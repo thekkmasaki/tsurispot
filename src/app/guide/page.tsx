@@ -15,6 +15,13 @@ import {
   Users,
   Ruler,
   Scissors,
+  Zap,
+  CircleDot,
+  Anchor,
+  Crosshair,
+  Moon,
+  Snowflake,
+  Clock,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -84,6 +91,55 @@ const detailGuides: {
     description:
       "氷締め・脳締め・血抜き・神経締めの方法を難易度別に解説。美味しく食べるコツも。",
     icon: Scissors,
+  },
+  {
+    href: "/guide/lure",
+    title: "ルアー釣り入門ガイド",
+    description:
+      "ミノー・バイブレーション・ワーム・メタルジグなどルアーの種類と選び方、アクションの付け方を解説。",
+    icon: Zap,
+  },
+  {
+    href: "/guide/float-fishing",
+    title: "ウキ釣り完全ガイド",
+    description:
+      "ウキの種類と選び方、仕掛けの作り方、エサの付け方、アタリの取り方を詳しく解説。",
+    icon: CircleDot,
+  },
+  {
+    href: "/guide/jigging",
+    title: "ショアジギング入門ガイド",
+    description:
+      "メタルジグの選び方、ロッドとリール、キャストとアクション、青物の取り込みと安全対策。",
+    icon: Anchor,
+  },
+  {
+    href: "/guide/eging",
+    title: "エギング入門ガイド",
+    description:
+      "エギの選び方、シャクリ方とフォール、季節別のポイント、アオリイカの締め方を解説。",
+    icon: Crosshair,
+  },
+  {
+    href: "/guide/night-fishing",
+    title: "夜釣り入門ガイド",
+    description:
+      "ヘッドライトやケミホタルなど必要装備、夜に釣れる魚種、安全対策、マナーを解説。",
+    icon: Moon,
+  },
+  {
+    href: "/guide/fish-handling",
+    title: "釣った魚の持ち帰り方ガイド",
+    description:
+      "締め方・血抜き・クーラーボックスの使い方・氷の量と保冷時間・自宅での下処理を解説。",
+    icon: Snowflake,
+  },
+  {
+    href: "/guide/tide",
+    title: "潮汐の読み方ガイド",
+    description:
+      "大潮・小潮の違い、潮見表の読み方、釣れる潮のタイミング、朝マズメ・夕マズメの重要性。",
+    icon: Clock,
   },
 ];
 
