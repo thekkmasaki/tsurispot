@@ -1,0 +1,17 @@
+import type { MetadataRoute } from "next";
+
+export default function robots(): MetadataRoute.Robots {
+  return {
+    rules: {
+      userAgent: "*",
+      allow: "/",
+      disallow: [
+        "/shops/*/dashboard",
+        "/spots/submit",
+        "/favorites",
+        "/contact",
+      ],
+    },
+    sitemap: "https://tsurispot.jp/sitemap.xml",
+  };
+}
