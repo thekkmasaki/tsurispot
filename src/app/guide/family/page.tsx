@@ -25,11 +25,11 @@ export const metadata: Metadata = {
     description:
       "子供と一緒に釣りを楽しむための完全ガイド。年齢別おすすめや安全対策を解説。",
     type: "article",
-    url: "https://tsurispot.jp/guide/family",
+    url: "https://tsurispot.com/guide/family",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/guide/family",
+    canonical: "https://tsurispot.com/guide/family",
   },
 };
 
@@ -41,19 +41,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "釣りの始め方ガイド",
-      item: "https://tsurispot.jp/guide",
+      item: "https://tsurispot.com/guide",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "ファミリーフィッシングガイド",
-      item: "https://tsurispot.jp/guide/family",
+      item: "https://tsurispot.com/guide/family",
     },
   ],
 };

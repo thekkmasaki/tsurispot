@@ -152,11 +152,11 @@ export const metadata: Metadata = {
     description:
       "釣り初心者のための完全ガイド。道具の揃え方から釣り場の選び方、マナーまでステップバイステップで解説。",
     type: "article",
-    url: "https://tsurispot.jp/guide",
+    url: "https://tsurispot.com/guide",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/guide",
+    canonical: "https://tsurispot.com/guide",
   },
 };
 

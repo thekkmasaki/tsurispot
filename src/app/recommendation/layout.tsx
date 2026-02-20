@@ -9,10 +9,10 @@ export const metadata: Metadata = {
     description:
       "潮回り・旬の魚・難易度から、今日最適な釣りスポットをスコアリング。",
     type: "website",
-    url: "https://tsurispot.jp/recommendation",
+    url: "https://tsurispot.com/recommendation",
     siteName: "ツリスポ",
   },
-  alternates: { canonical: "https://tsurispot.jp/recommendation" },
+  alternates: { canonical: "https://tsurispot.com/recommendation" },
 };
 
 export default function RecommendationLayout({

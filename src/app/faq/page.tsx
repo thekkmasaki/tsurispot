@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     description:
       "釣り初心者が抱えるよくある質問をカテゴリ別にわかりやすく回答。釣りデビュー前に知っておきたいことをすべて解説。",
     type: "website",
-    url: "https://tsurispot.jp/faq",
+    url: "https://tsurispot.com/faq",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/faq",
+    canonical: "https://tsurispot.com/faq",
   },
 };
 
@@ -523,13 +523,13 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "よくある質問（FAQ）",
-      item: "https://tsurispot.jp/faq",
+      item: "https://tsurispot.com/faq",
     },
   ],
 };

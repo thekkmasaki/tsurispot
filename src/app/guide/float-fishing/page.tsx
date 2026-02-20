@@ -12,11 +12,11 @@ export const metadata: Metadata = {
     description:
       "ウキの種類と選び方から仕掛けの作り方、アタリの取り方まで初心者向けに解説。",
     type: "article",
-    url: "https://tsurispot.jp/guide/float-fishing",
+    url: "https://tsurispot.com/guide/float-fishing",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/guide/float-fishing",
+    canonical: "https://tsurispot.com/guide/float-fishing",
   },
 };
 
@@ -28,19 +28,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "釣りの始め方ガイド",
-      item: "https://tsurispot.jp/guide",
+      item: "https://tsurispot.com/guide",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "ウキ釣り完全ガイド",
-      item: "https://tsurispot.jp/guide/float-fishing",
+      item: "https://tsurispot.com/guide/float-fishing",
     },
   ],
 };

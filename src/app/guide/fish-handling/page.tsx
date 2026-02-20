@@ -12,11 +12,11 @@ export const metadata: Metadata = {
     description:
       "締め方・血抜き・保冷の方法から自宅での下処理まで詳しく解説。",
     type: "article",
-    url: "https://tsurispot.jp/guide/fish-handling",
+    url: "https://tsurispot.com/guide/fish-handling",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/guide/fish-handling",
+    canonical: "https://tsurispot.com/guide/fish-handling",
   },
 };
 
@@ -28,19 +28,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "釣りの始め方ガイド",
-      item: "https://tsurispot.jp/guide",
+      item: "https://tsurispot.com/guide",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "釣った魚の持ち帰り方ガイド",
-      item: "https://tsurispot.jp/guide/fish-handling",
+      item: "https://tsurispot.com/guide/fish-handling",
     },
   ],
 };

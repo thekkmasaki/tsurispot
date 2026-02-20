@@ -21,11 +21,11 @@ export const metadata: Metadata = {
     description:
       "釣りを始めるのにいくらかかる？予算別に必要な道具と費用を徹底解説。",
     type: "article",
-    url: "https://tsurispot.jp/guide/budget",
+    url: "https://tsurispot.com/guide/budget",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/guide/budget",
+    canonical: "https://tsurispot.com/guide/budget",
   },
 };
 
@@ -37,19 +37,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "釣りの始め方ガイド",
-      item: "https://tsurispot.jp/guide",
+      item: "https://tsurispot.com/guide",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "釣りの費用ガイド",
-      item: "https://tsurispot.jp/guide/budget",
+      item: "https://tsurispot.com/guide/budget",
     },
   ],
 };

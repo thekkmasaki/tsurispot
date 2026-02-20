@@ -14,11 +14,11 @@ export const metadata: Metadata = {
     title: "サイトマップ - ツリスポ",
     description: "ツリスポの全ページ一覧。すべてのコンテンツに簡単にアクセスできます。",
     type: "website",
-    url: "https://tsurispot.jp/sitemap-page",
+    url: "https://tsurispot.com/sitemap-page",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/sitemap-page",
+    canonical: "https://tsurispot.com/sitemap-page",
   },
 };
 
@@ -30,13 +30,13 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "サイトマップ",
-      item: "https://tsurispot.jp/sitemap-page",
+      item: "https://tsurispot.com/sitemap-page",
     },
   ],
 };

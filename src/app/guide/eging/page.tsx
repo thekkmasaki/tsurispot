@@ -12,11 +12,11 @@ export const metadata: Metadata = {
     description:
       "エギの選び方からシャクリ方、季節別攻略まで初心者向けに解説。",
     type: "article",
-    url: "https://tsurispot.jp/guide/eging",
+    url: "https://tsurispot.com/guide/eging",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/guide/eging",
+    canonical: "https://tsurispot.com/guide/eging",
   },
 };
 
@@ -28,19 +28,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "釣りの始め方ガイド",
-      item: "https://tsurispot.jp/guide",
+      item: "https://tsurispot.com/guide",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "エギング入門ガイド",
-      item: "https://tsurispot.jp/guide/eging",
+      item: "https://tsurispot.com/guide/eging",
     },
   ],
 };

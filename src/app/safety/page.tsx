@@ -23,11 +23,11 @@ export const metadata: Metadata = {
     description:
       "釣りを安全に楽しむための総合ガイド。ライフジャケット、天候確認、転落リスク、毒魚、緊急連絡先まで網羅。",
     type: "article",
-    url: "https://tsurispot.jp/safety",
+    url: "https://tsurispot.com/safety",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/safety",
+    canonical: "https://tsurispot.com/safety",
   },
 };
 
@@ -39,13 +39,13 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "釣りの安全ガイド",
-      item: "https://tsurispot.jp/safety",
+      item: "https://tsurispot.com/safety",
     },
   ],
 };

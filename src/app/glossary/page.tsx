@@ -12,11 +12,11 @@ export const metadata: Metadata = {
     description:
       "釣り初心者が知っておきたい基本用語を50以上収録。カテゴリ別にわかりやすく解説。",
     type: "article",
-    url: "https://tsurispot.jp/glossary",
+    url: "https://tsurispot.com/glossary",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/glossary",
+    canonical: "https://tsurispot.com/glossary",
   },
 };
 

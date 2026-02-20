@@ -4,7 +4,7 @@ import { fishSpecies } from "@/lib/data/fish";
 import { regions } from "@/lib/data/regions";
 import { tackleShops } from "@/lib/data/shops";
 
-const baseUrl = "https://tsurispot.jp";
+const baseUrl = "https://tsurispot.com";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

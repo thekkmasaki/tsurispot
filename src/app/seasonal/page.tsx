@@ -21,11 +21,11 @@ export const metadata: Metadata = {
     description:
       "春夏秋冬それぞれの季節で釣れる魚やおすすめの釣法を初心者向けに解説。",
     type: "article",
-    url: "https://tsurispot.jp/seasonal",
+    url: "https://tsurispot.com/seasonal",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/seasonal",
+    canonical: "https://tsurispot.com/seasonal",
   },
 };
 
@@ -196,11 +196,11 @@ const jsonLd = {
   headline: "季節別釣りガイド - 春夏秋冬のおすすめ釣り",
   description:
     "春夏秋冬それぞれの季節で釣れる魚、おすすめの釣法、注意点を初心者向けにわかりやすく解説。",
-  url: "https://tsurispot.jp/seasonal",
+  url: "https://tsurispot.com/seasonal",
   publisher: {
     "@type": "Organization",
     name: "ツリスポ",
-    url: "https://tsurispot.jp",
+    url: "https://tsurispot.com",
   },
 };
 

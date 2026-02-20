@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     description:
       "全国の人気釣りスポットを一覧で紹介。堤防・漁港・磯・河川など釣り場タイプや地域・難易度で絞り込み検索。",
     type: "website",
-    url: "https://tsurispot.jp/spots",
+    url: "https://tsurispot.com/spots",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/spots",
+    canonical: "https://tsurispot.com/spots",
   },
 };
 
@@ -29,13 +29,13 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "釣りスポット一覧",
-      item: "https://tsurispot.jp/spots",
+      item: "https://tsurispot.com/spots",
     },
   ],
 };

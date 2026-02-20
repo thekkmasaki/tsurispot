@@ -12,11 +12,11 @@ export const metadata: Metadata = {
     description:
       "ルアーの種類・選び方・アクションの基本を初心者向けにわかりやすく解説。",
     type: "article",
-    url: "https://tsurispot.jp/guide/lure",
+    url: "https://tsurispot.com/guide/lure",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/guide/lure",
+    canonical: "https://tsurispot.com/guide/lure",
   },
 };
 
@@ -28,19 +28,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "釣りの始め方ガイド",
-      item: "https://tsurispot.jp/guide",
+      item: "https://tsurispot.com/guide",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "ルアー釣り入門ガイド",
-      item: "https://tsurispot.jp/guide/lure",
+      item: "https://tsurispot.com/guide/lure",
     },
   ],
 };

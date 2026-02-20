@@ -12,11 +12,11 @@ export const metadata: Metadata = {
     description:
       "釣った魚を新鮮に持ち帰る方法を難易度別に解説。氷締めから神経締めまで。",
     type: "article",
-    url: "https://tsurispot.jp/guide/handling",
+    url: "https://tsurispot.com/guide/handling",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/guide/handling",
+    canonical: "https://tsurispot.com/guide/handling",
   },
 };
 
@@ -28,19 +28,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "釣りの始め方ガイド",
-      item: "https://tsurispot.jp/guide",
+      item: "https://tsurispot.com/guide",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "魚の締め方・持ち帰りガイド",
-      item: "https://tsurispot.jp/guide/handling",
+      item: "https://tsurispot.com/guide/handling",
     },
   ],
 };

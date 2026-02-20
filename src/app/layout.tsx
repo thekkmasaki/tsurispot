@@ -3,6 +3,7 @@ import { Noto_Sans_JP, Inter } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Footer } from "@/components/layout/footer";
+import { GoogleAnalytics } from "@/components/google-analytics";
 import "./globals.css";
 
 const notoSansJP = Noto_Sans_JP({
@@ -17,7 +18,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://tsurispot.jp"),
+  metadataBase: new URL("https://tsurispot.com"),
   title: {
     default: "ツリスポ - 釣りスポット総合情報サイト",
     template: "%s | ツリスポ",
@@ -36,10 +37,10 @@ export const metadata: Metadata = {
     type: "website",
     locale: "ja_JP",
     siteName: "ツリスポ",
-    url: "https://tsurispot.jp",
+    url: "https://tsurispot.com",
   },
   alternates: {
-    canonical: "https://tsurispot.jp",
+    canonical: "https://tsurispot.com",
   },
   verification: {
     google: "YOUR_GOOGLE_SEARCH_CONSOLE_VERIFICATION_CODE",
@@ -60,6 +61,7 @@ export default function RootLayout({
       <body
         className={`${notoSansJP.variable} ${inter.variable} font-[family-name:var(--font-noto-sans-jp)] antialiased`}
       >
+        <GoogleAnalytics />
         <Header />
         <main className="min-h-screen pb-20 md:pb-0">{children}</main>
         <Footer />

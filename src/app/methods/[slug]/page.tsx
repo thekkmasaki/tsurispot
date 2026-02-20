@@ -410,11 +410,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: `${method.name}（${method.nameEn}）完全ガイド`,
       description: `${method.name}の必要な道具・釣り方・コツを初心者向けに徹底解説。${method.description}`,
       type: "article",
-      url: `https://tsurispot.jp/methods/${method.slug}`,
+      url: `https://tsurispot.com/methods/${method.slug}`,
       siteName: "ツリスポ",
     },
     alternates: {
-      canonical: `https://tsurispot.jp/methods/${method.slug}`,
+      canonical: `https://tsurispot.com/methods/${method.slug}`,
     },
   };
 }
@@ -432,19 +432,19 @@ export default async function MethodDetailPage({ params }: PageProps) {
         "@type": "ListItem",
         position: 1,
         name: "ホーム",
-        item: "https://tsurispot.jp",
+        item: "https://tsurispot.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "釣り方・釣法ガイド",
-        item: "https://tsurispot.jp/methods",
+        item: "https://tsurispot.com/methods",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: method.name,
-        item: `https://tsurispot.jp/methods/${method.slug}`,
+        item: `https://tsurispot.com/methods/${method.slug}`,
       },
     ],
   };
@@ -457,7 +457,7 @@ export default async function MethodDetailPage({ params }: PageProps) {
     author: {
       "@type": "Organization",
       name: "ツリスポ",
-      url: "https://tsurispot.jp",
+      url: "https://tsurispot.com",
     },
   };
 

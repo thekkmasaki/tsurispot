@@ -37,11 +37,11 @@ export const metadata: Metadata = {
     description:
       "リールの取り付け方、竿の継ぎ方、糸の通し方をステップバイステップで解説。",
     type: "article",
-    url: "https://tsurispot.jp/guide/setup",
+    url: "https://tsurispot.com/guide/setup",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/guide/setup",
+    canonical: "https://tsurispot.com/guide/setup",
   },
 };
 
@@ -135,19 +135,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "釣りの始め方ガイド",
-      item: "https://tsurispot.jp/guide",
+      item: "https://tsurispot.com/guide",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "竿とリールのセッティング方法",
-      item: "https://tsurispot.jp/guide/setup",
+      item: "https://tsurispot.com/guide/setup",
     },
   ],
 };

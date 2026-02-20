@@ -50,11 +50,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       title: `${fish.name}（${fish.nameEnglish}）の釣り情報`,
       description: `${fish.name}の旬の時期・釣り方・おすすめの食べ方を紹介。${fish.description}`,
       type: "article",
-      url: `https://tsurispot.jp/fish/${fish.slug}`,
+      url: `https://tsurispot.com/fish/${fish.slug}`,
       siteName: "ツリスポ",
     },
     alternates: {
-      canonical: `https://tsurispot.jp/fish/${fish.slug}`,
+      canonical: `https://tsurispot.com/fish/${fish.slug}`,
     },
   };
 }
@@ -77,7 +77,7 @@ export default async function FishDetailPage({ params }: PageProps) {
     author: {
       "@type": "Organization",
       name: "ツリスポ",
-      url: "https://tsurispot.jp",
+      url: "https://tsurispot.com",
     },
     about: {
       "@type": "Thing",
@@ -94,19 +94,19 @@ export default async function FishDetailPage({ params }: PageProps) {
         "@type": "ListItem",
         position: 1,
         name: "ホーム",
-        item: "https://tsurispot.jp",
+        item: "https://tsurispot.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "魚種図鑑",
-        item: "https://tsurispot.jp/fish",
+        item: "https://tsurispot.com/fish",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: fish.name,
-        item: `https://tsurispot.jp/fish/${fish.slug}`,
+        item: `https://tsurispot.com/fish/${fish.slug}`,
       },
     ],
   };

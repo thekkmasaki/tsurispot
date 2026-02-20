@@ -35,11 +35,11 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
       title: `${shop.name} - 釣具店情報 | ツリスポ`,
       description: shop.description,
       type: "website",
-      url: `https://tsurispot.jp/shops/${shop.slug}`,
+      url: `https://tsurispot.com/shops/${shop.slug}`,
       siteName: "ツリスポ",
     },
     alternates: {
-      canonical: `https://tsurispot.jp/shops/${shop.slug}`,
+      canonical: `https://tsurispot.com/shops/${shop.slug}`,
     },
   };
 }

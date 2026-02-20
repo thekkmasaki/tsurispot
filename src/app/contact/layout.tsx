@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   description:
     "ツリスポへのお問い合わせページです。スポット情報の修正・追加要望、バグ報告などお気軽にお寄せください。",
   alternates: {
-    canonical: "https://tsurispot.jp/contact",
+    canonical: "https://tsurispot.com/contact",
   },
 };
 

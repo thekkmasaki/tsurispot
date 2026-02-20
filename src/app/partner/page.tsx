@@ -24,11 +24,11 @@ export const metadata: Metadata = {
     description:
       "釣具店・管理釣り場・釣り堀・遊漁船など釣り関連事業者様向けの掲載をご案内します。",
     type: "website",
-    url: "https://tsurispot.jp/partner",
+    url: "https://tsurispot.com/partner",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/partner",
+    canonical: "https://tsurispot.com/partner",
   },
 };
 
@@ -219,13 +219,13 @@ export default function PartnerPage() {
               </p>
             </div>
             <div className="flex flex-col items-center gap-3">
-              <a href="mailto:partner@tsurispot.jp">
+              <a href="mailto:partner@tsurispot.com">
                 <Button
                   size="lg"
                   className="min-h-[44px] gap-2 bg-white px-8 text-slate-900 hover:bg-slate-100"
                 >
                   <Mail className="size-4" />
-                  partner@tsurispot.jp
+                  partner@tsurispot.com
                 </Button>
               </a>
               <p className="text-xs text-slate-400">
@@ -245,10 +245,10 @@ export default function PartnerPage() {
           相互リンク・コンテンツコラボ・取材協力なども随時受け付けています。
           お気軽に{" "}
           <a
-            href="mailto:partner@tsurispot.jp"
+            href="mailto:partner@tsurispot.com"
             className="text-primary underline"
           >
-            partner@tsurispot.jp
+            partner@tsurispot.com
           </a>{" "}
           までご連絡ください。
         </p>

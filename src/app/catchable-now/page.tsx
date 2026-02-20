@@ -11,11 +11,11 @@ export const metadata: Metadata = {
     description:
       "今の時期に釣れる魚を旬・シーズン・来月から狙える魚に分類して紹介。季節ごとの釣りのコツがわかります。",
     type: "website",
-    url: "https://tsurispot.jp/catchable-now",
+    url: "https://tsurispot.com/catchable-now",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/catchable-now",
+    canonical: "https://tsurispot.com/catchable-now",
   },
 };
 
@@ -27,13 +27,13 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "今釣れる魚",
-      item: "https://tsurispot.jp/catchable-now",
+      item: "https://tsurispot.com/catchable-now",
     },
   ],
 };

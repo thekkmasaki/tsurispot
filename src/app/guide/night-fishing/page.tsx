@@ -12,11 +12,11 @@ export const metadata: Metadata = {
     description:
       "夜釣りの装備・釣れる魚・安全対策・マナーを初心者向けに解説。",
     type: "article",
-    url: "https://tsurispot.jp/guide/night-fishing",
+    url: "https://tsurispot.com/guide/night-fishing",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/guide/night-fishing",
+    canonical: "https://tsurispot.com/guide/night-fishing",
   },
 };
 
@@ -28,19 +28,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "釣りの始め方ガイド",
-      item: "https://tsurispot.jp/guide",
+      item: "https://tsurispot.com/guide",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "夜釣り入門ガイド",
-      item: "https://tsurispot.jp/guide/night-fishing",
+      item: "https://tsurispot.com/guide/night-fishing",
     },
   ],
 };

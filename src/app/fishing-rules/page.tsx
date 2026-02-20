@@ -31,11 +31,11 @@ export const metadata: Metadata = {
     description:
       "釣りをする前に知っておきたいルールとマナーを解説。漁業権、禁漁期間、リリースサイズ、マナーまで網羅。",
     type: "article",
-    url: "https://tsurispot.jp/fishing-rules",
+    url: "https://tsurispot.com/fishing-rules",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/fishing-rules",
+    canonical: "https://tsurispot.com/fishing-rules",
   },
 };
 
@@ -47,13 +47,13 @@ const jsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "釣りのルールとマナー",
-      item: "https://tsurispot.jp/fishing-rules",
+      item: "https://tsurispot.com/fishing-rules",
     },
   ],
 };

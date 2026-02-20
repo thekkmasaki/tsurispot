@@ -18,11 +18,11 @@ export const metadata: Metadata = {
     description:
       "釣り初心者におすすめの道具を厳選して紹介。カテゴリ別にわかりやすく解説。",
     type: "website",
-    url: "https://tsurispot.jp/gear",
+    url: "https://tsurispot.com/gear",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/gear",
+    canonical: "https://tsurispot.com/gear",
   },
 };
 
@@ -34,13 +34,13 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "おすすめ釣り道具",
-      item: "https://tsurispot.jp/gear",
+      item: "https://tsurispot.com/gear",
     },
   ],
 };

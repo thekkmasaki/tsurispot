@@ -369,13 +369,13 @@ const jsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "今日のおすすめスポット",
-      item: "https://tsurispot.jp/recommendation",
+      item: "https://tsurispot.com/recommendation",
     },
   ],
 };

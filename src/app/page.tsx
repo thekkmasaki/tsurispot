@@ -30,11 +30,11 @@ export const metadata: Metadata = {
     description:
       "全国の釣りスポットを地図で簡単検索。今釣れる魚やベスト時間帯、おすすめの仕掛け情報まで網羅した釣り情報サイト。",
     type: "website",
-    url: "https://tsurispot.jp",
+    url: "https://tsurispot.com",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp",
+    canonical: "https://tsurispot.com",
   },
 };
 
@@ -49,12 +49,12 @@ const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "ツリスポ",
-  url: "https://tsurispot.jp",
+  url: "https://tsurispot.com",
   description:
     "全国の釣りスポットを地図で簡単検索。今釣れる魚やベスト時間帯、おすすめの仕掛け情報まで網羅した釣り情報サイト。",
   potentialAction: {
     "@type": "SearchAction",
-    target: "https://tsurispot.jp/spots?q={search_term_string}",
+    target: "https://tsurispot.com/spots?q={search_term_string}",
     "query-input": "required name=search_term_string",
   },
 };
@@ -63,8 +63,8 @@ const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "ツリスポ",
-  url: "https://tsurispot.jp",
-  logo: "https://tsurispot.jp/logo.svg",
+  url: "https://tsurispot.com",
+  logo: "https://tsurispot.com/logo.svg",
   sameAs: [],
   description:
     "釣りスポット総合情報サイト。全国の釣り場を地図で検索でき、今釣れる魚やおすすめの仕掛け情報を提供しています。",

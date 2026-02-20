@@ -99,11 +99,11 @@ export async function generateMetadata({
       title: `${region.areaName}の釣りスポット一覧 - ${region.prefecture}の釣り場情報`,
       description: `${region.prefecture}${region.areaName}エリアの釣りスポット${spots.length}件。${topFishNames}が釣れます。`,
       type: "website",
-      url: `https://tsurispot.jp/area/${region.slug}`,
+      url: `https://tsurispot.com/area/${region.slug}`,
       siteName: "ツリスポ",
     },
     alternates: {
-      canonical: `https://tsurispot.jp/area/${region.slug}`,
+      canonical: `https://tsurispot.com/area/${region.slug}`,
     },
   };
 }
@@ -141,7 +141,7 @@ export default async function AreaDetailPage({ params }: PageProps) {
     containsPlace: spots.map((spot) => ({
       "@type": "TouristAttraction",
       name: spot.name,
-      url: `https://tsurispot.jp/spots/${spot.slug}`,
+      url: `https://tsurispot.com/spots/${spot.slug}`,
     })),
   };
 
@@ -153,19 +153,19 @@ export default async function AreaDetailPage({ params }: PageProps) {
         "@type": "ListItem",
         position: 1,
         name: "ホーム",
-        item: "https://tsurispot.jp",
+        item: "https://tsurispot.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "釣りエリア",
-        item: "https://tsurispot.jp/area",
+        item: "https://tsurispot.com/area",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: `${region.areaName}（${region.prefecture}）`,
-        item: `https://tsurispot.jp/area/${region.slug}`,
+        item: `https://tsurispot.com/area/${region.slug}`,
       },
     ],
   };

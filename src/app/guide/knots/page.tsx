@@ -32,11 +32,11 @@ export const metadata: Metadata = {
     description:
       "初心者が覚えるべき3つの結び方をステップバイステップで解説。",
     type: "article",
-    url: "https://tsurispot.jp/guide/knots",
+    url: "https://tsurispot.com/guide/knots",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/guide/knots",
+    canonical: "https://tsurispot.com/guide/knots",
   },
 };
 
@@ -157,19 +157,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "釣りの始め方ガイド",
-      item: "https://tsurispot.jp/guide",
+      item: "https://tsurispot.com/guide",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "釣り糸の結び方",
-      item: "https://tsurispot.jp/guide/knots",
+      item: "https://tsurispot.com/guide/knots",
     },
   ],
 };

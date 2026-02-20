@@ -343,7 +343,7 @@ export default function AboutPage() {
                 <Badge variant="secondary" className="text-xs">
                   サイトURL
                 </Badge>
-                <span className="text-sm">https://tsurispot.jp</span>
+                <span className="text-sm">https://tsurispot.com</span>
               </div>
               <Separator />
               <div className="flex items-start gap-3">

@@ -32,11 +32,11 @@ export const metadata: Metadata = {
     description:
       "オーバーヘッドキャスト、サイドキャスト、ちょい投げの3つの投げ方を解説。",
     type: "article",
-    url: "https://tsurispot.jp/guide/casting",
+    url: "https://tsurispot.com/guide/casting",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/guide/casting",
+    canonical: "https://tsurispot.com/guide/casting",
   },
 };
 
@@ -160,19 +160,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "釣りの始め方ガイド",
-      item: "https://tsurispot.jp/guide",
+      item: "https://tsurispot.com/guide",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "投げ方の基本",
-      item: "https://tsurispot.jp/guide/casting",
+      item: "https://tsurispot.com/guide/casting",
     },
   ],
 };

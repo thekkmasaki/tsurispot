@@ -334,11 +334,11 @@ export default function BeginnerChecklistPage() {
             headline: "釣り初心者の持ち物チェックリスト - 忘れ物防止",
             description:
               "釣りに必要な持ち物をカテゴリ別にチェックリストで紹介。インタラクティブなチェック機能で忘れ物を防止。",
-            url: "https://tsurispot.jp/beginner-checklist",
+            url: "https://tsurispot.com/beginner-checklist",
             publisher: {
               "@type": "Organization",
               name: "ツリスポ",
-              url: "https://tsurispot.jp",
+              url: "https://tsurispot.com",
             },
           }),
         }}

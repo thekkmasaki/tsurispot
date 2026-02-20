@@ -12,11 +12,11 @@ export const metadata: Metadata = {
     description:
       "大潮・小潮の違いから潮見表の読み方、釣れるタイミングまで解説。",
     type: "article",
-    url: "https://tsurispot.jp/guide/tide",
+    url: "https://tsurispot.com/guide/tide",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/guide/tide",
+    canonical: "https://tsurispot.com/guide/tide",
   },
 };
 
@@ -28,19 +28,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "釣りの始め方ガイド",
-      item: "https://tsurispot.jp/guide",
+      item: "https://tsurispot.com/guide",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "潮汐の読み方ガイド",
-      item: "https://tsurispot.jp/guide/tide",
+      item: "https://tsurispot.com/guide/tide",
     },
   ],
 };

@@ -9,10 +9,10 @@ export const metadata: Metadata = {
     description:
       "釣りに重要な潮汐情報。潮回りと潮位グラフで最適な釣り時間がわかる。",
     type: "website",
-    url: "https://tsurispot.jp/tides",
+    url: "https://tsurispot.com/tides",
     siteName: "ツリスポ",
   },
-  alternates: { canonical: "https://tsurispot.jp/tides" },
+  alternates: { canonical: "https://tsurispot.com/tides" },
 };
 
 export default function TidesLayout({

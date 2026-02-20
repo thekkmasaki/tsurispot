@@ -20,11 +20,11 @@ export const metadata: Metadata = {
     description:
       "全国の釣具店を探せます。エサの在庫やレンタル竿の情報をチェック。",
     type: "website",
-    url: "https://tsurispot.jp/shops",
+    url: "https://tsurispot.com/shops",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/shops",
+    canonical: "https://tsurispot.com/shops",
   },
 };
 

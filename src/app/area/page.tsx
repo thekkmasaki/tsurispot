@@ -15,11 +15,11 @@ export const metadata: Metadata = {
     description:
       "全国の釣りエリアを都道府県別に一覧表示。各地域の釣りスポット数や特徴がひと目でわかります。",
     type: "website",
-    url: "https://tsurispot.jp/area",
+    url: "https://tsurispot.com/area",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/area",
+    canonical: "https://tsurispot.com/area",
   },
 };
 
@@ -77,7 +77,7 @@ export default function AreaListPage() {
       "@type": "ListItem",
       position: index + 1,
       name: `${region.prefecture} ${region.areaName}`,
-      url: `https://tsurispot.jp/area/${region.slug}`,
+      url: `https://tsurispot.com/area/${region.slug}`,
     })),
   };
 
@@ -89,13 +89,13 @@ export default function AreaListPage() {
         "@type": "ListItem",
         position: 1,
         name: "ホーム",
-        item: "https://tsurispot.jp",
+        item: "https://tsurispot.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "釣りエリア一覧",
-        item: "https://tsurispot.jp/area",
+        item: "https://tsurispot.com/area",
       },
     ],
   };

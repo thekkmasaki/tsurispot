@@ -13,11 +13,11 @@ export const metadata: Metadata = {
     description:
       "釣りで狙える海水魚・淡水魚を図鑑形式で紹介。旬の時期、難易度、おすすめの食べ方まで網羅。",
     type: "website",
-    url: "https://tsurispot.jp/fish",
+    url: "https://tsurispot.com/fish",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/fish",
+    canonical: "https://tsurispot.com/fish",
   },
 };
 
@@ -33,13 +33,13 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "魚種図鑑",
-      item: "https://tsurispot.jp/fish",
+      item: "https://tsurispot.com/fish",
     },
   ],
 };

@@ -22,11 +22,11 @@ export const metadata: Metadata = {
     description:
       "人気の釣法8種類を初心者向けに徹底解説。タックル・手順・コツまで網羅。",
     type: "website",
-    url: "https://tsurispot.jp/methods",
+    url: "https://tsurispot.com/methods",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/methods",
+    canonical: "https://tsurispot.com/methods",
   },
 };
 
@@ -38,13 +38,13 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "釣り方・釣法ガイド",
-      item: "https://tsurispot.jp/methods",
+      item: "https://tsurispot.com/methods",
     },
   ],
 };

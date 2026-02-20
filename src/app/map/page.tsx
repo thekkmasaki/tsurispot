@@ -10,11 +10,11 @@ export const metadata: Metadata = {
     description:
       "全国の釣りスポットを地図上で検索。マーカーをタップして釣り場の詳細情報を確認できます。",
     type: "website",
-    url: "https://tsurispot.jp/map",
+    url: "https://tsurispot.com/map",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/map",
+    canonical: "https://tsurispot.com/map",
   },
 };
 
@@ -26,13 +26,13 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "釣り場マップ",
-      item: "https://tsurispot.jp/map",
+      item: "https://tsurispot.com/map",
     },
   ],
 };

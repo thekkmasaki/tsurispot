@@ -39,11 +39,11 @@ export const metadata: Metadata = {
     description:
       "サビキ釣りの準備から釣り方、片付けまで完全解説。初心者でも釣れるコツを紹介。",
     type: "article",
-    url: "https://tsurispot.jp/guide/sabiki",
+    url: "https://tsurispot.com/guide/sabiki",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/guide/sabiki",
+    canonical: "https://tsurispot.com/guide/sabiki",
   },
 };
 
@@ -143,19 +143,19 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "釣りの始め方ガイド",
-      item: "https://tsurispot.jp/guide",
+      item: "https://tsurispot.com/guide",
     },
     {
       "@type": "ListItem",
       position: 3,
       name: "サビキ釣り完全ガイド",
-      item: "https://tsurispot.jp/guide/sabiki",
+      item: "https://tsurispot.com/guide/sabiki",
     },
   ],
 };

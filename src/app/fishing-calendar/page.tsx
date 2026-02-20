@@ -15,11 +15,11 @@ export const metadata: Metadata = {
     description:
       "月ごとに釣れる魚を一覧で紹介。1月~12月の釣りカレンダーで旬の魚がひと目でわかる。",
     type: "website",
-    url: "https://tsurispot.jp/fishing-calendar",
+    url: "https://tsurispot.com/fishing-calendar",
     siteName: "ツリスポ",
   },
   alternates: {
-    canonical: "https://tsurispot.jp/fishing-calendar",
+    canonical: "https://tsurispot.com/fishing-calendar",
   },
 };
 
@@ -31,13 +31,13 @@ const breadcrumbJsonLd = {
       "@type": "ListItem",
       position: 1,
       name: "ホーム",
-      item: "https://tsurispot.jp",
+      item: "https://tsurispot.com",
     },
     {
       "@type": "ListItem",
       position: 2,
       name: "月別釣りカレンダー",
-      item: "https://tsurispot.jp/fishing-calendar",
+      item: "https://tsurispot.com/fishing-calendar",
     },
   ],
 };

@@ -12,6 +12,6 @@ export default function robots(): MetadataRoute.Robots {
         "/contact",
       ],
     },
-    sitemap: "https://tsurispot.jp/sitemap.xml",
+    sitemap: "https://tsurispot.com/sitemap.xml",
   };
 }

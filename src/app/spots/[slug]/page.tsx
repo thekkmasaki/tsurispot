@@ -54,11 +54,11 @@ export async function generateMetadata({
       title: `${spot.name}の釣り場情報`,
       description: `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）で${fishNames}が狙えます。${spot.description}`,
       type: "article",
-      url: `https://tsurispot.jp/spots/${spot.slug}`,
+      url: `https://tsurispot.com/spots/${spot.slug}`,
       siteName: "ツリスポ",
     },
     alternates: {
-      canonical: `https://tsurispot.jp/spots/${spot.slug}`,
+      canonical: `https://tsurispot.com/spots/${spot.slug}`,
     },
   };
 }
@@ -107,19 +107,19 @@ export default async function SpotDetailPage({ params }: PageProps) {
         "@type": "ListItem",
         position: 1,
         name: "ホーム",
-        item: "https://tsurispot.jp",
+        item: "https://tsurispot.com",
       },
       {
         "@type": "ListItem",
         position: 2,
         name: "釣りスポット一覧",
-        item: "https://tsurispot.jp/spots",
+        item: "https://tsurispot.com/spots",
       },
       {
         "@type": "ListItem",
         position: 3,
         name: spot.name,
-        item: `https://tsurispot.jp/spots/${spot.slug}`,
+        item: `https://tsurispot.com/spots/${spot.slug}`,
       },
     ],
   };
