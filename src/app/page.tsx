@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
-import { getCatchableNow } from "@/lib/data/fish";
+import { getCatchableNow, fishSpecies } from "@/lib/data/fish";
 import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -20,15 +20,17 @@ import {
   Skull,
   TriangleAlert,
   Calendar,
+  TreePine,
+  Anchor,
 } from "lucide-react";
 import { NearbySpots } from "@/components/nearby-spots";
 import { OnlineUsersBadge } from "@/components/online-users-badge";
 import { SpotImage, FishImage } from "@/components/ui/spot-image";
 
 export const metadata: Metadata = {
-  title: "ツリスポ - 釣りスポット総合情報サイト｜全国の釣り場を地図で検索",
+  title: "ツリスポ - 海釣り・川釣りスポット総合情報サイト｜全国の釣り場を地図で検索",
   description:
-    "全国の釣りスポットを地図で簡単検索。今の時期に釣れる魚、ベストな時間帯、おすすめの仕掛け情報まで網羅。堤防・漁港・磯など釣り場タイプ別に探せる釣りスポット総合情報サイトです。",
+    "海釣りも川釣りも！全国の釣りスポットを地図で簡単検索。堤防・漁港・磯の海釣りから、渓流・湖・管理釣り場の淡水釣りまで。今の時期に釣れる魚、おすすめの仕掛け情報を網羅した釣りスポット総合情報サイト。",
   openGraph: {
     title: "ツリスポ - 釣りスポット総合情報サイト",
     description:
@@ -123,7 +125,7 @@ export default function Home() {
           <div className="flex flex-col items-center text-center">
             <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-sm text-white/90 backdrop-blur-sm sm:mb-4">
               <Waves className="size-4" />
-              <span>釣りスポット総合情報サイト</span>
+              <span>海釣り・川釣り 総合情報サイト</span>
             </div>
 
             <h1 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-white sm:mb-4 sm:text-4xl lg:text-5xl">
@@ -152,9 +154,13 @@ export default function Home() {
               </span>
             </Link>
 
-            {/* フィルタータグ */}
+            {/* フィルタータグ - 海釣り・川釣り両方 */}
             <div className="flex flex-wrap items-center justify-center gap-2">
-              {SPOT_TYPE_FILTERS.map((filter) => (
+              <span className="flex items-center gap-1 rounded-full bg-sky-500/30 px-2.5 py-0.5 text-xs text-sky-100 backdrop-blur-sm">
+                <Anchor className="size-3" />
+                海釣り
+              </span>
+              {SPOT_TYPE_FILTERS.filter(f => f.type !== "river").map((filter) => (
                 <Link key={filter.type} href={`/spots?type=${filter.type}`}>
                   <Badge
                     variant="outline"
@@ -164,6 +170,18 @@ export default function Home() {
                   </Badge>
                 </Link>
               ))}
+              <span className="flex items-center gap-1 rounded-full bg-emerald-500/30 px-2.5 py-0.5 text-xs text-emerald-100 backdrop-blur-sm">
+                <TreePine className="size-3" />
+                川・湖釣り
+              </span>
+              <Link href="/spots?type=river">
+                <Badge
+                  variant="outline"
+                  className="cursor-pointer border-emerald-300/50 bg-emerald-500/15 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-emerald-500/25 min-h-[36px] flex items-center"
+                >
+                  河川・渓流
+                </Badge>
+              </Link>
               <Link href="/map">
                 <Badge
                   variant="outline"
@@ -263,13 +281,16 @@ export default function Home() {
                     )}
                   </div>
 
-                  {/* 初心者OK & スポットタイプ */}
+                  {/* スポットタイプ & 海/川 */}
                   <div className="flex items-center gap-2">
                     <Badge
                       variant="secondary"
                       className="text-xs"
                     >
                       {SPOT_TYPE_LABELS[spot.spotType]}
+                    </Badge>
+                    <Badge variant="outline" className={`text-xs ${spot.spotType === "river" ? "border-emerald-200 text-emerald-700" : "border-sky-200 text-sky-700"}`}>
+                      {spot.spotType === "river" ? "川釣り" : "海釣り"}
                     </Badge>
                     {spot.difficulty === "beginner" && (
                       <Badge className="bg-emerald-100 text-xs text-emerald-700 hover:bg-emerald-100">
@@ -348,8 +369,8 @@ export default function Home() {
                         </h3>
 
                         <div className="flex flex-wrap items-center gap-1.5">
-                          <Badge variant="outline" className="text-xs">
-                            {DIFFICULTY_LABELS[fish.difficulty]}
+                          <Badge variant="outline" className={`text-xs ${fish.category === "freshwater" ? "border-emerald-200 text-emerald-700" : fish.category === "brackish" ? "border-teal-200 text-teal-700" : "border-sky-200 text-sky-700"}`}>
+                            {fish.category === "freshwater" ? "淡水" : fish.category === "brackish" ? "汽水" : "海水"}
                           </Badge>
                           {isPeak ? (
                             <Badge className="bg-orange-100 text-xs text-orange-700 hover:bg-orange-100">

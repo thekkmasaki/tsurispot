@@ -687,15 +687,17 @@ export default function GearSabikiPage() {
             {[
               {
                 name: "マルキュー アミ姫",
-                desc: "においが少ないチューブ型コマセ。女性やお子さんに人気。",
+                desc: "チューブ型で手が汚れにくい！においも少なく、初めてのサビキ釣りにおすすめ。女性やお子さんに大人気。",
                 price: "300〜500円",
-                asin: "B00TYF5RUS",
+                directUrl: "https://amzn.to/4c6gaUn",
+                asin: "",
                 query: "マルキュー アミ姫",
               },
               {
                 name: "ハヤブサ サビキ仕掛け（予備）",
                 desc: "根がかりや絡みに備えて、仕掛けは3セット以上持っていくと安心。",
                 price: "200〜400円",
+                directUrl: "",
                 asin: "B00CMQGRJK",
                 query: "ハヤブサ サビキ仕掛け ピンクスキン",
               },
@@ -703,6 +705,7 @@ export default function GearSabikiPage() {
                 name: "水汲みバケツ（折りたたみ）",
                 desc: "コマセを溶かしたり、釣った魚を入れたり。必需品です。",
                 price: "500〜1,000円",
+                directUrl: "",
                 asin: "B07L5N7CZX",
                 query: "水汲みバケツ 折りたたみ 釣り",
               },
@@ -710,6 +713,7 @@ export default function GearSabikiPage() {
                 name: "フィッシュグリップ",
                 desc: "魚のトゲやヒレから手を守る。毒を持つ魚がかかることもあるので安全のために。",
                 price: "1,500〜2,500円",
+                directUrl: "",
                 asin: "B074P3D6R9",
                 query: "フィッシュグリップ 釣り",
               },
@@ -725,7 +729,7 @@ export default function GearSabikiPage() {
                   </span>
                   <div className="flex gap-2">
                     <a
-                      href={getAmazonUrl(item.asin)}
+                      href={item.directUrl || getAmazonUrl(item.asin)}
                       target="_blank"
                       rel="noopener noreferrer nofollow"
                       className="inline-flex flex-1 items-center justify-center gap-1 rounded-md bg-[#FF9900] px-3 py-2 text-xs font-bold text-white hover:bg-[#E88B00]"

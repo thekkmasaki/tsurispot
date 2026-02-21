@@ -10,6 +10,7 @@ import {
   MapPin,
   Wrench,
   ListOrdered,
+  ExternalLink,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -29,7 +30,7 @@ interface FishingMethod {
   season: string;
   bestMonths: number[];
   targetFish: { name: string; slug: string }[];
-  requiredGear: { name: string; detail: string }[];
+  requiredGear: { name: string; detail: string; affiliateUrl?: string }[];
   steps: { title: string; description: string }[];
   tips: string[];
   relatedMethods: { slug: string; name: string }[];
@@ -63,7 +64,7 @@ const methods: FishingMethod[] = [
       { name: "リール", detail: "小〜中型スピニングリール（2000〜3000番）。ナイロン3号程度が巻いてあるものが便利。" },
       { name: "サビキ仕掛け", detail: "針4〜6号のピンクスキンが万能。ハゲ皮タイプも人気。予備を2〜3セット用意。" },
       { name: "コマセカゴ", detail: "下カゴ式が一般的。プラスチック製で8〜10号程度のオモリ付きが使いやすい。" },
-      { name: "コマセ（アミエビ）", detail: "冷凍ブロックが定番。チューブタイプは手が汚れず便利。" },
+      { name: "コマセ（アミエビ）", detail: "冷凍ブロックが定番。マルキュー「アミ姫」などのチューブタイプは手が汚れにくく、においも少ないので初心者におすすめ。", affiliateUrl: "https://amzn.to/4c6gaUn" },
       { name: "バケツ", detail: "コマセ用バケツと水くみバケツの2つ。蓋つきが風対策にもなる。" },
     ],
     steps: [
@@ -544,6 +545,17 @@ export default async function MethodDetailPage({ params }: PageProps) {
                 <p className="mt-1 text-sm text-muted-foreground">
                   {gear.detail}
                 </p>
+                {gear.affiliateUrl && (
+                  <a
+                    href={gear.affiliateUrl}
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="mt-2 inline-flex items-center gap-1 rounded-md bg-[#FF9900] px-3 py-1.5 text-xs font-bold text-white hover:bg-[#E88B00]"
+                  >
+                    Amazonで見る
+                    <ExternalLink className="size-3" />
+                  </a>
+                )}
               </CardContent>
             </Card>
           ))}
