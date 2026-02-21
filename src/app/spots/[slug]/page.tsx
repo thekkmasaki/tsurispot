@@ -38,6 +38,7 @@ import { SpotBouzuCard } from "@/components/spots/spot-bouzu-card";
 import { SpotWeatherTide } from "@/components/spots/spot-weather-tide";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -591,6 +592,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
           }))}
         />
       </section>
+
+      {/* 広告 */}
+      <InArticleAd className="mt-6" />
 
       {/* 混雑予想 */}
       <section className="mt-8 sm:mt-12">

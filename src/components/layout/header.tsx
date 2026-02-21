@@ -41,7 +41,7 @@ const moreNavItems = [
   { href: "/guide", label: "釣りガイド", icon: GraduationCap },
   { href: "/bouzu-checker", label: "ボウズ確率チェッカー", icon: Target },
   { href: "/quiz", label: "釣りスタイル診断", icon: Sparkles },
-  // { href: "/gear", label: "おすすめ道具", icon: Package }, // 一時非表示（アフィリエイト整備後に復活）
+  { href: "/gear", label: "おすすめ道具", icon: Package },
   { href: "/fishing-rules", label: "ルールとマナー", icon: Scale },
 ];
 

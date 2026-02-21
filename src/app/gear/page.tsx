@@ -1,18 +1,27 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ShoppingBag, ChevronRight } from "lucide-react";
+import {
+  ShoppingBag,
+  ChevronRight,
+  Fish,
+  Ruler,
+  Package,
+  ArrowRight,
+  Star,
+} from "lucide-react";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { ProductList } from "@/components/affiliate/product-list";
 import {
   products,
   getProductsByCategory,
   getProductsByDifficulty,
-  PRODUCT_CATEGORY_LABELS,
 } from "@/lib/data/products";
 
 export const metadata: Metadata = {
-  title: "おすすめ釣り道具 - 初心者から上級者まで厳選アイテム",
+  title: "おすすめ釣り道具 - 初心者から上級者まで厳選アイテム | ツリスポ",
   description:
-    "釣り初心者におすすめの道具を厳選して紹介。サビキセット、ロッド、リール、仕掛け、アクセサリーまでカテゴリ別にわかりやすく解説。Amazonや楽天で購入できます。",
+    "釣り初心者におすすめの道具を厳選して紹介。サビキセット、ロッド、リール、仕掛け、アクセサリーまでカテゴリ別にわかりやすく解説。Amazon・楽天で購入できます。",
   openGraph: {
     title: "おすすめ釣り道具 - 初心者から上級者まで厳選アイテム",
     description:
@@ -45,10 +54,54 @@ const breadcrumbJsonLd = {
   ],
 };
 
+// 特集記事データ
+const featuredArticles = [
+  {
+    href: "/gear/sabiki",
+    title: "サビキ釣りセットおすすめ10選",
+    subtitle: "【2025年版】初心者向け完全ガイド",
+    description:
+      "価格帯別にサビキ釣りセットを徹底比較。1000円台から高品質セットまで、初心者が失敗しない選び方を解説。",
+    icon: Fish,
+    badge: "人気No.1",
+    badgeColor: "bg-red-100 text-red-700",
+    iconColor: "text-blue-600",
+    bgColor: "bg-blue-50/50 border-blue-200",
+  },
+  {
+    href: "/gear/rod-beginner",
+    title: "初心者向け釣り竿おすすめ8選",
+    subtitle: "最初の1本はこれ！",
+    description:
+      "万能竿・サビキ竿・ちょい投げ竿をカテゴリ別に比較。長さ・硬さの選び方からコスパ重視のランキングまで。",
+    icon: Ruler,
+    badge: "迷ったらコレ",
+    badgeColor: "bg-blue-100 text-blue-700",
+    iconColor: "text-green-600",
+    bgColor: "bg-green-50/50 border-green-200",
+  },
+  {
+    href: "/gear/tackle-box",
+    title: "釣り道具一式セットおすすめ5選",
+    subtitle: "手ぶらで始められる！",
+    description:
+      "竿・リール・仕掛け・バケツまで全部入り。入門セット、ファミリーセット、コンパクトセットを目的別に紹介。",
+    icon: Package,
+    badge: "初心者必見",
+    badgeColor: "bg-green-100 text-green-700",
+    iconColor: "text-amber-600",
+    bgColor: "bg-amber-50/50 border-amber-200",
+  },
+];
+
 export default function GearPage() {
-  const beginnerSets = products.filter(
-    (p) => p.difficulty === "beginner" && (p.category === "other" || p.category === "rod" || p.category === "reel")
-  ).sort((a, b) => a.priority - b.priority);
+  const beginnerSets = products
+    .filter(
+      (p) =>
+        p.difficulty === "beginner" &&
+        (p.category === "other" || p.category === "rod" || p.category === "reel")
+    )
+    .sort((a, b) => a.priority - b.priority);
 
   const tackleProducts = getProductsByCategory("tackle");
   const accessoryProducts = [
@@ -81,7 +134,50 @@ export default function GearPage() {
           </p>
         </div>
 
-        {/* 初心者セット */}
+        {/* ========== 特集記事カード ========== */}
+        <section className="mb-12 sm:mb-16">
+          <h2 className="mb-6 flex items-center gap-2 text-xl font-bold sm:text-2xl">
+            <Star className="size-6 text-amber-500" />
+            特集記事 - 目的別おすすめガイド
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {featuredArticles.map((article) => (
+              <Link key={article.href} href={article.href} className="group">
+                <Card
+                  className={`h-full border-2 py-0 transition-all hover:shadow-lg ${article.bgColor}`}
+                >
+                  <CardContent className="flex h-full flex-col p-5">
+                    <div className="mb-3 flex items-center gap-2">
+                      <article.icon
+                        className={`size-6 ${article.iconColor}`}
+                      />
+                      <Badge
+                        className={`${article.badgeColor} hover:${article.badgeColor}`}
+                      >
+                        {article.badge}
+                      </Badge>
+                    </div>
+                    <h3 className="mb-1 text-base font-bold leading-snug group-hover:text-primary sm:text-lg">
+                      {article.title}
+                    </h3>
+                    <p className="mb-2 text-sm font-medium text-muted-foreground">
+                      {article.subtitle}
+                    </p>
+                    <p className="mb-4 flex-1 text-xs leading-relaxed text-muted-foreground">
+                      {article.description}
+                    </p>
+                    <div className="flex items-center gap-1 text-sm font-semibold text-primary">
+                      記事を読む
+                      <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* ========== 初心者へのおすすめ ========== */}
         <div className="mb-10 sm:mb-14">
           <div className="mb-4 rounded-xl border border-amber-200 bg-amber-50/50 p-4 dark:border-amber-900 dark:bg-amber-950/30">
             <p className="text-sm font-medium text-amber-800 dark:text-amber-200">

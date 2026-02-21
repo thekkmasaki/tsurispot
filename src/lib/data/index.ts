@@ -31,3 +31,4 @@ export { regions } from "./regions";
 export { getFishBySlug, getCatchableNow, getPeakFish } from "./fish";
 export { getSpotBySlug, getNearbySpots } from "./spots";
 export { tackleShops, getShopBySlug, getNearbyShops, getShopsForSpot } from "./shops";
+export { prefectureInfoList, getPrefectureInfoBySlug } from "./prefecture-info";

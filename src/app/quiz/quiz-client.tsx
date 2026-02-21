@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ChevronRight, Fish, RefreshCw, Share2 } from "lucide-react";
+import { Check, ChevronRight, Copy, Fish, RefreshCw, Share2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -350,15 +350,54 @@ export default function QuizClient() {
     setResult(null);
   }
 
-  function handleShare() {
-    if (!result) return;
-    const text = `【釣りスタイル診断】私は「${result.name}」でした！あなたは？ https://tsurispot.com/quiz`;
-    if (typeof navigator !== "undefined" && navigator.share) {
-      navigator.share({ text }).catch(() => {});
-    } else if (typeof navigator !== "undefined" && navigator.clipboard) {
+  const [copied, setCopied] = useState(false);
+
+  function getShareText() {
+    if (!result) return "";
+    return `【釣りスタイル診断】私は「${result.name}」でした！\n${result.description.slice(0, 50)}...\nあなたはどのタイプ？👇\nhttps://tsurispot.com/quiz\n#ツリスポ #釣りスタイル診断 #釣り`;
+  }
+
+  function shareTwitter() {
+    const text = getShareText();
+    window.open(
+      `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`,
+      "_blank",
+      "width=550,height=420"
+    );
+  }
+
+  function shareLine() {
+    const text = getShareText();
+    window.open(
+      `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent("https://tsurispot.com/quiz")}&text=${encodeURIComponent(text)}`,
+      "_blank",
+      "width=550,height=420"
+    );
+  }
+
+  function shareFacebook() {
+    window.open(
+      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent("https://tsurispot.com/quiz")}`,
+      "_blank",
+      "width=550,height=420"
+    );
+  }
+
+  function handleCopy() {
+    const text = getShareText();
+    if (navigator.clipboard) {
       navigator.clipboard.writeText(text).then(() => {
-        alert("クリップボードにコピーしました！");
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
       });
+    }
+  }
+
+  function handleNativeShare() {
+    if (!result) return;
+    const text = getShareText();
+    if (navigator.share) {
+      navigator.share({ text, url: "https://tsurispot.com/quiz" }).catch(() => {});
     }
   }
 
@@ -380,6 +419,12 @@ export default function QuizClient() {
             <p className="mt-4 text-sm text-gray-600 leading-relaxed text-center">
               {result.description}
             </p>
+            <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-center gap-2 text-xs text-gray-400">
+              <Fish className="size-3" />
+              <span>ツリスポ 釣りスタイル診断</span>
+              <span>|</span>
+              <span>tsurispot.com/quiz</span>
+            </div>
           </div>
         </div>
 
@@ -398,24 +443,60 @@ export default function QuizClient() {
           </div>
         </div>
 
-        {/* アクションボタン */}
-        <div className="flex gap-3">
-          <Button
-            variant="outline"
-            className="flex-1 gap-2"
-            onClick={handleReset}
-          >
-            <RefreshCw className="size-4" />
-            もう一度診断する
-          </Button>
-          <Button
-            className="flex-1 gap-2 bg-gradient-to-r from-cyan-500 to-blue-500 text-white hover:from-cyan-600 hover:to-blue-600 border-0"
-            onClick={handleShare}
+        {/* SNSシェアボタン */}
+        <div>
+          <h3 className="text-sm font-semibold text-gray-700 mb-3 flex items-center gap-1.5">
+            <Share2 className="size-4" />
+            結果をシェアする
+          </h3>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+            <button
+              onClick={shareTwitter}
+              className="flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-3 py-3 text-sm font-medium text-gray-700 transition-all hover:bg-[#1DA1F2] hover:text-white hover:border-[#1DA1F2] hover:shadow-md"
+            >
+              <svg className="size-4" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+              X (Twitter)
+            </button>
+            <button
+              onClick={shareLine}
+              className="flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-3 py-3 text-sm font-medium text-gray-700 transition-all hover:bg-[#06C755] hover:text-white hover:border-[#06C755] hover:shadow-md"
+            >
+              <svg className="size-4" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
+              LINE
+            </button>
+            <button
+              onClick={shareFacebook}
+              className="flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-3 py-3 text-sm font-medium text-gray-700 transition-all hover:bg-[#1877F2] hover:text-white hover:border-[#1877F2] hover:shadow-md"
+            >
+              <svg className="size-4" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              Facebook
+            </button>
+            <button
+              onClick={handleCopy}
+              className="flex items-center justify-center gap-2 rounded-xl border border-gray-200 bg-white px-3 py-3 text-sm font-medium text-gray-700 transition-all hover:bg-gray-100 hover:shadow-md"
+            >
+              {copied ? <Check className="size-4 text-emerald-500" /> : <Copy className="size-4" />}
+              {copied ? "コピー済み" : "コピー"}
+            </button>
+          </div>
+          <button
+            onClick={handleNativeShare}
+            className="mt-2 w-full flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 px-4 py-3 text-sm font-medium text-white transition-all hover:from-cyan-600 hover:to-blue-600 hover:shadow-md sm:hidden"
           >
             <Share2 className="size-4" />
-            シェアする
-          </Button>
+            その他のアプリでシェア
+          </button>
         </div>
+
+        {/* もう一度ボタン */}
+        <Button
+          variant="outline"
+          className="w-full gap-2"
+          onClick={handleReset}
+        >
+          <RefreshCw className="size-4" />
+          もう一度診断する
+        </Button>
 
         {/* 関連リンク */}
         <div className="pt-2">

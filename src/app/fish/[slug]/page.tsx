@@ -29,6 +29,7 @@ import { ProductList } from "@/components/affiliate/product-list";
 import { getProductsByFish, getTopProducts } from "@/lib/data/products";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -323,6 +324,9 @@ export default async function FishDetailPage({ params }: PageProps) {
           </CardContent>
         </Card>
       </section>
+
+      {/* 広告 */}
+      <InArticleAd className="mt-4" />
 
       {/* 釣れるスポット一覧 */}
       {fish.spots.length > 0 && (() => {
