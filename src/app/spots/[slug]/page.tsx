@@ -494,7 +494,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                   2,633円〜のカーボン製ルアーロッド。シーバス・エギング・ちょい投げに。
                 </p>
                 <a
-                  href="https://hb.afl.rakuten.co.jp/ichiba/5134daee.e7e21566.5134daef.1df36343/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E7%2582%25AD%25E7%25B4%25A0%25E7%25B9%258A%25E7%25B6%25AD+%25E9%2587%25A3%25E3%2582%258A%25E7%25AB%25BF+%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2590%25E3%2582%25B9%25E3%2583%25AD%25E3%2583%2583%25E3%2583%2589%2F&link_type=hybrid_url&ut=eyJwYWdlIjoic2hvcCIsInR5cGUiOiJoeWJyaWRfdXJsIiwiY29sIjoxfQ"
+                  href="https://hb.afl.rakuten.co.jp/ichiba/5134daee.e7e21566.5134daef.1df36343/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fiflife%2F021-outdoor%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
                   target="_blank"
                   rel="noopener noreferrer nofollow"
                   className="mt-2 inline-flex w-full items-center justify-center gap-1 rounded-md bg-[#BF0000] px-3 py-2 text-xs font-bold text-white hover:bg-[#A00000]"
