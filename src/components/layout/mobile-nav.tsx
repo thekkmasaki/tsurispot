@@ -2,14 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Map, Fish, BookOpen, Heart, MapPin } from "lucide-react";
+import { Map, Fish, Heart, MapPin, Trophy } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
   { href: "/spots", label: "スポット", icon: MapPin },
   { href: "/map", label: "地図", icon: Map },
+  { href: "/ranking", label: "ランキング", icon: Trophy },
   { href: "/catchable-now", label: "今釣れる", icon: Fish },
-  { href: "/fish", label: "図鑑", icon: BookOpen },
   { href: "/favorites", label: "お気に入り", icon: Heart },
 ];
 

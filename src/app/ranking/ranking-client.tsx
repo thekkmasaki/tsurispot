@@ -2,23 +2,23 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { Star, MapPin, Trophy, Users, Fish } from "lucide-react";
+import { Star, MapPin, Trophy, Users, Fish, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { FishingSpot } from "@/types";
 
 type TabKey = "all" | "beginner" | "family" | "night" | "port";
 
-const ALL_PREFECTURES = [
-  "全国",
-  "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県",
-  "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県",
-  "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県",
-  "岐阜県", "静岡県", "愛知県", "三重県",
-  "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県",
-  "鳥取県", "島根県", "岡山県", "広島県", "山口県",
-  "徳島県", "香川県", "愛媛県", "高知県",
-  "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県",
+const PREFECTURE_GROUPS = [
+  { label: "全国", prefectures: ["全国"] },
+  { label: "北海道・東北", prefectures: ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県"] },
+  { label: "関東", prefectures: ["茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県"] },
+  { label: "中部", prefectures: ["新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県"] },
+  { label: "近畿", prefectures: ["三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県"] },
+  { label: "中国・四国", prefectures: ["鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県"] },
+  { label: "九州・沖縄", prefectures: ["福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"] },
 ];
+
+const ALL_PREFECTURES = PREFECTURE_GROUPS.flatMap((g) => g.prefectures);
 
 const TABS: { key: TabKey; label: string }[] = [
   { key: "all", label: "総合" },
@@ -224,8 +224,28 @@ export function RankingClient({ spots }: RankingClientProps) {
 
   return (
     <div>
-      {/* 都道府県フィルタ */}
-      <div className="mb-4 -mx-1 overflow-x-auto">
+      {/* 都道府県フィルタ - モバイル: セレクトボックス */}
+      <div className="mb-4 sm:hidden">
+        <div className="relative">
+          <select
+            value={activePrefecture}
+            onChange={(e) => setActivePrefecture(e.target.value)}
+            className="w-full appearance-none rounded-xl border border-gray-200 bg-white px-4 py-3 pr-10 text-sm font-medium text-gray-700 shadow-sm focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+          >
+            {PREFECTURE_GROUPS.map((group) => (
+              <optgroup key={group.label} label={group.label}>
+                {group.prefectures.map((pref) => (
+                  <option key={pref} value={pref}>{pref}</option>
+                ))}
+              </optgroup>
+            ))}
+          </select>
+          <ChevronDown className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-400" />
+        </div>
+      </div>
+
+      {/* 都道府県フィルタ - PC: ボタン一覧 */}
+      <div className="mb-4 -mx-1 hidden overflow-x-auto sm:block">
         <div className="flex gap-2 px-1 pb-1" style={{ width: "max-content" }}>
           {ALL_PREFECTURES.map((pref) => (
             <button
