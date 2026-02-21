@@ -39,6 +39,7 @@ import { SpotWeatherTide } from "@/components/spots/spot-weather-tide";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { CatchReportButton } from "@/components/spots/catch-report-button";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -559,6 +560,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
             </Card>
           </section>
         </div>
+      </div>
+
+      {/* 釣れた！報告ボタン */}
+      <div className="mt-6 flex items-center justify-center">
+        <CatchReportButton spotSlug={spot.slug} />
       </div>
 
       {/* 天気・潮汐 */}
