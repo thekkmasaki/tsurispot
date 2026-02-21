@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { useState, useMemo, useCallback } from 'react';
+import { MapContainer, TileLayer, Marker, Popup, useMap, Circle } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { fishingSpots } from '@/lib/data/spots';
 import Link from 'next/link';
-import { Star } from 'lucide-react';
+import { Star, Navigation, Loader2 } from 'lucide-react';
 import { DIFFICULTY_LABELS } from '@/types';
 import { Badge } from '@/components/ui/badge';
 
@@ -53,10 +53,40 @@ function MapController({ center, zoom }: { center: [number, number]; zoom: numbe
   return null;
 }
 
+// 現在地用マーカー
+const userIcon = new L.DivIcon({
+  html: '<div style="width:16px;height:16px;background:#3b82f6;border:3px solid white;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.3)"></div>',
+  className: '',
+  iconSize: [16, 16],
+  iconAnchor: [8, 8],
+});
+
 export function SpotMap() {
   const [selectedPrefectures, setSelectedPrefectures] = useState<Set<string>>(new Set());
+  const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
+  const [locating, setLocating] = useState(false);
+  const [nearbyMode, setNearbyMode] = useState(false);
+
+  const handleLocate = useCallback(() => {
+    if (!navigator.geolocation) return;
+    setLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        const loc: [number, number] = [pos.coords.latitude, pos.coords.longitude];
+        setUserLocation(loc);
+        setNearbyMode(true);
+        setSelectedPrefectures(new Set());
+        setLocating(false);
+      },
+      () => {
+        setLocating(false);
+      },
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+  }, []);
 
   const togglePrefecture = (pref: string) => {
+    setNearbyMode(false);
     setSelectedPrefectures((prev) => {
       const next = new Set(prev);
       if (next.has(pref)) {
@@ -68,16 +98,31 @@ export function SpotMap() {
     });
   };
 
-  const filteredSpots = useMemo(
-    () =>
-      selectedPrefectures.size === 0
-        ? fishingSpots
-        : fishingSpots.filter((s) => selectedPrefectures.has(s.region.prefecture)),
-    [selectedPrefectures]
-  );
+  const filteredSpots = useMemo(() => {
+    if (nearbyMode && userLocation) {
+      // 現在地から30km以内のスポットを距離順で表示
+      const toRad = (d: number) => (d * Math.PI) / 180;
+      return fishingSpots
+        .map((s) => {
+          const dLat = toRad(s.latitude - userLocation[0]);
+          const dLon = toRad(s.longitude - userLocation[1]);
+          const a =
+            Math.sin(dLat / 2) ** 2 +
+            Math.cos(toRad(userLocation[0])) * Math.cos(toRad(s.latitude)) * Math.sin(dLon / 2) ** 2;
+          const dist = 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+          return { ...s, _dist: dist };
+        })
+        .filter((s) => s._dist <= 30)
+        .sort((a, b) => a._dist - b._dist);
+    }
+    if (selectedPrefectures.size === 0) return fishingSpots;
+    return fishingSpots.filter((s) => selectedPrefectures.has(s.region.prefecture));
+  }, [selectedPrefectures, nearbyMode, userLocation]);
 
-  // ズーム挙動: 0県→全体、1県→その県、2県以上→バウンディングボックス中心
   const { mapCenter, mapZoom } = useMemo((): { mapCenter: [number, number]; mapZoom: number } => {
+    if (nearbyMode && userLocation) {
+      return { mapCenter: userLocation, mapZoom: 12 };
+    }
     if (selectedPrefectures.size === 0) {
       return { mapCenter: DEFAULT_CENTER, mapZoom: DEFAULT_ZOOM };
     }
@@ -97,7 +142,7 @@ export function SpotMap() {
       return { mapCenter: [centerLat, centerLng], mapZoom: 8 };
     }
     return { mapCenter: DEFAULT_CENTER, mapZoom: DEFAULT_ZOOM };
-  }, [selectedPrefectures, filteredSpots]);
+  }, [selectedPrefectures, filteredSpots, nearbyMode, userLocation]);
 
   return (
     <div className="space-y-3">
@@ -106,16 +151,33 @@ export function SpotMap() {
         <div className="flex items-center gap-2">
           <span className="text-xs font-medium text-muted-foreground sm:text-sm">地域:</span>
           <button
-            onClick={() => setSelectedPrefectures(new Set())}
+            onClick={() => { setSelectedPrefectures(new Set()); setNearbyMode(false); }}
             className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors min-h-[36px] sm:text-sm ${
-              selectedPrefectures.size === 0
+              selectedPrefectures.size === 0 && !nearbyMode
                 ? 'bg-primary text-primary-foreground'
                 : 'bg-muted text-muted-foreground hover:bg-muted/80'
             }`}
           >
             すべて
           </button>
-          {selectedPrefectures.size > 0 && (
+          <button
+            onClick={handleLocate}
+            disabled={locating}
+            className={`flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium transition-colors min-h-[36px] sm:text-sm ${
+              nearbyMode
+                ? 'bg-blue-600 text-white'
+                : 'bg-muted text-muted-foreground hover:bg-blue-100 hover:text-blue-700'
+            }`}
+          >
+            {locating ? <Loader2 className="size-3.5 animate-spin" /> : <Navigation className="size-3.5" />}
+            現在地の近く
+          </button>
+          {nearbyMode && (
+            <span className="text-xs text-blue-600 font-medium">
+              半径30km内 {filteredSpots.length}件
+            </span>
+          )}
+          {!nearbyMode && selectedPrefectures.size > 0 && (
             <span className="text-xs text-muted-foreground">
               {selectedPrefectures.size}県選択中
             </span>
@@ -154,6 +216,14 @@ export function SpotMap() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+        {userLocation && nearbyMode && (
+          <>
+            <Marker position={userLocation} icon={userIcon}>
+              <Popup><span className="text-sm font-medium">現在地</span></Popup>
+            </Marker>
+            <Circle center={userLocation} radius={30000} pathOptions={{ color: '#3b82f6', fillColor: '#3b82f6', fillOpacity: 0.05, weight: 1 }} />
+          </>
+        )}
         {filteredSpots.map((spot) => (
           <Marker key={spot.id} position={[spot.latitude, spot.longitude]}>
             <Popup>
