@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -15,6 +16,7 @@ import {
   TriangleAlert,
   Skull,
   ShieldAlert,
+  Camera,
 } from "lucide-react";
 import { FishImage } from "@/components/ui/spot-image";
 import { Card, CardContent } from "@/components/ui/card";
@@ -230,6 +232,34 @@ export default async function FishDetailPage({ params }: PageProps) {
           title={`${fish.name}の釣り方・タックル情報｜ツリスポ`}
         />
       </div>
+
+      {/* 実釣写真ギャラリー */}
+      {fish.userPhotos && fish.userPhotos.length > 0 && (
+        <section className="mb-6 sm:mb-8">
+          <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+            <Camera className="size-5 text-primary" />
+            実釣写真
+          </h2>
+          <div className={`grid gap-2 sm:gap-3 ${fish.userPhotos.length === 1 ? "grid-cols-1" : fish.userPhotos.length === 2 ? "grid-cols-2" : "grid-cols-2 sm:grid-cols-3"}`}>
+            {fish.userPhotos.map((photo, index) => (
+              <div key={index} className="group relative overflow-hidden rounded-lg border bg-gray-100">
+                <div className="relative aspect-[4/3]">
+                  <Image
+                    src={photo.url}
+                    alt={photo.alt}
+                    fill
+                    className="object-cover transition-transform group-hover:scale-105"
+                    sizes="(max-width: 640px) 50vw, 33vw"
+                  />
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent px-2 pb-1.5 pt-6">
+                  <p className="text-xs text-white/90">{photo.credit}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* 基本情報 */}
       <section className="mb-6 sm:mb-8">

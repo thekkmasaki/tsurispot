@@ -384,34 +384,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
     safetyLevel: "safe", safetyNotes: ["護岸は安全", "空港施設内にトイレ・飲食あり"],
     youtubeLinks: [{ label: "神戸空港 釣り", searchQuery: "神戸空港 ベランダ 釣り", description: "神戸空港での釣り動画" }],
   },// ===== 兵庫県（淡路島エリア） =====
-  {
-    id: "s220", name: "翼港", slug: "tsubasa-port-awaji",
-    description: "淡路島の人工島に作られた港。潮通し抜群で青物（ハマチ・ブリ）やタチウオが狙える一級ポイント。ショアジギングの聖地。",
-    latitude: 34.5850, longitude: 135.0250, address: "兵庫県淡路市楠本2865-4",
-    accessInfo: "淡路ICから約10分。淡路島北部に位置。",
-    region: region("r136"), spotType: "port", difficulty: "intermediate",
-    isFree: false, feeDetail: "入場料600円",
-    hasParking: true, parkingDetail: "有料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/tsubasa-port.jpg", images: [], rating: 4.3, reviewCount: 345,
-    catchableFish: [
-      { fish: fish("buri"), monthStart: 9, monthEnd: 1, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
-      { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "テンヤ" },
-      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ・アジング" },
-      { fish: fish("madai"), monthStart: 4, monthEnd: 6, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
-    ],
-    bestTimes: [
-      { label: "朝マヅメ", timeRange: "05:00〜07:00", rating: "best" },
-      { label: "夕マヅメ", timeRange: "17:00〜19:00", rating: "best" },
-    ],
-    tackleRecommendations: [],
-    tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ5分〜満潮前", description: "明石海峡からの潮が直撃。青物のナブラが立つことも。" },
-    mazumeInfo: { springSunrise: "05:30", springSunset: "18:20", summerSunrise: "04:50", summerSunset: "19:10", autumnSunrise: "05:40", autumnSunset: "17:10", winterSunrise: "07:00", winterSunset: "16:55", tip: "ブリクラスは早朝のナブラ撃ちで。" },
-    gearGuides: [
-      { targetFish: "ブリ", method: "ショアジギング", difficulty: "advanced", rod: "ショアジギングロッド10ft MH", reel: "スピニング5000番", line: "PE2号", hook: "メタルジグ60g", otherItems: ["メタルジグ各種", "アシストフック"], tip: "朝マヅメのナブラ撃ちが最大のチャンス。" },
-    ],
-    safetyLevel: "caution", safetyNotes: ["外海に面しているため風波注意", "ライフジャケット必須"],
-    youtubeLinks: [{ label: "翼港 青物", searchQuery: "翼港 淡路島 ショアジギング 青物", description: "翼港での釣り動画" }],
-  },
+  // s220 翼港: spots-additional.ts s116 と重複のため削除
   {
     id: "s221", name: "吹上浜", slug: "fukiage-hama-awaji",
     description: "淡路島南部のサーフフィッシングスポット。ヒラメ・マゴチ・キスなどが狙える砂浜。投げ釣りやワームで楽しめる。",

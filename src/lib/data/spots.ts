@@ -18,6 +18,9 @@ import { kyushuChugokuDetailSpots } from "./spots-kyushu-chugoku-detail";
 import { kantoDetailSpots } from "./spots-kanto-detail";
 import { kansaiDetailSpots } from "./spots-kansai-detail";
 import { hokkaidoTohokuDetailSpots } from "./spots-hokkaido-tohoku-detail";
+import { hyogoDetailSpots } from "./spots-hyogo-detail";
+import { southKyushuDetailSpots } from "./spots-south-kyushu-detail";
+import { chibaShizuokaDetailSpots } from "./spots-chiba-shizuoka-detail";
 
 function fish(slug: string): FishSpecies {
   const f = getFishBySlug(slug);
@@ -2717,7 +2720,7 @@ const _baseSpots: FishingSpot[] = [
   },
 ];
 
-export const fishingSpots: FishingSpot[] = [..._baseSpots, ...additionalSpots, ...osakaKinkiSpots, ...extraSpots, ...sagamiMiuraSpots, ...sagamiShonanSpots, ...sagamiIzuSpots, ...tohokuSpots, ...hokurikuSpots, ...shikokuSpots, ...kyushuSouthSpots, ...okinawaSpots, ...saninSpots, ...tokaiDetailSpots, ...kyushuChugokuDetailSpots, ...kantoDetailSpots, ...kansaiDetailSpots, ...hokkaidoTohokuDetailSpots];
+export const fishingSpots: FishingSpot[] = [..._baseSpots, ...additionalSpots, ...osakaKinkiSpots, ...extraSpots, ...sagamiMiuraSpots, ...sagamiShonanSpots, ...sagamiIzuSpots, ...tohokuSpots, ...hokurikuSpots, ...shikokuSpots, ...kyushuSouthSpots, ...okinawaSpots, ...saninSpots, ...tokaiDetailSpots, ...kyushuChugokuDetailSpots, ...kantoDetailSpots, ...kansaiDetailSpots, ...hokkaidoTohokuDetailSpots, ...hyogoDetailSpots, ...southKyushuDetailSpots, ...chibaShizuokaDetailSpots];
 
 export function getSpotBySlug(slug: string): FishingSpot | undefined {
   return fishingSpots.find((s) => s.slug === slug);

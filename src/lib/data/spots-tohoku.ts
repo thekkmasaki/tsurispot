@@ -246,29 +246,6 @@ export const tohokuSpots: FishingSpot[] = [
       { label: "久慈港 釣り", searchQuery: "久慈港 釣り アイナメ", description: "久慈港での釣り動画" },
     ],
   },
-  {
-    id: "s429", name: "大船渡港", slug: "ofunato-port",
-    description: "岩手県南部のリアス海岸に位置する良港。水深があり、カレイやメバルのほか、青物の回遊も期待できる。復興後に整備され足場良好。",
-    latitude: 39.0820, longitude: 141.7200,
-    address: "岩手県大船渡市大船渡町茶屋前",
-    accessInfo: "JR大船渡線BRT大船渡駅から徒歩約10分。三陸道大船渡ICから約5分。",
-    region: localRegion("r140"), spotType: "port", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり（20台）",
-    hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/ofunato-port.jpg", images: [], rating: 3.8, reviewCount: 75,
-    catchableFish: [
-      { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
-      { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
-      { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
-    ],
-    bestTimes: btMorning, tackleRecommendations: [],
-    tideAdvice: tideStandard, mazumeInfo: mazumeTohoku,
-    gearGuides: [gearNage, gearSabiki],
-    safetyLevel: "safe", safetyNotes: ["護岸が整備されており安全", "駐車場から釣り場が近い"],
-    youtubeLinks: [
-      { label: "大船渡 釣り", searchQuery: "大船渡港 釣り", description: "大船渡港での釣り動画" },
-    ],
-  },
 
   // ========================================
   // 秋田県 (4スポット)
@@ -565,29 +542,6 @@ export const tohokuSpots: FishingSpot[] = [
     safetyLevel: "safe", safetyNotes: ["護岸は柵付きで安全", "観光施設隣接でトイレ・売店完備"],
     youtubeLinks: [
       { label: "小名浜港 サビキ", searchQuery: "小名浜港 アクアマリン サビキ釣り", description: "小名浜港でのサビキ釣り動画" },
-    ],
-  },
-  {
-    id: "s442", name: "相馬港", slug: "soma-fishing-port",
-    description: "福島県北部の太平洋に面した港。カレイの投げ釣りが有名で、秋にはヒラメやマゴチも狙える。松川浦に隣接し魚影が濃い。",
-    latitude: 37.8310, longitude: 140.9770,
-    address: "福島県相馬市尾浜",
-    accessInfo: "JR常磐線相馬駅から車で約15分。常磐自動車道相馬ICから約10分。",
-    region: localRegion("r143"), spotType: "port", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "漁港内に無料駐車場あり（20台）",
-    hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/soma-fishing-port.jpg", images: [], rating: 3.9, reviewCount: 95,
-    catchableFish: [
-      { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
-      { fish: fish("hirame"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "泳がせ釣り" },
-      { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
-    ],
-    bestTimes: btMorning, tackleRecommendations: [],
-    tideAdvice: tideStandard, mazumeInfo: mazumeTohoku,
-    gearGuides: [gearNage],
-    safetyLevel: "safe", safetyNotes: ["足場は整備されている"],
-    youtubeLinks: [
-      { label: "相馬港 カレイ", searchQuery: "相馬港 カレイ 投げ釣り", description: "相馬港でのカレイ釣り動画" },
     ],
   },
   {

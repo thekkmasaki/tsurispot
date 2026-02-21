@@ -570,6 +570,15 @@ export default async function SpotDetailPage({ params }: PageProps) {
           isFree={spot.isFree}
           hasRentalRod={spot.hasRentalRod}
           catchableFishCount={spot.catchableFish.length}
+          catchableFishDetails={spot.catchableFish.map((cf) => ({
+            fishSlug: cf.fish.slug,
+            fishName: cf.fish.name,
+            method: cf.method,
+            catchDifficulty: cf.catchDifficulty,
+            monthStart: cf.monthStart,
+            monthEnd: cf.monthEnd,
+            peakSeason: cf.peakSeason,
+          }))}
         />
       </section>
 

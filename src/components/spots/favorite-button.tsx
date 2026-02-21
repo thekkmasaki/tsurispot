@@ -43,26 +43,33 @@ export function FavoriteButton({ spotSlug }: { spotSlug: string }) {
     setFavorites(next);
     setIsFavorite(!isFavorite);
 
+    // ヘッダーのバッジ更新用カスタムイベント
+    window.dispatchEvent(new Event("favorites-updated"));
+
     setIsAnimating(true);
     setTimeout(() => setIsAnimating(false), 300);
   };
 
   return (
-    <Button
-      variant="ghost"
-      size="icon-sm"
+    <button
       onClick={toggleFavorite}
       aria-label={isFavorite ? "お気に入りから削除" : "お気に入りに追加"}
-      className="rounded-full"
+      className={cn(
+        "flex items-center justify-center rounded-full p-2.5 transition-all active:scale-90",
+        isFavorite
+          ? "bg-red-50 hover:bg-red-100"
+          : "bg-gray-50 hover:bg-gray-100"
+      )}
     >
       <Heart
         className={cn(
-          "size-5 transition-transform duration-300",
+          "size-6 transition-transform duration-300",
           isFavorite && "fill-red-500 text-red-500",
+          !isFavorite && "text-gray-400",
           isAnimating && "scale-125"
         )}
       />
-    </Button>
+    </button>
   );
 }
 

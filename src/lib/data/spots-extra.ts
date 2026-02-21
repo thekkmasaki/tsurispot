@@ -445,7 +445,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s239", name: "秋田港", slug: "akita-port",
     description: "秋田市の主要港。セリオンタワー周辺の岸壁でサビキ釣りが楽しめる。アジやハタハタなど日本海の魚種が豊富。",
-    latitude: 39.7800, longitude: 140.0500,
+    latitude: 39.7690, longitude: 140.0570,
     address: "秋田県秋田市土崎港西1丁目",
     accessInfo: "JR土崎駅から徒歩約15分。秋田自動車道秋田北ICから約10分。",
     region: localRegion("r70"), spotType: "port", difficulty: "beginner",
@@ -680,7 +680,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s250", name: "仙台港中野栄岸壁", slug: "sendai-nakanosakai-wharf",
     description: "仙台港の大型岸壁。アウトレット近くでアクセス抜群。サビキ釣りでイワシやサバ、投げ釣りでカレイが狙える。",
-    latitude: 38.2800, longitude: 141.0100,
+    latitude: 38.2820, longitude: 141.0050,
     address: "宮城県仙台市宮城野区中野",
     accessInfo: "JR中野栄駅から徒歩約20分。仙台東部道路仙台港ICから約5分。",
     region: region("r2"), spotType: "port", difficulty: "beginner",
@@ -747,7 +747,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s253", name: "日立港", slug: "hitachi-port",
     description: "茨城県北部の大型港。アジやサバのサビキ釣り、カレイの投げ釣りが楽しめる。秋はイナダの回遊もあり。",
-    latitude: 36.4833, longitude: 140.6333,
+    latitude: 36.5230, longitude: 140.6520,
     address: "茨城県日立市久慈町",
     accessInfo: "JR大甕駅から車で約10分。常磐自動車道日立南太田ICから約15分。",
     region: localRegion("r74"), spotType: "port", difficulty: "beginner",
@@ -769,7 +769,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s254", name: "那珂湊港", slug: "nakaminato-port",
     description: "おさかな市場で有名な那珂湊の港。サビキ釣りでアジやイワシ、投げ釣りでカレイが狙える。買い物と釣りを同時に楽しめる。",
-    latitude: 36.3333, longitude: 140.6000,
+    latitude: 36.3445, longitude: 140.5825,
     address: "茨城県ひたちなか市湊本町",
     accessInfo: "ひたちなか海浜鉄and那珂湊駅から徒歩約10分。北関東自動車道ひたちなかICから約15分。",
     region: localRegion("r75"), spotType: "port", difficulty: "beginner",
@@ -985,7 +985,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s265", name: "三崎港", slug: "misaki-fishing-port",
     description: "マグロで有名な三崎港。岸壁からアジやサバのサビキ釣り、イカ釣りが楽しめる。食事処も充実。",
-    latitude: 35.1400, longitude: 139.6200,
+    latitude: 35.1392, longitude: 139.6228,
     address: "神奈川県三浦市三崎5丁目",
     accessInfo: "京急三崎口駅からバスで約15分。横浜横須賀道路衣笠ICから約20分。",
     region: region("r8"), spotType: "port", difficulty: "beginner",
@@ -1135,7 +1135,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s272", name: "磯子海づり施設", slug: "isogo-fishing-facility",
     description: "横浜市磯子区の海釣り施設。柵付きの護岸で安全にアジやイワシのサビキ釣りが楽しめる。初心者やファミリーに最適。",
-    latitude: 35.3900, longitude: 139.6200,
+    latitude: 35.3890, longitude: 139.6340,
     address: "神奈川県横浜市磯子区新磯子39",
     accessInfo: "JR磯子駅からバスで約10分。首都高速湾岸線磯子ICから約5分。",
     region: region("r6"), spotType: "pier", difficulty: "beginner",
@@ -1157,7 +1157,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s273", name: "東扇島西公園", slug: "higashi-ogishima-park",
     description: "川崎市の人工島にある公園。東京湾の回遊魚が狙え、サビキ釣りからルアーまで楽しめる人気スポット。",
-    latitude: 35.4700, longitude: 139.7500,
+    latitude: 35.4600, longitude: 139.7370,
     address: "神奈川県川崎市川崎区東扇島",
     accessInfo: "JR川崎駅からバスで約30分。首都高速湾岸線東扇島ICすぐ。",
     region: region("r6"), spotType: "pier", difficulty: "beginner",
@@ -1610,7 +1610,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s297", name: "静岡用宗漁港堤防", slug: "mochimune-breakwater",
     description: "用宗漁港の外側堤防。サビキ釣りでアジやイワシ、投げ釣りでキスが好調。しらす漁で有名な港。",
-    latitude: 34.9400, longitude: 138.3700,
+    latitude: 34.9237, longitude: 138.3684,
     address: "静岡県静岡市駿河区用宗",
     accessInfo: "JR用宗駅から徒歩約10分。東名高速静岡ICから約20分。",
     region: region("r48"), spotType: "breakwater", difficulty: "beginner",
@@ -1631,7 +1631,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s298", name: "三河湾蒲郡港", slug: "mikawa-gamagori-port",
     description: "三河湾に面した蒲郡の港。穏やかな湾内でハゼやキスが狙える。竹島水族館やラグーナテンボスが近い。",
-    latitude: 34.8300, longitude: 137.2200,
+    latitude: 34.8229, longitude: 137.2259,
     address: "愛知県蒲郡市港町",
     accessInfo: "JR蒲郡駅から徒歩約15分。東名高速音羽蒲郡ICから約15分。",
     region: region("r53"), spotType: "port", difficulty: "beginner",
@@ -1997,29 +1997,7 @@ export const extraSpots: FishingSpot[] = [
     safetyLevel: "caution", safetyNotes: ["先端部は潮流が速い", "ライフジャケット推奨"],
     youtubeLinks: [{ label: "加太の釣り", searchQuery: "加太 大波止 釣り マダイ", description: "友ヶ島を望んで釣り" }],
   },
-  {
-    id: "s315", name: "淡路島翼港", slug: "awaji-tsubasa-port",
-    description: "淡路島北部の比較的新しい釣り場。メバルやアジの実績が高く、エギングでアオリイカも人気の穴場。",
-    latitude: 34.5900, longitude: 135.0200,
-    address: "兵庫県淡路市岩屋",
-    accessInfo: "神戸淡路鳴門自動車道淡路ICから約5分。",
-    region: region("r54"), spotType: "port", difficulty: "intermediate",
-    isFree: false, feeDetail: "入場料700円",
-    hasParking: true, parkingDetail: "有料駐車場あり",
-    hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/awaji-tsubasa.jpg", images: [], rating: 4.0, reviewCount: 65,
-    catchableFish: [
-      { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
-      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
-    ],
-    bestTimes: btStandard, tackleRecommendations: [],
-    tideAdvice: tideStandard, mazumeInfo: mazumeKinki,
-    gearGuides: [gearSabiki, gearEging],
-    safetyLevel: "safe", safetyNotes: ["管理された釣り場"],
-    isKuchikomiSpot: true,
-    youtubeLinks: [{ label: "淡路島翼港の釣り", searchQuery: "淡路島 翼港 釣り メバル", description: "淡路島北部で釣り" }],
-  },
+  // s315 翼港: spots-additional.ts s116 と重複のため削除
   {
     id: "s316", name: "泉佐野食品コンビナート", slug: "izumisano-combinat",
     description: "泉佐野市の岸壁。タチウオとアジの好ポイントで、秋の夜は釣り人で大賑わい。関空も近い。",
@@ -2598,7 +2576,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s353", name: "枕崎港", slug: "makurazaki-port",
     description: "カツオの一本釣りで有名な枕崎の港。薩摩半島最南端近くで、回遊魚の実績が高い。枕崎鰹節も名物。",
-    latitude: 31.2700, longitude: 130.3000,
+    latitude: 31.2740, longitude: 130.2970,
     address: "鹿児島県枕崎市松之尾町",
     accessInfo: "JR枕崎駅から徒歩約10分。指宿スカイライン頴娃ICから約30分。",
     region: localRegion("r127"), spotType: "port", difficulty: "intermediate",
@@ -2619,7 +2597,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s354", name: "種子島西之表港", slug: "tanegashima-nishinoomote",
     description: "種子島の玄関口。ロケット打ち上げでも有名な島で、アジやアオリイカ、回遊魚が豊富。",
-    latitude: 30.7300, longitude: 131.0000,
+    latitude: 30.7318, longitude: 130.9905,
     address: "鹿児島県西之表市西町",
     accessInfo: "鹿児島港からフェリーで約3時間30分。種子島空港から車で約30分。",
     region: localRegion("r128"), spotType: "port", difficulty: "intermediate",

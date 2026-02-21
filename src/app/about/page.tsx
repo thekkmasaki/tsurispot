@@ -225,7 +225,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 情報の信頼性・検証方法 */}
+      {/* 情報の信頼性について */}
       <section className="bg-muted/30 py-12 sm:py-16">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <div className="mx-auto max-w-2xl text-center">
@@ -235,10 +235,6 @@ export default function AboutPage() {
                 情報の信頼性について
               </h2>
             </div>
-            <p className="mb-8 text-sm leading-relaxed text-muted-foreground sm:text-base">
-              ツリスポでは、正確で信頼できる情報をお届けするために、
-              以下の検証プロセスを設けています。
-            </p>
           </div>
 
           <div className="mx-auto max-w-2xl space-y-4">
@@ -247,10 +243,10 @@ export default function AboutPage() {
                 <div className="flex gap-3">
                   <CheckCircle className="mt-0.5 size-5 shrink-0 text-emerald-600" />
                   <div>
-                    <h3 className="font-semibold">現地調査による一次情報の収集</h3>
+                    <h3 className="font-semibold">明石・播磨エリアは実釣経験に基づく情報</h3>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      釣りスポット情報は、編集部メンバーが実際に現地を訪問して収集しています。
-                      駐車場・トイレ・足場の状態など、釣り場の基本情報は目視で確認しています。
+                      運営者自身が明石・播磨周辺をホームグラウンドとして定期的に釣行しています。
+                      明石港、林崎漁港、大蔵海岸、翼港などの釣り場情報は、実際の釣行経験をもとに作成しています。
                     </p>
                   </div>
                 </div>
@@ -261,38 +257,10 @@ export default function AboutPage() {
                 <div className="flex gap-3">
                   <CheckCircle className="mt-0.5 size-5 shrink-0 text-emerald-600" />
                   <div>
-                    <h3 className="font-semibold">複数情報源によるクロスチェック</h3>
+                    <h3 className="font-semibold">その他エリアの情報について</h3>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      魚種の生態情報や釣り方のガイドは、水産庁や各都道府県の水産試験場の公開データ、
-                      釣具メーカーの技術資料、および経験豊富なアングラーへのヒアリングを基に作成しています。
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="border">
-              <CardContent className="p-5">
-                <div className="flex gap-3">
-                  <CheckCircle className="mt-0.5 size-5 shrink-0 text-emerald-600" />
-                  <div>
-                    <h3 className="font-semibold">定期的な情報アップデート</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      釣り場の状況は変化するため、季節ごとに情報の見直しを行っています。
-                      釣り禁止区域の変更や新しい施設情報など、重要な変更があった場合は速やかに反映します。
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-            <Card className="border">
-              <CardContent className="p-5">
-                <div className="flex gap-3">
-                  <CheckCircle className="mt-0.5 size-5 shrink-0 text-emerald-600" />
-                  <div>
-                    <h3 className="font-semibold">ユーザーフィードバックの活用</h3>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      サイト利用者からの情報提供やご指摘を積極的に取り入れ、
-                      情報の精度向上に努めています。誤りを発見された場合は、お問い合わせフォームよりご連絡ください。
+                      明石エリア以外のスポット情報は、公開されている釣果情報サイト・釣り場紹介記事・
+                      地図情報などを参考に作成しています。情報に誤りがあった場合は、お問い合わせよりご連絡いただければ修正いたします。
                     </p>
                   </div>
                 </div>

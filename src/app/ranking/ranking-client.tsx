@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Link from "next/link";
-import { Star, MapPin, Trophy, Users, Fish, ChevronDown } from "lucide-react";
+import { Star, MapPin, Trophy, Users, Fish, ChevronDown, Info } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { FishingSpot } from "@/types";
 
@@ -77,11 +77,38 @@ function filterSpots(spots: FishingSpot[], tab: TabKey): FishingSpot[] {
   }
 }
 
+/** ランキングスコア算出（100点満点） */
+function calcRankScore(spot: FishingSpot): number {
+  // 1. ベイズ平均レーティング（レビュー数が少ないと全体平均に引き寄せる）
+  const C = 10; // 信頼の閾値（レビュー数がC以上で本来のratingに近づく）
+  const M = 3.8; // 全体平均（仮定値）
+  const bayesian = (spot.reviewCount * spot.rating + C * M) / (spot.reviewCount + C);
+  const ratingScore = (bayesian / 5) * 50; // 最大50点
+
+  // 2. 魚種の豊富さ（最大15点）
+  const fishScore = Math.min(spot.catchableFish.length / 8, 1) * 15;
+
+  // 3. 設備の充実度（最大15点）
+  let facilityScore = 0;
+  if (spot.hasParking) facilityScore += 4;
+  if (spot.hasToilet) facilityScore += 4;
+  if (spot.hasRentalRod) facilityScore += 4;
+  if (spot.isFree) facilityScore += 3;
+
+  // 4. 人気度（レビュー数、最大10点）
+  const popularityScore = Math.min(spot.reviewCount / 200, 1) * 10;
+
+  // 5. 初心者歓迎度（最大10点）
+  const accessScore = spot.difficulty === "beginner" ? 10 : spot.difficulty === "intermediate" ? 5 : 2;
+
+  return ratingScore + fishScore + facilityScore + popularityScore + accessScore;
+}
+
 function sortSpots(spots: FishingSpot[]): FishingSpot[] {
-  return [...spots].sort((a, b) => {
-    if (b.rating !== a.rating) return b.rating - a.rating;
-    return b.reviewCount - a.reviewCount;
-  });
+  return [...spots]
+    .map((s) => ({ spot: s, score: calcRankScore(s) }))
+    .sort((a, b) => b.score - a.score)
+    .map((x) => x.spot);
 }
 
 function MedalBadge({ rank }: { rank: number }) {
@@ -144,6 +171,7 @@ interface SpotCardProps {
 function SpotCard({ spot, rank }: SpotCardProps) {
   const topFish = spot.catchableFish.slice(0, 3);
   const isTop3 = rank <= 3;
+  const score = calcRankScore(spot);
 
   return (
     <Link
@@ -174,6 +202,9 @@ function SpotCard({ spot, rank }: SpotCardProps) {
           <span className="flex items-center gap-1">
             <Users className="h-3.5 w-3.5" />
             {spot.reviewCount}件
+          </span>
+          <span className="flex items-center gap-1 font-semibold text-blue-600">
+            {score.toFixed(1)}pt
           </span>
         </div>
 
@@ -215,6 +246,7 @@ interface RankingClientProps {
 export function RankingClient({ spots }: RankingClientProps) {
   const [activeTab, setActiveTab] = useState<TabKey>("all");
   const [activePrefecture, setActivePrefecture] = useState("全国");
+  const [activeRegion, setActiveRegion] = useState<string | null>(null);
 
   const rankedSpots = useMemo(() => {
     const byPref = filterByPrefecture(spots, activePrefecture);
@@ -244,24 +276,56 @@ export function RankingClient({ spots }: RankingClientProps) {
         </div>
       </div>
 
-      {/* 都道府県フィルタ - PC: ボタン一覧 */}
-      <div className="mb-4 -mx-1 hidden overflow-x-auto sm:block">
-        <div className="flex gap-2 px-1 pb-1" style={{ width: "max-content" }}>
-          {ALL_PREFECTURES.map((pref) => (
+      {/* 都道府県フィルタ - PC: 地域別グループ */}
+      <div className="mb-4 hidden sm:block space-y-2">
+        <div className="flex flex-wrap gap-2 items-center">
+          <button
+            onClick={() => setActivePrefecture("全国")}
+            className={cn(
+              "rounded-full px-4 py-1.5 text-sm font-bold transition-colors",
+              activePrefecture === "全国"
+                ? "bg-blue-600 text-white shadow-sm"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+            )}
+          >
+            全国
+          </button>
+          <span className="text-xs text-muted-foreground">｜</span>
+          {PREFECTURE_GROUPS.slice(1).map((group) => (
             <button
-              key={pref}
-              onClick={() => setActivePrefecture(pref)}
+              key={group.label}
+              onClick={() => setActiveRegion(activeRegion === group.label ? null : group.label)}
               className={cn(
-                "whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
-                activePrefecture === pref
-                  ? "bg-blue-600 text-white shadow-sm"
-                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                "rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
+                activeRegion === group.label
+                  ? "bg-blue-100 text-blue-700 ring-1 ring-blue-300"
+                  : group.prefectures.includes(activePrefecture)
+                  ? "bg-blue-50 text-blue-600"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
               )}
             >
-              {pref}
+              {group.label}
             </button>
           ))}
         </div>
+        {activeRegion && (
+          <div className="flex flex-wrap gap-1.5 pl-2 border-l-2 border-blue-200 ml-2">
+            {PREFECTURE_GROUPS.find((g) => g.label === activeRegion)?.prefectures.map((pref) => (
+              <button
+                key={pref}
+                onClick={() => { setActivePrefecture(pref); setActiveRegion(null); }}
+                className={cn(
+                  "rounded-full px-3 py-1 text-xs font-medium transition-colors",
+                  activePrefecture === pref
+                    ? "bg-blue-600 text-white shadow-sm"
+                    : "bg-white text-gray-700 border border-gray-200 hover:bg-blue-50 hover:border-blue-200"
+                )}
+              >
+                {pref}
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* カテゴリタブフィルタ */}
@@ -300,6 +364,39 @@ export function RankingClient({ spots }: RankingClientProps) {
           <p className="text-muted-foreground">該当するスポットが見つかりませんでした。</p>
         </div>
       )}
+
+      {/* ランキング基準の説明 */}
+      <div className="mt-8 rounded-xl border border-blue-100 bg-blue-50/50 p-4 sm:p-6">
+        <div className="flex items-center gap-2 mb-3">
+          <Info className="h-4 w-4 text-blue-600" />
+          <h3 className="text-sm font-bold text-blue-900">ランキングの算出基準</h3>
+        </div>
+        <p className="text-xs text-blue-800 mb-3">
+          ツリスポのランキングは以下5つの指標を総合的に評価し、100点満点のスコアで順位を決定しています。
+        </p>
+        <div className="grid gap-2 sm:grid-cols-2">
+          <div className="rounded-lg bg-white/70 px-3 py-2">
+            <div className="text-xs font-semibold text-gray-800">評価スコア（最大50pt）</div>
+            <div className="text-xs text-gray-500 mt-0.5">ベイズ平均を使用。レビュー数が少ない場合は全体平均に補正され、信頼性を確保。</div>
+          </div>
+          <div className="rounded-lg bg-white/70 px-3 py-2">
+            <div className="text-xs font-semibold text-gray-800">魚種の豊富さ（最大15pt）</div>
+            <div className="text-xs text-gray-500 mt-0.5">釣れる魚の種類数が多いほど高評価。8種以上で満点。</div>
+          </div>
+          <div className="rounded-lg bg-white/70 px-3 py-2">
+            <div className="text-xs font-semibold text-gray-800">設備の充実度（最大15pt）</div>
+            <div className="text-xs text-gray-500 mt-0.5">駐車場・トイレ・レンタル竿の有無、無料かどうかを評価。</div>
+          </div>
+          <div className="rounded-lg bg-white/70 px-3 py-2">
+            <div className="text-xs font-semibold text-gray-800">人気度（最大10pt）</div>
+            <div className="text-xs text-gray-500 mt-0.5">レビュー数に基づく注目度。200件以上で満点。</div>
+          </div>
+          <div className="rounded-lg bg-white/70 px-3 py-2 sm:col-span-2">
+            <div className="text-xs font-semibold text-gray-800">アクセスのしやすさ（最大10pt）</div>
+            <div className="text-xs text-gray-500 mt-0.5">初心者向け＝10pt、中級者向け＝5pt、上級者向け＝2pt。誰でも行きやすいスポットを高評価。</div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

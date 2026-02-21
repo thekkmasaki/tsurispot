@@ -2,7 +2,9 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
+import { getFavorites } from "@/components/spots/favorite-button";
+import { ActiveUsers } from "@/components/layout/active-users";
 import {
   Fish,
   Map,
@@ -39,7 +41,7 @@ const moreNavItems = [
   { href: "/guide", label: "釣りガイド", icon: GraduationCap },
   { href: "/bouzu-checker", label: "ボウズ確率チェッカー", icon: Target },
   { href: "/quiz", label: "釣りスタイル診断", icon: Sparkles },
-  { href: "/gear", label: "おすすめ道具", icon: Package },
+  // { href: "/gear", label: "おすすめ道具", icon: Package }, // 一時非表示（アフィリエイト整備後に復活）
   { href: "/fishing-rules", label: "ルールとマナー", icon: Scale },
 ];
 
@@ -115,6 +117,20 @@ function DropdownMenu() {
 
 export function Header() {
   const pathname = usePathname();
+  const [favCount, setFavCount] = useState(0);
+
+  useEffect(() => {
+    setFavCount(getFavorites().length);
+    // localStorageの変更を監視
+    const onStorage = () => setFavCount(getFavorites().length);
+    window.addEventListener("storage", onStorage);
+    // カスタムイベントで同一タブ内の変更も検知
+    window.addEventListener("favorites-updated", onStorage);
+    return () => {
+      window.removeEventListener("storage", onStorage);
+      window.removeEventListener("favorites-updated", onStorage);
+    };
+  }, []);
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/40 bg-white/80 backdrop-blur-lg">
@@ -151,11 +167,12 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <ActiveUsers />
           <SearchOverlay />
           <Link
             href="/favorites"
             className={cn(
-              "flex items-center justify-center rounded-lg p-2 transition-colors",
+              "relative flex items-center justify-center rounded-lg p-2 transition-colors",
               pathname === "/favorites"
                 ? "bg-primary/10 text-primary"
                 : "text-muted-foreground hover:bg-muted hover:text-foreground"
@@ -163,6 +180,11 @@ export function Header() {
             aria-label="お気に入り"
           >
             <Heart className="h-5 w-5" />
+            {favCount > 0 && (
+              <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-bold text-white">
+                {favCount > 99 ? "99+" : favCount}
+              </span>
+            )}
           </Link>
         </div>
       </div>

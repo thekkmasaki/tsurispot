@@ -17,6 +17,8 @@ import {
   ChevronRight,
   Store,
   Mail,
+  Skull,
+  TriangleAlert,
 } from "lucide-react";
 import { NearbySpots } from "@/components/nearby-spots";
 import { SpotImage, FishImage } from "@/components/ui/spot-image";
@@ -317,13 +319,21 @@ export default function Home() {
                     href={`/fish/${fish.slug}`}
                     className="w-52 shrink-0 sm:w-auto"
                   >
-                    <Card className="group h-full gap-0 overflow-hidden py-0 transition-shadow hover:shadow-md">
+                    <Card className={`group h-full gap-0 overflow-hidden py-0 transition-shadow hover:shadow-md ${fish.isPoisonous ? "ring-2 ring-red-200" : ""}`}>
                       {/* カード上部の画像 */}
-                      <FishImage
-                        src={fish.imageUrl}
-                        alt={fish.name}
-                        category={fish.category}
-                      />
+                      <div className="relative">
+                        <FishImage
+                          src={fish.imageUrl}
+                          alt={fish.name}
+                          category={fish.category}
+                        />
+                        {fish.isPoisonous && (
+                          <div className="absolute top-2 right-2 flex items-center gap-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white shadow">
+                            {fish.dangerLevel === "high" ? <Skull className="size-3.5" /> : <TriangleAlert className="size-3.5" />}
+                            毒
+                          </div>
+                        )}
+                      </div>
 
                       <CardContent className="flex flex-col gap-2 p-3 sm:p-4">
                         <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
@@ -341,6 +351,11 @@ export default function Home() {
                           ) : (
                             <Badge className="bg-sky-100 text-xs text-sky-700 hover:bg-sky-100">
                               釣れる
+                            </Badge>
+                          )}
+                          {fish.isPoisonous && (
+                            <Badge className="bg-red-100 text-xs text-red-700 hover:bg-red-100">
+                              {fish.poisonType || "毒あり"}
                             </Badge>
                           )}
                         </div>

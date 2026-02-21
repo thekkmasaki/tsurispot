@@ -405,22 +405,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["港内は穏やかで安全", "外堤防は波に注意", "夕日が美しい西海岸"],
   },
-  {
-    id: "s873", name: "翼港", slug: "tsubasa-port-detail",
-    description: "淡路島北端の明石海峡大橋たもとに位置する有料釣り公園。潮通し抜群の好ポイントで、メジロ・ハマチなどの青物、マダイ、アオリイカの実績が高い。整備された施設でトイレ・売店完備。関西屈指の青物スポット。",
-    latitude: 34.5980, longitude: 135.0230,
-    address: "兵庫県淡路市岩屋",
-    accessInfo: "神戸淡路鳴門自動車道淡路ICからすぐ。高速バス淡路IC下車徒歩約5分。",
-    region: region("r54"), spotType: "pier", difficulty: "intermediate",
-    isFree: false, feeDetail: "大人1100円、小人550円程度（要最新確認）",
-    hasParking: true, parkingDetail: "有料駐車場完備",
-    hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタルタックルセットあり",
-    mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.3, reviewCount: 356,
-    catchableFish: [],
-    bestTimes: btMorning,
-    tackleRecommendations: [],
-    safetyLevel: "safe", safetyNotes: ["柵付きの釣り桟橋で安全", "売店・トイレ完備", "強風時は閉鎖の場合あり"],
-  },
+  // s873 翼港: spots-additional.ts s116 と重複のため削除
 
   // =========================================
   // 和歌山県（10スポット）

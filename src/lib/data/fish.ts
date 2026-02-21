@@ -186,6 +186,11 @@ export const fishSpecies: FishSpecies[] = [
         ],
       },
     ],
+    userPhotos: [
+      { url: "/images/fish/kasago-1.jpg", alt: "カサゴ（ガシラ）の実釣写真", credit: "実釣写真" },
+      { url: "/images/fish/kasago-2.jpg", alt: "カサゴの実釣写真 斑点模様", credit: "実釣写真" },
+      { url: "/images/fish/kasago-3.jpg", alt: "カサゴの実釣写真", credit: "実釣写真" },
+    ],
     spots: [],
   },
   {
@@ -499,6 +504,9 @@ export const fishSpecies: FishSpecies[] = [
         ],
       },
     ],
+    userPhotos: [
+      { url: "/images/fish/kurodai-1.jpg", alt: "クロダイ（チヌ）約50cmの実釣写真", credit: "実釣写真" },
+    ],
     spots: [],
   },
   {
@@ -730,6 +738,9 @@ export const fishSpecies: FishSpecies[] = [
           "秋が深まるとハゼが大きくなり引きも楽しめる",
         ],
       },
+    ],
+    userPhotos: [
+      { url: "/images/fish/haze-1.jpg", alt: "ハゼの実釣写真", credit: "実釣写真" },
     ],
     spots: [],
   },
@@ -1008,6 +1019,9 @@ export const fishSpecies: FishSpecies[] = [
         ],
       },
     ],
+    userPhotos: [
+      { url: "/images/fish/tsubasu-1.jpg", alt: "ツバス（ハマチ・イナダの若魚）の実釣写真", credit: "実釣写真" },
+    ],
     spots: [],
   },
   {
@@ -1151,6 +1165,9 @@ export const fishSpecies: FishSpecies[] = [
           "アタリはラインが走るか、竿先がグーンと曲がる。即合わせが基本",
         ],
       },
+    ],
+    userPhotos: [
+      { url: "/images/fish/nijimasu-1.jpg", alt: "ニジマスの実釣写真", credit: "実釣写真" },
     ],
     spots: [],
   },
@@ -1862,6 +1879,9 @@ export const fishSpecies: FishSpecies[] = [
           "アタリがあったら20〜30秒送り込んでから大きく合わせる",
         ],
       },
+    ],
+    userPhotos: [
+      { url: "/images/fish/magochi-1.jpg", alt: "マゴチ約40cmの実釣写真", credit: "実釣写真" },
     ],
     spots: [],
   },
@@ -2684,6 +2704,10 @@ export const fishSpecies: FishSpecies[] = [
         ],
       },
     ],
+    userPhotos: [
+      { url: "/images/fish/bera-1.jpg", alt: "ベラの実釣写真 緑色の体色", credit: "実釣写真" },
+      { url: "/images/fish/kyusen-1.jpg", alt: "キュウセンベラの実釣写真 カラフルな縞模様", credit: "実釣写真" },
+    ],
     spots: [],
   },
   {
@@ -2891,6 +2915,9 @@ export const fishSpecies: FishSpecies[] = [
           "特定外来生物のため地域のリリース禁止ルールを確認して対応する",
         ],
       },
+    ],
+    userPhotos: [
+      { url: "/images/fish/bluegill-1.jpg", alt: "ブルーギルの実釣写真", credit: "実釣写真" },
     ],
     spots: [],
   },

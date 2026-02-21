@@ -62,10 +62,17 @@ export interface FishSpecies {
   spots: SpotSummary[];
   fishingMethods?: FishingMethod[];
   youtubeLinks?: YouTubeSearchLink[];
+  userPhotos?: UserPhoto[];
   isPoisonous?: boolean;
   poisonType?: string;
   dangerLevel?: "low" | "medium" | "high";
   dangerNotes?: string[];
+}
+
+export interface UserPhoto {
+  url: string;
+  alt: string;
+  credit: string;
 }
 
 export interface FishingMethod {

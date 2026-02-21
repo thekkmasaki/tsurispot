@@ -113,90 +113,6 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
   },
 
-  // --- 室蘭港 ---
-  {
-    id: "s952",
-    name: "室蘭港",
-    slug: "muroran-ko",
-    description:
-      "噴火湾に面した室蘭市の主要港。崎守埠頭や絵鞆岬周辺が人気で、ソイ・ガヤ・アブラコなどの根魚が周年狙える。夏場にはイカやサバの回遊もあり、工場夜景を背景にした夜釣りが独特の雰囲気。",
-    latitude: 42.3220,
-    longitude: 140.9730,
-    address: "北海道室蘭市海岸町",
-    accessInfo:
-      "JR室蘭駅から徒歩約10分。道央自動車道室蘭ICから約15分。周辺に無料駐車スペースあり。",
-    region: {
-      id: "r302",
-      prefecture: "北海道",
-      areaName: "室蘭",
-      slug: "hokkaido-muroran",
-    },
-    spotType: "port",
-    difficulty: "intermediate",
-    isFree: true,
-    hasParking: true,
-    parkingDetail: "埠頭周辺に無料駐車スペース",
-    hasToilet: true,
-    hasConvenienceStore: true,
-    hasFishingShop: true,
-    hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.webp",
-    images: [],
-    rating: 4.0,
-    reviewCount: 167,
-    catchableFish: [],
-    bestTimes: btNight,
-    tackleRecommendations: [],
-    safetyLevel: "caution",
-    safetyNotes: [
-      "一部足場の悪いポイントあり",
-      "夜釣り時はヘッドライト必須",
-      "冬季の強風に注意",
-    ],
-  },
-
-  // --- 釧路港 ---
-  {
-    id: "s953",
-    name: "釧路港",
-    slug: "kushiro-ko",
-    description:
-      "道東を代表する大型港湾。西港・東港・副港の各エリアで釣りが楽しめる。チカ・サバ・カレイなどが通年狙え、夏はマイワシの大群が回遊する。副港市場隣接の岸壁は初心者にもアクセスしやすい。",
-    latitude: 42.9750,
-    longitude: 144.3810,
-    address: "北海道釧路市南大通",
-    accessInfo:
-      "JR釧路駅から車で約10分。道東自動車道阿寒ICから約40分。副港市場近くに無料駐車場あり。",
-    region: {
-      id: "r303",
-      prefecture: "北海道",
-      areaName: "釧路",
-      slug: "hokkaido-kushiro",
-    },
-    spotType: "port",
-    difficulty: "beginner",
-    isFree: true,
-    hasParking: true,
-    parkingDetail: "副港市場近く無料駐車場",
-    hasToilet: true,
-    hasConvenienceStore: true,
-    hasFishingShop: true,
-    hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.webp",
-    images: [],
-    rating: 3.9,
-    reviewCount: 145,
-    catchableFish: [],
-    bestTimes: btMorning,
-    tackleRecommendations: [],
-    safetyLevel: "safe",
-    safetyNotes: [
-      "副港エリアは足場良好",
-      "濃霧が発生しやすいので視界に注意",
-      "冬季は極寒のため万全の防寒対策を",
-    ],
-  },
-
   // --- 網走港 ---
   {
     id: "s954",
@@ -532,48 +448,6 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
   },
 
-  // --- 函館港 ---
-  {
-    id: "s962",
-    name: "函館港",
-    slug: "hakodate-ko",
-    description:
-      "函館山の麓に広がる歴史ある港。函館朝市や金森赤レンガ倉庫に隣接し、観光と釣りを同時に楽しめる。港内ではイカ（マイカ・ヤリイカ）が有名で、夏の夜イカ釣りは函館の風物詩。サバ・アジ・カレイなども好調。",
-    latitude: 41.7710,
-    longitude: 140.7260,
-    address: "北海道函館市末広町",
-    accessInfo:
-      "JR函館駅から徒歩約10分。函館空港から車で約20分。周辺に有料駐車場多数。",
-    region: {
-      id: "r311",
-      prefecture: "北海道",
-      areaName: "函館",
-      slug: "hokkaido-hakodate",
-    },
-    spotType: "port",
-    difficulty: "beginner",
-    isFree: true,
-    hasParking: true,
-    parkingDetail: "周辺有料駐車場（500〜1000円/日）",
-    hasToilet: true,
-    hasConvenienceStore: true,
-    hasFishingShop: true,
-    hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.webp",
-    images: [],
-    rating: 4.2,
-    reviewCount: 256,
-    catchableFish: [],
-    bestTimes: btNight,
-    tackleRecommendations: [],
-    safetyLevel: "safe",
-    safetyNotes: [
-      "港内は足場良好",
-      "観光客が多いエリアでは配慮が必要",
-      "夜イカ釣りはヘッドライト持参",
-    ],
-  },
-
   // --- 松前港 ---
   {
     id: "s963",
@@ -786,48 +660,6 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
   // =============================================
   // 青森県（6スポット）
   // =============================================
-
-  // --- 八戸港 ---
-  {
-    id: "s968",
-    name: "八戸港",
-    slug: "hachinohe-ko",
-    description:
-      "東北有数の大型漁港。館鼻漁港（朝市で有名）や新井田川河口周辺が人気の釣り場。サバ・イワシのサビキ釣りが盛んで、秋にはサケの回遊もある。カレイの投げ釣りやソイの穴釣りも好調な万能港。",
-    latitude: 40.5320,
-    longitude: 141.5320,
-    address: "青森県八戸市湊町",
-    accessInfo:
-      "JR八戸駅から車で約20分。八戸自動車道八戸ICから約15分。館鼻漁港に無料駐車場あり。",
-    region: {
-      id: "r314",
-      prefecture: "青森県",
-      areaName: "八戸",
-      slug: "aomori-hachinohe",
-    },
-    spotType: "port",
-    difficulty: "beginner",
-    isFree: true,
-    hasParking: true,
-    parkingDetail: "館鼻漁港に無料駐車場",
-    hasToilet: true,
-    hasConvenienceStore: true,
-    hasFishingShop: true,
-    hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.webp",
-    images: [],
-    rating: 4.1,
-    reviewCount: 198,
-    catchableFish: [],
-    bestTimes: btMorning,
-    tackleRecommendations: [],
-    safetyLevel: "safe",
-    safetyNotes: [
-      "館鼻漁港は足場良好",
-      "朝市開催日は駐車場が混雑",
-      "大型船の入出港時は注意",
-    ],
-  },
 
   // --- 大間崎 ---
   {
@@ -1126,48 +958,6 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
       "防波堤の一部は立入禁止区域あり",
       "津波警報発令時は即座に高台へ避難",
       "三陸沖は波が高くなりやすい",
-    ],
-  },
-
-  // --- 大船渡港 ---
-  {
-    id: "s976",
-    name: "大船渡港",
-    slug: "ofunato-ko",
-    description:
-      "リアス式海岸に囲まれた天然の良港。大船渡湾内は波が穏やかで初心者にも釣りやすい。カレイ・アイナメ・メバルの根魚系が充実し、サビキでイワシ・サバも狙える。碁石海岸など周辺の景勝地も多い。",
-    latitude: 39.0750,
-    longitude: 141.7200,
-    address: "岩手県大船渡市大船渡町",
-    accessInfo:
-      "JR大船渡駅（BRT）から車で約5分。三陸自動車道大船渡ICから約10分。港内に駐車スペースあり。",
-    region: {
-      id: "r318",
-      prefecture: "岩手県",
-      areaName: "釜石・大船渡",
-      slug: "iwate-kamaishi-ofunato",
-    },
-    spotType: "port",
-    difficulty: "beginner",
-    isFree: true,
-    hasParking: true,
-    parkingDetail: "港内に無料駐車スペース",
-    hasToilet: true,
-    hasConvenienceStore: true,
-    hasFishingShop: false,
-    hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.webp",
-    images: [],
-    rating: 3.8,
-    reviewCount: 94,
-    catchableFish: [],
-    bestTimes: btEvening,
-    tackleRecommendations: [],
-    safetyLevel: "safe",
-    safetyNotes: [
-      "湾内のため比較的穏やか",
-      "津波警報発令時は即座に高台へ避難",
-      "震災復興エリアでの釣りマナーに配慮",
     ],
   },
 
@@ -1606,48 +1396,6 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
   // =============================================
   // 福島県（3スポット）
   // =============================================
-
-  // --- 相馬港 ---
-  {
-    id: "s987",
-    name: "相馬港",
-    slug: "soma-ko",
-    description:
-      "福島県北東部の太平洋に面した港。松川浦に隣接し、カレイ・ヒラメの好漁場として知られる。港内の岸壁からサビキでイワシ・サバが楽しめ、投げ釣りでカレイ・アイナメも好調。震災からの復興が進み、釣り場環境も整備されている。",
-    latitude: 37.8380,
-    longitude: 140.9760,
-    address: "福島県相馬市尾浜",
-    accessInfo:
-      "JR相馬駅から車で約15分。常磐自動車道相馬ICから約10分。港周辺に駐車スペースあり。",
-    region: {
-      id: "r324",
-      prefecture: "福島県",
-      areaName: "相馬・いわき",
-      slug: "fukushima-soma-iwaki",
-    },
-    spotType: "port",
-    difficulty: "beginner",
-    isFree: true,
-    hasParking: true,
-    parkingDetail: "港周辺に無料駐車スペース",
-    hasToilet: true,
-    hasConvenienceStore: true,
-    hasFishingShop: false,
-    hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.webp",
-    images: [],
-    rating: 3.8,
-    reviewCount: 112,
-    catchableFish: [],
-    bestTimes: btMorning,
-    tackleRecommendations: [],
-    safetyLevel: "safe",
-    safetyNotes: [
-      "港内の岸壁は足場良好",
-      "津波警報発令時は即座に高台へ避難",
-      "松川浦周辺は潮の干満に注意",
-    ],
-  },
 
   // --- 小名浜港 ---
   {

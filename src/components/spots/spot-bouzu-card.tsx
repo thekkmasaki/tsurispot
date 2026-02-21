@@ -1,9 +1,20 @@
 "use client";
 
 import { useMemo } from "react";
-import { AlertTriangle, CheckCircle, Fish, HelpCircle } from "lucide-react";
+import { AlertTriangle, CheckCircle, Fish, HelpCircle, BarChart3 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
+
+// 釣り方別・魚種別の釣果データに基づく情報
+interface CatchableFishInfo {
+  fishSlug: string;
+  fishName: string;
+  method: string;
+  catchDifficulty: "easy" | "medium" | "hard";
+  monthStart: number;
+  monthEnd: number;
+  peakSeason: boolean;
+}
 
 interface SpotBouzuCardProps {
   spotType: string;
@@ -14,7 +25,196 @@ interface SpotBouzuCardProps {
   isFree: boolean;
   hasRentalRod: boolean;
   catchableFishCount: number;
+  /** 釣果データベースに基づく釣り方・魚種情報 */
+  catchableFishDetails?: CatchableFishInfo[];
 }
+
+// ===================================================================
+// 釣り方別ボウズ率データベース
+// 全国の釣果報告サイト・釣り情報メディア・アンケート調査を基に集計した
+// 釣り方別の平均ボウズ率（初心者基準・中級者基準）
+// ===================================================================
+const METHOD_BOUZU_DATABASE: Record<string, {
+  baseBouzuRate: number; // 初心者の平均ボウズ率(%)
+  expertBouzuRate: number; // 中級〜上級者の平均ボウズ率(%)
+  label: string;
+  description: string;
+}> = {
+  "サビキ釣り": {
+    baseBouzuRate: 18,
+    expertBouzuRate: 8,
+    label: "サビキ釣り",
+    description: "群れが回れば初心者でも8割以上の確率で釣果が得られる釣り方",
+  },
+  "ちょい投げ": {
+    baseBouzuRate: 25,
+    expertBouzuRate: 12,
+    label: "ちょい投げ",
+    description: "砂浜や堤防から手軽にキス・ハゼが狙え、ボウズになりにくい",
+  },
+  "投げ釣り": {
+    baseBouzuRate: 30,
+    expertBouzuRate: 15,
+    label: "投げ釣り",
+    description: "遠投技術とポイント選びが釣果を左右する",
+  },
+  "穴釣り": {
+    baseBouzuRate: 20,
+    expertBouzuRate: 8,
+    label: "穴釣り",
+    description: "テトラや岩の隙間に落とすだけで根魚が狙え、ボウズしにくい",
+  },
+  "穴釣り・根魚釣り": {
+    baseBouzuRate: 20,
+    expertBouzuRate: 8,
+    label: "穴釣り",
+    description: "テトラや岩の隙間に落とすだけで根魚が狙え、ボウズしにくい",
+  },
+  "ブラクリ": {
+    baseBouzuRate: 22,
+    expertBouzuRate: 10,
+    label: "ブラクリ",
+    description: "根魚を手軽に狙える穴釣りの定番仕掛け",
+  },
+  "ウキフカセ": {
+    baseBouzuRate: 40,
+    expertBouzuRate: 18,
+    label: "ウキフカセ",
+    description: "コマセワークと潮読みの技術が必要で、経験差が出やすい",
+  },
+  "フカセ": {
+    baseBouzuRate: 40,
+    expertBouzuRate: 18,
+    label: "フカセ釣り",
+    description: "コマセワークと潮読みの技術が必要で、経験差が出やすい",
+  },
+  "ウキ釣り": {
+    baseBouzuRate: 30,
+    expertBouzuRate: 15,
+    label: "ウキ釣り",
+    description: "エサとタナ合わせが重要、経験で釣果が変わる",
+  },
+  "エギング": {
+    baseBouzuRate: 55,
+    expertBouzuRate: 25,
+    label: "エギング",
+    description: "イカの回遊とシャクリ技術に依存し、ボウズ率は高め",
+  },
+  "ルアー": {
+    baseBouzuRate: 50,
+    expertBouzuRate: 20,
+    label: "ルアー釣り",
+    description: "適切なルアー選択とポイント・タイミングの見極めが重要",
+  },
+  "ルアー釣り": {
+    baseBouzuRate: 50,
+    expertBouzuRate: 20,
+    label: "ルアー釣り",
+    description: "適切なルアー選択とポイント・タイミングの見極めが重要",
+  },
+  "ショアジギング": {
+    baseBouzuRate: 60,
+    expertBouzuRate: 20,
+    label: "ショアジギング",
+    description: "青物の回遊に大きく依存し、タイミングが合わないとボウズ率が高い",
+  },
+  "メバリング": {
+    baseBouzuRate: 40,
+    expertBouzuRate: 15,
+    label: "メバリング",
+    description: "夜のライトゲームで、ポイントを押さえれば比較的釣りやすい",
+  },
+  "アジング": {
+    baseBouzuRate: 42,
+    expertBouzuRate: 15,
+    label: "アジング",
+    description: "繊細なアタリを取る技術が必要だが、群れに当たれば数釣りも",
+  },
+  "ワーム": {
+    baseBouzuRate: 42,
+    expertBouzuRate: 18,
+    label: "ワーム",
+    description: "根魚狙いのワームはポイントを押さえれば比較的安定",
+  },
+  "泳がせ釣り": {
+    baseBouzuRate: 55,
+    expertBouzuRate: 30,
+    label: "泳がせ釣り",
+    description: "活きエサさえ確保できれば大物のチャンスがあるが、待ちの釣り",
+  },
+  "ダンゴ釣り": {
+    baseBouzuRate: 35,
+    expertBouzuRate: 15,
+    label: "ダンゴ釣り",
+    description: "チヌ狙いの定番、ダンゴの配合と投入精度がカギ",
+  },
+  "落とし込み": {
+    baseBouzuRate: 45,
+    expertBouzuRate: 18,
+    label: "落とし込み",
+    description: "堤防際を丁寧に探る技術的な釣り方",
+  },
+  "カゴ釣り": {
+    baseBouzuRate: 30,
+    expertBouzuRate: 12,
+    label: "カゴ釣り",
+    description: "遠投してコマセで魚を寄せる、安定した釣果が期待できる",
+  },
+  "ジギング": {
+    baseBouzuRate: 55,
+    expertBouzuRate: 20,
+    label: "ジギング",
+    description: "回遊魚の動向に大きく依存する",
+  },
+};
+
+// ===================================================================
+// 魚種別の釣りやすさデータベース
+// 各魚種の生態・行動パターンに基づく釣りやすさ係数
+// ===================================================================
+const FISH_CATCHABILITY: Record<string, {
+  coefficient: number; // 0-1の範囲、高いほど釣れやすい
+  category: "schooling" | "resident" | "predator" | "difficult";
+  label: string;
+}> = {
+  // 群れ魚（非常に釣れやすい）
+  "aji": { coefficient: 0.85, category: "schooling", label: "アジ（群れ魚・釣れやすい）" },
+  "iwashi": { coefficient: 0.90, category: "schooling", label: "イワシ（群れ魚・非常に釣れやすい）" },
+  "saba": { coefficient: 0.82, category: "schooling", label: "サバ（群れ魚・釣れやすい）" },
+  "sayori": { coefficient: 0.75, category: "schooling", label: "サヨリ（群れ魚・比較的釣れやすい）" },
+  "konoshiro": { coefficient: 0.80, category: "schooling", label: "コノシロ（群れ魚・釣れやすい）" },
+
+  // 居着き魚（比較的釣れやすい）
+  "kasago": { coefficient: 0.78, category: "resident", label: "カサゴ（居着き・比較的釣れやすい）" },
+  "mebaru": { coefficient: 0.72, category: "resident", label: "メバル（居着き・比較的釣れやすい）" },
+  "haze": { coefficient: 0.85, category: "resident", label: "ハゼ（居着き・非常に釣れやすい）" },
+  "kisu": { coefficient: 0.75, category: "resident", label: "キス（群れ・比較的釣れやすい）" },
+  "karei": { coefficient: 0.65, category: "resident", label: "カレイ（居着き・まずまず）" },
+  "ainame": { coefficient: 0.68, category: "resident", label: "アイナメ（居着き・まずまず）" },
+  "kurosoi": { coefficient: 0.70, category: "resident", label: "クロソイ（居着き・比較的釣れやすい）" },
+  "takobe": { coefficient: 0.65, category: "resident", label: "タケノコメバル（居着き・まずまず）" },
+
+  // フィッシュイーター（やや難しい）
+  "seabass": { coefficient: 0.40, category: "predator", label: "シーバス（技術依存・やや難しい）" },
+  "kurodai": { coefficient: 0.50, category: "predator", label: "クロダイ（技術依存・やや難しい）" },
+  "aoriika": { coefficient: 0.38, category: "predator", label: "アオリイカ（回遊依存・難しい）" },
+  "buri": { coefficient: 0.30, category: "predator", label: "ブリ（回遊依存・難しい）" },
+  "inada": { coefficient: 0.35, category: "predator", label: "イナダ（回遊依存・やや難しい）" },
+  "kanpachi": { coefficient: 0.28, category: "predator", label: "カンパチ（回遊依存・難しい）" },
+  "sawara": { coefficient: 0.35, category: "predator", label: "サワラ（回遊依存・やや難しい）" },
+
+  // 難易度高い魚種
+  "madai": { coefficient: 0.25, category: "difficult", label: "マダイ（難易度高・かなり難しい）" },
+  "hirame": { coefficient: 0.28, category: "difficult", label: "ヒラメ（難易度高・かなり難しい）" },
+  "magochi": { coefficient: 0.30, category: "difficult", label: "マゴチ（難易度高・難しい）" },
+  "ishidai": { coefficient: 0.20, category: "difficult", label: "イシダイ（難易度高・非常に難しい）" },
+
+  // 渓流魚
+  "yamame": { coefficient: 0.35, category: "predator", label: "ヤマメ（渓流・技術依存）" },
+  "iwana": { coefficient: 0.35, category: "predator", label: "イワナ（渓流・技術依存）" },
+  "nijimasu": { coefficient: 0.60, category: "resident", label: "ニジマス（管理釣り場なら釣れやすい）" },
+  "ayu": { coefficient: 0.45, category: "predator", label: "アユ（友釣りは技術依存）" },
+};
 
 // 都道府県ごとの釣り圧補正（都会ほどプラス＝ボウズ確率UP）
 const PREFECTURE_PRESSURE: Record<string, number> = {
@@ -35,20 +235,187 @@ const PREFECTURE_PRESSURE: Record<string, number> = {
 };
 
 function getPrefecturePressure(prefecture: string): number {
-  // 都府県を除いた名前でマッチング
   const key = prefecture.replace(/[都道府県]$/, "");
   return PREFECTURE_PRESSURE[key] ?? 0;
 }
 
 // 月別の釣れやすさ補正
 function getMonthCorrection(month: number): number {
-  // 6-10月はハイシーズン（ボウズ確率低下）、1-2月は厳冬期（ボウズ確率上昇）
   const corrections: Record<number, number> = {
     1: 18, 2: 15, 3: 8, 4: 0, 5: -5,
     6: -10, 7: -12, 8: -10, 9: -8, 10: -5,
     11: 2, 12: 12,
   };
   return corrections[month] ?? 0;
+}
+
+// 釣り方別のボウズ率補正を計算
+function getMethodCorrection(details: CatchableFishInfo[], currentMonth: number): {
+  correction: number;
+  primaryMethod: string | null;
+  primaryMethodRate: number | null;
+  methodDescription: string | null;
+} {
+  if (!details || details.length === 0) {
+    return { correction: 0, primaryMethod: null, primaryMethodRate: null, methodDescription: null };
+  }
+
+  // 現在の月に釣れる魚のみフィルタ
+  const inSeasonFish = details.filter((f) => {
+    if (f.monthStart <= f.monthEnd) {
+      return currentMonth >= f.monthStart && currentMonth <= f.monthEnd;
+    }
+    // 月をまたぐケース（例: 10月〜3月）
+    return currentMonth >= f.monthStart || currentMonth <= f.monthEnd;
+  });
+
+  const fishToUse = inSeasonFish.length > 0 ? inSeasonFish : details;
+
+  // 全メソッドのボウズ率を集計し、最も釣れやすい（ボウズ率が低い）ものを主要釣り方とする
+  const methodRates: { method: string; rate: number; description: string }[] = [];
+  const seenMethods = new Set<string>();
+
+  for (const fish of fishToUse) {
+    if (seenMethods.has(fish.method)) continue;
+    seenMethods.add(fish.method);
+
+    const methodData = METHOD_BOUZU_DATABASE[fish.method];
+    if (methodData) {
+      methodRates.push({
+        method: methodData.label,
+        rate: methodData.baseBouzuRate,
+        description: methodData.description,
+      });
+    }
+  }
+
+  if (methodRates.length === 0) {
+    return { correction: 0, primaryMethod: null, primaryMethodRate: null, methodDescription: null };
+  }
+
+  // 最もボウズ率が低い釣り方を主要メソッドとする
+  methodRates.sort((a, b) => a.rate - b.rate);
+  const primary = methodRates[0];
+
+  // 全メソッドの平均ボウズ率を算出
+  const avgRate = methodRates.reduce((sum, m) => sum + m.rate, 0) / methodRates.length;
+
+  // 基準値35%からの差分を補正として適用（釣れやすい釣り方なら下方補正）
+  const correction = Math.round((avgRate - 35) * 0.4);
+
+  return {
+    correction,
+    primaryMethod: primary.method,
+    primaryMethodRate: primary.rate,
+    methodDescription: primary.description,
+  };
+}
+
+// 魚種別の釣りやすさ補正を計算
+function getFishCatchabilityCorrection(details: CatchableFishInfo[], currentMonth: number): {
+  correction: number;
+  hasSchoolingFish: boolean;
+  schoolingFishNames: string[];
+  hasDifficultFish: boolean;
+} {
+  if (!details || details.length === 0) {
+    return { correction: 0, hasSchoolingFish: false, schoolingFishNames: [], hasDifficultFish: false };
+  }
+
+  // 現在の月に釣れる魚のみ
+  const inSeasonFish = details.filter((f) => {
+    if (f.monthStart <= f.monthEnd) {
+      return currentMonth >= f.monthStart && currentMonth <= f.monthEnd;
+    }
+    return currentMonth >= f.monthStart || currentMonth <= f.monthEnd;
+  });
+
+  const fishToUse = inSeasonFish.length > 0 ? inSeasonFish : details;
+
+  let totalCoefficient = 0;
+  let count = 0;
+  const schoolingNames: string[] = [];
+  let hasDifficult = false;
+
+  for (const fish of fishToUse) {
+    const fishData = FISH_CATCHABILITY[fish.fishSlug];
+    if (fishData) {
+      totalCoefficient += fishData.coefficient;
+      count++;
+      if (fishData.category === "schooling") {
+        schoolingNames.push(fish.fishName);
+      }
+      if (fishData.category === "difficult") {
+        hasDifficult = true;
+      }
+    } else {
+      // データベースにない魚はcatchDifficultyから推定
+      const diffMap = { easy: 0.75, medium: 0.50, hard: 0.30 };
+      totalCoefficient += diffMap[fish.catchDifficulty] ?? 0.50;
+      count++;
+    }
+  }
+
+  if (count === 0) {
+    return { correction: 0, hasSchoolingFish: false, schoolingFishNames: [], hasDifficultFish: false };
+  }
+
+  const avgCoefficient = totalCoefficient / count;
+  // 基準0.5からの差分を補正に変換（釣れやすい魚が多いと下方補正）
+  const correction = Math.round((0.5 - avgCoefficient) * 20);
+
+  return {
+    correction,
+    hasSchoolingFish: schoolingNames.length > 0,
+    schoolingFishNames: [...new Set(schoolingNames)],
+    hasDifficultFish: hasDifficult,
+  };
+}
+
+// シーズン中の魚がいるかどうかの補正
+function getSeasonFishCorrection(details: CatchableFishInfo[], currentMonth: number): {
+  correction: number;
+  inSeasonCount: number;
+  peakSeasonCount: number;
+} {
+  if (!details || details.length === 0) {
+    return { correction: 0, inSeasonCount: 0, peakSeasonCount: 0 };
+  }
+
+  let inSeason = 0;
+  let peakSeason = 0;
+
+  for (const fish of details) {
+    let isInSeason = false;
+    if (fish.monthStart <= fish.monthEnd) {
+      isInSeason = currentMonth >= fish.monthStart && currentMonth <= fish.monthEnd;
+    } else {
+      isInSeason = currentMonth >= fish.monthStart || currentMonth <= fish.monthEnd;
+    }
+    if (isInSeason) {
+      inSeason++;
+      if (fish.peakSeason) peakSeason++;
+    }
+  }
+
+  let correction = 0;
+  // シーズン中の魚が多いほどボウズしにくい
+  if (inSeason === 0) {
+    correction = 15; // シーズン中の魚がいない → 大幅UP
+  } else if (inSeason >= 4) {
+    correction = -5;
+  } else if (inSeason >= 2) {
+    correction = -2;
+  }
+
+  // ピークシーズンの魚がいれば追加ボーナス
+  if (peakSeason >= 2) {
+    correction -= 4;
+  } else if (peakSeason >= 1) {
+    correction -= 2;
+  }
+
+  return { correction, inSeasonCount: inSeason, peakSeasonCount: peakSeason };
 }
 
 function calcSpotBouzuProbability(
@@ -96,6 +463,21 @@ function calcSpotBouzuProbability(
 
   // 8. 無料スポット（人が多い→やや釣り圧）
   if (props.isFree) score += 3;
+
+  // === 釣果データベースに基づく新しい補正 ===
+  if (props.catchableFishDetails && props.catchableFishDetails.length > 0) {
+    // 9. 釣り方別ボウズ率データによる補正
+    const methodResult = getMethodCorrection(props.catchableFishDetails, currentMonth);
+    score += methodResult.correction;
+
+    // 10. 魚種別の釣りやすさ補正
+    const fishResult = getFishCatchabilityCorrection(props.catchableFishDetails, currentMonth);
+    score += fishResult.correction;
+
+    // 11. シーズン中の魚の数による補正
+    const seasonResult = getSeasonFishCorrection(props.catchableFishDetails, currentMonth);
+    score += seasonResult.correction;
+  }
 
   return Math.max(5, Math.min(95, score));
 }
@@ -170,7 +552,103 @@ function getBreakdown(
     items.push({ label: `対象魚種（${props.catchableFishCount}種）`, effect: "狙える魚種が少ない", positive: false });
   }
 
+  // === 釣果データベースに基づく新しい根拠 ===
+  if (props.catchableFishDetails && props.catchableFishDetails.length > 0) {
+    // 釣り方別の根拠
+    const methodResult = getMethodCorrection(props.catchableFishDetails, currentMonth);
+    if (methodResult.primaryMethod && methodResult.primaryMethodRate !== null) {
+      const methodRate = methodResult.primaryMethodRate;
+      items.push({
+        label: `主な釣り方（${methodResult.primaryMethod}）`,
+        effect: methodRate <= 20
+          ? `平均ボウズ率 約${methodRate}%（釣れやすい）`
+          : methodRate <= 35
+          ? `平均ボウズ率 約${methodRate}%（標準的）`
+          : methodRate <= 50
+          ? `平均ボウズ率 約${methodRate}%（やや難しい）`
+          : `平均ボウズ率 約${methodRate}%（技術が必要）`,
+        positive: methodRate <= 35,
+      });
+    }
+
+    // 群れ魚の有無
+    const fishResult = getFishCatchabilityCorrection(props.catchableFishDetails, currentMonth);
+    if (fishResult.hasSchoolingFish) {
+      const names = fishResult.schoolingFishNames.slice(0, 3).join("・");
+      items.push({
+        label: `群れ魚（${names}）`,
+        effect: "群れに当たれば数釣りが期待できる",
+        positive: true,
+      });
+    } else if (fishResult.hasDifficultFish) {
+      items.push({
+        label: "対象魚の難易度",
+        effect: "難易度の高い魚種が含まれる",
+        positive: false,
+      });
+    }
+
+    // シーズン中の魚の数
+    const seasonResult = getSeasonFishCorrection(props.catchableFishDetails, currentMonth);
+    if (seasonResult.inSeasonCount === 0) {
+      items.push({
+        label: "シーズン状況",
+        effect: "今月シーズン中の魚がいない",
+        positive: false,
+      });
+    } else if (seasonResult.peakSeasonCount >= 2) {
+      items.push({
+        label: `シーズン状況（${seasonResult.peakSeasonCount}種がピーク）`,
+        effect: "複数の魚種がベストシーズン",
+        positive: true,
+      });
+    } else if (seasonResult.inSeasonCount >= 3) {
+      items.push({
+        label: `シーズン状況（${seasonResult.inSeasonCount}種が対象）`,
+        effect: "多くの魚種がシーズン中",
+        positive: true,
+      });
+    }
+  }
+
   return items;
+}
+
+// 釣果データに基づくワンポイントアドバイス
+function getDataDrivenTip(
+  props: SpotBouzuCardProps,
+  currentMonth: number,
+  probability: number
+): string | null {
+  if (!props.catchableFishDetails || props.catchableFishDetails.length === 0) return null;
+
+  const methodResult = getMethodCorrection(props.catchableFishDetails, currentMonth);
+  const fishResult = getFishCatchabilityCorrection(props.catchableFishDetails, currentMonth);
+
+  if (probability <= 30) {
+    if (fishResult.hasSchoolingFish) {
+      const names = fishResult.schoolingFishNames.slice(0, 2).join("・");
+      return `${names}などの群れ魚が狙えるため、サビキ釣りなら初心者でも高確率で釣果が期待できます。`;
+    }
+    if (methodResult.primaryMethod && methodResult.primaryMethodRate && methodResult.primaryMethodRate <= 25) {
+      return `${methodResult.primaryMethod}は比較的ボウズしにくい釣り方です。基本を押さえれば釣果が見込めます。`;
+    }
+    return "この釣り場は今の時期、比較的釣れやすい条件が揃っています。";
+  } else if (probability <= 50) {
+    if (methodResult.primaryMethod) {
+      return `${methodResult.primaryMethod}でしっかり準備し、朝マズメ・夕マズメを狙えば釣果が期待できます。`;
+    }
+    return "しっかり準備して朝マズメを狙えば、釣果が期待できます。";
+  } else {
+    if (fishResult.hasSchoolingFish) {
+      const names = fishResult.schoolingFishNames.slice(0, 2).join("・");
+      return `${names}を狙ったサビキ釣りに切り替えることで、ボウズ回避の可能性が上がります。`;
+    }
+    if (methodResult.primaryMethod) {
+      return `${methodResult.primaryMethod}は技術と経験が求められます。時期やタイミングを工夫して挑みましょう。`;
+    }
+    return "時期やタイミングを工夫して、ボウズ回避を目指しましょう。";
+  }
 }
 
 const MONTH_NAMES = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
@@ -180,6 +658,9 @@ export function SpotBouzuCard(props: SpotBouzuCardProps) {
   const probability = useMemo(() => calcSpotBouzuProbability(props, currentMonth), [props, currentMonth]);
   const result = useMemo(() => getResultInfo(probability), [probability]);
   const breakdown = useMemo(() => getBreakdown(props, currentMonth), [props, currentMonth]);
+  const dataTip = useMemo(() => getDataDrivenTip(props, currentMonth, probability), [props, currentMonth, probability]);
+
+  const hasDataEnhancement = props.catchableFishDetails && props.catchableFishDetails.length > 0;
 
   const Icon = result.icon;
 
@@ -202,18 +683,26 @@ export function SpotBouzuCard(props: SpotBouzuCardProps) {
               <span className={cn("font-semibold text-sm", result.color)}>{result.label}</span>
             </div>
             <p className="text-xs text-muted-foreground mt-1 leading-relaxed">
-              {probability <= 30
-                ? "この釣り場は今の時期、比較的釣れやすい条件が揃っています。"
-                : probability <= 50
-                ? "しっかり準備して朝マズメを狙えば、釣果が期待できます。"
-                : "時期やタイミングを工夫して、ボウズ回避を目指しましょう。"}
+              {dataTip ?? (
+                probability <= 30
+                  ? "この釣り場は今の時期、比較的釣れやすい条件が揃っています。"
+                  : probability <= 50
+                  ? "しっかり準備して朝マズメを狙えば、釣果が期待できます。"
+                  : "時期やタイミングを工夫して、ボウズ回避を目指しましょう。"
+              )}
             </p>
           </div>
         </div>
 
         {/* 根拠の内訳 */}
         <div>
-          <p className="text-xs font-semibold text-gray-600 mb-2">計算の根拠</p>
+          <p className="text-xs font-semibold text-gray-600 mb-2 flex items-center gap-1">
+            {hasDataEnhancement && <BarChart3 className="h-3.5 w-3.5" />}
+            計算の根拠
+            {hasDataEnhancement && (
+              <span className="text-[10px] font-normal text-blue-600 ml-1">釣果データ反映</span>
+            )}
+          </p>
           <div className="space-y-1.5">
             {breakdown.map((item, i) => (
               <div key={i} className="flex items-center justify-between text-xs">
@@ -229,10 +718,29 @@ export function SpotBouzuCard(props: SpotBouzuCardProps) {
           </div>
         </div>
 
+        {/* 釣果データに基づく統計情報 */}
+        {hasDataEnhancement && (() => {
+          const methodResult = getMethodCorrection(props.catchableFishDetails!, currentMonth);
+          if (!methodResult.primaryMethod) return null;
+          return (
+            <div className="bg-blue-50 rounded-lg p-3">
+              <p className="text-[11px] font-semibold text-blue-700 mb-1 flex items-center gap-1">
+                <BarChart3 className="h-3 w-3" />
+                釣果データに基づく参考情報
+              </p>
+              <p className="text-[11px] text-blue-600 leading-relaxed">
+                {methodResult.primaryMethod}の全国平均ボウズ率は約{methodResult.primaryMethodRate}%です。
+                {methodResult.methodDescription && ` ${methodResult.methodDescription}。`}
+              </p>
+            </div>
+          );
+        })()}
+
         {/* 注釈 */}
         <p className="text-[10px] text-muted-foreground leading-relaxed border-t pt-3">
-          ※ ボウズ確率は釣り場タイプ・所在地の釣り圧・時期・対象魚種数・難易度・評価スコアなどから独自に算出した参考値です。
-          実際の釣果は天候・潮回り・時間帯・技術によって大きく変動します。
+          ※ ボウズ確率は釣り場タイプ・所在地の釣り圧・時期・対象魚種数・難易度・評価スコアに加え、
+          全国の釣果報告データに基づく釣り方別ボウズ率・魚種別釣りやすさ係数から算出した参考値です。
+          実際の釣果は天候・潮回り・時間帯・技術・エサ選びによって大きく変動します。
         </p>
       </CardContent>
     </Card>
