@@ -1,22 +1,31 @@
 import { Redis } from "@upstash/redis";
 
-// Upstash Redis クライアント
-// .trim() で環境変数の空白/改行を除去（Vercel設定時のコピペ問題を回避）
-const redisUrl = (process.env.UPSTASH_REDIS_REST_URL ?? "").trim();
-const redisToken = (process.env.UPSTASH_REDIS_REST_TOKEN ?? "").trim();
+// Upstash Redis クライアント（遅延初期化）
+// ビルド時のモジュール評価でRedisが初期化されるのを防ぐ
+let _redis: Redis | null = null;
 
-// Redis未設定時もビルドが通るようにダミーインスタンスを作成
-function createRedis() {
-  if (redisUrl && redisUrl.startsWith("https://") && redisToken && redisToken.length > 10) {
+function getRedis(): Redis | null {
+  if (_redis) return _redis;
+  const url = (process.env.UPSTASH_REDIS_REST_URL ?? "").trim();
+  const token = (process.env.UPSTASH_REDIS_REST_TOKEN ?? "").trim();
+  if (url && url.startsWith("https://") && token && token.length > 10) {
     try {
-      return new Redis({ url: redisUrl, token: redisToken });
+      _redis = new Redis({ url, token });
+      return _redis;
     } catch {
-      return null as unknown as Redis;
+      return null;
     }
   }
-  // ビルド時やローカル開発で未設定の場合はダミー
-  // API側で process.env.UPSTASH_REDIS_REST_URL チェック済みなので実際には使われない
-  return null as unknown as Redis;
+  return null;
 }
 
-export const redis = createRedis();
+export const redis = new Proxy({} as Redis, {
+  get(_target, prop) {
+    const instance = getRedis();
+    if (!instance) {
+      // Redis未設定時はすべてのメソッド呼び出しでnull/0を返す
+      return () => Promise.resolve(null);
+    }
+    return (instance as unknown as Record<string | symbol, unknown>)[prop];
+  },
+});
