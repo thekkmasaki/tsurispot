@@ -19,10 +19,19 @@ import { getBeginnerEssentials } from "@/lib/data/products";
 
 const STORAGE_KEY = "tsurispot-checklist";
 
+interface AffiliateRec {
+  badge: string;
+  badgeColor: string;
+  name: string;
+  desc: string;
+  url: string;
+}
+
 interface ChecklistItem {
   id: string;
   label: string;
   note?: string;
+  affiliate?: AffiliateRec;
 }
 
 interface ChecklistCategory {
@@ -42,7 +51,16 @@ const categories: ChecklistCategory[] = [
     colorClass: "text-blue-600",
     bgClass: "bg-blue-50 dark:bg-blue-950",
     items: [
-      { id: "rod", label: "竿（ロッド）", note: "サビキセットなら竿・リール・仕掛け込みで3,000円前後" },
+      {
+        id: "rod", label: "竿（ロッド）", note: "サビキセットなら竿・リール・仕掛け込みで3,000円前後",
+        affiliate: {
+          badge: "慣れてきたら",
+          badgeColor: "bg-purple-100 text-purple-700",
+          name: "シマノ ホリデーパック",
+          desc: "振出式コンパクトロッド。持ち運びやすく、堤防からちょい投げ・サビキ・ウキ釣りまで幅広く対応。初心者セットを卒業したい人に最適。",
+          url: "https://amzn.to/4c7dgi1",
+        },
+      },
       { id: "reel", label: "リール", note: "スピニングリールが初心者向け" },
       { id: "tackle", label: "仕掛け（針・オモリ・ウキ）", note: "対象魚に合わせた仕掛けを用意" },
       { id: "line", label: "予備の釣り糸", note: "ライントラブルに備えて" },
@@ -78,10 +96,28 @@ const categories: ChecklistCategory[] = [
     bgClass: "bg-green-50 dark:bg-green-950",
     items: [
       { id: "chair", label: "折りたたみ椅子", note: "長時間の釣りでも快適に" },
-      { id: "net", label: "タモ（玉網）", note: "大きな魚を取り込むときに必要" },
+      {
+        id: "net", label: "タモ（玉網）", note: "大きな魚を取り込むときに必要",
+        affiliate: {
+          badge: "大物対策",
+          badgeColor: "bg-green-100 text-green-700",
+          name: "SANLIKE ランディングネット",
+          desc: "9段階伸縮で堤防からの大物取り込みに対応。折りたたみ式で持ち運びやすく、ラバーネットで魚を傷つけにくい。",
+          url: "https://amzn.to/4tOTONg",
+        },
+      },
       { id: "stringer", label: "ストリンガー", note: "魚を生かしたまま海中に繋ぎ止める道具" },
       { id: "scale", label: "フィッシュグリップ", note: "魚を安全に掴むための道具" },
-      { id: "knife", label: "ナイフ", note: "魚を締める・さばくときに使用" },
+      {
+        id: "knife", label: "ナイフ", note: "魚を締める・さばくときに使用",
+        affiliate: {
+          badge: "あると便利",
+          badgeColor: "bg-blue-100 text-blue-700",
+          name: "ダイワ フィッシュナイフ 2型",
+          desc: "ステンレス刃で錆びにくく、安全ロック付きで持ち運びも安心。魚を締める・血抜き・さばくのに最適。",
+          url: "https://amzn.to/3ZQsYqx",
+        },
+      },
       { id: "rainwear", label: "レインウェア", note: "急な雨や波しぶき対策に" },
       { id: "gloves", label: "フィッシンググローブ", note: "手を保護し、滑り止め効果も" },
       { id: "bugspray", label: "虫除けスプレー", note: "夏場は特に必須" },
@@ -226,40 +262,65 @@ function ChecklistPageContent() {
                 {category.items.map((item) => {
                   const isChecked = !!checked[item.id];
                   return (
-                    <button
-                      key={item.id}
-                      type="button"
-                      onClick={() => toggleItem(item.id)}
-                      className={`flex w-full items-start gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/50 ${
-                        isChecked ? "bg-muted/30" : ""
-                      }`}
-                    >
-                      <div className="mt-0.5 shrink-0">
-                        {isChecked ? (
-                          <div className="flex size-5 items-center justify-center rounded-full bg-primary text-primary-foreground">
-                            <Check className="size-3" />
-                          </div>
-                        ) : (
-                          <Circle className="size-5 text-muted-foreground/40" />
-                        )}
-                      </div>
-                      <div className="min-w-0">
-                        <p
-                          className={`text-sm font-medium ${
-                            isChecked
-                              ? "text-muted-foreground line-through"
-                              : "text-foreground"
-                          }`}
-                        >
-                          {item.label}
-                        </p>
-                        {item.note && (
-                          <p className="mt-0.5 text-xs text-muted-foreground">
-                            {item.note}
+                    <div key={item.id} className="divide-y-0">
+                      <button
+                        type="button"
+                        onClick={() => toggleItem(item.id)}
+                        className={`flex w-full items-start gap-3 px-4 py-3 text-left transition-colors hover:bg-muted/50 ${
+                          isChecked ? "bg-muted/30" : ""
+                        }`}
+                      >
+                        <div className="mt-0.5 shrink-0">
+                          {isChecked ? (
+                            <div className="flex size-5 items-center justify-center rounded-full bg-primary text-primary-foreground">
+                              <Check className="size-3" />
+                            </div>
+                          ) : (
+                            <Circle className="size-5 text-muted-foreground/40" />
+                          )}
+                        </div>
+                        <div className="min-w-0">
+                          <p
+                            className={`text-sm font-medium ${
+                              isChecked
+                                ? "text-muted-foreground line-through"
+                                : "text-foreground"
+                            }`}
+                          >
+                            {item.label}
                           </p>
-                        )}
-                      </div>
-                    </button>
+                          {item.note && (
+                            <p className="mt-0.5 text-xs text-muted-foreground">
+                              {item.note}
+                            </p>
+                          )}
+                        </div>
+                      </button>
+                      {item.affiliate && (
+                        <div className="border-t bg-muted/20 px-4 py-3">
+                          <div className="flex items-start gap-3">
+                            <div className="min-w-0 flex-1">
+                              <Badge className={`${item.affiliate.badgeColor} mb-1 text-[10px] hover:${item.affiliate.badgeColor.split(" ")[0]}`}>
+                                {item.affiliate.badge}
+                              </Badge>
+                              <p className="text-xs font-bold">{item.affiliate.name}</p>
+                              <p className="mt-0.5 text-[11px] leading-relaxed text-muted-foreground">
+                                {item.affiliate.desc}
+                              </p>
+                            </div>
+                            <a
+                              href={item.affiliate.url}
+                              target="_blank"
+                              rel="noopener noreferrer nofollow"
+                              onClick={(e) => e.stopPropagation()}
+                              className="mt-1 shrink-0 inline-flex items-center rounded-md bg-[#FF9900] px-3 py-2 text-[11px] font-bold text-white hover:bg-[#E88B00]"
+                            >
+                              Amazonで見る
+                            </a>
+                          </div>
+                        </div>
+                      )}
+                    </div>
                   );
                 })}
               </CardContent>
@@ -284,6 +345,7 @@ function ChecklistPageContent() {
           maxItems={6}
         />
       </div>
+
 
       {/* Internal links */}
       <div className="mt-8 rounded-xl border bg-muted/30 p-6">

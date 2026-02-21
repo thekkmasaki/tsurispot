@@ -254,6 +254,26 @@ export default function FishHandlingGuidePage() {
             <Warning>
               ナイフの取り扱いに注意。フィッシュグリップで魚をしっかり固定し、刃は自分の体から離す方向に使いましょう。釣り場にはバンドエイドも持っていくと安心です。
             </Warning>
+
+            <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50/50 p-4">
+              <p className="mb-1 text-xs font-bold text-amber-800">おすすめのフィッシュナイフ</p>
+              <div className="flex items-start gap-3">
+                <div className="min-w-0 flex-1">
+                  <p className="text-sm font-bold">ダイワ フィッシュナイフ 2型</p>
+                  <p className="mt-0.5 text-xs leading-relaxed text-amber-700">
+                    ステンレス刃で錆びにくく、安全ロック付きで持ち運びも安心。血抜き・締め・下処理まで1本でこなせる万能ナイフです。
+                  </p>
+                </div>
+                <a
+                  href="https://amzn.to/3ZQsYqx"
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="mt-1 shrink-0 inline-flex items-center rounded-md bg-[#FF9900] px-3 py-2 text-xs font-bold text-white hover:bg-[#E88B00]"
+                >
+                  Amazonで見る
+                </a>
+              </div>
+            </div>
           </SectionCard>
 
           {/* クーラーボックスの使い方 */}
