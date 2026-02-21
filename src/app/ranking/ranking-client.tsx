@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import Link from "next/link";
-import { Star, MapPin, Trophy, Users, Fish, ChevronDown, Info } from "lucide-react";
+import { Star, MapPin, Trophy, Users, Fish, ChevronDown, Info, Navigation, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { FishingSpot } from "@/types";
 
@@ -163,12 +163,21 @@ function StarRating({ rating }: { rating: number }) {
   );
 }
 
+function calcDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const toRad = (d: number) => (d * Math.PI) / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLon = toRad(lon2 - lon1);
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) ** 2;
+  return 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
 interface SpotCardProps {
   spot: FishingSpot;
   rank: number;
+  distanceKm?: number;
 }
 
-function SpotCard({ spot, rank }: SpotCardProps) {
+function SpotCard({ spot, rank, distanceKm }: SpotCardProps) {
   const topFish = spot.catchableFish.slice(0, 3);
   const isTop3 = rank <= 3;
   const score = calcRankScore(spot);
@@ -206,6 +215,12 @@ function SpotCard({ spot, rank }: SpotCardProps) {
           <span className="flex items-center gap-1 font-semibold text-blue-600">
             {score.toFixed(1)}pt
           </span>
+          {distanceKm !== undefined && (
+            <span className="flex items-center gap-1 font-medium text-emerald-600">
+              <Navigation className="h-3 w-3" />
+              {distanceKm < 10 ? distanceKm.toFixed(1) : Math.round(distanceKm)}km
+            </span>
+          )}
         </div>
 
         {/* 対象魚 */}
@@ -247,17 +262,79 @@ export function RankingClient({ spots }: RankingClientProps) {
   const [activeTab, setActiveTab] = useState<TabKey>("all");
   const [activePrefecture, setActivePrefecture] = useState("全国");
   const [activeRegion, setActiveRegion] = useState<string | null>(null);
+  const [nearbyMode, setNearbyMode] = useState(false);
+  const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
+  const [locating, setLocating] = useState(false);
+
+  const handleLocate = useCallback(() => {
+    if (!navigator.geolocation) return;
+    setLocating(true);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setUserLocation([pos.coords.latitude, pos.coords.longitude]);
+        setNearbyMode(true);
+        setActivePrefecture("全国");
+        setLocating(false);
+      },
+      () => setLocating(false),
+      { enableHighAccuracy: true, timeout: 10000 }
+    );
+  }, []);
 
   const rankedSpots = useMemo(() => {
+    if (nearbyMode && userLocation) {
+      // 現在地から100km以内をスコア×距離補正でランキング
+      const filtered = filterSpots(spots, activeTab);
+      return filtered
+        .map((s) => {
+          const dist = calcDistance(userLocation[0], userLocation[1], s.latitude, s.longitude);
+          const score = calcRankScore(s);
+          // 距離が近いほどボーナス（30km以内は+20pt、100km以内は距離に応じて減衰）
+          const distBonus = dist <= 30 ? 20 : dist <= 100 ? 20 * (1 - (dist - 30) / 70) : 0;
+          return { spot: s, score: score + distBonus, dist };
+        })
+        .filter((x) => x.dist <= 100)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, 10)
+        .map((x) => ({ ...x.spot, _dist: x.dist }));
+    }
     const byPref = filterByPrefecture(spots, activePrefecture);
     const filtered = filterSpots(byPref, activeTab);
     return sortSpots(filtered).slice(0, 10);
-  }, [spots, activeTab, activePrefecture]);
+  }, [spots, activeTab, activePrefecture, nearbyMode, userLocation]);
 
   return (
     <div>
+      {/* 現在地ボタン */}
+      <div className="mb-3">
+        <button
+          onClick={() => {
+            if (nearbyMode) {
+              setNearbyMode(false);
+            } else {
+              handleLocate();
+            }
+          }}
+          disabled={locating}
+          className={cn(
+            "flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all w-full sm:w-auto",
+            nearbyMode
+              ? "bg-emerald-600 text-white shadow-md"
+              : "bg-gray-100 text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 border border-gray-200"
+          )}
+        >
+          {locating ? <Loader2 className="size-4 animate-spin" /> : <Navigation className="size-4" />}
+          {nearbyMode ? "現在地の近く（100km以内）を表示中" : "現在地の近くでランキング"}
+        </button>
+        {nearbyMode && (
+          <p className="mt-1.5 text-xs text-emerald-600">
+            スコアに距離ボーナスを加算。近い＋評価の高いスポットが上位に表示されます。
+          </p>
+        )}
+      </div>
+
       {/* 都道府県フィルタ - モバイル: セレクトボックス */}
-      <div className="mb-4 sm:hidden">
+      <div className={cn("mb-4 sm:hidden", nearbyMode && "opacity-50 pointer-events-none")}>
         <div className="relative">
           <select
             value={activePrefecture}
@@ -277,7 +354,7 @@ export function RankingClient({ spots }: RankingClientProps) {
       </div>
 
       {/* 都道府県フィルタ - PC: 地域別グループ */}
-      <div className="mb-4 hidden sm:block space-y-2">
+      <div className={cn("mb-4 hidden sm:block space-y-2", nearbyMode && "opacity-50 pointer-events-none")}>
         <div className="flex flex-wrap gap-2 items-center">
           <button
             onClick={() => setActivePrefecture("全国")}
@@ -348,7 +425,7 @@ export function RankingClient({ spots }: RankingClientProps) {
 
       {/* 件数表示 */}
       <p className="mb-4 text-sm text-muted-foreground">
-        {activePrefecture}・{TABS.find((t) => t.key === activeTab)?.label ?? "総合"} TOP10
+        {nearbyMode ? "現在地の近く" : activePrefecture}・{TABS.find((t) => t.key === activeTab)?.label ?? "総合"} TOP10
         （{rankedSpots.length}件）
       </p>
 
@@ -356,7 +433,12 @@ export function RankingClient({ spots }: RankingClientProps) {
       {rankedSpots.length > 0 ? (
         <div className="space-y-3">
           {rankedSpots.map((spot, index) => (
-            <SpotCard key={spot.id} spot={spot} rank={index + 1} />
+            <SpotCard
+              key={spot.id}
+              spot={spot}
+              rank={index + 1}
+              distanceKm={nearbyMode && "_dist" in spot ? (spot as FishingSpot & { _dist: number })._dist : undefined}
+            />
           ))}
         </div>
       ) : (
