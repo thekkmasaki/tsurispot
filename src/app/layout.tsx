@@ -4,6 +4,7 @@ import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Footer } from "@/components/layout/footer";
 import { GoogleAnalytics } from "@/components/google-analytics";
+import { PWARegister } from "@/components/pwa-register";
 import "./globals.css";
 
 const notoSansJP = Noto_Sans_JP({
@@ -56,7 +57,13 @@ export default function RootLayout({
     <html lang="ja">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+        <meta name="theme-color" content="#0369a1" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="ツリスポ" />
         <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="manifest" href="/manifest.json" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8121234270035600"
@@ -67,6 +74,7 @@ export default function RootLayout({
         className={`${notoSansJP.variable} ${inter.variable} font-[family-name:var(--font-noto-sans-jp)] antialiased`}
       >
         <GoogleAnalytics />
+        <PWARegister />
         <Header />
         <main className="min-h-screen pb-20 md:pb-0">{children}</main>
         <Footer />
