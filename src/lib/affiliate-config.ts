@@ -10,7 +10,7 @@ export const AFFILIATE_CONFIG = {
     baseUrl: "https://www.amazon.co.jp/dp/",
   },
   rakuten: {
-    affiliateId: "RAKUTEN_ID", // 楽天アフィリエイトID（仮）
+    affiliateId: "5134daee.e7e21566.5134daef.1df36343",
     baseUrl: "https://hb.afl.rakuten.co.jp/ichiba/",
   },
   // もしもアフィリエイト経由なら両方カバーできる
@@ -28,8 +28,10 @@ export function getAmazonUrl(asin: string): string {
 }
 
 /**
- * 楽天検索URLを生成
+ * 楽天検索URLを生成（アフィリエイトID付き）
  */
 export function getRakutenUrl(searchQuery: string): string {
-  return `https://search.rakuten.co.jp/search/mall/${encodeURIComponent(searchQuery)}/`;
+  const { affiliateId } = AFFILIATE_CONFIG.rakuten;
+  const searchUrl = `https://search.rakuten.co.jp/search/mall/${encodeURIComponent(searchQuery)}/`;
+  return `${AFFILIATE_CONFIG.rakuten.baseUrl}${affiliateId}/?pc=${encodeURIComponent(searchUrl)}&link_type=hybrid_url&ut=eyJwYWdlIjoic2hvcCIsInR5cGUiOiJoeWJyaWRfdXJsIiwiY29sIjoxfQ`;
 }

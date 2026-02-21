@@ -615,6 +615,69 @@ export default function GearRodBeginnerPage() {
           </div>
         </section>
 
+        {/* --- ピックアップ: コスパ注目アイテム --- */}
+        <section className="mb-12">
+          <Card className="overflow-hidden border-2 border-red-200 py-0">
+            <div className="flex items-center gap-2 border-b bg-gradient-to-r from-red-50 to-amber-50 px-4 py-3 sm:px-6">
+              <Badge className="bg-red-500 text-white hover:bg-red-500">
+                注目
+              </Badge>
+              <h2 className="text-base font-bold sm:text-lg">
+                コスパ最強！ 2,633円〜のシーバスロッド
+              </h2>
+            </div>
+            <CardContent className="p-4 sm:p-6">
+              <div className="space-y-3">
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  炭素繊維（カーボン）製で軽量・高感度なシーバスロッド。
+                  2,000円台とは思えない本格仕様で、シーバス・エギング・ちょい投げなど
+                  幅広い釣りに対応。初心者のルアー入門にも、2本目のサブロッドにも最適です。
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <span className="rounded-md bg-red-100 px-3 py-1.5 text-sm font-bold text-red-700">
+                    2,633円〜
+                  </span>
+                  <Badge variant="outline">炭素繊維（カーボン）</Badge>
+                  <Badge variant="outline">シーバスロッド</Badge>
+                  <Badge variant="outline">ルアー対応</Badge>
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <div className="rounded-lg bg-green-50 p-3">
+                    <p className="mb-1 flex items-center gap-1 text-xs font-bold text-green-700">
+                      <CheckCircle className="size-3.5" />
+                      おすすめポイント
+                    </p>
+                    <ul className="space-y-1 text-xs text-green-800">
+                      <li>カーボン素材で軽くて感度が良い</li>
+                      <li>2,000円台の驚異的なコスパ</li>
+                      <li>シーバス・エギング・ちょい投げに対応</li>
+                    </ul>
+                  </div>
+                  <div className="rounded-lg bg-blue-50 p-3">
+                    <p className="mb-1 text-xs font-bold text-blue-700">
+                      こんな人におすすめ
+                    </p>
+                    <ul className="space-y-1 text-xs text-blue-800">
+                      <li>ルアー釣りを始めてみたい初心者</li>
+                      <li>サブロッドが欲しい経験者</li>
+                      <li>コスパ重視で竿を探している方</li>
+                    </ul>
+                  </div>
+                </div>
+                <a
+                  href="https://hb.afl.rakuten.co.jp/ichiba/5134daee.e7e21566.5134daef.1df36343/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F%25E7%2582%25AD%25E7%25B4%25A0%25E7%25B9%258A%25E7%25B6%25AD+%25E9%2587%25A3%25E3%2582%258A%25E7%25AB%25BF+%25E3%2582%25B7%25E3%2583%25BC%25E3%2583%2590%25E3%2582%25B9%25E3%2583%25AD%25E3%2583%2583%25E3%2583%2589%2F&link_type=hybrid_url&ut=eyJwYWdlIjoic2hvcCIsInR5cGUiOiJoeWJyaWRfdXJsIiwiY29sIjoxfQ"
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#BF0000] px-4 py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#A00000] sm:w-auto sm:px-8"
+                >
+                  楽天で詳細を見る
+                  <ExternalLink className="size-3.5" />
+                </a>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
         {/* --- セクション2: ランキング --- */}
         <section id="ranking" className="mb-12">
           <h2 className="mb-6 text-xl font-bold sm:text-2xl">

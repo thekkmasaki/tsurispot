@@ -1,8 +1,18 @@
 import { Redis } from "@upstash/redis";
 
-// Upstash Redis クライアント（環境変数から自動設定）
-// UPSTASH_REDIS_REST_URL と UPSTASH_REDIS_REST_TOKEN をVercel環境変数に設定
-export const redis = new Redis({
-  url: process.env.UPSTASH_REDIS_REST_URL || "",
-  token: process.env.UPSTASH_REDIS_REST_TOKEN || "",
-});
+// Upstash Redis クライアント
+// .trim() で環境変数の空白/改行を除去（Vercel設定時のコピペ問題を回避）
+const redisUrl = (process.env.UPSTASH_REDIS_REST_URL ?? "").trim();
+const redisToken = (process.env.UPSTASH_REDIS_REST_TOKEN ?? "").trim();
+
+// Redis未設定時もビルドが通るようにダミーインスタンスを作成
+function createRedis() {
+  if (redisUrl && redisUrl.startsWith("https://")) {
+    return new Redis({ url: redisUrl, token: redisToken });
+  }
+  // ビルド時やローカル開発で未設定の場合はダミー
+  // API側で process.env.UPSTASH_REDIS_REST_URL チェック済みなので実際には使われない
+  return null as unknown as Redis;
+}
+
+export const redis = createRedis();
