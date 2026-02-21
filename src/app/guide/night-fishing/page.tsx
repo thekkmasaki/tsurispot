@@ -167,8 +167,9 @@ export default function NightFishingGuidePage() {
               <div className="flex gap-2">
                 <span className="text-primary">&#9679;</span>
                 <span>
-                  <span className="font-medium text-foreground">防寒着</span>
-                  &nbsp;&mdash;&nbsp;夜は昼間より気温がぐっと下がります。夏でも海沿いは風が冷たいため、上着を1枚持っていきましょう。冬の夜釣りは防寒装備が生命線です。
+                  <span className="font-medium text-foreground">防寒着・フィッシンググローブ</span>
+                  &nbsp;&mdash;&nbsp;夜は昼間より気温がぐっと下がります。夏でも海沿いは風が冷たいため、上着を1枚持っていきましょう。冬の夜釣りは防寒装備が生命線です。指先が出るタイプのフィッシンググローブがあると操作性と防寒を両立できます。
+                  <a href="https://amzn.to/3ZOdinM" target="_blank" rel="noopener noreferrer" className="ml-1 text-xs font-medium text-blue-600 hover:underline">おすすめの手袋を見る &rarr;</a>
                 </span>
               </div>
               <div className="flex gap-2">

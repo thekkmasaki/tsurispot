@@ -1,5 +1,12 @@
-import type { FishingSpot } from "@/types";
+import type { FishingSpot, FishSpecies } from "@/types";
+import { getFishBySlug } from "./fish";
 import { regions } from "./regions";
+
+function fish(slug: string): FishSpecies {
+  const f = getFishBySlug(slug);
+  if (!f) throw new Error(`Fish not found: ${slug}`);
+  return f;
+}
 
 function region(id: string) {
   const r = regions.find((r) => r.id === id);
@@ -61,7 +68,12 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "有料駐車場あり（300円/1時間）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.7, reviewCount: 145,
-    catchableFish: [], bestTimes: btEvening, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
+      { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
+      { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+      { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+    ], bestTimes: btEvening, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["足場良好で柵あり", "飛行機の離発着を間近で見られる", "BBQ利用は要予約"],
   },
   {
@@ -74,7 +86,12 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "有料駐車場あり（1時間200円、最大800円）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.6, reviewCount: 198,
-    catchableFish: [], bestTimes: btEvening, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
+      { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+      { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 9, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "ちょい投げ" },
+    ], bestTimes: btEvening, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["護岸は足場良好", "西なぎさのみ釣り可能（東なぎさは立入禁止）", "駅から近く電車釣行に最適"],
   },
   {
@@ -87,7 +104,12 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "周辺の有料駐車場を利用",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.5, reviewCount: 87,
-    catchableFish: [], bestTimes: btNight, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
+      { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ウキ釣り" },
+      { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
+    ], bestTimes: btNight, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["護岸は柵付きで安全", "夜間も街灯あり", "周辺にコンビニあり"],
   },
   {
@@ -100,7 +122,11 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場多数（1時間400〜600円）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.4, reviewCount: 165,
-    catchableFish: [], bestTimes: btNight, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
+      { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
+      { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
+    ], bestTimes: btNight, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["遊泳禁止エリアで釣りが可能", "レインボーブリッジの夜景が美しい", "周辺商業施設が充実"],
   },
   {
@@ -113,7 +139,11 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場を利用",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.3, reviewCount: 62,
-    catchableFish: [], bestTimes: btEvening, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
+      { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
+      { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ウキ釣り" },
+    ], bestTimes: btEvening, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["護岸は足場良好", "周辺は再開発エリアで清潔", "釣り禁止区域に注意"],
   },
   {
@@ -126,7 +156,11 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "公園駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.4, reviewCount: 54,
-    catchableFish: [], bestTimes: btEvening, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
+      { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
+      { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ウキ釣り" },
+    ], bestTimes: btEvening, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["護岸は足場良好で安全", "運河沿いで波が穏やか", "近隣に駅があり電車釣行向き"],
   },
 
@@ -143,7 +177,13 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車スペースあり（台数限定）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.0, reviewCount: 132,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("mejina"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ〜日中", method: "ウキ釣り" },
+      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "外洋側は波が高い日あり要注意", "釣具店が近くにある"],
   },
   {
@@ -156,7 +196,13 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "漁港駐車場あり（有料500円/日）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.9, reviewCount: 176,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("soudagatuo"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
+      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "漁船の出入りに注意", "駅から近く電車釣行に最適"],
   },
   {
@@ -169,7 +215,12 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "葉山港駐車場（有料、1時間310円）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.8, reviewCount: 108,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
+      { fish: fish("kawahagi"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "ウキ釣り" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "エギング" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好で柵あり", "ヨットハーバー周辺は釣り禁止", "夕日が美しいスポット"],
   },
   {
@@ -182,7 +233,12 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場あり（1時間500円程度）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.5, reviewCount: 72,
-    catchableFish: [], bestTimes: btNight, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
+      { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
+      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ウキ釣り" },
+    ], bestTimes: btNight, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["護岸から足場良好", "マリーナ内は釣り禁止区域あり", "おしゃれなカフェ・レストラン隣接"],
   },
   {
@@ -196,7 +252,13 @@ export const kantoDetailSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: true,
     rentalDetail: "管理棟でレンタルロッドあり（要確認）",
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.1, reviewCount: 215,
-    catchableFish: [], bestTimes: btEvening, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ〜日中", method: "ウキ釣り" },
+      { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
+    ], bestTimes: btEvening, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["全面柵付きで安全", "管理人常駐", "トイレ・水道完備"],
   },
   {
@@ -211,7 +273,13 @@ export const kantoDetailSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
     rentalDetail: "レンタル竿セット（1本2,000円程度）、エサ・仕掛けも販売",
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.0, reviewCount: 189,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "ちょい投げ" },
+      { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+      { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["全面柵付き・管理人常駐", "ライフジャケット貸出あり", "荒天時は休園"],
   },
   {
@@ -224,7 +292,13 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "大磯港駐車場（有料、1時間310円）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.9, reviewCount: 142,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "エギング" },
+      { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
+      { fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["外海側は波が高い日あり", "テトラポッドの上は滑りやすいので注意", "ライフジャケット着用推奨"],
   },
 
@@ -241,7 +315,13 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に無料駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.8, reviewCount: 95,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "投げ釣り" },
+      { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
+      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "漁船の出入りに注意", "浮島を望む景観が美しい"],
   },
   {
@@ -254,7 +334,13 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "漁港駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.9, reviewCount: 121,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+      { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "「ばんや」で食事も楽しめる", "鋸山観光と組み合わせ可能"],
   },
   {
@@ -267,7 +353,12 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "フェリーターミナル駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.7, reviewCount: 88,
-    catchableFish: [], bestTimes: btEvening, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "ちょい投げ" },
+      { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
+      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
+    ], bestTimes: btEvening, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["フェリーの航路に投げ込み禁止", "堤防は足場良好", "鋸山観光との組み合わせがおすすめ"],
   },
   {
@@ -280,7 +371,12 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり（無料）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.5, reviewCount: 42,
-    catchableFish: [], bestTimes: btNight, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
+      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 9, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "ちょい投げ" },
+      { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
+    ], bestTimes: btNight, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "トイレが近くにないため事前に済ませること", "穴場でのんびり釣り向き"],
   },
   {
@@ -293,7 +389,12 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "漁港駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.9, reviewCount: 105,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ〜日中", method: "ウキ釣り" },
+      { fish: fish("inada"), monthStart: 7, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["堤防は比較的足場良好", "先端部は潮が速い場合あり注意", "漁船の往来に注意"],
   },
   {
@@ -306,7 +407,13 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "渚の駅たてやま駐車場（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.2, reviewCount: 234,
-    catchableFish: [], bestTimes: btEvening, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "投げ釣り" },
+      { fish: fish("kawahagi"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "ウキ釣り" },
+      { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
+    ], bestTimes: btEvening, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["桟橋は柵付きで安全", "夕日が美しい絶景ポイント", "渚の駅にトイレ・売店あり"],
   },
   {
@@ -319,7 +426,13 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.0, reviewCount: 168,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
+      { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["外洋側は波が高い日あり要注意", "漁船の往来が多いため注意", "利根川河口は流れが速い"],
   },
   {
@@ -332,7 +445,12 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "犬吠埼灯台駐車場（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.1, reviewCount: 92,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("mejina"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ〜日中", method: "ウキ釣り" },
+      { fish: fish("ishidai"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ぶっこみ釣り" },
+      { fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "danger", safetyNotes: ["磯場は滑りやすく足場が悪い", "波をかぶることがあるため要注意", "ライフジャケット・スパイクシューズ必須", "単独釣行は避けること"],
   },
   {
@@ -345,7 +463,13 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "漁港駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.7, reviewCount: 78,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "投げ釣り" },
+      { fish: fish("ishimochi"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ〜夜", method: "投げ釣り" },
+      { fish: fish("anago"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっこみ釣り" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "屏風ヶ浦の絶景を楽しめる", "風が強い日は釣りにくい"],
   },
   {
@@ -358,7 +482,12 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "漁港駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.8, reviewCount: 86,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
+      { fish: fish("magochi"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ〜日中", method: "ルアー" },
+      { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
+      { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["外洋側は波が高い場合あり", "サーファーとの距離に注意", "先端部は潮が速い"],
   },
   {
@@ -371,7 +500,12 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "漁港駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.0, reviewCount: 156,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("madako"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "探り釣り" },
+      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "漁船の往来に注意", "朝市で新鮮な魚介が購入可能"],
   },
   {
@@ -384,7 +518,12 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "鵜原海水浴場駐車場（夏季有料、他は無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.0, reviewCount: 68,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("mejina"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ〜日中", method: "ウキ釣り" },
+      { fish: fish("ishidai"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ぶっこみ釣り" },
+      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "探り釣り" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "danger", safetyNotes: ["磯場は足場が悪く滑りやすい", "波をかぶるポイントあり要注意", "スパイクシューズ・ライフジャケット必須", "ハイキングコースの遊歩道あり"],
   },
   {
@@ -397,7 +536,12 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に駐車スペースあり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.7, reviewCount: 58,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "エギング" },
+      { fish: fish("mejina"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "港内は穏やかで安全", "周辺の磯場は上級者向け"],
   },
   {
@@ -410,7 +554,13 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "漁港駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.8, reviewCount: 74,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 9, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "投げ釣り" },
+      { fish: fish("kawahagi"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "ウキ釣り" },
+      { fish: fish("madai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "鯛の浦方面は釣り禁止区域あり注意", "小湊観光と組み合わせ可能"],
   },
   {
@@ -423,7 +573,13 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.1, reviewCount: 187,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "エギング" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ〜日中", method: "ウキ釣り" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["堤防先端は波しぶきがかかることあり", "テトラポッド上は足場注意", "ライフジャケット着用推奨"],
   },
 
@@ -440,7 +596,12 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "漁港駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.0, reviewCount: 198,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["外洋に面しているため波が高い日あり", "漁船の往来が多いため注意", "大洗磯前神社が近く観光も楽しめる"],
   },
   {
@@ -453,7 +614,13 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "おさかな市場駐車場（無料）を利用",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.9, reviewCount: 165,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+      { fish: fish("ainame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "探り釣り" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "おさかな市場で新鮮な海産物が購入可能", "国営ひたち海浜公園が近い"],
   },
   {
@@ -466,7 +633,13 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に無料駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.8, reviewCount: 132,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
+      { fish: fish("magochi"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ〜日中", method: "ルアー" },
+      { fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["工業港エリアは立入禁止区域あり注意", "外洋側は波が高い日あり", "ライフジャケット着用推奨"],
   },
   {
@@ -479,7 +652,12 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "港公園駐車場（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.9, reviewCount: 145,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
+      { fish: fish("magochi"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ〜日中", method: "ルアー" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "danger", safetyNotes: ["南防波堤は絶対に立入禁止（死亡事故多発）", "港公園護岸は比較的安全", "工業地帯のため立入制限エリアが多い", "必ず許可されたエリアで釣りをすること"],
   },
 
@@ -496,7 +674,13 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "無料駐車場あり（複数箇所）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.7, reviewCount: 142,
-    catchableFish: [], bestTimes: btAllDay, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ〜日中", method: "ルアー" },
+      { fish: fish("bluegill"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
+      { fish: fish("koi"), monthStart: 3, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
+      { fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ〜日中", method: "ウキ釣り" },
+      { fish: fish("namazu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
+    ], bestTimes: btAllDay, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["河川敷は平坦で歩きやすい", "増水時は絶対に近づかないこと", "バーベキューエリアも隣接"],
   },
   {
@@ -509,7 +693,12 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "彩湖・道満グリーンパーク駐車場（有料、普通車410円）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.6, reviewCount: 108,
-    catchableFish: [], bestTimes: btAllDay, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ〜日中", method: "ルアー" },
+      { fish: fish("bluegill"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
+      { fish: fish("koi"), monthStart: 3, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
+      { fish: fish("wakasagi"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
+    ], bestTimes: btAllDay, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["湖畔は整備された遊歩道", "釣り禁止エリアがあるため看板を確認", "ボート釣りは禁止"],
   },
   {
@@ -522,7 +711,12 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "河川敷に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.8, reviewCount: 96,
-    catchableFish: [], bestTimes: btAllDay, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ〜日中", method: "ルアー" },
+      { fish: fish("oikawa"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
+      { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "ウキ釣り" },
+      { fish: fish("namazu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
+    ], bestTimes: btAllDay, tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["川の中州に渡る際は水量に注意", "増水時は絶対に釣りをしないこと", "夏場はBBQ客とエリアが重なることあり"],
   },
 
@@ -539,7 +733,11 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "富津公園駐車場（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.8, reviewCount: 134,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "投げ釣り" },
+      { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
+      { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["砂浜は足場良好", "遠浅のため子供連れでも安心", "展望塔からの景色は必見"],
   },
   {
@@ -552,7 +750,11 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "中の島公園駐車場（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.6, reviewCount: 112,
-    catchableFish: [], bestTimes: btEvening, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
+      { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ウキ釣り" },
+    ], bestTimes: btEvening, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["護岸は足場良好", "中の島公園は夕日の名所", "アクアラインからのアクセス良好"],
   },
 
@@ -569,7 +771,11 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "アウトレット駐車場（買い物で無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.4, reviewCount: 68,
-    catchableFish: [], bestTimes: btNight, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
+      { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
+      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
+    ], bestTimes: btNight, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["護岸は足場良好", "マリーナ内は釣り禁止区域あり", "アウトレットでの買い物も楽しめる"],
   },
   {
@@ -582,7 +788,12 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "周辺にコインパーキングあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.9, reviewCount: 198,
-    catchableFish: [], bestTimes: btNight, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
+      { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
+    ], bestTimes: btNight, tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["護岸は足場良好だが柵なし", "夜間は暗いためヘッドライト必須", "トイレが近くにないため注意", "路上駐車は厳禁"],
   },
 
@@ -599,7 +810,12 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "大洗磯前神社駐車場（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.1, reviewCount: 88,
-    catchableFish: [], bestTimes: btMorning, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("mejina"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ〜日中", method: "ウキ釣り" },
+      { fish: fish("ainame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "探り釣り" },
+      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "探り釣り" },
+    ], bestTimes: btMorning, tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["磯場は滑りやすいためスパイクシューズ推奨", "波が高い日は危険", "神磯の鳥居付近は立入禁止", "ライフジャケット着用推奨"],
   },
 
@@ -616,7 +832,11 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "豊洲市場周辺有料駐車場を利用",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.6, reviewCount: 178,
-    catchableFish: [], bestTimes: btEvening, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
+      { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
+      { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ウキ釣り" },
+    ], bestTimes: btEvening, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["護岸は柵付きで安全", "釣り禁止区域あり看板を確認", "豊洲市場で食事も楽しめる"],
   },
   {
@@ -629,7 +849,13 @@ export const kantoDetailSpots: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "有料駐車場あり（200円/1時間、最大800円）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.0, reviewCount: 278,
-    catchableFish: [], bestTimes: btEvening, tackleRecommendations: [],
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
+      { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+    ], bestTimes: btEvening, tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["護岸は柵付きで安全", "週末は大変混雑するため早朝推奨", "売店は無いため飲食物は持参"],
   },
 ];

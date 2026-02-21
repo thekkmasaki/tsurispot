@@ -40,6 +40,9 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { CatchReportButton } from "@/components/spots/catch-report-button";
+import { FishLikeButton } from "@/components/spots/fish-like-button";
+import { NearbyGpsSearch } from "@/components/spots/nearby-gps-search";
+import { MobileQuickNav } from "@/components/spots/mobile-quick-nav";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -94,12 +97,6 @@ export default async function SpotDetailPage({ params }: PageProps) {
       "@type": "GeoCoordinates",
       latitude: spot.latitude,
       longitude: spot.longitude,
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: spot.rating,
-      reviewCount: spot.reviewCount,
-      bestRating: 5,
     },
     isAccessibleForFree: spot.isFree,
     publicAccess: true,
@@ -190,6 +187,18 @@ export default async function SpotDetailPage({ params }: PageProps) {
     (s) => s.id !== spot.id
   ).slice(0, 5);
 
+  // Lightweight nearby spots data for GPS search (client component)
+  const gpsNearbyData = getNearbySpots(spot.latitude, spot.longitude, 20)
+    .filter((s) => s.id !== spot.id)
+    .map((s) => ({
+      slug: s.slug,
+      name: s.name,
+      spotType: s.spotType,
+      latitude: s.latitude,
+      longitude: s.longitude,
+      prefecture: s.region.prefecture,
+    }));
+
   // Get nearby tackle shops
   const nearbyShops = getShopsForSpot(spot.slug);
 
@@ -247,7 +256,6 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <span className="font-medium text-foreground">
               {spot.rating.toFixed(1)}
             </span>
-            <span>({spot.reviewCount}件)</span>
           </div>
           <div className="flex items-center gap-1">
             <MapPin className="size-4" />
@@ -279,6 +287,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
         />
       </div>
 
+      {/* モバイル向けクイックナビ */}
+      <MobileQuickNav />
+
       {/* 安全警告（危険・注意の場合はヘッダー直下に目立つように表示） */}
       {(spot.safetyLevel === "caution" || spot.safetyLevel === "danger") && (
         <div className="mb-8">
@@ -306,7 +317,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
         {/* Left: Main content */}
         <div className="space-y-6 sm:space-y-8">
           {/* Catchable fish - Season calendar */}
-          <section>
+          <section id="fish-season">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold sm:mb-4">
               <Fish className="size-5" />
               今釣れる魚 - シーズンカレンダー
@@ -346,6 +357,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                     </div>
                     <div className="flex items-center gap-2 text-xs text-muted-foreground shrink-0 sm:text-sm">
                       <span>{cf.recommendedTime}</span>
+                      <FishLikeButton spotSlug={slug} fishSlug={cf.fish.slug} />
                     </div>
                   </div>
                 ))}
@@ -356,7 +368,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           <Separator />
 
           {/* Best time */}
-          <section>
+          <section id="best-time">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
               <Clock className="size-5" />
               ベストタイム
@@ -483,7 +495,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           )}
 
           {/* Access info */}
-          <section>
+          <section id="access-info">
             <h2 className="mb-4 text-lg font-bold">アクセス情報</h2>
             <Card className="py-4">
               <CardHeader className="px-4 pb-0 pt-0">
@@ -568,7 +580,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
       </div>
 
       {/* 天気・潮汐 */}
-      <section className="mt-8 sm:mt-12">
+      <section id="weather-tide" className="mt-8 sm:mt-12">
         <SpotWeatherTide
           lat={spot.latitude}
           lng={spot.longitude}
@@ -650,7 +662,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
       {/* この近くの釣り場 */}
       {nearbySpots.length > 0 && (
-        <section className="mt-8 sm:mt-12">
+        <section id="nearby-spots" className="mt-8 sm:mt-12">
           <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
             <MapPin className="size-5" />
             この近くの釣り場
@@ -679,6 +691,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
               </Link>
             ))}
           </div>
+          <NearbyGpsSearch spots={gpsNearbyData} currentSpotSlug={slug} />
         </section>
       )}
 

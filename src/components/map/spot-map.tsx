@@ -238,11 +238,10 @@ export function SpotMap() {
                 <div className="flex items-center gap-1 text-sm">
                   <Star className="size-3.5 fill-yellow-400 text-yellow-400" />
                   <span className="font-medium">{spot.rating}</span>
-                  <span className="text-xs text-gray-500">({spot.reviewCount}件)</span>
                 </div>
                 <Link
                   href={`/spots/${spot.slug}`}
-                  className="mt-1 inline-flex items-center rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+                  className="mt-2 inline-flex w-full items-center justify-center gap-1 rounded-lg bg-blue-600 px-4 py-2 text-sm font-bold text-white shadow-sm transition-all hover:bg-blue-700 hover:shadow-md active:scale-95"
                 >
                   詳細を見る &rarr;
                 </Link>

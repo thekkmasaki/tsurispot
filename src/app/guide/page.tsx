@@ -51,6 +51,13 @@ const detailGuides: {
     icon: Link2,
   },
   {
+    href: "/guide/line",
+    title: "釣り糸（ライン）の選び方",
+    description:
+      "PE・ナイロン・フロロカーボンの違いと号数別の強度表。太さの使い分けも解説。",
+    icon: Ruler,
+  },
+  {
     href: "/guide/sabiki",
     title: "サビキ釣り完全ガイド",
     description:

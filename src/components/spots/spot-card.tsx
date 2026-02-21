@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { FishingSpot, SPOT_TYPE_LABELS } from "@/types";
 import { SpotImage } from "@/components/ui/spot-image";
+import { FavoriteButton } from "@/components/spots/favorite-button";
 
 export function SpotCard({ spot }: { spot: FishingSpot }) {
   const fishNames = spot.catchableFish.map((cf) => cf.fish.name);
@@ -26,6 +27,9 @@ export function SpotCard({ spot }: { spot: FishingSpot }) {
           <span className="absolute bottom-2 right-2 rounded bg-black/40 px-2 py-0.5 text-xs text-white">
             {SPOT_TYPE_LABELS[spot.spotType]}
           </span>
+          <div className="absolute top-2 right-2">
+            <FavoriteButton spotSlug={spot.slug} />
+          </div>
         </div>
 
         <CardContent className="space-y-2.5 p-3 sm:space-y-3 sm:p-4">
@@ -57,9 +61,6 @@ export function SpotCard({ spot }: { spot: FishingSpot }) {
           <div className="flex items-center gap-1 text-sm">
             <Star className="size-4 fill-yellow-400 text-yellow-400" />
             <span className="font-medium">{spot.rating.toFixed(1)}</span>
-            <span className="text-muted-foreground">
-              ({spot.reviewCount}件)
-            </span>
           </div>
 
           {/* Badges and facilities */}

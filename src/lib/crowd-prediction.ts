@@ -133,7 +133,7 @@ export function calculateCrowdScore(input: PredictionInput): CrowdPrediction {
     factors.push("オフシーズン気味");
   } else {
     // 12月・1月・2月：厳冬期で釣り人が大幅に少ない
-    score -= 38;
+    score -= 48;
     factors.push("厳冬期（空きやすい）");
   }
 

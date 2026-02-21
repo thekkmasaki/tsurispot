@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback } from "react";
 import Link from "next/link";
-import { Star, MapPin, Trophy, Users, Fish, ChevronDown, Info, Navigation, Loader2 } from "lucide-react";
+import { Star, MapPin, Trophy, Fish, ChevronDown, Info, Navigation, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { FishingSpot } from "@/types";
 
@@ -208,10 +208,6 @@ function SpotCard({ spot, rank, distanceKm }: SpotCardProps) {
             {spot.region.prefecture}
           </span>
           <span>{SPOT_TYPE_LABELS[spot.spotType] ?? spot.spotType}</span>
-          <span className="flex items-center gap-1">
-            <Users className="h-3.5 w-3.5" />
-            {spot.reviewCount}件
-          </span>
           <span className="flex items-center gap-1 font-semibold text-blue-600">
             {score.toFixed(1)}pt
           </span>

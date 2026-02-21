@@ -21,6 +21,7 @@ import {
   TriangleAlert,
 } from "lucide-react";
 import { NearbySpots } from "@/components/nearby-spots";
+import { OnlineUsersBadge } from "@/components/online-users-badge";
 import { SpotImage, FishImage } from "@/components/ui/spot-image";
 
 export const metadata: Metadata = {
@@ -113,6 +114,11 @@ export default function Home() {
         </div>
 
         <div className="relative mx-auto max-w-5xl px-4 pb-12 pt-10 sm:px-6 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-24">
+          {/* 接続人数 */}
+          <div className="absolute right-4 top-10 sm:right-6 sm:top-20 lg:top-24">
+            <OnlineUsersBadge />
+          </div>
+
           <div className="flex flex-col items-center text-center">
             <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-sm text-white/90 backdrop-blur-sm sm:mb-4">
               <Waves className="size-4" />

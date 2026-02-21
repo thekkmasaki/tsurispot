@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Copy } from "lucide-react";
+import { Copy, Instagram } from "lucide-react";
 
 interface ShareButtonsProps {
   url: string;
@@ -87,22 +87,19 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
         </svg>
       </button>
 
-      {/* はてなブックマーク */}
+      {/* Instagram（URLをコピーしてInstagramへ） */}
       <button
-        onClick={() =>
-          openPopup(`https://b.hatena.ne.jp/entry/${url}`)
-        }
-        aria-label="はてなブックマークに追加"
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-[#00A4DE] text-white opacity-100 hover:opacity-80 transition-opacity"
+        onClick={() => {
+          navigator.clipboard.writeText(`${title}\n${url}`).then(() => {
+            setCopied(true);
+            setTimeout(() => setCopied(false), 2000);
+            window.open("https://www.instagram.com/", "_blank", "noopener,noreferrer");
+          });
+        }}
+        aria-label="Instagramでシェア"
+        className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-tr from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white opacity-100 hover:opacity-80 transition-opacity"
       >
-        <svg
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="h-5 w-5"
-          aria-hidden="true"
-        >
-          <path d="M20.47 0C22.42 0 24 1.58 24 3.53v16.94C24 22.42 22.42 24 20.47 24H3.53C1.58 24 0 22.42 0 20.47V3.53C0 1.58 1.58 0 3.53 0h16.94zm-3.705 14.47a1.16 1.16 0 1 0 0 2.32 1.16 1.16 0 0 0 0-2.32zm-9.765.408v1.5h3.87v-1.5H6.998zm9.53-7.976c-1.7 0-2.91 1.2-2.91 2.75 0 1.02.56 1.89 1.4 2.38-.59.27-1.02.77-1.02 1.39 0 .5.24.95.64 1.23-.75.28-1.26.93-1.26 1.73 0 1.23 1.13 2.02 2.9 2.02 2.14 0 3.3-.98 3.3-2.3 0-.97-.64-1.67-1.88-1.97l-1.25-.3c-.51-.12-.73-.32-.73-.63 0-.22.1-.42.27-.57.28.07.57.11.88.11 1.69 0 2.88-1.14 2.88-2.74 0-.56-.18-1.08-.49-1.5h1.07V7.3h-2.16a3.14 3.14 0 0 0-1.61-.398zm-9.53.392v3.51H8.8c1.07 0 1.68-.56 1.68-1.51 0-.7-.38-1.17-.96-1.31.46-.17.73-.57.73-1.1 0-.87-.58-1.39-1.56-1.39H6.998zm9.53 1.03c.82 0 1.37.6 1.37 1.44 0 .85-.55 1.44-1.37 1.44-.83 0-1.37-.59-1.37-1.44 0-.84.54-1.44 1.37-1.44zM9.35 9.92c.42 0 .66.23.66.62 0 .4-.24.64-.66.64H8.5V9.92h.85zm-.25-2.02c.39 0 .61.21.61.58 0 .36-.22.58-.61.58H8.5V7.9h.6zm8.155 7.47l.99.24c.66.16.92.44.92.9 0 .6-.56.97-1.47.97-1.03 0-1.58-.36-1.58-.99 0-.5.34-.88.99-1.03l.15-.027z" />
-        </svg>
+        <Instagram className="h-5 w-5" />
       </button>
 
       {/* リンクコピー */}
