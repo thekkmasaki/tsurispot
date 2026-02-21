@@ -112,9 +112,15 @@ export function calculateCrowdScore(input: PredictionInput): CrowdPrediction {
     if (input.temperature >= 15 && input.temperature <= 28) {
       score += 8;
       factors.push("快適な気温");
+    } else if (input.temperature < 0) {
+      score -= 30;
+      factors.push("氷点下（ほぼ人がいない）");
     } else if (input.temperature < 5) {
-      score -= 15;
+      score -= 20;
       factors.push("寒さで人が少ない");
+    } else if (input.temperature < 10) {
+      score -= 10;
+      factors.push("肌寒い");
     } else if (input.temperature > 35) {
       score -= 10;
       factors.push("猛暑");
@@ -122,7 +128,7 @@ export function calculateCrowdScore(input: PredictionInput): CrowdPrediction {
   }
 
   // --- シーズンの影響（月別補正）---
-  // 厳冬期(12-2月)は釣り人が激減、春秋は安定、夏はピーク
+  const isWinter = input.month === 12 || input.month === 1 || input.month === 2;
   if (input.month >= 7 && input.month <= 8) {
     score += 15; // 夏休みシーズン・ピーク
     factors.push("夏休みシーズン");
@@ -133,8 +139,10 @@ export function calculateCrowdScore(input: PredictionInput): CrowdPrediction {
     factors.push("オフシーズン気味");
   } else {
     // 12月・1月・2月：厳冬期で釣り人が大幅に少ない
-    score -= 48;
-    factors.push("厳冬期（空きやすい）");
+    // 1月が最も空き、12月はまだ年末釣行がある
+    const winterPenalty = input.month === 1 ? 55 : input.month === 2 ? 50 : 40;
+    score -= winterPenalty;
+    factors.push(input.month === 1 ? "真冬（ほぼ貸し切り）" : "厳冬期（空きやすい）");
   }
 
   // --- スポット人気度の影響 ---
@@ -166,6 +174,11 @@ export function calculateCrowdScore(input: PredictionInput): CrowdPrediction {
       score -= 15;
       factors.push("地方で空きやすい");
     }
+  }
+
+  // --- 冬の週末補正（冬は週末でも夏ほど人が来ない）---
+  if (isWinter && (input.dayOfWeek === 0 || input.dayOfWeek === 6 || input.isHoliday)) {
+    score -= 15;
   }
 
   // --- アクセス性の影響 ---

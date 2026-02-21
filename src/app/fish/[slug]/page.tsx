@@ -24,6 +24,7 @@ import { Badge } from "@/components/ui/badge";
 import { getFishSpeciesWithSpots } from "@/lib/data";
 import { DIFFICULTY_LABELS, CATCH_RATING_LABELS } from "@/types";
 import { MonthCalendar } from "@/components/fish/month-calendar";
+import { NearbySpotsSorter } from "@/components/fish/nearby-spots-sorter";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
 import { ProductList } from "@/components/affiliate/product-list";
 import { getProductsByFish, getTopProducts } from "@/lib/data/products";
@@ -341,80 +342,10 @@ export default async function FishDetailPage({ params }: PageProps) {
       {/* 広告 */}
       <InArticleAd className="mt-4" />
 
-      {/* 釣れるスポット一覧 */}
-      {fish.spots.length > 0 && (() => {
-        const INITIAL_COUNT = 5;
-        const visibleSpots = fish.spots.slice(0, INITIAL_COUNT);
-        const hiddenSpots = fish.spots.slice(INITIAL_COUNT);
-
-        const SpotItem = ({ spot }: { spot: typeof fish.spots[number] }) => (
-          <Link href={`/spots/${spot.slug}`}>
-            <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
-              <CardContent className="flex items-center justify-between gap-2 p-3 sm:p-4">
-                <div className="min-w-0 flex-1">
-                  <h3 className="truncate text-sm font-semibold group-hover:text-primary sm:text-base">
-                    {spot.name}
-                  </h3>
-                  <p className="mt-0.5 text-xs text-muted-foreground">
-                    {spot.region.prefecture} {spot.region.areaName}
-                  </p>
-                </div>
-                <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-                  <Badge
-                    variant="outline"
-                    className={`hidden text-xs sm:inline-flex ${
-                      spot.catchRating === "excellent"
-                        ? "border-emerald-200 bg-emerald-50 text-emerald-700"
-                        : spot.catchRating === "good"
-                          ? "border-sky-200 bg-sky-50 text-sky-700"
-                          : ""
-                    }`}
-                  >
-                    {CATCH_RATING_LABELS[spot.catchRating]}{" "}
-                    {spot.catchRating === "excellent"
-                      ? "よく釣れる"
-                      : spot.catchRating === "good"
-                        ? "釣れる"
-                        : "まずまず"}
-                  </Badge>
-                  <div className="flex items-center gap-1 text-sm">
-                    <Star className="size-3.5 fill-amber-400 text-amber-400" />
-                    <span className="font-medium">{spot.rating}</span>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
-        );
-
-        return (
-          <section className="mb-6 sm:mb-8">
-            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
-              <MapPin className="size-5 text-primary" />
-              釣れるスポット
-              <span className="text-sm font-normal text-muted-foreground">({fish.spots.length}件)</span>
-            </h2>
-            <div className="space-y-2 sm:space-y-3">
-              {visibleSpots.map((spot) => (
-                <SpotItem key={spot.id} spot={spot} />
-              ))}
-            </div>
-            {hiddenSpots.length > 0 && (
-              <details className="group/details mt-2 sm:mt-3">
-                <summary className="flex cursor-pointer list-none items-center justify-center gap-1 rounded-lg border border-dashed border-muted-foreground/30 px-4 py-3 text-sm text-muted-foreground transition-colors hover:border-primary hover:text-primary">
-                  <span className="group-open/details:hidden">他 {hiddenSpots.length} 件のスポットを表示</span>
-                  <span className="hidden group-open/details:inline">閉じる</span>
-                </summary>
-                <div className="mt-2 space-y-2 sm:mt-3 sm:space-y-3">
-                  {hiddenSpots.map((spot) => (
-                    <SpotItem key={spot.id} spot={spot} />
-                  ))}
-                </div>
-              </details>
-            )}
-          </section>
-        );
-      })()}
+      {/* 釣れるスポット一覧（現在地ソート対応） */}
+      {fish.spots.length > 0 && (
+        <NearbySpotsSorter spots={fish.spots} fishName={fish.name} />
+      )}
 
       {/* この魚の狙い方 */}
       {fish.fishingMethods && fish.fishingMethods.length > 0 && (

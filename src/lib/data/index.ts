@@ -19,6 +19,8 @@ export function getFishSpeciesWithSpots(): FishSpecies[] {
           region: spot.region,
           rating: spot.rating,
           catchRating: cf.peakSeason ? "excellent" : "good",
+          latitude: spot.latitude,
+          longitude: spot.longitude,
         };
       }),
   }));

@@ -19,6 +19,7 @@ import {
   Mail,
   Skull,
   TriangleAlert,
+  Calendar,
 } from "lucide-react";
 import { NearbySpots } from "@/components/nearby-spots";
 import { OnlineUsersBadge } from "@/components/online-users-badge";
@@ -389,6 +390,28 @@ export default function Home() {
             </Link>
           </div>
         </div>
+      </section>
+
+      {/* 月別釣りカレンダーCTA */}
+      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
+        <Link href="/fishing-calendar">
+          <Card className="group overflow-hidden border-0 bg-gradient-to-r from-sky-50 via-blue-50 to-indigo-50 shadow-sm transition-shadow hover:shadow-md">
+            <CardContent className="flex items-center gap-4 px-5 py-5 sm:gap-6 sm:px-8 sm:py-6">
+              <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-blue-100 sm:size-14">
+                <Calendar className="size-6 text-blue-600 sm:size-7" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <h2 className="text-base font-bold tracking-tight sm:text-xl">
+                  月別釣りカレンダー
+                </h2>
+                <p className="mt-0.5 text-xs text-muted-foreground sm:text-sm">
+                  1月〜12月、何月に何が釣れる？旬の魚がひと目でわかる
+                </p>
+              </div>
+              <ChevronRight className="size-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1 sm:size-6" />
+            </CardContent>
+          </Card>
+        </Link>
       </section>
 
       {/* 初心者向けCTAセクション */}

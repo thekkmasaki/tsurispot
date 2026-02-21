@@ -97,6 +97,8 @@ export interface SpotSummary {
   region: Region;
   rating: number;
   catchRating: "excellent" | "good" | "fair";
+  latitude: number;
+  longitude: number;
 }
 
 export interface CatchableFish {
