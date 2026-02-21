@@ -3,6 +3,44 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 
+// ナイロン号数 → PE号数の換算テーブル
+const NYLON_TO_PE: Record<string, string> = {
+  "0.8": "0.2〜0.3",
+  "1": "0.3〜0.4",
+  "1.5": "0.4〜0.6",
+  "2": "0.6〜0.8",
+  "2.5": "0.8〜1",
+  "3": "1〜1.2",
+  "4": "1.5〜2",
+  "5": "2〜2.5",
+  "6": "3",
+  "8": "4",
+  "10": "5",
+};
+
+function addPeEquivalent(lineText: string): string {
+  // すでにPEが含まれている場合はそのまま返す
+  if (/PE/i.test(lineText)) return lineText;
+  // ナイロンX号 のパターンを検出
+  const match = lineText.match(/ナイロン(\d+(?:\.\d+)?)(?:〜(\d+(?:\.\d+)?))?号/);
+  if (!match) return lineText;
+  const low = match[1];
+  const high = match[2];
+  const peLow = NYLON_TO_PE[low];
+  const peHigh = high ? NYLON_TO_PE[high] : undefined;
+  if (!peLow) return lineText;
+  // PE換算を付加
+  let pe: string;
+  if (peHigh) {
+    const peLowFirst = peLow.split("〜")[0];
+    const peHighLast = peHigh.includes("〜") ? peHigh.split("〜")[1] : peHigh;
+    pe = `PE${peLowFirst}〜${peHighLast}号`;
+  } else {
+    pe = `PE${peLow}号`;
+  }
+  return `${lineText}（${pe}相当）`;
+}
+
 const difficultyColors = {
   beginner: "bg-emerald-100 text-emerald-700 hover:bg-emerald-100",
   intermediate: "bg-amber-100 text-amber-700 hover:bg-amber-100",
@@ -41,7 +79,7 @@ export function GearGuideCard({ guide }: { guide: GearGuideType }) {
         <dl className="divide-y">
           <GearRow icon="🎣" label="竿（ロッド）" value={guide.rod} />
           <GearRow icon="🔄" label="リール" value={guide.reel} />
-          <GearRow icon="🧵" label="糸（ライン）" value={guide.line} />
+          <GearRow icon="🧵" label="糸（ライン）" value={addPeEquivalent(guide.line)} />
           <GearRow icon="🪝" label="仕掛け・針" value={guide.hook} />
         </dl>
 
