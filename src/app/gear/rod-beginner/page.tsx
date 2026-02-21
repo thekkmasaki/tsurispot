@@ -509,6 +509,11 @@ export default function GearRodBeginnerPage() {
                   4. 合わせて買いたいリール
                 </a>
               </li>
+              <li>
+                <a href="#line-tip" className="text-primary hover:underline">
+                  5. 糸（ライン）は別で買おう！
+                </a>
+              </li>
             </ul>
           </CardContent>
         </Card>
@@ -803,6 +808,99 @@ export default function GearRodBeginnerPage() {
               </Card>
             ))}
           </div>
+        </section>
+
+        {/* --- セクション5: 糸は別で買おう --- */}
+        <section id="line-tip" className="mb-12">
+          <h2 className="mb-6 text-xl font-bold sm:text-2xl">
+            糸（ライン）は別で買おう！
+          </h2>
+          <Card className="border-sky-200 py-0">
+            <CardContent className="space-y-4 p-4 sm:p-6">
+              <div className="rounded-lg bg-sky-50 p-4">
+                <p className="mb-2 text-sm font-bold text-sky-900">
+                  リールに最初から巻いてある糸は使わないでください
+                </p>
+                <ul className="space-y-1 text-sm text-sky-800">
+                  <li>
+                    <strong>品質が低い：</strong>
+                    付属の糸は安価なもので、強度が低くすぐに切れます
+                  </li>
+                  <li>
+                    <strong>太さが合わない：</strong>
+                    釣り方に適した号数でないことが多いです
+                  </li>
+                  <li>
+                    <strong>劣化している：</strong>
+                    長期在庫品は糸が弱くなっていることがあります
+                  </li>
+                </ul>
+              </div>
+              <div>
+                <p className="mb-2 text-sm font-bold">
+                  初心者におすすめの糸の選び方
+                </p>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b text-left">
+                        <th className="pb-2 pr-4 font-semibold">釣り方</th>
+                        <th className="pb-2 pr-4 font-semibold">ナイロン</th>
+                        <th className="pb-2 font-semibold">PE</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b">
+                        <td className="py-2 pr-4 font-medium">サビキ釣り</td>
+                        <td className="py-2 pr-4">3号</td>
+                        <td className="py-2">1〜1.2号</td>
+                      </tr>
+                      <tr className="border-b">
+                        <td className="py-2 pr-4 font-medium">ちょい投げ</td>
+                        <td className="py-2 pr-4">2〜3号</td>
+                        <td className="py-2">0.8〜1号</td>
+                      </tr>
+                      <tr className="border-b">
+                        <td className="py-2 pr-4 font-medium">ウキ釣り</td>
+                        <td className="py-2 pr-4">2〜3号</td>
+                        <td className="py-2">0.6〜1号</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 pr-4 font-medium">ルアー釣り</td>
+                        <td className="py-2 pr-4">—</td>
+                        <td className="py-2">0.8〜1.5号</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  ※ 初心者はまずナイロンラインがおすすめ。扱いやすくトラブルが少ないです。
+                  PEラインは感度が高く飛距離が出ますが、別途リーダー（先糸）が必要です。
+                </p>
+              </div>
+              <div className="rounded-lg border p-4">
+                <p className="mb-1 text-sm font-bold">
+                  ライン交換に便利！ 高速リサイクラー
+                </p>
+                <p className="mb-3 text-xs text-muted-foreground">
+                  リールへのライン巻き替えが素早く均一にできる便利アイテム。
+                  テーブルに固定して使えるので、一人でも簡単にライン交換できます。
+                </p>
+                <div className="flex flex-col gap-2 sm:flex-row">
+                  <a
+                    href="https://hb.afl.rakuten.co.jp/ichiba/513505f3.9dc12d70.513505f4.52acab43/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjism%2F4995915331980-36-54383-n%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#BF0000] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#A00000]"
+                  >
+                    第一精工 高速リサイクラー2.0 を楽天で見る
+                    <ExternalLink className="size-3.5" />
+                  </a>
+                </div>
+                <p className="mt-2 text-xs text-muted-foreground">4,860円（税込）</p>
+              </div>
+            </CardContent>
+          </Card>
         </section>
 
         {/* --- 関連リンク --- */}
