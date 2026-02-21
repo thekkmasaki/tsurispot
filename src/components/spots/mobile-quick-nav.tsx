@@ -26,9 +26,9 @@ export function MobileQuickNav() {
           <button
             key={id}
             onClick={() => scrollTo(id)}
-            className="flex shrink-0 items-center gap-1.5 rounded-full border bg-white px-3 py-2 text-xs font-medium text-gray-700 shadow-sm transition-colors hover:bg-blue-50 hover:text-blue-600 min-h-[36px]"
+            className="flex shrink-0 items-center gap-1.5 rounded-full border bg-white px-4 py-2.5 text-sm font-medium text-gray-700 shadow-sm transition-colors hover:bg-blue-50 hover:text-blue-600 min-h-[44px]"
           >
-            <Icon className="size-3.5" />
+            <Icon className="size-4" />
             {label}
           </button>
         ))}

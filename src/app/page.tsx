@@ -115,7 +115,7 @@ export default function Home() {
 
         <div className="relative mx-auto max-w-5xl px-4 pb-12 pt-10 sm:px-6 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-24">
           {/* 接続人数 */}
-          <div className="absolute right-4 top-10 sm:right-6 sm:top-20 lg:top-24">
+          <div className="absolute right-4 top-4 sm:right-6 sm:top-20 lg:top-24">
             <OnlineUsersBadge />
           </div>
 

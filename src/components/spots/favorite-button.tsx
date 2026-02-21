@@ -55,7 +55,7 @@ export function FavoriteButton({ spotSlug }: { spotSlug: string }) {
       onClick={toggleFavorite}
       aria-label={isFavorite ? "お気に入りから削除" : "お気に入りに追加"}
       className={cn(
-        "flex items-center justify-center rounded-full p-2.5 transition-all active:scale-90",
+        "flex items-center justify-center rounded-full p-3 transition-all active:scale-90 min-w-[44px] min-h-[44px]",
         isFavorite
           ? "bg-red-50 hover:bg-red-100"
           : "bg-gray-50 hover:bg-gray-100"

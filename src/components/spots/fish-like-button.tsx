@@ -40,7 +40,7 @@ export function FishLikeButton({ spotSlug, fishSlug }: FishLikeButtonProps) {
       disabled={liked}
       aria-label={liked ? "釣れた！済み" : "この魚釣れた！"}
       title={liked ? "釣れた！済み" : "この魚ここで釣れた！"}
-      className={`inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs font-medium transition-all duration-300 min-h-[32px] ${
+      className={`inline-flex items-center gap-1 rounded-full px-3 py-2 text-xs font-medium transition-all duration-300 min-h-[44px] ${
         liked
           ? "bg-blue-100 text-blue-600 cursor-default"
           : "bg-gray-100 text-gray-500 hover:bg-blue-50 hover:text-blue-500 cursor-pointer"

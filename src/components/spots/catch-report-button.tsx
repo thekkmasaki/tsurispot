@@ -79,7 +79,7 @@ export function CatchReportButton({ spotSlug }: CatchReportButtonProps) {
       onClick={handleReport}
       disabled={reported}
       className={cn(
-        "flex items-center gap-2 rounded-full px-4 py-2.5 text-sm font-medium transition-all",
+        "flex items-center gap-2 rounded-full px-4 py-3 text-sm font-medium transition-all min-h-[44px]",
         reported
           ? "bg-emerald-50 text-emerald-600 border border-emerald-200 cursor-default"
           : "bg-white text-gray-700 border border-gray-200 hover:bg-emerald-50 hover:border-emerald-300 hover:text-emerald-700 active:scale-95",

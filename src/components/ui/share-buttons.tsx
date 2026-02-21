@@ -26,7 +26,7 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
   }
 
   return (
-    <div className="relative flex items-center gap-2">
+    <div className="relative flex flex-wrap items-center gap-3">
       {/* X (Twitter) */}
       <button
         onClick={() =>
@@ -35,7 +35,7 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
           )
         }
         aria-label="Xでシェア"
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-black text-white opacity-100 hover:opacity-80 transition-opacity"
+        className="flex h-11 w-11 items-center justify-center rounded-full bg-black text-white opacity-100 hover:opacity-80 transition-opacity"
       >
         <svg
           viewBox="0 0 24 24"
@@ -55,7 +55,7 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
           )
         }
         aria-label="LINEでシェア"
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-[#06C755] text-white opacity-100 hover:opacity-80 transition-opacity"
+        className="flex h-11 w-11 items-center justify-center rounded-full bg-[#06C755] text-white opacity-100 hover:opacity-80 transition-opacity"
       >
         <svg
           viewBox="0 0 24 24"
@@ -75,7 +75,7 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
           )
         }
         aria-label="Facebookでシェア"
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-[#1877F2] text-white opacity-100 hover:opacity-80 transition-opacity"
+        className="flex h-11 w-11 items-center justify-center rounded-full bg-[#1877F2] text-white opacity-100 hover:opacity-80 transition-opacity"
       >
         <svg
           viewBox="0 0 24 24"
@@ -97,7 +97,7 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
           });
         }}
         aria-label="Instagramでシェア"
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-tr from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white opacity-100 hover:opacity-80 transition-opacity"
+        className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-tr from-[#F58529] via-[#DD2A7B] to-[#8134AF] text-white opacity-100 hover:opacity-80 transition-opacity"
       >
         <Instagram className="h-5 w-5" />
       </button>
@@ -106,7 +106,7 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
       <button
         onClick={handleCopy}
         aria-label="リンクをコピー"
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200 text-gray-700 opacity-100 hover:opacity-80 transition-opacity"
+        className="flex h-11 w-11 items-center justify-center rounded-full bg-gray-200 text-gray-700 opacity-100 hover:opacity-80 transition-opacity"
       >
         <Copy className="h-4 w-4" />
       </button>
