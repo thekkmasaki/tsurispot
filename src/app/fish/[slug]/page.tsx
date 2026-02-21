@@ -25,6 +25,8 @@ import { MonthCalendar } from "@/components/fish/month-calendar";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
 import { ProductList } from "@/components/affiliate/product-list";
 import { getProductsByFish, getTopProducts } from "@/lib/data/products";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { ShareButtons } from "@/components/ui/share-buttons";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -116,6 +118,11 @@ export default async function FishDetailPage({ params }: PageProps) {
     .filter((f) => f.difficulty === fish.difficulty && f.slug !== fish.slug)
     .slice(0, 6);
 
+  // Same category fish (sea/freshwater) for internal linking
+  const sameCategoryFish = allFish
+    .filter((f) => f.category === fish.category && f.slug !== fish.slug && !similarFish.find((sf) => sf.slug === f.slug))
+    .slice(0, 6);
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-6 sm:px-6 sm:py-12">
       <script
@@ -127,6 +134,13 @@ export default async function FishDetailPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       {/* パンくず */}
+      <Breadcrumb
+        items={[
+          { label: "ホーム", href: "/" },
+          { label: "魚図鑑", href: "/fish" },
+          { label: fish.name },
+        ]}
+      />
       <Link
         href="/fish"
         className="mb-5 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground transition-colors hover:text-primary min-h-[44px] sm:mb-6"
@@ -209,6 +223,14 @@ export default async function FishDetailPage({ params }: PageProps) {
         </div>
       </div>
 
+      {/* SNSシェア */}
+      <div className="mb-6 sm:mb-8">
+        <ShareButtons
+          url={`https://tsurispot.com/fish/${fish.slug}`}
+          title={`${fish.name}の釣り方・タックル情報｜ツリスポ`}
+        />
+      </div>
+
       {/* 基本情報 */}
       <section className="mb-6 sm:mb-8">
         <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
@@ -273,52 +295,169 @@ export default async function FishDetailPage({ params }: PageProps) {
       </section>
 
       {/* 釣れるスポット一覧 */}
-      {fish.spots.length > 0 && (
+      {fish.spots.length > 0 && (() => {
+        const INITIAL_COUNT = 5;
+        const visibleSpots = fish.spots.slice(0, INITIAL_COUNT);
+        const hiddenSpots = fish.spots.slice(INITIAL_COUNT);
+
+        const SpotItem = ({ spot }: { spot: typeof fish.spots[number] }) => (
+          <Link href={`/spots/${spot.slug}`}>
+            <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
+              <CardContent className="flex items-center justify-between gap-2 p-3 sm:p-4">
+                <div className="min-w-0 flex-1">
+                  <h3 className="truncate text-sm font-semibold group-hover:text-primary sm:text-base">
+                    {spot.name}
+                  </h3>
+                  <p className="mt-0.5 text-xs text-muted-foreground">
+                    {spot.region.prefecture} {spot.region.areaName}
+                  </p>
+                </div>
+                <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+                  <Badge
+                    variant="outline"
+                    className={`hidden text-xs sm:inline-flex ${
+                      spot.catchRating === "excellent"
+                        ? "border-emerald-200 bg-emerald-50 text-emerald-700"
+                        : spot.catchRating === "good"
+                          ? "border-sky-200 bg-sky-50 text-sky-700"
+                          : ""
+                    }`}
+                  >
+                    {CATCH_RATING_LABELS[spot.catchRating]}{" "}
+                    {spot.catchRating === "excellent"
+                      ? "よく釣れる"
+                      : spot.catchRating === "good"
+                        ? "釣れる"
+                        : "まずまず"}
+                  </Badge>
+                  <div className="flex items-center gap-1 text-sm">
+                    <Star className="size-3.5 fill-amber-400 text-amber-400" />
+                    <span className="font-medium">{spot.rating}</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </Link>
+        );
+
+        return (
+          <section className="mb-6 sm:mb-8">
+            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+              <MapPin className="size-5 text-primary" />
+              釣れるスポット
+              <span className="text-sm font-normal text-muted-foreground">({fish.spots.length}件)</span>
+            </h2>
+            <div className="space-y-2 sm:space-y-3">
+              {visibleSpots.map((spot) => (
+                <SpotItem key={spot.id} spot={spot} />
+              ))}
+            </div>
+            {hiddenSpots.length > 0 && (
+              <details className="group/details mt-2 sm:mt-3">
+                <summary className="flex cursor-pointer list-none items-center justify-center gap-1 rounded-lg border border-dashed border-muted-foreground/30 px-4 py-3 text-sm text-muted-foreground transition-colors hover:border-primary hover:text-primary">
+                  <span className="group-open/details:hidden">他 {hiddenSpots.length} 件のスポットを表示</span>
+                  <span className="hidden group-open/details:inline">閉じる</span>
+                </summary>
+                <div className="mt-2 space-y-2 sm:mt-3 sm:space-y-3">
+                  {hiddenSpots.map((spot) => (
+                    <SpotItem key={spot.id} spot={spot} />
+                  ))}
+                </div>
+              </details>
+            )}
+          </section>
+        );
+      })()}
+
+      {/* この魚の狙い方 */}
+      {fish.fishingMethods && fish.fishingMethods.length > 0 && (
         <section className="mb-6 sm:mb-8">
           <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
-            <MapPin className="size-5 text-primary" />
-            釣れるスポット
+            <Fish className="size-5 text-primary" />
+            この魚の狙い方
           </h2>
-          <div className="space-y-2 sm:space-y-3">
-            {fish.spots.map((spot) => (
-              <Link key={spot.id} href={`/spots/${spot.slug}`}>
-                <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
-                  <CardContent className="flex items-center justify-between gap-2 p-3 sm:p-4">
-                    <div className="min-w-0 flex-1">
-                      <h3 className="truncate text-sm font-semibold group-hover:text-primary sm:text-base">
-                        {spot.name}
-                      </h3>
-                      <p className="mt-0.5 text-xs text-muted-foreground">
-                        {spot.region.prefecture} {spot.region.areaName}
-                      </p>
-                    </div>
-                    <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-                      <Badge
-                        variant="outline"
-                        className={`hidden text-xs sm:inline-flex ${
-                          spot.catchRating === "excellent"
-                            ? "border-emerald-200 bg-emerald-50 text-emerald-700"
-                            : spot.catchRating === "good"
-                              ? "border-sky-200 bg-sky-50 text-sky-700"
-                              : ""
-                        }`}
-                      >
-                        {CATCH_RATING_LABELS[spot.catchRating]}{" "}
-                        {spot.catchRating === "excellent"
-                          ? "よく釣れる"
-                          : spot.catchRating === "good"
-                            ? "釣れる"
-                            : "まずまず"}
-                      </Badge>
-                      <div className="flex items-center gap-1 text-sm">
-                        <Star className="size-3.5 fill-amber-400 text-amber-400" />
-                        <span className="font-medium">{spot.rating}</span>
+          <div className="space-y-4 sm:space-y-6">
+            {fish.fishingMethods.map((method, index) => {
+              const difficultyBadge =
+                method.difficulty === "beginner"
+                  ? { label: "初心者向け", className: "bg-green-100 text-green-800" }
+                  : method.difficulty === "intermediate"
+                    ? { label: "中級者向け", className: "bg-yellow-100 text-yellow-800" }
+                    : { label: "上級者向け", className: "bg-red-100 text-red-800" };
+
+              return (
+                <div
+                  key={index}
+                  className="rounded-xl border bg-white p-4 shadow-sm sm:p-6"
+                >
+                  {/* 釣法名 + 難易度バッジ */}
+                  <div className="mb-3 flex flex-wrap items-center gap-2 sm:mb-4">
+                    <h3 className="text-base font-bold sm:text-lg">{method.methodName}</h3>
+                    <span
+                      className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${difficultyBadge.className}`}
+                    >
+                      {difficultyBadge.label}
+                    </span>
+                  </div>
+
+                  {/* ベストシーズン */}
+                  <div className="mb-3 flex items-center gap-1.5 text-sm text-muted-foreground sm:mb-4">
+                    <Calendar className="size-4 shrink-0" />
+                    <span>ベストシーズン：{method.bestSeason}</span>
+                  </div>
+
+                  {/* 説明文 */}
+                  <p className="mb-4 text-sm leading-relaxed text-muted-foreground sm:mb-5">
+                    {method.description}
+                  </p>
+
+                  {/* タックル表 */}
+                  <div className="mb-4 rounded-lg bg-gray-50 p-3 sm:mb-5 sm:p-4">
+                    <p className="mb-2 text-xs font-bold uppercase tracking-wide text-muted-foreground">
+                      タックル
+                    </p>
+                    <dl className="grid grid-cols-1 gap-y-1.5 text-sm sm:grid-cols-2 sm:gap-x-4">
+                      <div className="flex gap-2">
+                        <dt className="w-20 shrink-0 font-semibold text-foreground">ロッド</dt>
+                        <dd className="text-muted-foreground">{method.tackle.rod}</dd>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
+                      <div className="flex gap-2">
+                        <dt className="w-20 shrink-0 font-semibold text-foreground">リール</dt>
+                        <dd className="text-muted-foreground">{method.tackle.reel}</dd>
+                      </div>
+                      <div className="flex gap-2">
+                        <dt className="w-20 shrink-0 font-semibold text-foreground">ライン</dt>
+                        <dd className="text-muted-foreground">{method.tackle.line}</dd>
+                      </div>
+                      <div className="flex gap-2">
+                        <dt className="w-20 shrink-0 font-semibold text-foreground">仕掛け・ルアー</dt>
+                        <dd className="text-muted-foreground">{method.tackle.hookOrLure}</dd>
+                      </div>
+                      {method.tackle.otherItems.length > 0 && (
+                        <div className="flex gap-2 sm:col-span-2">
+                          <dt className="w-20 shrink-0 font-semibold text-foreground">その他</dt>
+                          <dd className="text-muted-foreground">
+                            {method.tackle.otherItems.join("、")}
+                          </dd>
+                        </div>
+                      )}
+                    </dl>
+                  </div>
+
+                  {/* Tips */}
+                  {method.tips.length > 0 && (
+                    <ul className="space-y-1.5">
+                      {method.tips.map((tip, tipIndex) => (
+                        <li key={tipIndex} className="flex items-start gap-2 text-sm">
+                          <Lightbulb className="mt-0.5 size-4 shrink-0 text-amber-500" />
+                          <span className="text-muted-foreground">{tip}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              );
+            })}
           </div>
         </section>
       )}
@@ -419,6 +558,28 @@ export default async function FishDetailPage({ params }: PageProps) {
                     </p>
                   </CardContent>
                 </Card>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* 同じ種類（海水魚/淡水魚）の魚種（内部リンク強化） */}
+      {sameCategoryFish.length > 0 && (
+        <section className="mb-8">
+          <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
+            <Fish className="size-5 text-primary" />
+            {fish.category === "sea" ? "他の海水魚の釣り情報" : "他の淡水魚の釣り情報"}
+          </h2>
+          <div className="flex flex-wrap gap-2">
+            {sameCategoryFish.map((sf) => (
+              <Link key={sf.id} href={`/fish/${sf.slug}`} title={`${sf.name}の釣り情報・釣り方・旬の時期`}>
+                <Badge
+                  variant="outline"
+                  className="cursor-pointer px-3 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
+                >
+                  {sf.name}
+                </Badge>
               </Link>
             ))}
           </div>

@@ -3,6 +3,7 @@ import { Fish } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { getFishSpeciesWithSpots } from "@/lib/data";
 import { FishCard } from "@/components/fish/fish-card";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
   title: "魚種図鑑 - 釣りで狙える魚の旬・釣り方・食べ方ガイド",
@@ -55,6 +56,13 @@ function FishListContent() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      {/* パンくず */}
+      <Breadcrumb
+        items={[
+          { label: "ホーム", href: "/" },
+          { label: "魚図鑑" },
+        ]}
       />
       {/* ページヘッダー */}
       <div className="mb-8">

@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { regions } from "@/lib/data/regions";
 import { fishingSpots } from "@/lib/data/spots";
 import { SpotCard } from "@/components/spots/spot-card";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -93,11 +94,11 @@ export async function generateMetadata({
     .join("・");
 
   return {
-    title: `${region.areaName}の釣りスポット一覧 - ${region.prefecture}の釣り場情報`,
-    description: `${region.prefecture}${region.areaName}エリアの釣りスポット${spots.length}件を紹介。${topFishNames}などが狙えます。アクセス・料金・設備情報も掲載。`,
+    title: `${region.areaName}（${region.prefecture}）の釣り場・釣りスポット｜穴場情報あり`,
+    description: `${region.prefecture}${region.areaName}エリアの釣りスポット${spots.length}件を厳選紹介。${topFishNames}などが狙える穴場あり。初心者にもおすすめの釣り場からベテラン向けポイントまで。アクセス・駐車場・トイレ情報も掲載。`,
     openGraph: {
-      title: `${region.areaName}の釣りスポット一覧 - ${region.prefecture}の釣り場情報`,
-      description: `${region.prefecture}${region.areaName}エリアの釣りスポット${spots.length}件。${topFishNames}が釣れます。`,
+      title: `${region.areaName}（${region.prefecture}）の釣り場・釣りスポット｜穴場情報あり`,
+      description: `${region.prefecture}${region.areaName}の釣りスポット${spots.length}件。${topFishNames}が釣れる穴場あり。初心者にもおすすめ。`,
       type: "website",
       url: `https://tsurispot.com/area/${region.slug}`,
       siteName: "ツリスポ",
@@ -181,6 +182,15 @@ export default async function AreaDetailPage({ params }: PageProps) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
+      {/* パンくず */}
+      <Breadcrumb
+        items={[
+          { label: "ホーム", href: "/" },
+          { label: "エリア", href: "/area" },
+          { label: `${region.areaName}（${region.prefecture}）` },
+        ]}
+      />
+
       {/* Back link */}
       <Link
         href="/area"
@@ -217,14 +227,14 @@ export default async function AreaDetailPage({ params }: PageProps) {
           </h2>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {catchableFish.map((f) => (
-              <Link key={f.slug} href={`/fish/${f.slug}`}>
+              <Link key={f.slug} href={`/fish/${f.slug}`} title={`${f.name}の釣り情報・釣り方を見る`}>
                 <Badge
                   variant="outline"
                   className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
                 >
                   {f.name}
                   <span className="ml-1 text-muted-foreground">
-                    ({f.count})
+                    ({f.count}スポット)
                   </span>
                 </Badge>
               </Link>

@@ -19,7 +19,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { fishingSpots, getSpotBySlug, getNearbySpots } from "@/lib/data/spots";
+import { fishingSpots, getSpotBySlug, getNearbySpots, type NearbySpot } from "@/lib/data/spots";
 import { getShopsForSpot } from "@/lib/data/shops";
 import { SeasonCalendar } from "@/components/spots/season-calendar";
 import { BestTime } from "@/components/spots/best-time";
@@ -34,6 +34,8 @@ import {
 } from "@/types";
 import { SpotImage } from "@/components/ui/spot-image";
 import { CrowdPredictionCard } from "@/components/spots/crowd-prediction";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { ShareButtons } from "@/components/ui/share-buttons";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -179,8 +181,8 @@ export default async function SpotDetailPage({ params }: PageProps) {
     ],
   };
 
-  // Get nearby spots for internal linking
-  const nearbySpots = getNearbySpots(spot.latitude, spot.longitude, 6).filter(
+  // Get nearby spots for internal linking (exclude self, top 5 by Haversine distance)
+  const nearbySpots: NearbySpot[] = getNearbySpots(spot.latitude, spot.longitude, 6).filter(
     (s) => s.id !== spot.id
   ).slice(0, 5);
 
@@ -201,6 +203,15 @@ export default async function SpotDetailPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
+      {/* パンくず */}
+      <Breadcrumb
+        items={[
+          { label: "ホーム", href: "/" },
+          { label: "釣りスポット", href: "/spots" },
+          { label: spot.name },
+        ]}
+      />
+
       {/* Back link */}
       <Link
         href="/spots"
@@ -244,6 +255,12 @@ export default async function SpotDetailPage({ params }: PageProps) {
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
           {spot.description}
         </p>
+        <div className="mt-4">
+          <ShareButtons
+            url={`https://tsurispot.com/spots/${spot.slug}`}
+            title={`${spot.name}の釣り情報｜ツリスポ`}
+          />
+        </div>
       </div>
 
       {/* Photo area */}
@@ -313,7 +330,12 @@ export default async function SpotDetailPage({ params }: PageProps) {
                     className="flex items-center justify-between rounded-lg border p-3 text-sm"
                   >
                     <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-                      <span className="font-medium shrink-0">{cf.fish.name}</span>
+                      <Link
+                        href={`/fish/${cf.fish.slug}`}
+                        className="font-medium shrink-0 hover:text-primary hover:underline"
+                      >
+                        {cf.fish.name}
+                      </Link>
                       <Badge variant="secondary" className="text-xs shrink-0">
                         {cf.method}
                       </Badge>
@@ -582,32 +604,34 @@ export default async function SpotDetailPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* 近くの釣りスポット（内部リンク強化） */}
+      {/* この近くの釣り場 */}
       {nearbySpots.length > 0 && (
         <section className="mt-8 sm:mt-12">
-          <h2 className="mb-3 text-base font-bold sm:mb-4 sm:text-lg">近くの釣りスポット</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+            <MapPin className="size-5" />
+            この近くの釣り場
+          </h2>
+          <div className="flex gap-3 overflow-x-auto pb-2">
             {nearbySpots.map((nearSpot) => (
-              <Link key={nearSpot.id} href={`/spots/${nearSpot.slug}`}>
-                <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                  <CardContent className="p-4">
-                    <h3 className="truncate font-semibold group-hover:text-primary">
-                      {nearSpot.name}
-                    </h3>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      {nearSpot.region.prefecture} {nearSpot.region.areaName}
+              <Link key={nearSpot.id} href={`/spots/${nearSpot.slug}`} className="shrink-0">
+                <div className="min-w-[200px] rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
+                  <p className="text-sm text-gray-500 mb-1">
+                    約{nearSpot.distanceKm < 10
+                      ? nearSpot.distanceKm.toFixed(1)
+                      : Math.round(nearSpot.distanceKm).toString()}km
+                  </p>
+                  <p className="font-medium text-blue-600 hover:underline leading-snug">
+                    {nearSpot.name}
+                  </p>
+                  <p className="mt-1 text-xs text-gray-500">
+                    {SPOT_TYPE_LABELS[nearSpot.spotType]}
+                  </p>
+                  {nearSpot.catchableFish.length > 0 && (
+                    <p className="mt-2 text-xs text-muted-foreground">
+                      {nearSpot.catchableFish.slice(0, 3).map((cf) => cf.fish.name).join("・")}
                     </p>
-                    <div className="mt-2 flex items-center gap-2">
-                      <Badge variant="secondary" className="text-xs">
-                        {SPOT_TYPE_LABELS[nearSpot.spotType]}
-                      </Badge>
-                      <div className="flex items-center gap-1 text-xs">
-                        <Star className="size-3 fill-amber-400 text-amber-400" />
-                        <span>{nearSpot.rating}</span>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                  )}
+                </div>
               </Link>
             ))}
           </div>

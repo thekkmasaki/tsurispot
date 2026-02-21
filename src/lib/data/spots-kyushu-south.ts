@@ -1,0 +1,590 @@
+import { FishingSpot, FishSpecies, Region } from "@/types";
+import { getFishBySlug } from "./fish";
+import { regions } from "./regions";
+
+function fish(slug: string): FishSpecies {
+  const f = getFishBySlug(slug);
+  if (!f) throw new Error(`Fish not found: ${slug}`);
+  return f;
+}
+
+function region(id: string) {
+  const r = regions.find((r) => r.id === id);
+  if (!r) throw new Error(`Region not found: ${id}`);
+  return r;
+}
+
+const kyushuSouthRegions: Region[] = [
+  { id: "r160", prefecture: "大分県", areaName: "佐伯", slug: "oita-saiki" },
+  { id: "r161", prefecture: "大分県", areaName: "津久見", slug: "oita-tsukumi" },
+  { id: "r162", prefecture: "大分県", areaName: "臼杵", slug: "oita-usuki" },
+  { id: "r163", prefecture: "大分県", areaName: "佐賀関", slug: "oita-saganoseki" },
+  { id: "r164", prefecture: "宮崎県", areaName: "宮崎港", slug: "miyazaki-port" },
+  { id: "r165", prefecture: "宮崎県", areaName: "日南・油津", slug: "miyazaki-nichinan-aburatsu" },
+  { id: "r166", prefecture: "宮崎県", areaName: "日向・細島", slug: "miyazaki-hyuga-hososhima" },
+  { id: "r167", prefecture: "宮崎県", areaName: "延岡", slug: "miyazaki-nobeoka" },
+  { id: "r168", prefecture: "鹿児島県", areaName: "鹿児島市", slug: "kagoshima-city" },
+  { id: "r169", prefecture: "鹿児島県", areaName: "枕崎", slug: "kagoshima-makurazaki" },
+  { id: "r170", prefecture: "鹿児島県", areaName: "志布志", slug: "kagoshima-shibushi" },
+  { id: "r171", prefecture: "鹿児島県", areaName: "垂水", slug: "kagoshima-tarumizu" },
+  { id: "r172", prefecture: "佐賀県", areaName: "唐津", slug: "saga-karatsu-port" },
+  { id: "r173", prefecture: "佐賀県", areaName: "呼子", slug: "saga-yobuko" },
+  { id: "r174", prefecture: "長崎県", areaName: "長崎市", slug: "nagasaki-city" },
+  { id: "r175", prefecture: "長崎県", areaName: "佐世保", slug: "nagasaki-sasebo" },
+];
+
+function localRegion(id: string) {
+  return kyushuSouthRegions.find((r) => r.id === id) || region(id);
+}
+
+const mazumeKyushuSouth = {
+  springSunrise: "6:00頃", springSunset: "18:30頃",
+  summerSunrise: "5:20頃", summerSunset: "19:20頃",
+  autumnSunrise: "6:00頃", autumnSunset: "17:40頃",
+  winterSunrise: "7:10頃", winterSunset: "17:20頃",
+  tip: "朝マヅメは日の出前後1時間が最も活性が上がります。夏は早朝5時前後から釣果が上がりやすいです。",
+};
+
+const btMorning = [
+  { label: "朝マヅメ", timeRange: "5:30〜7:30", rating: "best" as const },
+  { label: "日中", timeRange: "10:00〜14:00", rating: "good" as const },
+  { label: "夕マヅメ", timeRange: "17:00〜19:00", rating: "good" as const },
+  { label: "夜", timeRange: "20:00〜23:00", rating: "fair" as const },
+];
+const btNight = [
+  { label: "朝マヅメ", timeRange: "5:30〜7:30", rating: "good" as const },
+  { label: "日中", timeRange: "10:00〜14:00", rating: "fair" as const },
+  { label: "夕マヅメ", timeRange: "17:00〜19:00", rating: "good" as const },
+  { label: "夜", timeRange: "20:00〜23:00", rating: "best" as const },
+];
+
+const tideStandard = { bestTide: "中潮〜大潮", bestTidePhase: "上げ潮〜満潮前後", description: "潮が動く時間帯に回遊魚の活性が上がります。" };
+const tideRock = { bestTide: "中潮〜大潮", bestTidePhase: "満潮前後", description: "満潮前後が根魚の活性が最も高まります。" };
+
+const gearSabiki = { targetFish: "アジ・サバ・イワシ", method: "サビキ釣り", difficulty: "beginner" as const, rod: "磯竿3号 3.6〜4.5m", reel: "スピニングリール 2500番", line: "ナイロン3号", hook: "サビキ仕掛け 5〜7号", otherItems: ["コマセカゴ", "アミエビ", "バケツ"], tip: "コマセを撒きすぎず、少しずつ出すのがコツ。" };
+const gearNage = { targetFish: "キス・カレイ", method: "投げ釣り", difficulty: "beginner" as const, rod: "投げ竿 3.9〜4.25m", reel: "スピニングリール 3000〜4000番", line: "ナイロン4号", hook: "流線針 7〜9号", otherItems: ["天秤オモリ 20〜25号", "青イソメ", "竿立て"], tip: "エサはイソメを房掛けにすると大型が食ってきます。" };
+const gearRock = { targetFish: "カサゴ・メバル", method: "穴釣り・根魚釣り", difficulty: "beginner" as const, rod: "穴釣りロッド 1.1〜1.5m", reel: "小型両軸リール", line: "フロロ3号", hook: "ブラクリ 3〜5号", otherItems: ["アオイソメ", "サバの切り身"], tip: "テトラの隙間に落とし込み、底に着いたら少し持ち上げて待つ。" };
+const gearEging = { targetFish: "アオリイカ", method: "エギング", difficulty: "intermediate" as const, rod: "エギングロッド 8.6〜9ft", reel: "スピニングリール 2500〜3000番", line: "PE 0.6〜0.8号 + リーダー フロロ 2号", hook: "エギ 2.5〜3.5号", otherItems: ["エギ各色", "ラインカッター", "フィッシュグリップ"], tip: "秋の新子シーズンは2.5号、春の親イカには3.5号のエギが有効。" };
+const gearJigging = { targetFish: "ブリ・カンパチ", method: "ショアジギング", difficulty: "intermediate" as const, rod: "ショアジギングロッド 9.6ft 30〜60g", reel: "スピニングリール 4000〜5000番", line: "PE 1.5〜2号 + リーダー フロロ 30lb", hook: "メタルジグ 30〜60g", otherItems: ["ジグ各種", "フィッシュグリップ", "プライヤー"], tip: "青物は朝マヅメの一番活性が高い時間帯に集中して狙う。" };
+
+export const kyushuSouthSpots: FishingSpot[] = [
+  // ========================================
+  // 大分県 (5スポット)
+  // ========================================
+  {
+    id: "s480", name: "別府国際観光港", slug: "beppu-kokusai-port",
+    description: "大分県別府市の大型港湾。フェリーターミナルが隣接し、足場が良く初心者でも楽しめる。春〜秋はアジやサバのサビキ釣りが好調で、夜は太刀魚狙いのアングラーも多い。",
+    latitude: 33.2840, longitude: 131.5040,
+    address: "大分県別府市汐見町10-1",
+    accessInfo: "JR別府駅から車で約10分。別府ICから約15分。バスは別府港バス停下車すぐ。",
+    region: localRegion("r33"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "港湾内に無料駐車スペースあり（50台）",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/beppu-kokusai-port.jpg", images: [], rating: 3.8, reviewCount: 98,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("tachiuo"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ釣り" },
+      { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeKyushuSouth,
+    gearGuides: [gearSabiki, gearRock],
+    safetyLevel: "safe",
+    safetyNotes: ["フェリー接岸時は立入禁止区域に注意", "防波堤の端では転落注意"],
+    youtubeLinks: [
+      { label: "別府港 アジサビキ釣り", searchQuery: "別府港 アジ サビキ 釣り", description: "別府港でのアジのサビキ釣り動画" },
+      { label: "別府港 太刀魚テンヤ", searchQuery: "別府 太刀魚 テンヤ 夜釣り", description: "別府港での太刀魚夜釣り動画" },
+    ],
+  },
+  {
+    id: "s481", name: "佐伯港", slug: "saiki-port",
+    description: "大分県南部の主要港湾。リアス式海岸に囲まれた複雑な地形が良質な漁場を形成。クロダイやメジナなどの磯魚から、アジやイワシまで多彩な魚種が狙える釣りの名所。",
+    latitude: 32.9600, longitude: 131.9010,
+    address: "大分県佐伯市鶴岡町",
+    accessInfo: "JR佐伯駅から車で約10分。東九州自動車道佐伯ICから約15分。",
+    region: localRegion("r160"), spotType: "port", difficulty: "intermediate",
+    isFree: true, hasParking: true, parkingDetail: "港湾内に無料駐車スペースあり",
+    hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
+    mainImageUrl: "/images/spots/saiki-port.jpg", images: [], rating: 4.0, reviewCount: 87,
+    catchableFish: [
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
+      { fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeKyushuSouth,
+    gearGuides: [gearSabiki, gearEging],
+    safetyLevel: "safe",
+    safetyNotes: ["漁船の出入りに注意", "堤防端部は滑りやすい"],
+    youtubeLinks: [
+      { label: "佐伯港 クロダイフカセ", searchQuery: "佐伯 クロダイ フカセ釣り 大分", description: "佐伯港でのクロダイフカセ釣り動画" },
+    ],
+  },
+  {
+    id: "s482", name: "津久見港", slug: "tsukumi-port",
+    description: "大分県津久見市の工業港。防波堤からのアジやサバのサビキ釣りが定番。春〜秋にはアオリイカのエギングも人気で、潮通しの良さから青物の回遊も期待できる。",
+    latitude: 33.0740, longitude: 131.8580,
+    address: "大分県津久見市港町",
+    accessInfo: "JR津久見駅から徒歩約15分。東九州自動車道津久見ICから約10分。",
+    region: localRegion("r161"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "港湾内に無料駐車スペースあり",
+    hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/tsukumi-port.jpg", images: [], rating: 3.7, reviewCount: 62,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+      { fish: fish("inada"), monthStart: 8, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeKyushuSouth,
+    gearGuides: [gearSabiki, gearEging],
+    safetyLevel: "safe",
+    safetyNotes: ["工業港につき立入禁止区域に注意"],
+    youtubeLinks: [
+      { label: "津久見港 アオリイカ エギング", searchQuery: "津久見 アオリイカ エギング 大分", description: "津久見港でのアオリイカエギング動画" },
+    ],
+  },
+  {
+    id: "s483", name: "臼杵港", slug: "usuki-port",
+    description: "国宝の石仏で有名な臼杵市の港。穏やかな内湾の港でファミリーフィッシングに最適。アジやキスの数釣りが楽しめ、秋にはアオリイカの実績も高い釣り場。",
+    latitude: 33.1270, longitude: 131.8060,
+    address: "大分県臼杵市臼杵",
+    accessInfo: "JR臼杵駅から徒歩約15分。臼杵ICから約10分。",
+    region: localRegion("r162"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "港付近に無料駐車スペースあり",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/usuki-port.jpg", images: [], rating: 3.6, reviewCount: 54,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeKyushuSouth,
+    gearGuides: [gearSabiki, gearNage],
+    safetyLevel: "safe",
+    safetyNotes: ["港内は漁船に注意"],
+    youtubeLinks: [
+      { label: "臼杵港 アジ釣り", searchQuery: "臼杵 アジ サビキ 釣り 大分", description: "臼杵港でのアジサビキ釣り動画" },
+    ],
+  },
+  {
+    id: "s484", name: "佐賀関港", slug: "saganoseki-port",
+    description: "豊後水道と瀬戸内海の合流点に位置する佐賀関港。潮通しが抜群で関サバ・関アジの漁場として名高い。堤防からのサビキ釣りでも良型のアジやサバが釣れる釣り師憧れの地。",
+    latitude: 33.2360, longitude: 131.8780,
+    address: "大分県大分市佐賀関",
+    accessInfo: "大分ICから国道197号経由で約40分。フェリーで四国・三崎港から約70分。",
+    region: localRegion("r163"), spotType: "port", difficulty: "intermediate",
+    isFree: true, hasParking: true, parkingDetail: "フェリーターミナル駐車場あり（有料）",
+    hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
+    mainImageUrl: "/images/spots/saganoseki-port.jpg", images: [], rating: 4.2, reviewCount: 134,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
+      { fish: fish("buri"), monthStart: 11, monthEnd: 2, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: { bestTide: "大潮", bestTidePhase: "上げ潮全般", description: "豊後水道の強い潮流が関サバ・関アジの餌となるプランクトンを育てます。潮が動く時間帯が最高です。" },
+    mazumeInfo: mazumeKyushuSouth,
+    gearGuides: [gearSabiki, gearJigging],
+    safetyLevel: "caution",
+    safetyNotes: ["潮流が非常に速いため注意が必要", "風の強い日は外側の堤防は危険"],
+    youtubeLinks: [
+      { label: "佐賀関 関アジ サビキ釣り", searchQuery: "佐賀関 関アジ サビキ釣り 大分", description: "佐賀関での関アジサビキ釣り動画" },
+      { label: "佐賀関 ショアジギング ブリ", searchQuery: "佐賀関 ショアジギング ブリ 豊後水道", description: "佐賀関でのショアジギング動画" },
+    ],
+  },
+  // ========================================
+  // 宮崎県 (4スポット)
+  // ========================================
+  {
+    id: "s485", name: "宮崎港", slug: "miyazaki-port",
+    description: "宮崎県の中心的な港湾。防波堤やテトラ帯が充実しており、年間を通じてアジやイワシのサビキ釣りが楽しめる。夏〜秋は太刀魚の夜釣りが人気の釣り場。",
+    latitude: 31.9340, longitude: 131.4620,
+    address: "宮崎県宮崎市港二丁目",
+    accessInfo: "JR宮崎駅から車で約10分。宮崎IC方面から国道220号経由。",
+    region: localRegion("r164"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "港湾周辺に無料駐車スペースあり",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/miyazaki-port.jpg", images: [], rating: 3.8, reviewCount: 112,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("tachiuo"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ釣り" },
+      { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
+    ],
+    bestTimes: btNight, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeKyushuSouth,
+    gearGuides: [gearSabiki, gearRock],
+    safetyLevel: "safe",
+    safetyNotes: ["港湾内は夜間でも照明あり", "フェリーの出入りに注意"],
+    youtubeLinks: [
+      { label: "宮崎港 太刀魚 夜釣り", searchQuery: "宮崎港 太刀魚 テンヤ 夜釣り", description: "宮崎港での太刀魚夜釣り動画" },
+    ],
+  },
+  {
+    id: "s486", name: "油津港", slug: "aburatsu-port",
+    description: "日南市の中心港湾。古くから漁業の街として栄え、港の防波堤からクロダイやメジナの磯釣りが楽しめる。カツオの一本釣りでも有名な港でもあり、周辺磯でのルアー釣りも盛ん。",
+    latitude: 31.5820, longitude: 131.4000,
+    address: "宮崎県日南市材木町",
+    accessInfo: "JR油津駅から徒歩約10分。日南ICから約30分。",
+    region: localRegion("r165"), spotType: "port", difficulty: "intermediate",
+    isFree: true, hasParking: true, parkingDetail: "港付近に駐車スペースあり",
+    hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
+    mainImageUrl: "/images/spots/aburatsu-port.jpg", images: [], rating: 4.0, reviewCount: 89,
+    catchableFish: [
+      { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
+      { fish: fish("mejina"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+      { fish: fish("kanpachi"), monthStart: 7, monthEnd: 10, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideRock, mazumeInfo: mazumeKyushuSouth,
+    gearGuides: [gearSabiki, gearJigging],
+    safetyLevel: "caution",
+    safetyNotes: ["外洋側の堤防は波が高い日は危険", "磯場は滑りやすいので注意"],
+    youtubeLinks: [
+      { label: "油津港 クロダイフカセ釣り", searchQuery: "油津 クロダイ フカセ 日南 宮崎", description: "油津港でのクロダイフカセ釣り動画" },
+    ],
+  },
+  {
+    id: "s487", name: "日向市細島港", slug: "hyuga-hososhima-port",
+    description: "宮崎県北部の主要港湾。工業港として整備されているが、周辺の波止からアジやカマスの数釣りが楽しめる。秋から冬はカマスの群れが回遊し、サビキやルアーで数釣りができる。",
+    latitude: 32.4540, longitude: 131.6730,
+    address: "宮崎県日向市細島",
+    accessInfo: "JR日向市駅から車で約10分。東九州自動車道日向ICから約15分。",
+    region: localRegion("r166"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "港湾内に駐車スペースあり",
+    hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/hyuga-hososhima-port.jpg", images: [], rating: 3.7, reviewCount: 67,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("kamasu"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り・ルアー" },
+      { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeKyushuSouth,
+    gearGuides: [gearSabiki],
+    safetyLevel: "safe",
+    safetyNotes: ["工業港につき立入禁止区域に注意"],
+    youtubeLinks: [
+      { label: "細島港 カマス 秋", searchQuery: "細島港 カマス 秋 宮崎 日向", description: "細島港でのカマス釣り動画" },
+    ],
+  },
+  {
+    id: "s488", name: "延岡新港", slug: "nobeoka-shinko",
+    description: "五ヶ瀬川の河口近くに位置する延岡市の港湾。シーバスの好ポイントとして有名で、河口部ではチヌやキビレも狙える。防波堤ではアジやイワシのサビキ釣りも人気。",
+    latitude: 32.5740, longitude: 131.6590,
+    address: "宮崎県延岡市港町二丁目",
+    accessInfo: "JR延岡駅から車で約10分。延岡ICから約15分。",
+    region: localRegion("r167"), spotType: "port", difficulty: "intermediate",
+    isFree: true, hasParking: true, parkingDetail: "港湾内に無料駐車スペースあり",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/nobeoka-shinko.jpg", images: [], rating: 3.9, reviewCount: 78,
+    catchableFish: [
+      { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("haze"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "チョイ投げ" },
+    ],
+    bestTimes: btNight, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeKyushuSouth,
+    gearGuides: [gearSabiki, gearRock],
+    safetyLevel: "safe",
+    safetyNotes: ["河口付近は流れが速い場合あり"],
+    youtubeLinks: [
+      { label: "延岡 シーバス ルアー", searchQuery: "延岡 シーバス ルアー 五ヶ瀬川", description: "延岡五ヶ瀬川河口でのシーバス釣り動画" },
+    ],
+  },
+  // ========================================
+  // 鹿児島県 (5スポット)
+  // ========================================
+  {
+    id: "s489", name: "鹿児島新港", slug: "kagoshima-shinko",
+    description: "錦江湾奥に位置する鹿児島市の主要港湾。桜島を望む絶景の釣り場で、年間を通じてアジやイワシのサビキ釣りが楽しめる。夏は太刀魚、秋はカンパチの回遊もあり多彩な魚種が狙える。",
+    latitude: 31.5950, longitude: 130.5760,
+    address: "鹿児島県鹿児島市本港新町",
+    accessInfo: "JR鹿児島中央駅から車で約10分。南九州自動車道鹿児島北ICから約20分。",
+    region: localRegion("r168"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "港湾内に駐車スペースあり（一部有料）",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
+    mainImageUrl: "/images/spots/kagoshima-shinko.jpg", images: [], rating: 4.1, reviewCount: 145,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("tachiuo"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ釣り" },
+      { fish: fish("kanpachi"), monthStart: 8, monthEnd: 10, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
+      { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeKyushuSouth,
+    gearGuides: [gearSabiki, gearJigging],
+    safetyLevel: "safe",
+    safetyNotes: ["桜島の噴火状況に注意（噴煙が多い日は灰が降る場合あり）", "フェリーの航路に注意"],
+    youtubeLinks: [
+      { label: "鹿児島新港 アジサビキ", searchQuery: "鹿児島新港 アジ サビキ 釣り", description: "鹿児島新港でのアジサビキ釣り動画" },
+      { label: "鹿児島 太刀魚 夜釣り", searchQuery: "鹿児島 太刀魚 テンヤ 夜釣り", description: "鹿児島での太刀魚夜釣り動画" },
+    ],
+  },
+  {
+    id: "s490", name: "枕崎港", slug: "makurazaki-port",
+    description: "カツオ漁業で有名な枕崎市の港湾。外洋に面した港で潮通しが良く、青物やシマアジなどの回遊魚が狙える本格的な釣り場。カツオのタタキが名物の街で釣りと食文化を同時に楽しめる。",
+    latitude: 31.2740, longitude: 130.2970,
+    address: "鹿児島県枕崎市松之尾町",
+    accessInfo: "JR指宿枕崎線枕崎駅から徒歩約20分。指宿スカイライン経由で鹿児島市から約90分。",
+    region: localRegion("r169"), spotType: "port", difficulty: "intermediate",
+    isFree: true, hasParking: true, parkingDetail: "港湾内に無料駐車スペースあり",
+    hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
+    mainImageUrl: "/images/spots/makurazaki-port.jpg", images: [], rating: 4.0, reviewCount: 96,
+    catchableFish: [
+      { fish: fish("kanpachi"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
+      { fish: fish("shimaaji"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeKyushuSouth,
+    gearGuides: [gearJigging, gearSabiki],
+    safetyLevel: "caution",
+    safetyNotes: ["外洋に面しているため波が高い日は危険", "台風時は避ける"],
+    youtubeLinks: [
+      { label: "枕崎 ショアジギング カンパチ", searchQuery: "枕崎 ショアジギング カンパチ 鹿児島", description: "枕崎でのショアジギング動画" },
+    ],
+  },
+  {
+    id: "s491", name: "志布志港", slug: "shibushi-port",
+    description: "鹿児島県東部の志布志湾に位置する大型港湾。フェリーターミナルが整備された港で、防波堤からのアジやイワシ釣りが盛ん。秋にはカンパチやハマチの回遊もあり、ショアジギングも人気。",
+    latitude: 31.4720, longitude: 131.0800,
+    address: "鹿児島県志布志市志布志町志布志",
+    accessInfo: "JR志布志駅から車で約10分。大隅縦貫道志布志ICから約15分。",
+    region: localRegion("r170"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "フェリーターミナル駐車場あり",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/shibushi-port.jpg", images: [], rating: 3.9, reviewCount: 88,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("inada"), monthStart: 8, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
+      { fish: fish("tachiuo"), monthStart: 7, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ釣り" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeKyushuSouth,
+    gearGuides: [gearSabiki, gearJigging],
+    safetyLevel: "safe",
+    safetyNotes: ["フェリーの出入り時は釣り禁止区域あり"],
+    youtubeLinks: [
+      { label: "志布志港 ショアジギング", searchQuery: "志布志港 ショアジギング ハマチ 鹿児島", description: "志布志港でのショアジギング動画" },
+    ],
+  },
+  {
+    id: "s492", name: "垂水フェリー港", slug: "tarumizu-ferry-port",
+    description: "錦江湾を挟んで桜島の対岸に位置する垂水市のフェリー港。桜島を間近に望む絶景の中でアジやキスが狙える。フェリーの待ち時間を利用した釣りも楽しめるユニークなスポット。",
+    latitude: 31.4930, longitude: 130.7090,
+    address: "鹿児島県垂水市新城",
+    accessInfo: "JR大隅線（廃線）垂水駅跡近く。鹿屋市から国道220号経由で約30分。フェリーで鹿児島港から約40分。",
+    region: localRegion("r171"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "フェリーターミナル駐車場あり",
+    hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/tarumizu-ferry-port.jpg", images: [], rating: 3.7, reviewCount: 56,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeKyushuSouth,
+    gearGuides: [gearSabiki, gearNage],
+    safetyLevel: "safe",
+    safetyNotes: ["フェリー乗り場周辺は立入禁止区域あり", "桜島の噴火情報を確認してから出かける"],
+    youtubeLinks: [
+      { label: "垂水 錦江湾 アジ釣り", searchQuery: "垂水 錦江湾 アジ サビキ 鹿児島", description: "垂水港での錦江湾アジ釣り動画" },
+    ],
+  },
+  {
+    id: "s493", name: "桜島フェリー港（桜島側）", slug: "sakurajima-ferry-port",
+    description: "活火山・桜島のフェリー乗り場周辺の釣りスポット。溶岩地帯が形成する複雑な海底地形に根魚が豊富。カサゴやメバルの穴釣りに加え、エギングでアオリイカも狙える特異な釣り場。",
+    latitude: 31.5800, longitude: 130.6380,
+    address: "鹿児島県鹿児島市桜島横山町",
+    accessInfo: "鹿児島港からフェリーで約15分。桜島フェリーターミナルから徒歩すぐ。",
+    region: localRegion("r16"), spotType: "rocky", difficulty: "intermediate",
+    isFree: true, hasParking: true, parkingDetail: "フェリーターミナル周辺に駐車スペースあり",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/sakurajima-ferry-port.jpg", images: [], rating: 4.2, reviewCount: 178,
+    catchableFish: [
+      { fish: fish("kasago"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
+      { fish: fish("mebaru"), monthStart: 2, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "アジング・メバリング" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideRock, mazumeInfo: mazumeKyushuSouth,
+    gearGuides: [gearRock, gearEging],
+    safetyLevel: "caution",
+    safetyNotes: ["桜島の噴火活動に常に注意", "噴火警戒レベルによっては立入禁止になる場合あり", "溶岩地帯は足場が悪い"],
+    youtubeLinks: [
+      { label: "桜島 穴釣り カサゴ", searchQuery: "桜島 穴釣り カサゴ 鹿児島", description: "桜島でのカサゴ穴釣り動画" },
+      { label: "桜島 エギング アオリイカ", searchQuery: "桜島 エギング アオリイカ 秋", description: "桜島でのエギング動画" },
+    ],
+  },
+  // ========================================
+  // 佐賀県 (2スポット)
+  // ========================================
+  {
+    id: "s494", name: "唐津港", slug: "karatsu-port",
+    description: "佐賀県北部の玄界灘に面した唐津港。唐津城の麓に位置する風光明媚な港で、アジやサバのサビキ釣りが定番。外海に面した防波堤ではクロダイや青物も狙える。",
+    latitude: 33.4490, longitude: 129.9660,
+    address: "佐賀県唐津市西城内",
+    accessInfo: "JR唐津駅から徒歩約15分。唐津ICから約10分。",
+    region: localRegion("r172"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
+    mainImageUrl: "/images/spots/karatsu-port.jpg", images: [], rating: 3.9, reviewCount: 103,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
+      { fish: fish("inada"), monthStart: 8, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeKyushuSouth,
+    gearGuides: [gearSabiki, gearJigging],
+    safetyLevel: "safe",
+    safetyNotes: ["玄界灘は波が荒れることがあるため天気に注意"],
+    youtubeLinks: [
+      { label: "唐津港 アジサビキ 玄界灘", searchQuery: "唐津港 アジ サビキ 玄界灘 佐賀", description: "唐津港でのアジサビキ釣り動画" },
+    ],
+  },
+  {
+    id: "s495", name: "呼子港", slug: "yobuko-port",
+    description: "イカの活け造りで全国的に有名な呼子の港。ケンサキイカやスルメイカのイカ釣りが盛んで、港内では年間を通じてアジのサビキ釣りも楽しめる。観光と釣りを同時に楽しめる人気スポット。",
+    latitude: 33.5400, longitude: 129.9090,
+    address: "佐賀県唐津市呼子町呼子",
+    accessInfo: "JR唐津駅から昭和バスで約40分「呼子」バス停下車。唐津ICから国道202号経由で約40分。",
+    region: localRegion("r173"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "呼子港近くに有料駐車場あり（500円/日）",
+    hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
+    mainImageUrl: "/images/spots/yobuko-port.jpg", images: [], rating: 4.1, reviewCount: 132,
+    catchableFish: [
+      { fish: fish("surumeika"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "イカ釣り（浮き）" },
+      { fish: fish("kouika"), monthStart: 4, monthEnd: 7, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
+    ],
+    bestTimes: btNight, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeKyushuSouth,
+    gearGuides: [gearSabiki, gearEging],
+    safetyLevel: "safe",
+    safetyNotes: ["夜釣りは明かりの持参を忘れずに", "漁船の出入りに注意"],
+    youtubeLinks: [
+      { label: "呼子 イカ釣り 夜", searchQuery: "呼子 イカ釣り 夜釣り 佐賀", description: "呼子港でのイカ夜釣り動画" },
+      { label: "呼子 エギング コウイカ", searchQuery: "呼子 エギング コウイカ 春", description: "呼子港でのエギング動画" },
+    ],
+  },
+  // ========================================
+  // 長崎県 (4スポット)
+  // ========================================
+  {
+    id: "s496", name: "長崎港", slug: "nagasaki-port",
+    description: "歴史ある長崎市の港湾。女神大橋の下や長崎港周辺の防波堤ではアジやサバのサビキ釣りが楽しめる。春〜秋はメバルやカサゴの根魚釣りも人気で、市内からアクセスしやすい都市型釣り場。",
+    latitude: 32.7420, longitude: 129.8710,
+    address: "長崎県長崎市常盤町",
+    accessInfo: "JR長崎駅から車で約10分。長崎自動車道長崎ICから約20分。",
+    region: localRegion("r174"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "周辺に有料駐車場あり",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/nagasaki-port.jpg", images: [], rating: 3.8, reviewCount: 119,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("mebaru"), monthStart: 2, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "メバリング" },
+      { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
+      { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeKyushuSouth,
+    gearGuides: [gearSabiki, gearRock],
+    safetyLevel: "safe",
+    safetyNotes: ["港湾施設内は立入禁止区域あり", "観光客が多い時間帯は混雑する"],
+    youtubeLinks: [
+      { label: "長崎港 アジ サビキ", searchQuery: "長崎港 アジ サビキ釣り 長崎", description: "長崎港でのアジサビキ釣り動画" },
+    ],
+  },
+  {
+    id: "s497", name: "五島福江港", slug: "goto-fukue-port",
+    description: "長崎県五島列島の中心・福江島の港湾。五島の海は透明度が高く、磯釣りの聖地として知られる。大型のクロダイやメジナ、アオリイカが狙え、本格的な磯釣りファンに人気の離島スポット。",
+    latitude: 32.6930, longitude: 128.8420,
+    address: "長崎県五島市東浜町",
+    accessInfo: "長崎港から高速船で約85分、フェリーで約3時間20分。",
+    region: region("r32"), spotType: "port", difficulty: "intermediate",
+    isFree: true, hasParking: true, parkingDetail: "港付近に駐車スペースあり",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
+    mainImageUrl: "/images/spots/goto-fukue-port.jpg", images: [], rating: 4.4, reviewCount: 167,
+    catchableFish: [
+      { fish: fish("mejina"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+      { fish: fish("ishidai"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "hard", recommendedTime: "日中", method: "石鯛釣り" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideRock, mazumeInfo: mazumeKyushuSouth,
+    gearGuides: [gearEging],
+    safetyLevel: "caution",
+    safetyNotes: ["離島のため天候が急変しやすい", "磯場は滑りやすく磯靴必須", "渡船利用時はライフジャケット着用"],
+    youtubeLinks: [
+      { label: "五島列島 グレ フカセ釣り", searchQuery: "五島列島 グレ フカセ釣り 磯", description: "五島列島での大型グレフカセ釣り動画" },
+      { label: "五島 アオリイカ エギング", searchQuery: "五島 アオリイカ エギング 秋", description: "五島列島でのエギング動画" },
+    ],
+  },
+  {
+    id: "s498", name: "平戸港", slug: "hirado-port",
+    description: "歴史的な港町・平戸の港湾。平戸大橋のたもとから防波堤にかけてアジやクロダイが狙える。西洋との交流の歴史が残る風光明媚な港で、観光と釣りを楽しめる長崎県北部の人気スポット。",
+    latitude: 33.3680, longitude: 129.5530,
+    address: "長崎県平戸市岩の上町",
+    accessInfo: "松浦鉄道たびら平戸口駅から車で約15分。西九州自動車道佐々ICから国道204号経由で約40分。",
+    region: region("r57"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "港付近に無料駐車スペースあり",
+    hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/hirado-port.jpg", images: [], rating: 4.0, reviewCount: 94,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
+      { fish: fish("mebaru"), monthStart: 2, monthEnd: 6, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "メバリング" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeKyushuSouth,
+    gearGuides: [gearSabiki, gearRock],
+    safetyLevel: "safe",
+    safetyNotes: ["観光客が多い時間帯は混雑する"],
+    youtubeLinks: [
+      { label: "平戸 クロダイ フカセ釣り", searchQuery: "平戸 クロダイ フカセ 長崎", description: "平戸港でのクロダイフカセ釣り動画" },
+    ],
+  },
+  {
+    id: "s499", name: "佐世保港", slug: "sasebo-port",
+    description: "長崎県北部の主要港湾。佐世保湾に囲まれた穏やかな内湾で、ファミリーフィッシングに最適。アジやイワシのサビキ釣りから、湾内でのシーバス・クロダイまで幅広い釣りが楽しめる。",
+    latitude: 33.1600, longitude: 129.7250,
+    address: "長崎県佐世保市干尽町",
+    accessInfo: "JR佐世保駅から徒歩約15分。西九州自動車道佐世保三川内ICから約20分。",
+    region: localRegion("r175"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "港湾周辺に有料駐車場あり",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
+    mainImageUrl: "/images/spots/sasebo-port.jpg", images: [], rating: 3.9, reviewCount: 121,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeKyushuSouth,
+    gearGuides: [gearSabiki, gearRock],
+    safetyLevel: "safe",
+    safetyNotes: ["米軍基地隣接のため立入禁止区域に注意"],
+    youtubeLinks: [
+      { label: "佐世保港 アジサビキ", searchQuery: "佐世保港 アジ サビキ 長崎", description: "佐世保港でのアジサビキ釣り動画" },
+      { label: "佐世保 シーバス ルアー", searchQuery: "佐世保 シーバス ルアー 夜釣り", description: "佐世保湾でのシーバスルアー動画" },
+    ],
+  },
+];

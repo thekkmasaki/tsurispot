@@ -1,0 +1,324 @@
+import { FishingSpot, FishSpecies, Region } from "@/types";
+import { getFishBySlug } from "./fish";
+import { regions } from "./regions";
+
+function fish(slug: string): FishSpecies {
+  const f = getFishBySlug(slug);
+  if (!f) throw new Error(`Fish not found: ${slug}`);
+  return f;
+}
+
+function region(id: string) {
+  const r = regions.find((r) => r.id === id);
+  if (!r) throw new Error(`Region not found: ${id}`);
+  return r;
+}
+
+const saninRegions: Region[] = [
+  { id: "r190", prefecture: "鳥取県", areaName: "岩美", slug: "tottori-iwami" },
+  { id: "r191", prefecture: "鳥取県", areaName: "琴浦", slug: "tottori-kotoura" },
+  { id: "r192", prefecture: "島根県", areaName: "美保関", slug: "shimane-mihogaseki" },
+  { id: "r193", prefecture: "島根県", areaName: "出雲大社", slug: "shimane-izumo" },
+  { id: "r194", prefecture: "島根県", areaName: "浜田", slug: "shimane-hamada" },
+  { id: "r195", prefecture: "島根県", areaName: "益田", slug: "shimane-masuda" },
+  { id: "r196", prefecture: "島根県", areaName: "隠岐", slug: "shimane-oki" },
+];
+
+function localRegion(id: string) {
+  return saninRegions.find((r) => r.id === id) || region(id);
+}
+
+const mazumeSanin = {
+  springSunrise: "5:40頃", springSunset: "18:30頃",
+  summerSunrise: "5:00頃", summerSunset: "19:20頃",
+  autumnSunrise: "5:40頃", autumnSunset: "17:30頃",
+  winterSunrise: "7:00頃", winterSunset: "16:50頃",
+  tip: "日本海側は朝夕のマヅメ時が最もよく釣れます。冬場の日本海は季節風が強いため風向きのチェックが必須です。",
+};
+
+const btMorning = [
+  { label: "朝マヅメ", timeRange: "5:00〜7:00", rating: "best" as const },
+  { label: "日中", timeRange: "10:00〜15:00", rating: "good" as const },
+  { label: "夕マヅメ", timeRange: "16:00〜18:00", rating: "good" as const },
+  { label: "夜", timeRange: "19:00〜22:00", rating: "fair" as const },
+];
+const btNight = [
+  { label: "朝マヅメ", timeRange: "5:00〜7:00", rating: "good" as const },
+  { label: "日中", timeRange: "10:00〜15:00", rating: "fair" as const },
+  { label: "夕マヅメ", timeRange: "16:00〜18:00", rating: "good" as const },
+  { label: "夜", timeRange: "19:00〜22:00", rating: "best" as const },
+];
+
+const tideStandard = { bestTide: "中潮〜大潮", bestTidePhase: "上げ潮〜満潮前後", description: "潮が動く時間帯に回遊魚の活性が上がります。" };
+const tideRock = { bestTide: "中潮〜大潮", bestTidePhase: "満潮前後", description: "満潮前後が根魚の活性が最も高まります。" };
+
+const gearSabiki = { targetFish: "アジ・サバ・イワシ", method: "サビキ釣り", difficulty: "beginner" as const, rod: "磯竿3号 3.6〜4.5m", reel: "スピニングリール 2500番", line: "ナイロン3号", hook: "サビキ仕掛け 5〜7号", otherItems: ["コマセカゴ", "アミエビ", "バケツ"], tip: "コマセを撒きすぎず、少しずつ出すのがコツ。" };
+const gearNage = { targetFish: "キス・カレイ", method: "投げ釣り", difficulty: "beginner" as const, rod: "投げ竿 3.9〜4.25m", reel: "スピニングリール 3000〜4000番", line: "ナイロン4号", hook: "流線針 7〜9号", otherItems: ["天秤オモリ 20〜25号", "青イソメ", "竿立て"], tip: "エサはイソメを房掛けにすると大型が食ってきます。" };
+const gearRock = { targetFish: "カサゴ・メバル・アイナメ", method: "穴釣り・根魚釣り", difficulty: "beginner" as const, rod: "穴釣りロッド 1.1〜1.5m", reel: "小型両軸リール", line: "フロロ3号", hook: "ブラクリ 3〜5号", otherItems: ["アオイソメ", "サバの切り身"], tip: "テトラの隙間に落とし込み、底に着いたら少し持ち上げて待つ。" };
+const gearEging = { targetFish: "アオリイカ・ヤリイカ", method: "エギング", difficulty: "intermediate" as const, rod: "エギングロッド 8.6〜9ft", reel: "スピニングリール 2500〜3000番", line: "PE 0.6〜0.8号 + リーダー フロロ 2号", hook: "エギ 2.5〜3.5号", otherItems: ["エギ各色", "ラインカッター", "フィッシュグリップ"], tip: "日本海のアオリイカは秋の新子シーズンが最盛期。ヤリイカは冬〜春。" };
+const gearJigging = { targetFish: "ハマチ・ヒラマサ", method: "ショアジギング", difficulty: "intermediate" as const, rod: "ショアジギングロッド 9.6ft 30〜60g", reel: "スピニングリール 4000〜5000番", line: "PE 1.5〜2号 + リーダー フロロ 30lb", hook: "メタルジグ 30〜60g", otherItems: ["ジグ各種", "フィッシュグリップ", "プライヤー"], tip: "日本海の青物は夏〜秋が最盛期。朝マヅメ一択で狙う。" };
+
+export const saninSpots: FishingSpot[] = [
+  // ========================================
+  // 鳥取県 (5スポット)
+  // ========================================
+  {
+    id: "s515", name: "鳥取港", slug: "tottori-port",
+    description: "鳥取県の県庁所在地の鳥取市にある主要港湾。鳥取砂丘から近く、防波堤からのアジやイワシのサビキ釣りが人気。秋〜冬はヤリイカのエギングも盛んで、観光ついでに楽しめる釣りスポット。",
+    latitude: 35.5230, longitude: 134.2220,
+    address: "鳥取県鳥取市賀露町西3丁目",
+    accessInfo: "JR鳥取駅から車で約15分。鳥取自動車道鳥取ICから約20分。",
+    region: region("r27"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "港湾内に無料駐車スペースあり（50台）",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
+    mainImageUrl: "/images/spots/tottori-port.jpg", images: [], rating: 3.9, reviewCount: 112,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("yariika"), monthStart: 12, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "エギング" },
+      { fish: fish("karei"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeSanin,
+    gearGuides: [gearSabiki, gearNage],
+    safetyLevel: "safe",
+    safetyNotes: ["冬季は季節風が強く防寒対策必須", "波が荒れやすい日は外側堤防に注意"],
+    youtubeLinks: [
+      { label: "鳥取港 アジサビキ釣り", searchQuery: "鳥取港 アジ サビキ 釣り 鳥取", description: "鳥取港でのアジサビキ釣り動画" },
+      { label: "鳥取港 ヤリイカ エギング", searchQuery: "鳥取 ヤリイカ エギング 冬 日本海", description: "鳥取港でのヤリイカエギング動画" },
+    ],
+  },
+  {
+    id: "s516", name: "境港", slug: "sakaiminato-port",
+    description: "松葉ガニの水揚げ日本一で知られる境港。水木しげるロードで有名な観光地でもあり、港周辺の防波堤からアジやサバのサビキ釣りが楽しめる。秋〜冬はヤリイカ釣りが最高潮を迎える。",
+    latitude: 35.5390, longitude: 133.2260,
+    address: "鳥取県境港市花町",
+    accessInfo: "JR境線境港駅から徒歩約15分。米子自動車道米子ICから約30分。",
+    region: region("r27"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "港湾周辺に有料駐車場あり（400円〜）",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
+    mainImageUrl: "/images/spots/sakaiminato-port.jpg", images: [], rating: 4.0, reviewCount: 145,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("yariika"), monthStart: 12, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "エギング" },
+      { fish: fish("ainame"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ブラクリ" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeSanin,
+    gearGuides: [gearSabiki, gearEging],
+    safetyLevel: "safe",
+    safetyNotes: ["観光シーズンは人が多い", "冬の季節風に注意"],
+    youtubeLinks: [
+      { label: "境港 ヤリイカ エギング 冬", searchQuery: "境港 ヤリイカ エギング 冬 鳥取", description: "境港でのヤリイカエギング動画" },
+      { label: "境港 アジサビキ 秋", searchQuery: "境港 アジ サビキ 秋 鳥取", description: "境港での秋のアジサビキ釣り動画" },
+    ],
+  },
+  {
+    id: "s517", name: "赤碕港", slug: "akasaki-port",
+    description: "鳥取県中部の東伯郡琴浦町にある漁港。日本海に面した小さな漁港だが、アジやイワシのサビキ釣りから、根魚狙いの穴釣りまで楽しめる穴場スポット。冬のヤリイカエギングでも実績がある。",
+    latitude: 35.4530, longitude: 133.5690,
+    address: "鳥取県東伯郡琴浦町赤碕",
+    accessInfo: "JR山陰本線赤碕駅から徒歩約15分。山陰自動車道琴浦東ICから約15分。",
+    region: localRegion("r191"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "港内に無料駐車スペースあり",
+    hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/akasaki-port.jpg", images: [], rating: 3.7, reviewCount: 58,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("yariika"), monthStart: 12, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "エギング" },
+      { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
+      { fish: fish("karei"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeSanin,
+    gearGuides: [gearSabiki, gearNage],
+    safetyLevel: "safe",
+    safetyNotes: ["冬場は天候悪化が急速なため注意", "漁船の出入りに配慮"],
+    youtubeLinks: [
+      { label: "鳥取 中部 漁港 アジ釣り", searchQuery: "鳥取 中部 漁港 アジ サビキ 日本海", description: "鳥取中部漁港でのアジ釣り動画" },
+    ],
+  },
+  {
+    id: "s518", name: "岩美町田後港", slug: "iwami-tago-port",
+    description: "鳥取県岩美町の日本海に面した田後港。周囲を岩場と松林に囲まれた風光明媚な港で、アジ・イワシのサビキ釣りが楽しめる。秋から冬はアオリイカやヤリイカの実績も高い漁港。",
+    latitude: 35.5900, longitude: 134.4350,
+    address: "鳥取県岩美郡岩美町田後",
+    accessInfo: "JR山陰本線岩美駅から車で約15分。山陰自動車道鳥取東ICから約25分。",
+    region: localRegion("r190"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "港内に無料駐車スペースあり",
+    hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/iwami-tago-port.jpg", images: [], rating: 3.8, reviewCount: 67,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+      { fish: fish("yariika"), monthStart: 12, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "エギング" },
+      { fish: fish("mebaru"), monthStart: 2, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "メバリング" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeSanin,
+    gearGuides: [gearSabiki, gearEging],
+    safetyLevel: "safe",
+    safetyNotes: ["冬季は季節風が強く荒天時は危険", "漁業関係者に迷惑をかけないよう注意"],
+    youtubeLinks: [
+      { label: "岩美 アオリイカ エギング 秋", searchQuery: "岩美 アオリイカ エギング 秋 鳥取 日本海", description: "岩美町でのアオリイカエギング動画" },
+    ],
+  },
+  {
+    id: "s519", name: "琴浦町逢束漁港", slug: "kotoura-outtsuka-port",
+    description: "鳥取県琴浦町の日本海に面した小規模漁港。アジやメバルの良型が釣れることで地元アングラーに知られる穴場スポット。冬のヤリイカエギングや春〜夏のキス投げ釣りも楽しめる。",
+    latitude: 35.4670, longitude: 133.6450,
+    address: "鳥取県東伯郡琴浦町逢束",
+    accessInfo: "JR山陰本線浦安駅から車で約10分。山陰自動車道琴浦西ICから約10分。",
+    region: localRegion("r191"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "港内に無料駐車スペースあり（10台程度）",
+    hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/kotoura-outtsuka-port.jpg", images: [], rating: 3.6, reviewCount: 42,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("mebaru"), monthStart: 2, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "メバリング" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("yariika"), monthStart: 12, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "エギング" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeSanin,
+    gearGuides: [gearSabiki, gearNage],
+    safetyLevel: "safe",
+    safetyNotes: ["小規模港のため漁業者優先", "冬季の荒天時は危険"],
+    youtubeLinks: [
+      { label: "鳥取 小規模漁港 メバリング", searchQuery: "鳥取 漁港 メバリング 春 日本海", description: "鳥取の漁港でのメバリング動画" },
+    ],
+  },
+  // ========================================
+  // 島根県 (5スポット)
+  // ========================================
+  {
+    id: "s520", name: "松江市美保関", slug: "matsue-mihonoseki",
+    description: "島根半島の東端に位置する美保関。日本海と中海が交わる潮通しの良いポイントで、アジやサバの大型が釣れることで知られる。美保神社への参拝客も多い風光明媚な漁港。",
+    latitude: 35.5590, longitude: 133.3190,
+    address: "島根県松江市美保関町美保関",
+    accessInfo: "JR松江駅から車で約40分。山陰自動車道東出雲ICから約40分。",
+    region: localRegion("r192"), spotType: "port", difficulty: "intermediate",
+    isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車スペースあり",
+    hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/matsue-mihonoseki.jpg", images: [], rating: 4.1, reviewCount: 98,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("inada"), monthStart: 8, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
+      { fish: fish("yariika"), monthStart: 12, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "エギング" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: { bestTide: "大潮・中潮", bestTidePhase: "潮が速い時間帯", description: "日本海と中海の潮が交わる美保関は潮の流れが複雑。潮が動く時間帯に青物の回遊が増えます。" },
+    mazumeInfo: mazumeSanin,
+    gearGuides: [gearSabiki, gearJigging],
+    safetyLevel: "caution",
+    safetyNotes: ["潮流が速いため転落注意", "冬季は季節風対策必須"],
+    youtubeLinks: [
+      { label: "美保関 青物 ショアジギング", searchQuery: "美保関 青物 ショアジギング 島根", description: "美保関でのショアジギング動画" },
+    ],
+  },
+  {
+    id: "s521", name: "出雲大社稲佐の浜", slug: "izumo-inasa-beach",
+    description: "縁結びの神様・出雲大社近くの稲佐の浜。神話の地として有名なこの砂浜では、投げ釣りでキスが狙える。観光と組み合わせて楽しめる釣りスポットで、秋には沖合でアオリイカの実績もある。",
+    latitude: 35.3980, longitude: 132.6590,
+    address: "島根県出雲市大社町杵築北",
+    accessInfo: "一畑電車大社線出雲大社前駅から徒歩約20分。出雲ICから約20分。",
+    region: localRegion("r193"), spotType: "beach", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "稲佐の浜駐車場（無料・約30台）",
+    hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/izumo-inasa-beach.jpg", images: [], rating: 3.8, reviewCount: 76,
+    catchableFish: [
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("karei"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+      { fish: fish("haze"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "チョイ投げ" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeSanin,
+    gearGuides: [gearNage],
+    safetyLevel: "caution",
+    safetyNotes: ["日本海に直接面しており、波が急に高くなる場合あり", "冬は荒天が多いので天候確認必須", "神聖な場所のためゴミは持ち帰り必須"],
+    youtubeLinks: [
+      { label: "稲佐の浜 キス投げ釣り", searchQuery: "稲佐の浜 キス 投げ釣り 出雲 島根", description: "稲佐の浜でのキス投げ釣り動画" },
+    ],
+  },
+  {
+    id: "s522", name: "浜田港", slug: "hamada-port",
+    description: "島根県西部の主要港湾・浜田港。浜田漁港は日本有数のカレイ・カサゴ・ノドグロ（アカムツ）の産地。防波堤からのサビキ釣りや投げ釣りが盛んで、ショアジギングでの青物狙いも人気。",
+    latitude: 34.9000, longitude: 132.0770,
+    address: "島根県浜田市浜田町",
+    accessInfo: "JR山陰本線浜田駅から徒歩約20分。浜田自動車道浜田ICから約10分。",
+    region: localRegion("r194"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "港湾内に無料駐車スペースあり（100台以上）",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
+    mainImageUrl: "/images/spots/hamada-port.jpg", images: [], rating: 4.1, reviewCount: 134,
+    catchableFish: [
+      { fish: fish("karei"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("inada"), monthStart: 8, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
+      { fish: fish("ainame"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ブラクリ" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeSanin,
+    gearGuides: [gearSabiki, gearNage, gearJigging],
+    safetyLevel: "safe",
+    safetyNotes: ["冬季は季節風（北西風）が強くなる", "防波堤の外側は波が高い日は注意"],
+    youtubeLinks: [
+      { label: "浜田港 カレイ 投げ釣り", searchQuery: "浜田港 カレイ 投げ釣り 島根 日本海", description: "浜田港でのカレイ投げ釣り動画" },
+      { label: "浜田 ショアジギング 青物", searchQuery: "浜田 ショアジギング ハマチ 青物 島根", description: "浜田港での青物ショアジギング動画" },
+    ],
+  },
+  {
+    id: "s523", name: "益田港", slug: "masuda-port",
+    description: "島根県最西端に近い益田市の港湾。万葉歌人・柿本人麻呂ゆかりの地でもあり、風光明媚な海岸線が続く。防波堤からのアジ・サバ釣りや、秋のアオリイカエギングが盛んな釣りスポット。",
+    latitude: 34.6740, longitude: 131.8390,
+    address: "島根県益田市七類町",
+    accessInfo: "JR山陰本線益田駅から車で約10分。浜田自動車道浜田ICから約30分。",
+    region: localRegion("r195"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "港湾内に無料駐車スペースあり",
+    hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/masuda-port.jpg", images: [], rating: 3.7, reviewCount: 78,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+      { fish: fish("karei"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeSanin,
+    gearGuides: [gearSabiki, gearEging],
+    safetyLevel: "safe",
+    safetyNotes: ["冬季は日本海の季節風が強い", "漁船の出入りに注意"],
+    youtubeLinks: [
+      { label: "益田 アオリイカ エギング", searchQuery: "益田 アオリイカ エギング 島根 日本海", description: "益田でのアオリイカエギング動画" },
+    ],
+  },
+  {
+    id: "s524", name: "隠岐の島西郷港", slug: "oki-saigo-port",
+    description: "島根県沖に浮かぶ隠岐の島（島後）の中心港・西郷港。離島の豊かな漁場に囲まれ、大型のクロダイ・グレ・ヒラマサなどが狙える磯釣りの聖地。日本海の荒波に揉まれた魚は引きが強烈。",
+    latitude: 36.1910, longitude: 133.3220,
+    address: "島根県隠岐郡隠岐の島町西郷南谷",
+    accessInfo: "境港から高速船で約2時間20分（フェリーで約3時間）。七類港からも高速船・フェリーあり。",
+    region: localRegion("r196"), spotType: "port", difficulty: "intermediate",
+    isFree: true, hasParking: true, parkingDetail: "港付近に駐車スペースあり",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
+    mainImageUrl: "/images/spots/oki-saigo-port.jpg", images: [], rating: 4.5, reviewCount: 213,
+    catchableFish: [
+      { fish: fish("mejina"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
+      { fish: fish("buri"), monthStart: 11, monthEnd: 2, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+      { fish: fish("ishidai"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "hard", recommendedTime: "日中", method: "石鯛釣り" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideRock, mazumeInfo: mazumeSanin,
+    gearGuides: [gearJigging, gearEging],
+    safetyLevel: "caution",
+    safetyNotes: ["離島のため天候が急変しやすい", "フェリーの運休を考慮した日程計画が必要", "磯場は磯靴・ライフジャケット着用必須"],
+    youtubeLinks: [
+      { label: "隠岐 グレ フカセ釣り 磯", searchQuery: "隠岐の島 グレ フカセ釣り 磯 島根", description: "隠岐の島での大型グレフカセ釣り動画" },
+      { label: "隠岐 ブリ ショアジギング 冬", searchQuery: "隠岐 ブリ ショアジギング 冬 日本海", description: "隠岐での冬のブリショアジギング動画" },
+    ],
+  },
+];

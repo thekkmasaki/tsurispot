@@ -121,17 +121,20 @@ export function calculateCrowdScore(input: PredictionInput): CrowdPrediction {
     }
   }
 
-  // --- シーズンの影響 (最大+10) ---
-  const peakMonths = [4, 5, 6, 7, 8, 9, 10]; // 釣りのハイシーズン
-  if (peakMonths.includes(input.month)) {
-    score += 10;
-    if (input.month >= 7 && input.month <= 8) {
-      score += 5; // 夏休みボーナス
-      factors.push("夏休みシーズン");
-    }
+  // --- シーズンの影響（月別補正）---
+  // 厳冬期(12-2月)は釣り人が激減、春秋は安定、夏はピーク
+  if (input.month >= 7 && input.month <= 8) {
+    score += 15; // 夏休みシーズン・ピーク
+    factors.push("夏休みシーズン");
+  } else if ([4, 5, 6, 9, 10].includes(input.month)) {
+    score += 5; // 春・秋のハイシーズン
+  } else if (input.month === 3 || input.month === 11) {
+    score -= 15; // 春先・晩秋：やや空いている
+    factors.push("オフシーズン気味");
   } else {
-    score -= 5;
-    factors.push("オフシーズン");
+    // 12月・1月・2月：厳冬期で釣り人が大幅に少ない
+    score -= 38;
+    factors.push("厳冬期（空きやすい）");
   }
 
   // --- スポット人気度の影響 ---

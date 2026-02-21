@@ -60,11 +60,27 @@ export interface FishSpecies {
   peakMonths: number[];
   cookingTips: string[];
   spots: SpotSummary[];
+  fishingMethods?: FishingMethod[];
   youtubeLinks?: YouTubeSearchLink[];
   isPoisonous?: boolean;
   poisonType?: string;
   dangerLevel?: "low" | "medium" | "high";
   dangerNotes?: string[];
+}
+
+export interface FishingMethod {
+  methodName: string;
+  difficulty: "beginner" | "intermediate" | "advanced";
+  description: string;
+  bestSeason: string;
+  tackle: {
+    rod: string;
+    reel: string;
+    line: string;
+    hookOrLure: string;
+    otherItems: string[];
+  };
+  tips: string[];
 }
 
 export interface SpotSummary {

@@ -2,17 +2,18 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Fish, Map, MapPin, BookOpen, GraduationCap, Scale, Heart, Store, Globe, Package } from "lucide-react";
+import { Fish, Map, MapPin, BookOpen, GraduationCap, Scale, Heart, Globe, Package, Target, Trophy } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SearchOverlay } from "./search-overlay";
 
 const navItems = [
   { href: "/spots", label: "スポット", icon: MapPin },
+  { href: "/ranking", label: "ランキング", icon: Trophy },
   { href: "/area", label: "エリア", icon: Globe },
   { href: "/map", label: "地図", icon: Map },
   { href: "/catchable-now", label: "今釣れる", icon: Fish },
+  { href: "/bouzu-checker", label: "ボウズ診断", icon: Target },
   { href: "/fish", label: "図鑑", icon: BookOpen },
-  { href: "/shops", label: "釣具店", icon: Store },
   { href: "/guide", label: "ガイド", icon: GraduationCap },
   { href: "/gear", label: "道具", icon: Package },
   { href: "/fishing-rules", label: "ルール", icon: Scale },

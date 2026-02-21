@@ -7,6 +7,12 @@ import { extraSpots } from "./spots-extra";
 import { sagamiMiuraSpots } from "./spots-sagami-miura";
 import { sagamiShonanSpots } from "./spots-sagami-shonan";
 import { sagamiIzuSpots } from "./spots-sagami-izu";
+import { tohokuSpots } from "./spots-tohoku";
+import { hokurikuSpots } from "./spots-hokuriku";
+import { shikokuSpots } from "./spots-shikoku";
+import { kyushuSouthSpots } from "./spots-kyushu-south";
+import { okinawaSpots } from "./spots-okinawa";
+import { saninSpots } from "./spots-sanin";
 
 function fish(slug: string): FishSpecies {
   const f = getFishBySlug(slug);
@@ -2706,18 +2712,34 @@ const _baseSpots: FishingSpot[] = [
   },
 ];
 
-export const fishingSpots: FishingSpot[] = [..._baseSpots, ...additionalSpots, ...osakaKinkiSpots, ...extraSpots, ...sagamiMiuraSpots, ...sagamiShonanSpots, ...sagamiIzuSpots];
+export const fishingSpots: FishingSpot[] = [..._baseSpots, ...additionalSpots, ...osakaKinkiSpots, ...extraSpots, ...sagamiMiuraSpots, ...sagamiShonanSpots, ...sagamiIzuSpots, ...tohokuSpots, ...hokurikuSpots, ...shikokuSpots, ...kyushuSouthSpots, ...okinawaSpots, ...saninSpots];
 
 export function getSpotBySlug(slug: string): FishingSpot | undefined {
   return fishingSpots.find((s) => s.slug === slug);
 }
 
-export function getNearbySpots(lat: number, lng: number, limit = 5): FishingSpot[] {
+function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number): number {
+  const R = 6371;
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLng = ((lng2 - lng1) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLng / 2) *
+      Math.sin(dLng / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
+export type NearbySpot = FishingSpot & { distanceKm: number };
+
+export function getNearbySpots(lat: number, lng: number, limit = 5): NearbySpot[] {
   return fishingSpots
     .map((spot) => ({
       ...spot,
-      distance: Math.sqrt(Math.pow(spot.latitude - lat, 2) + Math.pow(spot.longitude - lng, 2)),
+      distanceKm: haversineKm(lat, lng, spot.latitude, spot.longitude),
     }))
-    .sort((a, b) => a.distance - b.distance)
+    .sort((a, b) => a.distanceKm - b.distanceKm)
     .slice(0, limit);
 }

@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -473,6 +474,13 @@ export default async function MethodDetailPage({ params }: PageProps) {
       />
 
       {/* パンくず */}
+      <Breadcrumb
+        items={[
+          { label: "ホーム", href: "/" },
+          { label: "釣り方", href: "/methods" },
+          { label: method.name },
+        ]}
+      />
       <Link
         href="/methods"
         className="mb-5 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground transition-colors hover:text-primary min-h-[44px] sm:mb-6"

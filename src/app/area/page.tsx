@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { regions } from "@/lib/data/regions";
 import { fishingSpots } from "@/lib/data/spots";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
   title: "全国の釣りエリア一覧 - 都道府県別に釣りスポットを探す",
@@ -111,6 +112,12 @@ export default function AreaListPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
+      <Breadcrumb
+        items={[
+          { label: "ホーム", href: "/" },
+          { label: "エリア" },
+        ]}
+      />
       <div className="mb-5 sm:mb-8">
         <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
           全国の釣りエリア一覧

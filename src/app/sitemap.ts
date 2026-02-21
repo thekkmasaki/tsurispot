@@ -2,7 +2,7 @@ import type { MetadataRoute } from "next";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 import { regions } from "@/lib/data/regions";
-import { tackleShops } from "@/lib/data/shops";
+import { prefectures } from "@/lib/data/prefectures";
 
 const baseUrl = "https://tsurispot.com";
 
@@ -227,23 +227,23 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  // 釣具店一覧ページ
-  const shopListPage: MetadataRoute.Sitemap = [
+  // 都道府県一覧ページ
+  const prefectureListPage: MetadataRoute.Sitemap = [
     {
-      url: `${baseUrl}/shops`,
+      url: `${baseUrl}/prefecture`,
       lastModified: now,
       changeFrequency: "weekly",
       priority: 0.8,
     },
   ];
 
-  // 各釣具店詳細ページ
-  const shopPages: MetadataRoute.Sitemap = tackleShops.map((shop) => ({
-    url: `${baseUrl}/shops/${shop.slug}`,
+  // 各都道府県ページ
+  const prefecturePages: MetadataRoute.Sitemap = prefectures.map((pref) => ({
+    url: `${baseUrl}/prefecture/${pref.slug}`,
     lastModified: now,
     changeFrequency: "weekly",
     priority: 0.7,
   }));
 
-  return [...staticPages, ...spotPages, ...fishPages, ...areaListPage, ...areaPages, ...shopListPage, ...shopPages];
+  return [...staticPages, ...spotPages, ...fishPages, ...areaListPage, ...areaPages, ...prefectureListPage, ...prefecturePages];
 }

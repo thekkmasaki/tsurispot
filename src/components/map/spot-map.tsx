@@ -5,10 +5,8 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { fishingSpots } from '@/lib/data/spots';
-import { tackleShops } from '@/lib/data/shops';
-import { regions } from '@/lib/data/regions';
 import Link from 'next/link';
-import { Star, Store } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { DIFFICULTY_LABELS } from '@/types';
 import { Badge } from '@/components/ui/badge';
 
@@ -20,15 +18,6 @@ L.Icon.Default.mergeOptions({
     'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
   shadowUrl:
     'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
-});
-
-const shopIcon = new L.Icon({
-  iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  shadowSize: [41, 41],
 });
 
 const DEFAULT_CENTER: [number, number] = [36.5, 137.0];
@@ -44,6 +33,18 @@ const prefectureCenters: Record<string, { center: [number, number]; zoom: number
   '京都府': { center: [35.55, 135.30], zoom: 9 },
 };
 
+// 地方グループ定義
+const REGION_GROUPS: { label: string; prefectures: string[] }[] = [
+  { label: '北海道', prefectures: ['北海道'] },
+  { label: '東北', prefectures: ['青森県', '岩手県', '秋田県', '宮城県', '山形県', '福島県'] },
+  { label: '関東', prefectures: ['東京都', '神奈川県', '千葉県', '埼玉県', '茨城県', '栃木県', '群馬県'] },
+  { label: '中部', prefectures: ['新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県', '岐阜県', '静岡県', '愛知県'] },
+  { label: '近畿', prefectures: ['大阪府', '兵庫県', '京都府', '滋賀県', '奈良県', '和歌山県', '三重県'] },
+  { label: '中国', prefectures: ['鳥取県', '島根県', '岡山県', '広島県', '山口県'] },
+  { label: '四国', prefectures: ['香川県', '徳島県', '高知県', '愛媛県'] },
+  { label: '九州沖縄', prefectures: ['福岡県', '佐賀県', '長崎県', '熊本県', '大分県', '宮崎県', '鹿児島県', '沖縄県'] },
+];
+
 function MapController({ center, zoom }: { center: [number, number]; zoom: number }) {
   const map = useMap();
   useMemo(() => {
@@ -53,69 +54,93 @@ function MapController({ center, zoom }: { center: [number, number]; zoom: numbe
 }
 
 export function SpotMap() {
-  const [selectedPrefecture, setSelectedPrefecture] = useState<string>('');
-  const [showShops, setShowShops] = useState(true);
+  const [selectedPrefectures, setSelectedPrefectures] = useState<Set<string>>(new Set());
 
-  const prefectures = Array.from(new Set(regions.map((r) => r.prefecture)));
+  const togglePrefecture = (pref: string) => {
+    setSelectedPrefectures((prev) => {
+      const next = new Set(prev);
+      if (next.has(pref)) {
+        next.delete(pref);
+      } else {
+        next.add(pref);
+      }
+      return next;
+    });
+  };
 
-  const filteredSpots = selectedPrefecture
-    ? fishingSpots.filter((s) => s.region.prefecture === selectedPrefecture)
-    : fishingSpots;
+  const filteredSpots = useMemo(
+    () =>
+      selectedPrefectures.size === 0
+        ? fishingSpots
+        : fishingSpots.filter((s) => selectedPrefectures.has(s.region.prefecture)),
+    [selectedPrefectures]
+  );
 
-  const filteredShops = selectedPrefecture
-    ? tackleShops.filter((s) => s.region.prefecture === selectedPrefecture)
-    : tackleShops;
-
-  const mapCenter = selectedPrefecture && prefectureCenters[selectedPrefecture]
-    ? prefectureCenters[selectedPrefecture].center
-    : DEFAULT_CENTER;
-
-  const mapZoom = selectedPrefecture && prefectureCenters[selectedPrefecture]
-    ? prefectureCenters[selectedPrefecture].zoom
-    : DEFAULT_ZOOM;
+  // ズーム挙動: 0県→全体、1県→その県、2県以上→バウンディングボックス中心
+  const { mapCenter, mapZoom } = useMemo((): { mapCenter: [number, number]; mapZoom: number } => {
+    if (selectedPrefectures.size === 0) {
+      return { mapCenter: DEFAULT_CENTER, mapZoom: DEFAULT_ZOOM };
+    }
+    if (selectedPrefectures.size === 1) {
+      const pref = Array.from(selectedPrefectures)[0];
+      if (prefectureCenters[pref]) {
+        return { mapCenter: prefectureCenters[pref].center, mapZoom: prefectureCenters[pref].zoom };
+      }
+      // prefectureCentersに未登録の県はスポットの平均座標にフォールバック
+    }
+    // 2県以上、またはprefectureCenters未登録の1県: フィルタ済みスポットのバウンディングボックス中心
+    if (filteredSpots.length > 0) {
+      const lats = filteredSpots.map((s) => s.latitude);
+      const lngs = filteredSpots.map((s) => s.longitude);
+      const centerLat = (Math.min(...lats) + Math.max(...lats)) / 2;
+      const centerLng = (Math.min(...lngs) + Math.max(...lngs)) / 2;
+      return { mapCenter: [centerLat, centerLng], mapZoom: 8 };
+    }
+    return { mapCenter: DEFAULT_CENTER, mapZoom: DEFAULT_ZOOM };
+  }, [selectedPrefectures, filteredSpots]);
 
   return (
     <div className="space-y-3">
       {/* Region filter */}
-      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-        <span className="mr-1 text-xs font-medium text-muted-foreground sm:text-sm">地域:</span>
-        <button
-          onClick={() => setSelectedPrefecture('')}
-          className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors min-h-[36px] sm:text-sm ${
-            !selectedPrefecture
-              ? 'bg-primary text-primary-foreground'
-              : 'bg-muted text-muted-foreground hover:bg-muted/80'
-          }`}
-        >
-          すべて
-        </button>
-        {prefectures.map((pref) => (
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <span className="text-xs font-medium text-muted-foreground sm:text-sm">地域:</span>
           <button
-            key={pref}
-            onClick={() => setSelectedPrefecture(selectedPrefecture === pref ? '' : pref)}
+            onClick={() => setSelectedPrefectures(new Set())}
             className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors min-h-[36px] sm:text-sm ${
-              selectedPrefecture === pref
+              selectedPrefectures.size === 0
                 ? 'bg-primary text-primary-foreground'
                 : 'bg-muted text-muted-foreground hover:bg-muted/80'
             }`}
           >
-            {pref}
+            すべて
           </button>
+          {selectedPrefectures.size > 0 && (
+            <span className="text-xs text-muted-foreground">
+              {selectedPrefectures.size}県選択中
+            </span>
+          )}
+        </div>
+        {REGION_GROUPS.map((group) => (
+          <div key={group.label} className="flex flex-wrap items-center gap-1.5">
+            <span className="w-14 shrink-0 text-[10px] font-medium text-muted-foreground sm:text-xs">
+              {group.label}
+            </span>
+            {group.prefectures.map((pref) => (
+              <button
+                key={pref}
+                onClick={() => togglePrefecture(pref)}
+                className={`rounded-full px-2.5 py-1 text-[10px] font-medium transition-colors min-h-[32px] sm:text-xs ${
+                  selectedPrefectures.has(pref)
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                {pref.replace(/[都道府県]$/, '')}
+              </button>
+            ))}
+          </div>
         ))}
-      </div>
-
-      {/* Shop toggle */}
-      <div className="flex items-center gap-2">
-        <label className="flex items-center gap-2 text-sm cursor-pointer">
-          <input
-            type="checkbox"
-            checked={showShops}
-            onChange={(e) => setShowShops(e.target.checked)}
-            className="rounded"
-          />
-          <Store className="size-4 text-emerald-600" />
-          <span className="text-muted-foreground">釣具店を表示</span>
-        </label>
       </div>
 
       <MapContainer
@@ -150,36 +175,6 @@ export function SpotMap() {
                   className="mt-1 inline-flex items-center rounded-md bg-primary px-3 py-1.5 text-sm font-medium text-primary-foreground hover:bg-primary/90"
                 >
                   詳細を見る &rarr;
-                </Link>
-              </div>
-            </Popup>
-          </Marker>
-        ))}
-        {showShops && filteredShops.map((shop) => (
-          <Marker key={shop.id} position={[shop.latitude, shop.longitude]} icon={shopIcon}>
-            <Popup>
-              <div className="min-w-[200px] space-y-2 p-1">
-                <div className="flex items-center gap-1.5">
-                  <Store className="size-4 text-emerald-600" />
-                  <h3 className="text-sm font-bold leading-tight">{shop.name}</h3>
-                </div>
-                <p className="text-xs text-gray-600">{shop.businessHours}（定休: {shop.closedDays}）</p>
-                <div className="flex flex-wrap gap-1">
-                  {shop.hasLiveBait && (
-                    <span className="rounded bg-emerald-100 px-1.5 py-0.5 text-[10px] text-emerald-700">活きエサ</span>
-                  )}
-                  {shop.hasFrozenBait && (
-                    <span className="rounded bg-blue-100 px-1.5 py-0.5 text-[10px] text-blue-700">冷凍エサ</span>
-                  )}
-                  {shop.hasRentalRod && (
-                    <span className="rounded bg-orange-100 px-1.5 py-0.5 text-[10px] text-orange-700">レンタル竿</span>
-                  )}
-                </div>
-                <Link
-                  href={`/shops/${shop.slug}`}
-                  className="mt-1 inline-flex items-center rounded-md bg-emerald-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-emerald-700"
-                >
-                  店舗情報 &rarr;
                 </Link>
               </div>
             </Popup>
