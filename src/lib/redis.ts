@@ -7,8 +7,12 @@ const redisToken = (process.env.UPSTASH_REDIS_REST_TOKEN ?? "").trim();
 
 // Redis未設定時もビルドが通るようにダミーインスタンスを作成
 function createRedis() {
-  if (redisUrl && redisUrl.startsWith("https://")) {
-    return new Redis({ url: redisUrl, token: redisToken });
+  if (redisUrl && redisUrl.startsWith("https://") && redisToken && redisToken.length > 10) {
+    try {
+      return new Redis({ url: redisUrl, token: redisToken });
+    } catch {
+      return null as unknown as Redis;
+    }
   }
   // ビルド時やローカル開発で未設定の場合はダミー
   // API側で process.env.UPSTASH_REDIS_REST_URL チェック済みなので実際には使われない
