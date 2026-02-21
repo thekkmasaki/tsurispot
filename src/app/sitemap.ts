@@ -3,6 +3,8 @@ import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 import { regions } from "@/lib/data/regions";
 import { prefectures } from "@/lib/data/prefectures";
+import { areaGuides } from "@/lib/data/area-guides";
+import { monthlyGuides } from "@/lib/data/monthly-guides";
 
 const baseUrl = "https://tsurispot.com";
 
@@ -245,5 +247,75 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...spotPages, ...fishPages, ...areaListPage, ...areaPages, ...prefectureListPage, ...prefecturePages];
+  // 坊主チェッカー
+  const bouzuCheckerPage: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/bouzu-checker`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+  ];
+
+  // ランキングページ
+  const rankingPage: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/ranking`,
+      lastModified: now,
+      changeFrequency: "weekly",
+      priority: 0.8,
+    },
+  ];
+
+  // エリアガイド一覧ページ
+  const areaGuideListPage: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/area-guide`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
+  ];
+
+  // 各エリアガイド詳細ページ
+  const areaGuidePages: MetadataRoute.Sitemap = areaGuides.map((guide) => ({
+    url: `${baseUrl}/area-guide/${guide.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.7,
+  }));
+
+  // 月別ガイド一覧ページ
+  const monthlyListPage: MetadataRoute.Sitemap = [
+    {
+      url: `${baseUrl}/monthly`,
+      lastModified: now,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+  ];
+
+  // 各月別ガイド詳細ページ
+  const monthlyPages: MetadataRoute.Sitemap = monthlyGuides.map((guide) => ({
+    url: `${baseUrl}/monthly/${guide.slug}`,
+    lastModified: now,
+    changeFrequency: "monthly",
+    priority: 0.6,
+  }));
+
+  return [
+    ...staticPages,
+    ...spotPages,
+    ...fishPages,
+    ...areaListPage,
+    ...areaPages,
+    ...prefectureListPage,
+    ...prefecturePages,
+    ...bouzuCheckerPage,
+    ...rankingPage,
+    ...areaGuideListPage,
+    ...areaGuidePages,
+    ...monthlyListPage,
+    ...monthlyPages,
+  ];
 }

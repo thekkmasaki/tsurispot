@@ -4,13 +4,13 @@ import { fishingSpots } from "@/lib/data/spots";
 import { RankingClient } from "./ranking-client";
 
 export const metadata: Metadata = {
-  title: "釣りスポット人気ランキング｜全国のおすすめ釣り場TOP50",
+  title: "釣りスポット人気ランキング｜地域別おすすめ釣り場TOP10｜ツリスポ",
   description:
-    "全国の釣りスポットを評価順にランキング。初心者向け、ファミリー向け、上級者向けなど条件別でも探せます。",
+    "全国・地域別の釣りスポットを評価・口コミ順にランキング。北海道から沖縄まで地域別TOP10。初心者向け・ファミリー向け・夜釣りなど条件別に絞り込めます。",
   openGraph: {
-    title: "釣りスポット人気ランキング｜全国のおすすめ釣り場TOP50",
+    title: "釣りスポット人気ランキング｜地域別おすすめ釣り場TOP10｜ツリスポ",
     description:
-      "全国の釣りスポットを評価順にランキング。初心者向け、ファミリー向け、上級者向けなど条件別でも探せます。",
+      "全国・地域別の釣りスポットを評価順にランキング。地域別TOP10で自分にぴったりの釣り場を見つけよう。",
     type: "website",
     url: "https://tsurispot.com/ranking",
     siteName: "ツリスポ",
@@ -61,7 +61,7 @@ export default function RankingPage() {
             </div>
             <div>
               <h1 className="text-2xl font-bold sm:text-3xl">釣りスポット人気ランキング</h1>
-              <p className="mt-0.5 text-sm text-white/80">全国のおすすめ釣り場TOP50</p>
+              <p className="mt-0.5 text-sm text-white/80">地域別おすすめ釣り場TOP10</p>
             </div>
           </div>
           <p className="mt-4 text-sm leading-relaxed text-white/80">

@@ -8,6 +8,18 @@ import type { FishingSpot } from "@/types";
 
 type TabKey = "all" | "beginner" | "family" | "night" | "port";
 
+const ALL_PREFECTURES = [
+  "全国",
+  "北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県",
+  "茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県",
+  "新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県",
+  "岐阜県", "静岡県", "愛知県", "三重県",
+  "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県",
+  "鳥取県", "島根県", "岡山県", "広島県", "山口県",
+  "徳島県", "香川県", "愛媛県", "高知県",
+  "福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県",
+];
+
 const TABS: { key: TabKey; label: string }[] = [
   { key: "all", label: "総合" },
   { key: "beginner", label: "初心者向け" },
@@ -41,6 +53,11 @@ function hasNightFishing(spot: FishingSpot): boolean {
   return spot.bestTimes.some(
     (t) => t.label === "夜" && (t.rating === "best" || t.rating === "good")
   );
+}
+
+function filterByPrefecture(spots: FishingSpot[], prefecture: string): FishingSpot[] {
+  if (prefecture === "全国") return spots;
+  return spots.filter((s) => s.region.prefecture.includes(prefecture.replace(/[都府県]$/, "")));
 }
 
 function filterSpots(spots: FishingSpot[], tab: TabKey): FishingSpot[] {
@@ -197,15 +214,37 @@ interface RankingClientProps {
 
 export function RankingClient({ spots }: RankingClientProps) {
   const [activeTab, setActiveTab] = useState<TabKey>("all");
+  const [activePrefecture, setActivePrefecture] = useState("全国");
 
   const rankedSpots = useMemo(() => {
-    const filtered = filterSpots(spots, activeTab);
-    return sortSpots(filtered).slice(0, 50);
-  }, [spots, activeTab]);
+    const byPref = filterByPrefecture(spots, activePrefecture);
+    const filtered = filterSpots(byPref, activeTab);
+    return sortSpots(filtered).slice(0, 10);
+  }, [spots, activeTab, activePrefecture]);
 
   return (
     <div>
-      {/* タブフィルタ */}
+      {/* 都道府県フィルタ */}
+      <div className="mb-4 -mx-1 overflow-x-auto">
+        <div className="flex gap-2 px-1 pb-1" style={{ width: "max-content" }}>
+          {ALL_PREFECTURES.map((pref) => (
+            <button
+              key={pref}
+              onClick={() => setActivePrefecture(pref)}
+              className={cn(
+                "whitespace-nowrap rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
+                activePrefecture === pref
+                  ? "bg-blue-600 text-white shadow-sm"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+              )}
+            >
+              {pref}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* カテゴリタブフィルタ */}
       <div className="mb-6 flex flex-wrap gap-2">
         {TABS.map((tab) => (
           <button
@@ -225,7 +264,8 @@ export function RankingClient({ spots }: RankingClientProps) {
 
       {/* 件数表示 */}
       <p className="mb-4 text-sm text-muted-foreground">
-        {rankedSpots.length}件のスポットが見つかりました
+        {activePrefecture}・{TABS.find((t) => t.key === activeTab)?.label ?? "総合"} TOP10
+        （{rankedSpots.length}件）
       </p>
 
       {/* ランキングリスト */}

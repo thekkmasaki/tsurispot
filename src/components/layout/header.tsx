@@ -2,22 +2,116 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Fish, Map, MapPin, BookOpen, GraduationCap, Scale, Heart, Globe, Package, Target, Trophy } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import {
+  Fish,
+  Map,
+  MapPin,
+  BookOpen,
+  GraduationCap,
+  Scale,
+  Heart,
+  Package,
+  Target,
+  Trophy,
+  Calendar,
+  Sparkles,
+  ChevronDown,
+  Compass,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SearchOverlay } from "./search-overlay";
 
-const navItems = [
+// メインナビ（常時表示：最大5個）
+const mainNavItems = [
   { href: "/spots", label: "スポット", icon: MapPin },
-  { href: "/ranking", label: "ランキング", icon: Trophy },
-  { href: "/area", label: "エリア", icon: Globe },
   { href: "/map", label: "地図", icon: Map },
-  { href: "/catchable-now", label: "今釣れる", icon: Fish },
-  { href: "/bouzu-checker", label: "ボウズ診断", icon: Target },
   { href: "/fish", label: "図鑑", icon: BookOpen },
-  { href: "/guide", label: "ガイド", icon: GraduationCap },
-  { href: "/gear", label: "道具", icon: Package },
-  { href: "/fishing-rules", label: "ルール", icon: Scale },
+  { href: "/ranking", label: "ランキング", icon: Trophy },
+  { href: "/catchable-now", label: "今釣れる", icon: Fish },
 ];
+
+// ドロップダウン「もっと見る」
+const moreNavItems = [
+  { href: "/area", label: "エリア一覧", icon: Compass },
+  { href: "/area-guide", label: "エリアガイド記事", icon: MapPin },
+  { href: "/monthly", label: "月別釣りガイド", icon: Calendar },
+  { href: "/guide", label: "釣りガイド", icon: GraduationCap },
+  { href: "/bouzu-checker", label: "ボウズ確率チェッカー", icon: Target },
+  { href: "/quiz", label: "釣りスタイル診断", icon: Sparkles },
+  { href: "/gear", label: "おすすめ道具", icon: Package },
+  { href: "/fishing-rules", label: "ルールとマナー", icon: Scale },
+];
+
+function DropdownMenu() {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    function handleClickOutside(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // ドロップダウン内のリンクがアクティブかチェック
+  const hasActiveChild = moreNavItems.some(
+    (item) =>
+      pathname === item.href ||
+      (item.href !== "/" && pathname.startsWith(item.href))
+  );
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        onClick={() => setOpen(!open)}
+        className={cn(
+          "flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+          hasActiveChild
+            ? "bg-primary/10 text-primary"
+            : "text-muted-foreground hover:bg-muted hover:text-foreground"
+        )}
+      >
+        もっと見る
+        <ChevronDown
+          className={cn(
+            "h-3.5 w-3.5 transition-transform",
+            open && "rotate-180"
+          )}
+        />
+      </button>
+      {open && (
+        <div className="absolute right-0 top-full mt-1 w-56 rounded-xl border bg-white py-2 shadow-lg">
+          {moreNavItems.map((item) => {
+            const isActive =
+              pathname === item.href ||
+              (item.href !== "/" && pathname.startsWith(item.href));
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                onClick={() => setOpen(false)}
+                className={cn(
+                  "flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors",
+                  isActive
+                    ? "bg-primary/5 font-medium text-primary"
+                    : "text-gray-700 hover:bg-gray-50"
+                )}
+              >
+                <item.icon className="h-4 w-4" />
+                {item.label}
+              </Link>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
 
 export function Header() {
   const pathname = usePathname();
@@ -33,7 +127,7 @@ export function Header() {
         </Link>
 
         <nav className="hidden items-center gap-1 md:flex">
-          {navItems.map((item) => {
+          {mainNavItems.map((item) => {
             const isActive =
               pathname === item.href ||
               (item.href !== "/" && pathname.startsWith(item.href));
@@ -53,13 +147,11 @@ export function Header() {
               </Link>
             );
           })}
+          <DropdownMenu />
         </nav>
 
         <div className="flex items-center gap-2">
-          {/* Inline search */}
           <SearchOverlay />
-
-          {/* Favorites link */}
           <Link
             href="/favorites"
             className={cn(

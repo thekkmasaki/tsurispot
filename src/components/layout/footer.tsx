@@ -45,20 +45,22 @@ export function Footer() {
               <li><Link href="/spots" className="hover:text-foreground">スポット一覧</Link></li>
               <li><Link href="/ranking" className="hover:text-foreground">人気ランキング</Link></li>
               <li><Link href="/area" className="hover:text-foreground">エリアで探す</Link></li>
+              <li><Link href="/area-guide" className="hover:text-foreground">エリアガイド記事</Link></li>
               <li><Link href="/map" className="hover:text-foreground">地図で探す</Link></li>
               <li><Link href="/catchable-now" className="hover:text-foreground">今釣れる魚</Link></li>
-              <li><Link href="/spots/submit" className="hover:text-foreground">スポットを投稿</Link></li>
               <li><Link href="/favorites" className="hover:text-foreground">お気に入り</Link></li>
             </ul>
           </div>
           <div>
             <h3 className="mb-3 text-sm font-semibold">釣りを学ぶ</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
+              <li><Link href="/quiz" className="hover:text-foreground">釣りスタイル診断</Link></li>
               <li><Link href="/bouzu-checker" className="hover:text-foreground">ボウズ確率チェッカー</Link></li>
               <li><Link href="/guide" className="hover:text-foreground">釣りの始め方</Link></li>
               <li><Link href="/fish" className="hover:text-foreground">魚種図鑑</Link></li>
               <li><Link href="/glossary" className="hover:text-foreground">釣り用語集</Link></li>
               <li><Link href="/methods" className="hover:text-foreground">釣り方から探す</Link></li>
+              <li><Link href="/monthly" className="hover:text-foreground">月別釣りガイド</Link></li>
               <li><Link href="/seasonal" className="hover:text-foreground">季節別ガイド</Link></li>
               <li><Link href="/fishing-calendar" className="hover:text-foreground">釣りカレンダー</Link></li>
               <li><Link href="/beginner-checklist" className="hover:text-foreground">持ち物チェックリスト</Link></li>

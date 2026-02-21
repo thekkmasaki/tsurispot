@@ -34,6 +34,7 @@ import {
 } from "@/types";
 import { SpotImage } from "@/components/ui/spot-image";
 import { CrowdPredictionCard } from "@/components/spots/crowd-prediction";
+import { SpotBouzuCard } from "@/components/spots/spot-bouzu-card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
 
@@ -557,6 +558,20 @@ export default async function SpotDetailPage({ params }: PageProps) {
           </section>
         </div>
       </div>
+
+      {/* ボウズ確率 */}
+      <section className="mt-8 sm:mt-12">
+        <SpotBouzuCard
+          spotType={spot.spotType}
+          difficulty={spot.difficulty}
+          rating={spot.rating}
+          reviewCount={spot.reviewCount}
+          prefecture={spot.region.prefecture}
+          isFree={spot.isFree}
+          hasRentalRod={spot.hasRentalRod}
+          catchableFishCount={spot.catchableFish.length}
+        />
+      </section>
 
       {/* 混雑予想 */}
       <section className="mt-8 sm:mt-12">
