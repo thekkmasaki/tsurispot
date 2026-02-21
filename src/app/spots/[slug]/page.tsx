@@ -35,6 +35,7 @@ import {
 import { SpotImage } from "@/components/ui/spot-image";
 import { CrowdPredictionCard } from "@/components/spots/crowd-prediction";
 import { SpotBouzuCard } from "@/components/spots/spot-bouzu-card";
+import { SpotWeatherTide } from "@/components/spots/spot-weather-tide";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
 
@@ -558,6 +559,15 @@ export default async function SpotDetailPage({ params }: PageProps) {
           </section>
         </div>
       </div>
+
+      {/* 天気・潮汐 */}
+      <section className="mt-8 sm:mt-12">
+        <SpotWeatherTide
+          lat={spot.latitude}
+          lng={spot.longitude}
+          spotName={spot.name}
+        />
+      </section>
 
       {/* ボウズ確率 */}
       <section className="mt-8 sm:mt-12">
