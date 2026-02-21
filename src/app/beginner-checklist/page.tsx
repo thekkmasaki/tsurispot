@@ -54,10 +54,10 @@ const categories: ChecklistCategory[] = [
       {
         id: "rod", label: "竿（ロッド）", note: "サビキセットなら竿・リール・仕掛け込みで3,000円前後",
         affiliate: {
-          badge: "慣れてきたら",
-          badgeColor: "bg-purple-100 text-purple-700",
+          badge: "初心者おすすめ",
+          badgeColor: "bg-orange-100 text-orange-700",
           name: "シマノ ホリデーパック",
-          desc: "振出式コンパクトロッド。持ち運びやすく、堤防からちょい投げ・サビキ・ウキ釣りまで幅広く対応。初心者セットを卒業したい人に最適。",
+          desc: "軽量で扱いやすい振出式コンパクトロッド。初心者や女性にも最適で、コスパ抜群と高評価。堤防からサビキ・ちょい投げ・ウキ釣りまで幅広く対応。",
           url: "https://amzn.to/4c7dgi1",
         },
       },
