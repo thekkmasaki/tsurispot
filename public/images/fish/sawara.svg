@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a2a4a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#061525;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3a5a7a;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8a9aaa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c8ccd0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="200" cy="90" rx="180" ry="40" fill="#0e3258" opacity="0.3"/>
+  <ellipse cx="600" cy="480" rx="150" ry="35" fill="#050e1a" opacity="0.3"/>
+  <!-- Sawara (Japanese Spanish Mackerel) - sleek, silver, dark spots -->
+  <!-- Main body - very sleek and torpedo-shaped -->
+  <path d="M80,295 Q120,262 220,248 Q350,232 480,238 Q590,248 670,268 Q720,282 745,298 Q750,308 745,318 Q720,338 670,352 Q590,368 480,375 Q360,378 250,370 Q170,360 120,340 Q92,325 85,308 Z" fill="url(#body)"/>
+  <!-- Dark blue-grey back -->
+  <path d="M85,295 Q120,270 220,255 Q350,240 480,245 Q590,252 670,270 Q720,284 745,298 L745,295 Q720,278 670,262 Q590,245 480,235 Q350,228 220,245 Q130,258 90,285 Z" fill="#2a4060" opacity="0.7"/>
+  <!-- Silver side shine -->
+  <path d="M100,300 Q200,288 350,282 Q500,280 640,292 L720,305 Q640,300 500,296 Q350,292 200,298 Z" fill="#d0d5da" opacity="0.3"/>
+  <!-- Dark spots pattern (characteristic) -->
+  <circle cx="200" cy="290" r="4" fill="#2a3a4a" opacity="0.5"/>
+  <circle cx="240" cy="280" r="3.5" fill="#2a3a4a" opacity="0.5"/>
+  <circle cx="280" cy="272" r="4" fill="#2a3a4a" opacity="0.5"/>
+  <circle cx="320" cy="268" r="3" fill="#2a3a4a" opacity="0.5"/>
+  <circle cx="360" cy="265" r="4" fill="#2a3a4a" opacity="0.5"/>
+  <circle cx="400" cy="268" r="3.5" fill="#2a3a4a" opacity="0.5"/>
+  <circle cx="440" cy="272" r="3" fill="#2a3a4a" opacity="0.5"/>
+  <circle cx="480" cy="275" r="4" fill="#2a3a4a" opacity="0.45"/>
+  <circle cx="520" cy="280" r="3" fill="#2a3a4a" opacity="0.45"/>
+  <circle cx="560" cy="285" r="3.5" fill="#2a3a4a" opacity="0.4"/>
+  <circle cx="600" cy="290" r="3" fill="#2a3a4a" opacity="0.4"/>
+  <circle cx="220" cy="310" r="3" fill="#2a3a4a" opacity="0.4"/>
+  <circle cx="260" cy="305" r="3.5" fill="#2a3a4a" opacity="0.4"/>
+  <circle cx="310" cy="298" r="3" fill="#2a3a4a" opacity="0.4"/>
+  <circle cx="360" cy="295" r="3.5" fill="#2a3a4a" opacity="0.35"/>
+  <circle cx="410" cy="298" r="3" fill="#2a3a4a" opacity="0.35"/>
+  <circle cx="460" cy="300" r="3" fill="#2a3a4a" opacity="0.35"/>
+  <!-- Dorsal fin -->
+  <path d="M260,250 L278,200 Q290,192 300,200 L320,245" fill="#3a5a7a" stroke="#2a4a6a" stroke-width="1"/>
+  <!-- Second dorsal (small) -->
+  <path d="M580,270 L588,252 Q593,248 598,252 L605,268" fill="#3a5a7a" stroke="#2a4a6a" stroke-width="1"/>
+  <!-- Finlets (characteristic of mackerel family) -->
+  <path d="M625,275 L630,262 L635,274" fill="#3a5a7a" opacity="0.7"/>
+  <path d="M645,280 L650,268 L655,279" fill="#3a5a7a" opacity="0.7"/>
+  <path d="M665,286 L669,275 L673,285" fill="#3a5a7a" opacity="0.6"/>
+  <!-- Bottom finlets -->
+  <path d="M625,348 L630,360 L635,349" fill="#8a9aaa" opacity="0.5"/>
+  <path d="M645,342 L650,354 L655,343" fill="#8a9aaa" opacity="0.5"/>
+  <path d="M665,338 L669,348 L673,337" fill="#8a9aaa" opacity="0.5"/>
+  <!-- Pectoral fin -->
+  <path d="M175,310 L150,348 Q162,356 175,344 L200,315" fill="#5a7a90" opacity="0.7"/>
+  <!-- Anal fin -->
+  <path d="M560,372 L568,392 Q576,395 582,390 L590,370" fill="#5a7a90" stroke="#4a6a80" stroke-width="1"/>
+  <!-- Tail fin - forked -->
+  <path d="M735,298 L770,265 Q778,280 774,300 L772,318 L778,338 Q775,355 768,365 L735,325" fill="#3a5a7a" stroke="#2a4a6a" stroke-width="1"/>
+  <!-- Eye -->
+  <circle cx="130" cy="282" r="11" fill="#1a1a1a"/>
+  <circle cx="128" cy="280" r="4.5" fill="#3a3a4a"/>
+  <!-- Sharp teeth hint -->
+  <path d="M85,298 Q100,308 125,302" stroke="#2a3a4a" stroke-width="2" fill="none"/>
+  <!-- Gill -->
+  <line x1="160" y1="268" x2="163" y2="320" stroke="#4a6a80" stroke-width="2" opacity="0.4"/>
+  <!-- Label -->
+  <text x="400" y="480" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="42" fill="#ffffff" font-weight="bold" opacity="0.9">サワラ</text>
+  <text x="400" y="520" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="20" fill="#88bbdd" opacity="0.7">Japanese Spanish Mackerel</text>
+</svg>

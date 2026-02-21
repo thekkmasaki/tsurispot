@@ -128,6 +128,13 @@ const detailGuides: {
     icon: Crosshair,
   },
   {
+    href: "/guide/oyogase",
+    title: "泳がせ釣り入門ガイド",
+    description:
+      "サビキで釣ったアジやイワシを生きエサに大物を狙う！仕掛け・エサの付け方・やり取りのコツを解説。",
+    icon: Fish,
+  },
+  {
     href: "/guide/night-fishing",
     title: "夜釣り入門ガイド",
     description:

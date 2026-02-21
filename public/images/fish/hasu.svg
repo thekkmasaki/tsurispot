@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a3520;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d1a10;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#6a7a80;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#b0b8c0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d8dce0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- Freshwater greenish ambiance -->
+  <ellipse cx="200" cy="100" rx="180" ry="40" fill="#1e4530" opacity="0.3"/>
+  <ellipse cx="600" cy="110" rx="140" ry="30" fill="#1e4530" opacity="0.2"/>
+  <!-- River current lines -->
+  <path d="M0,300 Q200,295 400,300 Q600,305 800,298" stroke="#2a4530" stroke-width="1" fill="none" opacity="0.3"/>
+  <path d="M0,350 Q200,345 400,350 Q600,355 800,348" stroke="#2a4530" stroke-width="1" fill="none" opacity="0.25"/>
+  <!-- Hasu (Opsariichthys) - silver-white predatory freshwater fish, protruding lower jaw -->
+  <!-- Main body - streamlined, slightly compressed -->
+  <path d="M120,290 Q160,248 260,232 Q380,218 500,225 Q590,235 650,258 Q700,278 720,298 Q728,315 720,332 Q698,358 640,375 Q570,390 460,395 Q350,398 255,388 Q190,378 155,355 Q130,335 125,310 Z" fill="url(#body)"/>
+  <!-- Blue-grey back -->
+  <path d="M128,290 Q160,258 260,242 Q380,228 500,232 Q590,240 650,260 Q700,278 720,298 L718,292 Q698,272 650,252 Q590,232 500,222 Q380,215 260,228 Q165,242 130,278 Z" fill="#5a6870" opacity="0.6"/>
+  <!-- Bright silver side -->
+  <path d="M138,300 Q200,280 350,275 Q500,278 650,298" stroke="#e8ecf0" stroke-width="3" fill="none" opacity="0.4"/>
+  <path d="M135,310 Q200,292 350,288 Q500,290 655,310" stroke="#e8ecf0" stroke-width="2" fill="none" opacity="0.3"/>
+  <!-- Scale hints - silver sheen -->
+  <path d="M240,268 Q250,264 260,268" stroke="#c0c8d0" stroke-width="0.8" fill="none" opacity="0.4"/>
+  <path d="M300,258 Q310,254 320,258" stroke="#c0c8d0" stroke-width="0.8" fill="none" opacity="0.4"/>
+  <path d="M360,255 Q370,251 380,255" stroke="#c0c8d0" stroke-width="0.8" fill="none" opacity="0.4"/>
+  <path d="M420,258 Q430,254 440,258" stroke="#c0c8d0" stroke-width="0.8" fill="none" opacity="0.4"/>
+  <path d="M480,262 Q490,258 500,262" stroke="#c0c8d0" stroke-width="0.8" fill="none" opacity="0.4"/>
+  <!-- White belly -->
+  <path d="M140,325 Q170,352 255,375 Q350,390 460,392 Q560,388 630,375 Q680,360 710,340 Q722,328 722,318 Q720,335 705,352 Q670,375 590,390 Q490,400 380,402 Q270,400 200,385 Q155,370 140,345 Z" fill="#e8ecf0" opacity="0.3"/>
+  <!-- Lateral line -->
+  <path d="M170,288 Q320,278 470,280 Q600,288 700,308" stroke="#8a9098" stroke-width="1" fill="none" opacity="0.4"/>
+  <!-- Dorsal fin -->
+  <path d="M380,228 L395,185 Q408,178 418,185 L440,225" fill="#6a7a80" stroke="#5a6870" stroke-width="1"/>
+  <!-- Anal fin -->
+  <path d="M470,395 L480,422 L510,428 L540,420 L555,402" fill="#7a8a90" stroke="#6a7a80" stroke-width="1"/>
+  <!-- Pectoral fin -->
+  <path d="M210,315 L185,358 Q198,366 210,352 L235,322" fill="#8a9aa0" opacity="0.7"/>
+  <!-- Ventral fin -->
+  <path d="M310,382 L298,412 Q310,418 318,408 L322,385" fill="#8a9aa0" opacity="0.7"/>
+  <!-- Tail fin - forked -->
+  <path d="M712,305 L752,270 Q760,288 756,308 L754,325 L760,345 Q758,365 750,375 L712,338" fill="#6a7a80" stroke="#5a6870" stroke-width="1"/>
+  <!-- Eye -->
+  <circle cx="170" cy="272" r="13" fill="#1a1a1a"/>
+  <circle cx="168" cy="270" r="5.5" fill="#4a4a3a"/>
+  <circle cx="166" cy="268" r="2.5" fill="#ffffff" opacity="0.3"/>
+  <!-- Protruding lower jaw - signature feature of Hasu -->
+  <path d="M122,295 Q140,308 165,300" stroke="#4a5a60" stroke-width="2.5" fill="none"/>
+  <path d="M120,298 Q125,305 138,310" stroke="#5a6870" stroke-width="2" fill="none"/>
+  <!-- Gill -->
+  <line x1="195" y1="258" x2="198" y2="328" stroke="#5a6870" stroke-width="2" opacity="0.4"/>
+  <!-- Label -->
+  <text x="400" y="480" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="42" fill="#ffffff" font-weight="bold" opacity="0.9">ハス</text>
+  <text x="400" y="520" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="20" fill="#88bb88" opacity="0.7">Opsariichthys uncirostris</text>
+</svg>

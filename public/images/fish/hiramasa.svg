@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a2a4a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#061525;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3a5a78;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#90a0b0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d0d5da;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="200" cy="90" rx="180" ry="40" fill="#0e3258" opacity="0.3"/>
+  <ellipse cx="600" cy="480" rx="150" ry="35" fill="#050e1a" opacity="0.3"/>
+  <!-- Hiramasa (Yellowtail Amberjack) - silver with yellow stripe, sleek power -->
+  <!-- Main body - powerful, torpedo shape -->
+  <path d="M90,290 Q130,248 230,232 Q360,215 490,222 Q600,232 670,255 Q720,275 740,295 Q748,310 740,328 Q720,355 660,372 Q580,390 470,395 Q350,398 250,388 Q175,375 130,348 Q100,328 92,305 Z" fill="url(#body)"/>
+  <!-- Dark blue-green back -->
+  <path d="M95,290 Q130,258 230,242 Q360,225 490,230 Q600,238 670,258 Q720,278 740,295 L740,290 Q720,270 670,250 Q600,230 490,220 Q360,212 230,228 Q140,245 98,280 Z" fill="#2a4a65" opacity="0.7"/>
+  <!-- Yellow lateral stripe - signature feature -->
+  <path d="M130,290 Q250,278 400,275 Q550,278 680,295" stroke="#d4a820" stroke-width="6" fill="none" opacity="0.7" stroke-linecap="round"/>
+  <path d="M130,290 Q250,278 400,275 Q550,278 680,295" stroke="#e8c030" stroke-width="3" fill="none" opacity="0.5" stroke-linecap="round"/>
+  <!-- Silver shine on side -->
+  <path d="M110,300 Q230,292 400,288 Q570,292 710,308" stroke="#e0e4e8" stroke-width="2" fill="none" opacity="0.3"/>
+  <!-- Lighter belly -->
+  <path d="M105,310 Q140,340 230,365 Q340,382 460,388 Q570,388 650,375 Q700,362 730,340 Q742,325 742,310 Q740,330 725,348 Q690,372 610,388 Q510,400 390,402 Q280,400 200,385 Q140,368 110,340 Z" fill="#e0e4e8" opacity="0.3"/>
+  <!-- Dorsal fin -->
+  <path d="M280,235 L298,185 Q310,178 320,185 L345,230" fill="#3a5a70" stroke="#2a4a60" stroke-width="1"/>
+  <!-- Soft dorsal -->
+  <path d="M440,225 L450,200 L470,192 L500,198 L530,212 L560,235 L580,255" fill="#3a5a70" stroke="#2a4a60" stroke-width="1" opacity="0.8"/>
+  <!-- Anal fin -->
+  <path d="M500,392 L510,420 L540,426 L565,418 L580,398" fill="#5a7a90" stroke="#4a6a80" stroke-width="1"/>
+  <!-- Pectoral fin -->
+  <path d="M200,310 L172,358 Q185,368 198,355 L225,320" fill="#5a7a90" opacity="0.7"/>
+  <!-- Ventral fin -->
+  <path d="M270,378 L258,410 Q270,415 278,405 L282,382" fill="#6a8a98" opacity="0.7"/>
+  <!-- Tail fin - powerful, lunate -->
+  <path d="M730,300 L772,260 Q780,278 776,298 L774,318 L780,340 Q778,358 770,370 L730,332" fill="#3a5a70" stroke="#2a4a60" stroke-width="1"/>
+  <!-- Narrow caudal peduncle -->
+  <path d="M715,290 L730,285 L732,295 L732,318 L730,330 L715,325 Z" fill="#5a7a90"/>
+  <!-- Yellow on tail -->
+  <path d="M735,300 L770,265" stroke="#d4a820" stroke-width="3" fill="none" opacity="0.4"/>
+  <path d="M735,318 L770,360" stroke="#d4a820" stroke-width="3" fill="none" opacity="0.4"/>
+  <!-- Eye -->
+  <circle cx="148" cy="275" r="13" fill="#1a1a1a"/>
+  <circle cx="146" cy="273" r="5.5" fill="#3a3a4a"/>
+  <circle cx="144" cy="271" r="2" fill="#ffffff" opacity="0.3"/>
+  <!-- Eye stripe (yellow going through eye) -->
+  <path d="M138,262 Q148,275 140,290" stroke="#d4a820" stroke-width="2" fill="none" opacity="0.5"/>
+  <!-- Mouth -->
+  <path d="M94,294 Q108,304 135,298" stroke="#2a4050" stroke-width="2.5" fill="none"/>
+  <!-- Gill -->
+  <line x1="172" y1="260" x2="176" y2="325" stroke="#3a5a70" stroke-width="2" opacity="0.4"/>
+  <!-- Label -->
+  <text x="400" y="480" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="42" fill="#ffffff" font-weight="bold" opacity="0.9">ヒラマサ</text>
+  <text x="400" y="520" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="20" fill="#88bbdd" opacity="0.7">Yellowtail Amberjack</text>
+</svg>

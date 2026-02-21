@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a3020;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a1810;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2a4030;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4a6048;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- Murky freshwater ambiance -->
+  <ellipse cx="200" cy="90" rx="180" ry="40" fill="#1e3520" opacity="0.3"/>
+  <ellipse cx="600" cy="100" rx="140" ry="30" fill="#1e3520" opacity="0.2"/>
+  <!-- Water weeds -->
+  <path d="M30,600 Q40,480 35,380 Q30,320 40,280" stroke="#1a3020" stroke-width="5" fill="none" opacity="0.5"/>
+  <path d="M55,600 Q60,500 58,420 Q55,370 62,330" stroke="#1a3020" stroke-width="4" fill="none" opacity="0.4"/>
+  <path d="M745,600 Q750,490 748,400 Q745,350 752,300" stroke="#1a3020" stroke-width="5" fill="none" opacity="0.5"/>
+  <path d="M770,600 Q775,510 772,430 Q770,380 775,340" stroke="#1a3020" stroke-width="4" fill="none" opacity="0.4"/>
+  <!-- Raigyo (Northern Snakehead) - dark green, spotted, snake-like head, long body -->
+  <!-- Main body - elongated, cylindrical, snake-like -->
+  <path d="M80,285 Q110,258 170,248 Q260,238 370,240 Q480,244 570,255 Q640,268 700,288 Q735,302 745,318 Q748,330 740,340 Q720,355 670,365 Q590,378 480,382 Q370,384 270,378 Q190,370 140,352 Q108,338 92,318 Q82,305 80,285 Z" fill="url(#body)"/>
+  <!-- Spotted/mottled pattern (dark spots on green) -->
+  <circle cx="180" cy="275" r="8" fill="#1a2a18" opacity="0.5"/>
+  <circle cx="230" cy="268" r="7" fill="#1a2a18" opacity="0.5"/>
+  <circle cx="280" cy="262" r="9" fill="#1a2a18" opacity="0.5"/>
+  <circle cx="340" cy="258" r="8" fill="#1a2a18" opacity="0.5"/>
+  <circle cx="400" cy="260" r="9" fill="#1a2a18" opacity="0.45"/>
+  <circle cx="460" cy="265" r="8" fill="#1a2a18" opacity="0.45"/>
+  <circle cx="520" cy="272" r="7" fill="#1a2a18" opacity="0.4"/>
+  <circle cx="575" cy="282" r="8" fill="#1a2a18" opacity="0.4"/>
+  <circle cx="630" cy="295" r="7" fill="#1a2a18" opacity="0.35"/>
+  <circle cx="680" cy="310" r="6" fill="#1a2a18" opacity="0.35"/>
+  <!-- Second row of spots -->
+  <circle cx="210" cy="310" r="6" fill="#1a2a18" opacity="0.4"/>
+  <circle cx="270" cy="310" r="7" fill="#1a2a18" opacity="0.4"/>
+  <circle cx="335" cy="310" r="6" fill="#1a2a18" opacity="0.35"/>
+  <circle cx="400" cy="315" r="7" fill="#1a2a18" opacity="0.35"/>
+  <circle cx="465" cy="318" r="6" fill="#1a2a18" opacity="0.35"/>
+  <circle cx="530" cy="322" r="6" fill="#1a2a18" opacity="0.3"/>
+  <circle cx="590" cy="335" r="5" fill="#1a2a18" opacity="0.3"/>
+  <!-- Lighter belly -->
+  <path d="M95,325 Q130,350 200,365 Q300,378 420,382 Q540,380 640,368 Q700,355 735,335 Q745,325 742,318 Q742,332 730,345 Q690,365 610,378 Q500,388 380,390 Q260,388 180,375 Q125,360 98,338 Z" fill="#5a7058" opacity="0.4"/>
+  <!-- Flat snake-like head shape -->
+  <path d="M80,270 Q85,255 100,248 Q120,240 140,242 L170,248" fill="#2a4030" stroke="#1a3020" stroke-width="1"/>
+  <!-- Head plate scales (snake-like pattern) -->
+  <path d="M95,258 Q105,252 115,258" stroke="#1a2a18" stroke-width="1.5" fill="none" opacity="0.5"/>
+  <path d="M110,252 Q120,246 130,252" stroke="#1a2a18" stroke-width="1.5" fill="none" opacity="0.5"/>
+  <path d="M100,268 Q110,262 120,268" stroke="#1a2a18" stroke-width="1.5" fill="none" opacity="0.5"/>
+  <!-- Long dorsal fin (runs most of body length) -->
+  <path d="M200,245 L210,218 L240,210 L280,205 L320,202 L360,200 L400,202 L440,205 L480,210 L520,218 L560,228 L600,242 L640,260 L670,275" fill="#2a4030" stroke="#1a3020" stroke-width="1" opacity="0.8"/>
+  <!-- Long anal fin -->
+  <path d="M400,382 L410,405 L440,410 L480,412 L520,408 L560,400 L600,388 L630,372 L660,358" fill="#3a5038" stroke="#2a4028" stroke-width="1" opacity="0.7"/>
+  <!-- Pectoral fin -->
+  <path d="M160,310 L140,348 Q152,356 162,342 L178,318" fill="#3a5038" opacity="0.7"/>
+  <!-- Round tail fin -->
+  <path d="M735,320 L762,310 Q770,322 768,338 Q765,352 758,360 L735,348" fill="#2a4030" stroke="#1a3020" stroke-width="1"/>
+  <!-- Eye - small, positioned on flat head -->
+  <circle cx="110" cy="268" r="9" fill="#1a1a0a"/>
+  <circle cx="108" cy="266" r="4" fill="#6a5a20"/>
+  <circle cx="107" cy="265" r="2" fill="#ffffff" opacity="0.3"/>
+  <!-- Large mouth with teeth -->
+  <path d="M82,290 Q100,302 130,298" stroke="#1a2a18" stroke-width="2.5" fill="none"/>
+  <!-- Teeth hints -->
+  <path d="M88,290 L90,296" stroke="#8a9a80" stroke-width="1" opacity="0.4"/>
+  <path d="M98,295 L100,300" stroke="#8a9a80" stroke-width="1" opacity="0.4"/>
+  <path d="M108,297 L110,302" stroke="#8a9a80" stroke-width="1" opacity="0.4"/>
+  <!-- Gill -->
+  <line x1="150" y1="258" x2="154" y2="318" stroke="#1a3020" stroke-width="2" opacity="0.4"/>
+  <!-- Label -->
+  <text x="400" y="480" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="42" fill="#ffffff" font-weight="bold" opacity="0.9">ライギョ</text>
+  <text x="400" y="520" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="20" fill="#88bb88" opacity="0.7">Northern Snakehead</text>
+</svg>

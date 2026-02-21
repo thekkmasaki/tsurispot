@@ -37,6 +37,19 @@ interface PageProps {
 
 const allFish = getFishSpeciesWithSpots();
 
+// 釣法名 → /methods/[slug] のマッピング（methods/[slug]ページに存在するもののみ）
+const METHOD_NAME_TO_SLUG: Record<string, string> = {
+  "サビキ釣り": "sabiki",
+  "アジング": "ajing",
+  "エギング": "eging",
+  "メバリング": "mebaring",
+  "ショアジギング": "shore-jigging",
+  "ちょい投げ": "choi-nage",
+  "ちょい投げ釣り": "choi-nage",
+  "ウキ釣り": "uki-zuri",
+  "穴釣り": "ana-zuri",
+};
+
 export async function generateStaticParams() {
   return allFish.map((fish) => ({
     slug: fish.slug,
@@ -426,7 +439,18 @@ export default async function FishDetailPage({ params }: PageProps) {
                 >
                   {/* 釣法名 + 難易度バッジ */}
                   <div className="mb-3 flex flex-wrap items-center gap-2 sm:mb-4">
-                    <h3 className="text-base font-bold sm:text-lg">{method.methodName}</h3>
+                    <h3 className="text-base font-bold sm:text-lg">
+                      {METHOD_NAME_TO_SLUG[method.methodName] ? (
+                        <Link
+                          href={`/methods/${METHOD_NAME_TO_SLUG[method.methodName]}`}
+                          className="hover:text-primary hover:underline"
+                        >
+                          {method.methodName}
+                        </Link>
+                      ) : (
+                        method.methodName
+                      )}
+                    </h3>
                     <span
                       className={`inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ${difficultyBadge.className}`}
                     >

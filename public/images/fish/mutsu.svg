@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a1a30;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#050d18;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2a3548;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4a5568;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- Deep sea particles -->
+  <circle cx="150" cy="80" r="1.5" fill="#ffffff" opacity="0.1"/>
+  <circle cx="380" cy="60" r="1" fill="#ffffff" opacity="0.08"/>
+  <circle cx="600" cy="100" r="1.5" fill="#ffffff" opacity="0.1"/>
+  <circle cx="700" cy="150" r="1" fill="#ffffff" opacity="0.07"/>
+  <!-- Mutsu (Japanese Bluefish) - dark bluish-grey body, large eyes -->
+  <!-- Main body - deep-bodied -->
+  <path d="M130,280 Q170,232 270,215 Q380,200 490,208 Q580,218 650,242 Q700,262 720,288 Q728,308 720,328 Q698,360 640,382 Q570,400 460,408 Q350,412 255,402 Q190,390 155,365 Q132,342 128,315 Z" fill="url(#body)"/>
+  <!-- Slightly lighter side -->
+  <path d="M138,295 Q175,265 270,250 Q380,238 490,242 Q580,250 650,268 Q700,282 720,298 L720,288 Q700,262 650,242 Q580,218 490,208 Q380,200 270,215 Q170,232 130,280 Z" fill="#354560" opacity="0.5"/>
+  <!-- Lighter belly -->
+  <path d="M140,325 Q170,355 250,380 Q350,400 460,405 Q560,402 630,388 Q680,372 710,348 Q722,332 722,318 Q720,338 706,358 Q670,382 590,398 Q500,412 390,414 Q280,412 200,395 Q155,378 140,350 Z" fill="#5a6578" opacity="0.4"/>
+  <!-- Metallic sheen -->
+  <path d="M160,290 Q300,278 440,278 Q580,282 700,300" stroke="#6a7590" stroke-width="2" fill="none" opacity="0.3"/>
+  <!-- Dorsal fin -->
+  <path d="M270,220 L288,168 Q300,158 312,168 L340,215" fill="#2a3548" stroke="#1a2538" stroke-width="1"/>
+  <!-- Soft dorsal -->
+  <path d="M420,212 L435,180 L460,172 L490,178 L520,192 L550,215 L580,240" fill="#2a3548" stroke="#1a2538" stroke-width="1" opacity="0.8"/>
+  <!-- Anal fin -->
+  <path d="M460,408 L472,438 L500,445 L530,438 L548,418" fill="#354560" stroke="#2a3548" stroke-width="1"/>
+  <!-- Pectoral fin -->
+  <path d="M218,315 L188,365 Q202,375 215,360 L242,325" fill="#354560" opacity="0.7"/>
+  <!-- Ventral fin -->
+  <path d="M290,395 L278,428 Q290,432 298,420 L302,398" fill="#3a4a60" opacity="0.7"/>
+  <!-- Tail fin - forked -->
+  <path d="M712,298 L755,260 Q762,278 758,300 L756,318 L762,340 Q758,360 750,372 L712,332" fill="#2a3548" stroke="#1a2538" stroke-width="1"/>
+  <!-- Large eye (deep sea adaptation) -->
+  <circle cx="185" cy="265" r="16" fill="#1a1a20"/>
+  <circle cx="185" cy="265" r="10" fill="#2a2a35"/>
+  <circle cx="182" cy="262" r="4" fill="#4a4a5a"/>
+  <circle cx="180" cy="260" r="2" fill="#ffffff" opacity="0.3"/>
+  <!-- Mouth -->
+  <path d="M134,288 Q150,300 178,295" stroke="#1a2538" stroke-width="2.5" fill="none"/>
+  <!-- Gill -->
+  <path d="M208" y1="248" x2="212" y2="340" stroke="#2a3548" stroke-width="2" fill="none" opacity="0.4"/>
+  <line x1="208" y1="248" x2="212" y2="340" stroke="#2a3548" stroke-width="2" opacity="0.4"/>
+  <!-- Label -->
+  <text x="400" y="490" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="42" fill="#ffffff" font-weight="bold" opacity="0.9">ムツ</text>
+  <text x="400" y="530" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="20" fill="#8899bb" opacity="0.7">Japanese Bluefish</text>
+</svg>

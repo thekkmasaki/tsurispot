@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a3520;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d1a10;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#6a5530;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8a7550;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- Freshwater greenish ambiance -->
+  <ellipse cx="200" cy="100" rx="180" ry="40" fill="#1e4530" opacity="0.3"/>
+  <ellipse cx="600" cy="110" rx="140" ry="30" fill="#1e4530" opacity="0.2"/>
+  <!-- Sandy/muddy bottom -->
+  <path d="M0,480 Q100,470 200,475 Q300,482 400,478 Q500,472 600,476 Q700,480 800,475 L800,600 L0,600 Z" fill="#3a3020" opacity="0.4"/>
+  <path d="M0,500 Q150,492 300,498 Q450,505 600,500 Q700,495 800,498 L800,600 L0,600 Z" fill="#2a2015" opacity="0.3"/>
+  <!-- Dojou (Weather Loach) - elongated eel-like brown body with barbels -->
+  <!-- Main body - very elongated, eel-like, with slight S-curve -->
+  <path d="M80,310 Q120,290 180,282 Q260,275 350,278 Q450,282 530,290 Q600,300 660,315 Q710,330 740,345 Q755,355 748,362 Q738,368 720,365 Q680,358 630,345 Q570,330 490,318 Q410,310 330,308 Q260,310 200,318 Q150,328 110,340 Q88,348 82,338 Q78,328 80,310 Z" fill="url(#body)"/>
+  <!-- Lighter belly -->
+  <path d="M88,330 Q120,340 200,348 Q300,355 420,350 Q530,342 630,350 Q690,358 730,365 Q742,366 745,362 Q738,368 720,368 Q680,362 630,355 Q530,348 420,358 Q310,365 210,358 Q140,350 100,340 Q86,336 88,330 Z" fill="#b0a080" opacity="0.5"/>
+  <!-- Dark spots/mottling along body -->
+  <circle cx="180" cy="295" r="5" fill="#4a3a20" opacity="0.4"/>
+  <circle cx="250" cy="290" r="4" fill="#4a3a20" opacity="0.4"/>
+  <circle cx="320" cy="292" r="5" fill="#4a3a20" opacity="0.4"/>
+  <circle cx="390" cy="298" r="4" fill="#4a3a20" opacity="0.4"/>
+  <circle cx="460" cy="305" r="5" fill="#4a3a20" opacity="0.35"/>
+  <circle cx="530" cy="312" r="4" fill="#4a3a20" opacity="0.35"/>
+  <circle cx="600" cy="325" r="4" fill="#4a3a20" opacity="0.3"/>
+  <circle cx="660" cy="338" r="3.5" fill="#4a3a20" opacity="0.3"/>
+  <!-- Dark lateral line -->
+  <path d="M120,305 Q250,295 400,298 Q550,308 700,342" stroke="#4a3a20" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <!-- Small dorsal fin (far back on body) -->
+  <path d="M520,292 L530,270 Q537,265 544,270 L552,290" fill="#6a5530" stroke="#5a4520" stroke-width="1"/>
+  <!-- Small anal fin -->
+  <path d="M560,335 L568,350 Q574,352 580,348 L585,332" fill="#6a5530" stroke="#5a4520" stroke-width="1"/>
+  <!-- Rounded tail fin -->
+  <path d="M738,348 L758,340 Q765,350 762,362 Q758,372 750,378 L738,368" fill="#6a5530" stroke="#5a4520" stroke-width="1"/>
+  <!-- Pectoral fin (small, rounded) -->
+  <path d="M145,318 L130,342 Q140,348 148,338 L158,320" fill="#6a5530" opacity="0.7"/>
+  <!-- Barbels (whiskers) - characteristic feature, 5 pairs -->
+  <path d="M82,305 L55,290 Q52,288 55,286" stroke="#7a6540" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M84,310 L50,300 Q47,298 50,296" stroke="#7a6540" stroke-width="2" fill="none" stroke-linecap="round"/>
+  <path d="M85,315 L52,312 Q49,312 52,310" stroke="#7a6540" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M84,320 L55,322 Q52,324 55,326" stroke="#7a6540" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+  <path d="M86,325 L60,330 Q57,332 60,334" stroke="#7a6540" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+  <!-- Eye - small -->
+  <circle cx="102" cy="300" r="6" fill="#1a1a0a"/>
+  <circle cx="101" cy="299" r="2.5" fill="#4a4a30"/>
+  <!-- Mouth - small, downward facing (bottom feeder) -->
+  <path d="M80,318 Q88,324 98,322" stroke="#4a3a20" stroke-width="1.5" fill="none"/>
+  <!-- Gill slit -->
+  <line x1="125" y1="295" x2="127" y2="320" stroke="#5a4520" stroke-width="1.5" opacity="0.4"/>
+  <!-- Bubbles -->
+  <circle cx="70" cy="275" r="4" fill="none" stroke="#ffffff" stroke-width="1" opacity="0.15"/>
+  <circle cx="60" cy="255" r="3" fill="none" stroke="#ffffff" stroke-width="0.8" opacity="0.12"/>
+  <circle cx="75" cy="240" r="2" fill="none" stroke="#ffffff" stroke-width="0.6" opacity="0.1"/>
+  <!-- Label -->
+  <text x="400" y="480" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="42" fill="#ffffff" font-weight="bold" opacity="0.9">ドジョウ</text>
+  <text x="400" y="520" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="20" fill="#88bb88" opacity="0.7">Weather Loach</text>
+</svg>

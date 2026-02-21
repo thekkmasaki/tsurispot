@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a3a5c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d1f33;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8B6914;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6B4E12;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="200" cy="100" rx="180" ry="40" fill="#1e4a6e" opacity="0.3"/>
+  <ellipse cx="600" cy="500" rx="160" ry="35" fill="#0a1520" opacity="0.3"/>
+  <!-- Bullhead Shark body - distinctive blunt head -->
+  <path d="M100,290 Q120,260 160,255 Q200,250 240,255 Q340,258 440,265 Q540,272 600,280 Q660,290 700,305 L720,300 Q710,290 690,278 L680,270 Q660,262 640,268 Q600,265 540,262 Q440,256 340,250 Q240,245 180,248 Q140,250 115,265 Q100,275 100,290 Z" fill="url(#body)"/>
+  <!-- Belly -->
+  <path d="M110,305 Q140,330 240,340 Q340,348 440,342 Q540,335 620,322 Q660,312 700,305 L720,310 Q690,330 640,342 Q580,352 480,358 Q380,362 280,355 Q200,348 140,330 Q115,320 110,305 Z" fill="#c4a050" opacity="0.7"/>
+  <!-- Distinctive blunt/rounded head ridge -->
+  <path d="M110,280 Q130,250 155,240 Q175,232 190,240 Q200,248 200,258" fill="#7a5a18" stroke="#6a4a10" stroke-width="1"/>
+  <!-- Dark spots pattern -->
+  <circle cx="250" cy="285" r="8" fill="#4a3510" opacity="0.5"/>
+  <circle cx="310" cy="278" r="7" fill="#4a3510" opacity="0.5"/>
+  <circle cx="370" cy="282" r="9" fill="#4a3510" opacity="0.5"/>
+  <circle cx="430" cy="288" r="7" fill="#4a3510" opacity="0.5"/>
+  <circle cx="490" cy="280" r="8" fill="#4a3510" opacity="0.5"/>
+  <circle cx="550" cy="285" r="6" fill="#4a3510" opacity="0.5"/>
+  <circle cx="280" cy="310" r="6" fill="#4a3510" opacity="0.4"/>
+  <circle cx="350" cy="315" r="7" fill="#4a3510" opacity="0.4"/>
+  <circle cx="420" cy="318" r="6" fill="#4a3510" opacity="0.4"/>
+  <circle cx="500" cy="310" r="5" fill="#4a3510" opacity="0.4"/>
+  <!-- Dorsal fin 1 - tall spine -->
+  <path d="M300,258 L310,200 Q318,195 325,200 L340,256" fill="#7a5a18" stroke="#6a4a10" stroke-width="1"/>
+  <!-- Dorsal fin 2 -->
+  <path d="M520,268 L530,230 Q536,226 542,230 L552,266" fill="#7a5a18" stroke="#6a4a10" stroke-width="1"/>
+  <!-- Pectoral fin -->
+  <path d="M200,315 L170,370 Q185,375 200,362 L240,325" fill="#7a5a18" opacity="0.8"/>
+  <!-- Tail fin -->
+  <path d="M690,290 L740,255 Q748,270 745,290 L738,310 L750,325 Q745,345 735,355 L690,315" fill="#7a5a18" stroke="#6a4a10" stroke-width="1"/>
+  <!-- Eye - large -->
+  <circle cx="145" cy="275" r="12" fill="#2a2a1a"/>
+  <circle cx="143" cy="273" r="5" fill="#5a5a3a"/>
+  <!-- Gill slits -->
+  <line x1="180" y1="272" x2="184" y2="308" stroke="#5a4a10" stroke-width="1.5" opacity="0.5"/>
+  <line x1="190" y1="270" x2="194" y2="310" stroke="#5a4a10" stroke-width="1.5" opacity="0.5"/>
+  <!-- Mouth -->
+  <path d="M108,298 Q125,308 145,305" stroke="#4a3510" stroke-width="2" fill="none"/>
+  <!-- Label -->
+  <text x="400" y="480" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="42" fill="#ffffff" font-weight="bold" opacity="0.9">ネコザメ</text>
+  <text x="400" y="520" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="20" fill="#88bbdd" opacity="0.7">Bullhead Shark</text>
+</svg>

@@ -878,6 +878,25 @@ export default function GearRodBeginnerPage() {
                   PEラインは感度が高く飛距離が出ますが、別途リーダー（先糸）が必要です。
                 </p>
               </div>
+              <div className="rounded-lg border border-amber-200 bg-amber-50/50 p-4">
+                <p className="mb-1 text-sm font-bold text-amber-900">
+                  おすすめライン：魚の目に見えないフロロカーボン
+                </p>
+                <p className="mb-3 text-xs text-amber-800 leading-relaxed">
+                  フロロカーボンラインは水中での屈折率が水に近く、<strong>魚の目にほぼ見えません</strong>。
+                  警戒心の強い魚にも有効で、根ズレにも強いため堤防釣り全般に最適です。
+                  初心者が最初に選ぶラインとして間違いなしの一本。
+                </p>
+                <a
+                  href="https://amzn.to/4tKXyzu"
+                  target="_blank"
+                  rel="noopener noreferrer nofollow"
+                  className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
+                >
+                  Amazonでおすすめラインを見る
+                  <ExternalLink className="size-3.5" />
+                </a>
+              </div>
               <div className="rounded-lg border p-4">
                 <p className="mb-1 text-sm font-bold">
                   ライン交換に便利！ 高速リサイクラー

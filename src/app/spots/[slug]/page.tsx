@@ -21,6 +21,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { fishingSpots, getSpotBySlug, getNearbySpots, type NearbySpot } from "@/lib/data/spots";
 import { getShopsForSpot } from "@/lib/data/shops";
+import { getPrefectureByName } from "@/lib/data/prefectures";
 import { SeasonCalendar } from "@/components/spots/season-calendar";
 import { BestTime } from "@/components/spots/best-time";
 import { TackleCard } from "@/components/spots/tackle-card";
@@ -102,6 +103,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
     publicAccess: true,
   };
 
+  const prefForBreadcrumb = getPrefectureByName(spot.region.prefecture);
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -118,9 +120,21 @@ export default async function SpotDetailPage({ params }: PageProps) {
         name: "釣りスポット一覧",
         item: "https://tsurispot.com/spots",
       },
-      {
+      ...(prefForBreadcrumb ? [{
         "@type": "ListItem",
         position: 3,
+        name: spot.region.prefecture,
+        item: `https://tsurispot.com/prefecture/${prefForBreadcrumb.slug}`,
+      }] : []),
+      {
+        "@type": "ListItem",
+        position: prefForBreadcrumb ? 4 : 3,
+        name: spot.region.areaName,
+        item: `https://tsurispot.com/area/${spot.region.slug}`,
+      },
+      {
+        "@type": "ListItem",
+        position: prefForBreadcrumb ? 5 : 4,
         name: spot.name,
         item: `https://tsurispot.com/spots/${spot.slug}`,
       },
@@ -221,6 +235,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
         items={[
           { label: "ホーム", href: "/" },
           { label: "釣りスポット", href: "/spots" },
+          ...((() => {
+            const pref = getPrefectureByName(spot.region.prefecture);
+            return pref ? [{ label: spot.region.prefecture, href: `/prefecture/${pref.slug}` }] : [];
+          })()),
+          { label: spot.region.areaName, href: `/area/${spot.region.slug}` },
           { label: spot.name },
         ]}
       />
@@ -259,9 +278,24 @@ export default async function SpotDetailPage({ params }: PageProps) {
           </div>
           <div className="flex items-center gap-1">
             <MapPin className="size-4" />
-            <span>
-              {spot.region.prefecture} {spot.region.areaName}
-            </span>
+            {(() => {
+              const pref = getPrefectureByName(spot.region.prefecture);
+              return (
+                <>
+                  {pref ? (
+                    <Link href={`/prefecture/${pref.slug}`} className="hover:text-foreground hover:underline">
+                      {spot.region.prefecture}
+                    </Link>
+                  ) : (
+                    <span>{spot.region.prefecture}</span>
+                  )}
+                  {" "}
+                  <Link href={`/area/${spot.region.slug}`} className="hover:text-foreground hover:underline">
+                    {spot.region.areaName}
+                  </Link>
+                </>
+              );
+            })()}
           </div>
         </div>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">

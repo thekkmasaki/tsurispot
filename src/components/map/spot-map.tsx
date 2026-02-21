@@ -1,14 +1,20 @@
 'use client';
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 import { MapContainer, TileLayer, Marker, Popup, useMap, Circle } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { fishingSpots } from '@/lib/data/spots';
 import Link from 'next/link';
-import { Star, Navigation, Loader2 } from 'lucide-react';
+import { Star, Navigation, Loader2, Heart } from 'lucide-react';
 import { DIFFICULTY_LABELS } from '@/types';
 import { Badge } from '@/components/ui/badge';
+
+const FAV_KEY = 'tsurispot-favorites';
+function getFavs(): string[] {
+  try { const r = localStorage.getItem(FAV_KEY); return r ? JSON.parse(r) : []; } catch { return []; }
+}
+function setFavs(s: string[]) { localStorage.setItem(FAV_KEY, JSON.stringify(s)); }
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -66,6 +72,21 @@ export function SpotMap() {
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [locating, setLocating] = useState(false);
   const [nearbyMode, setNearbyMode] = useState(false);
+  const [favorites, setFavorites] = useState<Set<string>>(new Set());
+
+  useEffect(() => {
+    setFavorites(new Set(getFavs()));
+  }, []);
+
+  const toggleFavorite = useCallback((slug: string) => {
+    setFavorites(prev => {
+      const next = new Set(prev);
+      if (next.has(slug)) { next.delete(slug); } else { next.add(slug); }
+      setFavs(Array.from(next));
+      window.dispatchEvent(new Event('favorites-updated'));
+      return next;
+    });
+  }, []);
 
   const handleLocate = useCallback(() => {
     if (!navigator.geolocation) return;
@@ -227,8 +248,23 @@ export function SpotMap() {
         {filteredSpots.map((spot) => (
           <Marker key={spot.id} position={[spot.latitude, spot.longitude]}>
             <Popup>
-              <div className="min-w-[200px] space-y-2 p-1">
-                <h3 className="text-sm font-bold leading-tight sm:text-base">{spot.name}</h3>
+              <div className="min-w-[220px] space-y-2 p-1">
+                <div className="flex items-start justify-between gap-2">
+                  <h3 className="text-sm font-bold leading-tight sm:text-base">{spot.name}</h3>
+                  <button
+                    onClick={(e) => { e.stopPropagation(); toggleFavorite(spot.slug); }}
+                    aria-label={favorites.has(spot.slug) ? 'お気に入り解除' : 'お気に入り登録'}
+                    style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '2px', flexShrink: 0 }}
+                  >
+                    <Heart
+                      className="size-5 transition-transform"
+                      style={{
+                        fill: favorites.has(spot.slug) ? '#ef4444' : 'none',
+                        color: favorites.has(spot.slug) ? '#ef4444' : '#9ca3af',
+                      }}
+                    />
+                  </button>
+                </div>
                 <div className="flex items-center gap-2 text-xs text-gray-600">
                   <span>{spot.region.prefecture} {spot.region.areaName}</span>
                   <Badge variant="secondary" className="text-[10px] px-1.5 py-0">
@@ -241,9 +277,9 @@ export function SpotMap() {
                 </div>
                 <Link
                   href={`/spots/${spot.slug}`}
-                  className="mt-2 inline-flex w-full items-center justify-center gap-1 rounded-lg bg-blue-600 px-4 py-2 text-sm font-bold text-white shadow-sm transition-all hover:bg-blue-700 hover:shadow-md active:scale-95"
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '4px', width: '100%', padding: '8px 16px', borderRadius: '8px', backgroundColor: '#1d4ed8', color: '#ffffff', fontSize: '14px', fontWeight: 700, textDecoration: 'none', marginTop: '8px', border: 'none' }}
                 >
-                  詳細を見る &rarr;
+                  詳細を見る →
                 </Link>
               </div>
             </Popup>

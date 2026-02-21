@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a3050;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d1828;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a3520;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#6a5535;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="250" cy="100" rx="180" ry="40" fill="#1e3a5e" opacity="0.25"/>
+  <ellipse cx="550" cy="490" rx="160" ry="35" fill="#0a1520" opacity="0.3"/>
+  <!-- Kue (Longtooth Grouper) - massive body, dark brown with darker bands -->
+  <!-- Main body - very deep and massive -->
+  <path d="M120,270 Q160,210 250,188 Q350,170 450,178 Q540,188 610,215 Q660,238 690,268 Q710,295 708,320 Q700,358 660,388 Q600,418 500,432 Q400,438 300,428 Q220,415 170,388 Q138,362 128,330 Q120,305 120,270 Z" fill="url(#body)"/>
+  <!-- Darker bands (characteristic) -->
+  <path d="M220,210 Q230,300 225,410" stroke="#3a2515" stroke-width="25" fill="none" opacity="0.3" stroke-linecap="round"/>
+  <path d="M340,185 Q345,300 340,430" stroke="#3a2515" stroke-width="28" fill="none" opacity="0.3" stroke-linecap="round"/>
+  <path d="M460,182 Q465,300 462,432" stroke="#3a2515" stroke-width="25" fill="none" opacity="0.25" stroke-linecap="round"/>
+  <path d="M570,210 Q575,300 570,415" stroke="#3a2515" stroke-width="22" fill="none" opacity="0.25" stroke-linecap="round"/>
+  <path d="M650,248 Q655,310 650,385" stroke="#3a2515" stroke-width="18" fill="none" opacity="0.2" stroke-linecap="round"/>
+  <!-- Lighter belly -->
+  <path d="M140,340 Q170,375 250,405 Q350,425 460,430 Q560,428 630,410 Q680,392 700,365 Q708,345 708,325 Q708,350 698,372 Q670,400 600,420 Q510,435 400,440 Q290,438 210,418 Q160,398 138,365 Z" fill="#8a7a60" opacity="0.4"/>
+  <!-- Large dorsal fin with spines -->
+  <path d="M230,195 L245,140 L265,128 L290,120 L320,118 L350,120 L380,125 L410,135 L440,150 L470,168 L500,185 L530,200 L560,215 Q530,210 470,195 Q400,185 330,182 Q270,185 240,195 Z" fill="#4a3520" stroke="#3a2515" stroke-width="1"/>
+  <!-- Spine tips on dorsal -->
+  <line x1="245" y1="140" x2="248" y2="132" stroke="#5a4530" stroke-width="1.5"/>
+  <line x1="265" y1="128" x2="268" y2="120" stroke="#5a4530" stroke-width="1.5"/>
+  <line x1="290" y1="120" x2="293" y2="112" stroke="#5a4530" stroke-width="1.5"/>
+  <line x1="320" y1="118" x2="323" y2="110" stroke="#5a4530" stroke-width="1.5"/>
+  <!-- Anal fin -->
+  <path d="M460,432 L475,462 L510,468 L545,458 L565,435" fill="#4a3520" stroke="#3a2515" stroke-width="1"/>
+  <!-- Pectoral fin - large, rounded -->
+  <path d="M210,320 L170,380 Q185,395 205,378 L245,340" fill="#5a4530" opacity="0.8"/>
+  <!-- Ventral fin -->
+  <path d="M290,418 L275,455 Q290,460 300,448 L305,422" fill="#5a4530" opacity="0.7"/>
+  <!-- Tail fin - rounded (grouper style) -->
+  <path d="M698,300 L738,275 Q748,295 745,318 L742,340 L748,362 Q745,380 738,390 L698,345" fill="#4a3520" stroke="#3a2515" stroke-width="1"/>
+  <!-- Eye -->
+  <circle cx="170" cy="255" r="14" fill="#1a1a0a"/>
+  <circle cx="168" cy="253" r="6" fill="#4a4a30"/>
+  <circle cx="166" cy="251" r="2.5" fill="#ffffff" opacity="0.3"/>
+  <!-- Large mouth - characteristic of grouper -->
+  <path d="M125,278 Q145,295 175,290" stroke="#3a2515" stroke-width="3" fill="none"/>
+  <!-- Protruding lower jaw -->
+  <path d="M122,282 Q130,290 148,295" stroke="#3a2515" stroke-width="2" fill="none"/>
+  <!-- Gill -->
+  <path d="M198,240 Q204,290 200,355" stroke="#3a2515" stroke-width="2.5" fill="none" opacity="0.4"/>
+  <!-- Gill plate spine -->
+  <path d="M200,340 L208,348" stroke="#5a4530" stroke-width="2" opacity="0.5"/>
+  <!-- Label -->
+  <text x="400" y="505" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="42" fill="#ffffff" font-weight="bold" opacity="0.9">クエ</text>
+  <text x="400" y="545" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="20" fill="#88bbdd" opacity="0.7">Longtooth Grouper</text>
+</svg>

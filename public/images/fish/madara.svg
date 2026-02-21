@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a3050;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d1828;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#6a6050;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#8a7a68;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c0b8a0;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="250" cy="100" rx="180" ry="40" fill="#1e3a5e" opacity="0.25"/>
+  <ellipse cx="550" cy="490" rx="160" ry="35" fill="#0a1520" opacity="0.3"/>
+  <!-- Madara (Pacific Cod) - large head, chin barbel, mottled pattern, 3 dorsal fins -->
+  <!-- Main body - large head, tapers to tail -->
+  <path d="M100,285 Q130,248 200,232 Q300,215 400,220 Q500,228 580,245 Q650,262 700,285 Q715,300 710,315 Q695,345 640,365 Q570,382 470,388 Q360,390 260,382 Q190,372 145,348 Q118,328 110,305 Z" fill="url(#body)"/>
+  <!-- Mottled pattern (brownish-grey) -->
+  <ellipse cx="220" cy="270" rx="20" ry="14" fill="#5a5040" opacity="0.4"/>
+  <ellipse cx="290" cy="255" rx="25" ry="16" fill="#5a5040" opacity="0.35"/>
+  <ellipse cx="370" cy="250" rx="22" ry="15" fill="#5a5040" opacity="0.35"/>
+  <ellipse cx="450" cy="258" rx="20" ry="14" fill="#5a5040" opacity="0.3"/>
+  <ellipse cx="530" cy="268" rx="18" ry="12" fill="#5a5040" opacity="0.3"/>
+  <ellipse cx="600" cy="280" rx="16" ry="10" fill="#5a5040" opacity="0.25"/>
+  <ellipse cx="260" cy="310" rx="18" ry="12" fill="#5a5040" opacity="0.3"/>
+  <ellipse cx="340" cy="320" rx="20" ry="13" fill="#5a5040" opacity="0.25"/>
+  <ellipse cx="420" cy="325" rx="18" ry="12" fill="#5a5040" opacity="0.25"/>
+  <ellipse cx="500" cy="318" rx="16" ry="10" fill="#5a5040" opacity="0.2"/>
+  <!-- White belly -->
+  <path d="M120,320 Q155,348 240,370 Q340,385 450,388 Q550,385 630,370 Q680,355 705,335 Q712,322 710,310 Q710,330 698,348 Q665,372 580,388 Q480,398 380,398 Q270,395 200,378 Q150,362 125,338 Z" fill="#d8d0c0" opacity="0.4"/>
+  <!-- Lateral line -->
+  <path d="M180,280 Q300,270 420,272 Q540,278 660,295" stroke="#e0d8c0" stroke-width="1.5" fill="none" opacity="0.4"/>
+  <!-- Three dorsal fins (characteristic of cod) -->
+  <path d="M220,235 L235,195 L255,188 L275,192 L290,235" fill="#6a6050" stroke="#5a5040" stroke-width="1"/>
+  <path d="M340,222 L355,185 L375,178 L400,182 L420,195 L440,222" fill="#6a6050" stroke="#5a5040" stroke-width="1"/>
+  <path d="M510,240 L522,208 L540,202 L558,208 L575,222 L590,245" fill="#6a6050" stroke="#5a5040" stroke-width="1"/>
+  <!-- Two anal fins -->
+  <path d="M340,385 L350,412 L375,418 L400,412 L415,395" fill="#8a7a68" stroke="#6a6050" stroke-width="1"/>
+  <path d="M480,382 L490,405 L510,410 L530,405 L540,388" fill="#8a7a68" stroke="#6a6050" stroke-width="1"/>
+  <!-- Pectoral fin -->
+  <path d="M190,305 L162,352 Q175,360 188,348 L215,315" fill="#7a7060" opacity="0.7"/>
+  <!-- Ventral fin -->
+  <path d="M210,365 L198,395 Q210,400 218,390 L222,368" fill="#8a7a68" opacity="0.7"/>
+  <!-- Chin barbel (characteristic of cod) -->
+  <path d="M120,302 L115,325 Q118,330 122,325" stroke="#5a5040" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <!-- Tail fin -->
+  <path d="M698,290 L738,262 Q745,278 742,298 L740,315 L745,335 Q742,352 735,362 L698,325" fill="#6a6050" stroke="#5a5040" stroke-width="1"/>
+  <!-- Eye - large -->
+  <circle cx="155" cy="268" r="14" fill="#1a1a1a"/>
+  <circle cx="153" cy="266" r="6" fill="#4a4a3a"/>
+  <circle cx="151" cy="264" r="2.5" fill="#ffffff" opacity="0.3"/>
+  <!-- Mouth - large and slightly upturned -->
+  <path d="M105,290 Q118,300 145,296" stroke="#4a4030" stroke-width="2.5" fill="none"/>
+  <!-- Gill -->
+  <line x1="178" y1="255" x2="182" y2="325" stroke="#5a5040" stroke-width="2" opacity="0.4"/>
+  <!-- Label -->
+  <text x="400" y="480" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="42" fill="#ffffff" font-weight="bold" opacity="0.9">マダラ</text>
+  <text x="400" y="520" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="20" fill="#88bbdd" opacity="0.7">Pacific Cod</text>
+</svg>

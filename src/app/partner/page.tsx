@@ -11,7 +11,7 @@ import {
   Megaphone,
   TrendingUp,
   Star,
-  Phone,
+
   Clock,
   Shield,
   Zap,
@@ -214,7 +214,7 @@ export default function PartnerPage() {
           </div>
         </div>
         <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-          <a href="mailto:partner@tsurispot.com">
+          <a href="mailto:fishingspotjapan@gmail.com">
             <Button size="lg" className="min-h-[48px] gap-2 bg-blue-600 px-8 text-white hover:bg-blue-700">
               <Mail className="size-4" />
               まずは無料プランから始める
@@ -310,7 +310,7 @@ export default function PartnerPage() {
                     </li>
                   ))}
                 </ul>
-                <a href="mailto:partner@tsurispot.com">
+                <a href="mailto:fishingspotjapan@gmail.com">
                   <Button
                     className={`w-full min-h-[44px] ${
                       plan.highlight
@@ -438,23 +438,13 @@ export default function PartnerPage() {
               </p>
             </div>
             <div className="flex flex-col items-center gap-3 sm:flex-row">
-              <a href="mailto:partner@tsurispot.com">
+              <a href="mailto:fishingspotjapan@gmail.com">
                 <Button
                   size="lg"
                   className="min-h-[48px] gap-2 bg-white px-8 text-blue-800 hover:bg-blue-50"
                 >
                   <Mail className="size-4" />
-                  partner@tsurispot.com
-                </Button>
-              </a>
-              <a href="mailto:partner@tsurispot.com?subject=掲載希望（電話希望）">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="min-h-[48px] gap-2 border-white/40 px-8 text-white hover:bg-white/10"
-                >
-                  <Phone className="size-4" />
-                  お電話でのご相談
+                  fishingspotjapan@gmail.com
                 </Button>
               </a>
             </div>
@@ -485,10 +475,10 @@ export default function PartnerPage() {
           相互リンク・コンテンツコラボ・取材協力なども随時受け付けています。
           お気軽に{" "}
           <a
-            href="mailto:partner@tsurispot.com"
+            href="mailto:fishingspotjapan@gmail.com"
             className="text-primary underline"
           >
-            partner@tsurispot.com
+            fishingspotjapan@gmail.com
           </a>{" "}
           までご連絡ください。
         </p>

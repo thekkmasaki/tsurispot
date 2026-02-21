@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a2a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#050515;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#cc2020;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#aa1515;stop-opacity:1" />
+    </linearGradient>
+    <radialGradient id="eye" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#daa520;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#b8860b;stop-opacity:1" />
+    </radialGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- Deep sea ambiance -->
+  <circle cx="150" cy="100" r="2" fill="#ffffff" opacity="0.15"/>
+  <circle cx="350" cy="80" r="1.5" fill="#ffffff" opacity="0.1"/>
+  <circle cx="550" cy="120" r="2" fill="#ffffff" opacity="0.12"/>
+  <circle cx="680" cy="90" r="1" fill="#ffffff" opacity="0.1"/>
+  <!-- Splendid Alfonsino - deep red body, large golden eyes, deep body -->
+  <!-- Main body - deep bodied -->
+  <path d="M160,280 Q200,210 280,190 Q360,175 440,180 Q520,188 580,210 Q630,230 660,260 Q680,285 680,310 Q675,345 650,370 Q610,400 540,415 Q460,425 380,420 Q300,412 240,390 Q190,365 170,335 Q155,310 160,280 Z" fill="url(#body)"/>
+  <!-- Lighter belly area -->
+  <path d="M180,330 Q200,360 260,385 Q330,405 420,410 Q510,412 580,395 Q630,378 655,350 Q665,335 670,315 Q670,335 660,355 Q630,390 560,408 Q480,422 390,425 Q310,422 250,400 Q200,378 175,348 Q168,338 180,330 Z" fill="#dd3535" opacity="0.5"/>
+  <!-- Scale texture hints -->
+  <path d="M250,280 Q260,275 270,280" stroke="#b01818" stroke-width="1" fill="none" opacity="0.4"/>
+  <path d="M300,260 Q310,255 320,260" stroke="#b01818" stroke-width="1" fill="none" opacity="0.4"/>
+  <path d="M350,250 Q360,245 370,250" stroke="#b01818" stroke-width="1" fill="none" opacity="0.4"/>
+  <path d="M400,252 Q410,247 420,252" stroke="#b01818" stroke-width="1" fill="none" opacity="0.4"/>
+  <path d="M450,260 Q460,255 470,260" stroke="#b01818" stroke-width="1" fill="none" opacity="0.4"/>
+  <!-- Dorsal fin - large, spiny -->
+  <path d="M260,195 L270,140 L290,130 L310,125 L330,128 L350,132 L370,138 L390,148 L420,165 L440,180 Q420,180 380,178 Q330,178 280,190 Z" fill="#dd3030" stroke="#bb2020" stroke-width="1"/>
+  <!-- Anal fin -->
+  <path d="M440,418 L460,450 L490,458 L520,452 L540,438 L550,415 Q520,418 480,418 Z" fill="#dd3030" stroke="#bb2020" stroke-width="1"/>
+  <!-- Pectoral fin -->
+  <path d="M240,310 L200,360 Q215,372 230,358 L260,325" fill="#cc2525" opacity="0.8"/>
+  <!-- Ventral fin -->
+  <path d="M310,400 L295,440 Q310,445 320,435 L330,408" fill="#cc2525" opacity="0.8"/>
+  <!-- Tail fin - forked -->
+  <path d="M665,280 L720,240 Q735,260 730,285 L725,310 L735,335 Q730,360 720,375 L665,335" fill="#cc2525" stroke="#bb2020" stroke-width="1"/>
+  <!-- Large golden eye - signature feature -->
+  <circle cx="215" cy="270" r="28" fill="url(#eye)"/>
+  <circle cx="215" cy="270" r="14" fill="#1a1a1a"/>
+  <circle cx="210" cy="265" r="5" fill="#ffffff" opacity="0.5"/>
+  <!-- Eye glow -->
+  <circle cx="215" cy="270" r="32" fill="none" stroke="#ffd700" stroke-width="2" opacity="0.3"/>
+  <!-- Mouth -->
+  <path d="M165,290 Q178,300 200,298" stroke="#8a1010" stroke-width="2.5" fill="none"/>
+  <!-- Gill -->
+  <path d="M240,255 Q245,290 242,330" stroke="#9a1515" stroke-width="2" fill="none" opacity="0.5"/>
+  <!-- Label -->
+  <text x="400" y="510" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="42" fill="#ffffff" font-weight="bold" opacity="0.9">キンメダイ</text>
+  <text x="400" y="548" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="20" fill="#ddaa55" opacity="0.7">Splendid Alfonsino</text>
+</svg>

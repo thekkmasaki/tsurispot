@@ -8,6 +8,7 @@ import { regions } from "@/lib/data/regions";
 import { fishingSpots } from "@/lib/data/spots";
 import { SpotCard } from "@/components/spots/spot-card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { getPrefectureByName } from "@/lib/data/prefectures";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -187,7 +188,11 @@ export default async function AreaDetailPage({ params }: PageProps) {
         items={[
           { label: "ホーム", href: "/" },
           { label: "エリア", href: "/area" },
-          { label: `${region.areaName}（${region.prefecture}）` },
+          ...((() => {
+            const pref = getPrefectureByName(region.prefecture);
+            return pref ? [{ label: region.prefecture, href: `/prefecture/${pref.slug}` }] : [];
+          })()),
+          { label: region.areaName },
         ]}
       />
 
@@ -209,7 +214,16 @@ export default async function AreaDetailPage({ params }: PageProps) {
           </h1>
         </div>
         <p className="mt-1 text-sm text-muted-foreground sm:text-base">
-          {region.prefecture} - {spots.length}件の釣りスポット
+          {(() => {
+            const pref = getPrefectureByName(region.prefecture);
+            return pref ? (
+              <Link href={`/prefecture/${pref.slug}`} className="hover:text-foreground hover:underline">
+                {region.prefecture}
+              </Link>
+            ) : (
+              <>{region.prefecture}</>
+            );
+          })()} - {spots.length}件の釣りスポット
         </p>
         {description && (
           <p className="mt-3 text-sm leading-relaxed text-muted-foreground">

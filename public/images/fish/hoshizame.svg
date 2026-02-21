@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a3a5c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d1f33;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7a7a80;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5a5a60;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="300" cy="120" rx="200" ry="45" fill="#1e4a6e" opacity="0.25"/>
+  <ellipse cx="500" cy="480" rx="180" ry="40" fill="#0a1520" opacity="0.3"/>
+  <!-- Smoothhound shark body - sleek and smooth -->
+  <path d="M110,295 Q160,268 250,262 Q360,255 470,260 Q570,266 640,275 Q690,284 720,300 L740,295 Q725,282 700,270 Q680,260 660,265 L630,260 Q570,254 470,250 Q360,245 250,252 Q170,258 130,275 Q112,285 110,295 Z" fill="url(#body)"/>
+  <!-- Belly -->
+  <path d="M120,310 Q170,335 260,342 Q370,350 480,345 Q570,338 640,325 Q680,315 720,300 L740,308 Q700,330 640,345 Q570,355 470,360 Q360,365 260,358 Q180,350 130,330 Q115,320 120,310 Z" fill="#b0b0b5" opacity="0.6"/>
+  <!-- White spots (star spots) -->
+  <circle cx="220" cy="280" r="4" fill="#e0e0e5" opacity="0.7"/>
+  <circle cx="270" cy="275" r="3.5" fill="#e0e0e5" opacity="0.7"/>
+  <circle cx="320" cy="270" r="4" fill="#e0e0e5" opacity="0.7"/>
+  <circle cx="370" cy="268" r="3" fill="#e0e0e5" opacity="0.7"/>
+  <circle cx="420" cy="270" r="4" fill="#e0e0e5" opacity="0.7"/>
+  <circle cx="470" cy="273" r="3.5" fill="#e0e0e5" opacity="0.7"/>
+  <circle cx="520" cy="277" r="3" fill="#e0e0e5" opacity="0.7"/>
+  <circle cx="570" cy="280" r="3.5" fill="#e0e0e5" opacity="0.6"/>
+  <circle cx="620" cy="285" r="3" fill="#e0e0e5" opacity="0.6"/>
+  <circle cx="240" cy="300" r="3" fill="#e0e0e5" opacity="0.5"/>
+  <circle cx="290" cy="298" r="3.5" fill="#e0e0e5" opacity="0.5"/>
+  <circle cx="345" cy="295" r="3" fill="#e0e0e5" opacity="0.5"/>
+  <circle cx="400" cy="296" r="3.5" fill="#e0e0e5" opacity="0.5"/>
+  <circle cx="455" cy="298" r="3" fill="#e0e0e5" opacity="0.5"/>
+  <circle cx="510" cy="300" r="3" fill="#e0e0e5" opacity="0.5"/>
+  <circle cx="560" cy="302" r="2.5" fill="#e0e0e5" opacity="0.5"/>
+  <!-- Dorsal fin -->
+  <path d="M350,258 L365,210 Q374,205 382,210 L395,256" fill="#6a6a70" stroke="#5a5a60" stroke-width="1"/>
+  <!-- Second dorsal -->
+  <path d="M560,268 L568,245 Q573,242 578,245 L585,266" fill="#6a6a70" stroke="#5a5a60" stroke-width="1"/>
+  <!-- Pectoral fin -->
+  <path d="M220,315 L195,365 Q210,370 222,358 L255,325" fill="#6a6a70" opacity="0.8"/>
+  <!-- Tail -->
+  <path d="M700,280 L748,248 Q755,265 752,285 L745,305 L758,318 Q752,340 742,350 L700,315" fill="#6a6a70" stroke="#5a5a60" stroke-width="1"/>
+  <!-- Eye -->
+  <circle cx="155" cy="285" r="9" fill="#1a1a1a"/>
+  <circle cx="153" cy="283" r="3.5" fill="#3a3a3a"/>
+  <!-- Gill slits -->
+  <line x1="185" y1="275" x2="188" y2="310" stroke="#5a5a60" stroke-width="1.5" opacity="0.5"/>
+  <line x1="195" y1="273" x2="198" y2="312" stroke="#5a5a60" stroke-width="1.5" opacity="0.5"/>
+  <line x1="205" y1="272" x2="208" y2="314" stroke="#5a5a60" stroke-width="1.5" opacity="0.5"/>
+  <!-- Mouth -->
+  <path d="M115,300 Q135,308 155,305" stroke="#4a4a4a" stroke-width="2" fill="none"/>
+  <!-- Label -->
+  <text x="400" y="480" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="42" fill="#ffffff" font-weight="bold" opacity="0.9">ホシザメ</text>
+  <text x="400" y="520" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="20" fill="#88bbdd" opacity="0.7">Starspotted Smoothhound</text>
+</svg>

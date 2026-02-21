@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1028;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0a0815;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#cc3030;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e05040;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- Deep sea ambiance -->
+  <circle cx="120" cy="80" r="1.5" fill="#ffffff" opacity="0.12"/>
+  <circle cx="400" cy="60" r="1" fill="#ffffff" opacity="0.08"/>
+  <circle cx="650" cy="100" r="2" fill="#ffffff" opacity="0.1"/>
+  <!-- Akamutsu (Blackthroat Seaperch/Nodoguro) - red body, large eyes -->
+  <!-- Main body - moderately deep -->
+  <path d="M140,285 Q180,240 270,222 Q370,208 470,215 Q560,225 630,248 Q680,268 700,290 Q710,310 700,332 Q680,360 620,380 Q550,398 450,405 Q350,408 260,398 Q195,385 160,360 Q138,338 135,310 Z" fill="url(#body)"/>
+  <!-- Lighter belly area -->
+  <path d="M150,325 Q175,355 250,380 Q340,398 440,402 Q540,400 610,385 Q660,370 690,345 Q700,332 702,318 Q700,340 685,360 Q650,385 570,400 Q480,412 380,412 Q280,410 210,392 Q165,375 148,348 Z" fill="#e86060" opacity="0.5"/>
+  <!-- Scale hints -->
+  <path d="M280,260 Q290,255 300,260" stroke="#b02525" stroke-width="1" fill="none" opacity="0.4"/>
+  <path d="M340,250 Q350,245 360,250" stroke="#b02525" stroke-width="1" fill="none" opacity="0.4"/>
+  <path d="M410,252 Q420,247 430,252" stroke="#b02525" stroke-width="1" fill="none" opacity="0.4"/>
+  <path d="M480,258 Q490,253 500,258" stroke="#b02525" stroke-width="1" fill="none" opacity="0.4"/>
+  <!-- Dorsal fin -->
+  <path d="M260,225 L275,175 L300,162 L330,158 L360,162 L390,170 L420,182 L450,195 L480,215 Q460,215 400,212 Q340,212 280,222 Z" fill="#cc3535" stroke="#b02828" stroke-width="1"/>
+  <!-- Anal fin -->
+  <path d="M450,405 L460,435 L490,440 L520,432 L535,415 L540,400" fill="#cc3535" stroke="#b02828" stroke-width="1"/>
+  <!-- Pectoral fin -->
+  <path d="M225,310 L192,358 Q205,368 218,355 L248,320" fill="#d04040" opacity="0.8"/>
+  <!-- Ventral fin -->
+  <path d="M300,392 L288,425 Q300,430 308,418 L312,395" fill="#d04040" opacity="0.7"/>
+  <!-- Tail fin -->
+  <path d="M692,295 L735,260 Q742,278 738,298 L735,318 L740,340 Q738,358 730,370 L692,330" fill="#cc3535" stroke="#b02828" stroke-width="1"/>
+  <!-- Large eye -->
+  <circle cx="195" cy="268" r="18" fill="#1a1a1a"/>
+  <circle cx="195" cy="268" r="12" fill="#333320"/>
+  <circle cx="192" cy="265" r="5" fill="#555540"/>
+  <circle cx="190" cy="263" r="2.5" fill="#ffffff" opacity="0.4"/>
+  <!-- Black inside mouth - signature feature -->
+  <path d="M142,290 Q158,302 180,298" stroke="#2a1010" stroke-width="2.5" fill="none"/>
+  <path d="M145,290 Q155,298 172,295" fill="#1a0808" opacity="0.8"/>
+  <!-- Gill -->
+  <path d="M218,252 Q222,285 220,340" stroke="#a02020" stroke-width="2" fill="none" opacity="0.4"/>
+  <!-- Label -->
+  <text x="400" y="490" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="42" fill="#ffffff" font-weight="bold" opacity="0.9">アカムツ</text>
+  <text x="400" y="528" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="20" fill="#dd8888" opacity="0.7">Blackthroat Seaperch</text>
+</svg>

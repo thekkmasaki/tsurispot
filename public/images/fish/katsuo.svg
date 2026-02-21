@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a2a4a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#061525;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="back" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a3a6a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#2a4a7a;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="200" cy="90" rx="180" ry="40" fill="#0e3258" opacity="0.3"/>
+  <ellipse cx="600" cy="480" rx="150" ry="35" fill="#050e1a" opacity="0.3"/>
+  <!-- Skipjack Tuna - torpedo shaped, fast swimmer -->
+  <!-- Upper body (dark blue back) -->
+  <path d="M100,290 Q140,250 220,235 Q320,218 420,222 Q520,226 600,240 Q660,252 700,272 L720,268 Q700,255 660,240 Q600,225 520,215 Q420,208 320,210 Q220,212 160,230 Q120,245 100,270 Z" fill="url(#back)"/>
+  <!-- Lower body (silver belly) -->
+  <path d="M100,290 Q100,310 120,330 Q160,358 250,370 Q360,382 470,378 Q560,372 640,355 Q690,342 720,320 L730,310 Q720,325 700,340 Q660,358 580,370 Q480,382 370,385 Q260,382 180,368 Q130,352 110,330 Q100,315 100,290 Z" fill="#c0c8d0" opacity="0.8"/>
+  <!-- Silver side -->
+  <path d="M100,290 Q140,280 250,278 Q380,275 500,280 Q600,286 680,298 L720,308 L720,268 Q660,252 600,240 Q520,226 420,222 Q320,218 220,235 Q140,250 100,290 Z" fill="#a0aab5" opacity="0.5"/>
+  <!-- Dark lateral stripes (characteristic of skipjack) -->
+  <line x1="200" y1="310" x2="680" y2="340" stroke="#2a3a50" stroke-width="4" opacity="0.6" stroke-linecap="round"/>
+  <line x1="180" y1="325" x2="670" y2="355" stroke="#2a3a50" stroke-width="4" opacity="0.5" stroke-linecap="round"/>
+  <line x1="170" y1="340" x2="660" y2="365" stroke="#2a3a50" stroke-width="3.5" opacity="0.5" stroke-linecap="round"/>
+  <line x1="175" y1="355" x2="650" y2="375" stroke="#2a3a50" stroke-width="3" opacity="0.4" stroke-linecap="round"/>
+  <!-- Dorsal fin -->
+  <path d="M280,225 L310,170 Q325,162 335,170 L350,220" fill="#1a3060" stroke="#15254a" stroke-width="1"/>
+  <!-- Small finlets on top -->
+  <path d="M600,244 L607,230 L614,242" fill="#1a3060" opacity="0.7"/>
+  <path d="M625,250 L632,237 L639,249" fill="#1a3060" opacity="0.7"/>
+  <path d="M648,258 L654,246 L660,257" fill="#1a3060" opacity="0.7"/>
+  <!-- Small finlets on bottom -->
+  <path d="M600,360 L607,374 L614,362" fill="#8a9aa5" opacity="0.6"/>
+  <path d="M625,355" fill="#8a9aa5" opacity="0.6"/>
+  <path d="M625,355 L632,368 L639,356" fill="#8a9aa5" opacity="0.6"/>
+  <!-- Pectoral fin -->
+  <path d="M195,300 L165,340 Q175,348 190,338 L220,310" fill="#3a5070" opacity="0.7"/>
+  <!-- Tail fin - powerful forked -->
+  <path d="M710,278 L760,240 Q768,255 762,275 L755,295 L762,315 Q765,335 758,355 L710,320" fill="#1a3060" stroke="#15254a" stroke-width="1"/>
+  <!-- Narrow peduncle before tail -->
+  <path d="M690,285 L710,278 L710,320 L690,312 Z" fill="#5a6a78"/>
+  <!-- Eye -->
+  <circle cx="140" cy="272" r="12" fill="#1a1a20"/>
+  <circle cx="138" cy="270" r="5" fill="#3a3a4a"/>
+  <!-- Mouth -->
+  <path d="M100,285 Q108,295 130,293" stroke="#2a3a50" stroke-width="2" fill="none"/>
+  <!-- Label -->
+  <text x="400" y="480" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="42" fill="#ffffff" font-weight="bold" opacity="0.9">カツオ</text>
+  <text x="400" y="520" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="20" fill="#88bbdd" opacity="0.7">Skipjack Tuna</text>
+</svg>

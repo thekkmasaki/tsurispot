@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a3a5c;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d1f33;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3a4a30;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#5a6a40;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8a9a70;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <ellipse cx="200" cy="100" rx="180" ry="40" fill="#1e4a6e" opacity="0.25"/>
+  <ellipse cx="600" cy="490" rx="160" ry="35" fill="#0a1520" opacity="0.3"/>
+  <!-- Hokke (Atka Mackerel) - dark back, lighter belly, yellowish-green tint, elongated -->
+  <!-- Main body -->
+  <path d="M100,295 Q140,258 240,242 Q360,225 480,232 Q580,240 650,258 Q700,275 720,295 Q725,310 720,325 Q700,352 640,370 Q570,385 470,390 Q360,393 260,385 Q190,375 148,350 Q120,332 110,310 Z" fill="url(#body)"/>
+  <!-- Silver-green side -->
+  <path d="M110,295 Q140,280 240,270 Q360,260 480,265 Q580,272 650,285 Q700,295 720,305 L720,295 Q700,275 650,258 Q580,240 480,232 Q360,225 240,242 Q140,258 100,295 Z" fill="#6a7a50" opacity="0.6"/>
+  <!-- Lighter belly -->
+  <path d="M120,320 Q155,348 240,370 Q340,385 450,388 Q550,387 630,375 Q680,362 710,340 Q720,328 720,315 Q720,335 705,352 Q670,375 590,388 Q500,398 400,400 Q300,398 220,385 Q160,370 128,342 Z" fill="#c0c8a0" opacity="0.5"/>
+  <!-- Dark vertical bands/bars (characteristic) -->
+  <path d="M230,248 Q234,290 232,375" stroke="#2a3520" stroke-width="8" fill="none" opacity="0.3" stroke-linecap="round"/>
+  <path d="M310,235 Q314,290 312,385" stroke="#2a3520" stroke-width="8" fill="none" opacity="0.3" stroke-linecap="round"/>
+  <path d="M390,232 Q394,290 392,388" stroke="#2a3520" stroke-width="8" fill="none" opacity="0.25" stroke-linecap="round"/>
+  <path d="M470,235 Q474,290 472,386" stroke="#2a3520" stroke-width="7" fill="none" opacity="0.25" stroke-linecap="round"/>
+  <path d="M540,242 Q544,290 542,380" stroke="#2a3520" stroke-width="7" fill="none" opacity="0.2" stroke-linecap="round"/>
+  <path d="M610,258 Q613,290 610,368" stroke="#2a3520" stroke-width="6" fill="none" opacity="0.2" stroke-linecap="round"/>
+  <!-- Long dorsal fin (continuous) -->
+  <path d="M220,245 L240,200 L280,188 L320,182 L360,180 L400,182 L440,188 L480,195 L520,205 L560,218 L590,235 L620,255" fill="#4a5a35" stroke="#3a4a28" stroke-width="1" opacity="0.8"/>
+  <!-- Anal fin -->
+  <path d="M420,390 L430,418 L460,425 L490,420 L520,412 L540,395" fill="#6a7a50" stroke="#5a6a40" stroke-width="1"/>
+  <!-- Pectoral fin -->
+  <path d="M195,310 L165,358 Q178,368 192,355 L220,320" fill="#5a6a40" opacity="0.7"/>
+  <!-- Ventral fin -->
+  <path d="M280,378 L268,408 Q280,412 288,402 L295,380" fill="#6a7a50" opacity="0.7"/>
+  <!-- Tail fin -->
+  <path d="M710,295 L755,258 Q762,275 758,298 L755,318 L760,340 Q758,358 748,370 L710,328" fill="#4a5a35" stroke="#3a4a28" stroke-width="1"/>
+  <!-- Eye -->
+  <circle cx="150" cy="278" r="12" fill="#1a1a1a"/>
+  <circle cx="148" cy="276" r="5" fill="#4a4a30"/>
+  <!-- Mouth -->
+  <path d="M105,298 Q118,308 142,302" stroke="#3a4a28" stroke-width="2" fill="none"/>
+  <!-- Gill -->
+  <line x1="178" y1="265" x2="182" y2="320" stroke="#4a5a35" stroke-width="2" opacity="0.4"/>
+  <!-- Label -->
+  <text x="400" y="480" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="42" fill="#ffffff" font-weight="bold" opacity="0.9">ホッケ</text>
+  <text x="400" y="520" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="20" fill="#88bbdd" opacity="0.7">Atka Mackerel</text>
+</svg>
