@@ -12,6 +12,7 @@ import {
   Lightbulb,
   Package,
   Calendar,
+  ExternalLink,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -361,6 +362,49 @@ export default async function MonthlyGuidePage({ params }: Props) {
               </Card>
             ))}
           </div>
+
+          {/* 冬月の防寒アフィリエイト (11,12,1,2,3月) */}
+          {[1, 2, 3, 11, 12].includes(guide.month) && (
+            <div className="mt-6 space-y-3">
+              <h3 className="text-sm font-bold text-blue-900">冬の釣りにおすすめの防寒アイテム</h3>
+              <Card className="border-orange-200 bg-orange-50/50 py-0">
+                <CardContent className="p-4">
+                  <p className="mb-1 text-sm font-bold text-orange-900">電熱ベスト — 釣り中の寒さ対策に最強</p>
+                  <p className="mb-3 text-xs text-orange-800 leading-relaxed">
+                    USB給電で背中・腹部を温める電熱ベスト。風の強い堤防での釣りでも体の芯からポカポカ。
+                    モバイルバッテリーで稼働するのでコンセント不要。防寒着の中に着るだけでOK。
+                  </p>
+                  <a
+                    href="https://amzn.to/4tJlbIR"
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
+                  >
+                    Amazonで電熱ベストを見る
+                    <ExternalLink className="size-3.5" />
+                  </a>
+                </CardContent>
+              </Card>
+              <Card className="border-blue-200 bg-blue-50/50 py-0">
+                <CardContent className="p-4">
+                  <p className="mb-1 text-sm font-bold text-blue-900">モバイルバッテリー — 信頼できるメーカーを選ぼう</p>
+                  <p className="mb-3 text-xs text-blue-800 leading-relaxed">
+                    電熱ベストの給電だけでなく、<strong>釣り中にスマホの充電が切れると潮汐アプリや地図、緊急連絡が使えなくなり危険</strong>です。
+                    安全のためにも信頼できるメーカーの大容量モバイルバッテリーを必ず持参しましょう。
+                  </p>
+                  <a
+                    href="https://amzn.to/4s3kDvE"
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
+                  >
+                    Amazonでモバイルバッテリーを見る
+                    <ExternalLink className="size-3.5" />
+                  </a>
+                </CardContent>
+              </Card>
+            </div>
+          )}
         </section>
 
         {/* 前月・翌月ナビ */}
