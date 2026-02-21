@@ -482,30 +482,6 @@ export default async function SpotDetailPage({ params }: PageProps) {
             </section>
           )}
 
-          {/* コスパロッド紹介 */}
-          <section>
-            <Card className="overflow-hidden border-red-200 py-0">
-              <div className="border-b bg-red-50 px-3 py-2">
-                <p className="text-xs font-bold text-red-700">注目アイテム</p>
-              </div>
-              <CardContent className="p-3">
-                <p className="text-sm font-bold">炭素繊維シーバスロッド</p>
-                <p className="mt-1 text-xs text-muted-foreground">
-                  2,633円〜のカーボン製ルアーロッド。シーバス・エギング・ちょい投げに。
-                </p>
-                <a
-                  href="https://hb.afl.rakuten.co.jp/ichiba/5134daee.e7e21566.5134daef.1df36343/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fiflife%2F021-outdoor%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                  className="mt-2 inline-flex w-full items-center justify-center gap-1 rounded-md bg-[#BF0000] px-3 py-2 text-xs font-bold text-white hover:bg-[#A00000]"
-                >
-                  <ShoppingBag className="size-3" />
-                  楽天で見る（2,633円〜）
-                </a>
-              </CardContent>
-            </Card>
-          </section>
-
           {/* Access info */}
           <section>
             <h2 className="mb-4 text-lg font-bold">アクセス情報</h2>

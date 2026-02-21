@@ -120,20 +120,14 @@ function LineBuyTip() {
         </p>
         <p className="text-xs leading-relaxed text-sky-700">
           リールに最初から巻いてある糸は品質が低く、すぐ切れることがあります。
-          別売りのラインを自分で巻き替えるのがおすすめ。ライン交換には
-          <strong>ラインリサイクラー</strong>があると素早く均一に巻けて便利です。
+          別売りのラインを自分で巻き替えるのがおすすめです。
         </p>
         <a
-          href="https://hb.afl.rakuten.co.jp/ichiba/513505f3.9dc12d70.513505f4.52acab43/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjism%2F4995915331980-36-54383-n%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
-          target="_blank"
-          rel="noopener noreferrer nofollow"
-          className="mt-2 inline-flex w-full items-center justify-center gap-1 rounded-md bg-[#BF0000] px-3 py-2 text-xs font-bold text-white hover:bg-[#A00000]"
+          href="/gear/rod-beginner#line-tip"
+          className="mt-2 inline-flex w-full items-center justify-center gap-1 rounded-md bg-sky-600 px-3 py-2 text-xs font-bold text-white hover:bg-sky-700"
         >
-          高速リサイクラー2.0を楽天で見る（4,860円）
+          糸の選び方を詳しく見る →
         </a>
-        <p className="mt-1.5 text-[10px] text-muted-foreground">
-          ※ リール購入時にラインも一緒に買っておくと安心です
-        </p>
       </CardContent>
     </Card>
   );
