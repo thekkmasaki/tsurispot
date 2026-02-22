@@ -65,8 +65,8 @@ const difficulties = Object.entries(DIFFICULTY_LABELS) as [FishingSpot["difficul
 // Build unique prefecture list from regions
 const prefectures = Array.from(new Set(regions.map((r) => r.prefecture)));
 
-export function SpotListClient({ spots }: { spots: FishingSpot[] }) {
-  const [searchText, setSearchText] = useState("");
+export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpot[]; initialQuery?: string }) {
+  const [searchText, setSearchText] = useState(initialQuery);
   const [selectedPrefecture, setSelectedPrefecture] = useState<string>("");
   const [selectedArea, setSelectedArea] = useState<string>("");
   const [selectedType, setSelectedType] = useState<FishingSpot["spotType"] | "">("");

@@ -30,6 +30,7 @@ import { NearbySpots } from "@/components/nearby-spots";
 import { LocationRecommendations } from "@/components/location-recommendations";
 import { OnlineUsersBadge } from "@/components/online-users-badge";
 import { SpotImage, FishImage } from "@/components/ui/spot-image";
+import { HomeSearchBar } from "@/components/home-search-bar";
 
 export const metadata: Metadata = {
   title: "ツリスポ - 海釣り・川釣りスポット総合情報サイト｜全国の釣り場を地図で検索",
@@ -145,18 +146,7 @@ export default function Home() {
             </p>
 
             {/* 検索バー */}
-            <Link
-              href="/spots"
-              className="group mb-5 flex w-full max-w-lg items-center gap-3 rounded-xl bg-white/95 px-4 py-3.5 shadow-lg backdrop-blur-sm transition-shadow hover:shadow-xl sm:mb-6 sm:px-5 sm:py-4"
-            >
-              <Search className="size-5 shrink-0 text-muted-foreground" />
-              <span className="text-sm text-muted-foreground sm:text-base">
-                スポット名・地域で検索...
-              </span>
-              <span className="ml-auto shrink-0 rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-colors group-hover:bg-primary/90 sm:text-sm">
-                検索
-              </span>
-            </Link>
+            <HomeSearchBar />
 
             {/* フィルタータグ - 海釣り・川釣り両方 */}
             <div className="flex flex-wrap items-center justify-center gap-2">

@@ -41,7 +41,14 @@ const breadcrumbJsonLd = {
   ],
 };
 
-export default function SpotsPage() {
+export default async function SpotsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ q?: string; type?: string }>;
+}) {
+  const params = await searchParams;
+  const initialQuery = params.q || "";
+
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
@@ -70,7 +77,7 @@ export default function SpotsPage() {
           <span className="sm:hidden">投稿</span>
         </Link>
       </div>
-      <SpotListClient spots={fishingSpots} />
+      <SpotListClient spots={fishingSpots} initialQuery={initialQuery} />
     </div>
   );
 }
