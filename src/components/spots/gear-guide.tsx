@@ -15,6 +15,7 @@ const METHOD_SLUG_MAP: { pattern: RegExp; slug: string; label: string }[] = [
   { pattern: /ちょい投げ/, slug: "choi-nage", label: "ちょい投げガイド" },
   { pattern: /ウキ釣り|フカセ/, slug: "uki-zuri", label: "ウキ釣りガイド" },
   { pattern: /穴釣り|ブラクリ/, slug: "ana-zuri", label: "穴釣りガイド" },
+  { pattern: /タチウオ/, slug: "tachiuo-zuri", label: "タチウオ釣りガイド" },
 ];
 
 function getMethodPageLink(methodName: string): { slug: string; label: string } | null {

@@ -9,18 +9,19 @@ import {
   CircleDot,
   Crosshair,
   Compass,
+  Sword,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 export const metadata: Metadata = {
-  title: "釣り方・釣法ガイド - 8つの釣法を徹底解説",
+  title: "釣り方・釣法ガイド - 9つの釣法を徹底解説",
   description:
-    "サビキ釣り・アジング・エギング・ショアジギングなど、人気の釣法8種類を初心者向けにわかりやすく解説。必要なタックル、釣り方の手順、コツまで網羅。自分に合った釣り方を見つけよう。",
+    "サビキ釣り・アジング・エギング・ショアジギング・タチウオ釣りなど、人気の釣法9種類を初心者向けにわかりやすく解説。必要なタックル、釣り方の手順、コツまで網羅。自分に合った釣り方を見つけよう。",
   openGraph: {
-    title: "釣り方・釣法ガイド - 8つの釣法を徹底解説",
+    title: "釣り方・釣法ガイド - 9つの釣法を徹底解説",
     description:
-      "人気の釣法8種類を初心者向けに徹底解説。タックル・手順・コツまで網羅。",
+      "人気の釣法9種類を初心者向けに徹底解説。タックル・手順・コツまで網羅。",
     type: "website",
     url: "https://tsurispot.com/methods",
     siteName: "ツリスポ",
@@ -138,6 +139,15 @@ const methods: MethodSummary[] = [
     targetFish: ["カサゴ", "メバル", "ソイ"],
     icon: <Grip className="size-6 text-stone-600" />,
   },
+  {
+    slug: "tachiuo-zuri",
+    name: "タチウオ釣り",
+    nameEn: "Tachiuo Fishing",
+    description: "堤防から手軽にタチウオを狙える人気の夜釣り。ウキ釣り・テンヤ・ワインドなど多彩な釣法で挑む。",
+    difficulty: "intermediate",
+    targetFish: ["タチウオ"],
+    icon: <Sword className="size-6 text-slate-600" />,
+  },
 ];
 
 export default function MethodsIndexPage() {
@@ -159,7 +169,7 @@ export default function MethodsIndexPage() {
             </h1>
           </div>
           <p className="mt-2 text-sm text-muted-foreground sm:mt-3 sm:text-base">
-            初心者からベテランまで、8つの人気釣法をわかりやすく解説します
+            初心者からベテランまで、9つの人気釣法をわかりやすく解説します
           </p>
         </div>
 

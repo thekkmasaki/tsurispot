@@ -669,15 +669,11 @@ export default function GearRodBeginnerPage() {
                     </ul>
                   </div>
                 </div>
-                <a
-                  href="https://hb.afl.rakuten.co.jp/ichiba/5134daee.e7e21566.5134daef.1df36343/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fiflife%2F021-outdoor%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                  className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#BF0000] px-4 py-3.5 text-sm font-bold text-white transition-colors hover:bg-[#A00000] sm:w-auto sm:px-8"
+                <span
+                  className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-gray-300 px-4 py-3.5 text-sm font-bold text-gray-600 sm:w-auto sm:px-8"
                 >
-                  楽天で詳細を見る
-                  <ExternalLink className="size-3.5" />
-                </a>
+                  楽天で詳細を見る（準備中）
+                </span>
               </div>
             </CardContent>
           </Card>
@@ -878,24 +874,79 @@ export default function GearRodBeginnerPage() {
                   PEラインは感度が高く飛距離が出ますが、別途リーダー（先糸）が必要です。
                 </p>
               </div>
+              <div className="rounded-lg border border-sky-200 bg-sky-50/50 p-4">
+                <p className="mb-2 text-sm font-bold text-sky-900">
+                  道糸（メインライン）とハリスの違い
+                </p>
+                <p className="mb-3 text-xs text-sky-800 leading-relaxed">
+                  釣り糸は大きく<strong>道糸（メインライン）</strong>と<strong>ハリス（先糸）</strong>の2種類があります。
+                  道糸はリールに巻く糸で、ハリスは道糸の先に結んで針につなぐ糸です。
+                  初心者は<strong>両方を別々に購入</strong>しましょう。セット竿に付属する糸は品質が低いため、
+                  自分で選んだものに交換するのが釣果アップの第一歩です。
+                </p>
+              </div>
               <div className="rounded-lg border border-amber-200 bg-amber-50/50 p-4">
                 <p className="mb-1 text-sm font-bold text-amber-900">
-                  おすすめライン：魚の目に見えないフロロカーボン
+                  道糸のおすすめ：PEライン & ナイロンライン
                 </p>
                 <p className="mb-3 text-xs text-amber-800 leading-relaxed">
-                  フロロカーボンラインは水中での屈折率が水に近く、<strong>魚の目にほぼ見えません</strong>。
-                  警戒心の強い魚にも有効で、根ズレにも強いため堤防釣り全般に最適です。
-                  初心者が最初に選ぶラインとして間違いなしの一本。
+                  <strong>ナイロンライン</strong>はしなやかで扱いやすく、初心者の最初の1本に最適。
+                  トラブルが少なく、結びやすいのが特長です。
+                  <strong>PEライン</strong>は細くて強度が高く、飛距離が出て感度も抜群。
+                  ルアー釣りや遠投したい方におすすめですが、別途リーダー（先糸）が必要です。
                 </p>
-                <a
-                  href="https://amzn.to/4tKXyzu"
-                  target="_blank"
-                  rel="noopener noreferrer nofollow"
-                  className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
-                >
-                  Amazonでおすすめラインを見る
-                  <ExternalLink className="size-3.5" />
-                </a>
+                <div className="flex flex-col gap-2 sm:flex-row">
+                  <a
+                    href="https://amzn.to/4s1SPaX"
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
+                  >
+                    ナイロンライン（道糸）を見る
+                    <ExternalLink className="size-3.5" />
+                  </a>
+                  <a
+                    href="https://amzn.to/4s45H0i"
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
+                  >
+                    PEライン（道糸）を見る
+                    <ExternalLink className="size-3.5" />
+                  </a>
+                </div>
+              </div>
+              <div className="rounded-lg border border-green-200 bg-green-50/50 p-4">
+                <p className="mb-1 text-sm font-bold text-green-900">
+                  ハリス & フロロカーボンラインのおすすめ
+                </p>
+                <p className="mb-3 text-xs text-green-800 leading-relaxed">
+                  <strong>ハリス</strong>は道糸の先に結ぶ糸で、針に直接つなぎます。
+                  魚に一番近い部分なので、透明度と強度が重要です。
+                  <strong>フロロカーボン</strong>は水中での屈折率が水に近く、
+                  <strong>魚の目にほぼ見えません</strong>。
+                  警戒心の強い魚にも有効で、根ズレにも強いため堤防釣り全般に最適です。
+                </p>
+                <div className="flex flex-col gap-2 sm:flex-row">
+                  <a
+                    href="https://amzn.to/408jI1f"
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
+                  >
+                    ハリスを見る
+                    <ExternalLink className="size-3.5" />
+                  </a>
+                  <a
+                    href="https://amzn.to/4tKXyzu"
+                    target="_blank"
+                    rel="noopener noreferrer nofollow"
+                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
+                  >
+                    フロロカーボンラインを見る
+                    <ExternalLink className="size-3.5" />
+                  </a>
+                </div>
               </div>
               <div className="rounded-lg border p-4">
                 <p className="mb-1 text-sm font-bold">
@@ -906,15 +957,11 @@ export default function GearRodBeginnerPage() {
                   テーブルに固定して使えるので、一人でも簡単にライン交換できます。
                 </p>
                 <div className="flex flex-col gap-2 sm:flex-row">
-                  <a
-                    href="https://hb.afl.rakuten.co.jp/ichiba/513505f3.9dc12d70.513505f4.52acab43/?pc=https%3A%2F%2Fitem.rakuten.co.jp%2Fjism%2F4995915331980-36-54383-n%2F&link_type=picttext&ut=eyJwYWdlIjoiaXRlbSIsInR5cGUiOiJwaWN0dGV4dCIsInNpemUiOiIyNDB4MjQwIiwibmFtIjoxLCJuYW1wIjoicmlnaHQiLCJjb20iOjEsImNvbXAiOiJkb3duIiwicHJpY2UiOjEsImJvciI6MSwiY29sIjoxLCJiYnRuIjoxLCJwcm9kIjowLCJhbXAiOmZhbHNlfQ%3D%3D"
-                    target="_blank"
-                    rel="noopener noreferrer nofollow"
-                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#BF0000] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#A00000]"
+                  <span
+                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-gray-300 px-4 py-3 text-sm font-bold text-gray-600"
                   >
-                    第一精工 高速リサイクラー2.0 を楽天で見る
-                    <ExternalLink className="size-3.5" />
-                  </a>
+                    第一精工 高速リサイクラー2.0（リンク準備中）
+                  </span>
                 </div>
                 <p className="mt-2 text-xs text-muted-foreground">4,860円（税込）</p>
               </div>
