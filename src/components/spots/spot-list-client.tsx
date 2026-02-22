@@ -57,7 +57,7 @@ function haversineDistance(
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
-const ITEMS_PER_PAGE = 100;
+const ITEMS_PER_PAGE = 50;
 
 const spotTypes = Object.entries(SPOT_TYPE_LABELS) as [FishingSpot["spotType"], string][];
 const difficulties = Object.entries(DIFFICULTY_LABELS) as [FishingSpot["difficulty"], string][];
