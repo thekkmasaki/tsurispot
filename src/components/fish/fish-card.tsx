@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Star, TriangleAlert, Skull } from "lucide-react";
+import { Star, MapPin, TriangleAlert, Skull } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { DIFFICULTY_LABELS } from "@/types";
@@ -9,9 +9,10 @@ import { FishImage } from "@/components/ui/spot-image";
 interface FishCardProps {
   fish: FishSpecies;
   showPeakBadge?: boolean;
+  showSpots?: boolean;
 }
 
-export function FishCard({ fish, showPeakBadge }: FishCardProps) {
+export function FishCard({ fish, showPeakBadge, showSpots = false }: FishCardProps) {
   return (
     <Link href={`/fish/${fish.slug}`}>
       <Card className={`group h-full gap-0 overflow-hidden py-0 transition-shadow hover:shadow-md ${fish.isPoisonous ? "ring-2 ring-red-200" : ""}`}>
@@ -73,6 +74,17 @@ export function FishCard({ fish, showPeakBadge }: FishCardProps) {
 
           {/* サイズ */}
           <p className="text-xs text-muted-foreground">{fish.sizeCm}</p>
+
+          {/* 主な釣りスポット */}
+          {showSpots && fish.spots.length > 0 && (
+            <div className="flex items-start gap-1 border-t pt-1.5 mt-0.5">
+              <MapPin className="mt-0.5 size-3 shrink-0 text-muted-foreground" />
+              <p className="text-xs text-muted-foreground line-clamp-2">
+                {fish.spots.slice(0, 3).map((s) => s.name).join("、")}
+                {fish.spots.length > 3 && ` 他${fish.spots.length - 3}件`}
+              </p>
+            </div>
+          )}
         </CardContent>
       </Card>
     </Link>

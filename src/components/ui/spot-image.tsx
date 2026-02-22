@@ -1,7 +1,19 @@
 "use client";
 import Image from "next/image";
 import { useState } from "react";
-import { Fish } from "lucide-react";
+import {
+  Fish,
+  Anchor,
+  Waves,
+  TreePine,
+  Mountain,
+  Droplets,
+  Building2,
+  Ship,
+  Route,
+  MapPin,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 // 魚カテゴリ別のグラデーション
 const FISH_GRADIENTS = {
@@ -9,6 +21,91 @@ const FISH_GRADIENTS = {
   freshwater: "from-emerald-50 to-green-100",
   brackish: "from-teal-50 to-cyan-100",
 } as const;
+
+// スポットタイプ別のデザイン設定
+const SPOT_TYPE_STYLES: Record<
+  string,
+  {
+    gradient: string;
+    icon: LucideIcon;
+    iconColor: string;
+    pattern: string;
+    accentColor: string;
+  }
+> = {
+  port: {
+    gradient: "from-sky-400 via-blue-500 to-indigo-600",
+    icon: Anchor,
+    iconColor: "text-white/30",
+    pattern: "text-white/[0.06]",
+    accentColor: "bg-sky-300/20",
+  },
+  breakwater: {
+    gradient: "from-slate-400 via-blue-500 to-sky-600",
+    icon: Building2,
+    iconColor: "text-white/30",
+    pattern: "text-white/[0.06]",
+    accentColor: "bg-blue-300/20",
+  },
+  beach: {
+    gradient: "from-amber-300 via-orange-400 to-sky-500",
+    icon: Waves,
+    iconColor: "text-white/30",
+    pattern: "text-white/[0.06]",
+    accentColor: "bg-amber-200/20",
+  },
+  rocky: {
+    gradient: "from-stone-500 via-slate-600 to-blue-700",
+    icon: Mountain,
+    iconColor: "text-white/30",
+    pattern: "text-white/[0.06]",
+    accentColor: "bg-stone-300/20",
+  },
+  river: {
+    gradient: "from-emerald-400 via-teal-500 to-cyan-600",
+    icon: Droplets,
+    iconColor: "text-white/30",
+    pattern: "text-white/[0.06]",
+    accentColor: "bg-emerald-300/20",
+  },
+  lake: {
+    gradient: "from-teal-400 via-cyan-500 to-blue-600",
+    icon: Waves,
+    iconColor: "text-white/30",
+    pattern: "text-white/[0.06]",
+    accentColor: "bg-teal-300/20",
+  },
+  managed: {
+    gradient: "from-green-400 via-emerald-500 to-teal-600",
+    icon: TreePine,
+    iconColor: "text-white/30",
+    pattern: "text-white/[0.06]",
+    accentColor: "bg-green-300/20",
+  },
+  pier: {
+    gradient: "from-blue-400 via-indigo-500 to-violet-600",
+    icon: Ship,
+    iconColor: "text-white/30",
+    pattern: "text-white/[0.06]",
+    accentColor: "bg-indigo-300/20",
+  },
+  canal: {
+    gradient: "from-cyan-400 via-sky-500 to-blue-600",
+    icon: Route,
+    iconColor: "text-white/30",
+    pattern: "text-white/[0.06]",
+    accentColor: "bg-cyan-300/20",
+  },
+  estuary: {
+    gradient: "from-teal-400 via-emerald-500 to-sky-600",
+    icon: Droplets,
+    iconColor: "text-white/30",
+    pattern: "text-white/[0.06]",
+    accentColor: "bg-teal-300/20",
+  },
+};
+
+const DEFAULT_STYLE = SPOT_TYPE_STYLES.port;
 
 interface SpotImageProps {
   src?: string;
@@ -38,30 +135,51 @@ export function SpotImage({ src, alt, spotType = "port", className = "", height 
     );
   }
 
-  // 写真がない場合は Google Maps の埋め込み地図を表示
-  if (latitude && longitude) {
-    return (
-      <div className={`relative ${height} overflow-hidden ${className}`}>
-        <iframe
-          src={`https://maps.google.com/maps?q=${latitude},${longitude}&z=15&output=embed&t=k`}
-          width="100%"
-          height="100%"
-          style={{ border: 0, position: "absolute", top: 0, left: 0 }}
-          allowFullScreen
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          title={`${alt}の地図`}
+  // 写真がない場合はスポットタイプに応じた美しいプレースホルダーを表示
+  const style = SPOT_TYPE_STYLES[spotType] || DEFAULT_STYLE;
+  const IconComponent = style.icon;
+
+  return (
+    <div
+      className={`relative ${height} overflow-hidden bg-gradient-to-br ${style.gradient} ${className}`}
+    >
+      {/* 装飾パターン - 背景に散らばるアイコン */}
+      <div className="absolute inset-0 overflow-hidden">
+        <IconComponent
+          className={`absolute -top-3 -right-3 size-20 rotate-12 ${style.pattern}`}
+        />
+        <IconComponent
+          className={`absolute -bottom-2 -left-2 size-16 -rotate-12 ${style.pattern}`}
+        />
+        <IconComponent
+          className={`absolute top-1/2 left-1/4 size-10 rotate-45 ${style.pattern}`}
         />
       </div>
-    );
-  }
 
-  // 座標もない場合のフォールバック
-  return (
-    <div className={`flex ${height} items-center justify-center bg-gradient-to-br from-sky-100 to-blue-200 ${className}`}>
-      <div className="text-center text-primary/40">
-        <Fish className="mx-auto size-10" />
-        <span className="mt-1 block text-xs">写真準備中</span>
+      {/* 光のアクセント */}
+      <div
+        className={`absolute -top-8 -right-8 size-24 rounded-full ${style.accentColor} blur-2xl`}
+      />
+      <div
+        className={`absolute -bottom-6 -left-6 size-20 rounded-full ${style.accentColor} blur-xl`}
+      />
+
+      {/* メインコンテンツ */}
+      <div className="relative flex h-full flex-col items-center justify-center gap-1.5">
+        <div className="rounded-full bg-white/15 p-2.5 backdrop-blur-sm">
+          <IconComponent className="size-7 text-white/80" />
+        </div>
+        <span className="max-w-[80%] truncate text-center text-xs font-medium tracking-wide text-white/70">
+          {alt}
+        </span>
+        {latitude != null && longitude != null && (
+          <div className="flex items-center gap-1 text-white/40">
+            <MapPin className="size-2.5" />
+            <span className="text-[10px]">
+              {latitude.toFixed(2)}N, {longitude.toFixed(2)}E
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

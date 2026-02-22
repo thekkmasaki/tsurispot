@@ -17,11 +17,12 @@ import {
   Skull,
   ShieldAlert,
   Camera,
+  Users,
 } from "lucide-react";
 import { FishImage } from "@/components/ui/spot-image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { getFishSpeciesWithSpots } from "@/lib/data";
+import { getFishSpeciesWithSpots, getCoOccurringFish } from "@/lib/data";
 import { DIFFICULTY_LABELS, CATCH_RATING_LABELS } from "@/types";
 import { MonthCalendar } from "@/components/fish/month-calendar";
 import { NearbySpotsSorter } from "@/components/fish/nearby-spots-sorter";
@@ -129,6 +130,9 @@ export default async function FishDetailPage({ params }: PageProps) {
       },
     ],
   };
+
+  // Co-occurring fish (よく一緒に釣れる魚)
+  const coOccurringFish = getCoOccurringFish(fish.slug, 8);
 
   // Similar difficulty fish for internal linking
   const similarFish = allFish
@@ -521,6 +525,38 @@ export default async function FishDetailPage({ params }: PageProps) {
           </section>
         );
       })()}
+
+      {/* よく一緒に釣れる魚（共起魚種） */}
+      {coOccurringFish.length > 0 && (
+        <section className="mb-6 sm:mb-8">
+          <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+            <Users className="size-5 text-primary" />
+            {fish.name}と一緒に釣れる魚
+          </h2>
+          <p className="mb-3 text-xs text-muted-foreground sm:text-sm">
+            同じ釣り場で{fish.name}と一緒に狙える魚種です。
+          </p>
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
+            {coOccurringFish.map((cf) => (
+              <Link
+                key={cf.slug}
+                href={`/fish/${cf.slug}`}
+                title={`${cf.name}の釣り情報・釣り方を見る`}
+              >
+                <Badge
+                  variant="outline"
+                  className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
+                >
+                  {cf.name}
+                  <span className="ml-1 text-muted-foreground">
+                    ({cf.count}スポット共通)
+                  </span>
+                </Badge>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* 同じ難易度の魚種（内部リンク強化） */}
       {similarFish.length > 0 && (

@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { Star, Car, Toilet, Fish, ShoppingBag } from "lucide-react";
+import { Star, Car, Toilet, Fish, ShoppingBag, Navigation } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { FishingSpot, SPOT_TYPE_LABELS } from "@/types";
 import { SpotImage } from "@/components/ui/spot-image";
 import { FavoriteButton } from "@/components/spots/favorite-button";
 
-export function SpotCard({ spot }: { spot: FishingSpot }) {
+export function SpotCard({ spot, distance }: { spot: FishingSpot; distance?: number | null }) {
   const fishNames = spot.catchableFish.map((cf) => cf.fish.name);
   const displayFish = fishNames.slice(0, 3);
   const remainingCount = fishNames.length - 3;
@@ -40,6 +40,12 @@ export function SpotCard({ spot }: { spot: FishingSpot }) {
             </h3>
             <p className="mt-0.5 text-xs text-muted-foreground sm:text-sm">
               {spot.region.prefecture} {spot.region.areaName}
+              {distance != null && (
+                <span className="ml-1.5 inline-flex items-center gap-0.5 text-xs font-medium text-primary">
+                  <Navigation className="size-3" />
+                  約{distance < 1 ? `${Math.round(distance * 1000)}m` : distance < 10 ? `${distance.toFixed(1)}km` : `${Math.round(distance)}km`}
+                </span>
+              )}
             </p>
           </div>
 

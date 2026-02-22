@@ -210,40 +210,41 @@ export default function SpotSubmitPage() {
     setStatus("submitting");
 
     // メールで送信（Supabase接続前の暫定フロー）
-    const subject = encodeURIComponent(
-      `[ツリスポ] 新スポット投稿: ${form.spotName}`
-    );
+    const subject = `[ツリスポ] 新スポット投稿: ${form.spotName}`;
     const bodyLines = [
-      `■ スポット名: ${form.spotName}`,
-      `■ 都道府県: ${form.prefecture}`,
-      `■ エリア: ${form.areaName}`,
-      `■ 座標: ${form.latitude}, ${form.longitude}`,
-      `■ Google Maps: ${form.googleMapsUrl}`,
-      `■ タイプ: ${form.spotType}`,
-      `■ 難易度: ${form.difficulty}`,
-      `■ 無料: ${form.isFree ? "はい" : "いいえ"}`,
-      form.feeDetail ? `■ 料金詳細: ${form.feeDetail}` : "",
-      `■ 設備: ${form.facilities.join(", ") || "なし"}`,
-      `■ 釣れる魚: ${form.catchableFish}`,
-      "",
-      `■ 説明:`,
-      form.description,
-      "",
-      `■ アクセス:`,
-      form.accessInfo,
-      "",
-      form.additionalNotes ? `■ 補足:\n${form.additionalNotes}` : "",
-      "",
-      `--- 投稿者情報 ---`,
-      `名前: ${form.submitterName || "匿名"}`,
+      `スポット名: ${form.spotName}`,
+      `都道府県: ${form.prefecture}`,
+      form.areaName ? `エリア: ${form.areaName}` : "",
+      form.latitude ? `座標: ${form.latitude}, ${form.longitude}` : "",
+      form.googleMapsUrl ? `Google Maps: ${form.googleMapsUrl}` : "",
+      `タイプ: ${form.spotType}`,
+      form.difficulty ? `難易度: ${form.difficulty}` : "",
+      `無料: ${form.isFree ? "はい" : "いいえ"}`,
+      form.feeDetail ? `料金: ${form.feeDetail}` : "",
+      `設備: ${form.facilities.join(", ") || "なし"}`,
+      form.catchableFish ? `釣れる魚: ${form.catchableFish}` : "",
+      form.description ? `\n説明:\n${form.description}` : "",
+      form.accessInfo ? `\nアクセス:\n${form.accessInfo}` : "",
+      form.additionalNotes ? `\n補足:\n${form.additionalNotes}` : "",
+      `\n投稿者: ${form.submitterName || "匿名"}`,
       `メール: ${form.submitterEmail}`,
     ]
       .filter(Boolean)
       .join("\n");
-    const body = encodeURIComponent(bodyLines);
 
-    window.location.href = `mailto:fishingspotjapan@gmail.com?subject=${subject}&body=${body}`;
-    setStatus("success");
+    const mailtoUrl = `mailto:fishingspotjapan@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines)}`;
+
+    // <a>要素を使って確実にメールクライアントを起動
+    const link = document.createElement("a");
+    link.href = mailtoUrl;
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    // 少し待ってから成功画面を表示（メールアプリの起動を妨げないため）
+    setTimeout(() => setStatus("success"), 500);
   };
 
   if (status === "success") {

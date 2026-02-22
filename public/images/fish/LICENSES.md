@@ -67,6 +67,24 @@
 | haokoze.jpg | ハオコゼ | Hypodytes_rubripinnis_by_OpenCage.jpg | CC BY-SA 2.5 | OpenCage |
 | oniokoze.jpg | オニオコゼ | Inimicus_japonicus.jpg | Public domain | H. Patterson |
 | akaei.jpg | アカエイ | Hemitrygon_akajei_Lotte_World_Aquarium.png | CC BY-SA 4.0 | Coughdrop12 |
+| dochizame.jpg | ドチザメ | Banded_houndshark_osaka.jpg | CC BY-SA 2.0 | hirotomo t |
+| nekozame.jpg | ネコザメ | Heterodontus_japonicus_osaka.jpg | CC BY 2.0 | Jennifer Feuchter |
+| hoshizame.jpg | ホシザメ | Mustelus_manazo_Marinepia.jpg | CC BY-SA 4.0 | Totti |
+| iidako.jpg | イイダコ | Amphioctopus_fangsiao_NIFREL4.jpg | CC BY-SA 4.0 | Totti |
+| katsuo.jpg | カツオ | Katsuwonus_pelamis_Kagoshima.jpg | CC0 | タウナギ |
+| kinmedai.jpg | キンメダイ | Beryx_splendens_Marinepia.jpg | CC BY-SA 4.0 | Totti |
+| hatahata.jpg | ハタハタ | Hatahata.JPG | CC BY-SA 3.0 | fitm |
+| hokke.jpg | ホッケ | Pleurogrammus_azonus.jpg | CC BY-SA 2.5 | Daiju Azuma |
+| akamutsu.jpg | アカムツ | Doederleinia_berycoides_Marinepia_7.jpg | CC BY-SA 4.0 | Totti |
+| madara.jpg | マダラ | Gadus_macrocephalus_Kamo1.jpg | CC BY-SA 4.0 | Totti |
+| sawara.jpg | サワラ | Scomberomorus_niphonius.jpg | CC BY 4.0 | re_nebel |
+| hiramasa.jpg | ヒラマサ | HiramasaA.jpg | CC BY-SA 3.0 | Izuzuki |
+| kue.jpg | クエ | Epinephelus_bruneus_AQUAS.jpg | CC BY-SA 4.0 | Totti |
+| mutsu.jpg | ムツ | Mutsu201307.jpg | CC BY-SA 3.0 | Izuzuki |
+| dojou.jpg | ドジョウ | Dojo_loach_6.jpg | CC BY-SA 3.0 | Gourami Watcher |
+| tanago.jpg | タナゴ | Rhodeus_ocellatus_ocellatus(Hamamatsu,Shizuoka,Japan).jpg | CC BY-SA 3.0 | Seotaro |
+| raigyo.jpg | ライギョ | Channa_argus_01.jpg | CC BY 4.0 | Ω64 |
+| hasu.jpg | ハス | Opsariichthys_uncirostris_01.jpg | CC BY 4.0 | Ω64 |
 
 ## ライセンス要約
 

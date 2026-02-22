@@ -1,13 +1,31 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import { Search, X, SlidersHorizontal, ChevronDown, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useMemo, useCallback } from "react";
+import { Search, X, SlidersHorizontal, ChevronDown, ChevronLeft, ChevronRight, MapPin, Navigation, Loader2 } from "lucide-react";
 import { SpotCard } from "@/components/spots/spot-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { FishingSpot, SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { regions } from "@/lib/data/regions";
+
+function haversineDistance(
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number
+): number {
+  const R = 6371;
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLon = ((lon2 - lon1) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
 
 const ITEMS_PER_PAGE = 100;
 
@@ -25,11 +43,58 @@ export function SpotListClient({ spots }: { spots: FishingSpot[] }) {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
+  // Geolocation state
+  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [geoLoading, setGeoLoading] = useState(false);
+  const [geoError, setGeoError] = useState<string | null>(null);
+  const [sortByDistance, setSortByDistance] = useState(false);
+
+  const requestLocation = useCallback(() => {
+    if (!navigator.geolocation) {
+      setGeoError("お使いのブラウザは位置情報に対応していません");
+      return;
+    }
+    setGeoLoading(true);
+    setGeoError(null);
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
+        setSortByDistance(true);
+        setGeoLoading(false);
+        setCurrentPage(1);
+      },
+      (err) => {
+        if (err.code === err.PERMISSION_DENIED) {
+          setGeoError("位置情報の使用が許可されていません。ブラウザの設定を確認してください。");
+        } else {
+          setGeoError("位置情報を取得できませんでした。もう一度お試しください。");
+        }
+        setGeoLoading(false);
+      },
+      { enableHighAccuracy: false, timeout: 10000 }
+    );
+  }, []);
+
+  const clearDistanceSort = useCallback(() => {
+    setSortByDistance(false);
+    setCurrentPage(1);
+  }, []);
+
   const hasFilters = searchText || selectedPrefecture || selectedType || selectedDifficulty;
   const activeFilterCount = [selectedPrefecture, selectedType, selectedDifficulty].filter(Boolean).length;
 
+  // Precompute distances for all spots if user location is available
+  const distanceMap = useMemo(() => {
+    if (!userLocation) return null;
+    const map = new Map<string, number>();
+    for (const spot of spots) {
+      map.set(spot.id, haversineDistance(userLocation.lat, userLocation.lng, spot.latitude, spot.longitude));
+    }
+    return map;
+  }, [spots, userLocation]);
+
   const filteredSpots = useMemo(() => {
-    return spots.filter((spot) => {
+    const filtered = spots.filter((spot) => {
       if (searchText) {
         const q = searchText.toLowerCase();
         const nameMatch = spot.name.toLowerCase().includes(q);
@@ -43,7 +108,14 @@ export function SpotListClient({ spots }: { spots: FishingSpot[] }) {
       if (selectedDifficulty && spot.difficulty !== selectedDifficulty) return false;
       return true;
     });
-  }, [spots, searchText, selectedPrefecture, selectedType, selectedDifficulty]);
+
+    // Sort by distance if enabled
+    if (sortByDistance && distanceMap) {
+      filtered.sort((a, b) => (distanceMap.get(a.id) ?? Infinity) - (distanceMap.get(b.id) ?? Infinity));
+    }
+
+    return filtered;
+  }, [spots, searchText, selectedPrefecture, selectedType, selectedDifficulty, sortByDistance, distanceMap]);
 
   const totalPages = Math.ceil(filteredSpots.length / ITEMS_PER_PAGE);
   const paginatedSpots = filteredSpots.slice(
@@ -86,6 +158,42 @@ export function SpotListClient({ spots }: { spots: FishingSpot[] }) {
           </button>
         )}
       </div>
+
+      {/* Nearby sort button */}
+      {!sortByDistance ? (
+        <div>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={requestLocation}
+            disabled={geoLoading}
+            className="gap-1.5 min-h-[44px] border-primary/30 text-primary hover:bg-primary/5 hover:text-primary"
+          >
+            {geoLoading ? (
+              <Loader2 className="size-4 animate-spin" />
+            ) : (
+              <MapPin className="size-4" />
+            )}
+            {geoLoading ? "位置情報を取得中..." : "現在地から近い順に並べ替え"}
+          </Button>
+          {geoError && (
+            <p className="mt-1.5 text-xs text-red-600">{geoError}</p>
+          )}
+        </div>
+      ) : (
+        <div className="flex items-center gap-2 rounded-lg bg-primary/5 border border-primary/20 px-3 py-2 text-sm">
+          <Navigation className="size-4 shrink-0 text-primary" />
+          <span className="text-muted-foreground">
+            現在地から近い順に表示しています
+          </span>
+          <button
+            onClick={clearDistanceSort}
+            className="ml-auto shrink-0 rounded-md px-2 py-1 text-xs text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+          >
+            解除
+          </button>
+        </div>
+      )}
 
       {/* Mobile: collapsible filter toggle */}
       <button
@@ -185,7 +293,11 @@ export function SpotListClient({ spots }: { spots: FishingSpot[] }) {
         <>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
             {paginatedSpots.map((spot) => (
-              <SpotCard key={spot.id} spot={spot} />
+              <SpotCard
+                key={spot.id}
+                spot={spot}
+                distance={sortByDistance && distanceMap ? distanceMap.get(spot.id) : undefined}
+              />
             ))}
           </div>
 

@@ -18,6 +18,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { SpotCard } from "@/components/spots/spot-card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { getPrefectureInfoBySlug } from "@/lib/data/prefecture-info";
+import { getFishSlugByName } from "@/lib/data";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -315,15 +316,27 @@ export default async function PrefecturePage({ params }: PageProps) {
                     {seasonLabels[season]}
                   </h3>
                   <div className="flex flex-wrap gap-1">
-                    {fishes.map((f) => (
-                      <Badge
-                        key={f}
-                        variant="secondary"
-                        className="text-xs"
-                      >
-                        {f}
-                      </Badge>
-                    ))}
+                    {fishes.map((f) => {
+                      const fishSlug = getFishSlugByName(f);
+                      return fishSlug ? (
+                        <Link key={f} href={`/fish/${fishSlug}`} title={`${f}の釣り情報を見る`}>
+                          <Badge
+                            variant="secondary"
+                            className="cursor-pointer text-xs transition-colors hover:bg-primary hover:text-primary-foreground"
+                          >
+                            {f}
+                          </Badge>
+                        </Link>
+                      ) : (
+                        <Badge
+                          key={f}
+                          variant="secondary"
+                          className="text-xs"
+                        >
+                          {f}
+                        </Badge>
+                      );
+                    })}
                   </div>
                 </CardContent>
               </Card>
@@ -463,15 +476,27 @@ export default async function PrefecturePage({ params }: PageProps) {
             {pref.name}の代表的な釣りターゲット
           </h2>
           <div className="flex flex-wrap gap-2">
-            {prefInfo.popularFish.map((fishName) => (
-              <Badge
-                key={fishName}
-                variant="outline"
-                className="px-3 py-1.5 text-sm"
-              >
-                {fishName}
-              </Badge>
-            ))}
+            {prefInfo.popularFish.map((fishName) => {
+              const fishSlug = getFishSlugByName(fishName);
+              return fishSlug ? (
+                <Link key={fishName} href={`/fish/${fishSlug}`} title={`${fishName}の釣り情報・釣り方を見る`}>
+                  <Badge
+                    variant="outline"
+                    className="cursor-pointer px-3 py-1.5 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
+                  >
+                    {fishName}
+                  </Badge>
+                </Link>
+              ) : (
+                <Badge
+                  key={fishName}
+                  variant="outline"
+                  className="px-3 py-1.5 text-sm"
+                >
+                  {fishName}
+                </Badge>
+              );
+            })}
           </div>
         </section>
       )}

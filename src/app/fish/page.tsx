@@ -97,6 +97,7 @@ function FishListContent() {
                 key={fish.id}
                 fish={fish}
                 showPeakBadge={fish.peakMonths.includes(currentMonth)}
+                showSpots
               />
             ))}
           </div>
@@ -121,6 +122,7 @@ function FishListContent() {
                 key={fish.id}
                 fish={fish}
                 showPeakBadge={fish.peakMonths.includes(currentMonth)}
+                showSpots
               />
             ))}
           </div>

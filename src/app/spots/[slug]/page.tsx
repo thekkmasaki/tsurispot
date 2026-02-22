@@ -41,6 +41,8 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { FishLikeButton } from "@/components/spots/fish-like-button";
+import { FishingReportSummary } from "@/components/spots/fishing-report-summary";
+import { StreetViewSection } from "@/components/spots/street-view-section";
 import { NearbyGpsSearch } from "@/components/spots/nearby-gps-search";
 import { MobileQuickNav } from "@/components/spots/mobile-quick-nav";
 
@@ -323,6 +325,15 @@ export default async function SpotDetailPage({ params }: PageProps) {
       {/* モバイル向けクイックナビ */}
       <MobileQuickNav />
 
+      {/* 現地の様子 - Street View */}
+      <div className="mb-6 sm:mb-8">
+        <StreetViewSection
+          latitude={spot.latitude}
+          longitude={spot.longitude}
+          spotName={spot.name}
+        />
+      </div>
+
       {/* 安全警告（危険・注意の場合はヘッダー直下に目立つように表示） */}
       {(spot.safetyLevel === "caution" || spot.safetyLevel === "danger") && (
         <div className="mb-8">
@@ -377,25 +388,38 @@ export default async function SpotDetailPage({ params }: PageProps) {
                     key={cf.fish.id}
                     className="rounded-lg border p-3 text-sm"
                   >
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-2 min-w-0">
-                        <Link
-                          href={`/fish/${cf.fish.slug}`}
-                          className="font-medium shrink-0 hover:text-primary hover:underline"
-                        >
-                          {cf.fish.name}
-                        </Link>
-                        <Badge variant="secondary" className="text-xs shrink-0">
-                          {cf.method}
-                        </Badge>
-                      </div>
+                    <div className="flex items-center gap-2 min-w-0">
+                      <Link
+                        href={`/fish/${cf.fish.slug}`}
+                        className="font-medium truncate hover:text-primary hover:underline"
+                      >
+                        {cf.fish.name}
+                      </Link>
+                      <Badge variant="secondary" className="text-xs shrink-0">
+                        {cf.method}
+                      </Badge>
+                    </div>
+                    <div className="mt-1.5 flex items-center justify-between gap-2">
+                      <p className="text-xs text-muted-foreground truncate">
+                        おすすめ時間帯: {cf.recommendedTime}
+                      </p>
                       <FishLikeButton spotSlug={slug} fishSlug={cf.fish.slug} />
                     </div>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      おすすめ時間帯: {cf.recommendedTime}
-                    </p>
                   </div>
                 ))}
+              </div>
+            )}
+
+            {/* 釣果記録サマリー */}
+            {spot.catchableFish.length > 0 && (
+              <div className="mt-4">
+                <FishingReportSummary
+                  spotSlug={slug}
+                  fishList={spot.catchableFish.map((cf) => ({
+                    slug: cf.fish.slug,
+                    name: cf.fish.name,
+                  }))}
+                />
               </div>
             )}
           </section>
