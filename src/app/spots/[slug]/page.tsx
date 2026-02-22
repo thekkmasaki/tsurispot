@@ -466,7 +466,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                   初心者向け装備ガイド
                 </h2>
                 <p className="mb-4 text-sm text-muted-foreground">
-                  このスポットでの釣りに必要な道具をわかりやすくまとめました。
+                  このスポットでの釣りに必要な道具をわかりやすくまとめました。当日バタバタしないよう、事前にネットで揃えておくのがおすすめです。
                 </p>
                 <GearGuideList guides={spot.gearGuides} />
                 <SpotAffiliateRecommend
@@ -486,7 +486,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                   この釣り場でおすすめの装備
                 </h2>
                 <p className="mb-2 text-sm text-muted-foreground">
-                  このスポットの釣り方に合った装備をピックアップしました。
+                  このスポットの釣り方に合った装備をピックアップしました。当日バタバタしないよう、事前にネットで揃えておくのがおすすめです。
                 </p>
                 <SpotAffiliateRecommend
                   methods={spot.catchableFish.map((cf) => cf.method)}

@@ -33,7 +33,7 @@ export function SpotAffiliateRecommend({ methods }: SpotAffiliateRecommendProps)
 
   useEffect(() => {
     const currentMonth = new Date().getMonth() + 1; // 1-12
-    const relevant = getRelevantAffiliateProducts(methods, currentMonth, 3);
+    const relevant = getRelevantAffiliateProducts(methods, currentMonth, 6);
     setProducts(relevant);
   }, [methods]);
 
@@ -41,10 +41,13 @@ export function SpotAffiliateRecommend({ methods }: SpotAffiliateRecommendProps)
 
   return (
     <div className="mt-6">
-      <h3 className="mb-3 flex items-center gap-2 text-sm font-bold text-muted-foreground">
+      <h3 className="mb-1 flex items-center gap-2 text-sm font-bold text-muted-foreground">
         <ShoppingBag className="size-4" />
         この釣り場でおすすめの装備
       </h3>
+      <p className="mb-3 text-xs text-muted-foreground">
+        当日バタバタしないよう、事前にネットで揃えておくのがおすすめです
+      </p>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((product) => (
           <a
