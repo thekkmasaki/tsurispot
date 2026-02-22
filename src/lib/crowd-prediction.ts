@@ -164,14 +164,24 @@ export function calculateCrowdScore(input: PredictionInput): CrowdPrediction {
   // --- 都市度の影響（田舎は混まない）---
   if (input.prefecture) {
     const urbanPrefectures = ["東京都", "神奈川県", "大阪府", "愛知県", "千葉県", "埼玉県", "兵庫県", "福岡県"];
-    const suburbanPrefectures = ["静岡県", "京都府", "広島県", "宮城県", "新潟県", "北海道"];
+    const suburbanPrefectures = ["静岡県", "京都府", "広島県", "宮城県", "新潟県", "北海道", "三重県", "和歌山県"];
+    const ruralPrefectures = [
+      "青森県", "岩手県", "秋田県", "山形県", "福島県",
+      "鳥取県", "島根県", "山口県", "徳島県", "高知県",
+      "佐賀県", "大分県", "宮崎県", "鹿児島県", "沖縄県",
+      "富山県", "石川県", "福井県", "山梨県", "長野県",
+      "岐阜県", "奈良県", "滋賀県",
+    ];
     if (urbanPrefectures.includes(input.prefecture)) {
       score += 12;
       factors.push("都市部で人が多い");
     } else if (suburbanPrefectures.includes(input.prefecture)) {
-      // 中間: 補正なし
+      score -= 5;
+    } else if (ruralPrefectures.includes(input.prefecture)) {
+      score -= 30;
+      factors.push("地方のため人が少ない");
     } else {
-      score -= 15;
+      score -= 20;
       factors.push("地方で空きやすい");
     }
   }

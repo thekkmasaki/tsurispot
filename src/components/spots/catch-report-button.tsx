@@ -101,7 +101,7 @@ export function CatchReportButton({ spotSlug }: CatchReportButtonProps) {
             reported ? "bg-emerald-100 text-emerald-700" : "bg-gray-100 text-gray-600"
           )}
         >
-          {count}
+          {count}組が釣果報告
         </span>
       )}
     </button>
