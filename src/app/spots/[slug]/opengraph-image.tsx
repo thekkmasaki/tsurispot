@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { getSpotBySlug } from "@/lib/data/spots";
 import { SPOT_TYPE_LABELS } from "@/types";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 export const alt = "ツリスポ - 釣りスポット情報";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

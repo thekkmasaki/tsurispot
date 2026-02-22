@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { getFishBySlug } from "@/lib/data/fish";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 export const alt = "ツリスポ - 魚種情報";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";

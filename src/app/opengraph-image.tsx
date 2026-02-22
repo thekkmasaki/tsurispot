@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 export const alt = "ツリスポ - 全国の釣り場情報サイト";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
