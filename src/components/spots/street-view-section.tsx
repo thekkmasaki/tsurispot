@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Eye, ExternalLink, MapPin, Satellite } from "lucide-react";
+import { Map, ExternalLink, MapPin, Satellite } from "lucide-react";
 
 interface StreetViewSectionProps {
   latitude: number;
@@ -18,7 +18,7 @@ export function StreetViewSection({
 }: StreetViewSectionProps) {
   const [loaded, setLoaded] = useState(false);
 
-  const streetViewUrl = `https://www.google.com/maps/@${latitude},${longitude},3a,75y,90t/data=!3m7!1e1!3m5!1s!2e0!7i16384!8i8192!10b1`;
+  const mapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}&z=16`;
   const aerialUrl = `https://www.google.com/maps/@${latitude},${longitude},17z/data=!3m1!1e3`;
 
   // 衛星写真の埋め込み（全スポットで確実に表示される）
@@ -85,19 +85,16 @@ export function StreetViewSection({
           <ExternalLink className="size-3 text-muted-foreground" />
         </a>
         <a
-          href={streetViewUrl}
+          href={mapsUrl}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg border px-4 py-2 text-sm font-medium transition-colors hover:bg-gray-50"
         >
-          <Eye className="size-4 text-blue-600" />
-          ストリートビューで見る
+          <Map className="size-4 text-blue-600" />
+          Google Mapsで見る
           <ExternalLink className="size-3 text-muted-foreground" />
         </a>
       </div>
-      <p className="mt-2 text-[10px] text-muted-foreground">
-        ※ ストリートビューは一部の場所で利用できない場合があります
-      </p>
     </section>
   );
 }

@@ -247,8 +247,6 @@ export default function Home() {
                   src={spot.mainImageUrl?.startsWith("http") ? spot.mainImageUrl : undefined}
                   alt={spot.name}
                   spotType={spot.spotType}
-                  latitude={spot.latitude}
-                  longitude={spot.longitude}
                 />
 
                 <CardContent className="flex flex-col gap-3 p-4">

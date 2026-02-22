@@ -11,7 +11,6 @@ import {
   Building2,
   Ship,
   Route,
-  MapPin,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -113,11 +112,9 @@ interface SpotImageProps {
   spotType?: string;
   className?: string;
   height?: string;
-  latitude?: number;
-  longitude?: number;
 }
 
-export function SpotImage({ src, alt, spotType = "port", className = "", height = "h-32", latitude, longitude }: SpotImageProps) {
+export function SpotImage({ src, alt, spotType = "port", className = "", height = "h-32" }: SpotImageProps) {
   const [error, setError] = useState(false);
 
   // 実際の写真がある場合はそれを表示
@@ -172,14 +169,6 @@ export function SpotImage({ src, alt, spotType = "port", className = "", height 
         <span className="max-w-[80%] truncate text-center text-xs font-medium tracking-wide text-white/70">
           {alt}
         </span>
-        {latitude != null && longitude != null && (
-          <div className="flex items-center gap-1 text-white/40">
-            <MapPin className="size-2.5" />
-            <span className="text-[10px]">
-              {latitude.toFixed(2)}N, {longitude.toFixed(2)}E
-            </span>
-          </div>
-        )}
       </div>
     </div>
   );

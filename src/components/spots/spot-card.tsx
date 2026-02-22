@@ -21,8 +21,6 @@ export function SpotCard({ spot, distance }: { spot: FishingSpot; distance?: num
             alt={spot.name}
             spotType={spot.spotType}
             height="h-40"
-            latitude={spot.latitude}
-            longitude={spot.longitude}
           />
           <span className="absolute bottom-2 right-2 rounded bg-black/40 px-2 py-0.5 text-xs text-white">
             {SPOT_TYPE_LABELS[spot.spotType]}

@@ -318,8 +318,6 @@ export default async function SpotDetailPage({ params }: PageProps) {
           alt={spot.name}
           spotType={spot.spotType}
           height="h-48 sm:h-56 md:h-72"
-          latitude={spot.latitude}
-          longitude={spot.longitude}
         />
       </div>
 
