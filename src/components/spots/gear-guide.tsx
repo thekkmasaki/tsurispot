@@ -1,7 +1,34 @@
+import { ExternalLink } from "lucide-react";
 import { GearGuide as GearGuideType, DIFFICULTY_LABELS } from "@/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+
+// 装備項目に対応するアフィリエイトリンクのマッチング
+const GEAR_AFFILIATE_LINKS: { pattern: RegExp; url: string; label: string }[] = [
+  { pattern: /PE/i, url: "https://amzn.to/4s45H0i", label: "PEライン" },
+  { pattern: /ナイロン/i, url: "https://amzn.to/4s1SPaX", label: "ナイロンライン" },
+  { pattern: /フロロ/i, url: "https://amzn.to/4tKXyzu", label: "フロロカーボン" },
+];
+
+// その他アイテムのアフィリエイトマッチング
+const ITEM_AFFILIATE_LINKS: { pattern: RegExp; url: string; label: string }[] = [
+  { pattern: /コマセ|アミエビ|アミ姫/, url: "https://amzn.to/4c6gaUn", label: "アミ姫" },
+];
+
+function getLineAffiliateUrl(lineText: string): { url: string; label: string } | null {
+  for (const link of GEAR_AFFILIATE_LINKS) {
+    if (link.pattern.test(lineText)) return link;
+  }
+  return null;
+}
+
+function getItemAffiliateUrl(itemText: string): { url: string; label: string } | null {
+  for (const link of ITEM_AFFILIATE_LINKS) {
+    if (link.pattern.test(itemText)) return link;
+  }
+  return null;
+}
 
 // ナイロン号数 → PE号数の換算テーブル
 const NYLON_TO_PE: Record<string, string> = {
@@ -47,13 +74,24 @@ const difficultyColors = {
   advanced: "bg-red-100 text-red-700 hover:bg-red-100",
 };
 
-function GearRow({ label, value, icon }: { label: string; value: string; icon: string }) {
+function GearRow({ label, value, icon, affiliateUrl, affiliateLabel }: { label: string; value: string; icon: string; affiliateUrl?: string; affiliateLabel?: string }) {
   return (
     <div className="flex items-start gap-3 py-2">
       <span className="w-5 text-center text-base">{icon}</span>
       <div className="min-w-0 flex-1">
         <dt className="text-xs font-medium text-muted-foreground">{label}</dt>
         <dd className="text-sm font-semibold">{value}</dd>
+        {affiliateUrl && (
+          <a
+            href={affiliateUrl}
+            target="_blank"
+            rel="noopener noreferrer sponsored"
+            className="mt-1 inline-flex items-center gap-1 rounded-md bg-[#FF9900]/10 px-2 py-0.5 text-[11px] font-medium text-[#FF9900] transition-colors hover:bg-[#FF9900] hover:text-white"
+          >
+            {affiliateLabel || "おすすめを見る"}
+            <ExternalLink className="size-2.5" />
+          </a>
+        )}
       </div>
     </div>
   );
@@ -76,12 +114,23 @@ export function GearGuideCard({ guide }: { guide: GearGuideType }) {
         </div>
       </div>
       <CardContent className="p-3 sm:p-4">
-        <dl className="divide-y">
-          <GearRow icon="🎣" label="竿（ロッド）" value={guide.rod} />
-          <GearRow icon="🔄" label="リール" value={guide.reel} />
-          <GearRow icon="🧵" label="糸（ライン）" value={addPeEquivalent(guide.line)} />
-          <GearRow icon="🪝" label="仕掛け・針" value={guide.hook} />
-        </dl>
+        {(() => {
+          const lineAffiliate = getLineAffiliateUrl(guide.line);
+          return (
+            <dl className="divide-y">
+              <GearRow icon="🎣" label="竿（ロッド）" value={guide.rod} />
+              <GearRow icon="🔄" label="リール" value={guide.reel} />
+              <GearRow
+                icon="🧵"
+                label="糸（ライン）"
+                value={addPeEquivalent(guide.line)}
+                affiliateUrl={lineAffiliate?.url}
+                affiliateLabel={`${lineAffiliate?.label}をAmazonで見る`}
+              />
+              <GearRow icon="🪝" label="仕掛け・針" value={guide.hook} />
+            </dl>
+          );
+        })()}
 
         {guide.otherItems.length > 0 && (
           <div className="mt-3 border-t pt-3">
@@ -89,11 +138,21 @@ export function GearGuideCard({ guide }: { guide: GearGuideType }) {
               その他必要なもの
             </p>
             <div className="flex flex-wrap gap-1.5">
-              {guide.otherItems.map((item) => (
-                <Badge key={item} variant="outline" className="text-xs">
-                  {item}
-                </Badge>
-              ))}
+              {guide.otherItems.map((item) => {
+                const af = getItemAffiliateUrl(item);
+                return af ? (
+                  <a key={item} href={af.url} target="_blank" rel="noopener noreferrer sponsored">
+                    <Badge variant="outline" className="cursor-pointer gap-1 text-xs transition-colors hover:border-[#FF9900] hover:text-[#FF9900]">
+                      {item}
+                      <ExternalLink className="size-2.5" />
+                    </Badge>
+                  </a>
+                ) : (
+                  <Badge key={item} variant="outline" className="text-xs">
+                    {item}
+                  </Badge>
+                );
+              })}
             </div>
           </div>
         )}
