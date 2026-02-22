@@ -311,15 +311,17 @@ export default async function SpotDetailPage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* Photo area */}
-      <div className="mb-6 overflow-hidden rounded-xl sm:mb-8">
-        <SpotImage
-          src={spot.mainImageUrl?.startsWith("http") ? spot.mainImageUrl : undefined}
-          alt={spot.name}
-          spotType={spot.spotType}
-          height="h-48 sm:h-56 md:h-72"
-        />
-      </div>
+      {/* Photo area - 実際の写真がある場合のみ表示 */}
+      {spot.mainImageUrl?.startsWith("http") && (
+        <div className="mb-6 overflow-hidden rounded-xl sm:mb-8">
+          <SpotImage
+            src={spot.mainImageUrl}
+            alt={spot.name}
+            spotType={spot.spotType}
+            height="h-48 sm:h-56 md:h-72"
+          />
+        </div>
+      )}
 
       {/* モバイル向けクイックナビ */}
       <MobileQuickNav />
