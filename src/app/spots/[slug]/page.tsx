@@ -40,7 +40,6 @@ import { SpotWeatherTide } from "@/components/spots/spot-weather-tide";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
 import { InArticleAd } from "@/components/ads/ad-unit";
-import { CatchReportButton } from "@/components/spots/catch-report-button";
 import { FishLikeButton } from "@/components/spots/fish-like-button";
 import { NearbyGpsSearch } from "@/components/spots/nearby-gps-search";
 import { MobileQuickNav } from "@/components/spots/mobile-quick-nav";
@@ -376,23 +375,25 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 {spot.catchableFish.map((cf) => (
                   <div
                     key={cf.fish.id}
-                    className="flex items-center justify-between rounded-lg border p-3 text-sm"
+                    className="rounded-lg border p-3 text-sm"
                   >
-                    <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-                      <Link
-                        href={`/fish/${cf.fish.slug}`}
-                        className="font-medium shrink-0 hover:text-primary hover:underline"
-                      >
-                        {cf.fish.name}
-                      </Link>
-                      <Badge variant="secondary" className="text-xs shrink-0">
-                        {cf.method}
-                      </Badge>
-                    </div>
-                    <div className="flex items-center gap-2 text-xs text-muted-foreground shrink-0 sm:text-sm">
-                      <span>{cf.recommendedTime}</span>
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <Link
+                          href={`/fish/${cf.fish.slug}`}
+                          className="font-medium shrink-0 hover:text-primary hover:underline"
+                        >
+                          {cf.fish.name}
+                        </Link>
+                        <Badge variant="secondary" className="text-xs shrink-0">
+                          {cf.method}
+                        </Badge>
+                      </div>
                       <FishLikeButton spotSlug={slug} fishSlug={cf.fish.slug} />
                     </div>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      おすすめ時間帯: {cf.recommendedTime}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -606,11 +607,6 @@ export default async function SpotDetailPage({ params }: PageProps) {
             </Card>
           </section>
         </div>
-      </div>
-
-      {/* 釣れた！報告ボタン */}
-      <div className="mt-6 flex items-center justify-center">
-        <CatchReportButton spotSlug={spot.slug} />
       </div>
 
       {/* 天気・潮汐 */}

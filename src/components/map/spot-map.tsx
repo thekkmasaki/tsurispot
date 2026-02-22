@@ -69,6 +69,7 @@ const userIcon = new L.DivIcon({
 
 export function SpotMap() {
   const [selectedPrefectures, setSelectedPrefectures] = useState<Set<string>>(new Set());
+  const [selectedAreas, setSelectedAreas] = useState<Set<string>>(new Set());
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [locating, setLocating] = useState(false);
   const [nearbyMode, setNearbyMode] = useState(false);
@@ -108,6 +109,7 @@ export function SpotMap() {
 
   const togglePrefecture = (pref: string) => {
     setNearbyMode(false);
+    setSelectedAreas(new Set());
     setSelectedPrefectures((prev) => {
       const next = new Set(prev);
       if (next.has(pref)) {
@@ -118,6 +120,33 @@ export function SpotMap() {
       return next;
     });
   };
+
+  const toggleArea = (area: string) => {
+    setSelectedAreas((prev) => {
+      const next = new Set(prev);
+      if (next.has(area)) {
+        next.delete(area);
+      } else {
+        next.add(area);
+      }
+      return next;
+    });
+  };
+
+  // 選択した都道府県内の利用可能なエリア一覧
+  const availableAreas = useMemo(() => {
+    if (selectedPrefectures.size === 0) return [];
+    const areaMap = new Map<string, number>();
+    fishingSpots
+      .filter((s) => selectedPrefectures.has(s.region.prefecture))
+      .forEach((s) => {
+        const key = s.region.areaName;
+        areaMap.set(key, (areaMap.get(key) || 0) + 1);
+      });
+    return Array.from(areaMap.entries())
+      .sort((a, b) => b[1] - a[1])
+      .map(([name, count]) => ({ name, count }));
+  }, [selectedPrefectures]);
 
   const filteredSpots = useMemo(() => {
     if (nearbyMode && userLocation) {
@@ -137,8 +166,10 @@ export function SpotMap() {
         .sort((a, b) => a._dist - b._dist);
     }
     if (selectedPrefectures.size === 0) return fishingSpots;
-    return fishingSpots.filter((s) => selectedPrefectures.has(s.region.prefecture));
-  }, [selectedPrefectures, nearbyMode, userLocation]);
+    const prefFiltered = fishingSpots.filter((s) => selectedPrefectures.has(s.region.prefecture));
+    if (selectedAreas.size === 0) return prefFiltered;
+    return prefFiltered.filter((s) => selectedAreas.has(s.region.areaName));
+  }, [selectedPrefectures, selectedAreas, nearbyMode, userLocation]);
 
   const { mapCenter, mapZoom } = useMemo((): { mapCenter: [number, number]; mapZoom: number } => {
     if (nearbyMode && userLocation) {
@@ -172,7 +203,7 @@ export function SpotMap() {
         <div className="flex items-center gap-2">
           <span className="text-xs font-medium text-muted-foreground sm:text-sm">地域:</span>
           <button
-            onClick={() => { setSelectedPrefectures(new Set()); setNearbyMode(false); }}
+            onClick={() => { setSelectedPrefectures(new Set()); setSelectedAreas(new Set()); setNearbyMode(false); }}
             className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors min-h-[36px] sm:text-sm ${
               selectedPrefectures.size === 0 && !nearbyMode
                 ? 'bg-primary text-primary-foreground'
@@ -224,6 +255,38 @@ export function SpotMap() {
             ))}
           </div>
         ))}
+        {/* エリアフィルタ（都道府県選択時に表示） */}
+        {availableAreas.length > 0 && !nearbyMode && (
+          <div className="flex flex-wrap items-center gap-1.5 rounded-lg bg-muted/50 p-2">
+            <span className="w-14 shrink-0 text-[10px] font-medium text-muted-foreground sm:text-xs">
+              エリア
+            </span>
+            <button
+              onClick={() => setSelectedAreas(new Set())}
+              className={`rounded-full px-2.5 py-1 text-[10px] font-medium transition-colors min-h-[28px] sm:text-xs ${
+                selectedAreas.size === 0
+                  ? 'bg-emerald-600 text-white'
+                  : 'bg-white text-gray-700 hover:bg-gray-100'
+              }`}
+            >
+              すべて
+            </button>
+            {availableAreas.map(({ name, count }) => (
+              <button
+                key={name}
+                onClick={() => toggleArea(name)}
+                className={`rounded-full px-2.5 py-1 text-[10px] font-medium transition-colors min-h-[28px] sm:text-xs ${
+                  selectedAreas.has(name)
+                    ? 'bg-emerald-600 text-white'
+                    : 'bg-white text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                {name}
+                <span className="ml-0.5 text-[9px] opacity-60">({count})</span>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
 
       <MapContainer

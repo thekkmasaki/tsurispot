@@ -51,8 +51,8 @@ export function FishLikeButton({ spotSlug, fishSlug }: FishLikeButtonProps) {
           animating ? "scale-150" : ""
         } ${liked ? "fill-blue-500" : ""}`}
       />
-      <span className="hidden sm:inline">
-        {liked ? "釣れた！" : "釣れた"}
+      <span>
+        {liked ? "釣れた！" : "ここで釣れた"}
       </span>
     </button>
   );
