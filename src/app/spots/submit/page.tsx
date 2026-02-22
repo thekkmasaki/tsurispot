@@ -196,20 +196,7 @@ export default function SpotSubmitPage() {
     return errs;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setStatus("validating");
-
-    const validationErrors = validate();
-    if (validationErrors.length > 0) {
-      setErrors(validationErrors);
-      setStatus("idle");
-      return;
-    }
-
-    setStatus("submitting");
-
-    // メールで送信（Supabase接続前の暫定フロー）
+  const buildEmailContent = () => {
     const subject = `[ツリスポ] 新スポット投稿: ${form.spotName}`;
     const bodyLines = [
       `スポット名: ${form.spotName}`,
@@ -231,37 +218,97 @@ export default function SpotSubmitPage() {
     ]
       .filter(Boolean)
       .join("\n");
+    return { subject, body: bodyLines };
+  };
 
-    const mailtoUrl = `mailto:fishingspotjapan@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyLines)}`;
+  const [emailCopied, setEmailCopied] = useState(false);
 
-    // <a>要素を使って確実にメールクライアントを起動
-    const link = document.createElement("a");
-    link.href = mailtoUrl;
-    link.target = "_blank";
-    link.rel = "noopener noreferrer";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+  const handleCopyEmailContent = () => {
+    const { subject, body } = buildEmailContent();
+    navigator.clipboard.writeText(`件名: ${subject}\n\n${body}`);
+    setEmailCopied(true);
+    setTimeout(() => setEmailCopied(false), 2000);
+  };
 
-    // 少し待ってから成功画面を表示（メールアプリの起動を妨げないため）
-    setTimeout(() => setStatus("success"), 500);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setStatus("validating");
+
+    const validationErrors = validate();
+    if (validationErrors.length > 0) {
+      setErrors(validationErrors);
+      setStatus("idle");
+      return;
+    }
+
+    setStatus("success");
   };
 
   if (status === "success") {
+    const { subject, body } = buildEmailContent();
+    const gmailComposeUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=fishingspotjapan@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mailtoUrl = `mailto:fishingspotjapan@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
     return (
-      <main className="container mx-auto max-w-2xl px-4 py-12 text-center">
-        <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-green-100">
-          <CheckCircle2 className="h-10 w-10 text-green-600" />
+      <main className="container mx-auto max-w-2xl px-4 py-12">
+        <div className="text-center">
+          <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full bg-blue-100">
+            <Send className="h-10 w-10 text-blue-600" />
+          </div>
+          <h1 className="text-2xl font-bold">あと1ステップで完了です！</h1>
+          <p className="mt-3 text-muted-foreground">
+            以下のボタンからメールを送信してください。
+            <br />
+            スタッフが内容を確認し、問題なければサイトに掲載します。
+          </p>
         </div>
-        <h1 className="text-2xl font-bold">投稿ありがとうございます！</h1>
-        <p className="mt-3 text-muted-foreground">
-          メールアプリが開きます。内容を確認して送信してください。
-          <br />
-          スタッフが内容を確認し、問題なければサイトに掲載します。
-        </p>
-        <p className="mt-2 text-sm text-muted-foreground">
-          確認には通常1〜3営業日かかります。
-        </p>
+
+        <div className="mt-8 space-y-3">
+          <a
+            href={gmailComposeUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex w-full min-h-[52px] items-center justify-center gap-2 rounded-lg bg-red-600 px-6 py-3 text-base font-bold text-white transition-colors hover:bg-red-700"
+          >
+            <svg viewBox="0 0 24 24" className="size-5 fill-current"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+            Gmailで送信する
+          </a>
+          <a
+            href={mailtoUrl}
+            className="flex w-full min-h-[48px] items-center justify-center gap-2 rounded-lg border px-6 py-3 text-sm font-medium transition-colors hover:bg-muted"
+          >
+            <Send className="size-4" />
+            その他のメールアプリで送信する
+          </a>
+        </div>
+
+        <div className="mt-6 rounded-xl border border-dashed p-4">
+          <p className="mb-3 text-center text-sm text-muted-foreground">
+            メールが送信できない場合は、以下の内容をコピーして
+            <br />
+            <code className="rounded bg-muted px-2 py-0.5 text-xs font-medium">fishingspotjapan@gmail.com</code>
+            に直接お送りください
+          </p>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={handleCopyEmailContent}
+            className="mx-auto flex min-h-[36px] gap-1.5"
+          >
+            {emailCopied ? (
+              <>
+                <CheckCircle2 className="size-4 text-green-600" />
+                コピーしました！
+              </>
+            ) : (
+              <>
+                <MapPin className="size-4" />
+                投稿内容をコピーする
+              </>
+            )}
+          </Button>
+        </div>
+
         <div className="mt-8 flex justify-center gap-3">
           <Button asChild variant="outline">
             <Link href="/spots">スポット一覧に戻る</Link>
@@ -270,6 +317,7 @@ export default function SpotSubmitPage() {
             onClick={() => {
               setForm(initialFormData);
               setStatus("idle");
+              setEmailCopied(false);
             }}
           >
             別のスポットを投稿する
