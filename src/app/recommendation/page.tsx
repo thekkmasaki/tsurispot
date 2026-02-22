@@ -438,13 +438,18 @@ const REGION_OPTIONS: RegionOption[] = [
   },
 ];
 
+// --- 釣りの種類 ---
+
+type FishingCategory = "all" | "sea" | "freshwater";
+
 // --- ステップ定義 ---
 
 const STEPS = [
-  { id: 1, label: "エリア", shortLabel: "エリア" },
-  { id: 2, label: "レベル", shortLabel: "レベル" },
-  { id: 3, label: "同行者", shortLabel: "同行者" },
-  { id: 4, label: "釣りたい魚", shortLabel: "魚" },
+  { id: 1, label: "種類", shortLabel: "種類" },
+  { id: 2, label: "エリア", shortLabel: "エリア" },
+  { id: 3, label: "レベル", shortLabel: "レベル" },
+  { id: 4, label: "同行者", shortLabel: "同行者" },
+  { id: 5, label: "釣りたい魚", shortLabel: "魚" },
 ] as const;
 
 // --- 距離計算 ---
@@ -481,7 +486,10 @@ export default function RecommendationPage() {
   const [showResults, setShowResults] = useState(false);
 
   // フィルター状態
+  const [fishingCategory, setFishingCategory] = useState<FishingCategory>("all");
   const [selectedRegion, setSelectedRegion] = useState<RegionGroup>("all");
+  const [selectedPrefecture, setSelectedPrefecture] = useState<string | null>(null);
+  const [showPrefectureDetail, setShowPrefectureDetail] = useState(false);
   const [userLevel, setUserLevel] = useState<UserLevel>("beginner");
   const [companion, setCompanion] = useState<Companion>("solo");
   const [targetFishSlug, setTargetFishSlug] = useState<string | null>(null);
@@ -494,7 +502,7 @@ export default function RecommendationPage() {
   // ステップ遷移
   const goToStep = useCallback((step: number) => {
     setCurrentStep(step);
-    if (step === 5) {
+    if (step === 6) {
       setShowResults(true);
     }
   }, []);
@@ -502,6 +510,15 @@ export default function RecommendationPage() {
   const completeStep = useCallback((step: number) => {
     setCompletedSteps((prev) => (prev.includes(step) ? prev : [...prev, step]));
   }, []);
+
+  const handleCategorySelect = useCallback(
+    (cat: FishingCategory) => {
+      setFishingCategory(cat);
+      completeStep(1);
+      goToStep(2);
+    },
+    [completeStep, goToStep]
+  );
 
   const handleRegionSelect = useCallback(
     (region: RegionGroup) => {
@@ -513,9 +530,11 @@ export default function RecommendationPage() {
             (pos) => {
               setUserLocation({ lat: pos.coords.latitude, lon: pos.coords.longitude });
               setSelectedRegion("geolocation");
+              setSelectedPrefecture(null);
+              setShowPrefectureDetail(false);
               setGeoLoading(false);
-              completeStep(1);
-              goToStep(2);
+              completeStep(2);
+              goToStep(3);
             },
             () => {
               setGeoError("位置情報を取得できませんでした");
@@ -529,10 +548,30 @@ export default function RecommendationPage() {
         }
         return;
       }
+      if (region === "all") {
+        setSelectedRegion("all");
+        setSelectedPrefecture(null);
+        setShowPrefectureDetail(false);
+        setUserLocation(null);
+        completeStep(2);
+        goToStep(3);
+        return;
+      }
+      // 地方を選んだら都道府県選択を表示
       setSelectedRegion(region);
+      setSelectedPrefecture(null);
       setUserLocation(null);
-      completeStep(1);
-      goToStep(2);
+      setShowPrefectureDetail(true);
+    },
+    [completeStep, goToStep]
+  );
+
+  const handlePrefectureSelect = useCallback(
+    (prefecture: string | null) => {
+      setSelectedPrefecture(prefecture);
+      setShowPrefectureDetail(false);
+      completeStep(2);
+      goToStep(3);
     },
     [completeStep, goToStep]
   );
@@ -540,8 +579,8 @@ export default function RecommendationPage() {
   const handleLevelSelect = useCallback(
     (level: UserLevel) => {
       setUserLevel(level);
-      completeStep(2);
-      goToStep(3);
+      completeStep(3);
+      goToStep(4);
     },
     [completeStep, goToStep]
   );
@@ -549,8 +588,8 @@ export default function RecommendationPage() {
   const handleCompanionSelect = useCallback(
     (comp: Companion) => {
       setCompanion(comp);
-      completeStep(3);
-      goToStep(4);
+      completeStep(4);
+      goToStep(5);
     },
     [completeStep, goToStep]
   );
@@ -558,8 +597,8 @@ export default function RecommendationPage() {
   const handleFishSelect = useCallback(
     (slug: string | null) => {
       setTargetFishSlug(slug);
-      completeStep(4);
-      goToStep(5);
+      completeStep(5);
+      goToStep(6);
     },
     [completeStep, goToStep]
   );
@@ -568,7 +607,10 @@ export default function RecommendationPage() {
     setCurrentStep(1);
     setCompletedSteps([]);
     setShowResults(false);
+    setFishingCategory("all");
     setSelectedRegion("all");
+    setSelectedPrefecture(null);
+    setShowPrefectureDetail(false);
     setUserLevel("beginner");
     setCompanion("solo");
     setTargetFishSlug(null);
@@ -576,22 +618,63 @@ export default function RecommendationPage() {
     setGeoError(null);
   }, []);
 
-  // 旬の魚リスト
+  // 旬の魚リスト（fishSpecies基準）
   const seasonalFish = useMemo(() => getSeasonalFish(month), [month]);
   const peakFish = useMemo(() => getPeakFishList(month), [month]);
   const season = getSeason(month);
 
-  // エリアフィルタリング
+  // カテゴリ＋エリアフィルタリング
   const filteredSpots = useMemo(() => {
+    let spots = fishingSpots;
+
+    // カテゴリフィルタ（spotType: "river" → 淡水、それ以外 → 海）
+    if (fishingCategory === "sea") {
+      spots = spots.filter((s) => s.spotType !== "river");
+    } else if (fishingCategory === "freshwater") {
+      spots = spots.filter((s) => s.spotType === "river");
+    }
+
+    // エリアフィルタ
     if (selectedRegion === "all" || selectedRegion === "geolocation") {
-      return fishingSpots;
+      return spots;
     }
     const regionOption = REGION_OPTIONS.find((r) => r.value === selectedRegion);
-    if (!regionOption) return fishingSpots;
-    return fishingSpots.filter((spot) =>
+    if (!regionOption) return spots;
+    if (selectedPrefecture) {
+      return spots.filter((spot) => spot.region.prefecture === selectedPrefecture);
+    }
+    return spots.filter((spot) =>
       regionOption.prefectures.includes(spot.region.prefecture)
     );
-  }, [selectedRegion]);
+  }, [fishingCategory, selectedRegion, selectedPrefecture]);
+
+  // スポットデータから今月釣れる魚を動的に収集（fishSpeciesに無い魚も含む）
+  const spotFishList = useMemo(() => {
+    const fishRecord: Record<string, { fish: FishSpecies; isPeak: boolean }> = {};
+    for (const spot of filteredSpots) {
+      for (const cf of spot.catchableFish) {
+        const start = cf.monthStart;
+        const end = cf.monthEnd;
+        let inSeason = false;
+        if (start <= end) {
+          inSeason = month >= start && month <= end;
+        } else {
+          inSeason = month >= start || month <= end;
+        }
+        if (inSeason) {
+          if (!fishRecord[cf.fish.slug]) {
+            fishRecord[cf.fish.slug] = { fish: cf.fish, isPeak: cf.peakSeason };
+          } else if (cf.peakSeason) {
+            fishRecord[cf.fish.slug] = { fish: cf.fish, isPeak: true };
+          }
+        }
+      }
+    }
+    const all = Object.values(fishRecord);
+    const peak = all.filter((f) => f.isPeak).sort((a, b) => a.fish.name.localeCompare(b.fish.name));
+    const nonPeak = all.filter((f) => !f.isPeak).sort((a, b) => a.fish.name.localeCompare(b.fish.name));
+    return { peak, nonPeak, all };
+  }, [filteredSpots, month]);
 
   // スコアリング＆ソート
   const scoredSpots = useMemo(() => {
@@ -628,8 +711,13 @@ export default function RecommendationPage() {
   const topSpots = scoredSpots.slice(0, 6);
 
   // 選択済みラベル取得
+  const getCategoryLabel = () => {
+    const labels: Record<FishingCategory, string> = { all: "すべて", sea: "海釣り", freshwater: "淡水釣り" };
+    return labels[fishingCategory];
+  };
   const getRegionLabel = () => {
     if (selectedRegion === "geolocation") return "現在地から";
+    if (selectedPrefecture) return selectedPrefecture;
     const opt = REGION_OPTIONS.find((r) => r.value === selectedRegion);
     return opt?.label || "全国";
   };
@@ -643,8 +731,8 @@ export default function RecommendationPage() {
   };
   const getFishLabel = () => {
     if (!targetFishSlug) return "指定なし";
-    const f = seasonalFish.find((fs) => fs.slug === targetFishSlug);
-    return f?.name || "指定なし";
+    const f = spotFishList.all.find((sf) => sf.fish.slug === targetFishSlug);
+    return f?.fish.name || "指定なし";
   };
 
   const formatDate = (d: Date) => {
@@ -675,7 +763,7 @@ export default function RecommendationPage() {
               今日どこに行こうかな？
             </h1>
             <p className="mt-2 text-orange-100 text-sm sm:text-base">
-              {formatDate(today)} ー 4つの質問に答えるだけで最適な釣り場が見つかります
+              {formatDate(today)} ー 5つの質問に答えるだけで最適な釣り場が見つかります
             </p>
           </div>
         </section>
@@ -804,68 +892,45 @@ export default function RecommendationPage() {
             </div>
           )}
 
-          {/* ============ STEP 1: エリア選択 ============ */}
+          {/* ============ STEP 1: 種類選択 ============ */}
           {currentStep === 1 && !showResults && (
-            <Card className="border-orange-200 shadow-lg animate-in fade-in slide-in-from-bottom-3 duration-300">
+            <Card className="border-cyan-200 shadow-lg animate-in fade-in slide-in-from-bottom-3 duration-300">
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg flex items-center gap-2">
-                  <Globe className="size-5 text-orange-500" />
-                  Step 1：どこで釣りたい？
+                  <Waves className="size-5 text-cyan-500" />
+                  Step 1：どんな釣り？
                 </CardTitle>
                 <p className="text-sm text-gray-500 mt-1">
-                  釣りに行きたいエリアを選んでください
+                  海釣りか淡水釣りかを選んでください
                 </p>
               </CardHeader>
               <CardContent className="p-4 pt-0">
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                  {/* 現在地から探す */}
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   <button
-                    onClick={() => handleRegionSelect("geolocation")}
-                    disabled={geoLoading}
-                    className="relative p-4 rounded-xl border-2 border-dashed border-blue-300 bg-blue-50 hover:bg-blue-100 hover:border-blue-400 transition-all text-center group"
+                    onClick={() => handleCategorySelect("sea")}
+                    className="p-5 rounded-xl border-2 border-gray-200 hover:border-cyan-400 hover:bg-cyan-50 transition-all text-center group"
                   >
-                    {geoLoading ? (
-                      <Loader2 className="size-8 text-blue-500 mx-auto mb-2 animate-spin" />
-                    ) : (
-                      <Navigation className="size-8 text-blue-500 mx-auto mb-2 group-hover:scale-110 transition-transform" />
-                    )}
-                    <span className="block text-sm font-bold text-blue-700">
-                      {geoLoading ? "取得中..." : "現在地から探す"}
-                    </span>
-                    <span className="block text-[10px] text-blue-500 mt-1">
-                      GPSで近くのスポットを検索
-                    </span>
+                    <span className="block text-3xl mb-2 group-hover:scale-110 transition-transform">🌊</span>
+                    <span className="block text-base font-bold text-gray-700 group-hover:text-cyan-700">海釣り</span>
+                    <span className="block text-xs text-gray-500 mt-1">堤防・漁港・磯・砂浜など</span>
                   </button>
-
-                  {/* 全国 */}
-                  {REGION_OPTIONS.map((region) => (
-                    <button
-                      key={region.value}
-                      onClick={() => handleRegionSelect(region.value)}
-                      className="p-4 rounded-xl border-2 border-gray-200 hover:border-orange-400 hover:bg-orange-50 transition-all text-center group"
-                    >
-                      <span className="block text-2xl mb-2 group-hover:scale-110 transition-transform">
-                        {region.icon}
-                      </span>
-                      <span className="block text-sm font-bold text-gray-700 group-hover:text-orange-700">
-                        {region.label}
-                      </span>
-                      {region.value !== "all" && (
-                        <span className="block text-[10px] text-gray-400 mt-1">
-                          {region.prefectures.length}都道府県
-                        </span>
-                      )}
-                      {region.value === "all" && (
-                        <span className="block text-[10px] text-gray-400 mt-1">
-                          エリア指定なし
-                        </span>
-                      )}
-                    </button>
-                  ))}
+                  <button
+                    onClick={() => handleCategorySelect("freshwater")}
+                    className="p-5 rounded-xl border-2 border-gray-200 hover:border-emerald-400 hover:bg-emerald-50 transition-all text-center group"
+                  >
+                    <span className="block text-3xl mb-2 group-hover:scale-110 transition-transform">🏞️</span>
+                    <span className="block text-base font-bold text-gray-700 group-hover:text-emerald-700">淡水釣り</span>
+                    <span className="block text-xs text-gray-500 mt-1">川・湖・池・渓流など</span>
+                  </button>
+                  <button
+                    onClick={() => handleCategorySelect("all")}
+                    className="p-5 rounded-xl border-2 border-dashed border-gray-300 hover:border-orange-400 hover:bg-orange-50 transition-all text-center group"
+                  >
+                    <span className="block text-3xl mb-2 group-hover:scale-110 transition-transform">🗾</span>
+                    <span className="block text-base font-bold text-gray-700 group-hover:text-orange-700">どちらも</span>
+                    <span className="block text-xs text-gray-500 mt-1">ジャンル問わず提案</span>
+                  </button>
                 </div>
-                {geoError && (
-                  <p className="text-xs text-red-500 mt-3 text-center">{geoError}</p>
-                )}
               </CardContent>
             </Card>
           )}
@@ -881,7 +946,146 @@ export default function RecommendationPage() {
                   <Check className="size-4" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="text-xs text-green-600 font-medium">Step 1：エリア</span>
+                  <span className="text-xs text-green-600 font-medium">Step 1：種類</span>
+                  <p className="text-sm font-bold text-green-800 truncate">{getCategoryLabel()}</p>
+                </div>
+                <ChevronDown className="size-4 text-green-400 flex-shrink-0" />
+              </div>
+            </button>
+          )}
+
+          {/* ============ STEP 2: エリア選択 ============ */}
+          {currentStep === 2 && !showResults && (
+            <Card className="border-orange-200 shadow-lg animate-in fade-in slide-in-from-bottom-3 duration-300">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Globe className="size-5 text-orange-500" />
+                  Step 2：どこで釣りたい？
+                </CardTitle>
+                <p className="text-sm text-gray-500 mt-1">
+                  {showPrefectureDetail
+                    ? "都道府県を選ぶか、地方全体で探すこともできます"
+                    : "釣りに行きたいエリアを選んでください"}
+                </p>
+              </CardHeader>
+              <CardContent className="p-4 pt-0">
+                {showPrefectureDetail ? (
+                  /* 都道府県サブ選択 */
+                  <div className="space-y-3">
+                    <button
+                      onClick={() => setShowPrefectureDetail(false)}
+                      className="flex items-center gap-1 text-xs text-gray-500 hover:text-orange-600 transition-colors"
+                    >
+                      <ChevronRight className="size-3 rotate-180" />
+                      地方選択に戻る
+                    </button>
+                    <div className="text-center mb-2">
+                      <span className="text-sm font-bold text-orange-700">
+                        {REGION_OPTIONS.find((r) => r.value === selectedRegion)?.icon}{" "}
+                        {REGION_OPTIONS.find((r) => r.value === selectedRegion)?.label}
+                      </span>
+                    </div>
+                    {/* この地方全体 */}
+                    <button
+                      onClick={() => handlePrefectureSelect(null)}
+                      className="w-full p-3 rounded-xl border-2 border-dashed border-orange-300 bg-orange-50 hover:bg-orange-100 hover:border-orange-400 transition-all text-center"
+                    >
+                      <span className="text-sm font-bold text-orange-700">
+                        この地方全体で探す
+                      </span>
+                      <span className="block text-[10px] text-orange-500 mt-0.5">
+                        {REGION_OPTIONS.find((r) => r.value === selectedRegion)?.prefectures.length}都道府県すべて
+                      </span>
+                    </button>
+                    {/* 都道府県ボタン */}
+                    <div className="grid grid-cols-3 sm:grid-cols-4 gap-2">
+                      {REGION_OPTIONS.find((r) => r.value === selectedRegion)?.prefectures.map((pref) => {
+                        const spotCount = fishingSpots.filter((s) => s.region.prefecture === pref).length;
+                        return (
+                          <button
+                            key={pref}
+                            onClick={() => handlePrefectureSelect(pref)}
+                            className="p-3 rounded-xl border-2 border-gray-200 hover:border-orange-400 hover:bg-orange-50 transition-all text-center group"
+                          >
+                            <span className="block text-sm font-bold text-gray-700 group-hover:text-orange-700">
+                              {pref.replace(/県|府|都/, "")}
+                            </span>
+                            <span className="block text-[10px] text-gray-400 mt-0.5">
+                              {spotCount}スポット
+                            </span>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                ) : (
+                  /* 地方選択 */
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    {/* 現在地から探す */}
+                    <button
+                      onClick={() => handleRegionSelect("geolocation")}
+                      disabled={geoLoading}
+                      className="relative p-4 rounded-xl border-2 border-dashed border-blue-300 bg-blue-50 hover:bg-blue-100 hover:border-blue-400 transition-all text-center group"
+                    >
+                      {geoLoading ? (
+                        <Loader2 className="size-8 text-blue-500 mx-auto mb-2 animate-spin" />
+                      ) : (
+                        <Navigation className="size-8 text-blue-500 mx-auto mb-2 group-hover:scale-110 transition-transform" />
+                      )}
+                      <span className="block text-sm font-bold text-blue-700">
+                        {geoLoading ? "取得中..." : "現在地から探す"}
+                      </span>
+                      <span className="block text-[10px] text-blue-500 mt-1">
+                        GPSで近くのスポットを検索
+                      </span>
+                    </button>
+
+                    {/* 全国・各地方 */}
+                    {REGION_OPTIONS.map((region) => (
+                      <button
+                        key={region.value}
+                        onClick={() => handleRegionSelect(region.value)}
+                        className="p-4 rounded-xl border-2 border-gray-200 hover:border-orange-400 hover:bg-orange-50 transition-all text-center group"
+                      >
+                        <span className="block text-2xl mb-2 group-hover:scale-110 transition-transform">
+                          {region.icon}
+                        </span>
+                        <span className="block text-sm font-bold text-gray-700 group-hover:text-orange-700">
+                          {region.label}
+                        </span>
+                        {region.value !== "all" && (
+                          <span className="block text-[10px] text-gray-400 mt-1">
+                            {region.prefectures.length}都道府県
+                          </span>
+                        )}
+                        {region.value === "all" && (
+                          <span className="block text-[10px] text-gray-400 mt-1">
+                            エリア指定なし
+                          </span>
+                        )}
+                      </button>
+                    ))}
+                  </div>
+                )}
+                {geoError && (
+                  <p className="text-xs text-red-500 mt-3 text-center">{geoError}</p>
+                )}
+              </CardContent>
+            </Card>
+          )}
+
+          {/* 完了したStep 2（折りたたみ） */}
+          {completedSteps.includes(2) && currentStep !== 2 && (
+            <button
+              onClick={() => goToStep(2)}
+              className="w-full text-left"
+            >
+              <div className="flex items-center gap-3 px-4 py-3 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 transition-colors">
+                <div className="w-7 h-7 rounded-full bg-green-500 text-white flex items-center justify-center flex-shrink-0">
+                  <Check className="size-4" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <span className="text-xs text-green-600 font-medium">Step 2：エリア</span>
                   <p className="text-sm font-bold text-green-800 truncate">{getRegionLabel()}</p>
                 </div>
                 <ChevronDown className="size-4 text-green-400 flex-shrink-0" />
@@ -889,13 +1093,13 @@ export default function RecommendationPage() {
             </button>
           )}
 
-          {/* ============ STEP 2: レベル選択 ============ */}
-          {currentStep === 2 && !showResults && (
+          {/* ============ STEP 3: レベル選択 ============ */}
+          {currentStep === 3 && !showResults && (
             <Card className="border-blue-200 shadow-lg animate-in fade-in slide-in-from-bottom-3 duration-300">
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg flex items-center gap-2">
                   <TrendingUp className="size-5 text-blue-500" />
-                  Step 2：釣りレベルは？
+                  Step 3：釣りレベルは？
                 </CardTitle>
                 <p className="text-sm text-gray-500 mt-1">
                   あなたの釣り経験を教えてください
@@ -952,10 +1156,10 @@ export default function RecommendationPage() {
             </Card>
           )}
 
-          {/* 完了したStep 2（折りたたみ） */}
-          {completedSteps.includes(2) && currentStep !== 2 && (
+          {/* 完了したStep 3（折りたたみ） */}
+          {completedSteps.includes(3) && currentStep !== 3 && (
             <button
-              onClick={() => goToStep(2)}
+              onClick={() => goToStep(3)}
               className="w-full text-left"
             >
               <div className="flex items-center gap-3 px-4 py-3 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 transition-colors">
@@ -963,7 +1167,7 @@ export default function RecommendationPage() {
                   <Check className="size-4" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="text-xs text-green-600 font-medium">Step 2：レベル</span>
+                  <span className="text-xs text-green-600 font-medium">Step 3：レベル</span>
                   <p className="text-sm font-bold text-green-800 truncate">{getLevelLabel()}</p>
                 </div>
                 <ChevronDown className="size-4 text-green-400 flex-shrink-0" />
@@ -971,13 +1175,13 @@ export default function RecommendationPage() {
             </button>
           )}
 
-          {/* ============ STEP 3: 同行者選択 ============ */}
-          {currentStep === 3 && !showResults && (
+          {/* ============ STEP 4: 同行者選択 ============ */}
+          {currentStep === 4 && !showResults && (
             <Card className="border-purple-200 shadow-lg animate-in fade-in slide-in-from-bottom-3 duration-300">
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Users className="size-5 text-purple-500" />
-                  Step 3：誰と行く？
+                  Step 4：誰と行く？
                 </CardTitle>
                 <p className="text-sm text-gray-500 mt-1">
                   同行者によっておすすめスポットが変わります
@@ -1031,10 +1235,10 @@ export default function RecommendationPage() {
             </Card>
           )}
 
-          {/* 完了したStep 3（折りたたみ） */}
-          {completedSteps.includes(3) && currentStep !== 3 && (
+          {/* 完了したStep 4（折りたたみ） */}
+          {completedSteps.includes(4) && currentStep !== 4 && (
             <button
-              onClick={() => goToStep(3)}
+              onClick={() => goToStep(4)}
               className="w-full text-left"
             >
               <div className="flex items-center gap-3 px-4 py-3 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 transition-colors">
@@ -1042,7 +1246,7 @@ export default function RecommendationPage() {
                   <Check className="size-4" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="text-xs text-green-600 font-medium">Step 3：同行者</span>
+                  <span className="text-xs text-green-600 font-medium">Step 4：同行者</span>
                   <p className="text-sm font-bold text-green-800 truncate">{getCompanionLabel()}</p>
                 </div>
                 <ChevronDown className="size-4 text-green-400 flex-shrink-0" />
@@ -1050,8 +1254,8 @@ export default function RecommendationPage() {
             </button>
           )}
 
-          {/* ============ STEP 4: 釣りたい魚 ============ */}
-          {currentStep === 4 && !showResults && (
+          {/* ============ STEP 5: 釣りたい魚 ============ */}
+          {currentStep === 5 && !showResults && (
             <Card className="border-teal-200 shadow-lg animate-in fade-in slide-in-from-bottom-3 duration-300">
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg flex items-center gap-2">
@@ -1059,7 +1263,7 @@ export default function RecommendationPage() {
                   Step 4：何を釣りたい？
                 </CardTitle>
                 <p className="text-sm text-gray-500 mt-1">
-                  狙いたい魚があれば選択（任意）
+                  狙いたい魚があれば選択（任意）・{spotFishList.all.length}種類が今釣れます
                 </p>
               </CardHeader>
               <CardContent className="p-4 pt-0">
@@ -1078,20 +1282,20 @@ export default function RecommendationPage() {
                   </button>
 
                   {/* 旬の魚（優先表示） */}
-                  {peakFish.length > 0 && (
+                  {spotFishList.peak.length > 0 && (
                     <div>
                       <p className="text-xs font-medium text-orange-600 mb-2 flex items-center gap-1">
                         <Star className="size-3 fill-orange-400 text-orange-400" />
                         今が旬の魚
                       </p>
                       <div className="flex flex-wrap gap-2">
-                        {peakFish.map((f) => (
+                        {spotFishList.peak.map((f) => (
                           <button
-                            key={f.slug}
-                            onClick={() => handleFishSelect(f.slug)}
+                            key={f.fish.slug}
+                            onClick={() => handleFishSelect(f.fish.slug)}
                             className="px-4 py-2 rounded-lg border-2 border-orange-200 bg-orange-50 hover:bg-orange-100 hover:border-orange-400 transition-all text-sm font-medium text-orange-700"
                           >
-                            {f.name}
+                            {f.fish.name}
                             <span className="text-[10px] ml-1 text-orange-500">(旬)</span>
                           </button>
                         ))}
@@ -1100,33 +1304,33 @@ export default function RecommendationPage() {
                   )}
 
                   {/* その他の釣れる魚 */}
-                  <div>
-                    <p className="text-xs font-medium text-gray-500 mb-2">
-                      その他の釣れる魚
-                    </p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {seasonalFish
-                        .filter((f) => !f.peakMonths.includes(month))
-                        .map((f) => (
+                  {spotFishList.nonPeak.length > 0 && (
+                    <div>
+                      <p className="text-xs font-medium text-gray-500 mb-2">
+                        その他の釣れる魚
+                      </p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {spotFishList.nonPeak.map((f) => (
                           <button
-                            key={f.slug}
-                            onClick={() => handleFishSelect(f.slug)}
+                            key={f.fish.slug}
+                            onClick={() => handleFishSelect(f.fish.slug)}
                             className="px-3 py-1.5 rounded-full text-xs border border-gray-200 bg-white hover:border-teal-400 hover:bg-teal-50 transition-all text-gray-600"
                           >
-                            {f.name}
+                            {f.fish.name}
                           </button>
                         ))}
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </div>
               </CardContent>
             </Card>
           )}
 
-          {/* 完了したStep 4（折りたたみ） */}
-          {completedSteps.includes(4) && currentStep !== 4 && !showResults && (
+          {/* 完了したStep 5（折りたたみ） */}
+          {completedSteps.includes(5) && currentStep !== 5 && !showResults && (
             <button
-              onClick={() => goToStep(4)}
+              onClick={() => goToStep(5)}
               className="w-full text-left"
             >
               <div className="flex items-center gap-3 px-4 py-3 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 transition-colors">
@@ -1134,7 +1338,7 @@ export default function RecommendationPage() {
                   <Check className="size-4" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="text-xs text-green-600 font-medium">Step 4：釣りたい魚</span>
+                  <span className="text-xs text-green-600 font-medium">Step 5：釣りたい魚</span>
                   <p className="text-sm font-bold text-green-800 truncate">{getFishLabel()}</p>
                 </div>
                 <ChevronDown className="size-4 text-green-400 flex-shrink-0" />
@@ -1162,6 +1366,10 @@ export default function RecommendationPage() {
                     </button>
                   </div>
                   <div className="flex flex-wrap gap-2">
+                    <Badge className="bg-cyan-100 text-cyan-700 border-cyan-200 hover:bg-cyan-200">
+                      <Waves className="size-3 mr-1" />
+                      {getCategoryLabel()}
+                    </Badge>
                     <Badge className="bg-orange-100 text-orange-700 border-orange-200 hover:bg-orange-200">
                       <Map className="size-3 mr-1" />
                       {getRegionLabel()}
