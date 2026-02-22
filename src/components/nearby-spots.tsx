@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import { useGeolocation } from "@/hooks/use-geolocation";
 import { FishingSpot, SPOT_TYPE_LABELS } from "@/types";
@@ -7,6 +8,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { MapPin, Navigation, Star, Loader2 } from "lucide-react";
+
+type WaterFilter = "all" | "sea" | "freshwater";
 
 function getDistanceKm(
   lat1: number,
@@ -32,6 +35,7 @@ function formatDistance(km: number): string {
 }
 
 export function NearbySpots({ allSpots }: { allSpots: FishingSpot[] }) {
+  const [waterFilter, setWaterFilter] = useState<WaterFilter>("all");
   const { latitude, longitude, error, loading, permissionDenied, requestLocation } =
     useGeolocation();
 
@@ -74,8 +78,14 @@ export function NearbySpots({ allSpots }: { allSpots: FishingSpot[] }) {
     );
   }
 
-  // 近くのスポットを計算
-  const spotsWithDistance = allSpots
+  // フィルタリング + 近くのスポットを計算
+  const filtered = waterFilter === "all"
+    ? allSpots
+    : waterFilter === "sea"
+      ? allSpots.filter((s) => s.spotType !== "river")
+      : allSpots.filter((s) => s.spotType === "river");
+
+  const spotsWithDistance = filtered
     .map((spot) => ({
       ...spot,
       distanceKm: getDistanceKm(latitude, longitude, spot.latitude, spot.longitude),
@@ -87,15 +97,36 @@ export function NearbySpots({ allSpots }: { allSpots: FishingSpot[] }) {
 
   return (
     <div>
-      <div className="mb-4 flex items-center gap-2">
-        <div className="flex size-8 items-center justify-center rounded-full bg-sky-100">
-          <Navigation className="size-4 text-sky-600" />
+      <div className="mb-4 flex items-center justify-between gap-2">
+        <div className="flex items-center gap-2">
+          <div className="flex size-8 items-center justify-center rounded-full bg-sky-100">
+            <Navigation className="size-4 text-sky-600" />
+          </div>
+          <div>
+            <h2 className="text-base font-bold sm:text-lg">近くの釣りスポット</h2>
+            <p className="text-xs text-muted-foreground">
+              現在地から近い順に表示
+            </p>
+          </div>
         </div>
-        <div>
-          <h2 className="text-base font-bold sm:text-lg">近くの釣りスポット</h2>
-          <p className="text-xs text-muted-foreground">
-            現在地から近い順に表示
-          </p>
+        <div className="flex gap-1 rounded-lg border bg-muted/50 p-0.5">
+          {([
+            { value: "all" as const, label: "すべて" },
+            { value: "sea" as const, label: "🌊 海" },
+            { value: "freshwater" as const, label: "🏞️ 川" },
+          ]).map((opt) => (
+            <button
+              key={opt.value}
+              onClick={() => setWaterFilter(opt.value)}
+              className={`rounded-md px-2.5 py-1 text-xs font-medium transition-all ${
+                waterFilter === opt.value
+                  ? "bg-white text-foreground shadow-sm"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {opt.label}
+            </button>
+          ))}
         </div>
       </div>
 
