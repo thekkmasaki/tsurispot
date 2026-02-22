@@ -22,20 +22,40 @@ export const metadata: Metadata = {
   },
 };
 
-const jsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ItemList",
-  name: "月別釣りガイド",
-  description: "1月から12月まで、月ごとの釣り情報をまとめたガイド",
-  url: "https://tsurispot.com/monthly",
-  numberOfItems: 12,
-  itemListElement: monthlyGuides.map((guide, i) => ({
-    "@type": "ListItem",
-    position: i + 1,
-    name: guide.title,
-    url: `https://tsurispot.com/monthly/${guide.slug}`,
-  })),
-};
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "月別釣りガイド",
+    description: "1月から12月まで、月ごとの釣り情報をまとめたガイド",
+    url: "https://tsurispot.com/monthly",
+    numberOfItems: 12,
+    itemListElement: monthlyGuides.map((guide, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: guide.title,
+      url: `https://tsurispot.com/monthly/${guide.slug}`,
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "ホーム",
+        item: "https://tsurispot.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "月別釣りガイド",
+        item: "https://tsurispot.com/monthly",
+      },
+    ],
+  },
+];
 
 export default function MonthlyPage() {
   const currentMonth = new Date().getMonth() + 1;

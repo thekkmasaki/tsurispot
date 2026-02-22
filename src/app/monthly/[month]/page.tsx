@@ -38,11 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!guide) return {};
 
   const title = `${guide.title}｜ツリスポ`;
-  // descriptionを160文字以内に収める（全角文字は1文字として数える）
-  const rawDesc = guide.description;
-  const description = rawDesc.length <= 120
-    ? rawDesc
-    : rawDesc.substring(0, 118) + "…";
+  const description = guide.description;
 
   return {
     title,
@@ -113,18 +109,44 @@ export default async function MonthlyGuidePage({ params }: Props) {
   const currentMonth = new Date().getMonth() + 1;
   const isCurrentMonth = currentMonth === guide.month;
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
-    headline: guide.title,
-    description: guide.description,
-    url: `https://tsurispot.com/monthly/${month}`,
-    publisher: {
-      "@type": "Organization",
-      name: "ツリスポ",
-      url: "https://tsurispot.com",
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "Article",
+      headline: guide.title,
+      description: guide.description,
+      url: `https://tsurispot.com/monthly/${month}`,
+      publisher: {
+        "@type": "Organization",
+        name: "ツリスポ",
+        url: "https://tsurispot.com",
+      },
     },
-  };
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "ホーム",
+          item: "https://tsurispot.com",
+        },
+        {
+          "@type": "ListItem",
+          position: 2,
+          name: "月別釣りガイド",
+          item: "https://tsurispot.com/monthly",
+        },
+        {
+          "@type": "ListItem",
+          position: 3,
+          name: `${guide.nameJa}に釣れる魚`,
+          item: `https://tsurispot.com/monthly/${month}`,
+        },
+      ],
+    },
+  ];
 
   return (
     <>
@@ -155,7 +177,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-2">
                 <h1 className="text-2xl font-bold sm:text-3xl">
-                  {guide.nameJa}の釣り
+                  {guide.nameJa}に釣れる魚一覧
                 </h1>
                 {isCurrentMonth && (
                   <Badge variant="default" className="text-sm">
@@ -263,6 +285,14 @@ export default async function MonthlyGuidePage({ params }: Props) {
               );
             })}
           </div>
+          <div className="mt-4 text-center">
+            <Link
+              href="/catchable-now"
+              className="text-sm text-primary hover:underline"
+            >
+              今釣れる魚をもっと見る →
+            </Link>
+          </div>
         </section>
 
         {/* おすすめスポット */}
@@ -270,41 +300,66 @@ export default async function MonthlyGuidePage({ params }: Props) {
           <section className="mb-8">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
               <MapPin className="size-5 text-primary" />
-              {guide.nameJa}のおすすめスポット（上位{spotsForMonth.length}件）
+              {guide.nameJa}におすすめの釣りスポット
             </h2>
+            <p className="mb-4 text-sm text-muted-foreground">
+              {guide.nameJa}に旬の魚が釣れる人気スポットを厳選しました。評価の高いスポット上位{spotsForMonth.length}件を紹介します。
+            </p>
             <div className="grid gap-3 sm:grid-cols-2">
-              {spotsForMonth.map((spot) => (
-                <Link
-                  key={spot.slug}
-                  href={`/spots/${spot.slug}`}
-                  className="group flex items-start gap-3 rounded-lg border bg-white p-3 transition-shadow hover:shadow-md dark:bg-card"
-                >
-                  <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <MapPin className="size-5" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="flex flex-wrap items-center gap-2">
-                      <span className="font-semibold group-hover:text-primary">
-                        {spot.name}
-                      </span>
-                      <span className="text-xs text-muted-foreground">
-                        ★{spot.rating.toFixed(1)}
-                      </span>
+              {spotsForMonth.map((spot) => {
+                // この月に釣れる魚名を取得
+                const catchableFishNames = spot.catchableFish
+                  .filter((cf) => {
+                    const start = cf.monthStart;
+                    const end = cf.monthEnd;
+                    if (start <= end) {
+                      return guide.month >= start && guide.month <= end;
+                    } else {
+                      return guide.month >= start || guide.month <= end;
+                    }
+                  })
+                  .map((cf) => cf.fish.name)
+                  .slice(0, 4);
+
+                return (
+                  <Link
+                    key={spot.slug}
+                    href={`/spots/${spot.slug}`}
+                    className="group flex items-start gap-3 rounded-lg border bg-white p-3 transition-shadow hover:shadow-md dark:bg-card"
+                  >
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                      <MapPin className="size-5" />
                     </div>
-                    <p className="mt-0.5 text-xs text-muted-foreground">
-                      {spot.region.prefecture} ·{" "}
-                      {spot.difficulty === "beginner"
-                        ? "初心者向け"
-                        : spot.difficulty === "intermediate"
-                        ? "中級者向け"
-                        : "上級者向け"}
-                    </p>
-                    <p className="mt-1 line-clamp-1 text-xs text-muted-foreground">
-                      {spot.description}
-                    </p>
-                  </div>
-                </Link>
-              ))}
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <span className="font-semibold group-hover:text-primary">
+                          {spot.name}
+                        </span>
+                        <span className="text-xs text-muted-foreground">
+                          ★{spot.rating.toFixed(1)}
+                        </span>
+                      </div>
+                      <p className="mt-0.5 text-xs text-muted-foreground">
+                        {spot.region.prefecture} ·{" "}
+                        {spot.difficulty === "beginner"
+                          ? "初心者向け"
+                          : spot.difficulty === "intermediate"
+                          ? "中級者向け"
+                          : "上級者向け"}
+                      </p>
+                      {catchableFishNames.length > 0 && (
+                        <div className="mt-1 flex flex-wrap gap-1">
+                          {catchableFishNames.map((name) => (
+                            <Badge key={name} variant="secondary" className="text-[10px] px-1.5 py-0">
+                              {name}
+                            </Badge>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </Link>
+                );
+              })}
             </div>
             <div className="mt-4 text-center">
               <Link
@@ -442,7 +497,16 @@ export default async function MonthlyGuidePage({ params }: Props) {
         {/* 関連リンク */}
         <div className="rounded-xl border bg-muted/30 p-6">
           <h2 className="mb-4 text-base font-bold">関連ページ</h2>
-          <div className="grid gap-3 sm:grid-cols-3">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <Link
+              href="/catchable-now"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <p className="font-semibold">今釣れる魚</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                今の時期に釣れる魚をチェック
+              </p>
+            </Link>
             <Link
               href="/monthly"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
@@ -453,12 +517,12 @@ export default async function MonthlyGuidePage({ params }: Props) {
               </p>
             </Link>
             <Link
-              href="/catchable-now"
+              href="/fish"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
             >
-              <p className="font-semibold">今釣れる魚</p>
+              <p className="font-semibold">魚種図鑑</p>
               <p className="mt-1 text-xs text-muted-foreground">
-                今の時期に釣れる魚をチェック
+                全魚種の詳細情報を見る
               </p>
             </Link>
             <Link

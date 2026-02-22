@@ -15,6 +15,7 @@ import {
   Toilet,
   Store,
   ShoppingBag,
+  MessageSquare,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -46,6 +47,9 @@ import { StreetViewSection } from "@/components/spots/street-view-section";
 import { NearbyGpsSearch } from "@/components/spots/nearby-gps-search";
 import { MobileQuickNav } from "@/components/spots/mobile-quick-nav";
 import { SpotAffiliateRecommend } from "@/components/spots/spot-affiliate-recommend";
+import { getCatchReportsBySpot } from "@/lib/data/catch-reports";
+import { CatchReportList } from "@/components/spots/catch-report-list";
+import { CatchReportForm } from "@/components/spots/catch-report-form";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -189,14 +193,37 @@ export default async function SpotDetailPage({ params }: PageProps) {
       },
       {
         "@type": "Question",
-        name: `${spot.name}は初心者でも楽しめますか？`,
+        name: `${spot.name}にトイレはありますか？`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: spot.hasToilet
+            ? `はい、${spot.name}にはトイレがあります。`
+            : `${spot.name}には専用トイレはありません。近隣のコンビニや公共施設のトイレをご利用ください。`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `${spot.name}の難易度は？`,
         acceptedAnswer: {
           "@type": "Answer",
           text: difficultyAnswer,
         },
       },
+      {
+        "@type": "Question",
+        name: `${spot.name}へのアクセスは？`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${spot.name}の所在地は${spot.address}です。${spot.accessInfo}`,
+        },
+      },
     ],
   };
+
+  // 夜釣り可能かどうかの判定（bestTimesに夜があるか、catchableFishのrecommendedTimeに「夜」を含む場合）
+  const isNightFishing =
+    spot.bestTimes.some((bt) => bt.label.includes("夜")) ||
+    spot.catchableFish.some((cf) => cf.recommendedTime.includes("夜"));
 
   // Get nearby spots for internal linking (exclude self, top 5 by Haversine distance)
   const nearbySpots: NearbySpot[] = getNearbySpots(spot.latitude, spot.longitude, 6).filter(
@@ -471,6 +498,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 <GearGuideList guides={spot.gearGuides} />
                 <SpotAffiliateRecommend
                   methods={spot.catchableFish.map((cf) => cf.method)}
+                  isNightFishing={isNightFishing}
                 />
               </section>
             </>
@@ -490,6 +518,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 </p>
                 <SpotAffiliateRecommend
                   methods={spot.catchableFish.map((cf) => cf.method)}
+                  isNightFishing={isNightFishing}
                 />
               </section>
             </>
@@ -696,6 +725,16 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
       {/* 広告 */}
       <InArticleAd className="mt-6" />
+
+      {/* ユーザー釣果報告（UGC） */}
+      <section id="catch-reports" className="mt-8 sm:mt-12">
+        <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+          <MessageSquare className="size-5" />
+          みんなの釣果報告
+        </h2>
+        <CatchReportList reports={getCatchReportsBySpot(slug)} />
+        <CatchReportForm spotSlug={slug} spotName={spot.name} />
+      </section>
 
       {/* 混雑予想 */}
       <section className="mt-8 sm:mt-12">

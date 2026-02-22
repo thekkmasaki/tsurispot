@@ -61,7 +61,7 @@ export const affiliateProducts: AffiliateProduct[] = [
   {
     id: "af-heated-vest",
     name: "電熱ベスト",
-    url: "https://amzn.to/40sdGZ6",
+    url: "https://amzn.to/4tJlbIR",
     description: "普段使いもできる電熱ベスト。大容量バッテリー付きで長持ちし、腰まで暖かいと好評。冬の長時間釣行の必需品です。",
     methodKeywords: [], // 全釣法対象（冬季のみ）
     seasons: ["winter"],
@@ -209,13 +209,18 @@ export const affiliateProducts: AffiliateProduct[] = [
  * @param methods スポットのcatchableFishから取得した釣り方の配列
  * @param currentMonth 現在の月 (1-12)
  * @param maxItems 最大表示数（デフォルト3）
+ * @param isNightFishing 夜釣りが可能なスポットかどうか
  */
 export function getRelevantAffiliateProducts(
   methods: string[],
   currentMonth: number,
-  maxItems: number = 3
+  maxItems: number = 3,
+  isNightFishing: boolean = false
 ): AffiliateProduct[] {
   const currentSeason = getSeasonFromMonth(currentMonth);
+
+  // 夜釣り関連の商品ID
+  const nightFishingProductIds = ["af-mobile-battery", "af-anker-charger"];
 
   // 各商品のスコアリング
   const scored = affiliateProducts
@@ -239,6 +244,11 @@ export function getRelevantAffiliateProducts(
             }
           }
         }
+      }
+
+      // 夜釣り可能なスポットではモバイルバッテリー系のスコアをブースト
+      if (isNightFishing && nightFishingProductIds.includes(product.id)) {
+        score += 15;
       }
 
       return { product, score };

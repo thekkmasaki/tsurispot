@@ -20,6 +20,7 @@ import {
   Compass,
   Package,
   Home,
+  FileText,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getFavorites } from "@/components/spots/favorite-button";
@@ -37,6 +38,7 @@ const moreNavItems = [
   { href: "/fish", label: "魚図鑑", icon: BookOpen },
   { href: "/area", label: "エリア一覧", icon: Compass },
   { href: "/area-guide", label: "エリアガイド", icon: MapPin },
+  { href: "/blog", label: "コラム", icon: FileText },
   { href: "/monthly", label: "月別ガイド", icon: Calendar },
   { href: "/guide", label: "釣りガイド", icon: GraduationCap },
   { href: "/gear", label: "おすすめ道具", icon: Package },

@@ -20,6 +20,7 @@ import {
   Sparkles,
   ChevronDown,
   Compass,
+  FileText,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SearchOverlay } from "./search-overlay";
@@ -37,6 +38,7 @@ const mainNavItems = [
 const moreNavItems = [
   { href: "/area", label: "エリア一覧", icon: Compass },
   { href: "/area-guide", label: "エリアガイド記事", icon: MapPin },
+  { href: "/blog", label: "コラム", icon: FileText },
   { href: "/monthly", label: "月別釣りガイド", icon: Calendar },
   { href: "/guide", label: "釣りガイド", icon: GraduationCap },
   { href: "/bouzu-checker", label: "ボウズ確率チェッカー", icon: Target },

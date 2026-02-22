@@ -3,13 +3,13 @@ import { getFishSpeciesWithSpots } from "@/lib/data";
 import { CatchableNowClient } from "./catchable-now-client";
 
 export const metadata: Metadata = {
-  title: "今釣れる魚 - 今月の旬の釣りターゲット一覧",
+  title: "今釣れる魚｜今月のおすすめターゲットと釣り方ガイド｜ツリスポ",
   description:
-    "今の時期に釣れる魚を旬・シーズン・来月から狙える魚に分類して紹介。季節ごとの釣りのコツや狙い目の魚種がひと目でわかります。初心者でも釣りやすい旬の魚を見つけて釣りに出かけましょう。",
+    "今の時期に釣れる魚を「旬の魚」「シーズン中の魚」「来月から狙える魚」に分類して紹介。今月の堤防・磯・サーフで狙えるターゲットと釣り方がひと目でわかります。初心者でも釣りやすい旬の魚を見つけて釣りに出かけましょう。",
   openGraph: {
-    title: "今釣れる魚 - 今月の旬の釣りターゲット一覧",
+    title: "今釣れる魚｜今月のおすすめターゲットと釣り方ガイド｜ツリスポ",
     description:
-      "今の時期に釣れる魚を旬・シーズン・来月から狙える魚に分類して紹介。季節ごとの釣りのコツがわかります。",
+      "今の時期に釣れる魚を旬・シーズン・来月から狙える魚に分類して紹介。堤防・磯で狙えるターゲットと釣り方がわかります。",
     type: "website",
     url: "https://tsurispot.com/catchable-now",
     siteName: "ツリスポ",

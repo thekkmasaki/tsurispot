@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Fish, ChevronLeft, ChevronRight, Lightbulb } from "lucide-react";
+import { Fish, ChevronLeft, ChevronRight, Lightbulb, Calendar } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -23,6 +23,11 @@ const SEASONAL_TIPS: Record<string, string> = {
 const MONTH_NAMES = [
   "1月", "2月", "3月", "4月", "5月", "6月",
   "7月", "8月", "9月", "10月", "11月", "12月",
+];
+
+const MONTH_SLUGS = [
+  "january", "february", "march", "april", "may", "june",
+  "july", "august", "september", "october", "november", "december",
 ];
 
 function getSeason(month: number): string {
@@ -218,14 +223,66 @@ export function CatchableNowClient({ fishSpecies, initialMonth }: CatchableNowCl
         </Card>
       </section>
 
-      {/* Link to fish encyclopedia */}
-      <div className="mt-8 text-center">
-        <Link href="/fish">
-          <Button variant="outline" className="gap-1">
-            魚種図鑑を見る
-            <ChevronRight className="size-4" />
-          </Button>
-        </Link>
+      {/* Monthly guide navigation */}
+      <section className="mt-10">
+        <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
+          <Calendar className="size-5 text-primary" />
+          他の月の釣りガイドを見る
+        </h2>
+        <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
+          {MONTH_NAMES.map((name, i) => {
+            const monthNum = i + 1;
+            const slug = MONTH_SLUGS[i];
+            const isSelected = monthNum === selectedMonth;
+            return (
+              <Link
+                key={slug}
+                href={`/monthly/${slug}`}
+                className={`rounded-lg border p-2 text-center text-sm font-medium transition-shadow hover:shadow-md ${
+                  isSelected
+                    ? "border-primary bg-primary/10 text-primary"
+                    : "bg-white hover:border-primary/30 dark:bg-card"
+                }`}
+              >
+                {name}
+              </Link>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* Related links */}
+      <div className="mt-8 rounded-xl border bg-muted/30 p-6">
+        <h2 className="mb-4 text-base font-bold">関連ページ</h2>
+        <div className="grid gap-3 sm:grid-cols-3">
+          <Link
+            href="/fish"
+            className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+          >
+            <p className="font-semibold">魚種図鑑</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              全魚種の詳しい情報を見る
+            </p>
+          </Link>
+          <Link
+            href="/monthly"
+            className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+          >
+            <p className="font-semibold">月別釣りガイド</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              全12ヶ月の釣り情報
+            </p>
+          </Link>
+          <Link
+            href="/spots"
+            className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+          >
+            <p className="font-semibold">釣りスポット検索</p>
+            <p className="mt-1 text-xs text-muted-foreground">
+              全国の人気釣り場を探す
+            </p>
+          </Link>
+        </div>
       </div>
     </div>
   );

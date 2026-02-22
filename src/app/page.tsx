@@ -4,6 +4,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { getCatchableNow, fishSpecies } from "@/lib/data/fish";
 import { areaGuides } from "@/lib/data/area-guides";
 import { prefectures } from "@/lib/data/prefectures";
+import { getLatestBlogPosts, BLOG_CATEGORIES } from "@/lib/data/blog";
 import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -25,6 +26,8 @@ import {
   TreePine,
   Anchor,
   Compass,
+  FileText,
+  Tag,
 } from "lucide-react";
 import { NearbySpots } from "@/components/nearby-spots";
 import { LocationRecommendations } from "@/components/location-recommendations";
@@ -85,6 +88,7 @@ export default function Home() {
   const currentMonth = new Date().getMonth() + 1;
   const catchableNow = getCatchableNow(currentMonth);
   const popularSpots = fishingSpots.slice(0, 6);
+  const latestPosts = getLatestBlogPosts(3);
 
   return (
     <div className="flex flex-col">
@@ -543,6 +547,81 @@ export default function Home() {
           </CardContent>
         </Card>
       </section>
+
+      {/* 最新コラム */}
+      {latestPosts.length > 0 && (
+        <section className="bg-muted/50 py-8 sm:py-16">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6">
+            <div className="mb-6 flex items-end justify-between sm:mb-8">
+              <div>
+                <h2 className="text-xl font-bold tracking-tight sm:text-3xl">
+                  最新コラム
+                </h2>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  釣りに役立つ情報をお届け
+                </p>
+              </div>
+              <Link
+                href="/blog"
+                className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
+              >
+                すべて見る
+                <ArrowRight className="size-4" />
+              </Link>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {latestPosts.map((post) => (
+                <Link key={post.id} href={`/blog/${post.slug}`}>
+                  <Card className="group h-full transition-shadow hover:shadow-md">
+                    <CardContent className="flex h-full flex-col gap-3 p-5">
+                      <div className="flex items-center gap-2">
+                        <Badge variant="secondary" className="text-xs">
+                          {BLOG_CATEGORIES[post.category]}
+                        </Badge>
+                        <span className="text-xs text-muted-foreground">
+                          {post.publishedAt}
+                        </span>
+                      </div>
+                      <h3 className="text-base font-semibold leading-snug group-hover:text-primary">
+                        {post.title}
+                      </h3>
+                      <p className="line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                        {post.description}
+                      </p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {post.tags.slice(0, 3).map((tag) => (
+                          <span
+                            key={tag}
+                            className="inline-flex items-center gap-0.5 rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground"
+                          >
+                            <Tag className="size-2.5" />
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="flex items-center gap-1 text-sm font-medium text-primary">
+                        続きを読む
+                        <ChevronRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+
+            {/* モバイル用「すべて見る」リンク */}
+            <div className="mt-6 flex justify-center sm:hidden">
+              <Link href="/blog">
+                <Button variant="outline" className="gap-1">
+                  すべてのコラムを見る
+                  <ArrowRight className="size-4" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* 事業者向けCTA */}
       <section className="border-t bg-gradient-to-b from-slate-50 to-slate-100 py-10 sm:py-16">

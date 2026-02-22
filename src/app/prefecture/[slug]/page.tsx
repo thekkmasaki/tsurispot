@@ -9,6 +9,8 @@ import {
   Calendar,
   Star,
   CheckCircle2,
+  TrendingUp,
+  Flame,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -19,6 +21,7 @@ import { SpotCard } from "@/components/spots/spot-card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { getPrefectureInfoBySlug } from "@/lib/data/prefecture-info";
 import { getFishSlugByName } from "@/lib/data";
+import { SPOT_TYPE_LABELS } from "@/types";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -80,6 +83,75 @@ function getCatchableFishForPrefecture(prefectureName: string) {
   return Array.from(fishMap.values()).sort((a, b) => b.count - a.count);
 }
 
+const MONTH_NAMES = [
+  "1月", "2月", "3月", "4月", "5月", "6月",
+  "7月", "8月", "9月", "10月", "11月", "12月",
+];
+
+/**
+ * 今月旬の魚が多く釣れるスポットTOP5を算出
+ */
+function getTopSeasionalSpots(prefectureName: string, currentMonth: number) {
+  const prefSpots = getSpotsForPrefecture(prefectureName);
+
+  const scored = prefSpots.map((spot) => {
+    // このスポットのcatchableFishの中で、今月がseasonMonthsに含まれる魚の数をカウント
+    const inSeasonFish = spot.catchableFish.filter((cf) =>
+      cf.fish.seasonMonths.includes(currentMonth)
+    );
+    return {
+      spot,
+      score: inSeasonFish.length,
+      seasonalFishNames: inSeasonFish.map((cf) => cf.fish.name),
+    };
+  });
+
+  return scored
+    .filter((s) => s.score > 0)
+    .sort((a, b) => b.score - a.score || b.spot.rating - a.spot.rating)
+    .slice(0, 5);
+}
+
+/**
+ * 今月この県で釣れる魚を収集（重複排除）
+ */
+function getInSeasonFishForPrefecture(
+  prefectureName: string,
+  currentMonth: number
+) {
+  const fishMap = new Map<
+    string,
+    { name: string; slug: string; isPeak: boolean; spotCount: number }
+  >();
+
+  for (const spot of fishingSpots) {
+    if (spot.region.prefecture !== prefectureName) continue;
+    for (const cf of spot.catchableFish) {
+      if (!cf.fish.seasonMonths.includes(currentMonth)) continue;
+      const existing = fishMap.get(cf.fish.id);
+      if (existing) {
+        existing.spotCount++;
+        if (cf.fish.peakMonths.includes(currentMonth)) {
+          existing.isPeak = true;
+        }
+      } else {
+        fishMap.set(cf.fish.id, {
+          name: cf.fish.name,
+          slug: cf.fish.slug,
+          isPeak: cf.fish.peakMonths.includes(currentMonth),
+          spotCount: 1,
+        });
+      }
+    }
+  }
+
+  return Array.from(fishMap.values()).sort((a, b) => {
+    // 旬（ピーク）の魚を先に、次にスポット数順
+    if (a.isPeak !== b.isPeak) return a.isPeak ? -1 : 1;
+    return b.spotCount - a.spotCount;
+  });
+}
+
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
@@ -94,16 +166,19 @@ export async function generateMetadata({
     .map((f) => f.name)
     .join("・");
 
-  const spotCountText = spots.length > 0 ? `${spots.length}選` : "";
-  const title = `${pref.name}の釣り場${spotCountText} - おすすめスポット完全ガイド【2025年版】`;
-  const description = `${pref.name}のおすすめ釣り場・穴場スポット${spots.length > 0 ? `${spots.length}箇所` : ""}を完全ガイド。堤防・漁港・磯など初心者向けから上級者向けまでエリア別に紹介。${topFishNames}が狙えます。駐車場・トイレ情報も掲載。`;
+  // スポットタイプ別の集計
+  const spotTypes = new Set(spots.map((s) => SPOT_TYPE_LABELS[s.spotType]));
+  const spotTypeText = Array.from(spotTypes).slice(0, 4).join("・");
+
+  const title = `${pref.name}の釣りスポット一覧｜${spotTypeText || "堤防・漁港・磯"}のおすすめ釣り場【2026年最新】`;
+  const description = `${pref.name}の釣りスポット${spots.length > 0 ? `${spots.length}箇所` : ""}を完全網羅。${spotTypeText || "堤防・漁港・磯"}など初心者から上級者までおすすめの釣り場をエリア別に紹介。${topFishNames}が狙えます。駐車場・トイレ・アクセス情報も掲載。`;
 
   return {
     title,
     description,
     openGraph: {
-      title,
-      description: `${pref.name}の釣りスポット${spots.length > 0 ? `${spots.length}件` : ""}をエリア別に紹介。${topFishNames}が釣れます。`,
+      title: `${pref.name}の釣りスポット${spots.length > 0 ? `${spots.length}選` : ""}｜おすすめ釣り場ガイド`,
+      description: `${pref.name}で人気の釣りスポットをエリア別に紹介。${topFishNames}が釣れるおすすめの釣り場情報。`,
       type: "website",
       url: `https://tsurispot.com/prefecture/${pref.slug}`,
       siteName: "ツリスポ",
@@ -148,6 +223,12 @@ export default async function PrefecturePage({ params }: PageProps) {
   const freeSpots = spots.filter((s) => s.isFree);
 
   const spotCountText = spots.length > 0 ? `${spots.length}選` : "";
+
+  // 今月のデータ算出（SSGビルド時に確定）
+  const currentMonth = new Date().getMonth() + 1;
+  const currentMonthName = MONTH_NAMES[currentMonth - 1];
+  const topSeasonalSpots = getTopSeasionalSpots(pref.name, currentMonth);
+  const inSeasonFish = getInSeasonFishForPrefecture(pref.name, currentMonth);
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -248,7 +329,7 @@ export default async function PrefecturePage({ params }: PageProps) {
       {/* Header */}
       <div className="mb-6 sm:mb-8">
         <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
-          {pref.name}の釣り場{spotCountText} - おすすめスポット完全ガイド
+          {pref.name}の釣りスポット一覧｜おすすめ釣り場ガイド
         </h1>
         <p className="mt-2 text-sm text-muted-foreground sm:text-base">
           {spots.length > 0
@@ -285,6 +366,129 @@ export default async function PrefecturePage({ params }: PageProps) {
               </div>
             </CardContent>
           </Card>
+        </section>
+      )}
+
+      {/* 今月のおすすめスポットTOP5 */}
+      {topSeasonalSpots.length > 0 && (
+        <section className="mb-8 sm:mb-10">
+          <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
+            <TrendingUp className="size-5 text-orange-500" />
+            {currentMonthName}のおすすめスポットTOP5（{pref.name}）
+          </h2>
+          <p className="mb-4 text-sm text-muted-foreground">
+            {currentMonthName}に旬の魚が多く釣れるスポットをランキング形式でご紹介します。
+          </p>
+          <div className="grid gap-3 sm:gap-4">
+            {topSeasonalSpots.map((item, index) => (
+              <Link key={item.spot.id} href={`/spots/${item.spot.slug}`}>
+                <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
+                  <CardContent className="p-3 sm:p-4">
+                    <div className="flex items-start gap-3 sm:gap-4">
+                      {/* Rank badge */}
+                      <div
+                        className={`flex size-8 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white sm:size-10 sm:text-base ${
+                          index === 0
+                            ? "bg-yellow-500"
+                            : index === 1
+                              ? "bg-gray-400"
+                              : index === 2
+                                ? "bg-amber-700"
+                                : "bg-muted-foreground"
+                        }`}
+                      >
+                        {index + 1}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
+                          {item.spot.name}
+                        </h3>
+                        <p className="mt-0.5 text-xs text-muted-foreground">
+                          {item.spot.region.areaName}
+                          <span className="mx-1">|</span>
+                          {SPOT_TYPE_LABELS[item.spot.spotType]}
+                        </p>
+                        <div className="mt-2 flex flex-wrap gap-1">
+                          {item.seasonalFishNames.slice(0, 6).map((name) => (
+                            <Badge
+                              key={name}
+                              variant="secondary"
+                              className="text-xs"
+                            >
+                              <Flame className="mr-0.5 size-3 text-orange-500" />
+                              {name}
+                            </Badge>
+                          ))}
+                          {item.seasonalFishNames.length > 6 && (
+                            <Badge variant="outline" className="text-xs">
+                              +{item.seasonalFishNames.length - 6}
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+                      <div className="shrink-0 text-right">
+                        <div className="flex items-center gap-1 text-sm">
+                          <Star className="size-4 fill-yellow-400 text-yellow-400" />
+                          <span className="font-medium">
+                            {item.spot.rating.toFixed(1)}
+                          </span>
+                        </div>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          旬の魚{item.score}種
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* 今月この県で釣れる魚 */}
+      {inSeasonFish.length > 0 && (
+        <section className="mb-8 sm:mb-10">
+          <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
+            <Fish className="size-5 text-blue-500" />
+            {currentMonthName}に{pref.name}で釣れる魚
+          </h2>
+          <p className="mb-4 text-sm text-muted-foreground">
+            {currentMonthName}がシーズンの魚種を一覧で表示しています。
+            {inSeasonFish.filter((f) => f.isPeak).length > 0 &&
+              `特に${inSeasonFish
+                .filter((f) => f.isPeak)
+                .slice(0, 3)
+                .map((f) => f.name)
+                .join("・")}は最盛期です。`}
+          </p>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+            {inSeasonFish.map((f) => (
+              <Link key={f.slug} href={`/fish/${f.slug}`}>
+                <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
+                  <CardContent className="p-3">
+                    <div className="flex items-center gap-2">
+                      <Fish className="size-4 shrink-0 text-primary" />
+                      <div className="min-w-0">
+                        <h3 className="truncate text-sm font-semibold group-hover:text-primary">
+                          {f.name}
+                        </h3>
+                        <p className="text-xs text-muted-foreground">
+                          {f.spotCount}スポット
+                        </p>
+                      </div>
+                    </div>
+                    {f.isPeak && (
+                      <Badge className="mt-1.5 bg-orange-500 text-xs hover:bg-orange-500">
+                        <Flame className="mr-0.5 size-3" />
+                        最盛期
+                      </Badge>
+                    )}
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
         </section>
       )}
 

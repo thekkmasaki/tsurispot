@@ -26,16 +26,18 @@ const CATEGORY_COLORS: Record<AffiliateProduct["category"], string> = {
 interface SpotAffiliateRecommendProps {
   /** スポットのcatchableFishから取得した釣り方の配列 */
   methods: string[];
+  /** 夜釣りが可能なスポットかどうか */
+  isNightFishing?: boolean;
 }
 
-export function SpotAffiliateRecommend({ methods }: SpotAffiliateRecommendProps) {
+export function SpotAffiliateRecommend({ methods, isNightFishing = false }: SpotAffiliateRecommendProps) {
   const [products, setProducts] = useState<AffiliateProduct[]>([]);
 
   useEffect(() => {
     const currentMonth = new Date().getMonth() + 1; // 1-12
-    const relevant = getRelevantAffiliateProducts(methods, currentMonth, 6);
+    const relevant = getRelevantAffiliateProducts(methods, currentMonth, 6, isNightFishing);
     setProducts(relevant);
-  }, [methods]);
+  }, [methods, isNightFishing]);
 
   if (products.length === 0) return null;
 
