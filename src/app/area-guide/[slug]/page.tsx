@@ -17,7 +17,22 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { areaGuides, getAreaGuideBySlug, getRelatedAreaGuides } from "@/lib/data/area-guides";
 import { fishingSpots } from "@/lib/data/spots";
+import { fishSpecies } from "@/lib/data/fish";
 import { DIFFICULTY_LABELS } from "@/types";
+
+// エリアガイドの魚名 → fishSpecies の名前へのマッピング（表記揺れ対応）
+const FISH_NAME_ALIASES: Record<string, string> = {
+  "タコ": "マダコ",
+  "グレ": "メジナ",
+  "チヌ": "クロダイ",
+  "ハマチ": "ブリ",
+};
+
+function getFishSlug(fishName: string): string | null {
+  const lookupName = FISH_NAME_ALIASES[fishName] || fishName;
+  const found = fishSpecies.find((f) => f.name === lookupName);
+  return found ? found.slug : null;
+}
 
 export async function generateStaticParams() {
   return areaGuides.map((g) => ({ slug: g.slug }));
@@ -117,11 +132,56 @@ export default async function AreaGuideDetailPage({
     ],
   };
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: `${guide.name}で何が釣れますか？`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${guide.name}では${guide.mainFish.join("・")}などが釣れます。ベストシーズンは${guide.bestSeason}です。`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `${guide.name}のベストシーズンはいつですか？`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${guide.name}のベストシーズンは${guide.bestSeason}です。${guide.tips[0] || ""}`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `${guide.name}には釣りスポットがいくつありますか？`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `ツリスポでは${guide.name}エリアに${allSpots.length}か所の釣りスポットを掲載しています。${guide.prefectures.join("・")}の釣り場情報を網羅しています。`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `${guide.name}で初心者におすすめの釣り場は？`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: beginnerSpots.length > 0
+            ? `${guide.name}で初心者におすすめの釣り場は${beginnerSpots.map((s) => s.name).join("、")}などです。設備が整っており安心して釣りを楽しめます。`
+            : `${guide.name}には初心者でも楽しめる釣り場が多数あります。堤防や漁港がおすすめです。`,
+        },
+      },
+    ],
+  };
+
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <div className="min-h-screen bg-background">
         {/* Hero */}
@@ -146,6 +206,25 @@ export default async function AreaGuideDetailPage({
                 <div className="flex items-center gap-2 rounded-lg bg-white/70 px-3 py-2 text-sm">
                   <MapPin className="h-4 w-4 text-primary" />
                   <span className="font-medium">{allSpots.length}スポット掲載</span>
+                </div>
+              </div>
+              <div className="mt-4">
+                <div className="mb-1.5 text-xs font-medium text-muted-foreground">主要ターゲット</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {guide.mainFish.map((fishName) => {
+                    const fishSlug = getFishSlug(fishName);
+                    return fishSlug ? (
+                      <Link key={fishName} href={`/fish/${fishSlug}`}>
+                        <Badge variant="secondary" className="cursor-pointer hover:bg-primary/10 text-sm">
+                          {fishName}
+                        </Badge>
+                      </Link>
+                    ) : (
+                      <Badge key={fishName} variant="secondary" className="text-sm">
+                        {fishName}
+                      </Badge>
+                    );
+                  })}
                 </div>
               </div>
             </div>
@@ -379,10 +458,19 @@ export default async function AreaGuideDetailPage({
                         const start = fishData?.monthStart ?? 1;
                         const end = fishData?.monthEnd ?? 12;
                         const peak = fishData?.peakSeason ?? false;
+                        const fishSlug = getFishSlug(fishName);
 
                         return (
                           <tr key={fishName} className="border-b last:border-0">
-                            <td className="py-2 font-medium text-sm">{fishName}</td>
+                            <td className="py-2 font-medium text-sm">
+                              {fishSlug ? (
+                                <Link href={`/fish/${fishSlug}`} className="text-primary hover:underline">
+                                  {fishName}
+                                </Link>
+                              ) : (
+                                fishName
+                              )}
+                            </td>
                             {Array.from({ length: 12 }, (_, i) => i + 1).map((m) => {
                               const inSeason = start <= end ? m >= start && m <= end : m >= start || m <= end;
                               return (

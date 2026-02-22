@@ -22,26 +22,47 @@ import {
   Moon,
   Snowflake,
   Clock,
+  BookOpen,
+  Sparkles,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { StepCard } from "@/components/guide/step-card";
 import { ProductList } from "@/components/affiliate/product-list";
 import { getTopProducts } from "@/lib/data/products";
+import { Badge } from "@/components/ui/badge";
 import { type LucideIcon } from "lucide-react";
 
-const detailGuides: {
+interface GuideItem {
   href: string;
   title: string;
   description: string;
   icon: LucideIcon;
-}[] = [
+  category: "beginner" | "method" | "scene";
+}
+
+const categoryLabels = {
+  beginner: { label: "入門", color: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200" },
+  method: { label: "釣り方別", color: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200" },
+  scene: { label: "シーン別", color: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200" },
+};
+
+const detailGuides: GuideItem[] = [
+  {
+    href: "/guide/beginner",
+    title: "釣り初心者完全ガイド",
+    description:
+      "釣りの魅力、道具選び、おすすめの釣り方、スポット選び、マナーまで完全網羅。これから釣りを始める方の必読ガイド。",
+    icon: Sparkles,
+    category: "beginner",
+  },
   {
     href: "/guide/setup",
     title: "竿とリールのセッティング方法",
     description:
       "リールの取り付け方、竿の継ぎ方、糸の通し方をステップバイステップで解説。",
     icon: Wrench,
+    category: "beginner",
   },
   {
     href: "/guide/knots",
@@ -49,6 +70,7 @@ const detailGuides: {
     description:
       "ユニノット・クリンチノット・電車結びの3つの基本を覚えましょう。",
     icon: Link2,
+    category: "beginner",
   },
   {
     href: "/guide/line",
@@ -56,6 +78,7 @@ const detailGuides: {
     description:
       "PE・ナイロン・フロロカーボンの違いと号数別の強度表。太さの使い分けも解説。",
     icon: Ruler,
+    category: "beginner",
   },
   {
     href: "/guide/sabiki",
@@ -63,6 +86,23 @@ const detailGuides: {
     description:
       "初心者の定番、サビキ釣りの準備から釣り方、片付けまで丁寧に解説。",
     icon: Fish,
+    category: "method",
+  },
+  {
+    href: "/guide/choinage",
+    title: "ちょい投げ釣り完全ガイド",
+    description:
+      "キスやハゼを狙うちょい投げ釣り。仕掛けの作り方、投げ方、誘い方を初心者向けに解説。",
+    icon: Target,
+    category: "method",
+  },
+  {
+    href: "/guide/anazuri",
+    title: "穴釣り完全ガイド",
+    description:
+      "テトラの穴でカサゴやメバルを狙う穴釣り。ブラクリ仕掛け、ポイント選び、安全対策を解説。",
+    icon: Waves,
+    category: "method",
   },
   {
     href: "/guide/casting",
@@ -70,6 +110,7 @@ const detailGuides: {
     description:
       "ちょい投げ・オーバーヘッド・サイドキャストの3つの投げ方を習得。",
     icon: Target,
+    category: "beginner",
   },
   {
     href: "/guide/budget",
@@ -77,6 +118,7 @@ const detailGuides: {
     description:
       "予算3千円〜3万円の3コース別に必要な道具と費用を徹底解説。節約のコツも紹介。",
     icon: DollarSign,
+    category: "beginner",
   },
   {
     href: "/guide/family",
@@ -84,6 +126,7 @@ const detailGuides: {
     description:
       "子供の年齢別おすすめ、安全対策、持ち物リストなど家族で楽しむ釣りの始め方。",
     icon: Users,
+    category: "scene",
   },
   {
     href: "/guide/rigs",
@@ -91,6 +134,7 @@ const detailGuides: {
     description:
       "サビキ・ウキ釣り・ちょい投げ・穴釣り・ルアーの5つの基本仕掛けをイラスト付きで解説。",
     icon: Ruler,
+    category: "beginner",
   },
   {
     href: "/guide/handling",
@@ -98,6 +142,7 @@ const detailGuides: {
     description:
       "氷締め・脳締め・血抜き・神経締めの方法を難易度別に解説。美味しく食べるコツも。",
     icon: Scissors,
+    category: "scene",
   },
   {
     href: "/guide/lure",
@@ -105,6 +150,7 @@ const detailGuides: {
     description:
       "ミノー・バイブレーション・ワーム・メタルジグなどルアーの種類と選び方、アクションの付け方を解説。",
     icon: Zap,
+    category: "method",
   },
   {
     href: "/guide/float-fishing",
@@ -112,6 +158,7 @@ const detailGuides: {
     description:
       "ウキの種類と選び方、仕掛けの作り方、エサの付け方、アタリの取り方を詳しく解説。",
     icon: CircleDot,
+    category: "method",
   },
   {
     href: "/guide/jigging",
@@ -119,6 +166,7 @@ const detailGuides: {
     description:
       "メタルジグの選び方、ロッドとリール、キャストとアクション、青物の取り込みと安全対策。",
     icon: Anchor,
+    category: "method",
   },
   {
     href: "/guide/eging",
@@ -126,6 +174,7 @@ const detailGuides: {
     description:
       "エギの選び方、シャクリ方とフォール、季節別のポイント、アオリイカの締め方を解説。",
     icon: Crosshair,
+    category: "method",
   },
   {
     href: "/guide/oyogase",
@@ -133,6 +182,7 @@ const detailGuides: {
     description:
       "サビキで釣ったアジやイワシを生きエサに大物を狙う！仕掛け・エサの付け方・やり取りのコツを解説。",
     icon: Fish,
+    category: "method",
   },
   {
     href: "/guide/night-fishing",
@@ -140,6 +190,7 @@ const detailGuides: {
     description:
       "ヘッドライトやケミホタルなど必要装備、夜に釣れる魚種、安全対策、マナーを解説。",
     icon: Moon,
+    category: "scene",
   },
   {
     href: "/guide/fish-handling",
@@ -147,6 +198,7 @@ const detailGuides: {
     description:
       "締め方・血抜き・クーラーボックスの使い方・氷の量と保冷時間・自宅での下処理を解説。",
     icon: Snowflake,
+    category: "scene",
   },
   {
     href: "/guide/tide",
@@ -154,6 +206,7 @@ const detailGuides: {
     description:
       "大潮・小潮の違い、潮見表の読み方、釣れる潮のタイミング、朝マズメ・夕マズメの重要性。",
     icon: Clock,
+    category: "beginner",
   },
 ];
 
@@ -312,6 +365,21 @@ export default function GuidePage() {
         <p className="mb-6 text-center text-sm text-muted-foreground">
           各テーマごとに、実践的な手順を詳しく解説しています。
         </p>
+
+        {/* カテゴリフィルタ表示 */}
+        <div className="mb-4 flex flex-wrap items-center justify-center gap-2">
+          {(Object.entries(categoryLabels) as [keyof typeof categoryLabels, typeof categoryLabels[keyof typeof categoryLabels]][]).map(
+            ([key, { label, color }]) => (
+              <span
+                key={key}
+                className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${color}`}
+              >
+                {label}（{detailGuides.filter((g) => g.category === key).length}件）
+              </span>
+            )
+          )}
+        </div>
+
         <div className="grid gap-4 sm:grid-cols-2">
           {detailGuides.map((guide) => (
             <Link key={guide.href} href={guide.href} className="group">
@@ -321,10 +389,19 @@ export default function GuidePage() {
                     <guide.icon className="size-5" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="font-medium text-foreground group-hover:text-primary">
-                      {guide.title}
-                    </p>
-                    <p className="mt-1 text-xs text-muted-foreground">
+                    <div className="mb-1 flex items-center gap-2">
+                      <p className="font-medium text-foreground group-hover:text-primary">
+                        {guide.title}
+                      </p>
+                    </div>
+                    <div className="mb-1">
+                      <span
+                        className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium ${categoryLabels[guide.category].color}`}
+                      >
+                        {categoryLabels[guide.category].label}
+                      </span>
+                    </div>
+                    <p className="text-xs text-muted-foreground">
                       {guide.description}
                     </p>
                   </div>

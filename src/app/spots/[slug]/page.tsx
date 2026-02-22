@@ -313,7 +313,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
       {/* Photo area */}
       <div className="mb-6 overflow-hidden rounded-xl sm:mb-8">
         <SpotImage
-          src={spot.mainImageUrl}
+          src={spot.mainImageUrl?.startsWith("http") ? spot.mainImageUrl : undefined}
           alt={spot.name}
           spotType={spot.spotType}
           height="h-48 sm:h-56 md:h-72"

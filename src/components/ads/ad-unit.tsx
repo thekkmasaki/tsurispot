@@ -14,11 +14,14 @@ declare global {
   }
 }
 
+const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_ID;
+
 export function AdUnit({ slot, format = "auto", className = "" }: AdUnitProps) {
   const adRef = useRef<HTMLModElement>(null);
   const pushed = useRef(false);
 
   useEffect(() => {
+    if (!ADSENSE_ID) return;
     if (pushed.current) return;
     try {
       (window.adsbygoogle = window.adsbygoogle || []).push({});
@@ -28,12 +31,14 @@ export function AdUnit({ slot, format = "auto", className = "" }: AdUnitProps) {
     }
   }, []);
 
+  if (!ADSENSE_ID) return null;
+
   return (
     <div className={`ad-container my-6 flex justify-center ${className}`}>
       <ins
         className="adsbygoogle"
         style={{ display: "block" }}
-        data-ad-client="ca-pub-8121234270035600"
+        data-ad-client={ADSENSE_ID}
         data-ad-slot={slot}
         data-ad-format={format}
         data-full-width-responsive="true"

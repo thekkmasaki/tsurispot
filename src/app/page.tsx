@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
 import { getCatchableNow, fishSpecies } from "@/lib/data/fish";
+import { areaGuides } from "@/lib/data/area-guides";
 import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -22,6 +23,7 @@ import {
   Calendar,
   TreePine,
   Anchor,
+  Compass,
 } from "lucide-react";
 import { NearbySpots } from "@/components/nearby-spots";
 import { OnlineUsersBadge } from "@/components/online-users-badge";
@@ -435,6 +437,72 @@ export default function Home() {
             </CardContent>
           </Card>
         </Link>
+      </section>
+
+      {/* エリア別釣り場ガイド */}
+      <section className="bg-muted/50 py-8 sm:py-16">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <div className="mb-6 flex items-end justify-between sm:mb-8">
+            <div>
+              <h2 className="text-xl font-bold tracking-tight sm:text-3xl">
+                エリア別釣り場ガイド
+              </h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                全国{areaGuides.length}エリアの釣り場を完全攻略
+              </p>
+            </div>
+            <Link
+              href="/area-guide"
+              className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
+            >
+              すべて見る
+              <ArrowRight className="size-4" />
+            </Link>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {areaGuides.slice(0, 6).map((guide) => (
+              <Link key={guide.slug} href={`/area-guide/${guide.slug}`}>
+                <Card className="group h-full transition-shadow hover:shadow-md">
+                  <CardContent className="p-4">
+                    <div className="mb-2 flex items-center gap-2">
+                      <div className="flex size-8 items-center justify-center rounded-lg bg-primary/10">
+                        <Compass className="size-4 text-primary" />
+                      </div>
+                      <h3 className="font-semibold group-hover:text-primary">
+                        {guide.name}
+                      </h3>
+                    </div>
+                    <p className="mb-3 line-clamp-2 text-xs text-muted-foreground leading-relaxed">
+                      {guide.description}
+                    </p>
+                    <div className="mb-2 flex flex-wrap gap-1">
+                      {guide.mainFish.slice(0, 3).map((f) => (
+                        <Badge key={f} variant="secondary" className="text-xs">
+                          {f}
+                        </Badge>
+                      ))}
+                    </div>
+                    <div className="flex items-center justify-between text-xs text-muted-foreground">
+                      <span>ベストシーズン: {guide.bestSeason}</span>
+                      <ChevronRight className="size-3.5 text-primary" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+
+          {/* モバイル用「すべて見る」リンク */}
+          <div className="mt-6 flex justify-center sm:hidden">
+            <Link href="/area-guide">
+              <Button variant="outline" className="gap-1">
+                すべてのエリアを見る
+                <ArrowRight className="size-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
       </section>
 
       {/* 初心者向けCTAセクション */}

@@ -74,6 +74,7 @@ export function Footer() {
               <li><Link href="/safety" className="hover:text-foreground">安全ガイド</Link></li>
               <li><Link href="/faq" className="hover:text-foreground">よくある質問</Link></li>
               <li><Link href="/contact" className="hover:text-foreground">お問い合わせ</Link></li>
+              <li><Link href="/partner" className="hover:text-foreground font-medium text-blue-600 dark:text-blue-400">釣具店・遊漁船の方へ</Link></li>
             </ul>
           </div>
           <div>
