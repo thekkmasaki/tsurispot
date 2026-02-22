@@ -563,13 +563,15 @@ export default async function SpotDetailPage({ params }: PageProps) {
         {/* Right: Sidebar */}
         <div className="space-y-6 sm:space-y-8">
           {/* Recommended tackle */}
-          {spot.tackleRecommendations.length > 0 && (
+          {spot.tackleRecommendations.filter((t) => t.amazonUrl !== "#" && t.rakutenUrl !== "#").length > 0 && (
             <section>
               <h2 className="mb-4 text-lg font-bold">おすすめタックル</h2>
               <div className="space-y-4">
-                {spot.tackleRecommendations.map((tackle) => (
-                  <TackleCard key={tackle.id} tackle={tackle} />
-                ))}
+                {spot.tackleRecommendations
+                  .filter((t) => t.amazonUrl !== "#" && t.rakutenUrl !== "#")
+                  .map((tackle) => (
+                    <TackleCard key={tackle.id} tackle={tackle} />
+                  ))}
               </div>
               <p className="mt-3 text-xs text-muted-foreground">
                 ※ 上記リンクはアフィリエイトリンクを含みます。購入による追加費用は発生しません。

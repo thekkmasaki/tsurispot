@@ -1,8 +1,28 @@
-import { ExternalLink } from "lucide-react";
+import Link from "next/link";
+import { ExternalLink, BookOpen } from "lucide-react";
 import { GearGuide as GearGuideType, DIFFICULTY_LABELS } from "@/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+
+// 釣り方名 → 解説ページスラッグのマッピング
+const METHOD_SLUG_MAP: { pattern: RegExp; slug: string; label: string }[] = [
+  { pattern: /サビキ/, slug: "sabiki", label: "サビキ釣りガイド" },
+  { pattern: /アジング/, slug: "ajing", label: "アジングガイド" },
+  { pattern: /エギング/, slug: "eging", label: "エギングガイド" },
+  { pattern: /メバリング/, slug: "mebaring", label: "メバリングガイド" },
+  { pattern: /ショアジギ/, slug: "shore-jigging", label: "ショアジギングガイド" },
+  { pattern: /ちょい投げ/, slug: "choi-nage", label: "ちょい投げガイド" },
+  { pattern: /ウキ釣り|フカセ/, slug: "uki-zuri", label: "ウキ釣りガイド" },
+  { pattern: /穴釣り|ブラクリ/, slug: "ana-zuri", label: "穴釣りガイド" },
+];
+
+function getMethodPageLink(methodName: string): { slug: string; label: string } | null {
+  for (const m of METHOD_SLUG_MAP) {
+    if (m.pattern.test(methodName)) return m;
+  }
+  return null;
+}
 
 // 装備項目に対応するアフィリエイトリンクのマッチング
 const GEAR_AFFILIATE_LINKS: { pattern: RegExp; url: string; label: string }[] = [
@@ -11,9 +31,17 @@ const GEAR_AFFILIATE_LINKS: { pattern: RegExp; url: string; label: string }[] = 
   { pattern: /フロロ/i, url: "https://amzn.to/4tKXyzu", label: "フロロカーボン" },
 ];
 
+// ロッド・リールのアフィリエイトリンク
+const ROD_AFFILIATE = { url: "https://amzn.to/4s4i64m", label: "おすすめロッド" };
+const REEL_AFFILIATE = { url: "https://amzn.to/4atW7Om", label: "おすすめリール" };
+
 // その他アイテムのアフィリエイトマッチング
 const ITEM_AFFILIATE_LINKS: { pattern: RegExp; url: string; label: string }[] = [
   { pattern: /コマセ|アミエビ|アミ姫/, url: "https://amzn.to/4c6gaUn", label: "アミ姫" },
+  { pattern: /おもり|オモリ|ガン玉|割りビシ|ナス型/, url: "https://amzn.to/4cFGDbl", label: "おもりセット" },
+  { pattern: /スナップ/, url: "https://amzn.to/4c9oMcU", label: "スナップ" },
+  { pattern: /タックルボックス|釣りボックス/, url: "https://amzn.to/4rvRhGx", label: "釣りボックス" },
+  { pattern: /ロッドスタンド|竿受け|竿立て/, url: "https://amzn.to/3OwwVy8", label: "ロッドスタンド" },
 ];
 
 function getLineAffiliateUrl(lineText: string): { url: string; label: string } | null {
@@ -98,6 +126,7 @@ function GearRow({ label, value, icon, affiliateUrl, affiliateLabel }: { label: 
 }
 
 export function GearGuideCard({ guide }: { guide: GearGuideType }) {
+  const methodLink = getMethodPageLink(guide.method);
   return (
     <Card className="overflow-hidden py-0">
       <div className="border-b bg-muted/50 px-3 py-2.5 sm:px-4 sm:py-3">
@@ -108,9 +137,20 @@ export function GearGuideCard({ guide }: { guide: GearGuideType }) {
               （{guide.targetFish}狙い）
             </span>
           </h4>
-          <Badge className={cn("shrink-0 text-xs", difficultyColors[guide.difficulty])}>
-            {DIFFICULTY_LABELS[guide.difficulty]}
-          </Badge>
+          <div className="flex shrink-0 items-center gap-2">
+            {methodLink && (
+              <Link
+                href={`/methods/${methodLink.slug}`}
+                className="inline-flex items-center gap-1 rounded-md bg-sky-50 px-2 py-1 text-[11px] font-medium text-sky-700 transition-colors hover:bg-sky-100"
+              >
+                <BookOpen className="size-3" />
+                やり方を見る
+              </Link>
+            )}
+            <Badge className={cn("text-xs", difficultyColors[guide.difficulty])}>
+              {DIFFICULTY_LABELS[guide.difficulty]}
+            </Badge>
+          </div>
         </div>
       </div>
       <CardContent className="p-3 sm:p-4">
@@ -118,8 +158,20 @@ export function GearGuideCard({ guide }: { guide: GearGuideType }) {
           const lineAffiliate = getLineAffiliateUrl(guide.line);
           return (
             <dl className="divide-y">
-              <GearRow icon="🎣" label="竿（ロッド）" value={guide.rod} />
-              <GearRow icon="🔄" label="リール" value={guide.reel} />
+              <GearRow
+                icon="🎣"
+                label="竿（ロッド）"
+                value={guide.rod}
+                affiliateUrl={ROD_AFFILIATE.url}
+                affiliateLabel={`${ROD_AFFILIATE.label}をAmazonで見る`}
+              />
+              <GearRow
+                icon="🔄"
+                label="リール"
+                value={guide.reel}
+                affiliateUrl={REEL_AFFILIATE.url}
+                affiliateLabel={`${REEL_AFFILIATE.label}をAmazonで見る`}
+              />
               <GearRow
                 icon="🧵"
                 label="糸（ライン）"
