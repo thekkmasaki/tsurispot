@@ -22,6 +22,7 @@ interface SpotBouzuCardProps {
   rating: number;
   reviewCount: number;
   prefecture: string;
+  areaName: string;
   isFree: boolean;
   hasRentalRod: boolean;
   catchableFishCount: number;
@@ -216,27 +217,126 @@ const FISH_CATCHABILITY: Record<string, {
   "ayu": { coefficient: 0.45, category: "predator", label: "アユ（友釣りは技術依存）" },
 };
 
-// 都道府県ごとの釣り圧補正（都会ほどプラス＝ボウズ確率UP）
-const PREFECTURE_PRESSURE: Record<string, number> = {
-  // 大都市圏（高い釣り圧）
-  "東京": 18, "神奈川": 14, "大阪": 14, "愛知": 12, "埼玉": 15,
-  "千葉": 8, "兵庫": 8, "福岡": 6, "京都": 10,
-  // 中規模都市圏
-  "静岡": 2, "広島": 4, "宮城": 4, "新潟": 0, "岡山": 4,
-  "三重": 0, "長崎": -2, "和歌山": -2, "石川": 0, "富山": 0,
-  // 地方（低い釣り圧 → マイナス）
-  "北海道": -8, "沖縄": -6, "鹿児島": -6, "宮崎": -6,
-  "高知": -8, "徳島": -4, "愛媛": -4, "香川": -2,
+// エリアベースの釣り圧補正（実際のスポット所在地で判定）
+// 同じ都道府県でも都市部と田舎で釣り圧が大きく異なるため、エリア単位で設定
+const AREA_PRESSURE: Record<string, number> = {
+  // 東京都
+  "東京湾": 18,
+  // 神奈川県
+  "横浜": 16, "湘南": 12, "三浦半島": 6, "西湘": 4,
+  // 千葉県
+  "房総半島": 6, "外房": 2,
+  // 大阪府
+  "大阪湾": 14, "大阪市南港": 16, "大正・此花": 16, "泉大津": 10, "岬町": 4,
+  // 兵庫県（都市部と田舎の差が大きい）
+  "阪神": 14, "明石": 6, "淡路島": -2, "淡路島南部": -4,
+  // 京都府（釣りスポットは全て日本海側の田舎）
+  "舞鶴": -4, "京丹後": -6,
+  // 愛知県
+  "知多半島": 10, "三河湾": 8,
+  // 埼玉県
+  // (内陸なので釣り場は限定的)
+  // 静岡県
+  "伊豆・熱海": 4, "駿河湾": 0,
+  // 三重県
+  "志摩": -2, "尾鷲": -4,
+  // 和歌山県
+  "南紀": -4, "紀北": 0,
+  // 福岡県
+  "博多湾": 8, "北九州": 4,
+  // 広島県
+  "瀬戸内": 2, "尾道": 0,
+  // 宮城県
+  "仙台湾": 4, "女川": -2, "石巻": 0,
+  // 新潟県
+  "新潟": 0, "寺泊": -2, "柏崎": -2,
+  // 茨城県
+  "大洗": 4, "鹿島": 2,
+  // 岡山県
+  "倉敷": 4,
+  // 滋賀県
+  "琵琶湖": 6,
+  // 山梨県
+  "山中湖": 6,
+  // 長野県
+  "諏訪湖": 4,
+  // 栃木県
+  "中禅寺湖": 4,
+  // 群馬県
+  "利根川": 6,
+  // 富山県
+  "氷見": -2,
+  // 石川県
+  "能登": -4, "能登島": -6,
+  // 福井県
+  "敦賀": -2, "三国": -4,
+  // 北海道
+  "小樽・石狩": -6, "函館": -4,
+  // 沖縄県
+  "那覇": -2, "宮古島": -8, "石垣島": -8,
+  "北谷・宜野湾": -4, "読谷・恩納": -6, "名護・本部": -6,
+  "金武・うるま": -6, "中城・南城": -6, "糸満・豊見城": -4,
+  // 鹿児島県
+  "錦江湾": -4, "屋久島": -8, "鹿児島市": -2, "枕崎": -6, "志布志": -6, "垂水": -6,
+  // 青森県
+  "八戸": -4, "陸奥湾": -6, "大間": -8,
+  // 岩手県
+  "宮古": -8, "久慈": -8,
+  // 秋田県
+  "男鹿": -6, "能代": -8,
+  // 山形県
+  "酒田": -6, "鼠ヶ関": -8,
+  // 福島県
+  "いわき": -2, "相馬新地": -4,
+  // 高知県
+  "土佐湾": -6, "足摺": -8, "宿毛": -8, "桂浜": -6,
+  // 徳島県
+  "鳴門": -2, "小松島": -4,
+  // 香川県
+  "高松": 0, "詫間": -4,
+  // 愛媛県
+  "松山": -2, "今治": -4, "佐田岬": -6,
+  // 大分県
+  "別府": -2, "佐伯": -6, "津久見": -6, "臼杵": -6, "佐賀関": -4,
+  // 熊本県
+  "天草": -6,
+  // 宮崎県
+  "日南": -6, "宮崎港": -4, "日南・油津": -6, "日向・細島": -6, "延岡": -4,
+  // 佐賀県
+  "唐津": -4, "呼子": -6,
+  // 長崎県
+  "五島": -8, "平戸": -6, "長崎市": -2, "佐世保": -4,
+  // 山口県
+  "下関": -2,
+  // 鳥取県
+  "境港": -4, "岩美": -6, "琴浦": -6,
+  // 島根県
+  "美保関": -6, "出雲大社": -4, "浜田": -6, "益田": -6, "隠岐": -8,
+};
+
+// 都道府県のデフォルト値（エリア名で見つからない場合のフォールバック）
+const PREFECTURE_PRESSURE_DEFAULT: Record<string, number> = {
+  "東京": 18, "神奈川": 10, "大阪": 14, "愛知": 10, "埼玉": 15,
+  "千葉": 6, "兵庫": 4, "福岡": 4, "京都": -4,
+  "静岡": 2, "広島": 2, "宮城": 2, "新潟": 0, "岡山": 4,
+  "三重": -2, "長崎": -4, "和歌山": -2, "石川": -2, "富山": -2,
+  "北海道": -6, "沖縄": -6, "鹿児島": -4, "宮崎": -6,
+  "高知": -6, "徳島": -4, "愛媛": -4, "香川": -2,
   "大分": -4, "熊本": -4, "佐賀": -4, "山口": -4,
   "鳥取": -6, "島根": -6, "福井": -4, "山形": -6,
   "秋田": -8, "岩手": -8, "青森": -6,
-  "茨城": 4, "栃木": 6, "群馬": 8, "山梨": 6, "長野": 4,
+  "茨城": 4, "栃木": 4, "群馬": 6, "山梨": 6, "長野": 4,
   "岐阜": 4, "滋賀": 6, "奈良": 10, "福島": -2,
 };
 
-function getPrefecturePressure(prefecture: string): number {
+function getAreaPressure(prefecture: string, areaName: string): number {
+  // まずエリア名で直接検索
+  if (AREA_PRESSURE[areaName] !== undefined) {
+    return AREA_PRESSURE[areaName];
+  }
+  // フォールバック: 都道府県デフォルト
   const key = prefecture.replace(/[都道府県]$/, "");
-  return PREFECTURE_PRESSURE[key] ?? 0;
+  return PREFECTURE_PRESSURE_DEFAULT[key] ?? 0;
 }
 
 // 月別の釣れやすさ補正
@@ -441,8 +541,8 @@ function calcSpotBouzuProbability(
   };
   score += difficultyMod[props.difficulty] ?? 0;
 
-  // 3. 地域差（都会vs田舎）
-  score += getPrefecturePressure(props.prefecture);
+  // 3. 地域差（エリア単位で判定）
+  score += getAreaPressure(props.prefecture, props.areaName);
 
   // 4. 月別補正
   score += getMonthCorrection(currentMonth);
@@ -522,16 +622,17 @@ function getBreakdown(
     positive: base <= 30,
   });
 
-  // 地域差
-  const pressure = getPrefecturePressure(props.prefecture);
+  // 地域差（エリア単位で判定）
+  const pressure = getAreaPressure(props.prefecture, props.areaName);
+  const areaLabel = `${props.prefecture} ${props.areaName}`;
   if (pressure >= 10) {
-    items.push({ label: `所在地（${props.prefecture}）`, effect: "都市部で釣り圧が高い", positive: false });
+    items.push({ label: `所在地（${areaLabel}）`, effect: "都市部で釣り圧が高い", positive: false });
   } else if (pressure >= 4) {
-    items.push({ label: `所在地（${props.prefecture}）`, effect: "やや釣り圧あり", positive: false });
+    items.push({ label: `所在地（${areaLabel}）`, effect: "やや釣り圧あり", positive: false });
   } else if (pressure <= -4) {
-    items.push({ label: `所在地（${props.prefecture}）`, effect: "釣り圧が低く好条件", positive: true });
+    items.push({ label: `所在地（${areaLabel}）`, effect: "釣り圧が低く好条件", positive: true });
   } else {
-    items.push({ label: `所在地（${props.prefecture}）`, effect: "平均的な釣り圧", positive: true });
+    items.push({ label: `所在地（${areaLabel}）`, effect: "平均的な釣り圧", positive: true });
   }
 
   // 月別

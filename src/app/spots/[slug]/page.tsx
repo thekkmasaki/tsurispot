@@ -388,21 +388,23 @@ export default async function SpotDetailPage({ params }: PageProps) {
                     key={cf.fish.id}
                     className="rounded-lg border p-3 text-sm"
                   >
-                    <div className="flex items-center gap-2 min-w-0">
-                      <Link
-                        href={`/fish/${cf.fish.slug}`}
-                        className="font-medium truncate hover:text-primary hover:underline"
-                      >
-                        {cf.fish.name}
-                      </Link>
-                      <Badge variant="secondary" className="text-xs shrink-0">
-                        {cf.method}
-                      </Badge>
-                    </div>
-                    <div className="mt-1.5 flex items-center justify-between gap-2">
-                      <p className="text-xs text-muted-foreground truncate">
-                        おすすめ時間帯: {cf.recommendedTime}
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <Link
+                          href={`/fish/${cf.fish.slug}`}
+                          className="font-medium truncate hover:text-primary hover:underline"
+                        >
+                          {cf.fish.name}
+                        </Link>
+                        <Badge variant="secondary" className="text-xs shrink-0">
+                          {cf.method}
+                        </Badge>
+                      </div>
+                      <p className="text-xs text-muted-foreground shrink-0">
+                        {cf.recommendedTime}
                       </p>
+                    </div>
+                    <div className="mt-2">
                       <FishLikeButton spotSlug={slug} fishSlug={cf.fish.slug} />
                     </div>
                   </div>
@@ -650,6 +652,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           rating={spot.rating}
           reviewCount={spot.reviewCount}
           prefecture={spot.region.prefecture}
+          areaName={spot.region.areaName}
           isFree={spot.isFree}
           hasRentalRod={spot.hasRentalRod}
           catchableFishCount={spot.catchableFish.length}
