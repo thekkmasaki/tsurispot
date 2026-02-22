@@ -9,6 +9,36 @@ import { cn } from "@/lib/utils";
 import { FishingSpot, SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { regions } from "@/lib/data/regions";
 
+// カタカナ → ひらがな変換
+function katakanaToHiragana(str: string): string {
+  return str.replace(/[\u30A1-\u30F6]/g, (ch) =>
+    String.fromCharCode(ch.charCodeAt(0) - 0x60)
+  );
+}
+
+// 検索用正規化（小文字+ひらがな統一）
+function normalizeForSearch(str: string): string {
+  return katakanaToHiragana(str).toLowerCase();
+}
+
+// あいまい検索：双方向部分一致 + かな正規化
+function fuzzyMatch(query: string, ...targets: string[]): boolean {
+  const nq = normalizeForSearch(query);
+  for (const target of targets) {
+    if (!target) continue;
+    const nt = normalizeForSearch(target);
+    // 双方向: "伊根町"で"伊根"を検索 or "伊根"で"伊根町"を検索 どちらもOK
+    if (nt.includes(nq) || nq.includes(nt)) return true;
+  }
+  // クエリが複数語の場合（スペース区切り）すべて含まれるかチェック
+  const words = nq.split(/\s+/).filter(Boolean);
+  if (words.length > 1) {
+    const combined = targets.filter(Boolean).map(normalizeForSearch).join(" ");
+    return words.every((w) => combined.includes(w));
+  }
+  return false;
+}
+
 function haversineDistance(
   lat1: number,
   lon1: number,
@@ -105,12 +135,13 @@ export function SpotListClient({ spots }: { spots: FishingSpot[] }) {
   const filteredSpots = useMemo(() => {
     const filtered = spots.filter((spot) => {
       if (searchText) {
-        const q = searchText.toLowerCase();
-        const nameMatch = spot.name.toLowerCase().includes(q);
-        const regionMatch =
-          spot.region.prefecture.toLowerCase().includes(q) ||
-          spot.region.areaName.toLowerCase().includes(q);
-        if (!nameMatch && !regionMatch) return false;
+        if (!fuzzyMatch(
+          searchText,
+          spot.name,
+          spot.region.prefecture,
+          spot.region.areaName,
+          spot.address,
+        )) return false;
       }
       if (selectedPrefecture && spot.region.prefecture !== selectedPrefecture) return false;
       if (selectedArea && spot.region.areaName !== selectedArea) return false;

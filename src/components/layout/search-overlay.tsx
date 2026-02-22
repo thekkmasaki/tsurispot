@@ -118,11 +118,12 @@ export function SearchOverlay() {
     // ひらがな・カタカナ両方で検索
     const qHiragana = katakanaToHiragana(q);
     return allItems
-      .filter(
-        (item) =>
-          item.searchText.includes(q) ||
-          item.searchText.includes(qHiragana)
-      )
+      .filter((item) => {
+        // 双方向: クエリがデータに含まれる OR データがクエリに含まれる
+        if (item.searchText.includes(q) || item.searchText.includes(qHiragana)) return true;
+        if (q.includes(item.name.toLowerCase()) || qHiragana.includes(katakanaToHiragana(item.name).toLowerCase())) return true;
+        return false;
+      })
       .slice(0, 10);
   }, [query]);
 
