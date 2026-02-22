@@ -3,6 +3,7 @@ import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
 import { getCatchableNow, fishSpecies } from "@/lib/data/fish";
 import { areaGuides } from "@/lib/data/area-guides";
+import { prefectures } from "@/lib/data/prefectures";
 import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -26,6 +27,7 @@ import {
   Compass,
 } from "lucide-react";
 import { NearbySpots } from "@/components/nearby-spots";
+import { LocationRecommendations } from "@/components/location-recommendations";
 import { OnlineUsersBadge } from "@/components/online-users-badge";
 import { SpotImage, FishImage } from "@/components/ui/spot-image";
 
@@ -216,6 +218,15 @@ export default function Home() {
       {/* 近くの釣りスポット */}
       <section className="mx-auto w-full max-w-5xl px-4 pt-8 sm:px-6 sm:pt-12">
         <NearbySpots allSpots={fishingSpots} />
+      </section>
+
+      {/* 現在地ベースのおすすめ記事 */}
+      <section className="mx-auto w-full max-w-5xl px-4 pt-6 sm:px-6 sm:pt-10">
+        <LocationRecommendations
+          allSpots={fishingSpots}
+          prefectures={prefectures}
+          areaGuides={areaGuides}
+        />
       </section>
 
       {/* 人気の釣りスポットセクション */}
