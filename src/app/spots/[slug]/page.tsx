@@ -330,6 +330,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           latitude={spot.latitude}
           longitude={spot.longitude}
           spotName={spot.name}
+          address={spot.address}
         />
       </div>
 

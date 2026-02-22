@@ -7,6 +7,7 @@ interface StreetViewSectionProps {
   latitude: number;
   longitude: number;
   spotName: string;
+  address?: string;
 }
 
 const EMBED_KEY = process.env.NEXT_PUBLIC_GOOGLE_MAPS_EMBED_KEY;
@@ -15,15 +16,18 @@ export function StreetViewSection({
   latitude,
   longitude,
   spotName,
+  address,
 }: StreetViewSectionProps) {
   const [loaded, setLoaded] = useState(false);
 
-  const mapsUrl = `https://www.google.com/maps?q=${latitude},${longitude}&z=16`;
-  const aerialUrl = `https://www.google.com/maps/@${latitude},${longitude},17z/data=!3m1!1e3`;
+  // 地名検索で正確な場所を表示（座標指定より精度が高い）
+  const searchQuery = encodeURIComponent(`${spotName} ${address || ""}`);
+  const mapsUrl = `https://www.google.com/maps/search/${searchQuery}`;
+  const aerialUrl = `https://www.google.com/maps/search/${searchQuery}?layer=satellite`;
 
-  // 衛星写真の埋め込み（全スポットで確実に表示される）
+  // 衛星写真の埋め込み（地名検索で正確な場所を表示）
   const satelliteEmbedSrc = EMBED_KEY
-    ? `https://www.google.com/maps/embed/v1/view?key=${EMBED_KEY}&center=${latitude},${longitude}&zoom=17&maptype=satellite`
+    ? `https://www.google.com/maps/embed/v1/place?key=${EMBED_KEY}&q=${searchQuery}&maptype=satellite&zoom=16`
     : null;
 
   return (
