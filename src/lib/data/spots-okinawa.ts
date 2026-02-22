@@ -507,7 +507,7 @@ export const okinawaSpots: FishingSpot[] = [
   {
     id: "s1138", name: "久米島兼城港", slug: "kumejima-kaneshiro-port",
     description: "久米島の主要港湾・兼城港。フェリーが発着する港で、防波堤からのサビキ釣りやエギングが楽しめる。島の豊かな海にはミーバイやタマン（ハマフエフキ）が棲息し、離島ならではの大物との出会いも。",
-    latitude: 26.3360, longitude: 126.7900,
+    latitude: 26.33670, longitude: 126.791200,
     address: "沖縄県島尻郡久米島町兼城",
     accessInfo: "那覇泊港からフェリーで約3時間。久米島空港から車で約20分。",
     region: localRegion("r188"), spotType: "port", difficulty: "beginner",

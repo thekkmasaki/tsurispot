@@ -52,7 +52,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
   {
     id: "sah001", name: "明石新波止", slug: "akashi-shinhato",
     description: "明石海峡のショアジギング聖地として関西屈指の人気を誇る全長約550mの大型防波堤。中央付近までは手すり付きベランダ護岸で安全に釣りができ、先端の白灯台付近は潮通し抜群の好ポイント。ハマチ・メジロなどの青物、タチウオ、マダイ、ヒラメ、アオリイカと大物実績が非常に高い。明石海峡の速い潮流が育てた魚は引きが強く、アングラーを魅了し続ける。",
-    latitude: 34.6400, longitude: 134.9810,
+    latitude: 34.6400, longitude: 134.9012810,
     address: "兵庫県明石市岬町",
     accessInfo: "JR・山陽電鉄「明石」駅から徒歩約20分。新浜漁港方面へ。第二神明道路大蔵谷ICから約15分。漁港内駐車禁止のため周辺コインパーキング利用。",
     region: lr("r450"), spotType: "breakwater", difficulty: "intermediate",
@@ -192,7 +192,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
   {
     id: "sah006", name: "望海浜公園", slug: "bokaihama-koen",
     description: "明石市船上町に位置する松林に囲まれた小さな海浜公園。林崎漁港の西側に隣接し、砂浜と小さな護岸から釣りが楽しめる穴場スポット。投げ釣りでキス・カレイが定番で、護岸際ではカサゴ・メバルの根魚も狙える。駐車場・トイレ完備で無料利用可。人気スポットに比べて空いていることが多く、のんびり釣りを楽しみたい人におすすめ。",
-    latitude: 34.6350, longitude: 134.9480,
+    latitude: 34.6350, longitude: 134.941280,
     address: "兵庫県明石市船上町",
     accessInfo: "山陽電鉄「林崎松江海岸」駅から徒歩約10分。第二神明道路大蔵谷ICから約15分。",
     region: lr("r450"), spotType: "beach", difficulty: "beginner",
@@ -213,7 +213,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
   {
     id: "sah007", name: "藤江海岸", slug: "fujie-kaigan",
     description: "明石市藤江の約800mにわたる砂浜海岸。林崎松江海岸と大蔵海岸の間に位置し、サーフフィッシングのポイントとして地元アングラーに人気。キスの投げ釣りが定番だが、秋にはマゴチ・ヒラメのフラットフィッシュも狙えるルアーアングラー注目のエリア。JR大久保駅から徒歩圏内でアクセスも良好。海岸沿いの遊歩道が整備されている。",
-    latitude: 34.6360, longitude: 134.9400,
+    latitude: 34.63670, longitude: 134.9400,
     address: "兵庫県明石市藤江",
     accessInfo: "JR「大久保」駅から徒歩約20分。山陽電鉄「藤江」駅から徒歩約10分。第二神明道路大蔵谷ICから約10分。",
     region: lr("r450"), spotType: "beach", difficulty: "beginner",
@@ -282,7 +282,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
   {
     id: "sah010", name: "二見港防波堤", slug: "futami-port-bouhatei",
     description: "明石市二見町にある二見港の東防波堤。全長約200mの堤防で、足場が良く手軽に釣りが楽しめる。サビキでアジ・イワシ・サバが安定して釣れ、投げ釣りでキス・カレイも狙える。秋のタチウオシーズンには特に人気が高まる。港内は比較的穏やかでファミリーにも適している。東二見駅から徒歩圏内でアクセスが良い。",
-    latitude: 34.6560, longitude: 134.9000,
+    latitude: 34.65670, longitude: 134.9000,
     address: "兵庫県明石市二見町東二見",
     accessInfo: "山陽電鉄「東二見」駅から徒歩約12分。加古川バイパス明石西ICから約10分。",
     region: lr("r450"), spotType: "breakwater", difficulty: "beginner",
@@ -339,7 +339,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
   {
     id: "sah012", name: "伊保港", slug: "ibo-port-takasago",
     description: "高砂市伊保町に位置する港。関西電力高砂火力発電所の温排水の影響で冬場でも魚の活性が高いのが最大の特徴。通称「関電白灯」と呼ばれる白灯台付近が主な釣りポイントで、法華山谷川の河口に位置するためチヌ・シーバスの魚影が特に濃い。テトラ帯ではカサゴ・メバル・アコウの根魚が豊富。温排水効果で真冬でもアジが釣れることがある。",
-    latitude: 34.7350, longitude: 134.7800,
+    latitude: 34.73580, longitude: 134.781200,
     address: "兵庫県高砂市伊保港町1丁目",
     accessInfo: "山陽電鉄「伊保」駅から徒歩約20分。加古川バイパス高砂北出口から約15分。",
     region: lr("r451"), spotType: "port", difficulty: "intermediate",
@@ -419,7 +419,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
   {
     id: "sah015", name: "加古川左岸護岸（加古川河口導流堤）", slug: "kakogawa-sagan-gogan",
     description: "加古川河口の左岸（東側）に延びる導流堤と護岸。シーバスの一級ポイントとして関西のルアーマンに知られる。河口特有の地形がベイトフィッシュを集め、年間通じてシーバスの実績が高い。秋にはハマチなどの青物の回遊もある。導流堤の先端付近ではヒラメ・マゴチも狙えるフラットフィッシュのポイント。夕マヅメ〜夜のルアーゲームが最も効果的。",
-    latitude: 34.7190, longitude: 134.8200,
+    latitude: 34.71970, longitude: 134.821200,
     address: "兵庫県加古川市尾上町池田",
     accessInfo: "JR「加古川」駅からバスで約20分。加古川バイパス加古川東出口から約15分。向島公園方面。",
     region: lr("r451"), spotType: "river", difficulty: "intermediate",
@@ -490,7 +490,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
   {
     id: "sah018", name: "高砂向島公園護岸", slug: "takasago-mukojima-koen",
     description: "高砂市にある向島公園に隣接する護岸。加古川河口と高砂海浜公園の間に位置し、穏やかな内湾の環境で初心者やファミリーに人気。ハゼ釣りの名所として知られ、秋の数釣りシーズンには多くの釣り人で賑わう。サビキでアジ・小サバ、投げ釣りでキス・カレイも狙える。公園のトイレ・駐車場が使えて利便性が高い。",
-    latitude: 34.7240, longitude: 134.8100,
+    latitude: 34.72470, longitude: 134.811200,
     address: "兵庫県高砂市高砂町向島町",
     accessInfo: "山陽電鉄「高砂」駅から徒歩約15分。加古川バイパス高砂北出口から約10分。",
     region: lr("r451"), spotType: "breakwater", difficulty: "beginner",

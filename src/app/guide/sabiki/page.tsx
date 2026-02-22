@@ -1,10 +1,26 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ChevronLeft, Play } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Package,
+  Footprints,
+  Lightbulb,
+  HelpCircle,
+  MapPin,
+  Fish,
+  Target,
+  Anchor,
+  Trash2,
+  Play,
+} from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { YouTubeVideoList } from "@/components/youtube-video-card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { fishingSpots } from "@/lib/data/spots";
 import { ProductList } from "@/components/affiliate/product-list";
 import { getProductsByMethod } from "@/lib/data/products";
+import { YouTubeVideoList } from "@/components/youtube-video-card";
 import type { YouTubeSearchLink } from "@/types";
 
 const sabikiVideos: YouTubeSearchLink[] = [
@@ -31,13 +47,13 @@ const sabikiVideos: YouTubeSearchLink[] = [
 ];
 
 export const metadata: Metadata = {
-  title: "サビキ釣り完全ガイド - 初心者でも釣れる手順とコツ",
+  title: "サビキ釣り完全ガイド - 初心者でも爆釣するコツと仕掛け",
   description:
-    "サビキ釣りの準備から釣り方、片付けまで完全解説。コマセの使い方、タナの探し方、手返しのコツなど初心者が釣果を上げるポイントを紹介。",
+    "サビキ釣りの仕掛け、コマセの使い方、タナの探し方を初心者向けに完全解説。アジ・サバ・イワシの釣り方、必要な道具、おすすめスポット、釣果アップのコツ、片付けまで。堤防から手軽に始められるサビキ釣りで大漁を目指そう。",
   openGraph: {
-    title: "サビキ釣り完全ガイド - 初心者でも釣れる手順とコツ",
+    title: "サビキ釣り完全ガイド - 初心者でも爆釣するコツと仕掛け",
     description:
-      "サビキ釣りの準備から釣り方、片付けまで完全解説。初心者でも釣れるコツを紹介。",
+      "サビキ釣りの仕掛け、コマセの使い方、釣り方を初心者向けに完全解説。アジ・サバ・イワシを釣ろう。",
     type: "article",
     url: "https://tsurispot.com/guide/sabiki",
     siteName: "ツリスポ",
@@ -45,94 +61,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://tsurispot.com/guide/sabiki",
   },
-};
-
-const howToJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "HowTo",
-  name: "サビキ釣りの始め方 - 準備から釣り方・片付けまで",
-  description:
-    "サビキ釣りの準備から釣り方、片付けまで完全解説。コマセの使い方、タナの探し方、手返しのコツなど初心者が釣果を上げるポイントを紹介。",
-  totalTime: "PT3H",
-  supply: [
-    { "@type": "HowToSupply", name: "サビキ仕掛け（針サイズ4〜6号）" },
-    { "@type": "HowToSupply", name: "コマセ（冷凍アミエビまたはチューブタイプ）" },
-    { "@type": "HowToSupply", name: "コマセカゴ" },
-  ],
-  tool: [
-    { "@type": "HowToTool", name: "釣り竿（2〜3mの万能竿）" },
-    { "@type": "HowToTool", name: "スピニングリール（2000〜3000番）" },
-    { "@type": "HowToTool", name: "バケツ（コマセ用・水くみ用）" },
-    { "@type": "HowToTool", name: "ゴム手袋" },
-  ],
-  step: [
-    {
-      "@type": "HowToStep",
-      name: "コマセ（撒き餌）を解凍する",
-      text: "冷凍アミエビの場合、釣りに行く前日の夜に冷蔵庫に移すか、当日の朝にバケツにぬるま湯を入れて解凍します。",
-      position: 1,
-    },
-    {
-      "@type": "HowToStep",
-      name: "サビキ仕掛けを竿にセットする",
-      text: "竿にリールをセットし、糸をガイドに通したら、糸の先にサビキ仕掛けのスナップを結びます。仕掛けの下（または上）にコマセカゴを取り付けます。",
-      position: 2,
-    },
-    {
-      "@type": "HowToStep",
-      name: "カゴにコマセを詰める",
-      text: "コマセカゴにアミエビを7〜8分目まで詰めます。詰めすぎると海中で出にくくなるので、少し余裕を持たせましょう。",
-      position: 3,
-    },
-    {
-      "@type": "HowToStep",
-      name: "仕掛けを海に投入する",
-      text: "足元にそのまま落とすだけでOKです。投げる必要はありません。ベイルを起こして、仕掛けの重さで自然に沈めます。",
-      position: 4,
-    },
-    {
-      "@type": "HowToStep",
-      name: "底まで沈めてから少し巻き上げる",
-      text: "糸がたるんだら底に着いた合図です。リールを2〜3回巻いて底から少し浮かせます。",
-      position: 5,
-    },
-    {
-      "@type": "HowToStep",
-      name: "竿を上下にゆっくりシャクる",
-      text: "竿を50cm〜1mほど上下に動かして、カゴからコマセを出します。2〜3回シャクったら、竿を止めてアタリを待ちます。",
-      position: 6,
-    },
-    {
-      "@type": "HowToStep",
-      name: "アタリがあったら竿を立てる",
-      text: "ブルブルと手元に振動が伝わったら魚がかかった合図です。竿をゆっくり立てて、魚を逃がさないようにします。",
-      position: 7,
-    },
-    {
-      "@type": "HowToStep",
-      name: "リールを巻いて魚を取り込む",
-      text: "一定の速度でリールを巻いて、仕掛けを回収します。魚が複数かかっている場合は重くなりますが、焦らず巻きましょう。",
-      position: 8,
-    },
-    {
-      "@type": "HowToStep",
-      name: "片付け: コマセの残りは持ち帰る",
-      text: "余ったコマセは海に捨てず、ゴミ袋に入れて持ち帰ります。環境保護と釣り場のマナーです。",
-      position: 9,
-    },
-    {
-      "@type": "HowToStep",
-      name: "片付け: 仕掛けは丁寧に巻き取る",
-      text: "サビキ仕掛けは針が多いので、絡まないように仕掛け巻きに丁寧に巻き取ります。",
-      position: 10,
-    },
-    {
-      "@type": "HowToStep",
-      name: "片付け: 釣り場を水で流す",
-      text: "コマセや魚の汁で汚れた釣り場を、水くみバケツで海水をくんで洗い流します。来たときよりもきれいに。",
-      position: 11,
-    },
-  ],
 };
 
 const breadcrumbJsonLd = {
@@ -160,17 +88,155 @@ const breadcrumbJsonLd = {
   ],
 };
 
+const howToJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: "サビキ釣りの始め方 - 仕掛けの準備から実釣・片付けまで",
+  description:
+    "サビキ釣りの仕掛けのセットからコマセの使い方、タナの探し方、取り込み、片付けまで。初心者でもアジ・サバ・イワシが釣れる手順を解説。",
+  totalTime: "PT3H",
+  supply: [
+    { "@type": "HowToSupply", name: "サビキ仕掛け（ハゲ皮またはスキン・針4〜6号）" },
+    { "@type": "HowToSupply", name: "コマセカゴ（上カゴ式または下カゴ式）" },
+    { "@type": "HowToSupply", name: "コマセ（冷凍アミエビまたはチューブタイプ）" },
+  ],
+  tool: [
+    { "@type": "HowToTool", name: "釣り竿（2〜3mの万能竿または磯竿2〜3号）" },
+    { "@type": "HowToTool", name: "スピニングリール（2000〜3000番）" },
+    { "@type": "HowToTool", name: "バケツ（コマセ用・水くみ用）" },
+    { "@type": "HowToTool", name: "クーラーボックス" },
+  ],
+  step: [
+    {
+      "@type": "HowToStep",
+      name: "仕掛けをセットする",
+      text: "竿にリールをセットし、糸をガイドに通します。糸の先にサビキ仕掛けのスナップを結び、仕掛けの下（または上）にコマセカゴを取り付けます。下カゴ式が一般的で初心者向きです。",
+      position: 1,
+    },
+    {
+      "@type": "HowToStep",
+      name: "コマセ（撒き餌）をカゴに詰める",
+      text: "コマセカゴにアミエビを7〜8分目まで詰めます。詰めすぎると海中でコマセが出にくくなるので、少し余裕を持たせるのがポイント。チューブタイプならそのまま絞り入れるだけで簡単です。",
+      position: 2,
+    },
+    {
+      "@type": "HowToStep",
+      name: "狙うタナ（深さ）に仕掛けを下ろす",
+      text: "足元にそのまま仕掛けを落とします。投げる必要はありません。まずは底まで沈めてから、リールを2〜3回巻いて底から少し浮かせた位置からスタートしましょう。",
+      position: 3,
+    },
+    {
+      "@type": "HowToStep",
+      name: "竿をシャクってコマセを振り出す",
+      text: "竿を50cm〜1mほど上下に動かして、カゴからコマセを海中に拡散させます。2〜3回シャクったら竿を止めて、コマセの煙幕の中に針が漂うようにします。",
+      position: 4,
+    },
+    {
+      "@type": "HowToStep",
+      name: "アタリを待つ",
+      text: "竿を止めた状態で10〜30秒待ちます。コマセの匂いと煙幕に引き寄せられた魚が疑似餌の針に食いつくのを待ちましょう。竿先に集中してアタリを見逃さないようにします。",
+      position: 5,
+    },
+    {
+      "@type": "HowToStep",
+      name: "アワセてリールを巻き上げる",
+      text: "ブルブルと竿先に振動が伝わったら魚がかかった合図。竿をゆっくり立てて合わせ、一定の速度でリールを巻いて仕掛けを回収します。複数の針にかかっていると重くなりますが、焦らず巻きましょう。",
+      position: 6,
+    },
+    {
+      "@type": "HowToStep",
+      name: "魚を取り込んでバケツに入れる",
+      text: "仕掛けが上がってきたら、魚を針から外してバケツやクーラーボックスに入れます。針を飲み込んでいる場合はプライヤーを使って外しましょう。サバは暴れるのでフィッシュグリップがあると便利です。",
+      position: 7,
+    },
+    {
+      "@type": "HowToStep",
+      name: "コマセを詰め直して繰り返す",
+      text: "カゴのコマセが減っていたら詰め直し、再度仕掛けを投入します。群れが来ているうちは手返しよく繰り返すことが大漁のカギです。アタリがなければタナを変えてみましょう。",
+      position: 8,
+    },
+  ],
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "サビキ釣りに最適な時期・シーズンはいつですか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "サビキ釣りのベストシーズンは5〜11月です。特に6〜9月の夏場はアジ・サバ・イワシの回遊が活発で、初心者でも数釣りが楽しめます。春（4〜5月）は小型の豆アジが釣れ始め、秋（9〜11月）は脂が乗った良型のアジが狙えます。冬場は回遊が少なくなりますが、暖かい地域では年中釣れることもあります。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "サビキ釣りの仕掛けは上カゴ式と下カゴ式どちらがいい？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "初心者には下カゴ式がおすすめです。下カゴ式は仕掛けの一番下にカゴとオモリが付いているので、投入時に絡みにくく扱いやすいのが特徴。上カゴ式はコマセが上から降り注ぐのでアピール力が高く、深い場所や潮が速い場所で効果的です。まずは下カゴ式で慣れてから、上カゴ式も試してみましょう。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "サビキの針のサイズは何号がいいですか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "万能なのは4〜6号です。豆アジやイワシなど小型の魚がメインなら3〜4号、20cm以上のアジやサバが混じるなら5〜7号を選びましょう。針が大きすぎると小型魚の口に入らず、小さすぎると大型魚に折られることがあります。迷ったら5号を選べば幅広く対応できます。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "サビキ釣りで全然釣れないときはどうすればいい？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "まずタナ（深さ）を変えてみましょう。底付近、中層、表層と幅広く探ります。次に、仕掛けの種類を変えてみること。ピンクスキンで釣れなければハゲ皮やサバ皮に変更します。それでもダメなら、魚がまだ回遊していない可能性があります。周りの釣り人の様子を観察し、釣れている人がいればタナや仕掛けを参考にしましょう。朝マヅメや夕マヅメの時合いを狙うのも効果的です。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "コマセは冷凍アミエビとチューブタイプどちらがいい？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "冷凍アミエビの方がコストパフォーマンスが良く、集魚効果も高いです。1ブロック（約2kg）で300〜500円程度。ただし解凍の手間と手が汚れるデメリットがあります。チューブタイプ（アミ姫など）は手が汚れにくく持ち運びも楽ですが、やや割高。短時間の釣りやお試しならチューブタイプ、半日以上じっくり釣るなら冷凍アミエビがおすすめです。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "サビキ釣りの初期費用はいくらかかる？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "竿・リール・仕掛けが一式セットになったサビキ釣りセットが3,000〜5,000円程度。これにコマセ（300〜600円）、バケツ（100均でも可）、クーラーボックス（1,000〜3,000円）を合わせても、約5,000〜10,000円で始められます。まずはセット品で釣りの楽しさを体験し、ハマったら少しずつ道具をグレードアップしていくのがおすすめです。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "サビキで釣ったアジやサバはどうやって持ち帰ればいい？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "クーラーボックスに氷を入れておき、釣れた魚をすぐに入れるのが基本です。氷は釣具店やコンビニで購入できます。海水と氷を混ぜた「潮氷」にすると、魚全体が均一に冷えて鮮度が保たれます。アジは刺身、サバは塩焼き、イワシは天ぷらや煮付けにするとおいしくいただけます。",
+      },
+    },
+  ],
+};
+
 function SectionCard({
   title,
+  icon: Icon,
   children,
 }: {
   title: string;
+  icon?: React.ComponentType<{ className?: string }>;
   children: React.ReactNode;
 }) {
   return (
     <Card>
       <CardContent className="pt-6">
-        <h2 className="mb-4 text-xl font-bold">{title}</h2>
+        <div className="mb-4 flex items-center gap-2">
+          {Icon && <Icon className="size-5 text-primary" />}
+          <h2 className="text-xl font-bold">{title}</h2>
+        </div>
         {children}
       </CardContent>
     </Card>
@@ -205,6 +271,16 @@ function Danger({ children }: { children: React.ReactNode }) {
 }
 
 export default function SabikiGuidePage() {
+  // サビキ向けスポット（漁港・堤防の初心者向け）
+  const sabikiSpots = fishingSpots
+    .filter(
+      (s) =>
+        (s.spotType === "port" || s.spotType === "breakwater") &&
+        s.difficulty === "beginner"
+    )
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 6);
+
   return (
     <>
       <script
@@ -214,6 +290,10 @@ export default function SabikiGuidePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
         {/* パンくず */}
@@ -233,7 +313,9 @@ export default function SabikiGuidePage() {
             サビキ釣り完全ガイド
           </h1>
           <p className="mt-2 text-sm text-muted-foreground sm:mt-3 sm:text-base">
-            初心者の定番、サビキ釣り。準備から片付けまで丁寧に解説します。
+            初心者の定番、サビキ釣り。
+            <br className="hidden sm:inline" />
+            コマセの使い方から釣り方、片付けまで丁寧に解説します。
           </p>
         </div>
 
@@ -241,52 +323,50 @@ export default function SabikiGuidePage() {
         <div className="mb-6 rounded-lg border p-4 text-sm text-muted-foreground">
           <p className="font-medium text-foreground">サビキ釣りとは？</p>
           <p className="mt-1">
-            コマセ（撒き餌）で魚を集め、疑似餌がついた複数の針で一度にたくさんの魚を釣る方法です。アジ、サバ、イワシなどの回遊魚が主なターゲット。堤防から足元に落とすだけなので、投げる技術が不要で初心者に最適です。
+            サビキ釣りは、コマセ（撒き餌）で魚を寄せて、疑似餌が付いた複数の針で一度にたくさんの魚を釣る方法です。アジ、サバ、イワシなどの回遊魚が主なターゲットで、群れが来れば一度に3〜5匹がかかることも珍しくありません。堤防から足元に仕掛けを落とすだけなので投げる技術が不要で、お子さんから大人まで誰でも手軽に楽しめます。「最初の一匹」を釣りやすい釣り方として、釣り入門に最もおすすめされている定番スタイルです。釣った魚はその日のうちに刺身や天ぷらにして食べられるのも大きな魅力です。
           </p>
         </div>
 
         <div className="space-y-6">
           {/* 必要な道具 */}
-          <SectionCard title="必要な道具">
+          <SectionCard title="必要な道具" icon={Package}>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex gap-2">
                 <span className="font-medium text-foreground">竿：</span>
-                2〜3mの万能竿やサビキ用の竿。初心者セットに含まれていることが多い。
+                2〜3mの万能竿や磯竿2〜3号。初心者セットに含まれていることが多く、振り出し式のコンパクトロッドが持ち運びに便利です。長すぎると取り回しが難しいので、最初は2.4〜2.7mがおすすめ。
               </li>
               <li className="flex gap-2">
                 <span className="font-medium text-foreground">リール：</span>
-                小〜中型のスピニングリール。2000〜3000番が使いやすい。
+                スピニングリール2000〜3000番。ナイロンライン2〜3号が100m以上巻けるもの。糸付きリールでもサビキ釣りなら十分です。
               </li>
               <li className="flex gap-2">
-                <span className="font-medium text-foreground">
-                  サビキ仕掛け：
-                </span>
-                針のサイズは4〜6号が万能。ピンクスキンやハゲ皮などの種類がある。
+                <span className="font-medium text-foreground">サビキ仕掛け：</span>
+                針のサイズは4〜6号が万能。ハゲ皮（魚皮）とスキン（ビニール素材）の2種類があり、ピンクスキンが定番。状況によって使い分けると釣果が変わります。2〜3種類持っていくと安心です。
               </li>
               <li className="flex gap-2">
-                <span className="font-medium text-foreground">
-                  コマセカゴ：
-                </span>
-                仕掛けの上カゴ式か下カゴ式かで選ぶ。下カゴ式が一般的。
+                <span className="font-medium text-foreground">コマセカゴ：</span>
+                仕掛けの下に付ける「下カゴ式」が初心者向け。オモリ一体型のカゴなら別途オモリを買う必要がなく簡単です。上カゴ式はコマセが上から降り注ぐため深場で効果的。
               </li>
               <li className="flex gap-2">
-                <span className="font-medium text-foreground">
-                  コマセ（撒き餌）：
-                </span>
-                冷凍アミエビが定番。釣具店で購入できる。チューブタイプもあり手軽。
+                <span className="font-medium text-foreground">コマセ（アミエビ）：</span>
+                冷凍アミエビが最もコスパが良く、1ブロック（約2kg）で300〜500円。手を汚したくない方にはチューブタイプ（アミ姫など）が便利。半日の釣りなら冷凍1ブロックで足ります。
               </li>
               <li className="flex gap-2">
                 <span className="font-medium text-foreground">バケツ：</span>
-                コマセを入れるバケツと、釣った魚を入れる水くみバケツ。
+                コマセを入れるバケツ（蓋付きがベスト）と、海水を汲む水くみバケツの2つがあると便利です。折りたたみ式バケツなら収納に困りません。
+              </li>
+              <li className="flex gap-2">
+                <span className="font-medium text-foreground">クーラーボックス：</span>
+                釣った魚を新鮮に持ち帰るために必須。10〜15Lサイズが使いやすい。氷や保冷剤を入れておきましょう。
               </li>
             </ul>
             <Hint>
-              初心者は「サビキ釣りセット」を購入するのが最も簡単。竿・リール・仕掛け・カゴがセットで3,000〜5,000円程度です。
+              初心者は「サビキ釣りセット」を購入するのが最も簡単。竿・リール・仕掛け・カゴがセットで3,000〜5,000円程度です。コマセとバケツを追加すれば、すぐに釣りを始められます。
             </Hint>
           </SectionCard>
 
-          {/* 準備 */}
-          <SectionCard title="準備">
+          {/* 釣り方の手順 */}
+          <SectionCard title="釣り方の手順" icon={Footprints}>
             <ol className="list-none space-y-4">
               <li className="flex gap-3">
                 <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
@@ -294,10 +374,10 @@ export default function SabikiGuidePage() {
                 </span>
                 <div>
                   <p className="font-medium text-foreground">
-                    コマセ（撒き餌）を解凍する
+                    仕掛けをセットする
                   </p>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    冷凍アミエビの場合、釣りに行く前日の夜に冷蔵庫に移すか、当日の朝にバケツにぬるま湯を入れて解凍します。完全に溶けなくても、現場で自然に溶けます。
+                    竿にリールをセットし、糸をガイドに通します。糸の先にサビキ仕掛けのスナップ（接続金具）を結び、仕掛けの下にコマセカゴを取り付けます。仕掛けの袋に図解があるので参考にしましょう。
                   </p>
                 </div>
               </li>
@@ -307,10 +387,10 @@ export default function SabikiGuidePage() {
                 </span>
                 <div>
                   <p className="font-medium text-foreground">
-                    サビキ仕掛けを竿にセットする
+                    コマセ（撒き餌）をカゴに詰める
                   </p>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    竿にリールをセットし、糸をガイドに通したら、糸の先にサビキ仕掛けのスナップ（接続金具）を結びます。仕掛けの下（または上）にコマセカゴを取り付けます。
+                    コマセカゴにアミエビを7〜8分目まで詰めます。詰めすぎると海中でコマセが出にくくなるので、少し余裕を持たせるのがポイント。チューブタイプならそのまま絞り入れるだけで簡単です。
                   </p>
                 </div>
               </li>
@@ -320,58 +400,10 @@ export default function SabikiGuidePage() {
                 </span>
                 <div>
                   <p className="font-medium text-foreground">
-                    カゴにコマセを詰める
+                    狙うタナ（深さ）に仕掛けを下ろす
                   </p>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    コマセカゴにアミエビを7〜8分目まで詰めます。詰めすぎると海中で出にくくなるので、少し余裕を持たせましょう。
-                  </p>
-                </div>
-              </li>
-            </ol>
-            <Warning>
-              コマセはにおいが強いので、服や手に付くと落ちにくくなります。使い捨てのゴム手袋があると便利です。
-            </Warning>
-          </SectionCard>
-
-          {/* 釣り方 */}
-          <SectionCard title="釣り方">
-            <ol className="list-none space-y-4">
-              <li className="flex gap-3">
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
-                  1
-                </span>
-                <div>
-                  <p className="font-medium text-foreground">
-                    仕掛けを海に投入する
-                  </p>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    足元にそのまま落とすだけでOKです。投げる必要はありません。ベイルを起こして、仕掛けの重さで自然に沈めます。
-                  </p>
-                </div>
-              </li>
-              <li className="flex gap-3">
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
-                  2
-                </span>
-                <div>
-                  <p className="font-medium text-foreground">
-                    底まで沈めてから少し巻き上げる
-                  </p>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    糸がたるんだら底に着いた合図です。リールを2〜3回巻いて底から少し浮かせます。
-                  </p>
-                </div>
-              </li>
-              <li className="flex gap-3">
-                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
-                  3
-                </span>
-                <div>
-                  <p className="font-medium text-foreground">
-                    竿を上下にゆっくりシャクる
-                  </p>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    竿を50cm〜1mほど上下に動かして、カゴからコマセを出します。2〜3回シャクったら、竿を止めてアタリを待ちます。
+                    足元にそのまま仕掛けを落とします。投げる必要はありません。ベイルを起こして、仕掛けの重さで自然に沈めます。まずは底まで沈めてから、リールを2〜3回巻いて底から少し浮かせた位置からスタートしましょう。
                   </p>
                 </div>
               </li>
@@ -381,10 +413,10 @@ export default function SabikiGuidePage() {
                 </span>
                 <div>
                   <p className="font-medium text-foreground">
-                    アタリがあったら竿を立てる
+                    竿をシャクってコマセを振り出す
                   </p>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    ブルブルと手元に振動が伝わったら魚がかかった合図です。竿をゆっくり立てて、魚を逃がさないようにします。
+                    竿を50cm〜1mほど上下に動かして、カゴからコマセを海中に拡散させます。2〜3回シャクったら竿を止めて、コマセの煙幕の中に針が漂うようにします。シャクりすぎるとコマセがすぐになくなるので注意。
                   </p>
                 </div>
               </li>
@@ -394,67 +426,334 @@ export default function SabikiGuidePage() {
                 </span>
                 <div>
                   <p className="font-medium text-foreground">
-                    リールを巻いて魚を取り込む
+                    アタリを待つ
                   </p>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    一定の速度でリールを巻いて、仕掛けを回収します。魚が複数かかっている場合は重くなりますが、焦らず巻きましょう。
+                    竿を止めた状態で10〜30秒待ちます。コマセの匂いと煙幕に引き寄せられた魚が、疑似餌の付いた針に食いつくのを待ちましょう。竿先に集中してアタリを見逃さないようにします。
+                  </p>
+                </div>
+              </li>
+              <li className="flex gap-3">
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
+                  6
+                </span>
+                <div>
+                  <p className="font-medium text-foreground">
+                    アワセてリールを巻き上げる
+                  </p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    ブルブルと竿先に振動が伝わったら、魚がかかった合図です。竿をゆっくり立てて合わせ、一定の速度でリールを巻いて仕掛けを回収します。複数の針に魚がかかっていると重くなりますが、焦らずゆっくり巻きましょう。
+                  </p>
+                </div>
+              </li>
+              <li className="flex gap-3">
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
+                  7
+                </span>
+                <div>
+                  <p className="font-medium text-foreground">
+                    魚を取り込む
+                  </p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    仕掛けが上がってきたら、魚を針から外してバケツやクーラーボックスに入れます。針を飲み込んでいる場合はプライヤーを使いましょう。サバは暴れるので素早く外すのがコツです。
+                  </p>
+                </div>
+              </li>
+              <li className="flex gap-3">
+                <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
+                  8
+                </span>
+                <div>
+                  <p className="font-medium text-foreground">
+                    コマセを詰め直して繰り返す
+                  </p>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    カゴのコマセが減っていたら詰め直し、再度仕掛けを投入します。群れが来ているうちは手返しよく繰り返すことが大漁のカギ。アタリがなければタナ（深さ）を変えて魚のいる層を探りましょう。
                   </p>
                 </div>
               </li>
             </ol>
-            <Hint>
-              アタリがなければ、タナ（深さ）を変えてみましょう。リールを巻いて浅くしたり、糸を出して深くしたりして、魚のいる層を探します。
-            </Hint>
+
+            <Warning>
+              コマセはにおいが強いので、服や手に付くと落ちにくくなります。使い捨てのゴム手袋があると便利です。コマセ用のスプーンも売っているので活用しましょう。
+            </Warning>
+          </SectionCard>
+
+          {/* 釣れる魚 */}
+          <SectionCard title="サビキ釣りで釣れる魚" icon={Fish}>
+            <div className="space-y-4">
+              <div className="rounded-lg border p-4">
+                <div className="mb-2 flex items-center gap-2">
+                  <h3 className="font-bold text-foreground">アジ（マアジ）</h3>
+                  <Badge variant="secondary" className="text-xs">
+                    サビキの王道ターゲット
+                  </Badge>
+                </div>
+                <p className="mb-2 text-sm text-muted-foreground">
+                  サビキ釣りで最も人気のターゲット。群れで回遊し、コマセに集まりやすい魚です。刺身、なめろう、フライ、南蛮漬けなど料理のレパートリーも豊富。10〜20cmの「豆アジ」から25cm以上の「尺アジ」まで、サイズを問わず美味しくいただけます。特に秋のアジは脂が乗って絶品です。
+                </p>
+                <Link
+                  href="/fish/aji"
+                  className="inline-flex items-center text-sm text-primary hover:underline"
+                >
+                  アジの詳細を見る
+                  <ChevronRight className="ml-0.5 size-4" />
+                </Link>
+              </div>
+
+              <div className="rounded-lg border p-4">
+                <div className="mb-2 flex items-center gap-2">
+                  <h3 className="font-bold text-foreground">サバ（マサバ・ゴマサバ）</h3>
+                  <Badge variant="secondary" className="text-xs">
+                    パワフルな引き
+                  </Badge>
+                </div>
+                <p className="mb-2 text-sm text-muted-foreground">
+                  サビキ釣りの外道としても人気のターゲット。アジよりも引きが強く、竿をグイグイ引き込む力強いファイトが楽しめます。塩焼き、味噌煮、しめ鯖が定番料理。傷みが早い魚なので、釣ったらすぐに氷水の入ったクーラーボックスに入れて鮮度を保ちましょう。
+                </p>
+                <Link
+                  href="/fish/saba"
+                  className="inline-flex items-center text-sm text-primary hover:underline"
+                >
+                  サバの詳細を見る
+                  <ChevronRight className="ml-0.5 size-4" />
+                </Link>
+              </div>
+
+              <div className="rounded-lg border p-4">
+                <div className="mb-2 flex items-center gap-2">
+                  <h3 className="font-bold text-foreground">イワシ（カタクチイワシ・マイワシ）</h3>
+                  <Badge variant="secondary" className="text-xs">
+                    数釣りが楽しい
+                  </Badge>
+                </div>
+                <p className="mb-2 text-sm text-muted-foreground">
+                  大群で回遊するため、群れに当たれば一度に5〜6匹かかることも。サビキ釣りで最も数が釣れる魚です。天ぷら、唐揚げ、煮干し、オイルサーディンなど加工方法も多彩。小さなお子さんでも簡単に釣れるので、ファミリーフィッシングの強い味方です。
+                </p>
+                <Link
+                  href="/fish/iwashi"
+                  className="inline-flex items-center text-sm text-primary hover:underline"
+                >
+                  イワシの詳細を見る
+                  <ChevronRight className="ml-0.5 size-4" />
+                </Link>
+              </div>
+
+              <div className="rounded-lg bg-muted/50 p-4 text-sm text-muted-foreground">
+                <p className="font-medium text-foreground">
+                  その他にもこんな魚が釣れることも
+                </p>
+                <p className="mt-1">
+                  サッパ、コノシロ、ウミタナゴ、メジナ（グレ）の幼魚、小型のクロダイなど。思わぬ魚が針にかかるのもサビキ釣りの楽しさです。サビキで釣ったアジやイワシを生きエサにして
+                  <Link
+                    href="/guide/oyogase"
+                    className="text-primary hover:underline"
+                  >
+                    泳がせ釣り
+                  </Link>
+                  で大物を狙うこともできます。
+                </p>
+              </div>
+            </div>
           </SectionCard>
 
           {/* 釣果アップのコツ */}
-          <SectionCard title="釣果アップのコツ">
+          <SectionCard title="釣果アップのコツ" icon={Lightbulb}>
             <ul className="space-y-3 text-sm text-muted-foreground">
               <li className="flex gap-2">
                 <span className="text-primary">&#9679;</span>
                 <div>
                   <span className="font-medium text-foreground">
-                    コマセは少しずつ出す
+                    朝マヅメ・夕マヅメを狙う
                   </span>
                   <br />
-                  一度に大量に出すと魚がコマセだけ食べて針に食いつきません。シャクりは2〜3回で十分です。
+                  日の出・日の入り前後の薄暗い時間帯は魚の活性が最も高くなるゴールデンタイムです。この時間帯に釣り場にいることが大漁への第一歩。特に朝マヅメは回遊魚の接岸が多く、最も期待できます。
                 </div>
               </li>
               <li className="flex gap-2">
                 <span className="text-primary">&#9679;</span>
                 <div>
                   <span className="font-medium text-foreground">
-                    タナ（深さ）を変えて探る
+                    タナ（深さ）をこまめに変える
                   </span>
                   <br />
-                  魚は日によって、時間帯によって泳いでいる深さが変わります。底から中層まで幅広く探りましょう。
+                  魚は日によって、時間帯によって泳いでいる深さが変わります。底付近、中層、表層と幅広く探りましょう。アタリが出たタナを覚えておき、そのタナを集中的に攻めるのが効果的です。
                 </div>
               </li>
               <li className="flex gap-2">
                 <span className="text-primary">&#9679;</span>
                 <div>
                   <span className="font-medium text-foreground">
-                    群れが来たら手返しよく
+                    コマセは少しずつ、こまめに出す
                   </span>
                   <br />
-                  回遊魚は群れで移動するため、釣れ始めたらチャンスタイム。素早く仕掛けを回収して再投入を繰り返しましょう。
+                  一度に大量にコマセを出すと、魚がコマセだけ食べて針に食いつきません。シャクりは2〜3回で十分。コマセの煙幕の中に針が漂うように、シャクった後は竿を止めて待つのがコツです。
                 </div>
               </li>
               <li className="flex gap-2">
                 <span className="text-primary">&#9679;</span>
                 <div>
                   <span className="font-medium text-foreground">
-                    朝・夕マヅメを狙う
+                    仕掛けの色・種類を変えてみる
                   </span>
                   <br />
-                  日の出・日の入り前後は魚の活性が高い時間帯。この時間に合わせて釣り場に到着しましょう。
+                  ピンクスキンで反応がなければハゲ皮（魚皮）やサバ皮に変更してみましょう。日によって魚の好みが変わるので、2〜3種類の仕掛けを用意しておくと対応力が上がります。蓄光タイプは曇りの日や朝夕の薄暗い時間帯に効果的です。
+                </div>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-primary">&#9679;</span>
+                <div>
+                  <span className="font-medium text-foreground">
+                    群れが来たら手返し良く
+                  </span>
+                  <br />
+                  回遊魚は群れで移動するため、釣れ始めたらチャンスタイムです。魚を素早く外し、コマセを詰め直してすぐに再投入。この「手返し」のスピードが釣果を大きく左右します。
+                </div>
+              </li>
+              <li className="flex gap-2">
+                <span className="text-primary">&#9679;</span>
+                <div>
+                  <span className="font-medium text-foreground">
+                    周りの釣り人を観察する
+                  </span>
+                  <br />
+                  隣で爆釣している人がいたら、使っている仕掛けやタナを参考にしましょう。同じ釣り場でも、少しの違いで釣果に差が出ることがあります。釣りの上手い人は快く教えてくれることが多いです。
                 </div>
               </li>
             </ul>
           </SectionCard>
 
+          {/* おすすめスポット */}
+          <SectionCard title="おすすめスポット" icon={MapPin}>
+            <p className="mb-4 text-sm text-muted-foreground">
+              サビキ釣りに適した釣り場は、漁港や堤防など足場が安定した場所です。潮通しが良く、水深がある程度ある（3m以上）ポイントを選びましょう。海釣り公園や海釣り施設はトイレや売店もあり、初心者やファミリーに最適です。
+            </p>
+
+            {sabikiSpots.length > 0 && (
+              <div>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {sabikiSpots.map((spot) => (
+                    <Link
+                      key={spot.id}
+                      href={`/spots/${spot.slug}`}
+                      className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
+                    >
+                      <MapPin className="size-4 shrink-0 text-primary" />
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-medium group-hover:text-primary">
+                          {spot.name}
+                        </p>
+                        <p className="truncate text-xs text-muted-foreground">
+                          {spot.region.prefecture} {spot.region.areaName}
+                        </p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+                <div className="mt-3 text-center">
+                  <Button asChild variant="outline" size="sm">
+                    <Link href="/spots">
+                      すべてのスポットを見る
+                      <ChevronRight className="ml-1 size-4" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            )}
+          </SectionCard>
+
+          {/* よくある質問 */}
+          <SectionCard title="よくある質問（FAQ）" icon={HelpCircle}>
+            <div className="space-y-4">
+              <div className="rounded-lg border p-4">
+                <h3 className="mb-2 font-medium text-foreground">
+                  Q. サビキ釣りに最適な時期・シーズンはいつですか？
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  ベストシーズンは5〜11月です。特に6〜9月の夏場は
+                  <Link
+                    href="/fish/aji"
+                    className="text-primary hover:underline"
+                  >
+                    アジ
+                  </Link>
+                  ・
+                  <Link
+                    href="/fish/saba"
+                    className="text-primary hover:underline"
+                  >
+                    サバ
+                  </Link>
+                  ・
+                  <Link
+                    href="/fish/iwashi"
+                    className="text-primary hover:underline"
+                  >
+                    イワシ
+                  </Link>
+                  の回遊が活発で、初心者でも数釣りが楽しめます。秋は脂の乗った良型アジが狙えるシーズンです。
+                </p>
+              </div>
+              <div className="rounded-lg border p-4">
+                <h3 className="mb-2 font-medium text-foreground">
+                  Q. サビキ釣りの仕掛けは上カゴ式と下カゴ式どちらがいい？
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  初心者には下カゴ式がおすすめです。仕掛けの一番下にカゴとオモリが付いているので、投入時に絡みにくく扱いやすいのが特徴。上カゴ式はコマセが上から降り注ぐのでアピール力が高く、深い場所で効果的です。
+                </p>
+              </div>
+              <div className="rounded-lg border p-4">
+                <h3 className="mb-2 font-medium text-foreground">
+                  Q. サビキの針のサイズは何号がいいですか？
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  万能なのは4〜6号です。豆アジやイワシなど小型メインなら3〜4号、20cm以上のアジやサバ狙いなら5〜7号を選びましょう。迷ったら5号を選べば幅広く対応できます。
+                </p>
+              </div>
+              <div className="rounded-lg border p-4">
+                <h3 className="mb-2 font-medium text-foreground">
+                  Q. サビキ釣りで全然釣れないときはどうすればいい？
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  まずタナ（深さ）を変えてみましょう。底、中層、表層と幅広く探ります。次に仕掛けの種類を変更。それでもダメなら魚がまだ回遊していない可能性があります。朝マヅメや夕マヅメの時合いを狙うのも効果的です。
+                </p>
+              </div>
+              <div className="rounded-lg border p-4">
+                <h3 className="mb-2 font-medium text-foreground">
+                  Q. コマセは冷凍アミエビとチューブタイプどちらがいい？
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  冷凍アミエビの方がコスパが良く集魚効果も高いです。ただし解凍の手間と手が汚れるデメリットも。チューブタイプ（アミ姫など）は手が汚れにくく持ち運びも楽。短時間ならチューブ、半日以上なら冷凍がおすすめです。
+                </p>
+              </div>
+              <div className="rounded-lg border p-4">
+                <h3 className="mb-2 font-medium text-foreground">
+                  Q. サビキ釣りの初期費用はいくらかかる？
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  サビキ釣りセット（竿・リール・仕掛け付き）が3,000〜5,000円、コマセが300〜600円、バケツやクーラーボックスを含めても約5,000〜10,000円で始められます。まずはセット品で始めて、ハマったら道具をグレードアップしましょう。
+                </p>
+              </div>
+              <div className="rounded-lg border p-4">
+                <h3 className="mb-2 font-medium text-foreground">
+                  Q. サビキで釣った魚はどうやって持ち帰ればいい？
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  クーラーボックスに氷と海水を入れた「潮氷」に魚を入れるのがベスト。魚全体が均一に冷えて鮮度が保たれます。詳しくは
+                  <Link
+                    href="/guide/handling"
+                    className="text-primary hover:underline"
+                  >
+                    魚の締め方・持ち帰りガイド
+                  </Link>
+                  をご覧ください。
+                </p>
+              </div>
+            </div>
+          </SectionCard>
+
           {/* 片付け */}
-          <SectionCard title="片付け">
+          <SectionCard title="片付け・マナー" icon={Trash2}>
             <ol className="list-none space-y-4">
               <li className="flex gap-3">
                 <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
@@ -465,7 +764,7 @@ export default function SabikiGuidePage() {
                     コマセの残りは持ち帰る
                   </p>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    余ったコマセは海に捨てず、ゴミ袋に入れて持ち帰ります。環境保護と釣り場のマナーです。
+                    余ったコマセは海に捨てず、ゴミ袋に入れて持ち帰ります。環境保護と釣り場のマナーです。臭いが気になる場合は二重のゴミ袋に入れましょう。
                   </p>
                 </div>
               </li>
@@ -478,7 +777,7 @@ export default function SabikiGuidePage() {
                     仕掛けは丁寧に巻き取る
                   </p>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    サビキ仕掛けは針が多いので、絡まないように仕掛け巻きに丁寧に巻き取ります。再利用できることもあります。
+                    サビキ仕掛けは針が多いので、絡まないように仕掛け巻きに丁寧に巻き取ります。状態が良ければ再利用できることもあります。
                   </p>
                 </div>
               </li>
@@ -491,13 +790,13 @@ export default function SabikiGuidePage() {
                     釣り場を水で流す
                   </p>
                   <p className="mt-1 text-sm text-muted-foreground">
-                    コマセや魚の汁で汚れた釣り場を、水くみバケツで海水をくんで洗い流します。来たときよりもきれいに。
+                    コマセや魚の汁で汚れた釣り場を、水くみバケツで海水をくんで洗い流します。来たときよりもきれいにして帰りましょう。
                   </p>
                 </div>
               </li>
             </ol>
             <Danger>
-              釣り場を汚したまま帰ると、釣り禁止になる原因になります。必ず掃除して帰りましょう。次に来る人のためにも、マナーを守ることが大切です。
+              釣り場を汚したまま帰ると、釣り禁止になる原因になります。コマセの跡は特に目立つので、必ず海水で洗い流してから帰りましょう。マナーを守ることが、釣り場を守ることにつながります。
             </Danger>
           </SectionCard>
         </div>
@@ -514,7 +813,7 @@ export default function SabikiGuidePage() {
           <YouTubeVideoList links={sabikiVideos} />
         </section>
 
-        {/* サビキ釣りに必要な道具 */}
+        {/* 道具を揃えるなら */}
         <section className="mt-8 sm:mt-10">
           <ProductList
             products={getProductsByMethod("sabiki")}
@@ -523,17 +822,49 @@ export default function SabikiGuidePage() {
           />
         </section>
 
-        {/* 次のステップ */}
+        {/* 関連ガイド */}
+        <section className="mt-8 sm:mt-10">
+          <h2 className="mb-4 text-center text-xl font-bold">
+            関連ガイド
+          </h2>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <Link href="/guide/choinage" className="group">
+              <Card className="h-full transition-colors group-hover:border-primary">
+                <CardContent className="pt-6">
+                  <Target className="mb-2 size-5 text-primary" />
+                  <p className="font-medium group-hover:text-primary">
+                    ちょい投げ釣り完全ガイド
+                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    キスやハゼを狙うちょい投げ入門
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/guide/oyogase" className="group">
+              <Card className="h-full transition-colors group-hover:border-primary">
+                <CardContent className="pt-6">
+                  <Anchor className="mb-2 size-5 text-primary" />
+                  <p className="font-medium group-hover:text-primary">
+                    泳がせ釣り入門ガイド
+                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    サビキで釣ったアジで大物を狙おう
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+          </div>
+        </section>
+
+        {/* CTA */}
         <div className="mt-8 text-center sm:mt-12">
           <p className="mb-4 text-sm text-muted-foreground">
-            サビキ釣りに慣れたら、次はキャスティング（投げ方）を覚えましょう。
+            サビキ釣りができるスポットを探してみよう
           </p>
-          <Link
-            href="/guide/casting"
-            className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-          >
-            投げ方の基本を学ぶ
-          </Link>
+          <Button asChild size="lg" className="min-h-[48px] rounded-full px-8">
+            <Link href="/spots">スポットを探す</Link>
+          </Button>
         </div>
       </main>
     </>

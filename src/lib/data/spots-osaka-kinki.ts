@@ -19,7 +19,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s205", name: "シーサイドコスモ（魚釣り開放区域）", slug: "seaside-cosmo",
     description: "大阪南港のATC前に広がる開放的な護岸釣り場。柵付きで安全、足場良好。サビキでアジ・サバ、ルアーでシーバスやタチウオが狙える都市型フィッシングスポット。",
-    latitude: 34.6377, longitude: 135.4200, address: "大阪府大阪市住之江区南港北1丁目32",
+    latitude: 34.6383, longitude: 135.421700, address: "大阪府大阪市住之江区南港北1丁目32",
     accessInfo: "ニュートラム「トレードセンター前」駅下車すぐ。ATC隣接。",
     region: region("r131"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "ATC駐車場利用可（有料）",
@@ -52,7 +52,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s206", name: "南港北防波堤", slug: "nanko-kita-breakwater",
     description: "南港エリアの北側に位置する防波堤。潮通しが良くアジの回遊が多い。サビキ釣りの好ポイントでファミリーにも人気。",
-    latitude: 34.6420, longitude: 135.4100, address: "大阪府大阪市住之江区南港北3丁目地先",
+    latitude: 34.64280, longitude: 135.411200, address: "大阪府大阪市住之江区南港北3丁目地先",
     accessInfo: "ニュートラム「ポートタウン西」駅から徒歩約15分。",
     region: region("r131"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: false, hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
@@ -178,7 +178,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s211", name: "助松埠頭", slug: "sukematsu-wharf",
     description: "泉大津の工業港。車横付けポイントが人気で、サビキでのアジ・サバの数釣りからタチウオまで狙える。大阪湾中部の安定ポイント。",
-    latitude: 34.5100, longitude: 135.3800, address: "大阪府泉大津市（助松埠頭 POSCO前）",
+    latitude: 34.511200, longitude: 135.38121200, address: "大阪府泉大津市（助松埠頭 POSCO前）",
     accessInfo: "阪神高速湾岸線助松出口から約5分。泉大津大橋を渡って2つ目の信号を左折。",
     region: region("r133"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "路肩駐車可能エリアあり",
@@ -310,7 +310,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s216", name: "尼崎市立魚つり公園", slug: "amagasaki-fishing-park",
     description: "大阪湾奥に位置する人気の海釣り施設。柵・トイレ・売店完備で安全。サビキでアジ・サバ、ルアーでシーバス・タチウオが狙える。",
-    latitude: 34.6800, longitude: 135.3800, address: "兵庫県尼崎市平左衛門町66",
+    latitude: 34.681200, longitude: 135.3800, address: "兵庫県尼崎市平左衛門町66",
     accessInfo: "阪神「尼崎」駅からバスで約25分。阪神高速尼崎西出口から約10分。",
     region: region("r135"), spotType: "pier", difficulty: "beginner",
     isFree: false, feeDetail: "大人1000円、小中学生500円",
@@ -335,7 +335,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s217", name: "南芦屋浜", slug: "minami-ashiyahama",
     description: "芦屋市の埋め立て地にある柵付き護岸。安全で足場良好、ファミリーに大人気。夜のクロダイ（黒鯛）狙いも盛ん。",
-    latitude: 34.7100, longitude: 135.3100, address: "兵庫県芦屋市涼風町",
+    latitude: 34.711200, longitude: 135.311700, address: "兵庫県芦屋市涼風町",
     accessInfo: "阪神「打出」駅からバスで約10分。阪神高速芦屋出口から約5分。",
     region: region("r135"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "近隣に有料駐車場あり",
@@ -388,7 +388,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s221", name: "吹上浜", slug: "fukiage-hama-awaji",
     description: "淡路島南部のサーフフィッシングスポット。ヒラメ・マゴチ・キスなどが狙える砂浜。投げ釣りやワームで楽しめる。",
-    latitude: 34.2300, longitude: 134.7350, address: "兵庫県南あわじ市阿万吹上町",
+    latitude: 34.231200, longitude: 134.73580, address: "兵庫県南あわじ市阿万吹上町",
     accessInfo: "神戸淡路鳴門道西淡三原ICから約15分。",
     region: region("r136"), spotType: "beach", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "駐車場あり",
@@ -412,7 +412,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s223", name: "田井漁港", slug: "tai-port-maizuru",
     description: "舞鶴市の静かな漁港。アジング・メバリングの穴場として知られ、夜の常夜灯周りが好ポイント。",
-    latitude: 35.4900, longitude: 135.4300, address: "京都府舞鶴市田井1074",
+    latitude: 35.491200, longitude: 135.431200, address: "京都府舞鶴市田井1074",
     accessInfo: "舞鶴若狭道舞鶴東ICから約15分。",
     region: region("r137"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港横に駐車スペースあり",
@@ -436,7 +436,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s224", name: "浅茂川漁港", slug: "asamogawa-port",
     description: "京丹後市の漁港。日本海に面し、アジ・サゴシ・カレイなど多彩な魚種が狙える。周辺に温泉もあり観光がてら釣りが楽しめる。",
-    latitude: 35.7200, longitude: 135.0600, address: "京都府京丹後市網野町浅茂川1400",
+    latitude: 35.721200, longitude: 135.061200, address: "京都府京丹後市網野町浅茂川1400",
     accessInfo: "京都縦貫道京丹後大宮ICから約25分。",
     region: region("r137"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港駐車場あり",

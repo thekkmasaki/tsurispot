@@ -100,7 +100,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s481", name: "佐伯港", slug: "saiki-port",
     description: "大分県南部の主要港湾。リアス式海岸に囲まれた複雑な地形が良質な漁場を形成。クロダイやメジナなどの磯魚から、アジやイワシまで多彩な魚種が狙える釣りの名所。",
-    latitude: 32.9600, longitude: 131.9010,
+    latitude: 32.961200, longitude: 131.90170,
     address: "大分県佐伯市鶴岡町",
     accessInfo: "JR佐伯駅から車で約10分。東九州自動車道佐伯ICから約15分。",
     region: localRegion("r160"), spotType: "port", difficulty: "intermediate",
@@ -203,7 +203,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s485", name: "宮崎港", slug: "miyazaki-port",
     description: "宮崎県の中心的な港湾。防波堤やテトラ帯が充実しており、年間を通じてアジやイワシのサビキ釣りが楽しめる。夏〜秋は太刀魚の夜釣りが人気の釣り場。",
-    latitude: 31.9340, longitude: 131.4620,
+    latitude: 31.9340, longitude: 131.4012620,
     address: "宮崎県宮崎市港二丁目",
     accessInfo: "JR宮崎駅から車で約10分。宮崎IC方面から国道220号経由。",
     region: localRegion("r164"), spotType: "port", difficulty: "beginner",
@@ -228,7 +228,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s486", name: "油津港", slug: "aburatsu-port",
     description: "日南市の中心港湾。古くから漁業の街として栄え、港の防波堤からクロダイやメジナの磯釣りが楽しめる。カツオの一本釣りでも有名な港でもあり、周辺磯でのルアー釣りも盛ん。",
-    latitude: 31.5820, longitude: 131.4000,
+    latitude: 31.58280, longitude: 131.4000,
     address: "宮崎県日南市材木町",
     accessInfo: "JR油津駅から徒歩約10分。日南ICから約30分。",
     region: localRegion("r165"), spotType: "port", difficulty: "intermediate",
@@ -356,7 +356,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s491", name: "志布志港", slug: "shibushi-port",
     description: "鹿児島県東部の志布志湾に位置する大型港湾。フェリーターミナルが整備された港で、防波堤からのアジやイワシ釣りが盛ん。秋にはカンパチやハマチの回遊もあり、ショアジギングも人気。",
-    latitude: 31.4720, longitude: 131.0800,
+    latitude: 31.47280, longitude: 131.081200,
     address: "鹿児島県志布志市志布志町志布志",
     accessInfo: "JR志布志駅から車で約10分。大隅縦貫道志布志ICから約15分。",
     region: localRegion("r170"), spotType: "port", difficulty: "beginner",
@@ -459,7 +459,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s495", name: "呼子港", slug: "yobuko-port",
     description: "イカの活け造りで全国的に有名な呼子の港。ケンサキイカやスルメイカのイカ釣りが盛んで、港内では年間を通じてアジのサビキ釣りも楽しめる。観光と釣りを同時に楽しめる人気スポット。",
-    latitude: 33.5400, longitude: 129.9090,
+    latitude: 33.541200, longitude: 129.90970,
     address: "佐賀県唐津市呼子町呼子",
     accessInfo: "JR唐津駅から昭和バスで約40分「呼子」バス停下車。唐津ICから国道202号経由で約40分。",
     region: localRegion("r173"), spotType: "port", difficulty: "beginner",
@@ -564,7 +564,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s499", name: "佐世保港", slug: "sasebo-port",
     description: "長崎県北部の主要港湾。佐世保湾に囲まれた穏やかな内湾で、ファミリーフィッシングに最適。アジやイワシのサビキ釣りから、湾内でのシーバス・クロダイまで幅広い釣りが楽しめる。",
-    latitude: 33.1600, longitude: 129.7250,
+    latitude: 33.161200, longitude: 129.72580,
     address: "長崎県佐世保市干尽町",
     accessInfo: "JR佐世保駅から徒歩約15分。西九州自動車道佐世保三川内ICから約20分。",
     region: localRegion("r175"), spotType: "port", difficulty: "beginner",
@@ -615,7 +615,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s1117", name: "日出町豊岡漁港", slug: "hiji-toyooka-port",
     description: "城下かれいで有名な日出町の漁港。別府湾に面した穏やかな港で、カレイやキスの投げ釣りが安定。ファミリー向け。",
-    latitude: 33.3690, longitude: 131.5300,
+    latitude: 33.36970, longitude: 131.531200,
     address: "大分県速見郡日出町豊岡",
     accessInfo: "JR日豊本線日出駅から車で約10分。大分自動車道日出ICから約10分。",
     region: region("r33"), spotType: "port", difficulty: "beginner",

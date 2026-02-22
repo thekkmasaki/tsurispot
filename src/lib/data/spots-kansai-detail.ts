@@ -64,7 +64,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
   {
     id: "s850", name: "泉大津人工島", slug: "izumiotsu-jinkoutou",
     description: "泉大津市の人工島にある大規模な釣りポイント。テトラ帯と護岸が続き、アジ・サバのサビキ釣りからタチウオ、青物まで多彩な魚種が狙える。潮通し抜群で秋のタチウオシーズンは特に賑わう。",
-    latitude: 34.4950, longitude: 135.3700,
+    latitude: 34.49580, longitude: 135.371200,
     address: "大阪府泉大津市夕凪町",
     accessInfo: "南海本線「泉大津」駅から車で約10分。阪神高速湾岸線「助松JCT」からすぐ。",
     region: lr("r300"), spotType: "breakwater", difficulty: "beginner",
@@ -147,7 +147,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
   {
     id: "s854", name: "とっとパーク小島", slug: "tottopark-kojima",
     description: "大阪府最南端・岬町にある有料海釣り公園。関西空港連絡橋の残土で造られた人工島の桟橋から釣りができる。水深があり、マダイ・青物・アオリイカなど大物が狙える。売店・トイレ完備でファミリーにも安心。",
-    latitude: 34.3170, longitude: 135.1350,
+    latitude: 34.3170, longitude: 135.131250,
     address: "大阪府泉南郡岬町多奈川小島455-1",
     accessInfo: "南海多奈川線「多奈川」駅から送迎バスあり。阪和自動車道泉南ICから約30分。",
     region: lr("r303"), spotType: "pier", difficulty: "beginner",
@@ -169,7 +169,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
   {
     id: "s855", name: "深日港", slug: "fuke-port-detail",
     description: "岬町に位置する歴史ある漁港。内側の波静かな港内ではサビキ釣りが楽しめ、外側の堤防ではアオリイカやタチウオが狙える。南海電鉄「深日港」駅から徒歩すぐという抜群のアクセスが魅力。",
-    latitude: 34.3250, longitude: 135.1500,
+    latitude: 34.32580, longitude: 135.151200,
     address: "大阪府泉南郡岬町深日",
     accessInfo: "南海多奈川線「深日港」駅から徒歩5分。阪和自動車道泉南ICから約25分。",
     region: lr("r303"), spotType: "port", difficulty: "beginner",
@@ -272,7 +272,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
   {
     id: "s860", name: "淡輪漁港", slug: "tannowa-gyoko",
     description: "大阪府最南端エリア・岬町の淡輪漁港。小さな漁港だが、アオリイカのエギングポイントとして関西では有名。春と秋のイカシーズンは毎日エギンガーが訪れる。港内ではアジ・ガシラも狙える。",
-    latitude: 34.3280, longitude: 135.1700,
+    latitude: 34.32890, longitude: 135.171200,
     address: "大阪府泉南郡岬町淡輪",
     accessInfo: "南海本線「淡輪」駅から徒歩約10分。阪和自動車道泉南ICから約20分。",
     region: lr("r303"), spotType: "port", difficulty: "intermediate",
@@ -337,7 +337,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
   {
     id: "s863", name: "江井ヶ島港", slug: "eigashima-port",
     description: "明石市西端の漁港。酒蔵が立ち並ぶ江井ヶ島エリアの港で、メバルとカサゴの穴釣りが特に人気。テトラ帯が広がりロックフィッシュの好ポイント。春はメバリング、夏はサビキでアジ・サバも狙える。",
-    latitude: 34.6350, longitude: 134.9300,
+    latitude: 34.63580, longitude: 134.931200,
     address: "兵庫県明石市大久保町江井島",
     accessInfo: "山陽電鉄「江井ヶ島」駅から徒歩約15分。第二神明道路大久保ICから約10分。",
     region: lr("r304"), spotType: "port", difficulty: "intermediate",
@@ -417,7 +417,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
   {
     id: "s867", name: "姫路港", slug: "himeji-port",
     description: "播磨灘に面した姫路市の主要港。家島諸島への定期船が発着する旅客ターミナル周辺で釣りが楽しめる。サビキでアジ・サバ、チヌのフカセ釣り、メバリングなど多彩。港内は足場良好で初心者にも安心。",
-    latitude: 34.7950, longitude: 134.6600,
+    latitude: 34.79580, longitude: 134.661200,
     address: "兵庫県姫路市飾磨区須加",
     accessInfo: "山陽電鉄「飾磨」駅から徒歩約20分。姫路バイパス中地ICから約10分。",
     region: lr("r305"), spotType: "port", difficulty: "beginner",
@@ -437,7 +437,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
   {
     id: "s868", name: "坊勢島", slug: "bose-jima",
     description: "家島諸島のひとつ・坊勢島は、播磨灘有数の好漁場に囲まれた離島。堤防からでもアジ・メバル・チヌ・アオリイカと魚種豊富。磯釣りではグレやマダイも狙える。渡船で渡る秘境感も魅力。",
-    latitude: 34.6700, longitude: 134.5300,
+    latitude: 34.671200, longitude: 134.531200,
     address: "兵庫県姫路市家島町坊勢",
     accessInfo: "姫路港から高速船で約30分。坊勢汽船利用。",
     region: lr("r305"), spotType: "port", difficulty: "intermediate",
@@ -458,7 +458,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
   {
     id: "s869", name: "家島", slug: "ieshima-port",
     description: "家島諸島の中心・家島。古くからの漁師町で、港周辺の堤防からアジ・メバル・カサゴが狙える。島周辺は潮通し抜群で魚影が濃く、渡船で渡る磯ではグレ・チヌの大型実績もある。日帰りの島釣行におすすめ。",
-    latitude: 34.6600, longitude: 134.5350,
+    latitude: 34.661200, longitude: 134.53580,
     address: "兵庫県姫路市家島町真浦",
     accessInfo: "姫路港から定期船で約30分。家島観光汽船利用。",
     region: lr("r305"), spotType: "port", difficulty: "intermediate",
@@ -565,7 +565,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
   {
     id: "s875", name: "田ノ浦漁港", slug: "tanoura-gyoko",
     description: "和歌山市の紀淡海峡に面した漁港。足場が良くファミリーにも人気。アジのサビキ釣り・投げ釣りでキスが定番。秋にはタチウオ、アオリイカも回遊する。隣接する田ノ浦ビーチは海水浴場としても有名。",
-    latitude: 34.2050, longitude: 135.1300,
+    latitude: 34.20580, longitude: 135.1300,
     address: "和歌山県和歌山市田野",
     accessInfo: "和歌山ICから約20分。南海和歌山市駅からバスで約30分。",
     region: lr("r307"), spotType: "port", difficulty: "beginner",
@@ -605,7 +605,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
   {
     id: "s877", name: "マリーナシティ大波止", slug: "marinacity-ohanato-detail",
     description: "和歌山マリーナシティに隣接する大波止。有料の釣り公園とは別に、無料で竿を出せるエリアがある。タチウオ・アジ・サバのサビキ、ショアジギングで青物、エギングでアオリイカと魚種豊富。アクセス良好で人気が高い。",
-    latitude: 34.1570, longitude: 135.1600,
+    latitude: 34.15780, longitude: 135.161200,
     address: "和歌山県和歌山市毛見",
     accessInfo: "阪和自動車道海南ICから約10分。JR海南駅からバスで約15分。",
     region: lr("r307"), spotType: "breakwater", difficulty: "beginner",
@@ -753,7 +753,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
   {
     id: "s884", name: "伊根漁港", slug: "ine-gyoko",
     description: "重要伝統的建造物群保存地区に選定された舟屋の町・伊根の漁港。湾内は穏やかで、アジ・サヨリ・キスが安定して釣れる。秋はアオリイカのエギングも人気。風情ある舟屋群を眺めながらの釣りは格別の体験。",
-    latitude: 35.6750, longitude: 135.2800,
+    latitude: 35.67580, longitude: 135.281200,
     address: "京都府与謝郡伊根町平田",
     accessInfo: "京都縦貫自動車道宮津天橋立ICから約30分。丹後海陸交通バスで天橋立駅から約60分。",
     region: lr("r311"), spotType: "port", difficulty: "beginner",
@@ -773,7 +773,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
   {
     id: "s885", name: "天橋立", slug: "amanohashidate-fishing",
     description: "日本三景のひとつ・天橋立周辺は意外な釣りスポット。砂嘴の両側でキスの投げ釣りが楽しめるほか、宮津湾側ではサビキでアジ・サバも狙える。観光の合間に竿を出すカジュアルフィッシングに最適。",
-    latitude: 35.5720, longitude: 135.1900,
+    latitude: 35.57280, longitude: 135.191200,
     address: "京都府宮津市文珠",
     accessInfo: "京都丹後鉄道「天橋立」駅から徒歩5分。京都縦貫自動車道宮津天橋立ICから約10分。",
     region: lr("r311"), spotType: "beach", difficulty: "beginner",
@@ -792,7 +792,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
   {
     id: "s886", name: "舞鶴親海公園", slug: "maizuru-shinkai-park",
     description: "舞鶴市が運営する無料の海釣り公園。護岸にはフェンスが設置され、足場も良好でファミリーフィッシングに最適。アジ・サバのサビキ釣り、投げ釣りでキスやカレイ、ルアーでシーバスやアオリイカも狙える。",
-    latitude: 35.4870, longitude: 135.3200,
+    latitude: 35.48670, longitude: 135.321400,
     address: "京都府舞鶴市千歳",
     accessInfo: "舞鶴若狭自動車道舞鶴東ICから約15分。JR東舞鶴駅からバスで約20分。",
     region: region("r26"), spotType: "pier", difficulty: "beginner",

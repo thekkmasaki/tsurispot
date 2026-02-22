@@ -439,7 +439,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
   {
     id: "s1003", name: "門川漁港", slug: "kadogawa-fishing-port",
     description: "宮崎県北部の門川湾に面した漁港。湾内は穏やかで年間を通じてアジやイワシの数釣りが楽しめる。秋はアオリイカのエギングポイントとしても人気が高く、防波堤の足場が良くファミリーにもおすすめ。",
-    latitude: 32.4680, longitude: 131.6500,
+    latitude: 32.46890, longitude: 131.651200,
     address: "宮崎県東臼杵郡門川町門川尾末",
     accessInfo: "JR門川駅から車で約5分。東九州自動車道門川ICから約10分。",
     region: localRegion("r313"), spotType: "port", difficulty: "beginner",
@@ -517,7 +517,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
   {
     id: "s1006", name: "宮古島平良港", slug: "miyakojima-hirara-port",
     description: "宮古島の玄関口・平良港。フェリーターミナルがある大型港で、防波堤からガーラ（アジ類）やカーエー（フエフキダイ）が狙える。離島ターミナル付近は足場が良く、宮古島観光の合間に手軽に釣りが楽しめる。",
-    latitude: 24.7930, longitude: 125.2800,
+    latitude: 24.79360, longitude: 125.281200,
     address: "沖縄県宮古島市平良字下里",
     accessInfo: "宮古空港から車で約15分。下地島空港から宮古大橋経由で約30分。",
     region: localRegion("r320"), spotType: "port", difficulty: "beginner",
@@ -543,7 +543,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
   {
     id: "s1007", name: "伊良部島長山港", slug: "irabu-nagayama-port",
     description: "宮古島から伊良部大橋で繋がる伊良部島の長山港。700m超の長い堤防が特徴で、GT（ロウニンアジ）やガーラの回遊ポイントとして知られる。伊良部大橋を望む絶景と大物釣りが楽しめる離島スポット。",
-    latitude: 24.8100, longitude: 125.1710,
+    latitude: 24.811200, longitude: 125.17170,
     address: "沖縄県宮古島市伊良部字前里添",
     accessInfo: "宮古空港から伊良部大橋経由で車で約25分。",
     region: localRegion("r321"), spotType: "breakwater", difficulty: "intermediate",
@@ -569,7 +569,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
   {
     id: "s1008", name: "佐良浜港", slug: "sarahama-port",
     description: "伊良部島の北東部に位置する歴史ある漁港。カツオ漁の基地として知られ、港内は穏やかで初心者でも安心して釣りが楽しめる。アジ類のサビキ釣りが手軽で、夕方にはタマン（ハマフエフキ）も狙える。",
-    latitude: 24.8300, longitude: 125.2050,
+    latitude: 24.831200, longitude: 125.20580,
     address: "沖縄県宮古島市伊良部字池間添",
     accessInfo: "宮古空港から伊良部大橋経由で車で約30分。",
     region: localRegion("r321"), spotType: "port", difficulty: "beginner",
@@ -670,7 +670,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
   {
     id: "s1012", name: "今帰仁漁港", slug: "nakijin-fishing-port",
     description: "沖縄本島北部の今帰仁村にある小さな漁港。世界遺産の今帰仁城跡にも近い。防波堤からはアジ類やミーバイが狙え、観光客が少ないため地元の釣り人がのんびりと釣りを楽しむ穴場的スポット。",
-    latitude: 26.6790, longitude: 127.9400,
+    latitude: 26.67970, longitude: 127.941200,
     address: "沖縄県国頭郡今帰仁村字仲宗根",
     accessInfo: "沖縄自動車道許田ICから車で約30分。美ら海水族館から約10分。",
     region: localRegion("r324"), spotType: "port", difficulty: "beginner",

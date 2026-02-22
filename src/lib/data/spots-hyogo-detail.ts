@@ -323,7 +323,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
   {
     id: "sh013", name: "高砂港", slug: "takasago-port",
     description: "加古川河口の西側に位置する大きな港。工場の裏から南へ120mほど突き出た大波止が主な釣り場。夏はキス・ベラ・ハゼ、大物ではチヌ・スズキ・アコウ・ヒラメとターゲット豊富。車横付け可能なエリアもありファミリーにも人気。",
-    latitude: 34.7270, longitude: 134.8000,
+    latitude: 34.72780, longitude: 134.7989000,
     address: "兵庫県高砂市高砂町朝日町",
     accessInfo: "山陽電鉄「高砂」駅から徒歩約15分。加古川バイパス高砂北出口から約10分。",
     region: lr("r403"), spotType: "port", difficulty: "beginner",
@@ -541,7 +541,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
   {
     id: "sh023", name: "津名港（志筑）", slug: "tsuna-port-shizuki",
     description: "淡路島中部東海岸の大型港。4つの人工島が並ぶ淡路島屈指の人気釣り場で、堤防から釣れる魚ならほぼ全て狙える。青物・コブダイの名所で、投げ釣りでカワハギ・カレイ、エギングでアオリイカと魚種が非常に豊富。",
-    latitude: 34.4720, longitude: 134.9200,
+    latitude: 34.47280, longitude: 134.921200,
     address: "兵庫県淡路市志筑新島",
     accessInfo: "神戸淡路鳴門自動車道津名一宮ICから約10分。",
     region: lr("r405"), spotType: "port", difficulty: "beginner",
@@ -607,7 +607,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
   {
     id: "sh026", name: "郡家港", slug: "gunge-port",
     description: "淡路島西部、郡家川河口に作られた漁港。西側の赤灯波止と東側の白灯波止から釣りができ、アジ・キス・カレイ・カサゴ・メバル・チヌ・グレ・スズキ・タチウオ・青物・アオリイカと多彩。比較的空いていて穴場的存在。",
-    latitude: 34.4900, longitude: 134.8180,
+    latitude: 34.491200, longitude: 134.81890,
     address: "兵庫県淡路市郡家",
     accessInfo: "神戸淡路鳴門自動車道北淡ICから約15分。",
     region: lr("r406"), spotType: "port", difficulty: "intermediate",
@@ -696,7 +696,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
   {
     id: "sh030", name: "佐津漁港", slug: "satsu-gyoko",
     description: "香美町佐津の小さな漁港。佐津海水浴場に隣接し、夏は海水浴と釣りを同時に楽しめる。堤防からのサビキでアジ・キス、投げ釣りでシロギスの実績が高い。秋にはアオリイカのエギングポイントとしても知られる穴場的存在。",
-    latitude: 35.6440, longitude: 134.6700,
+    latitude: 35.64420, longitude: 134.671200,
     address: "兵庫県美方郡香美町香住区訓谷",
     accessInfo: "JR「佐津」駅から徒歩約15分。山陰近畿自動車道香住ICから約10分。",
     region: lr("r407"), spotType: "port", difficulty: "beginner",
@@ -762,7 +762,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
   {
     id: "sh033", name: "津居山港", slug: "tsuiyama-port",
     description: "豊岡市津居山にある日本海側の漁港。津居山ガニ（松葉ガニのブランド）の水揚げ港として有名。堤防からサビキでアジ・サバ、投げ釣りでキス・カレイが狙え、秋にはサゴシ・ハマチなどの青物も回遊する実力派の釣り場。",
-    latitude: 35.6470, longitude: 134.8200,
+    latitude: 35.64780, longitude: 134.821200,
     address: "兵庫県豊岡市津居山",
     accessInfo: "JR「城崎温泉」駅から車で約10分。北近畿豊岡自動車道日高神鍋高原ICから約35分。",
     region: lr("r408"), spotType: "port", difficulty: "beginner",
@@ -783,7 +783,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
   {
     id: "sh034", name: "小島岸壁", slug: "kojima-ganpeki-toyooka",
     description: "豊岡市の日本海に面した岸壁。足場が良く車横付け可能で、手軽にサビキ釣りが楽しめるファミリー向けポイント。アジ・キス・カレイ・チヌ・スズキと年間を通じて多彩なターゲットが狙える。冬場のカレイの実績も高い。",
-    latitude: 35.6450, longitude: 134.7800,
+    latitude: 35.64580, longitude: 134.781200,
     address: "兵庫県豊岡市竹野町小島",
     accessInfo: "JR「竹野」駅から車で約5分。北近畿豊岡自動車道日高神鍋高原ICから約25分。",
     region: lr("r408"), spotType: "breakwater", difficulty: "beginner",

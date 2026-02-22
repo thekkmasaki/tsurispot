@@ -35,7 +35,7 @@ export const areaGuides: AreaGuide[] = [
       "湾内は船の往来が多いため、航路付近や立入禁止区域に十分注意",
       "釣り具店や餌店が各漁港近辺に揃っているので手ぶらで来ても対応可能",
     ],
-    relatedSlugs: ["shonan", "chiba", "miura"],
+    relatedSlugs: ["shonan", "chiba", "miura", "hokkaido"],
   },
   {
     slug: "shonan",
@@ -60,7 +60,7 @@ export const areaGuides: AreaGuide[] = [
       "小田原エリアの漁港は観光客向け施設も充実し、ファミリーにも好適",
       "台風後は濁りが入りクロダイやシーバスが活性化することがある",
     ],
-    relatedSlugs: ["tokyo-bay", "miura", "suruga-bay"],
+    relatedSlugs: ["tokyo-bay", "miura", "suruga-bay", "niigata"],
   },
   {
     slug: "miura",
@@ -85,7 +85,7 @@ export const areaGuides: AreaGuide[] = [
       "アオリイカは秋（10〜12月）に大型が回遊。エギング経験者向き",
       "駐車場が少ない磯場が多いので、早朝到着を推奨",
     ],
-    relatedSlugs: ["shonan", "tokyo-bay", "chiba"],
+    relatedSlugs: ["shonan", "tokyo-bay", "chiba", "awaji"],
   },
   {
     slug: "chiba",
@@ -110,7 +110,7 @@ export const areaGuides: AreaGuide[] = [
       "内房の堤防サビキはGW〜秋口まで安定した釣果が期待できる",
       "千葉市から近い木更津・富津エリアは平日でも混みやすいので早め到着を",
     ],
-    relatedSlugs: ["tokyo-bay", "miura", "shonan"],
+    relatedSlugs: ["tokyo-bay", "miura", "shonan", "hokkaido"],
   },
   {
     slug: "osaka-bay",
@@ -135,7 +135,7 @@ export const areaGuides: AreaGuide[] = [
       "メバリングは冬〜春が型が出やすい。軽めのジグヘッドで表層から探る",
       "泉南方面のキスは投げ釣り初心者の入門に最適",
     ],
-    relatedSlugs: ["akashi", "wakayama", "seto-inland"],
+    relatedSlugs: ["akashi", "wakayama", "seto-inland", "awaji"],
   },
   {
     slug: "akashi",
@@ -160,7 +160,7 @@ export const areaGuides: AreaGuide[] = [
       "播磨灘のカレイ投げ釣りは冬〜春が旬。冷え込みの後は特に食いがいい",
       "明石の釣具店は充実しており、現地調達で釣行スタイルを整えられる",
     ],
-    relatedSlugs: ["osaka-bay", "seto-inland", "wakayama"],
+    relatedSlugs: ["osaka-bay", "seto-inland", "wakayama", "awaji", "kanazawa-noto"],
   },
   {
     slug: "wakayama",
@@ -185,7 +185,7 @@ export const areaGuides: AreaGuide[] = [
       "串本周辺はダイビングでも有名。海の透明度が高く魚影が視認しやすい",
       "秋のアオリイカは1kg超えの大型が釣れることも。エギング天国として人気",
     ],
-    relatedSlugs: ["osaka-bay", "akashi", "seto-inland"],
+    relatedSlugs: ["osaka-bay", "akashi", "seto-inland", "nanki-kumano"],
   },
   {
     slug: "suruga-bay",
@@ -210,7 +210,7 @@ export const areaGuides: AreaGuide[] = [
       "夏のカツオ一本釣り体験船は家族連れに大人気。要事前予約",
       "静岡市内の釣具チェーン店が充実。現地で情報収集するのがベスト",
     ],
-    relatedSlugs: ["shonan", "ise-bay", "miura"],
+    relatedSlugs: ["shonan", "ise-bay", "miura", "niigata"],
   },
   {
     slug: "ise-bay",
@@ -235,7 +235,7 @@ export const areaGuides: AreaGuide[] = [
       "名古屋港エリアは夜釣りのシーバスが定番。河川のデイゲームも面白い",
       "渥美半島の灯台周辺はヒラメ・マゴチのサーフゲームに人気",
     ],
-    relatedSlugs: ["suruga-bay", "osaka-bay", "seto-inland"],
+    relatedSlugs: ["suruga-bay", "osaka-bay", "seto-inland", "nanki-kumano"],
   },
   {
     slug: "seto-inland",
@@ -260,7 +260,7 @@ export const areaGuides: AreaGuide[] = [
       "岡山・倉敷のハゼ・キス釣りは夏の家族釣りに最適",
       "愛媛・今治周辺は来島海峡の激流が生む大型チヌが有名",
     ],
-    relatedSlugs: ["osaka-bay", "akashi", "fukuoka"],
+    relatedSlugs: ["osaka-bay", "akashi", "fukuoka", "amakusa"],
   },
   {
     slug: "fukuoka",
@@ -285,7 +285,7 @@ export const areaGuides: AreaGuide[] = [
       "離島遠征は天候・海況により欠航リスクあり。余裕のあるスケジュールで",
       "博多の釣具チェーン店は品揃えが豊富で、エサ・仕掛けは現地調達が便利",
     ],
-    relatedSlugs: ["seto-inland", "tohoku", "osaka-bay"],
+    relatedSlugs: ["seto-inland", "goto", "amakusa", "okinawa"],
   },
   {
     slug: "tohoku",
@@ -310,7 +310,7 @@ export const areaGuides: AreaGuide[] = [
       "釣り場の多くが震災復興区域付近にある。地元のルールやマナーを尊重すること",
       "民宿や釣り宿が各地にあり、地元の情報を教えてくれる頼もしい味方になる",
     ],
-    relatedSlugs: ["tokyo-bay", "fukuoka", "chiba"],
+    relatedSlugs: ["tokyo-bay", "hokkaido", "niigata", "chiba"],
   },
 ];
 

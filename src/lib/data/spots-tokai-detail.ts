@@ -452,7 +452,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
   {
     id: "s718", name: "師崎港堤防", slug: "morozaki-ko-teibo",
     description: "知多半島最南端の師崎港。篠島・日間賀島への定期船が発着する港で、堤防からのアオリイカや青物が人気。外洋に面した先端部ではショアジギングでブリ系の青物も狙える上級者向けポイントもある。",
-    latitude: 34.6460, longitude: 136.9800,
+    latitude: 34.64670, longitude: 136.981200,
     address: "愛知県知多郡南知多町師崎港",
     accessInfo: "名古屋ICから知多半島道路経由で約70分。名鉄河和線河和駅からバス約30分。",
     region: lr("r206"), spotType: "breakwater", difficulty: "intermediate",
@@ -713,7 +713,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
   {
     id: "s731", name: "鈴鹿港堤防", slug: "suzuka-ko-teibo",
     description: "伊勢湾に面した鈴鹿市の漁港。F1サーキットで有名な鈴鹿市の海側スポットで、アジ・キスの手軽な釣りが楽しめる。秋のサヨリが有名で、港内の静穏な環境は初心者や家族連れにも向いている。",
-    latitude: 34.9180, longitude: 136.5800,
+    latitude: 34.91890, longitude: 136.581200,
     address: "三重県鈴鹿市若松中1丁目",
     accessInfo: "近鉄鈴鹿市駅から車で約15分。東名阪道鈴鹿ICから約20分。",
     region: lr("r209"), spotType: "port", difficulty: "beginner",

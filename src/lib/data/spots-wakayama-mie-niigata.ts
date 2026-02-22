@@ -274,7 +274,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
   {
     id: "swmn010", name: "日置川河口", slug: "hikigawa-kakou",
     description: "白浜町日置にある日置川の河口。清流日置川は鮎釣りの名所だが、河口域はシーバス・ヒラスズキの好ポイント。サーフからはヒラメ・マゴチも狙え、河口のテトラ周りではチヌ・キビレが付く。南紀エリアの穴場的存在で、のんびりした釣りが楽しめる。",
-    latitude: 33.6300, longitude: 135.5010,
+    latitude: 33.631200, longitude: 135.50170,
     address: "和歌山県西牟婁郡白浜町日置",
     accessInfo: "紀勢自動車道すさみ南ICから約20分。JR紀勢本線紀伊日置駅から徒歩約15分。",
     region: lr("r503"), spotType: "beach", difficulty: "intermediate",
@@ -499,7 +499,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
   {
     id: "swmn020", name: "千代崎漁港", slug: "chiyozaki-gyoko",
     description: "鈴鹿市の伊勢湾に面した中規模漁港。複数の防波堤が隣接し、初心者から上級者まで熟練度に合わせた堤防釣りが楽しめる。ハゼ・キス・カレイの投げ釣りが定番で、秋にはサヨリの回遊も。港内は波が穏やかでファミリーにもおすすめ。",
-    latitude: 34.8550, longitude: 136.6200,
+    latitude: 34.85580, longitude: 136.621200,
     address: "三重県鈴鹿市南若松町",
     accessInfo: "東名阪自動車道鈴鹿ICから約20分。近鉄名古屋線千代崎駅から徒歩約15分。",
     region: lr("r511"), spotType: "port", difficulty: "beginner",

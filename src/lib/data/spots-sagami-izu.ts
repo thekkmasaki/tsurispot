@@ -80,7 +80,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si3", name: "初島堤防", slug: "hatsushima-breakwater",
     description: "熱海からフェリーで30分の離島・初島。島を囲む堤防は潮通し抜群で、メジナやイサキ、回遊魚の実績が高い。島ならではの魚影の濃さが魅力。",
-    latitude: 35.0400, longitude: 139.1650, address: "静岡県熱海市初島",
+    latitude: 35.041200, longitude: 139.16580, address: "静岡県熱海市初島",
     accessInfo: "熱海港から富士急マリンリゾート初島航路で約30分。",
     region: region("r9"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: false, parkingDetail: "島内に車は不要。熱海港に有料駐車場あり",
@@ -235,7 +235,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si8", name: "汐吹崎", slug: "shiobuki-zaki",
     description: "伊東市南部の荒々しい磯場。汐吹き岩で有名な観光スポットだが、磯釣り師にはメジナやイシダイのポイントとして知られる。干潮時に広がる磯場が狙い目。",
-    latitude: 34.9280, longitude: 139.1420, address: "静岡県伊東市富戸先",
+    latitude: 34.9280, longitude: 139.141220, address: "静岡県伊東市富戸先",
     accessInfo: "伊豆急行川奈駅から車で約5分。汐吹公園駐車場から徒歩約5分。",
     region: region("r9"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "汐吹公園駐車場（無料・数台）",
@@ -413,7 +413,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si14", name: "稲取港", slug: "inatori-port",
     description: "東伊豆最大級の漁港。金目鯛の水揚げで全国的に有名。堤防からはサビキでアジ、カゴ釣りでマダイ、エギングでアオリイカと多彩な釣りが楽しめる。",
-    latitude: 34.8100, longitude: 139.0560, address: "静岡県賀茂郡東伊豆町稲取",
+    latitude: 34.811200, longitude: 139.05670, address: "静岡県賀茂郡東伊豆町稲取",
     accessInfo: "伊豆急行伊豆稲取駅から徒歩約15分。",
     region: region("r9"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に有料駐車場あり",
@@ -513,7 +513,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si17", name: "今井浜", slug: "imaihama-beach",
     description: "河津町の美しいビーチ。白い砂浜が広がり、夏は海水浴場としても賑わう。春秋の早朝はキスの投げ釣りポイント。サーフルアーでヒラメも狙える。",
-    latitude: 34.7670, longitude: 139.0200, address: "静岡県賀茂郡河津町見高",
+    latitude: 34.76780, longitude: 139.021200, address: "静岡県賀茂郡河津町見高",
     accessInfo: "伊豆急行今井浜海岸駅から徒歩約3分。",
     region: region("r9"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海岸沿いに有料駐車場あり（夏季）",
@@ -856,7 +856,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si28", name: "富戸の磯（ボラ納屋下）", slug: "futo-iso-boranaya",
     description: "富戸エリアの本格磯釣りポイント。城ヶ崎海岸の一角で、溶岩が固まった荒々しい岩礁帯が広がる。メジナの魚影が濃く、冬場の寒グレシーズンは特に人気。",
-    latitude: 34.9050, longitude: 139.1400, address: "静岡県伊東市富戸",
+    latitude: 34.90580, longitude: 139.1400, address: "静岡県伊東市富戸",
     accessInfo: "伊豆急行富戸駅から徒歩約25分。城ヶ崎海岸ピクニカルコース経由。",
     region: region("r9"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "城ヶ崎海岸駐車場あり（有料）",

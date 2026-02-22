@@ -138,8 +138,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "abashiri-ko",
     description:
       "オホーツク海に面した道東の主要港。夏のカラフトマス・サケ釣りで全国的に有名。港内ではチカ・カレイ・コマイが安定して釣れ、外防波堤ではアブラコやソイも狙える。流氷シーズン（1〜3月）は釣り不可の期間あり。",
-    latitude: 44.0200,
-    longitude: 144.2870,
+    latitude: 44.020800,
+    longitude: 144.28780,
     address: "北海道網走市港町",
     accessInfo:
       "JR網走駅から車で約5分。旭川紋別自動車道遠軽ICから約90分。港内に無料駐車場あり。",
@@ -515,8 +515,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "matsumae-ko",
     description:
       "北海道最南端の城下町・松前の港。津軽海峡に面し、潮通しが良いためマグロの回遊もある。クロダイ（チヌ）が北海道では珍しく釣れるポイントで、ホッケ・ソイ・アブラコなどの北海道定番魚種も豊富。松前城・桜の名所としても有名。",
-    latitude: 41.4300,
-    longitude: 140.1100,
+    latitude: 41.431200,
+    longitude: 140.112800,
     address: "北海道松前郡松前町字松城",
     accessInfo:
       "函館から国道228号で約2時間。松前港フェリーターミナル周辺に駐車スペースあり。",
@@ -1141,8 +1141,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "ishinomaki-ko",
     description:
       "宮城県第2の都市・石巻市の主要港。旧北上川河口に位置し、シーバス（スズキ）のルアーフィッシングで全国的に有名。港内ではハゼ・カレイ・アイナメが好調で、サビキでイワシ・サバも狙える。石ノ森萬画館に近い。",
-    latitude: 38.4290,
-    longitude: 141.3100,
+    latitude: 38.42920,
+    longitude: 141.311200,
     address: "宮城県石巻市中央",
     accessInfo:
       "JR石巻駅から車で約10分。三陸自動車道石巻河南ICから約15分。港周辺に駐車スペースあり。",
@@ -1630,8 +1630,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "yotsukura-gyoko",
     description:
       "いわき市四倉地区の漁港。道の駅よつくら港に隣接し、アクセス・周辺施設ともに充実。カレイ・アイナメの投げ釣りが好調で、サビキでイワシ・サバも楽しめる。夏にはマゴチやヒラメの実績もあり、ファミリーからベテランまで幅広く楽しめる。",
-    latitude: 37.1000,
-    longitude: 140.9860,
+    latitude: 37.0978000,
+    longitude: 140.98670,
     address: "福島県いわき市四倉町",
     accessInfo:
       "JR四ツ倉駅から徒歩約15分。常磐自動車道四倉ICから約5分。道の駅よつくら港駐車場（無料）を利用。",

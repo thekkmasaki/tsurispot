@@ -149,7 +149,7 @@ export const kantoDetailSpots: FishingSpot[] = [
   {
     id: "s805", name: "辰巳の森海浜公園", slug: "tatsumi-no-mori-seaside-park",
     description: "東京都江東区の運河沿いに広がる海浜公園。護岸からのハゼ釣りが人気で、秋には入れ食い状態になることも。シーバスのルアーフィッシングも盛んで、夕マヅメから夜にかけてが好時間帯。静かな環境でのんびり釣りを楽しめる穴場スポット。",
-    latitude: 35.6370, longitude: 139.8100,
+    latitude: 35.63780, longitude: 139.811200,
     address: "東京都江東区辰巳2-1-35",
     accessInfo: "東京メトロ有楽町線「辰巳」駅から徒歩約10分。首都高速湾岸線新木場ICから約5分。",
     region: lr("r300"), spotType: "pier", difficulty: "beginner",
@@ -244,7 +244,7 @@ export const kantoDetailSpots: FishingSpot[] = [
   {
     id: "s810", name: "海辺つり公園", slug: "umibe-tsuri-park",
     description: "横須賀市にある本格的な海釣り公園。東京湾に面した約300mの護岸から釣りが楽しめ、アジ、サバ、イワシのサビキ釣りから、クロダイのウキ釣り、シーバスのルアーフィッシングまで幅広い釣りが可能。入場無料で柵付き護岸のため、ファミリーフィッシングに最適。",
-    latitude: 35.2760, longitude: 139.6700,
+    latitude: 35.27670, longitude: 139.671200,
     address: "神奈川県横須賀市平成町3-1",
     accessInfo: "京急堀ノ内駅から徒歩約15分。横浜横須賀道路横須賀ICから約15分。",
     region: lr("r301"), spotType: "pier", difficulty: "beginner",
@@ -264,7 +264,7 @@ export const kantoDetailSpots: FishingSpot[] = [
   {
     id: "s811", name: "磯子海づり施設", slug: "isogo-sea-fishing-facility",
     description: "横浜市磯子区にある本格的な海釣り施設。全長500mの桟橋から東京湾の魚を狙える有料の管理釣り場。アジ、サバ、シロギス、カレイ、メバルなど多彩な魚種が楽しめる。安全設備が充実しており、初心者やファミリーに特におすすめ。売店でエサや仕掛けも購入可能。",
-    latitude: 35.3890, longitude: 139.6340,
+    latitude: 35.3890, longitude: 139.631240,
     address: "神奈川県横浜市磯子区新磯子39",
     accessInfo: "JR根岸線磯子駅から市営バスで約10分。首都高速湾岸線磯子ICから約5分。",
     region: region("r6"), spotType: "pier", difficulty: "beginner",
@@ -456,7 +456,7 @@ export const kantoDetailSpots: FishingSpot[] = [
   {
     id: "s821", name: "飯岡港", slug: "iioka-port",
     description: "九十九里浜の北端に位置する漁港。堤防からのサビキ釣りでアジ、イワシが狙え、投げ釣りではシロギスやイシモチの実績が高い。夏場のイシモチは数釣りが楽しめ、夜釣りではアナゴも釣れる。屏風ヶ浦の断崖絶壁が間近に見える独特の景観。",
-    latitude: 35.7100, longitude: 140.7710,
+    latitude: 35.711200, longitude: 140.77170,
     address: "千葉県旭市下永井",
     accessInfo: "JR総武本線飯岡駅からバスで約10分。東関東自動車道佐原香取ICから約40分。",
     region: lr("r304"), spotType: "port", difficulty: "beginner",
@@ -493,7 +493,7 @@ export const kantoDetailSpots: FishingSpot[] = [
   {
     id: "s823", name: "大原漁港", slug: "ohara-port",
     description: "外房を代表する大規模漁港。タコ釣りの聖地として全国的に有名で、秋のマダコシーズンには多くのアングラーが訪れる。堤防からはアジ、サバのサビキ釣り、ヒラメの泳がせ釣りも好調。イセエビ漁でも知られる豊かな海。港の朝市も人気。",
-    latitude: 35.2585, longitude: 140.3900,
+    latitude: 35.2589, longitude: 140.391200,
     address: "千葉県いすみ市大原",
     accessInfo: "JR外房線大原駅から徒歩約15分。圏央道市原鶴舞ICから約50分。",
     region: region("r46"), spotType: "port", difficulty: "beginner",
@@ -686,7 +686,7 @@ export const kantoDetailSpots: FishingSpot[] = [
   {
     id: "s833", name: "彩湖（荒川調節池）", slug: "saiko-arakawa",
     description: "戸田市と和光市にまたがる荒川調節池「彩湖」。都心から最も近いバスフィッシングのフィールドとして人気が高い。ブラックバス、ブルーギル、コイ、ワカサギなど多彩な魚種が生息。湖畔の遊歩道からのんびり釣りが楽しめる。冬場のワカサギ釣りも一興。",
-    latitude: 35.8020, longitude: 139.6200,
+    latitude: 35.80280, longitude: 139.621200,
     address: "埼玉県戸田市内谷2887",
     accessInfo: "JR埼京線武蔵浦和駅からバスで約15分。外環自動車道和光ICから約10分。",
     region: lr("r306"), spotType: "river", difficulty: "beginner",
@@ -764,7 +764,7 @@ export const kantoDetailSpots: FishingSpot[] = [
   {
     id: "s837", name: "横浜ベイサイドマリーナ護岸", slug: "yokohama-bayside-marina",
     description: "三井アウトレットパーク横浜ベイサイドに隣接するマリーナの護岸。ショッピングの合間に釣りが楽しめるユニークなスポット。シーバス、メバル、カサゴなどの根魚が主なターゲット。夜のライトアップされた港での釣りは雰囲気抜群。",
-    latitude: 35.3640, longitude: 139.6300,
+    latitude: 35.36470, longitude: 139.6300,
     address: "神奈川県横浜市金沢区白帆5-2",
     accessInfo: "シーサイドライン鳥浜駅から徒歩約5分。首都高速湾岸線杉田ICから約5分。",
     region: region("r6"), spotType: "pier", difficulty: "beginner",
@@ -842,7 +842,7 @@ export const kantoDetailSpots: FishingSpot[] = [
   {
     id: "s841", name: "東扇島西公園", slug: "higashi-ogishima-nishi-park",
     description: "川崎市の人工島・東扇島にある海釣り公園。約500mの護岸から東京湾の多彩な魚種が狙える神奈川県内でも屈指の無料釣り場。アジ、サバ、イワシのサビキ釣りから、タチウオの夜釣り、カレイの投げ釣りまで幅広い釣りが楽しめる。週末は大変混雑するため早朝の場所取りが必要。",
-    latitude: 35.4600, longitude: 139.7370,
+    latitude: 35.461200, longitude: 139.73780,
     address: "神奈川県川崎市川崎区東扇島94-1",
     accessInfo: "JR川崎駅から市営バスで約30分「東扇島西公園前」下車。首都高速湾岸線東扇島ICから約5分。",
     region: region("r6"), spotType: "pier", difficulty: "beginner",

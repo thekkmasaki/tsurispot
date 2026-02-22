@@ -144,7 +144,7 @@ export const saninSpots: FishingSpot[] = [
   {
     id: "s518", name: "岩美町田後港", slug: "iwami-tago-port",
     description: "鳥取県岩美町の日本海に面した田後港。周囲を岩場と松林に囲まれた風光明媚な港で、アジ・イワシのサビキ釣りが楽しめる。秋から冬はアオリイカやヤリイカの実績も高い漁港。",
-    latitude: 35.5900, longitude: 134.4350,
+    latitude: 35.591200, longitude: 134.43580,
     address: "鳥取県岩美郡岩美町田後",
     accessInfo: "JR山陰本線岩美駅から車で約15分。山陰自動車道鳥取東ICから約25分。",
     region: localRegion("r190"), spotType: "port", difficulty: "beginner",
@@ -248,7 +248,7 @@ export const saninSpots: FishingSpot[] = [
   {
     id: "s522", name: "浜田港", slug: "hamada-port",
     description: "島根県西部の主要港湾・浜田港。浜田漁港は日本有数のカレイ・カサゴ・ノドグロ（アカムツ）の産地。防波堤からのサビキ釣りや投げ釣りが盛んで、ショアジギングでの青物狙いも人気。",
-    latitude: 34.9000, longitude: 132.0770,
+    latitude: 34.9012000, longitude: 132.07780,
     address: "島根県浜田市浜田町",
     accessInfo: "JR山陰本線浜田駅から徒歩約20分。浜田自動車道浜田ICから約10分。",
     region: localRegion("r194"), spotType: "port", difficulty: "beginner",

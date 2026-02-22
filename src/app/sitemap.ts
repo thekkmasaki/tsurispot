@@ -65,7 +65,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${baseUrl}/guide/sabiki`,
       lastModified: now,
       changeFrequency: "monthly",
-      priority: 0.6,
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/guide/casting`,

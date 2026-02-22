@@ -176,7 +176,7 @@ export const hokurikuSpots: FishingSpot[] = [
   {
     id: "s449", name: "氷見漁港", slug: "himi-gyoko",
     description: "寒ブリで全国的に有名な氷見の漁港。堤防からはアジやキスが釣れ、冬場のヤリイカ狙いのエギングも人気。立山連峰を望む絶景。",
-    latitude: 36.8560, longitude: 136.9800,
+    latitude: 36.85610, longitude: 136.899784700,
     address: "富山県氷見市比美町",
     accessInfo: "JR氷見線氷見駅から徒歩約15分。能越自動車道氷見ICから約10分。",
     region: region("r21"), spotType: "port", difficulty: "beginner",
@@ -319,7 +319,7 @@ export const hokurikuSpots: FishingSpot[] = [
   {
     id: "s455", name: "輪島港マリンタウン", slug: "wajima-marinetown",
     description: "朝市で有名な輪島の港。奥能登の潮通しの良い海域で、根魚やイカの好ポイント。観光と組み合わせた釣行にも最適。",
-    latitude: 37.3930, longitude: 136.9000,
+    latitude: 37.39280, longitude: 136.9000,
     address: "石川県輪島市マリンタウン",
     accessInfo: "のと里山海道能登空港ICから約30分。",
     region: region("r22"), spotType: "port", difficulty: "intermediate",

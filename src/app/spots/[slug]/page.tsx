@@ -45,6 +45,7 @@ import { FishingReportSummary } from "@/components/spots/fishing-report-summary"
 import { StreetViewSection } from "@/components/spots/street-view-section";
 import { NearbyGpsSearch } from "@/components/spots/nearby-gps-search";
 import { MobileQuickNav } from "@/components/spots/mobile-quick-nav";
+import { SpotAffiliateRecommend } from "@/components/spots/spot-affiliate-recommend";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -467,6 +468,28 @@ export default async function SpotDetailPage({ params }: PageProps) {
                   このスポットでの釣りに必要な道具をわかりやすくまとめました。
                 </p>
                 <GearGuideList guides={spot.gearGuides} />
+                <SpotAffiliateRecommend
+                  methods={spot.catchableFish.map((cf) => cf.method)}
+                />
+              </section>
+            </>
+          )}
+
+          {/* 装備ガイドがないスポットでもアフィリエイトを表示 */}
+          {(!spot.gearGuides || spot.gearGuides.length === 0) && spot.catchableFish.length > 0 && (
+            <>
+              <Separator />
+              <section>
+                <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
+                  <Wrench className="size-5" />
+                  この釣り場でおすすめの装備
+                </h2>
+                <p className="mb-2 text-sm text-muted-foreground">
+                  このスポットの釣り方に合った装備をピックアップしました。
+                </p>
+                <SpotAffiliateRecommend
+                  methods={spot.catchableFish.map((cf) => cf.method)}
+                />
               </section>
             </>
           )}

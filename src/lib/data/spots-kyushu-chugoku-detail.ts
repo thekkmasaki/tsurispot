@@ -95,7 +95,7 @@ export const kyushuChugokuDetailSpots: FishingSpot[] = [
   {
     id: "s750", name: "博多港中央ふ頭護岸", slug: "hakata-chuou-futo-gogan",
     description: "博多港のシンボル・中央ふ頭に整備された護岸。足場が広く安全柵も充実しており家族連れに最適。年間を通してアジやイワシのサビキ釣りが楽しめ、夜間はタチウオやシーバスも狙える博多湾屈指の好釣り場。",
-    latitude: 33.5850, longitude: 130.4100,
+    latitude: 33.58580, longitude: 130.411200,
     address: "福岡県福岡市博多区沖浜町2番地",
     accessInfo: "JR博多駅から西鉄バス「博多港国際ターミナル」行きで約20分。都市高速空港線東浜出口から約5分。",
     region: region("r15"), spotType: "pier", difficulty: "beginner",
@@ -163,7 +163,7 @@ export const kyushuChugokuDetailSpots: FishingSpot[] = [
   {
     id: "s753", name: "奈多漁港堤防", slug: "nata-port-breakwater",
     description: "福岡市東区の奈多漁港。博多湾の最奥部に近く、静穏なため家族連れに人気が高い。サビキ釣りでアジ・イワシが安定して釣れ、春から秋にかけてはキスの投げ釣りも楽しめる初心者向けの好ポイント。",
-    latitude: 33.6500, longitude: 130.4580,
+    latitude: 33.651200, longitude: 130.45890,
     address: "福岡県福岡市東区奈多",
     accessInfo: "JR香椎線海ノ中道駅から車で約10分。都市高速香椎線香椎東出口から約15分。",
     region: region("r15"), spotType: "port", difficulty: "beginner",
@@ -230,7 +230,7 @@ export const kyushuChugokuDetailSpots: FishingSpot[] = [
   {
     id: "s756", name: "津屋崎漁港堤防", slug: "tsuyazaki-port-breakwater",
     description: "福津市津屋崎の漁港。小さいながらも魚影が濃く、地元アングラーが通い詰める穴場スポット。テトラ周りのメバルやカサゴ、堤防外側のクロダイなど根魚の宝庫として知られる。",
-    latitude: 33.8020, longitude: 130.4900,
+    latitude: 33.80280, longitude: 130.491200,
     address: "福岡県福津市津屋崎",
     accessInfo: "JR鹿児島本線福間駅から車で約10分。",
     region: localRegion("r201"), spotType: "breakwater", difficulty: "intermediate",
@@ -346,7 +346,7 @@ export const kyushuChugokuDetailSpots: FishingSpot[] = [
   {
     id: "s761", name: "関門橋下護岸", slug: "kanmon-bridge-bank",
     description: "関門橋の真下に位置する護岸。関門海峡の激流が生み出す豊富なベイトが集まり、青物からタチウオまで一級の釣り場。橋のライトが夜間に海面を照らし、ライトゲームの名ポイントとして釣り人に愛される。",
-    latitude: 33.9580, longitude: 130.9800,
+    latitude: 33.95890, longitude: 130.981200,
     address: "福岡県北九州市門司区大里本町",
     accessInfo: "JR門司港駅から車で約5分。北九州都市高速大里出口から約3分。",
     region: region("r55"), spotType: "pier", difficulty: "intermediate",
@@ -552,7 +552,7 @@ export const kyushuChugokuDetailSpots: FishingSpot[] = [
   {
     id: "s770", name: "尾道港堤防", slug: "onomichi-port-breakwater",
     description: "「千光寺」で有名な坂の町・尾道の港堤防。尾道水道は潮流が速く魚影が濃い。クロダイやメバルの好ポイントで、春にはチヌの乗っ込みシーズンとして多くのフカセアングラーが集まる人気スポット。",
-    latitude: 34.4100, longitude: 133.1820,
+    latitude: 34.411200, longitude: 133.18280,
     address: "広島県尾道市東御所町",
     accessInfo: "JR山陽本線尾道駅から徒歩約5分。山陽自動車道尾道ICから約15分。",
     region: region("r58"), spotType: "breakwater", difficulty: "intermediate",

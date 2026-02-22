@@ -38,6 +38,7 @@ const prefectures = Array.from(new Set(regions.map((r) => r.prefecture)));
 export function SpotListClient({ spots }: { spots: FishingSpot[] }) {
   const [searchText, setSearchText] = useState("");
   const [selectedPrefecture, setSelectedPrefecture] = useState<string>("");
+  const [selectedArea, setSelectedArea] = useState<string>("");
   const [selectedType, setSelectedType] = useState<FishingSpot["spotType"] | "">("");
   const [selectedDifficulty, setSelectedDifficulty] = useState<FishingSpot["difficulty"] | "">("");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -80,8 +81,16 @@ export function SpotListClient({ spots }: { spots: FishingSpot[] }) {
     setCurrentPage(1);
   }, []);
 
-  const hasFilters = searchText || selectedPrefecture || selectedType || selectedDifficulty;
-  const activeFilterCount = [selectedPrefecture, selectedType, selectedDifficulty].filter(Boolean).length;
+  // Build area list for selected prefecture
+  const areasForPrefecture = useMemo(() => {
+    if (!selectedPrefecture) return [];
+    return regions
+      .filter((r) => r.prefecture === selectedPrefecture)
+      .map((r) => r.areaName);
+  }, [selectedPrefecture]);
+
+  const hasFilters = searchText || selectedPrefecture || selectedArea || selectedType || selectedDifficulty;
+  const activeFilterCount = [selectedPrefecture, selectedArea, selectedType, selectedDifficulty].filter(Boolean).length;
 
   // Precompute distances for all spots if user location is available
   const distanceMap = useMemo(() => {
@@ -104,6 +113,7 @@ export function SpotListClient({ spots }: { spots: FishingSpot[] }) {
         if (!nameMatch && !regionMatch) return false;
       }
       if (selectedPrefecture && spot.region.prefecture !== selectedPrefecture) return false;
+      if (selectedArea && spot.region.areaName !== selectedArea) return false;
       if (selectedType && spot.spotType !== selectedType) return false;
       if (selectedDifficulty && spot.difficulty !== selectedDifficulty) return false;
       return true;
@@ -115,7 +125,7 @@ export function SpotListClient({ spots }: { spots: FishingSpot[] }) {
     }
 
     return filtered;
-  }, [spots, searchText, selectedPrefecture, selectedType, selectedDifficulty, sortByDistance, distanceMap]);
+  }, [spots, searchText, selectedPrefecture, selectedArea, selectedType, selectedDifficulty, sortByDistance, distanceMap]);
 
   const totalPages = Math.ceil(filteredSpots.length / ITEMS_PER_PAGE);
   const paginatedSpots = filteredSpots.slice(
@@ -127,6 +137,7 @@ export function SpotListClient({ spots }: { spots: FishingSpot[] }) {
   const clearFilters = () => {
     setSearchText("");
     setSelectedPrefecture("");
+    setSelectedArea("");
     setSelectedType("");
     setSelectedDifficulty("");
     setCurrentPage(1);
@@ -215,7 +226,7 @@ export function SpotListClient({ spots }: { spots: FishingSpot[] }) {
       {/* Filters - always visible on desktop, collapsible on mobile */}
       <div className={cn(
         "space-y-4 overflow-hidden transition-all duration-200",
-        isFilterOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0 sm:max-h-none sm:opacity-100"
+        isFilterOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0 sm:max-h-none sm:opacity-100"
       )}>
         {/* Prefecture filter */}
         <div>
@@ -226,7 +237,11 @@ export function SpotListClient({ spots }: { spots: FishingSpot[] }) {
                 key={pref}
                 variant={selectedPrefecture === pref ? "default" : "outline"}
                 size="sm"
-                onClick={() => handleFilterChange(setSelectedPrefecture, selectedPrefecture === pref ? "" : pref)}
+                onClick={() => {
+                  const newPref = selectedPrefecture === pref ? "" : pref;
+                  handleFilterChange(setSelectedPrefecture, newPref);
+                  setSelectedArea("");
+                }}
                 className="min-h-[36px] text-xs sm:text-sm"
               >
                 {pref}
@@ -234,6 +249,34 @@ export function SpotListClient({ spots }: { spots: FishingSpot[] }) {
             ))}
           </div>
         </div>
+
+        {/* Area filter - shown when a prefecture is selected */}
+        {selectedPrefecture && areasForPrefecture.length > 0 && (
+          <div>
+            <p className="mb-2 text-sm font-medium text-muted-foreground">エリア</p>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              <Button
+                variant={selectedArea === "" ? "default" : "outline"}
+                size="sm"
+                onClick={() => handleFilterChange(setSelectedArea, "")}
+                className="min-h-[36px] text-xs sm:text-sm"
+              >
+                すべてのエリア
+              </Button>
+              {areasForPrefecture.map((area) => (
+                <Button
+                  key={area}
+                  variant={selectedArea === area ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => handleFilterChange(setSelectedArea, selectedArea === area ? "" : area)}
+                  className="min-h-[36px] text-xs sm:text-sm"
+                >
+                  {area}
+                </Button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Spot type + Difficulty in a row on mobile */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">

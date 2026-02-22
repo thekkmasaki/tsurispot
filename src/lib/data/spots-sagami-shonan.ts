@@ -19,7 +19,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   {
     id: "ss1", name: "逗子海岸", slug: "zushi-beach",
     description: "逗子湾に面した遠浅の砂浜。投げ釣りでキスやカレイが狙え、夏場はサーフィンとの共存エリア。秋口からはヒラメも回遊する。穏やかな波で初心者にも優しい。",
-    latitude: 35.2965, longitude: 139.5780, address: "神奈川県逗子市新宿1丁目",
+    latitude: 35.2965, longitude: 139.571280, address: "神奈川県逗子市新宿1丁目",
     accessInfo: "JR逗子駅から徒歩約15分。逗葉新道出口から約5分。",
     region: region("r7"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "逗子海岸駐車場（1時間400円）",
@@ -161,7 +161,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   {
     id: "ss6", name: "長者ヶ崎", slug: "chojagasaki",
     description: "葉山と横須賀の境にある岬。磯場が広がりクロダイやメジナの好ポイント。夕暮れ時は富士山のシルエットが美しく、景勝地としても有名。上級者向けの磯釣り場。",
-    latitude: 35.2520, longitude: 139.5700, address: "神奈川県三浦郡葉山町下山口",
+    latitude: 35.25280, longitude: 139.5700, address: "神奈川県三浦郡葉山町下山口",
     accessInfo: "JR逗子駅からバス「長者ヶ崎」下車すぐ。横横道路逗子ICから約20分。",
     region: region("r7"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "長者ヶ崎駐車場（1日1,000円・夏季1,500円）",
@@ -305,7 +305,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   {
     id: "ss11", name: "七里ヶ浜", slug: "shichirigahama",
     description: "江の島と稲村ヶ崎の間に広がるサーフスポット。ルアーフィッシングでシーバスやヒラメが狙える。サーファーが多いため釣りは早朝か夕方以降がおすすめ。",
-    latitude: 35.3060, longitude: 139.5100, address: "神奈川県鎌倉市七里ガ浜東",
+    latitude: 35.30670, longitude: 139.511200, address: "神奈川県鎌倉市七里ガ浜東",
     accessInfo: "江ノ電「七里ヶ浜」駅から徒歩5分。",
     region: region("r7"), spotType: "beach", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "七里ヶ浜海岸駐車場（1時間300円）",
