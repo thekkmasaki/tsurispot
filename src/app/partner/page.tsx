@@ -13,15 +13,8 @@ import {
   Shield,
   Zap,
   MessageSquare,
-  Star,
-  Crown,
   Ship,
-  Eye,
-  MousePointerClick,
-  Megaphone,
-  Camera,
   FileText,
-  BadgeCheck,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -71,70 +64,6 @@ const BENEFITS = [
   },
 ];
 
-const PLANS = [
-  {
-    name: "フリー",
-    price: "無料",
-    priceNote: "0円/月",
-    icon: BadgeCheck,
-    color: "emerald",
-    popular: false,
-    description: "まずはお試し。基本情報を無料で掲載できるプランです。",
-    features: [
-      "店舗名・住所・電話番号の掲載",
-      "営業時間・定休日の表示",
-      "地図上へのピン表示",
-      "ツリスポ内の店舗ページ作成",
-    ],
-    notIncluded: [
-      "写真掲載",
-      "おすすめ表示",
-      "特集記事",
-      "バナー広告",
-    ],
-  },
-  {
-    name: "ベーシック",
-    price: "月額5,000円",
-    priceNote: "税別",
-    icon: Star,
-    color: "blue",
-    popular: true,
-    description: "写真と「おすすめ」表示で、周辺の釣り人にしっかりPR。",
-    features: [
-      "フリープランの全機能",
-      "写真最大10枚まで掲載",
-      "「おすすめ」バッジ表示",
-      "近隣スポットページでの優先表示",
-      "月次閲覧レポート",
-      "掲載内容の随時更新対応",
-    ],
-    notIncluded: [
-      "特集記事",
-      "バナー広告",
-    ],
-  },
-  {
-    name: "プレミアム",
-    price: "月額15,000円",
-    priceNote: "税別",
-    icon: Crown,
-    color: "amber",
-    popular: false,
-    description: "特集記事＋バナー広告で最大限の露出。集客を本格化させたい方に。",
-    features: [
-      "ベーシックプランの全機能",
-      "写真枚数無制限",
-      "専用の特集記事ページ作成",
-      "エリアページ・トップへのバナー広告",
-      "検索結果での最優先表示",
-      "釣果レポートの代行更新",
-      "詳細なアクセス解析レポート",
-      "専任担当者によるサポート",
-    ],
-    notIncluded: [],
-  },
-];
 
 const CASE_STUDIES = [
   {
@@ -281,12 +210,12 @@ export default function PartnerPage() {
           </div>
         </div>
         <div className="mt-8">
-          <a href="mailto:fishingspotjapan@gmail.com?subject=掲載希望">
+          <Link href="/contact?from=partner">
             <Button size="lg" className="min-h-[48px] gap-2 bg-blue-600 px-8 text-white hover:bg-blue-700">
               <Mail className="size-4" />
               まずはお問い合わせ（無料）
             </Button>
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -319,122 +248,49 @@ export default function PartnerPage() {
         </div>
       </section>
 
-      {/* 料金プラン */}
+      {/* 掲載について */}
       <section id="plans" className="mb-14 scroll-mt-20 sm:mb-20">
         <h2 className="mb-2 text-center text-xl font-bold sm:text-2xl">
-          掲載プラン
+          掲載について
         </h2>
         <p className="mb-8 text-center text-sm text-muted-foreground">
-          事業規模やご要望に合わせて3つのプランからお選びいただけます
+          まずはお気軽にご相談ください。貴店に最適なプランをご提案します。
         </p>
-        <div className="grid gap-4 sm:gap-6 lg:grid-cols-3">
-          {PLANS.map((plan) => {
-            const colorMap: Record<string, { bg: string; text: string; border: string; badge: string; icon: string }> = {
-              emerald: {
-                bg: "bg-emerald-50 dark:bg-emerald-900/20",
-                text: "text-emerald-700 dark:text-emerald-400",
-                border: "border-emerald-200 dark:border-emerald-800",
-                badge: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400",
-                icon: "text-emerald-600 dark:text-emerald-400",
-              },
-              blue: {
-                bg: "bg-blue-50 dark:bg-blue-900/20",
-                text: "text-blue-700 dark:text-blue-400",
-                border: "border-blue-300 dark:border-blue-700 ring-2 ring-blue-200 dark:ring-blue-800",
-                badge: "bg-blue-100 text-blue-700 dark:bg-blue-900/30 dark:text-blue-400",
-                icon: "text-blue-600 dark:text-blue-400",
-              },
-              amber: {
-                bg: "bg-amber-50 dark:bg-amber-900/20",
-                text: "text-amber-700 dark:text-amber-400",
-                border: "border-amber-200 dark:border-amber-800",
-                badge: "bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400",
-                icon: "text-amber-600 dark:text-amber-400",
-              },
-            };
-            const colors = colorMap[plan.color];
-
-            return (
-              <Card
-                key={plan.name}
-                className={`relative gap-0 py-0 ${plan.popular ? colors.border : ""}`}
-              >
-                {plan.popular && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2">
-                    <Badge className="bg-blue-600 text-white hover:bg-blue-600 px-3 py-1 text-xs">
-                      人気No.1
-                    </Badge>
-                  </div>
-                )}
-                <CardContent className="flex flex-col p-5 sm:p-6">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className={`flex size-10 items-center justify-center rounded-xl ${colors.bg}`}>
-                      <plan.icon className={`size-5 ${colors.icon}`} />
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold">{plan.name}</h3>
-                    </div>
-                  </div>
-
-                  <div className="mb-4">
-                    <p className={`text-2xl font-bold ${colors.text}`}>
-                      {plan.price}
-                    </p>
-                    <p className="text-xs text-muted-foreground">
-                      {plan.priceNote}
-                    </p>
-                  </div>
-
-                  <p className="mb-5 text-xs text-muted-foreground leading-relaxed">
-                    {plan.description}
-                  </p>
-
-                  <ul className="mb-5 flex-1 space-y-2.5">
-                    {plan.features.map((feature) => (
-                      <li
-                        key={feature}
-                        className="flex items-start gap-2 text-xs sm:text-sm"
-                      >
-                        <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-emerald-500" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                    {plan.notIncluded.map((feature) => (
-                      <li
-                        key={feature}
-                        className="flex items-start gap-2 text-xs sm:text-sm text-muted-foreground/50"
-                      >
-                        <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center text-xs">
-                          &mdash;
-                        </span>
-                        <span className="line-through">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <a
-                    href={`mailto:fishingspotjapan@gmail.com?subject=${encodeURIComponent(`${plan.name}プラン掲載希望`)}`}
-                    className="mt-auto"
-                  >
-                    <Button
-                      className={`w-full min-h-[44px] gap-2 ${
-                        plan.popular
-                          ? "bg-blue-600 text-white hover:bg-blue-700"
-                          : "bg-muted text-foreground hover:bg-muted/80"
-                      }`}
-                    >
-                      <Mail className="size-4" />
-                      {plan.price === "無料" ? "無料で掲載を始める" : "このプランで相談する"}
-                    </Button>
-                  </a>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-        <p className="mt-4 text-center text-xs text-muted-foreground">
-          ※ 有料プランの最低契約期間は3ヶ月です。お支払いは銀行振込またはクレジットカードに対応。
-        </p>
+        <Card className="gap-0 py-0">
+          <CardContent className="flex flex-col items-center gap-4 p-6 text-center sm:p-8">
+            <div className="flex size-14 items-center justify-center rounded-full bg-blue-50 dark:bg-blue-900/20">
+              <MessageSquare className="size-7 text-blue-600 dark:text-blue-400" />
+            </div>
+            <div>
+              <h3 className="text-lg font-bold">無料相談受付中</h3>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                掲載プランや費用について、まずはお問い合わせフォームからお気軽にご相談ください。
+                <br />
+                事業内容やご要望をお伺いし、最適なご提案をさせていただきます。
+              </p>
+            </div>
+            <div className="flex flex-wrap justify-center gap-3 text-xs text-muted-foreground">
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="size-3.5 text-emerald-500" />
+                <span>相談無料</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="size-3.5 text-emerald-500" />
+                <span>返信2営業日以内</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="size-3.5 text-emerald-500" />
+                <span>無料プランあり</span>
+              </div>
+            </div>
+            <Link href="/contact?from=partner">
+              <Button size="lg" className="min-h-[48px] gap-2 bg-blue-600 px-8 text-white hover:bg-blue-700">
+                <Mail className="size-4" />
+                お問い合わせフォームへ
+              </Button>
+            </Link>
+          </CardContent>
+        </Card>
       </section>
 
       {/* 導入事例 */}
@@ -621,15 +477,15 @@ export default function PartnerPage() {
                 まずはお気軽にメールでご連絡ください。
               </p>
             </div>
-            <a href="mailto:fishingspotjapan@gmail.com?subject=掲載希望">
+            <Link href="/contact?from=partner">
               <Button
                 size="lg"
                 className="min-h-[48px] gap-2 bg-white px-8 text-blue-800 hover:bg-blue-50"
               >
                 <Mail className="size-4" />
-                fishingspotjapan@gmail.com
+                お問い合わせフォームへ
               </Button>
-            </a>
+            </Link>
             <div className="flex flex-wrap justify-center gap-6 text-xs text-blue-200">
               <div className="flex items-center gap-1.5">
                 <Clock className="size-3.5" />

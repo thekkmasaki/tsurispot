@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   Mail,
   Send,
@@ -10,6 +11,7 @@ import {
   MessageCircle,
   CheckCircle2,
   Copy,
+  Store,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -37,6 +39,12 @@ const categories = [
     description: "表示がおかしい・動かないなど",
   },
   {
+    value: "partner",
+    label: "掲載のご相談",
+    icon: Store,
+    description: "釣具店・船宿・管理釣り場の掲載希望",
+  },
+  {
     value: "other",
     label: "その他・ご意見",
     icon: MessageCircle,
@@ -45,11 +53,25 @@ const categories = [
 ];
 
 export default function ContactPage() {
+  return (
+    <Suspense>
+      <ContactPageInner />
+    </Suspense>
+  );
+}
+
+function ContactPageInner() {
+  const searchParams = useSearchParams();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [category, setCategory] = useState("");
   const [message, setMessage] = useState("");
   const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    const from = searchParams.get("from");
+    if (from === "partner") setCategory("partner");
+  }, [searchParams]);
 
   const selectedCategory = categories.find((c) => c.value === category);
 
@@ -188,7 +210,9 @@ export default function ContactPage() {
                       ? "例：△△市の□□堤防を追加してほしいです。アジやサバがよく釣れます。"
                       : category === "bug-report"
                         ? "例：地図ページが表示されません。使用ブラウザはChromeです。"
-                        : "お気軽にメッセージをお書きください"
+                        : category === "partner"
+                          ? "例：○○市で釣具店を経営しております。ツリスポへの掲載を検討しています。"
+                          : "お気軽にメッセージをお書きください"
                 }
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}

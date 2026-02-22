@@ -15,6 +15,8 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { YouTubeVideoList } from "@/components/youtube-video-card";
+import type { YouTubeSearchLink } from "@/types";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -34,6 +36,7 @@ interface FishingMethod {
   steps: { title: string; description: string }[];
   tips: string[];
   relatedMethods: { slug: string; name: string }[];
+  youtubeLinks: YouTubeSearchLink[];
 }
 
 const DIFFICULTY_MAP = {
@@ -86,6 +89,11 @@ const methods: FishingMethod[] = [
       { slug: "uki-zuri", name: "ウキ釣り" },
       { slug: "ajing", name: "アジング" },
     ],
+    youtubeLinks: [
+      { label: "サビキ釣り入門", searchQuery: "サビキ釣り 初心者 やり方 堤防", description: "堤防でのサビキ釣りの基本を動画で学ぼう" },
+      { label: "サビキ釣りでアジ大漁", searchQuery: "サビキ釣り アジ 大漁 堤防 釣果", description: "サビキで大量のアジを釣り上げる実釣映像" },
+      { label: "サビキ仕掛けの選び方", searchQuery: "サビキ仕掛け 選び方 おすすめ 初心者", description: "仕掛け・コマセの選び方と使い方のコツ" },
+    ],
   },
   {
     slug: "ajing",
@@ -128,6 +136,11 @@ const methods: FishingMethod[] = [
       { slug: "mebaring", name: "メバリング" },
       { slug: "sabiki", name: "サビキ釣り" },
       { slug: "eging", name: "エギング" },
+    ],
+    youtubeLinks: [
+      { label: "アジング入門", searchQuery: "アジング 初心者 やり方 ワーム ジグヘッド", description: "アジングの基本テクニックを動画で解説" },
+      { label: "アジング実釣", searchQuery: "アジング 実釣 常夜灯 漁港 夜釣り", description: "常夜灯周りでのアジング実釣の様子" },
+      { label: "アジングのワーム選び", searchQuery: "アジング ワーム おすすめ カラー サイズ", description: "状況別のワームの選び方とカラーローテーション" },
     ],
   },
   {
@@ -172,6 +185,11 @@ const methods: FishingMethod[] = [
       { slug: "ajing", name: "アジング" },
       { slug: "mebaring", name: "メバリング" },
     ],
+    youtubeLinks: [
+      { label: "エギング入門", searchQuery: "エギング 初心者 やり方 シャクリ方 アオリイカ", description: "エギングの基本シャクリとフォールを動画で学ぶ" },
+      { label: "エギングでアオリイカ", searchQuery: "エギング アオリイカ 実釣 堤防 秋", description: "堤防からアオリイカを狙うエギング実釣" },
+      { label: "エギの選び方", searchQuery: "エギ おすすめ カラー サイズ 選び方 初心者", description: "初心者向けエギの選び方とカラーローテーション" },
+    ],
   },
   {
     slug: "mebaring",
@@ -214,6 +232,11 @@ const methods: FishingMethod[] = [
       { slug: "ajing", name: "アジング" },
       { slug: "ana-zuri", name: "穴釣り" },
       { slug: "uki-zuri", name: "ウキ釣り" },
+    ],
+    youtubeLinks: [
+      { label: "メバリング入門", searchQuery: "メバリング 初心者 やり方 ワーム ジグヘッド 夜", description: "メバリングの基本テクニックを動画で解説" },
+      { label: "メバリング実釣", searchQuery: "メバリング 実釣 漁港 常夜灯 メバル", description: "漁港の常夜灯周りでのメバリング実釣映像" },
+      { label: "メバルプラッギング", searchQuery: "メバル プラグ プラッギング シンキングペンシル", description: "プラグで大型メバルを狙うテクニック" },
     ],
   },
   {
@@ -259,6 +282,11 @@ const methods: FishingMethod[] = [
       { slug: "ajing", name: "アジング" },
       { slug: "sabiki", name: "サビキ釣り" },
     ],
+    youtubeLinks: [
+      { label: "ショアジギング入門", searchQuery: "ショアジギング 初心者 やり方 メタルジグ 青物", description: "ショアジギングの基本アクションを動画で学ぶ" },
+      { label: "ショアジギングで青物", searchQuery: "ショアジギング 青物 ブリ イナダ ヒット 実釣", description: "岸から青物をヒットさせる迫力の実釣映像" },
+      { label: "メタルジグの選び方", searchQuery: "メタルジグ おすすめ 選び方 重さ カラー ショアジギング", description: "状況に合ったメタルジグの選び方ガイド" },
+    ],
   },
   {
     slug: "choi-nage",
@@ -302,6 +330,11 @@ const methods: FishingMethod[] = [
       { slug: "sabiki", name: "サビキ釣り" },
       { slug: "uki-zuri", name: "ウキ釣り" },
       { slug: "ana-zuri", name: "穴釣り" },
+    ],
+    youtubeLinks: [
+      { label: "ちょい投げ入門", searchQuery: "ちょい投げ 初心者 やり方 キス ハゼ 堤防", description: "ちょい投げの基本的なやり方を動画で解説" },
+      { label: "ちょい投げでキス釣り", searchQuery: "ちょい投げ キス 砂浜 サーフ 実釣 夏", description: "砂浜からキスを狙うちょい投げ実釣映像" },
+      { label: "天秤仕掛けの作り方", searchQuery: "ちょい投げ 仕掛け 作り方 天秤 初心者", description: "ちょい投げ仕掛けの選び方と作り方" },
     ],
   },
   {
@@ -347,6 +380,11 @@ const methods: FishingMethod[] = [
       { slug: "choi-nage", name: "ちょい投げ" },
       { slug: "ana-zuri", name: "穴釣り" },
     ],
+    youtubeLinks: [
+      { label: "ウキ釣り入門", searchQuery: "ウキ釣り 初心者 やり方 仕掛け 堤防", description: "ウキ釣りの基本を初心者向けに動画で解説" },
+      { label: "ウキフカセでクロダイ", searchQuery: "ウキフカセ クロダイ チヌ 堤防 実釣", description: "ウキフカセ釣りでクロダイを狙う実釣映像" },
+      { label: "ウキ仕掛けの作り方", searchQuery: "ウキ釣り 仕掛け 作り方 固定ウキ 遊動ウキ 初心者", description: "固定ウキ・遊動ウキ仕掛けの作り方ガイド" },
+    ],
   },
   {
     slug: "ana-zuri",
@@ -390,6 +428,11 @@ const methods: FishingMethod[] = [
       { slug: "mebaring", name: "メバリング" },
       { slug: "sabiki", name: "サビキ釣り" },
       { slug: "choi-nage", name: "ちょい投げ" },
+    ],
+    youtubeLinks: [
+      { label: "穴釣り入門", searchQuery: "穴釣り 初心者 やり方 テトラ カサゴ ブラクリ", description: "テトラでの穴釣りの基本を動画で学ぼう" },
+      { label: "穴釣りでカサゴ連発", searchQuery: "穴釣り カサゴ 連発 テトラポッド 実釣", description: "テトラの穴からカサゴを次々と釣り上げる実釣映像" },
+      { label: "穴釣りの安全対策", searchQuery: "穴釣り 安全 テトラ 靴 装備 注意点", description: "テトラでの穴釣りの安全装備と注意点" },
     ],
   },
 ];
@@ -608,6 +651,13 @@ export default async function MethodDetailPage({ params }: PageProps) {
           </CardContent>
         </Card>
       </section>
+
+      {/* 参考動画 */}
+      {method.youtubeLinks.length > 0 && (
+        <section className="mb-6 sm:mb-8">
+          <YouTubeVideoList links={method.youtubeLinks} />
+        </section>
+      )}
 
       {/* 対象魚 */}
       <section className="mb-6 sm:mb-8">

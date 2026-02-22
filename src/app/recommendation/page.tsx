@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useCallback } from "react";
 import Link from "next/link";
 import {
   ChevronRight,
@@ -19,6 +19,13 @@ import {
   Trophy,
   TrendingUp,
   Compass,
+  Navigation,
+  Check,
+  Globe,
+  ChevronDown,
+  RotateCcw,
+  Map,
+  Loader2,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -374,11 +381,91 @@ const jsonLd = {
     {
       "@type": "ListItem",
       position: 2,
-      name: "今日のおすすめスポット",
+      name: "今日どこに行こうかな？",
       item: "https://tsurispot.com/recommendation",
     },
   ],
 };
+
+// --- エリア定義 ---
+
+type RegionGroup = "all" | "hokkaido-tohoku" | "kanto" | "chubu-hokuriku" | "kansai" | "chugoku-shikoku" | "kyushu-okinawa" | "geolocation";
+
+interface RegionOption {
+  value: RegionGroup;
+  label: string;
+  icon: string;
+  prefectures: string[];
+}
+
+const REGION_OPTIONS: RegionOption[] = [
+  { value: "all", label: "全国", icon: "🗾", prefectures: [] },
+  {
+    value: "hokkaido-tohoku",
+    label: "北海道・東北",
+    icon: "🏔️",
+    prefectures: ["北海道", "青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県"],
+  },
+  {
+    value: "kanto",
+    label: "関東",
+    icon: "🏙️",
+    prefectures: ["茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県"],
+  },
+  {
+    value: "chubu-hokuriku",
+    label: "中部・北陸",
+    icon: "⛰️",
+    prefectures: ["新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県"],
+  },
+  {
+    value: "kansai",
+    label: "関西",
+    icon: "⛩️",
+    prefectures: ["三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県"],
+  },
+  {
+    value: "chugoku-shikoku",
+    label: "中国・四国",
+    icon: "🌊",
+    prefectures: ["鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県"],
+  },
+  {
+    value: "kyushu-okinawa",
+    label: "九州・沖縄",
+    icon: "🌺",
+    prefectures: ["福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"],
+  },
+];
+
+// --- ステップ定義 ---
+
+const STEPS = [
+  { id: 1, label: "エリア", shortLabel: "エリア" },
+  { id: 2, label: "レベル", shortLabel: "レベル" },
+  { id: 3, label: "同行者", shortLabel: "同行者" },
+  { id: 4, label: "釣りたい魚", shortLabel: "魚" },
+] as const;
+
+// --- 距離計算 ---
+
+function getDistanceKm(
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number
+): number {
+  const R = 6371;
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLon = ((lon2 - lon1) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
 
 // --- メインページ ---
 
@@ -388,27 +475,177 @@ export default function RecommendationPage() {
   const moonAge = getMoonAge(today);
   const tideType = getTideType(moonAge);
 
+  // ウィザード状態
+  const [currentStep, setCurrentStep] = useState(1);
+  const [completedSteps, setCompletedSteps] = useState<number[]>([]);
+  const [showResults, setShowResults] = useState(false);
+
   // フィルター状態
+  const [selectedRegion, setSelectedRegion] = useState<RegionGroup>("all");
   const [userLevel, setUserLevel] = useState<UserLevel>("beginner");
   const [companion, setCompanion] = useState<Companion>("solo");
   const [targetFishSlug, setTargetFishSlug] = useState<string | null>(null);
+
+  // 位置情報
+  const [userLocation, setUserLocation] = useState<{ lat: number; lon: number } | null>(null);
+  const [geoLoading, setGeoLoading] = useState(false);
+  const [geoError, setGeoError] = useState<string | null>(null);
+
+  // ステップ遷移
+  const goToStep = useCallback((step: number) => {
+    setCurrentStep(step);
+    if (step === 5) {
+      setShowResults(true);
+    }
+  }, []);
+
+  const completeStep = useCallback((step: number) => {
+    setCompletedSteps((prev) => (prev.includes(step) ? prev : [...prev, step]));
+  }, []);
+
+  const handleRegionSelect = useCallback(
+    (region: RegionGroup) => {
+      if (region === "geolocation") {
+        setGeoLoading(true);
+        setGeoError(null);
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            (pos) => {
+              setUserLocation({ lat: pos.coords.latitude, lon: pos.coords.longitude });
+              setSelectedRegion("geolocation");
+              setGeoLoading(false);
+              completeStep(1);
+              goToStep(2);
+            },
+            () => {
+              setGeoError("位置情報を取得できませんでした");
+              setGeoLoading(false);
+            },
+            { enableHighAccuracy: false, timeout: 10000 }
+          );
+        } else {
+          setGeoError("お使いのブラウザは位置情報に対応していません");
+          setGeoLoading(false);
+        }
+        return;
+      }
+      setSelectedRegion(region);
+      setUserLocation(null);
+      completeStep(1);
+      goToStep(2);
+    },
+    [completeStep, goToStep]
+  );
+
+  const handleLevelSelect = useCallback(
+    (level: UserLevel) => {
+      setUserLevel(level);
+      completeStep(2);
+      goToStep(3);
+    },
+    [completeStep, goToStep]
+  );
+
+  const handleCompanionSelect = useCallback(
+    (comp: Companion) => {
+      setCompanion(comp);
+      completeStep(3);
+      goToStep(4);
+    },
+    [completeStep, goToStep]
+  );
+
+  const handleFishSelect = useCallback(
+    (slug: string | null) => {
+      setTargetFishSlug(slug);
+      completeStep(4);
+      goToStep(5);
+    },
+    [completeStep, goToStep]
+  );
+
+  const handleReset = useCallback(() => {
+    setCurrentStep(1);
+    setCompletedSteps([]);
+    setShowResults(false);
+    setSelectedRegion("all");
+    setUserLevel("beginner");
+    setCompanion("solo");
+    setTargetFishSlug(null);
+    setUserLocation(null);
+    setGeoError(null);
+  }, []);
 
   // 旬の魚リスト
   const seasonalFish = useMemo(() => getSeasonalFish(month), [month]);
   const peakFish = useMemo(() => getPeakFishList(month), [month]);
   const season = getSeason(month);
 
+  // エリアフィルタリング
+  const filteredSpots = useMemo(() => {
+    if (selectedRegion === "all" || selectedRegion === "geolocation") {
+      return fishingSpots;
+    }
+    const regionOption = REGION_OPTIONS.find((r) => r.value === selectedRegion);
+    if (!regionOption) return fishingSpots;
+    return fishingSpots.filter((spot) =>
+      regionOption.prefectures.includes(spot.region.prefecture)
+    );
+  }, [selectedRegion]);
+
   // スコアリング＆ソート
   const scoredSpots = useMemo(() => {
-    const scored = fishingSpots.map((spot) =>
+    const scored = filteredSpots.map((spot) =>
       scoreSpot(spot, month, tideType, userLevel, companion, targetFishSlug)
     );
     scored.sort((a, b) => b.totalScore - a.totalScore);
     // 今月釣れる魚がないスポットは除外
-    return scored.filter((s) => s.catchableFishNow.length > 0);
-  }, [month, tideType, userLevel, companion, targetFishSlug]);
+    let result = scored.filter((s) => s.catchableFishNow.length > 0);
+    // 現在地ソート
+    if (selectedRegion === "geolocation" && userLocation) {
+      result.sort((a, b) => {
+        const distA = getDistanceKm(
+          userLocation.lat,
+          userLocation.lon,
+          a.spot.latitude,
+          a.spot.longitude
+        );
+        const distB = getDistanceKm(
+          userLocation.lat,
+          userLocation.lon,
+          b.spot.latitude,
+          b.spot.longitude
+        );
+        // 距離が近い順だが、スコアも考慮（スコア70%、距離近さ30%で混合）
+        const compositeA = a.totalScore * 0.7 - distA * 0.003;
+        const compositeB = b.totalScore * 0.7 - distB * 0.003;
+        return compositeB - compositeA;
+      });
+    }
+    return result;
+  }, [filteredSpots, month, tideType, userLevel, companion, targetFishSlug, selectedRegion, userLocation]);
 
   const topSpots = scoredSpots.slice(0, 6);
+
+  // 選択済みラベル取得
+  const getRegionLabel = () => {
+    if (selectedRegion === "geolocation") return "現在地から";
+    const opt = REGION_OPTIONS.find((r) => r.value === selectedRegion);
+    return opt?.label || "全国";
+  };
+  const getLevelLabel = () => {
+    const labels: Record<UserLevel, string> = { beginner: "初心者", intermediate: "中級者", advanced: "上級者" };
+    return labels[userLevel];
+  };
+  const getCompanionLabel = () => {
+    const labels: Record<Companion, string> = { solo: "1人", friends: "友人と", family: "家族と" };
+    return labels[companion];
+  };
+  const getFishLabel = () => {
+    if (!targetFishSlug) return "指定なし";
+    const f = seasonalFish.find((fs) => fs.slug === targetFishSlug);
+    return f?.name || "指定なし";
+  };
 
   const formatDate = (d: Date) => {
     const days = ["日", "月", "火", "水", "木", "金", "土"];
@@ -435,269 +672,572 @@ export default function RecommendationPage() {
             </div>
             <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
               <Sparkles className="size-7 sm:size-8" />
-              今日のおすすめ釣りスポット
+              今日どこに行こうかな？
             </h1>
             <p className="mt-2 text-orange-100 text-sm sm:text-base">
-              {formatDate(today)} の条件に最適な釣り場をスコアリングして提案します
+              {formatDate(today)} ー 4つの質問に答えるだけで最適な釣り場が見つかります
             </p>
           </div>
         </section>
 
         <div className="mx-auto max-w-5xl px-4 py-6 space-y-6">
-          {/* 今日の釣り条件 */}
-          <Card className="border-orange-200 bg-gradient-to-r from-orange-50 to-amber-50">
-            <CardHeader className="pb-2">
-              <CardTitle className="text-base flex items-center gap-2">
-                <Calendar className="size-5 text-orange-500" />
-                今日の釣り条件
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-4 pt-0">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                <div className="text-center p-3 bg-white rounded-lg shadow-sm">
-                  <Waves className="size-5 text-blue-500 mx-auto mb-1" />
-                  <p className="text-xs text-gray-500">潮回り</p>
-                  <Badge className={`mt-1 ${getTideTypeColor(tideType)}`}>
-                    {tideType}
-                  </Badge>
-                </div>
-                <div className="text-center p-3 bg-white rounded-lg shadow-sm">
-                  <Moon className="size-5 text-yellow-500 mx-auto mb-1" />
-                  <p className="text-xs text-gray-500">月齢</p>
-                  <p className="font-bold text-sm mt-1">
-                    {moonAge.toFixed(1)}
-                  </p>
-                </div>
-                <div className="text-center p-3 bg-white rounded-lg shadow-sm">
-                  <Calendar className="size-5 text-green-500 mx-auto mb-1" />
-                  <p className="text-xs text-gray-500">季節</p>
-                  <p className="font-bold text-sm mt-1">
-                    {getSeasonLabel(season)}
-                  </p>
-                </div>
-                <div className="text-center p-3 bg-white rounded-lg shadow-sm">
-                  <Fish className="size-5 text-orange-500 mx-auto mb-1" />
-                  <p className="text-xs text-gray-500">旬の魚</p>
-                  <p className="font-bold text-sm mt-1">
-                    {peakFish.length}種
-                  </p>
-                </div>
-              </div>
-
-              {/* 旬の魚チップス */}
-              {peakFish.length > 0 && (
-                <div className="mt-3 pt-3 border-t border-orange-200">
-                  <p className="text-xs text-gray-500 mb-2">
-                    今が旬の魚：
-                  </p>
-                  <div className="flex flex-wrap gap-1.5">
-                    {peakFish.map((f) => (
-                      <Link key={f.slug} href={`/fish/${f.slug}`}>
-                        <Badge
-                          variant="outline"
-                          className="text-xs cursor-pointer hover:bg-orange-100 border-orange-300 text-orange-700"
-                        >
-                          {f.name}
-                        </Badge>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </CardContent>
-          </Card>
-
-          {/* 条件入力パネル */}
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-base flex items-center gap-2">
-                <Compass className="size-5 text-blue-500" />
-                条件を設定
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="p-4 pt-0 space-y-4">
-              {/* 釣りレベル */}
-              <div>
-                <p className="text-sm font-medium mb-2 flex items-center gap-1.5">
-                  <TrendingUp className="size-4 text-gray-500" />
-                  釣りレベル
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {(
-                    [
-                      {
-                        value: "beginner",
-                        label: "初心者",
-                        desc: "はじめて〜数回",
-                      },
-                      {
-                        value: "intermediate",
-                        label: "中級者",
-                        desc: "月1〜2回釣行",
-                      },
-                      {
-                        value: "advanced",
-                        label: "上級者",
-                        desc: "週1以上",
-                      },
-                    ] as const
-                  ).map((level) => (
-                    <button
-                      key={level.value}
-                      onClick={() => setUserLevel(level.value)}
-                      className={`px-4 py-2 rounded-lg border text-sm transition-all ${
-                        userLevel === level.value
-                          ? "bg-blue-600 text-white border-blue-600 shadow-md"
-                          : "bg-white text-gray-700 border-gray-200 hover:border-blue-300 hover:bg-blue-50"
-                      }`}
-                    >
-                      <span className="font-medium">{level.label}</span>
-                      <span
-                        className={`block text-[10px] mt-0.5 ${
-                          userLevel === level.value
-                            ? "text-blue-100"
-                            : "text-gray-400"
-                        }`}
-                      >
-                        {level.desc}
-                      </span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* 同行者 */}
-              <div>
-                <p className="text-sm font-medium mb-2 flex items-center gap-1.5">
-                  <Users className="size-4 text-gray-500" />
-                  同行者
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {(
-                    [
-                      {
-                        value: "solo",
-                        label: "1人",
-                        icon: User,
-                      },
-                      {
-                        value: "friends",
-                        label: "友人と",
-                        icon: UserPlus,
-                      },
-                      {
-                        value: "family",
-                        label: "家族と",
-                        icon: Heart,
-                      },
-                    ] as const
-                  ).map((comp) => {
-                    const Icon = comp.icon;
-                    return (
-                      <button
-                        key={comp.value}
-                        onClick={() => setCompanion(comp.value)}
-                        className={`px-4 py-2 rounded-lg border text-sm transition-all flex items-center gap-2 ${
-                          companion === comp.value
-                            ? "bg-blue-600 text-white border-blue-600 shadow-md"
-                            : "bg-white text-gray-700 border-gray-200 hover:border-blue-300 hover:bg-blue-50"
-                        }`}
-                      >
-                        <Icon className="size-4" />
-                        <span className="font-medium">{comp.label}</span>
-                      </button>
-                    );
-                  })}
-                </div>
-              </div>
-
-              {/* 釣りたい魚 */}
-              <div>
-                <p className="text-sm font-medium mb-2 flex items-center gap-1.5">
-                  <Fish className="size-4 text-gray-500" />
-                  釣りたい魚（任意）
-                </p>
-                <div className="flex flex-wrap gap-1.5">
-                  <button
-                    onClick={() => setTargetFishSlug(null)}
-                    className={`px-3 py-1.5 rounded-full text-xs border transition-all ${
-                      targetFishSlug === null
-                        ? "bg-blue-600 text-white border-blue-600"
-                        : "bg-white text-gray-600 border-gray-200 hover:border-blue-300"
-                    }`}
-                  >
-                    指定なし
-                  </button>
-                  {seasonalFish.map((f) => (
-                    <button
-                      key={f.slug}
-                      onClick={() =>
-                        setTargetFishSlug(
-                          targetFishSlug === f.slug ? null : f.slug
-                        )
-                      }
-                      className={`px-3 py-1.5 rounded-full text-xs border transition-all ${
-                        targetFishSlug === f.slug
-                          ? "bg-blue-600 text-white border-blue-600"
-                          : f.peakMonths.includes(month)
-                            ? "bg-orange-50 text-orange-700 border-orange-200 hover:bg-orange-100"
-                            : "bg-white text-gray-600 border-gray-200 hover:border-blue-300"
-                      }`}
-                    >
-                      {f.name}
-                      {f.peakMonths.includes(month) && " (旬)"}
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          {/* 結果ヘッダー */}
-          <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold flex items-center gap-2">
-              <Trophy className="size-5 text-amber-500" />
-              おすすめスポット TOP{Math.min(6, topSpots.length)}
-            </h2>
-            <p className="text-sm text-gray-500">
-              {scoredSpots.length}件中
-            </p>
+          {/* 今日の釣り条件（コンパクト） */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <div className="text-center p-2.5 bg-white rounded-lg shadow-sm border border-orange-100">
+              <Waves className="size-4 text-blue-500 mx-auto mb-0.5" />
+              <p className="text-[10px] text-gray-500">潮回り</p>
+              <Badge className={`mt-0.5 text-[10px] px-1.5 ${getTideTypeColor(tideType)}`}>
+                {tideType}
+              </Badge>
+            </div>
+            <div className="text-center p-2.5 bg-white rounded-lg shadow-sm border border-orange-100">
+              <Moon className="size-4 text-yellow-500 mx-auto mb-0.5" />
+              <p className="text-[10px] text-gray-500">月齢</p>
+              <p className="font-bold text-xs mt-0.5">{moonAge.toFixed(1)}</p>
+            </div>
+            <div className="text-center p-2.5 bg-white rounded-lg shadow-sm border border-orange-100">
+              <Calendar className="size-4 text-green-500 mx-auto mb-0.5" />
+              <p className="text-[10px] text-gray-500">季節</p>
+              <p className="font-bold text-xs mt-0.5">{getSeasonLabel(season)}</p>
+            </div>
+            <div className="text-center p-2.5 bg-white rounded-lg shadow-sm border border-orange-100">
+              <Fish className="size-4 text-orange-500 mx-auto mb-0.5" />
+              <p className="text-[10px] text-gray-500">旬の魚</p>
+              <p className="font-bold text-xs mt-0.5">{peakFish.length}種</p>
+            </div>
           </div>
 
-          {/* 結果カード */}
-          {topSpots.length > 0 ? (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {topSpots.map((scored, index) => (
-                <SpotCard
-                  key={scored.spot.id}
-                  scored={scored}
-                  rank={index + 1}
-                />
-              ))}
+          {/* ステップ進捗バー */}
+          <div className="relative">
+            <div className="flex items-center justify-between">
+              {STEPS.map((step, i) => {
+                const isCompleted = completedSteps.includes(step.id);
+                const isCurrent = currentStep === step.id;
+                const isAccessible = step.id <= Math.max(currentStep, ...completedSteps, 0);
+                return (
+                  <div key={step.id} className="flex items-center flex-1 last:flex-none">
+                    <button
+                      onClick={() => isAccessible && goToStep(step.id)}
+                      disabled={!isAccessible}
+                      className={`relative flex flex-col items-center gap-1 transition-all ${
+                        isAccessible ? "cursor-pointer" : "cursor-default"
+                      }`}
+                    >
+                      <div
+                        className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${
+                          isCompleted
+                            ? "bg-green-500 text-white shadow-md shadow-green-200"
+                            : isCurrent
+                              ? "bg-orange-500 text-white shadow-lg shadow-orange-200 scale-110"
+                              : "bg-gray-200 text-gray-400"
+                        }`}
+                      >
+                        {isCompleted ? <Check className="size-5" /> : step.id}
+                      </div>
+                      <span
+                        className={`text-[10px] sm:text-xs font-medium transition-colors ${
+                          isCurrent
+                            ? "text-orange-600"
+                            : isCompleted
+                              ? "text-green-600"
+                              : "text-gray-400"
+                        }`}
+                      >
+                        {step.label}
+                      </span>
+                    </button>
+                    {i < STEPS.length - 1 && (
+                      <div className="flex-1 mx-1 sm:mx-2">
+                        <div
+                          className={`h-1 rounded-full transition-all duration-500 ${
+                            completedSteps.includes(step.id)
+                              ? "bg-green-400"
+                              : "bg-gray-200"
+                          }`}
+                        />
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+              {/* 結果ステップ */}
+              <div className="flex items-center">
+                <div className="w-4 sm:w-6 mx-1 sm:mx-2">
+                  <div
+                    className={`h-1 rounded-full transition-all duration-500 ${
+                      showResults ? "bg-green-400" : "bg-gray-200"
+                    }`}
+                  />
+                </div>
+                <div className="flex flex-col items-center gap-1">
+                  <div
+                    className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${
+                      showResults
+                        ? "bg-amber-500 text-white shadow-lg shadow-amber-200 scale-110"
+                        : "bg-gray-200 text-gray-400"
+                    }`}
+                  >
+                    <Trophy className="size-5" />
+                  </div>
+                  <span
+                    className={`text-[10px] sm:text-xs font-medium ${
+                      showResults ? "text-amber-600" : "text-gray-400"
+                    }`}
+                  >
+                    結果
+                  </span>
+                </div>
+              </div>
             </div>
-          ) : (
-            <Card>
-              <CardContent className="p-8 text-center">
-                <Fish className="size-12 text-gray-300 mx-auto mb-3" />
-                <p className="text-gray-500">
-                  条件に合うスポットが見つかりませんでした
+          </div>
+
+          {/* リセットボタン（ステップ進行後に表示） */}
+          {completedSteps.length > 0 && (
+            <div className="flex justify-end">
+              <button
+                onClick={handleReset}
+                className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-orange-600 transition-colors"
+              >
+                <RotateCcw className="size-3.5" />
+                最初からやり直す
+              </button>
+            </div>
+          )}
+
+          {/* ============ STEP 1: エリア選択 ============ */}
+          {currentStep === 1 && !showResults && (
+            <Card className="border-orange-200 shadow-lg animate-in fade-in slide-in-from-bottom-3 duration-300">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Globe className="size-5 text-orange-500" />
+                  Step 1：どこで釣りたい？
+                </CardTitle>
+                <p className="text-sm text-gray-500 mt-1">
+                  釣りに行きたいエリアを選んでください
                 </p>
-                <p className="text-sm text-gray-400 mt-1">
-                  フィルター条件を変更してみてください
-                </p>
+              </CardHeader>
+              <CardContent className="p-4 pt-0">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {/* 現在地から探す */}
+                  <button
+                    onClick={() => handleRegionSelect("geolocation")}
+                    disabled={geoLoading}
+                    className="relative p-4 rounded-xl border-2 border-dashed border-blue-300 bg-blue-50 hover:bg-blue-100 hover:border-blue-400 transition-all text-center group"
+                  >
+                    {geoLoading ? (
+                      <Loader2 className="size-8 text-blue-500 mx-auto mb-2 animate-spin" />
+                    ) : (
+                      <Navigation className="size-8 text-blue-500 mx-auto mb-2 group-hover:scale-110 transition-transform" />
+                    )}
+                    <span className="block text-sm font-bold text-blue-700">
+                      {geoLoading ? "取得中..." : "現在地から探す"}
+                    </span>
+                    <span className="block text-[10px] text-blue-500 mt-1">
+                      GPSで近くのスポットを検索
+                    </span>
+                  </button>
+
+                  {/* 全国 */}
+                  {REGION_OPTIONS.map((region) => (
+                    <button
+                      key={region.value}
+                      onClick={() => handleRegionSelect(region.value)}
+                      className="p-4 rounded-xl border-2 border-gray-200 hover:border-orange-400 hover:bg-orange-50 transition-all text-center group"
+                    >
+                      <span className="block text-2xl mb-2 group-hover:scale-110 transition-transform">
+                        {region.icon}
+                      </span>
+                      <span className="block text-sm font-bold text-gray-700 group-hover:text-orange-700">
+                        {region.label}
+                      </span>
+                      {region.value !== "all" && (
+                        <span className="block text-[10px] text-gray-400 mt-1">
+                          {region.prefectures.length}都道府県
+                        </span>
+                      )}
+                      {region.value === "all" && (
+                        <span className="block text-[10px] text-gray-400 mt-1">
+                          エリア指定なし
+                        </span>
+                      )}
+                    </button>
+                  ))}
+                </div>
+                {geoError && (
+                  <p className="text-xs text-red-500 mt-3 text-center">{geoError}</p>
+                )}
               </CardContent>
             </Card>
           )}
 
-          {/* もっと見るリンク */}
-          {scoredSpots.length > 6 && (
-            <div className="text-center">
-              <Link href="/spots">
-                <Button variant="outline" className="gap-2">
-                  <MapPin className="size-4" />
-                  すべての釣りスポットを見る
-                </Button>
-              </Link>
+          {/* 完了したStep 1（折りたたみ） */}
+          {completedSteps.includes(1) && currentStep !== 1 && (
+            <button
+              onClick={() => goToStep(1)}
+              className="w-full text-left"
+            >
+              <div className="flex items-center gap-3 px-4 py-3 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 transition-colors">
+                <div className="w-7 h-7 rounded-full bg-green-500 text-white flex items-center justify-center flex-shrink-0">
+                  <Check className="size-4" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <span className="text-xs text-green-600 font-medium">Step 1：エリア</span>
+                  <p className="text-sm font-bold text-green-800 truncate">{getRegionLabel()}</p>
+                </div>
+                <ChevronDown className="size-4 text-green-400 flex-shrink-0" />
+              </div>
+            </button>
+          )}
+
+          {/* ============ STEP 2: レベル選択 ============ */}
+          {currentStep === 2 && !showResults && (
+            <Card className="border-blue-200 shadow-lg animate-in fade-in slide-in-from-bottom-3 duration-300">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <TrendingUp className="size-5 text-blue-500" />
+                  Step 2：釣りレベルは？
+                </CardTitle>
+                <p className="text-sm text-gray-500 mt-1">
+                  あなたの釣り経験を教えてください
+                </p>
+              </CardHeader>
+              <CardContent className="p-4 pt-0">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {(
+                    [
+                      {
+                        value: "beginner" as const,
+                        label: "初心者",
+                        desc: "はじめて〜数回",
+                        detail: "道具のレンタルがあると安心",
+                        emoji: "🔰",
+                      },
+                      {
+                        value: "intermediate" as const,
+                        label: "中級者",
+                        desc: "月1〜2回釣行",
+                        detail: "いろんな釣り方に挑戦したい",
+                        emoji: "🎣",
+                      },
+                      {
+                        value: "advanced" as const,
+                        label: "上級者",
+                        desc: "週1以上",
+                        detail: "大物・穴場を狙いたい",
+                        emoji: "🏆",
+                      },
+                    ]
+                  ).map((level) => (
+                    <button
+                      key={level.value}
+                      onClick={() => handleLevelSelect(level.value)}
+                      className="p-5 rounded-xl border-2 border-gray-200 hover:border-blue-400 hover:bg-blue-50 transition-all text-center group"
+                    >
+                      <span className="block text-3xl mb-2 group-hover:scale-110 transition-transform">
+                        {level.emoji}
+                      </span>
+                      <span className="block text-base font-bold text-gray-700 group-hover:text-blue-700">
+                        {level.label}
+                      </span>
+                      <span className="block text-xs text-gray-500 mt-1">
+                        {level.desc}
+                      </span>
+                      <span className="block text-[10px] text-gray-400 mt-1">
+                        {level.detail}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* 完了したStep 2（折りたたみ） */}
+          {completedSteps.includes(2) && currentStep !== 2 && (
+            <button
+              onClick={() => goToStep(2)}
+              className="w-full text-left"
+            >
+              <div className="flex items-center gap-3 px-4 py-3 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 transition-colors">
+                <div className="w-7 h-7 rounded-full bg-green-500 text-white flex items-center justify-center flex-shrink-0">
+                  <Check className="size-4" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <span className="text-xs text-green-600 font-medium">Step 2：レベル</span>
+                  <p className="text-sm font-bold text-green-800 truncate">{getLevelLabel()}</p>
+                </div>
+                <ChevronDown className="size-4 text-green-400 flex-shrink-0" />
+              </div>
+            </button>
+          )}
+
+          {/* ============ STEP 3: 同行者選択 ============ */}
+          {currentStep === 3 && !showResults && (
+            <Card className="border-purple-200 shadow-lg animate-in fade-in slide-in-from-bottom-3 duration-300">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Users className="size-5 text-purple-500" />
+                  Step 3：誰と行く？
+                </CardTitle>
+                <p className="text-sm text-gray-500 mt-1">
+                  同行者によっておすすめスポットが変わります
+                </p>
+              </CardHeader>
+              <CardContent className="p-4 pt-0">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                  {(
+                    [
+                      {
+                        value: "solo" as const,
+                        label: "1人で",
+                        desc: "じっくり集中したい",
+                        icon: User,
+                        emoji: "🧘",
+                      },
+                      {
+                        value: "friends" as const,
+                        label: "友人と",
+                        desc: "ワイワイ楽しみたい",
+                        icon: UserPlus,
+                        emoji: "🤝",
+                      },
+                      {
+                        value: "family" as const,
+                        label: "家族と",
+                        desc: "安全で快適な場所",
+                        icon: Heart,
+                        emoji: "👨‍👩‍👧‍👦",
+                      },
+                    ]
+                  ).map((comp) => (
+                    <button
+                      key={comp.value}
+                      onClick={() => handleCompanionSelect(comp.value)}
+                      className="p-5 rounded-xl border-2 border-gray-200 hover:border-purple-400 hover:bg-purple-50 transition-all text-center group"
+                    >
+                      <span className="block text-3xl mb-2 group-hover:scale-110 transition-transform">
+                        {comp.emoji}
+                      </span>
+                      <span className="block text-base font-bold text-gray-700 group-hover:text-purple-700">
+                        {comp.label}
+                      </span>
+                      <span className="block text-xs text-gray-500 mt-1">
+                        {comp.desc}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* 完了したStep 3（折りたたみ） */}
+          {completedSteps.includes(3) && currentStep !== 3 && (
+            <button
+              onClick={() => goToStep(3)}
+              className="w-full text-left"
+            >
+              <div className="flex items-center gap-3 px-4 py-3 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 transition-colors">
+                <div className="w-7 h-7 rounded-full bg-green-500 text-white flex items-center justify-center flex-shrink-0">
+                  <Check className="size-4" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <span className="text-xs text-green-600 font-medium">Step 3：同行者</span>
+                  <p className="text-sm font-bold text-green-800 truncate">{getCompanionLabel()}</p>
+                </div>
+                <ChevronDown className="size-4 text-green-400 flex-shrink-0" />
+              </div>
+            </button>
+          )}
+
+          {/* ============ STEP 4: 釣りたい魚 ============ */}
+          {currentStep === 4 && !showResults && (
+            <Card className="border-teal-200 shadow-lg animate-in fade-in slide-in-from-bottom-3 duration-300">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <Fish className="size-5 text-teal-500" />
+                  Step 4：何を釣りたい？
+                </CardTitle>
+                <p className="text-sm text-gray-500 mt-1">
+                  狙いたい魚があれば選択（任意）
+                </p>
+              </CardHeader>
+              <CardContent className="p-4 pt-0">
+                <div className="space-y-3">
+                  {/* スキップボタン */}
+                  <button
+                    onClick={() => handleFishSelect(null)}
+                    className="w-full p-4 rounded-xl border-2 border-dashed border-gray-300 hover:border-teal-400 hover:bg-teal-50 transition-all text-center group"
+                  >
+                    <span className="text-sm font-bold text-gray-600 group-hover:text-teal-700">
+                      特に決めていない / スキップ
+                    </span>
+                    <span className="block text-[10px] text-gray-400 mt-1">
+                      今釣れる魚すべてから提案します
+                    </span>
+                  </button>
+
+                  {/* 旬の魚（優先表示） */}
+                  {peakFish.length > 0 && (
+                    <div>
+                      <p className="text-xs font-medium text-orange-600 mb-2 flex items-center gap-1">
+                        <Star className="size-3 fill-orange-400 text-orange-400" />
+                        今が旬の魚
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {peakFish.map((f) => (
+                          <button
+                            key={f.slug}
+                            onClick={() => handleFishSelect(f.slug)}
+                            className="px-4 py-2 rounded-lg border-2 border-orange-200 bg-orange-50 hover:bg-orange-100 hover:border-orange-400 transition-all text-sm font-medium text-orange-700"
+                          >
+                            {f.name}
+                            <span className="text-[10px] ml-1 text-orange-500">(旬)</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* その他の釣れる魚 */}
+                  <div>
+                    <p className="text-xs font-medium text-gray-500 mb-2">
+                      その他の釣れる魚
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {seasonalFish
+                        .filter((f) => !f.peakMonths.includes(month))
+                        .map((f) => (
+                          <button
+                            key={f.slug}
+                            onClick={() => handleFishSelect(f.slug)}
+                            className="px-3 py-1.5 rounded-full text-xs border border-gray-200 bg-white hover:border-teal-400 hover:bg-teal-50 transition-all text-gray-600"
+                          >
+                            {f.name}
+                          </button>
+                        ))}
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* 完了したStep 4（折りたたみ） */}
+          {completedSteps.includes(4) && currentStep !== 4 && !showResults && (
+            <button
+              onClick={() => goToStep(4)}
+              className="w-full text-left"
+            >
+              <div className="flex items-center gap-3 px-4 py-3 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 transition-colors">
+                <div className="w-7 h-7 rounded-full bg-green-500 text-white flex items-center justify-center flex-shrink-0">
+                  <Check className="size-4" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <span className="text-xs text-green-600 font-medium">Step 4：釣りたい魚</span>
+                  <p className="text-sm font-bold text-green-800 truncate">{getFishLabel()}</p>
+                </div>
+                <ChevronDown className="size-4 text-green-400 flex-shrink-0" />
+              </div>
+            </button>
+          )}
+
+          {/* ============ 結果表示 ============ */}
+          {showResults && (
+            <div className="space-y-6 animate-in fade-in slide-in-from-bottom-5 duration-500">
+              {/* 選択サマリー */}
+              <Card className="border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50">
+                <CardContent className="p-4">
+                  <div className="flex items-center justify-between mb-3">
+                    <p className="text-sm font-bold text-amber-800 flex items-center gap-2">
+                      <Compass className="size-4" />
+                      あなたの条件
+                    </p>
+                    <button
+                      onClick={handleReset}
+                      className="text-xs text-amber-600 hover:text-amber-800 flex items-center gap-1 transition-colors"
+                    >
+                      <RotateCcw className="size-3" />
+                      やり直す
+                    </button>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    <Badge className="bg-orange-100 text-orange-700 border-orange-200 hover:bg-orange-200">
+                      <Map className="size-3 mr-1" />
+                      {getRegionLabel()}
+                    </Badge>
+                    <Badge className="bg-blue-100 text-blue-700 border-blue-200 hover:bg-blue-200">
+                      <TrendingUp className="size-3 mr-1" />
+                      {getLevelLabel()}
+                    </Badge>
+                    <Badge className="bg-purple-100 text-purple-700 border-purple-200 hover:bg-purple-200">
+                      <Users className="size-3 mr-1" />
+                      {getCompanionLabel()}
+                    </Badge>
+                    <Badge className="bg-teal-100 text-teal-700 border-teal-200 hover:bg-teal-200">
+                      <Fish className="size-3 mr-1" />
+                      {getFishLabel()}
+                    </Badge>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* 結果ヘッダー */}
+              <div className="flex items-center justify-between">
+                <h2 className="text-lg font-bold flex items-center gap-2">
+                  <Trophy className="size-5 text-amber-500" />
+                  おすすめスポット TOP{Math.min(6, topSpots.length)}
+                </h2>
+                <p className="text-sm text-gray-500">
+                  {scoredSpots.length}件中
+                </p>
+              </div>
+
+              {/* 結果カード */}
+              {topSpots.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {topSpots.map((scored, index) => (
+                    <SpotCard
+                      key={scored.spot.id}
+                      scored={scored}
+                      rank={index + 1}
+                      userLocation={selectedRegion === "geolocation" ? userLocation : null}
+                    />
+                  ))}
+                </div>
+              ) : (
+                <Card>
+                  <CardContent className="p-8 text-center">
+                    <Fish className="size-12 text-gray-300 mx-auto mb-3" />
+                    <p className="text-gray-500">
+                      条件に合うスポットが見つかりませんでした
+                    </p>
+                    <p className="text-sm text-gray-400 mt-1">
+                      エリアを「全国」にするか、条件を変更してみてください
+                    </p>
+                    <Button
+                      onClick={handleReset}
+                      variant="outline"
+                      className="mt-4 gap-2"
+                    >
+                      <RotateCcw className="size-4" />
+                      条件を変更する
+                    </Button>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* もっと見るリンク */}
+              {scoredSpots.length > 6 && (
+                <div className="text-center">
+                  <Link href="/spots">
+                    <Button variant="outline" className="gap-2">
+                      <MapPin className="size-4" />
+                      すべての釣りスポットを見る
+                    </Button>
+                  </Link>
+                </div>
+              )}
             </div>
           )}
 
@@ -747,11 +1287,22 @@ export default function RecommendationPage() {
 function SpotCard({
   scored,
   rank,
+  userLocation,
 }: {
   scored: ScoredSpot;
   rank: number;
+  userLocation?: { lat: number; lon: number } | null;
 }) {
   const { spot, totalScore, rank: scoreRank, catchableFishNow, reason } = scored;
+
+  const distance = userLocation
+    ? getDistanceKm(
+        userLocation.lat,
+        userLocation.lon,
+        spot.latitude,
+        spot.longitude
+      )
+    : null;
 
   const spotTypeLabel: Record<string, string> = {
     port: "漁港",
@@ -804,6 +1355,16 @@ function SpotCard({
               <span>
                 {spot.region.prefecture} {spot.region.areaName}
               </span>
+              {distance !== null && (
+                <span className="text-blue-500 font-medium ml-auto">
+                  <Navigation className="size-3 inline mr-0.5" />
+                  {distance < 1
+                    ? `${(distance * 1000).toFixed(0)}m`
+                    : distance < 100
+                      ? `${distance.toFixed(1)}km`
+                      : `${distance.toFixed(0)}km`}
+                </span>
+              )}
             </div>
           </div>
 
