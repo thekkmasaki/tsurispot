@@ -116,9 +116,12 @@ export function HomeSearchBar() {
   );
 
   const handleSearch = useCallback(() => {
-    if (!query.trim()) return;
     setIsFocused(false);
-    router.push(`/spots?q=${encodeURIComponent(query.trim())}`);
+    if (!query.trim()) {
+      router.push("/spots");
+    } else {
+      router.push(`/spots?q=${encodeURIComponent(query.trim())}`);
+    }
   }, [query, router]);
 
   const handleKeyDown = useCallback(
