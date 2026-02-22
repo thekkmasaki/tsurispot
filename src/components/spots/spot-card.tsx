@@ -17,7 +17,7 @@ export function SpotCard({ spot, distance }: { spot: FishingSpot; distance?: num
         {/* スポット画像 */}
         <div className="relative">
           <SpotImage
-            src={spot.mainImageUrl}
+            src={spot.mainImageUrl?.startsWith("http") ? spot.mainImageUrl : undefined}
             alt={spot.name}
             spotType={spot.spotType}
             height="h-40"

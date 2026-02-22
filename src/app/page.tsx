@@ -244,7 +244,7 @@ export default function Home() {
               <Card className="group h-full gap-0 overflow-hidden border py-0 transition-shadow hover:shadow-md">
                 {/* カード上部の画像 */}
                 <SpotImage
-                  src={spot.mainImageUrl}
+                  src={spot.mainImageUrl?.startsWith("http") ? spot.mainImageUrl : undefined}
                   alt={spot.name}
                   spotType={spot.spotType}
                   latitude={spot.latitude}
