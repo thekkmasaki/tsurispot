@@ -21,17 +21,18 @@ export const AFFILIATE_CONFIG = {
 };
 
 /**
- * Amazon商品URLを生成
+ * Amazon商品URLを生成（検索ベース：商品名で検索するため常に有効）
  */
-export function getAmazonUrl(asin: string): string {
-  return `${AFFILIATE_CONFIG.amazon.baseUrl}${asin}?tag=${AFFILIATE_CONFIG.amazon.tag}`;
+export function getAmazonUrl(asinOrQuery: string, productName?: string): string {
+  // 商品名が提供されていれば検索リンクを生成（ASIN切れに強い）
+  const query = productName || asinOrQuery;
+  return `https://www.amazon.co.jp/s?k=${encodeURIComponent(query)}&tag=${AFFILIATE_CONFIG.amazon.tag}`;
 }
 
 /**
- * 楽天検索URLを生成（アフィリエイトID付き）
+ * 楽天検索URLを生成
+ * ※ 楽天アフィリエイトID未設定のため、通常の検索URLを返す
  */
 export function getRakutenUrl(searchQuery: string): string {
-  const { affiliateId } = AFFILIATE_CONFIG.rakuten;
-  const searchUrl = `https://search.rakuten.co.jp/search/mall/${encodeURIComponent(searchQuery)}/`;
-  return `${AFFILIATE_CONFIG.rakuten.baseUrl}${affiliateId}/?pc=${encodeURIComponent(searchUrl)}&link_type=hybrid_url&ut=eyJwYWdlIjoic2hvcCIsInR5cGUiOiJoeWJyaWRfdXJsIiwiY29sIjoxfQ`;
+  return `https://search.rakuten.co.jp/search/mall/${encodeURIComponent(searchQuery)}/`;
 }

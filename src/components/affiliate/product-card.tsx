@@ -17,7 +17,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product }: ProductCardProps) {
-  const amazonUrl = getAmazonUrl(product.amazonAsin);
+  const amazonUrl = getAmazonUrl(product.amazonAsin, product.name);
   const rakutenUrl = getRakutenUrl(product.rakutenSearchQuery);
 
   return (
