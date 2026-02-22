@@ -183,7 +183,7 @@ export function HomeSearchBar() {
           className="min-w-0 flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground sm:text-base"
         />
         <button
-          onClick={handleSearch}
+          onMouseDown={(e) => { e.preventDefault(); handleSearch(); }}
           className="shrink-0 rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90 sm:text-sm"
         >
           検索
