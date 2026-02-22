@@ -143,30 +143,33 @@ export function SpotImage({ src, alt, spotType = "port", className = "", height 
       {/* 装飾パターン - 背景に散らばるアイコン */}
       <div className="absolute inset-0 overflow-hidden">
         <IconComponent
-          className={`absolute -top-3 -right-3 size-20 rotate-12 ${style.pattern}`}
+          className={`absolute -top-4 -right-4 size-24 rotate-12 ${style.pattern}`}
         />
         <IconComponent
-          className={`absolute -bottom-2 -left-2 size-16 -rotate-12 ${style.pattern}`}
+          className={`absolute -bottom-3 -left-3 size-20 -rotate-12 ${style.pattern}`}
         />
         <IconComponent
-          className={`absolute top-1/2 left-1/4 size-10 rotate-45 ${style.pattern}`}
+          className={`absolute top-1/3 left-1/5 size-12 rotate-45 ${style.pattern}`}
+        />
+        <IconComponent
+          className={`absolute bottom-1/4 right-1/4 size-8 -rotate-6 ${style.pattern}`}
         />
       </div>
 
       {/* 光のアクセント */}
       <div
-        className={`absolute -top-8 -right-8 size-24 rounded-full ${style.accentColor} blur-2xl`}
+        className={`absolute -top-8 -right-8 size-28 rounded-full ${style.accentColor} blur-2xl`}
       />
       <div
-        className={`absolute -bottom-6 -left-6 size-20 rounded-full ${style.accentColor} blur-xl`}
+        className={`absolute -bottom-6 -left-6 size-24 rounded-full ${style.accentColor} blur-xl`}
       />
 
       {/* メインコンテンツ */}
-      <div className="relative flex h-full flex-col items-center justify-center gap-1.5">
-        <div className="rounded-full bg-white/15 p-2.5 backdrop-blur-sm">
-          <IconComponent className="size-7 text-white/80" />
+      <div className="relative flex h-full flex-col items-center justify-center gap-2">
+        <div className="rounded-full bg-white/20 p-3 shadow-lg backdrop-blur-sm">
+          <IconComponent className="size-8 text-white/90" />
         </div>
-        <span className="max-w-[80%] truncate text-center text-xs font-medium tracking-wide text-white/70">
+        <span className="max-w-[85%] truncate text-center text-sm font-semibold tracking-wide text-white/90 drop-shadow-sm">
           {alt}
         </span>
       </div>

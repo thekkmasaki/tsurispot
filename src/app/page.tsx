@@ -258,6 +258,7 @@ export default function Home() {
                   src={spot.mainImageUrl?.startsWith("http") ? spot.mainImageUrl : undefined}
                   alt={spot.name}
                   spotType={spot.spotType}
+                  height="h-36 sm:h-40"
                 />
 
                 <CardContent className="flex flex-col gap-3 p-4">
