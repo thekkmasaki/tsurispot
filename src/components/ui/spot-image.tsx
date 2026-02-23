@@ -118,13 +118,16 @@ interface SpotImageProps {
 export function SpotImage({ src, alt, spotType = "port", className = "", height = "h-32", priority = false }: SpotImageProps) {
   const [error, setError] = useState(false);
 
+  // alt属性を説明的に（SEO向上）
+  const descriptiveAlt = (alt.includes("釣り場") || alt.includes("釣りスポット")) ? alt : `${alt}の釣り場`;
+
   // 実際の写真がある場合はそれを表示
   if (src && !error) {
     return (
       <div className={`relative ${height} overflow-hidden ${className}`}>
         <Image
           src={src}
-          alt={alt}
+          alt={descriptiveAlt}
           fill
           className="object-cover"
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 50vw"
@@ -174,7 +177,7 @@ export function SpotImage({ src, alt, spotType = "port", className = "", height 
           <IconComponent className="size-8 text-white/90" />
         </div>
         <span className="max-w-[85%] truncate text-center text-sm font-semibold tracking-wide text-white/90 drop-shadow-sm">
-          {alt}
+          {descriptiveAlt}
         </span>
       </div>
     </div>

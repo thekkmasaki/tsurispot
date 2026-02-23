@@ -66,6 +66,7 @@ export default async function sitemap({
       { url: `${baseUrl}/tides`, lastModified: now, changeFrequency: "daily", priority: 0.7 },
       { url: `${baseUrl}/ranking`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
       { url: `${baseUrl}/bouzu-checker`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+      { url: `${baseUrl}/sitemap-page`, lastModified: now, changeFrequency: "weekly", priority: 0.5 },
       { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },
       { url: `${baseUrl}/partner`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
       { url: `${baseUrl}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },

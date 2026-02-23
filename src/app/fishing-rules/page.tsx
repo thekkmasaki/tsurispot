@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
   title: "釣りのルールとマナー - 漁業権・禁漁期間・リリースサイズまとめ",
@@ -90,6 +91,9 @@ export default function FishingRulesPage() {
       />
 
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
+        <div className="mb-4">
+          <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "ルール・マナー" }]} />
+        </div>
         {/* ヘッダー */}
         <div className="mb-8 text-center sm:mb-10">
           <h1 className="text-2xl font-bold tracking-tight sm:text-4xl">

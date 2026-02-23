@@ -7,11 +7,11 @@ import { monthlyGuides } from "@/lib/data/monthly-guides";
 import { fishSpecies } from "@/lib/data/fish";
 
 export const metadata: Metadata = {
-  title: "月別釣りガイド｜1月〜12月の釣れる魚・おすすめスポット｜ツリスポ",
+  title: "月別釣りカレンダー｜1月〜12月の釣れる魚・おすすめ釣法一覧【2026年版】",
   description:
     "1月〜12月、月ごとに釣れる魚・おすすめ釣り場・釣りTipsをまとめたガイド。水温・気候・ベストな釣り方も解説。今月の釣り計画に今すぐ役立ててください。",
   openGraph: {
-    title: "月別釣りガイド｜1月〜12月の釣れる魚・おすすめスポット｜ツリスポ",
+    title: "月別釣りカレンダー｜1月〜12月の釣れる魚・おすすめ釣法一覧【2026年版】",
     description:
       "月ごとに釣れる魚・おすすめ釣り場・釣りTipsをまとめたガイド。今月の釣り計画に役立てよう。",
     type: "website",

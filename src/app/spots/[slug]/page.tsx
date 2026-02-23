@@ -48,6 +48,8 @@ import { getCatchReportsBySpot } from "@/lib/data/catch-reports";
 import { CatchReportList } from "@/components/spots/catch-report-list";
 import { CatchReportForm } from "@/components/spots/catch-report-form";
 import { LineBanner } from "@/components/line-banner";
+import { areaGuides } from "@/lib/data/area-guides";
+import { seasonalGuides } from "@/lib/data/seasonal-guides";
 
 // Below-the-fold client components loaded lazily
 const StreetViewSection = dynamic(() => import("@/components/spots/street-view-section").then((m) => m.StreetViewSection));
@@ -67,9 +69,17 @@ export async function generateMetadata({
   if (!spot) return { title: "スポットが見つかりません" };
 
   const fishNames = spot.catchableFish.map((cf) => cf.fish.name).join("・");
+  const topFishNames = spot.catchableFish.slice(0, 2).map((cf) => cf.fish.name).join("・");
+  const topMethodLabel = spot.catchableFish[0]?.method ?? "";
+  const baseTitleText = `${spot.name}｜${spot.region.prefecture}${spot.region.areaName}の釣り場・釣りスポット`;
+  const fullTitle = topMethodLabel && topFishNames
+    ? `${baseTitleText}【${topMethodLabel}で${topFishNames}が釣れる】`
+    : baseTitleText;
+  const title = fullTitle.length <= 60 ? fullTitle : baseTitleText;
+  const description = `${spot.name}（${spot.address}）は${spot.region.prefecture}${spot.region.areaName}にある${SPOT_TYPE_LABELS[spot.spotType]}の釣り場。${fishNames}が狙えるおすすめスポットです。${spot.hasParking ? '駐車場あり。' : ''}${spot.hasToilet ? 'トイレあり。' : ''}${spot.isFree ? '無料で釣りOK。' : ''}アクセス・釣れる魚・仕掛け情報を初心者向けに完全ガイド。`;
   return {
-    title: `${spot.name}の釣り場情報 - ${spot.region.prefecture}${spot.region.areaName}の釣りスポット`,
-    description: `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）の釣り場情報。${fishNames}が狙えます。${spot.region.areaName}近くのおすすめ釣り場。料金・駐車場・アクセス方法、ベストな時間帯やおすすめタックルまで初心者に必要な情報を掲載。`,
+    title,
+    description,
     openGraph: {
       title: `${spot.name}の釣り場情報`,
       description: `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）で${fishNames}が狙えます。${spot.description}`,
@@ -970,6 +980,74 @@ export default async function SpotDetailPage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      {/* このエリアの釣りガイド */}
+      {(() => {
+        const matchedAreaGuides = areaGuides.filter((g) =>
+          g.prefectures.includes(spot.region.prefecture)
+        );
+        if (matchedAreaGuides.length === 0) return null;
+        return (
+          <section className="mt-8 sm:mt-12">
+            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+              <Compass className="size-5" />
+              {spot.region.prefecture}の釣りエリアガイド
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {matchedAreaGuides.slice(0, 4).map((guide) => (
+                <Link key={guide.slug} href={`/area-guide/${guide.slug}`}>
+                  <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold group-hover:text-primary">
+                        {guide.name}
+                      </h3>
+                      <p className="mt-1 line-clamp-2 text-xs text-muted-foreground leading-relaxed">
+                        {guide.description}
+                      </p>
+                      <div className="mt-2 flex flex-wrap gap-1">
+                        {guide.mainFish.slice(0, 3).map((f) => (
+                          <Badge key={f} variant="secondary" className="text-xs">
+                            {f}
+                          </Badge>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          </section>
+        );
+      })()}
+
+      {/* この釣り場に関連する季節特集 */}
+      {(() => {
+        const fishSlugs = spot.catchableFish.map((cf) => cf.fish.slug);
+        const matchedSeasonalGuides = seasonalGuides.filter((g) =>
+          g.targetFish.some((tf) => fishSlugs.includes(tf))
+        );
+        if (matchedSeasonalGuides.length === 0) return null;
+        return (
+          <section className="mt-8 sm:mt-12">
+            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+              <Fish className="size-5" />
+              関連する釣り方ガイド
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {matchedSeasonalGuides.slice(0, 6).map((guide) => (
+                <Link key={guide.slug} href={`/seasonal/${guide.slug}`}>
+                  <Badge
+                    variant="outline"
+                    className="cursor-pointer px-3 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground min-h-[40px] flex items-center"
+                  >
+                    {guide.title}
+                  </Badge>
+                </Link>
+              ))}
+            </div>
+          </section>
+        );
+      })()}
 
       {/* LINE登録バナー */}
       <section className="mt-8 sm:mt-12">

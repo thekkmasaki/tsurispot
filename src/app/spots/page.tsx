@@ -41,6 +41,53 @@ const breadcrumbJsonLd = {
   ],
 };
 
+const spotsFaqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "近くの釣り場はどうやって探せますか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "位置情報を許可すると、現在地から近い順に釣り場を表示します。地図ページからも探せます。地域やスポットタイプで絞り込むことも可能です。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "初心者におすすめの釣り場は？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "堤防や漁港など足場の良い釣り場がおすすめです。スポット一覧で難易度を「初心者向け」に絞り込むと、安全で釣りやすいスポットが見つかります。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "無料で釣りができる場所はありますか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "多くの堤防や漁港は無料で釣りができます。スポット情報で「無料」と表記のある場所をお探しください。管理釣り場や一部の漁港では入場料が必要な場合があります。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "釣り場の混雑状況はわかりますか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "各スポットの詳細ページで混雑予想を確認できます。一般的に週末や祝日の早朝は混雑しやすく、平日や夕方は比較的空いています。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "釣りスポットの情報は正確ですか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "掲載情報は定期的に更新していますが、現地の状況は変わることがあります。釣行前に最新の情報を確認し、立入禁止区域には入らないようご注意ください。",
+      },
+    },
+  ],
+};
+
 export default async function SpotsPage({
   searchParams,
 }: {
@@ -54,6 +101,10 @@ export default async function SpotsPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(spotsFaqJsonLd) }}
       />
       <Breadcrumb
         items={[

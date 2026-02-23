@@ -35,15 +35,35 @@ export function LocationPromptBanner() {
     setLoading(true);
 
     navigator.geolocation.getCurrentPosition(
-      () => {
+      (position) => {
+        // 位置情報をlocalStorageに保存してリロード後も利用可能にする
+        try {
+          localStorage.setItem(
+            "tsurispot_user_location",
+            JSON.stringify({
+              latitude: position.coords.latitude,
+              longitude: position.coords.longitude,
+              timestamp: Date.now(),
+            })
+          );
+        } catch {
+          // localStorage書き込み失敗は無視
+        }
         dismiss();
         // ページをリロードして近くのスポットを表示
         window.location.reload();
       },
-      () => {
+      (err) => {
+        setLoading(false);
+        if (err.code === err.PERMISSION_DENIED) {
+          // 拒否された場合は案内を表示してからdismiss
+          alert(
+            "位置情報が拒否されました。\n\nブラウザの設定から位置情報を許可してください：\n・iOS: 設定 → Safari → 位置情報\n・Android: ブラウザ設定 → サイトの設定 → 位置情報"
+          );
+        }
         dismiss();
       },
-      { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
+      { enableHighAccuracy: true, timeout: 15000, maximumAge: 300000 }
     );
   };
 

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BookOpenText, Fish, Anchor, Waves, Moon, Cable } from "lucide-react";
 import { GlossaryClient } from "./glossary-client";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
   title: "釣り用語集 - 初心者が知っておきたい釣りの基本用語",
@@ -177,6 +178,9 @@ export default function GlossaryPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main className="container mx-auto max-w-4xl px-4 py-8 sm:py-12">
+        <div className="mb-4">
+          <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "用語集" }]} />
+        </div>
         {/* Header */}
         <div className="mb-8 text-center sm:mb-10">
           <h1 className="text-2xl font-bold tracking-tight sm:text-4xl">

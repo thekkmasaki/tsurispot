@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
   title: "季節別釣りガイド - 春夏秋冬のおすすめ釣り",
@@ -214,6 +215,9 @@ export default function SeasonalPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main className="container mx-auto max-w-4xl px-4 py-8 sm:py-12">
+        <div className="mb-4">
+          <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "季節別釣りガイド" }]} />
+        </div>
         {/* Header */}
         <div className="mb-8 text-center sm:mb-10">
           <h1 className="text-2xl font-bold tracking-tight sm:text-4xl">

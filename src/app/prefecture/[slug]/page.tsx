@@ -200,14 +200,14 @@ export async function generateMetadata({
   const spotTypes = new Set(spots.map((s) => SPOT_TYPE_LABELS[s.spotType]));
   const spotTypeText = Array.from(spotTypes).slice(0, 4).join("・");
 
-  const title = `${pref.name}の釣り場・釣りスポット一覧｜近くのおすすめ釣り場【2026年最新】`;
-  const description = `${pref.name}の釣りスポット${spots.length > 0 ? `${spots.length}箇所` : ""}を完全網羅。${pref.name}近くの${spotTypeText || "堤防・漁港・磯"}など初心者にもおすすめの穴場釣り場をエリア別に紹介。${topFishNames}が狙えます。駐車場・トイレ・アクセス情報も掲載。`;
+  const title = `${pref.name}の釣り場おすすめ${spots.length > 0 ? spots.length : ""}選｜初心者向け穴場スポットも【2026年版】`;
+  const description = `${pref.name}のおすすめ釣りスポット${spots.length > 0 ? `${spots.length}箇所` : ""}を初心者〜上級者別にランキング形式で紹介。${pref.name}近くの${spotTypeText || "堤防・漁港・磯"}で${topFishNames}が狙える穴場釣り場を厳選。駐車場・トイレ情報、ベストシーズン、アクセス方法まで完全ガイド。`;
 
   return {
     title,
     description,
     openGraph: {
-      title: `${pref.name}の釣りスポット${spots.length > 0 ? `${spots.length}選` : ""}｜おすすめ釣り場ガイド`,
+      title: `${pref.name}の釣り場おすすめ${spots.length > 0 ? spots.length : ""}選【2026年版】`,
       description: `${pref.name}で人気の釣りスポットをエリア別に紹介。${topFishNames}が釣れるおすすめの釣り場情報。`,
       type: "website",
       url: `https://tsurispot.com/prefecture/${pref.slug}`,

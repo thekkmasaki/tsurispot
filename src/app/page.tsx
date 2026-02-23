@@ -3,6 +3,7 @@ import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
 import { getCatchableNow } from "@/lib/data/fish";
 import { areaGuides } from "@/lib/data/area-guides";
+import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { prefectures } from "@/lib/data/prefectures";
 import { getLatestBlogPosts, BLOG_CATEGORIES } from "@/lib/data/blog";
 import { SPOT_TYPE_LABELS } from "@/types";
@@ -151,6 +152,20 @@ export default function Home() {
   const popularSpots = fishingSpots.slice(0, 6);
   const latestPosts = getLatestBlogPosts(3);
 
+  const popularSpotsItemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "人気の釣りスポット",
+    itemListOrder: "https://schema.org/ItemListOrderDescending",
+    numberOfItems: popularSpots.length,
+    itemListElement: popularSpots.map((spot, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: `https://tsurispot.com/spots/${spot.slug}`,
+      name: spot.name,
+    })),
+  };
+
   return (
     <div className="flex flex-col">
       <script
@@ -164,6 +179,10 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFaqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(popularSpotsItemListJsonLd) }}
       />
       {/* ヒーローセクション */}
       <section className="relative overflow-hidden bg-gradient-to-br from-sky-600 via-[#0C4A6E] to-indigo-800">
@@ -642,6 +661,70 @@ export default function Home() {
               </Button>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* 季節の釣り特集 */}
+      <section className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-10">
+        <div className="mb-6 flex items-end justify-between sm:mb-8">
+          <div>
+            <h2 className="text-xl font-bold tracking-tight sm:text-3xl">
+              季節の釣り特集
+            </h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              今の時期におすすめの釣り方ガイド
+            </p>
+          </div>
+          <Link
+            href="/seasonal"
+            className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
+          >
+            すべて見る
+            <ArrowRight className="size-4" />
+          </Link>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {seasonalGuides
+            .filter((g) => g.months.includes(currentMonth))
+            .slice(0, 6)
+            .map((guide) => (
+              <Link key={guide.slug} href={`/seasonal/${guide.slug}`}>
+                <Card className="group h-full transition-shadow hover:shadow-md">
+                  <CardContent className="p-4">
+                    <div className="mb-2 flex items-center gap-2">
+                      <div className="flex size-8 items-center justify-center rounded-lg bg-orange-100">
+                        <Calendar className="size-4 text-orange-600" />
+                      </div>
+                      <h3 className="font-semibold group-hover:text-primary">
+                        {guide.title}
+                      </h3>
+                    </div>
+                    <p className="mb-3 line-clamp-2 text-xs text-muted-foreground leading-relaxed">
+                      {guide.description}
+                    </p>
+                    <div className="mb-2 flex flex-wrap gap-1">
+                      <Badge variant="outline" className="text-xs">
+                        {guide.method}
+                      </Badge>
+                      <Badge variant="secondary" className="text-xs">
+                        {guide.season}
+                      </Badge>
+                    </div>
+                    <div className="flex items-center justify-end">
+                      <ChevronRight className="size-3.5 text-primary" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+        </div>
+        <div className="mt-6 flex justify-center sm:hidden">
+          <Link href="/seasonal">
+            <Button variant="outline" className="gap-1">
+              すべての特集を見る
+              <ArrowRight className="size-4" />
+            </Button>
+          </Link>
         </div>
       </section>
 

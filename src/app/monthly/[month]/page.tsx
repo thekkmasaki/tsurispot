@@ -13,6 +13,8 @@ import {
   Package,
   Calendar,
   ExternalLink,
+  BookOpen,
+  HelpCircle,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -40,8 +42,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const guide = getMonthlyGuide(month);
   if (!guide) return {};
 
-  const title = `${guide.title}｜ツリスポ`;
-  const description = guide.description;
+  const topFishNames = guide.topFish
+    .slice(0, 4)
+    .map((slug) => fishSpecies.find((f) => f.slug === slug)?.name)
+    .filter(Boolean)
+    .join("・");
+
+  const title = `${guide.nameJa}の釣り｜今釣れる魚・おすすめ釣り方・狙える魚種一覧【2026年版】`;
+  const description = `${guide.nameJa}に釣れる魚と釣り方を徹底解説。${guide.nameJa}のおすすめターゲットは${topFishNames}。初心者でも楽しめる${guide.nameJa}の釣りスポット・仕掛け・コツを紹介。`;
 
   return {
     title,
@@ -151,6 +159,18 @@ export default async function MonthlyGuidePage({ params }: Props) {
           item: `https://tsurispot.com/monthly/${month}`,
         },
       ],
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: guide.faqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
     },
   ];
 
@@ -464,6 +484,43 @@ export default async function MonthlyGuidePage({ params }: Props) {
           )}
         </section>
 
+        {/* 釣りポイント解説 */}
+        <section className="mb-8">
+          <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
+            <BookOpen className="size-5 text-primary" />
+            {guide.nameJa}の釣りポイント解説
+          </h2>
+          <Card>
+            <CardContent className="pt-4">
+              <p className="text-sm leading-relaxed text-muted-foreground whitespace-pre-line">
+                {guide.commentary}
+              </p>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* FAQ */}
+        <section className="mb-8">
+          <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
+            <HelpCircle className="size-5 text-primary" />
+            {guide.nameJa}の釣りFAQ
+          </h2>
+          <div className="space-y-3">
+            {guide.faqs.map((faq, i) => (
+              <Card key={i}>
+                <CardContent className="pt-4">
+                  <h3 className="mb-2 text-sm font-bold">
+                    Q. {faq.question}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {faq.answer}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+
         {/* 前月・翌月ナビ */}
         <div className="mb-8 grid grid-cols-2 gap-4">
           {prevGuide && (
@@ -499,7 +556,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
         {/* 関連リンク */}
         <div className="rounded-xl border bg-muted/30 p-6">
           <h2 className="mb-4 text-base font-bold">関連ページ</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             <Link
               href="/catchable-now"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
@@ -519,6 +576,24 @@ export default async function MonthlyGuidePage({ params }: Props) {
               </p>
             </Link>
             <Link
+              href="/seasonal"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <p className="font-semibold">季節別ガイド</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                春夏秋冬の釣りを解説
+              </p>
+            </Link>
+            <Link
+              href="/fishing-spots/breakwater-beginner"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <p className="font-semibold">初心者向け堤防釣り</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                初心者でも安心の釣りスポット
+              </p>
+            </Link>
+            <Link
               href="/fish"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
             >
@@ -528,12 +603,12 @@ export default async function MonthlyGuidePage({ params }: Props) {
               </p>
             </Link>
             <Link
-              href="/seasonal"
+              href="/spots"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
             >
-              <p className="font-semibold">季節別ガイド</p>
+              <p className="font-semibold">全国釣りスポット</p>
               <p className="mt-1 text-xs text-muted-foreground">
-                春夏秋冬の釣りを解説
+                1000+の釣り場を探す
               </p>
             </Link>
           </div>

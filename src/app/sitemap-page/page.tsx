@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Map, MapPin, Fish, BookOpen, Anchor, ShieldCheck, Store, Globe } from "lucide-react";
+import { Map, MapPin, Fish, BookOpen, Anchor, ShieldCheck, Store, Globe, Building } from "lucide-react";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 import { regions } from "@/lib/data/regions";
 import { tackleShops } from "@/lib/data/shops";
+import { prefectures } from "@/lib/data/prefectures";
 
 export const metadata: Metadata = {
   title: "サイトマップ - ツリスポ",
@@ -45,6 +46,7 @@ interface SitemapSection {
   title: string;
   icon: React.ReactNode;
   links: { href: string; label: string }[];
+  groupByPrefecture?: boolean;
 }
 
 const methodSlugs = [
@@ -57,6 +59,14 @@ const methodSlugs = [
   { slug: "uki-zuri", name: "ウキ釣り" },
   { slug: "ana-zuri", name: "穴釣り" },
 ];
+
+// 都道府県別スポットグルーピング
+const spotsByPrefecture = fishingSpots.reduce<Record<string, typeof fishingSpots>>((acc, spot) => {
+  const pref = spot.region.prefecture;
+  if (!acc[pref]) acc[pref] = [];
+  acc[pref].push(spot);
+  return acc;
+}, {});
 
 export default function SitemapPage() {
   const sections: SitemapSection[] = [
@@ -106,11 +116,20 @@ export default function SitemapPage() {
       ],
     },
     {
-      title: "釣りスポット",
+      title: "釣りスポット（都道府県別）",
       icon: <MapPin className="size-5 text-primary" />,
       links: fishingSpots.map((spot) => ({
         href: `/spots/${spot.slug}`,
         label: `${spot.name}（${spot.region.prefecture}）`,
+      })),
+      groupByPrefecture: true,
+    },
+    {
+      title: "都道府県別ページ",
+      icon: <Building className="size-5 text-primary" />,
+      links: prefectures.map((pref) => ({
+        href: `/prefecture/${pref.slug}`,
+        label: pref.name,
       })),
     },
     {
@@ -180,22 +199,44 @@ export default function SitemapPage() {
                 <h2 className="text-lg font-bold">
                   {section.title}
                   <span className="ml-2 text-sm font-normal text-muted-foreground">
-                    （{section.links.length}件）
+                    ({section.links.length}件)
                   </span>
                 </h2>
               </div>
-              <ul className="grid gap-x-4 gap-y-1 sm:grid-cols-2 lg:grid-cols-3">
-                {section.links.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="inline-block py-0.5 text-sm text-muted-foreground transition-colors hover:text-primary hover:underline"
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              {section.groupByPrefecture ? (
+                <div className="space-y-4">
+                  {Object.entries(spotsByPrefecture).map(([pref, spots]) => (
+                    <div key={pref}>
+                      <h3 className="mb-1 text-sm font-semibold text-foreground">{pref}（{spots.length}件）</h3>
+                      <ul className="grid gap-x-4 gap-y-1 sm:grid-cols-2 lg:grid-cols-3">
+                        {spots.map((spot) => (
+                          <li key={spot.slug}>
+                            <Link
+                              href={`/spots/${spot.slug}`}
+                              className="inline-block py-0.5 text-sm text-muted-foreground transition-colors hover:text-primary hover:underline"
+                            >
+                              {spot.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <ul className="grid gap-x-4 gap-y-1 sm:grid-cols-2 lg:grid-cols-3">
+                  {section.links.map((link) => (
+                    <li key={link.href}>
+                      <Link
+                        href={link.href}
+                        className="inline-block py-0.5 text-sm text-muted-foreground transition-colors hover:text-primary hover:underline"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
             </section>
           ))}
         </div>

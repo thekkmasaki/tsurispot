@@ -60,17 +60,55 @@ export function useGeolocation() {
     );
   }, []);
 
-  // 初回: permissionが既に許可済みなら自動取得
+  // 初回: 保存済み位置情報またはpermission許可済みなら自動取得
   useEffect(() => {
-    if (!navigator.permissions) {
-      // permissions API未対応の場合はボタン押下で取得
-      return;
-    }
-    navigator.permissions.query({ name: "geolocation" }).then((result) => {
-      if (result.state === "granted") {
-        requestLocation();
+    // まずlocalStorageに保存済みの位置情報をチェック（バナー経由で保存されたもの）
+    try {
+      const saved = localStorage.getItem("tsurispot_user_location");
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        // 1時間以内の位置情報なら再利用
+        if (parsed.latitude && parsed.longitude && Date.now() - parsed.timestamp < 3600000) {
+          setState({
+            latitude: parsed.latitude,
+            longitude: parsed.longitude,
+            error: null,
+            loading: false,
+            permissionDenied: false,
+          });
+          return;
+        }
       }
-    });
+    } catch {
+      // パースエラーは無視
+    }
+
+    // permissions APIでチェック
+    if (navigator.permissions) {
+      navigator.permissions.query({ name: "geolocation" }).then((result) => {
+        if (result.state === "granted") {
+          requestLocation();
+        }
+      });
+    } else {
+      // permissions API未対応（iOS Safari等）: geolocation APIを直接試行
+      // permissionが既に許可されていれば成功する
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setState({
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude,
+            error: null,
+            loading: false,
+            permissionDenied: false,
+          });
+        },
+        () => {
+          // 失敗は無視（ボタン押下で再試行される）
+        },
+        { enableHighAccuracy: false, timeout: 5000, maximumAge: 300000 }
+      );
+    }
   }, [requestLocation]);
 
   return { ...state, requestLocation };

@@ -95,11 +95,11 @@ export async function generateMetadata({
     .join("・");
 
   return {
-    title: `${region.areaName}（${region.prefecture}）の釣り場｜近くのおすすめ釣りスポット・穴場情報`,
-    description: `${region.prefecture}${region.areaName}近くの釣りスポット${spots.length}件を厳選紹介。${topFishNames}などが狙える穴場あり。初心者にもおすすめの釣り場からベテラン向けポイントまで。アクセス・駐車場・トイレ情報も掲載。`,
+    title: `${region.areaName}（${region.prefecture}）の釣り場おすすめ${spots.length}選｜穴場スポットも紹介`,
+    description: `${region.areaName}（${region.prefecture}）のおすすめ釣りスポット${spots.length}箇所を厳選。${topFishNames}が釣れる初心者にもおすすめの穴場釣り場を紹介。駐車場・トイレ・アクセス情報も完全掲載。`,
     openGraph: {
-      title: `${region.areaName}（${region.prefecture}）の釣り場｜近くのおすすめ釣りスポット`,
-      description: `${region.prefecture}${region.areaName}近くの釣りスポット${spots.length}件。${topFishNames}が釣れる穴場あり。初心者にもおすすめ。`,
+      title: `${region.areaName}（${region.prefecture}）の釣り場おすすめ${spots.length}選｜穴場スポットも紹介`,
+      description: `${region.areaName}（${region.prefecture}）のおすすめ釣りスポット${spots.length}箇所を厳選。${topFishNames}が釣れる初心者にもおすすめの穴場釣り場を紹介。駐車場・トイレ・アクセス情報も完全掲載。`,
       type: "website",
       url: `https://tsurispot.com/area/${region.slug}`,
       siteName: "ツリスポ",

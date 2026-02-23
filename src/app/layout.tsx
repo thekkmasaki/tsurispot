@@ -53,6 +53,16 @@ export const metadata: Metadata = {
     siteName: "ツリスポ",
     url: "https://tsurispot.com",
   },
+  twitter: {
+    card: "summary_large_image",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    "max-image-preview": "large",
+    "max-snippet": -1,
+    "max-video-preview": -1,
+  },
   alternates: {
     canonical: "https://tsurispot.com",
   },
@@ -68,6 +78,18 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="theme-color" content="#0369a1" />
+        {/* Bing Webmaster Tools 認証用（登録後に値を設定してコメント解除）
+        <meta name="msvalidate.01" content="BING_VERIFICATION_CODE" /> */}
+        {/* Yandex Webmaster 認証用（登録後に値を設定してコメント解除）
+        <meta name="yandex-verification" content="YANDEX_VERIFICATION_CODE" /> */}
+        {/*
+          検索エンジン登録手順（ユーザー作業）:
+          1. Bing Webmaster Tools: https://www.bing.com/webmasters/ でサイト追加
+             → 認証コードを msvalidate.01 メタタグに設定
+          2. Yandex Webmaster: https://webmaster.yandex.com/ でサイト追加
+             → 認証コードを yandex-verification メタタグに設定
+          3. デプロイ後 curl https://tsurispot.com/api/ping-search-engines を実行
+        */}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="apple-mobile-web-app-title" content="ツリスポ" />
@@ -87,6 +109,26 @@ export default function RootLayout({
       <body
         className={`${notoSansJP.variable} ${inter.variable} font-[family-name:var(--font-noto-sans-jp)] antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "ツリスポ",
+              alternateName: ["TsuriSpot", "つりすぽ"],
+              url: "https://tsurispot.com",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate: "https://tsurispot.com/spots?q={search_term_string}",
+                },
+                "query-input": "required name=search_term_string",
+              },
+            }),
+          }}
+        />
         <GoogleAnalytics />
         <PWARegister />
         <Header />

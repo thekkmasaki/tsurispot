@@ -575,7 +575,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
     region: localRegion("r174"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/nagasaki-port.jpg", images: [], rating: 3.8, reviewCount: 119,
+    mainImageUrl: "/images/spots/wikimedia/nagasaki-port.jpg", imageAttribution: "Photo: Soramimi / CC BY-SA 4.0", images: [], rating: 3.8, reviewCount: 119,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("mebaru"), monthStart: 2, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "メバリング" },

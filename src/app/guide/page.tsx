@@ -33,6 +33,7 @@ import { getTopProducts } from "@/lib/data/products";
 import { Badge } from "@/components/ui/badge";
 import { type LucideIcon } from "lucide-react";
 import { LineBanner } from "@/components/line-banner";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 interface GuideItem {
   href: string;
@@ -231,6 +232,9 @@ export const metadata: Metadata = {
 export default function GuidePage() {
   return (
     <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
+      <div className="mb-4">
+        <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "釣りガイド" }]} />
+      </div>
       {/* ヘッダー */}
       <div className="mb-8 text-center sm:mb-10">
         <h1 className="text-2xl font-bold tracking-tight sm:text-4xl">
