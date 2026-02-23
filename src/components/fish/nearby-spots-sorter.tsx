@@ -144,7 +144,7 @@ export function NearbySpotsSorter({ spots, fishName }: NearbySpotsSorterProps) {
     <section className="mb-6 sm:mb-8">
       <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
         <MapPin className="size-5 text-primary" />
-        釣れるスポット
+        {fishName}が釣れるスポット一覧
         <span className="text-sm font-normal text-muted-foreground">
           ({spots.length}件)
         </span>

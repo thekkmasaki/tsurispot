@@ -237,6 +237,63 @@ export default async function SpotDetailPage({ params }: PageProps) {
           text: `${spot.name}の所在地は${spot.address}です。${spot.accessInfo}`,
         },
       },
+      {
+        "@type": "Question",
+        name: `${spot.name}は初心者でも釣れますか？`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: spot.difficulty === "beginner"
+            ? `はい、${spot.name}は初心者の方でも釣果が期待できる釣り場です。${spot.hasRentalRod ? "レンタル竿もあるので手ぶらでも楽しめます。" : ""}${spot.catchableFish.filter(cf => cf.catchDifficulty === "easy").length > 0 ? `${spot.catchableFish.filter(cf => cf.catchDifficulty === "easy").map(cf => cf.fish.name).slice(0, 3).join("、")}は比較的簡単に釣れます。` : ""}`
+            : spot.difficulty === "intermediate"
+              ? `${spot.name}は中級者向けの釣り場ですが、釣り方や時間帯を選べば初心者でも釣果を得られる可能性があります。${spot.catchableFish.filter(cf => cf.catchDifficulty === "easy").length > 0 ? `${spot.catchableFish.filter(cf => cf.catchDifficulty === "easy").map(cf => cf.fish.name).slice(0, 2).join("、")}は比較的狙いやすい魚です。` : ""}`
+              : `${spot.name}は上級者向けの釣り場です。初心者の方は経験者と一緒に訪れることをおすすめします。`,
+        },
+      },
+      ...(spot.catchableFish.length > 0
+        ? [{
+            "@type": "Question" as const,
+            name: `${spot.name}のおすすめ時期はいつですか？`,
+            acceptedAnswer: {
+              "@type": "Answer" as const,
+              text: (() => {
+                const peakFish = spot.catchableFish.filter(cf => cf.peakSeason);
+                if (peakFish.length > 0) {
+                  return `${spot.name}では${peakFish.slice(0, 3).map(cf => cf.fish.name).join("、")}が旬を迎える時期が特におすすめです。年間を通じて${spot.catchableFish.length}種類の魚が狙えます。`;
+                }
+                return `${spot.name}では年間を通じて${spot.catchableFish.length}種類の魚が狙えます。`;
+              })(),
+            },
+          }]
+        : []),
+      {
+        "@type": "Question",
+        name: `${spot.name}は混雑しますか？`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${spot.name}は${spot.isFree ? "無料の釣り場のため週末や祝日は混み合うことがあります" : "有料施設のため比較的快適に釣りを楽しめます"}。${spot.difficulty === "beginner" ? "初心者向けの人気スポットなのでハイシーズンは早めの場所取りがおすすめです。" : ""}朝マヅメの時間帯は釣り人が多くなる傾向があります。`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `${spot.name}の近くにコンビニや釣具店はありますか？`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: (() => {
+            const parts: string[] = [];
+            if (spot.hasConvenienceStore) {
+              parts.push(`${spot.name}の近くにはコンビニがあります`);
+            } else {
+              parts.push(`${spot.name}の近くにはコンビニがないため、飲み物や食べ物は事前に用意しておくことをおすすめします`);
+            }
+            if (spot.hasFishingShop) {
+              parts.push("近くに釣具店もあるので、エサや仕掛けの補充も可能です");
+            } else {
+              parts.push("釣具店は近くにないため、タックルやエサは事前に準備しておきましょう");
+            }
+            return parts.join("。") + "。";
+          })(),
+        },
+      },
     ],
   };
 
@@ -349,6 +406,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
         </div>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
           {spot.description}
+          {spot.name}は{spot.region.prefecture}{spot.region.areaName}に位置する
+          {spot.difficulty === "beginner" ? "初心者にもおすすめ" : spot.difficulty === "intermediate" ? "中級者向け" : "上級者向け"}
+          の釣りスポットです。
+          {spot.catchableFish.length > 0 ? `${spot.catchableFish.slice(0, 3).map(f => f.fish.name).join("、")}などが狙えます。` : ""}
+          {spot.isFree ? "無料で釣りができます。" : spot.feeDetail ? `利用料金: ${spot.feeDetail}` : ""}
         </p>
         <div className="mt-4">
           <ShareButtons
@@ -359,15 +421,22 @@ export default async function SpotDetailPage({ params }: PageProps) {
       </div>
 
       {/* Photo area - 実際の写真がある場合のみ表示 */}
-      {spot.mainImageUrl?.startsWith("http") && (
-        <div className="mb-6 overflow-hidden rounded-xl sm:mb-8">
-          <SpotImage
-            src={spot.mainImageUrl}
-            alt={spot.name}
-            spotType={spot.spotType}
-            height="h-48 sm:h-56 md:h-72"
-            priority
-          />
+      {(spot.mainImageUrl?.startsWith("http") || spot.mainImageUrl?.startsWith("/images/spots/wikimedia/")) && (
+        <div className="mb-6 sm:mb-8">
+          <div className="overflow-hidden rounded-xl">
+            <SpotImage
+              src={spot.mainImageUrl}
+              alt={spot.name}
+              spotType={spot.spotType}
+              height="h-48 sm:h-56 md:h-72"
+              priority
+            />
+          </div>
+          {spot.imageAttribution && (
+            <p className="mt-1 text-right text-xs text-muted-foreground">
+              {spot.imageAttribution}
+            </p>
+          )}
         </div>
       )}
 
@@ -414,7 +483,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           <section id="fish-season">
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold sm:mb-4">
               <Fish className="size-5" />
-              今釣れる魚 - シーズンカレンダー
+              {spot.name}で釣れる魚の季節カレンダー
             </h2>
             {spot.catchableFish.length > 0 ? (
               <Card className="py-3 sm:py-4">
@@ -482,7 +551,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           <section id="best-time">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
               <Clock className="size-5" />
-              ベストタイム
+              {spot.name}のおすすめ釣り時間帯
             </h2>
             <BestTime bestTimes={spot.bestTimes} />
           </section>
@@ -617,7 +686,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           {/* Recommended tackle */}
           {spot.tackleRecommendations.filter((t) => t.amazonUrl !== "#" && t.rakutenUrl !== "#").length > 0 && (
             <section>
-              <h2 className="mb-4 text-lg font-bold">おすすめタックル</h2>
+              <h2 className="mb-4 text-lg font-bold">{spot.name}で使える仕掛け・タックル</h2>
               <div className="space-y-4">
                 {spot.tackleRecommendations
                   .filter((t) => t.amazonUrl !== "#" && t.rakutenUrl !== "#")
@@ -808,7 +877,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
         <section id="nearby-spots" className="mt-8 sm:mt-12">
           <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
             <MapPin className="size-5" />
-            この近くの釣り場
+            {spot.name}周辺の釣りスポット
           </h2>
           <div className="flex gap-3 overflow-x-auto pb-2">
             {nearbySpots.map((nearSpot) => (
@@ -886,7 +955,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
       {/* この釣り場で釣れる魚（内部リンク強化） */}
       {spot.catchableFish.length > 0 && (
         <section className="mt-6 sm:mt-8">
-          <h2 className="mb-3 text-base font-bold sm:mb-4 sm:text-lg">この釣り場で狙える魚の詳細</h2>
+          <h2 className="mb-3 text-base font-bold sm:mb-4 sm:text-lg">{spot.name}で狙える魚種と釣り方</h2>
           <div className="flex flex-wrap gap-2">
             {spot.catchableFish.map((cf) => (
               <Link key={cf.fish.id} href={`/fish/${cf.fish.slug}`}>

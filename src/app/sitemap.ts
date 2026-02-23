@@ -5,6 +5,7 @@ import { regions } from "@/lib/data/regions";
 import { prefectures } from "@/lib/data/prefectures";
 import { areaGuides } from "@/lib/data/area-guides";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
+import { blogPosts } from "@/lib/data/blog";
 
 const baseUrl = "https://tsurispot.com";
 
@@ -70,6 +71,14 @@ export default async function sitemap({
       { url: `${baseUrl}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
       { url: `${baseUrl}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
       { url: `${baseUrl}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
+      // ブログ
+      { url: `${baseUrl}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
+      ...blogPosts.map((post) => ({
+        url: `${baseUrl}/blog/${post.slug}`,
+        lastModified: now,
+        changeFrequency: "weekly" as const,
+        priority: 0.6,
+      })),
       // エリアガイド
       { url: `${baseUrl}/area-guide`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
       ...areaGuides.map((guide) => ({

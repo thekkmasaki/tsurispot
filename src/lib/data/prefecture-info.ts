@@ -1111,6 +1111,11 @@ export function getPrefectureFAQs(slug: string, prefName: string, spotCount: num
     },
   ];
 
+  faqs.push({
+    question: `${prefName}の無料で釣りができるスポットは？`,
+    answer: `${prefName}には無料で釣りを楽しめるスポットがあります。堤防や漁港の外側、河川敷などは多くが無料で開放されています。当サイトでは各スポットの料金情報を掲載していますので、「無料」マークのあるスポットをお探しください。`,
+  });
+
   if (!isInland) {
     faqs.push({
       question: `${prefName}で釣り禁止のエリアはありますか？`,

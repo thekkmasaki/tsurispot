@@ -57,7 +57,14 @@ function hasNightFishing(spot: FishingSpot): boolean {
 
 function filterByPrefecture(spots: FishingSpot[], prefecture: string): FishingSpot[] {
   if (prefecture === "全国") return spots;
-  return spots.filter((s) => s.region.prefecture.includes(prefecture.replace(/[都府県]$/, "")));
+  // 完全一致で比較（「京都府」選択時に「東京都」がヒットするバグの修正）
+  return spots.filter((s) => {
+    const spotPref = s.region.prefecture;
+    // そのまま一致するか、末尾の都道府県を除去した状態で比較
+    return spotPref === prefecture
+      || spotPref === prefecture.replace(/[都道府県]$/, "")
+      || spotPref.replace(/[都道府県]$/, "") === prefecture.replace(/[都道府県]$/, "");
+  });
 }
 
 function filterSpots(spots: FishingSpot[], tab: TabKey): FishingSpot[] {

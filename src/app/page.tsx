@@ -93,9 +93,56 @@ const organizationJsonLd = {
   name: "ツリスポ",
   url: "https://tsurispot.com",
   logo: "https://tsurispot.com/logo.svg",
-  sameAs: [],
+  sameAs: ["https://www.instagram.com/tsurispotjapan/"],
   description:
     "釣りスポット総合情報サイト。全国の釣り場を地図で検索でき、今釣れる魚やおすすめの仕掛け情報を提供しています。",
+};
+
+const homeFaqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "近くの釣り場を探すにはどうすればいいですか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "ツリスポでは、GPSを使って現在地から近い釣り場を自動で表示します。トップページの「近くの釣り場」ボタンを押すか、地図ページから周辺の釣りスポットを検索できます。全国1000箇所以上の釣り場から最寄りのスポットが見つかります。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "釣り初心者におすすめの釣り場はどこですか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "初心者には堤防や漁港での釣りがおすすめです。足場が安定しており、サビキ釣りでアジやイワシが手軽に狙えます。ツリスポでは難易度「初心者向け」のスポットを絞り込み検索できます。駐車場やトイレの有無も確認できるので、ファミリーフィッシングにも最適です。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "今の時期に釣れる魚は何ですか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "ツリスポの「今釣れる魚」ページで、現在の月に釣れる魚種を一覧で確認できます。季節ごとに旬の魚が変わるため、シーズンカレンダーを参考にして狙いたい魚を選びましょう。各魚種のページでは釣り方や仕掛けの情報も掲載しています。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "堤防釣りに必要な道具は何ですか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "堤防釣りの基本セットは、竿（ロッド）、リール、仕掛け（サビキセットが初心者向け）、エサ（アミエビ等）、バケツ、クーラーボックスです。ツリスポの「釣りの始め方」ガイドや「持ち物チェックリスト」で必要な道具を詳しく確認できます。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "海釣りと川釣りの違いは何ですか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "海釣りは堤防・漁港・磯・砂浜などで行い、アジ・サバ・メバル・クロダイなど多彩な魚が狙えます。川釣りは渓流・河川・湖で行い、アユ・ヤマメ・ブラックバスなどが対象です。川釣りは遊漁券が必要な場合があります。ツリスポでは海・川それぞれのスポットを検索できます。",
+      },
+    },
+  ],
 };
 
 export default function Home() {
@@ -113,6 +160,10 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFaqJsonLd) }}
       />
       {/* ヒーローセクション */}
       <section className="relative overflow-hidden bg-gradient-to-br from-sky-600 via-[#0C4A6E] to-indigo-800">
@@ -152,9 +203,9 @@ export default function Home() {
             </div>
 
             <h1 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-white sm:mb-4 sm:text-4xl lg:text-5xl">
-              地図で見つける、
+              近くの釣り場が
               <br className="sm:hidden" />
-              あなたの釣りスポット
+              すぐ見つかる
             </h1>
 
             <p className="mb-6 max-w-lg text-sm text-blue-100 sm:mb-8 sm:text-lg">
@@ -293,6 +344,43 @@ export default function Home() {
         />
       </section>
 
+      {/* 目的別に釣り場を探す（SEOリンクセクション） */}
+      <section className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-10">
+        <h2 className="mb-4 text-lg font-bold tracking-tight sm:text-2xl">
+          目的別に釣り場を探す
+        </h2>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+          <Link href="/fishing-spots/breakwater-beginner" className="group">
+            <div className="rounded-xl border bg-blue-50/50 p-4 transition-all hover:shadow-md hover:-translate-y-0.5">
+              <div className="text-2xl mb-2">🎣</div>
+              <h3 className="text-sm font-semibold group-hover:text-primary">堤防釣り初心者向け</h3>
+              <p className="mt-1 text-xs text-muted-foreground">安全で釣りやすい堤防スポット</p>
+            </div>
+          </Link>
+          <Link href="/fishing-spots/best-saltwater" className="group">
+            <div className="rounded-xl border bg-cyan-50/50 p-4 transition-all hover:shadow-md hover:-translate-y-0.5">
+              <div className="text-2xl mb-2">🌊</div>
+              <h3 className="text-sm font-semibold group-hover:text-primary">海釣りおすすめ</h3>
+              <p className="mt-1 text-xs text-muted-foreground">人気の海釣りスポット一覧</p>
+            </div>
+          </Link>
+          <Link href="/fishing-spots/river-beginner" className="group">
+            <div className="rounded-xl border bg-emerald-50/50 p-4 transition-all hover:shadow-md hover:-translate-y-0.5">
+              <div className="text-2xl mb-2">🏞️</div>
+              <h3 className="text-sm font-semibold group-hover:text-primary">川釣り初心者向け</h3>
+              <p className="mt-1 text-xs text-muted-foreground">のんびり川釣りを楽しめる</p>
+            </div>
+          </Link>
+          <Link href="/fishing-spots/near-me" className="group">
+            <div className="rounded-xl border bg-amber-50/50 p-4 transition-all hover:shadow-md hover:-translate-y-0.5">
+              <div className="text-2xl mb-2">📍</div>
+              <h3 className="text-sm font-semibold group-hover:text-primary">近くの釣り場</h3>
+              <p className="mt-1 text-xs text-muted-foreground">現在地から一番近い釣り場</p>
+            </div>
+          </Link>
+        </div>
+      </section>
+
       {/* 人気の釣りスポットセクション */}
       <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-16">
         <div className="mb-6 flex items-end justify-between sm:mb-8">
@@ -319,7 +407,7 @@ export default function Home() {
               <Card className="group h-full gap-0 overflow-hidden border py-0 transition-shadow hover:shadow-md">
                 {/* カード上部の画像 */}
                 <SpotImage
-                  src={spot.mainImageUrl?.startsWith("http") ? spot.mainImageUrl : undefined}
+                  src={(spot.mainImageUrl?.startsWith("http") || spot.mainImageUrl?.startsWith("/images/spots/wikimedia/")) ? spot.mainImageUrl : undefined}
                   alt={spot.name}
                   spotType={spot.spotType}
                   height="h-36 sm:h-40"

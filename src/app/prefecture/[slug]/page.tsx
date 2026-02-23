@@ -428,6 +428,13 @@ export default async function PrefecturePage({ params }: PageProps) {
             `｜初心者向け${beginnerSpots.length}件`}
           {freeSpots.length > 0 && `｜無料${freeSpots.length}件`}
         </p>
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+          {pref.name}には{spots.length}件の釣りスポットが登録されています。
+          {beginnerSpots.length > 0 ? `初心者向けスポットは${beginnerSpots.length}件あります。` : ""}
+          {freeSpots.length > 0 ? `無料で釣りができるスポットは${freeSpots.length}件です。` : ""}
+          {catchableFish.length > 0 ? `${pref.name}で人気の魚種は${catchableFish.slice(0, 4).map(f => f.name).join("、")}です。` : ""}
+          {spotTypeBreakdown.length > 0 ? `釣り場のタイプは${spotTypeBreakdown.slice(0, 3).map(t => t.type).join("・")}が中心です。` : ""}
+        </p>
       </div>
 
       {/* Prefecture overview */}

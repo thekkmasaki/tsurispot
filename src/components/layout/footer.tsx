@@ -40,15 +40,17 @@ export function Footer() {
             </div>
           </div>
           <div>
-            <h3 className="mb-3 text-sm font-semibold">釣りスポット</h3>
+            <h3 className="mb-3 text-sm font-semibold">釣りスポットを探す</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/spots" className="hover:text-foreground">スポット一覧</Link></li>
-              <li><Link href="/ranking" className="hover:text-foreground">人気ランキング</Link></li>
+              <li><Link href="/spots" className="hover:text-foreground">全国の釣りスポット一覧</Link></li>
+              <li><Link href="/fishing-spots/near-me" className="hover:text-foreground">近くの釣り場を探す</Link></li>
+              <li><Link href="/ranking" className="hover:text-foreground">釣りスポット人気ランキング</Link></li>
+              <li><Link href="/fishing-spots/breakwater-beginner" className="hover:text-foreground">堤防釣り初心者おすすめ</Link></li>
+              <li><Link href="/fishing-spots/best-saltwater" className="hover:text-foreground">海釣りおすすめスポット</Link></li>
+              <li><Link href="/fishing-spots/river-beginner" className="hover:text-foreground">川釣り初心者おすすめ</Link></li>
               <li><Link href="/area" className="hover:text-foreground">エリアで探す</Link></li>
-              <li><Link href="/area-guide" className="hover:text-foreground">エリアガイド記事</Link></li>
               <li><Link href="/map" className="hover:text-foreground">地図で探す</Link></li>
               <li><Link href="/catchable-now" className="hover:text-foreground">今釣れる魚</Link></li>
-              <li><Link href="/favorites" className="hover:text-foreground">お気に入り</Link></li>
             </ul>
           </div>
           <div>
@@ -88,7 +90,37 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-8 border-t border-border/40 pt-6 text-center text-sm text-muted-foreground">
+        {/* 人気都道府県リンク */}
+        <div className="mt-6 border-t border-border/40 pt-6">
+          <h3 className="mb-3 text-sm font-semibold">人気エリアの釣りスポット</h3>
+          <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+            <Link href="/prefecture/hokkaido" className="hover:text-foreground">北海道の釣り場</Link>
+            <span>·</span>
+            <Link href="/prefecture/tokyo" className="hover:text-foreground">東京の釣り場</Link>
+            <span>·</span>
+            <Link href="/prefecture/kanagawa" className="hover:text-foreground">神奈川の釣り場</Link>
+            <span>·</span>
+            <Link href="/prefecture/chiba" className="hover:text-foreground">千葉の釣り場</Link>
+            <span>·</span>
+            <Link href="/prefecture/shizuoka" className="hover:text-foreground">静岡の釣り場</Link>
+            <span>·</span>
+            <Link href="/prefecture/aichi" className="hover:text-foreground">愛知の釣り場</Link>
+            <span>·</span>
+            <Link href="/prefecture/osaka" className="hover:text-foreground">大阪の釣り場</Link>
+            <span>·</span>
+            <Link href="/prefecture/hyogo" className="hover:text-foreground">兵庫の釣り場</Link>
+            <span>·</span>
+            <Link href="/prefecture/hiroshima" className="hover:text-foreground">広島の釣り場</Link>
+            <span>·</span>
+            <Link href="/prefecture/fukuoka" className="hover:text-foreground">福岡の釣り場</Link>
+            <span>·</span>
+            <Link href="/prefecture/okinawa" className="hover:text-foreground">沖縄の釣り場</Link>
+            <span>·</span>
+            <Link href="/prefecture" className="hover:text-foreground font-medium">全都道府県一覧 →</Link>
+          </div>
+        </div>
+
+        <div className="mt-6 border-t border-border/40 pt-6 text-center text-sm text-muted-foreground">
           <p>&copy; 2026 ツリスポ All rights reserved.</p>
           <p className="mx-auto mt-2 max-w-xl text-xs leading-relaxed">
             ※ 当サイトはアフィリエイトプログラムに参加しています。商品リンクからの購入で当サイトに報酬が支払われることがあります。
@@ -116,6 +148,12 @@ export function Footer() {
             </svg>
             @tsurispotjapan
           </a>
+        </div>
+        <div className="flex flex-wrap justify-center gap-x-3 gap-y-2 text-xs text-muted-foreground mb-3">
+          <Link href="/fishing-spots/near-me" className="hover:text-foreground font-medium">近くの釣り場</Link>
+          <Link href="/fishing-spots/breakwater-beginner" className="hover:text-foreground">堤防釣り初心者</Link>
+          <Link href="/fishing-spots/best-saltwater" className="hover:text-foreground">海釣りおすすめ</Link>
+          <Link href="/ranking" className="hover:text-foreground">人気ランキング</Link>
         </div>
         <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
           <Link href="/blog" className="hover:text-foreground">コラム</Link>

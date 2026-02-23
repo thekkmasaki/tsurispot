@@ -9,7 +9,6 @@ export default function robots(): MetadataRoute.Robots {
         "/shops/*/dashboard",
         "/spots/submit",
         "/favorites",
-        "/contact",
       ],
     },
     sitemap: "https://tsurispot.com/sitemap.xml",

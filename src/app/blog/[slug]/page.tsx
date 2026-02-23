@@ -94,7 +94,7 @@ export default async function BlogPostPage({
     dateModified: post.updatedAt || post.publishedAt,
     author: {
       "@type": "Organization",
-      name: "ツリスポ",
+      name: "ツリスポ編集部",
       url: "https://tsurispot.com",
     },
     publisher: {
@@ -103,7 +103,7 @@ export default async function BlogPostPage({
       url: "https://tsurispot.com",
       logo: {
         "@type": "ImageObject",
-        url: "https://tsurispot.com/logo.svg",
+        url: "https://tsurispot.com/icon-192.png",
       },
     },
     mainEntityOfPage: {

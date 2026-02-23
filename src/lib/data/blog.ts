@@ -40,9 +40,21 @@ export const blogPosts: BlogPost[] = [
 <p>まず最も重要なのが釣り竿です。初心者には「磯竿3号・4.5m前後」をおすすめします。3号はサビキ釣り、ウキ釣り、ちょい投げなど幅広い釣り方に対応できる万能な硬さです。長さ4.5m前後であれば、堤防の足元から少し沖まで対応できます。</p>
 <p>最初から高価な専用竿を買う必要はありません。3,000〜5,000円程度のセット竿でも十分に釣りを楽しめます。まずは釣りの楽しさを知ることが大切です。</p>
 
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4s4i64m" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">シマノ ロッド（初心者向け万能竿） →</a>
+<span style="font-size:0.82em;color:#475569">サビキ・ウキ釣り・ちょい投げまで対応。初心者にちょうど良いコスパモデルです。</span>
+</div>
+
 <h2>2. スピニングリール（2500〜3000番）</h2>
 <p>リールは糸を巻き取るための道具です。初心者には扱いやすい「スピニングリール」の2500〜3000番がベストです。この番手であればサビキ釣りからちょい投げまで幅広く使えます。</p>
 <p>選ぶ際のポイントは、糸付きのモデルを選ぶこと。ナイロン3号が150m程度巻いてあるリールなら、別途ラインを購入する手間が省けます。メーカー品であれば2,000〜4,000円台で良いものが手に入ります。</p>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4atW7Om" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">シマノ リール（2500番 初心者向け） →</a>
+<span style="font-size:0.82em;color:#475569">滑らかな巻き心地でトラブルが少なく、初心者に最適なコスパモデルです。</span>
+</div>
 
 <h2>3. サビキ仕掛けセット</h2>
 <p>堤防で最も簡単に釣果が出やすいのがサビキ釣りです。サビキ仕掛けは、針にスキンやサバ皮が巻かれた疑似餌が数本ついた仕掛けで、アジ・サバ・イワシなどの回遊魚を狙えます。</p>
@@ -51,6 +63,12 @@ export const blogPosts: BlogPost[] = [
 <h2>4. コマセ（アミエビ）</h2>
 <p>サビキ釣りに欠かせないのがコマセ（寄せエサ）です。冷凍のアミエビブロックが定番で、釣具店や釣りエサ店で購入できます。チューブタイプのコマセは手を汚さず使えるので、初心者や女性にもおすすめです。</p>
 <p>量の目安は、半日の釣りで1〜2kgあれば十分です。常温保存できるチューブタイプは事前に準備しやすく、余っても次回に使えるのがメリットです。</p>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4c6gaUn" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">マルキュー アミ姫（チューブタイプコマセ） →</a>
+<span style="font-size:0.82em;color:#475569">手が汚れにくいチューブ式。フルーティーな香りでにおいも少なく、初心者・女性にも人気です。</span>
+</div>
 
 <h2>5. バケツ・水汲みバケツ</h2>
 <p>意外と忘れがちですが、水汲みバケツは必需品です。釣った魚を一時的に活かしておく、手を洗う、釣り場を掃除するなど用途は多岐にわたります。ロープ付きの折りたたみバケツなら、堤防の上から海水を汲み上げることができて便利です。</p>
@@ -93,11 +111,29 @@ export const blogPosts: BlogPost[] = [
 <h3>レイヤリング（重ね着）の基本</h3>
 <p>防寒の基本はレイヤリングです。ベースレイヤー（肌着）は吸湿速乾素材のものを選びましょう。綿素材は汗を吸うと冷えるため厳禁です。ミドルレイヤーにはフリースやダウン、アウターレイヤーには防風・防水のジャケットを重ねます。釣り用の防寒着は動きやすさも考慮されているので、予算があれば専用品がおすすめです。</p>
 
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/3ZMtLc7" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">バラクラバ ネックウォーマー →</a>
+<span style="font-size:0.82em;color:#475569">首元からの冷風をしっかりガード。保温性が高く、釣り以外の普段使いにも便利です。</span>
+</div>
+
 <h3>手先・足先の防寒が最重要</h3>
 <p>釣りでは手先を使う作業が多いため、指先が冷えると仕掛けの交換やエサ付けが困難になります。釣り用の防寒グローブは、3本カット（親指・人差し指・中指が出るタイプ）が操作性と保温性のバランスが良くおすすめです。足元は防寒長靴や厚手の靴下を重ね履きして、地面からの冷えを防ぎましょう。</p>
 
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/3ZOdinM" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">防寒フィッシンググローブ（3本カットタイプ） →</a>
+<span style="font-size:0.82em;color:#475569">指先が出せるので仕掛け操作もしやすい。冬の釣りの必需品です。</span>
+</div>
+
 <h3>カイロ・電熱ベストの活用</h3>
 <p>貼るカイロは背中と腰に貼ると全身が温まりやすくなります。最近では充電式の電熱ベストも手頃な価格で手に入るようになりました。モバイルバッテリーで給電でき、釣り中もじんわり暖かいので、冬釣りの必需品になりつつあります。</p>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/40sdGZ6" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">電熱ベスト（大容量バッテリー付き） →</a>
+<span style="font-size:0.82em;color:#475569">腰まで暖かく、長時間の冬釣りでも快適。普段使いもできるデザインです。</span>
+</div>
 
 <h3>温かい飲み物と軽食の準備</h3>
 <p>保温ボトルに温かいコーヒーやスープを入れて持参しましょう。体の中から温めることで、長時間の釣りでも集中力を維持できます。カップ麺用のお湯を水筒に入れていくのも冬釣りの楽しみの一つです。</p>
@@ -131,9 +167,21 @@ export const blogPosts: BlogPost[] = [
 <p>コマセ（寄せエサ）はただ大量に撒けばいいわけではありません。ポイントは「同じ場所にコマセの帯を作る」ことです。仕掛けを投入したら、竿を2〜3回小刻みに上下させてカゴからコマセを出します。このとき激しく振りすぎると、コマセが広範囲に散ってしまい効果が薄れます。</p>
 <p>コマセを出した後は、竿を動かさずに10〜20秒ほど待ちましょう。コマセの煙幕の中にサビキ仕掛けが漂っている状態がベストです。アタリがなければ再度軽くシャクってコマセを追加し、また待つ。このリズムの繰り返しが釣果への近道です。</p>
 
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4c6gaUn" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">マルキュー アミ姫（チューブタイプコマセ） →</a>
+<span style="font-size:0.82em;color:#475569">手が汚れにくいチューブ式で、少量ずつ出せるからコマセワークもしやすい。サビキ釣りの定番です。</span>
+</div>
+
 <h2>コツ4：仕掛けのサイズと色を使い分ける</h2>
 <p>サビキ仕掛けにはさまざまなサイズと種類があります。針のサイズは、狙う魚の大きさに合わせて選びましょう。豆アジ（10cm前後）なら針3〜4号、中アジ（15〜20cm）なら5〜7号、大型のサバなら8〜10号が目安です。</p>
 <p>また、仕掛けの色（スキンの色）も重要です。ピンクスキンが最もオーソドックスですが、日によって白やハゲ皮（魚皮）のほうが反応が良いこともあります。2〜3種類の仕掛けを用意しておき、反応が悪いときは仕掛けを変えてみましょう。「今日の当たりカラー」を見つけたときは連発することも珍しくありません。</p>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4s1SPaX" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">東レ ナイロンライン（道糸） →</a>
+<span style="font-size:0.82em;color:#475569">視認性が高くアタリが把握しやすい。サビキ釣りの道糸に最適なナイロンラインです。</span>
+</div>
 
 <h2>コツ5：取り込みと手返しを速くする</h2>
 <p>アタリが出たら素早く巻き上げましょう。サビキ釣りはスピードが命です。モタモタしていると、針に掛かった魚が暴れてハリス（枝糸）が絡まり、仕掛けがダメになることがあります。</p>
@@ -164,14 +212,32 @@ export const blogPosts: BlogPost[] = [
 <h3>投げ竿</h3>
 <p>投げ釣り専用の竿は3.9〜4.25mが標準。号数は25〜30号で、オモリ25〜30号を快適にキャストできるものを選びましょう。初心者にはシマノ「サーフリーダー」やダイワ「プライムサーフ」がコストパフォーマンスに優れています。ちょい投げ（近距離）なら磯竿3号でも代用可能です。</p>
 
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4s4i64m" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">シマノ ロッド →</a>
+<span style="font-size:0.82em;color:#475569">ちょい投げから本格投げ釣りまで対応。コスパに優れた信頼のシマノ製です。</span>
+</div>
+
 <h3>リール</h3>
 <p>投げ釣り専用のスピニングリールがベストですが、4000〜5000番の汎用スピニングリールでも十分です。投げ専用リールはスプールが浅く設計されており、ライン放出がスムーズでより遠くに飛ばせます。</p>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4atW7Om" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">シマノ リール →</a>
+<span style="font-size:0.82em;color:#475569">滑らかな巻き心地のシマノ製リール。投げ釣り初心者にもおすすめです。</span>
+</div>
 
 <h3>ライン</h3>
 <p>ナイロン3〜5号、またはPE1〜2号+力糸（テーパーライン）が一般的です。力糸はキャスト時の衝撃でラインが切れるのを防ぐために必須。ナイロンの場合はテーパーライン（先端が太くなるライン）を使うと便利です。</p>
 
 <h3>仕掛け</h3>
 <p>キス狙いは天秤仕掛け（L型天秤+2〜3本針仕掛け）が定番。針はキス針6〜8号。カレイ狙いは流線針12〜15号の2本針仕掛け。エサはジャリメ（石ゴカイ）やアオイソメが万能エサとして使えます。</p>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4cFGDbl" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">おもりセット（まとめ買い） →</a>
+<span style="font-size:0.82em;color:#475569">投げ釣りに欠かせないおもり。複数の号数が入ったセットでまとめ買いがお得です。</span>
+</div>
 
 <h2>基本テクニック</h2>
 <h3>キャスティング</h3>
@@ -217,6 +283,12 @@ export const blogPosts: BlogPost[] = [
 <h3>フライライン</h3>
 <p>WF（ウェイトフォワード）タイプのフローティングライン（F）が初心者の基本。先端部が太く設計されており、キャストしやすい構造です。ラインの番手はロッドに合わせます（#4ロッドには#4ライン）。リーダー（テーパー状の透明ライン9ft）とティペット（さらに細い先糸）も必要です。</p>
 
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4tKXyzu" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">フロロカーボンライン →</a>
+<span style="font-size:0.82em;color:#475569">ティペットやリーダーの素材に最適。感度が高く根ズレにも強いフロロカーボンです。</span>
+</div>
+
 <h3>フライ（毛鉤）</h3>
 <p>大きく分けてドライフライ（水面に浮くタイプ）、ニンフ（水中を流すタイプ）、ウェットフライ（水中を泳がせるタイプ）、ストリーマー（小魚を模したタイプ）の4種類。初心者はドライフライの#14〜18エルクヘアカディスやアダムスから始めるのがおすすめです。</p>
 
@@ -257,8 +329,20 @@ export const blogPosts: BlogPost[] = [
 <h3>ライン</h3>
 <p>スピニングにはフロロカーボン4〜6lbが基本。ベイトにはフロロ10〜14lb。フロロカーボンは水中で見えにくく、感度も良いためバス釣りに最適です。PEラインを使う場合はリーダーを結びます。</p>
 
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4s45H0i" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">東レ PEライン（道糸） →</a>
+<span style="font-size:0.82em;color:#475569">感度と強度に優れた東レ製PEライン。パワーフィネスやスピニングPEの道糸に最適です。</span>
+</div>
+
 <h3>ルアー</h3>
 <p>バス釣りのルアーは大きく「ハードルアー」と「ソフトルアー（ワーム）」に分かれます。初心者が最初に揃えるべきルアーは以下の5つ：(1)4インチストレートワーム（ダウンショットリグ用）、(2)スピナーベイト3/8oz、(3)クランクベイト（シャッド系）、(4)ノーシンカーワーム（センコー系）、(5)バズベイト（夏のトップウォーター用）。</p>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4c9oMcU" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">スナップ（まとめ買い） →</a>
+<span style="font-size:0.82em;color:#475569">ルアーの交換がワンタッチで素早くなる必須小物。まとめ買いが断然お得です。</span>
+</div>
 
 <h2>基本テクニック</h2>
 <h3>ダウンショットリグ</h3>
@@ -320,11 +404,23 @@ export const blogPosts: BlogPost[] = [
 <h3>ショアジギング</h3>
 <p>堤防や磯からメタルジグを投げて青物を狙う釣り。9〜10ftのMH〜Hクラスロッド、4000〜5000番リール、PE1.5〜2号が標準タックル。ジグの重さは20〜60g。夏〜秋がハイシーズン。</p>
 
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4s45H0i" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">東レ PEライン（道糸） →</a>
+<span style="font-size:0.82em;color:#475569">感度と強度に優れた東レ製。ショアジギングやシーバスゲームの道糸に最適です。</span>
+</div>
+
 <h3>シーバスゲーム</h3>
 <p>スズキ（シーバス）をミノーやバイブレーションで狙う釣り。9ftクラスのMLロッド、3000番リール、PE0.8〜1.2号が基本。河口や港湾部が主なフィールドで、夜釣りが特に有効。</p>
 
 <h3>アジング・メバリング</h3>
 <p>極小のジグヘッドとワームでアジやメバルを狙う繊細なライトゲーム。6ft前後のULロッド、1000〜2000番リール、エステルライン0.2〜0.4号。常夜灯のある漁港が好ポイント。</p>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4tKXyzu" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">フロロカーボンライン →</a>
+<span style="font-size:0.82em;color:#475569">アジング・メバリングのリーダーに最適。感度が高く、根ズレにも強い定番ラインです。</span>
+</div>
 
 <h2>淡水のルアー釣り</h2>
 <h3>バスフィッシング</h3>
@@ -335,6 +431,12 @@ export const blogPosts: BlogPost[] = [
 
 <h2>ルアー釣りの基本テクニック</h2>
 <p>(1)ただ巻き：一定速度で巻く基本中の基本。(2)トゥイッチ：竿先を小刻みに動かしてルアーにアクションを付ける。(3)ジャーク：大きくしゃくってルアーを跳ねさせる。(4)リフト&フォール：持ち上げて落とすを繰り返す。(5)デッドスロー：極端にゆっくり巻く。まずはただ巻きから始め、徐々にテクニックの引き出しを増やしていきましょう。</p>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4c9oMcU" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">スナップ（まとめ買い） →</a>
+<span style="font-size:0.82em;color:#475569">ルアー交換がワンタッチで素早くなる便利アイテム。消耗品なのでまとめ買いがお得です。</span>
+</div>
 `,
   },
   {
@@ -359,6 +461,12 @@ export const blogPosts: BlogPost[] = [
 
 <h3>仕掛け</h3>
 <p>天井糸（道糸）0.4〜0.6号、ハリス0.2〜0.4号、目印（毛糸やマーカー）、ガン玉（オモリ）B〜2B、針はヤマメ針5〜7号が基本。エサはブドウ虫、ミミズ、川虫（ヒラタ、クロカワ虫）が定番です。</p>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4tKXyzu" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">フロロカーボンライン →</a>
+<span style="font-size:0.82em;color:#475569">渓流釣りのハリスに最適。透明度が高く魚に警戒されにくいフロロカーボンです。</span>
+</div>
 
 <h2>釣り方の基本</h2>
 <h3>エサ釣り</h3>
@@ -391,6 +499,12 @@ export const blogPosts: BlogPost[] = [
 <h3>氷上穴釣り</h3>
 <p>凍った湖に穴を開けて釣るスタイル。北海道や東北、長野県の高原湖で楽しめます。氷の厚さが15cm以上あることを確認してから入氷。テントを張って暖を取りながら釣る方法が一般的で、まさに冬ならではの非日常体験です。</p>
 
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/3ZOdinM" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">防寒フィッシンググローブ →</a>
+<span style="font-size:0.82em;color:#475569">指先が出せるタイプで繊細なワカサギのアタリも逃さない。氷上釣りの必需品です。</span>
+</div>
+
 <h3>ドーム船</h3>
 <p>暖房完備の屋形船の中から釣るスタイル。防寒着不要で快適にワカサギ釣りが楽しめるため、初心者やファミリーに最適です。山中湖・河口湖・諏訪湖・桧原湖などで営業しています。手ぶらでOKの施設も多く、道具一式レンタル可能。</p>
 
@@ -409,6 +523,12 @@ export const blogPosts: BlogPost[] = [
 
 <h2>釣り方のコツ</h2>
 <p>(1)タナ合わせ：ワカサギの群れがいる水深に仕掛けを合わせる。魚探があると便利。(2)誘い：穂先を2〜3cm小刻みに上下させてエサをアピール。(3)聞きアワセ：ピクピクとアタリが出たら、穂先をゆっくり持ち上げてアワセる。(4)手返し：魚を外したらすぐに仕掛けを落とす。時合いを逃さないスピードが大切。(5)エサ交換：10分に1回はエサを新鮮なものに交換すると食いが良くなります。</p>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/40sdGZ6" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">電熱ベスト（大容量バッテリー付き） →</a>
+<span style="font-size:0.82em;color:#475569">氷上やボートでの長時間釣行も快適。バッテリー付きでじんわり暖かい冬釣りの味方です。</span>
+</div>
 
 <h2>おすすめの湖</h2>
 <p>関東：山中湖・河口湖・相模湖・赤城大沼・榛名湖。東北：桧原湖（福島）・十和田湖（青森）。北海道：阿寒湖・網走湖・朱鞠内湖。信州：諏訪湖・木崎湖・野尻湖。それぞれドーム船やレンタル道具の充実度が異なるので、事前に確認しましょう。</p>
@@ -433,6 +553,18 @@ export const blogPosts: BlogPost[] = [
 
 <h3>レンタルタックル</h3>
 <p>多くの船宿ではレンタルタックル（竿・リール）を用意しています。初めての場合はレンタルで十分。仕掛けとエサは船宿で購入できることが多いですが、事前に確認しましょう。自分の道具を揃える場合、対象魚に応じたタックルが必要になります。</p>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4s45H0i" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">東レ PEライン（道糸） →</a>
+<span style="font-size:0.82em;color:#475569">船釣りの道糸に最適なPEライン。感度が高く深場のアタリもしっかり伝わります。</span>
+</div>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4atW7Om" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">シマノ リール →</a>
+<span style="font-size:0.82em;color:#475569">自分のリールがあればレンタル不要。滑らかな巻き心地で船釣りにも対応するコスパモデルです。</span>
+</div>
 
 <h2>持ち物リスト</h2>
 <p>(1)クーラーボックス（釣った魚を持ち帰るため）。(2)酔い止め薬（乗船30分前に服用）。(3)長靴（デッキは滑りやすい）。(4)防水ジャケット（波しぶきで濡れる）。(5)サングラス・帽子（日差し対策）。(6)タオル2〜3枚。(7)飲み物・軽食。(8)ゴミ袋。</p>
@@ -483,8 +615,22 @@ export const blogPosts: BlogPost[] = [
 <h2>必要な道具一覧と選び方</h2>
 <h3>竿（ロッド）</h3>
 <p>サビキ釣りには<strong>磯竿2〜3号、長さ3.6〜4.5m</strong>が最適です。2号は軽くて扱いやすく、3号はちょい投げにも対応できる汎用性があります。初心者は竿とリールがセットになった「サビキセット」が最もコストパフォーマンスに優れています。価格帯は3,000〜8,000円程度で十分です。</p>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4s4i64m" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">シマノ ロッド（サビキ向け万能竿） →</a>
+<span style="font-size:0.82em;color:#475569">サビキ・ウキ釣り・ちょい投げまで対応する万能竿。初心者のコスパ最優先ならこの1本です。</span>
+</div>
+
 <h3>リール</h3>
 <p>スピニングリール2000〜3000番が適しています。糸付き（ナイロン3号が巻いてあるもの）を選ぶと、ライン購入の手間が省けます。ダイワやシマノの2,000〜4,000円台のモデルで十分な性能があります。</p>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4s1SPaX" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">東レ ナイロンライン（道糸） →</a>
+<span style="font-size:0.82em;color:#475569">視認性が高くアタリが取りやすい。サビキ釣りの道糸に最適なナイロンラインです。</span>
+</div>
+
 <h3>サビキ仕掛け</h3>
 <p>サビキ仕掛けはさまざまな種類がありますが、初心者は<strong>「下カゴ式セット仕掛け」</strong>がおすすめ。カゴ・仕掛け・オモリがセットになっているため、竿に結ぶだけで使えます。針のサイズは以下を目安にしてください。</p>
 <ul>
@@ -495,6 +641,13 @@ export const blogPosts: BlogPost[] = [
 <p>仕掛けの色はピンクスキンがオーソドックスですが、白やハゲ皮（魚皮）のほうが反応が良い日もあります。2〜3種類用意しておくのがベストです。1セット200〜400円の消耗品なので、5セットは持っていきましょう。</p>
 <h3>コマセ（撒き餌）</h3>
 <p>サビキ釣りの生命線がコマセです。冷凍のアミエビブロック（1kg 300〜500円）が最もスタンダード。半日で1〜2kgが目安です。手を汚したくない方には<strong>チューブタイプのコマセ</strong>が人気で、常温保存できて絞り出すだけなので衛生的です。</p>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4c6gaUn" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">マルキュー アミ姫（チューブタイプコマセ） →</a>
+<span style="font-size:0.82em;color:#475569">手が汚れない・においが少ない・常温保存OK。初心者やファミリーに大人気のコマセです。</span>
+</div>
+
 <h3>その他の必需品</h3>
 <ul>
 <li><strong>水汲みバケツ</strong>（ロープ付き折りたたみ式）：手洗い、魚の一時保管、釣り場掃除に必須</li>
@@ -606,6 +759,12 @@ export const blogPosts: BlogPost[] = [
 <p>堤防釣りで最初に買うべきは<strong>磯竿2〜3号（3.6〜4.5m）＋スピニングリール2500番のセット</strong>です。セット価格は3,000〜8,000円。メーカー品（ダイワ・シマノ）のセットなら品質も安心です。3号であればサビキ・ちょい投げ・ウキ釣りと堤防の三大釣法すべてに対応できます。</p>
 <p>「何号を選べばいいかわからない」という方は、迷わず3号を選んでください。2号は柔らかくて繊細な釣りに向いていますが、初心者には少し扱いにくい場面があります。3号なら万能です。</p>
 
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4s4i64m" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">シマノ ロッド（堤防向け万能竿） →</a>
+<span style="font-size:0.82em;color:#475569">サビキ・ちょい投げ・ウキ釣りの三大釣法すべてに対応。最初の1本にぴったりです。</span>
+</div>
+
 <h3>ライン（糸）</h3>
 <p>リールに糸が付属していない場合は、<strong>ナイロン3号（150m巻き）</strong>を購入しましょう。ナイロンラインは伸びがあって切れにくく、初心者に最も扱いやすい素材です。PEラインはより高感度ですが、ライントラブルが起きやすいので慣れてからにしましょう。</p>
 
@@ -636,6 +795,12 @@ export const blogPosts: BlogPost[] = [
 <li>アタリ（ピクピクと竿先が揺れる）があったら巻き上げる</li>
 </ol>
 <p>ターゲット：アジ、サバ、イワシ、サッパなど。特に6〜10月がシーズンです。<a href="/blog/sabiki-tsuri-kanzen-guide-2026">サビキ釣り完全ガイド</a>で詳しいテクニックを解説しています。</p>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/4c6gaUn" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">マルキュー アミ姫（チューブタイプコマセ） →</a>
+<span style="font-size:0.82em;color:#475569">サビキ釣りの必須アイテム。チューブ式で手が汚れず、初心者やファミリーに最適です。</span>
+</div>
 
 <h3>ちょい投げ - 砂底の魚を狙う</h3>
 <p>ちょい投げは、天秤仕掛けにイソメ（虫エサ）をつけて20〜50m先に軽く投げ、砂底にいるキスやカレイを狙う釣り方です。本格的な投げ釣りと違い、磯竿3号でもできるので特別な道具は不要です。</p>
@@ -693,6 +858,12 @@ export const blogPosts: BlogPost[] = [
 <li>他人の釣り場（場所取り）を侵さない</li>
 </ul>
 <p>マナーについて詳しくは<a href="/blog/tsuriba-manner-guide">釣り場でのマナー完全ガイド</a>をご覧ください。</p>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://a.r10.to/h5iiZA" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">釣りバッグ →</a>
+<span style="font-size:0.82em;color:#475569">道具の持ち運びに便利なフィッシングバッグ。堤防釣りの荷物をまとめて収納できます。</span>
+</div>
 
 <h2>まとめ：まずは一歩踏み出そう</h2>
 <p>堤防釣りは、竿・リール・仕掛け・コマセがあれば今週末にでも始められます。最初はサビキ釣りから始めて、慣れたらちょい投げやウキ釣りに挑戦。釣りの楽しさは「やってみたら意外と簡単だった」と感じるところから始まります。</p>
@@ -779,6 +950,25 @@ export const blogPosts: BlogPost[] = [
 <li><strong>カイロ</strong>：背中と腰に貼るカイロ、ポケットに握るカイロ</li>
 <li><strong>温かい飲み物</strong>：保温ボトルにホットコーヒーやスープを持参</li>
 </ul>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/3ZOdinM" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">防寒フィッシンググローブ →</a>
+<span style="font-size:0.82em;color:#475569">指先が出せるタイプで仕掛け操作もしやすい。冬の海釣りの必需品です。</span>
+</div>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/40sdGZ6" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">電熱ベスト（大容量バッテリー付き） →</a>
+<span style="font-size:0.82em;color:#475569">冬の長時間釣行でも体の芯から暖かい。普段使いもできるデザインです。</span>
+</div>
+
+<div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
+<span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
+<a href="https://amzn.to/3ZMtLc7" target="_blank" rel="noopener noreferrer sponsored" style="font-weight:700;color:#0c4a6e;text-decoration:none;font-size:0.95em">バラクラバ ネックウォーマー →</a>
+<span style="font-size:0.82em;color:#475569">首元からの冷風をシャットアウト。保温性が高く、釣りから普段使いまで活躍します。</span>
+</div>
+
 <p>防寒装備については<a href="/blog/fuyu-teibouzuri-sakana-boukan">冬の堤防釣りで釣れる魚と防寒対策</a>で詳しく解説しています。</p>
 
 <h2>まとめ：冬の海釣りで特別な一匹を</h2>

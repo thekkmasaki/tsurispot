@@ -45,12 +45,15 @@ const breadcrumbJsonLd = {
   ],
 };
 
-// 釣れやすい順ソート（初心者向け→中級→上級、同難易度内は人気順）
-function sortByEase<T extends { difficulty: string; popularity?: number }>(list: T[]): T[] {
+// 釣れやすい順ソート（難易度→スポット数→人気順）
+function sortByEase<T extends { difficulty: string; popularity?: number; spots: unknown[] }>(list: T[]): T[] {
   const diffOrder: Record<string, number> = { beginner: 0, intermediate: 1, advanced: 2 };
   return [...list].sort((a, b) => {
     const dDiff = (diffOrder[a.difficulty] ?? 2) - (diffOrder[b.difficulty] ?? 2);
     if (dDiff !== 0) return dDiff;
+    // スポット数が多い＝釣れる場所が多い＝釣りやすい
+    const spotDiff = (b.spots?.length ?? 0) - (a.spots?.length ?? 0);
+    if (spotDiff !== 0) return spotDiff;
     return (a.popularity ?? 999) - (b.popularity ?? 999);
   });
 }
@@ -87,7 +90,7 @@ function FishListContent() {
           </h1>
         </div>
         <p className="text-sm text-muted-foreground">
-          釣りで狙える魚{fishSpecies.length}種を人気順に紹介。タップして詳しい情報を見よう。
+          釣りで狙える魚{fishSpecies.length}種を釣れやすい順に紹介。タップして詳しい情報を見よう。
         </p>
       </div>
 

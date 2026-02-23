@@ -27,6 +27,7 @@ export interface FishingSpot {
   hasRentalRod: boolean;
   rentalDetail?: string;
   mainImageUrl: string;
+  imageAttribution?: string;
   images: string[];
   rating: number;
   reviewCount: number;

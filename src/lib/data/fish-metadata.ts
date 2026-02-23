@@ -95,8 +95,10 @@ export const fishMetadata: Record<string, FishMeta> = {
   hatahata:       { aliases: ["鰰", "カミナリウオ", "シロハタ"], popularity: 42 },
   // ワタリガニ: 正式名はガザミ
   watarigani:     { aliases: ["ガザミ", "渡蟹", "タイワンガザミ"], popularity: 43 },
+  // ノコギリガザミ: マッドクラブ、マングローブガニ
+  nokogirigazami: { aliases: ["鋸蝤蛑", "マッドクラブ", "マングローブガニ", "ドウマンガニ", "エガニ"], popularity: 44 },
   // コショウダイ: 九州でコロダイ
-  koshoudai:      { aliases: ["胡椒鯛", "コロダイ"], popularity: 44 },
+  koshoudai:      { aliases: ["胡椒鯛", "コロダイ"], popularity: 45 },
   // ベラ: 関西でキュウセン、九州でギザミ
   bera:           { aliases: ["キュウセン", "倍良", "ギザミ", "ササノハベラ"], popularity: 45 },
   // ウミタナゴ: 関東でタナゴ

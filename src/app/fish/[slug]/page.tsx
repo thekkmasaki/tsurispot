@@ -132,6 +132,66 @@ export default async function FishDetailPage({ params }: PageProps) {
     ],
   };
 
+  // FAQ JSON-LD for fish page
+  const fishFaqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: `${fish.name}はいつ釣れますか？`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: fish.peakMonths.length > 0
+            ? `${fish.name}のベストシーズンは${fish.peakMonths.map(m => `${m}月`).join("・")}です。${fish.seasonMonths.length > 0 ? `シーズン全体では${fish.seasonMonths[0]}月〜${fish.seasonMonths[fish.seasonMonths.length - 1]}月に釣ることができます。` : ""}`
+            : `${fish.name}は${fish.seasonMonths.map(m => `${m}月`).join("・")}に釣ることができます。`,
+        },
+      },
+      ...(fish.fishingMethods && fish.fishingMethods.length > 0
+        ? [{
+            "@type": "Question" as const,
+            name: `${fish.name}の釣り方は？`,
+            acceptedAnswer: {
+              "@type": "Answer" as const,
+              text: `${fish.name}は${fish.fishingMethods.map(m => m.methodName).join("、")}で釣ることができます。${fish.fishingMethods[0] ? `${fish.fishingMethods[0].methodName}では${fish.fishingMethods[0].tackle.rod}と${fish.fishingMethods[0].tackle.reel}を使用します。` : ""}`,
+            },
+          }]
+        : []),
+      ...(fish.spots.length > 0
+        ? [{
+            "@type": "Question" as const,
+            name: `${fish.name}はどこで釣れますか？`,
+            acceptedAnswer: {
+              "@type": "Answer" as const,
+              text: `${fish.name}は${fish.spots.slice(0, 3).map(s => s.name).join("、")}${fish.spots.length > 3 ? `など全国${fish.spots.length}箇所` : ""}で釣ることができます。`,
+            },
+          }]
+        : []),
+      {
+        "@type": "Question",
+        name: `${fish.name}は初心者でも釣れますか？`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: fish.difficulty === "beginner"
+            ? `はい、${fish.name}は初心者でも比較的簡単に釣れる魚です。${fish.fishingMethods?.[0] ? `${fish.fishingMethods[0].methodName}がおすすめの釣り方です。` : ""}`
+            : fish.difficulty === "intermediate"
+              ? `${fish.name}は中級者向けの魚ですが、適切な仕掛けと時期を選べば初心者でもチャレンジできます。`
+              : `${fish.name}は上級者向けの魚です。ある程度の経験を積んでから挑戦することをおすすめします。`,
+        },
+      },
+      ...(fish.cookingTips.length > 0
+        ? [{
+            "@type": "Question" as const,
+            name: `${fish.name}の食べ方・おすすめ料理は？`,
+            acceptedAnswer: {
+              "@type": "Answer" as const,
+              text: `${fish.name}のおすすめの食べ方は${fish.cookingTips.join("、")}です。${fish.tasteRating >= 4 ? "味の評価が高く、食べて美味しい魚です。" : fish.tasteRating >= 3 ? "美味しく食べられる魚です。" : ""}`,
+            },
+          }]
+        : []),
+    ],
+  };
+
   // Co-occurring fish (よく一緒に釣れる魚)
   const coOccurringFish = getCoOccurringFish(fish.slug, 8);
 
@@ -154,6 +214,10 @@ export default async function FishDetailPage({ params }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(fishFaqJsonLd) }}
       />
       {/* パンくず */}
       <Breadcrumb
@@ -338,7 +402,7 @@ export default async function FishDetailPage({ params }: PageProps) {
       <section className="mb-6 sm:mb-8">
         <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
           <Calendar className="size-5 text-primary" />
-          釣れる時期
+          {fish.name}が釣れる時期・シーズンカレンダー
         </h2>
         <Card className="gap-0 py-0">
           <CardContent className="p-4 sm:p-6">
@@ -363,8 +427,14 @@ export default async function FishDetailPage({ params }: PageProps) {
         <section className="mb-6 sm:mb-8">
           <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
             <Fish className="size-5 text-primary" />
-            この魚の狙い方
+            {fish.name}の釣り方・仕掛け
           </h2>
+          <p className="text-sm text-muted-foreground mb-4">
+            {fish.name}は{fish.fishingMethods.map(m => m.methodName).join("、")}などの方法で狙えます。
+            {fish.difficulty === "beginner" ? "初心者でも比較的簡単に釣れる魚です。" :
+             fish.difficulty === "intermediate" ? "基本的な釣りの知識があれば狙える魚です。" :
+             "経験を積んだ釣り人向けのターゲットです。"}
+          </p>
           <div className="space-y-4 sm:space-y-6">
             {fish.fishingMethods.map((method, index) => {
               const difficultyBadge =
