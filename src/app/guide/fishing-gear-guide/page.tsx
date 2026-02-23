@@ -129,6 +129,249 @@ function SectionCard({
   );
 }
 
+function SpinningReelDiagram() {
+  return (
+    <div className="my-6">
+      <h3 className="mb-3 text-center text-sm font-bold text-foreground">スピニングリールの各部名称</h3>
+      <svg
+        viewBox="0 0 600 380"
+        width="100%"
+        style={{ maxWidth: 600 }}
+        aria-label="スピニングリールの各部名称図。ドラグノブ、ベール、ハンドル、スプール、ラインローラーの位置を番号付きで表示"
+        className="mx-auto"
+      >
+        <rect x="0" y="0" width="600" height="380" rx="12" fill="#F9FAFB" />
+
+        {/* リール本体の簡易図 */}
+        {/* ボディ */}
+        <ellipse cx="300" cy="180" rx="80" ry="100" fill="#E5E7EB" stroke="#9CA3AF" strokeWidth="2" />
+        {/* スプール */}
+        <ellipse cx="300" cy="180" rx="65" ry="85" fill="#D1D5DB" stroke="#9CA3AF" strokeWidth="1.5" />
+        {/* スプール中央 */}
+        <ellipse cx="300" cy="180" rx="30" ry="40" fill="#F3F4F6" stroke="#9CA3AF" strokeWidth="1" />
+
+        {/* ドラグノブ */}
+        <circle cx="300" cy="85" r="20" fill="#6B7280" stroke="#4B5563" strokeWidth="2" />
+        <circle cx="300" cy="85" r="8" fill="#9CA3AF" />
+
+        {/* ベール */}
+        <path d="M 235 130 Q 220 180 235 230" fill="none" stroke="#3B82F6" strokeWidth="3" />
+        {/* ベール先端 */}
+        <circle cx="235" cy="130" r="5" fill="#3B82F6" />
+
+        {/* ラインローラー */}
+        <circle cx="235" cy="230" r="8" fill="#60A5FA" stroke="#3B82F6" strokeWidth="1.5" />
+
+        {/* ハンドル */}
+        <line x1="380" y1="200" x2="450" y2="200" stroke="#6B7280" strokeWidth="4" />
+        <circle cx="460" cy="200" r="14" fill="#4B5563" stroke="#374151" strokeWidth="2" />
+        <circle cx="460" cy="200" r="6" fill="#6B7280" />
+
+        {/* 脚(フット) */}
+        <rect x="285" y="280" width="30" height="50" rx="4" fill="#9CA3AF" stroke="#6B7280" strokeWidth="1.5" />
+
+        {/* ラベル引き出し線と番号 */}
+        {/* 1. ドラグノブ */}
+        <line x1="320" y1="85" x2="430" y2="50" stroke="#EF4444" strokeWidth="1.5" />
+        <circle cx="435" cy="47" r="12" fill="#EF4444" />
+        <text x="435" y="52" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="bold">1</text>
+        <text x="460" y="52" fill="#374151" fontSize="12" fontWeight="bold">ドラグノブ</text>
+
+        {/* 2. スプール */}
+        <line x1="365" y1="160" x2="460" y2="120" stroke="#3B82F6" strokeWidth="1.5" />
+        <circle cx="465" cy="117" r="12" fill="#3B82F6" />
+        <text x="465" y="122" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="bold">2</text>
+        <text x="490" y="122" fill="#374151" fontSize="12" fontWeight="bold">スプール</text>
+
+        {/* 3. ベール */}
+        <line x1="220" y1="160" x2="100" y2="120" stroke="#22C55E" strokeWidth="1.5" />
+        <circle cx="95" cy="117" r="12" fill="#22C55E" />
+        <text x="95" y="122" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="bold">3</text>
+        <text x="30" y="100" fill="#374151" fontSize="12" fontWeight="bold">ベール</text>
+
+        {/* 4. ラインローラー */}
+        <line x1="227" y1="230" x2="100" y2="260" stroke="#F59E0B" strokeWidth="1.5" />
+        <circle cx="95" cy="263" r="12" fill="#F59E0B" />
+        <text x="95" y="268" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="bold">4</text>
+        <text x="10" y="245" fill="#374151" fontSize="12" fontWeight="bold">ラインローラー</text>
+
+        {/* 5. ハンドル */}
+        <line x1="460" y1="214" x2="480" y2="260" stroke="#8B5CF6" strokeWidth="1.5" />
+        <circle cx="483" cy="263" r="12" fill="#8B5CF6" />
+        <text x="483" y="268" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="bold">5</text>
+        <text x="440" y="290" fill="#374151" fontSize="12" fontWeight="bold">ハンドル</text>
+
+        {/* 6. フット */}
+        <line x1="315" y1="310" x2="400" y2="330" stroke="#6B7280" strokeWidth="1.5" />
+        <circle cx="405" cy="333" r="12" fill="#6B7280" />
+        <text x="405" y="338" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="bold">6</text>
+        <text x="425" y="338" fill="#374151" fontSize="12" fontWeight="bold">フット（脚）</text>
+
+        {/* 補足 */}
+        <text x="300" y="370" textAnchor="middle" fill="#6B7280" fontSize="10">初心者には2500番のスピニングリールがおすすめ</text>
+      </svg>
+    </div>
+  );
+}
+
+function RodPartsDiagram() {
+  return (
+    <div className="my-6">
+      <h3 className="mb-3 text-center text-sm font-bold text-foreground">竿（ロッド）の各部名称</h3>
+      <svg
+        viewBox="0 0 680 200"
+        width="100%"
+        style={{ maxWidth: 680 }}
+        aria-label="竿の各部名称図。ティップ、穂先ガイド、ガイド、ブランクス、リールシート、グリップの位置を番号付きで表示"
+        className="mx-auto"
+      >
+        <rect x="0" y="0" width="680" height="200" rx="12" fill="#F9FAFB" />
+
+        {/* 竿本体 */}
+        {/* グリップ部分 */}
+        <rect x="530" y="88" width="130" height="24" rx="6" fill="#8B7355" stroke="#6B5B3E" strokeWidth="1.5" />
+        {/* リールシート */}
+        <rect x="480" y="85" width="50" height="30" rx="4" fill="#6B7280" stroke="#4B5563" strokeWidth="1.5" />
+        {/* ブランクス（竿の本体） */}
+        <line x1="480" y1="100" x2="30" y2="100" stroke="#4B5563" strokeWidth="3" />
+        {/* ティップ（先端）は細く */}
+        <line x1="30" y1="100" x2="15" y2="100" stroke="#4B5563" strokeWidth="1.5" />
+
+        {/* ガイド */}
+        <rect x="60" y="90" width="6" height="20" rx="2" fill="#3B82F6" />
+        <circle cx="63" cy="88" r="5" fill="none" stroke="#3B82F6" strokeWidth="1.5" />
+
+        <rect x="140" y="90" width="6" height="20" rx="2" fill="#3B82F6" />
+        <circle cx="143" cy="88" r="6" fill="none" stroke="#3B82F6" strokeWidth="1.5" />
+
+        <rect x="230" y="90" width="6" height="20" rx="2" fill="#3B82F6" />
+        <circle cx="233" cy="88" r="7" fill="none" stroke="#3B82F6" strokeWidth="1.5" />
+
+        <rect x="330" y="88" width="8" height="24" rx="2" fill="#3B82F6" />
+        <circle cx="334" cy="85" r="8" fill="none" stroke="#3B82F6" strokeWidth="1.5" />
+
+        <rect x="420" y="86" width="8" height="28" rx="2" fill="#3B82F6" />
+        <circle cx="424" cy="83" r="9" fill="none" stroke="#3B82F6" strokeWidth="1.5" />
+
+        {/* 穂先ガイド（トップガイド） */}
+        <circle cx="15" cy="100" r="4" fill="#EF4444" stroke="#EF4444" strokeWidth="1" />
+
+        {/* ラベル - 上部 */}
+        {/* 1. ティップ（穂先） */}
+        <line x1="15" y1="96" x2="15" y2="40" stroke="#EF4444" strokeWidth="1.5" />
+        <circle cx="15" cy="35" r="10" fill="#EF4444" />
+        <text x="15" y="40" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontWeight="bold">1</text>
+        <text x="15" y="25" textAnchor="middle" fill="#374151" fontSize="11" fontWeight="bold">ティップ</text>
+
+        {/* 2. ガイド */}
+        <line x1="233" y1="85" x2="233" y2="40" stroke="#3B82F6" strokeWidth="1.5" />
+        <circle cx="233" cy="35" r="10" fill="#3B82F6" />
+        <text x="233" y="40" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontWeight="bold">2</text>
+        <text x="233" y="25" textAnchor="middle" fill="#374151" fontSize="11" fontWeight="bold">ガイド</text>
+
+        {/* 3. ブランクス */}
+        <line x1="380" y1="104" x2="380" y2="155" stroke="#22C55E" strokeWidth="1.5" />
+        <circle cx="380" cy="160" r="10" fill="#22C55E" />
+        <text x="380" y="165" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontWeight="bold">3</text>
+        <text x="380" y="180" textAnchor="middle" fill="#374151" fontSize="11" fontWeight="bold">ブランクス（竿本体）</text>
+
+        {/* ラベル - 下部 */}
+        {/* 4. リールシート */}
+        <line x1="505" y1="115" x2="505" y2="155" stroke="#F59E0B" strokeWidth="1.5" />
+        <circle cx="505" cy="160" r="10" fill="#F59E0B" />
+        <text x="505" y="165" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontWeight="bold">4</text>
+        <text x="505" y="180" textAnchor="middle" fill="#374151" fontSize="11" fontWeight="bold">リールシート</text>
+
+        {/* 5. グリップ(バット) */}
+        <line x1="595" y1="84" x2="595" y2="40" stroke="#8B5CF6" strokeWidth="1.5" />
+        <circle cx="595" cy="35" r="10" fill="#8B5CF6" />
+        <text x="595" y="40" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontWeight="bold">5</text>
+        <text x="620" y="25" textAnchor="middle" fill="#374151" fontSize="11" fontWeight="bold">グリップ</text>
+      </svg>
+    </div>
+  );
+}
+
+function RigPartsDiagram() {
+  return (
+    <div className="my-6">
+      <h3 className="mb-3 text-center text-sm font-bold text-foreground">仕掛けの基本パーツ</h3>
+      <svg
+        viewBox="0 0 680 280"
+        width="100%"
+        style={{ maxWidth: 680 }}
+        aria-label="仕掛けの基本パーツ図。サルカン、スナップ、ハリス、針、オモリ、ウキの個別イラスト"
+        className="mx-auto"
+      >
+        <rect x="0" y="0" width="680" height="280" rx="12" fill="#F9FAFB" />
+
+        {/* サルカン */}
+        <rect x="20" y="20" width="100" height="180" rx="8" fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="1.5" />
+        <circle cx="70" cy="75" r="10" fill="none" stroke="#6B7280" strokeWidth="2" />
+        <rect x="65" y="85" width="10" height="12" rx="2" fill="#6B7280" />
+        <circle cx="70" cy="107" r="10" fill="none" stroke="#6B7280" strokeWidth="2" />
+        <text x="70" y="140" textAnchor="middle" fill="#374151" fontSize="12" fontWeight="bold">サルカン</text>
+        <text x="70" y="156" textAnchor="middle" fill="#6B7280" fontSize="9">糸と糸を</text>
+        <text x="70" y="168" textAnchor="middle" fill="#6B7280" fontSize="9">つなぐ金具</text>
+        <text x="70" y="190" textAnchor="middle" fill="#3B82F6" fontSize="10">100〜300円</text>
+
+        {/* スナップ */}
+        <rect x="130" y="20" width="100" height="180" rx="8" fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="1.5" />
+        <circle cx="180" cy="60" r="8" fill="none" stroke="#6B7280" strokeWidth="2" />
+        <path d="M 176 68 L 176 100 Q 176 108 184 108 L 184 68" fill="none" stroke="#6B7280" strokeWidth="2" />
+        <text x="180" y="140" textAnchor="middle" fill="#374151" fontSize="12" fontWeight="bold">スナップ</text>
+        <text x="180" y="156" textAnchor="middle" fill="#6B7280" fontSize="9">仕掛けの</text>
+        <text x="180" y="168" textAnchor="middle" fill="#6B7280" fontSize="9">着脱に使用</text>
+        <text x="180" y="190" textAnchor="middle" fill="#3B82F6" fontSize="10">100〜300円</text>
+
+        {/* ハリス */}
+        <rect x="240" y="20" width="100" height="180" rx="8" fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="1.5" />
+        <line x1="290" y1="50" x2="290" y2="110" stroke="#60A5FA" strokeWidth="1.5" strokeDasharray="4" />
+        <circle cx="290" cy="50" r="3" fill="#60A5FA" />
+        <circle cx="290" cy="110" r="3" fill="#60A5FA" />
+        <text x="290" y="140" textAnchor="middle" fill="#374151" fontSize="12" fontWeight="bold">ハリス</text>
+        <text x="290" y="156" textAnchor="middle" fill="#6B7280" fontSize="9">針に結ぶ</text>
+        <text x="290" y="168" textAnchor="middle" fill="#6B7280" fontSize="9">細い糸</text>
+        <text x="290" y="190" textAnchor="middle" fill="#3B82F6" fontSize="10">300〜800円</text>
+
+        {/* 針 */}
+        <rect x="350" y="20" width="100" height="180" rx="8" fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="1.5" />
+        <line x1="400" y1="50" x2="400" y2="80" stroke="#6B7280" strokeWidth="2" />
+        <path d="M 400 80 Q 400 100 388 100 Q 376 100 376 85 L 376 75" fill="none" stroke="#6B7280" strokeWidth="2" />
+        <line x1="376" y1="75" x2="372" y2="70" stroke="#6B7280" strokeWidth="2" />
+        <text x="400" y="140" textAnchor="middle" fill="#374151" fontSize="12" fontWeight="bold">針（フック）</text>
+        <text x="400" y="156" textAnchor="middle" fill="#6B7280" fontSize="9">魚を掛ける</text>
+        <text x="400" y="168" textAnchor="middle" fill="#6B7280" fontSize="9">号数で大きさ選択</text>
+        <text x="400" y="190" textAnchor="middle" fill="#3B82F6" fontSize="10">200〜500円</text>
+
+        {/* オモリ */}
+        <rect x="460" y="20" width="100" height="180" rx="8" fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="1.5" />
+        <line x1="510" y1="50" x2="510" y2="65" stroke="#6B7280" strokeWidth="1.5" />
+        <ellipse cx="510" cy="85" rx="15" ry="20" fill="#9CA3AF" stroke="#6B7280" strokeWidth="1.5" />
+        <text x="510" y="140" textAnchor="middle" fill="#374151" fontSize="12" fontWeight="bold">オモリ</text>
+        <text x="510" y="156" textAnchor="middle" fill="#6B7280" fontSize="9">仕掛けを</text>
+        <text x="510" y="168" textAnchor="middle" fill="#6B7280" fontSize="9">沈める重り</text>
+        <text x="510" y="190" textAnchor="middle" fill="#3B82F6" fontSize="10">100〜500円</text>
+
+        {/* ウキ */}
+        <rect x="570" y="20" width="100" height="180" rx="8" fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="1.5" />
+        <line x1="620" y1="48" x2="620" y2="60" stroke="#6B7280" strokeWidth="1.5" />
+        <ellipse cx="620" cy="80" rx="12" ry="22" fill="#EF4444" stroke="#DC2626" strokeWidth="1.5" />
+        <line x1="620" y1="102" x2="620" y2="112" stroke="#6B7280" strokeWidth="1.5" />
+        <text x="620" y="140" textAnchor="middle" fill="#374151" fontSize="12" fontWeight="bold">ウキ</text>
+        <text x="620" y="156" textAnchor="middle" fill="#6B7280" fontSize="9">アタリを</text>
+        <text x="620" y="168" textAnchor="middle" fill="#6B7280" fontSize="9">目で確認</text>
+        <text x="620" y="190" textAnchor="middle" fill="#3B82F6" fontSize="10">200〜800円</text>
+
+        {/* 下部の補足 */}
+        <rect x="80" y="220" width="520" height="45" rx="8" fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="1" />
+        <text x="340" y="240" textAnchor="middle" fill="#374151" fontSize="11" fontWeight="bold">初心者は「完成仕掛け」を買えば全パーツがセットになっています</text>
+        <text x="340" y="256" textAnchor="middle" fill="#6B7280" fontSize="10">サビキ仕掛けなら1セット200〜500円で購入可能</text>
+      </svg>
+    </div>
+  );
+}
+
 export default function FishingGearGuidePage() {
   return (
     <>
@@ -217,6 +460,8 @@ export default function FishingGearGuidePage() {
             </div>
           </SectionCard>
 
+          <RodPartsDiagram />
+
           {/* 2. リールの選び方 */}
           <SectionCard id="reel" title="リールの選び方" icon={Wrench}>
             <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
@@ -248,6 +493,8 @@ export default function FishingGearGuidePage() {
               最初は「2500番のスピニングリール（糸付き）」を選べば間違いありません。糸（ナイロン3号）があらかじめ巻いてあるモデルなら、別途ラインを買う必要もなく手軽です。
             </div>
           </SectionCard>
+
+          <SpinningReelDiagram />
 
           {/* 3. ラインの選び方 */}
           <SectionCard id="line" title="ライン（釣り糸）の選び方" icon={Wrench}>
@@ -315,6 +562,8 @@ export default function FishingGearGuidePage() {
               ))}
             </div>
           </SectionCard>
+
+          <RigPartsDiagram />
 
           {/* 5. 小物・アクセサリー */}
           <SectionCard id="accessories" title="あると便利な小物・アクセサリー" icon={Package}>

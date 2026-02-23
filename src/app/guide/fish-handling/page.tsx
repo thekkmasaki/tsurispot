@@ -46,6 +46,177 @@ const breadcrumbJsonLd = {
   ],
 };
 
+/* --- SVG図解コンポーネント --- */
+
+function ShimeMethodsDiagram() {
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 660 280"
+        width="100%"
+        style={{ maxWidth: 660 }}
+        aria-label="魚の締め方3種類：氷締め、脳締め、神経締めの比較図"
+        role="img"
+      >
+        <rect x="0" y="0" width="660" height="280" rx="12" fill="#EFF6FF" />
+        <text x="330" y="26" textAnchor="middle" fontSize="14" fill="#1E293B" fontWeight="bold">魚の締め方 3種類</text>
+
+        {/* 1. 氷締め */}
+        <rect x="15" y="40" width="200" height="225" rx="10" fill="white" stroke="#3B82F6" strokeWidth="2" />
+        <rect x="15" y="40" width="200" height="32" rx="10" fill="#3B82F6" />
+        <rect x="15" y="58" width="200" height="14" fill="#3B82F6" />
+        <text x="115" y="61" textAnchor="middle" fontSize="13" fill="white" fontWeight="bold">1. 氷締め</text>
+        {/* 難易度 */}
+        <rect x="40" y="82" width="60" height="18" rx="9" fill="#DCFCE7" />
+        <text x="70" y="94" textAnchor="middle" fontSize="9" fill="#16A34A" fontWeight="bold">初心者向け</text>
+        {/* クーラーボックスの簡易図 */}
+        <rect x="55" y="110" width="120" height="60" rx="5" fill="#E0F2FE" stroke="#3B82F6" strokeWidth="1.5" />
+        {/* 氷 */}
+        <rect x="65" y="120" width="20" height="15" rx="3" fill="#93C5FD" opacity="0.7" />
+        <rect x="135" y="125" width="20" height="15" rx="3" fill="#93C5FD" opacity="0.7" />
+        {/* 海水 */}
+        <line x1="60" y1="150" x2="170" y2="150" stroke="#60A5FA" strokeWidth="1" strokeDasharray="4 2" />
+        <text x="115" y="148" textAnchor="middle" fontSize="8" fill="#3B82F6">海水</text>
+        {/* 魚 */}
+        <ellipse cx="115" cy="140" rx="25" ry="8" fill="#94A3B8" opacity="0.5" />
+        <text x="115" y="143" textAnchor="middle" fontSize="7" fill="#475569">魚</text>
+
+        <text x="115" y="192" textAnchor="middle" fontSize="10" fill="#334155">氷+海水に入れるだけ</text>
+        <text x="115" y="206" textAnchor="middle" fontSize="10" fill="#334155">小型魚（20cm以下）に</text>
+        <text x="115" y="230" textAnchor="middle" fontSize="10" fill="#3B82F6" fontWeight="bold">最も簡単！</text>
+        <text x="115" y="250" textAnchor="middle" fontSize="9" fill="#64748B">対象：アジ・イワシ・サバ</text>
+
+        {/* 2. 脳締め */}
+        <rect x="230" y="40" width="200" height="225" rx="10" fill="white" stroke="#F59E0B" strokeWidth="2" />
+        <rect x="230" y="40" width="200" height="32" rx="10" fill="#F59E0B" />
+        <rect x="230" y="58" width="200" height="14" fill="#F59E0B" />
+        <text x="330" y="61" textAnchor="middle" fontSize="13" fill="white" fontWeight="bold">2. 脳締め</text>
+        {/* 難易度 */}
+        <rect x="255" y="82" width="60" height="18" rx="9" fill="#FEF3C7" />
+        <text x="285" y="94" textAnchor="middle" fontSize="9" fill="#D97706" fontWeight="bold">中級者向け</text>
+        {/* 魚の頭の簡易図 */}
+        <ellipse cx="330" cy="135" rx="45" ry="30" fill="#E2E8F0" stroke="#94A3B8" strokeWidth="1.5" />
+        {/* 目 */}
+        <circle cx="350" cy="128" r="5" fill="white" stroke="#475569" strokeWidth="1" />
+        <circle cx="350" cy="128" r="2" fill="#475569" />
+        {/* 脳の位置（ターゲット） */}
+        <circle cx="335" cy="120" r="8" fill="#EF4444" opacity="0.2" stroke="#EF4444" strokeWidth="1" strokeDasharray="2 2" />
+        {/* ピック */}
+        <line x1="335" y1="100" x2="335" y2="115" stroke="#EF4444" strokeWidth="2" markerEnd="url(#arrowShime)" />
+        <text x="335" y="96" textAnchor="middle" fontSize="8" fill="#EF4444" fontWeight="bold">ピック</text>
+
+        <defs>
+          <marker id="arrowShime" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#EF4444" />
+          </marker>
+        </defs>
+
+        <text x="330" y="192" textAnchor="middle" fontSize="10" fill="#334155">目の後方を突いて即死</text>
+        <text x="330" y="206" textAnchor="middle" fontSize="10" fill="#334155">中型魚（20〜50cm）に</text>
+        <text x="330" y="230" textAnchor="middle" fontSize="10" fill="#F59E0B" fontWeight="bold">刺身の味が段違い！</text>
+        <text x="330" y="250" textAnchor="middle" fontSize="9" fill="#64748B">対象：マダイ・クロダイ・シーバス</text>
+
+        {/* 3. 神経締め */}
+        <rect x="445" y="40" width="200" height="225" rx="10" fill="white" stroke="#EF4444" strokeWidth="2" />
+        <rect x="445" y="40" width="200" height="32" rx="10" fill="#EF4444" />
+        <rect x="445" y="58" width="200" height="14" fill="#EF4444" />
+        <text x="545" y="61" textAnchor="middle" fontSize="13" fill="white" fontWeight="bold">3. 神経締め</text>
+        {/* 難易度 */}
+        <rect x="470" y="82" width="60" height="18" rx="9" fill="#FEE2E2" />
+        <text x="500" y="94" textAnchor="middle" fontSize="9" fill="#DC2626" fontWeight="bold">上級者向け</text>
+        {/* 魚の側面（簡易） */}
+        <ellipse cx="545" cy="135" rx="55" ry="22" fill="#E2E8F0" stroke="#94A3B8" strokeWidth="1.5" />
+        {/* 背骨ライン */}
+        <line x1="495" y1="130" x2="595" y2="130" stroke="#94A3B8" strokeWidth="1" strokeDasharray="3 2" />
+        {/* 神経ワイヤー */}
+        <line x1="498" y1="126" x2="590" y2="126" stroke="#EF4444" strokeWidth="2" strokeDasharray="4 3" />
+        <text x="545" y="123" textAnchor="middle" fontSize="7" fill="#EF4444" fontWeight="bold">ワイヤー</text>
+        {/* 目 */}
+        <circle cx="505" cy="132" r="4" fill="white" stroke="#475569" strokeWidth="1" />
+        <circle cx="505" cy="132" r="1.5" fill="#475569" />
+
+        <text x="545" y="192" textAnchor="middle" fontSize="10" fill="#334155">脊髄にワイヤーを通す</text>
+        <text x="545" y="206" textAnchor="middle" fontSize="10" fill="#334155">大型魚（50cm以上）に</text>
+        <text x="545" y="230" textAnchor="middle" fontSize="10" fill="#EF4444" fontWeight="bold">プロ級の鮮度！</text>
+        <text x="545" y="250" textAnchor="middle" fontSize="9" fill="#64748B">対象：ブリ・ヒラマサ・マグロ</text>
+      </svg>
+    </div>
+  );
+}
+
+function CoolerBoxDiagram() {
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 500 300"
+        width="100%"
+        style={{ maxWidth: 500 }}
+        aria-label="クーラーボックスの正しい入れ方：氷→新聞紙→魚→氷の断面図"
+        role="img"
+      >
+        <rect x="0" y="0" width="500" height="300" rx="12" fill="#F9FAFB" />
+        <text x="250" y="26" textAnchor="middle" fontSize="14" fill="#1E293B" fontWeight="bold">クーラーボックスの入れ方（断面図）</text>
+
+        {/* クーラーボックス本体 */}
+        <rect x="80" y="45" width="240" height="210" rx="5" fill="white" stroke="#3B82F6" strokeWidth="3" />
+        {/* フタ */}
+        <rect x="75" y="35" width="250" height="18" rx="5" fill="#3B82F6" stroke="#2563EB" strokeWidth="1.5" />
+        <text x="200" y="49" textAnchor="middle" fontSize="10" fill="white" fontWeight="bold">フタ</text>
+
+        {/* 底の氷層 */}
+        <rect x="85" y="215" width="230" height="35" rx="3" fill="#BFDBFE" stroke="#93C5FD" strokeWidth="1" />
+        <text x="200" y="237" textAnchor="middle" fontSize="11" fill="#2563EB" fontWeight="bold">氷（底）</text>
+
+        {/* 新聞紙（下） */}
+        <rect x="90" y="200" width="220" height="15" rx="2" fill="#FEF3C7" stroke="#F59E0B" strokeWidth="1" strokeDasharray="3 2" />
+        <text x="200" y="211" textAnchor="middle" fontSize="8" fill="#D97706">新聞紙</text>
+
+        {/* 魚層 */}
+        <rect x="90" y="130" width="220" height="70" rx="3" fill="#E2E8F0" opacity="0.5" />
+        {/* 魚の形 */}
+        <ellipse cx="160" cy="155" rx="45" ry="14" fill="#94A3B8" opacity="0.6" />
+        <text x="160" y="159" textAnchor="middle" fontSize="10" fill="#475569" fontWeight="bold">魚</text>
+        <ellipse cx="250" cy="170" rx="40" ry="12" fill="#94A3B8" opacity="0.5" />
+        <text x="250" y="174" textAnchor="middle" fontSize="10" fill="#475569" fontWeight="bold">魚</text>
+
+        {/* 新聞紙（上） */}
+        <rect x="90" y="115" width="220" height="15" rx="2" fill="#FEF3C7" stroke="#F59E0B" strokeWidth="1" strokeDasharray="3 2" />
+        <text x="200" y="126" textAnchor="middle" fontSize="8" fill="#D97706">新聞紙</text>
+
+        {/* 上の氷層 */}
+        <rect x="85" y="60" width="230" height="55" rx="3" fill="#BFDBFE" stroke="#93C5FD" strokeWidth="1" />
+        <text x="200" y="92" textAnchor="middle" fontSize="11" fill="#2563EB" fontWeight="bold">氷（上）</text>
+
+        {/* 右側の説明 */}
+        <g>
+          {/* 引出し線＋ラベル */}
+          <line x1="320" y1="87" x2="350" y2="75" stroke="#94A3B8" strokeWidth="1" />
+          <text x="355" y="72" fontSize="10" fill="#2563EB" fontWeight="bold">1 氷で冷やす</text>
+          <text x="355" y="85" fontSize="9" fill="#64748B">板氷がおすすめ</text>
+
+          <line x1="315" y1="123" x2="350" y2="120" stroke="#94A3B8" strokeWidth="1" />
+          <text x="355" y="118" fontSize="10" fill="#D97706" fontWeight="bold">2 新聞紙で包む</text>
+          <text x="355" y="131" fontSize="9" fill="#64748B">氷焼け防止</text>
+
+          <line x1="315" y1="160" x2="350" y2="160" stroke="#94A3B8" strokeWidth="1" />
+          <text x="355" y="158" fontSize="10" fill="#475569" fontWeight="bold">3 魚を並べる</text>
+          <text x="355" y="171" fontSize="9" fill="#64748B">重ねすぎない</text>
+
+          <line x1="315" y1="207" x2="350" y2="207" stroke="#94A3B8" strokeWidth="1" />
+          <text x="355" y="205" fontSize="10" fill="#D97706" fontWeight="bold">4 新聞紙で覆う</text>
+          <text x="355" y="218" fontSize="9" fill="#64748B">直接氷に触れさせない</text>
+
+          <line x1="320" y1="232" x2="350" y2="245" stroke="#94A3B8" strokeWidth="1" />
+          <text x="355" y="243" fontSize="10" fill="#2563EB" fontWeight="bold">5 底にも氷</text>
+          <text x="355" y="256" fontSize="9" fill="#64748B">上下から冷やす</text>
+        </g>
+
+        <text x="250" y="290" textAnchor="middle" fontSize="10" fill="#64748B">ポイント：魚が直接氷に触れないようにする</text>
+      </svg>
+    </div>
+  );
+}
+
 function SectionCard({
   title,
   icon: Icon,
@@ -121,6 +292,9 @@ export default function FishHandlingGuidePage() {
         </div>
 
         <div className="space-y-6">
+          {/* 締め方3種図 */}
+          <ShimeMethodsDiagram />
+
           {/* 締め方 */}
           <SectionCard title="締め方（脳締め・神経締め）" icon={Scissors}>
             <p className="mb-4 text-sm text-muted-foreground">
@@ -276,6 +450,9 @@ export default function FishHandlingGuidePage() {
               </div>
             </div>
           </SectionCard>
+
+          {/* クーラーボックスの入れ方図 */}
+          <CoolerBoxDiagram />
 
           {/* クーラーボックスの使い方 */}
           <SectionCard title="クーラーボックスの使い方" icon={Snowflake}>

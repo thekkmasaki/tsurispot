@@ -95,6 +95,194 @@ function Danger({ children }: { children: React.ReactNode }) {
   );
 }
 
+/* 夜釣りの装備チェックリスト図 */
+function NightFishingEquipmentDiagram() {
+  return (
+    <div className="my-6">
+      <p className="mb-2 text-sm font-medium text-center text-muted-foreground">夜釣り必須装備チェックリスト</p>
+      <svg
+        viewBox="0 0 700 260"
+        width="100%"
+        style={{ maxWidth: 700 }}
+        aria-label="夜釣りに必要な装備をアイコンと名称で配置した図。ヘッドライト、ケミホタル、ライフジャケット、防寒着、ランタン、虫よけの6つ。"
+        className="mx-auto"
+      >
+        <rect x="0" y="0" width="700" height="260" rx="8" fill="#1E293B" />
+        <text x="350" y="28" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#FBBF24">夜釣りの必須装備</text>
+
+        {/* Row 1 */}
+        {/* ヘッドライト */}
+        <g>
+          <rect x="20" y="45" width="200" height="90" rx="6" fill="#334155" stroke="#FBBF24" strokeWidth="1.5" />
+          {/* ライトアイコン */}
+          <circle cx="65" cy="85" r="18" fill="#FBBF24" opacity="0.2" stroke="#FBBF24" strokeWidth="1.5" />
+          <line x1="65" y1="67" x2="65" y2="58" stroke="#FBBF24" strokeWidth="1.5" />
+          <line x1="50" y1="72" x2="44" y2="66" stroke="#FBBF24" strokeWidth="1.2" />
+          <line x1="80" y1="72" x2="86" y2="66" stroke="#FBBF24" strokeWidth="1.2" />
+          <line x1="47" y1="85" x2="40" y2="85" stroke="#FBBF24" strokeWidth="1.2" />
+          <line x1="83" y1="85" x2="90" y2="85" stroke="#FBBF24" strokeWidth="1.2" />
+          <circle cx="65" cy="85" r="6" fill="#FBBF24" />
+          <text x="145" y="78" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#FBBF24">ヘッドライト</text>
+          <text x="145" y="94" textAnchor="middle" fontSize="9" fill="#94A3B8">200~400lm / 赤色LED付</text>
+          <text x="145" y="108" textAnchor="middle" fontSize="9" fill="#94A3B8">予備電池も忘れずに</text>
+          <text x="210" y="57" textAnchor="end" fontSize="10" fontWeight="bold" fill="#EF4444">必須</text>
+        </g>
+
+        {/* ケミホタル */}
+        <g>
+          <rect x="240" y="45" width="200" height="90" rx="6" fill="#334155" stroke="#22C55E" strokeWidth="1.5" />
+          {/* ケミホタルアイコン（棒状の発光体） */}
+          <rect x="280" y="72" width="30" height="8" rx="4" fill="#22C55E" opacity="0.6" stroke="#22C55E" strokeWidth="1" />
+          {/* 発光表現 */}
+          <circle cx="295" cy="76" r="15" fill="#22C55E" opacity="0.1" />
+          <circle cx="295" cy="76" r="22" fill="#22C55E" opacity="0.05" />
+          <text x="375" y="78" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#22C55E">ケミホタル</text>
+          <text x="375" y="94" textAnchor="middle" fontSize="9" fill="#94A3B8">竿先やウキに装着</text>
+          <text x="375" y="108" textAnchor="middle" fontSize="9" fill="#94A3B8">25/37/50mm各サイズ</text>
+          <text x="430" y="57" textAnchor="end" fontSize="10" fontWeight="bold" fill="#EF4444">必須</text>
+        </g>
+
+        {/* ライフジャケット */}
+        <g>
+          <rect x="460" y="45" width="220" height="90" rx="6" fill="#334155" stroke="#EF4444" strokeWidth="1.5" />
+          {/* ベストアイコン */}
+          <path d="M505,70 L495,90 L500,105 L520,105 L525,90 L515,70 Z" fill="#EF4444" opacity="0.3" stroke="#EF4444" strokeWidth="1.5" />
+          <line x1="510" y1="70" x2="510" y2="105" stroke="#EF4444" strokeWidth="1" />
+          <text x="600" y="78" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#EF4444">ライフジャケット</text>
+          <text x="600" y="94" textAnchor="middle" fontSize="9" fill="#94A3B8">暗闇の落水は命に関わる</text>
+          <text x="600" y="108" textAnchor="middle" fontSize="9" fill="#94A3B8">自動膨張式でもOK</text>
+          <text x="670" y="57" textAnchor="end" fontSize="10" fontWeight="bold" fill="#EF4444">必須</text>
+        </g>
+
+        {/* Row 2 */}
+        {/* 防寒着 */}
+        <g>
+          <rect x="20" y="150" width="200" height="90" rx="6" fill="#334155" stroke="#60A5FA" strokeWidth="1.5" />
+          {/* 上着アイコン */}
+          <path d="M55,175 L45,195 L50,210 L80,210 L85,195 L75,175 Z" fill="#60A5FA" opacity="0.3" stroke="#60A5FA" strokeWidth="1.5" />
+          <line x1="65" y1="175" x2="65" y2="210" stroke="#60A5FA" strokeWidth="1" />
+          <text x="145" y="188" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#60A5FA">防寒着・手袋</text>
+          <text x="145" y="204" textAnchor="middle" fontSize="9" fill="#94A3B8">夜は気温が急激に低下</text>
+          <text x="145" y="218" textAnchor="middle" fontSize="9" fill="#94A3B8">指先カットグローブが便利</text>
+        </g>
+
+        {/* ランタン */}
+        <g>
+          <rect x="240" y="150" width="200" height="90" rx="6" fill="#334155" stroke="#F59E0B" strokeWidth="1.5" />
+          {/* ランタンアイコン */}
+          <rect x="282" y="180" width="16" height="20" rx="3" fill="#F59E0B" opacity="0.3" stroke="#F59E0B" strokeWidth="1.5" />
+          <line x1="285" y1="180" x2="285" y2="174" stroke="#F59E0B" strokeWidth="1" />
+          <line x1="295" y1="180" x2="295" y2="174" stroke="#F59E0B" strokeWidth="1" />
+          <line x1="285" y1="174" x2="295" y2="174" stroke="#F59E0B" strokeWidth="1" />
+          <circle cx="290" cy="190" r="5" fill="#FBBF24" opacity="0.5" />
+          <text x="375" y="188" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#F59E0B">ランタン</text>
+          <text x="375" y="204" textAnchor="middle" fontSize="9" fill="#94A3B8">足元照明・作業用</text>
+          <text x="375" y="218" textAnchor="middle" fontSize="9" fill="#94A3B8">海面に向けないこと</text>
+        </g>
+
+        {/* 虫よけ */}
+        <g>
+          <rect x="460" y="150" width="220" height="90" rx="6" fill="#334155" stroke="#A78BFA" strokeWidth="1.5" />
+          {/* スプレーアイコン */}
+          <rect x="500" y="180" width="14" height="24" rx="3" fill="#A78BFA" opacity="0.3" stroke="#A78BFA" strokeWidth="1.5" />
+          <rect x="503" y="175" width="8" height="6" rx="1" fill="#A78BFA" opacity="0.5" />
+          {/* スプレー噴射 */}
+          <circle cx="510" y="170" r="2" fill="#A78BFA" opacity="0.3" />
+          <circle cx="515" y="167" r="1.5" fill="#A78BFA" opacity="0.2" />
+          <text x="600" y="188" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#A78BFA">虫よけスプレー</text>
+          <text x="600" y="204" textAnchor="middle" fontSize="9" fill="#94A3B8">夏場は蚊・ブヨ対策</text>
+          <text x="600" y="218" textAnchor="middle" fontSize="9" fill="#94A3B8">蚊取り線香も有効</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+/* ケミホタルの取り付け図 */
+function ChemiLightDiagram() {
+  return (
+    <div className="my-6">
+      <p className="mb-2 text-sm font-medium text-center text-muted-foreground">ケミホタルの取り付け方</p>
+      <svg
+        viewBox="0 0 700 200"
+        width="100%"
+        style={{ maxWidth: 700 }}
+        aria-label="ケミホタルをウキと竿先に取り付ける方法を示す図。ウキのスリットに差し込む方法と竿先にテープで固定する方法。"
+        className="mx-auto"
+      >
+        <rect x="0" y="0" width="700" height="200" rx="8" fill="#EFF6FF" />
+
+        {/* Step 1: 折って発光させる */}
+        <g>
+          <rect x="10" y="10" width="200" height="180" rx="6" fill="#FFFFFF" stroke="#93C5FD" strokeWidth="1.5" />
+          <text x="110" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1E40AF">Step 1: 発光させる</text>
+          {/* ケミホタル棒 */}
+          <rect x="60" y="60" width="100" height="14" rx="7" fill="#D1FAE5" stroke="#22C55E" strokeWidth="1.5" />
+          {/* 折り位置マーク */}
+          <line x1="110" y1="55" x2="110" y2="80" stroke="#EF4444" strokeWidth="1" strokeDasharray="3,2" />
+          <text x="110" y="50" textAnchor="middle" fontSize="9" fill="#EF4444">ここを折る</text>
+          {/* 矢印 */}
+          <path d="M90,90 C90,110 110,110 110,95" stroke="#6B7280" strokeWidth="1" fill="none" markerEnd="url(#arrowNF)" />
+          <path d="M130,90 C130,110 110,110 110,95" stroke="#6B7280" strokeWidth="1" fill="none" />
+          {/* 発光状態 */}
+          <rect x="60" y="130" width="100" height="14" rx="7" fill="#22C55E" opacity="0.6" stroke="#22C55E" strokeWidth="1.5" />
+          <circle cx="110" cy="137" r="20" fill="#22C55E" opacity="0.1" />
+          <text x="110" y="165" textAnchor="middle" fontSize="9" fill="#22C55E">パキッと折ると発光</text>
+          <defs>
+            <marker id="arrowNF" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6" fill="#6B7280" />
+            </marker>
+          </defs>
+        </g>
+
+        {/* Step 2: ウキに装着 */}
+        <g>
+          <rect x="230" y="10" width="220" height="180" rx="6" fill="#FFFFFF" stroke="#93C5FD" strokeWidth="1.5" />
+          <text x="340" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1E40AF">Step 2a: ウキに装着</text>
+          {/* ウキ本体 */}
+          <ellipse cx="340" cy="110" rx="20" ry="35" fill="#EF4444" opacity="0.2" stroke="#EF4444" strokeWidth="2" />
+          {/* ウキのトップ */}
+          <line x1="340" y1="75" x2="340" y2="55" stroke="#EF4444" strokeWidth="2" />
+          {/* ケミホタルスロット */}
+          <rect x="335" y="55" width="10" height="22" rx="2" fill="#22C55E" opacity="0.6" stroke="#22C55E" strokeWidth="1" />
+          {/* 発光表現 */}
+          <circle cx="340" cy="66" r="12" fill="#22C55E" opacity="0.1" />
+          {/* ケミホタルをスロットに差し込む矢印 */}
+          <rect x="370" y="50" width="25" height="8" rx="4" fill="#22C55E" opacity="0.5" stroke="#22C55E" strokeWidth="1" />
+          <path d="M370,54 L350,54" stroke="#6B7280" strokeWidth="1" markerEnd="url(#arrowNF)" />
+          <text x="400" y="57" fontSize="8" fill="#6B7280">差し込む</text>
+          {/* ライン */}
+          <line x1="340" y1="145" x2="340" y2="170" stroke="#3B82F6" strokeWidth="1.5" />
+          <text x="340" y="185" textAnchor="middle" fontSize="9" fill="#6B7280">ウキのトップに差し込む</text>
+        </g>
+
+        {/* Step 3: 竿先に装着 */}
+        <g>
+          <rect x="470" y="10" width="220" height="180" rx="6" fill="#FFFFFF" stroke="#93C5FD" strokeWidth="1.5" />
+          <text x="580" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1E40AF">Step 2b: 竿先に装着</text>
+          {/* 竿先 */}
+          <line x1="490" y1="100" x2="670" y2="100" stroke="#6B7280" strokeWidth="3" />
+          <line x1="670" y1="100" x2="680" y2="100" stroke="#6B7280" strokeWidth="2" />
+          {/* ケミホタル */}
+          <rect x="630" y="85" width="30" height="10" rx="5" fill="#22C55E" opacity="0.6" stroke="#22C55E" strokeWidth="1" />
+          {/* 発光表現 */}
+          <circle cx="645" cy="90" r="14" fill="#22C55E" opacity="0.1" />
+          {/* テープ */}
+          <rect x="632" y="95" width="26" height="4" rx="1" fill="#94A3B8" opacity="0.6" />
+          <rect x="632" y="81" width="26" height="4" rx="1" fill="#94A3B8" opacity="0.6" />
+          <text x="645" y="75" textAnchor="middle" fontSize="8" fill="#6B7280">テープで固定</text>
+          {/* ガイド */}
+          <circle cx="540" cy="100" r="4" fill="none" stroke="#6B7280" strokeWidth="1" />
+          <circle cx="580" cy="100" r="3.5" fill="none" stroke="#6B7280" strokeWidth="1" />
+          <circle cx="610" cy="100" r="3" fill="none" stroke="#6B7280" strokeWidth="1" />
+          <text x="580" y="130" textAnchor="middle" fontSize="9" fill="#6B7280">竿先（穂先）にテープで巻く</text>
+          <text x="580" y="145" textAnchor="middle" fontSize="9" fill="#6B7280">アタリの視認に使用</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
 export default function NightFishingGuidePage() {
   return (
     <>
@@ -132,6 +320,7 @@ export default function NightFishingGuidePage() {
         <div className="space-y-6">
           {/* 必要な装備 */}
           <SectionCard title="必要な装備" icon={Flashlight}>
+            <NightFishingEquipmentDiagram />
             <p className="mb-4 text-sm text-muted-foreground">
               夜釣りでは昼間の装備に加えて、暗闘対策の道具が必要です。事前にしっかり準備しましょう。
             </p>
@@ -192,6 +381,8 @@ export default function NightFishingGuidePage() {
             <Hint>
               ヘッドライトは釣りの最中は消しておくか赤色モードにしましょう。白い光で海面を照らすと魚が驚いて散ってしまいます。手元の作業時だけ点灯するのがマナーです。
             </Hint>
+
+            <ChemiLightDiagram />
           </SectionCard>
 
           {/* 夜に釣れる魚種 */}

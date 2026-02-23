@@ -155,6 +155,18 @@ export const fishMetadata: Record<string, FishMeta> = {
   dochizame:      { aliases: ["奴智鮫", "サメ"], popularity: 73 },
   nekozame:       { aliases: ["猫鮫", "サザエワリ"], popularity: 74 },
   hoshizame:      { aliases: ["星鮫", "ホシ"], popularity: 75 },
+  // スズメダイ: 堤防の小魚、外道の代表格
+  suzumedai:      { aliases: ["雀鯛", "スズメ"], popularity: 76 },
+  // ネンブツダイ: テンジクダイ科、堤防外道
+  nenbutsudai:    { aliases: ["念仏鯛", "ネンブツ"], popularity: 77 },
+  // ボラ: 出世魚。関東オボコ→イナッコ→スバシリ→イナ→ボラ→トド
+  bora:           { aliases: ["鯔", "イナ", "トド", "オボコ", "スバシリ", "イナッコ"], popularity: 78 },
+  // ヒイラギ: ヌメリの強い小型魚
+  hiiragi:        { aliases: ["柊", "ギチ", "ニロギ", "ゼンメ", "エノハ"], popularity: 79 },
+  // ヘダイ: チヌに似た鯛
+  hedai:          { aliases: ["平鯛", "ヘビチ", "シロチヌ"], popularity: 80 },
+  // キビレ: クロダイの近縁種、ヒレが黄色い
+  kibire:         { aliases: ["キチヌ", "黄鰭", "キビレチヌ"], popularity: 81 },
 
   // === 汽水魚 ===
   // クロダイ: 関西・九州でチヌ、幼魚はカイズ、メイタ

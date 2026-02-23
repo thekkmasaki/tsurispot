@@ -174,6 +174,204 @@ const faqJsonLd = {
   ],
 };
 
+/* ── SVG図解コンポーネント ── */
+
+function CastingFormSvg() {
+  return (
+    <div className="my-6">
+      <h3 className="mb-3 text-center text-sm font-bold text-foreground">ちょい投げのフォーム（3ステップ）</h3>
+      <svg
+        viewBox="0 0 600 300"
+        className="mx-auto w-full max-w-[600px]"
+        aria-label="ちょい投げの投げ方フォーム図解：構え、振りかぶり、リリースの3段階"
+      >
+        {/* 背景 */}
+        <rect x="0" y="0" width="600" height="300" fill="#F9FAFB" rx="12" />
+
+        {/* 地面 */}
+        <line x1="0" y1="260" x2="600" y2="260" stroke="#9CA3AF" strokeWidth="1" />
+
+        {/* Step 1: 構え */}
+        <g>
+          <text x="100" y="24" fontSize="14" fill="#3B82F6" textAnchor="middle" fontWeight="bold">1. 構え</text>
+
+          {/* 人体（棒人間） */}
+          <circle cx="95" cy="120" r="15" fill="none" stroke="#4B5563" strokeWidth="2" /> {/* 頭 */}
+          <line x1="95" y1="135" x2="95" y2="200" stroke="#4B5563" strokeWidth="2" /> {/* 胴体 */}
+          <line x1="95" y1="200" x2="75" y2="255" stroke="#4B5563" strokeWidth="2" /> {/* 左足 */}
+          <line x1="95" y1="200" x2="115" y2="255" stroke="#4B5563" strokeWidth="2" /> {/* 右足 */}
+
+          {/* 腕（竿を持つ） */}
+          <line x1="95" y1="155" x2="120" y2="140" stroke="#4B5563" strokeWidth="2" /> {/* 右腕 */}
+          <line x1="95" y1="155" x2="110" y2="145" stroke="#4B5563" strokeWidth="2" /> {/* 左腕 */}
+
+          {/* 竿（正面に構え） */}
+          <line x1="120" y1="140" x2="155" y2="80" stroke="#78716C" strokeWidth="3" />
+          <circle cx="155" cy="78" r="3" fill="#78716C" /> {/* 竿先 */}
+
+          {/* 仕掛け（ぶら下がり） */}
+          <line x1="155" y1="81" x2="155" y2="120" stroke="#4B5563" strokeWidth="1" strokeDasharray="3,2" />
+          <circle cx="155" cy="122" r="4" fill="#4B5563" /> {/* オモリ */}
+
+          {/* 糸を指で押さえるマーク */}
+          <circle cx="118" cy="138" r="5" fill="#EF4444" opacity="0.4" />
+          <text x="100" y="50" fontSize="9" fill="#6B7280" textAnchor="middle">ベイルを起こし</text>
+          <text x="100" y="62" fontSize="9" fill="#6B7280" textAnchor="middle">糸を人差し指で押さえる</text>
+        </g>
+
+        {/* 矢印 */}
+        <line x1="175" y1="170" x2="210" y2="170" stroke="#9CA3AF" strokeWidth="1.5" />
+        <polygon points="207,166 207,174 215,170" fill="#9CA3AF" />
+
+        {/* Step 2: 振りかぶり */}
+        <g>
+          <text x="300" y="24" fontSize="14" fill="#3B82F6" textAnchor="middle" fontWeight="bold">2. 振りかぶり</text>
+
+          {/* 人体 */}
+          <circle cx="295" cy="120" r="15" fill="none" stroke="#4B5563" strokeWidth="2" />
+          <line x1="295" y1="135" x2="295" y2="200" stroke="#4B5563" strokeWidth="2" />
+          <line x1="295" y1="200" x2="275" y2="255" stroke="#4B5563" strokeWidth="2" />
+          <line x1="295" y1="200" x2="315" y2="255" stroke="#4B5563" strokeWidth="2" />
+
+          {/* 腕（後方に竿） */}
+          <line x1="295" y1="155" x2="275" y2="130" stroke="#4B5563" strokeWidth="2" />
+
+          {/* 竿（後方に倒す） */}
+          <line x1="275" y1="130" x2="240" y2="70" stroke="#78716C" strokeWidth="3" />
+          <circle cx="238" cy="68" r="3" fill="#78716C" />
+
+          {/* 仕掛け */}
+          <line x1="238" y1="68" x2="225" y2="55" stroke="#4B5563" strokeWidth="1" strokeDasharray="3,2" />
+          <circle cx="223" cy="53" r="4" fill="#4B5563" />
+
+          {/* 後ろ確認注意 */}
+          <text x="230" y="45" fontSize="9" fill="#EF4444" textAnchor="end">後方確認!</text>
+
+          {/* 振りの軌道 */}
+          <path d="M240,70 Q290,50 340,80" fill="none" stroke="#3B82F6" strokeWidth="1.5" strokeDasharray="4,3" />
+          <polygon points="337,76 343,82 340,85" fill="#3B82F6" />
+
+          <text x="300" y="50" fontSize="9" fill="#6B7280" textAnchor="middle">正面に向かって</text>
+          <text x="300" y="62" fontSize="9" fill="#6B7280" textAnchor="middle">ゆっくり振る</text>
+        </g>
+
+        {/* 矢印 */}
+        <line x1="375" y1="170" x2="410" y2="170" stroke="#9CA3AF" strokeWidth="1.5" />
+        <polygon points="407,166 407,174 415,170" fill="#9CA3AF" />
+
+        {/* Step 3: リリース */}
+        <g>
+          <text x="500" y="24" fontSize="14" fill="#3B82F6" textAnchor="middle" fontWeight="bold">3. リリース</text>
+
+          {/* 人体 */}
+          <circle cx="480" cy="120" r="15" fill="none" stroke="#4B5563" strokeWidth="2" />
+          <line x1="480" y1="135" x2="480" y2="200" stroke="#4B5563" strokeWidth="2" />
+          <line x1="480" y1="200" x2="460" y2="255" stroke="#4B5563" strokeWidth="2" />
+          <line x1="480" y1="200" x2="500" y2="255" stroke="#4B5563" strokeWidth="2" />
+
+          {/* 腕（前方に竿） */}
+          <line x1="480" y1="155" x2="505" y2="130" stroke="#4B5563" strokeWidth="2" />
+
+          {/* 竿（前方） */}
+          <line x1="505" y1="130" x2="540" y2="75" stroke="#78716C" strokeWidth="3" />
+          <circle cx="542" cy="73" r="3" fill="#78716C" />
+
+          {/* 仕掛けの飛んでいく軌跡 */}
+          <path d="M542,73 Q560,50 585,90" fill="none" stroke="#F59E0B" strokeWidth="2" strokeDasharray="4,3" />
+          <circle cx="585" cy="92" r="4" fill="#4B5563" />
+
+          {/* 指を離すマーク */}
+          <circle cx="503" cy="128" r="5" fill="#22C55E" opacity="0.4" />
+          <text x="500" y="50" fontSize="9" fill="#6B7280" textAnchor="middle">頭上で指を離す</text>
+          <text x="500" y="62" fontSize="9" fill="#22C55E" textAnchor="middle">20-30m飛べばOK</text>
+        </g>
+
+        {/* 共通注意書き */}
+        <text x="300" y="290" fontSize="10" fill="#6B7280" textAnchor="middle">
+          力いっぱい投げる必要なし。コンパクトに振るのがコツ
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+function ChoinageRigDetailSvg() {
+  return (
+    <div className="my-6">
+      <h3 className="mb-3 text-center text-sm font-bold text-foreground">ちょい投げ仕掛けの構成</h3>
+      <svg
+        viewBox="0 0 400 420"
+        className="mx-auto w-full max-w-[400px]"
+        aria-label="ちょい投げ仕掛けの構成図解：竿、道糸、天秤、ハリス、針の位置関係"
+      >
+        {/* 背景 */}
+        <rect x="0" y="0" width="400" height="420" fill="#F9FAFB" rx="12" />
+
+        {/* 水面 */}
+        <rect x="30" y="120" width="340" height="270" fill="#DBEAFE" rx="8" />
+        <line x1="30" y1="125" x2="370" y2="125" stroke="#2563EB" strokeWidth="1.5" strokeDasharray="6,3" />
+        <text x="360" y="118" fontSize="10" fill="#2563EB" textAnchor="end">水面</text>
+
+        {/* 海底 */}
+        <path d="M30,370 Q120,355 200,365 Q280,375 370,360" fill="#D4A373" opacity="0.3" />
+        <text x="200" y="400" fontSize="10" fill="#92400E" textAnchor="middle">砂底</text>
+
+        {/* 竿先 */}
+        <rect x="85" y="15" width="30" height="12" rx="3" fill="#78716C" />
+        <text x="100" y="45" fontSize="12" fill="#44403C" textAnchor="middle">竿先</text>
+
+        {/* 道糸 */}
+        <line x1="100" y1="27" x2="100" y2="150" stroke="#4B5563" strokeWidth="2" />
+        <text x="125" y="90" fontSize="11" fill="#4B5563">道糸</text>
+        <text x="125" y="104" fontSize="9" fill="#6B7280">(ナイロン3号)</text>
+
+        {/* スナップサルカン */}
+        <circle cx="100" cy="160" r="7" fill="#9CA3AF" stroke="#6B7280" strokeWidth="1.5" />
+        <text x="125" y="164" fontSize="11" fill="#6B7280">スナップサルカン</text>
+
+        {/* 天秤（L型） */}
+        <line x1="100" y1="167" x2="100" y2="230" stroke="#4B5563" strokeWidth="2" />
+        <line x1="100" y1="230" x2="55" y2="230" stroke="#4B5563" strokeWidth="2.5" />
+
+        {/* オモリ */}
+        <ellipse cx="42" cy="230" rx="16" ry="10" fill="#4B5563" />
+        <text x="42" y="234" fontSize="8" fill="white" textAnchor="middle">5-10号</text>
+
+        {/* 天秤ラベル */}
+        <rect x="15" y="205" width="55" height="16" rx="3" fill="#EFF6FF" stroke="#3B82F6" strokeWidth="1" />
+        <text x="42" y="216" fontSize="9" fill="#3B82F6" textAnchor="middle">天秤オモリ</text>
+
+        {/* ハリス */}
+        <line x1="100" y1="230" x2="100" y2="350" stroke="#4B5563" strokeWidth="1" strokeDasharray="4,2" />
+        <text x="125" y="280" fontSize="11" fill="#4B5563">ハリス</text>
+        <text x="125" y="294" fontSize="9" fill="#6B7280">(フロロ1-1.5号)</text>
+
+        {/* 枝ハリス・針1 */}
+        <line x1="100" y1="300" x2="145" y2="315" stroke="#4B5563" strokeWidth="1" />
+        <path d="M145,315 Q138,330 147,330" fill="none" stroke="#F59E0B" strokeWidth="2" />
+        <ellipse cx="143" cy="332" rx="5" ry="3" fill="#F97316" opacity="0.7" />
+        <text x="160" y="320" fontSize="10" fill="#F59E0B">針1</text>
+        <text x="160" y="333" fontSize="9" fill="#F97316">エサ(イソメ)</text>
+
+        {/* 先針・針2 */}
+        <path d="M100,350 Q93,368 102,368" fill="none" stroke="#F59E0B" strokeWidth="2" />
+        <ellipse cx="98" cy="370" rx="5" ry="3" fill="#F97316" opacity="0.7" />
+        <text x="118" y="360" fontSize="10" fill="#F59E0B">針2</text>
+        <text x="118" y="373" fontSize="9" fill="#F97316">エサ(イソメ)</text>
+
+        {/* サビく方向の矢印 */}
+        <g>
+          <path d="M200,350 L270,350" fill="none" stroke="#22C55E" strokeWidth="2" />
+          <polygon points="265,345 265,355 275,350" fill="#22C55E" />
+          <text x="235" y="340" fontSize="10" fill="#22C55E" textAnchor="middle">サビく方向</text>
+          <text x="235" y="390" fontSize="9" fill="#6B7280" textAnchor="middle">ゆっくり引いて</text>
+          <text x="235" y="403" fontSize="9" fill="#6B7280" textAnchor="middle">広い範囲を探る</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
 function SectionCard({
   title,
   icon: Icon,
@@ -314,6 +512,8 @@ export default function ChoinageGuidePage() {
           {/* 仕掛け図 */}
           <RigDiagram type="choinage" />
 
+          <ChoinageRigDetailSvg />
+
           {/* 釣り方の手順 */}
           <SectionCard title="釣り方の手順" icon={Footprints}>
             <ol className="list-none space-y-4">
@@ -356,6 +556,11 @@ export default function ChoinageGuidePage() {
                   </p>
                 </div>
               </li>
+            </ol>
+
+            <CastingFormSvg />
+
+            <ol className="list-none space-y-4">
               <li className="flex gap-3">
                 <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
                   4

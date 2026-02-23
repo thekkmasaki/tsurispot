@@ -59,6 +59,100 @@ const breadcrumbJsonLd = {
   ],
 };
 
+/* --- SVG図解コンポーネント --- */
+
+function FamilyChecklistDiagram() {
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 660 340"
+        width="100%"
+        style={{ maxWidth: 660 }}
+        aria-label="家族での持ち物チェックリスト図：大人の道具、子供の安全装備、共通の持ち物の3カテゴリ"
+        role="img"
+      >
+        <rect x="0" y="0" width="660" height="340" rx="12" fill="#EFF6FF" />
+        <text x="330" y="28" textAnchor="middle" fontSize="14" fill="#1E293B" fontWeight="bold">ファミリーフィッシング持ち物チェックリスト</text>
+
+        {/* 大人の道具 */}
+        <rect x="15" y="42" width="200" height="280" rx="10" fill="white" stroke="#3B82F6" strokeWidth="2" />
+        <rect x="15" y="42" width="200" height="32" rx="10" fill="#3B82F6" />
+        <rect x="15" y="60" width="200" height="14" fill="#3B82F6" />
+        <text x="115" y="63" textAnchor="middle" fontSize="13" fill="white" fontWeight="bold">大人の道具</text>
+        {["竿・リール", "仕掛け（予備あり）", "エサ", "クーラーボックス", "ハサミ・プライヤー", "バケツ", "タオル 2〜3枚", "ゴミ袋"].map((item, i) => (
+          <g key={i}>
+            <rect x="30" y={84 + i * 28} width="14" height="14" rx="3" fill="none" stroke="#3B82F6" strokeWidth="1.5" />
+            <text x="52" y={95 + i * 28} fontSize="11" fill="#334155">{item}</text>
+          </g>
+        ))}
+
+        {/* 子供の安全装備 */}
+        <rect x="230" y="42" width="200" height="280" rx="10" fill="white" stroke="#EF4444" strokeWidth="2" />
+        <rect x="230" y="42" width="200" height="32" rx="10" fill="#EF4444" />
+        <rect x="230" y="60" width="200" height="14" fill="#EF4444" />
+        <text x="330" y="63" textAnchor="middle" fontSize="13" fill="white" fontWeight="bold">子供の安全装備</text>
+        {["ライフジャケット", "帽子（つば広）", "日焼け止め", "滑りにくい靴", "虫除けスプレー", "絆創膏・消毒液", "着替え一式", "飲み物（多めに）"].map((item, i) => (
+          <g key={i}>
+            <rect x="245" y={84 + i * 28} width="14" height="14" rx="3" fill="none" stroke="#EF4444" strokeWidth="1.5" />
+            <text x="267" y={95 + i * 28} fontSize="11" fill="#334155">{item}</text>
+          </g>
+        ))}
+
+        {/* 共通の持ち物 */}
+        <rect x="445" y="42" width="200" height="280" rx="10" fill="white" stroke="#22C55E" strokeWidth="2" />
+        <rect x="445" y="42" width="200" height="32" rx="10" fill="#22C55E" />
+        <rect x="445" y="60" width="200" height="14" fill="#22C55E" />
+        <text x="545" y="63" textAnchor="middle" fontSize="13" fill="white" fontWeight="bold">共通の持ち物</text>
+        {["おやつ・軽食", "レジャーシート", "ウェットティッシュ", "折りたたみ椅子", "日よけテント", "カメラ", "図鑑", "ゴミ袋（複数）"].map((item, i) => (
+          <g key={i}>
+            <rect x="460" y={84 + i * 28} width="14" height="14" rx="3" fill="none" stroke="#22C55E" strokeWidth="1.5" />
+            <text x="482" y={95 + i * 28} fontSize="11" fill="#334155">{item}</text>
+          </g>
+        ))}
+      </svg>
+    </div>
+  );
+}
+
+function SafeSpotDiagram() {
+  const conditions = [
+    { label: "柵・フェンスあり", sub: "転落防止の安全設備", color: "#3B82F6", iconPath: "M4 4H20V6H4V4Z M4 6V20H6V6H4Z M18 6V20H20V6H18Z M8 8V18H10V8H8Z M14 8V18H16V8H14Z M4 18H20V20H4V18Z" },
+    { label: "トイレが近い", sub: "子連れの必須条件", color: "#22C55E", iconPath: "M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2Z M9 7H15L16 14H13V22H11V14H8L9 7Z" },
+    { label: "駐車場が近い", sub: "荷物の運搬が楽", color: "#F59E0B", iconPath: "M5 11L6.5 6.5C6.8 5.6 7.6 5 8.5 5H15.5C16.4 5 17.2 5.6 17.5 6.5L19 11V18H17V20H15V18H9V20H7V18H5V11Z M7.5 14C8.3 14 9 13.3 9 12.5C9 11.7 8.3 11 7.5 11C6.7 11 6 11.7 6 12.5C6 13.3 6.7 14 7.5 14Z M16.5 14C17.3 14 18 13.3 18 12.5C18 11.7 17.3 11 16.5 11C15.7 11 15 11.7 15 12.5C15 13.3 15.7 14 16.5 14Z" },
+    { label: "足場が安定", sub: "コンクリートで平坦", color: "#EF4444", iconPath: "M2 20H22V22H2V20Z M4 18H20V20H4V18Z M3 14H5V18H3V14Z M7 12H9V18H7V12Z M11 10H13V18H11V10Z M15 12H17V18H15V12Z M19 14H21V18H19V14Z" },
+  ];
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 640 200"
+        width="100%"
+        style={{ maxWidth: 640 }}
+        aria-label="安全な釣り場の見分け方：柵あり、トイレ近く、駐車場近く、足場が安定の4条件"
+        role="img"
+      >
+        <rect x="0" y="0" width="640" height="200" rx="12" fill="#F9FAFB" />
+        <text x="320" y="26" textAnchor="middle" fontSize="14" fill="#1E293B" fontWeight="bold">安全な釣り場の4つの条件</text>
+
+        {conditions.map((c, i) => {
+          const cx = 80 + i * 150;
+          return (
+            <g key={i}>
+              <rect x={cx - 60} y={40} width={120} height={140} rx="10" fill="white" stroke={c.color} strokeWidth="2" />
+              <circle cx={cx} cy={80} r="24" fill={c.color} opacity="0.12" />
+              <text x={cx} y={86} textAnchor="middle" fontSize="22" fill={c.color} fontWeight="bold">{i + 1}</text>
+              <text x={cx} y={122} textAnchor="middle" fontSize="12" fill="#1E293B" fontWeight="bold">{c.label}</text>
+              <text x={cx} y={140} textAnchor="middle" fontSize="10" fill="#64748B">{c.sub}</text>
+              {/* チェックマーク */}
+              <circle cx={cx + 40} cy={55} r="10" fill={c.color} opacity="0.2" />
+              <path d={`M${cx + 35},55 L${cx + 39},59 L${cx + 46},51`} stroke={c.color} strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+            </g>
+          );
+        })}
+      </svg>
+    </div>
+  );
+}
+
 function SectionCard({
   title,
   icon: Icon,
@@ -379,6 +473,9 @@ export default function FamilyGuidePage() {
               </div>
             </div>
 
+            {/* 安全な釣り場の見分け方図 */}
+            <SafeSpotDiagram />
+
             {/* 手ぶらOKヒント */}
             <div className="mt-4 rounded-lg bg-blue-50 p-4 text-blue-800 dark:bg-blue-950 dark:text-blue-200">
               <div className="flex items-start gap-3">
@@ -394,6 +491,9 @@ export default function FamilyGuidePage() {
               </div>
             </div>
           </SectionCard>
+
+          {/* 持ち物チェックリスト図 */}
+          <FamilyChecklistDiagram />
 
           {/* 持ち物リスト（子連れ版） */}
           <SectionCard title="持ち物リスト（子連れ版）" icon={Backpack}>

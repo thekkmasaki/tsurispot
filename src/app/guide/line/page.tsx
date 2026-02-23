@@ -93,6 +93,177 @@ const FLUORO_DATA = [
   { gou: "8", lb: 30, kg: 13.6, use: "大型青物リーダー" },
 ];
 
+/* 3種ライン比較図（断面図と特性） */
+function LineComparisonDiagram() {
+  return (
+    <div className="my-6">
+      <p className="mb-2 text-sm font-medium text-center text-muted-foreground">3種のライン断面図と特性比較</p>
+      <svg
+        viewBox="0 0 720 280"
+        width="100%"
+        style={{ maxWidth: 720 }}
+        aria-label="ナイロン・フロロカーボン・PEラインの断面図と特性を比較した図。構造の違いと各特性の強弱を視覚的に示す。"
+        className="mx-auto"
+      >
+        <rect x="0" y="0" width="720" height="280" rx="8" fill="#F9FAFB" />
+
+        {/* ナイロン */}
+        <g>
+          <rect x="10" y="10" width="220" height="260" rx="6" fill="#FFFFFF" stroke="#F59E0B" strokeWidth="1.5" />
+          <text x="120" y="32" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#92400E">ナイロン</text>
+          {/* 断面図 - 単一構造 */}
+          <circle cx="120" cy="80" r="30" fill="#FDE68A" stroke="#F59E0B" strokeWidth="2" />
+          <text x="120" y="84" textAnchor="middle" fontSize="9" fill="#92400E">単繊維</text>
+          <text x="120" y="120" textAnchor="middle" fontSize="9" fill="#6B7280">1本の太い繊維</text>
+          {/* 特性バー */}
+          <text x="20" y="148" fontSize="10" fill="#374151">強度</text>
+          <rect x="70" y="138" width="60" height="12" rx="3" fill="#F59E0B" opacity="0.5" />
+          <rect x="70" y="138" width="60" height="12" rx="3" fill="none" stroke="#F59E0B" strokeWidth="1" />
+          <text x="20" y="168" fontSize="10" fill="#374151">感度</text>
+          <rect x="70" y="158" width="40" height="12" rx="3" fill="#F59E0B" opacity="0.5" />
+          <rect x="70" y="158" width="40" height="12" rx="3" fill="none" stroke="#F59E0B" strokeWidth="1" />
+          <text x="20" y="188" fontSize="10" fill="#374151">耐摩耗</text>
+          <rect x="70" y="178" width="60" height="12" rx="3" fill="#F59E0B" opacity="0.5" />
+          <rect x="70" y="178" width="60" height="12" rx="3" fill="none" stroke="#F59E0B" strokeWidth="1" />
+          <text x="20" y="208" fontSize="10" fill="#374151">しなやか</text>
+          <rect x="70" y="198" width="120" height="12" rx="3" fill="#F59E0B" opacity="0.5" />
+          <rect x="70" y="198" width="120" height="12" rx="3" fill="none" stroke="#F59E0B" strokeWidth="1" />
+          <text x="20" y="228" fontSize="10" fill="#374151">伸び</text>
+          <rect x="70" y="218" width="130" height="12" rx="3" fill="#F59E0B" opacity="0.5" />
+          <rect x="70" y="218" width="130" height="12" rx="3" fill="none" stroke="#F59E0B" strokeWidth="1" />
+          <text x="120" y="255" textAnchor="middle" fontSize="10" fill="#92400E" fontWeight="bold">初心者におすすめ</text>
+        </g>
+
+        {/* フロロカーボン */}
+        <g>
+          <rect x="250" y="10" width="220" height="260" rx="6" fill="#FFFFFF" stroke="#8B5CF6" strokeWidth="1.5" />
+          <text x="360" y="32" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#6D28D9">フロロカーボン</text>
+          {/* 断面図 - 密な構造 */}
+          <circle cx="360" cy="80" r="30" fill="#E9D5FF" stroke="#8B5CF6" strokeWidth="2" />
+          <circle cx="360" cy="80" r="18" fill="#DDD6FE" stroke="#8B5CF6" strokeWidth="1" />
+          <text x="360" y="84" textAnchor="middle" fontSize="9" fill="#6D28D9">高密度</text>
+          <text x="360" y="120" textAnchor="middle" fontSize="9" fill="#6B7280">硬く密度が高い</text>
+          {/* 特性バー */}
+          <text x="260" y="148" fontSize="10" fill="#374151">強度</text>
+          <rect x="310" y="138" width="70" height="12" rx="3" fill="#8B5CF6" opacity="0.4" />
+          <rect x="310" y="138" width="70" height="12" rx="3" fill="none" stroke="#8B5CF6" strokeWidth="1" />
+          <text x="260" y="168" fontSize="10" fill="#374151">感度</text>
+          <rect x="310" y="158" width="90" height="12" rx="3" fill="#8B5CF6" opacity="0.4" />
+          <rect x="310" y="158" width="90" height="12" rx="3" fill="none" stroke="#8B5CF6" strokeWidth="1" />
+          <text x="260" y="188" fontSize="10" fill="#374151">耐摩耗</text>
+          <rect x="310" y="178" width="110" height="12" rx="3" fill="#8B5CF6" opacity="0.4" />
+          <rect x="310" y="178" width="110" height="12" rx="3" fill="none" stroke="#8B5CF6" strokeWidth="1" />
+          <text x="260" y="208" fontSize="10" fill="#374151">しなやか</text>
+          <rect x="310" y="198" width="50" height="12" rx="3" fill="#8B5CF6" opacity="0.4" />
+          <rect x="310" y="198" width="50" height="12" rx="3" fill="none" stroke="#8B5CF6" strokeWidth="1" />
+          <text x="260" y="228" fontSize="10" fill="#374151">伸び</text>
+          <rect x="310" y="218" width="60" height="12" rx="3" fill="#8B5CF6" opacity="0.4" />
+          <rect x="310" y="218" width="60" height="12" rx="3" fill="none" stroke="#8B5CF6" strokeWidth="1" />
+          <text x="360" y="255" textAnchor="middle" fontSize="10" fill="#6D28D9" fontWeight="bold">リーダー向き</text>
+        </g>
+
+        {/* PE */}
+        <g>
+          <rect x="490" y="10" width="220" height="260" rx="6" fill="#FFFFFF" stroke="#3B82F6" strokeWidth="1.5" />
+          <text x="600" y="32" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#1E40AF">PE</text>
+          {/* 断面図 - 編み込み */}
+          <circle cx="600" cy="80" r="30" fill="#DBEAFE" stroke="#3B82F6" strokeWidth="2" />
+          <circle cx="590" cy="72" r="7" fill="#93C5FD" stroke="#3B82F6" strokeWidth="0.8" />
+          <circle cx="605" cy="70" r="7" fill="#93C5FD" stroke="#3B82F6" strokeWidth="0.8" />
+          <circle cx="612" cy="82" r="7" fill="#93C5FD" stroke="#3B82F6" strokeWidth="0.8" />
+          <circle cx="596" cy="88" r="7" fill="#93C5FD" stroke="#3B82F6" strokeWidth="0.8" />
+          <text x="600" y="120" textAnchor="middle" fontSize="9" fill="#6B7280">複数の繊維を編み込み</text>
+          {/* 特性バー */}
+          <text x="500" y="148" fontSize="10" fill="#374151">強度</text>
+          <rect x="550" y="138" width="140" height="12" rx="3" fill="#3B82F6" opacity="0.4" />
+          <rect x="550" y="138" width="140" height="12" rx="3" fill="none" stroke="#3B82F6" strokeWidth="1" />
+          <text x="500" y="168" fontSize="10" fill="#374151">感度</text>
+          <rect x="550" y="158" width="140" height="12" rx="3" fill="#3B82F6" opacity="0.4" />
+          <rect x="550" y="158" width="140" height="12" rx="3" fill="none" stroke="#3B82F6" strokeWidth="1" />
+          <text x="500" y="188" fontSize="10" fill="#374151">耐摩耗</text>
+          <rect x="550" y="178" width="30" height="12" rx="3" fill="#3B82F6" opacity="0.4" />
+          <rect x="550" y="178" width="30" height="12" rx="3" fill="none" stroke="#3B82F6" strokeWidth="1" />
+          <text x="500" y="208" fontSize="10" fill="#374151">しなやか</text>
+          <rect x="550" y="198" width="100" height="12" rx="3" fill="#3B82F6" opacity="0.4" />
+          <rect x="550" y="198" width="100" height="12" rx="3" fill="none" stroke="#3B82F6" strokeWidth="1" />
+          <text x="500" y="228" fontSize="10" fill="#374151">伸び</text>
+          <rect x="550" y="218" width="10" height="12" rx="3" fill="#3B82F6" opacity="0.4" />
+          <rect x="550" y="218" width="10" height="12" rx="3" fill="none" stroke="#3B82F6" strokeWidth="1" />
+          <text x="600" y="255" textAnchor="middle" fontSize="10" fill="#1E40AF" fontWeight="bold">最高の強度と感度</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+/* 号数と強度の関係図（棒グラフ風） */
+function LineStrengthDiagram() {
+  const data = [
+    { gou: "0.3", kg: 2.7, color: "#3B82F6" },
+    { gou: "0.6", kg: 5.4, color: "#3B82F6" },
+    { gou: "0.8", kg: 7.3, color: "#3B82F6" },
+    { gou: "1.0", kg: 9.1, color: "#3B82F6" },
+    { gou: "1.5", kg: 13.6, color: "#3B82F6" },
+    { gou: "2.0", kg: 17.2, color: "#3B82F6" },
+    { gou: "3.0", kg: 22.7, color: "#3B82F6" },
+  ];
+  const maxKg = 25;
+  const barWidth = 40;
+  const gap = 20;
+  const chartLeft = 50;
+  const chartBottom = 180;
+  const chartHeight = 140;
+
+  return (
+    <div className="my-6">
+      <p className="mb-2 text-sm font-medium text-center text-muted-foreground">PEラインの号数と耐荷重の関係</p>
+      <svg
+        viewBox="0 0 500 220"
+        width="100%"
+        style={{ maxWidth: 500 }}
+        aria-label="PEラインの号数と耐荷重の関係を棒グラフで示した図。号数が大きくなるほど耐荷重が増す。"
+        className="mx-auto"
+      >
+        <rect x="0" y="0" width="500" height="220" rx="8" fill="#F9FAFB" />
+
+        {/* Y軸ラベル */}
+        <text x="12" y="110" textAnchor="middle" fontSize="10" fill="#6B7280" transform="rotate(-90, 12, 110)">耐荷重 (kg)</text>
+
+        {/* Y軸目盛り */}
+        {[0, 5, 10, 15, 20, 25].map((v) => {
+          const y = chartBottom - (v / maxKg) * chartHeight;
+          return (
+            <g key={v}>
+              <line x1={chartLeft - 5} y1={y} x2={chartLeft + data.length * (barWidth + gap)} y2={y} stroke="#E5E7EB" strokeWidth="0.8" />
+              <text x={chartLeft - 8} y={y + 4} textAnchor="end" fontSize="9" fill="#6B7280">{v}</text>
+            </g>
+          );
+        })}
+
+        {/* X軸 */}
+        <line x1={chartLeft} y1={chartBottom} x2={chartLeft + data.length * (barWidth + gap)} y2={chartBottom} stroke="#9CA3AF" strokeWidth="1" />
+
+        {/* 棒グラフ */}
+        {data.map((d, i) => {
+          const x = chartLeft + i * (barWidth + gap) + gap / 2;
+          const barH = (d.kg / maxKg) * chartHeight;
+          const y = chartBottom - barH;
+          return (
+            <g key={d.gou}>
+              <rect x={x} y={y} width={barWidth} height={barH} rx="3" fill={d.color} opacity="0.6" stroke={d.color} strokeWidth="1" />
+              <text x={x + barWidth / 2} y={y - 4} textAnchor="middle" fontSize="9" fontWeight="bold" fill="#1E40AF">{d.kg}kg</text>
+              <text x={x + barWidth / 2} y={chartBottom + 14} textAnchor="middle" fontSize="10" fill="#374151">{d.gou}号</text>
+            </g>
+          );
+        })}
+
+        {/* X軸ラベル */}
+        <text x={chartLeft + (data.length * (barWidth + gap)) / 2} y={210} textAnchor="middle" fontSize="10" fill="#6B7280">PE号数</text>
+      </svg>
+    </div>
+  );
+}
+
 export default function LineGuidePage() {
   return (
     <div className="container mx-auto max-w-4xl px-4 py-6 sm:py-8">
@@ -125,6 +296,7 @@ export default function LineGuidePage() {
       {/* ライン3種類の比較 */}
       <section className="mb-10">
         <h2 className="mb-4 text-xl font-bold">ラインの種類と特徴</h2>
+        <LineComparisonDiagram />
 
         <div className="grid gap-4 sm:grid-cols-3">
           {/* PE */}
@@ -231,6 +403,7 @@ export default function LineGuidePage() {
       {/* PE号数×強度表 */}
       <section className="mb-10">
         <h2 className="mb-2 text-xl font-bold">PEラインの号数と強度</h2>
+        <LineStrengthDiagram />
         <p className="mb-4 text-sm text-muted-foreground">
           PEラインは4本編み・8本編みで強度が若干異なります。下記は標準的な4本編みの目安値です。
         </p>

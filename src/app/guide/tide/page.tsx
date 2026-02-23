@@ -86,6 +86,250 @@ function Warning({ children }: { children: React.ReactNode }) {
   );
 }
 
+/* 潮の満ち引き図（大潮/中潮/小潮/長潮の1日の水位変化グラフ） */
+function TideCycleDiagram() {
+  return (
+    <div className="my-6">
+      <p className="mb-2 text-sm font-medium text-center text-muted-foreground">潮回りごとの1日の水位変化</p>
+      <svg
+        viewBox="0 0 700 260"
+        width="100%"
+        style={{ maxWidth: 700 }}
+        aria-label="大潮、中潮、小潮、長潮の1日の水位変化を重ねて表示したグラフ。大潮が最も干満差が大きく、長潮が最も小さい。"
+        className="mx-auto"
+      >
+        <rect x="0" y="0" width="700" height="260" rx="8" fill="#F9FAFB" />
+
+        {/* グラフエリア */}
+        <rect x="60" y="30" width="580" height="170" rx="4" fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="1" />
+
+        {/* Y軸ラベル */}
+        <text x="15" y="115" textAnchor="middle" fontSize="10" fill="#6B7280" transform="rotate(-90, 15, 115)">潮位 (cm)</text>
+        <text x="55" y="42" textAnchor="end" fontSize="9" fill="#6B7280">200</text>
+        <text x="55" y="72" textAnchor="end" fontSize="9" fill="#6B7280">150</text>
+        <text x="55" y="102" textAnchor="end" fontSize="9" fill="#6B7280">100</text>
+        <text x="55" y="132" textAnchor="end" fontSize="9" fill="#6B7280">50</text>
+        <text x="55" y="162" textAnchor="end" fontSize="9" fill="#6B7280">0</text>
+        <text x="55" y="197" textAnchor="end" fontSize="9" fill="#6B7280">-20</text>
+
+        {/* Y軸グリッド */}
+        <line x1="60" y1="38" x2="640" y2="38" stroke="#F3F4F6" strokeWidth="0.8" />
+        <line x1="60" y1="68" x2="640" y2="68" stroke="#F3F4F6" strokeWidth="0.8" />
+        <line x1="60" y1="98" x2="640" y2="98" stroke="#F3F4F6" strokeWidth="0.8" />
+        <line x1="60" y1="128" x2="640" y2="128" stroke="#F3F4F6" strokeWidth="0.8" />
+        <line x1="60" y1="158" x2="640" y2="158" stroke="#E5E7EB" strokeWidth="1" />
+
+        {/* X軸時間ラベル */}
+        {["0時", "3時", "6時", "9時", "12時", "15時", "18時", "21時", "24時"].map((t, i) => (
+          <text key={t} x={60 + i * 72.5} y={212} textAnchor="middle" fontSize="9" fill="#6B7280">{t}</text>
+        ))}
+
+        {/* 大潮カーブ（青・最も振幅大） */}
+        <path
+          d="M60,50 C110,50 130,170 205,175 C280,180 300,40 350,38 C400,36 420,175 495,180 C570,185 590,45 640,42"
+          fill="none" stroke="#3B82F6" strokeWidth="2.5"
+        />
+
+        {/* 中潮カーブ（緑） */}
+        <path
+          d="M60,65 C110,65 135,155 205,155 C275,155 305,55 350,55 C395,55 425,155 495,158 C565,160 595,60 640,58"
+          fill="none" stroke="#22C55E" strokeWidth="2" strokeDasharray="6,3"
+        />
+
+        {/* 小潮カーブ（オレンジ） */}
+        <path
+          d="M60,82 C110,82 140,140 205,138 C270,136 310,72 350,72 C390,72 430,138 495,140 C560,142 600,78 640,76"
+          fill="none" stroke="#F59E0B" strokeWidth="2" strokeDasharray="4,4"
+        />
+
+        {/* 長潮カーブ（赤・最も振幅小） */}
+        <path
+          d="M60,95 C110,95 145,128 205,126 C265,124 315,88 350,88 C385,88 435,126 495,128 C555,130 605,92 640,90"
+          fill="none" stroke="#EF4444" strokeWidth="1.5" strokeDasharray="2,3"
+        />
+
+        {/* 凡例 */}
+        <g>
+          <line x1="80" y1="238" x2="105" y2="238" stroke="#3B82F6" strokeWidth="2.5" />
+          <text x="110" y="242" fontSize="10" fill="#3B82F6">大潮</text>
+
+          <line x1="160" y1="238" x2="185" y2="238" stroke="#22C55E" strokeWidth="2" strokeDasharray="6,3" />
+          <text x="190" y="242" fontSize="10" fill="#22C55E">中潮</text>
+
+          <line x1="240" y1="238" x2="265" y2="238" stroke="#F59E0B" strokeWidth="2" strokeDasharray="4,4" />
+          <text x="270" y="242" fontSize="10" fill="#F59E0B">小潮</text>
+
+          <line x1="320" y1="238" x2="345" y2="238" stroke="#EF4444" strokeWidth="1.5" strokeDasharray="2,3" />
+          <text x="350" y="242" fontSize="10" fill="#EF4444">長潮</text>
+
+          <text x="450" y="242" fontSize="9" fill="#6B7280">干満差が大きいほど魚の活性UP</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+/* 上げ潮・下げ潮と魚の活性図 */
+function TideActivityDiagram() {
+  return (
+    <div className="my-6">
+      <p className="mb-2 text-sm font-medium text-center text-muted-foreground">潮の動きと魚の活性の関係</p>
+      <svg
+        viewBox="0 0 700 240"
+        width="100%"
+        style={{ maxWidth: 700 }}
+        aria-label="上げ潮と下げ潮の動きに対する魚の活性度を示す図。潮が動き始めるタイミングと潮止まりで活性がどう変化するかを表す。"
+        className="mx-auto"
+      >
+        <rect x="0" y="0" width="700" height="240" rx="8" fill="#F9FAFB" />
+
+        {/* グラフエリア */}
+        <rect x="70" y="25" width="580" height="155" rx="4" fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="1" />
+
+        {/* Y軸（潮位） */}
+        <text x="20" y="102" textAnchor="middle" fontSize="10" fill="#3B82F6" transform="rotate(-90, 20, 102)">潮位</text>
+
+        {/* 潮位カーブ */}
+        <path
+          d="M70,160 C140,160 170,40 265,38 C360,36 370,170 430,170 C490,170 540,40 600,38 C620,37 640,45 650,55"
+          fill="none" stroke="#3B82F6" strokeWidth="2.5"
+        />
+
+        {/* 干潮マーク */}
+        <text x="70" y="175" textAnchor="start" fontSize="9" fontWeight="bold" fill="#3B82F6">干潮</text>
+        <text x="430" y="185" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#3B82F6">干潮</text>
+
+        {/* 満潮マーク */}
+        <text x="265" y="32" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#3B82F6">満潮</text>
+        <text x="600" y="32" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#3B82F6">満潮</text>
+
+        {/* 潮止まりゾーン */}
+        <rect x="250" y="25" width="30" height="155" fill="#EF4444" opacity="0.06" />
+        <rect x="415" y="25" width="30" height="155" fill="#EF4444" opacity="0.06" />
+        <text x="265" y="145" textAnchor="middle" fontSize="8" fill="#EF4444">潮止まり</text>
+        <text x="430" y="145" textAnchor="middle" fontSize="8" fill="#EF4444">潮止まり</text>
+
+        {/* 魚の活性バー（下段） */}
+        {/* 上げ潮ゾーン */}
+        <rect x="90" y="195" width="155" height="18" rx="4" fill="#22C55E" opacity="0.15" stroke="#22C55E" strokeWidth="1" />
+        <text x="167" y="207" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#22C55E">上げ潮</text>
+
+        {/* 活性が高い部分（上げ3分） */}
+        <rect x="140" y="195" width="50" height="18" rx="0" fill="#22C55E" opacity="0.3" />
+        <text x="165" y="230" textAnchor="middle" fontSize="8" fill="#22C55E">上げ3分</text>
+
+        {/* 潮止まりゾーン */}
+        <rect x="248" y="195" width="34" height="18" rx="4" fill="#EF4444" opacity="0.15" stroke="#EF4444" strokeWidth="1" />
+        <text x="265" y="207" textAnchor="middle" fontSize="8" fill="#EF4444">停</text>
+
+        {/* 下げ潮ゾーン */}
+        <rect x="285" y="195" width="125" height="18" rx="4" fill="#F59E0B" opacity="0.15" stroke="#F59E0B" strokeWidth="1" />
+        <text x="347" y="207" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#F59E0B">下げ潮</text>
+
+        {/* 活性が高い部分（下げ7分） */}
+        <rect x="340" y="195" width="65" height="18" rx="0" fill="#F59E0B" opacity="0.3" />
+        <text x="372" y="230" textAnchor="middle" fontSize="8" fill="#F59E0B">下げ7分</text>
+
+        {/* 潮止まりゾーン */}
+        <rect x="413" y="195" width="34" height="18" rx="4" fill="#EF4444" opacity="0.15" stroke="#EF4444" strokeWidth="1" />
+        <text x="430" y="207" textAnchor="middle" fontSize="8" fill="#EF4444">停</text>
+
+        {/* 次の上げ潮 */}
+        <rect x="450" y="195" width="195" height="18" rx="4" fill="#22C55E" opacity="0.15" stroke="#22C55E" strokeWidth="1" />
+        <text x="547" y="207" textAnchor="middle" fontSize="9" fontWeight="bold" fill="#22C55E">上げ潮</text>
+
+        {/* 魚活性ラベル */}
+        <text x="350" y="222" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#374151">「上げ3分・下げ7分」が釣れるタイミング</text>
+      </svg>
+    </div>
+  );
+}
+
+/* 潮見表の読み方図 */
+function TideChartReadingDiagram() {
+  return (
+    <div className="my-6">
+      <p className="mb-2 text-sm font-medium text-center text-muted-foreground">潮見表（タイドグラフ）の読み方</p>
+      <svg
+        viewBox="0 0 700 280"
+        width="100%"
+        style={{ maxWidth: 700 }}
+        aria-label="潮見表（タイドグラフ）の読み方。満潮、干潮、潮止まりの位置をラベル付きの曲線で示す。"
+        className="mx-auto"
+      >
+        <rect x="0" y="0" width="700" height="280" rx="8" fill="#EFF6FF" />
+
+        {/* タイトル */}
+        <text x="350" y="22" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#1E40AF">タイドグラフの見方（例: 大潮の日）</text>
+
+        {/* グラフエリア */}
+        <rect x="70" y="35" width="580" height="170" rx="4" fill="#FFFFFF" stroke="#93C5FD" strokeWidth="1" />
+
+        {/* Y軸 */}
+        <text x="55" y="48" textAnchor="end" fontSize="9" fill="#6B7280">180cm</text>
+        <text x="55" y="90" textAnchor="end" fontSize="9" fill="#6B7280">120cm</text>
+        <text x="55" y="132" textAnchor="end" fontSize="9" fill="#6B7280">60cm</text>
+        <text x="55" y="174" textAnchor="end" fontSize="9" fill="#6B7280">0cm</text>
+        <text x="55" y="202" textAnchor="end" fontSize="9" fill="#6B7280">-20cm</text>
+
+        {/* Y軸グリッド */}
+        <line x1="70" y1="45" x2="650" y2="45" stroke="#EFF6FF" strokeWidth="0.8" />
+        <line x1="70" y1="87" x2="650" y2="87" stroke="#EFF6FF" strokeWidth="0.8" />
+        <line x1="70" y1="129" x2="650" y2="129" stroke="#EFF6FF" strokeWidth="0.8" />
+        <line x1="70" y1="171" x2="650" y2="171" stroke="#E5E7EB" strokeWidth="1" />
+
+        {/* X軸時間 */}
+        {["0", "3", "6", "9", "12", "15", "18", "21", "24"].map((t, i) => (
+          <text key={t} x={70 + i * 72.5} y={220} textAnchor="middle" fontSize="9" fill="#6B7280">{t}時</text>
+        ))}
+
+        {/* 潮位カーブ（メインのタイドグラフ） */}
+        <path
+          d="M70,80 C100,80 130,185 215,190 C300,195 330,42 360,40 C390,38 420,190 505,195 C590,200 620,50 650,48"
+          fill="none" stroke="#3B82F6" strokeWidth="3"
+        />
+
+        {/* 干潮ラベル & ポイント */}
+        <circle cx="215" cy="190" r="4" fill="#3B82F6" />
+        <line x1="215" y1="190" x2="215" y2="225" stroke="#3B82F6" strokeWidth="1" strokeDasharray="3,2" />
+        <text x="215" y="240" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#3B82F6">干潮 5:42</text>
+        <text x="215" y="253" textAnchor="middle" fontSize="9" fill="#6B7280">潮位: 8cm</text>
+
+        {/* 満潮ラベル & ポイント */}
+        <circle cx="360" cy="40" r="4" fill="#EF4444" />
+        <line x1="360" y1="40" x2="390" y2="30" stroke="#EF4444" strokeWidth="1" />
+        <text x="420" y="30" textAnchor="start" fontSize="10" fontWeight="bold" fill="#EF4444">満潮 11:58</text>
+        <text x="420" y="43" textAnchor="start" fontSize="9" fill="#6B7280">潮位: 172cm</text>
+
+        {/* 第2干潮 */}
+        <circle cx="505" cy="195" r="4" fill="#3B82F6" />
+        <line x1="505" y1="195" x2="505" y2="225" stroke="#3B82F6" strokeWidth="1" strokeDasharray="3,2" />
+        <text x="505" y="240" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#3B82F6">干潮 18:15</text>
+        <text x="505" y="253" textAnchor="middle" fontSize="9" fill="#6B7280">潮位: -5cm</text>
+
+        {/* 潮止まりマーク */}
+        <rect x="207" y="183" width="16" height="14" rx="3" fill="#EF4444" opacity="0.15" stroke="#EF4444" strokeWidth="0.8" />
+        <text x="180" y="178" fontSize="8" fill="#EF4444">潮止まり</text>
+
+        <rect x="352" y="33" width="16" height="14" rx="3" fill="#EF4444" opacity="0.15" stroke="#EF4444" strokeWidth="0.8" />
+        <text x="340" y="28" fontSize="8" fill="#EF4444" textAnchor="end">潮止まり</text>
+
+        {/* 傾きが急な部分のハイライト（よく釣れるゾーン） */}
+        <rect x="240" y="35" width="85" height="170" fill="#22C55E" opacity="0.06" rx="3" />
+        <text x="282" y="60" textAnchor="middle" fontSize="8" fontWeight="bold" fill="#22C55E">よく釣れる</text>
+        <text x="282" y="72" textAnchor="middle" fontSize="8" fill="#22C55E">（急な上げ潮）</text>
+
+        <rect x="380" y="35" width="85" height="170" fill="#F59E0B" opacity="0.06" rx="3" />
+        <text x="422" y="60" textAnchor="middle" fontSize="8" fontWeight="bold" fill="#F59E0B">よく釣れる</text>
+        <text x="422" y="72" textAnchor="middle" fontSize="8" fill="#F59E0B">（急な下げ潮）</text>
+
+        {/* 注釈 */}
+        <text x="350" y="272" textAnchor="middle" fontSize="9" fill="#6B7280">曲線の傾きが急な部分ほど潮がよく動き、魚の活性が高い</text>
+      </svg>
+    </div>
+  );
+}
+
 export default function TideGuidePage() {
   return (
     <>
@@ -123,6 +367,7 @@ export default function TideGuidePage() {
         <div className="space-y-6">
           {/* 潮の種類 */}
           <SectionCard title="大潮・中潮・小潮・長潮・若潮の違い" icon={Waves}>
+            <TideCycleDiagram />
             <p className="mb-4 text-sm text-muted-foreground">
               潮の種類は月の満ち欠けに連動して、約15日周期で変化します。釣りへの影響度を理解しましょう。
             </p>
@@ -197,6 +442,7 @@ export default function TideGuidePage() {
 
           {/* 潮見表の読み方 */}
           <SectionCard title="潮見表の読み方" icon={BookOpen}>
+            <TideChartReadingDiagram />
             <p className="mb-4 text-sm text-muted-foreground">
               潮見表（タイドグラフ）は、一日の潮の満ち引きをグラフで表したもの。釣行前に必ずチェックしましょう。
             </p>
@@ -272,6 +518,7 @@ export default function TideGuidePage() {
 
           {/* 釣れる潮のタイミング */}
           <SectionCard title="釣れる潮のタイミング" icon={Clock}>
+            <TideActivityDiagram />
             <p className="mb-4 text-sm text-muted-foreground">
               潮の動きと魚の活性には密接な関係があります。ベストなタイミングを把握しましょう。
             </p>

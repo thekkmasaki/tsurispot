@@ -169,6 +169,199 @@ const faqJsonLd = {
   ],
 };
 
+/* ── SVG図解コンポーネント ── */
+
+function TetraHoleSvg() {
+  return (
+    <div className="my-6">
+      <h3 className="mb-3 text-center text-sm font-bold text-foreground">テトラの穴の探り方 - 良い穴と悪い穴</h3>
+      <svg
+        viewBox="0 0 520 360"
+        className="mx-auto w-full max-w-[520px]"
+        aria-label="テトラポッドの穴の探り方図解：良い穴と悪い穴の違い"
+      >
+        {/* 背景 */}
+        <rect x="0" y="0" width="520" height="360" fill="#F9FAFB" rx="12" />
+
+        {/* ── 良い穴 (左) ── */}
+        <g>
+          <rect x="15" y="10" width="235" height="26" rx="5" fill="#22C55E" />
+          <text x="132" y="28" fontSize="12" fill="white" textAnchor="middle" fontWeight="bold">良い穴（魚がいる確率 高）</text>
+
+          {/* テトラ左 */}
+          <polygon points="30,80 80,80 95,240 15,240" fill="#9CA3AF" opacity="0.4" stroke="#6B7280" strokeWidth="1" />
+          <text x="55" y="150" fontSize="10" fill="#4B5563" textAnchor="middle">テトラ</text>
+
+          {/* テトラ右 */}
+          <polygon points="150,70 200,70 215,240 135,240" fill="#9CA3AF" opacity="0.4" stroke="#6B7280" strokeWidth="1" />
+          <text x="175" y="140" fontSize="10" fill="#4B5563" textAnchor="middle">テトラ</text>
+
+          {/* 穴（暗い隙間・水あり） */}
+          <rect x="80" y="100" width="55" height="140" fill="#1E3A8A" opacity="0.4" rx="3" />
+          <rect x="82" y="150" width="51" height="88" fill="#3B82F6" opacity="0.3" />
+          <text x="107" y="120" fontSize="8" fill="white" textAnchor="middle">暗い</text>
+          <text x="107" y="195" fontSize="8" fill="#DBEAFE" textAnchor="middle">海水あり</text>
+
+          {/* 水面ライン（穴の中） */}
+          <line x1="82" y1="150" x2="133" y2="150" stroke="#60A5FA" strokeWidth="1" strokeDasharray="3,2" />
+
+          {/* 魚（カサゴ） */}
+          <ellipse cx="107" cy="210" rx="14" ry="8" fill="#EF4444" opacity="0.6" />
+          <circle cx="100" cy="208" r="2" fill="white" />
+          <text x="107" y="230" fontSize="8" fill="#DC2626" textAnchor="middle">カサゴ</text>
+
+          {/* 潮の流れ矢印 */}
+          <path d="M85,170 L130,170" fill="none" stroke="#60A5FA" strokeWidth="1.5" />
+          <polygon points="126,166 126,174 134,170" fill="#60A5FA" />
+          <text x="107" y="168" fontSize="7" fill="#2563EB" textAnchor="middle">潮の流れ</text>
+
+          {/* チェックポイント */}
+          <g>
+            <text x="15" y="270" fontSize="10" fill="#22C55E" fontWeight="bold">ポイント:</text>
+            <text x="15" y="285" fontSize="9" fill="#6B7280">- 奥が暗くて見えない</text>
+            <text x="15" y="300" fontSize="9" fill="#6B7280">- 海水が入っている</text>
+            <text x="15" y="315" fontSize="9" fill="#6B7280">- 潮が出入りしている</text>
+            <text x="15" y="330" fontSize="9" fill="#6B7280">- 水面に近い位置</text>
+          </g>
+        </g>
+
+        {/* 仕切り線 */}
+        <line x1="260" y1="20" x2="260" y2="340" stroke="#D1D5DB" strokeWidth="1" strokeDasharray="4,4" />
+
+        {/* ── 悪い穴 (右) ── */}
+        <g>
+          <rect x="275" y="10" width="235" height="26" rx="5" fill="#EF4444" />
+          <text x="392" y="28" fontSize="12" fill="white" textAnchor="middle" fontWeight="bold">悪い穴（魚がいない確率 高）</text>
+
+          {/* テトラ左 */}
+          <polygon points="290,80 340,80 355,200 275,200" fill="#9CA3AF" opacity="0.4" stroke="#6B7280" strokeWidth="1" />
+
+          {/* テトラ右 */}
+          <polygon points="390,80 440,80 455,200 375,200" fill="#9CA3AF" opacity="0.4" stroke="#6B7280" strokeWidth="1" />
+
+          {/* 穴（明るい・浅い・乾いている） */}
+          <rect x="340" y="100" width="35" height="80" fill="#E5E7EB" rx="3" />
+
+          {/* 明るい光線 */}
+          <line x1="350" y1="95" x2="345" y2="70" stroke="#F59E0B" strokeWidth="1" opacity="0.5" />
+          <line x1="358" y1="95" x2="358" y2="68" stroke="#F59E0B" strokeWidth="1" opacity="0.5" />
+          <line x1="366" y1="95" x2="371" y2="70" stroke="#F59E0B" strokeWidth="1" opacity="0.5" />
+          <text x="358" y="140" fontSize="8" fill="#92400E" textAnchor="middle">明るい</text>
+          <text x="358" y="155" fontSize="8" fill="#92400E" textAnchor="middle">浅い</text>
+          <text x="358" y="170" fontSize="8" fill="#92400E" textAnchor="middle">乾いている</text>
+
+          {/* バツ印 */}
+          <line x1="345" y1="190" x2="370" y2="210" stroke="#EF4444" strokeWidth="3" />
+          <line x1="370" y1="190" x2="345" y2="210" stroke="#EF4444" strokeWidth="3" />
+
+          {/* チェックポイント */}
+          <g>
+            <text x="275" y="270" fontSize="10" fill="#EF4444" fontWeight="bold">避けるべき穴:</text>
+            <text x="275" y="285" fontSize="9" fill="#6B7280">- 底が見えるほど浅い</text>
+            <text x="275" y="300" fontSize="9" fill="#6B7280">- 乾いている（水なし）</text>
+            <text x="275" y="315" fontSize="9" fill="#6B7280">- 明るくて開けている</text>
+            <text x="275" y="330" fontSize="9" fill="#6B7280">- 水面から離れすぎている</text>
+          </g>
+        </g>
+
+        {/* 下部の共通注意 */}
+        <text x="260" y="355" fontSize="9" fill="#6B7280" textAnchor="middle">
+          1つの穴で20〜30秒、反応がなければ次の穴へ移動。たくさんの穴を探るのが釣果アップのカギ
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+function AnazuriRigDetailSvg() {
+  return (
+    <div className="my-6">
+      <h3 className="mb-3 text-center text-sm font-bold text-foreground">穴釣りの仕掛けと動作</h3>
+      <svg
+        viewBox="0 0 400 380"
+        className="mx-auto w-full max-w-[400px]"
+        aria-label="穴釣りの仕掛けと誘い動作の図解"
+      >
+        {/* 背景 */}
+        <rect x="0" y="0" width="400" height="380" fill="#F9FAFB" rx="12" />
+
+        {/* テトラ左 */}
+        <polygon points="30,60 100,60 120,280 10,280" fill="#9CA3AF" opacity="0.35" stroke="#6B7280" strokeWidth="1" />
+        <text x="65" y="160" fontSize="11" fill="#4B5563" textAnchor="middle">テトラ</text>
+
+        {/* テトラ右 */}
+        <polygon points="210,50 280,50 300,280 190,280" fill="#9CA3AF" opacity="0.35" stroke="#6B7280" strokeWidth="1" />
+        <text x="245" y="150" fontSize="11" fill="#4B5563" textAnchor="middle">テトラ</text>
+
+        {/* 穴の中（水） */}
+        <rect x="100" y="90" width="90" height="190" fill="#DBEAFE" rx="4" />
+        <line x1="100" y1="95" x2="190" y2="95" stroke="#2563EB" strokeWidth="1" strokeDasharray="4,3" />
+        <text x="180" y="89" fontSize="8" fill="#2563EB" textAnchor="end">水面</text>
+
+        {/* 竿（短い） */}
+        <line x1="120" y1="15" x2="145" y2="15" stroke="#78716C" strokeWidth="4" strokeLinecap="round" />
+        <text x="132" y="10" fontSize="10" fill="#44403C" textAnchor="middle">短い竿 (1-1.5m)</text>
+
+        {/* 道糸 */}
+        <line x1="145" y1="17" x2="145" y2="200" stroke="#4B5563" strokeWidth="1.5" />
+        <text x="160" y="55" fontSize="10" fill="#4B5563">道糸</text>
+        <text x="160" y="68" fontSize="9" fill="#6B7280">(ナイロン3-4号)</text>
+
+        {/* ブラクリ */}
+        <ellipse cx="145" cy="215" rx="12" ry="9" fill="#EF4444" stroke="#DC2626" strokeWidth="1.5" />
+        <text x="145" y="219" fontSize="7" fill="white" textAnchor="middle">ブラクリ</text>
+
+        {/* 針+エサ */}
+        <path d="M145,224 Q138,242 147,242" fill="none" stroke="#F59E0B" strokeWidth="2" />
+        <ellipse cx="143" cy="244" rx="5" ry="3.5" fill="#F97316" opacity="0.8" />
+        <text x="165" y="218" fontSize="10" fill="#DC2626">オモリ+針</text>
+        <text x="165" y="248" fontSize="9" fill="#F97316">エサ</text>
+
+        {/* 誘いの動作（上下矢印） */}
+        <g>
+          <path d="M120,190 L120,240" fill="none" stroke="#22C55E" strokeWidth="2" />
+          <polygon points="115,195 125,195 120,185" fill="#22C55E" />
+          <polygon points="115,235 125,235 120,245" fill="#22C55E" />
+          <text x="105" y="220" fontSize="9" fill="#22C55E" textAnchor="end">5-10cm</text>
+          <text x="105" y="232" fontSize="9" fill="#22C55E" textAnchor="end">上下する</text>
+        </g>
+
+        {/* 魚（隠れている） */}
+        <ellipse cx="155" cy="260" rx="12" ry="7" fill="#EF4444" opacity="0.5" />
+        <circle cx="149" cy="258" r="2" fill="white" />
+        <text x="175" y="268" fontSize="9" fill="#DC2626">カサゴ</text>
+
+        {/* 右側の手順 */}
+        <g>
+          <rect x="300" y="60" width="90" height="280" rx="8" fill="#EFF6FF" stroke="#3B82F6" strokeWidth="1" />
+          <text x="345" y="82" fontSize="10" fill="#3B82F6" textAnchor="middle" fontWeight="bold">手順</text>
+
+          <circle cx="320" cy="105" r="10" fill="#3B82F6" />
+          <text x="320" y="109" fontSize="9" fill="white" textAnchor="middle">1</text>
+          <text x="345" y="125" fontSize="9" fill="#4B5563" textAnchor="middle">穴に</text>
+          <text x="345" y="137" fontSize="9" fill="#4B5563" textAnchor="middle">落とす</text>
+
+          <circle cx="320" cy="165" r="10" fill="#3B82F6" />
+          <text x="320" y="169" fontSize="9" fill="white" textAnchor="middle">2</text>
+          <text x="345" y="185" fontSize="9" fill="#4B5563" textAnchor="middle">底で</text>
+          <text x="345" y="197" fontSize="9" fill="#4B5563" textAnchor="middle">誘う</text>
+
+          <circle cx="320" cy="225" r="10" fill="#3B82F6" />
+          <text x="320" y="229" fontSize="9" fill="white" textAnchor="middle">3</text>
+          <text x="345" y="245" fontSize="9" fill="#4B5563" textAnchor="middle">10-20秒</text>
+          <text x="345" y="257" fontSize="9" fill="#4B5563" textAnchor="middle">待つ</text>
+
+          <circle cx="320" cy="285" r="10" fill="#EF4444" />
+          <text x="320" y="289" fontSize="9" fill="white" textAnchor="middle">4</text>
+          <text x="345" y="305" fontSize="9" fill="#EF4444" textAnchor="middle">アタリ→</text>
+          <text x="345" y="317" fontSize="9" fill="#EF4444" textAnchor="middle">即抜上げ!</text>
+          <text x="345" y="332" fontSize="8" fill="#6B7280" textAnchor="middle">なければ次の穴</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
 function SectionCard({
   title,
   icon: Icon,
@@ -328,6 +521,8 @@ export default function AnazuriGuidePage() {
           {/* 仕掛け図 */}
           <RigDiagram type="anazuri" />
 
+          <AnazuriRigDetailSvg />
+
           {/* 釣り方の手順 */}
           <SectionCard title="釣り方の手順" icon={Footprints}>
             <ol className="list-none space-y-4">
@@ -370,6 +565,11 @@ export default function AnazuriGuidePage() {
                   </p>
                 </div>
               </li>
+            </ol>
+
+            <TetraHoleSvg />
+
+            <ol className="list-none space-y-4">
               <li className="flex gap-3">
                 <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
                   4

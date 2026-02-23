@@ -198,6 +198,212 @@ function Danger({ children }: { children: React.ReactNode }) {
   );
 }
 
+function TackleSetupDiagram() {
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 600 320"
+        width="100%"
+        style={{ maxWidth: 600 }}
+        aria-label="スピニングタックルの組み立て手順図：竿のジョイント、リール取り付け、ガイドにライン通し、仕掛け接続"
+        role="img"
+      >
+        <rect width="600" height="320" rx="12" fill="#EFF6FF" />
+        <text x="300" y="28" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#1E3A5F">スピニングタックル組み立ての流れ</text>
+
+        {/* Step 1: 竿を伸ばす */}
+        <g transform="translate(20,55)">
+          <rect x="10" y="10" width="120" height="100" rx="8" fill="#FFFFFF" stroke="#D1D5DB" strokeWidth="1.5" />
+          <circle cx="30" cy="30" r="12" fill="#3B82F6" />
+          <text x="30" y="34" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#FFFFFF">1</text>
+          <text x="75" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1E3A5F">竿を伸ばす</text>
+          {/* 縮んだ竿 */}
+          <rect x="25" y="50" width="90" height="6" rx="3" fill="#D1D5DB" stroke="#9CA3AF" strokeWidth="1" />
+          {/* 伸ばした竿 */}
+          <line x1="25" y1="75" x2="115" y2="75" stroke="#F59E0B" strokeWidth="4" strokeLinecap="round" />
+          <line x1="115" y1="75" x2="115" y2="68" stroke="#F59E0B" strokeWidth="2" />
+          {/* ガイド */}
+          <circle cx="45" cy="75" r="3" fill="none" stroke="#6B7280" strokeWidth="1.5" />
+          <circle cx="70" cy="75" r="3" fill="none" stroke="#6B7280" strokeWidth="1.5" />
+          <circle cx="95" cy="75" r="2.5" fill="none" stroke="#6B7280" strokeWidth="1.5" />
+          <text x="70" y="98" textAnchor="middle" fontSize="9" fill="#6B7280">穂先から順に引き出す</text>
+        </g>
+
+        {/* 矢印 */}
+        <path d="M150,105 L170,105" stroke="#3B82F6" strokeWidth="2" fill="none" markerEnd="url(#arrowSetup)" />
+
+        {/* Step 2: リール取り付け */}
+        <g transform="translate(170,55)">
+          <rect x="10" y="10" width="120" height="100" rx="8" fill="#FFFFFF" stroke="#D1D5DB" strokeWidth="1.5" />
+          <circle cx="30" cy="30" r="12" fill="#3B82F6" />
+          <text x="30" y="34" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#FFFFFF">2</text>
+          <text x="78" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1E3A5F">リール装着</text>
+          {/* 竿のグリップ部分 */}
+          <rect x="25" y="55" width="90" height="8" rx="4" fill="#F59E0B" stroke="#D97706" strokeWidth="1" />
+          {/* リールシート */}
+          <rect x="50" y="50" width="30" height="18" rx="3" fill="#D1D5DB" stroke="#9CA3AF" strokeWidth="1.5" />
+          {/* リール本体 */}
+          <rect x="52" y="68" width="26" height="30" rx="5" fill="#E5E7EB" stroke="#9CA3AF" strokeWidth="1.5" />
+          {/* 矢印（取り付け方向） */}
+          <path d="M65,45 L65,52" stroke="#22C55E" strokeWidth="1.5" markerEnd="url(#arrowGreenSetup)" />
+          <text x="70" y="98" textAnchor="middle" fontSize="9" fill="#6B7280">リールシートに固定</text>
+        </g>
+
+        {/* 矢印 */}
+        <path d="M300,105 L320,105" stroke="#3B82F6" strokeWidth="2" fill="none" markerEnd="url(#arrowSetup)" />
+
+        {/* Step 3: ライン通し */}
+        <g transform="translate(320,55)">
+          <rect x="10" y="10" width="120" height="100" rx="8" fill="#FFFFFF" stroke="#D1D5DB" strokeWidth="1.5" />
+          <circle cx="30" cy="30" r="12" fill="#3B82F6" />
+          <text x="30" y="34" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#FFFFFF">3</text>
+          <text x="78" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1E3A5F">糸を通す</text>
+          {/* 竿 */}
+          <line x1="25" y1="65" x2="115" y2="65" stroke="#F59E0B" strokeWidth="3" strokeLinecap="round" />
+          {/* ガイド */}
+          <circle cx="40" cy="65" r="4" fill="none" stroke="#6B7280" strokeWidth="1.5" />
+          <circle cx="65" cy="65" r="3.5" fill="none" stroke="#6B7280" strokeWidth="1.5" />
+          <circle cx="90" cy="65" r="3" fill="none" stroke="#6B7280" strokeWidth="1.5" />
+          {/* ラインがガイドを通る */}
+          <path d="M30,58 L40,61 L65,61 L90,62 L110,58" stroke="#3B82F6" strokeWidth="1.5" fill="none" strokeDasharray="4,2" />
+          {/* 方向矢印 */}
+          <path d="M35,50 L50,50" stroke="#22C55E" strokeWidth="1.5" markerEnd="url(#arrowGreenSetup)" />
+          <text x="70" y="98" textAnchor="middle" fontSize="9" fill="#6B7280">下のガイドから順に</text>
+        </g>
+
+        {/* 矢印 */}
+        <path d="M450,105 L470,105" stroke="#3B82F6" strokeWidth="2" fill="none" markerEnd="url(#arrowSetup)" />
+
+        {/* Step 4: 仕掛け接続 */}
+        <g transform="translate(470,55)">
+          <rect x="10" y="10" width="120" height="100" rx="8" fill="#FFFFFF" stroke="#D1D5DB" strokeWidth="1.5" />
+          <circle cx="30" cy="30" r="12" fill="#22C55E" />
+          <text x="30" y="34" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#FFFFFF">4</text>
+          <text x="78" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1E3A5F">仕掛け接続</text>
+          {/* ラインの先 */}
+          <line x1="25" y1="60" x2="65" y2="60" stroke="#3B82F6" strokeWidth="1.5" />
+          {/* スナップ/サルカン */}
+          <circle cx="70" cy="60" r="4" fill="none" stroke="#9CA3AF" strokeWidth="2" />
+          {/* 仕掛け */}
+          <line x1="74" y1="60" x2="110" y2="60" stroke="#EF4444" strokeWidth="1.5" />
+          <line x1="110" y1="60" x2="110" y2="85" stroke="#EF4444" strokeWidth="1.5" />
+          {/* 針 */}
+          <path d="M110,85 Q115,95 105,90" stroke="#EF4444" strokeWidth="1.5" fill="none" />
+          {/* おもり */}
+          <circle cx="95" cy="75" r="5" fill="#9CA3AF" stroke="#6B7280" strokeWidth="1" />
+          <text x="70" y="98" textAnchor="middle" fontSize="9" fill="#6B7280">結んで完成!</text>
+        </g>
+
+        {/* 下部の注意書き */}
+        <rect x="30" y="175" width="540" height="130" rx="8" fill="#FFFFFF" stroke="#D1D5DB" strokeWidth="1" />
+        <text x="300" y="198" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#1E3A5F">チェックポイント</text>
+        <g transform="translate(50,210)">
+          <circle cx="8" cy="4" r="4" fill="#22C55E" />
+          <text x="18" y="8" fontSize="11" fill="#374151">ガイドは全て同じ方向（一直線）に並んでいるか</text>
+        </g>
+        <g transform="translate(50,235)">
+          <circle cx="8" cy="4" r="4" fill="#22C55E" />
+          <text x="18" y="8" fontSize="11" fill="#374151">リールがグラつかず固定されているか</text>
+        </g>
+        <g transform="translate(50,260)">
+          <circle cx="8" cy="4" r="4" fill="#22C55E" />
+          <text x="18" y="8" fontSize="11" fill="#374151">糸がガイドを一つも飛ばさず通っているか</text>
+        </g>
+        <g transform="translate(50,285)">
+          <circle cx="8" cy="4" r="4" fill="#22C55E" />
+          <text x="18" y="8" fontSize="11" fill="#374151">各節の竿がしっかり伸びて固定されているか</text>
+        </g>
+
+        <defs>
+          <marker id="arrowSetup" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0,0 8,3 0,6" fill="#3B82F6" />
+          </marker>
+          <marker id="arrowGreenSetup" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0,0 8,3 0,6" fill="#22C55E" />
+          </marker>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
+function DragAdjustmentDiagram() {
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 550 260"
+        width="100%"
+        style={{ maxWidth: 550 }}
+        aria-label="ドラグ調整の3段階図：締めすぎ、適正、緩すぎの比較"
+        role="img"
+      >
+        <rect width="550" height="260" rx="12" fill="#EFF6FF" />
+        <text x="275" y="28" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#1E3A5F">ドラグ調整の目安</text>
+
+        {/* 締めすぎ */}
+        <g transform="translate(20,50)">
+          <rect x="5" y="5" width="155" height="180" rx="8" fill="#FEF2F2" stroke="#FECACA" strokeWidth="1.5" />
+          <text x="82" y="28" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#EF4444">締めすぎ</text>
+          {/* リールアイコン */}
+          <rect x="52" y="40" width="40" height="50" rx="6" fill="#E5E7EB" stroke="#9CA3AF" strokeWidth="1.5" />
+          <circle cx="72" cy="65" r="12" fill="#D1D5DB" stroke="#9CA3AF" strokeWidth="1" />
+          {/* ドラグノブ（きつく締めた表示） */}
+          <rect x="62" y="35" width="20" height="8" rx="4" fill="#EF4444" stroke="#DC2626" strokeWidth="1" />
+          {/* 糸が切れている */}
+          <line x1="72" y1="90" x2="72" y2="120" stroke="#3B82F6" strokeWidth="2" />
+          <line x1="72" y1="122" x2="75" y2="125" stroke="#3B82F6" strokeWidth="2" />
+          <line x1="72" y1="122" x2="69" y2="126" stroke="#3B82F6" strokeWidth="2" />
+          <text x="82" y="145" textAnchor="middle" fontSize="10" fill="#EF4444" fontWeight="bold">糸が切れる!</text>
+          <text x="82" y="160" textAnchor="middle" fontSize="9" fill="#6B7280">魚の引きを吸収できず</text>
+          <text x="82" y="172" textAnchor="middle" fontSize="9" fill="#6B7280">ラインブレイクの危険</text>
+        </g>
+
+        {/* 適正 */}
+        <g transform="translate(195,50)">
+          <rect x="5" y="5" width="155" height="180" rx="8" fill="#F0FDF4" stroke="#BBF7D0" strokeWidth="2" />
+          <text x="82" y="28" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#22C55E">適正</text>
+          {/* リールアイコン */}
+          <rect x="52" y="40" width="40" height="50" rx="6" fill="#E5E7EB" stroke="#9CA3AF" strokeWidth="1.5" />
+          <circle cx="72" cy="65" r="12" fill="#D1D5DB" stroke="#9CA3AF" strokeWidth="1" />
+          {/* ドラグノブ */}
+          <rect x="62" y="35" width="20" height="8" rx="4" fill="#22C55E" stroke="#16A34A" strokeWidth="1" />
+          {/* 糸がしなやかに出ている */}
+          <path d="M72,90 Q80,105 72,120 Q64,135 72,145" stroke="#3B82F6" strokeWidth="2" fill="none" />
+          {/* 魚マーク */}
+          <ellipse cx="72" cy="155" rx="10" ry="5" fill="#60A5FA" />
+          <polygon points="82,155 90,150 90,160" fill="#60A5FA" />
+          <text x="82" y="175" textAnchor="middle" fontSize="10" fill="#22C55E" fontWeight="bold">バランス良好</text>
+        </g>
+
+        {/* 緩すぎ */}
+        <g transform="translate(370,50)">
+          <rect x="5" y="5" width="155" height="180" rx="8" fill="#FFFBEB" stroke="#FDE68A" strokeWidth="1.5" />
+          <text x="82" y="28" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#F59E0B">緩すぎ</text>
+          {/* リールアイコン */}
+          <rect x="52" y="40" width="40" height="50" rx="6" fill="#E5E7EB" stroke="#9CA3AF" strokeWidth="1.5" />
+          <circle cx="72" cy="65" r="12" fill="#D1D5DB" stroke="#9CA3AF" strokeWidth="1" />
+          {/* ドラグノブ（緩い表示） */}
+          <rect x="62" y="35" width="20" height="8" rx="4" fill="#F59E0B" stroke="#D97706" strokeWidth="1" />
+          {/* 糸がどんどん出ていく */}
+          <path d="M72,90 Q90,100 72,115 Q55,125 72,135 Q90,145 72,155" stroke="#3B82F6" strokeWidth="2" fill="none" />
+          {/* 方向矢印（出ていく方向） */}
+          <path d="M72,150 L72,160" stroke="#F59E0B" strokeWidth="2" markerEnd="url(#arrowAmber)" />
+          <text x="82" y="175" textAnchor="middle" fontSize="10" fill="#F59E0B" fontWeight="bold">巻き取れない!</text>
+        </g>
+
+        {/* 下部テキスト */}
+        <text x="275" y="248" textAnchor="middle" fontSize="11" fill="#6B7280">目安：糸を手で引いて、少し力を入れるとジーっと出る程度が適正</text>
+
+        <defs>
+          <marker id="arrowAmber" markerWidth="8" markerHeight="6" refX="4" refY="3" orient="auto">
+            <polygon points="0,0 8,3 0,6" fill="#F59E0B" />
+          </marker>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
 export default function SetupGuidePage() {
   return (
     <>
@@ -234,6 +440,8 @@ export default function SetupGuidePage() {
             釣りを始める前の準備。正しいセッティングで快適な釣りを楽しみましょう。
           </p>
         </div>
+
+        <TackleSetupDiagram />
 
         <div className="space-y-6">
           {/* リールの取り付け方 */}
@@ -347,6 +555,8 @@ export default function SetupGuidePage() {
               無理に引っ張ると折れの原因になります。固い場合は接続部分を温かい手で握って温めると外れやすくなります。
             </Danger>
           </SectionCard>
+
+          <DragAdjustmentDiagram />
 
           {/* 糸の通し方 */}
           <SectionCard title="糸の通し方（ラインの通し方）">

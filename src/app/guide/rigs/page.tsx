@@ -71,6 +71,185 @@ function TargetFishBadges({ fish }: { fish: string[] }) {
   );
 }
 
+/* ── 4種比較SVG ── */
+
+function RigComparisonSvg() {
+  return (
+    <div className="my-6">
+      <h3 className="mb-3 text-center text-sm font-bold text-foreground">4つの仕掛け比較</h3>
+      <svg
+        viewBox="0 0 640 320"
+        className="mx-auto w-full max-w-[640px]"
+        aria-label="サビキ・ちょい投げ・ウキ・穴釣りの4つの仕掛けを比較した図"
+      >
+        <rect x="0" y="0" width="640" height="320" fill="#F9FAFB" rx="12" />
+
+        {/* 水面ライン */}
+        <line x1="10" y1="80" x2="630" y2="80" stroke="#2563EB" strokeWidth="1" strokeDasharray="6,3" />
+        <text x="630" y="74" fontSize="9" fill="#2563EB" textAnchor="end">水面</text>
+
+        {/* 1. サビキ */}
+        <g>
+          <rect x="20" y="10" width="130" height="24" rx="4" fill="#3B82F6" />
+          <text x="85" y="27" fontSize="11" fill="white" textAnchor="middle" fontWeight="bold">サビキ</text>
+          <rect x="20" y="80" width="130" height="210" fill="#DBEAFE" opacity="0.5" rx="4" />
+          {/* 道糸 */}
+          <line x1="85" y1="44" x2="85" y2="250" stroke="#4B5563" strokeWidth="1.5" />
+          {/* 針6本 */}
+          {[110, 135, 160, 185, 210, 230].map((y, i) => (
+            <g key={i}>
+              <line x1="85" y1={y} x2="68" y2={y + 8} stroke="#4B5563" strokeWidth="0.7" />
+              <circle cx="66" cy={y + 6} r="2" fill="#EC4899" opacity="0.7" />
+            </g>
+          ))}
+          {/* カゴ */}
+          <rect x="78" y="250" width="14" height="14" rx="2" fill="#22C55E" />
+          <text x="85" y="290" fontSize="9" fill="#6B7280" textAnchor="middle">足元に落とす</text>
+          <text x="85" y="302" fontSize="9" fill="#6B7280" textAnchor="middle">コマセで集魚</text>
+        </g>
+
+        {/* 2. ちょい投げ */}
+        <g>
+          <rect x="170" y="10" width="130" height="24" rx="4" fill="#22C55E" />
+          <text x="235" y="27" fontSize="11" fill="white" textAnchor="middle" fontWeight="bold">ちょい投げ</text>
+          <rect x="170" y="80" width="130" height="210" fill="#DBEAFE" opacity="0.5" rx="4" />
+          {/* 道糸（斜め＝投げるので） */}
+          <line x1="210" y1="44" x2="235" y2="200" stroke="#4B5563" strokeWidth="1.5" />
+          {/* 天秤 */}
+          <line x1="235" y1="200" x2="215" y2="200" stroke="#4B5563" strokeWidth="2" />
+          <ellipse cx="210" cy="200" rx="8" ry="5" fill="#4B5563" />
+          {/* ハリス+針 */}
+          <line x1="235" y1="200" x2="235" y2="260" stroke="#4B5563" strokeWidth="1" strokeDasharray="3,2" />
+          <path d="M235,260 Q230,270 237,270" fill="none" stroke="#F59E0B" strokeWidth="1.5" />
+          {/* 海底 */}
+          <path d="M170,275 Q235,268 300,275" fill="#D4A373" opacity="0.3" />
+          <text x="235" y="290" fontSize="9" fill="#6B7280" textAnchor="middle">軽く投げて</text>
+          <text x="235" y="302" fontSize="9" fill="#6B7280" textAnchor="middle">底を探る</text>
+        </g>
+
+        {/* 3. ウキ */}
+        <g>
+          <rect x="320" y="10" width="130" height="24" rx="4" fill="#EF4444" />
+          <text x="385" y="27" fontSize="11" fill="white" textAnchor="middle" fontWeight="bold">ウキ釣り</text>
+          <rect x="320" y="80" width="130" height="210" fill="#DBEAFE" opacity="0.5" rx="4" />
+          {/* 道糸 */}
+          <line x1="385" y1="44" x2="385" y2="70" stroke="#4B5563" strokeWidth="1.5" />
+          {/* ウキ */}
+          <ellipse cx="385" cy="86" rx="8" ry="12" fill="#EF4444" stroke="#DC2626" strokeWidth="1" />
+          <rect x="383" y="71" width="3" height="10" fill="#44403C" />
+          {/* 道糸（水中） */}
+          <line x1="385" y1="98" x2="385" y2="240" stroke="#4B5563" strokeWidth="1" />
+          {/* ガン玉 */}
+          <circle cx="385" cy="210" r="3" fill="#4B5563" />
+          {/* ハリス */}
+          <line x1="385" y1="213" x2="385" y2="240" stroke="#4B5563" strokeWidth="0.8" strokeDasharray="3,2" />
+          {/* 針 */}
+          <path d="M385,240 Q380,252 387,252" fill="none" stroke="#F59E0B" strokeWidth="1.5" />
+          <text x="385" y="290" fontSize="9" fill="#6B7280" textAnchor="middle">ウキでアタリを見る</text>
+          <text x="385" y="302" fontSize="9" fill="#6B7280" textAnchor="middle">タナ自由自在</text>
+        </g>
+
+        {/* 4. 穴釣り */}
+        <g>
+          <rect x="470" y="10" width="130" height="24" rx="4" fill="#F59E0B" />
+          <text x="535" y="27" fontSize="11" fill="white" textAnchor="middle" fontWeight="bold">穴釣り</text>
+          {/* テトラ */}
+          <polygon points="480,80 520,80 530,200 470,200" fill="#9CA3AF" opacity="0.3" stroke="#6B7280" strokeWidth="0.5" />
+          <polygon points="550,80 590,80 600,200 540,200" fill="#9CA3AF" opacity="0.3" stroke="#6B7280" strokeWidth="0.5" />
+          {/* 隙間の水 */}
+          <rect x="520" y="100" width="20" height="170" fill="#DBEAFE" rx="3" />
+          {/* 道糸 */}
+          <line x1="530" y1="44" x2="530" y2="210" stroke="#4B5563" strokeWidth="1.5" />
+          {/* ブラクリ */}
+          <ellipse cx="530" cy="220" rx="8" ry="6" fill="#EF4444" />
+          <path d="M530,226 Q525,238 532,238" fill="none" stroke="#F59E0B" strokeWidth="1.5" />
+          <text x="535" y="290" fontSize="9" fill="#6B7280" textAnchor="middle">テトラの隙間に</text>
+          <text x="535" y="302" fontSize="9" fill="#6B7280" textAnchor="middle">落とすだけ</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function BasicPartsSvg() {
+  return (
+    <div className="my-6">
+      <h3 className="mb-3 text-center text-sm font-bold text-foreground">仕掛けの基本パーツ</h3>
+      <svg
+        viewBox="0 0 600 260"
+        className="mx-auto w-full max-w-[600px]"
+        aria-label="釣りの仕掛けに使う基本パーツの図解：サルカン、スナップ、ガン玉、ウキ止め、天秤オモリ、ブラクリ"
+      >
+        <rect x="0" y="0" width="600" height="260" fill="#F9FAFB" rx="12" />
+
+        {/* 1. サルカン */}
+        <g>
+          <circle cx="60" cy="80" r="20" fill="#9CA3AF" stroke="#6B7280" strokeWidth="2" />
+          <circle cx="60" cy="80" r="10" fill="#F9FAFB" />
+          <line x1="60" y1="55" x2="60" y2="40" stroke="#6B7280" strokeWidth="2" />
+          <line x1="60" y1="105" x2="60" y2="120" stroke="#6B7280" strokeWidth="2" />
+          <text x="60" y="145" fontSize="12" fill="#44403C" textAnchor="middle" fontWeight="bold">サルカン</text>
+          <text x="60" y="160" fontSize="9" fill="#6B7280" textAnchor="middle">糸のヨレ防止</text>
+          <text x="60" y="173" fontSize="9" fill="#6B7280" textAnchor="middle">道糸とハリスの接続</text>
+        </g>
+
+        {/* 2. スナップ */}
+        <g>
+          <ellipse cx="170" cy="75" rx="10" ry="18" fill="none" stroke="#6B7280" strokeWidth="2" />
+          <line x1="170" y1="55" x2="170" y2="40" stroke="#6B7280" strokeWidth="2" />
+          <line x1="162" y1="90" x2="178" y2="90" stroke="#6B7280" strokeWidth="2" />
+          <line x1="170" y1="95" x2="170" y2="120" stroke="#6B7280" strokeWidth="2" />
+          <text x="170" y="145" fontSize="12" fill="#44403C" textAnchor="middle" fontWeight="bold">スナップ</text>
+          <text x="170" y="160" fontSize="9" fill="#6B7280" textAnchor="middle">仕掛け交換が楽</text>
+          <text x="170" y="173" fontSize="9" fill="#6B7280" textAnchor="middle">ワンタッチ開閉</text>
+        </g>
+
+        {/* 3. ガン玉 */}
+        <g>
+          <circle cx="280" cy="80" r="12" fill="#4B5563" />
+          <line x1="268" y1="80" x2="292" y2="80" stroke="#F9FAFB" strokeWidth="1.5" />
+          <text x="280" y="84" fontSize="8" fill="white" textAnchor="middle">B</text>
+          <text x="280" y="115" fontSize="9" fill="#6B7280" textAnchor="middle">割れ目あり</text>
+          <text x="280" y="145" fontSize="12" fill="#44403C" textAnchor="middle" fontWeight="bold">ガン玉</text>
+          <text x="280" y="160" fontSize="9" fill="#6B7280" textAnchor="middle">仕掛けを沈める</text>
+          <text x="280" y="173" fontSize="9" fill="#6B7280" textAnchor="middle">ウキの浮力調整</text>
+        </g>
+
+        {/* 4. ウキ止め */}
+        <g>
+          <line x1="390" y1="40" x2="390" y2="120" stroke="#4B5563" strokeWidth="2" />
+          <rect x="383" y="72" width="14" height="8" rx="3" fill="#EF4444" />
+          <text x="390" y="145" fontSize="12" fill="#44403C" textAnchor="middle" fontWeight="bold">ウキ止め</text>
+          <text x="390" y="160" fontSize="9" fill="#6B7280" textAnchor="middle">タナの深さを決める</text>
+          <text x="390" y="173" fontSize="9" fill="#6B7280" textAnchor="middle">位置をずらして調整</text>
+        </g>
+
+        {/* 5. 天秤オモリ */}
+        <g>
+          <line x1="500" y1="50" x2="500" y2="80" stroke="#4B5563" strokeWidth="2" />
+          <line x1="500" y1="80" x2="470" y2="80" stroke="#4B5563" strokeWidth="2.5" />
+          <ellipse cx="462" cy="80" rx="12" ry="8" fill="#4B5563" />
+          <line x1="500" y1="80" x2="500" y2="120" stroke="#4B5563" strokeWidth="1" strokeDasharray="3,2" />
+          <text x="500" y="145" fontSize="12" fill="#44403C" textAnchor="middle" fontWeight="bold">天秤オモリ</text>
+          <text x="500" y="160" fontSize="9" fill="#6B7280" textAnchor="middle">ちょい投げ用</text>
+          <text x="500" y="173" fontSize="9" fill="#6B7280" textAnchor="middle">仕掛けの絡み防止</text>
+        </g>
+
+        {/* 用途タグ */}
+        <g>
+          <rect x="20" y="200" width="560" height="42" rx="6" fill="#EFF6FF" stroke="#3B82F6" strokeWidth="1" />
+          <text x="300" y="218" fontSize="10" fill="#3B82F6" textAnchor="middle" fontWeight="bold">使用する釣り方</text>
+          <text x="60" y="234" fontSize="9" fill="#3B82F6" textAnchor="middle">全般</text>
+          <text x="170" y="234" fontSize="9" fill="#3B82F6" textAnchor="middle">全般</text>
+          <text x="280" y="234" fontSize="9" fill="#3B82F6" textAnchor="middle">ウキ釣り</text>
+          <text x="390" y="234" fontSize="9" fill="#3B82F6" textAnchor="middle">ウキ釣り</text>
+          <text x="500" y="234" fontSize="9" fill="#3B82F6" textAnchor="middle">ちょい投げ</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
 /* ── SVG仕掛け図 ── */
 
 function SabikiRigSvg() {
@@ -722,6 +901,8 @@ export default function RigsGuidePage() {
           仕掛けとは、竿先から針までの糸や道具の組み合わせのこと。狙う魚や釣り方によって仕掛けは異なります。ここでは初心者が覚えるべき5つの基本仕掛けを図解で紹介します。
         </div>
 
+        <RigComparisonSvg />
+
         <div className="space-y-6">
           {/* 1. サビキ仕掛け */}
           <Card>
@@ -935,6 +1116,8 @@ export default function RigsGuidePage() {
             </CardContent>
           </Card>
         </div>
+
+        <BasicPartsSvg />
 
         {/* まとめ */}
         <div className="mt-8 sm:mt-12">

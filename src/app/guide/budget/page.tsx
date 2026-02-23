@@ -108,6 +108,148 @@ function BudgetItem({
   );
 }
 
+function BudgetComparisonDiagram() {
+  return (
+    <div className="my-6">
+      <h3 className="mb-3 text-center text-sm font-bold text-foreground">予算別セット構成の比較</h3>
+      <svg
+        viewBox="0 0 700 340"
+        width="100%"
+        style={{ maxWidth: 700 }}
+        aria-label="予算別セット構成図。3000円・10000円・30000円の3段階で含まれる道具を比較"
+        className="mx-auto"
+      >
+        {/* 背景 */}
+        <rect x="0" y="0" width="700" height="340" rx="12" fill="#F9FAFB" />
+
+        {/* 3,000円コース */}
+        <rect x="20" y="20" width="200" height="300" rx="8" fill="#FFFFFF" stroke="#22C55E" strokeWidth="2" />
+        <rect x="20" y="20" width="200" height="40" rx="8" fill="#22C55E" />
+        <rect x="20" y="52" width="200" height="8" fill="#22C55E" />
+        <text x="120" y="46" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">3,000円コース</text>
+        <text x="120" y="78" textAnchor="middle" fill="#22C55E" fontSize="11" fontWeight="bold">お試し</text>
+
+        <rect x="40" y="95" width="160" height="30" rx="6" fill="#DCFCE7" stroke="#22C55E" strokeWidth="1" />
+        <text x="120" y="115" textAnchor="middle" fill="#166534" fontSize="11">サビキセット（竿+リール）</text>
+
+        <rect x="40" y="135" width="160" height="30" rx="6" fill="#DCFCE7" stroke="#22C55E" strokeWidth="1" />
+        <text x="120" y="155" textAnchor="middle" fill="#166534" fontSize="11">仕掛け</text>
+
+        <rect x="40" y="175" width="160" height="30" rx="6" fill="#DCFCE7" stroke="#22C55E" strokeWidth="1" />
+        <text x="120" y="195" textAnchor="middle" fill="#166534" fontSize="11">エサ（アミエビ）</text>
+
+        <rect x="40" y="215" width="160" height="30" rx="6" fill="#DCFCE7" stroke="#22C55E" strokeWidth="1" />
+        <text x="120" y="235" textAnchor="middle" fill="#166534" fontSize="11">バケツ（100均）</text>
+
+        <rect x="40" y="255" width="160" height="30" rx="6" fill="#F3F4F6" stroke="#D1D5DB" strokeWidth="1" strokeDasharray="4" />
+        <text x="120" y="275" textAnchor="middle" fill="#9CA3AF" fontSize="11">クーラーBOX なし</text>
+
+        {/* 10,000円コース */}
+        <rect x="250" y="20" width="200" height="300" rx="8" fill="#FFFFFF" stroke="#3B82F6" strokeWidth="2" />
+        <rect x="250" y="20" width="200" height="40" rx="8" fill="#3B82F6" />
+        <rect x="250" y="52" width="200" height="8" fill="#3B82F6" />
+        <text x="350" y="46" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">10,000円コース</text>
+        <text x="350" y="78" textAnchor="middle" fill="#3B82F6" fontSize="11" fontWeight="bold">おすすめ!</text>
+
+        <rect x="270" y="95" width="160" height="30" rx="6" fill="#DBEAFE" stroke="#3B82F6" strokeWidth="1" />
+        <text x="350" y="115" textAnchor="middle" fill="#1E40AF" fontSize="11">竿+リールセット</text>
+
+        <rect x="270" y="135" width="160" height="30" rx="6" fill="#DBEAFE" stroke="#3B82F6" strokeWidth="1" />
+        <text x="350" y="155" textAnchor="middle" fill="#1E40AF" fontSize="11">仕掛け各種</text>
+
+        <rect x="270" y="175" width="160" height="30" rx="6" fill="#DBEAFE" stroke="#3B82F6" strokeWidth="1" />
+        <text x="350" y="195" textAnchor="middle" fill="#1E40AF" fontSize="11">クーラーボックス</text>
+
+        <rect x="270" y="215" width="160" height="30" rx="6" fill="#DBEAFE" stroke="#3B82F6" strokeWidth="1" />
+        <text x="350" y="235" textAnchor="middle" fill="#1E40AF" fontSize="11">プライヤー+ハサミ</text>
+
+        <rect x="270" y="255" width="160" height="30" rx="6" fill="#DBEAFE" stroke="#3B82F6" strokeWidth="1" />
+        <text x="350" y="275" textAnchor="middle" fill="#1E40AF" fontSize="11">消耗品（エサ等）</text>
+
+        {/* 30,000円コース */}
+        <rect x="480" y="20" width="200" height="300" rx="8" fill="#FFFFFF" stroke="#A855F7" strokeWidth="2" />
+        <rect x="480" y="20" width="200" height="40" rx="8" fill="#A855F7" />
+        <rect x="480" y="52" width="200" height="8" fill="#A855F7" />
+        <text x="580" y="46" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">30,000円コース</text>
+        <text x="580" y="78" textAnchor="middle" fill="#A855F7" fontSize="11" fontWeight="bold">本格スタート</text>
+
+        <rect x="500" y="95" width="160" height="30" rx="6" fill="#F3E8FF" stroke="#A855F7" strokeWidth="1" />
+        <text x="580" y="115" textAnchor="middle" fill="#6B21A8" fontSize="11">ブランドロッド</text>
+
+        <rect x="500" y="135" width="160" height="30" rx="6" fill="#F3E8FF" stroke="#A855F7" strokeWidth="1" />
+        <text x="580" y="155" textAnchor="middle" fill="#6B21A8" fontSize="11">シマノ/ダイワリール</text>
+
+        <rect x="500" y="175" width="160" height="30" rx="6" fill="#F3E8FF" stroke="#A855F7" strokeWidth="1" />
+        <text x="580" y="195" textAnchor="middle" fill="#6B21A8" fontSize="11">ライン+仕掛け</text>
+
+        <rect x="500" y="215" width="160" height="30" rx="6" fill="#F3E8FF" stroke="#A855F7" strokeWidth="1" />
+        <text x="580" y="235" textAnchor="middle" fill="#6B21A8" fontSize="11">クーラー+タックルBOX</text>
+
+        <rect x="500" y="255" width="160" height="30" rx="6" fill="#F3E8FF" stroke="#A855F7" strokeWidth="1" />
+        <text x="580" y="275" textAnchor="middle" fill="#6B21A8" fontSize="11">ライフジャケット</text>
+      </svg>
+    </div>
+  );
+}
+
+function CostBreakdownDiagram() {
+  return (
+    <div className="my-6">
+      <h3 className="mb-3 text-center text-sm font-bold text-foreground">初期費用の内訳（10,000円コースの場合）</h3>
+      <svg
+        viewBox="0 0 600 280"
+        width="100%"
+        style={{ maxWidth: 600 }}
+        aria-label="初期費用の内訳図。竿・リール・仕掛け・小物・エサの費用配分を表示"
+        className="mx-auto"
+      >
+        <rect x="0" y="0" width="600" height="280" rx="12" fill="#F9FAFB" />
+
+        {/* 横棒グラフスタイルで内訳を表示 */}
+        <text x="30" y="35" fill="#374151" fontSize="13" fontWeight="bold">費目</text>
+        <text x="460" y="35" fill="#374151" fontSize="13" fontWeight="bold">金額</text>
+        <text x="540" y="35" fill="#374151" fontSize="13" fontWeight="bold">割合</text>
+
+        <line x1="30" y1="45" x2="570" y2="45" stroke="#E5E7EB" strokeWidth="1" />
+
+        {/* 竿+リール: 5000円 = 50% */}
+        <text x="30" y="75" fill="#374151" fontSize="12">竿+リール</text>
+        <rect x="140" y="60" width="250" height="22" rx="4" fill="#3B82F6" />
+        <text x="460" y="76" fill="#374151" fontSize="12" fontWeight="bold">5,000円</text>
+        <text x="545" y="76" fill="#3B82F6" fontSize="12" fontWeight="bold">50%</text>
+
+        {/* 仕掛け: 1500円 = 15% */}
+        <text x="30" y="115" fill="#374151" fontSize="12">仕掛け各種</text>
+        <rect x="140" y="100" width="75" height="22" rx="4" fill="#22C55E" />
+        <text x="460" y="116" fill="#374151" fontSize="12" fontWeight="bold">1,500円</text>
+        <text x="545" y="116" fill="#22C55E" fontSize="12" fontWeight="bold">15%</text>
+
+        {/* クーラーBOX: 2000円 = 20% */}
+        <text x="30" y="155" fill="#374151" fontSize="12">クーラーBOX</text>
+        <rect x="140" y="140" width="100" height="22" rx="4" fill="#F59E0B" />
+        <text x="460" y="156" fill="#374151" fontSize="12" fontWeight="bold">2,000円</text>
+        <text x="545" y="156" fill="#F59E0B" fontSize="12" fontWeight="bold">20%</text>
+
+        {/* 小物: 800円 = 8% */}
+        <text x="30" y="195" fill="#374151" fontSize="12">小物類</text>
+        <rect x="140" y="180" width="40" height="22" rx="4" fill="#EF4444" />
+        <text x="460" y="196" fill="#374151" fontSize="12" fontWeight="bold">800円</text>
+        <text x="545" y="196" fill="#EF4444" fontSize="12" fontWeight="bold">8%</text>
+
+        {/* 消耗品: 700円 = 7% */}
+        <text x="30" y="235" fill="#374151" fontSize="12">消耗品（エサ等）</text>
+        <rect x="140" y="220" width="35" height="22" rx="4" fill="#8B5CF6" />
+        <text x="460" y="236" fill="#374151" fontSize="12" fontWeight="bold">700円</text>
+        <text x="545" y="236" fill="#8B5CF6" fontSize="12" fontWeight="bold">7%</text>
+
+        <line x1="30" y1="252" x2="570" y2="252" stroke="#E5E7EB" strokeWidth="1" />
+        <text x="30" y="272" fill="#374151" fontSize="13" fontWeight="bold">合計</text>
+        <text x="440" y="272" fill="#3B82F6" fontSize="14" fontWeight="bold">10,000円</text>
+      </svg>
+    </div>
+  );
+}
+
 export default function BudgetGuidePage() {
   return (
     <>
@@ -136,6 +278,8 @@ export default function BudgetGuidePage() {
             予算3千円から始められる！レベル別の費用と道具を徹底解説します。
           </p>
         </div>
+
+        <BudgetComparisonDiagram />
 
         <div className="space-y-6">
           {/* 3,000円コース */}
@@ -333,6 +477,8 @@ export default function BudgetGuidePage() {
               </Warning>
             </CardContent>
           </Card>
+
+          <CostBreakdownDiagram />
 
           {/* ランニングコスト */}
           <SectionCard title="ランニングコスト（毎回の費用）">

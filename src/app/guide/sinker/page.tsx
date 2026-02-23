@@ -289,6 +289,159 @@ const MATERIAL_DATA = [
   { name: "鉄（アイアン）", density: "7.9", price: "安い", feel: "硬い", eco: "無害", note: "鉛より軽い分サイズが大きくなる。環境対応品に使用。" },
 ];
 
+/* オモリの種類図（4種の代表的な形状） */
+function SinkerTypesDiagram() {
+  return (
+    <div className="my-6">
+      <p className="mb-2 text-sm font-medium text-center text-muted-foreground">代表的なオモリの形状</p>
+      <svg
+        viewBox="0 0 720 200"
+        width="100%"
+        style={{ maxWidth: 720 }}
+        aria-label="ナス型、ガン玉、中通し、天秤の4種類のオモリの形状と名称を示す図。"
+        className="mx-auto"
+      >
+        <rect x="0" y="0" width="720" height="200" rx="8" fill="#F9FAFB" />
+
+        {/* ナス型 */}
+        <g>
+          <rect x="10" y="10" width="165" height="180" rx="6" fill="#FFFFFF" stroke="#9CA3AF" strokeWidth="1.5" />
+          <text x="92" y="30" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#374151">ナス型</text>
+          {/* ナス形 */}
+          <ellipse cx="92" cy="100" rx="18" ry="35" fill="#9CA3AF" opacity="0.3" stroke="#6B7280" strokeWidth="2" />
+          {/* 上部のアイ（穴） */}
+          <circle cx="92" cy="62" r="5" fill="none" stroke="#6B7280" strokeWidth="1.5" />
+          <line x1="92" y1="57" x2="92" y2="45" stroke="#6B7280" strokeWidth="1" />
+          <text x="92" y="155" textAnchor="middle" fontSize="9" fill="#6B7280">サビキ・ちょい投げ</text>
+          <text x="92" y="170" textAnchor="middle" fontSize="9" fill="#6B7280">最も汎用的</text>
+        </g>
+
+        {/* ガン玉 */}
+        <g>
+          <rect x="190" y="10" width="165" height="180" rx="6" fill="#FFFFFF" stroke="#22C55E" strokeWidth="1.5" />
+          <text x="272" y="30" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#374151">ガン玉</text>
+          {/* 球体 */}
+          <circle cx="272" cy="95" r="16" fill="#22C55E" opacity="0.2" stroke="#22C55E" strokeWidth="2" />
+          {/* 割れ目 */}
+          <line x1="272" y1="79" x2="272" y2="111" stroke="#22C55E" strokeWidth="1.5" />
+          {/* ライン */}
+          <line x1="250" y1="95" x2="294" y2="95" stroke="#3B82F6" strokeWidth="1.5" />
+          <text x="272" y="130" textAnchor="middle" fontSize="8" fill="#22C55E">割れ目に糸を挟む</text>
+          <text x="272" y="155" textAnchor="middle" fontSize="9" fill="#6B7280">ウキ釣りの浮力調整</text>
+          <text x="272" y="170" textAnchor="middle" fontSize="9" fill="#6B7280">B~6B / G1~G8</text>
+        </g>
+
+        {/* 中通し */}
+        <g>
+          <rect x="370" y="10" width="165" height="180" rx="6" fill="#FFFFFF" stroke="#F59E0B" strokeWidth="1.5" />
+          <text x="452" y="30" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#374151">中通し</text>
+          {/* ナツメ型 */}
+          <ellipse cx="452" cy="95" rx="25" ry="18" fill="#F59E0B" opacity="0.2" stroke="#F59E0B" strokeWidth="2" />
+          {/* 中心の穴 */}
+          <circle cx="452" cy="95" r="3" fill="#FFFFFF" stroke="#F59E0B" strokeWidth="1" />
+          {/* ライン貫通 */}
+          <line x1="410" y1="95" x2="440" y2="95" stroke="#3B82F6" strokeWidth="1.5" />
+          <line x1="464" y1="95" x2="500" y2="95" stroke="#3B82F6" strokeWidth="1.5" />
+          <text x="452" y="130" textAnchor="middle" fontSize="8" fill="#F59E0B">穴に糸を通す</text>
+          <text x="452" y="155" textAnchor="middle" fontSize="9" fill="#6B7280">ぶっこみ・泳がせ</text>
+          <text x="452" y="170" textAnchor="middle" fontSize="9" fill="#6B7280">遊動式で違和感少</text>
+        </g>
+
+        {/* 天秤 */}
+        <g>
+          <rect x="550" y="10" width="165" height="180" rx="6" fill="#FFFFFF" stroke="#3B82F6" strokeWidth="1.5" />
+          <text x="632" y="30" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#374151">L型天秤</text>
+          {/* L字型アーム */}
+          <line x1="610" y1="60" x2="610" y2="110" stroke="#6B7280" strokeWidth="2.5" />
+          <line x1="610" y1="110" x2="670" y2="110" stroke="#6B7280" strokeWidth="2.5" />
+          {/* 上のアイ（道糸側） */}
+          <circle cx="610" cy="55" r="4" fill="none" stroke="#3B82F6" strokeWidth="1.5" />
+          <text x="595" y="52" textAnchor="end" fontSize="8" fill="#3B82F6">道糸</text>
+          {/* 右のアイ（ハリス側） */}
+          <circle cx="675" cy="110" r="4" fill="none" stroke="#EF4444" strokeWidth="1.5" />
+          <text x="688" y="114" fontSize="8" fill="#EF4444">ハリス</text>
+          {/* おもり */}
+          <ellipse cx="610" cy="125" rx="10" ry="15" fill="#6B7280" opacity="0.3" stroke="#6B7280" strokeWidth="1.5" />
+          <text x="632" y="155" textAnchor="middle" fontSize="9" fill="#6B7280">投げ釣りの定番</text>
+          <text x="632" y="170" textAnchor="middle" fontSize="9" fill="#6B7280">絡み防止構造</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+/* 号数と重さの対応図 */
+function SinkerWeightScaleDiagram() {
+  const scaleData = [
+    { gou: 1, g: 3.75 },
+    { gou: 2, g: 7.5 },
+    { gou: 3, g: 11.25 },
+    { gou: 4, g: 15 },
+    { gou: 5, g: 18.75 },
+    { gou: 6, g: 22.5 },
+    { gou: 8, g: 30 },
+    { gou: 10, g: 37.5 },
+  ];
+  const maxG = 40;
+  const chartLeft = 55;
+  const chartBottom = 165;
+  const chartHeight = 125;
+  const barWidth = 36;
+  const gap = 16;
+
+  return (
+    <div className="my-6">
+      <p className="mb-2 text-sm font-medium text-center text-muted-foreground">オモリの号数と重さスケール</p>
+      <svg
+        viewBox="0 0 520 210"
+        width="100%"
+        style={{ maxWidth: 520 }}
+        aria-label="オモリの1号から10号までの重さをグラム単位の棒グラフで示す図。1号3.75gから10号37.5gまで。"
+        className="mx-auto"
+      >
+        <rect x="0" y="0" width="520" height="210" rx="8" fill="#F9FAFB" />
+
+        {/* タイトル */}
+        <text x="260" y="22" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#374151">1号 = 3.75g（1匁）</text>
+
+        {/* Y軸ラベル */}
+        <text x="14" y="105" textAnchor="middle" fontSize="10" fill="#6B7280" transform="rotate(-90, 14, 105)">重さ (g)</text>
+
+        {/* Y軸目盛り */}
+        {[0, 10, 20, 30, 40].map((v) => {
+          const y = chartBottom - (v / maxG) * chartHeight;
+          return (
+            <g key={v}>
+              <line x1={chartLeft - 5} y1={y} x2={chartLeft + scaleData.length * (barWidth + gap)} y2={y} stroke="#E5E7EB" strokeWidth="0.8" />
+              <text x={chartLeft - 8} y={y + 4} textAnchor="end" fontSize="9" fill="#6B7280">{v}</text>
+            </g>
+          );
+        })}
+
+        {/* X軸 */}
+        <line x1={chartLeft} y1={chartBottom} x2={chartLeft + scaleData.length * (barWidth + gap)} y2={chartBottom} stroke="#9CA3AF" strokeWidth="1" />
+
+        {/* 棒グラフ */}
+        {scaleData.map((d, i) => {
+          const x = chartLeft + i * (barWidth + gap) + gap / 2;
+          const barH = (d.g / maxG) * chartHeight;
+          const y = chartBottom - barH;
+          return (
+            <g key={d.gou}>
+              <rect x={x} y={y} width={barWidth} height={barH} rx="3" fill="#6B7280" opacity="0.4" stroke="#6B7280" strokeWidth="1" />
+              <text x={x + barWidth / 2} y={y - 4} textAnchor="middle" fontSize="8" fontWeight="bold" fill="#374151">{d.g}g</text>
+              <text x={x + barWidth / 2} y={chartBottom + 14} textAnchor="middle" fontSize="10" fill="#374151">{d.gou}号</text>
+            </g>
+          );
+        })}
+
+        {/* 注釈 */}
+        <text x="260" y="200" textAnchor="middle" fontSize="9" fill="#6B7280">号数 x 3.75 = グラム数</text>
+      </svg>
+    </div>
+  );
+}
+
 export default function SinkerGuidePage() {
   return (
     <div className="container mx-auto max-w-4xl px-4 py-6 sm:py-8">
@@ -353,6 +506,7 @@ export default function SinkerGuidePage() {
           </CardContent>
         </Card>
 
+        <SinkerWeightScaleDiagram />
         {/* 号数の見方 */}
         <Card className="mb-4 py-0">
           <CardContent className="p-4 sm:p-5">
@@ -403,6 +557,7 @@ export default function SinkerGuidePage() {
       {/* セクション2: おもりの種類一覧 */}
       <section className="mb-10">
         <h2 className="mb-4 text-xl font-bold">おもりの種類一覧（12種類）</h2>
+        <SinkerTypesDiagram />
         <p className="mb-4 text-sm text-muted-foreground">
           形状・使い方・メリデメをそれぞれ解説。自分の釣り方に合ったおもりを見つけましょう。
         </p>

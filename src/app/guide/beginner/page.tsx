@@ -173,6 +173,132 @@ const faqJsonLd = {
   ],
 };
 
+/* --- SVG図解コンポーネント --- */
+
+function FishingFlowDiagram() {
+  const steps = [
+    { label: "準備", sub: "道具・エサを揃える", color: "#3B82F6", icon: "M12 2L15 8H9L12 2Z M9 9H15V15H9V9Z" },
+    { label: "移動", sub: "釣り場へ向かう", color: "#60A5FA", icon: "M5 17L12 5L19 17H5Z" },
+    { label: "セットアップ", sub: "仕掛けを組む", color: "#22C55E", icon: "M8 4H16V8H8V4Z M6 9H18V14H6V9Z" },
+    { label: "釣り", sub: "いよいよ実釣！", color: "#F59E0B", icon: "M12 3C16.97 3 21 7.03 21 12C21 16.97 16.97 21 12 21C7.03 21 3 16.97 3 12C3 7.03 7.03 3 12 3Z" },
+    { label: "片付け", sub: "ゴミ持ち帰り", color: "#EF4444", icon: "M6 6H18L17 20H7L6 6Z M4 4H20V6H4V4Z" },
+  ];
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 700 140"
+        width="100%"
+        style={{ maxWidth: 700 }}
+        aria-label="釣りの基本フロー図：準備、移動、セットアップ、釣り、片付けの5ステップ"
+        role="img"
+      >
+        <rect x="0" y="0" width="700" height="140" rx="12" fill="#EFF6FF" />
+        {steps.map((s, i) => {
+          const cx = 70 + i * 145;
+          return (
+            <g key={i}>
+              <rect x={cx - 55} y={15} width={110} height={90} rx="10" fill="white" stroke={s.color} strokeWidth="2" />
+              <circle cx={cx} cy={42} r="16" fill={s.color} opacity="0.15" />
+              <text x={cx} y={47} textAnchor="middle" fontSize="16" fill={s.color} fontWeight="bold">{i + 1}</text>
+              <text x={cx} y={72} textAnchor="middle" fontSize="13" fill="#1E293B" fontWeight="bold">{s.label}</text>
+              <text x={cx} y={90} textAnchor="middle" fontSize="10" fill="#64748B">{s.sub}</text>
+              {i < steps.length - 1 && (
+                <polygon points={`${cx + 60},55 ${cx + 75},60 ${cx + 60},65`} fill="#94A3B8" />
+              )}
+            </g>
+          );
+        })}
+        <text x="350" y="132" textAnchor="middle" fontSize="11" fill="#64748B">釣りの基本フロー（5ステップ）</text>
+      </svg>
+    </div>
+  );
+}
+
+function TackleDiagram() {
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 600 320"
+        width="100%"
+        style={{ maxWidth: 600 }}
+        aria-label="基本的なタックル構成図：竿、リール、道糸、仕掛け、エサの全体図"
+        role="img"
+      >
+        <rect x="0" y="0" width="600" height="320" rx="12" fill="#F9FAFB" />
+        {/* 竿（ロッド） */}
+        <line x1="80" y1="40" x2="520" y2="40" stroke="#1E293B" strokeWidth="4" strokeLinecap="round" />
+        <line x1="80" y1="40" x2="520" y2="40" stroke="#64748B" strokeWidth="2" strokeLinecap="round" strokeDasharray="0" />
+        {/* 竿先（穂先） */}
+        <circle cx="520" cy="40" r="4" fill="#EF4444" />
+        {/* グリップ */}
+        <rect x="60" y="33" width="80" height="14" rx="5" fill="#92400E" opacity="0.7" />
+        {/* リール */}
+        <ellipse cx="160" cy="65" rx="25" ry="18" fill="#E2E8F0" stroke="#3B82F6" strokeWidth="2" />
+        <circle cx="160" cy="65" r="8" fill="#3B82F6" opacity="0.3" />
+        <text x="160" y="69" textAnchor="middle" fontSize="8" fill="#3B82F6" fontWeight="bold">リール</text>
+        {/* 道糸 */}
+        <line x1="520" y1="40" x2="520" y2="130" stroke="#3B82F6" strokeWidth="1.5" strokeDasharray="4 2" />
+        {/* ウキ */}
+        <ellipse cx="520" cy="130" rx="10" ry="16" fill="#EF4444" opacity="0.8" />
+        <text x="520" y="134" textAnchor="middle" fontSize="8" fill="white" fontWeight="bold">ウキ</text>
+        {/* ハリス */}
+        <line x1="520" y1="146" x2="520" y2="230" stroke="#60A5FA" strokeWidth="1.5" />
+        {/* オモリ */}
+        <ellipse cx="520" cy="215" rx="8" ry="6" fill="#64748B" />
+        {/* サビキ仕掛け（針複数） */}
+        <line x1="520" y1="230" x2="520" y2="290" stroke="#60A5FA" strokeWidth="1.5" />
+        {[240, 255, 270].map((y, i) => (
+          <g key={i}>
+            <line x1="520" y1={y} x2="540" y2={y + 8} stroke="#F59E0B" strokeWidth="1.5" />
+            <path d={`M540,${y + 8} Q545,${y + 12} 538,${y + 13}`} stroke="#F59E0B" strokeWidth="1.5" fill="none" />
+          </g>
+        ))}
+        {/* コマセカゴ */}
+        <rect x="510" y="285" width="20" height="18" rx="3" fill="#22C55E" opacity="0.7" stroke="#22C55E" strokeWidth="1" />
+        <text x="520" y="298" textAnchor="middle" fontSize="7" fill="white" fontWeight="bold">カゴ</text>
+
+        {/* ラベル（引き出し線） */}
+        {/* 竿ラベル */}
+        <line x1="300" y1="40" x2="300" y2="20" stroke="#94A3B8" strokeWidth="1" />
+        <rect x="245" y="5" width="110" height="18" rx="4" fill="#3B82F6" />
+        <text x="300" y="17" textAnchor="middle" fontSize="11" fill="white" fontWeight="bold">竿（ロッド）2〜3m</text>
+        {/* リールラベル */}
+        <line x1="160" y1="83" x2="160" y2="105" stroke="#94A3B8" strokeWidth="1" />
+        <rect x="95" y="105" width="130" height="18" rx="4" fill="#3B82F6" />
+        <text x="160" y="118" textAnchor="middle" fontSize="11" fill="white" fontWeight="bold">リール（2000〜3000番）</text>
+        {/* 道糸ラベル */}
+        <line x1="520" y1="85" x2="470" y2="85" stroke="#94A3B8" strokeWidth="1" />
+        <rect x="395" y="77" width="75" height="18" rx="4" fill="#60A5FA" />
+        <text x="432" y="90" textAnchor="middle" fontSize="11" fill="white" fontWeight="bold">道糸（ライン）</text>
+        {/* ウキラベル */}
+        <line x1="510" y1="130" x2="440" y2="130" stroke="#94A3B8" strokeWidth="1" />
+        <rect x="405" y="122" width="35" height="18" rx="4" fill="#EF4444" />
+        <text x="422" y="135" textAnchor="middle" fontSize="11" fill="white" fontWeight="bold">ウキ</text>
+        {/* ハリスラベル */}
+        <line x1="520" y1="185" x2="460" y2="185" stroke="#94A3B8" strokeWidth="1" />
+        <rect x="415" y="177" width="45" height="18" rx="4" fill="#60A5FA" opacity="0.8" />
+        <text x="437" y="190" textAnchor="middle" fontSize="11" fill="white" fontWeight="bold">ハリス</text>
+        {/* 針ラベル */}
+        <line x1="540" y1="255" x2="570" y2="255" stroke="#94A3B8" strokeWidth="1" />
+        <rect x="570" y="247" width="25" height="18" rx="4" fill="#F59E0B" />
+        <text x="582" y="260" textAnchor="middle" fontSize="11" fill="white" fontWeight="bold">針</text>
+        {/* カゴラベル */}
+        <line x1="530" y1="294" x2="570" y2="294" stroke="#94A3B8" strokeWidth="1" />
+        <rect x="570" y="286" width="25" height="18" rx="4" fill="#22C55E" />
+        <text x="582" y="299" textAnchor="middle" fontSize="10" fill="white" fontWeight="bold">カゴ</text>
+
+        {/* タイトル */}
+        <text x="200" y="155" fontSize="13" fill="#1E293B" fontWeight="bold">基本的なタックル構成図</text>
+        <text x="200" y="172" fontSize="10" fill="#64748B">（サビキ釣りの場合）</text>
+
+        {/* 水面ライン */}
+        <line x1="470" y1="110" x2="600" y2="110" stroke="#93C5FD" strokeWidth="1" strokeDasharray="6 3" opacity="0.6" />
+        <text x="585" y="108" fontSize="9" fill="#93C5FD">水面</text>
+      </svg>
+    </div>
+  );
+}
+
 function SectionCard({
   title,
   icon: Icon,
@@ -366,12 +492,18 @@ export default function BeginnerGuidePage() {
             </SectionCard>
           </section>
 
+          {/* 釣りの基本フロー図 */}
+          <FishingFlowDiagram />
+
           {/* 最初に揃えるべき道具 */}
           <section id="gear">
             <SectionCard title="最初に揃えるべき道具" icon={Package}>
               <p className="mb-4 text-sm text-muted-foreground">
                 釣りを始めるにあたって最低限必要な道具をリストアップしました。すべてを個別に買い揃える必要はなく、初心者セットを購入すれば竿・リール・仕掛けが一式揃います。
               </p>
+
+              {/* タックル構成図 */}
+              <TackleDiagram />
 
               <h3 className="mb-3 font-medium text-foreground">
                 必須の道具（これだけあれば釣りができる）

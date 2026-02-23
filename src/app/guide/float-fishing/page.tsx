@@ -47,6 +47,211 @@ const breadcrumbJsonLd = {
   ],
 };
 
+/* ── SVG図解コンポーネント ── */
+
+function TanaAdjustSvg() {
+  return (
+    <div className="my-6">
+      <h3 className="mb-3 text-center text-sm font-bold text-foreground">タナ調整の仕組み</h3>
+      <svg
+        viewBox="0 0 500 380"
+        className="mx-auto w-full max-w-[500px]"
+        aria-label="ウキ釣りのタナ調整図解：ウキ止めの位置を変えることで狙う深さが変わる"
+      >
+        {/* 背景 */}
+        <rect x="0" y="0" width="500" height="380" fill="#F9FAFB" rx="12" />
+
+        {/* 左: 浅いタナ */}
+        <g>
+          <text x="120" y="24" fontSize="13" fill="#3B82F6" textAnchor="middle" fontWeight="bold">浅いタナ（表層狙い）</text>
+
+          {/* 水面 */}
+          <rect x="30" y="60" width="180" height="280" fill="#DBEAFE" rx="8" />
+          <line x1="30" y1="65" x2="210" y2="65" stroke="#2563EB" strokeWidth="1.5" strokeDasharray="6,3" />
+          <text x="200" y="58" fontSize="9" fill="#2563EB" textAnchor="end">水面</text>
+
+          {/* 道糸 */}
+          <line x1="120" y1="45" x2="120" y2="60" stroke="#4B5563" strokeWidth="1.5" />
+
+          {/* ウキ止め（浅い位置） */}
+          <rect x="115" y="70" width="10" height="5" rx="2" fill="#EF4444" />
+
+          {/* ウキ */}
+          <ellipse cx="120" cy="85" rx="10" ry="16" fill="#EF4444" stroke="#DC2626" strokeWidth="1.5" />
+          <rect x="118" y="66" width="4" height="10" fill="#44403C" />
+
+          {/* 道糸（水中） */}
+          <line x1="120" y1="101" x2="120" y2="190" stroke="#4B5563" strokeWidth="1" />
+
+          {/* ガン玉 */}
+          <circle cx="120" cy="160" r="4" fill="#4B5563" />
+
+          {/* ハリス */}
+          <line x1="120" y1="164" x2="120" y2="190" stroke="#4B5563" strokeWidth="1" strokeDasharray="3,2" />
+
+          {/* 針 */}
+          <path d="M120,190 Q113,205 122,205" fill="none" stroke="#F59E0B" strokeWidth="2" />
+          <ellipse cx="118" cy="207" rx="4" ry="3" fill="#F97316" opacity="0.7" />
+
+          {/* タナの距離 */}
+          <line x1="80" y1="75" x2="80" y2="195" stroke="#22C55E" strokeWidth="1.5" />
+          <line x1="75" y1="75" x2="85" y2="75" stroke="#22C55E" strokeWidth="1.5" />
+          <line x1="75" y1="195" x2="85" y2="195" stroke="#22C55E" strokeWidth="1.5" />
+          <text x="68" y="140" fontSize="10" fill="#22C55E" textAnchor="end" transform="rotate(-90,68,140)">タナ 約1.5m</text>
+
+          {/* 魚 */}
+          <ellipse cx="160" cy="120" rx="14" ry="6" fill="#60A5FA" opacity="0.7" />
+          <text x="160" y="145" fontSize="9" fill="#2563EB" textAnchor="middle">イワシ等</text>
+
+          {/* 海底 */}
+          <path d="M30,320 Q120,310 210,320" fill="#D4A373" opacity="0.3" />
+        </g>
+
+        {/* 右: 深いタナ */}
+        <g>
+          <text x="370" y="24" fontSize="13" fill="#3B82F6" textAnchor="middle" fontWeight="bold">深いタナ（底層狙い）</text>
+
+          {/* 水面 */}
+          <rect x="280" y="60" width="180" height="280" fill="#DBEAFE" rx="8" />
+          <line x1="280" y1="65" x2="460" y2="65" stroke="#2563EB" strokeWidth="1.5" strokeDasharray="6,3" />
+          <text x="450" y="58" fontSize="9" fill="#2563EB" textAnchor="end">水面</text>
+
+          {/* 道糸 */}
+          <line x1="370" y1="45" x2="370" y2="60" stroke="#4B5563" strokeWidth="1.5" />
+
+          {/* ウキ止め（浅い位置に見えるが、長いウキ下） */}
+          <rect x="365" y="70" width="10" height="5" rx="2" fill="#EF4444" />
+
+          {/* ウキ */}
+          <ellipse cx="370" cy="85" rx="10" ry="16" fill="#EF4444" stroke="#DC2626" strokeWidth="1.5" />
+          <rect x="368" y="66" width="4" height="10" fill="#44403C" />
+
+          {/* 道糸（水中・長い） */}
+          <line x1="370" y1="101" x2="370" y2="295" stroke="#4B5563" strokeWidth="1" />
+
+          {/* ガン玉 */}
+          <circle cx="370" cy="260" r="4" fill="#4B5563" />
+
+          {/* ハリス */}
+          <line x1="370" y1="264" x2="370" y2="295" stroke="#4B5563" strokeWidth="1" strokeDasharray="3,2" />
+
+          {/* 針 */}
+          <path d="M370,295 Q363,310 372,310" fill="none" stroke="#F59E0B" strokeWidth="2" />
+          <ellipse cx="368" cy="312" rx="4" ry="3" fill="#F97316" opacity="0.7" />
+
+          {/* タナの距離 */}
+          <line x1="330" y1="75" x2="330" y2="300" stroke="#22C55E" strokeWidth="1.5" />
+          <line x1="325" y1="75" x2="335" y2="75" stroke="#22C55E" strokeWidth="1.5" />
+          <line x1="325" y1="300" x2="335" y2="300" stroke="#22C55E" strokeWidth="1.5" />
+          <text x="318" y="195" fontSize="10" fill="#22C55E" textAnchor="end" transform="rotate(-90,318,195)">タナ 約4m</text>
+
+          {/* 魚 */}
+          <ellipse cx="410" cy="280" rx="14" ry="6" fill="#2563EB" opacity="0.7" />
+          <text x="410" y="300" fontSize="9" fill="#1E40AF" textAnchor="middle">チヌ等</text>
+
+          {/* 海底 */}
+          <path d="M280,320 Q370,310 460,320" fill="#D4A373" opacity="0.3" />
+        </g>
+
+        {/* 中央の矢印と説明 */}
+        <g>
+          <path d="M220,180 L270,180" fill="none" stroke="#EF4444" strokeWidth="2" />
+          <polygon points="265,175 265,185 275,180" fill="#EF4444" />
+          <text x="247" y="165" fontSize="10" fill="#EF4444" textAnchor="middle">ウキ止めを</text>
+          <text x="247" y="178" fontSize="10" fill="#EF4444" textAnchor="middle">上にずらす</text>
+        </g>
+
+        {/* 説明テキスト */}
+        <text x="250" y="365" fontSize="10" fill="#6B7280" textAnchor="middle">
+          ウキ止めの位置を変えるだけでタナ（深さ）を自由に調整できます
+        </text>
+      </svg>
+    </div>
+  );
+}
+
+function UkiAtariSvg() {
+  return (
+    <div className="my-6">
+      <h3 className="mb-3 text-center text-sm font-bold text-foreground">ウキのアタリパターン</h3>
+      <svg
+        viewBox="0 0 560 200"
+        className="mx-auto w-full max-w-[560px]"
+        aria-label="ウキのアタリパターン図解：消し込み、モゾモゾ、横走り、浮き上がりの4種類"
+      >
+        {/* 背景 */}
+        <rect x="0" y="0" width="560" height="200" fill="#F9FAFB" rx="12" />
+
+        {/* 共通水面ライン */}
+        <line x1="10" y1="100" x2="550" y2="100" stroke="#2563EB" strokeWidth="1" strokeDasharray="6,3" />
+
+        {/* 1. 消し込みアタリ */}
+        <g>
+          <text x="70" y="20" fontSize="11" fill="#EF4444" textAnchor="middle" fontWeight="bold">消し込み</text>
+          <text x="70" y="34" fontSize="9" fill="#6B7280" textAnchor="middle">合わせる!</text>
+          {/* 通常位置のウキ（薄い） */}
+          <ellipse cx="55" cy="92" rx="8" ry="14" fill="#EF4444" opacity="0.2" stroke="#DC2626" strokeWidth="1" strokeDasharray="3,2" />
+          <rect x="53" y="75" width="3" height="10" fill="#44403C" opacity="0.2" />
+          {/* 沈んだウキ */}
+          <ellipse cx="85" cy="130" rx="8" ry="14" fill="#EF4444" opacity="0.8" stroke="#DC2626" strokeWidth="1.5" />
+          <rect x="83" y="113" width="3" height="10" fill="#44403C" />
+          {/* 矢印 */}
+          <path d="M60,95 L80,120" fill="none" stroke="#EF4444" strokeWidth="1.5" />
+          <polygon points="78,117 84,120 80,124" fill="#EF4444" />
+          <text x="70" y="170" fontSize="9" fill="#6B7280" textAnchor="middle">一気に沈む</text>
+        </g>
+
+        {/* 2. モゾモゾアタリ */}
+        <g>
+          <text x="210" y="20" fontSize="11" fill="#F59E0B" textAnchor="middle" fontWeight="bold">モゾモゾ</text>
+          <text x="210" y="34" fontSize="9" fill="#6B7280" textAnchor="middle">まだ待つ</text>
+          {/* ウキ（小刻みに上下） */}
+          <ellipse cx="195" cy="88" rx="8" ry="14" fill="#EF4444" opacity="0.4" stroke="#DC2626" strokeWidth="1" strokeDasharray="2,2" />
+          <ellipse cx="210" cy="96" rx="8" ry="14" fill="#EF4444" opacity="0.6" stroke="#DC2626" strokeWidth="1" strokeDasharray="2,2" />
+          <ellipse cx="225" cy="90" rx="8" ry="14" fill="#EF4444" opacity="0.8" stroke="#DC2626" strokeWidth="1.5" />
+          <rect x="223" y="73" width="3" height="10" fill="#44403C" />
+          {/* 上下矢印 */}
+          <path d="M210,75 L210,65 M210,110 L210,120" fill="none" stroke="#F59E0B" strokeWidth="1.5" />
+          <polygon points="207,68 213,68 210,62" fill="#F59E0B" />
+          <polygon points="207,117 213,117 210,123" fill="#F59E0B" />
+          <text x="210" y="170" fontSize="9" fill="#6B7280" textAnchor="middle">小刻みに上下</text>
+        </g>
+
+        {/* 3. 横走りアタリ */}
+        <g>
+          <text x="350" y="20" fontSize="11" fill="#3B82F6" textAnchor="middle" fontWeight="bold">横走り</text>
+          <text x="350" y="34" fontSize="9" fill="#6B7280" textAnchor="middle">沈んだら合わせる</text>
+          {/* ウキ（横に移動） */}
+          <ellipse cx="325" cy="92" rx="8" ry="14" fill="#EF4444" opacity="0.2" stroke="#DC2626" strokeWidth="1" strokeDasharray="3,2" />
+          <ellipse cx="355" cy="92" rx="8" ry="14" fill="#EF4444" opacity="0.5" stroke="#DC2626" strokeWidth="1" strokeDasharray="3,2" />
+          <ellipse cx="380" cy="92" rx="8" ry="14" fill="#EF4444" opacity="0.8" stroke="#DC2626" strokeWidth="1.5" />
+          <rect x="378" y="75" width="3" height="10" fill="#44403C" />
+          {/* 横矢印 */}
+          <path d="M330,92 L375,92" fill="none" stroke="#3B82F6" strokeWidth="1.5" />
+          <polygon points="370,88 370,96 380,92" fill="#3B82F6" />
+          <text x="350" y="170" fontSize="9" fill="#6B7280" textAnchor="middle">横に移動する</text>
+        </g>
+
+        {/* 4. 浮き上がりアタリ */}
+        <g>
+          <text x="490" y="20" fontSize="11" fill="#22C55E" textAnchor="middle" fontWeight="bold">浮き上がり</text>
+          <text x="490" y="34" fontSize="9" fill="#6B7280" textAnchor="middle">浮きったら合わせる</text>
+          {/* 通常位置（薄い） */}
+          <ellipse cx="475" cy="92" rx="8" ry="14" fill="#EF4444" opacity="0.2" stroke="#DC2626" strokeWidth="1" strokeDasharray="3,2" />
+          <rect x="473" y="75" width="3" height="10" fill="#44403C" opacity="0.2" />
+          {/* 浮いたウキ（横倒しに近い） */}
+          <ellipse cx="505" cy="80" rx="14" ry="8" fill="#EF4444" opacity="0.8" stroke="#DC2626" strokeWidth="1.5" />
+          {/* 上向き矢印 */}
+          <path d="M480,92 L500,78" fill="none" stroke="#22C55E" strokeWidth="1.5" />
+          <polygon points="497,75 504,78 500,82" fill="#22C55E" />
+          <text x="490" y="170" fontSize="9" fill="#6B7280" textAnchor="middle">逆に浮き上がる</text>
+          <text x="490" y="183" fontSize="9" fill="#6B7280" textAnchor="middle">(チヌに多い)</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
 function SectionCard({
   title,
   icon: Icon,
@@ -243,6 +448,8 @@ export default function FloatFishingGuidePage() {
             <Warning>
               ウキの浮力表示とガン玉の重さを必ず合わせましょう。浮力が合っていないと、ウキが沈みすぎたり浮きすぎたりしてアタリが取れません。
             </Warning>
+
+            <TanaAdjustSvg />
           </SectionCard>
 
           {/* エサの付け方 */}
@@ -284,6 +491,8 @@ export default function FloatFishingGuidePage() {
             <p className="mb-4 text-sm text-muted-foreground">
               ウキ釣り最大の醍醐味は、ウキの動きからアタリ（魚が食いついた合図）を読み取ること。代表的なアタリのパターンを覚えましょう。
             </p>
+
+            <UkiAtariSvg />
 
             <div className="space-y-3 text-sm text-muted-foreground">
               <div className="flex gap-2">

@@ -224,6 +224,235 @@ const faqJsonLd = {
   ],
 };
 
+/* ── SVG図解コンポーネント ── */
+
+function KomaseSvg() {
+  return (
+    <div className="my-6">
+      <h3 className="mb-3 text-center text-sm font-bold text-foreground">コマセの撒き方（4ステップ）</h3>
+      <svg
+        viewBox="0 0 720 260"
+        className="mx-auto w-full max-w-[720px]"
+        aria-label="コマセの撒き方の図解：カゴに詰める、着底させる、シャクリ上げる、コマセが広がるの4ステップ"
+      >
+        {/* 背景 */}
+        <rect x="0" y="0" width="720" height="260" fill="#F9FAFB" rx="12" />
+
+        {/* Step 1: カゴにコマセを詰める */}
+        <g>
+          <text x="90" y="24" fontSize="13" fill="#3B82F6" textAnchor="middle" fontWeight="bold">1. カゴに詰める</text>
+          {/* カゴ */}
+          <rect x="70" y="80" width="40" height="50" rx="5" fill="#22C55E" stroke="#16A34A" strokeWidth="1.5" />
+          <text x="90" y="110" fontSize="9" fill="white" textAnchor="middle">カゴ</text>
+          {/* コマセ */}
+          <rect x="74" y="95" width="32" height="20" rx="3" fill="#F59E0B" opacity="0.6" />
+          <text x="90" y="108" fontSize="8" fill="#92400E" textAnchor="middle">7-8分目</text>
+          {/* 矢印（手で詰める） */}
+          <path d="M50,80 Q45,70 60,65" fill="none" stroke="#6B7280" strokeWidth="1.5" />
+          <polygon points="60,62 56,70 64,68" fill="#6B7280" />
+          <text x="40" y="58" fontSize="10" fill="#6B7280" textAnchor="middle">詰める</text>
+        </g>
+
+        {/* Step 2: 着底 */}
+        <g>
+          <text x="270" y="24" fontSize="13" fill="#3B82F6" textAnchor="middle" fontWeight="bold">2. 着底させる</text>
+          {/* 水面 */}
+          <line x1="210" y1="60" x2="330" y2="60" stroke="#2563EB" strokeWidth="1" strokeDasharray="4,3" />
+          <text x="325" y="56" fontSize="9" fill="#2563EB" textAnchor="end">水面</text>
+          {/* 水 */}
+          <rect x="210" y="60" width="120" height="170" fill="#DBEAFE" rx="6" />
+          {/* 道糸 */}
+          <line x1="270" y1="40" x2="270" y2="195" stroke="#4B5563" strokeWidth="1.5" />
+          {/* 針 */}
+          {[100, 120, 140, 160].map((y, i) => (
+            <g key={i}>
+              <line x1="270" y1={y} x2="252" y2={y + 8} stroke="#4B5563" strokeWidth="0.8" />
+              <circle cx="250" cy={y + 6} r="2" fill="#EC4899" opacity="0.7" />
+            </g>
+          ))}
+          {/* カゴ */}
+          <rect x="260" y="195" width="20" height="20" rx="3" fill="#22C55E" stroke="#16A34A" strokeWidth="1" />
+          {/* 底 */}
+          <path d="M210,230 Q270,225 330,230" fill="none" stroke="#92400E" strokeWidth="1.5" />
+          <text x="270" y="248" fontSize="9" fill="#92400E" textAnchor="middle">海底</text>
+          {/* 矢印 */}
+          <line x1="270" y1="185" x2="270" y2="195" stroke="#2563EB" strokeWidth="1.5" />
+          <polygon points="265,193 275,193 270,200" fill="#2563EB" />
+        </g>
+
+        {/* Step 3: シャクリ上げ */}
+        <g>
+          <text x="450" y="24" fontSize="13" fill="#3B82F6" textAnchor="middle" fontWeight="bold">3. シャクリ上げる</text>
+          {/* 水面 */}
+          <line x1="390" y1="60" x2="510" y2="60" stroke="#2563EB" strokeWidth="1" strokeDasharray="4,3" />
+          {/* 水 */}
+          <rect x="390" y="60" width="120" height="170" fill="#DBEAFE" rx="6" />
+          {/* 道糸 */}
+          <line x1="450" y1="40" x2="450" y2="155" stroke="#4B5563" strokeWidth="1.5" />
+          {/* 針 */}
+          {[80, 100, 120, 140].map((y, i) => (
+            <g key={i}>
+              <line x1="450" y1={y} x2="432" y2={y + 8} stroke="#4B5563" strokeWidth="0.8" />
+              <circle cx="430" cy={y + 6} r="2" fill="#EC4899" opacity="0.7" />
+            </g>
+          ))}
+          {/* カゴ */}
+          <rect x="440" y="155" width="20" height="20" rx="3" fill="#22C55E" stroke="#16A34A" strokeWidth="1" />
+          {/* シャクリの矢印 */}
+          <path d="M470,180 L470,100" fill="none" stroke="#EF4444" strokeWidth="2" />
+          <polygon points="465,105 475,105 470,95" fill="#EF4444" />
+          <text x="490" y="140" fontSize="10" fill="#EF4444">シャクリ</text>
+          <text x="490" y="154" fontSize="10" fill="#EF4444">50cm-1m</text>
+          {/* コマセ粒 */}
+          {[170, 175, 165, 180, 160].map((y, i) => (
+            <circle key={i} cx={440 + (i % 3) * 8 - 5} cy={y} r="2" fill="#F59E0B" opacity="0.6" />
+          ))}
+        </g>
+
+        {/* Step 4: コマセが広がる */}
+        <g>
+          <text x="630" y="24" fontSize="13" fill="#3B82F6" textAnchor="middle" fontWeight="bold">4. コマセが広がる</text>
+          {/* 水面 */}
+          <line x1="570" y1="60" x2="690" y2="60" stroke="#2563EB" strokeWidth="1" strokeDasharray="4,3" />
+          {/* 水 */}
+          <rect x="570" y="60" width="120" height="170" fill="#DBEAFE" rx="6" />
+          {/* 道糸 */}
+          <line x1="630" y1="40" x2="630" y2="175" stroke="#4B5563" strokeWidth="1.5" />
+          {/* 針（コマセの中に） */}
+          {[100, 120, 140, 160].map((y, i) => (
+            <g key={i}>
+              <line x1="630" y1={y} x2="612" y2={y + 8} stroke="#4B5563" strokeWidth="0.8" />
+              <circle cx="610" cy={y + 6} r="2" fill="#EC4899" opacity="0.7" />
+            </g>
+          ))}
+          {/* カゴ */}
+          <rect x="620" y="175" width="20" height="20" rx="3" fill="#22C55E" stroke="#16A34A" strokeWidth="1" />
+          {/* コマセの煙幕（楕円で表現） */}
+          <ellipse cx="625" cy="140" rx="35" ry="55" fill="#F59E0B" opacity="0.15" stroke="#F59E0B" strokeWidth="1" strokeDasharray="3,3" />
+          {/* コマセ粒 */}
+          {[
+            [610, 100], [620, 115], [600, 130], [635, 105], [640, 125],
+            [615, 145], [605, 160], [638, 150], [625, 170], [610, 175],
+          ].map(([x, y], i) => (
+            <circle key={i} cx={x} cy={y} r="1.5" fill="#F59E0B" opacity="0.7" />
+          ))}
+          <text x="670" y="140" fontSize="9" fill="#F59E0B">コマセの</text>
+          <text x="670" y="153" fontSize="9" fill="#F59E0B">煙幕</text>
+          {/* 魚が寄ってくる */}
+          <text x="585" y="120" fontSize="12" fill="#3B82F6">🐟</text>
+          <text x="595" y="155" fontSize="10" fill="#3B82F6">🐟</text>
+        </g>
+
+        {/* 矢印（ステップ間） */}
+        <line x1="145" y1="110" x2="200" y2="110" stroke="#9CA3AF" strokeWidth="1.5" />
+        <polygon points="195,106 195,114 205,110" fill="#9CA3AF" />
+        <line x1="335" y1="110" x2="385" y2="110" stroke="#9CA3AF" strokeWidth="1.5" />
+        <polygon points="380,106 380,114 390,110" fill="#9CA3AF" />
+        <line x1="515" y1="110" x2="565" y2="110" stroke="#9CA3AF" strokeWidth="1.5" />
+        <polygon points="560,106 560,114 570,110" fill="#9CA3AF" />
+      </svg>
+    </div>
+  );
+}
+
+function TanaSvg() {
+  return (
+    <div className="my-6">
+      <h3 className="mb-3 text-center text-sm font-bold text-foreground">タナ（深さ）の探り方</h3>
+      <svg
+        viewBox="0 0 400 350"
+        className="mx-auto w-full max-w-[400px]"
+        aria-label="タナの探り方の図解：表層・中層・底層のレイヤーと魚のいる位置"
+      >
+        {/* 背景 */}
+        <rect x="0" y="0" width="400" height="350" fill="#F9FAFB" rx="12" />
+
+        {/* 堤防 */}
+        <rect x="0" y="20" width="50" height="330" fill="#9CA3AF" opacity="0.3" stroke="#6B7280" strokeWidth="1" />
+        <text x="25" y="14" fontSize="11" fill="#4B5563" textAnchor="middle">堤防</text>
+
+        {/* 竿 */}
+        <line x1="40" y1="30" x2="100" y2="30" stroke="#78716C" strokeWidth="3" />
+        <text x="70" y="24" fontSize="9" fill="#44403C" textAnchor="middle">竿</text>
+
+        {/* 水面 */}
+        <line x1="50" y1="60" x2="400" y2="60" stroke="#2563EB" strokeWidth="1.5" strokeDasharray="6,3" />
+        <text x="380" y="54" fontSize="11" fill="#2563EB" textAnchor="end">水面</text>
+
+        {/* 水域 */}
+        <rect x="50" y="60" width="350" height="270" fill="#DBEAFE" rx="0" />
+
+        {/* 表層 */}
+        <rect x="50" y="60" width="350" height="80" fill="#BFDBFE" opacity="0.3" />
+        <text x="380" y="102" fontSize="12" fill="#2563EB" textAnchor="end" fontWeight="bold">表層</text>
+        <text x="380" y="118" fontSize="9" fill="#2563EB" textAnchor="end">イワシが多い</text>
+
+        {/* 中層 */}
+        <rect x="50" y="140" width="350" height="90" fill="#93C5FD" opacity="0.2" />
+        <text x="380" y="188" fontSize="12" fill="#2563EB" textAnchor="end" fontWeight="bold">中層</text>
+        <text x="380" y="204" fontSize="9" fill="#2563EB" textAnchor="end">アジが多い</text>
+
+        {/* 底層 */}
+        <rect x="50" y="230" width="350" height="80" fill="#60A5FA" opacity="0.2" />
+        <text x="380" y="272" fontSize="12" fill="#2563EB" textAnchor="end" fontWeight="bold">底層</text>
+        <text x="380" y="288" fontSize="9" fill="#2563EB" textAnchor="end">サバ・大型アジ</text>
+
+        {/* 海底 */}
+        <path d="M50,310 Q150,300 250,310 Q350,320 400,305" fill="#D4A373" opacity="0.4" />
+        <text x="225" y="340" fontSize="10" fill="#92400E" textAnchor="middle">海底</text>
+
+        {/* 道糸 */}
+        <line x1="100" y1="30" x2="100" y2="290" stroke="#4B5563" strokeWidth="1.5" />
+
+        {/* 仕掛け位置（底層付近） */}
+        {[160, 190, 220, 250, 270].map((y, i) => (
+          <g key={i}>
+            <line x1="100" y1={y} x2="80" y2={y + 10} stroke="#4B5563" strokeWidth="0.8" />
+            <circle cx="78" cy={y + 8} r="2" fill="#EC4899" opacity="0.7" />
+          </g>
+        ))}
+        {/* カゴ */}
+        <rect x="92" y="280" width="16" height="16" rx="2" fill="#22C55E" stroke="#16A34A" strokeWidth="1" />
+
+        {/* 魚（表層） */}
+        <g opacity="0.8">
+          <ellipse cx="180" cy="90" rx="12" ry="5" fill="#60A5FA" />
+          <ellipse cx="210" cy="100" rx="12" ry="5" fill="#60A5FA" />
+          <ellipse cx="240" cy="85" rx="12" ry="5" fill="#60A5FA" />
+          <ellipse cx="260" cy="95" rx="12" ry="5" fill="#60A5FA" />
+          <text x="150" y="90" fontSize="8" fill="#1D4ED8">イワシ</text>
+        </g>
+
+        {/* 魚（中層） */}
+        <g opacity="0.8">
+          <ellipse cx="190" cy="170" rx="14" ry="6" fill="#3B82F6" />
+          <ellipse cx="230" cy="180" rx="14" ry="6" fill="#3B82F6" />
+          <ellipse cx="260" cy="165" rx="14" ry="6" fill="#3B82F6" />
+          <text x="155" y="172" fontSize="8" fill="#1E40AF">アジ</text>
+        </g>
+
+        {/* 魚（底層） */}
+        <g opacity="0.8">
+          <ellipse cx="200" cy="255" rx="16" ry="7" fill="#2563EB" />
+          <ellipse cx="245" cy="265" rx="16" ry="7" fill="#2563EB" />
+          <text x="155" y="260" fontSize="8" fill="#1E3A8A">サバ</text>
+        </g>
+
+        {/* タナ変更の矢印 */}
+        <g>
+          <path d="M130,100 L130,260" fill="none" stroke="#EF4444" strokeWidth="2" />
+          <polygon points="125,105 135,105 130,95" fill="#EF4444" />
+          <polygon points="125,255 135,255 130,265" fill="#EF4444" />
+          <text x="145" y="180" fontSize="10" fill="#EF4444" transform="rotate(90,145,180)">タナを変えて探る</text>
+        </g>
+      </svg>
+      <p className="mt-2 text-center text-xs text-muted-foreground">
+        アタリがなければタナ（リールを巻く回数）を変えて、魚のいる層を探りましょう
+      </p>
+    </div>
+  );
+}
+
 function SectionCard({
   title,
   icon: Icon,
@@ -430,6 +659,11 @@ export default function SabikiGuidePage() {
                   </p>
                 </div>
               </li>
+            </ol>
+
+            <KomaseSvg />
+
+            <ol className="list-none space-y-4">
               <li className="flex gap-3">
                 <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
                   5
@@ -590,6 +824,11 @@ export default function SabikiGuidePage() {
                   魚は日によって、時間帯によって泳いでいる深さが変わります。底付近、中層、表層と幅広く探りましょう。アタリが出たタナを覚えておき、そのタナを集中的に攻めるのが効果的です。
                 </div>
               </li>
+            </ul>
+
+            <TanaSvg />
+
+            <ul className="space-y-3 text-sm text-muted-foreground">
               <li className="flex gap-2">
                 <span className="text-primary">&#9679;</span>
                 <div>

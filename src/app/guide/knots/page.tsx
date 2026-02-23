@@ -176,6 +176,280 @@ const breadcrumbJsonLd = {
   ],
 };
 
+/* ユニノットの手順図 */
+function UniKnotDiagram() {
+  return (
+    <div className="my-6">
+      <p className="mb-2 text-sm font-medium text-center text-muted-foreground">ユニノットの手順図</p>
+      <svg
+        viewBox="0 0 760 200"
+        width="100%"
+        style={{ maxWidth: 760 }}
+        aria-label="ユニノットの結び方4ステップ図解。糸をアイに通す、ループを作る、5回巻き付ける、締め込むの手順を示す。"
+        className="mx-auto"
+      >
+        {/* 背景 */}
+        <rect x="0" y="0" width="760" height="200" rx="8" fill="#EFF6FF" />
+
+        {/* Step 1: 糸をアイに通す */}
+        <g>
+          <rect x="10" y="10" width="170" height="180" rx="6" fill="#FFFFFF" stroke="#93C5FD" strokeWidth="1.5" />
+          <text x="95" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1E40AF">Step 1</text>
+          <text x="95" y="46" textAnchor="middle" fontSize="10" fill="#374151">アイに糸を通す</text>
+          {/* アイ（丸環） */}
+          <circle cx="60" cy="110" r="12" fill="none" stroke="#6B7280" strokeWidth="2.5" />
+          {/* 本線 */}
+          <line x1="20" y1="110" x2="48" y2="110" stroke="#3B82F6" strokeWidth="2" />
+          {/* アイを通る糸 */}
+          <line x1="72" y1="110" x2="160" y2="110" stroke="#3B82F6" strokeWidth="2" />
+          {/* 端糸ラベル */}
+          <text x="140" y="100" fontSize="9" fill="#6B7280">端糸 15cm</text>
+          <path d="M135,102 L140,108" stroke="#6B7280" strokeWidth="0.8" fill="none" />
+          {/* 本線ラベル */}
+          <text x="20" y="130" fontSize="9" fill="#6B7280">本線</text>
+        </g>
+
+        {/* Step 2: ループを作る */}
+        <g>
+          <rect x="200" y="10" width="170" height="180" rx="6" fill="#FFFFFF" stroke="#93C5FD" strokeWidth="1.5" />
+          <text x="285" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1E40AF">Step 2</text>
+          <text x="285" y="46" textAnchor="middle" fontSize="10" fill="#374151">ループを作る</text>
+          {/* アイ */}
+          <circle cx="230" cy="100" r="10" fill="none" stroke="#6B7280" strokeWidth="2" />
+          {/* 本線 */}
+          <line x1="210" y1="100" x2="220" y2="100" stroke="#3B82F6" strokeWidth="2" />
+          {/* 糸が折り返してループ */}
+          <path d="M240,100 L340,100 L340,80 L280,80 L280,140 L340,140 L340,120 L300,120" stroke="#3B82F6" strokeWidth="2" fill="none" />
+          {/* ループラベル */}
+          <text x="320" y="113" fontSize="9" fill="#EF4444">ループ</text>
+        </g>
+
+        {/* Step 3: 5回巻き付ける */}
+        <g>
+          <rect x="390" y="10" width="170" height="180" rx="6" fill="#FFFFFF" stroke="#93C5FD" strokeWidth="1.5" />
+          <text x="475" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1E40AF">Step 3</text>
+          <text x="475" y="46" textAnchor="middle" fontSize="10" fill="#374151">5回巻き付ける</text>
+          {/* 本線 */}
+          <line x1="410" y1="110" x2="550" y2="110" stroke="#3B82F6" strokeWidth="2" />
+          {/* 巻き付け（コイル表現） */}
+          <ellipse cx="440" cy="110" rx="6" ry="14" fill="none" stroke="#F59E0B" strokeWidth="1.8" />
+          <ellipse cx="455" cy="110" rx="6" ry="14" fill="none" stroke="#F59E0B" strokeWidth="1.8" />
+          <ellipse cx="470" cy="110" rx="6" ry="14" fill="none" stroke="#F59E0B" strokeWidth="1.8" />
+          <ellipse cx="485" cy="110" rx="6" ry="14" fill="none" stroke="#F59E0B" strokeWidth="1.8" />
+          <ellipse cx="500" cy="110" rx="6" ry="14" fill="none" stroke="#F59E0B" strokeWidth="1.8" />
+          {/* 巻き数ラベル */}
+          <text x="470" y="145" textAnchor="middle" fontSize="9" fill="#92400E">5~6回巻く</text>
+        </g>
+
+        {/* Step 4: 締め込む */}
+        <g>
+          <rect x="580" y="10" width="170" height="180" rx="6" fill="#FFFFFF" stroke="#93C5FD" strokeWidth="1.5" />
+          <text x="665" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1E40AF">Step 4</text>
+          <text x="665" y="46" textAnchor="middle" fontSize="10" fill="#374151">締め込む</text>
+          {/* アイ */}
+          <circle cx="620" cy="110" r="10" fill="none" stroke="#6B7280" strokeWidth="2" />
+          {/* 締まった結び目 */}
+          <rect x="632" y="102" width="20" height="16" rx="4" fill="#F59E0B" opacity="0.3" stroke="#F59E0B" strokeWidth="1.5" />
+          {/* 本線 */}
+          <line x1="600" y1="110" x2="610" y2="110" stroke="#3B82F6" strokeWidth="2" />
+          <line x1="652" y1="110" x2="740" y2="110" stroke="#3B82F6" strokeWidth="2" />
+          {/* 端糸（切る） */}
+          <line x1="652" y1="106" x2="670" y2="90" stroke="#3B82F6" strokeWidth="1.5" strokeDasharray="3,2" />
+          {/* ハサミマーク */}
+          <text x="672" y="88" fontSize="9" fill="#EF4444">カット</text>
+          {/* 矢印（引っ張る方向） */}
+          <polygon points="735,110 725,105 725,115" fill="#22C55E" />
+          <text x="720" y="130" fontSize="9" fill="#22C55E">引く</text>
+          <polygon points="605,110 615,105 615,115" fill="#22C55E" />
+          <text x="598" y="130" fontSize="9" fill="#22C55E">引く</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+/* クリンチノットの手順図 */
+function ClinchKnotDiagram() {
+  return (
+    <div className="my-6">
+      <p className="mb-2 text-sm font-medium text-center text-muted-foreground">クリンチノットの手順図</p>
+      <svg
+        viewBox="0 0 760 200"
+        width="100%"
+        style={{ maxWidth: 760 }}
+        aria-label="クリンチノットの結び方4ステップ図解。アイに通す、本線に巻き付ける、小さな輪と大きな輪に端糸を通す、締め込むの手順。"
+        className="mx-auto"
+      >
+        <rect x="0" y="0" width="760" height="200" rx="8" fill="#EFF6FF" />
+
+        {/* Step 1: アイに通す */}
+        <g>
+          <rect x="10" y="10" width="170" height="180" rx="6" fill="#FFFFFF" stroke="#93C5FD" strokeWidth="1.5" />
+          <text x="95" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1E40AF">Step 1</text>
+          <text x="95" y="46" textAnchor="middle" fontSize="10" fill="#374151">アイに糸を通す</text>
+          {/* サルカン */}
+          <rect x="50" y="95" width="20" height="30" rx="4" fill="none" stroke="#6B7280" strokeWidth="2" />
+          <circle cx="60" cy="95" r="6" fill="none" stroke="#6B7280" strokeWidth="1.5" />
+          {/* 糸 */}
+          <line x1="20" y1="110" x2="50" y2="110" stroke="#3B82F6" strokeWidth="2" />
+          <line x1="70" y1="110" x2="160" y2="110" stroke="#3B82F6" strokeWidth="2" />
+          <text x="120" y="100" fontSize="9" fill="#6B7280">10~15cm</text>
+          <text x="60" y="145" textAnchor="middle" fontSize="9" fill="#6B7280">サルカン</text>
+        </g>
+
+        {/* Step 2: 本線に巻き付ける */}
+        <g>
+          <rect x="200" y="10" width="170" height="180" rx="6" fill="#FFFFFF" stroke="#93C5FD" strokeWidth="1.5" />
+          <text x="285" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1E40AF">Step 2</text>
+          <text x="285" y="46" textAnchor="middle" fontSize="10" fill="#374151">本線に5~7回巻く</text>
+          {/* サルカン */}
+          <rect x="220" y="95" width="14" height="22" rx="3" fill="none" stroke="#6B7280" strokeWidth="1.5" />
+          {/* 本線 */}
+          <line x1="210" y1="106" x2="220" y2="106" stroke="#3B82F6" strokeWidth="2" />
+          <line x1="234" y1="106" x2="360" y2="106" stroke="#3B82F6" strokeWidth="2" />
+          {/* 巻き付け */}
+          <ellipse cx="260" cy="106" rx="5" ry="12" fill="none" stroke="#F59E0B" strokeWidth="1.8" />
+          <ellipse cx="273" cy="106" rx="5" ry="12" fill="none" stroke="#F59E0B" strokeWidth="1.8" />
+          <ellipse cx="286" cy="106" rx="5" ry="12" fill="none" stroke="#F59E0B" strokeWidth="1.8" />
+          <ellipse cx="299" cy="106" rx="5" ry="12" fill="none" stroke="#F59E0B" strokeWidth="1.8" />
+          <ellipse cx="312" cy="106" rx="5" ry="12" fill="none" stroke="#F59E0B" strokeWidth="1.8" />
+          {/* 小さな輪マーク */}
+          <circle cx="245" cy="106" r="5" fill="none" stroke="#EF4444" strokeWidth="1.2" strokeDasharray="2,2" />
+          <text x="245" y="135" textAnchor="middle" fontSize="8" fill="#EF4444">小さな輪</text>
+        </g>
+
+        {/* Step 3: 輪に通す */}
+        <g>
+          <rect x="390" y="10" width="170" height="180" rx="6" fill="#FFFFFF" stroke="#93C5FD" strokeWidth="1.5" />
+          <text x="475" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1E40AF">Step 3</text>
+          <text x="475" y="46" textAnchor="middle" fontSize="10" fill="#374151">2つの輪に通す</text>
+          {/* 本線 */}
+          <line x1="400" y1="100" x2="550" y2="100" stroke="#3B82F6" strokeWidth="2" />
+          {/* 小さな輪 */}
+          <circle cx="430" cy="100" r="8" fill="none" stroke="#EF4444" strokeWidth="1.5" />
+          <text x="430" y="85" textAnchor="middle" fontSize="8" fill="#EF4444">1</text>
+          {/* 大きな輪 */}
+          <ellipse cx="465" cy="100" rx="15" ry="20" fill="none" stroke="#22C55E" strokeWidth="1.5" />
+          <text x="465" y="76" textAnchor="middle" fontSize="8" fill="#22C55E">2</text>
+          {/* 端糸矢印 */}
+          <path d="M540,100 C540,70 430,70 430,92" stroke="#F59E0B" strokeWidth="1.5" fill="none" markerEnd="url(#arrowC)" />
+          <path d="M430,108 C430,130 465,130 465,120" stroke="#F59E0B" strokeWidth="1.5" fill="none" markerEnd="url(#arrowC)" />
+          <defs>
+            <marker id="arrowC" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+              <path d="M0,0 L6,3 L0,6" fill="#F59E0B" />
+            </marker>
+          </defs>
+          <text x="510" y="70" fontSize="8" fill="#92400E">端糸を通す</text>
+        </g>
+
+        {/* Step 4: 締め込む */}
+        <g>
+          <rect x="580" y="10" width="170" height="180" rx="6" fill="#FFFFFF" stroke="#93C5FD" strokeWidth="1.5" />
+          <text x="665" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1E40AF">Step 4</text>
+          <text x="665" y="46" textAnchor="middle" fontSize="10" fill="#374151">湿らせて締める</text>
+          {/* サルカン */}
+          <rect x="615" y="100" width="14" height="20" rx="3" fill="none" stroke="#6B7280" strokeWidth="1.5" />
+          {/* 締まった結び目 */}
+          <rect x="631" y="103" width="18" height="14" rx="4" fill="#F59E0B" opacity="0.3" stroke="#F59E0B" strokeWidth="1.5" />
+          {/* 本線 */}
+          <line x1="600" y1="110" x2="615" y2="110" stroke="#3B82F6" strokeWidth="2" />
+          <line x1="649" y1="110" x2="740" y2="110" stroke="#3B82F6" strokeWidth="2" />
+          {/* 水滴マーク */}
+          <path d="M665,75 Q670,65 675,75 Q675,82 665,82 Q655,82 665,75" fill="#60A5FA" opacity="0.5" />
+          <text x="665" y="92" textAnchor="middle" fontSize="8" fill="#3B82F6">湿らせる</text>
+          {/* 矢印 */}
+          <polygon points="735,110 725,105 725,115" fill="#22C55E" />
+          <polygon points="605,110 615,105 615,115" fill="#22C55E" />
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+/* 電車結びの手順図 */
+function TrainKnotDiagram() {
+  return (
+    <div className="my-6">
+      <p className="mb-2 text-sm font-medium text-center text-muted-foreground">電車結びの手順図</p>
+      <svg
+        viewBox="0 0 760 220"
+        width="100%"
+        style={{ maxWidth: 760 }}
+        aria-label="電車結びの手順図解。2本の糸を重ね、それぞれの端でユニノットを結び、引っ張って結び目を寄せる手順を示す。"
+        className="mx-auto"
+      >
+        <rect x="0" y="0" width="760" height="220" rx="8" fill="#EFF6FF" />
+
+        {/* Step 1: 2本の糸を重ねる */}
+        <g>
+          <rect x="10" y="10" width="230" height="195" rx="6" fill="#FFFFFF" stroke="#93C5FD" strokeWidth="1.5" />
+          <text x="125" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1E40AF">Step 1</text>
+          <text x="125" y="46" textAnchor="middle" fontSize="10" fill="#374151">2本の糸を10cm重ねる</text>
+          {/* 糸A（青） */}
+          <line x1="20" y1="100" x2="220" y2="100" stroke="#3B82F6" strokeWidth="2.5" />
+          <text x="30" y="92" fontSize="9" fill="#3B82F6">糸A（道糸）</text>
+          {/* 糸B（オレンジ） */}
+          <line x1="30" y1="115" x2="230" y2="115" stroke="#F59E0B" strokeWidth="2.5" />
+          <text x="160" y="132" fontSize="9" fill="#F59E0B">糸B（ハリス）</text>
+          {/* 重なりエリア */}
+          <rect x="60" y="90" width="140" height="35" rx="3" fill="none" stroke="#EF4444" strokeWidth="1" strokeDasharray="4,3" />
+          <text x="130" y="145" textAnchor="middle" fontSize="9" fill="#EF4444">約10cmの重なり</text>
+        </g>
+
+        {/* Step 2: 片方ずつユニノット */}
+        <g>
+          <rect x="260" y="10" width="240" height="195" rx="6" fill="#FFFFFF" stroke="#93C5FD" strokeWidth="1.5" />
+          <text x="380" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1E40AF">Step 2</text>
+          <text x="380" y="46" textAnchor="middle" fontSize="10" fill="#374151">それぞれユニノットを結ぶ</text>
+          {/* 糸A */}
+          <line x1="270" y1="105" x2="490" y2="105" stroke="#3B82F6" strokeWidth="2" />
+          {/* 糸B */}
+          <line x1="270" y1="115" x2="490" y2="115" stroke="#F59E0B" strokeWidth="2" />
+          {/* 左の結び目（糸Aのユニノット） */}
+          <ellipse cx="320" cy="110" rx="5" ry="11" fill="none" stroke="#3B82F6" strokeWidth="1.5" />
+          <ellipse cx="332" cy="110" rx="5" ry="11" fill="none" stroke="#3B82F6" strokeWidth="1.5" />
+          <ellipse cx="344" cy="110" rx="5" ry="11" fill="none" stroke="#3B82F6" strokeWidth="1.5" />
+          <rect x="313" y="98" width="38" height="24" rx="3" fill="#3B82F6" opacity="0.1" stroke="none" />
+          <text x="332" y="85" textAnchor="middle" fontSize="8" fill="#3B82F6">糸Aで結ぶ</text>
+          {/* 右の結び目（糸Bのユニノット） */}
+          <ellipse cx="420" cy="110" rx="5" ry="11" fill="none" stroke="#F59E0B" strokeWidth="1.5" />
+          <ellipse cx="432" cy="110" rx="5" ry="11" fill="none" stroke="#F59E0B" strokeWidth="1.5" />
+          <ellipse cx="444" cy="110" rx="5" ry="11" fill="none" stroke="#F59E0B" strokeWidth="1.5" />
+          <rect x="413" y="98" width="38" height="24" rx="3" fill="#F59E0B" opacity="0.1" stroke="none" />
+          <text x="432" y="85" textAnchor="middle" fontSize="8" fill="#F59E0B">糸Bで結ぶ</text>
+          {/* 間の距離 */}
+          <line x1="355" y1="135" x2="415" y2="135" stroke="#6B7280" strokeWidth="0.8" />
+          <text x="385" y="150" textAnchor="middle" fontSize="8" fill="#6B7280">離れている</text>
+        </g>
+
+        {/* Step 3: 引っ張って密着 */}
+        <g>
+          <rect x="520" y="10" width="230" height="195" rx="6" fill="#FFFFFF" stroke="#93C5FD" strokeWidth="1.5" />
+          <text x="635" y="30" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1E40AF">Step 3</text>
+          <text x="635" y="46" textAnchor="middle" fontSize="10" fill="#374151">本線を引いて密着させる</text>
+          {/* 糸A */}
+          <line x1="540" y1="108" x2="730" y2="108" stroke="#3B82F6" strokeWidth="2" />
+          {/* 糸B */}
+          <line x1="540" y1="115" x2="730" y2="115" stroke="#F59E0B" strokeWidth="2" />
+          {/* 合体した結び目 */}
+          <rect x="620" y="96" width="30" height="28" rx="6" fill="#22C55E" opacity="0.15" stroke="#22C55E" strokeWidth="1.5" />
+          <text x="635" y="113" textAnchor="middle" fontSize="8" fontWeight="bold" fill="#22C55E">密着</text>
+          {/* 左矢印（引く） */}
+          <polygon points="545,111 555,106 555,116" fill="#22C55E" />
+          <text x="555" y="135" fontSize="9" fill="#22C55E">引く</text>
+          {/* 右矢印（引く） */}
+          <polygon points="725,111 715,106 715,116" fill="#22C55E" />
+          <text x="705" y="135" fontSize="9" fill="#22C55E">引く</text>
+          {/* 端糸カット */}
+          <line x1="620" y1="96" x2="610" y2="80" stroke="#3B82F6" strokeWidth="1" strokeDasharray="3,2" />
+          <line x1="650" y1="96" x2="660" y2="80" stroke="#F59E0B" strokeWidth="1" strokeDasharray="3,2" />
+          <text x="635" y="75" textAnchor="middle" fontSize="8" fill="#EF4444">端糸をカット</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
 function Hint({ children }: { children: React.ReactNode }) {
   return (
     <div className="my-4 rounded-lg bg-blue-50 p-4 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">
@@ -304,6 +578,7 @@ export default function KnotsGuidePage() {
 
         <div className="space-y-6">
           {/* ユニノット */}
+          <UniKnotDiagram />
           <KnotSection
             number={1}
             title="ユニノット（基本中の基本）"
@@ -353,6 +628,7 @@ export default function KnotsGuidePage() {
           />
 
           {/* クリンチノット */}
+          <ClinchKnotDiagram />
           <KnotSection
             number={2}
             title="クリンチノット"
@@ -402,6 +678,7 @@ export default function KnotsGuidePage() {
           />
 
           {/* 電車結び */}
+          <TrainKnotDiagram />
           <KnotSection
             number={3}
             title="電車結び（糸と糸の接続）"

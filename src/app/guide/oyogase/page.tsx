@@ -56,6 +56,240 @@ const howToJsonLd = {
   ],
 };
 
+/* --- SVG図解コンポーネント --- */
+
+function OyogaseRigDiagram() {
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 600 400"
+        width="100%"
+        style={{ maxWidth: 600 }}
+        aria-label="泳がせ釣り仕掛け図：竿、道糸、ウキ、ハリス、孫針、活きエサの構成"
+        role="img"
+      >
+        <rect x="0" y="0" width="600" height="400" rx="12" fill="#EFF6FF" />
+        <text x="300" y="24" textAnchor="middle" fontSize="14" fill="#1E293B" fontWeight="bold">泳がせ釣り仕掛け図（ウキ式）</text>
+
+        {/* 堤防 */}
+        <rect x="0" y="45" width="120" height="355" fill="#D1D5DB" />
+        <text x="60" y="70" textAnchor="middle" fontSize="11" fill="#475569" fontWeight="bold">堤防</text>
+
+        {/* 竿 */}
+        <line x1="100" y1="55" x2="260" y2="35" stroke="#78716C" strokeWidth="4" strokeLinecap="round" />
+        <text x="180" y="30" textAnchor="middle" fontSize="10" fill="#78716C" fontWeight="bold">竿（磯竿3〜4号）</text>
+
+        {/* リール */}
+        <ellipse cx="130" cy="60" rx="12" ry="9" fill="#E2E8F0" stroke="#3B82F6" strokeWidth="1.5" />
+        <text x="130" y="79" textAnchor="middle" fontSize="8" fill="#3B82F6">リール</text>
+
+        {/* 水面 */}
+        <line x1="120" y1="120" x2="600" y2="120" stroke="#60A5FA" strokeWidth="2" strokeDasharray="8 4" />
+        <text x="565" y="115" fontSize="10" fill="#60A5FA" fontWeight="bold">水面</text>
+
+        {/* 道糸 */}
+        <line x1="260" y1="35" x2="300" y2="120" stroke="#3B82F6" strokeWidth="1.5" />
+        <text x="288" y="75" fontSize="9" fill="#3B82F6" fontWeight="bold">道糸</text>
+        <text x="288" y="86" fontSize="8" fill="#3B82F6">ナイロン4〜5号</text>
+
+        {/* ウキ */}
+        <ellipse cx="300" cy="115" rx="12" ry="20" fill="#EF4444" opacity="0.8" />
+        <ellipse cx="300" cy="110" rx="8" ry="5" fill="#FCA5A5" />
+        <text x="325" y="115" fontSize="10" fill="#EF4444" fontWeight="bold">ウキ</text>
+
+        {/* ウキ下の糸 */}
+        <line x1="300" y1="135" x2="300" y2="180" stroke="#3B82F6" strokeWidth="1.5" />
+
+        {/* サルカン */}
+        <rect x="296" y="180" width="8" height="12" rx="2" fill="#64748B" stroke="#475569" strokeWidth="1" />
+        <text x="315" y="190" fontSize="8" fill="#64748B" fontWeight="bold">サルカン</text>
+
+        {/* ハリス */}
+        <line x1="300" y1="192" x2="300" y2="290" stroke="#60A5FA" strokeWidth="1.5" />
+        <text x="315" y="240" fontSize="9" fill="#60A5FA" fontWeight="bold">ハリス</text>
+        <text x="315" y="252" fontSize="8" fill="#60A5FA">フロロ5〜8号</text>
+
+        {/* 親針 */}
+        <path d="M300,290 Q310,298 305,303 Q298,308 295,300" stroke="#F59E0B" strokeWidth="2" fill="none" />
+        <text x="318" y="302" fontSize="9" fill="#F59E0B" fontWeight="bold">親針</text>
+
+        {/* 活きエサ（アジ） */}
+        <ellipse cx="360" cy="295" rx="40" ry="18" fill="#93C5FD" opacity="0.4" stroke="#3B82F6" strokeWidth="1.5" />
+        {/* 尾 */}
+        <polygon points="395,290 415,280 415,310 395,300" fill="#93C5FD" opacity="0.4" stroke="#3B82F6" strokeWidth="1" />
+        {/* 目 */}
+        <circle cx="335" cy="293" r="3" fill="white" stroke="#475569" strokeWidth="1" />
+        <circle cx="335" cy="293" r="1.5" fill="#475569" />
+        <text x="360" y="328" textAnchor="middle" fontSize="10" fill="#3B82F6" fontWeight="bold">活きエサ（アジ）</text>
+
+        {/* 孫針ライン */}
+        <line x1="305" y1="300" x2="380" y2="308" stroke="#F59E0B" strokeWidth="1" strokeDasharray="3 2" />
+        <path d="M380,308 Q390,315 385,320 Q378,324 375,316" stroke="#F59E0B" strokeWidth="1.5" fill="none" />
+        <text x="395" y="320" fontSize="8" fill="#F59E0B">孫針（トレブル）</text>
+
+        {/* エサが泳ぐ矢印 */}
+        <path d="M410,295 Q430,280 420,265" stroke="#22C55E" strokeWidth="1.5" fill="none" strokeDasharray="4 3" />
+        <polygon points="418,268 425,262 422,272" fill="#22C55E" />
+        <text x="445" y="275" fontSize="9" fill="#22C55E">泳ぐ方向</text>
+
+        {/* 海底 */}
+        <path d="M120,370 Q200,355 300,365 Q400,375 500,360 Q550,355 600,365" stroke="#D4A574" strokeWidth="2" fill="#F5DEB3" opacity="0.4" />
+        <text x="450" y="385" fontSize="10" fill="#A0845C">海底</text>
+
+        {/* タナ説明 */}
+        <line x1="250" y1="120" x2="250" y2="290" stroke="#94A3B8" strokeWidth="1" strokeDasharray="3 3" />
+        <text x="240" y="205" textAnchor="end" fontSize="9" fill="#94A3B8" fontWeight="bold">タナ</text>
+        <text x="240" y="217" textAnchor="end" fontSize="8" fill="#94A3B8">（ウキ下の長さ）</text>
+      </svg>
+    </div>
+  );
+}
+
+function BaitHookingDiagram() {
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 560 240"
+        width="100%"
+        style={{ maxWidth: 560 }}
+        aria-label="エサの付け方図：鼻掛けと背掛けの2パターン"
+        role="img"
+      >
+        <rect x="0" y="0" width="560" height="240" rx="12" fill="#F9FAFB" />
+        <text x="280" y="24" textAnchor="middle" fontSize="14" fill="#1E293B" fontWeight="bold">エサの付け方（アジの場合）</text>
+
+        {/* 鼻掛け（左） */}
+        <rect x="20" y="38" width="250" height="190" rx="10" fill="white" stroke="#3B82F6" strokeWidth="2" />
+        <rect x="20" y="38" width="250" height="30" rx="10" fill="#3B82F6" />
+        <rect x="20" y="56" width="250" height="12" fill="#3B82F6" />
+        <text x="145" y="58" textAnchor="middle" fontSize="12" fill="white" fontWeight="bold">鼻掛け（おすすめ）</text>
+
+        {/* アジ（鼻掛け） */}
+        <ellipse cx="145" cy="130" rx="60" ry="25" fill="#93C5FD" opacity="0.3" stroke="#3B82F6" strokeWidth="1.5" />
+        <polygon points="200,122 230,110 230,150 200,138" fill="#93C5FD" opacity="0.3" stroke="#3B82F6" strokeWidth="1" />
+        {/* 目 */}
+        <circle cx="100" cy="126" r="5" fill="white" stroke="#475569" strokeWidth="1" />
+        <circle cx="100" cy="126" r="2" fill="#475569" />
+        {/* 鼻の穴に針 */}
+        <circle cx="82" cy="130" r="3" fill="#EF4444" opacity="0.3" />
+        <path d="M82,126 Q75,132 80,137" stroke="#EF4444" strokeWidth="2" fill="none" />
+        <line x1="82" y1="126" x2="82" y2="100" stroke="#EF4444" strokeWidth="1.5" strokeDasharray="3 2" />
+        {/* 矢印で鼻の穴を指す */}
+        <text x="75" y="95" textAnchor="middle" fontSize="9" fill="#EF4444" fontWeight="bold">針を通す</text>
+
+        <text x="145" y="175" textAnchor="middle" fontSize="10" fill="#334155">鼻の穴にハリを通す</text>
+        <text x="145" y="190" textAnchor="middle" fontSize="10" fill="#22C55E" fontWeight="bold">自然に泳ぎやすく長持ち</text>
+        <text x="145" y="206" textAnchor="middle" fontSize="9" fill="#64748B">最もポピュラーな付け方</text>
+        <text x="145" y="220" textAnchor="middle" fontSize="9" fill="#3B82F6">泳ぎの自由度が高い</text>
+
+        {/* 背掛け（右） */}
+        <rect x="290" y="38" width="250" height="190" rx="10" fill="white" stroke="#22C55E" strokeWidth="2" />
+        <rect x="290" y="38" width="250" height="30" rx="10" fill="#22C55E" />
+        <rect x="290" y="56" width="250" height="12" fill="#22C55E" />
+        <text x="415" y="58" textAnchor="middle" fontSize="12" fill="white" fontWeight="bold">背掛け</text>
+
+        {/* アジ（背掛け） */}
+        <ellipse cx="415" cy="130" rx="60" ry="25" fill="#86EFAC" opacity="0.2" stroke="#22C55E" strokeWidth="1.5" />
+        <polygon points="470,122 500,110 500,150 470,138" fill="#86EFAC" opacity="0.2" stroke="#22C55E" strokeWidth="1" />
+        {/* 目 */}
+        <circle cx="370" cy="126" r="5" fill="white" stroke="#475569" strokeWidth="1" />
+        <circle cx="370" cy="126" r="2" fill="#475569" />
+        {/* 背ビレ下に針 */}
+        <line x1="415" y1="105" x2="415" y2="112" stroke="#94A3B8" strokeWidth="1" />
+        <line x1="420" y1="105" x2="420" y2="110" stroke="#94A3B8" strokeWidth="1" />
+        <line x1="410" y1="105" x2="410" y2="112" stroke="#94A3B8" strokeWidth="1" />
+        <circle cx="415" cy="115" r="3" fill="#EF4444" opacity="0.3" />
+        <path d="M415,112 Q408,118 413,123" stroke="#EF4444" strokeWidth="2" fill="none" />
+        <line x1="415" y1="112" x2="415" y2="90" stroke="#EF4444" strokeWidth="1.5" strokeDasharray="3 2" />
+        <text x="415" y="86" textAnchor="middle" fontSize="9" fill="#EF4444" fontWeight="bold">針を刺す</text>
+
+        <text x="415" y="175" textAnchor="middle" fontSize="10" fill="#334155">背ビレの下にハリを刺す</text>
+        <text x="415" y="190" textAnchor="middle" fontSize="10" fill="#F59E0B" fontWeight="bold">フッキング率が高い</text>
+        <text x="415" y="206" textAnchor="middle" fontSize="9" fill="#64748B">エサが暴れにくい</text>
+        <text x="415" y="220" textAnchor="middle" fontSize="9" fill="#EF4444">やや弱りやすい点に注意</text>
+      </svg>
+    </div>
+  );
+}
+
+function OyogaseWaitDiagram() {
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 600 280"
+        width="100%"
+        style={{ maxWidth: 600 }}
+        aria-label="泳がせ釣りの待ち方図：活きエサが泳ぐ範囲と大物が寄ってくるイメージ"
+        role="img"
+      >
+        <rect x="0" y="0" width="600" height="280" rx="12" fill="#EFF6FF" />
+        <text x="300" y="24" textAnchor="middle" fontSize="14" fill="#1E293B" fontWeight="bold">泳がせ釣りのイメージ</text>
+
+        {/* 堤防 */}
+        <rect x="0" y="35" width="80" height="245" fill="#D1D5DB" />
+        <text x="40" y="55" textAnchor="middle" fontSize="10" fill="#475569" fontWeight="bold">堤防</text>
+        {/* 釣り人シルエット */}
+        <circle cx="65" cy="48" r="6" fill="#475569" />
+        <line x1="65" y1="54" x2="65" y2="72" stroke="#475569" strokeWidth="2" />
+        <line x1="65" y1="60" x2="55" y2="55" stroke="#475569" strokeWidth="1.5" />
+        <line x1="65" y1="60" x2="90" y2="50" stroke="#475569" strokeWidth="1.5" />
+        {/* 竿 */}
+        <line x1="90" y1="50" x2="160" y2="38" stroke="#78716C" strokeWidth="2" strokeLinecap="round" />
+
+        {/* 水面 */}
+        <path d="M80,85 Q140,80 200,87 Q260,94 320,85 Q380,76 440,87 Q500,95 560,85 Q580,82 600,87" stroke="#60A5FA" strokeWidth="2" fill="none" />
+        <text x="570" y="82" fontSize="9" fill="#60A5FA">水面</text>
+
+        {/* 道糸 */}
+        <line x1="160" y1="38" x2="200" y2="87" stroke="#3B82F6" strokeWidth="1.5" />
+
+        {/* ウキ */}
+        <ellipse cx="200" cy="84" rx="8" ry="14" fill="#EF4444" opacity="0.8" />
+
+        {/* ハリス */}
+        <line x1="200" y1="98" x2="230" y2="160" stroke="#60A5FA" strokeWidth="1" />
+
+        {/* 活きエサ（アジ）が泳ぐ範囲 */}
+        <ellipse cx="280" cy="160" rx="80" ry="50" fill="#3B82F6" opacity="0.06" stroke="#3B82F6" strokeWidth="1" strokeDasharray="5 3" />
+        <text x="280" y="210" textAnchor="middle" fontSize="9" fill="#3B82F6">エサが泳ぐ範囲</text>
+
+        {/* 活きエサ */}
+        <ellipse cx="260" cy="155" rx="18" ry="8" fill="#93C5FD" opacity="0.5" stroke="#3B82F6" strokeWidth="1" />
+        <circle cx="247" cy="153" r="2" fill="#475569" />
+        <text x="260" y="145" textAnchor="middle" fontSize="8" fill="#3B82F6" fontWeight="bold">アジ</text>
+        {/* 泳ぎの軌跡 */}
+        <path d="M240,158 Q260,170 280,155 Q300,140 310,155" stroke="#60A5FA" strokeWidth="1" fill="none" strokeDasharray="3 2" opacity="0.5" />
+
+        {/* 大物が寄ってくる */}
+        {/* シーバス */}
+        <ellipse cx="470" cy="155" rx="50" ry="22" fill="#64748B" opacity="0.2" stroke="#475569" strokeWidth="1.5" />
+        <polygon points="515,148 545,135 545,175 515,162" fill="#64748B" opacity="0.2" stroke="#475569" strokeWidth="1" />
+        <circle cx="430" cy="150" r="5" fill="white" stroke="#475569" strokeWidth="1" />
+        <circle cx="430" cy="150" r="2.5" fill="#475569" />
+        <text x="470" y="190" textAnchor="middle" fontSize="10" fill="#475569" fontWeight="bold">大物（シーバス）</text>
+
+        {/* 接近矢印 */}
+        <path d="M420,155 Q380,155 340,158" stroke="#EF4444" strokeWidth="2" fill="none" markerEnd="url(#arrowOyogase)" />
+        <text x="380" y="145" textAnchor="middle" fontSize="9" fill="#EF4444" fontWeight="bold">エサを追って接近！</text>
+
+        <defs>
+          <marker id="arrowOyogase" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+            <path d="M0,0 L8,4 L0,8 Z" fill="#EF4444" />
+          </marker>
+        </defs>
+
+        {/* 海底 */}
+        <path d="M80,250 Q180,240 280,248 Q380,256 480,245 Q540,240 600,248" stroke="#D4A574" strokeWidth="2" fill="#F5DEB3" opacity="0.3" />
+
+        {/* コツの吹き出し */}
+        <rect x="350" y="225" width="240" height="45" rx="8" fill="white" stroke="#F59E0B" strokeWidth="1.5" />
+        <text x="470" y="243" textAnchor="middle" fontSize="10" fill="#F59E0B" fontWeight="bold">コツ：最初のアタリで合わせない！</text>
+        <text x="470" y="258" textAnchor="middle" fontSize="9" fill="#64748B">食い込むまでじっくり待つ</text>
+      </svg>
+    </div>
+  );
+}
+
 export default function OyogasePage() {
   return (
     <main className="container mx-auto max-w-3xl px-4 py-6 sm:py-10">
@@ -184,6 +418,9 @@ export default function OyogasePage() {
         </Card>
       </section>
 
+      {/* 泳がせ釣り仕掛け図 */}
+      <OyogaseRigDiagram />
+
       {/* 仕掛けの種類 */}
       <section className="mb-10">
         <h2 className="mb-4 text-xl font-bold sm:text-2xl">泳がせ釣りの仕掛け3タイプ</h2>
@@ -229,6 +466,9 @@ export default function OyogasePage() {
         </div>
       </section>
 
+      {/* エサの付け方図 */}
+      <BaitHookingDiagram />
+
       {/* エサの付け方 */}
       <section className="mb-10">
         <h2 className="mb-4 text-xl font-bold sm:text-2xl">エサの付け方</h2>
@@ -257,6 +497,9 @@ export default function OyogasePage() {
           </CardContent>
         </Card>
       </section>
+
+      {/* 泳がせの待ち方図 */}
+      <OyogaseWaitDiagram />
 
       {/* 釣り方のコツ */}
       <section className="mb-10">

@@ -86,6 +86,247 @@ function Warning({ children }: { children: React.ReactNode }) {
   );
 }
 
+function EgiStructureDiagram() {
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 550 250"
+        width="100%"
+        style={{ maxWidth: 550 }}
+        aria-label="エギの構造図：ボディ、カンナ、シンカー、アイの各パーツ名称"
+        role="img"
+      >
+        <rect width="550" height="250" rx="12" fill="#EFF6FF" />
+        <text x="275" y="28" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#1E3A5F">エギの構造</text>
+
+        {/* エギ本体 */}
+        <g transform="translate(100,70)">
+          {/* ボディ */}
+          <ellipse cx="175" cy="60" rx="120" ry="28" fill="#F59E0B" stroke="#D97706" strokeWidth="2" />
+          {/* ボディのグラデーション的な模様 */}
+          <ellipse cx="175" cy="55" rx="100" ry="18" fill="#FBBF24" opacity="0.5" />
+          {/* 目 */}
+          <circle cx="100" cy="55" r="8" fill="#FFFFFF" stroke="#6B7280" strokeWidth="1.5" />
+          <circle cx="100" cy="55" r="4" fill="#1F2937" />
+
+          {/* アイ（ラインを結ぶ部分） */}
+          <circle cx="65" cy="50" r="6" fill="none" stroke="#3B82F6" strokeWidth="2.5" />
+          <line x1="76" y1="52" x2="92" y2="55" stroke="#3B82F6" strokeWidth="2" />
+
+          {/* シンカー（おもり） */}
+          <rect x="80" y="82" width="30" height="10" rx="3" fill="#9CA3AF" stroke="#6B7280" strokeWidth="1.5" />
+
+          {/* カンナ（針） */}
+          <g transform="translate(290,50)">
+            <line x1="0" y1="0" x2="15" y2="-5" stroke="#EF4444" strokeWidth="2" />
+            <line x1="15" y1="-5" x2="25" y2="5" stroke="#EF4444" strokeWidth="2" />
+            <line x1="0" y1="5" x2="15" y2="0" stroke="#EF4444" strokeWidth="2" />
+            <line x1="15" y1="0" x2="25" y2="10" stroke="#EF4444" strokeWidth="2" />
+            <line x1="0" y1="10" x2="15" y2="5" stroke="#EF4444" strokeWidth="2" />
+            <line x1="15" y1="5" x2="25" y2="15" stroke="#EF4444" strokeWidth="2" />
+            <line x1="0" y1="15" x2="15" y2="10" stroke="#EF4444" strokeWidth="2" />
+            <line x1="15" y1="10" x2="25" y2="20" stroke="#EF4444" strokeWidth="2" />
+          </g>
+
+          {/* ラベル線と名称 */}
+          {/* アイ */}
+          <line x1="65" y1="38" x2="65" y2="10" stroke="#6B7280" strokeWidth="1" strokeDasharray="3,2" />
+          <text x="65" y="5" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#3B82F6">アイ</text>
+
+          {/* ボディ */}
+          <line x1="175" y1="30" x2="175" y2="5" stroke="#6B7280" strokeWidth="1" strokeDasharray="3,2" />
+          <text x="175" y="0" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#F59E0B">ボディ</text>
+
+          {/* シンカー */}
+          <line x1="95" y1="92" x2="95" y2="115" stroke="#6B7280" strokeWidth="1" strokeDasharray="3,2" />
+          <text x="95" y="128" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#9CA3AF">シンカー</text>
+          <text x="95" y="142" textAnchor="middle" fontSize="10" fill="#6B7280">(おもり)</text>
+
+          {/* カンナ */}
+          <line x1="310" y1="80" x2="310" y2="110" stroke="#6B7280" strokeWidth="1" strokeDasharray="3,2" />
+          <text x="310" y="125" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#EF4444">カンナ</text>
+          <text x="310" y="139" textAnchor="middle" fontSize="10" fill="#6B7280">(針)</text>
+        </g>
+
+        {/* 補足 */}
+        <text x="275" y="235" textAnchor="middle" fontSize="11" fill="#6B7280">アイにラインを結び、シンカーの重さでエギが沈む。カンナでイカを掛ける</text>
+      </svg>
+    </div>
+  );
+}
+
+function ShakuriActionDiagram() {
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 600 300"
+        width="100%"
+        style={{ maxWidth: 600 }}
+        aria-label="エギングのシャクリアクション図：着底、シャクリ、フォール、アタリの連続動作"
+        role="img"
+      >
+        <rect width="600" height="300" rx="12" fill="#EFF6FF" />
+        <text x="300" y="28" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#1E3A5F">シャクリとフォールの基本アクション</text>
+
+        {/* 水面 */}
+        <line x1="30" y1="60" x2="570" y2="60" stroke="#60A5FA" strokeWidth="2" />
+        <text x="25" y="55" fontSize="10" fill="#3B82F6">水面</text>
+
+        {/* 海底 */}
+        <path d="M30,250 Q100,240 150,250 Q200,260 250,250 Q300,240 350,250 Q400,260 450,250 Q500,240 570,250" stroke="#D1A97A" strokeWidth="2" fill="#FEF3C7" opacity="0.5" />
+        <text x="25" y="248" fontSize="10" fill="#D97706">海底</text>
+
+        {/* Phase 1: キャスト & 着底 */}
+        <g>
+          {/* 沈下ライン */}
+          <path d="M70,65 Q80,150 90,240" stroke="#3B82F6" strokeWidth="1.5" strokeDasharray="5,3" />
+          {/* エギ（着底） */}
+          <ellipse cx="90" cy="240" rx="12" ry="6" fill="#F59E0B" stroke="#D97706" strokeWidth="1.5" />
+          <text x="80" y="275" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#3B82F6">1. 着底</text>
+        </g>
+
+        {/* Phase 2: シャクリ（2回） */}
+        <g>
+          {/* 1st シャクリ */}
+          <path d="M90,240 L140,160" stroke="#EF4444" strokeWidth="2.5" />
+          <path d="M130,165 L140,160 L135,175" stroke="#EF4444" strokeWidth="2" fill="none" />
+          {/* 2nd シャクリ */}
+          <path d="M140,160 L190,90" stroke="#EF4444" strokeWidth="2.5" />
+          <path d="M180,95 L190,90 L185,105" stroke="#EF4444" strokeWidth="2" fill="none" />
+          {/* エギ（跳ね上がった位置） */}
+          <ellipse cx="190" cy="90" rx="12" ry="6" fill="#F59E0B" stroke="#D97706" strokeWidth="1.5" />
+          <text x="170" y="275" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#EF4444">2. シャクリ</text>
+          <text x="170" y="288" textAnchor="middle" fontSize="9" fill="#6B7280">2-3回しゃくる</text>
+        </g>
+
+        {/* Phase 3: フォール */}
+        <g>
+          {/* テンションフォール（カーブ） */}
+          <path d="M190,90 Q250,120 290,200 Q310,240 320,245" stroke="#22C55E" strokeWidth="2.5" strokeDasharray="6,3" />
+          {/* エギ（沈下中） */}
+          <ellipse cx="320" cy="245" rx="12" ry="6" fill="#F59E0B" stroke="#D97706" strokeWidth="1.5" />
+          <text x="280" y="275" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#22C55E">3. フォール</text>
+          <text x="280" y="288" textAnchor="middle" fontSize="9" fill="#6B7280">テンション維持して沈下</text>
+        </g>
+
+        {/* Phase 4: シャクリ again */}
+        <g>
+          <path d="M320,245 L370,160" stroke="#EF4444" strokeWidth="2.5" />
+          <path d="M360,165 L370,160 L365,175" stroke="#EF4444" strokeWidth="2" fill="none" />
+          <path d="M370,160 L420,90" stroke="#EF4444" strokeWidth="2.5" />
+          <path d="M410,95 L420,90 L415,105" stroke="#EF4444" strokeWidth="2" fill="none" />
+          <ellipse cx="420" cy="90" rx="12" ry="6" fill="#F59E0B" stroke="#D97706" strokeWidth="1.5" />
+          <text x="400" y="275" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#EF4444">4. シャクリ</text>
+        </g>
+
+        {/* Phase 5: アタリ（フォール中） */}
+        <g>
+          <path d="M420,90 Q480,120 500,180" stroke="#22C55E" strokeWidth="2.5" strokeDasharray="6,3" />
+          {/* イカ */}
+          <g transform="translate(490,175)">
+            <ellipse cx="0" cy="0" rx="15" ry="8" fill="#F0ABFC" stroke="#A855F7" strokeWidth="1.5" />
+            <line x1="15" y1="-3" x2="25" y2="-6" stroke="#A855F7" strokeWidth="1.5" />
+            <line x1="15" y1="0" x2="25" y2="0" stroke="#A855F7" strokeWidth="1.5" />
+            <line x1="15" y1="3" x2="25" y2="6" stroke="#A855F7" strokeWidth="1.5" />
+            <circle cx="-5" cy="-2" r="2" fill="#1F2937" />
+          </g>
+          {/* アタリマーク */}
+          <text x="530" y="155" fontSize="10" fontWeight="bold" fill="#A855F7">アタリ!</text>
+          <text x="510" y="275" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#A855F7">5. アタリ</text>
+          <text x="510" y="288" textAnchor="middle" fontSize="9" fill="#6B7280">フォール中に抱く</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
+function EgiSizeDepthDiagram() {
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 500 280"
+        width="100%"
+        style={{ maxWidth: 500 }}
+        aria-label="エギのサイズと水深の使い分け図：3.5号、3.0号、2.5号の比較"
+        role="img"
+      >
+        <rect width="500" height="280" rx="12" fill="#EFF6FF" />
+        <text x="250" y="28" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#1E3A5F">エギのサイズと水深の使い分け</text>
+
+        {/* 水面 */}
+        <line x1="30" y1="55" x2="350" y2="55" stroke="#60A5FA" strokeWidth="1.5" />
+        <text x="190" y="50" textAnchor="middle" fontSize="10" fill="#3B82F6">水面</text>
+
+        {/* 水深目盛り */}
+        <line x1="30" y1="55" x2="30" y2="240" stroke="#93C5FD" strokeWidth="1" />
+        <text x="22" y="100" textAnchor="end" fontSize="9" fill="#6B7280">3m</text>
+        <line x1="25" y1="100" x2="35" y2="100" stroke="#93C5FD" strokeWidth="1" />
+        <text x="22" y="150" textAnchor="end" fontSize="9" fill="#6B7280">6m</text>
+        <line x1="25" y1="150" x2="35" y2="150" stroke="#93C5FD" strokeWidth="1" />
+        <text x="22" y="200" textAnchor="end" fontSize="9" fill="#6B7280">10m</text>
+        <line x1="25" y1="200" x2="35" y2="200" stroke="#93C5FD" strokeWidth="1" />
+        <text x="22" y="240" textAnchor="end" fontSize="9" fill="#6B7280">15m+</text>
+        <line x1="25" y1="240" x2="35" y2="240" stroke="#93C5FD" strokeWidth="1" />
+
+        {/* 海底 */}
+        <path d="M30,240 Q100,235 200,240 Q250,245 350,240" stroke="#D1A97A" strokeWidth="1.5" fill="#FEF3C7" opacity="0.3" />
+
+        {/* 2.5号 - 浅場 */}
+        <g transform="translate(60,0)">
+          <rect x="0" y="65" width="80" height="50" rx="6" fill="#DBEAFE" opacity="0.5" />
+          <ellipse cx="40" cy="85" rx="14" ry="7" fill="#60A5FA" stroke="#3B82F6" strokeWidth="1.5" />
+          <text x="40" y="89" textAnchor="middle" fontSize="8" fill="#FFFFFF" fontWeight="bold">2.5</text>
+          <text x="40" y="130" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#3B82F6">2.5号</text>
+          <text x="40" y="145" textAnchor="middle" fontSize="9" fill="#6B7280">秋の新子</text>
+          <text x="40" y="157" textAnchor="middle" fontSize="9" fill="#6B7280">浅場 (1-5m)</text>
+        </g>
+
+        {/* 3.0号 - 中層 */}
+        <g transform="translate(160,0)">
+          <rect x="0" y="85" width="80" height="80" rx="6" fill="#DBEAFE" opacity="0.5" />
+          <ellipse cx="40" cy="120" rx="17" ry="8" fill="#3B82F6" stroke="#2563EB" strokeWidth="1.5" />
+          <text x="40" y="124" textAnchor="middle" fontSize="8" fill="#FFFFFF" fontWeight="bold">3.0</text>
+          <text x="40" y="180" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#3B82F6">3.0号</text>
+          <text x="40" y="195" textAnchor="middle" fontSize="9" fill="#6B7280">オールシーズン</text>
+          <text x="40" y="207" textAnchor="middle" fontSize="9" fill="#6B7280">万能 (3-10m)</text>
+        </g>
+
+        {/* 3.5号 - 深場 */}
+        <g transform="translate(260,0)">
+          <rect x="0" y="110" width="80" height="120" rx="6" fill="#DBEAFE" opacity="0.5" />
+          <ellipse cx="40" cy="165" rx="20" ry="10" fill="#1D4ED8" stroke="#1E40AF" strokeWidth="1.5" />
+          <text x="40" y="169" textAnchor="middle" fontSize="8" fill="#FFFFFF" fontWeight="bold">3.5</text>
+          <text x="40" y="245" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1D4ED8">3.5号</text>
+          <text x="40" y="260" textAnchor="middle" fontSize="9" fill="#6B7280">春の親イカ</text>
+          <text x="40" y="272" textAnchor="middle" fontSize="9" fill="#6B7280">深場 (5-15m+)</text>
+        </g>
+
+        {/* 右側の季節情報 */}
+        <g transform="translate(370,55)">
+          <rect x="0" y="0" width="120" height="200" rx="8" fill="#FFFFFF" stroke="#D1D5DB" strokeWidth="1" />
+          <text x="60" y="20" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#1E3A5F">季節の目安</text>
+
+          <rect x="10" y="32" width="100" height="35" rx="4" fill="#FEF3C7" />
+          <text x="60" y="48" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#D97706">秋 (9-11月)</text>
+          <text x="60" y="62" textAnchor="middle" fontSize="9" fill="#6B7280">2.5-3.0号</text>
+
+          <rect x="10" y="75" width="100" height="35" rx="4" fill="#DCFCE7" />
+          <text x="60" y="91" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#16A34A">春 (3-6月)</text>
+          <text x="60" y="105" textAnchor="middle" fontSize="9" fill="#6B7280">3.0-3.5号</text>
+
+          <rect x="10" y="118" width="100" height="35" rx="4" fill="#DBEAFE" />
+          <text x="60" y="134" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#2563EB">冬 (12-2月)</text>
+          <text x="60" y="148" textAnchor="middle" fontSize="9" fill="#6B7280">3.5号ディープ</text>
+
+          <rect x="10" y="161" width="100" height="30" rx="4" fill="#F3E8FF" />
+          <text x="60" y="177" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#7C3AED">初心者推奨</text>
+          <text x="60" y="189" textAnchor="middle" fontSize="9" fill="#6B7280">3.0号から!</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
 export default function EgingGuidePage() {
   return (
     <>
@@ -126,6 +367,7 @@ export default function EgingGuidePage() {
             <p className="mb-4 text-sm text-muted-foreground">
               エギにはサイズ、カラー、沈下速度の違いがあり、状況に応じて使い分けることが釣果に直結します。
             </p>
+            <EgiStructureDiagram />
 
             <h3 className="mb-3 font-medium text-foreground">サイズの選び方</h3>
             <div className="mb-4 space-y-2 text-sm text-muted-foreground">
@@ -259,11 +501,14 @@ export default function EgingGuidePage() {
             </Warning>
           </SectionCard>
 
+          <EgiSizeDepthDiagram />
+
           {/* シャクリ方とフォールの使い分け */}
           <SectionCard title="シャクリ方とフォールの使い分け" icon={Waves}>
             <p className="mb-4 text-sm text-muted-foreground">
               エギングの核心は「シャクリ」と「フォール」の組み合わせ。エギを跳ね上げてイカの注意を引き、沈む間に抱かせるのが基本です。
             </p>
+            <ShakuriActionDiagram />
 
             <div className="space-y-4">
               <div className="rounded-lg border p-4">

@@ -165,6 +165,180 @@ function SectionCard({
   );
 }
 
+function FishingDebutStepsDiagram() {
+  return (
+    <div className="my-6">
+      <h3 className="mb-3 text-center text-sm font-bold text-foreground">釣りデビューまでのステップ</h3>
+      <svg
+        viewBox="0 0 680 160"
+        width="100%"
+        style={{ maxWidth: 680 }}
+        aria-label="釣りデビューまでのステップ図。道具を揃える、場所を選ぶ、天気を確認、実釣、片付けの5ステップフローチャート"
+        className="mx-auto"
+      >
+        <rect x="0" y="0" width="680" height="160" rx="12" fill="#F9FAFB" />
+
+        {/* Step 1 */}
+        <rect x="15" y="30" width="110" height="70" rx="8" fill="#3B82F6" />
+        <circle cx="70" cy="50" r="12" fill="#FFFFFF" />
+        <text x="70" y="55" textAnchor="middle" fill="#3B82F6" fontSize="12" fontWeight="bold">1</text>
+        <text x="70" y="80" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="bold">道具を揃える</text>
+
+        {/* Arrow 1 */}
+        <polygon points="130,65 145,60 145,70" fill="#93C5FD" />
+        <line x1="125" y1="65" x2="145" y2="65" stroke="#93C5FD" strokeWidth="2" />
+
+        {/* Step 2 */}
+        <rect x="150" y="30" width="110" height="70" rx="8" fill="#22C55E" />
+        <circle cx="205" cy="50" r="12" fill="#FFFFFF" />
+        <text x="205" y="55" textAnchor="middle" fill="#22C55E" fontSize="12" fontWeight="bold">2</text>
+        <text x="205" y="80" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="bold">場所を選ぶ</text>
+
+        {/* Arrow 2 */}
+        <polygon points="265,65 280,60 280,70" fill="#86EFAC" />
+        <line x1="260" y1="65" x2="280" y2="65" stroke="#86EFAC" strokeWidth="2" />
+
+        {/* Step 3 */}
+        <rect x="285" y="30" width="110" height="70" rx="8" fill="#F59E0B" />
+        <circle cx="340" cy="50" r="12" fill="#FFFFFF" />
+        <text x="340" y="55" textAnchor="middle" fill="#F59E0B" fontSize="12" fontWeight="bold">3</text>
+        <text x="340" y="80" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="bold">天気を確認</text>
+
+        {/* Arrow 3 */}
+        <polygon points="400,65 415,60 415,70" fill="#FCD34D" />
+        <line x1="395" y1="65" x2="415" y2="65" stroke="#FCD34D" strokeWidth="2" />
+
+        {/* Step 4 */}
+        <rect x="420" y="30" width="110" height="70" rx="8" fill="#EF4444" />
+        <circle cx="475" cy="50" r="12" fill="#FFFFFF" />
+        <text x="475" y="55" textAnchor="middle" fill="#EF4444" fontSize="12" fontWeight="bold">4</text>
+        <text x="475" y="80" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="bold">実釣!</text>
+
+        {/* Arrow 4 */}
+        <polygon points="535,65 550,60 550,70" fill="#FCA5A5" />
+        <line x1="530" y1="65" x2="550" y2="65" stroke="#FCA5A5" strokeWidth="2" />
+
+        {/* Step 5 */}
+        <rect x="555" y="30" width="110" height="70" rx="8" fill="#8B5CF6" />
+        <circle cx="610" cy="50" r="12" fill="#FFFFFF" />
+        <text x="610" y="55" textAnchor="middle" fill="#8B5CF6" fontSize="12" fontWeight="bold">5</text>
+        <text x="610" y="80" textAnchor="middle" fill="#FFFFFF" fontSize="11" fontWeight="bold">片付け</text>
+
+        {/* 下部注意 */}
+        <text x="340" y="130" textAnchor="middle" fill="#6B7280" fontSize="11">各ステップを順番にクリアすれば、スムーズに釣りデビューできます!</text>
+        <text x="340" y="148" textAnchor="middle" fill="#3B82F6" fontSize="10">所要時間の目安: 準備1〜2日 + 釣行3〜5時間</text>
+      </svg>
+    </div>
+  );
+}
+
+function BeginnerMethodsComparisonDiagram() {
+  return (
+    <div className="my-6">
+      <h3 className="mb-3 text-center text-sm font-bold text-foreground">初心者おすすめ釣り方3選の比較</h3>
+      <svg
+        viewBox="0 0 680 320"
+        width="100%"
+        style={{ maxWidth: 680 }}
+        aria-label="初心者おすすめ釣り方3選比較図。サビキ・ちょい投げ・穴釣りの特徴を3カラムで比較"
+        className="mx-auto"
+      >
+        <rect x="0" y="0" width="680" height="320" rx="12" fill="#F9FAFB" />
+
+        {/* サビキ釣り */}
+        <rect x="20" y="15" width="200" height="290" rx="8" fill="#FFFFFF" stroke="#22C55E" strokeWidth="2" />
+        <rect x="20" y="15" width="200" height="40" rx="8" fill="#22C55E" />
+        <rect x="20" y="47" width="200" height="8" fill="#22C55E" />
+        <text x="120" y="42" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">サビキ釣り</text>
+
+        <text x="40" y="80" fill="#374151" fontSize="11" fontWeight="bold">難易度</text>
+        <rect x="95" y="68" width="100" height="16" rx="3" fill="#E5E7EB" />
+        <rect x="95" y="68" width="20" height="16" rx="3" fill="#22C55E" />
+        <text x="200" y="80" fill="#22C55E" fontSize="10" fontWeight="bold">超簡単</text>
+
+        <text x="40" y="110" fill="#374151" fontSize="11" fontWeight="bold">釣果期待度</text>
+        <rect x="95" y="98" width="100" height="16" rx="3" fill="#E5E7EB" />
+        <rect x="95" y="98" width="95" height="16" rx="3" fill="#22C55E" />
+        <text x="200" y="110" fill="#22C55E" fontSize="10" fontWeight="bold">大漁</text>
+
+        <text x="40" y="140" fill="#374151" fontSize="11" fontWeight="bold">費用</text>
+        <text x="95" y="140" fill="#22C55E" fontSize="11" fontWeight="bold">3,000円〜</text>
+
+        <line x1="35" y1="150" x2="205" y2="150" stroke="#E5E7EB" strokeWidth="1" />
+
+        <text x="40" y="170" fill="#6B7280" fontSize="10">場所: 堤防・漁港</text>
+        <text x="40" y="188" fill="#6B7280" fontSize="10">対象: アジ・サバ・イワシ</text>
+        <text x="40" y="206" fill="#6B7280" fontSize="10">時期: 6〜10月</text>
+        <text x="40" y="224" fill="#6B7280" fontSize="10">特徴: 足元に落とすだけ</text>
+        <text x="40" y="242" fill="#6B7280" fontSize="10">投げる技術不要</text>
+
+        <rect x="45" y="260" width="150" height="28" rx="6" fill="#DCFCE7" />
+        <text x="120" y="279" textAnchor="middle" fill="#166534" fontSize="11" fontWeight="bold">一番おすすめ!</text>
+
+        {/* ちょい投げ */}
+        <rect x="240" y="15" width="200" height="290" rx="8" fill="#FFFFFF" stroke="#3B82F6" strokeWidth="2" />
+        <rect x="240" y="15" width="200" height="40" rx="8" fill="#3B82F6" />
+        <rect x="240" y="47" width="200" height="8" fill="#3B82F6" />
+        <text x="340" y="42" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">ちょい投げ</text>
+
+        <text x="260" y="80" fill="#374151" fontSize="11" fontWeight="bold">難易度</text>
+        <rect x="315" y="68" width="100" height="16" rx="3" fill="#E5E7EB" />
+        <rect x="315" y="68" width="40" height="16" rx="3" fill="#3B82F6" />
+        <text x="420" y="80" fill="#3B82F6" fontSize="10" fontWeight="bold">簡単</text>
+
+        <text x="260" y="110" fill="#374151" fontSize="11" fontWeight="bold">釣果期待度</text>
+        <rect x="315" y="98" width="100" height="16" rx="3" fill="#E5E7EB" />
+        <rect x="315" y="98" width="70" height="16" rx="3" fill="#3B82F6" />
+        <text x="420" y="110" fill="#3B82F6" fontSize="10" fontWeight="bold">高い</text>
+
+        <text x="260" y="140" fill="#374151" fontSize="11" fontWeight="bold">費用</text>
+        <text x="315" y="140" fill="#3B82F6" fontSize="11" fontWeight="bold">3,000円〜</text>
+
+        <line x1="255" y1="150" x2="425" y2="150" stroke="#E5E7EB" strokeWidth="1" />
+
+        <text x="260" y="170" fill="#6B7280" fontSize="10">場所: 砂浜・漁港</text>
+        <text x="260" y="188" fill="#6B7280" fontSize="10">対象: キス・ハゼ</text>
+        <text x="260" y="206" fill="#6B7280" fontSize="10">時期: 5〜11月</text>
+        <text x="260" y="224" fill="#6B7280" fontSize="10">特徴: 軽く投げる動作</text>
+        <text x="260" y="242" fill="#6B7280" fontSize="10">天ぷらが美味しい!</text>
+
+        <rect x="265" y="260" width="150" height="28" rx="6" fill="#DBEAFE" />
+        <text x="340" y="279" textAnchor="middle" fill="#1E40AF" fontSize="11" fontWeight="bold">次のステップに</text>
+
+        {/* 穴釣り */}
+        <rect x="460" y="15" width="200" height="290" rx="8" fill="#FFFFFF" stroke="#F59E0B" strokeWidth="2" />
+        <rect x="460" y="15" width="200" height="40" rx="8" fill="#F59E0B" />
+        <rect x="460" y="47" width="200" height="8" fill="#F59E0B" />
+        <text x="560" y="42" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">穴釣り</text>
+
+        <text x="480" y="80" fill="#374151" fontSize="11" fontWeight="bold">難易度</text>
+        <rect x="535" y="68" width="100" height="16" rx="3" fill="#E5E7EB" />
+        <rect x="535" y="68" width="25" height="16" rx="3" fill="#F59E0B" />
+        <text x="640" y="80" fill="#F59E0B" fontSize="10" fontWeight="bold">超簡単</text>
+
+        <text x="480" y="110" fill="#374151" fontSize="11" fontWeight="bold">釣果期待度</text>
+        <rect x="535" y="98" width="100" height="16" rx="3" fill="#E5E7EB" />
+        <rect x="535" y="98" width="60" height="16" rx="3" fill="#F59E0B" />
+        <text x="640" y="110" fill="#F59E0B" fontSize="10" fontWeight="bold">安定</text>
+
+        <text x="480" y="140" fill="#374151" fontSize="11" fontWeight="bold">費用</text>
+        <text x="535" y="140" fill="#F59E0B" fontSize="11" fontWeight="bold">2,000円〜</text>
+
+        <line x1="475" y1="150" x2="645" y2="150" stroke="#E5E7EB" strokeWidth="1" />
+
+        <text x="480" y="170" fill="#6B7280" fontSize="10">場所: テトラ・石積み</text>
+        <text x="480" y="188" fill="#6B7280" fontSize="10">対象: カサゴ・メバル</text>
+        <text x="480" y="206" fill="#6B7280" fontSize="10">時期: 通年</text>
+        <text x="480" y="224" fill="#6B7280" fontSize="10">特徴: 隙間に落とすだけ</text>
+        <text x="480" y="242" fill="#6B7280" fontSize="10">唐揚げが最高!</text>
+
+        <rect x="485" y="260" width="150" height="28" rx="6" fill="#FEF3C7" />
+        <text x="560" y="279" textAnchor="middle" fill="#92400E" fontSize="11" fontWeight="bold">通年楽しめる</text>
+      </svg>
+    </div>
+  );
+}
+
 export default function FishingForBeginnersPage() {
   return (
     <>
@@ -276,6 +450,8 @@ export default function FishingForBeginnersPage() {
               なら、手ぶらで体験できます。
             </div>
           </SectionCard>
+
+          <FishingDebutStepsDiagram />
 
           {/* 2. スポットの選び方 */}
           <SectionCard id="spot" title="初心者向け釣りスポットの選び方" icon={MapPin}>
@@ -395,6 +571,8 @@ export default function FishingForBeginnersPage() {
               </Button>
             </div>
           </SectionCard>
+
+          <BeginnerMethodsComparisonDiagram />
 
           {/* 4. おすすめ釣り方TOP5 */}
           <SectionCard id="methods" title="初心者におすすめの釣り方TOP5" icon={Anchor}>

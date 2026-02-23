@@ -223,6 +223,234 @@ function Danger({ children }: { children: React.ReactNode }) {
   );
 }
 
+function OverheadCastDiagram() {
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 600 280"
+        width="100%"
+        style={{ maxWidth: 600 }}
+        aria-label="オーバーヘッドキャストの3段階フォーム図：構え、振り上げ、リリースポイント"
+        role="img"
+      >
+        <rect width="600" height="280" rx="12" fill="#EFF6FF" />
+        {/* タイトル */}
+        <text x="300" y="28" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#1E3A5F">オーバーヘッドキャストのフォーム</text>
+
+        {/* Step 1: 構え */}
+        <g transform="translate(80,60)">
+          {/* 人体 */}
+          <circle cx="40" cy="20" r="12" fill="#93C5FD" stroke="#3B82F6" strokeWidth="2" />
+          <line x1="40" y1="32" x2="40" y2="80" stroke="#3B82F6" strokeWidth="2.5" />
+          <line x1="40" y1="80" x2="25" y2="120" stroke="#3B82F6" strokeWidth="2" />
+          <line x1="40" y1="80" x2="55" y2="120" stroke="#3B82F6" strokeWidth="2" />
+          {/* 竿（斜め前） */}
+          <line x1="40" y1="50" x2="70" y2="-10" stroke="#F59E0B" strokeWidth="3" strokeLinecap="round" />
+          {/* 腕 */}
+          <line x1="40" y1="45" x2="55" y2="30" stroke="#3B82F6" strokeWidth="2" />
+          <line x1="55" y1="30" x2="55" y2="10" stroke="#3B82F6" strokeWidth="2" />
+          <text x="40" y="150" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#3B82F6">1. 構え</text>
+          <text x="40" y="165" textAnchor="middle" fontSize="10" fill="#6B7280">竿を前に構える</text>
+        </g>
+
+        {/* 矢印1 */}
+        <path d="M180,120 L210,120" stroke="#3B82F6" strokeWidth="2" fill="none" markerEnd="url(#arrowCast)" />
+
+        {/* Step 2: 振り上げ */}
+        <g transform="translate(250,60)">
+          <circle cx="40" cy="20" r="12" fill="#93C5FD" stroke="#3B82F6" strokeWidth="2" />
+          <line x1="40" y1="32" x2="40" y2="80" stroke="#3B82F6" strokeWidth="2.5" />
+          <line x1="40" y1="80" x2="25" y2="120" stroke="#3B82F6" strokeWidth="2" />
+          <line x1="40" y1="80" x2="55" y2="120" stroke="#3B82F6" strokeWidth="2" />
+          {/* 竿（後ろに倒す） */}
+          <line x1="40" y1="50" x2="10" y2="-15" stroke="#F59E0B" strokeWidth="3" strokeLinecap="round" />
+          {/* 腕 */}
+          <line x1="40" y1="45" x2="30" y2="25" stroke="#3B82F6" strokeWidth="2" />
+          <line x1="30" y1="25" x2="20" y2="8" stroke="#3B82F6" strokeWidth="2" />
+          {/* 振り方向矢印 */}
+          <path d="M50,-5 C60,-20 65,-10 58,5" stroke="#EF4444" strokeWidth="1.5" fill="none" markerEnd="url(#arrowRed)" />
+          <text x="40" y="150" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#3B82F6">2. 振り上げ</text>
+          <text x="40" y="165" textAnchor="middle" fontSize="10" fill="#6B7280">しなりを溜める</text>
+        </g>
+
+        {/* 矢印2 */}
+        <path d="M350,120 L380,120" stroke="#3B82F6" strokeWidth="2" fill="none" markerEnd="url(#arrowCast)" />
+
+        {/* Step 3: リリース */}
+        <g transform="translate(420,60)">
+          <circle cx="40" cy="20" r="12" fill="#93C5FD" stroke="#3B82F6" strokeWidth="2" />
+          <line x1="40" y1="32" x2="40" y2="80" stroke="#3B82F6" strokeWidth="2.5" />
+          <line x1="40" y1="80" x2="25" y2="120" stroke="#3B82F6" strokeWidth="2" />
+          <line x1="40" y1="80" x2="55" y2="120" stroke="#3B82F6" strokeWidth="2" />
+          {/* 竿（前45度） */}
+          <line x1="40" y1="50" x2="80" y2="-5" stroke="#F59E0B" strokeWidth="3" strokeLinecap="round" />
+          {/* 腕 */}
+          <line x1="40" y1="45" x2="60" y2="25" stroke="#3B82F6" strokeWidth="2" />
+          <line x1="60" y1="25" x2="65" y2="8" stroke="#3B82F6" strokeWidth="2" />
+          {/* 45度の角度表示 */}
+          <path d="M55,50 A20,20 0 0,1 70,35" stroke="#22C55E" strokeWidth="1.5" fill="none" />
+          <text x="78" y="45" fontSize="10" fill="#22C55E" fontWeight="bold">45°</text>
+          {/* リリースマーク */}
+          <circle cx="80" cy="-5" r="5" fill="none" stroke="#EF4444" strokeWidth="2" />
+          <text x="92" y="-2" fontSize="9" fill="#EF4444">リリース!</text>
+          <text x="40" y="150" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#3B82F6">3. リリース</text>
+          <text x="40" y="165" textAnchor="middle" fontSize="10" fill="#6B7280">45度で指を離す</text>
+        </g>
+
+        <defs>
+          <marker id="arrowCast" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0,0 8,3 0,6" fill="#3B82F6" />
+          </marker>
+          <marker id="arrowRed" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0,0 8,3 0,6" fill="#EF4444" />
+          </marker>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
+function BailFingerDiagram() {
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 500 300"
+        width="100%"
+        style={{ maxWidth: 500 }}
+        aria-label="ベールの開閉と人差し指でラインを押さえる方法の図解"
+        role="img"
+      >
+        <rect width="500" height="300" rx="12" fill="#EFF6FF" />
+        <text x="250" y="28" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#1E3A5F">ベールと指の使い方</text>
+
+        {/* 左: ベール閉 */}
+        <g transform="translate(50,50)">
+          <text x="80" y="10" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#3B82F6">ベールを閉じた状態</text>
+          {/* リール本体 */}
+          <rect x="40" y="30" width="80" height="120" rx="10" fill="#D1D5DB" stroke="#6B7280" strokeWidth="1.5" />
+          {/* スプール */}
+          <rect x="55" y="50" width="50" height="80" rx="6" fill="#E5E7EB" stroke="#9CA3AF" strokeWidth="1.5" />
+          {/* ライン巻き */}
+          <rect x="60" y="55" width="40" height="70" rx="4" fill="#93C5FD" stroke="#3B82F6" strokeWidth="1" />
+          {/* ベール（閉じている） */}
+          <path d="M45,70 Q30,90 45,110" stroke="#F59E0B" strokeWidth="3" fill="none" strokeLinecap="round" />
+          <circle cx="45" cy="70" r="3" fill="#F59E0B" />
+          <circle cx="45" cy="110" r="3" fill="#F59E0B" />
+          {/* ハンドル */}
+          <line x1="120" y1="90" x2="145" y2="90" stroke="#6B7280" strokeWidth="2.5" />
+          <circle cx="148" cy="90" r="6" fill="#9CA3AF" stroke="#6B7280" strokeWidth="1.5" />
+          <text x="80" y="175" textAnchor="middle" fontSize="10" fill="#6B7280">糸が巻ける状態</text>
+        </g>
+
+        {/* 右: ベール開 + 指で押さえる */}
+        <g transform="translate(280,50)">
+          <text x="80" y="10" textAnchor="middle" fontSize="12" fontWeight="bold" fill="#EF4444">ベールを開けた状態</text>
+          {/* リール本体 */}
+          <rect x="40" y="30" width="80" height="120" rx="10" fill="#D1D5DB" stroke="#6B7280" strokeWidth="1.5" />
+          {/* スプール */}
+          <rect x="55" y="50" width="50" height="80" rx="6" fill="#E5E7EB" stroke="#9CA3AF" strokeWidth="1.5" />
+          {/* ライン巻き */}
+          <rect x="60" y="55" width="40" height="70" rx="4" fill="#93C5FD" stroke="#3B82F6" strokeWidth="1" />
+          {/* ベール（開いている） */}
+          <path d="M45,70 Q80,60 115,70" stroke="#F59E0B" strokeWidth="3" fill="none" strokeLinecap="round" />
+          <circle cx="45" cy="70" r="3" fill="#F59E0B" />
+          <circle cx="115" cy="70" r="3" fill="#F59E0B" />
+          {/* 人差し指 */}
+          <path d="M80,45 Q80,35 75,28 Q73,25 78,24 Q83,23 85,28 L88,40" stroke="#F4A460" strokeWidth="2.5" fill="#FDDCB5" strokeLinecap="round" />
+          {/* ラインが指にかかっている */}
+          <line x1="80" y1="55" x2="80" y2="35" stroke="#3B82F6" strokeWidth="1.5" strokeDasharray="3,2" />
+          <line x1="80" y1="28" x2="80" y2="10" stroke="#3B82F6" strokeWidth="1.5" />
+          {/* 矢印: 指で押さえるポイント */}
+          <line x1="120" y1="30" x2="95" y2="30" stroke="#EF4444" strokeWidth="1.5" markerEnd="url(#arrowRedBail)" />
+          <text x="155" y="28" fontSize="10" fill="#EF4444" fontWeight="bold">人差し指で</text>
+          <text x="155" y="40" fontSize="10" fill="#EF4444" fontWeight="bold">糸を押さえる</text>
+          {/* ハンドル */}
+          <line x1="120" y1="90" x2="145" y2="90" stroke="#6B7280" strokeWidth="2.5" />
+          <circle cx="148" cy="90" r="6" fill="#9CA3AF" stroke="#6B7280" strokeWidth="1.5" />
+          <text x="80" y="175" textAnchor="middle" fontSize="10" fill="#6B7280">糸が自由に出る状態</text>
+        </g>
+
+        {/* 補足テキスト */}
+        <text x="250" y="280" textAnchor="middle" fontSize="11" fill="#6B7280">第一関節あたりにラインをかけ、投げる瞬間に離します</text>
+
+        <defs>
+          <marker id="arrowRedBail" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0,0 8,3 0,6" fill="#EF4444" />
+          </marker>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
+function CastDistanceDiagram() {
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 600 280"
+        width="100%"
+        style={{ maxWidth: 600 }}
+        aria-label="リリース角度と飛距離の関係を示す放物線の図解。45度が最大飛距離になる"
+        role="img"
+      >
+        <rect width="600" height="280" rx="12" fill="#EFF6FF" />
+        <text x="300" y="28" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#1E3A5F">リリース角度と飛距離の関係</text>
+
+        {/* 地面 */}
+        <line x1="50" y1="230" x2="570" y2="230" stroke="#9CA3AF" strokeWidth="2" />
+        {/* 水面 */}
+        <rect x="350" y="230" width="220" height="30" rx="0" fill="#DBEAFE" opacity="0.5" />
+        <text x="460" y="250" textAnchor="middle" fontSize="10" fill="#3B82F6">水面</text>
+
+        {/* 人の位置マーカー */}
+        <circle cx="80" cy="220" r="8" fill="#93C5FD" stroke="#3B82F6" strokeWidth="2" />
+        <line x1="80" y1="228" x2="80" y2="230" stroke="#3B82F6" strokeWidth="2" />
+
+        {/* 早すぎるリリース (70度) - 短い距離 */}
+        <path d="M90,220 Q130,80 200,220" stroke="#EF4444" strokeWidth="2" fill="none" strokeDasharray="5,3" />
+        <text x="145" y="70" fontSize="10" fill="#EF4444">70° 早すぎ</text>
+        <circle cx="200" cy="220" r="4" fill="#EF4444" />
+
+        {/* 最適角度 (45度) - 最大飛距離 */}
+        <path d="M90,220 Q250,40 460,220" stroke="#22C55E" strokeWidth="3" fill="none" />
+        <text x="270" y="55" fontSize="12" fill="#22C55E" fontWeight="bold">45° 最適!</text>
+        <circle cx="460" cy="220" r="5" fill="#22C55E" stroke="#22C55E" strokeWidth="2" />
+        {/* 飛距離矢印 */}
+        <line x1="90" y1="245" x2="455" y2="245" stroke="#22C55E" strokeWidth="1.5" markerEnd="url(#arrowGreen)" />
+        <text x="270" y="260" textAnchor="middle" fontSize="11" fill="#22C55E" fontWeight="bold">最大飛距離</text>
+
+        {/* 遅すぎるリリース (20度) - 足元に落ちる */}
+        <path d="M90,220 Q110,190 160,220" stroke="#F59E0B" strokeWidth="2" fill="none" strokeDasharray="5,3" />
+        <text x="100" y="195" fontSize="10" fill="#F59E0B">20° 遅すぎ</text>
+        <circle cx="160" cy="220" r="4" fill="#F59E0B" />
+
+        {/* 角度インジケーター */}
+        <g transform="translate(80,220)">
+          <path d="M0,0 L30,-30" stroke="#EF4444" strokeWidth="1" strokeDasharray="3,2" />
+          <path d="M0,0 L40,-40" stroke="#22C55E" strokeWidth="1.5" />
+          <path d="M0,0 L40,-15" stroke="#F59E0B" strokeWidth="1" strokeDasharray="3,2" />
+        </g>
+
+        {/* 凡例 */}
+        <g transform="translate(30,265)">
+          <line x1="0" y1="0" x2="20" y2="0" stroke="#22C55E" strokeWidth="3" />
+          <text x="25" y="4" fontSize="10" fill="#6B7280">45°: 最大飛距離</text>
+          <line x1="160" y1="0" x2="180" y2="0" stroke="#EF4444" strokeWidth="2" strokeDasharray="5,3" />
+          <text x="185" y="4" fontSize="10" fill="#6B7280">70°: 真上に飛ぶ</text>
+          <line x1="320" y1="0" x2="340" y2="0" stroke="#F59E0B" strokeWidth="2" strokeDasharray="5,3" />
+          <text x="345" y="4" fontSize="10" fill="#6B7280">20°: 足元に落ちる</text>
+        </g>
+
+        <defs>
+          <marker id="arrowGreen" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0,0 8,3 0,6" fill="#22C55E" />
+          </marker>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
 export default function CastingGuidePage() {
   return (
     <>
@@ -270,6 +498,7 @@ export default function CastingGuidePage() {
             <p className="mb-4 text-sm text-muted-foreground">
               軽く投げる方法で、初心者が最初に覚えるべきキャスティングです。10〜30m程度飛ばすことを目標にします。
             </p>
+            <BailFingerDiagram />
             <ol className="list-none space-y-4">
               <li className="flex gap-3">
                 <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
@@ -347,6 +576,7 @@ export default function CastingGuidePage() {
             <p className="mb-4 text-sm text-muted-foreground">
               頭上から振り下ろす最も基本的な投げ方です。飛距離が出やすく、コントロールもしやすいのが特徴です。
             </p>
+            <OverheadCastDiagram />
             <ol className="list-none space-y-4">
               <li className="flex gap-3">
                 <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
@@ -469,6 +699,9 @@ export default function CastingGuidePage() {
               サイドキャストは仕掛けが低い位置を飛ぶため、周囲の人に当たりやすくなります。特に混雑した釣り場では十分注意してください。
             </Warning>
           </SectionCard>
+
+          {/* 着水点と飛距離の関係 */}
+          <CastDistanceDiagram />
 
           {/* よくある失敗と対策 */}
           <SectionCard title="よくある失敗と対策">

@@ -87,6 +87,168 @@ function DifficultyBadge({
   );
 }
 
+/* --- SVG図解コンポーネント --- */
+
+function DragAdjustmentDiagram() {
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 620 240"
+        width="100%"
+        style={{ maxWidth: 620 }}
+        aria-label="リールのドラグ調整図：ドラグノブの位置と回す方向、締めすぎ・適正・緩すぎの3段階"
+        role="img"
+      >
+        <rect x="0" y="0" width="620" height="240" rx="12" fill="#EFF6FF" />
+        <text x="310" y="26" textAnchor="middle" fontSize="14" fill="#1E293B" fontWeight="bold">リールのドラグ調整</text>
+
+        {/* リール本体 */}
+        <ellipse cx="130" cy="130" rx="65" ry="50" fill="#E2E8F0" stroke="#64748B" strokeWidth="2" />
+        <ellipse cx="130" cy="130" rx="30" ry="22" fill="#CBD5E1" stroke="#94A3B8" strokeWidth="1.5" />
+        {/* ドラグノブ（上部） */}
+        <circle cx="130" cy="78" r="18" fill="#3B82F6" stroke="#2563EB" strokeWidth="2" />
+        <text x="130" y="82" textAnchor="middle" fontSize="8" fill="white" fontWeight="bold">ドラグ</text>
+        <text x="130" y="92" textAnchor="middle" fontSize="7" fill="white">ノブ</text>
+        {/* 回転矢印 */}
+        <path d="M148,72 A22,22 0 0,1 138,58" stroke="#1E293B" strokeWidth="1.5" fill="none" markerEnd="url(#arrowDrag)" />
+        <text x="158" y="62" fontSize="9" fill="#1E293B" fontWeight="bold">締める</text>
+        <path d="M112,72 A22,22 0 0,0 122,58" stroke="#1E293B" strokeWidth="1.5" fill="none" markerEnd="url(#arrowDrag)" />
+        <text x="85" y="62" fontSize="9" fill="#1E293B" fontWeight="bold">緩める</text>
+        <defs>
+          <marker id="arrowDrag" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="#1E293B" />
+          </marker>
+        </defs>
+        {/* ハンドル */}
+        <line x1="195" y1="130" x2="220" y2="130" stroke="#64748B" strokeWidth="3" strokeLinecap="round" />
+        <circle cx="225" cy="130" r="6" fill="#94A3B8" stroke="#64748B" strokeWidth="1.5" />
+
+        {/* 3段階の説明 */}
+        {/* 締めすぎ */}
+        <rect x="280" y="45" width="320" height="50" rx="8" fill="white" stroke="#EF4444" strokeWidth="2" />
+        <circle cx="305" cy="70" r="14" fill="#FEE2E2" />
+        <text x="305" y="74" textAnchor="middle" fontSize="14" fill="#EF4444" fontWeight="bold">X</text>
+        <text x="330" y="64" fontSize="12" fill="#EF4444" fontWeight="bold">締めすぎ</text>
+        <text x="330" y="82" fontSize="10" fill="#64748B">ラインが切れる・竿が折れるリスク</text>
+
+        {/* 適正 */}
+        <rect x="280" y="105" width="320" height="50" rx="8" fill="white" stroke="#22C55E" strokeWidth="2" />
+        <circle cx="305" cy="130" r="14" fill="#DCFCE7" />
+        <path d="M298,130 L303,135 L313,124" stroke="#22C55E" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+        <text x="330" y="124" fontSize="12" fill="#22C55E" fontWeight="bold">適正（推奨）</text>
+        <text x="330" y="142" fontSize="10" fill="#64748B">手で引くとジワッと糸が出る程度</text>
+
+        {/* 緩すぎ */}
+        <rect x="280" y="165" width="320" height="50" rx="8" fill="white" stroke="#F59E0B" strokeWidth="2" />
+        <circle cx="305" cy="190" r="14" fill="#FEF3C7" />
+        <text x="305" y="195" textAnchor="middle" fontSize="14" fill="#F59E0B" fontWeight="bold">!</text>
+        <text x="330" y="184" fontSize="12" fill="#F59E0B" fontWeight="bold">緩すぎ</text>
+        <text x="330" y="202" fontSize="10" fill="#64748B">魚を寄せられない・根に潜られる</text>
+
+        <text x="310" y="232" textAnchor="middle" fontSize="10" fill="#64748B">手で糸を引っ張って「じわっ」と出るくらいが目安</text>
+      </svg>
+    </div>
+  );
+}
+
+function RodHoldingDiagram() {
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 600 220"
+        width="100%"
+        style={{ maxWidth: 600 }}
+        aria-label="竿の持ち方図：正しい持ち方と間違った持ち方"
+        role="img"
+      >
+        <rect x="0" y="0" width="600" height="220" rx="12" fill="#F9FAFB" />
+        <text x="300" y="26" textAnchor="middle" fontSize="14" fill="#1E293B" fontWeight="bold">竿の正しい持ち方</text>
+
+        {/* 正しい持ち方（左） */}
+        <rect x="20" y="40" width="265" height="165" rx="10" fill="white" stroke="#22C55E" strokeWidth="2" />
+        <circle cx="50" cy="58" r="12" fill="#DCFCE7" />
+        <path d="M44,58 L48,62 L57,53" stroke="#22C55E" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+        <text x="68" y="62" fontSize="13" fill="#22C55E" fontWeight="bold">正しい持ち方</text>
+
+        {/* 竿 */}
+        <line x1="50" y1="120" x2="270" y2="100" stroke="#78716C" strokeWidth="4" strokeLinecap="round" />
+        {/* リール */}
+        <ellipse cx="115" cy="135" rx="18" ry="13" fill="#E2E8F0" stroke="#3B82F6" strokeWidth="1.5" />
+        <circle cx="115" cy="135" r="5" fill="#3B82F6" opacity="0.3" />
+        {/* 手（リールフットを指で挟む） */}
+        <ellipse cx="115" cy="112" rx="20" ry="12" fill="#FECACA" opacity="0.5" stroke="#DC2626" strokeWidth="1" strokeDasharray="3 2" />
+        <text x="115" y="116" textAnchor="middle" fontSize="8" fill="#DC2626">手</text>
+        {/* 説明 */}
+        <text x="75" y="170" fontSize="10" fill="#334155">リールフット（脚）を中指と</text>
+        <text x="75" y="184" fontSize="10" fill="#334155">薬指の間に挟んで握る</text>
+        <text x="75" y="198" fontSize="10" fill="#22C55E" fontWeight="bold">安定感があり操作しやすい</text>
+
+        {/* 間違った持ち方（右） */}
+        <rect x="315" y="40" width="265" height="165" rx="10" fill="white" stroke="#EF4444" strokeWidth="2" />
+        <circle cx="345" cy="58" r="12" fill="#FEE2E2" />
+        <text x="345" y="63" textAnchor="middle" fontSize="16" fill="#EF4444" fontWeight="bold">X</text>
+        <text x="363" y="62" fontSize="13" fill="#EF4444" fontWeight="bold">間違った持ち方</text>
+
+        {/* 竿 */}
+        <line x1="345" y1="120" x2="565" y2="100" stroke="#78716C" strokeWidth="4" strokeLinecap="round" />
+        {/* リール */}
+        <ellipse cx="410" cy="135" rx="18" ry="13" fill="#E2E8F0" stroke="#3B82F6" strokeWidth="1.5" />
+        <circle cx="410" cy="135" r="5" fill="#3B82F6" opacity="0.3" />
+        {/* 手（グリップの上を握る） */}
+        <ellipse cx="380" cy="112" rx="20" ry="12" fill="#FECACA" opacity="0.5" stroke="#DC2626" strokeWidth="1" strokeDasharray="3 2" />
+        <text x="380" y="116" textAnchor="middle" fontSize="8" fill="#DC2626">手</text>
+        {/* 説明 */}
+        <text x="370" y="170" fontSize="10" fill="#334155">リールから離れた位置で</text>
+        <text x="370" y="184" fontSize="10" fill="#334155">握ってしまう</text>
+        <text x="370" y="198" fontSize="10" fill="#EF4444" fontWeight="bold">操作しにくく疲れやすい</text>
+      </svg>
+    </div>
+  );
+}
+
+function FishHookResponseDiagram() {
+  const steps = [
+    { label: "竿を立てる", sub: "アワセを入れて\n針を貫通させる", color: "#3B82F6" },
+    { label: "テンション維持", sub: "糸を緩めず\n張った状態をキープ", color: "#60A5FA" },
+    { label: "魚を寄せる", sub: "リールを巻いて\n手前に寄せる", color: "#22C55E" },
+    { label: "タモ入れ", sub: "網で確実に\nすくい上げる", color: "#F59E0B" },
+  ];
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 640 160"
+        width="100%"
+        style={{ maxWidth: 640 }}
+        aria-label="魚が掛かった時の対応フロー：竿を立てる、テンション維持、魚を寄せる、タモ入れの4ステップ"
+        role="img"
+      >
+        <rect x="0" y="0" width="640" height="160" rx="12" fill="#EFF6FF" />
+        <text x="320" y="24" textAnchor="middle" fontSize="14" fill="#1E293B" fontWeight="bold">魚が掛かった時の対応フロー</text>
+
+        {steps.map((s, i) => {
+          const cx = 80 + i * 155;
+          return (
+            <g key={i}>
+              <rect x={cx - 65} y={35} width={130} height={105} rx="10" fill="white" stroke={s.color} strokeWidth="2" />
+              <circle cx={cx} cy={62} r="16" fill={s.color} opacity="0.15" />
+              <text x={cx} y={67} textAnchor="middle" fontSize="16" fill={s.color} fontWeight="bold">{i + 1}</text>
+              <text x={cx} y={92} textAnchor="middle" fontSize="12" fill="#1E293B" fontWeight="bold">{s.label}</text>
+              {s.sub.split("\n").map((line, j) => (
+                <text key={j} x={cx} y={108 + j * 14} textAnchor="middle" fontSize="10" fill="#64748B">{line}</text>
+              ))}
+              {i < steps.length - 1 && (
+                <polygon points={`${cx + 70},80 ${cx + 82},85 ${cx + 70},90`} fill="#94A3B8" />
+              )}
+            </g>
+          );
+        })}
+
+        <text x="320" y="153" textAnchor="middle" fontSize="10" fill="#64748B">慌てずに落ち着いて対応しましょう</text>
+      </svg>
+    </div>
+  );
+}
+
 function SectionCard({
   title,
   difficulty,
@@ -137,6 +299,15 @@ export default function HandlingGuidePage() {
             釣った魚を美味しく食べるために。締め方から持ち帰りまで解説します。
           </p>
         </div>
+
+        {/* 竿の持ち方図 */}
+        <RodHoldingDiagram />
+
+        {/* ドラグ調整図 */}
+        <DragAdjustmentDiagram />
+
+        {/* 魚が掛かった時の対応図 */}
+        <FishHookResponseDiagram />
 
         <div className="space-y-6">
           {/* なぜ締めるのか */}

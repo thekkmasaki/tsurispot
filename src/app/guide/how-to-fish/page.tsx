@@ -237,6 +237,177 @@ function SectionCard({
   );
 }
 
+function FishingMethodsTreeDiagram() {
+  return (
+    <div className="my-6">
+      <h3 className="mb-3 text-center text-sm font-bold text-foreground">釣り方の種類マップ</h3>
+      <svg
+        viewBox="0 0 680 360"
+        width="100%"
+        style={{ maxWidth: 680 }}
+        aria-label="釣り方の種類マップ図。フィールド別に適した釣り方を表示するツリー図"
+        className="mx-auto"
+      >
+        <rect x="0" y="0" width="680" height="360" rx="12" fill="#F9FAFB" />
+
+        {/* 中央: 釣り方 */}
+        <rect x="270" y="10" width="140" height="40" rx="20" fill="#3B82F6" />
+        <text x="340" y="36" textAnchor="middle" fill="#FFFFFF" fontSize="14" fontWeight="bold">釣りの種類</text>
+
+        {/* 線 */}
+        <line x1="310" y1="50" x2="120" y2="90" stroke="#93C5FD" strokeWidth="2" />
+        <line x1="340" y1="50" x2="340" y2="90" stroke="#93C5FD" strokeWidth="2" />
+        <line x1="370" y1="50" x2="560" y2="90" stroke="#93C5FD" strokeWidth="2" />
+
+        {/* 堤防 */}
+        <rect x="40" y="90" width="160" height="36" rx="8" fill="#60A5FA" />
+        <text x="120" y="114" textAnchor="middle" fill="#FFFFFF" fontSize="13" fontWeight="bold">堤防・漁港</text>
+
+        {/* 堤防の釣り方 */}
+        <line x1="80" y1="126" x2="50" y2="155" stroke="#93C5FD" strokeWidth="1.5" />
+        <line x1="120" y1="126" x2="120" y2="155" stroke="#93C5FD" strokeWidth="1.5" />
+        <line x1="160" y1="126" x2="190" y2="155" stroke="#93C5FD" strokeWidth="1.5" />
+
+        <rect x="10" y="155" width="90" height="30" rx="6" fill="#DBEAFE" stroke="#60A5FA" strokeWidth="1" />
+        <text x="55" y="175" textAnchor="middle" fill="#1E40AF" fontSize="11">サビキ釣り</text>
+
+        <rect x="75" y="195" width="90" height="30" rx="6" fill="#DBEAFE" stroke="#60A5FA" strokeWidth="1" />
+        <text x="120" y="215" textAnchor="middle" fill="#1E40AF" fontSize="11">ちょい投げ</text>
+
+        <rect x="145" y="155" width="90" height="30" rx="6" fill="#DBEAFE" stroke="#60A5FA" strokeWidth="1" />
+        <text x="190" y="175" textAnchor="middle" fill="#1E40AF" fontSize="11">ウキ釣り</text>
+
+        {/* 堤防の対象魚 */}
+        <rect x="10" y="240" width="90" height="24" rx="4" fill="#EFF6FF" />
+        <text x="55" y="256" textAnchor="middle" fill="#3B82F6" fontSize="10">アジ・イワシ</text>
+
+        <rect x="75" y="240" width="90" height="24" rx="4" fill="#EFF6FF" />
+        <text x="120" y="256" textAnchor="middle" fill="#3B82F6" fontSize="10">キス・ハゼ</text>
+
+        <rect x="145" y="240" width="90" height="24" rx="4" fill="#EFF6FF" />
+        <text x="190" y="256" textAnchor="middle" fill="#3B82F6" fontSize="10">メジナ・クロダイ</text>
+
+        {/* 磯 */}
+        <rect x="260" y="90" width="160" height="36" rx="8" fill="#22C55E" />
+        <text x="340" y="114" textAnchor="middle" fill="#FFFFFF" fontSize="13" fontWeight="bold">磯・テトラ</text>
+
+        <line x1="310" y1="126" x2="290" y2="155" stroke="#86EFAC" strokeWidth="1.5" />
+        <line x1="370" y1="126" x2="390" y2="155" stroke="#86EFAC" strokeWidth="1.5" />
+
+        <rect x="245" y="155" width="90" height="30" rx="6" fill="#DCFCE7" stroke="#22C55E" strokeWidth="1" />
+        <text x="290" y="175" textAnchor="middle" fill="#166534" fontSize="11">フカセ釣り</text>
+
+        <rect x="345" y="155" width="90" height="30" rx="6" fill="#DCFCE7" stroke="#22C55E" strokeWidth="1" />
+        <text x="390" y="175" textAnchor="middle" fill="#166534" fontSize="11">穴釣り</text>
+
+        <rect x="245" y="195" width="90" height="24" rx="4" fill="#F0FDF4" />
+        <text x="290" y="211" textAnchor="middle" fill="#22C55E" fontSize="10">グレ・チヌ</text>
+
+        <rect x="345" y="195" width="90" height="24" rx="4" fill="#F0FDF4" />
+        <text x="390" y="211" textAnchor="middle" fill="#22C55E" fontSize="10">カサゴ・メバル</text>
+
+        {/* 砂浜・ルアー */}
+        <rect x="480" y="90" width="160" height="36" rx="8" fill="#F59E0B" />
+        <text x="560" y="114" textAnchor="middle" fill="#FFFFFF" fontSize="13" fontWeight="bold">砂浜・港湾</text>
+
+        <line x1="530" y1="126" x2="510" y2="155" stroke="#FCD34D" strokeWidth="1.5" />
+        <line x1="590" y1="126" x2="610" y2="155" stroke="#FCD34D" strokeWidth="1.5" />
+
+        <rect x="465" y="155" width="90" height="30" rx="6" fill="#FEF3C7" stroke="#F59E0B" strokeWidth="1" />
+        <text x="510" y="175" textAnchor="middle" fill="#92400E" fontSize="11">投げ釣り</text>
+
+        <rect x="565" y="155" width="100" height="30" rx="6" fill="#FEF3C7" stroke="#F59E0B" strokeWidth="1" />
+        <text x="615" y="175" textAnchor="middle" fill="#92400E" fontSize="11">ルアー釣り</text>
+
+        <rect x="465" y="195" width="90" height="24" rx="4" fill="#FFFBEB" />
+        <text x="510" y="211" textAnchor="middle" fill="#F59E0B" fontSize="10">キス・カレイ</text>
+
+        <rect x="565" y="195" width="100" height="24" rx="4" fill="#FFFBEB" />
+        <text x="615" y="211" textAnchor="middle" fill="#F59E0B" fontSize="10">シーバス・青物</text>
+
+        {/* 凡例 */}
+        <rect x="180" y="290" width="320" height="55" rx="8" fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="1" />
+        <text x="340" y="310" textAnchor="middle" fill="#6B7280" fontSize="11">初心者は堤防からのサビキ釣りがおすすめ!</text>
+        <rect x="270" y="320" width="8" height="8" rx="2" fill="#60A5FA" />
+        <text x="285" y="328" fill="#6B7280" fontSize="10">堤防</text>
+        <rect x="320" y="320" width="8" height="8" rx="2" fill="#22C55E" />
+        <text x="335" y="328" fill="#6B7280" fontSize="10">磯</text>
+        <rect x="360" y="320" width="8" height="8" rx="2" fill="#F59E0B" />
+        <text x="375" y="328" fill="#6B7280" fontSize="10">砂浜</text>
+      </svg>
+    </div>
+  );
+}
+
+function FishingTimelineDiagram() {
+  return (
+    <div className="my-6">
+      <h3 className="mb-3 text-center text-sm font-bold text-foreground">釣りの1日タイムライン</h3>
+      <svg
+        viewBox="0 0 680 220"
+        width="100%"
+        style={{ maxWidth: 680 }}
+        aria-label="釣りの1日タイムライン図。朝マヅメ・日中・夕マヅメ・夜の時間帯と魚の活性の関係を表示"
+        className="mx-auto"
+      >
+        <rect x="0" y="0" width="680" height="220" rx="12" fill="#F9FAFB" />
+
+        {/* 時間軸ラベル */}
+        <text x="30" y="25" fill="#374151" fontSize="12" fontWeight="bold">時間帯</text>
+        <text x="30" y="45" fill="#374151" fontSize="12" fontWeight="bold">魚の活性</text>
+
+        {/* 朝マヅメ 4:00-7:00 */}
+        <rect x="80" y="60" width="140" height="100" rx="8" fill="#FEF3C7" stroke="#F59E0B" strokeWidth="2" />
+        <text x="150" y="82" textAnchor="middle" fill="#92400E" fontSize="13" fontWeight="bold">朝マヅメ</text>
+        <text x="150" y="100" textAnchor="middle" fill="#B45309" fontSize="11">4:00 - 7:00</text>
+
+        {/* 活性バー - 高い */}
+        <rect x="100" y="115" width="100" height="14" rx="3" fill="#F59E0B" />
+        <text x="150" y="126" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontWeight="bold">活性 HIGH</text>
+
+        <text x="150" y="152" textAnchor="middle" fill="#92400E" fontSize="10">ゴールデンタイム!</text>
+
+        {/* 日中 7:00-15:00 */}
+        <rect x="230" y="60" width="140" height="100" rx="8" fill="#EFF6FF" stroke="#93C5FD" strokeWidth="1.5" />
+        <text x="300" y="82" textAnchor="middle" fill="#1E40AF" fontSize="13" fontWeight="bold">日中</text>
+        <text x="300" y="100" textAnchor="middle" fill="#3B82F6" fontSize="11">7:00 - 15:00</text>
+
+        {/* 活性バー - 低い */}
+        <rect x="260" y="115" width="40" height="14" rx="3" fill="#93C5FD" />
+        <rect x="300" y="115" width="40" height="14" rx="3" fill="#E5E7EB" />
+        <text x="300" y="126" textAnchor="middle" fill="#1E40AF" fontSize="10" fontWeight="bold">LOW</text>
+
+        <text x="300" y="152" textAnchor="middle" fill="#3B82F6" fontSize="10">深場や日陰を狙う</text>
+
+        {/* 夕マヅメ 15:00-18:00 */}
+        <rect x="380" y="60" width="140" height="100" rx="8" fill="#FEF3C7" stroke="#F59E0B" strokeWidth="2" />
+        <text x="450" y="82" textAnchor="middle" fill="#92400E" fontSize="13" fontWeight="bold">夕マヅメ</text>
+        <text x="450" y="100" textAnchor="middle" fill="#B45309" fontSize="11">15:00 - 18:00</text>
+
+        <rect x="400" y="115" width="100" height="14" rx="3" fill="#F59E0B" />
+        <text x="450" y="126" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontWeight="bold">活性 HIGH</text>
+
+        <text x="450" y="152" textAnchor="middle" fill="#92400E" fontSize="10">ゴールデンタイム!</text>
+
+        {/* 夜 18:00-4:00 */}
+        <rect x="530" y="60" width="140" height="100" rx="8" fill="#EDE9FE" stroke="#8B5CF6" strokeWidth="1.5" />
+        <text x="600" y="82" textAnchor="middle" fill="#5B21B6" fontSize="13" fontWeight="bold">夜</text>
+        <text x="600" y="100" textAnchor="middle" fill="#7C3AED" fontSize="11">18:00 - 4:00</text>
+
+        <rect x="560" y="115" width="60" height="14" rx="3" fill="#8B5CF6" />
+        <rect x="620" y="115" width="30" height="14" rx="3" fill="#E5E7EB" />
+        <text x="600" y="126" textAnchor="middle" fill="#FFFFFF" fontSize="10" fontWeight="bold">MEDIUM</text>
+
+        <text x="600" y="152" textAnchor="middle" fill="#7C3AED" fontSize="10">常夜灯周りが有効</text>
+
+        {/* 下部の補足 */}
+        <rect x="120" y="180" width="440" height="30" rx="6" fill="#FFFFFF" stroke="#E5E7EB" strokeWidth="1" />
+        <text x="340" y="200" textAnchor="middle" fill="#6B7280" fontSize="11">朝マヅメと夕マヅメが最も魚が釣れやすい時間帯です</text>
+      </svg>
+    </div>
+  );
+}
+
 export default function HowToFishPage() {
   return (
     <>
@@ -329,6 +500,8 @@ export default function HowToFishPage() {
             <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
               釣りは大きく「海釣り」「川釣り」「湖釣り」の3つに分けられます。それぞれフィールドの特徴や釣れる魚が異なるので、自分の住んでいる場所や興味に合わせて選びましょう。
             </p>
+
+            <FishingMethodsTreeDiagram />
 
             <div className="mb-4 space-y-3">
               <div className="rounded-lg border p-4">
@@ -666,6 +839,8 @@ export default function HowToFishPage() {
               </Button>
             </div>
           </SectionCard>
+
+          <FishingTimelineDiagram />
 
           {/* 7. 季節別おすすめ */}
           <SectionCard id="season" title="季節別おすすめの釣り方" icon={Sun}>
