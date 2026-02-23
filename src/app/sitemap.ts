@@ -6,12 +6,15 @@ import { prefectures } from "@/lib/data/prefectures";
 import { areaGuides } from "@/lib/data/area-guides";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
 import { blogPosts } from "@/lib/data/blog";
+import { seasonalGuides } from "@/lib/data/seasonal-guides";
+import { tackleShops } from "@/lib/data/shops";
+import { FISHING_METHODS, MONTHS } from "@/lib/data/fishing-methods";
 
 const baseUrl = "https://tsurispot.com";
 
-// カテゴリID: 0=static+guides, 1=spots, 2=fish, 3=prefectures+areas
+// カテゴリID: 0=static+guides, 1=spots, 2=fish, 3=prefectures+areas, 4=fishing-matrix+seasonal+shops
 export async function generateSitemaps() {
-  return [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }];
+  return [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
 }
 
 export default async function sitemap({
@@ -21,32 +24,54 @@ export default async function sitemap({
 }): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
 
-  // 0: 固定ページ + ガイド系
+  // 0: 固定ページ + ガイド系 + ブログ + エリアガイド + 月別ガイド
   if (id === 0) {
     return [
+      // トップ・主要ページ
       { url: baseUrl, lastModified: now, changeFrequency: "daily", priority: 1.0 },
       { url: `${baseUrl}/spots`, lastModified: now, changeFrequency: "daily", priority: 0.9 },
       { url: `${baseUrl}/fish`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
       { url: `${baseUrl}/map`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
       { url: `${baseUrl}/catchable-now`, lastModified: now, changeFrequency: "daily", priority: 0.8 },
+      { url: `${baseUrl}/ranking`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+      { url: `${baseUrl}/tides`, lastModified: now, changeFrequency: "daily", priority: 0.7 },
+      { url: `${baseUrl}/fishing-calendar`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+      { url: `${baseUrl}/for-beginners`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+      { url: `${baseUrl}/fishing`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
+      // ガイド（全27ページ）
       { url: `${baseUrl}/guide`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-      { url: `${baseUrl}/guide/setup`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-      { url: `${baseUrl}/guide/knots`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-      { url: `${baseUrl}/guide/sabiki`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-      { url: `${baseUrl}/guide/casting`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
       { url: `${baseUrl}/guide/beginner`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+      { url: `${baseUrl}/guide/setup`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/sabiki`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       { url: `${baseUrl}/guide/choinage`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/casting`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/float-fishing`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
       { url: `${baseUrl}/guide/anazuri`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
       { url: `${baseUrl}/guide/oyogase`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/eging`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/jigging`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/lure`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/entou-kago`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/knots`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/line`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
       { url: `${baseUrl}/guide/sinker`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
-      { url: `${baseUrl}/glossary`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-      { url: `${baseUrl}/seasonal`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-      { url: `${baseUrl}/beginner-checklist`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-      { url: `${baseUrl}/fishing-rules`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+      { url: `${baseUrl}/guide/rigs`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/tide`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/night-fishing`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/family`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/budget`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/handling`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/fish-handling`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/how-to-fish`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/fishing-tips`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/fishing-for-beginners`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/fishing-gear-guide`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      // 装備ガイド
       { url: `${baseUrl}/gear`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       { url: `${baseUrl}/gear/sabiki`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       { url: `${baseUrl}/gear/rod-beginner`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       { url: `${baseUrl}/gear/tackle-box`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+      // 釣り方別
       { url: `${baseUrl}/methods`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
       { url: `${baseUrl}/methods/sabiki`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       { url: `${baseUrl}/methods/ajing`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
@@ -56,16 +81,18 @@ export default async function sitemap({
       { url: `${baseUrl}/methods/choi-nage`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       { url: `${baseUrl}/methods/uki-zuri`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       { url: `${baseUrl}/methods/ana-zuri`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+      // その他固定ページ
+      { url: `${baseUrl}/glossary`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+      { url: `${baseUrl}/seasonal`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+      { url: `${baseUrl}/beginner-checklist`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+      { url: `${baseUrl}/fishing-rules`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       { url: `${baseUrl}/faq`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-      { url: `${baseUrl}/fishing-calendar`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
       { url: `${baseUrl}/safety`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
       { url: `${baseUrl}/recommendation`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
       { url: `${baseUrl}/fish-finder`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
-      { url: `${baseUrl}/for-beginners`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
       { url: `${baseUrl}/quiz`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
-      { url: `${baseUrl}/tides`, lastModified: now, changeFrequency: "daily", priority: 0.7 },
-      { url: `${baseUrl}/ranking`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
       { url: `${baseUrl}/bouzu-checker`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+      { url: `${baseUrl}/shops`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
       { url: `${baseUrl}/sitemap-page`, lastModified: now, changeFrequency: "weekly", priority: 0.5 },
       { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },
       { url: `${baseUrl}/partner`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
@@ -120,20 +147,55 @@ export default async function sitemap({
   }
 
   // 3: 都道府県・エリアページ
+  if (id === 3) {
+    return [
+      { url: `${baseUrl}/prefecture`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.8 },
+      ...prefectures.map((pref) => ({
+        url: `${baseUrl}/prefecture/${pref.slug}`,
+        lastModified: now,
+        changeFrequency: "weekly" as const,
+        priority: 0.7,
+      })),
+      { url: `${baseUrl}/area`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.8 },
+      ...regions.map((region) => ({
+        url: `${baseUrl}/area/${region.slug}`,
+        lastModified: now,
+        changeFrequency: "weekly" as const,
+        priority: 0.7,
+      })),
+    ];
+  }
+
+  // 4: 釣り方×月マトリクス + 季節ガイド + 釣具店
   return [
-    { url: `${baseUrl}/prefecture`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.8 },
-    ...prefectures.map((pref) => ({
-      url: `${baseUrl}/prefecture/${pref.slug}`,
+    // 釣り方×月マトリクス（method概要 + method×month個別ページ）
+    ...FISHING_METHODS.flatMap((method) => [
+      {
+        url: `${baseUrl}/fishing/${method.slug}`,
+        lastModified: now,
+        changeFrequency: "monthly" as const,
+        priority: 0.7,
+      },
+      ...MONTHS.map((month) => ({
+        url: `${baseUrl}/fishing/${method.slug}/${month.slug}`,
+        lastModified: now,
+        changeFrequency: "monthly" as const,
+        priority: 0.6,
+      })),
+    ]),
+    // 季節ガイド
+    ...seasonalGuides.map((guide) => ({
+      url: `${baseUrl}/seasonal/${guide.slug}`,
       lastModified: now,
-      changeFrequency: "weekly" as const,
-      priority: 0.7,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
     })),
-    { url: `${baseUrl}/area`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.8 },
-    ...regions.map((region) => ({
-      url: `${baseUrl}/area/${region.slug}`,
+    // 釣具店
+    ...tackleShops.map((shop) => ({
+      url: `${baseUrl}/shops/${shop.slug}`,
       lastModified: now,
-      changeFrequency: "weekly" as const,
-      priority: 0.7,
+      changeFrequency: "monthly" as const,
+      priority: 0.5,
     })),
   ];
 }

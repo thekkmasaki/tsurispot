@@ -21,6 +21,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { ProductList } from "@/components/affiliate/product-list";
 import { getBeginnerEssentials } from "@/lib/data/products";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { NearbyBeginnerSpots } from "@/components/guide/nearby-beginner-spots";
 
 export const metadata: Metadata = {
   title: "釣り初心者完全ガイド - ゼロから始める釣り入門【2025年版】",
@@ -453,15 +454,27 @@ function Hint({ children }: { children: React.ReactNode }) {
 }
 
 export default function BeginnerGuidePage() {
-  // 初心者向けの漁港・堤防スポットを取得（最大6件）
-  const beginnerSpots = fishingSpots
+  // 初心者向けの漁港・堤防スポット（位置情報コンポーネント用に全件渡す）
+  const allBeginnerSpots = fishingSpots
     .filter(
       (s) =>
         (s.spotType === "port" || s.spotType === "breakwater") &&
         s.difficulty === "beginner"
     )
-    .sort((a, b) => b.rating - a.rating)
-    .slice(0, 6);
+    .sort((a, b) => b.rating - a.rating);
+
+  const beginnerSpots = allBeginnerSpots.slice(0, 6);
+
+  // 位置情報コンポーネント用の軽量データ
+  const beginnerSpotGeoData = allBeginnerSpots.map((s) => ({
+    slug: s.slug,
+    name: s.name,
+    prefecture: s.region.prefecture,
+    areaName: s.region.areaName,
+    latitude: s.latitude,
+    longitude: s.longitude,
+    rating: s.rating,
+  }));
 
   return (
     <>
@@ -976,10 +989,19 @@ export default function BeginnerGuidePage() {
                 </ul>
               </div>
 
+              {/* 位置情報で近くの初心者向けスポットを案内 */}
+              <div>
+                <h3 className="mb-3 font-medium text-foreground">
+                  あなたの近くの初心者向けスポット
+                </h3>
+                <NearbyBeginnerSpots spots={beginnerSpotGeoData} />
+              </div>
+
+              {/* フォールバック: 人気の初心者スポット */}
               {beginnerSpots.length > 0 && (
-                <div>
+                <div className="mt-6">
                   <h3 className="mb-3 font-medium text-foreground">
-                    初心者におすすめのスポット
+                    人気の初心者向けスポット
                   </h3>
                   <div className="grid gap-2 sm:grid-cols-2">
                     {beginnerSpots.map((spot) => (
