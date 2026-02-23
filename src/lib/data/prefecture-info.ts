@@ -1028,3 +1028,95 @@ export function getPrefectureInfoBySlug(
 ): PrefectureInfo | undefined {
   return prefectureInfoMap.get(slug);
 }
+
+// 隣接県マッピング（地方区分を超えた実際の隣接関係）
+export const adjacentPrefectures: Record<string, string[]> = {
+  hokkaido: ["aomori"],
+  aomori: ["hokkaido", "iwate", "akita"],
+  iwate: ["aomori", "akita", "miyagi"],
+  miyagi: ["iwate", "akita", "yamagata", "fukushima"],
+  akita: ["aomori", "iwate", "miyagi", "yamagata"],
+  yamagata: ["akita", "miyagi", "fukushima", "niigata"],
+  fukushima: ["miyagi", "yamagata", "niigata", "gunma", "tochigi", "ibaraki"],
+  ibaraki: ["fukushima", "tochigi", "saitama", "chiba"],
+  tochigi: ["fukushima", "ibaraki", "gunma", "saitama"],
+  gunma: ["fukushima", "tochigi", "saitama", "nagano", "niigata"],
+  saitama: ["ibaraki", "tochigi", "gunma", "chiba", "tokyo", "yamanashi", "nagano"],
+  chiba: ["ibaraki", "saitama", "tokyo"],
+  tokyo: ["saitama", "chiba", "kanagawa", "yamanashi"],
+  kanagawa: ["tokyo", "yamanashi", "shizuoka"],
+  niigata: ["yamagata", "fukushima", "gunma", "nagano", "toyama"],
+  toyama: ["niigata", "nagano", "gifu", "ishikawa"],
+  ishikawa: ["toyama", "gifu", "fukui"],
+  fukui: ["ishikawa", "gifu", "shiga", "kyoto"],
+  yamanashi: ["saitama", "tokyo", "kanagawa", "nagano", "shizuoka"],
+  nagano: ["gunma", "saitama", "yamanashi", "shizuoka", "aichi", "gifu", "toyama", "niigata"],
+  gifu: ["toyama", "ishikawa", "fukui", "nagano", "aichi", "shiga", "mie"],
+  shizuoka: ["kanagawa", "yamanashi", "nagano", "aichi"],
+  aichi: ["shizuoka", "nagano", "gifu", "mie"],
+  mie: ["aichi", "gifu", "shiga", "kyoto", "nara", "wakayama"],
+  shiga: ["fukui", "gifu", "mie", "kyoto"],
+  kyoto: ["fukui", "shiga", "mie", "nara", "osaka", "hyogo"],
+  osaka: ["kyoto", "nara", "hyogo", "wakayama"],
+  hyogo: ["kyoto", "osaka", "tottori", "okayama", "tokushima"],
+  nara: ["kyoto", "osaka", "mie", "wakayama"],
+  wakayama: ["osaka", "nara", "mie"],
+  tottori: ["hyogo", "okayama", "shimane", "hiroshima"],
+  shimane: ["tottori", "hiroshima", "yamaguchi"],
+  okayama: ["hyogo", "tottori", "hiroshima", "kagawa"],
+  hiroshima: ["shimane", "tottori", "okayama", "yamaguchi", "ehime"],
+  yamaguchi: ["shimane", "hiroshima", "fukuoka", "oita"],
+  tokushima: ["hyogo", "kagawa", "ehime", "kochi"],
+  kagawa: ["okayama", "tokushima", "ehime"],
+  ehime: ["hiroshima", "kagawa", "tokushima", "kochi"],
+  kochi: ["tokushima", "ehime"],
+  fukuoka: ["yamaguchi", "oita", "kumamoto", "saga"],
+  saga: ["fukuoka", "nagasaki"],
+  nagasaki: ["saga"],
+  kumamoto: ["fukuoka", "oita", "miyazaki", "kagoshima"],
+  oita: ["yamaguchi", "fukuoka", "kumamoto", "miyazaki"],
+  miyazaki: ["oita", "kumamoto", "kagoshima"],
+  kagoshima: ["kumamoto", "miyazaki"],
+  okinawa: ["kagoshima"],
+};
+
+// 都道府県別FAQ（SEO用）
+export interface PrefectureFAQ {
+  question: string;
+  answer: string;
+}
+
+export function getPrefectureFAQs(slug: string, prefName: string, spotCount: number, popularFish: string[], bestSeason: string): PrefectureFAQ[] {
+  const isInland = ["tochigi", "gunma", "saitama", "yamanashi", "nagano", "gifu", "shiga", "nara"].includes(slug);
+  const fishText = popularFish.slice(0, 3).join("・");
+
+  const faqs: PrefectureFAQ[] = [
+    {
+      question: `${prefName}でおすすめの釣り場はどこですか？`,
+      answer: `${prefName}には${spotCount > 0 ? `${spotCount}件の` : "多数の"}釣りスポットがあります。${popularFish.length > 0 ? `${fishText}などが人気のターゲットです。` : ""}当サイトではスポットごとの評価・混雑度・アクセス情報を掲載していますので、目的に合った釣り場を探せます。`,
+    },
+    {
+      question: `${prefName}のベストシーズンはいつですか？`,
+      answer: bestSeason || `${prefName}は季節ごとに異なる魚種が楽しめます。詳しくは各スポットのページをご覧ください。`,
+    },
+    {
+      question: `${prefName}で初心者におすすめの釣り場は？`,
+      answer: isInland
+        ? `${prefName}では管理釣り場や河川敷の釣りスポットが初心者におすすめです。足場が安定していて、レンタルタックルが利用できる施設も多いのが特徴です。`
+        : `${prefName}では足場の良い堤防や漁港、海釣り公園が初心者におすすめです。トイレや駐車場が完備されたスポットも多く、ファミリーフィッシングにも最適です。`,
+    },
+    {
+      question: `${prefName}で今釣れる魚は何ですか？`,
+      answer: `${prefName}で現在釣れる魚は季節によって変わります。当サイトの「今釣れる魚」ページでリアルタイムの旬情報を確認できます。${popularFish.length > 0 ? `代表的なターゲットとしては${fishText}があります。` : ""}`,
+    },
+  ];
+
+  if (!isInland) {
+    faqs.push({
+      question: `${prefName}で釣り禁止のエリアはありますか？`,
+      answer: `${prefName}にも立入禁止区域や釣り禁止区域があります。漁港内の一部エリアや養殖場周辺などは釣り禁止の場合が多いです。各スポットの詳細ページで最新の規制情報を確認してください。マナーを守って安全に釣りを楽しみましょう。`,
+    });
+  }
+
+  return faqs;
+}

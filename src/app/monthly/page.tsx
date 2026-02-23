@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Calendar, Fish, ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
 import { fishSpecies } from "@/lib/data/fish";
 
@@ -67,6 +68,7 @@ export default function MonthlyPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main className="container mx-auto max-w-5xl px-4 py-8 sm:py-12">
+        <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "月別釣りガイド" }]} />
         {/* ヘッダー */}
         <div className="mb-8 text-center sm:mb-10">
           <div className="mb-3 flex justify-center">

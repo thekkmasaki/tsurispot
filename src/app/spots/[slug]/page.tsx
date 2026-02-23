@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import {
   Star,
@@ -20,7 +21,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { fishingSpots, getSpotBySlug, getNearbySpots, type NearbySpot } from "@/lib/data/spots";
+import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, type NearbySpot } from "@/lib/data/spots";
 import { getShopsForSpot } from "@/lib/data/shops";
 import { getPrefectureByName } from "@/lib/data/prefectures";
 import { SeasonCalendar } from "@/components/spots/season-calendar";
@@ -35,21 +36,24 @@ import {
   DIFFICULTY_LABELS,
 } from "@/types";
 import { SpotImage } from "@/components/ui/spot-image";
-import { CrowdPredictionCard } from "@/components/spots/crowd-prediction";
 import { SpotBouzuCard } from "@/components/spots/spot-bouzu-card";
-import { SpotWeatherTide } from "@/components/spots/spot-weather-tide";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { FishLikeButton } from "@/components/spots/fish-like-button";
 import { FishingReportSummary } from "@/components/spots/fishing-report-summary";
-import { StreetViewSection } from "@/components/spots/street-view-section";
-import { NearbyGpsSearch } from "@/components/spots/nearby-gps-search";
 import { MobileQuickNav } from "@/components/spots/mobile-quick-nav";
 import { SpotAffiliateRecommend } from "@/components/spots/spot-affiliate-recommend";
 import { getCatchReportsBySpot } from "@/lib/data/catch-reports";
 import { CatchReportList } from "@/components/spots/catch-report-list";
 import { CatchReportForm } from "@/components/spots/catch-report-form";
+import { LineBanner } from "@/components/line-banner";
+
+// Below-the-fold client components loaded lazily
+const StreetViewSection = dynamic(() => import("@/components/spots/street-view-section").then((m) => m.StreetViewSection));
+const SpotWeatherTide = dynamic(() => import("@/components/spots/spot-weather-tide").then((m) => m.SpotWeatherTide));
+const CrowdPredictionCard = dynamic(() => import("@/components/spots/crowd-prediction").then((m) => m.CrowdPredictionCard));
+const NearbyGpsSearch = dynamic(() => import("@/components/spots/nearby-gps-search").then((m) => m.NearbyGpsSearch));
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -65,7 +69,7 @@ export async function generateMetadata({
   const fishNames = spot.catchableFish.map((cf) => cf.fish.name).join("・");
   return {
     title: `${spot.name}の釣り場情報 - ${spot.region.prefecture}${spot.region.areaName}の釣りスポット`,
-    description: `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）の釣り場情報。${fishNames}が狙えます。料金・駐車場・アクセス方法、ベストな時間帯やおすすめタックルまで初心者に必要な情報を掲載。`,
+    description: `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）の釣り場情報。${fishNames}が狙えます。${spot.region.areaName}近くのおすすめ釣り場。料金・駐車場・アクセス方法、ベストな時間帯やおすすめタックルまで初心者に必要な情報を掲載。`,
     openGraph: {
       title: `${spot.name}の釣り場情報`,
       description: `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）で${fishNames}が狙えます。${spot.description}`,
@@ -93,6 +97,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
     "@type": "TouristAttraction",
     name: spot.name,
     description: spot.description,
+    url: `https://tsurispot.com/spots/${spot.slug}`,
     address: {
       "@type": "PostalAddress",
       addressLocality: spot.region.areaName,
@@ -107,6 +112,21 @@ export default async function SpotDetailPage({ params }: PageProps) {
     },
     isAccessibleForFree: spot.isFree,
     publicAccess: true,
+    ...(spot.mainImageUrl?.startsWith("http") ? { image: spot.mainImageUrl } : {}),
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: spot.rating.toFixed(1),
+      bestRating: "5",
+      worstRating: "1",
+      ratingCount: spot.reviewCount > 0 ? spot.reviewCount : 1,
+    },
+    amenityFeature: [
+      ...(spot.hasParking ? [{ "@type": "LocationFeatureSpecification", name: "駐車場", value: true }] : []),
+      ...(spot.hasToilet ? [{ "@type": "LocationFeatureSpecification", name: "トイレ", value: true }] : []),
+      ...(spot.hasRentalRod ? [{ "@type": "LocationFeatureSpecification", name: "レンタル竿", value: true }] : []),
+      ...(spot.hasFishingShop ? [{ "@type": "LocationFeatureSpecification", name: "釣具店", value: true }] : []),
+    ],
+    touristType: spot.difficulty === "beginner" ? "初心者" : spot.difficulty === "intermediate" ? "中級者" : "上級者",
   };
 
   const prefForBreadcrumb = getPrefectureByName(spot.region.prefecture);
@@ -346,6 +366,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
             alt={spot.name}
             spotType={spot.spotType}
             height="h-48 sm:h-56 md:h-72"
+            priority
           />
         </div>
       )}
@@ -817,6 +838,51 @@ export default async function SpotDetailPage({ params }: PageProps) {
         </section>
       )}
 
+      {/* 同じ都道府県の釣りスポット */}
+      {(() => {
+        const samePrefSpots = getSpotsByPrefecture(spot.region.prefecture, spot.slug, 6);
+        if (samePrefSpots.length === 0) return null;
+        const pref = getPrefectureByName(spot.region.prefecture);
+        return (
+          <section className="mt-8 sm:mt-12">
+            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+              <MapPin className="size-5" />
+              {spot.region.prefecture}の他の釣りスポット
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {samePrefSpots.map((ps) => (
+                <Link key={ps.id} href={`/spots/${ps.slug}`}>
+                  <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                    <CardContent className="p-4">
+                      <h3 className="font-semibold group-hover:text-primary truncate">{ps.name}</h3>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        {ps.region.areaName} / {SPOT_TYPE_LABELS[ps.spotType]}
+                      </p>
+                      <div className="mt-1 flex items-center gap-1 text-xs">
+                        <Star className="size-3 fill-yellow-400 text-yellow-400" />
+                        <span>{ps.rating.toFixed(1)}</span>
+                      </div>
+                      {ps.catchableFish.length > 0 && (
+                        <p className="mt-2 text-xs text-muted-foreground truncate">
+                          {ps.catchableFish.slice(0, 3).map((cf) => cf.fish.name).join("・")}
+                        </p>
+                      )}
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+            {pref && (
+              <div className="mt-3 text-right">
+                <Link href={`/prefecture/${pref.slug}`} className="text-sm text-primary hover:underline">
+                  {spot.region.prefecture}の釣りスポットをすべて見る →
+                </Link>
+              </div>
+            )}
+          </section>
+        );
+      })()}
+
       {/* この釣り場で釣れる魚（内部リンク強化） */}
       {spot.catchableFish.length > 0 && (
         <section className="mt-6 sm:mt-8">
@@ -835,6 +901,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      {/* LINE登録バナー */}
+      <section className="mt-8 sm:mt-12">
+        <LineBanner variant="compact" />
+      </section>
     </div>
   );
 }

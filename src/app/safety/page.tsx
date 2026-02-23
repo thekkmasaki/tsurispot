@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
   title: "釣りの安全ガイド - ツリスポ",
@@ -59,6 +60,7 @@ export default function SafetyPage() {
       />
 
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
+        <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "釣りの安全ガイド" }]} />
         {/* ヘッダー */}
         <div className="mb-8 text-center sm:mb-10">
           <h1 className="text-2xl font-bold tracking-tight sm:text-4xl">

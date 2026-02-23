@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
   title: "釣り方・釣法ガイド - 9つの釣法を徹底解説",
@@ -158,6 +159,7 @@ export default function MethodsIndexPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <main className="container mx-auto max-w-5xl px-4 py-8 sm:py-12">
+        <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "釣り方・釣法ガイド" }]} />
         {/* ヘッダー */}
         <div className="mb-8 text-center sm:mb-10">
           <div className="mb-2 flex items-center justify-center gap-2">

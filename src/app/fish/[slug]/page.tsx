@@ -22,7 +22,7 @@ import {
 import { FishImage } from "@/components/ui/spot-image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { getFishSpeciesWithSpots, getCoOccurringFish } from "@/lib/data";
+import { getFishSpeciesWithSpots, getCoOccurringFish, getFishBySameMethod, getFishBySameSeason } from "@/lib/data";
 import { DIFFICULTY_LABELS, CATCH_RATING_LABELS } from "@/types";
 import { MonthCalendar } from "@/components/fish/month-calendar";
 import { NearbySpotsSorter } from "@/components/fish/nearby-spots-sorter";
@@ -184,6 +184,7 @@ export default async function FishDetailPage({ params }: PageProps) {
           category={fish.category}
           height="h-32 sm:h-40"
           className="w-full"
+          priority
         />
         <div className="text-center pb-2">
           <h1 className="text-xl font-bold sm:text-3xl">{fish.name}</h1>
@@ -610,6 +611,67 @@ export default async function FishDetailPage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      {/* 同じ釣り方で釣れる魚 */}
+      {(() => {
+        const sameMethodFish = getFishBySameMethod(slug, 6);
+        if (sameMethodFish.length === 0) return null;
+        return (
+          <section className="mb-8">
+            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+              <Fish className="size-5 text-primary" />
+              同じ釣り方で釣れる魚
+            </h2>
+            <p className="mb-3 text-xs text-muted-foreground sm:text-sm">
+              {fish.name}と同じ釣り方で狙える他の魚種です。
+            </p>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              {sameMethodFish.map((sf) => (
+                <Link key={sf.slug} href={`/fish/${sf.slug}`} title={`${sf.name}の釣り方`}>
+                  <Badge
+                    variant="outline"
+                    className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
+                  >
+                    {sf.name}
+                    <span className="ml-1 text-muted-foreground">
+                      ({sf.methods.join("・")})
+                    </span>
+                  </Badge>
+                </Link>
+              ))}
+            </div>
+          </section>
+        );
+      })()}
+
+      {/* 同じ時期に旬を迎える魚 */}
+      {(() => {
+        const sameSeasonFish = getFishBySameSeason(slug, 6);
+        if (sameSeasonFish.length === 0) return null;
+        return (
+          <section className="mb-8">
+            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+              <Calendar className="size-5 text-primary" />
+              同じ時期に旬を迎える魚
+            </h2>
+            <p className="mb-3 text-xs text-muted-foreground sm:text-sm">
+              {fish.name}と同じ時期がベストシーズンの魚種です。一度の釣行で複数の魚種を狙えます。
+            </p>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              {sameSeasonFish.map((sf) => (
+                <Link key={sf.slug} href={`/fish/${sf.slug}`} title={`${sf.name}の釣り情報`}>
+                  <Badge
+                    variant="outline"
+                    className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
+                  >
+                    {sf.name}
+                  </Badge>
+                </Link>
+              ))}
+            </div>
+          </section>
+        );
+      })()}
     </div>
   );
 }

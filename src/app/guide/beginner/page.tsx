@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { LineBanner } from "@/components/line-banner";
 import {
   ChevronLeft,
   ChevronRight,
@@ -19,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { fishingSpots } from "@/lib/data/spots";
 import { ProductList } from "@/components/affiliate/product-list";
 import { getBeginnerEssentials } from "@/lib/data/products";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
   title: "釣り初心者完全ガイド - ゼロから始める釣り入門【2025年版】",
@@ -228,7 +230,12 @@ export default function BeginnerGuidePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
-        {/* パンくず */}
+        <Breadcrumb items={[
+          { label: "ホーム", href: "/" },
+          { label: "ガイド", href: "/guide" },
+          { label: "初心者完全ガイド" },
+        ]} />
+        {/* 戻るリンク */}
         <div className="mb-6">
           <Link
             href="/guide"
@@ -989,6 +996,10 @@ export default function BeginnerGuidePage() {
             <Link href="/spots">スポットを探す</Link>
           </Button>
         </div>
+      {/* LINE登録バナー */}
+      <div className="mt-8 sm:mt-12">
+        <LineBanner variant="compact" />
+      </div>
       </main>
     </>
   );

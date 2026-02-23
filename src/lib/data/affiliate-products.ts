@@ -61,7 +61,7 @@ export const affiliateProducts: AffiliateProduct[] = [
   {
     id: "af-heated-vest",
     name: "電熱ベスト",
-    url: "https://amzn.to/4tJlbIR",
+    url: "https://amzn.to/40sdGZ6",
     description: "普段使いもできる電熱ベスト。大容量バッテリー付きで長持ちし、腰まで暖かいと好評。冬の長時間釣行の必需品です。",
     methodKeywords: [], // 全釣法対象（冬季のみ）
     seasons: ["winter"],

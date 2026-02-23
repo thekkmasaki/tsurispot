@@ -3,7 +3,17 @@
 import { useMemo } from "react";
 import Link from "next/link";
 import { useGeolocation } from "@/hooks/use-geolocation";
-import { FishingSpot } from "@/types";
+import type { FishingSpot } from "@/types";
+
+type LightSpot = Pick<FishingSpot, "latitude" | "longitude"> & {
+  region: Pick<FishingSpot["region"], "prefecture">;
+  catchableFish: {
+    fish: { id: string; name: string; slug: string };
+    monthStart: number;
+    monthEnd: number;
+    peakSeason?: boolean;
+  }[];
+};
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -34,7 +44,7 @@ function getDistanceKm(
 }
 
 interface LocationRecommendationsProps {
-  allSpots: FishingSpot[];
+  allSpots: LightSpot[];
   prefectures: Prefecture[];
   areaGuides: AreaGuide[];
 }

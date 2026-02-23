@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { LineBanner } from "@/components/line-banner";
 import { ChevronLeft, Play } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
@@ -208,7 +210,11 @@ export default function SetupGuidePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
       />
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
-        {/* パンくず */}
+        <Breadcrumb items={[
+          { label: "ホーム", href: "/" },
+          { label: "ガイド", href: "/guide" },
+          { label: "セッティング方法" },
+        ]} />
         <div className="mb-6">
           <Link
             href="/guide"
@@ -431,6 +437,10 @@ export default function SetupGuidePage() {
             釣り糸の結び方を学ぶ
           </Link>
         </div>
+      {/* LINE登録バナー */}
+      <div className="mt-8 sm:mt-12">
+        <LineBanner variant="compact" />
+      </div>
       </main>
     </>
   );

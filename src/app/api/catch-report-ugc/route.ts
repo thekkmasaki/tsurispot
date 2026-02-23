@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 
+const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;
+
 // POST: ユーザー釣果投稿を受け取る
 export async function POST(request: Request) {
   try {
@@ -38,8 +40,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "未来の日付は指定できません" }, { status: 400 });
     }
 
-    // ログ出力（実運用ではDB保存やメール通知に置き換え）
-    console.log("[釣果投稿]", {
+    const payload = {
       spotSlug,
       spotName,
       fishName,
@@ -47,7 +48,21 @@ export async function POST(request: Request) {
       comment,
       date,
       submittedAt: new Date().toISOString(),
-    });
+      spotUrl: `https://tsurispot.com/spots/${spotSlug}`,
+    };
+
+    // Google Apps Script Webhook に送信（Sheets保存 + メール通知）
+    if (GAS_WEBHOOK_URL) {
+      fetch(GAS_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      }).catch((err) => {
+        console.error("[釣果投稿] GAS送信エラー:", err);
+      });
+    }
+
+    console.log("[釣果投稿]", payload);
 
     return NextResponse.json({
       ok: true,

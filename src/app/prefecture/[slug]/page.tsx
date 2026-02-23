@@ -19,9 +19,9 @@ import { regions } from "@/lib/data/regions";
 import { fishingSpots } from "@/lib/data/spots";
 import { SpotCard } from "@/components/spots/spot-card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
-import { getPrefectureInfoBySlug } from "@/lib/data/prefecture-info";
+import { getPrefectureInfoBySlug, adjacentPrefectures, getPrefectureFAQs } from "@/lib/data/prefecture-info";
 import { getFishSlugByName } from "@/lib/data";
-import { SPOT_TYPE_LABELS } from "@/types";
+import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -87,6 +87,36 @@ const MONTH_NAMES = [
   "1月", "2月", "3月", "4月", "5月", "6月",
   "7月", "8月", "9月", "10月", "11月", "12月",
 ];
+
+/**
+ * スポットタイプ別の集計
+ */
+function getSpotTypeBreakdown(prefectureName: string) {
+  const spots = getSpotsForPrefecture(prefectureName);
+  const typeMap = new Map<string, number>();
+  for (const spot of spots) {
+    const label = SPOT_TYPE_LABELS[spot.spotType];
+    typeMap.set(label, (typeMap.get(label) || 0) + 1);
+  }
+  return Array.from(typeMap.entries())
+    .map(([type, count]) => ({ type, count }))
+    .sort((a, b) => b.count - a.count);
+}
+
+/**
+ * 難易度別の集計
+ */
+function getDifficultyBreakdown(prefectureName: string) {
+  const spots = getSpotsForPrefecture(prefectureName);
+  const diffMap = new Map<string, number>();
+  for (const spot of spots) {
+    const label = DIFFICULTY_LABELS[spot.difficulty];
+    diffMap.set(label, (diffMap.get(label) || 0) + 1);
+  }
+  return Array.from(diffMap.entries())
+    .map(([level, count]) => ({ level, count }))
+    .sort((a, b) => b.count - a.count);
+}
 
 /**
  * 今月旬の魚が多く釣れるスポットTOP5を算出
@@ -170,8 +200,8 @@ export async function generateMetadata({
   const spotTypes = new Set(spots.map((s) => SPOT_TYPE_LABELS[s.spotType]));
   const spotTypeText = Array.from(spotTypes).slice(0, 4).join("・");
 
-  const title = `${pref.name}の釣りスポット一覧｜${spotTypeText || "堤防・漁港・磯"}のおすすめ釣り場【2026年最新】`;
-  const description = `${pref.name}の釣りスポット${spots.length > 0 ? `${spots.length}箇所` : ""}を完全網羅。${spotTypeText || "堤防・漁港・磯"}など初心者から上級者までおすすめの釣り場をエリア別に紹介。${topFishNames}が狙えます。駐車場・トイレ・アクセス情報も掲載。`;
+  const title = `${pref.name}の釣り場・釣りスポット一覧｜近くのおすすめ釣り場【2026年最新】`;
+  const description = `${pref.name}の釣りスポット${spots.length > 0 ? `${spots.length}箇所` : ""}を完全網羅。${pref.name}近くの${spotTypeText || "堤防・漁港・磯"}など初心者にもおすすめの穴場釣り場をエリア別に紹介。${topFishNames}が狙えます。駐車場・トイレ・アクセス情報も掲載。`;
 
   return {
     title,
@@ -255,20 +285,44 @@ export default async function PrefecturePage({ params }: PageProps) {
     ],
   };
 
+  // Calculate average geo coordinates for the prefecture
+  const spotsWithCoords = spots.filter((s) => s.latitude && s.longitude);
+  const prefAvgLat = spotsWithCoords.length > 0
+    ? spotsWithCoords.reduce((sum, s) => sum + s.latitude, 0) / spotsWithCoords.length
+    : null;
+  const prefAvgLng = spotsWithCoords.length > 0
+    ? spotsWithCoords.reduce((sum, s) => sum + s.longitude, 0) / spotsWithCoords.length
+    : null;
+
   const placeJsonLd = {
     "@context": "https://schema.org",
     "@type": "Place",
     name: `${pref.name}の釣り場`,
-    description: prefInfo?.description || `${pref.name}で人気の釣り場・穴場スポットを紹介。初心者向けから上級者向けまで。`,
+    description: prefInfo?.description || `${pref.name}で人気の釣り場・穴場スポットを紹介。近くのおすすめ釣りスポットが見つかります。`,
+    url: `https://tsurispot.com/prefecture/${pref.slug}`,
     address: {
       "@type": "PostalAddress",
       addressRegion: pref.name,
       addressCountry: "JP",
     },
+    ...(prefAvgLat && prefAvgLng ? {
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: prefAvgLat,
+        longitude: prefAvgLng,
+      },
+    } : {}),
     containsPlace: spots.slice(0, 20).map((spot) => ({
       "@type": "TouristAttraction",
       name: spot.name,
       url: `https://tsurispot.com/spots/${spot.slug}`,
+      ...(spot.latitude && spot.longitude ? {
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: spot.latitude,
+          longitude: spot.longitude,
+        },
+      } : {}),
     })),
   };
 
@@ -286,10 +340,39 @@ export default async function PrefecturePage({ params }: PageProps) {
     })),
   } : null;
 
-  // 近隣県のリンク取得
+  // 近隣県のリンク取得（地方を超えた実際の隣接関係）
+  const adjacentSlugs = adjacentPrefectures[slug] || [];
+  const adjacentPrefs = adjacentSlugs
+    .map((s) => getPrefectureBySlug(s))
+    .filter((p): p is NonNullable<typeof p> => !!p);
+
+  // 同地方の県（隣接県と別に表示）
   const sameRegionPrefs = prefectures.filter(
-    (p) => p.regionGroup === pref.regionGroup && p.slug !== pref.slug
+    (p) => p.regionGroup === pref.regionGroup && p.slug !== pref.slug && !adjacentSlugs.includes(p.slug)
   );
+
+  // スポットタイプ別・難易度別の集計
+  const spotTypeBreakdown = getSpotTypeBreakdown(pref.name);
+  const difficultyBreakdown = getDifficultyBreakdown(pref.name);
+
+  // FAQ生成
+  const faqs = prefInfo
+    ? getPrefectureFAQs(slug, pref.name, spots.length, prefInfo.popularFish, prefInfo.bestSeason)
+    : [];
+
+  // FAQ構造化データ
+  const faqJsonLd = faqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  } : null;
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
@@ -301,6 +384,12 @@ export default async function PrefecturePage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(placeJsonLd) }}
       />
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
       {itemListJsonLd && (
         <script
           type="application/ld+json"
@@ -705,7 +794,136 @@ export default async function PrefecturePage({ params }: PageProps) {
         </section>
       )}
 
-      {/* Nearby prefectures */}
+      {/* スポットタイプ別・難易度別の概要 */}
+      {spots.length > 0 && (spotTypeBreakdown.length > 0 || difficultyBreakdown.length > 0) && (
+        <section className="mb-8 sm:mb-10">
+          <h2 className="mb-4 text-base font-bold sm:text-lg">
+            {pref.name}の釣り場タイプ別ガイド
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {spotTypeBreakdown.length > 0 && (
+              <Card className="gap-0 py-0">
+                <CardContent className="p-4 sm:p-5">
+                  <h3 className="mb-3 text-sm font-bold sm:text-base">釣り場のタイプ</h3>
+                  <div className="space-y-2">
+                    {spotTypeBreakdown.map(({ type, count }) => {
+                      const percentage = Math.round((count / spots.length) * 100);
+                      return (
+                        <div key={type}>
+                          <div className="mb-1 flex items-center justify-between text-sm">
+                            <span>{type}</span>
+                            <span className="text-muted-foreground">{count}件（{percentage}%）</span>
+                          </div>
+                          <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
+                            <div
+                              className="h-full rounded-full bg-primary transition-all"
+                              style={{ width: `${percentage}%` }}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+            {difficultyBreakdown.length > 0 && (
+              <Card className="gap-0 py-0">
+                <CardContent className="p-4 sm:p-5">
+                  <h3 className="mb-3 text-sm font-bold sm:text-base">難易度レベル</h3>
+                  <div className="space-y-2">
+                    {difficultyBreakdown.map(({ level, count }) => {
+                      const percentage = Math.round((count / spots.length) * 100);
+                      return (
+                        <div key={level}>
+                          <div className="mb-1 flex items-center justify-between text-sm">
+                            <span>{level}</span>
+                            <span className="text-muted-foreground">{count}件（{percentage}%）</span>
+                          </div>
+                          <div className="h-2 w-full overflow-hidden rounded-full bg-muted">
+                            <div
+                              className="h-full rounded-full bg-emerald-500 transition-all"
+                              style={{ width: `${percentage}%` }}
+                            />
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* FAQ Section */}
+      {faqs.length > 0 && (
+        <section className="mb-8 sm:mb-10">
+          <h2 className="mb-4 text-base font-bold sm:text-lg">
+            {pref.name}の釣りに関するよくある質問
+          </h2>
+          <div className="space-y-3">
+            {faqs.map((faq, i) => (
+              <Card key={i} className="gap-0 py-0">
+                <CardContent className="p-4 sm:p-5">
+                  <h3 className="mb-2 text-sm font-bold sm:text-base">
+                    Q. {faq.question}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {faq.answer}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* Adjacent prefectures (地理的に隣接する県) */}
+      {adjacentPrefs.length > 0 && (
+        <section className="mb-8 sm:mb-10">
+          <h2 className="mb-3 text-base font-bold sm:text-lg">
+            {pref.name}から近い都道府県の釣り場
+          </h2>
+          <p className="mb-4 text-sm text-muted-foreground">
+            {pref.name}に隣接する都道府県の釣りスポットも探せます。遠征や旅行の際の参考にどうぞ。
+          </p>
+          <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+            {adjacentPrefs.map((p) => {
+              const count = fishingSpots.filter(
+                (s) => s.region.prefecture === p.name
+              ).length;
+              const adjInfo = getPrefectureInfoBySlug(p.slug);
+              return (
+                <Link key={p.slug} href={`/prefecture/${p.slug}`}>
+                  <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                    <CardContent className="p-3 sm:p-4">
+                      <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
+                        {p.name}
+                      </h3>
+                      <p className="mt-1 text-xs text-muted-foreground">
+                        {count}件のスポット
+                      </p>
+                      {adjInfo && adjInfo.popularFish.length > 0 && (
+                        <div className="mt-2 flex flex-wrap gap-1">
+                          {adjInfo.popularFish.slice(0, 2).map((f) => (
+                            <Badge key={f} variant="secondary" className="text-[10px] px-1.5 py-0">
+                              {f}
+                            </Badge>
+                          ))}
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                </Link>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* Same region prefectures (同地方の他の県、隣接県と重複しないもの) */}
       {sameRegionPrefs.length > 0 && (
         <section className="mb-8 sm:mb-10">
           <h2 className="mb-3 text-base font-bold sm:text-lg">

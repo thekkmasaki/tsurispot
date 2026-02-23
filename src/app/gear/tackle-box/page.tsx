@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { getAmazonUrl, getRakutenUrl } from "@/lib/affiliate-config";
 
 export const metadata: Metadata = {
@@ -426,18 +427,11 @@ export default function GearTackleBoxPage() {
         }}
       />
       <main className="container mx-auto max-w-4xl px-4 py-8 sm:py-12">
-        {/* パンくず */}
-        <nav className="mb-6 flex items-center gap-1.5 text-xs text-muted-foreground sm:text-sm">
-          <Link href="/" className="hover:text-foreground">
-            ホーム
-          </Link>
-          <ChevronRight className="size-3.5" />
-          <Link href="/gear" className="hover:text-foreground">
-            おすすめ道具
-          </Link>
-          <ChevronRight className="size-3.5" />
-          <span className="text-foreground">釣り道具一式セット</span>
-        </nav>
+        <Breadcrumb items={[
+          { label: "ホーム", href: "/" },
+          { label: "おすすめ道具", href: "/gear" },
+          { label: "釣り道具一式セット" },
+        ]} />
 
         {/* ヒーロー */}
         <div className="mb-10 sm:mb-14">

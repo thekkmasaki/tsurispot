@@ -29,10 +29,15 @@ export const metadata: Metadata = {
   keywords: [
     "釣りスポット",
     "釣り場",
+    "近くの釣り場",
+    "釣り場 近く",
     "釣り初心者",
     "今釣れる魚",
     "釣り場情報",
     "海釣り",
+    "川釣り",
+    "釣り場 おすすめ",
+    "穴場 釣りスポット",
   ],
   openGraph: {
     type: "website",

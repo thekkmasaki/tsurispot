@@ -16,6 +16,7 @@ import {
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 import {
   monthlyGuides,
   getMonthlyGuide,
@@ -155,18 +156,11 @@ export default async function MonthlyGuidePage({ params }: Props) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <main className="container mx-auto max-w-4xl px-4 py-8 sm:py-12">
-        {/* パンくずリスト */}
-        <nav className="mb-6 flex items-center gap-2 text-sm text-muted-foreground">
-          <Link href="/" className="hover:text-foreground">
-            トップ
-          </Link>
-          <span>/</span>
-          <Link href="/monthly" className="hover:text-foreground">
-            月別釣りガイド
-          </Link>
-          <span>/</span>
-          <span className="text-foreground">{guide.nameJa}の釣り</span>
-        </nav>
+        <Breadcrumb items={[
+          { label: "ホーム", href: "/" },
+          { label: "月別釣りガイド", href: "/monthly" },
+          { label: `${guide.nameJa}の釣り` },
+        ]} />
 
         {/* ヘッダー */}
         <div className="mb-8 overflow-hidden rounded-2xl border-2 border-border bg-gradient-to-br from-blue-50 to-cyan-50 p-6 sm:p-8 dark:from-blue-950/30 dark:to-cyan-950/30">

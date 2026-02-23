@@ -112,9 +112,10 @@ interface SpotImageProps {
   spotType?: string;
   className?: string;
   height?: string;
+  priority?: boolean;
 }
 
-export function SpotImage({ src, alt, spotType = "port", className = "", height = "h-32" }: SpotImageProps) {
+export function SpotImage({ src, alt, spotType = "port", className = "", height = "h-32", priority = false }: SpotImageProps) {
   const [error, setError] = useState(false);
 
   // 実際の写真がある場合はそれを表示
@@ -126,6 +127,9 @@ export function SpotImage({ src, alt, spotType = "port", className = "", height 
           alt={alt}
           fill
           className="object-cover"
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 50vw"
+          priority={priority}
+          loading={priority ? undefined : "lazy"}
           onError={() => setError(true)}
         />
       </div>
@@ -183,9 +187,10 @@ interface FishImageProps {
   category?: keyof typeof FISH_GRADIENTS;
   className?: string;
   height?: string;
+  priority?: boolean;
 }
 
-export function FishImage({ src, alt, category = "sea", className = "", height = "h-24 sm:h-28" }: FishImageProps) {
+export function FishImage({ src, alt, category = "sea", className = "", height = "h-24 sm:h-28", priority = false }: FishImageProps) {
   const [error, setError] = useState(false);
   const gradient = FISH_GRADIENTS[category] || FISH_GRADIENTS.sea;
 
@@ -199,7 +204,16 @@ export function FishImage({ src, alt, category = "sea", className = "", height =
 
   return (
     <div className={`relative ${height} overflow-hidden ${className}`}>
-      <Image src={src} alt={alt} fill className="object-cover" onError={() => setError(true)} />
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover"
+        sizes="(max-width: 768px) 100vw, 50vw"
+        priority={priority}
+        loading={priority ? undefined : "lazy"}
+        onError={() => setError(true)}
+      />
     </div>
   );
 }

@@ -95,11 +95,11 @@ export async function generateMetadata({
     .join("・");
 
   return {
-    title: `${region.areaName}（${region.prefecture}）の釣り場・釣りスポット｜穴場情報あり`,
-    description: `${region.prefecture}${region.areaName}エリアの釣りスポット${spots.length}件を厳選紹介。${topFishNames}などが狙える穴場あり。初心者にもおすすめの釣り場からベテラン向けポイントまで。アクセス・駐車場・トイレ情報も掲載。`,
+    title: `${region.areaName}（${region.prefecture}）の釣り場｜近くのおすすめ釣りスポット・穴場情報`,
+    description: `${region.prefecture}${region.areaName}近くの釣りスポット${spots.length}件を厳選紹介。${topFishNames}などが狙える穴場あり。初心者にもおすすめの釣り場からベテラン向けポイントまで。アクセス・駐車場・トイレ情報も掲載。`,
     openGraph: {
-      title: `${region.areaName}（${region.prefecture}）の釣り場・釣りスポット｜穴場情報あり`,
-      description: `${region.prefecture}${region.areaName}の釣りスポット${spots.length}件。${topFishNames}が釣れる穴場あり。初心者にもおすすめ。`,
+      title: `${region.areaName}（${region.prefecture}）の釣り場｜近くのおすすめ釣りスポット`,
+      description: `${region.prefecture}${region.areaName}近くの釣りスポット${spots.length}件。${topFishNames}が釣れる穴場あり。初心者にもおすすめ。`,
       type: "website",
       url: `https://tsurispot.com/area/${region.slug}`,
       siteName: "ツリスポ",
@@ -128,22 +128,47 @@ export default async function AreaDetailPage({ params }: PageProps) {
     (r) => r.prefecture === region.prefecture && r.id !== region.id
   );
 
+  // Calculate average geo coordinates for the area
+  const spotsWithCoords = spots.filter((s) => s.latitude && s.longitude);
+  const avgLat = spotsWithCoords.length > 0
+    ? spotsWithCoords.reduce((sum, s) => sum + s.latitude, 0) / spotsWithCoords.length
+    : null;
+  const avgLng = spotsWithCoords.length > 0
+    ? spotsWithCoords.reduce((sum, s) => sum + s.longitude, 0) / spotsWithCoords.length
+    : null;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Place",
-    name: `${region.prefecture} ${region.areaName}`,
+    name: `${region.prefecture} ${region.areaName}の釣り場`,
     description:
       description ||
-      `${region.prefecture}${region.areaName}エリアの釣りスポット情報`,
+      `${region.prefecture}${region.areaName}エリアの釣りスポット情報。近くのおすすめ釣り場を紹介。`,
+    url: `https://tsurispot.com/area/${region.slug}`,
     address: {
       "@type": "PostalAddress",
+      addressLocality: region.areaName,
       addressRegion: region.prefecture,
       addressCountry: "JP",
     },
-    containsPlace: spots.map((spot) => ({
+    ...(avgLat && avgLng ? {
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: avgLat,
+        longitude: avgLng,
+      },
+    } : {}),
+    containsPlace: spots.slice(0, 20).map((spot) => ({
       "@type": "TouristAttraction",
       name: spot.name,
       url: `https://tsurispot.com/spots/${spot.slug}`,
+      ...(spot.latitude && spot.longitude ? {
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: spot.latitude,
+          longitude: spot.longitude,
+        },
+      } : {}),
     })),
   };
 

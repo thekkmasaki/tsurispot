@@ -12,6 +12,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ProductList } from "@/components/affiliate/product-list";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 import {
   products,
   getProductsByCategory,
@@ -119,6 +120,7 @@ export default function GearPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <main className="container mx-auto max-w-5xl px-4 py-8 sm:py-12">
+        <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "おすすめ釣り道具" }]} />
         {/* ヒーローセクション */}
         <div className="mb-10 text-center sm:mb-14">
           <div className="mx-auto mb-4 flex size-14 items-center justify-center rounded-2xl bg-primary/10">

@@ -71,11 +71,59 @@ export function getFishSlugByName(name: string): string | null {
   return fish ? fish.slug : null;
 }
 
+/**
+ * 同じ釣り方で釣れる魚種を取得（魚種ページの内部リンク用）
+ */
+export function getFishBySameMethod(
+  fishSlug: string,
+  limit: number = 6
+): { slug: string; name: string; methods: string[] }[] {
+  const targetFish = fishSpecies.find((f) => f.slug === fishSlug);
+  if (!targetFish || !targetFish.fishingMethods) return [];
+
+  const targetMethods = new Set(targetFish.fishingMethods.map((m) => m.methodName));
+
+  return fishSpecies
+    .filter((f) => f.slug !== fishSlug && f.fishingMethods && f.fishingMethods.length > 0)
+    .map((f) => {
+      const sharedMethods = f.fishingMethods!
+        .filter((m) => targetMethods.has(m.methodName))
+        .map((m) => m.methodName);
+      return { slug: f.slug, name: f.name, methods: sharedMethods };
+    })
+    .filter((f) => f.methods.length > 0)
+    .sort((a, b) => b.methods.length - a.methods.length)
+    .slice(0, limit);
+}
+
+/**
+ * 同じ季節に釣れる魚種を取得（魚種ページの内部リンク用）
+ */
+export function getFishBySameSeason(
+  fishSlug: string,
+  limit: number = 6
+): { slug: string; name: string; overlapMonths: number }[] {
+  const targetFish = fishSpecies.find((f) => f.slug === fishSlug);
+  if (!targetFish) return [];
+
+  const targetPeak = new Set(targetFish.peakMonths);
+
+  return fishSpecies
+    .filter((f) => f.slug !== fishSlug)
+    .map((f) => {
+      const overlap = f.peakMonths.filter((m) => targetPeak.has(m)).length;
+      return { slug: f.slug, name: f.name, overlapMonths: overlap };
+    })
+    .filter((f) => f.overlapMonths > 0)
+    .sort((a, b) => b.overlapMonths - a.overlapMonths)
+    .slice(0, limit);
+}
+
 // 全データのエクスポート
 export { fishSpecies } from "./fish";
 export { fishingSpots } from "./spots";
 export { regions } from "./regions";
 export { getFishBySlug, getCatchableNow, getPeakFish } from "./fish";
-export { getSpotBySlug, getNearbySpots } from "./spots";
+export { getSpotBySlug, getNearbySpots, getSpotsByPrefecture } from "./spots";
 export { tackleShops, getShopBySlug, getNearbyShops, getShopsForSpot } from "./shops";
 export { prefectureInfoList, getPrefectureInfoBySlug } from "./prefecture-info";

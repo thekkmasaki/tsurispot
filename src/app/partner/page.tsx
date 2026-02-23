@@ -13,7 +13,6 @@ import {
   Shield,
   Zap,
   MessageSquare,
-  Ship,
   FileText,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -65,34 +64,6 @@ const BENEFITS = [
 ];
 
 
-const CASE_STUDIES = [
-  {
-    icon: Store,
-    type: "釣具店",
-    name: "海風フィッシング様",
-    location: "神奈川県・三浦半島エリア",
-    plan: "ベーシック",
-    quote:
-      "近くの釣りスポットページから毎月安定してお客様が来てくださっています。特に週末の来店数が掲載前と比べて約30%増えました。初心者の方が「ツリスポで見た」と来店されるのが嬉しいですね。",
-    metrics: [
-      { label: "月間ページ閲覧", value: "2,400回" },
-      { label: "地図クリック", value: "月180件" },
-    ],
-  },
-  {
-    icon: Ship,
-    type: "遊漁船",
-    name: "大漁丸様",
-    location: "千葉県・外房エリア",
-    plan: "プレミアム",
-    quote:
-      "特集記事を作っていただいたおかげで、Google検索から直接予約の問い合わせが増えました。シーズン中は電話が鳴りっぱなしです。バナー広告の効果も実感しています。",
-    metrics: [
-      { label: "特集記事PV", value: "月5,200回" },
-      { label: "電話問い合わせ", value: "月40件+" },
-    ],
-  },
-];
 
 const STATS = [
   { value: "960+", label: "掲載スポット数" },
@@ -293,60 +264,6 @@ export default function PartnerPage() {
         </Card>
       </section>
 
-      {/* 導入事例 */}
-      <section className="mb-14 sm:mb-20">
-        <h2 className="mb-2 text-center text-xl font-bold sm:text-2xl">
-          導入事例
-        </h2>
-        <p className="mb-8 text-center text-sm text-muted-foreground">
-          ツリスポを活用されている事業者様の声
-        </p>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {CASE_STUDIES.map((cs) => (
-            <Card key={cs.name} className="gap-0 py-0">
-              <CardContent className="p-5 sm:p-6">
-                <div className="mb-4 flex items-center gap-3">
-                  <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-900/20">
-                    <cs.icon className="size-5 text-blue-600 dark:text-blue-400" />
-                  </div>
-                  <div>
-                    <div className="flex items-center gap-2">
-                      <p className="text-sm font-bold">{cs.name}</p>
-                      <Badge variant="secondary" className="text-[10px] px-1.5 py-0">
-                        {cs.plan}プラン
-                      </Badge>
-                    </div>
-                    <p className="text-xs text-muted-foreground">
-                      {cs.type} / {cs.location}
-                    </p>
-                  </div>
-                </div>
-                <blockquote className="mb-4 text-xs leading-relaxed text-muted-foreground sm:text-sm border-l-2 border-blue-200 pl-3 italic">
-                  &ldquo;{cs.quote}&rdquo;
-                </blockquote>
-                <div className="flex gap-3">
-                  {cs.metrics.map((m) => (
-                    <div
-                      key={m.label}
-                      className="flex-1 rounded-lg bg-muted/50 p-2.5 text-center"
-                    >
-                      <p className="text-sm font-bold text-blue-600">
-                        {m.value}
-                      </p>
-                      <p className="text-[10px] text-muted-foreground">
-                        {m.label}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-        <p className="mt-3 text-center text-[10px] text-muted-foreground">
-          ※ 導入事例の数値は代表的な実績例です。効果は掲載内容やエリアにより異なります。
-        </p>
-      </section>
 
       {/* 掲載の流れ */}
       <section className="mb-14 sm:mb-20">

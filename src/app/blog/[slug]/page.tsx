@@ -8,9 +8,10 @@ import {
   getAdjacentPosts,
   BLOG_CATEGORIES,
 } from "@/lib/data/blog";
+import { fishSpecies } from "@/lib/data/fish";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { ChevronLeft, ChevronRight, Tag, Calendar, FileText } from "lucide-react";
+import { ChevronLeft, ChevronRight, Tag, Calendar, FileText, MapPin, Fish, Search } from "lucide-react";
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({
@@ -181,6 +182,65 @@ export default async function BlogPostPage({
         className="prose prose-gray max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-h2:mt-10 prose-h2:mb-4 prose-h2:text-xl prose-h2:border-l-4 prose-h2:border-primary prose-h2:pl-3 prose-h3:mt-6 prose-h3:mb-3 prose-h3:text-lg prose-p:leading-relaxed prose-p:text-gray-700 prose-li:text-gray-700 prose-ul:my-4 prose-li:my-1 sm:prose-h2:text-2xl sm:prose-h3:text-xl"
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
+
+      {/* 関連魚種リンク */}
+      {post.relatedFish && post.relatedFish.length > 0 && (() => {
+        const relatedFishData = post.relatedFish
+          .map((slug) => fishSpecies.find((f) => f.slug === slug))
+          .filter(Boolean);
+        return relatedFishData.length > 0 ? (
+          <section className="mt-10 rounded-xl border bg-blue-50/50 p-5">
+            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
+              <Fish className="size-5 text-primary" />
+              この記事に関連する魚種
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {relatedFishData.map((fish) => (
+                <Link
+                  key={fish!.slug}
+                  href={`/fish/${fish!.slug}`}
+                  className="inline-flex items-center gap-1.5 rounded-lg border bg-white px-3 py-2 text-sm font-medium transition-colors hover:border-primary hover:text-primary"
+                >
+                  {fish!.name}
+                </Link>
+              ))}
+            </div>
+          </section>
+        ) : null;
+      })()}
+
+      {/* CTA: サイト誘導 */}
+      <section className="mt-10 rounded-2xl border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-sky-50 p-6 sm:p-8">
+        <h2 className="mb-2 text-lg font-bold tracking-tight sm:text-xl">
+          近くの釣りスポットを探してみよう
+        </h2>
+        <p className="mb-5 text-sm leading-relaxed text-muted-foreground sm:text-base">
+          ツリスポでは全国1,000か所以上の釣りスポット情報を掲載。今釣れる魚・混雑予想・アクセス情報をまとめてチェックできます。
+        </p>
+        <div className="flex flex-wrap gap-3">
+          <Link
+            href="/spots"
+            className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary/90"
+          >
+            <MapPin className="size-4" />
+            釣りスポットを探す
+          </Link>
+          <Link
+            href="/fish"
+            className="inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-white px-5 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-primary/5"
+          >
+            <Fish className="size-4" />
+            魚図鑑を見る
+          </Link>
+          <Link
+            href="/catchable-now"
+            className="inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-white px-5 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-primary/5"
+          >
+            <Search className="size-4" />
+            今釣れる魚を調べる
+          </Link>
+        </div>
+      </section>
 
       {/* 前後の記事ナビゲーション */}
       <nav className="mt-12 grid gap-4 border-t pt-8 sm:grid-cols-2" aria-label="前後の記事">

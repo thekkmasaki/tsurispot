@@ -3,7 +3,12 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useGeolocation } from "@/hooks/use-geolocation";
-import { FishingSpot, SPOT_TYPE_LABELS } from "@/types";
+import { SPOT_TYPE_LABELS } from "@/types";
+import type { FishingSpot } from "@/types";
+
+type LightSpot = Pick<FishingSpot, "id" | "slug" | "name" | "spotType" | "rating" | "latitude" | "longitude"> & {
+  region: Pick<FishingSpot["region"], "prefecture" | "areaName">;
+};
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -34,7 +39,7 @@ function formatDistance(km: number): string {
   return `${Math.round(km)}km`;
 }
 
-export function NearbySpots({ allSpots }: { allSpots: FishingSpot[] }) {
+export function NearbySpots({ allSpots }: { allSpots: LightSpot[] }) {
   const [waterFilter, setWaterFilter] = useState<WaterFilter>("all");
   const { latitude, longitude, error, loading, permissionDenied, requestLocation } =
     useGeolocation();

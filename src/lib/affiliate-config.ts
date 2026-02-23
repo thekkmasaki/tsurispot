@@ -6,7 +6,7 @@
  */
 export const AFFILIATE_CONFIG = {
   amazon: {
-    tag: "tsurispot-22", // Amazon アソシエイトタグ（仮）
+    tag: "tsurispot-22", // Amazon アソシエイトタグ
     baseUrl: "https://www.amazon.co.jp/dp/",
   },
   rakuten: {

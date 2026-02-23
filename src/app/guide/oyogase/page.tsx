@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { LineBanner } from "@/components/line-banner";
 import { ChevronLeft, Fish, AlertTriangle, CheckCircle2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -60,14 +62,11 @@ export default function OyogasePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }} />
 
-      {/* パンくず */}
-      <nav className="mb-4 text-xs text-muted-foreground">
-        <Link href="/" className="hover:text-primary">ホーム</Link>
-        <span className="mx-1">/</span>
-        <Link href="/guide" className="hover:text-primary">ガイド</Link>
-        <span className="mx-1">/</span>
-        <span>泳がせ釣り</span>
-      </nav>
+      <Breadcrumb items={[
+        { label: "ホーム", href: "/" },
+        { label: "ガイド", href: "/guide" },
+        { label: "泳がせ釣りガイド" },
+      ]} />
 
       <Link href="/guide" className="mb-4 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary">
         <ChevronLeft className="size-4" />
@@ -330,6 +329,11 @@ export default function OyogasePage() {
             <p className="mt-1 text-xs text-muted-foreground">大物を美味しく持ち帰る</p>
           </Link>
         </div>
+      </div>
+
+      {/* LINE登録バナー */}
+      <div className="mt-8 sm:mt-12">
+        <LineBanner variant="compact" />
       </div>
     </main>
   );

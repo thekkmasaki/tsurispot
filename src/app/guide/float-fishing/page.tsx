@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { LineBanner } from "@/components/line-banner";
 import { ChevronLeft, CircleDot, Anchor, Bug, Eye, Fish } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -405,6 +406,10 @@ export default function FloatFishingGuidePage() {
             潮汐の読み方ガイドへ
           </Link>
         </div>
+      {/* LINE登録バナー */}
+      <div className="mt-8 sm:mt-12">
+        <LineBanner variant="compact" />
+      </div>
       </main>
     </>
   );

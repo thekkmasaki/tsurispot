@@ -29,20 +29,25 @@ import {
   FileText,
   Tag,
 } from "lucide-react";
-import { NearbySpots } from "@/components/nearby-spots";
-import { LocationRecommendations } from "@/components/location-recommendations";
-import { OnlineUsersBadge } from "@/components/online-users-badge";
+import dynamic from "next/dynamic";
 import { SpotImage, FishImage } from "@/components/ui/spot-image";
 import { HomeSearchBar } from "@/components/home-search-bar";
+import { LineBanner } from "@/components/line-banner";
+
+// Below-the-fold client components loaded lazily
+const NearbySpots = dynamic(() => import("@/components/nearby-spots").then((m) => m.NearbySpots));
+const LocationRecommendations = dynamic(() => import("@/components/location-recommendations").then((m) => m.LocationRecommendations));
+const OnlineUsersBadge = dynamic(() => import("@/components/online-users-badge").then((m) => m.OnlineUsersBadge));
+const SeasonalRecommend = dynamic(() => import("@/components/affiliate/seasonal-recommend").then((m) => m.SeasonalRecommend));
 
 export const metadata: Metadata = {
-  title: "ツリスポ - 海釣り・川釣りスポット総合情報サイト｜全国の釣り場を地図で検索",
+  title: "ツリスポ - 近くの釣り場が見つかる｜全国の海釣り・川釣りスポット検索",
   description:
-    "海釣りも川釣りも！全国の釣りスポットを地図で簡単検索。堤防・漁港・磯の海釣りから、渓流・湖・管理釣り場の淡水釣りまで。今の時期に釣れる魚、おすすめの仕掛け情報を網羅した釣りスポット総合情報サイト。",
+    "近くの釣り場を地図で簡単検索。全国1000箇所以上の釣りスポットから、堤防・漁港・磯の海釣り、渓流・湖の淡水釣りまで、近くのおすすめ釣り場が見つかります。今の時期に釣れる魚、初心者向けの穴場情報も満載。",
   openGraph: {
-    title: "ツリスポ - 釣りスポット総合情報サイト",
+    title: "ツリスポ - 近くの釣り場が見つかる釣りスポット検索サイト",
     description:
-      "全国の釣りスポットを地図で簡単検索。今釣れる魚やベスト時間帯、おすすめの仕掛け情報まで網羅した釣り情報サイト。",
+      "近くの釣り場を地図で簡単検索。全国の釣りスポットから今釣れる魚やおすすめの仕掛け情報まで網羅。",
     type: "website",
     url: "https://tsurispot.com",
     siteName: "ツリスポ",
@@ -59,13 +64,32 @@ const SPOT_TYPE_FILTERS = [
   { label: "川", type: "river" },
 ] as const;
 
+// NearbySpots / LocationRecommendations 用の軽量スポットデータ
+// フルデータ(33MB+)ではなく必要フィールドだけ渡してRSCペイロードを削減
+const lightSpots = fishingSpots.map((s) => ({
+  id: s.id,
+  slug: s.slug,
+  name: s.name,
+  spotType: s.spotType,
+  rating: s.rating,
+  latitude: s.latitude,
+  longitude: s.longitude,
+  region: { prefecture: s.region.prefecture, areaName: s.region.areaName },
+  catchableFish: s.catchableFish.map((cf) => ({
+    fish: { id: cf.fish.id, name: cf.fish.name, slug: cf.fish.slug },
+    monthStart: cf.monthStart,
+    monthEnd: cf.monthEnd,
+    peakSeason: cf.peakSeason,
+  })),
+}));
+
 const websiteJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   name: "ツリスポ",
   url: "https://tsurispot.com",
   description:
-    "全国の釣りスポットを地図で簡単検索。今釣れる魚やベスト時間帯、おすすめの仕掛け情報まで網羅した釣り情報サイト。",
+    "近くの釣り場を地図で簡単検索。全国1000箇所以上の釣りスポットから今釣れる魚やおすすめの仕掛け情報まで網羅した釣り情報サイト。",
   potentialAction: {
     "@type": "SearchAction",
     target: "https://tsurispot.com/spots?q={search_term_string}",
@@ -211,13 +235,13 @@ export default function Home() {
 
       {/* 近くの釣りスポット */}
       <section className="mx-auto w-full max-w-5xl px-4 pt-8 sm:px-6 sm:pt-12">
-        <NearbySpots allSpots={fishingSpots} />
+        <NearbySpots allSpots={lightSpots} />
       </section>
 
       {/* 現在地ベースのおすすめ記事 */}
       <section className="mx-auto w-full max-w-5xl px-4 pt-6 sm:px-6 sm:pt-10">
         <LocationRecommendations
-          allSpots={fishingSpots}
+          allSpots={lightSpots}
           prefectures={prefectures}
           areaGuides={areaGuides}
         />
@@ -622,6 +646,16 @@ export default function Home() {
           </div>
         </section>
       )}
+
+      {/* 今月のおすすめアイテム */}
+      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
+        <SeasonalRecommend maxItems={4} />
+      </section>
+
+      {/* LINE登録バナー */}
+      <section className="mx-auto w-full max-w-3xl px-4 pb-8 sm:px-6 sm:pb-12">
+        <LineBanner />
+      </section>
 
       {/* 事業者向けCTA */}
       <section className="border-t bg-gradient-to-b from-slate-50 to-slate-100 py-10 sm:py-16">

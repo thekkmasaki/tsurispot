@@ -8,6 +8,7 @@ import {
   Fish,
   ShieldCheck,
 } from "lucide-react";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
   title: "よくある質問（FAQ） - 釣り初心者のギモンを解決",
@@ -546,6 +547,7 @@ export default function FAQPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
+        <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "よくある質問" }]} />
         {/* ヘッダー */}
         <div className="mb-8 text-center sm:mb-10">
           <div className="mb-2 flex items-center justify-center gap-2">
@@ -629,8 +631,54 @@ export default function FAQPage() {
           ))}
         </div>
 
-        {/* 関連ページ */}
+        {/* カテゴリ別FAQ */}
         <div className="mt-12 rounded-xl border bg-muted/30 p-6">
+          <h2 className="mb-4 text-lg font-bold">カテゴリ別FAQ</h2>
+          <p className="mb-4 text-sm text-muted-foreground">
+            もっと詳しいFAQをカテゴリごとにまとめています。
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <Link
+              href="/faq/season"
+              className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md"
+            >
+              <p className="font-semibold">季節・時期別FAQ</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                サビキ釣りの時期・朝マヅメ・冬の釣り（9問）
+              </p>
+            </Link>
+            <Link
+              href="/faq/beginner"
+              className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md"
+            >
+              <p className="font-semibold">初心者向けFAQ</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                必要な道具・予算・場所選び・始め方（9問）
+              </p>
+            </Link>
+            <Link
+              href="/faq/spot"
+              className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md"
+            >
+              <p className="font-semibold">釣り場FAQ</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                堤防・漁港・管理釣り場のコツとマナー（7問）
+              </p>
+            </Link>
+            <Link
+              href="/faq/technique"
+              className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md"
+            >
+              <p className="font-semibold">テクニックFAQ</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                釣れない時の対処法・タナ合わせ・コマセ（8問）
+              </p>
+            </Link>
+          </div>
+        </div>
+
+        {/* 関連ページ */}
+        <div className="mt-8 rounded-xl border bg-muted/30 p-6">
           <h2 className="mb-4 text-lg font-bold">もっと詳しく知りたい方へ</h2>
           <div className="grid gap-3 sm:grid-cols-3">
             <Link

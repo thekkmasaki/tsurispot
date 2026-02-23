@@ -271,6 +271,84 @@ export const products: Product[] = [
     relatedFish: [],
     priority: 15,
   },
+  // ============================================
+  // 上級者向け大型魚ターゲット（アカメ・シーバス・ヒラスズキ等）
+  // ============================================
+  {
+    id: "p20",
+    name: "シマノ ディアルーナ S96MH",
+    description:
+      "大型シーバスからアカメまで対応するパワーロッド。9.6ftのレングスで飛距離を稼ぎつつ、MHパワーでメーター級の大型魚とも勝負できる。河口・サーフ・磯とフィールドを選ばない万能さ。",
+    priceRange: "20,000〜28,000円",
+    imageDescription: "シマノ ディアルーナ シーバスロッド",
+    amazonAsin: "B0BXLZ4Q3X",
+    rakutenSearchQuery: "シマノ ディアルーナ S96MH シーバスロッド",
+    category: "rod",
+    difficulty: "advanced",
+    relatedMethods: ["lure"],
+    relatedFish: ["akame", "seabass", "hiramasa", "buri"],
+    priority: 20,
+  },
+  {
+    id: "p21",
+    name: "シマノ ツインパワー 4000XG",
+    description:
+      "高剛性メタルボディで大型魚の強烈な引きに対応するハイエンドリール。4000番のXGギアでルアー回収が速く、アカメの激しいエラ洗いにも負けないドラグ性能。",
+    priceRange: "30,000〜40,000円",
+    imageDescription: "シマノ ツインパワー スピニングリール",
+    amazonAsin: "B0BXLZ4Q3X",
+    rakutenSearchQuery: "シマノ ツインパワー 4000XG スピニングリール",
+    category: "reel",
+    difficulty: "advanced",
+    relatedMethods: ["lure"],
+    relatedFish: ["akame", "seabass", "hiramasa", "buri"],
+    priority: 21,
+  },
+  {
+    id: "p22",
+    name: "東レ スーパーストロング PE×8 2号 200m",
+    description:
+      "8本編みの高強度PEライン。2号で約35lbの引張強度があり、アカメや大型シーバスの強烈なファイトにも対応。高密度編みでガイドの摩擦にも強く、飛距離も出る。",
+    priceRange: "2,500〜3,500円",
+    imageDescription: "東レ PEライン 2号",
+    amazonAsin: "B0BXLZ4Q3X",
+    rakutenSearchQuery: "東レ スーパーストロング PE 2号 8本編み",
+    category: "tackle",
+    difficulty: "advanced",
+    relatedMethods: ["lure"],
+    relatedFish: ["akame", "seabass", "hiramasa", "buri", "shiira"],
+    priority: 22,
+  },
+  {
+    id: "p23",
+    name: "クレハ シーガー グランドマックスFX 10号（40lb）",
+    description:
+      "アカメ・大型根魚用のショックリーダー。フロロカーボン100%で根ズレに強く、10号（40lb）で大型魚のファイトにも余裕の強度。しなやかさと強度を両立。",
+    priceRange: "1,500〜2,500円",
+    imageDescription: "クレハ フロロカーボン ショックリーダー",
+    amazonAsin: "B0BXLZ4Q3X",
+    rakutenSearchQuery: "シーガー グランドマックス フロロカーボン リーダー 10号",
+    category: "tackle",
+    difficulty: "advanced",
+    relatedMethods: ["lure"],
+    relatedFish: ["akame", "seabass", "hiramasa", "buri"],
+    priority: 23,
+  },
+  {
+    id: "p24",
+    name: "ボガグリップ 30lb フィッシュグリップ",
+    description:
+      "大型魚対応のフィッシュグリップ。アカメのような歯やエラが鋭い魚を安全にホールドできる。計量機能付きで最大30lb（約13.6kg）まで計測可能。",
+    priceRange: "3,000〜5,000円",
+    imageDescription: "大型フィッシュグリップ 計量付き",
+    amazonAsin: "B0BXLZ4Q3X",
+    rakutenSearchQuery: "フィッシュグリップ 大型魚 計量 ステンレス",
+    category: "accessory",
+    difficulty: "advanced",
+    relatedMethods: ["lure"],
+    relatedFish: ["akame", "seabass", "hiramasa", "buri", "shiira", "magochi"],
+    priority: 24,
+  },
 ];
 
 /**

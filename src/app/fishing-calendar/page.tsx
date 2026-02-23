@@ -4,6 +4,7 @@ import { Calendar, Fish, ChevronRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { fishSpecies, getPeakFish, getCatchableNow } from "@/lib/data/fish";
 
 export const metadata: Metadata = {
@@ -112,6 +113,7 @@ export default function FishingCalendarPage() {
       />
 
       <main className="container mx-auto max-w-5xl px-4 py-8 sm:py-12">
+        <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "月別釣りカレンダー" }]} />
         {/* ヘッダー */}
         <div className="mb-8 text-center sm:mb-10">
           <div className="mb-2 flex items-center justify-center gap-2">

@@ -27,6 +27,9 @@ import { akashiHarimaSpots } from "./spots-akashi-harima";
 import { freshwaterSpots } from "./spots-freshwater";
 import { freshwaterSpotsTohoku } from "./spots-freshwater-tohoku";
 import { freshwaterSpotsWest } from "./spots-freshwater-west";
+import { freshwaterSpotsKantoAdd } from "./spots-freshwater-kanto-add";
+import { freshwaterSpotsChubuAdd } from "./spots-freshwater-chubu-add";
+import { freshwaterSpotsWestAdd } from "./spots-freshwater-west-add";
 
 function fish(slug: string): FishSpecies {
   const f = getFishBySlug(slug);
@@ -2726,7 +2729,7 @@ const _baseSpots: FishingSpot[] = [
   },
 ];
 
-export const fishingSpots: FishingSpot[] = [..._baseSpots, ...additionalSpots, ...osakaKinkiSpots, ...extraSpots, ...sagamiMiuraSpots, ...sagamiShonanSpots, ...sagamiIzuSpots, ...tohokuSpots, ...hokurikuSpots, ...shikokuSpots, ...kyushuSouthSpots, ...okinawaSpots, ...saninSpots, ...tokaiDetailSpots, ...kyushuChugokuDetailSpots, ...kantoDetailSpots, ...kansaiDetailSpots, ...hokkaidoTohokuDetailSpots, ...hyogoDetailSpots, ...southKyushuDetailSpots, ...chibaShizuokaDetailSpots, ...wakayamaMieNiigataSpots, ...aichiFukuokaHiroshimaSpots, ...akashiHarimaSpots, ...freshwaterSpots, ...freshwaterSpotsTohoku, ...freshwaterSpotsWest];
+export const fishingSpots: FishingSpot[] = [..._baseSpots, ...additionalSpots, ...osakaKinkiSpots, ...extraSpots, ...sagamiMiuraSpots, ...sagamiShonanSpots, ...sagamiIzuSpots, ...tohokuSpots, ...hokurikuSpots, ...shikokuSpots, ...kyushuSouthSpots, ...okinawaSpots, ...saninSpots, ...tokaiDetailSpots, ...kyushuChugokuDetailSpots, ...kantoDetailSpots, ...kansaiDetailSpots, ...hokkaidoTohokuDetailSpots, ...hyogoDetailSpots, ...southKyushuDetailSpots, ...chibaShizuokaDetailSpots, ...wakayamaMieNiigataSpots, ...aichiFukuokaHiroshimaSpots, ...akashiHarimaSpots, ...freshwaterSpots, ...freshwaterSpotsTohoku, ...freshwaterSpotsWest, ...freshwaterSpotsKantoAdd, ...freshwaterSpotsChubuAdd, ...freshwaterSpotsWestAdd];
 
 export function getSpotBySlug(slug: string): FishingSpot | undefined {
   return fishingSpots.find((s) => s.slug === slug);
@@ -2755,5 +2758,12 @@ export function getNearbySpots(lat: number, lng: number, limit = 5): NearbySpot[
       distanceKm: haversineKm(lat, lng, spot.latitude, spot.longitude),
     }))
     .sort((a, b) => a.distanceKm - b.distanceKm)
+    .slice(0, limit);
+}
+
+export function getSpotsByPrefecture(prefecture: string, excludeSlug: string, limit = 6): FishingSpot[] {
+  return fishingSpots
+    .filter((s) => s.region.prefecture === prefecture && s.slug !== excludeSlug)
+    .sort((a, b) => b.rating - a.rating)
     .slice(0, limit);
 }
