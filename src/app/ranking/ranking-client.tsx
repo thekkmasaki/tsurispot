@@ -4,7 +4,27 @@ import { useState, useMemo, useCallback } from "react";
 import Link from "next/link";
 import { Star, MapPin, Trophy, Fish, ChevronDown, Info, Navigation, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import type { FishingSpot } from "@/types";
+
+/** サーバーから渡される軽量スポットデータ */
+export interface RankingSpot {
+  id: string;
+  slug: string;
+  name: string;
+  rating: number;
+  reviewCount: number;
+  prefecture: string;
+  spotType: string;
+  difficulty: string;
+  latitude: number;
+  longitude: number;
+  hasParking: boolean;
+  hasToilet: boolean;
+  hasRentalRod: boolean;
+  isFree: boolean;
+  fishCount: number;
+  topFish: { id: string; name: string }[];
+  bestTimes: { label: string; rating: string }[];
+}
 
 type TabKey = "all" | "beginner" | "family" | "night" | "port";
 
@@ -17,8 +37,6 @@ const PREFECTURE_GROUPS = [
   { label: "中国・四国", prefectures: ["鳥取県", "島根県", "岡山県", "広島県", "山口県", "徳島県", "香川県", "愛媛県", "高知県"] },
   { label: "九州・沖縄", prefectures: ["福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"] },
 ];
-
-const ALL_PREFECTURES = PREFECTURE_GROUPS.flatMap((g) => g.prefectures);
 
 const TABS: { key: TabKey; label: string }[] = [
   { key: "all", label: "総合" },
@@ -49,25 +67,23 @@ const DIFFICULTY_COLORS: Record<string, string> = {
   advanced: "bg-red-100 text-red-700",
 };
 
-function hasNightFishing(spot: FishingSpot): boolean {
+function hasNightFishing(spot: RankingSpot): boolean {
   return spot.bestTimes.some(
     (t) => t.label === "夜" && (t.rating === "best" || t.rating === "good")
   );
 }
 
-function filterByPrefecture(spots: FishingSpot[], prefecture: string): FishingSpot[] {
+function filterByPrefecture(spots: RankingSpot[], prefecture: string): RankingSpot[] {
   if (prefecture === "全国") return spots;
-  // 完全一致で比較（「京都府」選択時に「東京都」がヒットするバグの修正）
   return spots.filter((s) => {
-    const spotPref = s.region.prefecture;
-    // そのまま一致するか、末尾の都道府県を除去した状態で比較
+    const spotPref = s.prefecture;
     return spotPref === prefecture
       || spotPref === prefecture.replace(/[都道府県]$/, "")
       || spotPref.replace(/[都道府県]$/, "") === prefecture.replace(/[都道府県]$/, "");
   });
 }
 
-function filterSpots(spots: FishingSpot[], tab: TabKey): FishingSpot[] {
+function filterSpots(spots: RankingSpot[], tab: TabKey): RankingSpot[] {
   switch (tab) {
     case "all":
       return spots;
@@ -85,33 +101,28 @@ function filterSpots(spots: FishingSpot[], tab: TabKey): FishingSpot[] {
 }
 
 /** ランキングスコア算出（100点満点） */
-function calcRankScore(spot: FishingSpot): number {
-  // 1. ベイズ平均レーティング（レビュー数が少ないと全体平均に引き寄せる）
-  const C = 10; // 信頼の閾値（レビュー数がC以上で本来のratingに近づく）
-  const M = 3.8; // 全体平均（仮定値）
+function calcRankScore(spot: RankingSpot): number {
+  const C = 10;
+  const M = 3.8;
   const bayesian = (spot.reviewCount * spot.rating + C * M) / (spot.reviewCount + C);
-  const ratingScore = (bayesian / 5) * 50; // 最大50点
+  const ratingScore = (bayesian / 5) * 50;
 
-  // 2. 魚種の豊富さ（最大15点）
-  const fishScore = Math.min(spot.catchableFish.length / 8, 1) * 15;
+  const fishScore = Math.min(spot.fishCount / 8, 1) * 15;
 
-  // 3. 設備の充実度（最大15点）
   let facilityScore = 0;
   if (spot.hasParking) facilityScore += 4;
   if (spot.hasToilet) facilityScore += 4;
   if (spot.hasRentalRod) facilityScore += 4;
   if (spot.isFree) facilityScore += 3;
 
-  // 4. 人気度（レビュー数、最大10点）
   const popularityScore = Math.min(spot.reviewCount / 200, 1) * 10;
 
-  // 5. 初心者歓迎度（最大10点）
   const accessScore = spot.difficulty === "beginner" ? 10 : spot.difficulty === "intermediate" ? 5 : 2;
 
   return ratingScore + fishScore + facilityScore + popularityScore + accessScore;
 }
 
-function sortSpots(spots: FishingSpot[]): FishingSpot[] {
+function sortSpots(spots: RankingSpot[]): RankingSpot[] {
   return [...spots]
     .map((s) => ({ spot: s, score: calcRankScore(s) }))
     .sort((a, b) => b.score - a.score)
@@ -179,13 +190,12 @@ function calcDistance(lat1: number, lon1: number, lat2: number, lon2: number): n
 }
 
 interface SpotCardProps {
-  spot: FishingSpot;
+  spot: RankingSpot;
   rank: number;
   distanceKm?: number;
 }
 
 function SpotCard({ spot, rank, distanceKm }: SpotCardProps) {
-  const topFish = spot.catchableFish.slice(0, 3);
   const isTop3 = rank <= 3;
   const score = calcRankScore(spot);
 
@@ -212,7 +222,7 @@ function SpotCard({ spot, rank, distanceKm }: SpotCardProps) {
         <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
           <span className="flex items-center gap-1">
             <MapPin className="h-3.5 w-3.5" />
-            {spot.region.prefecture}
+            {spot.prefecture}
           </span>
           <span>{SPOT_TYPE_LABELS[spot.spotType] ?? spot.spotType}</span>
           <span className="flex items-center gap-1 font-semibold text-blue-600">
@@ -227,15 +237,15 @@ function SpotCard({ spot, rank, distanceKm }: SpotCardProps) {
         </div>
 
         {/* 対象魚 */}
-        {topFish.length > 0 && (
+        {spot.topFish.length > 0 && (
           <div className="mt-2 flex flex-wrap items-center gap-1.5">
             <Fish className="h-3.5 w-3.5 shrink-0 text-blue-400" />
-            {topFish.map((cf) => (
+            {spot.topFish.map((f) => (
               <span
-                key={cf.fish.id}
+                key={f.id}
                 className="rounded-full bg-blue-50 px-2 py-0.5 text-xs text-blue-700"
               >
-                {cf.fish.name}
+                {f.name}
               </span>
             ))}
           </div>
@@ -258,7 +268,7 @@ function SpotCard({ spot, rank, distanceKm }: SpotCardProps) {
 }
 
 interface RankingClientProps {
-  spots: FishingSpot[];
+  spots: RankingSpot[];
 }
 
 export function RankingClient({ spots }: RankingClientProps) {
@@ -286,13 +296,11 @@ export function RankingClient({ spots }: RankingClientProps) {
 
   const rankedSpots = useMemo(() => {
     if (nearbyMode && userLocation) {
-      // 現在地から100km以内をスコア×距離補正でランキング
       const filtered = filterSpots(spots, activeTab);
       return filtered
         .map((s) => {
           const dist = calcDistance(userLocation[0], userLocation[1], s.latitude, s.longitude);
           const score = calcRankScore(s);
-          // 距離が近いほどボーナス（30km以内は+20pt、100km以内は距離に応じて減衰）
           const distBonus = dist <= 30 ? 20 : dist <= 100 ? 20 * (1 - (dist - 30) / 70) : 0;
           return { spot: s, score: score + distBonus, dist };
         })
@@ -440,7 +448,7 @@ export function RankingClient({ spots }: RankingClientProps) {
               key={spot.id}
               spot={spot}
               rank={index + 1}
-              distanceKm={nearbyMode && "_dist" in spot ? (spot as FishingSpot & { _dist: number })._dist : undefined}
+              distanceKm={nearbyMode && "_dist" in spot ? (spot as RankingSpot & { _dist: number })._dist : undefined}
             />
           ))}
         </div>
