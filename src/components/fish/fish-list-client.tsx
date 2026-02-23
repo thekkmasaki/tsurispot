@@ -151,7 +151,7 @@ export function FishListClient({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="魚名で検索（例: アジ、カサゴ）"
-            className="w-full rounded-xl border border-input bg-background py-2.5 pl-10 pr-4 text-sm outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20"
+            className="h-12 w-full rounded-xl border border-input bg-background pl-10 pr-4 text-base outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 sm:h-10 sm:text-sm"
           />
         </div>
 
@@ -161,7 +161,7 @@ export function FishListClient({
           <div className="flex flex-wrap gap-2">
             <button
               onClick={() => setActiveCategory(null)}
-              className="focus:outline-none"
+              className="min-h-[40px] focus:outline-none"
             >
               <Badge
                 variant={activeCategory === null ? "default" : "outline"}
@@ -183,7 +183,7 @@ export function FishListClient({
                   onClick={() =>
                     setActiveCategory(activeCategory === key ? null : key)
                   }
-                  className="focus:outline-none"
+                  className="min-h-[40px] focus:outline-none"
                 >
                   <Badge
                     variant={activeCategory === key ? "default" : "outline"}
@@ -219,7 +219,7 @@ export function FishListClient({
                       activeDifficulty === key ? null : key,
                     )
                   }
-                  className="focus:outline-none"
+                  className="min-h-[40px] focus:outline-none"
                 >
                   <Badge
                     variant={activeDifficulty === key ? "default" : "outline"}
@@ -238,7 +238,7 @@ export function FishListClient({
             {/* 今月釣れるトグル */}
             <button
               onClick={() => setShowInSeason(!showInSeason)}
-              className="focus:outline-none"
+              className="min-h-[40px] focus:outline-none"
             >
               <Badge
                 variant={showInSeason ? "default" : "outline"}

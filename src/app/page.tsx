@@ -239,27 +239,27 @@ export default function Home() {
             {/* フィルタータグ */}
             <div className="flex flex-wrap items-center justify-center gap-2">
               <Link href="/spots?type=breakwater">
-                <Badge variant="outline" className="cursor-pointer border-white/40 bg-white/10 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/20 min-h-[36px]">
+                <Badge variant="outline" className="cursor-pointer border-white/40 bg-white/10 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/20 min-h-[40px]">
                   堤防
                 </Badge>
               </Link>
               <Link href="/spots?type=port">
-                <Badge variant="outline" className="cursor-pointer border-white/40 bg-white/10 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/20 min-h-[36px]">
+                <Badge variant="outline" className="cursor-pointer border-white/40 bg-white/10 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/20 min-h-[40px]">
                   漁港
                 </Badge>
               </Link>
               <Link href="/spots?type=rocky">
-                <Badge variant="outline" className="cursor-pointer border-white/40 bg-white/10 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/20 min-h-[36px]">
+                <Badge variant="outline" className="cursor-pointer border-white/40 bg-white/10 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/20 min-h-[40px]">
                   磯
                 </Badge>
               </Link>
               <Link href="/spots?type=river">
-                <Badge variant="outline" className="cursor-pointer border-emerald-300/50 bg-emerald-500/15 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-emerald-500/25 min-h-[36px]">
+                <Badge variant="outline" className="cursor-pointer border-emerald-300/50 bg-emerald-500/15 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-emerald-500/25 min-h-[40px]">
                   川・湖
                 </Badge>
               </Link>
               <Link href="/spots">
-                <Badge variant="outline" className="cursor-pointer border-white/40 bg-white/10 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/20 min-h-[36px]">
+                <Badge variant="outline" className="cursor-pointer border-white/40 bg-white/10 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/20 min-h-[40px]">
                   すべて
                 </Badge>
               </Link>
@@ -492,7 +492,7 @@ export default function Home() {
         {/* モバイル用「すべて見る」リンク */}
         <div className="mt-6 flex justify-center sm:hidden">
           <Link href="/spots">
-            <Button variant="outline" className="gap-1">
+            <Button variant="outline" className="min-h-[44px] gap-1">
               すべてのスポットを見る
               <ArrowRight className="size-4" />
             </Button>
@@ -589,7 +589,7 @@ export default function Home() {
           {/* モバイル用「もっと見る」リンク */}
           <div className="mt-6 flex justify-center sm:hidden">
             <Link href="/fish">
-              <Button variant="outline" className="gap-1">
+              <Button variant="outline" className="min-h-[44px] gap-1">
                 すべての魚を見る
                 <ArrowRight className="size-4" />
               </Button>
@@ -655,7 +655,7 @@ export default function Home() {
           {/* モバイル用「すべて見る」リンク */}
           <div className="mt-6 flex justify-center sm:hidden">
             <Link href="/area-guide">
-              <Button variant="outline" className="gap-1">
+              <Button variant="outline" className="min-h-[44px] gap-1">
                 すべてのエリアを見る
                 <ArrowRight className="size-4" />
               </Button>
@@ -720,7 +720,7 @@ export default function Home() {
         </div>
         <div className="mt-6 flex justify-center sm:hidden">
           <Link href="/seasonal">
-            <Button variant="outline" className="gap-1">
+            <Button variant="outline" className="min-h-[44px] gap-1">
               すべての特集を見る
               <ArrowRight className="size-4" />
             </Button>
@@ -793,7 +793,7 @@ export default function Home() {
             {/* モバイル用「すべて見る」リンク */}
             <div className="mt-6 flex justify-center sm:hidden">
               <Link href="/blog">
-                <Button variant="outline" className="gap-1">
+                <Button variant="outline" className="min-h-[44px] gap-1">
                   すべてのコラムを見る
                   <ArrowRight className="size-4" />
                 </Button>

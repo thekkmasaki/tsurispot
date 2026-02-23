@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a3040;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#081e28;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8090a0;stop-opacity:1" />
+      <stop offset="30%" style="stop-color:#b0bcc8;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#d0d8e0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e8eaee;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="sheen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.1" />
+      <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0.25" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0.05" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- Shallow sea ambiance -->
+  <ellipse cx="200" cy="80" rx="200" ry="45" fill="#0e3848" opacity="0.3"/>
+  <ellipse cx="600" cy="100" rx="160" ry="38" fill="#0e3848" opacity="0.2"/>
+  <ellipse cx="400" cy="500" rx="300" ry="40" fill="#0a2830" opacity="0.3"/>
+  <!-- Light rays from surface -->
+  <path d="M300,0 L280,200" stroke="#1a4858" stroke-width="15" fill="none" opacity="0.15"/>
+  <path d="M500,0 L520,180" stroke="#1a4858" stroke-width="12" fill="none" opacity="0.12"/>
+  <!-- Hiiragi (Ponyfish) - very flat, rhombus/diamond-shaped, highly reflective silver -->
+  <!-- Main body - extremely deep-bodied, laterally compressed, diamond/rhombus shape -->
+  <path d="M180,300 Q200,240 260,195 Q330,162 400,155 Q470,162 540,195 Q600,240 620,300 Q600,360 540,405 Q470,438 400,445 Q330,438 260,405 Q200,360 180,300 Z" fill="url(#body)"/>
+  <!-- Silvery sheen overlay -->
+  <path d="M200,290 Q280,248 400,240 Q520,248 600,290 Q610,300 600,310 Q520,290 400,285 Q280,290 200,310 Z" fill="url(#sheen)"/>
+  <!-- Iridescent reflections -->
+  <ellipse cx="350" cy="275" rx="80" ry="25" fill="#ffffff" opacity="0.08"/>
+  <ellipse cx="450" cy="290" rx="60" ry="20" fill="#ffffff" opacity="0.06"/>
+  <!-- Faint scale pattern -->
+  <circle cx="300" cy="270" r="5" fill="#c0c8d0" opacity="0.12" stroke="#b0b8c0" stroke-width="0.5"/>
+  <circle cx="340" cy="258" r="5" fill="#c0c8d0" opacity="0.12" stroke="#b0b8c0" stroke-width="0.5"/>
+  <circle cx="380" cy="252" r="5" fill="#c0c8d0" opacity="0.12" stroke="#b0b8c0" stroke-width="0.5"/>
+  <circle cx="420" cy="252" r="5" fill="#c0c8d0" opacity="0.12" stroke="#b0b8c0" stroke-width="0.5"/>
+  <circle cx="460" cy="258" r="5" fill="#c0c8d0" opacity="0.12" stroke="#b0b8c0" stroke-width="0.5"/>
+  <circle cx="500" cy="270" r="5" fill="#c0c8d0" opacity="0.12" stroke="#b0b8c0" stroke-width="0.5"/>
+  <!-- Second row -->
+  <circle cx="320" cy="295" r="4.5" fill="#c0c8d0" opacity="0.1" stroke="#b0b8c0" stroke-width="0.4"/>
+  <circle cx="360" cy="288" r="4.5" fill="#c0c8d0" opacity="0.1" stroke="#b0b8c0" stroke-width="0.4"/>
+  <circle cx="400" cy="285" r="4.5" fill="#c0c8d0" opacity="0.1" stroke="#b0b8c0" stroke-width="0.4"/>
+  <circle cx="440" cy="288" r="4.5" fill="#c0c8d0" opacity="0.1" stroke="#b0b8c0" stroke-width="0.4"/>
+  <circle cx="480" cy="295" r="4.5" fill="#c0c8d0" opacity="0.1" stroke="#b0b8c0" stroke-width="0.4"/>
+  <!-- Third row -->
+  <circle cx="310" cy="320" r="4" fill="#c0c8d0" opacity="0.08" stroke="#b0b8c0" stroke-width="0.4"/>
+  <circle cx="360" cy="315" r="4" fill="#c0c8d0" opacity="0.08" stroke="#b0b8c0" stroke-width="0.4"/>
+  <circle cx="410" cy="312" r="4" fill="#c0c8d0" opacity="0.08" stroke="#b0b8c0" stroke-width="0.4"/>
+  <circle cx="460" cy="315" r="4" fill="#c0c8d0" opacity="0.08" stroke="#b0b8c0" stroke-width="0.4"/>
+  <circle cx="500" cy="320" r="4" fill="#c0c8d0" opacity="0.08" stroke="#b0b8c0" stroke-width="0.4"/>
+  <!-- Dorsal fin - tall, triangular, spiny -->
+  <path d="M320,198 L335,130 Q345,120 355,128 L375,145 Q385,138 395,142 L420,162 Q428,158 436,165 L460,190" fill="#7a8a98" stroke="#6a7a88" stroke-width="1" opacity="0.75"/>
+  <!-- Dorsal fin rays -->
+  <line x1="337" y1="133" x2="342" y2="196" stroke="#6a7a88" stroke-width="0.8" opacity="0.4"/>
+  <line x1="358" y1="130" x2="365" y2="192" stroke="#6a7a88" stroke-width="0.8" opacity="0.4"/>
+  <line x1="378" y1="142" x2="385" y2="188" stroke="#6a7a88" stroke-width="0.8" opacity="0.4"/>
+  <line x1="398" y1="145" x2="405" y2="186" stroke="#6a7a88" stroke-width="0.8" opacity="0.4"/>
+  <line x1="420" y1="160" x2="428" y2="185" stroke="#6a7a88" stroke-width="0.8" opacity="0.4"/>
+  <line x1="438" y1="165" x2="445" y2="188" stroke="#6a7a88" stroke-width="0.8" opacity="0.4"/>
+  <!-- Pectoral fin -->
+  <path d="M250,325 L220,370 Q235,382 248,370 L268,338" fill="#8a9aa8" opacity="0.55"/>
+  <!-- Ventral fin -->
+  <path d="M330,420 L318,455 Q330,462 342,452 L348,425" fill="#8a9aa8" opacity="0.55"/>
+  <!-- Anal fin - prominent, matching dorsal -->
+  <path d="M360,435 L370,468 Q382,475 394,468 L410,455 Q418,460 428,455 L450,430" fill="#7a8a98" stroke="#6a7a88" stroke-width="1" opacity="0.7"/>
+  <line x1="372" y1="465" x2="378" y2="438" stroke="#6a7a88" stroke-width="0.7" opacity="0.35"/>
+  <line x1="395" y1="468" x2="402" y2="435" stroke="#6a7a88" stroke-width="0.7" opacity="0.35"/>
+  <line x1="420" y1="458" x2="428" y2="432" stroke="#6a7a88" stroke-width="0.7" opacity="0.35"/>
+  <!-- Tail fin - forked -->
+  <path d="M612,300 L655,262 Q662,278 658,298 L656,310 L662,328 Q658,348 652,360 L612,322" fill="#7a8a98" stroke="#6a7a88" stroke-width="1" opacity="0.8"/>
+  <line x1="655" y1="266" x2="622" y2="300" stroke="#6a7a88" stroke-width="0.8" opacity="0.3"/>
+  <line x1="652" y1="356" x2="620" y2="322" stroke="#6a7a88" stroke-width="0.8" opacity="0.3"/>
+  <!-- Protrusible mouth (characteristic - can extend downward) -->
+  <!-- Mouth tube hint -->
+  <path d="M182,300 Q192,308 210,305" stroke="#4a5a68" stroke-width="2.5" fill="none"/>
+  <path d="M185,305 L178,315 Q182,320 190,315" stroke="#4a5a68" stroke-width="1.5" fill="none" opacity="0.5"/>
+  <!-- Eye - relatively large for body size -->
+  <circle cx="225" cy="272" r="15" fill="#1a1a1a"/>
+  <circle cx="225" cy="272" r="9" fill="#2a3038"/>
+  <circle cx="223" cy="270" r="4.5" fill="#4a5058"/>
+  <circle cx="221" cy="268" r="2" fill="#ffffff" opacity="0.4"/>
+  <!-- Gill cover -->
+  <path d="M255,238 Q260,268 262,300 Q260,332 255,362" stroke="#6a7a88" stroke-width="2" fill="none" opacity="0.3"/>
+  <!-- Lateral line -->
+  <path d="M265,295 Q350,278 430,275 Q510,280 590,300" stroke="#8a9aa8" stroke-width="1.5" fill="none" opacity="0.2"/>
+  <!-- Bioluminescent hint (ponyfish can produce light) -->
+  <ellipse cx="380" cy="330" rx="50" ry="18" fill="#a0c8d8" opacity="0.06"/>
+  <ellipse cx="420" cy="340" rx="35" ry="12" fill="#a0c8d8" opacity="0.04"/>
+  <!-- Label -->
+  <text x="400" y="510" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="42" fill="#ffffff" font-weight="bold" opacity="0.9">ヒイラギ</text>
+  <text x="400" y="548" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="20" fill="#88ccbb" opacity="0.7">Ponyfish</text>
+</svg>

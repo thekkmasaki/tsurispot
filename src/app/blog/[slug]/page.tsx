@@ -87,14 +87,14 @@ export default async function BlogPostPage({
 
   const articleJsonLd = {
     "@context": "https://schema.org",
-    "@type": "Article",
+    "@type": "BlogPosting",
     headline: post.title,
     description: post.description,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt || post.publishedAt,
     author: {
       "@type": "Organization",
-      name: "ツリスポ編集部",
+      name: "ツリスポ",
       url: "https://tsurispot.com",
     },
     publisher: {
@@ -103,7 +103,7 @@ export default async function BlogPostPage({
       url: "https://tsurispot.com",
       logo: {
         "@type": "ImageObject",
-        url: "https://tsurispot.com/icon-192.png",
+        url: "https://tsurispot.com/logo.svg",
       },
     },
     mainEntityOfPage: {

@@ -28,6 +28,7 @@ import { SeasonCalendar } from "@/components/spots/season-calendar";
 import { BestTime } from "@/components/spots/best-time";
 import { TackleCard } from "@/components/spots/tackle-card";
 import { TideMazumeInfo } from "@/components/spots/tide-mazume-info";
+import { FavoriteButton } from "@/components/spots/favorite-button";
 import { GearGuideList } from "@/components/spots/gear-guide";
 import { SafetyWarning } from "@/components/spots/safety-warning";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
@@ -371,19 +372,22 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
       {/* Header section */}
       <div className="mb-5 sm:mb-6">
-        <div className="flex flex-wrap items-center gap-2">
-          <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">{spot.name}</h1>
-          {spot.difficulty === "beginner" && (
-            <Badge className="bg-green-600 hover:bg-green-600">
-              初心者OK
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex flex-wrap items-center gap-2">
+            <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">{spot.name}</h1>
+            {spot.difficulty === "beginner" && (
+              <Badge className="bg-green-600 hover:bg-green-600">
+                初心者OK
+              </Badge>
+            )}
+            {spot.isFree && (
+              <Badge className="bg-orange-500 hover:bg-orange-500">無料</Badge>
+            )}
+            <Badge variant="outline">
+              {SPOT_TYPE_LABELS[spot.spotType]}
             </Badge>
-          )}
-          {spot.isFree && (
-            <Badge className="bg-orange-500 hover:bg-orange-500">無料</Badge>
-          )}
-          <Badge variant="outline">
-            {SPOT_TYPE_LABELS[spot.spotType]}
-          </Badge>
+          </div>
+          <FavoriteButton spotSlug={spot.slug} />
         </div>
         <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
           <div className="flex items-center gap-1">

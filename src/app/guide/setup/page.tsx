@@ -404,6 +404,231 @@ function DragAdjustmentDiagram() {
   );
 }
 
+function DragAnimationSvg() {
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 400 300"
+        width="100%"
+        style={{ maxWidth: 400 }}
+        aria-label="ドラグ調整アニメーション：締めすぎ、適正、緩すぎの3段階をループ表示"
+        role="img"
+      >
+        <style>{`
+          @keyframes dragPhase {
+            0%, 33.32% { opacity: 1; }
+            33.33%, 100% { opacity: 0; }
+          }
+          @keyframes dragPhase2 {
+            0%, 33.32% { opacity: 0; }
+            33.33%, 66.65% { opacity: 1; }
+            66.66%, 100% { opacity: 0; }
+          }
+          @keyframes dragPhase3 {
+            0%, 66.65% { opacity: 0; }
+            66.66%, 99.99% { opacity: 1; }
+            100% { opacity: 0; }
+          }
+          @keyframes lineSnap {
+            0%, 60% { stroke-dashoffset: 0; opacity: 1; }
+            70% { stroke-dashoffset: 0; opacity: 1; }
+            75% { opacity: 0.3; }
+            80% { opacity: 1; }
+            85% { opacity: 0.2; }
+            90%, 100% { opacity: 0.5; stroke-dashoffset: 10; }
+          }
+          @keyframes lineTension {
+            0%, 100% { d: path("M120,120 Q200,118 300,120"); }
+            50% { d: path("M120,120 Q200,115 300,120"); }
+          }
+          @keyframes lineProper {
+            0% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: -20; }
+          }
+          @keyframes lineLoose {
+            0% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: -60; }
+          }
+          @keyframes fishPullRight {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(15px); }
+          }
+          @keyframes fishTiredPull {
+            0% { transform: translateX(0); }
+            30% { transform: translateX(10px); }
+            60% { transform: translateX(5px); }
+            100% { transform: translateX(-5px); }
+          }
+          @keyframes fishRunAway {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(50px); }
+          }
+          @keyframes snapBurst {
+            0%, 65% { opacity: 0; transform: scale(0); }
+            70% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0; transform: scale(2); }
+          }
+          @keyframes jijiBlink {
+            0%, 40%, 60%, 80%, 100% { opacity: 1; }
+            50%, 70%, 90% { opacity: 0.3; }
+          }
+          @keyframes labelPhase1 {
+            0%, 33.32% { opacity: 1; }
+            33.33%, 100% { opacity: 0; }
+          }
+          @keyframes labelPhase2 {
+            0%, 33.32% { opacity: 0; }
+            33.33%, 66.65% { opacity: 1; }
+            66.66%, 100% { opacity: 0; }
+          }
+          @keyframes labelPhase3 {
+            0%, 66.65% { opacity: 0; }
+            66.66%, 99.99% { opacity: 1; }
+            100% { opacity: 0; }
+          }
+          .drag-phase1 { animation: dragPhase 9s linear infinite; }
+          .drag-phase2 { animation: dragPhase2 9s linear infinite; }
+          .drag-phase3 { animation: dragPhase3 9s linear infinite; }
+          .line-snap { animation: lineSnap 3s ease-in-out infinite; }
+          .line-proper { animation: lineProper 1.5s linear infinite; }
+          .line-loose { animation: lineLoose 1s linear infinite; }
+          .fish-pull { animation: fishPullRight 3s ease-in-out infinite; }
+          .fish-tired { animation: fishTiredPull 3s ease-in-out infinite; }
+          .fish-run { animation: fishRunAway 3s linear infinite; }
+          .snap-burst { animation: snapBurst 3s ease-out infinite; transform-origin: 210px 120px; }
+          .jiji-text { animation: jijiBlink 1.5s ease-in-out infinite; }
+          .label-p1 { animation: labelPhase1 9s linear infinite; }
+          .label-p2 { animation: labelPhase2 9s linear infinite; }
+          .label-p3 { animation: labelPhase3 9s linear infinite; }
+        `}</style>
+
+        <rect x="0" y="0" width="400" height="300" rx="12" fill="#F9FAFB" />
+
+        {/* タイトル */}
+        <text x="200" y="24" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#1E293B">動きで見るドラグの効果</text>
+
+        {/* 共通要素: 竿 */}
+        <line x1="30" y1="140" x2="120" y2="100" stroke="#92400E" strokeWidth="4" strokeLinecap="round" />
+        {/* 竿先 */}
+        <circle cx="120" cy="100" r="3" fill="#EF4444" />
+        {/* リール */}
+        <ellipse cx="60" cy="135" rx="14" ry="10" fill="#E5E7EB" stroke="#6B7280" strokeWidth="1.5" />
+        <circle cx="60" cy="135" r="4" fill="#9CA3AF" />
+
+        {/* 魚が引く力の矢印（共通） */}
+        <defs>
+          <marker id="dragArrowR" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0,0 8,3 0,6" fill="#6B7280" />
+          </marker>
+        </defs>
+        <line x1="320" y1="140" x2="370" y2="140" stroke="#6B7280" strokeWidth="1.5" markerEnd="url(#dragArrowR)" />
+        <text x="345" y="155" textAnchor="middle" fontSize="8" fill="#6B7280">魚の引く力</text>
+
+        {/* === フェーズ1: 締めすぎ（赤） === */}
+        <g className="drag-phase1">
+          {/* ピンと張った糸 */}
+          <line x1="120" y1="100" x2="210" y2="120" stroke="#EF4444" strokeWidth="2" className="line-snap" />
+          {/* 切れた糸の表現 */}
+          <g className="snap-burst">
+            <line x1="205" y1="115" x2="215" y2="110" stroke="#EF4444" strokeWidth="2" />
+            <line x1="205" y1="125" x2="215" y2="130" stroke="#EF4444" strokeWidth="2" />
+            <line x1="210" y1="113" x2="210" y2="127" stroke="#EF4444" strokeWidth="1.5" />
+          </g>
+          {/* 切れた先の糸 */}
+          <line x1="215" y1="120" x2="300" y2="130" stroke="#EF4444" strokeWidth="1.5" opacity="0.5" strokeDasharray="4 3" />
+          {/* 魚（引っ張っている） */}
+          <g className="fish-pull">
+            <ellipse cx="315" cy="130" rx="18" ry="10" fill="#22C55E" opacity="0.8" />
+            <polygon points="333,130 345,122 345,138" fill="#22C55E" opacity="0.8" />
+            <circle cx="303" cy="127" r="2" fill="white" />
+            <circle cx="303" cy="127" r="1" fill="#1E293B" />
+          </g>
+          {/* プツンテキスト */}
+          <text x="210" y="105" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#EF4444">プツン!</text>
+        </g>
+
+        {/* === フェーズ2: 適正（緑） === */}
+        <g className="drag-phase2">
+          {/* しなやかに出る糸 */}
+          <path d="M120,100 Q170,108 220,115 Q260,120 300,125" stroke="#22C55E" strokeWidth="2" fill="none" strokeDasharray="6 3" className="line-proper" />
+          {/* 魚（疲れていく） */}
+          <g className="fish-tired">
+            <ellipse cx="315" cy="125" rx="18" ry="10" fill="#22C55E" opacity="0.8" />
+            <polygon points="333,125 345,117 345,133" fill="#22C55E" opacity="0.8" />
+            <circle cx="303" cy="122" r="2" fill="white" />
+            <circle cx="303" cy="122" r="1" fill="#1E293B" />
+          </g>
+          {/* ジジジテキスト */}
+          <text x="200" y="95" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#22C55E" className="jiji-text">ジジジ...</text>
+          {/* 糸が少し出ている波線 */}
+          <path d="M220,115 Q225,110 230,115 Q235,120 240,115" stroke="#22C55E" strokeWidth="1.5" fill="none" opacity="0.6" />
+        </g>
+
+        {/* === フェーズ3: 緩すぎ（黄） === */}
+        <g className="drag-phase3">
+          {/* どんどん出る糸（波打ち） */}
+          <path d="M120,100 Q150,130 180,110 Q210,90 240,120 Q270,150 300,125 Q330,100 360,130" stroke="#F59E0B" strokeWidth="2" fill="none" strokeDasharray="6 3" className="line-loose" />
+          {/* 魚（逃げていく） */}
+          <g className="fish-run">
+            <ellipse cx="315" cy="125" rx="18" ry="10" fill="#22C55E" opacity="0.8" />
+            <polygon points="333,125 345,117 345,133" fill="#22C55E" opacity="0.8" />
+            <circle cx="303" cy="122" r="2" fill="white" />
+            <circle cx="303" cy="122" r="1" fill="#1E293B" />
+          </g>
+          {/* 糸が出続ける矢印 */}
+          <text x="250" y="90" textAnchor="middle" fontSize="11" fill="#F59E0B" fontWeight="bold">糸が止まらない...</text>
+        </g>
+
+        {/* フェーズ表示ラベル */}
+        <g className="label-p1">
+          <rect x="100" y="170" width="200" height="32" rx="8" fill="#EF4444" />
+          <text x="200" y="191" textAnchor="middle" fontSize="14" fontWeight="bold" fill="white">{"締めすぎ \u274C"}</text>
+        </g>
+        <g className="label-p2">
+          <rect x="100" y="170" width="200" height="32" rx="8" fill="#22C55E" />
+          <text x="200" y="191" textAnchor="middle" fontSize="14" fontWeight="bold" fill="white">{"適正 \u2705"}</text>
+        </g>
+        <g className="label-p3">
+          <rect x="100" y="170" width="200" height="32" rx="8" fill="#F59E0B" />
+          <text x="200" y="191" textAnchor="middle" fontSize="14" fontWeight="bold" fill="white">{"緩すぎ \u26A0\uFE0F"}</text>
+        </g>
+
+        {/* 進行インジケーター */}
+        <g className="label-p1">
+          <circle cx="170" cy="220" r="5" fill="#EF4444" />
+          <circle cx="200" cy="220" r="5" fill="#D1D5DB" />
+          <circle cx="230" cy="220" r="5" fill="#D1D5DB" />
+        </g>
+        <g className="label-p2">
+          <circle cx="170" cy="220" r="5" fill="#D1D5DB" />
+          <circle cx="200" cy="220" r="5" fill="#22C55E" />
+          <circle cx="230" cy="220" r="5" fill="#D1D5DB" />
+        </g>
+        <g className="label-p3">
+          <circle cx="170" cy="220" r="5" fill="#D1D5DB" />
+          <circle cx="200" cy="220" r="5" fill="#D1D5DB" />
+          <circle cx="230" cy="220" r="5" fill="#F59E0B" />
+        </g>
+
+        {/* 説明テキスト */}
+        <rect x="30" y="238" width="340" height="50" rx="8" fill="white" stroke="#E5E7EB" strokeWidth="1" />
+        <g className="label-p1">
+          <text x="200" y="258" textAnchor="middle" fontSize="10" fill="#EF4444">ドラグが強すぎると糸の限界を超えて切れてしまう</text>
+          <text x="200" y="275" textAnchor="middle" fontSize="9" fill="#6B7280">大物がかかった時にラインブレイクの原因に</text>
+        </g>
+        <g className="label-p2">
+          <text x="200" y="258" textAnchor="middle" fontSize="10" fill="#22C55E">適正なドラグなら糸を出しながら魚を疲れさせる</text>
+          <text x="200" y="275" textAnchor="middle" fontSize="9" fill="#6B7280">糸を切られず、じっくりファイトできる</text>
+        </g>
+        <g className="label-p3">
+          <text x="200" y="258" textAnchor="middle" fontSize="10" fill="#F59E0B">ドラグが弱すぎると糸が出続けて巻き取れない</text>
+          <text x="200" y="275" textAnchor="middle" fontSize="9" fill="#6B7280">魚に主導権を握られて逃げられてしまう</text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
 export default function SetupGuidePage() {
   return (
     <>
@@ -557,6 +782,15 @@ export default function SetupGuidePage() {
           </SectionCard>
 
           <DragAdjustmentDiagram />
+
+          {/* ドラグアニメーション */}
+          <div className="my-4">
+            <h3 className="mb-2 text-lg font-bold">動きで見るドラグの効果</h3>
+            <p className="mb-2 text-sm text-muted-foreground">
+              ドラグの締め具合による違いをアニメーションで確認しましょう。3つの状態が順番にループします。
+            </p>
+            <DragAnimationSvg />
+          </div>
 
           {/* 糸の通し方 */}
           <SectionCard title="糸の通し方（ラインの通し方）">

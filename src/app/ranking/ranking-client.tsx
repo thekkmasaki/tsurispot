@@ -328,7 +328,7 @@ export function RankingClient({ spots }: RankingClientProps) {
           }}
           disabled={locating}
           className={cn(
-            "flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all w-full sm:w-auto",
+            "flex min-h-[44px] items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-medium transition-all w-full sm:w-auto",
             nearbyMode
               ? "bg-emerald-600 text-white shadow-md"
               : "bg-gray-100 text-gray-700 hover:bg-emerald-50 hover:text-emerald-700 border border-gray-200"
@@ -423,7 +423,7 @@ export function RankingClient({ spots }: RankingClientProps) {
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
             className={cn(
-              "rounded-full px-4 py-1.5 text-sm font-medium transition-colors",
+              "min-h-[40px] rounded-full px-4 py-1.5 text-sm font-medium transition-colors",
               activeTab === tab.key
                 ? "bg-blue-600 text-white shadow-sm"
                 : "bg-gray-100 text-gray-600 hover:bg-gray-200"

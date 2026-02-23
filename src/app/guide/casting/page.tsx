@@ -383,6 +383,231 @@ function BailFingerDiagram() {
   );
 }
 
+function CastingMotionAnimationSvg() {
+  return (
+    <div className="my-6">
+      <h4 className="mb-3 text-base font-bold text-foreground">動きで見るキャストフォーム</h4>
+      <svg
+        viewBox="0 0 500 400"
+        width="100%"
+        style={{ maxWidth: 500 }}
+        aria-label="オーバーヘッドキャストの動作アニメーション：構え、振りかぶり、振り下ろし、飛行、着水の一連の流れ"
+        role="img"
+      >
+        <defs>
+          {/* 竿の回転アニメーション */}
+          <style>{`
+            @keyframes rodSwing {
+              0%, 20% { transform: rotate(0deg); }
+              20.1%, 30% { transform: rotate(0deg); }
+              30.1%, 40% { transform: rotate(-120deg); }
+              40.1%, 50% { transform: rotate(-45deg); }
+              50.1%, 100% { transform: rotate(-45deg); }
+            }
+            @keyframes armSwing {
+              0%, 20% { transform: rotate(0deg); }
+              20.1%, 30% { transform: rotate(0deg); }
+              30.1%, 40% { transform: rotate(-90deg); }
+              40.1%, 50% { transform: rotate(-20deg); }
+              50.1%, 100% { transform: rotate(-20deg); }
+            }
+            @keyframes tackleMove {
+              0%, 50% { transform: translate(0px, 0px); opacity: 0; }
+              50.1% { transform: translate(0px, 0px); opacity: 1; }
+              60% { transform: translate(80px, -80px); opacity: 1; }
+              70% { transform: translate(160px, -60px); opacity: 1; }
+              80% { transform: translate(220px, -10px); opacity: 1; }
+              85% { transform: translate(240px, 20px); opacity: 1; }
+              86%, 100% { transform: translate(240px, 20px); opacity: 0; }
+            }
+            @keyframes splash1 {
+              0%, 84% { transform: scale(0); opacity: 0; }
+              85% { transform: scale(0.2); opacity: 0.9; }
+              90% { transform: scale(1); opacity: 0.6; }
+              95% { transform: scale(1.8); opacity: 0.2; }
+              100% { transform: scale(2.2); opacity: 0; }
+            }
+            @keyframes splash2 {
+              0%, 86% { transform: scale(0); opacity: 0; }
+              87% { transform: scale(0.2); opacity: 0.8; }
+              92% { transform: scale(1.2); opacity: 0.5; }
+              97% { transform: scale(2); opacity: 0.1; }
+              100% { transform: scale(2.2); opacity: 0; }
+            }
+            @keyframes splashDrop1 {
+              0%, 84% { transform: translate(0px, 0px); opacity: 0; }
+              85% { transform: translate(0px, 0px); opacity: 0.8; }
+              92% { transform: translate(-12px, -18px); opacity: 0.5; }
+              100% { transform: translate(-16px, -2px); opacity: 0; }
+            }
+            @keyframes splashDrop2 {
+              0%, 84% { transform: translate(0px, 0px); opacity: 0; }
+              86% { transform: translate(0px, 0px); opacity: 0.8; }
+              93% { transform: translate(10px, -20px); opacity: 0.5; }
+              100% { transform: translate(14px, -3px); opacity: 0; }
+            }
+            @keyframes splashDrop3 {
+              0%, 85% { transform: translate(0px, 0px); opacity: 0; }
+              87% { transform: translate(0px, 0px); opacity: 0.7; }
+              94% { transform: translate(0px, -22px); opacity: 0.4; }
+              100% { transform: translate(0px, -4px); opacity: 0; }
+            }
+            @keyframes phaseLabel {
+              0%, 20% { opacity: 1; }
+              20.1%, 30% { opacity: 0; }
+              30.1%, 40% { opacity: 0; }
+              40.1%, 50% { opacity: 0; }
+              50.1%, 85% { opacity: 0; }
+              85.1%, 100% { opacity: 0; }
+            }
+            @keyframes phaseLabel2 {
+              0%, 20% { opacity: 0; }
+              20.1%, 40% { opacity: 1; }
+              40.1%, 100% { opacity: 0; }
+            }
+            @keyframes phaseLabel3 {
+              0%, 40% { opacity: 0; }
+              40.1%, 50% { opacity: 1; }
+              50.1%, 100% { opacity: 0; }
+            }
+            @keyframes phaseLabel4 {
+              0%, 50% { opacity: 0; }
+              50.1%, 85% { opacity: 1; }
+              85.1%, 100% { opacity: 0; }
+            }
+            @keyframes phaseLabel5 {
+              0%, 85% { opacity: 0; }
+              85.1%, 100% { opacity: 1; }
+            }
+            @keyframes tackleLine {
+              0%, 50% { stroke-dashoffset: 0; opacity: 0; }
+              50.1% { stroke-dashoffset: 400; opacity: 0.6; }
+              85% { stroke-dashoffset: 0; opacity: 0.4; }
+              86%, 100% { opacity: 0; }
+            }
+            .rod-group {
+              transform-origin: 220px 230px;
+              animation: rodSwing 5s ease-in-out infinite;
+            }
+            .arm-group {
+              transform-origin: 220px 210px;
+              animation: armSwing 5s ease-in-out infinite;
+            }
+            .tackle {
+              animation: tackleMove 5s ease-out infinite;
+            }
+            .splash-ring1 {
+              transform-origin: center;
+              animation: splash1 5s ease-out infinite;
+            }
+            .splash-ring2 {
+              transform-origin: center;
+              animation: splash2 5s ease-out infinite;
+            }
+            .splash-drop1 {
+              animation: splashDrop1 5s ease-out infinite;
+            }
+            .splash-drop2 {
+              animation: splashDrop2 5s ease-out infinite;
+            }
+            .splash-drop3 {
+              animation: splashDrop3 5s ease-out infinite;
+            }
+            .phase1 { animation: phaseLabel 5s ease-in-out infinite; }
+            .phase2 { animation: phaseLabel2 5s ease-in-out infinite; }
+            .phase3 { animation: phaseLabel3 5s ease-in-out infinite; }
+            .phase4 { animation: phaseLabel4 5s ease-in-out infinite; }
+            .phase5 { animation: phaseLabel5 5s ease-in-out infinite; }
+            .tackle-trail {
+              animation: tackleLine 5s ease-out infinite;
+            }
+          `}</style>
+        </defs>
+
+        {/* 背景 */}
+        <rect width="500" height="400" rx="12" fill="#EFF6FF" />
+
+        {/* タイトル */}
+        <text x="250" y="28" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#1E3A5F">キャスト動作アニメーション</text>
+
+        {/* 海面 */}
+        <rect x="0" y="310" width="500" height="90" rx="0" fill="#3B82F6" opacity="0.15" />
+        <path d="M0,310 Q60,300 120,310 T240,310 T360,310 T480,310 L500,310" stroke="#3B82F6" strokeWidth="1.5" fill="none" opacity="0.4" />
+
+        {/* 地面/堤防 */}
+        <rect x="140" y="310" width="120" height="20" rx="2" fill="#9CA3AF" opacity="0.3" />
+        <line x1="140" y1="310" x2="260" y2="310" stroke="#6B7280" strokeWidth="1.5" />
+
+        {/* 釣り人の体（固定部分） */}
+        {/* 頭 */}
+        <circle cx="220" cy="195" r="14" fill="#374151" opacity="0.9" />
+        {/* 体 */}
+        <line x1="220" y1="209" x2="220" y2="270" stroke="#374151" strokeWidth="3" />
+        {/* 左足 */}
+        <line x1="220" y1="270" x2="200" y2="310" stroke="#374151" strokeWidth="2.5" />
+        {/* 右足 */}
+        <line x1="220" y1="270" x2="240" y2="310" stroke="#374151" strokeWidth="2.5" />
+
+        {/* 腕（アニメーション） */}
+        <g className="arm-group">
+          {/* 上腕 */}
+          <line x1="220" y1="220" x2="235" y2="200" stroke="#374151" strokeWidth="2.5" />
+          {/* 前腕 */}
+          <line x1="235" y1="200" x2="220" y2="185" stroke="#374151" strokeWidth="2.5" />
+        </g>
+
+        {/* 竿（アニメーション） */}
+        <g className="rod-group">
+          <line x1="220" y1="230" x2="220" y2="140" stroke="#6B7280" strokeWidth="3" strokeLinecap="round" />
+          {/* 竿先 */}
+          <line x1="220" y1="140" x2="220" y2="120" stroke="#6B7280" strokeWidth="2" strokeLinecap="round" />
+          {/* ガイド（竿のリング） */}
+          <circle cx="220" cy="160" r="2" fill="none" stroke="#9CA3AF" strokeWidth="1" />
+          <circle cx="220" cy="140" r="1.5" fill="none" stroke="#9CA3AF" strokeWidth="1" />
+        </g>
+
+        {/* 仕掛け（飛んでいくアニメーション） */}
+        <g className="tackle" style={{ transformOrigin: '220px 120px' }}>
+          <circle cx="220" cy="120" r="4" fill="#EF4444" />
+          <line x1="220" y1="124" x2="220" y2="132" stroke="#EF4444" strokeWidth="1" />
+        </g>
+
+        {/* 仕掛けの軌跡 */}
+        <path
+          d="M220,120 Q300,40 460,330"
+          stroke="#EF4444"
+          strokeWidth="1"
+          fill="none"
+          strokeDasharray="4,4"
+          className="tackle-trail"
+          opacity="0.4"
+        />
+
+        {/* 着水エフェクト */}
+        <g transform="translate(460, 330)">
+          <ellipse cx="0" cy="0" rx="8" ry="3" fill="none" stroke="#3B82F6" strokeWidth="1.5" className="splash-ring1" />
+          <ellipse cx="0" cy="0" rx="12" ry="5" fill="none" stroke="#3B82F6" strokeWidth="1" className="splash-ring2" />
+          {/* 水しぶき */}
+          <circle cx="0" cy="0" r="2" fill="#3B82F6" className="splash-drop1" />
+          <circle cx="0" cy="0" r="1.5" fill="#3B82F6" className="splash-drop2" />
+          <circle cx="0" cy="0" r="1.5" fill="#3B82F6" className="splash-drop3" />
+        </g>
+
+        {/* フェーズ表示 */}
+        <g>
+          <rect x="150" y="355" width="200" height="30" rx="8" fill="white" opacity="0.8" />
+          <text className="phase1" x="250" y="375" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#3B82F6">1. 構え</text>
+          <text className="phase2" x="250" y="375" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#F59E0B">2. 振りかぶり</text>
+          <text className="phase3" x="250" y="375" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#EF4444">3. 振り下ろし・リリース!</text>
+          <text className="phase4" x="250" y="375" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#8B5CF6">4. 飛行中...</text>
+          <text className="phase5" x="250" y="375" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#3B82F6">5. 着水!</text>
+        </g>
+      </svg>
+      <p className="mt-2 text-center text-xs text-muted-foreground">※ アニメーションが自動でループします</p>
+    </div>
+  );
+}
+
 function CastDistanceDiagram() {
   return (
     <div className="my-6">
@@ -577,6 +802,7 @@ export default function CastingGuidePage() {
               頭上から振り下ろす最も基本的な投げ方です。飛距離が出やすく、コントロールもしやすいのが特徴です。
             </p>
             <OverheadCastDiagram />
+            <CastingMotionAnimationSvg />
             <ol className="list-none space-y-4">
               <li className="flex gap-3">
                 <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">

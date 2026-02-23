@@ -299,6 +299,128 @@ function TackleDiagram() {
   );
 }
 
+function ReelAnimationSvg() {
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 400 350"
+        width="100%"
+        style={{ maxWidth: 400 }}
+        aria-label="リールの巻き取りアニメーション：ハンドルが回転し、ラインが巻き取られて魚が引き寄せられるイメージ"
+        role="img"
+      >
+        <style>{`
+          @keyframes reelHandleRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+          }
+          @keyframes lineReel {
+            0% { stroke-dashoffset: 0; }
+            100% { stroke-dashoffset: -40; }
+          }
+          @keyframes fishPull {
+            0% { transform: translateX(0); }
+            50% { transform: translateX(-100px); }
+            100% { transform: translateX(0); }
+          }
+          @keyframes fishTailWag {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(8deg); }
+            75% { transform: rotate(-8deg); }
+          }
+          .reel-handle {
+            animation: reelHandleRotate 2s linear infinite;
+            transform-origin: 100px 160px;
+          }
+          .reel-line {
+            animation: lineReel 1s linear infinite;
+          }
+          .fish-group {
+            animation: fishPull 4s ease-in-out infinite;
+          }
+          .fish-tail {
+            animation: fishTailWag 0.6s ease-in-out infinite;
+            transform-origin: 345px 155px;
+          }
+        `}</style>
+
+        <rect x="0" y="0" width="400" height="350" rx="12" fill="#F9FAFB" />
+
+        {/* タイトル */}
+        <text x="200" y="28" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#1E293B">リールの巻き取りイメージ</text>
+
+        {/* リール本体（側面図） */}
+        {/* ボディ */}
+        <rect x="60" y="120" width="80" height="80" rx="12" fill="#E5E7EB" stroke="#6B7280" strokeWidth="2" />
+        {/* スプール（中央の円） */}
+        <circle cx="100" cy="160" r="28" fill="#D1D5DB" stroke="#6B7280" strokeWidth="2" />
+        <circle cx="100" cy="160" r="18" fill="#E5E7EB" stroke="#6B7280" strokeWidth="1.5" />
+        <circle cx="100" cy="160" r="6" fill="#9CA3AF" />
+        {/* リール脚 */}
+        <rect x="85" y="200" width="30" height="10" rx="3" fill="#9CA3AF" stroke="#6B7280" strokeWidth="1" />
+        {/* 竿（簡略） */}
+        <rect x="80" y="210" width="40" height="8" rx="4" fill="#92400E" opacity="0.7" />
+
+        {/* ハンドル（回転するパーツ） */}
+        <g className="reel-handle">
+          {/* ハンドルアーム */}
+          <line x1="100" y1="160" x2="100" y2="120" stroke="#374151" strokeWidth="3" strokeLinecap="round" />
+          {/* ハンドルノブ */}
+          <circle cx="100" cy="117" r="7" fill="#374151" stroke="#1F2937" strokeWidth="1.5" />
+          <circle cx="100" cy="117" r="3" fill="#6B7280" />
+        </g>
+
+        {/* 竿先〜ガイド */}
+        <line x1="140" y1="160" x2="160" y2="100" stroke="#6B7280" strokeWidth="2" strokeLinecap="round" />
+        <circle cx="160" cy="98" r="3" fill="none" stroke="#6B7280" strokeWidth="1.5" />
+
+        {/* ライン（点線が移動） */}
+        <line x1="160" y1="98" x2="320" y2="155" stroke="#3B82F6" strokeWidth="2" strokeDasharray="8 4" className="reel-line" />
+
+        {/* 水面 */}
+        <line x1="0" y1="240" x2="400" y2="240" stroke="#93C5FD" strokeWidth="1" strokeDasharray="8 4" opacity="0.5" />
+        <text x="380" y="237" textAnchor="end" fontSize="9" fill="#93C5FD">水面</text>
+
+        {/* 魚（引き寄せられる） */}
+        <g className="fish-group">
+          {/* 魚の体 */}
+          <ellipse cx="330" cy="155" rx="22" ry="12" fill="#22C55E" opacity="0.9" />
+          {/* 尾びれ */}
+          <g className="fish-tail">
+            <polygon points="352,155 365,145 365,165" fill="#22C55E" opacity="0.9" />
+          </g>
+          {/* 目 */}
+          <circle cx="316" cy="152" r="3" fill="white" />
+          <circle cx="316" cy="152" r="1.5" fill="#1E293B" />
+          {/* 口 */}
+          <ellipse cx="308" cy="155" rx="2" ry="1.5" fill="#166534" />
+        </g>
+
+        {/* 矢印表示（引き寄せ方向） */}
+        <defs>
+          <marker id="reelArrow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0,0 8,3 0,6" fill="#3B82F6" />
+          </marker>
+        </defs>
+        <line x1="280" y1="190" x2="220" y2="190" stroke="#3B82F6" strokeWidth="1.5" markerEnd="url(#reelArrow)" />
+        <text x="250" y="206" textAnchor="middle" fontSize="9" fill="#3B82F6">巻き取り方向</text>
+
+        {/* 操作説明 */}
+        <rect x="30" y="260" width="340" height="70" rx="8" fill="white" stroke="#E5E7EB" strokeWidth="1" />
+        <circle cx="55" cy="280" r="8" fill="#3B82F6" opacity="0.15" />
+        <text x="55" y="284" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#3B82F6">1</text>
+        <text x="70" y="284" fontSize="10" fill="#374151">ハンドルを回してラインを巻き取る</text>
+        <circle cx="55" cy="305" r="8" fill="#22C55E" opacity="0.15" />
+        <text x="55" y="309" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#22C55E">2</text>
+        <text x="70" y="309" fontSize="10" fill="#374151">魚が手前に引き寄せられる</text>
+
+        {/* ラベル */}
+        <text x="200" y="342" textAnchor="middle" fontSize="10" fill="#64748B">リールの巻き取りイメージ</text>
+      </svg>
+    </div>
+  );
+}
+
 function SectionCard({
   title,
   icon: Icon,
@@ -504,6 +626,15 @@ export default function BeginnerGuidePage() {
 
               {/* タックル構成図 */}
               <TackleDiagram />
+
+              {/* リール巻き取りアニメーション */}
+              <h3 className="mb-3 mt-6 font-medium text-foreground">
+                動きで見るリールの使い方
+              </h3>
+              <p className="mb-2 text-sm text-muted-foreground">
+                リールのハンドルを回すと、ラインが巻き取られて魚が引き寄せられます。
+              </p>
+              <ReelAnimationSvg />
 
               <h3 className="mb-3 font-medium text-foreground">
                 必須の道具（これだけあれば釣りができる）

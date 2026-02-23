@@ -372,6 +372,265 @@ function ChoinageRigDetailSvg() {
   );
 }
 
+function ChoinageCastAnimationSvg() {
+  return (
+    <div className="my-6">
+      <h4 className="mb-3 text-center text-sm font-bold text-foreground">
+        動きで見る ちょい投げの流れ
+      </h4>
+      <svg
+        viewBox="0 0 500 400"
+        className="mx-auto w-full max-w-[500px]"
+        aria-label="ちょい投げのキャスト、着底、誘いの流れをアニメーションで図解"
+      >
+        <defs>
+          {/* キャスト軌道のパス */}
+          <path id="castArc" d="M90,200 Q250,20 400,300" />
+        </defs>
+
+        <style>{`
+          /* ── 全体タイミング: cast 2s → land 1s → lure 2s → pause 1s = 6s ── */
+
+          /* 仕掛け: キャスト弧を飛ぶ */
+          @keyframes castFly {
+            0%   { offset-distance: 0%; opacity: 1; }
+            33%  { offset-distance: 100%; opacity: 1; }
+            34%  { opacity: 0; }
+            100% { opacity: 0; }
+          }
+
+          /* 仕掛け: 着底（沈降） */
+          @keyframes sinkToBottom {
+            0%   { opacity: 0; transform: translate(400px, 300px); }
+            33%  { opacity: 0; transform: translate(400px, 300px); }
+            34%  { opacity: 1; transform: translate(400px, 300px); }
+            50%  { opacity: 1; transform: translate(400px, 345px); }
+            100% { opacity: 1; transform: translate(400px, 345px); }
+          }
+
+          /* 仕掛け: 誘い（サビく・左へ引く） */
+          @keyframes lureMove {
+            0%   { opacity: 0; }
+            50%  { opacity: 0; transform: translateX(0px); }
+            51%  { opacity: 1; transform: translateX(0px); }
+            83%  { opacity: 1; transform: translateX(-80px); }
+            84%  { opacity: 0; }
+            100% { opacity: 0; }
+          }
+
+          /* テキスト: 着底フェーズ表示 */
+          @keyframes showLandText {
+            0%   { opacity: 0; }
+            34%  { opacity: 0; }
+            38%  { opacity: 1; }
+            50%  { opacity: 1; }
+            51%  { opacity: 0; }
+            100% { opacity: 0; }
+          }
+
+          /* テキスト: 誘いフェーズ表示 */
+          @keyframes showLureText {
+            0%   { opacity: 0; }
+            51%  { opacity: 0; }
+            55%  { opacity: 1; }
+            83%  { opacity: 1; }
+            84%  { opacity: 0; }
+            100% { opacity: 0; }
+          }
+
+          /* 釣り糸: キャスト中に伸びる */
+          @keyframes lineExtend {
+            0%   { stroke-dashoffset: 400; }
+            33%  { stroke-dashoffset: 0; }
+            34%  { stroke-dashoffset: 400; }
+            100% { stroke-dashoffset: 400; }
+          }
+
+          /* フェーズインジケーター */
+          @keyframes phase1Active {
+            0%   { fill: #3B82F6; }
+            33%  { fill: #3B82F6; }
+            34%  { fill: #64748B; }
+            100% { fill: #64748B; }
+          }
+          @keyframes phase2Active {
+            0%   { fill: #64748B; }
+            33%  { fill: #64748B; }
+            34%  { fill: #3B82F6; }
+            50%  { fill: #3B82F6; }
+            51%  { fill: #64748B; }
+            100% { fill: #64748B; }
+          }
+          @keyframes phase3Active {
+            0%   { fill: #64748B; }
+            50%  { fill: #64748B; }
+            51%  { fill: #3B82F6; }
+            83%  { fill: #3B82F6; }
+            84%  { fill: #64748B; }
+            100% { fill: #64748B; }
+          }
+
+          .choinage-cast-fly {
+            offset-path: path("M90,200 Q250,20 400,300");
+            animation: castFly 6s ease-in-out infinite;
+          }
+
+          .choinage-sink {
+            animation: sinkToBottom 6s ease-in-out infinite;
+          }
+
+          .choinage-lure-group {
+            animation: lureMove 6s ease-in-out infinite;
+          }
+
+          .choinage-land-text {
+            animation: showLandText 6s ease-in-out infinite;
+          }
+
+          .choinage-lure-text {
+            animation: showLureText 6s ease-in-out infinite;
+          }
+
+          .choinage-line-cast {
+            stroke-dasharray: 400;
+            animation: lineExtend 6s ease-in-out infinite;
+          }
+
+          .choinage-phase1 { animation: phase1Active 6s ease-in-out infinite; }
+          .choinage-phase2 { animation: phase2Active 6s ease-in-out infinite; }
+          .choinage-phase3 { animation: phase3Active 6s ease-in-out infinite; }
+        `}</style>
+
+        {/* 背景 */}
+        <rect x="0" y="0" width="500" height="400" fill="#F0F9FF" rx="12" />
+
+        {/* 空 */}
+        <rect x="0" y="0" width="500" height="220" fill="#E0F2FE" rx="12" />
+
+        {/* 海面 */}
+        <path d="M0,220 Q60,210 125,220 Q190,230 250,220 Q310,210 375,220 Q440,230 500,220 L500,400 L0,400 Z" fill="#3B82F6" opacity="0.25" />
+        <path d="M0,220 Q60,210 125,220 Q190,230 250,220 Q310,210 375,220 Q440,230 500,220" fill="none" stroke="#3B82F6" strokeWidth="2" />
+
+        {/* 海中 */}
+        <rect x="0" y="222" width="500" height="178" fill="#2563EB" opacity="0.12" rx="0" />
+
+        {/* 海底（砂地） */}
+        <path d="M0,360 Q80,350 160,358 Q240,366 320,355 Q400,348 500,360 L500,400 L0,400 Z" fill="#D4A574" />
+        <path d="M0,360 Q80,350 160,358 Q240,366 320,355 Q400,348 500,360" fill="none" stroke="#C4956A" strokeWidth="1" />
+
+        {/* 砂地テクスチャ（点々） */}
+        <circle cx="80" cy="375" r="1.5" fill="#C4956A" opacity="0.5" />
+        <circle cx="150" cy="370" r="1" fill="#C4956A" opacity="0.5" />
+        <circle cx="220" cy="378" r="1.5" fill="#C4956A" opacity="0.4" />
+        <circle cx="300" cy="368" r="1" fill="#C4956A" opacity="0.5" />
+        <circle cx="370" cy="372" r="1.5" fill="#C4956A" opacity="0.4" />
+        <circle cx="430" cy="365" r="1" fill="#C4956A" opacity="0.5" />
+
+        {/* 水面ラベル */}
+        <text x="490" y="215" fontSize="10" fill="#2563EB" textAnchor="end" fontWeight="bold">水面</text>
+
+        {/* 釣り人（棒人間） - 左側 */}
+        <g>
+          {/* 頭 */}
+          <circle cx="60" cy="155" r="12" fill="none" stroke="#334155" strokeWidth="2.5" />
+          {/* 胴体 */}
+          <line x1="60" y1="167" x2="60" y2="210" stroke="#334155" strokeWidth="2.5" />
+          {/* 左足 */}
+          <line x1="60" y1="210" x2="45" y2="250" stroke="#334155" strokeWidth="2.5" />
+          {/* 右足 */}
+          <line x1="60" y1="210" x2="75" y2="250" stroke="#334155" strokeWidth="2.5" />
+          {/* 右腕（竿を持つ） */}
+          <line x1="60" y1="180" x2="80" y2="168" stroke="#334155" strokeWidth="2.5" />
+          {/* 左腕 */}
+          <line x1="60" y1="180" x2="72" y2="172" stroke="#334155" strokeWidth="2.5" />
+          {/* 竿 */}
+          <line x1="80" y1="168" x2="90" y2="200" stroke="#78716C" strokeWidth="3" />
+          <line x1="80" y1="168" x2="105" y2="115" stroke="#78716C" strokeWidth="2.5" />
+          <circle cx="105" cy="113" r="2.5" fill="#78716C" />
+          {/* 地面 */}
+          <line x1="20" y1="250" x2="100" y2="250" stroke="#94A3B8" strokeWidth="1" strokeDasharray="4,3" />
+        </g>
+
+        {/* 釣り糸: キャスト中に竿先から仕掛けへ伸びる */}
+        <path d="M105,113 Q200,60 400,300" fill="none" stroke="#64748B" strokeWidth="1" className="choinage-line-cast" />
+
+        {/* 仕掛け: キャスト飛行（弧を描く赤い丸） */}
+        <circle r="6" fill="#EF4444" className="choinage-cast-fly">
+          <title>仕掛け</title>
+        </circle>
+
+        {/* 仕掛け: 着底グループ（沈降アニメーション） */}
+        <g className="choinage-sink" style={{ opacity: 0 }}>
+          {/* オモリ */}
+          <ellipse cx="0" cy="0" rx="7" ry="5" fill="#EF4444" />
+          {/* 針仕掛け */}
+          <line x1="0" y1="5" x2="0" y2="18" stroke="#EF4444" strokeWidth="1" />
+          <line x1="0" y1="12" x2="8" y2="17" stroke="#EF4444" strokeWidth="1" />
+          <circle cx="9" cy="18" r="2" fill="#F97316" />
+          <circle cx="0" cy="19" r="2" fill="#F97316" />
+        </g>
+
+        {/* 仕掛け: 誘い（サビく）グループ */}
+        <g className="choinage-lure-group" style={{ opacity: 0 }}>
+          <g transform="translate(400,345)">
+            {/* オモリ */}
+            <ellipse cx="0" cy="0" rx="7" ry="5" fill="#EF4444" />
+            {/* 針仕掛け */}
+            <line x1="0" y1="5" x2="0" y2="13" stroke="#EF4444" strokeWidth="1" />
+            <line x1="0" y1="9" x2="8" y2="13" stroke="#EF4444" strokeWidth="1" />
+            <circle cx="9" cy="14" r="2" fill="#F97316" />
+            <circle cx="0" cy="14" r="2" fill="#F97316" />
+            {/* サビく軌跡（砂煙風） */}
+            <circle cx="12" cy="2" r="3" fill="#D4A574" opacity="0.4" />
+            <circle cx="18" cy="-1" r="2" fill="#D4A574" opacity="0.3" />
+            <circle cx="22" cy="3" r="2.5" fill="#D4A574" opacity="0.2" />
+          </g>
+          {/* サビく方向矢印 */}
+          <line x1="395" y1="340" x2="355" y2="340" stroke="#ffffff" strokeWidth="2" />
+          <polygon points="360,336 360,344 352,340" fill="#ffffff" />
+        </g>
+
+        {/* テキスト: 着底フェーズ */}
+        <g className="choinage-land-text" style={{ opacity: 0 }}>
+          <rect x="270" y="268" width="180" height="30" rx="6" fill="rgba(0,0,0,0.6)" />
+          <text x="360" y="288" fontSize="12" fill="#ffffff" textAnchor="middle" fontWeight="bold">
+            着底を感じたら糸を張る
+          </text>
+        </g>
+
+        {/* テキスト: 誘いフェーズ */}
+        <g className="choinage-lure-text" style={{ opacity: 0 }}>
+          <rect x="240" y="298" width="180" height="30" rx="6" fill="rgba(0,0,0,0.6)" />
+          <text x="330" y="318" fontSize="12" fill="#ffffff" textAnchor="middle" fontWeight="bold">
+            ズルズルと引く（サビく）
+          </text>
+        </g>
+
+        {/* フェーズインジケーター */}
+        <g>
+          {/* Phase 1 */}
+          <rect x="115" y="375" width="90" height="20" rx="4" className="choinage-phase1" opacity="0.9" />
+          <text x="160" y="389" fontSize="10" fill="#ffffff" textAnchor="middle" fontWeight="bold">
+            1. キャスト
+          </text>
+
+          {/* Phase 2 */}
+          <rect x="215" y="375" width="90" height="20" rx="4" className="choinage-phase2" opacity="0.9" />
+          <text x="260" y="389" fontSize="10" fill="#ffffff" textAnchor="middle" fontWeight="bold">
+            2. 着底
+          </text>
+
+          {/* Phase 3 */}
+          <rect x="315" y="375" width="90" height="20" rx="4" className="choinage-phase3" opacity="0.9" />
+          <text x="360" y="389" fontSize="10" fill="#ffffff" textAnchor="middle" fontWeight="bold">
+            3. 誘い
+          </text>
+        </g>
+      </svg>
+    </div>
+  );
+}
+
 function SectionCard({
   title,
   icon: Icon,
@@ -559,6 +818,8 @@ export default function ChoinageGuidePage() {
             </ol>
 
             <CastingFormSvg />
+
+            <ChoinageCastAnimationSvg />
 
             <ol className="list-none space-y-4">
               <li className="flex gap-3">

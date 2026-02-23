@@ -65,7 +65,7 @@ export function BlogListClient({ posts }: { posts: BlogPost[] }) {
       <div className="mb-8 flex flex-wrap gap-2">
         <button
           onClick={() => setActiveCategory(null)}
-          className="focus:outline-none"
+          className="min-h-[40px] focus:outline-none"
         >
           <Badge
             variant={activeCategory === null ? "default" : "outline"}
@@ -84,7 +84,7 @@ export function BlogListClient({ posts }: { posts: BlogPost[] }) {
               onClick={() =>
                 setActiveCategory(activeCategory === key ? null : key)
               }
-              className="focus:outline-none"
+              className="min-h-[40px] focus:outline-none"
             >
               <Badge
                 variant={activeCategory === key ? "default" : "outline"}

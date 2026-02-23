@@ -453,6 +453,330 @@ function TanaSvg() {
   );
 }
 
+/* ── CSSアニメーション付きSVGコンポーネント ── */
+
+function ShakuriAnimationSvg() {
+  return (
+    <div className="my-6">
+      <h4 className="mb-3 text-center text-sm font-bold text-foreground">動きで見るしゃくり方</h4>
+      <svg
+        viewBox="0 0 400 500"
+        width="100%"
+        className="mx-auto max-w-[400px]"
+        aria-label="しゃくり動作のイメージ：仕掛けが上下に動き、コマセが拡散して魚が寄ってくるアニメーション"
+      >
+        <style>{`
+          @keyframes shakuri {
+            0% { transform: translateY(0); }
+            40% { transform: translateY(-40px); }
+            60% { transform: translateY(-40px); }
+            80% { transform: translateY(0); }
+            100% { transform: translateY(0); }
+          }
+          @keyframes komase-spread {
+            0% { opacity: 0; r: 2; }
+            30% { opacity: 0.8; }
+            70% { opacity: 0.4; r: 5; }
+            100% { opacity: 0; r: 8; }
+          }
+          @keyframes fish-approach {
+            0% { transform: translateX(-60px); opacity: 0; }
+            30% { opacity: 1; }
+            80% { transform: translateX(0); opacity: 1; }
+            100% { transform: translateX(0); opacity: 1; }
+          }
+          .shakuri-rig {
+            animation: shakuri 3s ease-in-out infinite;
+          }
+          .komase-p1 { animation: komase-spread 3s ease-out infinite; animation-delay: 0.5s; }
+          .komase-p2 { animation: komase-spread 3s ease-out infinite; animation-delay: 0.8s; }
+          .komase-p3 { animation: komase-spread 3s ease-out infinite; animation-delay: 1.1s; }
+          .komase-p4 { animation: komase-spread 3s ease-out infinite; animation-delay: 1.4s; }
+          .komase-p5 { animation: komase-spread 3s ease-out infinite; animation-delay: 0.6s; }
+          .komase-p6 { animation: komase-spread 3s ease-out infinite; animation-delay: 0.9s; }
+          .komase-p7 { animation: komase-spread 3s ease-out infinite; animation-delay: 1.2s; }
+          .komase-p8 { animation: komase-spread 3s ease-out infinite; animation-delay: 1.5s; }
+          .fish-1 { animation: fish-approach 3s ease-out infinite; animation-delay: 1s; }
+          .fish-2 { animation: fish-approach 3s ease-out infinite; animation-delay: 1.5s; }
+          .fish-3 { animation: fish-approach 3s ease-out infinite; animation-delay: 2s; }
+        `}</style>
+
+        {/* 背景 */}
+        <rect x="0" y="0" width="400" height="500" fill="#F9FAFB" rx="12" />
+
+        {/* 空 */}
+        <rect x="0" y="0" width="400" height="100" fill="#EFF6FF" rx="12" />
+
+        {/* 堤防 */}
+        <rect x="0" y="40" width="60" height="460" fill="#9CA3AF" opacity="0.3" stroke="#6B7280" strokeWidth="1" />
+        <text x="30" y="32" fontSize="10" fill="#4B5563" textAnchor="middle">堤防</text>
+
+        {/* 竿 */}
+        <line x1="50" y1="55" x2="160" y2="45" stroke="#78716C" strokeWidth="3" strokeLinecap="round" />
+        <line x1="160" y1="45" x2="200" y2="60" stroke="#78716C" strokeWidth="2.5" strokeLinecap="round" />
+        <text x="130" y="38" fontSize="9" fill="#44403C" textAnchor="middle">竿</text>
+
+        {/* 水面 */}
+        <path d="M60,100 Q100,94 140,100 Q180,106 220,100 Q260,94 300,100 Q340,106 400,100 L400,100 L60,100" fill="none" stroke="#3B82F6" strokeWidth="2" />
+        <text x="380" y="94" fontSize="10" fill="#3B82F6" textAnchor="end">水面</text>
+
+        {/* 水域 */}
+        <rect x="60" y="100" width="340" height="400" fill="#DBEAFE" opacity="0.5" />
+
+        {/* 道糸（竿先から仕掛けへ） */}
+        <line x1="200" y1="60" x2="200" y2="140" stroke="#4B5563" strokeWidth="1" />
+
+        {/* しゃくりで動く仕掛けグループ */}
+        <g className="shakuri-rig">
+          {/* 道糸（動く部分） */}
+          <line x1="200" y1="140" x2="200" y2="400" stroke="#4B5563" strokeWidth="1.2" />
+
+          {/* サビキ針 3本 */}
+          <g>
+            {/* 針1 */}
+            <line x1="200" y1="240" x2="175" y2="255" stroke="#4B5563" strokeWidth="0.8" />
+            <circle cx="173" cy="257" r="3" fill="#EC4899" opacity="0.8" />
+            <text x="160" y="261" fontSize="8" fill="#6B7280" textAnchor="end">針</text>
+
+            {/* 針2 */}
+            <line x1="200" y1="290" x2="175" y2="305" stroke="#4B5563" strokeWidth="0.8" />
+            <circle cx="173" cy="307" r="3" fill="#EC4899" opacity="0.8" />
+
+            {/* 針3 */}
+            <line x1="200" y1="340" x2="175" y2="355" stroke="#4B5563" strokeWidth="0.8" />
+            <circle cx="173" cy="357" r="3" fill="#EC4899" opacity="0.8" />
+          </g>
+
+          {/* コマセカゴ */}
+          <rect x="188" y="370" width="24" height="28" rx="4" fill="#22C55E" stroke="#16A34A" strokeWidth="1.5" />
+          <text x="200" y="388" fontSize="7" fill="white" textAnchor="middle">カゴ</text>
+
+          {/* オモリ */}
+          <ellipse cx="200" cy="410" rx="8" ry="6" fill="#6B7280" stroke="#4B5563" strokeWidth="1" />
+          <text x="200" y="413" fontSize="6" fill="white" textAnchor="middle">錘</text>
+
+          {/* コマセパーティクル */}
+          <circle className="komase-p1" cx="185" cy="380" r="2" fill="#F59E0B" opacity="0" />
+          <circle className="komase-p2" cx="215" cy="375" r="2" fill="#F59E0B" opacity="0" />
+          <circle className="komase-p3" cx="178" cy="390" r="2" fill="#F59E0B" opacity="0" />
+          <circle className="komase-p4" cx="222" cy="385" r="2" fill="#F59E0B" opacity="0" />
+          <circle className="komase-p5" cx="190" cy="395" r="2" fill="#F59E0B" opacity="0" />
+          <circle className="komase-p6" cx="210" cy="392" r="2" fill="#F59E0B" opacity="0" />
+          <circle className="komase-p7" cx="175" cy="370" r="2" fill="#F59E0B" opacity="0" />
+          <circle className="komase-p8" cx="225" cy="378" r="2" fill="#F59E0B" opacity="0" />
+        </g>
+
+        {/* 魚（寄ってくるアニメーション） */}
+        <g className="fish-1">
+          <ellipse cx="120" cy="310" rx="16" ry="7" fill="#22C55E" opacity="0.8" />
+          <polygon points="103,310 95,304 95,316" fill="#22C55E" opacity="0.8" />
+          <circle cx="130" cy="308" r="1.5" fill="white" />
+        </g>
+        <g className="fish-2">
+          <ellipse cx="115" cy="350" rx="14" ry="6" fill="#22C55E" opacity="0.7" />
+          <polygon points="100,350 93,345 93,355" fill="#22C55E" opacity="0.7" />
+          <circle cx="124" cy="348" r="1.5" fill="white" />
+        </g>
+        <g className="fish-3">
+          <ellipse cx="125" cy="280" rx="12" ry="5" fill="#22C55E" opacity="0.6" />
+          <polygon points="112,280 106,276 106,284" fill="#22C55E" opacity="0.6" />
+          <circle cx="132" cy="278" r="1.2" fill="white" />
+        </g>
+
+        {/* しゃくり方向の矢印 */}
+        <g>
+          <path d="M250,200 L250,160" fill="none" stroke="#EF4444" strokeWidth="2" strokeDasharray="4,3" />
+          <polygon points="245,165 255,165 250,155" fill="#EF4444" />
+          <path d="M260,160 L260,200" fill="none" stroke="#EF4444" strokeWidth="2" />
+          <polygon points="255,195 265,195 260,205" fill="#EF4444" />
+          <text x="285" y="175" fontSize="10" fill="#EF4444" fontWeight="bold">しゃくり</text>
+          <text x="285" y="190" fontSize="9" fill="#EF4444">上→下</text>
+        </g>
+
+        {/* ラベル */}
+        <text x="200" y="475" fontSize="12" fill="#374151" textAnchor="middle" fontWeight="bold">しゃくり動作のイメージ</text>
+        <text x="200" y="492" fontSize="9" fill="#6B7280" textAnchor="middle">仕掛けを上下に動かしてコマセを拡散させます</text>
+      </svg>
+    </div>
+  );
+}
+
+function AtariAnimationSvg() {
+  return (
+    <div className="my-6">
+      <h4 className="mb-3 text-center text-sm font-bold text-foreground">アタリの瞬間</h4>
+      <svg
+        viewBox="0 0 400 300"
+        width="100%"
+        className="mx-auto max-w-[400px]"
+        aria-label="アタリの瞬間：ウキがゆっくり揺れた後、急に沈むアニメーション"
+      >
+        <style>{`
+          @keyframes uki-bob {
+            0% { transform: translateY(0); }
+            15% { transform: translateY(-3px); }
+            30% { transform: translateY(2px); }
+            45% { transform: translateY(-2px); }
+            55% { transform: translateY(1px); }
+            60% { transform: translateY(0); }
+            65% { transform: translateY(4px); }
+            70% { transform: translateY(30px); }
+            75% { transform: translateY(35px); }
+            80% { transform: translateY(30px); }
+            85% { transform: translateY(35px); }
+            90% { transform: translateY(10px); }
+            95% { transform: translateY(2px); }
+            100% { transform: translateY(0); }
+          }
+          @keyframes splash {
+            0% { opacity: 0; }
+            65% { opacity: 0; }
+            70% { opacity: 1; }
+            80% { opacity: 0.5; }
+            90% { opacity: 0; }
+            100% { opacity: 0; }
+          }
+          @keyframes atari-fish {
+            0% { transform: translateX(0) translateY(0); }
+            60% { transform: translateX(0) translateY(0); }
+            68% { transform: translateX(10px) translateY(-15px); }
+            72% { transform: translateX(5px) translateY(-10px); }
+            80% { transform: translateX(15px) translateY(-20px); }
+            90% { transform: translateX(10px) translateY(-5px); }
+            100% { transform: translateX(0) translateY(0); }
+          }
+          @keyframes line-tension {
+            0% { stroke-dashoffset: 0; }
+            60% { stroke-dashoffset: 0; }
+            70% { stroke-dashoffset: 5; }
+            80% { stroke-dashoffset: 0; }
+            90% { stroke-dashoffset: 3; }
+            100% { stroke-dashoffset: 0; }
+          }
+          @keyframes alert-text {
+            0% { opacity: 0; }
+            65% { opacity: 0; }
+            70% { opacity: 1; }
+            85% { opacity: 1; }
+            90% { opacity: 0; }
+            100% { opacity: 0; }
+          }
+          @keyframes wave1 {
+            0% { d: path("M0,80 Q50,74 100,80 Q150,86 200,80 Q250,74 300,80 Q350,86 400,80"); }
+            50% { d: path("M0,80 Q50,86 100,80 Q150,74 200,80 Q250,86 300,80 Q350,74 400,80"); }
+            100% { d: path("M0,80 Q50,74 100,80 Q150,86 200,80 Q250,74 300,80 Q350,86 400,80"); }
+          }
+          .uki-group {
+            animation: uki-bob 6s ease-in-out infinite;
+          }
+          .splash-effect {
+            animation: splash 6s ease-out infinite;
+          }
+          .atari-fish-move {
+            animation: atari-fish 6s ease-in-out infinite;
+          }
+          .atari-line {
+            animation: line-tension 6s ease-in-out infinite;
+          }
+          .alert-label {
+            animation: alert-text 6s ease-in-out infinite;
+          }
+          .wave-line {
+            animation: wave1 3s ease-in-out infinite;
+          }
+        `}</style>
+
+        {/* 背景 */}
+        <rect x="0" y="0" width="400" height="300" fill="#F9FAFB" rx="12" />
+
+        {/* 空 */}
+        <rect x="0" y="0" width="400" height="80" fill="#EFF6FF" rx="12" />
+
+        {/* 水面の波 */}
+        <path className="wave-line" d="M0,80 Q50,74 100,80 Q150,86 200,80 Q250,74 300,80 Q350,86 400,80" fill="none" stroke="#3B82F6" strokeWidth="2" />
+
+        {/* 水域 */}
+        <rect x="0" y="80" width="400" height="220" fill="#DBEAFE" opacity="0.5" />
+
+        {/* 水の深い部分グラデ */}
+        <rect x="0" y="200" width="400" height="100" fill="#93C5FD" opacity="0.2" />
+
+        {/* 道糸（上部・固定） */}
+        <line x1="80" y1="20" x2="200" y2="60" stroke="#4B5563" strokeWidth="1" />
+
+        {/* 竿先 */}
+        <line x1="30" y1="30" x2="80" y2="20" stroke="#78716C" strokeWidth="2.5" strokeLinecap="round" />
+
+        {/* ウキグループ（アニメーション） */}
+        <g className="uki-group">
+          {/* 道糸（ウキから下） */}
+          <line className="atari-line" x1="200" y1="90" x2="200" y2="200" stroke="#4B5563" strokeWidth="0.8" strokeDasharray="3,2" />
+
+          {/* ウキ本体 */}
+          <g>
+            {/* ウキの棒 */}
+            <line x1="200" y1="58" x2="200" y2="92" stroke="#4B5563" strokeWidth="1.5" />
+            {/* 赤い上部 */}
+            <circle cx="200" cy="68" r="7" fill="#EF4444" stroke="#DC2626" strokeWidth="1" />
+            {/* 白い下部 */}
+            <circle cx="200" cy="82" r="7" fill="white" stroke="#D1D5DB" strokeWidth="1" />
+          </g>
+
+          {/* 水しぶき */}
+          <g className="splash-effect" opacity="0">
+            <circle cx="190" cy="75" r="2" fill="#3B82F6" opacity="0.6" />
+            <circle cx="210" cy="73" r="1.5" fill="#3B82F6" opacity="0.5" />
+            <circle cx="185" cy="70" r="1" fill="#3B82F6" opacity="0.4" />
+            <circle cx="215" cy="72" r="1.5" fill="#3B82F6" opacity="0.5" />
+            <circle cx="195" cy="68" r="1" fill="#3B82F6" opacity="0.3" />
+            <circle cx="205" cy="69" r="1.2" fill="#3B82F6" opacity="0.4" />
+          </g>
+
+          {/* サビキ針 */}
+          <line x1="200" y1="150" x2="185" y2="160" stroke="#4B5563" strokeWidth="0.6" />
+          <circle cx="183" cy="162" r="2" fill="#EC4899" opacity="0.7" />
+          <line x1="200" y1="170" x2="185" y2="180" stroke="#4B5563" strokeWidth="0.6" />
+          <circle cx="183" cy="182" r="2" fill="#EC4899" opacity="0.7" />
+        </g>
+
+        {/* 魚（アタリ時に動く） */}
+        <g className="atari-fish-move">
+          <ellipse cx="220" cy="200" rx="18" ry="8" fill="#22C55E" opacity="0.8" />
+          <polygon points="239,200 248,194 248,206" fill="#22C55E" opacity="0.8" />
+          <circle cx="210" cy="198" r="2" fill="white" />
+          <circle cx="210" cy="198" r="1" fill="#1F2937" />
+        </g>
+
+        {/* 「アタリ!」テキスト */}
+        <g className="alert-label">
+          <rect x="240" y="38" width="80" height="28" rx="14" fill="#EF4444" />
+          <text x="280" y="57" fontSize="13" fill="white" textAnchor="middle" fontWeight="bold">アタリ!</text>
+        </g>
+
+        {/* 小さな魚（背景） */}
+        <ellipse cx="320" cy="150" rx="10" ry="4" fill="#60A5FA" opacity="0.3" />
+        <ellipse cx="340" cy="160" rx="8" ry="3.5" fill="#60A5FA" opacity="0.25" />
+        <ellipse cx="90" cy="180" rx="9" ry="4" fill="#60A5FA" opacity="0.2" />
+
+        {/* 説明ラベル */}
+        <g>
+          <text x="330" y="100" fontSize="9" fill="#3B82F6">ウキが揺れる</text>
+          <text x="330" y="112" fontSize="9" fill="#3B82F6">= 波の動き</text>
+          <line x1="320" y1="100" x2="215" y2="80" stroke="#3B82F6" strokeWidth="0.5" strokeDasharray="2,2" />
+        </g>
+        <g>
+          <text x="50" y="230" fontSize="9" fill="#22C55E">魚が食いつくと</text>
+          <text x="50" y="242" fontSize="9" fill="#22C55E">ウキが沈む!</text>
+        </g>
+
+        {/* ラベル */}
+        <text x="200" y="280" fontSize="12" fill="#374151" textAnchor="middle" fontWeight="bold">アタリの瞬間</text>
+        <text x="200" y="295" fontSize="9" fill="#6B7280" textAnchor="middle">ウキが急に沈んだら魚がかかった合図です</text>
+      </svg>
+    </div>
+  );
+}
+
 function SectionCard({
   title,
   icon: Icon,
@@ -663,6 +987,8 @@ export default function SabikiGuidePage() {
 
             <KomaseSvg />
 
+            <ShakuriAnimationSvg />
+
             <ol className="list-none space-y-4">
               <li className="flex gap-3">
                 <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
@@ -677,6 +1003,9 @@ export default function SabikiGuidePage() {
                   </p>
                 </div>
               </li>
+
+              <AtariAnimationSvg />
+
               <li className="flex gap-3">
                 <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-primary text-sm font-bold text-primary-foreground">
                   6

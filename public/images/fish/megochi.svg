@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2a1e14;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#15100a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#8a6a48;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#a08060;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#c0a080;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d8c0a0;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="headGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#7a5a38;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#a08058;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- Sandy bottom ambiance -->
+  <ellipse cx="400" cy="440" rx="380" ry="50" fill="#2a1e14" opacity="0.4"/>
+  <ellipse cx="200" cy="460" rx="150" ry="25" fill="#3a2e1e" opacity="0.3"/>
+  <ellipse cx="600" cy="450" rx="170" ry="30" fill="#3a2e1e" opacity="0.25"/>
+  <!-- Sand particles -->
+  <circle cx="120" cy="430" r="2" fill="#5a4a38" opacity="0.3"/>
+  <circle cx="280" cy="445" r="1.5" fill="#5a4a38" opacity="0.3"/>
+  <circle cx="450" cy="438" r="2" fill="#5a4a38" opacity="0.25"/>
+  <circle cx="580" cy="442" r="1.5" fill="#5a4a38" opacity="0.3"/>
+  <circle cx="700" cy="435" r="2" fill="#5a4a38" opacity="0.25"/>
+  <!-- Megochi (Flathead) - flat head, elongated body, bottom-dwelling -->
+  <!-- Main body - elongated, tapering towards tail, flattened -->
+  <path d="M100,300 Q120,278 180,268 Q260,255 360,252 Q480,250 580,258 Q650,268 700,285 Q720,295 725,305 Q722,318 700,330 Q650,348 580,358 Q480,365 360,366 Q260,365 190,355 Q140,342 115,325 Q100,315 98,308 Z" fill="url(#body)"/>
+  <!-- Flattened head (characteristic - wider, depressed) -->
+  <path d="M70,295 Q80,272 110,262 Q140,255 180,258 Q195,262 200,270 L200,340 Q195,348 180,352 Q140,355 110,348 Q80,338 70,315 Z" fill="url(#headGrad)"/>
+  <!-- Darker back markings -->
+  <path d="M100,295 Q130,275 200,265 Q320,252 450,252 Q580,256 660,268 Q700,278 720,292" stroke="#6a4a30" stroke-width="6" fill="none" opacity="0.3" stroke-linecap="round"/>
+  <!-- Mottled pattern (camouflage spots) -->
+  <circle cx="180" cy="280" r="8" fill="#6a4a30" opacity="0.25"/>
+  <circle cx="230" cy="272" r="10" fill="#6a4a30" opacity="0.2"/>
+  <circle cx="290" cy="268" r="9" fill="#6a4a30" opacity="0.22"/>
+  <circle cx="350" cy="265" r="11" fill="#6a4a30" opacity="0.2"/>
+  <circle cx="420" cy="264" r="8" fill="#6a4a30" opacity="0.22"/>
+  <circle cx="480" cy="266" r="10" fill="#6a4a30" opacity="0.2"/>
+  <circle cx="540" cy="270" r="9" fill="#6a4a30" opacity="0.18"/>
+  <circle cx="600" cy="276" r="8" fill="#6a4a30" opacity="0.18"/>
+  <circle cx="650" cy="282" r="7" fill="#6a4a30" opacity="0.15"/>
+  <!-- Light spots on dark patches -->
+  <circle cx="230" cy="275" r="3" fill="#c0a878" opacity="0.15"/>
+  <circle cx="350" cy="267" r="3" fill="#c0a878" opacity="0.15"/>
+  <circle cx="480" cy="269" r="3" fill="#c0a878" opacity="0.12"/>
+  <!-- Scale texture lines -->
+  <path d="M150,300 Q300,290 450,288 Q580,290 680,300" stroke="#7a5a40" stroke-width="1" fill="none" opacity="0.2"/>
+  <path d="M145,315 Q300,308 450,306 Q580,308 685,316" stroke="#7a5a40" stroke-width="1" fill="none" opacity="0.18"/>
+  <path d="M155,330 Q300,324 450,322 Q580,324 678,332" stroke="#7a5a40" stroke-width="1" fill="none" opacity="0.15"/>
+  <!-- First dorsal fin (tall, spiny) -->
+  <path d="M240,258 L250,210 Q258,205 266,210 L280,220 Q288,218 296,222 L310,252" fill="#8a6a48" stroke="#7a5a38" stroke-width="1" opacity="0.75"/>
+  <!-- Dorsal fin rays -->
+  <line x1="252" y1="212" x2="255" y2="255" stroke="#7a5a38" stroke-width="0.8" opacity="0.4"/>
+  <line x1="266" y1="210" x2="270" y2="255" stroke="#7a5a38" stroke-width="0.8" opacity="0.4"/>
+  <line x1="282" y1="219" x2="285" y2="254" stroke="#7a5a38" stroke-width="0.8" opacity="0.4"/>
+  <line x1="296" y1="222" x2="298" y2="253" stroke="#7a5a38" stroke-width="0.8" opacity="0.4"/>
+  <!-- Second dorsal fin -->
+  <path d="M450,254 L458,228 Q465,224 472,228 L485,235 Q490,232 498,236 L510,256" fill="#8a6a48" stroke="#7a5a38" stroke-width="1" opacity="0.7"/>
+  <line x1="460" y1="230" x2="462" y2="254" stroke="#7a5a38" stroke-width="0.7" opacity="0.35"/>
+  <line x1="475" y1="228" x2="478" y2="254" stroke="#7a5a38" stroke-width="0.7" opacity="0.35"/>
+  <line x1="492" y1="234" x2="495" y2="256" stroke="#7a5a38" stroke-width="0.7" opacity="0.35"/>
+  <!-- Large pectoral fins (characteristic of flatheads, spread like wings) -->
+  <path d="M160,330 L120,378 Q135,395 155,388 L175,365 Q188,385 198,378 L200,345" fill="#a08060" opacity="0.6" stroke="#8a6a48" stroke-width="1"/>
+  <!-- Ventral fin -->
+  <path d="M230,358 L222,385 Q232,392 242,382 L248,360" fill="#a08060" opacity="0.55"/>
+  <!-- Anal fin -->
+  <path d="M480,362 L488,388 Q498,392 508,386 L515,360" fill="#8a6a48" stroke="#7a5a38" stroke-width="1" opacity="0.65"/>
+  <!-- Tail fin -->
+  <path d="M710,295 L748,268 Q755,280 752,298 L750,310 L755,325 Q752,342 745,352 L710,325" fill="#8a6a48" stroke="#7a5a38" stroke-width="1" opacity="0.8"/>
+  <!-- Eye - positioned on top of flat head, looking upward -->
+  <circle cx="120" cy="275" r="12" fill="#1a1a1a"/>
+  <circle cx="120" cy="275" r="7" fill="#3a3820"/>
+  <circle cx="118" cy="273" r="3.5" fill="#5a5830"/>
+  <circle cx="117" cy="271" r="1.8" fill="#ffffff" opacity="0.4"/>
+  <!-- Gill spine (characteristic - sharp spine on operculum) -->
+  <path d="M152,295 L145,300 L155,310" stroke="#6a4a30" stroke-width="2.5" fill="none" opacity="0.5"/>
+  <path d="M155,290 L148,295 L158,305" stroke="#6a4a30" stroke-width="2" fill="none" opacity="0.4"/>
+  <!-- Mouth - wide, flat -->
+  <path d="M72,305 Q90,315 120,310" stroke="#5a3a20" stroke-width="2.5" fill="none"/>
+  <!-- Gill cover -->
+  <path d="M160,268 Q163,290 165,310 Q163,328 160,342" stroke="#7a5a40" stroke-width="2" fill="none" opacity="0.35"/>
+  <!-- Label -->
+  <text x="400" y="490" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="42" fill="#ffffff" font-weight="bold" opacity="0.9">メゴチ</text>
+  <text x="400" y="528" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="20" fill="#ccaa77" opacity="0.7">Flathead</text>
+</svg>

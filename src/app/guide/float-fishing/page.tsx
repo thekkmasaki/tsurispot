@@ -252,6 +252,159 @@ function UkiAtariSvg() {
   );
 }
 
+function UkiAtariAnimationSvg() {
+  return (
+    <div className="my-6">
+      <h4 className="mb-3 text-center text-sm font-bold text-foreground">
+        動きで見るアタリパターン
+      </h4>
+      <svg
+        viewBox="0 0 500 350"
+        className="mx-auto w-full max-w-[500px]"
+        aria-label="ウキのアタリパターンアニメーション：消し込み、モゾモゾ、横走り、浮き上がりの4種類が動きで見られる"
+      >
+        <defs>
+          {/* 水面のさざ波パターン */}
+          <pattern id="wave-pattern" x="0" y="0" width="60" height="12" patternUnits="userSpaceOnUse">
+            <path d="M0,6 Q15,0 30,6 Q45,12 60,6" fill="none" stroke="#60A5FA" strokeWidth="1" opacity="0.5">
+              <animate attributeName="d" values="M0,6 Q15,0 30,6 Q45,12 60,6;M0,6 Q15,12 30,6 Q45,0 60,6;M0,6 Q15,0 30,6 Q45,12 60,6" dur="3s" repeatCount="indefinite" />
+            </path>
+          </pattern>
+        </defs>
+
+        {/* 背景 */}
+        <rect x="0" y="0" width="500" height="350" fill="#F9FAFB" rx="12" />
+
+        {/* 空（水面の上） */}
+        <rect x="0" y="0" width="500" height="140" fill="#F0F9FF" rx="12" />
+
+        {/* 海 */}
+        <rect x="0" y="140" width="500" height="210" fill="#DBEAFE" />
+        <rect x="0" y="338" width="500" height="12" fill="#F9FAFB" rx="0" />
+
+        {/* 水面ライン */}
+        <line x1="0" y1="140" x2="500" y2="140" stroke="#3B82F6" strokeWidth="2" />
+
+        {/* さざ波アニメーション */}
+        <g opacity="0.4">
+          <path d="M0,140 Q30,134 60,140 Q90,146 120,140 Q150,134 180,140 Q210,146 240,140 Q270,134 300,140 Q330,146 360,140 Q390,134 420,140 Q450,146 480,140 L500,140" fill="none" stroke="#3B82F6" strokeWidth="1.5">
+            <animate attributeName="d" values="M0,140 Q30,134 60,140 Q90,146 120,140 Q150,134 180,140 Q210,146 240,140 Q270,134 300,140 Q330,146 360,140 Q390,134 420,140 Q450,146 480,140 L500,140;M0,140 Q30,146 60,140 Q90,134 120,140 Q150,146 180,140 Q210,134 240,140 Q270,146 300,140 Q330,134 360,140 Q390,146 420,140 Q450,134 480,140 L500,140;M0,140 Q30,134 60,140 Q90,146 120,140 Q150,134 180,140 Q210,146 240,140 Q270,134 300,140 Q330,146 360,140 Q390,134 420,140 Q450,146 480,140 L500,140" dur="2s" repeatCount="indefinite" />
+          </path>
+        </g>
+        <g opacity="0.25">
+          <path d="M0,148 Q25,144 50,148 Q75,152 100,148 Q125,144 150,148 Q175,152 200,148 Q225,144 250,148 Q275,152 300,148 Q325,144 350,148 Q375,152 400,148 Q425,144 450,148 Q475,152 500,148" fill="none" stroke="#3B82F6" strokeWidth="1">
+            <animate attributeName="d" values="M0,148 Q25,144 50,148 Q75,152 100,148 Q125,144 150,148 Q175,152 200,148 Q225,144 250,148 Q275,152 300,148 Q325,144 350,148 Q375,152 400,148 Q425,144 450,148 Q475,152 500,148;M0,148 Q25,152 50,148 Q75,144 100,148 Q125,152 150,148 Q175,144 200,148 Q225,152 250,148 Q275,144 300,148 Q325,152 350,148 Q375,144 400,148 Q425,152 450,148 Q475,144 500,148;M0,148 Q25,144 50,148 Q75,152 100,148 Q125,144 150,148 Q175,152 200,148 Q225,144 250,148 Q275,152 300,148 Q325,144 350,148 Q375,152 400,148 Q425,144 450,148 Q475,152 500,148" dur="2.5s" repeatCount="indefinite" />
+          </path>
+        </g>
+
+        {/* ── 1. 消し込み ── */}
+        <g>
+          {/* ラベル */}
+          <text x="62" y="28" fontSize="13" fill="#EF4444" textAnchor="middle" fontWeight="bold">消し込み</text>
+          <text x="62" y="44" fontSize="10" fill="#6B7280" textAnchor="middle">ゆっくり沈む</text>
+
+          {/* 道糸 */}
+          <line x1="62" y1="70" x2="62" y2="120" stroke="#9CA3AF" strokeWidth="1" />
+
+          {/* ウキ本体 - ゆっくり沈んで戻る */}
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0,0;0,50;0,50;0,0" keyTimes="0;0.4;0.6;1" dur="3s" repeatCount="indefinite" />
+            {/* ウキトップ（赤い棒） */}
+            <rect x="60" y="108" width="4" height="16" rx="2" fill="#EF4444" />
+            {/* ウキ上部（赤） */}
+            <ellipse cx="62" cy="130" rx="8" ry="12" fill="#EF4444" />
+            {/* ウキ下部（白） */}
+            <ellipse cx="62" cy="146" rx="6" ry="10" fill="#ffffff" stroke="#D1D5DB" strokeWidth="0.5" />
+          </g>
+        </g>
+
+        {/* ── 2. モゾモゾ ── */}
+        <g>
+          {/* ラベル */}
+          <text x="187" y="28" fontSize="13" fill="#F59E0B" textAnchor="middle" fontWeight="bold">モゾモゾ</text>
+          <text x="187" y="44" fontSize="10" fill="#6B7280" textAnchor="middle">ブルブル震える</text>
+
+          {/* 道糸 */}
+          <line x1="187" y1="70" x2="187" y2="120" stroke="#9CA3AF" strokeWidth="1" />
+
+          {/* ウキ本体 - 小刻みに震える */}
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0,0;-2,-3;1,2;-1,-2;2,1;-2,-1;1,3;0,0" dur="1s" repeatCount="indefinite" />
+            {/* ウキトップ */}
+            <rect x="185" y="108" width="4" height="16" rx="2" fill="#EF4444" />
+            {/* ウキ上部 */}
+            <ellipse cx="187" cy="130" rx="8" ry="12" fill="#EF4444" />
+            {/* ウキ下部 */}
+            <ellipse cx="187" cy="146" rx="6" ry="10" fill="#ffffff" stroke="#D1D5DB" strokeWidth="0.5" />
+          </g>
+        </g>
+
+        {/* ── 3. 横走り ── */}
+        <g>
+          {/* ラベル */}
+          <text x="312" y="28" fontSize="13" fill="#3B82F6" textAnchor="middle" fontWeight="bold">横走り</text>
+          <text x="312" y="44" fontSize="10" fill="#6B7280" textAnchor="middle">左右に移動</text>
+
+          {/* 道糸 */}
+          <line x1="312" y1="70" x2="312" y2="120" stroke="#9CA3AF" strokeWidth="1" />
+
+          {/* ウキ本体 - 左右に移動 */}
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="-30,0;30,0;-30,0" dur="2s" repeatCount="indefinite" />
+            {/* ウキトップ */}
+            <rect x="310" y="108" width="4" height="16" rx="2" fill="#EF4444" />
+            {/* ウキ上部 */}
+            <ellipse cx="312" cy="130" rx="8" ry="12" fill="#EF4444" />
+            {/* ウキ下部 */}
+            <ellipse cx="312" cy="146" rx="6" ry="10" fill="#ffffff" stroke="#D1D5DB" strokeWidth="0.5" />
+          </g>
+        </g>
+
+        {/* ── 4. 浮き上がり ── */}
+        <g>
+          {/* ラベル */}
+          <text x="437" y="28" fontSize="13" fill="#22C55E" textAnchor="middle" fontWeight="bold">浮き上がり</text>
+          <text x="437" y="44" fontSize="10" fill="#6B7280" textAnchor="middle">沈んで浮き上がる</text>
+
+          {/* 道糸 */}
+          <line x1="437" y1="70" x2="437" y2="120" stroke="#9CA3AF" strokeWidth="1" />
+
+          {/* ウキ本体 - 沈んでから大きく浮き上がる */}
+          <g>
+            <animateTransform attributeName="transform" type="translate" values="0,0;0,20;0,-30;0,-30;0,0" keyTimes="0;0.25;0.5;0.75;1" dur="3s" repeatCount="indefinite" />
+            {/* ウキトップ */}
+            <rect x="435" y="108" width="4" height="16" rx="2" fill="#EF4444" />
+            {/* ウキ上部 */}
+            <ellipse cx="437" cy="130" rx="8" ry="12" fill="#EF4444" />
+            {/* ウキ下部 */}
+            <ellipse cx="437" cy="146" rx="6" ry="10" fill="#ffffff" stroke="#D1D5DB" strokeWidth="0.5" />
+          </g>
+        </g>
+
+        {/* 各ウキの下のパターン名ラベル（水中） */}
+        <g>
+          <rect x="20" y="300" width="85" height="24" rx="6" fill="#EF4444" opacity="0.1" />
+          <text x="62" y="316" fontSize="11" fill="#EF4444" textAnchor="middle" fontWeight="bold">消し込み</text>
+
+          <rect x="145" y="300" width="85" height="24" rx="6" fill="#F59E0B" opacity="0.1" />
+          <text x="187" y="316" fontSize="11" fill="#F59E0B" textAnchor="middle" fontWeight="bold">モゾモゾ</text>
+
+          <rect x="270" y="300" width="85" height="24" rx="6" fill="#3B82F6" opacity="0.1" />
+          <text x="312" y="316" fontSize="11" fill="#3B82F6" textAnchor="middle" fontWeight="bold">横走り</text>
+
+          <rect x="395" y="300" width="85" height="24" rx="6" fill="#22C55E" opacity="0.1" />
+          <text x="437" y="316" fontSize="11" fill="#22C55E" textAnchor="middle" fontWeight="bold">浮き上がり</text>
+        </g>
+
+        {/* 区切り線（各ウキの間） */}
+        <line x1="125" y1="55" x2="125" y2="295" stroke="#E5E7EB" strokeWidth="1" strokeDasharray="4,4" />
+        <line x1="250" y1="55" x2="250" y2="295" stroke="#E5E7EB" strokeWidth="1" strokeDasharray="4,4" />
+        <line x1="375" y1="55" x2="375" y2="295" stroke="#E5E7EB" strokeWidth="1" strokeDasharray="4,4" />
+      </svg>
+    </div>
+  );
+}
+
 function SectionCard({
   title,
   icon: Icon,
@@ -493,6 +646,8 @@ export default function FloatFishingGuidePage() {
             </p>
 
             <UkiAtariSvg />
+
+            <UkiAtariAnimationSvg />
 
             <div className="space-y-3 text-sm text-muted-foreground">
               <div className="flex gap-2">

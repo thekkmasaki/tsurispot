@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a2a4a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#061828;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#5a6a7a;stop-opacity:1" />
+      <stop offset="35%" style="stop-color:#8a98a8;stop-opacity:1" />
+      <stop offset="65%" style="stop-color:#b0b8c0;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#c8ccd2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="yellowfin" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#d0a830;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e0c040;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- Sea ambiance -->
+  <ellipse cx="200" cy="90" rx="180" ry="40" fill="#0e3258" opacity="0.25"/>
+  <ellipse cx="600" cy="480" rx="150" ry="35" fill="#050e1a" opacity="0.3"/>
+  <ellipse cx="400" cy="550" rx="280" ry="40" fill="#061525" opacity="0.25"/>
+  <!-- Kibire (Yellowfin Black Porgy) - similar to kurodai but with yellow fins -->
+  <!-- Main body - deep-bodied, laterally compressed, typical sea bream shape -->
+  <path d="M120,290 Q160,210 260,180 Q360,162 440,168 Q540,180 610,215 Q665,255 680,295 Q678,340 655,375 Q615,412 535,430 Q450,440 360,435 Q280,425 215,395 Q165,362 140,328 Q125,310 122,298 Z" fill="url(#body)"/>
+  <!-- Darker dorsal region -->
+  <path d="M125,290 Q165,218 265,188 Q360,170 440,175 Q535,185 605,218 Q655,252 668,285 Q658,255 608,222 Q540,192 445,180 Q365,175 270,195 Q175,225 135,282 Z" fill="#4a5868" opacity="0.5"/>
+  <!-- Silver shine -->
+  <path d="M145,298 Q250,278 400,270 Q560,278 660,298" stroke="#d0d5e0" stroke-width="4" fill="none" opacity="0.2"/>
+  <path d="M150,310 Q260,295 400,288 Q550,294 655,310" stroke="#c8d0da" stroke-width="3" fill="none" opacity="0.15"/>
+  <!-- Faint dark horizontal lines (similar to kurodai) -->
+  <path d="M170,275 Q320,258 460,262 Q590,270 650,285" stroke="#4a5a6a" stroke-width="1.5" fill="none" opacity="0.2"/>
+  <path d="M175,305 Q320,290 460,292 Q590,298 648,310" stroke="#4a5a6a" stroke-width="1.5" fill="none" opacity="0.2"/>
+  <path d="M180,335 Q320,322 460,325 Q580,330 640,342" stroke="#4a5a6a" stroke-width="1.5" fill="none" opacity="0.18"/>
+  <!-- Scale pattern -->
+  <circle cx="280" cy="270" r="7" fill="none" stroke="#7a8898" stroke-width="0.8" opacity="0.25"/>
+  <circle cx="320" cy="262" r="7" fill="none" stroke="#7a8898" stroke-width="0.8" opacity="0.25"/>
+  <circle cx="360" cy="258" r="7" fill="none" stroke="#7a8898" stroke-width="0.8" opacity="0.25"/>
+  <circle cx="400" cy="256" r="7" fill="none" stroke="#7a8898" stroke-width="0.8" opacity="0.25"/>
+  <circle cx="440" cy="260" r="7" fill="none" stroke="#7a8898" stroke-width="0.8" opacity="0.25"/>
+  <circle cx="480" cy="268" r="7" fill="none" stroke="#7a8898" stroke-width="0.8" opacity="0.25"/>
+  <circle cx="520" cy="278" r="7" fill="none" stroke="#7a8898" stroke-width="0.8" opacity="0.22"/>
+  <circle cx="560" cy="290" r="7" fill="none" stroke="#7a8898" stroke-width="0.8" opacity="0.2"/>
+  <circle cx="300" cy="300" r="7" fill="none" stroke="#7a8898" stroke-width="0.8" opacity="0.22"/>
+  <circle cx="340" cy="295" r="7" fill="none" stroke="#7a8898" stroke-width="0.8" opacity="0.22"/>
+  <circle cx="380" cy="290" r="7" fill="none" stroke="#7a8898" stroke-width="0.8" opacity="0.22"/>
+  <circle cx="420" cy="292" r="7" fill="none" stroke="#7a8898" stroke-width="0.8" opacity="0.22"/>
+  <circle cx="460" cy="298" r="7" fill="none" stroke="#7a8898" stroke-width="0.8" opacity="0.2"/>
+  <circle cx="500" cy="305" r="7" fill="none" stroke="#7a8898" stroke-width="0.8" opacity="0.2"/>
+  <circle cx="320" cy="330" r="7" fill="none" stroke="#7a8898" stroke-width="0.8" opacity="0.18"/>
+  <circle cx="360" cy="325" r="7" fill="none" stroke="#7a8898" stroke-width="0.8" opacity="0.18"/>
+  <circle cx="400" cy="322" r="7" fill="none" stroke="#7a8898" stroke-width="0.8" opacity="0.18"/>
+  <circle cx="440" cy="326" r="7" fill="none" stroke="#7a8898" stroke-width="0.8" opacity="0.18"/>
+  <!-- Dorsal fin - YELLOW (key characteristic) with spiny front section -->
+  <path d="M240,185 L252,120 Q265,108 278,118 L295,112 Q308,105 318,115 L335,110 Q348,105 358,115 L375,112 Q388,108 398,118 L418,125 Q435,130 448,145 L465,165 L480,178" fill="url(#yellowfin)" stroke="#b09020" stroke-width="1" opacity="0.85"/>
+  <!-- Dorsal fin rays -->
+  <line x1="258" y1="122" x2="262" y2="182" stroke="#b09020" stroke-width="0.8" opacity="0.4"/>
+  <line x1="285" y1="114" x2="290" y2="180" stroke="#b09020" stroke-width="0.8" opacity="0.4"/>
+  <line x1="315" y1="112" x2="320" y2="178" stroke="#b09020" stroke-width="0.8" opacity="0.4"/>
+  <line x1="345" y1="110" x2="348" y2="176" stroke="#b09020" stroke-width="0.8" opacity="0.4"/>
+  <line x1="375" y1="112" x2="378" y2="175" stroke="#b09020" stroke-width="0.8" opacity="0.4"/>
+  <line x1="405" y1="120" x2="408" y2="176" stroke="#b09020" stroke-width="0.8" opacity="0.4"/>
+  <line x1="435" y1="132" x2="438" y2="178" stroke="#b09020" stroke-width="0.8" opacity="0.4"/>
+  <line x1="460" y1="150" x2="462" y2="180" stroke="#b09020" stroke-width="0.8" opacity="0.4"/>
+  <!-- Anal fin - YELLOW -->
+  <path d="M420,432 L430,465 Q450,475 470,468 L490,455 L510,430" fill="url(#yellowfin)" stroke="#b09020" stroke-width="1" opacity="0.8"/>
+  <line x1="435" y1="460" x2="440" y2="435" stroke="#b09020" stroke-width="0.8" opacity="0.4"/>
+  <line x1="458" y1="470" x2="462" y2="438" stroke="#b09020" stroke-width="0.8" opacity="0.4"/>
+  <line x1="480" y1="462" x2="485" y2="435" stroke="#b09020" stroke-width="0.8" opacity="0.4"/>
+  <!-- Pectoral fin - YELLOW -->
+  <path d="M210,318 L180,362 Q195,374 210,358 L235,325" fill="url(#yellowfin)" opacity="0.7"/>
+  <!-- Ventral fin - YELLOW -->
+  <path d="M310,420 L298,455 Q312,462 325,450 L332,422" fill="url(#yellowfin)" opacity="0.75"/>
+  <!-- Tail fin - YELLOW (distinctive) -->
+  <path d="M668,295 L715,252 Q728,270 722,295 L720,310 L725,335 Q722,355 712,368 L665,325" fill="url(#yellowfin)" stroke="#b09020" stroke-width="1" opacity="0.85"/>
+  <line x1="710" y1="258" x2="690" y2="295" stroke="#b09020" stroke-width="0.8" opacity="0.3"/>
+  <line x1="708" y1="362" x2="688" y2="325" stroke="#b09020" stroke-width="0.8" opacity="0.3"/>
+  <!-- Eye -->
+  <circle cx="180" cy="262" r="16" fill="#1a1a1a"/>
+  <circle cx="180" cy="262" r="10" fill="#2a2a30"/>
+  <circle cx="178" cy="260" r="4.5" fill="#4a4a50"/>
+  <circle cx="176" cy="258" r="2" fill="#ffffff" opacity="0.45"/>
+  <!-- Mouth - slightly downturned (porgy characteristic) -->
+  <path d="M125,295 Q140,308 165,300" stroke="#3a4a5a" stroke-width="2" fill="none"/>
+  <!-- Snout - slightly pointed -->
+  <path d="M122,292 Q128,285 140,280" stroke="#6a7888" stroke-width="1.5" fill="none" opacity="0.3"/>
+  <!-- Gill -->
+  <path d="M205,242 Q210,278 208,318" stroke="#5a6878" stroke-width="2" fill="none" opacity="0.35"/>
+  <!-- Gill cover detail -->
+  <path d="M210,250 Q214,280 212,310" stroke="#5a6878" stroke-width="1" fill="none" opacity="0.25"/>
+  <!-- Label -->
+  <text x="400" y="510" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="42" fill="#ffffff" font-weight="bold" opacity="0.9">キビレ</text>
+  <text x="400" y="548" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="20" fill="#ddcc88" opacity="0.7">Yellowfin Black Porgy</text>
+</svg>

@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a2a1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d150d;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="shell" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#3a5030;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#4a6038;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#5a6840;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4a5535;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="claw" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#4a5838;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3a4828;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- Mangrove ambiance -->
+  <ellipse cx="200" cy="520" rx="200" ry="55" fill="#0d1a0d" opacity="0.4"/>
+  <ellipse cx="600" cy="530" rx="180" ry="50" fill="#0d1a0d" opacity="0.35"/>
+  <!-- Mangrove root hints -->
+  <path d="M50,600 Q65,500 60,420 Q58,380 65,340" stroke="#2a3a20" stroke-width="5" fill="none" opacity="0.35"/>
+  <path d="M75,600 Q85,520 80,460 Q78,420 82,380" stroke="#2a3a20" stroke-width="4" fill="none" opacity="0.3"/>
+  <path d="M720,600 Q730,510 728,440 Q725,400 730,360" stroke="#2a3a20" stroke-width="5" fill="none" opacity="0.35"/>
+  <path d="M745,600 Q750,530 748,470 Q746,430 750,395" stroke="#2a3a20" stroke-width="4" fill="none" opacity="0.3"/>
+  <!-- Muddy water hint -->
+  <ellipse cx="400" cy="580" rx="350" ry="30" fill="#1a2518" opacity="0.3"/>
+  <!-- Nokogiri Gazami (Mud Crab) - large crab, dark green-brown -->
+  <!-- Main carapace (shell) - wide, slightly hexagonal -->
+  <path d="M260,250 Q280,200 340,180 Q380,170 400,168 Q420,170 460,180 Q520,200 540,250 Q548,280 545,310 Q530,350 480,370 Q430,382 400,385 Q370,382 320,370 Q270,350 255,310 Q252,280 260,250 Z" fill="url(#shell)"/>
+  <!-- Serrated front edge of carapace (nokogiri = saw) -->
+  <path d="M268,248 L280,238 L295,245 L310,235 L325,242 L340,232 L358,238 L372,230 L388,235 L400,228 L412,235 L428,230 L442,238 L460,232 L475,242 L490,235 L505,245 L520,238 L532,248" stroke="#2a3820" stroke-width="2.5" fill="none" opacity="0.7"/>
+  <!-- Carapace texture / ridges -->
+  <path d="M310,220 Q350,210 400,208 Q450,210 490,220" stroke="#3a4828" stroke-width="2" fill="none" opacity="0.3"/>
+  <path d="M290,250 Q345,238 400,235 Q455,238 510,250" stroke="#3a4828" stroke-width="1.5" fill="none" opacity="0.25"/>
+  <path d="M275,280 Q340,268 400,265 Q460,268 525,280" stroke="#3a4828" stroke-width="1.5" fill="none" opacity="0.2"/>
+  <!-- Carapace center line -->
+  <line x1="400" y1="175" x2="400" y2="380" stroke="#3a4828" stroke-width="1" opacity="0.15"/>
+  <!-- Shell pattern details -->
+  <ellipse cx="350" cy="260" rx="25" ry="18" fill="none" stroke="#3a4828" stroke-width="1" opacity="0.2"/>
+  <ellipse cx="450" cy="260" rx="25" ry="18" fill="none" stroke="#3a4828" stroke-width="1" opacity="0.2"/>
+  <ellipse cx="370" cy="310" rx="20" ry="15" fill="none" stroke="#3a4828" stroke-width="1" opacity="0.18"/>
+  <ellipse cx="430" cy="310" rx="20" ry="15" fill="none" stroke="#3a4828" stroke-width="1" opacity="0.18"/>
+  <!-- Eyes on stalks -->
+  <circle cx="370" cy="200" r="6" fill="#1a1a1a"/>
+  <circle cx="370" cy="200" r="3.5" fill="#2a3020"/>
+  <circle cx="369" cy="199" r="1.5" fill="#ffffff" opacity="0.3"/>
+  <circle cx="430" cy="200" r="6" fill="#1a1a1a"/>
+  <circle cx="430" cy="200" r="3.5" fill="#2a3020"/>
+  <circle cx="429" cy="199" r="1.5" fill="#ffffff" opacity="0.3"/>
+  <!-- Eye stalks -->
+  <line x1="380" y1="210" x2="372" y2="202" stroke="#3a5030" stroke-width="3" opacity="0.7"/>
+  <line x1="420" y1="210" x2="428" y2="202" stroke="#3a5030" stroke-width="3" opacity="0.7"/>
+  <!-- LEFT LARGE CLAW (chelipeds - very large, characteristic) -->
+  <!-- Upper arm -->
+  <path d="M260,280 Q230,268 200,258 Q175,252 155,260" fill="url(#claw)" stroke="#2a3820" stroke-width="1.5"/>
+  <!-- Claw base -->
+  <ellipse cx="145" cy="268" rx="22" ry="18" fill="url(#claw)" stroke="#2a3820" stroke-width="1"/>
+  <!-- Claw pincer - upper -->
+  <path d="M128,258 Q105,240 80,228 Q65,225 55,235 Q52,245 60,252 Q75,258 95,262 L125,268" fill="#4a5838" stroke="#2a3820" stroke-width="1.5"/>
+  <!-- Claw pincer - lower -->
+  <path d="M128,278 Q108,290 88,298 Q72,302 62,295 Q55,285 62,278 Q78,270 95,268 L125,268" fill="#3a4828" stroke="#2a3820" stroke-width="1.5"/>
+  <!-- Claw teeth -->
+  <circle cx="90" cy="255" r="2" fill="#2a3820" opacity="0.5"/>
+  <circle cx="78" cy="248" r="2" fill="#2a3820" opacity="0.5"/>
+  <circle cx="92" cy="290" r="2" fill="#2a3820" opacity="0.5"/>
+  <circle cx="80" cy="295" r="2" fill="#2a3820" opacity="0.5"/>
+  <!-- RIGHT LARGE CLAW -->
+  <!-- Upper arm -->
+  <path d="M540,280 Q570,268 600,258 Q625,252 645,260" fill="url(#claw)" stroke="#2a3820" stroke-width="1.5"/>
+  <!-- Claw base -->
+  <ellipse cx="655" cy="268" rx="22" ry="18" fill="url(#claw)" stroke="#2a3820" stroke-width="1"/>
+  <!-- Claw pincer - upper -->
+  <path d="M672,258 Q695,240 720,228 Q735,225 745,235 Q748,245 740,252 Q725,258 705,262 L675,268" fill="#4a5838" stroke="#2a3820" stroke-width="1.5"/>
+  <!-- Claw pincer - lower -->
+  <path d="M672,278 Q692,290 712,298 Q728,302 738,295 Q745,285 738,278 Q722,270 705,268 L675,268" fill="#3a4828" stroke="#2a3820" stroke-width="1.5"/>
+  <!-- Claw teeth -->
+  <circle cx="710" cy="255" r="2" fill="#2a3820" opacity="0.5"/>
+  <circle cx="722" cy="248" r="2" fill="#2a3820" opacity="0.5"/>
+  <circle cx="708" cy="290" r="2" fill="#2a3820" opacity="0.5"/>
+  <circle cx="720" cy="295" r="2" fill="#2a3820" opacity="0.5"/>
+  <!-- Walking legs (4 pairs) -->
+  <!-- Left side legs -->
+  <path d="M272,320 Q240,350 210,385 Q195,405 185,420" stroke="#3a4828" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.8"/>
+  <path d="M268,345 Q235,375 205,410 Q192,430 185,445" stroke="#3a4828" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.75"/>
+  <path d="M275,360 Q248,392 225,425 Q215,445 212,458" stroke="#3a4828" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <!-- Back left leg (paddle-shaped for swimming - portunidae) -->
+  <path d="M290,372 Q268,405 252,440 Q245,460 248,472" stroke="#3a4828" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <ellipse cx="248" cy="478" rx="12" ry="6" fill="#3a5030" stroke="#2a3820" stroke-width="1" opacity="0.7" transform="rotate(-15,248,478)"/>
+  <!-- Right side legs -->
+  <path d="M528,320 Q560,350 590,385 Q605,405 615,420" stroke="#3a4828" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.8"/>
+  <path d="M532,345 Q565,375 595,410 Q608,430 615,445" stroke="#3a4828" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.75"/>
+  <path d="M525,360 Q552,392 575,425 Q585,445 588,458" stroke="#3a4828" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <!-- Back right leg (paddle-shaped) -->
+  <path d="M510,372 Q532,405 548,440 Q555,460 552,472" stroke="#3a4828" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.7"/>
+  <ellipse cx="552" cy="478" rx="12" ry="6" fill="#3a5030" stroke="#2a3820" stroke-width="1" opacity="0.7" transform="rotate(15,552,478)"/>
+  <!-- Leg joint details -->
+  <circle cx="210" cy="385" r="3" fill="#4a5838" opacity="0.5"/>
+  <circle cx="205" cy="410" r="3" fill="#4a5838" opacity="0.5"/>
+  <circle cx="225" cy="425" r="3" fill="#4a5838" opacity="0.5"/>
+  <circle cx="590" cy="385" r="3" fill="#4a5838" opacity="0.5"/>
+  <circle cx="595" cy="410" r="3" fill="#4a5838" opacity="0.5"/>
+  <circle cx="575" cy="425" r="3" fill="#4a5838" opacity="0.5"/>
+  <!-- Antennae -->
+  <path d="M388,185 Q375,165 365,148" stroke="#4a5838" stroke-width="1.5" fill="none" opacity="0.5"/>
+  <path d="M412,185 Q425,165 435,148" stroke="#4a5838" stroke-width="1.5" fill="none" opacity="0.5"/>
+  <!-- Label -->
+  <text x="400" y="530" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="38" fill="#ffffff" font-weight="bold" opacity="0.9">ノコギリガザミ</text>
+  <text x="400" y="565" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="20" fill="#88bb88" opacity="0.7">Mud Crab</text>
+</svg>

@@ -273,7 +273,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
                   handleFilterChange(setSelectedPrefecture, newPref);
                   setSelectedArea("");
                 }}
-                className="min-h-[36px] text-xs sm:text-sm"
+                className="min-h-[40px] text-xs sm:text-sm"
               >
                 {pref}
               </Button>
@@ -290,7 +290,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
                 variant={selectedArea === "" ? "default" : "outline"}
                 size="sm"
                 onClick={() => handleFilterChange(setSelectedArea, "")}
-                className="min-h-[36px] text-xs sm:text-sm"
+                className="min-h-[40px] text-xs sm:text-sm"
               >
                 すべてのエリア
               </Button>
@@ -300,7 +300,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
                   variant={selectedArea === area ? "default" : "outline"}
                   size="sm"
                   onClick={() => handleFilterChange(setSelectedArea, selectedArea === area ? "" : area)}
-                  className="min-h-[36px] text-xs sm:text-sm"
+                  className="min-h-[40px] text-xs sm:text-sm"
                 >
                   {area}
                 </Button>
@@ -321,7 +321,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
                   variant={selectedType === key ? "default" : "outline"}
                   size="sm"
                   onClick={() => handleFilterChange(setSelectedType, selectedType === key ? "" : key)}
-                  className="min-h-[36px] text-xs sm:text-sm"
+                  className="min-h-[40px] text-xs sm:text-sm"
                 >
                   {label}
                 </Button>
@@ -339,7 +339,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
                   variant={selectedDifficulty === key ? "default" : "outline"}
                   size="sm"
                   onClick={() => handleFilterChange(setSelectedDifficulty, selectedDifficulty === key ? "" : key)}
-                  className="min-h-[36px] text-xs sm:text-sm"
+                  className="min-h-[40px] text-xs sm:text-sm"
                 >
                   {label}
                 </Button>
@@ -355,7 +355,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
           {filteredSpots.length}件のスポット
         </p>
         {hasFilters && (
-          <Button variant="ghost" size="sm" onClick={clearFilters} className="min-h-[36px]">
+          <Button variant="ghost" size="sm" onClick={clearFilters} className="min-h-[40px]">
             <X className="mr-1 size-4" />
             クリア
           </Button>
@@ -377,7 +377,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="flex items-center justify-center gap-2 pt-4">
+            <div className="flex items-center justify-center gap-1 pt-4 sm:gap-2">
               <Button
                 variant="outline"
                 size="sm"
@@ -386,20 +386,47 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
                 className="min-h-[44px] gap-1"
               >
                 <ChevronLeft className="size-4" />
-                前へ
+                <span className="hidden sm:inline">前へ</span>
               </Button>
-              <div className="flex items-center gap-1">
-                {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                  <Button
-                    key={page}
-                    variant={currentPage === page ? "default" : "outline"}
-                    size="sm"
-                    onClick={() => { setCurrentPage(page); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                    className="min-h-[44px] min-w-[44px]"
-                  >
-                    {page}
-                  </Button>
-                ))}
+              <div className="flex items-center gap-0.5 sm:gap-1">
+                {(() => {
+                  if (totalPages <= 7) {
+                    return Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                      <Button
+                        key={page}
+                        variant={currentPage === page ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => { setCurrentPage(page); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                        className="min-h-[44px] min-w-[44px]"
+                      >
+                        {page}
+                      </Button>
+                    ));
+                  }
+                  const pages: (number | string)[] = [];
+                  pages.push(1);
+                  if (currentPage > 3) pages.push("start-ellipsis");
+                  for (let p = Math.max(2, currentPage - 1); p <= Math.min(totalPages - 1, currentPage + 1); p++) {
+                    pages.push(p);
+                  }
+                  if (currentPage < totalPages - 2) pages.push("end-ellipsis");
+                  pages.push(totalPages);
+                  return pages.map((page) =>
+                    typeof page === "string" ? (
+                      <span key={page} className="flex min-h-[44px] min-w-[32px] items-center justify-center text-sm text-muted-foreground sm:min-w-[44px]">...</span>
+                    ) : (
+                      <Button
+                        key={page}
+                        variant={currentPage === page ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => { setCurrentPage(page); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                        className="min-h-[44px] min-w-[36px] sm:min-w-[44px]"
+                      >
+                        {page}
+                      </Button>
+                    )
+                  );
+                })()}
               </div>
               <Button
                 variant="outline"
@@ -408,7 +435,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
                 onClick={() => { setCurrentPage(currentPage + 1); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                 className="min-h-[44px] gap-1"
               >
-                次へ
+                <span className="hidden sm:inline">次へ</span>
                 <ChevronRight className="size-4" />
               </Button>
             </div>

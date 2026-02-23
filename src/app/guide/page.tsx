@@ -427,7 +427,7 @@ export default function GuidePage() {
           maxItems={3}
         />
         <div className="mt-4 text-center">
-          <Button asChild variant="outline" className="rounded-full">
+          <Button asChild variant="outline" className="min-h-[44px] rounded-full">
             <Link href="/gear">
               すべてのおすすめ道具を見る
               <ChevronRight className="ml-1 size-4" />

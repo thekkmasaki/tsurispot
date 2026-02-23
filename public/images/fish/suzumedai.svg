@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" width="800" height="600">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a3a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0d0d1f;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="body" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#2a3a5a;stop-opacity:1" />
+      <stop offset="40%" style="stop-color:#3a4a6a;stop-opacity:1" />
+      <stop offset="70%" style="stop-color:#4a5a7a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#5a6a8a;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="sheen" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4080c0;stop-opacity:0.4" />
+      <stop offset="100%" style="stop-color:#2060a0;stop-opacity:0" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <!-- Rocky reef ambiance -->
+  <ellipse cx="180" cy="520" rx="200" ry="60" fill="#1a1a30" opacity="0.4"/>
+  <ellipse cx="620" cy="540" rx="180" ry="50" fill="#1a1a30" opacity="0.35"/>
+  <ellipse cx="400" cy="560" rx="250" ry="40" fill="#151528" opacity="0.3"/>
+  <!-- Rock hints -->
+  <path d="M100,580 Q130,530 180,520 Q230,515 260,540 Q280,560 300,580" fill="#1e1e35" opacity="0.4"/>
+  <path d="M500,580 Q540,540 600,530 Q650,525 700,550 Q720,565 740,580" fill="#1e1e35" opacity="0.35"/>
+  <!-- Suzumedai (Damselfish) - small, oval/deep-bodied fish -->
+  <!-- Main body - oval, deep-bodied, compressed -->
+  <path d="M190,280 Q220,210 300,185 Q380,168 440,175 Q510,188 560,218 Q600,252 610,295 Q608,340 590,370 Q555,405 490,420 Q420,430 350,425 Q280,415 235,385 Q205,355 195,320 Z" fill="url(#body)"/>
+  <!-- Darker dorsal area -->
+  <path d="M195,280 Q225,218 305,192 Q380,178 440,182 Q510,195 555,222 Q590,250 600,280 Q590,255 555,228 Q510,200 445,188 Q385,182 310,198 Q235,225 205,275 Z" fill="#1a2a45" opacity="0.5"/>
+  <!-- Blue iridescent sheen (juvenile coloring hint) -->
+  <path d="M220,270 Q300,238 400,230 Q500,238 580,268" stroke="#3090d0" stroke-width="4" fill="none" opacity="0.25"/>
+  <path d="M225,290 Q310,260 400,252 Q500,258 575,285" stroke="#40a0e0" stroke-width="3" fill="none" opacity="0.2"/>
+  <!-- Fluorescent blue V-line on back (juvenile characteristic) -->
+  <path d="M340,195 L380,175 L420,195" stroke="#30b0ff" stroke-width="3" fill="none" opacity="0.5" stroke-linecap="round"/>
+  <path d="M345,200 L380,182 L415,200" stroke="#50c0ff" stroke-width="2" fill="none" opacity="0.35" stroke-linecap="round"/>
+  <!-- Scale pattern -->
+  <circle cx="300" cy="270" r="7" fill="none" stroke="#3a5070" stroke-width="0.8" opacity="0.3"/>
+  <circle cx="340" cy="260" r="7" fill="none" stroke="#3a5070" stroke-width="0.8" opacity="0.3"/>
+  <circle cx="380" cy="255" r="7" fill="none" stroke="#3a5070" stroke-width="0.8" opacity="0.3"/>
+  <circle cx="420" cy="258" r="7" fill="none" stroke="#3a5070" stroke-width="0.8" opacity="0.3"/>
+  <circle cx="460" cy="268" r="7" fill="none" stroke="#3a5070" stroke-width="0.8" opacity="0.3"/>
+  <circle cx="500" cy="282" r="7" fill="none" stroke="#3a5070" stroke-width="0.8" opacity="0.3"/>
+  <circle cx="320" cy="300" r="7" fill="none" stroke="#3a5070" stroke-width="0.8" opacity="0.25"/>
+  <circle cx="360" cy="292" r="7" fill="none" stroke="#3a5070" stroke-width="0.8" opacity="0.25"/>
+  <circle cx="400" cy="288" r="7" fill="none" stroke="#3a5070" stroke-width="0.8" opacity="0.25"/>
+  <circle cx="440" cy="292" r="7" fill="none" stroke="#3a5070" stroke-width="0.8" opacity="0.25"/>
+  <circle cx="480" cy="300" r="7" fill="none" stroke="#3a5070" stroke-width="0.8" opacity="0.25"/>
+  <circle cx="340" cy="330" r="7" fill="none" stroke="#3a5070" stroke-width="0.8" opacity="0.2"/>
+  <circle cx="380" cy="325" r="7" fill="none" stroke="#3a5070" stroke-width="0.8" opacity="0.2"/>
+  <circle cx="420" cy="322" r="7" fill="none" stroke="#3a5070" stroke-width="0.8" opacity="0.2"/>
+  <circle cx="460" cy="328" r="7" fill="none" stroke="#3a5070" stroke-width="0.8" opacity="0.2"/>
+  <!-- Dorsal fin - long, continuous (characteristic of damselfish) -->
+  <path d="M290,192 L300,140 Q320,125 340,130 L360,128 Q380,122 395,128 L415,130 Q435,126 450,135 L470,145 Q490,155 500,172 L510,195" fill="#2a3a55" stroke="#1a2a45" stroke-width="1" opacity="0.85"/>
+  <!-- Dorsal fin rays -->
+  <line x1="305" y1="142" x2="310" y2="190" stroke="#1a2a45" stroke-width="0.8" opacity="0.4"/>
+  <line x1="330" y1="130" x2="335" y2="186" stroke="#1a2a45" stroke-width="0.8" opacity="0.4"/>
+  <line x1="360" y1="128" x2="362" y2="184" stroke="#1a2a45" stroke-width="0.8" opacity="0.4"/>
+  <line x1="390" y1="126" x2="392" y2="182" stroke="#1a2a45" stroke-width="0.8" opacity="0.4"/>
+  <line x1="420" y1="130" x2="422" y2="185" stroke="#1a2a45" stroke-width="0.8" opacity="0.4"/>
+  <line x1="450" y1="138" x2="452" y2="190" stroke="#1a2a45" stroke-width="0.8" opacity="0.4"/>
+  <line x1="475" y1="148" x2="478" y2="192" stroke="#1a2a45" stroke-width="0.8" opacity="0.4"/>
+  <!-- Anal fin -->
+  <path d="M390,422 L400,455 Q420,462 440,455 L460,438 L480,418" fill="#3a4a65" stroke="#2a3a55" stroke-width="1" opacity="0.8"/>
+  <line x1="405" y1="450" x2="410" y2="425" stroke="#2a3a55" stroke-width="0.8" opacity="0.4"/>
+  <line x1="425" y1="458" x2="430" y2="428" stroke="#2a3a55" stroke-width="0.8" opacity="0.4"/>
+  <line x1="445" y1="452" x2="450" y2="425" stroke="#2a3a55" stroke-width="0.8" opacity="0.4"/>
+  <!-- Pectoral fin -->
+  <path d="M250,320 L222,360 Q235,370 248,358 L270,330" fill="#4a5a75" opacity="0.65"/>
+  <!-- Ventral fin -->
+  <path d="M320,410 L310,440 Q322,445 332,435 L338,412" fill="#3a4a65" opacity="0.7"/>
+  <!-- Tail fin - forked -->
+  <path d="M600,295 L645,258 Q655,275 650,295 L648,310 L652,330 Q650,348 642,362 L598,328" fill="#2a3a55" stroke="#1a2a45" stroke-width="1" opacity="0.85"/>
+  <!-- Tail fin rays -->
+  <line x1="640" y1="262" x2="620" y2="295" stroke="#1a2a45" stroke-width="0.8" opacity="0.3"/>
+  <line x1="638" y1="358" x2="618" y2="325" stroke="#1a2a45" stroke-width="0.8" opacity="0.3"/>
+  <!-- Eye - relatively large -->
+  <circle cx="235" cy="262" r="18" fill="#1a1a1a"/>
+  <circle cx="235" cy="262" r="11" fill="#2a2a35"/>
+  <circle cx="233" cy="260" r="5" fill="#4a4a55"/>
+  <circle cx="230" cy="258" r="2.5" fill="#ffffff" opacity="0.5"/>
+  <!-- Mouth - small, slightly protruding -->
+  <path d="M195,288 Q210,298 230,292" stroke="#1a2a45" stroke-width="2" fill="none"/>
+  <!-- Gill -->
+  <path d="M258,245 Q262,280 260,320" stroke="#2a3a55" stroke-width="2" fill="none" opacity="0.35"/>
+  <!-- Gill cover detail -->
+  <path d="M260,260 Q265,275 262,295" stroke="#2a3a55" stroke-width="1" fill="none" opacity="0.25"/>
+  <!-- Label -->
+  <text x="400" y="510" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="42" fill="#ffffff" font-weight="bold" opacity="0.9">スズメダイ</text>
+  <text x="400" y="548" text-anchor="middle" font-family="'Hiragino Sans', 'Yu Gothic', sans-serif" font-size="20" fill="#88aadd" opacity="0.7">Damselfish</text>
+</svg>
