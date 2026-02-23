@@ -24,6 +24,8 @@ import {
 } from "@/lib/data/monthly-guides";
 import { fishSpecies } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
+import { getMonthlyRigs } from "@/lib/data/monthly-rigs";
+import { MonthlyRigSection } from "@/components/monthly-rig-section";
 
 interface Props {
   params: Promise<{ month: string }>;
@@ -80,6 +82,9 @@ export default async function MonthlyGuidePage({ params }: Props) {
 
   const displayFish =
     guidedFish.length > 0 ? guidedFish : fishForMonth;
+
+  // その月のおすすめ仕掛けセット
+  const monthlyRigs = getMonthlyRigs(guide.month);
 
   // その月に釣れるスポット（catchableFishの月範囲でフィルタ）
   const spotsForMonth = fishingSpots
@@ -288,6 +293,9 @@ export default async function MonthlyGuidePage({ params }: Props) {
             </Link>
           </div>
         </section>
+
+        {/* おすすめ仕掛けセット */}
+        <MonthlyRigSection monthName={guide.nameJa} rigs={monthlyRigs} />
 
         {/* おすすめスポット */}
         {spotsForMonth.length > 0 && (

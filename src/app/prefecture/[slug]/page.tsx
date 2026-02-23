@@ -953,6 +953,69 @@ export default async function PrefecturePage({ params }: PageProps) {
         </section>
       )}
 
+      {/* QR Code section for tackle shops */}
+      {spots.length > 0 && (
+        <section className="mb-8 sm:mb-10">
+          <Card className="gap-0 py-0 border-blue-200 bg-gradient-to-br from-blue-50 to-slate-50">
+            <CardContent className="p-5 sm:p-8">
+              <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
+                🏪 釣具店の方へ
+              </h2>
+              <p className="mb-5 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                このQRコードを店頭に設置すると、お客様がスマホで地元の釣り場をすぐに検索できます。
+              </p>
+              <div className="flex flex-col sm:flex-row items-center gap-5 sm:gap-8">
+                {/* QR Code image */}
+                <div className="shrink-0">
+                  <a
+                    href={`https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=${encodeURIComponent(`https://tsurispot.com/prefecture/${slug}`)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="QRコードを新しいタブで開く（右クリックで保存できます）"
+                  >
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={`https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(`https://tsurispot.com/prefecture/${slug}`)}`}
+                      alt={`${pref.name}の釣りスポット QRコード`}
+                      width={200}
+                      height={200}
+                      className="rounded-lg border border-gray-200 bg-white p-2 shadow-sm"
+                    />
+                  </a>
+                </div>
+                <div className="text-center sm:text-left space-y-3">
+                  <div>
+                    <p className="text-base font-bold sm:text-lg">
+                      {pref.name}の釣りスポット
+                    </p>
+                    <p className="text-sm text-muted-foreground">
+                      {spots.length}件掲載中
+                    </p>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <a
+                      href={`https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=${encodeURIComponent(`https://tsurispot.com/prefecture/${slug}`)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+                    >
+                      QRコードをダウンロード
+                    </a>
+                    <Link
+                      href="/partner"
+                      className="inline-flex items-center justify-center gap-1 text-sm text-blue-600 hover:text-blue-800 transition-colors"
+                    >
+                      詳しくはパートナーページへ
+                      <ChevronLeft className="size-3 rotate-180" />
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+      )}
+
       {/* Internal links */}
       <section className="mt-8 sm:mt-12">
         <h2 className="mb-3 text-base font-bold sm:mb-4 sm:text-lg">

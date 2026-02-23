@@ -24,6 +24,7 @@ import { ProductList } from "@/components/affiliate/product-list";
 import { getProductsByMethod } from "@/lib/data/products";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
 import type { YouTubeSearchLink } from "@/types";
+import { RigDiagram } from "@/components/rig-diagram";
 
 const sabikiVideos: YouTubeSearchLink[] = [
   {
@@ -370,6 +371,9 @@ export default function SabikiGuidePage() {
               初心者は「サビキ釣りセット」を購入するのが最も簡単。竿・リール・仕掛け・カゴがセットで3,000〜5,000円程度です。コマセとバケツを追加すれば、すぐに釣りを始められます。
             </Hint>
           </SectionCard>
+
+          {/* 仕掛け図 */}
+          <RigDiagram type="sabiki" />
 
           {/* 釣り方の手順 */}
           <SectionCard title="釣り方の手順" icon={Footprints}>

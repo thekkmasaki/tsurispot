@@ -21,6 +21,7 @@ import { Button } from "@/components/ui/button";
 import { fishingSpots } from "@/lib/data/spots";
 import { ProductList } from "@/components/affiliate/product-list";
 import { getProductsByMethod } from "@/lib/data/products";
+import { RigDiagram } from "@/components/rig-diagram";
 
 export const metadata: Metadata = {
   title: "穴釣り完全ガイド - カサゴ・メバルの釣り方と仕掛け【初心者向け】",
@@ -323,6 +324,9 @@ export default function AnazuriGuidePage() {
               </ul>
             </div>
           </SectionCard>
+
+          {/* 仕掛け図 */}
+          <RigDiagram type="anazuri" />
 
           {/* 釣り方の手順 */}
           <SectionCard title="釣り方の手順" icon={Footprints}>

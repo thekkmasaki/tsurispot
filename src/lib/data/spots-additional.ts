@@ -4485,7 +4485,7 @@ export const additionalSpots: FishingSpot[] = [
     description: "富士五湖の山中湖。富士山を眺めながらのワカサギ釣りは最高。ドーム船でぬくぬくフィッシング。",
     latitude: 35.4234, longitude: 138.8612, address: "山梨県南都留郡山中湖村旭日丘",
     accessInfo: "東富士五湖道路山中湖ICから約5分。",
-    region: region("r44"), spotType: "pier", difficulty: "beginner",
+    region: region("r44"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "ドーム船乗船料4000円程度（遊漁券込）",
     hasParking: true, parkingDetail: "ドーム船乗り場に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, rentalDetail: "ドーム船でフルレンタルあり",

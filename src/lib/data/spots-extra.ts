@@ -1785,7 +1785,7 @@ export const extraSpots: FishingSpot[] = [
     latitude: 35.011700, longitude: 135.861200,
     address: "滋賀県大津市浜大津4丁目",
     accessInfo: "京阪びわ湖浜大津駅から徒歩約5分。名神高速大津ICから約10分。",
-    region: localRegion("r99"), spotType: "pier", difficulty: "beginner",
+    region: localRegion("r99"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "有料駐車場あり（周辺）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/biwako-otsu.jpg", images: [], rating: 3.8, reviewCount: 98,

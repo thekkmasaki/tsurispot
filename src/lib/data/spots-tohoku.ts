@@ -774,7 +774,7 @@ export const tohokuSpots: FishingSpot[] = [
     latitude: 38.1780, longitude: 140.9560,
     address: "宮城県名取市閖上",
     accessInfo: "JR仙台駅から車で約30分。仙台東部道路名取ICから約10分。",
-    region: region("r2"), spotType: "river", difficulty: "intermediate",
+    region: region("r2"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "閖上朝市駐車場利用可（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/yuriage-port.jpg", images: [], rating: 4.1, reviewCount: 165,

@@ -29,6 +29,7 @@ import { NearbySpotsSorter } from "@/components/fish/nearby-spots-sorter";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
 import { ProductList } from "@/components/affiliate/product-list";
 import { getProductsByFish, getTopProducts } from "@/lib/data/products";
+import { getHookSizeData } from "@/lib/data/hook-sizes";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
 import { InArticleAd } from "@/components/ads/ad-unit";
@@ -437,6 +438,81 @@ export default async function FishDetailPage({ params }: PageProps) {
                       )}
                     </dl>
                   </div>
+
+                  {/* 月別おすすめ針サイズ */}
+                  {(() => {
+                    const hookData = getHookSizeData(fish.slug, index);
+                    if (!hookData) return null;
+                    const MONTH_LABELS = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
+                    return (
+                      <div className="mb-4 rounded-lg border border-amber-200 bg-amber-50/50 p-3 sm:mb-5 sm:p-4">
+                        <p className="text-xs font-bold text-amber-900 mb-2">
+                          <span className="mr-1">&#x1F4CC;</span>月別おすすめ針サイズ（参考）
+                        </p>
+                        <p className="text-xs text-amber-700 mb-2">{hookData.hookType}</p>
+                        {/* 上段: 1月〜6月 */}
+                        <div className="grid grid-cols-6 gap-1 mb-1">
+                          {hookData.months.slice(0, 6).map((m, mi) => {
+                            const monthNum = mi + 1;
+                            const isCurrentMonth = monthNum === currentMonth;
+                            const isOff = m.size === "-";
+                            return (
+                              <div
+                                key={mi}
+                                className={`text-center rounded-md p-1.5 border ${
+                                  isCurrentMonth
+                                    ? "ring-2 ring-amber-400 bg-amber-100 border-amber-300"
+                                    : "bg-white border-amber-100"
+                                }`}
+                                title={m.note || undefined}
+                              >
+                                <div className="text-[10px] text-muted-foreground">{MONTH_LABELS[mi]}</div>
+                                <div className={`text-xs font-bold ${
+                                  isOff ? "text-muted-foreground/50" : "text-amber-800"
+                                }`}>
+                                  {m.size}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                        {/* 下段: 7月〜12月 */}
+                        <div className="grid grid-cols-6 gap-1">
+                          {hookData.months.slice(6, 12).map((m, mi) => {
+                            const monthNum = mi + 7;
+                            const isCurrentMonth = monthNum === currentMonth;
+                            const isOff = m.size === "-";
+                            return (
+                              <div
+                                key={mi}
+                                className={`text-center rounded-md p-1.5 border ${
+                                  isCurrentMonth
+                                    ? "ring-2 ring-amber-400 bg-amber-100 border-amber-300"
+                                    : "bg-white border-amber-100"
+                                }`}
+                                title={m.note || undefined}
+                              >
+                                <div className="text-[10px] text-muted-foreground">{MONTH_LABELS[mi + 6]}</div>
+                                <div className={`text-xs font-bold ${
+                                  isOff ? "text-muted-foreground/50" : "text-amber-800"
+                                }`}>
+                                  {m.size}
+                                </div>
+                              </div>
+                            );
+                          })}
+                        </div>
+                        {/* Tip */}
+                        <p className="text-xs text-amber-700 mt-2">
+                          <span className="mr-1">&#x1F4A1;</span>{hookData.tip}
+                        </p>
+                        {/* 注意書き */}
+                        <p className="text-[10px] text-muted-foreground mt-1.5 italic">
+                          ※ 地域や年によって異なります。あくまで参考情報としてご活用ください
+                        </p>
+                      </div>
+                    );
+                  })()}
 
                   {/* Tips */}
                   {method.tips.length > 0 && (

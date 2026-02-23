@@ -3,6 +3,7 @@ import Link from "next/link";
 import { LineBanner } from "@/components/line-banner";
 import { ChevronLeft, CircleDot, Anchor, Bug, Eye, Fish } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { RigDiagram } from "@/components/rig-diagram";
 
 export const metadata: Metadata = {
   title: "ウキ釣り完全ガイド - ウキの種類・仕掛け・アタリの取り方",
@@ -165,8 +166,10 @@ export default function FloatFishingGuidePage() {
           {/* 仕掛けの作り方 */}
           <SectionCard title="仕掛けの作り方" icon={Anchor}>
             <p className="mb-4 text-sm text-muted-foreground">
-              基本的なウキ釣り仕掛けの構成を上から順番に解説します。
+              基本的なウキ釣り仕掛けの構成を上から順番に解説します。まずは仕掛けの全体像を確認しましょう。
             </p>
+
+            <RigDiagram type="float" />
 
             <ol className="list-none space-y-4">
               <li className="flex gap-3">

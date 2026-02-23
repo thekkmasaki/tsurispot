@@ -3,30 +3,40 @@ import Link from "next/link";
 import {
   Store,
   MapPin,
-  BarChart3,
-  Users,
   Mail,
   ArrowLeft,
   CheckCircle2,
-  TrendingUp,
   Clock,
   Shield,
   Zap,
-  MessageSquare,
-  FileText,
+  QrCode,
+  ArrowRight,
+  Fish,
+
+  Smartphone,
+  UserCheck,
+  CalendarDays,
+  BookOpen,
+  Globe,
+  Map,
+  Compass,
+  Search,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { fishingSpots } from "@/lib/data/spots";
+import { fishSpecies } from "@/lib/data/fish";
+
+const spotCount = fishingSpots.length;
+const fishCount = fishSpecies.length;
 
 export const metadata: Metadata = {
-  title: "事業者様向け掲載のご案内 - ツリスポ パートナー",
-  description:
-    "全国960+釣りスポット・80魚種を掲載する釣り情報サイト「ツリスポ」への掲載をご案内。フリー・ベーシック・プレミアムの3プランで釣具店・管理釣り場・遊漁船の集客を支援します。",
+  title: "釣具店様向け QRコード設置のご案内 - ツリスポ パートナー",
+  description: `全国${spotCount}+釣りスポット・${fishCount}魚種を掲載する釣り情報サイト「ツリスポ」のQRコードを店頭に設置しませんか？完全無料で、お客様の「どこで釣れる？」を解決します。`,
   openGraph: {
-    title: "事業者様向け掲載のご案内 - ツリスポ パートナー",
-    description:
-      "全国960+釣りスポット掲載の「ツリスポ」に釣具店・管理釣り場・遊漁船を掲載しませんか。3つの料金プランからお選びいただけます。",
+    title: "釣具店様向け QRコード設置のご案内 - ツリスポ パートナー",
+    description: `QRコード1枚で、店員さんの負担を軽減。全国${spotCount}+スポット・${fishCount}魚種の情報をお客様のスマホに。設置完全無料。`,
     type: "website",
     url: "https://tsurispot.com/partner",
     siteName: "ツリスポ",
@@ -36,74 +46,143 @@ export const metadata: Metadata = {
   },
 };
 
-const BENEFITS = [
+const BEFORE_AFTER = [
   {
-    icon: TrendingUp,
-    title: "全国960+スポット・80魚種を掲載する成長中メディア",
-    description:
-      "ツリスポは全国の釣りスポット情報を網羅し、1,200+ページをSEO最適化済み。Google検索からの流入が増加中で、釣り人が情報収集する場に貴店を掲載できます。",
-  },
-  {
+    before: "「どこで釣れますか？」",
+    after: "スマホで近くのスポットを即検索",
     icon: MapPin,
-    title: "地域密着 - 近くの釣り場ページからダイレクト誘導",
-    description:
-      "お店の近くにある釣りスポットページに店舗情報を表示。釣りに行く前に情報収集しているユーザーへ、最も効果的なタイミングでPRできます。",
   },
   {
-    icon: Users,
-    title: "初心者からベテランまで幅広い釣り人にリーチ",
-    description:
-      "ツリスポは初めて釣りをする方から経験豊富なアングラーまで幅広い層が利用。海釣り・川釣り両方をカバーし、新規顧客の獲得からリピート促進まで対応できます。",
+    before: "「何が必要ですか？」",
+    after: "釣り方・道具リストを自動表示",
+    icon: Fish,
   },
   {
-    icon: BarChart3,
-    title: "掲載効果を可視化",
-    description:
-      "掲載後の閲覧数やクリック数など、効果をデータでご報告。数字を見ながら集客の改善につなげていただけます。",
+    before: "「今何が釣れますか？」",
+    after: "季節別の釣れる魚カレンダー",
+    icon: CalendarDays,
+  },
+  {
+    before: "「初心者ですが...」",
+    after: "初心者ガイドが完備",
+    icon: BookOpen,
   },
 ];
 
+const QR_TYPES = [
+  {
+    name: "全国版",
+    url: "tsurispot.com",
+    description: "トップページへ誘導。全国どこの店舗でも使える汎用タイプ。",
+    icon: Globe,
+    color: "bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400",
+  },
+  {
+    name: "都道府県版",
+    url: "tsurispot.com/prefecture/XXX",
+    description:
+      "ご希望の都道府県ページへ直行。地元の釣りスポット一覧が表示されます。",
+    icon: Map,
+    color:
+      "bg-emerald-50 text-emerald-600 dark:bg-emerald-900/20 dark:text-emerald-400",
+  },
+  {
+    name: "初心者版",
+    url: "tsurispot.com/for-beginners",
+    description: "完全初心者向けガイドへ誘導。道具・マナー・釣り方を網羅。",
+    icon: UserCheck,
+    color:
+      "bg-amber-50 text-amber-600 dark:bg-amber-900/20 dark:text-amber-400",
+  },
+  {
+    name: "診断版",
+    url: "tsurispot.com/fish-finder",
+    description:
+      "「何を釣りたいか」診断ページへ。お客様の好みに合った魚種を提案。",
+    icon: Compass,
+    color:
+      "bg-purple-50 text-purple-600 dark:bg-purple-900/20 dark:text-purple-400",
+  },
+];
 
-
-const STATS = [
-  { value: "960+", label: "掲載スポット数" },
-  { value: "1,200+", label: "総ページ数" },
-  { value: "80+", label: "対応魚種" },
-  { value: "47", label: "都道府県カバー" },
+const STEPS = [
+  {
+    step: "1",
+    icon: Mail,
+    title: "お問い合わせ",
+    description:
+      "下記のメールアドレスまたはお問い合わせフォームからご連絡ください。",
+  },
+  {
+    step: "2",
+    icon: MapPin,
+    title: "都道府県を指定",
+    description:
+      "ご希望のQRコードの種類と、都道府県版の場合は対象地域をお伝えください。",
+  },
+  {
+    step: "3",
+    icon: QrCode,
+    title: "QRコードをお届け",
+    description:
+      "メールでPDFファイルをお送りします。印刷してすぐにご利用いただけます。",
+  },
+  {
+    step: "4",
+    icon: Zap,
+    title: "店頭に設置するだけ",
+    description:
+      "レジ横やカウンター、入口など目立つ場所に掲示。お客様がスマホで読み取れます。",
+  },
 ];
 
 const FAQS = [
   {
-    q: "掲載開始までの流れを教えてください。",
-    a: "お問い合わせ → ヒアリング・ご提案 → 掲載内容のご確認 → 掲載開始、という流れです。お問い合わせから掲載まで最短1週間程度です。",
+    q: "費用はかかりますか？",
+    a: "いいえ、現在QRコードの作成・設置は完全無料でご提供しています。追加費用も一切かかりません。",
   },
   {
-    q: "掲載内容はあとから変更できますか？",
-    a: "はい、いつでも変更可能です。営業時間・料金・在庫情報・写真などの更新は随時対応いたします。ベーシック・プレミアムプランでは、変更依頼に迅速に対応いたします。",
+    q: "QRコードはどのように届きますか？",
+    a: "メールでPDFファイルをお送りします。A4やポストカードサイズなど、ご希望のサイズで印刷してお使いいただけます。",
   },
   {
-    q: "どのような事業者が対象ですか？",
-    a: "釣具店・管理釣り場・釣り堀・レンタルボート・遊漁船・釣り船など、釣りに関連するすべての事業者様が対象です。まずはお気軽にお問い合わせください。",
+    q: "掲載されている情報は定期的に更新されますか？",
+    a: "はい、釣りスポット情報・季節の魚種データ・釣り方ガイドなどは継続的に更新しています。QRコードの差し替えは不要で、常に最新情報が表示されます。",
   },
   {
-    q: "フリープランから有料プランへの切り替えはできますか？",
-    a: "はい、いつでもプランのアップグレードが可能です。まずはフリープランで掲載を始め、効果を実感いただいてからベーシック・プレミアムへ移行される事業者様も多くいらっしゃいます。",
+    q: "自分の店舗もサイトに掲載できますか？",
+    a: "はい、釣具店・船宿・管理釣り場などの店舗情報の掲載も承っています。お気軽にご相談ください。",
   },
   {
-    q: "最低契約期間はありますか？",
-    a: "有料プラン（ベーシック・プレミアム）の最低契約期間は3ヶ月です。4ヶ月目以降はいつでも解約可能です。フリープランに契約期間はありません。",
+    q: "複数の種類のQRコードを設置できますか？",
+    a: "はい、全国版・都道府県版・初心者版・診断版など、複数のQRコードを組み合わせてお使いいただけます。すべて無料です。",
   },
   {
-    q: "掲載効果のレポートはどのようなものですか？",
-    a: "ベーシックプランでは月間ページ閲覧数と地図クリック数の月次レポートをお送りします。プレミアムプランでは、検索キーワード分析・流入経路・競合比較など、より詳細なレポートを提供します。",
-  },
-  {
-    q: "バナー広告のデザインは自分で用意する必要がありますか？",
-    a: "いいえ、プレミアムプランではバナー広告のデザインも当社で制作いたします。もちろん、お持ちの素材をご提供いただくことも可能です。",
+    q: "QRコードのデザインをカスタマイズできますか？",
+    a: "基本デザインでのご提供となりますが、店舗名の記載など簡単なカスタマイズには対応可能です。お問い合わせ時にご相談ください。",
   },
 ];
 
 export default function PartnerPage() {
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      {
+        "@type": "ListItem",
+        position: 1,
+        name: "ホーム",
+        item: "https://tsurispot.com",
+      },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "パートナー（釣具店様向け）",
+        item: "https://tsurispot.com/partner",
+      },
+    ],
+  };
+
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -121,6 +200,12 @@ export default function PartnerPage() {
     <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 sm:py-12">
       <script
         type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(breadcrumbJsonLd),
+        }}
+      />
+      <script
+        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
@@ -132,26 +217,48 @@ export default function PartnerPage() {
         トップに戻る
       </Link>
 
-      {/* ヘッダー */}
-      <div className="mb-12 text-center sm:mb-16">
+      {/* ===== ヒーローセクション ===== */}
+      <section className="mb-14 text-center sm:mb-20">
         <Badge className="mb-4 bg-blue-100 text-blue-700 hover:bg-blue-100 dark:bg-blue-900/30 dark:text-blue-400">
           <Store className="mr-1 size-3" />
           釣具店・船宿・管理釣り場 向け
         </Badge>
+
         <h1 className="text-2xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-          ツリスポで、あなたのお店を
-          <br className="hidden sm:block" />
-          もっと多くの釣り人に届けませんか？
+          お客様の「よく聞かれる質問」
+          <br />
+          減らしませんか？
         </h1>
-        <p className="mx-auto mt-4 max-w-2xl text-sm text-muted-foreground sm:text-base">
-          釣り情報サイト「ツリスポ」は全国<strong>960+スポット</strong>・<strong>80魚種</strong>・
-          <strong>1,200+ページ</strong>を掲載し、SEO最適化済みのコンテンツで成長中。
-          掲載することでGoogle検索からの新規顧客獲得をサポートします。
+
+        <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
+          <strong>QRコード1枚</strong>で、店員さんの負担を軽減。
+          <br className="hidden sm:block" />
+          「どこで釣れる？」「何が必要？」をお客様自身のスマホで解決できます。
         </p>
+
+        <div className="mx-auto mt-6 flex max-w-md items-center justify-center gap-3 rounded-xl border-2 border-dashed border-blue-200 bg-blue-50/50 p-4 dark:border-blue-800 dark:bg-blue-950/20">
+          <QrCode className="size-10 shrink-0 text-blue-600 dark:text-blue-400" />
+          <div className="text-left">
+            <p className="text-sm font-bold text-blue-800 dark:text-blue-300">
+              設置完全無料
+            </p>
+            <p className="text-xs text-blue-600 dark:text-blue-400">
+              QRコードの作成から送付まで、費用は一切かかりません
+            </p>
+          </div>
+        </div>
 
         {/* 数字で訴求 */}
         <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
-          {STATS.map((stat) => (
+          {[
+            {
+              value: `${spotCount.toLocaleString()}+`,
+              label: "掲載スポット数",
+            },
+            { value: `${fishCount}+`, label: "対応魚種" },
+            { value: "47", label: "都道府県カバー" },
+            { value: "1,500+", label: "総ページ数" },
+          ].map((stat) => (
             <div
               key={stat.label}
               className="rounded-xl border bg-gradient-to-b from-white to-blue-50/50 p-4 dark:from-gray-900 dark:to-blue-950/20"
@@ -166,52 +273,57 @@ export default function PartnerPage() {
           ))}
         </div>
 
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <div className="flex items-center gap-2 text-sm">
-            <CheckCircle2 className="size-4 text-emerald-500" />
-            <span>全国960+スポット掲載</span>
-          </div>
-          <div className="flex items-center gap-2 text-sm">
-            <CheckCircle2 className="size-4 text-emerald-500" />
-            <span>SEO最適化済み</span>
-          </div>
-          <div className="flex items-center gap-2 text-sm">
-            <CheckCircle2 className="size-4 text-emerald-500" />
-            <span>海釣り・川釣り両対応</span>
-          </div>
-        </div>
         <div className="mt-8">
-          <Link href="/contact?from=partner">
-            <Button size="lg" className="min-h-[48px] gap-2 bg-blue-600 px-8 text-white hover:bg-blue-700">
-              <Mail className="size-4" />
-              まずはお問い合わせ（無料）
+          <a href="mailto:fishingspotjapan@gmail.com?subject=QRコード設置希望">
+            <Button
+              size="lg"
+              className="min-h-[52px] gap-2 bg-blue-600 px-10 text-base text-white hover:bg-blue-700"
+            >
+              <Mail className="size-5" />
+              まずはお気軽にご相談ください
             </Button>
-          </Link>
+          </a>
+          <p className="mt-2 text-xs text-muted-foreground">
+            fishingspotjapan@gmail.com
+          </p>
         </div>
-      </div>
+      </section>
 
-      {/* 掲載メリット */}
+      {/* ===== Before → After セクション ===== */}
       <section className="mb-14 sm:mb-20">
         <h2 className="mb-2 text-center text-xl font-bold sm:text-2xl">
-          掲載のメリット
+          QRコード設置で変わること
         </h2>
         <p className="mb-8 text-center text-sm text-muted-foreground">
-          ツリスポだからこそできる集客支援
+          お客様の疑問を、スマホ1つで解決
         </p>
-        <div className="grid gap-4 sm:grid-cols-2">
-          {BENEFITS.map((benefit) => (
-            <Card key={benefit.title} className="gap-0 py-0">
-              <CardContent className="flex gap-4 p-5 sm:p-6">
-                <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-900/20">
-                  <benefit.icon className="size-5 text-blue-600 dark:text-blue-400" />
-                </div>
-                <div>
-                  <h3 className="text-sm font-bold leading-snug sm:text-base">
-                    {benefit.title}
-                  </h3>
-                  <p className="mt-1.5 text-xs text-muted-foreground sm:text-sm leading-relaxed">
-                    {benefit.description}
-                  </p>
+        <div className="space-y-3 sm:space-y-4">
+          {BEFORE_AFTER.map((item) => (
+            <Card key={item.before} className="gap-0 py-0">
+              <CardContent className="p-4 sm:p-6">
+                <div className="flex items-center gap-3 sm:gap-5">
+                  <div className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-900/20">
+                    <item.icon className="size-5 text-blue-600 dark:text-blue-400" />
+                  </div>
+                  <div className="flex flex-1 flex-col gap-1 sm:flex-row sm:items-center sm:gap-4">
+                    <div className="flex items-center gap-2">
+                      <span className="shrink-0 rounded bg-red-50 px-2 py-0.5 text-xs font-medium text-red-600 dark:bg-red-900/20 dark:text-red-400">
+                        Before
+                      </span>
+                      <span className="text-sm font-medium line-through decoration-red-300 sm:text-base">
+                        {item.before}
+                      </span>
+                    </div>
+                    <ArrowRight className="hidden size-4 shrink-0 text-muted-foreground sm:block" />
+                    <div className="flex items-center gap-2">
+                      <span className="shrink-0 rounded bg-emerald-50 px-2 py-0.5 text-xs font-medium text-emerald-600 dark:bg-emerald-900/20 dark:text-emerald-400">
+                        After
+                      </span>
+                      <span className="text-sm font-bold text-emerald-700 dark:text-emerald-400 sm:text-base">
+                        {item.after}
+                      </span>
+                    </div>
+                  </div>
                 </div>
               </CardContent>
             </Card>
@@ -219,87 +331,60 @@ export default function PartnerPage() {
         </div>
       </section>
 
-      {/* 掲載について */}
-      <section id="plans" className="mb-14 scroll-mt-20 sm:mb-20">
-        <h2 className="mb-2 text-center text-xl font-bold sm:text-2xl">
-          掲載について
-        </h2>
-        <p className="mb-8 text-center text-sm text-muted-foreground">
-          まずはお気軽にご相談ください。貴店に最適なプランをご提案します。
-        </p>
-        <Card className="gap-0 py-0">
-          <CardContent className="flex flex-col items-center gap-4 p-6 text-center sm:p-8">
-            <div className="flex size-14 items-center justify-center rounded-full bg-blue-50 dark:bg-blue-900/20">
-              <MessageSquare className="size-7 text-blue-600 dark:text-blue-400" />
-            </div>
-            <div>
-              <h3 className="text-lg font-bold">無料相談受付中</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                掲載プランや費用について、まずはお問い合わせフォームからお気軽にご相談ください。
-                <br />
-                事業内容やご要望をお伺いし、最適なご提案をさせていただきます。
-              </p>
-            </div>
-            <div className="flex flex-wrap justify-center gap-3 text-xs text-muted-foreground">
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="size-3.5 text-emerald-500" />
-                <span>相談無料</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="size-3.5 text-emerald-500" />
-                <span>返信2営業日以内</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="size-3.5 text-emerald-500" />
-                <span>無料プランあり</span>
-              </div>
-            </div>
-            <Link href="/contact?from=partner">
-              <Button size="lg" className="min-h-[48px] gap-2 bg-blue-600 px-8 text-white hover:bg-blue-700">
-                <Mail className="size-4" />
-                お問い合わせフォームへ
-              </Button>
-            </Link>
-          </CardContent>
-        </Card>
-      </section>
-
-
-      {/* 掲載の流れ */}
+      {/* ===== QRコードの種類 ===== */}
       <section className="mb-14 sm:mb-20">
         <h2 className="mb-2 text-center text-xl font-bold sm:text-2xl">
-          掲載までの流れ
+          選べるQRコードの種類
         </h2>
         <p className="mb-8 text-center text-sm text-muted-foreground">
-          お問い合わせから最短1週間で掲載開始
+          お店のニーズに合わせて、複数のタイプをご用意しています
+        </p>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {QR_TYPES.map((qr) => (
+            <Card key={qr.name} className="gap-0 py-0">
+              <CardContent className="p-5 sm:p-6">
+                <div className="flex items-start gap-4">
+                  <div
+                    className={`flex size-11 shrink-0 items-center justify-center rounded-xl ${qr.color}`}
+                  >
+                    <qr.icon className="size-5" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-sm font-bold sm:text-base">
+                        {qr.name}
+                      </h3>
+                      <Badge
+                        variant="outline"
+                        className="text-[10px] font-normal"
+                      >
+                        無料
+                      </Badge>
+                    </div>
+                    <p className="mt-0.5 text-xs text-muted-foreground">
+                      {qr.url}
+                    </p>
+                    <p className="mt-2 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                      {qr.description}
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* ===== 設置の流れ ===== */}
+      <section className="mb-14 sm:mb-20">
+        <h2 className="mb-2 text-center text-xl font-bold sm:text-2xl">
+          設置までの流れ
+        </h2>
+        <p className="mb-8 text-center text-sm text-muted-foreground">
+          かんたん4ステップで設置完了
         </p>
         <div className="grid gap-4 sm:grid-cols-4">
-          {[
-            {
-              step: "1",
-              icon: Mail,
-              title: "お問い合わせ",
-              description: "メールでご連絡ください。件名に「掲載希望」とご記載いただくとスムーズです。",
-            },
-            {
-              step: "2",
-              icon: MessageSquare,
-              title: "ヒアリング",
-              description: "ご要望やお店の特徴をお聞きし、最適なプランをご提案します。",
-            },
-            {
-              step: "3",
-              icon: FileText,
-              title: "掲載内容確認",
-              description: "掲載するテキスト・写真の内容を確認いただきます。修正も柔軟に対応。",
-            },
-            {
-              step: "4",
-              icon: Zap,
-              title: "掲載開始",
-              description: "確認後、すぐに掲載開始。アクセスデータも定期的にご報告します。",
-            },
-          ].map((item) => (
+          {STEPS.map((item) => (
             <div
               key={item.step}
               className="relative rounded-xl border p-5 text-center"
@@ -313,7 +398,7 @@ export default function PartnerPage() {
                 <item.icon className="size-6 text-blue-600 dark:text-blue-400" />
               </div>
               <h3 className="mt-3 text-sm font-bold">{item.title}</h3>
-              <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+              <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
                 {item.description}
               </p>
             </div>
@@ -321,11 +406,115 @@ export default function PartnerPage() {
         </div>
       </section>
 
-      {/* 対象事業者 */}
+      {/* ===== 費用について ===== */}
+      <section className="mb-14 sm:mb-20">
+        <Card className="gap-0 overflow-hidden border-2 border-blue-200 py-0 dark:border-blue-800">
+          <CardContent className="flex flex-col items-center gap-4 p-6 text-center sm:p-10">
+            <div className="flex size-14 items-center justify-center rounded-full bg-emerald-50 dark:bg-emerald-900/20">
+              <Shield className="size-7 text-emerald-600 dark:text-emerald-400" />
+            </div>
+            <div>
+              <h2 className="text-xl font-bold sm:text-2xl">
+                QRコード設置は完全無料
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">
+                現在、QRコードの作成・デザイン・送付はすべて
+                <strong>無料</strong>
+                でご提供しています。
+                <br />
+                初期費用・月額料金・追加費用は一切かかりません。
+              </p>
+            </div>
+            <div className="flex flex-wrap justify-center gap-3 text-xs text-muted-foreground">
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="size-3.5 text-emerald-500" />
+                <span>初期費用 0円</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="size-3.5 text-emerald-500" />
+                <span>月額料金 0円</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="size-3.5 text-emerald-500" />
+                <span>追加費用 なし</span>
+              </div>
+            </div>
+            <p className="text-xs text-muted-foreground">
+              ※将来的にプレミアム掲載プランなどをご用意する場合がございますが、QRコード設置は引き続き無料です。
+            </p>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* ===== サイトの特徴 ===== */}
+      <section className="mb-14 sm:mb-20">
+        <h2 className="mb-2 text-center text-xl font-bold sm:text-2xl">
+          ツリスポの特徴
+        </h2>
+        <p className="mb-8 text-center text-sm text-muted-foreground">
+          お客様が安心して使える釣り情報サイト
+        </p>
+        <div className="grid gap-4 sm:grid-cols-3">
+          {[
+            {
+              icon: Search,
+              title: "SEO最適化済み",
+              description:
+                "Google検索で釣り情報を探すユーザーに届く設計。すべてのページが検索エンジンに最適化されています。",
+            },
+            {
+              icon: Smartphone,
+              title: "スマホ完全対応",
+              description:
+                "スマホでの閲覧に最適化。釣り場で見ても読みやすいレスポンシブデザインです。",
+            },
+            {
+              icon: CalendarDays,
+              title: "季節情報が充実",
+              description:
+                "月別の釣れる魚・混雑予想・旬の情報など、季節に応じた情報を自動更新しています。",
+            },
+            {
+              icon: MapPin,
+              title: "現在地から検索",
+              description:
+                "GPSで現在地から近い釣りスポットを自動表示。来店したお客様の地元情報がすぐ見つかります。",
+            },
+            {
+              icon: Fish,
+              title: "魚種別ガイド",
+              description: `${fishCount}種以上の魚種別に、釣り方・道具・料理法まで網羅。「何を釣りたいか」から情報を探せます。`,
+            },
+            {
+              icon: BookOpen,
+              title: "初心者ガイド完備",
+              description:
+                "釣り初心者向けの入門ガイド・チェックリスト・用語集を用意。初めてのお客様にも安心です。",
+            },
+          ].map((feature) => (
+            <Card key={feature.title} className="gap-0 py-0">
+              <CardContent className="p-5 sm:p-6">
+                <div className="flex size-10 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-900/20">
+                  <feature.icon className="size-5 text-blue-600 dark:text-blue-400" />
+                </div>
+                <h3 className="mt-3 text-sm font-bold">{feature.title}</h3>
+                <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                  {feature.description}
+                </p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
+
+      {/* ===== 対象事業者 ===== */}
       <section className="mb-14 sm:mb-20">
         <h2 className="mb-4 text-center text-xl font-bold sm:text-2xl">
-          こんな事業者様を募集しています
+          こんな事業者様におすすめ
         </h2>
+        <p className="mb-6 text-center text-sm text-muted-foreground">
+          釣りに関わるすべての事業者様が対象です
+        </p>
         <div className="flex flex-wrap justify-center gap-2">
           {[
             "釣具店・釣具チェーン",
@@ -350,7 +539,7 @@ export default function PartnerPage() {
         </div>
       </section>
 
-      {/* FAQ */}
+      {/* ===== FAQ ===== */}
       <section className="mb-14 sm:mb-20">
         <h2 className="mb-8 text-center text-xl font-bold sm:text-2xl">
           よくある質問
@@ -365,7 +554,7 @@ export default function PartnerPage() {
                   </span>
                   {faq.q}
                 </p>
-                <p className="mt-3 flex items-start gap-3 text-xs text-muted-foreground sm:text-sm leading-relaxed">
+                <p className="mt-3 flex items-start gap-3 text-xs leading-relaxed text-muted-foreground sm:text-sm">
                   <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-xs font-bold text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">
                     A
                   </span>
@@ -377,32 +566,35 @@ export default function PartnerPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* ===== CTA ===== */}
       <section id="contact" className="scroll-mt-20">
         <Card className="gap-0 overflow-hidden border-0 bg-gradient-to-br from-blue-700 to-blue-900 py-0">
           <CardContent className="flex flex-col items-center gap-6 px-5 py-10 text-center sm:px-12 sm:py-14">
             <div className="flex size-16 items-center justify-center rounded-full bg-white/10">
-              <Zap className="size-8 text-white" />
+              <QrCode className="size-8 text-white" />
             </div>
             <div>
               <h2 className="text-xl font-bold text-white sm:text-3xl">
-                まずは無料プランから始めませんか？
+                まずはお気軽にご相談ください
               </h2>
               <p className="mx-auto mt-3 max-w-lg text-sm text-blue-100 sm:text-base">
-                フリープランなら費用ゼロで掲載スタート。
-                効果を実感いただいてから有料プランへの移行も可能です。
-                まずはお気軽にメールでご連絡ください。
+                QRコード設置は完全無料。
+                <br />
+                メール1通で、お客様の満足度を上げる第一歩を踏み出せます。
               </p>
             </div>
-            <Link href="/contact?from=partner">
+            <a href="mailto:fishingspotjapan@gmail.com?subject=QRコード設置希望">
               <Button
                 size="lg"
-                className="min-h-[48px] gap-2 bg-white px-8 text-blue-800 hover:bg-blue-50"
+                className="min-h-[52px] gap-2 bg-white px-10 text-base text-blue-800 hover:bg-blue-50"
               >
-                <Mail className="size-4" />
-                お問い合わせフォームへ
+                <Mail className="size-5" />
+                メールで問い合わせる
               </Button>
-            </Link>
+            </a>
+            <p className="text-sm font-medium text-blue-100">
+              fishingspotjapan@gmail.com
+            </p>
             <div className="flex flex-wrap justify-center gap-6 text-xs text-blue-200">
               <div className="flex items-center gap-1.5">
                 <Clock className="size-3.5" />
@@ -410,11 +602,11 @@ export default function PartnerPage() {
               </div>
               <div className="flex items-center gap-1.5">
                 <Shield className="size-3.5" />
-                <span>ご相談無料</span>
+                <span>設置完全無料</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <CheckCircle2 className="size-3.5" />
-                <span>件名「掲載希望」でスムーズ</span>
+                <span>複数QR対応可</span>
               </div>
             </div>
           </CardContent>

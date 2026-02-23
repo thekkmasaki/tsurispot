@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { fishingSpots } from "@/lib/data/spots";
 import { ProductList } from "@/components/affiliate/product-list";
 import { getProductsByMethod } from "@/lib/data/products";
+import { RigDiagram } from "@/components/rig-diagram";
 
 export const metadata: Metadata = {
   title: "ちょい投げ釣り完全ガイド - キス・ハゼの釣り方と仕掛け【初心者向け】",
@@ -309,6 +310,9 @@ export default function ChoinageGuidePage() {
               サビキ釣りセットの竿・リールに、ちょい投げ仕掛け（200〜400円）とイソメを追加購入すれば、すぐにちょい投げ釣りが始められます。新たに竿を買い直す必要はありません。
             </Hint>
           </SectionCard>
+
+          {/* 仕掛け図 */}
+          <RigDiagram type="choinage" />
 
           {/* 釣り方の手順 */}
           <SectionCard title="釣り方の手順" icon={Footprints}>
