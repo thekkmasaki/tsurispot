@@ -20,12 +20,14 @@ export async function generateSitemaps() {
 export default async function sitemap({
   id,
 }: {
-  id: number;
+  id: Promise<string>;
 }): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
+  // Next.js 16: id is Promise<string> from URL params
+  const sitemapId = Number(await id);
 
   // 0: 固定ページ + ガイド系 + ブログ + エリアガイド + 月別ガイド
-  if (id === 0) {
+  if (sitemapId === 0) {
     return [
       // トップ・主要ページ
       { url: baseUrl, lastModified: now, changeFrequency: "daily", priority: 1.0 },
@@ -127,7 +129,7 @@ export default async function sitemap({
   }
 
   // 1: スポット詳細ページ
-  if (id === 1) {
+  if (sitemapId === 1) {
     return fishingSpots.map((spot) => ({
       url: `${baseUrl}/spots/${spot.slug}`,
       lastModified: now,
@@ -137,7 +139,7 @@ export default async function sitemap({
   }
 
   // 2: 魚種詳細ページ
-  if (id === 2) {
+  if (sitemapId === 2) {
     return fishSpecies.map((fish) => ({
       url: `${baseUrl}/fish/${fish.slug}`,
       lastModified: now,
@@ -147,7 +149,7 @@ export default async function sitemap({
   }
 
   // 3: 都道府県・エリアページ
-  if (id === 3) {
+  if (sitemapId === 3) {
     return [
       { url: `${baseUrl}/prefecture`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.8 },
       ...prefectures.map((pref) => ({
