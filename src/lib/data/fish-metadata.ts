@@ -169,50 +169,52 @@ export const fishMetadata: Record<string, FishMeta> = {
   blackbass:      { aliases: ["ラージマウスバス", "オオクチバス", "バス", "黒鱒", "ラージ"], popularity: 1 },
   // アユ: 香魚、年魚とも
   ayu:            { aliases: ["鮎", "香魚", "年魚", "アイ", "コアユ"], popularity: 2 },
+  // ウナギ: 蒲焼きで有名な高級魚
+  unagi:          { aliases: ["鰻", "ニホンウナギ", "ウナギ", "オオウナギ"], popularity: 3 },
   // ニジマス: 英名レインボートラウト
-  nijimasu:       { aliases: ["レインボートラウト", "虹鱒", "ニジ", "トラウト"], popularity: 3 },
+  nijimasu:       { aliases: ["レインボートラウト", "虹鱒", "ニジ", "トラウト"], popularity: 4 },
   // ヤマメ: 降海型はサクラマス、九州でエノハ
-  yamame:         { aliases: ["山女魚", "エノハ", "ヒラメ", "コサメ"], popularity: 4 },
+  yamame:         { aliases: ["山女魚", "エノハ", "ヒラメ", "コサメ"], popularity: 5 },
   // イワナ: 地方によりキリクチ、ゴギ、ニッコウイワナ
-  iwana:          { aliases: ["岩魚", "ニッコウイワナ", "エゾイワナ", "ゴギ", "キリクチ"], popularity: 5 },
+  iwana:          { aliases: ["岩魚", "ニッコウイワナ", "エゾイワナ", "ゴギ", "キリクチ"], popularity: 6 },
   // ワカサギ: 公魚、氷上穴釣りで有名
-  wakasagi:       { aliases: ["公魚", "アマサギ", "シラウオ"], popularity: 6 },
+  wakasagi:       { aliases: ["公魚", "アマサギ", "シラウオ"], popularity: 7 },
   // コイ: マゴイ、野鯉
-  koi:            { aliases: ["鯉", "マゴイ", "ノゴイ", "ドイツゴイ"], popularity: 7 },
+  koi:            { aliases: ["鯉", "マゴイ", "ノゴイ", "ドイツゴイ"], popularity: 8 },
   // ヘラブナ: 略してヘラ
-  herabuna:       { aliases: ["ヘラ", "ゲンゴロウブナ", "箆鮒", "カワチブナ"], popularity: 8 },
+  herabuna:       { aliases: ["ヘラ", "ゲンゴロウブナ", "箆鮒", "カワチブナ"], popularity: 9 },
   // ナマズ: 各地でナマズ
-  namazu:         { aliases: ["鯰", "マナマズ"], popularity: 9 },
+  namazu:         { aliases: ["鯰", "マナマズ"], popularity: 10 },
   // テナガエビ
-  tenagaebi:      { aliases: ["手長海老", "テナガ", "カワエビ"], popularity: 10 },
+  tenagaebi:      { aliases: ["手長海老", "テナガ", "カワエビ"], popularity: 11 },
   // アマゴ: 降海型はサツキマス、四国でアメゴ
-  amago:          { aliases: ["甘子", "アメゴ", "アメノウオ", "サツキマス"], popularity: 11 },
+  amago:          { aliases: ["甘子", "アメゴ", "アメノウオ", "サツキマス"], popularity: 12 },
   // ブルーギル: 略してギル
-  bluegill:       { aliases: ["ギル", "ブルーギル"], popularity: 12 },
+  bluegill:       { aliases: ["ギル", "ブルーギル"], popularity: 13 },
   // オイカワ: 関西でハエ、東北でヤマベ
-  oikawa:         { aliases: ["ハエ", "ヤマベ", "追河", "シラハエ", "ハヤ"], popularity: 13 },
+  oikawa:         { aliases: ["ハエ", "ヤマベ", "追河", "シラハエ", "ハヤ"], popularity: 14 },
   // ライギョ: 正式名カムルチー
-  raigyo:         { aliases: ["雷魚", "カムルチー", "スネークヘッド", "タイワンドジョウ"], popularity: 14 },
+  raigyo:         { aliases: ["雷魚", "カムルチー", "スネークヘッド", "タイワンドジョウ"], popularity: 15 },
   // ブラウントラウト
-  "brown-trout":  { aliases: ["ブラウン", "ブラウントラウト", "茶鱒"], popularity: 15 },
+  "brown-trout":  { aliases: ["ブラウン", "ブラウントラウト", "茶鱒"], popularity: 16 },
   // イトウ: 日本最大の淡水魚
-  itou:           { aliases: ["伊富", "伊当", "オビラメ"], popularity: 16 },
+  itou:           { aliases: ["伊富", "伊当", "オビラメ"], popularity: 17 },
   // ビワマス: 琵琶湖固有種
-  biwamasu:       { aliases: ["琵琶鱒", "アメノイオ", "アメノウオ"], popularity: 17 },
+  biwamasu:       { aliases: ["琵琶鱒", "アメノイオ", "アメノウオ"], popularity: 18 },
   // ヒメマス: ベニザケの陸封型
-  himemasu:       { aliases: ["姫鱒", "チップ", "ベニザケ陸封型"], popularity: 18 },
+  himemasu:       { aliases: ["姫鱒", "チップ", "ベニザケ陸封型"], popularity: 19 },
   // ウグイ: 関東でハヤ、北海道でアカハラ
-  ugui:           { aliases: ["ハヤ", "石斑魚", "アカハラ", "クキ", "アイソ"], popularity: 19 },
+  ugui:           { aliases: ["ハヤ", "石斑魚", "アカハラ", "クキ", "アイソ"], popularity: 20 },
   // カワムツ
-  kawamutsu:      { aliases: ["川鯥", "ハエ", "ムツ"], popularity: 20 },
+  kawamutsu:      { aliases: ["川鯥", "ハエ", "ムツ"], popularity: 21 },
   // マブナ: 各地でフナ
-  mabuna:         { aliases: ["真鮒", "ギンブナ", "フナ"], popularity: 21 },
+  mabuna:         { aliases: ["真鮒", "ギンブナ", "フナ"], popularity: 22 },
   // ハス: 琵琶湖固有種
-  hasu:           { aliases: ["鰣", "ケタバス", "オイカワの仲間"], popularity: 22 },
+  hasu:           { aliases: ["鰣", "ケタバス", "オイカワの仲間"], popularity: 23 },
   // ドジョウ
-  dojou:          { aliases: ["泥鰌", "鰌", "マドジョウ"], popularity: 23 },
+  dojou:          { aliases: ["泥鰌", "鰌", "マドジョウ"], popularity: 24 },
   // タナゴ: 小型美魚
-  tanago:         { aliases: ["鱮", "タイリクバラタナゴ", "ニッポンバラタナゴ"], popularity: 24 },
+  tanago:         { aliases: ["鱮", "タイリクバラタナゴ", "ニッポンバラタナゴ"], popularity: 25 },
   // ビワコオオナマズ: 琵琶湖固有種
-  "biwako-oonamazu": { aliases: ["琵琶湖大鯰", "オオナマズ"], popularity: 25 },
+  "biwako-oonamazu": { aliases: ["琵琶湖大鯰", "オオナマズ"], popularity: 26 },
 };
