@@ -60,6 +60,8 @@ export interface FishSpecies {
   peakMonths: number[];
   cookingTips: string[];
   spots: SpotSummary[];
+  aliases?: string[];
+  popularity?: number;
   fishingMethods?: FishingMethod[];
   youtubeLinks?: YouTubeSearchLink[];
   userPhotos?: UserPhoto[];

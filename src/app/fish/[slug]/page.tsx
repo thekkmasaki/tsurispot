@@ -65,8 +65,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!fish) return { title: "魚種が見つかりません" };
 
   return {
-    title: `${fish.name}（${fish.nameEnglish}）の釣り情報 - 旬の時期・釣り方・食べ方`,
-    description: `${fish.name}（${fish.nameKana}）の旬の時期・釣り方・おすすめの食べ方を詳しく紹介。シーズンカレンダーや釣れるスポット一覧、初心者向けの釣り方ガイドも掲載。${fish.description}`,
+    title: `${fish.name}${fish.aliases?.length ? `（${fish.aliases[0]}）` : `（${fish.nameEnglish}）`}の釣り情報 - 旬の時期・釣り方・食べ方`,
+    description: `${fish.name}${fish.aliases?.length ? `（${fish.aliases.slice(0, 2).join("・")}）` : `（${fish.nameKana}）`}の旬の時期・釣り方・おすすめの食べ方を詳しく紹介。シーズンカレンダーや釣れるスポット一覧、初心者向けの釣り方ガイドも掲載。${fish.description}`,
     openGraph: {
       title: `${fish.name}（${fish.nameEnglish}）の釣り情報`,
       description: `${fish.name}の旬の時期・釣り方・おすすめの食べ方を紹介。${fish.description}`,
@@ -103,7 +103,7 @@ export default async function FishDetailPage({ params }: PageProps) {
     about: {
       "@type": "Thing",
       name: fish.name,
-      alternateName: [fish.nameKana, fish.nameEnglish, fish.scientificName],
+      alternateName: [fish.nameKana, fish.nameEnglish, fish.scientificName, ...(fish.aliases || [])],
     },
   };
 
@@ -189,7 +189,12 @@ export default async function FishDetailPage({ params }: PageProps) {
         />
         <div className="text-center pb-2">
           <h1 className="text-xl font-bold sm:text-3xl">{fish.name}</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
+          {fish.aliases && fish.aliases.length > 0 && (
+            <p className="mt-0.5 text-sm font-medium text-muted-foreground">
+              別名: {fish.aliases.slice(0, 3).join("・")}
+            </p>
+          )}
+          <p className="mt-0.5 text-xs text-muted-foreground">
             {fish.nameKana} / {fish.scientificName}
           </p>
         </div>

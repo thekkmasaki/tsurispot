@@ -37,6 +37,11 @@ export function FishCard({ fish, showPeakBadge, showSpots = false }: FishCardPro
           <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
             {fish.name}
           </h3>
+          {fish.aliases && fish.aliases.length > 0 && (
+            <p className="text-[10px] text-muted-foreground -mt-0.5 truncate">
+              {fish.aliases.slice(0, 2).join("・")}
+            </p>
+          )}
 
           {/* バッジ行 */}
           <div className="flex flex-wrap items-center gap-1.5">
