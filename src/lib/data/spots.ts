@@ -30,6 +30,7 @@ import { freshwaterSpotsWest } from "./spots-freshwater-west";
 import { freshwaterSpotsKantoAdd } from "./spots-freshwater-kanto-add";
 import { freshwaterSpotsChubuAdd } from "./spots-freshwater-chubu-add";
 import { freshwaterSpotsWestAdd } from "./spots-freshwater-west-add";
+import { freshwaterSpotsKyoto } from "./spots-freshwater-kyoto";
 
 function fish(slug: string): FishSpecies {
   const f = getFishBySlug(slug);
@@ -2729,7 +2730,7 @@ const _baseSpots: FishingSpot[] = [
   },
 ];
 
-export const fishingSpots: FishingSpot[] = [..._baseSpots, ...additionalSpots, ...osakaKinkiSpots, ...extraSpots, ...sagamiMiuraSpots, ...sagamiShonanSpots, ...sagamiIzuSpots, ...tohokuSpots, ...hokurikuSpots, ...shikokuSpots, ...kyushuSouthSpots, ...okinawaSpots, ...saninSpots, ...tokaiDetailSpots, ...kyushuChugokuDetailSpots, ...kantoDetailSpots, ...kansaiDetailSpots, ...hokkaidoTohokuDetailSpots, ...hyogoDetailSpots, ...southKyushuDetailSpots, ...chibaShizuokaDetailSpots, ...wakayamaMieNiigataSpots, ...aichiFukuokaHiroshimaSpots, ...akashiHarimaSpots, ...freshwaterSpots, ...freshwaterSpotsTohoku, ...freshwaterSpotsWest, ...freshwaterSpotsKantoAdd, ...freshwaterSpotsChubuAdd, ...freshwaterSpotsWestAdd];
+export const fishingSpots: FishingSpot[] = [..._baseSpots, ...additionalSpots, ...osakaKinkiSpots, ...extraSpots, ...sagamiMiuraSpots, ...sagamiShonanSpots, ...sagamiIzuSpots, ...tohokuSpots, ...hokurikuSpots, ...shikokuSpots, ...kyushuSouthSpots, ...okinawaSpots, ...saninSpots, ...tokaiDetailSpots, ...kyushuChugokuDetailSpots, ...kantoDetailSpots, ...kansaiDetailSpots, ...hokkaidoTohokuDetailSpots, ...hyogoDetailSpots, ...southKyushuDetailSpots, ...chibaShizuokaDetailSpots, ...wakayamaMieNiigataSpots, ...aichiFukuokaHiroshimaSpots, ...akashiHarimaSpots, ...freshwaterSpots, ...freshwaterSpotsTohoku, ...freshwaterSpotsWest, ...freshwaterSpotsKantoAdd, ...freshwaterSpotsChubuAdd, ...freshwaterSpotsWestAdd, ...freshwaterSpotsKyoto];
 
 export function getSpotBySlug(slug: string): FishingSpot | undefined {
   return fishingSpots.find((s) => s.slug === slug);

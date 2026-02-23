@@ -57,7 +57,7 @@ const fwRegions: Region[] = [
   { id: "r639", prefecture: "石川県", areaName: "加賀", slug: "ishikawa-kaga" },
   // === 追加リージョン (r640〜) ===
   { id: "r640", prefecture: "神奈川県", areaName: "芦ノ湖", slug: "kanagawa-ashinoko" },
-  { id: "r641", prefecture: "滋賀県", areaName: "琵琶湖南湖", slug: "shiga-biwako-south" },
+  { id: "r641", prefecture: "滋賀県", areaName: "琵琶湖南湖", slug: "shiga-biwako-south-detail" },
   { id: "r642", prefecture: "滋賀県", areaName: "琵琶湖西岸", slug: "shiga-biwako-west" },
   { id: "r643", prefecture: "千葉県", areaName: "高滝ダム", slug: "chiba-takataki" },
   { id: "r644", prefecture: "秋田県", areaName: "八郎潟", slug: "akita-hachirogata" },

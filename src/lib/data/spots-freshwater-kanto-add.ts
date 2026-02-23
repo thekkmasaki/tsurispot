@@ -28,7 +28,7 @@ const fwRegionsKantoAdd: Region[] = [
   { id: "r742", prefecture: "千葉県", areaName: "手賀沼", slug: "chiba-teganuma" },
   { id: "r743", prefecture: "茨城県", areaName: "那珂川下流", slug: "ibaraki-nakagawa-lower" },
   { id: "r744", prefecture: "茨城県", areaName: "涸沼", slug: "ibaraki-hinuma" },
-  { id: "r745", prefecture: "栃木県", areaName: "中禅寺湖", slug: "tochigi-chuzenji" },
+  { id: "r745", prefecture: "栃木県", areaName: "中禅寺湖", slug: "tochigi-chuzenji-detail" },
   { id: "r746", prefecture: "栃木県", areaName: "箒川", slug: "tochigi-houkigawa" },
   { id: "r747", prefecture: "群馬県", areaName: "碓氷川", slug: "gunma-usuigawa" },
   { id: "r748", prefecture: "群馬県", areaName: "片品川", slug: "gunma-katashina" },

@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MapPin, Fish, ChevronLeft } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import { MapPin, ChevronLeft } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { regions } from "@/lib/data/regions";
 import { fishingSpots } from "@/lib/data/spots";
-import { SpotCard } from "@/components/spots/spot-card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { getPrefectureByName } from "@/lib/data/prefectures";
+import { AreaSpotList } from "@/components/area/area-spot-list";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -23,7 +22,7 @@ function getSpotsForRegion(regionId: string) {
 }
 
 function getCatchableFishForRegion(regionId: string) {
-  const fishMap = new Map<string, { name: string; slug: string; count: number }>();
+  const fishMap = new Map<string, { id: string; name: string; slug: string; count: number }>();
   for (const spot of fishingSpots) {
     if (spot.region.id !== regionId) continue;
     for (const cf of spot.catchableFish) {
@@ -32,6 +31,7 @@ function getCatchableFishForRegion(regionId: string) {
         existing.count++;
       } else {
         fishMap.set(cf.fish.id, {
+          id: cf.fish.id,
           name: cf.fish.name,
           slug: cf.fish.slug,
           count: 1,
@@ -257,48 +257,12 @@ export default async function AreaDetailPage({ params }: PageProps) {
         )}
       </div>
 
-      {/* Catchable fish in this region */}
-      {catchableFish.length > 0 && (
-        <section className="mb-6 sm:mb-8">
-          <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
-            <Fish className="size-5" />
-            {region.areaName}で釣れる魚
-          </h2>
-          <div className="flex flex-wrap gap-1.5 sm:gap-2">
-            {catchableFish.map((f) => (
-              <Link key={f.slug} href={`/fish/${f.slug}`} title={`${f.name}の釣り情報・釣り方を見る`}>
-                <Badge
-                  variant="outline"
-                  className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
-                >
-                  {f.name}
-                  <span className="ml-1 text-muted-foreground">
-                    ({f.count}スポット)
-                  </span>
-                </Badge>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* Spots list */}
-      <section>
-        <h2 className="mb-3 text-base font-bold sm:mb-4 sm:text-lg">
-          釣りスポット一覧（{spots.length}件）
-        </h2>
-        {spots.length > 0 ? (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {spots.map((spot) => (
-              <SpotCard key={spot.id} spot={spot} />
-            ))}
-          </div>
-        ) : (
-          <p className="text-sm text-muted-foreground">
-            このエリアの釣りスポットは現在準備中です。
-          </p>
-        )}
-      </section>
+      {/* Fish filter + Spots list (Client Component) */}
+      <AreaSpotList
+        spots={spots}
+        catchableFish={catchableFish}
+        areaName={region.areaName}
+      />
 
       {/* Same prefecture regions for internal linking */}
       {samePreRegions.length > 0 && (

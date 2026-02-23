@@ -49,10 +49,10 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JR小樽駅から徒歩約15分。札樽自動車道小樽ICから約5分。港周辺に有料駐車場あり。",
     region: {
-      id: "r300",
+      id: "r1070",
       prefecture: "北海道",
       areaName: "小樽",
-      slug: "hokkaido-otaru",
+      slug: "hokkaido-otaru-detail",
     },
     spotType: "port",
     difficulty: "beginner",
@@ -97,7 +97,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JR苫小牧駅から車で約20分。道央自動車道苫小牧東ICから約10分。港内無料駐車場あり。",
     region: {
-      id: "r301",
+      id: "r1071",
       prefecture: "北海道",
       areaName: "苫小牧",
       slug: "hokkaido-tomakomai",
@@ -144,7 +144,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JR網走駅から車で約5分。旭川紋別自動車道遠軽ICから約90分。港内に無料駐車場あり。",
     region: {
-      id: "r304",
+      id: "r1074",
       prefecture: "北海道",
       areaName: "網走",
       slug: "hokkaido-abashiri",
@@ -191,10 +191,10 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "旭川紋別自動車道遠軽瀬戸瀬ICから約60分。紋別空港から車で約10分。港内に駐車スペースあり。",
     region: {
-      id: "r305",
+      id: "r1075",
       prefecture: "北海道",
       areaName: "紋別",
-      slug: "hokkaido-monbetsu",
+      slug: "hokkaido-monbetsu-detail",
     },
     spotType: "port",
     difficulty: "beginner",
@@ -238,10 +238,10 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JR稚内駅から徒歩約10分。稚内空港から車で約20分。港周辺に無料駐車場あり。",
     region: {
-      id: "r306",
+      id: "r1076",
       prefecture: "北海道",
       areaName: "稚内",
-      slug: "hokkaido-wakkanai",
+      slug: "hokkaido-wakkanai-detail",
     },
     spotType: "port",
     difficulty: "intermediate",
@@ -285,10 +285,10 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "深川留萌自動車道留萌大和田ICから約10分。JR留萌駅（廃駅）跡から車で約5分。港内に駐車スペースあり。",
     region: {
-      id: "r307",
+      id: "r1077",
       prefecture: "北海道",
       areaName: "留萌",
-      slug: "hokkaido-rumoi",
+      slug: "hokkaido-rumoi-detail",
     },
     spotType: "port",
     difficulty: "beginner",
@@ -332,10 +332,10 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "深川留萌自動車道留萌大和田ICから国道231号で約30分。港内に駐車スペースあり。",
     region: {
-      id: "r307",
+      id: "r1077",
       prefecture: "北海道",
       areaName: "留萌",
-      slug: "hokkaido-rumoi",
+      slug: "hokkaido-rumoi-detail",
     },
     spotType: "port",
     difficulty: "beginner",
@@ -378,7 +378,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "札幌から国道5号〜229号で約2時間30分。余市から国道229号で約40分。漁港内に駐車スペースあり。",
     region: {
-      id: "r308",
+      id: "r1078",
       prefecture: "北海道",
       areaName: "積丹",
       slug: "hokkaido-shakotan",
@@ -426,10 +426,10 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JR余市駅から徒歩約15分。札幌から国道5号で約60分。港周辺に駐車スペースあり。",
     region: {
-      id: "r309",
+      id: "r1079",
       prefecture: "北海道",
       areaName: "余市",
-      slug: "hokkaido-yoichi",
+      slug: "hokkaido-yoichi-detail",
     },
     spotType: "port",
     difficulty: "beginner",
@@ -473,7 +473,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "札幌中心部から車で約30分。札樽自動車道銭函ICから約15分。各埠頭に無料駐車場あり。",
     region: {
-      id: "r310",
+      id: "r1080",
       prefecture: "北海道",
       areaName: "石狩",
       slug: "hokkaido-ishikari",
@@ -521,7 +521,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "函館から国道228号で約2時間。松前港フェリーターミナル周辺に駐車スペースあり。",
     region: {
-      id: "r312",
+      id: "r1082",
       prefecture: "北海道",
       areaName: "松前・江差",
       slug: "hokkaido-matsumae-esashi",
@@ -568,7 +568,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "札幌から国道5号〜276号で約2時間。港内に無料駐車場あり。",
     region: {
-      id: "r313",
+      id: "r1083",
       prefecture: "北海道",
       areaName: "岩内・寿都",
       slug: "hokkaido-iwanai-suttsu",
@@ -616,7 +616,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "札幌から国道230号〜5号〜229号で約2時間30分。漁港内に駐車スペースあり。",
     region: {
-      id: "r313",
+      id: "r1083",
       prefecture: "北海道",
       areaName: "岩内・寿都",
       slug: "hokkaido-iwanai-suttsu",
@@ -661,7 +661,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "函館から国道227号〜229号で約3時間。漁港内に駐車スペースあり。",
     region: {
-      id: "r312",
+      id: "r1082",
       prefecture: "北海道",
       areaName: "松前・江差",
       slug: "hokkaido-matsumae-esashi",
@@ -708,7 +708,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "函館から国道227号で約1時間30分。かもめ島駐車場（無料）を利用。",
     region: {
-      id: "r312",
+      id: "r1082",
       prefecture: "北海道",
       areaName: "松前・江差",
       slug: "hokkaido-matsumae-esashi",
@@ -759,7 +759,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "むつ市から国道338号で約1時間30分。大間崎駐車場（無料）を利用。",
     region: {
-      id: "r315",
+      id: "r1085",
       prefecture: "青森県",
       areaName: "下北半島",
       slug: "aomori-shimokita",
@@ -807,7 +807,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "むつ市中心部から国道338号で約30分。漁港内に駐車スペースあり。",
     region: {
-      id: "r315",
+      id: "r1085",
       prefecture: "青森県",
       areaName: "下北半島",
       slug: "aomori-shimokita",
@@ -854,7 +854,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JR鰺ヶ沢駅から徒歩約15分。東北自動車道大鰐弘前ICから約1時間。港周辺に駐車スペースあり。",
     region: {
-      id: "r316",
+      id: "r1086",
       prefecture: "青森県",
       areaName: "津軽・日本海側",
       slug: "aomori-tsugaru-nihonkai",
@@ -901,7 +901,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JR深浦駅から徒歩約10分。鰺ヶ沢町から国道101号で約40分。港周辺に駐車スペースあり。",
     region: {
-      id: "r316",
+      id: "r1086",
       prefecture: "青森県",
       areaName: "津軽・日本海側",
       slug: "aomori-tsugaru-nihonkai",
@@ -949,7 +949,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "青森市から国道280号〜339号で約2時間30分。竜飛崎灯台駐車場（無料）を利用。",
     region: {
-      id: "r316",
+      id: "r1086",
       prefecture: "青森県",
       areaName: "津軽・日本海側",
       slug: "aomori-tsugaru-nihonkai",
@@ -1001,7 +1001,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JR宮古駅から車で約10分。三陸自動車道宮古中央ICから約5分。港内に駐車スペースあり。",
     region: {
-      id: "r317",
+      id: "r1087",
       prefecture: "岩手県",
       areaName: "宮古・三陸北部",
       slug: "iwate-miyako-sanriku",
@@ -1049,7 +1049,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JR釜石駅から車で約10分。三陸自動車道釜石両石ICから約15分。港周辺に駐車スペースあり。",
     region: {
-      id: "r318",
+      id: "r1088",
       prefecture: "岩手県",
       areaName: "釜石・大船渡",
       slug: "iwate-kamaishi-ofunato",
@@ -1096,7 +1096,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JR久慈駅から車で約10分。八戸自動車道九戸ICから約50分。港内に駐車スペースあり。",
     region: {
-      id: "r317",
+      id: "r1087",
       prefecture: "岩手県",
       areaName: "宮古・三陸北部",
       slug: "iwate-miyako-sanriku",
@@ -1147,7 +1147,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JR石巻駅から車で約10分。三陸自動車道石巻河南ICから約15分。港周辺に駐車スペースあり。",
     region: {
-      id: "r319",
+      id: "r1089",
       prefecture: "宮城県",
       areaName: "石巻・松島",
       slug: "miyagi-ishinomaki-matsushima",
@@ -1195,7 +1195,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JR女川駅から徒歩約10分。三陸自動車道石巻河南ICから約30分。港周辺に駐車場あり。",
     region: {
-      id: "r319",
+      id: "r1089",
       prefecture: "宮城県",
       areaName: "石巻・松島",
       slug: "miyagi-ishinomaki-matsushima",
@@ -1242,7 +1242,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JR気仙沼駅（BRT）から車で約10分。三陸自動車道気仙沼中央ICから約15分。港周辺に駐車場あり。",
     region: {
-      id: "r320",
+      id: "r1090",
       prefecture: "宮城県",
       areaName: "気仙沼",
       slug: "miyagi-kesennuma",
@@ -1290,7 +1290,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JR本塩釜駅から徒歩約10分。三陸自動車道利府塩釜ICから約10分。魚市場周辺に有料駐車場あり。",
     region: {
-      id: "r319",
+      id: "r1089",
       prefecture: "宮城県",
       areaName: "石巻・松島",
       slug: "miyagi-ishinomaki-matsushima",
@@ -1342,7 +1342,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JR土崎駅から徒歩約15分。秋田自動車道秋田北ICから約10分。セリオン周辺に無料駐車場あり。",
     region: {
-      id: "r321",
+      id: "r1091",
       prefecture: "秋田県",
       areaName: "秋田・男鹿",
       slug: "akita-akita-oga",
@@ -1390,7 +1390,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JR男鹿駅から車で約20分。秋田自動車道昭和男鹿半島ICから約40分。漁港内に駐車スペースあり。",
     region: {
-      id: "r321",
+      id: "r1091",
       prefecture: "秋田県",
       areaName: "秋田・男鹿",
       slug: "akita-akita-oga",
@@ -1437,7 +1437,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JR金浦駅から徒歩約15分。日本海東北自動車道金浦ICから約5分。漁港内に駐車スペースあり。",
     region: {
-      id: "r322",
+      id: "r1092",
       prefecture: "秋田県",
       areaName: "にかほ・由利本荘",
       slug: "akita-nikaho-yurihonjo",
@@ -1488,7 +1488,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JR酒田駅から車で約10分。日本海東北自動車道酒田ICから約15分。港周辺に駐車スペースあり。",
     region: {
-      id: "r323",
+      id: "r1093",
       prefecture: "山形県",
       areaName: "酒田・庄内",
       slug: "yamagata-sakata-shonai",
@@ -1536,7 +1536,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JR鼠ケ関駅から徒歩約10分。日本海東北自動車道あつみ温泉ICから約15分。漁港内に駐車スペースあり。",
     region: {
-      id: "r323",
+      id: "r1093",
       prefecture: "山形県",
       areaName: "酒田・庄内",
       slug: "yamagata-sakata-shonai",
@@ -1588,7 +1588,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JRいわき駅から車で約20分。常磐自動車道いわき湯本ICから約15分。ら・ら・ミュウ駐車場（無料）を利用可。",
     region: {
-      id: "r324",
+      id: "r1094",
       prefecture: "福島県",
       areaName: "相馬・いわき",
       slug: "fukushima-soma-iwaki",
@@ -1636,7 +1636,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     accessInfo:
       "JR四ツ倉駅から徒歩約15分。常磐自動車道四倉ICから約5分。道の駅よつくら港駐車場（無料）を利用。",
     region: {
-      id: "r324",
+      id: "r1094",
       prefecture: "福島県",
       areaName: "相馬・いわき",
       slug: "fukushima-soma-iwaki",

@@ -22,7 +22,7 @@ const okinawaRegions: Region[] = [
   { id: "r184", prefecture: "沖縄県", areaName: "中城・南城", slug: "okinawa-nakagusuku-nanjo" },
   { id: "r185", prefecture: "沖縄県", areaName: "糸満・豊見城", slug: "okinawa-itoman-tomigusuku" },
   { id: "r186", prefecture: "沖縄県", areaName: "石垣島", slug: "okinawa-ishigaki" },
-  { id: "r187", prefecture: "沖縄県", areaName: "宮古島", slug: "okinawa-miyako" },
+  { id: "r187", prefecture: "沖縄県", areaName: "宮古島", slug: "okinawa-miyako-detail" },
   { id: "r188", prefecture: "沖縄県", areaName: "久米島", slug: "okinawa-kumejima" },
   { id: "r189", prefecture: "沖縄県", areaName: "国頭・大宜味", slug: "okinawa-kunigami-ogimi" },
 ];
