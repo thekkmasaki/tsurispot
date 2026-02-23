@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { PlusCircle } from "lucide-react";
+import { PlusCircle, ArrowRight } from "lucide-react";
 import { fishingSpots } from "@/lib/data/spots";
 import { SpotListClient } from "@/components/spots/spot-list-client";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
@@ -129,6 +129,25 @@ export default async function SpotsPage({
         </Link>
       </div>
       <SpotListClient spots={fishingSpots} initialQuery={initialQuery} />
+
+      {/* 初心者CTA */}
+      <div className="mt-8 rounded-2xl border-2 border-emerald-200 bg-gradient-to-r from-emerald-50 to-teal-50 p-5 sm:p-6">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 className="text-base font-bold text-emerald-900 sm:text-lg">釣りが初めてですか？</h2>
+            <p className="mt-1 text-sm text-emerald-700">
+              道具の選び方から釣り方まで、初心者向けのガイドを用意しています。
+            </p>
+          </div>
+          <Link
+            href="/guide/beginner"
+            className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-emerald-700 min-h-[44px]"
+          >
+            初心者ガイドを読む
+            <ArrowRight className="size-4" />
+          </Link>
+        </div>
+      </div>
 
       {/* SEO: 関連ページリンクセクション */}
       <div className="mt-10 border-t pt-8">

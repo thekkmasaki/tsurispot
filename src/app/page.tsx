@@ -222,15 +222,15 @@ export default function Home() {
             </div>
 
             <h1 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-white sm:mb-4 sm:text-4xl lg:text-5xl">
-              近くの釣り場が
+              今週末、
               <br className="sm:hidden" />
-              すぐ見つかる
+              釣りに行こう。
             </h1>
 
             <p className="mb-6 max-w-lg text-sm text-blue-100 sm:mb-8 sm:text-lg">
-              今の時期に何が釣れるか、一目でわかる。
+              道具がなくても、経験がなくても大丈夫。
               <br className="hidden sm:inline" />
-              初心者でも安心の釣り場ガイド付き。
+              近くの釣り場で、最高の1匹に出会おう。
             </p>
 
             {/* 検索バー */}
@@ -280,6 +280,31 @@ export default function Home() {
               className="fill-background"
             />
           </svg>
+        </div>
+      </section>
+
+      {/* 初心者スタートバナー */}
+      <section className="mx-auto w-full max-w-5xl px-4 pt-6 sm:px-6 sm:pt-10">
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 p-6 text-white sm:p-8">
+          <div className="relative z-10">
+            <div className="mb-1 text-sm font-medium text-emerald-100">はじめての方へ</div>
+            <h2 className="mb-2 text-xl font-bold sm:text-2xl">釣りを始めてみませんか？</h2>
+            <p className="mb-4 max-w-md text-sm text-emerald-50 sm:text-base">
+              道具は5,000円から。近くの堤防で、誰でも魚が釣れます。
+              ツリスポが最初の1匹までサポートします。
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link href="/guide/beginner" className="inline-flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-bold text-emerald-700 transition-colors hover:bg-emerald-50 min-h-[44px]">
+                初心者ガイドを見る
+                <ArrowRight className="size-4" />
+              </Link>
+              <Link href="/guide/budget" className="inline-flex items-center gap-2 rounded-lg border-2 border-white/50 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10 min-h-[44px]">
+                5,000円で始める方法
+              </Link>
+            </div>
+          </div>
+          {/* 背景の釣りアイコン */}
+          <div className="absolute -right-4 -top-4 text-8xl opacity-10 sm:text-9xl">🎣</div>
         </div>
       </section>
 
@@ -346,6 +371,45 @@ export default function Home() {
               </span>
             </div>
           </Link>
+        </div>
+      </section>
+
+      {/* 3ステップで釣りを始める */}
+      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
+        <h2 className="mb-6 text-center text-lg font-bold sm:text-xl">
+          たった3ステップで釣りデビュー
+        </h2>
+        <div className="grid gap-4 sm:grid-cols-3">
+          <div className="rounded-xl border bg-card p-5 text-center">
+            <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-blue-100 text-2xl">1</div>
+            <h3 className="mb-1 font-bold">釣り場を探す</h3>
+            <p className="text-sm text-muted-foreground">
+              近くの堤防や漁港を検索。初心者OKの釣り場がすぐ見つかります。
+            </p>
+            <Link href="/spots" className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
+              釣り場を探す <ChevronRight className="size-3" />
+            </Link>
+          </div>
+          <div className="rounded-xl border bg-card p-5 text-center">
+            <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-emerald-100 text-2xl">2</div>
+            <h3 className="mb-1 font-bold">道具を準備する</h3>
+            <p className="text-sm text-muted-foreground">
+              入門セットは5,000円から。何を買えばいいか完全ガイドで解説。
+            </p>
+            <Link href="/guide/budget" className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
+              道具ガイド <ChevronRight className="size-3" />
+            </Link>
+          </div>
+          <div className="rounded-xl border bg-card p-5 text-center">
+            <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-orange-100 text-2xl">3</div>
+            <h3 className="mb-1 font-bold">釣ってみる！</h3>
+            <p className="text-sm text-muted-foreground">
+              サビキ釣りなら初めてでも高確率で釣れます。動画付きガイドで安心。
+            </p>
+            <Link href="/guide/sabiki" className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
+              サビキガイド <ChevronRight className="size-3" />
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -510,6 +574,9 @@ export default function Home() {
               </h2>
               <p className="mt-1 text-sm text-muted-foreground">
                 {currentMonth}月に狙える魚たち
+              </p>
+              <p className="mt-1 text-sm text-muted-foreground">
+                今の時期ならこの魚が狙えます。初心者でも釣れるチャンス！
               </p>
             </div>
             <Link

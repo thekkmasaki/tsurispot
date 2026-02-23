@@ -500,10 +500,33 @@ export default function BeginnerGuidePage() {
             釣り初心者完全ガイド
           </h1>
           <p className="mt-2 text-sm text-muted-foreground sm:mt-3 sm:text-base">
-            釣りの魅力から道具選び、おすすめの釣り方、マナーまで。
-            <br className="hidden sm:inline" />
-            この記事を読めば、あなたも今日から釣り人デビューできます。
+            「やってみたいけど、何から始めればいいか分からない」
+            <br />
+            そんなあなたのために。道具選びから最初の1匹まで、この記事だけで全部わかります。
           </p>
+        </div>
+
+        {/* 釣りの魅力 - 感情に訴えるセクション */}
+        <div className="mb-8 rounded-2xl bg-gradient-to-br from-sky-50 to-blue-50 p-6">
+          <h2 className="mb-3 text-lg font-bold text-sky-900">釣りって、こんなに楽しい。</h2>
+          <ul className="space-y-2 text-sm text-sky-800">
+            <li className="flex items-start gap-2">
+              <span className="mt-0.5 text-lg">🌊</span>
+              <span><strong>非日常体験</strong> — 海風を浴びながら、水面を見つめる贅沢な時間</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="mt-0.5 text-lg">🐟</span>
+              <span><strong>感動の1匹</strong> — 初めて魚が釣れた瞬間は、大人でも声が出るほど嬉しい</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="mt-0.5 text-lg">🍽️</span>
+              <span><strong>自分で釣った魚の味</strong> — スーパーの魚とは別次元。新鮮な刺身は最高のご褒美</span>
+            </li>
+            <li className="flex items-start gap-2">
+              <span className="mt-0.5 text-lg">👨‍👩‍👧‍👦</span>
+              <span><strong>家族の思い出</strong> — 子供と一緒に釣りに行った日は、何年経っても忘れない</span>
+            </li>
+          </ul>
         </div>
 
         {/* 目次 */}
@@ -1258,6 +1281,25 @@ export default function BeginnerGuidePage() {
           <Button asChild size="lg" className="min-h-[48px] rounded-full px-8">
             <Link href="/spots">スポットを探す</Link>
           </Button>
+        </div>
+
+        {/* 最後のCTA */}
+        <div className="mt-12 rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 p-6 text-center text-white sm:p-8">
+          <h2 className="mb-2 text-xl font-bold sm:text-2xl">
+            さあ、最初の一歩を踏み出そう。
+          </h2>
+          <p className="mb-4 text-sm text-emerald-50 sm:text-base">
+            近くの釣り場を探して、今週末の予定を決めましょう。
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link href="/spots?difficulty=beginner" className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 font-bold text-emerald-700 transition-colors hover:bg-emerald-50 min-h-[48px]">
+              <MapPin className="size-4" />
+              初心者向け釣り場を探す
+            </Link>
+            <Link href="/guide/sabiki" className="inline-flex items-center gap-2 rounded-lg border-2 border-white/60 px-6 py-3 font-medium text-white transition-colors hover:bg-white/10 min-h-[48px]">
+              サビキ釣りの始め方
+            </Link>
+          </div>
         </div>
       {/* LINE登録バナー */}
       <div className="mt-8 sm:mt-12">

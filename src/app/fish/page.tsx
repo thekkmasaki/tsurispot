@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Link from "next/link";
 import { Fish } from "lucide-react";
 import { getFishSpeciesWithSpots } from "@/lib/data";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
@@ -72,6 +73,16 @@ function FishListContent() {
         </div>
         <p className="text-sm text-muted-foreground">
           釣りで狙える魚{fishSpecies.length}種を図鑑形式で紹介。名前・難易度・旬でかんたん絞り込み。
+        </p>
+      </div>
+
+      {/* 初心者向けメッセージ */}
+      <div className="mb-6 rounded-xl bg-blue-50 p-4">
+        <p className="text-sm text-blue-800">
+          <span className="font-bold">🐟 初心者の方へ：</span>
+          「初心者向け」フィルターで、最初に狙いやすい魚が見つかります。
+          まずは<Link href="/fish/aji" className="font-bold underline hover:text-blue-900">アジ</Link>や
+          <Link href="/fish/iwashi" className="font-bold underline hover:text-blue-900">イワシ</Link>から始めてみましょう！
         </p>
       </div>
 
