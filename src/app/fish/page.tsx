@@ -45,20 +45,23 @@ const breadcrumbJsonLd = {
   ],
 };
 
-// 人気順ソート（popularity小さい順、未設定は末尾）
-function sortByPop<T extends { popularity?: number }>(list: T[]): T[] {
-  return [...list].sort(
-    (a, b) => (a.popularity ?? 999) - (b.popularity ?? 999)
-  );
+// 釣れやすい順ソート（初心者向け→中級→上級、同難易度内は人気順）
+function sortByEase<T extends { difficulty: string; popularity?: number }>(list: T[]): T[] {
+  const diffOrder: Record<string, number> = { beginner: 0, intermediate: 1, advanced: 2 };
+  return [...list].sort((a, b) => {
+    const dDiff = (diffOrder[a.difficulty] ?? 2) - (diffOrder[b.difficulty] ?? 2);
+    if (dDiff !== 0) return dDiff;
+    return (a.popularity ?? 999) - (b.popularity ?? 999);
+  });
 }
 
 function FishListContent() {
   const currentMonth = new Date().getMonth() + 1;
   const fishSpecies = getFishSpeciesWithSpots();
 
-  const seaFish = sortByPop(fishSpecies.filter((f) => f.category === "sea"));
-  const brackishFish = sortByPop(fishSpecies.filter((f) => f.category === "brackish"));
-  const freshwaterFish = sortByPop(fishSpecies.filter((f) => f.category === "freshwater"));
+  const seaFish = sortByEase(fishSpecies.filter((f) => f.category === "sea"));
+  const brackishFish = sortByEase(fishSpecies.filter((f) => f.category === "brackish"));
+  const freshwaterFish = sortByEase(fishSpecies.filter((f) => f.category === "freshwater"));
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">

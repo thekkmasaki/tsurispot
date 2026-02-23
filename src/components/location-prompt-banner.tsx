@@ -8,10 +8,8 @@ const DISMISSED_KEY = "tsurispot_location_dismissed";
 export function LocationPromptBanner() {
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [granted, setGranted] = useState(false);
 
   useEffect(() => {
-    // SSR ガード
     if (typeof window === "undefined") return;
 
     // 既に閉じた場合は表示しない（セッション中）
@@ -20,21 +18,15 @@ export function LocationPromptBanner() {
     // Permissions API で現在の状態を確認
     if (navigator.permissions) {
       navigator.permissions.query({ name: "geolocation" }).then((result) => {
-        if (result.state === "granted") {
-          // 既に許可済み → バナー不要
-          setGranted(true);
+        if (result.state === "granted" || result.state === "denied") {
+          // 許可済み or 拒否済み → バナー不要
           return;
         }
-        if (result.state === "denied") {
-          // 拒否済み → バナーを出しても意味がない
-          return;
-        }
-        // "prompt" 状態 → バナーを表示
-        setVisible(true);
+        // "prompt" 状態 → 少し遅延してバナーを表示（ページ読み込み後）
+        setTimeout(() => setVisible(true), 1500);
       });
     } else {
-      // Permissions API 非対応 → とりあえず表示
-      setVisible(true);
+      setTimeout(() => setVisible(true), 1500);
     }
   }, []);
 
@@ -44,11 +36,11 @@ export function LocationPromptBanner() {
 
     navigator.geolocation.getCurrentPosition(
       () => {
-        setGranted(true);
-        setVisible(false);
+        dismiss();
+        // ページをリロードして近くのスポットを表示
+        window.location.reload();
       },
       () => {
-        // 拒否されても閉じる
         dismiss();
       },
       { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
@@ -60,11 +52,11 @@ export function LocationPromptBanner() {
     sessionStorage.setItem(DISMISSED_KEY, "1");
   };
 
-  if (!visible || granted) return null;
+  if (!visible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 animate-in slide-in-from-bottom-4 duration-300 sm:hidden">
-      <div className="mx-2 mb-2 rounded-2xl border border-sky-200 bg-white/95 p-3 shadow-lg backdrop-blur-sm">
+    <div className="fixed bottom-[68px] left-0 right-0 z-[60] animate-in slide-in-from-bottom-4 duration-300 sm:hidden">
+      <div className="mx-2 rounded-2xl border border-sky-200 bg-white p-3 shadow-lg">
         <div className="flex items-start gap-3">
           <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sky-100">
             <Navigation className="size-5 text-sky-600" />
@@ -74,13 +66,13 @@ export function LocationPromptBanner() {
               近くの釣り場を見つけよう
             </p>
             <p className="mt-0.5 text-xs text-muted-foreground">
-              位置情報を許可すると、現在地から近い順に釣り場を表示できます
+              位置情報を許可すると、近い順に釣り場を表示します
             </p>
             <div className="mt-2 flex items-center gap-2">
               <button
                 onClick={handleAllow}
                 disabled={loading}
-                className="inline-flex items-center gap-1.5 rounded-lg bg-sky-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-sky-700 active:bg-sky-800 disabled:opacity-60"
+                className="inline-flex min-h-[44px] items-center gap-1.5 rounded-lg bg-sky-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-sky-700 active:bg-sky-800 disabled:opacity-60"
               >
                 {loading ? (
                   <>
@@ -96,7 +88,7 @@ export function LocationPromptBanner() {
               </button>
               <button
                 onClick={dismiss}
-                className="px-3 py-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
+                className="min-h-[44px] px-3 py-2 text-xs text-muted-foreground transition-colors hover:text-foreground"
               >
                 今はしない
               </button>
@@ -104,7 +96,7 @@ export function LocationPromptBanner() {
           </div>
           <button
             onClick={dismiss}
-            className="shrink-0 rounded-full p-1 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
+            className="shrink-0 rounded-full p-1.5 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
             aria-label="閉じる"
           >
             <X className="size-4" />
