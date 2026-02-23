@@ -60,32 +60,42 @@ function filterFish(
       (f) => f.category === "freshwater" || f.category === "brackish"
     );
   }
-  // "any" -> no category filter
 
-  // Step 2: Filter by difficulty based on experience level
-  if (level === "beginner") {
-    filtered = filtered.filter((f) => f.difficulty === "beginner");
-  } else if (level === "intermediate") {
-    filtered = filtered.filter(
-      (f) => f.difficulty === "beginner" || f.difficulty === "intermediate"
-    );
-  }
-  // "advanced" -> no difficulty filter (all are fine)
-
-  // Step 3: Filter/sort by priority
-  if (priority === "quantity") {
-    // Quantity fishing -> prefer beginner difficulty (sabiki-type fish)
-    // Fish that are typically caught in quantity: beginner difficulty
-    filtered = filtered.filter((f) => f.difficulty === "beginner");
-  } else if (priority === "trophy") {
-    // Trophy fishing -> advanced difficulty fish
-    filtered = filtered.filter((f) => f.difficulty === "advanced");
+  // Step 2+3: 経験レベルと目的を組み合わせてフィルタ
+  if (priority === "trophy") {
+    // 大物狙い → 経験レベルに関係なく中級〜上級の魚を提案
+    // （大物を狙いたいなら、少し背伸びしてもOK）
+    if (level === "beginner") {
+      filtered = filtered.filter(
+        (f) => f.difficulty === "intermediate" || f.difficulty === "beginner"
+      );
+    }
+    // intermediate/advanced → 全難易度OK、上級を優先ソート
+    filtered.sort((a, b) => {
+      const order = { advanced: 0, intermediate: 1, beginner: 2 };
+      return order[a.difficulty] - order[b.difficulty];
+    });
+  } else if (priority === "quantity" || priority === "family") {
+    // 数釣り・家族 → 初心者向けの魚を優先
+    if (level === "beginner") {
+      filtered = filtered.filter((f) => f.difficulty === "beginner");
+    } else {
+      // 中級以上でも数釣り向けの魚を優先表示
+      filtered.sort((a, b) => {
+        const order = { beginner: 0, intermediate: 1, advanced: 2 };
+        return order[a.difficulty] - order[b.difficulty];
+      });
+    }
   } else if (priority === "delicious") {
-    // Delicious -> sort by taste rating (high first)
+    // 美味しい魚 → 経験レベルで絞った上で食味順
+    if (level === "beginner") {
+      filtered = filtered.filter((f) => f.difficulty === "beginner");
+    } else if (level === "intermediate") {
+      filtered = filtered.filter(
+        (f) => f.difficulty === "beginner" || f.difficulty === "intermediate"
+      );
+    }
     filtered.sort((a, b) => b.tasteRating - a.tasteRating);
-  } else if (priority === "family") {
-    // Family -> beginner difficulty fish
-    filtered = filtered.filter((f) => f.difficulty === "beginner");
   }
 
   // Prioritize fish that are in season this month
@@ -96,7 +106,6 @@ function filterFish(
     (f) => !f.seasonMonths.includes(currentMonth)
   );
 
-  // Peak season fish first, then in-season, then out-of-season
   const peakSeason = inSeason.filter((f) =>
     f.peakMonths.includes(currentMonth)
   );
@@ -105,6 +114,36 @@ function filterFish(
   );
 
   return [...peakSeason, ...normalSeason, ...outOfSeason].slice(0, 5);
+}
+
+// 条件緩和して代替提案を生成
+function getFallbackFish(
+  allFish: FishSpecies[],
+  location: LocationType,
+  currentMonth: number
+): FishSpecies[] {
+  let filtered = [...allFish];
+
+  if (location === "sea") {
+    filtered = filtered.filter(
+      (f) => f.category === "sea" || f.category === "brackish"
+    );
+  } else if (location === "freshwater") {
+    filtered = filtered.filter(
+      (f) => f.category === "freshwater" || f.category === "brackish"
+    );
+  }
+
+  // シーズン中の魚を人気順で返す
+  const inSeason = filtered.filter((f) =>
+    f.seasonMonths.includes(currentMonth)
+  );
+  const peak = inSeason.filter((f) => f.peakMonths.includes(currentMonth));
+  const normal = inSeason.filter(
+    (f) => !f.peakMonths.includes(currentMonth)
+  );
+
+  return [...peak, ...normal].slice(0, 3);
 }
 
 // --- JSON-LD ---
@@ -190,6 +229,12 @@ export default function FishFinderPage() {
     if (!showResults) return [];
     return filterFish(fishSpecies, location, level, priority, currentMonth);
   }, [showResults, location, level, priority, currentMonth]);
+
+  // Fallback (条件に合わない時の代替提案)
+  const fallbackResults = useMemo(() => {
+    if (!showResults || results.length > 0) return [];
+    return getFallbackFish(fishSpecies, location, currentMonth);
+  }, [showResults, results.length, location, currentMonth]);
 
   // Labels
   const getLocationLabel = () => {
@@ -624,25 +669,51 @@ export default function FishFinderPage() {
                   ))}
                 </div>
               ) : (
-                <Card>
-                  <CardContent className="p-8 text-center">
-                    <Fish className="size-12 text-gray-300 mx-auto mb-3" />
-                    <p className="text-gray-500">
-                      条件に合う魚が見つかりませんでした
-                    </p>
-                    <p className="text-sm text-gray-400 mt-1">
-                      条件を変更して再度お試しください
-                    </p>
-                    <Button
-                      onClick={handleReset}
-                      variant="outline"
-                      className="mt-4 gap-2"
-                    >
-                      <RotateCcw className="size-4" />
-                      条件を変更する
-                    </Button>
-                  </CardContent>
-                </Card>
+                <div className="space-y-4">
+                  <Card className="border-amber-200 bg-amber-50/50">
+                    <CardContent className="p-6 text-center">
+                      <p className="text-base font-bold text-amber-800">
+                        {currentMonth}月×この条件だと、ぴったりの魚は少なめです
+                      </p>
+                      <p className="text-sm text-amber-700 mt-2">
+                        {priority === "trophy" && level !== "advanced"
+                          ? "大物狙いは経験「上級」にすると選択肢が広がります！まずは中型魚で腕を磨くのもおすすめです。"
+                          : `${currentMonth}月はこの条件では難しい時期かもしれません。季節を変えるか、条件を少し広げてみてください。`}
+                      </p>
+                      <Button
+                        onClick={handleReset}
+                        variant="outline"
+                        className="mt-4 gap-2"
+                      >
+                        <RotateCcw className="size-4" />
+                        条件を変更する
+                      </Button>
+                    </CardContent>
+                  </Card>
+
+                  {fallbackResults.length > 0 && (
+                    <>
+                      <div>
+                        <h3 className="text-base font-bold flex items-center gap-2">
+                          <Fish className="size-4 text-cyan-500" />
+                          条件を広げたおすすめ
+                        </h3>
+                        <p className="text-xs text-gray-500 mt-1">
+                          {currentMonth}月に{location === "sea" ? "海" : location === "freshwater" ? "川・湖" : ""}で釣れる人気の魚
+                        </p>
+                      </div>
+                      <div className="space-y-4">
+                        {fallbackResults.map((fish) => (
+                          <FishResultCard
+                            key={fish.id}
+                            fish={fish}
+                            currentMonth={currentMonth}
+                          />
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
               )}
 
               {/* Related links */}
