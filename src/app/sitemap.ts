@@ -37,6 +37,7 @@ export default async function sitemap({
       { url: `${baseUrl}/guide/choinage`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
       { url: `${baseUrl}/guide/anazuri`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
       { url: `${baseUrl}/guide/oyogase`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/sinker`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
       { url: `${baseUrl}/glossary`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       { url: `${baseUrl}/seasonal`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       { url: `${baseUrl}/beginner-checklist`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },

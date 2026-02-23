@@ -89,6 +89,7 @@ const guidePages: SearchResult[] = [
   { type: "guide", name: "穴釣りガイド", slug: "/guide/anazuri", sub: "釣り方ガイド", searchText: "穴釣り あなつり anazuri テトラ カサゴ メバル 根魚 ブラクリ" },
   { type: "guide", name: "泳がせ釣りガイド", slug: "/guide/oyogase", sub: "釣り方ガイド", searchText: "泳がせ釣り およがせ oyogase 生き餌 ヒラメ 青物 ブリ" },
   { type: "guide", name: "ラインの選び方", slug: "/guide/line", sub: "道具ガイド", searchText: "ライン 道糸 ハリス ナイロン フロロカーボン peライン 選び方 line" },
+  { type: "guide", name: "おもりの種類と選び方", slug: "/guide/sinker", sub: "道具ガイド", searchText: "おもり 重り シンカー ガン玉 ナス型 天秤 ブラクリ sinker オモリ 号数" },
   { type: "guide", name: "仕掛けの種類", slug: "/guide/rigs", sub: "道具ガイド", searchText: "仕掛け しかけ rigs 天秤 胴付き ウキ仕掛け サビキ仕掛け" },
   { type: "guide", name: "結び方ガイド", slug: "/guide/knots", sub: "テクニックガイド", searchText: "結び方 ノット knots クリンチノット ユニノット FGノット 糸の結び方" },
   { type: "guide", name: "潮見表の読み方", slug: "/guide/tide", sub: "知識ガイド", searchText: "潮見表 しおみひょう tide 潮汐 大潮 中潮 小潮 潮回り 干潮 満潮" },
