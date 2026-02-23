@@ -25,13 +25,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: [
-      "https://tsurispot.com/sitemap/0.xml",
-      "https://tsurispot.com/sitemap/1.xml",
-      "https://tsurispot.com/sitemap/2.xml",
-      "https://tsurispot.com/sitemap/3.xml",
-      "https://tsurispot.com/sitemap/4.xml",
-    ],
+    sitemap: "https://tsurispot.com/sitemap.xml",
     host: "https://tsurispot.com",
   };
 }
