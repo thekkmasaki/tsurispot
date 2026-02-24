@@ -48,6 +48,7 @@ import { CatchReportList } from "@/components/spots/catch-report-list";
 import { CatchReportForm } from "@/components/spots/catch-report-form";
 import { LineBanner } from "@/components/line-banner";
 import { areaGuides } from "@/lib/data/area-guides";
+import { explainTime, explainMethod } from "@/lib/fishing-term-helper";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 
 // Below-the-fold client components loaded lazily
@@ -377,6 +378,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 初心者OK
               </Badge>
             )}
+            {spot.hasRentalRod && (
+              <Badge className="bg-purple-600 hover:bg-purple-600">
+                手ぶらOK
+              </Badge>
+            )}
             {spot.isFree && (
               <Badge className="bg-orange-500 hover:bg-orange-500">無料</Badge>
             )}
@@ -513,32 +519,41 @@ export default async function SpotDetailPage({ params }: PageProps) {
             {/* Fish details list */}
             {spot.catchableFish.length > 0 && (
               <div className="mt-3 space-y-2 sm:mt-4">
-                {spot.catchableFish.map((cf) => (
-                  <div
-                    key={cf.fish.id}
-                    className="rounded-lg border p-3 text-sm"
-                  >
-                    <div className="flex items-center justify-between gap-2">
-                      <div className="flex items-center gap-2 min-w-0">
-                        <Link
-                          href={`/fish/${cf.fish.slug}`}
-                          className="font-medium truncate hover:text-primary hover:underline"
-                        >
-                          {cf.fish.name}
-                        </Link>
-                        <Badge variant="secondary" className="text-xs shrink-0">
-                          {cf.method}
-                        </Badge>
+                {spot.catchableFish.map((cf) => {
+                  const methodExplanation = explainMethod(cf.method);
+                  return (
+                    <div
+                      key={cf.fish.id}
+                      className="rounded-lg border p-3 text-sm"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2 min-w-0">
+                          <Link
+                            href={`/fish/${cf.fish.slug}`}
+                            className="font-medium truncate hover:text-primary hover:underline"
+                          >
+                            {cf.fish.name}
+                          </Link>
+                          <Badge variant="secondary" className="text-xs shrink-0">
+                            {cf.method}
+                          </Badge>
+                        </div>
+                        <p className="text-xs text-muted-foreground shrink-0">
+                          {explainTime(cf.recommendedTime)}
+                        </p>
                       </div>
-                      <p className="text-xs text-muted-foreground shrink-0">
-                        {cf.recommendedTime}
-                      </p>
+                      {methodExplanation && (
+                        <p className="mt-1.5 text-xs text-muted-foreground">
+                          <span className="mr-1">💡</span>
+                          {cf.method}とは… {methodExplanation}
+                        </p>
+                      )}
+                      <div className="mt-2">
+                        <FishLikeButton spotSlug={slug} fishSlug={cf.fish.slug} />
+                      </div>
                     </div>
-                    <div className="mt-2">
-                      <FishLikeButton spotSlug={slug} fishSlug={cf.fish.slug} />
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             )}
 

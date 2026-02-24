@@ -74,15 +74,15 @@ export function SeasonCalendar({
       <div className="flex flex-wrap items-center gap-3 text-xs text-muted-foreground sm:gap-4">
         <div className="flex items-center gap-1.5">
           <div className="size-3 rounded-sm bg-primary" />
-          <span>ハイシーズン</span>
+          <span>ハイシーズン（最も釣れやすい時期）</span>
         </div>
         <div className="flex items-center gap-1.5">
           <div className="size-3 rounded-sm bg-primary/30" />
-          <span>シーズン</span>
+          <span>シーズン（釣れる時期）</span>
         </div>
         <div className="flex items-center gap-1.5">
           <div className="size-3 rounded-sm bg-muted" />
-          <span>オフシーズン</span>
+          <span>オフシーズン（釣れにくい時期）</span>
         </div>
       </div>
     </div>

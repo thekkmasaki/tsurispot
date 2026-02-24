@@ -4,6 +4,7 @@ import { GearGuide as GearGuideType, DIFFICULTY_LABELS } from "@/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
+import { explainGearSpec, generateShopAdvice } from "@/lib/fishing-term-helper";
 
 // 釣り方名 → 解説ページスラッグのマッピング
 const METHOD_SLUG_MAP: { pattern: RegExp; slug: string; label: string }[] = [
@@ -162,21 +163,21 @@ export function GearGuideCard({ guide }: { guide: GearGuideType }) {
               <GearRow
                 icon="🎣"
                 label="竿（ロッド）"
-                value={guide.rod}
+                value={explainGearSpec(guide.rod)}
                 affiliateUrl={ROD_AFFILIATE.url}
                 affiliateLabel={`${ROD_AFFILIATE.label}をAmazonで見る`}
               />
               <GearRow
                 icon="🔄"
                 label="リール"
-                value={guide.reel}
+                value={explainGearSpec(guide.reel)}
                 affiliateUrl={REEL_AFFILIATE.url}
                 affiliateLabel={`${REEL_AFFILIATE.label}をAmazonで見る`}
               />
               <GearRow
                 icon="🧵"
                 label="糸（ライン）"
-                value={addPeEquivalent(guide.line)}
+                value={explainGearSpec(addPeEquivalent(guide.line))}
                 affiliateUrl={lineAffiliate?.url}
                 affiliateLabel={`${lineAffiliate?.label}をAmazonで見る`}
               />
@@ -218,6 +219,19 @@ export function GearGuideCard({ guide }: { guide: GearGuideType }) {
             <p className="mt-1 text-sm text-amber-700">{guide.tip}</p>
           </div>
         )}
+
+        {(() => {
+          const shopAdvice = guide.shopAdvice || generateShopAdvice(guide.method, guide.difficulty);
+          if (!shopAdvice) return null;
+          return (
+            <div className="mt-3 rounded-lg bg-sky-50 p-3">
+              <p className="text-xs font-medium text-sky-800">
+                🏬 釣具店での頼み方
+              </p>
+              <p className="mt-1 text-sm text-sky-700">{shopAdvice}</p>
+            </div>
+          );
+        })()}
       </CardContent>
     </Card>
   );

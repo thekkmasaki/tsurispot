@@ -178,6 +178,7 @@ export interface GearGuide {
   hook: string;
   otherItems: string[];
   tip: string;
+  shopAdvice?: string;
 }
 
 export interface YouTubeSearchLink {
