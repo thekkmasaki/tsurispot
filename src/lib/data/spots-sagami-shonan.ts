@@ -1,4 +1,4 @@
-import { FishingSpot, FishSpecies } from "@/types";
+import { FishingSpot, FishSpecies, GearGuide } from "@/types";
 import { getFishBySlug } from "./fish";
 import { regions } from "./regions";
 
@@ -13,6 +13,91 @@ function region(id: string) {
   if (!r) throw new Error(`Region not found: ${id}`);
   return r;
 }
+
+// gear定数
+const gearSabiki: GearGuide = {
+  targetFish: "アジ・サバ・イワシ",
+  method: "サビキ釣り",
+  difficulty: "beginner",
+  rod: "磯竿3号 3.6〜4.5m",
+  reel: "スピニングリール 2500番",
+  line: "ナイロン3号",
+  hook: "サビキ仕掛け 5〜7号",
+  otherItems: ["コマセカゴ", "アミエビ", "バケツ"],
+  tip: "コマセは少しずつ出すのがコツ。夕マヅメが特に釣果がよい。"
+};
+
+const gearNage: GearGuide = {
+  targetFish: "キス・カレイ",
+  method: "投げ釣り",
+  difficulty: "beginner",
+  rod: "投げ竿 3.9〜4.25m",
+  reel: "スピニングリール 3000〜4000番",
+  line: "ナイロン4号",
+  hook: "流線針 7〜9号",
+  otherItems: ["天秤オモリ 20〜25号", "青イソメ", "竿立て"],
+  tip: "砂地を狙って遠投。アタリは小さいのでラインを張りすぎないこと。"
+};
+
+const gearRock: GearGuide = {
+  targetFish: "カサゴ・メバル",
+  method: "穴釣り・根魚釣り",
+  difficulty: "beginner",
+  rod: "穴釣りロッド 1.1〜1.5m",
+  reel: "小型両軸リール",
+  line: "フロロ3号",
+  hook: "ブラクリ 3〜5号",
+  otherItems: ["アオイソメ", "サバの切り身"],
+  tip: "テトラの隙間に落とし込み、底に着いたら少し持ち上げて待つ。"
+};
+
+const gearUki: GearGuide = {
+  targetFish: "クロダイ・メジナ",
+  method: "ウキフカセ釣り",
+  difficulty: "intermediate",
+  rod: "磯竿1.5〜2号 5.3m",
+  reel: "スピニングリール 2500〜3000番",
+  line: "ナイロン2号",
+  hook: "チヌ針3〜4号",
+  otherItems: ["ウキ", "オキアミ", "コマセ"],
+  tip: "潮の流れに乗せてウキを流すのがコツ。"
+};
+
+const gearEging: GearGuide = {
+  targetFish: "アオリイカ",
+  method: "エギング",
+  difficulty: "intermediate",
+  rod: "エギングロッド 8.6ft ML",
+  reel: "スピニングリール 2500番",
+  line: "PE 0.6号",
+  hook: "エギ 3〜3.5号",
+  otherItems: ["リーダー フロロ2号", "ギャフ", "イカ締めピック"],
+  tip: "秋イカは3号エギ、春の親イカは3.5〜4号が効果的。"
+};
+
+const gearJig: GearGuide = {
+  targetFish: "ブリ・ヒラマサ・カンパチ",
+  method: "ショアジギング",
+  difficulty: "intermediate",
+  rod: "ショアジギングロッド M〜MH 10ft",
+  reel: "スピニングリール 4000〜5000番",
+  line: "PE 1〜1.5号",
+  hook: "メタルジグ 30〜60g",
+  otherItems: ["リーダー フロロ5号", "プライヤー"],
+  tip: "朝マヅメの時合いに集中。ジャークのリズムを一定に保つ。"
+};
+
+const gearLure: GearGuide = {
+  targetFish: "シーバス",
+  method: "ルアー釣り",
+  difficulty: "intermediate",
+  rod: "シーバスロッド 9ft ML",
+  reel: "スピニングリール 3000番",
+  line: "PE 1号",
+  hook: "ミノー 80〜120mm",
+  otherItems: ["リーダー フロロ5号", "スナップ", "プライヤー"],
+  tip: "常夜灯周りの明暗部を狙うのが基本。"
+};
 
 export const sagamiShonanSpots: FishingSpot[] = [
   // ===== 逗子・葉山エリア (r7 湘南) =====
@@ -43,6 +128,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "逗子海岸 キス釣り", searchQuery: "逗子海岸 キス 投げ釣り", description: "逗子海岸でのキス投げ釣り動画" },
       { label: "逗子海岸 サーフ釣り", searchQuery: "逗子海岸 サーフ ヒラメ", description: "逗子海岸でのサーフフィッシング" },
     ],
+    gearGuides: [gearNage],
   },
   {
     id: "ss2", name: "小坪漁港", slug: "kotsubo-port",
@@ -71,6 +157,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "小坪漁港 メバリング", searchQuery: "小坪漁港 メバリング 夜釣り", description: "小坪漁港でのメバリング動画" },
       { label: "小坪漁港 根魚釣り", searchQuery: "小坪漁港 カサゴ 穴釣り", description: "小坪漁港での根魚釣り" },
     ],
+    gearGuides: [gearRock, gearUki],
   },
   {
     id: "ss3", name: "葉山港（あぶずり港）", slug: "hayama-port",
@@ -136,6 +223,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "森戸海岸 キス釣り", searchQuery: "森戸海岸 キス 投げ釣り 葉山", description: "森戸海岸でのキス釣り動画" },
       { label: "森戸海岸 サーフ", searchQuery: "森戸海岸 サーフフィッシング", description: "森戸海岸でのサーフ釣り" },
     ],
+    gearGuides: [gearNage, gearRock, gearEging, gearJig],
   },
   {
     id: "ss5", name: "一色海岸", slug: "isshiki-beach",
@@ -168,6 +256,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "一色海岸 キス", searchQuery: "一色海岸 葉山 キス釣り", description: "一色海岸でのキス釣り" },
       { label: "葉山 磯釣り", searchQuery: "葉山 一色海岸 磯 メバル", description: "一色海岸の磯場での釣り" },
     ],
+    gearGuides: [gearNage, gearRock, gearEging, gearJig],
   },
   {
     id: "ss6", name: "長者ヶ崎", slug: "chojagasaki",
@@ -198,6 +287,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "長者ヶ崎 磯釣り", searchQuery: "長者ヶ崎 磯釣り クロダイ", description: "長者ヶ崎での磯釣り動画" },
       { label: "長者ヶ崎 エギング", searchQuery: "長者ヶ崎 エギング アオリイカ", description: "長者ヶ崎でのエギング" },
     ],
+    gearGuides: [gearUki, gearRock, gearEging],
   },
   // ===== 鎌倉エリア (r7 湘南) =====
   {
@@ -228,6 +318,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "稲村ヶ崎 磯釣り", searchQuery: "稲村ヶ崎 磯釣り クロダイ 鎌倉", description: "稲村ヶ崎での磯釣り動画" },
       { label: "稲村ヶ崎 カマス", searchQuery: "稲村ヶ崎 カマス ルアー", description: "稲村ヶ崎でのカマス釣り" },
     ],
+    gearGuides: [gearUki, gearRock, gearSabiki],
   },
   {
     id: "ss8", name: "由比ヶ浜", slug: "yuigahama",
@@ -256,6 +347,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "由比ヶ浜 キス釣り", searchQuery: "由比ヶ浜 キス 投げ釣り 鎌倉", description: "由比ヶ浜でのキス投げ釣り" },
       { label: "由比ヶ浜 サーフ", searchQuery: "由比ヶ浜 サーフ ヒラメ シーバス", description: "由比ヶ浜サーフフィッシング" },
     ],
+    gearGuides: [gearNage, gearLure],
   },
   {
     id: "ss9", name: "材木座海岸", slug: "zaimokuza-beach",
@@ -284,6 +376,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "材木座海岸 釣り", searchQuery: "材木座海岸 キス ハゼ ちょい投げ", description: "材木座海岸でのちょい投げ" },
       { label: "和賀江島 磯釣り", searchQuery: "和賀江島 磯釣り 鎌倉", description: "和賀江島での磯釣り" },
     ],
+    gearGuides: [gearNage, gearRock],
   },
   {
     id: "ss10", name: "腰越漁港", slug: "koshigoe-port",
@@ -312,6 +405,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "腰越漁港 サビキ", searchQuery: "腰越漁港 サビキ アジ イワシ", description: "腰越漁港でのサビキ釣り" },
       { label: "腰越漁港 サヨリ", searchQuery: "腰越漁港 サヨリ ウキ釣り", description: "腰越漁港でのサヨリ釣り" },
     ],
+    gearGuides: [gearSabiki, gearUki],
   },
   {
     id: "ss11", name: "七里ヶ浜", slug: "shichirigahama",
@@ -340,6 +434,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "七里ヶ浜 シーバス", searchQuery: "七里ヶ浜 シーバス ルアー サーフ", description: "七里ヶ浜でのシーバス釣り" },
       { label: "七里ヶ浜 サーフ", searchQuery: "七里ヶ浜 サーフ ヒラメ 鎌倉", description: "七里ヶ浜サーフフィッシング" },
     ],
+    gearGuides: [gearLure, gearNage],
   },
   // ===== 藤沢・茅ヶ崎エリア (r7 湘南) =====
   {
@@ -410,6 +505,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "江の島 裏磯 青物", searchQuery: "江の島 裏磯 イナダ カゴ釣り", description: "江の島裏磯での青物釣り" },
       { label: "江の島 裏磯 マダイ", searchQuery: "江の島 裏磯 マダイ カゴ釣り", description: "江の島裏磯でのマダイ狙い" },
     ],
+    gearGuides: [gearUki, gearJig],
   },
   {
     id: "ss14", name: "湘南港北緑地広場", slug: "shonan-ko-kita-ryokuchi",
@@ -481,6 +577,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "片瀬西浜 キス", searchQuery: "片瀬海岸 キス 投げ釣り", description: "片瀬西浜でのキス釣り" },
       { label: "片瀬 シーバス", searchQuery: "片瀬海岸 境川河口 シーバス ルアー", description: "片瀬海岸でのシーバス釣り" },
     ],
+    gearGuides: [gearNage, gearLure, gearJig, gearRock],
   },
   {
     id: "ss16", name: "鵠沼海岸", slug: "kugenuma-beach",
@@ -509,6 +606,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "鵠沼海岸 キス", searchQuery: "鵠沼海岸 キス 投げ釣り 湘南", description: "鵠沼海岸でのキス釣り" },
       { label: "引地川河口 シーバス", searchQuery: "引地川 河口 シーバス ルアー 鵠沼", description: "引地川河口でのシーバス釣り" },
     ],
+    gearGuides: [gearNage, gearLure],
   },
   {
     id: "ss17", name: "辻堂海岸", slug: "tsujido-beach",
@@ -539,6 +637,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "辻堂海岸 キス", searchQuery: "辻堂海岸 キス 投げ釣り", description: "辻堂海岸でのキス投げ釣り" },
       { label: "辻堂 サーフ", searchQuery: "辻堂海岸 サーフ ヒラメ", description: "辻堂海岸でのサーフフィッシング" },
     ],
+    gearGuides: [gearNage, gearLure],
   },
   {
     id: "ss18", name: "茅ヶ崎漁港", slug: "chigasaki-port",
@@ -575,6 +674,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "茅ヶ崎漁港 サビキ", searchQuery: "茅ヶ崎漁港 サビキ アジ カマス", description: "茅ヶ崎漁港でのサビキ釣り" },
       { label: "茅ヶ崎漁港 投げ釣り", searchQuery: "茅ヶ崎漁港 キス 投げ釣り", description: "茅ヶ崎漁港でのキス投げ釣り" },
     ],
+    gearGuides: [gearSabiki, gearNage, gearRock, gearEging, gearJig],
   },
   {
     id: "ss19", name: "茅ヶ崎ヘッドランド", slug: "chigasaki-headland",
@@ -611,6 +711,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "茅ヶ崎ヘッドランド キス", searchQuery: "茅ヶ崎 ヘッドランド キス 投げ釣り", description: "茅ヶ崎ヘッドランドでのキス釣り" },
       { label: "茅ヶ崎 サーフ", searchQuery: "茅ヶ崎 サーフ ヒラメ ルアー", description: "茅ヶ崎サーフでのフラットフィッシュゲーム" },
     ],
+    gearGuides: [gearNage, gearLure, gearRock, gearEging, gearJig],
   },
   {
     id: "ss20", name: "柳島海岸", slug: "yanagishima-beach",
@@ -645,6 +746,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "柳島海岸 キス", searchQuery: "柳島海岸 キス 投げ釣り 茅ヶ崎", description: "柳島海岸でのキス投げ釣り" },
       { label: "柳島 シーバス", searchQuery: "柳島海岸 シーバス 相模川河口", description: "柳島海岸でのシーバス釣り" },
     ],
+    gearGuides: [gearNage, gearLure, gearRock, gearEging, gearJig],
   },
   {
     id: "ss21", name: "相模川河口", slug: "sagamigawa-kakou",
@@ -742,6 +844,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "平塚海岸 キス", searchQuery: "平塚海岸 キス 投げ釣り 湘南", description: "平塚海岸でのキス投げ釣り" },
       { label: "平塚海岸 ショアジギ", searchQuery: "平塚海岸 ショアジギング イナダ", description: "平塚海岸でのショアジギング" },
     ],
+    gearGuides: [gearNage, gearLure, gearJig],
   },
   {
     id: "ss24", name: "花水川河口", slug: "hanamizugawa-kakou",
@@ -771,6 +874,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "花水川河口 シーバス", searchQuery: "花水川河口 シーバス ルアー", description: "花水川河口でのシーバス釣り" },
       { label: "花水川 ハゼ", searchQuery: "花水川 ハゼ 釣り 平塚", description: "花水川でのハゼ釣り" },
     ],
+    gearGuides: [gearLure, gearNage],
   },
   {
     id: "ss25", name: "大磯海岸（照ヶ崎）", slug: "oiso-terugasaki",
@@ -805,6 +909,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "照ヶ崎 クロダイ", searchQuery: "大磯 照ヶ崎 クロダイ フカセ", description: "照ヶ崎でのクロダイ釣り" },
       { label: "大磯海岸 キス", searchQuery: "大磯海岸 キス 投げ釣り", description: "大磯海岸でのキス投げ釣り" },
     ],
+    gearGuides: [gearUki, gearNage, gearRock, gearLure],
   },
   // ===== 西湘エリア (r47 西湘) =====
   {
@@ -834,6 +939,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "二宮海岸 キス", searchQuery: "二宮海岸 キス 投げ釣り", description: "二宮海岸でのキス釣り" },
       { label: "二宮 ショアジギ", searchQuery: "二宮海岸 ショアジギング 青物", description: "二宮海岸でのショアジギング" },
     ],
+    gearGuides: [gearNage, gearJig],
   },
   {
     id: "ss27", name: "酒匂海岸", slug: "sakawa-beach",
@@ -864,6 +970,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "酒匂海岸 キス", searchQuery: "酒匂海岸 キス 投げ釣り 大会", description: "酒匂海岸でのキス投げ釣り" },
       { label: "酒匂川河口 シーバス", searchQuery: "酒匂川河口 シーバス ルアー", description: "酒匂川河口でのシーバス釣り" },
     ],
+    gearGuides: [gearNage, gearLure, gearJig],
   },
   {
     id: "ss28", name: "米神漁港", slug: "yonegami-port",
@@ -892,6 +999,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "米神漁港 釣り", searchQuery: "米神漁港 アジ サビキ 小田原", description: "米神漁港での釣り動画" },
       { label: "米神 カゴ釣り", searchQuery: "米神漁港 カゴ釣り イナダ", description: "米神漁港でのカゴ釣り" },
     ],
+    gearGuides: [gearSabiki, gearRock],
   },
   {
     id: "ss29", name: "根府川港", slug: "nebukawa-port",
@@ -920,6 +1028,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "根府川港 アジ", searchQuery: "根府川港 アジ サビキ", description: "根府川港でのアジ釣り" },
       { label: "根府川 カゴ釣り", searchQuery: "根府川港 カゴ釣り マダイ イナダ", description: "根府川港でのカゴ釣り" },
     ],
+    gearGuides: [gearSabiki, gearJig],
   },
   {
     id: "ss30", name: "江之浦港", slug: "enoura-port",
@@ -948,6 +1057,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "江之浦港 エギング", searchQuery: "江之浦港 エギング アオリイカ", description: "江之浦港でのエギング" },
       { label: "江之浦港 根魚", searchQuery: "江之浦港 カサゴ メバル 穴釣り", description: "江之浦港での根魚釣り" },
     ],
+    gearGuides: [gearRock, gearEging],
   },
   {
     id: "ss31", name: "真鶴岬（三ツ石海岸）", slug: "manazuru-misaki-mitsuishi",
@@ -1014,6 +1124,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "岩海岸 釣り", searchQuery: "真鶴 岩海岸 釣り キス", description: "岩海岸での釣り動画" },
       { label: "岩海岸 ファミリー", searchQuery: "真鶴 岩海岸 ファミリーフィッシング", description: "岩海岸でのファミリーフィッシング" },
     ],
+    gearGuides: [gearNage, gearRock],
   },
   {
     id: "ss33", name: "福浦港", slug: "fukuura-port",
@@ -1043,5 +1154,6 @@ export const sagamiShonanSpots: FishingSpot[] = [
       { label: "福浦港 釣り", searchQuery: "福浦港 アジ サビキ エギング", description: "福浦港での釣り動画" },
       { label: "福浦港 エギング", searchQuery: "福浦港 エギング アオリイカ 真鶴", description: "福浦港でのエギング" },
     ],
+    gearGuides: [gearSabiki, gearEging, gearRock],
   },
 ];

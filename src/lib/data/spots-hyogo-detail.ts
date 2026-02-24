@@ -1,4 +1,4 @@
-import type { FishingSpot, FishSpecies } from "@/types";
+import type { FishingSpot, FishSpecies, GearGuide } from "@/types";
 import { regions } from "./regions";
 import type { Region } from "@/types";
 import { getFishBySlug } from "./fish";
@@ -53,6 +53,92 @@ const btNight = [
   { label: "夜", timeRange: "19:00〜23:00", rating: "best" as const },
 ];
 
+
+// 共通 Gear Guides
+const gearSabiki: GearGuide = {
+  targetFish: "アジ・サバ・イワシ",
+  method: "サビキ釣り",
+  difficulty: "beginner",
+  rod: "磯竿3号 3.6〜4.5m",
+  reel: "スピニングリール 2500番",
+  line: "ナイロン3号",
+  hook: "サビキ仕掛け 5〜7号",
+  otherItems: ["コマセカゴ", "アミエビ", "バケツ"],
+  tip: "コマセは少しずつ出すのがコツ。夕マヅメが特に釣果がよい。"
+};
+
+const gearNage: GearGuide = {
+  targetFish: "キス・カレイ",
+  method: "投げ釣り",
+  difficulty: "beginner",
+  rod: "投げ竿 3.9〜4.25m",
+  reel: "スピニングリール 3000〜4000番",
+  line: "ナイロン4号",
+  hook: "流線針 7〜9号",
+  otherItems: ["天秤オモリ 20〜25号", "青イソメ", "竿立て"],
+  tip: "砂地を狙って遠投。アタリは小さいのでラインを張りすぎないこと。"
+};
+
+const gearRock: GearGuide = {
+  targetFish: "カサゴ・メバル",
+  method: "穴釣り・根魚釣り",
+  difficulty: "beginner",
+  rod: "穴釣りロッド 1.1〜1.5m",
+  reel: "小型両軸リール",
+  line: "フロロ3号",
+  hook: "ブラクリ 3〜5号",
+  otherItems: ["アオイソメ", "サバの切り身"],
+  tip: "テトラの隙間に落とし込み、底に着いたら少し持ち上げて待つ。"
+};
+
+const gearUki: GearGuide = {
+  targetFish: "クロダイ・メジナ",
+  method: "ウキフカセ釣り",
+  difficulty: "intermediate",
+  rod: "磯竿1.5〜2号 5.3m",
+  reel: "スピニングリール 2500〜3000番",
+  line: "ナイロン2号",
+  hook: "チヌ針3〜4号",
+  otherItems: ["ウキ", "オキアミ", "コマセ"],
+  tip: "潮の流れに乗せてウキを流すのがコツ。"
+};
+
+const gearEging: GearGuide = {
+  targetFish: "アオリイカ",
+  method: "エギング",
+  difficulty: "intermediate",
+  rod: "エギングロッド 8.6ft ML",
+  reel: "スピニングリール 2500番",
+  line: "PE 0.6号",
+  hook: "エギ 3〜3.5号",
+  otherItems: ["リーダー フロロ2号", "ギャフ", "イカ締めピック"],
+  tip: "秋イカは3号エギ、春の親イカは3.5〜4号が効果的。"
+};
+
+const gearJig: GearGuide = {
+  targetFish: "ブリ・ヒラマサ・カンパチ",
+  method: "ショアジギング",
+  difficulty: "intermediate",
+  rod: "ショアジギングロッド M〜MH 10ft",
+  reel: "スピニングリール 4000〜5000番",
+  line: "PE 1〜1.5号",
+  hook: "メタルジグ 30〜60g",
+  otherItems: ["リーダー フロロ5号", "プライヤー"],
+  tip: "朝マヅメの時合いに集中。ジャークのリズムを一定に保つ。"
+};
+
+const gearLure: GearGuide = {
+  targetFish: "シーバス",
+  method: "ルアー釣り",
+  difficulty: "intermediate",
+  rod: "シーバスロッド 9ft ML",
+  reel: "スピニングリール 3000番",
+  line: "PE 1号",
+  hook: "ミノー 80〜120mm",
+  otherItems: ["リーダー フロロ5号", "スナップ", "プライヤー"],
+  tip: "常夜灯周りの明暗部を狙うのが基本。"
+};
+
 export const hyogoDetailSpots: FishingSpot[] = [
   // =========================================
   // 神戸・須磨エリア（5スポット）
@@ -83,6 +169,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "JR駅から徒歩圏内", "東堤防は立入制限あり要確認"],
+    gearGuides: [gearSabiki, gearNage, gearEging, gearRock, gearJig],
     youtubeLinks: [{ label: "須磨浦漁港 釣り", searchQuery: "須磨浦漁港 サビキ アジ 釣り", description: "須磨浦漁港での釣り動画" }],
   },
   {
@@ -104,6 +191,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["遠浅で安全", "夏季は海水浴客との共存に配慮", "早朝の投げ釣りがおすすめ"],
+    gearGuides: [gearNage],
     youtubeLinks: [{ label: "須磨海岸 キス釣り", searchQuery: "須磨海岸 キス 投げ釣り 神戸", description: "須磨海岸でのキス釣り動画" }],
   },
   {
@@ -131,6 +219,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btNight,
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["テトラ帯は滑りやすい", "駐車場が少ないため電車推奨", "夜釣りは足元注意"],
+    gearGuides: [gearRock, gearUki, gearEging],
     youtubeLinks: [{ label: "塩屋漁港 メバリング", searchQuery: "塩屋漁港 メバリング 神戸 釣り", description: "塩屋漁港でのメバリング動画" }],
   },
   {
@@ -160,6 +249,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btEvening,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["全面柵付きで安全", "子連れファミリーに最適", "海釣りGO施設あり"],
+    gearGuides: [gearSabiki, gearLure, gearJig, gearEging],
     youtubeLinks: [{ label: "六甲アイランド 釣り", searchQuery: "六甲アイランドマリンパーク 釣り サビキ タチウオ", description: "六甲アイランドマリンパークでの釣り動画" }],
   },
   {
@@ -189,6 +279,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btNight,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["護岸は足場良好", "夜景が美しい", "ルアー釣り向きのポイント"],
+    gearGuides: [gearLure, gearUki, gearSabiki, gearJig],
     youtubeLinks: [{ label: "ポートアイランド 釣り", searchQuery: "ポートアイランド北公園 シーバス タチウオ 神戸 釣り", description: "ポートアイランドでの釣り動画" }],
   },
 
@@ -215,6 +306,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["明石海峡の潮流は非常に速い", "波止先端は混雑時注意", "ショアジギング時は周囲に配慮"],
+    gearGuides: [gearJig, gearEging, gearNage, gearSabiki],
     youtubeLinks: [{ label: "アジュール舞子 釣り", searchQuery: "アジュール舞子 ショアジギング 青物 釣り", description: "アジュール舞子での釣り動画" }],
   },
   {
@@ -243,6 +335,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btEvening,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["JR駅直結の好アクセス", "港内は足場良好", "漁船の出入りに注意"],
+    gearGuides: [gearSabiki, gearRock, gearUki],
     youtubeLinks: [{ label: "垂水漁港 釣り", searchQuery: "垂水漁港 アジ メバル 釣り 神戸", description: "垂水漁港での釣り動画" }],
   },
   {
@@ -264,6 +357,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btEvening,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["足場良好", "アウトレット施設隣接", "買い物と釣りの両立可能"],
+    gearGuides: [gearSabiki, gearNage],
     youtubeLinks: [{ label: "マリンピア神戸 釣り", searchQuery: "マリンピア神戸 護岸 サビキ 釣り", description: "マリンピア神戸裏護岸での釣り動画" }],
   },
 
@@ -297,6 +391,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btEvening,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["護岸は足場良好", "西宮ケーソンは立入禁止のため注意", "ゴミ持ち帰り徹底"],
+    gearGuides: [gearSabiki, gearUki, gearLure, gearJig],
     youtubeLinks: [{ label: "西宮浜 釣り", searchQuery: "西宮浜 サビキ チヌ 釣り", description: "西宮浜での釣り動画" }],
   },
   {
@@ -326,6 +421,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btEvening,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["護岸に手すりあり", "元フェリー乗り場で水深あり", "ヘチ釣りの好ポイント"],
+    gearGuides: [gearUki, gearLure, gearSabiki],
     youtubeLinks: [{ label: "鳴尾浜 釣り", searchQuery: "鳴尾浜臨海公園 チヌ ヘチ釣り", description: "鳴尾浜での釣り動画" }],
   },
   {
@@ -354,6 +450,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btNight,
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["河口は潮の影響で流れが変わる", "夜間はヘッドライト必須", "ウェーディング時はライフジャケット着用"],
+    gearGuides: [gearLure],
     youtubeLinks: [{ label: "武庫川河口 シーバス", searchQuery: "武庫川河口 シーバス ルアー 釣り", description: "武庫川河口でのシーバス釣り動画" }],
   },
   {
@@ -382,6 +479,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btEvening,
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["工業地帯のため周辺に注意", "閘門操作時は近づかない", "夜間は照明が少ない"],
+    gearGuides: [gearUki, gearLure],
     youtubeLinks: [{ label: "尼崎港 釣り", searchQuery: "尼崎港 チヌ シーバス ヘチ釣り", description: "尼崎港での釣り動画" }],
   },
 
@@ -416,6 +514,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["車横付けエリアあり", "足場は比較的良好", "大波止先端は潮流注意"],
+    gearGuides: [gearNage, gearUki, gearLure],
     youtubeLinks: [{ label: "高砂港 釣り", searchQuery: "高砂港 投げ釣り キス チヌ 釣り", description: "高砂港での釣り動画" }],
   },
   {
@@ -445,6 +544,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btEvening,
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["河口は潮流が速い", "導流堤は足場注意", "ウェーディングはライフジャケット必須"],
+    gearGuides: [gearLure],
     youtubeLinks: [{ label: "加古川河口 釣り", searchQuery: "加古川河口 シーバス チヌ ルアー 釣り", description: "加古川河口での釣り動画" }],
   },
   {
@@ -466,6 +566,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btEvening,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["車横付け可能エリアあり", "堤防は足場良好", "漁船の出入りに注意"],
+    gearGuides: [gearSabiki, gearRock],
     youtubeLinks: [{ label: "東二見漁港 釣り", searchQuery: "東二見漁港 サビキ タチウオ 釣り", description: "東二見漁港での釣り動画" }],
   },
   {
@@ -494,6 +595,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["公園施設で安全", "遠浅の砂浜", "ファミリー向け"],
+    gearGuides: [gearNage],
     youtubeLinks: [{ label: "高砂海浜公園 釣り", searchQuery: "高砂海浜公園 キス カレイ 投げ釣り", description: "高砂海浜公園での釣り動画" }],
   },
 
@@ -519,6 +621,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "河口部は潮の変化に注意", "赤穂城跡が近い"],
+    gearGuides: [gearSabiki, gearNage, gearUki, gearLure],
     youtubeLinks: [{ label: "赤穂港 釣り", searchQuery: "赤穂港 サビキ キス 釣り", description: "赤穂港での釣り動画" }],
   },
   {
@@ -546,6 +649,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["磯場は滑りやすい", "スパイクシューズ推奨", "単独釣行は避ける"],
+    gearGuides: [gearUki, gearEging, gearRock],
     youtubeLinks: [{ label: "赤穂御崎 釣り", searchQuery: "赤穂御崎 グレ チヌ フカセ釣り", description: "赤穂御崎での釣り動画" }],
   },
   {
@@ -567,6 +671,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "牡蠣イカダの近くは禁止エリアに注意", "歴史ある坂越の町並みが近い"],
+    gearGuides: [gearUki, gearRock, gearNage],
     youtubeLinks: [{ label: "坂越漁港 釣り", searchQuery: "坂越漁港 チヌ キス 釣り 赤穂", description: "坂越漁港での釣り動画" }],
   },
   {
@@ -596,6 +701,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["車横付け可能", "足場良好で安全", "ゴミ持ち帰り徹底"],
+    gearGuides: [gearSabiki, gearNage, gearLure],
     youtubeLinks: [{ label: "相生港 釣り", searchQuery: "相生港 野瀬埠頭 サビキ 釣り", description: "相生港での釣り動画" }],
   },
   {
@@ -617,6 +723,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btEvening,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["歴史ある港町", "牡蠣直売所が近い", "漁業関係者の邪魔にならないよう配慮"],
+    gearGuides: [gearUki, gearRock, gearEging],
     youtubeLinks: [{ label: "室津漁港 釣り", searchQuery: "室津漁港 チヌ フカセ釣り 兵庫", description: "室津漁港での釣り動画" }],
   },
 
@@ -649,6 +756,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["明石海峡の潮流が速い", "ジェノバライン乗り場付近は釣り禁止", "フェリー利用で電車釣行も可能"],
+    gearGuides: [gearSabiki, gearJig, gearEging],
     youtubeLinks: [{ label: "岩屋漁港 釣り", searchQuery: "淡路島 岩屋漁港 青物 アジ 釣り", description: "岩屋漁港での釣り動画" }],
   },
   {
@@ -678,6 +786,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btEvening,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["足場良好な堤防が多い", "人工島エリアは広々", "釣具店が近い"],
+    gearGuides: [gearSabiki, gearJig, gearEging, gearNage],
     youtubeLinks: [{ label: "津名港 釣り", searchQuery: "淡路島 津名港 青物 コブダイ 釣り", description: "津名港での釣り動画" }],
   },
   {
@@ -707,6 +816,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btEvening,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["テトラなしで足場良好", "芝生公園併設", "トイレ完備でファミリー向け"],
+    gearGuides: [gearSabiki, gearLure, gearRock, gearEging],
     youtubeLinks: [{ label: "炬口漁港 釣り", searchQuery: "淡路島 炬口漁港 青物 サビキ 釣り", description: "炬口漁港での釣り動画" }],
   },
   {
@@ -729,6 +839,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btEvening,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["護岸に柵付きで安全", "魚種が非常に豊富", "ファミリーフィッシングにおすすめ"],
+    gearGuides: [gearSabiki, gearEging, gearUki, gearRock],
     youtubeLinks: [{ label: "富島漁港 釣り", searchQuery: "淡路島 富島漁港 青物 タチウオ 釣り", description: "富島漁港での釣り動画" }],
   },
   {
@@ -757,6 +868,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btEvening,
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["波止先端は潮流注意", "比較的空いている穴場", "河口部はシーバスのポイント"],
+    gearGuides: [gearSabiki, gearEging, gearUki, gearLure, gearRock],
     youtubeLinks: [{ label: "郡家港 釣り", searchQuery: "淡路島 郡家港 アオリイカ 青物 釣り", description: "郡家港での釣り動画" }],
   },
 
@@ -789,6 +901,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["手すり付き堤防あり", "足場良好で安全", "カニシーズンは観光客が多い"],
+    gearGuides: [gearEging, gearSabiki, gearUki],
     youtubeLinks: [{ label: "香住東港 釣り", searchQuery: "香住東港 エギング アオリイカ 釣り", description: "香住東港での釣り動画" }],
   },
   {
@@ -817,6 +930,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["車横付け可能", "ファミリーに最適", "釣具店が近い"],
+    gearGuides: [gearSabiki],
     youtubeLinks: [{ label: "香住西港 釣り", searchQuery: "香住西港 サビキ アジ ファミリー 釣り", description: "香住西港での釣り動画" }],
   },
   {
@@ -844,6 +958,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["天然の良港で穏やか", "漁協前は足場良好", "松葉ガニの水揚げ港"],
+    gearGuides: [gearUki, gearEging, gearSabiki, gearRock],
     youtubeLinks: [{ label: "柴山港 釣り", searchQuery: "柴山港 チヌ アオリイカ エギング 釣り", description: "柴山港での釣り動画" }],
   },
   {
@@ -864,6 +979,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["海水浴場隣接で家族向け", "小さな漁港で穴場", "秋のエギングが好調"],
+    gearGuides: [gearSabiki, gearNage, gearEging],
     youtubeLinks: [{ label: "佐津漁港 釣り", searchQuery: "佐津漁港 アジ キス エギング 釣り", description: "佐津漁港での釣り動画" }],
   },
 
@@ -896,6 +1012,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["足場の良い堤防", "駐車場が近い", "竹野浜海水浴場が隣接"],
+    gearGuides: [gearSabiki, gearNage, gearEging],
     youtubeLinks: [{ label: "竹野港 釣り", searchQuery: "竹野港 アジ キス アオリイカ 釣り 豊岡", description: "竹野港での釣り動画" }],
   },
   {
@@ -925,6 +1042,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["入り江で穏やか", "城崎温泉が近い", "ファミリー向け"],
+    gearGuides: [gearSabiki, gearNage],
     youtubeLinks: [{ label: "気比堤防 釣り", searchQuery: "気比 堤防 サビキ アジ 釣り 豊岡", description: "気比堤防での釣り動画" }],
   },
   {
@@ -946,6 +1064,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["港内は比較的穏やか", "津居山ガニの本場", "城崎温泉と合わせた釣行に最適"],
+    gearGuides: [gearSabiki, gearNage],
     youtubeLinks: [{ label: "津居山港 釣り", searchQuery: "津居山港 サビキ 青物 釣り 豊岡", description: "津居山港での釣り動画" }],
   },
   {
@@ -975,6 +1094,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["車横付け可能", "足場良好", "冬のカレイが人気"],
+    gearGuides: [gearSabiki, gearNage, gearUki],
     youtubeLinks: [{ label: "小島岸壁 釣り", searchQuery: "小島 岸壁 豊岡 サビキ カレイ 釣り", description: "小島岸壁での釣り動画" }],
   },
 
@@ -1001,6 +1121,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["大型漁港で設備充実", "釣具店が近い", "ホタルイカの名産地"],
+    gearGuides: [gearSabiki, gearNage, gearEging],
     youtubeLinks: [{ label: "浜坂漁港 釣り", searchQuery: "浜坂漁港 サビキ アジ エギング 釣り", description: "浜坂漁港での釣り動画" }],
   },
   {
@@ -1029,6 +1150,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["小さな漁港で穴場", "但馬御火浦が近い", "湯村温泉と合わせた釣行に"],
+    gearGuides: [gearSabiki, gearNage, gearEging],
     youtubeLinks: [{ label: "諸寄漁港 釣り", searchQuery: "諸寄漁港 アジ エギング 釣り 新温泉", description: "諸寄漁港での釣り動画" }],
   },
   {
@@ -1057,6 +1179,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["兵庫県最西端の漁港", "磯場はスパイクシューズ必須", "山陰ジオパークの絶景"],
+    gearGuides: [gearNage, gearSabiki, gearEging],
     youtubeLinks: [{ label: "居組漁港 釣り", searchQuery: "居組漁港 キス アオリイカ 釣り 新温泉", description: "居組漁港での釣り動画" }],
   },
   {
@@ -1084,6 +1207,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["日本海の荒磯に注意", "余部鉄橋の観光と合わせて", "冬季は波浪に特に注意"],
+    gearGuides: [gearUki, gearRock, gearEging],
     youtubeLinks: [{ label: "釜屋漁港 釣り", searchQuery: "三尾 釜屋漁港 グレ アオリイカ 釣り", description: "釜屋漁港での釣り動画" }],
   },
 
@@ -1109,6 +1233,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btEvening,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "テトラ帯は注意", "地元密着型の穴場"],
+    gearGuides: [gearSabiki, gearRock],
     youtubeLinks: [{ label: "魚住漁港 釣り", searchQuery: "魚住漁港 サビキ アジ 根魚 釣り", description: "魚住漁港での釣り動画" }],
   },
   {
@@ -1137,6 +1262,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["遠浅の砂浜で安全", "夕日が美しい西向き海岸", "近くに温泉施設あり"],
+    gearGuides: [gearNage],
     youtubeLinks: [{ label: "大塩海岸 釣り", searchQuery: "大塩海岸 キス カレイ 投げ釣り 姫路", description: "大塩海岸での釣り動画" }],
   },
 ];

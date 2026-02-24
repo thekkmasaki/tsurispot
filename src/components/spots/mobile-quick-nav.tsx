@@ -1,10 +1,9 @@
 "use client";
 
-import { Fish, Clock, Car, Cloud, MapPin } from "lucide-react";
+import { Fish, Car, Cloud, MapPin } from "lucide-react";
 
 const NAV_ITEMS = [
   { id: "fish-season", label: "釣れる魚", icon: Fish },
-  { id: "best-time", label: "ベストタイム", icon: Clock },
   { id: "weather-tide", label: "天気・潮汐", icon: Cloud },
   { id: "access-info", label: "アクセス", icon: Car },
   { id: "nearby-spots", label: "近くの釣り場", icon: MapPin },

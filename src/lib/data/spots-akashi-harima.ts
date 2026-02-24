@@ -1,4 +1,4 @@
-import type { FishingSpot, FishSpecies } from "@/types";
+import type { FishingSpot, FishSpecies, GearGuide } from "@/types";
 import { regions } from "./regions";
 import type { Region } from "@/types";
 import { getFishBySlug } from "./fish";
@@ -44,6 +44,52 @@ const btNight = [
   { label: "夕マヅメ", timeRange: "16:00〜18:30", rating: "good" as const },
   { label: "夜", timeRange: "19:00〜23:00", rating: "best" as const },
 ];
+
+
+// 共通 Gear Guides
+const gearSabiki: GearGuide = {
+  targetFish: "アジ・サバ・イワシ", method: "サビキ釣り", difficulty: "beginner",
+  rod: "磯竿3号 3.6〜4.5m", reel: "スピニングリール 2500番", line: "ナイロン3号",
+  hook: "サビキ仕掛け 5〜7号", otherItems: ["コマセカゴ", "アミエビ", "バケツ"],
+  tip: "コマセは少しずつ出すのがコツ。夕マヅメが特に釣果がよい。"
+};
+const gearNage: GearGuide = {
+  targetFish: "キス・カレイ", method: "投げ釣り", difficulty: "beginner",
+  rod: "投げ竿 3.9〜4.25m", reel: "スピニングリール 3000〜4000番", line: "ナイロン4号",
+  hook: "流線針 7〜9号", otherItems: ["天秤オモリ 20〜25号", "青イソメ", "竿立て"],
+  tip: "砂地を狙って遠投。アタリは小さいのでラインを張りすぎないこと。"
+};
+const gearRock: GearGuide = {
+  targetFish: "カサゴ・メバル", method: "穴釣り・根魚釣り", difficulty: "beginner",
+  rod: "穴釣りロッド 1.1〜1.5m", reel: "小型両軸リール", line: "フロロ3号",
+  hook: "ブラクリ 3〜5号", otherItems: ["アオイソメ", "サバの切り身"],
+  tip: "テトラの隙間に落とし込み、底に着いたら少し持ち上げて待つ。"
+};
+const gearUki: GearGuide = {
+  targetFish: "クロダイ・メジナ", method: "ウキフカセ釣り", difficulty: "intermediate",
+  rod: "磯竿1.5〜2号 5.3m", reel: "スピニングリール 2500〜3000番", line: "ナイロン2号",
+  hook: "チヌ針3〜4号", otherItems: ["ウキ", "オキアミ", "コマセ"],
+  tip: "潮の流れに乗せてウキを流すのがコツ。"
+};
+const gearEging: GearGuide = {
+  targetFish: "アオリイカ", method: "エギング", difficulty: "intermediate",
+  rod: "エギングロッド 8.6ft ML", reel: "スピニングリール 2500番", line: "PE 0.6号",
+  hook: "エギ 3〜3.5号", otherItems: ["リーダー フロロ2号", "ギャフ", "イカ締めピック"],
+  tip: "秋イカは3号エギ、春の親イカは3.5〜4号が効果的。"
+};
+const gearJig: GearGuide = {
+  targetFish: "ブリ・ヒラマサ・カンパチ", method: "ショアジギング", difficulty: "intermediate",
+  rod: "ショアジギングロッド M〜MH 10ft", reel: "スピニングリール 4000〜5000番",
+  line: "PE 1〜1.5号", hook: "メタルジグ 30〜60g",
+  otherItems: ["リーダー フロロ5号", "プライヤー"],
+  tip: "朝マヅメの時合いに集中。ジャークのリズムを一定に保つ。"
+};
+const gearLure: GearGuide = {
+  targetFish: "シーバス", method: "ルアー釣り", difficulty: "intermediate",
+  rod: "シーバスロッド 9ft ML", reel: "スピニングリール 3000番", line: "PE 1号",
+  hook: "ミノー 80〜120mm", otherItems: ["リーダー フロロ5号", "スナップ", "プライヤー"],
+  tip: "常夜灯周りの明暗部を狙うのが基本。"
+};
 
 export const akashiHarimaSpots: FishingSpot[] = [
   // =========================================
@@ -192,6 +238,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearNage],
     safetyLevel: "safe", safetyNotes: ["公園施設で安全", "足場良好な護岸", "トイレ・自販機あり", "ファミリー向け"],
     youtubeLinks: [{ label: "明石海浜公園 釣り", searchQuery: "明石海浜公園 護岸 サビキ 釣り", description: "明石海浜公園護岸での釣り動画" }],
   },
@@ -219,6 +266,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearNage, gearRock, gearLure, gearJig, gearEging, gearUki],
     safetyLevel: "safe", safetyNotes: ["穏やかな海岸で安全", "駐車場・トイレ無料", "比較的空いている穴場", "松林の中を散策可能"],
     youtubeLinks: [{ label: "望海浜公園 釣り", searchQuery: "望海浜公園 明石 キス 投げ釣り", description: "望海浜公園での釣り動画" }],
   },
@@ -249,6 +297,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     bestTimes: btMorning,
     tackleRecommendations: [],
     tideAdvice: { bestTide: "中潮", bestTidePhase: "下げ潮", description: "干潮前後は砂浜が広がり遠投しやすい。フラットフィッシュはマヅメ時の下げ潮が好機。" },
+    gearGuides: [gearNage, gearLure, gearRock, gearJig, gearEging, gearUki],
     safetyLevel: "safe", safetyNotes: ["遠浅の砂浜で安全", "遊歩道が整備されている", "サーフフィッシングは周囲に注意"],
     youtubeLinks: [{ label: "藤江海岸 キス釣り", searchQuery: "藤江海岸 明石 キス 投げ釣り サーフ", description: "藤江海岸での投げ釣り動画" }],
   },
@@ -277,6 +326,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearRock, gearLure, gearJig, gearEging, gearUki],
     safetyLevel: "safe", safetyNotes: ["小規模漁港で穴場", "テトラ帯は足場注意", "漁船の出入りに配慮"],
     youtubeLinks: [{ label: "松江漁港 釣り", searchQuery: "松江漁港 明石 サビキ メバル 穴釣り", description: "松江漁港での釣り動画" }],
   },
@@ -325,6 +375,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     bestTimes: btEvening,
     tackleRecommendations: [],
     tideAdvice: { bestTide: "中潮", bestTidePhase: "上げ3分〜満潮", description: "上げ潮に乗ってアジ・イワシが回遊してくる。タチウオは満潮前後が好機。" },
+    gearGuides: [gearSabiki, gearLure, gearNage],
     safetyLevel: "safe", safetyNotes: ["足場良好な堤防", "港内は比較的穏やか", "漁船の出入りに注意", "駅から徒歩圏内"],
     youtubeLinks: [{ label: "二見港 サビキ釣り", searchQuery: "二見港 明石 サビキ タチウオ 釣り", description: "二見港防波堤での釣り動画" }],
   },
@@ -458,6 +509,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearNage, gearUki, gearRock, gearJig, gearEging],
     safetyLevel: "safe", safetyNotes: ["護岸にチェーン柵あり", "公園施設で安全", "トイレ・駐車場完備", "ファミリーのデビュー戦に最適"],
     youtubeLinks: [{ label: "別府みなと緑地 釣り", searchQuery: "別府みなと緑地 加古川 サビキ ハゼ 釣り", description: "別府みなと緑地での釣り動画" }],
   },
@@ -508,6 +560,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearUki],
     safetyLevel: "safe", safetyNotes: ["車横付け可能エリアあり", "工業港のため大型船に注意", "足場は比較的良好", "夜間は照明が少ない箇所あり"],
     youtubeLinks: [{ label: "高砂西港 釣り", searchQuery: "高砂西港 工業港 サビキ チヌ 釣り", description: "高砂西港での釣り動画" }],
   },
@@ -537,6 +590,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearNage, gearRock, gearJig, gearEging, gearUki],
     safetyLevel: "safe", safetyNotes: ["護岸は足場良好", "海洋文化センターの施設利用可", "トイレ・駐車場完備", "子供連れに最適"],
     youtubeLinks: [{ label: "加古川海洋文化センター 釣り", searchQuery: "加古川 海洋文化センター 別府 サビキ ハゼ 釣り", description: "海洋文化センター護岸での釣り動画" }],
   },

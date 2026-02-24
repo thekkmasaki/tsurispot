@@ -1,4 +1,4 @@
-import { FishingSpot, FishSpecies } from "@/types";
+import { FishingSpot, FishSpecies, GearGuide } from "@/types";
 import { getFishBySlug } from "./fish";
 import { regions } from "./regions";
 
@@ -13,6 +13,92 @@ function region(id: string) {
   if (!r) throw new Error(`Region not found: ${id}`);
   return r;
 }
+
+
+// 共通 Gear Guides
+const gearSabiki: GearGuide = {
+  targetFish: "アジ・サバ・イワシ",
+  method: "サビキ釣り",
+  difficulty: "beginner",
+  rod: "磯竿3号 3.6〜4.5m",
+  reel: "スピニングリール 2500番",
+  line: "ナイロン3号",
+  hook: "サビキ仕掛け 5〜7号",
+  otherItems: ["コマセカゴ", "アミエビ", "バケツ"],
+  tip: "コマセは少しずつ出すのがコツ。夕マヅメが特に釣果がよい。"
+};
+
+const gearNage: GearGuide = {
+  targetFish: "キス・カレイ",
+  method: "投げ釣り",
+  difficulty: "beginner",
+  rod: "投げ竿 3.9〜4.25m",
+  reel: "スピニングリール 3000〜4000番",
+  line: "ナイロン4号",
+  hook: "流線針 7〜9号",
+  otherItems: ["天秤オモリ 20〜25号", "青イソメ", "竿立て"],
+  tip: "砂地を狙って遠投。アタリは小さいのでラインを張りすぎないこと。"
+};
+
+const gearRock: GearGuide = {
+  targetFish: "カサゴ・メバル",
+  method: "穴釣り・根魚釣り",
+  difficulty: "beginner",
+  rod: "穴釣りロッド 1.1〜1.5m",
+  reel: "小型両軸リール",
+  line: "フロロ3号",
+  hook: "ブラクリ 3〜5号",
+  otherItems: ["アオイソメ", "サバの切り身"],
+  tip: "テトラの隙間に落とし込み、底に着いたら少し持ち上げて待つ。"
+};
+
+const gearUki: GearGuide = {
+  targetFish: "クロダイ・メジナ",
+  method: "ウキフカセ釣り",
+  difficulty: "intermediate",
+  rod: "磯竿1.5〜2号 5.3m",
+  reel: "スピニングリール 2500〜3000番",
+  line: "ナイロン2号",
+  hook: "チヌ針3〜4号",
+  otherItems: ["ウキ", "オキアミ", "コマセ"],
+  tip: "潮の流れに乗せてウキを流すのがコツ。"
+};
+
+const gearEging: GearGuide = {
+  targetFish: "アオリイカ",
+  method: "エギング",
+  difficulty: "intermediate",
+  rod: "エギングロッド 8.6ft ML",
+  reel: "スピニングリール 2500番",
+  line: "PE 0.6号",
+  hook: "エギ 3〜3.5号",
+  otherItems: ["リーダー フロロ2号", "ギャフ", "イカ締めピック"],
+  tip: "秋イカは3号エギ、春の親イカは3.5〜4号が効果的。"
+};
+
+const gearJig: GearGuide = {
+  targetFish: "ブリ・ヒラマサ・カンパチ",
+  method: "ショアジギング",
+  difficulty: "intermediate",
+  rod: "ショアジギングロッド M〜MH 10ft",
+  reel: "スピニングリール 4000〜5000番",
+  line: "PE 1〜1.5号",
+  hook: "メタルジグ 30〜60g",
+  otherItems: ["リーダー フロロ5号", "プライヤー"],
+  tip: "朝マヅメの時合いに集中。ジャークのリズムを一定に保つ。"
+};
+
+const gearLure: GearGuide = {
+  targetFish: "シーバス",
+  method: "ルアー釣り",
+  difficulty: "intermediate",
+  rod: "シーバスロッド 9ft ML",
+  reel: "スピニングリール 3000番",
+  line: "PE 1号",
+  hook: "ミノー 80〜120mm",
+  otherItems: ["リーダー フロロ5号", "スナップ", "プライヤー"],
+  tip: "常夜灯周りの明暗部を狙うのが基本。"
+};
 
 export const osakaKinkiSpots: FishingSpot[] = [
   // ===== 大阪市エリア（南港・ベイエリア） =====
@@ -76,6 +162,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
     tackleRecommendations: [],
     tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ3分〜7分", description: "上げ潮でアジの群れが入る。" },
     mazumeInfo: { springSunrise: "05:30", springSunset: "18:20", summerSunrise: "04:50", summerSunset: "19:10", autumnSunrise: "05:40", autumnSunset: "17:10", winterSunrise: "07:00", winterSunset: "16:55", tip: "アジの回遊は夕マヅメがチャンス。" },
+    gearGuides: [gearSabiki, gearJig, gearEging],
     safetyLevel: "caution", safetyNotes: ["柵なし区間あり", "足元注意", "ライフジャケット推奨"],
     youtubeLinks: [{ label: "南港 防波堤 釣り", searchQuery: "南港北防波堤 釣り", description: "南港北防波堤での釣り動画" }],
   },
@@ -129,6 +216,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
     tackleRecommendations: [],
     tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ3分〜7分", description: "フェリーの水流が魚を寄せる。" },
     mazumeInfo: { springSunrise: "05:30", springSunset: "18:20", summerSunrise: "04:50", summerSunset: "19:10", autumnSunrise: "05:40", autumnSunset: "17:10", winterSunrise: "07:00", winterSunset: "16:55", tip: "フェリー出航後に時合いが来ることが多い。" },
+    gearGuides: [gearLure, gearSabiki],
     safetyLevel: "caution", safetyNotes: ["フェリー出航時は引き波注意", "夜間は暗い"],
     youtubeLinks: [{ label: "南港大橋 釣り", searchQuery: "南港大橋 シーバス 釣り", description: "南港大橋での釣り動画" }],
   },
@@ -154,6 +242,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
     tackleRecommendations: [],
     tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ5分〜満潮前", description: "大阪港内に潮が入るタイミングが狙い目。" },
     mazumeInfo: { springSunrise: "05:30", springSunset: "18:20", summerSunrise: "04:50", summerSunset: "19:10", autumnSunrise: "05:40", autumnSunset: "17:10", winterSunrise: "07:00", winterSunset: "16:55", tip: "IKEAの建物が目印。" },
+    gearGuides: [gearUki, gearLure, gearSabiki],
     safetyLevel: "safe", safetyNotes: ["足場は比較的良好", "近隣に商業施設あり"],
     youtubeLinks: [{ label: "鶴浜 釣り", searchQuery: "鶴浜 チヌ シーバス 釣り", description: "鶴浜での釣り動画" }],
   },
@@ -178,6 +267,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
     tackleRecommendations: [],
     tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ5分〜満潮前", description: "夢洲方面からの潮流がベイト（小魚）を運ぶ。" },
     mazumeInfo: { springSunrise: "05:30", springSunset: "18:20", summerSunrise: "04:50", summerSunset: "19:10", autumnSunrise: "05:40", autumnSunset: "17:10", winterSunrise: "07:00", winterSunset: "16:55", tip: "夕暮れ時の夕日がきれい。" },
+    gearGuides: [gearLure, gearSabiki],
     safetyLevel: "safe", safetyNotes: ["護岸は比較的安全", "駐車場から近い"],
     youtubeLinks: [{ label: "舞洲 タチウオ", searchQuery: "舞洲 タチウオ 釣り", description: "舞洲での釣り動画" }],
   },
@@ -207,6 +297,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
     tackleRecommendations: [],
     tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ3分〜7分", description: "大阪湾中部の埠頭で安定した釣果。" },
     mazumeInfo: { springSunrise: "05:30", springSunset: "18:20", summerSunrise: "04:50", summerSunset: "19:10", autumnSunrise: "05:40", autumnSunset: "17:10", winterSunrise: "07:00", winterSunset: "16:55", tip: "車横付けOKなので快適。" },
+    gearGuides: [gearSabiki, gearLure],
     safetyLevel: "caution", safetyNotes: ["工業地帯のためトラック通行注意", "夜間は照明が少ない"],
     youtubeLinks: [{ label: "助松埠頭 釣り", searchQuery: "助松埠頭 アジ タチウオ 釣り", description: "助松埠頭での釣り動画" }],
   },
@@ -231,6 +322,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
     tackleRecommendations: [],
     tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ3分〜満潮前", description: "潮位が上がると護岸際でチヌが釣れる。" },
     mazumeInfo: { springSunrise: "05:30", springSunset: "18:20", summerSunrise: "04:50", summerSunset: "19:10", autumnSunrise: "05:40", autumnSunset: "17:10", winterSunrise: "07:00", winterSunset: "16:55", tip: "夜間封鎖の可能性あり。事前に確認を。" },
+    gearGuides: [gearSabiki, gearUki],
     safetyLevel: "caution", safetyNotes: ["夜間立ち入り封鎖の場合あり", "足元注意"],
     youtubeLinks: [{ label: "汐見埠頭 釣り", searchQuery: "汐見埠頭 砂上げ場 釣り", description: "汐見埠頭での釣り動画" }],
   },
@@ -286,6 +378,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
     tackleRecommendations: [],
     tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ5分〜満潮前", description: "紀淡海峡の潮がダイレクトに入る。" },
     mazumeInfo: { springSunrise: "05:30", springSunset: "18:25", summerSunrise: "04:55", summerSunset: "19:15", autumnSunrise: "05:50", autumnSunset: "17:20", winterSunrise: "07:00", winterSunset: "17:00", tip: "穴場のため人が少なく快適。" },
+    gearGuides: [gearSabiki, gearEging, gearUki],
     safetyLevel: "caution", safetyNotes: ["漁港関係者の邪魔にならないよう注意", "トイレなし"],
     youtubeLinks: [{ label: "小島漁港 釣り", searchQuery: "小島漁港 岬町 釣り", description: "小島漁港での釣り動画" }],
   },
@@ -310,6 +403,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
     tackleRecommendations: [],
     tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ5分〜満潮", description: "隣接の地磯周りに潮が入ると活性UP。" },
     mazumeInfo: { springSunrise: "05:30", springSunset: "18:25", summerSunrise: "04:55", summerSunset: "19:15", autumnSunrise: "05:50", autumnSunset: "17:20", winterSunrise: "07:00", winterSunset: "17:00", tip: "静かな漁港でのんびり釣りが楽しめる。" },
+    gearGuides: [gearEging, gearSabiki, gearUki],
     safetyLevel: "safe", safetyNotes: ["漁港内は足場良好", "近くに地磯あり（上級者向け）"],
     youtubeLinks: [{ label: "谷川港 エギング", searchQuery: "谷川港 岬町 エギング 釣り", description: "谷川港での釣り動画" }],
   },
@@ -336,6 +430,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
     tackleRecommendations: [],
     tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ3分〜7分", description: "大阪湾奥は上げ潮で魚が寄る。" },
     mazumeInfo: { springSunrise: "05:30", springSunset: "18:20", summerSunrise: "04:50", summerSunset: "19:10", autumnSunrise: "05:40", autumnSunset: "17:10", winterSunrise: "07:00", winterSunset: "16:55", tip: "初心者ファミリーに最適。" },
+    gearGuides: [gearSabiki, gearLure],
     safetyLevel: "safe", safetyNotes: ["柵付き施設で安全", "売店・トイレ完備", "レンタル竿あり"],
     youtubeLinks: [{ label: "尼崎魚つり公園", searchQuery: "尼崎市立魚つり公園 釣り", description: "尼崎魚つり公園での釣り動画" }],
   },
@@ -364,6 +459,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
     tackleRecommendations: [],
     tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ5分〜満潮", description: "柵護岸沿いに潮が流れるとチヌが寄る。" },
     mazumeInfo: { springSunrise: "05:30", springSunset: "18:20", summerSunrise: "04:50", summerSunset: "19:10", autumnSunrise: "05:40", autumnSunset: "17:10", winterSunrise: "07:00", winterSunset: "16:55", tip: "夜のチヌ狙いが特に人気。電気ウキで。" },
+    gearGuides: [gearUki, gearSabiki],
     safetyLevel: "safe", safetyNotes: ["柵付き護岸で安全", "トイレ・コンビニあり", "子連れに最適"],
     youtubeLinks: [{ label: "南芦屋浜 釣り", searchQuery: "南芦屋浜 チヌ 釣り", description: "南芦屋浜での釣り動画" }],
   },
@@ -388,6 +484,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
     tackleRecommendations: [],
     tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ5分〜満潮前", description: "空港島は潮通し良好。" },
     mazumeInfo: { springSunrise: "05:30", springSunset: "18:20", summerSunrise: "04:50", summerSunset: "19:10", autumnSunrise: "05:40", autumnSunset: "17:10", winterSunrise: "07:00", winterSunset: "16:55", tip: "飛行機と夕日を眺めながら釣り。" },
+    gearGuides: [gearSabiki, gearLure],
     safetyLevel: "safe", safetyNotes: ["護岸は安全", "空港施設内にトイレ・飲食あり"],
     youtubeLinks: [{ label: "神戸空港 釣り", searchQuery: "神戸空港 ベランダ 釣り", description: "神戸空港での釣り動画" }],
   },// ===== 兵庫県（淡路島エリア） =====
@@ -412,6 +509,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
     tackleRecommendations: [],
     tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ3分〜7分", description: "波打ち際にキスが集まる。" },
     mazumeInfo: { springSunrise: "05:30", springSunset: "18:25", summerSunrise: "04:55", summerSunset: "19:15", autumnSunrise: "05:50", autumnSunset: "17:20", winterSunrise: "07:00", winterSunset: "17:00", tip: "ヒラメは波打ち際の離岸流を狙う。" },
+    gearGuides: [gearLure, gearNage],
     safetyLevel: "caution", safetyNotes: ["波が高い日は注意", "離岸流に注意"],
     youtubeLinks: [{ label: "吹上浜 淡路島 釣り", searchQuery: "吹上浜 淡路島 ヒラメ キス 釣り", description: "吹上浜での釣り動画" }],
   },
@@ -444,6 +542,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
     tackleRecommendations: [],
     tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ3分〜7分", description: "常夜灯下でアジが集まる。" },
     mazumeInfo: { springSunrise: "05:25", springSunset: "18:30", summerSunrise: "04:45", summerSunset: "19:20", autumnSunrise: "05:35", autumnSunset: "17:15", winterSunrise: "06:55", winterSunset: "16:50", tip: "ライトゲームの穴場。常夜灯がキモ。" },
+    gearGuides: [gearRock, gearNage, gearEging],
     safetyLevel: "safe", safetyNotes: ["漁港内は足場良好", "静かな環境でのんびり釣り"],
     youtubeLinks: [{ label: "田井漁港 アジング", searchQuery: "田井漁港 舞鶴 アジング", description: "田井漁港での釣り動画" }],
   },
@@ -468,6 +567,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
     tackleRecommendations: [],
     tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ3分〜7分", description: "日本海の潮が入ると青物も回遊。" },
     mazumeInfo: { springSunrise: "05:25", springSunset: "18:35", summerSunrise: "04:45", summerSunset: "19:25", autumnSunrise: "05:35", autumnSunset: "17:15", winterSunrise: "06:55", winterSunset: "16:50", tip: "周辺の温泉で釣り後にリフレッシュ。" },
+    gearGuides: [gearSabiki, gearNage, gearJig],
     safetyLevel: "safe", safetyNotes: ["漁港内は足場良好", "冬は日本海の風が強い"],
     youtubeLinks: [{ label: "浅茂川漁港 釣り", searchQuery: "浅茂川漁港 京丹後 釣り", description: "浅茂川漁港での釣り動画" }],
   },

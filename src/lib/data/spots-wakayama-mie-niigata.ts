@@ -1,4 +1,4 @@
-import type { FishingSpot } from "@/types";
+import type { FishingSpot, GearGuide } from "@/types";
 import type { Region, FishSpecies } from "@/types";
 import { regions } from "./regions";
 import { getFishBySlug } from "./fish";
@@ -64,6 +64,91 @@ const btAllDay = [
   { label: "夜", timeRange: "19:00〜22:00", rating: "good" as const },
 ];
 
+// gear定数
+const gearSabiki: GearGuide = {
+  targetFish: "アジ・サバ・イワシ",
+  method: "サビキ釣り",
+  difficulty: "beginner",
+  rod: "磯竿3号 3.6〜4.5m",
+  reel: "スピニングリール 2500番",
+  line: "ナイロン3号",
+  hook: "サビキ仕掛け 5〜7号",
+  otherItems: ["コマセカゴ", "アミエビ", "バケツ"],
+  tip: "コマセは少しずつ出すのがコツ。夕マヅメが特に釣果がよい。"
+};
+
+const gearNage: GearGuide = {
+  targetFish: "キス・カレイ",
+  method: "投げ釣り",
+  difficulty: "beginner",
+  rod: "投げ竿 3.9〜4.25m",
+  reel: "スピニングリール 3000〜4000番",
+  line: "ナイロン4号",
+  hook: "流線針 7〜9号",
+  otherItems: ["天秤オモリ 20〜25号", "青イソメ", "竿立て"],
+  tip: "砂地を狙って遠投。アタリは小さいのでラインを張りすぎないこと。"
+};
+
+const gearRock: GearGuide = {
+  targetFish: "カサゴ・メバル",
+  method: "穴釣り・根魚釣り",
+  difficulty: "beginner",
+  rod: "穴釣りロッド 1.1〜1.5m",
+  reel: "小型両軸リール",
+  line: "フロロ3号",
+  hook: "ブラクリ 3〜5号",
+  otherItems: ["アオイソメ", "サバの切り身"],
+  tip: "テトラの隙間に落とし込み、底に着いたら少し持ち上げて待つ。"
+};
+
+const gearUki: GearGuide = {
+  targetFish: "クロダイ・メジナ",
+  method: "ウキフカセ釣り",
+  difficulty: "intermediate",
+  rod: "磯竿1.5〜2号 5.3m",
+  reel: "スピニングリール 2500〜3000番",
+  line: "ナイロン2号",
+  hook: "チヌ針3〜4号",
+  otherItems: ["ウキ", "オキアミ", "コマセ"],
+  tip: "潮の流れに乗せてウキを流すのがコツ。"
+};
+
+const gearEging: GearGuide = {
+  targetFish: "アオリイカ",
+  method: "エギング",
+  difficulty: "intermediate",
+  rod: "エギングロッド 8.6ft ML",
+  reel: "スピニングリール 2500番",
+  line: "PE 0.6号",
+  hook: "エギ 3〜3.5号",
+  otherItems: ["リーダー フロロ2号", "ギャフ", "イカ締めピック"],
+  tip: "秋イカは3号エギ、春の親イカは3.5〜4号が効果的。"
+};
+
+const gearJig: GearGuide = {
+  targetFish: "ブリ・ヒラマサ・カンパチ",
+  method: "ショアジギング",
+  difficulty: "intermediate",
+  rod: "ショアジギングロッド M〜MH 10ft",
+  reel: "スピニングリール 4000〜5000番",
+  line: "PE 1〜1.5号",
+  hook: "メタルジグ 30〜60g",
+  otherItems: ["リーダー フロロ5号", "プライヤー"],
+  tip: "朝マヅメの時合いに集中。ジャークのリズムを一定に保つ。"
+};
+
+const gearLure: GearGuide = {
+  targetFish: "シーバス",
+  method: "ルアー釣り",
+  difficulty: "intermediate",
+  rod: "シーバスロッド 9ft ML",
+  reel: "スピニングリール 3000番",
+  line: "PE 1号",
+  hook: "ミノー 80〜120mm",
+  otherItems: ["リーダー フロロ5号", "スナップ", "プライヤー"],
+  tip: "常夜灯周りの明暗部を狙うのが基本。"
+};
+
 export const wakayamaMieNiigataSpots: FishingSpot[] = [
   // =========================================
   // 和歌山県（15スポット）
@@ -97,6 +182,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好でファミリー向け", "駐車場広くトイレ完備", "夏季は海水浴客に注意"],
     youtubeLinks: [{ label: "和歌浦漁港 釣り", searchQuery: "和歌浦漁港 サビキ アジ 和歌山", description: "和歌浦漁港でのサビキ釣り動画" }],
+    gearGuides: [gearSabiki, gearNage, gearRock, gearEging, gearJig],
   },
   {
     id: "swmn002", name: "水軒鉄鋼団地", slug: "suiken-tekko-danchi",
@@ -118,6 +204,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["夜釣りの際は足元注意", "車横付け可能だが通行の邪魔にならないよう配慮", "工業地帯のため大型車両に注意"],
     youtubeLinks: [{ label: "水軒 タチウオ", searchQuery: "水軒鉄鋼団地 タチウオ 和歌山 夜釣り", description: "水軒鉄鋼団地でのタチウオ釣り動画" }],
+    gearGuides: [gearLure, gearUki, gearSabiki],
   },
   {
     id: "swmn003", name: "紀ノ川河口", slug: "kinokawa-kakou",
@@ -139,6 +226,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["ウェーディング時はライフジャケット必須", "河口流れが強いので注意", "夜間は足元に十分注意"],
     youtubeLinks: [{ label: "紀ノ川河口 シーバス", searchQuery: "紀ノ川河口 シーバス ルアー ランカー", description: "紀ノ川河口でのシーバス釣り動画" }],
+    gearGuides: [gearLure, gearNage],
   },
 
   // --- 有田・湯浅エリア ---
@@ -163,6 +251,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["磯場は滑りやすいので磯靴推奨", "河口は流れに注意", "台風後は漂着物に注意"],
     youtubeLinks: [{ label: "有田川河口 釣り", searchQuery: "有田川河口 シーバス チヌ 和歌山", description: "有田川河口での釣り動画" }],
+    gearGuides: [gearLure, gearUki, gearNage, gearEging],
   },
   {
     id: "swmn005", name: "湯浅広港", slug: "yuasa-hiro-port",
@@ -185,6 +274,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "トイレ・駐車場完備", "漁業関係者の作業を妨げないよう注意"],
     youtubeLinks: [{ label: "湯浅広港 釣り", searchQuery: "湯浅広港 サビキ アジ アオリイカ 和歌山", description: "湯浅広港での釣り動画" }],
+    gearGuides: [gearSabiki, gearNage, gearEging],
   },
 
   // --- 御坊・日高エリア ---
@@ -209,6 +299,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["波が高い日は危険、天候を確認", "砂利浜のため足場に注意", "離岸流に注意"],
     youtubeLinks: [{ label: "煙樹ヶ浜 ショアジギング", searchQuery: "煙樹ヶ浜 ショアジギング 青物 和歌山", description: "煙樹ヶ浜でのショアジギング動画" }],
+    gearGuides: [gearNage, gearLure, gearJig],
   },
   {
     id: "swmn007", name: "小浦漁港", slug: "koura-gyoko-wakayama",
@@ -230,6 +321,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["テトラでの釣りは滑りやすいので注意", "駐車時は漁業関係者の邪魔にならないよう配慮", "コンビニが遠いので飲食物持参推奨"],
     youtubeLinks: [{ label: "小浦漁港 エギング", searchQuery: "小浦漁港 エギング アオリイカ 和歌山", description: "小浦漁港でのエギング動画" }],
+    gearGuides: [gearEging, gearRock, gearUki],
   },
 
   // --- 田辺・白浜エリア ---
@@ -254,6 +346,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "外向き堤防はやや足場が悪いので注意", "釣具店が近くにあり便利"],
     youtubeLinks: [{ label: "芳養漁港 グレ", searchQuery: "芳養漁港 グレ フカセ釣り 田辺 和歌山", description: "芳養漁港でのグレ釣り動画" }],
+    gearGuides: [gearUki, gearSabiki, gearEging],
   },
   {
     id: "swmn009", name: "白浜・瀬戸漁港", slug: "shirahama-seto-gyoko",
@@ -276,6 +369,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好でファミリー向け", "観光地のためマナーを守って釣りを", "円月島方面は潮の流れに注意"],
     youtubeLinks: [{ label: "瀬戸漁港 釣り", searchQuery: "白浜 瀬戸漁港 サビキ アジ チヌ", description: "白浜瀬戸漁港での釣り動画" }],
+    gearGuides: [gearSabiki, gearUki, gearEging],
   },
   {
     id: "swmn010", name: "日置川河口", slug: "hikigawa-kakou",
@@ -297,6 +391,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["河口の流れが強い日は注意", "テトラ帯は滑りやすい", "増水時は絶対に近づかない"],
     youtubeLinks: [{ label: "日置川河口 シーバス", searchQuery: "日置川河口 シーバス ヒラスズキ ルアー", description: "日置川河口でのシーバス釣り動画" }],
+    gearGuides: [gearLure, gearUki],
   },
 
   // --- 串本・すさみエリア ---
@@ -320,6 +415,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "外向き堤防は波をかぶることがあるので注意", "黒潮の影響で潮流が速い日あり"],
     youtubeLinks: [{ label: "すさみ漁港 グレ", searchQuery: "すさみ漁港 グレ フカセ釣り 大型", description: "すさみ漁港でのグレ釣り動画" }],
+    gearGuides: [gearUki, gearEging],
   },
   {
     id: "swmn012", name: "串本・橋杭岩周辺", slug: "kushimoto-hashiguiiwa",
@@ -341,6 +437,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["磯場は滑りやすいので磯靴・ライフジャケット必須", "波が高い日は絶対に近づかない", "潮の満ち引きに注意"],
     youtubeLinks: [{ label: "橋杭岩 磯釣り", searchQuery: "橋杭岩 磯釣り グレ イシダイ 串本", description: "橋杭岩周辺での磯釣り動画" }],
+    gearGuides: [gearUki],
   },
   {
     id: "swmn013", name: "和深漁港", slug: "wabuka-gyoko",
@@ -362,6 +459,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["地磯へのアクセスは磯靴必須", "コンビニが遠いので食料持参推奨", "携帯電波が弱いエリアあり"],
     youtubeLinks: [{ label: "和深漁港 釣り", searchQuery: "和深漁港 グレ アオリイカ 串本", description: "和深漁港での釣り動画" }],
+    gearGuides: [gearUki, gearEging],
   },
 
   // --- 新宮・勝浦エリア ---
@@ -386,6 +484,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "外向き堤防は波に注意", "近くにコンビニ・釣具店あり"],
     youtubeLinks: [{ label: "三輪崎漁港 釣り", searchQuery: "三輪崎漁港 サビキ グレ 新宮", description: "三輪崎漁港での釣り動画" }],
+    gearGuides: [gearSabiki, gearUki],
   },
   {
     id: "swmn015", name: "太地・くじら浜公園護岸", slug: "taiji-kujirahama-gogan",
@@ -407,6 +506,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["護岸は足場良好でファミリー向け", "くじら博物館の見学と合わせて楽しめる", "夏季は観光客が多い"],
     youtubeLinks: [{ label: "太地 釣り", searchQuery: "太地町 くじら浜 釣り サビキ アオリイカ", description: "太地くじら浜公園での釣り動画" }],
+    gearGuides: [gearSabiki, gearNage, gearEging],
   },
 
   // =========================================
@@ -435,6 +535,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["波止の幅が広く足場良好", "ファミリー向け", "伊勢神宮からも近い"],
     youtubeLinks: [{ label: "有滝堤防 釣り", searchQuery: "有滝堤防 サビキ キス 伊勢 三重", description: "有滝堤防での釣り動画" }],
+    gearGuides: [gearSabiki, gearNage, gearLure],
   },
   {
     id: "swmn017", name: "五ヶ所漁港", slug: "gokasho-gyoko",
@@ -456,6 +557,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["湾内で波が穏やか", "チヌ釣りの名ポイント", "釣具店が近くにあり便利"],
     youtubeLinks: [{ label: "五ヶ所漁港 チヌ", searchQuery: "五ヶ所漁港 チヌ ダンゴ釣り フカセ 南伊勢", description: "五ヶ所漁港でのチヌ釣り動画" }],
+    gearGuides: [gearUki, gearEging, gearSabiki],
   },
 
   // --- 津・鈴鹿エリア ---
@@ -480,6 +582,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["テトラ帯は滑りやすいので注意", "先端部は潮の流れが速い", "タチウオシーズンは混雑注意"],
     youtubeLinks: [{ label: "日本鋼管 釣り", searchQuery: "日本鋼管突堤 津 クロダイ キス 三重", description: "日本鋼管突堤での釣り動画" }],
+    gearGuides: [gearUki, gearNage, gearLure],
   },
   {
     id: "swmn019", name: "白子漁港", slug: "shiroko-gyoko",
@@ -501,6 +604,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["釣り桟橋は足場良好でファミリー向け", "白灯台は先端部の足場に注意", "駐車場・トイレ完備で安心"],
     youtubeLinks: [{ label: "白子漁港 釣り", searchQuery: "白子漁港 サビキ アジ クロダイ 鈴鹿", description: "白子漁港での釣り動画" }],
+    gearGuides: [gearSabiki, gearUki, gearLure],
   },
   {
     id: "swmn020", name: "千代崎漁港", slug: "chiyozaki-gyoko",
@@ -522,6 +626,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["港内は穏やかで初心者向け", "複数の堤防があり混雑しにくい", "近鉄駅から徒歩圏内"],
     youtubeLinks: [{ label: "千代崎漁港 釣り", searchQuery: "千代崎漁港 ハゼ キス サヨリ 鈴鹿", description: "千代崎漁港での釣り動画" }],
+    gearGuides: [gearNage],
   },
 
   // --- 志摩・鳥羽エリア ---
@@ -545,6 +650,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["外向きの堤防は波をかぶることがある", "磯場へのアクセスは磯靴推奨", "安乗灯台付近は足場注意"],
     youtubeLinks: [{ label: "安乗漁港 グレ", searchQuery: "安乗漁港 グレ フカセ エギング 志摩", description: "安乗漁港での釣り動画" }],
+    gearGuides: [gearUki, gearEging],
   },
   {
     id: "swmn022", name: "相差漁港", slug: "osatsu-gyoko",
@@ -567,6 +673,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["テトラ帯は滑りやすいので注意", "海女さんの漁期中は一部制限あり", "観光地のためマナーを守って"],
     youtubeLinks: [{ label: "相差漁港 釣り", searchQuery: "相差漁港 アオリイカ エギング チヌ 鳥羽", description: "相差漁港での釣り動画" }],
+    gearGuides: [gearEging, gearUki, gearRock, gearSabiki],
   },
 
   // --- 尾鷲・熊野エリア ---
@@ -590,6 +697,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["道が狭いので運転注意", "コンビニ・釣具店が遠いので準備万端で", "携帯電波が弱いエリアあり"],
     youtubeLinks: [{ label: "梶賀漁港 エギング", searchQuery: "梶賀漁港 エギング アオリイカ 尾鷲", description: "梶賀漁港でのエギング動画" }],
+    gearGuides: [gearEging, gearUki, gearRock],
   },
   {
     id: "swmn024", name: "古江漁港", slug: "furue-gyoko-owase",
@@ -611,6 +719,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["足場が平坦でファミリー向け", "湾奥で波が穏やか", "駐車場あり"],
     youtubeLinks: [{ label: "古江漁港 サビキ", searchQuery: "古江漁港 サビキ アジ 尾鷲 ファミリー", description: "古江漁港でのサビキ釣り動画" }],
+    gearGuides: [gearSabiki, gearNage, gearEging],
   },
   {
     id: "swmn025", name: "磯津漁港", slug: "isozu-gyoko-yokkaichi",
@@ -639,6 +748,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "工業地帯の車両に注意", "夜釣りの際は足元に注意"],
     youtubeLinks: [{ label: "磯津漁港 釣り", searchQuery: "磯津漁港 ハゼ キス クロダイ 四日市", description: "磯津漁港での釣り動画" }],
+    gearGuides: [gearNage, gearUki, gearRock, gearJig, gearEging],
   },
 
   // =========================================
@@ -668,6 +778,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["管理釣り場で安全対策済み", "ライフジャケット着用義務あり", "荒天時は閉鎖"],
     youtubeLinks: [{ label: "新潟東港 ショアジギング", searchQuery: "新潟東港第2東防波堤 ショアジギング イナダ ワラサ", description: "新潟東港第2東防波堤でのショアジギング動画" }],
+    gearGuides: [gearJig, gearSabiki, gearEging],
   },
   {
     id: "swmn027", name: "新潟港山の下埠頭", slug: "niigata-yamashita-futo",
@@ -696,6 +807,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["大型船舶の入港時は注意", "夜釣りの際は足元注意", "信濃川の流れが強い日あり"],
     youtubeLinks: [{ label: "山の下埠頭 シーバス", searchQuery: "新潟 山の下埠頭 シーバス ルアー", description: "山の下埠頭でのシーバス釣り動画" }],
+    gearGuides: [gearLure, gearSabiki, gearNage, gearRock, gearJig, gearEging],
   },
 
   // --- 上越・糸魚川エリア ---
@@ -727,6 +839,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["管理された桟橋で安全", "ライフジャケット着用推奨", "荒天時は閉鎖", "開場時間を事前に確認"],
     youtubeLinks: [{ label: "上越フィッシングセンター", searchQuery: "上越海洋フィッシングセンター サビキ アジ 青物", description: "上越海洋フィッシングセンターでの釣り動画" }],
+    gearGuides: [gearSabiki, gearNage, gearJig, gearRock, gearEging],
   },
   {
     id: "swmn029", name: "能生漁港", slug: "nou-gyoko",
@@ -749,6 +862,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "道の駅が隣接しトイレ・食事に困らない", "冬季は日本海の荒波に注意"],
     youtubeLinks: [{ label: "能生漁港 釣り", searchQuery: "能生漁港 サビキ アジ エギング 糸魚川", description: "能生漁港での釣り動画" }],
+    gearGuides: [gearSabiki, gearNage, gearEging],
   },
 
   // --- 柏崎・出雲崎エリア ---
@@ -778,6 +892,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["車横付けで便利", "足場良好でファミリー向け", "冬季は強風・高波に注意"],
     youtubeLinks: [{ label: "出雲崎漁港 釣り", searchQuery: "出雲崎漁港 サビキ アジ キス 夕日", description: "出雲崎漁港での釣り動画" }],
+    gearGuides: [gearSabiki, gearNage, gearEging, gearRock, gearJig],
   },
   {
     id: "swmn031", name: "米山海岸", slug: "yoneyama-kaigan",
@@ -807,6 +922,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["サーフは波の状態を確認してから入水", "離岸流に注意", "冬季は荒天が多いので天気予報を確認"],
     youtubeLinks: [{ label: "米山海岸 サーフ", searchQuery: "米山海岸 サーフフィッシング ヒラメ キス 柏崎", description: "米山海岸でのサーフ釣り動画" }],
+    gearGuides: [gearNage, gearLure, gearJig, gearRock, gearEging],
   },
 
   // --- 村上・岩船エリア ---
@@ -838,6 +954,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好で車横付け可能", "連絡船の発着時は注意", "冬季は荒天が多い"],
     youtubeLinks: [{ label: "岩船港 釣り", searchQuery: "岩船港 サビキ アジ カマス 村上 新潟", description: "岩船港での釣り動画" }],
+    gearGuides: [gearSabiki, gearNage, gearLure, gearRock, gearJig, gearEging],
   },
   {
     id: "swmn033", name: "桑川漁港（笹川流れ）", slug: "kuwagawa-gyoko-sasagawanagare",
@@ -860,6 +977,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["磯場は滑りやすいので磯靴推奨", "夏季は海水浴客と共存", "笹川流れの景観を損なわないようマナー順守"],
     youtubeLinks: [{ label: "桑川漁港 釣り", searchQuery: "桑川漁港 笹川流れ アジ クロダイ 村上", description: "桑川漁港での釣り動画" }],
+    gearGuides: [gearUki, gearSabiki, gearEging],
   },
 
   // --- 佐渡島エリア ---
@@ -888,6 +1006,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "safe", safetyNotes: ["フェリーの入出港時は注意", "港内は足場良好", "レンタカーとの組み合わせがおすすめ"],
     youtubeLinks: [{ label: "両津港 釣り", searchQuery: "佐渡 両津港 クロダイ アジ エギング", description: "佐渡両津港での釣り動画" }],
+    gearGuides: [gearUki, gearSabiki, gearEging, gearRock, gearJig, gearNage],
   },
   {
     id: "swmn035", name: "佐渡・野崎鼻", slug: "sado-nozaki-hana",
@@ -914,5 +1033,6 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
     tackleRecommendations: [],
     safetyLevel: "caution", safetyNotes: ["磯靴・ライフジャケット必須", "波の状態を事前に確認", "携帯電波が弱いエリアあり", "食料・飲料は事前に準備"],
     youtubeLinks: [{ label: "佐渡 野崎鼻 磯釣り", searchQuery: "佐渡 野崎鼻 磯釣り クロダイ 青物 マダイ", description: "佐渡野崎鼻での磯釣り動画" }],
+    gearGuides: [gearUki, gearJig, gearEging, gearRock, gearNage],
   },
 ];

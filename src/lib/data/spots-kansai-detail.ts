@@ -1,4 +1,4 @@
-import type { FishingSpot } from "@/types";
+import type { FishingSpot, GearGuide } from "@/types";
 import { regions } from "./regions";
 import type { Region, FishSpecies } from "@/types";
 import { getFishBySlug } from "./fish";
@@ -57,6 +57,92 @@ const btNight = [
   { label: "夜", timeRange: "19:00〜23:00", rating: "best" as const },
 ];
 
+
+// 共通 Gear Guides
+const gearSabiki: GearGuide = {
+  targetFish: "アジ・サバ・イワシ",
+  method: "サビキ釣り",
+  difficulty: "beginner",
+  rod: "磯竿3号 3.6〜4.5m",
+  reel: "スピニングリール 2500番",
+  line: "ナイロン3号",
+  hook: "サビキ仕掛け 5〜7号",
+  otherItems: ["コマセカゴ", "アミエビ", "バケツ"],
+  tip: "コマセは少しずつ出すのがコツ。夕マヅメが特に釣果がよい。"
+};
+
+const gearNage: GearGuide = {
+  targetFish: "キス・カレイ",
+  method: "投げ釣り",
+  difficulty: "beginner",
+  rod: "投げ竿 3.9〜4.25m",
+  reel: "スピニングリール 3000〜4000番",
+  line: "ナイロン4号",
+  hook: "流線針 7〜9号",
+  otherItems: ["天秤オモリ 20〜25号", "青イソメ", "竿立て"],
+  tip: "砂地を狙って遠投。アタリは小さいのでラインを張りすぎないこと。"
+};
+
+const gearRock: GearGuide = {
+  targetFish: "カサゴ・メバル",
+  method: "穴釣り・根魚釣り",
+  difficulty: "beginner",
+  rod: "穴釣りロッド 1.1〜1.5m",
+  reel: "小型両軸リール",
+  line: "フロロ3号",
+  hook: "ブラクリ 3〜5号",
+  otherItems: ["アオイソメ", "サバの切り身"],
+  tip: "テトラの隙間に落とし込み、底に着いたら少し持ち上げて待つ。"
+};
+
+const gearUki: GearGuide = {
+  targetFish: "クロダイ・メジナ",
+  method: "ウキフカセ釣り",
+  difficulty: "intermediate",
+  rod: "磯竿1.5〜2号 5.3m",
+  reel: "スピニングリール 2500〜3000番",
+  line: "ナイロン2号",
+  hook: "チヌ針3〜4号",
+  otherItems: ["ウキ", "オキアミ", "コマセ"],
+  tip: "潮の流れに乗せてウキを流すのがコツ。"
+};
+
+const gearEging: GearGuide = {
+  targetFish: "アオリイカ",
+  method: "エギング",
+  difficulty: "intermediate",
+  rod: "エギングロッド 8.6ft ML",
+  reel: "スピニングリール 2500番",
+  line: "PE 0.6号",
+  hook: "エギ 3〜3.5号",
+  otherItems: ["リーダー フロロ2号", "ギャフ", "イカ締めピック"],
+  tip: "秋イカは3号エギ、春の親イカは3.5〜4号が効果的。"
+};
+
+const gearJig: GearGuide = {
+  targetFish: "ブリ・ヒラマサ・カンパチ",
+  method: "ショアジギング",
+  difficulty: "intermediate",
+  rod: "ショアジギングロッド M〜MH 10ft",
+  reel: "スピニングリール 4000〜5000番",
+  line: "PE 1〜1.5号",
+  hook: "メタルジグ 30〜60g",
+  otherItems: ["リーダー フロロ5号", "プライヤー"],
+  tip: "朝マヅメの時合いに集中。ジャークのリズムを一定に保つ。"
+};
+
+const gearLure: GearGuide = {
+  targetFish: "シーバス",
+  method: "ルアー釣り",
+  difficulty: "intermediate",
+  rod: "シーバスロッド 9ft ML",
+  reel: "スピニングリール 3000番",
+  line: "PE 1号",
+  hook: "ミノー 80〜120mm",
+  otherItems: ["リーダー フロロ5号", "スナップ", "プライヤー"],
+  tip: "常夜灯周りの明暗部を狙うのが基本。"
+};
+
 export const kansaiDetailSpots: FishingSpot[] = [
   // =========================================
   // 大阪府（11スポット）
@@ -86,6 +172,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearLure, gearRock, gearJig, gearEging, gearUki],
     safetyLevel: "caution", safetyNotes: ["テトラ帯は足場注意", "夜釣り時はヘッドライト必須", "ライフジャケット着用推奨"],
   },
   {
@@ -114,6 +201,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearLure, gearUki, gearJig, gearEging],
     safetyLevel: "safe", safetyNotes: ["車横付け可能エリアあり", "足場良好で初心者にも安心", "トラック等の往来に注意"],
   },
   {
@@ -134,6 +222,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btNight,
     tackleRecommendations: [],
+    gearGuides: [gearLure, gearSabiki],
     safetyLevel: "caution", safetyNotes: ["夜間は足元に注意", "橋脚周辺は根掛かりしやすい", "ライフジャケット着用推奨"],
   },
   {
@@ -162,6 +251,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearLure, gearUki, gearJig, gearEging],
     safetyLevel: "caution", safetyNotes: ["施設閉鎖中の可能性あり。最新情報を要確認", "周辺護岸は柵がない箇所あり"],
   },
   {
@@ -189,6 +279,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearUki, gearSabiki, gearEging, gearJig, gearRock],
     safetyLevel: "safe", safetyNotes: ["柵付き桟橋で安全", "売店・トイレ完備", "スタッフ常駐"],
   },
   {
@@ -210,6 +301,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearRock, gearEging, gearUki],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "外堤防は足元注意", "電車アクセス可能"],
   },
   {
@@ -236,6 +328,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearUki, gearSabiki, gearLure, gearJig, gearEging],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "チヌの落とし込みポイントが多数", "近くに釣具店あり"],
   },
   {
@@ -263,6 +356,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearLure, gearUki],
     safetyLevel: "safe", safetyNotes: ["足場フラットで安全", "車横付け可能", "柵なしのため子供連れは注意"],
   },
   {
@@ -291,6 +385,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btNight,
     tackleRecommendations: [],
+    gearGuides: [gearLure, gearSabiki, gearJig, gearEging],
     safetyLevel: "caution", safetyNotes: ["テトラ帯あり・足場注意", "夜釣り時はヘッドライト必須", "風が強い日は危険"],
   },
   {
@@ -318,6 +413,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearLure, gearEging],
     safetyLevel: "safe", safetyNotes: ["柵付き護岸で安全", "トイレ・コンビニ近い", "電車アクセス良好"],
   },
   {
@@ -343,6 +439,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearEging, gearSabiki, gearRock, gearUki],
     safetyLevel: "caution", safetyNotes: ["外堤防は高さあり注意", "漁業関係者の邪魔にならないよう配慮", "ゴミは必ず持ち帰り"],
   },
 
@@ -368,6 +465,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearLure, gearUki],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "明石海峡の潮流は非常に速い", "遊漁船利用時はライフジャケット着用"],
   },
   {
@@ -393,6 +491,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btNight,
     tackleRecommendations: [],
+    gearGuides: [gearLure, gearRock, gearEging],
     safetyLevel: "safe", safetyNotes: ["常夜灯があり夜釣りしやすい", "漁船の出入りに注意", "ゴミ持ち帰りを徹底"],
   },
   {
@@ -418,6 +517,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btNight,
     tackleRecommendations: [],
+    gearGuides: [gearRock, gearSabiki],
     safetyLevel: "caution", safetyNotes: ["テトラ帯は滑りやすい", "スパイクシューズ推奨", "穴釣り時は根掛かりに注意"],
   },
   {
@@ -446,6 +546,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearLure, gearSabiki, gearUki, gearJig, gearEging],
     safetyLevel: "safe", safetyNotes: ["車横付けエリアあり", "足場は比較的良好", "風が強い日は波かぶりに注意"],
   },
   {
@@ -472,6 +573,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearUki, gearLure],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "漁船の出入りに注意", "電車アクセス可能"],
   },
   {
@@ -491,6 +593,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearNage],
     safetyLevel: "safe", safetyNotes: ["遠浅で安全", "夏季は海水浴客との共存に注意", "投げ釣りは周囲に配慮"],
   },
   {
@@ -517,6 +620,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearUki, gearLure],
     safetyLevel: "safe", safetyNotes: ["フェリーターミナル周辺は足場良好", "定期船の航路に注意", "夜間照明あり"],
   },
   {
@@ -542,6 +646,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearUki, gearEging, gearRock],
     safetyLevel: "caution", safetyNotes: ["離島のため天候急変に注意", "最終便の時間を確認すること", "磯場はスパイクシューズ必須"],
   },
   {
@@ -567,6 +672,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearUki, gearRock, gearEging],
     safetyLevel: "caution", safetyNotes: ["離島のため船の時刻を事前確認", "風速が強い日は欠航の可能性あり", "磯場はライフジャケット必須"],
   },
   {
@@ -587,6 +693,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearUki],
     safetyLevel: "caution", safetyNotes: ["磯場は上級者向け", "渡船利用の磯は特に安全装備必須", "天候急変時は早めに撤収"],
   },
   {
@@ -613,6 +720,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btNight,
     tackleRecommendations: [],
+    gearGuides: [gearLure, gearNage, gearUki, gearRock, gearEging],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "常夜灯がありアジング好適", "洲本温泉街が近い"],
   },
   {
@@ -633,6 +741,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearRock, gearEging],
     safetyLevel: "safe", safetyNotes: ["港内は穏やかで安全", "外堤防は波に注意", "夕日が美しい西海岸"],
   },
   // s873 翼港: spots-additional.ts s116 と重複のため削除
@@ -665,6 +774,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearLure, gearEging, gearUki, gearJig],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "友ヶ島水道は潮流が速い", "遊漁船も多数出船"],
   },
   {
@@ -691,6 +801,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearNage, gearLure, gearEging],
     safetyLevel: "safe", safetyNotes: ["足場良好で初心者にも安心", "ビーチ隣接で家族連れにおすすめ", "夏は海水浴客に注意"],
   },
   {
@@ -715,6 +826,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearUki, gearEging, gearRock],
     safetyLevel: "caution", safetyNotes: ["道が狭く駐車場が少ない", "地元の漁師さんへの配慮を忘れずに", "磯場は滑りやすい"],
   },
   {
@@ -736,6 +848,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearLure, gearSabiki, gearEging, gearJig],
     safetyLevel: "safe", safetyNotes: ["足場良好で安全", "トイレ・売店あり", "混雑時はマナーを守って"],
   },
   {
@@ -763,6 +876,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearLure, gearNage, gearEging],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "大型船の航路に注意", "近くに温泉あり"],
   },
   {
@@ -789,6 +903,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearEging, gearUki],
     safetyLevel: "safe", safetyNotes: ["港内は穏やかで安全", "由良湾の入口付近は潮が速い", "漁船の出入りに注意"],
   },
   {
@@ -810,6 +925,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearUki, gearSabiki, gearEging],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "白浜温泉街が近い", "遊漁船の拠点としても有名"],
   },
   {
@@ -836,6 +952,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearUki, gearEging, gearSabiki, gearJig, gearRock],
     safetyLevel: "caution", safetyNotes: ["黒潮の影響で潮流が速い", "磯場へは渡船利用推奨", "天候急変に注意"],
   },
   {
@@ -862,6 +979,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearEging, gearNage],
     safetyLevel: "safe", safetyNotes: ["港内は穏やかで安全", "くじらの博物館が近い", "観光と釣りの組み合わせに最適"],
   },
   {
@@ -889,6 +1007,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearEging, gearLure, gearUki],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "マグロ漁船の出入りに注意", "勝浦温泉が徒歩圏内"],
   },
 
@@ -919,6 +1038,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearUki, gearNage, gearEging],
     safetyLevel: "safe", safetyNotes: ["港内は穏やかで安全", "舟屋の景観を損なわないよう配慮", "観光地のためマナー厳守"],
   },
   {
@@ -938,6 +1058,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearNage, gearSabiki],
     safetyLevel: "safe", safetyNotes: ["遠浅で安全", "観光客が多いため周囲に注意", "投げ釣りは人のいない場所で"],
   },
   {
@@ -966,6 +1087,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearNage, gearEging],
     safetyLevel: "safe", safetyNotes: ["フェンス付きで安全", "トイレ・駐車場完備", "開園時間を事前に確認すること"],
   },
   {
@@ -992,6 +1114,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearNage, gearEging],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "天橋立駅からのアクセス良好", "冬の日本海は荒天に注意"],
   },
 ];

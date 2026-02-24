@@ -72,6 +72,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:25", springSunset: "18:25", summerSunrise: "04:35", summerSunset: "19:15", autumnSunrise: "05:30", autumnSunset: "17:15", winterSunrise: "06:55", winterSunset: "16:45", tip: "利き鮎会準グランプリの味を堪能したい。山中温泉と合わせた釣行がおすすめ。" },
     safetyLevel: "caution", safetyNotes: ["上流部は道路が狭い", "ダム放水時は水位変動あり"],
+    gearGuides: [{ targetFish: "アユ", method: "友釣り", difficulty: "advanced", rod: "鮎竿 8〜9m", reel: "リール不要（延べ竿使用）", line: "メタルライン 0.05〜0.1号または複合メタル", hook: "掛け針（3本イカリ）7〜8号", otherItems: ["オトリ缶", "タモ網", "鮎タイツ", "鮎ベスト"], tip: "利き鮎会準グランプリの大聖寺川。オトリ鮎を流れに入れて野鮎の縄張りに送り込む。遊漁券が必要。" }],
     youtubeLinks: [{ label: "大聖寺川 アユ釣り", searchQuery: "大聖寺川 アユ 友釣り 加賀", description: "大聖寺川でのアユ釣り動画" }],
   },
   {
@@ -95,6 +96,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:25", springSunset: "18:25", summerSunrise: "04:35", summerSunset: "19:15", autumnSunrise: "05:30", autumnSunset: "17:15", winterSunrise: "06:55", winterSunset: "16:45", tip: "ひがし茶屋街の風情ある景色の中で小物釣りが楽しめる。" },
     safetyLevel: "safe", safetyNotes: ["観光地のため周辺の人に配慮"],
+    gearGuides: [{ targetFish: "オイカワ・カワムツ", method: "ウキ釣り", difficulty: "beginner", rod: "延べ竿 3.6〜4.5m", reel: "リール不要（延べ竿使用）", line: "ナイロン 0.8〜1号", hook: "袖針 3〜5号", otherItems: ["玉ウキ", "ガン玉", "練りエサまたはサシ（紅サシ）"], tip: "ひがし茶屋街の風情ある景色の中で小物釣り。流れの緩い淵やトロ場を狙う。" }],
     youtubeLinks: [{ label: "浅野川 金沢 釣り", searchQuery: "浅野川 金沢 釣り オイカワ", description: "金沢浅野川での釣り動画" }],
   },
   // ===== 福井県 =====
@@ -143,6 +145,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:25", springSunset: "18:25", summerSunrise: "04:40", summerSunset: "19:15", autumnSunrise: "05:30", autumnSunset: "17:15", winterSunrise: "06:55", winterSunset: "16:45", tip: "越前の里川風景の中でのんびり小物釣りを楽しめるフィールド。" },
     safetyLevel: "safe", safetyNotes: ["穏やかな流れで初心者にも安全"],
+    gearGuides: [{ targetFish: "アユ", method: "友釣り", difficulty: "advanced", rod: "鮎竿 8〜9m", reel: "リール不要（延べ竿使用）", line: "メタルライン 0.05〜0.1号", hook: "掛け針（3本イカリ）7〜8号", otherItems: ["オトリ缶", "タモ網", "鮎タイツ"], tip: "里川の雰囲気で穏やかにアユ釣りが楽しめる。遊漁券が必要。" }],
     youtubeLinks: [{ label: "日野川 釣り 福井", searchQuery: "日野川 アユ 釣り 越前 福井", description: "日野川での釣り動画" }],
   },
   // ===== 富山県 =====
@@ -166,6 +169,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:15", springSunset: "18:25", summerSunrise: "04:25", summerSunset: "19:15", autumnSunrise: "05:20", autumnSunset: "17:15", winterSunrise: "06:50", winterSunset: "16:40", tip: "本州最高所のイワナ生息地。大自然の中での渓流釣りは格別の体験。" },
     safetyLevel: "danger", safetyNotes: ["上流部は登山レベルの装備が必要", "携帯圏外の区間が多い", "熊出没注意", "単独入渓は非常に危険"],
+    gearGuides: [{ targetFish: "イワナ", method: "エサ釣り", difficulty: "intermediate", rod: "渓流竿 5.3〜6.1m", reel: "リール不要（延べ竿使用）", line: "ナイロン 0.3〜0.6号", hook: "渓流針 4〜6号", otherItems: ["目印（マーカー）", "ガン玉", "ブドウ虫・川虫"], tip: "本州最高所のイワナ生息地。上流から下流へ釣り下がる。ポイントは岩陰や落ち込み。遊漁券が必要。" }],
     youtubeLinks: [{ label: "黒部川 源流 イワナ", searchQuery: "黒部川 源流 イワナ 渓流釣り", description: "黒部川源流でのイワナ釣り動画" }],
   },
   {
@@ -189,6 +193,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:20", springSunset: "18:25", summerSunrise: "04:30", summerSunset: "19:15", autumnSunrise: "05:25", autumnSunset: "17:15", winterSunrise: "06:50", winterSunset: "16:40", tip: "五箇山の合掌造り集落（世界遺産）観光と合わせた釣行がおすすめ。" },
     safetyLevel: "caution", safetyNotes: ["ダム放水による急激な水位変動あり", "上流部は足場が悪い箇所あり"],
+    gearGuides: [{ targetFish: "アユ", method: "友釣り", difficulty: "advanced", rod: "鮎竿 8〜9m", reel: "リール不要（延べ竿使用）", line: "メタルライン 0.05〜0.1号", hook: "掛け針（3本イカリ）7〜8号", otherItems: ["オトリ缶", "タモ網", "鮎タイツ"], tip: "五箇山合掌造り集落近く。御母衣湖からの豊富な水量で安定した水量が魅力。" }],
     youtubeLinks: [{ label: "庄川 渓流釣り", searchQuery: "庄川 イワナ ヤマメ 渓流釣り 富山", description: "庄川上流での渓流釣り動画" }],
   },
   // ===== 愛知県 =====
@@ -237,6 +242,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:30", springSunset: "18:10", summerSunrise: "04:45", summerSunset: "19:00", autumnSunrise: "05:35", autumnSunset: "17:05", winterSunrise: "06:55", winterSunset: "16:40", tip: "解禁は2月と早い。成魚放流直後が数釣りのチャンス。" },
     safetyLevel: "caution", safetyNotes: ["山間部のため天候急変に注意", "冬季は路面凍結あり"],
+    gearGuides: [{ targetFish: "アマゴ・イワナ", method: "エサ釣り", difficulty: "intermediate", rod: "渓流竿 5.3〜6.1m", reel: "リール不要（延べ竿使用）", line: "ナイロン 0.3〜0.6号", hook: "渓流針 4〜6号", otherItems: ["目印（マーカー）", "ガン玉", "ブドウ虫・川虫"], tip: "愛知県随一のアマゴ渓流。解禁は2月と早い。成魚放流直後が数釣りのチャンス。" }],
     youtubeLinks: [{ label: "寒狭川 アマゴ釣り", searchQuery: "寒狭川 アマゴ 渓流釣り 設楽 愛知", description: "寒狭川でのアマゴ釣り動画" }],
   },
   // ===== 三重県 =====
@@ -261,6 +267,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:35", springSunset: "18:10", summerSunrise: "04:50", summerSunset: "19:05", autumnSunrise: "05:40", autumnSunset: "17:05", winterSunrise: "06:55", winterSunset: "16:45", tip: "水質日本一の清流。3月の解禁直後は放流アマゴの数釣りが楽しめる。" },
     safetyLevel: "caution", safetyNotes: ["大台ヶ原は日本有数の多雨地帯。増水に注意", "上流部はクマ出没注意"],
+    gearGuides: [{ targetFish: "アマゴ", method: "エサ釣り", difficulty: "intermediate", rod: "渓流竿 5.3〜6.1m", reel: "リール不要（延べ竿使用）", line: "ナイロン 0.3〜0.6号", hook: "渓流針 4〜6号", otherItems: ["目印（マーカー）", "ガン玉", "ブドウ虫・川虫"], tip: "水質日本一の清流。3月の解禁直後は放流アマゴの数釣りが楽しめる。" }],
     youtubeLinks: [{ label: "宮川 アマゴ釣り", searchQuery: "宮川 アマゴ 渓流釣り 大台町 三重", description: "宮川上流でのアマゴ渓流釣り動画" }],
   },
   {
@@ -284,6 +291,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:35", springSunset: "18:10", summerSunrise: "04:50", summerSunset: "19:05", autumnSunrise: "05:40", autumnSunset: "17:05", winterSunrise: "06:55", winterSunset: "16:45", tip: "透明度が高くサイトフィッシングが楽しめる。魚飛渓は必見スポット。" },
     safetyLevel: "caution", safetyNotes: ["夏は川遊び客が非常に多い", "魚飛渓は岩場で滑りやすい"],
+    gearGuides: [{ targetFish: "アマゴ", method: "ルアー釣り", difficulty: "beginner", rod: "トラウトロッド 5〜6ft UL", reel: "スピニングリール 1000〜2000番", line: "ナイロン 3lb", hook: "スプーン 2〜5g", otherItems: ["ランディングネット", "リリーサー"], tip: "奇跡の清流で透明度が高くサイトフィッシングが楽しめる。スプーンをゆっくり巻くのが基本。" }],
     youtubeLinks: [{ label: "銚子川 渓流釣り", searchQuery: "銚子川 奇跡の清流 アマゴ 渓流釣り", description: "銚子川での渓流釣り動画" }],
   },
   // ===== 滋賀県 =====
@@ -309,6 +317,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:30", springSunset: "18:20", summerSunrise: "04:45", summerSunset: "19:10", autumnSunrise: "05:35", autumnSunset: "17:10", winterSunrise: "06:55", winterSunset: "16:45", tip: "琵琶湖からの天然遡上アユが豊富。京阪神から日帰りで楽しめる。" },
     safetyLevel: "safe", safetyNotes: ["穏やかな流れで入門者にも最適"],
+    gearGuides: [{ targetFish: "アユ", method: "友釣り", difficulty: "advanced", rod: "鮎竿 8〜9m", reel: "リール不要（延べ竿使用）", line: "メタルライン 0.05〜0.1号", hook: "掛け針（3本イカリ）7〜8号", otherItems: ["オトリ缶", "タモ網", "鮎タイツ"], tip: "琵琶湖産の天然アユが大量に遡上する。京阪神から日帰りで楽しめる。" }],
     youtubeLinks: [{ label: "安曇川 アユ釣り", searchQuery: "安曇川 アユ 友釣り 朽木 滋賀", description: "安曇川でのアユ友釣り動画" }],
   },
   {
@@ -333,6 +342,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:30", springSunset: "18:15", summerSunrise: "04:45", summerSunset: "19:05", autumnSunrise: "05:35", autumnSunset: "17:10", winterSunrise: "06:55", winterSunset: "16:45", tip: "田村川は初心者に最適な里川。土山漁協事務所で情報収集してから入川を。" },
     safetyLevel: "safe", safetyNotes: ["穏やかな里川で安全に釣りが楽しめる"],
+    gearGuides: [{ targetFish: "アマゴ", method: "エサ釣り", difficulty: "intermediate", rod: "渓流竿 5.3〜6.1m", reel: "リール不要（延べ竿使用）", line: "ナイロン 0.3〜0.6号", hook: "渓流針 4〜6号", otherItems: ["目印（マーカー）", "ガン玉", "ブドウ虫・川虫"], tip: "田村川は初心者に最適な里川。土山漁協事務所で情報収集してから入川を。" }],
     youtubeLinks: [{ label: "野洲川 渓流釣り", searchQuery: "野洲川 渓流 アマゴ 土山 滋賀", description: "野洲川上流での渓流釣り動画" }],
   },
   {
@@ -357,6 +367,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:30", springSunset: "18:15", summerSunrise: "04:45", summerSunset: "19:05", autumnSunrise: "05:35", autumnSunset: "17:10", winterSunrise: "06:55", winterSunset: "16:45", tip: "愛知崖は屈指の渓相。大型イワナ・アマゴが潜む。永源寺の紅葉は11月が見頃。" },
     safetyLevel: "caution", safetyNotes: ["渓谷部は足場が悪い", "上流部はクマ出没注意"],
+    gearGuides: [{ targetFish: "イワナ・アマゴ", method: "エサ釣り", difficulty: "intermediate", rod: "渓流竿 5.3〜6.1m", reel: "リール不要（延べ竿使用）", line: "ナイロン 0.3〜0.6号", hook: "渓流針 4〜6号", otherItems: ["目印（マーカー）", "ガン玉", "ブドウ虫・川虫"], tip: "100を超える谷がある渓流の宝庫。大型イワナ・アマゴが狙える。永源寺の紅葉と合わせて。" }],
     youtubeLinks: [{ label: "愛知川 渓流釣り", searchQuery: "愛知川 永源寺 イワナ アマゴ 渓流釣り", description: "愛知川上流での渓流釣り動画" }],
   },
   // ===== 兵庫県 =====
@@ -382,6 +393,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:30", springSunset: "18:25", summerSunrise: "04:45", summerSunset: "19:15", autumnSunrise: "05:35", autumnSunset: "17:15", winterSunrise: "07:00", winterSunset: "16:50", tip: "コウノトリの里・但馬の大自然の中で渓流釣りが楽しめる。あゆ公園は初心者・ファミリー向け。" },
     safetyLevel: "safe", safetyNotes: ["あゆ公園はファミリーで安全に楽しめる"],
+    gearGuides: [{ targetFish: "ヤマメ・アマゴ", method: "ルアー釣り", difficulty: "beginner", rod: "トラウトロッド 5〜6ft UL", reel: "スピニングリール 1000〜2000番", line: "ナイロン 3lb", hook: "スプーン 2〜5g", otherItems: ["ランディングネット", "リリーサー"], tip: "コウノトリの里・但馬の大自然の中で渓流釣り。スプーンをゆっくり巻くのが基本。" }],
     youtubeLinks: [{ label: "円山川 渓流釣り", searchQuery: "円山川 養父 ヤマメ アマゴ 渓流釣り 兵庫", description: "円山川水系での渓流釣り動画" }],
   },
   {
@@ -406,6 +418,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:35", springSunset: "18:20", summerSunrise: "04:50", summerSunset: "19:10", autumnSunrise: "05:40", autumnSunset: "17:10", winterSunrise: "07:00", winterSunset: "16:50", tip: "播磨の里川で小物釣りからアユまで幅広く楽しめる。" },
     safetyLevel: "safe", safetyNotes: ["穏やかな里川で初心者に最適"],
+    gearGuides: [{ targetFish: "オイカワ・フナ", method: "ウキ釣り", difficulty: "beginner", rod: "延べ竿 3.6〜4.5m", reel: "リール不要（延べ竿使用）", line: "ナイロン 0.8〜1号", hook: "袖針 3〜5号", otherItems: ["玉ウキ", "ガン玉", "練りエサまたはサシ（紅サシ）"], tip: "播磨の里川で小物釣りからアユまで幅広く楽しめる。流れの緩い淵やトロ場を狙う。" }],
     youtubeLinks: [{ label: "加古川 アユ釣り", searchQuery: "加古川 アユ 釣り 西脇 兵庫", description: "加古川上流でのアユ釣り動画" }],
   },
   {
@@ -429,6 +442,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:35", springSunset: "18:20", summerSunrise: "04:50", summerSunset: "19:10", autumnSunrise: "05:40", autumnSunset: "17:10", winterSunrise: "07:00", winterSunset: "16:50", tip: "神戸から日帰り可能な本格渓流。三方川合流点が特におすすめ。" },
     safetyLevel: "caution", safetyNotes: ["山間部のため天候急変に注意", "クマ出没注意"],
+    gearGuides: [{ targetFish: "アマゴ", method: "ルアー釣り", difficulty: "beginner", rod: "トラウトロッド 5〜6ft UL", reel: "スピニングリール 1000〜2000番", line: "ナイロン 3lb", hook: "スプーン 2〜5g", otherItems: ["ランディングネット", "リリーサー"], tip: "神戸から日帰り可能な本格渓流。三方川合流点が特におすすめ。カラーローテーションが大事。" }],
     youtubeLinks: [{ label: "引原川 渓流釣り", searchQuery: "引原川 渓流 アマゴ ルアー 兵庫 宍粟", description: "引原川での渓流ルアー釣り動画" }],
   },
   // ===== 和歌山県 =====
@@ -453,6 +467,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:35", springSunset: "18:15", summerSunrise: "04:50", summerSunset: "19:10", autumnSunrise: "05:40", autumnSunset: "17:10", winterSunrise: "07:00", winterSunset: "16:50", tip: "支流の湯川川は天然アマゴの宝庫。道沿いでアクセスしやすい。" },
     safetyLevel: "safe", safetyNotes: ["道路沿いで入川しやすく安全"],
+    gearGuides: [{ targetFish: "アマゴ", method: "エサ釣り", difficulty: "intermediate", rod: "渓流竿 5.3〜6.1m", reel: "リール不要（延べ竿使用）", line: "ナイロン 0.3〜0.6号", hook: "渓流針 4〜6号", otherItems: ["目印（マーカー）", "ガン玉", "ブドウ虫・川虫"], tip: "支流の湯川川は天然アマゴの宝庫。道沿いでアクセスしやすい。" }],
     youtubeLinks: [{ label: "有田川 渓流釣り", searchQuery: "有田川 アマゴ 渓流釣り 和歌山", description: "有田川でのアマゴ渓流釣り動画" }],
   },
   {
@@ -476,6 +491,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:40", springSunset: "18:15", summerSunrise: "04:55", summerSunset: "19:10", autumnSunrise: "05:45", autumnSunset: "17:10", winterSunrise: "07:00", winterSunset: "16:55", tip: "本州最南端のアユ河川。一枚岩の前で竿を出す贅沢な釣り体験。" },
     safetyLevel: "caution", safetyNotes: ["七川ダム放水時は水位変動あり", "上流部は道路が狭い"],
+    gearGuides: [{ targetFish: "アユ", method: "友釣り", difficulty: "advanced", rod: "鮎竿 8〜9m", reel: "リール不要（延べ竿使用）", line: "メタルライン 0.05〜0.1号", hook: "掛け針（3本イカリ）7〜8号", otherItems: ["オトリ缶", "タモ網", "鮎タイツ"], tip: "本州最南端のアユ河川。一枚岩の前で竿を出す贅沢な釣り体験。" }],
     youtubeLinks: [{ label: "古座川 アユ釣り", searchQuery: "古座川 アユ アマゴ 友釣り 和歌山", description: "古座川での釣り動画" }],
   },
   // ===== 奈良県 =====
@@ -524,6 +540,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:35", springSunset: "18:15", summerSunrise: "04:55", summerSunset: "19:10", autumnSunrise: "05:40", autumnSunset: "17:10", winterSunrise: "07:00", winterSunset: "16:50", tip: "紀伊山地の秘境。天然アマゴの美しい朱点は一見の価値あり。" },
     safetyLevel: "caution", safetyNotes: ["山奥のためアクセスに時間がかかる", "携帯圏外の区間あり", "シカ・イノシシに注意"],
+    gearGuides: [{ targetFish: "アマゴ", method: "エサ釣り", difficulty: "intermediate", rod: "渓流竿 5.3〜6.1m", reel: "リール不要（延べ竿使用）", line: "ナイロン 0.3〜0.6号", hook: "渓流針 4〜6号", otherItems: ["目印（マーカー）", "ガン玉", "ブドウ虫・川虫"], tip: "紀伊山地の秘境。天然アマゴの美しい朱点は一見の価値あり。遊漁券が必要。" }],
     youtubeLinks: [{ label: "北山川 アマゴ釣り", searchQuery: "北山川 下北山村 アマゴ 渓流釣り 奈良", description: "北山川でのアマゴ釣り動画" }],
   },
   {
@@ -546,6 +563,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:35", springSunset: "18:15", summerSunrise: "04:50", summerSunset: "19:10", autumnSunrise: "05:40", autumnSunset: "17:10", winterSunrise: "07:00", winterSunset: "16:50", tip: "吉野杉の源流の里。中奥川は放流量が多く安定した釣果が期待できる。" },
     safetyLevel: "caution", safetyNotes: ["ダム放水時は水位変動あり", "上流部は足場が悪い"],
+    gearGuides: [{ targetFish: "アマゴ", method: "エサ釣り", difficulty: "intermediate", rod: "渓流竿 5.3〜6.1m", reel: "リール不要（延べ竿使用）", line: "ナイロン 0.3〜0.6号", hook: "渓流針 4〜6号", otherItems: ["目印（マーカー）", "ガン玉", "ブドウ虫・川虫"], tip: "吉野杉の源流の里。中奥川は放流量が多く安定した釣果が期待できる。" }],
     youtubeLinks: [{ label: "川上村 渓流釣り", searchQuery: "川上村 渓流 アマゴ 吉野 釣り 奈良", description: "川上村での渓流釣り動画" }],
   },
   // ===== 大阪府 =====
@@ -570,6 +588,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:35", springSunset: "18:15", summerSunrise: "04:50", summerSunset: "19:10", autumnSunrise: "05:40", autumnSunset: "17:10", winterSunrise: "07:00", winterSunset: "16:50", tip: "大阪市内から気軽にアクセスできる淡水釣りスポット。小物釣り入門に最適。" },
     safetyLevel: "safe", safetyNotes: ["穏やかな里川で安全"],
+    gearGuides: [{ targetFish: "オイカワ・カワムツ", method: "ウキ釣り", difficulty: "beginner", rod: "延べ竿 3.6〜4.5m", reel: "リール不要（延べ竿使用）", line: "ナイロン 0.8〜1号", hook: "袖針 3〜5号", otherItems: ["玉ウキ", "ガン玉", "練りエサまたはサシ（紅サシ）"], tip: "大阪市内から気軽にアクセスできる淡水釣りスポット。小物釣り入門に最適。" }],
     youtubeLinks: [{ label: "石川 河内長野 釣り", searchQuery: "石川 河内長野 オイカワ 釣り 大阪", description: "石川での小物釣り動画" }],
   },
   // ===== 福井県（追加）=====
@@ -594,6 +613,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:25", springSunset: "18:25", summerSunrise: "04:35", summerSunset: "19:15", autumnSunrise: "05:30", autumnSunset: "17:15", winterSunrise: "06:55", winterSunset: "16:45", tip: "丸岡城（日本最古の天守）観光と合わせて。あわら温泉も近い。" },
     safetyLevel: "safe", safetyNotes: ["穏やかな里川で安全"],
+    gearGuides: [{ targetFish: "オイカワ・フナ", method: "ウキ釣り", difficulty: "beginner", rod: "延べ竿 3.6〜4.5m", reel: "リール不要（延べ竿使用）", line: "ナイロン 0.8〜1号", hook: "袖針 3〜5号", otherItems: ["玉ウキ", "ガン玉", "練りエサまたはサシ（紅サシ）"], tip: "丸岡城観光と合わせて。あわら温泉も近い穏やかな里川。" }],
     youtubeLinks: [{ label: "竹田川 釣り", searchQuery: "竹田川 アユ 釣り 坂井 福井", description: "竹田川での釣り動画" }],
   },
   // ===== 富山県（追加）=====
@@ -619,6 +639,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:20", springSunset: "18:25", summerSunrise: "04:30", summerSunset: "19:15", autumnSunrise: "05:25", autumnSunset: "17:15", winterSunrise: "06:50", winterSunset: "16:40", tip: "春のサクラマスは全国からアングラーが訪れるビッグフィールド。" },
     safetyLevel: "caution", safetyNotes: ["大河川のためウェーディングは注意", "増水時は水位変動が大きい"],
+    gearGuides: [{ targetFish: "アユ", method: "友釣り", difficulty: "advanced", rod: "鮎竿 8〜9m", reel: "リール不要（延べ竿使用）", line: "メタルライン 0.05〜0.1号", hook: "掛け針（3本イカリ）7〜8号", otherItems: ["オトリ缶", "タモ網", "鮎タイツ"], tip: "飛騨高山から日本海に注ぐ大河。春のサクラマス釣りは全国から釣り人が集まる。" }],
     youtubeLinks: [{ label: "神通川 アユ釣り", searchQuery: "神通川 アユ サクラマス 友釣り 富山", description: "神通川での釣り動画" }],
   },
   // ===== 愛知県（追加）=====
@@ -644,6 +665,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:30", springSunset: "18:10", summerSunrise: "04:45", summerSunset: "19:00", autumnSunrise: "05:35", autumnSunset: "17:05", winterSunrise: "06:55", winterSunset: "16:40", tip: "長篠・設楽原の合戦で有名な歴史の地。鳳来峡の景色も素晴らしい。" },
     safetyLevel: "safe", safetyNotes: ["足場が比較的良く初心者にも適する"],
+    gearGuides: [{ targetFish: "オイカワ・カワムツ", method: "ウキ釣り", difficulty: "beginner", rod: "延べ竿 3.6〜4.5m", reel: "リール不要（延べ竿使用）", line: "ナイロン 0.8〜1号", hook: "袖針 3〜5号", otherItems: ["玉ウキ", "ガン玉", "練りエサまたはサシ（紅サシ）"], tip: "鳳来峡の景色が素晴らしいフィールド。長篠城跡など歴史観光と合わせた釣行も人気。" }],
     youtubeLinks: [{ label: "豊川 渓流釣り", searchQuery: "豊川 鳳来峡 アユ アマゴ 釣り 新城", description: "豊川上流での釣り動画" }],
   },
   // ===== 三重県（追加）=====
@@ -668,6 +690,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:35", springSunset: "18:10", summerSunrise: "04:50", summerSunset: "19:05", autumnSunrise: "05:40", autumnSunset: "17:05", winterSunrise: "06:55", winterSunset: "16:45", tip: "波瀬地区は特に渓相が美しい。松阪牛と合わせた贅沢な釣行を。" },
     safetyLevel: "caution", safetyNotes: ["上流部は道路が狭い", "増水時は入川禁止"],
+    gearGuides: [{ targetFish: "アマゴ", method: "エサ釣り", difficulty: "intermediate", rod: "渓流竿 5.3〜6.1m", reel: "リール不要（延べ竿使用）", line: "ナイロン 0.3〜0.6号", hook: "渓流針 4〜6号", otherItems: ["目印（マーカー）", "ガン玉", "ブドウ虫・川虫"], tip: "波瀬地区は特に渓相が美しい。松阪牛と合わせた贅沢な釣行を。" }],
     youtubeLinks: [{ label: "櫛田川 渓流釣り", searchQuery: "櫛田川 アマゴ 渓流釣り 三重 松阪", description: "櫛田川での渓流釣り動画" }],
   },
 ];

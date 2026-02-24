@@ -6,7 +6,6 @@ import {
   Star,
   MapPin,
   Car,
-  Clock,
   ChevronLeft,
   Fish,
   Compass,
@@ -25,7 +24,6 @@ import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, type
 import { getShopsForSpot } from "@/lib/data/shops";
 import { getPrefectureByName } from "@/lib/data/prefectures";
 import { SeasonCalendar } from "@/components/spots/season-calendar";
-import { BestTime } from "@/components/spots/best-time";
 import { TackleCard } from "@/components/spots/tackle-card";
 import { TideMazumeInfo } from "@/components/spots/tide-mazume-info";
 import { FavoriteButton } from "@/components/spots/favorite-button";
@@ -308,9 +306,8 @@ export default async function SpotDetailPage({ params }: PageProps) {
     ],
   };
 
-  // 夜釣り可能かどうかの判定（bestTimesに夜があるか、catchableFishのrecommendedTimeに「夜」を含む場合）
+  // 夜釣り可能かどうかの判定（catchableFishのrecommendedTimeに「夜」を含む場合）
   const isNightFishing =
-    spot.bestTimes.some((bt) => bt.label.includes("夜")) ||
     spot.catchableFish.some((cf) => cf.recommendedTime.includes("夜"));
 
   // Get nearby spots for internal linking (exclude self, top 5 by Haversine distance)
@@ -557,17 +554,6 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 />
               </div>
             )}
-          </section>
-
-          <Separator />
-
-          {/* Best time */}
-          <section id="best-time">
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
-              <Clock className="size-5" />
-              {spot.name}のおすすめ釣り時間帯
-            </h2>
-            <BestTime bestTimes={spot.bestTimes} />
           </section>
 
           {/* マヅメ・潮汐情報 */}

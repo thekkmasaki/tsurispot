@@ -284,7 +284,7 @@ export default function Home() {
       </section>
 
       {/* 初心者スタートバナー */}
-      <section className="mx-auto w-full max-w-5xl px-4 pt-6 sm:px-6 sm:pt-10">
+      <section className="mx-auto w-full max-w-5xl px-4 pt-10 sm:px-6 sm:pt-10">
         <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 p-6 text-white sm:p-8">
           <div className="relative z-10">
             <div className="mb-1 text-sm font-medium text-emerald-100">はじめての方へ</div>

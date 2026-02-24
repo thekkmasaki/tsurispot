@@ -1,4 +1,4 @@
-import { FishingSpot, FishSpecies } from "@/types";
+import { FishingSpot, FishSpecies, GearGuide } from "@/types";
 import { getFishBySlug } from "./fish";
 import { regions } from "./regions";
 
@@ -13,6 +13,91 @@ function region(id: string) {
   if (!r) throw new Error(`Region not found: ${id}`);
   return r;
 }
+
+// gear定数
+const gearSabiki: GearGuide = {
+  targetFish: "アジ・サバ・イワシ",
+  method: "サビキ釣り",
+  difficulty: "beginner",
+  rod: "磯竿3号 3.6〜4.5m",
+  reel: "スピニングリール 2500番",
+  line: "ナイロン3号",
+  hook: "サビキ仕掛け 5〜7号",
+  otherItems: ["コマセカゴ", "アミエビ", "バケツ"],
+  tip: "コマセは少しずつ出すのがコツ。夕マヅメが特に釣果がよい。"
+};
+
+const gearNage: GearGuide = {
+  targetFish: "キス・カレイ",
+  method: "投げ釣り",
+  difficulty: "beginner",
+  rod: "投げ竿 3.9〜4.25m",
+  reel: "スピニングリール 3000〜4000番",
+  line: "ナイロン4号",
+  hook: "流線針 7〜9号",
+  otherItems: ["天秤オモリ 20〜25号", "青イソメ", "竿立て"],
+  tip: "砂地を狙って遠投。アタリは小さいのでラインを張りすぎないこと。"
+};
+
+const gearRock: GearGuide = {
+  targetFish: "カサゴ・メバル",
+  method: "穴釣り・根魚釣り",
+  difficulty: "beginner",
+  rod: "穴釣りロッド 1.1〜1.5m",
+  reel: "小型両軸リール",
+  line: "フロロ3号",
+  hook: "ブラクリ 3〜5号",
+  otherItems: ["アオイソメ", "サバの切り身"],
+  tip: "テトラの隙間に落とし込み、底に着いたら少し持ち上げて待つ。"
+};
+
+const gearUki: GearGuide = {
+  targetFish: "クロダイ・メジナ",
+  method: "ウキフカセ釣り",
+  difficulty: "intermediate",
+  rod: "磯竿1.5〜2号 5.3m",
+  reel: "スピニングリール 2500〜3000番",
+  line: "ナイロン2号",
+  hook: "チヌ針3〜4号",
+  otherItems: ["ウキ", "オキアミ", "コマセ"],
+  tip: "潮の流れに乗せてウキを流すのがコツ。"
+};
+
+const gearEging: GearGuide = {
+  targetFish: "アオリイカ",
+  method: "エギング",
+  difficulty: "intermediate",
+  rod: "エギングロッド 8.6ft ML",
+  reel: "スピニングリール 2500番",
+  line: "PE 0.6号",
+  hook: "エギ 3〜3.5号",
+  otherItems: ["リーダー フロロ2号", "ギャフ", "イカ締めピック"],
+  tip: "秋イカは3号エギ、春の親イカは3.5〜4号が効果的。"
+};
+
+const gearJig: GearGuide = {
+  targetFish: "ブリ・ヒラマサ・カンパチ",
+  method: "ショアジギング",
+  difficulty: "intermediate",
+  rod: "ショアジギングロッド M〜MH 10ft",
+  reel: "スピニングリール 4000〜5000番",
+  line: "PE 1〜1.5号",
+  hook: "メタルジグ 30〜60g",
+  otherItems: ["リーダー フロロ5号", "プライヤー"],
+  tip: "朝マヅメの時合いに集中。ジャークのリズムを一定に保つ。"
+};
+
+const gearLure: GearGuide = {
+  targetFish: "シーバス",
+  method: "ルアー釣り",
+  difficulty: "intermediate",
+  rod: "シーバスロッド 9ft ML",
+  reel: "スピニングリール 3000番",
+  line: "PE 1号",
+  hook: "ミノー 80〜120mm",
+  otherItems: ["リーダー フロロ5号", "スナップ", "プライヤー"],
+  tip: "常夜灯周りの明暗部を狙うのが基本。"
+};
 
 export const sagamiIzuSpots: FishingSpot[] = [
   // ===== 熱海エリア =====
@@ -76,6 +161,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
       { label: "多賀港 釣り", searchQuery: "多賀港 熱海 カサゴ メバル 穴釣り", description: "多賀港での根魚釣り動画" },
       { label: "多賀 メバリング", searchQuery: "熱海 多賀 メバリング", description: "多賀港でのメバリング動画" },
     ],
+    gearGuides: [gearRock, gearSabiki],
   },
   {
     id: "si3", name: "初島堤防", slug: "hatsushima-breakwater",
@@ -147,6 +233,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
       { label: "長浜海岸 釣り", searchQuery: "熱海 長浜海岸 キス 投げ釣り", description: "長浜海岸での投げ釣り動画" },
       { label: "長浜 根魚", searchQuery: "長浜海岸 熱海 カサゴ 釣り", description: "長浜海岸での根魚釣り動画" },
     ],
+    gearGuides: [gearNage, gearRock, gearEging, gearJig],
   },
 
   // ===== 伊東エリア =====
@@ -240,6 +327,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
       { label: "いるか浜 釣り", searchQuery: "伊東 いるか浜 キス 投げ釣り", description: "いるか浜でのキス釣り動画" },
       { label: "伊東 投げ釣り", searchQuery: "伊東市 キス ちょい投げ", description: "伊東でのキス釣り動画" },
     ],
+    gearGuides: [gearNage, gearSabiki],
   },
   {
     id: "si8", name: "汐吹崎", slug: "shiobuki-zaki",
@@ -340,6 +428,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
       { label: "八幡野港 釣り", searchQuery: "八幡野港 エギング 釣り 東伊豆", description: "八幡野港での釣り動画" },
       { label: "八幡野 サビキ", searchQuery: "八幡野港 サビキ アジ", description: "八幡野港でのサビキ釣り動画" },
     ],
+    gearGuides: [gearSabiki, gearEging, gearRock],
   },
   {
     id: "si11", name: "赤沢港", slug: "akazawa-port",
@@ -368,6 +457,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
       { label: "赤沢港 釣り", searchQuery: "赤沢港 東伊豆 穴釣り カサゴ", description: "赤沢港での根魚釣り動画" },
       { label: "赤沢 メバリング", searchQuery: "赤沢 東伊豆 メバリング", description: "赤沢でのメバリング動画" },
     ],
+    gearGuides: [gearRock, gearEging],
   },
   {
     id: "si12", name: "北川港", slug: "hokkawa-port",
@@ -395,6 +485,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
       { label: "北川港 釣り", searchQuery: "北川港 東伊豆 サビキ 釣り", description: "北川港での釣り動画" },
       { label: "東伊豆 穴釣り", searchQuery: "東伊豆町 穴釣り カサゴ", description: "東伊豆での穴釣り動画" },
     ],
+    gearGuides: [gearSabiki, gearRock],
   },
   {
     id: "si13", name: "大川港", slug: "okawa-port",
@@ -423,6 +514,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
       { label: "大川港 釣り", searchQuery: "大川港 東伊豆 釣り", description: "大川港での釣り動画" },
       { label: "東伊豆 メバリング", searchQuery: "東伊豆 メバリング ナイトゲーム", description: "東伊豆でのメバリング動画" },
     ],
+    gearGuides: [gearSabiki, gearRock],
   },
   {
     id: "si14", name: "稲取港", slug: "inatori-port",
@@ -523,6 +615,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
       { label: "河津浜 釣り", searchQuery: "河津浜 キス 投げ釣り", description: "河津浜でのキス釣り動画" },
       { label: "河津 ヒラメ", searchQuery: "河津 サーフ ヒラメ 釣り", description: "河津でのヒラメ釣り動画" },
     ],
+    gearGuides: [gearNage],
   },
   {
     id: "si17", name: "今井浜", slug: "imaihama-beach",
@@ -550,6 +643,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
       { label: "今井浜 釣り", searchQuery: "今井浜 キス 投げ釣り 河津", description: "今井浜でのキス釣り動画" },
       { label: "今井浜 サーフ", searchQuery: "今井浜 サーフフィッシング ヒラメ", description: "今井浜でのサーフルアー動画" },
     ],
+    gearGuides: [gearNage],
   },
   {
     id: "si18", name: "白浜海岸", slug: "shirahama-coast-shimoda",
@@ -584,6 +678,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
       { label: "白浜 釣り", searchQuery: "下田 白浜 キス 投げ釣り", description: "白浜海岸でのキス釣り動画" },
       { label: "白浜 ショアジギング", searchQuery: "下田 白浜 ショアジギング イナダ", description: "白浜でのショアジギング動画" },
     ],
+    gearGuides: [gearNage, gearJig, gearRock, gearEging],
   },
   {
     id: "si19", name: "須崎港", slug: "suzaki-port-shimoda",
@@ -691,6 +786,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
       { label: "田牛 釣り", searchQuery: "田牛海岸 磯釣り 下田", description: "田牛海岸での釣り動画" },
       { label: "田牛 サンドスキー", searchQuery: "田牛 サンドスキー 下田 釣り", description: "田牛海岸の紹介動画" },
     ],
+    gearGuides: [gearUki, gearRock, gearNage],
   },
   {
     id: "si22", name: "弓ヶ浜", slug: "yumigahama-beach",
@@ -718,6 +814,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
       { label: "弓ヶ浜 釣り", searchQuery: "弓ヶ浜 キス 投げ釣り 南伊豆", description: "弓ヶ浜でのキス釣り動画" },
       { label: "南伊豆 サーフ", searchQuery: "南伊豆 サーフ ヒラメ 弓ヶ浜", description: "弓ヶ浜でのサーフフィッシング動画" },
     ],
+    gearGuides: [gearNage],
   },
   {
     id: "si23", name: "石廊崎港", slug: "irozaki-port",
@@ -857,6 +954,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
       { label: "子浦港 釣り", searchQuery: "子浦港 南伊豆 サビキ 釣り", description: "子浦港での釣り動画" },
       { label: "子浦 カワハギ", searchQuery: "子浦港 カワハギ 釣り 南伊豆", description: "子浦港でのカワハギ釣り動画" },
     ],
+    gearGuides: [gearSabiki, gearUki],
   },
   {
     id: "si27", name: "下田外浦港", slug: "shimoda-sotora-port",
@@ -890,6 +988,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
       { label: "外浦港 釣り", searchQuery: "外浦港 下田 サビキ 釣り", description: "外浦港での釣り動画" },
       { label: "下田 エギング", searchQuery: "下田 外浦 エギング アオリイカ", description: "下田外浦でのエギング動画" },
     ],
+    gearGuides: [gearSabiki, gearEging, gearRock, gearJig],
   },
 
   // ===== 伊東〜東伊豆 追加磯スポット =====

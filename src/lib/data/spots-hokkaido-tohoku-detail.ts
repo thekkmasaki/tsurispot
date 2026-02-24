@@ -1,4 +1,4 @@
-import type { FishingSpot, FishSpecies } from "@/types";
+import type { FishingSpot, FishSpecies, GearGuide } from "@/types";
 import { getFishBySlug } from "./fish";
 
 function fish(slug: string): FishSpecies {
@@ -30,6 +30,142 @@ const btNight = [
   { label: "夕マヅメ", timeRange: "16:00〜18:30", rating: "good" as const },
   { label: "夜", timeRange: "19:00〜23:00", rating: "best" as const },
 ];
+
+// =============================================
+// 装備ガイド定数
+// =============================================
+
+const gearSabiki: GearGuide = {
+  targetFish: "アジ・サバ・イワシ",
+  method: "サビキ釣り",
+  difficulty: "beginner",
+  rod: "磯竿3号 3.6〜4.5m",
+  reel: "スピニングリール 2500番",
+  line: "ナイロン3号",
+  hook: "サビキ仕掛け 5〜7号",
+  otherItems: ["コマセカゴ", "アミエビ", "バケツ"],
+  tip: "コマセは少しずつ出すのがコツ。夕マヅメが特に釣果がよい。",
+};
+
+const gearNage: GearGuide = {
+  targetFish: "キス・カレイ",
+  method: "投げ釣り",
+  difficulty: "beginner",
+  rod: "投げ竿 3.9〜4.25m",
+  reel: "スピニングリール 3000〜4000番",
+  line: "ナイロン4号",
+  hook: "流線針 7〜9号",
+  otherItems: ["天秤オモリ 20〜25号", "青イソメ", "竿立て"],
+  tip: "砂地を狙って遠投。アタリは小さいのでラインを張りすぎないこと。",
+};
+
+const gearRock: GearGuide = {
+  targetFish: "カサゴ・メバル・アイナメ",
+  method: "穴釣り・根魚釣り",
+  difficulty: "beginner",
+  rod: "穴釣りロッド 1.1〜1.5m",
+  reel: "小型両軸リール",
+  line: "フロロ3号",
+  hook: "ブラクリ 3〜5号",
+  otherItems: ["アオイソメ", "サバの切り身"],
+  tip: "テトラの隙間に落とし込み、底に着いたら少し持ち上げて待つ。",
+};
+
+const gearUki: GearGuide = {
+  targetFish: "クロダイ・メジナ",
+  method: "ウキフカセ釣り",
+  difficulty: "intermediate",
+  rod: "磯竿1.5〜2号 5.3m",
+  reel: "スピニングリール 2500〜3000番",
+  line: "ナイロン2号",
+  hook: "チヌ針3〜4号",
+  otherItems: ["ウキ", "オキアミ", "コマセ"],
+  tip: "潮の流れに乗せてウキを流すのがコツ。",
+};
+
+const gearEging: GearGuide = {
+  targetFish: "アオリイカ・ヤリイカ",
+  method: "エギング",
+  difficulty: "intermediate",
+  rod: "エギングロッド 8.6ft ML",
+  reel: "スピニングリール 2500番",
+  line: "PE 0.6号",
+  hook: "エギ 3〜3.5号",
+  otherItems: ["リーダー フロロ2号", "ギャフ", "イカ締めピック"],
+  tip: "秋イカは3号エギ、春の親イカは3.5〜4号が効果的。",
+};
+
+const gearJig: GearGuide = {
+  targetFish: "ブリ・ヒラマサ・カンパチ",
+  method: "ショアジギング",
+  difficulty: "intermediate",
+  rod: "ショアジギングロッド M〜MH 10ft",
+  reel: "スピニングリール 4000〜5000番",
+  line: "PE 1〜1.5号",
+  hook: "メタルジグ 30〜60g",
+  otherItems: ["リーダー フロロ5号", "プライヤー"],
+  tip: "朝マヅメの時合いに集中。ジャークのリズムを一定に保つ。",
+};
+
+const gearLure: GearGuide = {
+  targetFish: "シーバス・ヒラメ・マゴチ",
+  method: "ルアー釣り",
+  difficulty: "intermediate",
+  rod: "シーバスロッド 9ft ML",
+  reel: "スピニングリール 3000番",
+  line: "PE 1号",
+  hook: "ミノー 80〜120mm",
+  otherItems: ["リーダー フロロ5号", "スナップ", "プライヤー"],
+  tip: "常夜灯周りの明暗部を狙うのが基本。ヒラメ狙いは底付近をスローに。",
+};
+
+const gearMebaring: GearGuide = {
+  targetFish: "メバル",
+  method: "メバリング",
+  difficulty: "beginner",
+  rod: "メバリングロッド 7〜8ft UL",
+  reel: "スピニングリール 2000番",
+  line: "フロロ 2.5lb または PE 0.3号",
+  hook: "ジグヘッド 1〜2g + ワーム 2インチ",
+  otherItems: ["リーダー フロロ3lb", "ワーム各種", "ヘッドライト"],
+  tip: "常夜灯周りが好ポイント。表層〜中層をスローにリトリーブ。",
+};
+
+const gearChoinage: GearGuide = {
+  targetFish: "ハゼ・イシモチ",
+  method: "ちょい投げ",
+  difficulty: "beginner",
+  rod: "コンパクトロッド 1.8〜2.7m",
+  reel: "スピニングリール 2000〜2500番",
+  line: "ナイロン2〜3号",
+  hook: "流線針 6〜8号（天秤仕掛け）",
+  otherItems: ["ナス型オモリ 5〜8号", "青イソメ", "バケツ"],
+  tip: "軽く投げて底を引きずるように探る。ハゼはアタリが明確で初心者にも最適。",
+};
+
+const gearKago: GearGuide = {
+  targetFish: "マダイ",
+  method: "カゴ釣り",
+  difficulty: "intermediate",
+  rod: "磯竿3〜4号 4.5〜5.3m",
+  reel: "スピニングリール 4000〜5000番",
+  line: "ナイロン5号",
+  hook: "マダイ針 8〜10号",
+  otherItems: ["遠投カゴ", "オキアミ", "ウキ（遠投用）"],
+  tip: "コマセを効かせて回遊を待つ。潮目やカケアガリを狙うのがコツ。",
+};
+
+const gearWorm: GearGuide = {
+  targetFish: "クロソイ・カサゴ",
+  method: "ワーム（ロックフィッシュ）",
+  difficulty: "beginner",
+  rod: "ロックフィッシュロッド 7〜8ft M",
+  reel: "スピニングリール 2500番",
+  line: "フロロ 8lb または PE 0.8号",
+  hook: "オフセットフック #1〜2/0 + テキサスリグ",
+  otherItems: ["バレットシンカー 7〜14g", "ワーム 3〜4インチ"],
+  tip: "テトラや岩の隙間にワームを落とし込む。底をしっかり取るのがコツ。",
+};
 
 export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
   // =============================================
@@ -79,6 +215,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearNage, gearRock, gearMebaring],
     safetyLevel: "safe",
     safetyNotes: [
       "南防波堤は足場良好",
@@ -130,6 +267,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearNage, gearSabiki, gearLure, gearWorm, gearRock, gearMebaring],
     safetyLevel: "safe",
     safetyNotes: [
       "岸壁は足場良好",
@@ -179,6 +317,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearNage, gearWorm, gearRock, gearMebaring],
     safetyLevel: "caution",
     safetyNotes: [
       "流氷シーズンは釣り不可",
@@ -229,6 +368,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearNage, gearSabiki, gearWorm, gearRock, gearMebaring],
     safetyLevel: "caution",
     safetyNotes: [
       "流氷期間は釣り不可",
@@ -279,6 +419,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearNage, gearSabiki, gearWorm, gearLure, gearRock, gearMebaring],
     safetyLevel: "caution",
     safetyNotes: [
       "日本最北端のため年間を通じて気温が低い",
@@ -329,6 +470,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearLure, gearNage, gearRock, gearMebaring],
     safetyLevel: "safe",
     safetyNotes: [
       "南防波堤は足場良好",
@@ -379,6 +521,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearRock, gearChoinage, gearNage, gearMebaring],
     safetyLevel: "safe",
     safetyNotes: [
       "小規模漁港で足場良好",
@@ -426,6 +569,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearWorm, gearLure, gearRock],
     safetyLevel: "caution",
     safetyNotes: [
       "外防波堤は波が高い日は危険",
@@ -477,6 +621,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearLure, gearJig, gearNage, gearWorm, gearRock, gearMebaring],
     safetyLevel: "safe",
     safetyNotes: [
       "中防波堤は足場良好",
@@ -528,6 +673,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearNage, gearLure, gearSabiki, gearWorm, gearRock, gearMebaring],
     safetyLevel: "safe",
     safetyNotes: [
       "各埠頭とも足場良好で初心者向き",
@@ -578,6 +724,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearUki, gearSabiki, gearWorm, gearNage, gearRock, gearMebaring],
     safetyLevel: "caution",
     safetyNotes: [
       "津軽海峡の潮流が速い",
@@ -629,6 +776,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearNage, gearRock, gearLure, gearJig, gearMebaring],
     safetyLevel: "safe",
     safetyNotes: [
       "港内は足場良好",
@@ -675,6 +823,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearNage, gearLure],
     safetyLevel: "safe",
     safetyNotes: [
       "漁港内は穏やかで安全",
@@ -724,6 +873,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearWorm, gearEging, gearNage, gearRock, gearMebaring],
     safetyLevel: "caution",
     safetyNotes: [
       "外防波堤は高波時に危険",
@@ -774,6 +924,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearNage, gearRock, gearEging, gearMebaring],
     safetyLevel: "safe",
     safetyNotes: [
       "かもめ島周辺は足場良好",
@@ -829,6 +980,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearUki, gearWorm, gearNage, gearRock, gearChoinage],
     safetyLevel: "danger",
     safetyNotes: [
       "津軽海峡の潮流が非常に速い",
@@ -879,6 +1031,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearWorm, gearRock, gearNage, gearChoinage],
     safetyLevel: "safe",
     safetyNotes: [
       "漁港内は穏やかで安全",
@@ -932,6 +1085,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearJig, gearUki, gearRock, gearNage, gearWorm, gearMebaring, gearChoinage],
     safetyLevel: "safe",
     safetyNotes: [
       "港内は足場良好",
@@ -980,6 +1134,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearUki, gearWorm, gearSabiki],
     safetyLevel: "caution",
     safetyNotes: [
       "日本海の荒天時は釣り不可",
@@ -1032,6 +1187,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearUki, gearJig, gearWorm, gearNage, gearRock, gearMebaring, gearChoinage],
     safetyLevel: "danger",
     safetyNotes: [
       "津軽海峡の潮流が非常に速く危険",
@@ -1088,6 +1244,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearNage, gearRock, gearWorm, gearSabiki, gearMebaring, gearChoinage],
     safetyLevel: "safe",
     safetyNotes: [
       "震災後に整備された防波堤は足場良好",
@@ -1138,6 +1295,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearNage, gearRock, gearSabiki, gearWorm, gearMebaring, gearChoinage],
     safetyLevel: "caution",
     safetyNotes: [
       "防波堤の一部は立入禁止区域あり",
@@ -1185,6 +1343,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearRock, gearWorm, gearNage],
     safetyLevel: "safe",
     safetyNotes: [
       "港内は足場良好",
@@ -1241,6 +1400,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearLure, gearChoinage, gearNage, gearRock, gearSabiki, gearWorm, gearMebaring],
     safetyLevel: "safe",
     safetyNotes: [
       "港内は足場良好",
@@ -1288,6 +1448,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearNage, gearRock, gearWorm, gearChoinage],
     safetyLevel: "safe",
     safetyNotes: [
       "震災後に整備された施設は足場良好",
@@ -1340,6 +1501,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearNage, gearRock, gearChoinage, gearSabiki, gearWorm, gearMebaring],
     safetyLevel: "safe",
     safetyNotes: [
       "内湾は穏やかで安全",
@@ -1392,6 +1554,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearChoinage, gearNage, gearRock, gearLure, gearWorm, gearMebaring],
     safetyLevel: "safe",
     safetyNotes: [
       "港内は足場良好",
@@ -1448,6 +1611,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearNage, gearUki, gearRock, gearWorm, gearMebaring, gearKago],
     safetyLevel: "safe",
     safetyNotes: [
       "セリオン周辺の岸壁は足場良好",
@@ -1497,6 +1661,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btNight,
     tackleRecommendations: [],
+    gearGuides: [gearWorm, gearUki, gearSabiki, gearKago],
     safetyLevel: "caution",
     safetyNotes: [
       "男鹿半島は天候が急変しやすい",
@@ -1544,6 +1709,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearNage, gearSabiki],
     safetyLevel: "safe",
     safetyNotes: [
       "小規模漁港で穏やかな環境",
@@ -1601,6 +1767,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearNage, gearUki, gearRock, gearWorm, gearMebaring, gearKago],
     safetyLevel: "safe",
     safetyNotes: [
       "港内の岸壁は足場良好",
@@ -1652,6 +1819,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearUki, gearSabiki, gearNage, gearWorm, gearRock],
     safetyLevel: "caution",
     safetyNotes: [
       "外港の防波堤は高波時に危険",
@@ -1709,6 +1877,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],
+    gearGuides: [gearNage, gearRock, gearWorm, gearSabiki, gearKago, gearMebaring, gearChoinage],
     safetyLevel: "safe",
     safetyNotes: [
       "港内の岸壁は足場良好で初心者向き",
@@ -1757,6 +1926,7 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning,
     tackleRecommendations: [],
+    gearGuides: [gearNage, gearRock, gearSabiki, gearLure],
     safetyLevel: "safe",
     safetyNotes: [
       "道の駅隣接で施設が充実",

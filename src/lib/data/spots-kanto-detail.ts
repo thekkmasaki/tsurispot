@@ -1,4 +1,4 @@
-import type { FishingSpot, FishSpecies } from "@/types";
+import type { FishingSpot, FishSpecies, GearGuide } from "@/types";
 import { getFishBySlug } from "./fish";
 import { regions } from "./regions";
 
@@ -54,6 +54,20 @@ const btAllDay = [
   { label: "夜", timeRange: "19:00〜21:00", rating: "fair" as const },
 ];
 
+const gearSabiki: GearGuide = { targetFish: "アジ・サバ・イワシ", method: "サビキ釣り", difficulty: "beginner", rod: "磯竿3号 3.6〜4.5m", reel: "スピニングリール 2500番", line: "ナイロン3号", hook: "サビキ仕掛け 5〜7号", otherItems: ["コマセカゴ", "アミエビ", "バケツ"], tip: "コマセは少しずつ出すのがコツ。夕マヅメが特に釣果がよい。" };
+const gearNage: GearGuide = { targetFish: "キス・カレイ", method: "投げ釣り", difficulty: "beginner", rod: "投げ竿 3.9〜4.25m", reel: "スピニングリール 3000〜4000番", line: "ナイロン4号", hook: "流線針 7〜9号", otherItems: ["天秤オモリ 20〜25号", "青イソメ", "竿立て"], tip: "砂地を狙って遠投。アタリは小さいのでラインを張りすぎないこと。" };
+const gearChoinage: GearGuide = { targetFish: "ハゼ・シロギス", method: "ちょい投げ", difficulty: "beginner", rod: "万能竿 2.4〜3.6m", reel: "スピニングリール 2000〜2500番", line: "ナイロン2〜3号", hook: "流線針 6〜8号", otherItems: ["ナス型オモリ 5〜8号", "青イソメ", "バケツ"], tip: "足元から10〜30m程度に投げて底を探る。アタリがあったら少し送り込んでからアワセる。" };
+const gearRock: GearGuide = { targetFish: "カサゴ・メバル", method: "穴釣り・根魚釣り", difficulty: "beginner", rod: "穴釣りロッド 1.1〜1.5m", reel: "小型両軸リール", line: "フロロ3号", hook: "ブラクリ 3〜5号", otherItems: ["アオイソメ", "サバの切り身"], tip: "テトラの隙間に落とし込み、底に着いたら少し持ち上げて待つ。" };
+const gearUki: GearGuide = { targetFish: "クロダイ・メジナ", method: "ウキフカセ釣り", difficulty: "intermediate", rod: "磯竿1.5〜2号 5.3m", reel: "スピニングリール 2500〜3000番", line: "ナイロン2号", hook: "チヌ針3〜4号", otherItems: ["ウキ", "オキアミ", "コマセ"], tip: "潮の流れに乗せてウキを流すのがコツ。" };
+const gearEging: GearGuide = { targetFish: "アオリイカ", method: "エギング", difficulty: "intermediate", rod: "エギングロッド 8.6ft ML", reel: "スピニングリール 2500番", line: "PE 0.6号", hook: "エギ 3〜3.5号", otherItems: ["リーダー フロロ2号", "ギャフ", "イカ締めピック"], tip: "秋イカは3号エギ、春の親イカは3.5〜4号が効果的。" };
+const gearLure: GearGuide = { targetFish: "シーバス", method: "ルアー釣り", difficulty: "intermediate", rod: "シーバスロッド 9ft ML", reel: "スピニングリール 3000番", line: "PE 1号", hook: "ミノー 80〜120mm", otherItems: ["リーダー フロロ5号", "スナップ", "プライヤー"], tip: "常夜灯周りの明暗部を狙うのが基本。" };
+const gearJig: GearGuide = { targetFish: "ブリ・ヒラマサ・カンパチ", method: "ショアジギング", difficulty: "intermediate", rod: "ショアジギングロッド M〜MH 10ft", reel: "スピニングリール 4000〜5000番", line: "PE 1〜1.5号", hook: "メタルジグ 30〜60g", otherItems: ["リーダー フロロ5号", "プライヤー"], tip: "朝マヅメの時合いに集中。ジャークのリズムを一定に保つ。" };
+const gearMebaring: GearGuide = { targetFish: "メバル", method: "メバリング", difficulty: "beginner", rod: "メバリングロッド 7〜8ft UL", reel: "スピニングリール 1000〜2000番", line: "フロロ 2〜3lb", hook: "ジグヘッド 1〜3g + ワーム", otherItems: ["プラグ各種", "スナップ"], tip: "常夜灯の明暗部を軽いジグヘッドでスローに攻める。" };
+const gearTakoegi: GearGuide = { targetFish: "マダコ", method: "タコエギ", difficulty: "beginner", rod: "タコ専用ロッドまたは硬めのルアーロッド", reel: "スピニングリール 3000〜4000番", line: "PE 2〜3号", hook: "タコエギ 3.5号", otherItems: ["リーダー フロロ8号", "タコ入れネット"], tip: "底をズルズル引いて重みを感じたら大きくアワセる。" };
+const gearBukkomi: GearGuide = { targetFish: "イシダイ・アナゴ", method: "ぶっこみ釣り", difficulty: "intermediate", rod: "磯竿3〜4号 4.5〜5.3m", reel: "スピニングリール 4000〜5000番", line: "ナイロン5〜8号", hook: "伊勢尼10〜13号", otherItems: ["中通しオモリ 15〜30号", "サザエ・ウニ（イシダイ）", "青イソメ・サバの切り身（アナゴ）"], tip: "仕掛けを投入したら竿先の変化を見逃さないように集中する。" };
+const gearSaguri: GearGuide = { targetFish: "カサゴ・アイナメ・マダコ", method: "探り釣り", difficulty: "beginner", rod: "短めの万能竿 1.5〜2.1m", reel: "小型スピニングリール 2000番", line: "ナイロン3号", hook: "丸セイゴ 10〜12号", otherItems: ["ナス型オモリ 3〜5号", "アオイソメ"], tip: "堤防の際や岩の隙間をテンポよく探る。アタリがあったら即アワセ。" };
+const gearKago: GearGuide = { targetFish: "マダイ・イサキ", method: "カゴ釣り", difficulty: "intermediate", rod: "遠投磯竿 3〜4号 4.5〜5.3m", reel: "スピニングリール 4000〜5000番", line: "ナイロン4〜6号", hook: "マダイ針 8〜10号", otherItems: ["カゴ天秤", "オキアミ", "コマセ"], tip: "潮に乗せて遠投し、コマセと同調させるのがポイント。" };
+
 export const kantoDetailSpots: FishingSpot[] = [
   // =========================================
   // 東京都（6スポット）※若洲海浜公園は既存のため除外
@@ -79,6 +93,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
     ], bestTimes: btEvening, tackleRecommendations: [],
+    gearGuides: [gearChoinage, gearLure, gearSabiki, gearRock, gearMebaring, gearNage, gearUki, gearTakoegi],
     safetyLevel: "safe", safetyNotes: ["足場良好で柵あり", "飛行機の離発着を間近で見られる", "BBQ利用は要予約"],
   },
   {
@@ -101,6 +116,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
     ], bestTimes: btEvening, tackleRecommendations: [],
+    gearGuides: [gearChoinage, gearNage, gearLure, gearRock, gearMebaring, gearUki, gearTakoegi],
     safetyLevel: "safe", safetyNotes: ["護岸は足場良好", "西なぎさのみ釣り可能（東なぎさは立入禁止）", "駅から近く電車釣行に最適"],
   },
   {
@@ -119,6 +135,7 @@ export const kantoDetailSpots: FishingSpot[] = [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ウキ釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
     ], bestTimes: btNight, tackleRecommendations: [],
+    gearGuides: [gearChoinage, gearLure, gearUki],
     safetyLevel: "safe", safetyNotes: ["護岸は柵付きで安全", "夜間も街灯あり", "周辺にコンビニあり"],
   },
   {
@@ -140,6 +157,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
     ], bestTimes: btNight, tackleRecommendations: [],
+    gearGuides: [gearChoinage, gearLure, gearRock, gearNage, gearUki, gearTakoegi],
     safetyLevel: "safe", safetyNotes: ["遊泳禁止エリアで釣りが可能", "レインボーブリッジの夜景が美しい", "周辺商業施設が充実"],
   },
   {
@@ -162,6 +180,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
     ], bestTimes: btEvening, tackleRecommendations: [],
+    gearGuides: [gearChoinage, gearLure, gearUki, gearRock, gearMebaring, gearNage, gearTakoegi],
     safetyLevel: "safe", safetyNotes: ["護岸は足場良好", "周辺は再開発エリアで清潔", "釣り禁止区域に注意"],
   },
   {
@@ -184,6 +203,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
     ], bestTimes: btEvening, tackleRecommendations: [],
+    gearGuides: [gearChoinage, gearLure, gearUki, gearRock, gearMebaring, gearNage, gearTakoegi],
     safetyLevel: "safe", safetyNotes: ["護岸は足場良好で安全", "運河沿いで波が穏やか", "近隣に駅があり電車釣行向き"],
   },
 
@@ -207,6 +227,7 @@ export const kantoDetailSpots: FishingSpot[] = [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ〜日中", method: "ウキ釣り" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearUki, gearRock],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "外洋側は波が高い日あり要注意", "釣具店が近くにある"],
   },
   {
@@ -231,6 +252,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearLure, gearRock, gearMebaring, gearNage, gearUki, gearTakoegi],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "漁船の出入りに注意", "駅から近く電車釣行に最適"],
   },
   {
@@ -254,6 +276,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearLure, gearUki, gearEging, gearRock, gearNage, gearTakoegi],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好で柵あり", "ヨットハーバー周辺は釣り禁止", "夕日が美しいスポット"],
   },
   {
@@ -275,6 +298,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
     ], bestTimes: btNight, tackleRecommendations: [],
+    gearGuides: [gearLure, gearRock, gearUki, gearNage, gearTakoegi],
     safetyLevel: "safe", safetyNotes: ["護岸から足場良好", "マリーナ内は釣り禁止区域あり", "おしゃれなカフェ・レストラン隣接"],
   },
   {
@@ -295,6 +319,7 @@ export const kantoDetailSpots: FishingSpot[] = [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ〜日中", method: "ウキ釣り" },
       { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btEvening, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearUki, gearLure],
     safetyLevel: "safe", safetyNotes: ["全面柵付きで安全", "管理人常駐", "トイレ・水道完備"],
   },
   {
@@ -320,6 +345,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearChoinage, gearNage, gearLure, gearRock, gearUki, gearTakoegi],
     safetyLevel: "safe", safetyNotes: ["全面柵付き・管理人常駐", "ライフジャケット貸出あり", "荒天時は休園"],
   },
   {
@@ -344,6 +370,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearEging, gearLure, gearRock, gearNage, gearUki, gearTakoegi],
     safetyLevel: "caution", safetyNotes: ["外海側は波が高い日あり", "テトラポッドの上は滑りやすいので注意", "ライフジャケット着用推奨"],
   },
 
@@ -371,6 +398,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearNage, gearLure, gearRock, gearUki, gearTakoegi],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "漁船の出入りに注意", "浮島を望む景観が美しい"],
   },
   {
@@ -395,6 +423,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearNage, gearRock, gearMebaring, gearUki, gearTakoegi, gearLure],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "「ばんや」で食事も楽しめる", "鋸山観光と組み合わせ可能"],
   },
   {
@@ -413,6 +442,7 @@ export const kantoDetailSpots: FishingSpot[] = [
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
     ], bestTimes: btEvening, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearChoinage, gearLure, gearRock],
     safetyLevel: "safe", safetyNotes: ["フェリーの航路に投げ込み禁止", "堤防は足場良好", "鋸山観光との組み合わせがおすすめ"],
   },
   {
@@ -435,6 +465,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btNight, tackleRecommendations: [],
+    gearGuides: [gearLure, gearRock, gearChoinage, gearNage, gearUki, gearTakoegi],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "トイレが近くにないため事前に済ませること", "穴場でのんびり釣り向き"],
   },
   {
@@ -453,6 +484,7 @@ export const kantoDetailSpots: FishingSpot[] = [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ〜日中", method: "ウキ釣り" },
       { fish: fish("inada"), monthStart: 7, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearUki, gearLure],
     safetyLevel: "safe", safetyNotes: ["堤防は比較的足場良好", "先端部は潮が速い場合あり注意", "漁船の往来に注意"],
   },
   {
@@ -477,6 +509,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btEvening, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearNage, gearUki, gearLure, gearRock, gearTakoegi],
     safetyLevel: "safe", safetyNotes: ["桟橋は柵付きで安全", "夕日が美しい絶景ポイント", "渚の駅にトイレ・売店あり"],
   },
   {
@@ -501,6 +534,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearLure, gearNage, gearRock, gearMebaring, gearUki, gearTakoegi],
     safetyLevel: "caution", safetyNotes: ["外洋側は波が高い日あり要注意", "漁船の往来が多いため注意", "利根川河口は流れが速い"],
   },
   {
@@ -525,6 +559,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearUki, gearBukkomi, gearLure, gearRock, gearMebaring, gearNage, gearTakoegi],
     safetyLevel: "danger", safetyNotes: ["磯場は滑りやすく足場が悪い", "波をかぶることがあるため要注意", "ライフジャケット・スパイクシューズ必須", "単独釣行は避けること"],
   },
   {
@@ -550,6 +585,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearNage, gearBukkomi, gearRock, gearMebaring, gearUki, gearTakoegi, gearLure],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "屏風ヶ浦の絶景を楽しめる", "風が強い日は釣りにくい"],
   },
   {
@@ -568,6 +604,7 @@ export const kantoDetailSpots: FishingSpot[] = [
       { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearLure, gearSabiki],
     safetyLevel: "caution", safetyNotes: ["外洋側は波が高い場合あり", "サーファーとの距離に注意", "先端部は潮が速い"],
   },
   {
@@ -591,6 +628,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearSaguri, gearSabiki, gearLure, gearRock, gearMebaring, gearNage, gearUki],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "漁船の往来に注意", "朝市で新鮮な魚介が購入可能"],
   },
   {
@@ -614,6 +652,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearUki, gearBukkomi, gearSaguri, gearMebaring, gearNage, gearTakoegi, gearLure],
     safetyLevel: "danger", safetyNotes: ["磯場は足場が悪く滑りやすい", "波をかぶるポイントあり要注意", "スパイクシューズ・ライフジャケット必須", "ハイキングコースの遊歩道あり"],
   },
   {
@@ -638,6 +677,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearEging, gearUki, gearRock, gearMebaring, gearNage, gearTakoegi, gearLure],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "港内は穏やかで安全", "周辺の磯場は上級者向け"],
   },
   {
@@ -657,6 +697,7 @@ export const kantoDetailSpots: FishingSpot[] = [
       { fish: fish("kawahagi"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "ウキ釣り" },
       { fish: fish("madai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearNage, gearUki],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "鯛の浦方面は釣り禁止区域あり注意", "小湊観光と組み合わせ可能"],
   },
   {
@@ -682,6 +723,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearLure, gearEging, gearUki, gearRock, gearMebaring, gearNage, gearTakoegi],
     safetyLevel: "caution", safetyNotes: ["堤防先端は波しぶきがかかることあり", "テトラポッド上は足場注意", "ライフジャケット着用推奨"],
   },
 
@@ -710,6 +752,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearLure, gearRock, gearMebaring, gearNage, gearUki, gearTakoegi],
     safetyLevel: "caution", safetyNotes: ["外洋に面しているため波が高い日あり", "漁船の往来が多いため注意", "大洗磯前神社が近く観光も楽しめる"],
   },
   {
@@ -729,6 +772,7 @@ export const kantoDetailSpots: FishingSpot[] = [
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("ainame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "探り釣り" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearNage, gearSaguri],
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "おさかな市場で新鮮な海産物が購入可能", "国営ひたち海浜公園が近い"],
   },
   {
@@ -754,6 +798,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearLure, gearRock, gearMebaring, gearNage, gearUki, gearTakoegi],
     safetyLevel: "caution", safetyNotes: ["工業港エリアは立入禁止区域あり注意", "外洋側は波が高い日あり", "ライフジャケット着用推奨"],
   },
   {
@@ -778,6 +823,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearLure, gearRock, gearMebaring, gearNage, gearUki, gearTakoegi],
     safetyLevel: "danger", safetyNotes: ["南防波堤は絶対に立入禁止（死亡事故多発）", "港公園護岸は比較的安全", "工業地帯のため立入制限エリアが多い", "必ず許可されたエリアで釣りをすること"],
   },
 
@@ -807,6 +853,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btAllDay, tackleRecommendations: [],
+    gearGuides: [gearLure, gearUki, gearRock, gearMebaring, gearNage, gearTakoegi],
     safetyLevel: "safe", safetyNotes: ["河川敷は平坦で歩きやすい", "増水時は絶対に近づかないこと", "バーベキューエリアも隣接"],
   },
   {
@@ -825,6 +872,7 @@ export const kantoDetailSpots: FishingSpot[] = [
       { fish: fish("koi"), monthStart: 3, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
       { fish: fish("wakasagi"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
     ], bestTimes: btAllDay, tackleRecommendations: [],
+    gearGuides: [gearLure, gearUki],
     safetyLevel: "safe", safetyNotes: ["湖畔は整備された遊歩道", "釣り禁止エリアがあるため看板を確認", "ボート釣りは禁止"],
   },
   {
@@ -849,6 +897,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btAllDay, tackleRecommendations: [],
+    gearGuides: [gearLure, gearUki, gearRock, gearMebaring, gearNage, gearTakoegi],
     safetyLevel: "caution", safetyNotes: ["川の中州に渡る際は水量に注意", "増水時は絶対に釣りをしないこと", "夏場はBBQ客とエリアが重なることあり"],
   },
 
@@ -875,6 +924,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearNage, gearChoinage, gearRock, gearMebaring, gearUki, gearTakoegi, gearLure],
     safetyLevel: "safe", safetyNotes: ["砂浜は足場良好", "遠浅のため子供連れでも安心", "展望塔からの景色は必見"],
   },
   {
@@ -897,6 +947,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
     ], bestTimes: btEvening, tackleRecommendations: [],
+    gearGuides: [gearChoinage, gearLure, gearUki, gearRock, gearMebaring, gearNage, gearTakoegi],
     safetyLevel: "safe", safetyNotes: ["護岸は足場良好", "中の島公園は夕日の名所", "アクアラインからのアクセス良好"],
   },
 
@@ -921,6 +972,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
     ], bestTimes: btNight, tackleRecommendations: [],
+    gearGuides: [gearLure, gearRock, gearNage, gearUki, gearTakoegi],
     safetyLevel: "safe", safetyNotes: ["護岸は足場良好", "マリーナ内は釣り禁止区域あり", "アウトレットでの買い物も楽しめる"],
   },
   {
@@ -944,6 +996,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
     ], bestTimes: btNight, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearLure, gearRock, gearMebaring, gearNage, gearUki, gearTakoegi],
     safetyLevel: "caution", safetyNotes: ["護岸は足場良好だが柵なし", "夜間は暗いためヘッドライト必須", "トイレが近くにないため注意", "路上駐車は厳禁"],
   },
 
@@ -966,6 +1019,7 @@ export const kantoDetailSpots: FishingSpot[] = [
       { fish: fish("ainame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "探り釣り" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "探り釣り" },
     ], bestTimes: btMorning, tackleRecommendations: [],
+    gearGuides: [gearUki, gearSaguri],
     safetyLevel: "caution", safetyNotes: ["磯場は滑りやすいためスパイクシューズ推奨", "波が高い日は危険", "神磯の鳥居付近は立入禁止", "ライフジャケット着用推奨"],
   },
 
@@ -992,6 +1046,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
     ], bestTimes: btEvening, tackleRecommendations: [],
+    gearGuides: [gearChoinage, gearLure, gearUki, gearRock, gearMebaring, gearNage, gearTakoegi],
     safetyLevel: "safe", safetyNotes: ["護岸は柵付きで安全", "釣り禁止区域あり看板を確認", "豊洲市場で食事も楽しめる"],
   },
   {
@@ -1016,6 +1071,7 @@ export const kantoDetailSpots: FishingSpot[] = [
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
     ], bestTimes: btEvening, tackleRecommendations: [],
+    gearGuides: [gearSabiki, gearLure, gearNage, gearRock, gearMebaring, gearUki, gearTakoegi],
     safetyLevel: "safe", safetyNotes: ["護岸は柵付きで安全", "週末は大変混雑するため早朝推奨", "売店は無いため飲食物は持参"],
   },
 ];

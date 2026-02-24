@@ -198,6 +198,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:35", springSunset: "18:20", summerSunrise: "04:50", summerSunset: "19:10", autumnSunrise: "05:40", autumnSunset: "17:15", winterSunrise: "07:00", winterSunset: "16:50", tip: "川幅が広くのびのび釣りができる。夏の夜釣りでウナギを狙うのも一興。" },
     safetyLevel: "safe", safetyNotes: ["中流域は足場が比較的良い", "増水時は河川敷から退避"],
+    gearGuides: [{ targetFish: "アユ", method: "友釣り", difficulty: "advanced", rod: "鮎竿 8〜9m", reel: "リール不要（延べ竿使用）", line: "メタルライン 0.05〜0.1号または複合メタル", hook: "掛け針（3本イカリ）7〜8号", otherItems: ["オトリ缶", "タモ網", "鮎タイツ", "鮎ベスト"], tip: "保津峡の上流域でアユの友釣りが盛ん。南丹エリアは穴場で魚影も濃い。遊漁券が必要。" }],
     youtubeLinks: [{ label: "大堰川 アユ釣り", searchQuery: "大堰川 アユ 友釣り 南丹 京都", description: "大堰川でのアユ釣り動画" }],
   },
   {
@@ -323,6 +324,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:35", springSunset: "18:20", summerSunrise: "04:50", summerSunset: "19:10", autumnSunrise: "05:40", autumnSunset: "17:15", winterSunrise: "07:00", winterSunset: "16:50", tip: "出町柳の合流点は亀石（飛び石）でも有名な市民の憩いスポット。上流の八瀬エリアはアマゴの穴場。" },
     safetyLevel: "safe", safetyNotes: ["市街地のため周辺住民・散歩客に配慮", "下鴨神社周辺はマナーを守って"],
+    gearGuides: [{ targetFish: "オイカワ", method: "ウキ釣り", difficulty: "beginner", rod: "のべ竿 3.6〜5.4m（万能竿可）", reel: "リール不要（延べ竿使用）", line: "ナイロン 0.8〜1.5号", hook: "袖針 2〜4号", otherItems: ["玉ウキ", "ガン玉", "赤虫・サシ"], tip: "出町柳の亀石付近で手軽にオイカワ釣りが楽しめる。上流の八瀬エリアではアマゴも狙える。" }],
     youtubeLinks: [{ label: "高野川 釣り", searchQuery: "高野川 オイカワ 釣り 出町柳 京都", description: "高野川での釣り動画" }],
   },
   {
@@ -348,6 +350,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
     tideAdvice: tideFresh,
     mazumeInfo: { springSunrise: "05:35", springSunset: "18:20", summerSunrise: "04:50", summerSunset: "19:10", autumnSunrise: "05:40", autumnSunset: "17:15", winterSunrise: "07:00", winterSunset: "16:50", tip: "のんびりした里山の川で初心者・ファミリーに最適。春のウグイ遡上は見応えあり。" },
     safetyLevel: "safe", safetyNotes: ["穏やかな流れで子供連れでも安心", "農地周辺では農作業の邪魔にならないよう配慮"],
+    gearGuides: [{ targetFish: "オイカワ・カワムツ", method: "ウキ釣り", difficulty: "beginner", rod: "のべ竿 3.6〜5.4m（万能竿可）", reel: "リール不要（延べ竿使用）", line: "ナイロン 0.8〜1.5号", hook: "袖針 2〜4号", otherItems: ["玉ウキ", "ガン玉", "赤虫・サシ"], tip: "丹波の里山を流れる穏やかな小河川。延べ竿一本で手軽に楽しめ、初心者やファミリーに最適。" }],
     youtubeLinks: [{ label: "園部川 小物釣り", searchQuery: "園部川 オイカワ カワムツ 釣り 京都 南丹", description: "園部川での小物釣り動画" }],
   },
 ];
