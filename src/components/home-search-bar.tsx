@@ -192,8 +192,14 @@ export function HomeSearchBar() {
 
       {/* ドロップダウン候補 */}
       {showDropdown && (
+        <>
+          {/* モバイル用：背景オーバーレイでドロップダウン外のタッチを防ぐ */}
+          <div
+            className="fixed inset-0 z-40 sm:hidden"
+            onMouseDown={() => setIsFocused(false)}
+          />
         <div className="absolute left-0 right-0 top-full z-50 mt-2 rounded-xl border border-border bg-white shadow-xl">
-          <div className="max-h-80 overflow-y-auto p-2">
+          <div className="max-h-[60vh] sm:max-h-80 overflow-y-auto p-2">
             {results.length === 0 ? (
               <div className="px-3 py-4 text-center">
                 <p className="text-sm text-muted-foreground">
@@ -260,6 +266,7 @@ export function HomeSearchBar() {
             )}
           </div>
         </div>
+        </>
       )}
     </div>
   );

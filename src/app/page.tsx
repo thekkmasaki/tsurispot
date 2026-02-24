@@ -185,7 +185,7 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(popularSpotsItemListJsonLd) }}
       />
       {/* ヒーローセクション */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-sky-600 via-[#0C4A6E] to-indigo-800">
+      <section className="relative overflow-x-hidden bg-gradient-to-br from-sky-600 via-[#0C4A6E] to-indigo-800">
         {/* 装飾的な波パターン */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute bottom-0 left-0 right-0 h-32">
