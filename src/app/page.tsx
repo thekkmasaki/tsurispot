@@ -880,6 +880,23 @@ export default function Home() {
         <LineBanner />
       </section>
 
+      {/* 名言セクション */}
+      <section className="border-t bg-gradient-to-b from-slate-50 to-white py-12 sm:py-16">
+        <div className="mx-auto max-w-2xl px-4 text-center sm:px-6">
+          <blockquote className="space-y-4">
+            <div className="space-y-2 text-sm leading-relaxed text-slate-600 sm:text-base sm:leading-loose">
+              <p>一時間、幸せになりたかったら酒を飲みなさい。</p>
+              <p>三日間、幸せになりたかったら結婚しなさい。</p>
+              <p>八日間、幸せになりたかったら豚を殺して食べなさい。</p>
+              <p className="font-medium text-slate-800">永遠に、幸せになりたかったら釣りを覚えなさい。</p>
+            </div>
+            <footer className="text-xs text-slate-400 sm:text-sm">
+              ― 開高健『オーパ！』より
+            </footer>
+          </blockquote>
+        </div>
+      </section>
+
       {/* 事業者向け */}
       <section className="border-t py-6 sm:py-8">
         <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
