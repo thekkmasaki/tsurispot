@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import { Search, X, MapPin, Fish, BookOpen, FileText, Wrench } from "lucide-react";
+import { Search, X, MapPin, Fish, BookOpen, FileText, Wrench, LoaderCircle } from "lucide-react";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 import { blogPosts } from "@/lib/data/blog";
@@ -137,13 +137,43 @@ function ResultIcon({ type }: { type: ResultType }) {
 export function SearchOverlay() {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
+  // デバウンス処理: 入力中はisLoading=true、300ms後に検索実行
+  const handleQueryChange = useCallback((value: string) => {
+    setQuery(value);
+    if (debounceTimerRef.current) {
+      clearTimeout(debounceTimerRef.current);
+    }
+    if (value.trim() === "") {
+      setDebouncedQuery("");
+      setIsLoading(false);
+      return;
+    }
+    setIsLoading(true);
+    debounceTimerRef.current = setTimeout(() => {
+      setDebouncedQuery(value);
+      setIsLoading(false);
+    }, 300);
+  }, []);
+
+  // クリーンアップ
+  useEffect(() => {
+    return () => {
+      if (debounceTimerRef.current) {
+        clearTimeout(debounceTimerRef.current);
+      }
+    };
+  }, []);
+
   const groupedResults = useMemo(() => {
-    if (!query.trim()) return null;
-    const q = query.toLowerCase();
+    if (!debouncedQuery.trim()) return null;
+    const q = debouncedQuery.toLowerCase();
     const qHiragana = katakanaToHiragana(q);
 
     const matched = allItems.filter((item) => {
@@ -170,7 +200,7 @@ export function SearchOverlay() {
     }
 
     return Object.keys(groups).length > 0 ? groups : null;
-  }, [query]);
+  }, [debouncedQuery]);
 
   const hasResults = groupedResults !== null;
 
@@ -184,7 +214,7 @@ export function SearchOverlay() {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setIsOpen(false);
-        setQuery("");
+        handleQueryChange("");
       }
       // Ctrl+K or Cmd+K to open search
       if ((e.metaKey || e.ctrlKey) && e.key === "k") {
@@ -194,24 +224,24 @@ export function SearchOverlay() {
     };
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [handleQueryChange]);
 
   useEffect(() => {
     const handleClickOutside = (e: MouseEvent) => {
       if (overlayRef.current && !overlayRef.current.contains(e.target as Node)) {
         setIsOpen(false);
-        setQuery("");
+        handleQueryChange("");
       }
     };
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isOpen]);
+  }, [isOpen, handleQueryChange]);
 
   const handleSelect = (slug: string) => {
     setIsOpen(false);
-    setQuery("");
+    handleQueryChange("");
     router.push(slug);
   };
 
@@ -253,12 +283,15 @@ export function SearchOverlay() {
                   ref={inputRef}
                   type="text"
                   value={query}
-                  onChange={(e) => setQuery(e.target.value)}
+                  onChange={(e) => handleQueryChange(e.target.value)}
                   placeholder="スポット・魚種・ガイド・コラムを検索..."
                   className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
                 />
+                {isLoading && (
+                  <LoaderCircle className="size-4 shrink-0 animate-spin text-primary" />
+                )}
                 <button
-                  onClick={() => { setIsOpen(false); setQuery(""); }}
+                  onClick={() => { setIsOpen(false); handleQueryChange(""); }}
                   className="rounded-full p-1 text-muted-foreground hover:bg-muted hover:text-foreground"
                 >
                   <X className="size-4" />
@@ -271,10 +304,20 @@ export function SearchOverlay() {
                   <p className="px-3 py-6 text-center text-sm text-muted-foreground">
                     スポット名・魚種名・ガイド・コラムなど<br />何でも検索できます
                   </p>
+                ) : isLoading ? (
+                  <div className="flex flex-col items-center justify-center gap-2 px-3 py-8">
+                    <LoaderCircle className="size-6 animate-spin text-primary" />
+                    <p className="text-sm text-muted-foreground">検索中...</p>
+                  </div>
                 ) : !hasResults ? (
-                  <p className="px-3 py-6 text-center text-sm text-muted-foreground">
-                    「{query}」に一致する結果がありません
-                  </p>
+                  <div className="px-3 py-6 text-center">
+                    <p className="text-sm text-muted-foreground">
+                      「{query}」に一致する結果が見つかりませんでした
+                    </p>
+                    <p className="mt-1.5 text-xs text-muted-foreground/70">
+                      別のキーワードやひらがな・カタカナで試してみてください
+                    </p>
+                  </div>
                 ) : (
                   <div className="space-y-1">
                     {CATEGORY_ORDER.map((cat) => {
