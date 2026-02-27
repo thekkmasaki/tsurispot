@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
-import { AreaFilteredSpotList } from "@/components/spots/area-filter";
+import { AreaFilteredSpotList, type SpotCardData } from "@/components/spots/area-filter";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
@@ -94,13 +94,21 @@ const faqJsonLd = {
 };
 
 export default function BreakwaterBeginnerPage() {
-  const spots = fishingSpots
+  const spots: SpotCardData[] = fishingSpots
     .filter(
       (s) =>
         s.difficulty === "beginner" &&
         (s.spotType === "breakwater" || s.spotType === "pier" || s.spotType === "port")
     )
-    .sort((a, b) => b.rating - a.rating);
+    .sort((a, b) => b.rating - a.rating)
+    .map((s) => ({
+      id: s.id, slug: s.slug, name: s.name, spotType: s.spotType,
+      difficulty: s.difficulty, rating: s.rating, isFree: s.isFree,
+      hasParking: s.hasParking, hasToilet: s.hasToilet,
+      hasRentalRod: s.hasRentalRod, hasConvenienceStore: s.hasConvenienceStore,
+      mainImageUrl: s.mainImageUrl, region: s.region,
+      fishNames: s.catchableFish.map((cf) => cf.fish.name),
+    }));
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
