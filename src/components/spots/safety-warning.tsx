@@ -1,7 +1,7 @@
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { AlertTriangle, ShieldCheck, ShieldAlert } from "lucide-react";
+import { AlertTriangle, ShieldCheck, ShieldAlert, Zap, Check } from "lucide-react";
 
 const safetyConfig = {
   safe: {
@@ -82,7 +82,7 @@ export function SafetyWarning({
                 )}
               >
                 <span className="mt-0.5 shrink-0">
-                  {level === "danger" ? "⚠️" : level === "caution" ? "⚡" : "✓"}
+                  {level === "danger" ? <AlertTriangle className="size-4" /> : level === "caution" ? <Zap className="size-4" /> : <Check className="size-4" />}
                 </span>
                 <span>{note}</span>
               </li>

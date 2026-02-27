@@ -12,7 +12,7 @@ type LightSpot = Pick<FishingSpot, "id" | "slug" | "name" | "spotType" | "rating
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { MapPin, Navigation, Star, Loader2 } from "lucide-react";
+import { MapPin, Navigation, Star, Loader2, Waves, TreePine } from "lucide-react";
 
 type WaterFilter = "all" | "sea" | "freshwater";
 
@@ -116,19 +116,20 @@ export function NearbySpots({ allSpots }: { allSpots: LightSpot[] }) {
         </div>
         <div className="flex gap-1 rounded-lg border bg-muted/50 p-0.5">
           {([
-            { value: "all" as const, label: "すべて" },
-            { value: "sea" as const, label: "🌊 海" },
-            { value: "freshwater" as const, label: "🏞️ 川" },
-          ]).map((opt) => (
+            { value: "all" as const, label: "すべて", Icon: null },
+            { value: "sea" as const, label: "海", Icon: Waves },
+            { value: "freshwater" as const, label: "川", Icon: TreePine },
+          ] as const).map((opt) => (
             <button
               key={opt.value}
               onClick={() => setWaterFilter(opt.value)}
-              className={`rounded-md px-2.5 py-1 text-xs font-medium transition-all ${
+              className={`flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium transition-all ${
                 waterFilter === opt.value
                   ? "bg-white text-foreground shadow-sm"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >
+              {opt.Icon && <opt.Icon className="size-3" />}
               {opt.label}
             </button>
           ))}

@@ -41,6 +41,22 @@ const breadcrumbJsonLd = {
   ],
 };
 
+const spotsItemListJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "全国の釣りスポット一覧",
+  numberOfItems: fishingSpots.length,
+  itemListElement: fishingSpots
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 20)
+    .map((s, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: s.name,
+      url: `https://tsurispot.com/spots/${s.slug}`,
+    })),
+};
+
 const spotsFaqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -105,6 +121,10 @@ export default async function SpotsPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(spotsFaqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(spotsItemListJsonLd) }}
       />
       <Breadcrumb
         items={[

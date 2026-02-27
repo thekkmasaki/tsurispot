@@ -7,6 +7,16 @@ export const metadata: Metadata = {
   title: "釣りスタイル診断｜あなたにぴったりの釣り方は？",
   description:
     "5つの質問に答えるだけで、あなたにおすすめの釣りスタイルがわかる！初心者からベテランまで楽しめる釣り診断。",
+  openGraph: {
+    title: "釣りスタイル診断｜あなたにぴったりの釣り方は？",
+    description: "5つの質問に答えるだけで、あなたにおすすめの釣りスタイルがわかる！初心者からベテランまで楽しめる釣り診断。",
+    type: "website",
+    url: "https://tsurispot.com/quiz",
+    siteName: "ツリスポ",
+  },
+  alternates: {
+    canonical: "https://tsurispot.com/quiz",
+  },
 };
 
 const jsonLd = {

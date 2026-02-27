@@ -65,12 +65,24 @@ const difficulties = Object.entries(DIFFICULTY_LABELS) as [FishingSpot["difficul
 // Build unique prefecture list from regions
 const prefectures = Array.from(new Set(regions.map((r) => r.prefecture)));
 
+type FacilityKey = "hasParking" | "hasToilet" | "hasConvenienceStore" | "hasFishingShop" | "hasRentalRod";
+
+const FACILITY_OPTIONS: { key: FacilityKey; label: string }[] = [
+  { key: "hasParking", label: "駐車場" },
+  { key: "hasToilet", label: "トイレ" },
+  { key: "hasConvenienceStore", label: "コンビニ" },
+  { key: "hasFishingShop", label: "釣具店" },
+  { key: "hasRentalRod", label: "レンタル竿" },
+];
+
 export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpot[]; initialQuery?: string }) {
   const [searchText, setSearchText] = useState(initialQuery);
   const [selectedPrefecture, setSelectedPrefecture] = useState<string>("");
   const [selectedArea, setSelectedArea] = useState<string>("");
   const [selectedType, setSelectedType] = useState<FishingSpot["spotType"] | "">("");
   const [selectedDifficulty, setSelectedDifficulty] = useState<FishingSpot["difficulty"] | "">("");
+  const [selectedFacilities, setSelectedFacilities] = useState<FacilityKey[]>([]);
+  const [selectedFree, setSelectedFree] = useState<"" | "free" | "paid">("");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -119,8 +131,8 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
       .map((r) => r.areaName);
   }, [selectedPrefecture]);
 
-  const hasFilters = searchText || selectedPrefecture || selectedArea || selectedType || selectedDifficulty;
-  const activeFilterCount = [selectedPrefecture, selectedArea, selectedType, selectedDifficulty].filter(Boolean).length;
+  const hasFilters = searchText || selectedPrefecture || selectedArea || selectedType || selectedDifficulty || selectedFacilities.length > 0 || selectedFree;
+  const activeFilterCount = [selectedPrefecture, selectedArea, selectedType, selectedDifficulty, selectedFree].filter(Boolean).length + selectedFacilities.length;
 
   // Precompute distances for all spots if user location is available
   const distanceMap = useMemo(() => {
@@ -147,6 +159,11 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
       if (selectedArea && spot.region.areaName !== selectedArea) return false;
       if (selectedType && spot.spotType !== selectedType) return false;
       if (selectedDifficulty && spot.difficulty !== selectedDifficulty) return false;
+      if (selectedFree === "free" && !spot.isFree) return false;
+      if (selectedFree === "paid" && spot.isFree) return false;
+      for (const fac of selectedFacilities) {
+        if (!spot[fac]) return false;
+      }
       return true;
     });
 
@@ -156,7 +173,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
     }
 
     return filtered;
-  }, [spots, searchText, selectedPrefecture, selectedArea, selectedType, selectedDifficulty, sortByDistance, distanceMap]);
+  }, [spots, searchText, selectedPrefecture, selectedArea, selectedType, selectedDifficulty, selectedFacilities, selectedFree, sortByDistance, distanceMap]);
 
   const totalPages = Math.ceil(filteredSpots.length / ITEMS_PER_PAGE);
   const paginatedSpots = filteredSpots.slice(
@@ -171,6 +188,8 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
     setSelectedArea("");
     setSelectedType("");
     setSelectedDifficulty("");
+    setSelectedFacilities([]);
+    setSelectedFree("");
     setCurrentPage(1);
   };
 
@@ -339,6 +358,52 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
                   variant={selectedDifficulty === key ? "default" : "outline"}
                   size="sm"
                   onClick={() => handleFilterChange(setSelectedDifficulty, selectedDifficulty === key ? "" : key)}
+                  className="min-h-[40px] text-xs sm:text-sm"
+                >
+                  {label}
+                </Button>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Facility + Free/Paid row */}
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {/* Facility filter */}
+          <div>
+            <p className="mb-2 text-sm font-medium text-muted-foreground">施設</p>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              {FACILITY_OPTIONS.map(({ key, label }) => {
+                const active = selectedFacilities.includes(key);
+                return (
+                  <Button
+                    key={key}
+                    variant={active ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => {
+                      const next = active ? selectedFacilities.filter((f) => f !== key) : [...selectedFacilities, key];
+                      setSelectedFacilities(next);
+                      setCurrentPage(1);
+                    }}
+                    className="min-h-[40px] text-xs sm:text-sm"
+                  >
+                    {label}
+                  </Button>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Free / Paid filter */}
+          <div>
+            <p className="mb-2 text-sm font-medium text-muted-foreground">料金</p>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              {([["free", "無料"], ["paid", "有料"]] as const).map(([val, label]) => (
+                <Button
+                  key={val}
+                  variant={selectedFree === val ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => { handleFilterChange(setSelectedFree, selectedFree === val ? "" : val); }}
                   className="min-h-[40px] text-xs sm:text-sm"
                 >
                   {label}

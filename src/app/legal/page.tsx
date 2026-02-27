@@ -9,6 +9,9 @@ export const metadata: Metadata = {
   title: "特定商取引法に基づく表記",
   description:
     "ツリスポの特定商取引法に基づく表記です。事業者情報、サービス内容、返品・キャンセルについて記載しています。",
+  alternates: {
+    canonical: "https://tsurispot.com/legal",
+  },
 };
 
 export default function LegalPage() {

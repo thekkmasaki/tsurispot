@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="1080" height="1350">
+  <rect width="1080" height="1350" fill="#ffffff"/>
+  <!-- 上部の細い青ライン -->
+  <rect width="1080" height="6" fill="#0ea5e9"/>
+  <!-- メインコピー 左寄せ -->
+  <text x="100" y="340" font-family="Helvetica,Arial,sans-serif" font-size="72" font-weight="900" fill="#0f172a">サビキ釣り、</text>
+  <text x="100" y="430" font-family="Helvetica,Arial,sans-serif" font-size="72" font-weight="900" fill="#0f172a">何を買えば</text>
+  <text x="100" y="520" font-family="Helvetica,Arial,sans-serif" font-size="72" font-weight="900" fill="#0f172a">いいの？</text>
+  <!-- サブコピー -->
+  <text x="100" y="640" font-family="Helvetica,Arial,sans-serif" font-size="32" fill="#64748b">答え：5つだけ。合計3,000円。</text>
+  <!-- 区切り -->
+  <rect x="100" y="700" width="80" height="6" fill="#0ea5e9"/>
+  <!-- 3行の要約 -->
+  <text x="100" y="790" font-family="Helvetica,Arial,sans-serif" font-size="28" fill="#334155">虫エサいらない</text>
+  <text x="100" y="840" font-family="Helvetica,Arial,sans-serif" font-size="28" fill="#334155">釣具屋で一言いえば全部揃う</text>
+  <text x="100" y="890" font-family="Helvetica,Arial,sans-serif" font-size="28" fill="#334155">100均で代用できるものも多い</text>
+  <!-- スワイプ誘導 -->
+  <text x="100" y="1100" font-family="Helvetica,Arial,sans-serif" font-size="24" fill="#94a3b8">スワイプで詳しく &gt;&gt;</text>
+  <!-- ブランド 左下 -->
+  <text x="100" y="1280" font-family="Helvetica,Arial,sans-serif" font-size="20" fill="#cbd5e1">@tsurispotjapan</text>
+</svg>

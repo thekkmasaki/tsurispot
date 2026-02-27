@@ -29,6 +29,7 @@ import {
 import dynamic from "next/dynamic";
 import { SpotImage, FishImage } from "@/components/ui/spot-image";
 import { HomeSearchBar } from "@/components/home-search-bar";
+import { CatchableNowCarousel } from "@/components/catchable-now-carousel";
 
 
 // Below-the-fold client components loaded lazily
@@ -152,6 +153,20 @@ export default function Home() {
   const popularSpots = fishingSpots.slice(0, 6);
   const latestPosts = getLatestBlogPosts(3);
 
+  // Carousel data: fish catchable now with spot counts
+  const carouselFish = catchableNow.slice(0, 12).map((fish) => ({
+    id: fish.id,
+    name: fish.name,
+    slug: fish.slug,
+    imageUrl: fish.imageUrl,
+    category: fish.category,
+    difficulty: fish.difficulty,
+    isPeak: fish.peakMonths.includes(currentMonth),
+    spotCount: fishingSpots.filter((s) =>
+      s.catchableFish.some((cf) => cf.fish.id === fish.id)
+    ).length,
+  }));
+
   const popularSpotsItemListJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -236,6 +251,30 @@ export default function Home() {
             {/* 検索バー */}
             <HomeSearchBar />
 
+            {/* メインCTA */}
+            <div className="mb-4 flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
+              <Link href="/map" className="w-full sm:w-auto">
+                <Button size="lg" className="w-full gap-2 bg-amber-500 px-8 py-6 text-base font-bold text-white shadow-lg transition-all hover:bg-amber-400 hover:shadow-xl hover:scale-[1.02] sm:w-auto sm:text-lg min-h-[52px]">
+                  <MapPin className="size-5" />
+                  近くの釣り場を探す
+                </Button>
+              </Link>
+              <div className="flex gap-3">
+                <Link href="/for-beginners">
+                  <Button variant="outline" size="lg" className="gap-1.5 border-white/40 bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:scale-[1.02] min-h-[48px]">
+                    <BookOpen className="size-4" />
+                    初心者ガイド
+                  </Button>
+                </Link>
+                <Link href="/catchable-now">
+                  <Button variant="outline" size="lg" className="gap-1.5 border-white/40 bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:scale-[1.02] min-h-[48px]">
+                    <Fish className="size-4" />
+                    今釣れる魚
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
             {/* フィルタータグ */}
             <div className="flex flex-wrap items-center justify-center gap-2">
               <Link href="/spots?type=breakwater">
@@ -282,6 +321,9 @@ export default function Home() {
           </svg>
         </div>
       </section>
+
+      {/* 今釣れている魚カルーセル */}
+      <CatchableNowCarousel fish={carouselFish} />
 
       {/* 初心者スタートバナー */}
       <section className="mx-auto w-full max-w-5xl px-4 pt-10 sm:px-6 sm:pt-10">

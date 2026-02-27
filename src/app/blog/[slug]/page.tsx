@@ -67,6 +67,9 @@ export async function generateMetadata({
       siteName: "ツリスポ",
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt || post.publishedAt,
+      ...(post.image && {
+        images: [{ url: `https://tsurispot.com${post.image}`, width: 1200, height: 630 }],
+      }),
     },
     alternates: {
       canonical: `https://tsurispot.com/blog/${post.slug}`,
@@ -121,6 +124,9 @@ export default async function BlogPostPage({
     description: post.description,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt || post.publishedAt,
+    ...(post.image && {
+      image: `https://tsurispot.com${post.image}`,
+    }),
     author: {
       "@type": "Organization",
       name: "ツリスポ",
@@ -339,23 +345,36 @@ export default async function BlogPostPage({
             関連記事
           </h2>
           <div className="grid gap-3 sm:grid-cols-2">
-            {relatedPosts.map((related) => (
-              <Link key={related.id} href={`/blog/${related.slug}`}>
-                <Card className="group h-full transition-shadow hover:shadow-md">
-                  <CardContent className="flex flex-col gap-2 p-4">
-                    <Badge variant="secondary" className="w-fit text-xs">
-                      {BLOG_CATEGORIES[related.category]}
-                    </Badge>
-                    <h3 className="text-sm font-semibold leading-snug group-hover:text-primary">
-                      {related.title}
-                    </h3>
-                    <p className="line-clamp-2 text-xs text-muted-foreground">
-                      {related.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
+            {relatedPosts.map((related) => {
+              const relHero = CATEGORY_HERO[related.category];
+              const RelIcon = relHero.Icon;
+              return (
+                <Link key={related.id} href={`/blog/${related.slug}`}>
+                  <Card className="group h-full overflow-hidden py-0 transition-shadow hover:shadow-md">
+                    {related.image ? (
+                      <div className="relative h-32 w-full">
+                        <Image src={related.image} alt={related.title} fill className="object-cover" sizes="(max-width: 640px) 100vw, 384px" />
+                      </div>
+                    ) : (
+                      <div className={`flex h-24 w-full items-center justify-center bg-gradient-to-br ${relHero.gradient}`}>
+                        <RelIcon className="size-8 text-white/50" />
+                      </div>
+                    )}
+                    <CardContent className="flex flex-col gap-2 p-4">
+                      <Badge variant="secondary" className="w-fit text-xs">
+                        {BLOG_CATEGORIES[related.category]}
+                      </Badge>
+                      <h3 className="text-sm font-semibold leading-snug group-hover:text-primary">
+                        {related.title}
+                      </h3>
+                      <p className="line-clamp-2 text-xs text-muted-foreground">
+                        {related.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </Link>
+              );
+            })}
           </div>
         </section>
       )}

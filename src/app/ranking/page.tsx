@@ -39,6 +39,22 @@ const breadcrumbJsonLd = {
   ],
 };
 
+// ItemList JSON-LD for ranking page (top 10)
+const itemListJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "釣りスポット人気ランキング",
+  itemListElement: fishingSpots
+    .sort((a, b) => b.rating - a.rating || b.reviewCount - a.reviewCount)
+    .slice(0, 10)
+    .map((s, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: s.name,
+      url: `https://tsurispot.com/spots/${s.slug}`,
+    })),
+};
+
 // サーバー側で軽量データに変換（RSCペイロードの30MB超過を防止）
 const rankingSpots: RankingSpot[] = fishingSpots.map((s) => ({
   id: s.id,
@@ -66,6 +82,10 @@ export default function RankingPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
       />
 
       {/* ヘッダーグラデーション */}

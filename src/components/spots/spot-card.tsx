@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge";
 import { FishingSpot, SPOT_TYPE_LABELS } from "@/types";
 import { SpotImage } from "@/components/ui/spot-image";
 import { FavoriteButton } from "@/components/spots/favorite-button";
+import { CompareToggleButton } from "@/components/spots/compare-bar";
 
 export function SpotCard({ spot, distance }: { spot: FishingSpot; distance?: number | null }) {
   const fishNames = spot.catchableFish.map((cf) => cf.fish.name);
@@ -25,7 +26,8 @@ export function SpotCard({ spot, distance }: { spot: FishingSpot; distance?: num
           <span className="absolute bottom-2 right-2 rounded bg-black/40 px-2 py-0.5 text-xs text-white">
             {SPOT_TYPE_LABELS[spot.spotType]}
           </span>
-          <div className="absolute top-2 right-2">
+          <div className="absolute top-2 right-2 flex items-center gap-1">
+            <CompareToggleButton slug={spot.slug} name={spot.name} />
             <FavoriteButton spotSlug={spot.slug} />
           </div>
         </div>

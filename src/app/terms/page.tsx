@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "利用規約",
   description:
     "ツリスポの利用規約です。サービス内容、免責事項、禁止事項、著作権について定めています。",
+  alternates: {
+    canonical: "https://tsurispot.com/terms",
+  },
 };
 
 export default function TermsPage() {

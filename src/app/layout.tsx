@@ -6,6 +6,8 @@ import { Footer } from "@/components/layout/footer";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { PWARegister } from "@/components/pwa-register";
 import { CookieBanner } from "@/components/layout/cookie-banner";
+import { ScrollToTop } from "@/components/scroll-to-top";
+import { CompareBar } from "@/components/spots/compare-bar";
 import "./globals.css";
 
 const notoSansJP = Noto_Sans_JP({
@@ -56,6 +58,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    title: "ツリスポ - 釣りスポット総合情報サイト",
+    description: "近くの釣り場を地図で簡単検索。全国1000箇所以上の釣りスポットから、今の時期に釣れる魚・仕掛け情報まで網羅。",
   },
   robots: {
     index: true,
@@ -130,12 +134,30 @@ export default function RootLayout({
             }),
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "ツリスポ",
+              alternateName: "TsuriSpot",
+              url: "https://tsurispot.com",
+              logo: "https://tsurispot.com/logo.svg",
+              sameAs: [
+                "https://www.instagram.com/tsurispotjapan/",
+              ],
+            }),
+          }}
+        />
         <GoogleAnalytics />
         <PWARegister />
         <Header />
         <main className="min-h-screen pb-20 md:pb-0">{children}</main>
         <Footer />
         <MobileNav />
+        <CompareBar />
+        <ScrollToTop />
         <CookieBanner />
       </body>
     </html>

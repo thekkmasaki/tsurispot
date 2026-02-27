@@ -22,9 +22,19 @@ import {
 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "ツリスポについて",
+  title: "ツリスポについて｜釣りスポット総合情報サイト",
   description:
-    "ツリスポは釣りスポット総合情報サイトです。地図で直感的に釣り場を探せ、今の時期に釣れる魚やおすすめの仕掛け情報を提供しています。",
+    "ツリスポは全国1000箇所以上の釣りスポットを掲載する総合情報サイトです。地図で直感的に釣り場を探せ、今の時期に釣れる魚やおすすめの仕掛け情報を提供しています。",
+  openGraph: {
+    title: "ツリスポについて｜釣りスポット総合情報サイト",
+    description: "全国1000箇所以上の釣りスポットを掲載。地図で釣り場を探せ、釣れる魚や仕掛け情報を提供する総合情報サイトです。",
+    type: "website",
+    url: "https://tsurispot.com/about",
+    siteName: "ツリスポ",
+  },
+  alternates: {
+    canonical: "https://tsurispot.com/about",
+  },
 };
 
 const features = [

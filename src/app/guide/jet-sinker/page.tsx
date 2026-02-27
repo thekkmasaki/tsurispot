@@ -151,13 +151,13 @@ function JetSinkerDiagram() {
         ジェット天秤の構造
       </p>
       <svg
-        viewBox="0 0 600 220"
+        viewBox="0 0 600 260"
         width="100%"
         style={{ maxWidth: 600 }}
-        aria-label="ジェット天秤の構造図：ウイング（羽根）、おもり、道糸側アイ、ハリス側アイの各パーツを示す"
+        aria-label="ジェット天秤の構造図：ウイング（羽根）とおもりが一体化したボディ、道糸側アイ、ハリス側アイの各パーツを示す"
         className="mx-auto"
       >
-        <rect x="0" y="0" width="600" height="220" rx="8" fill="#F0F9FF" />
+        <rect x="0" y="0" width="600" height="260" rx="8" fill="#F0F9FF" />
         <text
           x="300"
           y="24"
@@ -169,118 +169,177 @@ function JetSinkerDiagram() {
           ジェット天秤の構造
         </text>
 
-        {/* ウイング（羽根） */}
-        <path
-          d="M200,100 Q240,55 310,80 L310,100 Q240,85 200,100Z"
-          fill="#38BDF8"
-          opacity="0.4"
-          stroke="#0284C7"
-          strokeWidth="1.5"
-        />
-        <path
-          d="M200,100 Q240,145 310,120 L310,100 Q240,115 200,100Z"
-          fill="#38BDF8"
-          opacity="0.4"
-          stroke="#0284C7"
-          strokeWidth="1.5"
-        />
-        <text x="245" y="72" fontSize="10" fill="#0369A1" fontWeight="bold">
-          ウイング（羽根）
-        </text>
-
-        {/* アーム（天秤部分） */}
-        <line
-          x1="310"
-          y1="100"
-          x2="430"
-          y2="100"
-          stroke="#6B7280"
-          strokeWidth="3"
-        />
-
-        {/* おもり */}
+        {/* ===== ウイング＋おもり一体ボディ ===== */}
+        {/* おもり（鉛）- ウイングの中心に一体化 */}
         <ellipse
-          cx="370"
-          cy="100"
-          rx="20"
-          ry="12"
+          cx="270"
+          cy="110"
+          rx="30"
+          ry="18"
           fill="#9CA3AF"
-          opacity="0.5"
+          opacity="0.6"
           stroke="#6B7280"
           strokeWidth="2"
         />
-        <text x="370" y="135" textAnchor="middle" fontSize="10" fill="#4B5563">
-          おもり
+
+        {/* ウイング上側（おもりを包むように一体化） */}
+        <path
+          d="M240,110 Q220,60 300,85 L300,110 Q260,90 240,110Z"
+          fill="#38BDF8"
+          opacity="0.35"
+          stroke="#0284C7"
+          strokeWidth="1.5"
+        />
+        {/* ウイング下側 */}
+        <path
+          d="M240,110 Q220,160 300,135 L300,110 Q260,130 240,110Z"
+          fill="#38BDF8"
+          opacity="0.35"
+          stroke="#0284C7"
+          strokeWidth="1.5"
+        />
+
+        {/* ボディラベル */}
+        <line x1="270" y1="140" x2="270" y2="165" stroke="#4B5563" strokeWidth="1" />
+        <text x="270" y="178" textAnchor="middle" fontSize="10" fill="#4B5563" fontWeight="bold">
+          おもり＋ウイング
+        </text>
+        <text x="270" y="192" textAnchor="middle" fontSize="9" fill="#6B7280">
+          （一体構造）
         </text>
 
-        {/* 道糸側アイ */}
+        {/* ウイングラベル */}
+        <line x1="225" y1="75" x2="210" y2="55" stroke="#0369A1" strokeWidth="1" />
+        <text x="210" y="50" textAnchor="middle" fontSize="10" fill="#0369A1" fontWeight="bold">
+          プラスチック羽根
+        </text>
+
+        {/* ===== 道糸側ワイヤーアーム ===== */}
+        {/* ボディから左に伸びるワイヤー */}
+        <line
+          x1="240"
+          y1="110"
+          x2="140"
+          y2="110"
+          stroke="#6B7280"
+          strokeWidth="2.5"
+        />
+        {/* 道糸側アイ（環） */}
         <circle
-          cx="195"
-          cy="100"
-          r="6"
+          cx="133"
+          cy="110"
+          r="7"
           fill="none"
           stroke="#2563EB"
-          strokeWidth="2"
+          strokeWidth="2.5"
         />
+        {/* 道糸の点線 */}
         <line
-          x1="140"
-          y1="100"
-          x2="189"
-          y2="100"
+          x1="70"
+          y1="110"
+          x2="126"
+          y2="110"
           stroke="#2563EB"
           strokeWidth="1.5"
-          strokeDasharray="4,3"
+          strokeDasharray="5,3"
         />
-        <text x="130" y="96" textAnchor="end" fontSize="11" fill="#2563EB" fontWeight="bold">
+        <text x="58" y="114" textAnchor="end" fontSize="11" fill="#2563EB" fontWeight="bold">
           道糸
         </text>
-
-        {/* ハリス側アイ */}
-        <circle
-          cx="436"
-          cy="100"
-          r="6"
-          fill="none"
-          stroke="#DC2626"
-          strokeWidth="2"
-        />
-        <line
-          x1="442"
-          y1="100"
-          x2="500"
-          y2="100"
-          stroke="#DC2626"
-          strokeWidth="1.5"
-          strokeDasharray="4,3"
-        />
-        <text x="510" y="104" fontSize="11" fill="#DC2626" fontWeight="bold">
-          ハリス
+        {/* 道糸側ラベル */}
+        <text x="133" y="88" textAnchor="middle" fontSize="9" fill="#2563EB">
+          道糸側アイ
         </text>
 
-        {/* 浮き上がりの矢印 */}
+        {/* ===== ハリス側ワイヤーアーム（L字型） ===== */}
+        {/* ボディから右に伸びるワイヤー（水平部分） */}
+        <line
+          x1="300"
+          y1="110"
+          x2="400"
+          y2="110"
+          stroke="#6B7280"
+          strokeWidth="2.5"
+        />
+        {/* L字の曲がり部分（下に曲がる） */}
         <path
-          d="M250,170 C260,155 270,155 280,165"
+          d="M400,110 Q410,110 410,120"
+          fill="none"
+          stroke="#6B7280"
+          strokeWidth="2.5"
+        />
+        {/* L字の縦部分 */}
+        <line
+          x1="410"
+          y1="120"
+          x2="410"
+          y2="170"
+          stroke="#6B7280"
+          strokeWidth="2.5"
+        />
+        {/* ハリス側アイ（環） */}
+        <circle
+          cx="410"
+          cy="178"
+          r="7"
+          fill="none"
+          stroke="#DC2626"
+          strokeWidth="2.5"
+        />
+        {/* ハリスの点線 */}
+        <line
+          x1="410"
+          y1="185"
+          x2="410"
+          y2="230"
+          stroke="#DC2626"
+          strokeWidth="1.5"
+          strokeDasharray="5,3"
+        />
+        <text x="410" y="245" textAnchor="middle" fontSize="11" fill="#DC2626" fontWeight="bold">
+          ハリス
+        </text>
+        {/* ハリス側ラベル */}
+        <text x="445" y="180" fontSize="9" fill="#DC2626">
+          ハリス側アイ
+        </text>
+
+        {/* L字ラベル */}
+        <line x1="430" y1="115" x2="470" y2="105" stroke="#4B5563" strokeWidth="1" />
+        <text x="475" y="108" fontSize="9" fill="#4B5563">
+          L字アーム
+        </text>
+        <text x="475" y="120" fontSize="8" fill="#6B7280">
+          （仕掛けの絡み防止）
+        </text>
+
+        {/* ===== キャスト方向の矢印 ===== */}
+        <line
+          x1="160"
+          y1="40"
+          x2="340"
+          y2="40"
+          stroke="#F59E0B"
+          strokeWidth="1.5"
+        />
+        <polygon points="335,36 335,44 345,40" fill="#F59E0B" />
+        <text x="250" y="36" textAnchor="middle" fontSize="9" fill="#F59E0B">
+          キャスト方向（羽根で空気抵抗を減らし飛距離UP）
+        </text>
+
+        {/* ===== 浮き上がり説明 ===== */}
+        <path
+          d="M500,160 Q510,130 520,145"
           fill="none"
           stroke="#0EA5E9"
           strokeWidth="1.5"
         />
-        <polygon points="278,160 284,167 276,168" fill="#0EA5E9" />
-        <text x="265" y="188" textAnchor="middle" fontSize="9" fill="#0EA5E9">
-          回収時に浮き上がる
+        <polygon points="508,132 514,138 506,140" fill="#0EA5E9" />
+        <text x="520" y="165" textAnchor="middle" fontSize="9" fill="#0EA5E9">
+          回収時に
         </text>
-
-        {/* 飛行方向の矢印 */}
-        <line
-          x1="200"
-          y1="45"
-          x2="350"
-          y2="45"
-          stroke="#F59E0B"
-          strokeWidth="1.5"
-        />
-        <polygon points="345,41 345,49 355,45" fill="#F59E0B" />
-        <text x="275" y="40" textAnchor="middle" fontSize="9" fill="#F59E0B">
-          キャスト方向（空気抵抗が少なく飛ぶ）
+        <text x="520" y="177" textAnchor="middle" fontSize="9" fill="#0EA5E9">
+          浮き上がる
         </text>
       </svg>
     </div>
@@ -991,13 +1050,13 @@ export default function JetSinkerGuidePage() {
           </h2>
           <Card className="border-emerald-200">
             <CardContent className="p-6">
-              <h3 className="mb-3 font-bold">おもりセット</h3>
+              <h3 className="mb-3 font-bold">ジェット天秤</h3>
               <p className="mb-4 text-sm text-muted-foreground">
-                ジェット天秤を含む各種おもりのセット。投げ釣り・ちょい投げ・サビキなど幅広い釣り方に対応するおもりが揃っています。
-                まずはセットで複数の号数を試して、自分の釣り場に合った重さを見つけましょう。
+                初心者でも遠投できて根がかりしにくい、投げ釣りの必須アイテム。
+                まずは8〜10号から始めて、自分の釣り場に合った号数を見つけましょう。
               </p>
               <a
-                href="https://amzn.to/4cFGDbl"
+                href="https://amzn.to/4l7BnQg"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-lg bg-amber-500 px-6 py-3 font-bold text-white shadow transition-colors hover:bg-amber-600"

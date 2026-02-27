@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="1080" height="1350">
+  <rect width="1080" height="1350" fill="#ffffff"/>
+  <rect width="1080" height="6" fill="#0ea5e9"/>
+  <!-- 見出し -->
+  <text x="100" y="120" font-family="Helvetica,Arial,sans-serif" font-size="24" font-weight="700" fill="#0ea5e9">あると便利</text>
+  <text x="100" y="200" font-family="Helvetica,Arial,sans-serif" font-size="36" font-weight="800" fill="#0f172a">クーラーボックス</text>
+  <text x="100" y="245" font-family="Helvetica,Arial,sans-serif" font-size="22" fill="#64748b">釣った魚の持ち帰り用。発泡スチロールでも可</text>
+  <text x="100" y="330" font-family="Helvetica,Arial,sans-serif" font-size="36" font-weight="800" fill="#0f172a">プライヤー</text>
+  <text x="100" y="375" font-family="Helvetica,Arial,sans-serif" font-size="22" fill="#64748b">魚から針を外す道具。素手は危ないのでほぼ必須</text>
+  <text x="100" y="460" font-family="Helvetica,Arial,sans-serif" font-size="36" font-weight="800" fill="#0f172a">日焼け止め + 帽子</text>
+  <text x="100" y="505" font-family="Helvetica,Arial,sans-serif" font-size="22" fill="#64748b">海辺の紫外線は想像以上。これ忘れると後悔する</text>
+  <!-- 100均セクション -->
+  <rect x="0" y="580" width="1080" height="420" fill="#f8fafc"/>
+  <text x="100" y="650" font-family="Helvetica,Arial,sans-serif" font-size="24" font-weight="700" fill="#0ea5e9">釣具屋の前にダイソーへ行け</text>
+  <rect x="100" y="680" width="80" height="4" fill="#0ea5e9"/>
+  <text x="100" y="740" font-family="Helvetica,Arial,sans-serif" font-size="30" fill="#0f172a">バケツ（折りたたみ）</text>
+  <text x="100" y="790" font-family="Helvetica,Arial,sans-serif" font-size="30" fill="#0f172a">ハサミ</text>
+  <text x="100" y="840" font-family="Helvetica,Arial,sans-serif" font-size="30" fill="#0f172a">タオル</text>
+  <text x="560" y="740" font-family="Helvetica,Arial,sans-serif" font-size="30" fill="#0f172a">ジップロック</text>
+  <text x="560" y="790" font-family="Helvetica,Arial,sans-serif" font-size="30" fill="#0f172a">レジャーシート</text>
+  <text x="560" y="840" font-family="Helvetica,Arial,sans-serif" font-size="30" fill="#0f172a">小物ケース</text>
+  <text x="100" y="940" font-family="Helvetica,Arial,sans-serif" font-size="28" font-weight="800" fill="#0f172a">この6つで約700円</text>
+  <!-- 合計 -->
+  <text x="100" y="1100" font-family="Helvetica,Arial,sans-serif" font-size="24" fill="#64748b">全部合わせても</text>
+  <text x="100" y="1160" font-family="Helvetica,Arial,sans-serif" font-size="24" fill="#64748b">最安</text>
+  <text x="195" y="1160" font-family="Helvetica,Arial,sans-serif" font-size="40" font-weight="900" fill="#0f172a">3,700円</text>
+  <text x="480" y="1160" font-family="Helvetica,Arial,sans-serif" font-size="24" fill="#64748b">快適に揃えても</text>
+  <text x="720" y="1160" font-family="Helvetica,Arial,sans-serif" font-size="40" font-weight="900" fill="#0f172a">7,000円</text>
+  <text x="100" y="1310" font-family="Helvetica,Arial,sans-serif" font-size="20" fill="#cbd5e1">@tsurispotjapan</text>
+</svg>

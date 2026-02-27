@@ -21,7 +21,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, type NearbySpot } from "@/lib/data/spots";
+import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, getSpotsByFish, type NearbySpot } from "@/lib/data/spots";
 import { getShopsForSpot } from "@/lib/data/shops";
 import { getPrefectureByName } from "@/lib/data/prefectures";
 import { SeasonCalendar } from "@/components/spots/season-calendar";
@@ -43,8 +43,8 @@ import { ShareButtons } from "@/components/ui/share-buttons";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { FishLikeButton } from "@/components/spots/fish-like-button";
 import { FishingReportSummary } from "@/components/spots/fishing-report-summary";
-import { MobileQuickNav } from "@/components/spots/mobile-quick-nav";
 import { SpotAffiliateRecommend } from "@/components/spots/spot-affiliate-recommend";
+import { SpotDetailTabs } from "@/components/spots/spot-detail-tabs";
 import { ParkingPeakCard } from "@/components/spots/parking-peak-info";
 import { FamilyInfoCard } from "@/components/spots/family-info";
 import { PackingChecklist } from "@/components/spots/packing-checklist";
@@ -57,7 +57,9 @@ import { SpotPhotoGallery } from "@/components/spots/spot-photo-gallery";
 import { areaGuides } from "@/lib/data/area-guides";
 import { explainTime, explainMethod } from "@/lib/fishing-term-helper";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
-import { CollapsibleSection } from "@/components/ui/collapsible-section";
+
+import { RecentlyViewedTracker } from "@/components/spots/recently-viewed-tracker";
+import { RecentlyViewedSpots } from "@/components/spots/recently-viewed";
 
 // Below-the-fold client components loaded lazily
 const StreetViewSection = dynamic(() => import("@/components/spots/street-view-section").then((m) => m.StreetViewSection));
@@ -79,21 +81,28 @@ export async function generateMetadata({
   const fishNames = spot.catchableFish.map((cf) => cf.fish.name).join("・");
   const topFishNames = spot.catchableFish.slice(0, 2).map((cf) => cf.fish.name).join("・");
   const topMethodLabel = spot.catchableFish[0]?.method ?? "";
-  const baseTitleText = `${spot.name}｜${spot.region.prefecture}${spot.region.areaName}の釣り場・釣りスポット`;
+  const baseTitleText = `${spot.name}の釣り情報・釣果・アクセス`;
   const fullTitle = topMethodLabel && topFishNames
-    ? `${baseTitleText}【${topMethodLabel}で${topFishNames}が釣れる】`
+    ? `${baseTitleText}【${topMethodLabel}で${topFishNames}】`
     : baseTitleText;
   const title = fullTitle.length <= 60 ? fullTitle : baseTitleText;
   const description = `${spot.name}（${spot.address}）は${spot.region.prefecture}${spot.region.areaName}にある${SPOT_TYPE_LABELS[spot.spotType]}の釣り場。${fishNames}が狙えるおすすめスポットです。${spot.hasParking ? '駐車場あり。' : ''}${spot.hasToilet ? 'トイレあり。' : ''}${spot.isFree ? '無料で釣りOK。' : ''}アクセス・釣れる魚・仕掛け情報を初心者向けに完全ガイド。`;
+  const ogDescription = `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）で${fishNames}が狙えます。${spot.description}`;
   return {
     title,
-    description,
+    description: description.slice(0, 160),
+    keywords: [spot.name, spot.region.prefecture, spot.region.areaName, "釣り場", "釣りスポット", ...spot.catchableFish.slice(0, 5).map((cf) => cf.fish.name)],
     openGraph: {
-      title: `${spot.name}の釣り場情報`,
-      description: `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）で${fishNames}が狙えます。${spot.description}`,
+      title: `${spot.name}の釣り情報・釣果・アクセス | ツリスポ`,
+      description: ogDescription.slice(0, 120),
       type: "article",
       url: `https://tsurispot.com/spots/${spot.slug}`,
       siteName: "ツリスポ",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${spot.name}の釣り情報 | ツリスポ`,
+      description: ogDescription.slice(0, 120),
     },
     alternates: {
       canonical: `https://tsurispot.com/spots/${spot.slug}`,
@@ -353,6 +362,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
+      {/* 最近見たスポット記録 */}
+      <RecentlyViewedTracker spot={{ slug: spot.slug, name: spot.name, prefecture: spot.region.prefecture, areaName: spot.region.areaName, spotType: spot.spotType }} />
+
       {/* パンくず */}
       <Breadcrumb
         items={[
@@ -475,495 +487,188 @@ export default async function SpotDetailPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* モバイル向けクイックナビ */}
-      <MobileQuickNav />
-
-      {/* 現地の様子 - Street View */}
-      <div className="mb-6 sm:mb-8">
-        <CollapsibleSection title="現地の様子（ストリートビュー）">
-          <StreetViewSection
-            latitude={spot.latitude}
-            longitude={spot.longitude}
-            spotName={spot.name}
-            address={spot.address}
-          />
-        </CollapsibleSection>
-      </div>
-
-      {/* 安全警告（危険・注意の場合はヘッダー直下に目立つように表示） */}
+      {/* 安全警告 */}
       {(spot.safetyLevel === "caution" || spot.safetyLevel === "danger") && (
-        <div className="mb-8">
-          <SafetyWarning
-            level={spot.safetyLevel}
-            notes={spot.safetyNotes}
-            isKuchikomi={spot.isKuchikomiSpot}
-          />
-        </div>
+        <div className="mb-4"><SafetyWarning level={spot.safetyLevel} notes={spot.safetyNotes} isKuchikomi={spot.isKuchikomiSpot} /></div>
       )}
-
-      {/* 口コミスポット（安全な場合は小さく表示） */}
       {spot.isKuchikomiSpot && spot.safetyLevel === "safe" && (
-        <div className="mb-8">
-          <SafetyWarning
-            level="safe"
-            notes={spot.safetyNotes}
-            isKuchikomi={true}
-          />
-        </div>
+        <div className="mb-4"><SafetyWarning level="safe" notes={spot.safetyNotes} isKuchikomi={true} /></div>
       )}
 
-      {/* 釣りルール・禁止事項 */}
-      <section className="mb-6 sm:mb-8">
-        <CollapsibleSection title="釣りルール・禁止事項" icon={<Shield className="size-5" />}>
-          <SpotRulesCard rules={spot.rules} spotType={spot.spotType} spotName={spot.name} />
-        </CollapsibleSection>
-      </section>
-
-      {/* Two column layout */}
-      <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1fr_360px]">
-        {/* Left: Main content */}
-        <div className="space-y-6 sm:space-y-8">
-          {/* Catchable fish - Season calendar */}
-          <section id="fish-season">
-            <CollapsibleSection title={`${spot.name}で釣れる魚`} icon={<Fish className="size-5" />}>
-            <h2 className="mb-3 hidden items-center gap-2 text-lg font-bold sm:mb-4 md:flex">
-              <Fish className="size-5" />
-              {spot.name}で釣れる魚の季節カレンダー
-            </h2>
+      {/* タブレイアウト */}
+      <SpotDetailTabs
+        overviewTab={<>
+          <section>
+            <h2 className="mb-4 text-lg font-bold">基本情報</h2>
+            <Card className="py-4"><CardContent className="px-4">
+              <dl className="space-y-3 text-sm">
+                {spot.feeDetail && (<div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">料金</dt><dd>{spot.feeDetail}</dd></div>)}
+                {spot.isFree && (<div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">料金</dt><dd className="font-medium text-orange-600">無料</dd></div>)}
+                <div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">難易度</dt><dd>{DIFFICULTY_LABELS[spot.difficulty]}</dd></div>
+                <div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">タイプ</dt><dd>{SPOT_TYPE_LABELS[spot.spotType]}</dd></div>
+                {spot.rentalDetail && (<div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">レンタル</dt><dd>{spot.rentalDetail}</dd></div>)}
+              </dl>
+            </CardContent></Card>
+          </section>
+          <section>
+            <h2 className="mb-3 text-lg font-bold">設備</h2>
+            <div className="flex flex-wrap gap-2">
+              {spot.hasParking && <Badge variant="outline" className="text-xs"><Car className="size-3.5 mr-1" />駐車場{spot.parkingDetail ? `（${spot.parkingDetail}）` : ""}</Badge>}
+              {spot.hasToilet && <Badge variant="outline" className="text-xs"><Toilet className="size-3.5 mr-1" />トイレ</Badge>}
+              {spot.hasFishingShop && <Badge variant="outline" className="text-xs"><Store className="size-3.5 mr-1" />釣具店</Badge>}
+              {spot.hasRentalRod && <Badge variant="outline" className="text-xs"><Wrench className="size-3.5 mr-1" />レンタル竿</Badge>}
+              {spot.hasConvenienceStore && <Badge variant="outline" className="text-xs"><ShoppingBag className="size-3.5 mr-1" />コンビニ近く</Badge>}
+            </div>
+          </section>
+          <section>
+            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold"><Shield className="size-5" />釣りルール・禁止事項</h2>
+            <SpotRulesCard rules={spot.rules} spotType={spot.spotType} spotName={spot.name} />
+          </section>
+          <section>
+            <h2 className="mb-3 text-lg font-bold">混雑予想</h2>
+            <CrowdPredictionCard rating={spot.rating} isFree={spot.isFree} difficulty={spot.difficulty} prefecture={spot.region.prefecture} hasParking={spot.hasParking} reviewCount={spot.reviewCount} />
+          </section>
+          <section>
+            <h2 className="mb-3 text-lg font-bold">ファミリー向け情報</h2>
+            <FamilyInfoCard familyInfo={spot.familyInfo} spotType={spot.spotType} hasToilet={spot.hasToilet} hasParking={spot.hasParking} difficulty={spot.difficulty} />
+          </section>
+          <section>
+            <h2 className="mb-3 text-lg font-bold">天気・潮汐情報</h2>
+            <SpotWeatherTide lat={spot.latitude} lng={spot.longitude} spotName={spot.name} />
+          </section>
+          <section>
+            <h2 className="mb-3 text-lg font-bold">ボウズ確率</h2>
+            <SpotBouzuCard spotType={spot.spotType} difficulty={spot.difficulty} rating={spot.rating} reviewCount={spot.reviewCount} prefecture={spot.region.prefecture} areaName={spot.region.areaName} isFree={spot.isFree} hasRentalRod={spot.hasRentalRod} catchableFishCount={spot.catchableFish.length} catchableFishDetails={spot.catchableFish.map((cf) => ({ fishSlug: cf.fish.slug, fishName: cf.fish.name, method: cf.method, catchDifficulty: cf.catchDifficulty, monthStart: cf.monthStart, monthEnd: cf.monthEnd, peakSeason: cf.peakSeason }))} />
+          </section>
+          {spot.youtubeLinks && spot.youtubeLinks.length > 0 && (
+            <section>
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold"><Play className="size-5" />参考動画</h2>
+              <p className="mb-4 text-sm text-muted-foreground">このスポットでの釣りの様子がわかるYouTube動画です。</p>
+              <YouTubeVideoList links={spot.youtubeLinks} />
+            </section>
+          )}
+        </>}
+        fishTab={<>
+          <section>
+            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold"><Fish className="size-5" />{spot.name}で釣れる魚の季節カレンダー</h2>
             {spot.catchableFish.length > 0 ? (
-              <Card className="py-3 sm:py-4">
-                <CardContent className="px-3 sm:px-4 overflow-x-auto scrollbar-hide">
-                  <div className="min-w-[480px]">
-                    <SeasonCalendar catchableFish={spot.catchableFish} />
-                  </div>
-                </CardContent>
-              </Card>
-            ) : (
-              <p className="text-sm text-muted-foreground">
-                釣れる魚の情報はまだ登録されていません。
-              </p>
-            )}
-
-            {/* Fish details list */}
-            {spot.catchableFish.length > 0 && (
-              <div className="mt-3 space-y-2 sm:mt-4">
+              <Card className="py-3 sm:py-4"><CardContent className="px-3 sm:px-4 overflow-x-auto scrollbar-hide"><div className="min-w-[480px]"><SeasonCalendar catchableFish={spot.catchableFish} /></div></CardContent></Card>
+            ) : (<p className="text-sm text-muted-foreground">釣れる魚の情報はまだ登録されていません。</p>)}
+          </section>
+          {spot.catchableFish.length > 0 && (
+            <section>
+              <h2 className="mb-3 text-lg font-bold">魚種別の釣り方</h2>
+              <div className="space-y-2">
                 {spot.catchableFish.map((cf) => {
                   const methodExplanation = explainMethod(cf.method);
                   return (
-                    <div
-                      key={cf.fish.id}
-                      className="rounded-lg border p-3 text-sm"
-                    >
+                    <div key={cf.fish.id} className="rounded-lg border p-3 text-sm">
                       <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2 min-w-0">
-                          <Link
-                            href={`/fish/${cf.fish.slug}`}
-                            className="font-medium truncate hover:text-primary hover:underline"
-                          >
-                            {cf.fish.name}
-                          </Link>
-                          <Badge variant="secondary" className="text-xs shrink-0">
-                            {cf.method}
-                          </Badge>
+                          <Link href={`/fish/${cf.fish.slug}`} className="font-medium truncate hover:text-primary hover:underline">{cf.fish.name}</Link>
+                          <Badge variant="secondary" className="text-xs shrink-0">{cf.method}</Badge>
                         </div>
-                        <p className="text-xs text-muted-foreground shrink-0">
-                          {explainTime(cf.recommendedTime)}
-                        </p>
+                        <p className="text-xs text-muted-foreground shrink-0">{explainTime(cf.recommendedTime)}</p>
                       </div>
-                      {methodExplanation && (
-                        <p className="mt-1.5 text-xs text-muted-foreground">
-                          <span className="mr-1">💡</span>
-                          {cf.method}とは… {methodExplanation}
-                        </p>
-                      )}
-                      <div className="mt-2">
-                        <FishLikeButton spotSlug={slug} fishSlug={cf.fish.slug} />
-                      </div>
+                      {methodExplanation && (<p className="mt-1.5 text-xs text-muted-foreground"><span className="mr-1">💡</span>{cf.method}とは… {methodExplanation}</p>)}
+                      <div className="mt-2"><FishLikeButton spotSlug={slug} fishSlug={cf.fish.slug} /></div>
                     </div>
                   );
                 })}
               </div>
-            )}
-
-            {/* 釣果記録サマリー */}
-            {spot.catchableFish.length > 0 && (
-              <div className="mt-4">
-                <FishingReportSummary
-                  spotSlug={slug}
-                  fishList={spot.catchableFish.map((cf) => ({
-                    slug: cf.fish.slug,
-                    name: cf.fish.name,
-                  }))}
-                />
-              </div>
-            )}
-            </CollapsibleSection>
-          </section>
-
-          {/* マヅメ・潮汐情報 */}
+            </section>
+          )}
           {(spot.mazumeInfo || spot.tideAdvice) && (
-            <>
-              <Separator />
-              <section>
-                <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
-                  <Compass className="size-5" />
-                  マヅメ・潮汐ガイド
-                </h2>
-                <TideMazumeInfo
-                  tideAdvice={spot.tideAdvice}
-                  mazumeInfo={spot.mazumeInfo}
-                />
-              </section>
-            </>
+            <section>
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold"><Compass className="size-5" />マヅメ・潮汐ガイド</h2>
+              <TideMazumeInfo tideAdvice={spot.tideAdvice} mazumeInfo={spot.mazumeInfo} />
+            </section>
           )}
-
-          {/* 持ち物チェックリスト */}
-          <Separator />
+          {spot.catchableFish.length > 0 && (
+            <section><FishingReportSummary spotSlug={slug} fishList={spot.catchableFish.map((cf) => ({ slug: cf.fish.slug, name: cf.fish.name }))} /></section>
+          )}
           <section>
-            <CollapsibleSection title="持ち物チェックリスト" icon={<ShoppingBag className="size-5" />}>
-              <PackingChecklist
-                spotType={spot.spotType}
-                hasConvenienceStore={spot.hasConvenienceStore}
-                hasToilet={spot.hasToilet}
-                hasFishingShop={spot.hasFishingShop}
-                hasRentalRod={spot.hasRentalRod}
-                difficulty={spot.difficulty}
-                safetyLevel={spot.safetyLevel}
-                isNightFishing={isNightFishing}
-              />
-            </CollapsibleSection>
+            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold"><MessageSquare className="size-5" />みんなの釣果報告</h2>
+            <CatchReportList reports={getCatchReportsBySpot(slug)} />
+            <CatchReportForm spotSlug={slug} spotName={spot.name} />
           </section>
-
-          {/* 初心者向け装備ガイド */}
-          {spot.gearGuides && spot.gearGuides.length > 0 && (
-            <>
-              <Separator />
-              <section>
-                <CollapsibleSection title="初心者向け装備ガイド" icon={<Wrench className="size-5" />}>
-                  <h2 className="mb-4 hidden items-center gap-2 text-lg font-bold md:flex">
-                    <Wrench className="size-5" />
-                    初心者向け装備ガイド
-                  </h2>
-                  <p className="mb-4 text-sm text-muted-foreground">
-                    このスポットでの釣りに必要な道具をわかりやすくまとめました。当日バタバタしないよう、事前にネットで揃えておくのがおすすめです。
-                  </p>
-                  <GearGuideList guides={spot.gearGuides} />
-                  <SpotAffiliateRecommend
-                    methods={spot.catchableFish.map((cf) => cf.method)}
-                    isNightFishing={isNightFishing}
-                  />
-                </CollapsibleSection>
-              </section>
-            </>
-          )}
-
-          {/* 装備ガイドがないスポットでもアフィリエイトを表示 */}
-          {(!spot.gearGuides || spot.gearGuides.length === 0) && spot.catchableFish.length > 0 && (
-            <>
-              <Separator />
-              <section>
-                <CollapsibleSection title="この釣り場でおすすめの装備" icon={<Wrench className="size-5" />}>
-                  <h2 className="mb-4 hidden items-center gap-2 text-lg font-bold md:flex">
-                    <Wrench className="size-5" />
-                    この釣り場でおすすめの装備
-                  </h2>
-                  <p className="mb-2 text-sm text-muted-foreground">
-                    このスポットの釣り方に合った装備をピックアップしました。当日バタバタしないよう、事前にネットで揃えておくのがおすすめです。
-                  </p>
-                  <SpotAffiliateRecommend
-                    methods={spot.catchableFish.map((cf) => cf.method)}
-                    isNightFishing={isNightFishing}
-                  />
-                </CollapsibleSection>
-              </section>
-            </>
-          )}
-
-          {/* YouTube 参考動画 */}
-          {spot.youtubeLinks && spot.youtubeLinks.length > 0 && (
-            <>
-              <Separator />
-              <section>
-                <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
-                  <Play className="size-5" />
-                  参考動画
-                </h2>
-                <p className="mb-4 text-sm text-muted-foreground">
-                  このスポットでの釣りの様子がわかるYouTube動画です。
-                </p>
-                <YouTubeVideoList links={spot.youtubeLinks} />
-              </section>
-            </>
-          )}
-
-          <Separator />
-
-          {/* Basic info */}
-          <section>
-            <h2 className="mb-4 text-lg font-bold">基本情報</h2>
-            <Card className="py-4">
-              <CardContent className="px-4">
-                <dl className="space-y-3 text-sm">
-                  {spot.feeDetail && (
-                    <div className="flex gap-4">
-                      <dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">
-                        料金
-                      </dt>
-                      <dd>{spot.feeDetail}</dd>
-                    </div>
-                  )}
-                  {spot.isFree && (
-                    <div className="flex gap-4">
-                      <dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">
-                        料金
-                      </dt>
-                      <dd className="font-medium text-orange-600">無料</dd>
-                    </div>
-                  )}
-                  <div className="flex gap-4">
-                    <dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">
-                      難易度
-                    </dt>
-                    <dd>{DIFFICULTY_LABELS[spot.difficulty]}</dd>
-                  </div>
-                  <div className="flex gap-4">
-                    <dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">
-                      タイプ
-                    </dt>
-                    <dd>{SPOT_TYPE_LABELS[spot.spotType]}</dd>
-                  </div>
-                  {spot.rentalDetail && (
-                    <div className="flex gap-4">
-                      <dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">
-                        レンタル
-                      </dt>
-                      <dd>{spot.rentalDetail}</dd>
-                    </div>
-                  )}
-                </dl>
-              </CardContent>
-            </Card>
-          </section>
-        </div>
-
-        {/* Right: Sidebar */}
-        <div className="space-y-6 sm:space-y-8">
-          {/* Recommended tackle */}
+        </>}
+        gearTab={<>
           {spot.tackleRecommendations.filter((t) => t.amazonUrl !== "#" && t.rakutenUrl !== "#").length > 0 && (
             <section>
               <h2 className="mb-4 text-lg font-bold">{spot.name}で使える仕掛け・タックル</h2>
-              <div className="space-y-4">
-                {spot.tackleRecommendations
-                  .filter((t) => t.amazonUrl !== "#" && t.rakutenUrl !== "#")
-                  .map((tackle) => (
-                    <TackleCard key={tackle.id} tackle={tackle} />
-                  ))}
-              </div>
-              <p className="mt-3 text-xs text-muted-foreground">
-                ※ 上記リンクはアフィリエイトリンクを含みます。購入による追加費用は発生しません。
-              </p>
+              <div className="space-y-4">{spot.tackleRecommendations.filter((t) => t.amazonUrl !== "#" && t.rakutenUrl !== "#").map((tackle) => (<TackleCard key={tackle.id} tackle={tackle} />))}</div>
+              <p className="mt-3 text-xs text-muted-foreground">※ 上記リンクはアフィリエイトリンクを含みます。購入による追加費用は発生しません。</p>
             </section>
           )}
-
-          {/* Access info */}
-          <section id="access-info">
+          {spot.gearGuides && spot.gearGuides.length > 0 && (
+            <section>
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold"><Wrench className="size-5" />初心者向け装備ガイド</h2>
+              <p className="mb-4 text-sm text-muted-foreground">このスポットでの釣りに必要な道具をわかりやすくまとめました。</p>
+              <GearGuideList guides={spot.gearGuides} />
+            </section>
+          )}
+          {spot.catchableFish.length > 0 && (
+            <section>
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold"><Wrench className="size-5" />{spot.gearGuides && spot.gearGuides.length > 0 ? "おすすめ装備" : "この釣り場でおすすめの装備"}</h2>
+              <p className="mb-2 text-sm text-muted-foreground">このスポットの釣り方に合った装備をピックアップしました。</p>
+              <SpotAffiliateRecommend methods={spot.catchableFish.map((cf) => cf.method)} isNightFishing={isNightFishing} />
+            </section>
+          )}
+          <section>
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold"><ShoppingBag className="size-5" />持ち物チェックリスト</h2>
+            <PackingChecklist spotType={spot.spotType} hasConvenienceStore={spot.hasConvenienceStore} hasToilet={spot.hasToilet} hasFishingShop={spot.hasFishingShop} hasRentalRod={spot.hasRentalRod} difficulty={spot.difficulty} safetyLevel={spot.safetyLevel} isNightFishing={isNightFishing} />
+          </section>
+        </>}
+        accessTab={<>
+          <section>
             <h2 className="mb-4 text-lg font-bold">アクセス情報</h2>
             <Card className="py-4">
-              <CardHeader className="px-4 pb-0 pt-0">
-                <CardTitle className="text-base">
-                  <MapPin className="mr-1 inline size-4" />
-                  所在地
-                </CardTitle>
-              </CardHeader>
+              <CardHeader className="px-4 pb-0 pt-0"><CardTitle className="text-base"><MapPin className="mr-1 inline size-4" />所在地</CardTitle></CardHeader>
               <CardContent className="space-y-4 px-4">
                 <div>
                   <p className="text-sm">{spot.address}</p>
-                  <a
-                    href={`https://www.google.com/maps/dir/?api=1&destination=${spot.latitude},${spot.longitude}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline min-h-[36px]"
-                  >
-                    <ExternalLink className="size-3.5" />
-                    Google Mapsでルートを見る
-                  </a>
+                  <a href={`https://www.google.com/maps/dir/?api=1&destination=${spot.latitude},${spot.longitude}`} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline min-h-[36px]"><ExternalLink className="size-3.5" />Google Mapsでルートを見る</a>
                 </div>
-
                 <Separator />
-
                 <div>
-                  <h4 className="mb-1 text-sm font-medium">
-                    <Car className="mr-1 inline size-4" />
-                    アクセス方法
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    {spot.accessInfo}
-                  </p>
+                  <h4 className="mb-1 text-sm font-medium"><Car className="mr-1 inline size-4" />アクセス方法</h4>
+                  <p className="text-sm text-muted-foreground">{spot.accessInfo}</p>
                 </div>
-
                 <Separator />
-
-                {/* Facilities */}
-                <div>
-                  <h4 className="mb-2 text-sm font-medium">設備</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {spot.hasParking && (
-                      <Badge variant="outline" className="text-xs">
-                        <Car className="size-3.5 mr-1" />
-                        駐車場{spot.parkingDetail ? `（${spot.parkingDetail}）` : ""}
-                      </Badge>
-                    )}
-                    {spot.hasToilet && (
-                      <Badge variant="outline" className="text-xs">
-                        <Toilet className="size-3.5 mr-1" />
-                        トイレ
-                      </Badge>
-                    )}
-                    {spot.hasFishingShop && (
-                      <Badge variant="outline" className="text-xs">
-                        <Store className="size-3.5 mr-1" />
-                        釣具店
-                      </Badge>
-                    )}
-                    {spot.hasRentalRod && (
-                      <Badge variant="outline" className="text-xs">
-                        <Wrench className="size-3.5 mr-1" />
-                        レンタル竿
-                      </Badge>
-                    )}
-                    {spot.hasConvenienceStore && (
-                      <Badge variant="outline" className="text-xs">
-                        <ShoppingBag className="size-3.5 mr-1" />
-                        コンビニ近く
-                      </Badge>
-                    )}
-                  </div>
-                </div>
-
-                <Separator />
-
-                {/* 駐車場混雑目安 */}
-                <ParkingPeakCard
-                  parkingPeakInfo={spot.parkingPeakInfo}
-                  hasParking={spot.hasParking}
-                  parkingDetail={spot.parkingDetail}
-                />
+                <ParkingPeakCard parkingPeakInfo={spot.parkingPeakInfo} hasParking={spot.hasParking} parkingDetail={spot.parkingDetail} />
               </CardContent>
             </Card>
           </section>
-
-          {/* ファミリー向け情報 */}
           <section>
-            <CollapsibleSection title="ファミリー向け情報">
-              <FamilyInfoCard
-                familyInfo={spot.familyInfo}
-                spotType={spot.spotType}
-                hasToilet={spot.hasToilet}
-                hasParking={spot.hasParking}
-                difficulty={spot.difficulty}
-              />
-            </CollapsibleSection>
+            <h2 className="mb-4 text-lg font-bold">現地の様子（ストリートビュー）</h2>
+            <StreetViewSection latitude={spot.latitude} longitude={spot.longitude} spotName={spot.name} address={spot.address} />
           </section>
-        </div>
-      </div>
-
-      {/* 天気・潮汐 */}
-      <section id="weather-tide" className="mt-8 sm:mt-12">
-        <CollapsibleSection title="天気・潮汐情報">
-          <SpotWeatherTide
-            lat={spot.latitude}
-            lng={spot.longitude}
-            spotName={spot.name}
-          />
-        </CollapsibleSection>
-      </section>
-
-      {/* ボウズ確率 */}
-      <section className="mt-8 sm:mt-12">
-        <CollapsibleSection title="ボウズ確率">
-          <SpotBouzuCard
-            spotType={spot.spotType}
-            difficulty={spot.difficulty}
-            rating={spot.rating}
-            reviewCount={spot.reviewCount}
-            prefecture={spot.region.prefecture}
-            areaName={spot.region.areaName}
-            isFree={spot.isFree}
-            hasRentalRod={spot.hasRentalRod}
-            catchableFishCount={spot.catchableFish.length}
-            catchableFishDetails={spot.catchableFish.map((cf) => ({
-              fishSlug: cf.fish.slug,
-              fishName: cf.fish.name,
-              method: cf.method,
-              catchDifficulty: cf.catchDifficulty,
-              monthStart: cf.monthStart,
-              monthEnd: cf.monthEnd,
-              peakSeason: cf.peakSeason,
-            }))}
-          />
-        </CollapsibleSection>
-      </section>
+          {nearbyShops.length > 0 && (
+            <section>
+              <h2 className="mb-3 text-lg font-bold">近くの釣具店</h2>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {nearbyShops.map((shop) => (
+                  <Link key={shop.id} href={`/shops/${shop.slug}`}>
+                    <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md"><CardContent className="p-4">
+                      <h3 className="truncate font-semibold group-hover:text-primary">{shop.name}</h3>
+                      <p className="mt-1 text-xs text-muted-foreground">{shop.businessHours}（定休: {shop.closedDays}）</p>
+                      <div className="mt-2 flex flex-wrap gap-1">
+                        {shop.hasLiveBait && <Badge variant="outline" className="text-[10px] px-1.5 py-0">活きエサ</Badge>}
+                        {shop.hasFrozenBait && <Badge variant="outline" className="text-[10px] px-1.5 py-0">冷凍エサ</Badge>}
+                        {shop.hasRentalRod && <Badge variant="outline" className="text-[10px] px-1.5 py-0">レンタル竿</Badge>}
+                      </div>
+                    </CardContent></Card>
+                  </Link>
+                ))}
+              </div>
+            </section>
+          )}
+        </>}
+      />
 
       {/* 広告 */}
       <InArticleAd className="mt-6" />
-
-      {/* ユーザー釣果報告（UGC） */}
-      <section id="catch-reports" className="mt-8 sm:mt-12">
-        <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
-          <MessageSquare className="size-5" />
-          みんなの釣果報告
-        </h2>
-        <CatchReportList reports={getCatchReportsBySpot(slug)} />
-        <CatchReportForm spotSlug={slug} spotName={spot.name} />
-      </section>
-
-      {/* 混雑予想 */}
-      <section className="mt-8 sm:mt-12">
-        <CollapsibleSection title="混雑予想">
-          <CrowdPredictionCard
-            rating={spot.rating}
-            isFree={spot.isFree}
-            difficulty={spot.difficulty}
-            prefecture={spot.region.prefecture}
-            hasParking={spot.hasParking}
-            reviewCount={spot.reviewCount}
-          />
-        </CollapsibleSection>
-      </section>
-
-      {/* 近くの釣具店 */}
-      {nearbyShops.length > 0 && (
-        <section className="mt-8 sm:mt-12">
-          <h2 className="mb-3 text-base font-bold sm:mb-4 sm:text-lg">近くの釣具店</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {nearbyShops.map((shop) => (
-              <Link key={shop.id} href={`/shops/${shop.slug}`}>
-                <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                  <CardContent className="p-4">
-                    <h3 className="truncate font-semibold group-hover:text-primary">
-                      {shop.name}
-                    </h3>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      {shop.businessHours}（定休: {shop.closedDays}）
-                    </p>
-                    <div className="mt-2 flex flex-wrap gap-1">
-                      {shop.hasLiveBait && (
-                        <Badge variant="outline" className="text-[10px] px-1.5 py-0">活きエサ</Badge>
-                      )}
-                      {shop.hasFrozenBait && (
-                        <Badge variant="outline" className="text-[10px] px-1.5 py-0">冷凍エサ</Badge>
-                      )}
-                      {shop.hasRentalRod && (
-                        <Badge variant="outline" className="text-[10px] px-1.5 py-0">レンタル竿</Badge>
-                      )}
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
 
       {/* この近くの釣り場 */}
       {nearbySpots.length > 0 && (
@@ -1041,6 +746,49 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 </Link>
               </div>
             )}
+          </section>
+        );
+      })()}
+
+      {/* 同じ魚が釣れる他のスポット */}
+      {(() => {
+        const fishSlugs = spot.catchableFish.map((cf) => cf.fish.slug);
+        const sameFishSpots = getSpotsByFish(fishSlugs, spot.slug, 5);
+        if (sameFishSpots.length === 0) return null;
+        return (
+          <section className="mt-8 sm:mt-12">
+            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+              <Fish className="size-5" />
+              同じ魚が釣れるスポット
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {sameFishSpots.map((ps) => {
+                const commonFish = ps.catchableFish
+                  .filter((cf) => fishSlugs.includes(cf.fish.slug))
+                  .slice(0, 3);
+                return (
+                  <Link key={ps.id} href={`/spots/${ps.slug}`}>
+                    <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                      <CardContent className="p-4">
+                        <h3 className="font-semibold group-hover:text-primary truncate">{ps.name}</h3>
+                        <p className="mt-1 text-xs text-muted-foreground">
+                          {ps.region.prefecture} {ps.region.areaName}
+                        </p>
+                        <div className="mt-1 flex items-center gap-1 text-xs">
+                          <Star className="size-3 fill-yellow-400 text-yellow-400" />
+                          <span>{ps.rating.toFixed(1)}</span>
+                        </div>
+                        {commonFish.length > 0 && (
+                          <p className="mt-2 text-xs text-muted-foreground truncate">
+                            共通: {commonFish.map((cf) => cf.fish.name).join("・")}
+                          </p>
+                        )}
+                      </CardContent>
+                    </Card>
+                  </Link>
+                );
+              })}
+            </div>
           </section>
         );
       })()}
@@ -1131,6 +879,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
           </section>
         );
       })()}
+
+      {/* 最近見たスポット */}
+      <RecentlyViewedSpots />
 
       {/* LINE登録バナー */}
       <section className="mt-8 sm:mt-12">

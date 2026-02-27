@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ExternalLink, BookOpen } from "lucide-react";
+import { ExternalLink, BookOpen, Fish, RefreshCw, Cable, Anchor, Lightbulb, Store } from "lucide-react";
 import { GearGuide as GearGuideType, DIFFICULTY_LABELS } from "@/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -104,10 +104,10 @@ const difficultyColors = {
   advanced: "bg-red-100 text-red-700 hover:bg-red-100",
 };
 
-function GearRow({ label, value, icon, affiliateUrl, affiliateLabel }: { label: string; value: string; icon: string; affiliateUrl?: string; affiliateLabel?: string }) {
+function GearRow({ label, value, icon, affiliateUrl, affiliateLabel }: { label: string; value: string; icon: React.ReactNode; affiliateUrl?: string; affiliateLabel?: string }) {
   return (
     <div className="flex items-start gap-3 py-2">
-      <span className="w-5 text-center text-base">{icon}</span>
+      <span className="flex w-5 items-center justify-center text-primary">{icon}</span>
       <div className="min-w-0 flex-1">
         <dt className="text-xs font-medium text-muted-foreground">{label}</dt>
         <dd className="text-sm font-semibold">{value}</dd>
@@ -161,27 +161,27 @@ export function GearGuideCard({ guide }: { guide: GearGuideType }) {
           return (
             <dl className="divide-y">
               <GearRow
-                icon="🎣"
+                icon={<Fish className="size-4" />}
                 label="竿（ロッド）"
                 value={explainGearSpec(guide.rod)}
                 affiliateUrl={ROD_AFFILIATE.url}
                 affiliateLabel={`${ROD_AFFILIATE.label}をAmazonで見る`}
               />
               <GearRow
-                icon="🔄"
+                icon={<RefreshCw className="size-4" />}
                 label="リール"
                 value={explainGearSpec(guide.reel)}
                 affiliateUrl={REEL_AFFILIATE.url}
                 affiliateLabel={`${REEL_AFFILIATE.label}をAmazonで見る`}
               />
               <GearRow
-                icon="🧵"
+                icon={<Cable className="size-4" />}
                 label="糸（ライン）"
                 value={explainGearSpec(addPeEquivalent(guide.line))}
                 affiliateUrl={lineAffiliate?.url}
                 affiliateLabel={`${lineAffiliate?.label}をAmazonで見る`}
               />
-              <GearRow icon="🪝" label="仕掛け・針" value={guide.hook} />
+              <GearRow icon={<Anchor className="size-4" />} label="仕掛け・針" value={guide.hook} />
             </dl>
           );
         })()}
@@ -214,7 +214,7 @@ export function GearGuideCard({ guide }: { guide: GearGuideType }) {
         {guide.tip && (
           <div className="mt-3 rounded-lg bg-amber-50 p-3">
             <p className="text-xs font-medium text-amber-800">
-              💡 初心者向けコツ
+              <Lightbulb className="mr-1 inline size-3.5" /> 初心者向けコツ
             </p>
             <p className="mt-1 text-sm text-amber-700">{guide.tip}</p>
           </div>
@@ -226,7 +226,7 @@ export function GearGuideCard({ guide }: { guide: GearGuideType }) {
           return (
             <div className="mt-3 rounded-lg bg-sky-50 p-3">
               <p className="text-xs font-medium text-sky-800">
-                🏬 釣具店での頼み方
+                <Store className="mr-1 inline size-3.5" /> 釣具店での頼み方
               </p>
               <p className="mt-1 text-sm text-sky-700">{shopAdvice}</p>
             </div>

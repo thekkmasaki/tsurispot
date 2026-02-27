@@ -8,6 +8,9 @@ export const metadata: Metadata = {
   title: "プライバシーポリシー",
   description:
     "ツリスポのプライバシーポリシーです。個人情報の取り扱い、Cookie、アクセス解析、広告配信について説明しています。",
+  alternates: {
+    canonical: "https://tsurispot.com/privacy",
+  },
 };
 
 export default function PrivacyPage() {

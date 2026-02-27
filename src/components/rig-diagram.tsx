@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Fish } from "lucide-react";
 
 type RigType = "sabiki" | "choinage" | "float" | "anazuri";
 
@@ -202,7 +202,7 @@ export function RigDiagram({ type }: { type: RigType }) {
         className="flex w-full items-center justify-between px-4 py-3 text-left transition-colors hover:bg-muted/50 sm:px-6"
       >
         <div className="flex items-center gap-2">
-          <span className="text-lg">🎣</span>
+          <Fish className="size-5 text-primary" />
           <div>
             <p className="text-sm font-bold sm:text-base">{rig.title}</p>
             <p className="text-xs text-muted-foreground">{rig.description}</p>

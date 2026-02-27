@@ -48,11 +48,28 @@ const breadcrumbJsonLd = {
 function FishListContent() {
   const fishSpecies = getFishSpeciesWithSpots();
 
+  const fishItemListJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: "魚種図鑑",
+    numberOfItems: fishSpecies.length,
+    itemListElement: fishSpecies.slice(0, 20).map((f, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: f.name,
+      url: `https://tsurispot.com/fish/${f.slug}`,
+    })),
+  };
+
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(fishItemListJsonLd) }}
       />
       {/* パンくず */}
       <Breadcrumb

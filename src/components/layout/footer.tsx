@@ -91,6 +91,58 @@ export function Footer() {
             </ul>
           </div>
         </div>
+        {/* 人気魚種リンク */}
+        <div className="mt-6 border-t border-border/40 pt-6">
+          <h3 className="mb-3 text-sm font-semibold">人気の釣りターゲット</h3>
+          <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+            <Link href="/fish/aji" className="hover:text-foreground">アジの釣り方</Link>
+            <span>·</span>
+            <Link href="/fish/saba" className="hover:text-foreground">サバの釣り方</Link>
+            <span>·</span>
+            <Link href="/fish/kasago" className="hover:text-foreground">カサゴの釣り方</Link>
+            <span>·</span>
+            <Link href="/fish/iwashi" className="hover:text-foreground">イワシの釣り方</Link>
+            <span>·</span>
+            <Link href="/fish/kisu" className="hover:text-foreground">キスの釣り方</Link>
+            <span>·</span>
+            <Link href="/fish/suzuki" className="hover:text-foreground">スズキの釣り方</Link>
+            <span>·</span>
+            <Link href="/fish/kurodai" className="hover:text-foreground">クロダイの釣り方</Link>
+            <span>·</span>
+            <Link href="/fish/aori-ika" className="hover:text-foreground">アオリイカの釣り方</Link>
+            <span>·</span>
+            <Link href="/fish/mebaru" className="hover:text-foreground">メバルの釣り方</Link>
+            <span>·</span>
+            <Link href="/fish/karei" className="hover:text-foreground">カレイの釣り方</Link>
+            <span>·</span>
+            <Link href="/fish" className="hover:text-foreground font-medium">魚種図鑑一覧 →</Link>
+          </div>
+        </div>
+
+        {/* 釣り方ガイドリンク */}
+        <div className="mt-6 border-t border-border/40 pt-6">
+          <h3 className="mb-3 text-sm font-semibold">釣り方ガイド</h3>
+          <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
+            <Link href="/methods/sabiki" className="hover:text-foreground">サビキ釣り</Link>
+            <span>·</span>
+            <Link href="/methods/choi-nage" className="hover:text-foreground">ちょい投げ</Link>
+            <span>·</span>
+            <Link href="/methods/uki-zuri" className="hover:text-foreground">ウキ釣り</Link>
+            <span>·</span>
+            <Link href="/methods/ajing" className="hover:text-foreground">アジング</Link>
+            <span>·</span>
+            <Link href="/methods/eging" className="hover:text-foreground">エギング</Link>
+            <span>·</span>
+            <Link href="/methods/mebaring" className="hover:text-foreground">メバリング</Link>
+            <span>·</span>
+            <Link href="/methods/shore-jigging" className="hover:text-foreground">ショアジギング</Link>
+            <span>·</span>
+            <Link href="/methods/ana-zuri" className="hover:text-foreground">穴釣り</Link>
+            <span>·</span>
+            <Link href="/methods" className="hover:text-foreground font-medium">釣り方一覧 →</Link>
+          </div>
+        </div>
+
         {/* 人気都道府県リンク */}
         <div className="mt-6 border-t border-border/40 pt-6">
           <h3 className="mb-3 text-sm font-semibold">人気エリアの釣りスポット</h3>

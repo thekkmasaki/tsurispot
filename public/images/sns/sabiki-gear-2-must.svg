@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 1350" width="1080" height="1350">
+  <rect width="1080" height="1350" fill="#ffffff"/>
+  <rect width="1080" height="6" fill="#0ea5e9"/>
+  <!-- 見出し -->
+  <text x="100" y="120" font-family="Helvetica,Arial,sans-serif" font-size="24" font-weight="700" fill="#0ea5e9">必須の5つ</text>
+  <!-- 1 -->
+  <rect x="100" y="180" width="6" height="120" fill="#0f172a"/>
+  <text x="140" y="225" font-family="Helvetica,Arial,sans-serif" font-size="36" font-weight="800" fill="#0f172a">竿 + リール</text>
+  <text x="140" y="275" font-family="Helvetica,Arial,sans-serif" font-size="22" fill="#64748b">初心者セットで2,000〜3,000円。これが一番安い</text>
+  <!-- 2 -->
+  <rect x="100" y="340" width="6" height="120" fill="#0f172a"/>
+  <text x="140" y="385" font-family="Helvetica,Arial,sans-serif" font-size="36" font-weight="800" fill="#0f172a">サビキ仕掛け</text>
+  <text x="140" y="435" font-family="Helvetica,Arial,sans-serif" font-size="22" fill="#64748b">4〜6号。1セット200円くらい。予備含めて3セット</text>
+  <!-- 3 -->
+  <rect x="100" y="500" width="6" height="120" fill="#0f172a"/>
+  <text x="140" y="545" font-family="Helvetica,Arial,sans-serif" font-size="36" font-weight="800" fill="#0f172a">アミエビ（コマセ）</text>
+  <text x="140" y="595" font-family="Helvetica,Arial,sans-serif" font-size="22" fill="#64748b">チューブタイプなら手が汚れない。虫エサ不要</text>
+  <!-- 4 -->
+  <rect x="100" y="660" width="6" height="120" fill="#0f172a"/>
+  <text x="140" y="705" font-family="Helvetica,Arial,sans-serif" font-size="36" font-weight="800" fill="#0f172a">バケツ</text>
+  <text x="140" y="755" font-family="Helvetica,Arial,sans-serif" font-size="22" fill="#64748b">釣った魚を入れる。100均の折りたたみバケツでいい</text>
+  <!-- 5 -->
+  <rect x="100" y="820" width="6" height="120" fill="#0f172a"/>
+  <text x="140" y="865" font-family="Helvetica,Arial,sans-serif" font-size="36" font-weight="800" fill="#0f172a">ハサミ</text>
+  <text x="140" y="915" font-family="Helvetica,Arial,sans-serif" font-size="22" fill="#64748b">糸を切るだけ。家にあるやつでいい</text>
+  <!-- 合計 -->
+  <rect x="100" y="1000" width="880" height="100" rx="12" fill="#f8fafc"/>
+  <text x="140" y="1060" font-family="Helvetica,Arial,sans-serif" font-size="28" fill="#334155">合計</text>
+  <text x="340" y="1062" font-family="Helvetica,Arial,sans-serif" font-size="40" font-weight="900" fill="#0f172a">約 3,000〜5,000円</text>
+  <!-- 一言 -->
+  <text x="100" y="1180" font-family="Helvetica,Arial,sans-serif" font-size="26" fill="#334155">釣具屋で「サビキやりたいです」と</text>
+  <text x="100" y="1220" font-family="Helvetica,Arial,sans-serif" font-size="26" fill="#334155">言えば全部選んでくれます。</text>
+  <text x="100" y="1310" font-family="Helvetica,Arial,sans-serif" font-size="20" fill="#cbd5e1">@tsurispotjapan</text>
+</svg>

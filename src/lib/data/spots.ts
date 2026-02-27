@@ -2941,3 +2941,15 @@ export function getSpotsByPrefecture(prefecture: string, excludeSlug: string, li
     .sort((a, b) => b.rating - a.rating)
     .slice(0, limit);
 }
+
+export function getSpotsByFish(fishSlugs: string[], excludeSlug: string, limit = 5): FishingSpot[] {
+  const fishSet = new Set(fishSlugs);
+  return fishingSpots
+    .filter((s) => s.slug !== excludeSlug && s.catchableFish.some((cf) => fishSet.has(cf.fish.slug)))
+    .sort((a, b) => {
+      const aMatch = a.catchableFish.filter((cf) => fishSet.has(cf.fish.slug)).length;
+      const bMatch = b.catchableFish.filter((cf) => fishSet.has(cf.fish.slug)).length;
+      return bMatch - aMatch || b.rating - a.rating;
+    })
+    .slice(0, limit);
+}

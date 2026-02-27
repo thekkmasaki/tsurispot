@@ -73,15 +73,25 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     ? `${fish.peakMonths[0]}月〜${fish.peakMonths[fish.peakMonths.length - 1]}月`
     : "";
 
+  const titleText = `${fish.name}の釣り方・時期・おすすめスポット${fish.aliases?.length ? `【${fish.aliases[0]}】` : ""}`;
+  const descText = `${fish.name}の釣り方を初心者にもわかりやすく解説。${peakMonthsStr ? `${fish.name}が釣れる時期は${peakMonthsStr}。` : ""}${methodNames ? `${methodNames}などの釣り方・仕掛け・タックル情報を詳しく紹介。` : ""}釣れるスポット一覧やシーズンカレンダーも掲載。${fish.description.slice(0, 60)}`;
+  const ogDesc = `${fish.name}の旬の時期・釣り方・おすすめの食べ方を紹介。${fish.description}`;
+
   return {
-    title: `${fish.name}の釣り方・釣れる時期・おすすめスポット${fish.aliases?.length ? `【${fish.aliases[0]}】` : ""}`,
-    description: `${fish.name}の釣り方を初心者にもわかりやすく解説。${peakMonthsStr ? `${fish.name}が釣れる時期は${peakMonthsStr}。` : ""}${methodNames ? `${methodNames}などの釣り方・仕掛け・タックル情報を詳しく紹介。` : ""}釣れるスポット一覧やシーズンカレンダーも掲載。${fish.description.slice(0, 60)}`,
+    title: titleText,
+    description: descText.slice(0, 160),
+    keywords: [fish.name, fish.nameKana, ...(fish.aliases || []).slice(0, 3), "釣り方", "釣れる時期", "おすすめスポット"],
     openGraph: {
-      title: `${fish.name}（${fish.nameEnglish}）の釣り情報`,
-      description: `${fish.name}の旬の時期・釣り方・おすすめの食べ方を紹介。${fish.description}`,
+      title: `${fish.name}の釣り方・時期・おすすめスポット | ツリスポ`,
+      description: ogDesc.slice(0, 120),
       type: "article",
       url: `https://tsurispot.com/fish/${fish.slug}`,
       siteName: "ツリスポ",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${fish.name}の釣り方・時期・おすすめスポット | ツリスポ`,
+      description: ogDesc.slice(0, 120),
     },
     alternates: {
       canonical: `https://tsurispot.com/fish/${fish.slug}`,
@@ -1026,6 +1036,34 @@ export default async function FishDetailPage({ params }: PageProps) {
                     className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
                   >
                     {sf.name}
+                  </Badge>
+                </Link>
+              ))}
+            </div>
+          </section>
+        );
+      })()}
+
+      {/* 釣り方ガイドへのリンク */}
+      {(() => {
+        const methodLinks = (fish.fishingMethods || [])
+          .map((m) => ({ name: m.methodName, slug: METHOD_NAME_TO_SLUG[m.methodName] }))
+          .filter((m) => m.slug);
+        if (methodLinks.length === 0) return null;
+        return (
+          <section className="mb-8">
+            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+              <BookOpen className="size-5 text-primary" />
+              {fish.name}の釣り方ガイド
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {methodLinks.map((m) => (
+                <Link key={m.slug} href={`/methods/${m.slug}`}>
+                  <Badge
+                    variant="outline"
+                    className="cursor-pointer px-3 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground min-h-[40px] flex items-center"
+                  >
+                    {m.name}の詳しいガイド
                   </Badge>
                 </Link>
               ))}

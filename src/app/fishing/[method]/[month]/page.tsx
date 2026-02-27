@@ -7,10 +7,11 @@ import {
   Fish,
   MapPin,
   Thermometer,
-  Star,
   ArrowRight,
   HelpCircle,
   Lightbulb,
+  ShoppingBag,
+  ExternalLink,
   Calendar,
   ChevronDown,
 } from "lucide-react";
@@ -24,7 +25,12 @@ import {
   getMonthBySlug,
   getMethodMonthPageData,
 } from "@/lib/data/fishing-methods";
-import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
+import { DIFFICULTY_LABELS } from "@/types";
+import {
+  SpotListWithFilter,
+  type SpotForFilter,
+} from "@/components/fishing/spot-list-with-filter";
+import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 
 interface Props {
   params: Promise<{ method: string; month: string }>;
@@ -75,6 +81,31 @@ export default async function MethodMonthPage({ params }: Props) {
 
   const peakFish = fish.filter((f) => f.isPeak);
   const normalFish = fish.filter((f) => !f.isPeak);
+
+  // スポットデータをクライアントコンポーネント用にシリアライズ
+  const serializedSpots: SpotForFilter[] = spots.map((spot) => ({
+    slug: spot.slug,
+    name: spot.name,
+    address: spot.address,
+    prefecture: spot.region.prefecture,
+    spotType: spot.spotType,
+    difficulty: spot.difficulty,
+    rating: spot.rating,
+    latitude: spot.latitude,
+    longitude: spot.longitude,
+    matchingFishCount: spot.matchingFishCount,
+    matchingFishNames: spot.catchableFish
+      .filter((cf) => method.methods.includes(cf.method))
+      .slice(0, 4)
+      .map((cf) => cf.fish.name),
+  }));
+
+  // アフィリエイト商品を取得（月と釣り方でマッチング）
+  const affiliateProducts = getRelevantAffiliateProducts(
+    method.methods,
+    month.num,
+    6
+  );
 
   // JSON-LD
   const breadcrumbJsonLd = {
@@ -365,68 +396,11 @@ export default async function MethodMonthPage({ params }: Props) {
               </CardContent>
             </Card>
           ) : (
-            <div className="space-y-3">
-              {spots.map((spot, idx) => (
-                <Link
-                  key={spot.slug}
-                  href={`/fishing-spots/${spot.slug}`}
-                >
-                  <Card className="hover:shadow-md transition-shadow">
-                    <CardContent className="p-4">
-                      <div className="flex items-start gap-3">
-                        <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-200 font-bold text-sm shrink-0">
-                          {idx + 1}
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <div className="flex items-center gap-2 flex-wrap mb-1">
-                            <h3 className="font-bold">{spot.name}</h3>
-                            <Badge variant="secondary" className="text-xs">
-                              {SPOT_TYPE_LABELS[spot.spotType]}
-                            </Badge>
-                            <Badge variant="outline" className="text-xs">
-                              {spot.region.prefecture}
-                            </Badge>
-                          </div>
-                          <div className="flex items-center gap-3 text-sm text-gray-600 mb-1">
-                            <span className="flex items-center gap-1">
-                              <Star className="size-3.5 text-yellow-500 fill-yellow-500" />
-                              {spot.rating.toFixed(1)}
-                            </span>
-                            <span>
-                              {spot.matchingFishCount}魚種マッチ
-                            </span>
-                            <span>
-                              {DIFFICULTY_LABELS[spot.difficulty]}
-                            </span>
-                          </div>
-                          <p className="text-xs text-gray-500 line-clamp-1">
-                            {spot.address}
-                          </p>
-                          {/* マッチする魚種表示 */}
-                          <div className="flex flex-wrap gap-1 mt-2">
-                            {spot.catchableFish
-                              .filter((cf) =>
-                                method.methods.includes(cf.method)
-                              )
-                              .slice(0, 4)
-                              .map((cf) => (
-                                <Badge
-                                  key={cf.fish.slug}
-                                  variant="secondary"
-                                  className="text-xs"
-                                >
-                                  {cf.fish.name}
-                                </Badge>
-                              ))}
-                          </div>
-                        </div>
-                        <ChevronRight className="size-4 text-gray-400 shrink-0 mt-2" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
+            <SpotListWithFilter
+              spots={serializedSpots}
+              methodName={method.name}
+              monthName={month.name}
+            />
           )}
         </section>
 
@@ -451,6 +425,69 @@ export default async function MethodMonthPage({ params }: Props) {
             </CardContent>
           </Card>
         </section>
+
+        {/* おすすめアイテム */}
+        {affiliateProducts.length > 0 && (
+          <section className="mb-10">
+            <h2 className="text-xl font-bold mb-1 flex items-center gap-2">
+              <ShoppingBag className="size-5" />
+              {month.name}の{method.name}おすすめアイテム
+            </h2>
+            <p className="mb-4 text-sm text-muted-foreground">
+              当日バタバタしないよう、事前にネットで揃えておくのがおすすめです
+            </p>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {affiliateProducts.map((product) => (
+                <a
+                  key={product.id}
+                  href={product.url}
+                  target="_blank"
+                  rel="noopener noreferrer sponsored"
+                  className="block"
+                >
+                  <Card className="group h-full gap-0 py-0 transition-all hover:shadow-md hover:border-primary/30">
+                    <CardContent className="p-3 sm:p-4">
+                      <div className="flex items-start justify-between gap-2">
+                        <Badge
+                          className={`shrink-0 text-[10px] ${
+                            product.category === "tackle"
+                              ? "bg-blue-100 text-blue-700"
+                              : product.category === "bait"
+                                ? "bg-green-100 text-green-700"
+                                : product.category === "wear"
+                                  ? "bg-orange-100 text-orange-700"
+                                  : "bg-purple-100 text-purple-700"
+                          }`}
+                        >
+                          {product.category === "tackle"
+                            ? "仕掛け・ライン"
+                            : product.category === "bait"
+                              ? "エサ"
+                              : product.category === "wear"
+                                ? "ウェア"
+                                : "便利グッズ"}
+                        </Badge>
+                        <ExternalLink className="size-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
+                      </div>
+                      <h3 className="mt-2 text-sm font-semibold leading-tight group-hover:text-primary">
+                        {product.name}
+                      </h3>
+                      <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground line-clamp-3">
+                        {product.description}
+                      </p>
+                      <div className="mt-3 flex items-center justify-center rounded-md bg-[#FF9900]/10 px-3 py-1.5 text-xs font-medium text-[#FF9900] transition-colors group-hover:bg-[#FF9900] group-hover:text-white">
+                        Amazonで見る
+                      </div>
+                    </CardContent>
+                  </Card>
+                </a>
+              ))}
+            </div>
+            <p className="mt-2 text-[10px] text-muted-foreground">
+              ※ 上記はAmazonアソシエイトリンクです。購入による追加費用は発生しません。
+            </p>
+          </section>
+        )}
 
         {/* FAQ */}
         <section className="mb-10">

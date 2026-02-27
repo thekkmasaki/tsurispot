@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>ツリスポ Instagram投稿画像</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #f0f0f0;
+    font-family: 'Hiragino Kaku Gothic ProN', 'Noto Sans JP', sans-serif;
+  }
+
+  .post {
+    width: 1080px;
+    height: 1080px;
+    background: linear-gradient(135deg, #0a2e5c 0%, #0c4a8e 30%, #1e6fc2 60%, #2d8bd4 80%, #3ba3e0 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* 波模様（下部） */
+  .wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 280px;
+  }
+  .wave svg {
+    width: 100%;
+    height: 100%;
+  }
+
+  /* 装飾の泡 */
+  .bubble {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+  }
+  .bubble-1 { width: 300px; height: 300px; top: -80px; right: -60px; }
+  .bubble-2 { width: 200px; height: 200px; bottom: 200px; left: -50px; }
+  .bubble-3 { width: 150px; height: 150px; top: 180px; right: 100px; background: rgba(255,255,255,0.04); }
+  .bubble-4 { width: 80px; height: 80px; top: 400px; left: 80px; background: rgba(255,255,255,0.05); }
+  .bubble-5 { width: 120px; height: 120px; bottom: 320px; right: 200px; background: rgba(255,255,255,0.03); }
+
+  /* 光の筋 */
+  .light-ray {
+    position: absolute;
+    top: -100px;
+    left: 50%;
+    transform: translateX(-50%) rotate(15deg);
+    width: 600px;
+    height: 500px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%);
+    clip-path: polygon(40% 0%, 60% 0%, 80% 100%, 20% 100%);
+  }
+
+  /* メインコンテンツ */
+  .content {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 80px 60px;
+    text-align: center;
+    color: white;
+  }
+
+  /* ロゴ画像 */
+  .logo-container {
+    width: 200px;
+    height: 200px;
+    border-radius: 40px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    margin-bottom: 40px;
+    border: 4px solid rgba(255,255,255,0.2);
+  }
+  .logo-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* サイト名 */
+  .site-name {
+    font-size: 72px;
+    font-weight: 900;
+    letter-spacing: 8px;
+    margin-bottom: 12px;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .site-name-en {
+    font-size: 24px;
+    font-weight: 600;
+    letter-spacing: 6px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 50px;
+    text-transform: uppercase;
+  }
+
+  /* 区切り線 */
+  .divider {
+    width: 80px;
+    height: 3px;
+    background: rgba(255,255,255,0.5);
+    border-radius: 2px;
+    margin-bottom: 50px;
+  }
+
+  /* キャッチコピー */
+  .tagline {
+    font-size: 36px;
+    font-weight: 700;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
+
+  /* 統計 */
+  .stats {
+    display: flex;
+    gap: 50px;
+    margin-bottom: 30px;
+  }
+  .stat {
+    text-align: center;
+  }
+  .stat-number {
+    font-size: 48px;
+    font-weight: 900;
+    color: #7dd3fc;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  }
+  .stat-label {
+    font-size: 18px;
+    color: rgba(255,255,255,0.8);
+    margin-top: 4px;
+  }
+
+  /* URL */
+  .url {
+    font-size: 22px;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 2px;
+    margin-top: 20px;
+  }
+
+  /* 小さな魚アイコン装飾 */
+  .fish-deco {
+    position: absolute;
+    font-size: 40px;
+    opacity: 0.15;
+  }
+  .fish-1 { top: 60px; left: 80px; transform: rotate(-15deg); }
+  .fish-2 { top: 120px; right: 120px; transform: rotate(10deg) scaleX(-1); font-size: 30px; }
+  .fish-3 { bottom: 300px; left: 60px; transform: rotate(5deg); font-size: 35px; }
+  .fish-4 { bottom: 250px; right: 80px; transform: rotate(-8deg) scaleX(-1); font-size: 28px; }
+</style>
+</head>
+<body>
+
+<div class="post">
+  <!-- 装飾 -->
+  <div class="bubble bubble-1"></div>
+  <div class="bubble bubble-2"></div>
+  <div class="bubble bubble-3"></div>
+  <div class="bubble bubble-4"></div>
+  <div class="bubble bubble-5"></div>
+  <div class="light-ray"></div>
+
+  <!-- 魚の装飾 -->
+  <div class="fish-deco fish-1">🐟</div>
+  <div class="fish-deco fish-2">🐟</div>
+  <div class="fish-deco fish-3">🐟</div>
+  <div class="fish-deco fish-4">🐟</div>
+
+  <!-- 波 -->
+  <div class="wave">
+    <svg viewBox="0 0 1080 280" preserveAspectRatio="none">
+      <path d="M0,120 C180,60 360,180 540,120 C720,60 900,180 1080,120 L1080,280 L0,280 Z" fill="rgba(255,255,255,0.06)"/>
+      <path d="M0,160 C180,100 360,220 540,160 C720,100 900,220 1080,160 L1080,280 L0,280 Z" fill="rgba(255,255,255,0.04)"/>
+      <path d="M0,200 C180,150 360,250 540,200 C720,150 900,250 1080,200 L1080,280 L0,280 Z" fill="rgba(255,255,255,0.03)"/>
+    </svg>
+  </div>
+
+  <!-- コンテンツ -->
+  <div class="content">
+    <div class="logo-container">
+      <img src="logo-square.jpg" alt="ツリスポ ロゴ">
+    </div>
+
+    <div class="site-name">ツリスポ</div>
+    <div class="site-name-en">TsuriSpot</div>
+
+    <div class="divider"></div>
+
+    <div class="tagline">
+      全国の釣りスポットが<br>すぐ見つかる
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-number">1,000<span style="font-size:32px">+</span></div>
+        <div class="stat-label">釣りスポット</div>
+      </div>
+      <div class="stat">
+        <div class="stat-number">80<span style="font-size:32px">+</span></div>
+        <div class="stat-label">対象魚種</div>
+      </div>
+    </div>
+
+    <div class="url">tsurispot.com</div>
+  </div>
+</div>
+
+</body>
+</html>

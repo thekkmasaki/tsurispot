@@ -40,7 +40,13 @@ export default async function sitemap({
       { url: `${baseUrl}/fishing-calendar`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
       { url: `${baseUrl}/for-beginners`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
       { url: `${baseUrl}/fishing`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-      // ガイド（全27ページ）
+      { url: `${baseUrl}/planner`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      // 目的別釣り場ページ
+      { url: `${baseUrl}/fishing-spots/breakwater-beginner`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+      { url: `${baseUrl}/fishing-spots/best-saltwater`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+      { url: `${baseUrl}/fishing-spots/river-beginner`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+      { url: `${baseUrl}/fishing-spots/near-me`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
+      // ガイド（全28ページ）
       { url: `${baseUrl}/guide`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       { url: `${baseUrl}/guide/beginner`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       { url: `${baseUrl}/guide/setup`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
@@ -68,6 +74,7 @@ export default async function sitemap({
       { url: `${baseUrl}/guide/fishing-tips`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
       { url: `${baseUrl}/guide/fishing-for-beginners`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
       { url: `${baseUrl}/guide/fishing-gear-guide`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/guide/jet-sinker`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
       // 装備ガイド
       { url: `${baseUrl}/gear`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       { url: `${baseUrl}/gear/sabiki`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
@@ -85,10 +92,15 @@ export default async function sitemap({
       { url: `${baseUrl}/methods/ana-zuri`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       // その他固定ページ
       { url: `${baseUrl}/glossary`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+      { url: `${baseUrl}/glossary-quiz`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
       { url: `${baseUrl}/seasonal`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       { url: `${baseUrl}/beginner-checklist`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       { url: `${baseUrl}/fishing-rules`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       { url: `${baseUrl}/faq`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+      { url: `${baseUrl}/faq/beginner`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/faq/season`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/faq/spot`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/faq/technique`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
       { url: `${baseUrl}/safety`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
       { url: `${baseUrl}/recommendation`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
       { url: `${baseUrl}/fish-finder`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
@@ -99,6 +111,7 @@ export default async function sitemap({
       { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },
       { url: `${baseUrl}/partner`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
       { url: `${baseUrl}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
+      { url: `${baseUrl}/legal`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
       { url: `${baseUrl}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
       { url: `${baseUrl}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
       // ブログ
@@ -107,7 +120,7 @@ export default async function sitemap({
         url: `${baseUrl}/blog/${post.slug}`,
         lastModified: now,
         changeFrequency: "weekly" as const,
-        priority: 0.6,
+        priority: 0.5,
       })),
       // エリアガイド
       { url: `${baseUrl}/area-guide`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
@@ -134,7 +147,7 @@ export default async function sitemap({
       url: `${baseUrl}/spots/${spot.slug}`,
       lastModified: now,
       changeFrequency: "weekly" as const,
-      priority: 0.7,
+      priority: 0.8,
     }));
   }
 
@@ -151,19 +164,19 @@ export default async function sitemap({
   // 3: 都道府県・エリアページ
   if (sitemapId === 3) {
     return [
-      { url: `${baseUrl}/prefecture`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.8 },
+      { url: `${baseUrl}/prefecture`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.9 },
       ...prefectures.map((pref) => ({
         url: `${baseUrl}/prefecture/${pref.slug}`,
         lastModified: now,
         changeFrequency: "weekly" as const,
-        priority: 0.7,
+        priority: 0.8,
       })),
-      { url: `${baseUrl}/area`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.8 },
+      { url: `${baseUrl}/area`, lastModified: now, changeFrequency: "weekly" as const, priority: 0.9 },
       ...regions.map((region) => ({
         url: `${baseUrl}/area/${region.slug}`,
         lastModified: now,
         changeFrequency: "weekly" as const,
-        priority: 0.7,
+        priority: 0.8,
       })),
     ];
   }

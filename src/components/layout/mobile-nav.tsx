@@ -21,6 +21,7 @@ import {
   Package,
   Home,
   FileText,
+  ClipboardList,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getFavorites } from "@/components/spots/favorite-button";
@@ -45,6 +46,7 @@ const moreNavItems = [
   { href: "/bouzu-checker", label: "ボウズ確率", icon: Target },
   { href: "/quiz", label: "スタイル診断", icon: Sparkles },
   { href: "/fishing-rules", label: "ルール・マナー", icon: Scale },
+  { href: "/planner", label: "プランナー", icon: ClipboardList },
 ];
 
 export function MobileNav() {

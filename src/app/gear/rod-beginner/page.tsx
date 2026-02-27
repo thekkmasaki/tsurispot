@@ -889,25 +889,47 @@ export default function GearRodBeginnerPage() {
                   <strong>PEライン</strong>は細くて強度が高く、飛距離が出て感度も抜群。
                   ルアー釣りや遠投したい方におすすめですが、別途リーダー（先糸）が必要です。
                 </p>
-                <div className="flex flex-col gap-2 sm:flex-row">
-                  <a
-                    href="https://amzn.to/4s1SPaX"
-                    target="_blank"
-                    rel="noopener noreferrer nofollow"
-                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
-                  >
-                    ナイロンライン（道糸）を見る
-                    <ExternalLink className="size-3.5" />
-                  </a>
-                  <a
-                    href="https://amzn.to/4s45H0i"
-                    target="_blank"
-                    rel="noopener noreferrer nofollow"
-                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
-                  >
-                    PEライン（道糸）を見る
-                    <ExternalLink className="size-3.5" />
-                  </a>
+                <div className="space-y-2">
+                  <div className="flex flex-col gap-2 sm:flex-row">
+                    <a
+                      href="https://amzn.to/4s1SPaX"
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
+                    >
+                      ナイロンライン（道糸）をAmazonで見る
+                      <ExternalLink className="size-3.5" />
+                    </a>
+                    <a
+                      href={getRakutenUrl("ナイロンライン 道糸 釣り")}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#BF0000] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#A00000]"
+                    >
+                      ナイロンラインを楽天で探す
+                      <ExternalLink className="size-3.5" />
+                    </a>
+                  </div>
+                  <div className="flex flex-col gap-2 sm:flex-row">
+                    <a
+                      href="https://amzn.to/4s45H0i"
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
+                    >
+                      PEライン（道糸）をAmazonで見る
+                      <ExternalLink className="size-3.5" />
+                    </a>
+                    <a
+                      href={getRakutenUrl("PEライン 道糸 釣り")}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#BF0000] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#A00000]"
+                    >
+                      PEラインを楽天で探す
+                      <ExternalLink className="size-3.5" />
+                    </a>
+                  </div>
                 </div>
               </div>
               <div className="rounded-lg border border-green-200 bg-green-50/50 p-4">
@@ -921,25 +943,47 @@ export default function GearRodBeginnerPage() {
                   <strong>魚の目にほぼ見えません</strong>。
                   警戒心の強い魚にも有効で、根ズレにも強いため堤防釣り全般に最適です。
                 </p>
-                <div className="flex flex-col gap-2 sm:flex-row">
-                  <a
-                    href="https://amzn.to/408jI1f"
-                    target="_blank"
-                    rel="noopener noreferrer nofollow"
-                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
-                  >
-                    ハリスを見る
-                    <ExternalLink className="size-3.5" />
-                  </a>
-                  <a
-                    href="https://amzn.to/4tKXyzu"
-                    target="_blank"
-                    rel="noopener noreferrer nofollow"
-                    className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
-                  >
-                    フロロカーボンラインを見る
-                    <ExternalLink className="size-3.5" />
-                  </a>
+                <div className="space-y-2">
+                  <div className="flex flex-col gap-2 sm:flex-row">
+                    <a
+                      href="https://amzn.to/408jI1f"
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
+                    >
+                      ハリスをAmazonで見る
+                      <ExternalLink className="size-3.5" />
+                    </a>
+                    <a
+                      href={getRakutenUrl("ハリス 釣り フロロカーボン")}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#BF0000] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#A00000]"
+                    >
+                      ハリスを楽天で探す
+                      <ExternalLink className="size-3.5" />
+                    </a>
+                  </div>
+                  <div className="flex flex-col gap-2 sm:flex-row">
+                    <a
+                      href="https://amzn.to/4tKXyzu"
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
+                    >
+                      フロロカーボンラインをAmazonで見る
+                      <ExternalLink className="size-3.5" />
+                    </a>
+                    <a
+                      href={getRakutenUrl("フロロカーボンライン 釣り")}
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#BF0000] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#A00000]"
+                    >
+                      フロロカーボンラインを楽天で探す
+                      <ExternalLink className="size-3.5" />
+                    </a>
+                  </div>
                 </div>
               </div>
               <div className="rounded-lg border p-4">
