@@ -13,6 +13,7 @@ export interface BlogPost {
   tags: string[];
   publishedAt: string;
   updatedAt?: string;
+  image?: string;
   relatedSpots?: string[];
   relatedFish?: string[];
 }

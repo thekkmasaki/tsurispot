@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { LineBanner } from "@/components/line-banner";
-import { ChevronLeft, Play } from "lucide-react";
+import { AlertTriangle, ChevronLeft, Play } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
 import type { YouTubeSearchLink } from "@/types";
@@ -28,16 +28,21 @@ const setupVideos: YouTubeSearchLink[] = [
     searchQuery: "釣り竿 セッティング 初心者 やり方",
     description: "竿・リール・ラインの準備を一通り解説",
   },
+  {
+    label: "リールへの糸巻き方（逆巻き防止）",
+    searchQuery: "リール 糸巻き 方向 スピニング 初心者",
+    description: "スピニングリールへの正しい糸の巻き方と方向の確認方法",
+  },
 ];
 
 export const metadata: Metadata = {
   title: "竿とリールのセッティング方法 - 初心者ガイド",
   description:
-    "リールの取り付け方、竿の継ぎ方、糸の通し方をステップバイステップで解説。初めての釣りでも迷わないセッティング手順ガイド。",
+    "リールの取り付け方、竿の継ぎ方、糸の通し方をステップバイステップで解説。初心者がやりがちなリールの糸巻き方向の間違いと対処法も詳しく紹介。",
   openGraph: {
     title: "竿とリールのセッティング方法 - 初心者ガイド",
     description:
-      "リールの取り付け方、竿の継ぎ方、糸の通し方をステップバイステップで解説。",
+      "リールの取り付け方、竿の継ぎ方、糸の通し方をステップバイステップで解説。糸の逆巻き注意も。",
     type: "article",
     url: "https://tsurispot.com/guide/setup",
     siteName: "ツリスポ",
@@ -52,7 +57,7 @@ const howToJsonLd = {
   "@type": "HowTo",
   name: "竿とリールのセッティング方法",
   description:
-    "リールの取り付け方、竿の継ぎ方、糸の通し方をステップバイステップで解説。初めての釣りでも迷わないセッティング手順ガイド。",
+    "リールの取り付け方、竿の継ぎ方、糸の通し方をステップバイステップで解説。初心者がやりがちなリールの糸巻き方向の間違いと対処法も詳しく紹介。",
   totalTime: "PT15M",
   tool: [
     { "@type": "HowToTool", name: "釣り竿（振り出し竿）" },
@@ -629,6 +634,149 @@ function DragAnimationSvg() {
   );
 }
 
+function LineWindingDirectionDiagram() {
+  return (
+    <div className="my-6">
+      <svg
+        viewBox="0 0 600 340"
+        width="100%"
+        style={{ maxWidth: 600 }}
+        aria-label="リールの糸巻き方向の正しい例と間違った例を比較した図。正しい方向はボビンとリールの回転方向が同じ。"
+        role="img"
+      >
+        <rect width="600" height="340" rx="12" fill="#FFFBEB" />
+        <text x="300" y="28" textAnchor="middle" fontSize="14" fontWeight="bold" fill="#92400E">
+          リールの糸巻き方向 &#x2014; 正しい例 vs 間違った例
+        </text>
+
+        {/* === 正しい例（左側） === */}
+        <g transform="translate(10,45)">
+          <rect x="5" y="5" width="275" height="280" rx="8" fill="#F0FDF4" stroke="#22C55E" strokeWidth="2" />
+          <rect x="5" y="5" width="275" height="30" rx="8" fill="#22C55E" />
+          <rect x="5" y="25" width="275" height="10" fill="#22C55E" />
+          <text x="142" y="25" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#FFFFFF">
+            正しい巻き方
+          </text>
+
+          {/* ボビン（糸の元） */}
+          <text x="70" y="58" textAnchor="middle" fontSize="10" fill="#374151">ボビン（糸の元）</text>
+          <ellipse cx="70" cy="100" rx="35" ry="45" fill="#E5E7EB" stroke="#9CA3AF" strokeWidth="1.5" />
+          <ellipse cx="70" cy="100" rx="20" ry="45" fill="#DBEAFE" stroke="#3B82F6" strokeWidth="1" />
+          {/* ボビンの回転矢印（反時計回り） */}
+          <path d="M42,75 A35,35 0 0,0 42,125" fill="none" stroke="#22C55E" strokeWidth="2.5" markerEnd="url(#arrowCorrect)" />
+          <text x="22" y="103" textAnchor="middle" fontSize="9" fill="#22C55E" fontWeight="bold">回転</text>
+
+          {/* 糸のライン（ボビンからリールへ） */}
+          <line x1="105" y1="85" x2="175" y2="85" stroke="#3B82F6" strokeWidth="2" />
+          {/* テンション表示 */}
+          <text x="140" y="78" textAnchor="middle" fontSize="8" fill="#6B7280">テンション</text>
+          <path d="M120,82 L125,79 L130,82 L135,79 L140,82 L145,79 L150,82 L155,79 L160,82" stroke="#6B7280" strokeWidth="0.8" fill="none" />
+
+          {/* リール */}
+          <text x="210" y="58" textAnchor="middle" fontSize="10" fill="#374151">リール（スプール）</text>
+          <ellipse cx="210" cy="100" rx="30" ry="40" fill="#E5E7EB" stroke="#9CA3AF" strokeWidth="1.5" />
+          <ellipse cx="210" cy="100" rx="18" ry="40" fill="#DBEAFE" stroke="#3B82F6" strokeWidth="1" />
+          {/* リールの回転矢印（反時計回り＝ボビンと同じ） */}
+          <path d="M245,78 A35,35 0 0,1 245,122" fill="none" stroke="#22C55E" strokeWidth="2.5" markerEnd="url(#arrowCorrect)" />
+          <text x="264" y="103" textAnchor="middle" fontSize="9" fill="#22C55E" fontWeight="bold">回転</text>
+
+          {/* 方向一致マーク */}
+          <text x="142" y="105" textAnchor="middle" fontSize="20" fill="#22C55E">&#x2192;</text>
+          <text x="142" y="120" textAnchor="middle" fontSize="9" fill="#22C55E" fontWeight="bold">同じ方向</text>
+
+          {/* 結果 */}
+          <rect x="25" y="155" width="235" height="55" rx="6" fill="#DCFCE7" stroke="#86EFAC" strokeWidth="1" />
+          <text x="142" y="175" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#166534">
+            糸ヨレが発生しない
+          </text>
+          <text x="142" y="192" textAnchor="middle" fontSize="10" fill="#15803D">
+            キャストがスムーズ・飛距離も出る
+          </text>
+
+          {/* スプールの断面図 */}
+          <text x="142" y="228" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#374151">スプール上面から見た図</text>
+          <circle cx="100" cy="260" r="25" fill="none" stroke="#22C55E" strokeWidth="2" />
+          <circle cx="100" cy="260" r="10" fill="#D1D5DB" />
+          {/* 巻き方向の矢印（反時計回り） */}
+          <path d="M85,238 A30,30 0 1,0 120,248" fill="none" stroke="#3B82F6" strokeWidth="2.5" markerEnd="url(#arrowBlueWind)" />
+          <text x="100" y="263" textAnchor="middle" fontSize="7" fill="#374151">スプール</text>
+
+          {/* ベイルとラインローラー */}
+          <line x1="125" y1="260" x2="160" y2="248" stroke="#9CA3AF" strokeWidth="2" />
+          <circle cx="160" cy="248" r="4" fill="#F59E0B" stroke="#D97706" strokeWidth="1" />
+          <text x="175" y="245" fontSize="8" fill="#374151">ラインローラー</text>
+          <text x="175" y="256" fontSize="8" fill="#374151">（ここを通す）</text>
+        </g>
+
+        {/* === 間違った例（右側） === */}
+        <g transform="translate(305,45)">
+          <rect x="5" y="5" width="275" height="280" rx="8" fill="#FEF2F2" stroke="#EF4444" strokeWidth="2" />
+          <rect x="5" y="5" width="275" height="30" rx="8" fill="#EF4444" />
+          <rect x="5" y="25" width="275" height="10" fill="#EF4444" />
+          <text x="142" y="25" textAnchor="middle" fontSize="13" fontWeight="bold" fill="#FFFFFF">
+            間違った巻き方（逆巻き）
+          </text>
+
+          {/* ボビン（糸の元） */}
+          <text x="70" y="58" textAnchor="middle" fontSize="10" fill="#374151">ボビン（糸の元）</text>
+          <ellipse cx="70" cy="100" rx="35" ry="45" fill="#E5E7EB" stroke="#9CA3AF" strokeWidth="1.5" />
+          <ellipse cx="70" cy="100" rx="20" ry="45" fill="#FEE2E2" stroke="#EF4444" strokeWidth="1" />
+          {/* ボビンの回転矢印（時計回り＝逆） */}
+          <path d="M42,125 A35,35 0 0,1 42,75" fill="none" stroke="#EF4444" strokeWidth="2.5" markerEnd="url(#arrowWrong)" />
+          <text x="22" y="103" textAnchor="middle" fontSize="9" fill="#EF4444" fontWeight="bold">逆回転</text>
+
+          {/* 糸のライン（ねじれ表現） */}
+          <path d="M105,85 Q115,78 125,90 Q135,100 145,82 Q155,68 165,88 L175,85" stroke="#EF4444" strokeWidth="2" fill="none" />
+          <text x="140" y="72" textAnchor="middle" fontSize="8" fill="#EF4444" fontWeight="bold">糸ヨレ発生!</text>
+
+          {/* リール */}
+          <text x="210" y="58" textAnchor="middle" fontSize="10" fill="#374151">リール（スプール）</text>
+          <ellipse cx="210" cy="100" rx="30" ry="40" fill="#E5E7EB" stroke="#9CA3AF" strokeWidth="1.5" />
+          <ellipse cx="210" cy="100" rx="18" ry="40" fill="#FEE2E2" stroke="#EF4444" strokeWidth="1" />
+          {/* リールの回転矢印 */}
+          <path d="M245,78 A35,35 0 0,1 245,122" fill="none" stroke="#22C55E" strokeWidth="2.5" markerEnd="url(#arrowCorrect)" />
+          <text x="264" y="103" textAnchor="middle" fontSize="9" fill="#6B7280">回転</text>
+
+          {/* 方向不一致マーク */}
+          <text x="142" y="105" textAnchor="middle" fontSize="20" fill="#EF4444">&#x2194;</text>
+          <text x="142" y="120" textAnchor="middle" fontSize="9" fill="#EF4444" fontWeight="bold">逆方向</text>
+
+          {/* 結果 */}
+          <rect x="25" y="155" width="235" height="55" rx="6" fill="#FEE2E2" stroke="#FECACA" strokeWidth="1" />
+          <text x="142" y="175" textAnchor="middle" fontSize="11" fontWeight="bold" fill="#991B1B">
+            糸ヨレ・バックラッシュの原因
+          </text>
+          <text x="142" y="192" textAnchor="middle" fontSize="10" fill="#B91C1C">
+            糸が絡まってトラブル続出
+          </text>
+
+          {/* ぐちゃぐちゃの糸のイメージ */}
+          <text x="142" y="228" textAnchor="middle" fontSize="10" fontWeight="bold" fill="#374151">こうなってしまう</text>
+          <circle cx="100" cy="260" r="25" fill="none" stroke="#EF4444" strokeWidth="2" strokeDasharray="4,2" />
+          <circle cx="100" cy="260" r="10" fill="#D1D5DB" />
+          {/* 絡まった糸の表現 */}
+          <path d="M80,242 Q95,250 85,260 Q78,268 95,272 Q108,265 100,255 Q90,248 105,245 Q115,252 110,265 Q98,278 88,270" stroke="#EF4444" strokeWidth="1.5" fill="none" />
+          <text x="100" y="263" textAnchor="middle" fontSize="7" fill="#991B1B">ぐちゃ...</text>
+          <text x="175" y="255" fontSize="9" fill="#B91C1C" fontWeight="bold">糸が絡まって</text>
+          <text x="175" y="268" fontSize="9" fill="#B91C1C" fontWeight="bold">釣りにならない</text>
+        </g>
+
+        <defs>
+          <marker id="arrowCorrect" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0,0 8,3 0,6" fill="#22C55E" />
+          </marker>
+          <marker id="arrowWrong" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0,0 8,3 0,6" fill="#EF4444" />
+          </marker>
+          <marker id="arrowBlueWind" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+            <polygon points="0,0 8,3 0,6" fill="#3B82F6" />
+          </marker>
+        </defs>
+      </svg>
+    </div>
+  );
+}
+
 export default function SetupGuidePage() {
   return (
     <>
@@ -855,6 +1003,122 @@ export default function SetupGuidePage() {
               糸が細くて通しにくい場合は、糸の先端をセロテープで太くすると通しやすくなります。
             </Hint>
           </SectionCard>
+
+          {/* リールの糸巻き方向の注意 */}
+          <div id="line-direction" className="scroll-mt-20">
+            <div className="overflow-hidden rounded-xl border-2 border-amber-400 bg-amber-50 shadow-lg dark:border-amber-600 dark:bg-amber-950">
+              <div className="flex items-center gap-3 border-b border-amber-300 bg-amber-100 px-4 py-3 dark:border-amber-700 dark:bg-amber-900">
+                <AlertTriangle className="size-6 shrink-0 text-amber-600 dark:text-amber-400" />
+                <h2 className="text-lg font-bold text-amber-800 dark:text-amber-200">
+                  初心者がよくやるミス：リールの糸巻き方向に注意！
+                </h2>
+              </div>
+              <div className="p-4 sm:p-6">
+                <p className="mb-4 text-sm leading-relaxed text-amber-900 dark:text-amber-100">
+                  リールに初めて糸を巻くとき、<strong>巻き方向を間違える</strong>のは初心者にありがちな失敗です。
+                  逆方向に巻いてしまうと、キャスト時に糸が絡まる「ライントラブル」の原因になります。
+                  最初にしっかり確認しましょう。
+                </p>
+
+                <LineWindingDirectionDiagram />
+
+                <div className="space-y-4">
+                  <div>
+                    <h3 className="mb-2 text-base font-bold text-amber-800 dark:text-amber-200">
+                      正しい糸巻きの手順
+                    </h3>
+                    <ol className="list-none space-y-3">
+                      <li className="flex gap-3">
+                        <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-amber-500 text-xs font-bold text-white">
+                          1
+                        </span>
+                        <div className="text-sm text-amber-900 dark:text-amber-100">
+                          <strong>ベイルを起こして</strong>糸をラインローラーに通す。ベイルを起こさずに巻くと、ラインローラーを通らず正しく巻けません。
+                        </div>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-amber-500 text-xs font-bold text-white">
+                          2
+                        </span>
+                        <div className="text-sm text-amber-900 dark:text-amber-100">
+                          <strong>糸をスプールに結んで</strong>ベイルを戻す。結び方はユニノットやアーバーノットが簡単です。
+                        </div>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-amber-500 text-xs font-bold text-white">
+                          3
+                        </span>
+                        <div className="text-sm text-amber-900 dark:text-amber-100">
+                          <strong>糸の出る方向を確認</strong>する。新品のボビン（糸の巻いてあるプラスチック）を床に置き、糸がボビンから出る方向（回転方向）と、リールのベイルが糸を巻き取る方向が<strong>同じ</strong>になるようにします。
+                        </div>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-amber-500 text-xs font-bold text-white">
+                          4
+                        </span>
+                        <div className="text-sm text-amber-900 dark:text-amber-100">
+                          <strong>テンションをかけながら巻く</strong>。糸を濡れたタオルや指で軽く挟み、たるまないように一定のテンションをかけて巻きます。
+                        </div>
+                      </li>
+                      <li className="flex gap-3">
+                        <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-amber-500 text-xs font-bold text-white">
+                          5
+                        </span>
+                        <div className="text-sm text-amber-900 dark:text-amber-100">
+                          <strong>ラインローラーを通っているか確認</strong>。巻いている途中で糸がラインローラーから外れていないか、数回に一度チェックしましょう。
+                        </div>
+                      </li>
+                    </ol>
+                  </div>
+
+                  <div className="rounded-lg border border-amber-300 bg-white p-4 dark:border-amber-700 dark:bg-amber-900/50">
+                    <h3 className="mb-2 text-base font-bold text-red-600 dark:text-red-400">
+                      逆巻きするとどうなる？
+                    </h3>
+                    <ul className="space-y-2 text-sm text-amber-900 dark:text-amber-100">
+                      <li className="flex gap-2">
+                        <span className="shrink-0 text-red-500">&#x2716;</span>
+                        <span><strong>糸ヨレ（ラインのねじれ）</strong>が発生し、キャストのたびに糸が絡まりやすくなる</span>
+                      </li>
+                      <li className="flex gap-2">
+                        <span className="shrink-0 text-red-500">&#x2716;</span>
+                        <span><strong>バックラッシュ</strong>（糸がぐちゃぐちゃに絡まる現象）が起きやすくなる</span>
+                      </li>
+                      <li className="flex gap-2">
+                        <span className="shrink-0 text-red-500">&#x2716;</span>
+                        <span>飛距離が大幅に落ちる</span>
+                      </li>
+                      <li className="flex gap-2">
+                        <span className="shrink-0 text-red-500">&#x2716;</span>
+                        <span>最悪の場合、ガイドに糸が絡まって竿が折れる原因にもなる</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="rounded-lg border border-green-300 bg-green-50 p-4 dark:border-green-700 dark:bg-green-900/50">
+                    <h3 className="mb-2 text-base font-bold text-green-700 dark:text-green-300">
+                      間違えた場合の直し方
+                    </h3>
+                    <ol className="space-y-1 text-sm text-green-800 dark:text-green-200">
+                      <li>1. リールから糸を<strong>全部出す</strong>（広い場所で行う）</li>
+                      <li>2. 糸のねじれが取れるよう、まっすぐ伸ばす</li>
+                      <li>3. 正しい方向でイチから巻き直す</li>
+                      <li>4. テンションをかけながら丁寧に巻く</li>
+                    </ol>
+                    <p className="mt-2 text-xs text-green-700 dark:text-green-300">
+                      ※ 少しだけ巻いた段階なら、すぐに出して巻き直しましょう。多く巻いてからでは糸ヨレが蓄積して取れにくくなります。
+                    </p>
+                  </div>
+
+                  <div className="rounded-lg bg-amber-100 p-3 text-sm text-amber-800 dark:bg-amber-900 dark:text-amber-200">
+                    <span className="font-bold">ポイント：</span>
+                    新品のリールでも最初の糸巻きは慎重に行いましょう。
+                    釣具店で購入時に糸巻きをお願いすると、正しい方向で巻いてもらえるので初心者にはおすすめです。
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* 参考動画 */}

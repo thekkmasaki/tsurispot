@@ -274,6 +274,16 @@ const TYPE_COLORS: Record<string, string> = {
 function TackleSetCard({ product }: { product: TackleSetProduct }) {
   const amazonUrl = getAmazonUrl(product.amazonAsin);
   const rakutenUrl = getRakutenUrl(product.rakutenQuery);
+  const TypeIcon = TYPE_ICONS[product.type];
+
+  const rankGradient =
+    product.rank === 1
+      ? "from-amber-400 to-yellow-500"
+      : product.rank === 2
+        ? "from-gray-300 to-gray-400"
+        : product.rank === 3
+          ? "from-amber-600 to-amber-700"
+          : "from-primary/60 to-primary/80";
 
   return (
     <Card
@@ -281,31 +291,22 @@ function TackleSetCard({ product }: { product: TackleSetProduct }) {
       className="overflow-hidden border-2 py-0 transition-shadow hover:shadow-lg"
     >
       <CardContent className="p-0">
-        {/* ヘッダー */}
-        <div className="flex items-center gap-3 border-b bg-muted/30 px-4 py-3 sm:px-6">
-          <div
-            className={`flex size-10 shrink-0 items-center justify-center rounded-full font-bold text-white ${
-              product.rank === 1
-                ? "bg-amber-500"
-                : product.rank === 2
-                  ? "bg-gray-400"
-                  : product.rank === 3
-                    ? "bg-amber-700"
-                    : "bg-primary/70"
-            }`}
-          >
+        {/* ランキングヘッダー with gradient */}
+        <div className={`relative flex items-center gap-3 border-b bg-gradient-to-r ${rankGradient} px-4 py-3 sm:px-6`}>
+          <TypeIcon className="pointer-events-none absolute right-4 size-16 text-white/10 sm:size-20" />
+          <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-white/90 font-bold text-gray-800 shadow-sm">
             {product.rank}
           </div>
           <div className="min-w-0 flex-1">
-            <h3 className="text-base font-bold leading-snug sm:text-lg">
+            <h3 className="text-base font-bold leading-snug text-white drop-shadow-sm sm:text-lg">
               {product.name}
             </h3>
             <div className="mt-1 flex flex-wrap items-center gap-2">
-              <span className="text-xs text-muted-foreground">
+              <span className="text-xs text-white/80">
                 {product.brand}
               </span>
               {product.isEditorPick && (
-                <Badge className="bg-amber-100 text-amber-700 hover:bg-amber-100">
+                <Badge className="bg-white/90 text-amber-700 hover:bg-white/90">
                   <Star className="mr-0.5 size-3 fill-amber-500 text-amber-500" />
                   編集部イチオシ
                 </Badge>

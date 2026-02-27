@@ -1,15 +1,38 @@
 "use client";
 
-import { ExternalLink, Star } from "lucide-react";
+import {
+  ExternalLink,
+  Star,
+} from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getAmazonUrl, getRakutenUrl } from "@/lib/affiliate-config";
-import type { Product } from "@/lib/data/products";
+import type { Product, ProductCategory } from "@/lib/data/products";
 
 const DIFFICULTY_LABEL: Record<string, string> = {
   beginner: "初心者向け",
   intermediate: "中級者向け",
   advanced: "上級者向け",
+};
+
+const CATEGORY_STRIPE: Record<ProductCategory, string> = {
+  rod: "from-blue-500 to-blue-600",
+  reel: "from-teal-500 to-teal-600",
+  tackle: "from-orange-500 to-orange-600",
+  accessory: "from-gray-500 to-gray-600",
+  wear: "from-red-500 to-red-600",
+  cooler: "from-cyan-500 to-cyan-600",
+  other: "from-slate-500 to-slate-600",
+};
+
+const CATEGORY_LABEL: Record<ProductCategory, string> = {
+  rod: "ロッド",
+  reel: "リール",
+  tackle: "仕掛け",
+  accessory: "アクセサリー",
+  wear: "ウェア",
+  cooler: "クーラー",
+  other: "その他",
 };
 
 interface ProductCardProps {
@@ -19,10 +42,15 @@ interface ProductCardProps {
 export function ProductCard({ product }: ProductCardProps) {
   const amazonUrl = getAmazonUrl(product.amazonAsin, product.name);
   const rakutenUrl = getRakutenUrl(product.rakutenSearchQuery);
+  const stripe = CATEGORY_STRIPE[product.category] || CATEGORY_STRIPE.other;
+  const categoryLabel = CATEGORY_LABEL[product.category] || "";
 
   return (
     <Card className="group h-full gap-0 overflow-hidden py-0 transition-shadow hover:shadow-md">
-      <CardContent className="flex h-full flex-col p-4 sm:p-5">
+      {/* カテゴリカラーストライプ */}
+      <div className={`h-1.5 bg-gradient-to-r ${stripe}`} />
+
+      <CardContent className="relative flex h-full flex-col p-4 sm:p-5">
         {/* ヘッダー：バッジ */}
         <div className="mb-2 flex flex-wrap items-center gap-1.5">
           {product.priority <= 3 && (
@@ -34,6 +62,11 @@ export function ProductCard({ product }: ProductCardProps) {
           <Badge variant="outline" className="text-xs">
             {DIFFICULTY_LABEL[product.difficulty]}
           </Badge>
+          {categoryLabel && (
+            <Badge variant="secondary" className="text-xs">
+              {categoryLabel}
+            </Badge>
+          )}
         </div>
 
         {/* 商品名 */}

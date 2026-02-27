@@ -1,17 +1,46 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import {
   blogPosts,
   getBlogPostBySlug,
   getRelatedPosts,
   getAdjacentPosts,
   BLOG_CATEGORIES,
+  type BlogPost,
 } from "@/lib/data/blog";
 import { fishSpecies } from "@/lib/data/fish";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { ChevronLeft, ChevronRight, Tag, Calendar, FileText, MapPin, Fish, Search } from "lucide-react";
+import {
+  ChevronLeft,
+  ChevronRight,
+  Tag,
+  Calendar,
+  FileText,
+  MapPin,
+  Fish,
+  Search,
+  BookOpen,
+  Package,
+  Target,
+  Shield,
+  Lightbulb,
+} from "lucide-react";
+
+const CATEGORY_HERO: Record<
+  BlogPost["category"],
+  { gradient: string; Icon: typeof BookOpen }
+> = {
+  beginner: { gradient: "from-blue-400 to-blue-600", Icon: BookOpen },
+  gear: { gradient: "from-orange-400 to-orange-600", Icon: Package },
+  seasonal: { gradient: "from-green-400 to-green-600", Icon: Calendar },
+  technique: { gradient: "from-purple-400 to-purple-600", Icon: Target },
+  "spot-guide": { gradient: "from-sky-400 to-sky-600", Icon: MapPin },
+  manner: { gradient: "from-amber-400 to-amber-600", Icon: Shield },
+  knowledge: { gradient: "from-indigo-400 to-indigo-600", Icon: Lightbulb },
+};
 
 export function generateStaticParams() {
   return blogPosts.map((post) => ({
@@ -143,6 +172,31 @@ export default async function BlogPostPage({
           </li>
         </ol>
       </nav>
+
+      {/* ヒーロービジュアル */}
+      {(() => {
+        const hero = CATEGORY_HERO[post.category];
+        const HeroIcon = hero.Icon;
+        return post.image ? (
+          <div className="relative mb-8 h-48 w-full overflow-hidden rounded-xl sm:h-64">
+            <Image
+              src={post.image}
+              alt={post.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 768px"
+              priority
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+          </div>
+        ) : (
+          <div
+            className={`mb-8 flex h-36 w-full items-center justify-center rounded-xl bg-gradient-to-br ${hero.gradient} sm:h-48`}
+          >
+            <HeroIcon className="size-16 text-white/30 sm:size-20" />
+          </div>
+        );
+      })()}
 
       {/* 記事ヘッダー */}
       <header className="mb-8">
