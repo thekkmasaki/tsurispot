@@ -47,6 +47,81 @@ const breadcrumbJsonLd = {
   ],
 };
 
+const howToJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  name: "ウキ釣りの仕掛けの作り方と釣り方",
+  description:
+    "ウキ釣り初心者のための完全ガイド。ウキの種類と選び方、仕掛けの作り方、エサの付け方、アタリの取り方を詳しく解説。チヌ・グレ・メバルなど代表的なターゲットも紹介。",
+  totalTime: "PT30M",
+  supply: [
+    { "@type": "HowToSupply", name: "ウキ（棒ウキ・玉ウキ・円錐ウキのいずれか）" },
+    { "@type": "HowToSupply", name: "ウキ止め糸" },
+    { "@type": "HowToSupply", name: "シモリ玉" },
+    { "@type": "HowToSupply", name: "ガン玉（オモリ）" },
+    { "@type": "HowToSupply", name: "サルカン" },
+    { "@type": "HowToSupply", name: "ハリス（1〜2号）" },
+    { "@type": "HowToSupply", name: "針（ハリス付きが便利）" },
+    { "@type": "HowToSupply", name: "エサ（オキアミ・虫エサ・練りエサ）" },
+  ],
+  tool: [
+    { "@type": "HowToTool", name: "磯竿またはウキ釣り用の竿（4.5〜5.3m）" },
+    { "@type": "HowToTool", name: "スピニングリール（2500〜3000番）" },
+    { "@type": "HowToTool", name: "ハサミまたはラインカッター" },
+    { "@type": "HowToTool", name: "バケツ" },
+  ],
+  step: [
+    {
+      "@type": "HowToStep",
+      name: "ウキ止めを付ける",
+      text: "道糸にウキ止め糸を結びます。ウキ止めの位置がタナ（狙う深さ）を決めます。水深2mを狙うなら、ウキから針まで2mになるよう調整します。",
+      position: 1,
+    },
+    {
+      "@type": "HowToStep",
+      name: "シモリ玉を通す",
+      text: "ウキ止めの下にシモリ玉（小さなビーズ）を通します。これがウキのストッパーの役割を果たします。",
+      position: 2,
+    },
+    {
+      "@type": "HowToStep",
+      name: "ウキを通す",
+      text: "道糸にウキを通します。中通しタイプ（円錐ウキ）は道糸が中を通る構造。棒ウキはスナップで接続します。",
+      position: 3,
+    },
+    {
+      "@type": "HowToStep",
+      name: "ガン玉（オモリ）を打つ",
+      text: "ウキの浮力に合わせたガン玉を道糸に打ちます。ウキのトップ（先端）がちょうど水面に出るくらいが最適な浮力バランスです。",
+      position: 4,
+    },
+    {
+      "@type": "HowToStep",
+      name: "サルカンを結ぶ",
+      text: "道糸とハリスの接続にサルカンを使います。糸のヨレ（ねじれ）を防ぐ効果があります。",
+      position: 5,
+    },
+    {
+      "@type": "HowToStep",
+      name: "ハリスと針を結ぶ",
+      text: "サルカンの下にハリス（1〜2号程度）を30〜100cm結び、先端に針を付けます。ハリス付き針を使うと簡単です。",
+      position: 6,
+    },
+    {
+      "@type": "HowToStep",
+      name: "エサを付けて仕掛けを投入する",
+      text: "針にオキアミや虫エサを付け、ポイントに向かって仕掛けを振り込みます。ウキが安定するまで少し待ちましょう。",
+      position: 7,
+    },
+    {
+      "@type": "HowToStep",
+      name: "アタリを待って合わせる",
+      text: "ウキの動きを観察し、消し込みアタリ（ウキが沈む）が出たらロッドを上にシャープに持ち上げて合わせます。モゾモゾした動きのときはまだ待ちましょう。",
+      position: 8,
+    },
+  ],
+};
+
 /* ── SVG図解コンポーネント ── */
 
 function TanaAdjustSvg() {
@@ -451,6 +526,10 @@ export default function FloatFishingGuidePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
       />
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
         {/* パンくず */}

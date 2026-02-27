@@ -15,6 +15,8 @@ import {
   Anchor,
   Trash2,
   Play,
+  ExternalLink,
+  ShoppingBag,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -926,11 +928,21 @@ export default function SabikiGuidePage() {
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li className="flex gap-2">
                 <span className="font-medium text-foreground">竿：</span>
-                2〜3mの万能竿や磯竿2〜3号。初心者セットに含まれていることが多く、振り出し式のコンパクトロッドが持ち運びに便利です。長すぎると取り回しが難しいので、最初は2.4〜2.7mがおすすめ。
+                <span>2〜3mの万能竿や磯竿2〜3号。初心者セットに含まれていることが多く、振り出し式のコンパクトロッドが持ち運びに便利です。長すぎると取り回しが難しいので、最初は2.4〜2.7mがおすすめ。{" "}
+                <a href="https://amzn.to/4s4i64m" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+                  <ShoppingBag className="size-3" />
+                  シマノ ロッドを見る
+                  <ExternalLink className="size-2.5" />
+                </a></span>
               </li>
               <li className="flex gap-2">
                 <span className="font-medium text-foreground">リール：</span>
-                スピニングリール2000〜3000番。ナイロンライン2〜3号が100m以上巻けるもの。糸付きリールでもサビキ釣りなら十分です。
+                <span>スピニングリール2000〜3000番。ナイロンライン2〜3号が100m以上巻けるもの。糸付きリールでもサビキ釣りなら十分です。{" "}
+                <a href="https://amzn.to/4atW7Om" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+                  <ShoppingBag className="size-3" />
+                  シマノ リールを見る
+                  <ExternalLink className="size-2.5" />
+                </a></span>
               </li>
               <li className="flex gap-2">
                 <span className="font-medium text-foreground">サビキ仕掛け：</span>
@@ -942,7 +954,12 @@ export default function SabikiGuidePage() {
               </li>
               <li className="flex gap-2">
                 <span className="font-medium text-foreground">コマセ（アミエビ）：</span>
-                冷凍アミエビが最もコスパが良く、1ブロック（約2kg）で300〜500円。手を汚したくない方にはチューブタイプ（アミ姫など）が便利。半日の釣りなら冷凍1ブロックで足ります。
+                <span>冷凍アミエビが最もコスパが良く、1ブロック（約2kg）で300〜500円。手を汚したくない方にはチューブタイプ（アミ姫など）が便利。半日の釣りなら冷凍1ブロックで足ります。{" "}
+                <a href="https://amzn.to/4c6gaUn" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+                  <ShoppingBag className="size-3" />
+                  マルキュー アミ姫を見る
+                  <ExternalLink className="size-2.5" />
+                </a></span>
               </li>
               <li className="flex gap-2">
                 <span className="font-medium text-foreground">バケツ：</span>
@@ -954,7 +971,12 @@ export default function SabikiGuidePage() {
               </li>
             </ul>
             <Hint>
-              初心者は「サビキ釣りセット」を購入するのが最も簡単。竿・リール・仕掛け・カゴがセットで3,000〜5,000円程度です。コマセとバケツを追加すれば、すぐに釣りを始められます。
+              初心者は「サビキ釣りセット」を購入するのが最も簡単。竿・リール・仕掛け・カゴがセットで3,000〜5,000円程度です。コマセとバケツを追加すれば、すぐに釣りを始められます。リールに巻くラインは、扱いやすいナイロンライン2〜3号がおすすめです。{" "}
+              <a href="https://amzn.to/4s1SPaX" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+                <ShoppingBag className="size-3" />
+                ナイロンラインを見る
+                <ExternalLink className="size-2.5" />
+              </a>
             </Hint>
           </SectionCard>
 

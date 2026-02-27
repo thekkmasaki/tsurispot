@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { LineBanner } from "@/components/line-banner";
-import { ChevronLeft, Play } from "lucide-react";
+import { ChevronLeft, Play, ExternalLink, ShoppingBag } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
 import type { YouTubeSearchLink } from "@/types";
@@ -750,6 +750,29 @@ export default function CastingGuidePage() {
           キャスティングの前に必ず後方と周囲の安全確認をしてください。釣り針は鋭く、他の人に当たると大けがにつながります。
         </Danger>
 
+        {/* 必要な道具 */}
+        <div className="mb-6 rounded-lg border p-4 text-sm text-muted-foreground">
+          <p className="mb-2 font-medium text-foreground">キャスティングに必要な道具</p>
+          <p className="mb-3">投げ釣りには竿・リール・おもり（天秤）が基本です。おもりの重さで飛距離が変わります。</p>
+          <div className="flex flex-wrap gap-2">
+            <a href="https://amzn.to/4s4i64m" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+              <ShoppingBag className="size-3" />
+              シマノ ロッドを見る
+              <ExternalLink className="size-2.5" />
+            </a>
+            <a href="https://amzn.to/4cFGDbl" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+              <ShoppingBag className="size-3" />
+              おもりセットを見る
+              <ExternalLink className="size-2.5" />
+            </a>
+            <a href="https://amzn.to/4l7BnQg" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+              <ShoppingBag className="size-3" />
+              ジェット天秤を見る
+              <ExternalLink className="size-2.5" />
+            </a>
+          </div>
+        </div>
+
         <div className="space-y-6">
           {/* ちょい投げ */}
           <SectionCard title="ちょい投げ（初心者はここから）">
@@ -825,7 +848,12 @@ export default function CastingGuidePage() {
               </li>
             </ol>
             <Hint>
-              最初は飛距離を気にせず、コントロール（狙った方向に投げること）を意識しましょう。距離は慣れてから伸ばせます。
+              最初は飛距離を気にせず、コントロール（狙った方向に投げること）を意識しましょう。距離は慣れてから伸ばせます。ちょい投げにはジェット天秤（5〜10号）を使うと仕掛けが安定します。{" "}
+              <a href="https://amzn.to/4l7BnQg" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+                <ShoppingBag className="size-3" />
+                ジェット天秤を見る
+                <ExternalLink className="size-2.5" />
+              </a>
             </Hint>
           </SectionCard>
 

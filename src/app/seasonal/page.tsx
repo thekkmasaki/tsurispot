@@ -198,11 +198,46 @@ const jsonLd = {
   description:
     "春夏秋冬それぞれの季節で釣れる魚、おすすめの釣法、注意点を初心者向けにわかりやすく解説。",
   url: "https://tsurispot.com/seasonal",
+  datePublished: "2025-01-01",
+  dateModified: new Date().toISOString().split("T")[0],
+  author: {
+    "@type": "Person",
+    name: "正木 家康",
+    jobTitle: "編集長",
+    url: "https://tsurispot.com/about",
+  },
   publisher: {
     "@type": "Organization",
     name: "ツリスポ",
     url: "https://tsurispot.com",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://tsurispot.com/logo.svg",
+    },
   },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": "https://tsurispot.com/seasonal",
+  },
+};
+
+const breadcrumbJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: "ホーム",
+      item: "https://tsurispot.com",
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: "季節別釣りガイド",
+      item: "https://tsurispot.com/seasonal",
+    },
+  ],
 };
 
 export default function SeasonalPage() {
@@ -213,6 +248,10 @@ export default function SeasonalPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <main className="container mx-auto max-w-4xl px-4 py-8 sm:py-12">
         <div className="mb-4">

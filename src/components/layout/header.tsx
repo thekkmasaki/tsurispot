@@ -21,7 +21,6 @@ import {
   ChevronDown,
   Compass,
   FileText,
-  ClipboardList,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SearchOverlay } from "./search-overlay";
@@ -46,7 +45,6 @@ const moreNavItems = [
   { href: "/quiz", label: "釣りスタイル診断", icon: Sparkles },
   { href: "/gear", label: "おすすめ道具", icon: Package },
   { href: "/fishing-rules", label: "ルールとマナー", icon: Scale },
-  { href: "/planner", label: "釣行プランナー", icon: ClipboardList },
 ];
 
 function DropdownMenu() {

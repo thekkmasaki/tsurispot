@@ -9,6 +9,8 @@ import {
   Lightbulb,
   Check,
   Star,
+  ExternalLink,
+  ShoppingBag,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -53,6 +55,82 @@ const breadcrumbJsonLd = {
       item: "https://tsurispot.com/guide/budget",
     },
   ],
+};
+
+const faqJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: [
+    {
+      "@type": "Question",
+      name: "釣りを始めるのに最低いくらかかりますか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "最低約3,000円から始められます。サビキ釣りセット（竿とリール付き）が2,000円前後、仕掛けとエサで1,000円程度です。100均のバケツを使えば追加費用も抑えられます。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "初心者におすすめの予算はいくらですか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "10,000円コースがおすすめです。竿とリールのセット、仕掛け各種、クーラーボックス、プライヤーなどが揃い、サビキ釣りからちょい投げまで幅広い釣り方に対応できます。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "釣りのランニングコスト（維持費）はいくらですか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "1回の釣行あたり500〜2,000円程度です。主にエサ代（アミエビ300〜500円、青イソメ500〜800円）と仕掛けの消耗品代がかかります。交通費や駐車場代は釣り場によって異なります。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "レンタルで釣りを体験できますか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "はい。海釣り公園や管理釣り場の中には、レンタル竿を無料または数百円で貸し出している施設があります。エサ代だけで手ぶらで釣りを体験できるので、まず一度試したい方にはレンタルがおすすめです。",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "釣り道具を安く揃えるコツはありますか？",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "セール時期（年末年始・決算期）を狙う、型落ちモデルを選ぶ、中古品を活用するなどの方法があります。また、使用後に真水で洗い乾燥させるなどメンテナンスをしっかり行えば道具の寿命が大幅に延びて長期的なコストを抑えられます。",
+      },
+    },
+  ],
+};
+
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "釣りの費用ガイド - 予算3千円〜3万円の始め方",
+  description:
+    "釣りを始めるのにいくらかかる？予算3,000円・10,000円・30,000円の3つのコース別に必要な道具と費用を徹底解説。ランニングコストや節約のコツも紹介します。",
+  datePublished: "2025-01-01",
+  dateModified: new Date().toISOString().split("T")[0],
+  author: {
+    "@type": "Person",
+    name: "正木 家康",
+    jobTitle: "編集長",
+    url: "https://tsurispot.com/about",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "ツリスポ",
+    url: "https://tsurispot.com",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://tsurispot.com/logo.svg",
+    },
+  },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": "https://tsurispot.com/guide/budget",
+  },
 };
 
 function SectionCard({
@@ -257,6 +335,14 @@ export default function BudgetGuidePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
         {/* パンくず */}
         <div className="mb-6">
@@ -306,6 +392,13 @@ export default function BudgetGuidePage() {
                   price="~2,500円"
                 />
                 <BudgetItem name="アミエビ（コマセ）" price="~300円" />
+                <li className="flex justify-center">
+                  <a href="https://amzn.to/4c6gaUn" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+                    <ShoppingBag className="size-3" />
+                    マルキュー アミ姫を見る
+                    <ExternalLink className="size-2.5" />
+                  </a>
+                </li>
                 <BudgetItem name="バケツ（100均）" price="~110円" />
                 <li className="border-t pt-2">
                   <div className="flex items-center justify-between text-sm font-bold">
@@ -368,6 +461,18 @@ export default function BudgetGuidePage() {
 
               <ul className="space-y-2 rounded-lg border p-4">
                 <BudgetItem name="竿+リールセット" price="~5,000円" />
+                <li className="flex flex-wrap justify-center gap-2">
+                  <a href="https://amzn.to/4s4i64m" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+                    <ShoppingBag className="size-3" />
+                    シマノ ロッドを見る
+                    <ExternalLink className="size-2.5" />
+                  </a>
+                  <a href="https://amzn.to/4atW7Om" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+                    <ShoppingBag className="size-3" />
+                    シマノ リールを見る
+                    <ExternalLink className="size-2.5" />
+                  </a>
+                </li>
                 <BudgetItem name="仕掛け各種" price="~1,500円" />
                 <BudgetItem name="クーラーボックス（小型）" price="~2,000円" />
                 <BudgetItem name="プライヤー+ハサミ" price="~800円" />
@@ -432,15 +537,48 @@ export default function BudgetGuidePage() {
                   name="ロッド（ブランドメーカー）"
                   price="~10,000円"
                 />
+                <li className="flex justify-center">
+                  <a href="https://amzn.to/4s4i64m" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+                    <ShoppingBag className="size-3" />
+                    シマノ ロッドを見る
+                    <ExternalLink className="size-2.5" />
+                  </a>
+                </li>
                 <BudgetItem
                   name="リール（シマノ/ダイワ2500番）"
                   price="~8,000円"
                 />
+                <li className="flex justify-center">
+                  <a href="https://amzn.to/4atW7Om" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+                    <ShoppingBag className="size-3" />
+                    シマノ リールを見る
+                    <ExternalLink className="size-2.5" />
+                  </a>
+                </li>
                 <BudgetItem name="ライン" price="~1,500円" />
+                <li className="flex flex-wrap justify-center gap-2">
+                  <a href="https://amzn.to/4s1SPaX" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+                    <ShoppingBag className="size-3" />
+                    ナイロンラインを見る
+                    <ExternalLink className="size-2.5" />
+                  </a>
+                  <a href="https://amzn.to/4s45H0i" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+                    <ShoppingBag className="size-3" />
+                    PEラインを見る
+                    <ExternalLink className="size-2.5" />
+                  </a>
+                </li>
                 <BudgetItem
                   name="タックルボックス+仕掛け"
                   price="~3,000円"
                 />
+                <li className="flex justify-center">
+                  <a href="https://amzn.to/4rvRhGx" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+                    <ShoppingBag className="size-3" />
+                    釣りボックスを見る
+                    <ExternalLink className="size-2.5" />
+                  </a>
+                </li>
                 <BudgetItem name="クーラーボックス" price="~4,000円" />
                 <BudgetItem name="ライフジャケット" price="~3,500円" />
                 <li className="border-t pt-2">
@@ -514,6 +652,18 @@ export default function BudgetGuidePage() {
                   </span>
                   <br />
                   ナイロンラインは3〜6ヶ月、PEラインは半年〜1年が交換の目安。
+                  <span className="mt-1.5 flex flex-wrap gap-2">
+                    <a href="https://amzn.to/4s1SPaX" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+                      <ShoppingBag className="size-3" />
+                      ナイロンラインを見る
+                      <ExternalLink className="size-2.5" />
+                    </a>
+                    <a href="https://amzn.to/4s45H0i" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+                      <ShoppingBag className="size-3" />
+                      PEラインを見る
+                      <ExternalLink className="size-2.5" />
+                    </a>
+                  </span>
                 </div>
               </li>
               <li className="flex gap-2">
@@ -571,7 +721,12 @@ export default function BudgetGuidePage() {
                     仕掛けを自作する
                   </span>
                   <br />
-                  慣れてきたら仕掛けを自作すると大幅にコストダウン。針とハリスを買ってサビキ仕掛けを自分で作れます。
+                  慣れてきたら仕掛けを自作すると大幅にコストダウン。針とハリスを買ってサビキ仕掛けを自分で作れます。{" "}
+                  <a href="https://amzn.to/408jI1f" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+                    <ShoppingBag className="size-3" />
+                    ハリスを見る
+                    <ExternalLink className="size-2.5" />
+                  </a>
                 </div>
               </li>
               <li className="flex gap-2">

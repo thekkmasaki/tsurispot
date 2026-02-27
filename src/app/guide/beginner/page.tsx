@@ -13,6 +13,8 @@ import {
   Anchor,
   Target,
   Waves,
+  ExternalLink,
+  ShoppingBag,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -753,11 +755,21 @@ export default function BeginnerGuidePage() {
               <ul className="mb-4 space-y-2 text-sm text-muted-foreground">
                 <li className="flex gap-2">
                   <span className="font-medium text-foreground">竿（ロッド）：</span>
-                  万能竿またはサビキ用の竿（2〜3m）。初心者セットに含まれていることが多い。振り出し式（伸縮式）が持ち運びに便利です。
+                  <span>万能竿またはサビキ用の竿（2〜3m）。初心者セットに含まれていることが多い。振り出し式（伸縮式）が持ち運びに便利です。{" "}
+                  <a href="https://amzn.to/4s4i64m" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+                    <ShoppingBag className="size-3" />
+                    シマノ ロッドを見る
+                    <ExternalLink className="size-2.5" />
+                  </a></span>
                 </li>
                 <li className="flex gap-2">
                   <span className="font-medium text-foreground">リール：</span>
-                  小〜中型のスピニングリール（2000〜3000番）。糸付きのものを選べば、ライン選びの手間も省けます。
+                  <span>小〜中型のスピニングリール（2000〜3000番）。糸付きのものを選べば、ライン選びの手間も省けます。{" "}
+                  <a href="https://amzn.to/4atW7Om" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+                    <ShoppingBag className="size-3" />
+                    シマノ リールを見る
+                    <ExternalLink className="size-2.5" />
+                  </a></span>
                 </li>
                 <li className="flex gap-2">
                   <span className="font-medium text-foreground">仕掛け：</span>
@@ -765,7 +777,12 @@ export default function BeginnerGuidePage() {
                 </li>
                 <li className="flex gap-2">
                   <span className="font-medium text-foreground">エサ：</span>
-                  サビキ釣りならアミエビ（冷凍またはチューブタイプ）。ちょい投げなら青イソメ。釣具店やエサ屋で購入できます。
+                  <span>サビキ釣りならアミエビ（冷凍またはチューブタイプ）。ちょい投げなら青イソメ。釣具店やエサ屋で購入できます。{" "}
+                  <a href="https://amzn.to/4c6gaUn" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
+                    <ShoppingBag className="size-3" />
+                    マルキュー アミ姫を見る
+                    <ExternalLink className="size-2.5" />
+                  </a></span>
                 </li>
               </ul>
 

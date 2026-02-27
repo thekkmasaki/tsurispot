@@ -40,7 +40,6 @@ export default async function sitemap({
       { url: `${baseUrl}/fishing-calendar`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
       { url: `${baseUrl}/for-beginners`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
       { url: `${baseUrl}/fishing`, lastModified: now, changeFrequency: "monthly", priority: 0.8 },
-      { url: `${baseUrl}/planner`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
       // 目的別釣り場ページ
       { url: `${baseUrl}/fishing-spots/breakwater-beginner`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },
       { url: `${baseUrl}/fishing-spots/best-saltwater`, lastModified: now, changeFrequency: "weekly", priority: 0.8 },

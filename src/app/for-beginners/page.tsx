@@ -18,12 +18,16 @@ import {
   Sun,
   CloudRain,
   Scissors,
+  ExternalLink,
+  ShoppingBag,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { fishSpecies } from "@/lib/data/fish";
+import { products } from "@/lib/data/products";
+import { ProductCard } from "@/components/affiliate/product-card";
 
 export const metadata: Metadata = {
   title: "はじめての釣り完全ガイド",
@@ -122,6 +126,11 @@ function getMonthName(month: number): string {
 }
 
 export default function ForBeginnersPage() {
+  // 初心者向けおすすめ商品（サビキセット + エサ）
+  const beginnerProducts = products
+    .filter((p) => p.difficulty === "beginner" && (p.id === "p1" || p.id === "p4" || p.id === "p5"))
+    .sort((a, b) => a.priority - b.priority);
+
   // 現在月を取得（SSG時にビルド月が入る）
   const currentMonth = new Date().getMonth() + 1;
 
@@ -230,30 +239,42 @@ export default function ForBeginnersPage() {
                         name: "釣り竿（ロッド）",
                         detail:
                           "万能竿またはサビキセット用。2.7〜3.6m程度。",
+                        affiliateUrl: "https://amzn.to/4s4i64m",
+                        affiliateLabel: "シマノ ロッド",
                       },
                       {
                         name: "リール",
                         detail:
                           "小型スピニングリール（2000〜3000番）。糸付きが便利。",
+                        affiliateUrl: "https://amzn.to/4atW7Om",
+                        affiliateLabel: "シマノ リール",
                       },
                       {
                         name: "仕掛け",
                         detail:
                           "サビキ仕掛け（4〜6号）+ コマセカゴ。2〜3セットあると安心。",
+                        affiliateUrl: null,
+                        affiliateLabel: null,
                       },
                       {
                         name: "エサ",
                         detail:
                           "サビキ釣りならアミエビ（チューブタイプが手軽）。",
+                        affiliateUrl: "https://amzn.to/4c6gaUn",
+                        affiliateLabel: "アミ姫を見る",
                       },
                       {
                         name: "バケツ",
                         detail:
                           "折りたたみ式が便利。水汲み・魚入れ・手洗いに使用。",
+                        affiliateUrl: null,
+                        affiliateLabel: null,
                       },
                       {
                         name: "ハサミ",
                         detail: "釣り糸を切るために必要。小さなハサミでOK。",
+                        affiliateUrl: null,
+                        affiliateLabel: null,
                       },
                     ].map((item) => (
                       <div
@@ -261,13 +282,25 @@ export default function ForBeginnersPage() {
                         className="flex gap-3 rounded-lg border p-3"
                       >
                         <div className="mt-0.5 size-2 shrink-0 rounded-full bg-amber-400" />
-                        <div>
+                        <div className="flex-1">
                           <p className="text-sm font-medium text-foreground">
                             {item.name}
                           </p>
                           <p className="text-xs text-muted-foreground">
                             {item.detail}
                           </p>
+                          {item.affiliateUrl && (
+                            <a
+                              href={item.affiliateUrl}
+                              target="_blank"
+                              rel="noopener noreferrer nofollow"
+                              className="mt-1 inline-flex items-center gap-1 text-xs font-medium text-blue-600 hover:underline"
+                            >
+                              <ShoppingBag className="size-3" />
+                              {item.affiliateLabel}
+                              <ExternalLink className="size-2.5" />
+                            </a>
+                          )}
                         </div>
                       </div>
                     ))}
@@ -335,15 +368,31 @@ export default function ForBeginnersPage() {
                   </div>
                 </div>
 
+                {/* 編集長おすすめセット */}
+                <div>
+                  <h3 className="mb-3 flex items-center gap-2 font-bold text-foreground">
+                    <ShoppingBag className="size-4 text-primary" />
+                    編集長おすすめ - すぐ始められるセット
+                  </h3>
+                  <p className="mb-3 text-xs text-muted-foreground">
+                    迷ったらこのセットを選べば間違いなし。竿・リール・仕掛け・バケツまで全部入りで、買ったその日に釣りが始められます。
+                  </p>
+                  <div className="grid gap-3 sm:grid-cols-2">
+                    {beginnerProducts.map((product) => (
+                      <ProductCard key={product.id} product={product} />
+                    ))}
+                  </div>
+                </div>
+
                 <div className="rounded-lg bg-amber-50 p-4 text-sm text-amber-800 dark:bg-amber-950 dark:text-amber-200">
                   <span className="font-medium">ヒント：</span>
-                  釣具店で「初心者セットをください」と伝えるのが一番簡単です。店員さんがその日の状況に合わせたベストなセットを選んでくれます。
+                  釣具店で「初心者セットをください」と伝えるのが一番簡単です。ネットで購入する場合は、上記のセットがコスパ最高です。
                 </div>
 
                 <div className="text-center">
                   <Button asChild variant="outline" size="sm">
-                    <Link href="/guide/budget">
-                      予算の詳しいガイドを見る
+                    <Link href="/gear">
+                      編集長厳選の道具をもっと見る
                       <ChevronRight className="ml-1 size-4" />
                     </Link>
                   </Button>
@@ -543,7 +592,7 @@ export default function ForBeginnersPage() {
                   <p className="text-sm text-muted-foreground">
                     コマセ（撒き餌）で魚を集め、疑似餌のついた仕掛けで釣ります。足元に落とすだけなので投げる技術が不要。アジ・サバ・イワシなど群れで釣れるので、初心者でもたくさんの魚に出会えます。
                   </p>
-                  <div className="mt-3">
+                  <div className="mt-3 flex flex-wrap items-center gap-3">
                     <Link
                       href="/guide/sabiki"
                       className="inline-flex items-center text-sm font-medium text-green-600 hover:underline"
@@ -551,6 +600,16 @@ export default function ForBeginnersPage() {
                       サビキ釣りの詳しいやり方を見る
                       <ChevronRight className="ml-0.5 size-4" />
                     </Link>
+                    <a
+                      href="https://amzn.to/4c6gaUn"
+                      target="_blank"
+                      rel="noopener noreferrer nofollow"
+                      className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100"
+                    >
+                      <ShoppingBag className="size-3" />
+                      サビキ用エサを見る
+                      <ExternalLink className="size-2.5" />
+                    </a>
                   </div>
                 </div>
 
@@ -628,6 +687,14 @@ export default function ForBeginnersPage() {
                       <p className="mt-1 text-xs text-muted-foreground">
                         特に堤防や磯では必ず着用。レンタルできる釣り場もあります。お子さんは必須です。
                       </p>
+                      <Link
+                        href="/gear"
+                        className="mt-1.5 inline-flex items-center gap-1 text-xs font-medium text-red-600 hover:underline"
+                      >
+                        <ShoppingBag className="size-3" />
+                        おすすめライフジャケットを見る
+                        <ChevronRight className="size-3" />
+                      </Link>
                     </div>
                   </div>
 
