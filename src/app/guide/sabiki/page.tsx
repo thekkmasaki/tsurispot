@@ -66,6 +66,35 @@ export const metadata: Metadata = {
   },
 };
 
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "サビキ釣り完全ガイド - 初心者でも爆釣するコツと仕掛け",
+  description:
+    "サビキ釣りの仕掛け、コマセの使い方、タナの探し方を初心者向けに完全解説。アジ・サバ・イワシの釣り方、必要な道具、おすすめスポット、釣果アップのコツ、片付けまで。",
+  datePublished: "2025-01-01",
+  dateModified: new Date().toISOString().split("T")[0],
+  author: {
+    "@type": "Person",
+    name: "正木 家康",
+    jobTitle: "編集長",
+    url: "https://tsurispot.com/about",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "ツリスポ",
+    url: "https://tsurispot.com",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://tsurispot.com/logo.svg",
+    },
+  },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": "https://tsurispot.com/guide/sabiki",
+  },
+};
+
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -839,6 +868,10 @@ export default function SabikiGuidePage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}

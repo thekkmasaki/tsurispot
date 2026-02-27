@@ -128,9 +128,10 @@ export default async function BlogPostPage({
       image: `https://tsurispot.com${post.image}`,
     }),
     author: {
-      "@type": "Organization",
-      name: "ツリスポ",
-      url: "https://tsurispot.com",
+      "@type": "Person",
+      name: "正木 家康",
+      jobTitle: "編集長",
+      url: "https://tsurispot.com/about",
     },
     publisher: {
       "@type": "Organization",

@@ -114,10 +114,22 @@ export default async function FishDetailPage({ params }: PageProps) {
     "@type": "Article",
     headline: `${fish.name}（${fish.nameEnglish}）の釣り情報`,
     description: fish.description,
+    datePublished: "2025-01-01",
+    dateModified: new Date().toISOString().split('T')[0],
     author: {
+      "@type": "Person",
+      name: "正木 家康",
+      jobTitle: "編集長",
+      url: "https://tsurispot.com/about",
+    },
+    publisher: {
       "@type": "Organization",
       name: "ツリスポ",
       url: "https://tsurispot.com",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://tsurispot.com/logo.svg",
+      },
     },
     about: {
       "@type": "Thing",

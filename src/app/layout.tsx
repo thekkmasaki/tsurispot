@@ -169,6 +169,26 @@ export default function RootLayout({
             }),
           }}
         />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              name: "ツリスポ",
+              url: "https://tsurispot.com",
+              applicationCategory: "TravelApplication",
+              operatingSystem: "All",
+              offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "JPY",
+              },
+              description:
+                "全国1000箇所以上の釣りスポットを地図で検索できる無料Webアプリ。今釣れる魚、仕掛け情報、初心者ガイドも充実。",
+            }),
+          }}
+        />
         <GoogleAnalytics />
         <PWARegister />
         <Header />

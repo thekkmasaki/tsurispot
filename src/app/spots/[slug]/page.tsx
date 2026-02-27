@@ -119,6 +119,23 @@ export default async function SpotDetailPage({ params }: PageProps) {
   const spot = getSpotBySlug(slug);
   if (!spot) notFound();
 
+  // 今月釣れる魚を算出（Event schema用）
+  const currentMonth = new Date().getMonth() + 1; // 1-12
+  const monthNames = ["", "1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
+  const currentMonthFish = spot.catchableFish.filter((cf) => {
+    if (cf.monthStart <= cf.monthEnd) {
+      return currentMonth >= cf.monthStart && currentMonth <= cf.monthEnd;
+    }
+    // 年をまたぐ場合（例: 11月〜3月）
+    return currentMonth >= cf.monthStart || currentMonth <= cf.monthEnd;
+  });
+
+  const currentYear = new Date().getFullYear();
+  const nextMonth = currentMonth === 12 ? 1 : currentMonth + 1;
+  const eventStartDate = `${currentYear}-${String(currentMonth).padStart(2, "0")}-01`;
+  const eventEndYear = currentMonth === 12 ? currentYear + 1 : currentYear;
+  const eventEndDate = `${eventEndYear}-${String(nextMonth).padStart(2, "0")}-01`;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "TouristAttraction",
@@ -154,6 +171,44 @@ export default async function SpotDetailPage({ params }: PageProps) {
       ...(spot.hasFishingShop ? [{ "@type": "LocationFeatureSpecification", name: "釣具店", value: true }] : []),
     ],
     touristType: spot.difficulty === "beginner" ? "初心者" : spot.difficulty === "intermediate" ? "中級者" : "上級者",
+    ...(currentMonthFish.length > 0
+      ? {
+          event: {
+            "@type": "Event",
+            name: `${spot.name}｜${monthNames[currentMonth]}の釣りシーズン`,
+            description: `${monthNames[currentMonth]}に${spot.name}で狙える魚: ${currentMonthFish.map((cf) => cf.fish.name).join("、")}`,
+            startDate: eventStartDate,
+            endDate: eventEndDate,
+            eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
+            eventStatus: "https://schema.org/EventScheduled",
+            location: {
+              "@type": "Place",
+              name: spot.name,
+              address: spot.address,
+              geo: {
+                "@type": "GeoCoordinates",
+                latitude: spot.latitude,
+                longitude: spot.longitude,
+              },
+            },
+            organizer: {
+              "@type": "Organization",
+              name: "ツリスポ",
+              url: "https://tsurispot.com",
+            },
+            ...(spot.isFree
+              ? {
+                  offers: {
+                    "@type": "Offer",
+                    price: "0",
+                    priceCurrency: "JPY",
+                    availability: "https://schema.org/InStock",
+                  },
+                }
+              : {}),
+          },
+        }
+      : {}),
   };
 
   const prefForBreadcrumb = getPrefectureByName(spot.region.prefecture);

@@ -40,6 +40,35 @@ export const metadata: Metadata = {
   },
 };
 
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "釣り初心者完全ガイド - ゼロから始める釣り入門",
+  description:
+    "釣りを始めたい初心者のための完全ガイド。釣りの魅力、最初に揃えるべき道具、初心者におすすめの釣り方（サビキ釣り・ちょい投げ・穴釣り）、おすすめスポット、基本マナーまで徹底解説。",
+  datePublished: "2025-01-01",
+  dateModified: new Date().toISOString().split("T")[0],
+  author: {
+    "@type": "Person",
+    name: "正木 家康",
+    jobTitle: "編集長",
+    url: "https://tsurispot.com/about",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "ツリスポ",
+    url: "https://tsurispot.com",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://tsurispot.com/logo.svg",
+    },
+  },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": "https://tsurispot.com/guide/beginner",
+  },
+};
+
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -478,6 +507,10 @@ export default function BeginnerGuidePage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}

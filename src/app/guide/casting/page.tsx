@@ -154,6 +154,35 @@ const howToJsonLd = {
   ],
 };
 
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "投げ方（キャスティング）の基本 - 初心者ガイド",
+  description:
+    "オーバーヘッドキャスト、サイドキャスト、ちょい投げの3つの投げ方を解説。よくある失敗と対策も紹介。初心者が安全にキャスティングを学べるガイド。",
+  datePublished: "2025-01-01",
+  dateModified: new Date().toISOString().split("T")[0],
+  author: {
+    "@type": "Person",
+    name: "正木 家康",
+    jobTitle: "編集長",
+    url: "https://tsurispot.com/about",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "ツリスポ",
+    url: "https://tsurispot.com",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://tsurispot.com/logo.svg",
+    },
+  },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": "https://tsurispot.com/guide/casting",
+  },
+};
+
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -679,6 +708,10 @@ function CastDistanceDiagram() {
 export default function CastingGuidePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
