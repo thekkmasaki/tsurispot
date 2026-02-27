@@ -1,4 +1,4 @@
-import { CheckSquare, AlertTriangle, Info } from "lucide-react";
+import { CheckSquare, AlertTriangle, Info, ExternalLink } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
@@ -13,11 +13,17 @@ interface PackingChecklistProps {
   isNightFishing: boolean;
 }
 
+interface AffiliateLink {
+  label: string;
+  url: string;
+}
+
 interface ChecklistItem {
   name: string;
   note?: string;
   level: "normal" | "warning" | "danger";
   badgeText?: string;
+  affiliate?: AffiliateLink;
 }
 
 function buildChecklist(props: PackingChecklistProps) {
@@ -36,12 +42,16 @@ function buildChecklist(props: PackingChecklistProps) {
     {
       name: "釣り竿・リール",
       level: "normal",
-      ...(hasRentalRod ? { badgeText: "現地レンタル可" } : {}),
+      ...(hasRentalRod
+        ? { badgeText: "現地レンタル可" }
+        : { affiliate: { label: "ロッド", url: "https://amzn.to/4s4i64m" } }),
     },
     {
       name: "仕掛け・エサ",
       level: "normal",
-      ...(hasFishingShop ? { badgeText: "現地購入可" } : {}),
+      ...(hasFishingShop
+        ? { badgeText: "現地購入可" }
+        : { affiliate: { label: "おもりセット", url: "https://amzn.to/4cFGDbl" } }),
     },
     { name: "クーラーボックス", note: "魚を持ち帰る場合", level: "normal" },
     { name: "タオル", level: "normal" },
@@ -130,6 +140,18 @@ function buildChecklist(props: PackingChecklistProps) {
     { name: "レジャーシート", level: "normal" },
     { name: "日焼け止め・帽子", note: "屋外全般", level: "normal" },
     { name: "絆創膏・消毒液", level: "normal" },
+    {
+      name: "モバイルバッテリー",
+      note: "スマホ充電切れ防止",
+      level: "normal",
+      affiliate: { label: "Anker", url: "https://amzn.to/4s2zhmT" },
+    },
+    {
+      name: "フィッシングバッグ",
+      note: "道具の持ち運びに",
+      level: "normal",
+      affiliate: { label: "大容量40L", url: "https://amzn.to/4aOYPgo" },
+    },
   ];
 
   return { essentials, conditional, convenient };
@@ -161,6 +183,17 @@ function ChecklistItemRow({ item }: { item: ChecklistItem }) {
         <Badge className="ml-auto bg-green-600 hover:bg-green-600 text-[10px] px-1.5 py-0">
           {item.badgeText}
         </Badge>
+      )}
+      {item.affiliate && (
+        <a
+          href={item.affiliate.url}
+          target="_blank"
+          rel="noopener noreferrer nofollow"
+          className="ml-auto inline-flex shrink-0 items-center gap-1 rounded bg-[#FF9900] px-2 py-1 text-[10px] font-bold text-white hover:bg-[#E88B00] transition-colors"
+        >
+          {item.affiliate.label}
+          <ExternalLink className="size-2.5" />
+        </a>
       )}
     </div>
   );
