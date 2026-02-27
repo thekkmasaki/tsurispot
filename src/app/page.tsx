@@ -322,6 +322,25 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 名言セクション */}
+      <section className="bg-slate-50/80 py-8 sm:py-10">
+        <div className="mx-auto max-w-2xl px-4 text-center sm:px-6">
+          <blockquote className="space-y-3">
+            <div className="space-y-1 text-xs leading-relaxed text-slate-400 sm:text-sm sm:leading-loose">
+              <p>一時間、幸せになりたかったら酒を飲みなさい。</p>
+              <p>三日間、幸せになりたかったら結婚しなさい。</p>
+              <p>八日間、幸せになりたかったら豚を殺して食べなさい。</p>
+            </div>
+            <p className="text-sm font-semibold tracking-wide text-slate-700 sm:text-base">
+              永遠に、幸せになりたかったら釣りを覚えなさい。
+            </p>
+            <footer className="text-[10px] text-slate-400 sm:text-xs">
+              ― 開高健『オーパ！』より
+            </footer>
+          </blockquote>
+        </div>
+      </section>
+
       {/* 今釣れている魚カルーセル */}
       <CatchableNowCarousel fish={carouselFish} />
 
@@ -452,23 +471,6 @@ export default function Home() {
               サビキガイド <ChevronRight className="size-3" />
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* 名言セクション */}
-      <section className="border-t bg-gradient-to-b from-slate-50 to-white py-12 sm:py-16">
-        <div className="mx-auto max-w-2xl px-4 text-center sm:px-6">
-          <blockquote className="space-y-4">
-            <div className="space-y-2 text-sm leading-relaxed text-slate-600 sm:text-base sm:leading-loose">
-              <p>一時間、幸せになりたかったら酒を飲みなさい。</p>
-              <p>三日間、幸せになりたかったら結婚しなさい。</p>
-              <p>八日間、幸せになりたかったら豚を殺して食べなさい。</p>
-              <p className="font-medium text-slate-800">永遠に、幸せになりたかったら釣りを覚えなさい。</p>
-            </div>
-            <footer className="text-xs text-slate-400 sm:text-sm">
-              ― 開高健『オーパ！』より
-            </footer>
-          </blockquote>
         </div>
       </section>
 
