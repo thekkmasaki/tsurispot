@@ -160,9 +160,9 @@ export function GoTodayButton({
   return (
     <div className="flex flex-col items-center gap-2 w-full">
       {/* Date selector chips */}
-      <div className="relative w-full max-w-sm">
+      <div className="relative w-full">
         <div
-          className="flex gap-1.5 overflow-x-auto pb-1 scrollbar-none px-1"
+          className="flex gap-1 overflow-x-auto pb-1 scrollbar-none"
           style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         >
           {dateRange.map((item, i) => (
@@ -171,12 +171,11 @@ export function GoTodayButton({
               onClick={() => setSelectedIndex(i)}
               aria-label={`${item.label} ${item.subLabel}を選択`}
               className={cn(
-                "flex-shrink-0 flex flex-col items-center rounded-lg px-2.5 py-1.5 text-xs font-medium transition-all min-h-[44px] min-w-[52px] justify-center",
+                "flex-shrink-0 flex flex-col items-center rounded-lg px-2 py-1 text-xs font-medium transition-all min-h-[40px] min-w-[44px] justify-center",
                 i === selectedIndex
                   ? "bg-blue-500 text-white shadow-sm"
-                  : "bg-gray-100 text-gray-600 hover:bg-gray-200",
+                  : "bg-white text-gray-600 hover:bg-gray-100",
                 i === 0 && i === selectedIndex && "ring-1 ring-blue-300",
-                // Weekend coloring when not selected
                 i !== selectedIndex && item.date.getDay() === 0 && "text-red-500",
                 i !== selectedIndex && item.date.getDay() === 6 && "text-blue-500"
               )}
@@ -195,31 +194,31 @@ export function GoTodayButton({
         </div>
       </div>
 
-      {/* Go button */}
-      <button
-        onClick={toggle}
-        aria-label={ariaLabel}
-        className={cn(
-          "flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all active:scale-95 min-h-[44px]",
-          isGoing
-            ? "bg-blue-500 text-white hover:bg-blue-600 shadow-md"
-            : "border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
-        )}
-      >
-        <Navigation
+      {/* Go button + count in one row */}
+      <div className="flex items-center gap-3">
+        <button
+          onClick={toggle}
+          aria-label={ariaLabel}
           className={cn(
-            "size-4 transition-transform duration-300",
-            isGoing && "fill-white",
-            isAnimating && "scale-125"
+            "flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-medium transition-all active:scale-95 min-h-[40px]",
+            isGoing
+              ? "bg-blue-500 text-white hover:bg-blue-600 shadow-md"
+              : "border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
           )}
-        />
-        <span>{buttonText}</span>
-      </button>
-
-      {/* Count display */}
-      {countText && (
-        <span className="text-xs text-muted-foreground">{countText}</span>
-      )}
+        >
+          <Navigation
+            className={cn(
+              "size-4 transition-transform duration-300",
+              isGoing && "fill-white",
+              isAnimating && "scale-125"
+            )}
+          />
+          <span>{buttonText}</span>
+        </button>
+        {countText && (
+          <span className="text-xs text-muted-foreground whitespace-nowrap">{countText}</span>
+        )}
+      </div>
     </div>
   );
 }

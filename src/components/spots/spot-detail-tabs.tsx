@@ -31,9 +31,9 @@ export function SpotDetailTabs({
           <TabsTrigger
             key={value}
             value={value}
-            className="flex items-center gap-1.5 px-3 py-2 text-sm min-h-[40px]"
+            className="flex items-center gap-1 px-2 py-2 text-xs sm:gap-1.5 sm:px-3 sm:text-sm min-h-[40px]"
           >
-            <Icon className="size-4" />
+            <Icon className="size-3.5 sm:size-4" />
             {label}
           </TabsTrigger>
         ))}

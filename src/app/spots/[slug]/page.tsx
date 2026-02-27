@@ -443,34 +443,16 @@ export default async function SpotDetailPage({ params }: PageProps) {
         スポット一覧に戻る
       </Link>
 
-      {/* Header section */}
+      {/* Header section - モバイルファースト設計 */}
       <div className="mb-5 sm:mb-6">
-        <div className="flex items-start justify-between gap-2">
-          <div className="flex flex-wrap items-center gap-2">
-            <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">{spot.name}</h1>
-            {spot.difficulty === "beginner" && (
-              <Badge className="bg-green-600 hover:bg-green-600">
-                初心者OK
-              </Badge>
-            )}
-            {spot.hasRentalRod && (
-              <Badge className="bg-purple-600 hover:bg-purple-600">
-                手ぶらOK
-              </Badge>
-            )}
-            {spot.isFree && (
-              <Badge className="bg-orange-500 hover:bg-orange-500">無料</Badge>
-            )}
-            <Badge variant="outline">
-              {SPOT_TYPE_LABELS[spot.spotType]}
-            </Badge>
-          </div>
-          <div className="flex items-center gap-2">
-            <GoTodayButton slug={spot.slug} spotName={spot.name} />
-            <FavoriteButton spotSlug={spot.slug} />
-          </div>
+        {/* スポット名 + お気に入り（最上段） */}
+        <div className="flex items-start justify-between gap-3">
+          <h1 className="min-w-0 text-xl font-bold leading-tight sm:text-2xl md:text-3xl">{spot.name}</h1>
+          <FavoriteButton spotSlug={spot.slug} />
         </div>
-        <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
+
+        {/* 評価 + エリア情報 */}
+        <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
           <div className="flex items-center gap-1">
             <Star className="size-4 fill-yellow-400 text-yellow-400" />
             <span className="font-medium text-foreground">
@@ -499,6 +481,28 @@ export default async function SpotDetailPage({ params }: PageProps) {
             })()}
           </div>
         </div>
+
+        {/* バッジ（3段目） */}
+        <div className="mt-2 flex flex-wrap gap-1.5">
+          {spot.difficulty === "beginner" && (
+            <Badge className="bg-green-600 hover:bg-green-600 text-xs">
+              初心者OK
+            </Badge>
+          )}
+          {spot.hasRentalRod && (
+            <Badge className="bg-purple-600 hover:bg-purple-600 text-xs">
+              手ぶらOK
+            </Badge>
+          )}
+          {spot.isFree && (
+            <Badge className="bg-orange-500 hover:bg-orange-500 text-xs">無料</Badge>
+          )}
+          <Badge variant="outline" className="text-xs">
+            {SPOT_TYPE_LABELS[spot.spotType]}
+          </Badge>
+        </div>
+
+        {/* 説明文 */}
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
           {spot.description}
           {spot.name}は{spot.region.prefecture}{spot.region.areaName}に位置する
@@ -507,7 +511,14 @@ export default async function SpotDetailPage({ params }: PageProps) {
           {spot.catchableFish.length > 0 ? `${spot.catchableFish.slice(0, 3).map(f => f.fish.name).join("、")}などが狙えます。` : ""}
           {spot.isFree ? "無料で釣りができます。" : spot.feeDetail ? `利用料金: ${spot.feeDetail}` : ""}
         </p>
-        <div className="mt-4">
+
+        {/* 「今日行く」ボタン（ヘッダーから分離、独立セクション） */}
+        <div className="mt-4 rounded-xl border bg-muted/30 p-3 sm:p-4">
+          <GoTodayButton slug={spot.slug} spotName={spot.name} />
+        </div>
+
+        {/* シェアボタン */}
+        <div className="mt-3">
           <ShareButtons
             url={`https://tsurispot.com/spots/${spot.slug}`}
             title={`${spot.name}の釣り情報｜ツリスポ`}
