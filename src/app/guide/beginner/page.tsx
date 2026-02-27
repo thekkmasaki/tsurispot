@@ -663,14 +663,56 @@ export default function BeginnerGuidePage() {
               {/* タックル構成図 */}
               <TackleDiagram />
 
-              {/* リール巻き取りアニメーション */}
-              <h3 className="mb-3 mt-6 font-medium text-foreground">
-                動きで見るリールの使い方
-              </h3>
-              <p className="mb-2 text-sm text-muted-foreground">
-                リールのハンドルを回すと、ラインが巻き取られて魚が引き寄せられます。
-              </p>
-              <ReelAnimationSvg />
+              {/* 初心者がよく悩むポイント */}
+              <div className="mt-6 rounded-lg border-2 border-amber-200 bg-amber-50 p-4 dark:border-amber-900 dark:bg-amber-950/30">
+                <h3 className="mb-3 font-medium text-amber-900 dark:text-amber-200">
+                  初心者がつまずきやすいポイント
+                </h3>
+                <div className="space-y-3 text-sm text-amber-800 dark:text-amber-300">
+                  <div>
+                    <p className="font-medium">「道具が多すぎて何を買えばいいかわからない」</p>
+                    <p className="mt-1 text-amber-700 dark:text-amber-400">
+                      → <strong>初心者セット1つだけ</strong>買えばOK。竿・リール・仕掛けが全部入りで3,000〜5,000円。あとはエサだけ。個別に選ぶのは2回目以降で十分です。
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-medium">「釣具屋に行くのが怖い。店員に何を聞けばいいかわからない」</p>
+                    <p className="mt-1 text-amber-700 dark:text-amber-400">
+                      → 「<strong>初めてサビキ釣りをしたいです</strong>」と言えば全部揃えてくれます。釣具店の店員さんは釣り好きなので、初心者に超やさしいです。
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-medium">「虫エサ（イソメ）が触れない…」</p>
+                    <p className="mt-1 text-amber-700 dark:text-amber-400">
+                      → サビキ釣りなら<strong>虫エサ不要</strong>。アミエビ（小エビ）をカゴに入れるだけ。チューブタイプなら手も汚れません。
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-medium">「どこで釣ればいいかわからない。勝手に入っていい場所？」</p>
+                    <p className="mt-1 text-amber-700 dark:text-amber-400">
+                      → 漁港や堤防の<strong>「釣り禁止」看板がない場所</strong>ならOK。不安なら海釣り公園や有料の釣り堀が確実。<Link href="/spots" className="font-medium underline">ツリスポで近くの釣り場を探す</Link>のが一番簡単です。
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-medium">「1匹も釣れなかったらどうしよう」</p>
+                    <p className="mt-1 text-amber-700 dark:text-amber-400">
+                      → サビキ釣りで<strong>アジやイワシの回遊</strong>にあたれば、初心者でも10匹以上釣れます。「釣れやすい時期×釣れやすい場所」を選ぶのがコツ。<Link href="/catchable-now" className="font-medium underline">今釣れる魚</Link>をチェックしましょう。
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-medium">「釣れた魚の扱い方がわからない。そのまま持って帰っていいの？」</p>
+                    <p className="mt-1 text-amber-700 dark:text-amber-400">
+                      → クーラーボックスに氷と海水を入れておき、釣れたら入れるだけ。小さい魚はリリース（逃がす）でOK。持ち帰る場合は<Link href="/guide/fish-handling" className="font-medium underline">魚の締め方ガイド</Link>を参考に。
+                    </p>
+                  </div>
+                  <div>
+                    <p className="font-medium">「一人で行っても大丈夫？周りの人に迷惑かけそう…」</p>
+                    <p className="mt-1 text-amber-700 dark:text-amber-400">
+                      → 一人で来てる人がほとんど。<strong>隣の人と2m以上の間隔</strong>を空ければ問題なし。わからないことは隣の釣り人に聞けば、だいたい教えてくれます。
+                    </p>
+                  </div>
+                </div>
+              </div>
 
               <h3 className="mb-3 font-medium text-foreground">
                 必須の道具（これだけあれば釣りができる）

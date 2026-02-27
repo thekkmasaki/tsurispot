@@ -87,6 +87,7 @@ export function Footer() {
               <li><Link href="/partner" className="hover:text-foreground">事業者様向け（掲載案内）</Link></li>
               <li><Link href="/privacy" className="hover:text-foreground">プライバシーポリシー</Link></li>
               <li><Link href="/terms" className="hover:text-foreground">利用規約</Link></li>
+              <li><Link href="/legal" className="hover:text-foreground">特定商取引法に基づく表記</Link></li>
             </ul>
           </div>
         </div>
@@ -161,6 +162,7 @@ export function Footer() {
           <Link href="/partner" className="hover:text-foreground">事業者様向け</Link>
           <Link href="/privacy" className="hover:text-foreground">プライバシーポリシー</Link>
           <Link href="/terms" className="hover:text-foreground">利用規約</Link>
+          <Link href="/legal" className="hover:text-foreground">特商法表記</Link>
         </div>
         <p className="mt-3 text-center text-xs text-muted-foreground">
           &copy; 2026 ツリスポ

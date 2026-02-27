@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
-import { SpotCard } from "@/components/spots/spot-card";
+import { AreaFilteredSpotList } from "@/components/spots/area-filter";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
@@ -129,29 +129,7 @@ export default function RiverBeginnerPage() {
         </p>
       </div>
 
-      <p className="mb-4 text-sm text-muted-foreground">
-        {spots.length}件のスポットが見つかりました
-      </p>
-
-      {spots.length > 0 ? (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {spots.map((spot) => (
-            <SpotCard key={spot.id} spot={spot} />
-          ))}
-        </div>
-      ) : (
-        <div className="rounded-xl border border-gray-100 bg-gray-50 py-12 text-center">
-          <p className="text-muted-foreground">
-            初心者向けの川釣りスポットを準備中です。
-          </p>
-          <p className="mt-2 text-sm text-muted-foreground">
-            <Link href="/spots" className="text-primary hover:underline">
-              全ての釣りスポット一覧
-            </Link>
-            からお探しください。
-          </p>
-        </div>
-      )}
+      <AreaFilteredSpotList spots={spots} />
 
       {/* FAQ section */}
       <section className="mt-12">

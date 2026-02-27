@@ -41,6 +41,43 @@ export interface FishingSpot {
   safetyNotes?: string[];
   isKuchikomiSpot?: boolean;
   youtubeLinks?: YouTubeSearchLink[];
+  rules?: SpotRules;
+  parkingPeakInfo?: ParkingPeakInfo;
+  familyInfo?: FamilyInfo;
+  spotPhotos?: SpotPhoto[];
+}
+
+export interface SpotRules {
+  castingAllowed: boolean;
+  lureAllowed: boolean;
+  chumAllowed: boolean;
+  fishingLicenseRequired: boolean;
+  maxRods?: number;
+  minKeepSize?: string;
+  restrictedAreas?: string[];
+  otherRules?: string[];
+}
+
+export interface ParkingPeakInfo {
+  peakStartTime: string;
+  recommendedArrival: string;
+  alternateParking?: string;
+}
+
+export interface FamilyInfo {
+  strollerAccessible: boolean;
+  hasRailing: boolean;
+  hasPlayArea: boolean;
+  parkingToSpotDistance?: string;
+  hasBabyChanging: boolean;
+  hasNursing: boolean;
+  familyNotes?: string;
+}
+
+export interface SpotPhoto {
+  url: string;
+  alt: string;
+  credit: string;
 }
 
 export interface FishSpecies {

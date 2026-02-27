@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
-import { SpotCard } from "@/components/spots/spot-card";
+import { AreaFilteredSpotList } from "@/components/spots/area-filter";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
@@ -130,15 +130,7 @@ export default function BestSaltwaterPage() {
         </p>
       </div>
 
-      <p className="mb-4 text-sm text-muted-foreground">
-        {spots.length}件の海釣りスポットが見つかりました
-      </p>
-
-      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {spots.map((spot) => (
-          <SpotCard key={spot.id} spot={spot} />
-        ))}
-      </div>
+      <AreaFilteredSpotList spots={spots} />
 
       {/* FAQ section */}
       <section className="mt-12">

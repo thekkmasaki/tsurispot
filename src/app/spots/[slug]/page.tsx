@@ -16,6 +16,7 @@ import {
   Store,
   ShoppingBag,
   MessageSquare,
+  Shield,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -27,6 +28,7 @@ import { SeasonCalendar } from "@/components/spots/season-calendar";
 import { TackleCard } from "@/components/spots/tackle-card";
 import { TideMazumeInfo } from "@/components/spots/tide-mazume-info";
 import { FavoriteButton } from "@/components/spots/favorite-button";
+import { GoTodayButton } from "@/components/spots/go-today-button";
 import { GearGuideList } from "@/components/spots/gear-guide";
 import { SafetyWarning } from "@/components/spots/safety-warning";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
@@ -43,13 +45,19 @@ import { FishLikeButton } from "@/components/spots/fish-like-button";
 import { FishingReportSummary } from "@/components/spots/fishing-report-summary";
 import { MobileQuickNav } from "@/components/spots/mobile-quick-nav";
 import { SpotAffiliateRecommend } from "@/components/spots/spot-affiliate-recommend";
+import { ParkingPeakCard } from "@/components/spots/parking-peak-info";
+import { FamilyInfoCard } from "@/components/spots/family-info";
+import { PackingChecklist } from "@/components/spots/packing-checklist";
 import { getCatchReportsBySpot } from "@/lib/data/catch-reports";
 import { CatchReportList } from "@/components/spots/catch-report-list";
 import { CatchReportForm } from "@/components/spots/catch-report-form";
+import { SpotRulesCard } from "@/components/spots/spot-rules";
 import { LineBanner } from "@/components/line-banner";
+import { SpotPhotoGallery } from "@/components/spots/spot-photo-gallery";
 import { areaGuides } from "@/lib/data/area-guides";
 import { explainTime, explainMethod } from "@/lib/fishing-term-helper";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
+import { CollapsibleSection } from "@/components/ui/collapsible-section";
 
 // Below-the-fold client components loaded lazily
 const StreetViewSection = dynamic(() => import("@/components/spots/street-view-section").then((m) => m.StreetViewSection));
@@ -390,7 +398,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
               {SPOT_TYPE_LABELS[spot.spotType]}
             </Badge>
           </div>
-          <FavoriteButton spotSlug={spot.slug} />
+          <div className="flex items-center gap-2">
+            <GoTodayButton slug={spot.slug} spotName={spot.name} />
+            <FavoriteButton spotSlug={spot.slug} />
+          </div>
         </div>
         <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-muted-foreground">
           <div className="flex items-center gap-1">
@@ -457,17 +468,26 @@ export default async function SpotDetailPage({ params }: PageProps) {
         </div>
       )}
 
+      {/* スポット写真ギャラリー */}
+      {spot.spotPhotos && spot.spotPhotos.length > 0 && (
+        <section className="mb-6 sm:mb-8">
+          <SpotPhotoGallery photos={spot.spotPhotos} spotName={spot.name} />
+        </section>
+      )}
+
       {/* モバイル向けクイックナビ */}
       <MobileQuickNav />
 
       {/* 現地の様子 - Street View */}
       <div className="mb-6 sm:mb-8">
-        <StreetViewSection
-          latitude={spot.latitude}
-          longitude={spot.longitude}
-          spotName={spot.name}
-          address={spot.address}
-        />
+        <CollapsibleSection title="現地の様子（ストリートビュー）">
+          <StreetViewSection
+            latitude={spot.latitude}
+            longitude={spot.longitude}
+            spotName={spot.name}
+            address={spot.address}
+          />
+        </CollapsibleSection>
       </div>
 
       {/* 安全警告（危険・注意の場合はヘッダー直下に目立つように表示） */}
@@ -492,13 +512,21 @@ export default async function SpotDetailPage({ params }: PageProps) {
         </div>
       )}
 
+      {/* 釣りルール・禁止事項 */}
+      <section className="mb-6 sm:mb-8">
+        <CollapsibleSection title="釣りルール・禁止事項" icon={<Shield className="size-5" />}>
+          <SpotRulesCard rules={spot.rules} spotType={spot.spotType} spotName={spot.name} />
+        </CollapsibleSection>
+      </section>
+
       {/* Two column layout */}
       <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1fr_360px]">
         {/* Left: Main content */}
         <div className="space-y-6 sm:space-y-8">
           {/* Catchable fish - Season calendar */}
           <section id="fish-season">
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold sm:mb-4">
+            <CollapsibleSection title={`${spot.name}で釣れる魚`} icon={<Fish className="size-5" />}>
+            <h2 className="mb-3 hidden items-center gap-2 text-lg font-bold sm:mb-4 md:flex">
               <Fish className="size-5" />
               {spot.name}で釣れる魚の季節カレンダー
             </h2>
@@ -569,6 +597,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 />
               </div>
             )}
+            </CollapsibleSection>
           </section>
 
           {/* マヅメ・潮汐情報 */}
@@ -588,23 +617,42 @@ export default async function SpotDetailPage({ params }: PageProps) {
             </>
           )}
 
+          {/* 持ち物チェックリスト */}
+          <Separator />
+          <section>
+            <CollapsibleSection title="持ち物チェックリスト" icon={<ShoppingBag className="size-5" />}>
+              <PackingChecklist
+                spotType={spot.spotType}
+                hasConvenienceStore={spot.hasConvenienceStore}
+                hasToilet={spot.hasToilet}
+                hasFishingShop={spot.hasFishingShop}
+                hasRentalRod={spot.hasRentalRod}
+                difficulty={spot.difficulty}
+                safetyLevel={spot.safetyLevel}
+                isNightFishing={isNightFishing}
+              />
+            </CollapsibleSection>
+          </section>
+
           {/* 初心者向け装備ガイド */}
           {spot.gearGuides && spot.gearGuides.length > 0 && (
             <>
               <Separator />
               <section>
-                <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
-                  <Wrench className="size-5" />
-                  初心者向け装備ガイド
-                </h2>
-                <p className="mb-4 text-sm text-muted-foreground">
-                  このスポットでの釣りに必要な道具をわかりやすくまとめました。当日バタバタしないよう、事前にネットで揃えておくのがおすすめです。
-                </p>
-                <GearGuideList guides={spot.gearGuides} />
-                <SpotAffiliateRecommend
-                  methods={spot.catchableFish.map((cf) => cf.method)}
-                  isNightFishing={isNightFishing}
-                />
+                <CollapsibleSection title="初心者向け装備ガイド" icon={<Wrench className="size-5" />}>
+                  <h2 className="mb-4 hidden items-center gap-2 text-lg font-bold md:flex">
+                    <Wrench className="size-5" />
+                    初心者向け装備ガイド
+                  </h2>
+                  <p className="mb-4 text-sm text-muted-foreground">
+                    このスポットでの釣りに必要な道具をわかりやすくまとめました。当日バタバタしないよう、事前にネットで揃えておくのがおすすめです。
+                  </p>
+                  <GearGuideList guides={spot.gearGuides} />
+                  <SpotAffiliateRecommend
+                    methods={spot.catchableFish.map((cf) => cf.method)}
+                    isNightFishing={isNightFishing}
+                  />
+                </CollapsibleSection>
               </section>
             </>
           )}
@@ -614,17 +662,19 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <>
               <Separator />
               <section>
-                <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
-                  <Wrench className="size-5" />
-                  この釣り場でおすすめの装備
-                </h2>
-                <p className="mb-2 text-sm text-muted-foreground">
-                  このスポットの釣り方に合った装備をピックアップしました。当日バタバタしないよう、事前にネットで揃えておくのがおすすめです。
-                </p>
-                <SpotAffiliateRecommend
-                  methods={spot.catchableFish.map((cf) => cf.method)}
-                  isNightFishing={isNightFishing}
-                />
+                <CollapsibleSection title="この釣り場でおすすめの装備" icon={<Wrench className="size-5" />}>
+                  <h2 className="mb-4 hidden items-center gap-2 text-lg font-bold md:flex">
+                    <Wrench className="size-5" />
+                    この釣り場でおすすめの装備
+                  </h2>
+                  <p className="mb-2 text-sm text-muted-foreground">
+                    このスポットの釣り方に合った装備をピックアップしました。当日バタバタしないよう、事前にネットで揃えておくのがおすすめです。
+                  </p>
+                  <SpotAffiliateRecommend
+                    methods={spot.catchableFish.map((cf) => cf.method)}
+                    isNightFishing={isNightFishing}
+                  />
+                </CollapsibleSection>
               </section>
             </>
           )}
@@ -789,43 +839,69 @@ export default async function SpotDetailPage({ params }: PageProps) {
                     )}
                   </div>
                 </div>
+
+                <Separator />
+
+                {/* 駐車場混雑目安 */}
+                <ParkingPeakCard
+                  parkingPeakInfo={spot.parkingPeakInfo}
+                  hasParking={spot.hasParking}
+                  parkingDetail={spot.parkingDetail}
+                />
               </CardContent>
             </Card>
+          </section>
+
+          {/* ファミリー向け情報 */}
+          <section>
+            <CollapsibleSection title="ファミリー向け情報">
+              <FamilyInfoCard
+                familyInfo={spot.familyInfo}
+                spotType={spot.spotType}
+                hasToilet={spot.hasToilet}
+                hasParking={spot.hasParking}
+                difficulty={spot.difficulty}
+              />
+            </CollapsibleSection>
           </section>
         </div>
       </div>
 
       {/* 天気・潮汐 */}
       <section id="weather-tide" className="mt-8 sm:mt-12">
-        <SpotWeatherTide
-          lat={spot.latitude}
-          lng={spot.longitude}
-          spotName={spot.name}
-        />
+        <CollapsibleSection title="天気・潮汐情報">
+          <SpotWeatherTide
+            lat={spot.latitude}
+            lng={spot.longitude}
+            spotName={spot.name}
+          />
+        </CollapsibleSection>
       </section>
 
       {/* ボウズ確率 */}
       <section className="mt-8 sm:mt-12">
-        <SpotBouzuCard
-          spotType={spot.spotType}
-          difficulty={spot.difficulty}
-          rating={spot.rating}
-          reviewCount={spot.reviewCount}
-          prefecture={spot.region.prefecture}
-          areaName={spot.region.areaName}
-          isFree={spot.isFree}
-          hasRentalRod={spot.hasRentalRod}
-          catchableFishCount={spot.catchableFish.length}
-          catchableFishDetails={spot.catchableFish.map((cf) => ({
-            fishSlug: cf.fish.slug,
-            fishName: cf.fish.name,
-            method: cf.method,
-            catchDifficulty: cf.catchDifficulty,
-            monthStart: cf.monthStart,
-            monthEnd: cf.monthEnd,
-            peakSeason: cf.peakSeason,
-          }))}
-        />
+        <CollapsibleSection title="ボウズ確率">
+          <SpotBouzuCard
+            spotType={spot.spotType}
+            difficulty={spot.difficulty}
+            rating={spot.rating}
+            reviewCount={spot.reviewCount}
+            prefecture={spot.region.prefecture}
+            areaName={spot.region.areaName}
+            isFree={spot.isFree}
+            hasRentalRod={spot.hasRentalRod}
+            catchableFishCount={spot.catchableFish.length}
+            catchableFishDetails={spot.catchableFish.map((cf) => ({
+              fishSlug: cf.fish.slug,
+              fishName: cf.fish.name,
+              method: cf.method,
+              catchDifficulty: cf.catchDifficulty,
+              monthStart: cf.monthStart,
+              monthEnd: cf.monthEnd,
+              peakSeason: cf.peakSeason,
+            }))}
+          />
+        </CollapsibleSection>
       </section>
 
       {/* 広告 */}
@@ -843,14 +919,16 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
       {/* 混雑予想 */}
       <section className="mt-8 sm:mt-12">
-        <CrowdPredictionCard
-          rating={spot.rating}
-          isFree={spot.isFree}
-          difficulty={spot.difficulty}
-          prefecture={spot.region.prefecture}
-          hasParking={spot.hasParking}
-          reviewCount={spot.reviewCount}
-        />
+        <CollapsibleSection title="混雑予想">
+          <CrowdPredictionCard
+            rating={spot.rating}
+            isFree={spot.isFree}
+            difficulty={spot.difficulty}
+            prefecture={spot.region.prefecture}
+            hasParking={spot.hasParking}
+            reviewCount={spot.reviewCount}
+          />
+        </CollapsibleSection>
       </section>
 
       {/* 近くの釣具店 */}

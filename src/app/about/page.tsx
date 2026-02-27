@@ -15,6 +15,10 @@ import {
   Shield,
   Calendar,
   CheckCircle,
+  Globe,
+  Leaf,
+  Handshake,
+  FileText,
 } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -130,8 +134,8 @@ export default function AboutPage() {
                 <h3 className="text-lg font-bold">創業ストーリー</h3>
               </div>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                ツリスポは2025年に「釣り初心者がもっと気軽に釣りを始められる世界を作りたい」という想いから誕生しました。
-                創業メンバー自身が釣りを始めた際、「どこで何が釣れるのか」「どんな道具が必要なのか」といった
+                ツリスポは2025年、釣り好きの個人が「初心者がもっと気軽に釣りを始められる世界を作りたい」という想いから立ち上げました。
+                自身が釣りを始めた頃、「どこで何が釣れるのか」「どんな道具が必要なのか」といった
                 基本的な情報がバラバラに散らばっていて、なかなか一歩を踏み出せなかった経験がきっかけです。
               </p>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
@@ -270,8 +274,88 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 運営情報 */}
+      {/* 社会課題への取り組み */}
       <section className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
+        <div className="mx-auto max-w-2xl text-center">
+          <div className="mb-6 inline-flex items-center gap-2">
+            <Globe className="size-5 text-primary" />
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+              社会課題への取り組み
+            </h2>
+          </div>
+          <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+            ツリスポは、水産庁が推進する国策「海業（うみぎょう）」の理念に賛同し、
+            釣り観光を通じた漁村地域の活性化に貢献することを目指しています。
+          </p>
+        </div>
+
+        <div className="mx-auto mt-8 grid max-w-3xl gap-4 sm:grid-cols-2">
+          <Card className="h-full border">
+            <CardContent className="p-5">
+              <div className="flex gap-3">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-blue-100">
+                  <BookOpen className="size-5 text-blue-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">釣りマナー・ルールの啓発</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    漁業権の周知、立入禁止区域の明示、ゴミの持ち帰りなど、釣り場を守るためのマナーやルールを各スポットページで発信しています。
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="h-full border">
+            <CardContent className="p-5">
+              <div className="flex gap-3">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-emerald-100">
+                  <Users className="size-5 text-emerald-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">初心者教育・安全な釣りの普及</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    装備ガイドや仕掛け解説を通じて、初心者が安全に釣りを楽しめる環境づくりに取り組んでいます。レジャーフィッシングの健全な発展を支えます。
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="h-full border">
+            <CardContent className="p-5">
+              <div className="flex gap-3">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-amber-100">
+                  <Handshake className="size-5 text-amber-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">地域経済への貢献</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    釣具店・宿泊施設・地域飲食店の情報を掲載し、釣り場周辺への送客を支援。漁村地域の経済活性化に貢献します。
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+          <Card className="h-full border">
+            <CardContent className="p-5">
+              <div className="flex gap-3">
+                <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-teal-100">
+                  <Leaf className="size-5 text-teal-600" />
+                </div>
+                <div>
+                  <h3 className="font-semibold">海洋環境保全情報の発信</h3>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    海洋ゴミ問題やリリースのルールなど、環境保全に関する情報を発信。持続可能な釣り文化の実現を目指しています。
+                  </p>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* 運営情報 */}
+      <section className="bg-muted/30 py-12 sm:py-16">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <h2 className="mb-8 text-center text-2xl font-bold tracking-tight sm:text-3xl">
           運営情報
         </h2>
@@ -326,6 +410,28 @@ export default function AboutPage() {
             </div>
           </CardContent>
         </Card>
+
+        <div className="mx-auto mt-6 flex max-w-2xl flex-wrap items-center justify-center gap-3">
+          <Link href="/privacy">
+            <Button variant="outline" size="sm" className="gap-1.5 text-xs">
+              <FileText className="size-3.5" />
+              プライバシーポリシー
+            </Button>
+          </Link>
+          <Link href="/terms">
+            <Button variant="outline" size="sm" className="gap-1.5 text-xs">
+              <FileText className="size-3.5" />
+              利用規約
+            </Button>
+          </Link>
+          <Link href="/legal">
+            <Button variant="outline" size="sm" className="gap-1.5 text-xs">
+              <FileText className="size-3.5" />
+              特定商取引法に基づく表記
+            </Button>
+          </Link>
+        </div>
+        </div>
       </section>
 
       {/* CTA */}

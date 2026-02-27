@@ -5,6 +5,7 @@ import { MobileNav } from "@/components/layout/mobile-nav";
 import { Footer } from "@/components/layout/footer";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { PWARegister } from "@/components/pwa-register";
+import { CookieBanner } from "@/components/layout/cookie-banner";
 import "./globals.css";
 
 const notoSansJP = Noto_Sans_JP({
@@ -135,6 +136,7 @@ export default function RootLayout({
         <main className="min-h-screen pb-20 md:pb-0">{children}</main>
         <Footer />
         <MobileNav />
+        <CookieBanner />
       </body>
     </html>
   );

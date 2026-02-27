@@ -41,6 +41,104 @@ const CATEGORY_CONFIG = {
 type Category = keyof typeof CATEGORY_CONFIG;
 type Difficulty = "beginner" | "intermediate" | "advanced";
 
+// --- 釣りカテゴリ（サブカテゴリ）マッピング ---
+type FishingCategory = "rockfish" | "pelagic" | "flatfish" | "migratory" | "freshwater_sub" | "squid_octopus";
+
+const FISHING_CATEGORY_CONFIG: Record<FishingCategory, { label: string; color: string }> = {
+  rockfish: { label: "根魚・ロックフィッシュ", color: "bg-amber-100 text-amber-700 hover:bg-amber-200" },
+  pelagic: { label: "青物", color: "bg-blue-100 text-blue-700 hover:bg-blue-200" },
+  flatfish: { label: "フラットフィッシュ", color: "bg-yellow-100 text-yellow-700 hover:bg-yellow-200" },
+  migratory: { label: "回遊魚", color: "bg-cyan-100 text-cyan-700 hover:bg-cyan-200" },
+  freshwater_sub: { label: "淡水魚", color: "bg-emerald-100 text-emerald-700 hover:bg-emerald-200" },
+  squid_octopus: { label: "イカ・タコ・甲殻類", color: "bg-purple-100 text-purple-700 hover:bg-purple-200" },
+};
+
+const FISHING_CATEGORY_MAP: Record<string, FishingCategory> = {
+  // 根魚・ロックフィッシュ
+  "メバル": "rockfish",
+  "カサゴ": "rockfish",
+  "アイナメ": "rockfish",
+  "クロソイ": "rockfish",
+  "キジハタ": "rockfish",
+  "アカハタ": "rockfish",
+  "マハタ": "rockfish",
+  "オオモンハタ": "rockfish",
+  "クエ": "rockfish",
+  "オニカサゴ": "rockfish",
+  "ホッケ": "rockfish",
+  "ハタハタ": "rockfish",
+  "カワハギ": "rockfish",
+  "コブダイ": "rockfish",
+  "スジアラ": "rockfish",
+  // 青物
+  "ブリ": "pelagic",
+  "イナダ": "pelagic",
+  "カンパチ": "pelagic",
+  "ヒラマサ": "pelagic",
+  "サワラ": "pelagic",
+  "シイラ": "pelagic",
+  "ソウダガツオ": "pelagic",
+  "カツオ": "pelagic",
+  "ロウニンアジ": "pelagic",
+  "シマアジ": "pelagic",
+  // フラットフィッシュ
+  "ヒラメ": "flatfish",
+  "マゴチ": "flatfish",
+  "カレイ": "flatfish",
+  "メゴチ": "flatfish",
+  // 回遊魚
+  "アジ": "migratory",
+  "サバ": "migratory",
+  "イワシ": "migratory",
+  "サヨリ": "migratory",
+  "タチウオ": "migratory",
+  "カマス": "migratory",
+  "コノシロ": "migratory",
+  "キス": "migratory",
+  "イシモチ": "migratory",
+  // 淡水魚
+  "アユ": "freshwater_sub",
+  "ヤマメ": "freshwater_sub",
+  "イワナ": "freshwater_sub",
+  "ニジマス": "freshwater_sub",
+  "ブラックバス": "freshwater_sub",
+  "ブルーギル": "freshwater_sub",
+  "ヘラブナ": "freshwater_sub",
+  "マブナ": "freshwater_sub",
+  "コイ": "freshwater_sub",
+  "ナマズ": "freshwater_sub",
+  "ワカサギ": "freshwater_sub",
+  "アマゴ": "freshwater_sub",
+  "オイカワ": "freshwater_sub",
+  "ウグイ": "freshwater_sub",
+  "カワムツ": "freshwater_sub",
+  "タナゴ": "freshwater_sub",
+  "ドジョウ": "freshwater_sub",
+  "ライギョ": "freshwater_sub",
+  "ハス": "freshwater_sub",
+  "イトウ": "freshwater_sub",
+  "ビワコオオナマズ": "freshwater_sub",
+  "ビワマス": "freshwater_sub",
+  "ヒメマス": "freshwater_sub",
+  "ブラウントラウト": "freshwater_sub",
+  "ウナギ": "freshwater_sub",
+  "サクラマス": "freshwater_sub",
+  "テナガエビ": "freshwater_sub",
+  // イカ・タコ・甲殻類
+  "アオリイカ": "squid_octopus",
+  "ヤリイカ": "squid_octopus",
+  "スルメイカ": "squid_octopus",
+  "コウイカ": "squid_octopus",
+  "マダコ": "squid_octopus",
+  "イイダコ": "squid_octopus",
+  "ワタリガニ": "squid_octopus",
+  "ノコギリガザミ": "squid_octopus",
+};
+
+function getFishingCategory(fish: FishSpecies): FishingCategory | null {
+  return FISHING_CATEGORY_MAP[fish.name] ?? null;
+}
+
 const MONTH_NAMES = [
   "1月",
   "2月",
@@ -63,6 +161,7 @@ export function FishListClient({
 }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<Category | null>(null);
+  const [activeFishingCategory, setActiveFishingCategory] = useState<FishingCategory | null>(null);
   const [activeDifficulty, setActiveDifficulty] = useState<Difficulty | null>(
     null,
   );
@@ -75,6 +174,18 @@ export function FishListClient({
     const counts: Record<Category, number> = { sea: 0, brackish: 0, freshwater: 0 };
     for (const f of fishSpecies) {
       counts[f.category]++;
+    }
+    return counts;
+  }, [fishSpecies]);
+
+  // 釣りカテゴリごとの件数
+  const fishingCategoryCounts = useMemo(() => {
+    const counts: Record<FishingCategory, number> = {
+      rockfish: 0, pelagic: 0, flatfish: 0, migratory: 0, freshwater_sub: 0, squid_octopus: 0,
+    };
+    for (const f of fishSpecies) {
+      const fc = getFishingCategory(f);
+      if (fc) counts[fc]++;
     }
     return counts;
   }, [fishSpecies]);
@@ -113,6 +224,11 @@ export function FishListClient({
       result = result.filter((f) => f.category === activeCategory);
     }
 
+    // 釣りカテゴリフィルター
+    if (activeFishingCategory) {
+      result = result.filter((f) => getFishingCategory(f) === activeFishingCategory);
+    }
+
     // 難易度フィルター
     if (activeDifficulty) {
       result = result.filter((f) => f.difficulty === activeDifficulty);
@@ -128,6 +244,7 @@ export function FishListClient({
     fishSpecies,
     searchQuery,
     activeCategory,
+    activeFishingCategory,
     activeDifficulty,
     showInSeason,
     currentMonth,
@@ -136,6 +253,7 @@ export function FishListClient({
   const hasActiveFilter =
     searchQuery.trim() !== "" ||
     activeCategory !== null ||
+    activeFishingCategory !== null ||
     activeDifficulty !== null ||
     showInSeason;
 
@@ -191,6 +309,45 @@ export function FishListClient({
                       activeCategory === key
                         ? ""
                         : config.color
+                    }`}
+                  >
+                    {config.label}
+                    <span className="ml-1 opacity-70">({count})</span>
+                  </Badge>
+                </button>
+              );
+            })}
+          </div>
+
+          {/* 釣りカテゴリフィルター */}
+          <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+            <button
+              onClick={() => setActiveFishingCategory(null)}
+              className="min-h-[40px] shrink-0 focus:outline-none"
+            >
+              <Badge
+                variant={activeFishingCategory === null ? "default" : "outline"}
+                className="cursor-pointer whitespace-nowrap px-3 py-1.5 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
+              >
+                全ジャンル
+              </Badge>
+            </button>
+            {(Object.keys(FISHING_CATEGORY_CONFIG) as FishingCategory[]).map((key) => {
+              const count = fishingCategoryCounts[key];
+              if (count === 0) return null;
+              const config = FISHING_CATEGORY_CONFIG[key];
+              return (
+                <button
+                  key={key}
+                  onClick={() =>
+                    setActiveFishingCategory(activeFishingCategory === key ? null : key)
+                  }
+                  className="min-h-[40px] shrink-0 focus:outline-none"
+                >
+                  <Badge
+                    variant={activeFishingCategory === key ? "default" : "outline"}
+                    className={`cursor-pointer whitespace-nowrap px-3 py-1.5 text-sm transition-colors ${
+                      activeFishingCategory === key ? "" : config.color
                     }`}
                   >
                     {config.label}
@@ -305,6 +462,7 @@ export function FishListClient({
             onClick={() => {
               setSearchQuery("");
               setActiveCategory(null);
+              setActiveFishingCategory(null);
               setActiveDifficulty(null);
               setShowInSeason(false);
             }}
