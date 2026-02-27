@@ -68,7 +68,7 @@ export function Footer() {
               <li><Link href="/fishing-calendar" className="hover:text-foreground">釣りカレンダー</Link></li>
               <li><Link href="/beginner-checklist" className="hover:text-foreground">持ち物チェックリスト</Link></li>
               <li><Link href="/fishing-rules" className="hover:text-foreground">ルールとマナー</Link></li>
-              <li><Link href="/gear" className="hover:text-foreground">おすすめ釣り道具</Link></li>
+              <li><Link href="/gear" className="hover:text-foreground">編集長厳選の釣り道具</Link></li>
             </ul>
           </div>
           <div>
@@ -174,7 +174,10 @@ export function Footer() {
         </div>
 
         <div className="mt-6 border-t border-border/40 pt-6 text-center text-sm text-muted-foreground">
-          <p>&copy; 2026 ツリスポ All rights reserved.</p>
+          <p>&copy; 2025-2026 ツリスポ All rights reserved.</p>
+          <p className="mt-1 text-xs">
+            運営者: 正木 家康｜運営開始: 2025年｜掲載スポット: 1,000箇所以上
+          </p>
           <p className="mx-auto mt-2 max-w-xl text-xs leading-relaxed">
             ※ 当サイトはアフィリエイトプログラムに参加しています。商品リンクからの購入で当サイトに報酬が支払われることがあります。
           </p>
@@ -217,7 +220,10 @@ export function Footer() {
           <Link href="/legal" className="hover:text-foreground">特商法表記</Link>
         </div>
         <p className="mt-3 text-center text-xs text-muted-foreground">
-          &copy; 2026 ツリスポ
+          &copy; 2025-2026 ツリスポ
+        </p>
+        <p className="mt-1 text-center text-[10px] text-muted-foreground">
+          運営者: 正木 家康
         </p>
         <p className="mx-auto mt-2 max-w-xs text-center text-[10px] leading-relaxed text-muted-foreground/70">
           ※ 当サイトはアフィリエイトプログラムに参加しています。商品リンクからの購入で当サイトに報酬が支払われることがあります。

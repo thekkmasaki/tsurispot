@@ -61,9 +61,36 @@ const features = [
   },
 ];
 
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "正木 家康",
+  jobTitle: "編集長",
+  worksFor: {
+    "@type": "Organization",
+    name: "ツリスポ",
+    url: "https://tsurispot.com",
+  },
+  description:
+    "釣り歴10年以上。明石・播磨エリアをホームグラウンドに、堤防釣りからショアジギングまで幅広く実践。ツリスポ編集長として全記事の監修を担当。",
+  knowsAbout: [
+    "堤防釣り",
+    "サビキ釣り",
+    "ショアジギング",
+    "エギング",
+    "釣り道具",
+    "釣りスポット情報",
+  ],
+  sameAs: ["https://www.instagram.com/tsurispotjapan/"],
+};
+
 export default function AboutPage() {
   return (
     <div className="flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+      />
       {/* ヒーローセクション */}
       <section className="relative overflow-hidden bg-gradient-to-br from-sky-600 via-blue-700 to-indigo-800">
         <div className="absolute inset-0 opacity-10">
@@ -186,8 +213,65 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 編集チーム */}
+      {/* 編集長プロフィール */}
       <section className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
+        <div className="mx-auto max-w-2xl text-center">
+          <div className="mb-6 inline-flex items-center gap-2">
+            <Shield className="size-5 text-primary" />
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+              編集長プロフィール
+            </h2>
+          </div>
+        </div>
+
+        <Card className="mx-auto max-w-2xl border">
+          <CardContent className="p-6 sm:p-8">
+            <div className="flex flex-col gap-6 sm:flex-row">
+              <div className="flex shrink-0 flex-col items-center gap-2">
+                <div className="flex size-20 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-blue-700 text-2xl font-bold text-white">
+                  正木
+                </div>
+                <Badge className="bg-primary/10 text-primary hover:bg-primary/10">
+                  編集長
+                </Badge>
+              </div>
+              <div className="flex-1">
+                <h3 className="mb-1 text-xl font-bold">正木 家康</h3>
+                <p className="mb-3 text-sm text-muted-foreground">
+                  ツリスポ編集長 / 釣り歴10年以上
+                </p>
+                <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+                  明石・播磨エリアをホームグラウンドに、堤防釣りからショアジギングまで幅広く実践。
+                  「初心者がもっと気軽に釣りを始められる世界を作りたい」という想いから2025年にツリスポを立ち上げ。
+                  全記事の監修と品質管理を担当し、おすすめ道具は実際に自分で使って納得したものだけを厳選して紹介しています。
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="outline" className="text-xs">堤防釣り</Badge>
+                  <Badge variant="outline" className="text-xs">サビキ釣り</Badge>
+                  <Badge variant="outline" className="text-xs">ショアジギング</Badge>
+                  <Badge variant="outline" className="text-xs">エギング</Badge>
+                  <Badge variant="outline" className="text-xs">ちょい投げ</Badge>
+                  <Badge variant="outline" className="text-xs">穴釣り</Badge>
+                </div>
+                <div className="mt-4 rounded-lg bg-muted/50 p-3">
+                  <p className="text-xs leading-relaxed text-muted-foreground">
+                    <span className="font-semibold text-foreground">ホームグラウンド:</span>{" "}
+                    明石港、林崎漁港、大蔵海岸、翼港 など明石・播磨エリア
+                  </p>
+                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
+                    <span className="font-semibold text-foreground">得意な釣り:</span>{" "}
+                    サビキ釣り、ショアジギング、エギング
+                  </p>
+                </div>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+
+      {/* 編集チーム */}
+      <section className="bg-muted/30 py-12 sm:py-16">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <div className="mb-6 inline-flex items-center gap-2">
             <Users className="size-5 text-primary" />
@@ -196,7 +280,7 @@ export default function AboutPage() {
             </h2>
           </div>
           <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-            ツリスポ編集部は、釣り歴10年以上の経験者を中心に構成されたチームです。
+            ツリスポ編集部は、編集長を中心に釣り歴10年以上の経験者で構成されたチームです。
             堤防釣りからオフショアまで幅広いジャンルに精通したメンバーが、
             初心者にもわかりやすい情報発信を心がけています。
           </p>
@@ -237,14 +321,14 @@ export default function AboutPage() {
             </CardContent>
           </Card>
         </div>
+        </div>
       </section>
 
       {/* 情報の信頼性について */}
-      <section className="bg-muted/30 py-12 sm:py-16">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+      <section className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
           <div className="mx-auto max-w-2xl text-center">
             <div className="mb-6 inline-flex items-center gap-2">
-              <Shield className="size-5 text-primary" />
+              <CheckCircle className="size-5 text-primary" />
               <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
                 情報の信頼性について
               </h2>
@@ -281,7 +365,6 @@ export default function AboutPage() {
               </CardContent>
             </Card>
           </div>
-        </div>
       </section>
 
       {/* 社会課題への取り組み */}

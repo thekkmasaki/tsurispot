@@ -56,7 +56,7 @@ export function ProductCard({ product }: ProductCardProps) {
           {product.priority <= 3 && (
             <Badge className="bg-amber-100 text-amber-700 hover:bg-amber-100">
               <Star className="mr-0.5 size-3 fill-amber-500 text-amber-500" />
-              おすすめ
+              編集長イチオシ
             </Badge>
           )}
           <Badge variant="outline" className="text-xs">
