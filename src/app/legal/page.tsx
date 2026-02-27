@@ -58,7 +58,7 @@ export default function LegalPage() {
                 <h2 className="text-lg font-semibold">代表者名</h2>
               </div>
               <div className="text-sm leading-relaxed text-muted-foreground">
-                <p>（運営者名）</p>
+                <p>正木 家康</p>
               </div>
             </div>
 
