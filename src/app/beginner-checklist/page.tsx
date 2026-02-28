@@ -16,6 +16,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ProductList } from "@/components/affiliate/product-list";
 import { getBeginnerEssentials } from "@/lib/data/products";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 const STORAGE_KEY = "tsurispot-checklist";
 
@@ -252,6 +253,7 @@ function ChecklistPageContent() {
 
   return (
     <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
+      <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "持ち物チェックリスト" }]} />
       {/* Header */}
       <div className="mb-8 text-center sm:mb-10">
         <h1 className="text-2xl font-bold tracking-tight sm:text-4xl">

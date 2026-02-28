@@ -8,7 +8,7 @@ import { FishListClient } from "@/components/fish/fish-list-client";
 export const metadata: Metadata = {
   title: "魚種図鑑 - 釣りで狙える魚の旬・釣り方・食べ方ガイド",
   description:
-    "釣りで狙える海水魚・淡水魚を図鑑形式で紹介。魚ごとの旬の時期、初心者でも釣りやすい難易度、おすすめの食べ方まで網羅。アジ・サバ・カサゴなど人気ターゲットの釣り情報が満載です。",
+    "80種以上の海水魚・淡水魚を図鑑形式で収録。旬の時期・釣りやすさ・おすすめの食べ方を魚ごとに詳しく解説。アジ・サバ・カサゴなど人気ターゲットの釣り方と仕掛けもわかる。今釣れる魚をチェック。",
   openGraph: {
     title: "魚種図鑑 - 釣りで狙える魚の旬・釣り方・食べ方ガイド",
     description:

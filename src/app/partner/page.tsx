@@ -4,7 +4,6 @@ import {
   Store,
   MapPin,
   Mail,
-  ArrowLeft,
   CheckCircle2,
   Clock,
   Shield,
@@ -25,6 +24,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 
@@ -209,13 +209,7 @@ export default function PartnerPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
 
-      <Link
-        href="/"
-        className="mb-5 inline-flex min-h-[44px] items-center gap-1 py-2 text-sm text-muted-foreground transition-colors hover:text-primary sm:mb-6"
-      >
-        <ArrowLeft className="size-4" />
-        トップに戻る
-      </Link>
+      <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "パートナー（釣具店様向け）" }]} />
 
       {/* ===== ヒーローセクション ===== */}
       <section className="mb-14 text-center sm:mb-20">

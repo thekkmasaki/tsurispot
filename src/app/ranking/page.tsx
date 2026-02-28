@@ -2,11 +2,12 @@ import type { Metadata } from "next";
 import { Trophy } from "lucide-react";
 import { fishingSpots } from "@/lib/data/spots";
 import { RankingClient, type RankingSpot } from "./ranking-client";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
   title: "釣りスポット人気ランキング｜地域別おすすめ釣り場TOP10｜ツリスポ",
   description:
-    "全国・地域別の釣りスポットを評価・口コミ順にランキング。北海道から沖縄まで地域別TOP10。初心者向け・ファミリー向け・夜釣りなど条件別に絞り込めます。",
+    "全国1,000箇所以上の釣りスポットを評価順にランキング。北海道から沖縄まで47都道府県の地域別TOP10を公開。初心者向け・ファミリー・夜釣りなど条件別に今すぐ比較。",
   openGraph: {
     title: "釣りスポット人気ランキング｜地域別おすすめ釣り場TOP10｜ツリスポ",
     description:
@@ -18,6 +19,14 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://tsurispot.com/ranking",
   },
+};
+
+const webPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "釣りスポット人気ランキング｜地域別おすすめ釣り場TOP10",
+  url: "https://tsurispot.com/ranking",
+  dateModified: "2026-02-28",
 };
 
 const breadcrumbJsonLd = {
@@ -81,6 +90,10 @@ export default function RankingPage() {
     <div className="min-h-screen">
       <script
         type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <script
@@ -91,11 +104,6 @@ export default function RankingPage() {
       {/* ヘッダーグラデーション */}
       <div className="bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-400 px-4 py-10 text-white">
         <div className="mx-auto max-w-4xl">
-          <div className="mb-4 flex items-center gap-1 text-sm text-white/70">
-            <a href="/" className="hover:text-white transition-colors">ホーム</a>
-            <span className="text-white/50">/</span>
-            <span className="text-white/90">人気ランキング</span>
-          </div>
           <div className="flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm">
               <Trophy className="h-7 w-7 text-yellow-300" />
@@ -113,6 +121,7 @@ export default function RankingPage() {
 
       {/* メインコンテンツ */}
       <div className="container mx-auto max-w-4xl px-4 py-6 sm:py-8">
+        <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "人気ランキング" }]} />
         <RankingClient spots={rankingSpots} />
       </div>
     </div>

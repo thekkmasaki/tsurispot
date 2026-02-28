@@ -1,9 +1,23 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
-  <!-- Yellow background -->
-  <rect x="0" y="0" width="64" height="64" rx="14" ry="14" fill="#facc15" />
-  <!-- ツリスポ text -->
-  <text x="32" y="26" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="13" font-weight="700" fill="#1a1a1a">ツリ</text>
-  <text x="32" y="44" text-anchor="middle" font-family="'Hiragino Sans','Noto Sans JP',sans-serif" font-size="13" font-weight="700" fill="#1a1a1a">スポ</text>
+  <!-- Blue gradient background -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#38bdf8"/>
+      <stop offset="100%" stop-color="#2563eb"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="64" height="64" rx="14" ry="14" fill="url(#bg)"/>
+  <!-- Fish icon (white silhouette) -->
+  <g transform="translate(32,30)" fill="white">
+    <!-- Fish body -->
+    <ellipse cx="0" cy="0" rx="16" ry="10" opacity="0.95"/>
+    <!-- Tail -->
+    <path d="M14,-2 L22,-9 L22,9 L14,2 Z" opacity="0.95"/>
+    <!-- Eye -->
+    <circle cx="-7" cy="-2" r="2.5" fill="#2563eb"/>
+    <circle cx="-7" cy="-2" r="1.2" fill="#1e3a5f"/>
+  </g>
   <!-- Wave decoration at bottom -->
-  <path d="M8 54 Q16 50 24 54 Q32 58 40 54 Q48 50 56 54" stroke="#1a1a1a" stroke-width="1.5" fill="none" opacity="0.3" stroke-linecap="round"/>
+  <path d="M6 50 Q14 46 22 50 Q30 54 38 50 Q46 46 54 50" stroke="white" stroke-width="1.5" fill="none" opacity="0.3" stroke-linecap="round"/>
+  <path d="M10 55 Q18 51 26 55 Q34 59 42 55 Q50 51 58 55" stroke="white" stroke-width="1.2" fill="none" opacity="0.2" stroke-linecap="round"/>
 </svg>

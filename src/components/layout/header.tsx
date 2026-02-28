@@ -21,6 +21,7 @@ import {
   ChevronDown,
   Compass,
   FileText,
+  Anchor,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SearchOverlay } from "./search-overlay";
@@ -36,6 +37,7 @@ const mainNavItems = [
 
 // ドロップダウン「もっと見る」
 const moreNavItems = [
+  { href: "/methods", label: "釣り方ガイド", icon: Anchor },
   { href: "/area", label: "エリア一覧", icon: Compass },
   { href: "/area-guide", label: "エリアガイド記事", icon: MapPin },
   { href: "/blog", label: "コラム", icon: FileText },

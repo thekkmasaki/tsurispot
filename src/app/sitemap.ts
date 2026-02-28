@@ -89,6 +89,7 @@ export default async function sitemap({
       { url: `${baseUrl}/methods/choi-nage`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       { url: `${baseUrl}/methods/uki-zuri`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       { url: `${baseUrl}/methods/ana-zuri`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+      { url: `${baseUrl}/methods/tachiuo-zuri`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       // その他固定ページ
       { url: `${baseUrl}/glossary`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
       { url: `${baseUrl}/glossary-quiz`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },

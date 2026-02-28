@@ -11,12 +11,16 @@ import {
   Wrench,
   ListOrdered,
   ExternalLink,
+  Star,
+  HelpCircle,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
-import type { YouTubeSearchLink } from "@/types";
+import { SpotCard } from "@/components/spots/spot-card";
+import { fishingSpots } from "@/lib/data/spots";
+import type { YouTubeSearchLink, FishingSpot } from "@/types";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -37,6 +41,28 @@ interface FishingMethod {
   tips: string[];
   relatedMethods: { slug: string; name: string }[];
   youtubeLinks: YouTubeSearchLink[];
+  /** catchableFish.method の値にマッチさせるキーワード群 */
+  methodKeys: string[];
+  faqs: { question: string; answer: string }[];
+}
+
+/**
+ * 釣り方に対応するスポットを取得し、rating順でソートして返す
+ */
+function getSpotsForMethod(
+  methodKeys: string[],
+  limit: number = 20
+): (FishingSpot & { matchCount: number })[] {
+  return fishingSpots
+    .map((spot) => {
+      const matchCount = spot.catchableFish.filter((cf) =>
+        methodKeys.some((key) => cf.method.includes(key))
+      ).length;
+      return { ...spot, matchCount };
+    })
+    .filter((s) => s.matchCount > 0)
+    .sort((a, b) => b.matchCount - a.matchCount || b.rating - a.rating)
+    .slice(0, limit);
 }
 
 const DIFFICULTY_MAP = {
@@ -94,6 +120,12 @@ const methods: FishingMethod[] = [
       { label: "サビキ釣りでアジ大漁", searchQuery: "サビキ釣り アジ 大漁 堤防 釣果", description: "サビキで大量のアジを釣り上げる実釣映像" },
       { label: "サビキ仕掛けの選び方", searchQuery: "サビキ仕掛け 選び方 おすすめ 初心者", description: "仕掛け・コマセの選び方と使い方のコツ" },
     ],
+    methodKeys: ["サビキ釣り", "ジグサビキ"],
+    faqs: [
+      { question: "サビキ釣りは初心者でも釣れますか？", answer: "はい、サビキ釣りは最も初心者向けの釣法です。投げる技術が不要で、仕掛けを足元に落とすだけで始められます。群れが回ってくれば入れ食いも期待でき、ファミリーフィッシングにも最適です。" },
+      { question: "サビキ釣りに最適な時期はいつですか？", answer: "6月〜11月がシーズンで、7月〜10月がベストです。夏から秋にかけてアジ・サバ・イワシの回遊が活発になり、数釣りが楽しめます。朝マヅメと夕マヅメが特に釣れやすい時間帯です。" },
+      { question: "サビキ釣りに必要な道具と費用は？", answer: "竿・リール・サビキ仕掛け・コマセカゴ・アミエビ・バケツが基本セットです。初心者セットなら3,000〜5,000円程度で揃えられます。コマセ（アミエビ）は500円前後で購入できます。" },
+    ],
   },
   {
     slug: "ajing",
@@ -141,6 +173,12 @@ const methods: FishingMethod[] = [
       { label: "アジング入門", searchQuery: "アジング 初心者 やり方 ワーム ジグヘッド", description: "アジングの基本テクニックを動画で解説" },
       { label: "アジング実釣", searchQuery: "アジング 実釣 常夜灯 漁港 夜釣り", description: "常夜灯周りでのアジング実釣の様子" },
       { label: "アジングのワーム選び", searchQuery: "アジング ワーム おすすめ カラー サイズ", description: "状況別のワームの選び方とカラーローテーション" },
+    ],
+    methodKeys: ["アジング"],
+    faqs: [
+      { question: "アジングとサビキ釣りの違いは？", answer: "サビキ釣りはコマセ（撒き餌）で魚を集めて複数の針で釣りますが、アジングはジグヘッドとワーム（疑似餌）を使ってアジを1匹ずつ狙います。アジングの方がゲーム性が高く、繊細なアタリを楽しめる釣りです。" },
+      { question: "アジングに最適な時間帯は？", answer: "夕マヅメ（日没前後）から夜がゴールデンタイムです。常夜灯が点灯する時間帯にアジが集まりやすく、特に日没後1〜2時間が最も活性が高い時間帯です。" },
+      { question: "アジングの初心者向けタックルの選び方は？", answer: "ロッドは5〜7フィートのアジング専用ロッド、リールは1000〜2000番の小型スピニングリール、ラインはエステル0.2〜0.3号がおすすめです。ジグヘッドは0.6〜1.5g、ワームは1.5〜2.5インチから始めましょう。" },
     ],
   },
   {
@@ -190,6 +228,12 @@ const methods: FishingMethod[] = [
       { label: "エギングでアオリイカ", searchQuery: "エギング アオリイカ 実釣 堤防 秋", description: "堤防からアオリイカを狙うエギング実釣" },
       { label: "エギの選び方", searchQuery: "エギ おすすめ カラー サイズ 選び方 初心者", description: "初心者向けエギの選び方とカラーローテーション" },
     ],
+    methodKeys: ["エギング"],
+    faqs: [
+      { question: "エギングの初心者が最初に揃えるべきものは？", answer: "エギング専用ロッド（8〜8.6フィート ML〜M）、2500〜3000番のスピニングリール、PEライン0.6〜0.8号、フロロリーダー2〜2.5号、エギ3〜3.5号を3〜5本が基本です。合計1万円前後で揃えられます。" },
+      { question: "エギングのベストシーズンはいつ？", answer: "春（3〜6月）と秋（9〜12月）の年2回です。春は大型の親イカ、秋は数釣りが楽しめる新子シーズンです。初心者には小型が多く反応も良い秋がおすすめです。" },
+      { question: "エギングのシャクリ方のコツは？", answer: "力任せにシャクるのではなく、テンポよく軽快に2〜3回シャクるのがコツです。シャクった後のフォール（沈下）中にイカが抱きつくので、フォール中のラインの動きに集中しましょう。" },
+    ],
   },
   {
     slug: "mebaring",
@@ -237,6 +281,12 @@ const methods: FishingMethod[] = [
       { label: "メバリング入門", searchQuery: "メバリング 初心者 やり方 ワーム ジグヘッド 夜", description: "メバリングの基本テクニックを動画で解説" },
       { label: "メバリング実釣", searchQuery: "メバリング 実釣 漁港 常夜灯 メバル", description: "漁港の常夜灯周りでのメバリング実釣映像" },
       { label: "メバルプラッギング", searchQuery: "メバル プラグ プラッギング シンキングペンシル", description: "プラグで大型メバルを狙うテクニック" },
+    ],
+    methodKeys: ["メバリング"],
+    faqs: [
+      { question: "メバリングとアジングの違いは？", answer: "どちらもジグヘッド＋ワームのライトゲームですが、メバリングはスローなただ巻きが基本で、アジングはフォール中のアタリを取る釣りです。メバリングは冬〜春がハイシーズン、アジングは秋〜冬がベストです。" },
+      { question: "メバリングに最適な季節は？", answer: "11月〜5月がシーズンで、1月〜4月がベストです。メバルは『春告魚』の異名を持ち、水温が下がる冬から春にかけて接岸します。夜行性が強いため、夕マヅメ以降が狙い目です。" },
+      { question: "メバリングのポイント選びのコツは？", answer: "常夜灯のある漁港や堤防が定番ポイントです。光と影の境目にメバルが集まりやすく、テトラ帯や海藻周り、岩礁帯も好ポイントです。風が弱く波が穏やかな夜がベストコンディションです。" },
     ],
   },
   {
@@ -287,6 +337,12 @@ const methods: FishingMethod[] = [
       { label: "ショアジギングで青物", searchQuery: "ショアジギング 青物 ブリ イナダ ヒット 実釣", description: "岸から青物をヒットさせる迫力の実釣映像" },
       { label: "メタルジグの選び方", searchQuery: "メタルジグ おすすめ 選び方 重さ カラー ショアジギング", description: "状況に合ったメタルジグの選び方ガイド" },
     ],
+    methodKeys: ["ショアジギング"],
+    faqs: [
+      { question: "ショアジギングで狙える魚は？", answer: "主なターゲットはブリ（イナダ・ワカシ）、カンパチ、サワラ、ソウダガツオなどの青物（回遊魚）です。時期やポイントによってはヒラメやマダイも狙えます。" },
+      { question: "ショアジギングの初心者が始めるには？", answer: "まずはライトショアジギング（20〜40gのジグ）から始めるのがおすすめです。9〜10フィートのロッド、4000番のリール、PE1.5号が基本タックル。堤防の先端や潮通しの良い場所で朝マヅメに狙いましょう。" },
+      { question: "ショアジギングのベストシーズンは？", answer: "5月〜12月がシーズンで、9月〜11月がベストです。秋は青物の回遊が最も活発で、大型も期待できます。朝マヅメ（日の出前後）が最大のチャンスタイムです。" },
+    ],
   },
   {
     slug: "choi-nage",
@@ -335,6 +391,12 @@ const methods: FishingMethod[] = [
       { label: "ちょい投げ入門", searchQuery: "ちょい投げ 初心者 やり方 キス ハゼ 堤防", description: "ちょい投げの基本的なやり方を動画で解説" },
       { label: "ちょい投げでキス釣り", searchQuery: "ちょい投げ キス 砂浜 サーフ 実釣 夏", description: "砂浜からキスを狙うちょい投げ実釣映像" },
       { label: "天秤仕掛けの作り方", searchQuery: "ちょい投げ 仕掛け 作り方 天秤 初心者", description: "ちょい投げ仕掛けの選び方と作り方" },
+    ],
+    methodKeys: ["ちょい投げ", "投げ釣り", "ぶっこみ釣り", "ぶっ込み釣り"],
+    faqs: [
+      { question: "ちょい投げとは何ですか？", answer: "ちょい投げは、5〜15号の軽いオモリを使って20〜50m程度投げる手軽な釣法です。本格的な投げ釣りのような遠投は不要で、万能竿でも楽しめます。キスやハゼなどの底物がメインターゲットです。" },
+      { question: "ちょい投げに最適な時期は？", answer: "5月〜11月がシーズンで、6月〜10月がベストです。夏のキス釣り、秋のハゼ釣りが特に人気です。砂地の海底がある堤防や砂浜がおすすめポイントです。" },
+      { question: "ちょい投げの餌は何を使いますか？", answer: "アオイソメ（ゴカイ）が最も万能な餌です。1パック500円前後で半日分。針に2〜3cm程度に付けて使います。小さくカットすると食い込みが良くなり、特にハゼに効果的です。" },
     ],
   },
   {
@@ -385,6 +447,12 @@ const methods: FishingMethod[] = [
       { label: "ウキフカセでクロダイ", searchQuery: "ウキフカセ クロダイ チヌ 堤防 実釣", description: "ウキフカセ釣りでクロダイを狙う実釣映像" },
       { label: "ウキ仕掛けの作り方", searchQuery: "ウキ釣り 仕掛け 作り方 固定ウキ 遊動ウキ 初心者", description: "固定ウキ・遊動ウキ仕掛けの作り方ガイド" },
     ],
+    methodKeys: ["ウキ釣り", "ウキフカセ", "フカセ釣り", "ウキフカセ釣り"],
+    faqs: [
+      { question: "ウキ釣りの初心者におすすめの仕掛けは？", answer: "最初は固定ウキ仕掛けがおすすめです。玉ウキにナイロンハリス1〜1.5号、チヌ針1〜2号のシンプルな仕掛けから始めましょう。ウキの動きでアタリがわかりやすく、初心者でも魚のバイトを見逃しにくいです。" },
+      { question: "ウキ釣りで狙える魚は？", answer: "クロダイ（チヌ）、メジナ（グレ）、アジ、サヨリ、マダイなど多彩な魚種が狙えます。エサや仕掛けを変えることで、同じウキ釣りでもターゲットを変えられる万能な釣法です。" },
+      { question: "ウキ釣りのタナの合わせ方は？", answer: "まず海底から50cm〜1mほど上にタナを設定し、反応を見ながら調整します。周りの釣り人を参考にするのも有効です。ウキが沈む速度や沈み方で魚種がわかるため、アタリのパターンを覚えることが上達の近道です。" },
+    ],
   },
   {
     slug: "ana-zuri",
@@ -434,6 +502,12 @@ const methods: FishingMethod[] = [
       { label: "穴釣りでカサゴ連発", searchQuery: "穴釣り カサゴ 連発 テトラポッド 実釣", description: "テトラの穴からカサゴを次々と釣り上げる実釣映像" },
       { label: "穴釣りの安全対策", searchQuery: "穴釣り 安全 テトラ 靴 装備 注意点", description: "テトラでの穴釣りの安全装備と注意点" },
     ],
+    methodKeys: ["穴釣り", "穴釣り・根魚釣り", "ブラクリ"],
+    faqs: [
+      { question: "穴釣りはどんな場所でできますか？", answer: "テトラポッド（消波ブロック）や石積みの隙間がある堤防や港が主なポイントです。海水が見える深さのある穴、潮が通る穴が好ポイントで、影になっている暗い穴が特に狙い目です。" },
+      { question: "穴釣りの魅力と特徴は？", answer: "投げる技術が不要で、仕掛けを穴に落とすだけのシンプルな釣法です。根魚は居着きの魚なので、穴の中に魚がいれば高確率で釣れます。冬場でも安定した釣果が期待でき、他の釣法が厳しい時期の救世主です。" },
+      { question: "穴釣りで注意すべきことは？", answer: "テトラの上は滑りやすいため、スパイクシューズやフェルトシューズが必須です。サンダルやスニーカーは厳禁。また、カサゴの背びれには鋭いトゲがあるため、フィッシュグリップで掴むようにしましょう。" },
+    ],
   },
   {
     slug: "tachiuo-zuri",
@@ -482,6 +556,12 @@ const methods: FishingMethod[] = [
       { label: "タチウオワインド釣法", searchQuery: "タチウオ ワインド 堤防 ジグヘッド ワーム 夜釣り", description: "ワインド釣法でタチウオを狙うテクニック解説" },
       { label: "タチウオテンヤ実釣", searchQuery: "タチウオ テンヤ 堤防 実釣 釣り方 引き釣り", description: "テンヤ仕掛けでタチウオを釣る実釣映像" },
     ],
+    methodKeys: ["テンヤ", "テンヤ釣り", "ワインド"],
+    faqs: [
+      { question: "タチウオ釣りに最適な時間帯は？", answer: "夕マヅメ（日没前後）から夜がベストタイムです。日没の30分前から釣り場に入り、暗くなるタイミングに備えましょう。タチウオは夜行性で、暗くなるにつれて浅い層に浮いてきます。" },
+      { question: "タチウオ釣りの方法にはどんな種類がある？", answer: "主に3つの釣法があります。キビナゴを使った電気ウキ釣り、テンヤにキビナゴを巻きつけるテンヤ釣り、ジグヘッドとワームで誘うワインド釣法です。初心者にはウキ釣りが最もわかりやすくおすすめです。" },
+      { question: "タチウオ釣りで注意すべきことは？", answer: "タチウオの歯は非常に鋭いため、素手で絶対に掴まないでください。フィッシュグリップ（魚つかみ）が必須です。また、ワイヤーリーダーの使用が推奨されます。フロロカーボンでも簡単に切られることがあります。" },
+    ],
   },
 ];
 
@@ -516,6 +596,14 @@ export default async function MethodDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const method = methods.find((m) => m.slug === slug);
   if (!method) notFound();
+
+  // この釣り方ができるスポット一覧
+  const matchingSpots = getSpotsForMethod(method.methodKeys, 20);
+  const totalMatchCount = fishingSpots.filter((spot) =>
+    spot.catchableFish.some((cf) =>
+      method.methodKeys.some((key) => cf.method.includes(key))
+    )
+  ).length;
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -552,7 +640,44 @@ export default async function MethodDetailPage({ params }: PageProps) {
       name: "ツリスポ",
       url: "https://tsurispot.com",
     },
+    publisher: {
+      "@type": "Organization",
+      name: "ツリスポ",
+      url: "https://tsurispot.com",
+    },
+    url: `https://tsurispot.com/methods/${method.slug}`,
+    mainEntityOfPage: `https://tsurispot.com/methods/${method.slug}`,
+    datePublished: "2025-01-01",
+    dateModified: new Date().toISOString().split("T")[0],
   };
+
+  // ItemList構造化データ（この釣り方ができるスポット一覧）
+  const itemListJsonLd = matchingSpots.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `${method.name}ができる釣りスポット`,
+    numberOfItems: totalMatchCount,
+    itemListElement: matchingSpots.slice(0, 20).map((spot, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: spot.name,
+      url: `https://tsurispot.com/spots/${spot.slug}`,
+    })),
+  } : null;
+
+  // FAQPage構造化データ
+  const faqJsonLd = method.faqs.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: method.faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: faq.answer,
+      },
+    })),
+  } : null;
 
   return (
     <main className="container mx-auto max-w-3xl px-4 py-6 sm:px-6 sm:py-12">
@@ -564,6 +689,18 @@ export default async function MethodDetailPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
+      {itemListJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+        />
+      )}
+      {faqJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       {/* パンくず */}
       <Breadcrumb
@@ -729,26 +866,58 @@ export default async function MethodDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* おすすめのスポット */}
-      <section className="mb-6 sm:mb-8">
-        <Link href="/spots">
-          <Card className="group gap-0 py-0 border-sky-200 bg-sky-50 transition-shadow hover:shadow-md">
-            <CardContent className="flex items-center gap-3 p-4 sm:p-5">
-              <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sky-100">
-                <MapPin className="size-5 text-sky-600" />
-              </div>
-              <div>
-                <p className="font-semibold group-hover:text-primary">
-                  {method.name}ができるスポットを探す
-                </p>
-                <p className="mt-0.5 text-xs text-muted-foreground">
-                  全国の釣りスポットから{method.name}に適した場所を見つけよう
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </Link>
-      </section>
+      {/* この釣り方ができるスポット一覧 */}
+      {matchingSpots.length > 0 && (
+        <section className="mb-6 sm:mb-8">
+          <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+            <MapPin className="size-5 text-primary" />
+            {method.name}ができるスポット
+            <span className="text-sm font-normal text-muted-foreground">
+              （全{totalMatchCount}件中おすすめ{matchingSpots.length}件）
+            </span>
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {matchingSpots.slice(0, 8).map((spot) => (
+              <SpotCard key={spot.id} spot={spot} />
+            ))}
+          </div>
+          {totalMatchCount > 8 && (
+            <div className="mt-4 text-center">
+              <Link
+                href="/spots"
+                className="inline-flex items-center gap-1 rounded-lg border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
+              >
+                <MapPin className="size-4" />
+                全国の{method.name}スポットをもっと見る
+              </Link>
+            </div>
+          )}
+        </section>
+      )}
+
+      {/* よくある質問（FAQ） */}
+      {method.faqs.length > 0 && (
+        <section className="mb-6 sm:mb-8">
+          <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+            <HelpCircle className="size-5 text-primary" />
+            {method.name}に関するよくある質問
+          </h2>
+          <div className="space-y-3">
+            {method.faqs.map((faq, i) => (
+              <Card key={i} className="gap-0 py-0">
+                <CardContent className="p-4 sm:p-5">
+                  <h3 className="mb-2 text-sm font-bold sm:text-base">
+                    Q. {faq.question}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {faq.answer}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* 関連する釣法 */}
       <section className="mb-8">

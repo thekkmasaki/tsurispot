@@ -30,6 +30,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 import type { FishingSpot, FishSpecies } from "@/types";
@@ -751,13 +752,6 @@ export default function RecommendationPage() {
         {/* ヘッダー */}
         <section className="bg-gradient-to-r from-orange-500 to-amber-400 text-white">
           <div className="mx-auto max-w-5xl px-4 py-8 sm:py-12">
-            <div className="flex items-center gap-2 text-orange-100 text-sm mb-3">
-              <Link href="/" className="hover:text-white transition-colors">
-                ホーム
-              </Link>
-              <ChevronRight className="size-3" />
-              <span>今日のおすすめ</span>
-            </div>
             <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
               <Sparkles className="size-7 sm:size-8" />
               今日どこに行こうかな？
@@ -769,6 +763,7 @@ export default function RecommendationPage() {
         </section>
 
         <div className="mx-auto max-w-5xl px-4 py-6 space-y-6">
+          <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "今日のおすすめ" }]} />
           {/* 今日の釣り条件（コンパクト） */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             <div className="text-center p-2.5 bg-white rounded-lg shadow-sm border border-orange-100">

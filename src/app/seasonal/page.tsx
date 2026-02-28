@@ -16,7 +16,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 export const metadata: Metadata = {
   title: "季節別釣りガイド - 春夏秋冬のおすすめ釣り",
   description:
-    "春夏秋冬それぞれの季節で釣れる魚、おすすめの釣法、注意点を初心者向けにわかりやすく解説。今の時期に最適な釣りを見つけましょう。",
+    "春夏秋冬の釣りを完全ガイド。季節ごとに釣れる魚20種以上・おすすめ釣法・注意点を初心者向けに解説。今の時期にベストな釣り方と狙い目ターゲットがすぐわかる。",
   openGraph: {
     title: "季節別釣りガイド - 春夏秋冬のおすすめ釣り",
     description:

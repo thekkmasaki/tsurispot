@@ -374,6 +374,28 @@ export default async function PrefecturePage({ params }: PageProps) {
     })),
   } : null;
 
+  // Article構造化データ
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: `${pref.name}の釣り場おすすめ${spots.length > 0 ? spots.length : ""}選｜初心者向け穴場スポットも`,
+    description: prefInfo?.description || `${pref.name}で人気の釣り場・穴場スポットを紹介。近くのおすすめ釣りスポットが見つかります。`,
+    author: {
+      "@type": "Organization",
+      name: "ツリスポ",
+      url: "https://tsurispot.com",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "ツリスポ",
+      url: "https://tsurispot.com",
+    },
+    url: `https://tsurispot.com/prefecture/${pref.slug}`,
+    mainEntityOfPage: `https://tsurispot.com/prefecture/${pref.slug}`,
+    datePublished: "2025-01-01",
+    dateModified: new Date().toISOString().split("T")[0],
+  };
+
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
@@ -396,6 +418,10 @@ export default async function PrefecturePage({ params }: PageProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
         />
       )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+      />
 
       {/* パンくず */}
       <Breadcrumb

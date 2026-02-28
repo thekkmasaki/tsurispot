@@ -3,11 +3,12 @@ import Link from "next/link";
 import { blogPosts } from "@/lib/data/blog";
 import { FileText } from "lucide-react";
 import { BlogListClient } from "@/components/blog/blog-list-client";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
   title: "釣りコラム・ブログ | ツリスポ",
   description:
-    "釣り初心者向けの道具選びから、季節ごとの釣り方テクニックまで。堤防釣り・サビキ釣りなど実践的な釣りコラムをお届けします。",
+    "釣り初心者の道具選びから上級者のテクニックまで、実践的なコラムを多数掲載。堤防釣り・サビキ釣り・ルアー・季節別攻略法を編集部が解説。最新の釣り情報をチェック。",
   openGraph: {
     title: "釣りコラム・ブログ | ツリスポ",
     description:
@@ -48,18 +49,7 @@ export default function BlogListPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
-      {/* パンくずリスト */}
-      <nav className="mb-6 text-sm text-muted-foreground" aria-label="パンくず">
-        <ol className="flex items-center gap-1.5">
-          <li>
-            <Link href="/" className="hover:text-foreground">
-              ホーム
-            </Link>
-          </li>
-          <li>/</li>
-          <li className="font-medium text-foreground">コラム</li>
-        </ol>
-      </nav>
+      <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "コラム" }]} />
 
       {/* ヘッダー */}
       <div className="mb-8">

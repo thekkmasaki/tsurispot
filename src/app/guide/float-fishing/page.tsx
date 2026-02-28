@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LineBanner } from "@/components/line-banner";
-import { ChevronLeft, CircleDot, Anchor, Bug, Eye, Fish } from "lucide-react";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { CircleDot, Anchor, Bug, Eye, Fish } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { RigDiagram } from "@/components/rig-diagram";
 
@@ -532,16 +533,7 @@ export default function FloatFishingGuidePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
       />
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
-        {/* パンくず */}
-        <div className="mb-6">
-          <Link
-            href="/guide"
-            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
-          >
-            <ChevronLeft className="mr-1 size-4" />
-            釣りの始め方ガイドに戻る
-          </Link>
-        </div>
+        <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "釣りガイド", href: "/guide" }, { label: "ウキ釣り完全ガイド" }]} />
 
         {/* ヘッダー */}
         <div className="mb-8 text-center sm:mb-10">

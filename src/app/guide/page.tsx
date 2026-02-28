@@ -215,7 +215,7 @@ const detailGuides: GuideItem[] = [
 export const metadata: Metadata = {
   title: "釣りの始め方ガイド - 初心者が知るべき5つのステップ",
   description:
-    "釣り初心者のための完全ガイド。釣りの種類選び、道具の揃え方、釣り場の選び方、当日の持ち物チェックリスト、マナーまでステップバイステップで解説。サビキセットなど初心者向けおすすめ道具も紹介します。",
+    "釣り初心者のための完全ガイド20本以上。道具の揃え方・釣り場の選び方・サビキ釣り・ちょい投げなど5ステップで解説。予算3,000円から始められるおすすめセットも紹介。今すぐ釣りデビュー。",
   openGraph: {
     title: "釣りの始め方ガイド - 初心者が知るべき5つのステップ",
     description:
@@ -229,9 +229,21 @@ export const metadata: Metadata = {
   },
 };
 
+const webPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "釣りの始め方ガイド - 初心者が知るべき5つのステップ",
+  url: "https://tsurispot.com/guide",
+  dateModified: "2026-02-28",
+};
+
 export default function GuidePage() {
   return (
     <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
+      />
       <div className="mb-4">
         <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "釣りガイド" }]} />
       </div>

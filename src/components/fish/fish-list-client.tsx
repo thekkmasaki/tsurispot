@@ -42,13 +42,14 @@ type Category = keyof typeof CATEGORY_CONFIG;
 type Difficulty = "beginner" | "intermediate" | "advanced";
 
 // --- 釣りカテゴリ（サブカテゴリ）マッピング ---
-type FishingCategory = "rockfish" | "pelagic" | "flatfish" | "migratory" | "freshwater_sub" | "squid_octopus";
+type FishingCategory = "rockfish" | "pelagic" | "flatfish" | "migratory" | "shore" | "freshwater_sub" | "squid_octopus";
 
 const FISHING_CATEGORY_CONFIG: Record<FishingCategory, { label: string; color: string }> = {
   rockfish: { label: "根魚・ロックフィッシュ", color: "bg-amber-100 text-amber-700 hover:bg-amber-200" },
   pelagic: { label: "青物", color: "bg-blue-100 text-blue-700 hover:bg-blue-200" },
   flatfish: { label: "フラットフィッシュ", color: "bg-yellow-100 text-yellow-700 hover:bg-yellow-200" },
   migratory: { label: "回遊魚", color: "bg-cyan-100 text-cyan-700 hover:bg-cyan-200" },
+  shore: { label: "堤防・磯魚", color: "bg-teal-100 text-teal-700 hover:bg-teal-200" },
   freshwater_sub: { label: "淡水魚", color: "bg-emerald-100 text-emerald-700 hover:bg-emerald-200" },
   squid_octopus: { label: "イカ・タコ・甲殻類", color: "bg-purple-100 text-purple-700 hover:bg-purple-200" },
 };
@@ -124,6 +125,33 @@ const FISHING_CATEGORY_MAP: Record<string, FishingCategory> = {
   "ウナギ": "freshwater_sub",
   "サクラマス": "freshwater_sub",
   "テナガエビ": "freshwater_sub",
+  // 堤防・磯魚
+  "クロダイ": "shore",
+  "メジナ": "shore",
+  "スズメダイ": "shore",
+  "ネンブツダイ": "shore",
+  "ボラ": "shore",
+  "ハゼ": "shore",
+  "マハゼ": "shore",
+  "シロギス": "shore",
+  "ベラ": "shore",
+  "ウミタナゴ": "shore",
+  "ヒイラギ": "shore",
+  "フグ": "shore",
+  "クサフグ": "shore",
+  "ハオコゼ": "shore",
+  "アイゴ": "shore",
+  "イシダイ": "shore",
+  "シマダイ": "shore",
+  "グレ": "shore",
+  "チヌ": "shore",
+  "マダイ": "shore",
+  "ヘダイ": "shore",
+  "アカエイ": "shore",
+  "ゴンズイ": "shore",
+  "オニオコゼ": "shore",
+  "セイゴ": "shore",
+  "シーバス": "shore",
   // イカ・タコ・甲殻類
   "アオリイカ": "squid_octopus",
   "ヤリイカ": "squid_octopus",
@@ -181,7 +209,7 @@ export function FishListClient({
   // 釣りカテゴリごとの件数
   const fishingCategoryCounts = useMemo(() => {
     const counts: Record<FishingCategory, number> = {
-      rockfish: 0, pelagic: 0, flatfish: 0, migratory: 0, freshwater_sub: 0, squid_octopus: 0,
+      rockfish: 0, pelagic: 0, flatfish: 0, migratory: 0, shore: 0, freshwater_sub: 0, squid_octopus: 0,
     };
     for (const f of fishSpecies) {
       const fc = getFishingCategory(f);

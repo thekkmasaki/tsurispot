@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { LineBanner } from "@/components/line-banner";
+import { Breadcrumb } from "@/components/ui/breadcrumb";
 import {
-  ChevronLeft,
   Baby,
   Users,
   Shield,
@@ -201,16 +201,7 @@ export default function FamilyGuidePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
-        {/* パンくず */}
-        <div className="mb-6">
-          <Link
-            href="/guide"
-            className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
-          >
-            <ChevronLeft className="mr-1 size-4" />
-            釣りの始め方ガイドに戻る
-          </Link>
-        </div>
+        <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "釣りガイド", href: "/guide" }, { label: "ファミリーフィッシングガイド" }]} />
 
         {/* ヘッダー */}
         <div className="mb-8 text-center sm:mb-10">

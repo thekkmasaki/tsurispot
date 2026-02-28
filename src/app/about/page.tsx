@@ -24,7 +24,7 @@ import {
 export const metadata: Metadata = {
   title: "ツリスポについて｜釣りスポット総合情報サイト",
   description:
-    "ツリスポは全国1000箇所以上の釣りスポットを掲載する総合情報サイトです。地図で直感的に釣り場を探せ、今の時期に釣れる魚やおすすめの仕掛け情報を提供しています。",
+    "ツリスポは全国1,000箇所以上・80魚種以上を掲載する釣り情報サイトです。釣り歴10年以上の編集長が全記事を監修。地図検索・魚種図鑑・季節別ガイドで最高の釣り体験をサポートします。",
   openGraph: {
     title: "ツリスポについて｜釣りスポット総合情報サイト",
     description: "全国1000箇所以上の釣りスポットを掲載。地図で釣り場を探せ、釣れる魚や仕掛け情報を提供する総合情報サイトです。",
@@ -61,6 +61,14 @@ const features = [
   },
 ];
 
+const webPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "ツリスポについて｜釣りスポット総合情報サイト",
+  url: "https://tsurispot.com/about",
+  dateModified: "2026-02-28",
+};
+
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
@@ -87,6 +95,10 @@ const personJsonLd = {
 export default function AboutPage() {
   return (
     <div className="flex flex-col">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}

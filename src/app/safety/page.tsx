@@ -18,7 +18,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 export const metadata: Metadata = {
   title: "釣りの安全ガイド - ツリスポ",
   description:
-    "釣りを安全に楽しむための総合ガイド。ライフジャケットの着用、天候・潮流の確認方法、転落リスク、毒魚への対処、子どもとの釣り、緊急時の連絡先、熱中症・低体温症対策まで網羅的に解説します。",
+    "釣りの安全対策7項目を徹底解説。ライフジャケット選び・天候確認・転落防止・毒魚の見分け方・子どもとの安全対策・緊急連絡先118番まで網羅。釣行前の安全チェックリスト付き。",
   openGraph: {
     title: "釣りの安全ガイド - ツリスポ",
     description:
@@ -30,6 +30,14 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://tsurispot.com/safety",
   },
+};
+
+const webPageJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "釣りの安全ガイド",
+  url: "https://tsurispot.com/safety",
+  dateModified: "2026-02-28",
 };
 
 const breadcrumbJsonLd = {
@@ -54,6 +62,10 @@ const breadcrumbJsonLd = {
 export default function SafetyPage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}

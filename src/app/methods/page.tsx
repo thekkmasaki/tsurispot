@@ -10,10 +10,12 @@ import {
   Crosshair,
   Compass,
   Sword,
+  MapPin,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { fishingSpots } from "@/lib/data/spots";
 
 export const metadata: Metadata = {
   title: "釣り方・釣法ガイド - 9つの釣法を徹底解説",
@@ -59,6 +61,15 @@ interface MethodSummary {
   difficulty: "beginner" | "intermediate" | "advanced";
   targetFish: string[];
   icon: React.ReactNode;
+  methodKeys: string[];
+}
+
+function getSpotCountForMethod(methodKeys: string[]): number {
+  return fishingSpots.filter((spot) =>
+    spot.catchableFish.some((cf) =>
+      methodKeys.some((key) => cf.method.includes(key))
+    )
+  ).length;
 }
 
 const DIFFICULTY_MAP = {
@@ -76,6 +87,7 @@ const methods: MethodSummary[] = [
     difficulty: "beginner",
     targetFish: ["アジ", "サバ", "イワシ"],
     icon: <Anchor className="size-6 text-sky-600" />,
+    methodKeys: ["サビキ釣り", "ジグサビキ"],
   },
   {
     slug: "ajing",
@@ -85,6 +97,7 @@ const methods: MethodSummary[] = [
     difficulty: "intermediate",
     targetFish: ["アジ", "メバル", "カマス"],
     icon: <Target className="size-6 text-indigo-600" />,
+    methodKeys: ["アジング"],
   },
   {
     slug: "eging",
@@ -94,6 +107,7 @@ const methods: MethodSummary[] = [
     difficulty: "intermediate",
     targetFish: ["アオリイカ", "コウイカ", "ヤリイカ"],
     icon: <Waves className="size-6 text-purple-600" />,
+    methodKeys: ["エギング"],
   },
   {
     slug: "mebaring",
@@ -103,6 +117,7 @@ const methods: MethodSummary[] = [
     difficulty: "intermediate",
     targetFish: ["メバル", "カサゴ", "アジ"],
     icon: <CircleDot className="size-6 text-teal-600" />,
+    methodKeys: ["メバリング"],
   },
   {
     slug: "shore-jigging",
@@ -112,6 +127,7 @@ const methods: MethodSummary[] = [
     difficulty: "advanced",
     targetFish: ["イナダ", "ワカシ", "ソウダガツオ"],
     icon: <Crosshair className="size-6 text-red-600" />,
+    methodKeys: ["ショアジギング"],
   },
   {
     slug: "choi-nage",
@@ -121,6 +137,7 @@ const methods: MethodSummary[] = [
     difficulty: "beginner",
     targetFish: ["キス", "ハゼ", "カレイ"],
     icon: <Compass className="size-6 text-amber-600" />,
+    methodKeys: ["ちょい投げ", "投げ釣り", "ぶっこみ釣り", "ぶっ込み釣り"],
   },
   {
     slug: "uki-zuri",
@@ -130,6 +147,7 @@ const methods: MethodSummary[] = [
     difficulty: "beginner",
     targetFish: ["クロダイ", "メジナ", "アジ"],
     icon: <Fish className="size-6 text-emerald-600" />,
+    methodKeys: ["ウキ釣り", "ウキフカセ", "フカセ釣り", "ウキフカセ釣り"],
   },
   {
     slug: "ana-zuri",
@@ -139,6 +157,7 @@ const methods: MethodSummary[] = [
     difficulty: "beginner",
     targetFish: ["カサゴ", "メバル", "ソイ"],
     icon: <Grip className="size-6 text-stone-600" />,
+    methodKeys: ["穴釣り", "穴釣り・根魚釣り", "ブラクリ"],
   },
   {
     slug: "tachiuo-zuri",
@@ -148,8 +167,22 @@ const methods: MethodSummary[] = [
     difficulty: "intermediate",
     targetFish: ["タチウオ"],
     icon: <Sword className="size-6 text-slate-600" />,
+    methodKeys: ["テンヤ", "テンヤ釣り", "ワインド"],
   },
 ];
+
+const itemListJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "釣り方・釣法ガイド",
+  numberOfItems: methods.length,
+  itemListElement: methods.map((method, index) => ({
+    "@type": "ListItem",
+    position: index + 1,
+    name: method.name,
+    url: `https://tsurispot.com/methods/${method.slug}`,
+  })),
+};
 
 export default function MethodsIndexPage() {
   return (
@@ -157,6 +190,10 @@ export default function MethodsIndexPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
       />
       <main className="container mx-auto max-w-5xl px-4 py-8 sm:py-12">
         <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "釣り方・釣法ガイド" }]} />
@@ -214,7 +251,7 @@ export default function MethodsIndexPage() {
                   <p className="mb-3 text-sm leading-relaxed text-muted-foreground">
                     {method.description}
                   </p>
-                  <div className="flex flex-wrap gap-1.5">
+                  <div className="flex flex-wrap items-center gap-1.5">
                     {method.targetFish.map((fish) => (
                       <Badge
                         key={fish}
@@ -224,6 +261,15 @@ export default function MethodsIndexPage() {
                         {fish}
                       </Badge>
                     ))}
+                    {(() => {
+                      const count = getSpotCountForMethod(method.methodKeys);
+                      return count > 0 ? (
+                        <Badge variant="secondary" className="text-xs">
+                          <MapPin className="mr-0.5 size-3" />
+                          {count}スポット
+                        </Badge>
+                      ) : null;
+                    })()}
                   </div>
                 </CardContent>
               </Card>
