@@ -318,7 +318,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-013", name: "琵琶湖・彦根港", slug: "biwako-hikone-port",
     description: "滋賀県彦根市の彦根港周辺。国宝彦根城のお膝元で、琵琶湖東岸の好ポイント。バス釣りのほかワカサギやハスも狙える。竹島への渡船場所でもあり、港内は足場が良くファミリーにも人気。彦根城観光と合わせて。",
-    latitude: 35.2756, longitude: 136.2645, address: "〒522-0002 滋賀県彦根市松原町（彦根港）",
+    latitude: 35.2838, longitude: 136.2424, address: "〒522-0002 滋賀県彦根市松原町（彦根港）",
     accessInfo: "JR彦根駅から徒歩約20分。名神高速彦根ICから約15分。",
     region: region("r3006"), spotType: "river", difficulty: "beginner",
     isFree: true,
@@ -343,7 +343,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-014", name: "琵琶湖・長浜港", slug: "biwako-nagahama-port",
     description: "滋賀県長浜市の長浜港周辺。琵琶湖北湖のバス釣りの拠点で、竹生島への渡船場でもある。港内は足場が良く、豊公園周辺の護岸ではウェーディングも可能。北湖ならではの大型バスが狙えるエリア。",
-    latitude: 35.3812, longitude: 136.2712, address: "〒526-0067 滋賀県長浜市港町（長浜港）",
+    latitude: 35.3720, longitude: 136.2631, address: "〒526-0067 滋賀県長浜市港町（長浜港）",
     accessInfo: "JR長浜駅から徒歩約10分。北陸自動車道長浜ICから約15分。",
     region: region("r3011"), spotType: "river", difficulty: "beginner",
     isFree: true,
@@ -393,7 +393,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-016", name: "琵琶湖・今津浜", slug: "biwako-imazu",
     description: "滋賀県高島市今津町の湖岸。琵琶湖北西部に位置し、今津港からは竹生島への連絡船が出ている。周辺はバス釣りの好ポイントが点在し、ウェーディングでの釣りも盛ん。近くにはザゼンソウ群落がある自然豊かなエリア。",
-    latitude: 35.3978, longitude: 136.0312, address: "〒520-1621 滋賀県高島市今津町今津",
+    latitude: 35.4184, longitude: 136.0463, address: "〒520-1621 滋賀県高島市今津町今津",
     accessInfo: "JR近江今津駅から徒歩約10分。名神京都東ICから約1時間。",
     region: region("r3007"), spotType: "river", difficulty: "intermediate",
     isFree: true,
@@ -612,7 +612,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-025", name: "温泉津港", slug: "yunotsu-port",
     description: "島根県大田市温泉津町にある漁港。世界遺産・石見銀山の積出港として栄えた歴史ある港。アジ・メバルの好ポイントで、秋にはアオリイカも好調。温泉津温泉に浸かった後の夜釣りが贅沢。",
-    latitude: 35.1089, longitude: 132.3312, address: "〒699-2598 島根県大田市温泉津町温泉津町温泉津",
+    latitude: 35.0942, longitude: 132.3388, address: "〒699-2598 島根県大田市温泉津町温泉津町温泉津",
     accessInfo: "JR温泉津駅から徒歩約15分。山陰自動車道温泉津ICから約10分。",
     region: region("r3013"), spotType: "port", difficulty: "beginner",
     isFree: true,
@@ -920,7 +920,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-037", name: "玉野・宇野港", slug: "tamano-uno-port",
     description: "岡山県玉野市の宇野港。直島への玄関口で、アート観光と合わせた釣行が可能。港内はチヌ・メバル・アジが好調で、足場も良くファミリー向き。瀬戸内海の穏やかな景色の中で釣りが楽しめる。",
-    latitude: 34.4878, longitude: 133.9412, address: "〒706-8531 岡山県玉野市宇野二丁目",
+    latitude: 34.4921, longitude: 133.9538, address: "〒706-8531 岡山県玉野市宇野二丁目",
     accessInfo: "JR宇野駅から徒歩約5分。瀬戸中央自動車道早島ICから約30分。",
     region: region("r3019"), spotType: "port", difficulty: "beginner",
     isFree: true,
@@ -1073,7 +1073,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-043", name: "串本・袋港", slug: "kushimoto-fukuro-port",
     description: "和歌山県串本町の袋港。本州最南端の町にある漁港で、黒潮の影響を受けて熱帯魚が見られるほど水温が高い。グレ・イシダイの磯釣りの拠点でもあり、港内ではアオリイカやアジも好調。橋杭岩の絶景が近い。",
-    latitude: 33.4712, longitude: 135.7812, address: "〒649-3503 和歌山県串本町串本",
+    latitude: 33.4772, longitude: 135.7716, address: "〒649-3503 和歌山県串本町串本",
     accessInfo: "JR串本駅から車で約10分。紀勢自動車道すさみ南ICから約30分。",
     region: region("r504"), spotType: "port", difficulty: "intermediate",
     isFree: true,
@@ -1281,7 +1281,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-051", name: "周防大島・片添ヶ浜", slug: "suo-oshima-katazoe",
     description: "山口県大島郡周防大島町の片添ヶ浜。「瀬戸内のハワイ」と呼ばれる周防大島の人気スポット。海水浴場に隣接する波止から、アジ・キス・メバル・チヌ・アオリイカなどが狙える。アジングの聖地としても全国的に有名な島。",
-    latitude: 33.9012, longitude: 132.3278, address: "山口県周防大島町西方",
+    latitude: 33.9003, longitude: 132.3638, address: "山口県周防大島町西方",
     accessInfo: "JR大畠駅から車で約30分。大島大橋を渡って島内へ。山陽自動車道玖珂ICから約40分。",
     region: region("r3029"), spotType: "port", difficulty: "beginner",
     isFree: true,

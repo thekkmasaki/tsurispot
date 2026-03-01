@@ -163,7 +163,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3377", name: "赤碕港", slug: "akasaki-port",
     description: "琴浦町の赤碕港は日本海に面した中規模漁港。堤防からのサビキ釣りでアジ・サバが好調。秋にはハマチの回遊もあり、ショアジギングファンに人気。",
-    latitude: 35.5010, longitude: 133.6770,
+    latitude: 35.51120, longitude: 133.65670,
     address: "〒689-2501 鳥取県東伯郡琴浦町赤碕（赤碕漁港）",
     accessInfo: "JR山陰本線赤碕駅から徒歩約15分。山陰自動車道赤碕ICから約5分。",
     region: localRegion("r3000"), spotType: "port", difficulty: "beginner",
@@ -249,7 +249,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3381", name: "田後港", slug: "tago-port-tottori",
     description: "岩美町の田後港は浦富海岸ジオパークの拠点港。透明度の高い海でアジ・メバルが狙え、テトラ周りの根魚も豊富。遊覧船乗り場もあり観光と併せて楽しめる。",
-    latitude: 35.5880, longitude: 134.3050,
+    latitude: 35.59450, longitude: 134.31560,
     address: "〒681-0071 鳥取県岩美郡岩美町田後（田後港）",
     accessInfo: "JR山陰本線岩美駅からバスで約15分「田後」下車。鳥取自動車道鳥取ICから約30分。",
     region: localRegion("r3001"), spotType: "port", difficulty: "beginner",
@@ -495,7 +495,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3392", name: "牛窓港", slug: "ushimado-port-okayama",
     description: "「日本のエーゲ海」と称される牛窓の漁港。瀬戸内海の穏やかな海でサビキ釣りやチヌ釣りが楽しめる。オリーブ園や美しい景観と合わせて観光も楽しめるスポット。",
-    latitude: 34.6220, longitude: 134.1550,
+    latitude: 34.61290, longitude: 134.15800,
     address: "〒701-4302 岡山県瀬戸内市牛窓町牛窓（牛窓港）",
     accessInfo: "JR赤穂線邑久駅から車で約15分。山陽自動車道備前ICから約30分。",
     region: localRegion("r3005"), spotType: "port", difficulty: "beginner",
@@ -561,7 +561,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3395", name: "下津井港", slug: "shimotsui-port",
     description: "倉敷市下津井は瀬戸大橋のたもとにある歴史ある港町。タコ釣りの聖地として知られ、瀬戸内海の好漁場。チヌやメバルも豊富で年間を通じて楽しめる。",
-    latitude: 34.4150, longitude: 133.8060,
+    latitude: 34.43570, longitude: 133.79140,
     address: "〒711-0927 岡山県倉敷市下津井（下津井港）",
     accessInfo: "JR瀬戸大橋線児島駅から車で約15分。瀬戸中央自動車道児島ICから約10分。",
     region: localRegion("r3004"), spotType: "port", difficulty: "beginner",
@@ -673,7 +673,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3400", name: "竹原港", slug: "takehara-port",
     description: "竹原市の竹原港は大崎上島へのフェリー発着港。堤防からアジやサバのサビキ釣りが手軽に楽しめる。秋のタチウオ釣りも人気で、夜釣りファンが集まる。",
-    latitude: 34.3470, longitude: 132.9220,
+    latitude: 34.32830, longitude: 132.91440,
     address: "〒725-0022 広島県竹原市港町3丁目（竹原港）",
     accessInfo: "JR呉線竹原駅から徒歩約15分。山陽自動車道河内ICから約30分。",
     region: localRegion("r3006"), spotType: "port", difficulty: "beginner",
@@ -783,7 +783,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3405", name: "江田島・大柿港", slug: "etajima-ogaki-port",
     description: "江田島市の大柿港は瀬戸内海に浮かぶ江田島の南端にある漁港。潮通しが良くメバル・カサゴの根魚が豊富。春のアオリイカも好実績で、島の穴場スポット。",
-    latitude: 34.1370, longitude: 132.4550,
+    latitude: 34.17160, longitude: 132.48140,
     address: "〒737-2302 広島県江田島市大柿町大原（大原港）",
     accessInfo: "広島港からフェリーで約30分、大柿港下船。呉市からは音戸大橋経由で車約40分。",
     region: localRegion("r3006"), spotType: "port", difficulty: "beginner",
@@ -940,7 +940,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3412", name: "仙崎港", slug: "senzaki-port",
     description: "長門市仙崎は金子みすゞの故郷として有名な港町。堤防からアジやサバが手軽に釣れ、秋のアオリイカも好調。仙崎かまぼこの名産地で観光も楽しめる。",
-    latitude: 34.3990, longitude: 131.1920,
+    latitude: 34.39080, longitude: 131.21310,
     address: "〒759-4106 山口県長門市仙崎（仙崎漁港）",
     accessInfo: "JR山陰本線仙崎駅から徒歩約10分。中国自動車道美祢ICから約40分。",
     region: localRegion("r3008"), spotType: "port", difficulty: "beginner",
@@ -984,7 +984,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3414", name: "周防大島・安下庄港", slug: "suooshima-agebosho-port",
     description: "周防大島町の安下庄港は瀬戸内海に浮かぶ大島の主要港。メバルやカサゴの根魚が豊富で、アジのサビキ釣りも安定。ミカンの島として知られ、温暖な気候で冬も釣りが楽しめる。",
-    latitude: 33.9070, longitude: 132.2430,
+    latitude: 33.88650, longitude: 132.27780,
     address: "〒742-2301 山口県大島郡周防大島町安下庄（安下庄港）",
     accessInfo: "JR山陽本線大畠駅から車で約20分。山陽自動車道玖珂ICから約30分。大島大橋経由。",
     region: localRegion("r3009"), spotType: "port", difficulty: "beginner",
@@ -1028,7 +1028,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3416", name: "岩国港", slug: "iwakuni-port",
     description: "岩国市の岩国港は瀬戸内海に面した中規模港。錦帯橋から近く、アジやチヌが手軽に狙える。足場が良くファミリー向けで、駐車場やトイレも完備。",
-    latitude: 34.1560, longitude: 132.2180,
+    latitude: 34.19110, longitude: 132.23710,
     address: "〒740-0018 山口県岩国市新港町（岩国港）",
     accessInfo: "JR山陽本線岩国駅から車で約10分。山陽自動車道岩国ICから約15分。",
     region: localRegion("r3009"), spotType: "port", difficulty: "beginner",
@@ -1119,7 +1119,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3420", name: "小松島港", slug: "komatsushima-port",
     description: "小松島市の小松島港は紀伊水道に面した大型港。堤防からのサビキ釣りでアジ・イワシが安定して釣れ、投げ釣りでキスやカレイも狙える。足場が良くファミリーに人気。",
-    latitude: 34.0010, longitude: 134.5870,
+    latitude: 34.01020, longitude: 134.58770,
     address: "〒773-0001 徳島県小松島市小松島町（小松島港）",
     accessInfo: "JR牟岐線南小松島駅から徒歩約15分。徳島自動車道徳島ICから約20分。",
     region: localRegion("r3010"), spotType: "port", difficulty: "beginner",
@@ -1141,7 +1141,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3421", name: "阿南市橘港", slug: "anan-tachibana-port",
     description: "阿南市の橘港は紀伊水道に面した漁港。アオリイカのエギングが特に好調で、秋の新子シーズンは多くのエギンガーで賑わう。アジやカマスの回遊も安定している。",
-    latitude: 33.8810, longitude: 134.6620,
+    latitude: 33.86850, longitude: 134.65330,
     address: "〒774-0017 徳島県阿南市橘町（橘港）",
     accessInfo: "JR牟岐線阿南駅から車で約20分。徳島自動車道徳島ICから約50分。",
     region: localRegion("r3010"), spotType: "port", difficulty: "beginner",
@@ -1207,7 +1207,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3424", name: "鳴門ウチノ海総合公園", slug: "naruto-uchinomi-park",
     description: "鳴門市のウチノ海総合公園は整備された護岸で釣りが楽しめるファミリースポット。穏やかなウチノ海でアジやチヌが狙え、投げ釣りでキスも楽しめる。公園施設も充実。",
-    latitude: 34.1770, longitude: 134.5950,
+    latitude: 34.20960, longitude: 134.59680,
     address: "〒772-0053 徳島県鳴門市鳴門町高島（高島漁港）",
     accessInfo: "JR鳴門線鳴門駅から車で約10分。神戸淡路鳴門自動車道鳴門北ICから約5分。",
     region: localRegion("r3010"), spotType: "pier", difficulty: "beginner",
@@ -1229,7 +1229,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3425", name: "日和佐港", slug: "hiwasa-port",
     description: "美波町の日和佐港はウミガメの産卵地として有名な大浜海岸の近く。堤防からアジやカマスが手軽に釣れ、エギングでアオリイカも好調。のどかな漁村の雰囲気が魅力。",
-    latitude: 33.7310, longitude: 134.5360,
+    latitude: 33.73040, longitude: 134.54580,
     address: "〒779-2305 徳島県海部郡美波町日和佐浦（日和佐港）",
     accessInfo: "JR牟岐線日和佐駅から徒歩約10分。徳島自動車道徳島ICから約70分。",
     region: localRegion("r3011"), spotType: "port", difficulty: "beginner",
@@ -1320,7 +1320,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3429", name: "観音寺港", slug: "kanonji-port-kagawa",
     description: "観音寺市の観音寺港は燧灘に面した漁港。アジやサバの回遊が豊富で、秋のタチウオ釣りも人気。銭形砂絵の近くにあり観光も楽しめる。",
-    latitude: 34.1260, longitude: 133.6600,
+    latitude: 34.12180, longitude: 133.629800,
     address: "〒768-0067 香川県観音寺市港町（観音寺港）",
     accessInfo: "JR予讃線観音寺駅から車で約5分。高松自動車道大野原ICから約10分。",
     region: localRegion("r3013"), spotType: "port", difficulty: "beginner",
@@ -1342,7 +1342,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3430", name: "小豆島・土庄港", slug: "shodoshima-tonosho-port",
     description: "小豆島の玄関口・土庄港は足場が良くファミリーフィッシングに最適。アジやメバルが手軽に釣れ、チヌの好ポイントも多い。オリーブの島で観光と釣りを満喫できる。",
-    latitude: 34.4860, longitude: 134.1780,
+    latitude: 34.49800, longitude: 134.16040,
     address: "〒761-4106 香川県小豆郡土庄町甲（土庄港）",
     accessInfo: "高松港からフェリーで約60分、土庄港着。岡山港からフェリーで約70分。",
     region: localRegion("r3013"), spotType: "port", difficulty: "beginner",
@@ -1364,7 +1364,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3431", name: "さぬき市津田港", slug: "sanuki-tsuda-port",
     description: "さぬき市の津田港は津田の松原海水浴場に隣接する漁港。キスの投げ釣りとサビキでのアジ釣りが人気。夏場は海水浴と釣りを同時に楽しむファミリーで賑わう。",
-    latitude: 34.2970, longitude: 134.2810,
+    latitude: 34.29280, longitude: 134.25480,
     address: "〒769-2401 香川県さぬき市津田町津田（津田港）",
     accessInfo: "JR高徳線讃岐津田駅から徒歩約15分。高松自動車道津田東ICから約5分。",
     region: localRegion("r3012"), spotType: "port", difficulty: "beginner",
@@ -1386,7 +1386,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3432", name: "丸亀港", slug: "marugame-port-kagawa",
     description: "丸亀市の丸亀港は丸亀城から近い便利な港。堤防からアジやチヌが手軽に狙え、投げ釣りでカレイも楽しめる。うどんの街で食事も楽しめる。",
-    latitude: 34.2900, longitude: 133.7960,
+    latitude: 34.304900, longitude: 133.78810,
     address: "〒763-0034 香川県丸亀市港町（丸亀港）",
     accessInfo: "JR予讃線丸亀駅から徒歩約15分。高松自動車道善通寺ICから約15分。",
     region: localRegion("r3012"), spotType: "port", difficulty: "beginner",
@@ -1430,7 +1430,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3434", name: "庵治港", slug: "aji-port-kagawa",
     description: "高松市庵治町の庵治港は映画「世界の中心で、愛をさけぶ」のロケ地近くにある漁港。チヌの好ポイントとして知られ、メバルやカサゴの根魚も豊富。庵治石の産地としても有名。",
-    latitude: 34.3980, longitude: 134.1230,
+    latitude: 34.38380, longitude: 134.12180,
     address: "〒761-0130 香川県高松市庵治町（庵治漁港）",
     accessInfo: "JR高松駅から車で約30分。高松自動車道高松中央ICから約30分。",
     region: localRegion("r3012"), spotType: "port", difficulty: "beginner",
@@ -1499,7 +1499,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3437", name: "宇和島港", slug: "uwajima-port-ehime",
     description: "宇和島市の宇和島港は宇和海に面した漁港。真珠養殖で有名なエリアで、アジやチヌが安定して釣れる。エギングでアオリイカも好調。闘牛と鯛めしの街。",
-    latitude: 33.2260, longitude: 132.5640,
+    latitude: 33.22830, longitude: 132.54610,
     address: "〒798-0003 愛媛県宇和島市築地町1丁目（宇和島港）",
     accessInfo: "JR予讃線宇和島駅から徒歩約15分。松山自動車道宇和島朝日ICから約5分。",
     region: localRegion("r3015"), spotType: "port", difficulty: "beginner",
@@ -1543,7 +1543,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3439", name: "八幡浜港", slug: "yawatahama-port-ehime",
     description: "八幡浜市の八幡浜港は四国最大の水産基地。アジやサバのサビキ釣りが安定しており、チヌやメバルも豊富。みかんの産地で、温暖な気候で冬も釣りが楽しめる。",
-    latitude: 33.4610, longitude: 132.4200,
+    latitude: 33.45490, longitude: 132.409200,
     address: "〒796-0087 愛媛県八幡浜市沖新田（八幡浜港）",
     accessInfo: "JR予讃線八幡浜駅から徒歩約15分。松山自動車道大洲ICから約25分。",
     region: localRegion("r3014"), spotType: "port", difficulty: "beginner",
@@ -1587,7 +1587,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3441", name: "伯方島・有津港", slug: "hakatajima-aritsu-port",
     description: "しまなみ海道の伯方島にある有津港はアジ・メバルの好ポイント。潮通しが良くアオリイカも好調。伯方の塩で有名な島で、橋で本土とつながりアクセスも便利。",
-    latitude: 34.1730, longitude: 133.0750,
+    latitude: 34.20210, longitude: 133.09560,
     address: "〒794-2305 愛媛県今治市伯方町有津（伯方島港）",
     accessInfo: "しまなみ海道伯方島ICから約5分。JR予讃線今治駅から車で約40分。",
     region: localRegion("r3014"), spotType: "port", difficulty: "beginner",
@@ -1700,7 +1700,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3446", name: "須崎港", slug: "susaki-port-kochi",
     description: "須崎市の須崎港は須崎湾に面した天然の良港。堤防からアジやサバのサビキ釣りが手軽に楽しめ、カンパチやブリの回遊もある。鍋焼きラーメンの街としても有名。",
-    latitude: 33.3920, longitude: 133.2810,
+    latitude: 33.39280, longitude: 133.30360,
     address: "〒785-0014 高知県須崎市原町1丁目（須崎港）",
     accessInfo: "JR土讃線須崎駅から徒歩約10分。高知自動車道須崎東ICから約10分。",
     region: localRegion("r3016"), spotType: "port", difficulty: "beginner",
@@ -1788,7 +1788,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3450", name: "宿毛湾港", slug: "sukumo-bay-port",
     description: "宿毛市の宿毛湾港は高知県最西端の港。黒潮の影響で温暖な海域に多彩な魚種が生息。アジやチヌの実績が高く、エギングでアオリイカも好調。だるま夕日の名所。",
-    latitude: 32.9390, longitude: 132.7280,
+    latitude: 32.92100, longitude: 132.69520,
     address: "〒788-0022 高知県宿毛市片島（宿毛港）",
     accessInfo: "土佐くろしお鉄道宿毛駅から車で約5分。高知自動車道四万十町中央ICから約60分。",
     region: localRegion("r3017"), spotType: "port", difficulty: "beginner",
@@ -2124,7 +2124,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3465", name: "伊万里港", slug: "imari-port-saga",
     description: "伊万里市の伊万里港は伊万里湾の奥に位置する穏やかな港。チヌやハゼが安定して釣れ、初心者でも安心して楽しめる。伊万里焼の街で観光も充実。",
-    latitude: 33.2760, longitude: 129.8800,
+    latitude: 33.27600, longitude: 129.867500,
     address: "〒848-0047 佐賀県伊万里市伊万里町甲（伊万里港）",
     accessInfo: "JR筑肥線伊万里駅から徒歩約10分。長崎自動車道武雄北方ICから約30分。",
     region: localRegion("r3020"), spotType: "port", difficulty: "beginner",
@@ -2171,7 +2171,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3467", name: "対馬・厳原港", slug: "tsushima-izuhara-port",
     description: "対馬市の厳原港は対馬の南部にある主要港。対馬海流の影響で大型のクロダイやヒラマサが狙え、磯釣りの聖地として全国から釣り師が訪れる。韓国の山々が望める国境の島。",
-    latitude: 34.2030, longitude: 129.2870,
+    latitude: 34.19390, longitude: 129.29150,
     address: "〒817-0016 長崎県対馬市厳原町東里（厳原港）",
     accessInfo: "博多港からジェットフォイルで約135分。福岡空港から対馬空港まで約35分。",
     region: localRegion("r3022"), spotType: "port", difficulty: "intermediate",
@@ -2259,7 +2259,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3471", name: "壱岐・郷ノ浦港", slug: "iki-gonoura-port",
     description: "壱岐市の郷ノ浦港は壱岐島の玄関口。豊かな漁場に恵まれ、アジ・サバが豊富に回遊する。エギングでアオリイカの大型も期待できる離島の好釣り場。",
-    latitude: 33.7450, longitude: 129.6910,
+    latitude: 33.74180, longitude: 129.67140,
     address: "〒811-5135 長崎県壱岐市郷ノ浦町郷ノ浦（郷ノ浦港）",
     accessInfo: "博多港からジェットフォイルで約65分。長崎空港から壱岐空港まで約30分。",
     region: localRegion("r3022"), spotType: "port", difficulty: "beginner",
@@ -2303,7 +2303,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3473", name: "佐世保港", slug: "sasebo-port-nagasaki",
     description: "佐世保市の佐世保港は九十九島を望む大型港。堤防からアジやサバが手軽に釣れ、チヌやメバルも狙える。ハンバーガーと海上自衛隊の街で観光も充実。",
-    latitude: 33.1570, longitude: 129.7230,
+    latitude: 33.12970, longitude: 129.71770,
     address: "〒857-0863 長崎県佐世保市三浦町（佐世保港）",
     accessInfo: "JR佐世保線佐世保駅から徒歩約10分。西九州自動車道佐世保大塔ICから約10分。",
     region: localRegion("r3022"), spotType: "port", difficulty: "beginner",
@@ -2328,7 +2328,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3474", name: "天草・本渡港", slug: "amakusa-hondo-port",
     description: "天草市の本渡港は天草の中心地にある港。堤防からアジやチヌが安定して釣れ、エギングでアオリイカも好調。天草の新鮮な海の幸グルメと合わせて楽しめる。",
-    latitude: 32.4570, longitude: 130.1920,
+    latitude: 32.45560, longitude: 130.20290,
     address: "〒863-0002 熊本県天草市本渡町本戸馬場（本渡港）",
     accessInfo: "天草空港から車で約15分。九州自動車道松橋ICから約90分。天草五橋経由。",
     region: localRegion("r3023"), spotType: "port", difficulty: "beginner",
@@ -2350,7 +2350,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3475", name: "八代港", slug: "yatsushiro-port-kumamoto",
     description: "八代市の八代港は八代海に面した大型港。チヌやスズキの実績が高く、投げ釣りでキスも楽しめる。冬場は干潟でハゼ釣りも人気。日奈久温泉にも近い。",
-    latitude: 32.5040, longitude: 130.5560,
+    latitude: 32.51240, longitude: 130.56790,
     address: "〒866-0034 熊本県八代市新港町（八代港）",
     accessInfo: "JR鹿児島本線八代駅から車で約10分。九州自動車道八代ICから約15分。",
     region: localRegion("r3023"), spotType: "port", difficulty: "beginner",
@@ -2372,7 +2372,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3476", name: "天草・牛深港", slug: "amakusa-ushibuka-port",
     description: "天草市牛深の牛深港は天草南端の港。黒潮の恩恵を受ける豊かな海でアジ・サバが豊富。ハイヤ大橋からの景色が美しく、牛深ハイヤ祭りの街としても有名。",
-    latitude: 32.1940, longitude: 130.0170,
+    latitude: 32.19360, longitude: 130.03380,
     address: "〒863-1901 熊本県天草市牛深町（牛深港）",
     accessInfo: "天草空港から車で約60分。九州自動車道松橋ICから約120分。",
     region: localRegion("r3023"), spotType: "port", difficulty: "beginner",
@@ -2463,7 +2463,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3480", name: "津久見港", slug: "tsukumi-port-oita",
     description: "津久見市の津久見港はセメントの街として知られる港。堤防からアジやチヌが手軽に釣れ、投げ釣りでキスも楽しめる。保戸島へのフェリー発着港でもある。",
-    latitude: 33.0740, longitude: 131.8620,
+    latitude: 33.08460, longitude: 131.87100,
     address: "〒879-2442 大分県津久見市港町（津久見港）",
     accessInfo: "JR日豊本線津久見駅から徒歩約10分。東九州自動車道津久見ICから約5分。",
     region: localRegion("r3024"), spotType: "port", difficulty: "beginner",
@@ -2507,7 +2507,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3482", name: "国東・武蔵港", slug: "kunisaki-musashi-port",
     description: "国東市の武蔵港は国東半島の東側にある漁港。周防灘に面し、アジやメバルの回遊が安定している。秋のアオリイカも好調で、穴場的な存在の静かな漁港。",
-    latitude: 33.5610, longitude: 131.7240,
+    latitude: 33.49380, longitude: 131.72950,
     address: "〒873-0502 大分県国東市国東町田深（武蔵港）",
     accessInfo: "JR日豊本線杵築駅から車で約40分。大分空港道路安岐ICから約20分。",
     region: localRegion("r3024"), spotType: "port", difficulty: "beginner",
@@ -2529,7 +2529,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3483", name: "臼杵港", slug: "usuki-port-oita",
     description: "臼杵市の臼杵港は臼杵石仏で有名な街の港。堤防からアジやチヌが安定して釣れ、ふぐの産地としても知られる。歴史と食の街で観光と釣りを満喫できる。",
-    latitude: 33.1180, longitude: 131.8020,
+    latitude: 33.12970, longitude: 131.81520,
     address: "〒875-0041 大分県臼杵市臼杵（臼杵港）",
     accessInfo: "JR日豊本線臼杵駅から徒歩約15分。東九州自動車道臼杵ICから約10分。",
     region: localRegion("r3024"), spotType: "port", difficulty: "beginner",
@@ -2576,7 +2576,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3485", name: "日南・油津港", slug: "nichinan-aburatsu-port",
     description: "日南市の油津港はマグロの水揚げで有名な港。堤防からアジやカツオが狙え、投げ釣りでキスも楽しめる。飫肥城下町の観光や日南海岸ドライブと併せて。",
-    latitude: 31.5780, longitude: 131.3880,
+    latitude: 31.56900, longitude: 131.40150,
     address: "〒887-0001 宮崎県日南市油津（油津港）",
     accessInfo: "JR日南線油津駅から徒歩約10分。東九州自動車道清武南ICから約60分。",
     region: localRegion("r3025"), spotType: "port", difficulty: "beginner",
@@ -2598,7 +2598,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3486", name: "日向・細島港", slug: "hyuga-hososhima-port",
     description: "日向市の細島港は日向灘に面した天然の良港。堤防からアジやサバが豊富に釣れ、ショアジギングでカンパチも狙える。馬ヶ背の絶景から近い。",
-    latitude: 32.4330, longitude: 131.6550,
+    latitude: 32.43390, longitude: 131.64600,
     address: "〒883-0001 宮崎県日向市細島（細島港）",
     accessInfo: "JR日豊本線日向市駅から車で約15分。東九州自動車道日向ICから約10分。",
     region: localRegion("r3025"), spotType: "port", difficulty: "beginner",
@@ -2620,7 +2620,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3487", name: "宮崎港", slug: "miyazaki-port",
     description: "宮崎市の宮崎港はフェリーターミナルのある大型港。堤防からアジやサバが手軽に釣れ、投げ釣りでキスも楽しめる。宮崎市街から近くアクセス抜群。",
-    latitude: 31.9260, longitude: 131.4650,
+    latitude: 31.87330, longitude: 131.44680,
     address: "〒880-0858 宮崎県宮崎市港（宮崎港フェリーターミナル）",
     accessInfo: "JR日豊本線宮崎駅から車で約15分。宮崎自動車道宮崎ICから約15分。",
     region: localRegion("r3025"), spotType: "port", difficulty: "beginner",
@@ -2667,7 +2667,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3489", name: "指宿港", slug: "ibusuki-port-kagoshima",
     description: "指宿市の指宿港は薩摩半島南端の港。温暖な気候で年間を通じて釣りが楽しめ、アジやチヌが安定して釣れる。砂むし温泉で有名な観光地で、釣りと温泉を両方満喫できる。",
-    latitude: 31.2370, longitude: 130.6350,
+    latitude: 31.25360, longitude: 130.62880,
     address: "〒891-0405 鹿児島県指宿市湊（指宿港）",
     accessInfo: "JR指宿枕崎線指宿駅から徒歩約15分。指宿スカイライン頴娃ICから約20分。",
     region: localRegion("r3026"), spotType: "port", difficulty: "beginner",

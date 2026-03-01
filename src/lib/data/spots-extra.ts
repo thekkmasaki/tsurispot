@@ -144,7 +144,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s225", name: "稚内港", slug: "wakkanai-port",
     description: "日本最北端の港町。北海道ならではの大型カレイやホッケが狙える。夏場はサバやイワシのサビキ釣りも楽しめる。",
-    latitude: 45.4093, longitude: 141.6731,
+    latitude: 45.4008, longitude: 141.7011,
     address: "〒097-0005 北海道稚内市港一丁目稚内天塩線",
     accessInfo: "JR稚内駅から徒歩約10分。",
     region: localRegion("r61"), spotType: "port", difficulty: "intermediate",
@@ -193,7 +193,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s227", name: "根室港", slug: "nemuro-port",
     description: "日本最東端の港。カレイやアイナメなど根魚が豊富。花咲ガニで有名な地域で、夏は良型のカレイが狙える。",
-    latitude: 43.3297, longitude: 145.5875,
+    latitude: 43.3446, longitude: 145.5844,
     address: "〒087-0028 北海道根室市幸町三丁目",
     accessInfo: "JR根室駅から徒歩約10分。",
     region: localRegion("r63"), spotType: "port", difficulty: "intermediate",
@@ -239,7 +239,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s229", name: "岩内港", slug: "iwanai-port",
     description: "積丹半島の付け根に位置する港。良型のカレイやホッケの実績が高く、秋にはサケも回遊する。",
-    latitude: 42.9781, longitude: 140.5089,
+    latitude: 42.9958, longitude: 140.5123,
     address: "〒045-0003 北海道岩内町字清住",
     accessInfo: "札幌から車で約2時間。小樽から国道5号経由約1時間30分。",
     region: region("r1"), spotType: "port", difficulty: "beginner",
@@ -264,7 +264,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s230", name: "余市港", slug: "yoichi-port",
     description: "ニッカウヰスキー工場で有名な余市の港。カレイ、ホッケの実績が高く、秋にはサケの遡上もある。観光と釣りが同時に楽しめる。",
-    latitude: 43.1959, longitude: 140.7837,
+    latitude: 43.2101, longitude: 140.7793,
     address: "〒046-0015 北海道余市町朝日町",
     accessInfo: "JR余市駅から徒歩約15分。札樽自動車道小樽ICから約30分。",
     region: localRegion("r65"), spotType: "port", difficulty: "beginner",
@@ -392,7 +392,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s235", name: "枝幸港", slug: "esashi-port",
     description: "オホーツク海沿いの小さな港。地元漁師に混じって釣りを楽しめる穴場。カレイの魚影が濃い。",
-    latitude: 44.9381, longitude: 142.5808,
+    latitude: 44.9317, longitude: 142.5917,
     address: "〒098-5807 北海道枝幸町本町",
     accessInfo: "旭川から車で約3時間30分。",
     region: localRegion("r62"), spotType: "port", difficulty: "intermediate",
@@ -488,7 +488,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s239", name: "秋田港", slug: "akita-port",
     description: "秋田市の主要港。セリオンタワー周辺の岸壁でサビキ釣りが楽しめる。アジやハタハタなど日本海の魚種が豊富。",
-    latitude: 39.7690, longitude: 140.0570,
+    latitude: 39.74790, longitude: 140.06680,
     address: "〒011-0945 秋田県秋田市飯島穀丁秋田天王線",
     accessInfo: "JR土崎駅から徒歩約15分。秋田自動車道秋田北ICから約10分。",
     region: localRegion("r70"), spotType: "port", difficulty: "beginner",
@@ -564,7 +564,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s242", name: "相馬港", slug: "soma-port",
     description: "福島県北部の漁港。震災復興を経て整備された綺麗な港。カレイやヒラメの実績が高く、投げ釣りの好ポイント。",
-    latitude: 37.8286, longitude: 140.9753,
+    latitude: 37.8020, longitude: 140.9256,
     address: "福島県相馬市",
     accessInfo: "JR相馬駅から車で約10分。常磐自動車道相馬ICから約15分。",
     region: localRegion("r73"), spotType: "port", difficulty: "beginner",
@@ -1176,7 +1176,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s268", name: "大磯港", slug: "oiso-fishing-port",
     description: "湘南の西端に位置する歴史ある港。アジやイワシのサビキ釣り、投げ釣りでキスも狙える。西湘バイパスでアクセス良好。",
-    latitude: 35.3036, longitude: 139.3106,
+    latitude: 35.3063, longitude: 139.3192,
     address: "〒255-8555 神奈川県大磯町西湘バイパス",
     accessInfo: "JR大磯駅から徒歩約15分。西湘バイパス大磯西ICから約3分。",
     region: region("r47"), spotType: "port", difficulty: "beginner",
@@ -1474,7 +1474,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s280", name: "七尾港", slug: "nanao-port",
     description: "能登半島内浦の港町。穏やかな七尾湾でアジやキス、ハゼが狙える。和倉温泉に近く観光も楽しめる。",
-    latitude: 37.0467, longitude: 136.961267,
+    latitude: 37.0563, longitude: 136.9681,
     address: "〒926-8605 石川県七尾市馬出町",
     accessInfo: "JR七尾駅から徒歩約10分。のと里山海道七尾ICから約10分。",
     region: region("r22"), spotType: "port", difficulty: "beginner",
@@ -2298,7 +2298,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s317", name: "賀露港", slug: "karo-port",
     description: "鳥取市の主要漁港。カニで有名だが、サビキ釣りでアジやイワシも好調。隣接するかにっこ館や海鮮市場も人気。",
-    latitude: 35.5410, longitude: 134.1985,
+    latitude: 35.53730, longitude: 134.1870,
     address: "〒680-0909 鳥取県鳥取市浜坂八丁目浜坂4号線",
     accessInfo: "JR鳥取駅から車で約15分。鳥取自動車道鳥取ICから約20分。",
     region: localRegion("r103"), spotType: "port", difficulty: "beginner",
@@ -2348,7 +2348,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s319", name: "浜田港", slug: "hamada-port",
     description: "島根県西部の主要漁港。のどぐろ（アカムツ）の水揚げで有名。アジやヒラマサ、アオリイカが好調。",
-    latitude: 34.8869, longitude: 132.0496,
+    latitude: 34.8824, longitude: 132.0599,
     address: "〒697-8501 島根県浜田市笠柄町",
     accessInfo: "JR浜田駅から車で約10分。浜田自動車道浜田ICから約10分。",
     region: localRegion("r105"), spotType: "port", difficulty: "intermediate",
@@ -2397,7 +2397,7 @@ export const extraSpots: FishingSpot[] = [
   },{
     id: "s322", name: "呉港", slug: "kure-port",
     description: "海上自衛隊の基地がある呉の港。アジやメバルが好調で、大和ミュージアム観光と合わせて楽しめる。",
-    latitude: 34.2427, longitude: 132.5617,
+    latitude: 34.2329, longitude: 132.6290,
     address: "〒737-0051 広島県呉市1丁目国道31号",
     accessInfo: "JR呉駅から徒歩約10分。広島呉道路呉ICから約10分。",
     region: localRegion("r108"), spotType: "port", difficulty: "beginner",
@@ -2422,7 +2422,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s323", name: "竹原港", slug: "takehara-port",
     description: "安芸の小京都・竹原の港。穏やかな瀬戸内海でメバルやカサゴが狙える。大久野島（うさぎ島）への船も出る。",
-    latitude: 34.3396, longitude: 132.9153,
+    latitude: 34.3283, longitude: 132.9144,
     address: "〒725-0026 広島県竹原市港町一丁目",
     accessInfo: "JR竹原駅から徒歩約15分。山陽自動車道河内ICから約30分。",
     region: localRegion("r109"), spotType: "port", difficulty: "beginner",
@@ -2446,7 +2446,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s324", name: "萩港", slug: "hagi-port",
     description: "幕末の志士を輩出した萩の港。日本海に面し、アジやアオリイカが好調。城下町観光も楽しめる。",
-    latitude: 34.4193, longitude: 131.4032,
+    latitude: 34.4380, longitude: 131.4037,
     address: "〒758-0021 山口県萩市東浜崎町",
     accessInfo: "JR萩駅から車で約10分。中国自動車道美祢東JCTから約40分。",
     region: localRegion("r110"), spotType: "port", difficulty: "beginner",
@@ -2637,7 +2637,7 @@ export const extraSpots: FishingSpot[] = [
   },{
     id: "s334", name: "須崎港", slug: "susaki-port",
     description: "高知県中部の港。鍋焼きラーメンで有名な街。アジやカマスが好調で、穏やかな湾内で初心者にもおすすめ。",
-    latitude: 33.3598, longitude: 133.2692,
+    latitude: 33.3928, longitude: 133.3036,
     address: "〒785-0009 高知県須崎市久礼須崎線",
     accessInfo: "JR須崎駅から徒歩約10分。高知自動車道須崎東ICから約10分。",
     region: localRegion("r116"), spotType: "port", difficulty: "beginner",
@@ -2854,7 +2854,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s349", name: "佐伯港", slug: "saiki-port",
     description: "大分県南部の港。リアス式海岸で魚種が豊富。アジやブリの回遊があり、寿司の街としても有名。",
-    latitude: 32.9612, longitude: 131.9017,
+    latitude: 32.9786, longitude: 131.9153,
     address: "〒876-0857 大分県佐伯市常盤東町中央通り",
     accessInfo: "JR佐伯駅から車で約10分。東九州自動車道佐伯ICから約10分。",
     region: localRegion("r123"), spotType: "port", difficulty: "intermediate",
@@ -2875,7 +2875,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s350", name: "臼杵港", slug: "usuki-port",
     description: "大分県臼杵市の港。臼杵石仏で有名な歴史の街。穏やかな臼杵湾でアジやメバルが好調。",
-    latitude: 33.1312, longitude: 131.8017,
+    latitude: 33.1297, longitude: 131.8152,
     address: "〒875-0011 大分県臼杵市昭和（臼杵港）",
     accessInfo: "JR臼杵駅から徒歩約15分。東九州自動車道臼杵ICから約10分。",
     region: localRegion("r124"), spotType: "port", difficulty: "beginner",
