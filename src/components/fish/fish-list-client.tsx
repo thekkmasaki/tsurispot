@@ -81,7 +81,7 @@ const FISHING_CATEGORY_MAP: Record<string, FishingCategory> = {
   shiira: "pelagic",
   soudagatuo: "pelagic",
   katsuo: "pelagic",
-  rouninaji: "pelagic",
+  rouninaji: "pelagic", // 旧slug互換
   shimaaji: "pelagic",
   // フラットフィッシュ
   hirame: "flatfish",
@@ -119,10 +119,12 @@ const FISHING_CATEGORY_MAP: Record<string, FishingCategory> = {
   raigyo: "freshwater_sub",
   hasu: "freshwater_sub",
   itou: "freshwater_sub",
-  biwako_oonamazu: "freshwater_sub",
+  biwako_oonamazu: "freshwater_sub", // 旧slug互換
   biwamasu: "freshwater_sub",
   himemasu: "freshwater_sub",
-  browntrout: "freshwater_sub",
+  browntrout: "freshwater_sub", // 旧slug互換
+  "brown-trout": "freshwater_sub",
+  "biwako-oonamazu": "freshwater_sub",
   unagi: "freshwater_sub",
   sakuramasu: "freshwater_sub",
   tenagaebi: "freshwater_sub",
@@ -158,10 +160,39 @@ const FISHING_CATEGORY_MAP: Record<string, FishingCategory> = {
   yariika: "squid_octopus",
   surumeika: "squid_octopus",
   kouika: "squid_octopus",
+  "kensaki-ika": "squid_octopus",
   madako: "squid_octopus",
   iidako: "squid_octopus",
   watarigani: "squid_octopus",
   nokogirigazami: "squid_octopus",
+  // 追加の堤防・磯魚
+  anago: "shore",
+  utsubo: "shore",
+  eso: "shore",
+  houbou: "shore",
+  dochizame: "shore",
+  nekozame: "shore",
+  hoshizame: "shore",
+  koshoudai: "shore",
+  akame: "shore",
+  hirasuzuki: "shore",
+  taman: "shore",
+  oonibe: "shore",
+  kibire: "shore",
+  // 追加の根魚
+  hata: "rockfish",
+  isaki: "rockfish",
+  ishigakidai: "rockfish",
+  // 追加の青物
+  "rounin-aji": "pelagic",
+  // 追加の回遊魚・中深海魚
+  kinmedai: "migratory",
+  akamutsu: "migratory",
+  madara: "migratory",
+  mutsu: "migratory",
+  amadai: "migratory",
+  itoyoridai: "migratory",
+  medai: "migratory",
 };
 
 function getFishingCategory(fish: FishSpecies): FishingCategory | null {
