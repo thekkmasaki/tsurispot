@@ -348,7 +348,7 @@ export function FishListClient({
           </div>
 
           {/* 釣りカテゴリフィルター */}
-          <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+          <div className="flex flex-wrap gap-2 pb-1">
             <button
               onClick={() => setActiveFishingCategory(null)}
               className="min-h-[40px] shrink-0 focus:outline-none"
