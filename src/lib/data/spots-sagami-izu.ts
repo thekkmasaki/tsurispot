@@ -719,7 +719,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si20", name: "爪木崎", slug: "tsumekizaki",
     description: "須崎半島の先端に位置する岬。水仙の群生地としても有名だが、磯釣りの一級ポイント。メジナ、イシダイ、クロダイが狙えるほか、回遊魚のショアジギングも実績あり。",
-    latitude: 34.6420, longitude: 138.9780, address: "〒415-0014 静岡県下田市須崎1327",
+    latitude: 34.6420, longitude: 138.9780, address: "〒415-0014 静岡県下田市須崎（爪木崎）",
     accessInfo: "伊豆急行伊豆急下田駅からバスで約15分、爪木崎バス停下車徒歩約10分。",
     region: region("r9"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "爪木崎公園駐車場あり（有料）",
