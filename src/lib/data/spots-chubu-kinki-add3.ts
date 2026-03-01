@@ -2686,7 +2686,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
     id: "fw445", name: "長良川・郡上八幡", slug: "nagaragawa-gujo-hachiman",
     description: "日本三大清流の長良川、郡上八幡エリアはアユの友釣りの聖地。夏の友釣りシーズンには全国から釣り人が集まる。ヤマメ・イワナの渓流釣りも楽しめる。",
     latitude: 35.7480, longitude: 136.9650,
-    address: "〒501-4214 岐阜県郡上市八幡町相生（長良川郡上地区）",
+    address: "〒501-4236 岐阜県郡上市八幡町相生（長良川郡上地区）",
     accessInfo: "東海北陸自動車道郡上八幡ICから約5分。長良川鉄道郡上八幡駅から徒歩約10分。",
     region: localRegion("r3320"), spotType: "river", difficulty: "advanced",
     isFree: false, hasParking: true, parkingDetail: "河川沿い駐車スペースあり",
