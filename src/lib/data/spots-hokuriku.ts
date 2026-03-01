@@ -55,7 +55,7 @@ export const hokurikuSpots: FishingSpot[] = [
   {
     id: "s444", name: "直江津港", slug: "naoetsu-port",
     description: "上越市の日本海に面した大港。広い岸壁でサビキ釣りからショアジギングまで楽しめる。春のホタルイカ接岸時期は特に賑わう。",
-    latitude: 37.1740, longitude: 138.2280,
+    latitude: 37.17910, longitude: 138.25230,
     address: "〒942-0011 新潟県上越市港町2丁目9-1",
     accessInfo: "えちごトキめき鉄道直江津駅から徒歩約15分。北陸自動車道上越ICから約10分。",
     region: region("r3"), spotType: "port", difficulty: "beginner",
@@ -86,7 +86,7 @@ export const hokurikuSpots: FishingSpot[] = [
   {
     id: "s445", name: "寺泊港", slug: "teradomari-port",
     description: "魚のアメ横と呼ばれる鮮魚市場に隣接した港。アジやキスが安定して釣れ、観光と釣りを同時に楽しめる人気スポット。",
-    latitude: 37.6290, longitude: 138.7580,
+    latitude: 37.64080, longitude: 138.76120,
     address: "〒940-2502 新潟県長岡市寺泊下荒町（寺泊港）",
     accessInfo: "JR越後線寺泊駅からバスで約10分。北陸自動車道中之島見附ICから約30分。",
     region: localRegion("r146"), spotType: "port", difficulty: "beginner",
@@ -139,7 +139,7 @@ export const hokurikuSpots: FishingSpot[] = [
   {
     id: "s447", name: "柏崎港", slug: "kashiwazaki-port",
     description: "柏崎市の中心部に近い港。堤防が長く伸び、アジやサバのサビキ釣りからエギングまで多彩。夕日が美しいスポットとしても知られる。",
-    latitude: 37.3620, longitude: 138.5570,
+    latitude: 37.37000, longitude: 138.53780,
     address: "〒945-0853 新潟県柏崎市番神2丁目",
     accessInfo: "JR信越本線柏崎駅から車で約10分。北陸自動車道柏崎ICから約15分。",
     region: localRegion("r147"), spotType: "breakwater", difficulty: "beginner",
@@ -449,7 +449,7 @@ export const hokurikuSpots: FishingSpot[] = [
   {
     id: "s458", name: "三国港突堤", slug: "mikuni-tottei",
     description: "九頭竜川河口に位置する三国港。堤防先端は潮通しが良く、クロダイやシーバスの好ポイント。夕陽の名所としても有名。",
-    latitude: 36.2520, longitude: 136.1480,
+    latitude: 36.21870, longitude: 136.13030,
     address: "〒913-0056 福井県坂井市三国町宿（三国港）",
     accessInfo: "えちぜん鉄道三国港駅から徒歩約10分。北陸自動車道金津ICから約20分。",
     region: localRegion("r149"), spotType: "breakwater", difficulty: "intermediate",
@@ -720,7 +720,7 @@ export const hokurikuSpots: FishingSpot[] = [
   {
     id: "s1087", name: "羽咋市滝港", slug: "hakui-taki-port",
     description: "千里浜なぎさドライブウェイの近くにある滝港。日本海に面した好漁場で、アジやキスが安定して釣れる。春のホタルイカ接岸も見られる。",
-    latitude: 36.8950, longitude: 136.7490,
+    latitude: 36.92230, longitude: 136.75430,
     address: "〒925-0163 石川県羽咋市滝町（滝港）",
     accessInfo: "JR七尾線羽咋駅から車で約10分。のと里山海道千里浜ICから約5分。",
     region: localRegion("r148"), spotType: "port", difficulty: "beginner",
@@ -802,7 +802,7 @@ export const hokurikuSpots: FishingSpot[] = [
   {
     id: "s1090", name: "聖籠町網代浜", slug: "seiro-ajirohama",
     description: "新潟市北部の聖籠町にある海水浴場横の釣りポイント。広いサーフからキスの投げ釣りが楽しめ、夏場は家族連れに人気。",
-    latitude: 37.9920, longitude: 139.1920,
+    latitude: 38.00180, longitude: 139.26160,
     address: "〒957-0117 新潟県北蒲原郡聖籠町網代浜（聖籠町網代浜）",
     accessInfo: "JR白新線佐々木駅から車で約15分。日本海東北道聖籠新発田ICから約10分。",
     region: region("r3"), spotType: "beach", difficulty: "beginner",
@@ -832,7 +832,7 @@ export const hokurikuSpots: FishingSpot[] = [
   {
     id: "s1091", name: "伏木港", slug: "fushiki-port",
     description: "高岡市の伏木港は万葉集の歌人・大伴家持ゆかりの地。古くからの交易港で、アジやカマスの釣果が安定。秋にはイナダの回遊も。",
-    latitude: 36.7960, longitude: 137.0440,
+    latitude: 36.78060, longitude: 137.04890,
     address: "〒933-0111 富山県高岡市伏木国分（伏木港）",
     accessInfo: "JR氷見線伏木駅から徒歩約10分。能越自動車道高岡北ICから約15分。",
     region: region("r21"), spotType: "port", difficulty: "beginner",

@@ -146,7 +146,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2500", name: "金沢港", slug: "kanazawa-ko",
     description: "金沢市の中心的な漁港。大野川河口に位置し、シーバスやクロダイのルアー釣りが盛ん。サビキでアジ・イワシも安定して釣れ、秋にはアオリイカも狙える人気スポット。",
-    latitude: 36.6120, longitude: 136.6150,
+    latitude: 36.61780, longitude: 136.60520,
     address: "〒920-0331 石川県金沢市大野町4丁目（金沢港）",
     accessInfo: "北陸自動車道金沢西ICから約15分。JR金沢駅から車で約20分。",
     region: localRegion("r2553"), spotType: "port", difficulty: "beginner",
@@ -168,7 +168,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2501", name: "七尾港", slug: "nanao-ko",
     description: "七尾湾に面した歴史ある港。湾内は穏やかで年間を通じて釣りが楽しめる。クロダイの落とし込み釣りが有名で、サビキでアジ、投げ釣りでキスも好調。",
-    latitude: 37.0430, longitude: 136.9680,
+    latitude: 37.05630, longitude: 136.96810,
     address: "〒926-0041 石川県七尾市府中町（七尾港）",
     accessInfo: "のと里山海道七尾ICから約10分。JR七尾駅から徒歩約15分。",
     region: localRegion("r2551"), spotType: "port", difficulty: "beginner",
@@ -190,7 +190,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2502", name: "輪島港", slug: "wajima-ko",
     description: "能登半島北部の代表的な漁港。朝市で有名だが釣り場としても人気。外海に面しており、メジナやクロダイの磯釣りポイントが点在。秋にはアオリイカも好調。",
-    latitude: 37.3920, longitude: 136.9010,
+    latitude: 37.40390, longitude: 136.91020,
     address: "〒928-0001 石川県輪島市河井町（輪島港）",
     accessInfo: "のと里山海道輪島ICから約10分。JR金沢駅から特急バスで約2時間。",
     region: localRegion("r2550"), spotType: "port", difficulty: "intermediate",
@@ -256,7 +256,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2505", name: "千里浜", slug: "chirihama-tsuri",
     description: "車で走れる砂浜として有名な千里浜なぎさドライブウェイ。投げ釣りでキス・カレイが狙える広大なサーフポイント。夏場のキス釣りは特に人気が高い。",
-    latitude: 36.8200, longitude: 136.7620,
+    latitude: 36.890600, longitude: 136.76970,
     address: "〒925-0054 石川県羽咋市千里浜町（千里浜なぎさドライブウェイ）",
     accessInfo: "のと里山海道千里浜ICすぐ。JR羽咋駅から車で約10分。",
     region: localRegion("r2554"), spotType: "beach", difficulty: "beginner",
@@ -322,7 +322,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2508", name: "福浦港", slug: "fukuura-ko-ishikawa",
     description: "日本最古の木造灯台がある風情ある港。能登外浦に面し潮通しが良い。メジナ・クロダイの磯釣りの好ポイントで、秋のアオリイカも実績が高い。",
-    latitude: 37.1390, longitude: 136.7480,
+    latitude: 37.08060, longitude: 136.73780,
     address: "〒925-0315 石川県羽咋郡志賀町福浦港（福浦港）",
     accessInfo: "のと里山海道西山ICから約20分。金沢市から車で約1時間。",
     region: localRegion("r2554"), spotType: "port", difficulty: "intermediate",
@@ -412,7 +412,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2512", name: "三国港", slug: "mikuni-ko",
     description: "九頭竜川河口に位置する福井県を代表する漁港。越前ガニで有名だが釣りも盛ん。シーバスのルアー釣りの好ポイントで、サビキでアジ・イワシも狙える。",
-    latitude: 36.2520, longitude: 136.1470,
+    latitude: 36.21870, longitude: 136.13030,
     address: "〒913-0056 福井県坂井市三国町宿（三国港）",
     accessInfo: "北陸自動車道金津ICから約20分。えちぜん鉄道三国港駅から徒歩約5分。",
     region: localRegion("r2564"), spotType: "port", difficulty: "beginner",
@@ -632,7 +632,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2522", name: "魚津港", slug: "uozu-ko",
     description: "蜃気楼で有名な魚津市の港。富山湾の深い海溝に近く、ホタルイカの名産地。アジ・サバのサビキが好調で、秋〜冬はメバルやカサゴの根魚も狙える。",
-    latitude: 36.8270, longitude: 137.4040,
+    latitude: 36.81990, longitude: 137.38940,
     address: "〒937-0066 富山県魚津市港町（魚津港）",
     accessInfo: "北陸自動車道魚津ICから約10分。あいの風とやま鉄道魚津駅から車で約5分。",
     region: localRegion("r2540"), spotType: "port", difficulty: "beginner",
@@ -654,7 +654,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2523", name: "富山新港", slug: "toyama-shinko",
     description: "富山市の大型港。広い岸壁からサビキでアジ・イワシが手軽に釣れ、投げ釣りでキス・カレイも好調。秋にはサゴシのナブラが立つことも。",
-    latitude: 36.7660, longitude: 137.1350,
+    latitude: 36.76570, longitude: 137.12370,
     address: "〒934-0004 富山県射水市港町（新湊漁港内海老江地区）",
     accessInfo: "北陸自動車道小杉ICから約20分。あいの風とやま鉄道越中大門駅から車で約15分。",
     region: localRegion("r2542"), spotType: "port", difficulty: "beginner",
@@ -876,7 +876,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2533", name: "衣浦港", slug: "kinuura-ko",
     description: "衣浦湾に面した大型港。広い岸壁からハゼのちょい投げが人気で、秋のハゼ釣りシーズンは多くの釣り人で賑わう。セイゴやクロダイも狙え、年間を通じて楽しめる。",
-    latitude: 34.8930, longitude: 136.9530,
+    latitude: 34.88210, longitude: 136.94450,
     address: "〒475-0023 愛知県半田市亀崎町9丁目（亀崎港）",
     accessInfo: "知多半島道路半田ICから約10分。JR亀崎駅から徒歩約15分。",
     region: localRegion("r2500"), spotType: "port", difficulty: "beginner",
@@ -944,7 +944,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2536", name: "沼津港", slug: "numazu-ko",
     description: "駿河湾に面した沼津市の大型港。深海魚の水揚げで有名だが、釣りではアジ・サバのサビキが好調。秋のアオリイカ、冬のカサゴ・メバルも人気。グルメも楽しめる。",
-    latitude: 35.0900, longitude: 138.8590, address: "〒410-0845 静岡県沼津市千本港町（沼津港）",
+    latitude: 35.081700, longitude: 138.85140, address: "〒410-0845 静岡県沼津市千本港町（沼津港）",
     accessInfo: "東名高速沼津ICから約15分。JR沼津駅からバスで約10分。",
     region: localRegion("r2512"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺有料駐車場あり",
@@ -986,7 +986,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2538", name: "田子の浦港", slug: "tagonoura-ko",
     description: "富士市の田子の浦港はしらす漁で有名。釣りではサビキでアジ・イワシが好調。投げ釣りでキス、秋にはタチウオも狙える。富士山を眺めながらの釣りが魅力。",
-    latitude: 35.1330, longitude: 138.6810, address: "〒416-0937 静岡県富士市前田（田子の浦港）",
+    latitude: 35.14430, longitude: 138.69730, address: "〒416-0937 静岡県富士市前田（田子の浦港）",
     accessInfo: "東名高速富士ICから約15分。JR吉原駅から車で約10分。",
     region: localRegion("r2513"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
@@ -1090,7 +1090,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2543", name: "御前崎港", slug: "omaezaki-ko",
     description: "遠州灘と駿河湾の境界に位置する御前崎港。潮通し抜群で回遊魚の実績が高い。ショアジギングでブリ・カンパチ、投げ釣りでキス、サビキでアジが狙える。",
-    latitude: 34.6179, longitude: 138.2203, address: "〒437-1621 静岡県御前崎市御前崎（御前崎港）",
+    latitude: 34.6100, longitude: 138.2158, address: "〒437-1621 静岡県御前崎市御前崎（御前崎港）",
     accessInfo: "東名高速相良牧之原ICから約30分。JR菊川駅から車で約30分。",
     region: localRegion("r2511"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
@@ -1261,7 +1261,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2551", name: "二色の浜", slug: "nishikinoham-tsuri",
     description: "貝塚市の二色の浜は白砂の美しいビーチ。投げ釣りでキス・カレイが狙え、夏場のキス釣りは特に人気。隣接する人工島からのサビキ釣りも楽しめる。",
-    latitude: 34.4380, longitude: 135.3560, address: "〒597-0071 大阪府貝塚市海塚二丁目",
+    latitude: 34.43350, longitude: 135.33970, address: "〒597-0071 大阪府貝塚市海塚二丁目",
     accessInfo: "南海本線二色浜駅から徒歩約10分。阪和自動車道貝塚ICから約10分。",
     region: localRegion("r2571"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海水浴場駐車場あり（夏季有料）",
@@ -1759,7 +1759,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2575", name: "引本港", slug: "hikimoto-ko",
     description: "紀北町の引本港はリアス式海岸の奥に位置する穏やかな港。グレ（メジナ）の実績が高く、磯釣りファンに人気。サビキでアジ、エギングでアオリイカも狙える。",
-    latitude: 34.0850, longitude: 136.2400, address: "〒519-3408 三重県北牟婁郡紀北町引本浦（引本港）",
+    latitude: 34.10690, longitude: 136.249600, address: "〒519-3408 三重県北牟婁郡紀北町引本浦（引本港）",
     accessInfo: "紀勢自動車道紀伊長島ICから約20分。JR紀伊長島駅から車で約20分。",
     region: localRegion("r2532"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港内駐車スペースあり",
@@ -1926,7 +1926,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2583", name: "宮津港", slug: "miyazu-ko",
     description: "天橋立の近くに位置する宮津港。日本海に面した穏やかな港で、サビキでアジ・サバが好調。投げ釣りでキス、秋はアオリイカも狙える。観光とセットで楽しめる。",
-    latitude: 35.5350, longitude: 135.1970, address: "〒626-0027 京都府宮津市外側",
+    latitude: 35.54690, longitude: 135.20000, address: "〒626-0027 京都府宮津市外側",
     accessInfo: "京都縦貫自動車道宮津天橋立ICから約5分。京都丹後鉄道宮津駅から徒歩約10分。",
     region: localRegion("r2590"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺有料駐車場あり",
@@ -2032,7 +2032,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2588", name: "相生港", slug: "aioi-ko",
     description: "播磨灘に面した相生市の港。牡蠣養殖が盛んだが、釣り場としてもアジ・メバルが好調。チヌのダンゴ釣りの人気ポイントで、穏やかな湾内で初心者向き。",
-    latitude: 34.8060, longitude: 134.4690, address: "〒678-0031 兵庫県相生市旭三丁目",
+    latitude: 34.79770, longitude: 134.47470, address: "〒678-0031 兵庫県相生市旭三丁目",
     accessInfo: "山陽自動車道龍野西ICから約15分。JR相生駅から車で約5分。",
     region: localRegion("r2580"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
@@ -2136,7 +2136,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2593", name: "柴山港", slug: "shibayama-ko",
     description: "香美町の柴山港は松葉ガニの水揚げで有名。日本海に面し、アジ・メバル・カサゴが通年で好調。秋のアオリイカも実績が高い穴場ポイント。",
-    latitude: 35.6480, longitude: 134.6200, address: "〒669-6544 兵庫県香美町香住区矢田香住村岡線",
+    latitude: 35.65370, longitude: 134.659600, address: "〒669-6544 兵庫県香美町香住区矢田香住村岡線",
     accessInfo: "北近畿豊岡自動車道八鹿氷ノ山ICから約50分。JR柴山駅から徒歩約10分。",
     region: localRegion("r2580"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",

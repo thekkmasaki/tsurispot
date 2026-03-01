@@ -155,7 +155,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "s3250", name: "常滑港", slug: "tokoname-ko-add3",
     description: "知多半島西岸の漁港。セントレア空港を望む好ロケーションで、サビキ釣りのアジ・サバが安定。秋にはタチウオも回遊する。",
-    latitude: 34.8880, longitude: 136.8310,
+    latitude: 34.87970, longitude: 136.83590,
     address: "〒479-0848 愛知県常滑市港町5丁目（常滑港）",
     accessInfo: "名鉄常滑線常滑駅から徒歩約15分。知多横断道路常滑ICから約5分。",
     region: localRegion("r3250"), spotType: "port", difficulty: "beginner",
@@ -396,7 +396,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "s3261", name: "浜島港", slug: "hamajima-ko-add3",
     description: "志摩市南部のリアス式海岸に面した港。アオリイカのエギングが盛んで、秋には良型の新子が回遊する。グレ・チヌの実績も高い。",
-    latitude: 34.3120, longitude: 136.7850,
+    latitude: 34.29900, longitude: 136.75750,
     address: "〒517-0404 三重県志摩市浜島町浜島（浜島港）",
     accessInfo: "近鉄志摩線鵜方駅から三重交通バスで約20分。伊勢自動車道伊勢ICから約50分。",
     region: localRegion("r3261"), spotType: "port", difficulty: "intermediate",
@@ -482,7 +482,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "s3265", name: "松阪港", slug: "matsusaka-ko-add3",
     description: "伊勢湾に面した松阪市の港。ハゼ・セイゴのちょい投げが人気で、秋にはサヨリも回遊する。穏やかな港内でファミリー向け。",
-    latitude: 34.5520, longitude: 136.5580,
+    latitude: 34.60230, longitude: 136.54190,
     address: "〒515-0102 三重県松阪市松名瀬町（松名瀬海岸）",
     accessInfo: "JR・近鉄松阪駅から車で約15分。伊勢自動車道松阪ICから約20分。",
     region: localRegion("r3265"), spotType: "port", difficulty: "beginner",
@@ -592,7 +592,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "s3270", name: "御前崎港", slug: "omaezaki-ko-add3",
     description: "遠州灘と駿河湾の境に位置する大型港。カツオ・マグロの水揚げで有名だが、堤防からもアジ・カマスのサビキ釣りやヒラメのルアー釣りが楽しめる。",
-    latitude: 34.6350, longitude: 138.2280,
+    latitude: 34.61000, longitude: 138.21580,
     address: "〒437-1623 静岡県御前崎市港（御前崎港）",
     accessInfo: "JR菊川駅から車で約30分。東名高速牧之原ICから約25分。",
     region: localRegion("r3270"), spotType: "port", difficulty: "intermediate",
@@ -788,7 +788,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "s3279", name: "田子の浦港", slug: "tagonoura-ko-add3",
     description: "富士市の駿河湾に面した港。富士山を正面に望む絶景ポイント。サビキでアジ・サバ、しらすパターンのシーバスも期待できる。",
-    latitude: 35.1350, longitude: 138.6820,
+    latitude: 35.14430, longitude: 138.69730,
     address: "〒416-0937 静岡県富士市前田（田子の浦港）",
     accessInfo: "JR吉原駅から車で約10分。東名高速富士ICから約15分。",
     region: localRegion("r3279"), spotType: "port", difficulty: "beginner",
@@ -1058,7 +1058,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "s3291", name: "魚津港", slug: "uozu-ko-add3",
     description: "蜃気楼で有名な魚津市の港。富山湾の深い海底谷に近く魚影が濃い。アジ・サバのサビキ釣り、ホタルイカシーズンには身投げも見られる人気スポット。",
-    latitude: 36.8280, longitude: 137.3950,
+    latitude: 36.81990, longitude: 137.38940,
     address: "〒937-0066 富山県魚津市港町（魚津港）",
     accessInfo: "北陸自動車道魚津ICから約10分。あいの風とやま鉄道魚津駅から車で約5分。",
     region: localRegion("r3411"), spotType: "port", difficulty: "beginner",
@@ -1146,7 +1146,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "s3295", name: "岩瀬浜", slug: "iwasehama-toyama",
     description: "富山市北部の岩瀬浜は砂浜と漁港が隣接する人気スポット。投げ釣りでキス・カレイ、港内ではサビキでアジ、シーバスのルアー釣りも盛ん。神通川河口に近い。",
-    latitude: 36.7480, longitude: 137.2250,
+    latitude: 36.76450, longitude: 137.23780,
     address: "〒931-8361 富山県富山市岩瀬白山町（岩瀬漁港）",
     accessInfo: "北陸自動車道富山ICから約20分。富山ライトレール岩瀬浜駅から徒歩約5分。",
     region: localRegion("r3411"), spotType: "beach", difficulty: "beginner",
@@ -1391,7 +1391,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "s3306", name: "深日港", slug: "fuke-ko",
     description: "大阪府最南端の漁港。紀淡海峡に近く潮通しが良い。アジのサビキ釣りはもちろん、カワハギやクロダイの実績も高い。秋のアオリイカも人気のポイント。",
-    latitude: 34.3250, longitude: 135.1580,
+    latitude: 34.32060, longitude: 135.13840,
     address: "〒599-0399 大阪府岬町深日和歌山阪南線",
     accessInfo: "阪和自動車道泉南ICから約25分。南海多奈川線深日港駅から徒歩約5分。",
     region: localRegion("r3288"), spotType: "port", difficulty: "beginner",
@@ -1482,7 +1482,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "s3310", name: "福良港", slug: "fukura-ko-add3",
     description: "淡路島南端の港で鳴門海峡に面する。渦潮観光の拠点だが、釣りでも人気が高い。潮通しが良くアジ・サバのサビキは安定。クロダイやアオリイカの実績も高い。",
-    latitude: 34.2550, longitude: 134.7250,
+    latitude: 34.25270, longitude: 134.71600,
     address: "〒656-0599 兵庫県南あわじ市福良甲",
     accessInfo: "神戸淡路鳴門自動車道淡路島南ICから約5分。福良バスターミナルすぐ。",
     region: localRegion("r3299"), spotType: "port", difficulty: "beginner",
@@ -1504,7 +1504,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "s3311", name: "洲本港", slug: "sumoto-ko-add3",
     description: "淡路島東岸の洲本城下に位置する港。温泉街に近く観光と釣りが両立できる。サビキでアジ、投げ釣りでキス、秋のアオリイカ、冬のメバルと年間通じて楽しめる。",
-    latitude: 34.3420, longitude: 134.8920,
+    latitude: 34.34810, longitude: 134.90090,
     address: "〒656-0025 兵庫県洲本市本町七丁目",
     accessInfo: "神戸淡路鳴門自動車道洲本ICから約10分。洲本バスセンターから徒歩約10分。",
     region: localRegion("r3294"), spotType: "port", difficulty: "beginner",
@@ -1592,7 +1592,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "s3315", name: "津居山港", slug: "tsuiyama-ko",
     description: "豊岡市の円山川河口に位置する港。松葉ガニの水揚げで知られるが、釣りではシーバスのルアー釣りが盛ん。河口域でハゼ、堤防からアジも楽しめる。",
-    latitude: 35.6180, longitude: 134.8180,
+    latitude: 35.64730, longitude: 134.83170,
     address: "〒669-6101 兵庫県豊岡市城崎城崎町楽々浦豊岡竹野線",
     accessInfo: "北近畿豊岡自動車道豊岡ICから約20分。JR城崎温泉駅から車で約10分。",
     region: localRegion("r3298"), spotType: "port", difficulty: "intermediate",
@@ -1658,7 +1658,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "s3318", name: "相生港", slug: "aioi-ko-add3",
     description: "播磨灘西部の相生湾に位置する港。湾内は穏やかで年間を通じて釣りが楽しめる。チヌの落とし込み釣り、投げ釣りでカレイ、サビキでアジが好調。",
-    latitude: 34.8050, longitude: 134.4680,
+    latitude: 34.79770, longitude: 134.47470,
     address: "〒678-0031 兵庫県相生市旭四丁目相生停車場線",
     accessInfo: "山陽自動車道竜野西ICから約15分。JR相生駅から徒歩約10分。",
     region: localRegion("r3297"), spotType: "port", difficulty: "beginner",
@@ -1724,7 +1724,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "s3321", name: "柴山港", slug: "shibayama-ko",
     description: "香美町の日本海側に面した漁港。松葉ガニの水揚げで有名だが、釣りでもアジ・メバル・アオリイカが好調。磯場も隣接し、メジナの磯釣りも楽しめる。",
-    latitude: 35.6580, longitude: 134.5780,
+    latitude: 35.65370, longitude: 134.65960,
     address: "〒669-6544 兵庫県香美町香住区鎧鎧停車場線",
     accessInfo: "北近畿豊岡自動車道八鹿氷ノ山ICから約60分。JR柴山駅から徒歩約10分。",
     region: localRegion("r3293"), spotType: "port", difficulty: "beginner",
@@ -1837,7 +1837,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "s3326", name: "宮津港", slug: "miyazu-ko-add3",
     description: "天橋立で有名な宮津市の港。宮津湾に面し波が穏やか。サビキでアジ・サバ、投げ釣りでキス・カレイ、秋のアオリイカも楽しめる。観光と釣りの両立が可能。",
-    latitude: 35.5350, longitude: 135.1950,
+    latitude: 35.54690, longitude: 135.20000,
     address: "〒626-0012 京都府宮津市本町宮津停車場線",
     accessInfo: "京都縦貫自動車道宮津天橋立ICから約5分。京都丹後鉄道宮津駅から徒歩約10分。",
     region: localRegion("r3301"), spotType: "port", difficulty: "beginner",
@@ -2060,7 +2060,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "s3336", name: "海南港", slug: "kainan-ko-add3",
     description: "和歌山市の南に位置する海南市の港。紀淡海峡に近く潮通しが良い。サビキでアジ・サバ、投げ釣りでキス、秋のアオリイカも好調。アクセスが良く手軽に楽しめる。",
-    latitude: 34.1520, longitude: 135.1850,
+    latitude: 34.15960, longitude: 135.15560,
     address: "〒640-8511 和歌山県和歌山市",
     accessInfo: "阪和自動車道海南ICから約10分。JRきのくに線海南駅から車で約5分。",
     region: localRegion("r3311"), spotType: "port", difficulty: "beginner",
@@ -2214,7 +2214,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "s3343", name: "加太港", slug: "kada-ko-add3",
     description: "和歌山市北西部の漁港。友ヶ島を望む紀淡海峡の好ロケーション。潮通しが良くマダイ・アジ・アオリイカの実績が高い。船釣りの基地としても有名。",
-    latitude: 34.2850, longitude: 135.0680,
+    latitude: 34.27760, longitude: 135.06850,
     address: "〒640-8511 和歌山県和歌山市深山岬加太港線",
     accessInfo: "阪和自動車道和歌山ICから約30分。南海加太線加太駅から徒歩約15分。",
     region: localRegion("r3312"), spotType: "port", difficulty: "intermediate",
@@ -2396,7 +2396,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "s3351", name: "引本港", slug: "hikimoto-ko",
     description: "尾鷲市の漁港。熊野灘に面し黒潮の恩恵を受ける。アジ・サバのサビキはもちろん、メジナ・クロダイの磯釣り的な釣りも堤防から楽しめる好ポイント。",
-    latitude: 34.0780, longitude: 136.2150,
+    latitude: 34.10690, longitude: 136.24960,
     address: "〒519-3408 三重県北牟婁郡紀北町引本浦（引本港）",
     accessInfo: "紀勢自動車道海山ICから約10分。JR紀伊長島駅から車で約20分。",
     region: localRegion("r3262"), spotType: "port", difficulty: "beginner",
@@ -2462,7 +2462,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "s3354", name: "七里御浜", slug: "shichiri-mihama",
     description: "世界遺産・熊野古道に隣接する約22kmの砂利浜。サーフフィッシングの名所で、投げ釣りでキス、ルアーでヒラメ・シーバスが狙える。ショアジギングでブリも。",
-    latitude: 33.8580, longitude: 136.0450,
+    latitude: 33.86470, longitude: 136.08080,
     address: "〒519-5204 三重県南牟婁郡御浜町阿田和（阿田和漁港）",
     accessInfo: "紀勢自動車道紀宝ICから約5分。JR阿田和駅から徒歩約10分。",
     region: localRegion("r3263"), spotType: "beach", difficulty: "intermediate",
@@ -2487,7 +2487,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "fw435", name: "長浜港", slug: "nagahama-ko-biwako",
     description: "琵琶湖北東岸の長浜市に位置する港。ブラックバスの実績が高く、春の産卵期は特に大型が狙える。ウィードエリアが豊富でワームやクランクベイトが有効。",
-    latitude: 35.3850, longitude: 136.2680,
+    latitude: 35.37200, longitude: 136.26310,
     address: "〒526-0023 滋賀県長浜市長浜分木町",
     accessInfo: "北陸自動車道長浜ICから約10分。JR長浜駅から徒歩約10分。",
     region: localRegion("r3315"), spotType: "river", difficulty: "intermediate",
@@ -2507,7 +2507,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "fw436", name: "彦根港", slug: "hikone-ko-biwako",
     description: "彦根城下の琵琶湖東岸に位置する港。春〜秋のブラックバス釣りが人気で、港内の岸壁から手軽に楽しめる。冬はワカサギ釣りのボートも出航する。",
-    latitude: 35.2780, longitude: 136.2550,
+    latitude: 35.28380, longitude: 136.24240,
     address: "〒522-0062 滋賀県彦根市彦根Osue-cho",
     accessInfo: "名神高速彦根ICから約10分。JR彦根駅から徒歩約15分。",
     region: localRegion("r3316"), spotType: "river", difficulty: "intermediate",
@@ -2547,7 +2547,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "fw438", name: "高島・知内浜", slug: "takashima-chinaihama",
     description: "琵琶湖西岸の高島市にある浜。比良山系からの清流が流入し水質が良い。ブラックバスに加えトラウト類の実績もある。キャンプ場併設で泊りがけ釣行に最適。",
-    latitude: 35.3880, longitude: 136.0680,
+    latitude: 35.45130, longitude: 136.06030,
     address: "〒520-1592 滋賀県高島市",
     accessInfo: "名神高速京都東ICから約70分。JRマキノ駅から車で約5分。",
     region: localRegion("r3318"), spotType: "river", difficulty: "intermediate",
