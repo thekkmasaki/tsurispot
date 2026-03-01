@@ -1284,7 +1284,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2552", name: "琵琶湖におの浜", slug: "biwako-onohama",
     description: "大津市南部のおの浜は琵琶湖バス釣りの超人気スポット。護岸が整備されアクセス抜群。ブラックバスの実績が高く、ブルーギルも多い。秋〜冬はワカサギも楽しめる。",
-    latitude: 35.0050, longitude: 135.8680, address: "滋賀県大津市におの浜",
+    latitude: 35.0050, longitude: 135.8680, address: "〒520-0801 滋賀県大津市におの浜（琵琶湖）",
     accessInfo: "名神高速大津ICから約10分。JR膳所駅から徒歩約15分。",
     region: localRegion("r2602"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場あり",
@@ -1304,7 +1304,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2553", name: "琵琶湖大津港", slug: "biwako-otsu-ko",
     description: "大津市の中心に位置する琵琶湖の主要港。ブラックバスのほか、ヘラブナやコイ釣りも楽しめる。遊覧船の発着場としても有名で、観光と釣りを両立できる。",
-    latitude: 35.0110, longitude: 135.8590, address: "滋賀県大津市浜大津",
+    latitude: 35.0110, longitude: 135.8590, address: "〒520-0047 滋賀県大津市浜大津（大津港）",
     accessInfo: "京阪電鉄びわ湖浜大津駅から徒歩約3分。名神高速大津ICから約10分。",
     region: localRegion("r2602"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場あり",
@@ -1324,7 +1324,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2554", name: "琵琶湖堅田", slug: "biwako-katata",
     description: "大津市北部の堅田エリアは琵琶湖バス釣りのメッカ。浮御堂周辺は有名ポイントで、ウィードが豊富。バスのほかヘラブナ、ハスも狙える。",
-    latitude: 35.1030, longitude: 135.9270, address: "滋賀県大津市本堅田",
+    latitude: 35.1030, longitude: 135.9270, address: "〒520-0242 滋賀県大津市本堅田（琵琶湖堅田）",
     accessInfo: "湖西道路堅田ICから約5分。JR堅田駅から徒歩約10分。",
     region: localRegion("r2603"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場あり",
@@ -1345,7 +1345,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2555", name: "琵琶湖長浜", slug: "biwako-nagahama",
     description: "長浜市の琵琶湖岸は広大なフラットが広がるバス釣りの好フィールド。春のスポーニングシーズンは大型バスの実績が高い。豊公園周辺が人気ポイント。",
-    latitude: 35.3800, longitude: 136.2700, address: "滋賀県長浜市公園町",
+    latitude: 35.3800, longitude: 136.2700, address: "〒526-0065 滋賀県長浜市公園町（琵琶湖長浜）",
     accessInfo: "北陸自動車道長浜ICから約10分。JR長浜駅から徒歩約5分。",
     region: localRegion("r2600"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "豊公園駐車場あり（有料）",
@@ -1365,7 +1365,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2556", name: "琵琶湖マキノ", slug: "biwako-makino",
     description: "高島市マキノ町は琵琶湖北部の美しいエリア。メタセコイア並木で有名だが、釣りではスモールマウスバスやニジマスの実績もある穴場。知内川河口も好ポイント。",
-    latitude: 35.4720, longitude: 136.0530, address: "滋賀県高島市マキノ町",
+    latitude: 35.4720, longitude: 136.0530, address: "〒520-1812 滋賀県高島市マキノ町知内（琵琶湖マキノ）",
     accessInfo: "湖西道路マキノICから約5分。JRマキノ駅から徒歩約15分。",
     region: localRegion("r2601"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "湖岸駐車場あり",
