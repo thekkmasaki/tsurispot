@@ -1114,7 +1114,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2544", name: "岸和田漁港", slug: "kishiwada-gyoko",
     description: "大阪府南部の代表的な漁港。だんじり祭りで有名だが、釣り場としてもアジ・イワシのサビキが好調。タチウオの夜釣りも人気が高く、年間を通じて釣り人が絶えない。",
-    latitude: 34.4640, longitude: 135.3700, address: "大阪府岸和田市地蔵浜町",
+    latitude: 34.4640, longitude: 135.3700, address: "〒596-0074 大阪府岸和田市大工町疎開道",
     accessInfo: "阪和自動車道岸和田和泉ICから約15分。南海本線岸和田駅からバスで約10分。",
     region: localRegion("r2571"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺有料駐車場あり",
@@ -1135,7 +1135,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2545", name: "泉佐野漁港", slug: "izumisano-gyoko",
     description: "関西空港対岸の大型漁港。サビキでアジ・サバが安定して釣れ、秋にはタチウオの夜釣りが大人気。投げ釣りでキスも狙え、初心者にもおすすめ。",
-    latitude: 34.4120, longitude: 135.3220, address: "大阪府泉佐野市新町",
+    latitude: 34.4120, longitude: 135.3220, address: "〒598-8799 大阪府泉佐野市上町二丁目",
     accessInfo: "阪和自動車道泉佐野ICから約10分。南海本線泉佐野駅から徒歩約15分。",
     region: localRegion("r2571"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内有料駐車場あり",
@@ -1156,7 +1156,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2546", name: "南港", slug: "nanko-tsuri",
     description: "大阪市住之江区の南港エリア。都心部からアクセス良好で、岸壁からサビキでアジ・イワシが手軽に楽しめる。チヌの落とし込み釣りの名所でもある。",
-    latitude: 34.6240, longitude: 135.4200, address: "大阪府大阪市住之江区南港",
+    latitude: 34.6240, longitude: 135.4200, address: "〒559-0033 大阪府大阪市住之江区南港中三丁目",
     accessInfo: "ニュートラム南港東駅から徒歩約10分。阪神高速湾岸線南港北ICから約5分。",
     region: localRegion("r2570"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場あり",
@@ -1177,7 +1177,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2547", name: "舞洲", slug: "maishima-tsuri",
     description: "大阪湾岸の人工島。広い護岸からサビキでアジ・サバが好調。タチウオの夜釣りは関西屈指の実績を誇る。チヌやシーバスのルアー釣りも人気。",
-    latitude: 34.6630, longitude: 135.4010, address: "大阪府大阪市此花区北港緑地",
+    latitude: 34.6630, longitude: 135.4010, address: "〒554-0031 大阪府大阪市此花区常吉二丁目常吉大橋",
     accessInfo: "阪神高速湾岸線北港IC隣接。JRゆめ咲線桜島駅からバスで約15分。",
     region: localRegion("r2570"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場あり",
@@ -1219,7 +1219,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2549", name: "汐見埠頭", slug: "shiomi-futo",
     description: "泉大津市の汐見埠頭は大阪湾岸の定番釣り場。広い岸壁からサビキでアジ・イワシが好調。タチウオの夜釣りや、ちょい投げでハゼも人気。",
-    latitude: 34.5100, longitude: 135.3880, address: "大阪府泉大津市臨海町",
+    latitude: 34.5100, longitude: 135.3880, address: "〒595-0055 大阪府泉大津市汐見町",
     accessInfo: "阪神高速湾岸線泉大津ICから約5分。南海本線泉大津駅から車で約10分。",
     region: localRegion("r2571"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "岸壁沿い駐車スペースあり",
@@ -1240,7 +1240,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2550", name: "貝塚人工島", slug: "kaizuka-jinkoshima",
     description: "貝塚市沖の人工島。護岸からサビキでアジ・イワシが好調で、秋のタチウオは関西有数の実績。投げ釣りでカレイやキスも狙える。",
-    latitude: 34.4450, longitude: 135.3470, address: "大阪府貝塚市二色中町",
+    latitude: 34.4450, longitude: 135.3470, address: "〒596-0014 大阪府貝塚市新浜一丁目阪神高速4号湾岸線",
     accessInfo: "阪和自動車道貝塚ICから約10分。南海本線貝塚駅から車で約10分。",
     region: localRegion("r2571"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "無料駐車場あり",
@@ -1261,7 +1261,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2551", name: "二色の浜", slug: "nishikinoham-tsuri",
     description: "貝塚市の二色の浜は白砂の美しいビーチ。投げ釣りでキス・カレイが狙え、夏場のキス釣りは特に人気。隣接する人工島からのサビキ釣りも楽しめる。",
-    latitude: 34.4380, longitude: 135.3560, address: "大阪府貝塚市澤",
+    latitude: 34.4380, longitude: 135.3560, address: "〒597-0071 大阪府貝塚市海塚二丁目",
     accessInfo: "南海本線二色浜駅から徒歩約10分。阪和自動車道貝塚ICから約10分。",
     region: localRegion("r2571"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海水浴場駐車場あり（夏季有料）",
@@ -1426,7 +1426,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2559", name: "琵琶湖近江八幡", slug: "biwako-omihachiman",
     description: "近江八幡市の琵琶湖岸は水郷地帯が広がる独特のフィールド。ヨシ原が豊富でバスの隠れ家が多い。長命寺港周辺や西の湖が人気ポイント。",
-    latitude: 35.1520, longitude: 136.0970, address: "滋賀県近江八幡市長命寺町（琵琶湖近江八幡）",
+    latitude: 35.1520, longitude: 136.0970, address: "〒523-8558 滋賀県近江八幡市北之庄町（琵琶湖近江八幡）",
     accessInfo: "名神高速竜王ICから約20分。JR近江八幡駅から車で約15分。",
     region: localRegion("r2600"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "長命寺港駐車場あり",
@@ -1905,7 +1905,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2582", name: "伊根漁港", slug: "ine-gyoko",
     description: "舟屋の町並みで有名な伊根町の漁港。日本海に面し潮通しが良い。アオリイカの聖地として知られ、秋のエギングシーズンは特に人気。サビキでアジも好調。",
-    latitude: 35.6780, longitude: 135.2830, address: "京都府伊根町平田",
+    latitude: 35.6780, longitude: 135.2830, address: "〒626-0424 京都府伊根町日出国道178号",
     accessInfo: "京都縦貫自動車道宮津天橋立ICから約30分。天橋立駅からバスで約50分。",
     region: localRegion("r2591"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "町営駐車場あり（有料）",
@@ -1926,7 +1926,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2583", name: "宮津港", slug: "miyazu-ko",
     description: "天橋立の近くに位置する宮津港。日本海に面した穏やかな港で、サビキでアジ・サバが好調。投げ釣りでキス、秋はアオリイカも狙える。観光とセットで楽しめる。",
-    latitude: 35.5350, longitude: 135.1970, address: "京都府宮津市鶴賀",
+    latitude: 35.5350, longitude: 135.1970, address: "〒626-0027 京都府宮津市外側",
     accessInfo: "京都縦貫自動車道宮津天橋立ICから約5分。京都丹後鉄道宮津駅から徒歩約10分。",
     region: localRegion("r2590"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺有料駐車場あり",
@@ -1947,7 +1947,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2584", name: "舞鶴漁港", slug: "maizuru-gyoko",
     description: "舞鶴市は東舞鶴・西舞鶴の2つの港があり、共に釣りが盛ん。サビキでアジ・サバが好調で、チヌのフカセ釣りも人気。港が広く多くのポイントがある。",
-    latitude: 35.4730, longitude: 135.3840, address: "京都府舞鶴市字浜",
+    latitude: 35.4730, longitude: 135.3840, address: "〒625-0087 京都府舞鶴市北吸国道27号",
     accessInfo: "舞鶴若狭自動車道舞鶴東ICから約10分。JR東舞鶴駅から車で約5分。",
     region: localRegion("r2590"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
@@ -1968,7 +1968,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2585", name: "天橋立", slug: "amanohashidate-tsuri",
     description: "日本三景のひとつ天橋立。砂州からの投げ釣りでキス・カレイが狙え、付近の港ではサビキでアジも楽しめる。観光名所の中で釣りができる贅沢なスポット。",
-    latitude: 35.5620, longitude: 135.1850, address: "京都府宮津市文珠",
+    latitude: 35.5620, longitude: 135.1850, address: "〒626-0001 京都府宮津市文珠天の橋立線",
     accessInfo: "京都縦貫自動車道宮津天橋立ICから約10分。京都丹後鉄道天橋立駅から徒歩約5分。",
     region: localRegion("r2590"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "天橋立駐車場あり（有料）",
@@ -1988,7 +1988,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2586", name: "久美浜", slug: "kumihama-tsuri",
     description: "京丹後市の久美浜湾は日本海と砂州で隔てられた汽水域。クロダイやハゼの実績が高く、湾口付近ではアジやアオリイカも狙える。穏やかな湾内で初心者向き。",
-    latitude: 35.6300, longitude: 134.9050, address: "京都府京丹後市久美浜町",
+    latitude: 35.6300, longitude: 134.9050, address: "〒629-3438 京都府京丹後市久美浜町神崎",
     accessInfo: "山陰近畿自動車道京丹後大宮ICから約30分。京都丹後鉄道久美浜駅から車で約5分。",
     region: localRegion("r2591"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "湾岸駐車スペースあり",
@@ -2008,7 +2008,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2587", name: "間人漁港", slug: "taiza-gyoko",
     description: "間人ガニ（松葉ガニ）で全国的に有名な漁港。日本海に面し潮通しが良い。メジナ・クロダイの磯釣りが盛んで、秋のアオリイカも実績が高い。",
-    latitude: 35.7260, longitude: 135.0760, address: "京都府京丹後市丹後町間人",
+    latitude: 35.7260, longitude: 135.0760, address: "〒627-0201 京都府京丹後市",
     accessInfo: "山陰近畿自動車道京丹後大宮ICから約20分。京都丹後鉄道峰山駅から車で約25分。",
     region: localRegion("r2591"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺駐車スペースあり",
@@ -2032,7 +2032,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2588", name: "相生港", slug: "aioi-ko",
     description: "播磨灘に面した相生市の港。牡蠣養殖が盛んだが、釣り場としてもアジ・メバルが好調。チヌのダンゴ釣りの人気ポイントで、穏やかな湾内で初心者向き。",
-    latitude: 34.8060, longitude: 134.4690, address: "兵庫県相生市相生",
+    latitude: 34.8060, longitude: 134.4690, address: "〒678-0031 兵庫県相生市旭三丁目",
     accessInfo: "山陽自動車道龍野西ICから約15分。JR相生駅から車で約5分。",
     region: localRegion("r2580"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
@@ -2053,7 +2053,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2589", name: "室津漁港", slug: "murotsu-gyoko",
     description: "たつの市の室津漁港は江戸時代の宿場町の風情が残る港。チヌのダンゴ釣りの名所で、メバル・カサゴの根魚も豊富。牡蠣シーズンには観光客も多い。",
-    latitude: 34.7950, longitude: 134.5050, address: "兵庫県たつの市御津町室津",
+    latitude: 34.7950, longitude: 134.5050, address: "〒671-1621 兵庫県たつの市揖保川町馬場",
     accessInfo: "山陽自動車道龍野ICから約20分。JR網干駅から車で約20分。",
     region: localRegion("r2580"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
@@ -2073,7 +2073,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2590", name: "赤穂御崎", slug: "ako-misaki-tsuri",
     description: "赤穂市の瀬戸内海に突き出た岬。磯釣りの好ポイントで、メジナ・クロダイの実績が高い。堤防からのサビキやエギングも楽しめる。瀬戸内海の絶景が魅力。",
-    latitude: 34.7210, longitude: 134.3810, address: "兵庫県赤穂市御崎",
+    latitude: 34.7210, longitude: 134.3810, address: "〒678-0233 兵庫県赤穂市千鳥町",
     accessInfo: "山陽自動車道赤穂ICから約15分。JR播州赤穂駅からバスで約20分。",
     region: localRegion("r2580"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "御崎駐車場あり（無料）",
@@ -2094,7 +2094,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2591", name: "家島", slug: "iejima-tsuri",
     description: "姫路沖の家島諸島の本島。瀬戸内海の離島で潮通しが良く、チヌ・メバルの実績が高い。島の各所に釣りポイントがあり、離島ならではの魚影の濃さが魅力。",
-    latitude: 34.6700, longitude: 134.5350, address: "兵庫県姫路市家島町",
+    latitude: 34.6700, longitude: 134.5350, address: "〒672-0199 兵庫県姫路市家島町家島町宮宮真浦線",
     accessInfo: "姫路港から定期船で約30分。JR姫路駅からバスで姫路港へ約20分。",
     region: localRegion("r2580"), spotType: "rocky", difficulty: "intermediate",
     isFree: true, hasParking: false, parkingDetail: "島内に駐車場なし（姫路港に駐車）",
@@ -2136,7 +2136,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2593", name: "柴山港", slug: "shibayama-ko",
     description: "香美町の柴山港は松葉ガニの水揚げで有名。日本海に面し、アジ・メバル・カサゴが通年で好調。秋のアオリイカも実績が高い穴場ポイント。",
-    latitude: 35.6480, longitude: 134.6200, address: "兵庫県香美町香住区柴山",
+    latitude: 35.6480, longitude: 134.6200, address: "〒669-6544 兵庫県香美町香住区矢田香住村岡線",
     accessInfo: "北近畿豊岡自動車道八鹿氷ノ山ICから約50分。JR柴山駅から徒歩約10分。",
     region: localRegion("r2580"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
@@ -2160,7 +2160,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2594", name: "串本港", slug: "kushimoto-ko",
     description: "本州最南端の串本町の港。黒潮の影響で魚種が豊富。グレ・クロダイの磯釣りの聖地で、アオリイカや青物の実績も非常に高い。全国から釣り人が訪れる。",
-    latitude: 33.4730, longitude: 135.7810, address: "和歌山県串本町串本",
+    latitude: 33.4730, longitude: 135.7810, address: "〒649-3503 和歌山県串本町串本国道42号",
     accessInfo: "紀勢自動車道すさみ南ICから約30分。JR串本駅から徒歩約10分。",
     region: localRegion("r2623"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
@@ -2181,7 +2181,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2595", name: "太地港", slug: "taiji-ko",
     description: "くじらの町として知られる太地町の港。黒潮が近く魚種が豊富。サビキでアジ・サバ、フカセでグレが好調。秋のアオリイカも人気で、穏やかな港内は初心者向き。",
-    latitude: 33.5950, longitude: 135.9450, address: "和歌山県太地町太地",
+    latitude: 33.5950, longitude: 135.9450, address: "〒649-5171 和歌山県太地町太地梶取崎線",
     accessInfo: "紀勢自動車道すさみ南ICから約40分。JR太地駅から徒歩約15分。",
     region: localRegion("r2622"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
@@ -2201,7 +2201,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2596", name: "田辺漁港", slug: "tanabe-gyoko",
     description: "田辺湾に面した田辺市の主要港。チヌ・グレのフカセ釣りが盛んで、サビキでアジも好調。秋のアオリイカも実績が高い。温暖な気候で年間を通じて釣りが楽しめる。",
-    latitude: 33.7280, longitude: 135.3700, address: "和歌山県田辺市磯間",
+    latitude: 33.7280, longitude: 135.3700, address: "〒646-8545 和歌山県田辺市江川",
     accessInfo: "紀勢自動車道南紀田辺ICから約10分。JR紀伊田辺駅から車で約10分。",
     region: localRegion("r2621"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
@@ -2222,7 +2222,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2597", name: "加太漁港", slug: "kada-gyoko",
     description: "和歌山市の加太は友ヶ島を望む紀淡海峡に面した漁港。潮通しが良く、マダイ・ハマチの実績が高い。堤防からのサビキやエギングも楽しめる人気ポイント。",
-    latitude: 34.2780, longitude: 135.0680, address: "和歌山県和歌山市加太",
+    latitude: 34.2780, longitude: 135.0680, address: "〒640-8511 和歌山県和歌山市",
     accessInfo: "阪和自動車道和歌山ICから約30分。南海加太線加太駅から徒歩約15分。",
     region: localRegion("r2620"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺有料駐車場あり",
@@ -2243,7 +2243,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2598", name: "雑賀崎漁港", slug: "saigasaki-gyoko",
     description: "和歌山市の雑賀崎は「日本のアマルフィ」と呼ばれる美しい漁港。チヌ・グレのフカセ釣りが盛んで、足場の良い堤防からサビキでアジも楽しめる。",
-    latitude: 34.1850, longitude: 135.1280, address: "和歌山県和歌山市雑賀崎",
+    latitude: 34.1850, longitude: 135.1280, address: "〒640-8511 和歌山県和歌山市雑賀崎",
     accessInfo: "阪和自動車道和歌山ICから約20分。南海和歌山市駅からバスで約30分。",
     region: localRegion("r2620"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺駐車スペースあり",
@@ -2264,7 +2264,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2599", name: "日置漁港", slug: "hiki-gyoko",
     description: "白浜町の南に位置する日置漁港。リアス式海岸の入り江にあり、グレ・チヌのフカセ釣りの好ポイント。秋のアオリイカも実績が高く、穴場感が魅力。",
-    latitude: 33.6260, longitude: 135.4280, address: "和歌山県白浜町日置",
+    latitude: 33.6260, longitude: 135.4280, address: "和歌山県白浜町",
     accessInfo: "紀勢自動車道日置川ICから約5分。JR紀伊日置駅から徒歩約15分。",
     region: localRegion("r2622"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
