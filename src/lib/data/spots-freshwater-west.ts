@@ -187,7 +187,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-091", name: "木曽川（中流域）", slug: "kisogawa-middle-river",
     description: "日本三大河川のひとつ。岐阜県〜愛知県を流れる中流域は、コイ・ナマズ・ブラックバスの好ポイント。犬山城周辺や各務原市エリアはおかっぱりが楽しめる。木曽川水園も人気。",
-    latitude: 35.3847, longitude: 136.9386, address: "岐阜県各務原市川島笠田町",
+    latitude: 35.3847, longitude: 136.9386, address: "〒484-0081 愛知県犬山市大字犬山",
     accessInfo: "東海北陸自動車道岐阜各務原ICから約10分。名鉄新鵜沼駅から車で約10分。",
     region: lr("r717"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "河川敷公園に無料駐車場あり",
@@ -243,7 +243,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-093", name: "九頭竜川", slug: "kuzuryugawa-river",
     description: "福井県を代表する一級河川。全国的にアユ・サクラマスの名川として知られる。中流域の大野市〜勝山市エリアは渓流釣りのメッカ。秋にはサケの遡上も見られる。",
-    latitude: 35.9897, longitude: 136.4922, address: "福井県大野市中据",
+    latitude: 35.9897, longitude: 136.4922, address: "〒912-0081 福井県大野市中荒井町一丁目",
     accessInfo: "北陸自動車道福井ICから約40分。JR越前大野駅から車で約10分。",
     region: lr("r719"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人2,500円（日券）",
