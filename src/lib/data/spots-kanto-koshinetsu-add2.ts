@@ -1575,7 +1575,7 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
     id: "s2265", name: "寺泊港", slug: "teradomari-ko-add2",
     description: "長岡市寺泊に位置する漁港。「魚のアメ横」と呼ばれる鮮魚センター通りに隣接し、釣りと海鮮グルメを同時に楽しめる。堤防からのサビキ釣りでアジやサバが釣れるほか、エギングでアオリイカも人気。カレイの投げ釣りも冬のお楽しみ。",
     latitude: 37.64080, longitude: 138.76120,
-    address: "新潟県長岡市寺泊金山国道402号線",
+    address: "新潟県長岡市寺泊上荒町",
     accessInfo: "JR越後線寺泊駅からバスで約15分。北陸自動車道西山ICから約30分。",
     region: localRegion("r2431"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に無料駐車場あり",

@@ -1281,7 +1281,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-051", name: "周防大島・片添ヶ浜", slug: "suo-oshima-katazoe",
     description: "山口県大島郡周防大島町の片添ヶ浜。「瀬戸内のハワイ」と呼ばれる周防大島の人気スポット。海水浴場に隣接する波止から、アジ・キス・メバル・チヌ・アオリイカなどが狙える。アジングの聖地としても全国的に有名な島。",
-    latitude: 33.9003, longitude: 132.3638, address: "山口県周防大島町西方",
+    latitude: 33.9003, longitude: 132.3638, address: "山口県周防大島町平野",
     accessInfo: "JR大畠駅から車で約30分。大島大橋を渡って島内へ。山陽自動車道玖珂ICから約40分。",
     region: region("r3029"), spotType: "port", difficulty: "beginner",
     isFree: true,
