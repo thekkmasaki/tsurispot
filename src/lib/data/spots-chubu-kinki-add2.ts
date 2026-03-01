@@ -478,7 +478,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     id: "s2515", name: "九頭竜川", slug: "kuzuryugawa-tsuri",
     description: "福井県を代表する大河川。中流域はアユの友釣りの聖地として全国的に有名。上流域ではヤマメ・イワナの渓流釣り、下流域ではシーバスのルアー釣りも楽しめる。",
     latitude: 36.0590, longitude: 136.3100,
-    address: "〒910-1221 福井県吉田郡永平寺町松岡吉野堺（九頭竜川永平寺地区）",
+    address: "〒910-1127 福井県吉田郡永平寺町松岡吉野堺（九頭竜川永平寺地区）",
     accessInfo: "北陸自動車道福井ICから約20分。えちぜん鉄道永平寺口駅から車で約10分。",
     region: localRegion("r2564"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "河川敷駐車スペースあり",
@@ -719,7 +719,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     id: "s2526", name: "神通川", slug: "jinzugawa-tsuri",
     description: "富山市の中心を流れる一級河川。サクラマス釣りの聖地として全国的に有名。アユの友釣りも盛んで、下流域ではシーバスのルアー釣りも楽しめる。",
     latitude: 36.7050, longitude: 137.1910,
-    address: "〒939-2706 富山県富山市婦中町上田島（神通川婦中地区）",
+    address: "〒939-2717 富山県富山市婦中町上田島（神通川婦中地区）",
     accessInfo: "北陸自動車道富山ICから約10分。JR富山駅から車で約15分。",
     region: localRegion("r2542"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "河川敷駐車スペースあり",
@@ -1007,7 +1007,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2539", name: "焼津港", slug: "yaizu-ko",
     description: "マグロの水揚げ日本一で知られる焼津港。釣りではサビキでアジ・サバ、投げ釣りでキスが好調。秋のタチウオの実績も高い。港周辺にはグルメスポットも豊富。",
-    latitude: 34.8700, longitude: 138.3230, address: "〒425-0027 静岡県焼津市中港1丁目（焼津港）",
+    latitude: 34.8700, longitude: 138.3230, address: "〒425-0021 静岡県焼津市中港（焼津港）",
     accessInfo: "東名高速焼津ICから約10分。JR焼津駅から車で約5分。",
     region: localRegion("r2513"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
@@ -1614,7 +1614,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2568", name: "長良川郡上", slug: "nagaragawa-gujo",
     description: "郡上八幡を流れる長良川はアユ釣りの聖地。日本三大清流のひとつで、水質は抜群。友釣りシーズンには全国から釣り人が集まる。アマゴやイワナも狙える。",
-    latitude: 35.7490, longitude: 136.9630, address: "〒501-4214 岐阜県郡上市八幡町相生（長良川郡上地区）",
+    latitude: 35.7490, longitude: 136.9630, address: "〒501-4236 岐阜県郡上市八幡町相生（長良川郡上地区）",
     accessInfo: "東海北陸自動車道郡上八幡ICから約5分。長良川鉄道郡上八幡駅から徒歩約10分。",
     region: localRegion("r2520"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "河川敷駐車スペースあり",
@@ -1675,7 +1675,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2571", name: "飛騨川下呂", slug: "hidagawa-gero",
     description: "下呂温泉で有名な下呂市を流れる飛騨川。温泉街を流れる区間でもアユやアマゴが釣れる。温泉と釣りを両方楽しめる贅沢なフィールド。",
-    latitude: 35.8050, longitude: 137.2440, address: "〒509-2202 岐阜県下呂市幸田（飛騨川下呂地区）",
+    latitude: 35.8050, longitude: 137.2440, address: "〒509-2206 岐阜県下呂市幸田（飛騨川下呂地区）",
     accessInfo: "中央自動車道中津川ICから約60分。JR下呂駅から徒歩約10分。",
     region: localRegion("r2521"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "温泉街周辺駐車場あり",
@@ -1715,7 +1715,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2573", name: "馬瀬川", slug: "mazegawa-tsuri",
     description: "下呂市馬瀬地区を流れる馬瀬川はアユ釣りの全国大会が開催される一級河川。水質が良くアユの香りが強いことで知られる。アマゴの渓流釣りも楽しめる。",
-    latitude: 35.8900, longitude: 137.1250, address: "〒509-2615 岐阜県下呂市馬瀬名丸（馬瀬川）",
+    latitude: 35.8900, longitude: 137.1250, address: "〒509-2612 岐阜県下呂市馬瀬名丸（馬瀬川）",
     accessInfo: "東海北陸自動車道郡上八幡ICから約40分。下呂市中心部から車で約30分。",
     region: localRegion("r2521"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "河川沿い駐車スペースあり",

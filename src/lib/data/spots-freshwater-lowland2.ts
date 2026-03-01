@@ -48,7 +48,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-361", name: "霞ヶ浦西浦・蔵川周辺用水路", slug: "kasumigaura-nishiura-tanago",
     description: "日本有数のタナゴ釣りのメッカ・霞ヶ浦西浦周辺の用水路群。通称「ホソ」と呼ばれる農業用水路にオカメタナゴやタイリクバラタナゴが多数生息。蔵川右岸のホソ群は特に実績が高い。レンコン田の周辺は水が動き、小魚の活性が高い。全国からタナゴ釣り愛好家が訪れる聖地。",
-    latitude: 36.0412, longitude: 140.3283, address: "〒300-0214 茨城県かすみがうら市坪井地先",
+    latitude: 36.0412, longitude: 140.3283, address: "〒300-0214 茨城県かすみがうら市坂（霞ヶ浦西浦周辺用水路）",
     accessInfo: "JR常磐線神立駅から車で約15分。常磐自動車道千代田石岡ICから約20分。",
     region: lr("r2335"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -320,7 +320,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-372", name: "福島潟（新潟市）", slug: "fukushimagata-raigyo",
     description: "新潟市の福島潟は新潟県最大の潟湖。ハスやヨシなどの水草が広がる自然豊かな環境に大型ライギョが生息。東北・甲信越エリアでは屈指のライギョフィールドとして知られる。冬季はオオヒシクイの渡来地としても有名な自然の宝庫。",
-    latitude: 37.9112, longitude: 139.2183, address: "〒950-3323 新潟県新潟市北区前新田乙地先",
+    latitude: 37.9112, longitude: 139.2183, address: "〒950-3328 新潟県新潟市北区前新田乙（福島潟）",
     accessInfo: "JR白新線豊栄駅から車で約5分。日本海東北自動車道豊栄新潟東港ICから約5分。",
     region: lr("r2346"), spotType: "river", difficulty: "advanced",
     isFree: true, feeDetail: "無料",
@@ -417,7 +417,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-376", name: "霞ヶ浦周辺田園水路", slug: "kasumi-tanbo-dojou",
     description: "茨城県霞ヶ浦周辺の田園地帯に広がる水路群はドジョウの好生息地。レンコン田や水田の間を流れる小水路にマドジョウが豊富に生息。タナゴやマブナも同時に楽しめ、のどかな里釣りが満喫できる。春の田植え前後はドジョウの活性が特に高い。",
-    latitude: 36.0212, longitude: 140.3483, address: "〒300-0214 茨城県かすみがうら市下土田地先",
+    latitude: 36.0212, longitude: 140.3483, address: "〒315-0058 茨城県かすみがうら市下土田（霞ヶ浦周辺田園水路）",
     accessInfo: "JR常磐線神立駅から車で約15分。常磐自動車道千代田石岡ICから約15分。",
     region: lr("r2350"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -441,7 +441,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-377", name: "亀田郷用水路（新潟市）", slug: "kamedagou-dojou",
     description: "新潟市の亀田郷は日本有数の穀倉地帯。広大な水田地帯に張り巡らされた用水路にドジョウが豊富に生息。かつて「芦沼」と呼ばれた低湿地を干拓した歴史ある土地で、今も水辺環境が豊か。マブナやタナゴも楽しめる越後の里釣りフィールド。",
-    latitude: 37.8712, longitude: 139.1183, address: "〒950-0141 新潟県新潟市江南区亀田地先",
+    latitude: 37.8712, longitude: 139.1183, address: "新潟県新潟市江南区亀田（亀田郷用水路）",
     accessInfo: "JR信越本線亀田駅から車で約5分。北陸自動車道新潟亀田ICすぐ。",
     region: lr("r2351"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
