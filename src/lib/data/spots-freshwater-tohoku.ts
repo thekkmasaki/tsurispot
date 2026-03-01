@@ -93,7 +93,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-073", name: "釧路川", slug: "kushirogawa-trout",
     description: "釧路湿原を流れる北海道東部の名河川。イトウ・アメマスの聖地として全国から釣り人が訪れる。湿原区間のカヌーフィッシングは格別で、手つかずの自然の中でワイルドトラウトに出会える。",
-    latitude: 43.1283, longitude: 144.4072, address: "〒085-0063 北海道釧路市北斗",
+    latitude: 43.1283, longitude: 144.4072, address: "〒084-0922 北海道釧路市北斗",
     accessInfo: "釧路空港から車で約30分。JR釧路駅から車で約20分（湿原区間）。",
     region: lr("r699"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人1,200円（1日）",
@@ -311,7 +311,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-081", name: "桧木内川", slug: "hinokinaigawa-keiryu",
     description: "角館の桜並木で有名な桧木内川は、渓流釣りの穴場的存在。上流域は原生林に囲まれた美しい渓相で、天然のヤマメ・イワナが豊富。角館の武家屋敷観光と合わせて楽しめる。",
-    latitude: 39.5953, longitude: 140.5633, address: "〒014-0325 秋田県仙北市角館町",
+    latitude: 39.5953, longitude: 140.5633, address: "〒014-0300 秋田県仙北市角館町",
     accessInfo: "秋田自動車道大曲ICから約30分。JR角館駅から徒歩約15分（下流域）。",
     region: lr("r707"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",

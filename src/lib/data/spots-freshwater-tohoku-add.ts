@@ -176,7 +176,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-255", name: "浅瀬石川", slug: "asaseishigawa-keiryu",
     description: "青森県黒石市を流れる岩木川水系の支流。比較的入渓しやすく歩きやすい渓流として初心者にも人気がある。イワナとヤマメが同じ割合で釣れ、上流の虹の湖（浅瀬石川ダム）ではワカサギ釣りも楽しめる。黒石温泉郷と合わせた釣行がおすすめ。",
-    latitude: 40.6500, longitude: 140.5833, address: "〒036-0405 青森県黒石市大字沖浦",
+    latitude: 40.6500, longitude: 140.5833, address: "〒036-0402 青森県黒石市大字沖浦",
     accessInfo: "東北自動車道黒石ICから約20分。JR弘前駅から車で約40分。",
     region: lr("r2104"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
