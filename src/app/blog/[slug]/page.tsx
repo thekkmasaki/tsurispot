@@ -4,9 +4,9 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import {
   blogPosts,
-  getBlogPostBySlug,
-  getRelatedPosts,
-  getAdjacentPosts,
+  getBlogPostBySlugAsync,
+  getRelatedPostsAsync,
+  getAdjacentPostsAsync,
   BLOG_CATEGORIES,
   type BlogPost,
 } from "@/lib/data/blog";
@@ -30,6 +30,12 @@ import {
   Camera,
 } from "lucide-react";
 
+// ISR: 60秒ごとに再検証
+export const revalidate = 60;
+
+// microCMS記事はビルド時に存在しないのでオンデマンドSSR
+export const dynamicParams = true;
+
 const CATEGORY_HERO: Record<
   BlogPost["category"],
   { gradient: string; Icon: typeof BookOpen }
@@ -44,6 +50,7 @@ const CATEGORY_HERO: Record<
   report: { gradient: "from-teal-400 to-teal-600", Icon: Camera },
 };
 
+// 静的記事のslugのみ事前生成（microCMS記事はオンデマンド）
 export function generateStaticParams() {
   return blogPosts.map((post) => ({
     slug: post.slug,
@@ -56,7 +63,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = await getBlogPostBySlugAsync(slug);
   if (!post) return {};
   return {
     title: `${post.title} | 釣りコラム | ツリスポ`,
@@ -70,7 +77,7 @@ export async function generateMetadata({
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt || post.publishedAt,
       ...(post.image && {
-        images: [{ url: `https://tsurispot.com${post.image}`, width: 1200, height: 630 }],
+        images: [{ url: post.image.startsWith("http") ? post.image : `https://tsurispot.com${post.image}`, width: 1200, height: 630 }],
       }),
     },
     alternates: {
@@ -85,14 +92,21 @@ export default async function BlogPostPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const post = getBlogPostBySlug(slug);
+  const post = await getBlogPostBySlugAsync(slug);
 
   if (!post) {
     notFound();
   }
 
-  const relatedPosts = getRelatedPosts(post);
-  const { prev, next } = getAdjacentPosts(post);
+  const relatedPosts = await getRelatedPostsAsync(post);
+  const { prev, next } = await getAdjacentPostsAsync(post);
+
+  // microCMS画像URLはフルURL、静的画像はパス
+  const imageUrl = post.image?.startsWith("http")
+    ? post.image
+    : post.image
+      ? `https://tsurispot.com${post.image}`
+      : undefined;
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -126,9 +140,7 @@ export default async function BlogPostPage({
     description: post.description,
     datePublished: post.publishedAt,
     dateModified: post.updatedAt || post.publishedAt,
-    ...(post.image && {
-      image: `https://tsurispot.com${post.image}`,
-    }),
+    ...(imageUrl && { image: imageUrl }),
     author: {
       "@type": "Person",
       name: "正木 家康",
@@ -195,6 +207,7 @@ export default async function BlogPostPage({
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 768px"
               priority
+              {...(post.image.startsWith("http") ? { unoptimized: true } : {})}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
           </div>
@@ -356,7 +369,14 @@ export default async function BlogPostPage({
                   <Card className="group h-full overflow-hidden py-0 transition-shadow hover:shadow-md">
                     {related.image ? (
                       <div className="relative h-32 w-full">
-                        <Image src={related.image} alt={related.title} fill className="object-cover" sizes="(max-width: 640px) 100vw, 384px" />
+                        <Image
+                          src={related.image}
+                          alt={related.title}
+                          fill
+                          className="object-cover"
+                          sizes="(max-width: 640px) 100vw, 384px"
+                          {...(related.image.startsWith("http") ? { unoptimized: true } : {})}
+                        />
                       </div>
                     ) : (
                       <div className={`flex h-24 w-full items-center justify-center bg-gradient-to-br ${relHero.gradient}`}>

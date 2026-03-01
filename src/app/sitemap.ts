@@ -5,7 +5,7 @@ import { regions } from "@/lib/data/regions";
 import { prefectures } from "@/lib/data/prefectures";
 import { areaGuides } from "@/lib/data/area-guides";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
-import { blogPosts } from "@/lib/data/blog";
+import { blogPosts, getAllBlogPosts } from "@/lib/data/blog";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { tackleShops } from "@/lib/data/shops";
 import { FISHING_METHODS, MONTHS } from "@/lib/data/fishing-methods";
@@ -116,11 +116,11 @@ export default async function sitemap({
       { url: `${baseUrl}/legal`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
       { url: `${baseUrl}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
       { url: `${baseUrl}/terms`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
-      // ブログ
+      // ブログ（静的 + microCMS記事）
       { url: `${baseUrl}/blog`, lastModified: now, changeFrequency: "weekly", priority: 0.7 },
-      ...blogPosts.map((post) => ({
+      ...(await getAllBlogPosts()).map((post) => ({
         url: `${baseUrl}/blog/${post.slug}`,
-        lastModified: now,
+        lastModified: post.updatedAt ? new Date(post.updatedAt) : now,
         changeFrequency: "weekly" as const,
         priority: 0.5,
       })),

@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { blogPosts } from "@/lib/data/blog";
+import { getAllBlogPosts } from "@/lib/data/blog";
 import { FileText } from "lucide-react";
 import { BlogListClient } from "@/components/blog/blog-list-client";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+
+// ISR: 60秒ごとに再検証
+export const revalidate = 60;
 
 export const metadata: Metadata = {
   title: "釣りコラム・ブログ | ツリスポ",
@@ -41,7 +44,9 @@ const breadcrumbJsonLd = {
   ],
 };
 
-export default function BlogListPage() {
+export default async function BlogListPage() {
+  const posts = await getAllBlogPosts();
+
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
       <script
@@ -67,7 +72,7 @@ export default function BlogListPage() {
       </div>
 
       {/* クライアントサイドフィルター付き記事一覧 */}
-      <BlogListClient posts={blogPosts} />
+      <BlogListClient posts={posts} />
     </div>
   );
 }

@@ -2556,9 +2556,32 @@ export const blogPosts: BlogPost[] = [
   ...blogArticles6,
 ];
 
-/** slugで記事を取得 */
+import { fetchMicroCMSBlogPosts, fetchMicroCMSBlogBySlug } from "@/lib/microcms";
+
+/** slugで記事を取得（同期版、静的記事のみ） */
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
   return blogPosts.find((post) => post.slug === slug);
+}
+
+/** slugで記事を取得（async版、microCMS優先 → 静的記事フォールバック） */
+export async function getBlogPostBySlugAsync(slug: string): Promise<BlogPost | undefined> {
+  // まずmicroCMSを検索
+  const cmsPost = await fetchMicroCMSBlogBySlug(slug);
+  if (cmsPost) return cmsPost;
+  // 静的記事から検索
+  return blogPosts.find((post) => post.slug === slug);
+}
+
+/** 全ブログ記事を取得（静的 + microCMS、publishedAt降順） */
+export async function getAllBlogPosts(): Promise<BlogPost[]> {
+  const cmsPosts = await fetchMicroCMSBlogPosts();
+  // slugの重複を防ぐ（microCMS側が優先）
+  const cmsSlugs = new Set(cmsPosts.map((p) => p.slug));
+  const staticPosts = blogPosts.filter((p) => !cmsSlugs.has(p.slug));
+  const merged = [...cmsPosts, ...staticPosts];
+  return merged.sort(
+    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+  );
 }
 
 /** カテゴリで記事をフィルタ */
@@ -2573,14 +2596,35 @@ export function getLatestBlogPosts(count: number = 3): BlogPost[] {
     .slice(0, count);
 }
 
-/** 関連記事を取得（同カテゴリ、自分以外） */
+/** 関連記事を取得（同カテゴリ、自分以外）— 全記事から */
+export async function getRelatedPostsAsync(post: BlogPost, count: number = 3): Promise<BlogPost[]> {
+  const all = await getAllBlogPosts();
+  return all
+    .filter((p) => p.id !== post.id && p.category === post.category)
+    .slice(0, count);
+}
+
+/** 関連記事を取得（同期版、静的記事のみ） */
 export function getRelatedPosts(post: BlogPost, count: number = 3): BlogPost[] {
   return blogPosts
     .filter((p) => p.id !== post.id && p.category === post.category)
     .slice(0, count);
 }
 
-/** 前後の記事を取得 */
+/** 前後の記事を取得（全記事から） */
+export async function getAdjacentPostsAsync(post: BlogPost): Promise<{ prev: BlogPost | null; next: BlogPost | null }> {
+  const all = await getAllBlogPosts();
+  const sorted = all.sort(
+    (a, b) => new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime()
+  );
+  const index = sorted.findIndex((p) => p.id === post.id);
+  return {
+    prev: index > 0 ? sorted[index - 1] : null,
+    next: index < sorted.length - 1 ? sorted[index + 1] : null,
+  };
+}
+
+/** 前後の記事を取得（同期版、静的記事のみ） */
 export function getAdjacentPosts(post: BlogPost): { prev: BlogPost | null; next: BlogPost | null } {
   const sorted = [...blogPosts].sort(
     (a, b) => new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime()

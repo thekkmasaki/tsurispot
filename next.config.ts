@@ -14,6 +14,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "images.microcms-assets.io",
+      },
     ],
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
