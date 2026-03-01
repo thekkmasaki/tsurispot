@@ -17,6 +17,16 @@ function applyMetadata(list: FishSpecies[]): FishSpecies[] {
   });
 }
 
+// slug重複を排除（先に定義されたほうを優先）
+function dedup(list: FishSpecies[]): FishSpecies[] {
+  const seen = new Set<string>();
+  return list.filter((f) => {
+    if (seen.has(f.slug)) return false;
+    seen.add(f.slug);
+    return true;
+  });
+}
+
 // 人気順ソート（popularity が小さい順、未設定は末尾）
 function sortByPopularity(list: FishSpecies[]): FishSpecies[] {
   return [...list].sort(
@@ -25,7 +35,7 @@ function sortByPopularity(list: FishSpecies[]): FishSpecies[] {
 }
 
 export const fishSpecies: FishSpecies[] = sortByPopularity(
-  applyMetadata([...seaFish, ...freshwaterFish, ...brackishFish])
+  dedup(applyMetadata([...seaFish, ...freshwaterFish, ...brackishFish]))
 );
 
 export function getFishBySlug(slug: string): FishSpecies | undefined {

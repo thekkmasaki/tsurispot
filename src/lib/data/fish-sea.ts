@@ -2084,7 +2084,7 @@ export const seaFish: FishSpecies[] = [
     scientificName: "Auxis rochei",
     slug: "soudagatuo",
     description:
-      "堤防から狙える小型の回遊魚。群れで回遊し、メタルジグやカゴ釣りでヒットします。血合いが多いため鮮度管理が重要。なまり節にすると美味。",
+      "堤防から狙える小型の回遊魚。群れで回遊し、メタルジグやカゴ釣りでヒットします。鮮度が落ちやすく、特に血合いからヒスタミンが発生しやすいため、釣ったらすぐに血抜きを行い、海水氷で徹底的に冷やすことが重要。なまり節にすると美味。",
     category: "sea",
     family: "サバ科",
     difficulty: "intermediate",
