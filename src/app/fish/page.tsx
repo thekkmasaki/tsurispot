@@ -84,7 +84,7 @@ function FishListContent() {
           <div className="flex size-10 items-center justify-center rounded-lg bg-sky-100">
             <Fish className="size-5 text-sky-600" />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+          <h1 className="text-2xl font-bold tracking-tight text-balance sm:text-3xl">
             魚種図鑑
           </h1>
         </div>

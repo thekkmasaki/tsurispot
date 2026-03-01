@@ -127,7 +127,7 @@ export const freshwaterSpots: FishingSpot[] = [
   {
     id: "fw-001", name: "河口湖", slug: "kawaguchiko-lake",
     description: "富士五湖の中でもバス釣りのメッカとして全国的に有名。おかっぱり・ボートともにポイントが豊富で、富士山を背景にした絶景の中で釣りが楽しめる。春のスポーニングシーズンには60cmオーバーの大物も。",
-    latitude: 35.5133, longitude: 138.7012553, address: "山梨県南都留郡富士河口湖町船津",
+    latitude: 35.5133, longitude: 138.7012553, address: "〒401-0301 山梨県南都留郡富士河口湖町船津（河口湖）",
     accessInfo: "中央自動車道河口湖ICから約10分。富士急行線河口湖駅から徒歩約15分。",
     region: lr("r600"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,050円（1日）",
@@ -152,7 +152,7 @@ export const freshwaterSpots: FishingSpot[] = [
   {
     id: "fw-002", name: "琵琶湖北湖（長浜エリア）", slug: "biwako-kitako-nagahama",
     description: "琵琶湖北湖は水深が深く大型バスが潜む。長浜エリアはおかっぱりポイントが豊富で、姉川河口や豊公園が有名。冬はワカサギも楽しめる。",
-    latitude: 35.3781, longitude: 136.2692, address: "滋賀県長浜市公園町",
+    latitude: 35.3781, longitude: 136.2692, address: "〒526-0065 滋賀県長浜市公園町（豊公園・琵琶湖北湖）",
     accessInfo: "北陸自動車道長浜ICから約10分。JR長浜駅から徒歩約5分（豊公園）。",
     region: lr("r601"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "豊公園駐車場（無料）",
@@ -175,7 +175,7 @@ export const freshwaterSpots: FishingSpot[] = [
   {
     id: "fw-003", name: "亀山ダム", slug: "kameyama-dam",
     description: "千葉県君津市にある関東屈指のバス釣りフィールド。レンタルボートでの釣りがメインで、カバー撃ちやディープクランクが効果的。春のプリスポーンには50cmオーバーも頻出。",
-    latitude: 35.1803, longitude: 140.051775, address: "千葉県君津市川俣旧川俣",
+    latitude: 35.1803, longitude: 140.051775, address: "〒292-0524 千葉県君津市川俣旧川俣（亀山ダム）",
     accessInfo: "館山自動車道君津ICから約20分。JR君津駅から車で約30分。",
     region: lr("r602"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "レンタルボート代 3,500〜5,000円程度",
@@ -198,7 +198,7 @@ export const freshwaterSpots: FishingSpot[] = [
   {
     id: "fw-004", name: "相模湖", slug: "sagamiko-lake",
     description: "神奈川県にある都心からアクセス抜群のバス釣りフィールド。ワカサギ釣りでも有名。レンタルボートでの釣りが中心で、秋原橋下や日相園前が人気ポイント。",
-    latitude: 35.5978, longitude: 139.2064, address: "神奈川県相模原市緑区与瀬",
+    latitude: 35.5978, longitude: 139.2064, address: "〒252-0171 神奈川県相模原市緑区与瀬（相模湖公園）",
     accessInfo: "中央自動車道相模湖ICから約5分。JR中央線相模湖駅から徒歩約10分。",
     region: lr("r603"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人700円。レンタルボート 3,000円〜",
@@ -222,7 +222,7 @@ export const freshwaterSpots: FishingSpot[] = [
   {
     id: "fw-005", name: "津久井湖", slug: "tsukuiko-lake",
     description: "相模湖の下流に位置するダム湖。バス釣りのフィールドとして人気があり、おかっぱりポイントも充実。津久井湖記念館前や沼本ボート前が好ポイント。",
-    latitude: 35.5883, longitude: 139.2447, address: "神奈川県相模原市緑区太井",
+    latitude: 35.5883, longitude: 139.2447, address: "〒252-0152 神奈川県相模原市緑区太井（津久井湖）",
     accessInfo: "中央自動車道相模湖東ICから約15分。JR橋本駅からバスで約20分。",
     region: lr("r604"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人700円",
@@ -245,7 +245,7 @@ export const freshwaterSpots: FishingSpot[] = [
   {
     id: "fw-006", name: "池原ダム", slug: "ikehara-dam",
     description: "奈良県下北山村にある日本屈指のビッグバスレイク。ロクマル（60cm超）の実績が豊富で、全国からバスアングラーが訪れる。レンタルボートでの釣りがメイン。",
-    latitude: 34.1342, longitude: 135.8472, address: "奈良県吉野郡下北山村上池原",
+    latitude: 34.1342, longitude: 135.8472, address: "〒639-3805 奈良県吉野郡下北山村上池原（池原ダム）",
     accessInfo: "名阪国道針ICから約2時間。紀勢自動車道尾鷲北ICから約1時間。",
     region: lr("r605"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "レンタルボート 4,000〜6,000円。遊漁券別途",
@@ -267,7 +267,7 @@ export const freshwaterSpots: FishingSpot[] = [
   {
     id: "fw-007", name: "七色ダム", slug: "nanairo-dam",
     description: "池原ダムの上流に位置するリザーバー。池原と並ぶビッグバスフィールドで、特に春のプリスポーン期には大型が接岸する。アルミボートでの釣りが中心。",
-    latitude: 34.1617, longitude: 135.8808, address: "奈良県吉野郡下北山村上池原",
+    latitude: 34.1617, longitude: 135.8808, address: "〒639-3805 奈良県吉野郡下北山村上池原（七色ダム）",
     accessInfo: "名阪国道針ICから約2時間。池原ダムから車で約15分。",
     region: lr("r606"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "レンタルボート 4,000円〜。遊漁券別途",
@@ -289,7 +289,7 @@ export const freshwaterSpots: FishingSpot[] = [
   {
     id: "fw-008", name: "霞ヶ浦", slug: "kasumigaura-lake",
     description: "日本第2位の面積を誇る湖。バス釣りの人気フィールドで、おかっぱりポイントが無数にある。土浦港周辺や桜川河口、霞ヶ浦総合公園などが代表的なポイント。",
-    latitude: 36.0333, longitude: 140.2167, address: "茨城県土浦市川口2丁目",
+    latitude: 36.0333, longitude: 140.2167, address: "〒300-0033 茨城県土浦市川口2丁目（霞ヶ浦総合公園）",
     accessInfo: "常磐自動車道土浦北ICから約10分。JR土浦駅から徒歩約15分（土浦港）。",
     region: lr("r607"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "土浦港周辺に無料駐車場あり",
@@ -313,7 +313,7 @@ export const freshwaterSpots: FishingSpot[] = [
   {
     id: "fw-009", name: "北浦", slug: "kitaura-lake",
     description: "霞ヶ浦の東に隣接する細長い湖。霞ヶ浦よりプレッシャーが低く、護岸からのおかっぱりで手軽にバス釣りが楽しめる。テナガエビ釣りの名所でもある。",
-    latitude: 36.0500, longitude: 140.4500, address: "茨城県行方市玉造甲",
+    latitude: 36.0500, longitude: 140.4500, address: "〒311-3512 茨城県行方市玉造甲（北浦・霞ヶ浦ふれあいランド）",
     accessInfo: "東関東自動車道潮来ICから約15分。",
     region: lr("r608"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "湖畔に駐車スペースあり",
@@ -337,7 +337,7 @@ export const freshwaterSpots: FishingSpot[] = [
   {
     id: "fw-010", name: "日原川（奥多摩）", slug: "nipparagawa-okutama",
     description: "東京都内とは思えない美しい渓流。奥多摩駅からアクセスでき、ヤマメ・イワナが狙える。解禁期間は3月〜9月。都心から日帰りで渓流釣りが楽しめる貴重なスポット。",
-    latitude: 35.8167, longitude: 139.0833, address: "東京都西多摩郡奥多摩町日原",
+    latitude: 35.8167, longitude: 139.0833, address: "〒198-0211 東京都西多摩郡奥多摩町日原（日原川渓流）",
     accessInfo: "JR青梅線奥多摩駅からバスで約15分。圏央道青梅ICから約50分。",
     region: lr("r609"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人2,000円（日券）",

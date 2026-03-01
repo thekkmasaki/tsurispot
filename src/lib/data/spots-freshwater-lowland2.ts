@@ -48,7 +48,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-361", name: "霞ヶ浦西浦・蔵川周辺用水路", slug: "kasumigaura-nishiura-tanago",
     description: "日本有数のタナゴ釣りのメッカ・霞ヶ浦西浦周辺の用水路群。通称「ホソ」と呼ばれる農業用水路にオカメタナゴやタイリクバラタナゴが多数生息。蔵川右岸のホソ群は特に実績が高い。レンコン田の周辺は水が動き、小魚の活性が高い。全国からタナゴ釣り愛好家が訪れる聖地。",
-    latitude: 36.0412, longitude: 140.3283, address: "茨城県かすみがうら市坪井地先",
+    latitude: 36.0412, longitude: 140.3283, address: "〒300-0214 茨城県かすみがうら市坪井地先",
     accessInfo: "JR常磐線神立駅から車で約15分。常磐自動車道千代田石岡ICから約20分。",
     region: lr("r2335"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -72,7 +72,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-362", name: "霞ヶ浦北浦・潮来周辺用水路", slug: "kasumigaura-kitaura-tanago",
     description: "霞ヶ浦の北浦・潮来周辺の用水路はタナゴ釣りの好フィールド。水郷地帯ならではの縦横に張り巡らされた水路網にタナゴやマブナが豊富に生息。秋から春にかけてはレンコン収穫で水が動き、小魚の活性が上がる。のどかな田園風景の中でのんびり釣りが楽しめる。",
-    latitude: 35.9412, longitude: 140.5583, address: "茨城県潮来市潮来地先",
+    latitude: 35.9412, longitude: 140.5583, address: "〒311-2424 茨城県潮来市潮来地先",
     accessInfo: "JR鹿島線潮来駅から車で約10分。東関東自動車道潮来ICから約5分。",
     region: lr("r2336"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -96,7 +96,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-363", name: "びん沼川（富士見市）", slug: "binnumagawa-tanago",
     description: "埼玉県富士見市のびん沼川はタナゴ・ヘラブナ・コイの好釣り場。荒川の旧河道で流れが穏やかなため小物釣りに最適。タイリクバラタナゴが多数生息し、春から秋にかけて安定した釣果が期待できる。ヘラブナ釣りの名所としても全国的に有名。",
-    latitude: 35.8512, longitude: 139.5883, address: "埼玉県富士見市南畑地先",
+    latitude: 35.8512, longitude: 139.5883, address: "〒354-0004 埼玉県富士見市下南畑地先",
     accessInfo: "東武東上線みずほ台駅からバスで約15分。関越自動車道所沢ICから約20分。",
     region: lr("r2337"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -121,7 +121,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-364", name: "見沼代用水（さいたま市）", slug: "minumadai-tanago",
     description: "さいたま市を流れる見沼代用水はタナゴ釣りの好フィールド。江戸時代に開削された歴史ある用水路で、東縁・西縁の両水路にタナゴやマブナが生息。都市部にありながら豊かな水辺環境が残る。見沼田んぼの中を流れる区間は特に生き物が豊富。",
-    latitude: 35.8912, longitude: 139.6683, address: "埼玉県さいたま市緑区大字大間木地先",
+    latitude: 35.8912, longitude: 139.6683, address: "〒336-0923 埼玉県さいたま市緑区大字大間木地先",
     accessInfo: "JR武蔵野線東浦和駅から徒歩約10分。",
     region: lr("r2338"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -146,7 +146,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-365", name: "手賀沼周辺用水路（柏市・我孫子市）", slug: "teganuma-canal-tanago",
     description: "千葉県北部の手賀沼周辺に広がる用水路群はタナゴ釣りの好フィールド。手賀沼に流入する小河川や用水路にタイリクバラタナゴやマブナが生息。のどかな田園風景の中で小物釣りが楽しめる。手賀沼自然ふれあい緑道からアクセスも良好。",
-    latitude: 35.8612, longitude: 140.0183, address: "千葉県柏市手賀地先",
+    latitude: 35.8612, longitude: 140.0183, address: "〒277-0005 千葉県柏市手賀地先",
     accessInfo: "JR常磐線我孫子駅からバスで約15分。常磐自動車道柏ICから約15分。",
     region: lr("r2339"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -170,7 +170,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-366", name: "渡良瀬遊水地", slug: "watarase-tanago",
     description: "栃木・群馬・埼玉・茨城の4県にまたがる渡良瀬遊水地はタナゴ釣りの穴場。広大な湿地帯に張り巡らされた水路にタナゴやマブナ、ドジョウが豊富に生息。ラムサール条約登録湿地でもある豊かな自然環境の中で釣りが楽しめる。野鳥観察と合わせて楽しむ人も多い。",
-    latitude: 36.2312, longitude: 139.7083, address: "栃木県栃木市藤岡町藤岡地先",
+    latitude: 36.2312, longitude: 139.7083, address: "〒323-1104 栃木県栃木市藤岡町藤岡地先",
     accessInfo: "東武日光線藤岡駅から車で約10分。東北自動車道館林ICから約20分。",
     region: lr("r2340"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -196,7 +196,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-367", name: "びん沼川（ライギョ釣り場）", slug: "binnumagawa-raigyo",
     description: "埼玉県富士見市のびん沼川は関東屈指のライギョ釣り場。ハスやヒシモなどの水草が茂るエリアに大型のライギョが潜む。フロッグゲームの聖地的存在で、80cmオーバーの実績も。ヘラブナやコイも多く、多魚種が楽しめるフィールド。",
-    latitude: 35.8552, longitude: 139.5933, address: "埼玉県富士見市南畑新田地先",
+    latitude: 35.8552, longitude: 139.5933, address: "〒354-0003 埼玉県富士見市南畑新田地先",
     accessInfo: "東武東上線みずほ台駅からバスで約15分。関越自動車道所沢ICから約20分。",
     region: lr("r2341"), spotType: "river", difficulty: "advanced",
     isFree: true, feeDetail: "無料",
@@ -221,7 +221,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-368", name: "印旛沼（千葉県）", slug: "inbanuma-raigyo",
     description: "千葉県北部の印旛沼はライギョ釣りの名所。広大な沼に加え、周辺の水路や蓮田にも大型のライギョが潜む。ハスの群生地はフロッグゲームのベストポイント。バスフィッシングでも有名なフィールドで、ブラックバスやコイも同時に楽しめる。",
-    latitude: 35.7612, longitude: 140.1683, address: "千葉県印西市師戸地先",
+    latitude: 35.7612, longitude: 140.1683, address: "〒270-1615 千葉県印西市師戸地先",
     accessInfo: "北総線印西牧の原駅から車で約10分。東関東自動車道千葉北ICから約30分。",
     region: lr("r2342"), spotType: "river", difficulty: "intermediate",
     isFree: true, feeDetail: "無料",
@@ -246,7 +246,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-369", name: "牛久沼（茨城県）", slug: "ushikunuma-raigyo",
     description: "茨城県南部の牛久沼はバスとライギョの好漁場。沼周辺の蓮田や水草帯に大型ライギョが潜み、夏場のフロッグゲームで人気。ブラックバスの名所としても全国的に有名。「うな丼」発祥の地としても知られ、ウナギも生息する。",
-    latitude: 35.9712, longitude: 140.1183, address: "茨城県龍ケ崎市佐貫町地先",
+    latitude: 35.9712, longitude: 140.1183, address: "〒301-0033 茨城県龍ケ崎市佐貫町地先",
     accessInfo: "JR常磐線龍ケ崎市駅から車で約10分。常磐自動車道つくば牛久ICから約15分。",
     region: lr("r2343"), spotType: "river", difficulty: "intermediate",
     isFree: true, feeDetail: "無料",
@@ -271,7 +271,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-370", name: "西の湖（琵琶湖内湖）", slug: "nishinoko-raigyo",
     description: "滋賀県近江八幡市の西の湖は琵琶湖最大の内湖。ヨシ原やハスなどの水草が広がり、大型ライギョの宝庫。フロッグゲームの聖地として関西圏のライギョ釣り師に人気が高い。ブラックバスやビワコオオナマズなど琵琶湖特有の魚種も楽しめる。",
-    latitude: 35.1312, longitude: 136.1283, address: "滋賀県近江八幡市円山町地先",
+    latitude: 35.1312, longitude: 136.1283, address: "〒523-0805 滋賀県近江八幡市円山町地先",
     accessInfo: "JR東海道線近江八幡駅から車で約15分。名神高速竜王ICから約20分。",
     region: lr("r2344"), spotType: "river", difficulty: "advanced",
     isFree: true, feeDetail: "無料",
@@ -296,7 +296,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-371", name: "大和郡山周辺ため池群", slug: "yamatokoriyama-raigyo",
     description: "奈良県大和郡山市は金魚の産地として有名だが、市内に点在するため池にはライギョが生息。比較的小規模な池が多く、岸から全域をカバーできるため効率的にライギョを探せる。ヒシモやハスの茂る池が好ポイント。バスやコイも混在する。",
-    latitude: 34.6412, longitude: 135.7883, address: "奈良県大和郡山市新木町地先",
+    latitude: 34.6412, longitude: 135.7883, address: "〒639-1021 奈良県大和郡山市新木町地先",
     accessInfo: "近鉄橿原線近鉄郡山駅から車で約10分。西名阪自動車道大和まほろばスマートICから約10分。",
     region: lr("r2345"), spotType: "river", difficulty: "intermediate",
     isFree: true, feeDetail: "無料（一部ため池は釣り禁止のため事前確認必要）",
@@ -320,7 +320,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-372", name: "福島潟（新潟市）", slug: "fukushimagata-raigyo",
     description: "新潟市の福島潟は新潟県最大の潟湖。ハスやヨシなどの水草が広がる自然豊かな環境に大型ライギョが生息。東北・甲信越エリアでは屈指のライギョフィールドとして知られる。冬季はオオヒシクイの渡来地としても有名な自然の宝庫。",
-    latitude: 37.9112, longitude: 139.2183, address: "新潟県新潟市北区前新田乙地先",
+    latitude: 37.9112, longitude: 139.2183, address: "〒950-3323 新潟県新潟市北区前新田乙地先",
     accessInfo: "JR白新線豊栄駅から車で約5分。日本海東北自動車道豊栄新潟東港ICから約5分。",
     region: lr("r2346"), spotType: "river", difficulty: "advanced",
     isFree: true, feeDetail: "無料",
@@ -346,7 +346,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-373", name: "見沼田んぼ水路（さいたま市）", slug: "minuma-tanbo-dojou",
     description: "さいたま市に広がる見沼田んぼの農業用水路はドジョウの好生息地。都市近郊に残る貴重な田園環境で、春から秋にかけてドジョウやマブナ、タナゴなどの小物釣りが楽しめる。見沼代用水に沿った遊歩道からアクセスも良好。のんびりとした里釣りの雰囲気を味わえる。",
-    latitude: 35.8812, longitude: 139.6783, address: "埼玉県さいたま市緑区大字三室地先",
+    latitude: 35.8812, longitude: 139.6783, address: "〒336-0911 埼玉県さいたま市緑区大字三室地先",
     accessInfo: "JR武蔵野線東浦和駅から徒歩約15分。",
     region: lr("r2347"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -370,7 +370,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-374", name: "谷津干潟周辺水路（習志野市）", slug: "yatsu-canal-dojou",
     description: "千葉県習志野市の谷津干潟周辺に流れる小水路はドジョウの生息地。ラムサール条約登録地である谷津干潟に隣接する淡水水路にドジョウやマブナが生息。都市部に残る貴重な自然環境で小物釣りが楽しめる。近隣の谷津バラ園と合わせて楽しむ人も。",
-    latitude: 35.6812, longitude: 140.0083, address: "千葉県習志野市谷津地先",
+    latitude: 35.6812, longitude: 140.0083, address: "〒275-0026 千葉県習志野市谷津地先",
     accessInfo: "JR総武線津田沼駅からバスで約10分。京葉道路花輪ICから約5分。",
     region: lr("r2348"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -393,7 +393,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-375", name: "渡良瀬遊水地水路", slug: "watarase-canal-dojou",
     description: "渡良瀬遊水地内に張り巡らされた水路はドジョウの宝庫。広大な湿地帯の水路にマドジョウやシマドジョウが多数生息。タナゴやマブナも同時に楽しめ、里釣りの原風景を味わえる。ラムサール条約登録湿地の豊かな生態系の中で自然を満喫。",
-    latitude: 36.2212, longitude: 139.7183, address: "栃木県栃木市藤岡町内野地先",
+    latitude: 36.2212, longitude: 139.7183, address: "〒323-1103 栃木県栃木市藤岡町内野地先",
     accessInfo: "東武日光線藤岡駅から車で約10分。東北自動車道館林ICから約20分。",
     region: lr("r2349"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -417,7 +417,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-376", name: "霞ヶ浦周辺田園水路", slug: "kasumi-tanbo-dojou",
     description: "茨城県霞ヶ浦周辺の田園地帯に広がる水路群はドジョウの好生息地。レンコン田や水田の間を流れる小水路にマドジョウが豊富に生息。タナゴやマブナも同時に楽しめ、のどかな里釣りが満喫できる。春の田植え前後はドジョウの活性が特に高い。",
-    latitude: 36.0212, longitude: 140.3483, address: "茨城県かすみがうら市下土田地先",
+    latitude: 36.0212, longitude: 140.3483, address: "〒300-0214 茨城県かすみがうら市下土田地先",
     accessInfo: "JR常磐線神立駅から車で約15分。常磐自動車道千代田石岡ICから約15分。",
     region: lr("r2350"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -441,7 +441,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-377", name: "亀田郷用水路（新潟市）", slug: "kamedagou-dojou",
     description: "新潟市の亀田郷は日本有数の穀倉地帯。広大な水田地帯に張り巡らされた用水路にドジョウが豊富に生息。かつて「芦沼」と呼ばれた低湿地を干拓した歴史ある土地で、今も水辺環境が豊か。マブナやタナゴも楽しめる越後の里釣りフィールド。",
-    latitude: 37.8712, longitude: 139.1183, address: "新潟県新潟市江南区亀田地先",
+    latitude: 37.8712, longitude: 139.1183, address: "〒950-0141 新潟県新潟市江南区亀田地先",
     accessInfo: "JR信越本線亀田駅から車で約5分。北陸自動車道新潟亀田ICすぐ。",
     region: lr("r2351"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",

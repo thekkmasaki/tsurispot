@@ -104,7 +104,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si1", name: "網代港", slug: "ajiro-port",
     description: "熱海の南に位置する風情ある漁港。干物で有名な網代だが、堤防からのサビキ釣りやアオリイカのエギングでも実績が高い。港内は比較的穏やかで初心者にも釣りやすい。",
-    latitude: 35.0672, longitude: 139.0789, address: "静岡県熱海市下多賀",
+    latitude: 35.0672, longitude: 139.0789, address: "〒413-0103 静岡県熱海市網代100-7",
     accessInfo: "JR網代駅から徒歩約10分。国道135号沿い。",
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車スペースあり",
@@ -137,7 +137,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si2", name: "多賀港", slug: "taga-port",
     description: "熱海と網代の間に位置する小さな漁港。混雑が少なく穴場的存在。テトラ帯でのカサゴやメバル釣りが楽しめる。",
-    latitude: 35.0745, longitude: 139.0812, address: "静岡県熱海市上多賀",
+    latitude: 35.0745, longitude: 139.0812, address: "〒413-0101 静岡県熱海市上多賀1069",
     accessInfo: "JR網代駅から車で約5分。国道135号沿い。",
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
@@ -166,7 +166,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si3", name: "初島堤防", slug: "hatsushima-breakwater",
     description: "熱海からフェリーで30分の離島・初島。島を囲む堤防は潮通し抜群で、メジナやイサキ、回遊魚の実績が高い。島ならではの魚影の濃さが魅力。",
-    latitude: 35.041200, longitude: 139.16580, address: "静岡県熱海市初島",
+    latitude: 35.041200, longitude: 139.16580, address: "〒413-0004 静岡県熱海市初島800",
     accessInfo: "熱海港から富士急マリンリゾート初島航路で約30分。",
     region: region("r9"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: false, parkingDetail: "島内に車は不要。熱海港に有料駐車場あり",
@@ -205,7 +205,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si4", name: "長浜海岸", slug: "nagahama-beach-atami",
     description: "熱海市内にある砂浜と磯が混在する海岸。投げ釣りでキスやカレイ、磯場ではカサゴやメバルが狙える。夏場は海水浴場との兼ね合いに注意。",
-    latitude: 35.0830, longitude: 139.0890, address: "静岡県熱海市下多賀",
+    latitude: 35.0830, longitude: 139.0890, address: "〒413-0102 静岡県熱海市下多賀1374",
     accessInfo: "JR網代駅から徒歩約15分。国道135号沿い。",
     region: region("r9"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海岸沿い有料駐車場あり（夏季のみ有料の場合あり）",
@@ -240,7 +240,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si5", name: "宇佐美港", slug: "usami-port",
     description: "伊東市北部の静かな漁港。サビキでアジやイワシが安定して釣れるファミリー向けポイント。港の外側ではエギングでアオリイカも狙える。",
-    latitude: 34.9890, longitude: 139.1012, address: "静岡県伊東市宇佐美",
+    latitude: 34.9890, longitude: 139.1012, address: "〒414-0001 静岡県伊東市宇佐美41",
     accessInfo: "JR宇佐美駅から徒歩約15分。国道135号沿い。",
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車スペースあり",
@@ -271,7 +271,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si6", name: "川奈港", slug: "kawana-port",
     description: "伊東市南部の風光明媚な漁港。堤防先端からはカゴ釣りでマダイやイサキが狙え、港内ではサビキでアジやイワシが楽しめる。エギングの好ポイントとしても有名。",
-    latitude: 34.9345, longitude: 139.1356, address: "静岡県伊東市川奈",
+    latitude: 34.9345, longitude: 139.1356, address: "〒414-0044 静岡県伊東市川奈1004",
     accessInfo: "伊豆急行川奈駅から徒歩約15分。国道135号から県道109号経由。",
     region: region("r9"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり",
@@ -304,7 +304,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si7", name: "いるか浜", slug: "iruka-beach",
     description: "伊東市の人工ビーチ。夏は海水浴場だが、春秋は投げ釣りでキスが好調。隣接する堤防からはアジやカサゴも狙える初心者にやさしいスポット。",
-    latitude: 34.9530, longitude: 139.1110, address: "静岡県伊東市新井",
+    latitude: 34.9530, longitude: 139.1110, address: "〒414-0043 静岡県伊東市新井2丁目",
     accessInfo: "JR伊東駅から徒歩約15分。",
     region: region("r9"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺に有料駐車場あり",
@@ -332,7 +332,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si8", name: "汐吹崎", slug: "shiobuki-zaki",
     description: "伊東市南部の荒々しい磯場。汐吹き岩で有名な観光スポットだが、磯釣り師にはメジナやイシダイのポイントとして知られる。干潮時に広がる磯場が狙い目。",
-    latitude: 34.9280, longitude: 139.141220, address: "静岡県伊東市富戸先",
+    latitude: 34.9280, longitude: 139.141220, address: "〒413-0231 静岡県伊東市富戸842",
     accessInfo: "伊豆急行川奈駅から車で約5分。汐吹公園駐車場から徒歩約5分。",
     region: region("r9"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "汐吹公園駐車場（無料・数台）",
@@ -373,7 +373,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si9", name: "富戸港", slug: "futo-port",
     description: "東伊豆の代表的な漁港。ダイビングスポットとしても有名だが、堤防からのサビキ釣りやカゴ釣りの実績も高い。透明度の高い海で気持ちよく釣りが楽しめる。",
-    latitude: 34.9120, longitude: 139.1320, address: "静岡県伊東市富戸",
+    latitude: 34.9120, longitude: 139.1320, address: "〒413-0231 静岡県伊東市富戸987-2",
     accessInfo: "伊豆急行富戸駅から徒歩約15分。国道135号から県道経由。",
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり（一部有料）",
@@ -404,7 +404,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si10", name: "八幡野港", slug: "yahawano-port",
     description: "伊豆高原エリアの小さな漁港。観光客が少なく穴場。堤防からのエギングやサビキ釣りが楽しめる。隣接する磯場でメジナも狙える。",
-    latitude: 34.8950, longitude: 139.1290, address: "静岡県伊東市八幡野",
+    latitude: 34.8950, longitude: 139.1290, address: "〒413-0232 静岡県伊東市八幡野1736-7",
     accessInfo: "伊豆急行伊豆高原駅から徒歩約20分。",
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車スペースあり",
@@ -433,7 +433,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si11", name: "赤沢港", slug: "akazawa-port",
     description: "東伊豆の赤沢温泉郷にある小さな漁港。磯場が隣接しており、メジナやカサゴの穴釣りが楽しめる。温泉リゾートと釣りを両立できるスポット。",
-    latitude: 34.8780, longitude: 139.1150, address: "静岡県伊東市赤沢",
+    latitude: 34.8780, longitude: 139.1150, address: "〒414-0233 静岡県伊東市赤沢164",
     accessInfo: "伊豆急行伊豆高原駅から車で約10分。",
     region: region("r9"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
@@ -462,7 +462,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si12", name: "北川港", slug: "hokkawa-port",
     description: "東伊豆町の小さな温泉港。北川温泉の目の前にあり、釣りと温泉を同時に楽しめる。サビキ釣りやカサゴの穴釣りが手軽に楽しめる。",
-    latitude: 34.8620, longitude: 139.1045, address: "静岡県賀茂郡東伊豆町奈良本",
+    latitude: 34.8620, longitude: 139.1045, address: "〒413-0302 静岡県賀茂郡東伊豆町奈良本1032",
     accessInfo: "伊豆急行伊豆北川駅から徒歩約10分。",
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
@@ -490,7 +490,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si13", name: "大川港", slug: "okawa-port",
     description: "東伊豆町の静かな漁港。大川温泉の近く。堤防からはサビキ釣りやエギングが楽しめ、周辺の磯場ではメジナやカサゴも狙える。",
-    latitude: 34.8530, longitude: 139.0980, address: "静岡県賀茂郡東伊豆町大川",
+    latitude: 34.8530, longitude: 139.0980, address: "〒413-0301 静岡県賀茂郡東伊豆町大川4-1",
     accessInfo: "伊豆急行伊豆大川駅から徒歩約10分。",
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
@@ -519,7 +519,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si14", name: "稲取港", slug: "inatori-port",
     description: "東伊豆最大級の漁港。金目鯛の水揚げで全国的に有名。堤防からはサビキでアジ、カゴ釣りでマダイ、エギングでアオリイカと多彩な釣りが楽しめる。",
-    latitude: 34.811200, longitude: 139.05670, address: "静岡県賀茂郡東伊豆町稲取",
+    latitude: 34.811200, longitude: 139.05670, address: "〒413-0411 静岡県賀茂郡東伊豆町稲取355",
     accessInfo: "伊豆急行伊豆稲取駅から徒歩約15分。",
     region: region("r9"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に有料駐車場あり",
@@ -555,7 +555,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si15", name: "見高磯", slug: "midaka-iso",
     description: "東伊豆の本格磯釣りポイント。ゴロタ石と岩礁が続く磯場で、メジナやクロダイのフカセ釣りが有名。春秋のアオリイカも実績が高い上級者向けの磯。",
-    latitude: 34.7950, longitude: 139.0420, address: "静岡県賀茂郡河津町見高",
+    latitude: 34.7950, longitude: 139.0420, address: "〒413-0503 静岡県賀茂郡河津町見高358-2",
     accessInfo: "伊豆急行伊豆稲取駅から車で約10分。磯への降り口から徒歩約10分。",
     region: region("r9"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "磯入り口付近に駐車スペースあり",
@@ -592,7 +592,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si16", name: "河津浜", slug: "kawazu-beach",
     description: "河津桜で有名な河津町の海岸。砂利混じりの砂浜で、投げ釣りでキスやカレイが狙える。秋冬はヒラメの実績もある穴場的ビーチ。",
-    latitude: 34.7580, longitude: 139.0120, address: "静岡県賀茂郡河津町浜",
+    latitude: 34.7580, longitude: 139.0120, address: "〒413-0513 静岡県賀茂郡河津町浜370-5",
     accessInfo: "伊豆急行河津駅から徒歩約10分。",
     region: region("r9"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海岸沿いに駐車スペースあり（桜シーズンは混雑）",
@@ -620,7 +620,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si17", name: "今井浜", slug: "imaihama-beach",
     description: "河津町の美しいビーチ。白い砂浜が広がり、夏は海水浴場としても賑わう。春秋の早朝はキスの投げ釣りポイント。サーフルアーでヒラメも狙える。",
-    latitude: 34.76780, longitude: 139.021200, address: "静岡県賀茂郡河津町見高",
+    latitude: 34.76780, longitude: 139.021200, address: "〒413-0503 静岡県賀茂郡河津町見高158-5",
     accessInfo: "伊豆急行今井浜海岸駅から徒歩約3分。",
     region: region("r9"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海岸沿いに有料駐車場あり（夏季）",
@@ -648,7 +648,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si18", name: "白浜海岸", slug: "shirahama-coast-shimoda",
     description: "下田市の白い砂浜が美しい海岸。伊豆随一の透明度を誇る。投げ釣りでキス、秋冬にはヒラメやマゴチもルアーで狙える。夏は海水浴場。",
-    latitude: 34.6650, longitude: 138.9780, address: "静岡県下田市白浜",
+    latitude: 34.6650, longitude: 138.9780, address: "〒415-0012 静岡県下田市白浜2745-1",
     accessInfo: "伊豆急行伊豆急下田駅からバスで約10分。",
     region: region("r9"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "有料駐車場あり（夏季は高額）",
@@ -683,7 +683,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si19", name: "須崎港", slug: "suzaki-port-shimoda",
     description: "下田市須崎半島にある漁港。須崎御用邸で知られるエリア。潮通しが良くアジやカマスの回遊魚が期待できるほか、エギングの人気ポイント。",
-    latitude: 34.6560, longitude: 138.9620, address: "静岡県下田市須崎",
+    latitude: 34.6560, longitude: 138.9620, address: "〒415-0014 静岡県下田市須崎1447",
     accessInfo: "伊豆急行伊豆急下田駅から車で約15分。",
     region: region("r9"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
@@ -719,7 +719,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si20", name: "爪木崎", slug: "tsumekizaki",
     description: "須崎半島の先端に位置する岬。水仙の群生地としても有名だが、磯釣りの一級ポイント。メジナ、イシダイ、クロダイが狙えるほか、回遊魚のショアジギングも実績あり。",
-    latitude: 34.6420, longitude: 138.9780, address: "静岡県下田市須崎",
+    latitude: 34.6420, longitude: 138.9780, address: "〒415-0014 静岡県下田市須崎1327",
     accessInfo: "伊豆急行伊豆急下田駅からバスで約15分、爪木崎バス停下車徒歩約10分。",
     region: region("r9"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "爪木崎公園駐車場あり（有料）",
@@ -760,7 +760,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si21", name: "田牛海岸", slug: "toji-coast",
     description: "下田市南部の秘境的海岸。サンドスキー場としても有名。磯と砂浜が入り混じり、投げ釣りのキスや磯場のカサゴ、メジナが狙える。アクセスの不便さゆえに穴場。",
-    latitude: 34.6320, longitude: 138.9850, address: "静岡県下田市田牛",
+    latitude: 34.6320, longitude: 138.9850, address: "〒415-0029 静岡県下田市田牛",
     accessInfo: "伊豆急行伊豆急下田駅から車で約20分。バスの場合は田牛バス停下車。",
     region: region("r9"), spotType: "rocky", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "海岸沿いに無料駐車スペースあり",
@@ -791,7 +791,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si22", name: "弓ヶ浜", slug: "yumigahama-beach",
     description: "南伊豆町の弓形に弧を描く美しい砂浜。白砂青松の景勝地で日本の渚百選にも選ばれている。投げ釣りでキスが安定して釣れるファミリー向けスポット。",
-    latitude: 34.6120, longitude: 138.9580, address: "静岡県賀茂郡南伊豆町湊",
+    latitude: 34.6120, longitude: 138.9580, address: "〒415-0152 静岡県賀茂郡南伊豆町湊",
     accessInfo: "伊豆急行伊豆急下田駅からバスで約25分。",
     region: region("r9"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海岸近くに有料駐車場あり",
@@ -819,7 +819,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si23", name: "石廊崎港", slug: "irozaki-port",
     description: "伊豆半島最南端の港。黒潮の影響を直接受け、魚種の豊富さは伊豆随一。カゴ釣りでマダイやイサキ、ショアジギングで青物が狙える上級者憧れのポイント。",
-    latitude: 34.6050, longitude: 138.8460, address: "静岡県賀茂郡南伊豆町石廊崎",
+    latitude: 34.6050, longitude: 138.8460, address: "〒415-0156 静岡県賀茂郡南伊豆町石廊崎546-5",
     accessInfo: "伊豆急行伊豆急下田駅からバスで約40分。車は国道136号から県道16号経由。",
     region: region("r9"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "石廊崎灯台付近に有料駐車場あり",
@@ -864,7 +864,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si24", name: "中木港", slug: "nakagi-port",
     description: "南伊豆の漁師町・中木の港。ヒリゾ浜への渡し船の出発地としても有名。堤防からはサビキやカゴ釣り、周辺の磯ではメジナやイシダイの本格磯釣りが楽しめる。",
-    latitude: 34.6180, longitude: 138.8680, address: "静岡県賀茂郡南伊豆町中木",
+    latitude: 34.6180, longitude: 138.8680, address: "〒415-0311 静岡県賀茂郡南伊豆町中木",
     accessInfo: "伊豆急行伊豆急下田駅からバスで約45分。車は国道136号から県道経由。",
     region: region("r9"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に有料駐車場あり",
@@ -897,7 +897,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si25", name: "妻良港", slug: "mera-port",
     description: "南伊豆の西側に位置する漁港。伊豆の秘境的漁港で釣り人の数が少なく、のんびり釣りが楽しめる。カゴ釣りやフカセ釣りでメジナ、マダイが狙える実力派ポイント。",
-    latitude: 34.6250, longitude: 138.8350, address: "静岡県賀茂郡南伊豆町妻良",
+    latitude: 34.6250, longitude: 138.8350, address: "〒415-0533 静岡県賀茂郡南伊豆町妻良416",
     accessInfo: "伊豆急行伊豆急下田駅からバスで約50分。車は国道136号経由。",
     region: region("r9"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
@@ -930,7 +930,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si26", name: "子浦港", slug: "koura-port",
     description: "南伊豆の西海岸に位置する天然の良港。三方を山に囲まれた穏やかな入り江で、風に強い。カゴ釣りやサビキ釣りの好ポイント。のどかな漁村の雰囲気も魅力。",
-    latitude: 34.6340, longitude: 138.8180, address: "静岡県賀茂郡南伊豆町子浦",
+    latitude: 34.6340, longitude: 138.8180, address: "〒415-0532 静岡県賀茂郡南伊豆町子浦1553-2",
     accessInfo: "伊豆急行伊豆急下田駅からバスで約55分。車は国道136号経由。",
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
@@ -959,7 +959,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si27", name: "下田外浦港", slug: "shimoda-sotora-port",
     description: "下田湾の入口に位置する外浦港。穏やかな内湾でファミリー釣りに最適。サビキでアジ・イワシが安定して釣れるほか、エギングのポイントとしても知られる。",
-    latitude: 34.6780, longitude: 138.9350, address: "静岡県下田市柿崎",
+    latitude: 34.6780, longitude: 138.9350, address: "〒415-0013 静岡県下田市柿崎",
     accessInfo: "伊豆急行伊豆急下田駅から車で約10分。バスの場合は外浦口バス停下車徒歩5分。",
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり（夏季は混雑）",
@@ -995,7 +995,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si28", name: "富戸の磯（ボラ納屋下）", slug: "futo-iso-boranaya",
     description: "富戸エリアの本格磯釣りポイント。城ヶ崎海岸の一角で、溶岩が固まった荒々しい岩礁帯が広がる。メジナの魚影が濃く、冬場の寒グレシーズンは特に人気。",
-    latitude: 34.90580, longitude: 139.1400, address: "静岡県伊東市富戸",
+    latitude: 34.90580, longitude: 139.1400, address: "〒413-0231 静岡県伊東市富戸837",
     accessInfo: "伊豆急行富戸駅から徒歩約25分。城ヶ崎海岸ピクニカルコース経由。",
     region: region("r9"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "城ヶ崎海岸駐車場あり（有料）",
@@ -1030,7 +1030,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si29", name: "下田港犬走堤防", slug: "shimoda-inubashiri-breakwater",
     description: "下田港の東側に位置する犬走堤防。下田港の中でもアクセスが良く、サビキ・エギング・カゴ釣りと多彩な釣りが楽しめる人気ポイント。足場も良好でファミリーにも人気。",
-    latitude: 34.6740, longitude: 138.9510, address: "静岡県下田市三丁目",
+    latitude: 34.6740, longitude: 138.9510, address: "〒415-0023 静岡県下田市三丁目18",
     accessInfo: "伊豆急行伊豆急下田駅から徒歩約20分。下田港沿いを歩く。",
     region: region("r9"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "下田港周辺に有料駐車場あり",

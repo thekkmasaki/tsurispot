@@ -110,6 +110,8 @@ export default async function sitemap({
       { url: `${baseUrl}/sitemap-page`, lastModified: now, changeFrequency: "weekly", priority: 0.5 },
       { url: `${baseUrl}/contact`, lastModified: now, changeFrequency: "yearly", priority: 0.4 },
       { url: `${baseUrl}/partner`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
+      { url: `${baseUrl}/umigyo`, lastModified: now, changeFrequency: "monthly", priority: 0.7 },
+      { url: `${baseUrl}/umigyo/for-municipalities`, lastModified: now, changeFrequency: "monthly", priority: 0.6 },
       { url: `${baseUrl}/about`, lastModified: now, changeFrequency: "monthly", priority: 0.5 },
       { url: `${baseUrl}/legal`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },
       { url: `${baseUrl}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 },

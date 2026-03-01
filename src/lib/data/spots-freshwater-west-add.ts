@@ -59,7 +59,7 @@ export const freshwaterSpotsWestAdd: FishingSpot[] = [
   {
     id: "fw-146", name: "揖保川", slug: "ibogawa-river",
     description: "兵庫県西部を流れる播磨灘に注ぐ一級河川。アユの友釣りで西日本有数の実績を誇り、毎年多くのアングラーが訪れる。上流域はアマゴの渓流釣りも人気。揖保乃糸（素麺）で有名な地域。",
-    latitude: 34.9719, longitude: 134.5531, address: "兵庫県宍粟市山崎町",
+    latitude: 34.9719, longitude: 134.5531, address: "〒671-2593 兵庫県宍粟市山崎町中広瀬133-6",
     accessInfo: "中国道山崎ICから約5分。JR姫路駅から車で約40分。",
     region: lr("r786"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日）",
@@ -83,7 +83,7 @@ export const freshwaterSpotsWestAdd: FishingSpot[] = [
   {
     id: "fw-147", name: "吉野川（紀の川上流）", slug: "yoshinogawa-nara",
     description: "奈良県吉野町を流れる紀の川の上流域。吉野杉の美林に囲まれた清流で、アマゴ・アユが豊富。吉野山の桜見物と合わせた春の釣行が人気。",
-    latitude: 34.3958, longitude: 135.8583, address: "奈良県吉野郡吉野町上市",
+    latitude: 34.3958, longitude: 135.8583, address: "〒639-3111 奈良県吉野郡吉野町上市2060",
     accessInfo: "南阪奈道路葛城ICから約40分。近鉄吉野線上市駅から徒歩約5分。",
     region: lr("r788"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -107,7 +107,7 @@ export const freshwaterSpotsWestAdd: FishingSpot[] = [
   {
     id: "fw-148", name: "日置川", slug: "hikigawa-river",
     description: "和歌山県白浜町・すさみ町を流れる清流。アユの友釣りが盛んで、県下有数の鮎河川。上流域はアマゴも釣れる。白浜温泉から近く、リゾート感のある釣行が楽しめる。",
-    latitude: 33.6917, longitude: 135.5708, address: "和歌山県西牟婁郡白浜町日置",
+    latitude: 33.6917, longitude: 135.5708, address: "〒649-2511 和歌山県西牟婁郡白浜町日置980-1",
     accessInfo: "紀勢自動車道日置川ICから約5分。JR紀伊日置駅から徒歩約10分。",
     region: lr("r789"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -131,7 +131,7 @@ export const freshwaterSpotsWestAdd: FishingSpot[] = [
   {
     id: "fw-149", name: "高津川", slug: "takatsugawa-river",
     description: "島根県益田市・津和野町を流れる一級河川。ダムのない自然河川として日本有数の清流で、水質日本一に輝いたこともある。天然アユの宝庫で、その味は絶品と評判。津和野の城下町観光も合わせて。",
-    latitude: 34.6778, longitude: 131.8500, address: "島根県益田市高津町",
+    latitude: 34.6778, longitude: 131.8500, address: "〒698-0041 島根県益田市高津町イ1643",
     accessInfo: "中国道六日市ICから約30分。JR益田駅から車で約10分。",
     region: lr("r807"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日）",
@@ -155,7 +155,7 @@ export const freshwaterSpotsWestAdd: FishingSpot[] = [
   {
     id: "fw-150", name: "旭川", slug: "asahikawa-river-okayama",
     description: "岡山県を流れる一級河川。岡山後楽園の横を流れ、上流の湯原温泉周辺は渓流釣りの名所。中流域はアユ、下流域はシーバスも狙える。湯原ダム上流は大物イワナが潜む。",
-    latitude: 35.0528, longitude: 133.7681, address: "岡山県真庭市湯原温泉",
+    latitude: 35.0528, longitude: 133.7681, address: "〒717-0402 岡山県真庭市湯原温泉3",
     accessInfo: "米子道湯原ICから約5分。JR中国勝山駅からバスで約20分。",
     region: lr("r792"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -179,7 +179,7 @@ export const freshwaterSpotsWestAdd: FishingSpot[] = [
   {
     id: "fw-151", name: "錦川", slug: "nishikigawa-river",
     description: "山口県岩国市を流れる清流。錦帯橋で有名な観光名所を流れる川で、アユ・ヤマメが豊富。錦帯橋周辺は景観も素晴らしく、観光と釣りを同時に楽しめる。上流の錦町は渓流釣りの穴場。",
-    latitude: 34.1669, longitude: 132.1758, address: "山口県岩国市横山",
+    latitude: 34.1669, longitude: 132.1758, address: "〒741-0081 山口県岩国市横山2丁目6-51",
     accessInfo: "山陽道岩国ICから約10分。JR岩国駅からバスで約20分。",
     region: lr("r794"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
@@ -204,7 +204,7 @@ export const freshwaterSpotsWestAdd: FishingSpot[] = [
   {
     id: "fw-152", name: "吉野川（徳島）", slug: "yoshinogawa-tokushima",
     description: "四国三郎の異名を持つ日本三大暴れ川の一つ。徳島県を横断する大河で、アユ釣りの名所として全国的に有名。特に上流の大歩危・小歩危峡は渓谷美と釣りの両方が楽しめる。",
-    latitude: 33.9292, longitude: 133.9667, address: "徳島県三好市池田町",
+    latitude: 33.9292, longitude: 133.9667, address: "〒778-0002 徳島県三好市池田町マチ2145",
     accessInfo: "徳島自動車道井川池田ICから約5分。JR阿波池田駅から徒歩約10分。",
     region: lr("r795"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日）",
@@ -228,7 +228,7 @@ export const freshwaterSpotsWestAdd: FishingSpot[] = [
   {
     id: "fw-153", name: "穴吹川", slug: "anabukigawa-river",
     description: "徳島県美馬市を流れる吉野川の支流。「四国一の清流」と称される透明度抜群の川で、川底まで透き通って見える。夏は川遊びのメッカ。アユ・アマゴの魚影が濃い。",
-    latitude: 34.0292, longitude: 134.0500, address: "徳島県美馬市穴吹町穴吹",
+    latitude: 34.0292, longitude: 134.0500, address: "〒777-0005 徳島県美馬市穴吹町穴吹字九反地5",
     accessInfo: "徳島自動車道脇町ICから約10分。JR穴吹駅から徒歩約10分。",
     region: lr("r796"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -252,7 +252,7 @@ export const freshwaterSpotsWestAdd: FishingSpot[] = [
   {
     id: "fw-154", name: "面河川", slug: "omogogawa-river",
     description: "愛媛県久万高原町を流れる仁淀川の源流の一つ。石鎚山系の清流で、アマゴ・イワナの渓流釣りが楽しめる。面河渓谷は四国有数の景勝地で、エメラルドグリーンの渓谷美が圧巻。",
-    latitude: 33.7625, longitude: 133.0500, address: "愛媛県上浮穴郡久万高原町若山",
+    latitude: 33.7625, longitude: 133.0500, address: "〒791-1710 愛媛県上浮穴郡久万高原町若山650-1",
     accessInfo: "松山道松山ICから約60分。JR松山駅から車で約80分。",
     region: lr("r797"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -275,7 +275,7 @@ export const freshwaterSpotsWestAdd: FishingSpot[] = [
   {
     id: "fw-155", name: "安田川", slug: "yasudagawa-river",
     description: "高知県安田町を流れる清流。仁淀川・四万十川と並ぶ高知の三大清流の一つで、天然アユの遡上量が多い。温かい気候のため他の河川より早くアユが解禁される。",
-    latitude: 33.5250, longitude: 134.0167, address: "高知県安芸郡安田町安田",
+    latitude: 33.5250, longitude: 134.0167, address: "〒781-6421 高知県安芸郡安田町安田1850",
     accessInfo: "高知東部自動車道安田ICから約5分。土佐くろしお鉄道安田駅から徒歩約10分。",
     region: lr("r810"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -299,7 +299,7 @@ export const freshwaterSpotsWestAdd: FishingSpot[] = [
   {
     id: "fw-156", name: "筑後川", slug: "chikugogawa-river",
     description: "九州最大の河川で「筑紫次郎」の異名を持つ。福岡県・大分県・佐賀県を流れ、有明海に注ぐ。エツ（筑後川固有の魚）やアユの漁が盛ん。中流域のバス釣りも人気が高い。",
-    latitude: 33.3181, longitude: 130.7500, address: "福岡県久留米市瀬下町",
+    latitude: 33.3181, longitude: 130.7500, address: "〒830-0025 福岡県久留米市瀬下町265",
     accessInfo: "九州道久留米ICから約10分。JR久留米駅から徒歩約15分。",
     region: lr("r800"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "河川敷に無料駐車スペースあり",
@@ -324,7 +324,7 @@ export const freshwaterSpotsWestAdd: FishingSpot[] = [
   {
     id: "fw-157", name: "白川（熊本）", slug: "shirakawa-kumamoto",
     description: "熊本県を流れる一級河川。阿蘇山を源流とし、熊本市街地を流れる。水源が豊富で水質が良く、アユやオイカワが釣れる。熊本城周辺での都市型釣りが楽しめる。",
-    latitude: 32.8092, longitude: 130.7167, address: "熊本県熊本市中央区白川",
+    latitude: 32.8092, longitude: 130.7167, address: "〒860-0862 熊本県熊本市中央区黒髪1丁目10",
     accessInfo: "九州道熊本ICから約15分。JR熊本駅から車で約10分。",
     region: lr("r811"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
@@ -347,7 +347,7 @@ export const freshwaterSpotsWestAdd: FishingSpot[] = [
   {
     id: "fw-158", name: "耶馬溪（山国川）", slug: "yabakei-river",
     description: "大分県中津市耶馬溪を流れる山国川。日本三大奇勝の一つ「耶馬渓」の渓谷美の中で釣りが楽しめる贅沢なフィールド。アユ・ヤマメの好漁場で、秋の紅葉は特に美しい。",
-    latitude: 33.3975, longitude: 131.1222, address: "大分県中津市耶馬溪町柿坂",
+    latitude: 33.3975, longitude: 131.1222, address: "〒871-0405 大分県中津市耶馬溪町大字柿坂138-1",
     accessInfo: "東九州道中津ICから約30分。JR中津駅から車で約30分。",
     region: lr("r813"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -371,7 +371,7 @@ export const freshwaterSpotsWestAdd: FishingSpot[] = [
   {
     id: "fw-159", name: "大淀川", slug: "oyodogawa-river",
     description: "宮崎県を流れる一級河川。霧島山系を源流とし、宮崎市街地を流れて日向灘に注ぐ。中流域はアユ釣りで有名、下流域ではシーバスやクロダイも狙える。温暖な気候で年間を通じて釣りが楽しめる。",
-    latitude: 31.9053, longitude: 131.4167, address: "宮崎県宮崎市大淀",
+    latitude: 31.9053, longitude: 131.4167, address: "〒880-0902 宮崎県宮崎市大淀4丁目6-28",
     accessInfo: "宮崎自動車道宮崎ICから約10分。JR宮崎駅から車で約10分。",
     region: lr("r804"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
@@ -395,7 +395,7 @@ export const freshwaterSpotsWestAdd: FishingSpot[] = [
   {
     id: "fw-160", name: "川内川", slug: "sendaigawa-river-kagoshima",
     description: "鹿児島県を流れる九州第二の大河。アユ釣りの好漁場として知られ、天然遡上のアユが多い。中流の曽木の滝は「東洋のナイアガラ」と呼ばれる名瀑。鹿児島の温泉と合わせた釣行が楽しめる。",
-    latitude: 31.8167, longitude: 130.2500, address: "鹿児島県薩摩川内市宮里町",
+    latitude: 31.8167, longitude: 130.2500, address: "〒895-0065 鹿児島県薩摩川内市宮里町1935-1",
     accessInfo: "南九州道薩摩川内ICから約10分。JR川内駅から車で約5分。",
     region: lr("r805"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",

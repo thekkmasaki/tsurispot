@@ -43,7 +43,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-071", name: "屈斜路湖", slug: "kussharoko-trout",
     description: "日本最大のカルデラ湖。ヒメマスやニジマスの好漁場として知られ、砂湯エリアでは温泉が湧き出す独特の環境。秋にはコカニー（ヒメマス）の遡上が見られ、大型ニジマスも狙える。カヌーフィッシングも人気。",
-    latitude: 43.6142, longitude: 144.3331, address: "北海道川上郡弟子屈町屈斜路",
+    latitude: 43.6142, longitude: 144.3331, address: "〒088-3341 北海道川上郡弟子屈町屈斜路",
     accessInfo: "釧路空港から車で約1時間30分。JR摩周駅から車で約20分。",
     region: lr("r697"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
@@ -69,7 +69,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-072", name: "尻別川", slug: "shiribetsugawa-trout",
     description: "「日本一の清流」に選ばれたこともある北海道を代表する清流。ニセコ連峰を源流とし、ニジマス・ヤマメ・イワナの宝庫。特にニジマスの大物が狙え、70cmオーバーの実績も。ラフティングも盛んな美しい川。",
-    latitude: 42.8747, longitude: 140.5781, address: "北海道虻田郡倶知安町比羅夫",
+    latitude: 42.8747, longitude: 140.5781, address: "〒044-0080 北海道虻田郡倶知安町比羅夫",
     accessInfo: "札幌から車で約2時間。JR倶知安駅から車で約10分。",
     region: lr("r698"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -93,7 +93,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-073", name: "釧路川", slug: "kushirogawa-trout",
     description: "釧路湿原を流れる北海道東部の名河川。イトウ・アメマスの聖地として全国から釣り人が訪れる。湿原区間のカヌーフィッシングは格別で、手つかずの自然の中でワイルドトラウトに出会える。",
-    latitude: 43.1283, longitude: 144.4072, address: "北海道釧路市北斗",
+    latitude: 43.1283, longitude: 144.4072, address: "〒085-0063 北海道釧路市北斗",
     accessInfo: "釧路空港から車で約30分。JR釧路駅から車で約20分（湿原区間）。",
     region: lr("r699"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人1,200円（1日）",
@@ -119,7 +119,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-074", name: "朱鞠内湖", slug: "shumarinai-trout",
     description: "北海道幌加内町にある日本最大の人造湖。幻の魚イトウが棲む貴重な湖として全国のルアー・フライマンの聖地。ワカサギ釣りも人気で、冬季は氷上穴釣りが楽しめる。人里離れた原始的な雰囲気が魅力。",
-    latitude: 44.2897, longitude: 142.2642, address: "北海道雨竜郡幌加内町朱鞠内",
+    latitude: 44.2897, longitude: 142.2642, address: "〒074-0742 北海道雨竜郡幌加内町朱鞠内",
     accessInfo: "旭川から車で約1時間40分。JR深川駅からバスで約2時間。",
     region: lr("r700"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -144,7 +144,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-075", name: "忠別川", slug: "chubetsugawa-trout",
     description: "大雪山系を源流とする旭川近郊の清流。ニジマス・ヤマメ・イワナが豊富で、上流域の渓流釣りが特に人気。旭岳の雪解け水が育む魚はコンディション抜群。旭川市街地からのアクセスも良好。",
-    latitude: 43.5886, longitude: 142.7953, address: "北海道上川郡東川町旭岳温泉",
+    latitude: 43.5886, longitude: 142.7953, address: "〒071-1472 北海道上川郡東川町旭岳温泉",
     accessInfo: "旭川から車で約40分。旭川空港から約30分。",
     region: lr("r701"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
@@ -169,7 +169,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-076", name: "岩木川", slug: "iwakigawa-ayu",
     description: "津軽平野を流れる青森県最大の河川。アユの友釣りで有名で、天然遡上のアユが釣れる貴重な河川。中流域ではヤマメやイワナも狙え、秋にはサケの遡上も見られる。岩木山を背景にした雄大な景色が魅力。",
-    latitude: 40.8133, longitude: 140.4247, address: "青森県弘前市中別所",
+    latitude: 40.8133, longitude: 140.4247, address: "〒036-8363 青森県弘前市中別所",
     accessInfo: "東北自動車道大鰐弘前ICから約30分。JR弘前駅から車で約20分。",
     region: lr("r702"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日・アユ）",
@@ -197,7 +197,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-077", name: "小川原湖", slug: "ogawarako-bass",
     description: "青森県東部に位置する汽水湖で、面積は全国11位の大きさ。ワカサギ・シラウオの漁獲量日本一を誇り、冬の氷上ワカサギ釣りは風物詩。ブラックバスやヘラブナも生息し、多彩な釣りが楽しめる。",
-    latitude: 40.7292, longitude: 141.2072, address: "青森県上北郡東北町大字大浦",
+    latitude: 40.7292, longitude: 141.2072, address: "〒039-2401 青森県上北郡東北町大字大浦",
     accessInfo: "第二みちのく有料道路三沢ICから約10分。青い森鉄道上北町駅から車で約10分。",
     region: lr("r703"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券 500円（1日）",
@@ -228,7 +228,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-078", name: "雫石川", slug: "shizukuishigawa-keiryu",
     description: "岩手山の麓を流れる清流で、ヤマメ・イワナの渓流釣りが盛ん。上流部は原生林に囲まれた美しい渓相で、天然のヤマメが生息。雫石スキー場周辺からのアクセスが良く、夏場の避暑釣りにも最適。",
-    latitude: 39.7558, longitude: 140.8803, address: "岩手県岩手郡雫石町長山",
+    latitude: 39.7558, longitude: 140.8803, address: "〒020-0585 岩手県岩手郡雫石町長山",
     accessInfo: "東北自動車道盛岡ICから約30分。JR雫石駅から車で約15分。",
     region: lr("r704"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -254,7 +254,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-079", name: "閉伊川", slug: "heigawa-ayu",
     description: "岩手県宮古市を流れる太平洋側の清流。天然アユの遡上が豊富で、東北屈指のアユ釣り河川。中流域のヤマメ・イワナの渓流釣りも人気が高い。三陸海岸の観光と合わせて楽しめる。",
-    latitude: 39.5886, longitude: 141.7933, address: "岩手県宮古市茂市",
+    latitude: 39.5886, longitude: 141.7933, address: "〒028-2104 岩手県宮古市茂市",
     accessInfo: "東北自動車道盛岡南ICから約1時間30分。JR茂市駅から徒歩すぐ。",
     region: lr("r705"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人2,500円（1日・アユ）",
@@ -281,7 +281,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-080", name: "雄物川", slug: "omonogawa-ayu",
     description: "秋田県南部を流れる一級河川。アユの友釣りとサクラマス釣りで東北屈指の人気河川。中流域は川幅が広く、ダイナミックな友釣りが楽しめる。横手市周辺が特に好ポイント。",
-    latitude: 39.3989, longitude: 140.4347, address: "秋田県横手市大雄大慈寺",
+    latitude: 39.3989, longitude: 140.4347, address: "〒013-0205 秋田県横手市大雄大慈寺",
     accessInfo: "秋田自動車道横手ICから約15分。JR横手駅から車で約10分。",
     region: lr("r706"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日・アユ）",
@@ -311,7 +311,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-081", name: "桧木内川", slug: "hinokinaigawa-keiryu",
     description: "角館の桜並木で有名な桧木内川は、渓流釣りの穴場的存在。上流域は原生林に囲まれた美しい渓相で、天然のヤマメ・イワナが豊富。角館の武家屋敷観光と合わせて楽しめる。",
-    latitude: 39.5953, longitude: 140.5633, address: "秋田県仙北市角館町",
+    latitude: 39.5953, longitude: 140.5633, address: "〒014-0325 秋田県仙北市角館町",
     accessInfo: "秋田自動車道大曲ICから約30分。JR角館駅から徒歩約15分（下流域）。",
     region: lr("r707"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -338,7 +338,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-082", name: "寒河江川", slug: "sagaegawa-ayu",
     description: "山形県中部を流れる最上川の支流で、東北を代表するアユの友釣り河川。清澄な水質と豊富な石付き苔がアユを育み、20cmを超える良型アユが釣れる。月山を望む風景の中での釣りは格別。",
-    latitude: 38.3731, longitude: 140.1494, address: "山形県寒河江市大字慈恩寺",
+    latitude: 38.3731, longitude: 140.1494, address: "〒990-0511 山形県寒河江市大字慈恩寺",
     accessInfo: "山形自動車道寒河江ICから約10分。JR寒河江駅から車で約10分。",
     region: lr("r708"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人2,500円（1日・アユ）",
@@ -364,7 +364,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-083", name: "小国川", slug: "ogunigawa-ayu",
     description: "山形県の清流・小国川は「日本の川の原風景」とも称される美しい渓流。天然アユの宝庫で、友釣りファンの聖地的存在。上流域ではヤマメ・イワナの渓流釣りも楽しめる。舟形町周辺が主なフィールド。",
-    latitude: 38.6869, longitude: 140.3356, address: "山形県最上郡舟形町舟形",
+    latitude: 38.6869, longitude: 140.3356, address: "〒999-4601 山形県最上郡舟形町舟形",
     accessInfo: "東北自動車道古川ICから約1時間。JR舟形駅から徒歩約15分。",
     region: lr("r709"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日・アユ）",
@@ -391,7 +391,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-084", name: "広瀬川", slug: "hirosegawa-keiryu",
     description: "杜の都・仙台市街を流れる清流で、市街地にいながら渓流釣りが楽しめる全国的にも珍しい河川。さとう宗幸の「青葉城恋唄」でも歌われた名川。アユ・ヤマメ・イワナが生息し、仙台市民の憩いの釣り場。",
-    latitude: 38.2514, longitude: 140.8278, address: "宮城県仙台市青葉区川内",
+    latitude: 38.2514, longitude: 140.8278, address: "〒980-0862 宮城県仙台市青葉区川内",
     accessInfo: "東北自動車道仙台宮城ICから約10分。地下鉄東西線大町西公園駅から徒歩約5分。",
     region: lr("r710"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -419,7 +419,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-085", name: "鳴瀬川", slug: "narusegawa-ayu",
     description: "宮城県中部を東西に流れる一級河川。アユの友釣りで人気が高く、天然遡上のアユが豊富。中流域の大崎市周辺は川幅が広くダイナミックな釣りが楽しめる。サクラマスの実績もある河川。",
-    latitude: 38.5456, longitude: 141.0367, address: "宮城県大崎市松山千石",
+    latitude: 38.5456, longitude: 141.0367, address: "〒987-1304 宮城県大崎市松山千石",
     accessInfo: "東北自動車道古川ICから約20分。JR松山町駅から車で約10分。",
     region: lr("r711"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日・アユ）",

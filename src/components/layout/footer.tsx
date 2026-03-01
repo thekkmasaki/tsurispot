@@ -10,7 +10,7 @@ export function Footer() {
           <div>
             <Link href="/" className="flex items-center gap-2">
               <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <Fish className="h-4 w-4" />
+                <Fish className="h-4 w-4" aria-hidden="true" />
               </div>
               <span className="font-bold">ツリスポ</span>
             </Link>

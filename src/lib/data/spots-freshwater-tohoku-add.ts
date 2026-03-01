@@ -54,7 +54,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-250", name: "十勝川上流域", slug: "tokachigawa-trout",
     description: "大雪山系を源流とする北海道十勝地方の大河。上流域ではニジマスやオショロコマの好漁場が点在し、トムラウシ方面の源流部では大型ニジマスが狙える。中流域ではアメマスの実績も高く、秋には50〜70cmクラスの大物が期待できる。十勝平野の雄大な景色の中で本格的なトラウトフィッシングが楽しめる。",
-    latitude: 43.0667, longitude: 143.2000, address: "北海道河東郡上士幌町ぬかびら源泉郷",
+    latitude: 43.0667, longitude: 143.2000, address: "〒080-1403 北海道河東郡上士幌町ぬかびら源泉郷",
     accessInfo: "帯広から車で約1時間30分。とかち帯広空港から車で約2時間。",
     region: lr("r2100"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
@@ -78,7 +78,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-251", name: "天塩川", slug: "teshiogawa-trout",
     description: "北海道北部を流れる日本最北の大河。イトウの聖地として全国から釣り人が訪れ、60cmを超えるニジマスの実績もある。中流域では50cmクラスのニジマスが定期的に釣れ、下流域ではイトウが狙える。川幅が広く、ウェーディングでの釣りが基本。人里離れた原野を流れる壮大なスケールが魅力。",
-    latitude: 44.8833, longitude: 141.7500, address: "北海道天塩郡天塩町",
+    latitude: 44.8833, longitude: 141.7500, address: "〒098-3300 北海道天塩郡天塩町",
     accessInfo: "旭川から車で約3時間。稚内空港から車で約1時間30分。",
     region: lr("r2101"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
@@ -102,7 +102,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-252", name: "豊平川", slug: "toyohiragawa-trout",
     description: "札幌市内を流れる石狩川水系の支流。都市河川ながら水質が良く、ニジマス・ヤマメ・アメマスが生息する全国的にも珍しい存在。定山渓温泉付近の上流域から市街地まで釣りが楽しめ、砥山ダム周辺は大型アメマスの実績が高い。札幌観光と合わせて楽しめる手軽さが魅力。",
-    latitude: 43.0083, longitude: 141.1667, address: "北海道札幌市南区定山渓温泉",
+    latitude: 43.0083, longitude: 141.1667, address: "〒061-2302 北海道札幌市南区定山渓温泉",
     accessInfo: "札幌中心部から車で約40分。地下鉄南北線真駒内駅からバスで約30分。",
     region: lr("r2102"), spotType: "river", difficulty: "intermediate",
     isFree: true, feeDetail: "遊漁券不要（石狩川水系豊平川は遊漁券不要区間が多い）",
@@ -126,7 +126,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-253", name: "石狩川上流（層雲峡）", slug: "ishikarigawa-upper-trout",
     description: "大雪山の麓・層雲峡付近を流れる石狩川の上流域。オショロコマが生息する原始的な渓流で、ニジマスやヤマメも混在する。層雲峡の壮大な柱状節理の景観を楽しみながらの釣りは格別。上川町周辺は温泉も豊富で、釣りと温泉を合わせた旅が人気。",
-    latitude: 43.7167, longitude: 143.1333, address: "北海道上川郡上川町層雲峡",
+    latitude: 43.7167, longitude: 143.1333, address: "〒078-1701 北海道上川郡上川町層雲峡",
     accessInfo: "旭川から車で約1時間20分。旭川空港から約1時間30分。",
     region: lr("r2103"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
@@ -151,7 +151,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-254", name: "奥入瀬川", slug: "oirasegawa-keiryu",
     description: "十和田湖を水源とする青森県を代表する清流。天然のヤマメ・イワナ・ニジマスが生息し、太平洋に注ぐためサクラマスやアユの遡上もある。支流の蔦川は特にイワナの魚影が濃い。奥入瀬渓流の観光と合わせて楽しめるが、渓流区間は別の入渓ポイントから。",
-    latitude: 40.5722, longitude: 141.0833, address: "青森県十和田市大字奥瀬",
+    latitude: 40.5722, longitude: 141.0833, address: "〒034-0301 青森県十和田市大字奥瀬",
     accessInfo: "東北自動車道十和田ICから約30分。JR八戸駅から車で約50分。",
     region: region("r674"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）/ 年券8,000円",
@@ -176,7 +176,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-255", name: "浅瀬石川", slug: "asaseishigawa-keiryu",
     description: "青森県黒石市を流れる岩木川水系の支流。比較的入渓しやすく歩きやすい渓流として初心者にも人気がある。イワナとヤマメが同じ割合で釣れ、上流の虹の湖（浅瀬石川ダム）ではワカサギ釣りも楽しめる。黒石温泉郷と合わせた釣行がおすすめ。",
-    latitude: 40.6500, longitude: 140.5833, address: "青森県黒石市大字沖浦",
+    latitude: 40.6500, longitude: 140.5833, address: "〒036-0405 青森県黒石市大字沖浦",
     accessInfo: "東北自動車道黒石ICから約20分。JR弘前駅から車で約40分。",
     region: lr("r2104"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
@@ -200,7 +200,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-256", name: "赤石川", slug: "akaishigawa-keiryu",
     description: "世界自然遺産・白神山地を源流とする青森県西部の清流。金色に輝く「金アユ」の産地として有名で、天然イワナ・ヤマメも豊富。白神山地の原生的な自然環境の中で釣りができる貴重なフィールド。透明度が極めて高く、魚影を目視しながらのサイトフィッシングも可能。",
-    latitude: 40.5667, longitude: 140.1333, address: "青森県西津軽郡鰺ヶ沢町大字一ツ森町",
+    latitude: 40.5667, longitude: 140.1333, address: "〒038-2731 青森県西津軽郡鰺ヶ沢町大字一ツ森町",
     accessInfo: "東北自動車道大鰐弘前ICから約1時間30分。JR鰺ヶ沢駅から車で約30分。",
     region: lr("r2105"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -225,7 +225,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-257", name: "北上川上流", slug: "kitakamigawa-upper-keiryu",
     description: "東北最大の河川・北上川の上流域（盛岡〜花巻周辺）。本流ではサクラマスの遡上で知られ、春のサクラマス釣りは東北屈指の人気。支流の和賀川・猿ヶ石川・豊沢川でもヤマメ・イワナが豊富。盛岡市街からのアクセスが良く、東北観光の拠点としても便利。",
-    latitude: 39.3333, longitude: 141.1000, address: "岩手県花巻市東和町",
+    latitude: 39.3333, longitude: 141.1000, address: "〒028-0114 岩手県花巻市東和町",
     accessInfo: "東北自動車道花巻ICから約15分。JR花巻駅から車で約20分。",
     region: region("r664"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -250,7 +250,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-258", name: "気仙川", slug: "kesengawa-keiryu",
     description: "岩手県住田町から大船渡市を流れる三陸沿岸の清流。「鳴瀬川」「五葉川」とも呼ばれた歴史ある川で、アユ・ヤマメ・イワナの宝庫。3月から10月まで釣り人で賑わう人気河川。三陸海岸の観光と合わせて楽しめ、上流の渓流釣りから下流のアユ釣りまで多彩。",
-    latitude: 39.1500, longitude: 141.6667, address: "岩手県気仙郡住田町世田米",
+    latitude: 39.1500, longitude: 141.6667, address: "〒029-2311 岩手県気仙郡住田町世田米",
     accessInfo: "東北自動車道水沢ICから約1時間。三陸自動車道大船渡碁石海岸ICから約20分。",
     region: lr("r2106"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 全魚種 大人2,000円（1日）",
@@ -274,7 +274,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-259", name: "砂鉄川", slug: "satetsugawa-keiryu",
     description: "岩手県一関市東山町を流れる北上川水系の支流。国の名勝・猊鼻渓（げいびけい）で知られる景勝地を流れる清流で、ヤマメ・イワナが豊富。猊鼻渓の舟下り観光エリアは釣り禁止だが、上流域は人が少なく穴場的な渓流釣り場。石灰岩の渓谷美が見事。",
-    latitude: 38.9500, longitude: 141.3000, address: "岩手県一関市東山町長坂",
+    latitude: 38.9500, longitude: 141.3000, address: "〒029-0302 岩手県一関市東山町長坂",
     accessInfo: "東北自動車道一関ICから約30分。JR猊鼻渓駅から徒歩約15分（猊鼻渓入口）。",
     region: lr("r2107"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -299,7 +299,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-260", name: "米代川上流", slug: "yoneshirogawa-upper-trout",
     description: "日本の名水百選にも選ばれた秋田県北部の大河・米代川の上流域。サクラマス釣りの聖地として全国的に有名で、年券15,000円の価値がある超一級河川。天然アユの遡上も豊富で、夏は友釣りファンで賑わう。鹿角市・大館市周辺が主なフィールド。",
-    latitude: 40.2167, longitude: 140.4833, address: "秋田県鹿角市十和田大湯",
+    latitude: 40.2167, longitude: 140.4833, address: "〒018-5421 秋田県鹿角市十和田大湯",
     accessInfo: "東北自動車道鹿角八幡平ICから約15分。JR十和田南駅から車で約10分。",
     region: lr("r2108"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "サクラマス共通券 年券15,000円 / 日券3,500円、アユ日券1,000円",
@@ -324,7 +324,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-261", name: "阿仁川", slug: "anigawa-keiryu",
     description: "秋田県北秋田市を流れる米代川の主要支流。マタギの里として知られる阿仁地域を流れ、原始的な渓流釣りが楽しめる。イワナの魚影が特に濃く、上流域では尺イワナの実績も。秋田内陸線の沿線にあり、鉄道旅と釣りを組み合わせた旅行も人気。",
-    latitude: 39.8500, longitude: 140.4000, address: "秋田県北秋田市阿仁銀山",
+    latitude: 39.8500, longitude: 140.4000, address: "〒018-4731 秋田県北秋田市阿仁銀山",
     accessInfo: "秋田自動車道鷹巣ICから約40分。秋田内陸線阿仁合駅から車で約10分。",
     region: lr("r2109"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -348,7 +348,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-262", name: "田沢湖", slug: "tazawako-trout",
     description: "日本一深い湖（水深423.4m）として知られる秋田県の田沢湖。かつてはクニマスが生息していた歴史ある湖で、現在はニジマス・ヒメマス・ワカサギが釣りの対象。湖周辺の美しい景観と温泉を楽しみながらの釣行が人気。秋の紅葉シーズンは特に美しい。",
-    latitude: 39.7292, longitude: 140.6600, address: "秋田県仙北市田沢湖田沢",
+    latitude: 39.7292, longitude: 140.6600, address: "〒014-1204 秋田県仙北市田沢湖田沢",
     accessInfo: "秋田自動車道大曲ICから約1時間。JR田沢湖駅から車で約15分。",
     region: region("r628"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券 大人500円（1日）",
@@ -373,7 +373,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-263", name: "最上川上流（米沢）", slug: "mogamigawa-upper-keiryu",
     description: "日本三大急流の一つ・最上川の源流域。吾妻連峰を水源とし、米沢市周辺では山間の渓流釣りが楽しめる。ヤマメ・イワナの魚影が濃く、支流の小樽川や大樽川は特に人気。米沢牛で有名な米沢の食文化と合わせた釣行プランが人気。",
-    latitude: 37.9167, longitude: 140.1167, address: "山形県米沢市大字関",
+    latitude: 37.9167, longitude: 140.1167, address: "〒992-1461 山形県米沢市大字関",
     accessInfo: "東北中央自動車道米沢八幡原ICから約20分。JR米沢駅から車で約30分。",
     region: lr("r2110"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -397,7 +397,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-264", name: "置賜白川", slug: "okitama-shirakawa-keiryu",
     description: "山形県南部・飯豊連峰を源流とする最上川支流。つり人誌のヤマメ釣りベスト50にも選出された実力派の渓流。白川ダムから上流はイワナとヤマメの混生域で、さらに源流部はイワナのみの世界。飯豊連峰の雪解け水が育む魚は美しくコンディション抜群。",
-    latitude: 38.0000, longitude: 139.8833, address: "山形県西置賜郡飯豊町大字椿",
+    latitude: 38.0000, longitude: 139.8833, address: "〒999-0605 山形県西置賜郡飯豊町大字椿",
     accessInfo: "東北中央自動車道南陽高畠ICから約50分。JR手ノ子駅から車で約15分。",
     region: lr("r2111"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日）",
@@ -420,7 +420,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-265", name: "赤川", slug: "akagawa-keiryu",
     description: "出羽三山・月山を源流とする庄内地方の一級河川。清流度が高く、天然アユの遡上が豊富。上流域ではヤマメ・イワナの渓流釣りが楽しめ、庄内平野を流れる中下流域ではアユの友釣りが人気。鶴岡市の食文化（だだちゃ豆、庄内そば）と合わせた釣行プランが魅力。",
-    latitude: 38.7500, longitude: 139.8833, address: "山形県鶴岡市田麦俣",
+    latitude: 38.7500, longitude: 139.8833, address: "〒997-0752 山形県鶴岡市田麦俣",
     accessInfo: "山形自動車道鶴岡ICから約40分。JR鶴岡駅から車で約50分（上流域）。",
     region: region("r661"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -445,7 +445,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-266", name: "名取川上流", slug: "natorigawa-keiryu",
     description: "蔵王連峰を源流とする宮城県南部の一級河川。上流域は経験者向けの本格的な渓流釣り場で、天然ヤマメ・イワナが自然繁殖している。魚のサイズが大きく、尺ヤマメの実績もある。秋保温泉・蔵王温泉へのアクセスも良く、温泉と釣りを組み合わせた旅行に最適。",
-    latitude: 38.2000, longitude: 140.6500, address: "宮城県仙台市太白区秋保町湯元",
+    latitude: 38.2000, longitude: 140.6500, address: "〒982-0241 宮城県仙台市太白区秋保町湯元",
     accessInfo: "東北自動車道仙台南ICから約30分。仙台市街地から車で約40分。",
     region: lr("r2112"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -469,7 +469,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-267", name: "荒雄川（鳴子温泉）", slug: "araogawa-keiryu",
     description: "宮城県大崎市鳴子温泉郷を流れる名取川水系の渓流。鬼首カルデラ内に位置し、キャッチ&リリース区間が設けられた管理の行き届いた釣り場。宮城県産ヤマメに限定した放流を行い、尺ヤマメの実績も多数。鳴子温泉で疲れを癒やせる最高の環境。",
-    latitude: 38.8000, longitude: 140.6833, address: "宮城県大崎市鳴子温泉鬼首",
+    latitude: 38.8000, longitude: 140.6833, address: "〒989-6941 宮城県大崎市鳴子温泉鬼首",
     accessInfo: "東北自動車道古川ICから約40分。JR鳴子温泉駅から車で約20分。",
     region: lr("r2113"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -492,7 +492,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-268", name: "白石川", slug: "shiroishigawa-keiryu",
     description: "蔵王連峰を源流とし白石市から大河原町を流れる阿武隈川水系の支流。一目千本桜で有名な大河原の桜と合わせて楽しめる渓流釣り場。七ヶ宿ダム下流域ではヤマメの魚影が濃く、20cm以上の良型が狙える。東北自動車道からのアクセスも良好。",
-    latitude: 38.0333, longitude: 140.5167, address: "宮城県白石市小原",
+    latitude: 38.0333, longitude: 140.5167, address: "〒989-0232 宮城県白石市小原",
     accessInfo: "東北自動車道白石ICから約20分。JR白石蔵王駅から車で約25分。",
     region: lr("r2114"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -516,7 +516,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-269", name: "阿武隈川宮城区間", slug: "abukumagawa-miyagi-bass",
     description: "福島県から宮城県に入り太平洋に注ぐ東北第二の大河。宮城県内（角田市〜亘理町）ではスモールマウスバスの好漁場として知られ、白石川合流点や玉崎浄水場周辺が有名ポイント。春のスポーニングシーズンにはデカスモールが狙える。テトラ帯や水門周辺が好ポイント。",
-    latitude: 38.0667, longitude: 140.7667, address: "宮城県柴田郡柴田町槻木",
+    latitude: 38.0667, longitude: 140.7667, address: "〒989-1600 宮城県柴田郡柴田町槻木",
     accessInfo: "東北自動車道白石ICから約25分。JR槻木駅から車で約5分。",
     region: lr("r2115"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券が必要（バス釣りでも他魚種が対象のため）",
@@ -545,7 +545,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-270", name: "只見川上流", slug: "tadamigawa-upper-keiryu",
     description: "福島県の奥会津を流れる阿賀野川水系の大河。大物渓流魚の宝庫として知られ、バックウォーターから大白沢合流点にかけてが主な釣り場。淵が多くポイント豊富で、尺イワナの実績が高い。檜枝岐村漁協と魚沼漁協の共同管轄。秘境感あふれる只見の自然を満喫できる。",
-    latitude: 37.3500, longitude: 139.3167, address: "福島県南会津郡只見町只見",
+    latitude: 37.3500, longitude: 139.3167, address: "〒968-0421 福島県南会津郡只見町只見",
     accessInfo: "磐越自動車道会津坂下ICから約1時間30分。JR只見駅から車で約10分。",
     region: region("r675"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -568,7 +568,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-271", name: "桧枝岐川", slug: "hinoemata-keiryu",
     description: "尾瀬の玄関口・檜枝岐村を流れる伊南川上流部。足場が比較的良く初心者にも釣りやすい環境が整っている。イワナの放流が盛んで魚影が濃く、駐車場やトイレも近くにある好環境。檜枝岐歌舞伎や温泉、岩魚料理など文化と食も楽しめる。",
-    latitude: 37.0167, longitude: 139.3833, address: "福島県南会津郡檜枝岐村居平",
+    latitude: 37.0167, longitude: 139.3833, address: "〒967-0525 福島県南会津郡檜枝岐村居平",
     accessInfo: "東北自動車道西那須野塩原ICから約2時間。関越自動車道小出ICから約1時間30分。",
     region: lr("r2117"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -591,7 +591,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-272", name: "猪苗代湖（天神浜）", slug: "inawashiroko-wakasagi",
     description: "日本第4位の面積を持つ福島県のシンボル・猪苗代湖。冬季のワカサギ釣りが人気で、天神浜では例年1月中旬から氷上穴釣りが楽しめる。湖水浴場としても有名な天神浜は足場が良く、春から秋はヘラブナやコイ釣りも楽しめる。磐梯山を望む絶景ロケーション。",
-    latitude: 37.5167, longitude: 140.0833, address: "福島県耶麻郡猪苗代町中小松",
+    latitude: 37.5167, longitude: 140.0833, address: "〒969-3133 福島県耶麻郡猪苗代町中小松",
     accessInfo: "磐越自動車道猪苗代磐梯高原ICから約15分。JR猪苗代駅から車で約10分。",
     region: region("r654"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券 大人500円（1日）",
@@ -616,7 +616,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-273", name: "桧原湖", slug: "hibarako-wakasagi-add",
     description: "裏磐梯の代表的な湖で、冬のワカサギ釣りの聖地として全国的に有名。ドーム船での快適なワカサギ釣りが楽しめ、氷上穴釣りも人気。春から秋はスモールマウスバスやニジマスも狙える。五色沼や磐梯山の観光と合わせた旅行プランが充実。",
-    latitude: 37.7000, longitude: 140.0833, address: "福島県耶麻郡北塩原村大字桧原",
+    latitude: 37.7000, longitude: 140.0833, address: "〒966-0401 福島県耶麻郡北塩原村大字桧原",
     accessInfo: "磐越自動車道猪苗代磐梯高原ICから約30分。JR猪苗代駅からバスで約40分。",
     region: region("r637"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券 大人700円（1日）",

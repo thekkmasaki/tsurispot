@@ -340,13 +340,45 @@ function getAreaPressure(prefecture: string, areaName: string): number {
 }
 
 // 月別の釣れやすさ補正
+// 実測データ: 冬（12-2月）は海水温低下で魚の活性が大幅ダウン。
+// 特に1-2月は堤防からの釣果がほぼゼロになることも珍しくない。
+// 2026-03-01修正: 冬の補正を大幅強化。実際のユーザー体験（2月に全員ボウズ）を反映。
 function getMonthCorrection(month: number): number {
   const corrections: Record<number, number> = {
-    1: 18, 2: 15, 3: 8, 4: 0, 5: -5,
-    6: -10, 7: -12, 8: -10, 9: -8, 10: -5,
-    11: 2, 12: 12,
+    1: 40,  // 真冬: 海水温8-10℃、魚活性最低、堤防はほぼ釣果ゼロ
+    2: 38,  // 厳冬期: 海水温9-11℃、まだ非常に厳しい
+    3: 22,  // 早春: 海水温11-13℃、回復し始めるがまだ厳しい
+    4: 5,   // 春本番: 海水温13-16℃、活性上昇中だがまだ本調子ではない
+    5: -8,  // 初夏: 海水温16-19℃、活性が高くなる
+    6: -12, // 梅雨: 海水温19-22℃、多くの魚種が活発
+    7: -15, // 盛夏: 海水温22-25℃、活性ピーク
+    8: -12, // 晩夏: 海水温24-26℃、活性維持
+    9: -8,  // 初秋: 海水温22-24℃、まだ好調
+    10: 0,  // 秋: 海水温18-22℃、徐々に活性低下
+    11: 12, // 晩秋: 海水温14-17℃、冬に向かって厳しくなる
+    12: 30, // 冬入口: 海水温11-14℃、急激に厳しくなる
   };
   return corrections[month] ?? 0;
+}
+
+// 季節による釣り方別ボウズ率の補正係数
+// 冬は全ての釣り方で難易度が上がる（海水温低下で魚の活性が落ちるため）
+function getSeasonalMethodMultiplier(month: number): number {
+  const multipliers: Record<number, number> = {
+    1: 1.6,  // 真冬: ボウズ率1.6倍（穴釣り20%→32%、メバリング40%→64%）
+    2: 1.5,  // 厳冬期: 1.5倍
+    3: 1.3,  // 早春: 1.3倍（まだ水温低い）
+    4: 1.1,  // 春: ほぼ通常
+    5: 1.0,  // 初夏: 通常
+    6: 0.9,  // 梅雨: やや釣れやすい
+    7: 0.85, // 盛夏: 活性ピーク
+    8: 0.9,  // 晩夏: 好調
+    9: 0.95, // 初秋: ほぼ通常
+    10: 1.0, // 秋: 通常
+    11: 1.15,// 晩秋: やや厳しくなる
+    12: 1.4, // 冬入口: 1.4倍
+  };
+  return multipliers[month] ?? 1.0;
 }
 
 // 釣り方別のボウズ率補正を計算
@@ -371,6 +403,9 @@ function getMethodCorrection(details: CatchableFishInfo[], currentMonth: number)
 
   const fishToUse = inSeasonFish.length > 0 ? inSeasonFish : details;
 
+  // 季節補正係数を取得
+  const seasonalMultiplier = getSeasonalMethodMultiplier(currentMonth);
+
   // 全メソッドのボウズ率を集計し、最も釣れやすい（ボウズ率が低い）ものを主要釣り方とする
   const methodRates: { method: string; rate: number; description: string }[] = [];
   const seenMethods = new Set<string>();
@@ -381,9 +416,11 @@ function getMethodCorrection(details: CatchableFishInfo[], currentMonth: number)
 
     const methodData = METHOD_BOUZU_DATABASE[fish.method];
     if (methodData) {
+      // 季節補正を適用（冬はボウズ率が上がる）
+      const adjustedRate = Math.min(90, Math.round(methodData.baseBouzuRate * seasonalMultiplier));
       methodRates.push({
         method: methodData.label,
-        rate: methodData.baseBouzuRate,
+        rate: adjustedRate,
         description: methodData.description,
       });
     }
@@ -501,18 +538,28 @@ function getSeasonFishCorrection(details: CatchableFishInfo[], currentMonth: num
   let correction = 0;
   // シーズン中の魚が多いほどボウズしにくい
   if (inSeason === 0) {
-    correction = 15; // シーズン中の魚がいない → 大幅UP
+    correction = 18; // シーズン中の魚がいない → 大幅UP
   } else if (inSeason >= 4) {
-    correction = -5;
+    correction = -3;
   } else if (inSeason >= 2) {
-    correction = -2;
+    correction = -1;
   }
 
-  // ピークシーズンの魚がいれば追加ボーナス
-  if (peakSeason >= 2) {
-    correction -= 4;
-  } else if (peakSeason >= 1) {
-    correction -= 2;
+  // ピークシーズンの魚がいても冬は効果を弱める
+  // 理由: メバル・カサゴは「冬がピーク」とされるが、
+  // 海水温10℃以下では活性が大幅に落ち、実際はボウズが多い
+  const isHarshWinter = [1, 2, 12].includes(currentMonth);
+  if (isHarshWinter) {
+    // 冬はピークシーズン補正をほぼ無効化
+    if (peakSeason >= 2) {
+      correction -= 1; // 通常-4 → 冬は-1に抑制
+    }
+  } else {
+    if (peakSeason >= 2) {
+      correction -= 3;
+    } else if (peakSeason >= 1) {
+      correction -= 1;
+    }
   }
 
   return { correction, inSeasonCount: inSeason, peakSeasonCount: peakSeason };
@@ -533,13 +580,19 @@ function calcSpotBouzuProbability(
   };
   let score = spotTypeBase[props.spotType] ?? 30;
 
-  // 2. 難易度補正
+  // 2. 難易度補正（冬は全難易度で+8上昇）
   const difficultyMod: Record<string, number> = {
     beginner: -8,
     intermediate: 0,
     advanced: 8,
   };
   score += difficultyMod[props.difficulty] ?? 0;
+  // 冬は初心者でも上級者でも難しい（海水温低下で魚の活性が落ちる）
+  if ([1, 2, 12].includes(currentMonth)) {
+    score += 8;
+  } else if ([3, 11].includes(currentMonth)) {
+    score += 4;
+  }
 
   // 3. 地域差（エリア単位で判定）
   score += getAreaPressure(props.prefecture, props.areaName);

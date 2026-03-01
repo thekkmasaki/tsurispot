@@ -47,6 +47,7 @@ const moreNavItems = [
   { href: "/bouzu-checker", label: "ボウズ確率", icon: Target },
   { href: "/quiz", label: "スタイル診断", icon: Sparkles },
   { href: "/fishing-rules", label: "ルール・マナー", icon: Scale },
+  { href: "/umigyo", label: "海業推進", icon: Anchor },
 ];
 
 export function MobileNav() {
@@ -71,7 +72,7 @@ export function MobileNav() {
     setMoreOpen(false);
   }, [pathname]);
 
-  // 外部クリックで閉じる
+  // 外部クリックで閉じる + Escキーで閉じる
   useEffect(() => {
     if (!moreOpen) return;
     function handleClick(e: MouseEvent) {
@@ -79,8 +80,15 @@ export function MobileNav() {
         setMoreOpen(false);
       }
     }
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setMoreOpen(false);
+    }
     document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClick);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, [moreOpen]);
 
   // 「もっと見る」のアイテムが現在アクティブかチェック
@@ -100,15 +108,17 @@ export function MobileNav() {
       {moreOpen && (
         <div
           ref={menuRef}
-          className="fixed bottom-[60px] left-2 right-2 z-50 rounded-2xl border bg-white shadow-2xl md:hidden animate-in slide-in-from-bottom-4 duration-200"
+          role="menu"
+          className="fixed bottom-[60px] left-2 right-2 z-50 rounded-2xl border bg-white shadow-2xl md:hidden animate-in slide-in-from-bottom-4 duration-200 overscroll-contain"
         >
           <div className="flex items-center justify-between px-4 py-3 border-b">
             <span className="text-sm font-bold text-gray-800">メニュー</span>
             <button
               onClick={() => setMoreOpen(false)}
-              className="rounded-full p-1.5 hover:bg-gray-100"
+              aria-label="メニューを閉じる"
+              className="rounded-full p-1.5 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
-              <X className="size-4 text-gray-500" />
+              <X className="size-4 text-gray-500" aria-hidden="true" />
             </button>
           </div>
           <div className="grid grid-cols-3 gap-1 p-3">
@@ -120,14 +130,15 @@ export function MobileNav() {
                 <Link
                   key={item.href}
                   href={item.href}
+                  role="menuitem"
                   className={cn(
-                    "flex flex-col items-center gap-1.5 rounded-xl px-2 py-3 text-xs transition-colors",
+                    "flex flex-col items-center gap-1.5 rounded-xl px-2 py-3 text-xs transition-colors touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
                     isActive
                       ? "bg-primary/10 text-primary font-medium"
                       : "text-gray-600 hover:bg-gray-50"
                   )}
                 >
-                  <item.icon className="size-5" />
+                  <item.icon className="size-5" aria-hidden="true" />
                   <span>{item.label}</span>
                 </Link>
               );
@@ -137,7 +148,7 @@ export function MobileNav() {
       )}
 
       {/* ボトムナビ */}
-      <nav className="fixed bottom-0 left-0 right-0 z-50 border-t border-border/40 bg-white/95 backdrop-blur-lg md:hidden pb-safe">
+      <nav aria-label="メインナビゲーション" className="fixed bottom-0 left-0 right-0 z-50 border-t border-border/40 bg-white/95 backdrop-blur-lg md:hidden pb-safe">
         <div className="flex items-center justify-around">
           {mainNavItems.map((item) => {
             const isActive =
@@ -149,7 +160,7 @@ export function MobileNav() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "relative flex flex-col items-center justify-center gap-0.5 px-3 py-2 text-xs transition-colors min-h-[52px] min-w-[52px]",
+                  "relative flex flex-col items-center justify-center gap-0.5 px-3 py-2 text-xs transition-colors min-h-[52px] min-w-[52px] touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
                   isActive
                     ? "text-primary"
                     : "text-muted-foreground"
@@ -157,6 +168,7 @@ export function MobileNav() {
               >
                 <div className="relative">
                   <item.icon
+                    aria-hidden="true"
                     className={cn("h-5 w-5", isActive && "fill-primary/20")}
                   />
                   {isFav && favCount > 0 && (
@@ -172,12 +184,15 @@ export function MobileNav() {
           {/* もっと見るボタン */}
           <button
             onClick={() => setMoreOpen(!moreOpen)}
+            aria-expanded={moreOpen}
+            aria-haspopup="true"
+            aria-label="その他のメニュー"
             className={cn(
-              "relative flex flex-col items-center justify-center gap-0.5 px-3 py-2 text-xs transition-colors min-h-[52px] min-w-[52px]",
+              "relative flex flex-col items-center justify-center gap-0.5 px-3 py-2 text-xs transition-colors min-h-[52px] min-w-[52px] touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
               moreOpen || hasActiveMore ? "text-primary" : "text-muted-foreground"
             )}
           >
-            <MoreHorizontal className={cn("h-5 w-5", (moreOpen || hasActiveMore) && "fill-primary/20")} />
+            <MoreHorizontal aria-hidden="true" className={cn("h-5 w-5", (moreOpen || hasActiveMore) && "fill-primary/20")} />
             <span className="font-medium">もっと</span>
           </button>
         </div>

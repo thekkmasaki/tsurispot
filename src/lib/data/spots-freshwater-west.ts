@@ -48,7 +48,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-086", name: "矢作川", slug: "yahagigawa-river",
     description: "愛知県を代表する一級河川。上流域はアユ・アマゴの渓流釣り、中下流域はブラックバスやコイ、ナマズが狙える多彩なフィールド。豊田市〜岡崎市にかけての中流域はおかっぱりポイントが豊富。",
-    latitude: 34.9556, longitude: 137.1722, address: "愛知県岡崎市明大寺町",
+    latitude: 34.9556, longitude: 137.1722, address: "〒444-0864 愛知県岡崎市明大寺町字川端19",
     accessInfo: "東名高速岡崎ICから約10分。名鉄東岡崎駅から徒歩約15分。",
     region: lr("r712"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "河川敷に無料駐車スペースあり",
@@ -76,7 +76,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-087", name: "豊川", slug: "toyogawa-river",
     description: "愛知県東部を流れる一級河川。設楽町から豊橋市まで流域が広く、上流ではアマゴ・アユ、中下流域ではブラックバス・コイ・ナマズが釣れる。牟呂松原頭首工下流は有名ポイント。",
-    latitude: 34.7881, longitude: 137.3939, address: "愛知県豊橋市下地町",
+    latitude: 34.7881, longitude: 137.3939, address: "〒440-0083 愛知県豊橋市下地町1-42",
     accessInfo: "東名高速豊川ICから約15分。JR豊橋駅から車で約10分。",
     region: lr("r713"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
@@ -105,7 +105,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-088", name: "青蓮寺湖", slug: "shorenji-lake",
     description: "三重県名張市にある青蓮寺ダムのダム湖。ブラックバスの穴場スポットとして知られ、50cmクラスの実績も。秋〜冬はワカサギ釣りも楽しめる。周囲は自然豊かでのんびりと釣りができる。",
-    latitude: 34.5994, longitude: 136.1128, address: "三重県名張市青蓮寺",
+    latitude: 34.5994, longitude: 136.1128, address: "〒518-0443 三重県名張市青蓮寺1303",
     accessInfo: "名阪国道上野ICから約30分。近鉄名張駅から車で約15分。",
     region: lr("r714"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
@@ -131,7 +131,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-089", name: "銚子川", slug: "choshigawa-river-mie",
     description: "三重県紀北町を流れる清流。「奇跡の川」とも呼ばれる透明度の高さが特徴で、アユ・アマゴの釣り場として全国的に有名。夏は川遊びの観光客も多い。",
-    latitude: 34.1417, longitude: 136.3325, address: "三重県北牟婁郡紀北町便ノ山",
+    latitude: 34.1417, longitude: 136.3325, address: "〒519-3406 三重県北牟婁郡紀北町便ノ山271",
     accessInfo: "紀勢自動車道海山ICから約5分。JR紀伊長島駅から車で約15分。",
     region: lr("r715"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人3,500円（年券）/ 日券1,500円",
@@ -158,7 +158,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-090", name: "揖斐川", slug: "ibigawa-river",
     description: "岐阜県西部を流れる木曽三川のひとつ。上流域はアマゴ・イワナの渓流釣り、中流域はアユの友釣り、下流域はコイやナマズが狙える。揖斐川上流の徳山ダム周辺は豊かな自然が残る。",
-    latitude: 35.3917, longitude: 136.5889, address: "岐阜県揖斐郡揖斐川町",
+    latitude: 35.3917, longitude: 136.5889, address: "〒501-0619 岐阜県揖斐郡揖斐川町三輪581-1",
     accessInfo: "東海環状自動車道大野神戸ICから約20分。養老鉄道揖斐駅から車で約15分。",
     region: lr("r716"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人2,000円（日券）",
@@ -217,7 +217,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-092", name: "黒部川", slug: "kurobegawa-river",
     description: "北アルプスを源流とする急流河川。イワナ・ヤマメの渓流釣りのメッカとして知られ、上流域は手つかずの自然が残る。秋はサケの遡上も見られる。下流域ではアユ釣りも盛ん。",
-    latitude: 36.8244, longitude: 137.4406, address: "富山県黒部市宇奈月町",
+    latitude: 36.8244, longitude: 137.4406, address: "〒938-0282 富山県黒部市宇奈月町浦山1451",
     accessInfo: "北陸自動車道黒部ICから約20分。富山地方鉄道宇奈月温泉駅から徒歩約5分。",
     region: lr("r718"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人3,000円（日券）",
@@ -271,7 +271,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-094", name: "安曇川", slug: "adogawa-river",
     description: "滋賀県高島市を流れ琵琶湖に注ぐ河川。アユの友釣りで全国的に有名で、解禁日には多くの釣り人が訪れる。上流域はイワナ・アマゴの渓流釣りも楽しめる。",
-    latitude: 35.2967, longitude: 135.9847, address: "滋賀県高島市安曇川町",
+    latitude: 35.2967, longitude: 135.9847, address: "〒520-1221 滋賀県高島市安曇川町田中530",
     accessInfo: "湖西道路真野ICから約30分。JR湖西線安曇川駅から車で約10分。",
     region: lr("r720"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人2,000円（日券）",
@@ -298,7 +298,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-095", name: "余呉湖", slug: "yogoko-lake",
     description: "滋賀県長浜市にある琵琶湖北方の小さな湖。冬のワカサギ釣りで有名で、桟橋から手軽に楽しめる。へらぶな釣りのフィールドとしても長い歴史がある。静かな環境でのんびり釣りが楽しめる。",
-    latitude: 35.5153, longitude: 136.1817, address: "滋賀県長浜市余呉町下余呉",
+    latitude: 35.5153, longitude: 136.1817, address: "〒529-0521 滋賀県長浜市余呉町下余呉（余呉湖）",
     accessInfo: "北陸自動車道木之本ICから約10分。JR北陸線余呉駅から徒歩約10分。",
     region: lr("r721"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "ワカサギ釣り 大人1,400円（桟橋利用含む）",
@@ -325,7 +325,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-096", name: "由良川", slug: "yuragawa-river",
     description: "京都府北部を流れる一級河川。上流域はアマゴの渓流釣り、中流域はアユの友釣りで知られる。綾部市〜福知山市周辺がメインフィールドで、豊かな自然環境が魅力。",
-    latitude: 35.2981, longitude: 135.2456, address: "京都府綾部市味方町",
+    latitude: 35.2981, longitude: 135.2456, address: "〒623-0046 京都府綾部市味方町アミダジ20-2",
     accessInfo: "舞鶴若狭自動車道綾部ICから約10分。JR綾部駅から車で約10分。",
     region: lr("r722"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人2,000円（日券）",
@@ -353,7 +353,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-097", name: "桂川（保津川）", slug: "katsuragawa-hozu-river",
     description: "京都府を流れる淀川水系の河川。上流部は保津峡として知られ、アマゴ・アユの好フィールド。亀岡市エリアはブラックバスやコイも狙える。嵐山周辺の桂川はアクセス良好。",
-    latitude: 35.0144, longitude: 135.6611, address: "京都府亀岡市保津町",
+    latitude: 35.0144, longitude: 135.6611, address: "〒621-0005 京都府亀岡市保津町下中島2",
     accessInfo: "京都縦貫自動車道亀岡ICから約10分。JR嵯峨野線亀岡駅から車で約5分。",
     region: lr("r723"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "河川敷に無料駐車場あり",
@@ -382,7 +382,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-098", name: "円山川", slug: "maruyamagawa-river",
     description: "兵庫県北部を流れる一級河川。アユ・ヤマメの釣りで有名で、特に養父市〜朝来市エリアが好フィールド。コウノトリの野生復帰で知られる豊岡市周辺の下流域ではコイやナマズも。",
-    latitude: 35.3947, longitude: 134.8256, address: "兵庫県養父市八鹿町",
+    latitude: 35.3947, longitude: 134.8256, address: "〒667-0021 兵庫県養父市八鹿町八鹿1675",
     accessInfo: "北近畿豊岡自動車道八鹿氷ノ山ICから約5分。JR山陰本線八鹿駅から徒歩約10分。",
     region: lr("r724"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人2,500円（日券）",
@@ -412,7 +412,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-099", name: "津風呂湖", slug: "tsufuroko-lake",
     description: "奈良県吉野町にあるダム湖。ブラックバスやへらぶなの釣り場として関西のアングラーに親しまれている。秋冬はワカサギ釣りも楽しめる。ボート釣りがメインだがおかっぱりポイントもある。",
-    latitude: 34.3861, longitude: 135.8631, address: "奈良県吉野郡吉野町河原屋",
+    latitude: 34.3861, longitude: 135.8631, address: "〒639-3101 奈良県吉野郡吉野町河原屋849",
     accessInfo: "南阪奈道路葛城ICから約50分。近鉄大和上市駅から車で約15分。",
     region: lr("r725"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁料 大人1,000円 + レンタルボート3,000円〜",
@@ -439,7 +439,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-100", name: "芦田川", slug: "ashidagawa-river",
     description: "広島県東部を流れる一級河川。福山市〜府中市にかけての流域で、アユの友釣りやコイ釣りが楽しめる。中流域の河佐峡はキャンプと合わせた渓流釣りが人気。",
-    latitude: 34.5261, longitude: 133.2228, address: "広島県府中市河佐町",
+    latitude: 34.5261, longitude: 133.2228, address: "〒726-0023 広島県府中市河佐町50",
     accessInfo: "山陽自動車道福山東ICから約30分。JR福塩線河佐駅から徒歩約10分。",
     region: lr("r726"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券 大人1,500円（日券）",
@@ -468,7 +468,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-101", name: "宍道湖", slug: "shinjiko-lake",
     description: "島根県松江市にある汽水湖。淡水と海水が混じる独特の環境で、テナガエビやハゼなどの汽水魚が狙える。宍道湖七珍（スズキ・ヤマトシジミなど）で有名。夕陽の美しさも全国屈指。",
-    latitude: 35.4406, longitude: 132.9383, address: "島根県松江市袖師町",
+    latitude: 35.4406, longitude: 132.9383, address: "〒690-0049 島根県松江市袖師町5-1",
     accessInfo: "山陰自動車道松江西ICから約10分。JR松江駅から徒歩約15分。",
     region: lr("r727"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "湖畔公園駐車場あり",
@@ -494,7 +494,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-102", name: "仁淀川", slug: "niyodogawa-river",
     description: "「仁淀ブルー」の愛称で知られる日本一の水質を誇る清流。アユ・アマゴの釣り場として全国トップクラスの人気を誇る。上流の支流（安居渓谷・中津渓谷）は絶景の渓流釣りが楽しめる。",
-    latitude: 33.5272, longitude: 133.1722, address: "高知県吾川郡いの町波川",
+    latitude: 33.5272, longitude: 133.1722, address: "〒781-2128 高知県吾川郡いの町波川192",
     accessInfo: "高知自動車道伊野ICから約5分。JR土讃線伊野駅から車で約5分。",
     region: lr("r728"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人3,500円（日券）",
@@ -522,7 +522,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-103", name: "大野川上流", slug: "onogawa-upper-river",
     description: "大分県竹田市を流れる大野川の上流域。岡城跡で有名な竹田の清流で、ヤマメ・アマゴの渓流釣りが楽しめる。九重連山を源流とする豊かな水量が魅力。夏はアユ釣りも盛ん。",
-    latitude: 32.9667, longitude: 131.3944, address: "大分県竹田市会々",
+    latitude: 32.9667, longitude: 131.3944, address: "〒878-0013 大分県竹田市会々1650",
     accessInfo: "中九州横断道路竹田ICから約10分。JR豊肥本線豊後竹田駅から車で約10分。",
     region: lr("r729"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人2,000円（日券）",
@@ -549,7 +549,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-104", name: "緑川", slug: "midorikawa-river",
     description: "熊本県中部を流れる一級河川。上流の甲佐町〜美里町エリアはアユ・ヤマメの好フィールド。緑川ダム周辺はブラックバスも狙える。阿蘇外輪山を源流とする清流が魅力。",
-    latitude: 32.7278, longitude: 130.8833, address: "熊本県上益城郡甲佐町",
+    latitude: 32.7278, longitude: 130.8833, address: "〒861-4601 熊本県上益城郡甲佐町豊内719-4",
     accessInfo: "九州自動車道松橋ICから約20分。JR豊肥本線肥後大津駅から車で約30分。",
     region: lr("r730"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券 大人1,500円（日券）",
@@ -578,7 +578,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   {
     id: "fw-105", name: "耳川", slug: "mimikawa-river",
     description: "宮崎県日向市〜美郷町を流れる清流。アユの友釣りで有名で、全国から釣り人が訪れる。上流域ではヤマメの渓流釣りも楽しめる。椎葉村周辺の源流域は手つかずの自然が残る秘境。",
-    latitude: 32.4142, longitude: 131.5228, address: "宮崎県東臼杵郡美郷町西郷",
+    latitude: 32.4142, longitude: 131.5228, address: "〒883-0402 宮崎県東臼杵郡美郷町西郷田代1",
     accessInfo: "東九州自動車道日向ICから約30分。JR日豊本線日向市駅から車で約40分。",
     region: lr("r731"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人3,000円（日券）",

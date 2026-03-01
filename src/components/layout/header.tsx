@@ -47,6 +47,7 @@ const moreNavItems = [
   { href: "/quiz", label: "釣りスタイル診断", icon: Sparkles },
   { href: "/gear", label: "おすすめ道具", icon: Package },
   { href: "/fishing-rules", label: "ルールとマナー", icon: Scale },
+  { href: "/umigyo", label: "海業推進", icon: Anchor },
 ];
 
 function DropdownMenu() {
@@ -60,8 +61,15 @@ function DropdownMenu() {
         setOpen(false);
       }
     }
+    function handleKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
     document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   // ドロップダウン内のリンクがアクティブかチェック
@@ -75,8 +83,11 @@ function DropdownMenu() {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
+        aria-expanded={open}
+        aria-haspopup="true"
+        aria-label="その他のメニュー"
         className={cn(
-          "flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+          "flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
           hasActiveChild
             ? "bg-primary/10 text-primary"
             : "text-muted-foreground hover:bg-muted hover:text-foreground"
@@ -84,6 +95,7 @@ function DropdownMenu() {
       >
         もっと見る
         <ChevronDown
+          aria-hidden="true"
           className={cn(
             "h-3.5 w-3.5 transition-transform",
             open && "rotate-180"
@@ -91,7 +103,7 @@ function DropdownMenu() {
         />
       </button>
       {open && (
-        <div className="absolute right-0 top-full mt-1 w-56 rounded-xl border bg-white py-2 shadow-lg">
+        <div role="menu" className="absolute right-0 top-full mt-1 w-56 rounded-xl border bg-white py-2 shadow-lg">
           {moreNavItems.map((item) => {
             const isActive =
               pathname === item.href ||
@@ -100,15 +112,16 @@ function DropdownMenu() {
               <Link
                 key={item.href}
                 href={item.href}
+                role="menuitem"
                 onClick={() => setOpen(false)}
                 className={cn(
-                  "flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors",
+                  "flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary",
                   isActive
                     ? "bg-primary/5 font-medium text-primary"
                     : "text-gray-700 hover:bg-gray-50"
                 )}
               >
-                <item.icon className="h-4 w-4" />
+                <item.icon className="h-4 w-4" aria-hidden="true" />
                 {item.label}
               </Link>
             );
@@ -141,12 +154,12 @@ export function Header() {
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-            <Fish className="h-5 w-5" />
+            <Fish className="h-5 w-5" aria-hidden="true" />
           </div>
           <span className="text-lg font-bold text-foreground">ツリスポ</span>
         </Link>
 
-        <nav className="hidden items-center gap-1 md:flex">
+        <nav aria-label="メインナビゲーション" className="hidden items-center gap-1 md:flex">
           {mainNavItems.map((item) => {
             const isActive =
               pathname === item.href ||
@@ -162,7 +175,7 @@ export function Header() {
                     : "text-muted-foreground hover:bg-muted hover:text-foreground"
                 )}
               >
-                <item.icon className="h-4 w-4" />
+                <item.icon className="h-4 w-4" aria-hidden="true" />
                 {item.label}
               </Link>
             );

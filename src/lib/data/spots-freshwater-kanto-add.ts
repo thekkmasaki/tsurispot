@@ -59,7 +59,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-106", name: "秩父さくら湖（浦山ダム）", slug: "chichibu-sakurako",
     description: "秩父市にある浦山ダムのダム湖。ヤマメ・イワナの放流が行われ、トラウトフィッシングが楽しめる。湖畔は自然豊かで四季折々の景色が美しい。秋の紅葉シーズンは特に人気。",
-    latitude: 35.9522, longitude: 139.0831, address: "埼玉県秩父市荒川久那",
+    latitude: 35.9522, longitude: 139.0831, address: "〒369-1801 埼玉県秩父市荒川久那4041",
     accessInfo: "関越道花園ICから約50分。秩父鉄道浦山口駅から徒歩約20分。",
     region: lr("r732"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
@@ -84,7 +84,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-107", name: "柳瀬川", slug: "yanasegawa-river",
     description: "埼玉県志木市・新座市を流れる荒川の支流。都心から近く、オイカワ・コイ・フナなどの手軽な淡水釣りが楽しめる。清瀬市の金山橋付近は水質が良く人気のポイント。",
-    latitude: 35.7733, longitude: 139.5636, address: "埼玉県新座市野火止",
+    latitude: 35.7733, longitude: 139.5636, address: "〒352-0011 埼玉県新座市野火止5丁目1",
     accessInfo: "東武東上線志木駅から徒歩約15分。関越道所沢ICから約15分。",
     region: lr("r733"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: false, hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
@@ -109,7 +109,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-108", name: "越辺川", slug: "oppegawa-river",
     description: "埼玉県坂戸市・鳩山町を流れる入間川の支流。自然豊かな里山の風景が残る清流で、オイカワやカワムツが多い。上流域ではヤマメの放流もある。",
-    latitude: 35.9386, longitude: 139.3503, address: "埼玉県比企郡鳩山町大豆戸",
+    latitude: 35.9386, longitude: 139.3503, address: "〒350-0324 埼玉県比企郡鳩山町大豆戸184-1",
     accessInfo: "関越道坂戸西ICから約15分。東武越生線越生駅から車で約10分。",
     region: lr("r734"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
@@ -133,7 +133,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-109", name: "高麗川", slug: "komagawa-river",
     description: "埼玉県日高市・飯能市を流れる清流。巾着田曼珠沙華公園周辺が特に有名で、ヤマメ・イワナの放流が行われる。夏はバーベキューと合わせて楽しむ家族連れも多い。",
-    latitude: 35.8767, longitude: 139.3281, address: "埼玉県日高市高麗本郷",
+    latitude: 35.8767, longitude: 139.3281, address: "〒350-1251 埼玉県日高市高麗本郷125-2",
     accessInfo: "圏央道狭山日高ICから約10分。西武秩父線高麗駅から徒歩約15分。",
     region: lr("r735"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券 大人800円（1日）",
@@ -160,7 +160,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-110", name: "多摩川上流（御岳渓谷）", slug: "tamagawa-mitake",
     description: "東京都青梅市の御岳渓谷は、都内で最も美しい渓流釣り場の一つ。ヤマメ・ニジマスの放流が盛んで、フライフィッシングの聖地としても知られる。遊歩道が整備されアクセスも良い。",
-    latitude: 35.8006, longitude: 139.1806, address: "東京都青梅市御岳本町",
+    latitude: 35.8006, longitude: 139.1806, address: "〒198-0173 東京都青梅市御岳本町362",
     accessInfo: "JR青梅線御嶽駅から徒歩約5分。圏央道青梅ICから約30分。",
     region: lr("r736"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -184,7 +184,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-111", name: "浅川", slug: "asakawa-river",
     description: "東京都八王子市・日野市を流れる多摩川の支流。住宅地の中を流れるが水質は良好で、オイカワ・コイ・ナマズなどが釣れる。子供連れのガサガサ遊びにも人気のスポット。",
-    latitude: 35.6603, longitude: 139.3881, address: "東京都日野市日野本町",
+    latitude: 35.6603, longitude: 139.3881, address: "〒191-0011 東京都日野市日野本町3丁目14",
     accessInfo: "JR中央線日野駅から徒歩約10分。中央道八王子ICから約15分。",
     region: lr("r737"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: false, hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
@@ -209,7 +209,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-112", name: "中津川", slug: "nakatsugawa-river-kanagawa",
     description: "神奈川県愛川町を流れる相模川の支流。宮ヶ瀬ダム下流の清流で、アユの友釣りとヤマメのルアー釣りが人気。夏場はキャンプと合わせて楽しむ人も多い。",
-    latitude: 35.5081, longitude: 139.2758, address: "神奈川県愛甲郡愛川町田代",
+    latitude: 35.5081, longitude: 139.2758, address: "〒243-0306 神奈川県愛甲郡愛川町田代1700",
     accessInfo: "圏央道相模原愛川ICから約15分。小田急本厚木駅からバスで約30分。",
     region: lr("r738"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,300円（1日）",
@@ -233,7 +233,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-113", name: "酒匂川", slug: "sakawagawa-river",
     description: "神奈川県西部を流れる一級河川。小田原市から足柄平野を潤す大河で、アユの友釣りでは関東有数の実績を誇る。中流域のヤマメ・ニジマス、下流域のシーバスと多彩な釣りが楽しめる。",
-    latitude: 35.2694, longitude: 139.1417, address: "神奈川県小田原市栢山",
+    latitude: 35.2694, longitude: 139.1417, address: "〒250-0852 神奈川県小田原市栢山2065",
     accessInfo: "小田急線栢山駅から徒歩約10分。東名高速大井松田ICから約10分。",
     region: lr("r739"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -259,7 +259,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-114", name: "養老川", slug: "yorogawa-river",
     description: "千葉県市原市を流れる二級河川。上流の養老渓谷は紅葉の名所としても有名。川沿いでオイカワやハヤが手軽に釣れ、下流域ではスズキやハゼも狙える汽水域がある。",
-    latitude: 35.3078, longitude: 140.1081, address: "千葉県市原市朝生原",
+    latitude: 35.3078, longitude: 140.1081, address: "〒290-0536 千葉県市原市朝生原177",
     accessInfo: "館山自動車道市原ICから約30分。小湊鉄道養老渓谷駅から徒歩すぐ。",
     region: lr("r740"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "養老渓谷周辺に駐車場あり（500円/日）",
@@ -281,7 +281,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-115", name: "手賀沼", slug: "teganuma-lake",
     description: "千葉県柏市・我孫子市にまたがる湖沼。かつて水質汚濁が問題だったが改善が進み、ブラックバスやヘラブナの釣り場として復活。手賀沼フィッシングセンターではマス釣り堀もある。",
-    latitude: 35.8628, longitude: 140.0175, address: "千葉県柏市箕輪新田",
+    latitude: 35.8628, longitude: 140.0175, address: "〒277-0085 千葉県柏市箕輪新田36-1",
     accessInfo: "常磐道柏ICから約20分。JR我孫子駅から徒歩約20分。",
     region: lr("r742"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "手賀沼親水広場駐車場（無料）",
@@ -309,7 +309,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-116", name: "涸沼", slug: "hinuma-lake",
     description: "茨城県大洗町・鉾田市にまたがる汽水湖。シジミの名産地で、シーバスの好漁場としても知られる。秋にはハゼ釣りも人気で、広大な湖面でボート釣りも楽しめる。",
-    latitude: 36.2928, longitude: 140.4764, address: "茨城県東茨城郡茨城町下石崎",
+    latitude: 36.2928, longitude: 140.4764, address: "〒311-3124 茨城県東茨城郡茨城町下石崎1651",
     accessInfo: "北関東自動車道水戸南ICから約15分。JR涸沼駅から車で約5分。",
     region: lr("r744"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "涸沼自然公園駐車場（無料）",
@@ -334,7 +334,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-117", name: "中禅寺湖", slug: "chuzenji-lake",
     description: "栃木県日光市にある標高1,269mの高原湖。レイクトラウト・ブラウントラウト・ヒメマスなど冷水性の魚が豊富で、日本を代表するトラウトレイクの一つ。釣り解禁は4月〜9月。",
-    latitude: 36.7342, longitude: 139.4797, address: "栃木県日光市中宮祠",
+    latitude: 36.7342, longitude: 139.4797, address: "〒321-1661 栃木県日光市中宮祠2482",
     accessInfo: "日光宇都宮道清滝ICからいろは坂経由で約30分。東武日光駅からバスで約50分。",
     region: lr("r745"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人2,100円（1日）",
@@ -359,7 +359,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-118", name: "箒川", slug: "houkigawa-river",
     description: "栃木県矢板市・那須塩原市を流れる那珂川の支流。塩原温泉郷を流れる渓流区間はヤマメ・イワナの宝庫。特に塩原ダム上流の管理区間は良型が出やすい。温泉と合わせた釣行が人気。",
-    latitude: 36.9339, longitude: 139.8192, address: "栃木県那須塩原市塩原",
+    latitude: 36.9339, longitude: 139.8192, address: "〒329-2921 栃木県那須塩原市塩原747",
     accessInfo: "東北道西那須野塩原ICから約30分。JR那須塩原駅からバスで約40分。",
     region: lr("r746"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -384,7 +384,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-119", name: "碓氷川", slug: "usuigawa-river",
     description: "群馬県安中市を流れる利根川水系の河川。妙義山・碓氷峠から流れ下り、ヤマメ・イワナの渓流釣りが楽しめる。碓氷峠鉄道文化むら近くの区間が人気。秋はサケの遡上も見られる。",
-    latitude: 36.3392, longitude: 138.8919, address: "群馬県安中市松井田町坂本",
+    latitude: 36.3392, longitude: 138.8919, address: "〒379-0307 群馬県安中市松井田町坂本1120",
     accessInfo: "上信越道松井田妙義ICから約10分。JR横川駅から徒歩約10分。",
     region: lr("r747"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
@@ -407,7 +407,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-120", name: "片品川", slug: "katashina-river",
     description: "群馬県片品村・沼田市を流れる利根川の支流。尾瀬の玄関口にあたり、上流はイワナの渓流、中流はヤマメ・アユが楽しめる。老神温泉周辺の渓谷は景観も素晴らしい。",
-    latitude: 36.7339, longitude: 139.3203, address: "群馬県利根郡片品村東小川",
+    latitude: 36.7339, longitude: 139.3203, address: "〒378-0415 群馬県利根郡片品村東小川4658-58",
     accessInfo: "関越道沼田ICから約30分。JR沼田駅からバスで約40分。",
     region: lr("r748"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,200円（1日）",
@@ -432,7 +432,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-121", name: "小菅川", slug: "kosugegawa-river",
     description: "山梨県小菅村を流れる多摩川の源流。東京都の水源林に守られた清流で、ヤマメ・イワナが自然繁殖する。小菅フィッシングビレッジでは管理釣り場もあり初心者にも対応。",
-    latitude: 35.7547, longitude: 138.9397, address: "山梨県北都留郡小菅村",
+    latitude: 35.7547, longitude: 138.9397, address: "〒409-0211 山梨県北都留郡小菅村4383",
     accessInfo: "中央道上野原ICから約50分。JR奥多摩駅からバスで約50分。",
     region: lr("r749"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -457,7 +457,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-122", name: "天竜川上流（伊那谷）", slug: "tenryugawa-upper",
     description: "諏訪湖を源とする天竜川の上流域。伊那市・駒ヶ根市周辺はアユの友釣りで有名。中央アルプスと南アルプスに挟まれた伊那谷の雄大な景色の中で釣りが楽しめる。",
-    latitude: 35.8330, longitude: 137.9547, address: "長野県伊那市山寺",
+    latitude: 35.8330, longitude: 137.9547, address: "〒396-0026 長野県伊那市山寺298",
     accessInfo: "中央道伊那ICから約10分。JR伊那市駅から徒歩約15分。",
     region: lr("r751"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -482,7 +482,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-123", name: "奈良井川", slug: "naraigawa-river",
     description: "長野県塩尻市・松本市を流れる信濃川水系の河川。奈良井宿を流れる上流域は渓流釣り、松本市街地付近の中流域はコイ・フナの里川釣りが楽しめる。中山道の宿場町散策と合わせた釣行が人気。",
-    latitude: 36.1769, longitude: 137.8703, address: "長野県塩尻市奈良井",
+    latitude: 36.1769, longitude: 137.8703, address: "〒399-6303 長野県塩尻市奈良井497-185",
     accessInfo: "中央道塩尻ICから約20分。JR奈良井駅から徒歩すぐ。",
     region: lr("r752"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
@@ -506,7 +506,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-124", name: "三面川", slug: "miomotegawa-river",
     description: "新潟県村上市を流れる日本海に注ぐ河川。サケの遡上で全国的に有名で「鮭の町」村上のシンボル。サケ釣りのほか、アユ・イワナの渓流釣りも楽しめる。鮭の酒びたしは村上の名物。",
-    latitude: 38.2256, longitude: 139.4956, address: "新潟県村上市三之町",
+    latitude: 38.2256, longitude: 139.4956, address: "〒958-0842 新潟県村上市三之町7-9",
     accessInfo: "日本海東北自動車道村上瀬波温泉ICから約5分。JR村上駅から徒歩約15分。",
     region: lr("r754"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -531,7 +531,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-125", name: "荒川中流（秋ヶ瀬）", slug: "arakawa-akigase",
     description: "さいたま市桜区の秋ヶ瀬公園周辺の荒川中流域。都心から30分圏内で、バス・コイ・ナマズ・ヘラブナなど多彩な淡水魚が楽しめる。ワンド（入り江）が多く、おかっぱりポイントが豊富。",
-    latitude: 35.8419, longitude: 139.5964, address: "埼玉県さいたま市桜区大字神田",
+    latitude: 35.8419, longitude: 139.5964, address: "〒338-0835 埼玉県さいたま市桜区大字神田654",
     accessInfo: "首都高与野ICから約15分。JR中浦和駅から徒歩約20分。",
     region: lr("r757"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "秋ヶ瀬公園駐車場（無料）",
@@ -560,7 +560,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-126", name: "利根川下流（佐原）", slug: "tonegawa-sawara",
     description: "千葉県香取市佐原周辺の利根川下流域。広大な河川敷でヘラブナ・コイの大物釣りが楽しめる。水郷佐原の町並みと合わせた釣行が人気。夏場はナマズのトップウォーターゲームも。",
-    latitude: 35.8892, longitude: 140.5000, address: "千葉県香取市佐原イ",
+    latitude: 35.8892, longitude: 140.5000, address: "〒287-0003 千葉県香取市佐原イ3981",
     accessInfo: "東関東自動車道佐原香取ICから約5分。JR佐原駅から徒歩約15分。",
     region: lr("r758"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
@@ -589,7 +589,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-127", name: "思川", slug: "omoigawa-river",
     description: "栃木県小山市を流れる利根川水系の河川。市街地を流れるが水質は良好で、オイカワ・コイ・ハヤのほか、バス釣りポイントもある。思川桜で有名な土手沿いでのんびり釣りができる。",
-    latitude: 36.3131, longitude: 139.7944, address: "栃木県小山市中央町",
+    latitude: 36.3131, longitude: 139.7944, address: "〒323-0023 栃木県小山市中央町3丁目7-1",
     accessInfo: "東北道佐野藤岡ICから約30分。JR小山駅から徒歩約10分。",
     region: lr("r760"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
@@ -616,7 +616,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   {
     id: "fw-128", name: "姫川", slug: "himekawa-river",
     description: "長野県白馬村から新潟県糸魚川市に注ぐ清流。フォッサマグナの断層を流れるダイナミックな渓谷美が魅力。上流域はイワナの聖地で、大物も潜む。白馬の山岳リゾートと合わせた釣行が人気。",
-    latitude: 36.7019, longitude: 137.8608, address: "長野県北安曇郡白馬村北城",
+    latitude: 36.7019, longitude: 137.8608, address: "〒399-9301 長野県北安曇郡白馬村北城7025",
     accessInfo: "長野道安曇野ICから約60分。JR白馬駅から車で約5分。",
     region: lr("r761"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",

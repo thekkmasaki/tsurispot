@@ -209,6 +209,7 @@ export default function Home() {
               fill="none"
               className="absolute bottom-0 w-full"
               preserveAspectRatio="none"
+              aria-hidden="true"
             >
               <path
                 d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,80 1440,60 L1440,120 L0,120 Z"
@@ -232,11 +233,11 @@ export default function Home() {
 
           <div className="flex flex-col items-center text-center">
             <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-sm text-white/90 backdrop-blur-sm sm:mb-4">
-              <Waves className="size-4" />
+              <Waves className="size-4" aria-hidden="true" />
               <span>海釣り・川釣り 総合情報サイト</span>
             </div>
 
-            <h1 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-white sm:mb-4 sm:text-4xl lg:text-5xl">
+            <h1 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-white text-balance sm:mb-4 sm:text-4xl lg:text-5xl">
               今週末、
               <br className="sm:hidden" />
               釣りに行こう。
@@ -254,20 +255,20 @@ export default function Home() {
             {/* メインCTA */}
             <div className="mb-4 flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
               <Link href="/map" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full gap-2 bg-amber-500 px-8 py-6 text-base font-bold text-white shadow-lg transition-all hover:bg-amber-400 hover:shadow-xl hover:scale-[1.02] sm:w-auto sm:text-lg min-h-[52px]">
+                <Button size="lg" className="w-full gap-2 bg-amber-500 px-8 py-6 text-base font-bold text-white shadow-lg transition-[background-color,box-shadow,transform] hover:bg-amber-400 hover:shadow-xl hover:scale-[1.02] sm:w-auto sm:text-lg min-h-[52px]">
                   <MapPin className="size-5" />
                   近くの釣り場を探す
                 </Button>
               </Link>
               <div className="flex gap-3">
                 <Link href="/for-beginners">
-                  <Button variant="outline" size="lg" className="gap-1.5 border-white/40 bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:scale-[1.02] min-h-[48px]">
+                  <Button variant="outline" size="lg" className="gap-1.5 border-white/40 bg-white/10 text-white backdrop-blur-sm transition-[background-color,transform] hover:bg-white/20 hover:scale-[1.02] min-h-[48px]">
                     <BookOpen className="size-4" />
                     初心者ガイド
                   </Button>
                 </Link>
                 <Link href="/catchable-now">
-                  <Button variant="outline" size="lg" className="gap-1.5 border-white/40 bg-white/10 text-white backdrop-blur-sm transition-all hover:bg-white/20 hover:scale-[1.02] min-h-[48px]">
+                  <Button variant="outline" size="lg" className="gap-1.5 border-white/40 bg-white/10 text-white backdrop-blur-sm transition-[background-color,transform] hover:bg-white/20 hover:scale-[1.02] min-h-[48px]">
                     <Fish className="size-4" />
                     今釣れる魚
                   </Button>
@@ -313,6 +314,7 @@ export default function Home() {
             fill="none"
             className="w-full"
             preserveAspectRatio="none"
+            aria-hidden="true"
           >
             <path
               d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z"
@@ -373,7 +375,7 @@ export default function Home() {
       <section className="mx-auto w-full max-w-5xl px-4 pt-8 sm:px-6 sm:pt-12">
         <div className="grid grid-cols-3 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-6">
           <Link href="/map">
-            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-sky-50 p-3 transition-all hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
+            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-sky-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
               <div className="flex size-10 items-center justify-center rounded-full bg-sky-100 sm:size-12">
                 <MapPin className="size-5 text-sky-600 sm:size-6" />
               </div>
@@ -383,7 +385,7 @@ export default function Home() {
             </div>
           </Link>
           <Link href="/catchable-now">
-            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-orange-50 p-3 transition-all hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
+            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-orange-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
               <div className="flex size-10 items-center justify-center rounded-full bg-orange-100 sm:size-12">
                 <Fish className="size-5 text-orange-600 sm:size-6" />
               </div>
@@ -393,7 +395,7 @@ export default function Home() {
             </div>
           </Link>
           <Link href="/fish-finder">
-            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-purple-50 p-3 transition-all hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
+            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-purple-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
               <div className="flex size-10 items-center justify-center rounded-full bg-purple-100 sm:size-12">
                 <Target className="size-5 text-purple-600 sm:size-6" />
               </div>
@@ -403,7 +405,7 @@ export default function Home() {
             </div>
           </Link>
           <Link href="/for-beginners">
-            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-emerald-50 p-3 transition-all hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
+            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-emerald-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
               <div className="flex size-10 items-center justify-center rounded-full bg-emerald-100 sm:size-12">
                 <BookOpen className="size-5 text-emerald-600 sm:size-6" />
               </div>
@@ -413,7 +415,7 @@ export default function Home() {
             </div>
           </Link>
           <Link href="/fishing-calendar">
-            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-blue-50 p-3 transition-all hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
+            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-blue-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
               <div className="flex size-10 items-center justify-center rounded-full bg-blue-100 sm:size-12">
                 <Calendar className="size-5 text-blue-600 sm:size-6" />
               </div>
@@ -423,7 +425,7 @@ export default function Home() {
             </div>
           </Link>
           <Link href="/recommendation">
-            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-amber-50 p-3 transition-all hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
+            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-amber-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
               <div className="flex size-10 items-center justify-center rounded-full bg-amber-100 sm:size-12">
                 <Compass className="size-5 text-amber-600 sm:size-6" />
               </div>
@@ -495,28 +497,28 @@ export default function Home() {
         </h2>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           <Link href="/fishing-spots/breakwater-beginner" className="group">
-            <div className="rounded-xl border bg-blue-50/50 p-4 transition-all hover:shadow-md hover:-translate-y-0.5">
+            <div className="rounded-xl border bg-blue-50/50 p-4 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5">
               <div className="text-2xl mb-2">🎣</div>
               <h3 className="text-sm font-semibold group-hover:text-primary">堤防釣り初心者向け</h3>
               <p className="mt-1 text-xs text-muted-foreground">安全で釣りやすい堤防スポット</p>
             </div>
           </Link>
           <Link href="/fishing-spots/best-saltwater" className="group">
-            <div className="rounded-xl border bg-cyan-50/50 p-4 transition-all hover:shadow-md hover:-translate-y-0.5">
+            <div className="rounded-xl border bg-cyan-50/50 p-4 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5">
               <div className="text-2xl mb-2">🌊</div>
               <h3 className="text-sm font-semibold group-hover:text-primary">海釣りおすすめ</h3>
               <p className="mt-1 text-xs text-muted-foreground">人気の海釣りスポット一覧</p>
             </div>
           </Link>
           <Link href="/fishing-spots/river-beginner" className="group">
-            <div className="rounded-xl border bg-emerald-50/50 p-4 transition-all hover:shadow-md hover:-translate-y-0.5">
+            <div className="rounded-xl border bg-emerald-50/50 p-4 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5">
               <div className="text-2xl mb-2">🏞️</div>
               <h3 className="text-sm font-semibold group-hover:text-primary">川釣り初心者向け</h3>
               <p className="mt-1 text-xs text-muted-foreground">のんびり川釣りを楽しめる</p>
             </div>
           </Link>
           <Link href="/fishing-spots/near-me" className="group">
-            <div className="rounded-xl border bg-amber-50/50 p-4 transition-all hover:shadow-md hover:-translate-y-0.5">
+            <div className="rounded-xl border bg-amber-50/50 p-4 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5">
               <div className="text-2xl mb-2">📍</div>
               <h3 className="text-sm font-semibold group-hover:text-primary">近くの釣り場</h3>
               <p className="mt-1 text-xs text-muted-foreground">現在地から一番近い釣り場</p>
@@ -529,7 +531,7 @@ export default function Home() {
       <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-16">
         <div className="mb-6 flex items-end justify-between sm:mb-8">
           <div>
-            <h2 className="text-xl font-bold tracking-tight sm:text-3xl">
+            <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
               人気の釣りスポット
             </h2>
             <p className="mt-1 text-sm text-muted-foreground">
@@ -630,7 +632,7 @@ export default function Home() {
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <div className="mb-6 flex items-end justify-between sm:mb-8">
             <div>
-              <h2 className="text-xl font-bold tracking-tight sm:text-3xl">
+              <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
                 今の時期に釣れる魚
               </h2>
               <p className="mt-1 text-sm text-muted-foreground">
@@ -731,7 +733,7 @@ export default function Home() {
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <div className="mb-6 flex items-end justify-between sm:mb-8">
             <div>
-              <h2 className="text-xl font-bold tracking-tight sm:text-3xl">
+              <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
                 エリア別釣り場ガイド
               </h2>
               <p className="mt-1 text-sm text-muted-foreground">
@@ -796,7 +798,7 @@ export default function Home() {
       <section className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-10">
         <div className="mb-6 flex items-end justify-between sm:mb-8">
           <div>
-            <h2 className="text-xl font-bold tracking-tight sm:text-3xl">
+            <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
               季節の釣り特集
             </h2>
             <p className="mt-1 text-sm text-muted-foreground">
@@ -862,7 +864,7 @@ export default function Home() {
           <div className="mx-auto max-w-5xl px-4 sm:px-6">
             <div className="mb-6 flex items-end justify-between sm:mb-8">
               <div>
-                <h2 className="text-xl font-bold tracking-tight sm:text-3xl">
+                <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
                   最新コラム
                 </h2>
                 <p className="mt-1 text-sm text-muted-foreground">

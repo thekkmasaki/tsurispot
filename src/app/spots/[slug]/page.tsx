@@ -17,6 +17,7 @@ import {
   ShoppingBag,
   MessageSquare,
   Shield,
+  Navigation2,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -60,6 +61,9 @@ import { seasonalGuides } from "@/lib/data/seasonal-guides";
 
 import { RecentlyViewedTracker } from "@/components/spots/recently-viewed-tracker";
 import { RecentlyViewedSpots } from "@/components/spots/recently-viewed";
+import { PortMannerSection } from "@/components/spots/port-manner-section";
+import { UmigyoBadge } from "@/components/spots/umigyo-badge";
+import { umigyoDistricts } from "@/lib/data/umigyo";
 
 // Below-the-fold client components loaded lazily
 const StreetViewSection = dynamic(() => import("@/components/spots/street-view-section").then((m) => m.StreetViewSection));
@@ -400,6 +404,13 @@ export default async function SpotDetailPage({ params }: PageProps) {
       prefecture: s.region.prefecture,
     }));
 
+  // 海業地区マッチング
+  const umigyoMatch = umigyoDistricts.find(
+    (d) => d.prefecture === spot.region.prefecture &&
+    (spot.name.includes(d.portName.replace(/漁港|港|地区/g, '')) ||
+     d.portName.includes(spot.name.replace(/漁港|港/g, '')))
+  );
+
   // Get nearby tackle shops
   const nearbyShops = getShopsForSpot(spot.slug);
 
@@ -447,7 +458,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
       <div className="mb-5 sm:mb-6">
         {/* スポット名 + お気に入り（最上段） */}
         <div className="flex items-start justify-between gap-3">
-          <h1 className="min-w-0 text-xl font-bold leading-tight sm:text-2xl md:text-3xl">{spot.name}</h1>
+          <h1 className="min-w-0 text-xl font-bold leading-tight text-pretty sm:text-2xl md:text-3xl">{spot.name}</h1>
           <FavoriteButton spotSlug={spot.slug} />
         </div>
 
@@ -500,6 +511,12 @@ export default async function SpotDetailPage({ params }: PageProps) {
           <Badge variant="outline" className="text-xs">
             {SPOT_TYPE_LABELS[spot.spotType]}
           </Badge>
+          {umigyoMatch && (
+            <UmigyoBadge
+              isModelDistrict={umigyoMatch.isModelDistrict}
+              portName={umigyoMatch.portName}
+            />
+          )}
         </div>
 
         {/* 説明文 */}
@@ -512,9 +529,32 @@ export default async function SpotDetailPage({ params }: PageProps) {
           {spot.isFree ? "無料で釣りができます。" : spot.feeDetail ? `利用料金: ${spot.feeDetail}` : ""}
         </p>
 
-        {/* 「今日行く」ボタン（ヘッダーから分離、独立セクション） */}
+        {/* 「今日行く」ボタン + ナビゲーション */}
         <div className="mt-4 rounded-xl border bg-muted/30 p-3 sm:p-4">
           <GoTodayButton slug={spot.slug} spotName={spot.name} />
+          <div className="mt-3 flex gap-2">
+            <a
+              href={`https://www.google.com/maps/search/?api=1&query=${spot.latitude},${spot.longitude}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-blue-700"
+            >
+              <MapPin className="size-4" />
+              Google Mapで見る
+            </a>
+            <a
+              href={`https://www.google.com/maps/dir/?api=1&destination=${spot.latitude},${spot.longitude}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border-2 border-blue-600 px-4 py-2.5 text-sm font-bold text-blue-700 transition-colors hover:bg-blue-50"
+            >
+              <Navigation2 className="size-4" />
+              ナビで行く
+            </a>
+          </div>
+          <p className="mt-2 text-center text-[11px] text-muted-foreground">
+            GPS座標で案内するので確実にたどり着けます
+          </p>
         </div>
 
         {/* シェアボタン */}
@@ -568,6 +608,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <h2 className="mb-4 text-lg font-bold">基本情報</h2>
             <Card className="py-4"><CardContent className="px-4">
               <dl className="space-y-3 text-sm">
+                <div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">住所</dt><dd><span className="font-medium">{spot.address}</span><a href={`https://www.google.com/maps/search/?api=1&query=${spot.latitude},${spot.longitude}`} target="_blank" rel="noopener noreferrer" className="ml-2 inline-flex items-center gap-1 text-xs text-blue-600 hover:underline"><MapPin className="size-3" />地図</a></dd></div>
                 {spot.feeDetail && (<div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">料金</dt><dd>{spot.feeDetail}</dd></div>)}
                 {spot.isFree && (<div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">料金</dt><dd className="font-medium text-orange-600">無料</dd></div>)}
                 <div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">難易度</dt><dd>{DIFFICULTY_LABELS[spot.difficulty]}</dd></div>
@@ -590,6 +631,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold"><Shield className="size-5" />釣りルール・禁止事項</h2>
             <SpotRulesCard rules={spot.rules} spotType={spot.spotType} spotName={spot.name} />
           </section>
+          {spot.spotType === "port" && <PortMannerSection />}
           <section>
             <h2 className="mb-3 text-lg font-bold">混雑予想</h2>
             <CrowdPredictionCard rating={spot.rating} isFree={spot.isFree} difficulty={spot.difficulty} prefecture={spot.region.prefecture} hasParking={spot.hasParking} reviewCount={spot.reviewCount} />
@@ -693,8 +735,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
               <CardHeader className="px-4 pb-0 pt-0"><CardTitle className="text-base"><MapPin className="mr-1 inline size-4" />所在地</CardTitle></CardHeader>
               <CardContent className="space-y-4 px-4">
                 <div>
-                  <p className="text-sm">{spot.address}</p>
-                  <a href={`https://www.google.com/maps/dir/?api=1&destination=${spot.latitude},${spot.longitude}`} target="_blank" rel="noopener noreferrer" className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline min-h-[36px]"><ExternalLink className="size-3.5" />Google Mapsでルートを見る</a>
+                  <p className="text-sm font-medium">{spot.address}</p>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    <a href={`https://www.google.com/maps/search/?api=1&query=${spot.latitude},${spot.longitude}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-blue-700 min-h-[40px]"><MapPin className="size-4" />Google Mapで場所を確認</a>
+                    <a href={`https://www.google.com/maps/dir/?api=1&destination=${spot.latitude},${spot.longitude}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700 transition-colors hover:bg-blue-100 min-h-[40px]"><Navigation2 className="size-4" />ルート案内</a>
+                  </div>
                 </div>
                 <Separator />
                 <div>

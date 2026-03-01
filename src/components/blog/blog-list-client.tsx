@@ -16,6 +16,7 @@ import {
   MapPin,
   Shield,
   Lightbulb,
+  Camera,
 } from "lucide-react";
 import { BLOG_CATEGORIES, type BlogPost } from "@/lib/data/blog";
 
@@ -30,6 +31,7 @@ const CATEGORY_THEME: Record<
   "spot-guide": { gradient: "from-sky-400 to-sky-600", Icon: MapPin },
   manner: { gradient: "from-amber-400 to-amber-600", Icon: Shield },
   knowledge: { gradient: "from-indigo-400 to-indigo-600", Icon: Lightbulb },
+  report: { gradient: "from-teal-400 to-teal-600", Icon: Camera },
 };
 
 function BlogThumbnail({ post }: { post: BlogPost }) {

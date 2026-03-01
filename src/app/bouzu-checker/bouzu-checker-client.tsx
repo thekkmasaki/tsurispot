@@ -294,7 +294,7 @@ function SelectButton({
   return (
     <button
       onClick={onClick}
-      className={`px-3 py-2 rounded-lg border text-sm transition-all text-left ${
+      className={`px-3 py-2 rounded-lg border text-sm transition-colors text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
         selected
           ? "bg-blue-600 text-white border-blue-600 shadow-md"
           : "bg-white text-gray-700 border-gray-200 hover:border-blue-300 hover:bg-blue-50"
@@ -552,7 +552,7 @@ export function BouzuCheckerClient() {
                 <button
                   key={m}
                   onClick={() => setForm({ ...form, month: m })}
-                  className={`py-2 rounded-lg border text-sm font-medium transition-all ${
+                  className={`py-2 rounded-lg border text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                     form.month === m
                       ? "bg-blue-600 text-white border-blue-600 shadow-md"
                       : "bg-white text-gray-700 border-gray-200 hover:border-blue-300 hover:bg-blue-50"
@@ -681,7 +681,7 @@ export function BouzuCheckerClient() {
             <button
               onClick={handleCheck}
               disabled={!isComplete}
-              className={`w-full py-3.5 rounded-xl text-base font-bold transition-all shadow-md ${
+              className={`w-full py-3.5 rounded-xl text-base font-bold shadow-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 ${
                 isComplete
                   ? "bg-gradient-to-r from-indigo-600 to-purple-500 text-white hover:from-indigo-700 hover:to-purple-600 active:scale-95"
                   : "bg-gray-200 text-gray-400 cursor-not-allowed"

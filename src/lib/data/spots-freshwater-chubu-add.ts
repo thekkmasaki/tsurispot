@@ -50,7 +50,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-129", name: "安倍川", slug: "abekawa-river",
     description: "静岡市を流れる一級河川。駿河湾に注ぐ清流で、アユ・アマゴの好漁場。上流域の梅ヶ島温泉周辺は渓流釣りの名所。安倍川餅で有名な名物河川。市街地からのアクセスも良好。",
-    latitude: 35.0083, longitude: 138.3214, address: "静岡県静岡市葵区足久保口組",
+    latitude: 35.0083, longitude: 138.3214, address: "〒421-2124 静岡県静岡市葵区足久保口組（安倍川上流域）",
     accessInfo: "新東名静岡ICから約20分。JR静岡駅から車で約30分。",
     region: lr("r763"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -74,7 +74,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-130", name: "天竜川中流（浜松）", slug: "tenryugawa-middle",
     description: "浜松市を流れる天竜川の中流域。船明ダム下流は大型アユの実績が高く、尺アユも狙える。コイ・ナマズなどの大物も多く、河川敷が広大でおかっぱりポイントが豊富。",
-    latitude: 34.8653, longitude: 137.7869, address: "静岡県浜松市天竜区二俣町",
+    latitude: 34.8653, longitude: 137.7869, address: "〒431-3314 静岡県浜松市天竜区二俣町二俣2160",
     accessInfo: "新東名浜松浜北ICから約20分。天竜浜名湖鉄道天竜二俣駅から徒歩約10分。",
     region: lr("r764"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -100,7 +100,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-131", name: "高原川", slug: "takaharagawa-river",
     description: "岐阜県飛騨市・高山市を流れる神通川の上流。北アルプスの雪解け水が育む清流で、イワナ・ヤマメの宝庫。奥飛騨温泉郷の近くで、温泉と渓流釣りを楽しめる贅沢なフィールド。",
-    latitude: 36.2892, longitude: 137.3978, address: "岐阜県高山市奥飛騨温泉郷栃尾",
+    latitude: 36.2892, longitude: 137.3978, address: "〒506-1423 岐阜県高山市奥飛騨温泉郷栃尾21",
     accessInfo: "中部縦貫道高山ICから約50分。JR高山駅からバスで約70分。",
     region: lr("r765"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人1,800円（1日）",
@@ -124,7 +124,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-132", name: "馬瀬川", slug: "mazegawa-river",
     description: "岐阜県下呂市馬瀬を流れる飛騨川の支流。「日本一のアユの川」として全国に名高く、全国鮎釣り選手権の会場にもなった名川。清流の美しさと豊富なアユの魚影が魅力。",
-    latitude: 35.8706, longitude: 137.1408, address: "岐阜県下呂市馬瀬名丸",
+    latitude: 35.8706, longitude: 137.1408, address: "〒509-2612 岐阜県下呂市馬瀬名丸5-8",
     accessInfo: "東海北陸道ひるがの高原ICから約40分。JR下呂駅から車で約30分。",
     region: lr("r766"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日）",
@@ -148,7 +148,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-133", name: "和良川", slug: "waragawa-river",
     description: "岐阜県郡上市和良町を流れる飛騨川の支流。オオサンショウウオが生息する清流として知られ、アユ・アマゴ釣りが楽しめる。和良鮎は「日本一のアユ」として食味コンテストでグランプリを受賞。",
-    latitude: 35.7492, longitude: 137.0408, address: "岐阜県郡上市和良町宮地",
+    latitude: 35.7492, longitude: 137.0408, address: "〒501-4507 岐阜県郡上市和良町宮地1155",
     accessInfo: "東海北陸道美並ICから約30分。長良川鉄道郡上八幡駅から車で約30分。",
     region: lr("r767"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -172,7 +172,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-134", name: "巴川", slug: "tomoegawa-river",
     description: "愛知県豊田市を流れる矢作川の支流。足助地区の香嵐渓は紅葉の名所で、渓流釣りも楽しめる。アマゴ・アユが釣れ、秋は紅葉トンネルの中での釣りが格別。",
-    latitude: 35.1286, longitude: 137.3128, address: "愛知県豊田市足助町",
+    latitude: 35.1286, longitude: 137.3128, address: "〒444-2424 愛知県豊田市足助町飯盛36",
     accessInfo: "東海環状自動車道豊田勘八ICから約20分。名鉄豊田市駅からバスで約40分。",
     region: lr("r768"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,200円（1日）",
@@ -197,7 +197,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-135", name: "大内山川", slug: "ouchiyamagawa-river",
     description: "三重県大紀町を流れる宮川の支流。アマゴの魚影が非常に濃く、三重県を代表する渓流釣り場の一つ。水質は抜群で、天然アマゴの朱点が美しい。大内山牛乳でも有名な地域。",
-    latitude: 34.3047, longitude: 136.4292, address: "三重県度会郡大紀町滝原",
+    latitude: 34.3047, longitude: 136.4292, address: "〒519-2703 三重県度会郡大紀町滝原870-37",
     accessInfo: "紀勢自動車道大紀滝原ICから約5分。JR滝原駅から徒歩約10分。",
     region: lr("r769"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -222,7 +222,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-136", name: "常願寺川", slug: "joganji-river",
     description: "富山県を流れる急流河川。立山連峰を源とし、日本一の暴れ川の異名を持つ。アユ釣りのほか、サクラマス（ヤマメの降海型）の遡上も見られる。急流ならではの力強いアユが魅力。",
-    latitude: 36.7103, longitude: 137.2444, address: "富山県富山市水橋",
+    latitude: 36.7103, longitude: 137.2444, address: "〒939-0526 富山県富山市水橋開発町800",
     accessInfo: "北陸道立山ICから約10分。あいの風とやま鉄道水橋駅から車で約5分。",
     region: lr("r770"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -247,7 +247,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-137", name: "手取川", slug: "tedorigawa-river",
     description: "石川県白山市を流れる一級河川。白山を水源とする北陸有数の河川で、アユ・サクラマスの好漁場。上流の白山渓谷は岩魚の楽園。手取峡谷の絶景も見どころ。",
-    latitude: 36.4778, longitude: 136.5917, address: "石川県白山市鶴来町",
+    latitude: 36.4778, longitude: 136.5917, address: "〒920-2121 石川県白山市鶴来本町4丁目ヌ85",
     accessInfo: "北陸道白山ICから約15分。北陸鉄道鶴来駅から徒歩約10分。",
     region: lr("r771"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -272,7 +272,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-138", name: "足羽川", slug: "asuwa-river",
     description: "福井県福井市・池田町を流れる九頭竜川の支流。上流の池田町周辺は渓流釣りの名所で、イワナ・ヤマメの魚影が濃い。福井市街を流れる中流域は桜の名所で、春は花見と釣りが楽しめる。",
-    latitude: 35.8625, longitude: 136.1858, address: "福井県今立郡池田町稲荷",
+    latitude: 35.8625, longitude: 136.1858, address: "〒910-2511 福井県今立郡池田町稲荷36-25-1",
     accessInfo: "北陸道福井ICから約40分。JR福井駅から車で約40分。",
     region: lr("r772"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,200円（1日）",
@@ -296,7 +296,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-139", name: "付知川", slug: "tsukechigawa-river",
     description: "岐阜県中津川市付知町を流れる木曽川の支流。「水と緑の清流の里」と呼ばれる付知峡の清流で、アマゴ・イワナの渓流釣りが盛ん。付知峡の不動滝は絶景ポイント。",
-    latitude: 35.6847, longitude: 137.3917, address: "岐阜県中津川市付知町",
+    latitude: 35.6847, longitude: 137.3917, address: "〒508-0351 岐阜県中津川市付知町6-39",
     accessInfo: "中央道中津川ICから約30分。JR中津川駅からバスで約40分。",
     region: lr("r776"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -320,7 +320,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-140", name: "気田川", slug: "ketagawa-river",
     description: "静岡県浜松市天竜区を流れる天竜川の支流。カヌーの聖地として知られるが、アユ・アマゴの好漁場でもある。水質が良く、流れが穏やかなのでウェーディングもしやすい。",
-    latitude: 35.0311, longitude: 137.8450, address: "静岡県浜松市天竜区春野町",
+    latitude: 35.0311, longitude: 137.8450, address: "〒437-0604 静岡県浜松市天竜区春野町堀之内1010-2",
     accessInfo: "新東名浜松浜北ICから約40分。遠鉄西鹿島駅から車で約40分。",
     region: lr("r782"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券 大人1,200円（1日）",
@@ -344,7 +344,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-141", name: "段戸川", slug: "dandogawa-river",
     description: "愛知県設楽町を流れる矢作川上流の支流。段戸裏谷原生林に囲まれた清流で、アマゴ・イワナの渓流釣りが楽しめる。愛知県でも屈指の水質を誇り、天然魚が多い。",
-    latitude: 35.1308, longitude: 137.4814, address: "愛知県北設楽郡設楽町田峯",
+    latitude: 35.1308, longitude: 137.4814, address: "〒441-2221 愛知県北設楽郡設楽町田峯字段戸1-1",
     accessInfo: "新東名新城ICから約40分。JR本長篠駅から車で約40分。",
     region: lr("r783"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -367,7 +367,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-142", name: "早月川", slug: "hayatsukigawa-river",
     description: "富山県滑川市・上市町を流れる急流河川。剱岳を源とし、日本有数の急傾斜河川。アユ釣りは上級者向けだが、パワフルな鮎が楽しめる。河口部ではシーバスも狙える。",
-    latitude: 36.7500, longitude: 137.3417, address: "富山県滑川市上小泉",
+    latitude: 36.7500, longitude: 137.3417, address: "〒936-0053 富山県滑川市上小泉2679",
     accessInfo: "北陸道滑川ICから約5分。あいの風とやま鉄道滑川駅から車で約5分。",
     region: lr("r779"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人1,300円（1日）",
@@ -390,7 +390,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-143", name: "犀川（金沢）", slug: "saigawa-kanazawa",
     description: "石川県金沢市を流れる河川。兼六園・金沢城の横を流れる都市河川ながら、アユ・ヤマメが釣れる意外な好フィールド。上流の犀川ダム周辺は渓流釣りのポイント。",
-    latitude: 36.5547, longitude: 136.6500, address: "石川県金沢市片町",
+    latitude: 36.5547, longitude: 136.6500, address: "〒920-0981 石川県金沢市片町1丁目3",
     accessInfo: "北陸道金沢西ICから約15分。JR金沢駅からバスで約10分。",
     region: lr("r780"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
@@ -414,7 +414,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-144", name: "真名川", slug: "managawa-river",
     description: "福井県大野市を流れる九頭竜川の支流。九頭竜川合流点付近はアユの好ポイント。上流の真名川ダム（麻那姫湖）周辺は渓流釣りが楽しめる。越前大野の城下町観光と合わせた釣行が人気。",
-    latitude: 35.9850, longitude: 136.4850, address: "福井県大野市中野",
+    latitude: 35.9850, longitude: 136.4850, address: "〒912-0084 福井県大野市中野40",
     accessInfo: "北陸道福井ICから約40分。JR越前大野駅から車で約10分。",
     region: lr("r781"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,200円（1日）",
@@ -438,7 +438,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-145", name: "雲出川", slug: "kumozugawa-river",
     description: "三重県津市・松阪市を流れる一級河川。中流域はアユ釣りが盛んで、下流域ではシーバス・ハゼも狙える。美杉地区の上流は渓流釣りも楽しめる多彩なフィールド。",
-    latitude: 34.6797, longitude: 136.3592, address: "三重県津市一志町",
+    latitude: 34.6797, longitude: 136.3592, address: "〒515-2514 三重県津市一志町其村743-1",
     accessInfo: "伊勢道久居ICから約15分。近鉄川合高岡駅から徒歩約10分。",
     region: lr("r784"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",

@@ -27,6 +27,7 @@ import {
   Target,
   Shield,
   Lightbulb,
+  Camera,
 } from "lucide-react";
 
 const CATEGORY_HERO: Record<
@@ -40,6 +41,7 @@ const CATEGORY_HERO: Record<
   "spot-guide": { gradient: "from-sky-400 to-sky-600", Icon: MapPin },
   manner: { gradient: "from-amber-400 to-amber-600", Icon: Shield },
   knowledge: { gradient: "from-indigo-400 to-indigo-600", Icon: Lightbulb },
+  report: { gradient: "from-teal-400 to-teal-600", Icon: Camera },
 };
 
 export function generateStaticParams() {

@@ -82,23 +82,23 @@ export function SpotCard({ spot, distance }: { spot: FishingSpot; distance?: num
               </Badge>
             )}
             {spot.hasParking && (
-              <span className="text-muted-foreground" title="駐車場あり">
-                <Car className="size-4" />
+              <span className="text-muted-foreground" role="img" aria-label="駐車場あり">
+                <Car className="size-4" aria-hidden="true" />
               </span>
             )}
             {spot.hasToilet && (
-              <span className="text-muted-foreground" title="トイレあり">
-                <Toilet className="size-4" />
+              <span className="text-muted-foreground" role="img" aria-label="トイレあり">
+                <Toilet className="size-4" aria-hidden="true" />
               </span>
             )}
             {spot.hasRentalRod && (
-              <span className="text-muted-foreground" title="レンタル竿あり">
-                <Fish className="size-4" />
+              <span className="text-muted-foreground" role="img" aria-label="レンタル竿あり">
+                <Fish className="size-4" aria-hidden="true" />
               </span>
             )}
             {spot.hasConvenienceStore && (
-              <span className="text-muted-foreground" title="コンビニ近く">
-                <ShoppingBag className="size-4" />
+              <span className="text-muted-foreground" role="img" aria-label="コンビニ近く">
+                <ShoppingBag className="size-4" aria-hidden="true" />
               </span>
             )}
           </div>

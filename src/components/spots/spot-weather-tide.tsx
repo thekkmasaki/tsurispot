@@ -419,6 +419,63 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
           <p className="text-xs text-muted-foreground leading-relaxed">{tideInfo.description}</p>
         </div>
 
+        {/* 強風警告 */}
+        {weather && (() => {
+          const windMs = weather.windSpeed / 3.6;
+          if (windMs >= 15) {
+            return (
+              <div className="mt-3 rounded-lg bg-red-50 border-2 border-red-400 px-3 py-3">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <ShieldAlert className="h-5 w-5 text-red-600 animate-pulse" />
+                  <span className="text-sm font-bold text-red-700">暴風警告：釣り中止を強く推奨</span>
+                </div>
+                <p className="text-xs text-red-700 leading-relaxed">
+                  現在の風速は<span className="font-bold">{windMs.toFixed(1)}m/s</span>で非常に危険な状態です。
+                  堤防・テトラでは波にさらわれる危険があります。釣行は中止してください。
+                </p>
+              </div>
+            );
+          }
+          if (windMs >= 10) {
+            return (
+              <div className="mt-3 rounded-lg bg-orange-50 border-2 border-orange-400 px-3 py-3">
+                <div className="flex items-center gap-2 mb-1.5">
+                  <AlertTriangle className="h-5 w-5 text-orange-600" />
+                  <span className="text-sm font-bold text-orange-700">強風注意：釣行は危険です</span>
+                </div>
+                <p className="text-xs text-orange-700 leading-relaxed">
+                  現在の風速は<span className="font-bold">{windMs.toFixed(1)}m/s</span>です。
+                  テトラや磯場は波しぶきの危険あり。仕掛けも流されやすく釣りになりません。中止・延期を検討してください。
+                </p>
+              </div>
+            );
+          }
+          if (windMs >= 7) {
+            return (
+              <div className="mt-3 rounded-lg bg-amber-50 border border-amber-300 px-3 py-2">
+                <div className="flex items-center gap-2 mb-1">
+                  <Wind className="h-4 w-4 text-amber-600" />
+                  <span className="text-xs font-bold text-amber-700">やや強い風（{windMs.toFixed(1)}m/s）</span>
+                </div>
+                <p className="text-xs text-amber-700 leading-relaxed">
+                  軽い仕掛けは流されやすいです。重めのオモリを使い、風裏のポイントを選びましょう。帽子・荷物の飛散にも注意。
+                </p>
+              </div>
+            );
+          }
+          if (windMs >= 5) {
+            return (
+              <div className="mt-3 rounded-lg bg-sky-50 border border-sky-200 px-3 py-2">
+                <div className="flex items-center gap-1.5">
+                  <Wind className="h-3.5 w-3.5 text-sky-600" />
+                  <span className="text-xs text-sky-700">風あり（{windMs.toFixed(1)}m/s）— 釣りは可能ですが仕掛けの調整が必要</span>
+                </div>
+              </div>
+            );
+          }
+          return null;
+        })()}
+
         {/* 警報・注意報 */}
         {weather && weather.warnings.length > 0 && (
           <div className="mt-3 rounded-lg bg-amber-50 border border-amber-200 px-3 py-2">
@@ -432,7 +489,7 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
           </div>
         )}
 
-        {weather && weather.warnings.length === 0 && (
+        {weather && weather.warnings.length === 0 && (weather.windSpeed / 3.6) < 5 && (
           <div className="mt-3 rounded-lg bg-emerald-50 border border-emerald-200 px-3 py-2">
             <div className="flex items-center gap-1.5">
               <ShieldAlert className="h-3.5 w-3.5 text-emerald-600" />

@@ -70,7 +70,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-326", name: "利根川下流（銚子〜佐原）", slug: "tonegawa-lower-unagi",
     description: "日本最大の流域面積を誇る利根川の下流域。銚子から佐原にかけての中下流域はウナギの好漁場として知られ、テトラポッド周辺や護岸の隙間、水門付近が好ポイント。夏場の夜釣りでは良型のウナギが期待でき、ナマズやコイも同時に狙える。桜井町公園周辺は足場も良く初心者にもおすすめ。",
-    latitude: 35.8978, longitude: 140.5621, address: "千葉県香取市佐原イ地先",
+    latitude: 35.8978, longitude: 140.5621, address: "〒287-0003 千葉県香取市佐原イ地先",
     accessInfo: "JR成田線佐原駅から車で約10分。東関東自動車道佐原香取ICから約15分。",
     region: lr("r2300"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料（遊漁券不要区間）",
@@ -95,7 +95,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-327", name: "多摩川中流（調布〜二子玉川）", slug: "tamagawa-middle-unagi",
     description: "都心からアクセス抜群の多摩川中流域。調布から二子玉川にかけてはウナギの生息密度が高く、護岸のテトラや水門周辺が好ポイント。ガス橋から下流は遊漁券不要で手軽に楽しめる。梅雨〜晩夏の夜釣りでは60cmオーバーの大物も。コイやナマズ、テナガエビも同時に狙える人気エリア。",
-    latitude: 35.6142, longitude: 139.6283, address: "東京都世田谷区鎌田1丁目地先",
+    latitude: 35.6142, longitude: 139.6283, address: "〒157-0077 東京都世田谷区鎌田1丁目地先",
     accessInfo: "東急田園都市線二子玉川駅から徒歩約10分。多摩川沿いの河川敷。",
     region: lr("r2301"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "ガス橋下流は遊漁券不要",
@@ -121,7 +121,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-328", name: "荒川下流（旧岩淵水門〜平井大橋）", slug: "arakawa-lower-unagi",
     description: "東京都内を流れる荒川下流域。旧岩淵水門から平井大橋にかけてはウナギ釣りの超人気エリア。テトラ帯や泥底のポイントが多く、夜釣りで安定した釣果が期待できる。河口側では数釣り、中流域では大型が狙えるのが特徴。江北橋や平井大橋下は足場が良くアクセスも便利。",
-    latitude: 35.7683, longitude: 139.7241, address: "東京都北区岩淵町地先",
+    latitude: 35.7683, longitude: 139.7241, address: "〒115-0041 東京都北区岩淵町地先",
     accessInfo: "JR京浜東北線赤羽駅から徒歩約15分。東京メトロ南北線赤羽岩淵駅から徒歩約10分。",
     region: lr("r2302"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -146,7 +146,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-329", name: "江戸川下流（柴又〜市川）", slug: "edogawa-lower-unagi",
     description: "東京と千葉の境を流れる江戸川の下流域。柴又から市川にかけては護岸が整備されウナギ釣りに適した環境。柳原水門周辺や柴又帝釈天付近は足場が良く初心者にもおすすめ。橋脚周辺は特に実績が高い。満潮前後はウナギの活性が上がり、連続ヒットも期待できる。",
-    latitude: 35.7612, longitude: 139.8783, address: "東京都葛飾区柴又7丁目地先",
+    latitude: 35.7612, longitude: 139.8783, address: "〒125-0052 東京都葛飾区柴又7丁目地先",
     accessInfo: "京成金町線柴又駅から徒歩約8分。京成本線市川真間駅から徒歩約15分。",
     region: lr("r2303"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -171,7 +171,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-330", name: "相模川下流（馬入橋〜河口）", slug: "sagamigawa-lower-unagi",
     description: "神奈川県を代表する大河川・相模川の下流域。馬入橋から河口にかけてはウナギの好漁場で、寒川取水堰より下流が主なポイント。神川橋下流の消波ブロック帯や水門周辺が実績高い。ドバミミズが最強エサとされ、雨後の濁りが入ったタイミングが特に良い。アユやハゼも同時に楽しめる。",
-    latitude: 35.3283, longitude: 139.3541, address: "神奈川県平塚市馬入本町地先",
+    latitude: 35.3283, longitude: 139.3541, address: "〒254-0024 神奈川県平塚市馬入本町地先",
     accessInfo: "JR東海道線平塚駅から徒歩約20分。湘南大橋すぐ。",
     region: lr("r2304"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "寒川取水堰下流は遊漁券不要",
@@ -196,7 +196,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-331", name: "那珂川下流（水戸〜ひたちなか）", slug: "nakagawa-lower-unagi",
     description: "栃木県から茨城県へ流れる那珂川の下流域。水戸市からひたちなかにかけてはウナギの天然遡上が多く、良型が期待できるポイント。千波湖付近の合流点や護岸周辺が狙い目。アユの名河川としても知られ、秋口にはサケの遡上も見られる豊かな川。",
-    latitude: 36.3752, longitude: 140.4631, address: "茨城県水戸市千波町地先",
+    latitude: 36.3752, longitude: 140.4631, address: "〒310-0851 茨城県水戸市千波町地先",
     accessInfo: "JR常磐線水戸駅からバスで約10分。北関東自動車道水戸南ICから約15分。",
     region: lr("r2305"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "那珂川漁協遊漁券 日券1,000円",
@@ -221,7 +221,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-332", name: "古利根川（越谷〜杉戸）", slug: "furutonegawa-unagi",
     description: "埼玉県東部を流れる古利根川はウナギ釣りの穴場的スポット。利根川の旧河道で流れが穏やかなため初心者でも釣りやすい。越谷から杉戸にかけて全域で実績があり、橋脚周辺やテトラ帯が好ポイント。ナマズやヘラブナも多く生息する。梅雨時期の夜釣りで特に好釣果。",
-    latitude: 35.9012, longitude: 139.7883, address: "埼玉県北葛飾郡杉戸町地先",
+    latitude: 35.9012, longitude: 139.7883, address: "〒345-0036 埼玉県北葛飾郡杉戸町杉戸地先",
     accessInfo: "東武スカイツリーライン北越谷駅からバスで約10分。東北自動車道岩槻ICから約20分。",
     region: lr("r2306"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -246,7 +246,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-333", name: "天竜川下流（浜松〜磐田）", slug: "tenryugawa-lower-unagi",
     description: "南アルプスを源流とする天竜川の下流域。浜松から磐田にかけての中下流域はウナギの好漁場で、河口から秋葉ダムまで広い範囲で狙える。ナマズやスッポンも外道として掛かることがある。静岡県はウナギの養殖で有名だが、天然ウナギの味は格別。",
-    latitude: 34.7283, longitude: 137.7941, address: "静岡県浜松市中央区天竜川町地先",
+    latitude: 34.7283, longitude: 137.7941, address: "〒435-0013 静岡県浜松市中央区天竜川町地先",
     accessInfo: "JR東海道線浜松駅から車で約20分。東名高速浜松ICから約15分。",
     region: lr("r2307"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "天竜川漁協遊漁券 日券1,000円",
@@ -271,7 +271,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-334", name: "大井川下流（島田〜焼津）", slug: "ooigawa-lower-unagi",
     description: "駿河湾に注ぐ大井川の下流域。島田から焼津にかけての中下流域はウナギの生息が確認されており、護岸やテトラ帯が好ポイント。SLで有名な大井川鐵道の沿線に位置し、観光と合わせて楽しめる。ナマズやコイも狙える複合ポイント。",
-    latitude: 34.7983, longitude: 138.2341, address: "静岡県島田市向島町地先",
+    latitude: 34.7983, longitude: 138.2341, address: "〒427-0045 静岡県島田市向島町地先",
     accessInfo: "JR東海道線島田駅から車で約10分。東名高速吉田ICから約15分。",
     region: lr("r2308"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "大井川漁協遊漁券 日券1,000円",
@@ -296,7 +296,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-335", name: "豊川下流（豊橋〜豊川市）", slug: "toyokawa-lower-unagi",
     description: "三河湾に注ぐ豊川の下流域。牟呂松原頭首工より下流は堰堤がなく、ウナギやアユの天然遡上が豊富。豊橋市街地からアクセスも良く、護岸整備された釣りやすい環境。夏場の夜釣りでは安定した釣果が期待できる。",
-    latitude: 34.7683, longitude: 137.3841, address: "愛知県豊橋市下地町地先",
+    latitude: 34.7683, longitude: 137.3841, address: "〒440-0085 愛知県豊橋市下地町地先",
     accessInfo: "JR東海道線豊橋駅から車で約10分。東名高速豊川ICから約15分。",
     region: lr("r2309"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "豊川上漁協遊漁券 日券500円",
@@ -321,7 +321,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-336", name: "淀川下流（十三〜海老江）", slug: "yodogawa-lower-unagi",
     description: "大阪市内を流れる淀川の下流域。十三から海老江にかけてはウナギ釣りの名ポイントで、大阪府内で最も実績の高いエリア。海老江の護岸や旧淀川（大川）の天神橋付近も好釣り場。梅雨から秋にかけてがシーズンで、大型のウナギも期待できる。都市河川ながら魚影は濃い。",
-    latitude: 34.7083, longitude: 135.4641, address: "大阪府大阪市淀川区十三東1丁目地先",
+    latitude: 34.7083, longitude: 135.4641, address: "〒532-0023 大阪府大阪市淀川区十三東1丁目地先",
     accessInfo: "阪急十三駅から徒歩約10分。JR大阪駅から徒歩約20分。",
     region: lr("r2310"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -346,7 +346,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-337", name: "大和川下流（堺〜松原）", slug: "yamatogawa-lower-unagi",
     description: "奈良県から大阪府を流れ大阪湾に注ぐ大和川の下流域。近年の水質改善によりウナギの生息数が増加傾向。堺市から松原市にかけての護岸やテトラ帯が主なポイント。都市近郊で手軽にウナギ釣りが楽しめる。ナマズやコイの魚影も濃い。",
-    latitude: 34.5883, longitude: 135.5141, address: "大阪府堺市堺区遠里小野町地先",
+    latitude: 34.5883, longitude: 135.5141, address: "〒590-0001 大阪府堺市堺区遠里小野町地先",
     accessInfo: "南海高野線浅香山駅から徒歩約5分。阪和自動車道堺ICから約10分。",
     region: lr("r2311"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -370,7 +370,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-338", name: "紀ノ川下流（和歌山市）", slug: "kinokawa-lower-unagi",
     description: "紀伊半島を流れる紀ノ川の下流域。和歌山市内でウナギ釣りが楽しめる好漁場。河口に近いエリアでは汽水域となり、ウナギの魚影が特に濃い。護岸やテトラ帯周辺が好ポイントで、夏場の夜釣りでは良型の実績多数。アユやコイも楽しめる多魚種の川。",
-    latitude: 34.2383, longitude: 135.1841, address: "和歌山県和歌山市湊本町地先",
+    latitude: 34.2383, longitude: 135.1841, address: "〒640-8222 和歌山県和歌山市湊本町地先",
     accessInfo: "JR紀勢本線和歌山駅から車で約15分。阪和自動車道和歌山ICから約10分。",
     region: lr("r2312"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "下流域は遊漁券不要",
@@ -395,7 +395,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-339", name: "加古川下流（加古川市〜高砂市）", slug: "kakogawa-lower-unagi",
     description: "兵庫県を代表する一級河川・加古川の下流域。加古川市から高砂市にかけてはウナギの好漁場。護岸やテトラ帯、水門周辺が好ポイント。播磨灘に注ぐ河口付近は汽水域となりウナギの魚影が濃い。ナマズやコイも多く生息する。",
-    latitude: 34.7583, longitude: 134.8441, address: "兵庫県加古川市加古川町本町地先",
+    latitude: 34.7583, longitude: 134.8441, address: "〒675-0037 兵庫県加古川市加古川町本町地先",
     accessInfo: "JR神戸線加古川駅から徒歩約15分。加古川バイパス加古川ランプから約5分。",
     region: lr("r2313"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "下流域は遊漁券不要",
@@ -419,7 +419,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-340", name: "旭川下流（岡山市）", slug: "asahikawa-lower-unagi",
     description: "岡山市内を流れる旭川の下流域。岡山城付近から河口にかけてウナギが生息し、護岸やテトラ帯が好ポイント。都市河川ながら魚影は濃く、ナマズやコイも多い。百間川との合流点付近は特に実績が高い。",
-    latitude: 34.6583, longitude: 133.9241, address: "岡山県岡山市北区京橋町地先",
+    latitude: 34.6583, longitude: 133.9241, address: "〒700-0831 岡山県岡山市北区京橋町地先",
     accessInfo: "JR岡山駅から徒歩約15分。山陽自動車道岡山ICから約20分。",
     region: lr("r2314"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "下流域は遊漁券不要",
@@ -443,7 +443,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-341", name: "高梁川下流（倉敷〜総社）", slug: "takahashigawa-lower-unagi",
     description: "岡山県西部を流れる高梁川の下流域。倉敷市から総社市にかけてウナギの好漁場が広がる。水島湾に注ぐ河口付近は汽水域でウナギの魚影が特に濃い。護岸やテトラ帯が好ポイント。アユやコイも同時に楽しめる。",
-    latitude: 34.5683, longitude: 133.7541, address: "岡山県倉敷市酒津地先",
+    latitude: 34.5683, longitude: 133.7541, address: "〒710-0801 岡山県倉敷市酒津地先",
     accessInfo: "JR伯備線倉敷駅から車で約15分。山陽自動車道倉敷ICから約10分。",
     region: lr("r2315"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "下流域は遊漁券不要",
@@ -467,7 +467,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-342", name: "太田川下流（広島市）", slug: "otagawa-lower-unagi",
     description: "広島市の中心部を流れる太田川の下流域。原爆ドーム付近から河口にかけてウナギが生息し、都市部ながら夜釣りで実績がある。デルタ地帯を形成する複数の分流があり、護岸やテトラ帯が多数。京橋川・元安川なども好ポイント。",
-    latitude: 34.3983, longitude: 132.4541, address: "広島県広島市中区基町地先",
+    latitude: 34.3983, longitude: 132.4541, address: "〒730-0011 広島県広島市中区基町地先",
     accessInfo: "広島電鉄原爆ドーム前駅から徒歩約5分。山陽自動車道広島ICから約20分。",
     region: lr("r2316"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "下流域は遊漁券不要",
@@ -491,7 +491,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-343", name: "四万十川中下流（中村〜河口）", slug: "shimantogawa-lower-unagi",
     description: "「日本最後の清流」四万十川の中下流域。河口付近から佐田沈下橋あたりまでがウナギ釣りの好ポイント。沈下橋周辺の流れが緩やかなワンドや石積み護岸が狙い目。四万十川のウナギは味が格別で地元でも珍重される。4〜9月が漁期で、夜釣りがメイン。",
-    latitude: 32.9883, longitude: 132.9341, address: "高知県四万十市中村山手通地先",
+    latitude: 32.9883, longitude: 132.9341, address: "〒787-0028 高知県四万十市中村山手通地先",
     accessInfo: "土佐くろしお鉄道中村駅から車で約10分。高知自動車道四万十町中央ICから約60分。",
     region: lr("r2317"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "四万十川上流淡水漁協 年券3,000円（ウナギ含む）",
@@ -517,7 +517,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-344", name: "吉野川下流（徳島市〜石井町）", slug: "yoshinogawa-lower-unagi",
     description: "四国最大の河川・吉野川の下流域。徳島市から石井町にかけてウナギの好漁場が広がる。河口付近の汽水域は特にウナギの魚影が濃い。護岸やテトラ帯、水門周辺が好ポイント。アユやコイなども同時に楽しめる。日本有数の暴れ川だが下流域は流れが穏やか。",
-    latitude: 34.0683, longitude: 134.5441, address: "徳島県徳島市住吉地先",
+    latitude: 34.0683, longitude: 134.5441, address: "〒770-0861 徳島県徳島市住吉地先",
     accessInfo: "JR徳島駅から車で約10分。徳島自動車道徳島ICから約15分。",
     region: lr("r2318"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "下流域は遊漁券不要",
@@ -542,7 +542,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-345", name: "仁淀川下流（いの町〜土佐市）", slug: "niyodogawa-lower-unagi",
     description: "「仁淀ブルー」で知られる仁淀川の下流域。いの町から土佐市にかけてウナギの好漁場が広がる。清流ならではの良質なウナギが釣れ、味も絶品。流れが緩やかなワンドや護岸周辺が好ポイント。アユの遡上期はウナギの餌も豊富で活性が高まる。",
-    latitude: 33.5483, longitude: 133.4241, address: "高知県吾川郡いの町枝川地先",
+    latitude: 33.5483, longitude: 133.4241, address: "〒781-2120 高知県吾川郡いの町枝川地先",
     accessInfo: "JR土讃線伊野駅から車で約10分。高知自動車道伊野ICから約5分。",
     region: lr("r2319"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "仁淀川漁協遊漁券 日券1,000円",
@@ -567,7 +567,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-346", name: "筑後川中下流（久留米〜大川）", slug: "chikugogawa-lower-unagi",
     description: "九州最大の河川・筑後川の中下流域。久留米市から大川市にかけてはウナギ釣りのメッカで、毎年多くの釣り人が訪れる。橋脚周辺やテトラ帯、支流合流点が好ポイント。有明海に注ぐ河口付近は汽水域でウナギの魚影が特に濃い。山ノ井川など支流も見逃せない。",
-    latitude: 33.3183, longitude: 130.5041, address: "福岡県久留米市瀬下町地先",
+    latitude: 33.3183, longitude: 130.5041, address: "〒830-0025 福岡県久留米市瀬下町地先",
     accessInfo: "JR鹿児島本線久留米駅から徒歩約15分。九州自動車道久留米ICから約10分。",
     region: lr("r2320"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "下流域は遊漁券不要",
@@ -592,7 +592,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-347", name: "球磨川下流（八代〜人吉）", slug: "kumagawa-lower-unagi",
     description: "日本三大急流の一つ・球磨川の中下流域。八代市から人吉市にかけてウナギが生息し、特に中流域の流れが穏やかなワンドや護岸周辺が好ポイント。清流で育ったウナギは味が良いと評判。アユの名河川としても有名で、アユ釣りと合わせて楽しめる。",
-    latitude: 32.5083, longitude: 130.6441, address: "熊本県八代市本町地先",
+    latitude: 32.5083, longitude: 130.6441, address: "〒866-0861 熊本県八代市本町地先",
     accessInfo: "JR鹿児島本線八代駅から車で約10分。九州自動車道八代ICから約5分。",
     region: lr("r2321"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "球磨川漁協遊漁券 日券1,000円",
@@ -617,7 +617,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-348", name: "大淀川下流（宮崎市）", slug: "ooyodogawa-lower-unagi",
     description: "宮崎市内を流れる大淀川の下流域。宮崎市街地からアクセスが良く、護岸整備された釣りやすい環境。河口に近い汽水域はウナギの魚影が特に濃い。橋脚周辺やテトラ帯が好ポイント。温暖な気候のため、関東より早くシーズンインする。",
-    latitude: 31.9183, longitude: 131.4141, address: "宮崎県宮崎市橘通西地先",
+    latitude: 31.9183, longitude: 131.4141, address: "〒880-0001 宮崎県宮崎市橘通西地先",
     accessInfo: "JR日豊本線宮崎駅から徒歩約15分。宮崎自動車道宮崎ICから約10分。",
     region: lr("r2322"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "下流域は遊漁券不要",
@@ -642,7 +642,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-349", name: "多摩川河口（六郷橋〜大師橋）", slug: "tamagawa-estuary-tenaga",
     description: "多摩川河口の六郷橋から大師橋にかけてはテナガエビ釣りの超人気ポイント。消波ブロック帯や護岸の隙間にテナガエビが大量に生息し、梅雨前後のハイシーズンには入れ食いも。川崎側の方が釣りやすく、ファミリーフィッシングにも最適。ハゼやウナギも同時に狙える。",
-    latitude: 35.5412, longitude: 139.7183, address: "東京都大田区西六郷4丁目地先",
+    latitude: 35.5412, longitude: 139.7183, address: "〒144-0056 東京都大田区西六郷4丁目地先",
     accessInfo: "京急六郷土手駅から徒歩約5分。首都高速横羽線六郷出口から約5分。",
     region: lr("r2323"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -667,7 +667,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-350", name: "荒川下流（平井大橋）", slug: "arakawa-hirai-tenaga",
     description: "荒川下流の平井大橋付近はテナガエビ釣りの定番ポイント。コンクリート護岸帯が続き、足場が良くファミリーフィッシングに最適。潮位が上がる時間帯に護岸帯を釣り歩くのが基本スタイル。梅雨前後のシーズンには大型のテナガエビが狙える。",
-    latitude: 35.7012, longitude: 139.8383, address: "東京都江戸川区平井7丁目地先",
+    latitude: 35.7012, longitude: 139.8383, address: "〒132-0035 東京都江戸川区平井7丁目地先",
     accessInfo: "JR総武線平井駅から徒歩約10分。首都高速中央環状線平井大橋出口すぐ。",
     region: lr("r2324"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -691,7 +691,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-351", name: "江戸川放水路", slug: "edogawa-housui-tenaga",
     description: "千葉県市川市の江戸川放水路はハゼとテナガエビの名所。放水路の護岸帯にテナガエビが大量に生息し、梅雨前後は入れ食いになることも。ハゼ釣り船の桟橋周辺も好ポイント。足場が良くアクセスも便利で、初心者やファミリーに最適。",
-    latitude: 35.7112, longitude: 139.9283, address: "千葉県市川市妙典1丁目地先",
+    latitude: 35.7112, longitude: 139.9283, address: "〒272-0111 千葉県市川市妙典1丁目地先",
     accessInfo: "東京メトロ東西線妙典駅から徒歩約10分。京葉道路市川ICから約15分。",
     region: lr("r2325"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -715,7 +715,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-352", name: "旧江戸川（なぎさ公園〜葛西橋）", slug: "kyu-edogawa-tenaga",
     description: "東京都江戸川区の旧江戸川はテナガエビとハゼの好漁場。なぎさ公園から葛西橋にかけて護岸が整備され、足場が良く初心者にも釣りやすい。テトラポッド周辺や護岸の隙間がテナガエビの住処。ウナギも夜釣りで狙える。都心からのアクセスが良く人気が高い。",
-    latitude: 35.6612, longitude: 139.8983, address: "東京都江戸川区南葛西7丁目地先",
+    latitude: 35.6612, longitude: 139.8983, address: "〒134-0085 東京都江戸川区南葛西7丁目地先",
     accessInfo: "東京メトロ東西線葛西駅からバスで約10分。首都高速湾岸線葛西出口から約5分。",
     region: lr("r2326"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -739,7 +739,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-353", name: "荒川・岩淵水門", slug: "arakawa-iwabuchi-tenaga",
     description: "荒川と隅田川の分岐点にある旧岩淵水門周辺はテナガエビ釣りの人気ポイント。水門のコンクリート構造物周辺にテナガエビが多数生息。足場が良く公園も併設されておりファミリー向け。テトラ帯もありポイントが豊富。ウナギやコイも狙える複合ポイント。",
-    latitude: 35.7883, longitude: 139.7241, address: "東京都北区志茂5丁目地先",
+    latitude: 35.7883, longitude: 139.7241, address: "〒115-0042 東京都北区志茂5丁目地先",
     accessInfo: "東京メトロ南北線赤羽岩淵駅から徒歩約10分。JR赤羽駅から徒歩約15分。",
     region: lr("r2327"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -764,7 +764,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-354", name: "淀川河口（海老江）", slug: "yodogawa-estuary-tenaga",
     description: "大阪市の淀川河口付近・海老江エリアはテナガエビ釣りの好ポイント。護岸が整備され足場が良く、テトラ帯にテナガエビが多数生息。ハゼ釣りの人気エリアでもあり、昼はテナガエビ、夜はウナギと一日中楽しめる。大阪駅からもアクセス良好。",
-    latitude: 34.6983, longitude: 135.4541, address: "大阪府大阪市此花区伝法地先",
+    latitude: 34.6983, longitude: 135.4541, address: "〒554-0002 大阪府大阪市此花区伝法地先",
     accessInfo: "阪神なんば線伝法駅から徒歩約10分。阪神高速湾岸線北港JCTから約5分。",
     region: lr("r2328"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -788,7 +788,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-355", name: "大和川河口（堺市）", slug: "yamatogawa-estuary-tenaga",
     description: "大和川河口付近はテナガエビとハゼの好釣り場。護岸やテトラ帯にテナガエビが多数生息し、梅雨前後のシーズンには好釣果が期待できる。近年の水質改善により魚影が増加傾向。足場が良くアクセスも便利な都市型釣り場。",
-    latitude: 34.5783, longitude: 135.4841, address: "大阪府堺市堺区松屋町地先",
+    latitude: 34.5783, longitude: 135.4841, address: "〒590-0903 大阪府堺市堺区松屋町地先",
     accessInfo: "南海本線湊駅から徒歩約10分。阪神高速堺線堺出口から約5分。",
     region: lr("r2329"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -812,7 +812,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-356", name: "中川下流（江戸川区）", slug: "nakagawa-lower-tenaga",
     description: "東京都江戸川区を流れる中川の下流域はテナガエビ釣りの穴場。荒川や江戸川と比べて釣り人が少なく、のんびりと釣りが楽しめる。護岸帯やテトラ周辺にテナガエビが生息し、梅雨前後が最盛期。コイやヘラブナも釣れる。",
-    latitude: 35.7312, longitude: 139.8583, address: "東京都葛飾区東新小岩地先",
+    latitude: 35.7312, longitude: 139.8583, address: "〒124-0023 東京都葛飾区東新小岩地先",
     accessInfo: "JR総武線新小岩駅から徒歩約15分。",
     region: lr("r2330"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -836,7 +836,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-357", name: "多摩川（登戸付近）", slug: "tamagawa-noborito-tenaga",
     description: "多摩川中流の登戸付近はテナガエビ釣りの実績ポイント。二ヶ領堰下流のテトラ帯や護岸にテナガエビが生息。河口部に比べて水がきれいで、釣ったテナガエビの味も良い。オイカワやコイなども楽しめ、駅からのアクセスも良好。",
-    latitude: 35.6212, longitude: 139.5683, address: "神奈川県川崎市多摩区登戸地先",
+    latitude: 35.6212, longitude: 139.5683, address: "〒214-0014 神奈川県川崎市多摩区登戸地先",
     accessInfo: "JR南武線・小田急線登戸駅から徒歩約10分。",
     region: lr("r2331"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -860,7 +860,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-358", name: "荒川（秋ヶ瀬橋付近）", slug: "arakawa-akigase-tenaga",
     description: "埼玉県さいたま市の秋ヶ瀬橋付近はテナガエビ釣りの好ポイント。秋ヶ瀬公園に隣接し、護岸やテトラ帯にテナガエビが多数生息。都心部より上流のためプレッシャーが低く、良型が多い。ヘラブナやコイの名所でもある。",
-    latitude: 35.8412, longitude: 139.6183, address: "埼玉県さいたま市桜区大久保領家地先",
+    latitude: 35.8412, longitude: 139.6183, address: "〒338-0826 埼玉県さいたま市桜区大久保領家地先",
     accessInfo: "JR武蔵野線西浦和駅から徒歩約20分。秋ヶ瀬公園内。",
     region: lr("r2332"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -884,7 +884,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-359", name: "花見川（千葉市）", slug: "hanamigawa-tenaga",
     description: "千葉市の花見川はテナガエビ釣りの穴場的スポット。印旛沼から東京湾に注ぐ河川で、中下流域にテナガエビが多数生息。護岸が整備され足場が良い。ハゼやコイも釣れ、のんびりとした雰囲気で釣りが楽しめる。駅からのアクセスも良好。",
-    latitude: 35.6612, longitude: 140.0483, address: "千葉県千葉市花見川区花見川地先",
+    latitude: 35.6612, longitude: 140.0483, address: "〒262-0046 千葉県千葉市花見川区花見川地先",
     accessInfo: "京成本線八千代台駅からバスで約10分。京葉道路花輪ICから約10分。",
     region: lr("r2333"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
@@ -908,7 +908,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
   {
     id: "fw-360", name: "新左近川親水公園", slug: "shinsakongawa-tenaga",
     description: "東京都江戸川区にある新左近川親水公園はテナガエビ釣りの人気スポット。都営地下鉄の駅から徒歩圏内でアクセス抜群。護岸が整備されファミリーフィッシングに最適。カヌーも楽しめる公園として知られ、テナガエビ・コイ・ヘラブナが釣れる。",
-    latitude: 35.6512, longitude: 139.8683, address: "東京都江戸川区臨海町2丁目地先",
+    latitude: 35.6512, longitude: 139.8683, address: "〒134-0086 東京都江戸川区臨海町2丁目地先",
     accessInfo: "都営地下鉄新宿線葛西駅から徒歩約15分。首都高速湾岸線葛西出口から約5分。",
     region: lr("r2334"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",

@@ -134,7 +134,7 @@ export default async function SpotsPage({
       />
       <div className="mb-5 flex items-start justify-between gap-4 sm:mb-8">
         <div>
-          <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">近くの釣りスポット・釣り場を探す</h1>
+          <h1 className="text-xl font-bold text-balance sm:text-2xl md:text-3xl">近くの釣りスポット・釣り場を探す</h1>
           <p className="mt-1 text-sm text-muted-foreground sm:mt-2 sm:text-base">
             全国の釣りスポット・穴場を地域・タイプ・難易度で絞り込み
           </p>

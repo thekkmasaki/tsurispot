@@ -2,6 +2,7 @@ import { blogArticles2 } from "./blog-articles-2";
 import { blogArticles3 } from "./blog-articles-3";
 import { blogArticles4 } from "./blog-articles-4";
 import { blogArticles5 } from "./blog-articles-5";
+import { blogArticles6 } from "./blog-articles-6";
 
 export interface BlogPost {
   id: string;
@@ -9,7 +10,7 @@ export interface BlogPost {
   title: string;
   description: string;
   content: string;
-  category: "beginner" | "gear" | "seasonal" | "technique" | "spot-guide" | "manner" | "knowledge";
+  category: "beginner" | "gear" | "seasonal" | "technique" | "spot-guide" | "manner" | "knowledge" | "report";
   tags: string[];
   publishedAt: string;
   updatedAt?: string;
@@ -26,6 +27,7 @@ export const BLOG_CATEGORIES: Record<BlogPost["category"], string> = {
   "spot-guide": "スポットガイド",
   manner: "マナー・ルール",
   knowledge: "釣り知識",
+  report: "釣行レポート",
 };
 
 export const blogPosts: BlogPost[] = [
@@ -2551,6 +2553,7 @@ export const blogPosts: BlogPost[] = [
   ...blogArticles3,
   ...blogArticles4,
   ...blogArticles5,
+  ...blogArticles6,
 ];
 
 /** slugで記事を取得 */
