@@ -2306,7 +2306,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
     id: "s3192", name: "柏崎港", slug: "kashiwazaki-kou",
     description: "柏崎市の大型港。広い岸壁からサビキ釣りでアジ・イワシが手軽に釣れ、秋にはサワラやイナダの回遊も見られる。クロダイのウキフカセ釣りの名所としても知られる。",
     latitude: 37.3667, longitude: 138.5500,
-    address: "〒945-0065 新潟県柏崎市西港町",
+    address: "〒945-0067 新潟県柏崎市西港町（柏崎港）",
     accessInfo: "JR信越本線柏崎駅から車で約10分。北陸自動車道柏崎ICから約10分。",
     region: localRegion("r3191"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",

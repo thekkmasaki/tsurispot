@@ -538,7 +538,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
     id: "s3018", name: "石狩放水路", slug: "ishikari-housui-ro",
     description: "石狩川の放水路で、河口付近はシーバスの好ポイントとして知られる。秋にはサケが遡上し、ウキルアーでのサケ釣りが盛ん。ハゼのちょい投げも楽しめる。",
     latitude: 43.2320, longitude: 141.3540,
-    address: "〒061-3372 北海道石狩市生振",
+    address: "〒061-3245 北海道石狩市生振（石狩放水路河口）",
     accessInfo: "札幌中心部から車で約40分。国道231号から道道508号経由。",
     region: localRegion("r3006"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "河川敷駐車スペースあり",

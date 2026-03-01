@@ -433,7 +433,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si11", name: "赤沢港", slug: "akazawa-port",
     description: "東伊豆の赤沢温泉郷にある小さな漁港。磯場が隣接しており、メジナやカサゴの穴釣りが楽しめる。温泉リゾートと釣りを両立できるスポット。",
-    latitude: 34.8780, longitude: 139.1150, address: "〒414-0233 静岡県伊東市赤沢164",
+    latitude: 34.8780, longitude: 139.1150, address: "〒413-0233 静岡県伊東市赤沢（赤沢港）",
     accessInfo: "伊豆急行伊豆高原駅から車で約10分。",
     region: region("r9"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",

@@ -268,7 +268,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
     id: "s708", name: "下田港堤防", slug: "shimoda-ko-teibo",
     description: "伊豆半島南端の開港の地・下田港。外浦と内浦の2つのエリアがあり、黒潮の影響で魚種が豊富。アオリイカのエギングやグレ・イシダイが人気。観光と釣りを両立できる利便性の高いスポット。",
     latitude: 34.6740, longitude: 138.9450,
-    address: "〒415-0013 静岡県下田市外ヶ岡（下田港）",
+    address: "〒415-0000 静岡県下田市外ヶ岡（下田港）",
     accessInfo: "伊豆急行下田駅から徒歩約10分。西伊豆有料道路下田ICから約5分。",
     region: lr("r823"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺の有料駐車場（500〜800円/日）",
