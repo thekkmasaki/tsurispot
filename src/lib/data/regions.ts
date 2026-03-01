@@ -655,4 +655,7 @@ export const regions: Region[] = [
   { id: "r3028", prefecture: "山口県", areaName: "下関・関門", slug: "yamaguchi-shimonoseki-kanmon" },
   { id: "r3029", prefecture: "山口県", areaName: "周防大島", slug: "yamaguchi-suo-oshima-detail" },
   { id: "r3030", prefecture: "山口県", areaName: "萩・長門", slug: "yamaguchi-hagi-nagato-detail" },
+  // === add3追加リージョン ===
+  { id: "r3411", prefecture: "富山県", areaName: "魚津・滑川", slug: "toyama-uozu-namerikawa" },
+  { id: "r3412", prefecture: "富山県", areaName: "黒部・入善", slug: "toyama-kurobe-nyuzen" },
 ];

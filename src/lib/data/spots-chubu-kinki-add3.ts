@@ -104,6 +104,11 @@ const localRegions: Region[] = [
   { id: "r3327", prefecture: "奈良県", areaName: "五條", slug: "nara-gojo-add3" },
   { id: "r3328", prefecture: "奈良県", areaName: "十津川", slug: "nara-totsukawa-add3" },
   { id: "r3329", prefecture: "奈良県", areaName: "下北山", slug: "nara-shimokitayama-add3" },
+  // 富山県
+  { id: "r21", prefecture: "富山県", areaName: "氷見", slug: "toyama-himi" },
+  { id: "r81", prefecture: "富山県", areaName: "新湊", slug: "toyama-shinminato" },
+  { id: "r3411", prefecture: "富山県", areaName: "魚津・滑川", slug: "toyama-uozu-namerikawa" },
+  { id: "r3412", prefecture: "富山県", areaName: "黒部・入善", slug: "toyama-kurobe-nyuzen" },
 ];
 
 function localRegion(id: string): Region {
@@ -1034,7 +1039,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
     latitude: 36.8550, longitude: 136.9820,
     address: "〒935-0012 富山県氷見市比美町（氷見漁港）",
     accessInfo: "能越自動車道氷見ICから約5分。JR氷見駅から徒歩約10分。",
-    region: localRegion("r3410"), spotType: "port", difficulty: "beginner",
+    region: localRegion("r21"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.1, reviewCount: 180,
@@ -1122,7 +1127,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
     latitude: 36.7780, longitude: 137.1050,
     address: "〒934-0004 富山県射水市港町（新湊漁港）",
     accessInfo: "北陸自動車道小杉ICから約15分。万葉線東新湊駅から徒歩約10分。",
-    region: localRegion("r3410"), spotType: "port", difficulty: "beginner",
+    region: localRegion("r81"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.8, reviewCount: 125,
@@ -1188,7 +1193,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
     latitude: 36.7920, longitude: 137.0350,
     address: "〒933-0133 富山県高岡市太田（雨晴海岸）",
     accessInfo: "能越自動車道高岡ICから約20分。JR雨晴駅から徒歩約5分。",
-    region: localRegion("r3410"), spotType: "beach", difficulty: "beginner",
+    region: localRegion("r81"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海岸沿い無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.0, reviewCount: 95,
@@ -1232,7 +1237,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
     latitude: 36.7950, longitude: 137.0680,
     address: "〒933-0101 富山県高岡市伏木国分（伏木港）",
     accessInfo: "能越自動車道高岡ICから約15分。JR伏木駅から徒歩約15分。",
-    region: localRegion("r3410"), spotType: "port", difficulty: "beginner",
+    region: localRegion("r81"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "埠頭周辺駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.5, reviewCount: 75,
