@@ -7,7 +7,7 @@ export const client = createClient({
   apiKey: process.env.MICROCMS_API_KEY || "",
 });
 
-/** microCMS側のブログ記事レスポンス型 */
+/** microCMS側のブログ記事レスポンス型（デフォルトテンプレート準拠） */
 export interface MicroCMSBlogResponse {
   id: string;
   createdAt: string;
@@ -15,18 +15,21 @@ export interface MicroCMSBlogResponse {
   publishedAt: string;
   revisedAt: string;
   title: string;
-  slug: string;
-  description: string;
   content: string;
-  category: string[];
-  tags?: string[];
-  image?: {
+  // デフォルトテンプレートのフィールド
+  eyecatch?: {
     url: string;
     height: number;
     width: number;
   };
-  relatedSpots?: string[];
-  relatedFish?: string[];
+  category?: {
+    id: string;
+    name: string;
+  };
+  // 追加カスタムフィールド
+  slug?: string;
+  description?: string;
+  tags?: string[];
 }
 
 /** microCMSのリスト取得レスポンス型 */
@@ -37,32 +40,44 @@ interface MicroCMSListResponse {
   limit: number;
 }
 
+/** microCMSカテゴリ名 → BlogPost.category のマッピング */
+const CATEGORY_MAP: Record<string, BlogPost["category"]> = {
+  "初心者向け": "beginner",
+  "道具・装備": "gear",
+  "季節・時期": "seasonal",
+  "テクニック": "technique",
+  "スポットガイド": "spot-guide",
+  "マナー・ルール": "manner",
+  "釣り知識": "knowledge",
+  "釣行レポート": "report",
+  // 英語ID直接指定にも対応
+  beginner: "beginner",
+  gear: "gear",
+  seasonal: "seasonal",
+  technique: "technique",
+  "spot-guide": "spot-guide",
+  manner: "manner",
+  knowledge: "knowledge",
+  report: "report",
+};
+
 /** microCMS記事を既存BlogPost型に変換 */
 export function microCMSToBlogPost(item: MicroCMSBlogResponse): BlogPost {
-  const validCategories = [
-    "beginner", "gear", "seasonal", "technique",
-    "spot-guide", "manner", "knowledge", "report",
-  ] as const;
-
-  // microCMSのセレクトフィールドは配列で返る
-  const rawCategory = Array.isArray(item.category) ? item.category[0] : item.category;
-  const category = validCategories.includes(rawCategory as typeof validCategories[number])
-    ? (rawCategory as BlogPost["category"])
-    : "knowledge";
+  // コンテンツ参照のcategoryからマッピング
+  const catName = item.category?.name || item.category?.id || "";
+  const category = CATEGORY_MAP[catName] || "knowledge";
 
   return {
     id: `cms-${item.id}`,
-    slug: item.slug,
+    slug: item.slug || item.id, // slugがなければmicroCMSのidをフォールバック
     title: item.title,
-    description: item.description,
+    description: item.description || "",
     content: item.content,
     category,
     tags: item.tags || [],
     publishedAt: item.publishedAt.split("T")[0],
     updatedAt: item.updatedAt.split("T")[0],
-    image: item.image?.url,
-    relatedSpots: item.relatedSpots || [],
-    relatedFish: item.relatedFish || [],
+    image: item.eyecatch?.url,
   };
 }
 
