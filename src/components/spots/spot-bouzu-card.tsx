@@ -342,12 +342,14 @@ function getAreaPressure(prefecture: string, areaName: string): number {
 // 月別の釣れやすさ補正
 // 実測データ: 冬（12-2月）は海水温低下で魚の活性が大幅ダウン。
 // 特に1-2月は堤防からの釣果がほぼゼロになることも珍しくない。
-// 2026-03-01修正: 冬の補正を大幅強化。実際のユーザー体験（2月に全員ボウズ）を反映。
+// 2026-03-01修正: 冬の補正を大幅強化。
+// 実測データ(2026-02-28 二見人工島): 2月土曜、胴突きメバル狙い→全員ボウズ。
+// 水位低下で穴釣り不可。半日でヒトデのみ。同日の釣り人3組全員ボウズ。
 function getMonthCorrection(month: number): number {
   const corrections: Record<number, number> = {
-    1: 40,  // 真冬: 海水温8-10℃、魚活性最低、堤防はほぼ釣果ゼロ
-    2: 38,  // 厳冬期: 海水温9-11℃、まだ非常に厳しい
-    3: 22,  // 早春: 海水温11-13℃、回復し始めるがまだ厳しい
+    1: 50,  // 真冬: 海水温8-10℃、魚活性最低、堤防はほぼ釣果ゼロ
+    2: 48,  // 厳冬期: 海水温9-11℃、実測で全員ボウズ
+    3: 30,  // 早春: 海水温11-13℃、回復し始めるがまだ厳しい
     4: 5,   // 春本番: 海水温13-16℃、活性上昇中だがまだ本調子ではない
     5: -8,  // 初夏: 海水温16-19℃、活性が高くなる
     6: -12, // 梅雨: 海水温19-22℃、多くの魚種が活発
@@ -355,19 +357,20 @@ function getMonthCorrection(month: number): number {
     8: -12, // 晩夏: 海水温24-26℃、活性維持
     9: -8,  // 初秋: 海水温22-24℃、まだ好調
     10: 0,  // 秋: 海水温18-22℃、徐々に活性低下
-    11: 12, // 晩秋: 海水温14-17℃、冬に向かって厳しくなる
-    12: 30, // 冬入口: 海水温11-14℃、急激に厳しくなる
+    11: 15, // 晩秋: 海水温14-17℃、冬に向かって厳しくなる
+    12: 38, // 冬入口: 海水温11-14℃、急激に厳しくなる
   };
   return corrections[month] ?? 0;
 }
 
 // 季節による釣り方別ボウズ率の補正係数
 // 冬は全ての釣り方で難易度が上がる（海水温低下で魚の活性が落ちるため）
+// 実測(2026-02-28): 胴突きメバル狙い・穴釣り→全員ボウズ。冬は全釣法で大幅に難易度UP。
 function getSeasonalMethodMultiplier(month: number): number {
   const multipliers: Record<number, number> = {
-    1: 1.6,  // 真冬: ボウズ率1.6倍（穴釣り20%→32%、メバリング40%→64%）
-    2: 1.5,  // 厳冬期: 1.5倍
-    3: 1.3,  // 早春: 1.3倍（まだ水温低い）
+    1: 2.0,  // 真冬: ボウズ率2.0倍（穴釣り20%→40%、メバリング40%→80%）
+    2: 1.9,  // 厳冬期: 1.9倍（実測で全釣法ボウズ）
+    3: 1.5,  // 早春: 1.5倍（まだ水温低い）
     4: 1.1,  // 春: ほぼ通常
     5: 1.0,  // 初夏: 通常
     6: 0.9,  // 梅雨: やや釣れやすい
@@ -375,8 +378,8 @@ function getSeasonalMethodMultiplier(month: number): number {
     8: 0.9,  // 晩夏: 好調
     9: 0.95, // 初秋: ほぼ通常
     10: 1.0, // 秋: 通常
-    11: 1.15,// 晩秋: やや厳しくなる
-    12: 1.4, // 冬入口: 1.4倍
+    11: 1.2, // 晩秋: やや厳しくなる
+    12: 1.6, // 冬入口: 1.6倍
   };
   return multipliers[month] ?? 1.0;
 }
@@ -538,7 +541,7 @@ function getSeasonFishCorrection(details: CatchableFishInfo[], currentMonth: num
   let correction = 0;
   // シーズン中の魚が多いほどボウズしにくい
   if (inSeason === 0) {
-    correction = 18; // シーズン中の魚がいない → 大幅UP
+    correction = 22; // シーズン中の魚がいない → 大幅UP
   } else if (inSeason >= 4) {
     correction = -3;
   } else if (inSeason >= 2) {
@@ -548,11 +551,16 @@ function getSeasonFishCorrection(details: CatchableFishInfo[], currentMonth: num
   // ピークシーズンの魚がいても冬は効果を弱める
   // 理由: メバル・カサゴは「冬がピーク」とされるが、
   // 海水温10℃以下では活性が大幅に落ち、実際はボウズが多い
-  const isHarshWinter = [1, 2, 12].includes(currentMonth);
+  // 実測(2026-02-28): メバル狙い胴突き→ボウズ。冬のメバルは机上の空論。
+  const isHarshWinter = [1, 2].includes(currentMonth);
+  const isColdMonth = [1, 2, 12].includes(currentMonth);
   if (isHarshWinter) {
-    // 冬はピークシーズン補正をほぼ無効化
+    // 1-2月はピークシーズン補正を完全無効化（メバルもカサゴも実際は釣れない）
+    correction += 5; // むしろ追加ペナルティ（「冬が旬」を信じて行くとボウズ）
+  } else if (isColdMonth) {
+    // 12月はピーク補正を弱める
     if (peakSeason >= 2) {
-      correction -= 1; // 通常-4 → 冬は-1に抑制
+      correction -= 1;
     }
   } else {
     if (peakSeason >= 2) {
@@ -588,10 +596,13 @@ function calcSpotBouzuProbability(
   };
   score += difficultyMod[props.difficulty] ?? 0;
   // 冬は初心者でも上級者でも難しい（海水温低下で魚の活性が落ちる）
-  if ([1, 2, 12].includes(currentMonth)) {
-    score += 8;
+  // 実測: 2月は全員ボウズ。冬の堤防は技術関係なく厳しい。
+  if ([1, 2].includes(currentMonth)) {
+    score += 15; // 真冬はどの難易度でも+15
+  } else if (currentMonth === 12) {
+    score += 10;
   } else if ([3, 11].includes(currentMonth)) {
-    score += 4;
+    score += 5;
   }
 
   // 3. 地域差（エリア単位で判定）
@@ -649,10 +660,12 @@ function getResultInfo(probability: number): ResultInfo {
     return { label: "釣れる可能性が高い", color: "text-blue-600", bgColor: "bg-blue-50", icon: CheckCircle };
   } else if (probability <= 50) {
     return { label: "準備次第で釣れる", color: "text-yellow-600", bgColor: "bg-yellow-50", icon: HelpCircle };
-  } else if (probability <= 70) {
+  } else if (probability <= 65) {
     return { label: "やや厳しい条件", color: "text-orange-600", bgColor: "bg-orange-50", icon: AlertTriangle };
+  } else if (probability <= 80) {
+    return { label: "かなり厳しい", color: "text-red-500", bgColor: "bg-red-50", icon: AlertTriangle };
   } else {
-    return { label: "厳しい条件", color: "text-red-600", bgColor: "bg-red-50", icon: AlertTriangle };
+    return { label: "ほぼ釣れない", color: "text-red-700", bgColor: "bg-red-100", icon: AlertTriangle };
   }
 }
 
@@ -793,7 +806,7 @@ function getDataDrivenTip(
       return `${methodResult.primaryMethod}でしっかり準備し、朝マズメ・夕マズメを狙えば釣果が期待できます。`;
     }
     return "しっかり準備して朝マズメを狙えば、釣果が期待できます。";
-  } else {
+  } else if (probability <= 75) {
     if (fishResult.hasSchoolingFish) {
       const names = fishResult.schoolingFishNames.slice(0, 2).join("・");
       return `${names}を狙ったサビキ釣りに切り替えることで、ボウズ回避の可能性が上がります。`;
@@ -802,6 +815,9 @@ function getDataDrivenTip(
       return `${methodResult.primaryMethod}は技術と経験が求められます。時期やタイミングを工夫して挑みましょう。`;
     }
     return "時期やタイミングを工夫して、ボウズ回避を目指しましょう。";
+  } else {
+    // 80%以上: 正直に「今は行くべきでない」と伝える
+    return "この時期は魚の活性が非常に低く、ベテランでもボウズが当たり前です。暖かくなるまで待つのが賢明です。";
   }
 }
 

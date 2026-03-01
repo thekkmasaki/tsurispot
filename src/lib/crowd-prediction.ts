@@ -128,8 +128,8 @@ export function calculateCrowdScore(input: PredictionInput): CrowdPrediction {
   }
 
   // --- シーズンの影響（月別補正）---
-  // 実測データ: 冬（12-2月）は都市近郊の人気スポットでもほぼ無人。
-  // 夏のピーク比で釣り人数は1/10以下。
+  // 実測データ(2026-02-28 二見人工島): 2月土曜、半日で3組のみ。全員ボウズ。
+  // 冬（12-2月）は都市近郊の人気スポットでもほぼ無人。夏のピーク比で釣り人数は1/20以下。
   const isWinter = input.month === 12 || input.month === 1 || input.month === 2;
   if (input.month >= 7 && input.month <= 8) {
     score += 15; // 夏休みシーズン・ピーク
@@ -137,15 +137,15 @@ export function calculateCrowdScore(input: PredictionInput): CrowdPrediction {
   } else if ([4, 5, 6, 9, 10].includes(input.month)) {
     score += 5; // 春・秋のハイシーズン
   } else if (input.month === 3) {
-    score -= 50; // 3月はまだ冬同然。海水温11℃前後で魚活性も低く、釣り人はほとんどいない
+    score -= 55; // 3月はまだ冬同然。海水温11℃前後で魚活性も低く、釣り人はほとんどいない
     factors.push("早春（まだ寒く人が少ない）");
   } else if (input.month === 11) {
     score -= 25; // 晩秋：冬に向かって急速に空いてくる
     factors.push("晩秋（冬に向かい空いてくる）");
   } else {
     // 12月・1月・2月：厳冬期で釣り人が大幅に少ない
-    // 1月が最も空き、2月も同様、12月はまだ年末釣行がある程度
-    const winterPenalty = input.month === 1 ? 70 : input.month === 2 ? 65 : 55;
+    // 実測: 2月の土曜でも終日3組程度。1月はさらに少ない。
+    const winterPenalty = input.month === 1 ? 80 : input.month === 2 ? 75 : 60;
     score -= winterPenalty;
     factors.push(input.month === 1 ? "真冬（ほぼ貸し切り）" : input.month === 2 ? "厳冬期（ほぼ無人）" : "冬（大幅に空く）");
   }
@@ -192,11 +192,22 @@ export function calculateCrowdScore(input: PredictionInput): CrowdPrediction {
   }
 
   // --- 冬・早春の週末補正（寒い時期は週末でも夏ほど人が来ない）---
+  // 実測(2026-02-28): 2月の土曜で半日3組。週末でも冬はガラガラ。
   const isColdSeason = isWinter || input.month === 3 || input.month === 11;
   if (isColdSeason && (input.dayOfWeek === 0 || input.dayOfWeek === 6 || input.isHoliday)) {
-    const coldWeekendPenalty = isWinter ? 25 : 15; // 冬は-25、3月/11月は-15
+    const coldWeekendPenalty = isWinter ? 30 : 15; // 冬は-30、3月/11月は-15
     score -= coldWeekendPenalty;
     factors.push(isWinter ? "冬の週末（夏ほど人が来ない）" : "寒い時期の週末（人が少なめ）");
+  }
+
+  // --- 冬は都市部ボーナスを大幅減（寒いと都市部の人も釣りに来ない）---
+  // 実測: 兵庫県明石市（都市部扱い）でも2月はほぼ無人
+  if (isWinter && input.prefecture) {
+    const urbanPrefectures = ["東京都", "神奈川県", "大阪府", "愛知県", "千葉県", "埼玉県", "兵庫県", "福岡県"];
+    if (urbanPrefectures.includes(input.prefecture)) {
+      score -= 10; // 冬は都市部ボーナスの効果を打ち消し
+      factors.push("冬は都市部でも人が来ない");
+    }
   }
 
   // --- アクセス性の影響 ---
