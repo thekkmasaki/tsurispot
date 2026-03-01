@@ -181,7 +181,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
     id: "s3128", name: "鹿島港魚釣園", slug: "kashima-kou-tsurien",
     description: "鹿島港に設置された有料の釣り施設。柵付きの釣り桟橋から安全に釣りが楽しめ、アジ・イワシのサビキ釣りからヒラメの泳がせ釣りまで多彩。レンタルタックルもあり初心者にも安心。",
     latitude: 35.9425, longitude: 140.6942,
-    address: "〒314-0047 茨城県鹿嶋市新浜",
+    address: "〒314-0013 茨城県鹿嶋市新浜（鹿島港魚釣園）",
     accessInfo: "JR鹿島線鹿島神宮駅から車で約15分。東関東自動車道潮来ICから約30分。",
     region: localRegion("r3102"), spotType: "pier", difficulty: "beginner",
     isFree: false, hasParking: true, parkingDetail: "無料駐車場あり",
