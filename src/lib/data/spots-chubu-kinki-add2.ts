@@ -1385,7 +1385,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2557", name: "琵琶湖彦根", slug: "biwako-hikone",
     description: "彦根城下の琵琶湖岸は歴史情緒あふれるバス釣りスポット。彦根港周辺は足場が良く、バスのほかヘラブナやコイも狙える。冬はワカサギ釣りの実績もある。",
-    latitude: 35.2750, longitude: 136.2550, address: "滋賀県彦根市松原町",
+    latitude: 35.2750, longitude: 136.2550, address: "〒522-0002 滋賀県彦根市松原町（琵琶湖彦根）",
     accessInfo: "名神高速彦根ICから約10分。JR彦根駅から車で約10分。",
     region: localRegion("r2600"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "彦根港周辺駐車場あり",
@@ -1406,7 +1406,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2558", name: "余呉湖", slug: "yogoko-tsuri",
     description: "琵琶湖の北に位置する小さな湖。冬のワカサギ釣りで関西では屈指の人気を誇る。ドーム船もあり、初心者でも快適にワカサギ釣りが楽しめる。夏場はコイ・フナも。",
-    latitude: 35.5160, longitude: 136.1780, address: "滋賀県長浜市余呉町",
+    latitude: 35.5160, longitude: 136.1780, address: "〒529-0521 滋賀県長浜市余呉町下余呉（余呉湖）",
     accessInfo: "北陸自動車道木之本ICから約15分。JR余呉駅から徒歩約10分。",
     region: localRegion("r2604"), spotType: "river", difficulty: "beginner",
     isFree: false, hasParking: true, parkingDetail: "湖畔駐車場あり（有料）",
@@ -1426,7 +1426,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2559", name: "琵琶湖近江八幡", slug: "biwako-omihachiman",
     description: "近江八幡市の琵琶湖岸は水郷地帯が広がる独特のフィールド。ヨシ原が豊富でバスの隠れ家が多い。長命寺港周辺や西の湖が人気ポイント。",
-    latitude: 35.1520, longitude: 136.0970, address: "滋賀県近江八幡市長命寺町",
+    latitude: 35.1520, longitude: 136.0970, address: "滋賀県近江八幡市長命寺町（琵琶湖近江八幡）",
     accessInfo: "名神高速竜王ICから約20分。JR近江八幡駅から車で約15分。",
     region: localRegion("r2600"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "長命寺港駐車場あり",
@@ -1446,7 +1446,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2560", name: "琵琶湖草津", slug: "biwako-kusatsu",
     description: "草津市の琵琶湖岸は烏丸半島周辺がバス釣りの好ポイント。水生植物園の周辺はウィードが豊富で、バスのストック量が多い。護岸も整備されアクセス良好。",
-    latitude: 35.0310, longitude: 135.9350, address: "滋賀県草津市下物町",
+    latitude: 35.0310, longitude: 135.9350, address: "〒525-0001 滋賀県草津市下物町（琵琶湖草津）",
     accessInfo: "名神高速草津田上ICから約15分。JR草津駅から車で約20分。",
     region: localRegion("r2602"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "烏丸半島周辺駐車場あり",
@@ -1466,7 +1466,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2561", name: "瀬田川洗堰", slug: "setagawa-araizeki",
     description: "琵琶湖から唯一流れ出る瀬田川の洗堰周辺。バスやヘラブナの好ポイントで、堰の上下流でそれぞれ異なる釣りが楽しめる。コイやナマズの実績もある。",
-    latitude: 34.9670, longitude: 135.9050, address: "滋賀県大津市瀬田",
+    latitude: 34.9670, longitude: 135.9050, address: "〒520-2134 滋賀県大津市瀬田（瀬田川洗堰）",
     accessInfo: "名神高速瀬田西ICから約5分。JR瀬田駅から車で約10分。",
     region: localRegion("r2602"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "周辺駐車スペースあり",
