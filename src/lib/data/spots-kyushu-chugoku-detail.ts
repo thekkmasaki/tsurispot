@@ -388,7 +388,7 @@ export const kyushuChugokuDetailSpots: FishingSpot[] = [
     id: "s761", name: "関門橋下護岸", slug: "kanmon-bridge-bank",
     description: "関門橋の真下に位置する護岸。関門海峡の激流が生み出す豊富なベイトが集まり、青物からタチウオまで一級の釣り場。橋のライトが夜間に海面を照らし、ライトゲームの名ポイントとして釣り人に愛される。",
     latitude: 33.95890, longitude: 130.981200,
-    address: "〒800-0013 福岡県北九州市門司区大里本町",
+    address: "〒800-0063 福岡県北九州市門司区大里本町",
     accessInfo: "JR門司港駅から車で約5分。北九州都市高速大里出口から約3分。",
     region: region("r55"), spotType: "pier", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "関門海峡公園駐車場あり（無料）",
