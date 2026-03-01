@@ -1365,7 +1365,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2556", name: "琵琶湖マキノ", slug: "biwako-makino",
     description: "高島市マキノ町は琵琶湖北部の美しいエリア。メタセコイア並木で有名だが、釣りではスモールマウスバスやニジマスの実績もある穴場。知内川河口も好ポイント。",
-    latitude: 35.4720, longitude: 136.0530, address: "〒520-1812 滋賀県高島市マキノ町知内（琵琶湖マキノ）",
+    latitude: 35.4720, longitude: 136.0530, address: "〒520-1814 滋賀県高島市マキノ町知内（琵琶湖マキノ）",
     accessInfo: "湖西道路マキノICから約5分。JRマキノ駅から徒歩約15分。",
     region: localRegion("r2601"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "湖岸駐車場あり",
