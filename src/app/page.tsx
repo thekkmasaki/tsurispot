@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
-import { getCatchableNow } from "@/lib/data/fish";
+import { getCatchableNow, fishSpecies } from "@/lib/data/fish";
 import { areaGuides } from "@/lib/data/area-guides";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { prefectures } from "@/lib/data/prefectures";
@@ -153,6 +153,11 @@ export default function Home() {
   const popularSpots = fishingSpots.slice(0, 6);
   const latestPosts = getLatestBlogPosts(3);
 
+  // Stats for hero section
+  const totalSpots = fishingSpots.length;
+  const totalFishSpecies = fishSpecies.length;
+  const totalPrefectures = new Set(fishingSpots.map((s) => s.region.prefecture)).size;
+
   // Carousel data: fish catchable now with spot counts
   const carouselFish = catchableNow.slice(0, 12).map((fish) => ({
     id: fish.id,
@@ -243,11 +248,29 @@ export default function Home() {
               釣りに行こう。
             </h1>
 
-            <p className="mb-6 max-w-lg text-sm text-blue-100 sm:mb-8 sm:text-lg">
+            <p className="mb-4 max-w-lg text-sm text-blue-100 sm:mb-5 sm:text-lg">
               道具がなくても、経験がなくても大丈夫。
               <br className="hidden sm:inline" />
               近くの釣り場で、最高の1匹に出会おう。
             </p>
+
+            {/* スポット数統計 */}
+            <div className="mb-5 flex items-center justify-center gap-4 text-xs text-blue-200/90 sm:mb-7 sm:gap-6 sm:text-sm">
+              <div className="flex items-center gap-1.5">
+                <MapPin className="size-3.5 sm:size-4" />
+                <span>全国<strong className="font-bold text-white">{totalSpots.toLocaleString()}</strong>スポット</span>
+              </div>
+              <div className="h-3 w-px bg-white/30" />
+              <div className="flex items-center gap-1.5">
+                <Fish className="size-3.5 sm:size-4" />
+                <span><strong className="font-bold text-white">{totalFishSpecies}</strong>魚種</span>
+              </div>
+              <div className="h-3 w-px bg-white/30" />
+              <div className="flex items-center gap-1.5">
+                <Compass className="size-3.5 sm:size-4" />
+                <span><strong className="font-bold text-white">{totalPrefectures}</strong>都道府県</span>
+              </div>
+            </div>
 
             {/* 検索バー */}
             <HomeSearchBar />

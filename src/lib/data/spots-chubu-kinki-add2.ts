@@ -390,8 +390,8 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2511", name: "小浜新港", slug: "obama-shinko",
     description: "若狭湾に面した小浜市の主要港。アジ・サバのサビキ釣りは年間を通じて好調。秋のアオリイカ、春のメバルも人気が高い。足場が良く家族連れにもおすすめ。",
-    latitude: 35.4890, longitude: 135.7530,
-    address: "〒917-0081 福井県小浜市川崎3丁目4（小浜漁港）",
+    latitude: 35.4993, longitude: 135.7387,
+    address: "〒917-0081 福井県小浜市川崎1丁目（小浜新港）",
     accessInfo: "舞鶴若狭自動車道小浜ICから約10分。JR小浜駅から車で約5分。",
     region: localRegion("r2562"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
