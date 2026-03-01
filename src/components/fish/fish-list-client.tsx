@@ -502,7 +502,7 @@ export function FishListClient({
         <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
           {filteredFish.map((fish) => (
             <FishCard
-              key={fish.id}
+              key={fish.slug}
               fish={fish}
               showPeakBadge={fish.peakMonths.includes(currentMonth)}
               showSpots

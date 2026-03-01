@@ -167,7 +167,7 @@ export const freshwaterFish: FishSpecies[] = [
     spots: [],
   },
   {
-    id: "f30",
+    id: "fw1",
     name: "テナガエビ",
     nameKana: "テナガエビ",
     nameEnglish: "River Prawn",
@@ -1625,7 +1625,7 @@ export const freshwaterFish: FishSpecies[] = [
     spots: [],
   },
   {
-    id: "f106",
+    id: "fw30",
     name: "ウナギ",
     nameKana: "ウナギ",
     nameEnglish: "Japanese Eel",
