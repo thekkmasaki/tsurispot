@@ -105,7 +105,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
   {
     id: "s990", name: "谷山港", slug: "taniyama-port",
     description: "鹿児島市内最大級の大規模港湾。赤灯台周辺や七ツ島方面など多彩なポイントを有し、年間を通じて豊富な魚種が狙える。夜の「ぶっこみ釣り」でマダイが釣れることでも有名な鹿児島屈指の人気釣り場。",
-    latitude: 31.5390, longitude: 130.5580,
+    latitude: 31.50050, longitude: 130.52430,
     address: "〒891-0131 鹿児島県鹿児島市谷山港3丁目3",
     accessInfo: "JR谷山駅から車で約10分。指宿スカイライン谷山ICから約10分。広大な港湾のため各ポイントに専用駐車場あり。",
     region: localRegion("r1000"), spotType: "port", difficulty: "beginner",
@@ -224,7 +224,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
   {
     id: "s994", name: "串木野新港", slug: "kushikino-shinko",
     description: "いちき串木野市の主要港湾。まぐろ漁業で有名な港で、防波堤からはアジやサバのサビキ釣りが定番。外洋に面した堤防先端ではショアジギングでブリやカンパチも狙える本格的な釣り場。",
-    latitude: 31.7170, longitude: 130.2680,
+    latitude: 31.72470, longitude: 130.23740,
     address: "〒896-0046 鹿児島県いちき串木野市西薩町17-7",
     accessInfo: "JR串木野駅から車で約10分。南九州自動車道串木野ICから約15分。",
     region: localRegion("r1003"), spotType: "port", difficulty: "intermediate",
@@ -426,7 +426,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
   {
     id: "s1001", name: "福島港", slug: "kushima-fukushima-port",
     description: "宮崎県最南端・串間市の福島港。潮通しの良い堤防、足場の良い岸壁、河口域など多彩なポイントを持つ。クロダイやメジナのフカセ釣りに加え、カマスの群れが入ると爆釣が楽しめる県南部の実力派スポット。",
-    latitude: 31.4530, longitude: 131.2240,
+    latitude: 31.44630, longitude: 131.20150,
     address: "〒888-0007 宮崎県串間市大字南方249",
     accessInfo: "JR串間駅から車で約15分。東九州自動車道串間ICから約20分。",
     region: localRegion("r1011"), spotType: "port", difficulty: "intermediate",
@@ -825,7 +825,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
   {
     id: "s1014", name: "牛深港", slug: "ushibuka-port",
     description: "天草諸島最南端に位置する熊本県下最大級の漁港。古くから漁業の街として栄え、魚影の濃さは九州でもトップクラス。アジ・サバの数釣りから、クロダイ・メジナのフカセ釣り、エギングまで幅広い釣りが楽しめる。",
-    latitude: 32.2040, longitude: 130.0290,
+    latitude: 32.19360, longitude: 130.03380,
     address: "〒863-1901 熊本県天草市牛深町3465",
     accessInfo: "熊本市内から国道266号経由で約3時間。天草空港から車で約60分。",
     region: localRegion("r1030"), spotType: "port", difficulty: "beginner",
@@ -883,7 +883,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
   {
     id: "s1016", name: "合津港", slug: "aitsu-port",
     description: "上天草市松島町にある穴場的な漁港。人気スポットに比べて休日でも釣り人が少なく、のんびりと釣りを楽しめる。クロダイの実績が高くウキ釣りの好ポイント。冬場のメバルやアジングも人気がある。",
-    latitude: 32.5280, longitude: 130.4480,
+    latitude: 32.51660, longitude: 130.42770,
     address: "〒861-6102 熊本県上天草市松島町合津4276",
     accessInfo: "熊本市内から国道266号経由で約90分。天草五橋の5号橋近く。",
     region: localRegion("r1032"), spotType: "port", difficulty: "beginner",

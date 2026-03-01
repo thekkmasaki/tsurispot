@@ -325,7 +325,7 @@ export const okinawaSpots: FishingSpot[] = [
   {
     id: "s509", name: "本部港", slug: "motobu-port",
     description: "沖縄美ら海水族館に近い本部港。離島（伊江島・水納島）行きのフェリーが発着する港で、防波堤からアジ類やミーバイが狙える。観光の合間に気軽に楽しめるアクセス抜群の釣りスポット。",
-    latitude: 26.6590, longitude: 127.8890,
+    latitude: 26.64840, longitude: 127.87450,
     address: "〒905-0225 沖縄県国頭郡本部町字崎本部5232",
     accessInfo: "沖縄自動車道許田ICから約40分。美ら海水族館から車で約5分。",
     region: localRegion("r182"), spotType: "port", difficulty: "beginner",

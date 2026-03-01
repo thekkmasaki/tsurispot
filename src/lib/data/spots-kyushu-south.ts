@@ -107,7 +107,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s481", name: "佐伯港", slug: "saiki-port",
     description: "大分県南部の主要港湾。リアス式海岸に囲まれた複雑な地形が良質な漁場を形成。クロダイやメジナなどの磯魚から、アジやイワシまで多彩な魚種が狙える釣りの名所。",
-    latitude: 32.961200, longitude: 131.90170,
+    latitude: 32.978600, longitude: 131.91530,
     address: "〒876-0801 大分県佐伯市葛港1-1",
     accessInfo: "JR佐伯駅から車で約10分。東九州自動車道佐伯ICから約15分。",
     region: localRegion("r160"), spotType: "port", difficulty: "intermediate",
@@ -132,7 +132,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s482", name: "津久見港", slug: "tsukumi-port",
     description: "大分県津久見市の工業港。防波堤からのアジやサバのサビキ釣りが定番。春〜秋にはアオリイカのエギングも人気で、潮通しの良さから青物の回遊も期待できる。",
-    latitude: 33.0740, longitude: 131.8580,
+    latitude: 33.08460, longitude: 131.87100,
     address: "〒879-2435 大分県津久見市港町（津久見港）",
     accessInfo: "JR津久見駅から徒歩約15分。東九州自動車道津久見ICから約10分。",
     region: localRegion("r161"), spotType: "port", difficulty: "beginner",
@@ -163,7 +163,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s483", name: "臼杵港", slug: "usuki-port",
     description: "国宝の石仏で有名な臼杵市の港。穏やかな内湾の港でファミリーフィッシングに最適。アジやキスの数釣りが楽しめ、秋にはアオリイカの実績も高い釣り場。",
-    latitude: 33.1270, longitude: 131.8060,
+    latitude: 33.12970, longitude: 131.81520,
     address: "〒875-0034 大分県臼杵市板知屋（臼杵港フェリーターミナル）",
     accessInfo: "JR臼杵駅から徒歩約15分。臼杵ICから約10分。",
     region: localRegion("r162"), spotType: "port", difficulty: "beginner",
@@ -194,7 +194,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s484", name: "佐賀関港", slug: "saganoseki-port",
     description: "豊後水道と瀬戸内海の合流点に位置する佐賀関港。潮通しが抜群で関サバ・関アジの漁場として名高い。堤防からのサビキ釣りでも良型のアジやサバが釣れる釣り師憧れの地。",
-    latitude: 33.2360, longitude: 131.8780,
+    latitude: 33.25100, longitude: 131.86820,
     address: "〒879-2201 大分県大分市佐賀関（佐賀関港）",
     accessInfo: "大分ICから国道197号経由で約40分。フェリーで四国・三崎港から約70分。",
     region: localRegion("r163"), spotType: "port", difficulty: "intermediate",
@@ -256,7 +256,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s486", name: "油津港", slug: "aburatsu-port",
     description: "日南市の中心港湾。古くから漁業の街として栄え、港の防波堤からクロダイやメジナの磯釣りが楽しめる。カツオの一本釣りでも有名な港でもあり、周辺磯でのルアー釣りも盛ん。",
-    latitude: 31.58280, longitude: 131.4000,
+    latitude: 31.56900, longitude: 131.4015000,
     address: "〒887-0001 宮崎県日南市油津4丁目12-16",
     accessInfo: "JR油津駅から徒歩約10分。日南ICから約30分。",
     region: localRegion("r165"), spotType: "port", difficulty: "intermediate",
@@ -289,7 +289,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s487", name: "日向市細島港", slug: "hyuga-hososhima-port",
     description: "宮崎県北部の主要港湾。工業港として整備されているが、周辺の波止からアジやカマスの数釣りが楽しめる。秋から冬はカマスの群れが回遊し、サビキやルアーで数釣りができる。",
-    latitude: 32.4540, longitude: 131.6730,
+    latitude: 32.43390, longitude: 131.64600,
     address: "〒883-0001 宮崎県日向市大字細島803-1",
     accessInfo: "JR日向市駅から車で約10分。東九州自動車道日向ICから約15分。",
     region: localRegion("r166"), spotType: "port", difficulty: "beginner",
@@ -313,7 +313,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s488", name: "延岡新港", slug: "nobeoka-shinko",
     description: "五ヶ瀬川の河口近くに位置する延岡市の港湾。シーバスの好ポイントとして有名で、河口部ではチヌやキビレも狙える。防波堤ではアジやイワシのサビキ釣りも人気。",
-    latitude: 32.5740, longitude: 131.6590,
+    latitude: 32.52270, longitude: 131.69260,
     address: "〒889-0512 宮崎県延岡市新浜町（延岡新港）",
     accessInfo: "JR延岡駅から車で約10分。延岡ICから約15分。",
     region: localRegion("r167"), spotType: "port", difficulty: "intermediate",
@@ -416,7 +416,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s491", name: "志布志港", slug: "shibushi-port",
     description: "鹿児島県東部の志布志湾に位置する大型港湾。フェリーターミナルが整備された港で、防波堤からのアジやイワシ釣りが盛ん。秋にはカンパチやハマチの回遊もあり、ショアジギングも人気。",
-    latitude: 31.47280, longitude: 131.081200,
+    latitude: 31.47570, longitude: 131.107300,
     address: "〒899-7103 鹿児島県志布志市志布志町志布志3292",
     accessInfo: "JR志布志駅から車で約10分。大隅縦貫道志布志ICから約15分。",
     region: localRegion("r170"), spotType: "port", difficulty: "beginner",
@@ -507,7 +507,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s494", name: "唐津港", slug: "karatsu-port",
     description: "佐賀県北部の玄界灘に面した唐津港。唐津城の麓に位置する風光明媚な港で、アジやサバのサビキ釣りが定番。外海に面した防波堤ではクロダイや青物も狙える。",
-    latitude: 33.4490, longitude: 129.9660,
+    latitude: 33.46910, longitude: 129.95970,
     address: "〒847-0871 佐賀県唐津市東大島町2-50",
     accessInfo: "JR唐津駅から徒歩約15分。唐津ICから約10分。",
     region: localRegion("r172"), spotType: "port", difficulty: "beginner",
@@ -532,7 +532,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s495", name: "呼子港", slug: "yobuko-port",
     description: "イカの活け造りで全国的に有名な呼子の港。ケンサキイカやスルメイカのイカ釣りが盛んで、港内では年間を通じてアジのサビキ釣りも楽しめる。観光と釣りを同時に楽しめる人気スポット。",
-    latitude: 33.541200, longitude: 129.90970,
+    latitude: 33.538900, longitude: 129.89300,
     address: "〒847-0303 佐賀県唐津市呼子町呼子1740-11",
     accessInfo: "JR唐津駅から昭和バスで約40分「呼子」バス停下車。唐津ICから国道202号経由で約40分。",
     region: localRegion("r173"), spotType: "port", difficulty: "beginner",
@@ -569,7 +569,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s496", name: "長崎港", slug: "nagasaki-port",
     description: "歴史ある長崎市の港湾。女神大橋の下や長崎港周辺の防波堤ではアジやサバのサビキ釣りが楽しめる。春〜秋はメバルやカサゴの根魚釣りも人気で、市内からアクセスしやすい都市型釣り場。",
-    latitude: 32.7420, longitude: 129.8710,
+    latitude: 32.70200, longitude: 129.84650,
     address: "〒850-0035 長崎県長崎市元船町17-3",
     accessInfo: "JR長崎駅から車で約10分。長崎自動車道長崎ICから約20分。",
     region: localRegion("r174"), spotType: "port", difficulty: "beginner",
@@ -657,7 +657,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s499", name: "佐世保港", slug: "sasebo-port",
     description: "長崎県北部の主要港湾。佐世保湾に囲まれた穏やかな内湾で、ファミリーフィッシングに最適。アジやイワシのサビキ釣りから、湾内でのシーバス・クロダイまで幅広い釣りが楽しめる。",
-    latitude: 33.161200, longitude: 129.72580,
+    latitude: 33.129700, longitude: 129.71770,
     address: "〒857-0852 長崎県佐世保市干尽町6-1",
     accessInfo: "JR佐世保駅から徒歩約15分。西九州自動車道佐世保三川内ICから約20分。",
     region: localRegion("r175"), spotType: "port", difficulty: "beginner",
@@ -803,7 +803,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s1120", name: "指宿港", slug: "ibusuki-port",
     description: "砂むし温泉で有名な指宿市の港。薩摩半島南端に位置し、錦江湾の入口で魚種が豊富。アジやカンパチの回遊が期待できる。",
-    latitude: 31.2470, longitude: 130.6520,
+    latitude: 31.25360, longitude: 130.62880,
     address: "〒891-0405 鹿児島県指宿市湊1丁目1-1",
     accessInfo: "JR指宿枕崎線指宿駅から徒歩約10分。指宿スカイライン谷山ICから約60分。",
     region: localRegion("r168"), spotType: "port", difficulty: "beginner",
@@ -886,7 +886,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s1123", name: "伊万里港", slug: "imari-port",
     description: "伊万里焼で有名な伊万里市の港。伊万里湾の奥に位置する穏やかな港で、チヌやシーバスが狙える。陶芸の街の文化と釣りを同時に楽しめる。",
-    latitude: 33.2630, longitude: 129.8860,
+    latitude: 33.27600, longitude: 129.86750,
     address: "〒848-0027 佐賀県伊万里市伊万里町甲358-1",
     accessInfo: "松浦鉄道伊万里駅から徒歩約15分。西九州自動車道伊万里東府招ICから約10分。",
     region: localRegion("r172"), spotType: "port", difficulty: "beginner",
@@ -948,7 +948,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s1125", name: "対馬市厳原港", slug: "tsushima-izuhara-port",
     description: "日本最北西端の離島・対馬の中心港。韓国との国境に近い海域は魚種が豊富で、ヒラマサやクロダイの大物が期待できる究極の離島釣り。",
-    latitude: 34.2020, longitude: 129.2870,
+    latitude: 34.19390, longitude: 129.29150,
     address: "〒817-0016 長崎県対馬市厳原町東里（厳原港）",
     accessInfo: "福岡空港から対馬やまねこ空港まで約35分。博多港からフェリーで約4時間45分。",
     region: region("r32"), spotType: "port", difficulty: "intermediate",
@@ -1003,7 +1003,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s1127", name: "高鍋港", slug: "takanabe-port",
     description: "宮崎県中部の高鍋町の漁港。太平洋に面した港でアジやタチウオが安定して釣れる。宮崎を代表する餃子の街で食も楽しめる。",
-    latitude: 32.1380, longitude: 131.5360,
+    latitude: 32.11770, longitude: 131.53640,
     address: "〒884-0004 宮崎県児湯郡高鍋町蚊口浦6259-1",
     accessInfo: "JR日豊本線高鍋駅から車で約10分。東九州自動車道高鍋ICから約10分。",
     region: localRegion("r164"), spotType: "port", difficulty: "beginner",
@@ -1053,7 +1053,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s1129", name: "天草市本渡港", slug: "amakusa-hondo-port",
     description: "天草諸島の中心港。天草四郎の歴史が残る島で、アジやクロダイが安定して釣れる。イルカウォッチングも楽しめる。",
-    latitude: 32.4560, longitude: 130.1920,
+    latitude: 32.45560, longitude: 130.20290,
     address: "〒863-0021 熊本県天草市港町1",
     accessInfo: "熊本市内から車で約2時間。天草空港から約20分。",
     region: region("r34"), spotType: "port", difficulty: "beginner",
@@ -1209,7 +1209,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s1135", name: "霧島市隼人港", slug: "kirishima-hayato-port",
     description: "霧島温泉郷に近い錦江湾沿いの港。桜島を正面に望む絶景の釣り場で、アジやタチウオが安定して釣れる。温泉旅行の合間に。",
-    latitude: 31.7250, longitude: 130.7180,
+    latitude: 31.71830, longitude: 130.72770,
     address: "〒899-5102 鹿児島県霧島市隼人町真孝2072",
     accessInfo: "JR日豊本線隼人駅から車で約10分。東九州自動車道隼人東ICから約5分。",
     region: localRegion("r168"), spotType: "port", difficulty: "beginner",
