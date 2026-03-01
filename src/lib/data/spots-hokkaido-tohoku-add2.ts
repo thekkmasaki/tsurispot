@@ -161,7 +161,7 @@ export const hokkaidoTohokuAdd2Spots: FishingSpot[] = [
   {
     id: "s2001", name: "根室港", slug: "nemuro-ko",
     description: "日本最東端の主要港。花咲ガニで有名だが、釣りではコマイ・カレイ・チカが主なターゲット。夏場はサバやイワシの回遊もあり、秋にはサケ釣りも楽しめる。",
-    latitude: 43.3280, longitude: 145.5830,
+    latitude: 43.34460, longitude: 145.58440,
     address: "〒087-0009 北海道根室市弥栄町（根室港岸壁付近）",
     accessInfo: "JR根室駅から徒歩約15分。釧路市から国道44号経由で約2時間30分。",
     region: localRegion("r2001"), spotType: "port", difficulty: "beginner",
@@ -228,7 +228,7 @@ export const hokkaidoTohokuAdd2Spots: FishingSpot[] = [
   {
     id: "s2004", name: "室蘭港", slug: "muroran-ko",
     description: "噴火湾に面した工業都市・室蘭の港。港内は波が穏やかでファミリーにも向く。カレイやソイの投げ釣り、サビキでイワシやチカが狙える。夜釣りではクロソイが人気。",
-    latitude: 42.3170, longitude: 140.9730,
+    latitude: 42.34390, longitude: 140.95040,
     address: "〒051-0022 北海道室蘭市海岸町1丁目（室蘭港岸壁付近）",
     accessInfo: "JR室蘭駅から徒歩約10分。道央自動車道室蘭ICから約10分。",
     region: localRegion("r2004"), spotType: "port", difficulty: "beginner",
@@ -294,7 +294,7 @@ export const hokkaidoTohokuAdd2Spots: FishingSpot[] = [
   {
     id: "s2007", name: "白老港", slug: "shiraoi-ko",
     description: "ウポポイ（民族共生象徴空間）の近くに位置する港。太平洋に面し、カレイの投げ釣りやサケ釣りが人気。港内は足場が良くファミリーフィッシングにも適している。",
-    latitude: 42.5490, longitude: 141.3530,
+    latitude: 42.51850, longitude: 141.31870,
     address: "〒059-0906 北海道白老郡白老町本町（白老港岸壁付近）",
     accessInfo: "JR白老駅から車で約5分。道央自動車道白老ICから約10分。",
     region: localRegion("r2007"), spotType: "port", difficulty: "beginner",
@@ -446,7 +446,7 @@ export const hokkaidoTohokuAdd2Spots: FishingSpot[] = [
   {
     id: "s2014", name: "えりも港", slug: "erimo-ko",
     description: "襟裳岬の東側に位置する漁港。昆布漁が盛んなエリアで、カレイやアブラコの投げ釣りが楽しめる。風が強い日が多いが、港内は比較的穏やか。",
-    latitude: 42.0040, longitude: 143.1570,
+    latitude: 42.01620, longitude: 143.14380,
     address: "〒058-0204 北海道幌泉郡えりも町字本町（えりも漁港）",
     accessInfo: "帯広市から国道236号・336号経由で約3時間。襟裳岬から約10分。",
     region: localRegion("r2014"), spotType: "port", difficulty: "intermediate",

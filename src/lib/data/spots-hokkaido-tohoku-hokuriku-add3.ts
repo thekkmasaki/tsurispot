@@ -194,7 +194,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3002", name: "枝幸港", slug: "esashi-ko-okhotsk",
     description: "オホーツク海に面した漁港で、毛ガニの水揚げで有名。釣りではカレイやホッケが中心で、夏にはサバの回遊もある。港内は広く足場が良い。",
-    latitude: 44.9380, longitude: 142.5830,
+    latitude: 44.93170, longitude: 142.59170,
     address: "〒098-5814 北海道枝幸郡枝幸町岬町（枝幸港）",
     accessInfo: "旭川から車で約3時間。オホーツク紋別空港から約1時間30分。国道238号沿い。",
     region: localRegion("r3011"), spotType: "port", difficulty: "beginner",
@@ -259,7 +259,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3005", name: "増毛港", slug: "mashike-ko",
     description: "増毛町の歴史ある漁港。甘えびの水揚げで有名だが、釣りではホッケやカレイが主なターゲット。港の外側ではヒラメやソイも狙える。",
-    latitude: 43.8540, longitude: 141.5210,
+    latitude: 43.85340, longitude: 141.53270,
     address: "〒077-0204 北海道増毛郡増毛町港町",
     accessInfo: "JR留萌駅から車で約20分。深川留萌自動車道留萌ICから約25分。国道231号沿い。",
     region: localRegion("r3009"), spotType: "port", difficulty: "beginner",
@@ -281,7 +281,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3006", name: "羽幌港", slug: "haboro-ko",
     description: "天売島・焼尻島へのフェリーが発着する港。港内は穏やかでサビキ釣りに最適。カレイやホッケの実績が高く、夏にはイワシの大群が入ることもある。",
-    latitude: 44.3610, longitude: 141.6970,
+    latitude: 44.37610, longitude: 141.69750,
     address: "〒078-4116 北海道苫前郡羽幌町港町1丁目",
     accessInfo: "旭川から車で約2時間30分。留萌から国道232号経由で約1時間。",
     region: localRegion("r3009"), spotType: "port", difficulty: "beginner",
@@ -302,7 +302,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3007", name: "花咲港", slug: "hanasaki-ko",
     description: "根室市南部の港で花咲ガニの産地として有名。釣りではカレイやアイナメが狙え、春のホッケシーズンには数釣りが楽しめる。太平洋に面し潮通しが良い。",
-    latitude: 43.2780, longitude: 145.5930,
+    latitude: 43.28950, longitude: 145.58410,
     address: "〒087-0032 北海道根室市花咲港",
     accessInfo: "JR根室駅から車で約10分。釧路市から国道44号経由で約2時間40分。",
     region: localRegion("r3001"), spotType: "port", difficulty: "beginner",
@@ -386,7 +386,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3011", name: "十勝港", slug: "tokachi-ko",
     description: "十勝地方の物流拠点となる大型港。広い岸壁からカレイやソイの投げ釣りが楽しめる。夏場はサバやイワシの回遊も見られ、サビキ釣りも好調。",
-    latitude: 42.3070, longitude: 143.3300,
+    latitude: 42.29850, longitude: 143.330400,
     address: "〒089-2446 北海道広尾郡広尾町紋別（十勝港）",
     accessInfo: "帯広市から車で約1時間30分。広尾町中心部から約10分。",
     region: localRegion("r3003"), spotType: "port", difficulty: "beginner",
@@ -579,7 +579,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3020", name: "余市港", slug: "yoichi-ko",
     description: "ニッカウヰスキーの町・余市の港。春のホッケ、夏のイワシ・サバ、秋のサケと四季を通じて楽しめる。港内は足場が良くファミリーにも人気。",
-    latitude: 43.1960, longitude: 140.7830,
+    latitude: 43.21010, longitude: 140.77930,
     address: "〒046-0024 北海道余市郡余市町港町",
     accessInfo: "JR余市駅から徒歩約15分。札樽自動車道小樽ICから約20分。",
     region: localRegion("r3007"), spotType: "port", difficulty: "beginner",
@@ -601,7 +601,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3021", name: "岩内港", slug: "iwanai-ko",
     description: "後志地方西部の大型港。かつてニシン漁で栄えた歴史ある港で、現在はカレイやホッケの投げ釣り、夜のヤリイカ釣りが盛ん。港内は広く多くの釣り座がある。",
-    latitude: 42.9780, longitude: 140.5100,
+    latitude: 42.99580, longitude: 140.512300,
     address: "〒045-0003 北海道岩内郡岩内町万代",
     accessInfo: "札幌から車で約1時間50分。小樽から国道5号・229号経由で約1時間。",
     region: localRegion("r3007"), spotType: "port", difficulty: "beginner",
@@ -666,7 +666,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3024", name: "瀬棚港", slug: "setana-ko",
     description: "檜山地方の主要港で、日本海に面した好漁場。ヒラメやブリのルアーフィッシングで実績が高く、春のホッケ、冬のヤリイカも楽しめる。三本杉岩が目印。",
-    latitude: 42.4240, longitude: 139.8510,
+    latitude: 42.44960, longitude: 139.84130,
     address: "〒049-4816 北海道久遠郡せたな町瀬棚区本町",
     accessInfo: "札幌から車で約3時間30分。八雲町から国道229号経由で約1時間。",
     region: localRegion("r3008"), spotType: "port", difficulty: "intermediate",
@@ -709,7 +709,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3026", name: "白老港", slug: "shiraoi-ko-add3",
     description: "ウポポイ（民族共生象徴空間）に近い港。胆振海岸に面しカレイの投げ釣りが盛ん。テトラ帯ではソイやガヤの穴釣りも楽しめる。サケ釣りの穴場としても知られる。",
-    latitude: 42.5490, longitude: 141.3540,
+    latitude: 42.51850, longitude: 141.31870,
     address: "〒059-0906 北海道白老郡白老町本町（白老港）",
     accessInfo: "JR白老駅から車で約5分。道央自動車道白老ICから約10分。",
     region: localRegion("r3005"), spotType: "port", difficulty: "beginner",
@@ -979,7 +979,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3039", name: "天塩港", slug: "teshio-ko",
     description: "天塩川河口に位置する港。天塩川はサケの遡上で有名で、河口付近ではシーバスも狙える。港内はカレイの投げ釣りが中心。利尻島を望む景色が美しい。",
-    latitude: 44.8830, longitude: 141.7460,
+    latitude: 44.87280, longitude: 141.73020,
     address: "〒098-3300 北海道天塩郡天塩町海岸通",
     accessInfo: "稚内から車で約1時間。旭川から国道40号経由で約3時間。",
     region: localRegion("r3010"), spotType: "port", difficulty: "beginner",
@@ -1269,7 +1269,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3052", name: "大船渡港", slug: "ofunato-ko-add3",
     description: "三陸海岸南部の拠点港。リアス式海岸の深い入り江にあるため波が穏やかで、カレイやアイナメの投げ釣りが安定。秋のサンマシーズンには港が活気づく。",
-    latitude: 39.0470, longitude: 141.7330,
+    latitude: 39.06370, longitude: 141.72980,
     address: "〒022-0002 岩手県大船渡市大船渡町字茶屋前",
     accessInfo: "JR大船渡駅（BRT）から徒歩約10分。三陸沿岸道路大船渡ICから約5分。",
     region: localRegion("r3031"), spotType: "port", difficulty: "beginner",
@@ -1354,7 +1354,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3056", name: "久慈港", slug: "kuji-ko-add3",
     description: "久慈市の拠点港。NHK朝ドラ「あまちゃん」の舞台として有名なエリア。カレイやアイナメの投げ釣りが安定しており、秋にはサケの回遊も見られる。",
-    latitude: 40.1890, longitude: 141.7870,
+    latitude: 40.19680, longitude: 141.79850,
     address: "〒028-8041 岩手県久慈市川崎町",
     accessInfo: "JR久慈駅から車で約10分。八戸自動車道九戸ICから約40分。",
     region: localRegion("r3033"), spotType: "port", difficulty: "beginner",
@@ -1707,7 +1707,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3072", name: "能代港", slug: "noshiro-ko-add3",
     description: "米代川河口に位置する港で、シーバスの好ポイントとして東北屈指の実績を誇る。河口域ではハゼのちょい投げも楽しめ、港内ではアジのサビキ釣りも可能。",
-    latitude: 40.2170, longitude: 140.0260,
+    latitude: 40.21570, longitude: 140.01590,
     address: "〒016-0807 秋田県能代市大森山（能代港）",
     accessInfo: "JR能代駅から車で約10分。秋田自動車道能代南ICから約15分。",
     region: localRegion("r3051"), spotType: "port", difficulty: "intermediate",
@@ -1814,7 +1814,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3077", name: "船川港", slug: "funakawa-ko",
     description: "男鹿半島の東側に位置する船川港。男鹿線の終着駅・男鹿駅に近くアクセスが良い。アジやサバのサビキ釣りのほか、春にはホッケの接岸もある。",
-    latitude: 39.8860, longitude: 139.8360,
+    latitude: 39.91050, longitude: 139.81570,
     address: "〒010-0511 秋田県男鹿市船川港船川",
     accessInfo: "JR男鹿駅から徒歩約10分。秋田自動車道昭和男鹿半島ICから約25分。",
     region: localRegion("r3052"), spotType: "port", difficulty: "beginner",
@@ -1905,7 +1905,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3081", name: "加茂港", slug: "kamo-ko-yamagata",
     description: "鶴岡市の加茂水族館（クラゲドリーム館）に隣接する漁港。防波堤からアジやクロダイが狙え、観光のついでに釣りが楽しめる好立地。",
-    latitude: 38.7530, longitude: 139.7250,
+    latitude: 38.76790, longitude: 139.72800,
     address: "〒997-1206 山形県鶴岡市今泉",
     accessInfo: "JR鶴岡駅から車で約15分。日本海東北自動車道鶴岡西ICから約20分。",
     region: localRegion("r3061"), spotType: "port", difficulty: "beginner",
@@ -2058,7 +2058,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3088", name: "相馬港", slug: "soma-ko-add3",
     description: "相馬市の拠点港で、松川浦に隣接する。カレイやヒラメの投げ釣りが有名で、松川浦ではハゼのちょい投げも楽しめる。相馬のりの産地としても知られる。",
-    latitude: 37.8280, longitude: 140.9720,
+    latitude: 37.80200, longitude: 140.92560,
     address: "〒976-0022 福島県相馬市尾浜",
     accessInfo: "JR相馬駅から車で約10分。常磐自動車道相馬ICから約15分。",
     region: localRegion("r3071"), spotType: "port", difficulty: "beginner",
@@ -2187,7 +2187,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3094", name: "江名港", slug: "ena-ko",
     description: "いわき市南部の古い漁港。三崎公園・マリンタワーに近い観光エリア。防波堤からのサビキ釣りでアジ・イワシが楽しめ、根魚も豊富な穴場スポット。",
-    latitude: 36.9080, longitude: 140.8980,
+    latitude: 36.96950, longitude: 140.96010,
     address: "〒970-0316 福島県いわき市小名浜下神白",
     accessInfo: "JR泉駅から車で約20分。常磐自動車道いわき湯本ICから約25分。",
     region: localRegion("r3072"), spotType: "port", difficulty: "beginner",
@@ -2214,7 +2214,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3095", name: "直江津港", slug: "naoetsu-ko",
     description: "上越市の拠点港で、佐渡汽船のフェリーが発着する。広い岸壁からアジやサバのサビキ釣りが楽しめ、秋にはサワラやイナダの回遊もある。",
-    latitude: 37.1560, longitude: 138.2370,
+    latitude: 37.17910, longitude: 138.25230,
     address: "〒942-0011 新潟県上越市港町2丁目",
     accessInfo: "JR直江津駅から車で約5分。北陸自動車道上越ICから約10分。",
     region: localRegion("r3080"), spotType: "port", difficulty: "beginner",
@@ -2258,7 +2258,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3097", name: "新潟東港", slug: "niigata-higashi-ko",
     description: "新潟市の東側に位置する大型港。釣り公園として整備された護岸があり、サビキでアジ・イワシが好調。秋にはサワラやイナダの回遊で青物ファンも集まる。",
-    latitude: 37.9670, longitude: 139.1210,
+    latitude: 37.96990, longitude: 139.20770,
     address: "〒957-0101 新潟県北蒲原郡聖籠町東港",
     accessInfo: "JR新潟駅から車で約30分。日本海東北自動車道聖籠新発田ICから約10分。",
     region: localRegion("r3082"), spotType: "port", difficulty: "beginner",
@@ -2344,7 +2344,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3101", name: "寺泊港", slug: "teradomari-ko",
     description: "「魚のアメ横」として有名な寺泊の港。鮮魚店が並ぶ観光エリアに隣接し、釣りと海鮮グルメを両方楽しめる。アジやイワシのサビキ釣りが手軽。",
-    latitude: 37.6310, longitude: 138.7660,
+    latitude: 37.64080, longitude: 138.76120,
     address: "〒940-2502 新潟県長岡市寺泊下荒町",
     accessInfo: "JR寺泊駅から車で約10分。北陸自動車道中之島見附ICから約30分。",
     region: localRegion("r3081"), spotType: "port", difficulty: "beginner",
@@ -2541,7 +2541,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3110", name: "岩瀬浜", slug: "iwasehama",
     description: "富山市岩瀬地区の砂浜。キスの投げ釣りで県内屈指の人気ポイント。遠浅の砂浜が広がり、初心者でも釣りやすい。富山港展望台にも近い。",
-    latitude: 36.7530, longitude: 137.2220,
+    latitude: 36.76450, longitude: 137.23780,
     address: "〒931-8358 富山県富山市岩瀬古志町",
     accessInfo: "富山ライトレール岩瀬浜駅から徒歩約5分。北陸自動車道富山ICから約25分。",
     region: localRegion("r3091"), spotType: "beach", difficulty: "beginner",
@@ -2608,7 +2608,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3113", name: "輪島港", slug: "wajima-ko",
     description: "朝市で有名な輪島市の港。能登半島の外浦に面し、クロダイやメジナのウキフカセ釣りで実績が高い。港内ではアジのサビキ釣りも手軽に楽しめる。",
-    latitude: 37.3930, longitude: 136.8980,
+    latitude: 37.40390, longitude: 136.91020,
     address: "〒928-0001 石川県輪島市河井町",
     accessInfo: "のと里山空港から車で約25分。金沢から能越自動車道・のと里山海道経由で約2時間。",
     region: localRegion("r3100"), spotType: "port", difficulty: "intermediate",
@@ -2630,7 +2630,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3114", name: "七尾港", slug: "nanao-ko",
     description: "能登半島の内浦側に位置する七尾湾の港。波が穏やかで釣りやすく、アジやキスが手軽に楽しめる。和倉温泉に近く、釣りの後に温泉も楽しめる。",
-    latitude: 36.9640, longitude: 136.9580,
+    latitude: 37.05630, longitude: 136.96810,
     address: "〒926-0011 石川県七尾市万行町",
     accessInfo: "JR七尾駅から車で約5分。能越自動車道七尾ICから約10分。",
     region: localRegion("r3100"), spotType: "port", difficulty: "beginner",
