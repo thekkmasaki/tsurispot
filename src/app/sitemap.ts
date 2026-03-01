@@ -14,7 +14,7 @@ const baseUrl = "https://tsurispot.com";
 
 // カテゴリID: 0=static+guides, 1=spots, 2=fish, 3=prefectures+areas, 4=fishing-matrix+seasonal+shops
 export async function generateSitemaps() {
-  return [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
+  return [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }];
 }
 
 export default async function sitemap({
@@ -181,6 +181,43 @@ export default async function sitemap({
         priority: 0.8,
       })),
     ];
+  }
+
+  // 5: 都道府県×魚種ページ
+  if (sitemapId === 5) {
+    const combos: { prefSlug: string; fishSlug: string }[] = [];
+    const seen = new Set<string>();
+    for (const spot of fishingSpots) {
+      const pref = prefectures.find(p => p.name === spot.region.prefecture);
+      if (!pref) continue;
+      for (const cf of spot.catchableFish) {
+        const key = `${pref.slug}|${cf.fish.slug}`;
+        if (!seen.has(key)) {
+          seen.add(key);
+          combos.push({ prefSlug: pref.slug, fishSlug: cf.fish.slug });
+        }
+      }
+    }
+    return combos.map(c => ({
+      url: `${baseUrl}/prefecture/${c.prefSlug}/fish/${c.fishSlug}`,
+      lastModified: now,
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    }));
+  }
+
+  // 6: 月×地域ページ
+  if (sitemapId === 6) {
+    const MONTHS_SLUGS = ["january","february","march","april","may","june","july","august","september","october","november","december"];
+    const REGION_SLUGS = ["hokkaido","tohoku","kanto","chubu","kinki","chugoku","shikoku","kyushu-okinawa"];
+    return MONTHS_SLUGS.flatMap(month =>
+      REGION_SLUGS.map(region => ({
+        url: `${baseUrl}/seasonal/${month}/${region}`,
+        lastModified: now,
+        changeFrequency: "monthly" as const,
+        priority: 0.6,
+      }))
+    );
   }
 
   // 4: 釣り方×月マトリクス + 季節ガイド + 釣具店

@@ -22,6 +22,8 @@ const nextConfig: NextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    minimumCacheTTL: 31536000,
+    formats: ['image/avif', 'image/webp'],
   },
   headers: async () => [
     {

@@ -66,7 +66,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://tsurispot.com/sitemap.xml",
+    sitemap: ["https://tsurispot.com/sitemap.xml", "https://tsurispot.com/image-sitemap.xml"],
     host: "https://tsurispot.com",
   };
 }
