@@ -103,6 +103,8 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="manifest" href="/manifest.json" />
+        {/* AI/LLM向けサイト情報ドキュメント */}
+        <link rel="help" type="text/markdown" href="/llms.txt" title="LLM Information" />
         {process.env.NEXT_PUBLIC_ADSENSE_ID && (
           <script
             async
