@@ -5,8 +5,8 @@ import { FileText } from "lucide-react";
 import { BlogListClient } from "@/components/blog/blog-list-client";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 
-// ISR: 60秒ごとに再検証
-export const revalidate = 60;
+// ISR: 1時間ごとに再検証（Vercel無料プランのISR Reads節約）
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "釣りコラム・ブログ | ツリスポ",

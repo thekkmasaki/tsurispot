@@ -30,8 +30,8 @@ import {
   Camera,
 } from "lucide-react";
 
-// ISR: 60秒ごとに再検証
-export const revalidate = 60;
+// ISR: 1時間ごとに再検証（Vercel無料プランのISR Reads節約）
+export const revalidate = 3600;
 
 // microCMS記事はビルド時に存在しないのでオンデマンドSSR
 export const dynamicParams = true;
