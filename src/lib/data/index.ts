@@ -1,4 +1,4 @@
-import { FishSpecies, SpotSummary } from "@/types";
+import { FishSpecies, FishingSpot, SpotSummary } from "@/types";
 import { fishSpecies } from "./fish";
 import { fishingSpots } from "./spots";
 
@@ -117,6 +117,14 @@ export function getFishBySameSeason(
     .filter((f) => f.overlapMonths > 0)
     .sort((a, b) => b.overlapMonths - a.overlapMonths)
     .slice(0, limit);
+}
+
+// 都道府県×魚種のスポット取得
+export function getSpotsByPrefectureAndFish(prefName: string, fishSlug: string): FishingSpot[] {
+  return fishingSpots.filter(s =>
+    s.region.prefecture === prefName &&
+    s.catchableFish.some(cf => cf.fish.slug === fishSlug)
+  );
 }
 
 // 全データのエクスポート
