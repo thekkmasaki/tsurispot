@@ -158,7 +158,7 @@ export const saninSpots: FishingSpot[] = [
     id: "s518", name: "岩美町田後港", slug: "iwami-tago-port",
     description: "鳥取県岩美町の日本海に面した田後港。周囲を岩場と松林に囲まれた風光明媚な港で、アジ・イワシのサビキ釣りが楽しめる。秋から冬はアオリイカやヤリイカの実績も高い漁港。",
     latitude: 35.591200, longitude: 134.43580,
-    address: "〒681-0072 鳥取県岩美郡岩美町大字田後68",
+    address: "〒681-0071 鳥取県岩美郡岩美町田後（田後港）",
     accessInfo: "JR山陰本線岩美駅から車で約15分。山陰自動車道鳥取東ICから約25分。",
     region: localRegion("r190"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内に無料駐車スペースあり",
