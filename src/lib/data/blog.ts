@@ -2556,8 +2556,6 @@ export const blogPosts: BlogPost[] = [
   ...blogArticles6,
 ];
 
-import { fetchMicroCMSBlogPosts, fetchMicroCMSBlogBySlug } from "@/lib/microcms";
-
 /** slugで記事を取得（同期版、静的記事のみ） */
 export function getBlogPostBySlug(slug: string): BlogPost | undefined {
   return blogPosts.find((post) => post.slug === slug);
@@ -2565,17 +2563,16 @@ export function getBlogPostBySlug(slug: string): BlogPost | undefined {
 
 /** slugで記事を取得（async版、microCMS優先 → 静的記事フォールバック） */
 export async function getBlogPostBySlugAsync(slug: string): Promise<BlogPost | undefined> {
-  // まずmicroCMSを検索
+  const { fetchMicroCMSBlogBySlug } = await import("@/lib/microcms");
   const cmsPost = await fetchMicroCMSBlogBySlug(slug);
   if (cmsPost) return cmsPost;
-  // 静的記事から検索
   return blogPosts.find((post) => post.slug === slug);
 }
 
 /** 全ブログ記事を取得（静的 + microCMS、publishedAt降順） */
 export async function getAllBlogPosts(): Promise<BlogPost[]> {
+  const { fetchMicroCMSBlogPosts } = await import("@/lib/microcms");
   const cmsPosts = await fetchMicroCMSBlogPosts();
-  // slugの重複を防ぐ（microCMS側が優先）
   const cmsSlugs = new Set(cmsPosts.map((p) => p.slug));
   const staticPosts = blogPosts.filter((p) => !cmsSlugs.has(p.slug));
   const merged = [...cmsPosts, ...staticPosts];
