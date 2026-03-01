@@ -612,7 +612,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-025", name: "温泉津港", slug: "yunotsu-port",
     description: "島根県大田市温泉津町にある漁港。世界遺産・石見銀山の積出港として栄えた歴史ある港。アジ・メバルの好ポイントで、秋にはアオリイカも好調。温泉津温泉に浸かった後の夜釣りが贅沢。",
-    latitude: 35.1089, longitude: 132.3312, address: "島根県大田市温泉津町温泉津",
+    latitude: 35.1089, longitude: 132.3312, address: "〒699-2598 島根県大田市温泉津町温泉津町温泉津",
     accessInfo: "JR温泉津駅から徒歩約15分。山陰自動車道温泉津ICから約10分。",
     region: region("r3013"), spotType: "port", difficulty: "beginner",
     isFree: true,
@@ -638,7 +638,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-026", name: "境水道・美保関", slug: "sakai-suido-mihonoseki",
     description: "島根県松江市美保関町の境水道周辺。鳥取県境港市との間を流れる境水道は潮通しが良く、多彩な魚種が狙える。特にアジ・メバル・チヌが好調で、秋にはサゴシ（サワラの若魚）の回遊も。美保神社の参拝と合わせて。",
-    latitude: 35.5612, longitude: 133.2389, address: "島根県松江市美保関町美保関",
+    latitude: 35.5612, longitude: 133.2389, address: "〒684-0034 島根県松江市",
     accessInfo: "JR境港駅から車で約20分。松江市内から約40分。",
     region: region("r3014"), spotType: "port", difficulty: "beginner",
     isFree: true,
@@ -664,7 +664,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-027", name: "出雲市・十六島鼻", slug: "izumo-jushimanohana",
     description: "島根県出雲市十六島町の岩場。日本海に突き出した磯場で、グレ・チヌ・イシダイなどの磯釣りが楽しめる本格ポイント。十六島海苔（うっぷるいのり）でも有名な地域。荒々しい日本海の波を受ける迫力ある釣り場。",
-    latitude: 35.4478, longitude: 132.7689, address: "島根県出雲市十六島町",
+    latitude: 35.4478, longitude: 132.7689, address: "島根県出雲市樋之谷",
     accessInfo: "出雲市内から車で約30分。山陰自動車道出雲ICから約25分。",
     region: region("r3015"), spotType: "rocky", difficulty: "advanced",
     isFree: true,
@@ -689,7 +689,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-028", name: "松江・中海", slug: "matsue-nakaumi",
     description: "島根県松江市の中海沿岸。宍道湖と境水道を結ぶ汽水湖で、シーバスの聖地として全国的に有名。夜のシーバスゲームが特に人気で、ランカーサイズの実績も多い。ハゼやチヌも豊富。",
-    latitude: 35.4589, longitude: 133.1478, address: "島根県松江市東出雲町",
+    latitude: 35.4589, longitude: 133.1478, address: "〒699-0101 島根県松江市富士見町",
     accessInfo: "JR松江駅から車で約20分。山陰自動車道松江東ICから約10分。",
     region: region("r3016"), spotType: "river", difficulty: "intermediate",
     isFree: true,
@@ -713,7 +713,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-029", name: "宍道湖（詳細・シーバス）", slug: "shinjiko-seabass",
     description: "島根県松江市〜出雲市にかかる汽水湖。日本有数のシーバスフィールドとして知られ、全国からアングラーが訪れる。特に秋のコノシロパターンは爆発的な釣果をもたらす。夕日の名所でもあり、日本百景に選ばれた絶景の中で釣りが楽しめる。",
-    latitude: 35.4389, longitude: 132.9478, address: "島根県松江市嫁島町",
+    latitude: 35.4389, longitude: 132.9478, address: "島根県松江市",
     accessInfo: "JR松江駅から車で約10分。出雲空港から約20分。",
     region: region("r727"), spotType: "river", difficulty: "intermediate",
     isFree: true,
@@ -737,7 +737,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-030", name: "隠岐の島・西郷港（詳細）", slug: "oki-saigo-detail",
     description: "島根県隠岐の島町の西郷港。隠岐諸島の玄関口で、港内でもアジ・メバル・チヌが好調。島全体が釣りの楽園で、磯からはヒラマサ・マダイ・イシダイなどの大物が狙える。離島ならではの魚影の濃さが魅力。",
-    latitude: 36.2089, longitude: 133.3178, address: "島根県隠岐郡隠岐の島町西町",
+    latitude: 36.2089, longitude: 133.3178, address: "〒685-8585 島根県隠岐の島町下西",
     accessInfo: "境港からフェリーで約2時間30分。出雲空港から飛行機で約30分。",
     region: region("r196"), spotType: "port", difficulty: "beginner",
     isFree: true,
@@ -764,7 +764,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-031", name: "出雲大社・稲佐の浜（詳細）", slug: "izumo-inasa-detail",
     description: "島根県出雲市大社町の稲佐の浜。出雲大社のすぐ西にある砂浜で、キス・ヒラメ・マゴチがサーフフィッシングで狙える。神話の舞台としても有名で、弁天島が象徴的な景観。秋にはショアジギングでサゴシも。",
-    latitude: 35.3945, longitude: 132.6756, address: "島根県出雲市大社町杵築北稲佐",
+    latitude: 35.3945, longitude: 132.6756, address: "〒699-0721 島根県出雲市大社町",
     accessInfo: "一畑電鉄出雲大社前駅から徒歩約20分。山陰道出雲ICから約20分。",
     region: region("r3015"), spotType: "beach", difficulty: "intermediate",
     isFree: true,
@@ -790,7 +790,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-032", name: "日生港", slug: "hinase-port",
     description: "岡山県備前市日生町の漁港。カキ養殖で有名な日生諸島の玄関口。漁港周辺ではアジ・メバル・カサゴ・チヌなどが狙え、秋にはタチウオやアオリイカも。日生の牡蠣お好み焼き（カキオコ）のグルメも楽しみの一つ。",
-    latitude: 34.7289, longitude: 134.2678, address: "岡山県備前市日生町日生",
+    latitude: 34.7289, longitude: 134.2678, address: "〒701-3202 岡山県備前市",
     accessInfo: "JR赤穂線日生駅から徒歩約10分。山陽自動車道備前ICから約20分。",
     region: region("r3017"), spotType: "port", difficulty: "beginner",
     isFree: true,
@@ -817,7 +817,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-033", name: "児島・田の口港", slug: "kojima-tanokuchi",
     description: "岡山県倉敷市児島の田の口港。瀬戸大橋のすぐ近くに位置し、瀬戸内海の好漁場。チヌ・メバル・カサゴの根魚が豊富で、秋にはタチウオの回遊もある。国産ジーンズの聖地・児島観光と合わせて楽しめる。",
-    latitude: 34.4312, longitude: 133.8189, address: "岡山県倉敷市児島田の口",
+    latitude: 34.4312, longitude: 133.8189, address: "〒711-0924 岡山県倉敷市大畠",
     accessInfo: "JR児島駅から車で約10分。瀬戸中央自動車道児島ICから約5分。",
     region: region("r3020"), spotType: "port", difficulty: "beginner",
     isFree: true,
@@ -842,7 +842,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-034", name: "牛窓港（詳細）", slug: "ushimado-port-detail",
     description: "岡山県瀬戸内市牛窓町の牛窓港。「日本のエーゲ海」と称される瀬戸内海の美しい風景の中で釣りが楽しめる。チヌの落とし込み釣りのメッカとして有名で、メバル・カサゴ・アジなども豊富。フェリー乗り場周辺は足場も良くファミリー向き。",
-    latitude: 34.6189, longitude: 134.1578, address: "岡山県瀬戸内市牛窓町牛窓",
+    latitude: 34.6189, longitude: 134.1578, address: "〒701-4302 岡山県瀬戸内市牛窓町牛窓岡山牛窓線",
     accessInfo: "JR邑久駅からバス約20分。岡山ブルーライン邑久ICから約15分。",
     region: region("r106"), spotType: "port", difficulty: "beginner",
     isFree: true,
@@ -869,7 +869,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-035", name: "下津井港（詳細）", slug: "shimotsui-port-detail",
     description: "岡山県倉敷市下津井の漁港。瀬戸大橋の真下に位置し、タコ・メバル・チヌなどが好調。下津井ダコで有名な漁師町で、鮮度抜群のタコ料理も楽しめる。潮通しが非常に良く、大型の回遊魚も期待できる。",
-    latitude: 34.4078, longitude: 133.8012, address: "岡山県倉敷市下津井",
+    latitude: 34.4078, longitude: 133.8012, address: "〒711-0926 香川県坂出市櫃石瀬戸中央自動車道;国道30号バイパス",
     accessInfo: "JR児島駅から車で約15分。瀬戸中央自動車道児島ICから約10分。",
     region: region("r107"), spotType: "port", difficulty: "intermediate",
     isFree: true,
@@ -895,7 +895,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-036", name: "玉島港・E地区", slug: "tamashima-e-chiku",
     description: "岡山県倉敷市玉島の工業港周辺。E地区と呼ばれる護岸エリアが釣り人に開放されており、チヌ・シーバス・ヒラメなどが狙える。足場が良く、車を横付けして釣りができるポイントもある。夜のシーバスゲームが特に人気。",
-    latitude: 34.5412, longitude: 133.6878, address: "岡山県倉敷市玉島乙島",
+    latitude: 34.5412, longitude: 133.6878, address: "〒710-0253 岡山県倉敷市",
     accessInfo: "JR新倉敷駅から車で約15分。山陽自動車道玉島ICから約10分。",
     region: region("r3018"), spotType: "port", difficulty: "beginner",
     isFree: true,
@@ -920,7 +920,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-037", name: "玉野・宇野港", slug: "tamano-uno-port",
     description: "岡山県玉野市の宇野港。直島への玄関口で、アート観光と合わせた釣行が可能。港内はチヌ・メバル・アジが好調で、足場も良くファミリー向き。瀬戸内海の穏やかな景色の中で釣りが楽しめる。",
-    latitude: 34.4878, longitude: 133.9412, address: "岡山県玉野市築港1丁目",
+    latitude: 34.4878, longitude: 133.9412, address: "〒706-8531 岡山県玉野市宇野二丁目",
     accessInfo: "JR宇野駅から徒歩約5分。瀬戸中央自動車道早島ICから約30分。",
     region: region("r3019"), spotType: "port", difficulty: "beginner",
     isFree: true,
@@ -972,7 +972,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-039", name: "阿南市・今津漁港", slug: "anan-imatsu-port",
     description: "徳島県阿南市の今津漁港。波止とT字突堤が複数あり、ポイントが豊富。アジ・メバル・チヌのほか、アオリイカのエギングも人気。県南部の穏やかな海で、のんびりした釣りが楽しめる。",
-    latitude: 33.9178, longitude: 134.6645, address: "徳島県阿南市那賀川町今津浦",
+    latitude: 33.9178, longitude: 134.6645, address: "〒774-0013 徳島県阿南市領家町",
     accessInfo: "JR阿南駅から車で約15分。徳島自動車道徳島ICから約40分。",
     region: region("r112"), spotType: "port", difficulty: "beginner",
     isFree: true,
@@ -997,7 +997,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-040", name: "日和佐港（詳細）", slug: "hiwasa-port-detail",
     description: "徳島県美波町の日和佐港。ウミガメの産卵地として有名な大浜海岸に近い港。アオリイカの好ポイントとして知られ、秋のエギングシーズンには多くのアングラーが訪れる。グレ・チヌのフカセ釣りも好調。",
-    latitude: 33.7312, longitude: 134.5312, address: "徳島県海部郡美波町日和佐浦",
+    latitude: 33.7312, longitude: 134.5312, address: "〒779-2305 徳島県美波町",
     accessInfo: "JR日和佐駅から徒歩約15分。徳島自動車道徳島ICから約1時間20分。",
     region: region("r3021"), spotType: "port", difficulty: "intermediate",
     isFree: true,
@@ -1022,7 +1022,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-041", name: "鳴門・亀浦観光港", slug: "naruto-kameura",
     description: "徳島県鳴門市の亀浦観光港。うずしお観光船の発着港で、鳴門海峡の潮流が生み出す豊かな漁場に近い。足場が良くファミリーにも人気で、アジ・チヌ・タチウオなどが狙える。鳴門の渦潮観光と合わせて楽しめる。",
-    latitude: 34.2312, longitude: 134.6178, address: "徳島県鳴門市鳴門町土佐泊浦字大毛",
+    latitude: 34.2312, longitude: 134.6178, address: "〒772-0053 徳島県鳴門市福池鳴門スカイライン",
     accessInfo: "JR鳴門駅からバスで約15分。高松自動車道鳴門ICから約10分。",
     region: region("r29"), spotType: "port", difficulty: "beginner",
     isFree: true,
@@ -1047,7 +1047,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-042", name: "徳島・マリンピア沖洲", slug: "tokushima-marinpia-okisu",
     description: "徳島市沖洲のマリンピア護岸。徳島市中心部から最も近い海釣りスポットで、足場の良い護岸からチヌ・シーバス・ハゼなどが狙える。夜の常夜灯周りでのアジングやメバリングが人気。仕事帰りの釣行にも便利な都市型フィッシングポイント。",
-    latitude: 34.0578, longitude: 134.5978, address: "徳島県徳島市東沖洲",
+    latitude: 34.0578, longitude: 134.5978, address: "〒770-8571 徳島県徳島市東沖洲二丁目",
     accessInfo: "徳島駅から車で約15分。徳島自動車道徳島ICから約15分。",
     region: region("r3022"), spotType: "port", difficulty: "beginner",
     isFree: true,
@@ -1073,7 +1073,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-043", name: "串本・袋港", slug: "kushimoto-fukuro-port",
     description: "和歌山県串本町の袋港。本州最南端の町にある漁港で、黒潮の影響を受けて熱帯魚が見られるほど水温が高い。グレ・イシダイの磯釣りの拠点でもあり、港内ではアオリイカやアジも好調。橋杭岩の絶景が近い。",
-    latitude: 33.4712, longitude: 135.7812, address: "和歌山県東牟婁郡串本町袋",
+    latitude: 33.4712, longitude: 135.7812, address: "〒649-3503 和歌山県串本町串本",
     accessInfo: "JR串本駅から車で約10分。紀勢自動車道すさみ南ICから約30分。",
     region: region("r504"), spotType: "port", difficulty: "intermediate",
     isFree: true,
@@ -1099,7 +1099,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-044", name: "那智勝浦・天満漁港", slug: "nachikatsura-temma",
     description: "和歌山県那智勝浦町の天満漁港。まぐろの水揚げ日本一で有名な勝浦港に隣接。港内ではアジ・サバのサビキ釣りが好調で、外側の堤防ではグレ・チヌも狙える。那智の滝観光と合わせた釣行が人気。",
-    latitude: 33.6312, longitude: 135.9478, address: "和歌山県東牟婁郡那智勝浦町天満",
+    latitude: 33.6312, longitude: 135.9478, address: "〒649-5392 和歌山県那智勝浦町築地一丁目那智山勝浦線",
     accessInfo: "JR紀伊勝浦駅から徒歩約15分。紀勢自動車道那智勝浦ICから約10分。",
     region: region("r505"), spotType: "port", difficulty: "beginner",
     isFree: true,
@@ -1126,7 +1126,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-045", name: "音戸大橋下", slug: "ondo-ohashi-shita",
     description: "広島県呉市の音戸大橋下周辺。音戸の瀬戸は潮流が速く、カレイ・メバル・マダイなどの好ポイント。瀬戸内海を代表する潮通しの良い釣り場で、大物の実績も高い。平清盛が一日で切り開いたという伝説の海峡。",
-    latitude: 34.1912, longitude: 132.5312, address: "広島県呉市警固屋",
+    latitude: 34.1912, longitude: 132.5312, address: "〒737-1204 広島県呉市2丁目",
     accessInfo: "JR呉駅から車で約15分。広島呉道路呉ICから約20分。",
     region: region("r3024"), spotType: "port", difficulty: "intermediate",
     isFree: true,
@@ -1152,7 +1152,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-046", name: "江田島・切串港（詳細）", slug: "etajima-kirikushi-detail",
     description: "広島県江田島市の切串港。広島市内からフェリーで約30分でアクセスでき、島ならではの魚影の濃さが魅力。アジ・メバル・チヌが好調で、アオリイカの実績も高い。海上自衛隊の第1術科学校がある島としても有名。",
-    latitude: 34.2878, longitude: 132.4812, address: "広島県江田島市江田島町切串",
+    latitude: 34.2878, longitude: 132.4812, address: "〒737-0846 広島県江田島市1丁目",
     accessInfo: "広島港からフェリーで約30分。呉市からは早瀬大橋経由で車約40分。",
     region: region("r3025"), spotType: "port", difficulty: "beginner",
     isFree: true,
@@ -1178,7 +1178,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-047", name: "蒲刈・大地蔵港", slug: "kamagari-daijizo-port",
     description: "広島県呉市下蒲刈島の大地蔵港。とびしま海道沿いの好ポイントで、安芸灘大橋を渡ってすぐにアクセスできる。メバル・カサゴ・アジなどの実績が高く、春はメバリングの聖地として多くのアングラーが訪れる。",
-    latitude: 34.1978, longitude: 132.6312, address: "広島県呉市下蒲刈町大地蔵",
+    latitude: 34.1978, longitude: 132.6312, address: "〒737-0137 広島県呉市1丁目",
     accessInfo: "JR仁方駅から車で約10分。安芸灘大橋を渡ってすぐ。広島呉道路呉ICから約30分。",
     region: region("r3026"), spotType: "port", difficulty: "beginner",
     isFree: true,
@@ -1205,7 +1205,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-048", name: "角島・大浜（詳細）", slug: "tsunoshima-ohama-detail",
     description: "山口県下関市豊北町の角島大浜海岸。角島大橋で本土と繋がる離島で、エメラルドグリーンの海が美しい。サーフからのキス・ヒラメ釣りが人気で、磯場ではグレ・チヌも。日本有数の絶景ドライブスポットとしても有名。",
-    latitude: 34.3545, longitude: 130.8975, address: "山口県下関市豊北町角島",
+    latitude: 34.3545, longitude: 130.8975, address: "〒759-5241 山口県下関市",
     accessInfo: "JR特牛駅から車で約15分。下関ICから約1時間20分。",
     region: region("r3027"), spotType: "beach", difficulty: "intermediate",
     isFree: true,
@@ -1231,7 +1231,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-049", name: "下関・関門海峡護岸", slug: "shimonoseki-kanmon-gogan",
     description: "山口県下関市の関門海峡沿いの護岸。唐戸市場やあるかぽーと周辺から手軽に釣りが楽しめ、関門海峡の速い潮流がもたらす豊かな漁場。フグ・アジ・チヌ・シーバスなどが狙える。ふぐの本場で観光グルメも充実。",
-    latitude: 33.9578, longitude: 130.9412, address: "山口県下関市あるかぽーと",
+    latitude: 33.9578, longitude: 130.9412, address: "〒750-0036 山口県下関市南部町国道9号",
     accessInfo: "JR下関駅からバス約10分。中国自動車道下関ICから約15分。",
     region: region("r3028"), spotType: "port", difficulty: "beginner",
     isFree: true,
@@ -1257,7 +1257,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-050", name: "萩・菊ヶ浜", slug: "hagi-kikugahama",
     description: "山口県萩市の菊ヶ浜。萩城跡のすぐ近くに広がる白砂の海岸で、キス・ヒラメのサーフフィッシングが楽しめる。城下町萩の風情ある街並みと日本海の絶景を同時に味わえる。夏は海水浴客で賑わう。",
-    latitude: 34.4178, longitude: 131.3889, address: "山口県萩市堀内",
+    latitude: 34.4178, longitude: 131.3889, address: "〒758-0033 山口県萩市堀内",
     accessInfo: "JR東萩駅から車で約10分。中国自動車道美祢東ICから約40分。",
     region: region("r3030"), spotType: "beach", difficulty: "beginner",
     isFree: true,
@@ -1281,7 +1281,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-051", name: "周防大島・片添ヶ浜", slug: "suo-oshima-katazoe",
     description: "山口県大島郡周防大島町の片添ヶ浜。「瀬戸内のハワイ」と呼ばれる周防大島の人気スポット。海水浴場に隣接する波止から、アジ・キス・メバル・チヌ・アオリイカなどが狙える。アジングの聖地としても全国的に有名な島。",
-    latitude: 33.9012, longitude: 132.3278, address: "山口県大島郡周防大島町平野片添",
+    latitude: 33.9012, longitude: 132.3278, address: "山口県周防大島町西方",
     accessInfo: "JR大畠駅から車で約30分。大島大橋を渡って島内へ。山陽自動車道玖珂ICから約40分。",
     region: region("r3029"), spotType: "port", difficulty: "beginner",
     isFree: true,
