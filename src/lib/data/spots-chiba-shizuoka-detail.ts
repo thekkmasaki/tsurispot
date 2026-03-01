@@ -1026,7 +1026,7 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
     id: "scs040", name: "大瀬崎", slug: "osezaki",
     description: "沼津市の駿河湾に突き出した岬。ダイビングの聖地として世界的に有名だが、先端部の磯場は上級者向けの本格磯釣りフィールド。メジナ、イシダイ、クロダイの大型が期待でき、ショアジギングでカンパチやヒラマサも実績あり。日本一深い駿河湾の恩恵を最も受ける磯。",
     latitude: 35.0165, longitude: 138.8055,
-    address: "〒410-0244 静岡県沼津市西浦江梨329",
+    address: "〒410-0244 静岡県沼津市西浦江梨（大瀬崎）",
     accessInfo: "JR沼津駅からバスで約50分。東名高速沼津ICから約40分。",
     region: lr("r1063"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "大瀬崎駐車場（有料500円）",
