@@ -200,7 +200,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-256", name: "赤石川", slug: "akaishigawa-keiryu",
     description: "世界自然遺産・白神山地を源流とする青森県西部の清流。金色に輝く「金アユ」の産地として有名で、天然イワナ・ヤマメも豊富。白神山地の原生的な自然環境の中で釣りができる貴重なフィールド。透明度が極めて高く、魚影を目視しながらのサイトフィッシングも可能。",
-    latitude: 40.5667, longitude: 140.1333, address: "〒038-2731 青森県西津軽郡鰺ヶ沢町大字一ツ森町",
+    latitude: 40.5667, longitude: 140.1333, address: "〒038-2723 青森県西津軽郡鰺ヶ沢町大字一ツ森町",
     accessInfo: "東北自動車道大鰐弘前ICから約1時間30分。JR鰺ヶ沢駅から車で約30分。",
     region: lr("r2105"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -324,7 +324,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-261", name: "阿仁川", slug: "anigawa-keiryu",
     description: "秋田県北秋田市を流れる米代川の主要支流。マタギの里として知られる阿仁地域を流れ、原始的な渓流釣りが楽しめる。イワナの魚影が特に濃く、上流域では尺イワナの実績も。秋田内陸線の沿線にあり、鉄道旅と釣りを組み合わせた旅行も人気。",
-    latitude: 39.8500, longitude: 140.4000, address: "〒018-4731 秋田県北秋田市阿仁銀山",
+    latitude: 39.8500, longitude: 140.4000, address: "〒018-4613 秋田県北秋田市阿仁銀山",
     accessInfo: "秋田自動車道鷹巣ICから約40分。秋田内陸線阿仁合駅から車で約10分。",
     region: lr("r2109"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -373,7 +373,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-263", name: "最上川上流（米沢）", slug: "mogamigawa-upper-keiryu",
     description: "日本三大急流の一つ・最上川の源流域。吾妻連峰を水源とし、米沢市周辺では山間の渓流釣りが楽しめる。ヤマメ・イワナの魚影が濃く、支流の小樽川や大樽川は特に人気。米沢牛で有名な米沢の食文化と合わせた釣行プランが人気。",
-    latitude: 37.9167, longitude: 140.1167, address: "〒992-1461 山形県米沢市大字関",
+    latitude: 37.9167, longitude: 140.1167, address: "〒992-1472 山形県米沢市大字関",
     accessInfo: "東北中央自動車道米沢八幡原ICから約20分。JR米沢駅から車で約30分。",
     region: lr("r2110"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -397,7 +397,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-264", name: "置賜白川", slug: "okitama-shirakawa-keiryu",
     description: "山形県南部・飯豊連峰を源流とする最上川支流。つり人誌のヤマメ釣りベスト50にも選出された実力派の渓流。白川ダムから上流はイワナとヤマメの混生域で、さらに源流部はイワナのみの世界。飯豊連峰の雪解け水が育む魚は美しくコンディション抜群。",
-    latitude: 38.0000, longitude: 139.8833, address: "〒999-0605 山形県西置賜郡飯豊町大字椿",
+    latitude: 38.0000, longitude: 139.8833, address: "〒999-0604 山形県西置賜郡飯豊町大字椿",
     accessInfo: "東北中央自動車道南陽高畠ICから約50分。JR手ノ子駅から車で約15分。",
     region: lr("r2111"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日）",
@@ -420,7 +420,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-265", name: "赤川", slug: "akagawa-keiryu",
     description: "出羽三山・月山を源流とする庄内地方の一級河川。清流度が高く、天然アユの遡上が豊富。上流域ではヤマメ・イワナの渓流釣りが楽しめ、庄内平野を流れる中下流域ではアユの友釣りが人気。鶴岡市の食文化（だだちゃ豆、庄内そば）と合わせた釣行プランが魅力。",
-    latitude: 38.7500, longitude: 139.8833, address: "〒997-0752 山形県鶴岡市田麦俣",
+    latitude: 38.7500, longitude: 139.8833, address: "〒997-0532 山形県鶴岡市田麦俣",
     accessInfo: "山形自動車道鶴岡ICから約40分。JR鶴岡駅から車で約50分（上流域）。",
     region: region("r661"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -492,7 +492,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-268", name: "白石川", slug: "shiroishigawa-keiryu",
     description: "蔵王連峰を源流とし白石市から大河原町を流れる阿武隈川水系の支流。一目千本桜で有名な大河原の桜と合わせて楽しめる渓流釣り場。七ヶ宿ダム下流域ではヤマメの魚影が濃く、20cm以上の良型が狙える。東北自動車道からのアクセスも良好。",
-    latitude: 38.0333, longitude: 140.5167, address: "〒989-0232 宮城県白石市小原",
+    latitude: 38.0333, longitude: 140.5167, address: "〒989-0233 宮城県白石市小原",
     accessInfo: "東北自動車道白石ICから約20分。JR白石蔵王駅から車で約25分。",
     region: lr("r2114"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -516,7 +516,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-269", name: "阿武隈川宮城区間", slug: "abukumagawa-miyagi-bass",
     description: "福島県から宮城県に入り太平洋に注ぐ東北第二の大河。宮城県内（角田市〜亘理町）ではスモールマウスバスの好漁場として知られ、白石川合流点や玉崎浄水場周辺が有名ポイント。春のスポーニングシーズンにはデカスモールが狙える。テトラ帯や水門周辺が好ポイント。",
-    latitude: 38.0667, longitude: 140.7667, address: "〒989-1600 宮城県柴田郡柴田町槻木",
+    latitude: 38.0667, longitude: 140.7667, address: "〒989-1756 宮城県柴田郡柴田町槻木",
     accessInfo: "東北自動車道白石ICから約25分。JR槻木駅から車で約5分。",
     region: lr("r2115"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券が必要（バス釣りでも他魚種が対象のため）",
@@ -568,7 +568,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-271", name: "桧枝岐川", slug: "hinoemata-keiryu",
     description: "尾瀬の玄関口・檜枝岐村を流れる伊南川上流部。足場が比較的良く初心者にも釣りやすい環境が整っている。イワナの放流が盛んで魚影が濃く、駐車場やトイレも近くにある好環境。檜枝岐歌舞伎や温泉、岩魚料理など文化と食も楽しめる。",
-    latitude: 37.0167, longitude: 139.3833, address: "〒967-0525 福島県南会津郡檜枝岐村居平",
+    latitude: 37.0167, longitude: 139.3833, address: "〒967-0521 福島県南会津郡檜枝岐村居平",
     accessInfo: "東北自動車道西那須野塩原ICから約2時間。関越自動車道小出ICから約1時間30分。",
     region: lr("r2117"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -591,7 +591,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-272", name: "猪苗代湖（天神浜）", slug: "inawashiroko-wakasagi",
     description: "日本第4位の面積を持つ福島県のシンボル・猪苗代湖。冬季のワカサギ釣りが人気で、天神浜では例年1月中旬から氷上穴釣りが楽しめる。湖水浴場としても有名な天神浜は足場が良く、春から秋はヘラブナやコイ釣りも楽しめる。磐梯山を望む絶景ロケーション。",
-    latitude: 37.5167, longitude: 140.0833, address: "〒969-3133 福島県耶麻郡猪苗代町中小松",
+    latitude: 37.5167, longitude: 140.0833, address: "〒969-2271 福島県耶麻郡猪苗代町中小松",
     accessInfo: "磐越自動車道猪苗代磐梯高原ICから約15分。JR猪苗代駅から車で約10分。",
     region: region("r654"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券 大人500円（1日）",
@@ -616,7 +616,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
   {
     id: "fw-273", name: "桧原湖", slug: "hibarako-wakasagi-add",
     description: "裏磐梯の代表的な湖で、冬のワカサギ釣りの聖地として全国的に有名。ドーム船での快適なワカサギ釣りが楽しめ、氷上穴釣りも人気。春から秋はスモールマウスバスやニジマスも狙える。五色沼や磐梯山の観光と合わせた旅行プランが充実。",
-    latitude: 37.7000, longitude: 140.0833, address: "〒966-0401 福島県耶麻郡北塩原村大字桧原",
+    latitude: 37.7000, longitude: 140.0833, address: "〒966-0501 福島県耶麻郡北塩原村大字桧原",
     accessInfo: "磐越自動車道猪苗代磐梯高原ICから約30分。JR猪苗代駅からバスで約40分。",
     region: region("r637"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券 大人700円（1日）",

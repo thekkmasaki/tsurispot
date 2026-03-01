@@ -169,7 +169,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-076", name: "岩木川", slug: "iwakigawa-ayu",
     description: "津軽平野を流れる青森県最大の河川。アユの友釣りで有名で、天然遡上のアユが釣れる貴重な河川。中流域ではヤマメやイワナも狙え、秋にはサケの遡上も見られる。岩木山を背景にした雄大な景色が魅力。",
-    latitude: 40.8133, longitude: 140.4247, address: "〒036-8363 青森県弘前市中別所",
+    latitude: 40.8133, longitude: 140.4247, address: "〒036-8385 青森県弘前市中別所",
     accessInfo: "東北自動車道大鰐弘前ICから約30分。JR弘前駅から車で約20分。",
     region: lr("r702"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日・アユ）",
@@ -197,7 +197,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-077", name: "小川原湖", slug: "ogawarako-bass",
     description: "青森県東部に位置する汽水湖で、面積は全国11位の大きさ。ワカサギ・シラウオの漁獲量日本一を誇り、冬の氷上ワカサギ釣りは風物詩。ブラックバスやヘラブナも生息し、多彩な釣りが楽しめる。",
-    latitude: 40.7292, longitude: 141.2072, address: "〒039-2401 青森県上北郡東北町大字大浦",
+    latitude: 40.7292, longitude: 141.2072, address: "〒039-2402 青森県上北郡東北町大字大浦",
     accessInfo: "第二みちのく有料道路三沢ICから約10分。青い森鉄道上北町駅から車で約10分。",
     region: lr("r703"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "遊漁券 500円（1日）",
@@ -254,7 +254,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-079", name: "閉伊川", slug: "heigawa-ayu",
     description: "岩手県宮古市を流れる太平洋側の清流。天然アユの遡上が豊富で、東北屈指のアユ釣り河川。中流域のヤマメ・イワナの渓流釣りも人気が高い。三陸海岸の観光と合わせて楽しめる。",
-    latitude: 39.5886, longitude: 141.7933, address: "〒028-2104 岩手県宮古市茂市",
+    latitude: 39.5886, longitude: 141.7933, address: "〒028-2101 岩手県宮古市茂市",
     accessInfo: "東北自動車道盛岡南ICから約1時間30分。JR茂市駅から徒歩すぐ。",
     region: lr("r705"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人2,500円（1日・アユ）",
@@ -281,7 +281,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
   {
     id: "fw-080", name: "雄物川", slug: "omonogawa-ayu",
     description: "秋田県南部を流れる一級河川。アユの友釣りとサクラマス釣りで東北屈指の人気河川。中流域は川幅が広く、ダイナミックな友釣りが楽しめる。横手市周辺が特に好ポイント。",
-    latitude: 39.3989, longitude: 140.4347, address: "〒013-0205 秋田県横手市大雄大慈寺",
+    latitude: 39.3989, longitude: 140.4347, address: "〒013-0456 秋田県横手市大雄大慈寺",
     accessInfo: "秋田自動車道横手ICから約15分。JR横手駅から車で約10分。",
     region: lr("r706"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日・アユ）",
