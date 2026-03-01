@@ -946,7 +946,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-038", name: "小松島港（詳細）", slug: "komatsushima-detail",
     description: "徳島県小松島市の小松島港。紀伊水道に面し、潮通しが良い好漁場。秋のタチウオ釣りが特に有名で、多くの釣り人が集まる。サビキでアジ・イワシ、投げ釣りでキスも狙える。阿波おどりの時期は観光と合わせて。",
-    latitude: 33.9912, longitude: 134.5912, address: "岡山県小松島市小松島町",
+    latitude: 34.0048, longitude: 134.5907, address: "〒773-0001 徳島県小松島市小松島町（小松島港）",
     accessInfo: "JR南小松島駅から徒歩約10分。徳島自動車道徳島ICから約20分。",
     region: region("r151"), spotType: "port", difficulty: "beginner",
     isFree: true,

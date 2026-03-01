@@ -193,8 +193,8 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "s3252", name: "伊良湖港", slug: "irago-ko-add3",
     description: "渥美半島先端の港。太平洋と三河湾の潮がぶつかる好漁場で、カサゴ・メバルの根魚やアジ・サバの回遊魚が豊富。",
-    latitude: 34.5790, longitude: 137.0220,
-    address: "〒441-3624 愛知県田原市伊良湖町（伊良湖港）",
+    latitude: 34.5891, longitude: 137.0227,
+    address: "〒441-3624 愛知県田原市伊良湖町宮下（伊良湖港）",
     accessInfo: "豊鉄バス伊良湖岬停留所から徒歩約5分。東名高速豊川ICから国道259号経由で約90分。",
     region: localRegion("r3252"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり（50台）",
@@ -1097,8 +1097,8 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "s3293", name: "入善漁港", slug: "nyuzen-gyoko",
     description: "富山県東端の漁港。黒部川扇状地の湧水が海に注ぎ込む独特の環境。キジハタなど根魚が豊富で、夏のアジサビキ、秋のアオリイカも好調。穴場的スポット。",
-    latitude: 36.9250, longitude: 137.5080,
-    address: "〒939-0622 富山県下新川郡入善町芦崎（芦崎漁港）",
+    latitude: 36.9250, longitude: 137.4270,
+    address: "〒939-0667 富山県下新川郡入善町芦崎（入善漁港）",
     accessInfo: "北陸自動車道入善スマートICから約10分。あいの風とやま鉄道入善駅から車で約10分。",
     region: localRegion("r3412"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内駐車スペースあり",
@@ -2582,7 +2582,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
   {
     id: "fw440", name: "大津港周辺", slug: "otsu-ko-biwako",
     description: "琵琶湖最南端エリアの大津港。ミシガンクルーズの発着港だが、護岸からのバス釣りも楽しめる。都市部で電車アクセスが良く、仕事帰りの短時間釣行にも。",
-    latitude: 35.0050, longitude: 135.8680,
+    latitude: 35.0128, longitude: 135.8686,
     address: "滋賀県大津市浜大津",
     accessInfo: "名神高速大津ICから約10分。京阪びわ湖浜大津駅から徒歩約5分。",
     region: localRegion("r3319"), spotType: "river", difficulty: "beginner",

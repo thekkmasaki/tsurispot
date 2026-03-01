@@ -383,8 +383,8 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3387", name: "波子海水浴場", slug: "hashiko-beach-shimane",
     description: "江津市の波子海水浴場は遠浅の砂浜が続くキスの好ポイント。アクアス水族館の近くにあり、家族連れに人気。投げ釣りで良型のキスやカレイが期待できる。",
-    latitude: 35.0230, longitude: 132.2080,
-    address: "〒699-3161 島根県江津市波子町（波子漁港）",
+    latitude: 34.9646, longitude: 132.1455,
+    address: "〒699-3161 島根県江津市波子町（波子海水浴場）",
     accessInfo: "JR山陰本線波子駅から徒歩約10分。浜田自動車道浜田ICから約15分。",
     region: localRegion("r3003"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海水浴場駐車場あり（無料・50台）",
@@ -404,8 +404,8 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3388", name: "益田港", slug: "masuda-port-shimane",
     description: "島根県最西部の益田港はアジやサバの回遊が豊富。堤防からのサビキ釣りで初心者でも楽しめる。秋のアオリイカやヤリイカも好実績のポイント。",
-    latitude: 34.6810, longitude: 131.8370,
-    address: "〒698-0041 島根県益田市高津町（高津川河口）",
+    latitude: 34.6998, longitude: 131.8196,
+    address: "〒698-0041 島根県益田市高津町（益田港）",
     accessInfo: "JR山陰本線益田駅から車で約10分。浜田自動車道旭ICから約50分。",
     region: localRegion("r3003"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内に無料駐車スペースあり（30台）",
@@ -448,7 +448,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3390", name: "三隅港", slug: "misumi-port-shimane",
     description: "浜田市三隅町の三隅港は日本海に面した中規模漁港。堤防の外側ではショアジギングでハマチが狙え、内側ではサビキ釣りでアジが安定して釣れる。",
-    latitude: 34.9320, longitude: 132.0190,
+    latitude: 34.7855, longitude: 131.9280,
     address: "〒699-3225 島根県浜田市三隅町向野田（三隅港）",
     accessInfo: "JR山陰本線三保三隅駅から車で約5分。浜田自動車道浜田ICから約20分。",
     region: localRegion("r3003"), spotType: "port", difficulty: "beginner",
@@ -604,8 +604,8 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3397", name: "西宝伝漁港", slug: "nishi-hoden-port",
     description: "岡山市東区の西宝伝漁港は犬島行きフェリー乗り場がある漁港。チヌやメバルの好ポイントで、堤防の先端からはマダイも狙える。瀬戸内の穏やかな海で釣りが楽しめる。",
-    latitude: 34.6590, longitude: 134.0830,
-    address: "〒704-8154 岡山県岡山市東区西大寺浜（吉井川河口）",
+    latitude: 34.5860, longitude: 134.1007,
+    address: "〒704-8153 岡山県岡山市東区宝伝（西宝伝漁港）",
     accessInfo: "JR赤穂線西大寺駅から車で約20分。山陽自動車道山陽ICから約30分。",
     region: localRegion("r3005"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "フェリー乗り場駐車場あり（無料・30台）",
@@ -2102,8 +2102,8 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3464", name: "太良町竹崎港", slug: "tara-takezaki-port",
     description: "太良町の竹崎港は有明海に面した漁港。干満差日本一の有明海ならではの干潟釣りが楽しめる。竹崎カニや竹崎カキの産地で、グルメも充実。",
-    latitude: 33.0150, longitude: 130.1800,
-    address: "〒849-1613 佐賀県藤津郡太良町大字大浦（竹崎港）",
+    latitude: 32.9539, longitude: 130.2202,
+    address: "〒849-1602 佐賀県藤津郡太良町竹崎（竹崎漁港）",
     accessInfo: "JR長崎本線多良駅から車で約10分。長崎自動車道武雄北方ICから約40分。",
     region: localRegion("r3020"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車スペースあり（15台）",

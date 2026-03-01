@@ -116,7 +116,7 @@ export const shikokuSpots: FishingSpot[] = [
   {
     id: "s463", name: "坂出港番の州", slug: "sakaide-bannosu",
     description: "瀬戸大橋のたもとに位置する埋立地の釣りスポット。広い護岸でサビキ釣りやタチウオの夜釣りが人気。瀬戸大橋の絶景ポイント。",
-    latitude: 34.3060, longitude: 133.8350,
+    latitude: 34.3254, longitude: 133.8323,
     address: "〒762-0063 香川県坂出市番の州公園6-6",
     accessInfo: "JR坂出駅から車で約10分。瀬戸中央自動車道坂出ICから約5分。",
     region: localRegion("r150"), spotType: "pier", difficulty: "beginner",

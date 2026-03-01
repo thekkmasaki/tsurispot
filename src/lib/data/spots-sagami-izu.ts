@@ -519,7 +519,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si14", name: "稲取港", slug: "inatori-port",
     description: "東伊豆最大級の漁港。金目鯛の水揚げで全国的に有名。堤防からはサビキでアジ、カゴ釣りでマダイ、エギングでアオリイカと多彩な釣りが楽しめる。",
-    latitude: 34.811200, longitude: 139.05670, address: "〒413-0411 静岡県賀茂郡東伊豆町稲取355",
+    latitude: 34.7725, longitude: 139.0419, address: "〒413-0411 静岡県賀茂郡東伊豆町稲取355",
     accessInfo: "伊豆急行伊豆稲取駅から徒歩約15分。",
     region: region("r9"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に有料駐車場あり",

@@ -359,7 +359,7 @@ export const tohokuSpots: FishingSpot[] = [
   {
     id: "s433", name: "能代港", slug: "noshiro-port",
     description: "米代川河口に位置する能代港。シーバスの聖地として知られ、秋のハタハタ接岸時期は特に賑わう。河口ならではの多彩な魚種が魅力。",
-    latitude: 40.2130, longitude: 140.0210,
+    latitude: 40.2101, longitude: 139.9914,
     address: "〒016-0807 秋田県能代市大森山（能代港）",
     accessInfo: "JR五能線能代駅から車で約10分。秋田自動車道能代東ICから約15分。",
     region: localRegion("r141"), spotType: "port", difficulty: "intermediate",

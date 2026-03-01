@@ -1090,7 +1090,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2543", name: "御前崎港", slug: "omaezaki-ko",
     description: "遠州灘と駿河湾の境界に位置する御前崎港。潮通し抜群で回遊魚の実績が高い。ショアジギングでブリ・カンパチ、投げ釣りでキス、サビキでアジが狙える。",
-    latitude: 34.5980, longitude: 138.2280, address: "〒437-1621 静岡県御前崎市御前崎（御前崎港）",
+    latitude: 34.6179, longitude: 138.2203, address: "〒437-1621 静岡県御前崎市御前崎（御前崎港）",
     accessInfo: "東名高速相良牧之原ICから約30分。JR菊川駅から車で約30分。",
     region: localRegion("r2511"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",

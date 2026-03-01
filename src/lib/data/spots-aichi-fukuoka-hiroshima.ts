@@ -137,8 +137,8 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
   {
     id: "s1023", name: "一色漁港堤防", slug: "isshiki-gyoko-teibo",
     description: "西尾市の一色漁港は三河湾に面した大規模漁港。ウナギの養殖でも有名な一色だが、堤防からのサビキ釣りやクロダイのヘチ釣りも盛ん。矢作川河口に近く汽水域の影響でシーバスの実績も高い人気ポイント。",
-    latitude: 34.8080, longitude: 137.0420,
-    address: "〒444-0416 愛知県西尾市一色町佐久島（佐久島漁港）",
+    latitude: 34.7951, longitude: 137.0141,
+    address: "〒444-0424 愛知県西尾市一色町小薮船江東（一色漁港）",
     accessInfo: "名鉄西尾線西尾駅から車で約20分。岡崎ICから国道23号経由で約40分。",
     region: lr("r902"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港内に無料駐車スペース（30台）",
@@ -167,7 +167,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
   {
     id: "s1024", name: "東幡豆港堤防", slug: "higashihazu-ko-teibo",
     description: "西尾市幡豆地区の小さな漁港。三河湾に面し前島・沖島を望むロケーションで、アオリイカやメバルが狙える穴場スポット。潮通しの良い堤防先端では秋にイナダの回遊も見られ、地元アングラーに愛される釣り場。",
-    latitude: 34.7840, longitude: 137.1120,
+    latitude: 34.7877, longitude: 137.1363,
     address: "〒444-0704 愛知県西尾市東幡豆町小見行田（東幡豆港）",
     accessInfo: "名鉄蒲郡線東幡豆駅から徒歩約10分。音羽蒲郡ICから約30分。",
     region: lr("r902"), spotType: "breakwater", difficulty: "intermediate",

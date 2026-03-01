@@ -313,8 +313,8 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3134", name: "涸沼", slug: "hinuma",
     description: "茨城県中部に位置する汽水湖。シーバスの聖地として全国的に有名で、ランカーサイズのシーバスが多数釣れる。夏から秋にかけてのハゼ釣りも好調で、天然うなぎが釣れることも。",
-    latitude: 36.3200, longitude: 140.4500,
-    address: "〒311-3100 茨城県東茨城郡茨城町",
+    latitude: 36.2844, longitude: 140.4990,
+    address: "〒311-3116 茨城県東茨城郡茨城町下石崎",
     accessInfo: "JR常磐線水戸駅から車で約20分。北関東自動車道水戸南ICから約15分。",
     region: localRegion("r3103"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "湖畔に複数の無料駐車場あり",
@@ -377,8 +377,8 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3137", name: "鹿島灘サーフ", slug: "kashimanada-surf",
     description: "鹿島灘に面した広大なサーフエリア。ヒラメ・マゴチのサーフフィッシングのメッカとして知られ、シーズンには全国からアングラーが集まる。キスの投げ釣りも楽しめる。",
-    latitude: 35.9600, longitude: 140.7000,
-    address: "〒311-2221 茨城県鹿嶋市荒野",
+    latitude: 35.9890, longitude: 140.6732,
+    address: "〒311-1513 茨城県鉾田市安房",
     accessInfo: "JR鹿島線鹿島神宮駅から車で約20分。東関東自動車道潮来ICから約35分。",
     region: localRegion("r3102"), spotType: "beach", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "海岸沿いに無料駐車場あり",
@@ -773,8 +773,8 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3155", name: "千倉港", slug: "chikura-kou",
     description: "南房総の漁港。堤防からアジ・サバのサビキ釣りが楽しめ、外洋側ではメジナやクロダイのウキフカセ釣りが人気。近くの千倉海岸ではキスの投げ釣りも好調。",
-    latitude: 34.9500, longitude: 139.9500,
-    address: "〒295-0004 千葉県南房総市千倉町",
+    latitude: 34.9540, longitude: 139.9580,
+    address: "〒295-0004 千葉県南房総市千倉町千倉",
     accessInfo: "JR内房線千倉駅から車で約5分。富津館山道路富浦ICから約20分。",
     region: localRegion("r3111"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
@@ -950,8 +950,8 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3163", name: "羽田空港周辺護岸", slug: "haneda-airport-gogan",
     description: "羽田空港近くの多摩川河口域。シーバスのルアーフィッシングで全国的に有名なポイントで、ランカーサイズの実績が多い。ウェーディングでの釣りが主流だが、護岸からも楽しめる。",
-    latitude: 35.5500, longitude: 139.7700,
-    address: "〒144-0041 東京都大田区羽田空港",
+    latitude: 35.5496, longitude: 139.7812,
+    address: "〒144-0041 東京都大田区羽田空港3丁目",
     accessInfo: "京急空港線天空橋駅から徒歩約10分。首都高速1号羽田線空港西ICから約5分。",
     region: localRegion("r3120"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場利用",
@@ -992,7 +992,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3165", name: "砂町運河", slug: "sunamachi-unga",
     description: "江東区の都市型運河。ハゼ釣りの穴場として知られ、秋のシーズンには護岸からちょい投げで入れ食いになることも。シーバスの夜釣りも実績が高い。駅から歩ける手軽さが魅力。",
-    latitude: 35.6500, longitude: 139.8400,
+    latitude: 35.6585, longitude: 139.8345,
     address: "〒136-0074 東京都江東区東砂",
     accessInfo: "東京メトロ東西線南砂町駅から徒歩約10分。首都高速9号深川線木場ICから約10分。",
     region: localRegion("r3121"), spotType: "pier", difficulty: "beginner",
@@ -1032,7 +1032,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3167", name: "荒川河口（荒川ロックゲート周辺）", slug: "arakawa-kakou-lockgate",
     description: "荒川と旧中川の合流点にあるロックゲート周辺。流れが複雑でシーバスの好ポイントとして知られる。ハゼ釣りも好調で、護岸からの釣りが楽しめるアクセス抜群のスポット。",
-    latitude: 35.6700, longitude: 139.8500,
+    latitude: 35.6831, longitude: 139.8474,
     address: "〒132-0034 東京都江戸川区小松川1丁目",
     accessInfo: "都営新宿線東大島駅から徒歩約10分。首都高速7号小松川線錦糸町ICから約10分。",
     region: localRegion("r3121"), spotType: "river", difficulty: "beginner",
@@ -1470,8 +1470,8 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3187", name: "大黒海づり施設", slug: "daikoku-umizuri",
     description: "横浜市の公設海釣り施設。ベイブリッジを望む護岸から安全に釣りが楽しめる。サビキ釣りでアジ・イワシ、投げ釣りでカレイが人気。レンタルタックル完備でファミリーに最適。",
-    latitude: 35.4600, longitude: 139.6700,
-    address: "〒230-0054 神奈川県横浜市鶴見区大黒ふ頭20",
+    latitude: 35.4501, longitude: 139.6954,
+    address: "〒230-0054 神奈川県横浜市鶴見区大黒ふ頭20番地先",
     accessInfo: "JR鶴見駅からバスで約20分「大黒海づり公園」下車。首都高速湾岸線大黒ふ頭ICから約3分。",
     region: localRegion("r3133"), spotType: "pier", difficulty: "beginner",
     isFree: false, hasParking: true, parkingDetail: "有料駐車場あり（500円/回）",
@@ -1893,7 +1893,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "fw417", name: "犀川（安曇野地区）", slug: "saigawa-azumino",
     description: "北アルプスの雪解け水を集める犀川。大型ニジマスやブラウントラウトの実績が高く、ルアー・フライフィッシングの聖地。特に明科地区は放流量も多く人気が高い。",
-    latitude: 36.3500, longitude: 137.9000,
+    latitude: 36.3445, longitude: 137.9285,
     address: "〒399-7102 長野県安曇野市明科中川手",
     accessInfo: "JR篠ノ井線明科駅から車で約5分。長野自動車道安曇野ICから約15分。",
     region: localRegion("r3172"), spotType: "river", difficulty: "intermediate",
@@ -2157,7 +2157,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "fw430", name: "桂川（都留地区）", slug: "katsuragawa-tsuru",
     description: "都留市を流れる桂川。ヤマメ・ニジマスの渓流釣りとアユの友釣りが楽しめる。都心から比較的近く、日帰りで渓流釣りが可能。管理釣り場も周辺に多く初心者にも対応。",
-    latitude: 35.5500, longitude: 138.9000,
+    latitude: 35.5470, longitude: 138.9055,
     address: "〒402-0053 山梨県都留市上谷",
     accessInfo: "富士急行都留市駅から徒歩約10分。中央自動車道都留ICから約5分。",
     region: localRegion("r3181"), spotType: "river", difficulty: "intermediate",
@@ -2198,7 +2198,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "fw432", name: "道志川", slug: "doshigawa",
     description: "山梨県東部を流れる清流。ヤマメ・イワナの渓流釣りの名川で、自然度が高く魚影が濃い。道志温泉やキャンプ場が多く、アウトドアと合わせた釣行が人気。",
-    latitude: 35.5000, longitude: 139.0500,
+    latitude: 35.5195, longitude: 139.0420,
     address: "〒402-0209 山梨県南都留郡道志村",
     accessInfo: "JR中央本線大月駅から車で約40分。中央自動車道相模湖ICから約30分。",
     region: localRegion("r3181"), spotType: "river", difficulty: "intermediate",

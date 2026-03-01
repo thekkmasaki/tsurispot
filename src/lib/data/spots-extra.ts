@@ -1646,7 +1646,7 @@ export const extraSpots: FishingSpot[] = [
   },{
     id: "s289", name: "渥美半島伊良湖港", slug: "atsumi-irago-port",
     description: "渥美半島先端の港。潮通し抜群で回遊魚が多い。ショアジギングでイナダ、エギングでアオリイカが人気。",
-    latitude: 34.578900, longitude: 137.021700,
+    latitude: 34.5865, longitude: 137.0215,
     address: "愛知県田原市伊良湖町",
     accessInfo: "豊橋鉄道三河田原駅から車で約40分。東名高速豊川ICから約1時間30分。",
     region: localRegion("r91"), spotType: "port", difficulty: "intermediate",
@@ -1915,7 +1915,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s301", name: "堺浜海釣りテラス", slug: "sakai-hama-fishing",
     description: "堺市の海沿いに整備された釣りテラス。柵付きで安全にサビキ釣りが楽しめる。シーバスやタチウオも人気。",
-    latitude: 34.558900, longitude: 135.431200,
+    latitude: 34.6048, longitude: 135.4248,
     address: "大阪府堺市堺区匠町",
     accessInfo: "南海本線堺駅からバスで約20分。阪神高速湾岸線堺ICから約5分。",
     region: localRegion("r96"), spotType: "pier", difficulty: "beginner",
@@ -1990,7 +1990,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s304", name: "天橋立文殊堤防", slug: "amanohashidate-breakwater",
     description: "日本三景・天橋立近くの堤防。キスやアジのサビキ釣りが楽しめる。観光と釣りの両立が可能な贅沢スポット。",
-    latitude: 35.561700, longitude: 135.191200,
+    latitude: 35.5699, longitude: 135.1926,
     address: "京都府宮津市文珠",
     accessInfo: "京都丹後鉄道天橋立駅から徒歩約10分。京都縦貫自動車道宮津天橋立ICから約10分。",
     region: localRegion("r98"), spotType: "breakwater", difficulty: "beginner",
@@ -2095,8 +2095,8 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s308", name: "白浜漁港", slug: "shirahama-gyoko-wakayama",
     description: "南紀白浜の漁港。温泉リゾートの近くでアジやイカが楽しめる。観光・温泉・釣りのトリプルが実現する贅沢スポット。",
-    latitude: 33.6800, longitude: 135.3400,
-    address: "和歌山県西牟婁郡白浜町",
+    latitude: 33.6920, longitude: 135.3480,
+    address: "和歌山県西牟婁郡白浜町堅田",
     accessInfo: "JR白浜駅からバスで約15分。紀勢自動車道南紀白浜ICから約10分。",
     region: localRegion("r100"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "無料駐車場あり（15台）",
@@ -2169,7 +2169,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s311", name: "明石大蔵海岸", slug: "akashi-okura-coast",
     description: "明石海峡大橋を望む海岸。投げ釣りでキスやカレイ、サビキ釣りでアジが好調。バーベキュー施設も併設。",
-    latitude: 34.641200, longitude: 134.981700,
+    latitude: 34.6421, longitude: 135.0154,
     address: "兵庫県明石市大蔵海岸通1丁目",
     accessInfo: "JR朝霧駅から徒歩約5分。第二神明道路大蔵谷ICから約5分。",
     region: region("r25"), spotType: "beach", difficulty: "beginner",
@@ -2219,7 +2219,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s313", name: "和歌山マリーナシティ大波止", slug: "wakayama-marina-ohanato",
     description: "和歌山マリーナシティの大波止。有料釣り場と無料の外側が選べる。タチウオ、アジ、青物と魚種豊富な人気スポット。",
-    latitude: 34.168900, longitude: 135.151200,
+    latitude: 34.1551, longitude: 135.1737,
     address: "和歌山県和歌山市毛見",
     accessInfo: "JR海南駅からバスで約10分。阪和自動車道海南ICから約10分。",
     region: localRegion("r49"), spotType: "breakwater", difficulty: "beginner",
@@ -2244,7 +2244,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s314", name: "加太大波止", slug: "kada-ohanato",
     description: "友ヶ島を望む加太の大波止。マダイやアジが好調で春の乗っ込みシーズンは特に人気。めでたい電車でのアクセスも楽しい。",
-    latitude: 34.281200, longitude: 135.061700,
+    latitude: 34.2760, longitude: 135.0711,
     address: "和歌山県和歌山市加太",
     accessInfo: "南海加太線加太駅から徒歩約15分。阪和自動車道和歌山ICから約30分。",
     region: localRegion("r49"), spotType: "breakwater", difficulty: "intermediate",
@@ -2270,8 +2270,8 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s316", name: "泉佐野食品コンビナート", slug: "izumisano-combinat",
     description: "泉佐野市の岸壁。タチウオとアジの好ポイントで、秋の夜は釣り人で大賑わい。関空も近い。",
-    latitude: 34.4100, longitude: 135.3200,
-    address: "大阪府泉佐野市住吉町",
+    latitude: 34.4312, longitude: 135.3219,
+    address: "大阪府泉佐野市住吉町9-6",
     accessInfo: "南海本線泉佐野駅から車で約10分。阪和自動車道上之郷ICから約10分。",
     region: localRegion("r95"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "無料駐車場あり（30台）",
@@ -2298,7 +2298,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s317", name: "賀露港", slug: "karo-port",
     description: "鳥取市の主要漁港。カニで有名だが、サビキ釣りでアジやイワシも好調。隣接するかにっこ館や海鮮市場も人気。",
-    latitude: 35.531700, longitude: 134.191700,
+    latitude: 35.5410, longitude: 134.1985,
     address: "鳥取県鳥取市賀露町西3丁目",
     accessInfo: "JR鳥取駅から車で約15分。鳥取自動車道鳥取ICから約20分。",
     region: localRegion("r103"), spotType: "port", difficulty: "beginner",
@@ -2323,7 +2323,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s318", name: "大社漁港", slug: "taisha-port",
     description: "出雲大社に近い漁港。日本海に面し、アジやヒラマサの実績がある。出雲観光と釣りが同時に楽しめる。",
-    latitude: 35.4000, longitude: 132.6800,
+    latitude: 35.4018, longitude: 132.6773,
     address: "島根県出雲市大社町杵築北",
     accessInfo: "一畑電車出雲大社前駅から車で約10分。山陰自動車道出雲ICから約20分。",
     region: localRegion("r104"), spotType: "port", difficulty: "intermediate",
@@ -2348,7 +2348,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s319", name: "浜田港", slug: "hamada-port",
     description: "島根県西部の主要漁港。のどぐろ（アカムツ）の水揚げで有名。アジやヒラマサ、アオリイカが好調。",
-    latitude: 34.891700, longitude: 132.081200,
+    latitude: 34.8869, longitude: 132.0496,
     address: "島根県浜田市原井町",
     accessInfo: "JR浜田駅から車で約10分。浜田自動車道浜田ICから約10分。",
     region: localRegion("r105"), spotType: "port", difficulty: "intermediate",
@@ -2373,7 +2373,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s320", name: "牛窓港", slug: "ushimado-port",
     description: "日本のエーゲ海と呼ばれる牛窓の港。穏やかな瀬戸内海でカレイやメバル、チヌが狙える。オリーブ園も有名。",
-    latitude: 34.611700, longitude: 134.161200,
+    latitude: 34.6156, longitude: 134.1586,
     address: "岡山県瀬戸内市牛窓町牛窓",
     accessInfo: "JR邑久駅から車で約15分。山陽自動車道備前ICから約25分。",
     region: localRegion("r106"), spotType: "port", difficulty: "beginner",
@@ -2397,7 +2397,7 @@ export const extraSpots: FishingSpot[] = [
   },{
     id: "s322", name: "呉港", slug: "kure-port",
     description: "海上自衛隊の基地がある呉の港。アジやメバルが好調で、大和ミュージアム観光と合わせて楽しめる。",
-    latitude: 34.238900, longitude: 132.56171200,
+    latitude: 34.2427, longitude: 132.5617,
     address: "広島県呉市中央4丁目",
     accessInfo: "JR呉駅から徒歩約10分。広島呉道路呉ICから約10分。",
     region: localRegion("r108"), spotType: "port", difficulty: "beginner",
@@ -2422,7 +2422,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s323", name: "竹原港", slug: "takehara-port",
     description: "安芸の小京都・竹原の港。穏やかな瀬戸内海でメバルやカサゴが狙える。大久野島（うさぎ島）への船も出る。",
-    latitude: 34.3400, longitude: 132.9200,
+    latitude: 34.3396, longitude: 132.9153,
     address: "広島県竹原市港町4丁目",
     accessInfo: "JR竹原駅から徒歩約15分。山陽自動車道河内ICから約30分。",
     region: localRegion("r109"), spotType: "port", difficulty: "beginner",
@@ -2446,7 +2446,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s324", name: "萩港", slug: "hagi-port",
     description: "幕末の志士を輩出した萩の港。日本海に面し、アジやアオリイカが好調。城下町観光も楽しめる。",
-    latitude: 34.4100, longitude: 131.3900,
+    latitude: 34.4193, longitude: 131.4032,
     address: "山口県萩市東浜崎町",
     accessInfo: "JR萩駅から車で約10分。中国自動車道美祢東JCTから約40分。",
     region: localRegion("r110"), spotType: "port", difficulty: "beginner",
@@ -2467,7 +2467,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s325", name: "周防大島沖家室港", slug: "suo-oshima-okamuro",
     description: "瀬戸内海の周防大島にある小さな漁港。メバルやカサゴなど根魚の宝庫。穴場的存在で釣り人も少なく穏やか。",
-    latitude: 33.8800, longitude: 132.2400,
+    latitude: 33.8850, longitude: 132.2470,
     address: "山口県大島郡周防大島町沖家室島",
     accessInfo: "JR大畠駅から車で約40分。山陽自動車道玖珂ICから約40分。",
     region: localRegion("r111"), spotType: "port", difficulty: "intermediate",
@@ -2567,7 +2567,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s330", name: "坂出港", slug: "sakaide-port",
     description: "瀬戸大橋の四国側の港。穏やかな瀬戸内海でカレイやメバルが狙える。うどん巡りと釣りの両立が可能。",
-    latitude: 34.318900, longitude: 133.861200,
+    latitude: 34.3314, longitude: 133.8503,
     address: "香川県坂出市入船町1丁目",
     accessInfo: "JR坂出駅から車で約10分。瀬戸中央自動車道坂出ICから約10分。",
     region: localRegion("r113"), spotType: "port", difficulty: "beginner",
@@ -2592,7 +2592,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s331", name: "宇和島港", slug: "uwajima-port",
     description: "愛媛県南部の港。真珠養殖やタイ養殖で有名。天然のマダイやアジが狙え、宇和島鯛めしも絶品。",
-    latitude: 33.221700, longitude: 132.5600,
+    latitude: 33.2329, longitude: 132.5506,
     address: "愛媛県宇和島市築地町1丁目",
     accessInfo: "JR宇和島駅から徒歩約10分。松山自動車道宇和島朝日ICから約10分。",
     region: localRegion("r114"), spotType: "port", difficulty: "intermediate",
@@ -2617,7 +2617,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s332", name: "八幡浜港", slug: "yawatahama-port",
     description: "愛媛県西部のみかんと魚の街。アジやタチウオが好調で、別府へのフェリーも出る交通の要衝。",
-    latitude: 33.461700, longitude: 132.421700,
+    latitude: 33.4565, longitude: 132.4066,
     address: "愛媛県八幡浜市沖新田",
     accessInfo: "JR八幡浜駅から車で約5分。松山自動車道大洲ICから約30分。",
     region: localRegion("r115"), spotType: "port", difficulty: "beginner",
@@ -2637,7 +2637,7 @@ export const extraSpots: FishingSpot[] = [
   },{
     id: "s334", name: "須崎港", slug: "susaki-port",
     description: "高知県中部の港。鍋焼きラーメンで有名な街。アジやカマスが好調で、穏やかな湾内で初心者にもおすすめ。",
-    latitude: 33.391700, longitude: 133.291200,
+    latitude: 33.3598, longitude: 133.2692,
     address: "高知県須崎市浜町1丁目",
     accessInfo: "JR須崎駅から徒歩約10分。高知自動車道須崎東ICから約10分。",
     region: localRegion("r116"), spotType: "port", difficulty: "beginner",
@@ -2661,8 +2661,8 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s335", name: "安芸港", slug: "aki-port",
     description: "高知県東部の港。野良時計や岩崎弥太郎の生家で有名。アジやカマスが通年好調な穴場スポット。",
-    latitude: 33.5000, longitude: 133.9000,
-    address: "高知県安芸市本町",
+    latitude: 33.5032, longitude: 133.9068,
+    address: "高知県安芸市港町",
     accessInfo: "土佐くろしお鉄道安芸駅から車で約5分。高知東部自動車道安芸ICから約5分。",
     region: localRegion("r117"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "無料駐車場あり（10台）",
@@ -2710,7 +2710,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s340", name: "香川県直島港", slug: "naoshima-port",
     description: "現代アートの島・直島の港。穏やかな瀬戸内海でメバルやカサゴが狙える。アート観光と釣りの両立が可能。",
-    latitude: 34.4600, longitude: 134.0000,
+    latitude: 34.4540, longitude: 133.9950,
     address: "香川県香川郡直島町宮浦",
     accessInfo: "高松港からフェリーで約1時間。宇野港からフェリーで約20分。",
     region: region("r30"), spotType: "port", difficulty: "beginner",
@@ -2784,7 +2784,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s343", name: "志賀島漁港", slug: "shikanoshima-port",
     description: "福岡市の志賀島にある漁港。金印が発見された島で、アジやイカが好調。海の中道を通ってドライブでアクセス。",
-    latitude: 33.6800, longitude: 130.3400,
+    latitude: 33.6747, longitude: 130.3350,
     address: "福岡県福岡市東区志賀島",
     accessInfo: "JR香椎駅からバスで約30分。海の中道経由で車約30分。",
     region: region("r15"), spotType: "port", difficulty: "beginner",
@@ -2808,7 +2808,7 @@ export const extraSpots: FishingSpot[] = [
   },{
     id: "s345", name: "対馬厳原港", slug: "tsushima-izuhara-port",
     description: "対馬の中心港。韓国にも近い国境の島で、大型のクロダイやマダイが期待できる。釣り遠征に人気。",
-    latitude: 34.2000, longitude: 129.2900,
+    latitude: 34.2045, longitude: 129.2875,
     address: "長崎県対馬市厳原町東里",
     accessInfo: "対馬空港から車で約15分。博多港からフェリーで約4時間30分。",
     region: localRegion("r120"), spotType: "port", difficulty: "intermediate",
@@ -2829,7 +2829,7 @@ export const extraSpots: FishingSpot[] = [
   },{
     id: "s348", name: "水俣港", slug: "minamata-port",
     description: "不知火海に面した水俣の港。穏やかな海でアジやチヌが狙える。環境学習とも組み合わせられるスポット。",
-    latitude: 32.211200, longitude: 130.411700,
+    latitude: 32.1988, longitude: 130.3719,
     address: "熊本県水俣市月浦",
     accessInfo: "JR水俣駅から車で約10分。南九州西回り自動車道水俣ICから約10分。",
     region: localRegion("r122"), spotType: "port", difficulty: "beginner",
@@ -2854,7 +2854,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s349", name: "佐伯港", slug: "saiki-port",
     description: "大分県南部の港。リアス式海岸で魚種が豊富。アジやブリの回遊があり、寿司の街としても有名。",
-    latitude: 32.961200, longitude: 131.9017000,
+    latitude: 32.9612, longitude: 131.9017,
     address: "大分県佐伯市鶴岡西町2丁目",
     accessInfo: "JR佐伯駅から車で約10分。東九州自動車道佐伯ICから約10分。",
     region: localRegion("r123"), spotType: "port", difficulty: "intermediate",
@@ -2875,7 +2875,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s350", name: "臼杵港", slug: "usuki-port",
     description: "大分県臼杵市の港。臼杵石仏で有名な歴史の街。穏やかな臼杵湾でアジやメバルが好調。",
-    latitude: 33.131200, longitude: 131.8017000,
+    latitude: 33.1312, longitude: 131.8017,
     address: "大分県臼杵市大字臼杵",
     accessInfo: "JR臼杵駅から徒歩約15分。東九州自動車道臼杵ICから約10分。",
     region: localRegion("r124"), spotType: "port", difficulty: "beginner",
@@ -2899,7 +2899,7 @@ export const extraSpots: FishingSpot[] = [
   },{
     id: "s352", name: "青島港", slug: "aoshima-port",
     description: "宮崎市南部の青島近くの港。亜熱帯植物に囲まれたトロピカルな雰囲気。アジやカマスが通年好調。",
-    latitude: 31.8017000, longitude: 131.471200,
+    latitude: 31.8017, longitude: 131.4712,
     address: "宮崎県宮崎市青島",
     accessInfo: "JR青島駅から徒歩約10分。宮崎自動車道宮崎ICから約20分。",
     region: localRegion("r126"), spotType: "port", difficulty: "beginner",
@@ -2969,7 +2969,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s355", name: "唐津東港", slug: "karatsu-higashi-port",
     description: "唐津城を望む東港。呼子にも近く、アジやイカが好調。唐津くんちの祭りでも有名な城下町。",
-    latitude: 33.451200, longitude: 129.971200,
+    latitude: 33.4538, longitude: 129.9874,
     address: "佐賀県唐津市東城内",
     accessInfo: "JR唐津駅から徒歩約15分。長崎自動車道多久ICから約40分。",
     region: region("r41"), spotType: "port", difficulty: "beginner",
@@ -3110,7 +3110,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s364", name: "糸満漁港", slug: "itoman-port",
     description: "沖縄本島最南端の漁港。ウミンチュ（漁師）の街で、セリの見学もできる。タマンやガーラの実績が高い。",
-    latitude: 26.121700, longitude: 127.658900,
+    latitude: 26.1268, longitude: 127.6600,
     address: "沖縄県糸満市西崎1丁目",
     accessInfo: "那覇空港から車で約20分。",
     region: region("r17"), spotType: "port", difficulty: "intermediate",

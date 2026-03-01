@@ -624,7 +624,7 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
   {
     id: "scs023", name: "福田港", slug: "fukude-port",
     description: "磐田市の太田川河口に位置する漁港。しらす漁と桜えび漁で知られる港で、遠州灘に面した堤防からはキスの投げ釣りやルアーでヒラメ・マゴチが狙える。河口部ではシーバスやクロダイの実績も高い。周辺にはサーフポイントも多く、広範囲を攻められる。",
-    latitude: 34.6540, longitude: 137.8478,
+    latitude: 34.6665, longitude: 137.9078,
     address: "〒437-1202 静岡県磐田市豊浜4127-21",
     accessInfo: "JR磐田駅から車で約20分。東名高速磐田ICから約15分。",
     region: lr("r1060"), spotType: "port", difficulty: "intermediate",
@@ -952,7 +952,7 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
   {
     id: "scs037", name: "伊東港白灯堤防", slug: "ito-port-hakuto-teibo",
     description: "伊東港の東側に延びる白灯台のある大堤防。サビキでアジ・サバ・イワシが年間を通じて安定して釣れる伊東を代表する釣りポイント。夜のアジングやメバリングも好調で、カゴ釣りでのマダイ実績も高い。温泉街からのアクセスも良く、旅行中の釣りにも最適。",
-    latitude: 34.9575, longitude: 139.1055,
+    latitude: 34.9715, longitude: 139.1029,
     address: "〒414-0002 静岡県伊東市湯川571-19",
     accessInfo: "JR伊東駅から徒歩約15分。小田原厚木道路経由で伊豆縦貫道約60分。",
     region: lr("r1065"), spotType: "breakwater", difficulty: "beginner",

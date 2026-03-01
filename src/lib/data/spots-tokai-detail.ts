@@ -196,7 +196,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
   {
     id: "s705", name: "大井川港堤防", slug: "oigawa-ko-teibo",
     description: "大井川河口に隣接した港。河川と海が交わる汽水域でクロダイやシーバスが狙え、秋のハゼ釣りも人気。大型テトラが並ぶ外堤ではアオリイカも釣れる。初心者から上級者まで楽しめる多彩なスポット。",
-    latitude: 34.7990, longitude: 138.2870,
+    latitude: 34.7848, longitude: 138.2920,
     address: "〒425-0033 静岡県焼津市小川新堤外（大井川港）",
     accessInfo: "JR島田駅からバスで約25分。東名高速相良牧之原ICから約20分。",
     region: lr("r821"), spotType: "port", difficulty: "beginner",
@@ -223,7 +223,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
   {
     id: "s706", name: "御前崎港堤防", slug: "omaezaki-ko-teibo",
     description: "静岡県最南端・御前崎に位置する漁港。外洋に面した環境でイシダイや大型クロダイが狙える中上級者向けのポイント。春から秋にかけてのショアジギングでは青物の回遊も多く、遠征釣行の定番スポット。",
-    latitude: 34.5970, longitude: 138.2140,
+    latitude: 34.6141, longitude: 138.2148,
     address: "〒437-1621 静岡県御前崎市御前崎（御前崎港）",
     accessInfo: "東名高速相良牧之原ICから約30分。御前崎灯台から徒歩約10分。",
     region: lr("r822"), spotType: "breakwater", difficulty: "intermediate",
@@ -295,7 +295,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
   {
     id: "s709", name: "稲取港堤防", slug: "inatori-ko-teibo",
     description: "東伊豆の風光明媚な漁港。黒潮が近く年間を通じて多彩な魚が狙える。春のカツオ・ソウダガツオのショアジギングや、秋のアオリイカエギングが特に人気。港内でのサビキ釣りは初心者にも優しい。",
-    latitude: 34.7390, longitude: 139.0190,
+    latitude: 34.7725, longitude: 139.0419,
     address: "〒413-0411 静岡県賀茂郡東伊豆町稲取（稲取港）",
     accessInfo: "伊豆急行稲取駅から徒歩約10分。国道135号線沿い。",
     region: lr("r823"), spotType: "port", difficulty: "beginner",
@@ -480,7 +480,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
   {
     id: "s717", name: "豊浜釣り桟橋", slug: "toyohama-tsuribashi",
     description: "知多半島の人気No.1釣り施設。沖合200mに伸びる桟橋から水深のある海底を狙え、アジ・サバ・イワシが入れ食いになることも。夜間は太刀魚も狙え、管理された安全な環境で初心者から楽しめる。",
-    latitude: 34.7050, longitude: 136.8560,
+    latitude: 34.7027, longitude: 136.9340,
     address: "〒470-3412 愛知県知多郡南知多町豊浜字大磯40-2",
     accessInfo: "名古屋ICから知多半島道路経由で約60分。最寄りバス停「豊浜」から徒歩約5分。",
     region: region("r10"), spotType: "pier", difficulty: "beginner",
@@ -606,7 +606,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
   {
     id: "s722", name: "武豊緑地護岸", slug: "taketoyo-ryokuchi-gokan",
     description: "衣浦港に面した武豊緑地の護岸。大型の岸壁でファミリー向けサビキ釣りからヘチ釣りまで楽しめる。秋のタチウオシーズンは非常に人気が高く、夜には多くのアングラーが集まる中部圏の定番釣り場。",
-    latitude: 34.8420, longitude: 136.9010,
+    latitude: 34.8554, longitude: 136.9362,
     address: "〒470-2335 愛知県知多郡武豊町緑浜町（武豊緑地）",
     accessInfo: "JR武豊線武豊駅から徒歩約20分。知多半島道路武豊ICから約5分。",
     region: lr("r827"), spotType: "pier", difficulty: "beginner",
@@ -660,7 +660,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
   {
     id: "s724", name: "碧南海釣り公園", slug: "hekinan-umitsuri-park",
     description: "碧南市が運営する管理型釣り公園。広い岸壁と安全柵が整備され、子供連れも安心して楽しめる。アジ・サバのサビキを中心にカレイやシロギスも狙えて、釣り教室も定期開催されるファミリーの聖地。",
-    latitude: 34.8840, longitude: 136.9780,
+    latitude: 34.8498, longitude: 136.9605,
     address: "〒447-0849 愛知県碧南市浜町2丁目4",
     accessInfo: "名鉄三河線碧南駅から徒歩約20分。知多半島道路武豊ICから約15分。",
     region: lr("r827"), spotType: "pier", difficulty: "beginner",

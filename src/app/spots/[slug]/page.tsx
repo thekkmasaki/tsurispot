@@ -140,6 +140,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
   const eventEndYear = currentMonth === 12 ? currentYear + 1 : currentYear;
   const eventEndDate = `${eventEndYear}-${String(nextMonth).padStart(2, "0")}-01`;
 
+  // TouristAttraction（観光地情報。aggregateRatingはGoogleが非対応なので含めない）
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "TouristAttraction",
@@ -161,13 +162,6 @@ export default async function SpotDetailPage({ params }: PageProps) {
     isAccessibleForFree: spot.isFree,
     publicAccess: true,
     ...(spot.mainImageUrl?.startsWith("http") ? { image: spot.mainImageUrl } : {}),
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: spot.rating.toFixed(1),
-      bestRating: "5",
-      worstRating: "1",
-      ratingCount: spot.reviewCount > 0 ? spot.reviewCount : 1,
-    },
     amenityFeature: [
       ...(spot.hasParking ? [{ "@type": "LocationFeatureSpecification", name: "駐車場", value: true }] : []),
       ...(spot.hasToilet ? [{ "@type": "LocationFeatureSpecification", name: "トイレ", value: true }] : []),
@@ -213,6 +207,35 @@ export default async function SpotDetailPage({ params }: PageProps) {
           },
         }
       : {}),
+  };
+
+  // LocalBusiness（Googleが aggregateRating をサポートするタイプ）
+  const localBusinessJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SportsActivityLocation",
+    name: spot.name,
+    description: spot.description,
+    url: `https://tsurispot.com/spots/${spot.slug}`,
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: spot.region.areaName,
+      addressRegion: spot.region.prefecture,
+      addressCountry: "JP",
+      streetAddress: spot.address,
+    },
+    geo: {
+      "@type": "GeoCoordinates",
+      latitude: spot.latitude,
+      longitude: spot.longitude,
+    },
+    ...(spot.mainImageUrl?.startsWith("http") ? { image: spot.mainImageUrl } : {}),
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: spot.rating.toFixed(1),
+      bestRating: "5",
+      worstRating: "1",
+      ratingCount: spot.reviewCount > 0 ? spot.reviewCount : 1,
+    },
   };
 
   const prefForBreadcrumb = getPrefectureByName(spot.region.prefecture);
@@ -419,6 +442,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
       />
       <script
         type="application/ld+json"
