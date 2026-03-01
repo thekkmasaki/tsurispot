@@ -29,7 +29,7 @@ export interface MicroCMSBlogResponse {
   // 追加カスタムフィールド
   slug?: string;
   description?: string;
-  tags?: string[];
+  tags?: string; // カンマ区切りテキスト（例: "堤防釣り,初心者,サビキ"）
 }
 
 /** microCMSのリスト取得レスポンス型 */
@@ -74,7 +74,7 @@ export function microCMSToBlogPost(item: MicroCMSBlogResponse): BlogPost {
     description: item.description || "",
     content: item.content,
     category,
-    tags: item.tags || [],
+    tags: item.tags ? item.tags.split(",").map((t) => t.trim()).filter(Boolean) : [],
     publishedAt: item.publishedAt.split("T")[0],
     updatedAt: item.updatedAt.split("T")[0],
     image: item.eyecatch?.url,
