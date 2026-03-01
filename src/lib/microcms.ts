@@ -94,7 +94,7 @@ export async function fetchMicroCMSBlogPosts(): Promise<BlogPost[]> {
 
   try {
     const data = await client.get<MicroCMSListResponse>({
-      endpoint: "blog",
+      endpoint: "blogs",
       queries: { limit: 100, orders: "-publishedAt" },
     });
     return data.contents.map(microCMSToBlogPost);
@@ -114,7 +114,7 @@ export async function fetchMicroCMSBlogBySlug(
 
   try {
     const data = await client.get<MicroCMSListResponse>({
-      endpoint: "blog",
+      endpoint: "blogs",
       queries: { filters: `slug[equals]${slug}`, limit: 1 },
     });
     if (data.contents.length === 0) return null;
