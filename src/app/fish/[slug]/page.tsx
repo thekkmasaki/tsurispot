@@ -37,6 +37,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
+import { getPrefectureByName } from "@/lib/data/prefectures";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -298,6 +299,22 @@ export default async function FishDetailPage({ params }: PageProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
         />
       )}
+      {fish.youtubeLinks && fish.youtubeLinks.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "VideoObject",
+              name: fish.youtubeLinks[0].title || `${fish.name} 釣り方`,
+              description: `${fish.name}の釣り方・ポイント紹介動画`,
+              thumbnailUrl: `https://tsurispot.com/api/og/fish/${fish.slug}`,
+              uploadDate: "2025-01-01",
+              contentUrl: fish.youtubeLinks[0].url,
+            }),
+          }}
+        />
+      )}
       {/* パンくず */}
       <Breadcrumb
         items={[
@@ -500,6 +517,37 @@ export default async function FishDetailPage({ params }: PageProps) {
       {fish.spots.length > 0 && (
         <NearbySpotsSorter spots={fish.spots} fishName={fish.name} />
       )}
+
+      {/* 都道府県別リンク */}
+      {fish.spots.length > 0 && (() => {
+        const prefMap = new Map<string, { prefSlug: string; prefName: string; count: number }>();
+        for (const spot of fish.spots) {
+          const pref = getPrefectureByName(spot.region.prefecture);
+          if (pref) {
+            const existing = prefMap.get(pref.slug);
+            if (existing) existing.count++;
+            else prefMap.set(pref.slug, { prefSlug: pref.slug, prefName: pref.name, count: 1 });
+          }
+        }
+        const prefList = Array.from(prefMap.values()).sort((a, b) => b.count - a.count);
+        return prefList.length > 0 ? (
+          <section className="mb-6 sm:mb-8">
+            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
+              <MapPin className="size-5 text-primary" />
+              都道府県別 {fish.name}が釣れるスポット
+            </h2>
+            <div className="flex flex-wrap gap-1.5">
+              {prefList.map(p => (
+                <Link key={p.prefSlug} href={`/prefecture/${p.prefSlug}/fish/${fish.slug}`}>
+                  <Badge variant="outline" className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-white">
+                    {p.prefName} ({p.count})
+                  </Badge>
+                </Link>
+              ))}
+            </div>
+          </section>
+        ) : null;
+      })()}
 
       {/* この魚の狙い方 */}
       {fish.fishingMethods && fish.fishingMethods.length > 0 && (

@@ -11,6 +11,7 @@ import {
   type BlogPost,
 } from "@/lib/data/blog";
 import { fishSpecies } from "@/lib/data/fish";
+import { prefectures } from "@/lib/data/prefectures";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -283,6 +284,60 @@ export default async function BlogPostPage({
             </div>
           </section>
         ) : null;
+      })()}
+
+      {/* タグベースの都道府県・魚種リンク */}
+      {(() => {
+        const matchedPrefs = post.tags
+          .map(tag => prefectures.find(p => p.name === tag || p.nameShort === tag))
+          .filter((p): p is NonNullable<typeof p> => p != null);
+        const matchedFish = post.tags
+          .map(tag => fishSpecies.find(f => f.name === tag))
+          .filter((f): f is NonNullable<typeof f> => f != null);
+        if (matchedPrefs.length === 0 && matchedFish.length === 0) return null;
+        return (
+          <section className="mt-10 rounded-xl border bg-green-50/50 p-5">
+            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
+              <MapPin className="size-5 text-primary" />
+              関連する釣りスポット情報
+            </h2>
+            {matchedPrefs.length > 0 && (
+              <div className="mb-3">
+                <p className="mb-2 text-sm text-muted-foreground">都道府県別に探す</p>
+                <div className="flex flex-wrap gap-2">
+                  {matchedPrefs.map(pref => (
+                    <Link
+                      key={pref.slug}
+                      href={`/prefecture/${pref.slug}`}
+                      className="inline-flex items-center gap-1.5 rounded-lg border bg-white px-3 py-2 text-sm font-medium transition-colors hover:border-primary hover:text-primary"
+                    >
+                      <MapPin className="size-3.5" />
+                      {pref.name}の釣りスポット
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+            {matchedFish.length > 0 && matchedPrefs.length > 0 && (
+              <div>
+                <p className="mb-2 text-sm text-muted-foreground">この都道府県で釣れる魚</p>
+                <div className="flex flex-wrap gap-2">
+                  {matchedPrefs.flatMap(pref =>
+                    matchedFish.map(f => (
+                      <Link
+                        key={`${pref.slug}-${f.slug}`}
+                        href={`/prefecture/${pref.slug}/fish/${f.slug}`}
+                        className="inline-flex items-center gap-1.5 rounded-lg border bg-white px-3 py-2 text-sm font-medium transition-colors hover:border-primary hover:text-primary"
+                      >
+                        {pref.nameShort}で{f.name}が釣れるスポット
+                      </Link>
+                    ))
+                  )}
+                </div>
+              </div>
+            )}
+          </section>
+        );
       })()}
 
       {/* CTA: サイト誘導 */}

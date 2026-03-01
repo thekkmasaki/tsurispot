@@ -455,6 +455,22 @@ export default async function SpotDetailPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
       />
+      {spot.youtubeLinks && spot.youtubeLinks.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "VideoObject",
+              name: spot.youtubeLinks[0].title || `${spot.name} 釣り動画`,
+              description: `${spot.name}での釣り動画。${spot.catchableFish.slice(0, 3).map(cf => cf.fish.name).join("、")}などが釣れるスポットです。`,
+              thumbnailUrl: `https://tsurispot.com/api/og/spot/${spot.slug}`,
+              uploadDate: "2025-01-01",
+              contentUrl: spot.youtubeLinks[0].url,
+            }),
+          }}
+        />
+      )}
       {/* 最近見たスポット記録 */}
       <RecentlyViewedTracker spot={{ slug: spot.slug, name: spot.name, prefecture: spot.region.prefecture, areaName: spot.region.areaName, spotType: spot.spotType }} />
 
@@ -713,6 +729,31 @@ export default async function SpotDetailPage({ params }: PageProps) {
               </div>
             </section>
           )}
+          {/* 県×魚種プログラマティックページへのリンク */}
+          {spot.catchableFish.length > 0 && (() => {
+            const pref = getPrefectureByName(spot.region.prefecture);
+            if (!pref) return null;
+            const seen = new Set<string>();
+            const uniqueFish = spot.catchableFish.filter(cf => {
+              if (seen.has(cf.fish.slug)) return false;
+              seen.add(cf.fish.slug);
+              return true;
+            });
+            return (
+              <section>
+                <h3 className="mb-2 text-sm font-bold">{pref.name}で釣れる魚のスポットをもっと見る</h3>
+                <div className="flex flex-wrap gap-1.5">
+                  {uniqueFish.map(cf => (
+                    <Link key={cf.fish.slug} href={`/prefecture/${pref.slug}/fish/${cf.fish.slug}`}>
+                      <Badge variant="outline" className="text-xs cursor-pointer hover:bg-primary hover:text-white transition-colors">
+                        {cf.fish.name}
+                      </Badge>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            );
+          })()}
           {(spot.mazumeInfo || spot.tideAdvice) && (
             <section>
               <h2 className="mb-4 flex items-center gap-2 text-lg font-bold"><Compass className="size-5" />マヅメ・潮汐ガイド</h2>
