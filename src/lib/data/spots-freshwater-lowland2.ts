@@ -441,7 +441,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
   {
     id: "fw-377", name: "亀田郷用水路（新潟市）", slug: "kamedagou-dojou",
     description: "新潟市の亀田郷は日本有数の穀倉地帯。広大な水田地帯に張り巡らされた用水路にドジョウが豊富に生息。かつて「芦沼」と呼ばれた低湿地を干拓した歴史ある土地で、今も水辺環境が豊か。マブナやタナゴも楽しめる越後の里釣りフィールド。",
-    latitude: 37.8712, longitude: 139.1183, address: "新潟県新潟市江南区亀田（亀田郷用水路）",
+    latitude: 37.8712, longitude: 139.1183, address: "〒950-0125 新潟県新潟市江南区亀田向陽二丁目（亀田郷用水路）",
     accessInfo: "JR信越本線亀田駅から車で約5分。北陸自動車道新潟亀田ICすぐ。",
     region: lr("r2351"), spotType: "river", difficulty: "beginner",
     isFree: true, feeDetail: "無料",
