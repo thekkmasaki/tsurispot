@@ -1566,7 +1566,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
     id: "s3440", name: "新居浜マリーナ", slug: "niihama-marina",
     description: "新居浜市のマリーナは燧灘に面した整備された釣りスポット。護岸からアジやキスが手軽に狙え、ファミリーフィッシングに最適。別子銅山の歴史ある街で観光も楽しめる。",
     latitude: 33.9590, longitude: 133.2880,
-    address: "〒792-0896 愛媛県新居浜市垣生3丁目（垣生漁港）",
+    address: "〒792-0872 愛媛県新居浜市垣生3丁目（垣生漁港）",
     accessInfo: "JR予讃線新居浜駅から車で約15分。松山自動車道新居浜ICから約15分。",
     region: localRegion("r3014"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "マリーナ駐車場あり（無料・40台）",
