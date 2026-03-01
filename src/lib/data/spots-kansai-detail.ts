@@ -285,7 +285,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
   {
     id: "s855", name: "深日港", slug: "fuke-port-detail",
     description: "岬町に位置する歴史ある漁港。内側の波静かな港内ではサビキ釣りが楽しめ、外側の堤防ではアオリイカやタチウオが狙える。南海電鉄「深日港」駅から徒歩すぐという抜群のアクセスが魅力。",
-    latitude: 34.32580, longitude: 135.151200,
+    latitude: 34.32060, longitude: 135.138400,
     address: "〒599-0303 大阪府泉南郡岬町深日2917（深日港）",
     accessInfo: "南海多奈川線「深日港」駅から徒歩5分。阪和自動車道泉南ICから約25分。",
     region: lr("r883"), spotType: "port", difficulty: "beginner",
@@ -497,7 +497,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
   {
     id: "s863", name: "江井ヶ島港", slug: "eigashima-port",
     description: "明石市西端の漁港。酒蔵が立ち並ぶ江井ヶ島エリアの港で、メバルとカサゴの穴釣りが特に人気。テトラ帯が広がりロックフィッシュの好ポイント。春はメバリング、夏はサビキでアジ・サバも狙える。",
-    latitude: 34.63580, longitude: 134.931200,
+    latitude: 34.67370, longitude: 134.911400,
     address: "〒674-0064 兵庫県明石市大久保町江井島（江井ヶ島港）",
     accessInfo: "山陽電鉄「江井ヶ島」駅から徒歩約15分。第二神明道路大久保ICから約10分。",
     region: lr("r884"), spotType: "port", difficulty: "intermediate",
@@ -599,7 +599,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
   {
     id: "s867", name: "姫路港", slug: "himeji-port",
     description: "播磨灘に面した姫路市の主要港。家島諸島への定期船が発着する旅客ターミナル周辺で釣りが楽しめる。サビキでアジ・サバ、チヌのフカセ釣り、メバリングなど多彩。港内は足場良好で初心者にも安心。",
-    latitude: 34.79580, longitude: 134.661200,
+    latitude: 34.78500, longitude: 134.661700,
     address: "〒672-8048 兵庫県姫路市飾磨区須加（姫路港）",
     accessInfo: "山陽電鉄「飾磨」駅から徒歩約20分。姫路バイパス中地ICから約10分。",
     region: lr("r885"), spotType: "port", difficulty: "beginner",
@@ -726,7 +726,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
   {
     id: "s872", name: "都志港", slug: "toshi-port",
     description: "淡路島西海岸に位置する都志港。夕日が美しい西海岸の漁港で、アジ・メバル・カサゴなどの好ポイント。秋のアオリイカシーズンは特に人気が高い。比較的空いていて穴場的な存在。",
-    latitude: 34.4330, longitude: 134.7730,
+    latitude: 34.41630, longitude: 134.77910,
     address: "〒656-1301 兵庫県洲本市五色町都志（都志港）",
     accessInfo: "神戸淡路鳴門自動車道北淡ICから約30分。",
     region: region("r54"), spotType: "port", difficulty: "beginner",
@@ -854,7 +854,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
   {
     id: "s878", name: "御坊・日高港", slug: "gobo-hidaka-port",
     description: "和歌山県中部の日高港。紀伊水道に面し、アジ・サバのサビキ釣りが年間通して好調。秋はタチウオ、冬〜春はカレイの実績が高い。港内は広く足場も良いため初心者にもおすすめ。近くに温泉施設もある。",
-    latitude: 33.8910, longitude: 135.1520,
+    latitude: 33.87100, longitude: 135.14250,
     address: "〒644-0011 和歌山県御坊市塩屋町南塩屋（日高港）",
     accessInfo: "JR紀勢本線「御坊」駅から車で約10分。湯浅御坊道路御坊ICから約10分。",
     region: lr("r888"), spotType: "port", difficulty: "beginner",
@@ -1093,7 +1093,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
   {
     id: "s887", name: "宮津港", slug: "miyazu-port",
     description: "天橋立の玄関口・宮津市の中心港。日本海に面した大きな港で、アジ・サバのサビキ釣りが安定。夏はキスの投げ釣り、秋はアオリイカのエギングが人気。港内は足場が良く、天橋立観光の前後に気軽に竿が出せる。",
-    latitude: 35.5350, longitude: 135.1970,
+    latitude: 35.54690, longitude: 135.20000,
     address: "〒626-0017 京都府宮津市鶴賀（宮津港）",
     accessInfo: "京都丹後鉄道「宮津」駅から徒歩約10分。京都縦貫自動車道宮津天橋立ICから約5分。",
     region: lr("r891"), spotType: "port", difficulty: "beginner",

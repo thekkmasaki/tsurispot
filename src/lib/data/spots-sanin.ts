@@ -67,7 +67,7 @@ export const saninSpots: FishingSpot[] = [
   {
     id: "s515", name: "鳥取港", slug: "tottori-port",
     description: "鳥取県の県庁所在地の鳥取市にある主要港湾。鳥取砂丘から近く、防波堤からのアジやイワシのサビキ釣りが人気。秋〜冬はヤリイカのエギングも盛んで、観光ついでに楽しめる釣りスポット。",
-    latitude: 35.5230, longitude: 134.2220,
+    latitude: 35.53760, longitude: 134.18220,
     address: "〒680-0908 鳥取県鳥取市賀露町西3丁目27-1",
     accessInfo: "JR鳥取駅から車で約15分。鳥取自動車道鳥取ICから約20分。",
     region: region("r27"), spotType: "port", difficulty: "beginner",
@@ -132,7 +132,7 @@ export const saninSpots: FishingSpot[] = [
   {
     id: "s517", name: "赤碕港", slug: "akasaki-port",
     description: "鳥取県中部の東伯郡琴浦町にある漁港。日本海に面した小さな漁港だが、アジやイワシのサビキ釣りから、根魚狙いの穴釣りまで楽しめる穴場スポット。冬のヤリイカエギングでも実績がある。",
-    latitude: 35.4530, longitude: 133.5690,
+    latitude: 35.51120, longitude: 133.65670,
     address: "〒689-2501 鳥取県東伯郡琴浦町大字赤碕1735",
     accessInfo: "JR山陰本線赤碕駅から徒歩約15分。山陰自動車道琴浦東ICから約15分。",
     region: localRegion("r191"), spotType: "port", difficulty: "beginner",
@@ -157,7 +157,7 @@ export const saninSpots: FishingSpot[] = [
   {
     id: "s518", name: "岩美町田後港", slug: "iwami-tago-port",
     description: "鳥取県岩美町の日本海に面した田後港。周囲を岩場と松林に囲まれた風光明媚な港で、アジ・イワシのサビキ釣りが楽しめる。秋から冬はアオリイカやヤリイカの実績も高い漁港。",
-    latitude: 35.591200, longitude: 134.43580,
+    latitude: 35.594500, longitude: 134.31560,
     address: "〒681-0071 鳥取県岩美郡岩美町田後（田後港）",
     accessInfo: "JR山陰本線岩美駅から車で約15分。山陰自動車道鳥取東ICから約25分。",
     region: localRegion("r190"), spotType: "port", difficulty: "beginner",
@@ -272,7 +272,7 @@ export const saninSpots: FishingSpot[] = [
   {
     id: "s522", name: "浜田港", slug: "hamada-port",
     description: "島根県西部の主要港湾・浜田港。浜田漁港は日本有数のカレイ・カサゴ・ノドグロ（アカムツ）の産地。防波堤からのサビキ釣りや投げ釣りが盛んで、ショアジギングでの青物狙いも人気。",
-    latitude: 34.9012000, longitude: 132.07780,
+    latitude: 34.8824000, longitude: 132.05990,
     address: "〒697-0041 島根県浜田市片庭町254",
     accessInfo: "JR山陰本線浜田駅から徒歩約20分。浜田自動車道浜田ICから約10分。",
     region: localRegion("r194"), spotType: "port", difficulty: "beginner",
@@ -304,7 +304,7 @@ export const saninSpots: FishingSpot[] = [
   {
     id: "s523", name: "益田港", slug: "masuda-port",
     description: "島根県最西端に近い益田市の港湾。万葉歌人・柿本人麻呂ゆかりの地でもあり、風光明媚な海岸線が続く。防波堤からのアジ・サバ釣りや、秋のアオリイカエギングが盛んな釣りスポット。",
-    latitude: 34.6740, longitude: 131.8390,
+    latitude: 34.69930, longitude: 131.81880,
     address: "〒698-0041 島根県益田市高津町イ2600-3",
     accessInfo: "JR山陰本線益田駅から車で約10分。浜田自動車道浜田ICから約30分。",
     region: localRegion("r195"), spotType: "port", difficulty: "beginner",
@@ -454,7 +454,7 @@ export const saninSpots: FishingSpot[] = [
   {
     id: "s1154", name: "七類港", slug: "shichirui-port",
     description: "島根半島の東端に位置する七類港。隠岐の島行きフェリーの発着港で、防波堤からのアジやイワシのサビキ釣りが楽しめる。潮通しが良くブリやヒラマサの回遊もあり、青物狙いのジギングにも好ポイント。",
-    latitude: 35.5570, longitude: 133.3350,
+    latitude: 35.57270, longitude: 133.22660,
     address: "〒690-1311 島根県松江市美保関町七類3246-1",
     accessInfo: "JR松江駅から車で約50分。山陰自動車道東出雲ICから約40分。",
     region: localRegion("r192"), spotType: "port", difficulty: "intermediate",
@@ -540,7 +540,7 @@ export const saninSpots: FishingSpot[] = [
   {
     id: "s1157", name: "浜田市瀬戸ヶ島", slug: "hamada-setogashima",
     description: "浜田港の外側に位置する瀬戸ヶ島。磯釣りの好ポイントとして知られ、クロダイやグレのフカセ釣りで実績が高い。秋のアオリイカエギングや冬のブリ狙いショアジギングも人気。",
-    latitude: 34.8870, longitude: 132.0620,
+    latitude: 34.90090, longitude: 132.05970,
     address: "〒697-0051 島根県浜田市瀬戸ケ島町138-12",
     accessInfo: "JR浜田駅から車で約15分。浜田自動車道浜田ICから約15分。",
     region: localRegion("r194"), spotType: "rocky", difficulty: "intermediate",

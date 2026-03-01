@@ -146,7 +146,7 @@ export const shikokuSpots: FishingSpot[] = [
   {
     id: "s464", name: "丸亀港", slug: "marugame-port",
     description: "丸亀城の城下町に位置する港。堤防からチヌやメバルが安定して釣れ、うどん巡りの合間に気軽に楽しめる。",
-    latitude: 34.2840, longitude: 133.7960,
+    latitude: 34.30490, longitude: 133.78810,
     address: "〒763-0044 香川県丸亀市福島町127-16",
     accessInfo: "JR予讃線丸亀駅から徒歩約15分。高松自動車道坂出ICから約10分。",
     region: localRegion("r150"), spotType: "port", difficulty: "beginner",
@@ -231,7 +231,7 @@ export const shikokuSpots: FishingSpot[] = [
   {
     id: "s467", name: "小松島港", slug: "komatsushima-port",
     description: "徳島県南部の主要港。広い岸壁からサビキ釣りやちょい投げが楽しめ、アジやハゼが安定して釣れる。ファミリーにも人気。",
-    latitude: 34.0010, longitude: 134.5910,
+    latitude: 34.01020, longitude: 134.58770,
     address: "〒773-0001 徳島県小松島市小松島町新港35",
     accessInfo: "JR牟岐線中田駅から車で約10分。徳島自動車道徳島ICから約20分。",
     region: localRegion("r151"), spotType: "port", difficulty: "beginner",
@@ -399,7 +399,7 @@ export const shikokuSpots: FishingSpot[] = [
   {
     id: "s473", name: "土佐清水市以布利港", slug: "tosashimizu-iburi",
     description: "足摺岬の手前に位置する小さな漁港。ジンベイザメの研究施設がある。磯が近く、グレやイシダイの好ポイント。黒潮の恵みで魚影が濃い。",
-    latitude: 32.7870, longitude: 132.9430,
+    latitude: 32.80120, longitude: 132.96430,
     address: "〒787-0302 高知県土佐清水市以布利539-1",
     accessInfo: "土佐くろしお鉄道中村駅から車で約40分。",
     region: region("r59"), spotType: "port", difficulty: "intermediate",
@@ -454,7 +454,7 @@ export const shikokuSpots: FishingSpot[] = [
   {
     id: "s475", name: "今治港", slug: "imabari-port",
     description: "しまなみ海道の四国側玄関口。瀬戸内海の潮流が速く、タイやアジの好ポイント。造船の街ならではの岸壁釣りが楽しめる。",
-    latitude: 34.0650, longitude: 132.9930,
+    latitude: 34.07060, longitude: 133.01060,
     address: "〒794-0013 愛媛県今治市片原町1丁目100-3",
     accessInfo: "JR予讃線今治駅から徒歩約15分。西瀬戸自動車道今治ICから約10分。",
     region: localRegion("r154"), spotType: "port", difficulty: "beginner",
@@ -512,7 +512,7 @@ export const shikokuSpots: FishingSpot[] = [
   {
     id: "s477", name: "宇和島港", slug: "uwajima-port-fishing",
     description: "真珠養殖と闘牛で有名な宇和島の港。宇和海に面し、グレやアジの好ポイント。九島大橋周辺は根魚も豊富。",
-    latitude: 33.2270, longitude: 132.5590,
+    latitude: 33.22830, longitude: 132.54610,
     address: "〒798-0003 愛媛県宇和島市住吉町2丁目4-7",
     accessInfo: "JR予讃線宇和島駅から徒歩約10分。松山自動車道宇和島朝日ICから約5分。",
     region: localRegion("r154"), spotType: "port", difficulty: "beginner",
@@ -602,7 +602,7 @@ export const shikokuSpots: FishingSpot[] = [
   {
     id: "s1096", name: "さぬき市津田港", slug: "sanuki-tsuda-port",
     description: "瀬戸内海に面した津田の松原の近くの漁港。穏やかな海でキスやハゼが安定して釣れ、秋にはタチウオの夜釣りが人気。",
-    latitude: 34.2930, longitude: 134.2830,
+    latitude: 34.29280, longitude: 134.25480,
     address: "〒769-2401 香川県さぬき市津田町津田1402-22",
     accessInfo: "JR高徳線讃岐津田駅から徒歩約15分。高松自動車道津田東ICから約5分。",
     region: region("r30"), spotType: "port", difficulty: "beginner",
@@ -681,7 +681,7 @@ export const shikokuSpots: FishingSpot[] = [
   {
     id: "s1099", name: "日和佐港", slug: "hiwasa-port",
     description: "ウミガメの産卵地として有名な美波町の漁港。太平洋に面した港でアジやカマスが安定して釣れ、エギングでのアオリイカも好調。",
-    latitude: 33.7310, longitude: 134.5270,
+    latitude: 33.73040, longitude: 134.54580,
     address: "〒779-2304 徳島県海部郡美波町日和佐浦114",
     accessInfo: "JR牟岐線日和佐駅から徒歩約10分。徳島市内から車で約80分。",
     region: localRegion("r151"), spotType: "port", difficulty: "beginner",
@@ -793,7 +793,7 @@ export const shikokuSpots: FishingSpot[] = [
   {
     id: "s1103", name: "新居浜港", slug: "niihama-port",
     description: "別子銅山の歴史を持つ工業都市・新居浜の港。瀬戸内海に面した穏やかな港でアジやキスが安定して釣れる。マイントピア別子の観光と合わせて。",
-    latitude: 33.9620, longitude: 133.2790,
+    latitude: 33.99700, longitude: 133.31150,
     address: "〒792-0872 愛媛県新居浜市垣生3丁目乙340-15",
     accessInfo: "JR予讃線新居浜駅から車で約10分。松山自動車道新居浜ICから約15分。",
     region: localRegion("r154"), spotType: "port", difficulty: "beginner",
@@ -845,7 +845,7 @@ export const shikokuSpots: FishingSpot[] = [
   {
     id: "s1105", name: "東かがわ市引田港", slug: "higashikagawa-hiketa-port",
     description: "瀬戸内海東部に位置する引田港。ハマチ養殖発祥の地で、堤防からメバルやチヌが安定して釣れる。引田の古い町並みも見どころ。",
-    latitude: 34.2340, longitude: 134.3720,
+    latitude: 34.23010, longitude: 134.40950,
     address: "〒769-2901 香川県東かがわ市引田2661-44",
     accessInfo: "JR高徳線引田駅から徒歩約10分。高松自動車道引田ICから約5分。",
     region: region("r30"), spotType: "port", difficulty: "beginner",
@@ -921,7 +921,7 @@ export const shikokuSpots: FishingSpot[] = [
   {
     id: "s1108", name: "西条市東予港", slug: "saijo-toyo-port",
     description: "瀬戸内海に面した愛媛県東部の港。石鎚山を望む絶景の釣り場で、アジやキスが安定して釣れる。西条祭りの街としても有名。",
-    latitude: 33.9290, longitude: 133.1160,
+    latitude: 33.92950, longitude: 133.08670,
     address: "〒799-1341 愛媛県西条市壬生川124-2",
     accessInfo: "JR予讃線壬生川駅から車で約5分。松山自動車道いよ西条ICから約10分。",
     region: localRegion("r154"), spotType: "port", difficulty: "beginner",
@@ -998,7 +998,7 @@ export const shikokuSpots: FishingSpot[] = [
   {
     id: "s1111", name: "観音寺港", slug: "kanonji-port",
     description: "寛永通宝の砂絵で有名な観音寺市の港。瀬戸内海と燧灘に面し、タチウオやキスの釣果が安定。うどん巡りと合わせて。",
-    latitude: 34.1280, longitude: 133.6440,
+    latitude: 34.12180, longitude: 133.62980,
     address: "〒768-0076 香川県観音寺市港町2-7",
     accessInfo: "JR予讃線観音寺駅から車で約5分。高松自動車道大野原ICから約10分。",
     region: localRegion("r150"), spotType: "port", difficulty: "beginner",
@@ -1101,7 +1101,7 @@ export const shikokuSpots: FishingSpot[] = [
   {
     id: "s1115", name: "西予市三瓶港", slug: "seiyo-mikame-port",
     description: "宇和海に面した西予市の漁港。リアス海岸の入り組んだ地形が好漁場を形成。アジやアオリイカの釣果が安定している。",
-    latitude: 33.3620, longitude: 132.3360,
+    latitude: 33.38070, longitude: 132.41670,
     address: "〒796-0907 愛媛県西予市三瓶町朝立1-438",
     accessInfo: "JR予讃線卯之町駅から車で約20分。松山自動車道西予宇和ICから約25分。",
     region: localRegion("r155"), spotType: "port", difficulty: "beginner",
