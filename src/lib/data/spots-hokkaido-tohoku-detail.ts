@@ -333,8 +333,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "monbetsu-ko",
     description:
       "オホーツク海沿岸の中核港。ガリンコ号で知られる港だが、釣り場としてもチカ・カレイ・コマイが好調。夏にはサケ・カラフトマスの回遊もあり、第2埠頭や南防波堤が主なポイント。",
-    latitude: 44.3530,
-    longitude: 143.3490,
+    latitude: 44.35600,
+    longitude: 143.36070,
     address: "〒094-0011 北海道紋別市港町",
     accessInfo:
       "旭川紋別自動車道遠軽瀬戸瀬ICから約60分。紋別空港から車で約10分。港内に駐車スペースあり。",
@@ -384,8 +384,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "wakkanai-ko",
     description:
       "日本最北端の港。北防波堤ドームが有名なランドマーク。港内ではチカやコマイのサビキ釣りが盛んで、夏にはサケ・マスの回遊も。北の大地ならではの大物カレイ（マガレイ・クロガシラ）が投げ釣りで狙える。",
-    latitude: 45.4090,
-    longitude: 141.6810,
+    latitude: 45.40080,
+    longitude: 141.70110,
     address: "〒097-0023 北海道稚内市開運1丁目（稚内港北防波堤ドーム）",
     accessInfo:
       "JR稚内駅から徒歩約10分。稚内空港から車で約20分。港周辺に無料駐車場あり。",
@@ -486,8 +486,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "mashike-ko",
     description:
       "留萌管内の小さな漁港。港内のサビキでチカ・ハゼが安定して釣れ、外防波堤からはホッケやソイが狙える。春先のニシン回遊は近年復活傾向で、地元アングラーが多く集まる。増毛の酒蔵巡りと合わせて楽しめる。",
-    latitude: 43.8560,
-    longitude: 141.5230,
+    latitude: 43.85340,
+    longitude: 141.53270,
     address: "〒077-0221 北海道増毛郡増毛町港町",
     accessInfo:
       "深川留萌自動車道留萌大和田ICから国道231号で約30分。港内に駐車スペースあり。",
@@ -585,8 +585,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "yoichi-ko",
     description:
       "余市川河口に位置する港。ニッカウヰスキー蒸溜所で有名な町だが、釣り場としても一級。春のホッケ・ニシン、夏のヒラメ、秋のサケ・ブリと四季を通じて多彩な魚種が楽しめる。中防波堤が主な釣り場。",
-    latitude: 43.1950,
-    longitude: 140.7870,
+    latitude: 43.21010,
+    longitude: 140.77930,
     address: "〒046-0024 北海道余市郡余市町港町",
     accessInfo:
       "JR余市駅から徒歩約15分。札幌から国道5号で約60分。港周辺に駐車スペースあり。",
@@ -637,8 +637,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "ishikari-wan-shinko",
     description:
       "札幌から最も近い大型港湾で、道央圏の釣り人が最も多く集まるスポット。花畔（ばんなぐろ）埠頭・東埠頭・樽川埠頭など多数のポイントがある。チカ・ニシン・カレイ・ヒラメ・サケと何でも釣れる万能港。ファミリー釣りの定番。",
-    latitude: 43.2170,
-    longitude: 141.3030,
+    latitude: 43.21540,
+    longitude: 141.33550,
     address: "〒061-3244 北海道石狩市新港南3丁目",
     accessInfo:
       "札幌中心部から車で約30分。札樽自動車道銭函ICから約15分。各埠頭に無料駐車場あり。",
@@ -689,8 +689,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "matsumae-ko",
     description:
       "北海道最南端の城下町・松前の港。津軽海峡に面し、潮通しが良いためマグロの回遊もある。クロダイ（チヌ）が北海道では珍しく釣れるポイントで、ホッケ・ソイ・アブラコなどの北海道定番魚種も豊富。松前城・桜の名所としても有名。",
-    latitude: 41.431200,
-    longitude: 140.112800,
+    latitude: 41.420000,
+    longitude: 140.089800,
     address: "〒049-1511 北海道松前郡松前町字松城",
     accessInfo:
       "函館から国道228号で約2時間。松前港フェリーターミナル周辺に駐車スペースあり。",
@@ -740,8 +740,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "iwanai-ko",
     description:
       "ニセコエリアからほど近い日本海側の港。旧フェリーターミナルの岸壁が主な釣り場で、ホッケ・カレイ・ソイが好調。春のホッケ釣りは港内が大賑わいとなる。夏にはヒラメ、秋にはブリの回遊もあり。",
-    latitude: 42.9770,
-    longitude: 140.5120,
+    latitude: 42.99580,
+    longitude: 140.51230,
     address: "〒045-0001 北海道岩内郡岩内町大浜",
     accessInfo:
       "札幌から国道5号〜276号で約2時間。港内に無料駐車場あり。",
@@ -1208,8 +1208,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "miyako-ko",
     description:
       "三陸海岸の中心に位置する宮古市の主要港。浄土ヶ浜に近い風光明媚なエリア。カレイ・アイナメ・ソイなどの根魚が周年楽しめ、夏にはサバやイワシの回遊もある。震災復興後、防波堤が整備され釣りやすくなった。",
-    latitude: 39.6420,
-    longitude: 141.9570,
+    latitude: 39.62870,
+    longitude: 141.96470,
     address: "〒027-0004 岩手県宮古市臨港通1",
     accessInfo:
       "JR宮古駅から車で約10分。三陸自動車道宮古中央ICから約5分。港内に駐車スペースあり。",
@@ -1260,8 +1260,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "kamaishi-ko",
     description:
       "「鉄と魚のまち」として知られる釜石市の主要港。世界最深の防波堤（ギネス認定）がある港で、カレイ・アイナメ・ドンコなどの底物が好調。夏にはサバの回遊、秋にはサケの遡上も見られる。釜石大観音が港を見守る。",
-    latitude: 39.2680,
-    longitude: 141.8950,
+    latitude: 39.26860,
+    longitude: 141.88510,
     address: "〒026-0011 岩手県釜石市港町1丁目",
     accessInfo:
       "JR釜石駅から車で約10分。三陸自動車道釜石両石ICから約15分。港周辺に駐車スペースあり。",
@@ -1311,8 +1311,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "kuji-ko",
     description:
       "岩手県北部の三陸海岸に面した港。NHK朝ドラ「あまちゃん」の舞台として知られる。アイナメ・ソイ・メバルなどのロックフィッシュが好調で、投げ釣りでカレイも狙える。小袖海岸（海女の北限の地）にも近い。",
-    latitude: 40.1920,
-    longitude: 141.7810,
+    latitude: 40.19680,
+    longitude: 141.79850,
     address: "〒028-0011 岩手県久慈市湊町",
     accessInfo:
       "JR久慈駅から車で約10分。八戸自動車道九戸ICから約50分。港内に駐車スペースあり。",
@@ -1363,8 +1363,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "ishinomaki-ko",
     description:
       "宮城県第2の都市・石巻市の主要港。旧北上川河口に位置し、シーバス（スズキ）のルアーフィッシングで全国的に有名。港内ではハゼ・カレイ・アイナメが好調で、サビキでイワシ・サバも狙える。石ノ森萬画館に近い。",
-    latitude: 38.42920,
-    longitude: 141.311200,
+    latitude: 38.42640,
+    longitude: 141.290600,
     address: "〒986-0822 宮城県石巻市中央1丁目",
     accessInfo:
       "JR石巻駅から車で約10分。三陸自動車道石巻河南ICから約15分。港周辺に駐車スペースあり。",
@@ -1416,8 +1416,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "onagawa-ko",
     description:
       "牡鹿半島の付け根に位置するリアス式海岸の港。サンマ水揚げ日本一の港町として知られる。釣り場としてはカレイ・アイナメ・メバルの根魚が充実し、投げ釣りでマコガレイの大物も狙える。震災後に新しく整備されたシーパルピア女川に隣接。",
-    latitude: 38.4440,
-    longitude: 141.4430,
+    latitude: 38.44090,
+    longitude: 141.45750,
     address: "〒986-2265 宮城県牡鹿郡女川町女川浜",
     accessInfo:
       "JR女川駅から徒歩約10分。三陸自動車道石巻河南ICから約30分。港周辺に駐車場あり。",
@@ -1464,8 +1464,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "kesennuma-ko",
     description:
       "フカヒレとサンマで知られる気仙沼市の主要港。内湾は穏やかで初心者にも釣りやすく、カレイ・アイナメ・ハゼが安定して釣れる。夏にはサバ・イワシの回遊があり、秋にはサケの遡上も見られる。お魚いちばや復興屋台村に隣接。",
-    latitude: 38.9080,
-    longitude: 141.5760,
+    latitude: 38.88620,
+    longitude: 141.59760,
     address: "〒988-0037 宮城県気仙沼市魚市場前7-13",
     accessInfo:
       "JR気仙沼駅（BRT）から車で約10分。三陸自動車道気仙沼中央ICから約15分。港周辺に駐車場あり。",
@@ -1517,8 +1517,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "shiogama-ko",
     description:
       "日本三景・松島湾の入口に位置する港。塩竈市魚市場に隣接し、新鮮な魚介が堪能できる。港内ではハゼ・カレイ・アイナメが通年楽しめ、夏にはマゴチやヒラメも。松島観光と合わせて楽しめるアクセス良好な釣り場。",
-    latitude: 38.3170,
-    longitude: 141.0220,
+    latitude: 38.28580,
+    longitude: 141.01220,
     address: "〒985-0016 宮城県塩竈市港町1丁目4-1",
     accessInfo:
       "JR本塩釜駅から徒歩約10分。三陸自動車道利府塩釜ICから約10分。魚市場周辺に有料駐車場あり。",
@@ -1574,8 +1574,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "akita-ko",
     description:
       "秋田市の中心港湾。セリオンタワー（ポートタワー）がランドマーク。広大な岸壁からハタハタ・カレイ・キス・アジが狙える。冬の風物詩ハタハタ釣りは秋田県民の年中行事で、12月の接岸時には港が大賑わいとなる。",
-    latitude: 39.7690,
-    longitude: 140.0570,
+    latitude: 39.74790,
+    longitude: 140.06680,
     address: "〒011-0945 秋田県秋田市土崎港西1丁目9-1",
     accessInfo:
       "JR土崎駅から徒歩約15分。秋田自動車道秋田北ICから約10分。セリオン周辺に無料駐車場あり。",
@@ -1729,8 +1729,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "sakata-ko",
     description:
       "最上川河口に位置する山形県最大の港。江戸時代に北前船の寄港地として栄えた歴史ある港町。キス・カレイの投げ釣り、サビキでアジ・イワシが楽しめる。冬にはハタハタの接岸もある。酒田のラーメンと合わせて楽しみたい。",
-    latitude: 38.9330,
-    longitude: 139.8450,
+    latitude: 38.93490,
+    longitude: 139.82190,
     address: "〒998-0036 山形県酒田市船場町2丁目",
     accessInfo:
       "JR酒田駅から車で約10分。日本海東北自動車道酒田ICから約15分。港周辺に駐車スペースあり。",
@@ -1783,8 +1783,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "nezugaseki-ko",
     description:
       "山形県最南端、新潟県との県境に位置する漁港。弁天島を挟んだ内港・外港があり、内港はファミリー向け、外港は上級者向けと住み分けがされている。クロダイ・マダイのフカセ釣りが盛んで、磯釣りのメッカとして知られる。",
-    latitude: 38.5560,
-    longitude: 139.5570,
+    latitude: 38.56000,
+    longitude: 139.54430,
     address: "〒999-7126 山形県鶴岡市鼠ケ関",
     accessInfo:
       "JR鼠ケ関駅から徒歩約10分。日本海東北自動車道あつみ温泉ICから約15分。漁港内に駐車スペースあり。",
@@ -1839,8 +1839,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     slug: "onahama-ko",
     description:
       "いわき市の中心港湾で、アクアマリンふくしま（水族館）に隣接する東北有数の大型港。いわき・ら・ら・ミュウ（物産館）も近く、観光と釣りを同時に楽しめる。カレイ・アイナメ・メバルの根魚が好調で、夏にはサバ・アジの回遊もある。",
-    latitude: 36.9370,
-    longitude: 140.9010,
+    latitude: 36.94550,
+    longitude: 140.91640,
     address: "〒971-8101 福島県いわき市小名浜字辰巳町50",
     accessInfo:
       "JRいわき駅から車で約20分。常磐自動車道いわき湯本ICから約15分。ら・ら・ミュウ駐車場（無料）を利用可。",

@@ -248,7 +248,7 @@ export const tohokuSpots: FishingSpot[] = [
   {
     id: "s428", name: "久慈港", slug: "kuji-port",
     description: "あまちゃんの舞台として知られる久慈市の港。ウニだけでなく釣りも楽しめ、アイナメやソイなどの根魚が豊富。",
-    latitude: 40.1930, longitude: 141.7830,
+    latitude: 40.19680, longitude: 141.79850,
     address: "〒028-0041 岩手県久慈市長内町（久慈港）",
     accessInfo: "JR八戸線久慈駅から徒歩約15分。",
     region: localRegion("r140"), spotType: "port", difficulty: "beginner",
@@ -359,7 +359,7 @@ export const tohokuSpots: FishingSpot[] = [
   {
     id: "s433", name: "能代港", slug: "noshiro-port",
     description: "米代川河口に位置する能代港。シーバスの聖地として知られ、秋のハタハタ接岸時期は特に賑わう。河口ならではの多彩な魚種が魅力。",
-    latitude: 40.2101, longitude: 139.9914,
+    latitude: 40.2157, longitude: 140.0159,
     address: "〒016-0807 秋田県能代市大森山（能代港）",
     accessInfo: "JR五能線能代駅から車で約10分。秋田自動車道能代東ICから約15分。",
     region: localRegion("r141"), spotType: "port", difficulty: "intermediate",
@@ -392,7 +392,7 @@ export const tohokuSpots: FishingSpot[] = [
   {
     id: "s434", name: "女川港", slug: "onagawa-port",
     description: "三陸の漁師町・女川の港。リアス海岸で水深があり、根魚やカレイの宝庫。復興後の整備された岸壁は足場も良い。",
-    latitude: 38.4460, longitude: 141.4460,
+    latitude: 38.44090, longitude: 141.45750,
     address: "〒986-2265 宮城県牡鹿郡女川町女川浜（女川港）",
     accessInfo: "JR石巻線女川駅から徒歩約10分。三陸自動車道石巻女川ICから約15分。",
     region: localRegion("r144"), spotType: "port", difficulty: "beginner",
@@ -731,7 +731,7 @@ export const tohokuSpots: FishingSpot[] = [
   {
     id: "s1064", name: "大船渡港", slug: "ofunato-port",
     description: "三陸リアス海岸の大船渡湾に面した港。さんま漁で有名で、堤防からはカレイやアイナメの根魚が豊富。復興した美しい港町。",
-    latitude: 39.0690, longitude: 141.7160,
+    latitude: 39.06370, longitude: 141.72980,
     address: "〒022-0002 岩手県大船渡市大船渡町茶屋前（大船渡港）",
     accessInfo: "三陸鉄道リアス線大船渡駅から徒歩約15分。三陸自動車道大船渡ICから約10分。",
     region: localRegion("r140"), spotType: "port", difficulty: "beginner",
@@ -785,7 +785,7 @@ export const tohokuSpots: FishingSpot[] = [
   {
     id: "s1066", name: "船川港", slug: "funakawa-port",
     description: "男鹿半島の玄関口・船川港。男鹿水族館GAOにも近く、アジやメバルが安定して釣れる。冬場のハタハタ接岸は風物詩。",
-    latitude: 39.8860, longitude: 139.8370,
+    latitude: 39.91050, longitude: 139.81570,
     address: "〒010-0511 秋田県男鹿市船川港船川（船川港）",
     accessInfo: "JR男鹿線男鹿駅から徒歩約15分。秋田自動車道昭和男鹿半島ICから約40分。",
     region: region("r36"), spotType: "port", difficulty: "beginner",
@@ -846,7 +846,7 @@ export const tohokuSpots: FishingSpot[] = [
   {
     id: "s1068", name: "気仙沼港", slug: "kesennuma-port",
     description: "フカヒレで有名な気仙沼の港。三陸の豊かな海に恵まれ、堤防からサバやイワシのサビキ釣りが大漁。秋にはサンマの水揚げで活気づく。",
-    latitude: 38.9080, longitude: 141.5740,
+    latitude: 38.88620, longitude: 141.59760,
     address: "〒988-0021 宮城県気仙沼市港町（気仙沼港）",
     accessInfo: "JR大船渡線気仙沼駅から車で約5分。三陸自動車道気仙沼ICから約15分。",
     region: localRegion("r145"), spotType: "port", difficulty: "beginner",
@@ -931,7 +931,7 @@ export const tohokuSpots: FishingSpot[] = [
   {
     id: "s1071", name: "加茂港", slug: "kamo-port-yamagata",
     description: "鶴岡市の日本海に面した漁港。世界一のクラゲ水族館・加茂水族館に隣接。堤防からアジやメバルが狙え、観光と釣りの両立が可能。",
-    latitude: 38.7510, longitude: 139.7480,
+    latitude: 38.76790, longitude: 139.72800,
     address: "〒997-1204 山形県鶴岡市加茂（加茂漁港）",
     accessInfo: "JR鶴岡駅から車で約20分。山形自動車道鶴岡ICから約25分。",
     region: localRegion("r142"), spotType: "port", difficulty: "beginner",
@@ -986,7 +986,7 @@ export const tohokuSpots: FishingSpot[] = [
   {
     id: "s1073", name: "相馬港", slug: "soma-port",
     description: "福島県北部の相馬市の港。松川浦の内海に面した穏やかな港で、ハゼやカレイが安定して釣れる。相馬野馬追で知られる歴史ある街。",
-    latitude: 37.8230, longitude: 140.9510,
+    latitude: 37.80200, longitude: 140.92560,
     address: "〒976-0022 福島県相馬市尾浜（相馬港・松川浦漁港）",
     accessInfo: "JR常磐線相馬駅から車で約10分。常磐自動車道相馬ICから約10分。",
     region: localRegion("r143"), spotType: "port", difficulty: "beginner",
@@ -1073,7 +1073,7 @@ export const tohokuSpots: FishingSpot[] = [
   {
     id: "s1076", name: "七ヶ浜町湊浜", slug: "shichigahama-minatohama",
     description: "仙台市近郊の七ヶ浜町にあるサーフスポット。サーフィンと釣りが共存する海岸で、ヒラメやマゴチのルアー釣りが人気。キスの投げ釣りも好調。",
-    latitude: 38.3050, longitude: 141.0560,
+    latitude: 38.28680, longitude: 141.04700,
     address: "〒985-0813 宮城県宮城郡七ヶ浜町湊浜（湊浜海岸）",
     accessInfo: "JR仙石線多賀城駅から車で約15分。仙台東部道路多賀城ICから約10分。",
     region: region("r2"), spotType: "beach", difficulty: "intermediate",
@@ -1126,7 +1126,7 @@ export const tohokuSpots: FishingSpot[] = [
   {
     id: "s1078", name: "いわき市江名港", slug: "iwaki-ena-port",
     description: "いわき市南部の太平洋に面した漁港。水深があり、根魚やカレイが安定して釣れる。夏場のイワシやサバのサビキ釣りも好調。",
-    latitude: 36.9650, longitude: 140.9250,
+    latitude: 36.96950, longitude: 140.96010,
     address: "〒970-0311 福島県いわき市江名（江名漁港）",
     accessInfo: "JR常磐線泉駅から車で約20分。常磐自動車道いわき勿来ICから約25分。",
     region: region("r38"), spotType: "port", difficulty: "beginner",
