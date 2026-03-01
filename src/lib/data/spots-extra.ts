@@ -3017,7 +3017,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s359", name: "読谷漁港", slug: "yomitan-port",
     description: "沖縄本島中部の漁港。残波岬に近く、カラフルな熱帯魚からタマンやガーラまで多彩な魚種が狙える。",
-    latitude: 26.391700, longitude: 127.721200,
+    latitude: 26.3891, longitude: 127.7229,
     address: "沖縄県中頭郡読谷村都屋",
     accessInfo: "那覇空港から車で約1時間。沖縄自動車道沖縄南ICから約20分。",
     region: localRegion("r129"), spotType: "port", difficulty: "beginner",
@@ -3086,7 +3086,7 @@ export const extraSpots: FishingSpot[] = [
   },{
     id: "s363", name: "那覇泊港", slug: "naha-tomari-port",
     description: "那覇市中心部の港。離島への船が出る大型港で、岸壁からアジやガーラが狙える。国際通りにも近い。",
-    latitude: 26.221700, longitude: 127.671200,
+    latitude: 26.2262, longitude: 127.6783,
     address: "沖縄県那覇市前島3丁目",
     accessInfo: "ゆいレール美栄橋駅から徒歩約10分。",
     region: region("r17"), spotType: "port", difficulty: "beginner",
@@ -3135,7 +3135,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s365", name: "石垣島登野城漁港", slug: "ishigaki-tonoshiro-port",
     description: "石垣島の小さな漁港。サンゴ礁の海でカラフルな魚やGTジュニアが狙える南国の釣り場。",
-    latitude: 24.341200, longitude: 124.158900,
+    latitude: 24.3310, longitude: 124.1635,
     address: "沖縄県石垣市登野城",
     accessInfo: "新石垣空港から車で約30分。",
     region: region("r17"), spotType: "port", difficulty: "intermediate",
