@@ -40,6 +40,10 @@ import { hokkaidoTohokuAdd2Spots } from "./spots-hokkaido-tohoku-add2";
 import { chugokuShikokuKyushuAdd2Spots } from "./spots-chugoku-shikoku-kyushu-add2";
 import { kantoKoshinetsuAdd2Spots } from "./spots-kanto-koshinetsu-add2";
 import { chubuKinkiAdd2Spots } from "./spots-chubu-kinki-add2";
+import { chubuKinkiAdd3Spots } from "./spots-chubu-kinki-add3";
+import { chugokuKyushuOkinawaAdd3Spots } from "./spots-chugoku-kyushu-okinawa-add3";
+import { hokkaidoTohokuHokurikuAdd3Spots } from "./spots-hokkaido-tohoku-hokuriku-add3";
+import { kantoKoshinetsuAdd3Spots } from "./spots-kanto-koshinetsu-add3";
 
 function fish(slug: string): FishSpecies {
   const f = getFishBySlug(slug);
@@ -2908,7 +2912,7 @@ const _baseSpots: FishingSpot[] = [
   },
 ];
 
-export const fishingSpots: FishingSpot[] = [..._baseSpots, ...additionalSpots, ...osakaKinkiSpots, ...extraSpots, ...sagamiMiuraSpots, ...sagamiShonanSpots, ...sagamiIzuSpots, ...tohokuSpots, ...hokurikuSpots, ...shikokuSpots, ...kyushuSouthSpots, ...okinawaSpots, ...saninSpots, ...tokaiDetailSpots, ...kyushuChugokuDetailSpots, ...kantoDetailSpots, ...kansaiDetailSpots, ...hokkaidoTohokuDetailSpots, ...hyogoDetailSpots, ...southKyushuDetailSpots, ...chibaShizuokaDetailSpots, ...wakayamaMieNiigataSpots, ...aichiFukuokaHiroshimaSpots, ...akashiHarimaSpots, ...freshwaterSpots, ...freshwaterSpotsTohoku, ...freshwaterSpotsWest, ...freshwaterSpotsKantoAdd, ...freshwaterSpotsChubuAdd, ...freshwaterSpotsWestAdd, ...freshwaterSpotsKyoto, ...freshwaterSpotsTohokuAdd, ...freshwaterSpotsChubuKansaiAdd, ...freshwaterSpotsLowland, ...freshwaterSpotsLowland2, ...kinkiChugokuShikokuAddSpots, ...hokkaidoTohokuAdd2Spots, ...chugokuShikokuKyushuAdd2Spots, ...kantoKoshinetsuAdd2Spots, ...chubuKinkiAdd2Spots];
+export const fishingSpots: FishingSpot[] = [..._baseSpots, ...additionalSpots, ...osakaKinkiSpots, ...extraSpots, ...sagamiMiuraSpots, ...sagamiShonanSpots, ...sagamiIzuSpots, ...tohokuSpots, ...hokurikuSpots, ...shikokuSpots, ...kyushuSouthSpots, ...okinawaSpots, ...saninSpots, ...tokaiDetailSpots, ...kyushuChugokuDetailSpots, ...kantoDetailSpots, ...kansaiDetailSpots, ...hokkaidoTohokuDetailSpots, ...hyogoDetailSpots, ...southKyushuDetailSpots, ...chibaShizuokaDetailSpots, ...wakayamaMieNiigataSpots, ...aichiFukuokaHiroshimaSpots, ...akashiHarimaSpots, ...freshwaterSpots, ...freshwaterSpotsTohoku, ...freshwaterSpotsWest, ...freshwaterSpotsKantoAdd, ...freshwaterSpotsChubuAdd, ...freshwaterSpotsWestAdd, ...freshwaterSpotsKyoto, ...freshwaterSpotsTohokuAdd, ...freshwaterSpotsChubuKansaiAdd, ...freshwaterSpotsLowland, ...freshwaterSpotsLowland2, ...kinkiChugokuShikokuAddSpots, ...hokkaidoTohokuAdd2Spots, ...chugokuShikokuKyushuAdd2Spots, ...kantoKoshinetsuAdd2Spots, ...chubuKinkiAdd2Spots, ...chubuKinkiAdd3Spots, ...chugokuKyushuOkinawaAdd3Spots, ...hokkaidoTohokuHokurikuAdd3Spots, ...kantoKoshinetsuAdd3Spots];
 
 export function getSpotBySlug(slug: string): FishingSpot | undefined {
   return fishingSpots.find((s) => s.slug === slug);
