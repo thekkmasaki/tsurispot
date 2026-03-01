@@ -462,11 +462,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "VideoObject",
-              name: spot.youtubeLinks[0].title || `${spot.name} 釣り動画`,
-              description: `${spot.name}での釣り動画。${spot.catchableFish.slice(0, 3).map(cf => cf.fish.name).join("、")}などが釣れるスポットです。`,
+              name: spot.youtubeLinks[0].label || `${spot.name} 釣り動画`,
+              description: spot.youtubeLinks[0].description || `${spot.name}での釣り動画。${spot.catchableFish.slice(0, 3).map(cf => cf.fish.name).join("、")}などが釣れるスポットです。`,
               thumbnailUrl: `https://tsurispot.com/api/og/spot/${spot.slug}`,
               uploadDate: "2025-01-01",
-              contentUrl: spot.youtubeLinks[0].url,
+              contentUrl: `https://www.youtube.com/results?search_query=${encodeURIComponent(spot.youtubeLinks[0].searchQuery)}`,
             }),
           }}
         />
