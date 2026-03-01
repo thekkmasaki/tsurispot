@@ -564,7 +564,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     id: "s2519", name: "鷹巣漁港", slug: "takasu-gyoko",
     description: "福井市北部の越前海岸に位置する漁港。磯場が隣接し、メジナ・クロダイの好ポイント。堤防からのサビキ釣りやエギングも楽しめる。鷹巣海水浴場に隣接。",
     latitude: 36.1050, longitude: 136.0080,
-    address: "〒910-3382 福井県福井市鷹巣町（鷹巣漁港）",
+    address: "〒910-3381 福井県福井市蓑町（鷹巣漁港）",
     accessInfo: "北陸自動車道福井北ICから約30分。JR福井駅から車で約30分。",
     region: localRegion("r2560"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
