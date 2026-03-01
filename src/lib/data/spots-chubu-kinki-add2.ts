@@ -1198,7 +1198,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2548", name: "とっとパーク小島", slug: "tottopark-kojima",
     description: "岬町にある有料海釣り公園。沖に突き出た桟橋から水深のあるポイントを攻められ、大物の実績が高い。マダイ・青物・アオリイカなど多彩な魚種が狙える。",
-    latitude: 34.3220, longitude: 135.1450, address: "大阪府岬町多奈川小島",
+    latitude: 34.3220, longitude: 135.1450, address: "〒599-0314 大阪府泉南郡岬町多奈川小島（とっとパーク小島）",
     accessInfo: "南海本線多奈川駅から徒歩約10分。阪和自動車道泉南ICから約30分。",
     region: localRegion("r2571"), spotType: "pier", difficulty: "beginner",
     isFree: false, hasParking: true, parkingDetail: "専用駐車場あり（有料）",
@@ -1490,7 +1490,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2562", name: "津風呂湖", slug: "tsufuroko-tsuri",
     description: "吉野町にあるダム湖。ブラックバスの管理釣り場として有名で、レンタルボートも完備。バスのほかヘラブナやワカサギの実績もあり、四季を通じて釣りが楽しめる。",
-    latitude: 34.3880, longitude: 135.8320, address: "奈良県吉野町河原屋",
+    latitude: 34.3880, longitude: 135.8320, address: "〒639-3102 奈良県吉野郡吉野町河原屋（津風呂湖）",
     accessInfo: "南阪奈道路葛城ICから約60分。近鉄大和上市駅から車で約15分。",
     region: localRegion("r2610"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "管理棟前駐車場あり",
@@ -1510,7 +1510,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2563", name: "池原ダム", slug: "ikehara-dam-tsuri",
     description: "日本最大級のアーチダム湖。バス釣りの聖地として全国的に有名で、60cmオーバーの実績多数。レンタルボートで広大なフィールドを攻略する釣りが楽しめる。",
-    latitude: 34.2180, longitude: 135.7620, address: "奈良県下北山村上池原",
+    latitude: 34.2180, longitude: 135.7620, address: "〒639-3805 奈良県吉野郡下北山村上池原（池原ダム）",
     accessInfo: "国道169号経由。吉野町から車で約90分。大台町からも約60分。",
     region: localRegion("r2612"), spotType: "river", difficulty: "advanced",
     isFree: false, hasParking: true, parkingDetail: "各ボート桟橋に駐車場あり",
@@ -1530,7 +1530,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2564", name: "布目ダム", slug: "nunome-dam-tsuri",
     description: "奈良市東部に位置するダム湖。ブラックバスとワカサギ釣りの好フィールド。冬のワカサギドーム船は関西では貴重な釣り場。バスの魚影も濃い。",
-    latitude: 34.6720, longitude: 136.0050, address: "奈良県奈良市北野山町",
+    latitude: 34.6720, longitude: 136.0050, address: "〒630-1234 奈良県奈良市北野山町（布目ダム）",
     accessInfo: "名阪国道針ICから約20分。近鉄奈良駅から車で約40分。",
     region: localRegion("r2611"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "ダム周辺駐車場あり",
@@ -1550,7 +1550,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2565", name: "室生ダム", slug: "murou-dam-tsuri",
     description: "宇陀市の室生ダムはヘラブナ釣りの名所。静かな山間の湖で、ヘラブナの型も良い。バスやブルーギルも生息しており、多彩な淡水釣りが楽しめる。",
-    latitude: 34.5480, longitude: 136.0230, address: "奈良県宇陀市室生",
+    latitude: 34.5480, longitude: 136.0230, address: "〒633-0315 奈良県宇陀市室生大野（室生ダム）",
     accessInfo: "名阪国道針ICから約20分。近鉄室生口大野駅から車で約10分。",
     region: localRegion("r2611"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "ダム周辺駐車場あり",
@@ -1570,7 +1570,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2566", name: "吉野川五條", slug: "yoshinogawa-gojo",
     description: "五條市を流れる吉野川はアユの友釣りの名所。清流が続き、夏にはアユ師で賑わう。アマゴやウグイも狙え、渓流釣りの入門にも適したフィールド。",
-    latitude: 34.3530, longitude: 135.6930, address: "奈良県五條市今井町",
+    latitude: 34.3530, longitude: 135.6930, address: "〒637-0004 奈良県五條市今井町（吉野川）",
     accessInfo: "京奈和自動車道五條ICから約5分。JR五条駅から徒歩約10分。",
     region: localRegion("r2610"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "河川敷駐車スペースあり",
@@ -1591,7 +1591,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2567", name: "初瀬川", slug: "hasegawa-tsuri",
     description: "桜井市を流れる初瀬川（大和川上流）。アマゴやオイカワが釣れる里川で、長谷寺周辺の風情ある景色の中で釣りが楽しめる。渓流釣り入門に最適。",
-    latitude: 34.5350, longitude: 135.9000, address: "奈良県桜井市初瀬",
+    latitude: 34.5350, longitude: 135.9000, address: "〒633-0112 奈良県桜井市初瀬（初瀬川）",
     accessInfo: "西名阪自動車道天理ICから約30分。近鉄長谷寺駅から徒歩約10分。",
     region: localRegion("r2611"), spotType: "river", difficulty: "beginner",
     isFree: false, hasParking: true, parkingDetail: "長谷寺周辺有料駐車場あり",
