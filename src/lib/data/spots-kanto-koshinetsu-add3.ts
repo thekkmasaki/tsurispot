@@ -269,7 +269,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3132", name: "大津港", slug: "otsu-kou-ibaraki",
     description: "北茨城市の大型漁港。外洋に面した堤防からはショアジギングでイナダやサワラが狙え、港内ではサビキ釣りでアジ・イワシが手軽に釣れる。冬場のアイナメ釣りでも有名。",
-    latitude: 36.8408, longitude: 140.7917,
+    latitude: 36.8461, longitude: 140.7781,
     address: "〒319-1702 茨城県北茨城市大津町",
     accessInfo: "JR常磐線大津港駅から徒歩約15分。常磐自動車道北茨城ICから約10分。",
     region: localRegion("r3101"), spotType: "port", difficulty: "intermediate",
@@ -553,7 +553,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3145", name: "館山港", slug: "tateyama-kou",
     description: "南房総の中心港。広い岸壁からサビキ釣り、投げ釣り、ルアー釣りと多彩な釣りが楽しめる。黒潮の影響で魚種が豊富で、冬でもアジやカワハギが釣れるのが魅力。",
-    latitude: 34.9958, longitude: 139.8625,
+    latitude: 34.9958, longitude: 139.8446,
     address: "〒294-0036 千葉県館山市館山",
     accessInfo: "JR内房線館山駅から徒歩約15分。富津館山道路富浦ICから約15分。",
     region: localRegion("r3111"), spotType: "port", difficulty: "beginner",
@@ -620,7 +620,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3148", name: "金谷港", slug: "kanaya-kou",
     description: "東京湾フェリー発着港に隣接する漁港。堤防からアジのサビキ釣りやカワハギ釣りが楽しめる。鋸山ハイキングと合わせて楽しめ、フェリーで三浦半島からのアクセスも可能。",
-    latitude: 35.1500, longitude: 139.8167,
+    latitude: 35.170100, longitude: 139.8175,
     address: "〒299-1861 千葉県富津市金谷",
     accessInfo: "JR内房線浜金谷駅から徒歩約5分。富津館山道路富津金谷ICから約5分。",
     region: localRegion("r3112"), spotType: "port", difficulty: "beginner",
@@ -685,7 +685,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3151", name: "木更津港", slug: "kisarazu-kou",
     description: "東京湾の奥に位置する港。ハゼ釣りの名所として有名で、秋のシーズンには家族連れで大賑わい。シーバスのルアーフィッシングも好調で、夜釣りのアングラーも多い。",
-    latitude: 35.3750, longitude: 139.9250,
+    latitude: 35.35970, longitude: 139.82220,
     address: "〒292-0839 千葉県木更津市中の島",
     accessInfo: "JR内房線木更津駅から徒歩約15分。東京湾アクアライン木更津金田ICから約15分。",
     region: localRegion("r3112"), spotType: "port", difficulty: "beginner",
@@ -707,7 +707,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3152", name: "興津港", slug: "okitsu-kou",
     description: "外房の穴場的漁港。湾内が穏やかで、サビキ釣りやウキ釣りが楽しめる。メジナやクロダイの磯釣りもでき、エギングでアオリイカも狙える多彩なポイント。",
-    latitude: 35.1250, longitude: 140.2750,
+    latitude: 35.13070, longitude: 140.25180,
     address: "〒299-5245 千葉県勝浦市興津",
     accessInfo: "JR外房線上総興津駅から徒歩約10分。圏央道市原鶴舞ICから約55分。",
     region: localRegion("r3110"), spotType: "port", difficulty: "beginner",
@@ -1074,7 +1074,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3169", name: "辰巳の森海浜公園", slug: "tatsumi-no-mori-kaihin",
     description: "辰巳運河沿いの公園。護岸からハゼ・シーバス・クロダイが狙える都心の釣りスポット。BBQ広場もあり、釣りとBBQを合わせて楽しめる。夜のシーバスが特に好調。",
-    latitude: 35.6380, longitude: 139.8100,
+    latitude: 35.64960, longitude: 139.812200,
     address: "〒135-0053 東京都江東区辰巳2丁目",
     accessInfo: "東京メトロ有楽町線辰巳駅から徒歩約5分。首都高速湾岸線新木場ICから約5分。",
     region: localRegion("r3120"), spotType: "pier", difficulty: "beginner",
@@ -1273,7 +1273,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3178", name: "葉山港", slug: "hayama-kou",
     description: "葉山マリーナに隣接する漁港。御用邸近くの上品なエリアで、堤防からアジ・メバル・カワハギが狙える。富士山と江の島を望む景観が美しく、カゴ釣りでマダイの実績も。",
-    latitude: 35.2683, longitude: 139.5717,
+    latitude: 35.2852, longitude: 139.5671,
     address: "〒240-0112 神奈川県三浦郡葉山町堀内",
     accessInfo: "JR逗子駅からバスで約10分「葉山」下車。横浜横須賀道路逗子ICから約10分。",
     region: localRegion("r3130"), spotType: "port", difficulty: "beginner",
@@ -1515,7 +1515,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3189", name: "野島公園", slug: "nojima-park",
     description: "横浜市金沢区の島にある公園。護岸からハゼ・カレイ・シーバスが狙え、ファミリーフィッシングに最適。BBQ場やキャンプ場も併設され、アウトドアと釣りを合わせて楽しめる。",
-    latitude: 35.3350, longitude: 139.6350,
+    latitude: 35.32710, longitude: 139.63600,
     address: "〒236-0025 神奈川県横浜市金沢区野島町24",
     accessInfo: "京急金沢文庫駅から徒歩約20分。横浜横須賀道路朝比奈ICから約10分。",
     region: localRegion("r3133"), spotType: "pier", difficulty: "beginner",
@@ -2261,7 +2261,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3190", name: "直江津港", slug: "naoetsu-kou",
     description: "上越市の大型港。日本海に面した堤防からアジ・サバのサビキ釣りが好調で、秋にはイナダなど青物の回遊も見られる。佐渡汽船のフェリーターミナルに隣接し、アクセスも便利。",
-    latitude: 37.1667, longitude: 138.2333,
+    latitude: 37.1791, longitude: 138.2523,
     address: "〒942-0011 新潟県上越市港町",
     accessInfo: "えちごトキめき鉄道直江津駅から車で約5分。北陸自動車道上越ICから約10分。",
     region: localRegion("r3190"), spotType: "port", difficulty: "beginner",
@@ -2305,7 +2305,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3192", name: "柏崎港", slug: "kashiwazaki-kou",
     description: "柏崎市の大型港。広い岸壁からサビキ釣りでアジ・イワシが手軽に釣れ、秋にはサワラやイナダの回遊も見られる。クロダイのウキフカセ釣りの名所としても知られる。",
-    latitude: 37.3667, longitude: 138.5500,
+    latitude: 37.3700, longitude: 138.537800,
     address: "〒945-0067 新潟県柏崎市西港町（柏崎港）",
     accessInfo: "JR信越本線柏崎駅から車で約10分。北陸自動車道柏崎ICから約10分。",
     region: localRegion("r3191"), spotType: "port", difficulty: "beginner",
@@ -2327,7 +2327,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3193", name: "寺泊港", slug: "teradomari-kou",
     description: "長岡市の「魚のアメ横」で有名な港。鮮魚市場に隣接し、堤防からアジ・サバのサビキ釣りが楽しめる。釣った魚を市場で調理してもらえるサービスもあり、グルメと釣りの両立が可能。",
-    latitude: 37.6500, longitude: 138.7833,
+    latitude: 37.640800, longitude: 138.7612,
     address: "〒940-2502 新潟県長岡市寺泊下荒町",
     accessInfo: "JR越後線寺泊駅からバスで約10分。北陸自動車道中之島見附ICから約30分。",
     region: localRegion("r3192"), spotType: "port", difficulty: "beginner",
@@ -2415,7 +2415,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3197", name: "佐渡・両津港", slug: "sado-ryotsu-kou",
     description: "佐渡島の玄関口。フェリーターミナル周辺の堤防からアジ・サバのサビキ釣りが楽しめ、加茂湖側ではハゼのちょい投げも好調。到着後すぐに釣りが始められる便利なスポット。",
-    latitude: 38.0667, longitude: 138.4333,
+    latitude: 38.0835, longitude: 138.4344,
     address: "〒952-0014 新潟県佐渡市両津湊",
     accessInfo: "佐渡汽船両津港着（新潟港から約2時間30分）。",
     region: localRegion("r3193"), spotType: "port", difficulty: "beginner",
@@ -2478,7 +2478,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3200", name: "佐渡・赤泊港", slug: "sado-akadomari-kou",
     description: "佐渡島南東部の港。クロダイの紀州釣りで有名なポイントで、大型クロダイの実績が高い。堤防からアジ・メバルも狙え、離島ならではの豊かな魚影が魅力。",
-    latitude: 37.8833, longitude: 138.3333,
+    latitude: 37.8655, longitude: 138.4145,
     address: "〒952-0711 新潟県佐渡市赤泊",
     accessInfo: "両津港から車で約50分。小木港から車で約30分。",
     region: localRegion("r3193"), spotType: "port", difficulty: "intermediate",
@@ -2610,7 +2610,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3206", name: "伊東港", slug: "ito-kou",
     description: "伊豆半島東部の港。堤防（白灯台堤防）からアジ・サバのサビキ釣りが好調で、冬にはメジナやカワハギも狙える。温泉街からのアクセスも良く、観光と釣りの両立が可能。",
-    latitude: 34.9667, longitude: 139.1167,
+    latitude: 34.9721, longitude: 139.1047,
     address: "〒414-0002 静岡県伊東市新井",
     accessInfo: "JR伊東線伊東駅から徒歩約15分。小田原厚木道路小田原西ICから約50分。",
     region: localRegion("r3200"), spotType: "port", difficulty: "beginner",
@@ -2654,7 +2654,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3208", name: "沼津港", slug: "numazu-kou",
     description: "駿河湾に面した沼津市の漁港。深海魚でも有名な沼津港は、堤防からアジ・サバのサビキ釣りが好調。夜のタチウオ釣りも人気。港内の飲食店街で海鮮グルメも堪能できる。",
-    latitude: 35.0917, longitude: 138.8667,
+    latitude: 35.0817, longitude: 138.8514,
     address: "〒410-0845 静岡県沼津市千本港町",
     accessInfo: "JR東海道線沼津駅からバスで約10分。東名高速沼津ICから約20分。",
     region: localRegion("r3201"), spotType: "port", difficulty: "beginner",

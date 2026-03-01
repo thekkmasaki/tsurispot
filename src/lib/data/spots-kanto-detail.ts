@@ -75,7 +75,7 @@ export const kantoDetailSpots: FishingSpot[] = [
   {
     id: "s800", name: "城南島海浜公園", slug: "jonanjima-seaside-park",
     description: "羽田空港のすぐ近くに位置する海浜公園。人工砂浜と護岸から釣りが楽しめ、頭上を飛行機が通過する迫力ある景観が魅力。ハゼやシーバスが通年で狙え、夏場はサビキ釣りでアジやイワシも楽しめる。BBQ施設も隣接しておりファミリーに大人気。",
-    latitude: 35.5786, longitude: 139.7576,
+    latitude: 35.5821, longitude: 139.7864,
     address: "〒143-0002 東京都大田区城南島4-2-2",
     accessInfo: "JR大森駅から京急バスで約20分「城南島四丁目」下車。首都高速湾岸線大井南ICから約10分。",
     region: lr("r870"), spotType: "beach", difficulty: "beginner",
@@ -258,7 +258,7 @@ export const kantoDetailSpots: FishingSpot[] = [
   {
     id: "s808", name: "葉山港", slug: "hayama-port",
     description: "湘南のリゾート地・葉山に位置する小さな漁港。あぶずり港とも呼ばれ、堤防からのサビキ釣りやエギングが人気。アジ、メバル、カワハギなど多彩な魚種が狙え、秋にはアオリイカのエギングも好調。御用邸に隣接する上品な雰囲気の釣り場。",
-    latitude: 35.2675, longitude: 139.5778,
+    latitude: 35.2852, longitude: 139.5671,
     address: "〒240-0112 神奈川県三浦郡葉山町堀内50-2",
     accessInfo: "JR逗子駅から京急バスで約15分「鐙摺」下車。横浜横須賀道路逗子ICから約10分。",
     region: region("r8"), spotType: "port", difficulty: "beginner",
@@ -429,7 +429,7 @@ export const kantoDetailSpots: FishingSpot[] = [
   {
     id: "s815", name: "金谷港", slug: "kanaya-port",
     description: "東京湾フェリーの発着地として知られる内房の港。フェリー乗り場周辺の護岸や堤防からアジ、シロギス、メバルが狙える。対岸の三浦半島から渡ってくる釣り人も多い。港周辺には鋸山ロープウェイの乗り場があり、観光も楽しめる。",
-    latitude: 35.1542, longitude: 139.8282,
+    latitude: 35.1701, longitude: 139.8175,
     address: "〒299-1861 千葉県富津市金谷3970-13",
     accessInfo: "JR内房線浜金谷駅から徒歩約8分。館山自動車道富津金谷ICから約5分。東京湾フェリー久里浜港から約40分。",
     region: lr("r872"), spotType: "port", difficulty: "beginner",
@@ -448,7 +448,7 @@ export const kantoDetailSpots: FishingSpot[] = [
   {
     id: "s816", name: "浜金谷港", slug: "hamakanaya-port",
     description: "金谷港の南側に位置する小さな漁港。釣り人が少なく穴場的なスポットで、のんびりと釣りが楽しめる。メバル、カサゴなどの根魚が豊富で、夜釣りのメバリングが特に面白い。ちょい投げのシロギスやハゼも好ターゲット。",
-    latitude: 35.1480, longitude: 139.8310,
+    latitude: 35.17010, longitude: 139.81750,
     address: "〒299-1861 千葉県富津市金谷4153-1",
     accessInfo: "JR内房線浜金谷駅から徒歩約5分。館山自動車道富津金谷ICから約5分。",
     region: lr("r872"), spotType: "port", difficulty: "beginner",
@@ -804,7 +804,7 @@ export const kantoDetailSpots: FishingSpot[] = [
   {
     id: "s831", name: "鹿島港", slug: "kashima-port",
     description: "鹿島臨海工業地帯に隣接する巨大な港湾。港公園周辺の護岸からの釣りが人気で、アジ、サバ、イワシのサビキ釣りから、ヒラメやマゴチの大物釣りまで楽しめる。黒潮の影響を受けた温暖な海域で、多彩な魚種が狙える。※南防波堤は死亡事故多発のため立入禁止。",
-    latitude: 35.9470, longitude: 140.6850,
+    latitude: 35.94490, longitude: 140.66170,
     address: "〒314-0103 茨城県神栖市東深芝10",
     accessInfo: "JR鹿島線鹿島神宮駅からタクシーで約15分。東関東自動車道潮来ICから約20分。",
     region: region("r52"), spotType: "port", difficulty: "intermediate",

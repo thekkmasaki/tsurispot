@@ -130,7 +130,7 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
   {
     id: "s2200", name: "城南島海浜公園", slug: "jonanjima-kaihin-park-add2",
     description: "羽田空港のすぐ近くに位置する東京湾奥の人気釣り場。人工砂浜と護岸から多彩な釣りが楽しめ、頭上を飛行機が通過する迫力満点の景観が魅力。秋のハゼ釣りシーズンは入れ食い状態になることも多く、ファミリーフィッシングに最適。夜はシーバスのルアーフィッシングも盛ん。",
-    latitude: 35.5786, longitude: 139.7576,
+    latitude: 35.5821, longitude: 139.7864,
     address: "東京都大田区城南島4-2-2",
     accessInfo: "JR大森駅から京急バスで約20分「城南島四丁目」下車。首都高速湾岸線大井南ICから約10分。",
     region: localRegion("r2360"), spotType: "beach", difficulty: "beginner",
@@ -173,7 +173,7 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
   {
     id: "s2202", name: "大井ふ頭中央海浜公園", slug: "ooi-futo-chuo-kaihin-add2",
     description: "東京モノレール大井競馬場前駅からすぐの都市型海浜公園。勝島運河沿いの護岸でハゼ釣りが大人気で、初心者やお子さんでも簡単に数釣りが楽しめる。シーバスやクロダイの実績も高く、夜のルアーフィッシングも盛ん。",
-    latitude: 35.5980, longitude: 139.7440,
+    latitude: 35.59480, longitude: 139.75300,
     address: "東京都品川区八潮4丁目",
     accessInfo: "東京モノレール大井競馬場前駅から徒歩約5分。首都高速湾岸線大井南ICから約5分。",
     region: localRegion("r2360"), spotType: "pier", difficulty: "beginner",
@@ -393,7 +393,7 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
   {
     id: "s2212", name: "大磯港", slug: "oiso-ko-add2",
     description: "湘南エリアの老舗漁港。堤防からのサビキ釣りでアジやイワシが楽しめ、冬場はカゴ釣りでマダイやイサキも狙える。港内は比較的穏やかで初心者にも安心。大磯ロングビーチに近く、夏場は海水浴と組み合わせて楽しむ家族連れも多い。",
-    latitude: 35.3020, longitude: 139.3100,
+    latitude: 35.30630, longitude: 139.319200,
     address: "〒255-0003 神奈川県中郡大磯町大磯1398-18",
     accessInfo: "JR東海道本線大磯駅から徒歩約15分。小田原厚木道路大磯ICから約5分。",
     region: localRegion("r2372"), spotType: "port", difficulty: "beginner",
@@ -1552,7 +1552,7 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
   {
     id: "s2264", name: "直江津港", slug: "naoetsu-ko-add2",
     description: "上越市に位置する日本海側の大型港。サビキ釣りでアジやサバが安定して釣れるほか、ショアジギングでイナダやサワラなどの青物も期待できる。冬場はメバルやカサゴの根魚釣りも人気。佐渡汽船のフェリーターミナルもあり佐渡観光と組み合わせも可能。",
-    latitude: 37.1680, longitude: 138.2350,
+    latitude: 37.17910, longitude: 138.25230,
     address: "〒942-0004 新潟県上越市五智一丁目",
     accessInfo: "えちごトキめき鉄道直江津駅から徒歩約15分。北陸自動車道上越ICから約10分。",
     region: localRegion("r2430"), spotType: "port", difficulty: "beginner",
@@ -1574,7 +1574,7 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
   {
     id: "s2265", name: "寺泊港", slug: "teradomari-ko-add2",
     description: "長岡市寺泊に位置する漁港。「魚のアメ横」と呼ばれる鮮魚センター通りに隣接し、釣りと海鮮グルメを同時に楽しめる。堤防からのサビキ釣りでアジやサバが釣れるほか、エギングでアオリイカも人気。カレイの投げ釣りも冬のお楽しみ。",
-    latitude: 37.6310, longitude: 138.7620,
+    latitude: 37.64080, longitude: 138.76120,
     address: "新潟県長岡市寺泊金山国道402号線",
     accessInfo: "JR越後線寺泊駅からバスで約15分。北陸自動車道西山ICから約30分。",
     region: localRegion("r2431"), spotType: "port", difficulty: "beginner",
@@ -1617,7 +1617,7 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
   {
     id: "s2267", name: "柏崎港", slug: "kashiwazaki-ko-add2",
     description: "柏崎市の日本海に面した大型港。堤防からのサビキ釣りでアジやサバが安定して釣れ、ショアジギングで青物も狙える。エギングでのアオリイカの実績も高い。柏崎マリーナに隣接しており、釣り場としての環境が整っている。",
-    latitude: 37.3600, longitude: 138.5480,
+    latitude: 37.370000, longitude: 138.53780,
     address: "〒945-0847 新潟県柏崎市若葉町国道8号",
     accessInfo: "JR信越本線柏崎駅から車で約10分。北陸自動車道柏崎ICから約15分。",
     region: localRegion("r2431"), spotType: "port", difficulty: "beginner",
@@ -1704,7 +1704,7 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
   {
     id: "s2271", name: "岩船港", slug: "iwafune-ko",
     description: "村上市に位置する日本海の漁港。粟島への連絡船が発着する港で、堤防からのサビキ釣りやショアジギングが楽しめる。秋のサケの遡上シーズンには三面川に向かう釣り人のベースにもなる。クロダイやメジナのウキ釣りも人気。",
-    latitude: 38.0640, longitude: 139.4570,
+    latitude: 38.19050, longitude: 139.43190,
     address: "〒959-2627 新潟県胎内市下赤谷坪穴林道",
     accessInfo: "JR羽越本線岩船町駅から徒歩約15分。日本海東北自動車道村上瀬波温泉ICから約15分。",
     region: localRegion("r2432"), spotType: "port", difficulty: "beginner",
