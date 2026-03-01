@@ -1790,7 +1790,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s296", name: "碧南海つり公園跡地", slug: "hekinan-fishing-spot",
     description: "碧南市の海釣りスポット。クロダイやハゼの実績が高く、足場も良い。三河湾奥の穏やかな海で初心者にも安心。",
-    latitude: 34.861700, longitude: 136.981200,
+    latitude: 34.8503, longitude: 136.9590,
     address: "愛知県碧南市港南町",
     accessInfo: "名鉄碧南中央駅から車で約10分。知多半島道路半田ICから約20分。",
     region: region("r53"), spotType: "breakwater", difficulty: "beginner",
@@ -1894,7 +1894,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s300", name: "泉南りんくう釣り護岸", slug: "sennan-rinku-fishing",
     description: "関西国際空港の対岸にある釣り護岸。タチウオやアジのサビキ釣りが人気。飛行機の離着陸を眺めながら釣りができる。",
-    latitude: 34.391200, longitude: 135.291700,
+    latitude: 34.4044, longitude: 135.2904,
     address: "大阪府泉南市りんくう南浜",
     accessInfo: "南海本線樽井駅から徒歩約15分。阪和自動車道泉南ICから約10分。",
     region: localRegion("r95"), spotType: "breakwater", difficulty: "beginner",
@@ -2518,7 +2518,7 @@ export const extraSpots: FishingSpot[] = [
   {
     id: "s327", name: "境港外港", slug: "sakaiminato-gaiko",
     description: "ゲゲゲの鬼太郎の街・境港の外港。日本海に面し、アジやサバ、秋にはマグロの回遊もある。水木しげるロードも近い。",
-    latitude: 35.538900, longitude: 133.228900,
+    latitude: 35.5492, longitude: 133.2495,
     address: "鳥取県境港市昭和町",
     accessInfo: "JR境港駅から車で約10分。米子自動車道米子ICから約30分。",
     region: region("r27"), spotType: "port", difficulty: "beginner",

@@ -943,8 +943,8 @@ export const southKyushuDetailSpots: FishingSpot[] = [
   {
     id: "s1018", name: "米水津地磯", slug: "yonouzu-jiiso",
     description: "大分県佐伯市米水津の地磯群。豊後水道の入口に位置し、黒潮の支流がぶつかる好漁場。「グレの聖地」と呼ばれるほどメジナ釣りで全国的に有名。渡船で沖磯に渡ればさらに大型のメジナやイシダイが狙える。",
-    latitude: 32.9180, longitude: 131.9350,
-    address: "〒876-1404 大分県佐伯市米水津大字小浦144",
+    latitude: 32.9197, longitude: 131.9971,
+    address: "〒876-1404 大分県佐伯市米水津大字小浦（小浦漁港）",
     accessInfo: "東九州自動車道佐伯ICから国道388号経由で約30分。渡船は米水津港から。",
     region: localRegion("r1040"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "米水津港周辺に駐車スペースあり（渡船利用者用）",
