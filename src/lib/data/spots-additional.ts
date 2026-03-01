@@ -5010,7 +5010,7 @@ export const additionalSpots: FishingSpot[] = [
   {
     id: "s188", name: "下関彦島海士郷", slug: "shimonoseki-hikoshima",
     description: "関門海峡に面した彦島の漁港。潮流が速くアジの魚影が濃い。アジングの隠れた名所。",
-    latitude: 33.9312, longitude: 130.9012, address: "〒750-0095 山口県下関市彦島海士郷町",
+    latitude: 33.9312, longitude: 130.9012, address: "〒750-0071 山口県下関市彦島海士郷町",
     accessInfo: "JR下関駅から車で15分。中国自動車道下関ICから約20分。",
     region: region("r28"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
@@ -5114,7 +5114,7 @@ export const additionalSpots: FishingSpot[] = [
   {
     id: "s192", name: "境港・美保関漁港", slug: "sakaiminato-mihonoseki",
     description: "島根半島の東端に位置する歴史ある港。アジ・イカが豊富で、灯台周辺の磯場では根魚も狙える。",
-    latitude: 35.5725, longitude: 133.2345, address: "〒684-0076 鳥取県境港市美保関町",
+    latitude: 35.5725, longitude: 133.2345, address: "〒690-1501 島根県松江市美保関町美保関",
     accessInfo: "JR境港駅から車で約20分。", region: region("r27"),
     spotType: "port", difficulty: "intermediate", isFree: true,
     hasParking: true, parkingDetail: "無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
@@ -5170,7 +5170,7 @@ export const additionalSpots: FishingSpot[] = [
   {
     id: "s194", name: "鳴門・ウチノ海総合公園護岸", slug: "naruto-uchinoumi",
     description: "穏やかな内海に面した護岸で家族連れに人気。チヌ・ハゼ・キスが気軽に狙える。",
-    latitude: 34.1825, longitude: 134.5920, address: "〒772-0053 徳島県鳴門市鳴門町高島",
+    latitude: 34.1825, longitude: 134.5920, address: "〒772-0051 徳島県鳴門市鳴門町高島",
     accessInfo: "鳴門ICから車で約10分。", region: region("r29"),
     spotType: "breakwater", difficulty: "beginner", isFree: true,
     hasParking: true, parkingDetail: "無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
@@ -5221,7 +5221,7 @@ export const additionalSpots: FishingSpot[] = [
   {
     id: "s196", name: "松山・三津浜港", slug: "matsuyama-mitsuhama",
     description: "松山市内からアクセス抜群の港。アジ・メバル・チヌに加え、タチウオの好ポイントとしても知られる。",
-    latitude: 33.8625, longitude: 132.7245, address: "〒791-8063 愛媛県松山市三津浜",
+    latitude: 33.8625, longitude: 132.7245, address: "〒791-8061 愛媛県松山市三津",
     accessInfo: "伊予鉄三津駅から徒歩10分。松山自動車道松山ICから約20分。", region: region("r31"),
     spotType: "port", difficulty: "beginner", isFree: true,
     hasParking: true, parkingDetail: "無料駐車スペースあり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
@@ -5266,7 +5266,7 @@ export const additionalSpots: FishingSpot[] = [
   {
     id: "s198", name: "天草・鬼池港", slug: "amakusa-oniike",
     description: "島原半島行きフェリー発着の港。潮通しが良くマダイ・アジ・アオリイカの好ポイント。",
-    latitude: 32.5750, longitude: 130.1920, address: "〒863-2421 熊本県天草市五和町鬼池",
+    latitude: 32.5750, longitude: 130.1920, address: "〒863-2331 熊本県天草市五和町鬼池",
     accessInfo: "天草空港から車で約30分。", region: region("r34"),
     spotType: "port", difficulty: "intermediate", isFree: true,
     hasParking: true, parkingDetail: "フェリー乗り場駐車場利用可", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
@@ -5325,7 +5325,7 @@ export const additionalSpots: FishingSpot[] = [
   {
     id: "s200", name: "男鹿・戸賀漁港", slug: "oga-toga",
     description: "男鹿半島の岩礁帯に囲まれた漁港。メバル・クロダイが豊富で磯釣りも楽しめる。",
-    latitude: 39.9425, longitude: 139.7850, address: "〒010-0673 秋田県男鹿市戸賀浜町",
+    latitude: 39.9425, longitude: 139.7850, address: "〒010-0673 秋田県男鹿市戸賀塩浜",
     accessInfo: "JR男鹿駅から車で約30分。", region: region("r36"),
     spotType: "port", difficulty: "intermediate", isFree: true,
     hasParking: true, parkingDetail: "無料駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
