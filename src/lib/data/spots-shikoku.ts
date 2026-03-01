@@ -815,7 +815,7 @@ export const shikokuSpots: FishingSpot[] = [
     id: "s1104", name: "愛南町深浦漁港", slug: "ainan-fukaurako",
     description: "愛媛県最南端・愛南町の漁港。宇和海に面した好漁場で、グレやアオリイカの釣果が抜群。真珠養殖の海で釣りを楽しめる。",
     latitude: 32.9610, longitude: 132.5440,
-    address: "〒798-4131 愛媛県南宇和郡愛南町鯆越311-2",
+    address: "〒798-4351 愛媛県南宇和郡愛南町鯆越（深浦漁港）",
     accessInfo: "宇和島市から車で約40分。松山自動車道津島高田ICから約40分。",
     region: localRegion("r155"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "漁港内に無料駐車スペースあり",
