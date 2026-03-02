@@ -9,6 +9,7 @@ import { blogPosts, getAllBlogPosts } from "@/lib/data/blog";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { tackleShops } from "@/lib/data/shops";
 import { FISHING_METHODS, MONTHS } from "@/lib/data/fishing-methods";
+import { REGION_GROUPS } from "@/lib/data/regions-group";
 
 const baseUrl = "https://tsurispot.com";
 
@@ -25,7 +26,7 @@ const legalDate = new Date("2025-06-01");
 
 // カテゴリID: 0=static+guides, 1=spots, 2=fish, 3=prefectures+areas, 4=fishing-matrix+seasonal+shops
 export async function generateSitemaps() {
-  return [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }];
+  return [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }, { id: 7 }];
 }
 
 export default async function sitemap({
@@ -228,6 +229,28 @@ export default async function sitemap({
         priority: 0.6,
       }))
     );
+  }
+
+  // 7: 釣り方×地域ページ + 都道府県別釣りルールページ
+  if (sitemapId === 7) {
+    return [
+      // 釣り方×地域ページ
+      ...FISHING_METHODS.flatMap((method) =>
+        REGION_GROUPS.map((region) => ({
+          url: `${baseUrl}/fishing/${method.slug}/${region.slug}`,
+          lastModified: contentDate,
+          changeFrequency: "monthly" as const,
+          priority: 0.6,
+        }))
+      ),
+      // 都道府県別釣りルールページ
+      ...prefectures.map((pref) => ({
+        url: `${baseUrl}/fishing-rules/${pref.slug}`,
+        lastModified: contentDate,
+        changeFrequency: "monthly" as const,
+        priority: 0.6,
+      })),
+    ];
   }
 
   // 4: 釣り方×月マトリクス + 季節ガイド + 釣具店
