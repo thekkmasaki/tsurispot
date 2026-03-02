@@ -21,6 +21,9 @@ import {
   ThermometerSnowflake,
   AlertTriangle,
   ShieldAlert,
+  OctagonAlert,
+  Thermometer,
+  ExternalLink,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -52,6 +55,15 @@ interface TideInfo {
   highTides: string[];
   lowTides: string[];
   description: string;
+}
+
+// 体感温度（Wind Chill）計算
+// JAG/TI方式: T: 気温(℃), V: 風速(km/h)
+function calcWindChill(tempC: number, windKmh: number): number {
+  // 風速1.3m/s(≒4.8km/h)未満 or 気温10℃超の場合は体感温度≒気温
+  if (windKmh < 4.8 || tempC > 10) return tempC;
+  const wc = 13.12 + 0.6215 * tempC - 11.37 * Math.pow(windKmh, 0.16) + 0.3965 * tempC * Math.pow(windKmh, 0.16);
+  return Math.round(wc * 10) / 10;
 }
 
 // 風向（度）→ 日本語ラベル
@@ -419,60 +431,220 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
           <p className="text-xs text-muted-foreground leading-relaxed">{tideInfo.description}</p>
         </div>
 
-        {/* 強風警告 */}
+        {/* 風速警告バナー */}
         {weather && (() => {
           const windMs = weather.windSpeed / 3.6;
+          const windChill = calcWindChill(weather.temperature, weather.windSpeed);
+          const tempDiff = Math.round((weather.temperature - windChill) * 10) / 10;
+          const showWindChill = windMs >= 5 && tempDiff > 1;
+          const isCold = windChill <= 5;
+          const isVeryCold = windChill <= 0;
+
+          // 防寒装備リンク
+          const coldGearLinks = [
+            { name: "防寒フィッシンググローブ", url: "https://amzn.to/3ZOdinM" },
+            { name: "電熱ベスト", url: "https://amzn.to/40sdGZ6" },
+            { name: "バラクラバ ネックウォーマー", url: "https://amzn.to/3ZMtLc7" },
+          ];
+
           if (windMs >= 15) {
             return (
-              <div className="mt-3 rounded-lg bg-red-50 border-2 border-red-400 px-3 py-3">
-                <div className="flex items-center gap-2 mb-1.5">
-                  <ShieldAlert className="h-5 w-5 text-red-600 animate-pulse" />
-                  <span className="text-sm font-bold text-red-700">暴風警告：釣り中止を強く推奨</span>
+              <div className="mt-4 rounded-xl bg-red-600 text-white px-4 py-4 shadow-lg animate-pulse-slow">
+                <div className="flex items-start gap-3">
+                  <div className="flex-shrink-0 mt-0.5">
+                    <OctagonAlert className="h-7 w-7" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-base font-bold mb-1">
+                      危険な風速です -- 釣りは中止してください
+                    </div>
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="flex items-center gap-1.5 bg-white/20 rounded-lg px-2.5 py-1">
+                        <Wind className="h-4 w-4" />
+                        <span className="text-lg font-bold">{windMs.toFixed(1)}m/s</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Navigation
+                          className="h-4 w-4"
+                          style={{ transform: `rotate(${getWindRotation(weather.windDirection)}deg)` }}
+                        />
+                        <span className="text-sm">{getWindDirectionLabel(weather.windDirection)}の風</span>
+                      </div>
+                    </div>
+                    <ul className="text-sm space-y-1 list-disc list-inside opacity-90">
+                      <li>堤防・テトラポッドは特に危険です</li>
+                      <li>高波にも警戒してください</li>
+                      <li>安全な場所に避難し、釣行は中止してください</li>
+                    </ul>
+                    {showWindChill && (
+                      <div className="mt-2 flex items-center gap-1.5 bg-white/15 rounded-lg px-2.5 py-1.5 w-fit">
+                        <Thermometer className="h-4 w-4" />
+                        <span className="text-sm">体感温度 <span className="font-bold">{windChill.toFixed(1)}°C</span>（気温より{tempDiff.toFixed(0)}°C低い）</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <p className="text-xs text-red-700 leading-relaxed">
-                  現在の風速は<span className="font-bold">{windMs.toFixed(1)}m/s</span>で非常に危険な状態です。
-                  堤防・テトラでは波にさらわれる危険があります。釣行は中止してください。
-                </p>
               </div>
             );
           }
+
           if (windMs >= 10) {
             return (
-              <div className="mt-3 rounded-lg bg-orange-50 border-2 border-orange-400 px-3 py-3">
-                <div className="flex items-center gap-2 mb-1.5">
-                  <AlertTriangle className="h-5 w-5 text-orange-600" />
-                  <span className="text-sm font-bold text-orange-700">強風注意：釣行は危険です</span>
+              <div className="mt-4 space-y-2">
+                <div className="rounded-xl bg-gradient-to-r from-orange-500 to-red-500 text-white px-4 py-4 shadow-md">
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0 mt-0.5">
+                      <ShieldAlert className="h-6 w-6" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-base font-bold mb-1">
+                        釣りに適さない風の強さです
+                      </div>
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="flex items-center gap-1.5 bg-white/20 rounded-lg px-2.5 py-1">
+                          <Wind className="h-4 w-4" />
+                          <span className="text-lg font-bold">{windMs.toFixed(1)}m/s</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Navigation
+                            className="h-4 w-4"
+                            style={{ transform: `rotate(${getWindRotation(weather.windDirection)}deg)` }}
+                          />
+                          <span className="text-sm">{getWindDirectionLabel(weather.windDirection)}の風</span>
+                        </div>
+                      </div>
+                      <ul className="text-sm space-y-1 list-disc list-inside opacity-90">
+                        <li>安全のため、風裏のポイントや釣行延期を検討してください</li>
+                        <li>キャスティングが困難で、軽い仕掛けは使えません</li>
+                        <li>防風・防寒装備は必須です</li>
+                      </ul>
+                      {showWindChill && (
+                        <div className="mt-2 flex items-center gap-1.5 bg-white/15 rounded-lg px-2.5 py-1.5 w-fit">
+                          <Thermometer className="h-4 w-4" />
+                          <span className="text-sm">体感温度 <span className="font-bold">{windChill.toFixed(1)}°C</span>（気温より{tempDiff.toFixed(0)}°C低い）</span>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <p className="text-xs text-orange-700 leading-relaxed">
-                  現在の風速は<span className="font-bold">{windMs.toFixed(1)}m/s</span>です。
-                  テトラや磯場は波しぶきの危険あり。仕掛けも流されやすく釣りになりません。中止・延期を検討してください。
-                </p>
+                {/* 防寒装備おすすめ（寒い時のみ） */}
+                {isCold && (
+                  <div className="rounded-lg bg-orange-50 border border-orange-200 px-3 py-2.5">
+                    <div className="text-xs font-semibold text-orange-800 mb-1.5">
+                      {isVeryCold ? "厳重な防寒対策が必要です" : "防寒装備をおすすめします"}
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {coldGearLinks.map((item) => (
+                        <a
+                          key={item.url}
+                          href={item.url}
+                          target="_blank"
+                          rel="noopener noreferrer sponsored"
+                          className="inline-flex items-center gap-1 text-xs bg-white border border-orange-200 rounded-full px-2.5 py-1 text-orange-700 hover:bg-orange-100 transition-colors"
+                        >
+                          {item.name}
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             );
           }
+
           if (windMs >= 7) {
             return (
-              <div className="mt-3 rounded-lg bg-amber-50 border border-amber-300 px-3 py-2">
-                <div className="flex items-center gap-2 mb-1">
-                  <Wind className="h-4 w-4 text-amber-600" />
-                  <span className="text-xs font-bold text-amber-700">やや強い風（{windMs.toFixed(1)}m/s）</span>
+              <div className="mt-4 space-y-2">
+                <div className="rounded-xl bg-amber-50 border-2 border-amber-400 px-4 py-3 shadow-sm">
+                  <div className="flex items-start gap-3">
+                    <div className="flex-shrink-0 mt-0.5">
+                      <AlertTriangle className="h-5 w-5 text-amber-600" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-bold text-amber-800 mb-1">
+                        風が強い状況です -- 釣りへの影響あり
+                      </div>
+                      <div className="flex items-center gap-3 mb-2">
+                        <div className="flex items-center gap-1.5 bg-amber-100 rounded-lg px-2.5 py-1">
+                          <Wind className="h-4 w-4 text-amber-700" />
+                          <span className="text-base font-bold text-amber-800">{windMs.toFixed(1)}m/s</span>
+                        </div>
+                        <div className="flex items-center gap-1 text-amber-700">
+                          <Navigation
+                            className="h-3.5 w-3.5"
+                            style={{ transform: `rotate(${getWindRotation(weather.windDirection)}deg)` }}
+                          />
+                          <span className="text-xs">{getWindDirectionLabel(weather.windDirection)}の風</span>
+                        </div>
+                      </div>
+                      <ul className="text-xs text-amber-800 space-y-0.5 list-disc list-inside">
+                        <li>軽い仕掛けは流されやすい -- 重めのオモリ推奨</li>
+                        <li>キャスティングの精度が落ちます</li>
+                        <li>帽子・荷物の飛散に注意</li>
+                      </ul>
+                      {showWindChill && (
+                        <div className="mt-2 flex items-center gap-1.5 text-xs text-amber-700">
+                          <Thermometer className="h-3.5 w-3.5" />
+                          <span>体感温度 <span className="font-semibold">{windChill.toFixed(1)}°C</span>（気温より{tempDiff.toFixed(0)}°C低い）</span>
+                        </div>
+                      )}
+                      {isCold && (
+                        <div className="mt-1.5 text-xs text-amber-700">
+                          風で体感温度が下がっています。防風ジャケット・手袋を推奨します。
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
-                <p className="text-xs text-amber-700 leading-relaxed">
-                  軽い仕掛けは流されやすいです。重めのオモリを使い、風裏のポイントを選びましょう。帽子・荷物の飛散にも注意。
-                </p>
+                {/* 防寒装備おすすめ（寒い時のみ） */}
+                {isCold && (
+                  <div className="rounded-lg bg-amber-50/50 border border-amber-200 px-3 py-2">
+                    <div className="text-xs font-semibold text-amber-800 mb-1.5">おすすめ防寒グッズ</div>
+                    <div className="flex flex-wrap gap-2">
+                      {coldGearLinks.slice(0, 2).map((item) => (
+                        <a
+                          key={item.url}
+                          href={item.url}
+                          target="_blank"
+                          rel="noopener noreferrer sponsored"
+                          className="inline-flex items-center gap-1 text-xs bg-white border border-amber-200 rounded-full px-2.5 py-1 text-amber-700 hover:bg-amber-100 transition-colors"
+                        >
+                          {item.name}
+                          <ExternalLink className="h-3 w-3" />
+                        </a>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             );
           }
+
           if (windMs >= 5) {
             return (
-              <div className="mt-3 rounded-lg bg-sky-50 border border-sky-200 px-3 py-2">
-                <div className="flex items-center gap-1.5">
-                  <Wind className="h-3.5 w-3.5 text-sky-600" />
-                  <span className="text-xs text-sky-700">風あり（{windMs.toFixed(1)}m/s）— 釣りは可能ですが仕掛けの調整が必要</span>
+              <div className="mt-3 rounded-lg bg-sky-50 border border-sky-300 px-3 py-2.5">
+                <div className="flex items-start gap-2">
+                  <Wind className="h-4 w-4 text-sky-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <div className="flex items-center gap-2 mb-0.5">
+                      <span className="text-xs font-bold text-sky-800">やや風が強い状況です（{windMs.toFixed(1)}m/s）</span>
+                      <span className="text-xs text-sky-600">{getWindDirectionLabel(weather.windDirection)}の風</span>
+                    </div>
+                    <p className="text-xs text-sky-700">
+                      釣りは可能ですが、仕掛けの調整が必要です。帽子・軽い仕掛けに注意してください。
+                    </p>
+                    {showWindChill && (
+                      <p className="text-xs text-sky-600 mt-0.5">
+                        風で体感温度が下がります（体感{windChill.toFixed(1)}°C）。上着を1枚多めにお持ちください。
+                      </p>
+                    )}
+                  </div>
                 </div>
               </div>
             );
           }
+
           return null;
         })()}
 
