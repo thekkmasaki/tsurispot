@@ -45,6 +45,9 @@ export interface FishingSpot {
   parkingPeakInfo?: ParkingPeakInfo;
   familyInfo?: FamilyInfo;
   spotPhotos?: SpotPhoto[];
+  googleRating?: number;
+  googleReviewCount?: number;
+  managementInfo?: ManagementInfo;
 }
 
 export interface SpotRules {
@@ -78,6 +81,17 @@ export interface SpotPhoto {
   url: string;
   alt: string;
   credit: string;
+}
+
+export interface ManagementInfo {
+  organizationName: string;
+  contactPhone?: string;
+  contactUrl?: string;
+  openingHours?: string;
+  closedDays?: string;
+  fishingFee?: string;
+  licensingInfo?: string;
+  notes?: string[];
 }
 
 export interface FishSpecies {
