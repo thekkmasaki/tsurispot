@@ -57,6 +57,41 @@ const spotsItemListJsonLd = {
     })),
 };
 
+const spotsDatasetJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  name: "日本の釣りスポットデータベース",
+  description:
+    "日本全国の釣りスポット・釣り場情報を収録したデータベース。堤防・漁港・磯・河川・湖沼など多様なスポットタイプをカバーし、釣れる魚種・アクセス・設備情報を提供。",
+  url: "https://tsurispot.com/spots",
+  license: "https://tsurispot.com/terms",
+  creator: {
+    "@type": "Organization",
+    name: "ツリスポ編集部",
+    url: "https://tsurispot.com",
+  },
+  distribution: {
+    "@type": "DataDownload",
+    encodingFormat: "text/html",
+    contentUrl: "https://tsurispot.com/spots",
+  },
+  spatialCoverage: {
+    "@type": "Place",
+    name: "Japan",
+  },
+  variableMeasured: [
+    "釣り場名",
+    "位置情報（緯度・経度）",
+    "スポットタイプ",
+    "釣れる魚種",
+    "難易度",
+    "設備情報",
+    "混雑予想",
+  ],
+  measurementTechnique: "現地調査・ユーザー投稿・公開情報の集約",
+  keywords: ["釣りスポット", "釣り場", "フィッシング", "日本", "堤防", "漁港", "磯", "河川"],
+};
+
 const spotsFaqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -125,6 +160,10 @@ export default async function SpotsPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(spotsItemListJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(spotsDatasetJsonLd) }}
       />
       <Breadcrumb
         items={[

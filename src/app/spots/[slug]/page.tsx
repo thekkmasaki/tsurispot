@@ -406,6 +406,17 @@ export default async function SpotDetailPage({ params }: PageProps) {
     ],
   };
 
+  const spotSpeakableJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: `${spot.name}の釣り情報`,
+    url: `https://tsurispot.com/spots/${spot.slug}`,
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", ".spot-description", ".catchable-fish-summary"],
+    },
+  };
+
   // 夜釣り可能かどうかの判定（catchableFishのrecommendedTimeに「夜」を含む場合）
   const isNightFishing =
     spot.catchableFish.some((cf) => cf.recommendedTime.includes("夜"));
@@ -434,6 +445,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
      d.portName.includes(spot.name.replace(/漁港|港/g, '')))
   );
 
+  // 県内スポット数（信頼性指標用）
+  const prefSpots = getSpotsByPrefecture(spot.region.prefecture);
+  const prefSpotCount = prefSpots.length;
+
   // Get nearby tackle shops
   const nearbyShops = getShopsForSpot(spot.slug);
 
@@ -454,6 +469,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(spotSpeakableJsonLd) }}
       />
       {spot.youtubeLinks && spot.youtubeLinks.length > 0 && (
         <script
@@ -588,6 +607,25 @@ export default async function SpotDetailPage({ params }: PageProps) {
           {spot.catchableFish.length > 0 ? `${spot.catchableFish.slice(0, 3).map(f => f.fish.name).join("、")}などが狙えます。` : ""}
           {spot.isFree ? "無料で釣りができます。" : spot.feeDetail ? `利用料金: ${spot.feeDetail}` : ""}
         </p>
+
+        {/* データ信頼性指標 */}
+        <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 rounded-lg border bg-muted/30 px-3 py-2 text-xs text-muted-foreground">
+          <span className="flex items-center gap-1">
+            <Shield className="size-3.5 text-primary" />
+            {spot.region.prefecture}の{prefSpotCount}スポット中
+          </span>
+          <span className="flex items-center gap-1">
+            <Fish className="size-3.5 text-primary" />
+            釣れる魚 {spot.catchableFish.length}種類
+          </span>
+          {spot.googleRating && (
+            <span className="flex items-center gap-1">
+              <Star className="size-3.5 fill-yellow-400 text-yellow-400" />
+              Google評価 {spot.googleRating.toFixed(1)}
+              {spot.googleReviewCount ? ` (${spot.googleReviewCount.toLocaleString()}件)` : ""}
+            </span>
+          )}
+        </div>
 
         {/* 「今日行く」ボタン + ナビゲーション */}
         <div className="mt-4 rounded-xl border bg-muted/30 p-3 sm:p-4">

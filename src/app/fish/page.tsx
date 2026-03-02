@@ -45,6 +45,39 @@ const breadcrumbJsonLd = {
   ],
 };
 
+const fishDatasetJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  name: "日本の釣り魚種データベース",
+  description:
+    "日本で釣れる海水魚・淡水魚の図鑑データベース。魚種ごとの旬の時期・釣り方・難易度・おすすめの食べ方・釣れるスポット情報を収録。",
+  url: "https://tsurispot.com/fish",
+  license: "https://tsurispot.com/terms",
+  creator: {
+    "@type": "Organization",
+    name: "ツリスポ編集部",
+    url: "https://tsurispot.com",
+  },
+  distribution: {
+    "@type": "DataDownload",
+    encodingFormat: "text/html",
+    contentUrl: "https://tsurispot.com/fish",
+  },
+  spatialCoverage: {
+    "@type": "Place",
+    name: "Japan",
+  },
+  variableMeasured: [
+    "魚種名",
+    "分類（海水魚・淡水魚）",
+    "ベストシーズン",
+    "釣り方",
+    "難易度",
+    "食味評価",
+  ],
+  keywords: ["魚種図鑑", "釣り魚", "海水魚", "淡水魚", "日本", "旬の魚", "釣り方"],
+};
+
 function FishListContent() {
   const fishSpecies = getFishSpeciesWithSpots();
 
@@ -70,6 +103,10 @@ function FishListContent() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(fishItemListJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(fishDatasetJsonLd) }}
       />
       {/* パンくず */}
       <Breadcrumb

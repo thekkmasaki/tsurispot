@@ -221,6 +221,28 @@ export default async function FishDetailPage({ params }: PageProps) {
             },
           }]
         : []),
+      {
+        "@type": "Question",
+        name: `${fish.name}のサイズはどのくらいですか？`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${fish.name}の一般的なサイズは${fish.sizeCm}です。${fish.family}に分類される${fish.category === "sea" ? "海水" : fish.category === "freshwater" ? "淡水" : "汽水域の"}魚です。`,
+        },
+      },
+      ...(fish.spots.length > 0
+        ? [{
+            "@type": "Question" as const,
+            name: `${fish.name}が釣れる都道府県は？`,
+            acceptedAnswer: {
+              "@type": "Answer" as const,
+              text: (() => {
+                const prefSet = new Set(fish.spots.map(s => s.region.prefecture));
+                const prefList = Array.from(prefSet).slice(0, 10);
+                return `${fish.name}は${prefList.join("、")}${prefSet.size > 10 ? `など全国${prefSet.size}都道府県` : ""}で釣ることができます。全国${fish.spots.length}箇所のスポットで確認されています。`;
+              })(),
+            },
+          }]
+        : []),
     ],
   };
 
@@ -266,6 +288,17 @@ export default async function FishDetailPage({ params }: PageProps) {
     ],
   } : null;
 
+  const fishSpeakableJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: `${fish.name}の釣り方・時期・おすすめスポット`,
+    url: `https://tsurispot.com/fish/${fish.slug}`,
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", ".fish-description", ".season-info"],
+    },
+  };
+
   // Co-occurring fish (よく一緒に釣れる魚)
   const coOccurringFish = getCoOccurringFish(fish.slug, 8);
 
@@ -292,6 +325,10 @@ export default async function FishDetailPage({ params }: PageProps) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(fishFaqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(fishSpeakableJsonLd) }}
       />
       {howToJsonLd && (
         <script
@@ -418,6 +455,27 @@ export default async function FishDetailPage({ params }: PageProps) {
           title={`${fish.name}の釣り方・タックル情報｜ツリスポ`}
         />
       </div>
+
+      {/* 統計情報 */}
+      {fish.spots.length > 0 && (() => {
+        const fishPrefectures = new Set(fish.spots.map(s => s.region.prefecture));
+        return (
+          <div className="mb-6 grid grid-cols-3 gap-2 sm:mb-8 sm:gap-3">
+            <div className="rounded-lg border bg-blue-50/50 p-3 text-center">
+              <p className="text-lg font-bold text-blue-700 sm:text-xl">{fish.spots.length}</p>
+              <p className="text-[10px] text-blue-600 sm:text-xs">釣れるスポット</p>
+            </div>
+            <div className="rounded-lg border bg-emerald-50/50 p-3 text-center">
+              <p className="text-lg font-bold text-emerald-700 sm:text-xl">{fishPrefectures.size}</p>
+              <p className="text-[10px] text-emerald-600 sm:text-xs">都道府県</p>
+            </div>
+            <div className="rounded-lg border bg-amber-50/50 p-3 text-center">
+              <p className="text-lg font-bold text-amber-700 sm:text-xl">{fish.seasonMonths.length}</p>
+              <p className="text-[10px] text-amber-600 sm:text-xs">ヶ月シーズン</p>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* 実釣写真ギャラリー */}
       {fish.userPhotos && fish.userPhotos.length > 0 && (
