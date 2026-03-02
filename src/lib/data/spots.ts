@@ -82,7 +82,7 @@ const _baseSpots: FishingSpot[] = [
     images: ["/images/spots/wikimedia/otaru-port.jpg"],
     imageAttribution: "Photo: Samantha Bell / Wikimedia Commons (CC BY 2.0)",
     rating: 4.0,
-    reviewCount: 185,
+    reviewCount: 185, googleRating: 4, googleReviewCount: 26,
     catchableFish: [
       { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
@@ -170,7 +170,7 @@ const _baseSpots: FishingSpot[] = [
     images: ["/images/spots/wikimedia/ishikari-shinko.jpg"],
     imageAttribution: "Photo: T DMY / Wikimedia Commons (CC BY 3.0)",
     rating: 3.8,
-    reviewCount: 142,
+    reviewCount: 142, googleRating: 3.2, googleReviewCount: 17,
     catchableFish: [
       { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
@@ -261,7 +261,7 @@ const _baseSpots: FishingSpot[] = [
     images: ["/images/spots/wikimedia/sendai-chuo-park.jpg"],
     imageAttribution: "Photo: Ellerad / Wikimedia Commons (CC BY-SA 4.0)",
     rating: 3.7,
-    reviewCount: 98,
+    reviewCount: 98, googleRating: 3.9, googleReviewCount: 467,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -348,7 +348,7 @@ const _baseSpots: FishingSpot[] = [
     mainImageUrl: "/images/spots/shobutada-beach.jpg",
     images: ["/images/spots/shobutada-beach.jpg"],
     rating: 3.6,
-    reviewCount: 54,
+    reviewCount: 54, googleRating: 4, googleReviewCount: 601,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("hirame"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -518,7 +518,7 @@ const _baseSpots: FishingSpot[] = [
     images: ["/images/spots/wikimedia/katsuura-port.jpg"],
     imageAttribution: "Photo: Abasaa / Wikimedia Commons (Public Domain)",
     rating: 4.1,
-    reviewCount: 176,
+    reviewCount: 176, googleRating: 3.7, googleReviewCount: 247,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -610,7 +610,7 @@ const _baseSpots: FishingSpot[] = [
     mainImageUrl: "/images/spots/tateyama-jieitai-breakwater.jpg",
     images: ["/images/spots/tateyama-jieitai-breakwater.jpg"],
     rating: 4.0,
-    reviewCount: 89,
+    reviewCount: 89, googleRating: 3.5, googleReviewCount: 20,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
@@ -690,7 +690,7 @@ const _baseSpots: FishingSpot[] = [
     imageAttribution: "Photo: Wikimedia Commons / CC BY-SA 3.0",
     images: ["/images/spots/wikimedia/wakasu-seaside-park.jpg"],
     rating: 4.0,
-    reviewCount: 267,
+    reviewCount: 267, googleRating: 4.1, googleReviewCount: 4282,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -985,7 +985,7 @@ const _baseSpots: FishingSpot[] = [
     imageAttribution: "Photo: Wikimedia Commons / CC BY-SA 4.0",
     images: ["/images/spots/wikimedia/honmoku-fishing.jpg"],
     rating: 4.0,
-    reviewCount: 95,
+    reviewCount: 95, googleRating: 3.8, googleReviewCount: 1725,
     catchableFish: [
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中〜夕方", method: "穴釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "メバリング" },
@@ -1080,7 +1080,7 @@ const _baseSpots: FishingSpot[] = [
     imageAttribution: "Photo: Wikimedia Commons / CC0",
     images: ["/images/spots/wikimedia/enoshima-breakwater.jpg"],
     rating: 4.1,
-    reviewCount: 203,
+    reviewCount: 203, googleRating: 4.4, googleReviewCount: 40,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ジグサビキ" },
@@ -1175,7 +1175,7 @@ const _baseSpots: FishingSpot[] = [
     imageAttribution: "Photo: Wikimedia Commons / CC BY-SA 3.0",
     images: ["/images/spots/wikimedia/jogashima.jpg"],
     rating: 3.8,
-    reviewCount: 67,
+    reviewCount: 67, googleRating: 3.5, googleReviewCount: 383,
     catchableFish: [
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "穴釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
@@ -1347,7 +1347,7 @@ const _baseSpots: FishingSpot[] = [
     imageAttribution: "Photo: fto mizno / CC BY 2.0",
     images: ["/images/spots/wikimedia/atami-port.jpg"],
     rating: 3.9,
-    reviewCount: 145,
+    reviewCount: 145, googleRating: 3.6, googleReviewCount: 594,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
@@ -1436,7 +1436,7 @@ const _baseSpots: FishingSpot[] = [
     imageAttribution: "Photo: Akahito Yamabe / CC BY-SA 4.0",
     images: ["/images/spots/wikimedia/shimizu-port.jpg"],
     rating: 4.1,
-    reviewCount: 167,
+    reviewCount: 167, googleRating: 4.4, googleReviewCount: 34,
     catchableFish: [
       { fish: fish("tachiuo"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "テンヤ" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -1528,7 +1528,7 @@ const _baseSpots: FishingSpot[] = [
     imageAttribution: "Photo: Wikimedia Commons / CC BY-SA 4.0",
     images: ["/images/spots/wikimedia/morozaki-port.jpg"],
     rating: 4.0,
-    reviewCount: 134,
+    reviewCount: 134, googleRating: 3.5, googleReviewCount: 36,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -1615,7 +1615,7 @@ const _baseSpots: FishingSpot[] = [
     mainImageUrl: "/images/spots/toyohama-fishing-pier.jpg",
     images: ["/images/spots/toyohama-fishing-pier.jpg"],
     rating: 3.7,
-    reviewCount: 87,
+    reviewCount: 87, googleRating: 3.5, googleReviewCount: 617,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
@@ -1704,7 +1704,7 @@ const _baseSpots: FishingSpot[] = [
     imageAttribution: "Photo: Wikimedia Commons / CC BY-SA 4.0",
     images: ["/images/spots/wikimedia/toba-port.jpg"],
     rating: 4.0,
-    reviewCount: 112,
+    reviewCount: 112, googleRating: 4.1, googleReviewCount: 286,
     catchableFish: [
       { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -1797,7 +1797,7 @@ const _baseSpots: FishingSpot[] = [
     mainImageUrl: "/images/spots/marina-city-fishing.jpg",
     images: ["/images/spots/marina-city-fishing.jpg"],
     rating: 4.3,
-    reviewCount: 234,
+    reviewCount: 234, googleRating: 3.1, googleReviewCount: 7,
     catchableFish: [
       { fish: fish("madai"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ・ウキ釣り" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -2152,7 +2152,7 @@ const _baseSpots: FishingSpot[] = [
     imageAttribution: "Photo: Soramimi / CC BY-SA 4.0",
     images: ["/images/spots/wikimedia/hakata-wharf.jpg"],
     rating: 3.7,
-    reviewCount: 156,
+    reviewCount: 156, googleRating: 4.4, googleReviewCount: 63,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
@@ -2241,7 +2241,7 @@ const _baseSpots: FishingSpot[] = [
     imageAttribution: "Photo: Wikimedia Commons / CC0",
     images: ["/images/spots/wikimedia/shikanoshima.jpg"],
     rating: 3.8,
-    reviewCount: 92,
+    reviewCount: 92, googleRating: 4.4, googleReviewCount: 353,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -2318,7 +2318,7 @@ const _baseSpots: FishingSpot[] = [
     imageAttribution: "Photo: Immanuelle / CC BY-SA 4.0",
     images: ["/images/spots/wikimedia/kagoshima-port.jpg"],
     rating: 3.9,
-    reviewCount: 118,
+    reviewCount: 118, googleRating: 4.6, googleReviewCount: 13,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("tachiuo"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "テンヤ" },
@@ -2410,7 +2410,7 @@ const _baseSpots: FishingSpot[] = [
     imageAttribution: "Photo: Wikimedia Commons / CC BY-SA 4.0",
     images: ["/images/spots/wikimedia/naha-ichimonji.jpg"],
     rating: 4.3,
-    reviewCount: 87,
+    reviewCount: 87, googleRating: 2.8, googleReviewCount: 4,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -2484,7 +2484,7 @@ const _baseSpots: FishingSpot[] = [
     mainImageUrl: "/images/spots/chatan-fisherina.jpg",
     images: ["/images/spots/chatan-fisherina.jpg"],
     rating: 3.6,
-    reviewCount: 68,
+    reviewCount: 68, googleRating: 4.2, googleReviewCount: 75,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("haze"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -2571,7 +2571,7 @@ const _baseSpots: FishingSpot[] = [
     imageAttribution: "Photo: Nesnad / CC BY 4.0",
     images: ["/images/spots/wikimedia/oiso-port.jpg"],
     rating: 3.8,
-    reviewCount: 123,
+    reviewCount: 123, googleRating: 3.8, googleReviewCount: 17,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("tachiuo"), monthStart: 7, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "テンヤ" },
@@ -2661,7 +2661,7 @@ const _baseSpots: FishingSpot[] = [
     imageAttribution: "Photo: Kobayashimori / CC BY-SA 3.0",
     images: ["/images/spots/wikimedia/numazu-port.jpg"],
     rating: 3.9,
-    reviewCount: 145,
+    reviewCount: 145, googleRating: 3.9, googleReviewCount: 167,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("tachiuo"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "テンヤ" },
@@ -2753,7 +2753,7 @@ const _baseSpots: FishingSpot[] = [
     imageAttribution: "Photo: Wikimedia Commons / CC BY 3.0",
     images: ["/images/spots/wikimedia/misaki-port.jpg"],
     rating: 4.0,
-    reviewCount: 167,
+    reviewCount: 167, googleRating: 4, googleReviewCount: 1548,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },

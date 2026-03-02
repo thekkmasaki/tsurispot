@@ -66,7 +66,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "浦山ダム駐車場（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/chichibu-sakurako.jpg", images: ["/images/spots/chichibu-sakurako.jpg"],
-    rating: 3.7, reviewCount: 67,
+    rating: 3.7, reviewCount: 67, googleRating: 4.1, googleReviewCount: 2067,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" },
@@ -89,7 +89,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     region: lr("r733"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: false, hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/yanasegawa.jpg", images: ["/images/spots/yanasegawa.jpg"],
-    rating: 3.3, reviewCount: 45,
+    rating: 3.3, reviewCount: 45, googleRating: 3.9, googleReviewCount: 14,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
       { fish: fish("koi"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "吸い込み釣り" },
@@ -115,7 +115,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/oppegawa.jpg", images: ["/images/spots/oppegawa.jpg"],
-    rating: 3.5, reviewCount: 38,
+    rating: 3.5, reviewCount: 38, googleRating: 4.5, googleReviewCount: 4,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -140,7 +140,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "巾着田駐車場（500円/日）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/komagawa.jpg", images: ["/images/spots/komagawa.jpg"],
-    rating: 3.8, reviewCount: 92,
+    rating: 3.8, reviewCount: 92, googleRating: 4.4, googleReviewCount: 18,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -167,7 +167,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "御岳渓谷駐車場（1,000円/日）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/tamagawa-mitake.jpg", images: ["/images/spots/tamagawa-mitake.jpg"],
-    rating: 4.1, reviewCount: 156,
+    rating: 4.1, reviewCount: 156, googleRating: 4.4, googleReviewCount: 546,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" },
       { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ルアー" },
@@ -189,7 +189,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     region: lr("r737"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: false, hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/asakawa.jpg", images: ["/images/spots/asakawa.jpg"],
-    rating: 3.2, reviewCount: 34,
+    rating: 3.2, reviewCount: 34, googleRating: 3.8, googleReviewCount: 21,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
       { fish: fish("koi"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "吸い込み釣り" },
@@ -240,7 +240,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "河川敷に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/sakawagawa.jpg", images: ["/images/spots/sakawagawa.jpg"],
-    rating: 4.0, reviewCount: 145,
+    rating: 4.0, reviewCount: 145, googleRating: 4.3, googleReviewCount: 15,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -265,7 +265,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "養老渓谷周辺に駐車場あり（500円/日）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/yorogawa.jpg", images: ["/images/spots/yorogawa.jpg"],
-    rating: 3.6, reviewCount: 56,
+    rating: 3.6, reviewCount: 56, googleRating: 2.9, googleReviewCount: 22,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -287,7 +287,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "手賀沼親水広場駐車場（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/teganuma.jpg", images: ["/images/spots/teganuma.jpg"],
-    rating: 3.4, reviewCount: 89,
+    rating: 3.4, reviewCount: 89, googleRating: 4.1, googleReviewCount: 196,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝", method: "へら竿" },
@@ -315,7 +315,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "涸沼自然公園駐車場（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/hinuma.jpg", images: ["/images/spots/hinuma.jpg"],
-    rating: 3.8, reviewCount: 112,
+    rating: 3.8, reviewCount: 112, googleRating: 4, googleReviewCount: 150,
     catchableFish: [
       { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -366,7 +366,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "塩原温泉各所に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/houkigawa.jpg", images: ["/images/spots/houkigawa.jpg"],
-    rating: 4.0, reviewCount: 89,
+    rating: 4.0, reviewCount: 89, googleRating: 3.6, googleReviewCount: 34,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" },
@@ -414,7 +414,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "各入渓ポイントに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/katashina.jpg", images: ["/images/spots/katashina.jpg"],
-    rating: 4.0, reviewCount: 72,
+    rating: 4.0, reviewCount: 72, googleRating: 3.5, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -439,7 +439,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "小菅フィッシングビレッジに駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: true, rentalDetail: "管理釣り場でレンタルタックルあり",
     mainImageUrl: "/images/spots/kosugegawa.jpg", images: ["/images/spots/kosugegawa.jpg"],
-    rating: 4.1, reviewCount: 98,
+    rating: 4.1, reviewCount: 98, googleRating: 4, googleReviewCount: 3,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" },
@@ -489,7 +489,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "奈良井宿駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/naraigawa.jpg", images: ["/images/spots/naraigawa.jpg"],
-    rating: 3.6, reviewCount: 45,
+    rating: 3.6, reviewCount: 45, googleRating: 4, googleReviewCount: 13,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -513,7 +513,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/miomotegawa.jpg", images: ["/images/spots/miomotegawa.jpg"],
-    rating: 4.1, reviewCount: 134,
+    rating: 4.1, reviewCount: 134, googleRating: 3.7, googleReviewCount: 11,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
       { fish: fish("iwana"), monthStart: 4, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -537,7 +537,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "秋ヶ瀬公園駐車場（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/arakawa-akigase.jpg", images: ["/images/spots/arakawa-akigase.jpg"],
-    rating: 3.6, reviewCount: 145,
+    rating: 3.6, reviewCount: 145, googleRating: 3.8, googleReviewCount: 28,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("koi"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "吸い込み釣り" },
@@ -566,7 +566,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/tonegawa-sawara.jpg", images: ["/images/spots/tonegawa-sawara.jpg"],
-    rating: 3.5, reviewCount: 78,
+    rating: 3.5, reviewCount: 78, googleRating: 4.5, googleReviewCount: 8,
     catchableFish: [
       { fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "へら竿" },
       { fish: fish("koi"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "吸い込み釣り" },
@@ -595,7 +595,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/omoigawa.jpg", images: ["/images/spots/omoigawa.jpg"],
-    rating: 3.4, reviewCount: 42,
+    rating: 3.4, reviewCount: 42, googleRating: 3.7, googleReviewCount: 49,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
       { fish: fish("koi"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "吸い込み釣り" },
@@ -623,7 +623,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "入渓ポイント近くに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/himekawa.jpg", images: ["/images/spots/himekawa.jpg"],
-    rating: 4.2, reviewCount: 67,
+    rating: 4.2, reviewCount: 67, googleRating: 3.7, googleReviewCount: 55,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "エサ釣り" },
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },

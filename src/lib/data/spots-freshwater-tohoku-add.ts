@@ -61,7 +61,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "各入渓ポイント付近に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/tokachigawa.jpg", images: ["/images/spots/tokachigawa.jpg"],
-    rating: 4.4, reviewCount: 76,
+    rating: 4.4, reviewCount: 76, googleRating: 3.9, googleReviewCount: 105,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("iwana"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" },
@@ -85,7 +85,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "各入渓ポイント付近に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/teshiogawa.jpg", images: ["/images/spots/teshiogawa.jpg"],
-    rating: 4.5, reviewCount: 62,
+    rating: 4.5, reviewCount: 62, googleRating: 4, googleReviewCount: 143,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("iwana"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" },
@@ -109,7 +109,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "定山渓温泉街に有料駐車場あり。河川沿いにも駐車スペース点在",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/toyohiragawa.jpg", images: ["/images/spots/toyohiragawa.jpg"],
-    rating: 3.9, reviewCount: 98,
+    rating: 3.9, reviewCount: 98, googleRating: 4.2, googleReviewCount: 70,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("yamame"), monthStart: 6, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" },
@@ -133,7 +133,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "層雲峡温泉街に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/ishikarigawa-upper.jpg", images: ["/images/spots/ishikarigawa-upper.jpg"],
-    rating: 4.1, reviewCount: 52,
+    rating: 4.1, reviewCount: 52, googleRating: 3.3, googleReviewCount: 3,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("yamame"), monthStart: 6, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" },
@@ -158,7 +158,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "奥入瀬渓流沿いに無料駐車場複数あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/oirasegawa.jpg", images: ["/images/spots/oirasegawa.jpg"],
-    rating: 4.2, reviewCount: 71,
+    rating: 4.2, reviewCount: 71, googleRating: 4.5, googleReviewCount: 46,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("iwana"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "餌釣り" },
@@ -183,7 +183,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "虹の湖公園駐車場（無料）等あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/asaseishigawa.jpg", images: ["/images/spots/asaseishigawa.jpg"],
-    rating: 3.7, reviewCount: 38,
+    rating: 3.7, reviewCount: 38, googleRating: 4, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "餌釣り" },
       { fish: fish("iwana"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -207,7 +207,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "入渓ポイント付近に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/akaishigawa.jpg", images: ["/images/spots/akaishigawa.jpg"],
-    rating: 4.3, reviewCount: 45,
+    rating: 4.3, reviewCount: 45, googleRating: 3.8, googleReviewCount: 10,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "餌釣り" },
       { fish: fish("yamame"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" },
@@ -232,7 +232,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/kitakamigawa-upper.jpg", images: ["/images/spots/kitakamigawa-upper.jpg"],
-    rating: 4.0, reviewCount: 65,
+    rating: 4.0, reviewCount: 65, googleRating: 4, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("iwana"), monthStart: 4, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "餌釣り" },
@@ -257,7 +257,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/kesengawa.jpg", images: ["/images/spots/kesengawa.jpg"],
-    rating: 4.0, reviewCount: 52,
+    rating: 4.0, reviewCount: 52, googleRating: 4.7, googleReviewCount: 3,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "餌釣り" },
@@ -281,7 +281,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "猊鼻渓駐車場（有料）、上流域に路肩駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/satetsugawa.jpg", images: ["/images/spots/satetsugawa.jpg"],
-    rating: 3.8, reviewCount: 35,
+    rating: 3.8, reviewCount: 35, googleRating: 4.2, googleReviewCount: 6,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("iwana"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "餌釣り" },
@@ -306,7 +306,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/yoneshirogawa-upper.jpg", images: ["/images/spots/yoneshirogawa-upper.jpg"],
-    rating: 4.4, reviewCount: 89,
+    rating: 4.4, reviewCount: 89, googleRating: 4, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("sakuramasu"), monthStart: 3, monthEnd: 8, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("ayu"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -331,7 +331,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "入渓ポイント付近に路肩駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/anigawa.jpg", images: ["/images/spots/anigawa.jpg"],
-    rating: 4.1, reviewCount: 41,
+    rating: 4.1, reviewCount: 41, googleRating: 3.5, googleReviewCount: 16,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "餌釣り" },
       { fish: fish("yamame"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -355,7 +355,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "田沢湖畔に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/tazawako.jpg", images: ["/images/spots/tazawako.jpg"],
-    rating: 3.8, reviewCount: 58,
+    rating: 3.8, reviewCount: 58, googleRating: 4.4, googleReviewCount: 950,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("himemasu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "早朝", method: "トローリング" },
@@ -427,7 +427,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "入渓ポイント付近に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/akagawa.jpg", images: ["/images/spots/akagawa.jpg"],
-    rating: 3.9, reviewCount: 44,
+    rating: 3.9, reviewCount: 44, googleRating: 3.7, googleReviewCount: 19,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("iwana"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "餌釣り" },
@@ -452,7 +452,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "秋保温泉周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/natorigawa.jpg", images: ["/images/spots/natorigawa.jpg"],
-    rating: 4.1, reviewCount: 59,
+    rating: 4.1, reviewCount: 59, googleRating: 4.4, googleReviewCount: 8,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("iwana"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "餌釣り" },
@@ -499,7 +499,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "七ヶ宿ダム周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/shiroishigawa.jpg", images: ["/images/spots/shiroishigawa.jpg"],
-    rating: 3.8, reviewCount: 47,
+    rating: 3.8, reviewCount: 47, googleRating: 4.3, googleReviewCount: 44,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("iwana"), monthStart: 4, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "餌釣り" },
@@ -523,7 +523,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/abukumagawa-miyagi.jpg", images: ["/images/spots/abukumagawa-miyagi.jpg"],
-    rating: 3.9, reviewCount: 72,
+    rating: 3.9, reviewCount: 72, googleRating: 2, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("oikawa"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -552,7 +552,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "入渓ポイント付近に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/tadamigawa-upper.jpg", images: ["/images/spots/tadamigawa-upper.jpg"],
-    rating: 4.4, reviewCount: 58,
+    rating: 4.4, reviewCount: 58, googleRating: 4.3, googleReviewCount: 103,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "餌釣り" },
       { fish: fish("yamame"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -598,7 +598,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "天神浜駐車場（無料・冬季有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/inawashiroko-wakasagi.jpg", images: ["/images/spots/inawashiroko-wakasagi.jpg"],
-    rating: 3.9, reviewCount: 82,
+    rating: 3.9, reviewCount: 82, googleRating: 3.7, googleReviewCount: 81,
     catchableFish: [
       { fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ワカサギ仕掛け" },
       { fish: fish("herabuna"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝", method: "へら竿" },
@@ -623,7 +623,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     hasParking: true, parkingDetail: "湖畔に無料駐車場複数あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
     mainImageUrl: "/images/spots/hibarako-wakasagi.jpg", images: ["/images/spots/hibarako-wakasagi.jpg"],
-    rating: 4.2, reviewCount: 115,
+    rating: 4.2, reviewCount: 115, googleRating: 4.3, googleReviewCount: 471,
     catchableFish: [
       { fish: fish("wakasagi"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ドーム船/氷上穴釣り" },
       { fish: fish("blackbass"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
