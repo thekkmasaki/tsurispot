@@ -138,7 +138,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s206", name: "南港北防波堤", slug: "nanko-kita-breakwater",
     description: "南港エリアの北側に位置する防波堤。潮通しが良くアジの回遊が多い。サビキ釣りの好ポイントでファミリーにも人気。",
-    latitude: 34.64280, longitude: 135.411200, address: "〒559-0034 大阪府大阪市住之江区南港北3丁目",
+    latitude: 34.64280, longitude: 135.411200, address: "〒559-0034 大阪府大阪市住之江区南港北",
     accessInfo: "ニュートラム「ポートタウン西」駅から徒歩約15分。",
     region: region("r131"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: false, hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
@@ -169,7 +169,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s207", name: "かもめ大橋下", slug: "kamome-ohashi",
     description: "南港のランドマーク・かもめ大橋の下。橋脚周辺にシーバスやチヌが付き、ルアーマンに人気の実力派ポイント。タチウオの名所としても有名。",
-    latitude: 34.6250, longitude: 135.4050, address: "〒559-0032 大阪府大阪市住之江区南港南5-6（かもめ大橋下）",
+    latitude: 34.6250, longitude: 135.4050, address: "〒559-0032 大阪府大阪市住之江区南港南",
     accessInfo: "ニュートラム「南港東」駅から徒歩約20分。阪神高速4号湾岸線南港北出口から約5分。",
     region: region("r131"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "周辺に無料駐車スペースあり",
@@ -198,7 +198,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s208", name: "南港大橋下（フェリーターミナル横）", slug: "nanko-ohashi",
     description: "フェリーターミナル横のポイント。橋脚とフェリーの水流で魚が集まりやすい。シーバスとタチウオの好ポイント。",
-    latitude: 34.6300, longitude: 135.4180, address: "〒559-0032 大阪府大阪市住之江区南港南（南港大橋下）",
+    latitude: 34.6300, longitude: 135.4180, address: "〒559-0032 大阪府大阪市住之江区南港南2丁目1-1",
     accessInfo: "ニュートラム「フェリーターミナル」駅から徒歩約10分。",
     region: region("r131"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "周辺に駐車スペースあり",
@@ -224,7 +224,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s209", name: "鶴浜地区護岸", slug: "tsuruhama-gogan",
     description: "大正区の護岸釣りスポット。IKEAやコストコに近い便利な立地。チヌやシーバスの実績が高く、買い物ついでに立ち寄る人も。",
-    latitude: 34.6478, longitude: 135.4437, address: "〒551-0023 大阪府大阪市大正区鶴町3丁目",
+    latitude: 34.6478, longitude: 135.4437, address: "〒551-0023 大阪府大阪市大正区鶴町3丁目27",
     accessInfo: "大阪シティバス「鶴町四」停留所から徒歩約5分。阪神高速大正出口から約10分。",
     region: region("r132"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "近隣商業施設の駐車場利用可",
@@ -249,7 +249,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s210", name: "舞洲地区護岸", slug: "maishima-gogan",
     description: "大阪市此花区の人工島・舞洲の護岸。バーベキュー場やスポーツ施設の近くで釣りが楽しめる。タチウオ・シーバスの実績あり。",
-    latitude: 34.6640, longitude: 135.3980, address: "〒554-0042 大阪府大阪市此花区北港緑地2丁目",
+    latitude: 34.6640, longitude: 135.3980, address: "〒554-0042 大阪府大阪市此花区3",
     accessInfo: "JR桜島駅からバスで約15分「舞洲スポーツアイランド」下車。",
     region: region("r132"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "舞洲各施設の駐車場利用可",
@@ -275,7 +275,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s211", name: "助松埠頭", slug: "sukematsu-wharf",
     description: "泉大津の工業港。車横付けポイントが人気で、サビキでのアジ・サバの数釣りからタチウオまで狙える。大阪湾中部の安定ポイント。",
-    latitude: 34.511200, longitude: 135.38121200, address: "〒595-0074 大阪府泉大津市小津島町（助松埠頭 POSCO前）",
+    latitude: 34.511200, longitude: 135.38121200, address: "〒595-0074 大阪府泉大津市小津島町",
     accessInfo: "阪神高速湾岸線助松出口から約5分。泉大津大橋を渡って2つ目の信号を左折。",
     region: region("r133"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "路肩駐車可能エリアあり",
@@ -304,7 +304,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s212", name: "汐見埠頭 砂上げ場", slug: "shiomi-wharf",
     description: "泉大津の人気ポイント。広い護岸で車横付けが可能。サビキ・タチウオ・チヌと多彩な魚種。夜間は封鎖される場合があるので注意。",
-    latitude: 34.5050, longitude: 135.3750, address: "〒595-0054 大阪府泉大津市汐見町（汐見埠頭 砂上げ場）",
+    latitude: 34.5050, longitude: 135.3750, address: "〒595-0054 大阪府泉大津市汐見町106",
     accessInfo: "臨海線・汐見町交差点を曲がる。阪神高速湾岸線助松出口から約10分。",
     region: region("r133"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "車横付け可能",
@@ -330,7 +330,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s213", name: "深日漁港", slug: "fuke-port",
     description: "大阪府最南端に位置する歴史ある漁港。潮通し抜群でタチウオ・アオリイカ・グレなど多彩な魚種が狙える。隣接する海上釣り堀「岬」も人気。",
-    latitude: 34.3195, longitude: 135.1430, address: "〒599-0303 大阪府泉南郡岬町深日2917（深日港）",
+    latitude: 34.3195, longitude: 135.1430, address: "〒599-0303 大阪府岬町深日",
     accessInfo: "南海多奈川線「深日港」駅から徒歩5分。阪和道泉南ICから約30分。",
     region: region("r134"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に無料駐車スペースあり",
@@ -360,7 +360,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s214", name: "小島漁港", slug: "kojima-port-osaka",
     description: "岬町の小さな漁港。地元の釣り人が通う穴場スポット。アジのサビキ釣りやアオリイカのエギングが楽しめる。",
-    latitude: 34.3100, longitude: 135.1300, address: "〒599-0312 大阪府泉南郡岬町多奈川小島（小島漁港）",
+    latitude: 34.3100, longitude: 135.1300, address: "〒599-0314 大阪府岬町多奈川小島",
     accessInfo: "南海多奈川線「多奈川」駅からバスで約10分。",
     region: region("r134"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に少数の駐車スペース",
@@ -385,7 +385,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s215", name: "谷川港", slug: "tanigawa-port",
     description: "岬町多奈川の静かな漁港。地磯に隣接し、アオリイカやグレの穴場。秋のエギングシーズンが特に人気。",
-    latitude: 34.3150, longitude: 135.1350, address: "〒599-0311 大阪府泉南郡岬町多奈川谷川（谷川港）",
+    latitude: 34.3150, longitude: 135.1350, address: "〒599-0311 大阪府岬町多奈川谷川",
     accessInfo: "南海多奈川線「多奈川」駅から徒歩約15分。",
     region: region("r134"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に駐車スペースあり",
@@ -437,7 +437,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s217", name: "南芦屋浜", slug: "minami-ashiyahama",
     description: "芦屋市の埋め立て地にある柵付き護岸。安全で足場良好、ファミリーに大人気。夜のクロダイ（黒鯛）狙いも盛ん。",
-    latitude: 34.711200, longitude: 135.311700, address: "〒659-0032 兵庫県芦屋市涼風町（南芦屋浜）",
+    latitude: 34.711200, longitude: 135.311700, address: "〒659-0034 兵庫県芦屋市陽光町4",
     accessInfo: "阪神「打出」駅からバスで約10分。阪神高速芦屋出口から約5分。",
     region: region("r135"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "近隣に有料駐車場あり",
@@ -466,7 +466,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s218", name: "神戸空港ベランダ", slug: "kobe-airport-veranda",
     description: "神戸空港島の護岸釣り場。飛行機を眺めながら釣りが楽しめる開放的なスポット。サビキ・タチウオ・シーバスの実績あり。",
-    latitude: 34.6316, longitude: 135.2239, address: "〒650-0048 兵庫県神戸市中央区神戸空港（神戸空港ベランダ）",
+    latitude: 34.6316, longitude: 135.2239, address: "〒650-0048 兵庫県神戸市中央区神戸空港",
     accessInfo: "ポートライナー「神戸空港」駅から徒歩約10分。",
     region: region("r135"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "空港駐車場利用可（有料）",
@@ -517,7 +517,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s223", name: "田井漁港", slug: "tai-port-maizuru",
     description: "舞鶴市の静かな漁港。アジング・メバリングの穴場として知られ、夜の常夜灯周りが好ポイント。",
-    latitude: 35.491200, longitude: 135.431200, address: "〒624-0932 京都府舞鶴市田井1074",
+    latitude: 35.491200, longitude: 135.431200, address: "〒625-0157 京都府舞鶴市田井1074",
     accessInfo: "舞鶴若狭道舞鶴東ICから約15分。",
     region: region("r137"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港横に駐車スペースあり",

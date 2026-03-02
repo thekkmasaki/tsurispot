@@ -40,7 +40,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
   {
     id: "fw-161", name: "鴨川（賀茂川）", slug: "kamogawa-river-kyoto",
     description: "京都市街を南北に流れる京都のシンボル的な川。上流の賀茂川エリアはオイカワ・アユが豊富で、夏には友釣りやルアーでアユを狙う釣り人で賑わう。源流域の雲ヶ畑周辺ではアマゴも釣れる。四条大橋から見える納涼床と川面の風景は京都ならではの風情がある。市街地でありながら清流が保たれており、初心者でも気軽にオイカワ釣りが楽しめる。",
-    latitude: 35.0333, longitude: 135.7697, address: "〒603-8047 京都府京都市北区上賀茂本山（上賀茂神社付近・鴨川）",
+    latitude: 35.0333, longitude: 135.7697, address: "〒606-0801 京都府京都市左京区下鴨宮河町",
     accessInfo: "地下鉄烏丸線北山駅から徒歩約5分。京都市内各所からバスでアクセス可能。",
     region: lr("r1100"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "賀茂川漁協遊漁券 大人3,500円（年券）/ 日券1,500円",
@@ -68,7 +68,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
   {
     id: "fw-162", name: "宇治川", slug: "ujigawa-river-kyoto",
     description: "琵琶湖から流れ出る瀬田川が京都府に入り宇治川と名を変える。天ヶ瀬ダム下流から宇治橋周辺にかけてはブラックバスの人気フィールドで、50cmオーバーの実績も多数。夏場はアユの友釣りも盛んで、冬はコイ・フナ・寒バエが狙える。世界遺産の平等院鳳凰堂のすぐそばで釣りができる贅沢なロケーション。",
-    latitude: 34.8892, longitude: 135.8081, address: "〒611-0021 京都府宇治市宇治塔川（宇治橋付近）",
+    latitude: 34.8892, longitude: 135.8081, address: "〒611-0021 京都府宇治市宇治蓮華2-2",
     accessInfo: "京滋バイパス宇治東ICから約5分。JR奈良線宇治駅から徒歩約10分。京阪宇治線宇治駅から徒歩約5分。",
     region: lr("r1101"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "宇治川漁協遊漁券 大人3,000円（年券）/ 日券1,500円",
@@ -97,7 +97,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
   {
     id: "fw-163", name: "木津川（笠置エリア）", slug: "kizugawa-kasagi-river",
     description: "京都府南部を流れる淀川水系の大河。笠置キャンプ場周辺はアユの友釣りとスモールマウスバスの人気フィールドとして全国的に知られる。笠置大橋下流は友鮎釣りの一級ポイントで、支流の白砂川ではカワムツやテナガエビも手軽に楽しめる。笠置の自然岩と清流が織りなす景観は絶景。",
-    latitude: 34.7578, longitude: 135.9369, address: "〒619-1303 京都府相楽郡笠置町笠置（笠置キャンプ場付近）",
+    latitude: 34.7578, longitude: 135.9369, address: "〒619-1303 京都府笠置町笠置佃",
     accessInfo: "京奈和自動車道木津ICから約20分。JR関西本線笠置駅から徒歩約5分。",
     region: lr("r1102"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "木津川漁協遊漁券 大人5,000円（年券）/ 日券2,000円",
@@ -126,7 +126,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
   {
     id: "fw-164", name: "美山川", slug: "miyamagawa-river-kyoto",
     description: "京都府南丹市美山町を流れる由良川上流域の清流。「かやぶきの里」で有名な美山の大自然に囲まれ、全国の利き鮎会で準グランプリを4度獲得した極上のアユが釣れる。芦生の森を源流とする水質は京都随一で、アマゴ・ヤマメの渓流釣りも楽しめる。日本の原風景が残る里山での釣りは格別の贅沢。",
-    latitude: 35.2556, longitude: 135.5833, address: "〒601-0751 京都府南丹市美山町島（美山川）",
+    latitude: 35.2556, longitude: 135.5833, address: "〒601-0722 京都府南丹市美山町安掛寺ノ下31-1",
     accessInfo: "京都縦貫自動車道園部ICから約30分。JR園部駅から南丹市営バスで約50分。",
     region: lr("r1103"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "美山漁協遊漁券 アユ日券3,500円 / アマゴ日券2,500円",
@@ -153,7 +153,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
   {
     id: "fw-165", name: "上桂川（京北エリア）", slug: "kamikatsura-river-keihoku",
     description: "京都市右京区京北を流れる桂川の最上流部。平安時代から皇室に鮎を献上していた歴史ある渓流で「献上鮎」の伝統が残る。アマゴの渓流釣りが特に人気で、解禁日には関西一円から釣り人が集まる。京都市街から国道162号で約1時間とアクセスも良好。道の駅ウッディー京北で遊漁券を購入できる。",
-    latitude: 35.1583, longitude: 135.6250, address: "〒601-0251 京都府京都市右京区京北周山町（上桂川）",
+    latitude: 35.1583, longitude: 135.6250, address: "〒601-0251 京都府京都市右京区京北周山町アチラ谷19",
     accessInfo: "国道162号線で京都市街から約60分。道の駅ウッディー京北が目印。",
     region: lr("r1104"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "上桂川漁協遊漁券 年券7,000円 / 日券3,500円",
@@ -277,7 +277,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
   {
     id: "fw-170", name: "天若湖（日吉ダム）", slug: "amanjakuko-hiyoshi-dam",
     description: "京都府南丹市日吉町にある日吉ダムのダム湖。ブラックバスとヘラブナの釣り場として関西のアングラーに人気。ダム資料館「ビジターセンター」が併設され、観光と釣りを同時に楽しめる。スプリングパーク（温泉施設）も隣接しており、釣りの後は温泉でリラックスできる。",
-    latitude: 35.1333, longitude: 135.5167, address: "〒629-0335 京都府南丹市日吉町中（日吉ダム・天若湖）",
+    latitude: 35.1333, longitude: 135.5167, address: "〒629-0335 京都府南丹市日吉町中神子ヶ谷68-68",
     accessInfo: "京都縦貫自動車道園部ICから約15分。JR園部駅から車で約20分。",
     region: lr("r1109"), spotType: "river", difficulty: "intermediate",
     isFree: true,
@@ -304,7 +304,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
   {
     id: "fw-171", name: "高野川", slug: "takanogawa-river-kyoto",
     description: "京都市左京区を流れる鴨川の支流。比叡山のふもとから流れ出し、出町柳で鴨川と合流する。八瀬・大原エリアの上流部はアマゴが釣れる渓流で、下流の出町柳周辺ではオイカワやコイが手軽に釣れる。下鴨神社の「糺の森」のすぐそばを流れ、散策と合わせた釣りが楽しめる。",
-    latitude: 35.0458, longitude: 135.7828, address: "〒606-8103 京都府京都市左京区高野西開町（高野川）",
+    latitude: 35.0458, longitude: 135.7828, address: "〒606-0801 京都府京都市左京区下鴨宮河町",
     accessInfo: "叡山電鉄出町柳駅から徒歩約3分。京都市バス「出町柳駅前」下車すぐ。",
     region: lr("r1110"), spotType: "river", difficulty: "beginner",
     isFree: false, feeDetail: "賀茂川漁協遊漁券 大人3,500円（年券）/ 日券1,500円",
@@ -330,7 +330,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
   {
     id: "fw-172", name: "園部川", slug: "sonobegawa-river-kyoto",
     description: "京都府南丹市園部町を流れる桂川の支流。丹波の里山を流れる穏やかな小河川で、初心者やファミリーに最適な釣り場。オイカワやカワムツが豊富で、延べ竿一本で手軽に楽しめる。春にはウグイの群れが遡上し、子供でも簡単に釣果が出る。園部城跡や丹波の味覚と合わせた家族旅行にもおすすめ。",
-    latitude: 35.0986, longitude: 135.4694, address: "〒622-0041 京都府南丹市園部町小山東町（園部川）",
+    latitude: 35.0986, longitude: 135.4694, address: "〒629-0161 京都府南丹市八木町美里",
     accessInfo: "京都縦貫自動車道園部ICから約5分。JR嵯峨野線園部駅から徒歩約15分。",
     region: lr("r1111"), spotType: "river", difficulty: "beginner",
     isFree: true,

@@ -74,7 +74,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-130", name: "天竜川中流（浜松）", slug: "tenryugawa-middle",
     description: "浜松市を流れる天竜川の中流域。船明ダム下流は大型アユの実績が高く、尺アユも狙える。コイ・ナマズなどの大物も多く、河川敷が広大でおかっぱりポイントが豊富。",
-    latitude: 34.8653, longitude: 137.7869, address: "〒431-3314 静岡県浜松市天竜区二俣町二俣2160",
+    latitude: 34.8653, longitude: 137.7869, address: "〒431-3315 静岡県浜松市天竜区二俣町大園",
     accessInfo: "新東名浜松浜北ICから約20分。天竜浜名湖鉄道天竜二俣駅から徒歩約10分。",
     region: lr("r764"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -148,7 +148,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-133", name: "和良川", slug: "waragawa-river",
     description: "岐阜県郡上市和良町を流れる飛騨川の支流。オオサンショウウオが生息する清流として知られ、アユ・アマゴ釣りが楽しめる。和良鮎は「日本一のアユ」として食味コンテストでグランプリを受賞。",
-    latitude: 35.7492, longitude: 137.0408, address: "〒501-4507 岐阜県郡上市和良町宮地1155",
+    latitude: 35.7492, longitude: 137.0408, address: "〒501-4507 岐阜県郡上市和良町沢192-1",
     accessInfo: "東海北陸道美並ICから約30分。長良川鉄道郡上八幡駅から車で約30分。",
     region: lr("r767"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -172,7 +172,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-134", name: "巴川", slug: "tomoegawa-river",
     description: "愛知県豊田市を流れる矢作川の支流。足助地区の香嵐渓は紅葉の名所で、渓流釣りも楽しめる。アマゴ・アユが釣れ、秋は紅葉トンネルの中での釣りが格別。",
-    latitude: 35.1286, longitude: 137.3128, address: "〒444-2424 愛知県豊田市足助町飯盛36",
+    latitude: 35.1286, longitude: 137.3128, address: "〒444-2424 愛知県豊田市足助町",
     accessInfo: "東海環状自動車道豊田勘八ICから約20分。名鉄豊田市駅からバスで約40分。",
     region: lr("r768"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,200円（1日）",
@@ -222,7 +222,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-136", name: "常願寺川", slug: "joganji-river",
     description: "富山県を流れる急流河川。立山連峰を源とし、日本一の暴れ川の異名を持つ。アユ釣りのほか、サクラマス（ヤマメの降海型）の遡上も見られる。急流ならではの力強いアユが魅力。",
-    latitude: 36.7103, longitude: 137.2444, address: "〒939-0526 富山県富山市水橋開発町800",
+    latitude: 36.7103, longitude: 137.2444, address: "〒930-0911 富山県富山市本郷島",
     accessInfo: "北陸道立山ICから約10分。あいの風とやま鉄道水橋駅から車で約5分。",
     region: lr("r770"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -296,7 +296,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-139", name: "付知川", slug: "tsukechigawa-river",
     description: "岐阜県中津川市付知町を流れる木曽川の支流。「水と緑の清流の里」と呼ばれる付知峡の清流で、アマゴ・イワナの渓流釣りが盛ん。付知峡の不動滝は絶景ポイント。",
-    latitude: 35.6847, longitude: 137.3917, address: "〒508-0351 岐阜県中津川市付知町6-39",
+    latitude: 35.6847, longitude: 137.3917, address: "〒508-0204 岐阜県中津川市高山",
     accessInfo: "中央道中津川ICから約30分。JR中津川駅からバスで約40分。",
     region: lr("r776"), spotType: "river", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
@@ -367,7 +367,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
   {
     id: "fw-142", name: "早月川", slug: "hayatsukigawa-river",
     description: "富山県滑川市・上市町を流れる急流河川。剱岳を源とし、日本有数の急傾斜河川。アユ釣りは上級者向けだが、パワフルな鮎が楽しめる。河口部ではシーバスも狙える。",
-    latitude: 36.7500, longitude: 137.3417, address: "〒936-0053 富山県滑川市上小泉2679",
+    latitude: 36.7500, longitude: 137.3417, address: "〒937-0842 富山県魚津市吉野",
     accessInfo: "北陸道滑川ICから約5分。あいの風とやま鉄道滑川駅から車で約5分。",
     region: lr("r779"), spotType: "river", difficulty: "advanced",
     isFree: false, feeDetail: "遊漁券 大人1,300円（1日）",
