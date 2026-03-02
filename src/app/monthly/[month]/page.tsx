@@ -123,6 +123,38 @@ export default async function MonthlyGuidePage({ params }: Props) {
   const currentMonth = new Date().getMonth() + 1;
   const isCurrentMonth = currentMonth === guide.month;
 
+  // 自動生成FAQ（guide.faqsに追加する動的Q&A）
+  const topFishNames = displayFish.slice(0, 4).map(f => f?.name).filter(Boolean);
+  const beginnerFish = displayFish.filter(f => f?.difficulty === "beginner").map(f => f?.name).filter(Boolean);
+
+  const autoFaqs: { question: string; answer: string }[] = [
+    {
+      question: `${guide.nameJa}に釣れる魚は何ですか？`,
+      answer: `${guide.nameJa}に釣れる代表的な魚は${topFishNames.join("、")}などです。全${fishForMonth.length}種類以上の魚が${guide.nameJa}に釣れるシーズンを迎えます。`,
+    },
+    {
+      question: `${guide.nameJa}の釣りで初心者におすすめの魚は？`,
+      answer: beginnerFish.length > 0
+        ? `${guide.nameJa}に初心者が狙いやすいのは${beginnerFish.slice(0, 3).join("、")}です。サビキ釣りやちょい投げなど簡単な釣り方で楽しめます。`
+        : `${guide.nameJa}は${topFishNames.slice(0, 2).join("や")}が狙い目です。堤防や漁港での釣りなら初心者でも楽しめます。`,
+    },
+    {
+      question: `${guide.nameJa}の釣りにおすすめのスポットは？`,
+      answer: spotsForMonth.length > 0
+        ? `${guide.nameJa}のおすすめスポットは${spotsForMonth.slice(0, 3).map(s => s.name).join("、")}などです。全国${spotsForMonth.length}箇所以上のスポットで${guide.nameJa}の釣りが楽しめます。`
+        : `${guide.nameJa}は堤防や漁港での釣りがおすすめです。足場が安定しているスポットを選びましょう。`,
+    },
+    {
+      question: `${guide.nameJa}の釣りで注意することは？`,
+      answer: `${guide.nameJa}の釣りでは${guide.conditions.weather}に注意が必要です。水温は${guide.conditions.waterTemp}で、${guide.tips[0] || "天候や潮の動きを確認して釣行計画を立てましょう"}。`,
+    },
+  ];
+
+  // guide.faqsと重複しないようフィルタリング
+  const existingQuestions = new Set(guide.faqs.map(f => f.question));
+  const filteredAutoFaqs = autoFaqs.filter(f => !existingQuestions.has(f.question));
+  const allFaqs = [...guide.faqs, ...filteredAutoFaqs];
+
   const jsonLd = [
     {
       "@context": "https://schema.org",
@@ -163,7 +195,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
-      mainEntity: guide.faqs.map((faq) => ({
+      mainEntity: allFaqs.map((faq) => ({
         "@type": "Question",
         name: faq.question,
         acceptedAnswer: {
@@ -212,6 +244,22 @@ export default async function MonthlyGuidePage({ params }: Props) {
           <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
             {guide.description}
           </p>
+        </div>
+
+        {/* 月別統計 */}
+        <div className="mb-6 grid grid-cols-3 gap-2 sm:gap-3">
+          <div className="rounded-lg border bg-blue-50/50 p-3 text-center">
+            <p className="text-lg font-bold text-blue-700 sm:text-xl">{fishForMonth.length}+</p>
+            <p className="text-[10px] text-blue-600 sm:text-xs">{guide.nameJa}に釣れる魚種</p>
+          </div>
+          <div className="rounded-lg border bg-emerald-50/50 p-3 text-center">
+            <p className="text-lg font-bold text-emerald-700 sm:text-xl">{spotsForMonth.length}+</p>
+            <p className="text-[10px] text-emerald-600 sm:text-xs">おすすめスポット</p>
+          </div>
+          <div className="rounded-lg border bg-amber-50/50 p-3 text-center">
+            <p className="text-lg font-bold text-amber-700 sm:text-xl">{displayFish.filter(f => f?.peakMonths.includes(guide.month)).length}</p>
+            <p className="text-[10px] text-amber-600 sm:text-xs">最盛期の魚種</p>
+          </div>
         </div>
 
         {/* 今月の条件カード */}
@@ -506,7 +554,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
             {guide.nameJa}の釣りFAQ
           </h2>
           <div className="space-y-3">
-            {guide.faqs.map((faq, i) => (
+            {allFaqs.map((faq, i) => (
               <Card key={i}>
                 <CardContent className="pt-4">
                   <h3 className="mb-2 text-sm font-bold">

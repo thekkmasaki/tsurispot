@@ -25,6 +25,8 @@ import {
   Compass,
   Tag,
   Target,
+  BarChart3,
+  Shield,
 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { SpotImage, FishImage } from "@/components/ui/spot-image";
@@ -100,6 +102,17 @@ const organizationJsonLd = {
     "釣りスポット総合情報サイト。全国の釣り場を地図で検索でき、今釣れる魚やおすすめの仕掛け情報を提供しています。",
 };
 
+const homeSpeakableJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "ツリスポ - 近くの釣り場・釣りスポット検索",
+  url: "https://tsurispot.com",
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: ["h1", ".hero-description", ".stats-section"],
+  },
+};
+
 const homeFaqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -158,6 +171,12 @@ export default function Home() {
   const totalFishSpecies = fishSpecies.length;
   const totalPrefectures = new Set(fishingSpots.map((s) => s.region.prefecture)).size;
 
+  // Stats for data trust banner
+  const seaSpots = fishingSpots.filter((s) => ["breakwater", "port", "rocky", "beach", "offshore"].includes(s.spotType)).length;
+  const freshwaterSpots = fishingSpots.filter((s) => ["river", "lake", "managed"].includes(s.spotType)).length;
+  const catchableNowCount = catchableNow.length;
+  const totalAreas = new Set(fishingSpots.map((s) => s.region.areaName)).size;
+
   // Carousel data: fish catchable now with spot counts
   const carouselFish = catchableNow.slice(0, 12).map((fish) => ({
     id: fish.id,
@@ -203,6 +222,10 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(popularSpotsItemListJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeSpeakableJsonLd) }}
       />
       {/* ヒーローセクション */}
       <section className="relative overflow-x-hidden bg-gradient-to-br from-sky-600 via-[#0C4A6E] to-indigo-800">
@@ -344,6 +367,47 @@ export default function Home() {
               className="fill-background"
             />
           </svg>
+        </div>
+      </section>
+
+      {/* データで見るツリスポ — 統計バナー */}
+      <section className="border-b bg-white py-8 sm:py-10">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <div className="mb-6 text-center">
+            <h2 className="flex items-center justify-center gap-2 text-lg font-bold sm:text-xl">
+              <BarChart3 className="size-5 text-primary" />
+              データで見るツリスポ
+            </h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              全国の釣りスポット・魚種情報を独自に調査・掲載しています
+            </p>
+          </div>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
+            <div className="rounded-xl border bg-gradient-to-br from-blue-50 to-sky-50 p-4 text-center">
+              <p className="text-2xl font-bold text-blue-700 sm:text-3xl">{totalSpots.toLocaleString()}</p>
+              <p className="mt-1 text-xs font-medium text-blue-600">釣りスポット</p>
+              <p className="mt-0.5 text-[10px] text-blue-500">海{seaSpots} / 川・湖{freshwaterSpots}</p>
+            </div>
+            <div className="rounded-xl border bg-gradient-to-br from-emerald-50 to-green-50 p-4 text-center">
+              <p className="text-2xl font-bold text-emerald-700 sm:text-3xl">{totalFishSpecies}</p>
+              <p className="mt-1 text-xs font-medium text-emerald-600">魚種データ</p>
+              <p className="mt-0.5 text-[10px] text-emerald-500">釣り方・旬・仕掛け情報</p>
+            </div>
+            <div className="rounded-xl border bg-gradient-to-br from-amber-50 to-orange-50 p-4 text-center">
+              <p className="text-2xl font-bold text-amber-700 sm:text-3xl">{totalPrefectures}</p>
+              <p className="mt-1 text-xs font-medium text-amber-600">都道府県カバー</p>
+              <p className="mt-0.5 text-[10px] text-amber-500">{totalAreas}エリアに対応</p>
+            </div>
+            <div className="rounded-xl border bg-gradient-to-br from-purple-50 to-fuchsia-50 p-4 text-center">
+              <p className="text-2xl font-bold text-purple-700 sm:text-3xl">{catchableNowCount}</p>
+              <p className="mt-1 text-xs font-medium text-purple-600">今月釣れる魚種</p>
+              <p className="mt-0.5 text-[10px] text-purple-500">{currentMonth}月のシーズン魚</p>
+            </div>
+          </div>
+          <div className="mt-4 flex items-center justify-center gap-2 text-xs text-muted-foreground">
+            <Shield className="size-3.5" />
+            <span>データは編集部が実地調査・公開情報をもとに独自に収集・更新しています</span>
+          </div>
         </div>
       </section>
 
