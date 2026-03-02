@@ -577,7 +577,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           <GoTodayButton slug={spot.slug} spotName={spot.name} />
           <div className="mt-3 flex gap-2">
             <a
-              href={`https://www.google.com/maps/search/?api=1&query=${spot.latitude},${spot.longitude}`}
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.name)}`}
               target="_blank"
               rel="noopener noreferrer"
               className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-blue-700"
@@ -651,7 +651,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <h2 className="mb-4 text-lg font-bold">基本情報</h2>
             <Card className="py-4"><CardContent className="px-4">
               <dl className="space-y-3 text-sm">
-                <div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">住所</dt><dd><span className="font-medium">{spot.address}</span><a href={`https://www.google.com/maps/search/?api=1&query=${spot.latitude},${spot.longitude}`} target="_blank" rel="noopener noreferrer" className="ml-2 inline-flex items-center gap-1 text-xs text-blue-600 hover:underline"><MapPin className="size-3" />地図</a></dd></div>
+                <div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">住所</dt><dd><span className="font-medium">{spot.address}</span><a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.name)}`} target="_blank" rel="noopener noreferrer" className="ml-2 inline-flex items-center gap-1 text-xs text-blue-600 hover:underline"><MapPin className="size-3" />地図</a></dd></div>
                 {spot.feeDetail && (<div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">料金</dt><dd>{spot.feeDetail}</dd></div>)}
                 {spot.isFree && (<div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">料金</dt><dd className="font-medium text-orange-600">無料</dd></div>)}
                 <div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">難易度</dt><dd>{DIFFICULTY_LABELS[spot.difficulty]}</dd></div>
@@ -805,7 +805,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 <div>
                   <p className="text-sm font-medium">{spot.address}</p>
                   <div className="mt-2 flex flex-wrap gap-2">
-                    <a href={`https://www.google.com/maps/search/?api=1&query=${spot.latitude},${spot.longitude}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-blue-700 min-h-[40px]"><MapPin className="size-4" />Google Mapで場所を確認</a>
+                    <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.name)}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-blue-700 min-h-[40px]"><MapPin className="size-4" />Google Mapで場所を確認</a>
                     <a href={`https://www.google.com/maps/dir/?api=1&destination=${spot.latitude},${spot.longitude}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50 px-4 py-2 text-sm font-medium text-blue-700 transition-colors hover:bg-blue-100 min-h-[40px]"><Navigation2 className="size-4" />ルート案内</a>
                   </div>
                 </div>
