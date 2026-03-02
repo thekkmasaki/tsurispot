@@ -18,6 +18,7 @@ import {
   MessageSquare,
   Shield,
   Navigation2,
+  HelpCircle,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -1175,6 +1176,28 @@ export default async function SpotDetailPage({ params }: PageProps) {
           </section>
         );
       })()}
+
+      {/* よくある質問（FAQ） */}
+      <section className="mt-8 sm:mt-12">
+        <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
+          <HelpCircle className="size-5 text-primary" />
+          {spot.name}のよくある質問
+        </h2>
+        <div className="space-y-3">
+          {faqJsonLd.mainEntity.slice(0, 6).map((q: { name: string; acceptedAnswer: { text: string } }, i: number) => (
+            <Card key={i} className="gap-0 py-0">
+              <CardContent className="p-4">
+                <h3 className="mb-2 text-sm font-bold">
+                  Q. {q.name}
+                </h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {q.acceptedAnswer.text}
+                </p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
 
       {/* 最近見たスポット */}
       <RecentlyViewedSpots />

@@ -21,6 +21,7 @@ import {
   BookOpen,
   Clock,
   Trophy,
+  HelpCircle,
 } from "lucide-react";
 import { FishImage } from "@/components/ui/spot-image";
 import { Card, CardContent } from "@/components/ui/card";
@@ -1232,6 +1233,28 @@ export default async function FishDetailPage({ params }: PageProps) {
           </section>
         );
       })()}
+
+      {/* よくある質問（FAQ） */}
+      <section className="mb-8">
+        <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
+          <HelpCircle className="size-5 text-primary" />
+          {fish.name}のよくある質問
+        </h2>
+        <div className="space-y-3">
+          {fishFaqJsonLd.mainEntity.map((q: { name: string; acceptedAnswer: { text: string } }, i: number) => (
+            <Card key={i} className="gap-0 py-0">
+              <CardContent className="p-4">
+                <h3 className="mb-2 text-sm font-bold">
+                  Q. {q.name}
+                </h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {q.acceptedAnswer.text}
+                </p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
