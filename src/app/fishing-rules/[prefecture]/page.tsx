@@ -71,6 +71,8 @@ export default async function PrefectureFishingRulesPage({ params }: Props) {
     .slice(0, 10);
 
   // JSON-LD
+  const pageUrl = `https://tsurispot.com/fishing-rules/${pref.slug}`;
+
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -90,17 +92,98 @@ export default async function PrefectureFishingRulesPage({ params }: Props) {
       {
         "@type": "ListItem",
         position: 3,
-        name: `${pref.name}`,
-        item: `https://tsurispot.com/fishing-rules/${pref.slug}`,
+        name: `${pref.name}の釣りルール`,
+        item: pageUrl,
       },
     ],
+  };
+
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: `${pref.name}の釣りルール・規制情報｜禁漁期間・遊漁券・サイズ制限`,
+    description: `${pref.name}で釣りをする前に知っておきたいルールと規制。禁漁期間、遊漁券が必要な河川、サイズ制限、漁業権に関する注意事項を解説。`,
+    datePublished: "2025-06-01",
+    dateModified: new Date().toISOString().split("T")[0],
+    author: {
+      "@type": "Person",
+      name: "正木 家康",
+      jobTitle: "編集長",
+      url: "https://tsurispot.com/about",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "ツリスポ",
+      url: "https://tsurispot.com",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://tsurispot.com/logo.svg",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": pageUrl,
+    },
+  };
+
+  // FAQ JSON-LD をルールデータから動的生成
+  const faqItems: { question: string; answer: string }[] = [];
+
+  if (rule && rule.yugyokenRivers.length > 0) {
+    faqItems.push({
+      question: `${pref.name}で遊漁券が必要な河川は？`,
+      answer: `${pref.name}では${rule.yugyokenRivers.join("、")}などの河川で遊漁券が必要です。${COMMON_RULES.yugyoken}`,
+    });
+  }
+
+  if (rule && rule.closedSeasons.length > 0) {
+    const seasonTexts = rule.closedSeasons
+      .map((cs) => `${cs.fish}: ${cs.period}`)
+      .join("。");
+    faqItems.push({
+      question: `${pref.name}の禁漁期間はいつですか？`,
+      answer: `${pref.name}の主な禁漁期間は以下の通りです。${seasonTexts}。河川によって異なる場合がありますので、各漁協にご確認ください。`,
+    });
+  }
+
+  if (rule && rule.sizeLimits.length > 0) {
+    const sizeTexts = rule.sizeLimits
+      .map((sl) => `${sl.fish}: ${sl.minSize}以上`)
+      .join("、");
+    faqItems.push({
+      question: `${pref.name}の釣りのサイズ制限は？`,
+      answer: `${pref.name}では${sizeTexts}のサイズ制限があります。${COMMON_RULES.sizeLimit}`,
+    });
+  }
+
+  // ルールデータがない場合でも汎用FAQを追加
+  if (faqItems.length === 0) {
+    faqItems.push({
+      question: `${pref.name}で釣りをする際に注意することは？`,
+      answer: `${pref.name}で釣りをする際は、漁業権の対象となる貝類・海藻の採取禁止、渓流魚の禁漁期間、遊漁券の必要性を事前に確認してください。${COMMON_RULES.penalty}`,
+    });
+  }
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
   };
 
   return (
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([breadcrumbJsonLd, articleJsonLd, faqJsonLd]),
+        }}
       />
 
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
