@@ -46,7 +46,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
     isFree: false, feeDetail: "賀茂川漁協遊漁券 大人3,500円（年券）/ 日券1,500円",
     hasParking: false, parkingDetail: "周辺のコインパーキングを利用",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kamogawa-river-kyoto.webp", imageAttribution: "Photo: SunkistSun / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/kamogawa-river-kyoto.webp"],
+    mainImageUrl: "", imageAttribution: "", images: [],
     rating: 3.7, reviewCount: 145, googleRating: 4.6, googleReviewCount: 766,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
