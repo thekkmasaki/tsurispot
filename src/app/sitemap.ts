@@ -154,13 +154,14 @@ export default async function sitemap({
     ];
   }
 
-  // 1: スポット詳細ページ
+  // 1: スポット詳細ページ（画像サイトマップ付き）
   if (sitemapId === 1) {
     return fishingSpots.map((spot) => ({
       url: `${baseUrl}/spots/${spot.slug}`,
       lastModified: dynamicDate,
       changeFrequency: "weekly" as const,
       priority: 0.8,
+      images: spot.mainImageUrl?.startsWith("http") ? [spot.mainImageUrl] : [],
     }));
   }
 
