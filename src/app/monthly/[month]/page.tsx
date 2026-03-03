@@ -19,6 +19,7 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { SpotImage } from "@/components/ui/spot-image";
 import {
   monthlyGuides,
   getMonthlyGuide,
@@ -28,6 +29,8 @@ import { fishSpecies } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
 import { getMonthlyRigs } from "@/lib/data/monthly-rigs";
 import { MonthlyRigSection } from "@/components/monthly-rig-section";
+import { MonthlySportsSorter } from "@/components/monthly-spots-sorter";
+import type { MonthlySpot } from "@/components/monthly-spots-sorter";
 
 interface Props {
   params: Promise<{ month: string }>;
@@ -376,6 +379,11 @@ export default async function MonthlyGuidePage({ params }: Props) {
               今釣れる魚をもっと見る →
             </Link>
           </div>
+          <div className="mt-3 text-center">
+            <Link href="/fishing-spots/near-me" className="text-sm text-primary hover:underline">
+              近くの釣り場を探す →
+            </Link>
+          </div>
         </section>
 
         {/* おすすめ仕掛けセット */}
@@ -391,10 +399,18 @@ export default async function MonthlyGuidePage({ params }: Props) {
             <p className="mb-4 text-sm text-muted-foreground">
               {guide.nameJa}に旬の魚が釣れる人気スポットを厳選しました。評価の高いスポット上位{spotsForMonth.length}件を紹介します。
             </p>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {spotsForMonth.map((spot) => {
-                // この月に釣れる魚名を取得
-                const catchableFishNames = spot.catchableFish
+            <MonthlySportsSorter
+              spots={spotsForMonth.map((spot) => ({
+                slug: spot.slug,
+                name: spot.name,
+                rating: spot.rating,
+                latitude: spot.latitude,
+                longitude: spot.longitude,
+                spotType: spot.spotType,
+                difficulty: spot.difficulty,
+                mainImageUrl: spot.mainImageUrl,
+                region: { prefecture: spot.region.prefecture },
+                catchableFishNames: spot.catchableFish
                   .filter((cf) => {
                     const start = cf.monthStart;
                     const end = cf.monthEnd;
@@ -405,54 +421,28 @@ export default async function MonthlyGuidePage({ params }: Props) {
                     }
                   })
                   .map((cf) => cf.fish.name)
-                  .slice(0, 4);
-
-                return (
-                  <Link
-                    key={spot.slug}
-                    href={`/spots/${spot.slug}`}
-                    className="group flex items-start gap-3 rounded-lg border bg-white p-3 transition-shadow hover:shadow-md dark:bg-card"
-                  >
-                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                      <MapPin className="size-5" />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="font-semibold group-hover:text-primary">
-                          {spot.name}
-                        </span>
-                        <span className="text-xs text-muted-foreground">
-                          ★{spot.rating.toFixed(1)}
-                        </span>
-                      </div>
-                      <p className="mt-0.5 text-xs text-muted-foreground">
-                        {spot.region.prefecture} ·{" "}
-                        {spot.difficulty === "beginner"
-                          ? "初心者向け"
-                          : spot.difficulty === "intermediate"
-                          ? "中級者向け"
-                          : "上級者向け"}
-                      </p>
-                      {catchableFishNames.length > 0 && (
-                        <div className="mt-1 flex flex-wrap gap-1">
-                          {catchableFishNames.map((name) => (
-                            <Badge key={name} variant="secondary" className="text-[10px] px-1.5 py-0">
-                              {name}
-                            </Badge>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </Link>
-                );
-              })}
-            </div>
-            <div className="mt-4 text-center">
+                  .slice(0, 4),
+              })) as MonthlySpot[]}
+              monthName={guide.nameJa}
+            />
+            <div className="mt-4 flex flex-wrap items-center justify-center gap-4">
               <Link
                 href="/spots"
                 className="text-sm text-primary hover:underline"
               >
                 すべての釣りスポットを見る →
+              </Link>
+              <Link
+                href="/map"
+                className="text-sm text-primary hover:underline"
+              >
+                地図で探す →
+              </Link>
+              <Link
+                href="/fishing-spots/near-me"
+                className="text-sm text-primary hover:underline"
+              >
+                近くの釣り場を探す →
               </Link>
             </div>
           </section>
@@ -516,9 +506,9 @@ export default async function MonthlyGuidePage({ params }: Props) {
                     モバイルバッテリーで稼働するのでコンセント不要。防寒着の中に着るだけでOK。
                   </p>
                   <a
-                    href="https://amzn.to/4tJlbIR"
+                    href="https://amzn.to/40sdGZ6"
                     target="_blank"
-                    rel="noopener noreferrer nofollow"
+                    rel="sponsored noopener noreferrer"
                     className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
                   >
                     Amazonで電熱ベストを見る
@@ -536,7 +526,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
                   <a
                     href="https://amzn.to/4s3kDvE"
                     target="_blank"
-                    rel="noopener noreferrer nofollow"
+                    rel="sponsored noopener noreferrer"
                     className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
                   >
                     Amazonでモバイルバッテリーを見る
@@ -546,6 +536,78 @@ export default async function MonthlyGuidePage({ params }: Props) {
               </Card>
             </div>
           )}
+
+          {/* 夏月の暑さ・安全対策アフィリエイト (5,6,7,8,9月) */}
+          {[5, 6, 7, 8, 9].includes(guide.month) && (
+            <div className="mt-6 space-y-3">
+              <h3 className="text-sm font-bold text-blue-900">夏の釣りの必需品</h3>
+              <Card className="border-sky-200 bg-sky-50/50 py-0">
+                <CardContent className="p-4">
+                  <p className="mb-1 text-sm font-bold text-sky-900">偏光サングラス — 水中の魚が見える＆目の保護</p>
+                  <p className="mb-3 text-xs text-sky-800 leading-relaxed">
+                    偏光レンズで水面の反射をカットし、水中の魚影や海底の地形が見えます。紫外線から目を守り、長時間の釣りでも疲れにくい。
+                  </p>
+                  <a href="https://amzn.to/3ZPBnuq" target="_blank" rel="sponsored noopener noreferrer"
+                     className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]">
+                    Amazonで偏光サングラスを見る
+                    <ExternalLink className="size-3.5" />
+                  </a>
+                </CardContent>
+              </Card>
+              <Card className="border-red-200 bg-red-50/50 py-0">
+                <CardContent className="p-4">
+                  <p className="mb-1 text-sm font-bold text-red-900">ライフジャケット — 海の事故を防ぐ必須アイテム</p>
+                  <p className="mb-3 text-xs text-red-800 leading-relaxed">
+                    腰巻きタイプなら動きやすく釣りの邪魔になりません。万が一の落水時に命を守る最重要装備です。
+                  </p>
+                  <a href="https://amzn.to/4s1DpU5" target="_blank" rel="sponsored noopener noreferrer"
+                     className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]">
+                    Amazonでライフジャケットを見る
+                    <ExternalLink className="size-3.5" />
+                  </a>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+
+          {/* 全月共通: 基本の釣り道具 */}
+          <div className="mt-6 space-y-3">
+            <h3 className="text-sm font-bold">基本の釣り道具をチェック</h3>
+            <div className="grid gap-2 sm:grid-cols-2">
+              <a href="https://amzn.to/4s4i64m" target="_blank" rel="sponsored noopener noreferrer"
+                 className="flex items-center gap-3 rounded-lg border p-3 transition-shadow hover:shadow-md">
+                <span className="text-2xl">🎣</span>
+                <div>
+                  <p className="text-sm font-bold">ロッド（シマノ）</p>
+                  <p className="text-xs text-muted-foreground">万能竿で堤防〜サーフまで対応</p>
+                </div>
+              </a>
+              <a href="https://amzn.to/4atW7Om" target="_blank" rel="sponsored noopener noreferrer"
+                 className="flex items-center gap-3 rounded-lg border p-3 transition-shadow hover:shadow-md">
+                <span className="text-2xl">🔄</span>
+                <div>
+                  <p className="text-sm font-bold">リール（シマノ）</p>
+                  <p className="text-xs text-muted-foreground">コスパ最高の定番リール</p>
+                </div>
+              </a>
+              <a href="https://amzn.to/4s45H0i" target="_blank" rel="sponsored noopener noreferrer"
+                 className="flex items-center gap-3 rounded-lg border p-3 transition-shadow hover:shadow-md">
+                <span className="text-2xl">🧵</span>
+                <div>
+                  <p className="text-sm font-bold">PEライン（東レ）</p>
+                  <p className="text-xs text-muted-foreground">感度が高く強度も十分</p>
+                </div>
+              </a>
+              <a href="https://amzn.to/4cFGDbl" target="_blank" rel="sponsored noopener noreferrer"
+                 className="flex items-center gap-3 rounded-lg border p-3 transition-shadow hover:shadow-md">
+                <span className="text-2xl">⚓</span>
+                <div>
+                  <p className="text-sm font-bold">おもりセット</p>
+                  <p className="text-xs text-muted-foreground">まとめ買いがお得</p>
+                </div>
+              </a>
+            </div>
+          </div>
         </section>
 
         {/* 釣りポイント解説 */}
@@ -584,6 +646,22 @@ export default async function MonthlyGuidePage({ params }: Props) {
             ))}
           </div>
         </section>
+
+        {/* 釣り場診断CTA */}
+        <div className="mb-8 rounded-xl border-2 border-primary/20 bg-primary/5 p-6 text-center">
+          <p className="mb-2 text-base font-bold">{guide.nameJa}、どこで釣る？</p>
+          <p className="mb-4 text-sm text-muted-foreground">
+            条件に合った釣り場を診断します
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link href="/fish-finder" className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90">
+              釣り場診断を試す
+            </Link>
+            <Link href="/recommendation" className="inline-flex items-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-muted">
+              今週のおすすめを見る
+            </Link>
+          </div>
+        </div>
 
         {/* 前月・翌月ナビ */}
         <div className="mb-8 grid grid-cols-2 gap-4">

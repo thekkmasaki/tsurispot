@@ -18,15 +18,12 @@ import {
   Waves,
   BookOpen,
   ChevronRight,
-  Store,
   Skull,
   TriangleAlert,
   Calendar,
   Compass,
   Tag,
   Target,
-  BarChart3,
-  Shield,
   Navigation,
 } from "lucide-react";
 import dynamic from "next/dynamic";
@@ -87,7 +84,7 @@ const homeSpeakableJsonLd = {
   url: "https://tsurispot.com",
   speakable: {
     "@type": "SpeakableSpecification",
-    cssSelector: ["h1", ".hero-description", ".stats-section"],
+    cssSelector: ["h1", ".hero-description"],
   },
 };
 
@@ -194,11 +191,6 @@ export default function Home() {
   const totalFishSpecies = fishSpecies.length;
   const totalPrefectures = new Set(fishingSpots.map((s) => s.region.prefecture)).size;
 
-  // Stats for data trust banner
-  const seaSpots = fishingSpots.filter((s) => ["breakwater", "port", "rocky", "beach", "offshore"].includes(s.spotType)).length;
-  const freshwaterSpots = fishingSpots.filter((s) => ["river", "lake", "managed"].includes(s.spotType)).length;
-  const catchableNowCount = catchableNow.length;
-  const totalAreas = new Set(fishingSpots.map((s) => s.region.areaName)).size;
 
   // Carousel data: fish catchable now with spot counts
   const carouselFish = catchableNow.slice(0, 12).map((fish) => ({
@@ -384,46 +376,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* データで見るツリスポ — 統計バナー */}
-      <section className="border-b bg-white py-8 sm:py-10">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
-          <div className="mb-6 text-center">
-            <h2 className="flex items-center justify-center gap-2 text-lg font-bold sm:text-xl">
-              <BarChart3 className="size-5 text-primary" />
-              データで見るツリスポ
-            </h2>
-            <p className="mt-1 text-sm text-muted-foreground">
-              全国の釣りスポット・魚種情報を独自に調査・掲載しています
-            </p>
-          </div>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-4">
-            <div className="rounded-xl border bg-gradient-to-br from-blue-50 to-sky-50 p-4 text-center">
-              <p className="text-2xl font-bold text-blue-700 sm:text-3xl">{totalSpots.toLocaleString()}</p>
-              <p className="mt-1 text-xs font-medium text-blue-600">釣りスポット</p>
-              <p className="mt-0.5 text-[10px] text-blue-500">海{seaSpots} / 川・湖{freshwaterSpots}</p>
-            </div>
-            <div className="rounded-xl border bg-gradient-to-br from-emerald-50 to-green-50 p-4 text-center">
-              <p className="text-2xl font-bold text-emerald-700 sm:text-3xl">{totalFishSpecies}</p>
-              <p className="mt-1 text-xs font-medium text-emerald-600">魚種データ</p>
-              <p className="mt-0.5 text-[10px] text-emerald-500">釣り方・旬・仕掛け情報</p>
-            </div>
-            <div className="rounded-xl border bg-gradient-to-br from-amber-50 to-orange-50 p-4 text-center">
-              <p className="text-2xl font-bold text-amber-700 sm:text-3xl">{totalPrefectures}</p>
-              <p className="mt-1 text-xs font-medium text-amber-600">都道府県カバー</p>
-              <p className="mt-0.5 text-[10px] text-amber-500">{totalAreas}エリアに対応</p>
-            </div>
-            <div className="rounded-xl border bg-gradient-to-br from-purple-50 to-fuchsia-50 p-4 text-center">
-              <p className="text-2xl font-bold text-purple-700 sm:text-3xl">{catchableNowCount}</p>
-              <p className="mt-1 text-xs font-medium text-purple-600">今月釣れる魚種</p>
-              <p className="mt-0.5 text-[10px] text-purple-500">{currentMonth}月のシーズン魚</p>
-            </div>
-          </div>
-          <div className="mt-4 flex items-center justify-center gap-2 text-xs text-muted-foreground">
-            <Shield className="size-3.5" />
-            <span>データは編集部が実地調査・公開情報をもとに独自に収集・更新しています</span>
-          </div>
-        </div>
-      </section>
 
       {/* 名言セクション */}
       <section className="bg-slate-50/80 py-8 sm:py-10">
@@ -448,7 +400,7 @@ export default function Home() {
       <CatchableNowCarousel fish={carouselFish} />
 
       {/* 初心者スタートバナー */}
-      <section className="mx-auto w-full max-w-5xl px-4 pt-10 sm:px-6 sm:pt-10">
+      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
         <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 p-6 text-white sm:p-8">
           <div className="relative z-10">
             <div className="mb-1 text-sm font-medium text-emerald-100">はじめての方へ</div>
@@ -473,7 +425,7 @@ export default function Home() {
       </section>
 
       {/* クイックアクション */}
-      <section className="mx-auto w-full max-w-5xl px-4 pt-8 sm:px-6 sm:pt-12">
+      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
         <div className="grid grid-cols-3 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-6">
           <Link href="/map">
             <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-sky-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
@@ -578,12 +530,12 @@ export default function Home() {
       </section>
 
       {/* 近くの釣りスポット */}
-      <section className="mx-auto w-full max-w-5xl px-4 pt-8 sm:px-6 sm:pt-12">
+      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
         <NearbySpots allSpots={lightSpots} />
       </section>
 
       {/* 現在地ベースのおすすめ記事 */}
-      <section className="mx-auto w-full max-w-5xl px-4 pt-6 sm:px-6 sm:pt-10">
+      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
         <LocationRecommendations
           allSpots={lightSpots}
           prefectures={prefectures}
@@ -591,45 +543,9 @@ export default function Home() {
         />
       </section>
 
-      {/* 目的別に釣り場を探す（SEOリンクセクション） */}
-      <section className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-10">
-        <h2 className="mb-4 text-lg font-bold tracking-tight sm:text-2xl">
-          目的別に釣り場を探す
-        </h2>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <Link href="/fishing-spots/breakwater-beginner" className="group">
-            <div className="rounded-xl border bg-blue-50/50 p-4 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5">
-              <div className="text-2xl mb-2">🎣</div>
-              <h3 className="text-sm font-semibold group-hover:text-primary">堤防釣り初心者向け</h3>
-              <p className="mt-1 text-xs text-muted-foreground">安全で釣りやすい堤防スポット</p>
-            </div>
-          </Link>
-          <Link href="/fishing-spots/best-saltwater" className="group">
-            <div className="rounded-xl border bg-cyan-50/50 p-4 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5">
-              <div className="text-2xl mb-2">🌊</div>
-              <h3 className="text-sm font-semibold group-hover:text-primary">海釣りおすすめ</h3>
-              <p className="mt-1 text-xs text-muted-foreground">人気の海釣りスポット一覧</p>
-            </div>
-          </Link>
-          <Link href="/fishing-spots/river-beginner" className="group">
-            <div className="rounded-xl border bg-emerald-50/50 p-4 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5">
-              <div className="text-2xl mb-2">🏞️</div>
-              <h3 className="text-sm font-semibold group-hover:text-primary">川釣り初心者向け</h3>
-              <p className="mt-1 text-xs text-muted-foreground">のんびり川釣りを楽しめる</p>
-            </div>
-          </Link>
-          <Link href="/fishing-spots/near-me" className="group">
-            <div className="rounded-xl border bg-amber-50/50 p-4 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5">
-              <div className="text-2xl mb-2">📍</div>
-              <h3 className="text-sm font-semibold group-hover:text-primary">近くの釣り場</h3>
-              <p className="mt-1 text-xs text-muted-foreground">現在地から一番近い釣り場</p>
-            </div>
-          </Link>
-        </div>
-      </section>
 
       {/* 人気の釣りスポットセクション */}
-      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-16">
+      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
         <div className="mb-6 flex items-end justify-between sm:mb-8">
           <div>
             <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
@@ -729,7 +645,7 @@ export default function Home() {
       </section>
 
       {/* 今釣れる魚セクション */}
-      <section className="bg-muted/50 py-8 sm:py-16">
+      <section className="bg-muted/50 py-8 sm:py-12">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <div className="mb-6 flex items-end justify-between sm:mb-8">
             <div>
@@ -830,7 +746,7 @@ export default function Home() {
       </section>
 
       {/* エリア別釣り場ガイド */}
-      <section className="bg-muted/50 py-8 sm:py-16">
+      <section className="bg-muted/50 py-8 sm:py-12">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <div className="mb-6 flex items-end justify-between sm:mb-8">
             <div>
@@ -896,7 +812,7 @@ export default function Home() {
       </section>
 
       {/* 季節の釣り特集 */}
-      <section className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-10">
+      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
         <div className="mb-6 flex items-end justify-between sm:mb-8">
           <div>
             <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
@@ -961,7 +877,7 @@ export default function Home() {
 
       {/* 最新コラム */}
       {latestPosts.length > 0 && (
-        <section className="bg-muted/50 py-8 sm:py-16">
+        <section className="bg-muted/50 py-8 sm:py-12">
           <div className="mx-auto max-w-5xl px-4 sm:px-6">
             <div className="mb-6 flex items-end justify-between sm:mb-8">
               <div>
@@ -1039,23 +955,6 @@ export default function Home() {
         <SeasonalRecommend maxItems={4} />
       </section>
 
-      {/* 事業者向け */}
-      <section className="border-t py-6 sm:py-8">
-        <div className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
-          <div className="flex items-center gap-3">
-            <Store className="size-5 shrink-0 text-muted-foreground" />
-            <p className="text-sm text-muted-foreground">
-              釣具店・事業者の方へ — QRコード設置は<span className="font-medium text-foreground">完全無料</span>
-            </p>
-          </div>
-          <Link href="/partner">
-            <Button variant="outline" size="sm" className="shrink-0 gap-1">
-              詳しく見る
-              <ChevronRight className="size-3.5" />
-            </Button>
-          </Link>
-        </div>
-      </section>
 
       {/* スマホ向け位置情報バナー */}
       <LocationPromptBanner />
