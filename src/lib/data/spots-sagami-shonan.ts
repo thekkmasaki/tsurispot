@@ -854,9 +854,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
     region: region("r7"), spotType: "beach", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "花水川河口周辺に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hanamizugawa-kakou.jpg", imageAttribution: "Photo: Nesnad
-
- This photo was taken with iPhone 14 Pro / Wikimedia Commons (CC BY 4.0)", images: [], rating: 3.7, reviewCount: 70,
+    mainImageUrl: "/images/spots/wikimedia/hanamizugawa-kakou.jpg", imageAttribution: "Photo: Nesnad  This photo was taken with iPhone 14 Pro / Wikimedia Commons (CC BY 4.0)", images: [], rating: 3.7, reviewCount: 70,
     catchableFish: [
       { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },

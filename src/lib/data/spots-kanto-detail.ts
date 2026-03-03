@@ -192,9 +192,7 @@ export const kantoDetailSpots: FishingSpot[] = [
     region: lr("r870"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "公園駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tatsumi-no-mori-seaside-park.jpg", imageAttribution: "Photo: Lombroso
-
- This photo was taken with Sony Xperia / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.4, reviewCount: 54, googleRating: 3.9, googleReviewCount: 1677,
+    mainImageUrl: "/images/spots/wikimedia/tatsumi-no-mori-seaside-park.jpg", imageAttribution: "Photo: Lombroso  This photo was taken with Sony Xperia / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.4, reviewCount: 54, googleRating: 3.9, googleReviewCount: 1677,
     catchableFish: [
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
       { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },

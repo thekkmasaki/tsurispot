@@ -142,9 +142,7 @@ export const tohokuSpots: FishingSpot[] = [
     region: localRegion("r138"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺コインパーキングあり（500円/日）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/aomori-kita-breakwater.jpg", imageAttribution: "Photo: あおもりくま at Japanese Wikipedia(Aomorikuma)
-
- This / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.6, reviewCount: 98, googleRating: 4.4, googleReviewCount: 139,
+    mainImageUrl: "/images/spots/wikimedia/aomori-kita-breakwater.jpg", imageAttribution: "Photo: あおもりくま at Japanese Wikipedia(Aomorikuma)  This / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.6, reviewCount: 98, googleRating: 4.4, googleReviewCount: 139,
     catchableFish: [
       { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },

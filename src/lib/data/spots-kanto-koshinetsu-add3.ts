@@ -1608,9 +1608,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
     region: localRegion("r3141"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "河川敷に無料駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/watarasegawa-ashikaga.jpg", imageAttribution: "Photo: Naopan
-
- This photo was taken with iPhone 6 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.5, reviewCount: 95,
+    mainImageUrl: "/images/spots/wikimedia/watarasegawa-ashikaga.jpg", imageAttribution: "Photo: Naopan  This photo was taken with iPhone 6 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.5, reviewCount: 95,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "渓流釣り" },

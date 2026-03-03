@@ -1487,9 +1487,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（日券）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/watarasegawa-kiryu.jpg", imageAttribution: "Photo: Naopan
-
- This photo was taken with iPhone 6 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/watarasegawa-kiryu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/watarasegawa-kiryu.jpg", imageAttribution: "Photo: Naopan  This photo was taken with iPhone 6 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/watarasegawa-kiryu.jpg"],
     rating: 4.0, reviewCount: 95,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },

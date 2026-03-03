@@ -127,9 +127,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "無料",
     hasParking: true, parkingDetail: "岩淵水門公園駐車場、近隣コインパーキング",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/arakawa-lower-unagi.jpg", imageAttribution: "Photo: Asanagi
-
- This photo was taken with iPhone 13 Pro / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/arakawa-lower-unagi.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/arakawa-lower-unagi.jpg", imageAttribution: "Photo: Asanagi  This photo was taken with iPhone 13 Pro / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/arakawa-lower-unagi.jpg"],
     rating: 4.1, reviewCount: 145, googleRating: 4.3, googleReviewCount: 109,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -916,9 +914,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "無料",
     hasParking: true, parkingDetail: "公園駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shinsakongawa-tenaga.jpg", imageAttribution: "Photo: Comyu
-
- This photo was taken with Olympus E-300 / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/shinsakongawa-tenaga.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/shinsakongawa-tenaga.jpg", imageAttribution: "Photo: Comyu  This photo was taken with Olympus E-300 / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/shinsakongawa-tenaga.jpg"],
     rating: 3.8, reviewCount: 95, googleRating: 4.1, googleReviewCount: 906,
     catchableFish: [
       { fish: fish("tenagaebi"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ミャク釣り" },

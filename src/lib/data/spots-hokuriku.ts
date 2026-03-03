@@ -664,9 +664,7 @@ export const hokurikuSpots: FishingSpot[] = [
     region: region("r21"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/iwase-gyoko.jpg", imageAttribution: "Photo: Suikotei
-
- This photo was taken with Google Pixel / Wikimedia Commons (CC BY 4.0)", images: [], rating: 3.6, reviewCount: 112, googleRating: 4.1, googleReviewCount: 47,
+    mainImageUrl: "/images/spots/wikimedia/iwase-gyoko.jpg", imageAttribution: "Photo: Suikotei  This photo was taken with Google Pixel / Wikimedia Commons (CC BY 4.0)", images: [], rating: 3.6, reviewCount: 112, googleRating: 4.1, googleReviewCount: 47,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 6, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },

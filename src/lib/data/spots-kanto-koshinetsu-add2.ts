@@ -1329,9 +1329,7 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
     region: localRegion("r2412"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/omoigawa-tochigi.jpg", imageAttribution: "Photo: うらにわ
-
- This photo was taken with iPhone 6 Plus / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.4, reviewCount: 55, googleRating: 3.7, googleReviewCount: 49,
+    mainImageUrl: "/images/spots/wikimedia/omoigawa-tochigi.jpg", imageAttribution: "Photo: うらにわ  This photo was taken with iPhone 6 Plus / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.4, reviewCount: 55, googleRating: 3.7, googleReviewCount: 49,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
       { fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝〜日中", method: "ヘラブナ釣り" },
