@@ -61,6 +61,8 @@ import { SpotPhotoGallery } from "@/components/spots/spot-photo-gallery";
 import { areaGuides } from "@/lib/data/area-guides";
 import { explainTime, explainMethod } from "@/lib/fishing-term-helper";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
+import { FISHING_METHODS } from "@/lib/data/fishing-methods";
+import { REGION_GROUPS } from "@/lib/data/regions-group";
 
 import { RecentlyViewedTracker } from "@/components/spots/recently-viewed-tracker";
 import { RecentlyViewedSpots } from "@/components/spots/recently-viewed";
@@ -1261,6 +1263,39 @@ export default async function SpotDetailPage({ params }: PageProps) {
                   </CardContent>
                 </Card>
               </Link>
+            </div>
+          </section>
+        );
+      })()}
+
+      {/* 釣り方×地域ガイドリンク */}
+      {(() => {
+        const spotMethods = [...new Set(spot.catchableFish.map((cf) => cf.method))];
+        const regionGroup = REGION_GROUPS.find((rg) =>
+          rg.prefectures.includes(spot.region.prefecture)
+        );
+        if (!regionGroup || spotMethods.length === 0) return null;
+        const matchedMethods = FISHING_METHODS.filter((fm) =>
+          spotMethods.some((sm) => fm.methods.includes(sm))
+        );
+        if (matchedMethods.length === 0) return null;
+        return (
+          <section className="mt-8 sm:mt-12">
+            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+              <Compass className="size-5" />
+              {regionGroup.name}の釣り方ガイド
+            </h2>
+            <div className="flex flex-wrap gap-2">
+              {matchedMethods.slice(0, 6).map((fm) => (
+                <Link key={fm.slug} href={`/fishing/${fm.slug}/area/${regionGroup.slug}`}>
+                  <Badge
+                    variant="outline"
+                    className="cursor-pointer px-3 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground min-h-[40px] flex items-center"
+                  >
+                    {regionGroup.name}の{fm.name}スポット
+                  </Badge>
+                </Link>
+              ))}
             </div>
           </section>
         );
