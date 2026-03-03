@@ -406,7 +406,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r901"), spotType: "pier", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に路肩スペース",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/centrair-tokoname-maejima.jpg", images: [], rating: 3.7, reviewCount: 62, googleRating: 3.5, googleReviewCount: 10,
+    mainImageUrl: "/images/spots/wikimedia/centrair-tokoname-maejima.jpg", imageAttribution: "Photo: 名古屋太郎 / Wikimedia Commons (CC0)", images: [], rating: 3.7, reviewCount: 62, googleRating: 3.5, googleReviewCount: 10,
     catchableFish: [
       { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ヘチ釣り" },
@@ -1006,7 +1006,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r906"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "波止手前に駐車スペース（10台）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/bouchi-no-hatojo.jpg", images: [], rating: 3.9, reviewCount: 82, googleRating: 4.6, googleReviewCount: 5,
+    mainImageUrl: "/images/spots/wikimedia/bouchi-no-hatojo.jpg", imageAttribution: "Photo: C2revenge / Wikimedia Commons (CC0)", images: [], rating: 3.9, reviewCount: 82, googleRating: 4.6, googleReviewCount: 5,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("konoshiro"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },

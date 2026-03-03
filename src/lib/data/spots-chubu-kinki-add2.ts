@@ -569,7 +569,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2560"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.9, reviewCount: 80, googleRating: 3.8, googleReviewCount: 116,
+    mainImageUrl: "/images/spots/wikimedia/takasu-gyoko.jpg", imageAttribution: "Photo: NASA / Wikimedia Commons (Public domain)", images: [], rating: 3.9, reviewCount: 80, googleRating: 3.8, googleReviewCount: 116,
     catchableFish: [
       { fish: fish("mejina"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -594,7 +594,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2541"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.2, reviewCount: 230, googleRating: 3.9, googleReviewCount: 78,
+    mainImageUrl: "/images/spots/wikimedia/himi-gyoko.jpg", imageAttribution: "Photo: Koshinami / Wikimedia Commons (CC0)", images: [], rating: 4.2, reviewCount: 230, googleRating: 3.9, googleReviewCount: 78,
     catchableFish: [
       { fish: fish("buri"), monthStart: 11, monthEnd: 2, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -660,7 +660,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2542"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.8, reviewCount: 140, googleRating: 4.2, googleReviewCount: 13,
+    mainImageUrl: "/images/spots/wikimedia/toyama-shinko.jpg", imageAttribution: "Photo: 赤座 / Wikimedia Commons (CC0)", images: [], rating: 3.8, reviewCount: 140, googleRating: 4.2, googleReviewCount: 13,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 6, monthEnd: 9, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },

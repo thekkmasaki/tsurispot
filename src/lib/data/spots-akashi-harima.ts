@@ -698,7 +698,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r450"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: false, parkingDetail: "漁港内駐車不可。周辺コインパーキング利用（1時間200〜300円程度）",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.8, reviewCount: 290, googleRating: 3.9, googleReviewCount: 327,
+    mainImageUrl: "/images/spots/wikimedia/tarumi-gyoko.jpg", imageAttribution: "Photo: NatsuTV / Wikimedia Commons (CC0)", images: [], rating: 3.8, reviewCount: 290, googleRating: 3.9, googleReviewCount: 327,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
@@ -757,7 +757,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r450"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内に限定的な駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.6, reviewCount: 150, googleRating: 4, googleReviewCount: 1,
+    mainImageUrl: "/images/spots/wikimedia/eigashima-ko.jpg", imageAttribution: "Photo: Tokumeigakarinoaoshima / Wikimedia Commons (CC0)", images: [], rating: 3.6, reviewCount: 150, googleRating: 4, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "投げ釣り" },
@@ -819,7 +819,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r450"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: false, parkingDetail: "駐車場なし。JR塩屋駅から徒歩5分のため電車釣行推奨",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.5, reviewCount: 120, googleRating: 3.7, googleReviewCount: 89,
+    mainImageUrl: "/images/spots/wikimedia/shioya-gyoko.jpg", imageAttribution: "Photo: NatsuTV / Wikimedia Commons (CC0)", images: [], rating: 3.5, reviewCount: 120, googleRating: 3.7, googleReviewCount: 89,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "メバリング" },
