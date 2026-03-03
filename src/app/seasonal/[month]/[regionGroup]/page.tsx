@@ -108,8 +108,23 @@ export async function generateMetadata({
   const regionName = getRegionGroupBySlug(regionSlug);
   if (!monthDef || !regionName) return { title: "ページが見つかりません" };
 
-  const title = `${monthDef.name}に${regionName}で釣れる魚と釣り場【2026年版】`;
-  const description = `${monthDef.name}（${monthDef.season}）に${regionName}地方で釣れる魚種と人気の釣り場を紹介。ベストシーズンの魚をピックアップし、おすすめスポットをご案内。${regionName}の${monthDef.name}の釣り情報はツリスポで。`;
+  // メタデータ用に今月釣れる魚を取得
+  const metaRegionPrefs = prefectures.filter((p) => p.regionGroup === regionName);
+  const metaRegionPrefNames = new Set(metaRegionPrefs.map((p) => p.name));
+  const metaInSeasonFish = new Map<string, string>();
+  for (const spot of fishingSpots) {
+    if (!metaRegionPrefNames.has(spot.region.prefecture)) continue;
+    for (const cf of spot.catchableFish) {
+      if (cf.fish.seasonMonths.includes(monthDef.num)) {
+        metaInSeasonFish.set(cf.fish.id, cf.fish.name);
+      }
+    }
+  }
+  const metaFishNames = Array.from(metaInSeasonFish.values()).slice(0, 5).join("・");
+  const metaSpotCount = fishingSpots.filter((s) => metaRegionPrefNames.has(s.region.prefecture)).length;
+
+  const title = `【${monthDef.name}】${regionName}で今釣れる魚とおすすめ釣り場【2026年最新】`;
+  const description = `${monthDef.name}（${monthDef.season}）に${regionName}地方で釣れる魚種と人気の釣り場を紹介。${metaFishNames ? `${metaFishNames}など` : "ベストシーズンの魚"}が狙えるおすすめスポット${metaSpotCount > 0 ? `${metaSpotCount}箇所` : ""}をご案内。初心者向けの釣り方・タックル情報も掲載。`;
 
   return {
     title,

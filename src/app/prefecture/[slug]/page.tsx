@@ -200,15 +200,21 @@ export async function generateMetadata({
   const spotTypes = new Set(spots.map((s) => SPOT_TYPE_LABELS[s.spotType]));
   const spotTypeText = Array.from(spotTypes).slice(0, 4).join("・");
 
-  const title = `${pref.name}の釣り場おすすめ${spots.length > 0 ? spots.length : ""}選｜初心者向け穴場スポットも【2026年版】`;
-  const description = `${pref.name}のおすすめ釣りスポット${spots.length > 0 ? `${spots.length}箇所` : ""}を初心者〜上級者別にランキング形式で紹介。${pref.name}近くの${spotTypeText || "堤防・漁港・磯"}で${topFishNames}が狙える穴場釣り場を厳選。駐車場・トイレ情報、ベストシーズン、アクセス方法まで完全ガイド。`;
+  const beginnerCount = spots.filter((s) => s.difficulty === "beginner").length;
+  const freeCount = spots.filter((s) => s.isFree).length;
+  const beginnerText = beginnerCount > 0 ? `初心者OK ${beginnerCount}箇所` : "";
+  const freeText = freeCount > 0 ? `無料 ${freeCount}箇所` : "";
+  const featureTexts = [beginnerText, freeText].filter(Boolean).join("・");
+
+  const title = `${pref.name}の釣り場おすすめ${spots.length > 0 ? spots.length : ""}選｜${featureTexts || "初心者向け穴場スポットも"}【2026年最新】`;
+  const description = `${pref.name}のおすすめ釣りスポット${spots.length > 0 ? `${spots.length}箇所` : ""}を初心者〜上級者別にランキング形式で紹介。${pref.name}近くの${spotTypeText || "堤防・漁港・磯"}で${topFishNames}が狙える穴場釣り場を厳選。駐車場・トイレ情報、ベストシーズン、アクセス方法まで完全ガイド。${featureTexts ? `【${featureTexts}】` : ""}`;
 
   return {
     title,
     description,
     openGraph: {
-      title: `${pref.name}の釣り場おすすめ${spots.length > 0 ? spots.length : ""}選【2026年版】`,
-      description: `${pref.name}で人気の釣りスポットをエリア別に紹介。${topFishNames}が釣れるおすすめの釣り場情報。`,
+      title: `${pref.name}の釣り場おすすめ${spots.length > 0 ? spots.length : ""}選【2026年最新】`,
+      description: `${pref.name}で人気の釣りスポットをエリア別に紹介。${topFishNames}が釣れるおすすめの釣り場情報。${featureTexts ? `${featureTexts}。` : ""}`,
       type: "website",
       url: `https://tsurispot.com/prefecture/${pref.slug}`,
       siteName: "ツリスポ",
@@ -381,46 +387,80 @@ export default async function PrefecturePage({ params }: PageProps) {
     headline: `${pref.name}の釣り場おすすめ${spots.length > 0 ? spots.length : ""}選｜初心者向け穴場スポットも`,
     description: prefInfo?.description || `${pref.name}で人気の釣り場・穴場スポットを紹介。近くのおすすめ釣りスポットが見つかります。`,
     author: {
-      "@type": "Organization",
-      name: "ツリスポ",
-      url: "https://tsurispot.com",
+      "@type": "Person",
+      name: "正木 家康",
+      jobTitle: "編集長",
+      url: "https://tsurispot.com/about",
     },
     publisher: {
       "@type": "Organization",
       name: "ツリスポ",
       url: "https://tsurispot.com",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://tsurispot.com/logo.svg",
+      },
     },
-    url: `https://tsurispot.com/prefecture/${pref.slug}`,
-    mainEntityOfPage: `https://tsurispot.com/prefecture/${pref.slug}`,
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": `https://tsurispot.com/prefecture/${pref.slug}`,
+    },
     datePublished: "2025-01-01",
     dateModified: new Date().toISOString().split("T")[0],
   };
+
+  // 動的FAQデータ（prefInfoが無い場合でもスポットデータから生成）
+  const dynamicFaqItems = [
+    {
+      question: `${pref.name}のおすすめ釣りスポットは？`,
+      answer: spots.length > 0
+        ? `${pref.name}のおすすめ釣りスポットは${spots.sort((a, b) => b.rating - a.rating).slice(0, 3).map((s) => s.name).join("、")}です。${spots.length}件のスポットを掲載中で、初心者向けから上級者向けまで幅広くご紹介しています。`
+        : `${pref.name}の釣りスポット情報は現在準備中です。`,
+    },
+    {
+      question: `${pref.name}で今釣れる魚は？`,
+      answer: inSeasonFish.length > 0
+        ? `${currentMonthName}の${pref.name}では${inSeasonFish.slice(0, 6).map((f) => f.name).join("・")}などが釣れます。${inSeasonFish.filter((f) => f.isPeak).length > 0 ? `特に${inSeasonFish.filter((f) => f.isPeak).slice(0, 3).map((f) => f.name).join("・")}は最盛期です。` : ""}`
+        : `${pref.name}の釣れる魚の情報は各スポットページでご確認ください。`,
+    },
+    {
+      question: `${pref.name}の釣り場の特徴は？`,
+      answer: spotTypeBreakdown.length > 0
+        ? `${pref.name}の釣り場は${spotTypeBreakdown.map((t) => `${t.type}${t.count}件（${Math.round((t.count / spots.length) * 100)}%）`).join("、")}です。${beginnerSpots.length > 0 ? `初心者向けスポットは${beginnerSpots.length}件、` : ""}${freeSpots.length > 0 ? `無料で楽しめるスポットは${freeSpots.length}件あります。` : ""}`
+        : `${pref.name}の釣り場情報は現在準備中です。`,
+    },
+  ];
+
+  // prefInfoのFAQがあればそちらを使い、なければ動的FAQを使用
+  const finalFaqItems = faqs.length > 0 ? faqs : dynamicFaqItems;
+
+  // 動的FAQ用のJSON-LD（prefInfoがない場合）
+  const dynamicFaqJsonLd = faqs.length === 0 && dynamicFaqItems.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: dynamicFaqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  } : null;
+
+  const jsonLdArray = [
+    breadcrumbJsonLd,
+    placeJsonLd,
+    articleJsonLd,
+    ...(faqJsonLd ? [faqJsonLd] : dynamicFaqJsonLd ? [dynamicFaqJsonLd] : []),
+    ...(itemListJsonLd ? [itemListJsonLd] : []),
+  ];
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(placeJsonLd) }}
-      />
-      {faqJsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
-        />
-      )}
-      {itemListJsonLd && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
-        />
-      )}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdArray) }}
       />
 
       {/* パンくず */}

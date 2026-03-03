@@ -12,6 +12,7 @@ import {
   FileText,
   Fish,
   ShieldAlert,
+  HelpCircle,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -38,8 +39,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const pref = prefectures.find((p) => p.slug === prefSlug);
   if (!pref) return {};
 
-  const title = `${pref.name}の釣りルール・規制情報｜禁漁期間・遊漁券・サイズ制限`;
-  const description = `${pref.name}で釣りをする前に知っておきたいルールと規制をまとめました。禁漁期間、遊漁券が必要な河川、サイズ制限、漁業権に関する注意事項を解説。`;
+  const prefSpotCount = fishingSpots.filter((s) => s.region.prefecture === pref.name).length;
+  const title = `${pref.name}の釣りルール・規制【2026年最新】遊漁券・禁漁期間・サイズ制限まとめ`;
+  const description = `${pref.name}で釣りをする前に必ず確認したいルール・規制を完全まとめ。禁漁期間、遊漁券が必要な河川・湖、サイズ制限、漁業権、リリース規定を解説。${prefSpotCount > 0 ? `${pref.name}の釣り場${prefSpotCount}箇所の情報も掲載。` : ""}違反すると罰則の対象になる場合もあるため、必ず事前にチェックしましょう。`;
 
   return {
     title,
@@ -387,6 +389,30 @@ export default async function PrefectureFishingRulesPage({ params }: Props) {
                   </p>
                 </CardContent>
               </Card>
+            </section>
+          )}
+
+          {/* よくある質問 */}
+          {faqItems.length > 0 && (
+            <section>
+              <div className="mb-4 flex items-center gap-2">
+                <HelpCircle className="h-5 w-5 text-primary" />
+                <h2 className="text-xl font-bold sm:text-2xl">よくある質問</h2>
+              </div>
+              <div className="space-y-3">
+                {faqItems.map((item, idx) => (
+                  <Card key={idx}>
+                    <CardContent className="p-4">
+                      <h3 className="mb-2 text-sm font-bold">
+                        Q. {item.question}
+                      </h3>
+                      <p className="text-sm text-muted-foreground">
+                        A. {item.answer}
+                      </p>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
             </section>
           )}
 
