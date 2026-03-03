@@ -6,13 +6,13 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { FishListClient } from "@/components/fish/fish-list-client";
 
 export const metadata: Metadata = {
-  title: "魚種図鑑 - 釣りで狙える魚の旬・釣り方・食べ方ガイド",
+  title: "魚種図鑑100種以上｜釣りで狙える魚の旬・釣り方・食べ方ガイド",
   description:
-    "80種以上の海水魚・淡水魚を図鑑形式で収録。旬の時期・釣りやすさ・おすすめの食べ方を魚ごとに詳しく解説。アジ・サバ・カサゴなど人気ターゲットの釣り方と仕掛けもわかる。今釣れる魚をチェック。",
+    "100種以上の海水魚・淡水魚・汽水魚を図鑑形式で収録。旬の時期・釣りやすさ・難易度・おすすめの食べ方を魚ごとに詳しく解説。アジ・サバ・カサゴ・シーバスなど人気ターゲットの釣り方と仕掛けもわかる。",
   openGraph: {
-    title: "魚種図鑑 - 釣りで狙える魚の旬・釣り方・食べ方ガイド",
+    title: "魚種図鑑100種以上｜釣りで狙える魚の旬・釣り方・食べ方ガイド",
     description:
-      "釣りで狙える海水魚・淡水魚を図鑑形式で紹介。旬の時期、難易度、おすすめの食べ方まで網羅。",
+      "100種以上の海水魚・淡水魚・汽水魚を図鑑形式で紹介。旬の時期、難易度、おすすめ釣り方と食べ方まで網羅。",
     type: "website",
     url: "https://tsurispot.com/fish",
     siteName: "ツリスポ",

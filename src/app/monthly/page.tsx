@@ -155,6 +155,17 @@ export default function MonthlyPage() {
                     : "border-border hover:border-primary/30"
                 }`}
               >
+                {/* サムネイル画像 */}
+                {guide.heroImage && (
+                  <div className="relative h-28 w-full overflow-hidden">
+                    <img
+                      src={guide.heroImage}
+                      alt={guide.heroImageAlt || `${guide.nameJa}の釣り`}
+                      className="h-full w-full object-cover transition-transform group-hover:scale-105"
+                      loading="lazy"
+                    />
+                  </div>
+                )}
                 {/* カードヘッダー */}
                 <div
                   className={`flex items-center gap-3 p-4 ${

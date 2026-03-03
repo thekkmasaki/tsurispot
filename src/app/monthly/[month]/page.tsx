@@ -68,6 +68,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       url: `https://tsurispot.com/monthly/${month}`,
       siteName: "ツリスポ",
+      ...(guide.heroImage
+        ? {
+            images: [
+              {
+                url: `https://tsurispot.com${guide.heroImage}`,
+                width: 1200,
+                height: 630,
+                alt: guide.heroImageAlt || `${guide.nameJa}の釣り`,
+              },
+            ],
+          }
+        : {}),
     },
     alternates: {
       canonical: `https://tsurispot.com/monthly/${month}`,
@@ -247,6 +259,23 @@ export default async function MonthlyGuidePage({ params }: Props) {
           { label: "月別釣りガイド", href: "/monthly" },
           { label: `${guide.nameJa}の釣り` },
         ]} />
+
+        {/* ヒーロー画像 */}
+        {guide.heroImage && (
+          <div className="mb-6 overflow-hidden rounded-2xl">
+            <img
+              src={guide.heroImage}
+              alt={guide.heroImageAlt || `${guide.nameJa}の釣り`}
+              className="h-48 w-full object-cover sm:h-64"
+              loading="eager"
+            />
+            {guide.heroImageAttribution && (
+              <p className="mt-1 text-[10px] text-muted-foreground text-right">
+                {guide.heroImageAttribution}
+              </p>
+            )}
+          </div>
+        )}
 
         {/* ヘッダー */}
         <div className="mb-8 overflow-hidden rounded-2xl border-2 border-border bg-gradient-to-br from-blue-50 to-cyan-50 p-6 sm:p-8 dark:from-blue-950/30 dark:to-cyan-950/30">

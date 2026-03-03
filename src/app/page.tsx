@@ -40,9 +40,9 @@ const LocationPromptBanner = dynamic(() => import("@/components/location-prompt-
 const SeasonalRecommend = dynamic(() => import("@/components/affiliate/seasonal-recommend").then((m) => m.SeasonalRecommend));
 
 export const metadata: Metadata = {
-  title: "ツリスポ - 近くの釣り場が見つかる｜全国の海釣り・川釣りスポット検索",
+  title: "ツリスポ｜近くの釣り場が見つかる｜全国3,300+の海釣り・川釣りスポット検索",
   description:
-    "全国3,300箇所以上の釣りスポットを地図で簡単検索。堤防・漁港・磯の海釣りから渓流・湖の川釣りまで網羅。今釣れる魚・混雑予想・初心者向け穴場も一目でわかる。近くの釣り場を今すぐチェック。",
+    "全国3,300箇所以上の釣りスポットと100種以上の魚種図鑑を無料で検索。堤防・漁港・磯の海釣りから渓流・湖の川釣りまで網羅。今釣れる魚・混雑予想・初心者向け穴場・潮汐情報が一目でわかる。",
   openGraph: {
     title: "ツリスポ - 近くの釣り場が見つかる釣りスポット検索サイト",
     description:
@@ -190,6 +190,13 @@ export default function Home() {
   const totalSpots = fishingSpots.length;
   const totalFishSpecies = fishSpecies.length;
   const totalPrefectures = new Set(fishingSpots.map((s) => s.region.prefecture)).size;
+
+  // GEO stats for data section
+  const seaSpots = fishingSpots.filter((s) => s.spotType !== "river" && s.spotType !== "lake").length;
+  const freshwaterSpotCount = fishingSpots.filter((s) => s.spotType === "river" || s.spotType === "lake").length;
+  const beginnerSpots = fishingSpots.filter((s) => s.difficulty === "beginner").length;
+  const catchableNowCount = getCatchableNow(currentMonth).length;
+  const totalGuides = areaGuides.length;
 
 
   // Carousel data: fish catchable now with spot counts
@@ -394,6 +401,45 @@ export default function Home() {
             </footer>
           </blockquote>
         </div>
+      </section>
+
+      {/* GEO対策: 統計データセクション */}
+      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
+        <h2 className="mb-2 text-center text-lg font-bold tracking-tight sm:text-xl">
+          日本最大級の釣り情報データベース
+        </h2>
+        <p className="mb-6 text-center text-sm text-muted-foreground">
+          ツリスポは全国{totalPrefectures}都道府県の釣り場情報を網羅しています
+        </p>
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
+          <div className="rounded-xl border bg-card p-4 text-center">
+            <div className="text-2xl font-bold text-primary sm:text-3xl">{totalSpots.toLocaleString()}<span className="text-base font-normal">+</span></div>
+            <div className="mt-1 text-xs text-muted-foreground">釣りスポット数</div>
+          </div>
+          <div className="rounded-xl border bg-card p-4 text-center">
+            <div className="text-2xl font-bold text-primary sm:text-3xl">{totalFishSpecies}<span className="text-base font-normal">+</span></div>
+            <div className="mt-1 text-xs text-muted-foreground">魚種図鑑</div>
+          </div>
+          <div className="rounded-xl border bg-card p-4 text-center">
+            <div className="text-2xl font-bold text-primary sm:text-3xl">{totalPrefectures}</div>
+            <div className="mt-1 text-xs text-muted-foreground">都道府県カバー</div>
+          </div>
+          <div className="rounded-xl border bg-card p-4 text-center">
+            <div className="text-2xl font-bold text-primary sm:text-3xl">{seaSpots.toLocaleString()}</div>
+            <div className="mt-1 text-xs text-muted-foreground">海釣りスポット</div>
+          </div>
+          <div className="rounded-xl border bg-card p-4 text-center">
+            <div className="text-2xl font-bold text-primary sm:text-3xl">{freshwaterSpotCount}</div>
+            <div className="mt-1 text-xs text-muted-foreground">川・湖スポット</div>
+          </div>
+          <div className="rounded-xl border bg-card p-4 text-center">
+            <div className="text-2xl font-bold text-primary sm:text-3xl">{beginnerSpots.toLocaleString()}</div>
+            <div className="mt-1 text-xs text-muted-foreground">初心者OK</div>
+          </div>
+        </div>
+        <p className="mt-4 text-center text-xs text-muted-foreground">
+          今月釣れる魚は<strong>{catchableNowCount}種</strong>。全国{totalGuides}エリアのガイドと月別・季節別の釣り方情報を毎月更新中。
+        </p>
       </section>
 
       {/* 今釣れている魚カルーセル */}
