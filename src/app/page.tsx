@@ -44,7 +44,7 @@ const SeasonalRecommend = dynamic(() => import("@/components/affiliate/seasonal-
 export const metadata: Metadata = {
   title: "ツリスポ - 近くの釣り場が見つかる｜全国の海釣り・川釣りスポット検索",
   description:
-    "全国1,000箇所以上の釣りスポットを地図で簡単検索。堤防・漁港・磯の海釣りから渓流・湖の川釣りまで網羅。今釣れる魚・混雑予想・初心者向け穴場も一目でわかる。近くの釣り場を今すぐチェック。",
+    "全国3,300箇所以上の釣りスポットを地図で簡単検索。堤防・漁港・磯の海釣りから渓流・湖の川釣りまで網羅。今釣れる魚・混雑予想・初心者向け穴場も一目でわかる。近くの釣り場を今すぐチェック。",
   openGraph: {
     title: "ツリスポ - 近くの釣り場が見つかる釣りスポット検索サイト",
     description:
@@ -77,30 +77,7 @@ const lightSpots = fishingSpots.map((s) => ({
   })),
 }));
 
-const websiteJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  name: "ツリスポ",
-  url: "https://tsurispot.com",
-  description:
-    "近くの釣り場を地図で簡単検索。全国1000箇所以上の釣りスポットから今釣れる魚やおすすめの仕掛け情報まで網羅した釣り情報サイト。",
-  potentialAction: {
-    "@type": "SearchAction",
-    target: "https://tsurispot.com/spots?q={search_term_string}",
-    "query-input": "required name=search_term_string",
-  },
-};
-
-const organizationJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "ツリスポ",
-  url: "https://tsurispot.com",
-  logo: "https://tsurispot.com/logo.svg",
-  sameAs: ["https://www.instagram.com/tsurispotjapan/"],
-  description:
-    "釣りスポット総合情報サイト。全国の釣り場を地図で検索でき、今釣れる魚やおすすめの仕掛け情報を提供しています。",
-};
+// WebSite + Organization は layout.tsx に統一（重複排除）
 
 const homeSpeakableJsonLd = {
   "@context": "https://schema.org",
@@ -167,7 +144,7 @@ const homeFaqJsonLd = {
       name: "近くの釣り場を探すにはどうすればいいですか？",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "ツリスポでは、GPSを使って現在地から近い釣り場を自動で表示します。トップページの「近くの釣り場」ボタンを押すか、地図ページから周辺の釣りスポットを検索できます。全国1000箇所以上の釣り場から最寄りのスポットが見つかります。",
+        text: "ツリスポでは、GPSを使って現在地から近い釣り場を自動で表示します。トップページの「近くの釣り場」ボタンを押すか、地図ページから周辺の釣りスポットを検索できます。全国3,300箇所以上の釣り場から最寄りのスポットが見つかります。",
       },
     },
     {
@@ -250,31 +227,18 @@ export default function Home() {
     })),
   };
 
+  const homeJsonLdArray = [
+    homeFaqJsonLd,
+    popularSpotsItemListJsonLd,
+    homeSpeakableJsonLd,
+    homeDatasetJsonLd,
+  ];
+
   return (
     <div className="flex flex-col">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeFaqJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(popularSpotsItemListJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeSpeakableJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeDatasetJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLdArray) }}
       />
       {/* ヒーローセクション */}
       <section className="relative overflow-x-hidden bg-gradient-to-br from-sky-600 via-[#0C4A6E] to-indigo-800">
