@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MapPin, ChevronLeft } from "lucide-react";
+import { MapPin, ChevronLeft, HelpCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { regions } from "@/lib/data/regions";
 import { fishingSpots } from "@/lib/data/spots";
@@ -181,6 +181,52 @@ export default async function AreaDetailPage({ params }: PageProps) {
     })),
   };
 
+  const pageUrl = `https://tsurispot.com/area/${region.slug}`;
+
+  // 釣り方の集計
+  const methodMap = new Map<string, number>();
+  for (const spot of spots) {
+    for (const cf of spot.catchableFish) {
+      methodMap.set(cf.method, (methodMap.get(cf.method) || 0) + 1);
+    }
+  }
+  const methodBreakdown = Array.from(methodMap.entries())
+    .map(([method, count]) => ({ method, count }))
+    .sort((a, b) => b.count - a.count);
+
+  // 施設情報
+  const parkingCount = spots.filter((s) => s.hasParking).length;
+  const toiletCount = spots.filter((s) => s.hasToilet).length;
+  const freeCount = spots.filter((s) => s.isFree).length;
+
+  // FAQ データ
+  const faqItems = [
+    {
+      question: `${region.areaName}のおすすめ釣りスポットは？`,
+      answer: spots.length > 0
+        ? `${region.areaName}（${region.prefecture}）のおすすめスポットは${spots.sort((a, b) => b.rating - a.rating).slice(0, 3).map((s) => s.name).join("、")}です。${spots.length}件のスポットを掲載しています。`
+        : `${region.areaName}の釣りスポット情報は現在準備中です。`,
+    },
+    {
+      question: `${region.areaName}で釣れる魚は何ですか？`,
+      answer: catchableFish.length > 0
+        ? `${region.areaName}では${catchableFish.slice(0, 6).map((f) => f.name).join("・")}などが釣れます。${methodBreakdown.length > 0 ? `主な釣り方は${methodBreakdown.slice(0, 3).map((m) => m.method).join("、")}です。` : ""}`
+        : `${region.areaName}の釣れる魚の情報は各スポットページでご確認ください。`,
+    },
+    {
+      question: `${region.areaName}の釣り場へのアクセスや設備は？`,
+      answer: (() => {
+        const parts: string[] = [];
+        if (parkingCount > 0) parts.push(`駐車場ありのスポットは${parkingCount}件`);
+        if (toiletCount > 0) parts.push(`トイレありは${toiletCount}件`);
+        if (freeCount > 0) parts.push(`無料で利用できるスポットは${freeCount}件`);
+        return parts.length > 0
+          ? `${region.areaName}の釣り場は、${parts.join("、")}あります。各スポットの詳細ページでアクセス方法や設備情報をご確認ください。`
+          : `${region.areaName}の釣り場のアクセスや設備は各スポットの詳細ページでご確認ください。`;
+      })(),
+    },
+  ];
+
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -201,20 +247,59 @@ export default async function AreaDetailPage({ params }: PageProps) {
         "@type": "ListItem",
         position: 3,
         name: `${region.areaName}（${region.prefecture}）`,
-        item: `https://tsurispot.com/area/${region.slug}`,
+        item: pageUrl,
       },
     ],
   };
+
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: `${region.areaName}（${region.prefecture}）の釣り場おすすめ${spots.length}選`,
+    description: description || `${region.prefecture}${region.areaName}エリアの釣りスポット情報。近くのおすすめ釣り場を紹介。`,
+    datePublished: "2025-01-01",
+    dateModified: new Date().toISOString().split("T")[0],
+    author: {
+      "@type": "Person",
+      name: "正木 家康",
+      jobTitle: "編集長",
+      url: "https://tsurispot.com/about",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "ツリスポ",
+      url: "https://tsurispot.com",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://tsurispot.com/logo.svg",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": pageUrl,
+    },
+  };
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
+  const jsonLdArray = [breadcrumbJsonLd, jsonLd, articleJsonLd, faqJsonLd];
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdArray) }}
       />
 
       {/* パンくず */}
@@ -272,6 +357,28 @@ export default async function AreaDetailPage({ params }: PageProps) {
         catchableFish={catchableFish}
         areaName={region.areaName}
       />
+
+      {/* よくある質問 */}
+      <section className="mt-8 mb-8 sm:mt-10 sm:mb-10">
+        <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
+          <HelpCircle className="size-5 text-primary" />
+          {region.areaName}の釣りに関するよくある質問
+        </h2>
+        <div className="space-y-3">
+          {faqItems.map((item, idx) => (
+            <Card key={idx} className="gap-0 py-0">
+              <CardContent className="p-4 sm:p-5">
+                <h3 className="mb-2 text-sm font-bold sm:text-base">
+                  Q. {item.question}
+                </h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  A. {item.answer}
+                </p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
 
       {/* Same prefecture regions for internal linking */}
       {samePreRegions.length > 0 && (

@@ -931,13 +931,13 @@ export default async function PrefecturePage({ params }: PageProps) {
       )}
 
       {/* FAQ Section */}
-      {faqs.length > 0 && (
+      {finalFaqItems.length > 0 && (
         <section className="mb-8 sm:mb-10">
           <h2 className="mb-4 text-base font-bold sm:text-lg">
             {pref.name}の釣りに関するよくある質問
           </h2>
           <div className="space-y-3">
-            {faqs.map((faq, i) => (
+            {finalFaqItems.map((faq, i) => (
               <Card key={i} className="gap-0 py-0">
                 <CardContent className="p-4 sm:p-5">
                   <h3 className="mb-2 text-sm font-bold sm:text-base">
