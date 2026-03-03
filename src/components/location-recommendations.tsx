@@ -229,7 +229,7 @@ export function LocationRecommendations({
         </div>
       )}
 
-      {/* 今日どこに行こうかなリンク */}
+      {/* 今週どこ行こうかなリンク */}
       <Link href="/recommendation" className="mt-4 block">
         <Card className="group border-dashed transition-shadow hover:shadow-md">
           <CardContent className="flex items-center gap-3 p-3 sm:p-4">
@@ -238,10 +238,10 @@ export function LocationRecommendations({
             </div>
             <div className="min-w-0 flex-1">
               <h3 className="text-sm font-semibold group-hover:text-primary">
-                今日どこに行こうかな？
+                今週どこ行こうかな？
               </h3>
               <p className="text-xs text-muted-foreground">
-                条件を選んで、あなたにぴったりの釣り場を診断
+                日付を選んで、あなたにぴったりの釣り場を診断
               </p>
             </div>
             <ChevronRight className="size-5 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-1" />

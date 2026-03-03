@@ -719,17 +719,17 @@ export default function FishFinderPage() {
               {/* Related links */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
                 <Link href="/recommendation">
-                  <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
+                  <Card className="hover:shadow-md transition-shadow cursor-pointer h-full border-orange-200 bg-gradient-to-r from-orange-50 to-amber-50">
                     <CardContent className="p-4 flex items-center gap-3">
                       <div className="rounded-full bg-orange-100 p-2.5">
-                        <Target className="size-5 text-orange-500" />
+                        <Calendar className="size-5 text-orange-500" />
                       </div>
                       <div>
                         <p className="font-semibold text-sm">
-                          今日のおすすめスポット
+                          今週どこ行こうかな？
                         </p>
                         <p className="text-xs text-gray-500 mt-0.5">
-                          条件に合った釣り場を提案
+                          日付・エリア・レベルから最適な釣り場を提案
                         </p>
                       </div>
                       <ChevronRight className="size-4 text-gray-400 ml-auto" />

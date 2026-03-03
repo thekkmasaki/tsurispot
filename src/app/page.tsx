@@ -530,7 +530,7 @@ export default function Home() {
                 <Compass className="size-5 text-amber-600 sm:size-6" />
               </div>
               <span className="text-center text-[11px] font-medium leading-tight sm:text-xs">
-                おすすめ診断
+                今週の診断
               </span>
             </div>
           </Link>

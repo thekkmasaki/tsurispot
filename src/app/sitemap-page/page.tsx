@@ -165,7 +165,7 @@ export default function SitemapPage() {
         { href: "/partner", label: "パートナー募集" },
         { href: "/privacy", label: "プライバシーポリシー" },
         { href: "/terms", label: "利用規約" },
-        { href: "/recommendation", label: "おすすめスポット" },
+        { href: "/recommendation", label: "今週どこ行こうかな？" },
       ],
     },
   ];

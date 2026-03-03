@@ -63,7 +63,7 @@ const guidePages: SearchResult[] = [
 // --- 便利ツールページリスト ---
 const toolPages: SearchResult[] = [
   { type: "tool", name: "釣り場診断", slug: "/fish-finder", sub: "おすすめスポット検索", searchText: "釣り場 診断 おすすめ 探す fish finder どこ" },
-  { type: "tool", name: "おすすめ診断", slug: "/recommendation", sub: "あなたに合った釣りを診断", searchText: "おすすめ 診断 recommendation ぴったり 合う 相性" },
+  { type: "tool", name: "今週どこ行こうかな", slug: "/recommendation", sub: "日付・エリアから最適な釣り場を提案", searchText: "おすすめ 診断 recommendation ぴったり 合う 相性 今週 どこ 行く 日付" },
   { type: "tool", name: "今釣れる魚", slug: "/catchable-now", sub: "現在のシーズン情報", searchText: "今 釣れる 魚 シーズン 旬 catchable now いま 今月" },
   { type: "tool", name: "ボウズチェッカー", slug: "/bouzu-checker", sub: "坊主回避ツール", searchText: "ボウズ ぼうず 坊主 チェッカー bouzu 釣れない 回避" },
   { type: "tool", name: "釣り用語集", slug: "/glossary", sub: "釣り用語辞典", searchText: "用語 用語集 辞典 glossary 言葉 意味 わからない" },
