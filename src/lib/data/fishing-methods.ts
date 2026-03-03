@@ -295,6 +295,132 @@ function generateTipsAnswer(
   return `${month.name}（水温${cond.waterTemp}）の${method.name}では、${seasonTips[month.season]}`;
 }
 
+// ===== HowTo スキーマ用データ =====
+
+interface HowToStepData {
+  name: string;
+  text: string;
+}
+
+interface HowToData {
+  steps: HowToStepData[];
+  supply: string[];
+  tool: string[];
+  totalTime: string;
+}
+
+const METHOD_HOWTO_DATA: Record<string, HowToData> = {
+  sabiki: {
+    steps: [
+      { name: "仕掛けをセットする", text: "竿にリールをセットし、糸をガイドに通します。サビキ仕掛けのスナップを結び、下カゴ式のコマセカゴを取り付けます。" },
+      { name: "コマセをカゴに詰める", text: "コマセカゴにアミエビを7〜8分目まで詰めます。チューブタイプなら絞り入れるだけで簡単です。" },
+      { name: "仕掛けを投入する", text: "足元に仕掛けを下ろします。まず底まで沈めてからリールを2〜3回巻き、底から少し浮かせた位置にセットします。" },
+      { name: "コマセを振り出す", text: "竿を50cm〜1mほど上下にシャクり、コマセを海中に拡散させます。2〜3回シャクったら竿を止めます。" },
+      { name: "アタリを待って合わせる", text: "10〜30秒待ち、竿先にブルブルと振動が伝わったら魚がかかった合図です。ゆっくり竿を立てて合わせましょう。" },
+      { name: "魚を取り込む", text: "一定速度でリールを巻いて仕掛けを回収し、魚を針から外してクーラーボックスに入れます。" },
+    ],
+    supply: ["サビキ仕掛け（針4〜6号）", "コマセカゴ", "コマセ（アミエビまたはチューブ）"],
+    tool: ["釣り竿（2〜3mの万能竿）", "スピニングリール（2000〜3000番）", "バケツ", "クーラーボックス"],
+    totalTime: "PT3H",
+  },
+  choinage: {
+    steps: [
+      { name: "仕掛けをセットする", text: "竿にリールをセットし、道糸にちょい投げ用の天秤オモリを結びます。天秤の先に市販の投げ仕掛け（針7〜9号）をセットします。" },
+      { name: "エサを針に付ける", text: "青イソメやジャリメを針に通し刺しにします。タラシは2〜3cmほど残すと食いが良くなります。" },
+      { name: "仕掛けを投げる", text: "後方の安全を確認し、竿を振って仕掛けを20〜30mほど投げます。力任せに投げず、竿のしなりを使うのがコツです。" },
+      { name: "着底を確認する", text: "オモリが底に着いたら糸フケを取り、竿先に軽くテンションがかかる状態にします。竿立てがあると便利です。" },
+      { name: "アタリを待って合わせる", text: "竿先の動きに集中します。コツコツと前アタリが出たら少し待ち、グーッと引き込まれたら竿を立てて合わせます。" },
+      { name: "魚を取り込む", text: "リールを巻いて寄せ、波打ち際や足元まで来たら抜き上げて取り込みます。" },
+    ],
+    supply: ["ちょい投げ仕掛け（針7〜9号）", "天秤オモリ（5〜10号）", "エサ（青イソメ・ジャリメ）"],
+    tool: ["釣り竿（2〜3mの万能竿またはコンパクトロッド）", "スピニングリール（2000〜3000番）", "竿立て", "クーラーボックス"],
+    totalTime: "PT3H",
+  },
+  "float-fishing": {
+    steps: [
+      { name: "仕掛けをセットする", text: "道糸にウキ止め・シモリ玉・ウキを通し、サルカンの下にハリスと針をセットします。ガン玉でウキのバランスを調整します。" },
+      { name: "タナ（深さ）を設定する", text: "ウキ止めの位置でタナを決めます。まずは1〜2ヒロ（約1.5〜3m）を目安にセットし、反応を見て調整します。" },
+      { name: "エサを針に付ける", text: "オキアミや練りエサを針に付けます。オキアミは尾を切ってから刺すと外れにくくなります。" },
+      { name: "仕掛けを投入する", text: "ウキごと仕掛けを狙いのポイントに投入します。コマセを使う場合は同じ位置に撒いて魚を寄せます。" },
+      { name: "ウキの動きを見て合わせる", text: "ウキが沈んだり横に走ったりしたらアタリです。一呼吸おいてから竿を立てて合わせましょう。" },
+      { name: "魚を取り込む", text: "魚の引きに合わせてリールを巻き、タモ網（玉網）があれば使って取り込みます。" },
+    ],
+    supply: ["ウキ（円錐ウキまたは棒ウキ）", "ハリス・針", "ガン玉", "エサ（オキアミ・練りエサ）"],
+    tool: ["磯竿（1〜1.5号、4.5〜5.3m）", "スピニングリール（2500番）", "タモ網", "バッカン・クーラーボックス"],
+    totalTime: "PT4H",
+  },
+  eging: {
+    steps: [
+      { name: "エギを選ぶ", text: "水深やイカの活性に合わせてエギ（3〜3.5号）を選びます。日中はナチュラル系、濁りがある日はオレンジやピンクが有効です。" },
+      { name: "エギをセットする", text: "PEラインの先端にリーダー（フロロカーボン2〜2.5号）をFGノットで結び、スナップ経由でエギを接続します。" },
+      { name: "エギをキャストする", text: "狙いのポイントにエギを投げ、着水したらラインを出しながらボトム（底）まで沈めます。" },
+      { name: "シャクリを入れる", text: "竿を2〜3回鋭くシャクり上げてエギを跳ね上げます。これがイカを誘うアクションです。" },
+      { name: "フォールさせてアタリを取る", text: "シャクリ後にラインを張った状態でエギをゆっくり沈めます。ラインが不自然に走ったり、テンションが変わったらイカが抱いた合図です。" },
+      { name: "イカを取り込む", text: "穏やかに竿を立てて合わせ、一定の速度でリールを巻きます。イカは身切れしやすいのでドラグは緩めに設定しましょう。" },
+    ],
+    supply: ["エギ（3〜3.5号を数色）", "リーダー（フロロカーボン2〜2.5号）"],
+    tool: ["エギングロッド（8〜8.6ft）", "スピニングリール（2500〜3000番）", "ギャフまたはタモ網", "イカ締めピック"],
+    totalTime: "PT3H",
+  },
+  lure: {
+    steps: [
+      { name: "ルアーを選ぶ", text: "狙う魚種に合わせてルアーを選びます。メバル・アジにはジグヘッド+ワーム、青物にはメタルジグが定番です。" },
+      { name: "ルアーをセットする", text: "リーダーの先にスナップを結び、ルアーをセットします。PEラインにはリーダー（フロロ1.5〜5号）を忘れずに接続します。" },
+      { name: "キャストする", text: "狙いのポイントにルアーを投げます。着水後、狙うタナ（表層・中層・底層）まで沈めます。" },
+      { name: "アクションを加える", text: "リールを巻きながらルアーを泳がせます。ただ巻き・トゥイッチ・リフト＆フォールなど、魚の反応を見て変化をつけます。" },
+      { name: "アタリを合わせる", text: "ガツンと衝撃が伝わったらすぐにロッドを立てて合わせます。巻き合わせが基本で、大きく煽る必要はありません。" },
+      { name: "魚を取り込む", text: "ドラグを活かしてやり取りし、手前まで寄せたらタモ網や抜き上げで取り込みます。" },
+    ],
+    supply: ["ルアー各種（ジグヘッド+ワーム、メタルジグ、ミノー等）", "リーダー（フロロカーボン）"],
+    tool: ["ルアーロッド（ターゲットに応じた長さ・硬さ）", "スピニングリール（2000〜4000番）", "タモ網", "フィッシュグリップ"],
+    totalTime: "PT3H",
+  },
+};
+
+/**
+ * 釣り方×月のHowTo JSON-LDスキーマを生成
+ */
+export function generateHowToJsonLd(
+  method: FishingMethodDef,
+  month: MonthDef,
+  fish: { name: string; isPeak: boolean }[]
+) {
+  const howtoData = METHOD_HOWTO_DATA[method.slug];
+  if (!howtoData) return null;
+
+  const cond = MONTH_CONDITIONS[month.num];
+  const peakFishNames = fish.filter((f) => f.isPeak).slice(0, 3).map((f) => f.name);
+  const fishNames = fish.slice(0, 5).map((f) => f.name);
+
+  const targetFishText = peakFishNames.length > 0
+    ? `${peakFishNames.join("・")}が最盛期`
+    : fishNames.length > 0
+      ? `${fishNames.join("・")}が狙える`
+      : "釣れる魚は限られる";
+
+  return {
+    "@context": "https://schema.org",
+    "@type": "HowTo",
+    name: `${month.name}の${method.name}ガイド`,
+    description: `${month.name}（水温${cond.waterTemp}）の${method.name}の手順を解説。${targetFishText}時期です。`,
+    totalTime: howtoData.totalTime,
+    supply: howtoData.supply.map((s) => ({
+      "@type": "HowToSupply",
+      name: s,
+    })),
+    tool: howtoData.tool.map((t) => ({
+      "@type": "HowToTool",
+      name: t,
+    })),
+    step: howtoData.steps.map((step, idx) => ({
+      "@type": "HowToStep",
+      name: step.name,
+      text: step.text,
+      position: idx + 1,
+    })),
+  };
+}
+
 /**
  * 月×釣り方のページで使う全データをまとめて取得
  */
@@ -310,6 +436,7 @@ export function getMethodMonthPageData(
   const spots = getSpotsForMethodAndMonth(method, month.num);
   const { waterTemp, overview } = generateOverview(method, month);
   const faqs = generateFAQs(method, month);
+  const howToJsonLd = generateHowToJsonLd(method, month, fish);
 
   const prevMonth = MONTHS[(month.num - 2 + 12) % 12];
   const nextMonth = MONTHS[month.num % 12];
@@ -322,6 +449,7 @@ export function getMethodMonthPageData(
     waterTemp,
     overview,
     faqs,
+    howToJsonLd,
     prevMonth,
     nextMonth,
   };

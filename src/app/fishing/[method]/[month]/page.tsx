@@ -76,7 +76,7 @@ export default async function MethodMonthPage({ params }: Props) {
   const data = getMethodMonthPageData(methodSlug, monthSlug);
   if (!data) notFound();
 
-  const { method, month, fish, spots, waterTemp, overview, faqs, prevMonth, nextMonth } =
+  const { method, month, fish, spots, waterTemp, overview, faqs, howToJsonLd, prevMonth, nextMonth } =
     data;
 
   const peakFish = fish.filter((f) => f.isPeak);
@@ -157,7 +157,9 @@ export default async function MethodMonthPage({ params }: Props) {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify([breadcrumbJsonLd, faqJsonLd]),
+          __html: JSON.stringify(
+            [breadcrumbJsonLd, faqJsonLd, howToJsonLd].filter(Boolean)
+          ),
         }}
       />
 
