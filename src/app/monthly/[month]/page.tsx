@@ -15,6 +15,10 @@ import {
   ExternalLink,
   BookOpen,
   HelpCircle,
+  Compass,
+  Shield,
+  Waves,
+  Target,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -392,6 +396,123 @@ export default async function MonthlyGuidePage({ params }: Props) {
           </div>
         </section>
 
+        {/* この月のおすすめ釣り方ガイド */}
+        {(() => {
+          const monthGuideLinks: Record<number, { href: string; title: string; description: string }[]> = {
+            1: [
+              { href: "/guide/casting", title: "投げ釣り", description: "カレイの投げ釣りシーズン。砂浜からの遠投で大型カレイを狙おう" },
+              { href: "/guide/lure", title: "ルアー釣り", description: "メバリング入門に最適な時期。常夜灯周りを攻めよう" },
+              { href: "/guide/anazuri", title: "穴釣り", description: "カサゴの穴釣りで冬の堤防を楽しもう" },
+              { href: "/guide/tide", title: "潮汐の読み方", description: "潮の動きを理解して釣果アップ" },
+            ],
+            2: [
+              { href: "/guide/lure", title: "ルアー釣り", description: "メバリング最盛期。漁港のテトラ帯が好ポイント" },
+              { href: "/guide/anazuri", title: "穴釣り", description: "根魚狙いの穴釣りで寒さに負けない釣りを" },
+              { href: "/guide/casting", title: "投げ釣り", description: "冬のカレイ投げ釣りラストスパート" },
+              { href: "/guide/knots", title: "結び方ガイド", description: "オフシーズンに結び方をマスターしよう" },
+            ],
+            3: [
+              { href: "/guide/sabiki", title: "サビキ釣り", description: "春のサビキ開幕。アジやイワシが回遊し始める" },
+              { href: "/guide/lure", title: "ルアー釣り", description: "メバル・カサゴのライトゲームが好調" },
+              { href: "/guide/float-fishing", title: "ウキ釣り", description: "チヌやメジナのウキ釣りシーズン到来" },
+              { href: "/guide/eging", title: "エギング", description: "春イカの先行シーズン。大型アオリイカのチャンス" },
+            ],
+            4: [
+              { href: "/guide/sabiki", title: "サビキ釣り", description: "サビキ釣りの本格シーズン。ファミリーにもおすすめ" },
+              { href: "/guide/eging", title: "エギング", description: "春イカシーズン本番。産卵前の大型を狙え" },
+              { href: "/guide/float-fishing", title: "ウキ釣り", description: "のっこみチヌのウキ釣りが熱い" },
+              { href: "/guide/jigging", title: "ショアジギング", description: "青物の回遊が始まる時期" },
+            ],
+            5: [
+              { href: "/guide/sabiki", title: "サビキ釣り", description: "アジ・サバの数釣りが楽しめる" },
+              { href: "/guide/eging", title: "エギング", description: "アオリイカのベストシーズン" },
+              { href: "/guide/lure", title: "ルアー釣り", description: "シーバスやチヌのルアーゲーム" },
+              { href: "/guide/choinage", title: "ちょい投げ", description: "キスのちょい投げ釣りが開幕" },
+            ],
+            6: [
+              { href: "/guide/sabiki", title: "サビキ釣り", description: "サビキ最盛期。アジ・イワシが爆釣" },
+              { href: "/guide/choinage", title: "ちょい投げ", description: "キスのちょい投げが最も熱い時期" },
+              { href: "/guide/eging", title: "エギング", description: "梅雨時のエギングテクニック" },
+              { href: "/guide/night-fishing", title: "夜釣りガイド", description: "蒸し暑い日は涼しい夜釣りがおすすめ" },
+            ],
+            7: [
+              { href: "/guide/sabiki", title: "サビキ釣り", description: "夏休みのサビキ釣り。子供と一緒に" },
+              { href: "/guide/choinage", title: "ちょい投げ", description: "キス・ハゼのちょい投げが好調" },
+              { href: "/guide/jigging", title: "ショアジギング", description: "青物回遊のピーク。ブリ・カンパチを狙え" },
+              { href: "/guide/night-fishing", title: "夜釣りガイド", description: "夏の夜釣りでタチウオ・イカを狙おう" },
+            ],
+            8: [
+              { href: "/guide/sabiki", title: "サビキ釣り", description: "真夏のサビキ。朝夕のマズメ時が狙い目" },
+              { href: "/guide/choinage", title: "ちょい投げ", description: "ハゼのちょい投げシーズン到来" },
+              { href: "/guide/jigging", title: "ショアジギング", description: "青物の活性が最も高い時期" },
+              { href: "/guide/oyogase", title: "泳がせ釣り", description: "サビキで釣った小魚で大物を狙う" },
+            ],
+            9: [
+              { href: "/guide/sabiki", title: "サビキ釣り", description: "秋のサビキ。大型のアジが回遊" },
+              { href: "/guide/eging", title: "エギング", description: "秋イカ最盛期。新子サイズが数釣れる" },
+              { href: "/guide/jigging", title: "ショアジギング", description: "秋の青物ラッシュ。堤防から大物チャンス" },
+              { href: "/guide/oyogase", title: "泳がせ釣り", description: "ヒラメ・ブリの泳がせ釣りが熱い" },
+            ],
+            10: [
+              { href: "/guide/eging", title: "エギング", description: "秋イカ後半戦。サイズアップしたアオリイカ" },
+              { href: "/guide/jigging", title: "ショアジギング", description: "秋の大型青物ラストチャンス" },
+              { href: "/guide/sabiki", title: "サビキ釣り", description: "秋サビキの終盤。脂ののったアジを狙え" },
+              { href: "/guide/lure", title: "ルアー釣り", description: "シーバスの秋パターンが好調" },
+            ],
+            11: [
+              { href: "/guide/eging", title: "エギング", description: "晩秋のエギング。深場に移動するイカを狙う" },
+              { href: "/guide/casting", title: "投げ釣り", description: "カレイの投げ釣りシーズン開幕" },
+              { href: "/guide/lure", title: "ルアー釣り", description: "メバリング開幕。秋の夜長にライトゲーム" },
+              { href: "/guide/night-fishing", title: "夜釣りガイド", description: "秋の夜釣りでメバル・アジを狙う" },
+            ],
+            12: [
+              { href: "/guide/lure", title: "ルアー釣り", description: "メバリング好調。冬の夜のライトゲーム" },
+              { href: "/guide/anazuri", title: "穴釣り", description: "冬の定番。カサゴ・メバルの穴釣り" },
+              { href: "/guide/casting", title: "投げ釣り", description: "カレイシーズン本番。大型カレイを狙え" },
+              { href: "/guide/tide", title: "潮汐の読み方", description: "冬の釣りは潮の読みが釣果を左右する" },
+            ],
+          };
+          const links = monthGuideLinks[guide.month];
+          if (!links || links.length === 0) return null;
+          return (
+            <section className="mb-8">
+              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
+                <BookOpen className="size-5 text-primary" />
+                {guide.nameJa}のおすすめ釣り方ガイド
+              </h2>
+              <div className="grid gap-3 sm:grid-cols-2">
+                {links.map((link) => (
+                  <Link
+                    key={link.href}
+                    href={link.href}
+                    className="group flex items-start gap-3 rounded-lg border bg-white p-4 transition-shadow hover:shadow-md dark:bg-card"
+                  >
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                      <BookOpen className="size-5 text-primary" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-2">
+                        <span className="font-semibold group-hover:text-primary">
+                          {link.title}
+                        </span>
+                        <ChevronRight className="size-4 text-muted-foreground transition-transform group-hover:translate-x-0.5" />
+                      </div>
+                      <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+                        {link.description}
+                      </p>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+              <div className="mt-3 text-center">
+                <Link href="/guide" className="text-sm text-primary hover:underline">
+                  すべてのガイドを見る →
+                </Link>
+              </div>
+            </section>
+          );
+        })()}
+
         {/* おすすめ仕掛けセット */}
         <MonthlyRigSection monthName={guide.nameJa} rigs={monthlyRigs} />
 
@@ -653,6 +774,56 @@ export default async function MonthlyGuidePage({ params }: Props) {
           </div>
         </section>
 
+        {/* 釣りに役立つツール */}
+        <section className="mb-8">
+          <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
+            <Compass className="size-5 text-primary" />
+            釣りに役立つツール
+          </h2>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <Link
+              href="/tides"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <Waves className="mx-auto mb-2 size-8 text-blue-500" />
+              <p className="font-semibold">潮汐チャート</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                釣果に直結する潮汐情報
+              </p>
+            </Link>
+            <Link
+              href="/bouzu-checker"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <Target className="mx-auto mb-2 size-8 text-red-500" />
+              <p className="font-semibold">ボウズチェッカー</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                条件から釣果確率を算出
+              </p>
+            </Link>
+            <Link
+              href="/glossary"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <BookOpen className="mx-auto mb-2 size-8 text-emerald-500" />
+              <p className="font-semibold">用語集</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                わからない言葉をすぐ検索
+              </p>
+            </Link>
+            <Link
+              href="/quiz"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <HelpCircle className="mx-auto mb-2 size-8 text-purple-500" />
+              <p className="font-semibold">釣りクイズ</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                釣りの知識を腕試し
+              </p>
+            </Link>
+          </div>
+        </section>
+
         {/* 季節の釣り特集 */}
         {relatedSeasonalGuides.length > 0 && (
           <section className="mb-8">
@@ -683,6 +854,24 @@ export default async function MonthlyGuidePage({ params }: Props) {
             </div>
           </section>
         )}
+
+        {/* 安全・マナー */}
+        <div className="mb-8 grid gap-3 sm:grid-cols-2">
+          <Link href="/safety" className="flex items-center gap-3 rounded-lg border border-red-200 bg-red-50/50 p-4 transition-shadow hover:shadow-md dark:bg-red-950/20">
+            <Shield className="size-6 text-red-500" />
+            <div>
+              <p className="font-semibold">安全ガイド</p>
+              <p className="text-xs text-muted-foreground">事故を防ぐための必読情報</p>
+            </div>
+          </Link>
+          <Link href="/fishing-rules" className="flex items-center gap-3 rounded-lg border border-amber-200 bg-amber-50/50 p-4 transition-shadow hover:shadow-md dark:bg-amber-950/20">
+            <BookOpen className="size-6 text-amber-500" />
+            <div>
+              <p className="font-semibold">ルールとマナー</p>
+              <p className="text-xs text-muted-foreground">釣り場で守るべきルール</p>
+            </div>
+          </Link>
+        </div>
 
         {/* 初心者向けバナー */}
         <section className="mb-8">
@@ -761,7 +950,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
         {/* 関連リンク */}
         <div className="rounded-xl border bg-muted/30 p-6">
           <h2 className="mb-4 text-base font-bold">関連ページ</h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-4">
             <Link
               href="/catchable-now"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
@@ -841,6 +1030,105 @@ export default async function MonthlyGuidePage({ params }: Props) {
               <p className="font-semibold">エリア別ガイド</p>
               <p className="mt-1 text-xs text-muted-foreground">
                 全国のエリア別釣り場攻略
+              </p>
+            </Link>
+            <Link
+              href="/gear"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <p className="font-semibold">おすすめ釣り道具</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                編集長厳選の道具
+              </p>
+            </Link>
+            <Link
+              href="/ranking"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <p className="font-semibold">人気ランキング</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                人気スポットをチェック
+              </p>
+            </Link>
+            <Link
+              href="/prefecture"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <p className="font-semibold">都道府県から探す</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                47都道府県の釣り場
+              </p>
+            </Link>
+            <Link
+              href="/methods"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <p className="font-semibold">釣り方一覧</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                釣法別ガイド
+              </p>
+            </Link>
+            <Link
+              href="/blog"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <p className="font-semibold">ブログ</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                最新の釣り情報
+              </p>
+            </Link>
+            <Link
+              href="/shops"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <p className="font-semibold">釣具店を探す</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                全国の釣具店情報
+              </p>
+            </Link>
+            <Link
+              href="/for-beginners"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <p className="font-semibold">はじめての方へ</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                釣りの始め方
+              </p>
+            </Link>
+            <Link
+              href="/beginner-checklist"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <p className="font-semibold">初心者チェックリスト</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                持ち物リスト
+              </p>
+            </Link>
+            <Link
+              href="/guide/knots"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <p className="font-semibold">結び方ガイド</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                基本の結び方
+              </p>
+            </Link>
+            <Link
+              href="/guide/rigs"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <p className="font-semibold">仕掛け図鑑</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                釣り方別の仕掛け
+              </p>
+            </Link>
+            <Link
+              href="/guide/setup"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <p className="font-semibold">道具の選び方</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                初めての道具選び
               </p>
             </Link>
           </div>

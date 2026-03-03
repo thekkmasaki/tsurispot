@@ -230,37 +230,155 @@ export default function MonthlyPage() {
           })}
         </div>
 
-        {/* 季節の釣りへのリンク */}
-        <div className="mt-10 rounded-xl border bg-muted/30 p-6">
-          <h2 className="mb-4 text-base font-bold">関連ガイド</h2>
-          <div className="grid gap-3 sm:grid-cols-3">
-            <Link
-              href="/seasonal"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">季節別釣りガイド</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                春夏秋冬でまとめた釣り情報
-              </p>
-            </Link>
-            <Link
-              href="/catchable-now"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">今釣れる魚</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                今の時期に釣れる魚をチェック
-              </p>
-            </Link>
-            <Link
-              href="/fishing-calendar"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">釣りカレンダー</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                魚種別の釣りシーズン早見表
-              </p>
-            </Link>
+        {/* 関連リンク */}
+        <div className="mt-10 space-y-6 rounded-xl border bg-muted/30 p-6">
+          <h2 className="text-lg font-bold">関連コンテンツ</h2>
+
+          {/* 情報・ガイド */}
+          <div>
+            <h3 className="mb-3 text-sm font-semibold text-muted-foreground">情報・ガイド</h3>
+            <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-4">
+              <Link
+                href="/guide"
+                className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+              >
+                <p className="font-semibold">釣り方ガイド一覧</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  初心者から上級者向けまで
+                </p>
+              </Link>
+              <Link
+                href="/seasonal"
+                className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+              >
+                <p className="font-semibold">季節別釣りガイド</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  春夏秋冬でまとめた釣り情報
+                </p>
+              </Link>
+              <Link
+                href="/catchable-now"
+                className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+              >
+                <p className="font-semibold">今釣れる魚</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  今の時期に釣れる魚をチェック
+                </p>
+              </Link>
+              <Link
+                href="/fishing-calendar"
+                className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+              >
+                <p className="font-semibold">釣りカレンダー</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  魚種別の釣りシーズン早見表
+                </p>
+              </Link>
+              <Link
+                href="/methods"
+                className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+              >
+                <p className="font-semibold">釣法別ガイド</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  9つの釣り方を徹底解説
+                </p>
+              </Link>
+              <Link
+                href="/gear"
+                className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+              >
+                <p className="font-semibold">おすすめ釣り道具</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  編集長厳選の道具
+                </p>
+              </Link>
+            </div>
+          </div>
+
+          {/* スポットを探す */}
+          <div>
+            <h3 className="mb-3 text-sm font-semibold text-muted-foreground">スポットを探す</h3>
+            <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-4">
+              <Link
+                href="/ranking"
+                className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+              >
+                <p className="font-semibold">人気スポットランキング</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  全国の人気釣り場TOP
+                </p>
+              </Link>
+              <Link
+                href="/spots"
+                className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+              >
+                <p className="font-semibold">全国釣りスポット</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  1000+の釣り場を検索
+                </p>
+              </Link>
+              <Link
+                href="/map"
+                className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+              >
+                <p className="font-semibold">地図で探す</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  全国の釣り場をマップ表示
+                </p>
+              </Link>
+              <Link
+                href="/prefecture"
+                className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+              >
+                <p className="font-semibold">都道府県一覧</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  47都道府県の釣り場
+                </p>
+              </Link>
+            </div>
+          </div>
+
+          {/* ツール・初心者向け */}
+          <div>
+            <h3 className="mb-3 text-sm font-semibold text-muted-foreground">ツール・初心者向け</h3>
+            <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-4">
+              <Link
+                href="/tides"
+                className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+              >
+                <p className="font-semibold">潮汐チャート</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  潮の動きをチェック
+                </p>
+              </Link>
+              <Link
+                href="/bouzu-checker"
+                className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+              >
+                <p className="font-semibold">ボウズチェッカー</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  釣れない確率を診断
+                </p>
+              </Link>
+              <Link
+                href="/for-beginners"
+                className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+              >
+                <p className="font-semibold">はじめての方へ</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  釣りの始め方ガイド
+                </p>
+              </Link>
+              <Link
+                href="/fish"
+                className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+              >
+                <p className="font-semibold">魚種図鑑</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  100+種の魚の情報
+                </p>
+              </Link>
+            </div>
           </div>
         </div>
       </main>
