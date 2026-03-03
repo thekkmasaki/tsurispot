@@ -477,7 +477,7 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
     region: lr("r1054"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "河口付近の駐車スペース（無料）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.7, reviewCount: 56,
+    mainImageUrl: "/images/spots/wikimedia/kuriyamagawa-kakou.jpg", imageAttribution: "Photo: 小石川人晃 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 56,
     catchableFish: [
       { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -585,7 +585,7 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
     region: lr("r1060"), spotType: "breakwater", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "舞阪漁港周辺の駐車場",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.3, reviewCount: 185, googleRating: 3.9, googleReviewCount: 7,
+    mainImageUrl: "/images/spots/wikimedia/hamanako-imagirekou.jpg", imageAttribution: "Photo: renepaulo / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.3, reviewCount: 185, googleRating: 3.9, googleReviewCount: 7,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
       { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
@@ -775,7 +775,7 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
     region: lr("r1062"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺の駐車スペース（無料）",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.7, reviewCount: 72, googleRating: 3.8, googleReviewCount: 4,
+    mainImageUrl: "/images/spots/wikimedia/okitsu-port-shizuoka.jpg", imageAttribution: "Photo: 浅野ます道 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.7, reviewCount: 72, googleRating: 3.8, googleReviewCount: 4,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 9, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "投げ釣り" },
@@ -847,7 +847,7 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
     region: lr("r1063"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺の駐車スペース",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.0, reviewCount: 85, googleRating: 3.6, googleReviewCount: 503,
+    mainImageUrl: "/images/spots/wikimedia/shizuura-port.jpg", imageAttribution: "Photo: Batholith / Wikimedia Commons (Public domain)", images: [], rating: 4.0, reviewCount: 85, googleRating: 3.6, googleReviewCount: 503,
     catchableFish: [
       { fish: fish("madai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -872,7 +872,7 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
     region: lr("r1064"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "土肥港周辺の無料駐車場",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.8, reviewCount: 68, googleRating: 4, googleReviewCount: 75,
+    mainImageUrl: "/images/spots/wikimedia/toi-port.jpg", imageAttribution: "Photo: ion66 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.8, reviewCount: 68, googleRating: 4, googleReviewCount: 75,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("madai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
@@ -891,7 +891,7 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
     region: lr("r1064"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺の駐車スペース（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.9, reviewCount: 55, googleRating: 4.5, googleReviewCount: 12,
+    mainImageUrl: "/images/spots/wikimedia/arari-port.jpg", imageAttribution: "Photo: Batholith (talk) / Wikimedia Commons (Public domain)", images: [], rating: 3.9, reviewCount: 55, googleRating: 4.5, googleReviewCount: 12,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("madai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
@@ -914,7 +914,7 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
     region: lr("r1064"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺の駐車スペース（無料）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.1, reviewCount: 72, googleRating: 4, googleReviewCount: 274,
+    mainImageUrl: "/images/spots/wikimedia/tago-port.jpg", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: [], rating: 4.1, reviewCount: 72, googleRating: 4, googleReviewCount: 274,
     catchableFish: [
       { fish: fish("mejina"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ〜日中", method: "ウキ釣り" },

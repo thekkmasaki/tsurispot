@@ -76,7 +76,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "無料（遊漁券不要区間）",
     hasParking: true, parkingDetail: "桜井町公園駐車場（無料）、河川敷駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/tonegawa-lower.jpg", images: ["/images/spots/tonegawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tonegawa-lower-unagi.jpg", imageAttribution: "Photo: Kaz Ish / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/tonegawa-lower-unagi.jpg"],
     rating: 4.0, reviewCount: 95, googleRating: 4.5, googleReviewCount: 8,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -101,7 +101,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "ガス橋下流は遊漁券不要",
     hasParking: true, parkingDetail: "河川敷駐車場（一部有料）、近隣コインパーキング",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/tamagawa-middle.jpg", images: ["/images/spots/tamagawa-middle.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tamagawa-middle-unagi.jpg", imageAttribution: "Photo: Suikotei / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/tamagawa-middle-unagi.jpg"],
     rating: 3.9, reviewCount: 120,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -127,7 +127,9 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "無料",
     hasParking: true, parkingDetail: "岩淵水門公園駐車場、近隣コインパーキング",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/arakawa-lower.jpg", images: ["/images/spots/arakawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/arakawa-lower-unagi.jpg", imageAttribution: "Photo: Asanagi
+
+ This photo was taken with iPhone 13 Pro / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/arakawa-lower-unagi.jpg"],
     rating: 4.1, reviewCount: 145, googleRating: 4.3, googleReviewCount: 109,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -152,7 +154,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "無料",
     hasParking: true, parkingDetail: "柴又公園駐車場、近隣コインパーキング",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/edogawa-lower.jpg", images: ["/images/spots/edogawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/edogawa-lower-unagi.jpg", imageAttribution: "Photo: Ka23 13 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/edogawa-lower-unagi.jpg"],
     rating: 3.8, reviewCount: 88,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -177,7 +179,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "寒川取水堰下流は遊漁券不要",
     hasParking: true, parkingDetail: "馬入ふれあい公園駐車場（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/sagamigawa-lower.jpg", images: ["/images/spots/sagamigawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/sagamigawa-lower-unagi.jpg", imageAttribution: "Photo: Nesnad / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/sagamigawa-lower-unagi.jpg"],
     rating: 3.9, reviewCount: 78,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -202,7 +204,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: false, feeDetail: "那珂川漁協遊漁券 日券1,000円",
     hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/nakagawa-lower.jpg", images: ["/images/spots/nakagawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/nakagawa-lower-unagi.jpg", imageAttribution: "Photo: CyberOyaji / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/nakagawa-lower-unagi.jpg"],
     rating: 3.8, reviewCount: 65, googleRating: 4, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -227,7 +229,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "無料",
     hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/furutonegawa.jpg", images: ["/images/spots/furutonegawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/furutonegawa-unagi.jpg", imageAttribution: "Photo: Gentle_Heart / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/furutonegawa-unagi.jpg"],
     rating: 3.7, reviewCount: 52, googleRating: 4.1, googleReviewCount: 9,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -252,7 +254,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: false, feeDetail: "天竜川漁協遊漁券 日券1,000円",
     hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/tenryugawa-lower.jpg", images: ["/images/spots/tenryugawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tenryugawa-lower-unagi.jpg", imageAttribution: "Photo: Puchi-masashi / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/tenryugawa-lower-unagi.jpg"],
     rating: 4.0, reviewCount: 72, googleRating: 4.5, googleReviewCount: 13,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -277,7 +279,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: false, feeDetail: "大井川漁協遊漁券 日券1,000円",
     hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/ooigawa-lower.jpg", images: ["/images/spots/ooigawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/ooigawa-lower-unagi.jpg", imageAttribution: "Photo: shinnygogo from Los Angeles, United States / Wikimedia Commons (CC BY-SA 2.0)", images: ["/images/spots/wikimedia/ooigawa-lower-unagi.jpg"],
     rating: 3.7, reviewCount: 48, googleRating: 3.7, googleReviewCount: 301,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -302,7 +304,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: false, feeDetail: "豊川上漁協遊漁券 日券500円",
     hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/toyokawa-lower.jpg", images: ["/images/spots/toyokawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/toyokawa-lower-unagi.jpg", imageAttribution: "Photo: 円周率３パーセント / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/toyokawa-lower-unagi.jpg"],
     rating: 3.8, reviewCount: 55, googleRating: 3.6, googleReviewCount: 5,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -327,7 +329,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "無料",
     hasParking: true, parkingDetail: "河川敷駐車場あり（一部有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/yodogawa-lower.jpg", images: ["/images/spots/yodogawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/yodogawa-lower-unagi.jpg", imageAttribution: "Photo: DVMG / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/yodogawa-lower-unagi.jpg"],
     rating: 3.8, reviewCount: 98, googleRating: 3.6, googleReviewCount: 40,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -352,7 +354,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "無料",
     hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/yamatogawa-lower.jpg", images: ["/images/spots/yamatogawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/yamatogawa-lower-unagi.jpg", imageAttribution: "Photo: Hippietrail / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/yamatogawa-lower-unagi.jpg"],
     rating: 3.5, reviewCount: 45, googleRating: 4, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -376,7 +378,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "下流域は遊漁券不要",
     hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/kinokawa-lower.jpg", images: ["/images/spots/kinokawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kinokawa-lower-unagi.jpg", imageAttribution: "Photo: アラツク / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/kinokawa-lower-unagi.jpg"],
     rating: 3.9, reviewCount: 62, googleRating: 4, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -401,7 +403,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "下流域は遊漁券不要",
     hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/kakogawa-lower.jpg", images: ["/images/spots/kakogawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kakogawa-lower-unagi.jpg", imageAttribution: "Photo: Harimawood / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/kakogawa-lower-unagi.jpg"],
     rating: 3.7, reviewCount: 48, googleRating: 4.3, googleReviewCount: 3,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -425,7 +427,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "下流域は遊漁券不要",
     hasParking: true, parkingDetail: "近隣コインパーキング利用",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/asahikawa-lower.jpg", images: ["/images/spots/asahikawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/asahikawa-lower-unagi.jpg", imageAttribution: "Photo: DVMG / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/asahikawa-lower-unagi.jpg"],
     rating: 3.6, reviewCount: 38, googleRating: 4, googleReviewCount: 3,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -449,7 +451,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "下流域は遊漁券不要",
     hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/takahashigawa-lower.jpg", images: ["/images/spots/takahashigawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/takahashigawa-lower-unagi.jpg", imageAttribution: "Photo: あかしょうびん / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/takahashigawa-lower-unagi.jpg"],
     rating: 3.7, reviewCount: 42, googleRating: 4.6, googleReviewCount: 7,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -473,7 +475,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "下流域は遊漁券不要",
     hasParking: true, parkingDetail: "近隣コインパーキング利用",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/otagawa-lower.jpg", images: ["/images/spots/otagawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/otagawa-lower-unagi.jpg", imageAttribution: "Photo: かるちる / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/otagawa-lower-unagi.jpg"],
     rating: 3.6, reviewCount: 40, googleRating: 5, googleReviewCount: 3,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -497,7 +499,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: false, feeDetail: "四万十川上流淡水漁協 年券3,000円（ウナギ含む）",
     hasParking: true, parkingDetail: "沈下橋付近に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/shimantogawa-lower.jpg", images: ["/images/spots/shimantogawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/shimantogawa-lower-unagi.jpg", imageAttribution: "Photo: inunami / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/shimantogawa-lower-unagi.jpg"],
     rating: 4.4, reviewCount: 85, googleRating: 4.3, googleReviewCount: 217,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -523,7 +525,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "下流域は遊漁券不要",
     hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/yoshinogawa-lower.jpg", images: ["/images/spots/yoshinogawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/yoshinogawa-lower-unagi.jpg", imageAttribution: "Photo: そらみみ (Soramimi) / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/yoshinogawa-lower-unagi.jpg"],
     rating: 3.9, reviewCount: 58,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -548,7 +550,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: false, feeDetail: "仁淀川漁協遊漁券 日券1,000円",
     hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/niyodogawa-lower.jpg", images: ["/images/spots/niyodogawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/niyodogawa-lower-unagi.jpg", imageAttribution: "Photo: Oyazo / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/niyodogawa-lower-unagi.jpg"],
     rating: 4.2, reviewCount: 62, googleRating: 4.2, googleReviewCount: 177,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -573,7 +575,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "下流域は遊漁券不要",
     hasParking: true, parkingDetail: "河川敷駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/chikugogawa-lower.jpg", images: ["/images/spots/chikugogawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/chikugogawa-lower-unagi.jpg", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/chikugogawa-lower-unagi.jpg"],
     rating: 4.1, reviewCount: 92, googleRating: 4.7, googleReviewCount: 3,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -598,7 +600,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: false, feeDetail: "球磨川漁協遊漁券 日券1,000円",
     hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/kumagawa-lower.jpg", images: ["/images/spots/kumagawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kumagawa-lower-unagi.jpg", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/kumagawa-lower-unagi.jpg"],
     rating: 4.0, reviewCount: 55,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -623,7 +625,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "下流域は遊漁券不要",
     hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/ooyodogawa-lower.jpg", images: ["/images/spots/ooyodogawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/ooyodogawa-lower-unagi.jpg", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/ooyodogawa-lower-unagi.jpg"],
     rating: 3.8, reviewCount: 48, googleRating: 3.9, googleReviewCount: 65,
     catchableFish: [
       { fish: fish("unagi"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ぶっ込み釣り" },
@@ -648,7 +650,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "無料",
     hasParking: true, parkingDetail: "河川敷駐車場あり（一部有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/tamagawa-estuary.jpg", images: ["/images/spots/tamagawa-estuary.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tamagawa-estuary-tenaga.jpg", imageAttribution: "Photo: Kazuhiro Tsugita / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/tamagawa-estuary-tenaga.jpg"],
     rating: 4.2, reviewCount: 180, googleRating: 4.3, googleReviewCount: 135,
     catchableFish: [
       { fish: fish("tenagaebi"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ミャク釣り" },
@@ -673,7 +675,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "無料",
     hasParking: true, parkingDetail: "河川敷駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/arakawa-hirai.jpg", images: ["/images/spots/arakawa-hirai.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/arakawa-hirai-tenaga.jpg", imageAttribution: "Photo: koji_h / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/arakawa-hirai-tenaga.jpg"],
     rating: 4.0, reviewCount: 135, googleRating: 4, googleReviewCount: 59,
     catchableFish: [
       { fish: fish("tenagaebi"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ミャク釣り" },
@@ -697,7 +699,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "無料",
     hasParking: true, parkingDetail: "河川敷駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/edogawa-housui.jpg", images: ["/images/spots/edogawa-housui.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/edogawa-housui-tenaga.jpg", imageAttribution: "Photo: 慈姑鑑真 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/edogawa-housui-tenaga.jpg"],
     rating: 4.1, reviewCount: 160, googleRating: 5, googleReviewCount: 3,
     catchableFish: [
       { fish: fish("tenagaebi"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ミャク釣り" },
@@ -721,7 +723,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "無料",
     hasParking: true, parkingDetail: "なぎさ公園駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/kyu-edogawa.jpg", images: ["/images/spots/kyu-edogawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kyu-edogawa-tenaga.jpg", imageAttribution: "Photo: 賢太郎 森川 from 埼玉県さいたま市浦和区, 日本 / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/kyu-edogawa-tenaga.jpg"],
     rating: 3.9, reviewCount: 110, googleRating: 4.1, googleReviewCount: 528,
     catchableFish: [
       { fish: fish("tenagaebi"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ミャク釣り" },
@@ -745,7 +747,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "無料",
     hasParking: true, parkingDetail: "岩淵水門公園駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/arakawa-iwabuchi.jpg", images: ["/images/spots/arakawa-iwabuchi.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/arakawa-iwabuchi-tenaga.jpg", imageAttribution: "Photo: tak1701d / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/arakawa-iwabuchi-tenaga.jpg"],
     rating: 4.0, reviewCount: 125, googleRating: 4.3, googleReviewCount: 109,
     catchableFish: [
       { fish: fish("tenagaebi"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ミャク釣り" },
@@ -770,7 +772,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "無料",
     hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/yodogawa-estuary.jpg", images: ["/images/spots/yodogawa-estuary.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/yodogawa-estuary-tenaga.jpg", imageAttribution: "Photo: studio IRONY / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/yodogawa-estuary-tenaga.jpg"],
     rating: 3.8, reviewCount: 85,
     catchableFish: [
       { fish: fish("tenagaebi"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ミャク釣り" },
@@ -794,7 +796,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "無料",
     hasParking: true, parkingDetail: "近隣コインパーキング利用",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/yamatogawa-estuary.jpg", images: ["/images/spots/yamatogawa-estuary.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/yamatogawa-estuary-tenaga.jpg", imageAttribution: "Photo: Naokijp / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/yamatogawa-estuary-tenaga.jpg"],
     rating: 3.5, reviewCount: 55,
     catchableFish: [
       { fish: fish("tenagaebi"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ミャク釣り" },
@@ -818,7 +820,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "無料",
     hasParking: false, parkingDetail: "近隣コインパーキング利用",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/nakagawa-lower.jpg", images: ["/images/spots/nakagawa-lower.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/nakagawa-lower-tenaga.jpg", imageAttribution: "Photo: FourTildes / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/nakagawa-lower-tenaga.jpg"],
     rating: 3.6, reviewCount: 48,
     catchableFish: [
       { fish: fish("tenagaebi"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ミャク釣り" },
@@ -842,7 +844,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "無料",
     hasParking: true, parkingDetail: "河川敷駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/tamagawa-noborito.jpg", images: ["/images/spots/tamagawa-noborito.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tamagawa-noborito-tenaga.jpg", imageAttribution: "Photo: 鋸香具師 / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/tamagawa-noborito-tenaga.jpg"],
     rating: 3.7, reviewCount: 65, googleRating: 4.2, googleReviewCount: 174,
     catchableFish: [
       { fish: fish("tenagaebi"), monthStart: 6, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ミャク釣り" },
@@ -866,7 +868,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "無料",
     hasParking: true, parkingDetail: "秋ヶ瀬公園駐車場（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/arakawa-akigase.jpg", images: ["/images/spots/arakawa-akigase.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/arakawa-akigase-tenaga.jpg", imageAttribution: "Photo: heiwa4126 / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/arakawa-akigase-tenaga.jpg"],
     rating: 3.8, reviewCount: 72,
     catchableFish: [
       { fish: fish("tenagaebi"), monthStart: 6, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ミャク釣り" },
@@ -890,7 +892,7 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "無料",
     hasParking: true, parkingDetail: "花見川サイクリングロード沿い駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/hanamigawa.jpg", images: ["/images/spots/hanamigawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/hanamigawa-tenaga.jpg", imageAttribution: "Photo: Otota DANA / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/hanamigawa-tenaga.jpg"],
     rating: 3.6, reviewCount: 42,
     catchableFish: [
       { fish: fish("tenagaebi"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ミャク釣り" },
@@ -914,7 +916,9 @@ export const freshwaterSpotsLowland: FishingSpot[] = [
     isFree: true, feeDetail: "無料",
     hasParking: true, parkingDetail: "公園駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/shinsakongawa.jpg", images: ["/images/spots/shinsakongawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/shinsakongawa-tenaga.jpg", imageAttribution: "Photo: Comyu
+
+ This photo was taken with Olympus E-300 / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/shinsakongawa-tenaga.jpg"],
     rating: 3.8, reviewCount: 95, googleRating: 4.1, googleReviewCount: 906,
     catchableFish: [
       { fish: fish("tenagaebi"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ミャク釣り" },

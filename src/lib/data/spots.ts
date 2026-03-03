@@ -1795,8 +1795,8 @@ const _baseSpots: FishingSpot[] = [
     hasFishingShop: true,
     hasRentalRod: true,
     rentalDetail: "竿レンタル1,500円/日・エサ販売あり",
-    mainImageUrl: "/images/spots/marina-city-fishing.jpg",
-    images: ["/images/spots/marina-city-fishing.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/marina-city-fishing.jpg", imageAttribution: "Photo: shikabane taro / Wikimedia Commons (CC BY 3.0)",
+    images: ["/images/spots/wikimedia/marina-city-fishing.jpg"],
     rating: 4.3,
     reviewCount: 234, googleRating: 3.1, googleReviewCount: 7,
     catchableFish: [
@@ -1899,8 +1899,8 @@ const _baseSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/shirahama-hiki.jpg",
-    images: ["/images/spots/shirahama-hiki.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/shirahama-hiki.jpg", imageAttribution: "Photo: YOSHIFUMI OGISO / Wikimedia Commons (CC BY-SA 3.0)",
+    images: ["/images/spots/wikimedia/shirahama-hiki.jpg"],
     rating: 4.4,
     reviewCount: 78,
     catchableFish: [

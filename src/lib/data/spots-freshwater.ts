@@ -133,7 +133,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,050円（1日）",
     hasParking: true, parkingDetail: "湖畔各所に無料・有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタルボート店で竿のレンタルあり",
-    mainImageUrl: "/images/spots/kawaguchiko.jpg", images: ["/images/spots/kawaguchiko.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kawaguchiko-lake.jpg", imageAttribution: "Photo: 保姆虫と登山 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/kawaguchiko-lake.jpg"],
     rating: 4.3, reviewCount: 312, googleRating: 4.6, googleReviewCount: 3400,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -157,7 +157,7 @@ export const freshwaterSpots: FishingSpot[] = [
     region: lr("r601"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "豊公園駐車場（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/biwako-nagahama.jpg", images: ["/images/spots/biwako-nagahama.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/biwako-kitako-nagahama.jpg", imageAttribution: "Photo: Salada220422 / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/biwako-kitako-nagahama.jpg"],
     rating: 4.1, reviewCount: 189, googleRating: 3.8, googleReviewCount: 50,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -181,7 +181,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "レンタルボート代 3,500〜5,000円程度",
     hasParking: true, parkingDetail: "各ボート店に駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "ボート店でレンタルタックルあり",
-    mainImageUrl: "/images/spots/kameyama-dam.jpg", images: ["/images/spots/kameyama-dam.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kameyama-dam.jpg", imageAttribution: "Photo: On-neko / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/kameyama-dam.jpg"],
     rating: 4.2, reviewCount: 245, googleRating: 3.7, googleReviewCount: 812,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -204,7 +204,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人700円。レンタルボート 3,000円〜",
     hasParking: true, parkingDetail: "湖畔各所に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true,
-    mainImageUrl: "/images/spots/sagamiko.jpg", images: ["/images/spots/sagamiko.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/sagamiko-lake.jpg", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, NASA / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/sagamiko-lake.jpg"],
     rating: 3.9, reviewCount: 198, googleRating: 4, googleReviewCount: 388,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -228,7 +228,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人700円",
     hasParking: true, parkingDetail: "津久井湖城山公園駐車場（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/tsukuiko.jpg", images: ["/images/spots/tsukuiko.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tsukuiko-lake.jpg", imageAttribution: "Photo: 運転太郎 / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/tsukuiko-lake.jpg"],
     rating: 3.8, reviewCount: 156, googleRating: 4.1, googleReviewCount: 65,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -273,7 +273,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "レンタルボート 4,000円〜。遊漁券別途",
     hasParking: true, parkingDetail: "ボート店に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/nanairo-dam.jpg", images: ["/images/spots/nanairo-dam.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/nanairo-dam.jpg", imageAttribution: "Photo: takoyama / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/nanairo-dam.jpg"],
     rating: 4.4, reviewCount: 134, googleRating: 4.4, googleReviewCount: 47,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -294,7 +294,7 @@ export const freshwaterSpots: FishingSpot[] = [
     region: lr("r607"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "土浦港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/kasumigaura.jpg", images: ["/images/spots/kasumigaura.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kasumigaura-lake.jpg", imageAttribution: "Photo: 小石川人晃 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/kasumigaura-lake.jpg"],
     rating: 3.8, reviewCount: 267,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -318,7 +318,7 @@ export const freshwaterSpots: FishingSpot[] = [
     region: lr("r608"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "湖畔に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/kitaura.jpg", images: ["/images/spots/kitaura.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kitaura-lake.jpg", imageAttribution: "Photo: 小石川人晃 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/kitaura-lake.jpg"],
     rating: 3.7, reviewCount: 145, googleRating: 3.7, googleReviewCount: 134,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -343,7 +343,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（日券）",
     hasParking: true, parkingDetail: "日原集落に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/nipparagawa.jpg", images: ["/images/spots/nipparagawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/nipparagawa-okutama.jpg", imageAttribution: "Photo: TMC48 / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/nipparagawa-okutama.jpg"],
     rating: 4.0, reviewCount: 98, googleRating: 4.6, googleReviewCount: 7,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ミャク釣り" },
@@ -367,7 +367,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（日券）",
     hasParking: true, parkingDetail: "河川沿いに有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/akigawa.jpg", images: ["/images/spots/akigawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/akigawa-akiruno.jpg", imageAttribution: "Photo: moonwalker76 / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/akigawa-akiruno.jpg"],
     rating: 3.8, reviewCount: 134,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ミャク釣り" },
@@ -391,7 +391,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "入漁料 大人4,000円（日券）",
     hasParking: true, parkingDetail: "釣場専用駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "フライロッドのレンタルあり",
-    mainImageUrl: "/images/spots/yozawa.jpg", images: ["/images/spots/yozawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/yozawa-kebari-senyo.jpg", imageAttribution: "Photo: takeshi yagi / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/yozawa-kebari-senyo.jpg"],
     rating: 4.4, reviewCount: 87, googleRating: 4.5, googleReviewCount: 105,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝〜日中", method: "フライ・テンカラ" },
@@ -415,7 +415,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（日券）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/katsuragawa.jpg", images: ["/images/spots/katsuragawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/katsuragawa-otsuki.jpg", imageAttribution: "Photo: 運転太郎 / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/katsuragawa-otsuki.jpg"],
     rating: 4.0, reviewCount: 112,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ミャク釣り" },
@@ -439,7 +439,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（日券）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/hayatogawa.jpg", images: ["/images/spots/hayatogawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/hayatogawa-miyagase.jpg", imageAttribution: "Photo: Σ64 / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/hayatogawa-miyagase.jpg"],
     rating: 3.9, reviewCount: 76, googleRating: 4.1, googleReviewCount: 357,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -463,7 +463,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "ボート代 3,000円〜（遊漁券込み）",
     hasParking: true, parkingDetail: "各ボート店に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "ヘラ竿のレンタルあり",
-    mainImageUrl: "/images/spots/mishimako.jpg", images: ["/images/spots/mishimako.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/mishimako-herabuna.jpg", imageAttribution: "Photo: Koda6029 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/mishimako-herabuna.jpg"],
     rating: 4.1, reviewCount: 167, googleRating: 4.1, googleReviewCount: 48,
     catchableFish: [
       { fish: fish("herabuna"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "へら竿・練りエサ" },
@@ -486,7 +486,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "ボート代 3,000円〜（遊漁券込み）",
     hasParking: true, parkingDetail: "ボート店に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
-    mainImageUrl: "/images/spots/tozurahara.jpg", images: ["/images/spots/tozurahara.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tozurahara-dam.jpg", imageAttribution: "Photo: Fffkk / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/tozurahara-dam.jpg"],
     rating: 4.0, reviewCount: 123, googleRating: 3.8, googleReviewCount: 12,
     catchableFish: [
       { fish: fish("herabuna"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "へら竿・練りエサ" },
@@ -508,7 +508,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,000円",
     hasParking: true, parkingDetail: "湖畔に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/tsurutako.jpg", images: ["/images/spots/tsurutako.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tsurutako-herabuna.jpg", imageAttribution: "Photo: tak1701d / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/tsurutako-herabuna.jpg"],
     rating: 3.9, reviewCount: 98, googleRating: 3.8, googleReviewCount: 325,
     catchableFish: [
       { fish: fish("herabuna"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "へら竿" },
@@ -532,7 +532,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "1日券 4,700円（一般）",
     hasParking: true, parkingDetail: "無料駐車場あり（約100台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "ルアー・フライロッドのレンタルあり（1,000円）",
-    mainImageUrl: "/images/spots/fishon-shishidome.jpg", images: ["/images/spots/fishon-shishidome.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/fishon-shishidome.jpg", imageAttribution: "Photo: Puchi-masashi / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/fishon-shishidome.jpg"],
     rating: 4.2, reviewCount: 234,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "放流直後", method: "ルアー" },
@@ -555,7 +555,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "1日券 4,500円",
     hasParking: true, parkingDetail: "無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタルロッド・ルアーセットあり",
-    mainImageUrl: "/images/spots/kaga-fishing.jpg", images: ["/images/spots/kaga-fishing.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kaga-fishing-area.jpg", imageAttribution: "Photo: fujidreams1971 / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/kaga-fishing-area.jpg"],
     rating: 4.0, reviewCount: 156, googleRating: 3.5, googleReviewCount: 288,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "放流直後", method: "ルアー" },
@@ -579,7 +579,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 700円+テント・用具レンタル 2,000円程度",
     hasParking: true, parkingDetail: "湖畔に駐車場あり（冬季有料500円）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "ワカサギ釣りセット一式レンタルあり",
-    mainImageUrl: "/images/spots/akagi-onuma.jpg", images: ["/images/spots/akagi-onuma.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/akagi-onuma-wakasagi.jpg", imageAttribution: "Photo: Ka23 13 / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/akagi-onuma-wakasagi.jpg"],
     rating: 4.3, reviewCount: 289, googleRating: 4, googleReviewCount: 186,
     catchableFish: [
       { fish: fish("wakasagi"), monthStart: 9, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "氷上穴釣り・ボート" },
@@ -601,7 +601,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 700円。ボート代別途",
     hasParking: true, parkingDetail: "湖畔に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
-    mainImageUrl: "/images/spots/harunako.jpg", images: ["/images/spots/harunako.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/harunako-wakasagi.jpg", imageAttribution: "Photo: Mass Ave 975 / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/harunako-wakasagi.jpg"],
     rating: 3.9, reviewCount: 198, googleRating: 4.2, googleReviewCount: 1071,
     catchableFish: [
       { fish: fish("wakasagi"), monthStart: 9, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "氷上穴釣り・ボート" },
@@ -626,7 +626,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,500円（日券）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/kanogawa.jpg", images: ["/images/spots/kanogawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kanogawa-ayu.jpg", imageAttribution: "Photo: 運転太郎 / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/kanogawa-ayu.jpg"],
     rating: 4.5, reviewCount: 167, googleRating: 4.6, googleReviewCount: 17,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
@@ -649,7 +649,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,100円（日券）",
     hasParking: true, parkingDetail: "河川敷に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/sagamigawa-ayu.jpg", images: ["/images/spots/sagamigawa-ayu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/sagamigawa-ayu.jpg", imageAttribution: "Photo: おにく / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/sagamigawa-ayu.jpg"],
     rating: 3.9, reviewCount: 145,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
@@ -673,7 +673,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,500円（日券）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/nakagawa-ayu.jpg", images: ["/images/spots/nakagawa-ayu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/nakagawa-ayu.jpg", imageAttribution: "Photo: Miyuki Meinaka / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/nakagawa-ayu.jpg"],
     rating: 4.3, reviewCount: 134, googleRating: 4, googleReviewCount: 73,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
@@ -697,7 +697,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,000円（日券）",
     hasParking: true, parkingDetail: "支笏湖温泉に有料駐車場あり（500円）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/shikotsuko.jpg", images: ["/images/spots/shikotsuko.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/shikotsuko-trout.jpg", imageAttribution: "Photo: こまっちゃん / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/shikotsuko-trout.jpg"],
     rating: 4.4, reviewCount: 156, googleRating: 4.5, googleReviewCount: 1642,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -720,7 +720,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,000円（日券）",
     hasParking: true, parkingDetail: "湖畔に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/toyako.jpg", images: ["/images/spots/toyako.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/toyako-trout.jpg", imageAttribution: "Photo: hasano_jp / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/toyako-trout.jpg"],
     rating: 4.1, reviewCount: 123, googleRating: 4.6, googleReviewCount: 1154,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -743,7 +743,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（日券）",
     hasParking: true, parkingDetail: "阿寒湖温泉に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "フライ・ルアータックルのレンタルあり",
-    mainImageUrl: "/images/spots/akanko.jpg", images: ["/images/spots/akanko.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/akanko-trout.jpg", imageAttribution: "Photo: コムケ / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/akanko-trout.jpg"],
     rating: 4.5, reviewCount: 112, googleRating: 4.3, googleReviewCount: 699,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" },
@@ -768,7 +768,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人700円（日券）",
     hasParking: true, parkingDetail: "休屋地区に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/towadako.jpg", images: ["/images/spots/towadako.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/towadako-trout.jpg", imageAttribution: "Photo: Koichi Shibata / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/towadako-trout.jpg"],
     rating: 4.2, reviewCount: 98, googleRating: 4.4, googleReviewCount: 1061,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -791,7 +791,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,000円（日券）",
     hasParking: true, parkingDetail: "湖畔に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/tazawako.jpg", images: ["/images/spots/tazawako.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tazawako-trout.jpg", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/tazawako-trout.jpg"],
     rating: 4.0, reviewCount: 87,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -814,7 +814,7 @@ export const freshwaterSpots: FishingSpot[] = [
     region: lr("r630"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/ongagawa.jpg", images: ["/images/spots/ongagawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/ongagawa-bass.jpg", imageAttribution: "Photo: そらみみ (Soramimi) / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/ongagawa-bass.jpg"],
     rating: 3.8, reviewCount: 167, googleRating: 4.1, googleReviewCount: 28,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -840,7 +840,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人600円",
     hasParking: true, parkingDetail: "湖畔に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/saiko.jpg", images: ["/images/spots/saiko.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/saiko-lake.jpg", imageAttribution: "Photo: Reginald Pentinio / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/saiko-lake.jpg"],
     rating: 4.0, reviewCount: 89, googleRating: 4.4, googleReviewCount: 356,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -864,7 +864,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人600円。ボート代別途",
     hasParking: true, parkingDetail: "湖畔に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/shojiko.jpg", images: ["/images/spots/shojiko.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/shojiko-lake.jpg", imageAttribution: "Photo: 運転太郎 / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/shojiko-lake.jpg"],
     rating: 3.8, reviewCount: 78, googleRating: 4.4, googleReviewCount: 577,
     catchableFish: [
       { fish: fish("herabuna"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "へら竿" },
@@ -888,7 +888,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人600円",
     hasParking: true, parkingDetail: "湖畔に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/motosuko.jpg", images: ["/images/spots/motosuko.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/motosuko-lake.jpg", imageAttribution: "Photo: Susanna Zema / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/motosuko-lake.jpg"],
     rating: 4.1, reviewCount: 98, googleRating: 4.5, googleReviewCount: 987,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -912,7 +912,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（日券）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/fuefukigawa.jpg", images: ["/images/spots/fuefukigawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/fuefukigawa-keiryu.jpg", imageAttribution: "Photo: さかおり (talk) / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/fuefukigawa-keiryu.jpg"],
     rating: 3.8, reviewCount: 76,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ミャク釣り" },
@@ -936,7 +936,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人700円。レンタルボート 5,000円〜",
     hasParking: true, parkingDetail: "各マリーナに駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
-    mainImageUrl: "/images/spots/nojiriko.jpg", images: ["/images/spots/nojiriko.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/nojiriko-bass.jpg", imageAttribution: "Photo: Nesnad / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/nojiriko-bass.jpg"],
     rating: 4.3, reviewCount: 178, googleRating: 4.2, googleReviewCount: 434,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -959,7 +959,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人700円。レンタルボート 4,000円〜",
     hasParking: true, parkingDetail: "各マリーナに駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
-    mainImageUrl: "/images/spots/hibarako.jpg", images: ["/images/spots/hibarako.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/hibarako-bass.jpg", imageAttribution: "Photo: shinohal / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/hibarako-bass.jpg"],
     rating: 4.2, reviewCount: 198, googleRating: 4.3, googleReviewCount: 471,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -982,7 +982,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人3,000円（日券）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/nagaragawa-gujo.jpg", images: ["/images/spots/nagaragawa-gujo.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/nagaragawa-gujo-ayu.jpg", imageAttribution: "Photo: Tabuchi Yutaka / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/nagaragawa-gujo-ayu.jpg"],
     rating: 4.6, reviewCount: 234,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
@@ -1005,7 +1005,7 @@ export const freshwaterSpots: FishingSpot[] = [
     region: region("r43"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "各ポイント近くに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/biwako-east.jpg", images: ["/images/spots/biwako-east.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/biwako-east-shore.jpg", imageAttribution: "Photo: Taito Koba / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/biwako-east-shore.jpg"],
     rating: 4.0, reviewCount: 189, googleRating: 4.3, googleReviewCount: 1729,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -1029,7 +1029,7 @@ export const freshwaterSpots: FishingSpot[] = [
     region: region("r43"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "湖岸緑地に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/biwako-west.jpg", images: ["/images/spots/biwako-west.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/biwako-west-shore.jpg", imageAttribution: "Photo: MPY223 / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/biwako-west-shore.jpg"],
     rating: 4.2, reviewCount: 234,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -1053,7 +1053,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（日券）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/shibakawa.jpg", images: ["/images/spots/shibakawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/shibakawa-keiryu.jpg", imageAttribution: "Photo: Shift / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/shibakawa-keiryu.jpg"],
     rating: 3.9, reviewCount: 67, googleRating: 4, googleReviewCount: 5,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -1077,7 +1077,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（日券）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/kinugawa.jpg", images: ["/images/spots/kinugawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kinugawa-keiryu.jpg", imageAttribution: "Photo: Nyao148 / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/kinugawa-keiryu.jpg"],
     rating: 4.0, reviewCount: 134,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -1127,7 +1127,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（日券）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/nagurigawa.jpg", images: ["/images/spots/nagurigawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/nagurigawa-keiryu.jpg", imageAttribution: "Photo: wakanmuri / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/nagurigawa-keiryu.jpg"],
     rating: 3.7, reviewCount: 78, googleRating: 4, googleReviewCount: 82,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ミャク釣り" },
@@ -1151,7 +1151,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "ドーム船 3,500〜4,500円（レンタル込み）",
     hasParking: true, parkingDetail: "各乗り場に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, rentalDetail: "ドーム船でワカサギセット一式レンタルあり",
-    mainImageUrl: "/images/spots/suwako-wakasagi.jpg", images: ["/images/spots/suwako-wakasagi.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/suwako-wakasagi.jpg", imageAttribution: "Photo: Tab-chan / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/suwako-wakasagi.jpg"],
     rating: 4.1, reviewCount: 289, googleRating: 3.6, googleReviewCount: 15,
     catchableFish: [
       { fish: fish("wakasagi"), monthStart: 9, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ドーム船" },
@@ -1174,7 +1174,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（日券）",
     hasParking: true, parkingDetail: "歌ヶ浜駐車場（無料）等",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/chuzenji-trout.jpg", images: ["/images/spots/chuzenji-trout.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/chuzenji-trout.jpg", imageAttribution: "Photo: Mauricio V. Genta / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/chuzenji-trout.jpg"],
     rating: 4.5, reviewCount: 234, googleRating: 3.5, googleReviewCount: 8,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -1197,7 +1197,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（日券）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/tonegawa-shibukawa.jpg", images: ["/images/spots/tonegawa-shibukawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tonegawa-shibukawa.jpg", imageAttribution: "Photo: inunami / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/tonegawa-shibukawa.jpg"],
     rating: 3.9, reviewCount: 123, googleRating: 4.3, googleReviewCount: 9,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
@@ -1221,7 +1221,7 @@ export const freshwaterSpots: FishingSpot[] = [
     region: region("r5"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/tamagawa-fuchu.jpg", images: ["/images/spots/tamagawa-fuchu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tamagawa-fuchu.jpg", imageAttribution: "Photo: 珈琲牛乳 / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/tamagawa-fuchu.jpg"],
     rating: 3.6, reviewCount: 234, googleRating: 5, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("koi"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "パン鯉" },
@@ -1269,7 +1269,7 @@ export const freshwaterSpots: FishingSpot[] = [
     region: region("r4"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "印旛沼公園等に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/inbanuma.jpg", images: ["/images/spots/inbanuma.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/inbanuma-bass.jpg", imageAttribution: "Photo: heriheri / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/inbanuma-bass.jpg"],
     rating: 3.7, reviewCount: 198, googleRating: 3.9, googleReviewCount: 137,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -1295,7 +1295,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 600円。レンタルボート 3,500円〜",
     hasParking: true, parkingDetail: "各ボート店に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true,
-    mainImageUrl: "/images/spots/yamanakako-bass.jpg", images: ["/images/spots/yamanakako-bass.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/yamanakako-bass.jpg", imageAttribution: "Photo: wanghongliu / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/yamanakako-bass.jpg"],
     rating: 4.1, reviewCount: 198, googleRating: 4, googleReviewCount: 143,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -1317,7 +1317,7 @@ export const freshwaterSpots: FishingSpot[] = [
     region: region("r20"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "沼畔に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/ushikunuma.jpg", images: ["/images/spots/ushikunuma.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/ushikunuma-bass.jpg", imageAttribution: "Photo: Miyuki Meinaka / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/ushikunuma-bass.jpg"],
     rating: 3.6, reviewCount: 167, googleRating: 3.9, googleReviewCount: 94,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -1342,7 +1342,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人700円。レンタルボート 3,000円〜",
     hasParking: true, parkingDetail: "ボート店に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
-    mainImageUrl: "/images/spots/takatakiko.jpg", images: ["/images/spots/takatakiko.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/takatakiko-bass.jpg", imageAttribution: "Photo: 小石川人晃 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/takatakiko-bass.jpg"],
     rating: 3.9, reviewCount: 178, googleRating: 3.8, googleReviewCount: 104,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -1366,7 +1366,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（日券）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/okutonegawa.jpg", images: ["/images/spots/okutonegawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/okutonegawa-keiryu.jpg", imageAttribution: "Photo: photo: Qurren (talk) Taken with Canon PowerShot / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/okutonegawa-keiryu.jpg"],
     rating: 4.1, reviewCount: 89, googleRating: 3.7, googleReviewCount: 805,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" },
@@ -1389,7 +1389,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人700円。レンタルボート 2,500円〜",
     hasParking: true, parkingDetail: "ダムサイトに無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/tanzawako.jpg", images: ["/images/spots/tanzawako.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tanzawako-bass.jpg", imageAttribution: "Photo: hideki higano / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/tanzawako-bass.jpg"],
     rating: 3.8, reviewCount: 98, googleRating: 4.1, googleReviewCount: 348,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -1413,7 +1413,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人3,000円（日券）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/yoshinogawa.jpg", images: ["/images/spots/yoshinogawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/yoshinogawa-ayu.jpg", imageAttribution: "Photo: Puchi-masashi / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/yoshinogawa-ayu.jpg"],
     rating: 4.3, reviewCount: 112,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
@@ -1437,7 +1437,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（日券）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/arakawa-chichibu.jpg", images: ["/images/spots/arakawa-chichibu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/arakawa-chichibu.jpg", imageAttribution: "Photo: tak1701d / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/arakawa-chichibu.jpg"],
     rating: 4.0, reviewCount: 87,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -1462,7 +1462,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人800円（日券）",
     hasParking: true, parkingDetail: "河川敷に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/irumagawa.jpg", images: ["/images/spots/irumagawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/irumagawa-fishing.jpg", imageAttribution: "Photo: SEMISAYAMASHI / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/irumagawa-fishing.jpg"],
     rating: 3.7, reviewCount: 134,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -1487,7 +1487,9 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（日券）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/watarasegawa.jpg", images: ["/images/spots/watarasegawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/watarasegawa-kiryu.jpg", imageAttribution: "Photo: Naopan
+
+ This photo was taken with iPhone 6 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/watarasegawa-kiryu.jpg"],
     rating: 4.0, reviewCount: 95,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -1512,7 +1514,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,500円（日券）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/kannagawa.jpg", images: ["/images/spots/kannagawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kannagawa-trout.jpg", imageAttribution: "Photo: photo: Qurren (talk) Taken with Canon IXY 430F / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/kannagawa-trout.jpg"],
     rating: 4.2, reviewCount: 72, googleRating: 4.6, googleReviewCount: 8,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フライ" },
@@ -1536,7 +1538,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（日券）",
     hasParking: true, parkingDetail: "日光市内の公共駐車場を利用",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/daiyagawa.jpg", images: ["/images/spots/daiyagawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/daiyagawa-nikko.jpg", imageAttribution: "Photo: くろふね / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/daiyagawa-nikko.jpg"],
     rating: 4.1, reviewCount: 78, googleRating: 4, googleReviewCount: 6,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -1586,7 +1588,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人600円。ドーム船 3,500円〜",
     hasParking: true, parkingDetail: "湖畔に無料・有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, rentalDetail: "ドーム船利用時にレンタルタックルあり",
-    mainImageUrl: "/images/spots/suwako.jpg", images: ["/images/spots/suwako.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/suwako-lake.jpg", imageAttribution: "Photo: Tab-chan / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/suwako-lake.jpg"],
     rating: 4.0, reviewCount: 245, googleRating: 4.3, googleReviewCount: 1309,
     catchableFish: [
       { fish: fish("wakasagi"), monthStart: 9, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ドーム船" },
@@ -1611,7 +1613,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人600円。氷上釣り 入漁料込み1,000円",
     hasParking: true, parkingDetail: "湖畔に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "ワカサギ釣りセットレンタルあり",
-    mainImageUrl: "/images/spots/matsubarako.jpg", images: ["/images/spots/matsubarako.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/matsubarako-lake.jpg", imageAttribution: "Photo: くろふね / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/matsubarako-lake.jpg"],
     rating: 3.9, reviewCount: 98, googleRating: 4.1, googleReviewCount: 190,
     catchableFish: [
       { fish: fish("wakasagi"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "氷上穴釣り" },
@@ -1660,7 +1662,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（日券）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/aganogawa.jpg", images: ["/images/spots/aganogawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/aganogawa-niigata.jpg", imageAttribution: "Photo: suzune konoo / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/aganogawa-niigata.jpg"],
     rating: 4.1, reviewCount: 102, googleRating: 3.8, googleReviewCount: 103,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -1685,7 +1687,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人3,000円（日券）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/uonogawa.jpg", images: ["/images/spots/uonogawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/uonogawa-fishing.jpg", imageAttribution: "Photo: Puchi-masashi / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/uonogawa-fishing.jpg"],
     rating: 4.4, reviewCount: 145, googleRating: 3.7, googleReviewCount: 113,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -1709,7 +1711,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（日券）",
     hasParking: true, parkingDetail: "キャンプ場や河川沿いに駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/doshigawa.jpg", images: ["/images/spots/doshigawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/doshigawa-trout.jpg", imageAttribution: "Photo: Σ64 / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/doshigawa-trout.jpg"],
     rating: 4.0, reviewCount: 112, googleRating: 4.4, googleReviewCount: 9,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -1733,7 +1735,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: true,
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/kokaigawa.jpg", images: ["/images/spots/kokaigawa.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kokaigawa-fishing.jpg", imageAttribution: "Photo: Toshihiro Matsui / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/kokaigawa-fishing.jpg"],
     rating: 3.6, reviewCount: 89, googleRating: 3.6, googleReviewCount: 102,
     catchableFish: [
       { fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "へら竿" },
@@ -1759,7 +1761,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: true,
     hasParking: true, parkingDetail: "沼周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/inbanuma.jpg", images: ["/images/spots/inbanuma.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/inbanuma-lake.jpg", imageAttribution: "Photo: 小石川人晃 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/inbanuma-lake.jpg"],
     rating: 3.9, reviewCount: 198, googleRating: 3.9, googleReviewCount: 137,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -1785,7 +1787,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人3,000円（日券）。サケ有効利用調査参加費別途",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/arakawa-murakami.jpg", images: ["/images/spots/arakawa-murakami.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/arakawa-murakami.jpg", imageAttribution: "Photo: Drph17 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/arakawa-murakami.jpg"],
     rating: 4.5, reviewCount: 167,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 7, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
