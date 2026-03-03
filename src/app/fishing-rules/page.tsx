@@ -18,10 +18,13 @@ import {
   Info,
   Shell,
   Fish,
+  MapPin,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { prefectures, regionGroupOrder } from "@/lib/data/prefectures";
 
 export const metadata: Metadata = {
   title: "釣りのルールとマナー - 漁業権・禁漁期間・リリースサイズまとめ",
@@ -420,6 +423,39 @@ export default function FishingRulesPage() {
             </div>
           </section>
         </div>
+
+        {/* 都道府県別の釣りルール */}
+        <section className="mt-10 sm:mt-14">
+          <div className="mb-4 flex items-center gap-2">
+            <MapPin className="h-5 w-5 text-primary" />
+            <h2 className="text-xl font-bold sm:text-2xl">都道府県別の釣りルール</h2>
+          </div>
+          <p className="mb-6 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            各都道府県ごとの詳しい釣りルール・規制情報をまとめています。釣行前に必ずご確認ください。
+          </p>
+          <div className="space-y-6">
+            {regionGroupOrder.map((regionName) => {
+              const regionPrefs = prefectures.filter((p) => p.regionGroup === regionName);
+              return (
+                <div key={regionName}>
+                  <h3 className="mb-2 text-sm font-bold text-muted-foreground">{regionName}</h3>
+                  <div className="flex flex-wrap gap-1.5">
+                    {regionPrefs.map((pref) => (
+                      <Link key={pref.slug} href={`/fishing-rules/${pref.slug}`}>
+                        <Badge
+                          variant="outline"
+                          className="cursor-pointer px-3 py-1.5 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
+                        >
+                          {pref.name}
+                        </Badge>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
 
         {/* CTA */}
         <div className="mt-10 text-center sm:mt-14">

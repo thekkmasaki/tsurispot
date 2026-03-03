@@ -8,10 +8,13 @@ import {
   Fish,
   AlertTriangle,
   Anchor,
+  Calendar,
+  MapPin,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { MONTHS } from "@/lib/data/fishing-methods";
 
 export const metadata: Metadata = {
   title: "季節別釣りガイド - 春夏秋冬のおすすめ釣り",
@@ -414,6 +417,73 @@ export default function SeasonalPage() {
             </section>
           ))}
         </div>
+
+        {/* 月×地域別ガイド */}
+        <section className="mt-12">
+          <div className="mb-4 flex items-center gap-2">
+            <Calendar className="size-5 text-primary" />
+            <h2 className="text-xl font-bold sm:text-2xl">月×地域別 釣りガイド</h2>
+          </div>
+          <p className="mb-6 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            お住まいの地域と月を選んで、今釣れる魚とおすすめスポットをチェック
+          </p>
+          <div className="overflow-x-auto">
+            <table className="w-full text-sm border-collapse">
+              <thead>
+                <tr>
+                  <th className="sticky left-0 z-10 bg-background border p-2 text-left text-xs font-medium text-muted-foreground">月</th>
+                  {(
+                    [
+                      { slug: "hokkaido", name: "北海道" },
+                      { slug: "tohoku", name: "東北" },
+                      { slug: "kanto", name: "関東" },
+                      { slug: "chubu", name: "中部" },
+                      { slug: "kinki", name: "近畿" },
+                      { slug: "chugoku", name: "中国" },
+                      { slug: "shikoku", name: "四国" },
+                      { slug: "kyushu-okinawa", name: "九州沖縄" },
+                    ] as const
+                  ).map((region) => (
+                    <th key={region.slug} className="border p-2 text-center text-xs font-medium text-muted-foreground whitespace-nowrap">
+                      {region.name}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {MONTHS.map((month) => (
+                  <tr key={month.slug}>
+                    <td className="sticky left-0 z-10 bg-background border p-2 text-xs font-medium whitespace-nowrap">
+                      {month.name}
+                    </td>
+                    {(
+                      [
+                        "hokkaido",
+                        "tohoku",
+                        "kanto",
+                        "chubu",
+                        "kinki",
+                        "chugoku",
+                        "shikoku",
+                        "kyushu-okinawa",
+                      ] as const
+                    ).map((regionSlug) => (
+                      <td key={regionSlug} className="border p-1 text-center">
+                        <Link
+                          href={`/seasonal/${month.slug}/${regionSlug}`}
+                          className="inline-flex items-center justify-center rounded px-2 py-1.5 text-xs text-primary hover:bg-primary/10 transition-colors"
+                        >
+                          <MapPin className="size-3 mr-0.5" />
+                          詳細
+                        </Link>
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
 
         {/* CTA */}
         <div className="mt-12 rounded-xl border bg-muted/30 p-6">
