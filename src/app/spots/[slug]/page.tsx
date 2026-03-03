@@ -232,7 +232,8 @@ export default async function SpotDetailPage({ params }: PageProps) {
   // LocalBusiness（Googleが aggregateRating をサポートするタイプ）
   const localBusinessJsonLd = {
     "@context": "https://schema.org",
-    "@type": "SportsActivityLocation",
+    "@type": "LocalBusiness",
+    additionalType: "https://schema.org/SportsActivityLocation",
     name: spot.name,
     description: spot.description,
     url: `https://tsurispot.com/spots/${spot.slug}`,
