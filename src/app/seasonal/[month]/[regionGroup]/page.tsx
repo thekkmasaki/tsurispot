@@ -9,6 +9,7 @@ import {
   ChevronRight,
   Flame,
   Thermometer,
+  HelpCircle,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -280,15 +281,82 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
     })),
   };
 
+  const pageUrl = `https://tsurispot.com/seasonal/${monthSlug}/${regionSlug}`;
+
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: `${monthDef.name}の${regionName}の釣り - 釣れる魚・おすすめスポット`,
+    description: `${monthDef.name}（${monthDef.season}）に${regionName}地方で釣れる魚${allFishList.length}種とおすすめ釣り場を紹介。`,
+    datePublished: "2025-06-01",
+    dateModified: new Date().toISOString().split("T")[0],
+    author: {
+      "@type": "Person",
+      name: "正木 家康",
+      jobTitle: "編集長",
+      url: "https://tsurispot.com/about",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "ツリスポ",
+      url: "https://tsurispot.com",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://tsurispot.com/logo.svg",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": pageUrl,
+    },
+  };
+
+  // FAQ 動的生成
+  const peakFishNames = peakFish.slice(0, 4).map((f) => f.name);
+  const topFishNames = allFishList.slice(0, 5).map((f) => f.name);
+  const topSpotNames = topSpots.slice(0, 3).map((s) => s.spot.name);
+
+  const faqItems = [
+    {
+      question: `${monthDef.name}に${regionName}で釣れる魚は？`,
+      answer: allFishList.length > 0
+        ? `${monthDef.name}に${regionName}では${topFishNames.join("・")}など${allFishList.length}種が釣れます。${peakFishNames.length > 0 ? `特に${peakFishNames.join("・")}は最盛期です。` : ""}`
+        : `${monthDef.name}の${regionName}で釣れる魚の情報は現在準備中です。`,
+    },
+    {
+      question: `${monthDef.name}の${regionName}のおすすめ釣りスポットは？`,
+      answer: topSpotNames.length > 0
+        ? `${monthDef.name}の${regionName}では${topSpotNames.join("・")}などがおすすめです。旬の魚が多く釣れるスポットを厳選しています。`
+        : `${monthDef.name}の${regionName}のおすすめスポット情報は現在準備中です。`,
+    },
+    {
+      question: `${monthDef.name}の${regionName}の釣り方のコツは？`,
+      answer: seasonalTips.length > 0
+        ? seasonalTips.slice(0, 2).join(" ")
+        : `${monthDef.name}（${monthDef.season}）の釣りでは天候と水温の変化に注意し、魚の活性に合わせた釣り方を選びましょう。`,
+    },
+  ];
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify([breadcrumbJsonLd, articleJsonLd, faqJsonLd, itemListJsonLd]),
+        }}
       />
 
       {/* パンくず */}
@@ -474,6 +542,28 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
           </Card>
         </section>
       )}
+
+      {/* よくある質問 */}
+      <section className="mb-8 sm:mb-10">
+        <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
+          <HelpCircle className="size-5 text-primary" />
+          よくある質問
+        </h2>
+        <div className="space-y-3">
+          {faqItems.map((item, idx) => (
+            <Card key={idx} className="gap-0 py-0">
+              <CardContent className="p-4">
+                <h3 className="mb-2 text-sm font-bold">
+                  Q. {item.question}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  A. {item.answer}
+                </p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
 
       {/* 都道府県別リンク */}
       {regionPrefs.length > 1 && (
