@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { MapPin, Fish, Calendar, Target, ChevronLeft } from "lucide-react";
+import { MapPin, Fish, Calendar, Target, ChevronLeft, HelpCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
@@ -155,6 +155,30 @@ export default async function PrefectureFishPage({ params }: PageProps) {
     .sort((a, b) => a - b)
     .map((m) => `${m}月`);
 
+  const pageUrl = `https://tsurispot.com/prefecture/${pref.slug}/fish/${fish.slug}`;
+  const headline = `${pref.name}で${fish.name}を釣る - おすすめスポット・時期・釣り方`;
+  const pageDescription = `${pref.name}で${fish.name}が釣れるおすすめ釣りスポット${spots.length}件を紹介。シーズン・釣り方・難易度・アクセス情報を完全ガイド。`;
+
+  // FAQ データ
+  const faqItems = [
+    {
+      question: `${pref.name}で${fish.name}が釣れるスポットは何件ありますか？`,
+      answer: `現在、${pref.name}で${fish.name}が釣れるスポットは${spots.length}件掲載しています。${methodBreakdown.length > 0 ? `主な釣り方は${methodBreakdown.slice(0, 3).map((m) => m.method).join("、")}です。` : ""}`,
+    },
+    {
+      question: `${pref.name}で${fish.name}が釣れる時期はいつですか？`,
+      answer: seasonMonthNames.length > 0
+        ? `${pref.name}での${fish.name}のシーズンは${seasonMonthNames.join("・")}です。${peakMonthNames.length > 0 ? `特に${peakMonthNames.join("・")}が最盛期で、最も釣果が期待できます。` : ""}`
+        : `${fish.name}の詳しいシーズン情報は各スポットページでご確認ください。`,
+    },
+    {
+      question: `${pref.name}で${fish.name}を釣るにはどんな釣り方がおすすめですか？`,
+      answer: methodBreakdown.length > 0
+        ? `${pref.name}で${fish.name}を狙うなら、${methodBreakdown[0].method}が最も多く${methodBreakdown[0].count}件のスポットで実績があります。${methodBreakdown.length > 1 ? `他にも${methodBreakdown.slice(1, 3).map((m) => m.method).join("、")}でも狙えます。` : ""}各スポットの詳細ページで具体的な釣り方をご確認ください。`
+        : `${fish.name}の釣り方の詳細は各スポットページでご確認ください。`,
+    },
+  ];
+
   // JSON-LD
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -169,7 +193,7 @@ export default async function PrefectureFishPage({ params }: PageProps) {
       {
         "@type": "ListItem",
         position: 2,
-        name: "都道府県から探す",
+        name: "都道府県一覧",
         item: "https://tsurispot.com/prefecture",
       },
       {
@@ -181,10 +205,51 @@ export default async function PrefectureFishPage({ params }: PageProps) {
       {
         "@type": "ListItem",
         position: 4,
-        name: `${fish.name}が釣れるスポット`,
-        item: `https://tsurispot.com/prefecture/${pref.slug}/fish/${fish.slug}`,
+        name: `${fish.name}の釣り情報`,
+        item: pageUrl,
       },
     ],
+  };
+
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline,
+    description: pageDescription,
+    datePublished: "2025-01-01",
+    dateModified: new Date().toISOString().split("T")[0],
+    author: {
+      "@type": "Person",
+      name: "正木 家康",
+      jobTitle: "編集長",
+      url: "https://tsurispot.com/about",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "ツリスポ",
+      url: "https://tsurispot.com",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://tsurispot.com/logo.svg",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": pageUrl,
+    },
+  };
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
   };
 
   const itemListJsonLd = {
@@ -200,24 +265,22 @@ export default async function PrefectureFishPage({ params }: PageProps) {
     })),
   };
 
+  const jsonLdArray = [breadcrumbJsonLd, articleJsonLd, faqJsonLd, itemListJsonLd];
+
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdArray) }}
       />
 
       {/* パンくず */}
       <Breadcrumb
         items={[
           { label: "ホーム", href: "/" },
-          { label: "都道府県", href: "/prefecture" },
+          { label: "都道府県一覧", href: "/prefecture" },
           { label: pref.name, href: `/prefecture/${pref.slug}` },
-          { label: `${fish.name}が釣れるスポット` },
+          { label: `${fish.name}の釣り情報` },
         ]}
       />
 
@@ -426,6 +489,28 @@ export default async function PrefectureFishPage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      {/* よくある質問 */}
+      <section className="mb-8 sm:mb-10">
+        <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
+          <HelpCircle className="size-5 text-primary" />
+          {pref.name}の{fish.name}に関するよくある質問
+        </h2>
+        <div className="space-y-4">
+          {faqItems.map((item, idx) => (
+            <Card key={idx} className="gap-0 py-0">
+              <CardContent className="p-4">
+                <h3 className="font-bold text-sm sm:text-base mb-2">
+                  Q. {item.question}
+                </h3>
+                <p className="text-sm text-muted-foreground">
+                  A. {item.answer}
+                </p>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
 
       {/* 関連リンク */}
       <section className="mt-8 sm:mt-12">
