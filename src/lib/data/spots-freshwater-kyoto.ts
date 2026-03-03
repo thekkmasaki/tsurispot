@@ -46,7 +46,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
     isFree: false, feeDetail: "賀茂川漁協遊漁券 大人3,500円（年券）/ 日券1,500円",
     hasParking: false, parkingDetail: "周辺のコインパーキングを利用",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Kamo_river_%28%E5%8A%A0%E8%8C%82%E5%B7%9D%29%2C_Kyoto%2C_Japan_-_panoramio.jpg/960px-Kamo_river_%28%E5%8A%A0%E8%8C%82%E5%B7%9D%29%2C_Kyoto%2C_Japan_-_panoramio.jpg", imageAttribution: "Photo: yasui / Wikimedia Commons (CC BY-SA 3.0)", images: [],
     rating: 3.7, reviewCount: 145, googleRating: 4.6, googleReviewCount: 766,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },

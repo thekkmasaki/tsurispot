@@ -575,7 +575,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
     region: localRegion("r174"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.8, reviewCount: 119,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/03/CruiseShip-SUN_PRINCESS_%282815661754%29.jpg/960px-CruiseShip-SUN_PRINCESS_%282815661754%29.jpg", imageAttribution: "Photo: Suzumiya Haruka / Wikimedia Commons (CC BY 2.0)", images: [], rating: 3.8, reviewCount: 119,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("mebaru"), monthStart: 2, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "メバリング" },

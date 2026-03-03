@@ -171,7 +171,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r450"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海岸沿いに駐車スペースあり（夏季の海水浴シーズンは一部有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 4.1, reviewCount: 298, googleRating: 3.8, googleReviewCount: 49,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Hayasijinjya_0992.JPG/960px-Hayasijinjya_0992.JPG", imageAttribution: "Photo: 日:Jnn / Wikimedia Commons (CC BY 2.1 jp)", images: [], rating: 4.1, reviewCount: 298, googleRating: 3.8, googleReviewCount: 49,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "投げ釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
@@ -200,7 +200,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r450"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: false, parkingDetail: "漁港内駐車禁止。周辺コインパーキング利用（1日600〜1000円程度）",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.8, reviewCount: 234, googleRating: 4.4, googleReviewCount: 5,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f1/Sigma_Mark-I_01.jpg/960px-Sigma_Mark-I_01.jpg", imageAttribution: "Photo: halfrain / Wikimedia Commons (CC BY-SA 2.0)", images: [], rating: 3.8, reviewCount: 234, googleRating: 4.4, googleReviewCount: 5,
     catchableFish: [
       { fish: fish("anago"), monthStart: 6, monthEnd: 2, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ〜夜", method: "ぶっこみ釣り" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ〜夜", method: "穴釣り" },
@@ -251,7 +251,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r450"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "公園駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.3, reviewCount: 67, googleRating: 3.7, googleReviewCount: 187,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/3_Chome_Hayashisakich%C5%8D%2C_Akashi-shi%2C_Hy%C5%8Dgo-ken_673-0033%2C_Japan_-_panoramio.jpg/960px-3_Chome_Hayashisakich%C5%8D%2C_Akashi-shi%2C_Hy%C5%8Dgo-ken_673-0033%2C_Japan_-_panoramio.jpg", imageAttribution: "Photo: kcomiida / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.3, reviewCount: 67, googleRating: 3.7, googleReviewCount: 187,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "投げ釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
@@ -279,7 +279,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r450"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海岸付近に駐車スペースあり（無料）",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.4, reviewCount: 89, googleRating: 4, googleReviewCount: 76,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/3_Chome_Hayashisakich%C5%8D%2C_Akashi-shi%2C_Hy%C5%8Dgo-ken_673-0033%2C_Japan_-_panoramio.jpg/960px-3_Chome_Hayashisakich%C5%8D%2C_Akashi-shi%2C_Hy%C5%8Dgo-ken_673-0033%2C_Japan_-_panoramio.jpg", imageAttribution: "Photo: kcomiida / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.4, reviewCount: 89, googleRating: 4, googleReviewCount: 76,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "投げ釣り" },
       { fish: fish("magochi"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -310,7 +310,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r450"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.4, reviewCount: 78,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Hayasijinjya_0992.JPG/960px-Hayasijinjya_0992.JPG", imageAttribution: "Photo: 日:Jnn / Wikimedia Commons (CC BY 2.1 jp)", images: [], rating: 3.4, reviewCount: 78,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
@@ -364,7 +364,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r450"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.6, reviewCount: 178, googleRating: 4.6, googleReviewCount: 5,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Harimanada6003.jpg/960px-Harimanada6003.jpg", imageAttribution: "Photo: 日:Jnn / Wikimedia Commons (CC BY 2.1 jp)", images: [], rating: 3.6, reviewCount: 178, googleRating: 4.6, googleReviewCount: 5,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
@@ -392,7 +392,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r451"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "新島南緑地駐車場（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 4.0, reviewCount: 345, googleRating: 3.7, googleReviewCount: 107,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Aejinjya9834.jpg/960px-Aejinjya9834.jpg", imageAttribution: "Photo: 日:Jnn / Wikimedia Commons (CC BY 2.1 jp)", images: [], rating: 4.0, reviewCount: 345, googleRating: 3.7, googleReviewCount: 107,
     catchableFish: [
       { fish: fish("hata"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "穴釣り・テキサスリグ" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
@@ -428,7 +428,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r451"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "伊保灯台駐車場（無料、約30台）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.9, reviewCount: 256,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/%E9%AB%98%E7%A0%82%E6%B5%B7%E6%B5%9C%E5%85%AC%E5%9C%92_-_panoramio_%281%29.jpg/960px-%E9%AB%98%E7%A0%82%E6%B5%B7%E6%B5%9C%E5%85%AC%E5%9C%92_-_panoramio_%281%29.jpg", imageAttribution: "Photo: shikabane taro / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.9, reviewCount: 256,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "落とし込み・ヘチ釣り" },
       { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
@@ -464,7 +464,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r450"), spotType: "breakwater", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "人工島内に駐車スペースあり（無料）",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 4.2, reviewCount: 198, googleRating: 3.6, googleReviewCount: 80,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Efflorescence0663253.JPG/960px-Efflorescence0663253.JPG", imageAttribution: "Photo: 日:Jnn / Wikimedia Commons (CC BY 2.1 jp)", images: [], rating: 4.2, reviewCount: 198, googleRating: 3.6, googleReviewCount: 80,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ぶっこみ釣り" },
       { fish: fish("madai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ぶっこみ釣り" },
@@ -493,7 +493,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r451"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "みなと緑地駐車場（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.4, reviewCount: 134, googleRating: 3.9, googleReviewCount: 58,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/%E8%A5%BF%E7%94%BA%E5%85%AC%E5%9C%92_%E7%A0%82%E5%A0%B4.jpg/960px-%E8%A5%BF%E7%94%BA%E5%85%AC%E5%9C%92_%E7%A0%82%E5%A0%B4.jpg", imageAttribution: "Photo: Harimawood / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.4, reviewCount: 134, googleRating: 3.9, googleReviewCount: 58,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
@@ -522,7 +522,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r451"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "向島公園駐車場（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.9, reviewCount: 213, googleRating: 3.9, googleReviewCount: 58,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/%E5%8A%A0%E5%8F%A4%E5%B7%9D%E5%B8%82%E9%BE%8D%E5%AE%AE%E7%A5%9E%E7%A4%BE_%E9%B3%A5%E5%B1%85.jpg/960px-%E5%8A%A0%E5%8F%A4%E5%B7%9D%E5%B8%82%E9%BE%8D%E5%AE%AE%E7%A5%9E%E7%A4%BE_%E9%B3%A5%E5%B1%85.jpg", imageAttribution: "Photo: Harimawood / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.9, reviewCount: 213, googleRating: 3.9, googleReviewCount: 58,
     catchableFish: [
       { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
       { fish: fish("hirame"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -551,7 +551,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r451"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "岸壁に駐車スペースあり（無料）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.5, reviewCount: 112, googleRating: 2.5, googleReviewCount: 4,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/%E9%AB%98%E7%A0%82%E6%B5%B7%E6%B5%9C%E5%85%AC%E5%9C%92_-_panoramio_%281%29.jpg/960px-%E9%AB%98%E7%A0%82%E6%B5%B7%E6%B5%9C%E5%85%AC%E5%9C%92_-_panoramio_%281%29.jpg", imageAttribution: "Photo: shikabane taro / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.5, reviewCount: 112, googleRating: 2.5, googleReviewCount: 4,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -573,7 +573,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r451"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海洋文化センター駐車場（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.3, reviewCount: 98, googleRating: 3.9, googleReviewCount: 691,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8e/%E8%A5%BF%E7%94%BA%E5%85%AC%E5%9C%92_%E3%83%A9%E3%82%A4%E3%82%AA%E3%83%B3%E3%81%AE%E4%B9%97%E3%82%8A%E7%89%A9.jpg/960px-%E8%A5%BF%E7%94%BA%E5%85%AC%E5%9C%92_%E3%83%A9%E3%82%A4%E3%82%AA%E3%83%B3%E3%81%AE%E4%B9%97%E3%82%8A%E7%89%A9.jpg", imageAttribution: "Photo: Harimawood / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.3, reviewCount: 98, googleRating: 3.9, googleReviewCount: 691,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
@@ -603,7 +603,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r451"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "向島公園駐車場（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.4, reviewCount: 156, googleRating: 3.8, googleReviewCount: 333,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/%E9%AB%98%E7%A0%82%E6%B5%B7%E6%B5%9C%E5%85%AC%E5%9C%92_-_panoramio_%282%29.jpg/960px-%E9%AB%98%E7%A0%82%E6%B5%B7%E6%B5%9C%E5%85%AC%E5%9C%92_-_panoramio_%282%29.jpg", imageAttribution: "Photo: shikabane taro / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.4, reviewCount: 156, googleRating: 3.8, googleReviewCount: 333,
     catchableFish: [
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ・ミャク釣り" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -634,7 +634,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r450"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "大蔵海岸公園駐車場（500円/回）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 4.2, reviewCount: 380, googleRating: 4.2, googleReviewCount: 610,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/%E5%94%84%E3%81%94%E3%81%88%E5%96%AB%E8%8C%B6_%E5%A4%A2_%2814218592640%29.jpg/960px-%E5%94%84%E3%81%94%E3%81%88%E5%96%AB%E8%8C%B6_%E5%A4%A2_%2814218592640%29.jpg", imageAttribution: "Photo: halfrain / Wikimedia Commons (CC BY-SA 2.0)", images: [], rating: 4.2, reviewCount: 380, googleRating: 4.2, googleReviewCount: 610,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "投げ釣り" },
       { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
@@ -698,7 +698,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r450"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: false, parkingDetail: "漁港内駐車不可。周辺コインパーキング利用（1時間200〜300円程度）",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.8, reviewCount: 290, googleRating: 3.9, googleReviewCount: 327,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/%E5%B1%B1%E9%99%BD%E5%9E%82%E6%B0%B4%E9%A7%85_Sanyo-Tarumi_Sta._-_panoramio.jpg/960px-%E5%B1%B1%E9%99%BD%E5%9E%82%E6%B0%B4%E9%A7%85_Sanyo-Tarumi_Sta._-_panoramio.jpg", imageAttribution: "Photo: iloverjoa / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.8, reviewCount: 290, googleRating: 3.9, googleReviewCount: 327,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
@@ -728,7 +728,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r450"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.7, reviewCount: 180, googleRating: 3.9, googleReviewCount: 39,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Efflorescence0663253.JPG/960px-Efflorescence0663253.JPG", imageAttribution: "Photo: 日:Jnn / Wikimedia Commons (CC BY 2.1 jp)", images: [], rating: 3.7, reviewCount: 180, googleRating: 3.9, googleReviewCount: 39,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "投げ釣り" },
@@ -757,7 +757,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r450"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内に限定的な駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.6, reviewCount: 150, googleRating: 4, googleReviewCount: 1,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/%E6%98%8E%E7%9F%B3%E5%8E%9F%E4%BA%BA%E3%80%8C%E8%85%B0%E9%AA%A8%E7%99%BA%E8%A6%8B%E5%9C%B0%E3%80%8D%281998-04-27%29_-_panoramio.jpg/960px-%E6%98%8E%E7%9F%B3%E5%8E%9F%E4%BA%BA%E3%80%8C%E8%85%B0%E9%AA%A8%E7%99%BA%E8%A6%8B%E5%9C%B0%E3%80%8D%281998-04-27%29_-_panoramio.jpg", imageAttribution: "Photo: kcomiida / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.6, reviewCount: 150, googleRating: 4, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "投げ釣り" },
@@ -787,7 +787,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r450"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "人工島内に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 4.0, reviewCount: 250, googleRating: 3.6, googleReviewCount: 80,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Harimanada6003.jpg/960px-Harimanada6003.jpg", imageAttribution: "Photo: 日:Jnn / Wikimedia Commons (CC BY 2.1 jp)", images: [], rating: 4.0, reviewCount: 250, googleRating: 3.6, googleReviewCount: 80,
     catchableFish: [
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "メバリング" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
@@ -819,7 +819,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r450"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: false, parkingDetail: "駐車場なし。JR塩屋駅から徒歩5分のため電車釣行推奨",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.5, reviewCount: 120, googleRating: 3.7, googleReviewCount: 89,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Shioyacho%2C_Tarumi_Ward%2C_Kobe%2C_Hyogo_Prefecture_655-0872%2C_Japan_-_panoramio.jpg/960px-Shioyacho%2C_Tarumi_Ward%2C_Kobe%2C_Hyogo_Prefecture_655-0872%2C_Japan_-_panoramio.jpg", imageAttribution: "Photo: shikabane taro / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.5, reviewCount: 120, googleRating: 3.7, googleReviewCount: 89,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "メバリング" },
@@ -880,7 +880,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r450"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内に限定的な駐車スペースあり（早い者勝ち）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.9, reviewCount: 220, googleRating: 3.6, googleReviewCount: 146,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Hayasijinjya_0992.JPG/960px-Hayasijinjya_0992.JPG", imageAttribution: "Photo: 日:Jnn / Wikimedia Commons (CC BY 2.1 jp)", images: [], rating: 3.9, reviewCount: 220, googleRating: 3.6, googleReviewCount: 146,
     catchableFish: [
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "メバリング" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ・アジング" },
@@ -911,7 +911,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     region: lr("r451"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "護岸沿いに無料駐車スペースあり（車横付け可能エリアあり）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.8, reviewCount: 200,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/JA_Hyogo_Minami_Harima_Branch.jpg/960px-JA_Hyogo_Minami_Harima_Branch.jpg", imageAttribution: "Photo: Suikotei / Wikimedia Commons (CC BY 4.0)", images: [], rating: 3.8, reviewCount: 200,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "投げ釣り" },
       { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },

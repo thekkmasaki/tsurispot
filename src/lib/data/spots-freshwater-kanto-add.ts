@@ -286,7 +286,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     region: lr("r742"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "手賀沼親水広場駐車場（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/%E6%96%87%E5%AD%A6%E3%81%AE%E5%BA%83%E5%A0%B4_%E7%9C%8B%E6%9D%BF_-_panoramio.jpg/960px-%E6%96%87%E5%AD%A6%E3%81%AE%E5%BA%83%E5%A0%B4_%E7%9C%8B%E6%9D%BF_-_panoramio.jpg", imageAttribution: "Photo: 運転太郎 / Wikimedia Commons (CC BY 3.0)", images: [],
     rating: 3.4, reviewCount: 89, googleRating: 4.1, googleReviewCount: 196,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -438,7 +438,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "小菅フィッシングビレッジに駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: true, rentalDetail: "管理釣り場でレンタルタックルあり",
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/New_construction%2C_during_construction_Kosuge_village_office._Nov._2014.JPG/960px-New_construction%2C_during_construction_Kosuge_village_office._Nov._2014.JPG", imageAttribution: "Photo: Sakaori (talk) / Wikimedia Commons (CC BY 3.0)", images: [],
     rating: 4.1, reviewCount: 98, googleRating: 4, googleReviewCount: 3,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -463,7 +463,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Inashi_Eki_platform_in_2009.jpg/960px-Inashi_Eki_platform_in_2009.jpg", imageAttribution: "Photo: Kinori / Wikimedia Commons (Public domain)", images: [],
     rating: 4.0, reviewCount: 123,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -622,7 +622,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "入渓ポイント近くに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Hakubamura_yakuba.JPG/960px-Hakubamura_yakuba.JPG", imageAttribution: "Photo: アラツク / Wikimedia Commons (CC BY-SA 4.0)", images: [],
     rating: 4.2, reviewCount: 67, googleRating: 3.7, googleReviewCount: 55,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "エサ釣り" },

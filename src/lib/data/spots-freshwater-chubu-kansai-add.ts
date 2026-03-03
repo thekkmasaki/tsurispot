@@ -60,7 +60,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人3,000円（1日）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Kaga_Regional_Joint_Government_Building_01.JPG/960px-Kaga_Regional_Joint_Government_Building_01.JPG", imageAttribution: "Photo: Hohoho / Wikimedia Commons (CC BY-SA 3.0)", images: [],
     rating: 4.1, reviewCount: 87, googleRating: 2, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -109,7 +109,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,500円（1日）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/%E3%82%AB%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%A4%E3%83%BC%E3%82%B0%E3%83%A9%E3%82%A6%E3%83%B3%E3%83%89_%E3%83%90%E3%83%83%E3%82%AF%E3%83%8D%E3%83%83%E3%83%88%E8%A3%8F%E3%82%88%E3%82%8A_-_panoramio.jpg/960px-%E3%82%AB%E3%83%BC%E3%83%AB%E3%83%9E%E3%82%A4%E3%83%A4%E3%83%BC%E3%82%B0%E3%83%A9%E3%82%A6%E3%83%B3%E3%83%89_%E3%83%90%E3%83%83%E3%82%AF%E3%83%8D%E3%83%83%E3%83%88%E8%A3%8F%E3%82%88%E3%82%8A_-_panoramio.jpg", imageAttribution: "Photo: クハ４１９－５ / Wikimedia Commons (CC BY-SA 3.0)", images: [],
     rating: 4.4, reviewCount: 234, googleRating: 3.8, googleReviewCount: 13,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
@@ -133,7 +133,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Komaru-jou_Gate.JPG/960px-Komaru-jou_Gate.JPG", imageAttribution: "Photo: Osarusan / Wikimedia Commons (CC BY-SA 3.0)", images: [],
     rating: 3.5, reviewCount: 56, googleRating: 3.7, googleReviewCount: 39,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -230,7 +230,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "入渓ポイント近くに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Shitara_r143_Hirano_bridge.JPG/960px-Shitara_r143_Hirano_bridge.JPG", imageAttribution: "Photo: Hosousu / Wikimedia Commons (CC BY 4.0)", images: [],
     rating: 4.0, reviewCount: 78,
     catchableFish: [
       { fish: fish("amago"), monthStart: 2, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -329,7 +329,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,200円（1日）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Tamura_jinja_Torii.jpg/960px-Tamura_jinja_Torii.jpg", imageAttribution: "Photo: Yanajin33 / Wikimedia Commons (CC BY-SA 3.0)", images: [],
     rating: 3.6, reviewCount: 56, googleRating: 2.7, googleReviewCount: 3,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -380,7 +380,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日）",
     hasParking: true, parkingDetail: "あゆ公園に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: true,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Kojo%2C_Yabu%2C_Hyogo_Prefecture_667-0114%2C_Japan_-_panoramio.jpg/960px-Kojo%2C_Yabu%2C_Hyogo_Prefecture_667-0114%2C_Japan_-_panoramio.jpg", imageAttribution: "Photo: kiwa dokokano / Wikimedia Commons (CC BY-SA 3.0)", images: [],
     rating: 3.9, reviewCount: 98,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -405,7 +405,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/58/%E6%9D%89%E5%8E%9F%E5%B7%9D_%EF%BC%8F_%E8%A5%BF%E8%84%87%E5%B8%82_-_panoramio.jpg/960px-%E6%9D%89%E5%8E%9F%E5%B7%9D_%EF%BC%8F_%E8%A5%BF%E8%84%87%E5%B8%82_-_panoramio.jpg", imageAttribution: "Photo: shikabane taro / Wikimedia Commons (CC BY 3.0)", images: [],
     rating: 3.6, reviewCount: 67,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -430,7 +430,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,600円（1日）",
     hasParking: true, parkingDetail: "入渓ポイント近くに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/92/%E6%8F%96%E4%BF%9D%E5%B7%9D_Ibogawa_Riv._-_panoramio.jpg/960px-%E6%8F%96%E4%BF%9D%E5%B7%9D_Ibogawa_Riv._-_panoramio.jpg", imageAttribution: "Photo: iloverjoa / Wikimedia Commons (CC BY 3.0)", images: [],
     rating: 4.0, reviewCount: 78,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -479,7 +479,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,000〜2,500円（漁協により異なる）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/%E7%89%A1%E4%B8%B9%E5%B2%A9_-_panoramio.jpg/960px-%E7%89%A1%E4%B8%B9%E5%B2%A9_-_panoramio.jpg", imageAttribution: "Photo: helohelon / Wikimedia Commons (CC BY-SA 3.0)", images: [],
     rating: 4.3, reviewCount: 112,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -504,7 +504,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人3,500円（1日）",
     hasParking: true, parkingDetail: "天川村各所に駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/69/Oominesanji_stairs.jpg/960px-Oominesanji_stairs.jpg", imageAttribution: "Photo: Tim Notari from Tanabe-Shi Wakayama-Ken, Japan / Wikimedia Commons (CC BY-SA 2.0)", images: [],
     rating: 4.4, reviewCount: 167, googleRating: 3, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -528,7 +528,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,500円（1日）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/Sasa-no-taki.jpg/960px-Sasa-no-taki.jpg", imageAttribution: "Photo: S Shinohal / Wikimedia Commons (CC BY-SA 3.0)", images: [],
     rating: 4.2, reviewCount: 98, googleRating: 5, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -552,7 +552,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日）",
     hasParking: true, parkingDetail: "入渓ポイント近くに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/2/27/2010-4-25_-_panoramio_-_ys1979_%2810%29.jpg", imageAttribution: "Photo: ys1979 / Wikimedia Commons (CC BY 3.0)", images: [],
     rating: 4.0, reviewCount: 89, googleRating: 3.9, googleReviewCount: 33,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -576,7 +576,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: true,
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/%E8%88%8A%E8%A5%BF%E6%A2%9D%E6%A9%8B_Ky%C5%AB-saij%C5%8D-bashi_2013.2.10_-_panoramio.jpg/960px-%E8%88%8A%E8%A5%BF%E6%A2%9D%E6%A9%8B_Ky%C5%AB-saij%C5%8D-bashi_2013.2.10_-_panoramio.jpg", imageAttribution: "Photo: Nankou Oronain (as36… / Wikimedia Commons (CC BY-SA 3.0)", images: [],
     rating: 3.2, reviewCount: 45,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -601,7 +601,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
     hasParking: true, parkingDetail: "丸岡城周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Maruoka_Castle_%E4%B8%B8%E5%B2%A1%E5%9F%8E5_-_panoramio.jpg/960px-Maruoka_Castle_%E4%B8%B8%E5%B2%A1%E5%9F%8E5_-_panoramio.jpg", imageAttribution: "Photo: baggio4ever / Wikimedia Commons (CC BY 3.0)", images: [],
     rating: 3.4, reviewCount: 45,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -626,7 +626,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日）",
     hasParking: true, parkingDetail: "河川敷に広大な駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d6/Nakanoshinmachi%2C_Toyama%2C_Toyama_Prefecture_939-8085%2C_Japan_-_panoramio_%281%29.jpg/960px-Nakanoshinmachi%2C_Toyama%2C_Toyama_Prefecture_939-8085%2C_Japan_-_panoramio_%281%29.jpg", imageAttribution: "Photo: kiwa dokokano / Wikimedia Commons (CC BY-SA 3.0)", images: [],
     rating: 4.1, reviewCount: 145, googleRating: 3.9, googleReviewCount: 33,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -652,7 +652,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Horaisan-Niomon.JPG/960px-Horaisan-Niomon.JPG", imageAttribution: "Photo: Yanajin33 / Wikimedia Commons (CC BY-SA 3.0)", images: [],
     rating: 3.8, reviewCount: 89, googleRating: 3.9, googleReviewCount: 25,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },

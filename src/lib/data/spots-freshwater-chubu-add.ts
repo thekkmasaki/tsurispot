@@ -80,7 +80,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "河川敷に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/%E5%A4%A7%E6%A9%8B%E7%89%A7%E5%A0%B4_-_panoramio.jpg/960px-%E5%A4%A7%E6%A9%8B%E7%89%A7%E5%A0%B4_-_panoramio.jpg", imageAttribution: "Photo: Sato S / Wikimedia Commons (CC BY-SA 3.0)", images: [],
     rating: 4.1, reviewCount: 156, googleRating: 4.1, googleReviewCount: 111,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -106,7 +106,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,800円（1日）",
     hasParking: true, parkingDetail: "入渓ポイント近くに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ce/ISS043-E-245166_-_View_of_Earth.jpg/960px-ISS043-E-245166_-_View_of_Earth.jpg", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. Johnson Space Center / Wikimedia Commons (Public domain)", images: [],
     rating: 4.3, reviewCount: 89, googleRating: 3.7, googleReviewCount: 47,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -178,7 +178,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,200円（1日）",
     hasParking: true, parkingDetail: "香嵐渓周辺に有料駐車場あり（500円/日）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/%E9%A6%99%E5%B5%90%E6%B8%93%E3%83%A9%E3%82%A4%E3%83%88%E3%82%A2%E3%83%83%E3%83%97_%28%E6%84%9B%E7%9F%A5%E7%9C%8C%E8%B1%8A%E7%94%B0%E5%B8%82%E8%B6%B3%E5%8A%A9%E7%94%BA%29_-_panoramio_-_gundam2345.jpg/960px-%E9%A6%99%E5%B5%90%E6%B8%93%E3%83%A9%E3%82%A4%E3%83%88%E3%82%A2%E3%83%83%E3%83%97_%28%E6%84%9B%E7%9F%A5%E7%9C%8C%E8%B1%8A%E7%94%B0%E5%B8%82%E8%B6%B3%E5%8A%A9%E7%94%BA%29_-_panoramio_-_gundam2345.jpg", imageAttribution: "Photo: gundam2345 / Wikimedia Commons (CC BY 3.0)", images: [],
     rating: 3.9, reviewCount: 89, googleRating: 4.6, googleReviewCount: 7,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -203,7 +203,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/%E7%86%8A%E9%87%8E%E8%A1%97%E9%81%93_-_panoramio_%281%29.jpg/960px-%E7%86%8A%E9%87%8E%E8%A1%97%E9%81%93_-_panoramio_%281%29.jpg", imageAttribution: "Photo: Mamusi Taka / Wikimedia Commons (CC BY-SA 3.0)", images: [],
     rating: 4.1, reviewCount: 92, googleRating: 3, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -228,7 +228,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Toyama_Freight_Station.jpg/960px-Toyama_Freight_Station.jpg", imageAttribution: "Photo: 赤座 / Wikimedia Commons (CC BY-SA 4.0)", images: [],
     rating: 4.0, reviewCount: 98, googleRating: 3.7, googleReviewCount: 3,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
@@ -253,7 +253,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/%E7%99%BD%E5%B1%B1_-_panoramio_%282%29.jpg/960px-%E7%99%BD%E5%B1%B1_-_panoramio_%282%29.jpg", imageAttribution: "Photo: クハ４１９－５ / Wikimedia Commons (CC BY-SA 3.0)", images: [],
     rating: 4.1, reviewCount: 112,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -326,7 +326,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,200円（1日）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c8/View_of_Route_152_and_473.jpg/960px-View_of_Route_152_and_473.jpg", imageAttribution: "Photo: Nikm / Wikimedia Commons (Public domain)", images: [],
     rating: 3.8, reviewCount: 56,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -396,7 +396,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Ninjadera.jpg/960px-Ninjadera.jpg", imageAttribution: "Photo: Photo by Haruyuki Mase 間瀬晴之_撮影 / Wikimedia Commons (CC BY 3.0)", images: [],
     rating: 3.5, reviewCount: 78, googleRating: 4.8, googleReviewCount: 14,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -420,7 +420,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,200円（1日）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/ca/%E8%B6%8A%E5%89%8D%E5%A4%A7%E9%87%8E%E5%9F%8E2_-_panoramio.jpg/960px-%E8%B6%8A%E5%89%8D%E5%A4%A7%E9%87%8E%E5%9F%8E2_-_panoramio.jpg", imageAttribution: "Photo: baggio4ever / Wikimedia Commons (CC BY 3.0)", images: [],
     rating: 3.7, reviewCount: 56, googleRating: 3, googleReviewCount: 3,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -444,7 +444,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Louvre_Sculpture_Museum%2C_Mie.jpg/960px-Louvre_Sculpture_Museum%2C_Mie.jpg", imageAttribution: "Photo: Miyuki Meinaka / Wikimedia Commons (CC BY-SA 4.0)", images: [],
     rating: 3.6, reviewCount: 67, googleRating: 3.7, googleReviewCount: 23,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
