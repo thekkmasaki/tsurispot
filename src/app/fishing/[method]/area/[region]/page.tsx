@@ -7,6 +7,7 @@ import {
   ChevronRight,
   Star,
   Navigation,
+  HelpCircle,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -105,6 +106,30 @@ export default async function MethodRegionPage({ params }: Props) {
     prefCounts.set(pref, (prefCounts.get(pref) ?? 0) + 1);
   }
 
+  const pageUrl = `https://tsurispot.com/fishing/${method.slug}/area/${region.slug}`;
+  const title = `${region.name}の${method.name}スポット一覧`;
+  const description = `${region.name}地方で${method.name}ができる釣りスポットを一覧で紹介。各スポットの基本情報、釣れる魚、アクセス情報を掲載。${region.name}で${method.name}を楽しむならツリスポ。`;
+
+  // FAQ データ
+  const faqItems = [
+    {
+      question: `${region.name}で${method.name}ができるスポットは何件ありますか？`,
+      answer: spots.length > 0
+        ? `現在、${region.name}地方で${method.name}ができるスポットは${spots.length}件掲載しています。${prefCounts.size > 1 ? `${Array.from(prefCounts.entries()).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([p, c]) => `${p}（${c}件）`).join("、")}などにスポットがあります。` : ""}`
+        : `現在、${region.name}地方の${method.name}スポットは準備中です。随時追加しています。`,
+    },
+    {
+      question: `${region.name}で${method.name}をするのに初心者でも大丈夫ですか？`,
+      answer: `はい、${region.name}には初心者向けの${method.name}スポットもあります。${method.description}各スポットページで難易度を確認できるので、「初心者向け」のスポットから始めるのがおすすめです。`,
+    },
+    {
+      question: `${region.name}の${method.name}で釣れる魚は何ですか？`,
+      answer: spots.length > 0
+        ? `${region.name}の${method.name}では、${[...new Set(spots.flatMap((s) => s.matchingFishNames))].slice(0, 6).join("・")}などが釣れます。スポットや時期によって釣れる魚種は異なりますので、各スポットの詳細ページをご確認ください。`
+        : `${region.name}の${method.name}スポット情報は現在準備中です。詳しくは各スポットページをご確認ください。`,
+    },
+  ];
+
   // JSON-LD
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -119,22 +144,63 @@ export default async function MethodRegionPage({ params }: Props) {
       {
         "@type": "ListItem",
         position: 2,
-        name: "釣り方×月別ガイド",
+        name: "釣り方一覧",
         item: "https://tsurispot.com/fishing",
       },
       {
         "@type": "ListItem",
         position: 3,
-        name: `${method.name}`,
+        name: method.name,
         item: `https://tsurispot.com/fishing/${method.slug}`,
       },
       {
         "@type": "ListItem",
         position: 4,
-        name: `${region.name}`,
-        item: `https://tsurispot.com/fishing/${method.slug}/area/${region.slug}`,
+        name: `${region.name}の${method.name}`,
+        item: pageUrl,
       },
     ],
+  };
+
+  const articleJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: title,
+    description,
+    datePublished: "2025-01-01",
+    dateModified: new Date().toISOString().split("T")[0],
+    author: {
+      "@type": "Person",
+      name: "正木 家康",
+      jobTitle: "編集長",
+      url: "https://tsurispot.com/about",
+    },
+    publisher: {
+      "@type": "Organization",
+      name: "ツリスポ",
+      url: "https://tsurispot.com",
+      logo: {
+        "@type": "ImageObject",
+        url: "https://tsurispot.com/logo.svg",
+      },
+    },
+    mainEntityOfPage: {
+      "@type": "WebPage",
+      "@id": pageUrl,
+    },
+  };
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
   };
 
   const itemListJsonLd = spots.length > 0 ? {
@@ -150,7 +216,7 @@ export default async function MethodRegionPage({ params }: Props) {
     })),
   } : null;
 
-  const jsonLdArray = [breadcrumbJsonLd, ...(itemListJsonLd ? [itemListJsonLd] : [])];
+  const jsonLdArray = [breadcrumbJsonLd, articleJsonLd, faqJsonLd, ...(itemListJsonLd ? [itemListJsonLd] : [])];
 
   return (
     <>
@@ -165,9 +231,9 @@ export default async function MethodRegionPage({ params }: Props) {
         <Breadcrumb
           items={[
             { label: "ホーム", href: "/" },
-            { label: "釣り方×月別ガイド", href: "/fishing" },
+            { label: "釣り方一覧", href: "/fishing" },
             { label: method.name, href: `/fishing/${method.slug}` },
-            { label: region.name },
+            { label: `${region.name}の${method.name}` },
           ]}
         />
 
@@ -332,6 +398,28 @@ export default async function MethodRegionPage({ params }: Props) {
                   </CardContent>
                 </Card>
               </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* よくある質問 */}
+        <section className="mb-10">
+          <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+            <HelpCircle className="size-5" />
+            {region.name}の{method.name}に関するよくある質問
+          </h2>
+          <div className="space-y-4">
+            {faqItems.map((item, idx) => (
+              <Card key={idx}>
+                <CardContent className="p-4">
+                  <h3 className="font-bold text-sm sm:text-base mb-2">
+                    Q. {item.question}
+                  </h3>
+                  <p className="text-sm text-gray-700 dark:text-gray-300">
+                    A. {item.answer}
+                  </p>
+                </CardContent>
+              </Card>
             ))}
           </div>
         </section>
