@@ -27,6 +27,7 @@ import {
   Target,
   BarChart3,
   Shield,
+  Navigation,
 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { SpotImage, FishImage } from "@/components/ui/spot-image";
@@ -524,13 +525,13 @@ export default function Home() {
               </span>
             </div>
           </Link>
-          <Link href="/recommendation">
+          <Link href="/fishing-spots/near-me">
             <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-amber-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
               <div className="flex size-10 items-center justify-center rounded-full bg-amber-100 sm:size-12">
-                <Compass className="size-5 text-amber-600 sm:size-6" />
+                <Navigation className="size-5 text-amber-600 sm:size-6" />
               </div>
               <span className="text-center text-[11px] font-medium leading-tight sm:text-xs">
-                今週の診断
+                近くの釣り場
               </span>
             </div>
           </Link>
