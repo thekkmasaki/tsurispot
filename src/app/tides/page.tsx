@@ -857,10 +857,10 @@ export default function TidesPage() {
                   </div>
                   <div>
                     <p className="font-semibold text-sm">
-                      今日のおすすめスポット
+                      今週どこ行こうかな？
                     </p>
                     <p className="text-xs text-gray-500 mt-0.5">
-                      潮回りも考慮した最適な釣り場を提案
+                      日付・潮回りも考慮した最適な釣り場を提案
                     </p>
                   </div>
                   <ChevronRight className="size-4 text-gray-400 ml-auto" />
