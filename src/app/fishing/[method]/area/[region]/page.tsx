@@ -40,32 +40,46 @@ export async function generateStaticParams() {
   return params;
 }
 
+interface SpotSummary {
+  slug: string;
+  name: string;
+  address: string;
+  rating: number;
+  difficulty: FishingSpot["difficulty"];
+  prefecture: string;
+  matchingFishCount: number;
+  matchingFishNames: string[];
+}
+
 function getSpotsForMethodAndRegion(
   method: FishingMethodDef,
   regionGroup: RegionGroup
-): (FishingSpot & { matchingFishCount: number; matchingFishNames: string[] })[] {
-  const prefs = regionGroup.prefectures;
-  return fishingSpots
-    .filter(
-      (spot) =>
-        prefs.includes(spot.region.prefecture) &&
-        spot.catchableFish.some((cf) => method.methods.includes(cf.method))
-    )
-    .map((spot) => {
-      const matchingFish = spot.catchableFish.filter((cf) =>
-        method.methods.includes(cf.method)
-      );
-      return {
-        ...spot,
-        matchingFishCount: matchingFish.length,
-        matchingFishNames: matchingFish.slice(0, 4).map((cf) => cf.fish.name),
-      };
-    })
-    .sort((a, b) => {
-      if (b.matchingFishCount !== a.matchingFishCount)
-        return b.matchingFishCount - a.matchingFishCount;
-      return b.rating - a.rating;
+): { spots: SpotSummary[]; totalCount: number } {
+  const prefs = new Set(regionGroup.prefectures);
+  const filtered: SpotSummary[] = [];
+  for (const spot of fishingSpots) {
+    if (!prefs.has(spot.region.prefecture)) continue;
+    const matchingFish = spot.catchableFish.filter((cf) =>
+      method.methods.includes(cf.method)
+    );
+    if (matchingFish.length === 0) continue;
+    filtered.push({
+      slug: spot.slug,
+      name: spot.name,
+      address: spot.address,
+      rating: spot.rating,
+      difficulty: spot.difficulty,
+      prefecture: spot.region.prefecture,
+      matchingFishCount: matchingFish.length,
+      matchingFishNames: matchingFish.slice(0, 4).map((cf) => cf.fish.name),
     });
+  }
+  filtered.sort((a, b) => {
+    if (b.matchingFishCount !== a.matchingFishCount)
+      return b.matchingFishCount - a.matchingFishCount;
+    return b.rating - a.rating;
+  });
+  return { spots: filtered.slice(0, 50), totalCount: filtered.length };
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
@@ -99,11 +113,10 @@ export default async function MethodRegionPage({ params }: Props) {
   const region = getRegionGroupBySlug(regionSlug);
   if (!method || !region) notFound();
 
-  const spots = getSpotsForMethodAndRegion(method, region);
+  const { spots, totalCount } = getSpotsForMethodAndRegion(method, region);
   const prefCounts = new Map<string, number>();
   for (const spot of spots) {
-    const pref = spot.region.prefecture;
-    prefCounts.set(pref, (prefCounts.get(pref) ?? 0) + 1);
+    prefCounts.set(spot.prefecture, (prefCounts.get(spot.prefecture) ?? 0) + 1);
   }
 
   const pageUrl = `https://tsurispot.com/fishing/${method.slug}/area/${region.slug}`;
@@ -114,8 +127,8 @@ export default async function MethodRegionPage({ params }: Props) {
   const faqItems = [
     {
       question: `${region.name}で${method.name}ができるスポットは何件ありますか？`,
-      answer: spots.length > 0
-        ? `現在、${region.name}地方で${method.name}ができるスポットは${spots.length}件掲載しています。${prefCounts.size > 1 ? `${Array.from(prefCounts.entries()).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([p, c]) => `${p}（${c}件）`).join("、")}などにスポットがあります。` : ""}`
+      answer: totalCount > 0
+        ? `現在、${region.name}地方で${method.name}ができるスポットは${totalCount}件掲載しています。${prefCounts.size > 1 ? `${Array.from(prefCounts.entries()).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([p, c]) => `${p}（${c}件）`).join("、")}などにスポットがあります。` : ""}`
         : `現在、${region.name}地方の${method.name}スポットは準備中です。随時追加しています。`,
     },
     {
@@ -124,7 +137,7 @@ export default async function MethodRegionPage({ params }: Props) {
     },
     {
       question: `${region.name}の${method.name}で釣れる魚は何ですか？`,
-      answer: spots.length > 0
+      answer: totalCount > 0
         ? `${region.name}の${method.name}では、${[...new Set(spots.flatMap((s) => s.matchingFishNames))].slice(0, 6).join("・")}などが釣れます。スポットや時期によって釣れる魚種は異なりますので、各スポットの詳細ページをご確認ください。`
         : `${region.name}の${method.name}スポット情報は現在準備中です。詳しくは各スポットページをご確認ください。`,
     },
@@ -203,11 +216,11 @@ export default async function MethodRegionPage({ params }: Props) {
     })),
   };
 
-  const itemListJsonLd = spots.length > 0 ? {
+  const itemListJsonLd = totalCount > 0 ? {
     "@context": "https://schema.org",
     "@type": "ItemList",
     name: `${region.name}の${method.name}スポット`,
-    numberOfItems: spots.length,
+    numberOfItems: totalCount,
     itemListElement: spots.slice(0, 20).map((spot, idx) => ({
       "@type": "ListItem",
       position: idx + 1,
@@ -242,7 +255,7 @@ export default async function MethodRegionPage({ params }: Props) {
           <h1 className="text-2xl sm:text-3xl font-bold mb-3">
             {region.name}の{method.name}スポット一覧
             <span className="block text-base sm:text-lg font-normal text-gray-600 mt-1">
-              {spots.length}件のスポットが見つかりました
+              {totalCount}件のスポットが見つかりました
             </span>
           </h1>
 
@@ -257,7 +270,7 @@ export default async function MethodRegionPage({ params }: Props) {
               <p className="text-sm text-gray-700 dark:text-gray-300">
                 {region.name}地方で{method.name}ができるスポットをまとめました。
                 {spots.length > 0
-                  ? `${spots.length}件のスポットで${method.name}を楽しめます。`
+                  ? `${totalCount}件のスポットで${method.name}を楽しめます。`
                   : `現在、${method.name}ができるスポットデータは準備中です。`}
               </p>
             </CardContent>
@@ -355,6 +368,18 @@ export default async function MethodRegionPage({ params }: Props) {
                   </Card>
                 </Link>
               ))}
+              {totalCount > 50 && (
+                <Card className="border-dashed">
+                  <CardContent className="p-4 text-center text-sm text-gray-500">
+                    全{totalCount}件中、上位50件を表示しています。
+                    すべてのスポットは
+                    <Link href="/spots" className="text-blue-600 hover:underline mx-1">
+                      スポット一覧
+                    </Link>
+                    から検索できます。
+                  </CardContent>
+                </Card>
+              )}
             </div>
           )}
         </section>
