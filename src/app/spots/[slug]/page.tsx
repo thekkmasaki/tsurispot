@@ -447,8 +447,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
   );
 
   // 県内スポット数（信頼性指標用）
-  const prefSpots = getSpotsByPrefecture(spot.region.prefecture);
-  const prefSpotCount = prefSpots.length;
+  const prefSpotCount = fishingSpots.filter((s) => s.region.prefecture === spot.region.prefecture).length;
 
   // Get nearby tackle shops
   const nearbyShops = getShopsForSpot(spot.slug);

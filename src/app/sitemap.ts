@@ -237,7 +237,7 @@ export default async function sitemap({
       // 釣り方×地域ページ
       ...FISHING_METHODS.flatMap((method) =>
         REGION_GROUPS.map((region) => ({
-          url: `${baseUrl}/fishing/${method.slug}/${region.slug}`,
+          url: `${baseUrl}/fishing/${method.slug}/area/${region.slug}`,
           lastModified: contentDate,
           changeFrequency: "monthly" as const,
           priority: 0.6,

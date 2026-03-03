@@ -19,7 +19,6 @@ import {
 import {
   REGION_GROUPS,
   getRegionGroupBySlug,
-  getRegionPrefectures,
   type RegionGroup,
 } from "@/lib/data/regions-group";
 import { fishingSpots } from "@/lib/data/spots";
@@ -30,9 +29,6 @@ interface Props {
   params: Promise<{ method: string; region: string }>;
 }
 
-// regionのslugはMONTHS slugとは明確に異なるため衝突しない
-// region: hokkaido, tohoku, kanto, chubu, kinki, chugoku, shikoku, kyushu
-// month: january, february, ... december
 export async function generateStaticParams() {
   const params: { method: string; region: string }[] = [];
   for (const method of FISHING_METHODS) {
@@ -87,11 +83,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       title,
       description,
       type: "article",
-      url: `https://tsurispot.com/fishing/${method.slug}/${region.slug}`,
+      url: `https://tsurispot.com/fishing/${method.slug}/area/${region.slug}`,
       siteName: "ツリスポ",
     },
     alternates: {
-      canonical: `https://tsurispot.com/fishing/${method.slug}/${region.slug}`,
+      canonical: `https://tsurispot.com/fishing/${method.slug}/area/${region.slug}`,
     },
   };
 }
@@ -136,7 +132,7 @@ export default async function MethodRegionPage({ params }: Props) {
         "@type": "ListItem",
         position: 4,
         name: `${region.name}`,
-        item: `https://tsurispot.com/fishing/${method.slug}/${region.slug}`,
+        item: `https://tsurispot.com/fishing/${method.slug}/area/${region.slug}`,
       },
     ],
   };
@@ -306,7 +302,7 @@ export default async function MethodRegionPage({ params }: Props) {
             {REGION_GROUPS.filter((r) => r.slug !== region.slug).map((r) => (
               <Link
                 key={r.slug}
-                href={`/fishing/${method.slug}/${r.slug}`}
+                href={`/fishing/${method.slug}/area/${r.slug}`}
               >
                 <Card className="hover:shadow-md transition-shadow">
                   <CardContent className="p-3 text-center">
@@ -325,7 +321,7 @@ export default async function MethodRegionPage({ params }: Props) {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {FISHING_METHODS.filter((m) => m.slug !== method.slug).map((m) => (
-              <Link key={m.slug} href={`/fishing/${m.slug}/${region.slug}`}>
+              <Link key={m.slug} href={`/fishing/${m.slug}/area/${region.slug}`}>
                 <Card className="hover:shadow-md transition-shadow">
                   <CardContent className="p-3 flex items-center gap-2">
                     <span className="text-lg">{m.icon}</span>
