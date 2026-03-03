@@ -608,6 +608,48 @@ export default async function FishDetailPage({ params }: PageProps) {
         ) : null;
       })()}
 
+      {/* この魚が釣れる都道府県ガイドへのリンク */}
+      {fish.spots.length > 0 && (() => {
+        const prefGuideMap = new Map<string, { prefSlug: string; prefName: string; count: number }>();
+        for (const spot of fish.spots) {
+          const pref = getPrefectureByName(spot.region.prefecture);
+          if (pref) {
+            const existing = prefGuideMap.get(pref.slug);
+            if (existing) existing.count++;
+            else prefGuideMap.set(pref.slug, { prefSlug: pref.slug, prefName: pref.name, count: 1 });
+          }
+        }
+        const prefGuideList = Array.from(prefGuideMap.values()).sort((a, b) => b.count - a.count);
+        return prefGuideList.length > 0 ? (
+          <section className="mb-6 sm:mb-8">
+            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
+              <BookOpen className="size-5 text-primary" />
+              {fish.name}が釣れる都道府県の釣りガイド
+            </h2>
+            <p className="mb-3 text-xs text-muted-foreground sm:text-sm">
+              {fish.name}が釣れる各都道府県の釣り情報・おすすめスポットを見る
+            </p>
+            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+              {prefGuideList.slice(0, 12).map(p => (
+                <Link key={p.prefSlug} href={`/prefecture/${p.prefSlug}`}>
+                  <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                    <CardContent className="flex items-center justify-between p-3">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <MapPin className="size-4 shrink-0 text-blue-500" />
+                        <span className="text-sm font-medium group-hover:text-primary truncate">{p.prefName}</span>
+                      </div>
+                      <Badge variant="secondary" className="shrink-0 text-xs">
+                        {p.count}箇所
+                      </Badge>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          </section>
+        ) : null;
+      })()}
+
       {/* この魚の狙い方 */}
       {fish.fishingMethods && fish.fishingMethods.length > 0 && (
         <section className="mb-6 sm:mb-8">

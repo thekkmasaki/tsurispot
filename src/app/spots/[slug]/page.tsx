@@ -19,6 +19,8 @@ import {
   Shield,
   Navigation2,
   HelpCircle,
+  BookOpen,
+  Scale,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -1209,6 +1211,56 @@ export default async function SpotDetailPage({ params }: PageProps) {
           ))}
         </div>
       </section>
+
+      {/* 都道府県ガイド・釣りルールリンク */}
+      {(() => {
+        const pref = getPrefectureByName(spot.region.prefecture);
+        if (!pref) return null;
+        return (
+          <section className="mt-8 sm:mt-12">
+            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+              <BookOpen className="size-5" />
+              {spot.region.prefecture}の釣り情報
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Link href={`/prefecture/${pref.slug}`}>
+                <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                  <CardContent className="flex items-center gap-3 p-4">
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-blue-100">
+                      <MapPin className="size-5 text-blue-600" />
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="text-sm font-semibold group-hover:text-primary">
+                        {spot.region.prefecture}の釣りガイド
+                      </h3>
+                      <p className="mt-0.5 text-xs text-muted-foreground">
+                        {spot.region.prefecture}の釣りスポット一覧・おすすめ情報
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+              <Link href={`/fishing-rules/${pref.slug}`}>
+                <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                  <CardContent className="flex items-center gap-3 p-4">
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-amber-100">
+                      <Scale className="size-5 text-amber-600" />
+                    </div>
+                    <div className="min-w-0">
+                      <h3 className="text-sm font-semibold group-hover:text-primary">
+                        {spot.region.prefecture}の釣りルール
+                      </h3>
+                      <p className="mt-0.5 text-xs text-muted-foreground">
+                        {spot.region.prefecture}の釣りに関する規則・禁漁期間
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            </div>
+          </section>
+        );
+      })()}
 
       {/* 最近見たスポット */}
       <RecentlyViewedSpots />
