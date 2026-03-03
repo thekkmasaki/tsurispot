@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import {
   Cloud,
   CloudDrizzle,
@@ -34,16 +34,26 @@ interface SpotWeatherTideProps {
   spotName: string;
 }
 
-interface WeatherData {
-  temperature: number;
+interface DailyWeatherData {
   weatherCode: number;
-  windSpeed: number;
-  windDirection: number;
   maxTemp: number;
   minTemp: number;
   sunrise: string;
   sunset: string;
+  windSpeedMax: number;
+  windDirection: number;
   seaTemp: number | null;
+}
+
+interface WeatherData {
+  // Current (today only)
+  currentTemp: number;
+  currentWeatherCode: number;
+  currentWindSpeed: number;
+  currentWindDirection: number;
+  // Daily forecasts (14 days)
+  daily: DailyWeatherData[];
+  // Warnings (today only)
   warnings: string[];
 }
 
@@ -267,23 +277,54 @@ function FishingScoreBar({ score }: { score: number }) {
   );
 }
 
+// 14日間の日付リストを生成
+function generate14Days(): Date[] {
+  const days: Date[] = [];
+  const today = new Date();
+  for (let i = 0; i < 14; i++) {
+    const d = new Date(today);
+    d.setDate(today.getDate() + i);
+    days.push(d);
+  }
+  return days;
+}
+
+// 曜日ラベル
+const DAY_LABELS = ["日", "月", "火", "水", "木", "金", "土"];
+
 export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  const tideInfo = getTideInfo(getMoonAge(new Date()), lng);
+  // 14日間の日付
+  const dates = generate14Days();
+  const selectedDate = dates[selectedIndex];
+
+  // 選択日の潮汐情報
+  const tideInfo = getTideInfo(getMoonAge(selectedDate), lng);
+
+  // 日付ヘッダーテキスト
+  const getHeaderText = useCallback(() => {
+    if (selectedIndex === 0) return "今日のコンディション";
+    const m = selectedDate.getMonth() + 1;
+    const d = selectedDate.getDate();
+    const dow = DAY_LABELS[selectedDate.getDay()];
+    return `${m}/${d}(${dow})のコンディション`;
+  }, [selectedIndex, selectedDate]);
 
   useEffect(() => {
     async function fetchWeather() {
       try {
-        // 天気API（風向追加）
+        // 天気API（14日間予報）
         const weatherPromise = fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset&timezone=Asia%2FTokyo&forecast_days=1`
+          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,wind_speed_10m_max,wind_direction_10m_dominant&timezone=Asia%2FTokyo&forecast_days=14`
         ).then(r => r.json());
 
-        // 海水温API（Marine API）
+        // 海水温API（Marine API、14日間）
         const marinePromise = fetch(
-          `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lng}&current=sea_surface_temperature&timezone=Asia%2FTokyo`
+          `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lng}&daily=sea_surface_temperature_max&timezone=Asia%2FTokyo&forecast_days=14`
         ).then(r => r.json()).catch(() => null);
 
         // 気象庁警報・注意報API
@@ -291,16 +332,28 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
 
         const [data, marine, warnings] = await Promise.all([weatherPromise, marinePromise, warningPromise]);
 
+        // 14日間のdailyデータを構築
+        const dailyData: DailyWeatherData[] = [];
+        const dailyCount = data.daily?.time?.length ?? 0;
+        for (let i = 0; i < dailyCount; i++) {
+          dailyData.push({
+            weatherCode: data.daily.weather_code[i],
+            maxTemp: data.daily.temperature_2m_max[i],
+            minTemp: data.daily.temperature_2m_min[i],
+            sunrise: data.daily.sunrise[i]?.split("T")[1]?.slice(0, 5) ?? "",
+            sunset: data.daily.sunset[i]?.split("T")[1]?.slice(0, 5) ?? "",
+            windSpeedMax: data.daily.wind_speed_10m_max[i],
+            windDirection: data.daily.wind_direction_10m_dominant[i],
+            seaTemp: marine?.daily?.sea_surface_temperature_max?.[i] ?? null,
+          });
+        }
+
         setWeather({
-          temperature: data.current.temperature_2m,
-          weatherCode: data.current.weather_code,
-          windSpeed: data.current.wind_speed_10m,
-          windDirection: data.current.wind_direction_10m,
-          maxTemp: data.daily.temperature_2m_max[0],
-          minTemp: data.daily.temperature_2m_min[0],
-          sunrise: data.daily.sunrise[0]?.split("T")[1]?.slice(0, 5) ?? "",
-          sunset: data.daily.sunset[0]?.split("T")[1]?.slice(0, 5) ?? "",
-          seaTemp: marine?.current?.sea_surface_temperature ?? null,
+          currentTemp: data.current.temperature_2m,
+          currentWeatherCode: data.current.weather_code,
+          currentWindSpeed: data.current.wind_speed_10m,
+          currentWindDirection: data.current.wind_direction_10m,
+          daily: dailyData,
           warnings,
         });
       } catch {
@@ -312,7 +365,17 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
     fetchWeather();
   }, [lat, lng]);
 
-  const weatherInfo = weather ? getWeatherInfo(weather.weatherCode) : null;
+  // 選択日のデータ取得
+  const isToday = selectedIndex === 0;
+  const dailyData = weather?.daily[selectedIndex] ?? null;
+
+  // 表示用の天気コード・温度・風速
+  const displayWeatherCode = isToday ? weather?.currentWeatherCode ?? dailyData?.weatherCode ?? 0 : dailyData?.weatherCode ?? 0;
+  const displayTemp = isToday ? weather?.currentTemp ?? 0 : null; // 未来日は現在気温なし
+  const displayWindSpeed = isToday ? weather?.currentWindSpeed ?? 0 : dailyData?.windSpeedMax ?? 0; // km/h
+  const displayWindDirection = isToday ? weather?.currentWindDirection ?? 0 : dailyData?.windDirection ?? 0;
+
+  const weatherInfo = weather ? getWeatherInfo(displayWeatherCode) : null;
   const WeatherIcon = weatherInfo?.icon ?? Sun;
 
   return (
@@ -320,10 +383,66 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
       <div className="bg-sky-50 px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
           <ThermometerSun className="h-5 w-5 text-sky-600" />
-          <h3 className="font-bold text-sm">今日のコンディション</h3>
+          <h3 className="font-bold text-sm">{getHeaderText()}</h3>
         </div>
         <FishingScoreBar score={tideInfo.fishingScore} />
       </div>
+
+      {/* 14日間の日付セレクター */}
+      <div
+        ref={scrollRef}
+        className="flex gap-1 px-3 py-2 overflow-x-auto border-b scrollbar-hide"
+        style={{ WebkitOverflowScrolling: "touch" }}
+      >
+        {dates.map((date, i) => {
+          const dayOfWeek = date.getDay();
+          const isSat = dayOfWeek === 6;
+          const isSun = dayOfWeek === 0;
+          const isSelected = i === selectedIndex;
+          const dayNum = date.getDate();
+          const dowLabel = DAY_LABELS[dayOfWeek];
+
+          return (
+            <button
+              key={i}
+              onClick={() => setSelectedIndex(i)}
+              className={cn(
+                "flex-shrink-0 flex flex-col items-center justify-center rounded-lg px-2 py-1.5 min-w-[40px] transition-colors",
+                isSelected
+                  ? "bg-sky-600 text-white"
+                  : "bg-gray-100 hover:bg-gray-200",
+                !isSelected && isSat && "text-blue-600",
+                !isSelected && isSun && "text-red-600",
+              )}
+            >
+              {i === 0 ? (
+                <>
+                  <span className="text-[10px] font-medium leading-tight">今日</span>
+                  <span className={cn(
+                    "text-xs font-bold leading-tight",
+                    isSelected ? "text-white" : isSat ? "text-blue-600" : isSun ? "text-red-600" : ""
+                  )}>
+                    {dayNum}
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className={cn(
+                    "text-[10px] leading-tight",
+                    isSelected ? "text-white/80" : ""
+                  )}>
+                    {dowLabel}
+                  </span>
+                  <span className="text-xs font-bold leading-tight">
+                    {dayNum}
+                  </span>
+                </>
+              )}
+            </button>
+          );
+        })}
+      </div>
+
       <CardContent className="p-4">
         <div className="grid grid-cols-2 gap-4">
           {/* 天気セクション */}
@@ -337,42 +456,59 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
                 <div className="h-8 w-20 rounded bg-gray-200" />
                 <div className="h-4 w-16 rounded bg-gray-200" />
               </div>
-            ) : weather ? (
+            ) : weather && dailyData ? (
               <div className="space-y-2">
                 <div className="flex items-center gap-2">
                   <WeatherIcon className={cn("h-8 w-8", weatherInfo?.color)} />
                   <div>
-                    <div className="text-2xl font-bold">{weather.temperature}°</div>
-                    <div className="text-xs text-muted-foreground">{weatherInfo?.label}</div>
+                    {isToday ? (
+                      <>
+                        <div className="text-2xl font-bold">{displayTemp}°</div>
+                        <div className="text-xs text-muted-foreground">{weatherInfo?.label}</div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="text-lg font-bold">
+                          {dailyData.minTemp}°〜{dailyData.maxTemp}°
+                        </div>
+                        <div className="text-xs text-muted-foreground">{weatherInfo?.label}</div>
+                      </>
+                    )}
                   </div>
                 </div>
                 <div className="space-y-1 text-xs text-muted-foreground">
-                  <div className="flex items-center gap-1.5">
-                    <ThermometerSun className="h-3 w-3" />
-                    <span>気温 {weather.minTemp}〜{weather.maxTemp}°C</span>
-                  </div>
-                  {weather.seaTemp !== null && (
+                  {isToday && (
+                    <div className="flex items-center gap-1.5">
+                      <ThermometerSun className="h-3 w-3" />
+                      <span>気温 {dailyData.minTemp}〜{dailyData.maxTemp}°C</span>
+                    </div>
+                  )}
+                  {dailyData.seaTemp !== null && (
                     <div className="flex items-center gap-1.5">
                       <ThermometerSnowflake className="h-3 w-3 text-cyan-500" />
-                      <span className="font-medium text-cyan-700">水温 {weather.seaTemp.toFixed(1)}°C</span>
+                      <span className="font-medium text-cyan-700">水温 {dailyData.seaTemp.toFixed(1)}°C</span>
                     </div>
                   )}
                   <div className="flex items-center gap-1.5">
                     <Navigation
                       className="h-3 w-3 text-sky-500"
-                      style={{ transform: `rotate(${getWindRotation(weather.windDirection)}deg)` }}
+                      style={{ transform: `rotate(${getWindRotation(displayWindDirection)}deg)` }}
                     />
-                    <span>風向 {getWindDirectionLabel(weather.windDirection)}</span>
+                    <span>風向 {getWindDirectionLabel(displayWindDirection)}</span>
                   </div>
                   <div className="flex items-center gap-1.5">
                     <Wind className="h-3 w-3" />
-                    <span>風速 {(weather.windSpeed / 3.6).toFixed(1)}m/s</span>
+                    {isToday ? (
+                      <span>風速 {(displayWindSpeed / 3.6).toFixed(1)}m/s</span>
+                    ) : (
+                      <span>最大風速 {(dailyData.windSpeedMax / 3.6).toFixed(1)}m/s</span>
+                    )}
                   </div>
                   <div className="flex items-center gap-1.5">
                     <Sunrise className="h-3 w-3" />
-                    <span>{weather.sunrise}</span>
+                    <span>{dailyData.sunrise}</span>
                     <Sunset className="h-3 w-3 ml-1" />
-                    <span>{weather.sunset}</span>
+                    <span>{dailyData.sunset}</span>
                   </div>
                 </div>
               </div>
@@ -432,10 +568,14 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
         </div>
 
         {/* 風速警告バナー */}
-        {weather && (() => {
-          const windMs = weather.windSpeed / 3.6;
-          const windChill = calcWindChill(weather.temperature, weather.windSpeed);
-          const tempDiff = Math.round((weather.temperature - windChill) * 10) / 10;
+        {weather && dailyData && (() => {
+          // 今日: 現在の風速で判定、未来: 日別最大風速で判定
+          const windSpeedKmh = isToday ? weather.currentWindSpeed : dailyData.windSpeedMax;
+          const windDir = isToday ? weather.currentWindDirection : dailyData.windDirection;
+          const tempForChill = isToday ? weather.currentTemp : dailyData.maxTemp;
+          const windMs = windSpeedKmh / 3.6;
+          const windChill = calcWindChill(tempForChill, windSpeedKmh);
+          const tempDiff = Math.round((tempForChill - windChill) * 10) / 10;
           const showWindChill = windMs >= 5 && tempDiff > 1;
           const isCold = windChill <= 5;
           const isVeryCold = windChill <= 0;
@@ -456,7 +596,7 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="text-base font-bold mb-1">
-                      危険な風速です -- 釣りは中止してください
+                      {isToday ? "危険な風速です -- 釣りは中止してください" : "危険な風が予想されています -- 釣りは控えてください"}
                     </div>
                     <div className="flex items-center gap-3 mb-2">
                       <div className="flex items-center gap-1.5 bg-white/20 rounded-lg px-2.5 py-1">
@@ -466,15 +606,15 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
                       <div className="flex items-center gap-1">
                         <Navigation
                           className="h-4 w-4"
-                          style={{ transform: `rotate(${getWindRotation(weather.windDirection)}deg)` }}
+                          style={{ transform: `rotate(${getWindRotation(windDir)}deg)` }}
                         />
-                        <span className="text-sm">{getWindDirectionLabel(weather.windDirection)}の風</span>
+                        <span className="text-sm">{getWindDirectionLabel(windDir)}の風</span>
                       </div>
                     </div>
                     <ul className="text-sm space-y-1 list-disc list-inside opacity-90">
                       <li>堤防・テトラポッドは特に危険です</li>
                       <li>高波にも警戒してください</li>
-                      <li>安全な場所に避難し、釣行は中止してください</li>
+                      <li>{isToday ? "安全な場所に避難し、釣行は中止してください" : "この日の釣行は中止してください"}</li>
                     </ul>
                     {showWindChill && (
                       <div className="mt-2 flex items-center gap-1.5 bg-white/15 rounded-lg px-2.5 py-1.5 w-fit">
@@ -498,7 +638,7 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="text-base font-bold mb-1">
-                        釣りに適さない風の強さです
+                        {isToday ? "釣りに適さない風の強さです" : "釣りに適さない風が予想されています"}
                       </div>
                       <div className="flex items-center gap-3 mb-2">
                         <div className="flex items-center gap-1.5 bg-white/20 rounded-lg px-2.5 py-1">
@@ -508,9 +648,9 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
                         <div className="flex items-center gap-1">
                           <Navigation
                             className="h-4 w-4"
-                            style={{ transform: `rotate(${getWindRotation(weather.windDirection)}deg)` }}
+                            style={{ transform: `rotate(${getWindRotation(windDir)}deg)` }}
                           />
-                          <span className="text-sm">{getWindDirectionLabel(weather.windDirection)}の風</span>
+                          <span className="text-sm">{getWindDirectionLabel(windDir)}の風</span>
                         </div>
                       </div>
                       <ul className="text-sm space-y-1 list-disc list-inside opacity-90">
@@ -563,7 +703,7 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="text-sm font-bold text-amber-800 mb-1">
-                        風が強い状況です -- 釣りへの影響あり
+                        {isToday ? "風が強い状況です -- 釣りへの影響あり" : "風が強くなる予報です -- 釣りへの影響あり"}
                       </div>
                       <div className="flex items-center gap-3 mb-2">
                         <div className="flex items-center gap-1.5 bg-amber-100 rounded-lg px-2.5 py-1">
@@ -573,9 +713,9 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
                         <div className="flex items-center gap-1 text-amber-700">
                           <Navigation
                             className="h-3.5 w-3.5"
-                            style={{ transform: `rotate(${getWindRotation(weather.windDirection)}deg)` }}
+                            style={{ transform: `rotate(${getWindRotation(windDir)}deg)` }}
                           />
-                          <span className="text-xs">{getWindDirectionLabel(weather.windDirection)}の風</span>
+                          <span className="text-xs">{getWindDirectionLabel(windDir)}の風</span>
                         </div>
                       </div>
                       <ul className="text-xs text-amber-800 space-y-0.5 list-disc list-inside">
@@ -628,8 +768,10 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
                   <Wind className="h-4 w-4 text-sky-600 flex-shrink-0 mt-0.5" />
                   <div>
                     <div className="flex items-center gap-2 mb-0.5">
-                      <span className="text-xs font-bold text-sky-800">やや風が強い状況です（{windMs.toFixed(1)}m/s）</span>
-                      <span className="text-xs text-sky-600">{getWindDirectionLabel(weather.windDirection)}の風</span>
+                      <span className="text-xs font-bold text-sky-800">
+                        {isToday ? `やや風が強い状況です（${windMs.toFixed(1)}m/s）` : `やや強い風が予想されています（${windMs.toFixed(1)}m/s）`}
+                      </span>
+                      <span className="text-xs text-sky-600">{getWindDirectionLabel(windDir)}の風</span>
                     </div>
                     <p className="text-xs text-sky-700">
                       釣りは可能ですが、仕掛けの調整が必要です。帽子・軽い仕掛けに注意してください。
@@ -648,8 +790,8 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
           return null;
         })()}
 
-        {/* 警報・注意報 */}
-        {weather && weather.warnings.length > 0 && (
+        {/* 警報・注意報（今日のみ表示） */}
+        {isToday && weather && weather.warnings.length > 0 && (
           <div className="mt-3 rounded-lg bg-amber-50 border border-amber-200 px-3 py-2">
             <div className="flex items-center gap-1.5 mb-1">
               <AlertTriangle className="h-3.5 w-3.5 text-amber-600" />
@@ -661,7 +803,7 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
           </div>
         )}
 
-        {weather && weather.warnings.length === 0 && (weather.windSpeed / 3.6) < 5 && (
+        {isToday && weather && weather.warnings.length === 0 && (weather.currentWindSpeed / 3.6) < 5 && (
           <div className="mt-3 rounded-lg bg-emerald-50 border border-emerald-200 px-3 py-2">
             <div className="flex items-center gap-1.5">
               <ShieldAlert className="h-3.5 w-3.5 text-emerald-600" />
