@@ -3712,9 +3712,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r42"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shimotsui-port.jpg", imageAttribution: "Photo: murakami_tak
-
- This photo was taken with iPhone 4 / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/shimotsui-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/shimotsui-port.jpg", imageAttribution: "Photo: murakami_tak / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/shimotsui-port.jpg"],
     rating: 4.0, reviewCount: 87, googleRating: 4.5, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
