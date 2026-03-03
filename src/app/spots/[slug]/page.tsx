@@ -954,6 +954,21 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 </div>
                 <Separator />
                 <ParkingPeakCard parkingPeakInfo={spot.parkingPeakInfo} hasParking={spot.hasParking} parkingDetail={spot.parkingDetail} />
+                <Separator />
+                <div className="rounded-lg border border-sky-200 bg-sky-50 p-3">
+                  <h4 className="mb-1 text-sm font-semibold text-sky-800"><Car className="mr-1 inline size-4" />レンタカーで行く</h4>
+                  <p className="mb-2 text-xs text-sky-700">{spot.name}は車でのアクセスが便利です。周辺のレンタカーを比較・予約できます。</p>
+                  <a
+                    href="https://a.r10.to/hFFHZ3"
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    className="inline-flex items-center gap-1 rounded-md bg-sky-600 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-sky-700"
+                  >
+                    <Navigation2 className="size-3.5" />
+                    楽天レンタカーで探す
+                    <ExternalLink className="size-3" />
+                  </a>
+                </div>
               </CardContent>
             </Card>
           </section>
