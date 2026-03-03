@@ -808,10 +808,13 @@ export default async function SpotDetailPage({ params }: PageProps) {
               {spot.hasConvenienceStore && <Badge variant="outline" className="text-xs"><ShoppingBag className="size-3.5 mr-1" />コンビニ近く</Badge>}
             </div>
           </section>
+          {/* 釣りルール: 個別データがあるスポットのみ表示（推測ルールは誤情報の原因になるため非表示） */}
+          {spot.rules && (
           <section>
             <h2 className="mb-3 flex items-center gap-2 text-lg font-bold"><Shield className="size-5" />釣りルール・禁止事項</h2>
             <SpotRulesCard rules={spot.rules} spotType={spot.spotType} spotName={spot.name} />
           </section>
+          )}
           {spot.spotType === "port" && <PortMannerSection />}
           <section>
             <h2 className="mb-3 text-lg font-bold">混雑予想</h2>
