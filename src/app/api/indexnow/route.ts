@@ -155,7 +155,7 @@ async function collectAllUrls(): Promise<string[]> {
  * 10,000件ずつバッチに分割して送信
  */
 async function submitToIndexNow(urlList: string[]): Promise<{ submitted: number; batches: number; status: number[] }> {
-  const BATCH_SIZE = 10000;
+  const BATCH_SIZE = 500;
   const statuses: number[] = [];
   let batches = 0;
 
@@ -175,6 +175,11 @@ async function submitToIndexNow(urlList: string[]): Promise<{ submitted: number;
     });
 
     statuses.push(response.status);
+
+    // バッチ間に1秒待機（レートリミット対策）
+    if (i + BATCH_SIZE < urlList.length) {
+      await new Promise(resolve => setTimeout(resolve, 1000));
+    }
   }
 
   return { submitted: urlList.length, batches, status: statuses };
