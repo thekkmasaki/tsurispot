@@ -26,6 +26,7 @@ import {
   RotateCcw,
   Map,
   Loader2,
+  CalendarDays,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -108,7 +109,7 @@ function isFishInSeason(
   return { inSeason, isPeak };
 }
 
-// --- スポットの釣れる魚を今月で絞る ---
+// --- スポットの釣れる魚を指定月で絞る ---
 
 function getCatchableFishNow(
   spot: FishingSpot,
@@ -382,7 +383,7 @@ const jsonLd = {
     {
       "@type": "ListItem",
       position: 2,
-      name: "今日どこに行こうかな？",
+      name: "今週どこ行こうかな？",
       item: "https://tsurispot.com/recommendation",
     },
   ],
@@ -443,14 +444,15 @@ const REGION_OPTIONS: RegionOption[] = [
 
 type FishingCategory = "all" | "sea" | "freshwater";
 
-// --- ステップ定義 ---
+// --- ステップ定義（6ステップ） ---
 
 const STEPS = [
-  { id: 1, label: "種類", shortLabel: "種類" },
-  { id: 2, label: "エリア", shortLabel: "エリア" },
-  { id: 3, label: "レベル", shortLabel: "レベル" },
-  { id: 4, label: "同行者", shortLabel: "同行者" },
-  { id: 5, label: "釣りたい魚", shortLabel: "魚" },
+  { id: 1, label: "日付", shortLabel: "日付" },
+  { id: 2, label: "種類", shortLabel: "種類" },
+  { id: 3, label: "エリア", shortLabel: "エリア" },
+  { id: 4, label: "レベル", shortLabel: "レベル" },
+  { id: 5, label: "同行者", shortLabel: "同行者" },
+  { id: 6, label: "釣りたい魚", shortLabel: "魚" },
 ] as const;
 
 // --- 距離計算 ---
@@ -473,13 +475,66 @@ function getDistanceKm(
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
+// --- 日付関連のヘルパー ---
+
+function getDayLabel(date: Date, today: Date): string {
+  const days = ["日", "月", "火", "水", "木", "金", "土"];
+  const diffMs = date.getTime() - today.getTime();
+  const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+
+  const monthDay = `${date.getMonth() + 1}/${date.getDate()}(${days[date.getDay()]})`;
+
+  if (diffDays === 0) return `今日 ${monthDay}`;
+  if (diffDays === 1) return `明日 ${monthDay}`;
+  return monthDay;
+}
+
+function getDateChipStyle(date: Date): string {
+  const day = date.getDay();
+  if (day === 0) return "border-red-300 hover:border-red-500 hover:bg-red-50"; // 日曜
+  if (day === 6) return "border-blue-300 hover:border-blue-500 hover:bg-blue-50"; // 土曜
+  return "border-gray-200 hover:border-orange-400 hover:bg-orange-50"; // 平日
+}
+
+function getDateChipSelectedStyle(date: Date): string {
+  const day = date.getDay();
+  if (day === 0) return "border-red-500 bg-red-50 ring-2 ring-red-300"; // 日曜
+  if (day === 6) return "border-blue-500 bg-blue-50 ring-2 ring-blue-300"; // 土曜
+  return "border-orange-500 bg-orange-50 ring-2 ring-orange-300"; // 平日
+}
+
+function getDateTextColor(date: Date): string {
+  const day = date.getDay();
+  if (day === 0) return "text-red-600";
+  if (day === 6) return "text-blue-600";
+  return "text-gray-700";
+}
+
 // --- メインページ ---
 
 export default function RecommendationPage() {
-  const [today] = useState(() => new Date());
-  const month = today.getMonth() + 1;
-  const moonAge = getMoonAge(today);
-  const tideType = getTideType(moonAge);
+  const [today] = useState(() => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    return d;
+  });
+
+  // 日付選択（8日分生成）
+  const dateOptions = useMemo(() => {
+    const dates: Date[] = [];
+    for (let i = 0; i < 8; i++) {
+      const d = new Date(today);
+      d.setDate(d.getDate() + i);
+      dates.push(d);
+    }
+    return dates;
+  }, [today]);
+
+  // 選択された日付（デフォルトは今日）
+  const [selectedDate, setSelectedDate] = useState<Date>(today);
+  const selectedMonth = selectedDate.getMonth() + 1;
+  const selectedMoonAge = getMoonAge(selectedDate);
+  const selectedTideType = getTideType(selectedMoonAge);
 
   // ウィザード状態
   const [currentStep, setCurrentStep] = useState(1);
@@ -503,7 +558,7 @@ export default function RecommendationPage() {
   // ステップ遷移
   const goToStep = useCallback((step: number) => {
     setCurrentStep(step);
-    if (step === 6) {
+    if (step === 7) {
       setShowResults(true);
     }
   }, []);
@@ -512,15 +567,27 @@ export default function RecommendationPage() {
     setCompletedSteps((prev) => (prev.includes(step) ? prev : [...prev, step]));
   }, []);
 
-  const handleCategorySelect = useCallback(
-    (cat: FishingCategory) => {
-      setFishingCategory(cat);
+  // Step 1: 日付選択
+  const handleDateSelect = useCallback(
+    (date: Date) => {
+      setSelectedDate(date);
       completeStep(1);
       goToStep(2);
     },
     [completeStep, goToStep]
   );
 
+  // Step 2: カテゴリ選択
+  const handleCategorySelect = useCallback(
+    (cat: FishingCategory) => {
+      setFishingCategory(cat);
+      completeStep(2);
+      goToStep(3);
+    },
+    [completeStep, goToStep]
+  );
+
+  // Step 3: エリア選択
   const handleRegionSelect = useCallback(
     (region: RegionGroup) => {
       if (region === "geolocation") {
@@ -534,8 +601,8 @@ export default function RecommendationPage() {
               setSelectedPrefecture(null);
               setShowPrefectureDetail(false);
               setGeoLoading(false);
-              completeStep(2);
-              goToStep(3);
+              completeStep(3);
+              goToStep(4);
             },
             () => {
               setGeoError("位置情報を取得できませんでした");
@@ -554,8 +621,8 @@ export default function RecommendationPage() {
         setSelectedPrefecture(null);
         setShowPrefectureDetail(false);
         setUserLocation(null);
-        completeStep(2);
-        goToStep(3);
+        completeStep(3);
+        goToStep(4);
         return;
       }
       // 地方を選んだら都道府県選択を表示
@@ -571,35 +638,38 @@ export default function RecommendationPage() {
     (prefecture: string | null) => {
       setSelectedPrefecture(prefecture);
       setShowPrefectureDetail(false);
-      completeStep(2);
-      goToStep(3);
-    },
-    [completeStep, goToStep]
-  );
-
-  const handleLevelSelect = useCallback(
-    (level: UserLevel) => {
-      setUserLevel(level);
       completeStep(3);
       goToStep(4);
     },
     [completeStep, goToStep]
   );
 
-  const handleCompanionSelect = useCallback(
-    (comp: Companion) => {
-      setCompanion(comp);
+  // Step 4: レベル選択
+  const handleLevelSelect = useCallback(
+    (level: UserLevel) => {
+      setUserLevel(level);
       completeStep(4);
       goToStep(5);
     },
     [completeStep, goToStep]
   );
 
+  // Step 5: 同行者選択
+  const handleCompanionSelect = useCallback(
+    (comp: Companion) => {
+      setCompanion(comp);
+      completeStep(5);
+      goToStep(6);
+    },
+    [completeStep, goToStep]
+  );
+
+  // Step 6: 魚選択
   const handleFishSelect = useCallback(
     (slug: string | null) => {
       setTargetFishSlug(slug);
-      completeStep(5);
-      goToStep(6);
+      completeStep(6);
+      goToStep(7);
     },
     [completeStep, goToStep]
   );
@@ -608,6 +678,7 @@ export default function RecommendationPage() {
     setCurrentStep(1);
     setCompletedSteps([]);
     setShowResults(false);
+    setSelectedDate(today);
     setFishingCategory("all");
     setSelectedRegion("all");
     setSelectedPrefecture(null);
@@ -617,12 +688,11 @@ export default function RecommendationPage() {
     setTargetFishSlug(null);
     setUserLocation(null);
     setGeoError(null);
-  }, []);
+  }, [today]);
 
-  // 旬の魚リスト（fishSpecies基準）
-  const seasonalFish = useMemo(() => getSeasonalFish(month), [month]);
-  const peakFish = useMemo(() => getPeakFishList(month), [month]);
-  const season = getSeason(month);
+  // 選択された日付ベースの旬の魚リスト
+  const peakFish = useMemo(() => getPeakFishList(selectedMonth), [selectedMonth]);
+  const season = getSeason(selectedMonth);
 
   // カテゴリ＋エリアフィルタリング
   const filteredSpots = useMemo(() => {
@@ -649,7 +719,7 @@ export default function RecommendationPage() {
     );
   }, [fishingCategory, selectedRegion, selectedPrefecture]);
 
-  // スポットデータから今月釣れる魚を動的に収集（fishSpeciesに無い魚も含む）
+  // スポットデータから選択月の釣れる魚を動的に収集
   const spotFishList = useMemo(() => {
     const fishRecord: Record<string, { fish: FishSpecies; isPeak: boolean }> = {};
     for (const spot of filteredSpots) {
@@ -658,9 +728,9 @@ export default function RecommendationPage() {
         const end = cf.monthEnd;
         let inSeason = false;
         if (start <= end) {
-          inSeason = month >= start && month <= end;
+          inSeason = selectedMonth >= start && selectedMonth <= end;
         } else {
-          inSeason = month >= start || month <= end;
+          inSeason = selectedMonth >= start || selectedMonth <= end;
         }
         if (inSeason) {
           if (!fishRecord[cf.fish.slug]) {
@@ -675,12 +745,12 @@ export default function RecommendationPage() {
     const peak = all.filter((f) => f.isPeak).sort((a, b) => a.fish.name.localeCompare(b.fish.name));
     const nonPeak = all.filter((f) => !f.isPeak).sort((a, b) => a.fish.name.localeCompare(b.fish.name));
     return { peak, nonPeak, all };
-  }, [filteredSpots, month]);
+  }, [filteredSpots, selectedMonth]);
 
   // スコアリング＆ソート
   const scoredSpots = useMemo(() => {
     const scored = filteredSpots.map((spot) =>
-      scoreSpot(spot, month, tideType, userLevel, companion, targetFishSlug)
+      scoreSpot(spot, selectedMonth, selectedTideType, userLevel, companion, targetFishSlug)
     );
     scored.sort((a, b) => b.totalScore - a.totalScore);
     // 今月釣れる魚がないスポットは除外
@@ -707,11 +777,15 @@ export default function RecommendationPage() {
       });
     }
     return result;
-  }, [filteredSpots, month, tideType, userLevel, companion, targetFishSlug, selectedRegion, userLocation]);
+  }, [filteredSpots, selectedMonth, selectedTideType, userLevel, companion, targetFishSlug, selectedRegion, userLocation]);
 
   const topSpots = scoredSpots.slice(0, 6);
 
   // 選択済みラベル取得
+  const getDateLabel = () => {
+    const days = ["日", "月", "火", "水", "木", "金", "土"];
+    return `${selectedDate.getMonth() + 1}/${selectedDate.getDate()}(${days[selectedDate.getDay()]})`;
+  };
   const getCategoryLabel = () => {
     const labels: Record<FishingCategory, string> = { all: "すべて", sea: "海釣り", freshwater: "淡水釣り" };
     return labels[fishingCategory];
@@ -741,6 +815,28 @@ export default function RecommendationPage() {
     return `${d.getFullYear()}年${d.getMonth() + 1}月${d.getDate()}日（${days[d.getDay()]}）`;
   };
 
+  // 「この日に行く」ボタンのハンドラ
+  const handleSaveDate = useCallback((spotSlug: string) => {
+    try {
+      const key = "tsurispot-planned-trips";
+      const existing = JSON.parse(localStorage.getItem(key) || "[]");
+      const entry = {
+        spotSlug,
+        date: selectedDate.toISOString().split("T")[0],
+        savedAt: new Date().toISOString(),
+      };
+      // 同じスポット・日付の重複は除く
+      const filtered = existing.filter(
+        (e: { spotSlug: string; date: string }) =>
+          !(e.spotSlug === spotSlug && e.date === entry.date)
+      );
+      filtered.push(entry);
+      localStorage.setItem(key, JSON.stringify(filtered));
+    } catch {
+      // localStorage unavailable
+    }
+  }, [selectedDate]);
+
   return (
     <>
       <script
@@ -753,30 +849,31 @@ export default function RecommendationPage() {
         <section className="bg-gradient-to-r from-orange-500 to-amber-400 text-white">
           <div className="mx-auto max-w-5xl px-4 py-8 sm:py-12">
             <h1 className="text-2xl sm:text-3xl font-bold flex items-center gap-3">
-              <Sparkles className="size-7 sm:size-8" />
-              今日どこに行こうかな？
+              <CalendarDays className="size-7 sm:size-8" />
+              今週どこ行こうかな？
             </h1>
             <p className="mt-2 text-orange-100 text-sm sm:text-base">
-              {formatDate(today)} ー 5つの質問に答えるだけで最適な釣り場が見つかります
+              行きたい日を選んで、潮回り・旬の魚から最適な釣り場を提案します
             </p>
           </div>
         </section>
 
         <div className="mx-auto max-w-5xl px-4 py-6 space-y-6">
-          <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "今日のおすすめ" }]} />
-          {/* 今日の釣り条件（コンパクト） */}
+          <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "今週のおすすめ" }]} />
+
+          {/* 選んだ日付の釣り条件（コンパクト） */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <div className="text-center p-2.5 bg-white rounded-lg shadow-sm border border-orange-100">
+              <CalendarDays className="size-4 text-orange-500 mx-auto mb-0.5" />
+              <p className="text-[10px] text-gray-500">選択日</p>
+              <p className="font-bold text-xs mt-0.5">{getDateLabel()}</p>
+            </div>
             <div className="text-center p-2.5 bg-white rounded-lg shadow-sm border border-orange-100">
               <Waves className="size-4 text-blue-500 mx-auto mb-0.5" />
               <p className="text-[10px] text-gray-500">潮回り</p>
-              <Badge className={`mt-0.5 text-[10px] px-1.5 ${getTideTypeColor(tideType)}`}>
-                {tideType}
+              <Badge className={`mt-0.5 text-[10px] px-1.5 ${getTideTypeColor(selectedTideType)}`}>
+                {selectedTideType}
               </Badge>
-            </div>
-            <div className="text-center p-2.5 bg-white rounded-lg shadow-sm border border-orange-100">
-              <Moon className="size-4 text-yellow-500 mx-auto mb-0.5" />
-              <p className="text-[10px] text-gray-500">月齢</p>
-              <p className="font-bold text-xs mt-0.5">{moonAge.toFixed(1)}</p>
             </div>
             <div className="text-center p-2.5 bg-white rounded-lg shadow-sm border border-orange-100">
               <Calendar className="size-4 text-green-500 mx-auto mb-0.5" />
@@ -791,8 +888,8 @@ export default function RecommendationPage() {
           </div>
 
           {/* ステップ進捗バー */}
-          <div className="relative">
-            <div className="flex items-center justify-between">
+          <div className="relative overflow-x-auto">
+            <div className="flex items-center justify-between min-w-[500px]">
               {STEPS.map((step, i) => {
                 const isCompleted = completedSteps.includes(step.id);
                 const isCurrent = currentStep === step.id;
@@ -807,7 +904,7 @@ export default function RecommendationPage() {
                       }`}
                     >
                       <div
-                        className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${
+                        className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold transition-all duration-300 ${
                           isCompleted
                             ? "bg-green-500 text-white shadow-md shadow-green-200"
                             : isCurrent
@@ -815,10 +912,10 @@ export default function RecommendationPage() {
                               : "bg-gray-200 text-gray-400"
                         }`}
                       >
-                        {isCompleted ? <Check className="size-5" /> : step.id}
+                        {isCompleted ? <Check className="size-4 sm:size-5" /> : step.id}
                       </div>
                       <span
-                        className={`text-[10px] sm:text-xs font-medium transition-colors ${
+                        className={`text-[9px] sm:text-xs font-medium transition-colors ${
                           isCurrent
                             ? "text-orange-600"
                             : isCompleted
@@ -830,7 +927,7 @@ export default function RecommendationPage() {
                       </span>
                     </button>
                     {i < STEPS.length - 1 && (
-                      <div className="flex-1 mx-1 sm:mx-2">
+                      <div className="flex-1 mx-0.5 sm:mx-2">
                         <div
                           className={`h-1 rounded-full transition-all duration-500 ${
                             completedSteps.includes(step.id)
@@ -845,7 +942,7 @@ export default function RecommendationPage() {
               })}
               {/* 結果ステップ */}
               <div className="flex items-center">
-                <div className="w-4 sm:w-6 mx-1 sm:mx-2">
+                <div className="w-3 sm:w-6 mx-0.5 sm:mx-2">
                   <div
                     className={`h-1 rounded-full transition-all duration-500 ${
                       showResults ? "bg-green-400" : "bg-gray-200"
@@ -854,16 +951,16 @@ export default function RecommendationPage() {
                 </div>
                 <div className="flex flex-col items-center gap-1">
                   <div
-                    className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 ${
+                    className={`w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center text-xs sm:text-sm font-bold transition-all duration-300 ${
                       showResults
                         ? "bg-amber-500 text-white shadow-lg shadow-amber-200 scale-110"
                         : "bg-gray-200 text-gray-400"
                     }`}
                   >
-                    <Trophy className="size-5" />
+                    <Trophy className="size-4 sm:size-5" />
                   </div>
                   <span
-                    className={`text-[10px] sm:text-xs font-medium ${
+                    className={`text-[9px] sm:text-xs font-medium ${
                       showResults ? "text-amber-600" : "text-gray-400"
                     }`}
                   >
@@ -887,13 +984,73 @@ export default function RecommendationPage() {
             </div>
           )}
 
-          {/* ============ STEP 1: 種類選択 ============ */}
+          {/* ============ STEP 1: 日付選択 ============ */}
           {currentStep === 1 && !showResults && (
+            <Card className="border-orange-200 shadow-lg animate-in fade-in slide-in-from-bottom-3 duration-300">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg flex items-center gap-2">
+                  <CalendarDays className="size-5 text-orange-500" />
+                  Step 1：いつ行く？
+                </CardTitle>
+                <p className="text-sm text-gray-500 mt-1">
+                  釣りに行きたい日を選んでください（各日の潮回りも表示）
+                </p>
+              </CardHeader>
+              <CardContent className="p-4 pt-0">
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                  {dateOptions.map((date) => {
+                    const moonAge = getMoonAge(date);
+                    const tide = getTideType(moonAge);
+                    return (
+                      <button
+                        key={date.toISOString()}
+                        onClick={() => handleDateSelect(date)}
+                        className={`p-4 rounded-xl border-2 transition-all text-center group ${getDateChipStyle(date)}`}
+                      >
+                        <span className={`block text-base font-bold ${getDateTextColor(date)} group-hover:scale-105 transition-transform`}>
+                          {getDayLabel(date, today)}
+                        </span>
+                        <div className="mt-2">
+                          <Badge className={`text-[10px] px-1.5 ${getTideTypeColor(tide)}`}>
+                            {tide}
+                          </Badge>
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* 完了したStep 1（折りたたみ） */}
+          {completedSteps.includes(1) && currentStep !== 1 && (
+            <button
+              onClick={() => goToStep(1)}
+              className="w-full text-left"
+            >
+              <div className="flex items-center gap-3 px-4 py-3 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 transition-colors">
+                <div className="w-7 h-7 rounded-full bg-green-500 text-white flex items-center justify-center flex-shrink-0">
+                  <Check className="size-4" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <span className="text-xs text-green-600 font-medium">Step 1：日付</span>
+                  <p className="text-sm font-bold text-green-800 truncate">
+                    {formatDate(selectedDate)} ・ {selectedTideType}
+                  </p>
+                </div>
+                <ChevronDown className="size-4 text-green-400 flex-shrink-0" />
+              </div>
+            </button>
+          )}
+
+          {/* ============ STEP 2: 種類選択 ============ */}
+          {currentStep === 2 && !showResults && (
             <Card className="border-cyan-200 shadow-lg animate-in fade-in slide-in-from-bottom-3 duration-300">
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Waves className="size-5 text-cyan-500" />
-                  Step 1：どんな釣り？
+                  Step 2：どんな釣り？
                 </CardTitle>
                 <p className="text-sm text-gray-500 mt-1">
                   海釣りか淡水釣りかを選んでください
@@ -930,10 +1087,10 @@ export default function RecommendationPage() {
             </Card>
           )}
 
-          {/* 完了したStep 1（折りたたみ） */}
-          {completedSteps.includes(1) && currentStep !== 1 && (
+          {/* 完了したStep 2（折りたたみ） */}
+          {completedSteps.includes(2) && currentStep !== 2 && (
             <button
-              onClick={() => goToStep(1)}
+              onClick={() => goToStep(2)}
               className="w-full text-left"
             >
               <div className="flex items-center gap-3 px-4 py-3 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 transition-colors">
@@ -941,7 +1098,7 @@ export default function RecommendationPage() {
                   <Check className="size-4" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="text-xs text-green-600 font-medium">Step 1：種類</span>
+                  <span className="text-xs text-green-600 font-medium">Step 2：種類</span>
                   <p className="text-sm font-bold text-green-800 truncate">{getCategoryLabel()}</p>
                 </div>
                 <ChevronDown className="size-4 text-green-400 flex-shrink-0" />
@@ -949,13 +1106,13 @@ export default function RecommendationPage() {
             </button>
           )}
 
-          {/* ============ STEP 2: エリア選択 ============ */}
-          {currentStep === 2 && !showResults && (
+          {/* ============ STEP 3: エリア選択 ============ */}
+          {currentStep === 3 && !showResults && (
             <Card className="border-orange-200 shadow-lg animate-in fade-in slide-in-from-bottom-3 duration-300">
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Globe className="size-5 text-orange-500" />
-                  Step 2：どこで釣りたい？
+                  Step 3：どこで釣りたい？
                 </CardTitle>
                 <p className="text-sm text-gray-500 mt-1">
                   {showPrefectureDetail
@@ -1069,10 +1226,10 @@ export default function RecommendationPage() {
             </Card>
           )}
 
-          {/* 完了したStep 2（折りたたみ） */}
-          {completedSteps.includes(2) && currentStep !== 2 && (
+          {/* 完了したStep 3（折りたたみ） */}
+          {completedSteps.includes(3) && currentStep !== 3 && (
             <button
-              onClick={() => goToStep(2)}
+              onClick={() => goToStep(3)}
               className="w-full text-left"
             >
               <div className="flex items-center gap-3 px-4 py-3 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 transition-colors">
@@ -1080,7 +1237,7 @@ export default function RecommendationPage() {
                   <Check className="size-4" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="text-xs text-green-600 font-medium">Step 2：エリア</span>
+                  <span className="text-xs text-green-600 font-medium">Step 3：エリア</span>
                   <p className="text-sm font-bold text-green-800 truncate">{getRegionLabel()}</p>
                 </div>
                 <ChevronDown className="size-4 text-green-400 flex-shrink-0" />
@@ -1088,13 +1245,13 @@ export default function RecommendationPage() {
             </button>
           )}
 
-          {/* ============ STEP 3: レベル選択 ============ */}
-          {currentStep === 3 && !showResults && (
+          {/* ============ STEP 4: レベル選択 ============ */}
+          {currentStep === 4 && !showResults && (
             <Card className="border-blue-200 shadow-lg animate-in fade-in slide-in-from-bottom-3 duration-300">
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg flex items-center gap-2">
                   <TrendingUp className="size-5 text-blue-500" />
-                  Step 3：釣りレベルは？
+                  Step 4：釣りレベルは？
                 </CardTitle>
                 <p className="text-sm text-gray-500 mt-1">
                   あなたの釣り経験を教えてください
@@ -1151,10 +1308,10 @@ export default function RecommendationPage() {
             </Card>
           )}
 
-          {/* 完了したStep 3（折りたたみ） */}
-          {completedSteps.includes(3) && currentStep !== 3 && (
+          {/* 完了したStep 4（折りたたみ） */}
+          {completedSteps.includes(4) && currentStep !== 4 && (
             <button
-              onClick={() => goToStep(3)}
+              onClick={() => goToStep(4)}
               className="w-full text-left"
             >
               <div className="flex items-center gap-3 px-4 py-3 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 transition-colors">
@@ -1162,7 +1319,7 @@ export default function RecommendationPage() {
                   <Check className="size-4" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="text-xs text-green-600 font-medium">Step 3：レベル</span>
+                  <span className="text-xs text-green-600 font-medium">Step 4：レベル</span>
                   <p className="text-sm font-bold text-green-800 truncate">{getLevelLabel()}</p>
                 </div>
                 <ChevronDown className="size-4 text-green-400 flex-shrink-0" />
@@ -1170,13 +1327,13 @@ export default function RecommendationPage() {
             </button>
           )}
 
-          {/* ============ STEP 4: 同行者選択 ============ */}
-          {currentStep === 4 && !showResults && (
+          {/* ============ STEP 5: 同行者選択 ============ */}
+          {currentStep === 5 && !showResults && (
             <Card className="border-purple-200 shadow-lg animate-in fade-in slide-in-from-bottom-3 duration-300">
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Users className="size-5 text-purple-500" />
-                  Step 4：誰と行く？
+                  Step 5：誰と行く？
                 </CardTitle>
                 <p className="text-sm text-gray-500 mt-1">
                   同行者によっておすすめスポットが変わります
@@ -1230,10 +1387,10 @@ export default function RecommendationPage() {
             </Card>
           )}
 
-          {/* 完了したStep 4（折りたたみ） */}
-          {completedSteps.includes(4) && currentStep !== 4 && (
+          {/* 完了したStep 5（折りたたみ） */}
+          {completedSteps.includes(5) && currentStep !== 5 && (
             <button
-              onClick={() => goToStep(4)}
+              onClick={() => goToStep(5)}
               className="w-full text-left"
             >
               <div className="flex items-center gap-3 px-4 py-3 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 transition-colors">
@@ -1241,7 +1398,7 @@ export default function RecommendationPage() {
                   <Check className="size-4" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="text-xs text-green-600 font-medium">Step 4：同行者</span>
+                  <span className="text-xs text-green-600 font-medium">Step 5：同行者</span>
                   <p className="text-sm font-bold text-green-800 truncate">{getCompanionLabel()}</p>
                 </div>
                 <ChevronDown className="size-4 text-green-400 flex-shrink-0" />
@@ -1249,16 +1406,16 @@ export default function RecommendationPage() {
             </button>
           )}
 
-          {/* ============ STEP 5: 釣りたい魚 ============ */}
-          {currentStep === 5 && !showResults && (
+          {/* ============ STEP 6: 釣りたい魚 ============ */}
+          {currentStep === 6 && !showResults && (
             <Card className="border-teal-200 shadow-lg animate-in fade-in slide-in-from-bottom-3 duration-300">
               <CardHeader className="pb-3">
                 <CardTitle className="text-lg flex items-center gap-2">
                   <Fish className="size-5 text-teal-500" />
-                  Step 4：何を釣りたい？
+                  Step 6：何を釣りたい？
                 </CardTitle>
                 <p className="text-sm text-gray-500 mt-1">
-                  狙いたい魚があれば選択（任意）・{spotFishList.all.length}種類が今釣れます
+                  狙いたい魚があれば選択（任意）・{spotFishList.all.length}種類が{getDateLabel()}に釣れます
                 </p>
               </CardHeader>
               <CardContent className="p-4 pt-0">
@@ -1281,7 +1438,7 @@ export default function RecommendationPage() {
                     <div>
                       <p className="text-xs font-medium text-orange-600 mb-2 flex items-center gap-1">
                         <Star className="size-3 fill-orange-400 text-orange-400" />
-                        今が旬の魚
+                        {getDateLabel()}に旬の魚
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {spotFishList.peak.map((f) => (
@@ -1322,10 +1479,10 @@ export default function RecommendationPage() {
             </Card>
           )}
 
-          {/* 完了したStep 5（折りたたみ） */}
-          {completedSteps.includes(5) && currentStep !== 5 && !showResults && (
+          {/* 完了したStep 6（折りたたみ） */}
+          {completedSteps.includes(6) && currentStep !== 6 && !showResults && (
             <button
-              onClick={() => goToStep(5)}
+              onClick={() => goToStep(6)}
               className="w-full text-left"
             >
               <div className="flex items-center gap-3 px-4 py-3 bg-green-50 rounded-lg border border-green-200 hover:bg-green-100 transition-colors">
@@ -1333,7 +1490,7 @@ export default function RecommendationPage() {
                   <Check className="size-4" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <span className="text-xs text-green-600 font-medium">Step 5：釣りたい魚</span>
+                  <span className="text-xs text-green-600 font-medium">Step 6：釣りたい魚</span>
                   <p className="text-sm font-bold text-green-800 truncate">{getFishLabel()}</p>
                 </div>
                 <ChevronDown className="size-4 text-green-400 flex-shrink-0" />
@@ -1344,6 +1501,37 @@ export default function RecommendationPage() {
           {/* ============ 結果表示 ============ */}
           {showResults && (
             <div className="space-y-6 animate-in fade-in slide-in-from-bottom-5 duration-500">
+              {/* 選んだ日付の潮回り情報（大きく表示） */}
+              <Card className="border-blue-200 bg-gradient-to-r from-blue-50 to-cyan-50">
+                <CardContent className="p-4 sm:p-6">
+                  <div className="flex items-center justify-between mb-3">
+                    <h2 className="text-base sm:text-lg font-bold text-blue-800 flex items-center gap-2">
+                      <CalendarDays className="size-5" />
+                      {formatDate(selectedDate)}の釣り条件
+                    </h2>
+                  </div>
+                  <div className="grid grid-cols-3 gap-3">
+                    <div className="text-center p-3 bg-white/80 rounded-xl">
+                      <Waves className="size-5 text-blue-500 mx-auto mb-1" />
+                      <p className="text-xs text-gray-500 mb-1">潮回り</p>
+                      <Badge className={`text-sm px-2.5 py-0.5 ${getTideTypeColor(selectedTideType)}`}>
+                        {selectedTideType}
+                      </Badge>
+                    </div>
+                    <div className="text-center p-3 bg-white/80 rounded-xl">
+                      <Moon className="size-5 text-yellow-500 mx-auto mb-1" />
+                      <p className="text-xs text-gray-500 mb-1">月齢</p>
+                      <p className="font-bold text-base">{selectedMoonAge.toFixed(1)}</p>
+                    </div>
+                    <div className="text-center p-3 bg-white/80 rounded-xl">
+                      <Fish className="size-5 text-orange-500 mx-auto mb-1" />
+                      <p className="text-xs text-gray-500 mb-1">旬の魚</p>
+                      <p className="font-bold text-base">{peakFish.length}種</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
               {/* 選択サマリー */}
               <Card className="border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50">
                 <CardContent className="p-4">
@@ -1361,6 +1549,10 @@ export default function RecommendationPage() {
                     </button>
                   </div>
                   <div className="flex flex-wrap gap-2">
+                    <Badge className="bg-orange-100 text-orange-700 border-orange-200 hover:bg-orange-200">
+                      <CalendarDays className="size-3 mr-1" />
+                      {getDateLabel()}
+                    </Badge>
                     <Badge className="bg-cyan-100 text-cyan-700 border-cyan-200 hover:bg-cyan-200">
                       <Waves className="size-3 mr-1" />
                       {getCategoryLabel()}
@@ -1405,6 +1597,8 @@ export default function RecommendationPage() {
                       scored={scored}
                       rank={index + 1}
                       userLocation={selectedRegion === "geolocation" ? userLocation : null}
+                      selectedDate={selectedDate}
+                      onSaveDate={handleSaveDate}
                     />
                   ))}
                 </div>
@@ -1462,16 +1656,16 @@ export default function RecommendationPage() {
                 </CardContent>
               </Card>
             </Link>
-            <Link href="/spots">
+            <Link href="/fish-finder">
               <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
                 <CardContent className="p-4 flex items-center gap-3">
-                  <div className="rounded-full bg-green-100 p-2.5">
-                    <MapPin className="size-5 text-green-500" />
+                  <div className="rounded-full bg-purple-100 p-2.5">
+                    <Fish className="size-5 text-purple-500" />
                   </div>
                   <div>
-                    <p className="font-semibold text-sm">釣りスポット一覧</p>
+                    <p className="font-semibold text-sm">釣り方診断</p>
                     <p className="text-xs text-gray-500 mt-0.5">
-                      全国の人気釣り場を探す
+                      3つの質問でおすすめの魚を提案
                     </p>
                   </div>
                   <ChevronRight className="size-4 text-gray-400 ml-auto" />
@@ -1491,11 +1685,16 @@ function SpotCard({
   scored,
   rank,
   userLocation,
+  selectedDate,
+  onSaveDate,
 }: {
   scored: ScoredSpot;
   rank: number;
   userLocation?: { lat: number; lon: number } | null;
+  selectedDate: Date;
+  onSaveDate: (spotSlug: string) => void;
 }) {
+  const [saved, setSaved] = useState(false);
   const { spot, totalScore, rank: scoreRank, catchableFishNow, reason } = scored;
 
   const distance = userLocation
@@ -1520,6 +1719,16 @@ function SpotCard({
     beginner: "初心者向け",
     intermediate: "中級者向け",
     advanced: "上級者向け",
+  };
+
+  const days = ["日", "月", "火", "水", "木", "金", "土"];
+  const dateStr = `${selectedDate.getMonth() + 1}/${selectedDate.getDate()}(${days[selectedDate.getDay()]})`;
+
+  const handleSave = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onSaveDate(spot.slug);
+    setSaved(true);
   };
 
   return (
@@ -1585,9 +1794,9 @@ function SpotCard({
             </Badge>
           </div>
 
-          {/* 今釣れる魚 */}
+          {/* 選んだ日付に釣れる魚 */}
           <div>
-            <p className="text-xs text-gray-500 mb-1">今釣れる魚：</p>
+            <p className="text-xs text-gray-500 mb-1">{dateStr}に釣れる魚：</p>
             <div className="flex flex-wrap gap-1">
               {catchableFishNow.slice(0, 5).map((cf) => (
                 <Badge
@@ -1635,6 +1844,29 @@ function SpotCard({
               />
             </div>
           </div>
+
+          {/* 「この日に行く」ボタン */}
+          <button
+            onClick={handleSave}
+            disabled={saved}
+            className={`w-full py-2 rounded-lg text-xs font-medium transition-all ${
+              saved
+                ? "bg-green-100 text-green-700 border border-green-200"
+                : "bg-orange-100 text-orange-700 border border-orange-200 hover:bg-orange-200"
+            }`}
+          >
+            {saved ? (
+              <span className="flex items-center justify-center gap-1">
+                <Check className="size-3" />
+                {dateStr}に行く予定に保存しました
+              </span>
+            ) : (
+              <span className="flex items-center justify-center gap-1">
+                <Calendar className="size-3" />
+                {dateStr}に行く
+              </span>
+            )}
+          </button>
         </CardContent>
       </Card>
     </Link>
