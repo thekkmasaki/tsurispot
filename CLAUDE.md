@@ -30,9 +30,13 @@ git commit -m "WIP: 東北・追加スポットの住所修正15件"
 - ポート3000が占有されやすい
 
 ## デプロイ
-- Netlify（GitHub master連携で自動デプロイ）
-- `git push origin master` でデプロイ開始
-- ビルドフック: `https://api.netlify.com/build_hooks/69a1b8126ecd03b29f81299b`
+- **ホスティング: Vercel**
+- `rm -rf .next && npx vercel@latest --prod --yes` でデプロイ
+- **デプロイ後は必ず IndexNow を実行する:**
+  ```bash
+  curl -s "https://tsurispot.com/api/indexnow"
+  ```
+  これにより Bing/Yandex に全URLを即通知（5,000件超、500件ずつバッチ送信）
 
 ## アフィリエイト
 - ユーザーが送ったリンクのみ使用。勝手にリンクを生成しない
