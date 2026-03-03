@@ -44,7 +44,15 @@ function buildChecklist(props: PackingChecklistProps) {
       level: "normal",
       ...(hasRentalRod
         ? { badgeText: "現地レンタル可" }
-        : { affiliate: { label: "ロッド", url: "https://amzn.to/4s4i64m" } }),
+        : { affiliate: { label: "シマノ ロッド", url: "https://amzn.to/4s4i64m" } }),
+    },
+    {
+      name: "リール",
+      note: "竿に合ったサイズを",
+      level: "normal",
+      ...(hasRentalRod
+        ? { badgeText: "現地レンタル可" }
+        : { affiliate: { label: "シマノ リール", url: "https://amzn.to/4atW7Om" } }),
     },
     {
       name: "仕掛け・エサ",
@@ -52,6 +60,18 @@ function buildChecklist(props: PackingChecklistProps) {
       ...(hasFishingShop
         ? { badgeText: "現地購入可" }
         : { affiliate: { label: "おもりセット", url: "https://amzn.to/4cFGDbl" } }),
+    },
+    {
+      name: "道糸（ライン）",
+      note: "予備もあると安心",
+      level: "normal",
+      affiliate: { label: "ナイロンライン", url: "https://amzn.to/4s1SPaX" },
+    },
+    {
+      name: "スナップ・サルカン",
+      note: "仕掛け交換に便利",
+      level: "normal",
+      affiliate: { label: "スナップ", url: "https://amzn.to/4c9oMcU" },
     },
     { name: "クーラーボックス", note: "魚を持ち帰る場合", level: "normal" },
     { name: "タオル", level: "normal" },
@@ -70,6 +90,7 @@ function buildChecklist(props: PackingChecklistProps) {
       name: "ライフジャケット",
       note: "必須",
       level: "danger",
+      affiliate: { label: "ライフジャケット", url: "https://amzn.to/4s1DpU5" },
     });
   }
 
@@ -106,6 +127,7 @@ function buildChecklist(props: PackingChecklistProps) {
       name: "日焼け止め・帽子",
       note: "日陰なし",
       level: "warning",
+      affiliate: { label: "偏光グラス", url: "https://amzn.to/3ZPBnuq" },
     });
   }
 
@@ -121,7 +143,11 @@ function buildChecklist(props: PackingChecklistProps) {
   }
 
   if (isNightFishing) {
-    conditional.push({ name: "ヘッドライト", level: "warning" });
+    conditional.push({
+      name: "ヘッドライト",
+      level: "warning",
+      affiliate: { label: "モバイルバッテリー", url: "https://amzn.to/4s2zhmT" },
+    });
     conditional.push({ name: "反射ベスト", level: "warning" });
   }
 
@@ -130,6 +156,7 @@ function buildChecklist(props: PackingChecklistProps) {
       name: "携帯電話",
       note: "緊急時用・電波確認",
       level: "warning",
+      affiliate: { label: "モバイルバッテリー", url: "https://amzn.to/4s2zhmT" },
     });
   }
 
@@ -137,7 +164,30 @@ function buildChecklist(props: PackingChecklistProps) {
     { name: "フィッシュグリップ", note: "魚を掴む道具", level: "normal" },
     { name: "プライヤー", note: "針外し", level: "normal" },
     { name: "バケツ", note: "海水汲み用", level: "normal" },
-    { name: "レジャーシート", level: "normal" },
+    {
+      name: "偏光サングラス",
+      note: "水面の反射を抑え魚が見える",
+      level: "normal",
+      affiliate: { label: "偏光グラス", url: "https://amzn.to/3ZPBnuq" },
+    },
+    {
+      name: "釣り用ベスト",
+      note: "小物をすぐ取り出せる",
+      level: "normal",
+      affiliate: { label: "フィッシングベスト", url: "https://amzn.to/4kLuCTM" },
+    },
+    {
+      name: "釣りボックス（座れる）",
+      note: "収納＋椅子として活躍",
+      level: "normal",
+      affiliate: { label: "タックルボックス", url: "https://amzn.to/4rvRhGx" },
+    },
+    {
+      name: "ロッドスタンド",
+      note: "竿を立てておける",
+      level: "normal",
+      affiliate: { label: "ロッドスタンド", url: "https://amzn.to/3OwwVy8" },
+    },
     { name: "日焼け止め・帽子", note: "屋外全般", level: "normal" },
     { name: "絆創膏・消毒液", level: "normal" },
     {
@@ -188,7 +238,7 @@ function ChecklistItemRow({ item }: { item: ChecklistItem }) {
         <a
           href={item.affiliate.url}
           target="_blank"
-          rel="noopener noreferrer nofollow"
+          rel="noopener noreferrer sponsored"
           className="ml-auto inline-flex shrink-0 items-center gap-1 rounded bg-[#FF9900] px-2 py-1 text-[10px] font-bold text-white hover:bg-[#E88B00] transition-colors"
         >
           {item.affiliate.label}

@@ -202,6 +202,42 @@ export const affiliateProducts: AffiliateProduct[] = [
     seasons: ["all"],
     category: "accessory",
   },
+  {
+    id: "af-lifejacket",
+    name: "ライフジャケット",
+    url: "https://amzn.to/4s1DpU5",
+    description: "装着感が良く、腰に巻いた感じも快適。お手頃価格で初心者やコストを抑えたい方におすすめです。磯釣り・堤防釣りの必需品。",
+    methodKeywords: [],
+    seasons: ["all"],
+    category: "wear",
+  },
+  {
+    id: "af-fishing-vest",
+    name: "釣り用ベスト",
+    url: "https://amzn.to/4kLuCTM",
+    description: "小物をすぐ取り出せるフィッシングベスト。仕掛けやハサミなどをポケットに整理でき、釣りが格段に楽になります。",
+    methodKeywords: [],
+    seasons: ["all"],
+    category: "wear",
+  },
+  {
+    id: "af-polarized-glasses",
+    name: "偏光サングラス",
+    url: "https://amzn.to/3ZPBnuq",
+    description: "水面の反射を抑えて魚が見える偏光グラス。調光レンズで天候を選ばず使えます。軽量コンパクトフレームで長時間でも快適。",
+    methodKeywords: ["サイトフィッシング", "エギング", "アジング", "メバリング", "渓流ルアー"],
+    seasons: ["all"],
+    category: "accessory",
+  },
+  {
+    id: "af-line-recycler",
+    name: "第一精工 高速リサイクラー2.0",
+    url: "https://amzn.to/40kfHGS",
+    description: "ラインの巻き替えが驚くほど楽になる高速リサイクラー。ライン交換の手間を大幅に短縮できます。",
+    methodKeywords: [],
+    seasons: ["all"],
+    category: "accessory",
+  },
 ];
 
 /**

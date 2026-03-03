@@ -817,10 +817,13 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <h2 className="mb-3 text-lg font-bold">混雑予想</h2>
             <CrowdPredictionCard rating={spot.rating} isFree={spot.isFree} difficulty={spot.difficulty} prefecture={spot.region.prefecture} hasParking={spot.hasParking} reviewCount={spot.reviewCount} />
           </section>
+          {/* ファミリー向け情報: トイレ・駐車場あり＋初心者向けの場合のみ表示 */}
+          {spot.hasToilet && spot.hasParking && spot.difficulty === "beginner" && (
           <section>
             <h2 className="mb-3 text-lg font-bold">ファミリー向け情報</h2>
             <FamilyInfoCard familyInfo={spot.familyInfo} spotType={spot.spotType} hasToilet={spot.hasToilet} hasParking={spot.hasParking} difficulty={spot.difficulty} />
           </section>
+          )}
           <section>
             <h2 className="mb-3 text-lg font-bold">天気・潮汐情報</h2>
             <SpotWeatherTide lat={spot.latitude} lng={spot.longitude} spotName={spot.name} />
