@@ -27,6 +27,7 @@ import {
 } from "@/lib/data/monthly-guides";
 import { fishSpecies } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
+import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { getMonthlyRigs } from "@/lib/data/monthly-rigs";
 import { MonthlyRigSection } from "@/components/monthly-rig-section";
 import { MonthlySportsSorter } from "@/components/monthly-spots-sorter";
@@ -122,6 +123,11 @@ export default async function MonthlyGuidePage({ params }: Props) {
     currentIndex < 11 ? monthSlugs[currentIndex + 1] : monthSlugs[0];
   const prevGuide = getMonthlyGuide(prevSlug);
   const nextGuide = getMonthlyGuide(nextSlug);
+
+  // この月に関連する季節特集ガイド
+  const relatedSeasonalGuides = seasonalGuides
+    .filter((sg) => sg.months.includes(guide.month))
+    .slice(0, 4);
 
   const currentMonth = new Date().getMonth() + 1;
   const isCurrentMonth = currentMonth === guide.month;
@@ -647,6 +653,63 @@ export default async function MonthlyGuidePage({ params }: Props) {
           </div>
         </section>
 
+        {/* 季節の釣り特集 */}
+        {relatedSeasonalGuides.length > 0 && (
+          <section className="mb-8">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
+              <Calendar className="size-5 text-primary" />
+              {guide.nameJa}の釣り特集ガイド
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {relatedSeasonalGuides.map((sg) => (
+                <Link
+                  key={sg.slug}
+                  href={`/seasonal/${sg.slug}`}
+                  className="group flex items-start gap-3 rounded-lg border bg-white p-4 transition-shadow hover:shadow-md dark:bg-card"
+                >
+                  <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-orange-100">
+                    <Calendar className="size-5 text-orange-600" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="font-semibold group-hover:text-primary">{sg.title}</p>
+                    <p className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">{sg.description.slice(0, 80)}...</p>
+                    <div className="mt-1.5 flex flex-wrap gap-1">
+                      <Badge variant="outline" className="text-[10px]">{sg.method}</Badge>
+                      <Badge variant="secondary" className="text-[10px]">{sg.season}</Badge>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* 初心者向けバナー */}
+        <section className="mb-8">
+          <div className="overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 p-6 text-white">
+            <div className="mb-1 text-sm font-medium text-emerald-100">はじめての方へ</div>
+            <h2 className="mb-2 text-lg font-bold">{guide.nameJa}から釣りを始めませんか？</h2>
+            <p className="mb-4 text-sm text-emerald-50">
+              道具は5,000円から。近くの堤防で、初心者でも魚が釣れます。
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/guide/beginner"
+                className="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-bold text-emerald-700 transition-colors hover:bg-emerald-50"
+              >
+                初心者ガイドを見る
+                <ChevronRight className="size-4" />
+              </Link>
+              <Link
+                href="/guide/budget"
+                className="inline-flex items-center gap-2 rounded-lg border-2 border-white/50 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10"
+              >
+                5,000円で始める方法
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* 釣り場診断CTA */}
         <div className="mb-8 rounded-xl border-2 border-primary/20 bg-primary/5 p-6 text-center">
           <p className="mb-2 text-base font-bold">{guide.nameJa}、どこで釣る？</p>
@@ -709,6 +772,15 @@ export default async function MonthlyGuidePage({ params }: Props) {
               </p>
             </Link>
             <Link
+              href="/map"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <p className="font-semibold">地図で探す</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                全国の釣り場をマップで表示
+              </p>
+            </Link>
+            <Link
               href="/monthly"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
             >
@@ -718,21 +790,21 @@ export default async function MonthlyGuidePage({ params }: Props) {
               </p>
             </Link>
             <Link
-              href="/seasonal"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">季節別ガイド</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                春夏秋冬の釣りを解説
-              </p>
-            </Link>
-            <Link
               href="/fishing-spots/breakwater-beginner"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
             >
               <p className="font-semibold">初心者向け堤防釣り</p>
               <p className="mt-1 text-xs text-muted-foreground">
                 初心者でも安心の釣りスポット
+              </p>
+            </Link>
+            <Link
+              href="/fishing-spots/near-me"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <p className="font-semibold">近くの釣り場</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                現在地から近い釣りスポット
               </p>
             </Link>
             <Link
@@ -751,6 +823,24 @@ export default async function MonthlyGuidePage({ params }: Props) {
               <p className="font-semibold">全国釣りスポット</p>
               <p className="mt-1 text-xs text-muted-foreground">
                 1000+の釣り場を探す
+              </p>
+            </Link>
+            <Link
+              href="/fishing-calendar"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <p className="font-semibold">釣りカレンダー</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                月別の釣りカレンダー
+              </p>
+            </Link>
+            <Link
+              href="/area-guide"
+              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <p className="font-semibold">エリア別ガイド</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                全国のエリア別釣り場攻略
               </p>
             </Link>
           </div>
