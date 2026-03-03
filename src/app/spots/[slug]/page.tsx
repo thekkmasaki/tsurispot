@@ -183,6 +183,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
       ...(spot.hasFishingShop ? [{ "@type": "LocationFeatureSpecification", name: "釣具店", value: true }] : []),
     ],
     touristType: spot.difficulty === "beginner" ? "初心者" : spot.difficulty === "intermediate" ? "中級者" : "上級者",
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", ".spot-description", ".catchable-fish-summary"],
+    },
     ...(currentMonthFish.length > 0
       ? {
           event: {

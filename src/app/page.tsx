@@ -113,6 +113,51 @@ const homeSpeakableJsonLd = {
   },
 };
 
+const homeDatasetJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Dataset",
+  name: "ツリスポ - 日本の釣りスポット・魚種総合データベース",
+  description: `日本全国${fishingSpots.length}箇所以上の釣りスポットと${fishSpecies.length}種以上の魚種情報を収録した総合釣り情報データベース。位置情報・釣れる魚・設備・混雑予想・おすすめタックルなどを網羅。`,
+  url: "https://tsurispot.com",
+  license: "https://tsurispot.com/terms",
+  creator: {
+    "@type": "Organization",
+    name: "ツリスポ編集部",
+    url: "https://tsurispot.com",
+  },
+  distribution: [
+    {
+      "@type": "DataDownload",
+      encodingFormat: "text/html",
+      contentUrl: "https://tsurispot.com/spots",
+      name: "釣りスポット一覧",
+    },
+    {
+      "@type": "DataDownload",
+      encodingFormat: "text/html",
+      contentUrl: "https://tsurispot.com/fish",
+      name: "魚種図鑑",
+    },
+  ],
+  spatialCoverage: {
+    "@type": "Place",
+    name: "Japan",
+    geo: {
+      "@type": "GeoShape",
+      box: "24.0 122.9 45.6 145.8",
+    },
+  },
+  variableMeasured: [
+    "釣り場名・位置情報（緯度・経度）",
+    "スポットタイプ（堤防・漁港・磯・河川等）",
+    "釣れる魚種・旬の時期",
+    "難易度・設備情報",
+    "混雑予想・おすすめタックル",
+  ],
+  measurementTechnique: "現地調査・公開情報の集約・専門家による監修",
+  keywords: ["釣りスポット", "釣り場", "魚種図鑑", "フィッシング", "日本", "釣り情報"],
+};
+
 const homeFaqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -226,6 +271,10 @@ export default function Home() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeSpeakableJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(homeDatasetJsonLd) }}
       />
       {/* ヒーローセクション */}
       <section className="relative overflow-x-hidden bg-gradient-to-br from-sky-600 via-[#0C4A6E] to-indigo-800">
