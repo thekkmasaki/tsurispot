@@ -160,6 +160,17 @@ export default async function SpotDetailPage({ params }: PageProps) {
       latitude: spot.latitude,
       longitude: spot.longitude,
     },
+    containedInPlace: {
+      "@type": "Place",
+      name: `${spot.region.prefecture}${spot.region.areaName}`,
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: spot.region.areaName,
+        addressRegion: spot.region.prefecture,
+        addressCountry: "JP",
+      },
+    },
+    hasMap: `https://www.google.com/maps?q=${spot.latitude},${spot.longitude}`,
     isAccessibleForFree: spot.isFree,
     publicAccess: true,
     ...(spot.mainImageUrl?.startsWith("http") ? { image: spot.mainImageUrl } : {}),
@@ -229,6 +240,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
       latitude: spot.latitude,
       longitude: spot.longitude,
     },
+    hasMap: `https://www.google.com/maps?q=${spot.latitude},${spot.longitude}`,
     ...(spot.mainImageUrl?.startsWith("http") ? { image: spot.mainImageUrl } : {}),
     aggregateRating: {
       "@type": "AggregateRating",
