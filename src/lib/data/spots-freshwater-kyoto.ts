@@ -46,7 +46,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
     isFree: false, feeDetail: "賀茂川漁協遊漁券 大人3,500円（年券）/ 日券1,500円",
     hasParking: false, parkingDetail: "周辺のコインパーキングを利用",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kamogawa-river-kyoto.jpg", imageAttribution: "Photo: SunkistSun / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/kamogawa-river-kyoto.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kamogawa-river-kyoto.webp", imageAttribution: "Photo: SunkistSun / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/kamogawa-river-kyoto.webp"],
     rating: 3.7, reviewCount: 145, googleRating: 4.6, googleReviewCount: 766,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -74,7 +74,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
     isFree: false, feeDetail: "宇治川漁協遊漁券 大人3,000円（年券）/ 日券1,500円",
     hasParking: true, parkingDetail: "宇治公園周辺に有料駐車場あり（700円/日程度）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ujigawa-river-kyoto.jpg", imageAttribution: "Photo: GiveMeMollusks / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/ujigawa-river-kyoto.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/ujigawa-river-kyoto.webp", imageAttribution: "Photo: GiveMeMollusks / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/ujigawa-river-kyoto.webp"],
     rating: 4.0, reviewCount: 198, googleRating: 4.8, googleReviewCount: 12,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -103,7 +103,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
     isFree: false, feeDetail: "木津川漁協遊漁券 大人5,000円（年券）/ 日券2,000円",
     hasParking: true, parkingDetail: "笠置キャンプ場駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: true, rentalDetail: "笠置キャンプ場でレンタル竿あり",
-    mainImageUrl: "/images/spots/wikimedia/kizugawa-kasagi-river.jpg", imageAttribution: "Photo: ESU / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/kizugawa-kasagi-river.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kizugawa-kasagi-river.webp", imageAttribution: "Photo: ESU / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/kizugawa-kasagi-river.webp"],
     rating: 4.1, reviewCount: 178, googleRating: 4, googleReviewCount: 1489,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -132,7 +132,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
     isFree: false, feeDetail: "美山漁協遊漁券 アユ日券3,500円 / アマゴ日券2,500円",
     hasParking: true, parkingDetail: "各所に河川沿い駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/miyamagawa-river-kyoto.jpg", imageAttribution: "Photo: 育漢 林 / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/miyamagawa-river-kyoto.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/miyamagawa-river-kyoto.webp", imageAttribution: "Photo: 育漢 林 / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/miyamagawa-river-kyoto.webp"],
     rating: 4.4, reviewCount: 167, googleRating: 4.5, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -159,7 +159,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
     isFree: false, feeDetail: "上桂川漁協遊漁券 年券7,000円 / 日券3,500円",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kamikatsura-river-keihoku.jpg", imageAttribution: "Photo: 経済特区 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/kamikatsura-river-keihoku.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kamikatsura-river-keihoku.webp", imageAttribution: "Photo: 経済特区 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/kamikatsura-river-keihoku.webp"],
     rating: 4.1, reviewCount: 134, googleRating: 4, googleReviewCount: 24,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -184,7 +184,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
     isFree: false, feeDetail: "大堰川漁協遊漁券 大人2,000円（日券）",
     hasParking: true, parkingDetail: "河川敷に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ooigawa-nantan-river.jpg", imageAttribution: "Photo: Mont Blank rich / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/ooigawa-nantan-river.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/ooigawa-nantan-river.webp", imageAttribution: "Photo: Mont Blank rich / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/ooigawa-nantan-river.webp"],
     rating: 3.8, reviewCount: 89, googleRating: 4.2, googleReviewCount: 19,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -210,7 +210,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
     isFree: false, feeDetail: "賀茂川漁協遊漁券 大人3,500円（年券）/ 日券1,500円",
     hasParking: true, parkingDetail: "貴船周辺に有料駐車場あり（500円〜/回）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kibune-kurama-river.jpg", imageAttribution: "Photo: KimonBerlin / Wikimedia Commons (CC BY-SA 2.0)", images: ["/images/spots/wikimedia/kibune-kurama-river.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kibune-kurama-river.webp", imageAttribution: "Photo: KimonBerlin / Wikimedia Commons (CC BY-SA 2.0)", images: ["/images/spots/wikimedia/kibune-kurama-river.webp"],
     rating: 4.0, reviewCount: 98, googleRating: 4.5, googleReviewCount: 26,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -234,7 +234,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（日券）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/wachigawa-river-kyoto.jpg", imageAttribution: "Photo: Puchi-masashi / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/wachigawa-river-kyoto.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/wachigawa-river-kyoto.webp", imageAttribution: "Photo: Puchi-masashi / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/wachigawa-river-kyoto.webp"],
     rating: 3.9, reviewCount: 67, googleRating: 3.8, googleReviewCount: 4,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -259,7 +259,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
     isFree: false, feeDetail: "上桂川漁協遊漁券 日券3,500円",
     hasParking: true, parkingDetail: "清滝周辺に有料駐車場あり（1,000円/日程度）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kiyotakigawa-river-kyoto.jpg", imageAttribution: "Photo: hajime / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/kiyotakigawa-river-kyoto.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kiyotakigawa-river-kyoto.webp", imageAttribution: "Photo: hajime / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/kiyotakigawa-river-kyoto.webp"],
     rating: 3.7, reviewCount: 56, googleRating: 4.6, googleReviewCount: 25,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -283,7 +283,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
     isFree: true,
     hasParking: true, parkingDetail: "日吉ダム周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/amanjakuko-hiyoshi-dam.jpg", imageAttribution: "Photo: 経済特区 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/amanjakuko-hiyoshi-dam.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/amanjakuko-hiyoshi-dam.webp", imageAttribution: "Photo: 経済特区 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/amanjakuko-hiyoshi-dam.webp"],
     rating: 3.6, reviewCount: 78, googleRating: 4.1, googleReviewCount: 529,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -310,7 +310,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
     isFree: false, feeDetail: "賀茂川漁協遊漁券 大人3,500円（年券）/ 日券1,500円",
     hasParking: false, parkingDetail: "周辺のコインパーキングを利用",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/takanogawa-river-kyoto.jpg", imageAttribution: "Photo: Hahifuheho / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/takanogawa-river-kyoto.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/takanogawa-river-kyoto.webp", imageAttribution: "Photo: Hahifuheho / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/takanogawa-river-kyoto.webp"],
     rating: 3.5, reviewCount: 67, googleRating: 3.9, googleReviewCount: 17,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -336,7 +336,7 @@ export const freshwaterSpotsKyoto: FishingSpot[] = [
     isFree: true,
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sonobegawa-river-kyoto.jpg", imageAttribution: "Photo: 矢野裕之 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/sonobegawa-river-kyoto.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/sonobegawa-river-kyoto.webp", imageAttribution: "Photo: 矢野裕之 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/sonobegawa-river-kyoto.webp"],
     rating: 3.3, reviewCount: 45,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },

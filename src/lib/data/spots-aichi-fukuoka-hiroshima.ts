@@ -122,7 +122,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r901"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車スペース（20台）",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/handa-ko-teibo.jpg", imageAttribution: "Photo: 博柳 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.6, reviewCount: 78, googleRating: 3.4, googleReviewCount: 22,
+    mainImageUrl: "/images/spots/wikimedia/handa-ko-teibo.webp", imageAttribution: "Photo: 博柳 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.6, reviewCount: 78, googleRating: 3.4, googleReviewCount: 22,
     catchableFish: [
       { fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
       { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -143,7 +143,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r902"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港内に無料駐車スペース（30台）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/isshiki-gyoko-teibo.jpg", imageAttribution: "Photo: HQA02330 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.9, reviewCount: 112, googleRating: 3.5, googleReviewCount: 30,
+    mainImageUrl: "/images/spots/wikimedia/isshiki-gyoko-teibo.webp", imageAttribution: "Photo: HQA02330 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.9, reviewCount: 112, googleRating: 3.5, googleReviewCount: 30,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ヘチ釣り・ウキフカセ" },
       { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -173,7 +173,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r902"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "漁港横に無料駐車スペース（10台）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/higashihazu-ko-teibo.jpg", imageAttribution: "Photo: HQA02330 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 52, googleRating: 3.3, googleReviewCount: 16,
+    mainImageUrl: "/images/spots/wikimedia/higashihazu-ko-teibo.webp", imageAttribution: "Photo: HQA02330 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 52, googleRating: 3.3, googleReviewCount: 16,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
@@ -200,7 +200,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: region("r10"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺に路肩駐車スペース（マナー順守）",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shiomi-futo-nagoya.jpg", imageAttribution: "Photo: Psjk2106 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 134,
+    mainImageUrl: "/images/spots/wikimedia/shiomi-futo-nagoya.webp", imageAttribution: "Photo: Psjk2106 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 134,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ・夕マヅメ", method: "ヘチ釣り" },
       { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -230,7 +230,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r900"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港横に無料駐車場（50台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/akabane-ko-teibo.jpg", imageAttribution: "Photo: Hamachidori / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.0, reviewCount: 143, googleRating: 4.4, googleReviewCount: 12,
+    mainImageUrl: "/images/spots/wikimedia/akabane-ko-teibo.webp", imageAttribution: "Photo: Hamachidori / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.0, reviewCount: 143, googleRating: 4.4, googleReviewCount: 12,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("hirame"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "泳がせ釣り" },
@@ -252,7 +252,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r900"), spotType: "pier", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "埠頭周辺に路肩スペース",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/toyohashi-mikawa-kamino.jpg", imageAttribution: "Photo: Mikkabie / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.9, reviewCount: 98, googleRating: 3.6, googleReviewCount: 16,
+    mainImageUrl: "/images/spots/wikimedia/toyohashi-mikawa-kamino.webp", imageAttribution: "Photo: Mikkabie / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.9, reviewCount: 98, googleRating: 3.6, googleReviewCount: 16,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ヘチ釣り" },
       { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -282,7 +282,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: region("r10"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: false,
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/himakajima-nishi-teibo.jpg", imageAttribution: "Photo: gundam2345 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.1, reviewCount: 87, googleRating: 3.8, googleReviewCount: 55,
+    mainImageUrl: "/images/spots/wikimedia/himakajima-nishi-teibo.webp", imageAttribution: "Photo: gundam2345 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.1, reviewCount: 87, googleRating: 3.8, googleReviewCount: 55,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ・夕マヅメ", method: "エギング" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -304,7 +304,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r901"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港横に無料駐車スペース（10台）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/chigara-gyoko-teibo.jpg", imageAttribution: "Photo: Yanajin33 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.5, reviewCount: 38, googleRating: 4, googleReviewCount: 44,
+    mainImageUrl: "/images/spots/wikimedia/chigara-gyoko-teibo.webp", imageAttribution: "Photo: Yanajin33 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.5, reviewCount: 38, googleRating: 4, googleReviewCount: 44,
     catchableFish: [
       { fish: fish("yariika"), monthStart: 12, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "エギング" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -332,7 +332,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r902"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペース（10台）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/yahagigawa-kakou-teibo.jpg", imageAttribution: "Photo: HQA02330 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.1, reviewCount: 95,
+    mainImageUrl: "/images/spots/wikimedia/yahagigawa-kakou-teibo.webp", imageAttribution: "Photo: HQA02330 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.1, reviewCount: 95,
     catchableFish: [
       { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜・朝マヅメ", method: "ルアー" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ぶっこみ釣り" },
@@ -363,7 +363,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r900"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "エコパーク駐車場（無料・50台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tahara-ecopark-gokan.jpg", imageAttribution: "Photo: 円周率３パーセント (Enshuritsu 3 percent) / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 82, googleRating: 4, googleReviewCount: 86,
+    mainImageUrl: "/images/spots/wikimedia/tahara-ecopark-gokan.webp", imageAttribution: "Photo: 円周率３パーセント (Enshuritsu 3 percent) / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 82, googleRating: 4, googleReviewCount: 86,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -385,7 +385,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r900"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "堤防手前に路肩スペース（5台）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/koshido-tottei.jpg", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: [], rating: 4.2, reviewCount: 68,
+    mainImageUrl: "/images/spots/wikimedia/koshido-tottei.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: [], rating: 4.2, reviewCount: 68,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -406,7 +406,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r901"), spotType: "pier", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に路肩スペース",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/centrair-tokoname-maejima.jpg", imageAttribution: "Photo: 名古屋太郎 / Wikimedia Commons (CC0)", images: [], rating: 3.7, reviewCount: 62, googleRating: 3.5, googleReviewCount: 10,
+    mainImageUrl: "/images/spots/wikimedia/centrair-tokoname-maejima.webp", imageAttribution: "Photo: 名古屋太郎 / Wikimedia Commons (CC0)", images: [], rating: 3.7, reviewCount: 62, googleRating: 3.5, googleReviewCount: 10,
     catchableFish: [
       { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ヘチ釣り" },
@@ -434,7 +434,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: region("r53"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海岸沿い無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nishiura-onsen-gokan.jpg", imageAttribution: "Photo: さかおり / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.6, reviewCount: 54, googleRating: 3.9, googleReviewCount: 136,
+    mainImageUrl: "/images/spots/wikimedia/nishiura-onsen-gokan.webp", imageAttribution: "Photo: さかおり / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.6, reviewCount: 54, googleRating: 3.9, googleReviewCount: 136,
     catchableFish: [
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("kisu"), monthStart: 6, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
@@ -463,7 +463,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: region("r10"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "藤前干潟駐車場付近に路肩スペース",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shonai-kakou-gokan.jpg", imageAttribution: "Photo: 円周率３パーセント / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 108,
+    mainImageUrl: "/images/spots/wikimedia/shonai-kakou-gokan.webp", imageAttribution: "Photo: 円周率３パーセント / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 108,
     catchableFish: [
       { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜・朝マヅメ", method: "ルアー" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ぶっこみ釣り" },
@@ -491,7 +491,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     hasParking: true, parkingDetail: "専用無料駐車場（100台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
     rentalDetail: "竿・リールセット600円/日。仕掛け・餌も販売。",
-    mainImageUrl: "/images/spots/wikimedia/fukuoka-umizuri-koen.jpg", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.4, reviewCount: 398, googleRating: 3.9, googleReviewCount: 886,
+    mainImageUrl: "/images/spots/wikimedia/fukuoka-umizuri-koen.webp", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.4, reviewCount: 398, googleRating: 3.9, googleReviewCount: 886,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -521,7 +521,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r904"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に無料駐車スペース（20台）",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/meinohama-gyoko-teibo.jpg", imageAttribution: "Photo: そらみみ (Soramimi) / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.7, reviewCount: 92, googleRating: 3.4, googleReviewCount: 22,
+    mainImageUrl: "/images/spots/wikimedia/meinohama-gyoko-teibo.webp", imageAttribution: "Photo: そらみみ (Soramimi) / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.7, reviewCount: 92, googleRating: 3.4, googleReviewCount: 22,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング・サビキ" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
@@ -549,7 +549,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r904"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港内に無料駐車スペース（15台）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nishiura-gyoko-teibo-fukuoka.jpg", imageAttribution: "Photo: Ran Zwigenberg / Wikimedia Commons (CC BY 2.0)", images: [], rating: 3.8, reviewCount: 72, googleRating: 3.5, googleReviewCount: 69,
+    mainImageUrl: "/images/spots/wikimedia/nishiura-gyoko-teibo-fukuoka.webp", imageAttribution: "Photo: Ran Zwigenberg / Wikimedia Commons (CC BY 2.0)", images: [], rating: 3.8, reviewCount: 72, googleRating: 3.5, googleReviewCount: 69,
     catchableFish: [
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "穴釣り" },
@@ -577,7 +577,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r904"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港横に無料駐車スペース（15台）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kafuri-gyoko-teibo.jpg", imageAttribution: "Photo: Thomas Woodtli from Zürich, Switzerland / Wikimedia Commons (CC BY-SA 2.0)", images: [], rating: 3.6, reviewCount: 58, googleRating: 5, googleReviewCount: 1,
+    mainImageUrl: "/images/spots/wikimedia/kafuri-gyoko-teibo.webp", imageAttribution: "Photo: Thomas Woodtli from Zürich, Switzerland / Wikimedia Commons (CC BY-SA 2.0)", images: [], rating: 3.6, reviewCount: 58, googleRating: 5, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 6, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -598,7 +598,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r904"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "漁港内に無料駐車場（20台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/karadomari-gyoko-teibo.jpg", imageAttribution: "Photo: Ran Zwigenberg / Wikimedia Commons (CC BY 2.0)", images: [], rating: 3.9, reviewCount: 86, googleRating: 3.9, googleReviewCount: 78,
+    mainImageUrl: "/images/spots/wikimedia/karadomari-gyoko-teibo.webp", imageAttribution: "Photo: Ran Zwigenberg / Wikimedia Commons (CC BY 2.0)", images: [], rating: 3.9, reviewCount: 86, googleRating: 3.9, googleReviewCount: 78,
     catchableFish: [
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "穴釣り" },
@@ -626,7 +626,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r903"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "漁港横に無料駐車場（50台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kanezaki-gyoko-teibo.jpg", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: [], rating: 4.3, reviewCount: 218, googleRating: 4.5, googleReviewCount: 2,
+    mainImageUrl: "/images/spots/wikimedia/kanezaki-gyoko-teibo.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: [], rating: 4.3, reviewCount: 218, googleRating: 4.5, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ・夕マヅメ", method: "エギング" },
       { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
@@ -655,7 +655,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r903"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港内に有料駐車場（500円/日）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/konominato-gyoko-teibo.jpg", imageAttribution: "Photo: ハポニアラ / Wikimedia Commons (CC BY 4.0)", images: [], rating: 3.9, reviewCount: 105, googleRating: 4.3, googleReviewCount: 12,
+    mainImageUrl: "/images/spots/wikimedia/konominato-gyoko-teibo.webp", imageAttribution: "Photo: ハポニアラ / Wikimedia Commons (CC BY 4.0)", images: [], rating: 3.9, reviewCount: 105, googleRating: 4.3, googleReviewCount: 12,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "カゴ釣り・サビキ" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
@@ -684,7 +684,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: region("r55"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "マリーナ駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shinmoji-marina-teibo.jpg", imageAttribution: "Photo: Ka23 13 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 112, googleRating: 3.9, googleReviewCount: 122,
+    mainImageUrl: "/images/spots/wikimedia/shinmoji-marina-teibo.webp", imageAttribution: "Photo: Ka23 13 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 112, googleRating: 3.9, googleReviewCount: 122,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ・夜", method: "アジング・サビキ" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ウキ釣り" },
@@ -705,7 +705,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: region("r55"), spotType: "pier", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "ノーフォーク広場駐車場（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/norfolk-hiroba-gokan.jpg", imageAttribution: "Photo: ゴーヤーズ / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.1, reviewCount: 145, googleRating: 4.1, googleReviewCount: 494,
+    mainImageUrl: "/images/spots/wikimedia/norfolk-hiroba-gokan.webp", imageAttribution: "Photo: ゴーヤーズ / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.1, reviewCount: 145, googleRating: 4.1, googleReviewCount: 494,
     catchableFish: [
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中・夜", method: "穴釣り" },
@@ -734,7 +734,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: region("r55"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港内に無料駐車スペース（20台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ashiya-gyoko-teibo-fukuoka.jpg", imageAttribution: "Photo: アラツク / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 76, googleRating: 3.6, googleReviewCount: 35,
+    mainImageUrl: "/images/spots/wikimedia/ashiya-gyoko-teibo-fukuoka.webp", imageAttribution: "Photo: アラツク / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 76, googleRating: 3.6, googleReviewCount: 35,
     catchableFish: [
       { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜・朝マヅメ", method: "ルアー" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -756,7 +756,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: region("r15"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "百道浜周辺有料駐車場",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/momochihama-gokan.jpg", imageAttribution: "Photo: Hirho / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.7, reviewCount: 88, googleRating: 4.1, googleReviewCount: 6583,
+    mainImageUrl: "/images/spots/wikimedia/momochihama-gokan.webp", imageAttribution: "Photo: Hirho / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.7, reviewCount: 88, googleRating: 4.1, googleReviewCount: 6583,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ・夜", method: "アジング" },
       { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -784,7 +784,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r905"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: false,
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/oshima-gyoko-teibo-munakata.jpg", imageAttribution: "Photo: ハポニアラ / Wikimedia Commons (CC BY 4.0)", images: [], rating: 4.5, reviewCount: 167, googleRating: 4, googleReviewCount: 1,
+    mainImageUrl: "/images/spots/wikimedia/oshima-gyoko-teibo-munakata.webp", imageAttribution: "Photo: ハポニアラ / Wikimedia Commons (CC BY 4.0)", images: [], rating: 4.5, reviewCount: 167, googleRating: 4, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("hiramasa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング・プラッキング" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ・夕マヅメ", method: "エギング" },
@@ -813,7 +813,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: region("r15"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "ベイサイドプレイス駐車場（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hakata-suzaki-gokan.jpg", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 98, googleRating: 3.6, googleReviewCount: 141,
+    mainImageUrl: "/images/spots/wikimedia/hakata-suzaki-gokan.webp", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 98, googleRating: 3.6, googleReviewCount: 141,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "アジング" },
       { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -842,7 +842,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r903"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: false,
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ainoshima-gyoko-teibo.jpg", imageAttribution: "Photo: ハポニアラ / Wikimedia Commons (CC BY 4.0)", images: [], rating: 4.0, reviewCount: 72, googleRating: 4.6, googleReviewCount: 40,
+    mainImageUrl: "/images/spots/wikimedia/ainoshima-gyoko-teibo.webp", imageAttribution: "Photo: ハポニアラ / Wikimedia Commons (CC BY 4.0)", images: [], rating: 4.0, reviewCount: 72, googleRating: 4.6, googleReviewCount: 40,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ・アジング" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
@@ -864,7 +864,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r905"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海岸沿い無料駐車場（30台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/okagaki-hatsu-gokan.jpg", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, NASA / Wikimedia Commons (Public domain)", images: [], rating: 3.8, reviewCount: 68, googleRating: 4.1, googleReviewCount: 42,
+    mainImageUrl: "/images/spots/wikimedia/okagaki-hatsu-gokan.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, NASA / Wikimedia Commons (Public domain)", images: [], rating: 3.8, reviewCount: 68, googleRating: 4.1, googleReviewCount: 42,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("hirame"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "泳がせ釣り・ルアー" },
@@ -897,7 +897,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: region("r13"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "マリノポリス駐車場（無料・50台）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/aga-marinopolis-gokan.jpg", imageAttribution: "Photo: OS6 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.1, reviewCount: 234, googleRating: 3.5, googleReviewCount: 104,
+    mainImageUrl: "/images/spots/wikimedia/aga-marinopolis-gokan.webp", imageAttribution: "Photo: OS6 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.1, reviewCount: 234, googleRating: 3.5, googleReviewCount: 104,
     catchableFish: [
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ウキ釣り・テンヤ" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -919,7 +919,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: region("r13"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "公園駐車場（1日500円）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/karuga-kaihin-gokan.jpg", imageAttribution: "Photo: OS6 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 124, googleRating: 4.1, googleReviewCount: 378,
+    mainImageUrl: "/images/spots/wikimedia/karuga-kaihin-gokan.webp", imageAttribution: "Photo: OS6 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 124, googleRating: 4.1, googleReviewCount: 378,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -948,7 +948,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: region("r13"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "公園駐車場（無料・200台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kure-portopia-gokan.jpg", imageAttribution: "Photo: OS6 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 156, googleRating: 3.9, googleReviewCount: 835,
+    mainImageUrl: "/images/spots/wikimedia/kure-portopia-gokan.webp", imageAttribution: "Photo: OS6 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 156, googleRating: 3.9, googleReviewCount: 835,
     catchableFish: [
       { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
       { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -977,7 +977,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r908"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "公園駐車場（無料・30台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sunami-kaihin-gokan.jpg", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 112, googleRating: 4.2, googleReviewCount: 502,
+    mainImageUrl: "/images/spots/wikimedia/sunami-kaihin-gokan.webp", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 112, googleRating: 4.2, googleReviewCount: 502,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ・夕マヅメ", method: "エギング" },
@@ -1006,7 +1006,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r906"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "波止手前に駐車スペース（10台）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/bouchi-no-hatojo.jpg", imageAttribution: "Photo: C2revenge / Wikimedia Commons (CC0)", images: [], rating: 3.9, reviewCount: 82, googleRating: 4.6, googleReviewCount: 5,
+    mainImageUrl: "/images/spots/wikimedia/bouchi-no-hatojo.webp", imageAttribution: "Photo: C2revenge / Wikimedia Commons (CC0)", images: [], rating: 3.9, reviewCount: 82, googleRating: 4.6, googleReviewCount: 5,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("konoshiro"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
@@ -1028,7 +1028,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r906"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "鞆の浦観光駐車場（有料500円/日）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tomonoura-sensui-gokan.jpg", imageAttribution: "Photo: 伊部リコ / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.7, reviewCount: 64, googleRating: 3.6, googleReviewCount: 22,
+    mainImageUrl: "/images/spots/wikimedia/tomonoura-sensui-gokan.webp", imageAttribution: "Photo: 伊部リコ / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.7, reviewCount: 64, googleRating: 3.6, googleReviewCount: 22,
     catchableFish: [
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "穴釣り" },
@@ -1056,7 +1056,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: region("r58"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "漁港横に駐車スペース（5台）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hoshishio-gyoko-teibo.jpg", imageAttribution: "Photo: z tanuki / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.8, reviewCount: 48,
+    mainImageUrl: "/images/spots/wikimedia/hoshishio-gyoko-teibo.webp", imageAttribution: "Photo: z tanuki / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.8, reviewCount: 48,
     catchableFish: [
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "穴釣り" },
@@ -1083,7 +1083,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: region("r13"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車スペース（15台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shimokamagari-daijizo-teibo.jpg", imageAttribution: "Photo: Puchi-masashi / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 92, googleRating: 3.6, googleReviewCount: 74,
+    mainImageUrl: "/images/spots/wikimedia/shimokamagari-daijizo-teibo.webp", imageAttribution: "Photo: Puchi-masashi / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 92, googleRating: 3.6, googleReviewCount: 74,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
@@ -1110,7 +1110,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: region("r58"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペース（10台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/innoshima-shigei-teibo.jpg", imageAttribution: "Photo: アラツク / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.9, reviewCount: 56, googleRating: 3.9, googleReviewCount: 20,
+    mainImageUrl: "/images/spots/wikimedia/innoshima-shigei-teibo.webp", imageAttribution: "Photo: アラツク / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.9, reviewCount: 56, googleRating: 3.9, googleReviewCount: 20,
     catchableFish: [
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "穴釣り" },
@@ -1132,7 +1132,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r907"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "マリーナ周辺に有料駐車場",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hiroshima-kannon-marina-gokan.jpg", imageAttribution: "Photo: Ricekun / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.6, reviewCount: 78, googleRating: 4, googleReviewCount: 183,
+    mainImageUrl: "/images/spots/wikimedia/hiroshima-kannon-marina-gokan.webp", imageAttribution: "Photo: Ricekun / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.6, reviewCount: 78, googleRating: 4, googleReviewCount: 183,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ・夜", method: "アジング" },
       { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },

@@ -152,7 +152,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2553"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kanazawa-ko.jpg", imageAttribution: "Photo: 金沢市 / Wikimedia Commons (CC BY 2.1 jp)", images: [], rating: 4.0, reviewCount: 210, googleRating: 4, googleReviewCount: 34,
+    mainImageUrl: "/images/spots/wikimedia/kanazawa-ko.webp", imageAttribution: "Photo: 金沢市 / Wikimedia Commons (CC BY 2.1 jp)", images: [], rating: 4.0, reviewCount: 210, googleRating: 4, googleReviewCount: 34,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -174,7 +174,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2551"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nanao-ko.jpg", imageAttribution: "Photo: comachiangel / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.8, reviewCount: 145, googleRating: 4.3, googleReviewCount: 4,
+    mainImageUrl: "/images/spots/wikimedia/nanao-ko.webp", imageAttribution: "Photo: comachiangel / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.8, reviewCount: 145, googleRating: 4.3, googleReviewCount: 4,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "落とし込み" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -196,7 +196,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2550"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/wajima-ko.jpg", imageAttribution: "Photo: inazakira / Wikimedia Commons (CC BY-SA 2.0)", images: [], rating: 4.1, reviewCount: 120, googleRating: 4.2, googleReviewCount: 12,
+    mainImageUrl: "/images/spots/wikimedia/wajima-ko.webp", imageAttribution: "Photo: inazakira / Wikimedia Commons (CC BY-SA 2.0)", images: [], rating: 4.1, reviewCount: 120, googleRating: 4.2, googleReviewCount: 12,
     catchableFish: [
       { fish: fish("mejina"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -218,7 +218,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2550"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/suzu-gyoko.jpg", imageAttribution: "Photo: Nyaaharu / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.9, reviewCount: 78, googleRating: 3.9, googleReviewCount: 23,
+    mainImageUrl: "/images/spots/wikimedia/suzu-gyoko.webp", imageAttribution: "Photo: Nyaaharu / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.9, reviewCount: 78, googleRating: 3.9, googleReviewCount: 23,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
@@ -240,7 +240,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2551"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "各ポイント付近に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/notojima-tsuri.jpg", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: [], rating: 4.0, reviewCount: 95, googleRating: 4.4, googleReviewCount: 112,
+    mainImageUrl: "/images/spots/wikimedia/notojima-tsuri.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: [], rating: 4.0, reviewCount: 95, googleRating: 4.4, googleReviewCount: 112,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -262,7 +262,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2554"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "砂浜に直接駐車可能",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/chirihama-tsuri.jpg", imageAttribution: "Photo: Maechan0360 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 110,
+    mainImageUrl: "/images/spots/wikimedia/chirihama-tsuri.webp", imageAttribution: "Photo: Maechan0360 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 110,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("karei"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
@@ -284,7 +284,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2552"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tedorigawa-tsuri.jpg", imageAttribution: "Photo: クハ４１９－５ / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.1, reviewCount: 88,
+    mainImageUrl: "/images/spots/wikimedia/tedorigawa-tsuri.webp", imageAttribution: "Photo: クハ４１９－５ / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.1, reviewCount: 88,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "渓流釣り" },
@@ -306,7 +306,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2552"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hashidate-gyoko.jpg", imageAttribution: "Photo: inazakira / Wikimedia Commons (CC BY-SA 2.0)", images: [], rating: 3.7, reviewCount: 72, googleRating: 3.6, googleReviewCount: 145,
+    mainImageUrl: "/images/spots/wikimedia/hashidate-gyoko.webp", imageAttribution: "Photo: inazakira / Wikimedia Commons (CC BY-SA 2.0)", images: [], rating: 3.7, reviewCount: 72, googleRating: 3.6, googleReviewCount: 145,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "メバリング" },
@@ -328,7 +328,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2554"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/fukuura-ko-ishikawa.jpg", imageAttribution: "Photo: Binka 777er / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 65,
+    mainImageUrl: "/images/spots/wikimedia/fukuura-ko-ishikawa.webp", imageAttribution: "Photo: Binka 777er / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 65,
     catchableFish: [
       { fish: fish("mejina"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -349,7 +349,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2550"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kuroshima-gyoko.jpg", imageAttribution: "Photo: Ruess1 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.7, reviewCount: 42, googleRating: 4.3, googleReviewCount: 34,
+    mainImageUrl: "/images/spots/wikimedia/kuroshima-gyoko.webp", imageAttribution: "Photo: Ruess1 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.7, reviewCount: 42, googleRating: 4.3, googleReviewCount: 34,
     catchableFish: [
       { fish: fish("kasago"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "メバリング" },
@@ -374,7 +374,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2563"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tsuruga-ko.jpg", imageAttribution: "Photo: kcomiida / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.9, reviewCount: 185, googleRating: 4.2, googleReviewCount: 10,
+    mainImageUrl: "/images/spots/wikimedia/tsuruga-ko.webp", imageAttribution: "Photo: kcomiida / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.9, reviewCount: 185, googleRating: 4.2, googleReviewCount: 10,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ダンゴ釣り" },
@@ -396,7 +396,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2562"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/obama-shinko.jpg", imageAttribution: "Photo: kcomiida / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.0, reviewCount: 165, googleRating: 4.2, googleReviewCount: 5,
+    mainImageUrl: "/images/spots/wikimedia/obama-shinko.webp", imageAttribution: "Photo: kcomiida / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.0, reviewCount: 165, googleRating: 4.2, googleReviewCount: 5,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
@@ -418,7 +418,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2564"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/mikuni-ko.jpg", imageAttribution: "Photo: shikabane taro / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.9, reviewCount: 150, googleRating: 4.2, googleReviewCount: 173,
+    mainImageUrl: "/images/spots/wikimedia/mikuni-ko.webp", imageAttribution: "Photo: shikabane taro / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.9, reviewCount: 150, googleRating: 4.2, googleReviewCount: 173,
     catchableFish: [
       { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -440,7 +440,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2560"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/echizen-gyoko.jpg", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.2, reviewCount: 135, googleRating: 4.3, googleReviewCount: 121,
+    mainImageUrl: "/images/spots/wikimedia/echizen-gyoko.webp", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.2, reviewCount: 135, googleRating: 4.3, googleReviewCount: 121,
     catchableFish: [
       { fish: fish("mejina"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -483,7 +483,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2564"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kuzuryugawa-tsuri.jpg", imageAttribution: "Photo: クハ４１９－５ / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.3, reviewCount: 120, googleRating: 3.9, googleReviewCount: 102,
+    mainImageUrl: "/images/spots/wikimedia/kuzuryugawa-tsuri.webp", imageAttribution: "Photo: クハ４１９－５ / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.3, reviewCount: 120, googleRating: 3.9, googleReviewCount: 102,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "渓流釣り" },
@@ -505,7 +505,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2564"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "湖畔駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kitagata-ko.jpg", imageAttribution: "Photo: Suikotei / Wikimedia Commons (CC BY 4.0)", images: [], rating: 3.5, reviewCount: 55, googleRating: 4.1, googleReviewCount: 40,
+    mainImageUrl: "/images/spots/wikimedia/kitagata-ko.webp", imageAttribution: "Photo: Suikotei / Wikimedia Commons (CC BY 4.0)", images: [], rating: 3.5, reviewCount: 55, googleRating: 4.1, googleReviewCount: 40,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("bluegill"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -569,7 +569,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2560"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/takasu-gyoko.jpg", imageAttribution: "Photo: NASA / Wikimedia Commons (Public domain)", images: [], rating: 3.9, reviewCount: 80, googleRating: 3.8, googleReviewCount: 116,
+    mainImageUrl: "/images/spots/wikimedia/takasu-gyoko.webp", imageAttribution: "Photo: NASA / Wikimedia Commons (Public domain)", images: [], rating: 3.9, reviewCount: 80, googleRating: 3.8, googleReviewCount: 116,
     catchableFish: [
       { fish: fish("mejina"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -594,7 +594,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2541"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/himi-gyoko.jpg", imageAttribution: "Photo: Koshinami / Wikimedia Commons (CC0)", images: [], rating: 4.2, reviewCount: 230, googleRating: 3.9, googleReviewCount: 78,
+    mainImageUrl: "/images/spots/wikimedia/himi-gyoko.webp", imageAttribution: "Photo: Koshinami / Wikimedia Commons (CC0)", images: [], rating: 4.2, reviewCount: 230, googleRating: 3.9, googleReviewCount: 78,
     catchableFish: [
       { fish: fish("buri"), monthStart: 11, monthEnd: 2, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -616,7 +616,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2542"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shinminato-gyoko.jpg", imageAttribution: "Photo: アラツク / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.9, reviewCount: 165, googleRating: 3.9, googleReviewCount: 24,
+    mainImageUrl: "/images/spots/wikimedia/shinminato-gyoko.webp", imageAttribution: "Photo: アラツク / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.9, reviewCount: 165, googleRating: 3.9, googleReviewCount: 24,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -638,7 +638,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2540"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/uozu-ko.jpg", imageAttribution: "Photo: shikabane taro / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.8, reviewCount: 120, googleRating: 4.2, googleReviewCount: 10,
+    mainImageUrl: "/images/spots/wikimedia/uozu-ko.webp", imageAttribution: "Photo: shikabane taro / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.8, reviewCount: 120, googleRating: 4.2, googleReviewCount: 10,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("saba"), monthStart: 7, monthEnd: 9, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -660,7 +660,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2542"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/toyama-shinko.jpg", imageAttribution: "Photo: 赤座 / Wikimedia Commons (CC0)", images: [], rating: 3.8, reviewCount: 140, googleRating: 4.2, googleReviewCount: 13,
+    mainImageUrl: "/images/spots/wikimedia/toyama-shinko.webp", imageAttribution: "Photo: 赤座 / Wikimedia Commons (CC0)", images: [], rating: 3.8, reviewCount: 140, googleRating: 4.2, googleReviewCount: 13,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 6, monthEnd: 9, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
@@ -682,7 +682,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2543"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "河川沿い駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kurobegawa-tsuri.jpg", imageAttribution: "Photo: Triglav / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.2, reviewCount: 75, googleRating: 4.1, googleReviewCount: 62,
+    mainImageUrl: "/images/spots/wikimedia/kurobegawa-tsuri.webp", imageAttribution: "Photo: Triglav / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.2, reviewCount: 75, googleRating: 4.1, googleReviewCount: 62,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "渓流釣り" },
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "渓流釣り" },
@@ -703,7 +703,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2541"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shogawa-tsuri.jpg", imageAttribution: "Photo: kajikawa / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.0, reviewCount: 95, googleRating: 4.1, googleReviewCount: 62,
+    mainImageUrl: "/images/spots/wikimedia/shogawa-tsuri.webp", imageAttribution: "Photo: kajikawa / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.0, reviewCount: 95, googleRating: 4.1, googleReviewCount: 62,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "渓流釣り" },
@@ -724,7 +724,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2542"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/jinzugawa-tsuri.jpg", imageAttribution: "Photo: tsuda / Wikimedia Commons (CC BY-SA 2.0)", images: [], rating: 4.3, reviewCount: 110, googleRating: 3.9, googleReviewCount: 33,
+    mainImageUrl: "/images/spots/wikimedia/jinzugawa-tsuri.webp", imageAttribution: "Photo: tsuda / Wikimedia Commons (CC BY-SA 2.0)", images: [], rating: 4.3, reviewCount: 110, googleRating: 3.9, googleReviewCount: 33,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -771,7 +771,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2500"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "無料駐車場あり（約100台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hekinan-umizuri-koen.jpg", imageAttribution: "Photo: HQA02330 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 280, googleRating: 3.6, googleReviewCount: 143,
+    mainImageUrl: "/images/spots/wikimedia/hekinan-umizuri-koen.webp", imageAttribution: "Photo: HQA02330 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 280, googleRating: 3.6, googleReviewCount: 143,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("saba"), monthStart: 7, monthEnd: 9, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -793,7 +793,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2502"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/toyohama-gyoko.jpg", imageAttribution: "Photo: gundam2345 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.1, reviewCount: 245, googleRating: 3.7, googleReviewCount: 200,
+    mainImageUrl: "/images/spots/wikimedia/toyohama-gyoko.webp", imageAttribution: "Photo: gundam2345 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.1, reviewCount: 245, googleRating: 3.7, googleReviewCount: 200,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
@@ -815,7 +815,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2502"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/morozaki-ko.jpg", imageAttribution: "Photo: Cakoko23 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 195, googleRating: 3.7, googleReviewCount: 903,
+    mainImageUrl: "/images/spots/wikimedia/morozaki-ko.webp", imageAttribution: "Photo: Cakoko23 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 195, googleRating: 3.7, googleReviewCount: 903,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -837,7 +837,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2502"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: false, parkingDetail: "島内に駐車場なし（師崎港に駐車）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shinojima-tsuri.jpg", imageAttribution: "Photo: ESU / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.3, reviewCount: 130, googleRating: 4, googleReviewCount: 97,
+    mainImageUrl: "/images/spots/wikimedia/shinojima-tsuri.webp", imageAttribution: "Photo: ESU / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.3, reviewCount: 130, googleRating: 4, googleReviewCount: 97,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("mejina"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -860,7 +860,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2502"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: false, parkingDetail: "島内に駐車場なし（師崎港に駐車）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/himakajima-tsuri.jpg", imageAttribution: "Photo: ESU / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.0, reviewCount: 115, googleRating: 4.3, googleReviewCount: 329,
+    mainImageUrl: "/images/spots/wikimedia/himakajima-tsuri.webp", imageAttribution: "Photo: ESU / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.0, reviewCount: 115, googleRating: 4.3, googleReviewCount: 329,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
@@ -882,7 +882,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2500"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kinuura-ko.jpg", imageAttribution: "Photo: 博柳 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.6, reviewCount: 155, googleRating: 4.5, googleReviewCount: 6,
+    mainImageUrl: "/images/spots/wikimedia/kinuura-ko.webp", imageAttribution: "Photo: 博柳 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.6, reviewCount: 155, googleRating: 4.5, googleReviewCount: 6,
     catchableFish: [
       { fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
       { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -925,7 +925,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2502"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "りんくうビーチ駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tokoname-rinku-tsuri.jpg", imageAttribution: "Photo: Yanajin33 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.5, reviewCount: 175,
+    mainImageUrl: "/images/spots/wikimedia/tokoname-rinku-tsuri.webp", imageAttribution: "Photo: Yanajin33 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.5, reviewCount: 175,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -949,7 +949,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2512"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/numazu-ko.jpg", imageAttribution: "Photo: Batholith / Wikimedia Commons (Public domain)", images: [], rating: 4.0, reviewCount: 235, googleRating: 3.9, googleReviewCount: 167,
+    mainImageUrl: "/images/spots/wikimedia/numazu-ko.webp", imageAttribution: "Photo: Batholith / Wikimedia Commons (Public domain)", images: [], rating: 4.0, reviewCount: 235, googleRating: 3.9, googleReviewCount: 167,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
@@ -970,7 +970,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2512"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/heda-ko.jpg", imageAttribution: "Photo: funk bass / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.1, reviewCount: 85, googleRating: 3.8, googleReviewCount: 27,
+    mainImageUrl: "/images/spots/wikimedia/heda-ko.webp", imageAttribution: "Photo: funk bass / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.1, reviewCount: 85, googleRating: 3.8, googleReviewCount: 27,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -991,7 +991,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2513"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tagonoura-ko.jpg", imageAttribution: "Photo: まも / Wikimedia Commons (Public domain)", images: [], rating: 3.8, reviewCount: 195, googleRating: 4.2, googleReviewCount: 90,
+    mainImageUrl: "/images/spots/wikimedia/tagonoura-ko.webp", imageAttribution: "Photo: まも / Wikimedia Commons (Public domain)", images: [], rating: 3.8, reviewCount: 195, googleRating: 4.2, googleReviewCount: 90,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
@@ -1012,7 +1012,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2513"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/yaizu-ko.jpg", imageAttribution: "Photo: buku2photo / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.9, reviewCount: 210, googleRating: 3.5, googleReviewCount: 47,
+    mainImageUrl: "/images/spots/wikimedia/yaizu-ko.webp", imageAttribution: "Photo: buku2photo / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.9, reviewCount: 210, googleRating: 3.5, googleReviewCount: 47,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("saba"), monthStart: 7, monthEnd: 9, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -1033,7 +1033,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2513"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/mochimune-ko.jpg", imageAttribution: "Photo: Nesnad / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 150, googleRating: 3.8, googleReviewCount: 29,
+    mainImageUrl: "/images/spots/wikimedia/mochimune-ko.webp", imageAttribution: "Photo: Nesnad / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 150, googleRating: 3.8, googleReviewCount: 29,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
@@ -1053,7 +1053,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2513"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shimizu-ko.jpg", imageAttribution: "Photo: 浅野ます道 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.1, reviewCount: 250, googleRating: 4.4, googleReviewCount: 34,
+    mainImageUrl: "/images/spots/wikimedia/shimizu-ko.webp", imageAttribution: "Photo: 浅野ます道 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.1, reviewCount: 250, googleRating: 4.4, googleReviewCount: 34,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("saba"), monthStart: 7, monthEnd: 9, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -1074,7 +1074,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2512"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shimoda-ko.jpg", imageAttribution: "Photo: Fumihiko Ueno / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.2, reviewCount: 175, googleRating: 4.4, googleReviewCount: 22,
+    mainImageUrl: "/images/spots/wikimedia/shimoda-ko.webp", imageAttribution: "Photo: Fumihiko Ueno / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.2, reviewCount: 175, googleRating: 4.4, googleReviewCount: 22,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
@@ -1095,7 +1095,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2511"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/omaezaki-ko.jpg", imageAttribution: "Photo: gundam2345 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.1, reviewCount: 190, googleRating: 4.3, googleReviewCount: 11,
+    mainImageUrl: "/images/spots/wikimedia/omaezaki-ko.webp", imageAttribution: "Photo: gundam2345 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.1, reviewCount: 190, googleRating: 4.3, googleReviewCount: 11,
     catchableFish: [
       { fish: fish("buri"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -1119,7 +1119,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2571"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kishiwada-gyoko.jpg", imageAttribution: "Photo: Unforgiven II / Wikimedia Commons (CC BY-SA 2.0)", images: [], rating: 3.9, reviewCount: 220, googleRating: 3.8, googleReviewCount: 239,
+    mainImageUrl: "/images/spots/wikimedia/kishiwada-gyoko.webp", imageAttribution: "Photo: Unforgiven II / Wikimedia Commons (CC BY-SA 2.0)", images: [], rating: 3.9, reviewCount: 220, googleRating: 3.8, googleReviewCount: 239,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ワインド" },
@@ -1140,7 +1140,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2571"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/izumisano-gyoko.jpg", imageAttribution: "Photo: Nankou Oronain (as36… / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 195, googleRating: 3.9, googleReviewCount: 12,
+    mainImageUrl: "/images/spots/wikimedia/izumisano-gyoko.webp", imageAttribution: "Photo: Nankou Oronain (as36… / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 195, googleRating: 3.9, googleReviewCount: 12,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ワインド" },
@@ -1161,7 +1161,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2570"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nanko-tsuri.jpg", imageAttribution: "Photo: z tanuki / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.5, reviewCount: 175,
+    mainImageUrl: "/images/spots/wikimedia/nanko-tsuri.webp", imageAttribution: "Photo: z tanuki / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.5, reviewCount: 175,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "落とし込み" },
@@ -1182,7 +1182,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2570"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/maishima-tsuri.jpg", imageAttribution: "Photo: ignis / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 240, googleRating: 3.9, googleReviewCount: 926,
+    mainImageUrl: "/images/spots/wikimedia/maishima-tsuri.webp", imageAttribution: "Photo: ignis / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 240, googleRating: 3.9, googleReviewCount: 926,
     catchableFish: [
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ワインド" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -1203,7 +1203,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2571"), spotType: "pier", difficulty: "beginner",
     isFree: false, hasParking: true, parkingDetail: "専用駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
-    mainImageUrl: "/images/spots/wikimedia/tottopark-kojima.jpg", imageAttribution: "Photo: shikabane taro / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.2, reviewCount: 310, googleRating: 3.3, googleReviewCount: 1457,
+    mainImageUrl: "/images/spots/wikimedia/tottopark-kojima.webp", imageAttribution: "Photo: shikabane taro / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.2, reviewCount: 310, googleRating: 3.3, googleReviewCount: 1457,
     catchableFish: [
       { fish: fish("madai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -1224,7 +1224,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2571"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "岸壁沿い駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shiomi-futo.jpg", imageAttribution: "Photo: ---=XEON=--- / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.6, reviewCount: 180, googleRating: 3.8, googleReviewCount: 93,
+    mainImageUrl: "/images/spots/wikimedia/shiomi-futo.webp", imageAttribution: "Photo: ---=XEON=--- / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.6, reviewCount: 180, googleRating: 3.8, googleReviewCount: 93,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ワインド" },
@@ -1245,7 +1245,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2571"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kaizuka-jinkoshima.jpg", imageAttribution: "Photo: Suikotei / Wikimedia Commons (CC BY 4.0)", images: [], rating: 3.9, reviewCount: 255, googleRating: 3.5, googleReviewCount: 25,
+    mainImageUrl: "/images/spots/wikimedia/kaizuka-jinkoshima.webp", imageAttribution: "Photo: Suikotei / Wikimedia Commons (CC BY 4.0)", images: [], rating: 3.9, reviewCount: 255, googleRating: 3.5, googleReviewCount: 25,
     catchableFish: [
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ワインド" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -1266,7 +1266,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2571"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海水浴場駐車場あり（夏季有料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nishikinoham-tsuri.jpg", imageAttribution: "Photo: ほっきー / Wikimedia Commons (CC0)", images: [], rating: 3.5, reviewCount: 130, googleRating: 3.9, googleReviewCount: 966,
+    mainImageUrl: "/images/spots/wikimedia/nishikinoham-tsuri.webp", imageAttribution: "Photo: ほっきー / Wikimedia Commons (CC0)", images: [], rating: 3.5, reviewCount: 130, googleRating: 3.9, googleReviewCount: 966,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
@@ -1289,7 +1289,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2602"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/biwako-onohama.jpg", imageAttribution: "Photo: Higa4 / Wikimedia Commons (CC0)", images: [], rating: 4.0, reviewCount: 280,
+    mainImageUrl: "/images/spots/wikimedia/biwako-onohama.webp", imageAttribution: "Photo: Higa4 / Wikimedia Commons (CC0)", images: [], rating: 4.0, reviewCount: 280,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("bluegill"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -1309,7 +1309,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2602"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/biwako-otsu-ko.jpg", imageAttribution: "Photo: Higa4 / Wikimedia Commons (CC0)", images: [], rating: 3.6, reviewCount: 145, googleRating: 4.2, googleReviewCount: 83,
+    mainImageUrl: "/images/spots/wikimedia/biwako-otsu-ko.webp", imageAttribution: "Photo: Higa4 / Wikimedia Commons (CC0)", images: [], rating: 3.6, reviewCount: 145, googleRating: 4.2, googleReviewCount: 83,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ヘラブナ釣り" },
@@ -1329,7 +1329,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2603"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/biwako-katata.jpg", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY 2.5)", images: [], rating: 4.2, reviewCount: 320,
+    mainImageUrl: "/images/spots/wikimedia/biwako-katata.webp", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY 2.5)", images: [], rating: 4.2, reviewCount: 320,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("bluegill"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -1350,7 +1350,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2600"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "豊公園駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/biwako-nagahama.jpg", imageAttribution: "Photo: ヨッシーパパ / Wikimedia Commons (CC0)", images: [], rating: 3.9, reviewCount: 195,
+    mainImageUrl: "/images/spots/wikimedia/biwako-nagahama.webp", imageAttribution: "Photo: ヨッシーパパ / Wikimedia Commons (CC0)", images: [], rating: 3.9, reviewCount: 195,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("bluegill"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -1370,7 +1370,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2601"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "湖岸駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/biwako-makino.jpg", imageAttribution: "Photo: Akeiro Torii / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 85, googleRating: 3.8, googleReviewCount: 597,
+    mainImageUrl: "/images/spots/wikimedia/biwako-makino.webp", imageAttribution: "Photo: Akeiro Torii / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 85, googleRating: 3.8, googleReviewCount: 597,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("ayu"), monthStart: 6, monthEnd: 9, peakSeason: false, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
@@ -1390,7 +1390,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2600"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "彦根港周辺駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/biwako-hikone.jpg", imageAttribution: "Photo: くろふね / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.8, reviewCount: 160,
+    mainImageUrl: "/images/spots/wikimedia/biwako-hikone.webp", imageAttribution: "Photo: くろふね / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.8, reviewCount: 160,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ヘラブナ釣り" },
@@ -1411,7 +1411,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2604"), spotType: "river", difficulty: "beginner",
     isFree: false, hasParking: true, parkingDetail: "湖畔駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
-    mainImageUrl: "/images/spots/wikimedia/yogoko-tsuri.jpg", imageAttribution: "Photo: Puchi-masashi / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.1, reviewCount: 230, googleRating: 4.2, googleReviewCount: 232,
+    mainImageUrl: "/images/spots/wikimedia/yogoko-tsuri.webp", imageAttribution: "Photo: Puchi-masashi / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.1, reviewCount: 230, googleRating: 4.2, googleReviewCount: 232,
     catchableFish: [
       { fish: fish("wakasagi"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ワカサギ釣り" },
       { fish: fish("koi"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ぶっこみ釣り" },
@@ -1431,7 +1431,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2600"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "長命寺港駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/biwako-omihachiman.jpg", imageAttribution: "Photo: Saimmx / Wikimedia Commons (CC0)", images: [], rating: 3.9, reviewCount: 155,
+    mainImageUrl: "/images/spots/wikimedia/biwako-omihachiman.webp", imageAttribution: "Photo: Saimmx / Wikimedia Commons (CC0)", images: [], rating: 3.9, reviewCount: 155,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("bluegill"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -1451,7 +1451,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2602"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "烏丸半島周辺駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/biwako-kusatsu.jpg", imageAttribution: "Photo: helohelon / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.0, reviewCount: 210,
+    mainImageUrl: "/images/spots/wikimedia/biwako-kusatsu.webp", imageAttribution: "Photo: helohelon / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.0, reviewCount: 210,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("bluegill"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -1471,7 +1471,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2602"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "周辺駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/setagawa-araizeki.jpg", imageAttribution: "Photo: Puchi-masashi / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 140, googleRating: 4.4, googleReviewCount: 26,
+    mainImageUrl: "/images/spots/wikimedia/setagawa-araizeki.webp", imageAttribution: "Photo: Puchi-masashi / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 140, googleRating: 4.4, googleReviewCount: 26,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ヘラブナ釣り" },
@@ -1495,7 +1495,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2610"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "管理棟前駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
-    mainImageUrl: "/images/spots/wikimedia/tsufuroko-tsuri.jpg", imageAttribution: "Photo: Nankou Oronain (as36… / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.0, reviewCount: 175, googleRating: 4, googleReviewCount: 41,
+    mainImageUrl: "/images/spots/wikimedia/tsufuroko-tsuri.webp", imageAttribution: "Photo: Nankou Oronain (as36… / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.0, reviewCount: 175, googleRating: 4, googleReviewCount: 41,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ヘラブナ釣り" },
@@ -1555,7 +1555,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2611"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "ダム周辺駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/murou-dam-tsuri.jpg", imageAttribution: "Photo: Nankou Oronain (as36… / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 90, googleRating: 3.8, googleReviewCount: 191,
+    mainImageUrl: "/images/spots/wikimedia/murou-dam-tsuri.webp", imageAttribution: "Photo: Nankou Oronain (as36… / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 90, googleRating: 3.8, googleReviewCount: 191,
     catchableFish: [
       { fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "ヘラブナ釣り" },
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -1575,7 +1575,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2610"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/yoshinogawa-gojo.jpg", imageAttribution: "Photo: Vanquish0 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 110, googleRating: 3, googleReviewCount: 1,
+    mainImageUrl: "/images/spots/wikimedia/yoshinogawa-gojo.webp", imageAttribution: "Photo: Vanquish0 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 110, googleRating: 3, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "渓流釣り" },
@@ -1596,7 +1596,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2611"), spotType: "river", difficulty: "beginner",
     isFree: false, hasParking: true, parkingDetail: "長谷寺周辺有料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hasegawa-tsuri.jpg", imageAttribution: "Photo: WolfgangMichel / Wikimedia Commons (CC0)", images: [], rating: 3.5, reviewCount: 45, googleRating: 4, googleReviewCount: 2,
+    mainImageUrl: "/images/spots/wikimedia/hasegawa-tsuri.webp", imageAttribution: "Photo: WolfgangMichel / Wikimedia Commons (CC0)", images: [], rating: 3.5, reviewCount: 45, googleRating: 4, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "渓流釣り" },
       { fish: fish("oikawa"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -1619,7 +1619,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2520"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nagaragawa-gujo.jpg", imageAttribution: "Photo: Yoshihito Ohki / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.5, reviewCount: 350,
+    mainImageUrl: "/images/spots/wikimedia/nagaragawa-gujo.webp", imageAttribution: "Photo: Yoshihito Ohki / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.5, reviewCount: 350,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "渓流釣り" },
@@ -1640,7 +1640,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2523"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ibigawa-tsuri.jpg", imageAttribution: "Photo: HISASHI UNO / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 95,
+    mainImageUrl: "/images/spots/wikimedia/ibigawa-tsuri.webp", imageAttribution: "Photo: HISASHI UNO / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 95,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
       { fish: fish("ugui"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "エサ釣り" },
@@ -1660,7 +1660,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2520"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "河川沿い駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/itadorigawa-tsuri.jpg", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: [], rating: 4.2, reviewCount: 110, googleRating: 4.5, googleReviewCount: 30,
+    mainImageUrl: "/images/spots/wikimedia/itadorigawa-tsuri.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: [], rating: 4.2, reviewCount: 110, googleRating: 4.5, googleReviewCount: 30,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "渓流釣り" },
@@ -1680,7 +1680,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2521"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "温泉街周辺駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hidagawa-gero.jpg", imageAttribution: "Photo: Miyuki Meinaka / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.9, reviewCount: 85,
+    mainImageUrl: "/images/spots/wikimedia/hidagawa-gero.webp", imageAttribution: "Photo: Miyuki Meinaka / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.9, reviewCount: 85,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "渓流釣り" },
@@ -1700,7 +1700,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2522"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "河川沿い駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tsukechigawa-tsuri.jpg", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: [], rating: 4.1, reviewCount: 75, googleRating: 4.7, googleReviewCount: 3,
+    mainImageUrl: "/images/spots/wikimedia/tsukechigawa-tsuri.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: [], rating: 4.1, reviewCount: 75, googleRating: 4.7, googleReviewCount: 3,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "渓流釣り" },
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "渓流釣り" },
@@ -1743,7 +1743,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2532"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/owase-ko.jpg", imageAttribution: "Photo: A10ml / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 165, googleRating: 4.2, googleReviewCount: 28,
+    mainImageUrl: "/images/spots/wikimedia/owase-ko.webp", imageAttribution: "Photo: A10ml / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 165, googleRating: 4.2, googleReviewCount: 28,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("mejina"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -1764,7 +1764,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2532"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港内駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hikimoto-ko.jpg", imageAttribution: "Photo: Mamusi Taka / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.1, reviewCount: 95, googleRating: 3.6, googleReviewCount: 26,
+    mainImageUrl: "/images/spots/wikimedia/hikimoto-ko.webp", imageAttribution: "Photo: Mamusi Taka / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.1, reviewCount: 95, googleRating: 3.6, googleReviewCount: 26,
     catchableFish: [
       { fish: fish("mejina"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -1784,7 +1784,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2531"), spotType: "rocky", difficulty: "intermediate",
     isFree: true, hasParking: false, parkingDetail: "島内に駐車場なし（鳥羽港に駐車）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/toshijima-tsuri.jpg", imageAttribution: "Photo: Ｊun O / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.3, reviewCount: 140, googleRating: 4.4, googleReviewCount: 54,
+    mainImageUrl: "/images/spots/wikimedia/toshijima-tsuri.webp", imageAttribution: "Photo: Ｊun O / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.3, reviewCount: 140, googleRating: 4.4, googleReviewCount: 54,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("mejina"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -1805,7 +1805,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2531"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/toba-ko.jpg", imageAttribution: "Photo: Miyuki Meinaka / Wikimedia Commons (Public domain)", images: [], rating: 3.7, reviewCount: 185, googleRating: 4.1, googleReviewCount: 286,
+    mainImageUrl: "/images/spots/wikimedia/toba-ko.webp", imageAttribution: "Photo: Miyuki Meinaka / Wikimedia Commons (Public domain)", images: [], rating: 3.7, reviewCount: 185, googleRating: 4.1, googleReviewCount: 286,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
@@ -1825,7 +1825,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2531"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nakiri-gyoko.jpg", imageAttribution: "Photo: Miyuki Meinaka / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.1, reviewCount: 110, googleRating: 3.9, googleReviewCount: 73,
+    mainImageUrl: "/images/spots/wikimedia/nakiri-gyoko.webp", imageAttribution: "Photo: Miyuki Meinaka / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.1, reviewCount: 110, googleRating: 3.9, googleReviewCount: 73,
     catchableFish: [
       { fish: fish("mejina"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -1846,7 +1846,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2530"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ominato-gyoko-mie.jpg", imageAttribution: "Photo: Miyuki Meinaka / Wikimedia Commons (CC0)", images: [], rating: 3.6, reviewCount: 95, googleRating: 5, googleReviewCount: 1,
+    mainImageUrl: "/images/spots/wikimedia/ominato-gyoko-mie.webp", imageAttribution: "Photo: Miyuki Meinaka / Wikimedia Commons (CC0)", images: [], rating: 3.6, reviewCount: 95, googleRating: 5, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -1866,7 +1866,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2532"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kiinagashima-ko.jpg", imageAttribution: "Photo: Mamusi Taka / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.9, reviewCount: 155, googleRating: 4.1, googleReviewCount: 26,
+    mainImageUrl: "/images/spots/wikimedia/kiinagashima-ko.webp", imageAttribution: "Photo: Mamusi Taka / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.9, reviewCount: 155, googleRating: 4.1, googleReviewCount: 26,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("mejina"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -1887,7 +1887,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2531"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/matoya-gyoko.jpg", imageAttribution: "Photo: Miyuki Meinaka / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 75, googleRating: 3, googleReviewCount: 1,
+    mainImageUrl: "/images/spots/wikimedia/matoya-gyoko.webp", imageAttribution: "Photo: Miyuki Meinaka / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 75, googleRating: 3, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -1910,7 +1910,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2591"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "町営駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ine-gyoko.jpg", imageAttribution: "Photo: Raita Futo from Tokyo, Japan / Wikimedia Commons (CC BY 2.0)", images: [], rating: 4.3, reviewCount: 185, googleRating: 3.8, googleReviewCount: 37,
+    mainImageUrl: "/images/spots/wikimedia/ine-gyoko.webp", imageAttribution: "Photo: Raita Futo from Tokyo, Japan / Wikimedia Commons (CC BY 2.0)", images: [], rating: 4.3, reviewCount: 185, googleRating: 3.8, googleReviewCount: 37,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -1931,7 +1931,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2590"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/miyazu-ko.jpg", imageAttribution: "Photo: Yanajin33 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 145,
+    mainImageUrl: "/images/spots/wikimedia/miyazu-ko.webp", imageAttribution: "Photo: Yanajin33 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 145,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 6, monthEnd: 9, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
@@ -1952,7 +1952,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2590"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/maizuru-gyoko.jpg", imageAttribution: "Photo: Mont Blank rich / Wikimedia Commons (CC0)", images: [], rating: 3.9, reviewCount: 210, googleRating: 3, googleReviewCount: 2,
+    mainImageUrl: "/images/spots/wikimedia/maizuru-gyoko.webp", imageAttribution: "Photo: Mont Blank rich / Wikimedia Commons (CC0)", images: [], rating: 3.9, reviewCount: 210, googleRating: 3, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -1973,7 +1973,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2590"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "天橋立駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/amanohashidate-tsuri.jpg", imageAttribution: "Photo: Drivephotographer / Wikimedia Commons (CC0)", images: [], rating: 3.6, reviewCount: 120, googleRating: 4.5, googleReviewCount: 6994,
+    mainImageUrl: "/images/spots/wikimedia/amanohashidate-tsuri.webp", imageAttribution: "Photo: Drivephotographer / Wikimedia Commons (CC0)", images: [], rating: 3.6, reviewCount: 120, googleRating: 4.5, googleReviewCount: 6994,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
@@ -1993,7 +1993,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2591"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "湾岸駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kumihama-tsuri.jpg", imageAttribution: "Photo: chatani / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.6, reviewCount: 65,
+    mainImageUrl: "/images/spots/wikimedia/kumihama-tsuri.webp", imageAttribution: "Photo: chatani / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.6, reviewCount: 65,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -2013,7 +2013,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2591"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/taiza-gyoko.jpg", imageAttribution: "Photo: YOSHIFUMI OGISO / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.0, reviewCount: 90, googleRating: 4, googleReviewCount: 58,
+    mainImageUrl: "/images/spots/wikimedia/taiza-gyoko.webp", imageAttribution: "Photo: YOSHIFUMI OGISO / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.0, reviewCount: 90, googleRating: 4, googleReviewCount: 58,
     catchableFish: [
       { fish: fish("mejina"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -2037,7 +2037,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2580"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/aioi-ko.jpg", imageAttribution: "Photo: Corpse Reviver / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 120, googleRating: 4, googleReviewCount: 1,
+    mainImageUrl: "/images/spots/wikimedia/aioi-ko.webp", imageAttribution: "Photo: Corpse Reviver / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 120, googleRating: 4, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ダンゴ釣り" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -2058,7 +2058,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2580"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/murotsu-gyoko.jpg", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: [], rating: 3.8, reviewCount: 95, googleRating: 3.8, googleReviewCount: 74,
+    mainImageUrl: "/images/spots/wikimedia/murotsu-gyoko.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: [], rating: 3.8, reviewCount: 95, googleRating: 3.8, googleReviewCount: 74,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ダンゴ釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "メバリング" },
@@ -2078,7 +2078,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2580"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "御崎駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ako-misaki-tsuri.jpg", imageAttribution: "Photo: mikeneko / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.0, reviewCount: 110,
+    mainImageUrl: "/images/spots/wikimedia/ako-misaki-tsuri.webp", imageAttribution: "Photo: mikeneko / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.0, reviewCount: 110,
     catchableFish: [
       { fish: fish("mejina"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -2099,7 +2099,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2580"), spotType: "rocky", difficulty: "intermediate",
     isFree: true, hasParking: false, parkingDetail: "島内に駐車場なし（姫路港に駐車）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/iejima-tsuri.jpg", imageAttribution: "Photo: Yuuki20041221 / Wikimedia Commons (CC0)", images: [], rating: 4.1, reviewCount: 100, googleRating: 4.2, googleReviewCount: 43,
+    mainImageUrl: "/images/spots/wikimedia/iejima-tsuri.webp", imageAttribution: "Photo: Yuuki20041221 / Wikimedia Commons (CC0)", images: [], rating: 4.1, reviewCount: 100, googleRating: 4.2, googleReviewCount: 43,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "メバリング" },
@@ -2120,7 +2120,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2580"), spotType: "rocky", difficulty: "intermediate",
     isFree: true, hasParking: false, parkingDetail: "島内に駐車場なし（姫路港に駐車）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/bozejima-tsuri.jpg", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY 2.5)", images: [], rating: 4.2, reviewCount: 85, googleRating: 3.9, googleReviewCount: 67,
+    mainImageUrl: "/images/spots/wikimedia/bozejima-tsuri.webp", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY 2.5)", images: [], rating: 4.2, reviewCount: 85, googleRating: 3.9, googleReviewCount: 67,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "メバリング" },
@@ -2141,7 +2141,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2580"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shibayama-ko.jpg", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 70, googleRating: 3.9, googleReviewCount: 17,
+    mainImageUrl: "/images/spots/wikimedia/shibayama-ko.webp", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 70, googleRating: 3.9, googleReviewCount: 17,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "メバリング" },
@@ -2165,7 +2165,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2623"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kushimoto-ko.jpg", imageAttribution: "Photo: Drivephotographer / Wikimedia Commons (CC0)", images: [], rating: 4.5, reviewCount: 320, googleRating: 3.9, googleReviewCount: 125,
+    mainImageUrl: "/images/spots/wikimedia/kushimoto-ko.webp", imageAttribution: "Photo: Drivephotographer / Wikimedia Commons (CC0)", images: [], rating: 4.5, reviewCount: 320, googleRating: 3.9, googleReviewCount: 125,
     catchableFish: [
       { fish: fish("mejina"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -2186,7 +2186,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2622"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/taiji-ko.jpg", imageAttribution: "Photo: アラツク / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.9, reviewCount: 95, googleRating: 4.6, googleReviewCount: 8,
+    mainImageUrl: "/images/spots/wikimedia/taiji-ko.webp", imageAttribution: "Photo: アラツク / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.9, reviewCount: 95, googleRating: 4.6, googleReviewCount: 8,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("mejina"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -2206,7 +2206,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2621"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tanabe-gyoko.jpg", imageAttribution: "Photo: Vanquish0 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 185, googleRating: 5, googleReviewCount: 1,
+    mainImageUrl: "/images/spots/wikimedia/tanabe-gyoko.webp", imageAttribution: "Photo: Vanquish0 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 185, googleRating: 5, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -2227,7 +2227,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2620"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺有料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kada-gyoko.jpg", imageAttribution: "Photo: Hiroaki Kaneko / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.2, reviewCount: 220, googleRating: 3.8, googleReviewCount: 49,
+    mainImageUrl: "/images/spots/wikimedia/kada-gyoko.webp", imageAttribution: "Photo: Hiroaki Kaneko / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.2, reviewCount: 220, googleRating: 3.8, googleReviewCount: 49,
     catchableFish: [
       { fish: fish("madai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },

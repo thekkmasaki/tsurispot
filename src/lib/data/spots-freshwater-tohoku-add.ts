@@ -60,7 +60,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
     hasParking: true, parkingDetail: "各入渓ポイント付近に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tokachigawa-trout.jpg", imageAttribution: "Photo: pakku / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/tokachigawa-trout.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tokachigawa-trout.webp", imageAttribution: "Photo: pakku / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/tokachigawa-trout.webp"],
     rating: 4.4, reviewCount: 76, googleRating: 3.9, googleReviewCount: 105,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -84,7 +84,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
     hasParking: true, parkingDetail: "各入渓ポイント付近に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/teshiogawa-trout.jpg", imageAttribution: "Photo: inunami / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/teshiogawa-trout.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/teshiogawa-trout.webp", imageAttribution: "Photo: inunami / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/teshiogawa-trout.webp"],
     rating: 4.5, reviewCount: 62, googleRating: 4, googleReviewCount: 143,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -108,7 +108,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: true, feeDetail: "遊漁券不要（石狩川水系豊平川は遊漁券不要区間が多い）",
     hasParking: true, parkingDetail: "定山渓温泉街に有料駐車場あり。河川沿いにも駐車スペース点在",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/toyohiragawa-trout.jpg", imageAttribution: "Photo: t-konno / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/toyohiragawa-trout.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/toyohiragawa-trout.webp", imageAttribution: "Photo: t-konno / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/toyohiragawa-trout.webp"],
     rating: 3.9, reviewCount: 98, googleRating: 4.2, googleReviewCount: 70,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -132,7 +132,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
     hasParking: true, parkingDetail: "層雲峡温泉街に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ishikarigawa-upper-trout.jpg", imageAttribution: "Photo: pakku / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/ishikarigawa-upper-trout.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/ishikarigawa-upper-trout.webp", imageAttribution: "Photo: pakku / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/ishikarigawa-upper-trout.webp"],
     rating: 4.1, reviewCount: 52, googleRating: 3.3, googleReviewCount: 3,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -182,7 +182,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
     hasParking: true, parkingDetail: "虹の湖公園駐車場（無料）等あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/asaseishigawa-keiryu.jpg", imageAttribution: "Photo: 掬茶 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/asaseishigawa-keiryu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/asaseishigawa-keiryu.webp", imageAttribution: "Photo: 掬茶 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/asaseishigawa-keiryu.webp"],
     rating: 3.7, reviewCount: 38, googleRating: 4, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "餌釣り" },
@@ -206,7 +206,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "入渓ポイント付近に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/akaishigawa-keiryu.jpg", imageAttribution: "Photo: firecatdriver / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/akaishigawa-keiryu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/akaishigawa-keiryu.webp", imageAttribution: "Photo: firecatdriver / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/akaishigawa-keiryu.webp"],
     rating: 4.3, reviewCount: 45, googleRating: 3.8, googleReviewCount: 10,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "餌釣り" },
@@ -231,7 +231,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kitakamigawa-upper-keiryu.jpg", imageAttribution: "Photo: 小石川人晃 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/kitakamigawa-upper-keiryu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kitakamigawa-upper-keiryu.webp", imageAttribution: "Photo: 小石川人晃 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/kitakamigawa-upper-keiryu.webp"],
     rating: 4.0, reviewCount: 65, googleRating: 4, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -256,7 +256,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 全魚種 大人2,000円（1日）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kesengawa-keiryu.jpg", imageAttribution: "Photo: Yauchi / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/kesengawa-keiryu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kesengawa-keiryu.webp", imageAttribution: "Photo: Yauchi / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/kesengawa-keiryu.webp"],
     rating: 4.0, reviewCount: 52, googleRating: 4.7, googleReviewCount: 3,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -280,7 +280,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "猊鼻渓駐車場（有料）、上流域に路肩駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/satetsugawa-keiryu.jpg", imageAttribution: "Photo: とらもん192 / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/satetsugawa-keiryu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/satetsugawa-keiryu.webp", imageAttribution: "Photo: とらもん192 / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/satetsugawa-keiryu.webp"],
     rating: 3.8, reviewCount: 35, googleRating: 4.2, googleReviewCount: 6,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -305,7 +305,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "サクラマス共通券 年券15,000円 / 日券3,500円、アユ日券1,000円",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/yoneshirogawa-upper-trout.jpg", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/yoneshirogawa-upper-trout.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/yoneshirogawa-upper-trout.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/yoneshirogawa-upper-trout.webp"],
     rating: 4.4, reviewCount: 89, googleRating: 4, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("sakuramasu"), monthStart: 3, monthEnd: 8, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -379,7 +379,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "入渓ポイント周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/mogamigawa-upper-keiryu.jpg", imageAttribution: "Photo: contri from Yonezawa-Shi, Yamagata, Japan / Wikimedia Commons (CC BY-SA 2.0)", images: ["/images/spots/wikimedia/mogamigawa-upper-keiryu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/mogamigawa-upper-keiryu.webp", imageAttribution: "Photo: contri from Yonezawa-Shi, Yamagata, Japan / Wikimedia Commons (CC BY-SA 2.0)", images: ["/images/spots/wikimedia/mogamigawa-upper-keiryu.webp"],
     rating: 4.0, reviewCount: 47,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "餌釣り" },
@@ -403,7 +403,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日）",
     hasParking: true, parkingDetail: "白川ダム周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/okitama-shirakawa-keiryu.jpg", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/okitama-shirakawa-keiryu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/okitama-shirakawa-keiryu.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/okitama-shirakawa-keiryu.webp"],
     rating: 4.3, reviewCount: 55,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" },
@@ -426,7 +426,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "入渓ポイント付近に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/akagawa-keiryu.jpg", imageAttribution: "Photo: Jaerijaeri / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/akagawa-keiryu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/akagawa-keiryu.webp", imageAttribution: "Photo: Jaerijaeri / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/akagawa-keiryu.webp"],
     rating: 3.9, reviewCount: 44, googleRating: 3.7, googleReviewCount: 19,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -451,7 +451,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "秋保温泉周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/natorigawa-keiryu.jpg", imageAttribution: "Photo: TANAKA Juuyoh (田中十洋) / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/natorigawa-keiryu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/natorigawa-keiryu.webp", imageAttribution: "Photo: TANAKA Juuyoh (田中十洋) / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/natorigawa-keiryu.webp"],
     rating: 4.1, reviewCount: 59, googleRating: 4.4, googleReviewCount: 8,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -475,7 +475,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "鬼首温泉郷周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/araogawa-keiryu.jpg", imageAttribution: "Photo: suzune konoo / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/araogawa-keiryu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/araogawa-keiryu.webp", imageAttribution: "Photo: suzune konoo / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/araogawa-keiryu.webp"],
     rating: 4.2, reviewCount: 68,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" },
@@ -498,7 +498,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "七ヶ宿ダム周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shiroishigawa-keiryu.jpg", imageAttribution: "Photo: CloudVisual cloudvisual / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/shiroishigawa-keiryu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/shiroishigawa-keiryu.webp", imageAttribution: "Photo: CloudVisual cloudvisual / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/shiroishigawa-keiryu.webp"],
     rating: 3.8, reviewCount: 47, googleRating: 4.3, googleReviewCount: 44,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -522,7 +522,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券が必要（バス釣りでも他魚種が対象のため）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/abukumagawa-miyagi-bass.jpg", imageAttribution: "Photo: Yukky81 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/abukumagawa-miyagi-bass.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/abukumagawa-miyagi-bass.webp", imageAttribution: "Photo: Yukky81 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/abukumagawa-miyagi-bass.webp"],
     rating: 3.9, reviewCount: 72, googleRating: 2, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -551,7 +551,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "入渓ポイント付近に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tadamigawa-upper-keiryu.jpg", imageAttribution: "Photo: 東京特許許可局 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/tadamigawa-upper-keiryu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tadamigawa-upper-keiryu.webp", imageAttribution: "Photo: 東京特許許可局 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/tadamigawa-upper-keiryu.webp"],
     rating: 4.4, reviewCount: 58, googleRating: 4.3, googleReviewCount: 103,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "餌釣り" },
@@ -574,7 +574,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "檜枝岐村内に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hinoemata-keiryu.jpg", imageAttribution: "Photo: Fumihiko Ueno / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/hinoemata-keiryu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/hinoemata-keiryu.webp", imageAttribution: "Photo: Fumihiko Ueno / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/hinoemata-keiryu.webp"],
     rating: 4.0, reviewCount: 64,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "餌釣り" },
@@ -597,7 +597,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人500円（1日）",
     hasParking: true, parkingDetail: "天神浜駐車場（無料・冬季有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/inawashiroko-wakasagi.jpg", imageAttribution: "Photo: shikabane taro / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/inawashiroko-wakasagi.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/inawashiroko-wakasagi.webp", imageAttribution: "Photo: shikabane taro / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/inawashiroko-wakasagi.webp"],
     rating: 3.9, reviewCount: 82, googleRating: 3.7, googleReviewCount: 81,
     catchableFish: [
       { fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ワカサギ仕掛け" },
@@ -622,7 +622,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人700円（1日）",
     hasParking: true, parkingDetail: "湖畔に無料駐車場複数あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
-    mainImageUrl: "/images/spots/wikimedia/hibarako-wakasagi-add.jpg", imageAttribution: "Photo: contri / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/hibarako-wakasagi-add.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/hibarako-wakasagi-add.webp", imageAttribution: "Photo: contri / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/hibarako-wakasagi-add.webp"],
     rating: 4.2, reviewCount: 115, googleRating: 4.3, googleReviewCount: 471,
     catchableFish: [
       { fish: fish("wakasagi"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ドーム船/氷上穴釣り" },

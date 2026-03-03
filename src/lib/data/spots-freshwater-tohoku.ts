@@ -49,7 +49,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
     hasParking: true, parkingDetail: "砂湯駐車場（無料）、和琴半島駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kussharoko-trout.jpg", imageAttribution: "Photo: pakku / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/kussharoko-trout.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kussharoko-trout.webp", imageAttribution: "Photo: pakku / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/kussharoko-trout.webp"],
     rating: 4.2, reviewCount: 87, googleRating: 4.5, googleReviewCount: 388,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -75,7 +75,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "各入渓ポイントに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shiribetsugawa-trout.jpg", imageAttribution: "Photo: pakku / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/shiribetsugawa-trout.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/shiribetsugawa-trout.webp", imageAttribution: "Photo: pakku / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/shiribetsugawa-trout.webp"],
     rating: 4.5, reviewCount: 112, googleRating: 3.9, googleReviewCount: 75,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -125,7 +125,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "朱鞠内湖畔キャンプ場駐車場（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shumarinai-trout.jpg", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/shumarinai-trout.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/shumarinai-trout.webp", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/shumarinai-trout.webp"],
     rating: 4.3, reviewCount: 68, googleRating: 4.1, googleReviewCount: 117,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -150,7 +150,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
     hasParking: true, parkingDetail: "各入渓ポイントに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/chubetsugawa-trout.jpg", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/chubetsugawa-trout.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/chubetsugawa-trout.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/chubetsugawa-trout.webp"],
     rating: 4.0, reviewCount: 54, googleRating: 5, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -175,7 +175,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日・アユ）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/iwakigawa-ayu.jpg", imageAttribution: "Photo: A_CUVE / Wikimedia Commons (CC BY-SA 2.0)", images: ["/images/spots/wikimedia/iwakigawa-ayu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/iwakigawa-ayu.webp", imageAttribution: "Photo: A_CUVE / Wikimedia Commons (CC BY-SA 2.0)", images: ["/images/spots/wikimedia/iwakigawa-ayu.webp"],
     rating: 3.9, reviewCount: 73, googleRating: 3.8, googleReviewCount: 92,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -203,7 +203,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 500円（1日）",
     hasParking: true, parkingDetail: "湖畔公園駐車場（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ogawarako-bass.jpg", imageAttribution: "Photo: 国土交通省 東北地方整備局 青森河川国道事務所 / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/ogawarako-bass.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/ogawarako-bass.webp", imageAttribution: "Photo: 国土交通省 東北地方整備局 青森河川国道事務所 / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/ogawarako-bass.webp"],
     rating: 3.8, reviewCount: 62, googleRating: 4, googleReviewCount: 111,
     catchableFish: [
       { fish: fish("wakasagi"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "氷上穴釣り" },
@@ -260,7 +260,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,500円（1日・アユ）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/heigawa-ayu.jpg", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, NASA / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/heigawa-ayu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/heigawa-ayu.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, NASA / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/heigawa-ayu.webp"],
     rating: 4.1, reviewCount: 56, googleRating: 3.5, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -287,7 +287,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日・アユ）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/omonogawa-ayu.jpg", imageAttribution: "Photo: Yauchi / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/omonogawa-ayu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/omonogawa-ayu.webp", imageAttribution: "Photo: Yauchi / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/omonogawa-ayu.webp"],
     rating: 4.0, reviewCount: 81, googleRating: 3.6, googleReviewCount: 116,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -317,7 +317,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "角館市街地に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hinokinaigawa-keiryu.jpg", imageAttribution: "Photo: 掬茶 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/hinokinaigawa-keiryu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/hinokinaigawa-keiryu.webp", imageAttribution: "Photo: 掬茶 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/hinokinaigawa-keiryu.webp"],
     rating: 3.9, reviewCount: 42, googleRating: 4, googleReviewCount: 13,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "餌釣り" },
@@ -370,7 +370,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日・アユ）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ogunigawa-ayu.jpg", imageAttribution: "Photo: MWE / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/ogunigawa-ayu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/ogunigawa-ayu.webp", imageAttribution: "Photo: MWE / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/ogunigawa-ayu.webp"],
     rating: 4.3, reviewCount: 78, googleRating: 3, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -397,7 +397,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "河川敷付近にコインパーキングあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hirosegawa-keiryu.jpg", imageAttribution: "Photo: 石巻敎祖 / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/hirosegawa-keiryu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/hirosegawa-keiryu.webp", imageAttribution: "Photo: 石巻敎祖 / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/hirosegawa-keiryu.webp"],
     rating: 3.8, reviewCount: 124, googleRating: 4.4, googleReviewCount: 8,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -425,7 +425,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日・アユ）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/narusegawa-ayu.jpg", imageAttribution: "Photo: くろふね / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/narusegawa-ayu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/narusegawa-ayu.webp", imageAttribution: "Photo: くろふね / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/narusegawa-ayu.webp"],
     rating: 3.9, reviewCount: 67, googleRating: 3.4, googleReviewCount: 58,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },

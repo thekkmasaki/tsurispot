@@ -35,8 +35,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tomakomai-nishi-port.jpg", imageAttribution: "Photo: inunami / Wikimedia Commons (CC BY 2.0)",
-    images: ["/images/spots/wikimedia/tomakomai-nishi-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tomakomai-nishi-port.webp", imageAttribution: "Photo: inunami / Wikimedia Commons (CC BY 2.0)",
+    images: ["/images/spots/wikimedia/tomakomai-nishi-port.webp"],
     rating: 3.8,
     reviewCount: 134, googleRating: 3.8, googleReviewCount: 1275,
     catchableFish: [
@@ -87,8 +87,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/muroran-port.jpg", imageAttribution: "Photo: Hiroshi Nakai / Wikimedia Commons (CC BY 2.0)",
-    images: ["/images/spots/wikimedia/muroran-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/muroran-port.webp", imageAttribution: "Photo: Hiroshi Nakai / Wikimedia Commons (CC BY 2.0)",
+    images: ["/images/spots/wikimedia/muroran-port.webp"],
     rating: 3.9,
     reviewCount: 98, googleRating: 4, googleReviewCount: 11,
     catchableFish: [
@@ -138,9 +138,9 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hakodate-port.jpg",
+    mainImageUrl: "/images/spots/wikimedia/hakodate-port.webp",
     imageAttribution: "Photo: 663highland / CC BY 2.5",
-    images: ["/images/spots/wikimedia/hakodate-port.jpg"],
+    images: ["/images/spots/wikimedia/hakodate-port.webp"],
     rating: 4.0,
     reviewCount: 167,
     catchableFish: [
@@ -187,9 +187,9 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kushiro-port.jpg",
+    mainImageUrl: "/images/spots/wikimedia/kushiro-port.webp",
     imageAttribution: "Photo: 663highland / CC BY 2.5",
-    images: ["/images/spots/wikimedia/kushiro-port.jpg"],
+    images: ["/images/spots/wikimedia/kushiro-port.webp"],
     rating: 3.7,
     reviewCount: 76, googleRating: 4.1, googleReviewCount: 22,
     catchableFish: [
@@ -235,8 +235,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hachinohe-port.jpg", imageAttribution: "Photo: Moyashisan / Wikimedia Commons (CC BY-SA 4.0)",
-    images: ["/images/spots/wikimedia/hachinohe-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/hachinohe-port.webp", imageAttribution: "Photo: Moyashisan / Wikimedia Commons (CC BY-SA 4.0)",
+    images: ["/images/spots/wikimedia/hachinohe-port.webp"],
     rating: 4.0,
     reviewCount: 145, googleRating: 3.6, googleReviewCount: 156,
     catchableFish: [
@@ -282,8 +282,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ajigasawa-port.jpg", imageAttribution: "Photo: ワニの製作者不明　／　撮影者　あおもりくま / Wikimedia Commons (Public domain)",
-    images: ["/images/spots/wikimedia/ajigasawa-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/ajigasawa-port.webp", imageAttribution: "Photo: ワニの製作者不明　／　撮影者　あおもりくま / Wikimedia Commons (Public domain)",
+    images: ["/images/spots/wikimedia/ajigasawa-port.webp"],
     rating: 3.6,
     reviewCount: 42, googleRating: 3.6, googleReviewCount: 7,
     catchableFish: [
@@ -328,8 +328,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tappi-zaki.jpg", imageAttribution: "Photo: --あおもりくま（Aomorikuma） 2020年8月15日 (土) 07:02 (UTC) / Wikimedia Commons (Public domain)",
-    images: ["/images/spots/wikimedia/tappi-zaki.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tappi-zaki.webp", imageAttribution: "Photo: --あおもりくま（Aomorikuma） 2020年8月15日 (土) 07:02 (UTC) / Wikimedia Commons (Public domain)",
+    images: ["/images/spots/wikimedia/tappi-zaki.webp"],
     rating: 4.3,
     reviewCount: 38, googleRating: 4.3, googleReviewCount: 3033,
     catchableFish: [
@@ -377,8 +377,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/miyako-port.jpg", imageAttribution: "Photo: Yasu (talk) / Wikimedia Commons (CC BY-SA 3.0)",
-    images: ["/images/spots/wikimedia/miyako-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/miyako-port.webp", imageAttribution: "Photo: Yasu (talk) / Wikimedia Commons (CC BY-SA 3.0)",
+    images: ["/images/spots/wikimedia/miyako-port.webp"],
     rating: 3.7,
     reviewCount: 65, googleRating: 3.6, googleReviewCount: 229,
     catchableFish: [
@@ -423,8 +423,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ofunato-port.jpg", imageAttribution: "Photo: まも / Wikimedia Commons (Public domain)",
-    images: ["/images/spots/wikimedia/ofunato-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/ofunato-port.webp", imageAttribution: "Photo: まも / Wikimedia Commons (Public domain)",
+    images: ["/images/spots/wikimedia/ofunato-port.webp"],
     rating: 3.6,
     reviewCount: 48, googleRating: 3.6, googleReviewCount: 7,
     catchableFish: [
@@ -470,8 +470,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ishinomaki-port.jpg", imageAttribution: "Photo: które shikabane taro / Wikimedia Commons (CC BY 3.0)",
-    images: ["/images/spots/wikimedia/ishinomaki-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/ishinomaki-port.webp", imageAttribution: "Photo: które shikabane taro / Wikimedia Commons (CC BY 3.0)",
+    images: ["/images/spots/wikimedia/ishinomaki-port.webp"],
     rating: 3.9,
     reviewCount: 112, googleRating: 4.1, googleReviewCount: 10,
     catchableFish: [
@@ -517,8 +517,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kesennuma-port.jpg", imageAttribution: "Photo: とらもん192 / Wikimedia Commons (CC BY 4.0)",
-    images: ["/images/spots/wikimedia/kesennuma-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kesennuma-port.webp", imageAttribution: "Photo: とらもん192 / Wikimedia Commons (CC BY 4.0)",
+    images: ["/images/spots/wikimedia/kesennuma-port.webp"],
     rating: 3.8,
     reviewCount: 72, googleRating: 4.3, googleReviewCount: 45,
     catchableFish: [
@@ -563,8 +563,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shiogama-port.jpg", imageAttribution: "Photo: ChiefHira / Wikimedia Commons (CC BY-SA 3.0)",
-    images: ["/images/spots/wikimedia/shiogama-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/shiogama-port.webp", imageAttribution: "Photo: ChiefHira / Wikimedia Commons (CC BY-SA 3.0)",
+    images: ["/images/spots/wikimedia/shiogama-port.webp"],
     rating: 3.6,
     reviewCount: 89, googleRating: 4.3, googleReviewCount: 3102,
     catchableFish: [
@@ -609,8 +609,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/oga-marina.jpg", imageAttribution: "Photo: inunami / Wikimedia Commons (CC BY 2.0)",
-    images: ["/images/spots/wikimedia/oga-marina.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/oga-marina.webp", imageAttribution: "Photo: inunami / Wikimedia Commons (CC BY 2.0)",
+    images: ["/images/spots/wikimedia/oga-marina.webp"],
     rating: 3.7,
     reviewCount: 56, googleRating: 3.9, googleReviewCount: 19,
     catchableFish: [
@@ -656,8 +656,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/oga-kamo-iso.jpg", imageAttribution: "Photo: らんで / Wikimedia Commons (CC BY 4.0)",
-    images: ["/images/spots/wikimedia/oga-kamo-iso.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/oga-kamo-iso.webp", imageAttribution: "Photo: らんで / Wikimedia Commons (CC BY 4.0)",
+    images: ["/images/spots/wikimedia/oga-kamo-iso.webp"],
     rating: 4.2,
     reviewCount: 34, googleRating: 4, googleReviewCount: 61,
     catchableFish: [
@@ -704,8 +704,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sakata-kita-port.jpg", imageAttribution: "Photo: kiwa dokokano / Wikimedia Commons (CC BY-SA 3.0)",
-    images: ["/images/spots/wikimedia/sakata-kita-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/sakata-kita-port.webp", imageAttribution: "Photo: kiwa dokokano / Wikimedia Commons (CC BY-SA 3.0)",
+    images: ["/images/spots/wikimedia/sakata-kita-port.webp"],
     rating: 3.9,
     reviewCount: 78, googleRating: 3.6, googleReviewCount: 16,
     catchableFish: [
@@ -752,8 +752,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/onahama-port.jpg", imageAttribution: "Photo: 小石川人晃 / Wikimedia Commons (CC BY-SA 4.0)",
-    images: ["/images/spots/wikimedia/onahama-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/onahama-port.webp", imageAttribution: "Photo: 小石川人晃 / Wikimedia Commons (CC BY-SA 4.0)",
+    images: ["/images/spots/wikimedia/onahama-port.webp"],
     rating: 3.9,
     reviewCount: 134, googleRating: 3.9, googleReviewCount: 13,
     catchableFish: [
@@ -800,8 +800,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/yotsukura-port.jpg", imageAttribution: "Photo: 小石川人晃 / Wikimedia Commons (CC BY-SA 4.0)",
-    images: ["/images/spots/wikimedia/yotsukura-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/yotsukura-port.webp", imageAttribution: "Photo: 小石川人晃 / Wikimedia Commons (CC BY-SA 4.0)",
+    images: ["/images/spots/wikimedia/yotsukura-port.webp"],
     rating: 3.5,
     reviewCount: 45, googleRating: 3.8, googleReviewCount: 74,
     catchableFish: [
@@ -848,8 +848,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/oarai-port.jpg", imageAttribution: "Photo: 小石川人晃 / Wikimedia Commons (CC BY-SA 4.0)",
-    images: ["/images/spots/wikimedia/oarai-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/oarai-port.webp", imageAttribution: "Photo: 小石川人晃 / Wikimedia Commons (CC BY-SA 4.0)",
+    images: ["/images/spots/wikimedia/oarai-port.webp"],
     rating: 4.0,
     reviewCount: 178, googleRating: 3.9, googleReviewCount: 389,
     catchableFish: [
@@ -896,8 +896,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kashima-port.jpg", imageAttribution: "Photo: Kaz Ish / Wikimedia Commons (CC BY-SA 3.0)",
-    images: ["/images/spots/wikimedia/kashima-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kashima-port.webp", imageAttribution: "Photo: Kaz Ish / Wikimedia Commons (CC BY-SA 3.0)",
+    images: ["/images/spots/wikimedia/kashima-port.webp"],
     rating: 3.8,
     reviewCount: 89, googleRating: 2.6, googleReviewCount: 17,
     catchableFish: [
@@ -942,8 +942,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hasaki-shinko.jpg", imageAttribution: "Photo: 小石川人晃 / Wikimedia Commons (CC BY-SA 3.0)",
-    images: ["/images/spots/wikimedia/hasaki-shinko.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/hasaki-shinko.webp", imageAttribution: "Photo: 小石川人晃 / Wikimedia Commons (CC BY-SA 3.0)",
+    images: ["/images/spots/wikimedia/hasaki-shinko.webp"],
     rating: 4.1,
     reviewCount: 156,
     catchableFish: [
@@ -991,8 +991,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kashiwazaki-port.jpg", imageAttribution: "Photo: Rebirth10 / Wikimedia Commons (CC BY-SA 4.0)",
-    images: ["/images/spots/wikimedia/kashiwazaki-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kashiwazaki-port.webp", imageAttribution: "Photo: Rebirth10 / Wikimedia Commons (CC BY-SA 4.0)",
+    images: ["/images/spots/wikimedia/kashiwazaki-port.webp"],
     rating: 3.8,
     reviewCount: 98, googleRating: 3.5, googleReviewCount: 4,
     catchableFish: [
@@ -1037,8 +1037,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/naoetsu-port.jpg", imageAttribution: "Photo: ペ有家音 / Wikimedia Commons (Public domain)",
-    images: ["/images/spots/wikimedia/naoetsu-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/naoetsu-port.webp", imageAttribution: "Photo: ペ有家音 / Wikimedia Commons (Public domain)",
+    images: ["/images/spots/wikimedia/naoetsu-port.webp"],
     rating: 3.9,
     reviewCount: 87, googleRating: 3.8, googleReviewCount: 13,
     catchableFish: [
@@ -1085,8 +1085,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/choshi-gaiko.jpg", imageAttribution: "Photo: Ocdp / Wikimedia Commons (CC0)",
-    images: ["/images/spots/wikimedia/choshi-gaiko.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/choshi-gaiko.webp", imageAttribution: "Photo: Ocdp / Wikimedia Commons (CC0)",
+    images: ["/images/spots/wikimedia/choshi-gaiko.webp"],
     rating: 4.0,
     reviewCount: 112, googleRating: 3.8, googleReviewCount: 14,
     catchableFish: [
@@ -1132,8 +1132,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kisarazu-naiko.jpg", imageAttribution: "Photo: heriheri / Wikimedia Commons (CC BY 3.0)",
-    images: ["/images/spots/wikimedia/kisarazu-naiko.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kisarazu-naiko.webp", imageAttribution: "Photo: heriheri / Wikimedia Commons (CC BY 3.0)",
+    images: ["/images/spots/wikimedia/kisarazu-naiko.webp"],
     rating: 3.6,
     reviewCount: 123, googleRating: 3.8, googleReviewCount: 588,
     catchableFish: [
@@ -1178,8 +1178,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kanaya-port.jpg", imageAttribution: "Photo: Nesnad / Wikimedia Commons (CC BY 4.0)",
-    images: ["/images/spots/wikimedia/kanaya-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kanaya-port.webp", imageAttribution: "Photo: Nesnad / Wikimedia Commons (CC BY 4.0)",
+    images: ["/images/spots/wikimedia/kanaya-port.webp"],
     rating: 3.5,
     reviewCount: 67, googleRating: 4, googleReviewCount: 3229,
     catchableFish: [
@@ -1225,8 +1225,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tomiura-shinko.jpg", imageAttribution: "Photo: Syced / Wikimedia Commons (CC0)",
-    images: ["/images/spots/wikimedia/tomiura-shinko.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tomiura-shinko.webp", imageAttribution: "Photo: Syced / Wikimedia Commons (CC0)",
+    images: ["/images/spots/wikimedia/tomiura-shinko.webp"],
     rating: 3.8,
     reviewCount: 89, googleRating: 3.7, googleReviewCount: 238,
     catchableFish: [
@@ -1273,8 +1273,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/jonanjima-park.jpg", imageAttribution: "Photo: Syced / Wikimedia Commons (CC0)",
-    images: ["/images/spots/wikimedia/jonanjima-park.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/jonanjima-park.webp", imageAttribution: "Photo: Syced / Wikimedia Commons (CC0)",
+    images: ["/images/spots/wikimedia/jonanjima-park.webp"],
     rating: 3.5,
     reviewCount: 145, googleRating: 4.3, googleReviewCount: 6046,
     catchableFish: [
@@ -1320,8 +1320,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/oifuto-park.jpg", imageAttribution: "Photo: Olegushka / Wikimedia Commons (CC0)",
-    images: ["/images/spots/wikimedia/oifuto-park.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/oifuto-park.webp", imageAttribution: "Photo: Olegushka / Wikimedia Commons (CC0)",
+    images: ["/images/spots/wikimedia/oifuto-park.webp"],
     rating: 3.4,
     reviewCount: 98, googleRating: 3.9, googleReviewCount: 86,
     catchableFish: [
@@ -1365,8 +1365,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/akatsuki-futo-park.jpg", imageAttribution: "Photo: Syced / Wikimedia Commons (CC0)",
-    images: ["/images/spots/wikimedia/akatsuki-futo-park.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/akatsuki-futo-park.webp", imageAttribution: "Photo: Syced / Wikimedia Commons (CC0)",
+    images: ["/images/spots/wikimedia/akatsuki-futo-park.webp"],
     rating: 3.3,
     reviewCount: 34, googleRating: 3.7, googleReviewCount: 1225,
     catchableFish: [
@@ -1413,8 +1413,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/himi-port.jpg", imageAttribution: "Photo: Koshinami / Wikimedia Commons (CC0)",
-    images: ["/images/spots/wikimedia/himi-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/himi-port.webp", imageAttribution: "Photo: Koshinami / Wikimedia Commons (CC0)",
+    images: ["/images/spots/wikimedia/himi-port.webp"],
     rating: 3.9,
     reviewCount: 112, googleRating: 3.9, googleReviewCount: 78,
     catchableFish: [
@@ -1460,8 +1460,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kurobe-port.jpg", imageAttribution: "Photo: Fuseoyama / Wikimedia Commons (CC BY-SA 3.0)",
-    images: ["/images/spots/wikimedia/kurobe-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kurobe-port.webp", imageAttribution: "Photo: Fuseoyama / Wikimedia Commons (CC BY-SA 3.0)",
+    images: ["/images/spots/wikimedia/kurobe-port.webp"],
     rating: 3.7,
     reviewCount: 45,
     catchableFish: [
@@ -1508,8 +1508,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kanazawa-port.jpg", imageAttribution: "Photo: 金沢市 / Wikimedia Commons (CC BY 2.1 jp)",
-    images: ["/images/spots/wikimedia/kanazawa-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kanazawa-port.webp", imageAttribution: "Photo: 金沢市 / Wikimedia Commons (CC BY 2.1 jp)",
+    images: ["/images/spots/wikimedia/kanazawa-port.webp"],
     rating: 3.6,
     reviewCount: 87, googleRating: 4, googleReviewCount: 34,
     catchableFish: [
@@ -1555,8 +1555,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tsuruga-shinko.jpg", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY 2.5)",
-    images: ["/images/spots/wikimedia/tsuruga-shinko.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tsuruga-shinko.webp", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY 2.5)",
+    images: ["/images/spots/wikimedia/tsuruga-shinko.webp"],
     rating: 4.0,
     reviewCount: 145, googleRating: 3.9, googleReviewCount: 145,
     catchableFish: [
@@ -1602,8 +1602,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/mikuni-sunset-beach.jpg", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)",
-    images: ["/images/spots/wikimedia/mikuni-sunset-beach.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/mikuni-sunset-beach.webp", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)",
+    images: ["/images/spots/wikimedia/mikuni-sunset-beach.webp"],
     rating: 3.7,
     reviewCount: 67, googleRating: 3.9, googleReviewCount: 738,
     catchableFish: [
@@ -1648,9 +1648,9 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/yaizu-port.jpg",
+    mainImageUrl: "/images/spots/wikimedia/yaizu-port.webp",
     imageAttribution: "Photo: Wikimedia Commons / CC BY-SA 4.0",
-    images: ["/images/spots/wikimedia/yaizu-port.jpg"],
+    images: ["/images/spots/wikimedia/yaizu-port.webp"],
     rating: 3.8,
     reviewCount: 134, googleRating: 3.5, googleReviewCount: 47,
     catchableFish: [
@@ -1696,8 +1696,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/omaezaki-port.jpg", imageAttribution: "Photo: gundam2345 / Wikimedia Commons (CC BY 3.0)",
-    images: ["/images/spots/wikimedia/omaezaki-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/omaezaki-port.webp", imageAttribution: "Photo: gundam2345 / Wikimedia Commons (CC BY 3.0)",
+    images: ["/images/spots/wikimedia/omaezaki-port.webp"],
     rating: 4.1,
     reviewCount: 156, googleRating: 4.3, googleReviewCount: 11,
     catchableFish: [
@@ -1744,8 +1744,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/mochimune-port.jpg", imageAttribution: "Photo: Nesnad / Wikimedia Commons (CC BY-SA 3.0)",
-    images: ["/images/spots/wikimedia/mochimune-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/mochimune-port.webp", imageAttribution: "Photo: Nesnad / Wikimedia Commons (CC BY-SA 3.0)",
+    images: ["/images/spots/wikimedia/mochimune-port.webp"],
     rating: 3.6,
     reviewCount: 56, googleRating: 3.8, googleReviewCount: 29,
     catchableFish: [
@@ -1792,8 +1792,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hekinan-fishing-park.jpg", imageAttribution: "Photo: HQA02330 / Wikimedia Commons (CC BY-SA 4.0)",
-    images: ["/images/spots/wikimedia/hekinan-fishing-park.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/hekinan-fishing-park.webp", imageAttribution: "Photo: HQA02330 / Wikimedia Commons (CC BY-SA 4.0)",
+    images: ["/images/spots/wikimedia/hekinan-fishing-park.webp"],
     rating: 3.8,
     reviewCount: 167, googleRating: 3.4, googleReviewCount: 13,
     catchableFish: [
@@ -1840,8 +1840,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/gamagori-takeshima.jpg", imageAttribution: "Photo: Hyppolyte de Saint-Rambert / Wikimedia Commons (CC BY 4.0)",
-    images: ["/images/spots/wikimedia/gamagori-takeshima.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/gamagori-takeshima.webp", imageAttribution: "Photo: Hyppolyte de Saint-Rambert / Wikimedia Commons (CC BY 4.0)",
+    images: ["/images/spots/wikimedia/gamagori-takeshima.webp"],
     rating: 3.5,
     reviewCount: 78, googleRating: 4.1, googleReviewCount: 248,
     catchableFish: [
@@ -1886,8 +1886,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/owase-port.jpg", imageAttribution: "Photo: ccfarmer / Wikimedia Commons (CC BY 3.0)",
-    images: ["/images/spots/wikimedia/owase-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/owase-port.webp", imageAttribution: "Photo: ccfarmer / Wikimedia Commons (CC BY 3.0)",
+    images: ["/images/spots/wikimedia/owase-port.webp"],
     rating: 4.0,
     reviewCount: 98, googleRating: 4.2, googleReviewCount: 28,
     catchableFish: [
@@ -1932,8 +1932,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/toshijima.jpg", imageAttribution: "Photo: Ｊun O / Wikimedia Commons (CC BY-SA 3.0)",
-    images: ["/images/spots/wikimedia/toshijima.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/toshijima.webp", imageAttribution: "Photo: Ｊun O / Wikimedia Commons (CC BY-SA 3.0)",
+    images: ["/images/spots/wikimedia/toshijima.webp"],
     rating: 4.5,
     reviewCount: 45, googleRating: 4.4, googleReviewCount: 54,
     catchableFish: [
@@ -1980,8 +1980,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kushimoto-port.jpg", imageAttribution: "Photo: Drivephotographer / Wikimedia Commons (CC0)",
-    images: ["/images/spots/wikimedia/kushimoto-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kushimoto-port.webp", imageAttribution: "Photo: Drivephotographer / Wikimedia Commons (CC0)",
+    images: ["/images/spots/wikimedia/kushimoto-port.webp"],
     rating: 4.2,
     reviewCount: 134, googleRating: 3.9, googleReviewCount: 125,
     catchableFish: [
@@ -2028,8 +2028,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kada-port.jpg", imageAttribution: "Photo: Hiroaki Kaneko / Wikimedia Commons (CC BY-SA 3.0)",
-    images: ["/images/spots/wikimedia/kada-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kada-port.webp", imageAttribution: "Photo: Hiroaki Kaneko / Wikimedia Commons (CC BY-SA 3.0)",
+    images: ["/images/spots/wikimedia/kada-port.webp"],
     rating: 3.9,
     reviewCount: 112, googleRating: 3.8, googleReviewCount: 49,
     catchableFish: [
@@ -2074,8 +2074,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tanabe-iso.jpg", imageAttribution: "Photo: Nankou Oronain (as36… / Wikimedia Commons (CC BY-SA 3.0)",
-    images: ["/images/spots/wikimedia/tanabe-iso.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tanabe-iso.webp", imageAttribution: "Photo: Nankou Oronain (as36… / Wikimedia Commons (CC BY-SA 3.0)",
+    images: ["/images/spots/wikimedia/tanabe-iso.webp"],
     rating: 4.5,
     reviewCount: 67, googleRating: 3.8, googleReviewCount: 9,
     catchableFish: [
@@ -2123,8 +2123,8 @@ export const additionalSpots: FishingSpot[] = [
     hasFishingShop: true,
     hasRentalRod: true,
     rentalDetail: "竿レンタル500円/日",
-    mainImageUrl: "/images/spots/wikimedia/nanko-fishing-park.jpg", imageAttribution: "Photo: z tanuki / Wikimedia Commons (CC BY 3.0)",
-    images: ["/images/spots/wikimedia/nanko-fishing-park.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/nanko-fishing-park.webp", imageAttribution: "Photo: z tanuki / Wikimedia Commons (CC BY 3.0)",
+    images: ["/images/spots/wikimedia/nanko-fishing-park.webp"],
     rating: 3.8,
     reviewCount: 234, googleRating: 3.8, googleReviewCount: 44,
     catchableFish: [
@@ -2171,8 +2171,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kishiwada-kyuko.jpg", imageAttribution: "Photo: ほっきー / Wikimedia Commons (CC0)",
-    images: ["/images/spots/wikimedia/kishiwada-kyuko.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kishiwada-kyuko.webp", imageAttribution: "Photo: ほっきー / Wikimedia Commons (CC0)",
+    images: ["/images/spots/wikimedia/kishiwada-kyuko.webp"],
     rating: 3.7,
     reviewCount: 156, googleRating: 3.8, googleReviewCount: 239,
     catchableFish: [
@@ -2218,9 +2218,9 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/akashi-port.jpg",
+    mainImageUrl: "/images/spots/wikimedia/akashi-port.webp",
     imageAttribution: "Photo: Wikimedia Commons / CC BY 2.5",
-    images: ["/images/spots/wikimedia/akashi-port.jpg"],
+    images: ["/images/spots/wikimedia/akashi-port.webp"],
     rating: 4.0,
     reviewCount: 198, googleRating: 4.1, googleReviewCount: 30,
     catchableFish: [
@@ -2269,8 +2269,8 @@ export const additionalSpots: FishingSpot[] = [
     hasFishingShop: true,
     hasRentalRod: true,
     rentalDetail: "竿レンタル800円/日",
-    mainImageUrl: "/images/spots/wikimedia/hiraiso-fishing-park.jpg", imageAttribution: "Photo: NatsuTV / Wikimedia Commons (CC0)",
-    images: ["/images/spots/wikimedia/hiraiso-fishing-park.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/hiraiso-fishing-park.webp", imageAttribution: "Photo: NatsuTV / Wikimedia Commons (CC0)",
+    images: ["/images/spots/wikimedia/hiraiso-fishing-park.webp"],
     rating: 4.1,
     reviewCount: 267, googleRating: 3.8, googleReviewCount: 648,
     catchableFish: [
@@ -2318,9 +2318,9 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/maizuru-shinkai-park.jpg",
+    mainImageUrl: "/images/spots/wikimedia/maizuru-shinkai-park.webp",
     imageAttribution: "Photo: りなべる / Wikimedia Commons (CC BY 4.0)",
-    images: ["/images/spots/wikimedia/maizuru-shinkai-park.jpg"],
+    images: ["/images/spots/wikimedia/maizuru-shinkai-park.webp"],
     rating: 3.8,
     reviewCount: 89, googleRating: 3.8, googleReviewCount: 838,
     catchableFish: [
@@ -2367,8 +2367,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sakaiminato-port.jpg", imageAttribution: "Photo: KASEI / Wikimedia Commons (CC BY-SA 3.0)",
-    images: ["/images/spots/wikimedia/sakaiminato-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/sakaiminato-port.webp", imageAttribution: "Photo: KASEI / Wikimedia Commons (CC BY-SA 3.0)",
+    images: ["/images/spots/wikimedia/sakaiminato-port.webp"],
     rating: 3.8,
     reviewCount: 98,
     catchableFish: [
@@ -2414,9 +2414,9 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shimonoseki-port.jpg",
+    mainImageUrl: "/images/spots/wikimedia/shimonoseki-port.webp",
     imageAttribution: "Photo: Gazouya-japan / CC BY-SA 3.0",
-    images: ["/images/spots/wikimedia/shimonoseki-port.jpg"],
+    images: ["/images/spots/wikimedia/shimonoseki-port.webp"],
     rating: 3.9,
     reviewCount: 145, googleRating: 4, googleReviewCount: 2,
     catchableFish: [
@@ -2464,8 +2464,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/onomichi-port.jpg", imageAttribution: "Photo: 米田賢一 / Wikimedia Commons (CC BY 3.0)",
-    images: ["/images/spots/wikimedia/onomichi-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/onomichi-port.webp", imageAttribution: "Photo: 米田賢一 / Wikimedia Commons (CC BY 3.0)",
+    images: ["/images/spots/wikimedia/onomichi-port.webp"],
     rating: 3.6,
     reviewCount: 78, googleRating: 4.1, googleReviewCount: 10,
     catchableFish: [
@@ -2510,8 +2510,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shimokama-garijima.jpg", imageAttribution: "Photo: Puchi-masashi / Wikimedia Commons (CC BY-SA 4.0)",
-    images: ["/images/spots/wikimedia/shimokama-garijima.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/shimokama-garijima.webp", imageAttribution: "Photo: Puchi-masashi / Wikimedia Commons (CC BY-SA 4.0)",
+    images: ["/images/spots/wikimedia/shimokama-garijima.webp"],
     rating: 4.0,
     reviewCount: 56, googleRating: 4.1, googleReviewCount: 39,
     catchableFish: [
@@ -2560,8 +2560,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/naruto-port.jpg", imageAttribution: "Photo: Gohachiyasu1214 / Wikimedia Commons (CC BY-SA 4.0)",
-    images: ["/images/spots/wikimedia/naruto-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/naruto-port.webp", imageAttribution: "Photo: Gohachiyasu1214 / Wikimedia Commons (CC BY-SA 4.0)",
+    images: ["/images/spots/wikimedia/naruto-port.webp"],
     rating: 4.0,
     reviewCount: 112, googleRating: 5, googleReviewCount: 1,
     catchableFish: [
@@ -2608,8 +2608,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/takamatsu-port.jpg", imageAttribution: "Photo: saitowitz / Wikimedia Commons (CC BY-SA 2.0)",
-    images: ["/images/spots/wikimedia/takamatsu-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/takamatsu-port.webp", imageAttribution: "Photo: saitowitz / Wikimedia Commons (CC BY-SA 2.0)",
+    images: ["/images/spots/wikimedia/takamatsu-port.webp"],
     rating: 3.5,
     reviewCount: 89, googleRating: 4, googleReviewCount: 2207,
     catchableFish: [
@@ -2655,8 +2655,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/matsuyama-port.jpg", imageAttribution: "Photo: DVMG / Wikimedia Commons (CC BY 3.0)",
-    images: ["/images/spots/wikimedia/matsuyama-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/matsuyama-port.webp", imageAttribution: "Photo: DVMG / Wikimedia Commons (CC BY 3.0)",
+    images: ["/images/spots/wikimedia/matsuyama-port.webp"],
     rating: 3.6,
     reviewCount: 78, googleRating: 4, googleReviewCount: 296,
     catchableFish: [
@@ -2701,8 +2701,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sadamisaki.jpg", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)",
-    images: ["/images/spots/wikimedia/sadamisaki.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/sadamisaki.webp", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)",
+    images: ["/images/spots/wikimedia/sadamisaki.webp"],
     rating: 4.5,
     reviewCount: 34, googleRating: 4.6, googleReviewCount: 83,
     catchableFish: [
@@ -2750,8 +2750,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/muroto-misaki.jpg", imageAttribution: "Photo: Ervaar Japan / Wikimedia Commons (CC BY 2.0)",
-    images: ["/images/spots/wikimedia/muroto-misaki.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/muroto-misaki.webp", imageAttribution: "Photo: Ervaar Japan / Wikimedia Commons (CC BY 2.0)",
+    images: ["/images/spots/wikimedia/muroto-misaki.webp"],
     rating: 4.4,
     reviewCount: 45,
     catchableFish: [
@@ -2797,8 +2797,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sukumo-bay.jpg", imageAttribution: "Photo: ぺ有家音 / Wikimedia Commons (CC0)",
-    images: ["/images/spots/wikimedia/sukumo-bay.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/sukumo-bay.webp", imageAttribution: "Photo: ぺ有家音 / Wikimedia Commons (CC0)",
+    images: ["/images/spots/wikimedia/sukumo-bay.webp"],
     rating: 3.9,
     reviewCount: 56,
     catchableFish: [
@@ -2844,8 +2844,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/moji-port.jpg", imageAttribution: "Photo: Yoh-Plus / Wikimedia Commons (CC BY 4.0)",
-    images: ["/images/spots/wikimedia/moji-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/moji-port.webp", imageAttribution: "Photo: Yoh-Plus / Wikimedia Commons (CC BY 4.0)",
+    images: ["/images/spots/wikimedia/moji-port.webp"],
     rating: 3.7,
     reviewCount: 112,
     catchableFish: [
@@ -2891,8 +2891,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/itoshima-nokita-port.jpg", imageAttribution: "Photo: abu_9495 / Wikimedia Commons (CC BY 3.0)",
-    images: ["/images/spots/wikimedia/itoshima-nokita-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/itoshima-nokita-port.webp", imageAttribution: "Photo: abu_9495 / Wikimedia Commons (CC BY 3.0)",
+    images: ["/images/spots/wikimedia/itoshima-nokita-port.webp"],
     rating: 3.5,
     reviewCount: 34, googleRating: 3.7, googleReviewCount: 91,
     catchableFish: [
@@ -2939,8 +2939,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/goto-fukue-port.jpg", imageAttribution: "Photo: Nami-ja / Wikimedia Commons (CC BY-SA 3.0)",
-    images: ["/images/spots/wikimedia/goto-fukue-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/goto-fukue-port.webp", imageAttribution: "Photo: Nami-ja / Wikimedia Commons (CC BY-SA 3.0)",
+    images: ["/images/spots/wikimedia/goto-fukue-port.webp"],
     rating: 4.3,
     reviewCount: 67, googleRating: 4, googleReviewCount: 148,
     catchableFish: [
@@ -2987,9 +2987,9 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nagasaki-port.jpg",
+    mainImageUrl: "/images/spots/wikimedia/nagasaki-port.webp",
     imageAttribution: "Photo: Soramimi / CC BY-SA 4.0",
-    images: ["/images/spots/wikimedia/nagasaki-port.jpg"],
+    images: ["/images/spots/wikimedia/nagasaki-port.webp"],
     rating: 3.6,
     reviewCount: 98, googleRating: 4.7, googleReviewCount: 18,
     catchableFish: [
@@ -3035,8 +3035,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/beppu-port.jpg", imageAttribution: "Photo: Psjk2106 / Wikimedia Commons (CC BY-SA 4.0)",
-    images: ["/images/spots/wikimedia/beppu-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/beppu-port.webp", imageAttribution: "Photo: Psjk2106 / Wikimedia Commons (CC BY-SA 4.0)",
+    images: ["/images/spots/wikimedia/beppu-port.webp"],
     rating: 3.7,
     reviewCount: 89, googleRating: 3.3, googleReviewCount: 24,
     catchableFish: [
@@ -3082,8 +3082,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/amakusa-shimoda-port.jpg", imageAttribution: "Photo: shikabane taro / Wikimedia Commons (CC BY 3.0)",
-    images: ["/images/spots/wikimedia/amakusa-shimoda-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/amakusa-shimoda-port.webp", imageAttribution: "Photo: shikabane taro / Wikimedia Commons (CC BY 3.0)",
+    images: ["/images/spots/wikimedia/amakusa-shimoda-port.webp"],
     rating: 4.1,
     reviewCount: 56, googleRating: 5, googleReviewCount: 2,
     catchableFish: [
@@ -3130,8 +3130,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nichinan-port.jpg", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)",
-    images: ["/images/spots/wikimedia/nichinan-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/nichinan-port.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)",
+    images: ["/images/spots/wikimedia/nichinan-port.webp"],
     rating: 3.8,
     reviewCount: 67,
     catchableFish: [
@@ -3178,8 +3178,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ibusuki-port.jpg", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)",
-    images: ["/images/spots/wikimedia/ibusuki-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/ibusuki-port.webp", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)",
+    images: ["/images/spots/wikimedia/ibusuki-port.webp"],
     rating: 3.7,
     reviewCount: 78, googleRating: 3.3, googleReviewCount: 3,
     catchableFish: [
@@ -3224,8 +3224,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tarumizu-ferry.jpg", imageAttribution: "Photo: Mizushimasea / Wikimedia Commons (CC BY-SA 4.0)",
-    images: ["/images/spots/wikimedia/tarumizu-ferry.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tarumizu-ferry.webp", imageAttribution: "Photo: Mizushimasea / Wikimedia Commons (CC BY-SA 4.0)",
+    images: ["/images/spots/wikimedia/tarumizu-ferry.webp"],
     rating: 3.4,
     reviewCount: 45, googleRating: 3.7, googleReviewCount: 67,
     catchableFish: [
@@ -3270,8 +3270,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ginowan-marina.jpg", imageAttribution: "Photo: Naha Mama Pavilionz / Wikimedia Commons (CC0)",
-    images: ["/images/spots/wikimedia/ginowan-marina.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/ginowan-marina.webp", imageAttribution: "Photo: Naha Mama Pavilionz / Wikimedia Commons (CC0)",
+    images: ["/images/spots/wikimedia/ginowan-marina.webp"],
     rating: 3.6,
     reviewCount: 78, googleRating: 4.1, googleReviewCount: 100,
     catchableFish: [
@@ -3315,8 +3315,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nago-port.jpg", imageAttribution: "Photo: 690 Noda / Wikimedia Commons (CC BY 3.0)",
-    images: ["/images/spots/wikimedia/nago-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/nago-port.webp", imageAttribution: "Photo: 690 Noda / Wikimedia Commons (CC BY 3.0)",
+    images: ["/images/spots/wikimedia/nago-port.webp"],
     rating: 3.5,
     reviewCount: 56, googleRating: 3.8, googleReviewCount: 186,
     catchableFish: [
@@ -3360,8 +3360,8 @@ export const additionalSpots: FishingSpot[] = [
     hasConvenienceStore: false,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ishigaki-sukuji-beach.jpg", imageAttribution: "Photo: Syced / Wikimedia Commons (CC0)",
-    images: ["/images/spots/wikimedia/ishigaki-sukuji-beach.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/ishigaki-sukuji-beach.webp", imageAttribution: "Photo: Syced / Wikimedia Commons (CC0)",
+    images: ["/images/spots/wikimedia/ishigaki-sukuji-beach.webp"],
     rating: 4.0,
     reviewCount: 45, googleRating: 4.3, googleReviewCount: 639,
     catchableFish: [
@@ -3397,7 +3397,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r51"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "無料駐車場あり（約100台）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hakodate-midori-no-shima.jpg", imageAttribution: "Photo: 掬茶 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/hakodate-midori-no-shima.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/hakodate-midori-no-shima.webp", imageAttribution: "Photo: 掬茶 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/hakodate-midori-no-shima.webp"],
     rating: 4.2, reviewCount: 89, googleRating: 4.1, googleReviewCount: 614,
     catchableFish: [
       { fish: fish("aji"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -3419,7 +3419,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r51"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場利用",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hakodate-yamashita-wharf.jpg", imageAttribution: "Photo: lienyuan lee / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/hakodate-yamashita-wharf.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/hakodate-yamashita-wharf.webp", imageAttribution: "Photo: lienyuan lee / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/hakodate-yamashita-wharf.webp"],
     rating: 3.9, reviewCount: 67, googleRating: 3.5, googleReviewCount: 15,
     catchableFish: [
       { fish: fish("kasago"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "ブラクリ釣り" },
@@ -3445,7 +3445,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r46"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ohara-port.jpg", imageAttribution: "Photo: tak1701d / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/ohara-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/ohara-port.webp", imageAttribution: "Photo: tak1701d / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/ohara-port.webp"],
     rating: 4.0, reviewCount: 98, googleRating: 3.6, googleReviewCount: 76,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -3473,7 +3473,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r46"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kamogawa-port.jpg", imageAttribution: "Photo: 運転太郎 / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/kamogawa-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kamogawa-port.webp", imageAttribution: "Photo: 運転太郎 / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/kamogawa-port.webp"],
     rating: 3.8, reviewCount: 72, googleRating: 3.6, googleReviewCount: 331,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
@@ -3499,7 +3499,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r47"), spotType: "beach", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場あり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kozu-beach.jpg", imageAttribution: "Photo: alonfloc / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/kozu-beach.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kozu-beach.webp", imageAttribution: "Photo: alonfloc / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/kozu-beach.webp"],
     rating: 4.1, reviewCount: 156, googleRating: 4.1, googleReviewCount: 94,
     catchableFish: [
       { fish: fish("inada"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
@@ -3521,7 +3521,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r47"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港の駅駐車場利用可（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, rentalDetail: "近隣釣具店でレンタルあり",
-    mainImageUrl: "/images/spots/wikimedia/odawara-hayakawa-port.jpg", imageAttribution: "Photo: Nesnad / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/odawara-hayakawa-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/odawara-hayakawa-port.webp", imageAttribution: "Photo: Nesnad / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/odawara-hayakawa-port.webp"],
     rating: 3.9, reviewCount: 112, googleRating: 3.9, googleReviewCount: 158,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -3544,7 +3544,7 @@ export const additionalSpots: FishingSpot[] = [
     isFree: false, feeDetail: "大人200円、小中学生100円",
     hasParking: true, parkingDetail: "無料駐車場あり（約200台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタル竿セット1000円",
-    mainImageUrl: "/images/spots/wikimedia/kashima-port-fishing-park.jpg", imageAttribution: "Photo: Kaz Ish / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/kashima-port-fishing-park.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kashima-port-fishing-park.webp", imageAttribution: "Photo: Kaz Ish / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/kashima-port-fishing-park.webp"],
     rating: 4.0, reviewCount: 145, googleRating: 3.5, googleReviewCount: 534,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -3572,7 +3572,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r54"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sumoto-port.jpg", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY 2.5)", images: ["/images/spots/wikimedia/sumoto-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/sumoto-port.webp", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY 2.5)", images: ["/images/spots/wikimedia/sumoto-port.webp"],
     rating: 4.3, reviewCount: 134, googleRating: 3.4, googleReviewCount: 14,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
@@ -3601,7 +3601,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r54"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "周辺駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tsubasa-port.jpg", imageAttribution: "Photo: Nekosuki / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/tsubasa-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tsubasa-port.webp", imageAttribution: "Photo: Nekosuki / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/tsubasa-port.webp"],
     rating: 4.1, reviewCount: 89, googleRating: 3.8, googleReviewCount: 182,
     catchableFish: [
       { fish: fish("inada"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
@@ -3630,7 +3630,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r55"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "門司港レトロ駐車場利用（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/moji-retro-wharf.jpg", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/moji-retro-wharf.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/moji-retro-wharf.webp", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/moji-retro-wharf.webp"],
     rating: 3.7, reviewCount: 78, googleRating: 4.3, googleReviewCount: 12953,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
@@ -3660,7 +3660,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r41"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/karatsu-higashi-hatojo.jpg", imageAttribution: "Photo: THE-ICER / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/karatsu-higashi-hatojo.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/karatsu-higashi-hatojo.webp", imageAttribution: "Photo: THE-ICER / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/karatsu-higashi-hatojo.webp"],
     rating: 4.0, reviewCount: 89, googleRating: 4, googleReviewCount: 15,
     catchableFish: [
       { fish: fish("inada"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
@@ -3682,7 +3682,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r41"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "朝市駐車場利用可",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/yobuko-port.jpg", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/yobuko-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/yobuko-port.webp", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/yobuko-port.webp"],
     rating: 4.4, reviewCount: 112, googleRating: 4.3, googleReviewCount: 42,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
@@ -3712,7 +3712,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r42"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shimotsui-port.jpg", imageAttribution: "Photo: murakami_tak / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/shimotsui-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/shimotsui-port.webp", imageAttribution: "Photo: murakami_tak / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/shimotsui-port.webp"],
     rating: 4.0, reviewCount: 87, googleRating: 4.5, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
@@ -3736,7 +3736,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r57"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hirado-port.jpg", imageAttribution: "Photo: sk01 / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/hirado-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/hirado-port.webp", imageAttribution: "Photo: sk01 / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/hirado-port.webp"],
     rating: 4.3, reviewCount: 76, googleRating: 4.1, googleReviewCount: 11,
     catchableFish: [
       { fish: fish("inada"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
@@ -3761,7 +3761,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r58"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/onomichi-itozaki-port.jpg", imageAttribution: "Photo: RitikaPahwa4444 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/onomichi-itozaki-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/onomichi-itozaki-port.webp", imageAttribution: "Photo: RitikaPahwa4444 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/onomichi-itozaki-port.webp"],
     rating: 3.8, reviewCount: 65, googleRating: 4, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
@@ -3789,7 +3789,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r59"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "足摺岬駐車場利用",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ashizuri-cape-rocky.jpg", imageAttribution: "Photo: inunami / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/ashizuri-cape-rocky.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/ashizuri-cape-rocky.webp", imageAttribution: "Photo: inunami / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/ashizuri-cape-rocky.webp"],
     rating: 4.6, reviewCount: 45, googleRating: 4.3, googleReviewCount: 26,
     catchableFish: [
       { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
@@ -3818,7 +3818,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r50"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/miyako-hirara-port.jpg", imageAttribution: "Photo: Nesnad / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/miyako-hirara-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/miyako-hirara-port.webp", imageAttribution: "Photo: Nesnad / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/miyako-hirara-port.webp"],
     rating: 4.1, reviewCount: 56, googleRating: 3.8, googleReviewCount: 18,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -3841,7 +3841,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r56"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/yakushima-anbo-port.jpg", imageAttribution: "Photo: Makoto Kaneda / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/yakushima-anbo-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/yakushima-anbo-port.webp", imageAttribution: "Photo: Makoto Kaneda / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/yakushima-anbo-port.webp"],
     rating: 4.4, reviewCount: 34, googleRating: 3.6, googleReviewCount: 31,
     catchableFish: [
       { fish: fish("inada"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
@@ -3865,7 +3865,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r43"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "湖岸緑地駐車場（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/biwako-nanko-shore.jpg", imageAttribution: "Photo: 优 / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/biwako-nanko-shore.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/biwako-nanko-shore.webp", imageAttribution: "Photo: 优 / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/biwako-nanko-shore.webp"],
     rating: 4.2, reviewCount: 234, googleRating: 4.1, googleReviewCount: 1921,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -3892,7 +3892,7 @@ export const additionalSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人600円",
     hasParking: true, parkingDetail: "湖畔駐車場あり（無料・有料あり）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, rentalDetail: "ドーム船でレンタルあり",
-    mainImageUrl: "/images/spots/wikimedia/yamanakako-lake.jpg", imageAttribution: "Photo: wanghongliu / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/yamanakako-lake.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/yamanakako-lake.webp", imageAttribution: "Photo: wanghongliu / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/yamanakako-lake.webp"],
     rating: 4.0, reviewCount: 178,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -3916,7 +3916,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r24"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺に駐車場あり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sakai-senboku-port.jpg", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/sakai-senboku-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/sakai-senboku-port.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/sakai-senboku-port.webp"],
     rating: 3.8, reviewCount: 145, googleRating: 3, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -3945,7 +3945,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r27"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tottori-port.jpg", imageAttribution: "Photo: noppo3 / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/tottori-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tottori-port.webp", imageAttribution: "Photo: noppo3 / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/tottori-port.webp"],
     rating: 3.9, reviewCount: 89, googleRating: 3.7, googleReviewCount: 5115,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -3973,7 +3973,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r28"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shimonoseki-arukaport.jpg", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY 2.5)", images: ["/images/spots/wikimedia/shimonoseki-arukaport.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/shimonoseki-arukaport.webp", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY 2.5)", images: ["/images/spots/wikimedia/shimonoseki-arukaport.webp"],
     rating: 3.8, reviewCount: 98,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
@@ -4003,7 +4003,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r29"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/naruto-ogemajima.jpg", imageAttribution: "Photo: Syced / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/naruto-ogemajima.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/naruto-ogemajima.webp", imageAttribution: "Photo: Syced / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/naruto-ogemajima.webp"],
     rating: 4.4, reviewCount: 56, googleRating: 4, googleReviewCount: 18,
     catchableFish: [
       { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
@@ -4031,7 +4031,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r30"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "サンポート駐車場利用（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/takamatsu-tamamo-breakwater.jpg", imageAttribution: "Photo: Puchi-masashi / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/takamatsu-tamamo-breakwater.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/takamatsu-tamamo-breakwater.webp", imageAttribution: "Photo: Puchi-masashi / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/takamatsu-tamamo-breakwater.webp"],
     rating: 3.9, reviewCount: 112, googleRating: 4.9, googleReviewCount: 8,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -4053,7 +4053,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r31"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/niihama-port.jpg", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/niihama-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/niihama-port.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/niihama-port.webp"],
     rating: 3.7, reviewCount: 67, googleRating: 3.9, googleReviewCount: 28,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
@@ -4075,7 +4075,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r33"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "フェリーターミナル駐車場利用",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/beppu-international-port.jpg", imageAttribution: "Photo: z tanuki / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/beppu-international-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/beppu-international-port.webp", imageAttribution: "Photo: z tanuki / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/beppu-international-port.webp"],
     rating: 3.6, reviewCount: 56, googleRating: 4.5, googleReviewCount: 40,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -4134,7 +4134,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r35"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nichinan-aburatsu-port.jpg", imageAttribution: "Photo: z tanuki / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/nichinan-aburatsu-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/nichinan-aburatsu-port.webp", imageAttribution: "Photo: z tanuki / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/nichinan-aburatsu-port.webp"],
     rating: 4.1, reviewCount: 56, googleRating: 4, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("inada"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
@@ -4187,7 +4187,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r22"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "砂浜に車で乗り入れ可能",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/noto-chirihama.jpg", imageAttribution: "Photo: クハ４１９－５ / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/noto-chirihama.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/noto-chirihama.webp", imageAttribution: "Photo: クハ４１９－５ / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/noto-chirihama.webp"],
     rating: 4.1, reviewCount: 112, googleRating: 4.2, googleReviewCount: 923,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
@@ -4208,7 +4208,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r2"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sendai-shiogama-port.jpg", imageAttribution: "Photo: Arui Kashiwagi / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/sendai-shiogama-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/sendai-shiogama-port.webp", imageAttribution: "Photo: Arui Kashiwagi / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/sendai-shiogama-port.webp"],
     rating: 3.9, reviewCount: 98, googleRating: 4, googleReviewCount: 50,
     catchableFish: [
       { fish: fish("karei"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
@@ -4230,7 +4230,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r18"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "朝市駐車場利用可",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hachinohe-tatehana-wharf.jpg", imageAttribution: "Photo: tsushima / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/hachinohe-tatehana-wharf.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/hachinohe-tatehana-wharf.webp", imageAttribution: "Photo: tsushima / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/hachinohe-tatehana-wharf.webp"],
     rating: 4.0, reviewCount: 112, googleRating: 4.3, googleReviewCount: 3614,
     catchableFish: [
       { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -4258,7 +4258,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r19"), spotType: "rocky", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "浄土ヶ浜駐車場（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/miyako-jodogahama.jpg", imageAttribution: "Photo: sweeper_G3 / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/miyako-jodogahama.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/miyako-jodogahama.webp", imageAttribution: "Photo: sweeper_G3 / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/miyako-jodogahama.webp"],
     rating: 4.2, reviewCount: 56, googleRating: 4.4, googleReviewCount: 2292,
     catchableFish: [
       { fish: fish("kasago"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "穴釣り" },
@@ -4284,7 +4284,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r36"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "入道崎駐車場（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/oga-nyudozaki.jpg", imageAttribution: "Photo: らんで / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/oga-nyudozaki.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/oga-nyudozaki.webp", imageAttribution: "Photo: らんで / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/oga-nyudozaki.webp"],
     rating: 4.4, reviewCount: 34, googleRating: 4.4, googleReviewCount: 865,
     catchableFish: [
       { fish: fish("madai"), monthStart: 4, monthEnd: 6, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
@@ -4310,7 +4310,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r37"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sakata-port.jpg", imageAttribution: "Photo: kntrty from Kanagawa, Japan / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/sakata-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/sakata-port.webp", imageAttribution: "Photo: kntrty from Kanagawa, Japan / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/sakata-port.webp"],
     rating: 3.8, reviewCount: 78, googleRating: 3.2, googleReviewCount: 13,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -4332,7 +4332,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r38"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "ら・ら・ミュウ駐車場利用可",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/iwaki-onahama-port.jpg", imageAttribution: "Photo: まも / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/iwaki-onahama-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/iwaki-onahama-port.webp", imageAttribution: "Photo: まも / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/iwaki-onahama-port.webp"],
     rating: 4.0, reviewCount: 134, googleRating: 4.1, googleReviewCount: 25,
     catchableFish: [
       { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "泳がせ釣り" },
@@ -4354,7 +4354,7 @@ export const additionalSpots: FishingSpot[] = [
     isFree: false, feeDetail: "大人900円、子供450円",
     hasParking: true, parkingDetail: "有料駐車場あり（約300台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタル竿セット2000円",
-    mainImageUrl: "/images/spots/wikimedia/yokohama-honmoku-fishing.jpg", imageAttribution: "Photo: LERK / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/yokohama-honmoku-fishing.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/yokohama-honmoku-fishing.webp", imageAttribution: "Photo: LERK / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/yokohama-honmoku-fishing.webp"],
     rating: 4.1, reviewCount: 234, googleRating: 3.8, googleReviewCount: 1725,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -4381,7 +4381,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r5"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "有料駐車場あり（約500台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタル竿あり",
-    mainImageUrl: "/images/spots/wikimedia/wakasu-kaihin-park.jpg", imageAttribution: "Photo: BsBsBs / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/wakasu-kaihin-park.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/wakasu-kaihin-park.webp", imageAttribution: "Photo: BsBsBs / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/wakasu-kaihin-park.webp"],
     rating: 3.7, reviewCount: 234, googleRating: 4.1, googleReviewCount: 4282,
     catchableFish: [
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -4408,7 +4408,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r10"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/chita-toyohama-port.jpg", imageAttribution: "Photo: Cakoko23 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/chita-toyohama-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/chita-toyohama-port.webp", imageAttribution: "Photo: Cakoko23 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/chita-toyohama-port.webp"],
     rating: 3.8, reviewCount: 89, googleRating: 3.7, googleReviewCount: 200,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
@@ -4430,7 +4430,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r11"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "灯台周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shima-daiozaki.jpg", imageAttribution: "Photo: Miyuki Meinaka / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/shima-daiozaki.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/shima-daiozaki.webp", imageAttribution: "Photo: Miyuki Meinaka / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/shima-daiozaki.webp"],
     rating: 4.3, reviewCount: 45, googleRating: 4.3, googleReviewCount: 119,
     catchableFish: [
       { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
@@ -4457,7 +4457,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r12"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nanki-shirahama-port.jpg", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY 2.5)", images: ["/images/spots/wikimedia/nanki-shirahama-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/nanki-shirahama-port.webp", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY 2.5)", images: ["/images/spots/wikimedia/nanki-shirahama-port.webp"],
     rating: 4.1, reviewCount: 98, googleRating: 4.5, googleReviewCount: 8,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
@@ -4485,7 +4485,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r14"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tosashimizu-port.jpg", imageAttribution: "Photo: inunami / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/tosashimizu-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tosashimizu-port.webp", imageAttribution: "Photo: inunami / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/tosashimizu-port.webp"],
     rating: 4.2, reviewCount: 56, googleRating: 3.5, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -4517,7 +4517,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r15"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hakata-seaside-momochi.jpg", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/hakata-seaside-momochi.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/hakata-seaside-momochi.webp", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/hakata-seaside-momochi.webp"],
     rating: 3.6, reviewCount: 98,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
@@ -4547,7 +4547,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r7"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "江の島周辺有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shonan-enoshima-breakwater.jpg", imageAttribution: "Photo: Σ64 / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/shonan-enoshima-breakwater.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/shonan-enoshima-breakwater.webp", imageAttribution: "Photo: Σ64 / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/shonan-enoshima-breakwater.webp"],
     rating: 3.9, reviewCount: 189, googleRating: 4.4, googleReviewCount: 40,
     catchableFish: [
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
@@ -4570,7 +4570,7 @@ export const additionalSpots: FishingSpot[] = [
     isFree: false, feeDetail: "大人500円、子供300円",
     hasParking: true, parkingDetail: "有料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタル竿セットあり",
-    mainImageUrl: "/images/spots/wikimedia/atami-port-fishing.jpg", imageAttribution: "Photo: Drivephotographer / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/atami-port-fishing.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/atami-port-fishing.webp", imageAttribution: "Photo: Drivephotographer / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/atami-port-fishing.webp"],
     rating: 3.8, reviewCount: 134, googleRating: 3.6, googleReviewCount: 594,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -4593,7 +4593,7 @@ export const additionalSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人3500円（1日）",
     hasParking: true, parkingDetail: "湖畔駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/chuzenji-lake.jpg", imageAttribution: "Photo: Inazakira / Wikimedia Commons (CC BY-SA 2.0)", images: ["/images/spots/wikimedia/chuzenji-lake.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/chuzenji-lake.webp", imageAttribution: "Photo: Inazakira / Wikimedia Commons (CC BY-SA 2.0)", images: ["/images/spots/wikimedia/chuzenji-lake.webp"],
     rating: 4.3, reviewCount: 98, googleRating: 4.4, googleReviewCount: 1445,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -4615,7 +4615,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r40"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "遊水地周辺に駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tone-watarase-yusuchi.jpg", imageAttribution: "Photo: Jan Ebr / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/tone-watarase-yusuchi.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/tone-watarase-yusuchi.webp", imageAttribution: "Photo: Jan Ebr / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/tone-watarase-yusuchi.webp"],
     rating: 3.6, reviewCount: 67, googleRating: 4.3, googleReviewCount: 696,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -4641,7 +4641,7 @@ export const additionalSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人700円",
     hasParking: true, parkingDetail: "湖畔駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, rentalDetail: "ドーム船でレンタルあり",
-    mainImageUrl: "/images/spots/wikimedia/nagano-suwa-lake.jpg", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY 2.5)", images: ["/images/spots/wikimedia/nagano-suwa-lake.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/nagano-suwa-lake.webp", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY 2.5)", images: ["/images/spots/wikimedia/nagano-suwa-lake.webp"],
     rating: 3.8, reviewCount: 156, googleRating: 4.3, googleReviewCount: 1309,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -4665,7 +4665,7 @@ export const additionalSpots: FishingSpot[] = [
     isFree: false, feeDetail: "ドーム船乗船料4000円程度（遊漁券込）",
     hasParking: true, parkingDetail: "ドーム船乗り場に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, rentalDetail: "ドーム船でフルレンタルあり",
-    mainImageUrl: "/images/spots/wikimedia/yamanakako-pier.jpg", imageAttribution: "Photo: 運転太郎 / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/yamanakako-pier.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/yamanakako-pier.webp", imageAttribution: "Photo: 運転太郎 / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/yamanakako-pier.webp"],
     rating: 4.1, reviewCount: 189, googleRating: 4, googleReviewCount: 714,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" },
@@ -4688,7 +4688,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r24"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタル竿セットあり",
-    mainImageUrl: "/images/spots/wikimedia/osaka-nanko-fishing-park.jpg", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/osaka-nanko-fishing-park.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/osaka-nanko-fishing-park.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/osaka-nanko-fishing-park.webp"],
     rating: 3.8, reviewCount: 198, googleRating: 3.8, googleReviewCount: 44,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -4717,7 +4717,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r9"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/izu-shimoda-port.jpg", imageAttribution: "Photo: Fumihiko Ueno / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/izu-shimoda-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/izu-shimoda-port.webp", imageAttribution: "Photo: Fumihiko Ueno / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/izu-shimoda-port.webp"],
     rating: 4.2, reviewCount: 98, googleRating: 4.4, googleReviewCount: 22,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -4746,7 +4746,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ito-port.jpg", imageAttribution: "Photo: Batholith / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/ito-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/ito-port.webp", imageAttribution: "Photo: Batholith / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/ito-port.webp"],
     rating: 3.9, reviewCount: 112, googleRating: 3.5, googleReviewCount: 25,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -4768,7 +4768,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r4"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/uchibo-hota-port.jpg", imageAttribution: "Photo: くろふね / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/uchibo-hota-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/uchibo-hota-port.webp", imageAttribution: "Photo: くろふね / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/uchibo-hota-port.webp"],
     rating: 4.0, reviewCount: 89, googleRating: 3.8, googleReviewCount: 171,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
@@ -4824,7 +4824,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r11"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/yokkaichi-kasumigaura.jpg", imageAttribution: "Photo: 由紀奈 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/yokkaichi-kasumigaura.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/yokkaichi-kasumigaura.webp", imageAttribution: "Photo: 由紀奈 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/yokkaichi-kasumigaura.webp"],
     rating: 3.7, reviewCount: 98, googleRating: 3.4, googleReviewCount: 32,
     catchableFish: [
       { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -4846,7 +4846,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r26"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "天橋立駐車場利用（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/amanohashidate-asokai.jpg", imageAttribution: "Photo: Ray Swi-hymn from Sijhih-Taipei, Taiwan / Wikimedia Commons (CC BY-SA 2.0)", images: ["/images/spots/wikimedia/amanohashidate-asokai.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/amanohashidate-asokai.webp", imageAttribution: "Photo: Ray Swi-hymn from Sijhih-Taipei, Taiwan / Wikimedia Commons (CC BY-SA 2.0)", images: ["/images/spots/wikimedia/amanohashidate-asokai.webp"],
     rating: 3.7, reviewCount: 78, googleRating: 3.9, googleReviewCount: 24,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
@@ -4876,7 +4876,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r31"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hashihama-port.jpg", imageAttribution: "Photo: DVMG / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/hashihama-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/hashihama-port.webp", imageAttribution: "Photo: DVMG / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/hashihama-port.webp"],
     rating: 4.0, reviewCount: 67, googleRating: 4.1, googleReviewCount: 33,
     catchableFish: [
       { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
@@ -4900,7 +4900,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r32"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sasebo-port.jpg", imageAttribution: "Photo: SCOTT CAMERON / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/sasebo-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/sasebo-port.webp", imageAttribution: "Photo: SCOTT CAMERON / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/sasebo-port.webp"],
     rating: 3.8, reviewCount: 78, googleRating: 4.4, googleReviewCount: 129,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
@@ -4922,7 +4922,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r35"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nobeoka-port.jpg", imageAttribution: "Photo: Syced / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/nobeoka-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/nobeoka-port.webp", imageAttribution: "Photo: Syced / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/nobeoka-port.webp"],
     rating: 3.7, reviewCount: 56, googleRating: 5, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -4943,7 +4943,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r50"), spotType: "beach", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "橋周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/miyako-kurima-bridge.jpg", imageAttribution: "Photo: Raita Futo from Tokyo, Japan / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/miyako-kurima-bridge.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/miyako-kurima-bridge.webp", imageAttribution: "Photo: Raita Futo from Tokyo, Japan / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/miyako-kurima-bridge.webp"],
     rating: 4.3, reviewCount: 34,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -4966,7 +4966,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r7"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/katase-port.jpg", imageAttribution: "Photo: Syced / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/katase-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/katase-port.webp", imageAttribution: "Photo: Syced / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/katase-port.webp"],
     rating: 3.8, reviewCount: 156, googleRating: 3.9, googleReviewCount: 46,
     catchableFish: [
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
@@ -4987,7 +4987,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r12"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kii-tanabe-port.jpg", imageAttribution: "Photo: HQA02330 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/kii-tanabe-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/kii-tanabe-port.webp", imageAttribution: "Photo: HQA02330 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/kii-tanabe-port.webp"],
     rating: 4.0, reviewCount: 67, googleRating: 5, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
@@ -5015,7 +5015,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r28"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shimonoseki-hikoshima.jpg", imageAttribution: "Photo: まも (Mamo) / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/shimonoseki-hikoshima.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/shimonoseki-hikoshima.webp", imageAttribution: "Photo: まも (Mamo) / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/shimonoseki-hikoshima.webp"],
     rating: 4.1, reviewCount: 45,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
@@ -5043,7 +5043,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r15"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/itoshima-funakoshi-port.jpg", imageAttribution: "Photo: Soumei Baba / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/itoshima-funakoshi-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/itoshima-funakoshi-port.webp", imageAttribution: "Photo: Soumei Baba / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/itoshima-funakoshi-port.webp"],
     rating: 4.0, reviewCount: 78, googleRating: 4.1, googleReviewCount: 95,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
@@ -5070,7 +5070,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r8"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "公園駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/yokosuka-umikaze-park.jpg", imageAttribution: "Photo: Hunini / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/yokosuka-umikaze-park.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/yokosuka-umikaze-park.webp", imageAttribution: "Photo: Hunini / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/yokosuka-umikaze-park.webp"],
     rating: 3.9, reviewCount: 167, googleRating: 4.1, googleReviewCount: 2607,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -5092,7 +5092,7 @@ export const additionalSpots: FishingSpot[] = [
     region: region("r11"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shima-port.jpg", imageAttribution: "Photo: Miyuki Meinaka / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/shima-port.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/shima-port.webp", imageAttribution: "Photo: Miyuki Meinaka / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/shima-port.webp"],
     rating: 4.0, reviewCount: 78, googleRating: 3.9, googleReviewCount: 795,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
@@ -5118,7 +5118,7 @@ export const additionalSpots: FishingSpot[] = [
     accessInfo: "JR境港駅から車で約20分。", region: region("r27"),
     spotType: "port", difficulty: "intermediate", isFree: true,
     hasParking: true, parkingDetail: "無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sakaiminato-mihonoseki.jpg", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/sakaiminato-mihonoseki.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/sakaiminato-mihonoseki.webp", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/sakaiminato-mihonoseki.webp"],
     rating: 4.2, reviewCount: 76, googleRating: 4.2, googleReviewCount: 109,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
@@ -5147,7 +5147,7 @@ export const additionalSpots: FishingSpot[] = [
     accessInfo: "中国自動車道下関ICから約70分。", region: region("r28"),
     spotType: "rocky", difficulty: "intermediate", isFree: true,
     hasParking: true, parkingDetail: "無料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shimonoseki-tsunoshima.jpg", imageAttribution: "Photo: ハポニアラ / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/shimonoseki-tsunoshima.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/shimonoseki-tsunoshima.webp", imageAttribution: "Photo: ハポニアラ / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/shimonoseki-tsunoshima.webp"],
     rating: 4.4, reviewCount: 112, googleRating: 4.7, googleReviewCount: 1615,
     catchableFish: [
       { fish: fish("madai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
@@ -5174,7 +5174,7 @@ export const additionalSpots: FishingSpot[] = [
     accessInfo: "鳴門ICから車で約10分。", region: region("r29"),
     spotType: "breakwater", difficulty: "beginner", isFree: true,
     hasParking: true, parkingDetail: "無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/naruto-uchinoumi.jpg", imageAttribution: "Photo: Kounosu / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/naruto-uchinoumi.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/naruto-uchinoumi.webp", imageAttribution: "Photo: Kounosu / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/naruto-uchinoumi.webp"],
     rating: 3.8, reviewCount: 54, googleRating: 4.3, googleReviewCount: 1075,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
@@ -5203,7 +5203,7 @@ export const additionalSpots: FishingSpot[] = [
     accessInfo: "JR高松駅から徒歩5分。", region: region("r30"),
     spotType: "port", difficulty: "beginner", isFree: true,
     hasParking: true, parkingDetail: "有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/takamatsu-sunport.jpg", imageAttribution: "Photo: Drivephotographer / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/takamatsu-sunport.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/takamatsu-sunport.webp", imageAttribution: "Photo: Drivephotographer / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/takamatsu-sunport.webp"],
     rating: 3.6, reviewCount: 42,
     catchableFish: [
       { fish: fish("mebaru"), monthStart: 2, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "メバリング" },
@@ -5225,7 +5225,7 @@ export const additionalSpots: FishingSpot[] = [
     accessInfo: "伊予鉄三津駅から徒歩10分。松山自動車道松山ICから約20分。", region: region("r31"),
     spotType: "port", difficulty: "beginner", isFree: true,
     hasParking: true, parkingDetail: "無料駐車スペースあり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/matsuyama-mitsuhama.jpg", imageAttribution: "Photo: DVMG / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/matsuyama-mitsuhama.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/matsuyama-mitsuhama.webp", imageAttribution: "Photo: DVMG / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/matsuyama-mitsuhama.webp"],
     rating: 3.9, reviewCount: 88, googleRating: 3.4, googleReviewCount: 584,
     catchableFish: [
       { fish: fish("tachiuo"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ワインド釣法" },
@@ -5248,7 +5248,7 @@ export const additionalSpots: FishingSpot[] = [
     accessInfo: "JR別府駅から徒歩10分。", region: region("r33"),
     spotType: "beach", difficulty: "beginner", isFree: true,
     hasParking: true, parkingDetail: "周辺有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/beppu-kitahama.jpg", imageAttribution: "Photo: Tabitan / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/beppu-kitahama.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/beppu-kitahama.webp", imageAttribution: "Photo: Tabitan / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/beppu-kitahama.webp"],
     rating: 3.7, reviewCount: 45, googleRating: 3.9, googleReviewCount: 197,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
@@ -5270,7 +5270,7 @@ export const additionalSpots: FishingSpot[] = [
     accessInfo: "天草空港から車で約30分。", region: region("r34"),
     spotType: "port", difficulty: "intermediate", isFree: true,
     hasParking: true, parkingDetail: "フェリー乗り場駐車場利用可", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/amakusa-oniike.jpg", imageAttribution: "Photo: まも / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/amakusa-oniike.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/amakusa-oniike.webp", imageAttribution: "Photo: まも / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/amakusa-oniike.webp"],
     rating: 4.1, reviewCount: 63, googleRating: 3.8, googleReviewCount: 68,
     catchableFish: [
       { fish: fish("madai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
@@ -5298,7 +5298,7 @@ export const additionalSpots: FishingSpot[] = [
     accessInfo: "JR油津駅から徒歩10分。", region: region("r35"),
     spotType: "port", difficulty: "intermediate", isFree: true,
     hasParking: true, parkingDetail: "無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nichinan-aburatsu.jpg", imageAttribution: "Photo: 松岡明芳 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/nichinan-aburatsu.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/nichinan-aburatsu.webp", imageAttribution: "Photo: 松岡明芳 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/nichinan-aburatsu.webp"],
     rating: 4.0, reviewCount: 71, googleRating: 3.9, googleReviewCount: 20,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -5329,7 +5329,7 @@ export const additionalSpots: FishingSpot[] = [
     accessInfo: "JR男鹿駅から車で約30分。", region: region("r36"),
     spotType: "port", difficulty: "intermediate", isFree: true,
     hasParking: true, parkingDetail: "無料駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/oga-toga.jpg", imageAttribution: "Photo: Ocavis Leechroot / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/oga-toga.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/oga-toga.webp", imageAttribution: "Photo: Ocavis Leechroot / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/oga-toga.webp"],
     rating: 4.1, reviewCount: 58, googleRating: 4, googleReviewCount: 44,
     catchableFish: [
       { fish: fish("mebaru"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "メバリング" },
@@ -5356,7 +5356,7 @@ export const additionalSpots: FishingSpot[] = [
     accessInfo: "JR酒田駅から車で約10分。", region: region("r37"),
     spotType: "port", difficulty: "beginner", isFree: true,
     hasParking: true, parkingDetail: "無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sakata-kitako.jpg", imageAttribution: "Photo: Ryuetsu Kato / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/sakata-kitako.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/sakata-kitako.webp", imageAttribution: "Photo: Ryuetsu Kato / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/sakata-kitako.webp"],
     rating: 3.9, reviewCount: 82, googleRating: 3.6, googleReviewCount: 16,
     catchableFish: [
       { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー釣り" },
@@ -5378,7 +5378,7 @@ export const additionalSpots: FishingSpot[] = [
     accessInfo: "JRいわき駅からバスで約30分。常磐自動車道いわき湯本ICから約20分。", region: region("r38"),
     spotType: "port", difficulty: "beginner", isFree: true,
     hasParking: true, parkingDetail: "有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/iwaki-onahama.jpg", imageAttribution: "Photo: 小石川人晃 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/iwaki-onahama.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/iwaki-onahama.webp", imageAttribution: "Photo: 小石川人晃 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/iwaki-onahama.webp"],
     rating: 4.0, reviewCount: 156, googleRating: 4.3, googleReviewCount: 84,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -5401,7 +5401,7 @@ export const additionalSpots: FishingSpot[] = [
     accessInfo: "鹿島臨海鉄道大洗駅から徒歩15分。北関東自動車道水戸大洗ICから約10分。", region: region("r20"),
     spotType: "breakwater", difficulty: "beginner", isFree: true,
     hasParking: true, parkingDetail: "無料駐車場あり（約200台）", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/oarai-teiho.jpg", imageAttribution: "Photo: Ocdp / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/oarai-teiho.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/oarai-teiho.webp", imageAttribution: "Photo: Ocdp / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/oarai-teiho.webp"],
     rating: 4.3, reviewCount: 234, googleRating: 3.4, googleReviewCount: 8,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -5425,7 +5425,7 @@ export const additionalSpots: FishingSpot[] = [
     accessInfo: "JR唐津駅からバスで約30分。長崎自動車道多久ICから約50分。", region: region("r41"),
     spotType: "port", difficulty: "intermediate", isFree: true, isKuchikomiSpot: true,
     hasParking: true, parkingDetail: "朝市周辺有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/karatsu-yobuko-asaichi.jpg", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/karatsu-yobuko-asaichi.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/karatsu-yobuko-asaichi.webp", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/karatsu-yobuko-asaichi.webp"],
     rating: 4.5, reviewCount: 187, googleRating: 3.6, googleReviewCount: 3029,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
@@ -5447,7 +5447,7 @@ export const additionalSpots: FishingSpot[] = [
     accessInfo: "南海本線泉大津駅からバスで約10分。阪神高速湾岸線助松JCTから約5分。", region: region("r24"),
     spotType: "port", difficulty: "beginner", isFree: true,
     hasParking: true, parkingDetail: "周辺に駐車スペースあり", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/izumiotsu-shiomi.jpg", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/izumiotsu-shiomi.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/izumiotsu-shiomi.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/izumiotsu-shiomi.webp"],
     rating: 4.0, reviewCount: 145, googleRating: 3.8, googleReviewCount: 93,
     catchableFish: [
       { fish: fish("tachiuo"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ワインド釣法" },
@@ -5478,7 +5478,7 @@ export const additionalSpots: FishingSpot[] = [
     accessInfo: "南海本線樽井駅から徒歩15分。阪和自動車道泉南ICから約10分。", region: region("r24"),
     spotType: "port", difficulty: "beginner", isFree: true,
     hasParking: true, parkingDetail: "漁港周辺に無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sennan-tarui.jpg", imageAttribution: "Photo: クハ４１９－５ / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/sennan-tarui.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/sennan-tarui.webp", imageAttribution: "Photo: クハ４１９－５ / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/sennan-tarui.webp"],
     rating: 3.8, reviewCount: 87, googleRating: 3.7, googleReviewCount: 88,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -5508,7 +5508,7 @@ export const additionalSpots: FishingSpot[] = [
     accessInfo: "南海多奈川線深日港駅から徒歩5分。阪和自動車道泉南ICから約25分。", region: region("r24"),
     spotType: "port", difficulty: "intermediate", isFree: true,
     hasParking: true, parkingDetail: "港周辺に無料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/misaki-fuke.jpg", imageAttribution: "Photo: shikabane taro / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/misaki-fuke.jpg"],
+    mainImageUrl: "/images/spots/wikimedia/misaki-fuke.webp", imageAttribution: "Photo: shikabane taro / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/misaki-fuke.webp"],
     rating: 4.2, reviewCount: 103, googleRating: 3.9, googleReviewCount: 32,
     catchableFish: [
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ" },
