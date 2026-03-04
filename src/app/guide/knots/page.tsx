@@ -4,6 +4,8 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ChevronLeft, Play } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
+import { YouTubeEmbedList } from "@/components/youtube-embed";
+import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import type { YouTubeSearchLink } from "@/types";
 
 const knotVideos: YouTubeSearchLink[] = [
@@ -737,6 +739,13 @@ export default function KnotsGuidePage() {
             実際の手の動きを動画で見ると、格段にわかりやすくなります。
           </p>
           <YouTubeVideoList links={knotVideos} />
+          <div className="mt-6">
+            <YouTubeEmbedList
+              videos={fishingMethodVideos.knots}
+              sectionTitle="ノットの結び方動画"
+              description="FGノットなど、実際の手の動きがわかる解説動画です。"
+            />
+          </div>
         </section>
 
         {/* 次のステップ */}

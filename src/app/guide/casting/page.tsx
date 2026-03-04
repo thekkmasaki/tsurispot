@@ -4,6 +4,8 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ChevronLeft, Play, ExternalLink, ShoppingBag } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
+import { YouTubeEmbedList } from "@/components/youtube-embed";
+import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import type { YouTubeSearchLink } from "@/types";
 
 const castingVideos: YouTubeSearchLink[] = [
@@ -1065,6 +1067,13 @@ export default function CastingGuidePage() {
             投げ方は動画で見るのが一番わかりやすいです。
           </p>
           <YouTubeVideoList links={castingVideos} />
+          <div className="mt-6">
+            <YouTubeEmbedList
+              videos={fishingMethodVideos.casting}
+              sectionTitle="投げ釣り入門動画"
+              description="初心者向けにキャスティングの基本を解説した動画です。"
+            />
+          </div>
         </section>
 
         {/* ガイドに戻る */}

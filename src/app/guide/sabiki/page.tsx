@@ -24,6 +24,8 @@ import { fishingSpots } from "@/lib/data/spots";
 import { ProductList } from "@/components/affiliate/product-list";
 import { getProductsByMethod } from "@/lib/data/products";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
+import { YouTubeEmbedList } from "@/components/youtube-embed";
+import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import type { YouTubeSearchLink } from "@/types";
 import { RigDiagram } from "@/components/rig-diagram";
 
@@ -1443,6 +1445,13 @@ export default function SabikiGuidePage() {
             サビキ釣りの一連の流れを動画で確認しましょう。
           </p>
           <YouTubeVideoList links={sabikiVideos} />
+          <div className="mt-6">
+            <YouTubeEmbedList
+              videos={fishingMethodVideos.sabiki}
+              sectionTitle="サビキ釣り入門動画"
+              description="プロが解説するサビキ釣りの基本テクニック動画です。"
+            />
+          </div>
         </section>
 
         {/* 道具を揃えるなら */}

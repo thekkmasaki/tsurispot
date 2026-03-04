@@ -4,6 +4,8 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { AlertTriangle, ChevronLeft, Play } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
+import { YouTubeEmbedList } from "@/components/youtube-embed";
+import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import type { YouTubeSearchLink } from "@/types";
 
 const setupVideos: YouTubeSearchLink[] = [
@@ -1130,6 +1132,13 @@ export default function SetupGuidePage() {
             文字だけではわかりにくい手順を動画で確認しましょう。
           </p>
           <YouTubeVideoList links={setupVideos} />
+          <div className="mt-6">
+            <YouTubeEmbedList
+              videos={fishingMethodVideos.sabiki}
+              sectionTitle="初心者向け実釣動画"
+              description="セッティングを覚えたら実際の釣り動画を参考にしましょう。"
+            />
+          </div>
         </section>
 
         {/* 次のステップ */}

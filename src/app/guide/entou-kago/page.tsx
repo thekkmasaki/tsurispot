@@ -15,6 +15,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
+import { YouTubeEmbedList } from "@/components/youtube-embed";
+import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import type { YouTubeSearchLink } from "@/types";
 
 const entouKagoVideos: YouTubeSearchLink[] = [
@@ -1118,6 +1120,13 @@ export default function EntouKagoGuidePage() {
             遠投カゴ釣りの仕掛けの作り方や投げ方を動画で確認しましょう。
           </p>
           <YouTubeVideoList links={entouKagoVideos} />
+          <div className="mt-6">
+            <YouTubeEmbedList
+              videos={fishingMethodVideos.casting}
+              sectionTitle="遠投カゴ釣り入門動画"
+              description="キャスティングや仕掛けの基本を動画で学びましょう。"
+            />
+          </div>
         </section>
 
         {/* 関連ガイド */}
