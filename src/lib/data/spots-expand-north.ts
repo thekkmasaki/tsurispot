@@ -1143,7 +1143,7 @@ export const expandNorthSpots: FishingSpot[] = [
     latitude: 36.6556, longitude: 136.6250,
     address: "〒920-0266 石川県河北郡内灘町大清台",
     accessInfo: "JR内灘駅から車で約10分。北陸自動車道金沢東ICから約20分。",
-    region: localRegion("r4240"), spotType: "river_mouth", difficulty: "intermediate",
+    region: localRegion("r4240"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "河口付近に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", imageAttribution: "", images: [], rating: 4.0, reviewCount: 160, googleRating: 3.9, googleReviewCount: 85,
