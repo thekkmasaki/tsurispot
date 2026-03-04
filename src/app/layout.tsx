@@ -126,10 +126,14 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "WebSite",
+              "@id": "https://tsurispot.com/#website",
               name: "ツリスポ",
-              alternateName: ["TsuriSpot", "つりすぽ"],
+              alternateName: ["TsuriSpot", "つりすぽ", "釣りスポット"],
               url: "https://tsurispot.com",
               inLanguage: "ja",
+              publisher: {
+                "@id": "https://tsurispot.com/#organization",
+              },
               potentialAction: {
                 "@type": "SearchAction",
                 target: {
@@ -147,6 +151,7 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Organization",
+              "@id": "https://tsurispot.com/#organization",
               name: "ツリスポ",
               alternateName: "TsuriSpot",
               url: "https://tsurispot.com",

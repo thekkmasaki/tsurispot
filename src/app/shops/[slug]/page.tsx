@@ -41,6 +41,7 @@ export async function generateMetadata({
       title: `${shop.name} - 釣具店情報`,
       description: shop.description,
       url: `https://tsurispot.com/shops/${slug}`,
+      siteName: "ツリスポ",
     },
   };
 }
