@@ -308,7 +308,7 @@ export function SearchOverlay() {
               </div>
 
               {/* Results */}
-              <div className="max-h-[28rem] overflow-y-auto p-2">
+              <div className="max-h-[28rem] overflow-y-auto p-2" onMouseDown={(e) => e.preventDefault()}>
                 {query.trim() === "" ? (
                   <p className="px-3 py-6 text-center text-sm text-muted-foreground">
                     スポット名・魚種名・ガイド・コラムなど<br />何でも検索できます
