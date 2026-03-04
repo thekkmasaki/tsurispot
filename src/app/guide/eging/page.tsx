@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronLeft, Palette, Settings, Waves, Calendar, Scissors } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { YouTubeEmbedList } from "@/components/youtube-embed";
+import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 
 export const metadata: Metadata = {
   title: "エギング入門ガイド - エギの選び方・シャクリ方・季節別攻略",
@@ -656,6 +658,15 @@ export default function EgingGuidePage() {
               締めたイカは鮮度が保たれ、帰宅後に美味しい刺身やお造りが楽しめます。当日〜翌日が最も美味しいタイミングです。
             </Hint>
           </SectionCard>
+        </div>
+
+        {/* 参考動画 */}
+        <div className="mt-8 sm:mt-12">
+          <YouTubeEmbedList
+            videos={fishingMethodVideos.eging}
+            sectionTitle="エギングの参考動画"
+            description="初心者向けにエギングの基本動作やシャクリ方を解説した動画です。"
+          />
         </div>
 
         {/* 関連ガイド */}

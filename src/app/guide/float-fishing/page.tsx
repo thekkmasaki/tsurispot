@@ -4,6 +4,8 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { CircleDot, Anchor, Bug, Eye, Fish } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { RigDiagram } from "@/components/rig-diagram";
+import { YouTubeEmbedList } from "@/components/youtube-embed";
+import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 
 export const metadata: Metadata = {
   title: "ウキ釣り完全ガイド - ウキの種類・仕掛け・アタリの取り方",
@@ -794,6 +796,15 @@ export default function FloatFishingGuidePage() {
               </div>
             </div>
           </SectionCard>
+        </div>
+
+        {/* 参考動画 */}
+        <div className="mt-8 sm:mt-12">
+          <YouTubeEmbedList
+            videos={fishingMethodVideos["float-fishing"]}
+            sectionTitle="ウキ釣りの参考動画"
+            description="初心者向けにウキ釣りの基本を解説した動画です。"
+          />
         </div>
 
         {/* 関連ガイド */}

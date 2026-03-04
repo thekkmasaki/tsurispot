@@ -36,6 +36,8 @@ import { GoTodayButton } from "@/components/spots/go-today-button";
 import { GearGuideList } from "@/components/spots/gear-guide";
 import { SafetyWarning } from "@/components/spots/safety-warning";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
+import { YouTubeEmbedList } from "@/components/youtube-embed";
+import { getVideosForMethods, getVideosForSpotType } from "@/lib/data/youtube-videos";
 import {
   SPOT_TYPE_LABELS,
   DIFFICULTY_LABELS,
@@ -849,6 +851,19 @@ export default async function SpotDetailPage({ params }: PageProps) {
               <YouTubeVideoList links={spot.youtubeLinks} />
             </section>
           )}
+          {(() => {
+            const methods = spot.catchableFish.map((cf) => cf.method);
+            const methodVideos = methods.length > 0
+              ? getVideosForMethods(methods, 2)
+              : getVideosForSpotType(spot.spotType, 2);
+            return methodVideos.length > 0 ? (
+              <YouTubeEmbedList
+                videos={methodVideos}
+                sectionTitle="関連する釣り方動画"
+                description={`${spot.name}で使える釣り方の解説動画です。`}
+              />
+            ) : null;
+          })()}
         </>}
         fishTab={<>
           <section>

@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronLeft, Flashlight, Fish, ShieldAlert, MapPin, Heart } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { YouTubeEmbedList } from "@/components/youtube-embed";
+import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 
 export const metadata: Metadata = {
   title: "夜釣り入門ガイド - 必要装備・釣れる魚・安全対策を解説",
@@ -575,6 +577,15 @@ export default function NightFishingGuidePage() {
               夜釣り禁止の釣り場もあります。事前に看板や地元のルールを確認し、禁止されている場所では絶対に夜釣りをしないでください。
             </Warning>
           </SectionCard>
+        </div>
+
+        {/* 参考動画 */}
+        <div className="mt-8 sm:mt-12">
+          <YouTubeEmbedList
+            videos={fishingMethodVideos["night-fishing"]}
+            sectionTitle="夜釣りの参考動画"
+            description="初心者向けに夜釣りの基本テクニックを解説した動画です。"
+          />
         </div>
 
         {/* 関連ガイド */}

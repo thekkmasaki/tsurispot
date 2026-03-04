@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronLeft, Fish, Target, Zap, Settings } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { YouTubeEmbedList } from "@/components/youtube-embed";
+import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 
 export const metadata: Metadata = {
   title: "ルアー釣り入門ガイド - ルアーの種類・選び方・アクションを解説",
@@ -550,6 +552,15 @@ export default function LureGuidePage() {
               最初から高価な道具を揃える必要はありません。入門モデルでも十分に楽しめます。まずは実際に釣りをしてみて、自分の好みのスタイルが分かってからグレードアップしましょう。
             </Warning>
           </SectionCard>
+        </div>
+
+        {/* 参考動画 */}
+        <div className="mt-8 sm:mt-12">
+          <YouTubeEmbedList
+            videos={fishingMethodVideos.lure}
+            sectionTitle="ルアー釣りの参考動画"
+            description="初心者向けにルアーフィッシングの基本を解説した動画です。"
+          />
         </div>
 
         {/* 関連ガイド */}

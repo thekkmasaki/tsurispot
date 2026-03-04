@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { YouTubeEmbedList } from "@/components/youtube-embed";
+import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 
 export const metadata: Metadata = {
   title: "釣り仕掛け図解ガイド - 5つの基本仕掛けをイラストで解説",
@@ -1177,6 +1179,14 @@ export default function RigsGuidePage() {
             釣り糸の結び方ガイドへ
           </Link>
         </div>
+      {/* 参考動画 */}
+      <div className="mt-8 sm:mt-12">
+        <YouTubeEmbedList
+          videos={fishingMethodVideos.rigs}
+          sectionTitle="仕掛け作りの参考動画"
+          description="初心者向けに基本的な仕掛けの作り方を解説した動画です。"
+        />
+      </div>
       {/* LINE登録バナー */}
       <div className="mt-8 sm:mt-12">
       </div>

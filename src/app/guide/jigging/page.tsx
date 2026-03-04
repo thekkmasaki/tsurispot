@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronLeft, Zap, Settings, Target, ShieldAlert, Fish } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { YouTubeEmbedList } from "@/components/youtube-embed";
+import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 
 export const metadata: Metadata = {
   title: "ショアジギング入門ガイド - メタルジグで青物を狙う",
@@ -632,6 +634,15 @@ export default function JiggingGuidePage() {
               「濡れている場所には絶対に立たない」が磯の鉄則。波しぶきで濡れている場所は、次の大波で水没する可能性があります。命に関わるため、安全マージンを十分に取りましょう。
             </Danger>
           </SectionCard>
+        </div>
+
+        {/* 参考動画 */}
+        <div className="mt-8 sm:mt-12">
+          <YouTubeEmbedList
+            videos={fishingMethodVideos.jigging}
+            sectionTitle="ショアジギングの参考動画"
+            description="初心者向けにショアジギングの基本テクニックを解説した動画です。"
+          />
         </div>
 
         {/* 関連ガイド */}

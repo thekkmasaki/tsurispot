@@ -31,6 +31,8 @@ import { DIFFICULTY_LABELS, CATCH_RATING_LABELS } from "@/types";
 import { MonthCalendar } from "@/components/fish/month-calendar";
 import { NearbySpotsSorter } from "@/components/fish/nearby-spots-sorter";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
+import { YouTubeEmbedList } from "@/components/youtube-embed";
+import { getVideosForMethods } from "@/lib/data/youtube-videos";
 import { ProductList } from "@/components/affiliate/product-list";
 import { getProductsByFish, getTopProducts } from "@/lib/data/products";
 import { getHookSizeData } from "@/lib/data/hook-sizes";
@@ -1023,6 +1025,21 @@ export default async function FishDetailPage({ params }: PageProps) {
           <YouTubeVideoList links={fish.youtubeLinks} />
         </section>
       )}
+
+      {/* 釣り方動画（埋め込み） */}
+      {(() => {
+        const methods = fish.fishingMethods?.map(m => m.methodName) || [];
+        const methodVideos = getVideosForMethods(methods, 2);
+        return methodVideos.length > 0 ? (
+          <section className="mb-6 sm:mb-8">
+            <YouTubeEmbedList
+              videos={methodVideos}
+              sectionTitle={`${fish.name}の釣り方動画`}
+              description={`${fish.name}を釣るための基本テクニックを動画で学べます。`}
+            />
+          </section>
+        ) : null;
+      })()}
 
       {/* 豆知識 */}
       <section className="mb-8">
