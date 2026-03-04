@@ -575,6 +575,79 @@ export default function Home() {
         </div>
       </section>
 
+      {/* 人気の釣り方ガイド */}
+      <section className="bg-muted/50 py-8 sm:py-12">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <div className="mb-6 flex items-end justify-between sm:mb-8">
+            <div>
+              <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
+                釣り方ガイド
+              </h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                初心者から上級者まで、釣り方を完全解説
+              </p>
+            </div>
+            <Link
+              href="/guide"
+              className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
+            >
+              すべて見る
+              <ArrowRight className="size-4" />
+            </Link>
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { href: "/guide/sabiki", title: "サビキ釣り", desc: "堤防で手軽にアジ・サバ・イワシ", badge: "初心者向け", badgeClass: "bg-green-100 text-green-800" },
+              { href: "/guide/choinage", title: "ちょい投げ", desc: "キスやハゼを狙う投げ釣り入門", badge: "初心者向け", badgeClass: "bg-green-100 text-green-800" },
+              { href: "/guide/eging", title: "エギング", desc: "アオリイカを狙うルアー釣り", badge: "中級", badgeClass: "bg-blue-100 text-blue-800" },
+              { href: "/guide/jigging", title: "ショアジギング", desc: "メタルジグで青物を狙う", badge: "中〜上級", badgeClass: "bg-orange-100 text-orange-800" },
+              { href: "/guide/float-fishing", title: "ウキ釣り", desc: "メジナやクロダイをウキで狙う", badge: "初〜中級", badgeClass: "bg-blue-100 text-blue-800" },
+              { href: "/guide/anazuri", title: "穴釣り", desc: "テトラの隙間でカサゴ・メバル", badge: "初心者向け", badgeClass: "bg-green-100 text-green-800" },
+              { href: "/guide/lure", title: "ルアー釣り", desc: "シーバスやヒラメをルアーで", badge: "中級", badgeClass: "bg-blue-100 text-blue-800" },
+              { href: "/guide/night-fishing", title: "ナイトフィッシング", desc: "夜の堤防でメバル・アジを狙う", badge: "初〜中級", badgeClass: "bg-blue-100 text-blue-800" },
+            ].map((guide) => (
+              <Link key={guide.href} href={guide.href}>
+                <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                  <CardContent className="p-4">
+                    <div className="mb-2 flex items-center justify-between">
+                      <h3 className="font-semibold group-hover:text-primary">{guide.title}</h3>
+                      <Badge className={`text-[10px] ${guide.badgeClass}`}>{guide.badge}</Badge>
+                    </div>
+                    <p className="text-xs text-muted-foreground leading-relaxed">{guide.desc}</p>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            {[
+              { href: "/guide/knots", label: "結び方" },
+              { href: "/guide/line", label: "ライン" },
+              { href: "/guide/rigs", label: "仕掛け" },
+              { href: "/guide/sinker", label: "オモリ" },
+              { href: "/guide/tide", label: "潮汐" },
+              { href: "/guide/casting", label: "キャスティング" },
+              { href: "/guide/budget", label: "予算別" },
+              { href: "/guide/family", label: "ファミリー" },
+            ].map((item) => (
+              <Link key={item.href} href={item.href}>
+                <Badge variant="outline" className="cursor-pointer px-2.5 py-1 text-xs transition-colors hover:bg-primary hover:text-white">
+                  {item.label}
+                </Badge>
+              </Link>
+            ))}
+          </div>
+          <div className="mt-6 flex justify-center sm:hidden">
+            <Link href="/guide">
+              <Button variant="outline" className="min-h-[44px] gap-1">
+                すべてのガイドを見る
+                <ArrowRight className="size-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* 近くの釣りスポット */}
       <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
         <NearbySpots allSpots={lightSpots} />

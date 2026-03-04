@@ -1161,6 +1161,83 @@ export default async function FishDetailPage({ params }: PageProps) {
         </section>
       )}
 
+      {/* 釣り方ガイドへのリンク */}
+      {fish.fishingMethods && fish.fishingMethods.length > 0 && (() => {
+        const GUIDE_MAP: Record<string, { href: string; label: string; desc: string }> = {
+          "サビキ釣り": { href: "/guide/sabiki", label: "サビキ釣り完全ガイド", desc: "仕掛け・コマセの使い方を図解" },
+          "アジング": { href: "/guide/lure", label: "ルアー釣りガイド", desc: "ルアーの選び方とアクション" },
+          "エギング": { href: "/guide/eging", label: "エギング完全ガイド", desc: "エギの選び方とシャクリ方" },
+          "メバリング": { href: "/guide/lure", label: "ルアー釣りガイド", desc: "ルアーの選び方とアクション" },
+          "ショアジギング": { href: "/guide/jigging", label: "ショアジギング完全ガイド", desc: "メタルジグで青物を狙う方法" },
+          "ちょい投げ": { href: "/guide/choinage", label: "ちょい投げ完全ガイド", desc: "キスやハゼの投げ釣り入門" },
+          "ちょい投げ釣り": { href: "/guide/choinage", label: "ちょい投げ完全ガイド", desc: "キスやハゼの投げ釣り入門" },
+          "ウキ釣り": { href: "/guide/float-fishing", label: "ウキ釣り完全ガイド", desc: "ウキの種類とタナの取り方" },
+          "穴釣り": { href: "/guide/anazuri", label: "穴釣り完全ガイド", desc: "テトラの隙間で根魚を狙う" },
+          "ルアー釣り": { href: "/guide/lure", label: "ルアー釣り完全ガイド", desc: "ルアーの種類とアクション解説" },
+          "泳がせ釣り": { href: "/guide/oyogase", label: "泳がせ釣り入門ガイド", desc: "活きエサで大物を狙う" },
+          "遠投カゴ釣り": { href: "/guide/entou-kago", label: "遠投カゴ釣りガイド", desc: "沖のタナを攻めるカゴ釣り" },
+          "投げ釣り": { href: "/guide/choinage", label: "ちょい投げ完全ガイド", desc: "投げ釣りの基本とコツ" },
+          "フカセ釣り": { href: "/guide/float-fishing", label: "ウキ釣り完全ガイド", desc: "フカセ釣りの基本テクニック" },
+        };
+        const seen = new Set<string>();
+        const guideLinks = fish.fishingMethods
+          .map((m) => GUIDE_MAP[m.methodName])
+          .filter((g): g is { href: string; label: string; desc: string } => {
+            if (!g || seen.has(g.href)) return false;
+            seen.add(g.href);
+            return true;
+          });
+        if (guideLinks.length === 0) return null;
+        return (
+          <section className="mb-6 sm:mb-8">
+            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
+              <BookOpen className="size-5 text-primary" />
+              {fish.name}の釣り方ガイド
+            </h2>
+            <div className="grid gap-2 sm:grid-cols-2">
+              {guideLinks.map((guide) => (
+                <Link key={guide.href} href={guide.href}>
+                  <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                    <CardContent className="p-3">
+                      <h3 className="text-sm font-semibold group-hover:text-primary">{guide.label}</h3>
+                      <p className="mt-0.5 text-xs text-muted-foreground">{guide.desc}</p>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          </section>
+        );
+      })()}
+
+      {/* 関連する季節ガイド */}
+      {(() => {
+        const matchedSeasonalGuides = seasonalGuides.filter((g) =>
+          g.targetFish.includes(fish.slug)
+        );
+        if (matchedSeasonalGuides.length === 0) return null;
+        return (
+          <section className="mb-6 sm:mb-8">
+            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
+              <Calendar className="size-5 text-primary" />
+              {fish.name}の季節別攻略ガイド
+            </h2>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              {matchedSeasonalGuides.slice(0, 6).map((guide) => (
+                <Link key={guide.slug} href={`/seasonal/${guide.slug}`}>
+                  <Badge
+                    variant="outline"
+                    className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
+                  >
+                    {guide.title}
+                  </Badge>
+                </Link>
+              ))}
+            </div>
+          </section>
+        );
+      })()}
+
       {/* 同じ釣り方で釣れる魚 */}
       {(() => {
         const sameMethodFish = getFishBySameMethod(slug, 6);

@@ -1172,6 +1172,60 @@ export default async function SpotDetailPage({ params }: PageProps) {
         </section>
       )}
 
+      {/* おすすめ釣り方ガイド */}
+      {(() => {
+        const METHOD_TO_GUIDE: Record<string, { href: string; label: string }> = {
+          "サビキ釣り": { href: "/guide/sabiki", label: "サビキ釣り完全ガイド" },
+          "ちょい投げ": { href: "/guide/choinage", label: "ちょい投げ完全ガイド" },
+          "ちょい投げ釣り": { href: "/guide/choinage", label: "ちょい投げ完全ガイド" },
+          "エギング": { href: "/guide/eging", label: "エギング完全ガイド" },
+          "ショアジギング": { href: "/guide/jigging", label: "ショアジギング完全ガイド" },
+          "ウキ釣り": { href: "/guide/float-fishing", label: "ウキ釣り完全ガイド" },
+          "穴釣り": { href: "/guide/anazuri", label: "穴釣り完全ガイド" },
+          "ルアー釣り": { href: "/guide/lure", label: "ルアー釣り完全ガイド" },
+          "泳がせ釣り": { href: "/guide/oyogase", label: "泳がせ釣り入門ガイド" },
+          "遠投カゴ釣り": { href: "/guide/entou-kago", label: "遠投カゴ釣りガイド" },
+          "投げ釣り": { href: "/guide/choinage", label: "ちょい投げ完全ガイド" },
+        };
+        const methods = new Set(spot.catchableFish.map((cf) => cf.method));
+        const guideLinks = Array.from(methods)
+          .map((m) => METHOD_TO_GUIDE[m])
+          .filter((g): g is { href: string; label: string } => !!g);
+        // dedupe by href
+        const seen = new Set<string>();
+        const uniqueGuides = guideLinks.filter((g) => {
+          if (seen.has(g.href)) return false;
+          seen.add(g.href);
+          return true;
+        });
+        if (uniqueGuides.length === 0) return null;
+        return (
+          <section className="mt-8 sm:mt-12">
+            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+              <BookOpen className="size-5" />
+              おすすめ釣り方ガイド
+            </h2>
+            <p className="mb-3 text-xs text-muted-foreground sm:text-sm">
+              {spot.name}で使える釣り方を詳しく解説しています。
+            </p>
+            <div className="grid gap-2 sm:grid-cols-2">
+              {uniqueGuides.slice(0, 4).map((guide) => (
+                <Link key={guide.href} href={guide.href}>
+                  <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                    <CardContent className="flex items-center gap-3 p-3">
+                      <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                        <BookOpen className="size-4 text-primary" />
+                      </div>
+                      <span className="text-sm font-medium group-hover:text-primary">{guide.label}</span>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          </section>
+        );
+      })()}
+
       {/* このエリアの釣りガイド */}
       {(() => {
         const matchedAreaGuides = areaGuides.filter((g) =>
