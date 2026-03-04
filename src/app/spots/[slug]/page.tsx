@@ -119,15 +119,12 @@ export async function generateMetadata({
   };
 }
 
-export const dynamicParams = true;
+export const dynamicParams = false;
 export const revalidate = 3600;
 
 export function generateStaticParams() {
-  // ビルドサイズ制限対策: 上位500件のみSSG、残りはISRでオンデマンド生成
-  return fishingSpots
-    .sort((a, b) => b.rating - a.rating)
-    .slice(0, 500)
-    .map((spot) => ({ slug: spot.slug }));
+  // Vercel Pro (250MB上限) のため全スポットをSSGで事前生成
+  return fishingSpots.map((spot) => ({ slug: spot.slug }));
 }
 
 export default async function SpotDetailPage({ params }: PageProps) {
