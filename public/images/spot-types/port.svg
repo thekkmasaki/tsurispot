@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#87CEEB"/>
+      <stop offset="100%" stop-color="#E0F0FF"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#3B82C4"/>
+      <stop offset="100%" stop-color="#1E5FA0"/>
+    </linearGradient>
+  </defs>
+  <!-- Sky -->
+  <rect width="800" height="260" fill="url(#sky)"/>
+  <!-- Mountains in background -->
+  <polygon points="0,260 150,140 300,260" fill="#6B8E6B" opacity="0.4"/>
+  <polygon points="200,260 400,100 600,260" fill="#5A7D5A" opacity="0.3"/>
+  <!-- Sea -->
+  <rect y="260" width="800" height="190" fill="url(#sea)"/>
+  <!-- Harbor walls -->
+  <rect x="50" y="220" width="300" height="40" fill="#8B8B8B" rx="2"/>
+  <rect x="450" y="220" width="300" height="40" fill="#8B8B8B" rx="2"/>
+  <!-- Harbor entrance gap -->
+  <rect y="260" width="800" height="5" fill="#2E6EB5" opacity="0.3"/>
+  <!-- Boats -->
+  <g>
+    <path d="M180 250 Q200 265 220 250 L215 240 H185 Z" fill="#E74C3C"/>
+    <rect x="197" y="225" width="4" height="20" fill="#8B4513"/>
+    <polygon points="201,225 201,237 215,232" fill="white"/>
+  </g>
+  <g>
+    <path d="M520 250 Q540 265 560 250 L555 240 H525 Z" fill="#3498DB"/>
+    <rect x="537" y="225" width="4" height="20" fill="#8B4513"/>
+    <polygon points="541,225 541,237 555,232" fill="white"/>
+  </g>
+  <!-- Fishing person on left wall -->
+  <g fill="#4A4A4A">
+    <circle cx="300" cy="205" r="7"/>
+    <rect x="296" y="212" width="8" height="16" rx="2"/>
+  </g>
+  <line x1="308" y1="210" x2="370" y2="170" stroke="#6B4423" stroke-width="2"/>
+  <line x1="370" y1="170" x2="370" y2="290" stroke="#AAA" stroke-width="1" stroke-dasharray="4,3"/>
+  <!-- Lighthouse -->
+  <rect x="730" y="180" width="16" height="40" fill="white" rx="2"/>
+  <rect x="728" y="175" width="20" height="8" fill="#E74C3C" rx="2"/>
+  <circle cx="738" cy="171" r="5" fill="#FFD93D"/>
+  <!-- Waves -->
+  <path d="M0 300 Q40 290 80 300 Q120 310 160 300 Q200 290 240 300 Q280 310 320 300 Q360 290 400 300 Q440 310 480 300 Q520 290 560 300 Q600 310 640 300 Q680 290 720 300 Q760 310 800 300 V450 H0Z" fill="#2E6EB5" opacity="0.4"/>
+  <!-- Text -->
+  <text x="400" y="410" text-anchor="middle" fill="white" font-family="sans-serif" font-size="24" font-weight="bold" opacity="0.8">漁港釣り</text>
+</svg>

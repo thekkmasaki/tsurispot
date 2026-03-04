@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#87CEEB"/>
+      <stop offset="100%" stop-color="#B8E6B8"/>
+    </linearGradient>
+    <linearGradient id="river" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5DADE2"/>
+      <stop offset="100%" stop-color="#3498DB"/>
+    </linearGradient>
+  </defs>
+  <!-- Sky -->
+  <rect width="800" height="200" fill="url(#sky)"/>
+  <!-- Trees / greenery background -->
+  <g fill="#4CAF50" opacity="0.6">
+    <circle cx="50" cy="180" r="40"/>
+    <circle cx="120" cy="170" r="50"/>
+    <circle cx="200" cy="185" r="35"/>
+    <circle cx="600" cy="175" r="45"/>
+    <circle cx="680" cy="180" r="40"/>
+    <circle cx="750" cy="170" r="50"/>
+  </g>
+  <g fill="#388E3C" opacity="0.5">
+    <circle cx="80" cy="190" r="35"/>
+    <circle cx="160" cy="195" r="30"/>
+    <circle cx="640" cy="185" r="35"/>
+    <circle cx="720" cy="190" r="30"/>
+  </g>
+  <!-- River banks -->
+  <path d="M0,200 Q100,220 200,210 Q300,200 400,210 Q500,220 600,210 Q700,200 800,210 V230 Q700,250 600,240 Q500,230 400,240 Q300,250 200,240 Q100,230 0,240Z" fill="#8D6E63"/>
+  <path d="M0,350 Q100,330 200,340 Q300,350 400,340 Q500,330 600,340 Q700,350 800,340 V380 Q700,370 600,375 Q500,380 400,375 Q300,370 200,375 Q100,380 0,375Z" fill="#8D6E63"/>
+  <!-- River water -->
+  <path d="M0,230 Q100,250 200,240 Q300,230 400,240 Q500,250 600,240 Q700,230 800,240 V350 Q700,330 600,340 Q500,350 400,340 Q300,330 200,340 Q100,350 0,340Z" fill="url(#river)"/>
+  <!-- Water ripples -->
+  <g stroke="white" stroke-width="1" opacity="0.3" fill="none">
+    <path d="M150,270 Q170,265 190,270"/>
+    <path d="M350,290 Q370,285 390,290"/>
+    <path d="M550,275 Q570,270 590,275"/>
+    <path d="M250,310 Q270,305 290,310"/>
+    <path d="M450,320 Q470,315 490,320"/>
+  </g>
+  <!-- Grass on banks -->
+  <g stroke="#4CAF50" stroke-width="2" opacity="0.6">
+    <line x1="100" y1="220" x2="95" y2="205"/><line x1="110" y1="218" x2="108" y2="203"/>
+    <line x1="500" y1="215" x2="495" y2="200"/><line x1="510" y1="217" x2="508" y2="202"/>
+    <line x1="300" y1="350" x2="295" y2="365"/><line x1="310" y1="348" x2="308" y2="363"/>
+  </g>
+  <!-- Lower bank greenery -->
+  <path d="M0,375 Q200,365 400,375 Q600,385 800,370 V450 H0Z" fill="#66BB6A"/>
+  <!-- Fishing person on bank -->
+  <g fill="#4A4A4A">
+    <circle cx="350" cy="335" r="7"/>
+    <rect x="346" y="342" width="8" height="16" rx="2"/>
+  </g>
+  <!-- Fishing rod -->
+  <line x1="358" y1="340" x2="420" y2="280" stroke="#6B4423" stroke-width="2"/>
+  <line x1="420" y1="280" x2="400" y2="290" stroke="#AAA" stroke-width="1" stroke-dasharray="4,3"/>
+  <!-- Float -->
+  <ellipse cx="400" cy="290" rx="4" ry="6" fill="#E74C3C"/>
+  <!-- Text -->
+  <text x="400" y="430" text-anchor="middle" fill="white" font-family="sans-serif" font-size="24" font-weight="bold" opacity="0.8">河口・川釣り</text>
+</svg>

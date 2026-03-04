@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#87CEEB"/>
+      <stop offset="100%" stop-color="#D6EAF8"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4A90D9"/>
+      <stop offset="100%" stop-color="#2E6EB5"/>
+    </linearGradient>
+  </defs>
+  <!-- Sky -->
+  <rect width="800" height="250" fill="url(#sky)"/>
+  <!-- Sun -->
+  <circle cx="600" cy="70" r="35" fill="#FFD93D" opacity="0.9"/>
+  <!-- Clouds -->
+  <ellipse cx="150" cy="80" rx="55" ry="22" fill="white" opacity="0.6"/>
+  <ellipse cx="190" cy="70" rx="45" ry="18" fill="white" opacity="0.6"/>
+  <!-- Sea -->
+  <rect y="250" width="800" height="200" fill="url(#sea)"/>
+  <!-- Waves -->
+  <path d="M0 280 Q50 270 100 280 Q150 290 200 280 Q250 270 300 280 Q350 290 400 280 Q450 270 500 280 Q550 290 600 280 Q650 270 700 280 Q750 290 800 280 V300 H0Z" fill="#3B82C4" opacity="0.4"/>
+  <!-- Pier structure -->
+  <rect x="150" y="220" width="500" height="12" fill="#A0522D" rx="2"/>
+  <!-- Pier supports -->
+  <g fill="#8B4513">
+    <rect x="180" y="232" width="8" height="80" rx="1"/>
+    <rect x="280" y="232" width="8" height="90" rx="1"/>
+    <rect x="380" y="232" width="8" height="85" rx="1"/>
+    <rect x="480" y="232" width="8" height="90" rx="1"/>
+    <rect x="580" y="232" width="8" height="80" rx="1"/>
+  </g>
+  <!-- Pier railing -->
+  <g stroke="#8B4513" stroke-width="2">
+    <line x1="150" y1="220" x2="150" y2="200"/>
+    <line x1="250" y1="220" x2="250" y2="200"/>
+    <line x1="350" y1="220" x2="350" y2="200"/>
+    <line x1="450" y1="220" x2="450" y2="200"/>
+    <line x1="550" y1="220" x2="550" y2="200"/>
+    <line x1="650" y1="220" x2="650" y2="200"/>
+    <line x1="150" y1="200" x2="650" y2="200"/>
+    <line x1="150" y1="210" x2="650" y2="210"/>
+  </g>
+  <!-- Pier planks -->
+  <g stroke="#966F33" stroke-width="0.5" opacity="0.4">
+    <line x1="170" y1="220" x2="170" y2="232"/>
+    <line x1="210" y1="220" x2="210" y2="232"/>
+    <line x1="250" y1="220" x2="250" y2="232"/>
+    <line x1="310" y1="220" x2="310" y2="232"/>
+    <line x1="350" y1="220" x2="350" y2="232"/>
+    <line x1="410" y1="220" x2="410" y2="232"/>
+    <line x1="450" y1="220" x2="450" y2="232"/>
+    <line x1="510" y1="220" x2="510" y2="232"/>
+    <line x1="550" y1="220" x2="550" y2="232"/>
+    <line x1="610" y1="220" x2="610" y2="232"/>
+  </g>
+  <!-- Fishing people -->
+  <g fill="#4A4A4A">
+    <circle cx="300" cy="190" r="6"/>
+    <rect x="297" y="196" width="6" height="14" rx="1"/>
+  </g>
+  <g fill="#5A5A5A">
+    <circle cx="450" cy="190" r="6"/>
+    <rect x="447" y="196" width="6" height="14" rx="1"/>
+  </g>
+  <!-- Fishing rods -->
+  <line x1="306" y1="195" x2="340" y2="155" stroke="#6B4423" stroke-width="1.5"/>
+  <line x1="340" y1="155" x2="340" y2="300" stroke="#AAA" stroke-width="0.8" stroke-dasharray="3,3"/>
+  <line x1="456" y1="195" x2="500" y2="150" stroke="#6B4423" stroke-width="1.5"/>
+  <line x1="500" y1="150" x2="500" y2="310" stroke="#AAA" stroke-width="0.8" stroke-dasharray="3,3"/>
+  <!-- Text -->
+  <text x="400" y="400" text-anchor="middle" fill="white" font-family="sans-serif" font-size="24" font-weight="bold" opacity="0.8">桟橋釣り</text>
+</svg>

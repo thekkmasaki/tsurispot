@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#87CEEB"/>
+      <stop offset="100%" stop-color="#D4E6F1"/>
+    </linearGradient>
+    <linearGradient id="water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#5DADE2"/>
+      <stop offset="100%" stop-color="#2980B9"/>
+    </linearGradient>
+  </defs>
+  <!-- Sky -->
+  <rect width="800" height="250" fill="url(#sky)"/>
+  <!-- Sun -->
+  <circle cx="400" cy="80" r="40" fill="#FFD93D" opacity="0.9"/>
+  <!-- Clouds -->
+  <ellipse cx="200" cy="60" rx="50" ry="20" fill="white" opacity="0.6"/>
+  <ellipse cx="600" cy="80" rx="55" ry="22" fill="white" opacity="0.6"/>
+  <!-- Water -->
+  <rect y="250" width="800" height="200" fill="url(#water)"/>
+  <!-- Waves -->
+  <path d="M0 275 Q50 265 100 275 Q150 285 200 275 Q250 265 300 275 Q350 285 400 275 Q450 265 500 275 Q550 285 600 275 Q650 265 700 275 Q750 285 800 275 V300 H0Z" fill="#2471A3" opacity="0.4"/>
+  <!-- Shore -->
+  <path d="M0,250 Q200,240 400,250 Q600,260 800,245 V270 Q600,280 400,270 Q200,260 0,270Z" fill="#A9CCB8"/>
+  <!-- Fishing person -->
+  <g fill="#4A4A4A">
+    <circle cx="400" cy="225" r="8"/>
+    <rect x="396" y="233" width="8" height="18" rx="2"/>
+    <line x1="400" y1="236" x2="390" y2="248" stroke="#4A4A4A" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="400" y1="236" x2="410" y2="248" stroke="#4A4A4A" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="396" y1="251" x2="390" y2="265" stroke="#4A4A4A" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="404" y1="251" x2="410" y2="265" stroke="#4A4A4A" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <!-- Fishing rod -->
+  <line x1="410" y1="235" x2="500" y2="175" stroke="#6B4423" stroke-width="2"/>
+  <line x1="500" y1="175" x2="500" y2="300" stroke="#AAA" stroke-width="1" stroke-dasharray="4,3"/>
+  <!-- Fish jumping -->
+  <g fill="#C0C0C0" opacity="0.6">
+    <path d="M600 240 Q610 230 620 240 Q615 245 610 240Z"/>
+    <ellipse cx="608" cy="238" rx="8" ry="4"/>
+  </g>
+  <!-- Bucket -->
+  <rect x="370" y="258" width="15" height="10" fill="#2196F3" rx="1"/>
+  <rect x="368" y="256" width="19" height="3" fill="#1976D2" rx="1"/>
+  <!-- Text -->
+  <text x="400" y="400" text-anchor="middle" fill="white" font-family="sans-serif" font-size="24" font-weight="bold" opacity="0.8">釣りスポット</text>
+</svg>

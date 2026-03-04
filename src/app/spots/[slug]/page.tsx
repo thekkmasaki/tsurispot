@@ -715,11 +715,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
       )}
 
       {/* スポット写真ギャラリー */}
-      {spot.spotPhotos && spot.spotPhotos.length > 0 && (
-        <section className="mb-6 sm:mb-8">
-          <SpotPhotoGallery photos={spot.spotPhotos} spotName={spot.name} />
-        </section>
-      )}
+      <section className="mb-6 sm:mb-8">
+        <SpotPhotoGallery photos={spot.spotPhotos} spotType={spot.spotType} spotName={spot.name} />
+      </section>
 
       {/* 安全警告 */}
       {(spot.safetyLevel === "caution" || spot.safetyLevel === "danger") && (

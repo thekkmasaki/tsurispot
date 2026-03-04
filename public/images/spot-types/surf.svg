@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" fill="none">
+  <defs>
+    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#FFB347"/>
+      <stop offset="50%" stop-color="#FFCC80"/>
+      <stop offset="100%" stop-color="#E0F0FF"/>
+    </linearGradient>
+    <linearGradient id="sea" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#4A90D9"/>
+      <stop offset="100%" stop-color="#2E6EB5"/>
+    </linearGradient>
+    <linearGradient id="sand" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F4D03F"/>
+      <stop offset="100%" stop-color="#E5BE38"/>
+    </linearGradient>
+  </defs>
+  <!-- Sky (sunset) -->
+  <rect width="800" height="220" fill="url(#sky)"/>
+  <!-- Sun -->
+  <circle cx="400" cy="100" r="45" fill="#FF6B35" opacity="0.8"/>
+  <circle cx="400" cy="100" r="55" fill="#FF6B35" opacity="0.2"/>
+  <!-- Sea -->
+  <rect y="220" width="800" height="100" fill="url(#sea)"/>
+  <!-- Waves / surf -->
+  <path d="M0 280 Q60 265 120 280 Q180 295 240 280 Q300 265 360 280 Q420 295 480 280 Q540 265 600 280 Q660 295 720 280 Q780 265 800 275 V320 H0Z" fill="white" opacity="0.6"/>
+  <path d="M0 290 Q50 280 100 290 Q150 300 200 290 Q250 280 300 290 Q350 300 400 290 Q450 280 500 290 Q550 300 600 290 Q650 280 700 290 Q750 300 800 290 V320 H0Z" fill="white" opacity="0.3"/>
+  <!-- Beach / sand -->
+  <path d="M0 320 Q200 310 400 315 Q600 320 800 310 V450 H0Z" fill="url(#sand)"/>
+  <!-- Sand texture dots -->
+  <g fill="#D4A832" opacity="0.3">
+    <circle cx="100" cy="380" r="2"/><circle cx="200" cy="400" r="2"/>
+    <circle cx="350" cy="370" r="2"/><circle cx="500" cy="390" r="2"/>
+    <circle cx="650" cy="375" r="2"/><circle cx="750" cy="395" r="2"/>
+  </g>
+  <!-- Fishing person on beach -->
+  <g fill="#4A4A4A">
+    <circle cx="250" cy="295" r="7"/>
+    <rect x="246" y="302" width="8" height="16" rx="2"/>
+    <line x1="250" y1="305" x2="240" y2="315" stroke="#4A4A4A" stroke-width="2.5" stroke-linecap="round"/>
+    <line x1="250" y1="305" x2="260" y2="315" stroke="#4A4A4A" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+  <!-- Fishing rod (surf cast) -->
+  <line x1="260" y1="300" x2="350" y2="230" stroke="#6B4423" stroke-width="2.5"/>
+  <line x1="350" y1="230" x2="420" y2="270" stroke="#AAA" stroke-width="1" stroke-dasharray="4,3"/>
+  <!-- Rod holder -->
+  <line x1="200" y1="310" x2="200" y2="330" stroke="#666" stroke-width="3"/>
+  <line x1="195" y1="330" x2="205" y2="330" stroke="#666" stroke-width="2"/>
+  <!-- Text -->
+  <text x="400" y="420" text-anchor="middle" fill="#8B6914" font-family="sans-serif" font-size="24" font-weight="bold" opacity="0.7">サーフ釣り</text>
+</svg>
