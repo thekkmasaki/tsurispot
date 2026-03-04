@@ -119,71 +119,81 @@ export default function RootLayout({
       <body
         className={`${notoSansJP.variable} ${inter.variable} font-[family-name:var(--font-noto-sans-jp)] antialiased`}
       >
+        {/* WebSite schema: サイト名をGoogleに正しく認識させるため独立したscriptタグ */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
-            __html: JSON.stringify([
-              {
-                "@context": "https://schema.org",
-                "@type": "WebSite",
-                name: "ツリスポ",
-                alternateName: ["TsuriSpot", "つりすぽ"],
-                url: "https://tsurispot.com",
-                potentialAction: {
-                  "@type": "SearchAction",
-                  target: {
-                    "@type": "EntryPoint",
-                    urlTemplate: "https://tsurispot.com/spots?q={search_term_string}",
-                  },
-                  "query-input": "required name=search_term_string",
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              name: "ツリスポ",
+              alternateName: ["TsuriSpot", "つりすぽ"],
+              url: "https://tsurispot.com",
+              inLanguage: "ja",
+              potentialAction: {
+                "@type": "SearchAction",
+                target: {
+                  "@type": "EntryPoint",
+                  urlTemplate: "https://tsurispot.com/spots?q={search_term_string}",
                 },
+                "query-input": "required name=search_term_string",
               },
-              {
-                "@context": "https://schema.org",
-                "@type": "Organization",
-                name: "ツリスポ",
-                alternateName: "TsuriSpot",
-                url: "https://tsurispot.com",
-                logo: "https://tsurispot.com/logo.svg",
-                description:
-                  "全国3,300箇所以上の釣りスポットを掲載する総合情報サイト。地図で直感的に釣り場を探せ、今の時期に釣れる魚やおすすめの仕掛け情報を提供。",
-                foundingDate: "2025",
-                founder: {
-                  "@type": "Person",
-                  name: "正木 家康",
-                  jobTitle: "編集長",
-                },
-                contactPoint: {
-                  "@type": "ContactPoint",
-                  contactType: "customer support",
-                  email: "fishingspotjapan@gmail.com",
-                  url: "https://tsurispot.com/contact",
-                  availableLanguage: "Japanese",
-                },
-                address: {
-                  "@type": "PostalAddress",
-                  addressCountry: "JP",
-                },
-                sameAs: [
-                  "https://www.instagram.com/tsurispotjapan/",
-                ],
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "ツリスポ",
+              alternateName: "TsuriSpot",
+              url: "https://tsurispot.com",
+              logo: "https://tsurispot.com/logo.svg",
+              description:
+                "全国3,300箇所以上の釣りスポットを掲載する総合情報サイト。地図で直感的に釣り場を探せ、今の時期に釣れる魚やおすすめの仕掛け情報を提供。",
+              foundingDate: "2025",
+              founder: {
+                "@type": "Person",
+                name: "正木 家康",
+                jobTitle: "編集長",
               },
-              {
-                "@context": "https://schema.org",
-                "@type": "WebApplication",
-                name: "ツリスポ",
-                url: "https://tsurispot.com",
-                applicationCategory: "TravelApplication",
-                operatingSystem: "All",
-                offers: {
-                  "@type": "Offer",
-                  price: "0",
-                  priceCurrency: "JPY",
-                },
-                description:
-                  "全国3,300箇所以上の釣りスポットを地図で検索できる無料Webアプリ。今釣れる魚、仕掛け情報、初心者ガイドも充実。",
+              contactPoint: {
+                "@type": "ContactPoint",
+                contactType: "customer support",
+                email: "fishingspotjapan@gmail.com",
+                url: "https://tsurispot.com/contact",
+                availableLanguage: "Japanese",
               },
-            ]),
+              address: {
+                "@type": "PostalAddress",
+                addressCountry: "JP",
+              },
+              sameAs: [
+                "https://www.instagram.com/tsurispotjapan/",
+              ],
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              name: "ツリスポ",
+              url: "https://tsurispot.com",
+              applicationCategory: "TravelApplication",
+              operatingSystem: "All",
+              offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "JPY",
+              },
+              description:
+                "全国3,300箇所以上の釣りスポットを地図で検索できる無料Webアプリ。今釣れる魚、仕掛け情報、初心者ガイドも充実。",
+            }),
           }}
         />
         <GoogleAnalytics />
