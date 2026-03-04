@@ -24,7 +24,8 @@ import {
   Anchor,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { SearchOverlay } from "./search-overlay";
+import { SearchOverlayClient } from "./search-overlay-client";
+import type { SearchItem } from "@/lib/data/search-index";
 
 // メインナビ（常時表示：最大5個）
 const mainNavItems = [
@@ -132,7 +133,7 @@ function DropdownMenu() {
   );
 }
 
-export function Header() {
+export function Header({ searchItems }: { searchItems?: SearchItem[] }) {
   const pathname = usePathname();
   const [favCount, setFavCount] = useState(0);
 
@@ -185,7 +186,7 @@ export function Header() {
 
         <div className="flex items-center gap-2">
           <ActiveUsers />
-          <SearchOverlay />
+          {searchItems && <SearchOverlayClient items={searchItems} />}
           <Link
             href="/favorites"
             className={cn(
