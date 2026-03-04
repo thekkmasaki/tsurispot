@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { LineBanner } from "@/components/line-banner";
 import { ChevronLeft, Scissors, Droplets, Snowflake, Timer, ChefHat } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -670,7 +669,6 @@ export default function FishHandlingGuidePage() {
         </div>
       {/* LINE登録バナー */}
       <div className="mt-8 sm:mt-12">
-        <LineBanner variant="compact" />
       </div>
       </main>
     </>

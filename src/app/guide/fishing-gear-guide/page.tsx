@@ -19,7 +19,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
-import { LineBanner } from "@/components/line-banner";
 
 export const metadata: Metadata = {
   title: "釣り道具の選び方完全ガイド｜初心者が揃えるべき道具と予算【2026年版】",
@@ -804,7 +803,6 @@ export default function FishingGearGuidePage() {
         </div>
 
         <div className="mt-8 sm:mt-12">
-          <LineBanner variant="compact" />
         </div>
       </main>
     </>

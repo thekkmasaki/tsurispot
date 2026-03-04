@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
-import { LineBanner } from "@/components/line-banner";
 import { ChevronLeft, Play, ExternalLink, ShoppingBag } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
@@ -1082,7 +1081,6 @@ export default function CastingGuidePage() {
         </div>
       {/* LINE登録バナー */}
       <div className="mt-8 sm:mt-12">
-        <LineBanner variant="compact" />
       </div>
       </main>
     </>

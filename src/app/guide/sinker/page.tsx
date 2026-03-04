@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { LineBanner } from "@/components/line-banner";
 import { ChevronLeft, Info, ExternalLink } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -838,7 +837,6 @@ export default function SinkerGuidePage() {
 
       {/* LINE登録バナー */}
       <div className="mt-8 sm:mt-12">
-        <LineBanner variant="compact" />
       </div>
     </div>
   );

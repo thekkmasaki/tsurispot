@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { LineBanner } from "@/components/line-banner";
 import { ChevronLeft, Palette, Settings, Waves, Calendar, Scissors } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -708,7 +707,6 @@ export default function EgingGuidePage() {
         </div>
       {/* LINE登録バナー */}
       <div className="mt-8 sm:mt-12">
-        <LineBanner variant="compact" />
       </div>
       </main>
     </>

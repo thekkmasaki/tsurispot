@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { LineBanner } from "@/components/line-banner";
 import {
   ChevronLeft,
   DollarSign,
@@ -795,7 +794,6 @@ export default function BudgetGuidePage() {
         </div>
       {/* LINE登録バナー */}
       <div className="mt-8 sm:mt-12">
-        <LineBanner variant="compact" />
       </div>
       </main>
     </>

@@ -56,7 +56,6 @@ import { getCatchReportsBySpot } from "@/lib/data/catch-reports";
 import { CatchReportList } from "@/components/spots/catch-report-list";
 import { CatchReportForm } from "@/components/spots/catch-report-form";
 import { SpotRulesCard } from "@/components/spots/spot-rules";
-import { LineBanner } from "@/components/line-banner";
 import { SpotPhotoGallery } from "@/components/spots/spot-photo-gallery";
 import { areaGuides } from "@/lib/data/area-guides";
 import { explainTime, explainMethod } from "@/lib/fishing-term-helper";
@@ -1338,7 +1337,6 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
       {/* LINE登録バナー */}
       <section className="mt-8 sm:mt-12">
-        <LineBanner variant="compact" />
       </section>
       {spot.googleRating && (
         <p className="mt-2 text-[10px] text-muted-foreground">レビューデータ提供: Google</p>

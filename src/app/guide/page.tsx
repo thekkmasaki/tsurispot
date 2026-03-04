@@ -32,7 +32,6 @@ import { ProductList } from "@/components/affiliate/product-list";
 import { getTopProducts } from "@/lib/data/products";
 import { Badge } from "@/components/ui/badge";
 import { type LucideIcon } from "lucide-react";
-import { LineBanner } from "@/components/line-banner";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 interface GuideItem {
@@ -457,7 +456,6 @@ export default function GuidePage() {
 
       {/* LINE登録バナー */}
       <div className="mt-8 sm:mt-12">
-        <LineBanner />
       </div>
 
       {/* CTA */}

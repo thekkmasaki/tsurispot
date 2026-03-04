@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
-import { LineBanner } from "@/components/line-banner";
 import {
   ChevronLeft,
   ChevronRight,
@@ -1151,7 +1150,6 @@ export default function JetSinkerGuidePage() {
           </div>
         </section>
 
-        <LineBanner />
       </div>
     </>
   );

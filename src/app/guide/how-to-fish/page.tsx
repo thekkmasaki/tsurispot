@@ -25,7 +25,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
-import { LineBanner } from "@/components/line-banner";
 
 export const metadata: Metadata = {
   title: "釣りのやり方完全ガイド｜初めてでもわかる基本の釣り方【2026年版】",
@@ -1038,7 +1037,6 @@ export default function HowToFishPage() {
         </div>
 
         <div className="mt-8 sm:mt-12">
-          <LineBanner variant="compact" />
         </div>
       </main>
     </>
