@@ -68,9 +68,5 @@ export default function robots(): MetadataRoute.Robots {
     ],
     sitemap: "https://tsurispot.com/sitemap.xml",
     host: "https://tsurispot.com",
-    other: {
-      "llms.txt": "https://tsurispot.com/llms.txt",
-      "llms-full.txt": "https://tsurispot.com/llms-full.txt",
-    },
   };
 }

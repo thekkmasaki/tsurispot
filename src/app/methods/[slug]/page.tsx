@@ -18,6 +18,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
+import { YouTubeEmbedList } from "@/components/youtube-embed";
+import { getVideosForMethods } from "@/lib/data/youtube-videos";
 import { SpotCard } from "@/components/spots/spot-card";
 import { fishingSpots } from "@/lib/data/spots";
 import type { YouTubeSearchLink, FishingSpot } from "@/types";
@@ -843,6 +845,20 @@ export default async function MethodDetailPage({ params }: PageProps) {
           <YouTubeVideoList links={method.youtubeLinks} />
         </section>
       )}
+
+      {/* 動画埋め込み */}
+      {(() => {
+        const methodVideos = getVideosForMethods([method.name], 2);
+        return methodVideos.length > 0 ? (
+          <section className="mb-6 sm:mb-8">
+            <YouTubeEmbedList
+              videos={methodVideos}
+              sectionTitle={`${method.name}の解説動画`}
+              description={`${method.name}の基本テクニックを動画で学べます。`}
+            />
+          </section>
+        ) : null;
+      })()}
 
       {/* 対象魚 */}
       <section className="mb-6 sm:mb-8">

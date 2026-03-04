@@ -679,7 +679,7 @@ export const kitakinkiSpots: FishingSpot[] = [
     latitude: 35.6200, longitude: 134.3800,
     address: "〒669-6943 兵庫県美方郡新温泉町釜屋",
     accessInfo: "北近畿豊岡自動車道「新温泉浜坂IC」から約20分。",
-    region: lr("rnk06"), spotType: "surf", difficulty: "intermediate",
+    region: lr("rnk06"), spotType: "beach", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.8, reviewCount: 16, googleRating: 3.8, googleReviewCount: 4,
