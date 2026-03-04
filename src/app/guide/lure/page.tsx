@@ -318,7 +318,7 @@ export default function LureGuidePage() {
   const lureSpots = fishingSpots
     .filter((s) =>
       s.catchableFish?.some((f) =>
-        f.methods?.some((m) => m.includes("ルアー") || m.includes("ジギング") || m.includes("エギング"))
+        f.method?.includes("ルアー") || f.method?.includes("ジギング") || f.method?.includes("エギング")
       )
     )
     .sort((a, b) => b.rating - a.rating)

@@ -295,7 +295,7 @@ export default function OyogasePage() {
     .filter((s) =>
       (s.spotType === "breakwater" || s.spotType === "port") &&
       s.catchableFish?.some((f) =>
-        f.methods?.some((m) => m.includes("泳がせ") || m.includes("のませ"))
+        f.method?.includes("泳がせ") || f.method?.includes("のませ")
       )
     )
     .sort((a, b) => b.rating - a.rating)

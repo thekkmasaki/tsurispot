@@ -528,7 +528,7 @@ export default function FloatFishingGuidePage() {
   const floatSpots = fishingSpots
     .filter((s) =>
       s.catchableFish?.some((f) =>
-        f.methods?.some((m) => m.includes("ウキ") || m.includes("フカセ"))
+        f.method?.includes("ウキ") || f.method?.includes("フカセ")
       )
     )
     .sort((a, b) => b.rating - a.rating)

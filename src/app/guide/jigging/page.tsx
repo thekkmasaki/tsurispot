@@ -318,7 +318,7 @@ export default function JiggingGuidePage() {
   const jiggingSpots = fishingSpots
     .filter((s) =>
       s.catchableFish?.some((f) =>
-        f.methods?.some((m) => m.includes("ジギング") || m.includes("ルアー"))
+        f.method?.includes("ジギング") || f.method?.includes("ルアー")
       )
     )
     .sort((a, b) => b.rating - a.rating)

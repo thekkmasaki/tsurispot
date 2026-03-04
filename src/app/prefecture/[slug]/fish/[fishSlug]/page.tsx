@@ -1,67 +1,40 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import {
-  MapPin,
-  Fish,
-  ChevronLeft,
-  Calendar,
-  Star,
-  Flame,
-  Anchor,
-  Clock,
-  ArrowRight,
-} from "lucide-react";
+import { MapPin, Fish, Calendar, Target, ChevronLeft, HelpCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
-import { fishingSpots } from "@/lib/data/spots";
-import { fishSpecies, getFishBySlug } from "@/lib/data/fish";
-import { SpotCard } from "@/components/spots/spot-card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
-import { DIFFICULTY_LABELS, SPOT_TYPE_LABELS } from "@/types";
+import { SpotCard } from "@/components/spots/spot-card";
+import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
+import { fishSpecies, getFishBySlug } from "@/lib/data/fish";
+import { fishingSpots } from "@/lib/data/spots";
+import { getSpotsByPrefectureAndFish } from "@/lib/data";
+import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 
 type PageProps = {
   params: Promise<{ slug: string; fishSlug: string }>;
 };
 
-/** この都道府県でこの魚が釣れるスポットを取得 */
-function getSpotsForPrefectureAndFish(prefName: string, fishSlug: string) {
-  return fishingSpots.filter(
-    (s) =>
-      s.region.prefecture === prefName &&
-      s.catchableFish.some((cf) => cf.fish.slug === fishSlug)
-  );
-}
-
-/** 全都道府県×魚種の組み合わせを生成（5スポット以上） */
-function getPrefFishCombinations() {
-  const combos: { prefSlug: string; fishSlug: string; count: number }[] = [];
-  const countMap = new Map<string, number>();
+// generateStaticParams: 実データに基づく組み合わせのみ生成
+export function generateStaticParams() {
+  const combos: { slug: string; fishSlug: string }[] = [];
+  const seen = new Set<string>();
 
   for (const spot of fishingSpots) {
     const pref = prefectures.find((p) => p.name === spot.region.prefecture);
     if (!pref) continue;
-    for (const cf of spot.catchableFish) {
-      const key = `${pref.slug}|${cf.fish.slug}`;
-      countMap.set(key, (countMap.get(key) || 0) + 1);
-    }
-  }
 
-  for (const [key, count] of countMap) {
-    if (count >= 3) {
-      const [prefSlug, fishSlug] = key.split("|");
-      combos.push({ prefSlug, fishSlug, count });
+    for (const cf of spot.catchableFish) {
+      const key = `${pref.slug}/${cf.fish.slug}`;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      combos.push({ slug: pref.slug, fishSlug: cf.fish.slug });
     }
   }
 
   return combos;
 }
-
-const MONTH_NAMES = [
-  "1月", "2月", "3月", "4月", "5月", "6月",
-  "7月", "8月", "9月", "10月", "11月", "12月",
-];
 
 export async function generateMetadata({
   params,
@@ -71,42 +44,38 @@ export async function generateMetadata({
   const fish = getFishBySlug(fishSlug);
   if (!pref || !fish) return { title: "ページが見つかりません" };
 
-  const spots = getSpotsForPrefectureAndFish(pref.name, fishSlug);
-  const seasonText =
-    fish.peakMonths.length > 0
-      ? `ベストシーズンは${fish.peakMonths.map((m) => MONTH_NAMES[m - 1]).join("・")}。`
-      : "";
-  const methodText =
-    fish.fishingMethods && fish.fishingMethods.length > 0
-      ? `おすすめの釣り方は${fish.fishingMethods
-          .slice(0, 3)
-          .map((m) => m.methodName)
-          .join("・")}。`
-      : "";
-
-  const title = `${pref.name}の${fish.name}釣りスポット${spots.length}選｜時期・釣り方・おすすめポイント【2026年】`;
-  const description = `${pref.name}で${fish.name}が釣れる釣りスポットを${spots.length}箇所厳選して紹介。${seasonText}${methodText}アクセス・駐車場情報から初心者向けの釣り方まで完全ガイド。`;
+  const spots = getSpotsByPrefectureAndFish(pref.name, fishSlug);
+  const title = `${pref.name}で${fish.name}が釣れる釣り場${spots.length}選【2026年最新】`;
+  const description = `${pref.name}で${fish.name}が釣れるおすすめ釣りスポット${spots.length}件を紹介。シーズン・釣り方・難易度・アクセス情報を完全ガイド。初心者から上級者まで${pref.name}で${fish.name}を釣るならツリスポ。`;
 
   return {
     title,
     description,
     openGraph: {
-      title: `${pref.name}の${fish.name}釣りスポット${spots.length}選【2026年最新】`,
-      description: `${pref.name}で${fish.name}が釣れるおすすめ釣り場を紹介。${seasonText}`,
+      title,
+      description,
       type: "website",
-      url: `https://tsurispot.com/prefecture/${pref.slug}/fish/${fish.slug}`,
+      url: `https://tsurispot.com/prefecture/${slug}/fish/${fishSlug}`,
       siteName: "ツリスポ",
     },
     alternates: {
-      canonical: `https://tsurispot.com/prefecture/${pref.slug}/fish/${fish.slug}`,
+      canonical: `https://tsurispot.com/prefecture/${slug}/fish/${fishSlug}`,
     },
   };
 }
 
-export function generateStaticParams() {
-  const combos = getPrefFishCombinations();
-  return combos.map((c) => ({ slug: c.prefSlug, fishSlug: c.fishSlug }));
-}
+// 難易度ラベル（CatchableFish用）
+const CATCH_DIFFICULTY_LABELS: Record<string, string> = {
+  easy: "簡単",
+  medium: "普通",
+  hard: "難しい",
+};
+
+const CATCH_DIFFICULTY_COLORS: Record<string, string> = {
+  easy: "bg-green-100 text-green-800",
+  medium: "bg-yellow-100 text-yellow-800",
+  hard: "bg-red-100 text-red-800",
+};
 
 export default async function PrefectureFishPage({ params }: PageProps) {
   const { slug, fishSlug } = await params;
@@ -114,145 +83,103 @@ export default async function PrefectureFishPage({ params }: PageProps) {
   const fish = getFishBySlug(fishSlug);
   if (!pref || !fish) notFound();
 
-  const spots = getSpotsForPrefectureAndFish(pref.name, fishSlug);
+  const spots = getSpotsByPrefectureAndFish(pref.name, fishSlug);
   if (spots.length === 0) notFound();
 
-  const currentMonth = new Date().getMonth() + 1;
-  const isInSeason = fish.seasonMonths.includes(currentMonth);
-  const isPeak = fish.peakMonths.includes(currentMonth);
-
-  // スポットのcatchableFishから、この魚の詳細情報を取得
-  const spotsWithFishInfo = spots.map((spot) => {
-    const cf = spot.catchableFish.find((c) => c.fish.slug === fishSlug)!;
-    return { spot, catchInfo: cf };
+  // 各スポットの釣れる魚情報を取得
+  const spotsWithCatchInfo = spots.map((spot) => {
+    const catchInfo = spot.catchableFish.find((cf) => cf.fish.slug === fishSlug);
+    return { spot, catchInfo };
   });
 
-  // 評価順でソート
-  const sortedSpots = [...spotsWithFishInfo].sort(
-    (a, b) => b.spot.rating - a.spot.rating
-  );
-
-  // 釣り方の集計
-  const methodCounts = new Map<string, number>();
-  for (const { catchInfo } of spotsWithFishInfo) {
-    if (catchInfo.method) {
-      methodCounts.set(
-        catchInfo.method,
-        (methodCounts.get(catchInfo.method) || 0) + 1
-      );
+  // 釣り方別に集計
+  const methodMap = new Map<string, number>();
+  for (const { catchInfo } of spotsWithCatchInfo) {
+    if (catchInfo) {
+      const m = catchInfo.method;
+      methodMap.set(m, (methodMap.get(m) || 0) + 1);
     }
   }
-  const topMethods = Array.from(methodCounts.entries())
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 5);
+  const methodBreakdown = Array.from(methodMap.entries())
+    .map(([method, count]) => ({ method, count }))
+    .sort((a, b) => b.count - a.count);
 
-  // スポットタイプの集計
-  const typeCounts = new Map<string, number>();
-  for (const { spot } of spotsWithFishInfo) {
-    const label = SPOT_TYPE_LABELS[spot.spotType];
-    typeCounts.set(label, (typeCounts.get(label) || 0) + 1);
-  }
-  const topTypes = Array.from(typeCounts.entries())
-    .sort((a, b) => b[1] - a[1]);
-
-  // 難易度の集計
-  const difficultyCounts = new Map<string, number>();
-  for (const { catchInfo } of spotsWithFishInfo) {
-    const label =
-      catchInfo.catchDifficulty === "easy"
-        ? "簡単"
-        : catchInfo.catchDifficulty === "medium"
-          ? "普通"
-          : "難しい";
-    difficultyCounts.set(label, (difficultyCounts.get(label) || 0) + 1);
-  }
-
-  // 初心者向けスポット
-  const beginnerSpots = spotsWithFishInfo.filter(
-    (s) =>
-      s.spot.difficulty === "beginner" ||
-      s.catchInfo.catchDifficulty === "easy"
-  );
-
-  // 同じ都道府県で釣れる他の魚（上位10件）
-  const otherFishMap = new Map<string, { name: string; slug: string; count: number }>();
-  for (const spot of fishingSpots) {
-    if (spot.region.prefecture !== pref.name) continue;
+  // 同じ県の他の魚種
+  const otherFishInPref = new Map<string, { slug: string; name: string; count: number }>();
+  for (const spot of spots) {
     for (const cf of spot.catchableFish) {
       if (cf.fish.slug === fishSlug) continue;
-      const existing = otherFishMap.get(cf.fish.slug);
+      const existing = otherFishInPref.get(cf.fish.slug);
       if (existing) {
         existing.count++;
       } else {
-        otherFishMap.set(cf.fish.slug, {
-          name: cf.fish.name,
+        otherFishInPref.set(cf.fish.slug, {
           slug: cf.fish.slug,
+          name: cf.fish.name,
           count: 1,
         });
       }
     }
   }
-  const otherFish = Array.from(otherFishMap.values())
+  const relatedFishInPref = Array.from(otherFishInPref.values())
     .sort((a, b) => b.count - a.count)
-    .slice(0, 15);
+    .slice(0, 12);
 
-  // 他の都道府県でこの魚が釣れる（上位10件）
-  const otherPrefMap = new Map<string, { name: string; slug: string; count: number }>();
+  // 同じ魚種の他の県
+  const otherPrefsForFish = new Map<string, { prefSlug: string; prefName: string; count: number }>();
   for (const spot of fishingSpots) {
     if (spot.region.prefecture === pref.name) continue;
     if (!spot.catchableFish.some((cf) => cf.fish.slug === fishSlug)) continue;
     const spotPref = prefectures.find((p) => p.name === spot.region.prefecture);
     if (!spotPref) continue;
-    const existing = otherPrefMap.get(spotPref.slug);
+    const existing = otherPrefsForFish.get(spotPref.slug);
     if (existing) {
       existing.count++;
     } else {
-      otherPrefMap.set(spotPref.slug, {
-        name: spotPref.name,
-        slug: spotPref.slug,
+      otherPrefsForFish.set(spotPref.slug, {
+        prefSlug: spotPref.slug,
+        prefName: spotPref.name,
         count: 1,
       });
     }
   }
-  const otherPrefs = Array.from(otherPrefMap.values())
+  const relatedPrefsForFish = Array.from(otherPrefsForFish.values())
     .sort((a, b) => b.count - a.count)
-    .slice(0, 10);
+    .slice(0, 12);
 
-  // 季節カレンダー
-  const seasonCalendar = MONTH_NAMES.map((name, i) => {
-    const month = i + 1;
-    const inSeason = fish.seasonMonths.includes(month);
-    const peak = fish.peakMonths.includes(month);
-    return { name, month, inSeason, peak };
-  });
+  // シーズン情報
+  const seasonMonthNames = fish.seasonMonths
+    .sort((a, b) => a - b)
+    .map((m) => `${m}月`);
+  const peakMonthNames = fish.peakMonths
+    .sort((a, b) => a - b)
+    .map((m) => `${m}月`);
 
-  // FAQ
+  const pageUrl = `https://tsurispot.com/prefecture/${pref.slug}/fish/${fish.slug}`;
+  const headline = `${pref.name}で${fish.name}を釣る - おすすめスポット・時期・釣り方`;
+  const pageDescription = `${pref.name}で${fish.name}が釣れるおすすめ釣りスポット${spots.length}件を紹介。シーズン・釣り方・難易度・アクセス情報を完全ガイド。`;
+
+  // FAQ データ
   const faqItems = [
     {
-      question: `${pref.name}で${fish.name}はいつ釣れますか？`,
-      answer: fish.seasonMonths.length > 0
-        ? `${pref.name}で${fish.name}が釣れるシーズンは${fish.seasonMonths.map((m) => MONTH_NAMES[m - 1]).join("・")}です。${fish.peakMonths.length > 0 ? `特に${fish.peakMonths.map((m) => MONTH_NAMES[m - 1]).join("・")}がベストシーズンです。` : ""}`
-        : `${pref.name}での${fish.name}の釣期は各スポットで異なります。詳しくは各スポットページをご確認ください。`,
+      question: `${pref.name}で${fish.name}が釣れるスポットは何件ありますか？`,
+      answer: `現在、${pref.name}で${fish.name}が釣れるスポットは${spots.length}件掲載しています。${methodBreakdown.length > 0 ? `主な釣り方は${methodBreakdown.slice(0, 3).map((m) => m.method).join("、")}です。` : ""}`,
     },
     {
-      question: `${pref.name}で${fish.name}が釣れるスポットは何箇所ありますか？`,
-      answer: `${pref.name}には${fish.name}が釣れるスポットが${spots.length}箇所あります。${topTypes.length > 0 ? `釣り場のタイプは${topTypes.map((t) => `${t[0]}（${t[1]}件）`).join("、")}です。` : ""}`,
+      question: `${pref.name}で${fish.name}が釣れる時期はいつですか？`,
+      answer: seasonMonthNames.length > 0
+        ? `${pref.name}での${fish.name}のシーズンは${seasonMonthNames.join("・")}です。${peakMonthNames.length > 0 ? `特に${peakMonthNames.join("・")}が最盛期で、最も釣果が期待できます。` : ""}`
+        : `${fish.name}の詳しいシーズン情報は各スポットページでご確認ください。`,
     },
     {
-      question: `${pref.name}で${fish.name}を釣るおすすめの方法は？`,
-      answer: topMethods.length > 0
-        ? `${pref.name}で${fish.name}を釣る際のおすすめ釣法は${topMethods.map((m) => m[0]).join("、")}です。${beginnerSpots.length > 0 ? `初心者の方には${beginnerSpots.slice(0, 2).map((s) => s.spot.name).join("・")}がおすすめです。` : ""}`
-        : `${fish.name}の釣り方は各スポットページで詳しく紹介しています。`,
-    },
-    {
-      question: `${pref.name}で初心者でも${fish.name}は釣れますか？`,
-      answer: beginnerSpots.length > 0
-        ? `はい、${pref.name}には初心者でも${fish.name}が釣りやすいスポットが${beginnerSpots.length}箇所あります。${beginnerSpots.slice(0, 3).map((s) => s.spot.name).join("・")}は特にアクセスが良く、設備も整っているのでおすすめです。`
-        : `${fish.name}は${DIFFICULTY_LABELS[fish.difficulty]}の魚です。初心者の方はまず基本的な釣り方をガイドページで確認してからチャレンジしましょう。`,
+      question: `${pref.name}で${fish.name}を釣るにはどんな釣り方がおすすめですか？`,
+      answer: methodBreakdown.length > 0
+        ? `${pref.name}で${fish.name}を狙うなら、${methodBreakdown[0].method}が最も多く${methodBreakdown[0].count}件のスポットで実績があります。${methodBreakdown.length > 1 ? `他にも${methodBreakdown.slice(1, 3).map((m) => m.method).join("、")}でも狙えます。` : ""}各スポットの詳細ページで具体的な釣り方をご確認ください。`
+        : `${fish.name}の釣り方の詳細は各スポットページでご確認ください。`,
     },
   ];
 
-  // 構造化データ
+  // JSON-LD
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -266,7 +193,7 @@ export default async function PrefectureFishPage({ params }: PageProps) {
       {
         "@type": "ListItem",
         position: 2,
-        name: "都道府県から探す",
+        name: "都道府県一覧",
         item: "https://tsurispot.com/prefecture",
       },
       {
@@ -278,30 +205,19 @@ export default async function PrefectureFishPage({ params }: PageProps) {
       {
         "@type": "ListItem",
         position: 4,
-        name: `${fish.name}釣りスポット`,
-        item: `https://tsurispot.com/prefecture/${pref.slug}/fish/${fish.slug}`,
+        name: `${fish.name}の釣り情報`,
+        item: pageUrl,
       },
     ],
-  };
-
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqItems.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
   };
 
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: `${pref.name}の${fish.name}釣りスポット${spots.length}選`,
-    description: `${pref.name}で${fish.name}が釣れるおすすめ釣りスポットを紹介。`,
+    headline,
+    description: pageDescription,
+    datePublished: "2025-01-01",
+    dateModified: new Date().toISOString().split("T")[0],
     author: {
       "@type": "Person",
       name: "正木 家康",
@@ -319,18 +235,29 @@ export default async function PrefectureFishPage({ params }: PageProps) {
     },
     mainEntityOfPage: {
       "@type": "WebPage",
-      "@id": `https://tsurispot.com/prefecture/${pref.slug}/fish/${fish.slug}`,
+      "@id": pageUrl,
     },
-    datePublished: "2026-03-05",
-    dateModified: new Date().toISOString().split("T")[0],
+  };
+
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqItems.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
   };
 
   const itemListJsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: `${pref.name}の${fish.name}釣りスポット`,
+    name: `${pref.name}で${fish.name}が釣れる釣り場`,
     numberOfItems: spots.length,
-    itemListElement: sortedSpots.slice(0, 30).map(({ spot }, index) => ({
+    itemListElement: spots.slice(0, 30).map((spot, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: spot.name,
@@ -338,7 +265,7 @@ export default async function PrefectureFishPage({ params }: PageProps) {
     })),
   };
 
-  const jsonLdArray = [breadcrumbJsonLd, faqJsonLd, articleJsonLd, itemListJsonLd];
+  const jsonLdArray = [breadcrumbJsonLd, articleJsonLd, faqJsonLd, itemListJsonLd];
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
@@ -351,207 +278,98 @@ export default async function PrefectureFishPage({ params }: PageProps) {
       <Breadcrumb
         items={[
           { label: "ホーム", href: "/" },
-          { label: "都道府県", href: "/prefecture" },
+          { label: "都道府県一覧", href: "/prefecture" },
           { label: pref.name, href: `/prefecture/${pref.slug}` },
-          { label: `${fish.name}釣りスポット` },
+          { label: `${fish.name}の釣り情報` },
         ]}
       />
 
-      {/* Back link */}
+      {/* 戻るリンク */}
       <Link
         href={`/prefecture/${pref.slug}`}
         className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground min-h-[44px]"
       >
         <ChevronLeft className="size-4" />
-        {pref.name}の釣りスポット一覧に戻る
+        {pref.name}の釣り場一覧に戻る
       </Link>
 
-      {/* Header */}
+      {/* ヘッダー */}
       <div className="mb-6 sm:mb-8">
         <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
-          {pref.name}の{fish.name}が釣れるスポット一覧
+          {pref.name}で{fish.name}が釣れる釣り場一覧
         </h1>
         <p className="mt-2 text-sm text-muted-foreground sm:text-base">
           {spots.length}件の釣りスポットで{fish.name}が狙えます
-          {isPeak && `｜今月は最盛期`}
-          {isInSeason && !isPeak && `｜今月はシーズン中`}
         </p>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          {pref.name}で{fish.name}（{fish.nameKana}）が釣れるスポットを{spots.length}箇所掲載しています。
-          {fish.seasonMonths.length > 0 &&
-            `シーズンは${fish.seasonMonths.map((m) => MONTH_NAMES[m - 1]).join("・")}。`}
-          {fish.peakMonths.length > 0 &&
-            `特に${fish.peakMonths.map((m) => MONTH_NAMES[m - 1]).join("・")}がベストシーズンです。`}
-          {topMethods.length > 0 &&
-            `主な釣り方は${topMethods.slice(0, 3).map((m) => m[0]).join("・")}です。`}
+          {pref.name}で{fish.name}が釣れる釣り場を{spots.length}件掲載しています。
+          {seasonMonthNames.length > 0 && `シーズンは${seasonMonthNames.join("・")}。`}
+          {peakMonthNames.length > 0 && `特に${peakMonthNames.join("・")}が最盛期です。`}
+          {methodBreakdown.length > 0 && `主な釣り方は${methodBreakdown.slice(0, 3).map((m) => m.method).join("、")}です。`}
         </p>
       </div>
 
-      {/* 今月のステータス */}
-      {isInSeason && (
-        <div
-          className={`mb-6 rounded-lg border p-4 ${
-            isPeak
-              ? "border-orange-200 bg-orange-50"
-              : "border-blue-200 bg-blue-50"
-          }`}
-        >
-          <div className="flex items-center gap-2">
-            {isPeak ? (
-              <Flame className="size-5 text-orange-500" />
-            ) : (
-              <Calendar className="size-5 text-blue-500" />
-            )}
-            <span className="font-bold">
-              {isPeak
-                ? `${MONTH_NAMES[currentMonth - 1]}は${fish.name}の最盛期！`
-                : `${MONTH_NAMES[currentMonth - 1]}は${fish.name}のシーズン中`}
-            </span>
-          </div>
-          <p className="mt-1 text-sm text-muted-foreground">
-            {isPeak
-              ? `今が${pref.name}で${fish.name}を釣る最高のタイミングです。`
-              : `${pref.name}で${fish.name}を狙えるシーズンです。`}
-          </p>
-        </div>
-      )}
-
-      {/* 魚の基本情報 */}
-      <section className="mb-8">
-        <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
-          <Fish className="size-5 text-primary" />
-          {fish.name}の基本情報
-        </h2>
-        <Card className="gap-0 py-0">
-          <CardContent className="p-4 sm:p-6">
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <div>
-                <p className="text-xs text-muted-foreground">難易度</p>
-                <p className="mt-1 font-medium">{DIFFICULTY_LABELS[fish.difficulty]}</p>
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground">サイズ</p>
-                <p className="mt-1 font-medium">{fish.sizeCm}</p>
-              </div>
-              <div>
-                <p className="text-xs text-muted-foreground">カテゴリ</p>
-                <p className="mt-1 font-medium">
-                  {fish.category === "sea"
-                    ? "海水魚"
-                    : fish.category === "freshwater"
-                      ? "淡水魚"
-                      : "汽水魚"}
+      {/* シーズン・釣り方サマリ */}
+      <section className="mb-6 sm:mb-8">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {/* シーズン情報 */}
+          <Card className="gap-0 py-0">
+            <CardContent className="p-4">
+              <h2 className="mb-2 flex items-center gap-2 text-sm font-bold">
+                <Calendar className="size-4 text-primary" />
+                シーズン
+              </h2>
+              <div className="space-y-1">
+                <p className="text-sm text-muted-foreground">
+                  釣れる時期: {seasonMonthNames.join("・")}
                 </p>
+                {peakMonthNames.length > 0 && (
+                  <p className="text-sm">
+                    <Badge className="bg-orange-500 text-xs hover:bg-orange-500">最盛期</Badge>
+                    <span className="ml-1.5 text-muted-foreground">{peakMonthNames.join("・")}</span>
+                  </p>
+                )}
               </div>
-              <div>
-                <p className="text-xs text-muted-foreground">味の評価</p>
-                <div className="mt-1 flex items-center gap-1">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star
-                      key={i}
-                      className={`size-4 ${
-                        i < fish.tasteRating
-                          ? "fill-yellow-400 text-yellow-400"
-                          : "text-gray-200"
-                      }`}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
+            </CardContent>
+          </Card>
 
-            {/* シーズンカレンダー */}
-            <div className="mt-5">
-              <p className="mb-2 text-xs font-medium text-muted-foreground">
-                シーズンカレンダー
-              </p>
-              <div className="grid grid-cols-6 gap-1 sm:grid-cols-12">
-                {seasonCalendar.map((m) => (
-                  <div
-                    key={m.month}
-                    className={`rounded px-1.5 py-1 text-center text-xs ${
-                      m.peak
-                        ? "bg-orange-500 font-bold text-white"
-                        : m.inSeason
-                          ? "bg-blue-100 text-blue-700"
-                          : "bg-gray-100 text-gray-400"
-                    }`}
-                  >
-                    {m.name}
-                  </div>
-                ))}
-              </div>
-              <div className="mt-2 flex gap-4 text-xs text-muted-foreground">
-                <span className="flex items-center gap-1">
-                  <span className="inline-block size-3 rounded bg-orange-500" /> 最盛期
-                </span>
-                <span className="flex items-center gap-1">
-                  <span className="inline-block size-3 rounded bg-blue-100" /> シーズン
-                </span>
-              </div>
-            </div>
-
-            {/* 釣り方 */}
-            {fish.fishingMethods && fish.fishingMethods.length > 0 && (
-              <div className="mt-5">
-                <p className="mb-2 text-xs font-medium text-muted-foreground">
-                  おすすめの釣り方
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  {fish.fishingMethods.map((m) => (
-                    <Badge key={m.methodName} variant="secondary">
-                      <Anchor className="mr-1 size-3" />
-                      {m.methodName}
+          {/* 釣り方 */}
+          {methodBreakdown.length > 0 && (
+            <Card className="gap-0 py-0">
+              <CardContent className="p-4">
+                <h2 className="mb-2 flex items-center gap-2 text-sm font-bold">
+                  <Target className="size-4 text-primary" />
+                  主な釣り方
+                </h2>
+                <div className="flex flex-wrap gap-1.5">
+                  {methodBreakdown.map(({ method, count }) => (
+                    <Badge key={method} variant="outline" className="text-xs">
+                      {method}
+                      <span className="ml-1 text-muted-foreground">({count})</span>
                     </Badge>
                   ))}
                 </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* 魚種基本情報 */}
+          <Card className="gap-0 py-0">
+            <CardContent className="p-4">
+              <h2 className="mb-2 flex items-center gap-2 text-sm font-bold">
+                <Fish className="size-4 text-primary" />
+                {fish.name}の基本情報
+              </h2>
+              <div className="space-y-1 text-sm text-muted-foreground">
+                <p>カテゴリ: {fish.category === "sea" ? "海水魚" : fish.category === "freshwater" ? "淡水魚" : "汽水魚"}</p>
+                <p>サイズ: {fish.sizeCm}</p>
+                <p>
+                  難易度:{" "}
+                  <Badge variant="secondary" className="text-xs">
+                    {DIFFICULTY_LABELS[fish.difficulty]}
+                  </Badge>
+                </p>
               </div>
-            )}
-
-            <div className="mt-4">
-              <Link
-                href={`/fish/${fish.slug}`}
-                className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
-              >
-                {fish.name}の詳細情報を見る
-                <ArrowRight className="size-3" />
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
-      </section>
-
-      {/* 統計情報 */}
-      <section className="mb-8">
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          <Card className="gap-0 py-0">
-            <CardContent className="p-4 text-center">
-              <p className="text-2xl font-bold text-primary">{spots.length}</p>
-              <p className="text-xs text-muted-foreground">釣りスポット</p>
-            </CardContent>
-          </Card>
-          <Card className="gap-0 py-0">
-            <CardContent className="p-4 text-center">
-              <p className="text-2xl font-bold text-primary">
-                {beginnerSpots.length}
-              </p>
-              <p className="text-xs text-muted-foreground">初心者OK</p>
-            </CardContent>
-          </Card>
-          <Card className="gap-0 py-0">
-            <CardContent className="p-4 text-center">
-              <p className="text-2xl font-bold text-primary">
-                {topMethods.length > 0 ? topMethods[0][0] : "-"}
-              </p>
-              <p className="text-xs text-muted-foreground">人気の釣り方</p>
-            </CardContent>
-          </Card>
-          <Card className="gap-0 py-0">
-            <CardContent className="p-4 text-center">
-              <p className="text-2xl font-bold text-primary">
-                {topTypes.length > 0 ? topTypes[0][0] : "-"}
-              </p>
-              <p className="text-xs text-muted-foreground">多い釣り場タイプ</p>
             </CardContent>
           </Card>
         </div>
@@ -559,49 +377,80 @@ export default async function PrefectureFishPage({ params }: PageProps) {
 
       {/* スポット一覧 */}
       <section className="mb-8 sm:mb-10">
-        <h2 className="mb-4 text-base font-bold sm:text-lg">
-          {pref.name}で{fish.name}が釣れるスポット（全{spots.length}件）
+        <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
+          <MapPin className="size-5 text-primary" />
+          {pref.name}で{fish.name}が釣れるスポット（{spots.length}件）
         </h2>
 
+        {/* スポット詳細テーブル */}
+        <div className="mb-6 overflow-x-auto">
+          <table className="w-full text-sm border-collapse">
+            <thead>
+              <tr className="border-b bg-muted/50">
+                <th className="px-3 py-2 text-left font-medium">スポット名</th>
+                <th className="px-3 py-2 text-left font-medium hidden sm:table-cell">タイプ</th>
+                <th className="px-3 py-2 text-left font-medium">釣り方</th>
+                <th className="px-3 py-2 text-left font-medium hidden sm:table-cell">難易度</th>
+                <th className="px-3 py-2 text-left font-medium hidden md:table-cell">時期</th>
+              </tr>
+            </thead>
+            <tbody>
+              {spotsWithCatchInfo.map(({ spot, catchInfo }) => (
+                <tr key={spot.id} className="border-b hover:bg-muted/30">
+                  <td className="px-3 py-2">
+                    <Link
+                      href={`/spots/${spot.slug}`}
+                      className="font-medium text-primary hover:underline"
+                    >
+                      {spot.name}
+                    </Link>
+                    <p className="text-xs text-muted-foreground sm:hidden">
+                      {SPOT_TYPE_LABELS[spot.spotType]}
+                    </p>
+                  </td>
+                  <td className="px-3 py-2 hidden sm:table-cell">
+                    <Badge variant="secondary" className="text-xs">
+                      {SPOT_TYPE_LABELS[spot.spotType]}
+                    </Badge>
+                  </td>
+                  <td className="px-3 py-2">
+                    {catchInfo?.method || "-"}
+                  </td>
+                  <td className="px-3 py-2 hidden sm:table-cell">
+                    {catchInfo && (
+                      <span className={`inline-block rounded px-2 py-0.5 text-xs font-medium ${CATCH_DIFFICULTY_COLORS[catchInfo.catchDifficulty]}`}>
+                        {CATCH_DIFFICULTY_LABELS[catchInfo.catchDifficulty]}
+                      </span>
+                    )}
+                  </td>
+                  <td className="px-3 py-2 hidden md:table-cell text-muted-foreground">
+                    {catchInfo ? `${catchInfo.monthStart}月〜${catchInfo.monthEnd}月` : "-"}
+                    {catchInfo?.peakSeason && (
+                      <Badge className="ml-1 bg-orange-500 text-[10px] hover:bg-orange-500">旬</Badge>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* SpotCardグリッド */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {sortedSpots.map(({ spot, catchInfo }) => (
-            <div key={spot.id} className="relative">
-              <SpotCard spot={spot} />
-              {/* 釣り方と難易度のオーバーレイ */}
-              <div className="mt-1 flex flex-wrap gap-1">
-                {catchInfo.method && (
-                  <Badge variant="outline" className="text-xs">
-                    <Anchor className="mr-0.5 size-3" />
-                    {catchInfo.method}
-                  </Badge>
-                )}
-                {catchInfo.recommendedTime && (
-                  <Badge variant="outline" className="text-xs">
-                    <Clock className="mr-0.5 size-3" />
-                    {catchInfo.recommendedTime}
-                  </Badge>
-                )}
-                {catchInfo.peakSeason && (
-                  <Badge className="bg-orange-500 text-xs hover:bg-orange-500">
-                    <Flame className="mr-0.5 size-3" />
-                    旬
-                  </Badge>
-                )}
-              </div>
-            </div>
+          {spots.map((spot) => (
+            <SpotCard key={spot.id} spot={spot} />
           ))}
         </div>
       </section>
 
-      {/* この県で釣れる他の魚 */}
-      {otherFish.length > 0 && (
+      {/* 同じ県の他の魚種 */}
+      {relatedFishInPref.length > 0 && (
         <section className="mb-8 sm:mb-10">
-          <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
-            <Fish className="size-5" />
+          <h2 className="mb-3 text-base font-bold sm:text-lg">
             {pref.name}で釣れる他の魚種
           </h2>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
-            {otherFish.map((f) => (
+            {relatedFishInPref.map((f) => (
               <Link key={f.slug} href={`/prefecture/${pref.slug}/fish/${f.slug}`}>
                 <Badge
                   variant="outline"
@@ -616,22 +465,21 @@ export default async function PrefectureFishPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* 他の都道府県でこの魚が釣れる */}
-      {otherPrefs.length > 0 && (
+      {/* 同じ魚種の他の県 */}
+      {relatedPrefsForFish.length > 0 && (
         <section className="mb-8 sm:mb-10">
-          <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
-            <MapPin className="size-5" />
-            他の都道府県の{fish.name}釣りスポット
+          <h2 className="mb-3 text-base font-bold sm:text-lg">
+            {fish.name}が釣れる他の都道府県
           </h2>
-          <div className="grid gap-2 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
-            {otherPrefs.map((p) => (
-              <Link key={p.slug} href={`/prefecture/${p.slug}/fish/${fishSlug}`}>
-                <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
-                  <CardContent className="p-3">
-                    <h3 className="text-sm font-semibold group-hover:text-primary">
-                      {p.name}
+          <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+            {relatedPrefsForFish.map((p) => (
+              <Link key={p.prefSlug} href={`/prefecture/${p.prefSlug}/fish/${fish.slug}`}>
+                <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                  <CardContent className="p-3 sm:p-4">
+                    <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
+                      {p.prefName}
                     </h3>
-                    <p className="text-xs text-muted-foreground">
+                    <p className="mt-1 text-xs text-muted-foreground">
                       {p.count}スポット
                     </p>
                   </CardContent>
@@ -642,20 +490,21 @@ export default async function PrefectureFishPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* FAQ */}
+      {/* よくある質問 */}
       <section className="mb-8 sm:mb-10">
-        <h2 className="mb-4 text-base font-bold sm:text-lg">
-          {pref.name}の{fish.name}釣りに関するよくある質問
+        <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
+          <HelpCircle className="size-5 text-primary" />
+          {pref.name}の{fish.name}に関するよくある質問
         </h2>
-        <div className="space-y-3">
-          {faqItems.map((faq, i) => (
-            <Card key={i} className="gap-0 py-0">
-              <CardContent className="p-4 sm:p-5">
-                <h3 className="mb-2 text-sm font-bold sm:text-base">
-                  Q. {faq.question}
+        <div className="space-y-4">
+          {faqItems.map((item, idx) => (
+            <Card key={idx} className="gap-0 py-0">
+              <CardContent className="p-4">
+                <h3 className="font-bold text-sm sm:text-base mb-2">
+                  Q. {item.question}
                 </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  {faq.answer}
+                <p className="text-sm text-muted-foreground">
+                  A. {item.answer}
                 </p>
               </CardContent>
             </Card>
@@ -673,13 +522,13 @@ export default async function PrefectureFishPage({ params }: PageProps) {
             href={`/prefecture/${pref.slug}`}
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
-            {pref.name}の釣りスポット
+            {pref.name}の釣り場
           </Link>
           <Link
             href={`/fish/${fish.slug}`}
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
-            {fish.name}の釣り情報
+            {fish.name}の釣り方
           </Link>
           <Link
             href="/prefecture"
@@ -698,12 +547,6 @@ export default async function PrefectureFishPage({ params }: PageProps) {
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             今釣れる魚
-          </Link>
-          <Link
-            href="/for-beginners"
-            className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
-          >
-            初心者ガイド
           </Link>
         </div>
       </section>
