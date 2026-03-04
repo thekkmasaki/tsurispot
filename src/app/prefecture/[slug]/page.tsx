@@ -1096,12 +1096,44 @@ export default async function PrefecturePage({ params }: PageProps) {
         </section>
       )}
 
+      {/* 釣り方ガイド */}
+      <section className="mt-8 sm:mt-12">
+        <h2 className="mb-3 text-base font-bold sm:mb-4 sm:text-lg">
+          {pref.name}でおすすめの釣り方ガイド
+        </h2>
+        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {[
+            { href: "/guide/sabiki", label: "サビキ釣り", desc: "堤防でアジ・サバ・イワシを手軽に" },
+            { href: "/guide/choinage", label: "ちょい投げ", desc: "キスやハゼを狙う投げ釣り入門" },
+            { href: "/guide/eging", label: "エギング", desc: "アオリイカをエギで狙う" },
+            { href: "/guide/anazuri", label: "穴釣り", desc: "テトラでカサゴ・メバルを狙う" },
+            { href: "/guide/float-fishing", label: "ウキ釣り", desc: "メジナやクロダイをウキで狙う" },
+            { href: "/guide/jigging", label: "ショアジギング", desc: "メタルジグで青物を狙う" },
+          ].map((guide) => (
+            <Link key={guide.href} href={guide.href}>
+              <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                <CardContent className="p-3">
+                  <p className="text-sm font-semibold group-hover:text-primary">{guide.label}</p>
+                  <p className="mt-0.5 text-xs text-muted-foreground">{guide.desc}</p>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
+      </section>
+
       {/* Internal links */}
       <section className="mt-8 sm:mt-12">
         <h2 className="mb-3 text-base font-bold sm:mb-4 sm:text-lg">
           関連リンク
         </h2>
         <div className="flex flex-wrap gap-2">
+          <Link
+            href={`/fishing-rules/${slug}`}
+            className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
+          >
+            {pref.name}の釣りルール
+          </Link>
           <Link
             href="/spots"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
@@ -1133,10 +1165,28 @@ export default async function PrefecturePage({ params }: PageProps) {
             魚種から探す
           </Link>
           <Link
+            href="/guide"
+            className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
+          >
+            釣り方ガイド一覧
+          </Link>
+          <Link
             href="/ranking"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             釣り場ランキング
+          </Link>
+          <Link
+            href="/fishing-calendar"
+            className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
+          >
+            月別カレンダー
+          </Link>
+          <Link
+            href="/for-beginners"
+            className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
+          >
+            初心者ガイド
           </Link>
         </div>
       </section>

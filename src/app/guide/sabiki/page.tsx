@@ -98,6 +98,12 @@ const articleJsonLd = {
   },
 };
 
+// サビキ釣りができるスポット（methodに「サビキ」を含む）
+const sabikiSpots = fishingSpots
+  .filter((s) => s.catchableFish.some((cf) => cf.method.includes("サビキ")))
+  .sort((a, b) => b.rating - a.rating)
+  .slice(0, 8);
+
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -1463,6 +1469,55 @@ export default function SabikiGuidePage() {
           />
         </section>
 
+        {/* サビキ釣りで狙える魚 */}
+        <section className="mt-8 sm:mt-10">
+          <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
+            <Fish className="size-5 text-primary" />
+            サビキ釣りで狙える魚
+          </h2>
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
+            {[
+              { slug: "aji", name: "アジ" },
+              { slug: "saba", name: "サバ" },
+              { slug: "iwashi", name: "イワシ" },
+              { slug: "konoshiro", name: "コノシロ" },
+              { slug: "sayori", name: "サヨリ" },
+              { slug: "umitanago", name: "ウミタナゴ" },
+            ].map((f) => (
+              <Link key={f.slug} href={`/fish/${f.slug}`}>
+                <Badge variant="outline" className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-white sm:text-sm">
+                  {f.name}の釣り方
+                </Badge>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* サビキ釣りができるスポット */}
+        <section className="mt-6 sm:mt-8">
+          <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
+            <MapPin className="size-5 text-primary" />
+            サビキ釣りにおすすめのスポット
+          </h2>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {sabikiSpots.slice(0, 6).map((spot) => (
+              <Link key={spot.slug} href={`/spots/${spot.slug}`}>
+                <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                  <CardContent className="p-3">
+                    <p className="text-sm font-semibold group-hover:text-primary truncate">{spot.name}</p>
+                    <p className="mt-0.5 text-xs text-muted-foreground">{spot.region.prefecture} {spot.region.areaName}</p>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+          {sabikiSpots.length > 6 && (
+            <p className="mt-2 text-center text-xs text-muted-foreground">
+              他{sabikiSpots.length - 6}件のスポットでもサビキ釣りができます
+            </p>
+          )}
+        </section>
+
         {/* 関連ガイド */}
         <section className="mt-8 sm:mt-10">
           <h2 className="mb-4 text-center text-xl font-bold">
@@ -1491,6 +1546,32 @@ export default function SabikiGuidePage() {
                   </p>
                   <p className="mt-1 text-xs text-muted-foreground">
                     サビキで釣ったアジで大物を狙おう
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/guide/rigs" className="group">
+              <Card className="h-full transition-colors group-hover:border-primary">
+                <CardContent className="pt-6">
+                  <Anchor className="mb-2 size-5 text-primary" />
+                  <p className="font-medium group-hover:text-primary">
+                    仕掛けガイド
+                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    釣り方別の仕掛けパターンを解説
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/guide/handling" className="group">
+              <Card className="h-full transition-colors group-hover:border-primary">
+                <CardContent className="pt-6">
+                  <Fish className="mb-2 size-5 text-primary" />
+                  <p className="font-medium group-hover:text-primary">
+                    釣った魚の持ち帰り方
+                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    新鮮に持ち帰るコツと締め方
                   </p>
                 </CardContent>
               </Card>
