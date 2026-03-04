@@ -409,10 +409,15 @@ function getMethodCorrection(details: CatchableFishInfo[], currentMonth: number)
   // 季節補正係数を取得
   const seasonalMultiplier = getSeasonalMethodMultiplier(currentMonth);
 
-  // 全メソッドのボウズ率を集計し、最も釣れやすい（ボウズ率が低い）ものを主要釣り方とする
-  const methodRates: { method: string; rate: number; description: string }[] = [];
-  const seenMethods = new Set<string>();
+  // 釣り方ごとの出現回数（対象魚種数）をカウントし、最も多い釣り方を主要メソッドとする
+  const methodCount: Record<string, number> = {};
+  const methodRates: { method: string; rate: number; description: string; count: number }[] = [];
 
+  for (const fish of fishToUse) {
+    methodCount[fish.method] = (methodCount[fish.method] || 0) + 1;
+  }
+
+  const seenMethods = new Set<string>();
   for (const fish of fishToUse) {
     if (seenMethods.has(fish.method)) continue;
     seenMethods.add(fish.method);
@@ -425,6 +430,7 @@ function getMethodCorrection(details: CatchableFishInfo[], currentMonth: number)
         method: methodData.label,
         rate: adjustedRate,
         description: methodData.description,
+        count: methodCount[fish.method] || 1,
       });
     }
   }
@@ -433,8 +439,8 @@ function getMethodCorrection(details: CatchableFishInfo[], currentMonth: number)
     return { correction: 0, primaryMethod: null, primaryMethodRate: null, methodDescription: null };
   }
 
-  // 最もボウズ率が低い釣り方を主要メソッドとする
-  methodRates.sort((a, b) => a.rate - b.rate);
+  // 対象魚種数が最も多い釣り方を主要メソッドとする（同数なら名前順で安定ソート）
+  methodRates.sort((a, b) => b.count - a.count || a.method.localeCompare(b.method));
   const primary = methodRates[0];
 
   // 全メソッドの平均ボウズ率を算出
