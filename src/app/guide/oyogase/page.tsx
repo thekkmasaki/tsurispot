@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
-import { ChevronLeft, Fish, AlertTriangle, CheckCircle2 } from "lucide-react";
+import { ChevronLeft, Fish, AlertTriangle, CheckCircle2, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { fishingSpots } from "@/lib/data/spots";
 
 export const metadata: Metadata = {
   title: "泳がせ釣り入門ガイド - 生きエサで大物を狙う方法",
@@ -290,6 +291,16 @@ function OyogaseWaitDiagram() {
 }
 
 export default function OyogasePage() {
+  const oyogaseSpots = fishingSpots
+    .filter((s) =>
+      (s.spotType === "breakwater" || s.spotType === "port") &&
+      s.catchableFish?.some((f) =>
+        f.methods?.some((m) => m.includes("泳がせ") || m.includes("のませ"))
+      )
+    )
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 6);
+
   return (
     <main className="container mx-auto max-w-3xl px-4 py-6 sm:py-10">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }} />
@@ -554,6 +565,33 @@ export default function OyogasePage() {
         </Card>
       </section>
 
+      {/* 泳がせ釣りにおすすめのスポット */}
+      {oyogaseSpots.length > 0 && (
+        <section className="mb-10">
+          <h2 className="mb-4 text-xl font-bold sm:text-2xl">泳がせ釣りにおすすめのスポット</h2>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {oyogaseSpots.map((spot) => (
+              <Link
+                key={spot.id}
+                href={`/spots/${spot.slug}`}
+                className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
+              >
+                <MapPin className="size-4 shrink-0 text-primary" />
+                <div className="min-w-0 flex-1">
+                  <p className="truncate text-sm font-medium group-hover:text-primary">{spot.name}</p>
+                  <p className="truncate text-xs text-muted-foreground">{spot.region.prefecture} {spot.region.areaName}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+          <div className="mt-3 text-center">
+            <Link href="/spots" className="text-sm text-primary hover:underline">
+              すべてのスポットを見る →
+            </Link>
+          </div>
+        </section>
+      )}
+
       {/* 関連ガイド */}
       <div className="rounded-xl border bg-muted/30 p-6">
         <h2 className="mb-4 text-lg font-bold">関連ガイド</h2>
@@ -569,6 +607,18 @@ export default function OyogasePage() {
           <Link href="/guide/handling" className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md">
             <p className="font-semibold group-hover:text-primary">魚の締め方ガイド</p>
             <p className="mt-1 text-xs text-muted-foreground">大物を美味しく持ち帰る</p>
+          </Link>
+          <Link href="/guide/jigging" className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md">
+            <p className="font-semibold group-hover:text-primary">ショアジギングガイド</p>
+            <p className="mt-1 text-xs text-muted-foreground">メタルジグで青物を狙う</p>
+          </Link>
+          <Link href="/guide/lure" className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md">
+            <p className="font-semibold group-hover:text-primary">ルアー釣りガイド</p>
+            <p className="mt-1 text-xs text-muted-foreground">ルアーの基本を学ぶ</p>
+          </Link>
+          <Link href="/guide/choinage" className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md">
+            <p className="font-semibold group-hover:text-primary">ちょい投げガイド</p>
+            <p className="mt-1 text-xs text-muted-foreground">堤防でのお手軽投げ釣り</p>
           </Link>
         </div>
       </div>
