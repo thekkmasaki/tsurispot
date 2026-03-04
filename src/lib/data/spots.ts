@@ -2940,7 +2940,21 @@ function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number): nu
 export type NearbySpot = FishingSpot & { distanceKm: number };
 
 export function getNearbySpots(lat: number, lng: number, limit = 5): NearbySpot[] {
-  return fishingSpots
+  // Pre-filter by bounding box (~55km per 0.5 degrees) to avoid Haversine on all spots
+  const margin = Math.max(0.5, limit * 0.03); // widen box for larger limits
+  const latMin = lat - margin;
+  const latMax = lat + margin;
+  const lngMin = lng - margin;
+  const lngMax = lng + margin;
+
+  const candidates = fishingSpots.filter(
+    (s) => s.latitude >= latMin && s.latitude <= latMax && s.longitude >= lngMin && s.longitude <= lngMax
+  );
+
+  // Fallback: if bounding box yields fewer results than limit, use all spots
+  const source = candidates.length >= limit ? candidates : fishingSpots;
+
+  return source
     .map((spot) => ({
       ...spot,
       distanceKm: haversineKm(lat, lng, spot.latitude, spot.longitude),
@@ -2958,12 +2972,15 @@ export function getSpotsByPrefecture(prefecture: string, excludeSlug: string, li
 
 export function getSpotsByFish(fishSlugs: string[], excludeSlug: string, limit = 5): FishingSpot[] {
   const fishSet = new Set(fishSlugs);
-  return fishingSpots
-    .filter((s) => s.slug !== excludeSlug && s.catchableFish.some((cf) => fishSet.has(cf.fish.slug)))
-    .sort((a, b) => {
-      const aMatch = a.catchableFish.filter((cf) => fishSet.has(cf.fish.slug)).length;
-      const bMatch = b.catchableFish.filter((cf) => fishSet.has(cf.fish.slug)).length;
-      return bMatch - aMatch || b.rating - a.rating;
-    })
-    .slice(0, limit);
+  const matched: { spot: FishingSpot; matchCount: number }[] = [];
+  for (const s of fishingSpots) {
+    if (s.slug === excludeSlug) continue;
+    let count = 0;
+    for (const cf of s.catchableFish) {
+      if (fishSet.has(cf.fish.slug)) count++;
+    }
+    if (count > 0) matched.push({ spot: s, matchCount: count });
+  }
+  matched.sort((a, b) => b.matchCount - a.matchCount || b.spot.rating - a.spot.rating);
+  return matched.slice(0, limit).map((m) => m.spot);
 }

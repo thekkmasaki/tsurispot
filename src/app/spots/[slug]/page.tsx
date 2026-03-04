@@ -453,22 +453,22 @@ export default async function SpotDetailPage({ params }: PageProps) {
   const isNightFishing =
     spot.catchableFish.some((cf) => cf.recommendedTime.includes("夜"));
 
-  // Get nearby spots for internal linking (exclude self, top 5 by Haversine distance)
-  const nearbySpots: NearbySpot[] = getNearbySpots(spot.latitude, spot.longitude, 6).filter(
-    (s) => s.id !== spot.id
-  ).slice(0, 5);
+  // Single getNearbySpots call for both internal links and GPS search
+  const allNearby: NearbySpot[] = getNearbySpots(spot.latitude, spot.longitude, 21)
+    .filter((s) => s.id !== spot.id);
 
-  // Lightweight nearby spots data for GPS search (client component)
-  const gpsNearbyData = getNearbySpots(spot.latitude, spot.longitude, 20)
-    .filter((s) => s.id !== spot.id)
-    .map((s) => ({
-      slug: s.slug,
-      name: s.name,
-      spotType: s.spotType,
-      latitude: s.latitude,
-      longitude: s.longitude,
-      prefecture: s.region.prefecture,
-    }));
+  // Top 5 for internal linking
+  const nearbySpots: NearbySpot[] = allNearby.slice(0, 5);
+
+  // Up to 20 for GPS search (client component) - lightweight data only
+  const gpsNearbyData = allNearby.slice(0, 20).map((s) => ({
+    slug: s.slug,
+    name: s.name,
+    spotType: s.spotType,
+    latitude: s.latitude,
+    longitude: s.longitude,
+    prefecture: s.region.prefecture,
+  }));
 
   // 海業地区マッチング
   const umigyoMatch = umigyoDistricts.find(
