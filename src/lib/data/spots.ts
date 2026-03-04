@@ -2917,7 +2917,50 @@ const _baseSpots: FishingSpot[] = [
   },
 ];
 
-export const fishingSpots: FishingSpot[] = [..._baseSpots, ...additionalSpots, ...osakaKinkiSpots, ...extraSpots, ...sagamiMiuraSpots, ...sagamiShonanSpots, ...sagamiIzuSpots, ...tohokuSpots, ...hokurikuSpots, ...shikokuSpots, ...kyushuSouthSpots, ...okinawaSpots, ...saninSpots, ...tokaiDetailSpots, ...kyushuChugokuDetailSpots, ...kantoDetailSpots, ...kansaiDetailSpots, ...hokkaidoTohokuDetailSpots, ...hyogoDetailSpots, ...southKyushuDetailSpots, ...chibaShizuokaDetailSpots, ...wakayamaMieNiigataSpots, ...aichiFukuokaHiroshimaSpots, ...akashiHarimaSpots, ...freshwaterSpots, ...freshwaterSpotsTohoku, ...freshwaterSpotsWest, ...freshwaterSpotsKantoAdd, ...freshwaterSpotsChubuAdd, ...freshwaterSpotsWestAdd, ...freshwaterSpotsKyoto, ...freshwaterSpotsTohokuAdd, ...freshwaterSpotsChubuKansaiAdd, ...freshwaterSpotsLowland, ...freshwaterSpotsLowland2, ...kinkiChugokuShikokuAddSpots, ...hokkaidoTohokuAdd2Spots, ...chugokuShikokuKyushuAdd2Spots, ...kantoKoshinetsuAdd2Spots, ...chubuKinkiAdd2Spots, ...chubuKinkiAdd3Spots, ...chugokuKyushuOkinawaAdd3Spots, ...hokkaidoTohokuHokurikuAdd3Spots, ...kantoKoshinetsuAdd3Spots, ...freshwaterSpotsMajor, ...expandKyushuSpots, ...expandNorthSpots, ...expandWestSpots, ...expandCentralSpots];
+// Deduplication: remove duplicate spots by name (and near-duplicates within ~500m)
+// Keeps the entry with the most catchable fish as a proxy for data completeness.
+// _baseSpots are listed first so they are preferred when catchableFish counts tie.
+function deduplicateSpots(spots: FishingSpot[]): FishingSpot[] {
+  const seen = new Map<string, FishingSpot>();
+  for (const spot of spots) {
+    const key = spot.name.trim();
+    const existing = seen.get(key);
+    if (!existing) {
+      seen.set(key, spot);
+    } else {
+      if (spot.catchableFish.length > existing.catchableFish.length) {
+        seen.set(key, spot);
+      }
+    }
+  }
+  const result = Array.from(seen.values());
+  const coordKey = (s: FishingSpot) =>
+    `${Math.round(s.latitude * 200) / 200}_${Math.round(s.longitude * 200) / 200}`;
+  const coordMap = new Map<string, FishingSpot>();
+  const deduped: FishingSpot[] = [];
+  for (const spot of result) {
+    const ck = coordKey(spot);
+    const existing = coordMap.get(ck);
+    if (!existing) {
+      coordMap.set(ck, spot);
+      deduped.push(spot);
+    } else if (existing.name.trim() === spot.name.trim()) {
+      if (spot.catchableFish.length > existing.catchableFish.length) {
+        const idx = deduped.indexOf(existing);
+        if (idx !== -1) deduped[idx] = spot;
+        coordMap.set(ck, spot);
+      }
+    } else {
+      deduped.push(spot);
+    }
+  }
+  return deduped;
+}
+
+const _allSpots: FishingSpot[] = [..._baseSpots, ...additionalSpots, ...osakaKinkiSpots, ...extraSpots, ...sagamiMiuraSpots, ...sagamiShonanSpots, ...sagamiIzuSpots, ...tohokuSpots, ...hokurikuSpots, ...shikokuSpots, ...kyushuSouthSpots, ...okinawaSpots, ...saninSpots, ...tokaiDetailSpots, ...kyushuChugokuDetailSpots, ...kantoDetailSpots, ...kansaiDetailSpots, ...hokkaidoTohokuDetailSpots, ...hyogoDetailSpots, ...southKyushuDetailSpots, ...chibaShizuokaDetailSpots, ...wakayamaMieNiigataSpots, ...aichiFukuokaHiroshimaSpots, ...akashiHarimaSpots, ...freshwaterSpots, ...freshwaterSpotsTohoku, ...freshwaterSpotsWest, ...freshwaterSpotsKantoAdd, ...freshwaterSpotsChubuAdd, ...freshwaterSpotsWestAdd, ...freshwaterSpotsKyoto, ...freshwaterSpotsTohokuAdd, ...freshwaterSpotsChubuKansaiAdd, ...freshwaterSpotsLowland, ...freshwaterSpotsLowland2, ...kinkiChugokuShikokuAddSpots, ...hokkaidoTohokuAdd2Spots, ...chugokuShikokuKyushuAdd2Spots, ...kantoKoshinetsuAdd2Spots, ...chubuKinkiAdd2Spots, ...chubuKinkiAdd3Spots, ...chugokuKyushuOkinawaAdd3Spots, ...hokkaidoTohokuHokurikuAdd3Spots, ...kantoKoshinetsuAdd3Spots, ...freshwaterSpotsMajor, ...expandKyushuSpots, ...expandNorthSpots, ...expandWestSpots, ...expandCentralSpots];
+
+export const fishingSpots: FishingSpot[] = deduplicateSpots(_allSpots);
+// Debug: dedup removed (_allSpots.length - fishingSpots.length) duplicate spots
 
 export function getSpotBySlug(slug: string): FishingSpot | undefined {
   return fishingSpots.find((s) => s.slug === slug);
