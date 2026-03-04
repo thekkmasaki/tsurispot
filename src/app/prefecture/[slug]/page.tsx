@@ -720,7 +720,14 @@ export default async function PrefecturePage({ params }: PageProps) {
           </h2>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {catchableFish.map((f) => (
-              <Link key={f.slug} href={`/fish/${f.slug}`}>
+              <Link
+                key={f.slug}
+                href={
+                  f.count >= 3
+                    ? `/prefecture/${pref.slug}/fish/${f.slug}`
+                    : `/fish/${f.slug}`
+                }
+              >
                 <Badge
                   variant="outline"
                   className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
