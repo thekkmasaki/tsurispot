@@ -8,91 +8,91 @@ export const fishingMethodVideos: Record<string, YouTubeVideo[]> = {
   sabiki: [
     {
       videoId: "Jnqt18hYwAM",
-      title: "シマノ初心者釣り教室 - 堤防サビキ釣り",
+      title: "シマノ初心者釣り教室 堤防編 - サビキ・ちょい投げ・ウキ釣り",
     },
     {
       videoId: "QfhgDNh2Yh8",
-      title: "DAIWA初心者入門 - 堤防サビキ釣り",
+      title: "DAIWA初心者釣り入門 森川芳郎のやってみよう！堤防サビキ編",
     },
   ],
   lure: [
     {
-      videoId: "NtnOYMBhef8",
-      title: "DAIWA初心者釣り入門 - ルアー釣りの基本",
+      videoId: "ZBLXlVcwXrE",
+      title: "モアザンブランジーノ実釣解説 - 大野ゆうきのシーバスルアー",
     },
     {
-      videoId: "Jnqt18hYwAM",
-      title: "シマノ初心者釣り教室 - 堤防での釣り方",
+      videoId: "Fc6lIVIuAi8",
+      title: "初心者でもすぐにできるショアジギング講座 - 釣りよかでしょう。",
     },
   ],
   eging: [
     {
-      videoId: "Jnqt18hYwAM",
-      title: "シマノ初心者釣り教室 - エギングの基本動作",
+      videoId: "By9euax0Av4",
+      title: "エギング初挑戦！初心者でも釣れるエギングの始め方 - DUEL",
     },
     {
-      videoId: "NtnOYMBhef8",
-      title: "DAIWA初心者入門 - ルアーフィッシング",
+      videoId: "fBKLcF4VvZI",
+      title: "エメラルダスドリフトマスク 山田ヒロヒトのエギング実釣 - DAIWA",
     },
   ],
   jigging: [
     {
-      videoId: "NtnOYMBhef8",
-      title: "DAIWA初心者入門 - ショアジギングの基本",
+      videoId: "Fc6lIVIuAi8",
+      title: "初心者でもすぐにできるショアジギング講座 - 釣りよかでしょう。",
     },
     {
-      videoId: "Jnqt18hYwAM",
-      title: "シマノ初心者釣り教室 - メタルジグの使い方",
+      videoId: "EgIIdmiVJHw",
+      title: "陸からライトショアジギング 巨大ヒラメ - 釣りよかでしょう。",
     },
   ],
   "float-fishing": [
     {
-      videoId: "Jnqt18hYwAM",
-      title: "シマノ初心者釣り教室 - ウキ釣りの基本",
+      videoId: "NtnOYMBhef8",
+      title: "DAIWA初心者釣り入門 やってみよう！堤防釣り - ウキ・エサ釣り",
     },
     {
-      videoId: "QfhgDNh2Yh8",
-      title: "DAIWA初心者入門 - ウキ釣り入門",
+      videoId: "5CiB0XtXDVw",
+      title: "電気ウキを付けてアジ釣り - 南紀和歌山釣太郎",
     },
   ],
   casting: [
     {
-      videoId: "Jnqt18hYwAM",
-      title: "シマノ初心者釣り教室 - キャスティングの基本",
+      videoId: "NtnOYMBhef8",
+      title: "DAIWA初心者釣り入門 やってみよう！堤防釣り - 投げ方の基本",
     },
     {
-      videoId: "NtnOYMBhef8",
-      title: "DAIWA初心者入門 - 投げ釣りの基本",
+      videoId: "Jnqt18hYwAM",
+      title: "シマノ初心者釣り教室 堤防編 - ちょい投げの基本も解説",
     },
   ],
   knots: [
     {
       videoId: "AxclGqyo-yo",
-      title: "堀田式FGノット - 簡単で強い結び方",
+      title: "素早く簡単最強ノット！堀田式FGノット - DUO公式",
     },
     {
       videoId: "tPRMy4Xlopw",
-      title: "簡単FGノットの結び方 - 初心者向け",
+      title: "堀田光哉さん 簡単FGノット - マルヨシTV",
     },
   ],
   rigs: [
     {
-      videoId: "Jnqt18hYwAM",
-      title: "シマノ初心者釣り教室 - 仕掛けの作り方",
+      videoId: "QfhgDNh2Yh8",
+      title: "DAIWA初心者釣り入門 サビキ仕掛けのセット方法 - 森川芳郎",
     },
     {
-      videoId: "QfhgDNh2Yh8",
-      title: "DAIWA初心者入門 - 基本の仕掛け",
+      videoId: "tPRMy4Xlopw",
+      title: "堀田光哉さん 簡単FGノット - 仕掛け作りの基本",
     },
   ],
   "night-fishing": [
     {
       videoId: "5CiB0XtXDVw",
-      title: "電気ウキで夜釣り - 初心者向け解説",
+      title: "電気ウキを付けてアジ釣り - 南紀和歌山釣太郎",
     },
     {
-      videoId: "Jnqt18hYwAM",
-      title: "シマノ初心者釣り教室 - 夜釣りの準備",
+      videoId: "NbHuGLcr7i4",
+      title: "サーフのカゴ半夜釣りで高級魚を狙う - DAIWA磯ちゃんねる",
     },
   ],
 };
