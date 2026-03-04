@@ -4,6 +4,10 @@ const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;
 
 // POST: ユーザー釣果投稿を受け取る
 export async function POST(request: Request) {
+  if (!process.env.GAS_CATCH_REPORT_URL) {
+    return Response.json({ error: "Not configured" }, { status: 503 });
+  }
+
   try {
     const body = await request.json().catch(() => ({}));
     const { spotSlug, spotName, fishName, userName, comment, date } = body as {
