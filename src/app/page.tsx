@@ -192,8 +192,8 @@ export default function Home() {
   const totalPrefectures = new Set(fishingSpots.map((s) => s.region.prefecture)).size;
 
   // GEO stats for data section
-  const seaSpots = fishingSpots.filter((s) => s.spotType !== "river" && s.spotType !== "lake").length;
-  const freshwaterSpotCount = fishingSpots.filter((s) => s.spotType === "river" || s.spotType === "lake").length;
+  const seaSpots = fishingSpots.filter((s) => s.spotType !== "river").length;
+  const freshwaterSpotCount = fishingSpots.filter((s) => s.spotType === "river").length;
   const beginnerSpots = fishingSpots.filter((s) => s.difficulty === "beginner").length;
   const catchableNowCount = getCatchableNow(currentMonth).length;
   const totalGuides = areaGuides.length;
