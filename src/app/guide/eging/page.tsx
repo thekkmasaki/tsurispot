@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ChevronLeft, Palette, Settings, Waves, Calendar, Scissors } from "lucide-react";
+import { ChevronLeft, Palette, Settings, Waves, Calendar, Scissors, MapPin, Fish } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { fishingSpots } from "@/lib/data/spots";
 import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 
@@ -669,6 +671,50 @@ export default function EgingGuidePage() {
           />
         </div>
 
+        {/* エギングで狙える魚 */}
+        <section className="mt-8 sm:mt-10">
+          <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
+            <Fish className="size-5 text-primary" />
+            エギングで狙えるターゲット
+          </h2>
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
+            {[
+              { slug: "aoriika", name: "アオリイカ" },
+              { slug: "kouika", name: "コウイカ" },
+            ].map((f) => (
+              <Link key={f.slug} href={`/fish/${f.slug}`}>
+                <Badge variant="outline" className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-white sm:text-sm">
+                  {f.name}の釣り方
+                </Badge>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* エギングにおすすめのスポット */}
+        <section className="mt-6 sm:mt-8">
+          <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
+            <MapPin className="size-5 text-primary" />
+            エギングにおすすめのスポット
+          </h2>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {fishingSpots
+              .filter((s) => s.catchableFish.some((cf) => cf.method.includes("エギング")))
+              .sort((a, b) => b.rating - a.rating)
+              .slice(0, 6)
+              .map((spot) => (
+                <Link key={spot.slug} href={`/spots/${spot.slug}`}>
+                  <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                    <CardContent className="p-3">
+                      <p className="text-sm font-semibold group-hover:text-primary truncate">{spot.name}</p>
+                      <p className="mt-0.5 text-xs text-muted-foreground">{spot.region.prefecture} {spot.region.areaName}</p>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+          </div>
+        </section>
+
         {/* 関連ガイド */}
         <div className="mt-8 sm:mt-12">
           <Card>
@@ -698,6 +744,12 @@ export default function EgingGuidePage() {
                     釣り糸の結び方
                   </Link>
                   <span className="text-muted-foreground"> - エギとの接続に必要な結び方</span>
+                </li>
+                <li>
+                  <Link href="/guide/sabiki" className="text-primary hover:underline">
+                    サビキ釣り完全ガイド
+                  </Link>
+                  <span className="text-muted-foreground"> - 堤防で手軽にアジ・サバ・イワシ</span>
                 </li>
               </ul>
             </CardContent>

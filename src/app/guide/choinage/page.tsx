@@ -1116,6 +1116,53 @@ export default function ChoinageGuidePage() {
           />
         </section>
 
+        {/* ちょい投げで狙える魚 */}
+        <section className="mt-8 sm:mt-10">
+          <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
+            <Fish className="size-5 text-primary" />
+            ちょい投げで狙える魚
+          </h2>
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
+            {[
+              { slug: "shirogisu", name: "シロギス" },
+              { slug: "haze", name: "ハゼ" },
+              { slug: "karei", name: "カレイ" },
+              { slug: "magochi", name: "マゴチ" },
+              { slug: "hirame", name: "ヒラメ" },
+            ].map((f) => (
+              <Link key={f.slug} href={`/fish/${f.slug}`}>
+                <Badge variant="outline" className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-white sm:text-sm">
+                  {f.name}の釣り方
+                </Badge>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        {/* ちょい投げにおすすめのスポット */}
+        <section className="mt-6 sm:mt-8">
+          <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
+            <MapPin className="size-5 text-primary" />
+            ちょい投げにおすすめのスポット
+          </h2>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {fishingSpots
+              .filter((s) => s.catchableFish.some((cf) => cf.method.includes("ちょい投げ") || cf.method.includes("投げ釣り")))
+              .sort((a, b) => b.rating - a.rating)
+              .slice(0, 6)
+              .map((spot) => (
+                <Link key={spot.slug} href={`/spots/${spot.slug}`}>
+                  <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                    <CardContent className="p-3">
+                      <p className="text-sm font-semibold group-hover:text-primary truncate">{spot.name}</p>
+                      <p className="mt-0.5 text-xs text-muted-foreground">{spot.region.prefecture} {spot.region.areaName}</p>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+          </div>
+        </section>
+
         {/* 関連ガイド */}
         <section className="mt-8 sm:mt-10">
           <h2 className="mb-4 text-center text-xl font-bold">
@@ -1135,6 +1182,19 @@ export default function ChoinageGuidePage() {
                 </CardContent>
               </Card>
             </Link>
+            <Link href="/guide/sabiki" className="group">
+              <Card className="h-full transition-colors group-hover:border-primary">
+                <CardContent className="pt-6">
+                  <Fish className="mb-2 size-5 text-primary" />
+                  <p className="font-medium group-hover:text-primary">
+                    サビキ釣り完全ガイド
+                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    堤防で手軽にアジ・サバ・イワシ
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
             <Link href="/guide/beginner" className="group">
               <Card className="h-full transition-colors group-hover:border-primary">
                 <CardContent className="pt-6">
@@ -1144,6 +1204,19 @@ export default function ChoinageGuidePage() {
                   </p>
                   <p className="mt-1 text-xs text-muted-foreground">
                     釣りの基本から道具選びまで完全網羅
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/guide/sinker" className="group">
+              <Card className="h-full transition-colors group-hover:border-primary">
+                <CardContent className="pt-6">
+                  <Target className="mb-2 size-5 text-primary" />
+                  <p className="font-medium group-hover:text-primary">
+                    オモリ・シンカーガイド
+                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    号数の選び方と使い分け
                   </p>
                 </CardContent>
               </Card>
