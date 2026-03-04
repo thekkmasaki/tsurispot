@@ -1391,6 +1391,30 @@ export default async function FishDetailPage({ params }: PageProps) {
           ))}
         </div>
       </section>
+
+      {/* まとめ（GEO最適化：AI引用しやすい要約） */}
+      <section className="mb-8 fish-description">
+        <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
+          まとめ：{fish.name}の釣り情報
+        </h2>
+        <Card className="gap-0 py-0">
+          <CardContent className="p-4">
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              {fish.name}（{fish.nameKana}）は{fish.category === "sea" ? "海水魚" : fish.category === "freshwater" ? "淡水魚" : "汽水魚"}で、
+              {fish.seasonMonths.length > 0
+                ? `${fish.seasonMonths[0]}月〜${fish.seasonMonths[fish.seasonMonths.length - 1]}月に釣ることができます。`
+                : "通年で釣ることができます。"}
+              {fish.peakMonths.length > 0 && `ベストシーズンは${fish.peakMonths.map(m => `${m}月`).join("・")}です。`}
+              {fish.fishingMethods && fish.fishingMethods.length > 0 && `主な釣り方は${fish.fishingMethods.map(m => m.methodName).join("、")}。`}
+              {fish.spots.length > 0 && `全国${fish.spots.length}箇所の釣りスポットで確認されています。`}
+              {fish.difficulty === "beginner" ? "初心者でも比較的簡単に釣れる魚です。" :
+               fish.difficulty === "intermediate" ? "基本的な釣りの知識があれば狙える魚です。" :
+               "経験を積んだ釣り人向けのターゲットです。"}
+              詳しい釣り方・仕掛け情報はツリスポ（tsurispot.com）で確認できます。
+            </p>
+          </CardContent>
+        </Card>
+      </section>
     </div>
   );
 }

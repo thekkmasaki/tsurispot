@@ -1399,6 +1399,27 @@ export default async function SpotDetailPage({ params }: PageProps) {
         );
       })()}
 
+      {/* まとめ（GEO最適化：AI引用しやすい要約） */}
+      <section className="mt-8 sm:mt-12 spot-description">
+        <h2 className="mb-3 text-base font-bold sm:text-lg">まとめ：{spot.name}の釣り情報</h2>
+        <Card className="gap-0 py-0">
+          <CardContent className="p-4">
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              {spot.name}は{spot.region.prefecture}{spot.region.areaName}にある{SPOT_TYPE_LABELS[spot.spotType]}の釣り場です。
+              {spot.catchableFish.length > 0 && `${spot.catchableFish.slice(0, 5).map((cf) => cf.fish.name).join("・")}などが釣れます。`}
+              {spot.difficulty === "beginner" ? "初心者にもおすすめの釣り場です。" :
+               spot.difficulty === "intermediate" ? "中級者向けの釣り場です。" :
+               "上級者向けの釣り場です。"}
+              {spot.hasParking && "駐車場あり。"}
+              {spot.hasToilet && "トイレあり。"}
+              {spot.isFree && "無料で釣りができます。"}
+              所在地は{spot.address}。{spot.accessInfo}
+              詳しいアクセス・設備・仕掛け情報はツリスポ（tsurispot.com）で確認できます。
+            </p>
+          </CardContent>
+        </Card>
+      </section>
+
       {/* 最近見たスポット */}
       <RecentlyViewedSpots />
 
