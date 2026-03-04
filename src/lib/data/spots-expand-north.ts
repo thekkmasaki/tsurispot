@@ -1030,7 +1030,7 @@ export const expandNorthSpots: FishingSpot[] = [
     latitude: 40.9556, longitude: 141.3250,
     address: "〒039-3212 青森県上北郡六ヶ所村大字鷹架字内子内",
     accessInfo: "三沢駅から車で約30分。第二みちのく有料道路三沢ICから約25分。",
-    region: localRegion("r4230"), spotType: "lake", difficulty: "beginner",
+    region: localRegion("r4230"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "湖畔に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", imageAttribution: "", images: [], rating: 3.5, reviewCount: 55, googleRating: 3.5, googleReviewCount: 20,
