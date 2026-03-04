@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ChevronLeft, Fish, Target, Zap, Settings } from "lucide-react";
+import { ChevronLeft, Fish, Target, Zap, Settings, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
+import { fishingSpots } from "@/lib/data/spots";
 
 export const metadata: Metadata = {
   title: "ルアー釣り入門ガイド - ルアーの種類・選び方・アクションを解説",
@@ -313,6 +315,15 @@ function RetrieveSpeedDiagram() {
 }
 
 export default function LureGuidePage() {
+  const lureSpots = fishingSpots
+    .filter((s) =>
+      s.catchableFish?.some((f) =>
+        f.methods?.some((m) => m.includes("ルアー") || m.includes("ジギング") || m.includes("エギング"))
+      )
+    )
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 6);
+
   return (
     <>
       <script
@@ -554,6 +565,76 @@ export default function LureGuidePage() {
           </SectionCard>
         </div>
 
+        {/* ルアーで狙える魚 */}
+        <section className="mt-8 sm:mt-12">
+          <Card>
+            <CardContent className="pt-6">
+              <div className="mb-4 flex items-center gap-2">
+                <Fish className="size-5 text-primary" />
+                <h2 className="text-xl font-bold">ルアーで狙える魚</h2>
+              </div>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {[
+                  { slug: "aji", name: "アジ", badge: "アジング" },
+                  { slug: "mebaru", name: "メバル", badge: "メバリング" },
+                  { slug: "seabass", name: "シーバス", badge: "人気No.1" },
+                  { slug: "buri", name: "ブリ", badge: "ショアジギング" },
+                  { slug: "hirame", name: "ヒラメ", badge: "サーフ" },
+                  { slug: "kasago", name: "カサゴ", badge: "ロックフィッシュ" },
+                  { slug: "aoriika", name: "アオリイカ", badge: "エギング" },
+                  { slug: "kurodai", name: "クロダイ", badge: "チニング" },
+                ].map((fish) => (
+                  <Link
+                    key={fish.slug}
+                    href={`/fish/${fish.slug}`}
+                    className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
+                  >
+                    <Fish className="size-4 shrink-0 text-primary" />
+                    <div className="min-w-0 flex-1">
+                      <span className="text-sm font-medium group-hover:text-primary">{fish.name}</span>
+                    </div>
+                    <Badge variant="secondary" className="shrink-0 text-xs">{fish.badge}</Badge>
+                  </Link>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* ルアー釣りにおすすめのスポット */}
+        {lureSpots.length > 0 && (
+          <section className="mt-6">
+            <Card>
+              <CardContent className="pt-6">
+                <div className="mb-4 flex items-center gap-2">
+                  <MapPin className="size-5 text-primary" />
+                  <h2 className="text-xl font-bold">ルアー釣りにおすすめのスポット</h2>
+                </div>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {lureSpots.map((spot) => (
+                    <Link
+                      key={spot.id}
+                      href={`/spots/${spot.slug}`}
+                      className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
+                    >
+                      <MapPin className="size-4 shrink-0 text-primary" />
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-medium group-hover:text-primary">{spot.name}</p>
+                        <p className="truncate text-xs text-muted-foreground">{spot.region.prefecture} {spot.region.areaName}</p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+                <div className="mt-3 text-center">
+                  <Link href="/spots" className="text-sm text-primary hover:underline">
+                    すべてのスポットを見る →
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+          </section>
+        )}
+
         {/* 参考動画 */}
         <div className="mt-8 sm:mt-12">
           <YouTubeEmbedList
@@ -592,6 +673,18 @@ export default function LureGuidePage() {
                     夜釣り入門ガイド
                   </Link>
                   <span className="text-muted-foreground"> - メバリングやアジングに最適な夜釣りの基本</span>
+                </li>
+                <li>
+                  <Link href="/guide/sabiki" className="text-primary hover:underline">
+                    サビキ釣り完全ガイド
+                  </Link>
+                  <span className="text-muted-foreground"> - エサ釣りの基本をマスター</span>
+                </li>
+                <li>
+                  <Link href="/guide/anazuri" className="text-primary hover:underline">
+                    穴釣り完全ガイド
+                  </Link>
+                  <span className="text-muted-foreground"> - テトラの穴でロックフィッシュを狙う</span>
                 </li>
               </ul>
             </CardContent>

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
-import { CircleDot, Anchor, Bug, Eye, Fish } from "lucide-react";
+import { CircleDot, Anchor, Bug, Eye, Fish, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { RigDiagram } from "@/components/rig-diagram";
 import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
+import { fishingSpots } from "@/lib/data/spots";
 
 export const metadata: Metadata = {
   title: "ウキ釣り完全ガイド - ウキの種類・仕掛け・アタリの取り方",
@@ -523,6 +525,15 @@ function Warning({ children }: { children: React.ReactNode }) {
 }
 
 export default function FloatFishingGuidePage() {
+  const floatSpots = fishingSpots
+    .filter((s) =>
+      s.catchableFish?.some((f) =>
+        f.methods?.some((m) => m.includes("ウキ") || m.includes("フカセ"))
+      )
+    )
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 6);
+
   return (
     <>
       <script
@@ -773,6 +784,9 @@ export default function FloatFishingGuidePage() {
                 <p className="mt-2 text-xs text-muted-foreground">
                   時期：通年（春〜秋が好シーズン）/ タナ：底付近〜中層
                 </p>
+                <Link href="/fish/kurodai" className="mt-2 inline-flex items-center text-sm text-primary hover:underline">
+                  クロダイの詳細を見る →
+                </Link>
               </div>
 
               <div className="rounded-lg border p-4">
@@ -783,6 +797,9 @@ export default function FloatFishingGuidePage() {
                 <p className="mt-2 text-xs text-muted-foreground">
                   時期：秋〜春（冬が最盛期）/ タナ：中層〜やや深め
                 </p>
+                <Link href="/fish/mejina" className="mt-2 inline-flex items-center text-sm text-primary hover:underline">
+                  メジナの詳細を見る →
+                </Link>
               </div>
 
               <div className="rounded-lg border p-4">
@@ -793,10 +810,47 @@ export default function FloatFishingGuidePage() {
                 <p className="mt-2 text-xs text-muted-foreground">
                   時期：冬〜春 / タナ：表層〜中層（夜間）
                 </p>
+                <Link href="/fish/mebaru" className="mt-2 inline-flex items-center text-sm text-primary hover:underline">
+                  メバルの詳細を見る →
+                </Link>
               </div>
             </div>
           </SectionCard>
         </div>
+
+        {/* ウキ釣りにおすすめのスポット */}
+        {floatSpots.length > 0 && (
+          <section className="mt-8 sm:mt-12">
+            <Card>
+              <CardContent className="pt-6">
+                <div className="mb-4 flex items-center gap-2">
+                  <MapPin className="size-5 text-primary" />
+                  <h2 className="text-xl font-bold">ウキ釣りにおすすめのスポット</h2>
+                </div>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {floatSpots.map((spot) => (
+                    <Link
+                      key={spot.id}
+                      href={`/spots/${spot.slug}`}
+                      className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
+                    >
+                      <MapPin className="size-4 shrink-0 text-primary" />
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-medium group-hover:text-primary">{spot.name}</p>
+                        <p className="truncate text-xs text-muted-foreground">{spot.region.prefecture} {spot.region.areaName}</p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+                <div className="mt-3 text-center">
+                  <Link href="/spots" className="text-sm text-primary hover:underline">
+                    すべてのスポットを見る →
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+          </section>
+        )}
 
         {/* 参考動画 */}
         <div className="mt-8 sm:mt-12">
@@ -836,6 +890,18 @@ export default function FloatFishingGuidePage() {
                     夜釣り入門ガイド
                   </Link>
                   <span className="text-muted-foreground"> - 電気ウキを使った夜のウキ釣り</span>
+                </li>
+                <li>
+                  <Link href="/guide/sabiki" className="text-primary hover:underline">
+                    サビキ釣り完全ガイド
+                  </Link>
+                  <span className="text-muted-foreground"> - 堤防で手軽にアジ・サバを釣る</span>
+                </li>
+                <li>
+                  <Link href="/guide/choinage" className="text-primary hover:underline">
+                    ちょい投げ完全ガイド
+                  </Link>
+                  <span className="text-muted-foreground"> - ウキ釣りと組み合わせやすい釣法</span>
                 </li>
               </ul>
             </CardContent>

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ChevronLeft, Zap, Settings, Target, ShieldAlert, Fish } from "lucide-react";
+import { ChevronLeft, Zap, Settings, Target, ShieldAlert, Fish, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
+import { fishingSpots } from "@/lib/data/spots";
 
 export const metadata: Metadata = {
   title: "ショアジギング入門ガイド - メタルジグで青物を狙う",
@@ -313,6 +315,15 @@ function ShoreJiggingPointDiagram() {
 }
 
 export default function JiggingGuidePage() {
+  const jiggingSpots = fishingSpots
+    .filter((s) =>
+      s.catchableFish?.some((f) =>
+        f.methods?.some((m) => m.includes("ジギング") || m.includes("ルアー"))
+      )
+    )
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 6);
+
   return (
     <>
       <script
@@ -636,6 +647,74 @@ export default function JiggingGuidePage() {
           </SectionCard>
         </div>
 
+        {/* ショアジギングで狙える魚 */}
+        <section className="mt-8 sm:mt-12">
+          <Card>
+            <CardContent className="pt-6">
+              <div className="mb-4 flex items-center gap-2">
+                <Fish className="size-5 text-primary" />
+                <h2 className="text-xl font-bold">ショアジギングで狙える魚</h2>
+              </div>
+              <div className="grid gap-2 sm:grid-cols-2">
+                {[
+                  { slug: "buri", name: "ブリ（ハマチ・イナダ）", badge: "青物の王道" },
+                  { slug: "kanpachi", name: "カンパチ", badge: "引きが強い" },
+                  { slug: "sawara", name: "サワラ", badge: "秋〜冬" },
+                  { slug: "hirame", name: "ヒラメ", badge: "底層狙い" },
+                  { slug: "aji", name: "アジ", badge: "ライトジギング" },
+                  { slug: "shiira", name: "シイラ", badge: "夏の大物" },
+                ].map((fish) => (
+                  <Link
+                    key={fish.slug}
+                    href={`/fish/${fish.slug}`}
+                    className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
+                  >
+                    <Fish className="size-4 shrink-0 text-primary" />
+                    <div className="min-w-0 flex-1">
+                      <span className="text-sm font-medium group-hover:text-primary">{fish.name}</span>
+                    </div>
+                    <Badge variant="secondary" className="shrink-0 text-xs">{fish.badge}</Badge>
+                  </Link>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </section>
+
+        {/* ショアジギングにおすすめのスポット */}
+        {jiggingSpots.length > 0 && (
+          <section className="mt-6">
+            <Card>
+              <CardContent className="pt-6">
+                <div className="mb-4 flex items-center gap-2">
+                  <MapPin className="size-5 text-primary" />
+                  <h2 className="text-xl font-bold">ショアジギングにおすすめのスポット</h2>
+                </div>
+                <div className="grid gap-2 sm:grid-cols-2">
+                  {jiggingSpots.map((spot) => (
+                    <Link
+                      key={spot.id}
+                      href={`/spots/${spot.slug}`}
+                      className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
+                    >
+                      <MapPin className="size-4 shrink-0 text-primary" />
+                      <div className="min-w-0 flex-1">
+                        <p className="truncate text-sm font-medium group-hover:text-primary">{spot.name}</p>
+                        <p className="truncate text-xs text-muted-foreground">{spot.region.prefecture} {spot.region.areaName}</p>
+                      </div>
+                    </Link>
+                  ))}
+                </div>
+                <div className="mt-3 text-center">
+                  <Link href="/spots" className="text-sm text-primary hover:underline">
+                    すべてのスポットを見る →
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+          </section>
+        )}
+
         {/* 参考動画 */}
         <div className="mt-8 sm:mt-12">
           <YouTubeEmbedList
@@ -674,6 +753,18 @@ export default function JiggingGuidePage() {
                     潮汐の読み方ガイド
                   </Link>
                   <span className="text-muted-foreground"> - 青物が回遊しやすい潮のタイミング</span>
+                </li>
+                <li>
+                  <Link href="/guide/sabiki" className="text-primary hover:underline">
+                    サビキ釣り完全ガイド
+                  </Link>
+                  <span className="text-muted-foreground"> - 同じ堤防で楽しめるお手軽釣法</span>
+                </li>
+                <li>
+                  <Link href="/guide/eging" className="text-primary hover:underline">
+                    エギング入門ガイド
+                  </Link>
+                  <span className="text-muted-foreground"> - 堤防からイカを狙うルアー釣り</span>
                 </li>
               </ul>
             </CardContent>
