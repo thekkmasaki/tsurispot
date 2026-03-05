@@ -412,30 +412,30 @@ export default function Home() {
           ツリスポは全国{totalPrefectures}都道府県の釣り場情報を網羅しています
         </p>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-          <div className="rounded-xl border bg-card p-4 text-center">
+          <Link href="/spots" className="rounded-xl border bg-card p-4 text-center transition-colors hover:border-primary/50 hover:bg-primary/5">
             <div className="text-2xl font-bold text-primary sm:text-3xl">{totalSpots.toLocaleString()}<span className="text-base font-normal">+</span></div>
             <div className="mt-1 text-xs text-muted-foreground">釣りスポット数</div>
-          </div>
-          <div className="rounded-xl border bg-card p-4 text-center">
+          </Link>
+          <Link href="/fish" className="rounded-xl border bg-card p-4 text-center transition-colors hover:border-primary/50 hover:bg-primary/5">
             <div className="text-2xl font-bold text-primary sm:text-3xl">{totalFishSpecies}<span className="text-base font-normal">+</span></div>
             <div className="mt-1 text-xs text-muted-foreground">魚種図鑑</div>
-          </div>
-          <div className="rounded-xl border bg-card p-4 text-center">
+          </Link>
+          <Link href="/prefecture" className="rounded-xl border bg-card p-4 text-center transition-colors hover:border-primary/50 hover:bg-primary/5">
             <div className="text-2xl font-bold text-primary sm:text-3xl">{totalPrefectures}</div>
             <div className="mt-1 text-xs text-muted-foreground">都道府県カバー</div>
-          </div>
-          <div className="rounded-xl border bg-card p-4 text-center">
+          </Link>
+          <Link href="/fishing-spots/best-saltwater" className="rounded-xl border bg-card p-4 text-center transition-colors hover:border-primary/50 hover:bg-primary/5">
             <div className="text-2xl font-bold text-primary sm:text-3xl">{seaSpots.toLocaleString()}</div>
             <div className="mt-1 text-xs text-muted-foreground">海釣りスポット</div>
-          </div>
-          <div className="rounded-xl border bg-card p-4 text-center">
+          </Link>
+          <Link href="/fishing-spots/river-beginner" className="rounded-xl border bg-card p-4 text-center transition-colors hover:border-primary/50 hover:bg-primary/5">
             <div className="text-2xl font-bold text-primary sm:text-3xl">{freshwaterSpotCount}</div>
             <div className="mt-1 text-xs text-muted-foreground">川・湖スポット</div>
-          </div>
-          <div className="rounded-xl border bg-card p-4 text-center">
+          </Link>
+          <Link href="/fishing-spots/breakwater-beginner" className="rounded-xl border bg-card p-4 text-center transition-colors hover:border-primary/50 hover:bg-primary/5">
             <div className="text-2xl font-bold text-primary sm:text-3xl">{beginnerSpots.toLocaleString()}</div>
-            <div className="mt-1 text-xs text-muted-foreground">初心者OK</div>
-          </div>
+            <div className="mt-1 text-xs text-muted-foreground">初心者向けスポット</div>
+          </Link>
         </div>
         <p className="mt-4 text-center text-xs text-muted-foreground">
           今月釣れる魚は<strong>{catchableNowCount}種</strong>。全国{totalGuides}エリアのガイドと月別・季節別の釣り方情報を毎月更新中。
