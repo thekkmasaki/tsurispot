@@ -107,8 +107,14 @@ export function NearbySpotsSorter({ spots, fishName, totalCount }: NearbySpotsSo
     spot,
   }: {
     spot: (typeof sortedSpots)[number];
-  }) => (
-    <Link href={`/spots/${spot.slug}`}>
+  }) => {
+    const richLabel = `${spot.prefecture}${spot.areaName}の${spot.name}で${fishName}を釣る`;
+    return (
+    <Link
+      href={`/spots/${spot.slug}`}
+      title={richLabel}
+      aria-label={richLabel}
+    >
       <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
         <CardContent className="flex items-center justify-between gap-2 p-3 sm:p-4">
           <div className="min-w-0 flex-1">
@@ -152,6 +158,7 @@ export function NearbySpotsSorter({ spots, fishName, totalCount }: NearbySpotsSo
       </Card>
     </Link>
   );
+  };
 
   return (
     <section className="mb-6 sm:mb-8">

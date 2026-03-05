@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import { getSpotBySlug } from "@/lib/data/spots";
 import { SPOT_TYPE_LABELS } from "@/types";
+import { getOgFont } from "@/lib/og-font";
 
 export const runtime = "nodejs";
 export const alt = "ツリスポ - 釣りスポット情報";
@@ -63,21 +64,8 @@ export default async function Image({
     );
   }
 
-  // フォント読み込み
-  let fontData: ArrayBuffer | undefined;
-  try {
-    const fontRes = await fetch(
-      "https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap"
-    );
-    const css = await fontRes.text();
-    const fontUrlMatch = css.match(/url\(([^)]+)\)/);
-    if (fontUrlMatch) {
-      const fontFileRes = await fetch(fontUrlMatch[1]);
-      fontData = await fontFileRes.arrayBuffer();
-    }
-  } catch {
-    // フォント取得失敗時はデフォルトフォント
-  }
+  // フォント読み込み（モジュールレベルキャッシュ）
+  const fontData = await getOgFont();
 
   const gradient = SPOT_GRADIENTS[spot.spotType] || SPOT_GRADIENTS.port;
   const icon = SPOT_ICONS[spot.spotType] || "🎣";

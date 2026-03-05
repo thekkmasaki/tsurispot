@@ -17,8 +17,11 @@ const baseUrl = "https://tsurispot.com";
 const BUILD_DATE = new Date().toISOString().split("T")[0]; // YYYY-MM-DD形式
 
 // コンテンツ種別ごとのlastmod日付
+// dynamicDate: ビルド時の日付（スポット・都道府県等のデータ連動ページ）
+// contentDate: ビルド日と同期（コンテンツ更新もビルド時に反映されるため）
+// legalDate: 法務ページは手動更新のため固定
 const dynamicDate = new Date(BUILD_DATE);
-const contentDate = new Date("2026-02-23");
+const contentDate = new Date(BUILD_DATE);
 const legalDate = new Date("2025-06-01");
 
 // 単一サイトマップ（generateSitemapsを削除 → Google が確実に取得できる1ファイル構成）

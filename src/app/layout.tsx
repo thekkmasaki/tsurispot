@@ -9,7 +9,11 @@ import { PWARegister } from "@/components/pwa-register";
 import { CookieBanner } from "@/components/layout/cookie-banner";
 import { ScrollToTop } from "@/components/scroll-to-top";
 import { CompareBar } from "@/components/spots/compare-bar";
+import { fishingSpots } from "@/lib/data/spots";
 import "./globals.css";
+
+// ビルド時にスポット数を自動算出
+const SPOT_COUNT = fishingSpots.length.toLocaleString();
 
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
@@ -62,7 +66,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "ツリスポ - 釣りスポット総合情報サイト",
-    description: "近くの釣り場を地図で簡単検索。全国3,300箇所以上の釣りスポットから、今の時期に釣れる魚・仕掛け情報まで網羅。",
+    description: `近くの釣り場を地図で簡単検索。全国${SPOT_COUNT}箇所以上の釣りスポットから、今の時期に釣れる魚・仕掛け情報まで網羅。`,
   },
   robots: {
     index: true,
@@ -86,18 +90,14 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="theme-color" content="#0369a1" />
-        {/* Bing Webmaster Tools 認証用（登録後に値を設定してコメント解除）
-        <meta name="msvalidate.01" content="BING_VERIFICATION_CODE" /> */}
-        {/* Yandex Webmaster 認証用（登録後に値を設定してコメント解除）
-        <meta name="yandex-verification" content="YANDEX_VERIFICATION_CODE" /> */}
-        {/*
-          検索エンジン登録手順（ユーザー作業）:
-          1. Bing Webmaster Tools: https://www.bing.com/webmasters/ でサイト追加
-             → 認証コードを msvalidate.01 メタタグに設定
-          2. Yandex Webmaster: https://webmaster.yandex.com/ でサイト追加
-             → 認証コードを yandex-verification メタタグに設定
-          3. デプロイ後 curl https://tsurispot.com/api/ping-search-engines を実行
-        */}
+        {/* Bing Webmaster Tools: .env.local に NEXT_PUBLIC_BING_VERIFICATION を設定 */}
+        {process.env.NEXT_PUBLIC_BING_VERIFICATION && (
+          <meta name="msvalidate.01" content={process.env.NEXT_PUBLIC_BING_VERIFICATION} />
+        )}
+        {/* Yandex Webmaster: .env.local に NEXT_PUBLIC_YANDEX_VERIFICATION を設定 */}
+        {process.env.NEXT_PUBLIC_YANDEX_VERIFICATION && (
+          <meta name="yandex-verification" content={process.env.NEXT_PUBLIC_YANDEX_VERIFICATION} />
+        )}
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="default" />
         <meta name="application-name" content="ツリスポ" />
@@ -158,7 +158,7 @@ export default function RootLayout({
               url: "https://tsurispot.com",
               logo: "https://tsurispot.com/logo.svg",
               description:
-                "全国3,300箇所以上の釣りスポットを掲載する総合情報サイト。地図で直感的に釣り場を探せ、今の時期に釣れる魚やおすすめの仕掛け情報を提供。",
+                `全国${SPOT_COUNT}箇所以上の釣りスポットを掲載する総合情報サイト。地図で直感的に釣り場を探せ、今の時期に釣れる魚やおすすめの仕掛け情報を提供。`,
               foundingDate: "2025",
               founder: {
                 "@type": "Person",
@@ -198,7 +198,7 @@ export default function RootLayout({
                 priceCurrency: "JPY",
               },
               description:
-                "全国3,300箇所以上の釣りスポットを地図で検索できる無料Webアプリ。今釣れる魚、仕掛け情報、初心者ガイドも充実。",
+                `全国${SPOT_COUNT}箇所以上の釣りスポットを地図で検索できる無料Webアプリ。今釣れる魚、仕掛け情報、初心者ガイドも充実。`,
             }),
           }}
         />

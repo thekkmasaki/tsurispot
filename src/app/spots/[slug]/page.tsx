@@ -1038,8 +1038,17 @@ export default async function SpotDetailPage({ params }: PageProps) {
             {spot.name}周辺の釣りスポット
           </h2>
           <div className="flex gap-3 overflow-x-auto pb-2">
-            {nearbySpots.map((nearSpot) => (
-              <Link key={nearSpot.id} href={`/spots/${nearSpot.slug}`} className="shrink-0">
+            {nearbySpots.map((nearSpot) => {
+              const nearSpotTypeLabel = SPOT_TYPE_LABELS[nearSpot.spotType];
+              const nearSpotRichLabel = `${spot.region.prefecture}${spot.region.areaName}近くの${nearSpotTypeLabel}・${nearSpot.name}`;
+              return (
+              <Link
+                key={nearSpot.id}
+                href={`/spots/${nearSpot.slug}`}
+                className="shrink-0"
+                title={nearSpotRichLabel}
+                aria-label={nearSpotRichLabel}
+              >
                 <div className="min-w-[200px] rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
                   <p className="text-sm text-gray-500 mb-1">
                     約{nearSpot.distanceKm < 10
@@ -1048,9 +1057,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
                   </p>
                   <p className="font-medium text-blue-600 hover:underline leading-snug">
                     {nearSpot.name}
-                  </p>
-                  <p className="mt-1 text-xs text-gray-500">
-                    {SPOT_TYPE_LABELS[nearSpot.spotType]}
+                    <span className="ml-1 text-xs font-normal text-gray-400">
+                      ({nearSpotTypeLabel})
+                    </span>
                   </p>
                   {nearSpot.catchableFish.length > 0 && (
                     <p className="mt-2 text-xs text-muted-foreground">
@@ -1059,7 +1068,8 @@ export default async function SpotDetailPage({ params }: PageProps) {
                   )}
                 </div>
               </Link>
-            ))}
+              );
+            })}
           </div>
           <NearbyGpsSearch spots={gpsNearbyData} currentSpotSlug={slug} />
         </section>
@@ -1077,13 +1087,21 @@ export default async function SpotDetailPage({ params }: PageProps) {
               {spot.region.prefecture}の他の釣りスポット
             </h2>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {samePrefSpots.map((ps) => (
-                <Link key={ps.id} href={`/spots/${ps.slug}`}>
+              {samePrefSpots.map((ps) => {
+                const psTypeLabel = SPOT_TYPE_LABELS[ps.spotType];
+                const psRichLabel = `${spot.region.prefecture}${ps.region.areaName}の${psTypeLabel}・${ps.name}の釣り場情報`;
+                return (
+                <Link
+                  key={ps.id}
+                  href={`/spots/${ps.slug}`}
+                  title={psRichLabel}
+                  aria-label={psRichLabel}
+                >
                   <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                     <CardContent className="p-4">
                       <h3 className="font-semibold group-hover:text-primary truncate">{ps.name}</h3>
                       <p className="mt-1 text-xs text-muted-foreground">
-                        {ps.region.areaName} / {SPOT_TYPE_LABELS[ps.spotType]}
+                        {ps.region.areaName} / {psTypeLabel}
                       </p>
                       <div className="mt-1 flex items-center gap-1 text-xs">
                         <Star className="size-3 fill-yellow-400 text-yellow-400" />
@@ -1097,7 +1115,8 @@ export default async function SpotDetailPage({ params }: PageProps) {
                     </CardContent>
                   </Card>
                 </Link>
-              ))}
+                );
+              })}
             </div>
             {pref && (
               <div className="mt-3 text-right">

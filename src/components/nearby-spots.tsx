@@ -100,6 +100,13 @@ export function NearbySpots({ allSpots }: { allSpots: LightSpot[] }) {
 
   if (spotsWithDistance.length === 0) return null;
 
+  // 最も近いスポットのエリア名を見出しに活用
+  const nearestArea = spotsWithDistance[0]?.region.areaName;
+  const nearestPref = spotsWithDistance[0]?.region.prefecture;
+  const headingText = nearestArea
+    ? `${nearestPref}${nearestArea}周辺の釣り場`
+    : "現在地周辺の釣り場";
+
   return (
     <div>
       <div className="mb-4 flex items-center justify-between gap-2">
@@ -108,7 +115,7 @@ export function NearbySpots({ allSpots }: { allSpots: LightSpot[] }) {
             <Navigation className="size-4 text-sky-600" />
           </div>
           <div>
-            <h2 className="text-base font-bold sm:text-lg">近くの釣りスポット</h2>
+            <h2 className="text-base font-bold sm:text-lg">{headingText}</h2>
             <p className="text-xs text-muted-foreground">
               現在地から近い順に表示
             </p>
@@ -137,35 +144,47 @@ export function NearbySpots({ allSpots }: { allSpots: LightSpot[] }) {
       </div>
 
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {spotsWithDistance.map((spot) => (
-          <Link key={spot.id} href={`/spots/${spot.slug}`}>
-            <Card className="group h-full gap-0 overflow-hidden py-0 transition-shadow hover:shadow-md">
-              <CardContent className="flex flex-col gap-2 p-3 sm:p-4">
-                <div className="flex items-start justify-between gap-2">
-                  <h3 className="truncate text-sm font-semibold group-hover:text-primary sm:text-base">
-                    {spot.name}
-                  </h3>
-                  <div className="flex shrink-0 items-center gap-1 text-sm">
-                    <Star className="size-3.5 fill-amber-400 text-amber-400" />
-                    <span className="font-medium">{spot.rating}</span>
+        {spotsWithDistance.map((spot) => {
+          const spotTypeLabel = SPOT_TYPE_LABELS[spot.spotType];
+          const richLabel = `${spot.region.prefecture}${spot.region.areaName}の${spotTypeLabel}・${spot.name}の釣り場情報`;
+          return (
+            <Link
+              key={spot.id}
+              href={`/spots/${spot.slug}`}
+              title={richLabel}
+              aria-label={richLabel}
+            >
+              <Card className="group h-full gap-0 overflow-hidden py-0 transition-shadow hover:shadow-md">
+                <CardContent className="flex flex-col gap-2 p-3 sm:p-4">
+                  <div className="flex items-start justify-between gap-2">
+                    <h3 className="truncate text-sm font-semibold group-hover:text-primary sm:text-base">
+                      {spot.name}
+                      <span className="ml-1 text-xs font-normal text-muted-foreground">
+                        ({spotTypeLabel})
+                      </span>
+                    </h3>
+                    <div className="flex shrink-0 items-center gap-1 text-sm">
+                      <Star className="size-3.5 fill-amber-400 text-amber-400" />
+                      <span className="font-medium">{spot.rating}</span>
+                    </div>
                   </div>
-                </div>
-                <p className="text-xs text-muted-foreground">
-                  {spot.region.prefecture} {spot.region.areaName}
-                </p>
-                <div className="flex items-center justify-between">
-                  <Badge variant="secondary" className="text-xs">
-                    {SPOT_TYPE_LABELS[spot.spotType]}
-                  </Badge>
-                  <span className="flex items-center gap-1 text-xs font-medium text-sky-600">
-                    <MapPin className="size-3" />
-                    {formatDistance(spot.distanceKm)}
-                  </span>
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
-        ))}
+                  <p className="text-xs text-muted-foreground">
+                    {spot.region.prefecture} {spot.region.areaName}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <Badge variant="secondary" className="text-xs">
+                      {spotTypeLabel}
+                    </Badge>
+                    <span className="flex items-center gap-1 text-xs font-medium text-sky-600">
+                      <MapPin className="size-3" />
+                      {formatDistance(spot.distanceKm)}
+                    </span>
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
