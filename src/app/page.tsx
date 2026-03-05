@@ -292,20 +292,20 @@ export default function Home() {
 
             {/* スポット数統計 */}
             <div className="mb-5 flex items-center justify-center gap-4 text-xs text-blue-200/90 sm:mb-7 sm:gap-6 sm:text-sm">
-              <div className="flex items-center gap-1.5">
+              <Link href="/spots" className="flex items-center gap-1.5 transition-colors hover:text-white">
                 <MapPin className="size-3.5 sm:size-4" />
                 <span>全国<strong className="font-bold text-white">{totalSpots.toLocaleString()}</strong>スポット</span>
-              </div>
+              </Link>
               <div className="h-3 w-px bg-white/30" />
-              <div className="flex items-center gap-1.5">
+              <Link href="/fish" className="flex items-center gap-1.5 transition-colors hover:text-white">
                 <Fish className="size-3.5 sm:size-4" />
                 <span><strong className="font-bold text-white">{totalFishSpecies}</strong>魚種</span>
-              </div>
+              </Link>
               <div className="h-3 w-px bg-white/30" />
-              <div className="flex items-center gap-1.5">
+              <Link href="/prefecture" className="flex items-center gap-1.5 transition-colors hover:text-white">
                 <Compass className="size-3.5 sm:size-4" />
                 <span><strong className="font-bold text-white">{totalPrefectures}</strong>都道府県</span>
-              </div>
+              </Link>
             </div>
 
             {/* 検索バー */}

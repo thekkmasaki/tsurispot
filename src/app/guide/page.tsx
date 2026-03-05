@@ -24,6 +24,8 @@ import {
   Clock,
   BookOpen,
   Sparkles,
+  ChefHat,
+  HelpCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -202,11 +204,27 @@ const detailGuides: GuideItem[] = [
     category: "scene",
   },
   {
+    href: "/guide/fish-recipes",
+    title: "釣った魚の簡単レシピガイド",
+    description:
+      "アジ・イワシ・サバ・カサゴ・メバル・キス・ハゼ・シーバスの料理法。全24レシピで初心者でも美味しく食べられる。",
+    icon: ChefHat,
+    category: "scene",
+  },
+  {
     href: "/guide/tide",
     title: "潮汐の読み方ガイド",
     description:
       "大潮・小潮の違い、潮見表の読み方、釣れる潮のタイミング、朝マズメ・夕マズメの重要性。",
     icon: Clock,
+    category: "beginner",
+  },
+  {
+    href: "/guide/troubleshooting",
+    title: "トラブルシューティングガイド",
+    description:
+      "アタリがこない、糸絡み、根がかり、魚のバラシ、天候急変、ケガの応急処置まで現場で困ったときの対処法を網羅。",
+    icon: HelpCircle,
     category: "beginner",
   },
 ];

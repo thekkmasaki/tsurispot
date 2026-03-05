@@ -650,6 +650,12 @@ export default function FishHandlingGuidePage() {
                   </Link>
                   <span className="text-muted-foreground"> - 小型魚の氷締めの基本</span>
                 </li>
+                <li>
+                  <Link href="/guide/fish-recipes" className="text-primary hover:underline">
+                    釣った魚の簡単レシピガイド
+                  </Link>
+                  <span className="text-muted-foreground"> - 持ち帰った魚を美味しく食べる24レシピ</span>
+                </li>
               </ul>
             </CardContent>
           </Card>
