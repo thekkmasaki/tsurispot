@@ -618,6 +618,13 @@ export const kansaiDetailSpots: FishingSpot[] = [
     tackleRecommendations: [],
     gearGuides: [gearNage],
     safetyLevel: "safe", safetyNotes: ["遠浅で安全", "夏季は海水浴客との共存に注意", "投げ釣りは周囲に配慮"],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      otherRules: ["夏季（7〜8月）は海水浴エリアでの釣り禁止", "海水浴シーズンは早朝・夕方のみ釣り可能", "周囲の遊泳者に十分配慮すること"],
+    },
   },
   {
     id: "s867", name: "姫路港", slug: "himeji-port",
@@ -992,6 +999,13 @@ export const kansaiDetailSpots: FishingSpot[] = [
     tackleRecommendations: [],
     gearGuides: [gearUki, gearEging, gearSabiki, gearJig, gearRock],
     safetyLevel: "caution", safetyNotes: ["黒潮の影響で潮流が速い", "磯場へは渡船利用推奨", "天候急変に注意"],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      otherRules: ["磯場への渡船利用時はライフジャケット必須", "黒潮の影響で潮流が非常に速いため安全に十分注意"],
+    },
   },
   {
     id: "s882", name: "太地港", slug: "taiji-port",
@@ -1047,6 +1061,14 @@ export const kansaiDetailSpots: FishingSpot[] = [
     tackleRecommendations: [],
     gearGuides: [gearSabiki, gearEging, gearLure, gearUki],
     safetyLevel: "safe", safetyNotes: ["港内は足場良好", "マグロ漁船の出入りに注意", "勝浦温泉が徒歩圏内"],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      restrictedAreas: ["マグロ水揚げ場周辺は関係者以外立入禁止"],
+      otherRules: ["マグロ漁船の出入りが多いため航路に注意", "早朝は水揚げ作業中のため港の一部が通行止めになることがある"],
+    },
   },
 
   // =========================================
@@ -1078,6 +1100,14 @@ export const kansaiDetailSpots: FishingSpot[] = [
     tackleRecommendations: [],
     gearGuides: [gearSabiki, gearUki, gearNage, gearEging],
     safetyLevel: "safe", safetyNotes: ["港内は穏やかで安全", "舟屋の景観を損なわないよう配慮", "観光地のためマナー厳守"],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      restrictedAreas: ["舟屋の前面は釣り禁止（重要伝統的建造物群保存地区）"],
+      otherRules: ["舟屋の景観を損なわないよう配慮すること", "コマセ使用後は清掃必須", "観光客の通行を妨げないこと"],
+    },
   },
   {
     id: "s885", name: "天橋立", slug: "amanohashidate-fishing",
@@ -1127,6 +1157,14 @@ export const kansaiDetailSpots: FishingSpot[] = [
     tackleRecommendations: [],
     gearGuides: [gearSabiki, gearNage, gearEging],
     safetyLevel: "safe", safetyNotes: ["フェンス付きで安全", "トイレ・駐車場完備", "開園時間を事前に確認すること"],
+    rules: {
+      castingAllowed: false,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      maxRods: 3,
+      otherRules: ["投げ釣り禁止", "竿は1人3本まで", "開園時間内のみ利用可能（冬季は短縮営業の場合あり）"],
+    },
   },
   {
     id: "s887", name: "宮津港", slug: "miyazu-port",
