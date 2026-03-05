@@ -25,6 +25,11 @@ export const metadata: Metadata = {
     type: "article",
     url: "https://tsurispot.com/guide/budget",
     siteName: "ツリスポ",
+    images: [{
+      url: `/api/og?title=${encodeURIComponent("釣りの費用ガイド")}&emoji=${encodeURIComponent("💰")}`,
+      width: 1200,
+      height: 630,
+    }],
   },
   alternates: {
     canonical: "https://tsurispot.com/guide/budget",

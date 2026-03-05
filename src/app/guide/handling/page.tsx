@@ -14,6 +14,11 @@ export const metadata: Metadata = {
     type: "article",
     url: "https://tsurispot.com/guide/handling",
     siteName: "ツリスポ",
+    images: [{
+      url: `/api/og?title=${encodeURIComponent("魚の締め方・持ち帰りガイド")}&emoji=${encodeURIComponent("🐠")}`,
+      width: 1200,
+      height: 630,
+    }],
   },
   alternates: {
     canonical: "https://tsurispot.com/guide/handling",
