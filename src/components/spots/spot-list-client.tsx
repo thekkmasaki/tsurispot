@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useDeferredValue, useTransition } from "react";
 import { Search, X, SlidersHorizontal, ChevronDown, ChevronLeft, ChevronRight, MapPin, Navigation, Loader2 } from "lucide-react";
 import { SpotCard } from "@/components/spots/spot-card";
 import { Button } from "@/components/ui/button";
@@ -77,6 +77,7 @@ const FACILITY_OPTIONS: { key: FacilityKey; label: string }[] = [
 
 export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpot[]; initialQuery?: string }) {
   const [searchText, setSearchText] = useState(initialQuery);
+  const deferredSearchText = useDeferredValue(searchText);
   const [selectedPrefecture, setSelectedPrefecture] = useState<string>("");
   const [selectedArea, setSelectedArea] = useState<string>("");
   const [selectedType, setSelectedType] = useState<FishingSpot["spotType"] | "">("");
@@ -85,6 +86,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
   const [selectedFree, setSelectedFree] = useState<"" | "free" | "paid">("");
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+  const [isPending, startTransition] = useTransition();
 
   // Geolocation state
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
@@ -146,9 +148,9 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
 
   const filteredSpots = useMemo(() => {
     const filtered = spots.filter((spot) => {
-      if (searchText) {
+      if (deferredSearchText) {
         if (!fuzzyMatch(
-          searchText,
+          deferredSearchText,
           spot.name,
           spot.region.prefecture,
           spot.region.areaName,
@@ -173,7 +175,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
     }
 
     return filtered;
-  }, [spots, searchText, selectedPrefecture, selectedArea, selectedType, selectedDifficulty, selectedFacilities, selectedFree, sortByDistance, distanceMap]);
+  }, [spots, deferredSearchText, selectedPrefecture, selectedArea, selectedType, selectedDifficulty, selectedFacilities, selectedFree, sortByDistance, distanceMap]);
 
   const totalPages = Math.ceil(filteredSpots.length / ITEMS_PER_PAGE);
   const paginatedSpots = filteredSpots.slice(
@@ -184,18 +186,22 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
   // Reset page when filters change
   const clearFilters = () => {
     setSearchText("");
-    setSelectedPrefecture("");
-    setSelectedArea("");
-    setSelectedType("");
-    setSelectedDifficulty("");
-    setSelectedFacilities([]);
-    setSelectedFree("");
-    setCurrentPage(1);
+    startTransition(() => {
+      setSelectedPrefecture("");
+      setSelectedArea("");
+      setSelectedType("");
+      setSelectedDifficulty("");
+      setSelectedFacilities([]);
+      setSelectedFree("");
+      setCurrentPage(1);
+    });
   };
 
   const handleFilterChange = <T,>(setter: (v: T) => void, value: T) => {
-    setter(value);
-    setCurrentPage(1);
+    startTransition(() => {
+      setter(value);
+      setCurrentPage(1);
+    });
   };
 
   return (
@@ -206,7 +212,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
         <Input
           placeholder="スポット名・地域名で検索..."
           value={searchText}
-          onChange={(e) => { setSearchText(e.target.value); setCurrentPage(1); }}
+          onChange={(e) => { setSearchText(e.target.value); startTransition(() => { setCurrentPage(1); }); }}
           className="h-12 pl-11 text-base sm:h-10 sm:pl-10 sm:text-sm"
         />
         {searchText && (
@@ -289,8 +295,11 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
                 size="sm"
                 onClick={() => {
                   const newPref = selectedPrefecture === pref ? "" : pref;
-                  handleFilterChange(setSelectedPrefecture, newPref);
-                  setSelectedArea("");
+                  startTransition(() => {
+                    setSelectedPrefecture(newPref);
+                    setSelectedArea("");
+                    setCurrentPage(1);
+                  });
                 }}
                 className="min-h-[40px] text-xs sm:text-sm"
               >
@@ -381,9 +390,11 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
                     variant={active ? "default" : "outline"}
                     size="sm"
                     onClick={() => {
-                      const next = active ? selectedFacilities.filter((f) => f !== key) : [...selectedFacilities, key];
-                      setSelectedFacilities(next);
-                      setCurrentPage(1);
+                      startTransition(() => {
+                        const next = active ? selectedFacilities.filter((f) => f !== key) : [...selectedFacilities, key];
+                        setSelectedFacilities(next);
+                        setCurrentPage(1);
+                      });
                     }}
                     className="min-h-[40px] text-xs sm:text-sm"
                   >
@@ -430,7 +441,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
       {/* Results grid */}
       {paginatedSpots.length > 0 ? (
         <>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+          <div className={cn("grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 transition-opacity duration-200", isPending && "opacity-50")}>
             {paginatedSpots.map((spot) => (
               <SpotCard
                 key={spot.id}

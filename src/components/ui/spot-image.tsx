@@ -121,10 +121,13 @@ export function SpotImage({ src, alt, spotType = "port", className = "", height 
   // alt属性を説明的に（SEO向上）
   const descriptiveAlt = (alt.includes("釣り場") || alt.includes("釣りスポット")) ? alt : `${alt}の釣り場`;
 
+  // height propがデフォルト値の場合のみaspect-ratioを付与（明示的にheightが渡されていれば従来通り）
+  const aspectStyle = height === "h-32" ? { aspectRatio: "16/10" } : undefined;
+
   // 実際の写真がある場合はそれを表示
   if (src && !error) {
     return (
-      <div className={`relative ${height} overflow-hidden ${className}`}>
+      <div className={`relative ${height} overflow-hidden ${className}`} style={aspectStyle}>
         <Image
           src={src}
           alt={descriptiveAlt}
@@ -146,6 +149,7 @@ export function SpotImage({ src, alt, spotType = "port", className = "", height 
   return (
     <div
       className={`relative ${height} overflow-hidden bg-gradient-to-br ${style.gradient} ${className}`}
+      style={aspectStyle}
     >
       {/* 装飾パターン - 背景に散らばるアイコン */}
       <div className="absolute inset-0 overflow-hidden">
@@ -197,16 +201,19 @@ export function FishImage({ src, alt, category = "sea", className = "", height =
   const [error, setError] = useState(false);
   const gradient = FISH_GRADIENTS[category] || FISH_GRADIENTS.sea;
 
+  // height propがデフォルト値の場合のみaspect-ratioを付与
+  const aspectStyle = height === "h-24 sm:h-28" ? { aspectRatio: "16/10" } : undefined;
+
   if (!src || error) {
     return (
-      <div className={`flex ${height} items-center justify-center bg-gradient-to-br ${gradient} ${className}`}>
+      <div className={`flex ${height} items-center justify-center bg-gradient-to-br ${gradient} ${className}`} style={aspectStyle}>
         <Fish className="size-10 text-sky-300" />
       </div>
     );
   }
 
   return (
-    <div className={`relative ${height} overflow-hidden ${className}`}>
+    <div className={`relative ${height} overflow-hidden ${className}`} style={aspectStyle}>
       <Image
         src={src}
         alt={alt}

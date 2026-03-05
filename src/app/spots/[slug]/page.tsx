@@ -732,8 +732,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
       {/* タブレイアウト */}
       <SpotDetailTabs
         overviewTab={<>
+          <h2 className="sr-only">{spot.name}の基本情報・設備</h2>
           <section>
-            <h2 className="mb-4 text-lg font-bold">基本情報</h2>
+            <h3 className="mb-4 text-lg font-bold">基本情報</h3>
             <Card className="py-4"><CardContent className="px-4">
               <dl className="space-y-3 text-sm">
                 <div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">住所</dt><dd><span className="font-medium">{spot.address}</span><a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(spot.name)}`} target="_blank" rel="noopener noreferrer" className="ml-2 inline-flex items-center gap-1 text-xs text-blue-600 hover:underline"><MapPin className="size-3" />地図</a></dd></div>
@@ -748,7 +749,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           {/* 管理・問い合わせ情報 */}
           {spot.managementInfo && (
             <section className="mt-6">
-              <h2 className="mb-4 text-lg font-bold">管理・問い合わせ</h2>
+              <h3 className="mb-4 text-lg font-bold">管理・問い合わせ</h3>
               <Card className="py-4"><CardContent className="px-4">
                 <dl className="space-y-3 text-sm">
                   <div className="flex gap-4">
@@ -808,7 +809,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
             </section>
           )}
           <section>
-            <h2 className="mb-3 text-lg font-bold">設備</h2>
+            <h3 className="mb-3 text-lg font-bold">設備</h3>
             <div className="flex flex-wrap gap-2">
               {spot.hasParking && <Badge variant="outline" className="text-xs"><Car className="size-3.5 mr-1" />駐車場{spot.parkingDetail ? `（${spot.parkingDetail}）` : ""}</Badge>}
               {spot.hasToilet && <Badge variant="outline" className="text-xs"><Toilet className="size-3.5 mr-1" />トイレ</Badge>}
@@ -820,33 +821,33 @@ export default async function SpotDetailPage({ params }: PageProps) {
           {/* 釣りルール: 個別データがあるスポットのみ表示（推測ルールは誤情報の原因になるため非表示） */}
           {spot.rules && (
           <section>
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold"><Shield className="size-5" />釣りルール・禁止事項</h2>
+            <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><Shield className="size-5" />釣りルール・禁止事項</h3>
             <SpotRulesCard rules={spot.rules} spotType={spot.spotType} spotName={spot.name} />
           </section>
           )}
           {spot.spotType === "port" && <PortMannerSection />}
           <section>
-            <h2 className="mb-3 text-lg font-bold">混雑予想</h2>
+            <h3 className="mb-3 text-lg font-bold">混雑予想</h3>
             <CrowdPredictionCard rating={spot.rating} isFree={spot.isFree} difficulty={spot.difficulty} prefecture={spot.region.prefecture} hasParking={spot.hasParking} reviewCount={spot.reviewCount} />
           </section>
           {/* ファミリー向け情報: トイレ・駐車場あり＋初心者向けの場合のみ表示 */}
           {spot.hasToilet && spot.hasParking && spot.difficulty === "beginner" && (
           <section>
-            <h2 className="mb-3 text-lg font-bold">ファミリー向け情報</h2>
+            <h3 className="mb-3 text-lg font-bold">ファミリー向け情報</h3>
             <FamilyInfoCard familyInfo={spot.familyInfo} spotType={spot.spotType} hasToilet={spot.hasToilet} hasParking={spot.hasParking} difficulty={spot.difficulty} />
           </section>
           )}
           <section>
-            <h2 className="mb-3 text-lg font-bold">天気・潮汐情報</h2>
+            <h3 className="mb-3 text-lg font-bold">天気・潮汐情報</h3>
             <SpotWeatherTide lat={spot.latitude} lng={spot.longitude} spotName={spot.name} />
           </section>
           <section>
-            <h2 className="mb-3 text-lg font-bold">ボウズ確率</h2>
+            <h3 className="mb-3 text-lg font-bold">ボウズ確率</h3>
             <SpotBouzuCard spotType={spot.spotType} difficulty={spot.difficulty} rating={spot.rating} reviewCount={spot.reviewCount} prefecture={spot.region.prefecture} areaName={spot.region.areaName} isFree={spot.isFree} hasRentalRod={spot.hasRentalRod} catchableFishCount={spot.catchableFish.length} catchableFishDetails={spot.catchableFish.map((cf) => ({ fishSlug: cf.fish.slug, fishName: cf.fish.name, method: cf.method, catchDifficulty: cf.catchDifficulty, monthStart: cf.monthStart, monthEnd: cf.monthEnd, peakSeason: cf.peakSeason }))} />
           </section>
           {spot.youtubeLinks && spot.youtubeLinks.length > 0 && (
             <section>
-              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold"><Play className="size-5" />参考動画</h2>
+              <h3 className="mb-4 flex items-center gap-2 text-lg font-bold"><Play className="size-5" />参考動画</h3>
               <p className="mb-4 text-sm text-muted-foreground">このスポットでの釣りの様子がわかるYouTube動画です。</p>
               <YouTubeVideoList links={spot.youtubeLinks} />
             </section>
@@ -866,15 +867,16 @@ export default async function SpotDetailPage({ params }: PageProps) {
           })()}
         </>}
         fishTab={<>
+          <h2 className="sr-only">{spot.name}の釣り情報</h2>
           <section>
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold"><Fish className="size-5" />{spot.name}で釣れる魚の季節カレンダー</h2>
+            <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><Fish className="size-5" />{spot.name}で釣れる魚の季節カレンダー</h3>
             {spot.catchableFish.length > 0 ? (
               <Card className="py-3 sm:py-4"><CardContent className="px-3 sm:px-4 overflow-x-auto scrollbar-hide"><div className="min-w-[480px]"><SeasonCalendar catchableFish={spot.catchableFish} /></div></CardContent></Card>
             ) : (<p className="text-sm text-muted-foreground">釣れる魚の情報はまだ登録されていません。</p>)}
           </section>
           {spot.catchableFish.length > 0 && (
             <section>
-              <h2 className="mb-3 text-lg font-bold">魚種別の釣り方</h2>
+              <h3 className="mb-3 text-lg font-bold">魚種別の釣り方</h3>
               <div className="space-y-2">
                 {spot.catchableFish.map((cf) => {
                   const methodExplanation = explainMethod(cf.method);
@@ -922,7 +924,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           })()}
           {(spot.mazumeInfo || spot.tideAdvice) && (
             <section>
-              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold"><Compass className="size-5" />マヅメ・潮汐ガイド</h2>
+              <h3 className="mb-4 flex items-center gap-2 text-lg font-bold"><Compass className="size-5" />マヅメ・潮汐ガイド</h3>
               <TideMazumeInfo tideAdvice={spot.tideAdvice} mazumeInfo={spot.mazumeInfo} />
             </section>
           )}
@@ -930,41 +932,43 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <section><FishingReportSummary spotSlug={slug} fishList={spot.catchableFish.map((cf) => ({ slug: cf.fish.slug, name: cf.fish.name }))} /></section>
           )}
           <section>
-            <h2 className="mb-3 flex items-center gap-2 text-lg font-bold"><MessageSquare className="size-5" />みんなの釣果報告</h2>
+            <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><MessageSquare className="size-5" />みんなの釣果報告</h3>
             <CatchReportList reports={getCatchReportsBySpot(slug)} />
             <CatchReportForm spotSlug={slug} spotName={spot.name} />
           </section>
         </>}
         gearTab={<>
+          <h2 className="sr-only">おすすめの仕掛け・装備</h2>
           {spot.tackleRecommendations.filter((t) => t.amazonUrl !== "#" && t.rakutenUrl !== "#").length > 0 && (
             <section>
-              <h2 className="mb-4 text-lg font-bold">{spot.name}で使える仕掛け・タックル</h2>
+              <h3 className="mb-4 text-lg font-bold">{spot.name}で使える仕掛け・タックル</h3>
               <div className="space-y-4">{spot.tackleRecommendations.filter((t) => t.amazonUrl !== "#" && t.rakutenUrl !== "#").map((tackle) => (<TackleCard key={tackle.id} tackle={tackle} />))}</div>
               <p className="mt-3 text-xs text-muted-foreground">※ 上記リンクはアフィリエイトリンクを含みます。購入による追加費用は発生しません。</p>
             </section>
           )}
           {spot.gearGuides && spot.gearGuides.length > 0 && (
             <section>
-              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold"><Wrench className="size-5" />初心者向け装備ガイド</h2>
+              <h3 className="mb-4 flex items-center gap-2 text-lg font-bold"><Wrench className="size-5" />初心者向け装備ガイド</h3>
               <p className="mb-4 text-sm text-muted-foreground">このスポットでの釣りに必要な道具をわかりやすくまとめました。</p>
               <GearGuideList guides={spot.gearGuides} />
             </section>
           )}
           {spot.catchableFish.length > 0 && (
             <section>
-              <h2 className="mb-4 flex items-center gap-2 text-lg font-bold"><Wrench className="size-5" />{spot.gearGuides && spot.gearGuides.length > 0 ? "おすすめ装備" : "この釣り場でおすすめの装備"}</h2>
+              <h3 className="mb-4 flex items-center gap-2 text-lg font-bold"><Wrench className="size-5" />{spot.gearGuides && spot.gearGuides.length > 0 ? "おすすめ装備" : "この釣り場でおすすめの装備"}</h3>
               <p className="mb-2 text-sm text-muted-foreground">このスポットの釣り方に合った装備をピックアップしました。</p>
               <SpotAffiliateRecommend methods={spot.catchableFish.map((cf) => cf.method)} isNightFishing={isNightFishing} />
             </section>
           )}
           <section>
-            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold"><ShoppingBag className="size-5" />持ち物チェックリスト</h2>
+            <h3 className="mb-4 flex items-center gap-2 text-lg font-bold"><ShoppingBag className="size-5" />持ち物チェックリスト</h3>
             <PackingChecklist spotType={spot.spotType} hasConvenienceStore={spot.hasConvenienceStore} hasToilet={spot.hasToilet} hasFishingShop={spot.hasFishingShop} hasRentalRod={spot.hasRentalRod} difficulty={spot.difficulty} safetyLevel={spot.safetyLevel} isNightFishing={isNightFishing} />
           </section>
         </>}
         accessTab={<>
+          <h2 className="sr-only">アクセス・現地情報</h2>
           <section>
-            <h2 className="mb-4 text-lg font-bold">アクセス情報</h2>
+            <h3 className="mb-4 text-lg font-bold">アクセス情報</h3>
             <Card className="py-4">
               <CardHeader className="px-4 pb-0 pt-0"><CardTitle className="text-base"><MapPin className="mr-1 inline size-4" />所在地</CardTitle></CardHeader>
               <CardContent className="space-y-4 px-4">
@@ -1001,12 +1005,12 @@ export default async function SpotDetailPage({ params }: PageProps) {
             </Card>
           </section>
           <section>
-            <h2 className="mb-4 text-lg font-bold">現地の様子（ストリートビュー）</h2>
+            <h3 className="mb-4 text-lg font-bold">現地の様子（ストリートビュー）</h3>
             <StreetViewSection latitude={spot.latitude} longitude={spot.longitude} spotName={spot.name} address={spot.address} />
           </section>
           {nearbyShops.length > 0 && (
             <section>
-              <h2 className="mb-3 text-lg font-bold">近くの釣具店</h2>
+              <h3 className="mb-3 text-lg font-bold">近くの釣具店</h3>
               <div className="grid gap-3 sm:grid-cols-2">
                 {nearbyShops.map((shop) => (
                   <Link key={shop.id} href={`/shops/${shop.slug}`}>
@@ -1030,13 +1034,16 @@ export default async function SpotDetailPage({ params }: PageProps) {
       {/* 広告 */}
       <InArticleAd className="mt-6" />
 
+      {/* 関連スポット・記事 */}
+      <h2 className="mt-8 text-xl font-bold sm:mt-12 sm:text-2xl">関連スポット・記事</h2>
+
       {/* この近くの釣り場 */}
       {nearbySpots.length > 0 && (
-        <section id="nearby-spots" className="mt-8 sm:mt-12">
-          <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+        <section id="nearby-spots" className="mt-6 sm:mt-8">
+          <h3 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
             <MapPin className="size-5" />
             {spot.name}周辺の釣りスポット
-          </h2>
+          </h3>
           <div className="flex gap-3 overflow-x-auto pb-2">
             {nearbySpots.map((nearSpot) => {
               const nearSpotTypeLabel = SPOT_TYPE_LABELS[nearSpot.spotType];
@@ -1081,11 +1088,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
         if (samePrefSpots.length === 0) return null;
         const pref = getPrefectureByName(spot.region.prefecture);
         return (
-          <section className="mt-8 sm:mt-12">
-            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+          <section className="mt-6 sm:mt-8">
+            <h3 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
               <MapPin className="size-5" />
               {spot.region.prefecture}の他の釣りスポット
-            </h2>
+            </h3>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {samePrefSpots.map((ps) => {
                 const psTypeLabel = SPOT_TYPE_LABELS[ps.spotType];
@@ -1135,11 +1142,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
         const sameFishSpots = getSpotsByFish(fishSlugs, spot.slug, 5);
         if (sameFishSpots.length === 0) return null;
         return (
-          <section className="mt-8 sm:mt-12">
-            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+          <section className="mt-6 sm:mt-8">
+            <h3 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
               <Fish className="size-5" />
               同じ魚が釣れるスポット
-            </h2>
+            </h3>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {sameFishSpots.map((ps) => {
                 const commonFish = ps.catchableFish
@@ -1183,7 +1190,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
         });
         return (
           <section className="mt-6 sm:mt-8">
-            <h2 className="mb-3 text-base font-bold sm:mb-4 sm:text-lg">{spot.name}で狙える魚種と釣り方</h2>
+            <h3 className="mb-3 text-base font-bold sm:mb-4 sm:text-lg">{spot.name}で狙える魚種と釣り方</h3>
             <div className="flex flex-wrap gap-2">
               {uniqueCf.map((cf) => (
                 <Link key={cf.fish.id} href={`/fish/${cf.fish.slug}`}>
@@ -1245,11 +1252,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
         });
         if (uniqueGuides.length === 0) return null;
         return (
-          <section className="mt-8 sm:mt-12">
-            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+          <section className="mt-6 sm:mt-8">
+            <h3 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
               <BookOpen className="size-5" />
               おすすめ釣り方ガイド
-            </h2>
+            </h3>
             <p className="mb-3 text-xs text-muted-foreground sm:text-sm">
               {spot.name}で使える釣り方を詳しく解説しています。
             </p>
@@ -1278,11 +1285,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
         );
         if (matchedAreaGuides.length === 0) return null;
         return (
-          <section className="mt-8 sm:mt-12">
-            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+          <section className="mt-6 sm:mt-8">
+            <h3 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
               <Compass className="size-5" />
               {spot.region.prefecture}の釣りエリアガイド
-            </h2>
+            </h3>
             <div className="grid gap-3 sm:grid-cols-2">
               {matchedAreaGuides.slice(0, 4).map((guide) => (
                 <Link key={guide.slug} href={`/area-guide/${guide.slug}`}>
@@ -1318,11 +1325,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
         );
         if (matchedSeasonalGuides.length === 0) return null;
         return (
-          <section className="mt-8 sm:mt-12">
-            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+          <section className="mt-6 sm:mt-8">
+            <h3 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
               <Fish className="size-5" />
               関連する釣り方ガイド
-            </h2>
+            </h3>
             <div className="flex flex-wrap gap-2">
               {matchedSeasonalGuides.slice(0, 6).map((guide) => (
                 <Link key={guide.slug} href={`/seasonal/${guide.slug}`}>
@@ -1340,11 +1347,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
       })()}
 
       {/* よくある質問（FAQ） */}
-      <section className="mt-8 sm:mt-12">
-        <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
+      <section className="mt-6 sm:mt-8">
+        <h3 className="mb-4 flex items-center gap-2 text-lg font-bold">
           <HelpCircle className="size-5 text-primary" />
           {spot.name}のよくある質問
-        </h2>
+        </h3>
         <div className="space-y-3">
           {faqJsonLd.mainEntity.slice(0, 6).map((q: { name: string; acceptedAnswer: { text: string } }, i: number) => (
             <Card key={i} className="gap-0 py-0">
@@ -1366,11 +1373,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
         const pref = getPrefectureByName(spot.region.prefecture);
         if (!pref) return null;
         return (
-          <section className="mt-8 sm:mt-12">
-            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+          <section className="mt-6 sm:mt-8">
+            <h3 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
               <BookOpen className="size-5" />
               {spot.region.prefecture}の釣り情報
-            </h2>
+            </h3>
             <div className="grid gap-3 sm:grid-cols-2">
               <Link href={`/prefecture/${pref.slug}`}>
                 <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
@@ -1423,11 +1430,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
         );
         if (matchedMethods.length === 0) return null;
         return (
-          <section className="mt-8 sm:mt-12">
-            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
+          <section className="mt-6 sm:mt-8">
+            <h3 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
               <Compass className="size-5" />
               {regionGroup.name}の釣り方ガイド
-            </h2>
+            </h3>
             <div className="flex flex-wrap gap-2">
               {matchedMethods.slice(0, 6).map((fm) => (
                 <Link key={fm.slug} href={`/fishing/${fm.slug}/area/${regionGroup.slug}`}>
@@ -1446,7 +1453,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
       {/* まとめ（GEO最適化：AI引用しやすい要約） */}
       <section className="mt-8 sm:mt-12 spot-description">
-        <h2 className="mb-3 text-base font-bold sm:text-lg">まとめ：{spot.name}の釣り情報</h2>
+        <h3 className="mb-3 text-base font-bold sm:text-lg">まとめ：{spot.name}の釣り情報</h3>
         <Card className="gap-0 py-0">
           <CardContent className="p-4">
             <p className="text-sm leading-relaxed text-muted-foreground">

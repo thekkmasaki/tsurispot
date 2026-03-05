@@ -37,7 +37,9 @@ const NearbySpots = dynamic(() => import("@/components/nearby-spots").then((m) =
 const LocationRecommendations = dynamic(() => import("@/components/location-recommendations").then((m) => m.LocationRecommendations));
 const LocationPromptBanner = dynamic(() => import("@/components/location-prompt-banner").then((m) => m.LocationPromptBanner));
 const SeasonalRecommend = dynamic(() => import("@/components/affiliate/seasonal-recommend").then((m) => m.SeasonalRecommend));
-const OnlineUsersBadge = dynamic(() => import("@/components/online-users-badge").then((m) => m.OnlineUsersBadge));
+const OnlineUsersBadge = dynamic(() => import("@/components/online-users-badge").then((m) => m.OnlineUsersBadge), {
+  loading: () => <div className="inline-flex h-7 w-28 animate-pulse rounded-full bg-white/10" />,
+});
 
 export const metadata: Metadata = {
   title: "ツリスポ｜近くの釣り場が見つかる｜全国3,300+の海釣り・川釣りスポット検索",
