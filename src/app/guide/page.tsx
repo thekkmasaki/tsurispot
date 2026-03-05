@@ -68,6 +68,14 @@ const detailGuides: GuideItem[] = [
     category: "beginner",
   },
   {
+    href: "/guide/beginner-setup",
+    title: "初心者のための仕掛け準備ガイド",
+    description:
+      "竿の組み立て、リールの取り付け、糸の結び方、仕掛けのセット、エサの付け方まで。買ってから実釣まで全部わかる。",
+    icon: Package,
+    category: "beginner",
+  },
+  {
     href: "/guide/knots",
     title: "釣り糸の結び方",
     description:

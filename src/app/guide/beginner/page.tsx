@@ -1343,7 +1343,20 @@ export default function BeginnerGuidePage() {
           <h2 className="mb-4 text-center text-xl font-bold">
             次に読むガイド
           </h2>
-          <div className="grid gap-3 sm:grid-cols-3">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            <Link href="/guide/beginner-setup" className="group">
+              <Card className="h-full transition-colors group-hover:border-primary">
+                <CardContent className="pt-6">
+                  <Package className="mb-2 size-5 text-primary" />
+                  <p className="font-medium group-hover:text-primary">
+                    仕掛け準備ガイド
+                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    竿の組み立てから仕掛けセットまで全手順
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
             <Link href="/guide/sabiki" className="group">
               <Card className="h-full transition-colors group-hover:border-primary">
                 <CardContent className="pt-6">
@@ -1379,6 +1392,19 @@ export default function BeginnerGuidePage() {
                   </p>
                   <p className="mt-1 text-xs text-muted-foreground">
                     テトラの隙間で根魚を狙う穴釣り入門
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/guide/troubleshooting" className="group">
+              <Card className="h-full transition-colors group-hover:border-primary">
+                <CardContent className="pt-6">
+                  <HelpCircle className="mb-2 size-5 text-primary" />
+                  <p className="font-medium group-hover:text-primary">
+                    トラブルシューティング
+                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    困ったときの対処法を完全網羅
                   </p>
                 </CardContent>
               </Card>
