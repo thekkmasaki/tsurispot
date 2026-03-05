@@ -37,6 +37,11 @@ export const metadata: Metadata = {
     type: "article",
     url: "https://tsurispot.com/guide/casting",
     siteName: "ツリスポ",
+    images: [{
+      url: `/api/og?title=${encodeURIComponent("投げ方（キャスティング）の基本")}&emoji=${encodeURIComponent("🎯")}`,
+      width: 1200,
+      height: 630,
+    }],
   },
   alternates: {
     canonical: "https://tsurispot.com/guide/casting",
