@@ -278,6 +278,11 @@ export function SpotRulesCard({ rules, spotType, spotName }: SpotRulesCardProps)
             <p>遊漁券は不要です。無料で釣りを楽しめます。</p>
           </div>
         )}
+        {/* 現地確認の注意書き */}
+        <div className="mt-4 flex items-start gap-2 rounded-lg bg-amber-50 p-3 text-sm text-amber-800 dark:bg-amber-950 dark:text-amber-200">
+          <AlertTriangle className="mt-0.5 size-4 shrink-0" />
+          <p>釣り場のルールは変更されることがあります。釣行前に必ず現地の看板・管理事務所等で最新のルールをご確認ください。</p>
+        </div>
       </CardContent>
     </Card>
   );

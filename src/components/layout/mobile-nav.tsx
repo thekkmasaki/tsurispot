@@ -22,6 +22,7 @@ import {
   Home,
   FileText,
   Anchor,
+  Store,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { getFavorites } from "@/components/spots/favorite-button";
@@ -43,6 +44,7 @@ const moreNavItems = [
   { href: "/blog", label: "コラム", icon: FileText },
   { href: "/monthly", label: "月別ガイド", icon: Calendar },
   { href: "/guide", label: "釣りガイド", icon: GraduationCap },
+  { href: "/shops", label: "釣具店ガイド", icon: Store },
   { href: "/gear", label: "おすすめ道具", icon: Package },
   { href: "/bouzu-checker", label: "ボウズ確率", icon: Target },
   { href: "/quiz", label: "スタイル診断", icon: Sparkles },

@@ -626,7 +626,7 @@ export default async function PrefecturePage({ params }: PageProps) {
           </p>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {inSeasonFish.map((f) => (
-              <Link key={f.slug} href={`/fish/${f.slug}`}>
+              <Link key={f.slug} href={f.spotCount >= 3 ? `/prefecture/${pref.slug}/fish/${f.slug}` : `/fish/${f.slug}`}>
                 <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
                   <CardContent className="p-3">
                     <div className="flex items-center gap-2">
@@ -684,8 +684,12 @@ export default async function PrefecturePage({ params }: PageProps) {
                   <div className="flex flex-wrap gap-1">
                     {fishes.map((f) => {
                       const fishSlug = getFishSlugByName(f);
-                      return fishSlug ? (
-                        <Link key={f} href={`/fish/${fishSlug}`} title={`${f}の釣り情報を見る`}>
+                      const fishInPref = fishSlug ? catchableFish.find(cf => cf.slug === fishSlug) : null;
+                      const href = fishInPref && fishInPref.count >= 3
+                        ? `/prefecture/${pref.slug}/fish/${fishSlug}`
+                        : fishSlug ? `/fish/${fishSlug}` : null;
+                      return href ? (
+                        <Link key={f} href={href} title={fishInPref && fishInPref.count >= 3 ? `${pref.name}の${f}釣り情報` : `${f}の釣り情報を見る`}>
                           <Badge
                             variant="secondary"
                             className="cursor-pointer text-xs transition-colors hover:bg-primary hover:text-primary-foreground"

@@ -575,9 +575,24 @@ export default async function FishDetailPage({ params }: PageProps) {
       <InArticleAd className="mt-4" />
 
       {/* 釣れるスポット一覧（現在地ソート対応） */}
-      {fish.spots.length > 0 && (
-        <NearbySpotsSorter spots={fish.spots} fishName={fish.name} />
-      )}
+      {fish.spots.length > 0 && (() => {
+        // クライアントコンポーネントに渡すデータを軽量化（最大30件、不要フィールド除去）
+        const MAX_CLIENT_SPOTS = 30;
+        const lightSpots = fish.spots.slice(0, MAX_CLIENT_SPOTS).map(s => ({
+          id: s.id,
+          name: s.name,
+          slug: s.slug,
+          prefecture: s.region.prefecture,
+          areaName: s.region.areaName,
+          rating: s.rating,
+          catchRating: s.catchRating,
+          latitude: s.latitude,
+          longitude: s.longitude,
+        }));
+        return (
+          <NearbySpotsSorter spots={lightSpots} fishName={fish.name} totalCount={fish.spots.length} />
+        );
+      })()}
 
       {/* 都道府県別リンク */}
       {fish.spots.length > 0 && (() => {
@@ -610,7 +625,7 @@ export default async function FishDetailPage({ params }: PageProps) {
         ) : null;
       })()}
 
-      {/* この魚が釣れる都道府県ガイドへのリンク */}
+      {/* この魚が釣れる都道府県の釣りガイド */}
       {fish.spots.length > 0 && (() => {
         const prefGuideMap = new Map<string, { prefSlug: string; prefName: string; count: number }>();
         for (const spot of fish.spots) {
@@ -629,16 +644,16 @@ export default async function FishDetailPage({ params }: PageProps) {
               {fish.name}が釣れる都道府県の釣りガイド
             </h2>
             <p className="mb-3 text-xs text-muted-foreground sm:text-sm">
-              {fish.name}が釣れる各都道府県の釣り情報・おすすめスポットを見る
+              {fish.name}が釣れる各都道府県の詳しい釣り場情報・シーズン・釣り方を見る
             </p>
             <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
               {prefGuideList.slice(0, 12).map(p => (
-                <Link key={p.prefSlug} href={`/prefecture/${p.prefSlug}`}>
+                <Link key={p.prefSlug} href={`/prefecture/${p.prefSlug}/fish/${fish.slug}`}>
                   <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                     <CardContent className="flex items-center justify-between p-3">
                       <div className="flex items-center gap-2 min-w-0">
                         <MapPin className="size-4 shrink-0 text-blue-500" />
-                        <span className="text-sm font-medium group-hover:text-primary truncate">{p.prefName}</span>
+                        <span className="text-sm font-medium group-hover:text-primary truncate">{p.prefName}の{fish.name}釣り</span>
                       </div>
                       <Badge variant="secondary" className="shrink-0 text-xs">
                         {p.count}箇所

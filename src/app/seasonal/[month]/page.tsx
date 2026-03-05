@@ -21,20 +21,20 @@ import { fishSpecies } from "@/lib/data/fish";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ month: string }>;
 }
 
 export async function generateStaticParams() {
   return seasonalGuides.map((guide) => ({
-    slug: guide.slug,
+    month: guide.slug,
   }));
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const guide = seasonalGuides.find((g) => g.slug === slug);
+  const { month } = await params;
+  const guide = seasonalGuides.find((g) => g.slug === month);
   if (!guide) return { title: "ページが見つかりません" };
 
   const title = `${guide.season}の${guide.method}完全ガイド【2026年版】| ツリスポ`;
@@ -64,8 +64,8 @@ const SEASON_COLOR: Record<string, { bg: string; border: string; text: string; b
 };
 
 export default async function SeasonalGuidePage({ params }: PageProps) {
-  const { slug } = await params;
-  const guide = seasonalGuides.find((g) => g.slug === slug);
+  const { month } = await params;
+  const guide = seasonalGuides.find((g) => g.slug === month);
   if (!guide) notFound();
 
   const color = SEASON_COLOR[guide.season] ?? SEASON_COLOR["春"];

@@ -8,9 +8,12 @@ import {
   Globe,
   Star,
   ChevronLeft,
+  ChevronRight,
   CheckCircle,
   XCircle,
   Store,
+  Sparkles,
+  Mail,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -18,6 +21,7 @@ import { Separator } from "@/components/ui/separator";
 import { tackleShops, getShopBySlug } from "@/lib/data/shops";
 import { getSpotBySlug } from "@/lib/data/spots";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { LiveBaitStock } from "@/components/shops/live-bait-stock";
 
 type Params = Promise<{ slug: string }>;
 
@@ -37,6 +41,7 @@ export async function generateMetadata({
   return {
     title: `${shop.name} - 釣具店情報 | ツリスポ`,
     description: `${shop.name}（${shop.address}）の営業時間・エサ在庫・サービス情報。${shop.description}`,
+    ...(slug === "sample-premium" ? { robots: { index: false, follow: false } } : {}),
     openGraph: {
       title: `${shop.name} - 釣具店情報`,
       description: shop.description,
@@ -86,10 +91,14 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
             "ratingValue": shop.rating,
             "bestRating": 5,
             "worstRating": 1,
+            "reviewCount": 1,
           },
         }
       : {}),
   };
+
+  // サンプル店舗はJSON-LDを出力しない（偽データの構造化データ防止）
+  const shouldOutputJsonLd = slug !== "sample-premium";
 
   // BreadcrumbList JSON-LD
   const breadcrumbJsonLd = {
@@ -105,7 +114,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
       {
         "@type": "ListItem",
         "position": 2,
-        "name": "釣具店",
+        "name": "釣具店・エサ店ガイド",
         "item": "https://tsurispot.com/shops",
       },
       {
@@ -124,10 +133,12 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
-      />
+      {shouldOutputJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessJsonLd) }}
+        />
+      )}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
@@ -137,7 +148,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
       <Breadcrumb
         items={[
           { label: "ホーム", href: "/" },
-          { label: "釣具店", href: "/shops" },
+          { label: "釣具店・エサ店ガイド", href: "/shops" },
           { label: shop.name },
         ]}
       />
@@ -179,6 +190,21 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
 
       {/* Description */}
       <p className="text-base leading-relaxed mb-6">{shop.description}</p>
+
+      {/* プレミアム: 店主からのメッセージ */}
+      {shop.isPremium && shop.ownerMessage && (
+        <Card className="mb-6 border-amber-200 bg-gradient-to-br from-amber-50 to-transparent dark:from-amber-950/20">
+          <CardHeader className="pb-2">
+            <CardTitle className="text-base flex items-center gap-2">
+              <span className="text-lg">💬</span>
+              店主からのメッセージ
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm leading-relaxed">{shop.ownerMessage}</p>
+          </CardContent>
+        </Card>
+      )}
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Basic Info Card */}
@@ -251,40 +277,44 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
           </CardContent>
         </Card>
 
-        {/* Bait Stock Card */}
-        {shop.baitStock && shop.baitStock.length > 0 && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="text-lg">エサ在庫状況</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                {shop.baitStock.map((bait) => (
-                  <div
-                    key={bait.name}
-                    className="flex items-center justify-between text-sm"
-                  >
-                    <div className="flex items-center gap-2">
-                      {bait.available ? (
-                        <CheckCircle className="w-4 h-4 text-green-500" />
-                      ) : (
-                        <XCircle className="w-4 h-4 text-red-400" />
-                      )}
-                      <span>{bait.name}</span>
+        {/* Bait Stock Card — プレミアムはリアルタイム、それ以外は静的 */}
+        {shop.isPremium && shop.baitStock && shop.baitStock.length > 0 ? (
+          <LiveBaitStock shopSlug={shop.slug} fallbackStock={shop.baitStock} />
+        ) : (
+          shop.baitStock && shop.baitStock.length > 0 && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">エサ在庫状況</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2">
+                  {shop.baitStock.map((bait) => (
+                    <div
+                      key={bait.name}
+                      className="flex items-center justify-between text-sm"
+                    >
+                      <div className="flex items-center gap-2">
+                        {bait.available ? (
+                          <CheckCircle className="w-4 h-4 text-green-500" />
+                        ) : (
+                          <XCircle className="w-4 h-4 text-red-400" />
+                        )}
+                        <span>{bait.name}</span>
+                      </div>
+                      <div className="text-right text-muted-foreground">
+                        {bait.price && <span>{bait.price}</span>}
+                        {bait.updatedAt && (
+                          <span className="ml-2 text-xs">
+                            ({bait.updatedAt}更新)
+                          </span>
+                        )}
+                      </div>
                     </div>
-                    <div className="text-right text-muted-foreground">
-                      {bait.price && <span>{bait.price}</span>}
-                      {bait.updatedAt && (
-                        <span className="ml-2 text-xs">
-                          ({bait.updatedAt}更新)
-                        </span>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          )
         )}
 
         {/* Nearby Spots Card */}
@@ -337,6 +367,65 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
           </CardContent>
         </Card>
       </div>
+
+      {/* 掲載案内CTA（プレミアム店には非表示） */}
+      {!shop.isPremium && <div className="mt-8">
+        <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-transparent">
+          <CardHeader>
+            <CardTitle className="text-lg flex items-center gap-2">
+              <Sparkles className="w-5 h-5 text-primary" />
+              このページの情報を充実させませんか？
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-sm leading-relaxed">
+              店舗オーナーの方へ ―
+              ツリスポでは無料で店舗基本情報を掲載しています。プレミアムプラン（月額980円）では、エサ在庫のリアルタイム更新・写真掲載・検索優先表示など、集客に役立つ機能をご利用いただけます。
+            </p>
+            <div className="space-y-1.5 text-sm">
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                <span>無料: 基本情報の掲載・近くの釣りスポットとの連携</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <CheckCircle className="w-4 h-4 text-amber-500 flex-shrink-0" />
+                <span>
+                  プレミアム（月額980円）: エサ在庫リアルタイム更新・写真掲載・検索優先表示
+                </span>
+              </div>
+              <p className="text-xs text-muted-foreground pl-6">
+                年間契約なら10,000円（2ヶ月分おトク）
+              </p>
+            </div>
+            <div className="flex flex-col gap-3 pt-2">
+              <Link
+                href="/shops/update?shop=sample-premium&token=demo"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-amber-500 px-4 py-2.5 text-sm font-bold text-white hover:bg-amber-600 transition-colors"
+              >
+                エサ在庫管理のデモを試す
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+              <Link
+                href="/shops/sample-premium"
+                className="inline-flex items-center justify-center gap-1 text-sm text-primary hover:underline"
+              >
+                プレミアムページのサンプルを見る
+                <ChevronRight className="w-4 h-4" />
+              </Link>
+              <div className="flex items-center gap-2 text-sm pt-1">
+                <Mail className="w-4 h-4 text-primary" />
+                <span className="text-muted-foreground">お問い合わせ:</span>
+                <a
+                  href="mailto:fishingspotjapan@gmail.com"
+                  className="text-primary hover:underline"
+                >
+                  fishingspotjapan@gmail.com
+                </a>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>}
     </div>
   );
 }

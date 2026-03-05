@@ -258,6 +258,8 @@ export interface TackleShop {
   baitStock?: BaitStock[];
   nearbySpotSlugs: string[];
   imageUrl: string;
+  photos?: string[];
+  ownerMessage?: string;
   rating: number;
   isPremium: boolean;
 }

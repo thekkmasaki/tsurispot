@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect, useMemo } from "react";
 import { getFavorites } from "@/components/spots/favorite-button";
-import { ActiveUsers } from "@/components/layout/active-users";
 import {
   Fish,
   Map,
@@ -22,6 +21,7 @@ import {
   Compass,
   FileText,
   Anchor,
+  Store,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SearchOverlayClient } from "./search-overlay-client";
@@ -46,6 +46,7 @@ const moreNavItems = [
   { href: "/guide", label: "釣りガイド", icon: GraduationCap },
   { href: "/bouzu-checker", label: "ボウズ確率チェッカー", icon: Target },
   { href: "/quiz", label: "釣りスタイル診断", icon: Sparkles },
+  { href: "/shops", label: "釣具店ガイド", icon: Store },
   { href: "/gear", label: "おすすめ道具", icon: Package },
   { href: "/fishing-rules", label: "ルールとマナー", icon: Scale },
   { href: "/umigyo", label: "海業推進", icon: Anchor },
@@ -185,7 +186,6 @@ export function Header({ searchItems }: { searchItems?: SearchItem[] }) {
         </nav>
 
         <div className="flex items-center gap-2">
-          <ActiveUsers />
           {searchItems && <SearchOverlayClient items={searchItems} />}
           <Link
             href="/favorites"

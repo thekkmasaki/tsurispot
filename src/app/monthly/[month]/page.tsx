@@ -24,6 +24,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { SpotImage } from "@/components/ui/spot-image";
+import { MonthlyHeroImage } from "@/components/monthly-hero-image";
 import {
   monthlyGuides,
   getMonthlyGuide,
@@ -93,15 +94,16 @@ export default async function MonthlyGuidePage({ params }: Props) {
   if (!guide) notFound();
 
   // その月に釣れる魚をfish.tsから取得
-  const fishForMonth = fishSpecies
+  const allFishForMonth = fishSpecies
     .filter((f) => f.seasonMonths.includes(guide.month))
     .sort((a, b) => {
       // peakMonthsに含まれる魚を優先
       const aIsPeak = a.peakMonths.includes(guide.month) ? 1 : 0;
       const bIsPeak = b.peakMonths.includes(guide.month) ? 1 : 0;
       return bIsPeak - aIsPeak;
-    })
-    .slice(0, 8);
+    });
+  const totalFishCount = allFishForMonth.length;
+  const fishForMonth = allFishForMonth.slice(0, 8);
 
   // topFishのスラッグで魚を取得（データが指定した魚を優先表示）
   const guidedFish = guide.topFish
@@ -115,7 +117,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
   const monthlyRigs = getMonthlyRigs(guide.month);
 
   // その月に釣れるスポット（catchableFishの月範囲でフィルタ）
-  const spotsForMonth = fishingSpots
+  const allSpotsForMonth = fishingSpots
     .filter((spot) =>
       spot.catchableFish.some((cf) => {
         const start = cf.monthStart;
@@ -128,8 +130,23 @@ export default async function MonthlyGuidePage({ params }: Props) {
         }
       })
     )
+    .sort((a, b) => b.rating - a.rating);
+  const totalSpotsCount = allSpotsForMonth.length;
+
+  // 都道府県ごとに上位2件を選び地理的に分散（最大50件をクライアントに渡す）
+  const spotsByPref = new Map<string, typeof allSpotsForMonth>();
+  for (const spot of allSpotsForMonth) {
+    const pref = spot.region.prefecture;
+    const arr = spotsByPref.get(pref) || [];
+    if (arr.length < 2) {
+      arr.push(spot);
+      spotsByPref.set(pref, arr);
+    }
+  }
+  const spotsForMonth = [...spotsByPref.values()]
+    .flat()
     .sort((a, b) => b.rating - a.rating)
-    .slice(0, 10);
+    .slice(0, 50);
 
   // 前月・翌月
   const currentIndex = monthSlugs.indexOf(month);
@@ -155,7 +172,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
   const autoFaqs: { question: string; answer: string }[] = [
     {
       question: `${guide.nameJa}に釣れる魚は何ですか？`,
-      answer: `${guide.nameJa}に釣れる代表的な魚は${topFishNames.join("、")}などです。全${fishForMonth.length}種類以上の魚が${guide.nameJa}に釣れるシーズンを迎えます。`,
+      answer: `${guide.nameJa}に釣れる代表的な魚は${topFishNames.join("、")}などです。全${totalFishCount}種類以上の魚が${guide.nameJa}に釣れるシーズンを迎えます。`,
     },
     {
       question: `${guide.nameJa}の釣りで初心者におすすめの魚は？`,
@@ -166,7 +183,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
     {
       question: `${guide.nameJa}の釣りにおすすめのスポットは？`,
       answer: spotsForMonth.length > 0
-        ? `${guide.nameJa}のおすすめスポットは${spotsForMonth.slice(0, 3).map(s => s.name).join("、")}などです。全国${spotsForMonth.length}箇所以上のスポットで${guide.nameJa}の釣りが楽しめます。`
+        ? `${guide.nameJa}のおすすめスポットは${spotsForMonth.slice(0, 3).map(s => s.name).join("、")}などです。全国${totalSpotsCount}箇所以上のスポットで${guide.nameJa}の釣りが楽しめます。`
         : `${guide.nameJa}は堤防や漁港での釣りがおすすめです。足場が安定しているスポットを選びましょう。`,
     },
     {
@@ -260,21 +277,15 @@ export default async function MonthlyGuidePage({ params }: Props) {
           { label: `${guide.nameJa}の釣り` },
         ]} />
 
-        {/* ヒーロー画像 */}
+        {/* ヒーロー画像（存在しない場合は非表示） */}
         {guide.heroImage && (
-          <div className="mb-6 overflow-hidden rounded-2xl">
-            <img
-              src={guide.heroImage}
-              alt={guide.heroImageAlt || `${guide.nameJa}の釣り`}
-              className="h-48 w-full object-cover sm:h-64"
-              loading="eager"
-            />
-            {guide.heroImageAttribution && (
-              <p className="mt-1 text-[10px] text-muted-foreground text-right">
-                {guide.heroImageAttribution}
-              </p>
-            )}
-          </div>
+          <MonthlyHeroImage
+            src={guide.heroImage}
+            alt={guide.heroImageAlt || `${guide.nameJa}の釣り`}
+            attribution={guide.heroImageAttribution}
+            className="mb-6 overflow-hidden rounded-2xl"
+            imgClassName="h-48 w-full object-cover sm:h-64"
+          />
         )}
 
         {/* ヘッダー */}
@@ -307,11 +318,11 @@ export default async function MonthlyGuidePage({ params }: Props) {
         {/* 月別統計 */}
         <div className="mb-6 grid grid-cols-3 gap-2 sm:gap-3">
           <div className="rounded-lg border bg-blue-50/50 p-3 text-center">
-            <p className="text-lg font-bold text-blue-700 sm:text-xl">{fishForMonth.length}+</p>
+            <p className="text-lg font-bold text-blue-700 sm:text-xl">{totalFishCount}</p>
             <p className="text-[10px] text-blue-600 sm:text-xs">{guide.nameJa}に釣れる魚種</p>
           </div>
           <div className="rounded-lg border bg-emerald-50/50 p-3 text-center">
-            <p className="text-lg font-bold text-emerald-700 sm:text-xl">{spotsForMonth.length}+</p>
+            <p className="text-lg font-bold text-emerald-700 sm:text-xl">{totalSpotsCount}</p>
             <p className="text-[10px] text-emerald-600 sm:text-xs">おすすめスポット</p>
           </div>
           <div className="rounded-lg border bg-amber-50/50 p-3 text-center">
@@ -553,7 +564,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
               {guide.nameJa}におすすめの釣りスポット
             </h2>
             <p className="mb-4 text-sm text-muted-foreground">
-              {guide.nameJa}に旬の魚が釣れる人気スポットを厳選しました。評価の高いスポット上位{spotsForMonth.length}件を紹介します。
+              {guide.nameJa}に旬の魚が釣れる人気スポットを厳選しました。「現在地から近い順」で近くのスポットを表示できます。
             </p>
             <MonthlySportsSorter
               spots={spotsForMonth.map((spot) => ({

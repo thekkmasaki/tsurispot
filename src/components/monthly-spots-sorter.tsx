@@ -103,18 +103,25 @@ export function MonthlySportsSorter({ spots, monthName }: MonthlySportsSorterPro
   }, []);
 
   const sortedSpots = userLocation
-    ? [...spots]
-        .map((spot) => ({
-          ...spot,
-          distance: haversineDistance(
-            userLocation.lat,
-            userLocation.lng,
-            spot.latitude,
-            spot.longitude
-          ),
-        }))
-        .sort((a, b) => a.distance - b.distance)
-    : spots.map((spot) => ({ ...spot, distance: null as number | null }));
+    ? (() => {
+        const withDist = [...spots]
+          .map((spot) => ({
+            ...spot,
+            distance: haversineDistance(
+              userLocation.lat,
+              userLocation.lng,
+              spot.latitude,
+              spot.longitude
+            ),
+          }))
+          .sort((a, b) => a.distance - b.distance);
+        // 150km以内のスポットを優先表示。3件未満なら近い順に10件
+        const nearby = withDist.filter((s) => s.distance <= 150);
+        return (nearby.length >= 3 ? nearby : withDist).slice(0, 10);
+      })()
+    : spots
+        .slice(0, 10)
+        .map((spot) => ({ ...spot, distance: null as number | null }));
 
   return (
     <>

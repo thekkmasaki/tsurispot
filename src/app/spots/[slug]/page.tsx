@@ -1154,23 +1154,49 @@ export default async function SpotDetailPage({ params }: PageProps) {
       })()}
 
       {/* この釣り場で釣れる魚（内部リンク強化） */}
-      {spot.catchableFish.length > 0 && (
-        <section className="mt-6 sm:mt-8">
-          <h2 className="mb-3 text-base font-bold sm:mb-4 sm:text-lg">{spot.name}で狙える魚種と釣り方</h2>
-          <div className="flex flex-wrap gap-2">
-            {spot.catchableFish.map((cf) => (
-              <Link key={cf.fish.id} href={`/fish/${cf.fish.slug}`}>
-                <Badge
-                  variant="outline"
-                  className="cursor-pointer px-3 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground min-h-[40px] flex items-center"
-                >
-                  {cf.fish.name}の釣り情報
-                </Badge>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
+      {spot.catchableFish.length > 0 && (() => {
+        const pref = getPrefectureByName(spot.region.prefecture);
+        const seen = new Set<string>();
+        const uniqueCf = spot.catchableFish.filter(cf => {
+          if (seen.has(cf.fish.slug)) return false;
+          seen.add(cf.fish.slug);
+          return true;
+        });
+        return (
+          <section className="mt-6 sm:mt-8">
+            <h2 className="mb-3 text-base font-bold sm:mb-4 sm:text-lg">{spot.name}で狙える魚種と釣り方</h2>
+            <div className="flex flex-wrap gap-2">
+              {uniqueCf.map((cf) => (
+                <Link key={cf.fish.id} href={`/fish/${cf.fish.slug}`}>
+                  <Badge
+                    variant="outline"
+                    className="cursor-pointer px-3 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground min-h-[40px] flex items-center"
+                  >
+                    {cf.fish.name}の釣り情報
+                  </Badge>
+                </Link>
+              ))}
+            </div>
+            {pref && (
+              <div className="mt-3">
+                <p className="mb-2 text-xs text-muted-foreground">{spot.region.prefecture}の魚種別釣り場ガイド</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {uniqueCf.slice(0, 8).map((cf) => (
+                    <Link key={`pref-fish-${cf.fish.slug}`} href={`/prefecture/${pref.slug}/fish/${cf.fish.slug}`}>
+                      <Badge
+                        variant="secondary"
+                        className="cursor-pointer text-xs transition-colors hover:bg-primary hover:text-primary-foreground"
+                      >
+                        {spot.region.prefecture}の{cf.fish.name}釣り
+                      </Badge>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+          </section>
+        );
+      })()}
 
       {/* おすすめ釣り方ガイド */}
       {(() => {

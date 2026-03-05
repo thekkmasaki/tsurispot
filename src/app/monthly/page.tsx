@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Calendar, Fish, ChevronRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { MonthlyHeroImage } from "@/components/monthly-hero-image";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
 import { fishSpecies } from "@/lib/data/fish";
 
@@ -155,16 +156,14 @@ export default function MonthlyPage() {
                     : "border-border hover:border-primary/30"
                 }`}
               >
-                {/* サムネイル画像 */}
+                {/* サムネイル画像（存在しない場合は非表示） */}
                 {guide.heroImage && (
-                  <div className="relative h-28 w-full overflow-hidden">
-                    <img
-                      src={guide.heroImage}
-                      alt={guide.heroImageAlt || `${guide.nameJa}の釣り`}
-                      className="h-full w-full object-cover transition-transform group-hover:scale-105"
-                      loading="lazy"
-                    />
-                  </div>
+                  <MonthlyHeroImage
+                    src={guide.heroImage}
+                    alt={guide.heroImageAlt || `${guide.nameJa}の釣り`}
+                    className="relative h-28 w-full overflow-hidden"
+                    imgClassName="h-full w-full object-cover transition-transform group-hover:scale-105"
+                  />
                 )}
                 {/* カードヘッダー */}
                 <div

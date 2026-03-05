@@ -22,10 +22,8 @@ npx vitest run src/lib/data/__tests__/spots.test.ts  # 単一テスト
 # Lint
 npx eslint
 
-# デプロイ（Vercel Pro）
-rm -rf .next && npx vercel@latest --prod --yes
-# デプロイ後は必ず IndexNow を実行:
-curl -s "https://tsurispot.com/api/indexnow"
+# デプロイ（Vercel Pro）+ IndexNow自動通知
+npm run deploy
 
 # TypeScript型チェック
 npx tsc --noEmit

@@ -35,9 +35,9 @@ import { CatchableNowCarousel } from "@/components/catchable-now-carousel";
 // Below-the-fold client components loaded lazily
 const NearbySpots = dynamic(() => import("@/components/nearby-spots").then((m) => m.NearbySpots));
 const LocationRecommendations = dynamic(() => import("@/components/location-recommendations").then((m) => m.LocationRecommendations));
-const OnlineUsersBadge = dynamic(() => import("@/components/online-users-badge").then((m) => m.OnlineUsersBadge));
 const LocationPromptBanner = dynamic(() => import("@/components/location-prompt-banner").then((m) => m.LocationPromptBanner));
 const SeasonalRecommend = dynamic(() => import("@/components/affiliate/seasonal-recommend").then((m) => m.SeasonalRecommend));
+const OnlineUsersBadge = dynamic(() => import("@/components/online-users-badge").then((m) => m.OnlineUsersBadge));
 
 export const metadata: Metadata = {
   title: "ツリスポ｜近くの釣り場が見つかる｜全国3,300+の海釣り・川釣りスポット検索",

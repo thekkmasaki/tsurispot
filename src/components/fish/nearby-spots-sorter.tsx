@@ -7,7 +7,19 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CATCH_RATING_LABELS } from "@/types";
-import type { SpotSummary } from "@/types";
+
+/** クライアントに渡す軽量スポットデータ（region.id/slugを省略） */
+export interface SpotLight {
+  id: string;
+  name: string;
+  slug: string;
+  prefecture: string;
+  areaName: string;
+  rating: number;
+  catchRating: "excellent" | "good" | "fair";
+  latitude: number;
+  longitude: number;
+}
 
 function haversineDistance(
   lat1: number,
@@ -34,11 +46,12 @@ function formatDistance(km: number): string {
 }
 
 interface NearbySpotsSorterProps {
-  spots: SpotSummary[];
+  spots: SpotLight[];
   fishName: string;
+  totalCount: number;
 }
 
-export function NearbySpotsSorter({ spots, fishName }: NearbySpotsSorterProps) {
+export function NearbySpotsSorter({ spots, fishName, totalCount }: NearbySpotsSorterProps) {
   const [userLocation, setUserLocation] = useState<{
     lat: number;
     lng: number;
@@ -103,7 +116,7 @@ export function NearbySpotsSorter({ spots, fishName }: NearbySpotsSorterProps) {
               {spot.name}
             </h3>
             <p className="mt-0.5 text-xs text-muted-foreground">
-              {spot.region.prefecture} {spot.region.areaName}
+              {spot.prefecture} {spot.areaName}
               {spot.distance !== null && (
                 <span className="ml-2 inline-flex items-center gap-0.5 text-primary font-medium">
                   <Navigation className="size-3" />
@@ -146,7 +159,7 @@ export function NearbySpotsSorter({ spots, fishName }: NearbySpotsSorterProps) {
         <MapPin className="size-5 text-primary" />
         {fishName}が釣れるスポット一覧
         <span className="text-sm font-normal text-muted-foreground">
-          ({spots.length}件)
+          ({totalCount}件)
         </span>
       </h2>
 
@@ -207,6 +220,12 @@ export function NearbySpotsSorter({ spots, fishName }: NearbySpotsSorterProps) {
             ))}
           </div>
         </details>
+      )}
+      {totalCount > spots.length && (
+        <p className="mt-2 text-center text-xs text-muted-foreground">
+          ※ 全{totalCount}件中、上位{spots.length}件を表示しています。
+          都道府県別リンクから地域ごとのスポットを確認できます。
+        </p>
       )}
     </section>
   );
