@@ -1197,6 +1197,14 @@ const _baseSpots: FishingSpot[] = [
     ],
     safetyLevel: "caution",
     safetyNotes: ["堤防は柵がないため足元注意", "波が高い日は堤防に波しぶきがかかる", "観光客が多いためキャスト時は後方確認必須"],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      restrictedAreas: ["ヨットハーバー周辺は釣り禁止", "灯台周辺は立入禁止区域あり"],
+      otherRules: ["観光客が多いためキャスト時は必ず後方確認", "ゴミの持ち帰り厳守"],
+    },
     youtubeLinks: [
       { label: "江ノ島でサビキ釣り", searchQuery: "江ノ島 湘南大堤防 サビキ釣り アジ", description: "江ノ島の大堤防でアジやイワシをサビキ釣り。観光と釣りの両立。" },
       { label: "江ノ島で青物狙い", searchQuery: "江ノ島 堤防 青物 ジグサビキ サバ", description: "江ノ島の堤防からジグサビキでサバや青物を狙う。" },
@@ -1368,6 +1376,13 @@ const _baseSpots: FishingSpot[] = [
     ],
     safetyLevel: "safe",
     safetyNotes: ["護岸は整備されて足場が良い", "BBQエリアと釣りエリアは隣接"],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      otherRules: ["BBQエリア側への投げ込み禁止", "護岸のゴミは必ず持ち帰ること", "22時以降は騒音に配慮すること"],
+    },
     youtubeLinks: [
       { label: "うみかぜ公園で釣り", searchQuery: "うみかぜ公園 釣り サビキ 横須賀 ファミリー", description: "横須賀のうみかぜ公園でファミリーフィッシング。BBQも楽しめる。" },
     ],
@@ -1461,6 +1476,14 @@ const _baseSpots: FishingSpot[] = [
     ],
     safetyLevel: "safe",
     safetyNotes: ["安全柵付き有料施設", "スタッフ常駐", "天候不良時は閉鎖される場合あり"],
+    rules: {
+      castingAllowed: false,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      maxRods: 2,
+      otherRules: ["投げ釣り禁止", "竿は1人2本まで", "営業時間内のみ釣り可能（季節により変動）"],
+    },
     youtubeLinks: [
       { label: "熱海港海釣り施設で釣り", searchQuery: "熱海港 海釣り施設 サビキ 初心者 手ぶら", description: "熱海の有料海釣り施設でレンタル竿を使った初心者釣り体験。" },
     ],
@@ -1926,6 +1949,14 @@ const _baseSpots: FishingSpot[] = [
     ],
     safetyLevel: "safe",
     safetyNotes: ["安全柵付き有料施設", "スタッフ常駐", "売店・レンタル完備"],
+    rules: {
+      castingAllowed: false,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      maxRods: 2,
+      otherRules: ["投げ釣り禁止", "竿は1人2本まで", "マダイ放流日は特別ルールあり（施設に確認）", "営業時間内のみ釣り可能"],
+    },
     youtubeLinks: [
       { label: "マリーナシティ釣り公園", searchQuery: "和歌山マリーナシティ 釣り公園 マダイ 初心者", description: "和歌山マリーナシティの有料釣り公園でマダイ釣り体験。" },
       { label: "マリーナシティでタチウオ", searchQuery: "マリーナシティ タチウオ テンヤ 夜釣り 和歌山", description: "和歌山マリーナシティで秋のタチウオを狙う夜釣り。" },
@@ -2265,6 +2296,14 @@ const _baseSpots: FishingSpot[] = [
     ],
     safetyLevel: "safe",
     safetyNotes: ["整備された岸壁で足場は良好", "夜釣りは足元注意"],
+    rules: {
+      castingAllowed: false,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      restrictedAreas: ["旅客ターミナル周辺は釣り禁止", "フェリー乗り場付近は立入禁止"],
+      otherRules: ["投げ釣り禁止（ちょい投げはOK）", "コマセ禁止の区間あり", "船舶の通行に注意すること"],
+    },
     youtubeLinks: [
       { label: "博多埠頭でアジング", searchQuery: "博多埠頭 アジ サビキ 夜釣り 福岡", description: "博多港でアジを狙うサビキ釣りと夜のアジング。" },
       { label: "博多埠頭でタチウオ", searchQuery: "博多 タチウオ テンヤ 夜釣り 福岡", description: "博多埠頭で秋のタチウオをテンヤで狙う夜釣り。" },
