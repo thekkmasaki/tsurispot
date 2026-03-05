@@ -238,6 +238,15 @@ export const affiliateProducts: AffiliateProduct[] = [
     seasons: ["all"],
     category: "accessory",
   },
+  {
+    id: "af-jet-sinker",
+    name: "ジェット天秤",
+    url: "https://amzn.to/4l7BnQg",
+    description: "ちょい投げ・投げ釣りの必需品。遠投性能が高く、海底を引いても根がかりしにくい設計です。",
+    methodKeywords: ["ちょい投げ", "投げ釣り", "カレイ", "キス"],
+    seasons: ["all"],
+    category: "tackle",
+  },
 ];
 
 /**
