@@ -142,6 +142,35 @@ const howToJsonLd = {
   ],
 };
 
+const articleJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: "初心者のための仕掛け準備 完全ガイド｜道具の組み立てから実釣まで",
+  description:
+    "竿の組み立て、リールの取り付け、糸の結び方（ユニノット・クリンチノット・電車結び）、仕掛けのセット、エサの付け方までステップバイステップ解説。",
+  datePublished: "2026-03-05",
+  dateModified: "2026-03-05",
+  author: {
+    "@type": "Person",
+    name: "正木 家康",
+    jobTitle: "編集長",
+    url: "https://tsurispot.com/about",
+  },
+  publisher: {
+    "@type": "Organization",
+    name: "ツリスポ",
+    url: "https://tsurispot.com",
+    logo: {
+      "@type": "ImageObject",
+      url: "https://tsurispot.com/logo.svg",
+    },
+  },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": "https://tsurispot.com/guide/beginner-setup",
+  },
+};
+
 /* ================================================================
    ユーティリティコンポーネント
    ================================================================ */
@@ -818,6 +847,10 @@ export default function BeginnerSetupGuidePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
         <Breadcrumb
