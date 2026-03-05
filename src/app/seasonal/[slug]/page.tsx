@@ -75,8 +75,8 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
     .map((fishSlug) => fishSpecies.find((f) => f.slug === fishSlug))
     .filter(Boolean);
 
-  // おすすめスポットを取得: spotTypeが一致し、対象月にcatchableFishがあるスポットをrating順
-  const recommendedSpots = fishingSpots
+  // おすすめスポットを取得: spotTypeが一致し、対象月にcatchableFishがあるスポットを地方別にrating順
+  const allMatchingSpots = fishingSpots
     .filter((spot) => {
       const typeMatch = guide.spotTypes.includes(spot.spotType);
       if (!typeMatch) return false;
@@ -92,8 +92,37 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
       });
       return hasFishInSeason;
     })
-    .sort((a, b) => b.rating - a.rating)
-    .slice(0, 10);
+    .sort((a, b) => b.rating - a.rating);
+
+  // 地方別にグループ化
+  const REGION_MAP: Record<string, string> = {
+    "北海道": "北海道・東北", "青森県": "北海道・東北", "岩手県": "北海道・東北", "宮城県": "北海道・東北",
+    "秋田県": "北海道・東北", "山形県": "北海道・東北", "福島県": "北海道・東北",
+    "茨城県": "関東", "栃木県": "関東", "群馬県": "関東", "埼玉県": "関東",
+    "千葉県": "関東", "東京都": "関東", "神奈川県": "関東",
+    "新潟県": "中部・北陸", "富山県": "中部・北陸", "石川県": "中部・北陸", "福井県": "中部・北陸",
+    "山梨県": "中部・北陸", "長野県": "中部・北陸", "岐阜県": "中部・北陸",
+    "静岡県": "東海", "愛知県": "東海", "三重県": "東海",
+    "滋賀県": "近畿", "京都府": "近畿", "大阪府": "近畿", "兵庫県": "近畿",
+    "奈良県": "近畿", "和歌山県": "近畿",
+    "鳥取県": "中国・四国", "島根県": "中国・四国", "岡山県": "中国・四国", "広島県": "中国・四国",
+    "山口県": "中国・四国", "徳島県": "中国・四国", "香川県": "中国・四国", "愛媛県": "中国・四国", "高知県": "中国・四国",
+    "福岡県": "九州・沖縄", "佐賀県": "九州・沖縄", "長崎県": "九州・沖縄", "熊本県": "九州・沖縄",
+    "大分県": "九州・沖縄", "宮崎県": "九州・沖縄", "鹿児島県": "九州・沖縄", "沖縄県": "九州・沖縄",
+  };
+  const REGION_ORDER = ["北海道・東北", "関東", "中部・北陸", "東海", "近畿", "中国・四国", "九州・沖縄"];
+
+  const spotsByRegion: Record<string, typeof allMatchingSpots> = {};
+  for (const spot of allMatchingSpots) {
+    const region = REGION_MAP[spot.region.prefecture] ?? "その他";
+    if (!spotsByRegion[region]) spotsByRegion[region] = [];
+    if (spotsByRegion[region].length < 3) {
+      spotsByRegion[region].push(spot);
+    }
+  }
+  const regionEntries = REGION_ORDER
+    .filter((r) => spotsByRegion[r] && spotsByRegion[r].length > 0)
+    .map((r) => ({ region: r, spots: spotsByRegion[r] }));
 
   // 関連する季節特集
   const relatedGuides = guide.relatedSlugs
@@ -252,11 +281,18 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
             <MapPin className={`size-5 ${color.text}`} />
             おすすめスポット
           </h2>
-          {recommendedSpots.length > 0 ? (
+          {regionEntries.length > 0 ? (
             <>
-              <div className="grid gap-4 sm:grid-cols-2">
-                {recommendedSpots.map((spot) => (
-                  <SpotCard key={spot.id} spot={spot} />
+              <div className="space-y-6">
+                {regionEntries.map(({ region, spots }) => (
+                  <div key={region}>
+                    <h3 className="mb-3 text-sm font-bold text-muted-foreground border-b pb-1">{region}</h3>
+                    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                      {spots.map((spot) => (
+                        <SpotCard key={spot.id} spot={spot} />
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
               <div className="mt-4 text-center">
@@ -290,10 +326,25 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
             {guide.gear.map((item) => (
               <Card key={item.name} className="gap-0 py-0">
                 <CardContent className="p-4">
-                  <p className="text-sm font-semibold">{item.name}</p>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    {item.detail}
-                  </p>
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold">{item.name}</p>
+                      <p className="mt-1 text-sm text-muted-foreground">
+                        {item.detail}
+                      </p>
+                    </div>
+                    {item.affiliateUrl && (
+                      <a
+                        href={item.affiliateUrl}
+                        target="_blank"
+                        rel="noopener noreferrer sponsored"
+                        className="shrink-0 inline-flex items-center gap-1 rounded-full bg-amber-100 px-3 py-1.5 text-xs font-semibold text-amber-800 hover:bg-amber-200 transition-colors"
+                      >
+                        Amazonで見る
+                        <ArrowRight className="size-3" />
+                      </a>
+                    )}
+                  </div>
                 </CardContent>
               </Card>
             ))}

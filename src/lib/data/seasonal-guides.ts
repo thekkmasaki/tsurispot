@@ -9,7 +9,7 @@ export interface SeasonalGuide {
   description: string;
   tips: string[];
   cautions: string[];
-  gear: { name: string; detail: string }[];
+  gear: { name: string; detail: string; affiliateUrl?: string }[];
   faq: { question: string; answer: string }[];
   steps: { title: string; description: string }[];
   relatedSlugs: string[];
