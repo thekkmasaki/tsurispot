@@ -8,6 +8,9 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 // ISR: 1時間ごとに再検証（Vercel無料プランのISR Reads節約）
 export const revalidate = 3600;
 
+// Vercel Pro: microCMS API呼び出しのタイムアウト対策
+export const maxDuration = 60;
+
 export const metadata: Metadata = {
   title: "釣りコラム・ブログ | ツリスポ",
   description:

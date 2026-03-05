@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { blogArticles2 } from "./blog-articles-2";
 import { blogArticles3 } from "./blog-articles-3";
 import { blogArticles4 } from "./blog-articles-4";
@@ -2561,16 +2562,16 @@ export function getBlogPostBySlug(slug: string): BlogPost | undefined {
   return blogPosts.find((post) => post.slug === slug);
 }
 
-/** slugで記事を取得（async版、microCMS優先 → 静的記事フォールバック） */
-export async function getBlogPostBySlugAsync(slug: string): Promise<BlogPost | undefined> {
+/** slugで記事を取得（async版、microCMS優先 → 静的記事フォールバック）— React cache でリクエスト単位メモ化 */
+export const getBlogPostBySlugAsync = cache(async (slug: string): Promise<BlogPost | undefined> => {
   const { fetchMicroCMSBlogBySlug } = await import("@/lib/microcms");
   const cmsPost = await fetchMicroCMSBlogBySlug(slug);
   if (cmsPost) return cmsPost;
   return blogPosts.find((post) => post.slug === slug);
-}
+});
 
-/** 全ブログ記事を取得（静的 + microCMS、publishedAt降順） */
-export async function getAllBlogPosts(): Promise<BlogPost[]> {
+/** 全ブログ記事を取得（静的 + microCMS、publishedAt降順）— React cache でリクエスト単位メモ化 */
+export const getAllBlogPosts = cache(async (): Promise<BlogPost[]> => {
   const { fetchMicroCMSBlogPosts } = await import("@/lib/microcms");
   const cmsPosts = await fetchMicroCMSBlogPosts();
   const cmsSlugs = new Set(cmsPosts.map((p) => p.slug));
@@ -2579,7 +2580,7 @@ export async function getAllBlogPosts(): Promise<BlogPost[]> {
   return merged.sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   );
-}
+});
 
 /** カテゴリで記事をフィルタ */
 export function getBlogPostsByCategory(category: BlogPost["category"]): BlogPost[] {
