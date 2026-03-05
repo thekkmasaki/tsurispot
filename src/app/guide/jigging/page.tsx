@@ -18,6 +18,11 @@ export const metadata: Metadata = {
     type: "article",
     url: "https://tsurispot.com/guide/jigging",
     siteName: "ツリスポ",
+    images: [{
+      url: `/api/og?title=${encodeURIComponent("ショアジギング入門ガイド")}&emoji=${encodeURIComponent("⚡")}`,
+      width: 1200,
+      height: 630,
+    }],
   },
   alternates: {
     canonical: "https://tsurispot.com/guide/jigging",

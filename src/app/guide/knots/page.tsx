@@ -17,6 +17,11 @@ export const metadata: Metadata = {
     type: "article",
     url: "https://tsurispot.com/guide/knots",
     siteName: "ツリスポ",
+    images: [{
+      url: `/api/og?title=${encodeURIComponent("釣り糸の結び方ガイド")}&emoji=${encodeURIComponent("🪢")}`,
+      width: 1200,
+      height: 630,
+    }],
   },
   alternates: {
     canonical: "https://tsurispot.com/guide/knots",

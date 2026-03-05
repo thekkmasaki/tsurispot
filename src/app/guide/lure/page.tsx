@@ -18,6 +18,11 @@ export const metadata: Metadata = {
     type: "article",
     url: "https://tsurispot.com/guide/lure",
     siteName: "ツリスポ",
+    images: [{
+      url: `/api/og?title=${encodeURIComponent("ルアー釣り入門ガイド")}&emoji=${encodeURIComponent("🪝")}`,
+      width: 1200,
+      height: 630,
+    }],
   },
   alternates: {
     canonical: "https://tsurispot.com/guide/lure",
