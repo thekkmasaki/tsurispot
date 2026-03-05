@@ -28,6 +28,11 @@ export const metadata: Metadata = {
     type: "article",
     url: "https://tsurispot.com/guide/jet-sinker",
     siteName: "ツリスポ",
+    images: [{
+      url: `/api/og?title=${encodeURIComponent("ジェット天秤の使い方")}&emoji=${encodeURIComponent("🚀")}`,
+      width: 1200,
+      height: 630,
+    }],
   },
   alternates: {
     canonical: "https://tsurispot.com/guide/jet-sinker",

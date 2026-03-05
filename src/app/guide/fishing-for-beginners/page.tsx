@@ -36,6 +36,11 @@ export const metadata: Metadata = {
     type: "article",
     url: "https://tsurispot.com/guide/fishing-for-beginners",
     siteName: "ツリスポ",
+    images: [{
+      url: `/api/og?title=${encodeURIComponent("釣り初心者完全ガイド【2026年版】")}&emoji=${encodeURIComponent("🎣")}`,
+      width: 1200,
+      height: 630,
+    }],
   },
   alternates: {
     canonical: "https://tsurispot.com/guide/fishing-for-beginners",
