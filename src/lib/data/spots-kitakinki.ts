@@ -944,7 +944,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk037", name: "伊根港カンジャガハナ灯台", slug: "ine-kanjagahana-todai",
     description: "伊根湾の入口に突き出た岩場に建つ赤灯台周辺の釣りポイント。足場はコンクリートで比較的安定しており、テトラポッド際を狙った根魚釣りやエギングが楽しめる。伊根の舟屋群に隣接しているため、地元住民への配慮とマナーが重要。アオリイカやメバルの実績が高い穴場的スポット。",
-    latitude: 35.6770, longitude: 135.2820,
+    latitude: 35.6650, longitude: 135.2867,
     address: "〒626-0424 京都府与謝郡伊根町字亀島",
     accessInfo: "山陰近畿自動車道「与謝天橋立IC」から約40分。伊根の舟屋群方面。",
     region: lr("rnk04"), spotType: "rocky", difficulty: "intermediate",
@@ -965,7 +965,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk038", name: "伊根町七面山駐車場", slug: "ine-shichimensan",
     description: "伊根町の舟屋群近くにある駐車場前の岸壁と防波堤から釣りが楽しめるスポット。駐車場・トイレ・自販機が揃い、ファミリーでも安心。防波堤は足場が良く水深も十分で、サビキでのアジ釣りからエギングまで幅広く対応。伊根の舟屋を眺めながら釣りを楽しめるロケーションも魅力。",
-    latitude: 35.6750, longitude: 135.2830,
+    latitude: 35.6750, longitude: 135.2880,
     address: "〒626-0423 京都府与謝郡伊根町字平田",
     accessInfo: "山陰近畿自動車道「与謝天橋立IC」から約35分。七面山駐車場を目印に。",
     region: lr("rnk04"), spotType: "breakwater", difficulty: "beginner",
@@ -987,8 +987,8 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk039", name: "伊根町大西駐車場", slug: "ine-oonishi",
     description: "伊根湾に面した有料駐車場前の護岸から釣りができるポイント。水深10m以上と深く、大型のマダイやヒラメの実績がある。カゴ釣りや泳がせ釣りで青物を狙うベテランから、サビキで手軽にアジを楽しむファミリーまで幅広く対応。駐車場・トイレ・自販機完備で利便性が高い。",
-    latitude: 35.6715, longitude: 135.2865,
-    address: "〒626-0425 京都府与謝郡伊根町字日出",
+    latitude: 35.6693, longitude: 135.2809,
+    address: "〒626-0424 京都府与謝郡伊根町字亀島",
     accessInfo: "山陰近畿自動車道「与謝天橋立IC」から約30分。大西駐車場を目印に。",
     region: lr("rnk04"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "有料駐車場（100円/30分、8:00-21:00。1日最大3,000円）",
@@ -1010,7 +1010,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk040", name: "上佐波賀", slug: "kami-sabaka",
     description: "舞鶴湾の奥に位置する護岸の釣りポイント。沖にはカキ筏が浮かび、独特の雰囲気を醸し出す。石畳の海底がなだらかに傾斜し、10〜15m沖で急激に深くなる地形変化が魚を集める。チヌやマダイの実績が高く、秋にはアオリイカやコウイカも回遊する。潮通しが良く、静かな環境でじっくり釣りを楽しみたい方向け。",
-    latitude: 35.4900, longitude: 135.4100,
+    latitude: 35.5087, longitude: 135.3658,
     address: "〒625-0134 京都府舞鶴市佐波賀",
     accessInfo: "舞鶴若狭自動車道「舞鶴東IC」から約20分。宮谷神社方面。",
     region: lr("rnk01"), spotType: "rocky", difficulty: "intermediate",
@@ -1031,7 +1031,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk041", name: "平", slug: "taira-maizuru",
     description: "舞鶴クレインブリッジ北側の湾奥に位置する知る人ぞ知る釣りポイント。石畳の基礎とカキ殻の駆け上がりが複雑な地形を作り、チヌやシーバスの好ポイントを形成する。住宅地近くの小さな桟橋付近に魚影が濃く、ルアーフィッシングで実績がある。静かな環境で穴場感のある釣り場。",
-    latitude: 35.4850, longitude: 135.4050,
+    latitude: 35.5148, longitude: 135.3883,
     address: "〒625-0133 京都府舞鶴市平",
     accessInfo: "舞鶴若狭自動車道「舞鶴東IC」から約25分。舞鶴クレインブリッジ北側。",
     region: lr("rnk01"), spotType: "pier", difficulty: "intermediate",
@@ -1051,7 +1051,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk042", name: "香住港北防波堤", slug: "kasumi-kita-bouhatei",
     description: "香住西港に延びる白灯台が目印の大型防波堤。先端部は水深が深く、大型船が出入りするだけの深さがあり潮通しも抜群。春と秋のアオリイカシーズンには多くのエギンガーで賑わう。サビキでのアジ・メバル狙いも安定しており、チヌの実績も高い上級者向けポイント。",
-    latitude: 35.6380, longitude: 134.6200,
+    latitude: 35.6468, longitude: 134.6264,
     address: "〒669-6542 兵庫県美方郡香美町香住区一日市",
     accessInfo: "山陰近畿自動車道「香住IC」から約10分。",
     region: lr("rnk05"), spotType: "breakwater", difficulty: "intermediate",
@@ -1075,7 +1075,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk043", name: "香住港南防波堤", slug: "kasumi-minami-bouhatei",
     description: "香住港の南側に延びる大規模防波堤で、途中まで車でアクセスできる利便性が魅力。沖にはダブルテトラポッドが配置され魚礁として機能し、根魚やイカの好ポイントを形成。先端部の水深が深いエリアでは紀州釣りでチヌを狙う常連が多い。泳がせ釣りでヒラメの実績もある。",
-    latitude: 35.6330, longitude: 134.6260,
+    latitude: 35.6410, longitude: 134.6288,
     address: "〒669-6542 兵庫県美方郡香美町香住区香住",
     accessInfo: "山陰近畿自動車道「香住IC」から約3分。防波堤中間まで車で進入可。",
     region: lr("rnk05"), spotType: "breakwater", difficulty: "intermediate",
@@ -1098,7 +1098,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk044", name: "香住東港保安前堤防", slug: "kasumi-higashi-hoan",
     description: "香住東港の海上保安署前に延びる堤防で、ファミリーフィッシングに人気のポイント。先端の白灯台を目指して歩くと、途中に駆け上がりのポイントがあり、ウキ釣りでアジやチヌを狙える。湾内に位置するため比較的穏やかで、飛ばしウキを使ったアジ釣りが効果的。",
-    latitude: 35.6340, longitude: 134.6330,
+    latitude: 35.6488, longitude: 134.6363,
     address: "〒669-6541 兵庫県美方郡香美町香住区境1115",
     accessInfo: "山陰近畿自動車道「香住IC」から約5分。",
     region: lr("rnk05"), spotType: "breakwater", difficulty: "beginner",
@@ -1121,7 +1121,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk045", name: "香住港下浜防波堤", slug: "kasumi-shimohama-bouhatei",
     description: "香住港の下浜エリアに位置する防波堤で、内側と外側で異なる釣りが楽しめる。港内は砂底で浅いがサビキでアジが狙え、テトラポッド帯では根魚やエギングでのアオリイカ狙いが有力。近くには約2000万年前の化石足跡群（下浜化石足跡群）があり、観光を兼ねた釣行にもおすすめ。",
-    latitude: 35.6390, longitude: 134.6180,
+    latitude: 35.6461, longitude: 134.6146,
     address: "〒669-6564 兵庫県美方郡香美町香住区下浜",
     accessInfo: "山陰近畿自動車道「香住IC」から約5分。",
     region: lr("rnk05"), spotType: "breakwater", difficulty: "beginner",
@@ -1144,7 +1144,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk046", name: "香住漁港ふれあいデッキ", slug: "kasumi-fureai-deck",
     description: "香住東港の第2東防波堤根元に設置された全長180mの無料公共釣りデッキ。ベンチやテーブルも備わり、子連れファミリーでも安全に釣りが楽しめる。浅い岩礁帯が広がるためメバルやアコウなどの根魚がメインターゲット。夏場は隣接の海水浴場と合わせてレジャーを楽しめる。",
-    latitude: 35.6350, longitude: 134.6280,
+    latitude: 35.6376, longitude: 134.6217,
     address: "〒669-6541 兵庫県美方郡香美町香住区境",
     accessInfo: "山陰近畿自動車道「香住IC」から約6分。東港方面。",
     region: lr("rnk05"), spotType: "breakwater", difficulty: "beginner",
@@ -1165,7 +1165,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk047", name: "地蔵鼻展望台", slug: "jizo-bana",
     description: "香住区下浜の岬先端に位置する磯釣りポイント。潮通しが良く水深もあるため、フカセ釣りでグレやチヌ、秋にはショアジギングで青物も狙える。定員5〜6名と限られたスペースだが、その分魚影が濃く実績は高い。約2000万年前の化石が見られる地質名所としても知られる展望スポット。",
-    latitude: 35.6400, longitude: 134.6200,
+    latitude: 35.6483, longitude: 134.6133,
     address: "〒669-6564 兵庫県美方郡香美町香住区下浜",
     accessInfo: "山陰近畿自動車道「香住IC」から約5分。駐車場から砂の斜面を降りる。",
     region: lr("rnk05"), spotType: "rocky", difficulty: "advanced",
@@ -1187,7 +1187,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk048", name: "浦島漁港", slug: "urashima-gyoko",
     description: "伊根町本庄浜に位置する漁港で、浦島太郎伝説ゆかりの太鯛島が沖に見える風光明媚なロケーション。海底は砂地が主体で投げ釣りに適しており、カレイやヒラメの実績がある。荒天時にはシーバスが港内に入ることも多く、ルアーフィッシングも楽しめる。夏の海水浴シーズンは駐車場が有料になる。",
-    latitude: 35.7050, longitude: 135.2550,
+    latitude: 35.7340, longitude: 135.2747,
     address: "〒626-0403 京都府与謝郡伊根町本庄浜",
     accessInfo: "山陰近畿自動車道「与謝天橋立IC」から約40分。本庄浜方面。",
     region: lr("rnk04"), spotType: "port", difficulty: "beginner",
@@ -1210,7 +1210,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk049", name: "田井ノ浜海岸", slug: "tainohama-kaigan",
     description: "新温泉町にあるゴロタ浜（丸石海岸）の釣りポイント。砂浜ではなく花崗岩の丸石が敷き詰められた独特の地形で、海底の岩礁帯が沖まで続く。海水の透明度が極めて高く、偏光グラスで魚の姿を確認しながら釣りができることも。岸から急に深くなるため根魚の実績が良い。夏は海水浴場になるため日中の釣りは制限される。",
-    latitude: 35.6170, longitude: 134.5400,
+    latitude: 35.6419, longitude: 134.4766,
     address: "〒669-6713 兵庫県美方郡新温泉町田井",
     accessInfo: "山陰近畿自動車道「新温泉浜坂IC」から約10分。",
     region: lr("rnk06"), spotType: "rocky", difficulty: "intermediate",
@@ -1233,7 +1233,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk050", name: "浜坂漁港東防波堤", slug: "hamasaka-higashi-bouhatei",
     description: "浜坂県民サンビーチ横からL字型に延びる防波堤で、先端に白灯台が建つ。外海側のテトラポッド帯は根魚の宝庫で、特に冬季の大型メバル狙いの夜釣りで定評がある。港内側は砂底で極端に浅いが、ケーソン目地の深みに魚が付くため地形変化を狙うのがコツ。秋以降は青物の回遊も見られる。",
-    latitude: 35.6230, longitude: 134.5730,
+    latitude: 35.6310, longitude: 134.4470,
     address: "〒669-6701 兵庫県美方郡新温泉町芦屋",
     accessInfo: "山陰近畿自動車道「新温泉浜坂IC」から約6分。浜坂県民サンビーチ方面。",
     region: lr("rnk06"), spotType: "breakwater", difficulty: "intermediate",
@@ -1257,7 +1257,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk051", name: "竹野港東防波堤", slug: "takeno-higashi-bouhatei",
     description: "竹野浜海水浴場から延びる大型防波堤で、通称「竹野大波止」。春〜初夏のメバル・カサゴから始まり、夏のサビキでアジ、秋のアオリイカ、冬のカレイと四季を通じて多彩な釣りが楽しめる。先端部は水深が深く潮通しも良いが、テトラポッドを越える必要があるため上級者向け。キャンプ・BBQは禁止。",
-    latitude: 35.6560, longitude: 134.7570,
+    latitude: 35.6630, longitude: 134.7588,
     address: "〒669-6201 兵庫県豊岡市竹野町竹野",
     accessInfo: "北近畿豊岡自動車道「但馬空港IC」から約35分。竹野浜方面。",
     region: lr("rnk07"), spotType: "breakwater", difficulty: "intermediate",
@@ -1281,7 +1281,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk052", name: "竹野港北防波堤", slug: "takeno-kita-bouhatei",
     description: "竹野港の北側に延びる防波堤と、猫崎半島方面へ続く岩場が一体となった釣り場。防波堤中間から先端にかけては低めで投げやすく、外海側のテトラポッドが根魚やアオリイカの好ポイントを形成。岩場は高低差が少なく歩きやすいため、磯釣り入門にも適している。御社下駐車場からアクセス。",
-    latitude: 35.6580, longitude: 134.7550,
+    latitude: 35.6633, longitude: 134.7567,
     address: "〒669-6201 兵庫県豊岡市竹野町竹野",
     accessInfo: "北近畿豊岡自動車道「但馬空港IC」から約35分。御社下駐車場を利用。",
     region: lr("rnk07"), spotType: "breakwater", difficulty: "beginner",
