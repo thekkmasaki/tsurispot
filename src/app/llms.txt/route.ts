@@ -106,6 +106,9 @@ ${areaGuides.map((g) => `  - ${g.name}: https://tsurispot.com/area-guide/${g.slu
 - 釣り方ガイド（総合）: https://tsurispot.com/guide/how-to-fish
 - 釣具ガイド: https://tsurispot.com/guide/fishing-gear-guide
 - 魚のさばき方ガイド: https://tsurispot.com/guide/handling
+- 仕掛け準備完全ガイド: https://tsurispot.com/guide/beginner-setup
+- 釣った魚の簡単レシピ: https://tsurispot.com/guide/fish-recipes
+- トラブルシューティング: https://tsurispot.com/guide/troubleshooting
 
 ### 装備・釣具
 - 装備ガイド: https://tsurispot.com/gear

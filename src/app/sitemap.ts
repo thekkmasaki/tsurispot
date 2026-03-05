@@ -89,6 +89,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/guide/fishing-for-beginners`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.6 },
     { url: `${baseUrl}/guide/fishing-gear-guide`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.6 },
     { url: `${baseUrl}/guide/jet-sinker`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${baseUrl}/guide/beginner-setup`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/guide/fish-recipes`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${baseUrl}/guide/troubleshooting`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.6 },
     // 装備ガイド
     { url: `${baseUrl}/gear`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.7 },
     { url: `${baseUrl}/gear/sabiki`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.7 },
