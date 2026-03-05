@@ -824,14 +824,22 @@ export default function HandlingGuidePage() {
         {/* 次のステップ */}
         <div className="mt-8 text-center sm:mt-12">
           <p className="mb-4 text-sm text-muted-foreground">
-            仕掛けの作り方も学んで、釣りの準備を万全にしましょう。
+            持ち帰った魚を美味しく調理しましょう。
           </p>
-          <Link
-            href="/guide/rigs"
-            className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-          >
-            仕掛け図解ガイドへ
-          </Link>
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <Link
+              href="/guide/fish-recipes"
+              className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+            >
+              釣った魚のレシピ集へ
+            </Link>
+            <Link
+              href="/guide/rigs"
+              className="inline-flex items-center rounded-full border border-primary/50 px-6 py-3 text-sm font-medium text-primary hover:bg-primary/10"
+            >
+              仕掛け図解ガイドへ
+            </Link>
+          </div>
         </div>
       {/* LINE登録バナー */}
       <div className="mt-8 sm:mt-12">

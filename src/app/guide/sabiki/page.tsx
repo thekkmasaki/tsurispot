@@ -1576,6 +1576,32 @@ export default function SabikiGuidePage() {
                 </CardContent>
               </Card>
             </Link>
+            <Link href="/guide/beginner-setup" className="group">
+              <Card className="h-full transition-colors group-hover:border-primary">
+                <CardContent className="pt-6">
+                  <Package className="mb-2 size-5 text-primary" />
+                  <p className="font-medium group-hover:text-primary">
+                    仕掛けの準備ガイド
+                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    サビキ仕掛けのセット手順を詳しく解説
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
+            <Link href="/guide/troubleshooting" className="group">
+              <Card className="h-full transition-colors group-hover:border-primary">
+                <CardContent className="pt-6">
+                  <HelpCircle className="mb-2 size-5 text-primary" />
+                  <p className="font-medium group-hover:text-primary">
+                    トラブルシューティング
+                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    糸絡み・根掛かりなど困ったときの対処法
+                  </p>
+                </CardContent>
+              </Card>
+            </Link>
           </div>
         </section>
 

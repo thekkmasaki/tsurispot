@@ -1146,12 +1146,20 @@ export default function SetupGuidePage() {
           <p className="mb-4 text-sm text-muted-foreground">
             セッティングができたら、次は糸の結び方を覚えましょう。
           </p>
-          <Link
-            href="/guide/knots"
-            className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-          >
-            釣り糸の結び方を学ぶ
-          </Link>
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <Link
+              href="/guide/knots"
+              className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+            >
+              釣り糸の結び方を学ぶ
+            </Link>
+            <Link
+              href="/guide/beginner-setup"
+              className="inline-flex items-center rounded-full border border-primary/50 px-6 py-3 text-sm font-medium text-primary hover:bg-primary/10"
+            >
+              仕掛けのセット方法を学ぶ
+            </Link>
+          </div>
         </div>
       {/* LINE登録バナー */}
       <div className="mt-8 sm:mt-12">

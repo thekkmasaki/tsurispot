@@ -462,6 +462,12 @@ export default function KnotsGuidePage() {
               サビキ釣りガイドへ
             </Link>
             <Link
+              href="/guide/beginner-setup"
+              className="inline-flex items-center rounded-full bg-white/20 px-6 py-3 text-sm font-medium text-white hover:bg-white/30"
+            >
+              仕掛けの準備ガイド
+            </Link>
+            <Link
               href="/guide/beginner"
               className="inline-flex items-center rounded-full border border-white/50 px-6 py-3 text-sm font-medium text-white hover:bg-white/10"
             >
