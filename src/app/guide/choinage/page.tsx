@@ -31,6 +31,11 @@ export const metadata: Metadata = {
     type: "article",
     url: "https://tsurispot.com/guide/choinage",
     siteName: "ツリスポ",
+    images: [{
+      url: `/api/og?title=${encodeURIComponent("ちょい投げ釣り完全ガイド")}&emoji=${encodeURIComponent("🏖️")}`,
+      width: 1200,
+      height: 630,
+    }],
   },
   alternates: {
     canonical: "https://tsurispot.com/guide/choinage",

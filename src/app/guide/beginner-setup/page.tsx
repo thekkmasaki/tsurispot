@@ -27,6 +27,11 @@ export const metadata: Metadata = {
     type: "article",
     url: "https://tsurispot.com/guide/beginner-setup",
     siteName: "ツリスポ",
+    images: [{
+      url: `/api/og?title=${encodeURIComponent("初心者のための仕掛け準備ガイド")}&emoji=${encodeURIComponent("🔧")}`,
+      width: 1200,
+      height: 630,
+    }],
   },
   alternates: {
     canonical: "https://tsurispot.com/guide/beginner-setup",

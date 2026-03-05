@@ -27,6 +27,11 @@ export const metadata: Metadata = {
     type: "article",
     url: "https://tsurispot.com/guide/fish-recipes",
     siteName: "ツリスポ",
+    images: [{
+      url: `/api/og?title=${encodeURIComponent("釣った魚の簡単レシピ集")}&emoji=${encodeURIComponent("🍳")}`,
+      width: 1200,
+      height: 630,
+    }],
   },
   alternates: {
     canonical: "https://tsurispot.com/guide/fish-recipes",
