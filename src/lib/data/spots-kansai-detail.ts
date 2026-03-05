@@ -253,6 +253,13 @@ export const kansaiDetailSpots: FishingSpot[] = [
     tackleRecommendations: [],
     gearGuides: [gearSabiki, gearLure, gearUki, gearJig, gearEging],
     safetyLevel: "caution", safetyNotes: ["施設閉鎖中の可能性あり。最新情報を要確認", "周辺護岸は柵がない箇所あり"],
+    rules: {
+      castingAllowed: false,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      otherRules: ["施設は閉鎖中の場合あり。大阪市公式サイトで最新情報を確認すること", "周辺護岸で釣る場合は投げ釣り禁止"],
+    },
   },
   {
     id: "s854", name: "とっとパーク小島", slug: "tottopark-kojima",
@@ -281,6 +288,14 @@ export const kansaiDetailSpots: FishingSpot[] = [
     tackleRecommendations: [],
     gearGuides: [gearUki, gearSabiki, gearEging, gearJig, gearRock],
     safetyLevel: "safe", safetyNotes: ["柵付き桟橋で安全", "売店・トイレ完備", "スタッフ常駐"],
+    rules: {
+      castingAllowed: false,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      maxRods: 2,
+      otherRules: ["投げ釣り禁止", "竿は1人2本まで", "営業時間内のみ利用可能", "ライフジャケット着用推奨"],
+    },
   },
   {
     id: "s855", name: "深日港", slug: "fuke-port-detail",
@@ -441,6 +456,14 @@ export const kansaiDetailSpots: FishingSpot[] = [
     tackleRecommendations: [],
     gearGuides: [gearEging, gearSabiki, gearRock, gearUki],
     safetyLevel: "caution", safetyNotes: ["外堤防は高さあり注意", "漁業関係者の邪魔にならないよう配慮", "ゴミは必ず持ち帰り"],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      restrictedAreas: ["漁協前の作業場付近は立入禁止"],
+      otherRules: ["漁業関係者の作業を妨げないこと", "外堤防の先端は波をかぶることがあるため注意"],
+    },
   },
 
   // =========================================
@@ -622,6 +645,14 @@ export const kansaiDetailSpots: FishingSpot[] = [
     tackleRecommendations: [],
     gearGuides: [gearSabiki, gearUki, gearLure],
     safetyLevel: "safe", safetyNotes: ["フェリーターミナル周辺は足場良好", "定期船の航路に注意", "夜間照明あり"],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      restrictedAreas: ["フェリーターミナル乗降場は釣り禁止", "家島行き定期船の航路への仕掛け投入禁止"],
+      otherRules: ["定期船の出入りに注意すること"],
+    },
   },
   {
     id: "s868", name: "坊勢島", slug: "bose-jima",
@@ -828,6 +859,13 @@ export const kansaiDetailSpots: FishingSpot[] = [
     tackleRecommendations: [],
     gearGuides: [gearUki, gearEging, gearRock],
     safetyLevel: "caution", safetyNotes: ["道が狭く駐車場が少ない", "地元の漁師さんへの配慮を忘れずに", "磯場は滑りやすい"],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      otherRules: ["駐車場が非常に少ないため路上駐車禁止", "地元漁師の作業を妨げないこと", "コマセ使用後は必ず清掃すること"],
+    },
   },
   {
     id: "s877", name: "マリーナシティ大波止", slug: "marinacity-ohanato-detail",
