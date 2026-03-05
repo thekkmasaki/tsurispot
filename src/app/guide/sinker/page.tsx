@@ -16,6 +16,11 @@ export const metadata: Metadata = {
     type: "article",
     url: "https://tsurispot.com/guide/sinker",
     siteName: "ツリスポ",
+    images: [{
+      url: `/api/og?title=${encodeURIComponent("おもりの種類と選び方ガイド")}&emoji=${encodeURIComponent("⚓")}`,
+      width: 1200,
+      height: 630,
+    }],
   },
   alternates: {
     canonical: "https://tsurispot.com/guide/sinker",
