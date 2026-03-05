@@ -2633,6 +2633,13 @@ const _baseSpots: FishingSpot[] = [
     ],
     safetyLevel: "safe",
     safetyNotes: ["整備された護岸で足場良好", "アメリカンビレッジが近くトイレ・食事に困らない"],
+    rules: {
+      castingAllowed: false,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["投げ釣り禁止（護岸のため）", "コマセの使用は周辺施設への配慮から控えること", "ヨットハーバー内への仕掛け投入禁止"],
+    },
     youtubeLinks: [
       { label: "北谷フィッシャリーナで釣り", searchQuery: "北谷 フィッシャリーナ 釣り 沖縄 アメリカンビレッジ", description: "沖縄・北谷の護岸でのんびりアジやハゼを釣る。" },
     ],
@@ -2725,6 +2732,14 @@ const _baseSpots: FishingSpot[] = [
     ],
     safetyLevel: "caution",
     safetyNotes: ["堤防は柵がない", "先端部は波をかぶることがある", "夜釣りはヘッドライト必須"],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      restrictedAreas: ["港内の荷揚げ場付近は釣り禁止"],
+      otherRules: ["港内でのコマセ使用禁止", "漁船の航路に仕掛けを投入しないこと", "ゴミの持ち帰り厳守"],
+    },
     youtubeLinks: [
       { label: "大磯港で釣り", searchQuery: "大磯港 釣り サビキ エギング 湘南", description: "湘南・大磯港の堤防でサビキ釣りやエギングを楽しむ。" },
     ],
@@ -2815,6 +2830,14 @@ const _baseSpots: FishingSpot[] = [
     ],
     safetyLevel: "safe",
     safetyNotes: ["港内は足場が良い", "漁船の出入りに注意", "周辺に飲食店・トイレ多数"],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      restrictedAreas: ["外港堤防の一部は立入禁止（柵あり）", "深海水族館前は釣り禁止"],
+      otherRules: ["漁船の出入りが多いため航路への投げ込み注意", "早朝は水揚げ作業中のため漁港関係者に配慮すること"],
+    },
     isKuchikomiSpot: true,
     youtubeLinks: [
       { label: "沼津港でアジ・タチウオ釣り", searchQuery: "沼津港 アジ タチウオ 釣り 駿河湾", description: "駿河湾の沼津港でアジとタチウオを狙う。海鮮丼とセットで楽しむ。" },
@@ -2907,6 +2930,14 @@ const _baseSpots: FishingSpot[] = [
     ],
     safetyLevel: "safe",
     safetyNotes: ["港内は足場が良く初心者向け", "漁船の出入りに注意", "マグロ丼の店が近く食事に便利"],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      restrictedAreas: ["マグロ水揚げ場周辺は釣り禁止", "漁協前の岸壁は漁業関係者以外立入禁止"],
+      otherRules: ["漁船の出入りが頻繁なため航路に注意", "早朝の水揚げ時間帯は漁港関係者優先"],
+    },
     youtubeLinks: [
       { label: "三崎港でアジ・カワハギ釣り", searchQuery: "三崎港 アジ カワハギ 釣り 三浦", description: "マグロの街・三崎港でアジやカワハギを堤防から狙う。" },
     ],
@@ -2996,6 +3027,14 @@ const _baseSpots: FishingSpot[] = [
     ],
     safetyLevel: "caution",
     safetyNotes: ["外洋に面しているため波が高い日は危険", "堤防に柵がないエリアあり", "風が強い日が多いので防寒対策必須"],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      restrictedAreas: ["第一卸売市場周辺は関係者以外立入禁止", "外港の一部堤防は立入禁止（柵あり）"],
+      otherRules: ["漁業関係者・トラックの出入りが多いため通行の妨げにならないこと", "水揚げ作業中のエリアには近づかない"],
+    },
     youtubeLinks: [
       { label: "銚子漁港でショアジギング", searchQuery: "銚子漁港 ショアジギング イナダ 青物", description: "銚子漁港の堤防からイナダなどの青物をショアジギングで狙う。" },
       { label: "銚子でカレイ投げ釣り", searchQuery: "銚子 カレイ 投げ釣り 冬 千葉", description: "冬の銚子でカレイを投げ釣りで狙う。良型カレイの実績ポイント。" },
