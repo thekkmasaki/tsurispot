@@ -1,10 +1,17 @@
 import type { FishingSpot, FishSpecies, Region, GearGuide } from "@/types";
 import { getFishBySlug } from "./fish";
+import { regions } from "./regions";
 
 function fish(slug: string): FishSpecies {
   const f = getFishBySlug(slug);
   if (!f) throw new Error(`Fish not found: ${slug}`);
   return f;
+}
+
+function region(id: string) {
+  const r = regions.find((r) => r.id === id);
+  if (!r) throw new Error(`Region not found: ${id}`);
+  return r;
 }
 
 // =============================================
@@ -15,9 +22,7 @@ function fish(slug: string): FishSpecies {
 const localRegions: Region[] = [
   // 北海道
   { id: "r2000", prefecture: "北海道", areaName: "苫小牧西", slug: "hokkaido-tomakomai-nishi" },
-  { id: "r2001", prefecture: "北海道", areaName: "根室", slug: "hokkaido-nemuro" },
   { id: "r2002", prefecture: "北海道", areaName: "釧路", slug: "hokkaido-kushiro" },
-  { id: "r2003", prefecture: "北海道", areaName: "函館", slug: "hokkaido-hakodate" },
   { id: "r2004", prefecture: "北海道", areaName: "室蘭", slug: "hokkaido-muroran" },
   { id: "r2005", prefecture: "北海道", areaName: "八雲", slug: "hokkaido-yakumo" },
   { id: "r2006", prefecture: "北海道", areaName: "鹿部", slug: "hokkaido-shikabe" },
@@ -52,7 +57,6 @@ const localRegions: Region[] = [
   { id: "r2051", prefecture: "秋田県", areaName: "能代・八峰", slug: "akita-noshiro-happo" },
   { id: "r2052", prefecture: "秋田県", areaName: "由利本荘・にかほ", slug: "akita-yurihonjo-nikaho" },
   { id: "r2053", prefecture: "秋田県", areaName: "秋田市", slug: "akita-city-add" },
-  { id: "r2054", prefecture: "秋田県", areaName: "八郎潟", slug: "akita-hachirogata" },
   // 宮城
   { id: "r2060", prefecture: "宮城県", areaName: "仙台・名取", slug: "miyagi-sendai-natori" },
   { id: "r2061", prefecture: "宮城県", areaName: "石巻・東松島", slug: "miyagi-ishinomaki-hm" },
@@ -72,9 +76,7 @@ const localRegions: Region[] = [
 ];
 
 function localRegion(id: string) {
-  const r = localRegions.find((r) => r.id === id);
-  if (!r) throw new Error(`Region not found: ${id}`);
-  return r;
+  return localRegions.find((r) => r.id === id) || region(id);
 }
 
 // マヅメ情報
@@ -164,7 +166,7 @@ export const hokkaidoTohokuAdd2Spots: FishingSpot[] = [
     latitude: 43.34460, longitude: 145.58440,
     address: "〒087-0052 北海道根室市梅ケ枝町2丁目34",
     accessInfo: "JR根室駅から徒歩約15分。釧路市から国道44号経由で約2時間30分。",
-    region: localRegion("r2001"), spotType: "port", difficulty: "beginner",
+    region: region("r63"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/wikimedia/nemuro-ko.webp", imageAttribution: "Photo: Tbe00626 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 89, googleRating: 4.5, googleReviewCount: 10,
@@ -208,7 +210,7 @@ export const hokkaidoTohokuAdd2Spots: FishingSpot[] = [
     latitude: 41.7760, longitude: 140.7260,
     address: "〒041-0821 北海道函館市港町14",
     accessInfo: "JR函館駅から車で約5分。函館空港から約20分。港周辺に駐車場あり。",
-    region: localRegion("r2003"), spotType: "port", difficulty: "beginner",
+    region: region("r51"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺有料駐車場あり（500円/日程度）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/wikimedia/hakodate-kita-futo.webp", imageAttribution: "Photo: Rsa / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.0, reviewCount: 198, googleRating: 3.9, googleReviewCount: 13,
@@ -625,7 +627,7 @@ export const hokkaidoTohokuAdd2Spots: FishingSpot[] = [
     latitude: 41.7690, longitude: 140.7170,
     address: "〒040-0052 北海道函館市大町15",
     accessInfo: "JR函館駅から車で約5分。函館市電末広町電停から徒歩約10分。",
-    region: localRegion("r2003"), spotType: "pier", difficulty: "beginner",
+    region: region("r51"), spotType: "pier", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "島内無料駐車場あり（約100台）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.1, reviewCount: 210,

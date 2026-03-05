@@ -1,10 +1,17 @@
 import { FishingSpot, FishSpecies, Region } from "@/types";
 import { getFishBySlug } from "./fish";
+import { regions } from "./regions";
 
 function fish(slug: string): FishSpecies {
   const f = getFishBySlug(slug);
   if (!f) throw new Error(`Fish not found: ${slug}`);
   return f;
+}
+
+function region(id: string) {
+  const r = regions.find((r) => r.id === id);
+  if (!r) throw new Error(`Region not found: ${id}`);
+  return r;
 }
 
 const localRegions: Region[] = [
@@ -18,7 +25,6 @@ const localRegions: Region[] = [
   { id: "r4011", prefecture: "鳥取県", areaName: "境港・米子", slug: "tottori-sakaiminato-yonago" },
   { id: "r4012", prefecture: "鳥取県", areaName: "倉吉・東伯", slug: "tottori-kurayoshi-tohaku" },
   // 徳島県
-  { id: "r4020", prefecture: "徳島県", areaName: "鳴門", slug: "tokushima-naruto" },
   { id: "r4021", prefecture: "徳島県", areaName: "小松島・阿南", slug: "tokushima-komatsushima-anan" },
   { id: "r4022", prefecture: "徳島県", areaName: "牟岐・海陽", slug: "tokushima-mugi-kaiyo" },
   // 愛媛県
@@ -34,20 +40,15 @@ const localRegions: Region[] = [
   // 島根県
   { id: "r4050", prefecture: "島根県", areaName: "松江・宍道湖", slug: "shimane-matsue-shinjiko" },
   { id: "r4051", prefecture: "島根県", areaName: "浜田・江津", slug: "shimane-hamada-gotsu" },
-  { id: "r4052", prefecture: "島根県", areaName: "隠岐", slug: "shimane-oki" },
   { id: "r4053", prefecture: "島根県", areaName: "出雲・大田", slug: "shimane-izumo-oda" },
   // 山口県
-  { id: "r4060", prefecture: "山口県", areaName: "下関", slug: "yamaguchi-shimonoseki" },
-  { id: "r4061", prefecture: "山口県", areaName: "萩・長門", slug: "yamaguchi-hagi-nagato" },
   { id: "r4062", prefecture: "山口県", areaName: "周防大島・柳井", slug: "yamaguchi-suooshima-yanai" },
   { id: "r4063", prefecture: "山口県", areaName: "下松・光", slug: "yamaguchi-kudamatsu-hikari" },
   { id: "r4064", prefecture: "山口県", areaName: "宇部・山陽小野田", slug: "yamaguchi-ube-sanyo-onoda" },
 ];
 
 function localRegion(id: string) {
-  const r = localRegions.find((r) => r.id === id);
-  if (!r) throw new Error(`Region not found: ${id}`);
-  return r;
+  return localRegions.find((r) => r.id === id) || region(id);
 }
 
 const mazumeWest = {
@@ -550,7 +551,7 @@ export const expandWestSpots: FishingSpot[] = [
     latitude: 34.2311, longitude: 134.6256,
     address: "〒772-0053 徳島県鳴門市鳴門町土佐泊浦",
     accessInfo: "JR鳴門駅から車で約15分。神戸淡路鳴門自動車道鳴門北ICから約5分。",
-    region: localRegion("r4020"), spotType: "port", difficulty: "intermediate",
+    region: region("r29"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 4.0, reviewCount: 95,
@@ -632,7 +633,7 @@ export const expandWestSpots: FishingSpot[] = [
     latitude: 34.2025, longitude: 134.5939,
     address: "〒772-0011 徳島県鳴門市鳴門町高島",
     accessInfo: "JR鳴門駅から車で約10分。神戸淡路鳴門自動車道鳴門ICから約10分。",
-    region: localRegion("r4020"), spotType: "port", difficulty: "intermediate",
+    region: region("r29"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "渡船場に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 4.2, reviewCount: 110,
@@ -652,7 +653,7 @@ export const expandWestSpots: FishingSpot[] = [
     latitude: 34.0556, longitude: 134.5833,
     address: "〒770-0867 徳島県徳島市沖洲",
     accessInfo: "JR徳島駅から車で約10分。徳島自動車道徳島ICから約15分。",
-    region: localRegion("r4020"), spotType: "port", difficulty: "intermediate",
+    region: region("r29"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.8, reviewCount: 140,
@@ -1193,7 +1194,7 @@ export const expandWestSpots: FishingSpot[] = [
     latitude: 36.2086, longitude: 133.3219,
     address: "〒685-0013 島根県隠岐郡隠岐の島町中町",
     accessInfo: "七類港からフェリーで約2時間半。隠岐空港から車で約10分。",
-    region: localRegion("r4052"), spotType: "port", difficulty: "intermediate",
+    region: region("r196"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 4.3, reviewCount: 80,
@@ -1355,7 +1356,7 @@ export const expandWestSpots: FishingSpot[] = [
     latitude: 33.9567, longitude: 130.9419,
     address: "〒750-0005 山口県下関市唐戸町",
     accessInfo: "JR下関駅からバスで約10分。中国自動車道下関ICから約15分。",
-    region: localRegion("r4060"), spotType: "port", difficulty: "intermediate",
+    region: region("r28"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "唐戸市場周辺に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 4.0, reviewCount: 200,
@@ -1376,7 +1377,7 @@ export const expandWestSpots: FishingSpot[] = [
     latitude: 34.4158, longitude: 131.3906,
     address: "〒758-0057 山口県萩市堀内",
     accessInfo: "JR東萩駅から車で約5分。小郡萩道路萩ICから約30分。",
-    region: localRegion("r4061"), spotType: "port", difficulty: "beginner",
+    region: region("r844"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.9, reviewCount: 110,
@@ -1397,7 +1398,7 @@ export const expandWestSpots: FishingSpot[] = [
     latitude: 34.3936, longitude: 131.1833,
     address: "〒759-4106 山口県長門市仙崎",
     accessInfo: "JR仙崎駅から徒歩約10分。中国自動車道美祢ICから約40分。",
-    region: localRegion("r4061"), spotType: "port", difficulty: "beginner",
+    region: region("r844"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.8, reviewCount: 90,
@@ -1540,7 +1541,7 @@ export const expandWestSpots: FishingSpot[] = [
     latitude: 34.3539, longitude: 130.8597,
     address: "〒759-5332 山口県下関市豊北町角島",
     accessInfo: "JR特牛駅から車で約15分。中国自動車道美祢ICから約70分。",
-    region: localRegion("r4060"), spotType: "port", difficulty: "intermediate",
+    region: region("r28"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "島内に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 4.2, reviewCount: 95,
@@ -1561,7 +1562,7 @@ export const expandWestSpots: FishingSpot[] = [
     latitude: 33.9350, longitude: 130.9233,
     address: "〒750-0092 山口県下関市彦島本村町",
     accessInfo: "JR下関駅から車で約10分。中国自動車道下関ICから約15分。",
-    region: localRegion("r4060"), spotType: "breakwater", difficulty: "intermediate",
+    region: region("r28"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "各釣り場近くに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.9, reviewCount: 110,
@@ -1623,7 +1624,7 @@ export const expandWestSpots: FishingSpot[] = [
     latitude: 34.4361, longitude: 131.4167,
     address: "〒758-0011 山口県萩市越ヶ浜",
     accessInfo: "JR越ヶ浜駅から徒歩約10分。小郡萩道路萩ICから約15分。",
-    region: localRegion("r4061"), spotType: "port", difficulty: "intermediate",
+    region: region("r844"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.8, reviewCount: 65,

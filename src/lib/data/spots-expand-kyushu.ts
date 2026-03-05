@@ -1,10 +1,17 @@
 import { FishingSpot, FishSpecies, Region } from "@/types";
 import { getFishBySlug } from "./fish";
+import { regions } from "./regions";
 
 function fish(slug: string): FishSpecies {
   const f = getFishBySlug(slug);
   if (!f) throw new Error(`Fish not found: ${slug}`);
   return f;
+}
+
+function region(id: string) {
+  const r = regions.find((r) => r.id === id);
+  if (!r) throw new Error(`Region not found: ${id}`);
+  return r;
 }
 
 const localRegions: Region[] = [
@@ -35,7 +42,7 @@ const localRegions: Region[] = [
 ];
 
 function localRegion(id: string) {
-  return localRegions.find((r) => r.id === id)!;
+  return localRegions.find((r) => r.id === id) || region(id);
 }
 
 const mazumeKyushu = {
