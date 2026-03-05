@@ -1,5 +1,12 @@
 import { FishingSpot, FishSpecies, Region } from "@/types";
 import { getFishBySlug } from "./fish";
+import { regions } from "./regions";
+
+function region(id: string): Region {
+  const r = regions.find((r) => r.id === id);
+  if (!r) throw new Error(`Region not found: ${id}`);
+  return r;
+}
 
 function fish(slug: string): FishSpecies {
   const f = getFishBySlug(slug);
@@ -33,19 +40,15 @@ const localRegions: Region[] = [
   { id: "r4242", prefecture: "石川県", areaName: "輪島・珠洲", slug: "ishikawa-wajima-suzu" },
   { id: "r4243", prefecture: "石川県", areaName: "加賀・小松", slug: "ishikawa-kaga-komatsu" },
   // 福井県
-  { id: "r4250", prefecture: "福井県", areaName: "敦賀", slug: "fukui-tsuruga" },
   { id: "r4251", prefecture: "福井県", areaName: "小浜・高浜", slug: "fukui-obama-takahama" },
   { id: "r4252", prefecture: "福井県", areaName: "三国・坂井", slug: "fukui-mikuni-sakai" },
   { id: "r4253", prefecture: "福井県", areaName: "越前・南越前", slug: "fukui-echizen-minamiechizen" },
   // 富山県
-  { id: "r4260", prefecture: "富山県", areaName: "氷見", slug: "toyama-himi" },
   { id: "r4261", prefecture: "富山県", areaName: "新湊・射水", slug: "toyama-shinminato-imizu" },
   { id: "r4262", prefecture: "富山県", areaName: "黒部・魚津", slug: "toyama-kurobe-uozu" },
   { id: "r4263", prefecture: "富山県", areaName: "富山・岩瀬", slug: "toyama-toyama-iwase" },
   // 宮城県
   { id: "r4270", prefecture: "宮城県", areaName: "塩竈・松島", slug: "miyagi-shiogama-matsushima" },
-  { id: "r4271", prefecture: "宮城県", areaName: "石巻", slug: "miyagi-ishinomaki" },
-  { id: "r4272", prefecture: "宮城県", areaName: "気仙沼", slug: "miyagi-kesennuma" },
 ];
 
 function localRegion(id: string) {
@@ -1278,7 +1281,7 @@ export const expandNorthSpots: FishingSpot[] = [
     latitude: 35.6556, longitude: 136.0694,
     address: "〒914-0079 福井県敦賀市港町1-1",
     accessInfo: "JR敦賀駅から車で約10分。北陸自動車道敦賀ICから約10分。",
-    region: localRegion("r4250"), spotType: "port", difficulty: "beginner",
+    region: region("r23"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "", imageAttribution: "", images: [], rating: 4.0, reviewCount: 250, googleRating: 3.9, googleReviewCount: 160,
@@ -1388,7 +1391,7 @@ export const expandNorthSpots: FishingSpot[] = [
     latitude: 35.7278, longitude: 136.0528,
     address: "〒914-0844 福井県敦賀市色浜",
     accessInfo: "JR敦賀駅から車で約25分。北陸自動車道敦賀ICから約25分。",
-    region: localRegion("r4250"), spotType: "rocky", difficulty: "intermediate",
+    region: region("r23"), spotType: "rocky", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "浜辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", imageAttribution: "", images: [], rating: 4.0, reviewCount: 70, googleRating: 4.0, googleReviewCount: 30,
@@ -1501,7 +1504,7 @@ export const expandNorthSpots: FishingSpot[] = [
     latitude: 36.8556, longitude: 136.9806,
     address: "〒935-0011 富山県氷見市中央町",
     accessInfo: "JR氷見駅から徒歩約15分。能越自動車道氷見ICから約10分。",
-    region: localRegion("r4260"), spotType: "port", difficulty: "beginner",
+    region: region("r21"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "番屋街駐車場利用可",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "", imageAttribution: "", images: [], rating: 4.0, reviewCount: 200, googleRating: 3.9, googleReviewCount: 130,
@@ -1633,7 +1636,7 @@ export const expandNorthSpots: FishingSpot[] = [
     latitude: 36.8000, longitude: 137.0139,
     address: "〒933-0133 富山県高岡市太田",
     accessInfo: "JR雨晴駅から徒歩約5分。能越自動車道高岡ICから約20分。",
-    region: localRegion("r4260"), spotType: "beach", difficulty: "beginner",
+    region: region("r21"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "雨晴海岸駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", imageAttribution: "", images: [], rating: 3.8, reviewCount: 80, googleRating: 4.3, googleReviewCount: 3000,
@@ -1677,7 +1680,7 @@ export const expandNorthSpots: FishingSpot[] = [
     latitude: 36.7917, longitude: 137.0611,
     address: "〒933-0105 富山県高岡市伏木錦町",
     accessInfo: "JR伏木駅から徒歩約10分。能越自動車道高岡ICから約15分。",
-    region: localRegion("r4260"), spotType: "port", difficulty: "intermediate",
+    region: region("r21"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", imageAttribution: "", images: [], rating: 3.8, reviewCount: 130, googleRating: 3.7, googleReviewCount: 60,
@@ -1746,7 +1749,7 @@ export const expandNorthSpots: FishingSpot[] = [
     latitude: 38.4194, longitude: 141.3028,
     address: "〒986-0022 宮城県石巻市魚町1丁目",
     accessInfo: "JR石巻駅から車で約10分。三陸自動車道石巻河南ICから約15分。",
-    region: localRegion("r4271"), spotType: "port", difficulty: "beginner",
+    region: region("r145"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "", imageAttribution: "", images: [], rating: 3.9, reviewCount: 200, googleRating: 3.8, googleReviewCount: 120,
@@ -1768,7 +1771,7 @@ export const expandNorthSpots: FishingSpot[] = [
     latitude: 38.9028, longitude: 141.5806,
     address: "〒988-0037 宮城県気仙沼市魚浜町",
     accessInfo: "JR気仙沼駅から車で約10分。三陸自動車道気仙沼中央ICから約10分。",
-    region: localRegion("r4272"), spotType: "port", difficulty: "beginner",
+    region: region("r1090"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", imageAttribution: "", images: [], rating: 3.8, reviewCount: 150, googleRating: 3.9, googleReviewCount: 80,

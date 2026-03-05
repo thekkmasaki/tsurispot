@@ -159,7 +159,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
     latitude: 45.4170, longitude: 141.6810,
     address: "〒097-0023 北海道稚内市開運1丁目2-2",
     accessInfo: "JR稚内駅から徒歩約10分。稚内空港から車で約25分。",
-    region: localRegion("r61"), spotType: "port", difficulty: "beginner",
+    region: region("r61"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/wikimedia/wakkanai-kita-bouhatei-dome.webp", imageAttribution: "Photo: Ka23 13 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 112, googleRating: 4.1, googleReviewCount: 1963,
