@@ -328,6 +328,13 @@ const _baseSpots: FishingSpot[] = [
     ],
     safetyLevel: "safe",
     safetyNotes: ["護岸は整備されているが柵が低い箇所あり", "子供は必ずライフジャケット着用"],
+    rules: {
+      castingAllowed: false,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      otherRules: ["投げ釣りは禁止（ちょい投げはOK）", "周囲の歩行者に配慮すること"],
+    },
     youtubeLinks: [
       { label: "仙台港中央公園でサビキ釣り", searchQuery: "仙台港中央公園 サビキ釣り 初心者", description: "仙台港中央公園の護岸からサビキ釣りでアジやハゼを狙う。" },
     ],
@@ -666,6 +673,14 @@ const _baseSpots: FishingSpot[] = [
     ],
     safetyLevel: "caution",
     safetyNotes: ["先端部は潮流が速い", "トイレ・コンビニが近くにない", "夜釣りは足元に注意（ヘッドライト必須）"],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      restrictedAreas: ["自衛隊側のフェンス内は立入禁止"],
+      otherRules: ["自衛隊敷地内への立入厳禁", "堤防先端は潮が速いため上級者向け"],
+    },
     youtubeLinks: [
       { label: "館山自衛隊堤防でエギング", searchQuery: "館山 自衛隊堤防 エギング アオリイカ", description: "館山自衛隊堤防でアオリイカを狙うエギングの実釣。" },
     ],
@@ -773,6 +788,14 @@ const _baseSpots: FishingSpot[] = [
     ],
     safetyLevel: "safe",
     safetyNotes: ["人工磯エリアは足場が不安定な箇所あり", "護岸には柵あり"],
+    rules: {
+      castingAllowed: false,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      maxRods: 2,
+      otherRules: ["投げ釣りは人工磯エリアのみ可能（護岸では禁止）", "ゴミは必ず持ち帰ること"],
+    },
     youtubeLinks: [
       { label: "若洲海浜公園で釣り", searchQuery: "若洲海浜公園 釣り 初心者 サビキ", description: "都内屈指の釣りスポット若洲海浜公園でのサビキ釣り入門。" },
       { label: "若洲で穴釣り", searchQuery: "若洲海浜公園 穴釣り カサゴ テトラ", description: "若洲の人工磯でカサゴを狙う穴釣りの楽しみ方。" },
@@ -862,6 +885,13 @@ const _baseSpots: FishingSpot[] = [
     ],
     safetyLevel: "safe",
     safetyNotes: ["24時間釣り可能だが夜間は足元注意", "護岸は整備されており柵あり"],
+    rules: {
+      castingAllowed: false,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["投げ釣り禁止（ちょい投げはOK）", "コマセ使用禁止（公園管理規則）", "ジョギング・散歩の方が多いため周囲に配慮すること"],
+    },
     youtubeLinks: [
       { label: "豊洲ぐるり公園のハゼ釣り", searchQuery: "豊洲ぐるり公園 ハゼ釣り ちょい投げ", description: "豊洲市場近くの公園でハゼのちょい投げ釣り。" },
       { label: "豊洲でシーバスナイト", searchQuery: "豊洲 シーバス ルアー 夜釣り 夜景", description: "夜景を楽しみながら豊洲でシーバスをルアーで狙う。" },
@@ -961,6 +991,14 @@ const _baseSpots: FishingSpot[] = [
     ],
     safetyLevel: "safe",
     safetyNotes: ["安全柵完備の有料施設", "スタッフ常駐で初心者も安心"],
+    rules: {
+      castingAllowed: false,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      maxRods: 2,
+      otherRules: ["投げ釣り禁止", "竿は1人2本まで", "タコ釣り禁止", "見学のみの入場不可"],
+    },
     youtubeLinks: [
       { label: "大黒海釣り施設でサビキ", searchQuery: "大黒海釣り施設 サビキ アジ 横浜", description: "横浜・大黒海釣り施設でアジやイワシをサビキ釣り。" },
       { label: "大黒海釣り施設 初心者ガイド", searchQuery: "大黒海釣り施設 初心者 手ぶら レンタル", description: "手ぶらでOK！大黒海釣り施設の初心者向けガイド。" },
@@ -1056,6 +1094,14 @@ const _baseSpots: FishingSpot[] = [
     ],
     safetyLevel: "safe",
     safetyNotes: ["安全柵完備の有料施設", "営業時間は季節で変動（要確認）"],
+    rules: {
+      castingAllowed: false,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      maxRods: 2,
+      otherRules: ["投げ釣り禁止", "竿は1人2本まで", "タコ釣り禁止", "営業時間外の入場不可"],
+    },
     youtubeLinks: [
       { label: "本牧海づり施設でカサゴ穴釣り", searchQuery: "本牧海づり施設 カサゴ 穴釣り ブラクリ", description: "本牧海づり施設でカサゴを穴釣りで狙うテクニック。" },
       { label: "本牧でメバリング", searchQuery: "本牧 メバリング メバル 夜釣り 横浜", description: "横浜・本牧でメバルをルアーで狙うメバリング。" },
