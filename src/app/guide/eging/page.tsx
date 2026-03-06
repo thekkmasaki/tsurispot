@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { fishingSpots } from "@/lib/data/spots";
 import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
+import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
 
 export const metadata: Metadata = {
   title: "エギング入門ガイド - エギの選び方・シャクリ方・季節別攻略",
@@ -719,6 +720,9 @@ export default function EgingGuidePage() {
               ))}
           </div>
         </section>
+
+        {/* この釣り方で釣れる魚 */}
+        <CatchableFishSection guideSlug="eging" title="エギングで釣れる魚" />
 
         {/* 関連ガイド */}
         <div className="mt-8 sm:mt-12">

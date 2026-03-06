@@ -8,6 +8,7 @@ import { RigDiagram } from "@/components/rig-diagram";
 import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import { fishingSpots } from "@/lib/data/spots";
+import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
 
 export const metadata: Metadata = {
   title: "ウキ釣り完全ガイド - ウキの種類・仕掛け・アタリの取り方",
@@ -865,6 +866,9 @@ export default function FloatFishingGuidePage() {
             description="初心者向けにウキ釣りの基本を解説した動画です。"
           />
         </div>
+
+        {/* この釣り方で釣れる魚 */}
+        <CatchableFishSection guideSlug="float-fishing" title="ウキ釣りで釣れる魚" />
 
         {/* 関連ガイド */}
         <div className="mt-8 sm:mt-12">
