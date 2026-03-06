@@ -21,6 +21,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { ProductList } from "@/components/affiliate/product-list";
 import { getProductsByMethod } from "@/lib/data/products";
 import { RigDiagram } from "@/components/rig-diagram";
+import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
 
 export const metadata: Metadata = {
   title: "穴釣り完全ガイド - カサゴ・メバルの釣り方と仕掛け【初心者向け】",
@@ -926,6 +927,9 @@ export default function AnazuriGuidePage() {
             description="穴釣りを始めるなら、まずはブラクリ仕掛けと短い竿を揃えましょう。"
           />
         </section>
+
+        {/* この釣り方で釣れる魚 */}
+        <CatchableFishSection guideSlug="anazuri" title="穴釣りで釣れる魚" />
 
         {/* 関連ガイド */}
         <section className="mt-8 sm:mt-10">

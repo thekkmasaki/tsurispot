@@ -19,6 +19,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { ProductList } from "@/components/affiliate/product-list";
 import { getProductsByMethod } from "@/lib/data/products";
 import { RigDiagram } from "@/components/rig-diagram";
+import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
 
 export const metadata: Metadata = {
   title: "ちょい投げ釣り完全ガイド - キス・ハゼの釣り方と仕掛け【初心者向け】",
@@ -1167,6 +1168,9 @@ export default function ChoinageGuidePage() {
               ))}
           </div>
         </section>
+
+        {/* この釣り方で釣れる魚 */}
+        <CatchableFishSection guideSlug="choinage" title="ちょい投げで釣れる魚" />
 
         {/* 関連ガイド */}
         <section className="mt-8 sm:mt-10">

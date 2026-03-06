@@ -64,6 +64,42 @@ export const FISHING_METHODS: FishingMethodDef[] = [
     description:
       "疑似餌（ルアー）を使って魚を誘い出す釣り方。メバリング、アジング、ショアジギングなど多彩なスタイルがある。",
   },
+  {
+    slug: "anazuri",
+    name: "穴釣り",
+    methods: ["穴釣り", "ブラクリ釣り", "穴釣り（磯）", "穴釣り・石積み釣り"],
+    icon: "🪨",
+    guide: "/guide/anazuri",
+    description:
+      "テトラポッドや岩の隙間に仕掛けを落とし込んでカサゴやメバルなどの根魚を狙う釣り方。",
+  },
+  {
+    slug: "jigging",
+    name: "ショアジギング",
+    methods: ["ショアジギング", "ジギング", "ショアルアー", "ショアプラッギング", "磯からのキャスティング"],
+    icon: "💪",
+    guide: "/guide/jigging",
+    description:
+      "メタルジグを遠投して青物やヒラメなどを狙うパワフルな釣り方。堤防や磯から大物が狙える。",
+  },
+  {
+    slug: "oyogase",
+    name: "泳がせ釣り",
+    methods: ["泳がせ釣り", "泳がせ釣り（ノマセ釣り）", "泳がせ釣り（堤防）"],
+    icon: "🐠",
+    guide: "/guide/oyogase",
+    description:
+      "サビキで釣った小魚を生きエサにして大物を狙う釣り方。ヒラメやブリなどが対象。",
+  },
+  {
+    slug: "entou-kago",
+    name: "遠投カゴ釣り",
+    methods: ["カゴ釣り", "遠投カゴ釣り"],
+    icon: "🧺",
+    guide: "/guide/entou-kago",
+    description:
+      "カゴにコマセを詰めて遠投し、マダイやアジなどを狙う本格的な釣り方。",
+  },
 ];
 
 // ===== 月定義 =====
@@ -97,6 +133,39 @@ export function getMethodBySlug(slug: string): FishingMethodDef | undefined {
 
 export function getMonthBySlug(slug: string): MonthDef | undefined {
   return MONTHS.find((m) => m.slug === slug);
+}
+
+/**
+ * 指定釣り方で釣れる魚一覧（月を問わず）
+ * ガイドページの「この釣り方で釣れる魚」セクション用
+ */
+export function getFishForMethod(
+  method: FishingMethodDef,
+  limit: number = 15
+): FishSpecies[] {
+  return fishSpecies
+    .filter((f) => {
+      if (!f.fishingMethods || f.fishingMethods.length === 0) return false;
+      return f.fishingMethods.some((fm) =>
+        method.methods.some(
+          (m) => fm.methodName === m || fm.methodName.includes(m)
+        )
+      );
+    })
+    .sort((a, b) => (a.popularity ?? 999) - (b.popularity ?? 999))
+    .slice(0, limit);
+}
+
+/**
+ * ガイドslugから釣れる魚を取得するショートカット
+ */
+export function getFishForGuideSlug(
+  guideSlug: string,
+  limit: number = 15
+): FishSpecies[] {
+  const method = getMethodBySlug(guideSlug);
+  if (!method) return [];
+  return getFishForMethod(method, limit);
 }
 
 /**

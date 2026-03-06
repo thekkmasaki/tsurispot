@@ -28,6 +28,7 @@ import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import type { YouTubeSearchLink } from "@/types";
 import { RigDiagram } from "@/components/rig-diagram";
+import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
 
 const sabikiVideos: YouTubeSearchLink[] = [
   {
@@ -1522,6 +1523,9 @@ export default function SabikiGuidePage() {
             </p>
           )}
         </section>
+
+        {/* この釣り方で釣れる魚 */}
+        <CatchableFishSection guideSlug="sabiki" title="サビキ釣りで釣れる魚" />
 
         {/* 関連ガイド */}
         <section className="mt-8 sm:mt-10">
