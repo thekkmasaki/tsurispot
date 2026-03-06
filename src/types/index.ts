@@ -43,6 +43,7 @@ export interface FishingSpot {
   youtubeLinks?: YouTubeSearchLink[];
   rules?: SpotRules;
   parkingPeakInfo?: ParkingPeakInfo;
+  parkingGuide?: ParkingGuide;
   familyInfo?: FamilyInfo;
   spotPhotos?: SpotPhoto[];
   googleRating?: number;
@@ -65,6 +66,28 @@ export interface ParkingPeakInfo {
   peakStartTime: string;
   recommendedArrival: string;
   alternateParking?: string;
+}
+
+export interface ParkingGuide {
+  fee: "free" | "paid" | "conditional";
+  feeDetail?: string;
+  capacity?: number;
+  parkingName?: string;
+  locationNote?: string;
+  parkingLatitude?: number;
+  parkingLongitude?: number;
+  walkToSpot?: string;
+  peakTime?: string;
+  alternate?: AlternateParking[];
+  notes?: string[];
+}
+
+export interface AlternateParking {
+  name: string;
+  distance?: string;
+  fee?: string;
+  latitude?: number;
+  longitude?: number;
 }
 
 export interface FamilyInfo {

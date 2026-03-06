@@ -51,7 +51,7 @@ import { FishLikeButton } from "@/components/spots/fish-like-button";
 import { FishingReportSummary } from "@/components/spots/fishing-report-summary";
 import { SpotAffiliateRecommend } from "@/components/spots/spot-affiliate-recommend";
 import { SpotDetailTabs } from "@/components/spots/spot-detail-tabs";
-import { ParkingPeakCard } from "@/components/spots/parking-peak-info";
+import { ParkingGuideCard, getParkingBadgeText, getParkingAmenityDescription, getParkingFaqAnswer } from "@/components/spots/parking-guide-card";
 import { FamilyInfoCard } from "@/components/spots/family-info";
 import { PackingChecklist } from "@/components/spots/packing-checklist";
 import { getCatchReportsBySpot } from "@/lib/data/catch-reports";
@@ -190,7 +190,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
     publicAccess: true,
     ...(spot.mainImageUrl?.startsWith("http") ? { image: spot.mainImageUrl } : {}),
     amenityFeature: [
-      ...(spot.hasParking ? [{ "@type": "LocationFeatureSpecification", name: "駐車場", value: true }] : []),
+      ...(spot.hasParking ? [{ "@type": "LocationFeatureSpecification", name: "駐車場", value: true, description: getParkingAmenityDescription(spot.hasParking, spot.parkingDetail, spot.parkingGuide) }] : []),
       ...(spot.hasToilet ? [{ "@type": "LocationFeatureSpecification", name: "トイレ", value: true }] : []),
       ...(spot.hasRentalRod ? [{ "@type": "LocationFeatureSpecification", name: "レンタル竿", value: true }] : []),
       ...(spot.hasFishingShop ? [{ "@type": "LocationFeatureSpecification", name: "釣具店", value: true }] : []),
@@ -348,9 +348,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
         name: `${spot.name}に駐車場はありますか？`,
         acceptedAnswer: {
           "@type": "Answer",
-          text: spot.hasParking
-            ? `はい、${spot.name}には駐車場があります。${spot.parkingDetail || ""}`
-            : `${spot.name}には専用駐車場はありません。周辺のコインパーキング等をご利用ください。`,
+          text: getParkingFaqAnswer(spot.name, spot.hasParking, spot.parkingDetail, spot.parkingGuide),
         },
       },
       {
@@ -800,7 +798,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           <section>
             <h3 className="mb-3 text-lg font-bold">設備</h3>
             <div className="flex flex-wrap gap-2">
-              {spot.hasParking && <Badge variant="outline" className="text-xs"><Car className="size-3.5 mr-1" />駐車場{spot.parkingDetail ? `（${spot.parkingDetail}）` : ""}</Badge>}
+              {spot.hasParking && <Badge variant="outline" className="text-xs"><Car className="size-3.5 mr-1" />{getParkingBadgeText(spot.hasParking, spot.parkingDetail, spot.parkingGuide)}</Badge>}
               {spot.hasToilet && <Badge variant="outline" className="text-xs"><Toilet className="size-3.5 mr-1" />トイレ</Badge>}
               {spot.hasFishingShop && <Badge variant="outline" className="text-xs"><Store className="size-3.5 mr-1" />釣具店</Badge>}
               {spot.hasRentalRod && <Badge variant="outline" className="text-xs"><Wrench className="size-3.5 mr-1" />レンタル竿</Badge>}
@@ -974,7 +972,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                   <p className="text-sm text-muted-foreground">{spot.accessInfo}</p>
                 </div>
                 <Separator />
-                <ParkingPeakCard parkingPeakInfo={spot.parkingPeakInfo} hasParking={spot.hasParking} parkingDetail={spot.parkingDetail} />
+                <ParkingGuideCard parkingGuide={spot.parkingGuide} hasParking={spot.hasParking} parkingDetail={spot.parkingDetail} spotName={spot.name} spotLatitude={spot.latitude} spotLongitude={spot.longitude} />
                 <Separator />
                 <div className="rounded-lg border border-sky-200 bg-sky-50 p-3">
                   <h4 className="mb-1 text-sm font-semibold text-sky-800"><Car className="mr-1 inline size-4" />レンタカーで行く</h4>
