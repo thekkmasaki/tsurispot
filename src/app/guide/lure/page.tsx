@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import { fishingSpots } from "@/lib/data/spots";
+import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
 
 export const metadata: Metadata = {
   title: "ルアー釣り入門ガイド - ルアーの種類・選び方・アクションを解説",
@@ -648,6 +649,9 @@ export default function LureGuidePage() {
             description="初心者向けにルアーフィッシングの基本を解説した動画です。"
           />
         </div>
+
+        {/* この釣り方で釣れる魚 */}
+        <CatchableFishSection guideSlug="lure" title="ルアー釣りで釣れる魚" />
 
         {/* 関連ガイド */}
         <div className="mt-8 sm:mt-12">

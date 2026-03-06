@@ -18,6 +18,7 @@ import { YouTubeVideoList } from "@/components/youtube-video-card";
 import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import type { YouTubeSearchLink } from "@/types";
+import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
 
 const entouKagoVideos: YouTubeSearchLink[] = [
   {
@@ -1133,6 +1134,9 @@ export default function EntouKagoGuidePage() {
             />
           </div>
         </section>
+
+        {/* この釣り方で釣れる魚 */}
+        <CatchableFishSection guideSlug="entou-kago" title="遠投カゴ釣りで釣れる魚" />
 
         {/* 関連ガイド */}
         <section className="mt-8 sm:mt-10">

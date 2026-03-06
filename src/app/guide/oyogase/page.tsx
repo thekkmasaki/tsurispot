@@ -4,6 +4,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ChevronLeft, Fish, AlertTriangle, CheckCircle2, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { fishingSpots } from "@/lib/data/spots";
+import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
 
 export const metadata: Metadata = {
   title: "泳がせ釣り入門ガイド - 生きエサで大物を狙う方法",
@@ -596,6 +597,9 @@ export default function OyogasePage() {
           </div>
         </section>
       )}
+
+      {/* この釣り方で釣れる魚 */}
+      <CatchableFishSection guideSlug="oyogase" title="泳がせ釣りで釣れる魚" />
 
       {/* 関連ガイド */}
       <div className="rounded-xl border bg-muted/30 p-6">
