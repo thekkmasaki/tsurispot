@@ -256,5 +256,71 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.6,
     })),
+
+    // ===== 都道府県×月ページ (564ページ) =====
+    ...prefectures.flatMap((pref) =>
+      MONTHS.map((month) => ({
+        url: `${baseUrl}/prefecture/${pref.slug}/${month.slug}`,
+        lastModified: dynamicDate,
+        changeFrequency: "monthly" as const,
+        priority: 0.6,
+      }))
+    ),
+
+    // ===== 魚×釣り方ページ =====
+    ...(() => {
+      const fishMethodCombos: { fishSlug: string; methodSlug: string }[] = [];
+      const seenFM = new Set<string>();
+      for (const fish of fishSpecies) {
+        if (!fish.fishingMethods || fish.fishingMethods.length === 0) continue;
+        for (const fm of fish.fishingMethods) {
+          for (const method of FISHING_METHODS) {
+            if (method.methods.includes(fm.methodName)) {
+              const key = `${fish.slug}|${method.slug}`;
+              if (!seenFM.has(key)) {
+                seenFM.add(key);
+                fishMethodCombos.push({ fishSlug: fish.slug, methodSlug: method.slug });
+              }
+            }
+          }
+        }
+      }
+      return fishMethodCombos;
+    })().map(c => ({
+      url: `${baseUrl}/fish/${c.fishSlug}/method/${c.methodSlug}`,
+      lastModified: contentDate,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+
+    // ===== 釣り場タイプページ =====
+    { url: `${baseUrl}/spot-type`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.8 },
+    ...["port", "beach", "rocky", "river", "pier", "breakwater"].map(type => ({
+      url: `${baseUrl}/spot-type/${type}`,
+      lastModified: dynamicDate,
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
+    })),
+
+    // ===== 釣り場タイプ×都道府県ページ =====
+    ...(() => {
+      const spotTypePrefCombos: { type: string; prefSlug: string }[] = [];
+      const seenSTP = new Set<string>();
+      for (const spot of fishingSpots) {
+        const pref = prefectures.find(p => p.name === spot.region.prefecture);
+        if (!pref) continue;
+        const key = `${spot.spotType}|${pref.slug}`;
+        if (!seenSTP.has(key)) {
+          seenSTP.add(key);
+          spotTypePrefCombos.push({ type: spot.spotType, prefSlug: pref.slug });
+        }
+      }
+      return spotTypePrefCombos;
+    })().map(c => ({
+      url: `${baseUrl}/spot-type/${c.type}/${c.prefSlug}`,
+      lastModified: dynamicDate,
+      changeFrequency: "weekly" as const,
+      priority: 0.6,
+    })),
   ];
 }
