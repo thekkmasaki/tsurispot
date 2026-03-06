@@ -5,6 +5,8 @@ import { getCatchableNow, fishSpecies } from "@/lib/data/fish";
 import { areaGuides } from "@/lib/data/area-guides";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { prefectures } from "@/lib/data/prefectures";
+import { regions } from "@/lib/data/regions";
+import { REGION_GROUPS } from "@/lib/data/regions-group";
 import { getLatestBlogPosts, BLOG_CATEGORIES } from "@/lib/data/blog";
 import { SPOT_TYPE_LABELS } from "@/types";
 import { Card, CardContent } from "@/components/ui/card";
@@ -45,10 +47,10 @@ const spotCount = fishingSpots.length.toLocaleString();
 const fishCount = fishSpecies.length;
 
 export const metadata: Metadata = {
-  title: `ツリスポ｜近くの釣り場が見つかる｜全国${spotCount}+の海釣り・川釣りスポット検索`,
+  title: "ツリスポ - 近くの釣り場が見つかる釣りスポット検索",
   description: `全国${spotCount}箇所以上の釣りスポットと${fishCount}種以上の魚種図鑑を無料で検索。堤防・漁港・磯の海釣りから渓流・湖の川釣りまで網羅。今釣れる魚・混雑予想・初心者向け穴場・潮汐情報が一目でわかる。`,
   openGraph: {
-    title: "ツリスポ - 近くの釣り場が見つかる釣りスポット検索サイト",
+    title: "ツリスポ - 近くの釣り場が見つかる釣りスポット検索",
     description:
       "近くの釣り場を地図で簡単検索。全国の釣りスポットから今釣れる魚やおすすめの仕掛け情報まで網羅。",
     type: "website",
@@ -931,6 +933,88 @@ export default function Home() {
               </Button>
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* 全国のエリア別釣りガイド（/area/[slug] 内部リンク強化） */}
+      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
+        <div className="mb-6 flex items-end justify-between sm:mb-8">
+          <div>
+            <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
+              全国のエリア別釣りガイド
+            </h2>
+            <p className="mt-1 text-sm text-muted-foreground">
+              地方から釣りエリアを探す（全{regions.length}エリア）
+            </p>
+          </div>
+          <Link
+            href="/area"
+            className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
+          >
+            すべて見る
+            <ArrowRight className="size-4" />
+          </Link>
+        </div>
+
+        <div className="space-y-6">
+          {REGION_GROUPS.map((group) => {
+            const groupRegions = regions
+              .filter((r) => group.prefectures.includes(r.prefecture))
+              .sort((a, b) => a.prefecture.localeCompare(b.prefecture) || a.areaName.localeCompare(b.areaName));
+            if (groupRegions.length === 0) return null;
+
+            // 都道府県ごとにグループ化
+            const byPref = new Map<string, typeof groupRegions>();
+            for (const r of groupRegions) {
+              const existing = byPref.get(r.prefecture);
+              if (existing) {
+                existing.push(r);
+              } else {
+                byPref.set(r.prefecture, [r]);
+              }
+            }
+
+            return (
+              <div key={group.slug}>
+                <h3 className="mb-3 flex items-center gap-2 text-base font-semibold sm:text-lg">
+                  <Compass className="size-4 text-primary" />
+                  {group.name}
+                  <span className="text-xs font-normal text-muted-foreground">
+                    ({groupRegions.length}エリア)
+                  </span>
+                </h3>
+                <div className="space-y-3">
+                  {Array.from(byPref.entries()).map(([pref, prefRegions]) => (
+                    <div key={pref}>
+                      <div className="mb-1.5 text-xs font-medium text-muted-foreground">{pref}</div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {prefRegions.map((r) => (
+                          <Link key={r.id} href={`/area/${r.slug}`}>
+                            <Badge
+                              variant="outline"
+                              className="cursor-pointer px-2.5 py-1 text-xs transition-colors hover:bg-primary hover:text-white"
+                            >
+                              {r.areaName}
+                            </Badge>
+                          </Link>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* モバイル用「すべて見る」リンク */}
+        <div className="mt-6 flex justify-center sm:hidden">
+          <Link href="/area">
+            <Button variant="outline" className="min-h-[44px] gap-1">
+              すべてのエリアを見る
+              <ArrowRight className="size-4" />
+            </Button>
+          </Link>
         </div>
       </section>
 
