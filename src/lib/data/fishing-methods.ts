@@ -102,7 +102,7 @@ export function getMonthBySlug(slug: string): MonthDef | undefined {
 /**
  * monthStart/monthEnd のラップ対応判定（10月〜3月のような年またぎ）
  */
-function isMonthInRange(
+export function isMonthInRange(
   month: number,
   start: number,
   end: number
