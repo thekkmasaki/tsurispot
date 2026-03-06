@@ -515,7 +515,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
               "@type": "VideoObject",
               name: spot.youtubeLinks[0].label || `${spot.name} 釣り動画`,
               description: spot.youtubeLinks[0].description || `${spot.name}での釣り動画。${spot.catchableFish.slice(0, 3).map(cf => cf.fish.name).join("、")}などが釣れるスポットです。`,
-              thumbnailUrl: `https://tsurispot.com/api/og/spot/${spot.slug}`,
+              thumbnailUrl: `https://tsurispot.com/api/og?title=${encodeURIComponent(spot.name)}&description=${encodeURIComponent(spot.region.prefecture + ' ' + spot.region.areaName)}&emoji=${encodeURIComponent('🎣')}`,
               uploadDate: "2025-01-01",
               contentUrl: `https://www.youtube.com/results?search_query=${encodeURIComponent(spot.youtubeLinks[0].searchQuery)}`,
             }),
@@ -643,20 +643,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
         {/* データ信頼性指標 */}
         <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 rounded-lg border bg-muted/30 px-3 py-2 text-xs text-muted-foreground">
           <span className="flex items-center gap-1">
-            <Shield className="size-3.5 text-primary" />
-            {spot.region.prefecture}の{prefSpotCount}スポット中
-          </span>
-          <span className="flex items-center gap-1">
             <Fish className="size-3.5 text-primary" />
             釣れる魚 {spot.catchableFish.length}種類
           </span>
-          {spot.googleRating && (
-            <span className="flex items-center gap-1">
-              <Star className="size-3.5 fill-yellow-400 text-yellow-400" />
-              Google評価 {spot.googleRating.toFixed(1)}
-              {spot.googleReviewCount ? ` (${spot.googleReviewCount.toLocaleString()}件)` : ""}
-            </span>
-          )}
         </div>
 
         {/* 「今日行く」ボタン + ナビゲーション */}
