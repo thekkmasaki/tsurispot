@@ -1457,7 +1457,7 @@ export default async function FishDetailPage({ params }: PageProps) {
           <li>・学名・分類情報: {fish.scientificName}（{fish.family}）— 日本産魚類検索 全種の同定 第三版（東海大学出版会）に準拠</li>
           <li>・釣り場データ: ツリスポ編集部による現地調査・漁業協同組合公開情報・釣具店ヒアリングに基づく（{fish.spots.length}スポット収録、{new Date().getFullYear()}年{new Date().getMonth() + 1}月時点）</li>
           <li>・シーズン情報: 全国の釣果報告データ・水産試験場の漁獲統計を参考に編集部が総合判断</li>
-          {fish.isToxic && <li>・毒性情報: 厚生労働省「自然毒のリスクプロファイル」に準拠</li>}
+          {fish.isPoisonous && <li>・毒性情報: 厚生労働省「自然毒のリスクプロファイル」に準拠</li>}
         </ul>
       </section>
     </div>
