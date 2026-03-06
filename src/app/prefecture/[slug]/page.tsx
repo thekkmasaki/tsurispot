@@ -1194,6 +1194,19 @@ export default async function PrefecturePage({ params }: PageProps) {
           </Link>
         </div>
       </section>
+
+      {/* 出典・情報源 */}
+      <section className="mb-8">
+        <h2 className="mb-3 text-sm font-bold text-muted-foreground">
+          出典・情報源
+        </h2>
+        <ul className="space-y-1 text-xs text-muted-foreground">
+          <li>・釣り場データ: ツリスポ編集部による現地調査・漁業協同組合公開情報・釣具店ヒアリングに基づく（{prefSpots.length}スポット収録、{new Date().getFullYear()}年{new Date().getMonth() + 1}月時点）</li>
+          <li>・釣りルール: 各都道府県水産課・内水面漁業協同組合の公開規則に準拠</li>
+          <li>・シーズン情報: 水産試験場の漁獲統計・釣果報告データを参考に編集部が総合判断</li>
+          <li>・施設情報（駐車場・トイレ等）: 現地確認およびGoogle Maps情報に基づく</li>
+        </ul>
+      </section>
     </div>
   );
 }

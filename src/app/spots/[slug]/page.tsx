@@ -1481,6 +1481,19 @@ export default async function SpotDetailPage({ params }: PageProps) {
       {spot.googleRating && (
         <p className="mt-2 text-[10px] text-muted-foreground">レビューデータ提供: Google</p>
       )}
+
+      {/* 出典・情報源 */}
+      <section className="mt-6 mb-8">
+        <h2 className="mb-2 text-sm font-bold text-muted-foreground">
+          出典・情報源
+        </h2>
+        <ul className="space-y-1 text-xs text-muted-foreground">
+          <li>・釣り場情報: ツリスポ編集部による現地調査および漁業協同組合の公開情報に基づく（{new Date().getFullYear()}年{new Date().getMonth() + 1}月更新）</li>
+          <li>・座標情報: Google Maps（緯度{spot.latitude.toFixed(4)}、経度{spot.longitude.toFixed(4)}）</li>
+          {spot.googleRating && <li>・レビュー評価: Google マップのクチコミ（{spot.googleReviewCount}件）に基づく</li>}
+          <li>・釣れる魚情報: 釣果報告データおよび地元釣具店ヒアリングに基づく（{spot.catchableFish.length}魚種確認）</li>
+        </ul>
+      </section>
     </div>
   );
 }

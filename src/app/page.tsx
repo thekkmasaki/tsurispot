@@ -41,10 +41,12 @@ const OnlineUsersBadge = dynamic(() => import("@/components/online-users-badge")
   loading: () => <div className="inline-flex h-7 w-28 animate-pulse rounded-full bg-white/10" />,
 });
 
+const spotCount = fishingSpots.length.toLocaleString();
+const fishCount = fishSpecies.length;
+
 export const metadata: Metadata = {
-  title: "ツリスポ｜近くの釣り場が見つかる｜全国3,300+の海釣り・川釣りスポット検索",
-  description:
-    "全国3,300箇所以上の釣りスポットと100種以上の魚種図鑑を無料で検索。堤防・漁港・磯の海釣りから渓流・湖の川釣りまで網羅。今釣れる魚・混雑予想・初心者向け穴場・潮汐情報が一目でわかる。",
+  title: `ツリスポ｜近くの釣り場が見つかる｜全国${spotCount}+の海釣り・川釣りスポット検索`,
+  description: `全国${spotCount}箇所以上の釣りスポットと${fishCount}種以上の魚種図鑑を無料で検索。堤防・漁港・磯の海釣りから渓流・湖の川釣りまで網羅。今釣れる魚・混雑予想・初心者向け穴場・潮汐情報が一目でわかる。`,
   openGraph: {
     title: "ツリスポ - 近くの釣り場が見つかる釣りスポット検索サイト",
     description:
@@ -144,7 +146,7 @@ const homeFaqJsonLd = {
       name: "近くの釣り場を探すにはどうすればいいですか？",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "ツリスポでは、GPSを使って現在地から近い釣り場を自動で表示します。トップページの「近くの釣り場」ボタンを押すか、地図ページから周辺の釣りスポットを検索できます。全国3,300箇所以上の釣り場から最寄りのスポットが見つかります。",
+        text: `ツリスポでは、GPSを使って現在地から近い釣り場を自動で表示します。トップページの「近くの釣り場」ボタンを押すか、地図ページから周辺の釣りスポットを検索できます。全国${spotCount}箇所以上の釣り場から最寄りのスポットが見つかります。`,
       },
     },
     {

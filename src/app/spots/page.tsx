@@ -5,14 +5,14 @@ import { fishingSpots } from "@/lib/data/spots";
 import { SpotListClient } from "@/components/spots/spot-list-client";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 
+const sc = fishingSpots.length.toLocaleString();
+
 export const metadata: Metadata = {
-  title: "全国3,300+の釣りスポット・釣り場を検索｜近くの穴場や初心者向け",
-  description:
-    "全国3,300箇所以上の釣りスポットを地域・タイプ・難易度で絞り込み検索。堤防・漁港・磯・河川・湖の穴場から初心者OK・駐車場あり・トイレありの釣り場まで条件指定で探せます。今釣れる魚や混雑予想もわかる。",
+  title: `全国${sc}+の釣りスポット・釣り場を検索｜近くの穴場や初心者向け`,
+  description: `全国${sc}箇所以上の釣りスポットを地域・タイプ・難易度で絞り込み検索。堤防・漁港・磯・河川・湖の穴場から初心者OK・駐車場あり・トイレありの釣り場まで条件指定で探せます。今釣れる魚や混雑予想もわかる。`,
   openGraph: {
-    title: "全国3,300+の釣りスポット・釣り場を検索｜近くの穴場や初心者向け",
-    description:
-      "全国3,300箇所以上の釣りスポットを検索。堤防・漁港・磯・河川などタイプ別・都道府県別に絞り込み。初心者向けや駐車場あり等の条件で探せます。",
+    title: `全国${sc}+の釣りスポット・釣り場を検索｜近くの穴場や初心者向け`,
+    description: `全国${sc}箇所以上の釣りスポットを検索。堤防・漁港・磯・河川などタイプ別・都道府県別に絞り込み。初心者向けや駐車場あり等の条件で探せます。`,
     type: "website",
     url: "https://tsurispot.com/spots",
     siteName: "ツリスポ",

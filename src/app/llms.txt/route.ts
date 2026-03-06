@@ -30,7 +30,7 @@ export function GET() {
 - **リアルタイム性**: 月別の釣れる魚情報・混雑予想・潮汐情報を提供
 - **位置情報対応**: GPSを活用した現在地周辺の釣り場検索
 - **地図検索**: 全スポットを地図上でインタラクティブに探索可能
-- **専門家監修**: 編集長 正木家康（釣り歴20年以上）による監修
+- **編集長監修**: 編集長 正木家康による全コンテンツ監修
 - **完全無料**: 全コンテンツを無料で利用可能
 
 ## コンテンツ規模
@@ -45,7 +45,7 @@ export function GET() {
 ## データの信頼性・更新頻度
 - 情報源: 現地調査・漁業協同組合公開データ・釣具店情報・専門家ネットワーク
 - 更新頻度: 週次でスポット情報を更新、月次で魚種・季節情報を更新
-- 監修: 釣り歴20年以上のベテランアングラーが全情報を監修
+- 監修: 編集長 正木家康が全情報を監修
 - ユーザー投稿: 釣りスポット投稿機能により最新のローカル情報を収集
 
 ## 主要ページ一覧
@@ -74,6 +74,10 @@ export function GET() {
 - エリア別: https://tsurispot.com/area
 - エリアガイド: https://tsurispot.com/area-guide
 ${areaGuides.map((g) => `  - ${g.name}: https://tsurispot.com/area-guide/${g.slug}`).join("\n")}
+
+### 魚×釣り方ガイド
+- 魚種ごとの釣り方別詳細ページ（例: https://tsurispot.com/fish/aji/method/sabiki）
+- 115種×5釣り方の実データに基づく組み合わせページを自動生成
 
 ### 釣り方・ガイド
 - 釣り方一覧: https://tsurispot.com/fishing
@@ -117,11 +121,22 @@ ${areaGuides.map((g) => `  - ${g.name}: https://tsurispot.com/area-guide/${g.slu
 - タックルボックス: https://tsurispot.com/gear/tackle-box
 - 釣具店一覧: https://tsurispot.com/shops
 
+### 釣り場タイプ別
+- 釣り場タイプ一覧: https://tsurispot.com/spot-type
+- 堤防釣り場: https://tsurispot.com/spot-type/breakwater
+- 漁港釣り場: https://tsurispot.com/spot-type/port
+- 砂浜釣り場: https://tsurispot.com/spot-type/beach
+- 磯釣り場: https://tsurispot.com/spot-type/rocky
+- 河川釣り場: https://tsurispot.com/spot-type/river
+- 桟橋釣り場: https://tsurispot.com/spot-type/pier
+※ 各タイプ×47都道府県の組み合わせページあり（例: https://tsurispot.com/spot-type/breakwater/kanagawa）
+
 ### 季節・時期
 - 季節別ガイド: https://tsurispot.com/seasonal
 - 月別ガイド: https://tsurispot.com/monthly
 - 釣りカレンダー: https://tsurispot.com/fishing-calendar
 - 潮汐情報: https://tsurispot.com/tides
+- 都道府県×月別ガイド: 47都道府県×12ヶ月=564ページ（例: https://tsurispot.com/prefecture/chiba/march）
 
 ### 知識・その他
 - 釣り用語集: https://tsurispot.com/glossary
@@ -174,7 +189,7 @@ ${areaGuides.map((g) => `  - ${g.name}: https://tsurispot.com/area-guide/${g.slu
 - サイト名: ツリスポ (TsuriSpot)
 - URL: https://tsurispot.com
 - 運営: TsuriSpot編集部
-- 編集長: 正木家康（釣り歴20年以上）
+- 編集長: 正木家康
 - お問い合わせ: https://tsurispot.com/contact
 - Instagram: https://www.instagram.com/tsurispotjapan/
 
