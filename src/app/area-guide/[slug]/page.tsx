@@ -18,6 +18,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { areaGuides, getAreaGuideBySlug, getRelatedAreaGuides } from "@/lib/data/area-guides";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
+import { getPrefectureByName } from "@/lib/data/prefectures";
 import { DIFFICULTY_LABELS } from "@/types";
 
 // エリアガイドの魚名 → fishSpecies の名前へのマッピング（表記揺れ対応）
@@ -191,7 +192,26 @@ export default async function AreaGuideDetailPage({
             <div className="mt-6">
               <div className="flex items-center gap-2 text-sm text-primary font-medium mb-2">
                 <MapPin className="h-4 w-4" />
-                <span>{guide.prefectures.join(" / ")}</span>
+                <span>
+                  {guide.prefectures.map((prefName, idx) => {
+                    const pref = getPrefectureByName(prefName);
+                    return (
+                      <span key={prefName}>
+                        {idx > 0 && " / "}
+                        {pref ? (
+                          <Link
+                            href={`/prefecture/${pref.slug}`}
+                            className="hover:underline"
+                          >
+                            {prefName}
+                          </Link>
+                        ) : (
+                          prefName
+                        )}
+                      </span>
+                    );
+                  })}
+                </span>
               </div>
               <h1 className="text-3xl font-bold sm:text-4xl">{guide.title}</h1>
               <p className="mt-4 max-w-3xl text-muted-foreground leading-relaxed">
@@ -550,6 +570,40 @@ export default async function AreaGuideDetailPage({
                     </Card>
                   </Link>
                 ))}
+              </div>
+            </section>
+          )}
+
+          {/* 関連する都道府県の釣り場 */}
+          {guide.prefectures.length > 0 && (
+            <section>
+              <h2 className="mb-4 text-xl font-bold flex items-center gap-2">
+                <MapPin className="h-5 w-5 text-primary" />
+                {guide.name}に関連する都道府県の釣り場
+              </h2>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {guide.prefectures.map((prefName) => {
+                  const pref = getPrefectureByName(prefName);
+                  if (!pref) return null;
+                  const spotCount = fishingSpots.filter(
+                    (s) => s.region.prefecture === prefName
+                  ).length;
+                  return (
+                    <Link key={pref.slug} href={`/prefecture/${pref.slug}`}>
+                      <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                        <CardContent className="p-4">
+                          <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base flex items-center gap-1.5">
+                            <MapPin className="h-4 w-4 text-primary" />
+                            {prefName}の釣り場
+                          </h3>
+                          <p className="mt-1 text-xs text-muted-foreground">
+                            {spotCount}件のスポット掲載中
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  );
+                })}
               </div>
             </section>
           )}

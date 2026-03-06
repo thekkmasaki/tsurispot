@@ -11,6 +11,7 @@ import {
   CheckCircle2,
   TrendingUp,
   Flame,
+  Compass,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -22,6 +23,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { getPrefectureInfoBySlug, adjacentPrefectures, getPrefectureFAQs } from "@/lib/data/prefecture-info";
 import { getFishSlugByName } from "@/lib/data";
 import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
+import { areaGuides, type AreaGuide } from "@/lib/data/area-guides";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -81,6 +83,15 @@ function getCatchableFishForPrefecture(prefectureName: string) {
     }
   }
   return Array.from(fishMap.values()).sort((a, b) => b.count - a.count);
+}
+
+/**
+ * この都道府県に関連するエリアガイドを取得
+ */
+function getAreaGuidesForPrefecture(prefectureName: string): AreaGuide[] {
+  return areaGuides.filter((guide) =>
+    guide.prefectures.includes(prefectureName)
+  );
 }
 
 const MONTH_NAMES = [
@@ -254,6 +265,9 @@ export default async function PrefecturePage({ params }: PageProps) {
   const prefInfo = getPrefectureInfoBySlug(slug);
 
   const { regionMap, ungroupedSpots } = getSpotsByRegion(pref.name);
+
+  // この都道府県に関連するエリアガイド
+  const prefAreaGuides = getAreaGuidesForPrefecture(pref.name);
 
   const beginnerSpots = spots.filter((s) => s.difficulty === "beginner");
   const freeSpots = spots.filter((s) => s.isFree);
@@ -779,6 +793,50 @@ export default async function PrefecturePage({ params }: PageProps) {
         </section>
       )}
 
+      {/* エリアガイド（area-guide）へのリンク */}
+      {prefAreaGuides.length > 0 && (
+        <section className="mb-8 sm:mb-10">
+          <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
+            <Compass className="size-5 text-primary" />
+            {pref.name}のエリア別釣りガイド
+          </h2>
+          <p className="mb-4 text-sm text-muted-foreground">
+            {pref.name}に関連するエリアの釣り場ガイドです。各エリアの特徴・おすすめ魚種・ベストシーズンなどを詳しく解説しています。
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {prefAreaGuides.map((guide) => (
+              <Link key={guide.slug} href={`/area-guide/${guide.slug}`}>
+                <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                  <CardContent className="p-4">
+                    <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
+                      <Compass className="mr-1.5 inline size-4 text-primary" />
+                      {guide.name}の釣り場ガイド
+                    </h3>
+                    <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+                      {guide.description.slice(0, 80)}...
+                    </p>
+                    <div className="mt-2 flex flex-wrap gap-1">
+                      {guide.mainFish.slice(0, 3).map((fish) => (
+                        <Badge
+                          key={fish}
+                          variant="secondary"
+                          className="text-[10px] px-1.5 py-0"
+                        >
+                          {fish}
+                        </Badge>
+                      ))}
+                    </div>
+                    <p className="mt-2 text-[10px] text-muted-foreground">
+                      ベストシーズン: {guide.bestSeason}
+                    </p>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* Spots grouped by area */}
       {regionMap.size > 0 ? (
         <section className="mb-8 sm:mb-10">
@@ -1132,6 +1190,15 @@ export default async function PrefecturePage({ params }: PageProps) {
           関連リンク
         </h2>
         <div className="flex flex-wrap gap-2">
+          {prefAreaGuides.map((guide) => (
+            <Link
+              key={guide.slug}
+              href={`/area-guide/${guide.slug}`}
+              className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
+            >
+              {guide.name}の釣り場ガイド
+            </Link>
+          ))}
           <Link
             href={`/fishing-rules/${slug}`}
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
@@ -1201,7 +1268,7 @@ export default async function PrefecturePage({ params }: PageProps) {
           出典・情報源
         </h2>
         <ul className="space-y-1 text-xs text-muted-foreground">
-          <li>・釣り場データ: ツリスポ編集部による現地調査・漁業協同組合公開情報・釣具店ヒアリングに基づく（{prefSpots.length}スポット収録、{new Date().getFullYear()}年{new Date().getMonth() + 1}月時点）</li>
+          <li>・釣り場データ: ツリスポ編集部による現地調査・漁業協同組合公開情報・釣具店ヒアリングに基づく（{spots.length}スポット収録、{new Date().getFullYear()}年{new Date().getMonth() + 1}月時点）</li>
           <li>・釣りルール: 各都道府県水産課・内水面漁業協同組合の公開規則に準拠</li>
           <li>・シーズン情報: 水産試験場の漁獲統計・釣果報告データを参考に編集部が総合判断</li>
           <li>・施設情報（駐車場・トイレ等）: 現地確認およびGoogle Maps情報に基づく</li>
