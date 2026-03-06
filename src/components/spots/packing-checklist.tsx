@@ -99,6 +99,7 @@ function buildChecklist(props: PackingChecklistProps) {
       name: "飲み物・食べ物",
       note: "周辺に店がありません",
       level: "warning",
+      affiliate: { label: "飲料水をまとめ買い", url: "https://amzn.to/3OWQtfi" },
     });
   }
 

@@ -266,6 +266,15 @@ export const affiliateProducts: AffiliateProduct[] = [
     category: "accessory",
   },
   {
+    id: "af-water",
+    name: "飲料水（まとめ買い）",
+    url: "https://amzn.to/3OWQtfi",
+    description: "釣り場での水分補給は必須。特に夏場は熱中症対策として最低1リットルは持参しましょう。まとめ買いでストックしておくと安心です。",
+    methodKeywords: [],
+    seasons: ["all"],
+    category: "accessory",
+  },
+  {
     id: "af-jet-sinker",
     name: "ジェット天秤",
     url: "https://amzn.to/4l7BnQg",

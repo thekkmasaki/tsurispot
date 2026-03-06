@@ -469,6 +469,7 @@ export default function SafetyPage() {
                       <li>めまい・吐き気が出たらすぐ涼しい場所へ</li>
                       <li>クーラーボックスに冷たい飲み物を用意</li>
                     </ul>
+                    <a href="https://amzn.to/3OWQtfi" target="_blank" rel="noopener noreferrer sponsored" className="mt-3 inline-flex items-center gap-1 rounded-md bg-amber-600 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-amber-700">飲料水をまとめ買い →</a>
                   </CardContent>
                 </Card>
 

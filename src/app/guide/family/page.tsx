@@ -566,7 +566,7 @@ export default function FamilyGuidePage() {
                   </li>
                   <li className="flex gap-2">
                     <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" />
-                    飲み物（多めに）
+                    飲み物（多めに） <a href="https://amzn.to/3OWQtfi" target="_blank" rel="noopener noreferrer sponsored" className="text-xs text-blue-600 hover:underline">→ まとめ買い</a>
                   </li>
                   <li className="flex gap-2">
                     <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" />

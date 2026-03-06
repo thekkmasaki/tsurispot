@@ -186,7 +186,15 @@ const categories: ChecklistCategory[] = [
     colorClass: "text-amber-600",
     bgClass: "bg-amber-50 dark:bg-amber-950",
     items: [
-      { id: "water", label: "水・スポーツドリンク", note: "熱中症対策に最低1リットルは用意" },
+      { id: "water", label: "水・スポーツドリンク", note: "熱中症対策に最低1リットルは用意",
+        affiliate: {
+          name: "飲料水（まとめ買い）",
+          badge: "必需品",
+          badgeColor: "bg-amber-100 text-amber-800",
+          desc: "釣り場に自販機がないことも。事前にまとめ買いしておくと安心です。",
+          url: "https://amzn.to/3OWQtfi",
+        },
+      },
       { id: "snack", label: "おにぎり・パン等の軽食", note: "片手で食べられるものが便利" },
       { id: "thermos", label: "温かい飲み物（冬場）", note: "魔法瓶でコーヒーやお茶を持参" },
       { id: "candy", label: "飴・チョコ等", note: "手軽にエネルギー補給" },
