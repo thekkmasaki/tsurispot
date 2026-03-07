@@ -114,9 +114,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
       { fish: fish("mebaru"), monthStart: 12, monthEnd: 5, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "メバリング", source: "明石News" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "釣り場Navi" },
       { fish: fish("sawara"), monthStart: 8, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング", source: "明石News" },
-      { fish: fish("madako"), monthStart: 5, monthEnd: 8, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ", source: "明石News" },
       { fish: fish("sayori"), monthStart: 11, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り", source: "明石News" },
-      { fish: fish("bera"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り（外道）", source: "釣り場Navi" },
       { fish: fish("saba"), monthStart: 5, monthEnd: 7, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り", source: "明石News" },
       { fish: fish("kawahagi"), monthStart: 10, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "胴突き仕掛け", source: "明石News" },
     ],
@@ -128,7 +126,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
       { targetFish: "ハマチ・メジロ", method: "ショアジギング", difficulty: "intermediate", rod: "ショアジギングロッド9.6〜10ft MH", reel: "スピニング4000〜5000番", line: "PE1.5〜2号", hook: "メタルジグ30〜60g", otherItems: ["リーダーフロロ6〜8号", "アシストフック", "ランディングネット"], tip: "明石海峡の潮流に合わせてジグの重さを変える。潮止まり前後の30分が最大のチャンス。先端付近が好ポイント。" },
       { targetFish: "タチウオ", method: "テンヤ・ワインド", difficulty: "intermediate", rod: "タチウオ専用ロッドまたはエギングロッド8.6ft", reel: "スピニング2500〜3000番", line: "PE0.8〜1号", hook: "タチウオテンヤ1/2〜1oz", otherItems: ["ケミホタル", "ワイヤーリーダー", "キビナゴ"], tip: "夕マヅメ〜22時頃が最盛期。ベランダ護岸の常夜灯下は特に好ポイント。ワインドで広範囲を探る。" },
     ],
-    safetyLevel: "caution", safetyNotes: ["大潮時は潮流が非常に速い", "先端部は混雑時キャスト注意", "漁港内駐車禁止・迷惑駐車厳禁", "テトラ帯は足場注意"],
+    safetyLevel: "caution", safetyNotes: ["大潮時は潮流が非常に速い", "先端部は混雑時キャスト注意", "漁港内駐車禁止・迷惑駐車厳禁", "テトラ帯は足場注意", "タコ釣り禁止（明石市漁業権設定区域）"],
     youtubeLinks: [
       { label: "明石新波止 ショアジギング", searchQuery: "明石新波止 ショアジギング 青物 ハマチ", description: "明石新波止でのショアジギング動画" },
       { label: "明石新波止 タチウオ", searchQuery: "明石新波止 タチウオ テンヤ ワインド", description: "明石新波止でのタチウオ釣り動画" },
