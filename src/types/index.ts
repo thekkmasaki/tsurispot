@@ -186,6 +186,8 @@ export interface CatchableFish {
   catchDifficulty: "easy" | "medium" | "hard";
   recommendedTime: string;
   method: string;
+  /** 釣果情報の出典（釣具店名・釣果サイト等） */
+  source?: string;
 }
 
 export interface BestTime {

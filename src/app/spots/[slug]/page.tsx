@@ -899,6 +899,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                         <p className="text-xs text-muted-foreground shrink-0">{explainTime(cf.recommendedTime)}</p>
                       </div>
                       {methodExplanation && (<p className="mt-1.5 text-xs text-muted-foreground"><span className="mr-1">💡</span>{cf.method}とは… {methodExplanation}</p>)}
+                      {cf.source && (<p className="mt-1 text-[10px] text-muted-foreground/70">出典: {cf.source}</p>)}
                       <div className="mt-2"><FishLikeButton spotSlug={slug} fishSlug={cf.fish.slug} /></div>
                     </div>
                   );
