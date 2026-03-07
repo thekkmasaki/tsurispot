@@ -595,7 +595,10 @@ export default function LureGuidePage() {
                     href={`/fish/${fish.slug}`}
                     className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
                   >
-                    <Fish className="size-4 shrink-0 text-primary" />
+                    <div className="size-8 shrink-0 overflow-hidden rounded-md bg-primary/10">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={`/images/fish/${fish.slug}.jpg`} alt={fish.name} className="size-full object-cover" loading="lazy" />
+                    </div>
                     <div className="min-w-0 flex-1">
                       <span className="text-sm font-medium group-hover:text-primary">{fish.name}</span>
                     </div>

@@ -373,8 +373,11 @@ export default function OyogasePage() {
             <Link key={fish.slug} href={`/fish/${fish.slug}`} className="group">
               <Card className="h-full py-0 transition-shadow hover:shadow-md">
                 <CardContent className="p-3">
-                  <div className="flex items-center gap-1.5">
-                    <Fish className="size-4 text-blue-500" />
+                  <div className="flex items-center gap-2">
+                    <div className="size-8 shrink-0 overflow-hidden rounded-md bg-primary/10">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={`/images/fish/${fish.slug}.jpg`} alt={fish.name} className="size-full object-cover" loading="lazy" />
+                    </div>
                     <span className="text-sm font-bold group-hover:text-primary">{fish.name}</span>
                   </div>
                   <p className="mt-1 text-xs text-muted-foreground">{fish.desc}</p>

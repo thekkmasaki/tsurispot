@@ -104,7 +104,7 @@ export async function fetchMicroCMSBlogPosts(): Promise<BlogPost[]> {
   }
 }
 
-/** microCMSからslug指定で1記事取得 */
+/** microCMSからslug指定で1記事取得（slugフィールド → id フォールバック） */
 export async function fetchMicroCMSBlogBySlug(
   slug: string
 ): Promise<BlogPost | null> {
@@ -113,12 +113,25 @@ export async function fetchMicroCMSBlogBySlug(
   }
 
   try {
+    // まずslugフィールドで検索
     const data = await client.get<MicroCMSListResponse>({
       endpoint: "blogs",
       queries: { filters: `slug[equals]${slug}`, limit: 1 },
     });
-    if (data.contents.length === 0) return null;
-    return microCMSToBlogPost(data.contents[0]);
+    if (data.contents.length > 0) {
+      return microCMSToBlogPost(data.contents[0]);
+    }
+
+    // slugフィールドになければ、idとして直接取得を試行
+    try {
+      const item = await client.get<MicroCMSBlogResponse>({
+        endpoint: "blogs",
+        contentId: slug,
+      });
+      return microCMSToBlogPost(item);
+    } catch {
+      return null;
+    }
   } catch (e) {
     console.warn("[microCMS] slug検索失敗:", slug, e);
     return null;

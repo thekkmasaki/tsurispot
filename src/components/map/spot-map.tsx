@@ -77,6 +77,19 @@ export function SpotMap() {
 
   useEffect(() => {
     setFavorites(new Set(getFavs()));
+    // デフォルトで現在地の近くを表示
+    if (navigator.geolocation) {
+      setLocating(true);
+      navigator.geolocation.getCurrentPosition(
+        (pos) => {
+          setUserLocation([pos.coords.latitude, pos.coords.longitude]);
+          setNearbyMode(true);
+          setLocating(false);
+        },
+        () => { setLocating(false); },
+        { enableHighAccuracy: true, timeout: 10000 }
+      );
+    }
   }, []);
 
   const toggleFavorite = useCallback((slug: string) => {
