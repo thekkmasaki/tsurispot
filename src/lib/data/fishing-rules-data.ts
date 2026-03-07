@@ -2,14 +2,31 @@
  * 都道府県別の釣りルール・規制データ
  */
 
+export interface SeaFishingRules {
+  /** タコ・貝類等の漁業権に関する注意 */
+  fishingRightsNotes: string[];
+  /** 撒き餌（コマセ）規制 */
+  chumRegulation?: string;
+  /** 海面の禁漁期間 */
+  closedSeasons: { fish: string; period: string; note?: string }[];
+  /** 海面のサイズ制限 */
+  sizeLimits: { fish: string; minSize: string }[];
+  /** 釣り方の規制（投げ釣り・ルアー等） */
+  methodRestrictions: string[];
+  /** 釣り禁止・注意区域 */
+  restrictedAreas: string[];
+  /** その他の海面ルール */
+  otherNotes: string[];
+}
+
 export interface PrefectureFishingRule {
   prefSlug: string;
   prefName: string;
   /** 遊漁券が必要な主な河川 */
   yugyokenRivers: string[];
-  /** 主な禁漁期間情報 */
+  /** 主な禁漁期間情報（内水面） */
   closedSeasons: { fish: string; period: string; note?: string }[];
-  /** サイズ制限 */
+  /** サイズ制限（内水面） */
   sizeLimits: { fish: string; minSize: string }[];
   /** 特記事項 */
   specialNotes: string[];
@@ -17,6 +34,8 @@ export interface PrefectureFishingRule {
   authority: string;
   /** 参考情報（公式リンクのテキスト説明） */
   referenceText: string;
+  /** 海面の釣りルール */
+  seaRules?: SeaFishingRules;
 }
 
 /**
@@ -55,6 +74,37 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "北海道",
     referenceText: "北海道の内水面漁業調整規則は北海道庁のウェブサイトで確認できます。",
+    seaRules: {
+      fishingRightsNotes: [
+        "ケガニ（毛ガニ）は全道で漁業権の対象。遊漁者の採捕は禁止されています。",
+        "ウニ・アワビ・ナマコは漁業権の対象。採取すると密漁になります。",
+        "昆布・ワカメ等の海藻類も漁業権の対象地域が多く、採取は禁止です。",
+        "タコは一部海域で漁業権が設定されています。事前に確認してください。",
+      ],
+      closedSeasons: [
+        { fish: "サケ", period: "河口から一定距離（概ね500m〜1km）は周年採捕禁止", note: "河口規制。海面でのサケ釣りは地域・時期により可能な場合あり。" },
+        { fish: "ケガニ", period: "周年（遊漁者は採捕禁止）", note: "漁業者のみ許可期間に採捕可能" },
+      ],
+      sizeLimits: [
+        { fish: "ヒラメ", minSize: "35cm" },
+        { fish: "マガレイ", minSize: "15cm" },
+        { fish: "クロソイ", minSize: "20cm" },
+      ],
+      methodRestrictions: [
+        "サケの引っ掛け釣り（スレ掛け）は禁止されています。",
+        "河口付近でのサケ・マス釣りは、地域ごとに規制区域が設定されています。",
+      ],
+      restrictedAreas: [
+        "各河川の河口付近は「さけ・ます河口規制」により採捕禁止区域が設定されています。",
+        "漁港内の作業区域は立入禁止の場合があります。漁業者の指示に従ってください。",
+        "積丹半島の一部磯場は漁業権区域のため、ウニ・アワビの採取は厳禁です。",
+      ],
+      otherNotes: [
+        "冬季の防波堤は積雪・凍結で滑りやすく、落水事故が多発しています。ライフジャケット必須。",
+        "ヒグマが海岸にも出没することがあります。特にサケの遡上時期は注意してください。",
+        "北海道では釣り場のゴミ問題が深刻化しています。ゴミは必ず持ち帰りましょう。",
+      ],
+    },
   },
   {
     prefSlug: "aomori",
@@ -73,6 +123,33 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "青森県",
     referenceText: "青森県の内水面漁業調整規則は青森県庁のウェブサイトで確認できます。",
+    seaRules: {
+      fishingRightsNotes: [
+        "ナマコは全域で漁業権の対象。遊漁者の採取は禁止されています。",
+        "アワビ・ウニも漁業権の対象地域が多く、採取は密漁となります。",
+        "陸奥湾のホタテ・ホヤは養殖漁業権が設定されています。養殖施設周辺での釣りは避けてください。",
+        "昆布・ワカメ等の海藻類の採取も禁止区域があります。",
+      ],
+      closedSeasons: [
+        { fish: "ヒラメ", period: "地域により禁漁期間あり", note: "資源保護のため" },
+      ],
+      sizeLimits: [
+        { fish: "ヒラメ", minSize: "30cm" },
+      ],
+      methodRestrictions: [
+        "陸奥湾内の養殖施設付近での投げ釣りは、養殖ロープに絡まる恐れがあるため自粛が求められています。",
+      ],
+      restrictedAreas: [
+        "大間崎周辺は漁業者のマグロ漁が盛んなエリア。遊漁船の航行ルールを守ってください。",
+        "陸奥湾のホタテ養殖区域は船釣りでの進入が制限されています。",
+        "八戸港の一部区域は立入禁止です。",
+      ],
+      otherNotes: [
+        "日本海側（深浦・鰺ヶ沢）は冬季の荒波に注意。防波堤からの高波被害が発生しています。",
+        "津軽海峡は潮流が速いため、船釣りでは十分な装備と経験が必要です。",
+        "釣り場のゴミ問題が深刻です。ゴミは必ず持ち帰りましょう。",
+      ],
+    },
   },
   {
     prefSlug: "iwate",
@@ -91,6 +168,31 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "岩手県",
     referenceText: "岩手県の内水面漁業調整規則は岩手県庁のウェブサイトで確認できます。",
+    seaRules: {
+      fishingRightsNotes: [
+        "アワビ・ウニは三陸沿岸全域で漁業権の対象。採取は密漁となります。",
+        "ナマコの採取も禁止されています。高値で取引されるため密漁の取り締まりが強化されています。",
+        "ワカメ・昆布等の海藻類も漁業権の対象。採取は厳禁です。",
+        "三陸沿岸の磯場は広範囲に漁業権区域が設定されています。貝類・海藻の採取はしないでください。",
+      ],
+      closedSeasons: [],
+      sizeLimits: [
+        { fish: "ヒラメ", minSize: "30cm" },
+      ],
+      methodRestrictions: [
+        "漁港内での投げ釣りは漁業作業の妨げになるため、禁止・自粛が求められている場所があります。",
+      ],
+      restrictedAreas: [
+        "宮古港・釜石港・大船渡港の一部区域は立入禁止です。",
+        "三陸沿岸の養殖施設（ワカメ・カキ・ホタテ等）周辺は釣り禁止の場合があります。",
+        "震災復旧工事中のエリアは引き続き立入禁止の場所があります。事前に確認してください。",
+      ],
+      otherNotes: [
+        "三陸海岸はリアス式海岸で足場が悪い磯場が多いです。磯靴・ライフジャケットを必ず着用してください。",
+        "秋〜冬の三陸沿岸は急な時化に注意。天候の急変に備えましょう。",
+        "釣り場周辺の漁具（カゴ・ロープ等）には絶対に触れないでください。",
+      ],
+    },
   },
   {
     prefSlug: "miyagi",
@@ -109,6 +211,31 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "宮城県",
     referenceText: "宮城県の内水面漁業調整規則は宮城県庁のウェブサイトで確認できます。",
+    seaRules: {
+      fishingRightsNotes: [
+        "カキ・ワカメ・ノリは養殖漁業権が設定されています。養殖施設に近づかないでください。",
+        "アワビ・ウニ・ナマコは漁業権の対象。採取は密漁となります。",
+        "ホヤも養殖漁業権の対象地域があります。",
+        "松島湾内はほぼ全域に漁業権が設定されています。貝類・海藻の採取は厳禁です。",
+      ],
+      closedSeasons: [],
+      sizeLimits: [
+        { fish: "ヒラメ", minSize: "30cm" },
+      ],
+      methodRestrictions: [
+        "松島湾内の養殖施設付近での投げ釣りは禁止されています。",
+      ],
+      restrictedAreas: [
+        "松島湾内は釣り禁止区域が複数設定されています。現地の看板を確認してください。",
+        "塩釜港・石巻港の一部区域は関係者以外立入禁止です。",
+        "養殖筏周辺（特にカキ・ワカメ養殖エリア）は船釣りでの進入が制限されています。",
+      ],
+      otherNotes: [
+        "仙台湾のハゼ釣りは秋が最盛期。投げ釣りで気軽に楽しめます。",
+        "三陸沿岸は複雑な地形のため、磯場では足元に注意してください。",
+        "冬季の金華山沖は荒天になりやすいです。船釣りは天候を十分確認してから出港してください。",
+      ],
+    },
   },
   {
     prefSlug: "akita",
@@ -128,6 +255,31 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "秋田県",
     referenceText: "秋田県の内水面漁業調整規則は秋田県庁のウェブサイトで確認できます。",
+    seaRules: {
+      fishingRightsNotes: [
+        "タコは一部海域で漁業権が設定されています。タコ釣りの可否を事前に確認してください。",
+        "アワビ・サザエ・ウニは漁業権の対象。採取は密漁となります。",
+        "ワカメ・昆布等の海藻類も漁業権区域があります。",
+      ],
+      closedSeasons: [
+        { fish: "ハタハタ", period: "産卵期（12月頃）に規制あり", note: "秋田県の県魚。産卵保護のため地域ごとに規制が設けられています。" },
+      ],
+      sizeLimits: [
+        { fish: "ヒラメ", minSize: "30cm" },
+      ],
+      methodRestrictions: [
+        "男鹿半島の一部磯場では、漁業者との共存のため釣り方に制限がある場合があります。",
+      ],
+      restrictedAreas: [
+        "秋田港・船川港の一部区域は立入禁止です。",
+        "男鹿半島の入道崎周辺は断崖絶壁のため、安全上立入りが制限されている磯場があります。",
+      ],
+      otherNotes: [
+        "ハタハタの接岸シーズン（12月前後）は沿岸が大変混雑します。マナーを守って釣りを楽しんでください。",
+        "冬季の日本海は荒天が多く、高波に注意が必要です。天気予報を必ず確認してください。",
+        "男鹿半島は磯釣りの好ポイントが多数ありますが、滑りやすい岩場が多いため磯靴を着用してください。",
+      ],
+    },
   },
   {
     prefSlug: "yamagata",
