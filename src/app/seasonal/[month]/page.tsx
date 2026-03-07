@@ -253,7 +253,15 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
                 <Link key={fish.slug} href={`/fish/${fish.slug}`}>
                   <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                     <CardContent className="flex items-center gap-3 p-4">
-                      <Fish className="size-5 shrink-0 text-sky-400" />
+                      <div className="size-10 shrink-0 overflow-hidden rounded-lg bg-primary/10">
+                        {fish.imageUrl ? (
+                          <img src={fish.imageUrl} alt={fish.name} className="size-full object-cover" loading="lazy" />
+                        ) : (
+                          <div className="flex size-full items-center justify-center text-primary">
+                            <Fish className="size-5" />
+                          </div>
+                        )}
+                      </div>
                       <div className="min-w-0">
                         <p className="font-semibold group-hover:text-primary">
                           {fish.name}

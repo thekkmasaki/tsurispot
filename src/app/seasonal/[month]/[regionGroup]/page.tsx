@@ -480,25 +480,36 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
             {monthDef.name}にシーズンの魚（{regionName}）
           </h2>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-            {seasonFish.map((f) => (
-              <Link key={f.slug} href={`/fish/${f.slug}`}>
-                <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
-                  <CardContent className="p-3">
-                    <div className="flex items-center gap-2">
-                      <Fish className="size-4 shrink-0 text-primary" />
-                      <div className="min-w-0">
-                        <h3 className="truncate text-sm font-semibold group-hover:text-primary">
-                          {f.name}
-                        </h3>
-                        <p className="text-xs text-muted-foreground">
-                          {f.spotCount}スポット
-                        </p>
+            {seasonFish.map((f) => {
+              const fishData = fishSpecies.find((fs) => fs.slug === f.slug);
+              return (
+                <Link key={f.slug} href={`/fish/${f.slug}`}>
+                  <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
+                    <CardContent className="p-3">
+                      <div className="flex items-center gap-2">
+                        <div className="size-8 shrink-0 overflow-hidden rounded-md bg-primary/10">
+                          {fishData?.imageUrl ? (
+                            <img src={fishData.imageUrl} alt={f.name} className="size-full object-cover" loading="lazy" />
+                          ) : (
+                            <div className="flex size-full items-center justify-center text-primary">
+                              <Fish className="size-4" />
+                            </div>
+                          )}
+                        </div>
+                        <div className="min-w-0">
+                          <h3 className="truncate text-sm font-semibold group-hover:text-primary">
+                            {f.name}
+                          </h3>
+                          <p className="text-xs text-muted-foreground">
+                            {f.spotCount}スポット
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
+                    </CardContent>
+                  </Card>
+                </Link>
+              );
+            })}
           </div>
         </section>
       )}

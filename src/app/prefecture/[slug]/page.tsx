@@ -18,6 +18,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { regions } from "@/lib/data/regions";
 import { fishingSpots } from "@/lib/data/spots";
+import { fishSpecies } from "@/lib/data/fish";
 import { SpotCard } from "@/components/spots/spot-card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { getPrefectureInfoBySlug, adjacentPrefectures, getPrefectureFAQs } from "@/lib/data/prefecture-info";
@@ -640,31 +641,42 @@ export default async function PrefecturePage({ params }: PageProps) {
                 .join("・")}は最盛期です。`}
           </p>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-            {inSeasonFish.map((f) => (
-              <Link key={f.slug} href={f.spotCount >= 3 ? `/prefecture/${pref.slug}/fish/${f.slug}` : `/fish/${f.slug}`}>
-                <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
-                  <CardContent className="p-3">
-                    <div className="flex items-center gap-2">
-                      <Fish className="size-4 shrink-0 text-primary" />
-                      <div className="min-w-0">
-                        <h3 className="truncate text-sm font-semibold group-hover:text-primary">
-                          {f.name}
-                        </h3>
-                        <p className="text-xs text-muted-foreground">
-                          {f.spotCount}スポット
-                        </p>
+            {inSeasonFish.map((f) => {
+              const fishData = fishSpecies.find((fs) => fs.slug === f.slug);
+              return (
+                <Link key={f.slug} href={f.spotCount >= 3 ? `/prefecture/${pref.slug}/fish/${f.slug}` : `/fish/${f.slug}`}>
+                  <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
+                    <CardContent className="p-3">
+                      <div className="flex items-center gap-2">
+                        <div className="size-8 shrink-0 overflow-hidden rounded-md bg-primary/10">
+                          {fishData?.imageUrl ? (
+                            <img src={fishData.imageUrl} alt={f.name} className="size-full object-cover" loading="lazy" />
+                          ) : (
+                            <div className="flex size-full items-center justify-center text-primary">
+                              <Fish className="size-4" />
+                            </div>
+                          )}
+                        </div>
+                        <div className="min-w-0">
+                          <h3 className="truncate text-sm font-semibold group-hover:text-primary">
+                            {f.name}
+                          </h3>
+                          <p className="text-xs text-muted-foreground">
+                            {f.spotCount}スポット
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    {f.isPeak && (
-                      <Badge className="mt-1.5 bg-orange-500 text-xs hover:bg-orange-500">
-                        <Flame className="mr-0.5 size-3" />
-                        最盛期
-                      </Badge>
-                    )}
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
+                      {f.isPeak && (
+                        <Badge className="mt-1.5 bg-orange-500 text-xs hover:bg-orange-500">
+                          <Flame className="mr-0.5 size-3" />
+                          最盛期
+                        </Badge>
+                      )}
+                    </CardContent>
+                  </Card>
+                </Link>
+              );
+            })}
           </div>
         </section>
       )}
