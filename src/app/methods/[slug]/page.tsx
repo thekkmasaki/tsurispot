@@ -22,6 +22,7 @@ import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { getVideosForMethods } from "@/lib/data/youtube-videos";
 import { SpotCard } from "@/components/spots/spot-card";
 import { fishingSpots } from "@/lib/data/spots";
+import { fishSpecies } from "@/lib/data/fish";
 import type { YouTubeSearchLink, FishingSpot } from "@/types";
 
 interface PageProps {
@@ -867,18 +868,30 @@ export default async function MethodDetailPage({ params }: PageProps) {
           対象魚
         </h2>
         <div className="grid grid-cols-2 gap-2 sm:gap-3">
-          {method.targetFish.map((fish) => (
-            <Link key={fish.slug} href={`/fish/${fish.slug}`}>
-              <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                <CardContent className="flex items-center gap-3 p-4">
-                  <Fish className="size-5 shrink-0 text-sky-300" />
-                  <span className="text-sm font-semibold group-hover:text-primary">
-                    {fish.name}
-                  </span>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
+          {method.targetFish.map((fish) => {
+            const fishData = fishSpecies.find((f) => f.slug === fish.slug);
+            const fishImageUrl = fishData?.imageUrl;
+            return (
+              <Link key={fish.slug} href={`/fish/${fish.slug}`}>
+                <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                  <CardContent className="flex items-center gap-3 p-4">
+                    <div className="size-10 shrink-0 overflow-hidden rounded-lg bg-primary/10">
+                      {fishImageUrl ? (
+                        <img src={fishImageUrl} alt={fish.name} className="size-full object-cover" loading="lazy" />
+                      ) : (
+                        <div className="flex size-full items-center justify-center text-primary">
+                          <Fish className="size-5" />
+                        </div>
+                      )}
+                    </div>
+                    <span className="text-sm font-semibold group-hover:text-primary">
+                      {fish.name}
+                    </span>
+                  </CardContent>
+                </Card>
+              </Link>
+            );
+          })}
         </div>
       </section>
 

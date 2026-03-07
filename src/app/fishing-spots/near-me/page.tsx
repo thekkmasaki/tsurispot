@@ -391,7 +391,15 @@ export default function NearMePage() {
               href={`/fish/${fish.slug}`}
               className="flex items-start gap-3 rounded-lg border bg-card p-3 transition-colors hover:bg-accent"
             >
-              <Fish className="mt-0.5 h-5 w-5 shrink-0 text-blue-500" />
+              <div className="size-10 shrink-0 overflow-hidden rounded-lg bg-primary/10">
+                {fish.imageUrl ? (
+                  <img src={fish.imageUrl} alt={fish.name} className="size-full object-cover" loading="lazy" />
+                ) : (
+                  <div className="flex size-full items-center justify-center text-primary">
+                    <Fish className="size-5" />
+                  </div>
+                )}
+              </div>
               <div className="min-w-0">
                 <span className="font-medium">{fish.name}</span>
                 {fish.peakMonths.includes(currentMonth) && (
