@@ -12,13 +12,26 @@ export function FavoritesClient() {
   const [favoritesSlugs, setFavoritesSlugs] = useState<string[]>([]);
 
   useEffect(() => {
-    setFavoritesSlugs(getFavorites());
+    const savedSlugs = getFavorites();
+    // 存在しないスポットのslugをクリーンアップ
+    const validSlugs = savedSlugs.filter((slug) =>
+      fishingSpots.some((spot) => spot.slug === slug)
+    );
+    if (validSlugs.length !== savedSlugs.length) {
+      localStorage.setItem("tsurispot-favorites", JSON.stringify(validSlugs));
+      window.dispatchEvent(new Event("favorites-updated"));
+    }
+    setFavoritesSlugs(validSlugs);
 
     const handleStorage = () => {
       setFavoritesSlugs(getFavorites());
     };
     window.addEventListener("storage", handleStorage);
-    return () => window.removeEventListener("storage", handleStorage);
+    window.addEventListener("favorites-updated", handleStorage);
+    return () => {
+      window.removeEventListener("storage", handleStorage);
+      window.removeEventListener("favorites-updated", handleStorage);
+    };
   }, []);
 
   const favoriteSpots = fishingSpots.filter((spot) =>
