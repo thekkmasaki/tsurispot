@@ -480,14 +480,12 @@ export default async function MonthlyGuidePage({ params }: Props) {
                         {fish.fishingMethods.slice(0, 3).map((m) => {
                           const methodSlug = METHOD_SLUG_MAP[m.methodName];
                           return methodSlug ? (
-                            <Link
+                            <span
                               key={m.methodName}
-                              href={`/methods/${methodSlug}`}
-                              onClick={(e) => e.stopPropagation()}
-                              className="rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-medium text-blue-700 transition-colors hover:bg-blue-100 dark:bg-blue-950/30 dark:text-blue-300"
+                              className="rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-medium text-blue-700 dark:bg-blue-950/30 dark:text-blue-300"
                             >
                               {m.methodName}
-                            </Link>
+                            </span>
                           ) : (
                             <span key={m.methodName} className="rounded-full bg-gray-100 px-2 py-0.5 text-[10px] text-gray-600">
                               {m.methodName}
