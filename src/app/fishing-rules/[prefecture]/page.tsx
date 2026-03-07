@@ -13,6 +13,9 @@ import {
   Fish,
   ShieldAlert,
   HelpCircle,
+  Anchor,
+  Ban,
+  Waves,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -40,8 +43,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!pref) return {};
 
   const prefSpotCount = fishingSpots.filter((s) => s.region.prefecture === pref.name).length;
-  const title = `${pref.name}の釣りルール・規制【2026年最新】遊漁券・禁漁期間・サイズ制限まとめ`;
-  const description = `${pref.name}で釣りをする前に必ず確認したいルール・規制を完全まとめ。禁漁期間、遊漁券が必要な河川・湖、サイズ制限、漁業権、リリース規定を解説。${prefSpotCount > 0 ? `${pref.name}の釣り場${prefSpotCount}箇所の情報も掲載。` : ""}違反すると罰則の対象になる場合もあるため、必ず事前にチェックしましょう。`;
+  const title = `${pref.name}の釣りルール・規制【2026年最新】海釣り・川釣りの禁漁期間・漁業権まとめ`;
+  const description = `${pref.name}で釣りをする前に必ず確認したいルール・規制を完全まとめ。海面の漁業権（タコ・貝類）・撒き餌規制・釣り禁止区域から、河川の遊漁券・禁漁期間・サイズ制限まで網羅。${prefSpotCount > 0 ? `${pref.name}の釣り場${prefSpotCount}箇所の情報も掲載。` : ""}違反すると罰則の対象になる場合もあるため、必ず事前にチェックしましょう。`;
 
   return {
     title,
@@ -158,6 +161,23 @@ export default async function PrefectureFishingRulesPage({ params }: Props) {
     });
   }
 
+  // 海面ルールのFAQ
+  if (rule?.seaRules) {
+    if (rule.seaRules.fishingRightsNotes.length > 0) {
+      faqItems.push({
+        question: `${pref.name}の海でタコや貝を採ってもいいですか？`,
+        answer: `${pref.name}では${rule.seaRules.fishingRightsNotes[0]} 漁業権を侵害すると罰則の対象となるため、事前に確認が必要です。`,
+      });
+    }
+    if (rule.seaRules.closedSeasons.length > 0) {
+      const seaSeasonTexts = rule.seaRules.closedSeasons.map((cs) => `${cs.fish}: ${cs.period}`).join("。");
+      faqItems.push({
+        question: `${pref.name}の海釣りに禁漁期間はありますか？`,
+        answer: `${pref.name}の海面の主な禁漁期間は以下の通りです。${seaSeasonTexts}。`,
+      });
+    }
+  }
+
   // ルールデータがない場合でも汎用FAQを追加
   if (faqItems.length === 0) {
     faqItems.push({
@@ -243,6 +263,180 @@ export default async function PrefectureFishingRulesPage({ params }: Props) {
               </CardContent>
             </Card>
           </section>
+
+          {/* ===== 海面の釣りルール ===== */}
+          {rule?.seaRules && (
+            <>
+              <section>
+                <div className="mb-4 flex items-center gap-2">
+                  <Anchor className="h-5 w-5 text-primary" />
+                  <h2 className="text-xl font-bold sm:text-2xl">海釣りのルール</h2>
+                </div>
+
+                {/* 漁業権対象 */}
+                {rule.seaRules.fishingRightsNotes.length > 0 && (
+                  <div className="space-y-3">
+                    <h3 className="flex items-center gap-2 text-base font-semibold">
+                      <Ban className="h-4 w-4 text-red-500" />
+                      漁業権の対象（採取禁止）
+                    </h3>
+                    {rule.seaRules.fishingRightsNotes.map((note, idx) => (
+                      <div
+                        key={idx}
+                        className="flex gap-3 rounded-lg border border-red-200 bg-red-50/50 p-4 dark:border-red-900 dark:bg-red-950/30"
+                      >
+                        <AlertTriangle className="h-4 w-4 mt-0.5 shrink-0 text-red-600" />
+                        <p className="text-sm text-red-800 dark:text-red-200">{note}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* 撒き餌規制 */}
+                {rule.seaRules.chumRegulation && (
+                  <div className="mt-4">
+                    <Card>
+                      <CardContent className="p-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Info className="h-4 w-4 text-amber-600" />
+                          <h3 className="text-sm font-semibold">撒き餌（コマセ）の規制</h3>
+                        </div>
+                        <p className="text-sm text-muted-foreground">{rule.seaRules.chumRegulation}</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                )}
+              </section>
+
+              {/* 海面の禁漁期間 */}
+              {rule.seaRules.closedSeasons.length > 0 && (
+                <section>
+                  <div className="mb-4 flex items-center gap-2">
+                    <Calendar className="h-5 w-5 text-primary" />
+                    <h2 className="text-xl font-bold sm:text-2xl">海面の禁漁期間</h2>
+                  </div>
+                  <div className="space-y-3">
+                    {rule.seaRules.closedSeasons.map((cs) => (
+                      <Card key={cs.fish}>
+                        <CardContent className="p-4">
+                          <div className="flex items-start justify-between gap-2">
+                            <div>
+                              <div className="flex items-center gap-2">
+                                <Waves className="h-4 w-4 text-primary" />
+                                <h3 className="font-semibold">{cs.fish}</h3>
+                              </div>
+                              {cs.note && (
+                                <p className="mt-1 text-sm text-muted-foreground">{cs.note}</p>
+                              )}
+                            </div>
+                            <span className="shrink-0 rounded-full bg-red-100 px-3 py-1 text-xs font-medium text-red-700 dark:bg-red-900 dark:text-red-200">
+                              {cs.period}
+                            </span>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* 海面のサイズ制限 */}
+              {rule.seaRules.sizeLimits.length > 0 && (
+                <section>
+                  <div className="mb-4 flex items-center gap-2">
+                    <Ruler className="h-5 w-5 text-primary" />
+                    <h2 className="text-xl font-bold sm:text-2xl">海面のサイズ制限</h2>
+                  </div>
+                  <Card>
+                    <CardContent className="p-4 sm:p-6">
+                      <div className="overflow-x-auto">
+                        <table className="w-full text-sm">
+                          <thead>
+                            <tr className="border-b text-left">
+                              <th className="pb-2 pr-4 font-medium">魚種</th>
+                              <th className="pb-2 font-medium">最小サイズ</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y text-muted-foreground">
+                            {rule.seaRules.sizeLimits.map((sl) => (
+                              <tr key={sl.fish}>
+                                <td className="py-2 pr-4">{sl.fish}</td>
+                                <td className="py-2">{sl.minSize}</td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </section>
+              )}
+
+              {/* 釣り方の規制 */}
+              {rule.seaRules.methodRestrictions.length > 0 && (
+                <section>
+                  <div className="mb-4 flex items-center gap-2">
+                    <ShieldAlert className="h-5 w-5 text-primary" />
+                    <h2 className="text-xl font-bold sm:text-2xl">釣り方の規制</h2>
+                  </div>
+                  <div className="space-y-3">
+                    {rule.seaRules.methodRestrictions.map((note, idx) => (
+                      <div key={idx} className="flex gap-3 rounded-lg border p-4">
+                        <Info className="h-5 w-5 shrink-0 text-amber-600" />
+                        <p className="text-sm text-muted-foreground">{note}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* 釣り禁止・注意区域 */}
+              {rule.seaRules.restrictedAreas.length > 0 && (
+                <section>
+                  <div className="mb-4 flex items-center gap-2">
+                    <Ban className="h-5 w-5 text-red-500" />
+                    <h2 className="text-xl font-bold sm:text-2xl">釣り禁止・注意区域</h2>
+                  </div>
+                  <div className="space-y-3">
+                    {rule.seaRules.restrictedAreas.map((area, idx) => (
+                      <div key={idx} className="flex gap-3 rounded-lg border border-amber-200 bg-amber-50/50 p-4 dark:border-amber-900 dark:bg-amber-950/30">
+                        <MapPin className="h-4 w-4 mt-0.5 shrink-0 text-amber-600" />
+                        <p className="text-sm text-amber-800 dark:text-amber-200">{area}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* その他の海面ルール */}
+              {rule.seaRules.otherNotes.length > 0 && (
+                <section>
+                  <div className="mb-4 flex items-center gap-2">
+                    <Info className="h-5 w-5 text-primary" />
+                    <h2 className="text-xl font-bold sm:text-2xl">その他の海面ルール</h2>
+                  </div>
+                  <div className="space-y-3">
+                    {rule.seaRules.otherNotes.map((note, idx) => (
+                      <div key={idx} className="flex gap-3 rounded-lg border p-4">
+                        <Info className="h-5 w-5 shrink-0 text-blue-600" />
+                        <p className="text-sm text-muted-foreground">{note}</p>
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+            </>
+          )}
+
+          {/* ===== 内水面（川・湖）のルール ===== */}
+          {(rule && (rule.yugyokenRivers.length > 0 || rule.closedSeasons.length > 0 || rule.sizeLimits.length > 0)) && (
+            <section>
+              <div className="mb-4 flex items-center gap-2">
+                <Fish className="h-5 w-5 text-primary" />
+                <h2 className="text-xl font-bold sm:text-2xl">川・湖のルール（内水面）</h2>
+              </div>
+            </section>
+          )}
 
           {/* 遊漁券が必要な河川 */}
           {rule && rule.yugyokenRivers.length > 0 && (

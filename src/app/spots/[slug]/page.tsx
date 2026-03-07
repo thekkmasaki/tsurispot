@@ -67,6 +67,7 @@ import { REGION_GROUPS } from "@/lib/data/regions-group";
 
 import { RecentlyViewedTracker } from "@/components/spots/recently-viewed-tracker";
 import { RecentlyViewedSpots } from "@/components/spots/recently-viewed";
+import { CollapsibleSection } from "@/components/ui/collapsible-section";
 import { PortMannerSection } from "@/components/spots/port-manner-section";
 import { UmigyoBadge } from "@/components/spots/umigyo-badge";
 import { umigyoDistricts } from "@/lib/data/umigyo";
@@ -1092,269 +1093,130 @@ export default async function SpotDetailPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* 同じ都道府県の釣りスポット */}
-      {(() => {
-        const samePrefSpots = getSpotsByPrefecture(spot.region.prefecture, spot.slug, 6);
-        if (samePrefSpots.length === 0) return null;
-        const pref = getPrefectureByName(spot.region.prefecture);
-        return (
-          <section className="mt-6 sm:mt-8">
-            <h3 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
-              <MapPin className="size-5" />
-              {spot.region.prefecture}の他の釣りスポット
-            </h3>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {samePrefSpots.map((ps) => {
-                const psTypeLabel = SPOT_TYPE_LABELS[ps.spotType];
-                const psRichLabel = `${spot.region.prefecture}${ps.region.areaName}の${psTypeLabel}・${ps.name}の釣り場情報`;
-                return (
-                <Link
-                  key={ps.id}
-                  href={`/spots/${ps.slug}`}
-                  title={psRichLabel}
-                  aria-label={psRichLabel}
-                >
-                  <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                    <CardContent className="p-4">
-                      <h3 className="font-semibold group-hover:text-primary truncate">{ps.name}</h3>
-                      <p className="mt-1 text-xs text-muted-foreground">
-                        {ps.region.areaName} / {psTypeLabel}
-                      </p>
-                      <div className="mt-1 flex items-center gap-1 text-xs">
-                        <Star className="size-3 fill-yellow-400 text-yellow-400" />
-                        <span>{ps.rating.toFixed(1)}</span>
-                      </div>
-                      {ps.catchableFish.length > 0 && (
-                        <p className="mt-2 text-xs text-muted-foreground truncate">
-                          {ps.catchableFish.slice(0, 3).map((cf) => cf.fish.name).join("・")}
-                        </p>
-                      )}
-                    </CardContent>
-                  </Card>
-                </Link>
-                );
-              })}
-            </div>
-            {pref && (
-              <div className="mt-3 text-right">
-                <Link href={`/prefecture/${pref.slug}`} className="text-sm text-primary hover:underline">
-                  {spot.region.prefecture}の釣りスポットをすべて見る →
-                </Link>
-              </div>
-            )}
-          </section>
-        );
-      })()}
-
-      {/* 同じ魚が釣れる他のスポット */}
-      {(() => {
-        const fishSlugs = spot.catchableFish.map((cf) => cf.fish.slug);
-        const sameFishSpots = getSpotsByFish(fishSlugs, spot.slug, 5);
-        if (sameFishSpots.length === 0) return null;
-        return (
-          <section className="mt-6 sm:mt-8">
-            <h3 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
-              <Fish className="size-5" />
-              同じ魚が釣れるスポット
-            </h3>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {sameFishSpots.map((ps) => {
-                const commonFish = ps.catchableFish
-                  .filter((cf) => fishSlugs.includes(cf.fish.slug))
-                  .slice(0, 3);
-                return (
+      {/* 関連スポット・ガイド（折りたたみ） */}
+      <CollapsibleSection
+        title={`${spot.region.prefecture}の関連スポット・ガイド`}
+        icon={<Compass className="size-5 text-primary" />}
+        previewText="タップして表示"
+      >
+        {/* 同じ都道府県の釣りスポット */}
+        {(() => {
+          const samePrefSpots = getSpotsByPrefecture(spot.region.prefecture, spot.slug, 6);
+          if (samePrefSpots.length === 0) return null;
+          const pref = getPrefectureByName(spot.region.prefecture);
+          return (
+            <div className="mb-6">
+              <h3 className="mb-3 text-sm font-bold">{spot.region.prefecture}の他の釣りスポット</h3>
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {samePrefSpots.map((ps) => (
                   <Link key={ps.id} href={`/spots/${ps.slug}`}>
                     <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                      <CardContent className="p-4">
-                        <h3 className="font-semibold group-hover:text-primary truncate">{ps.name}</h3>
-                        <p className="mt-1 text-xs text-muted-foreground">
-                          {ps.region.prefecture} {ps.region.areaName}
-                        </p>
+                      <CardContent className="p-3">
+                        <h4 className="text-sm font-semibold group-hover:text-primary truncate">{ps.name}</h4>
+                        <p className="mt-0.5 text-xs text-muted-foreground">{ps.region.areaName}</p>
                         <div className="mt-1 flex items-center gap-1 text-xs">
                           <Star className="size-3 fill-yellow-400 text-yellow-400" />
                           <span>{ps.rating.toFixed(1)}</span>
                         </div>
-                        {commonFish.length > 0 && (
-                          <p className="mt-2 text-xs text-muted-foreground truncate">
-                            共通: {commonFish.map((cf) => cf.fish.name).join("・")}
-                          </p>
-                        )}
                       </CardContent>
                     </Card>
                   </Link>
-                );
-              })}
-            </div>
-          </section>
-        );
-      })()}
-
-      {/* この釣り場で釣れる魚（内部リンク強化） */}
-      {spot.catchableFish.length > 0 && (() => {
-        const pref = getPrefectureByName(spot.region.prefecture);
-        const seen = new Set<string>();
-        const uniqueCf = spot.catchableFish.filter(cf => {
-          if (seen.has(cf.fish.slug)) return false;
-          seen.add(cf.fish.slug);
-          return true;
-        });
-        return (
-          <section className="mt-6 sm:mt-8">
-            <h3 className="mb-3 text-base font-bold sm:mb-4 sm:text-lg">{spot.name}で狙える魚種と釣り方</h3>
-            <div className="flex flex-wrap gap-2">
-              {uniqueCf.map((cf) => (
-                <Link key={cf.fish.id} href={`/fish/${cf.fish.slug}`}>
-                  <Badge
-                    variant="outline"
-                    className="cursor-pointer px-3 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground min-h-[40px] flex items-center"
-                  >
-                    {cf.fish.name}の釣り情報
-                  </Badge>
-                </Link>
-              ))}
-            </div>
-            {pref && (
-              <div className="mt-3">
-                <p className="mb-2 text-xs text-muted-foreground">{spot.region.prefecture}の魚種別釣り場ガイド</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {uniqueCf.slice(0, 8).map((cf) => (
-                    <Link key={`pref-fish-${cf.fish.slug}`} href={`/prefecture/${pref.slug}/fish/${cf.fish.slug}`}>
-                      <Badge
-                        variant="secondary"
-                        className="cursor-pointer text-xs transition-colors hover:bg-primary hover:text-primary-foreground"
-                      >
-                        {spot.region.prefecture}の{cf.fish.name}釣り
-                      </Badge>
-                    </Link>
-                  ))}
-                </div>
+                ))}
               </div>
-            )}
-          </section>
-        );
-      })()}
-
-      {/* おすすめ釣り方ガイド */}
-      {(() => {
-        const METHOD_TO_GUIDE: Record<string, { href: string; label: string }> = {
-          "サビキ釣り": { href: "/guide/sabiki", label: "サビキ釣り完全ガイド" },
-          "ちょい投げ": { href: "/guide/choinage", label: "ちょい投げ完全ガイド" },
-          "ちょい投げ釣り": { href: "/guide/choinage", label: "ちょい投げ完全ガイド" },
-          "エギング": { href: "/guide/eging", label: "エギング完全ガイド" },
-          "ショアジギング": { href: "/guide/jigging", label: "ショアジギング完全ガイド" },
-          "ウキ釣り": { href: "/guide/float-fishing", label: "ウキ釣り完全ガイド" },
-          "穴釣り": { href: "/guide/anazuri", label: "穴釣り完全ガイド" },
-          "ルアー釣り": { href: "/guide/lure", label: "ルアー釣り完全ガイド" },
-          "泳がせ釣り": { href: "/guide/oyogase", label: "泳がせ釣り入門ガイド" },
-          "遠投カゴ釣り": { href: "/guide/entou-kago", label: "遠投カゴ釣りガイド" },
-          "投げ釣り": { href: "/guide/choinage", label: "ちょい投げ完全ガイド" },
-        };
-        const methods = new Set(spot.catchableFish.map((cf) => cf.method));
-        const guideLinks = Array.from(methods)
-          .map((m) => METHOD_TO_GUIDE[m])
-          .filter((g): g is { href: string; label: string } => !!g);
-        // dedupe by href
-        const seen = new Set<string>();
-        const uniqueGuides = guideLinks.filter((g) => {
-          if (seen.has(g.href)) return false;
-          seen.add(g.href);
-          return true;
-        });
-        if (uniqueGuides.length === 0) return null;
-        return (
-          <section className="mt-6 sm:mt-8">
-            <h3 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
-              <BookOpen className="size-5" />
-              おすすめ釣り方ガイド
-            </h3>
-            <p className="mb-3 text-xs text-muted-foreground sm:text-sm">
-              {spot.name}で使える釣り方を詳しく解説しています。
-            </p>
-            <div className="grid gap-2 sm:grid-cols-2">
-              {uniqueGuides.slice(0, 4).map((guide) => (
-                <Link key={guide.href} href={guide.href}>
-                  <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                    <CardContent className="flex items-center gap-3 p-3">
-                      <div className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                        <BookOpen className="size-4 text-primary" />
-                      </div>
-                      <span className="text-sm font-medium group-hover:text-primary">{guide.label}</span>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
+              {pref && (
+                <div className="mt-2 text-right">
+                  <Link href={`/prefecture/${pref.slug}`} className="text-sm text-primary hover:underline">
+                    {spot.region.prefecture}の釣りスポットをすべて見る →
+                  </Link>
+                </div>
+              )}
             </div>
-          </section>
-        );
-      })()}
+          );
+        })()}
 
-      {/* このエリアの釣りガイド */}
-      {(() => {
-        const matchedAreaGuides = areaGuides.filter((g) =>
-          g.prefectures.includes(spot.region.prefecture)
-        );
-        if (matchedAreaGuides.length === 0) return null;
-        return (
-          <section className="mt-6 sm:mt-8">
-            <h3 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
-              <Compass className="size-5" />
-              {spot.region.prefecture}の釣りエリアガイド
-            </h3>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {matchedAreaGuides.slice(0, 4).map((guide) => (
-                <Link key={guide.slug} href={`/area-guide/${guide.slug}`}>
-                  <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                    <CardContent className="p-4">
-                      <h3 className="font-semibold group-hover:text-primary">
-                        {guide.name}
-                      </h3>
-                      <p className="mt-1 line-clamp-2 text-xs text-muted-foreground leading-relaxed">
-                        {guide.description}
-                      </p>
-                      <div className="mt-2 flex flex-wrap gap-1">
-                        {guide.mainFish.slice(0, 3).map((f) => (
-                          <Badge key={f} variant="secondary" className="text-xs">
-                            {f}
-                          </Badge>
-                        ))}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
+        {/* 魚種リンク */}
+        {spot.catchableFish.length > 0 && (
+          <div className="mb-6">
+            <h3 className="mb-2 text-sm font-bold">狙える魚種</h3>
+            <div className="flex flex-wrap gap-1.5">
+              {(() => {
+                const seen = new Set<string>();
+                return spot.catchableFish.filter(cf => { if (seen.has(cf.fish.slug)) return false; seen.add(cf.fish.slug); return true; }).map((cf) => (
+                  <Link key={cf.fish.id} href={`/fish/${cf.fish.slug}`}>
+                    <Badge variant="outline" className="cursor-pointer px-2 py-1 text-xs transition-colors hover:bg-primary hover:text-primary-foreground">
+                      {cf.fish.name}
+                    </Badge>
+                  </Link>
+                ));
+              })()}
             </div>
-          </section>
-        );
-      })()}
+          </div>
+        )}
 
-      {/* この釣り場に関連する季節特集 */}
-      {(() => {
-        const fishSlugs = spot.catchableFish.map((cf) => cf.fish.slug);
-        const matchedSeasonalGuides = seasonalGuides.filter((g) =>
-          g.targetFish.some((tf) => fishSlugs.includes(tf))
-        );
-        if (matchedSeasonalGuides.length === 0) return null;
-        return (
-          <section className="mt-6 sm:mt-8">
-            <h3 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
-              <Fish className="size-5" />
-              関連する釣り方ガイド
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {matchedSeasonalGuides.slice(0, 6).map((guide) => (
-                <Link key={guide.slug} href={`/seasonal/${guide.slug}`}>
-                  <Badge
-                    variant="outline"
-                    className="cursor-pointer px-3 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground min-h-[40px] flex items-center"
-                  >
-                    {guide.title}
+        {/* 釣り方ガイド */}
+        {(() => {
+          const METHOD_TO_GUIDE: Record<string, { href: string; label: string }> = {
+            "サビキ釣り": { href: "/guide/sabiki", label: "サビキ釣り完全ガイド" },
+            "ちょい投げ": { href: "/guide/choinage", label: "ちょい投げ完全ガイド" },
+            "ちょい投げ釣り": { href: "/guide/choinage", label: "ちょい投げ完全ガイド" },
+            "エギング": { href: "/guide/eging", label: "エギング完全ガイド" },
+            "ショアジギング": { href: "/guide/jigging", label: "ショアジギング完全ガイド" },
+            "ウキ釣り": { href: "/guide/float-fishing", label: "ウキ釣り完全ガイド" },
+            "穴釣り": { href: "/guide/anazuri", label: "穴釣り完全ガイド" },
+            "ルアー釣り": { href: "/guide/lure", label: "ルアー釣り完全ガイド" },
+            "泳がせ釣り": { href: "/guide/oyogase", label: "泳がせ釣り入門ガイド" },
+            "遠投カゴ釣り": { href: "/guide/entou-kago", label: "遠投カゴ釣りガイド" },
+            "投げ釣り": { href: "/guide/choinage", label: "ちょい投げ完全ガイド" },
+          };
+          const methods = new Set(spot.catchableFish.map((cf) => cf.method));
+          const seen = new Set<string>();
+          const uniqueGuides = Array.from(methods)
+            .map((m) => METHOD_TO_GUIDE[m])
+            .filter((g): g is { href: string; label: string } => {
+              if (!g || seen.has(g.href)) return false;
+              seen.add(g.href);
+              return true;
+            });
+          if (uniqueGuides.length === 0) return null;
+          return (
+            <div className="mb-6">
+              <h3 className="mb-2 text-sm font-bold">おすすめ釣り方ガイド</h3>
+              <div className="flex flex-wrap gap-1.5">
+                {uniqueGuides.slice(0, 4).map((guide) => (
+                  <Link key={guide.href} href={guide.href}>
+                    <Badge variant="outline" className="cursor-pointer px-2 py-1 text-xs transition-colors hover:bg-primary hover:text-primary-foreground">
+                      {guide.label}
+                    </Badge>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
+
+        {/* 都道府県ガイドリンク */}
+        {(() => {
+          const pref = getPrefectureByName(spot.region.prefecture);
+          if (!pref) return null;
+          return (
+            <div className="mb-4">
+              <h3 className="mb-2 text-sm font-bold">{spot.region.prefecture}の釣り情報</h3>
+              <div className="flex flex-wrap gap-1.5">
+                <Link href={`/prefecture/${pref.slug}`}>
+                  <Badge variant="outline" className="cursor-pointer px-2 py-1 text-xs transition-colors hover:bg-primary hover:text-primary-foreground">
+                    {spot.region.prefecture}の釣りガイド
                   </Badge>
                 </Link>
-              ))}
+                <Link href={`/fishing-rules/${pref.slug}`}>
+                  <Badge variant="outline" className="cursor-pointer px-2 py-1 text-xs transition-colors hover:bg-primary hover:text-primary-foreground">
+                    {spot.region.prefecture}の釣りルール
+                  </Badge>
+                </Link>
+              </div>
             </div>
-          </section>
-        );
-      })()}
+          );
+        })()}
+      </CollapsibleSection>
 
       {/* よくある質問（FAQ） */}
       <section className="mt-6 sm:mt-8">
@@ -1378,88 +1240,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* 都道府県ガイド・釣りルールリンク */}
-      {(() => {
-        const pref = getPrefectureByName(spot.region.prefecture);
-        if (!pref) return null;
-        return (
-          <section className="mt-6 sm:mt-8">
-            <h3 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
-              <BookOpen className="size-5" />
-              {spot.region.prefecture}の釣り情報
-            </h3>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Link href={`/prefecture/${pref.slug}`}>
-                <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                  <CardContent className="flex items-center gap-3 p-4">
-                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-blue-100">
-                      <MapPin className="size-5 text-blue-600" />
-                    </div>
-                    <div className="min-w-0">
-                      <h3 className="text-sm font-semibold group-hover:text-primary">
-                        {spot.region.prefecture}の釣りガイド
-                      </h3>
-                      <p className="mt-0.5 text-xs text-muted-foreground">
-                        {spot.region.prefecture}の釣りスポット一覧・おすすめ情報
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-              <Link href={`/fishing-rules/${pref.slug}`}>
-                <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                  <CardContent className="flex items-center gap-3 p-4">
-                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-amber-100">
-                      <Scale className="size-5 text-amber-600" />
-                    </div>
-                    <div className="min-w-0">
-                      <h3 className="text-sm font-semibold group-hover:text-primary">
-                        {spot.region.prefecture}の釣りルール
-                      </h3>
-                      <p className="mt-0.5 text-xs text-muted-foreground">
-                        {spot.region.prefecture}の釣りに関する規則・禁漁期間
-                      </p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            </div>
-          </section>
-        );
-      })()}
-
-      {/* 釣り方×地域ガイドリンク */}
-      {(() => {
-        const spotMethods = [...new Set(spot.catchableFish.map((cf) => cf.method))];
-        const regionGroup = REGION_GROUPS.find((rg) =>
-          rg.prefectures.includes(spot.region.prefecture)
-        );
-        if (!regionGroup || spotMethods.length === 0) return null;
-        const matchedMethods = FISHING_METHODS.filter((fm) =>
-          spotMethods.some((sm) => fm.methods.includes(sm))
-        );
-        if (matchedMethods.length === 0) return null;
-        return (
-          <section className="mt-6 sm:mt-8">
-            <h3 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
-              <Compass className="size-5" />
-              {regionGroup.name}の釣り方ガイド
-            </h3>
-            <div className="flex flex-wrap gap-2">
-              {matchedMethods.slice(0, 6).map((fm) => (
-                <Link key={fm.slug} href={`/fishing/${fm.slug}/area/${regionGroup.slug}`}>
-                  <Badge
-                    variant="outline"
-                    className="cursor-pointer px-3 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground min-h-[40px] flex items-center"
-                  >
-                    {regionGroup.name}の{fm.name}スポット
-                  </Badge>
-                </Link>
-              ))}
-            </div>
-          </section>
-        );
-      })()}
+      {/* 都道府県ガイド・地域ガイドは上の折りたたみセクションに統合済み */}
 
       {/* まとめ（GEO最適化：AI引用しやすい要約） */}
       <section className="mt-8 sm:mt-12 spot-description">

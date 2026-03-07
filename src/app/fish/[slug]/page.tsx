@@ -41,6 +41,7 @@ import { ShareButtons } from "@/components/ui/share-buttons";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { getPrefectureByName } from "@/lib/data/prefectures";
+import { CollapsibleSection } from "@/components/ui/collapsible-section";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -1092,89 +1093,56 @@ export default async function FishDetailPage({ params }: PageProps) {
         );
       })()}
 
-      {/* よく一緒に釣れる魚（共起魚種） */}
-      {coOccurringFish.length > 0 && (
-        <section className="mb-6 sm:mb-8">
-          <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
-            <Users className="size-5 text-primary" />
-            {fish.name}と一緒に釣れる魚
-          </h2>
-          <p className="mb-3 text-xs text-muted-foreground sm:text-sm">
-            同じ釣り場で{fish.name}と一緒に狙える魚種です。
-          </p>
-          <div className="flex flex-wrap gap-1.5 sm:gap-2">
-            {coOccurringFish.map((cf) => (
-              <Link
-                key={cf.slug}
-                href={`/fish/${cf.slug}`}
-                title={`${cf.name}の釣り情報・釣り方を見る`}
-              >
-                <Badge
-                  variant="outline"
-                  className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
-                >
-                  {cf.name}
-                  <span className="ml-1 text-muted-foreground">
-                    ({cf.count}スポット共通)
-                  </span>
-                </Badge>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* 同じ難易度の魚種（内部リンク強化） */}
-      {similarFish.length > 0 && (
-        <section className="mb-8">
-          <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
-            <Fish className="size-5 text-primary" />
-            同じ難易度の魚種
-          </h2>
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {similarFish.map((sf) => (
-              <Link key={sf.id} href={`/fish/${sf.slug}`}>
-                <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                  <CardContent className="p-4 text-center">
-                    <Fish
-                      className={`mx-auto mb-2 size-8 ${
-                        sf.category === "sea" ? "text-sky-300" : "text-green-300"
-                      }`}
-                    />
-                    <h3 className="text-sm font-semibold group-hover:text-primary">
+      {/* 関連する魚種（折りたたみ） */}
+      {(coOccurringFish.length > 0 || similarFish.length > 0 || sameCategoryFish.length > 0) && (
+        <CollapsibleSection
+          title={`${fish.name}に関連する魚種`}
+          icon={<Fish className="size-5 text-primary" />}
+          previewText={`${coOccurringFish.length + similarFish.length + sameCategoryFish.length}種`}
+        >
+          {coOccurringFish.length > 0 && (
+            <div className="mb-4">
+              <h3 className="mb-2 text-sm font-bold">一緒に釣れる魚</h3>
+              <div className="flex flex-wrap gap-1.5">
+                {coOccurringFish.map((cf) => (
+                  <Link key={cf.slug} href={`/fish/${cf.slug}`}>
+                    <Badge variant="outline" className="cursor-pointer px-2 py-1 text-xs transition-colors hover:bg-primary hover:text-primary-foreground">
+                      {cf.name}
+                    </Badge>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+          {similarFish.length > 0 && (
+            <div className="mb-4">
+              <h3 className="mb-2 text-sm font-bold">同じ難易度の魚種</h3>
+              <div className="flex flex-wrap gap-1.5">
+                {similarFish.map((sf) => (
+                  <Link key={sf.id} href={`/fish/${sf.slug}`}>
+                    <Badge variant="outline" className="cursor-pointer px-2 py-1 text-xs transition-colors hover:bg-primary hover:text-primary-foreground">
                       {sf.name}
-                    </h3>
-                    <p className="mt-1 text-xs text-muted-foreground">
-                      {DIFFICULTY_LABELS[sf.difficulty]}
-                    </p>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
-
-      {/* 同じ種類（海水魚/淡水魚）の魚種（内部リンク強化） */}
-      {sameCategoryFish.length > 0 && (
-        <section className="mb-8">
-          <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
-            <Fish className="size-5 text-primary" />
-            {fish.category === "sea" ? "他の海水魚の釣り情報" : "他の淡水魚の釣り情報"}
-          </h2>
-          <div className="flex flex-wrap gap-2">
-            {sameCategoryFish.map((sf) => (
-              <Link key={sf.id} href={`/fish/${sf.slug}`} title={`${sf.name}の釣り情報・釣り方・旬の時期`}>
-                <Badge
-                  variant="outline"
-                  className="cursor-pointer px-3 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
-                >
-                  {sf.name}
-                </Badge>
-              </Link>
-            ))}
-          </div>
-        </section>
+                    </Badge>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+          {sameCategoryFish.length > 0 && (
+            <div>
+              <h3 className="mb-2 text-sm font-bold">{fish.category === "sea" ? "他の海水魚" : "他の淡水魚"}</h3>
+              <div className="flex flex-wrap gap-1.5">
+                {sameCategoryFish.map((sf) => (
+                  <Link key={sf.id} href={`/fish/${sf.slug}`}>
+                    <Badge variant="outline" className="cursor-pointer px-2 py-1 text-xs transition-colors hover:bg-primary hover:text-primary-foreground">
+                      {sf.name}
+                    </Badge>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          )}
+        </CollapsibleSection>
       )}
 
       {/* 釣り方ガイドへのリンク */}
@@ -1254,137 +1222,50 @@ export default async function FishDetailPage({ params }: PageProps) {
         );
       })()}
 
-      {/* 同じ釣り方で釣れる魚 */}
+      {/* 同じ釣り方・同じ時期の魚（折りたたみ） */}
       {(() => {
         const sameMethodFish = getFishBySameMethod(slug, 6);
-        if (sameMethodFish.length === 0) return null;
-        return (
-          <section className="mb-8">
-            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
-              <Fish className="size-5 text-primary" />
-              同じ釣り方で釣れる魚
-            </h2>
-            <p className="mb-3 text-xs text-muted-foreground sm:text-sm">
-              {fish.name}と同じ釣り方で狙える他の魚種です。
-            </p>
-            <div className="flex flex-wrap gap-1.5 sm:gap-2">
-              {sameMethodFish.map((sf) => (
-                <Link key={sf.slug} href={`/fish/${sf.slug}`} title={`${sf.name}の釣り方`}>
-                  <Badge
-                    variant="outline"
-                    className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
-                  >
-                    {sf.name}
-                    <span className="ml-1 text-muted-foreground">
-                      ({sf.methods.join("・")})
-                    </span>
-                  </Badge>
-                </Link>
-              ))}
-            </div>
-          </section>
-        );
-      })()}
-
-      {/* 同じ時期に旬を迎える魚 */}
-      {(() => {
         const sameSeasonFish = getFishBySameSeason(slug, 6);
-        if (sameSeasonFish.length === 0) return null;
+        if (sameMethodFish.length === 0 && sameSeasonFish.length === 0) return null;
         return (
-          <section className="mb-8">
-            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
-              <Calendar className="size-5 text-primary" />
-              同じ時期に旬を迎える魚
-            </h2>
-            <p className="mb-3 text-xs text-muted-foreground sm:text-sm">
-              {fish.name}と同じ時期がベストシーズンの魚種です。一度の釣行で複数の魚種を狙えます。
-            </p>
-            <div className="flex flex-wrap gap-1.5 sm:gap-2">
-              {sameSeasonFish.map((sf) => (
-                <Link key={sf.slug} href={`/fish/${sf.slug}`} title={`${sf.name}の釣り情報`}>
-                  <Badge
-                    variant="outline"
-                    className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
-                  >
-                    {sf.name}
-                  </Badge>
-                </Link>
-              ))}
-            </div>
-          </section>
+          <CollapsibleSection
+            title="似た条件の魚種"
+            icon={<Calendar className="size-5 text-primary" />}
+            previewText={`${sameMethodFish.length + sameSeasonFish.length}種`}
+          >
+            {sameMethodFish.length > 0 && (
+              <div className="mb-4">
+                <h3 className="mb-2 text-sm font-bold">同じ釣り方で釣れる魚</h3>
+                <div className="flex flex-wrap gap-1.5">
+                  {sameMethodFish.map((sf) => (
+                    <Link key={sf.slug} href={`/fish/${sf.slug}`}>
+                      <Badge variant="outline" className="cursor-pointer px-2 py-1 text-xs transition-colors hover:bg-primary hover:text-primary-foreground">
+                        {sf.name}
+                      </Badge>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+            {sameSeasonFish.length > 0 && (
+              <div>
+                <h3 className="mb-2 text-sm font-bold">同じ時期に旬を迎える魚</h3>
+                <div className="flex flex-wrap gap-1.5">
+                  {sameSeasonFish.map((sf) => (
+                    <Link key={sf.slug} href={`/fish/${sf.slug}`}>
+                      <Badge variant="outline" className="cursor-pointer px-2 py-1 text-xs transition-colors hover:bg-primary hover:text-primary-foreground">
+                        {sf.name}
+                      </Badge>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+          </CollapsibleSection>
         );
       })()}
 
-      {/* 釣り方ガイドへのリンク */}
-      {(() => {
-        const methodLinks = (fish.fishingMethods || [])
-          .map((m) => ({ name: m.methodName, slug: METHOD_NAME_TO_SLUG[m.methodName] }))
-          .filter((m) => m.slug);
-        if (methodLinks.length === 0) return null;
-        return (
-          <section className="mb-8">
-            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
-              <BookOpen className="size-5 text-primary" />
-              {fish.name}の釣り方ガイド
-            </h2>
-            <div className="flex flex-wrap gap-2">
-              {methodLinks.map((m) => (
-                <Link key={m.slug} href={`/methods/${m.slug}`}>
-                  <Badge
-                    variant="outline"
-                    className="cursor-pointer px-3 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground min-h-[40px] flex items-center"
-                  >
-                    {m.name}の詳しいガイド
-                  </Badge>
-                </Link>
-              ))}
-            </div>
-          </section>
-        );
-      })()}
-
-      {/* 関連する季節の釣り特集 */}
-      {(() => {
-        const relatedGuides = seasonalGuides.filter((g) =>
-          g.targetFish.includes(fish.slug)
-        );
-        if (relatedGuides.length === 0) return null;
-        return (
-          <section className="mb-8">
-            <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
-              <BookOpen className="size-5 text-primary" />
-              {fish.name}の釣り方特集ガイド
-            </h2>
-            <p className="mb-3 text-xs text-muted-foreground sm:text-sm">
-              {fish.name}を狙うための季節別釣りガイドです。
-            </p>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {relatedGuides.map((guide) => (
-                <Link key={guide.slug} href={`/seasonal/${guide.slug}`}>
-                  <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                    <CardContent className="p-4">
-                      <h3 className="text-sm font-semibold group-hover:text-primary">
-                        {guide.title}
-                      </h3>
-                      <p className="mt-1 line-clamp-2 text-xs text-muted-foreground leading-relaxed">
-                        {guide.description}
-                      </p>
-                      <div className="mt-2 flex flex-wrap gap-1">
-                        <Badge variant="outline" className="text-xs">
-                          {guide.method}
-                        </Badge>
-                        <Badge variant="secondary" className="text-xs">
-                          {guide.season}
-                        </Badge>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-          </section>
-        );
-      })()}
+      {/* 重複セクション削除済み（釣り方ガイド・季節ガイドは上部に統合） */}
 
       {/* よくある質問（FAQ） */}
       <section className="mb-8">

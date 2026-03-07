@@ -24,6 +24,7 @@ import { getPrefectureInfoBySlug, adjacentPrefectures, getPrefectureFAQs } from 
 import { getFishSlugByName } from "@/lib/data";
 import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { areaGuides, type AreaGuide } from "@/lib/data/area-guides";
+import { SpotSearchFilter } from "@/components/prefecture/spot-search-filter";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -761,37 +762,17 @@ export default async function PrefecturePage({ params }: PageProps) {
         </section>
       )}
 
-      {/* Area links within this prefecture */}
-      {prefRegions.length > 0 && (
-        <section className="mb-6 sm:mb-8">
-          <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
-            <Navigation className="size-5" />
-            {pref.name}のエリア一覧
-          </h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {prefRegions.map((r) => {
-              const count = fishingSpots.filter(
-                (s) => s.region.id === r.id
-              ).length;
-              return (
-                <Link key={r.id} href={`/area/${r.slug}`}>
-                  <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                    <CardContent className="p-4">
-                      <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
-                        <MapPin className="mr-1 inline size-4" />
-                        {r.areaName}
-                      </h3>
-                      <p className="mt-1 text-xs text-muted-foreground">
-                        {count}件のスポット
-                      </p>
-                    </CardContent>
-                  </Card>
-                </Link>
-              );
-            })}
-          </div>
-        </section>
-      )}
+      {/* Area + Spot search filter (client component) */}
+      <SpotSearchFilter
+        prefName={pref.name}
+        prefRegions={prefRegions.map((r) => ({ id: r.id, slug: r.slug, areaName: r.areaName }))}
+        regionGroups={Array.from(regionMap.values()).map(({ region: r, spots: s }) => ({
+          region: { id: r.id, slug: r.slug, areaName: r.areaName },
+          spots: s,
+        }))}
+        ungroupedSpots={ungroupedSpots}
+        totalSpots={spots.length}
+      />
 
       {/* エリアガイド（area-guide）へのリンク */}
       {prefAreaGuides.length > 0 && (
@@ -837,71 +818,7 @@ export default async function PrefecturePage({ params }: PageProps) {
         </section>
       )}
 
-      {/* Spots grouped by area */}
-      {regionMap.size > 0 ? (
-        <section className="mb-8 sm:mb-10">
-          <h2 className="mb-4 text-base font-bold sm:text-lg">
-            エリア別 釣りスポット一覧（全{spots.length}件）
-          </h2>
-
-          {Array.from(regionMap.values()).map(({ region: r, spots: areaSpots }) => (
-            <div key={r.id} className="mb-8">
-              <h3 className="mb-3 flex items-center gap-2 border-l-4 border-primary pl-3 text-sm font-bold sm:text-base">
-                <MapPin className="size-4 text-primary" />
-                {r.areaName}エリア（{areaSpots.length}件）
-              </h3>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {areaSpots.map((spot) => (
-                  <SpotCard key={spot.id} spot={spot} />
-                ))}
-              </div>
-            </div>
-          ))}
-
-          {/* Region外のスポット */}
-          {ungroupedSpots.length > 0 && (
-            <div className="mb-8">
-              <h3 className="mb-3 flex items-center gap-2 border-l-4 border-muted-foreground pl-3 text-sm font-bold sm:text-base">
-                <MapPin className="size-4" />
-                その他のエリア（{ungroupedSpots.length}件）
-              </h3>
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {ungroupedSpots.map((spot) => (
-                  <SpotCard key={spot.id} spot={spot} />
-                ))}
-              </div>
-            </div>
-          )}
-        </section>
-      ) : spots.length > 0 ? (
-        <section className="mb-8 sm:mb-10">
-          <h2 className="mb-3 text-base font-bold sm:mb-4 sm:text-lg">
-            釣りスポット一覧（{spots.length}件）
-          </h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {spots.map((spot) => (
-              <SpotCard key={spot.id} spot={spot} />
-            ))}
-          </div>
-        </section>
-      ) : (
-        <section className="mb-8 sm:mb-10">
-          <div className="rounded-lg border border-dashed p-8 text-center">
-            <p className="text-sm text-muted-foreground">
-              {pref.name}の釣りスポット情報は現在準備中です。
-            </p>
-            <p className="mt-2 text-sm text-muted-foreground">
-              近日中に追加予定ですので、しばらくお待ちください。
-            </p>
-            <Link
-              href="/spots"
-              className="mt-4 inline-block text-sm text-primary hover:underline"
-            >
-              全国の釣りスポットを見る
-            </Link>
-          </div>
-        </section>
-      )}
+      {/* Spots section is now handled by SpotSearchFilter above */}
 
       {/* Popular fish details (for SEO rich content) */}
       {prefInfo && prefInfo.popularFish.length > 0 && (
@@ -1110,14 +1027,14 @@ export default async function PrefecturePage({ params }: PageProps) {
                 {/* QR Code image */}
                 <div className="shrink-0">
                   <a
-                    href={`https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=${encodeURIComponent(`https://tsurispot.com/prefecture/${slug}`)}`}
+                    href={`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(`https://tsurispot.com/prefecture/${slug}`)}`}
                     target="_blank"
                     rel="noopener noreferrer"
                     title="QRコードを新しいタブで開く（右クリックで保存できます）"
                   >
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src={`https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=${encodeURIComponent(`https://tsurispot.com/prefecture/${slug}`)}`}
+                      src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(`https://tsurispot.com/prefecture/${slug}`)}`}
                       alt={`${pref.name}の釣りスポット QRコード`}
                       width={200}
                       height={200}
@@ -1136,7 +1053,7 @@ export default async function PrefecturePage({ params }: PageProps) {
                   </div>
                   <div className="flex flex-col gap-2">
                     <a
-                      href={`https://chart.googleapis.com/chart?cht=qr&chs=300x300&chl=${encodeURIComponent(`https://tsurispot.com/prefecture/${slug}`)}`}
+                      href={`https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(`https://tsurispot.com/prefecture/${slug}`)}`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-blue-700"

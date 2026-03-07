@@ -3,20 +3,16 @@ import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
 import { getCatchableNow, fishSpecies } from "@/lib/data/fish";
 import { getLatestBlogPosts, BLOG_CATEGORIES } from "@/lib/data/blog";
-import { SPOT_TYPE_LABELS } from "@/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   MapPin,
-  Star,
   Fish,
   ArrowRight,
   Waves,
   BookOpen,
   ChevronRight,
-  Skull,
-  TriangleAlert,
   Calendar,
   Compass,
   Tag,
@@ -24,8 +20,9 @@ import {
   Navigation,
 } from "lucide-react";
 import dynamic from "next/dynamic";
-import { SpotImage, FishImage } from "@/components/ui/spot-image";
 import { HomeSearchBar } from "@/components/home-search-bar";
+import { HomeSeasonalFish } from "@/components/home-seasonal-fish";
+import { HomePopularSpots } from "@/components/home-popular-spots";
 
 
 // Below-the-fold client components loaded lazily
@@ -193,7 +190,25 @@ const homeFaqJsonLd = {
 export default function Home() {
   const currentMonth = new Date().getMonth() + 1;
   const catchableNow = getCatchableNow(currentMonth);
-  const popularSpots = fishingSpots.slice(0, 6);
+  // 評価順にトップ200件を軽量データ化してクライアントへ
+  const popularSpotsData = fishingSpots
+    .slice()
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 200)
+    .map((s) => ({
+      id: s.id,
+      slug: s.slug,
+      name: s.name,
+      spotType: s.spotType,
+      rating: s.rating,
+      latitude: s.latitude,
+      longitude: s.longitude,
+      prefecture: s.region.prefecture,
+      areaName: s.region.areaName,
+      difficulty: s.difficulty,
+      mainImageUrl: s.mainImageUrl,
+      fishNames: s.catchableFish.slice(0, 6).map((cf) => cf.fish.name),
+    }));
   const latestPosts = getLatestBlogPosts(3);
 
   // Stats for hero section
@@ -207,8 +222,8 @@ export default function Home() {
     "@type": "ItemList",
     name: "人気の釣りスポット",
     itemListOrder: "https://schema.org/ItemListOrderDescending",
-    numberOfItems: popularSpots.length,
-    itemListElement: popularSpots.map((spot, index) => ({
+    numberOfItems: 6,
+    itemListElement: popularSpotsData.slice(0, 6).map((spot, index) => ({
       "@type": "ListItem",
       position: index + 1,
       url: `https://tsurispot.com/spots/${spot.slug}`,
@@ -552,206 +567,11 @@ export default function Home() {
         <NearbySpots allSpots={lightSpots} />
       </section>
 
-      {/* 人気の釣りスポットセクション */}
-      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
-        <div className="mb-6 flex items-end justify-between sm:mb-8">
-          <div>
-            <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
-              人気の釣りスポット
-            </h2>
-            <p className="mt-1 text-sm text-muted-foreground">
-              みんなに選ばれている釣り場
-            </p>
-          </div>
-          <Link
-            href="/spots"
-            className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
-          >
-            すべて見る
-            <ArrowRight className="size-4" />
-          </Link>
-        </div>
-
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {popularSpots.map((spot) => (
-            <Link key={spot.id} href={`/spots/${spot.slug}`}>
-              <Card className="group h-full gap-0 overflow-hidden border py-0 transition-shadow hover:shadow-md">
-                {/* カード上部の画像 */}
-                <SpotImage
-                  src={(spot.mainImageUrl?.startsWith("http") || spot.mainImageUrl?.startsWith("/images/spots/wikimedia/")) ? spot.mainImageUrl : undefined}
-                  alt={spot.name}
-                  spotType={spot.spotType}
-                  height="h-36 sm:h-40"
-                />
-
-                <CardContent className="flex flex-col gap-3 p-4">
-                  <div className="flex items-start justify-between gap-2">
-                    <div className="min-w-0">
-                      <h3 className="truncate text-base font-semibold group-hover:text-primary">
-                        {spot.name}
-                      </h3>
-                      <p className="mt-0.5 text-xs text-muted-foreground">
-                        {spot.region.prefecture} {spot.region.areaName}
-                      </p>
-                    </div>
-                    <div className="flex shrink-0 items-center gap-1 text-sm">
-                      <Star className="size-4 fill-amber-400 text-amber-400" />
-                      <span className="font-medium">{spot.rating}</span>
-                    </div>
-                  </div>
-
-                  {/* 釣れる魚バッジ */}
-                  <div className="flex flex-wrap gap-1.5">
-                    {spot.catchableFish.slice(0, 3).map((cf) => (
-                      <Badge
-                        key={cf.fish.id}
-                        variant="outline"
-                        className="text-xs"
-                      >
-                        {cf.fish.name}
-                      </Badge>
-                    ))}
-                    {spot.catchableFish.length > 3 && (
-                      <Badge variant="outline" className="text-xs">
-                        +{spot.catchableFish.length - 3}
-                      </Badge>
-                    )}
-                  </div>
-
-                  {/* スポットタイプ & 海/川 */}
-                  <div className="flex items-center gap-2">
-                    <Badge
-                      variant="secondary"
-                      className="text-xs"
-                    >
-                      {SPOT_TYPE_LABELS[spot.spotType]}
-                    </Badge>
-                    <Badge variant="outline" className={`text-xs ${spot.spotType === "river" ? "border-emerald-200 text-emerald-700" : "border-sky-200 text-sky-700"}`}>
-                      {spot.spotType === "river" ? "川釣り" : "海釣り"}
-                    </Badge>
-                    {spot.difficulty === "beginner" && (
-                      <Badge className="bg-emerald-100 text-xs text-emerald-700 hover:bg-emerald-100">
-                        初心者OK
-                      </Badge>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
-        </div>
-
-        {/* モバイル用「すべて見る」リンク */}
-        <div className="mt-6 flex justify-center sm:hidden">
-          <Link href="/spots">
-            <Button variant="outline" className="min-h-[44px] gap-1">
-              すべてのスポットを見る
-              <ArrowRight className="size-4" />
-            </Button>
-          </Link>
-        </div>
-      </section>
+      {/* 人気の釣りスポット（位置情報対応） */}
+      <HomePopularSpots spots={popularSpotsData} />
 
       {/* 今釣れる魚セクション */}
-      <section className="bg-muted/50 py-8 sm:py-12">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
-          <div className="mb-6 flex items-end justify-between sm:mb-8">
-            <div>
-              <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
-                今の時期に釣れる魚
-              </h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                {currentMonth}月に狙える魚たち
-              </p>
-              <p className="mt-1 text-sm text-muted-foreground">
-                今の時期ならこの魚が狙えます。初心者でも釣れるチャンス！
-              </p>
-            </div>
-            <Link
-              href="/fish"
-              className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
-            >
-              もっと見る
-              <ArrowRight className="size-4" />
-            </Link>
-          </div>
-
-          {/* モバイル: 横スクロール / PC: グリッド */}
-          <div className="relative">
-            <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-4 scrollbar-hide sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4">
-              {catchableNow.map((fish) => {
-                const isPeak = fish.peakMonths.includes(currentMonth);
-                return (
-                  <Link
-                    key={fish.id}
-                    href={`/fish/${fish.slug}`}
-                    className="w-52 shrink-0 sm:w-auto"
-                  >
-                    <Card className={`group h-full gap-0 overflow-hidden py-0 transition-shadow hover:shadow-md ${fish.isPoisonous ? "ring-2 ring-red-200" : ""}`}>
-                      {/* カード上部の画像 */}
-                      <div className="relative">
-                        <FishImage
-                          src={fish.imageUrl}
-                          alt={fish.name}
-                          category={fish.category}
-                        />
-                        {fish.isPoisonous && (
-                          <div className="absolute top-2 right-2 flex items-center gap-1 rounded-full bg-red-600 px-2 py-1 text-xs font-bold text-white shadow">
-                            {fish.dangerLevel === "high" ? <Skull className="size-3.5" /> : <TriangleAlert className="size-3.5" />}
-                            毒
-                          </div>
-                        )}
-                      </div>
-
-                      <CardContent className="flex flex-col gap-2 p-3 sm:p-4">
-                        <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
-                          {fish.name}
-                        </h3>
-
-                        <div className="flex flex-wrap items-center gap-1.5">
-                          <Badge variant="outline" className={`text-xs ${fish.category === "freshwater" ? "border-emerald-200 text-emerald-700" : fish.category === "brackish" ? "border-teal-200 text-teal-700" : "border-sky-200 text-sky-700"}`}>
-                            {fish.category === "freshwater" ? "淡水" : fish.category === "brackish" ? "汽水" : "海水"}
-                          </Badge>
-                          {isPeak ? (
-                            <Badge className="bg-orange-100 text-xs text-orange-700 hover:bg-orange-100">
-                              旬!
-                            </Badge>
-                          ) : (
-                            <Badge className="bg-sky-100 text-xs text-sky-700 hover:bg-sky-100">
-                              釣れる
-                            </Badge>
-                          )}
-                          {fish.isPoisonous && (
-                            <Badge className="bg-red-100 text-xs text-red-700 hover:bg-red-100">
-                              {fish.poisonType || "毒あり"}
-                            </Badge>
-                          )}
-                        </div>
-
-                        <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
-                          {fish.description}
-                        </p>
-                      </CardContent>
-                    </Card>
-                  </Link>
-                );
-              })}
-            </div>
-            {/* Scroll indicator - mobile only */}
-            <div className="pointer-events-none absolute right-0 top-0 bottom-4 w-8 bg-gradient-to-l from-muted/50 to-transparent sm:hidden" />
-          </div>
-
-          {/* モバイル用「もっと見る」リンク */}
-          <div className="mt-6 flex justify-center sm:hidden">
-            <Link href="/fish">
-              <Button variant="outline" className="min-h-[44px] gap-1">
-                すべての魚を見る
-                <ArrowRight className="size-4" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      <HomeSeasonalFish fish={catchableNow} currentMonth={currentMonth} />
 
       {/* 最新コラム */}
       {latestPosts.length > 0 && (

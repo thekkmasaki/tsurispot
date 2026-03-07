@@ -305,6 +305,36 @@ export const affiliateProducts: AffiliateProduct[] = [
     category: "book",
     prefectures: ["三重県", "和歌山県"],
   },
+  {
+    id: "af-drivemap-tokyo-boso",
+    name: "令和版 海釣りドライブマップ① 東京湾〜房総半島",
+    url: "https://amzn.to/4lkVquI",
+    description: "東京湾から房総半島までの釣り場を完全収録したドライブマップ。各ポイントの釣れる魚・アクセス・駐車場情報が充実しており、関東の釣行計画に最適です。",
+    methodKeywords: [],
+    seasons: ["all"],
+    category: "book",
+    prefectures: ["東京都", "神奈川県", "千葉県"],
+  },
+  {
+    id: "af-drivemap-tokyo-miura",
+    name: "令和版 海釣りドライブマップ 東京湾〜三浦半島",
+    url: "https://amzn.to/4sxzoHj",
+    description: "東京湾から三浦半島エリアの釣り場を網羅したドライブマップ。横須賀・三浦・葉山など人気ポイントのアクセス・駐車場・釣れる魚が詳しく、初めての釣り場でも安心です。",
+    methodKeywords: [],
+    seasons: ["all"],
+    category: "book",
+    prefectures: ["東京都", "神奈川県"],
+  },
+  {
+    id: "af-drivemap-sagami",
+    name: "令和版 相模湾海釣りドライブマップ",
+    url: "https://amzn.to/4b0Z5Zy",
+    description: "相模湾エリアの釣り場を完全収録したドライブマップ。湘南・小田原・真鶴など人気ポイントの釣れる魚・アクセス・駐車場情報が充実しています。",
+    methodKeywords: [],
+    seasons: ["all"],
+    category: "book",
+    prefectures: ["神奈川県", "静岡県"],
+  },
 ];
 
 /**

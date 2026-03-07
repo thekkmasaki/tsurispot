@@ -23,6 +23,7 @@ import { ProductList } from "@/components/affiliate/product-list";
 import { getBeginnerEssentials } from "@/lib/data/products";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { NearbyBeginnerSpots } from "@/components/guide/nearby-beginner-spots";
+import { CollapsibleSection } from "@/components/ui/collapsible-section";
 
 export const metadata: Metadata = {
   title: "釣り初心者完全ガイド - ゼロから始める釣り入門【2025年版】",
@@ -756,65 +757,61 @@ export default function BeginnerGuidePage() {
               <h3 className="mb-3 font-medium text-foreground">
                 必須の道具（これだけあれば釣りができる）
               </h3>
-              <ul className="mb-4 space-y-2 text-sm text-muted-foreground">
-                <li className="flex gap-2">
+              <ul className="mb-4 space-y-3 text-sm text-muted-foreground">
+                <li>
                   <span className="font-medium text-foreground">竿（ロッド）：</span>
-                  <span>万能竿またはサビキ用の竿（2〜3m）。初心者セットに含まれていることが多い。振り出し式（伸縮式）が持ち運びに便利です。{" "}
+                  万能竿またはサビキ用の竿（2〜3m）。初心者セットに含まれていることが多い。振り出し式（伸縮式）が持ち運びに便利です。{" "}
                   <a href="https://amzn.to/4s4i64m" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
                     <ShoppingBag className="size-3" />
                     シマノ ロッドを見る
                     <ExternalLink className="size-2.5" />
-                  </a></span>
+                  </a>
                 </li>
-                <li className="flex gap-2">
+                <li>
                   <span className="font-medium text-foreground">リール：</span>
-                  <span>小〜中型のスピニングリール（2000〜3000番）。糸付きのものを選べば、ライン選びの手間も省けます。{" "}
+                  小〜中型のスピニングリール（2000〜3000番）。糸付きのものを選べば、ライン選びの手間も省けます。{" "}
                   <a href="https://amzn.to/4atW7Om" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
                     <ShoppingBag className="size-3" />
                     シマノ リールを見る
                     <ExternalLink className="size-2.5" />
-                  </a></span>
+                  </a>
                 </li>
-                <li className="flex gap-2">
+                <li>
                   <span className="font-medium text-foreground">仕掛け：</span>
                   サビキ仕掛け（4〜6号）が最も万能。コマセカゴとセットになったものが便利です。予備を2〜3セット用意しておくと安心。
                 </li>
-                <li className="flex gap-2">
+                <li>
                   <span className="font-medium text-foreground">エサ：</span>
-                  <span>サビキ釣りならアミエビ（冷凍またはチューブタイプ）。ちょい投げなら青イソメ。釣具店やエサ屋で購入できます。{" "}
+                  サビキ釣りならアミエビ（冷凍またはチューブタイプ）。ちょい投げなら青イソメ。釣具店やエサ屋で購入できます。{" "}
                   <a href="https://amzn.to/4c6gaUn" target="_blank" rel="noopener noreferrer nofollow" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-medium text-amber-700 hover:bg-amber-100">
                     <ShoppingBag className="size-3" />
                     マルキュー アミ姫を見る
                     <ExternalLink className="size-2.5" />
-                  </a></span>
+                  </a>
                 </li>
               </ul>
 
               <h3 className="mb-3 font-medium text-foreground">
                 あると便利な道具
               </h3>
-              <ul className="mb-4 space-y-2 text-sm text-muted-foreground">
-                <li className="flex gap-2">
+              <ul className="mb-4 space-y-3 text-sm text-muted-foreground">
+                <li>
                   <span className="font-medium text-foreground">バケツ：</span>
                   コマセを入れたり、釣った魚を一時的に入れたり、帰りに釣り場を洗い流すのに使います。折りたたみ式が便利。
                 </li>
-                <li className="flex gap-2">
-                  <span className="font-medium text-foreground">
-                    クーラーボックス：
-                  </span>
+                <li>
+                  <span className="font-medium text-foreground">クーラーボックス：</span>
                   釣った魚を新鮮に持ち帰るために必要。氷と一緒に入れましょう。発泡スチロールの箱でも代用可能。
                 </li>
-                <li className="flex gap-2">
-                  <span className="font-medium text-foreground">
-                    ハサミ・プライヤー：
-                  </span>
+                <li>
+                  <span className="font-medium text-foreground">ハサミ・プライヤー：</span>
                   釣り糸を切ったり、魚から針を外したりするのに使います。専用のフィッシングプライヤーがあると便利。
                 </li>
-                <li className="flex gap-2">
+                <li>
                   <span className="font-medium text-foreground">タオル：</span>
                   手を拭いたり、魚を掴んだりするのに使います。2〜3枚あると重宝します。
                 </li>
-                <li className="flex gap-2">
+                <li>
                   <span className="font-medium text-foreground">ゴミ袋：</span>
                   釣り糸の切れ端やエサの容器など、ゴミは必ず持ち帰りましょう。
                 </li>
@@ -1215,7 +1212,7 @@ export default function BeginnerGuidePage() {
 
           {/* よくある質問 */}
           <section id="faq">
-            <SectionCard title="よくある質問（FAQ）" icon={HelpCircle}>
+            <CollapsibleSection mobileOnly={true} title="よくある質問（FAQ）" icon={<HelpCircle className="size-5" />}>
               <div className="space-y-4">
                 <div className="rounded-lg border p-4">
                   <h3 className="mb-2 font-medium text-foreground">
@@ -1322,99 +1319,100 @@ export default function BeginnerGuidePage() {
                   </p>
                 </div>
               </div>
-            </SectionCard>
+            </CollapsibleSection>
           </section>
         </div>
 
         {/* 道具を揃えるなら */}
         <section className="mt-8 sm:mt-10">
-          <ProductList
-            products={getBeginnerEssentials().slice(0, 4)}
-            title="初心者が最初に揃えるべき道具"
-            description="これから釣りを始める方におすすめの定番アイテムを厳選しました。"
-          />
-          <div className="mt-4 text-center">
-            <Button asChild variant="outline" className="rounded-full">
-              <Link href="/gear">
-                すべてのおすすめ道具を見る
-                <ChevronRight className="ml-1 size-4" />
-              </Link>
-            </Button>
-          </div>
+          <CollapsibleSection title="初心者が最初に揃えるべき道具" previewText="おすすめアイテム">
+            <ProductList
+              products={getBeginnerEssentials().slice(0, 4)}
+              title="初心者が最初に揃えるべき道具"
+              description="これから釣りを始める方におすすめの定番アイテムを厳選しました。"
+            />
+            <div className="mt-4 text-center">
+              <Button asChild variant="outline" className="rounded-full">
+                <Link href="/gear">
+                  すべてのおすすめ道具を見る
+                  <ChevronRight className="ml-1 size-4" />
+                </Link>
+              </Button>
+            </div>
+          </CollapsibleSection>
         </section>
 
         {/* 次に読むガイド */}
         <section className="mt-8 sm:mt-10">
-          <h2 className="mb-4 text-center text-xl font-bold">
-            次に読むガイド
-          </h2>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            <Link href="/guide/beginner-setup" className="group">
-              <Card className="h-full transition-colors group-hover:border-primary">
-                <CardContent className="pt-6">
-                  <Package className="mb-2 size-5 text-primary" />
-                  <p className="font-medium group-hover:text-primary">
-                    仕掛け準備ガイド
-                  </p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    竿の組み立てから仕掛けセットまで全手順
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/guide/sabiki" className="group">
-              <Card className="h-full transition-colors group-hover:border-primary">
-                <CardContent className="pt-6">
-                  <Anchor className="mb-2 size-5 text-primary" />
-                  <p className="font-medium group-hover:text-primary">
-                    サビキ釣り完全ガイド
-                  </p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    初心者の定番、サビキ釣りを詳しく解説
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/guide/choinage" className="group">
-              <Card className="h-full transition-colors group-hover:border-primary">
-                <CardContent className="pt-6">
-                  <Target className="mb-2 size-5 text-primary" />
-                  <p className="font-medium group-hover:text-primary">
-                    ちょい投げ釣り完全ガイド
-                  </p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    キスやハゼを狙うちょい投げの基本
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/guide/anazuri" className="group">
-              <Card className="h-full transition-colors group-hover:border-primary">
-                <CardContent className="pt-6">
-                  <Waves className="mb-2 size-5 text-primary" />
-                  <p className="font-medium group-hover:text-primary">
-                    穴釣り完全ガイド
-                  </p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    テトラの隙間で根魚を狙う穴釣り入門
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/guide/troubleshooting" className="group">
-              <Card className="h-full transition-colors group-hover:border-primary">
-                <CardContent className="pt-6">
-                  <HelpCircle className="mb-2 size-5 text-primary" />
-                  <p className="font-medium group-hover:text-primary">
-                    トラブルシューティング
-                  </p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    困ったときの対処法を完全網羅
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
+          <CollapsibleSection title="次に読むガイド" previewText="5件のガイド">
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              <Link href="/guide/beginner-setup" className="group">
+                <Card className="h-full transition-colors group-hover:border-primary">
+                  <CardContent className="pt-6">
+                    <Package className="mb-2 size-5 text-primary" />
+                    <p className="font-medium group-hover:text-primary">
+                      仕掛け準備ガイド
+                    </p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      竿の組み立てから仕掛けセットまで全手順
+                    </p>
+                  </CardContent>
+                </Card>
+              </Link>
+              <Link href="/guide/sabiki" className="group">
+                <Card className="h-full transition-colors group-hover:border-primary">
+                  <CardContent className="pt-6">
+                    <Anchor className="mb-2 size-5 text-primary" />
+                    <p className="font-medium group-hover:text-primary">
+                      サビキ釣り完全ガイド
+                    </p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      初心者の定番、サビキ釣りを詳しく解説
+                    </p>
+                  </CardContent>
+                </Card>
+              </Link>
+              <Link href="/guide/choinage" className="group">
+                <Card className="h-full transition-colors group-hover:border-primary">
+                  <CardContent className="pt-6">
+                    <Target className="mb-2 size-5 text-primary" />
+                    <p className="font-medium group-hover:text-primary">
+                      ちょい投げ釣り完全ガイド
+                    </p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      キスやハゼを狙うちょい投げの基本
+                    </p>
+                  </CardContent>
+                </Card>
+              </Link>
+              <Link href="/guide/anazuri" className="group">
+                <Card className="h-full transition-colors group-hover:border-primary">
+                  <CardContent className="pt-6">
+                    <Waves className="mb-2 size-5 text-primary" />
+                    <p className="font-medium group-hover:text-primary">
+                      穴釣り完全ガイド
+                    </p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      テトラの隙間で根魚を狙う穴釣り入門
+                    </p>
+                  </CardContent>
+                </Card>
+              </Link>
+              <Link href="/guide/troubleshooting" className="group">
+                <Card className="h-full transition-colors group-hover:border-primary">
+                  <CardContent className="pt-6">
+                    <HelpCircle className="mb-2 size-5 text-primary" />
+                    <p className="font-medium group-hover:text-primary">
+                      トラブルシューティング
+                    </p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      困ったときの対処法を完全網羅
+                    </p>
+                  </CardContent>
+                </Card>
+              </Link>
+            </div>
+          </CollapsibleSection>
         </section>
 
         {/* CTA */}

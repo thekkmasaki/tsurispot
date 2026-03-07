@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { MapPin } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { regions } from "@/lib/data/regions";
 import { fishingSpots } from "@/lib/data/spots";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { AreaListFilter } from "@/components/area/area-list-filter";
 
 export const metadata: Metadata = {
   title: "全国の釣りエリア一覧 - 都道府県別に釣りスポットを探す",
@@ -24,47 +21,57 @@ export const metadata: Metadata = {
   },
 };
 
-// Group regions by prefecture
-function getRegionsByPrefecture() {
+function buildPrefectureGroups() {
   const grouped = new Map<
     string,
-    { prefecture: string; regions: typeof regions }
+    { prefecture: string; regions: { id: string; slug: string; areaName: string; prefecture: string; spotCount: number; topFish: string[] }[] }
   >();
 
   for (const region of regions) {
+    // Spot count
+    const spotCount = fishingSpots.filter((s) => s.region.id === region.id).length;
+
+    // Top fish
+    const fishMap = new Map<string, number>();
+    for (const spot of fishingSpots) {
+      if (spot.region.id !== region.id) continue;
+      for (const cf of spot.catchableFish) {
+        fishMap.set(cf.fish.name, (fishMap.get(cf.fish.name) || 0) + 1);
+      }
+    }
+    const topFish = Array.from(fishMap.entries())
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, 3)
+      .map(([name]) => name);
+
+    const item = {
+      id: region.id,
+      slug: region.slug,
+      areaName: region.areaName,
+      prefecture: region.prefecture,
+      spotCount,
+      topFish,
+    };
+
     const existing = grouped.get(region.prefecture);
     if (existing) {
-      existing.regions.push(region);
+      existing.regions.push(item);
     } else {
       grouped.set(region.prefecture, {
         prefecture: region.prefecture,
-        regions: [region],
+        regions: [item],
       });
     }
   }
-  return Array.from(grouped.values());
-}
 
-function getSpotCountForRegion(regionId: string) {
-  return fishingSpots.filter((s) => s.region.id === regionId).length;
-}
-
-function getTopFishForRegion(regionId: string): string[] {
-  const fishMap = new Map<string, number>();
-  for (const spot of fishingSpots) {
-    if (spot.region.id !== regionId) continue;
-    for (const cf of spot.catchableFish) {
-      fishMap.set(cf.fish.name, (fishMap.get(cf.fish.name) || 0) + 1);
-    }
-  }
-  return Array.from(fishMap.entries())
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 3)
-    .map(([name]) => name);
+  return Array.from(grouped.values()).map((g) => ({
+    ...g,
+    totalSpots: g.regions.reduce((sum, r) => sum + r.spotCount, 0),
+  }));
 }
 
 export default function AreaListPage() {
-  const prefectureGroups = getRegionsByPrefecture();
+  const groups = buildPrefectureGroups();
   const totalSpots = fishingSpots.length;
   const totalRegions = regions.length;
 
@@ -127,60 +134,7 @@ export default function AreaListPage() {
         </p>
       </div>
 
-      <div className="space-y-8 sm:space-y-10">
-        {prefectureGroups.map((group) => (
-          <section key={group.prefecture}>
-            <h2 className="mb-3 text-base font-bold sm:mb-4 sm:text-lg">
-              {group.prefecture}
-            </h2>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {group.regions.map((region) => {
-                const spotCount = getSpotCountForRegion(region.id);
-                const topFish = getTopFishForRegion(region.id);
-
-                return (
-                  <Link key={region.id} href={`/area/${region.slug}`}>
-                    <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                      <CardContent className="p-4">
-                        <div className="flex items-start justify-between gap-2">
-                          <div className="min-w-0">
-                            <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
-                              <MapPin className="mr-1 inline size-4" />
-                              {region.areaName}
-                            </h3>
-                            <p className="mt-0.5 text-xs text-muted-foreground">
-                              {region.prefecture}
-                            </p>
-                          </div>
-                          <Badge
-                            variant="secondary"
-                            className="shrink-0 text-xs"
-                          >
-                            {spotCount}スポット
-                          </Badge>
-                        </div>
-                        {topFish.length > 0 && (
-                          <div className="mt-2 flex flex-wrap gap-1">
-                            {topFish.map((name) => (
-                              <Badge
-                                key={name}
-                                variant="outline"
-                                className="text-xs"
-                              >
-                                {name}
-                              </Badge>
-                            ))}
-                          </div>
-                        )}
-                      </CardContent>
-                    </Card>
-                  </Link>
-                );
-              })}
-            </div>
-          </section>
-        ))}
-      </div>
+      <AreaListFilter groups={groups} />
     </div>
   );
 }

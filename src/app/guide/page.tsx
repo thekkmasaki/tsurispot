@@ -28,13 +28,12 @@ import {
   HelpCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import { StepCard } from "@/components/guide/step-card";
 import { ProductList } from "@/components/affiliate/product-list";
 import { getTopProducts } from "@/lib/data/products";
-import { Badge } from "@/components/ui/badge";
 import { type LucideIcon } from "lucide-react";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { GuideListFilter } from "@/components/guide/guide-list-filter";
 
 interface GuideItem {
   href: string;
@@ -43,12 +42,6 @@ interface GuideItem {
   icon: LucideIcon;
   category: "beginner" | "method" | "scene";
 }
-
-const categoryLabels = {
-  beginner: { label: "入門", color: "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200" },
-  method: { label: "釣り方別", color: "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200" },
-  scene: { label: "シーン別", color: "bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200" },
-};
 
 const detailGuides: GuideItem[] = [
   {
@@ -420,51 +413,15 @@ export default function GuidePage() {
           各テーマごとに、実践的な手順を詳しく解説しています。
         </p>
 
-        {/* カテゴリフィルタ表示 */}
-        <div className="mb-4 flex flex-wrap items-center justify-center gap-2">
-          {(Object.entries(categoryLabels) as [keyof typeof categoryLabels, typeof categoryLabels[keyof typeof categoryLabels]][]).map(
-            ([key, { label, color }]) => (
-              <span
-                key={key}
-                className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium ${color}`}
-              >
-                {label}（{detailGuides.filter((g) => g.category === key).length}件）
-              </span>
-            )
-          )}
-        </div>
-
-        <div className="grid gap-4 sm:grid-cols-2">
-          {detailGuides.map((guide) => (
-            <Link key={guide.href} href={guide.href} className="group">
-              <Card className="h-full transition-colors group-hover:border-primary">
-                <CardContent className="flex items-start gap-4 pt-6">
-                  <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <guide.icon className="size-5" />
-                  </div>
-                  <div className="min-w-0 flex-1">
-                    <div className="mb-1 flex items-center gap-2">
-                      <p className="font-medium text-foreground group-hover:text-primary">
-                        {guide.title}
-                      </p>
-                    </div>
-                    <div className="mb-1">
-                      <span
-                        className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-medium ${categoryLabels[guide.category].color}`}
-                      >
-                        {categoryLabels[guide.category].label}
-                      </span>
-                    </div>
-                    <p className="text-xs text-muted-foreground">
-                      {guide.description}
-                    </p>
-                  </div>
-                  <ChevronRight className="mt-0.5 size-4 shrink-0 text-muted-foreground transition-transform group-hover:translate-x-0.5 group-hover:text-primary" />
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
-        </div>
+        <GuideListFilter
+          guides={detailGuides.map((g) => ({
+            href: g.href,
+            title: g.title,
+            description: g.description,
+            iconName: g.icon.displayName || "",
+            category: g.category,
+          }))}
+        />
       </div>
 
       {/* 道具を揃えるなら */}

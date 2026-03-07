@@ -24,6 +24,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { SpotImage } from "@/components/ui/spot-image";
+import { CollapsibleSection } from "@/components/ui/collapsible-section";
 import { MonthlyHeroImage } from "@/components/monthly-hero-image";
 import {
   monthlyGuides,
@@ -643,8 +644,13 @@ export default async function MonthlyGuidePage({ params }: Props) {
         </section>
 
         {/* おすすめ装備 */}
+        <CollapsibleSection
+          title={`${guide.nameJa}のおすすめ装備`}
+          icon={<Package className="size-5" />}
+          mobileOnly={true}
+        >
         <section className="mb-8">
-          <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
+          <h2 className="mb-4 hidden items-center gap-2 text-lg font-bold md:flex">
             <Package className="size-5 text-primary" />
             {guide.nameJa}のおすすめ装備
           </h2>
@@ -776,6 +782,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
             </div>
           </div>
         </section>
+        </CollapsibleSection>
 
         {/* 釣りポイント解説 */}
         <section className="mb-8">
@@ -793,11 +800,12 @@ export default async function MonthlyGuidePage({ params }: Props) {
         </section>
 
         {/* FAQ */}
+        <CollapsibleSection
+          title={`${guide.nameJa}の釣りFAQ`}
+          icon={<HelpCircle className="size-5" />}
+          previewText={`${allFaqs.length}件`}
+        >
         <section className="mb-8">
-          <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
-            <HelpCircle className="size-5 text-primary" />
-            {guide.nameJa}の釣りFAQ
-          </h2>
           <div className="space-y-3">
             {allFaqs.map((faq, i) => (
               <Card key={i}>
@@ -813,7 +821,13 @@ export default async function MonthlyGuidePage({ params }: Props) {
             ))}
           </div>
         </section>
+        </CollapsibleSection>
 
+        {/* 関連ガイド・ツール（折りたたみ） */}
+        <CollapsibleSection
+          title="関連ガイド・ツール"
+          previewText="ツール・特集・関連ページ"
+        >
         {/* 釣りに役立つツール */}
         <section className="mb-8">
           <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
@@ -895,99 +909,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
           </section>
         )}
 
-        {/* 安全・マナー */}
-        <div className="mb-8 grid gap-3 sm:grid-cols-2">
-          <Link href="/safety" className="flex items-center gap-3 rounded-lg border border-red-200 bg-red-50/50 p-4 transition-shadow hover:shadow-md dark:bg-red-950/20">
-            <Shield className="size-6 text-red-500" />
-            <div>
-              <p className="font-semibold">安全ガイド</p>
-              <p className="text-xs text-muted-foreground">事故を防ぐための必読情報</p>
-            </div>
-          </Link>
-          <Link href="/fishing-rules" className="flex items-center gap-3 rounded-lg border border-amber-200 bg-amber-50/50 p-4 transition-shadow hover:shadow-md dark:bg-amber-950/20">
-            <BookOpen className="size-6 text-amber-500" />
-            <div>
-              <p className="font-semibold">ルールとマナー</p>
-              <p className="text-xs text-muted-foreground">釣り場で守るべきルール</p>
-            </div>
-          </Link>
-        </div>
-
-        {/* 初心者向けバナー */}
-        <section className="mb-8">
-          <div className="overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 p-6 text-white">
-            <div className="mb-1 text-sm font-medium text-emerald-100">はじめての方へ</div>
-            <h2 className="mb-2 text-lg font-bold">{guide.nameJa}から釣りを始めませんか？</h2>
-            <p className="mb-4 text-sm text-emerald-50">
-              道具は5,000円から。近くの堤防で、初心者でも魚が釣れます。
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link
-                href="/guide/beginner"
-                className="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-bold text-emerald-700 transition-colors hover:bg-emerald-50"
-              >
-                初心者ガイドを見る
-                <ChevronRight className="size-4" />
-              </Link>
-              <Link
-                href="/guide/budget"
-                className="inline-flex items-center gap-2 rounded-lg border-2 border-white/50 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10"
-              >
-                5,000円で始める方法
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        {/* 釣り場診断CTA */}
-        <div className="mb-8 rounded-xl border-2 border-primary/20 bg-primary/5 p-6 text-center">
-          <p className="mb-2 text-base font-bold">{guide.nameJa}、どこで釣る？</p>
-          <p className="mb-4 text-sm text-muted-foreground">
-            条件に合った釣り場を診断します
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            <Link href="/fish-finder" className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90">
-              釣り場診断を試す
-            </Link>
-            <Link href="/recommendation" className="inline-flex items-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-muted">
-              今週のおすすめを見る
-            </Link>
-          </div>
-        </div>
-
-        {/* 前月・翌月ナビ */}
-        <div className="mb-8 grid grid-cols-2 gap-4">
-          {prevGuide && (
-            <Link
-              href={`/monthly/${prevSlug}`}
-              className="flex items-center gap-2 rounded-lg border bg-white p-4 transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <ChevronLeft className="size-5 shrink-0 text-primary" />
-              <div className="min-w-0">
-                <p className="text-xs text-muted-foreground">前月</p>
-                <p className="font-semibold">
-                  {prevGuide.emoji} {prevGuide.nameJa}の釣り
-                </p>
-              </div>
-            </Link>
-          )}
-          {nextGuide && (
-            <Link
-              href={`/monthly/${nextSlug}`}
-              className="flex items-center justify-end gap-2 rounded-lg border bg-white p-4 transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <div className="min-w-0 text-right">
-                <p className="text-xs text-muted-foreground">翌月</p>
-                <p className="font-semibold">
-                  {nextGuide.emoji} {nextGuide.nameJa}の釣り
-                </p>
-              </div>
-              <ChevronRight className="size-5 shrink-0 text-primary" />
-            </Link>
-          )}
-        </div>
-
-        {/* 関連リンク */}
+        {/* 関連ページ */}
         <div className="rounded-xl border bg-muted/30 p-6">
           <h2 className="mb-4 text-base font-bold">関連ページ</h2>
           <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-4">
@@ -1173,6 +1095,100 @@ export default async function MonthlyGuidePage({ params }: Props) {
             </Link>
           </div>
         </div>
+        </CollapsibleSection>
+
+        {/* 安全・マナー */}
+        <div className="mb-8 grid gap-3 sm:grid-cols-2">
+          <Link href="/safety" className="flex items-center gap-3 rounded-lg border border-red-200 bg-red-50/50 p-4 transition-shadow hover:shadow-md dark:bg-red-950/20">
+            <Shield className="size-6 text-red-500" />
+            <div>
+              <p className="font-semibold">安全ガイド</p>
+              <p className="text-xs text-muted-foreground">事故を防ぐための必読情報</p>
+            </div>
+          </Link>
+          <Link href="/fishing-rules" className="flex items-center gap-3 rounded-lg border border-amber-200 bg-amber-50/50 p-4 transition-shadow hover:shadow-md dark:bg-amber-950/20">
+            <BookOpen className="size-6 text-amber-500" />
+            <div>
+              <p className="font-semibold">ルールとマナー</p>
+              <p className="text-xs text-muted-foreground">釣り場で守るべきルール</p>
+            </div>
+          </Link>
+        </div>
+
+        {/* 初心者向けバナー */}
+        <section className="mb-8">
+          <div className="overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 p-6 text-white">
+            <div className="mb-1 text-sm font-medium text-emerald-100">はじめての方へ</div>
+            <h2 className="mb-2 text-lg font-bold">{guide.nameJa}から釣りを始めませんか？</h2>
+            <p className="mb-4 text-sm text-emerald-50">
+              道具は5,000円から。近くの堤防で、初心者でも魚が釣れます。
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/guide/beginner"
+                className="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-bold text-emerald-700 transition-colors hover:bg-emerald-50"
+              >
+                初心者ガイドを見る
+                <ChevronRight className="size-4" />
+              </Link>
+              <Link
+                href="/guide/budget"
+                className="inline-flex items-center gap-2 rounded-lg border-2 border-white/50 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10"
+              >
+                5,000円で始める方法
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* 釣り場診断CTA */}
+        <div className="mb-8 rounded-xl border-2 border-primary/20 bg-primary/5 p-6 text-center">
+          <p className="mb-2 text-base font-bold">{guide.nameJa}、どこで釣る？</p>
+          <p className="mb-4 text-sm text-muted-foreground">
+            条件に合った釣り場を診断します
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Link href="/fish-finder" className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90">
+              釣り場診断を試す
+            </Link>
+            <Link href="/recommendation" className="inline-flex items-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-muted">
+              今週のおすすめを見る
+            </Link>
+          </div>
+        </div>
+
+        {/* 前月・翌月ナビ */}
+        <div className="mb-8 grid grid-cols-2 gap-4">
+          {prevGuide && (
+            <Link
+              href={`/monthly/${prevSlug}`}
+              className="flex items-center gap-2 rounded-lg border bg-white p-4 transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <ChevronLeft className="size-5 shrink-0 text-primary" />
+              <div className="min-w-0">
+                <p className="text-xs text-muted-foreground">前月</p>
+                <p className="font-semibold">
+                  {prevGuide.emoji} {prevGuide.nameJa}の釣り
+                </p>
+              </div>
+            </Link>
+          )}
+          {nextGuide && (
+            <Link
+              href={`/monthly/${nextSlug}`}
+              className="flex items-center justify-end gap-2 rounded-lg border bg-white p-4 transition-shadow hover:shadow-md dark:bg-card"
+            >
+              <div className="min-w-0 text-right">
+                <p className="text-xs text-muted-foreground">翌月</p>
+                <p className="font-semibold">
+                  {nextGuide.emoji} {nextGuide.nameJa}の釣り
+                </p>
+              </div>
+              <ChevronRight className="size-5 shrink-0 text-primary" />
+            </Link>
+          )}
+        </div>
+
       </main>
     </>
   );
