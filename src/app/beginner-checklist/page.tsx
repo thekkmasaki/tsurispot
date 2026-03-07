@@ -102,9 +102,36 @@ const categories: ChecklistCategory[] = [
           url: "https://amzn.to/4c6gaUn",
         },
       },
-      { id: "bucket", label: "バケツ", note: "海水を汲む用。折りたたみ式が便利" },
-      { id: "cooler", label: "クーラーボックス＋氷", note: "釣った魚の鮮度を保つため" },
-      { id: "scissors", label: "ハサミ・プライヤー", note: "糸を切る・針を外す必須アイテム" },
+      {
+        id: "bucket", label: "バケツ", note: "海水を汲む用。折りたたみ式が便利",
+        affiliate: {
+          badge: "道具まとめに",
+          badgeColor: "bg-teal-100 text-teal-700",
+          name: "大容量フィッシングバッカン 40L",
+          desc: "バケツ代わりにも使える大容量バッカン。釣り道具を一式まとめて収納でき、2層構造でよく使うものは上段に。",
+          url: "https://amzn.to/4aOYPgo",
+        },
+      },
+      {
+        id: "cooler", label: "クーラーボックス＋氷", note: "釣った魚の鮮度を保つため",
+        affiliate: {
+          badge: "座れる収納",
+          badgeColor: "bg-sky-100 text-sky-700",
+          name: "釣りボックス（座れるタイプ）",
+          desc: "大容量収納で椅子にもなる。ロッドスタンド設置可能で、ぶっこみ釣りや泳がせ釣りがとても楽に。",
+          url: "https://amzn.to/4rvRhGx",
+        },
+      },
+      {
+        id: "scissors", label: "ハサミ・プライヤー", note: "糸を切る・針を外す必須アイテム",
+        affiliate: {
+          badge: "仕掛け交換に",
+          badgeColor: "bg-violet-100 text-violet-700",
+          name: "スナップ（まとめ買い）",
+          desc: "仕掛け交換がワンタッチで楽に。ちょっとずつ買うよりまとめ買いの方がお得。ハサミと一緒に揃えておこう。",
+          url: "https://amzn.to/4c9oMcU",
+        },
+      },
       { id: "towel", label: "タオル（2〜3枚）", note: "魚を掴む用・手拭き用" },
       { id: "bag", label: "ゴミ袋", note: "使った仕掛けやゴミは必ず持ち帰る" },
     ],
@@ -116,13 +143,40 @@ const categories: ChecklistCategory[] = [
     colorClass: "text-red-600",
     bgClass: "bg-red-50 dark:bg-red-950",
     items: [
-      { id: "lifejacket", label: "ライフジャケット", note: "堤防・磯では必須。レンタルできる施設も" },
+      {
+        id: "lifejacket", label: "ライフジャケット", note: "堤防・磯では必須。レンタルできる施設も",
+        affiliate: {
+          badge: "安全第一",
+          badgeColor: "bg-red-100 text-red-700",
+          name: "腰巻きタイプ ライフジャケット",
+          desc: "装着感が良く腰に巻いた感じも快適と好評。お手頃価格で初心者やコストをかけずに釣りをしたい人におすすめ。",
+          url: "https://amzn.to/4s1DpU5",
+        },
+      },
       { id: "shoes", label: "滑りにくい靴", note: "スパイクシューズや長靴がおすすめ" },
       { id: "hat", label: "帽子", note: "日差し対策と、飛んできた針から頭を守る" },
       { id: "sunscreen", label: "日焼け止め", note: "海辺は紫外線が強い。こまめに塗り直す" },
-      { id: "sunglasses", label: "偏光サングラス", note: "水面の反射を抑え、水中が見やすくなる" },
+      {
+        id: "sunglasses", label: "偏光サングラス", note: "水面の反射を抑え、水中が見やすくなる",
+        affiliate: {
+          badge: "長時間も快適",
+          badgeColor: "bg-amber-100 text-amber-700",
+          name: "変色調光偏光グラス",
+          desc: "可動式テンプルとノーズパッドの調整が可能で、長時間の装着でも快適。軽量コンパクトフレームで疲れにくい。",
+          url: "https://amzn.to/3ZPBnuq",
+        },
+      },
       { id: "firstaid", label: "絆創膏・消毒液", note: "針で刺したときや魚のヒレでケガした時に" },
-      { id: "headlight", label: "ヘッドライト", note: "朝マヅメ・夕マヅメの薄暗い時間帯に" },
+      {
+        id: "headlight", label: "ヘッドライト", note: "朝マヅメ・夕マヅメの薄暗い時間帯に",
+        affiliate: {
+          badge: "充電切れ対策",
+          badgeColor: "bg-indigo-100 text-indigo-700",
+          name: "Anker モバイルバッテリー",
+          desc: "ヘッドライトやスマホの充電切れ防止に。大容量で1日安心。釣り場での長時間使用にも対応。",
+          url: "https://amzn.to/4s2zhmT",
+        },
+      },
     ],
   },
   {
@@ -132,7 +186,16 @@ const categories: ChecklistCategory[] = [
     colorClass: "text-green-600",
     bgClass: "bg-green-50 dark:bg-green-950",
     items: [
-      { id: "chair", label: "折りたたみ椅子", note: "長時間の釣りでも快適に" },
+      {
+        id: "chair", label: "折りたたみ椅子", note: "長時間の釣りでも快適に",
+        affiliate: {
+          badge: "収納＋椅子",
+          badgeColor: "bg-emerald-100 text-emerald-700",
+          name: "釣りボックス（座れるタイプ）",
+          desc: "大容量で座れる一石二鳥のタックルボックス。ロッドスタンドも設置可能で、ぶっこみ釣りにも最適。",
+          url: "https://amzn.to/4rvRhGx",
+        },
+      },
       {
         id: "net", label: "タモ（玉網）", note: "大きな魚を取り込むときに必要",
         affiliate: {
@@ -143,7 +206,16 @@ const categories: ChecklistCategory[] = [
           url: "https://amzn.to/4tOTONg",
         },
       },
-      { id: "stringer", label: "ストリンガー", note: "魚を生かしたまま海中に繋ぎ止める道具" },
+      {
+        id: "stringer", label: "ストリンガー", note: "魚を生かしたまま海中に繋ぎ止める道具",
+        affiliate: {
+          badge: "竿置きに便利",
+          badgeColor: "bg-slate-100 text-slate-700",
+          name: "ロッドスタンド",
+          desc: "竿を立てておけるスタンド。釣りボックスと組み合わせると、ぶっこみ釣りや泳がせ釣りが格段に楽に。",
+          url: "https://amzn.to/3OwwVy8",
+        },
+      },
       { id: "scale", label: "フィッシュグリップ", note: "魚を安全に掴むための道具" },
       {
         id: "knife", label: "ナイフ", note: "魚を締める・さばくときに使用",
@@ -155,7 +227,16 @@ const categories: ChecklistCategory[] = [
           url: "https://amzn.to/3ZQsYqx",
         },
       },
-      { id: "rainwear", label: "レインウェア", note: "急な雨や波しぶき対策に" },
+      {
+        id: "rainwear", label: "レインウェア", note: "急な雨や波しぶき対策に",
+        affiliate: {
+          badge: "防寒にも",
+          badgeColor: "bg-violet-100 text-violet-700",
+          name: "電熱ベスト（バッテリー付き）",
+          desc: "普段使いもできる電熱ベスト。暖かさとバッテリーの持ちが好評。大容量バッテリー付きで長時間の釣りでも安心。",
+          url: "https://amzn.to/40sdGZ6",
+        },
+      },
       {
         id: "gloves", label: "フィッシンググローブ", note: "手を保護し、滑り止め効果も",
         affiliate: {

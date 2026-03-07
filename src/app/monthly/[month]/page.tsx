@@ -393,8 +393,14 @@ export default async function MonthlyGuidePage({ params }: Props) {
                   href={`/fish/${fish.slug}`}
                   className="group flex items-start gap-3 rounded-lg border bg-white p-3 transition-shadow hover:shadow-md dark:bg-card"
                 >
-                  <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-                    <Fish className="size-5" />
+                  <div className="size-10 shrink-0 overflow-hidden rounded-lg bg-primary/10">
+                    {fish.imageUrl ? (
+                      <img src={fish.imageUrl} alt={fish.name} className="size-full object-cover" />
+                    ) : (
+                      <div className="flex size-full items-center justify-center text-primary">
+                        <Fish className="size-5" />
+                      </div>
+                    )}
                   </div>
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
@@ -654,7 +660,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
             <Package className="size-5 text-primary" />
             {guide.nameJa}のおすすめ装備
           </h2>
-          <div className="grid gap-3 sm:grid-cols-3">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {guide.gear.map((item, i) => (
               <Card key={i}>
                 <CardContent className="pt-4">
