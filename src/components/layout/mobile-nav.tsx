@@ -25,7 +25,7 @@ import {
   Store,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { getFavorites } from "@/components/spots/favorite-button";
+import { useFavorites } from "@/hooks/use-favorites";
 
 const mainNavItems = [
   { href: "/spots", label: "スポット", icon: MapPin },
@@ -54,20 +54,9 @@ const moreNavItems = [
 
 export function MobileNav() {
   const pathname = usePathname();
-  const [favCount, setFavCount] = useState(0);
+  const { count: favCount } = useFavorites();
   const [moreOpen, setMoreOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    setFavCount(getFavorites().length);
-    const onUpdate = () => setFavCount(getFavorites().length);
-    window.addEventListener("storage", onUpdate);
-    window.addEventListener("favorites-updated", onUpdate);
-    return () => {
-      window.removeEventListener("storage", onUpdate);
-      window.removeEventListener("favorites-updated", onUpdate);
-    };
-  }, []);
 
   // ページ遷移時にメニューを閉じる
   useEffect(() => {

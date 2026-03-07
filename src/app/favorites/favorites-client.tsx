@@ -1,38 +1,25 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import Link from "next/link";
 import { Heart, Map, List } from "lucide-react";
 import { SpotCard } from "@/components/spots/spot-card";
 import { Button } from "@/components/ui/button";
 import { fishingSpots } from "@/lib/data/spots";
-import { getFavorites } from "@/components/spots/favorite-button";
+import { useFavorites, getFavorites } from "@/hooks/use-favorites";
 
 export function FavoritesClient() {
-  const [favoritesSlugs, setFavoritesSlugs] = useState<string[]>([]);
+  const { favorites: favoritesSlugs, removeFavorite } = useFavorites();
 
+  // 存在しないスポットのslugをクリーンアップ
   useEffect(() => {
     const savedSlugs = getFavorites();
-    // 存在しないスポットのslugをクリーンアップ
-    const validSlugs = savedSlugs.filter((slug) =>
-      fishingSpots.some((spot) => spot.slug === slug)
+    const invalidSlugs = savedSlugs.filter(
+      (slug) => !fishingSpots.some((spot) => spot.slug === slug)
     );
-    if (validSlugs.length !== savedSlugs.length) {
-      localStorage.setItem("tsurispot-favorites", JSON.stringify(validSlugs));
-      window.dispatchEvent(new Event("favorites-updated"));
-    }
-    setFavoritesSlugs(validSlugs);
-
-    const handleStorage = () => {
-      setFavoritesSlugs(getFavorites());
-    };
-    window.addEventListener("storage", handleStorage);
-    window.addEventListener("favorites-updated", handleStorage);
-    return () => {
-      window.removeEventListener("storage", handleStorage);
-      window.removeEventListener("favorites-updated", handleStorage);
-    };
-  }, []);
+    // 無効なスラッグがある場合のみ削除
+    invalidSlugs.forEach((slug) => removeFavorite(slug));
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const favoriteSpots = fishingSpots.filter((spot) =>
     favoritesSlugs.includes(spot.slug)

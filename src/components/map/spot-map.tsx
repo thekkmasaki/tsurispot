@@ -9,12 +9,7 @@ import Link from 'next/link';
 import { Star, Navigation, Loader2, Heart } from 'lucide-react';
 import { DIFFICULTY_LABELS } from '@/types';
 import { Badge } from '@/components/ui/badge';
-
-const FAV_KEY = 'tsurispot-favorites';
-function getFavs(): string[] {
-  try { const r = localStorage.getItem(FAV_KEY); return r ? JSON.parse(r) : []; } catch { return []; }
-}
-function setFavs(s: string[]) { localStorage.setItem(FAV_KEY, JSON.stringify(s)); }
+import { useFavorites } from '@/hooks/use-favorites';
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -73,10 +68,9 @@ export function SpotMap() {
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [locating, setLocating] = useState(false);
   const [nearbyMode, setNearbyMode] = useState(false);
-  const [favorites, setFavorites] = useState<Set<string>>(new Set());
+  const { toggleFavorite, isFavorite } = useFavorites();
 
   useEffect(() => {
-    setFavorites(new Set(getFavs()));
     // デフォルトで現在地の近くを表示
     if (navigator.geolocation) {
       setLocating(true);
@@ -90,16 +84,6 @@ export function SpotMap() {
         { enableHighAccuracy: true, timeout: 10000 }
       );
     }
-  }, []);
-
-  const toggleFavorite = useCallback((slug: string) => {
-    setFavorites(prev => {
-      const next = new Set(prev);
-      if (next.has(slug)) { next.delete(slug); } else { next.add(slug); }
-      setFavs(Array.from(next));
-      window.dispatchEvent(new Event('favorites-updated'));
-      return next;
-    });
   }, []);
 
   const handleLocate = useCallback(() => {
@@ -329,14 +313,14 @@ export function SpotMap() {
                   <h3 className="text-sm font-bold leading-tight sm:text-base">{spot.name}</h3>
                   <button
                     onClick={(e) => { e.stopPropagation(); toggleFavorite(spot.slug); }}
-                    aria-label={favorites.has(spot.slug) ? 'お気に入り解除' : 'お気に入り登録'}
+                    aria-label={isFavorite(spot.slug) ? 'お気に入り解除' : 'お気に入り登録'}
                     style={{ background: 'none', border: 'none', cursor: 'pointer', padding: '2px', flexShrink: 0 }}
                   >
                     <Heart
                       className="size-5 transition-transform"
                       style={{
-                        fill: favorites.has(spot.slug) ? '#ef4444' : 'none',
-                        color: favorites.has(spot.slug) ? '#ef4444' : '#9ca3af',
+                        fill: isFavorite(spot.slug) ? '#ef4444' : 'none',
+                        color: isFavorite(spot.slug) ? '#ef4444' : '#9ca3af',
                       }}
                     />
                   </button>

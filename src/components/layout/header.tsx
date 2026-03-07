@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect, useMemo } from "react";
-import { getFavorites } from "@/components/spots/favorite-button";
+import { useFavorites } from "@/hooks/use-favorites";
 import {
   Fish,
   Map,
@@ -136,20 +136,7 @@ function DropdownMenu() {
 
 export function Header({ searchItems }: { searchItems?: SearchItem[] }) {
   const pathname = usePathname();
-  const [favCount, setFavCount] = useState(0);
-
-  useEffect(() => {
-    setFavCount(getFavorites().length);
-    // localStorageの変更を監視
-    const onStorage = () => setFavCount(getFavorites().length);
-    window.addEventListener("storage", onStorage);
-    // カスタムイベントで同一タブ内の変更も検知
-    window.addEventListener("favorites-updated", onStorage);
-    return () => {
-      window.removeEventListener("storage", onStorage);
-      window.removeEventListener("favorites-updated", onStorage);
-    };
-  }, []);
+  const { count: favCount } = useFavorites();
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/40 bg-white/80 backdrop-blur-lg">

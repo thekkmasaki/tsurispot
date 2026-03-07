@@ -2,6 +2,10 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## 事業目標
+
+**このサイトの売却目標は1億円。** すべての施策はこの目標から逆算して行う。月間収益300〜400万円（24-36x multiple）、月間50万PV以上が必要。収益源はアフィリエイト・広告・B2B（釣具店掲載料）・スポンサード。
+
 ## 言語
 
 全てのコミュニケーション・コミットメッセージは日本語で行う。
@@ -50,7 +54,7 @@ npx tsc --noEmit
 
 | データ | エントリポイント | 規模 |
 |--------|-----------------|------|
-| スポット | `spots.ts` → 80+ファイルを統合して `fishingSpots[]` | 1,327+件 |
+| スポット | `spots.ts` → 80+ファイルを統合して `fishingSpots[]` | 2,141+件 |
 | 魚種 | `fish.ts` → `fish-sea.ts` + `fish-freshwater.ts` + `fish-brackish.ts` | 100+種 |
 | ブログ | `blog.ts` → `blog-articles-*.ts`（5分割）+ microCMS | ハイブリッド |
 | 地域 | `regions.ts`（67K行）| 全国市区町村 |
@@ -96,12 +100,28 @@ npx tsc --noEmit
 - `/api/catch-report` — 釣果報告（Upstash Redis）
 - `/api/presence` — オンラインユーザー検出（Redis、120秒TTL）
 
+### スポットデータファイル規則
+
+- ファイル名: `spots-{地域名}.ts`（例: `spots-hokkaido-tohoku-detail.ts`）
+- 80+ファイルを `spots.ts` が統合して `fishingSpots[]` をexport
+- 1ファイルあたり最大5MB — 部分読み込み（offset/limit）を推奨
+
+### 画像パス規則
+
+- 魚種写真: `/images/fish/{slug}.jpg`
+- スポット写真: `/images/spots/wikimedia/{slug}.jpg` または外部URL
+- OGP画像: `/api/og?title=...&emoji=...`（runtime: `nodejs`、`edge`はデータ1MB制限超過）
+
+### Client / Server コンポーネント
+
+- `onClick` 等のイベントハンドラは **Client Component（`"use client"`）のみ** で使用可
+- Server Component内でインタラクティブな要素が必要な場合は、別ファイルのClient Componentに分離する
+- `img`タグの `onError` もServer Componentでは使えない
+
 ## 注意事項
 
 - OneDrive上のプロジェクト → `.next` の EPERM エラーが頻発。ビルド前に `rm -rf .next`
 - 日本語パスを含むためbash操作時は引用符で囲む
-- アフィリエイトリンクはユーザー提供のもののみ使用（勝手に生成しない）
-- リンク一覧: `C:\Users\kk471\OneDrive\デスクトップ\saas\アフィリエイト\リンク一覧.txt`
+- アフィリエイトリンク一覧: `C:\Users\kk471\OneDrive\デスクトップ\saas\アフィリエイト\リンク一覧.txt`
 - スポット紹介文の他サイトからの丸パクリは絶対NG
-- OGP画像の runtime は `nodejs`（`edge` だとスポットデータが1MB制限を超える）
-- `src/lib/data/` の単一ファイルが巨大（最大5MB超）なので、部分読み込みを推奨
+- デプロイ前に `npx tsc --noEmit` で型チェック必須
