@@ -19,6 +19,8 @@ import {
   Shield,
   Waves,
   Target,
+  Newspaper,
+  Globe,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -38,6 +40,8 @@ import { getMonthlyRigs } from "@/lib/data/monthly-rigs";
 import { MonthlyRigSection } from "@/components/monthly-rig-section";
 import { MonthlySportsSorter } from "@/components/monthly-spots-sorter";
 import type { MonthlySpot } from "@/components/monthly-spots-sorter";
+import { getAllBlogPosts } from "@/lib/data/blog";
+import { prefectures } from "@/lib/data/prefectures";
 
 interface Props {
   params: Promise<{ month: string }>;
@@ -165,6 +169,54 @@ export default async function MonthlyGuidePage({ params }: Props) {
 
   const currentMonth = new Date().getMonth() + 1;
   const isCurrentMonth = currentMonth === guide.month;
+
+  // 地域別スポット集計（地方→都道府県ごとのスポット数）
+  const REGION_GROUP_SLUG_MAP: Record<string, string> = {
+    "北海道": "hokkaido", "東北": "tohoku", "関東": "kanto", "中部": "chubu",
+    "近畿": "kinki", "中国": "chugoku", "四国": "shikoku", "九州・沖縄": "kyushu-okinawa",
+  };
+  const regionSpotCounts = new Map<string, number>();
+  for (const spot of allSpotsForMonth) {
+    const pref = prefectures.find(p => p.name === spot.region.prefecture);
+    if (pref) {
+      regionSpotCounts.set(pref.regionGroup, (regionSpotCounts.get(pref.regionGroup) || 0) + 1);
+    }
+  }
+  const regionGroups = Object.entries(REGION_GROUP_SLUG_MAP)
+    .map(([name, slug]) => ({ name, slug, count: regionSpotCounts.get(name) || 0 }))
+    .filter(r => r.count > 0);
+
+  // 都道府県別スポット数TOP10
+  const prefSpotCounts = new Map<string, number>();
+  for (const spot of allSpotsForMonth) {
+    const pref = spot.region.prefecture;
+    prefSpotCounts.set(pref, (prefSpotCounts.get(pref) || 0) + 1);
+  }
+  const topPrefectures = [...prefSpotCounts.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 12)
+    .map(([name, count]) => {
+      const p = prefectures.find(pr => pr.name === name);
+      return { name, slug: p?.slug || "", count };
+    })
+    .filter(p => p.slug);
+
+  // 魚の釣り方→釣り方ページへのマッピング
+  const METHOD_SLUG_MAP: Record<string, string> = {
+    "サビキ釣り": "sabiki", "ルアー釣り": "lure", "エギング": "eging",
+    "ショアジギング": "jigging", "投げ釣り": "casting", "穴釣り": "anazuri",
+    "泳がせ釣り": "oyogase", "ちょい投げ": "choinage", "ウキ釣り": "float-fishing",
+    "フカセ釣り": "fukase", "遠投カゴ釣り": "entou-kago",
+  };
+
+  // この月の関連ブログ記事を取得
+  const allBlogPosts = await getAllBlogPosts();
+  const relatedBlogPosts = allBlogPosts
+    .filter(post => {
+      const postMonth = parseInt(post.publishedAt.split("-")[1]);
+      return postMonth === guide.month;
+    })
+    .slice(0, 6);
 
   // 自動生成FAQ（guide.faqsに追加する動的Q&A）
   const topFishNames = displayFish.slice(0, 4).map(f => f?.name).filter(Boolean);
@@ -423,22 +475,48 @@ export default async function MonthlyGuidePage({ params }: Props) {
                     <p className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">
                       {fish.description}
                     </p>
+                    {fish.fishingMethods && fish.fishingMethods.length > 0 && (
+                      <div className="mt-1.5 flex flex-wrap gap-1">
+                        {fish.fishingMethods.slice(0, 3).map((m) => {
+                          const methodSlug = METHOD_SLUG_MAP[m.methodName];
+                          return methodSlug ? (
+                            <Link
+                              key={m.methodName}
+                              href={`/methods/${methodSlug}`}
+                              onClick={(e) => e.stopPropagation()}
+                              className="rounded-full bg-blue-50 px-2 py-0.5 text-[10px] font-medium text-blue-700 transition-colors hover:bg-blue-100 dark:bg-blue-950/30 dark:text-blue-300"
+                            >
+                              {m.methodName}
+                            </Link>
+                          ) : (
+                            <span key={m.methodName} className="rounded-full bg-gray-100 px-2 py-0.5 text-[10px] text-gray-600">
+                              {m.methodName}
+                            </span>
+                          );
+                        })}
+                      </div>
+                    )}
                   </div>
                 </Link>
               );
             })}
           </div>
-          <div className="mt-4 text-center">
-            <Link
-              href="/catchable-now"
-              className="text-sm text-primary hover:underline"
-            >
+          {totalFishCount > displayFish.length && (
+            <div className="mt-4 text-center">
+              <Link
+                href={`/seasonal/${month}`}
+                className="inline-flex items-center gap-1.5 rounded-lg border px-4 py-2 text-sm font-medium transition-colors hover:bg-muted"
+              >
+                {guide.nameJa}に釣れる全{totalFishCount}種を見る →
+              </Link>
+            </div>
+          )}
+          <div className="mt-3 flex flex-wrap justify-center gap-4">
+            <Link href="/catchable-now" className="text-sm text-primary hover:underline">
               今釣れる魚をもっと見る →
             </Link>
-          </div>
-          <div className="mt-3 text-center">
-            <Link href="/fishing-spots/near-me" className="text-sm text-primary hover:underline">
-              近くの釣り場を探す →
+            <Link href="/fish" className="text-sm text-primary hover:underline">
+              魚種図鑑 →
             </Link>
           </div>
         </section>
@@ -559,6 +637,83 @@ export default async function MonthlyGuidePage({ params }: Props) {
             </section>
           );
         })()}
+
+        {/* 地域別に探す */}
+        {regionGroups.length > 0 && (
+          <section className="mb-8">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
+              <Globe className="size-5 text-primary" />
+              {guide.nameJa}の釣り — 地域別ガイド
+            </h2>
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+              {regionGroups.map((rg) => (
+                <Link
+                  key={rg.slug}
+                  href={`/seasonal/${month}/${rg.slug}`}
+                  className="group rounded-lg border bg-white p-3 text-center transition-shadow hover:shadow-md dark:bg-card"
+                >
+                  <p className="font-semibold group-hover:text-primary">{rg.name}</p>
+                  <p className="text-xs text-muted-foreground">{rg.count}スポット</p>
+                </Link>
+              ))}
+            </div>
+            {/* 人気都道府県 */}
+            <div className="mt-4">
+              <h3 className="mb-2 text-sm font-bold text-muted-foreground">人気の都道府県</h3>
+              <div className="flex flex-wrap gap-1.5">
+                {topPrefectures.map((pref) => (
+                  <Link
+                    key={pref.slug}
+                    href={`/prefecture/${pref.slug}`}
+                    className="rounded-full border bg-white px-3 py-1 text-xs font-medium transition-colors hover:border-primary hover:text-primary dark:bg-card"
+                  >
+                    {pref.name.replace(/[都道府県]$/, "")}
+                    <span className="ml-1 text-muted-foreground">({pref.count})</span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+            <div className="mt-3 text-center">
+              <Link href="/prefecture" className="text-sm text-primary hover:underline">
+                47都道府県から探す →
+              </Link>
+            </div>
+          </section>
+        )}
+
+        {/* 関連ブログ・釣果週報 */}
+        {relatedBlogPosts.length > 0 && (
+          <section className="mb-8">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
+              <Newspaper className="size-5 text-primary" />
+              {guide.nameJa}の釣り情報・釣果レポート
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {relatedBlogPosts.map((post) => (
+                <Link
+                  key={post.slug}
+                  href={`/blog/${post.slug}`}
+                  className="group flex items-start gap-3 rounded-lg border bg-white p-3 transition-shadow hover:shadow-md dark:bg-card"
+                >
+                  <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-orange-100 dark:bg-orange-950/30">
+                    <Newspaper className="size-5 text-orange-600" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <p className="line-clamp-2 text-sm font-semibold leading-tight group-hover:text-primary">
+                      {post.title}
+                    </p>
+                    <p className="mt-1 text-[10px] text-muted-foreground">{post.publishedAt}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
+            <div className="mt-3 text-center">
+              <Link href="/blog" className="text-sm text-primary hover:underline">
+                すべてのコラムを見る →
+              </Link>
+            </div>
+          </section>
+        )}
 
         {/* おすすめ仕掛けセット */}
         <MonthlyRigSection monthName={guide.nameJa} rigs={monthlyRigs} />
@@ -918,187 +1073,32 @@ export default async function MonthlyGuidePage({ params }: Props) {
         {/* 関連ページ */}
         <div className="rounded-xl border bg-muted/30 p-6">
           <h2 className="mb-4 text-base font-bold">関連ページ</h2>
-          <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-4">
-            <Link
-              href="/catchable-now"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">今釣れる魚</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                今の時期に釣れる魚をチェック
-              </p>
-            </Link>
-            <Link
-              href="/map"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">地図で探す</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                全国の釣り場をマップで表示
-              </p>
-            </Link>
-            <Link
-              href="/monthly"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">月別ガイド一覧</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                全12ヶ月のガイドを見る
-              </p>
-            </Link>
-            <Link
-              href="/fishing-spots/breakwater-beginner"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">初心者向け堤防釣り</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                初心者でも安心の釣りスポット
-              </p>
-            </Link>
-            <Link
-              href="/fishing-spots/near-me"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">近くの釣り場</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                現在地から近い釣りスポット
-              </p>
-            </Link>
-            <Link
-              href="/fish"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">魚種図鑑</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                全魚種の詳細情報を見る
-              </p>
-            </Link>
-            <Link
-              href="/spots"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">全国釣りスポット</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                1000+の釣り場を探す
-              </p>
-            </Link>
-            <Link
-              href="/fishing-calendar"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">釣りカレンダー</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                月別の釣りカレンダー
-              </p>
-            </Link>
-            <Link
-              href="/area-guide"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">エリア別ガイド</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                全国のエリア別釣り場攻略
-              </p>
-            </Link>
-            <Link
-              href="/gear"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">おすすめ釣り道具</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                編集長厳選の道具
-              </p>
-            </Link>
-            <Link
-              href="/ranking"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">人気ランキング</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                人気スポットをチェック
-              </p>
-            </Link>
-            <Link
-              href="/prefecture"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">都道府県から探す</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                47都道府県の釣り場
-              </p>
-            </Link>
-            <Link
-              href="/methods"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">釣り方一覧</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                釣法別ガイド
-              </p>
-            </Link>
-            <Link
-              href="/blog"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">ブログ</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                最新の釣り情報
-              </p>
-            </Link>
-            <Link
-              href="/shops"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">釣具店を探す</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                全国の釣具店情報
-              </p>
-            </Link>
-            <Link
-              href="/for-beginners"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">はじめての方へ</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                釣りの始め方
-              </p>
-            </Link>
-            <Link
-              href="/beginner-checklist"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">初心者チェックリスト</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                持ち物リスト
-              </p>
-            </Link>
-            <Link
-              href="/guide/knots"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">結び方ガイド</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                基本の結び方
-              </p>
-            </Link>
-            <Link
-              href="/guide/rigs"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">仕掛け図鑑</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                釣り方別の仕掛け
-              </p>
-            </Link>
-            <Link
-              href="/guide/setup"
-              className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
-            >
-              <p className="font-semibold">道具の選び方</p>
-              <p className="mt-1 text-xs text-muted-foreground">
-                初めての道具選び
-              </p>
-            </Link>
+          <div className="grid gap-x-6 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              { href: "/catchable-now", label: "今釣れる魚" },
+              { href: `/seasonal/${month}`, label: `${guide.nameJa}の季節特集` },
+              { href: "/fishing-calendar", label: "釣りカレンダー" },
+              { href: "/fishing-spots/near-me", label: "近くの釣り場" },
+              { href: "/map", label: "地図で探す" },
+              { href: "/spots", label: "全国釣りスポット" },
+              { href: "/fish", label: "魚種図鑑" },
+              { href: "/area-guide", label: "エリア別ガイド" },
+              { href: "/monthly", label: "月別ガイド一覧" },
+              { href: "/fishing-rules", label: "都道府県別ルール" },
+              { href: "/gear", label: "おすすめ釣り道具" },
+              { href: "/ranking", label: "人気ランキング" },
+              { href: "/prefecture", label: "都道府県から探す" },
+              { href: "/methods", label: "釣り方一覧" },
+              { href: "/blog", label: "釣りコラム" },
+              { href: "/for-beginners", label: "はじめての方へ" },
+              { href: "/beginner-checklist", label: "持ち物チェックリスト" },
+              { href: "/guide/knots", label: "結び方ガイド" },
+            ].map((link) => (
+              <Link key={link.href} href={link.href} className="flex items-center gap-1.5 py-1 text-sm text-primary hover:underline">
+                <ChevronRight className="size-3 shrink-0" />
+                {link.label}
+              </Link>
+            ))}
           </div>
         </div>
         </CollapsibleSection>
