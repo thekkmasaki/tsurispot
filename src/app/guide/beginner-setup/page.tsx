@@ -9,8 +9,10 @@ import {
   ArrowDown,
   ExternalLink,
   ShoppingBag,
+  BookOpen,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { CollapsibleSection } from "@/components/ui/collapsible-section";
 
 /* ================================================================
    メタデータ & 構造化データ
@@ -1543,52 +1545,58 @@ export default function BeginnerSetupGuidePage() {
            関連ページリンク
            ====================================================== */}
         <div className="mt-8 sm:mt-12">
-          <h2 className="mb-4 text-lg font-bold">もっと詳しく学ぶ</h2>
-          <div className="grid gap-3 sm:grid-cols-2">
-            {[
-              {
-                href: "/guide/knots",
-                title: "糸の結び方ガイド",
-                desc: "ユニノット・クリンチノット・電車結びをさらに詳しく",
-              },
-              {
-                href: "/guide/rigs",
-                title: "仕掛け図解ガイド",
-                desc: "5つの基本仕掛けをイラスト付きで解説",
-              },
-              {
-                href: "/guide/sabiki",
-                title: "サビキ釣り完全ガイド",
-                desc: "準備から釣り方のコツまで徹底解説",
-              },
-              {
-                href: "/guide/choinage",
-                title: "ちょい投げ完全ガイド",
-                desc: "投げ方のコツとキス・カレイの狙い方",
-              },
-              {
-                href: "/guide/setup",
-                title: "竿とリールのセッティング",
-                desc: "リールの糸巻き方向の間違いと対処法も",
-              },
-              {
-                href: "/guide/beginner",
-                title: "釣り初心者完全ガイド",
-                desc: "釣りの魅力から道具選びまで総合案内",
-              },
-            ].map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="flex flex-col rounded-lg border p-4 hover:bg-muted/50 transition-colors"
-              >
-                <span className="font-medium text-foreground">{link.title}</span>
-                <span className="mt-1 text-xs text-muted-foreground">
-                  {link.desc}
-                </span>
-              </Link>
-            ))}
-          </div>
+          <CollapsibleSection
+            title="もっと詳しく学ぶ"
+            icon={<BookOpen className="size-5" />}
+            defaultOpen={false}
+            previewText="6件の関連ガイド"
+          >
+            <div className="grid gap-3 sm:grid-cols-2">
+              {[
+                {
+                  href: "/guide/knots",
+                  title: "糸の結び方ガイド",
+                  desc: "ユニノット・クリンチノット・電車結びをさらに詳しく",
+                },
+                {
+                  href: "/guide/rigs",
+                  title: "仕掛け図解ガイド",
+                  desc: "5つの基本仕掛けをイラスト付きで解説",
+                },
+                {
+                  href: "/guide/sabiki",
+                  title: "サビキ釣り完全ガイド",
+                  desc: "準備から釣り方のコツまで徹底解説",
+                },
+                {
+                  href: "/guide/choinage",
+                  title: "ちょい投げ完全ガイド",
+                  desc: "投げ方のコツとキス・カレイの狙い方",
+                },
+                {
+                  href: "/guide/setup",
+                  title: "竿とリールのセッティング",
+                  desc: "リールの糸巻き方向の間違いと対処法も",
+                },
+                {
+                  href: "/guide/beginner",
+                  title: "釣り初心者完全ガイド",
+                  desc: "釣りの魅力から道具選びまで総合案内",
+                },
+              ].map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="flex flex-col rounded-lg border p-4 hover:bg-muted/50 transition-colors"
+                >
+                  <span className="font-medium text-foreground">{link.title}</span>
+                  <span className="mt-1 text-xs text-muted-foreground">
+                    {link.desc}
+                  </span>
+                </Link>
+              ))}
+            </div>
+          </CollapsibleSection>
         </div>
 
         {/* LINE登録バナー */}

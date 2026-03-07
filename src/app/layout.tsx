@@ -7,7 +7,7 @@ import { Footer } from "@/components/layout/footer";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { PWARegister } from "@/components/pwa-register";
 import { CookieBanner } from "@/components/layout/cookie-banner";
-import { ScrollToTop } from "@/components/scroll-to-top";
+import { BackToTop } from "@/components/ui/back-to-top";
 import { CompareBar } from "@/components/spots/compare-bar";
 import { fishingSpots } from "@/lib/data/spots";
 import "./globals.css";
@@ -204,7 +204,7 @@ export default function RootLayout({
         <Footer />
         <MobileNav />
         <CompareBar />
-        <ScrollToTop />
+        <BackToTop />
         <CookieBanner />
       </body>
     </html>

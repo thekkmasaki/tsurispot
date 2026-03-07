@@ -1212,7 +1212,7 @@ export default function BeginnerGuidePage() {
 
           {/* よくある質問 */}
           <section id="faq">
-            <CollapsibleSection mobileOnly={true} title="よくある質問（FAQ）" icon={<HelpCircle className="size-5" />}>
+            <CollapsibleSection title="よくある質問（FAQ）" icon={<HelpCircle className="size-5" />} defaultOpen={false} previewText="6件の質問">
               <div className="space-y-4">
                 <div className="rounded-lg border p-4">
                   <h3 className="mb-2 font-medium text-foreground">
@@ -1325,21 +1325,19 @@ export default function BeginnerGuidePage() {
 
         {/* 道具を揃えるなら */}
         <section className="mt-8 sm:mt-10">
-          <CollapsibleSection title="初心者が最初に揃えるべき道具" previewText="おすすめアイテム">
-            <ProductList
-              products={getBeginnerEssentials().slice(0, 4)}
-              title="初心者が最初に揃えるべき道具"
-              description="これから釣りを始める方におすすめの定番アイテムを厳選しました。"
-            />
-            <div className="mt-4 text-center">
-              <Button asChild variant="outline" className="rounded-full">
-                <Link href="/gear">
-                  すべてのおすすめ道具を見る
-                  <ChevronRight className="ml-1 size-4" />
-                </Link>
-              </Button>
-            </div>
-          </CollapsibleSection>
+          <ProductList
+            products={getBeginnerEssentials().slice(0, 4)}
+            title="初心者が最初に揃えるべき道具"
+            description="これから釣りを始める方におすすめの定番アイテムを厳選しました。"
+          />
+          <div className="mt-4 text-center">
+            <Button asChild variant="outline" className="rounded-full">
+              <Link href="/gear">
+                すべてのおすすめ道具を見る
+                <ChevronRight className="ml-1 size-4" />
+              </Link>
+            </Button>
+          </div>
         </section>
 
         {/* 次に読むガイド */}

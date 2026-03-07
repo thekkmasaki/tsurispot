@@ -29,6 +29,7 @@ import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import type { YouTubeSearchLink } from "@/types";
 import { RigDiagram } from "@/components/rig-diagram";
 import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
+import { CollapsibleSection } from "@/components/ui/collapsible-section";
 
 const sabikiVideos: YouTubeSearchLink[] = [
   {
@@ -1270,7 +1271,11 @@ export default function SabikiGuidePage() {
           </SectionCard>
 
           {/* おすすめスポット */}
-          <SectionCard title="おすすめスポット" icon={MapPin}>
+          <CollapsibleSection
+            title="おすすめスポット"
+            icon={<MapPin className="size-5" />}
+            mobileOnly={true}
+          >
             <p className="mb-4 text-sm text-muted-foreground">
               サビキ釣りに適した釣り場は、漁港や堤防など足場が安定した場所です。潮通しが良く、水深がある程度ある（3m以上）ポイントを選びましょう。海釣り公園や海釣り施設はトイレや売店もあり、初心者やファミリーに最適です。
             </p>
@@ -1306,10 +1311,15 @@ export default function SabikiGuidePage() {
                 </div>
               </div>
             )}
-          </SectionCard>
+          </CollapsibleSection>
 
           {/* よくある質問 */}
-          <SectionCard title="よくある質問（FAQ）" icon={HelpCircle}>
+          <CollapsibleSection
+            title="よくある質問（FAQ）"
+            icon={<HelpCircle className="size-5" />}
+            defaultOpen={false}
+            previewText="7件の質問"
+          >
             <div className="space-y-4">
               <div className="rounded-lg border p-4">
                 <h3 className="mb-2 font-medium text-foreground">
@@ -1396,7 +1406,7 @@ export default function SabikiGuidePage() {
                 </p>
               </div>
             </div>
-          </SectionCard>
+          </CollapsibleSection>
 
           {/* 片付け */}
           <SectionCard title="片付け・マナー" icon={Trash2}>
@@ -1501,27 +1511,29 @@ export default function SabikiGuidePage() {
 
         {/* サビキ釣りができるスポット */}
         <section className="mt-6 sm:mt-8">
-          <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
-            <MapPin className="size-5 text-primary" />
-            サビキ釣りにおすすめのスポット
-          </h2>
-          <div className="grid gap-2 sm:grid-cols-2">
-            {sabikiSpots.slice(0, 6).map((spot) => (
-              <Link key={spot.slug} href={`/spots/${spot.slug}`}>
-                <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                  <CardContent className="p-3">
-                    <p className="text-sm font-semibold group-hover:text-primary truncate">{spot.name}</p>
-                    <p className="mt-0.5 text-xs text-muted-foreground">{spot.region.prefecture} {spot.region.areaName}</p>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
-          {sabikiSpots.length > 6 && (
-            <p className="mt-2 text-center text-xs text-muted-foreground">
-              他{sabikiSpots.length - 6}件のスポットでもサビキ釣りができます
-            </p>
-          )}
+          <CollapsibleSection
+            title="サビキ釣りにおすすめのスポット"
+            icon={<MapPin className="size-5" />}
+            mobileOnly={true}
+          >
+            <div className="grid gap-2 sm:grid-cols-2">
+              {sabikiSpots.slice(0, 6).map((spot) => (
+                <Link key={spot.slug} href={`/spots/${spot.slug}`}>
+                  <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                    <CardContent className="p-3">
+                      <p className="text-sm font-semibold group-hover:text-primary truncate">{spot.name}</p>
+                      <p className="mt-0.5 text-xs text-muted-foreground">{spot.region.prefecture} {spot.region.areaName}</p>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+            {sabikiSpots.length > 6 && (
+              <p className="mt-2 text-center text-xs text-muted-foreground">
+                他{sabikiSpots.length - 6}件のスポットでもサビキ釣りができます
+              </p>
+            )}
+          </CollapsibleSection>
         </section>
 
         {/* この釣り方で釣れる魚 */}
@@ -1529,89 +1541,93 @@ export default function SabikiGuidePage() {
 
         {/* 関連ガイド */}
         <section className="mt-8 sm:mt-10">
-          <h2 className="mb-4 text-center text-xl font-bold">
-            関連ガイド
-          </h2>
-          <div className="grid gap-3 sm:grid-cols-2">
-            <Link href="/guide/choinage" className="group">
-              <Card className="h-full transition-colors group-hover:border-primary">
-                <CardContent className="pt-6">
-                  <Target className="mb-2 size-5 text-primary" />
-                  <p className="font-medium group-hover:text-primary">
-                    ちょい投げ釣り完全ガイド
-                  </p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    キスやハゼを狙うちょい投げ入門
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/guide/oyogase" className="group">
-              <Card className="h-full transition-colors group-hover:border-primary">
-                <CardContent className="pt-6">
-                  <Anchor className="mb-2 size-5 text-primary" />
-                  <p className="font-medium group-hover:text-primary">
-                    泳がせ釣り入門ガイド
-                  </p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    サビキで釣ったアジで大物を狙おう
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/guide/rigs" className="group">
-              <Card className="h-full transition-colors group-hover:border-primary">
-                <CardContent className="pt-6">
-                  <Anchor className="mb-2 size-5 text-primary" />
-                  <p className="font-medium group-hover:text-primary">
-                    仕掛けガイド
-                  </p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    釣り方別の仕掛けパターンを解説
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/guide/handling" className="group">
-              <Card className="h-full transition-colors group-hover:border-primary">
-                <CardContent className="pt-6">
-                  <Fish className="mb-2 size-5 text-primary" />
-                  <p className="font-medium group-hover:text-primary">
-                    釣った魚の持ち帰り方
-                  </p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    新鮮に持ち帰るコツと締め方
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/guide/beginner-setup" className="group">
-              <Card className="h-full transition-colors group-hover:border-primary">
-                <CardContent className="pt-6">
-                  <Package className="mb-2 size-5 text-primary" />
-                  <p className="font-medium group-hover:text-primary">
-                    仕掛けの準備ガイド
-                  </p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    サビキ仕掛けのセット手順を詳しく解説
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-            <Link href="/guide/troubleshooting" className="group">
-              <Card className="h-full transition-colors group-hover:border-primary">
-                <CardContent className="pt-6">
-                  <HelpCircle className="mb-2 size-5 text-primary" />
-                  <p className="font-medium group-hover:text-primary">
-                    トラブルシューティング
-                  </p>
-                  <p className="mt-1 text-xs text-muted-foreground">
-                    糸絡み・根掛かりなど困ったときの対処法
-                  </p>
-                </CardContent>
-              </Card>
-            </Link>
-          </div>
+          <CollapsibleSection
+            title="関連ガイド"
+            icon={<ChevronRight className="size-5" />}
+            defaultOpen={false}
+            previewText="6件のガイド"
+          >
+            <div className="grid gap-3 sm:grid-cols-2">
+              <Link href="/guide/choinage" className="group">
+                <Card className="h-full transition-colors group-hover:border-primary">
+                  <CardContent className="pt-6">
+                    <Target className="mb-2 size-5 text-primary" />
+                    <p className="font-medium group-hover:text-primary">
+                      ちょい投げ釣り完全ガイド
+                    </p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      キスやハゼを狙うちょい投げ入門
+                    </p>
+                  </CardContent>
+                </Card>
+              </Link>
+              <Link href="/guide/oyogase" className="group">
+                <Card className="h-full transition-colors group-hover:border-primary">
+                  <CardContent className="pt-6">
+                    <Anchor className="mb-2 size-5 text-primary" />
+                    <p className="font-medium group-hover:text-primary">
+                      泳がせ釣り入門ガイド
+                    </p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      サビキで釣ったアジで大物を狙おう
+                    </p>
+                  </CardContent>
+                </Card>
+              </Link>
+              <Link href="/guide/rigs" className="group">
+                <Card className="h-full transition-colors group-hover:border-primary">
+                  <CardContent className="pt-6">
+                    <Anchor className="mb-2 size-5 text-primary" />
+                    <p className="font-medium group-hover:text-primary">
+                      仕掛けガイド
+                    </p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      釣り方別の仕掛けパターンを解説
+                    </p>
+                  </CardContent>
+                </Card>
+              </Link>
+              <Link href="/guide/handling" className="group">
+                <Card className="h-full transition-colors group-hover:border-primary">
+                  <CardContent className="pt-6">
+                    <Fish className="mb-2 size-5 text-primary" />
+                    <p className="font-medium group-hover:text-primary">
+                      釣った魚の持ち帰り方
+                    </p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      新鮮に持ち帰るコツと締め方
+                    </p>
+                  </CardContent>
+                </Card>
+              </Link>
+              <Link href="/guide/beginner-setup" className="group">
+                <Card className="h-full transition-colors group-hover:border-primary">
+                  <CardContent className="pt-6">
+                    <Package className="mb-2 size-5 text-primary" />
+                    <p className="font-medium group-hover:text-primary">
+                      仕掛けの準備ガイド
+                    </p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      サビキ仕掛けのセット手順を詳しく解説
+                    </p>
+                  </CardContent>
+                </Card>
+              </Link>
+              <Link href="/guide/troubleshooting" className="group">
+                <Card className="h-full transition-colors group-hover:border-primary">
+                  <CardContent className="pt-6">
+                    <HelpCircle className="mb-2 size-5 text-primary" />
+                    <p className="font-medium group-hover:text-primary">
+                      トラブルシューティング
+                    </p>
+                    <p className="mt-1 text-xs text-muted-foreground">
+                      糸絡み・根掛かりなど困ったときの対処法
+                    </p>
+                  </CardContent>
+                </Card>
+              </Link>
+            </div>
+          </CollapsibleSection>
         </section>
 
         {/* CTA */}
