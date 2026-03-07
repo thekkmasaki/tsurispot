@@ -38,7 +38,15 @@ function CarouselCard({ fish }: { fish: CarouselFish }) {
     >
       <div className="p-3">
         <div className="mb-2 flex items-center justify-between">
-          <Fish className={`size-5 ${iconColor}`} />
+          <div className="size-8 shrink-0 overflow-hidden rounded-lg bg-primary/10">
+            {fish.imageUrl ? (
+              <img src={fish.imageUrl} alt={fish.name} className="size-full object-cover" loading="lazy" />
+            ) : (
+              <div className="flex size-full items-center justify-center">
+                <Fish className={`size-4 ${iconColor}`} />
+              </div>
+            )}
+          </div>
           {fish.isPeak && (
             <span className="rounded-full bg-orange-500 px-2 py-0.5 text-xs font-bold text-white">
               旬

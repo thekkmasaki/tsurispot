@@ -18,8 +18,14 @@ function RigSetCard({ set }: { set: MonthlyRigSet }) {
         className="flex w-full items-center justify-between px-4 py-3 text-left transition-colors hover:bg-muted/50"
       >
         <div className="flex items-center gap-3">
-          <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">
-            <Fish className="size-4" />
+          <div className="size-9 shrink-0 overflow-hidden rounded-lg bg-primary/10">
+            {set.fishSlug ? (
+              <img src={`/images/fish/${set.fishSlug}.jpg`} alt={set.targetFish} className="size-full object-cover" loading="lazy" />
+            ) : (
+              <div className="flex size-full items-center justify-center text-primary">
+                <Fish className="size-4" />
+              </div>
+            )}
           </div>
           <div>
             <div className="flex flex-wrap items-center gap-2">
