@@ -14,7 +14,9 @@ export interface AffiliateProduct {
   methodKeywords: string[];
   /** どの季節に関連するか */
   seasons: ("spring" | "summer" | "autumn" | "winter" | "all")[];
-  category: "tackle" | "bait" | "wear" | "accessory";
+  category: "tackle" | "bait" | "wear" | "accessory" | "book";
+  /** 特定の都道府県でのみ表示する（未指定なら全国対象） */
+  prefectures?: string[];
 }
 
 /**
@@ -283,6 +285,26 @@ export const affiliateProducts: AffiliateProduct[] = [
     seasons: ["all"],
     category: "tackle",
   },
+  {
+    id: "af-drivemap-osaka-harima",
+    name: "令和版 海釣りドライブマップ② 大阪湾〜播磨灘",
+    url: "https://amzn.to/4qTgsSj",
+    description: "大阪湾から播磨灘までの釣り場を網羅したドライブマップ。各ポイントのアクセス・駐車場・トイレ情報が詳しく、初めての釣り場でも安心です。",
+    methodKeywords: [],
+    seasons: ["all"],
+    category: "book",
+    prefectures: ["大阪府", "兵庫県"],
+  },
+  {
+    id: "af-drivemap-ise-kito",
+    name: "令和版 海釣りドライブマップ① 伊勢湾〜紀東",
+    url: "https://amzn.to/4sp5Go3",
+    description: "伊勢湾から紀東エリアの釣り場を完全収録したドライブマップ。ポイントごとの釣れる魚・時期・仕掛けも紹介されており、釣行計画に最適です。",
+    methodKeywords: [],
+    seasons: ["all"],
+    category: "book",
+    prefectures: ["三重県", "和歌山県"],
+  },
 ];
 
 /**
@@ -291,12 +313,14 @@ export const affiliateProducts: AffiliateProduct[] = [
  * @param currentMonth 現在の月 (1-12)
  * @param maxItems 最大表示数（デフォルト3）
  * @param isNightFishing 夜釣りが可能なスポットかどうか
+ * @param prefecture スポットの都道府県（地域限定商品のフィルタに使用）
  */
 export function getRelevantAffiliateProducts(
   methods: string[],
   currentMonth: number,
   maxItems: number = 3,
-  isNightFishing: boolean = false
+  isNightFishing: boolean = false,
+  prefecture?: string
 ): AffiliateProduct[] {
   const currentSeason = getSeasonFromMonth(currentMonth);
 
@@ -307,7 +331,12 @@ export function getRelevantAffiliateProducts(
   const scored = affiliateProducts
     .filter((product) => {
       // 季節フィルタ: "all" を含むか、現在の季節と一致するもののみ
-      return product.seasons.includes("all") || product.seasons.includes(currentSeason);
+      if (!product.seasons.includes("all") && !product.seasons.includes(currentSeason)) return false;
+      // 都道府県限定商品: 対象外なら除外
+      if (product.prefectures && product.prefectures.length > 0) {
+        if (!prefecture || !product.prefectures.includes(prefecture)) return false;
+      }
+      return true;
     })
     .map((product) => {
       let score = 0;
@@ -315,6 +344,10 @@ export function getRelevantAffiliateProducts(
       if (product.methodKeywords.length === 0) {
         // 全釣法対象商品（手袋、バッテリー等）は低めのベーススコア
         score = 1;
+        // 都道府県限定の書籍はスコアブースト
+        if (product.prefectures && product.prefectures.length > 0) {
+          score = 8;
+        }
       } else {
         // 釣り方のキーワードマッチでスコアリング
         for (const method of methods) {

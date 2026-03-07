@@ -15,6 +15,7 @@ const CATEGORY_LABELS: Record<AffiliateProduct["category"], string> = {
   bait: "エサ",
   wear: "ウェア",
   accessory: "便利グッズ",
+  book: "釣り場ガイド",
 };
 
 const CATEGORY_COLORS: Record<AffiliateProduct["category"], string> = {
@@ -22,6 +23,7 @@ const CATEGORY_COLORS: Record<AffiliateProduct["category"], string> = {
   bait: "bg-green-100 text-green-700",
   wear: "bg-orange-100 text-orange-700",
   accessory: "bg-purple-100 text-purple-700",
+  book: "bg-amber-100 text-amber-700",
 };
 
 interface SpotAffiliateRecommendProps {
@@ -29,16 +31,18 @@ interface SpotAffiliateRecommendProps {
   methods: string[];
   /** 夜釣りが可能なスポットかどうか */
   isNightFishing?: boolean;
+  /** スポットの都道府県（地域限定商品のフィルタ用） */
+  prefecture?: string;
 }
 
-export function SpotAffiliateRecommend({ methods, isNightFishing = false }: SpotAffiliateRecommendProps) {
+export function SpotAffiliateRecommend({ methods, isNightFishing = false, prefecture }: SpotAffiliateRecommendProps) {
   const [products, setProducts] = useState<AffiliateProduct[]>([]);
 
   useEffect(() => {
     const currentMonth = new Date().getMonth() + 1; // 1-12
-    const relevant = getRelevantAffiliateProducts(methods, currentMonth, 6, isNightFishing);
+    const relevant = getRelevantAffiliateProducts(methods, currentMonth, 6, isNightFishing, prefecture);
     setProducts(relevant);
-  }, [methods, isNightFishing]);
+  }, [methods, isNightFishing, prefecture]);
 
   if (products.length === 0) return null;
 

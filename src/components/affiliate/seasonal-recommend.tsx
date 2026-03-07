@@ -16,6 +16,7 @@ const CATEGORY_LABELS: Record<AffiliateProduct["category"], string> = {
   bait: "エサ",
   wear: "ウェア",
   accessory: "便利グッズ",
+  book: "釣り場ガイド",
 };
 
 const CATEGORY_COLORS: Record<AffiliateProduct["category"], string> = {
@@ -23,6 +24,7 @@ const CATEGORY_COLORS: Record<AffiliateProduct["category"], string> = {
   bait: "bg-green-100 text-green-700",
   wear: "bg-orange-100 text-orange-700",
   accessory: "bg-purple-100 text-purple-700",
+  book: "bg-amber-100 text-amber-700",
 };
 
 const SEASON_CONFIG = {
