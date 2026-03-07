@@ -2,11 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
 import { getCatchableNow, fishSpecies } from "@/lib/data/fish";
-import { areaGuides } from "@/lib/data/area-guides";
-import { seasonalGuides } from "@/lib/data/seasonal-guides";
-import { prefectures } from "@/lib/data/prefectures";
-import { regions } from "@/lib/data/regions";
-import { REGION_GROUPS } from "@/lib/data/regions-group";
 import { getLatestBlogPosts, BLOG_CATEGORIES } from "@/lib/data/blog";
 import { SPOT_TYPE_LABELS } from "@/types";
 import { Card, CardContent } from "@/components/ui/card";
@@ -31,14 +26,23 @@ import {
 import dynamic from "next/dynamic";
 import { SpotImage, FishImage } from "@/components/ui/spot-image";
 import { HomeSearchBar } from "@/components/home-search-bar";
-import { CatchableNowCarousel } from "@/components/catchable-now-carousel";
 
 
 // Below-the-fold client components loaded lazily
-const NearbySpots = dynamic(() => import("@/components/nearby-spots").then((m) => m.NearbySpots));
-const LocationRecommendations = dynamic(() => import("@/components/location-recommendations").then((m) => m.LocationRecommendations));
-const LocationPromptBanner = dynamic(() => import("@/components/location-prompt-banner").then((m) => m.LocationPromptBanner));
-const SeasonalRecommend = dynamic(() => import("@/components/affiliate/seasonal-recommend").then((m) => m.SeasonalRecommend));
+const NearbySpots = dynamic(() => import("@/components/nearby-spots").then((m) => m.NearbySpots), {
+  loading: () => (
+    <div className="space-y-4">
+      <div className="h-7 w-48 animate-pulse rounded bg-muted" />
+      <div className="h-64 w-full animate-pulse rounded-xl bg-muted" />
+    </div>
+  ),
+});
+const LocationPromptBanner = dynamic(() => import("@/components/location-prompt-banner").then((m) => m.LocationPromptBanner), {
+  loading: () => <div className="h-12 w-full animate-pulse rounded-lg bg-muted" />,
+});
+const SeasonalRecommend = dynamic(() => import("@/components/affiliate/seasonal-recommend").then((m) => m.SeasonalRecommend), {
+  loading: () => <div className="h-32 w-full animate-pulse rounded-xl bg-muted" />,
+});
 const OnlineUsersBadge = dynamic(() => import("@/components/online-users-badge").then((m) => m.OnlineUsersBadge), {
   loading: () => <div className="inline-flex h-7 w-28 animate-pulse rounded-full bg-white/10" />,
 });
@@ -197,27 +201,6 @@ export default function Home() {
   const totalFishSpecies = fishSpecies.length;
   const totalPrefectures = new Set(fishingSpots.map((s) => s.region.prefecture)).size;
 
-  // GEO stats for data section
-  const seaSpots = fishingSpots.filter((s) => s.spotType !== "river").length;
-  const freshwaterSpotCount = fishingSpots.filter((s) => s.spotType === "river").length;
-  const beginnerSpots = fishingSpots.filter((s) => s.difficulty === "beginner").length;
-  const catchableNowCount = getCatchableNow(currentMonth).length;
-  const totalGuides = areaGuides.length;
-
-
-  // Carousel data: fish catchable now with spot counts
-  const carouselFish = catchableNow.slice(0, 12).map((fish) => ({
-    id: fish.id,
-    name: fish.name,
-    slug: fish.slug,
-    imageUrl: fish.imageUrl,
-    category: fish.category,
-    difficulty: fish.difficulty,
-    isPeak: fish.peakMonths.includes(currentMonth),
-    spotCount: fishingSpots.filter((s) =>
-      s.catchableFish.some((cf) => cf.fish.id === fish.id)
-    ).length,
-  }));
 
   const popularSpotsItemListJsonLd = {
     "@context": "https://schema.org",
@@ -390,9 +373,9 @@ export default function Home() {
       </section>
 
 
-      {/* 名言セクション */}
-      <section className="bg-slate-50/80 py-8 sm:py-10">
-        <div className="mx-auto max-w-2xl px-4 text-center sm:px-6">
+      {/* 名言セクション + コンパクト統計 */}
+      <section className="bg-slate-50/80 py-6 sm:py-8">
+        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
           <blockquote className="space-y-3">
             <div className="space-y-1 text-xs leading-relaxed text-slate-400 sm:text-sm sm:leading-loose">
               <p>一時間、幸せになりたかったら酒を飲みなさい。</p>
@@ -406,73 +389,22 @@ export default function Home() {
               ― 開高健『オーパ！』より
             </footer>
           </blockquote>
-        </div>
-      </section>
-
-      {/* GEO対策: 統計データセクション */}
-      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
-        <h2 className="mb-2 text-center text-lg font-bold tracking-tight sm:text-xl">
-          日本最大級の釣り情報データベース
-        </h2>
-        <p className="mb-6 text-center text-sm text-muted-foreground">
-          ツリスポは全国{totalPrefectures}都道府県の釣り場情報を網羅しています
-        </p>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-          <Link href="/spots" className="rounded-xl border bg-card p-4 text-center transition-colors hover:border-primary/50 hover:bg-primary/5">
-            <div className="text-2xl font-bold text-primary sm:text-3xl">{totalSpots.toLocaleString()}<span className="text-base font-normal">+</span></div>
-            <div className="mt-1 text-xs text-muted-foreground">釣りスポット数</div>
-          </Link>
-          <Link href="/fish" className="rounded-xl border bg-card p-4 text-center transition-colors hover:border-primary/50 hover:bg-primary/5">
-            <div className="text-2xl font-bold text-primary sm:text-3xl">{totalFishSpecies}<span className="text-base font-normal">+</span></div>
-            <div className="mt-1 text-xs text-muted-foreground">魚種図鑑</div>
-          </Link>
-          <Link href="/prefecture" className="rounded-xl border bg-card p-4 text-center transition-colors hover:border-primary/50 hover:bg-primary/5">
-            <div className="text-2xl font-bold text-primary sm:text-3xl">{totalPrefectures}</div>
-            <div className="mt-1 text-xs text-muted-foreground">都道府県カバー</div>
-          </Link>
-          <Link href="/fishing-spots/best-saltwater" className="rounded-xl border bg-card p-4 text-center transition-colors hover:border-primary/50 hover:bg-primary/5">
-            <div className="text-2xl font-bold text-primary sm:text-3xl">{seaSpots.toLocaleString()}</div>
-            <div className="mt-1 text-xs text-muted-foreground">海釣りスポット</div>
-          </Link>
-          <Link href="/fishing-spots/river-beginner" className="rounded-xl border bg-card p-4 text-center transition-colors hover:border-primary/50 hover:bg-primary/5">
-            <div className="text-2xl font-bold text-primary sm:text-3xl">{freshwaterSpotCount}</div>
-            <div className="mt-1 text-xs text-muted-foreground">川・湖スポット</div>
-          </Link>
-          <Link href="/fishing-spots/breakwater-beginner" className="rounded-xl border bg-card p-4 text-center transition-colors hover:border-primary/50 hover:bg-primary/5">
-            <div className="text-2xl font-bold text-primary sm:text-3xl">{beginnerSpots.toLocaleString()}</div>
-            <div className="mt-1 text-xs text-muted-foreground">初心者向けスポット</div>
-          </Link>
-        </div>
-        <p className="mt-4 text-center text-xs text-muted-foreground">
-          今月釣れる魚は<strong>{catchableNowCount}種</strong>。全国{totalGuides}エリアのガイドと月別・季節別の釣り方情報を毎月更新中。
-        </p>
-      </section>
-
-      {/* 今釣れている魚カルーセル */}
-      <CatchableNowCarousel fish={carouselFish} />
-
-      {/* 初心者スタートバナー */}
-      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
-        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-r from-emerald-500 to-teal-600 p-6 text-white sm:p-8">
-          <div className="relative z-10">
-            <div className="mb-1 text-sm font-medium text-emerald-100">はじめての方へ</div>
-            <h2 className="mb-2 text-xl font-bold sm:text-2xl">釣りを始めてみませんか？</h2>
-            <p className="mb-4 max-w-md text-sm text-emerald-50 sm:text-base">
-              道具は5,000円から。近くの堤防で、誰でも魚が釣れます。
-              ツリスポが最初の1匹までサポートします。
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link href="/guide/beginner" className="inline-flex items-center gap-2 rounded-lg bg-white px-5 py-2.5 text-sm font-bold text-emerald-700 transition-colors hover:bg-emerald-50 min-h-[44px]">
-                初心者ガイドを見る
-                <ArrowRight className="size-4" />
-              </Link>
-              <Link href="/guide/budget" className="inline-flex items-center gap-2 rounded-lg border-2 border-white/50 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:bg-white/10 min-h-[44px]">
-                5,000円で始める方法
-              </Link>
-            </div>
+          <div className="mt-5 flex items-center justify-center gap-4 text-xs text-muted-foreground sm:gap-8 sm:text-sm">
+            <Link href="/spots" className="transition-colors hover:text-primary">
+              <span className="block text-lg font-bold text-primary sm:text-2xl">{totalSpots.toLocaleString()}+</span>
+              釣りスポット
+            </Link>
+            <div className="h-8 w-px bg-border" />
+            <Link href="/fish" className="transition-colors hover:text-primary">
+              <span className="block text-lg font-bold text-primary sm:text-2xl">{totalFishSpecies}+</span>
+              魚種図鑑
+            </Link>
+            <div className="h-8 w-px bg-border" />
+            <Link href="/prefecture" className="transition-colors hover:text-primary">
+              <span className="block text-lg font-bold text-primary sm:text-2xl">{totalPrefectures}</span>
+              都道府県
+            </Link>
           </div>
-          {/* 背景の釣りアイコン */}
-          <div className="absolute -right-4 -top-4 text-8xl opacity-10 sm:text-9xl">🎣</div>
         </div>
       </section>
 
@@ -539,45 +471,6 @@ export default function Home() {
               </span>
             </div>
           </Link>
-        </div>
-      </section>
-
-      {/* 3ステップで釣りを始める */}
-      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
-        <h2 className="mb-6 text-center text-lg font-bold sm:text-xl">
-          たった3ステップで釣りデビュー
-        </h2>
-        <div className="grid gap-4 sm:grid-cols-3">
-          <div className="rounded-xl border bg-card p-5 text-center">
-            <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-blue-100 text-2xl">1</div>
-            <h3 className="mb-1 font-bold">釣り場を探す</h3>
-            <p className="text-sm text-muted-foreground">
-              近くの堤防や漁港を検索。初心者OKの釣り場がすぐ見つかります。
-            </p>
-            <Link href="/spots" className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
-              釣り場を探す <ChevronRight className="size-3" />
-            </Link>
-          </div>
-          <div className="rounded-xl border bg-card p-5 text-center">
-            <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-emerald-100 text-2xl">2</div>
-            <h3 className="mb-1 font-bold">道具を準備する</h3>
-            <p className="text-sm text-muted-foreground">
-              入門セットは5,000円から。何を買えばいいか完全ガイドで解説。
-            </p>
-            <Link href="/guide/budget" className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
-              道具ガイド <ChevronRight className="size-3" />
-            </Link>
-          </div>
-          <div className="rounded-xl border bg-card p-5 text-center">
-            <div className="mx-auto mb-3 flex size-12 items-center justify-center rounded-full bg-orange-100 text-2xl">3</div>
-            <h3 className="mb-1 font-bold">釣ってみる！</h3>
-            <p className="text-sm text-muted-foreground">
-              サビキ釣りなら初めてでも高確率で釣れます。動画付きガイドで安心。
-            </p>
-            <Link href="/guide/sabiki" className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
-              サビキガイド <ChevronRight className="size-3" />
-            </Link>
-          </div>
         </div>
       </section>
 
@@ -658,16 +551,6 @@ export default function Home() {
       <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
         <NearbySpots allSpots={lightSpots} />
       </section>
-
-      {/* 現在地ベースのおすすめ記事 */}
-      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
-        <LocationRecommendations
-          allSpots={lightSpots}
-          prefectures={prefectures}
-          areaGuides={areaGuides}
-        />
-      </section>
-
 
       {/* 人気の釣りスポットセクション */}
       <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
@@ -867,218 +750,6 @@ export default function Home() {
               </Button>
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* エリア別釣り場ガイド */}
-      <section className="bg-muted/50 py-8 sm:py-12">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
-          <div className="mb-6 flex items-end justify-between sm:mb-8">
-            <div>
-              <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
-                エリア別釣り場ガイド
-              </h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                全国{areaGuides.length}エリアの釣り場を完全攻略
-              </p>
-            </div>
-            <Link
-              href="/area-guide"
-              className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
-            >
-              すべて見る
-              <ArrowRight className="size-4" />
-            </Link>
-          </div>
-
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {areaGuides.slice(0, 6).map((guide) => (
-              <Link key={guide.slug} href={`/area-guide/${guide.slug}`}>
-                <Card className="group h-full transition-shadow hover:shadow-md">
-                  <CardContent className="p-4">
-                    <div className="mb-2 flex items-center gap-2">
-                      <div className="flex size-8 items-center justify-center rounded-lg bg-primary/10">
-                        <Compass className="size-4 text-primary" />
-                      </div>
-                      <h3 className="font-semibold group-hover:text-primary">
-                        {guide.name}
-                      </h3>
-                    </div>
-                    <p className="mb-3 line-clamp-2 text-xs text-muted-foreground leading-relaxed">
-                      {guide.description}
-                    </p>
-                    <div className="mb-2 flex flex-wrap gap-1">
-                      {guide.mainFish.slice(0, 3).map((f) => (
-                        <Badge key={f} variant="secondary" className="text-xs">
-                          {f}
-                        </Badge>
-                      ))}
-                    </div>
-                    <div className="flex items-center justify-between text-xs text-muted-foreground">
-                      <span>ベストシーズン: {guide.bestSeason}</span>
-                      <ChevronRight className="size-3.5 text-primary" />
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
-
-          {/* モバイル用「すべて見る」リンク */}
-          <div className="mt-6 flex justify-center sm:hidden">
-            <Link href="/area-guide">
-              <Button variant="outline" className="min-h-[44px] gap-1">
-                すべてのエリアを見る
-                <ArrowRight className="size-4" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 全国のエリア別釣りガイド（/area/[slug] 内部リンク強化） */}
-      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
-        <div className="mb-6 flex items-end justify-between sm:mb-8">
-          <div>
-            <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
-              全国のエリア別釣りガイド
-            </h2>
-            <p className="mt-1 text-sm text-muted-foreground">
-              地方から釣りエリアを探す（全{regions.length}エリア）
-            </p>
-          </div>
-          <Link
-            href="/area"
-            className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
-          >
-            すべて見る
-            <ArrowRight className="size-4" />
-          </Link>
-        </div>
-
-        <div className="space-y-6">
-          {REGION_GROUPS.map((group) => {
-            const groupRegions = regions
-              .filter((r) => group.prefectures.includes(r.prefecture))
-              .sort((a, b) => a.prefecture.localeCompare(b.prefecture) || a.areaName.localeCompare(b.areaName));
-            if (groupRegions.length === 0) return null;
-
-            // 都道府県ごとにグループ化
-            const byPref = new Map<string, typeof groupRegions>();
-            for (const r of groupRegions) {
-              const existing = byPref.get(r.prefecture);
-              if (existing) {
-                existing.push(r);
-              } else {
-                byPref.set(r.prefecture, [r]);
-              }
-            }
-
-            return (
-              <div key={group.slug}>
-                <h3 className="mb-3 flex items-center gap-2 text-base font-semibold sm:text-lg">
-                  <Compass className="size-4 text-primary" />
-                  {group.name}
-                  <span className="text-xs font-normal text-muted-foreground">
-                    ({groupRegions.length}エリア)
-                  </span>
-                </h3>
-                <div className="space-y-3">
-                  {Array.from(byPref.entries()).map(([pref, prefRegions]) => (
-                    <div key={pref}>
-                      <div className="mb-1.5 text-xs font-medium text-muted-foreground">{pref}</div>
-                      <div className="flex flex-wrap gap-1.5">
-                        {prefRegions.map((r) => (
-                          <Link key={r.id} href={`/area/${r.slug}`}>
-                            <Badge
-                              variant="outline"
-                              className="cursor-pointer px-2.5 py-1 text-xs transition-colors hover:bg-primary hover:text-white"
-                            >
-                              {r.areaName}
-                            </Badge>
-                          </Link>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* モバイル用「すべて見る」リンク */}
-        <div className="mt-6 flex justify-center sm:hidden">
-          <Link href="/area">
-            <Button variant="outline" className="min-h-[44px] gap-1">
-              すべてのエリアを見る
-              <ArrowRight className="size-4" />
-            </Button>
-          </Link>
-        </div>
-      </section>
-
-      {/* 季節の釣り特集 */}
-      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
-        <div className="mb-6 flex items-end justify-between sm:mb-8">
-          <div>
-            <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
-              季節の釣り特集
-            </h2>
-            <p className="mt-1 text-sm text-muted-foreground">
-              今の時期におすすめの釣り方ガイド
-            </p>
-          </div>
-          <Link
-            href="/seasonal"
-            className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
-          >
-            すべて見る
-            <ArrowRight className="size-4" />
-          </Link>
-        </div>
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {seasonalGuides
-            .filter((g) => g.months.includes(currentMonth))
-            .slice(0, 6)
-            .map((guide) => (
-              <Link key={guide.slug} href={`/seasonal/${guide.slug}`}>
-                <Card className="group h-full transition-shadow hover:shadow-md">
-                  <CardContent className="p-4">
-                    <div className="mb-2 flex items-center gap-2">
-                      <div className="flex size-8 items-center justify-center rounded-lg bg-orange-100">
-                        <Calendar className="size-4 text-orange-600" />
-                      </div>
-                      <h3 className="font-semibold group-hover:text-primary">
-                        {guide.title}
-                      </h3>
-                    </div>
-                    <p className="mb-3 line-clamp-2 text-xs text-muted-foreground leading-relaxed">
-                      {guide.description}
-                    </p>
-                    <div className="mb-2 flex flex-wrap gap-1">
-                      <Badge variant="outline" className="text-xs">
-                        {guide.method}
-                      </Badge>
-                      <Badge variant="secondary" className="text-xs">
-                        {guide.season}
-                      </Badge>
-                    </div>
-                    <div className="flex items-center justify-end">
-                      <ChevronRight className="size-3.5 text-primary" />
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-        </div>
-        <div className="mt-6 flex justify-center sm:hidden">
-          <Link href="/seasonal">
-            <Button variant="outline" className="min-h-[44px] gap-1">
-              すべての特集を見る
-              <ArrowRight className="size-4" />
-            </Button>
-          </Link>
         </div>
       </section>
 

@@ -72,10 +72,23 @@ import { UmigyoBadge } from "@/components/spots/umigyo-badge";
 import { umigyoDistricts } from "@/lib/data/umigyo";
 
 // Below-the-fold client components loaded lazily
-const StreetViewSection = dynamic(() => import("@/components/spots/street-view-section").then((m) => m.StreetViewSection));
-const SpotWeatherTide = dynamic(() => import("@/components/spots/spot-weather-tide").then((m) => m.SpotWeatherTide));
-const CrowdPredictionCard = dynamic(() => import("@/components/spots/crowd-prediction").then((m) => m.CrowdPredictionCard));
-const NearbyGpsSearch = dynamic(() => import("@/components/spots/nearby-gps-search").then((m) => m.NearbyGpsSearch));
+const StreetViewSection = dynamic(() => import("@/components/spots/street-view-section").then((m) => m.StreetViewSection), {
+  loading: () => (
+    <div className="space-y-3">
+      <div className="h-5 w-36 animate-pulse rounded bg-muted" />
+      <div className="h-64 w-full animate-pulse rounded-xl bg-muted" />
+    </div>
+  ),
+});
+const SpotWeatherTide = dynamic(() => import("@/components/spots/spot-weather-tide").then((m) => m.SpotWeatherTide), {
+  loading: () => <div className="h-48 w-full animate-pulse rounded-xl bg-muted" />,
+});
+const CrowdPredictionCard = dynamic(() => import("@/components/spots/crowd-prediction").then((m) => m.CrowdPredictionCard), {
+  loading: () => <div className="h-40 w-full animate-pulse rounded-xl bg-muted" />,
+});
+const NearbyGpsSearch = dynamic(() => import("@/components/spots/nearby-gps-search").then((m) => m.NearbyGpsSearch), {
+  loading: () => <div className="h-32 w-full animate-pulse rounded-xl bg-muted" />,
+});
 
 type PageProps = {
   params: Promise<{ slug: string }>;
