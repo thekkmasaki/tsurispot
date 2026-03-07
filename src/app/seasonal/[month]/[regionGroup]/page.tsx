@@ -14,7 +14,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
-import { SpotCard } from "@/components/spots/spot-card";
+import { MonthlySportsSorter, type MonthlySpot } from "@/components/monthly-spots-sorter";
 import { MONTHS } from "@/lib/data/fishing-methods";
 import { prefectures } from "@/lib/data/prefectures";
 import { fishSpecies } from "@/lib/data/fish";
@@ -514,20 +514,33 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* おすすめスポット */}
-      {topSpots.length > 0 && (
-        <section className="mb-8 sm:mb-10">
-          <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
-            <MapPin className="size-5 text-primary" />
-            {monthDef.name}の{regionName}おすすめ釣り場
-          </h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {topSpots.map(({ spot }) => (
-              <SpotCard key={spot.id} spot={spot} />
-            ))}
-          </div>
-        </section>
-      )}
+      {/* おすすめスポット（近い順ソート対応） */}
+      {topSpots.length > 0 && (() => {
+        const sortableSpots: MonthlySpot[] = topSpots.map(({ spot }) => ({
+          slug: spot.slug,
+          name: spot.name,
+          rating: spot.rating,
+          latitude: spot.latitude,
+          longitude: spot.longitude,
+          spotType: spot.spotType,
+          difficulty: spot.difficulty,
+          mainImageUrl: spot.mainImageUrl,
+          region: { prefecture: spot.region.prefecture },
+          catchableFishNames: spot.catchableFish
+            .filter((cf) => cf.fish.seasonMonths.includes(monthDef!.num))
+            .map((cf) => cf.fish.name)
+            .slice(0, 3),
+        }));
+        return (
+          <section className="mb-8 sm:mb-10">
+            <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
+              <MapPin className="size-5 text-primary" />
+              {monthDef.name}の{regionName}おすすめ釣り場
+            </h2>
+            <MonthlySportsSorter spots={sortableSpots} monthName={monthDef.name} />
+          </section>
+        );
+      })()}
 
       {/* 季節のコツ */}
       {seasonalTips.length > 0 && (

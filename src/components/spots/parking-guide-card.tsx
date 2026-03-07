@@ -188,13 +188,13 @@ export function ParkingGuideCard({
             </a>
           ) : (
             <a
-              href={`https://www.google.com/maps/search/駐車場/@${spotLatitude},${spotLongitude},15z`}
+              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('駐車場')}&center=${spotLatitude},${spotLongitude}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-blue-700"
             >
               <MapPin className="size-3.5" />
-              周辺の駐車場を地図で確認
+              周辺に駐車場を地図で確認
               <ExternalLink className="size-3" />
             </a>
           )}
