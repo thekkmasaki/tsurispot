@@ -68,6 +68,15 @@ function YouTubeEmbed({ videoId, title }: YouTubeEmbedProps) {
         ) : (
           <div className="absolute inset-0 bg-muted" />
         )}
+        {/* Googlebot用: 初期HTMLにiframeを含める */}
+        <noscript>
+          <iframe
+            src={`https://www.youtube.com/embed/${videoId}?rel=0`}
+            title={title || "YouTube動画"}
+            allowFullScreen
+            style={{ position: "absolute", inset: 0, width: "100%", height: "100%" }}
+          />
+        </noscript>
       </div>
       {title && (
         <div className="bg-card px-3 py-2">

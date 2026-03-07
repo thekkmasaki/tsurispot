@@ -339,22 +339,6 @@ export default async function FishDetailPage({ params }: PageProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
         />
       )}
-      {fish.youtubeLinks && fish.youtubeLinks.length > 0 && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "VideoObject",
-              name: fish.youtubeLinks[0].label || `${fish.name} 釣り方`,
-              description: fish.youtubeLinks[0].description || `${fish.name}の釣り方・ポイント紹介動画`,
-              thumbnailUrl: `https://tsurispot.com/api/og/fish/${fish.slug}`,
-              uploadDate: "2025-01-01",
-              contentUrl: `https://www.youtube.com/results?search_query=${encodeURIComponent(fish.youtubeLinks[0].searchQuery)}`,
-            }),
-          }}
-        />
-      )}
       {/* パンくず */}
       <Breadcrumb
         items={[

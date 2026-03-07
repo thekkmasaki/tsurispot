@@ -517,22 +517,31 @@ export default async function SpotDetailPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(spotSpeakableJsonLd) }}
       />
-      {spot.youtubeLinks && spot.youtubeLinks.length > 0 && (
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "VideoObject",
-              name: spot.youtubeLinks[0].label || `${spot.name} 釣り動画`,
-              description: spot.youtubeLinks[0].description || `${spot.name}での釣り動画。${spot.catchableFish.slice(0, 3).map(cf => cf.fish.name).join("、")}などが釣れるスポットです。`,
-              thumbnailUrl: `https://tsurispot.com/api/og?title=${encodeURIComponent(spot.name)}&description=${encodeURIComponent(spot.region.prefecture + ' ' + spot.region.areaName)}&emoji=${encodeURIComponent('🎣')}`,
-              uploadDate: "2025-01-01",
-              contentUrl: `https://www.youtube.com/results?search_query=${encodeURIComponent(spot.youtubeLinks[0].searchQuery)}`,
-            }),
-          }}
-        />
-      )}
+      {(() => {
+        const methods = spot.catchableFish.map((cf) => cf.method);
+        const vids = methods.length > 0
+          ? getVideosForMethods(methods, 1)
+          : getVideosForSpotType(spot.spotType, 1);
+        if (vids.length === 0) return null;
+        const v = vids[0];
+        return (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "VideoObject",
+                name: v.title,
+                description: `${spot.name}で使える釣り方の解説動画`,
+                thumbnailUrl: `https://i.ytimg.com/vi/${v.videoId}/hqdefault.jpg`,
+                uploadDate: "2025-01-01",
+                contentUrl: `https://www.youtube.com/watch?v=${v.videoId}`,
+                embedUrl: `https://www.youtube.com/embed/${v.videoId}`,
+              }),
+            }}
+          />
+        );
+      })()}
       {/* 最近見たスポット記録 */}
       <RecentlyViewedTracker spot={{ slug: spot.slug, name: spot.name, prefecture: spot.region.prefecture, areaName: spot.region.areaName, spotType: spot.spotType }} />
 
