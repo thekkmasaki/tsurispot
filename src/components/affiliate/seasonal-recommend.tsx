@@ -9,6 +9,7 @@ import {
   affiliateProducts,
   getSeasonFromMonth,
 } from "@/lib/data/affiliate-products";
+import { trackAffiliateClick } from "@/lib/affiliate-config";
 
 const CATEGORY_LABELS: Record<AffiliateProduct["category"], string> = {
   tackle: "仕掛け・ライン",
@@ -62,8 +63,17 @@ function getSeasonalProducts(month: number, maxItems: number = 4): AffiliateProd
     (p) => p.seasons.includes(season) && !p.seasons.includes("all")
   );
 
+  // 季節別に推したい通年商品を追加選定
+  const seasonalEssentialIds: Record<string, string[]> = {
+    spring: ["af-polarized-glasses", "af-lifejacket", "af-beginner-set", "af-amihime"],
+    summer: ["af-water", "af-polarized-glasses", "af-lifejacket", "af-mobile-battery"],
+    autumn: ["af-rod-shimano", "af-reel-shimano", "af-pe-line", "af-amihime"],
+    winter: [], // 冬は季節限定商品が多いので通年は少なめ
+  };
+
   // 通年商品から人気のものを選択（基本装備: ロッド、リール、ライン系を優先）
   const essentialIds = [
+    ...(seasonalEssentialIds[season] || []),
     "af-rod-shimano",
     "af-reel-shimano",
     "af-pe-line",
@@ -138,6 +148,12 @@ export function SeasonalRecommend({ maxItems = 4 }: SeasonalRecommendProps) {
             href={product.url}
             target="_blank"
             rel="noopener noreferrer sponsored"
+            onClick={() => trackAffiliateClick({
+              productName: product.name,
+              productCategory: product.category,
+              platform: product.url.includes("r10.to") || product.url.includes("rakuten") ? "rakuten" : "amazon",
+              pageType: "homepage",
+            })}
             className="block"
           >
             <Card className="group h-full gap-0 border-white/60 bg-white/80 py-0 backdrop-blur-sm transition-all hover:border-primary/30 hover:shadow-md">

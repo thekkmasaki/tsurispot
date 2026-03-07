@@ -178,8 +178,11 @@ export function Footer() {
           <p className="mt-1 text-xs">
             運営者: 正木 家康｜運営開始: 2025年｜掲載スポット: 1,000箇所以上
           </p>
-          <p className="mx-auto mt-2 max-w-xl text-xs leading-relaxed">
-            ※ 当サイトはアフィリエイトプログラムに参加しています。商品リンクからの購入で当サイトに報酬が支払われることがあります。
+          <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed">
+            当サイトはAmazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。
+          </p>
+          <p className="mx-auto mt-1 max-w-xl text-xs leading-relaxed text-muted-foreground">
+            また、楽天アフィリエイトにも参加しています。商品リンクからの購入で当サイトに報酬が支払われることがありますが、ユーザーに追加費用は発生しません。
           </p>
         </div>
       </div>
@@ -225,8 +228,8 @@ export function Footer() {
         <p className="mt-1 text-center text-[10px] text-muted-foreground">
           運営者: 正木 家康
         </p>
-        <p className="mx-auto mt-2 max-w-xs text-center text-[10px] leading-relaxed text-muted-foreground/70">
-          ※ 当サイトはアフィリエイトプログラムに参加しています。商品リンクからの購入で当サイトに報酬が支払われることがあります。
+        <p className="mx-auto mt-2 max-w-xs text-center text-[11px] leading-relaxed text-muted-foreground">
+          Amazonアソシエイト・プログラム参加者｜楽天アフィリエイト参加
         </p>
       </div>
     </footer>

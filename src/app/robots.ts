@@ -50,6 +50,14 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
       {
+        userAgent: "anthropic-ai",
+        allow: "/",
+      },
+      {
+        userAgent: "CCBot",
+        allow: "/",
+      },
+      {
         userAgent: "Applebot-Extended",
         allow: "/",
       },

@@ -54,6 +54,10 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "images.microcms-assets.io",
       },
+      {
+        protocol: "https",
+        hostname: "upload.wikimedia.org",
+      },
     ],
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",

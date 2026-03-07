@@ -1306,7 +1306,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     description: "大津市の中心に位置する琵琶湖の主要港。ブラックバスのほか、ヘラブナやコイ釣りも楽しめる。遊覧船の発着場としても有名で、観光と釣りを両立できる。",
     latitude: 35.0110, longitude: 135.8590, address: "〒520-0047 滋賀県〒520-0047 滋賀 県 大津 市 浜大津 5 丁目 3-10, 5丁目-3-10 浜大津 大津市",
     accessInfo: "京阪電鉄びわ湖浜大津駅から徒歩約3分。名神高速大津ICから約10分。",
-    region: localRegion("r2602"), spotType: "port", difficulty: "beginner",
+    region: localRegion("r2602"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Honpuku-ji_%28Otsu%2C_Shiga%29_02.jpg/960px-Honpuku-ji_%28Otsu%2C_Shiga%29_02.jpg", imageAttribution: "Photo: Higa4 / Wikimedia Commons (CC0)", images: [], rating: 3.6, reviewCount: 145, googleRating: 4.2, googleReviewCount: 83,

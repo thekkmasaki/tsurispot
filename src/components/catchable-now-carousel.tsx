@@ -1,10 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Fish, ChevronRight } from "lucide-react";
-import { FishImage } from "@/components/ui/spot-image";
 
 interface CarouselFish {
   id: string;
@@ -23,43 +21,30 @@ const DIFFICULTY_BADGE: Record<string, { label: string; className: string }> = {
   advanced: { label: "上級者", className: "bg-red-100 text-red-700" },
 };
 
+const CATEGORY_ICON_COLOR: Record<string, string> = {
+  sea: "text-sky-500",
+  freshwater: "text-emerald-500",
+  brackish: "text-teal-500",
+};
+
 function CarouselCard({ fish }: { fish: CarouselFish }) {
-  const [imageLoaded, setImageLoaded] = useState(false);
   const diff = DIFFICULTY_BADGE[fish.difficulty];
+  const iconColor = CATEGORY_ICON_COLOR[fish.category] || "text-sky-500";
 
   return (
     <Link
       href={`/fish/${fish.slug}`}
       className="w-40 shrink-0 snap-start overflow-hidden rounded-xl border bg-card transition-shadow hover:shadow-md sm:w-44"
     >
-      <div className="relative">
-        {/* スケルトン: 画像読み込み完了まで表示 */}
-        {!imageLoaded && fish.imageUrl && (
-          <div className="absolute inset-0 z-10 animate-pulse bg-muted" style={{ aspectRatio: "16/10" }} />
-        )}
-        <FishImage
-          src={fish.imageUrl}
-          alt={fish.name}
-          category={fish.category}
-        />
-        {/* onLoad検知用の隠しimg（FishImageはNext/Imageのfillを使うため直接onLoadを取れない） */}
-        {fish.imageUrl && (
-          <img
-            src={fish.imageUrl}
-            alt=""
-            className="sr-only"
-            aria-hidden="true"
-            onLoad={() => setImageLoaded(true)}
-            onError={() => setImageLoaded(true)}
-          />
-        )}
-        {fish.isPeak && (
-          <div className="absolute top-2 left-2 z-20 rounded-full bg-orange-500 px-2 py-0.5 text-xs font-bold text-white shadow">
-            旬
-          </div>
-        )}
-      </div>
       <div className="p-3">
+        <div className="mb-2 flex items-center justify-between">
+          <Fish className={`size-5 ${iconColor}`} />
+          {fish.isPeak && (
+            <span className="rounded-full bg-orange-500 px-2 py-0.5 text-xs font-bold text-white">
+              旬
+            </span>
+          )}
+        </div>
         <h3 className="truncate text-sm font-semibold">{fish.name}</h3>
         <div className="mt-1.5 flex flex-wrap gap-1">
           <Badge className={`text-xs hover:opacity-100 ${diff.className}`}>

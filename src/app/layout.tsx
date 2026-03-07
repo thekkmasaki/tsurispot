@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP, Inter } from "next/font/google";
+import { Noto_Sans_JP } from "next/font/google";
 import { Header } from "@/components/layout/header";
 import { searchIndex } from "@/lib/data/search-index";
 import { MobileNav } from "@/components/layout/mobile-nav";
@@ -22,11 +22,6 @@ const notoSansJP = Noto_Sans_JP({
   display: "swap",
 });
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://tsurispot.com"),
@@ -118,7 +113,7 @@ export default function RootLayout({
         )}
       </head>
       <body
-        className={`${notoSansJP.variable} ${inter.variable} font-[family-name:var(--font-noto-sans-jp)] antialiased`}
+        className={`${notoSansJP.variable} font-[family-name:var(--font-noto-sans-jp)] antialiased`}
       >
         {/* WebSite schema: サイト名をGoogleに正しく認識させるため独立したscriptタグ */}
         <script

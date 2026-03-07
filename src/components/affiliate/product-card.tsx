@@ -6,7 +6,8 @@ import {
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { getAmazonUrl, getRakutenUrl } from "@/lib/affiliate-config";
+import { getAmazonUrl, getRakutenUrl, trackAffiliateClick } from "@/lib/affiliate-config";
+import type { PageType } from "@/lib/affiliate-config";
 import type { Product, ProductCategory } from "@/lib/data/products";
 
 const DIFFICULTY_LABEL: Record<string, string> = {
@@ -37,9 +38,10 @@ const CATEGORY_LABEL: Record<ProductCategory, string> = {
 
 interface ProductCardProps {
   product: Product;
+  pageType?: PageType;
 }
 
-export function ProductCard({ product }: ProductCardProps) {
+export function ProductCard({ product, pageType = "gear" }: ProductCardProps) {
   const amazonUrl = getAmazonUrl(product.amazonAsin, product.name);
   const rakutenUrl = getRakutenUrl(product.rakutenSearchQuery);
   const stripe = CATEGORY_STRIPE[product.category] || CATEGORY_STRIPE.other;
@@ -91,7 +93,8 @@ export function ProductCard({ product }: ProductCardProps) {
           <a
             href={amazonUrl}
             target="_blank"
-            rel="noopener noreferrer nofollow"
+            rel="noopener noreferrer sponsored"
+            onClick={() => trackAffiliateClick({ productName: product.name, productCategory: product.category, platform: "amazon", pageType })}
             className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
           >
             Amazonで見る
@@ -100,7 +103,8 @@ export function ProductCard({ product }: ProductCardProps) {
           <a
             href={rakutenUrl}
             target="_blank"
-            rel="noopener noreferrer nofollow"
+            rel="noopener noreferrer sponsored"
+            onClick={() => trackAffiliateClick({ productName: product.name, productCategory: product.category, platform: "rakuten", pageType })}
             className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#BF0000] px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#A00000]"
           >
             楽天で見る

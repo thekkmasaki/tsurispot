@@ -8,6 +8,7 @@ import {
   type AffiliateProduct,
   getRelevantAffiliateProducts,
 } from "@/lib/data/affiliate-products";
+import { trackAffiliateClick } from "@/lib/affiliate-config";
 
 const CATEGORY_LABELS: Record<AffiliateProduct["category"], string> = {
   tackle: "仕掛け・ライン",
@@ -57,6 +58,12 @@ export function SpotAffiliateRecommend({ methods, isNightFishing = false }: Spot
             href={product.url}
             target="_blank"
             rel="noopener noreferrer sponsored"
+            onClick={() => trackAffiliateClick({
+              productName: product.name,
+              productCategory: product.category,
+              platform: "amazon",
+              pageType: "spot",
+            })}
             className="block"
           >
             <Card className="group h-full gap-0 py-0 transition-all hover:shadow-md hover:border-primary/30">

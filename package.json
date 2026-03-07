@@ -9,10 +9,10 @@
     "lint": "eslint",
     "test": "vitest",
     "test:run": "vitest run",
-    "deploy": "rm -rf .next && npx vercel@latest --prod --yes && curl -s https://tsurispot.com/api/indexnow"
+    "deploy": "rm -rf .next && npx vercel@latest --prod --yes && curl -s https://tsurispot.com/api/indexnow",
+    "analyze": "ANALYZE=true next build"
   },
   "dependencies": {
-    "@netlify/plugin-nextjs": "^5.15.8",
     "@supabase/supabase-js": "^2.97.0",
     "@tailwindcss/typography": "^0.5.19",
     "@upstash/redis": "^1.36.2",
@@ -29,6 +29,7 @@
     "tailwind-merge": "^3.5.0"
   },
   "devDependencies": {
+    "@next/bundle-analyzer": "^15.3.0",
     "@tailwindcss/postcss": "^4",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
