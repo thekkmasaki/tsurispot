@@ -335,6 +335,26 @@ export default function ForMunicipalitiesPage() {
         />
       </div>
 
+      {/* 準備中バナー */}
+      <div className="mx-auto w-full max-w-5xl px-4 sm:px-6">
+        <div className="rounded-xl border-2 border-dashed border-amber-300 bg-amber-50 p-5 text-center">
+          <div className="mb-1 flex items-center justify-center gap-2 text-lg font-bold text-amber-800">
+            <Clock className="size-5" />
+            本ページは現在準備中です
+          </div>
+          <p className="text-sm text-amber-700">
+            自治体・漁協向けのデジタル集客プランは現在サービス内容を整備しております。正式な受付開始までもうしばらくお待ちください。ご興味のある方は
+            <a
+              href="mailto:info@tsurispot.com?subject=海業推進地区の掲載について"
+              className="font-medium underline hover:text-amber-900"
+            >
+              info@tsurispot.com
+            </a>
+            まで事前にご相談いただけます。
+          </p>
+        </div>
+      </div>
+
       {/* 課題提起 */}
       <section className="mx-auto w-full max-w-5xl px-4 pb-12 sm:px-6 sm:pb-16">
         <div className="mb-8 text-center">
