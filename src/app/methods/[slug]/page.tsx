@@ -781,7 +781,7 @@ export default async function MethodDetailPage({ params }: PageProps) {
                     href={gear.affiliateUrl}
                     target="_blank"
                     rel="noopener noreferrer nofollow"
-                    className="mt-2 inline-flex items-center gap-1 rounded-md bg-amazon px-3 py-1.5 text-xs font-bold text-white hover:bg-amazon-hover"
+                    className="mt-2 inline-flex items-center gap-1 rounded-md bg-[#FF9900] px-3 py-1.5 text-xs font-bold text-white hover:bg-[#E88B00]"
                   >
                     Amazonで見る
                     <ExternalLink className="size-3" />

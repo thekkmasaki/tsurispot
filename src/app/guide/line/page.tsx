@@ -636,7 +636,7 @@ export default function LineGuidePage() {
                 href="https://amzn.to/408jI1f"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-amazon px-6 py-3 text-sm font-bold text-white shadow transition-all hover:bg-amazon-hover hover:shadow-md active:scale-95 min-h-[44px]"
+                className="inline-flex shrink-0 items-center justify-center gap-2 rounded-lg bg-[#FF9900] px-6 py-3 text-sm font-bold text-white shadow transition-all hover:bg-[#E88B00] hover:shadow-md active:scale-95 min-h-[44px]"
               >
                 Amazonで見る &rarr;
               </a>

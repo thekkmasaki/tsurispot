@@ -841,7 +841,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
                     href="https://amzn.to/40sdGZ6"
                     target="_blank"
                     rel="sponsored noopener noreferrer"
-                    className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-amazon px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-amazon-hover"
+                    className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
                   >
                     Amazonで電熱ベストを見る
                     <ExternalLink className="size-3.5" />
@@ -859,7 +859,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
                     href="https://amzn.to/4s3kDvE"
                     target="_blank"
                     rel="sponsored noopener noreferrer"
-                    className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-amazon px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-amazon-hover"
+                    className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
                   >
                     Amazonでモバイルバッテリーを見る
                     <ExternalLink className="size-3.5" />
@@ -880,7 +880,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
                     偏光レンズで水面の反射をカットし、水中の魚影や海底の地形が見えます。紫外線から目を守り、長時間の釣りでも疲れにくい。
                   </p>
                   <a href="https://amzn.to/3ZPBnuq" target="_blank" rel="sponsored noopener noreferrer"
-                     className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-amazon px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-amazon-hover">
+                     className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]">
                     Amazonで偏光サングラスを見る
                     <ExternalLink className="size-3.5" />
                   </a>
@@ -893,7 +893,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
                     腰巻きタイプなら動きやすく釣りの邪魔になりません。万が一の落水時に命を守る最重要装備です。
                   </p>
                   <a href="https://amzn.to/4s1DpU5" target="_blank" rel="sponsored noopener noreferrer"
-                     className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-amazon px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-amazon-hover">
+                     className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]">
                     Amazonでライフジャケットを見る
                     <ExternalLink className="size-3.5" />
                   </a>
