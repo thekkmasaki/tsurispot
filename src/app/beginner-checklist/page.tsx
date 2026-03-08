@@ -458,7 +458,7 @@ function ChecklistPageContent() {
                               target="_blank"
                               rel="noopener noreferrer nofollow"
                               onClick={(e) => e.stopPropagation()}
-                              className="mt-1 shrink-0 inline-flex items-center rounded-md bg-amazon px-3 py-2 text-[11px] font-bold text-white hover:bg-amazon-hover"
+                              className="mt-1 shrink-0 inline-flex items-center rounded-md bg-[#FF9900] px-3 py-2 text-[11px] font-bold text-white hover:bg-[#E88B00]"
                             >
                               Amazonで見る
                             </a>
