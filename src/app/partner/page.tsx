@@ -434,7 +434,7 @@ export default function PartnerPage() {
               </div>
             </div>
             <p className="text-xs text-muted-foreground">
-              ※将来的にプレミアム掲載プランなどをご用意する場合がございますが、QRコード設置は引き続き無料です。
+              ※QRコード設置は無料です。エサ在庫管理などの追加機能は、無料プランとプレミアムプラン（月額1,980円）をご用意しています。
             </p>
           </CardContent>
         </Card>
@@ -557,6 +557,106 @@ export default function PartnerPage() {
               </CardContent>
             </Card>
           ))}
+        </div>
+      </section>
+
+      {/* ===== LINE餌在庫管理 ===== */}
+      <section className="mb-14 sm:mb-20">
+        <div className="rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 p-6 dark:border-emerald-800 dark:from-emerald-950/30 dark:to-teal-950/30 sm:p-10">
+          <div className="flex items-center gap-3 mb-6">
+            <div className="flex size-12 items-center justify-center rounded-xl bg-line">
+              <svg viewBox="0 0 24 24" fill="white" className="size-7">
+                <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.271.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314" />
+              </svg>
+            </div>
+            <div>
+              <h2 className="text-xl font-bold sm:text-2xl">LINE餌在庫管理サービス</h2>
+              <p className="text-sm text-emerald-700 dark:text-emerald-400">LINEで簡単に餌の在庫状況をリアルタイム公開</p>
+            </div>
+          </div>
+
+          <p className="text-sm leading-relaxed text-emerald-900 dark:text-emerald-200 sm:text-base mb-6">
+            お客様からの「今日エサある？」の電話対応を減らせます。LINEで「更新」と送るだけで、餌の在庫状況をツリスポ上でリアルタイム公開。お客様はサイトやLINEからいつでも在庫を確認できます。
+          </p>
+
+          <div className="grid gap-4 sm:grid-cols-3 mb-8">
+            <div className="rounded-xl bg-white/70 p-4 dark:bg-gray-900/30">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="flex size-7 items-center justify-center rounded-full bg-emerald-100 text-sm font-bold text-emerald-700">1</span>
+                <h3 className="text-sm font-bold">友だち追加</h3>
+              </div>
+              <p className="text-xs text-muted-foreground">ツリスポ公式LINEを友だち追加。ツリスポから店舗登録を行います。</p>
+            </div>
+            <div className="rounded-xl bg-white/70 p-4 dark:bg-gray-900/30">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="flex size-7 items-center justify-center rounded-full bg-emerald-100 text-sm font-bold text-emerald-700">2</span>
+                <h3 className="text-sm font-bold">「更新」と送信</h3>
+              </div>
+              <p className="text-xs text-muted-foreground">LINEで「更新」と送ると、お店専用の在庫更新ページのURLが届きます。</p>
+            </div>
+            <div className="rounded-xl bg-white/70 p-4 dark:bg-gray-900/30">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="flex size-7 items-center justify-center rounded-full bg-emerald-100 text-sm font-bold text-emerald-700">3</span>
+                <h3 className="text-sm font-bold">在庫を入力</h3>
+              </div>
+              <p className="text-xs text-muted-foreground">餌の名前・価格・在庫状況を入力するだけ。サイトに即反映されます。</p>
+            </div>
+          </div>
+
+          <div className="rounded-xl bg-white/80 p-5 dark:bg-gray-900/40 mb-6">
+            <h3 className="text-sm font-bold mb-3">店舗オーナー様が使えるコマンド</h3>
+            <div className="space-y-2 text-sm">
+              <div className="flex items-start gap-3">
+                <span className="shrink-0 rounded bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">更新</span>
+                <span className="text-muted-foreground">餌の在庫更新ページのURLが届きます</span>
+              </div>
+              <div className="flex items-start gap-3">
+                <span className="shrink-0 rounded bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">確認</span>
+                <span className="text-muted-foreground">現在の在庫状況をLINE上で確認できます</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-col items-center gap-3 text-center">
+            <div className="rounded-xl bg-white/80 p-4 dark:bg-gray-900/40 mb-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                <div>
+                  <p className="font-bold text-emerald-700 dark:text-emerald-400 mb-1">無料プラン</p>
+                  <p className="text-xs text-muted-foreground">エサ在庫更新（1日10回まで）・基本情報表示</p>
+                </div>
+                <div>
+                  <p className="font-bold text-amber-600 dark:text-amber-400 mb-1">プレミアム <span className="font-normal text-xs">月額1,980円</span></p>
+                  <p className="text-xs text-muted-foreground">更新無制限・LINE連携リアルタイム更新・検索優先表示</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex flex-wrap justify-center gap-3 text-xs text-emerald-700 dark:text-emerald-400">
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="size-3.5" />
+                <span>初期費用 0円</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="size-3.5" />
+                <span>無料プランあり</span>
+              </div>
+              <div className="flex items-center gap-1.5">
+                <CheckCircle2 className="size-3.5" />
+                <span>スマホだけでOK</span>
+              </div>
+            </div>
+            <a href="mailto:fishingspotjapan@gmail.com?subject=LINE餌在庫管理サービス希望&body=店舗名：%0A住所：%0Aご連絡先：%0Aご希望プラン（無料/プレミアム）：%0A">
+              <Button
+                size="lg"
+                className="min-h-[52px] gap-2 bg-line px-10 text-base text-white hover:bg-line-hover"
+              >
+                <Smartphone className="size-5" />
+                LINE在庫管理を始める
+              </Button>
+            </a>
+            <p className="text-xs text-muted-foreground">
+              fishingspotjapan@gmail.com にメールが届きます
+            </p>
+          </div>
         </div>
       </section>
 
