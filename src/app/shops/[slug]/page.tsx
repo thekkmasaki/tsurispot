@@ -380,21 +380,21 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
           <CardContent className="space-y-4">
             <p className="text-sm leading-relaxed">
               店舗オーナーの方へ ―
-              ツリスポでは無料で店舗基本情報を掲載しています。プレミアムプラン（月額980円）では、エサ在庫のリアルタイム更新・写真掲載・検索優先表示など、集客に役立つ機能をご利用いただけます。
+              ツリスポでは無料で店舗基本情報を掲載しています。プレミアムプラン（月額1,980円）では、エサ在庫のリアルタイム更新・写真掲載・検索優先表示など、集客に役立つ機能をご利用いただけます。
             </p>
             <div className="space-y-1.5 text-sm">
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                <span>無料: 基本情報の掲載・近くの釣りスポットとの連携</span>
+                <span>無料: 基本情報の掲載・エサ在庫更新（1日10回まで）</span>
               </div>
               <div className="flex items-center gap-2">
                 <CheckCircle className="w-4 h-4 text-amber-500 flex-shrink-0" />
                 <span>
-                  プレミアム（月額980円）: エサ在庫リアルタイム更新・写真掲載・検索優先表示
+                  プレミアム（月額1,980円）: 更新無制限・LINE連携・写真掲載・検索優先表示
                 </span>
               </div>
               <p className="text-xs text-muted-foreground pl-6">
-                年間契約なら10,000円（2ヶ月分おトク）
+                年間契約なら19,800円（2ヶ月分おトク）
               </p>
             </div>
             <div className="flex flex-col gap-3 pt-2">

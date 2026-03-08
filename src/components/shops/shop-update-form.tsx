@@ -175,13 +175,13 @@ export function ShopUpdateForm({ shopName }: { shopName?: string }) {
             🎮 デモモード
           </p>
           <p className="text-xs text-blue-700 dark:text-blue-400">
-            これはお試し用のデモページです。実際にボタンをタップして操作感をお確かめください。プレミアムプランにお申し込みいただくと、あなたのお店専用の更新ページをお渡しします。
+            これはお試し用のデモページです。実際にボタンをタップして操作感をお確かめください。無料プラン（1日10回まで更新可）またはプレミアムプラン（月額1,980円・更新無制限・LINE連携）をお選びいただけます。
           </p>
           <a
-            href="mailto:fishingspotjapan@gmail.com?subject=プレミアムプランについて"
+            href="mailto:fishingspotjapan@gmail.com?subject=エサ在庫管理について"
             className="inline-block mt-2 text-xs font-medium text-blue-600 underline dark:text-blue-400"
           >
-            プレミアムプランに申し込む →
+            お申し込み・お問い合わせ →
           </a>
         </div>
       )}

@@ -204,6 +204,10 @@ export default function ShopsListPage() {
                     </li>
                     <li className="flex items-start gap-2 text-sm">
                       <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
+                      <span>エサ在庫の掲載・更新（1日10回まで）</span>
+                    </li>
+                    <li className="flex items-start gap-2 text-sm">
+                      <CheckCircle className="w-4 h-4 text-green-500 mt-0.5 flex-shrink-0" />
                       <span>QRコード付き紹介カードの無料送付</span>
                     </li>
                   </ul>
@@ -216,11 +220,11 @@ export default function ShopsListPage() {
                   <CardTitle className="text-lg text-amber-600 dark:text-amber-400">
                     プレミアムプラン{" "}
                     <span className="text-sm font-normal text-muted-foreground">
-                      月額980円（税込）
+                      月額1,980円（税込）
                     </span>
                   </CardTitle>
                   <p className="text-xs text-muted-foreground">
-                    年間契約なら10,000円（2ヶ月分おトク）
+                    年間契約なら19,800円（2ヶ月分おトク）
                   </p>
                 </CardHeader>
                 <CardContent>
@@ -237,7 +241,7 @@ export default function ShopsListPage() {
                     </li>
                     <li className="flex items-start gap-2 text-sm">
                       <CheckCircle className="w-4 h-4 text-amber-500 mt-0.5 flex-shrink-0" />
-                      <span>エサ在庫リアルタイム更新（専用フォームから簡単操作）</span>
+                      <span>エサ在庫更新無制限・LINE連携リアルタイム更新</span>
                     </li>
                     <li className="flex items-start gap-2 text-sm">
                       <CheckCircle className="w-4 h-4 text-amber-500 mt-0.5 flex-shrink-0" />

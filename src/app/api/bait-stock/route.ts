@@ -92,8 +92,17 @@ export async function POST(request: NextRequest) {
     if (count === 1) {
       await withTimeout(redis.expire(rateLimitKey, 86400));
     }
-    if (count && count > 100) {
-      return NextResponse.json({ error: "本日の更新回数の上限に達しました（1日100回まで）" }, { status: 429 });
+    // レートリミット: プレミアム店舗は無制限、デモ店舗は100回/日、無料店舗は10回/日
+    const shopData = getShopBySlug(shop);
+    const isPremium = shopData?.isPremium === true;
+    if (!isPremium) {
+      const dailyLimit = isDemo ? 100 : 10;
+      if (count && count > dailyLimit) {
+        return NextResponse.json(
+          { error: `本日の更新回数の上限に達しました（1日${dailyLimit}回まで）。プレミアムプラン（月額1,980円）なら無制限に更新できます。` },
+          { status: 429 }
+        );
+      }
     }
     await withTimeout(redis.set(`${REDIS_PREFIX}${shop}`, stockWithTime, { ex: 604800 }));
   } catch {

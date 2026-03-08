@@ -768,7 +768,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     latitude: 34.8780, longitude: 136.9700,
     address: "〒447-0844 愛知県碧南市港本町",
     accessInfo: "知多半島道路半田ICから約20分。名鉄碧南駅から車で約10分。",
-    region: localRegion("r2500"), spotType: "pier", difficulty: "beginner",
+    region: localRegion("r2500"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "無料駐車場あり（約100台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Hekinan-Rinkai-gymnasium-Aichi.jpg/960px-Hekinan-Rinkai-gymnasium-Aichi.jpg", imageAttribution: "Photo: HQA02330 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 280, googleRating: 3.6, googleReviewCount: 143,

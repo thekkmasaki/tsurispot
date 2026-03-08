@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState, useRef, useEffect, useMemo } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useFavorites } from "@/hooks/use-favorites";
 import {
   Fish,
@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SearchOverlayClient } from "./search-overlay-client";
+import { LineButton } from "./line-button";
 import type { SearchItem } from "@/lib/data/search-index";
 
 // メインナビ（常時表示：最大5個）
@@ -174,6 +175,7 @@ export function Header({ searchItems }: { searchItems?: SearchItem[] }) {
 
         <div className="flex items-center gap-2">
           {searchItems && <SearchOverlayClient items={searchItems} />}
+          <LineButton />
           <Link
             href="/favorites"
             className={cn(

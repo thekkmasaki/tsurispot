@@ -915,6 +915,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   },
   {
     id: "nk036", name: "若狭高浜海釣り公園", slug: "wakasa-takahama-umizuri",
+    officialUrl: "https://wakasa-takahama.jp/spot/umizuripark/",
     description: "高浜町塩土にある海釣り公園で、釣り桟橋からの釣りが楽しめる整備された施設。レンタル竿も用意されており、手ぶらでも釣りが可能。サビキでアジやマダイ、投げ釣りでキス、クロダイも狙える。足場が良く安全面も充実しており、釣り初心者やお子様連れに最適。",
     latitude: 35.5200, longitude: 135.5350,
     address: "〒919-2228 福井県大飯郡高浜町塩土",
@@ -1034,7 +1035,7 @@ export const kitakinkiSpots: FishingSpot[] = [
     latitude: 35.5148, longitude: 135.3883,
     address: "〒625-0133 京都府舞鶴市平",
     accessInfo: "舞鶴若狭自動車道「舞鶴東IC」から約25分。舞鶴クレインブリッジ北側。",
-    region: lr("rnk01"), spotType: "pier", difficulty: "intermediate",
+    region: lr("rnk01"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: false, parkingDetail: "専用駐車場なし（空き地あるが私有地の可能性あり）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.4, reviewCount: 18, googleRating: 3.5, googleReviewCount: 4,

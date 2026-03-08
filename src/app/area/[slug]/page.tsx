@@ -97,18 +97,22 @@ export async function generateMetadata({
   const parkingCount = spots.filter((s) => s.hasParking).length;
   const toiletCount = spots.filter((s) => s.hasToilet).length;
   const freeCount = spots.filter((s) => s.isFree).length;
+  const familyCount = spots.filter((s) => s.difficulty === "beginner" && s.hasToilet && s.hasParking).length;
   const facilityParts: string[] = [];
+  if (familyCount > 0) facilityParts.push(`子連れ向け${familyCount}箇所`);
   if (parkingCount > 0) facilityParts.push(`駐車場あり${parkingCount}箇所`);
   if (toiletCount > 0) facilityParts.push(`トイレあり${toiletCount}箇所`);
   if (freeCount > 0) facilityParts.push(`無料${freeCount}箇所`);
   const facilityText = facilityParts.length > 0 ? facilityParts.join("、") + "。" : "";
 
+  const titleSuffix = familyCount > 0 ? "子連れ・穴場スポットも紹介" : "穴場スポットも紹介";
+
   return {
-    title: `${region.areaName}（${region.prefecture}）の釣り場おすすめ${spots.length}選｜穴場スポットも紹介`,
-    description: `${region.areaName}（${region.prefecture}）のおすすめ釣りスポット${spots.length}箇所を厳選。${topFishNames}が釣れる初心者にもおすすめの穴場釣り場を紹介。${facilityText}アクセス・地図情報も完全掲載。`,
+    title: `${region.areaName}（${region.prefecture}）の釣り場おすすめ${spots.length}選｜${titleSuffix}`,
+    description: `${region.areaName}（${region.prefecture}）のおすすめ釣りスポット${spots.length}箇所を厳選。${topFishNames}が釣れる初心者やファミリーにもおすすめの穴場釣り場を紹介。${facilityText}アクセス・地図情報も完全掲載。`,
     openGraph: {
-      title: `${region.areaName}（${region.prefecture}）の釣り場おすすめ${spots.length}選｜穴場スポットも紹介`,
-      description: `${region.areaName}（${region.prefecture}）のおすすめ釣りスポット${spots.length}箇所を厳選。${topFishNames}が釣れる初心者にもおすすめの穴場釣り場を紹介。${facilityText}アクセス・地図情報も完全掲載。`,
+      title: `${region.areaName}（${region.prefecture}）の釣り場おすすめ${spots.length}選｜${titleSuffix}`,
+      description: `${region.areaName}（${region.prefecture}）のおすすめ釣りスポット${spots.length}箇所を厳選。${topFishNames}が釣れる初心者やファミリーにもおすすめの穴場釣り場を紹介。${facilityText}アクセス・地図情報も完全掲載。`,
       type: "website",
       url: `https://tsurispot.com/area/${region.slug}`,
       siteName: "ツリスポ",

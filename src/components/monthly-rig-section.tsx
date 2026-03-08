@@ -17,12 +17,14 @@ const ITEM_AFFILIATE: { pattern: RegExp; name: string; url: string }[] = [
   { pattern: /おもり|オモリ|ガン玉|中通し/i, name: "おもりセット", url: "https://amzn.to/4cFGDbl" },
   { pattern: /スナップ/i, name: "スナップ", url: "https://amzn.to/4c9oMcU" },
   { pattern: /コマセ|アミ姫|オキアミ.*集魚/i, name: "マルキュー アミ姫", url: "https://amzn.to/4c6gaUn" },
+  { pattern: /エギ|餌木/i, name: "エギ10本セット", url: "https://amzn.to/3Nc9r10" },
 ];
 
 /** 仕掛けセットの釣り方 → おすすめ道具のマッピング */
 const METHOD_AFFILIATE: { pattern: RegExp; name: string; desc: string; url: string }[] = [
   { pattern: /サビキ|投げ|ちょい投げ|ウキ|フカセ|カゴ/i, name: "万能ロッド（シマノ）", desc: "堤防〜サーフまで対応", url: "https://amzn.to/4s4i64m" },
-  { pattern: /ルアー|ジギング|エギング|アジング|メバリング/i, name: "万能ロッド（シマノ）", desc: "ルアーにも対応", url: "https://amzn.to/4s4i64m" },
+  { pattern: /ルアー|ジギング|アジング|メバリング/i, name: "万能ロッド（シマノ）", desc: "ルアーにも対応", url: "https://amzn.to/4s4i64m" },
+  { pattern: /エギング/i, name: "エギ10本セット（ラトル内蔵・夜光）", desc: "2.5〜3.5号セットで即戦力", url: "https://amzn.to/3Nc9r10" },
 ];
 
 function getItemAffiliates(items: { name: string; spec: string }[]): { name: string; url: string }[] {

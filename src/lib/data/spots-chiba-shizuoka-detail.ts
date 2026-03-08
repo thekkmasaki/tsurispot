@@ -746,7 +746,7 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
     latitude: 35.0155, longitude: 138.4925,
     address: "〒424-0037 静岡県静岡市清水区袖師町1974-10",
     accessInfo: "JR清水駅から徒歩約10分。東名高速清水ICから約5分。",
-    region: lr("r1062"), spotType: "pier", difficulty: "beginner",
+    region: lr("r1062"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺の有料駐車場（400円/日）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1d/Manhole_cover_of_Shimizu%2C_Shizuoka.JPG/960px-Manhole_cover_of_Shimizu%2C_Shizuoka.JPG", imageAttribution: "Photo: そらみみ (Soramimi) / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 125, googleRating: 3.9, googleReviewCount: 17,

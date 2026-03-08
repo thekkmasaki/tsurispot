@@ -627,7 +627,7 @@ export const hokkaidoTohokuAdd2Spots: FishingSpot[] = [
     latitude: 41.7690, longitude: 140.7170,
     address: "〒040-0052 北海道函館市大町15",
     accessInfo: "JR函館駅から車で約5分。函館市電末広町電停から徒歩約10分。",
-    region: region("r51"), spotType: "pier", difficulty: "beginner",
+    region: region("r51"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "島内無料駐車場あり（約100台）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.1, reviewCount: 210,

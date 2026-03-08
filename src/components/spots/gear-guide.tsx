@@ -41,6 +41,7 @@ const REEL_AFFILIATE = { url: "https://amzn.to/4atW7Om", label: "おすすめリ
 const ITEM_AFFILIATE_LINKS: { pattern: RegExp; url: string; label: string }[] = [
   { pattern: /コマセ|アミエビ|アミ姫/, url: "https://amzn.to/4c6gaUn", label: "アミ姫" },
   { pattern: /おもり|オモリ|ガン玉|割りビシ|ナス型/, url: "https://amzn.to/4cFGDbl", label: "おもりセット" },
+  { pattern: /エギ|餌木/, url: "https://amzn.to/3Nc9r10", label: "エギセット" },
   { pattern: /スナップ/, url: "https://amzn.to/4c9oMcU", label: "スナップ" },
   { pattern: /タックルボックス|釣りボックス/, url: "https://amzn.to/4rvRhGx", label: "釣りボックス" },
   { pattern: /ロッドスタンド|竿受け|竿立て/, url: "https://amzn.to/3OwwVy8", label: "ロッドスタンド" },

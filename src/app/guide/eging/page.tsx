@@ -470,6 +470,21 @@ export default function EgingGuidePage() {
             <Hint>
               初心者はまず3.0号のオレンジ系ベーシックタイプを2〜3本揃えましょう。根がかりでロストすることもあるので、同じカラーを複数持っておくと安心です。
             </Hint>
+
+            <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-4 dark:border-amber-800 dark:bg-amber-950/30">
+              <p className="mb-2 text-sm font-semibold text-foreground">エギを揃えるなら</p>
+              <p className="mb-3 text-sm text-muted-foreground">
+                2.5号・3.0号・3.5号が10本入ったセット。ラトル内蔵で集魚力が高く、夜光タイプなのでナイトエギングにも対応。まとめ買いでロスト時も安心です。
+              </p>
+              <a
+                href="https://amzn.to/3Nc9r10"
+                target="_blank"
+                rel="noopener noreferrer nofollow"
+                className="inline-flex items-center gap-1.5 rounded-md bg-[#FF9900] px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
+              >
+                Amazonでエギセットを見る →
+              </a>
+            </div>
           </SectionCard>
 
           {/* ロッドとリールの選び方 */}

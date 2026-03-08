@@ -349,6 +349,21 @@ export const products: Product[] = [
     relatedFish: ["akame", "seabass", "hiramasa", "buri", "shiira", "magochi"],
     priority: 24,
   },
+  {
+    id: "p25",
+    name: "ダイワ サゴシーZ 95HS（サワラ専用ミノー）",
+    description:
+      "サワラ（サゴシ）専用設計のヘビーシンキングミノー。95mmボディで飛距離抜群、高速巻きでの安定したスイムアクションがサワラの捕食本能を刺激。鋭い歯によるラインブレイク対策にワイヤーリーダーとの併用がおすすめ。",
+    priceRange: "1,200〜1,500円",
+    imageDescription: "ダイワ サゴシーZ 95HS ミノー",
+    amazonAsin: "",
+    rakutenSearchQuery: "ダイワ サゴシーZ 95HS",
+    category: "tackle",
+    difficulty: "intermediate",
+    relatedMethods: ["shorejigging", "lure"],
+    relatedFish: ["sawara"],
+    priority: 25,
+  },
 ];
 
 /**

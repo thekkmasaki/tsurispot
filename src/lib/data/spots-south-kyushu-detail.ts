@@ -137,6 +137,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
   },
   {
     id: "s991", name: "鴨池海釣り公園", slug: "kamoike-fishing-park",
+    officialUrl: "http://umiduri-kouen.com/kamoike/",
     description: "鹿児島市街地から近い管理釣り場。桜島を正面に望む絶景の中で安全に釣りが楽しめる。足場が整備され柵も完備しているためファミリーに大人気。アジ・サバ・タチウオなど多彩な魚種が年間を通じて狙える。",
     latitude: 31.5610, longitude: 130.5640,
     address: "〒890-0062 鹿児島県鹿児島市与次郎2丁目9-12",

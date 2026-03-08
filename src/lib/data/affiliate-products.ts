@@ -151,6 +151,15 @@ export const affiliateProducts: AffiliateProduct[] = [
     category: "tackle",
   },
   {
+    id: "af-egi-set",
+    name: "エギ ルアー 10本セット（ラトル内蔵・夜光）",
+    url: "https://amzn.to/3Nc9r10",
+    description: "2.5号・3.0号・3.5号の餌木10本セット。ラトル内蔵で集魚力抜群、夜光タイプで夜釣りにも対応。アオリイカ・ヤリイカ・タコ狙いに。",
+    methodKeywords: ["エギング"],
+    seasons: ["all"],
+    category: "tackle",
+  },
+  {
     id: "af-eging-rod",
     name: "エギングロッド",
     url: "https://amzn.to/4rLFPqc",
@@ -275,6 +284,15 @@ export const affiliateProducts: AffiliateProduct[] = [
     methodKeywords: [],
     seasons: ["all"],
     category: "accessory",
+  },
+  {
+    id: "af-sagoshiz",
+    name: "ダイワ サゴシーZ 95HS（サワラ専用ミノー）",
+    url: "https://amzn.to/4ldWbp4",
+    description: "サワラ（サゴシ）専用設計のヘビーシンキングミノー。高速巻きでの安定スイムがサワラの捕食本能を刺激。飛距離も抜群でショアからのサワラ狙いに最適です。",
+    methodKeywords: ["ショアジギ", "ルアー", "キャスティング"],
+    seasons: ["spring", "autumn"],
+    category: "tackle",
   },
   {
     id: "af-jet-sinker",

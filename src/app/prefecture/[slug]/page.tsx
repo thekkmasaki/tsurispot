@@ -215,12 +215,14 @@ export async function generateMetadata({
 
   const beginnerCount = spots.filter((s) => s.difficulty === "beginner").length;
   const freeCount = spots.filter((s) => s.isFree).length;
+  const familyCount = spots.filter((s) => s.difficulty === "beginner" && s.hasToilet && s.hasParking).length;
   const beginnerText = beginnerCount > 0 ? `初心者OK ${beginnerCount}箇所` : "";
   const freeText = freeCount > 0 ? `無料 ${freeCount}箇所` : "";
-  const featureTexts = [beginnerText, freeText].filter(Boolean).join("・");
+  const familyText = familyCount > 0 ? `子連れ向け ${familyCount}箇所` : "";
+  const featureTexts = [beginnerText, familyText, freeText].filter(Boolean).join("・");
 
-  const title = `${pref.name}の釣り場おすすめ${spots.length > 0 ? spots.length : ""}選｜${featureTexts || "初心者向け穴場スポットも"}【2026年最新】`;
-  const description = `${pref.name}のおすすめ釣りスポット${spots.length > 0 ? `${spots.length}箇所` : ""}を初心者〜上級者別にランキング形式で紹介。${pref.name}近くの${spotTypeText || "堤防・漁港・磯"}で${topFishNames}が狙える穴場釣り場を厳選。駐車場・トイレ情報、ベストシーズン、アクセス方法まで完全ガイド。${featureTexts ? `【${featureTexts}】` : ""}`;
+  const title = `${pref.name}の釣り場おすすめ${spots.length > 0 ? spots.length : ""}選｜${featureTexts || "初心者・子連れ向け穴場スポットも"}【2026年最新】`;
+  const description = `${pref.name}のおすすめ釣りスポット${spots.length > 0 ? `${spots.length}箇所` : ""}を初心者〜上級者別にランキング形式で紹介。${familyCount > 0 ? `子連れ・ファミリー向け${familyCount}箇所。` : ""}${pref.name}近くの${spotTypeText || "堤防・漁港・磯"}で${topFishNames}が狙える穴場釣り場を厳選。駐車場・トイレ情報、ベストシーズン、アクセス方法まで完全ガイド。${featureTexts ? `【${featureTexts}】` : ""}`;
 
   return {
     title,

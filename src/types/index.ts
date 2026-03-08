@@ -49,6 +49,7 @@ export interface FishingSpot {
   googleRating?: number;
   googleReviewCount?: number;
   managementInfo?: ManagementInfo;
+  officialUrl?: string;
 }
 
 export interface SpotRules {

@@ -3,8 +3,78 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Camera, X, ChevronLeft, ChevronRight, ImagePlus, MapPin, Fish } from "lucide-react";
 import type { SpotPhoto } from "@/types";
+
+// Inline SVG icons to avoid Turbopack module resolution issues with lucide-react
+const svgProps = { xmlns: "http://www.w3.org/2000/svg", width: 24, height: 24, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
+
+function CameraIcon({ className }: { className?: string }) {
+  return (
+    <svg {...svgProps} className={className}>
+      <path d="M13.997 4a2 2 0 0 1 1.76 1.05l.486.9A2 2 0 0 0 18.003 7H20a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h1.997a2 2 0 0 0 1.759-1.048l.489-.904A2 2 0 0 1 10.004 4z" />
+      <circle cx="12" cy="13" r="3" />
+    </svg>
+  );
+}
+
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg {...svgProps} className={className}>
+      <path d="M18 6 6 18" />
+      <path d="m6 6 12 12" />
+    </svg>
+  );
+}
+
+function ChevronLeftIcon({ className }: { className?: string }) {
+  return (
+    <svg {...svgProps} className={className}>
+      <path d="m15 18-6-6 6-6" />
+    </svg>
+  );
+}
+
+function ChevronRightIcon({ className }: { className?: string }) {
+  return (
+    <svg {...svgProps} className={className}>
+      <path d="m9 18 6-6-6-6" />
+    </svg>
+  );
+}
+
+function ImagePlusIcon({ className }: { className?: string }) {
+  return (
+    <svg {...svgProps} className={className}>
+      <path d="M16 5h6" />
+      <path d="M19 2v6" />
+      <path d="M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5" />
+      <path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+      <circle cx="9" cy="9" r="2" />
+    </svg>
+  );
+}
+
+function MapPinIcon({ className }: { className?: string }) {
+  return (
+    <svg {...svgProps} className={className}>
+      <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+      <circle cx="12" cy="10" r="3" />
+    </svg>
+  );
+}
+
+function FishIcon({ className }: { className?: string }) {
+  return (
+    <svg {...svgProps} className={className}>
+      <path d="M6.5 12c.94-3.46 4.94-6 8.5-6 3.56 0 6.06 2.54 7 6-.94 3.47-3.44 6-7 6s-7.56-2.53-8.5-6Z" />
+      <path d="M18 12v.5" />
+      <path d="M16 17.93a9.77 9.77 0 0 1 0-11.86" />
+      <path d="M7 10.67C7 8 5.58 5.97 2.73 5.5c-1 1.5-1 5 .23 6.5-1.24 1.5-1.24 5-.23 6.5C5.58 18.03 7 16 7 13.33" />
+      <path d="M10.46 7.26C10.2 5.88 9.17 4.24 8 3h5.8a2 2 0 0 1 1.98 1.67l.23 1.4" />
+      <path d="m16.01 17.93-.23 1.4A2 2 0 0 1 13.8 21H9.5a5.96 5.96 0 0 0 1.49-3.98" />
+    </svg>
+  );
+}
 
 const SPOT_TYPE_DEFAULT_IMAGES: Record<string, { src: string; label: string }> = {
   breakwater: { src: "/images/spot-types/breakwater.svg", label: "堤防" },
@@ -72,7 +142,7 @@ export function SpotPhotoGallery({ photos, spotType, spotName }: SpotPhotoGaller
     return (
       <div>
         <h2 className="mb-3 flex items-center gap-2 text-lg font-bold sm:mb-4">
-          <Camera className="size-5" />
+          <CameraIcon className="size-5" />
           釣り場の様子
         </h2>
 
@@ -89,7 +159,7 @@ export function SpotPhotoGallery({ photos, spotType, spotName }: SpotPhotoGaller
             <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
             <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-gray-700 backdrop-blur-sm">
-                <MapPin className="size-3" />
+                <MapPinIcon className="size-3" />
                 {defaultImg.label}タイプ
               </span>
             </div>
@@ -108,7 +178,7 @@ export function SpotPhotoGallery({ photos, spotType, spotName }: SpotPhotoGaller
                   key={feature}
                   className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700 dark:bg-blue-950/50 dark:text-blue-300"
                 >
-                  <Fish className="size-3 shrink-0" />
+                  <FishIcon className="size-3 shrink-0" />
                   {feature}
                 </span>
               ))}
@@ -120,7 +190,7 @@ export function SpotPhotoGallery({ photos, spotType, spotName }: SpotPhotoGaller
             {/* Photo submission CTA */}
             <div className="flex flex-col items-center gap-3 rounded-lg bg-gradient-to-br from-blue-50 to-sky-50 p-4 text-center dark:from-blue-950/30 dark:to-sky-950/30 sm:flex-row sm:text-left">
               <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/50">
-                <ImagePlus className="size-6 text-blue-600 dark:text-blue-400" />
+                <ImagePlusIcon className="size-6 text-blue-600 dark:text-blue-400" />
               </div>
               <div className="flex-1">
                 <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
@@ -134,7 +204,7 @@ export function SpotPhotoGallery({ photos, spotType, spotName }: SpotPhotoGaller
                 href="/contact"
                 className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-blue-700 hover:shadow-md active:scale-[0.98]"
               >
-                <Camera className="size-4" />
+                <CameraIcon className="size-4" />
                 写真を投稿する
               </Link>
             </div>
@@ -160,7 +230,7 @@ export function SpotPhotoGallery({ photos, spotType, spotName }: SpotPhotoGaller
   return (
     <div>
       <h2 className="mb-3 flex items-center gap-2 text-lg font-bold sm:mb-4">
-        <Camera className="size-5" />
+        <CameraIcon className="size-5" />
         釣り場の様子
       </h2>
 
@@ -233,7 +303,7 @@ export function SpotPhotoGallery({ photos, spotType, spotName }: SpotPhotoGaller
             onClick={closeLightbox}
             aria-label="閉じる"
           >
-            <X className="size-6" />
+            <XIcon className="size-6" />
           </button>
 
           {photos.length > 1 && (
@@ -244,7 +314,7 @@ export function SpotPhotoGallery({ photos, spotType, spotName }: SpotPhotoGaller
                 onClick={(e) => { e.stopPropagation(); goPrev(); }}
                 aria-label="前の写真"
               >
-                <ChevronLeft className="size-6" />
+                <ChevronLeftIcon className="size-6" />
               </button>
               <button
                 type="button"
@@ -252,7 +322,7 @@ export function SpotPhotoGallery({ photos, spotType, spotName }: SpotPhotoGaller
                 onClick={(e) => { e.stopPropagation(); goNext(); }}
                 aria-label="次の写真"
               >
-                <ChevronRight className="size-6" />
+                <ChevronRightIcon className="size-6" />
               </button>
             </>
           )}

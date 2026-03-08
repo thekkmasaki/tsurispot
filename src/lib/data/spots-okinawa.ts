@@ -184,7 +184,7 @@ export const okinawaSpots: FishingSpot[] = [
     latitude: 26.3080, longitude: 127.7490,
     address: "〒904-0115 沖縄県北谷町美浜54",
     accessInfo: "沖縄自動車道北中城ICから約20分。国道58号北谷方面から。",
-    region: localRegion("r180"), spotType: "pier", difficulty: "beginner",
+    region: localRegion("r180"), spotType: "breakwater", difficulty: "beginner",
     isFree: false, feeDetail: "釣り場利用料500円（マリーナ管理費）",
     hasParking: true, parkingDetail: "アメリカンビレッジ周辺に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,

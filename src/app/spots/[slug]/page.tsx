@@ -58,7 +58,9 @@ import { getCatchReportsBySpot } from "@/lib/data/catch-reports";
 import { CatchReportList } from "@/components/spots/catch-report-list";
 import { CatchReportForm } from "@/components/spots/catch-report-form";
 import { SpotRulesCard } from "@/components/spots/spot-rules";
-import { SpotPhotoGallery } from "@/components/spots/spot-photo-gallery";
+const SpotPhotoGallery = dynamic(
+  () => import("@/components/spots/spot-photo-gallery").then(m => ({ default: m.SpotPhotoGallery })),
+);
 import { areaGuides } from "@/lib/data/area-guides";
 import { explainTime, explainMethod } from "@/lib/fishing-term-helper";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
@@ -110,7 +112,8 @@ export async function generateMetadata({
     ? `${baseTitleText}【${topMethodLabel}で${topFishNames}】`
     : baseTitleText;
   const title = fullTitle.length <= 60 ? fullTitle : baseTitleText;
-  const description = `${spot.name}（${spot.address}）は${spot.region.prefecture}${spot.region.areaName}にある${SPOT_TYPE_LABELS[spot.spotType]}の釣り場。${fishNames}が狙えるおすすめスポットです。${spot.hasParking ? '駐車場あり。' : ''}${spot.hasToilet ? 'トイレあり。' : ''}${spot.isFree ? '無料で釣りOK。' : ''}アクセス・釣れる魚・仕掛け情報を初心者向けに完全ガイド。`;
+  const isFamilyFriendly = spot.difficulty === "beginner" && spot.hasToilet && spot.hasParking;
+  const description = `${spot.name}（${spot.address}）は${spot.region.prefecture}${spot.region.areaName}にある${SPOT_TYPE_LABELS[spot.spotType]}の釣り場。${fishNames}が狙えるおすすめスポットです。${spot.hasParking ? '駐車場あり。' : ''}${spot.hasToilet ? 'トイレあり。' : ''}${spot.isFree ? '無料で釣りOK。' : ''}${isFamilyFriendly ? '子連れ・ファミリーにもおすすめ。' : ''}アクセス・釣れる魚・仕掛け情報を初心者向けに完全ガイド。`;
   const ogDescription = `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）で${fishNames}が狙えます。${spot.description}`;
   return {
     title,
@@ -283,6 +286,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
       worstRating: "1",
       ratingCount: spot.googleReviewCount || (spot.reviewCount > 0 ? spot.reviewCount : 1),
     },
+    ...(spot.officialUrl ? { sameAs: spot.officialUrl } : {}),
   };
 
   const prefForBreadcrumb = getPrefectureByName(spot.region.prefecture);
@@ -753,6 +757,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 <div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">難易度</dt><dd>{DIFFICULTY_LABELS[spot.difficulty]}</dd></div>
                 <div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">タイプ</dt><dd>{SPOT_TYPE_LABELS[spot.spotType]}</dd></div>
                 {spot.rentalDetail && (<div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">レンタル</dt><dd>{spot.rentalDetail}</dd></div>)}
+                {spot.officialUrl && (<div className="flex gap-4"><dt className="w-20 shrink-0 font-medium text-muted-foreground sm:w-24">公式サイト</dt><dd><a href={spot.officialUrl} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-blue-600 hover:underline"><ExternalLink className="size-3" />公式サイトを見る</a></dd></div>)}
               </dl>
             </CardContent></Card>
           </section>
