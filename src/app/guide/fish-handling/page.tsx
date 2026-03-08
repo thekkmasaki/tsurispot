@@ -447,7 +447,7 @@ export default function FishHandlingGuidePage() {
                   href="https://amzn.to/3ZQsYqx"
                   target="_blank"
                   rel="noopener noreferrer nofollow"
-                  className="mt-1 shrink-0 inline-flex items-center rounded-md bg-amazon px-3 py-2 text-xs font-bold text-white hover:bg-amazon-hover"
+                  className="mt-1 shrink-0 inline-flex items-center rounded-md bg-[#FF9900] px-3 py-2 text-xs font-bold text-white hover:bg-[#E88B00]"
                 >
                   Amazonで見る
                 </a>
