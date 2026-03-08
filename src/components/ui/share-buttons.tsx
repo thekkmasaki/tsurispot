@@ -55,7 +55,7 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
           )
         }
         aria-label="LINEでシェア"
-        className="flex h-11 w-11 items-center justify-center rounded-full bg-[#06C755] text-white opacity-100 hover:opacity-80 transition-opacity"
+        className="flex h-11 w-11 items-center justify-center rounded-full bg-[#06c755] text-white opacity-100 hover:opacity-80 transition-opacity"
       >
         <svg
           viewBox="0 0 24 24"
