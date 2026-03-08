@@ -477,7 +477,7 @@ export default async function MethodMonthPage({ params }: Props) {
                       <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground line-clamp-3">
                         {product.description}
                       </p>
-                      <div className="mt-3 flex items-center justify-center rounded-md bg-[#FF9900]/10 px-3 py-1.5 text-xs font-medium text-[#FF9900] transition-colors group-hover:bg-[#FF9900] group-hover:text-white">
+                      <div className="mt-3 flex items-center justify-center rounded-md bg-amazon/10 px-3 py-1.5 text-xs font-medium text-amazon transition-colors group-hover:bg-amazon group-hover:text-white">
                         Amazonで見る
                       </div>
                     </CardContent>
