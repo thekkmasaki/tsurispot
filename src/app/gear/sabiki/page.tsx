@@ -421,7 +421,7 @@ function SabikiProductCard({ product }: { product: SabikiProduct }) {
               href={amazonUrl}
               target="_blank"
               rel="noopener noreferrer nofollow"
-              className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#FF9900] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#E88B00]"
+              className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-amazon px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-amazon-hover"
             >
               Amazonで見る
               <ExternalLink className="size-3.5" />
@@ -430,7 +430,7 @@ function SabikiProductCard({ product }: { product: SabikiProduct }) {
               href={rakutenUrl}
               target="_blank"
               rel="noopener noreferrer nofollow"
-              className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-[#BF0000] px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-[#A00000]"
+              className="inline-flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-rakuten px-4 py-3 text-sm font-bold text-white transition-colors hover:bg-rakuten-hover"
             >
               楽天で見る
               <ExternalLink className="size-3.5" />
@@ -726,7 +726,7 @@ export default function GearSabikiPage() {
                       href={item.directUrl || getAmazonUrl(item.asin)}
                       target="_blank"
                       rel="noopener noreferrer nofollow"
-                      className="inline-flex flex-1 items-center justify-center gap-1 rounded-md bg-[#FF9900] px-3 py-2 text-xs font-bold text-white hover:bg-[#E88B00]"
+                      className="inline-flex flex-1 items-center justify-center gap-1 rounded-md bg-amazon px-3 py-2 text-xs font-bold text-white hover:bg-amazon-hover"
                     >
                       Amazon
                       <ExternalLink className="size-3" />
@@ -735,7 +735,7 @@ export default function GearSabikiPage() {
                       href={getRakutenUrl(item.query)}
                       target="_blank"
                       rel="noopener noreferrer nofollow"
-                      className="inline-flex flex-1 items-center justify-center gap-1 rounded-md bg-[#BF0000] px-3 py-2 text-xs font-bold text-white hover:bg-[#A00000]"
+                      className="inline-flex flex-1 items-center justify-center gap-1 rounded-md bg-rakuten px-3 py-2 text-xs font-bold text-white hover:bg-rakuten-hover"
                     >
                       楽天
                       <ExternalLink className="size-3" />
