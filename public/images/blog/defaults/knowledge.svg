@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#e0e7ff"/>
+      <stop offset="100%" style="stop-color:#a5b4fc"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#bg)"/>
+  <!-- Lightbulb -->
+  <g transform="translate(400,145)" opacity="0.5">
+    <path d="M0,-50 Q-30,-50 -30,-25 Q-30,5 -15,15 L-15,30 L15,30 L15,15 Q30,5 30,-25 Q30,-50 0,-50Z" fill="#4f46e5" opacity="0.2"/>
+    <path d="M0,-50 Q-30,-50 -30,-25 Q-30,5 -15,15 L-15,30 L15,30 L15,15 Q30,5 30,-25 Q30,-50 0,-50Z" fill="none" stroke="#4338ca" stroke-width="2.5"/>
+    <line x1="-12" y1="35" x2="12" y2="35" stroke="#4338ca" stroke-width="2"/>
+    <line x1="-10" y1="40" x2="10" y2="40" stroke="#4338ca" stroke-width="2"/>
+    <!-- Light rays -->
+    <line x1="0" y1="-60" x2="0" y2="-68" stroke="#4338ca" stroke-width="2" stroke-linecap="round"/>
+    <line x1="-25" y1="-55" x2="-30" y2="-62" stroke="#4338ca" stroke-width="2" stroke-linecap="round"/>
+    <line x1="25" y1="-55" x2="30" y2="-62" stroke="#4338ca" stroke-width="2" stroke-linecap="round"/>
+    <line x1="-38" y1="-35" x2="-45" y2="-38" stroke="#4338ca" stroke-width="2" stroke-linecap="round"/>
+    <line x1="38" y1="-35" x2="45" y2="-38" stroke="#4338ca" stroke-width="2" stroke-linecap="round"/>
+  </g>
+  <!-- Waves -->
+  <path d="M0,325 Q100,310 200,325 Q300,340 400,325 Q500,310 600,325 Q700,340 800,325 L800,400 L0,400Z" fill="#6366f1" opacity="0.12"/>
+  <!-- Fish knowledge icon -->
+  <g transform="translate(300,200)" opacity="0.15">
+    <ellipse cx="0" cy="0" rx="25" ry="12" fill="#4338ca"/>
+    <path d="M-25,0 Q-35,-12 -25,-12 Q-30,0 -25,12 Q-35,12 -25,0Z" fill="#4338ca"/>
+    <circle cx="12" cy="-3" r="2.5" fill="#e0e7ff"/>
+  </g>
+  <text x="400" y="278" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="600" fill="#4338ca" opacity="0.5">FISHING KNOWLEDGE</text>
+  <text x="400" y="303" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#4f46e5" opacity="0.4">tsurispot.com</text>
+</svg>

@@ -23,12 +23,6 @@ import {
   MapPin,
   Fish,
   Search,
-  BookOpen,
-  Package,
-  Target,
-  Shield,
-  Lightbulb,
-  Camera,
 } from "lucide-react";
 
 // ISR: 1時間ごとに再検証（Vercel無料プランのISR Reads節約）
@@ -40,18 +34,16 @@ export const maxDuration = 60;
 // microCMS記事はビルド時に存在しないのでオンデマンドSSR
 export const dynamicParams = true;
 
-const CATEGORY_HERO: Record<
-  BlogPost["category"],
-  { gradient: string; Icon: typeof BookOpen }
-> = {
-  beginner: { gradient: "from-blue-400 to-blue-600", Icon: BookOpen },
-  gear: { gradient: "from-orange-400 to-orange-600", Icon: Package },
-  seasonal: { gradient: "from-green-400 to-green-600", Icon: Calendar },
-  technique: { gradient: "from-purple-400 to-purple-600", Icon: Target },
-  "spot-guide": { gradient: "from-sky-400 to-sky-600", Icon: MapPin },
-  manner: { gradient: "from-amber-400 to-amber-600", Icon: Shield },
-  knowledge: { gradient: "from-indigo-400 to-indigo-600", Icon: Lightbulb },
-  report: { gradient: "from-teal-400 to-teal-600", Icon: Camera },
+/** カテゴリ別のデフォルトサムネイル画像パス */
+const CATEGORY_DEFAULT_IMAGE: Record<BlogPost["category"], string> = {
+  beginner: "/images/blog/defaults/beginner.svg",
+  gear: "/images/blog/defaults/gear.svg",
+  seasonal: "/images/blog/defaults/seasonal.svg",
+  technique: "/images/blog/defaults/technique.svg",
+  "spot-guide": "/images/blog/defaults/spot-guide.svg",
+  manner: "/images/blog/defaults/manner.svg",
+  knowledge: "/images/blog/defaults/knowledge.svg",
+  report: "/images/blog/defaults/report.svg",
 };
 
 // 静的記事のslugのみ事前生成（microCMS記事はオンデマンド）
@@ -200,26 +192,22 @@ export default async function BlogPostPage({
 
       {/* ヒーロービジュアル */}
       {(() => {
-        const hero = CATEGORY_HERO[post.category];
-        const HeroIcon = hero.Icon;
-        return post.image ? (
+        const heroImage = post.image || CATEGORY_DEFAULT_IMAGE[post.category];
+        const isExternal = heroImage.startsWith("http");
+        return (
           <div className="relative mb-8 h-48 w-full overflow-hidden rounded-xl sm:h-64">
             <Image
-              src={post.image}
+              src={heroImage}
               alt={post.title}
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, 768px"
               priority
-              {...(post.image.startsWith("http") ? { unoptimized: true } : {})}
+              {...(isExternal ? { unoptimized: true } : {})}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
-          </div>
-        ) : (
-          <div
-            className={`mb-8 flex h-36 w-full items-center justify-center rounded-xl bg-gradient-to-br ${hero.gradient} sm:h-48`}
-          >
-            <HeroIcon className="size-16 text-white/30 sm:size-20" />
+            {post.image && (
+              <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+            )}
           </div>
         );
       })()}
@@ -420,27 +408,21 @@ export default async function BlogPostPage({
           </h2>
           <div className="grid gap-3 sm:grid-cols-2">
             {relatedPosts.map((related) => {
-              const relHero = CATEGORY_HERO[related.category];
-              const RelIcon = relHero.Icon;
+              const relImage = related.image || CATEGORY_DEFAULT_IMAGE[related.category];
+              const isExternal = relImage.startsWith("http");
               return (
                 <Link key={related.id} href={`/blog/${related.slug}`}>
                   <Card className="group h-full overflow-hidden py-0 transition-shadow hover:shadow-md">
-                    {related.image ? (
-                      <div className="relative h-32 w-full">
-                        <Image
-                          src={related.image}
-                          alt={related.title}
-                          fill
-                          className="object-cover"
-                          sizes="(max-width: 640px) 100vw, 384px"
-                          {...(related.image.startsWith("http") ? { unoptimized: true } : {})}
-                        />
-                      </div>
-                    ) : (
-                      <div className={`flex h-24 w-full items-center justify-center bg-gradient-to-br ${relHero.gradient}`}>
-                        <RelIcon className="size-8 text-white/50" />
-                      </div>
-                    )}
+                    <div className="relative h-32 w-full">
+                      <Image
+                        src={relImage}
+                        alt={related.title}
+                        fill
+                        className="object-cover"
+                        sizes="(max-width: 640px) 100vw, 384px"
+                        {...(isExternal ? { unoptimized: true } : {})}
+                      />
+                    </div>
                     <CardContent className="flex flex-col gap-2 p-4">
                       <Badge variant="secondary" className="w-fit text-xs">
                         {BLOG_CATEGORIES[related.category]}

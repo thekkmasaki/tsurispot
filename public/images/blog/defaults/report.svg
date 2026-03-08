@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ccfbf1"/>
+      <stop offset="100%" style="stop-color:#5eead4"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#bg)"/>
+  <!-- Camera icon -->
+  <g transform="translate(400,145)" opacity="0.5">
+    <rect x="-45" y="-25" width="90" height="60" rx="8" fill="#0d9488" opacity="0.2"/>
+    <rect x="-45" y="-25" width="90" height="60" rx="8" fill="none" stroke="#0f766e" stroke-width="2.5"/>
+    <path d="M-15,-25 L-10,-38 L10,-38 L15,-25" fill="none" stroke="#0f766e" stroke-width="2"/>
+    <circle cx="0" cy="5" r="18" fill="none" stroke="#0f766e" stroke-width="2.5"/>
+    <circle cx="0" cy="5" r="10" fill="#0d9488" opacity="0.2"/>
+    <circle cx="0" cy="5" r="4" fill="#0f766e" opacity="0.3"/>
+    <!-- Flash -->
+    <circle cx="28" cy="-15" r="4" fill="#0f766e" opacity="0.3"/>
+  </g>
+  <!-- Fish catch illustration -->
+  <g transform="translate(300,200)" opacity="0.2">
+    <ellipse cx="0" cy="0" rx="22" ry="10" fill="#0f766e"/>
+    <path d="M-22,0 Q-32,-10 -22,-10 Q-27,0 -22,10 Q-32,10 -22,0Z" fill="#0f766e"/>
+    <circle cx="12" cy="-3" r="2" fill="#ccfbf1"/>
+  </g>
+  <g transform="translate(520,180)" opacity="0.15">
+    <ellipse cx="0" cy="0" rx="18" ry="8" fill="#0f766e"/>
+    <path d="M-18,0 Q-26,-8 -18,-8 Q-22,0 -18,8 Q-26,8 -18,0Z" fill="#0f766e"/>
+  </g>
+  <!-- Waves -->
+  <path d="M0,310 Q100,295 200,310 Q300,325 400,310 Q500,295 600,310 Q700,325 800,310 L800,400 L0,400Z" fill="#14b8a6" opacity="0.2"/>
+  <path d="M0,340 Q100,325 200,340 Q300,355 400,340 Q500,325 600,340 Q700,355 800,340 L800,400 L0,400Z" fill="#0d9488" opacity="0.15"/>
+  <text x="400" y="278" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="600" fill="#0f766e" opacity="0.5">FISHING REPORT</text>
+  <text x="400" y="303" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#0d9488" opacity="0.4">tsurispot.com</text>
+</svg>

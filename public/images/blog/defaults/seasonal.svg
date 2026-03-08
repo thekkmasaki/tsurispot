@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#dcfce7"/>
+      <stop offset="100%" style="stop-color:#86efac"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#bg)"/>
+  <!-- Sun -->
+  <circle cx="600" cy="100" r="35" fill="#f59e0b" opacity="0.25"/>
+  <g transform="translate(600,100)" opacity="0.2">
+    <line x1="0" y1="-50" x2="0" y2="-60" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+    <line x1="35" y1="-35" x2="42" y2="-42" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+    <line x1="50" y1="0" x2="60" y2="0" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+    <line x1="-50" y1="0" x2="-60" y2="0" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+    <line x1="-35" y1="-35" x2="-42" y2="-42" stroke="#f59e0b" stroke-width="3" stroke-linecap="round"/>
+  </g>
+  <!-- Calendar icon -->
+  <g transform="translate(400,160)" opacity="0.5">
+    <rect x="-45" y="-40" width="90" height="80" rx="8" fill="#16a34a" opacity="0.2"/>
+    <rect x="-45" y="-40" width="90" height="80" rx="8" fill="none" stroke="#15803d" stroke-width="2.5"/>
+    <line x1="-45" y1="-15" x2="45" y2="-15" stroke="#15803d" stroke-width="2"/>
+    <line x1="-20" y1="-50" x2="-20" y2="-35" stroke="#15803d" stroke-width="3" stroke-linecap="round"/>
+    <line x1="20" y1="-50" x2="20" y2="-35" stroke="#15803d" stroke-width="3" stroke-linecap="round"/>
+    <!-- Calendar dots -->
+    <circle cx="-25" cy="5" r="4" fill="#15803d" opacity="0.4"/>
+    <circle cx="0" cy="5" r="4" fill="#15803d" opacity="0.4"/>
+    <circle cx="25" cy="5" r="4" fill="#15803d" opacity="0.4"/>
+    <circle cx="-25" cy="25" r="4" fill="#15803d" opacity="0.4"/>
+    <circle cx="0" cy="25" r="4" fill="#16a34a" opacity="0.7"/>
+  </g>
+  <!-- Waves -->
+  <path d="M0,330 Q100,310 200,330 Q300,350 400,330 Q500,310 600,330 Q700,350 800,330 L800,400 L0,400Z" fill="#22c55e" opacity="0.15"/>
+  <text x="400" y="280" text-anchor="middle" font-family="sans-serif" font-size="18" font-weight="600" fill="#15803d" opacity="0.5">SEASONAL GUIDE</text>
+  <text x="400" y="305" text-anchor="middle" font-family="sans-serif" font-size="13" fill="#16a34a" opacity="0.4">tsurispot.com</text>
+</svg>

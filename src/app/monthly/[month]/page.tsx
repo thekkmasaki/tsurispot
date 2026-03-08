@@ -350,7 +350,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-2">
                 <h1 className="text-2xl font-bold sm:text-3xl">
-                  {guide.nameJa}に釣れる魚一覧
+                  {guide.nameJa}の釣り｜今釣れる魚・おすすめ釣り方
                 </h1>
                 {isCurrentMonth && (
                   <Badge variant="default" className="text-sm">

@@ -53,8 +53,6 @@ interface WeatherData {
   currentWindDirection: number;
   // Daily forecasts (14 days)
   daily: DailyWeatherData[];
-  // Warnings (today only)
-  warnings: string[];
 }
 
 interface TideInfo {
@@ -202,62 +200,6 @@ function getTideInfo(moonAge: number, lng: number): TideInfo {
   };
 }
 
-// 緯度経度から最寄りの気象庁地域コードを推定し、警報・注意報を取得
-async function fetchJmaWarnings(lat: number, lng: number): Promise<string[]> {
-  try {
-    // 気象庁の警報・注意報JSON（全国一括）
-    const res = await fetch("https://www.jma.go.jp/bosai/warning/data/warning/overview.json");
-    if (!res.ok) return [];
-    const data: { office: string; areaName: string; warnings?: string; status?: string }[] = await res.json();
-    if (!Array.isArray(data)) return [];
-
-    // 地域名からマッチングするため、都道府県名を緯度経度から推定
-    const prefName = estimatePrefecture(lat, lng);
-    if (!prefName) return [];
-
-    const warnings: string[] = [];
-    for (const entry of data) {
-      if (entry.areaName?.includes(prefName) && entry.status && entry.status !== "なし" && entry.status !== "") {
-        if (entry.warnings) warnings.push(entry.warnings);
-        if (entry.status) warnings.push(entry.status);
-      }
-    }
-    return warnings;
-  } catch {
-    return [];
-  }
-}
-
-// 緯度経度から都道府県名を推定（簡易版）
-function estimatePrefecture(lat: number, lng: number): string {
-  // 主要な都道府県の緯度経度中心から最も近いものを返す
-  const prefs: [string, number, number][] = [
-    ["北海道", 43.06, 141.35], ["青森", 40.82, 140.74], ["岩手", 39.70, 141.15],
-    ["宮城", 38.27, 140.87], ["秋田", 39.72, 140.10], ["山形", 38.24, 140.33],
-    ["福島", 37.75, 140.47], ["茨城", 36.34, 140.45], ["栃木", 36.57, 139.88],
-    ["群馬", 36.39, 139.06], ["埼玉", 35.86, 139.65], ["千葉", 35.60, 140.12],
-    ["東京", 35.68, 139.69], ["神奈川", 35.45, 139.64], ["新潟", 37.90, 139.02],
-    ["富山", 36.69, 137.21], ["石川", 36.59, 136.63], ["福井", 36.07, 136.22],
-    ["山梨", 35.66, 138.57], ["長野", 36.23, 138.18], ["岐阜", 35.39, 136.72],
-    ["静岡", 34.98, 138.38], ["愛知", 35.18, 136.91], ["三重", 34.73, 136.51],
-    ["滋賀", 35.00, 135.87], ["京都", 35.02, 135.77], ["大阪", 34.69, 135.52],
-    ["兵庫", 34.69, 135.18], ["奈良", 34.69, 135.83], ["和歌山", 34.23, 135.17],
-    ["鳥取", 35.50, 134.24], ["島根", 35.47, 133.05], ["岡山", 34.66, 133.93],
-    ["広島", 34.40, 132.46], ["山口", 34.19, 131.47], ["徳島", 34.07, 134.56],
-    ["香川", 34.34, 134.04], ["愛媛", 33.84, 132.77], ["高知", 33.56, 133.53],
-    ["福岡", 33.61, 130.42], ["佐賀", 33.25, 130.30], ["長崎", 32.74, 129.87],
-    ["熊本", 32.79, 130.74], ["大分", 33.24, 131.61], ["宮崎", 31.91, 131.42],
-    ["鹿児島", 31.56, 130.56], ["沖縄", 26.34, 127.80],
-  ];
-  let nearest = prefs[0][0];
-  let minDist = Infinity;
-  for (const [name, plat, plng] of prefs) {
-    const d = (lat - plat) ** 2 + (lng - plng) ** 2;
-    if (d < minDist) { minDist = d; nearest = name; }
-  }
-  return nearest;
-}
-
 function FishingScoreBar({ score }: { score: number }) {
   return (
     <div className="flex items-center gap-1.5">
@@ -327,10 +269,7 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
           `https://marine-api.open-meteo.com/v1/marine?latitude=${lat}&longitude=${lng}&daily=sea_surface_temperature_max&timezone=Asia%2FTokyo&forecast_days=14`
         ).then(r => r.json()).catch(() => null);
 
-        // 気象庁警報・注意報API
-        const warningPromise = fetchJmaWarnings(lat, lng);
-
-        const [data, marine, warnings] = await Promise.all([weatherPromise, marinePromise, warningPromise]);
+        const [data, marine] = await Promise.all([weatherPromise, marinePromise]);
 
         // 14日間のdailyデータを構築
         const dailyData: DailyWeatherData[] = [];
@@ -354,7 +293,6 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
           currentWindSpeed: data.current.wind_speed_10m,
           currentWindDirection: data.current.wind_direction_10m,
           daily: dailyData,
-          warnings,
         });
       } catch {
         // API失敗時は天気表示なし
@@ -789,28 +727,6 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
 
           return null;
         })()}
-
-        {/* 警報・注意報（今日のみ表示） */}
-        {isToday && weather && weather.warnings.length > 0 && (
-          <div className="mt-3 rounded-lg bg-amber-50 border border-amber-200 px-3 py-2">
-            <div className="flex items-center gap-1.5 mb-1">
-              <AlertTriangle className="h-3.5 w-3.5 text-amber-600" />
-              <span className="text-xs font-semibold text-amber-700">注意報・警報</span>
-            </div>
-            <p className="text-xs text-amber-700 leading-relaxed">
-              {weather.warnings.join("、")}
-            </p>
-          </div>
-        )}
-
-        {isToday && weather && weather.warnings.length === 0 && (weather.currentWindSpeed / 3.6) < 5 && (
-          <div className="mt-3 rounded-lg bg-emerald-50 border border-emerald-200 px-3 py-2">
-            <div className="flex items-center gap-1.5">
-              <ShieldAlert className="h-3.5 w-3.5 text-emerald-600" />
-              <span className="text-xs text-emerald-700">警報：なし　注意報：なし</span>
-            </div>
-          </div>
-        )}
 
         <p className="mt-2 text-[10px] text-muted-foreground">
           ※ 天気・水温はOpen-Meteoの予報データ。潮汐は月齢に基づく概算値で、実際の潮位とは異なる場合があります。

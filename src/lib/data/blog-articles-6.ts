@@ -176,9 +176,9 @@ export const blogArticles6: BlogPost[] = [
     id: "52",
     slug: "chouka-shuho-akashi-kobe-2026-03-week1",
     title:
-      "【釣果週報】明石・神戸エリア 2026年3月第1週｜チヌ乗っ込み開幕！カレイも釣れ出し",
+      "【釣果週報】明石・神戸エリア 2026年3月第1週｜チヌ乗っ込み開幕、カレイも釣れ出し",
     description:
-      "2026年3月第1週の明石・神戸エリア釣果まとめ。須磨海づり公園でチヌ44.5cm、平磯でチヌ49.5cmの大物。アジュール舞子ではカレイ釣れ出し。明石沖の船釣りではフグが絶好調。スポット別に今狙うべきターゲットとタックルを解説。",
+      "2026年3月第1週の明石・神戸エリア陸っぱり釣果まとめ。須磨海づり公園でチヌ44.5cm、平磯でチヌ49.5cm。アジュール舞子ではカレイ釣れ出し。東二見人工島でもハネ・チヌの報告あり。スポット別に今狙うべきターゲットとタックルを解説。",
     category: "report",
     tags: [
       "釣果週報",
@@ -209,7 +209,7 @@ export const blogArticles6: BlogPost[] = [
 <p style="font-size:1.1em;line-height:1.8;color:#334155">
 明石・神戸エリアの<strong>2026年3月第1週</strong>の釣果情報をまとめました。<br/>
 須磨・平磯の海づり公園で<strong>チヌの乗っ込みが開幕</strong>、49.5cmの大物も上がっています。<br/>
-アジュール舞子では<strong>カレイが釣れ出し</strong>、明石沖の船釣りでは<strong>フグが絶好調</strong>。春の釣りシーズン到来です。
+アジュール舞子では<strong>カレイが釣れ出し</strong>、明石沖の船釣りでは<strong>フグがトップ22匹と好調</strong>です。
 </p>
 
 <h2>今週の釣果速報（一覧）</h2>
@@ -250,49 +250,35 @@ export const blogArticles6: BlogPost[] = [
 <tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc">
 <td style="padding:0.6em 0.8em;font-weight:600"><a href="/spots/ajuru-maiko">アジュール舞子</a></td>
 <td style="padding:0.6em 0.8em">カレイ</td>
-<td style="padding:0.6em 0.8em">—</td>
+<td style="padding:0.6em 0.8em">情報なし</td>
 <td style="padding:0.6em 0.8em">投げ釣り</td>
 <td style="padding:0.6em 0.8em;text-align:center">🔥🔥</td>
 </tr>
 <tr style="border-bottom:1px solid #e2e8f0">
 <td style="padding:0.6em 0.8em;font-weight:600"><a href="/spots/higashi-futami-jinkoto">東二見人工島</a></td>
 <td style="padding:0.6em 0.8em">ハネ・チヌ</td>
-<td style="padding:0.6em 0.8em">—</td>
+<td style="padding:0.6em 0.8em">情報なし</td>
 <td style="padding:0.6em 0.8em">エビ撒き</td>
-<td style="padding:0.6em 0.8em;text-align:center">🔥🔥🔥</td>
-</tr>
-<tr style="border-bottom:1px solid #e2e8f0;background:#f8fafc">
-<td style="padding:0.6em 0.8em;font-weight:600">明石沖（船）</td>
-<td style="padding:0.6em 0.8em">フグ</td>
-<td style="padding:0.6em 0.8em">トップ22匹</td>
-<td style="padding:0.6em 0.8em">船釣り（カットウ）</td>
-<td style="padding:0.6em 0.8em;text-align:center">🔥🔥🔥🔥🔥</td>
-</tr>
-<tr style="border-bottom:1px solid #e2e8f0">
-<td style="padding:0.6em 0.8em;font-weight:600">明石沖（船）</td>
-<td style="padding:0.6em 0.8em">メバル</td>
-<td style="padding:0.6em 0.8em">20〜30cm</td>
-<td style="padding:0.6em 0.8em">船釣り（胴突き）</td>
-<td style="padding:0.6em 0.8em;text-align:center">🔥🔥🔥</td>
+<td style="padding:0.6em 0.8em;text-align:center">🔥🔥</td>
 </tr>
 <tr style="background:#f8fafc">
-<td style="padding:0.6em 0.8em;font-weight:600">明石沖（船）</td>
-<td style="padding:0.6em 0.8em">マダイ</td>
-<td style="padding:0.6em 0.8em">45〜57cm</td>
-<td style="padding:0.6em 0.8em">船釣り（タイラバ）</td>
-<td style="padding:0.6em 0.8em;text-align:center">🔥🔥</td>
+<td style="padding:0.6em 0.8em;font-weight:600;color:#64748b">明石沖（船・参考）</td>
+<td style="padding:0.6em 0.8em;color:#64748b">フグ/メバル/マダイ</td>
+<td style="padding:0.6em 0.8em;color:#64748b">フグ トップ22匹</td>
+<td style="padding:0.6em 0.8em;color:#64748b">カットウ/胴突き/タイラバ</td>
+<td style="padding:0.6em 0.8em;text-align:center">—</td>
 </tr>
 </tbody>
 </table>
 </div>
 
-<p style="font-size:0.85em;color:#64748b">※好調度は今週の釣果情報と前週比で独自に評価。🔥が多いほど釣れています。</p>
+<p style="font-size:0.85em;color:#64748b">※好調度は今週の具体的な釣果報告数・サイズ・匹数に基づく評価です。</p>
 
 <hr style="margin:2.5em 0;border:none;border-top:2px solid #e2e8f0"/>
 
 <h2>① 須磨海づり公園 — チヌ乗っ込み開幕！</h2>
 
-<p>須磨海づり公園で<strong>チヌの乗っ込みが始まりました</strong>。今週は44.5cmの良型がエビ撒きで上がっています。水温は10.0〜10.5℃と、チヌが浅場に入ってくるギリギリのライン。これから水温が上がるにつれて、さらに期待が持てます。</p>
+<p>須磨海づり公園で<strong>チヌの乗っ込みが始まりました</strong>。今週は44.5cmの良型がエビ撒きで上がっています。水温は10.0〜10.5℃と、チヌが浅場に入ってくるギリギリのラインです。</p>
 
 <div style="margin:1.5em 0;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden">
 <div style="padding:0.8em 1em;background:#fafafa;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;gap:0.6em">
@@ -313,7 +299,7 @@ export const blogArticles6: BlogPost[] = [
 <li><strong>チヌ 44.5cm</strong>（エビ撒き釣り）</li>
 <li>水温：10.0〜10.5℃</li>
 <li>エサ：シラサエビ</li>
-<li>乗っ込み第一波、今後さらに型・数ともに上向く見込み</li>
+<li>乗っ込み第一波の様子</li>
 </ul>
 
 <h3>今週ここで狙うなら</h3>
@@ -329,7 +315,7 @@ export const blogArticles6: BlogPost[] = [
 
 <h2>② <a href="/spots/hiraiso-fishing-park">平磯海づり公園</a> — チヌ49.5cmの大物！</h2>
 
-<p><a href="/spots/hiraiso-fishing-park">平磯海づり公園</a>では、なんと<strong>49.5cmの年なしチヌ</strong>が上がりました。50cm目前の堂々たるサイズ。メバルも13〜20cmが顔を見せており、春の訪れを感じさせます。</p>
+<p><a href="/spots/hiraiso-fishing-park">平磯海づり公園</a>では<strong>49.5cmのチヌ</strong>が上がりました。メバルも13〜20cmが出ています。</p>
 
 <div style="margin:1.5em 0;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden">
 <div style="padding:0.8em 1em;background:#fafafa;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;gap:0.6em">
@@ -405,9 +391,9 @@ export const blogArticles6: BlogPost[] = [
 
 <hr style="margin:2.5em 0;border:none;border-top:2px solid #e2e8f0"/>
 
-<h2>④ <a href="/spots/higashi-futami-jinkoto">東二見人工島</a> — ハネ・チヌ好調</h2>
+<h2>④ <a href="/spots/higashi-futami-jinkoto">東二見人工島</a> — ハネ・チヌの報告あり</h2>
 
-<p><a href="/spots/higashi-futami-jinkoto">東二見人工島</a>では<strong>エビ撒き釣りでハネ（スズキの若魚）とチヌ</strong>が好調です。テトラ帯からの釣りがメインで、足元から水深があるのでエビ撒きとの相性が抜群。</p>
+<p><a href="/spots/higashi-futami-jinkoto">東二見人工島</a>では<strong>エビ撒き釣りでハネ（スズキの若魚）とチヌ</strong>の釣果報告があります。テトラ帯からの釣りがメインで、足元から水深があるのでエビ撒きとの相性が良いポイントです。</p>
 
 <div style="margin:1.5em 0;border:1px solid #e2e8f0;border-radius:12px;overflow:hidden">
 <div style="padding:0.8em 1em;background:#fafafa;border-bottom:1px solid #e2e8f0;display:flex;align-items:center;gap:0.6em">
@@ -430,7 +416,7 @@ export const blogArticles6: BlogPost[] = [
 <li>テトラ際のエビ撒きが最も実績あり</li>
 </ul>
 
-<p>東二見人工島は<a href="/spots/futami-jinkoutou">二見人工島</a>とも隣接していて、広い範囲で竿を出せます。先週の<a href="/blog/futami-jinkoutou-winter-2026">二見人工島釣行レポート</a>ではボウズでしたが、3月に入って状況は一変。水温の上昇とともに魚の活性が上がっています。</p>
+<p>東二見人工島は<a href="/spots/futami-jinkoutou">二見人工島</a>とも隣接していて、広い範囲で竿を出せます。先週の<a href="/blog/futami-jinkoutou-winter-2026">二見人工島釣行レポート</a>ではボウズでしたが、3月に入って釣果の報告が出ています。ただしサイズ・匹数の詳細は不明です。</p>
 
 <h3>今週ここで狙うなら</h3>
 <p>エビ撒きでハネを狙うなら、しっかりしたロッドが必要です。テトラ際でのやり取りになるので、パワーのある磯竿がおすすめ。</p>
@@ -443,9 +429,11 @@ export const blogArticles6: BlogPost[] = [
 
 <hr style="margin:2.5em 0;border:none;border-top:2px solid #e2e8f0"/>
 
-<h2>⑤ 明石沖（船釣り） — フグ絶好調・メバルも良型</h2>
+<h2>参考：明石沖の船釣り情報</h2>
 
-<p>今週のMVPは明石沖の<strong>船フグ</strong>。トップ22匹と文句なしの爆釣です。ガシラ（カサゴ）も40〜45匹/船と数釣りが楽しめています。メバルは20〜30cmの良型が揃い、マダイも45〜57cmと型が良い。</p>
+<p style="font-size:0.9em;color:#64748b">※以下は船釣り（遊漁船）の情報です。陸っぱりの釣果ではありません。</p>
+
+<p>明石沖の船フグはトップ22匹、ガシラも40〜45匹/船。メバル20〜30cm、マダイ45〜57cmの報告もあります。</p>
 
 <div style="margin:1.5em 0;display:flex;flex-direction:column;gap:0.8em">
 <div style="border:1px solid #e2e8f0;border-radius:12px;overflow:hidden">
@@ -457,7 +445,7 @@ export const blogArticles6: BlogPost[] = [
 </div>
 </div>
 <div style="padding:1em;font-size:0.9em;line-height:1.7;color:#334155">
-「フグ絶好調！トップ<strong>22匹</strong>。カットウ釣りでコンスタントに当たっています。ガシラも40〜45匹/船と数が出ています。」
+「フグ好調。トップ<strong>22匹</strong>。カットウ釣りで当たっています。ガシラも40〜45匹/船。」
 </div>
 <div style="padding:0.5em 1em;background:#f8fafc;font-size:0.75em;color:#94a3b8">出典：<a href="https://akashi-fish.com/fishing/" target="_blank" rel="noopener noreferrer" style="color:#0ea5e9;text-decoration:underline">海蓮丸</a></div>
 </div>
@@ -479,23 +467,23 @@ export const blogArticles6: BlogPost[] = [
 
 <h3>今週の実績</h3>
 <ul>
-<li><strong>フグ：トップ22匹</strong>（カットウ釣り）— 今週最も好調！</li>
-<li><strong>ガシラ：40〜45匹/船</strong>（胴突き）</li>
-<li><strong>メバル：20〜30cm</strong>（胴突き）— 良型揃い</li>
-<li><strong>マダイ：45〜57cm</strong>（タイラバ・鯛サビキ）</li>
+<li>フグ：トップ22匹（カットウ釣り）</li>
+<li>ガシラ：40〜45匹/船（胴突き）</li>
+<li>メバル：20〜30cm（胴突き）</li>
+<li>マダイ：45〜57cm（タイラバ・鯛サビキ）</li>
 </ul>
 
-<p>明石沖は船釣りのメッカ。海蓮丸、名田屋、魚英などの遊漁船から出船しています。フグのカットウ釣りは初心者でも比較的釣りやすく、この好調時なら二桁も十分狙えます。</p>
+<p style="font-size:0.9em;color:#64748b">海蓮丸、名田屋、魚英などの遊漁船から出船しています。</p>
 
 <hr style="margin:2.5em 0;border:none;border-top:2px solid #e2e8f0"/>
 
 <h2>今週の総評</h2>
 
-<p>3月に入り、明石・神戸エリアは<strong>冬から春への転換期</strong>に入りました。最大のトピックは<strong>チヌの乗っ込み開幕</strong>。須磨・平磯の海づり公園で40cm超の良型が連発しています。</p>
+<p>3月に入り、明石・神戸エリアは<strong>冬から春への転換期</strong>に入りました。最大のトピックは<strong>チヌの乗っ込み開幕</strong>。須磨で44.5cm、平磯で49.5cmの良型が上がっています。</p>
 
-<p>カレイもアジュール舞子で釣れ始め、投げ釣りファンには嬉しいニュース。これから4月にかけてサイズアップが期待できます。</p>
+<p>カレイもアジュール舞子で釣れ始めていますが、サイズ・匹数の詳細はまだ少ない状況です。陸っぱりは全体的にまだ本格化前で、スポットによってはボウズの可能性もあります。</p>
 
-<p>船釣りは絶好調。特にフグは今がピークで、トップ20匹超えの日も珍しくありません。陸っぱりでなかなか釣果が出ない方は、思い切って船に乗ってみるのもおすすめです。</p>
+<p>なお、明石沖の船釣りではフグのトップ22匹など好調な報告がありますが、あくまで船の情報です。</p>
 
 <div style="margin:2em 0;padding:1.2em;background:#fff1f2;border:1px solid #fecdd3;border-radius:12px">
 <p style="font-weight:700;color:#9f1239;margin:0 0 0.8em;font-size:0.95em">📱 SNSで最新釣果をチェック</p>

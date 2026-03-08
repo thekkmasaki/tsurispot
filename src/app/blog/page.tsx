@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getAllBlogPosts } from "@/lib/data/blog";
 import { FileText } from "lucide-react";
-import { BlogListClient } from "@/components/blog/blog-list-client";
+import { BlogListClient } from "@/components/blog/blog-list.client";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 // ISR: 1時間ごとに再検証（Vercel無料プランのISR Reads節約）

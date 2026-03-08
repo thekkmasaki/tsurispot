@@ -5,58 +5,33 @@ import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import {
-  ChevronRight,
-  Tag,
-  FileText,
-  BookOpen,
-  Package,
-  Calendar,
-  Target,
-  MapPin,
-  Shield,
-  Lightbulb,
-  Camera,
-} from "lucide-react";
+import { ChevronRight, Tag, FileText } from "lucide-react"; // icons
 import { BLOG_CATEGORIES, type BlogPost } from "@/lib/data/blog";
 
-const CATEGORY_THEME: Record<
-  BlogPost["category"],
-  { gradient: string; Icon: typeof BookOpen }
-> = {
-  beginner: { gradient: "from-blue-400 to-blue-600", Icon: BookOpen },
-  gear: { gradient: "from-orange-400 to-orange-600", Icon: Package },
-  seasonal: { gradient: "from-green-400 to-green-600", Icon: Calendar },
-  technique: { gradient: "from-purple-400 to-purple-600", Icon: Target },
-  "spot-guide": { gradient: "from-sky-400 to-sky-600", Icon: MapPin },
-  manner: { gradient: "from-amber-400 to-amber-600", Icon: Shield },
-  knowledge: { gradient: "from-indigo-400 to-indigo-600", Icon: Lightbulb },
-  report: { gradient: "from-teal-400 to-teal-600", Icon: Camera },
+/** カテゴリ別のデフォルトサムネイル画像パス */
+const CATEGORY_DEFAULT_IMAGE: Record<BlogPost["category"], string> = {
+  beginner: "/images/blog/defaults/beginner.svg",
+  gear: "/images/blog/defaults/gear.svg",
+  seasonal: "/images/blog/defaults/seasonal.svg",
+  technique: "/images/blog/defaults/technique.svg",
+  "spot-guide": "/images/blog/defaults/spot-guide.svg",
+  manner: "/images/blog/defaults/manner.svg",
+  knowledge: "/images/blog/defaults/knowledge.svg",
+  report: "/images/blog/defaults/report.svg",
 };
 
 function BlogThumbnail({ post }: { post: BlogPost }) {
-  const theme = CATEGORY_THEME[post.category];
-  const IconComp = theme.Icon;
-
-  if (post.image) {
-    return (
-      <div className="relative h-40 w-full shrink-0 overflow-hidden sm:h-auto sm:w-[120px]">
-        <Image
-          src={post.image}
-          alt={post.title}
-          fill
-          className="object-cover"
-          sizes="(max-width: 640px) 100vw, 120px"
-        />
-      </div>
-    );
-  }
+  const imageSrc = post.image || CATEGORY_DEFAULT_IMAGE[post.category];
 
   return (
-    <div
-      className={`flex h-40 w-full shrink-0 items-center justify-center bg-gradient-to-br ${theme.gradient} sm:h-auto sm:w-[120px]`}
-    >
-      <IconComp className="size-10 text-white/80" />
+    <div className="relative h-40 w-full shrink-0 overflow-hidden sm:h-auto sm:w-[120px]">
+      <Image
+        src={imageSrc}
+        alt={post.title}
+        fill
+        className="object-cover"
+        sizes="(max-width: 640px) 100vw, 120px"
+      />
     </div>
   );
 }

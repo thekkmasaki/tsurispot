@@ -23,23 +23,21 @@ export function CookieBanner() {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 p-4 shadow-lg md:bottom-4 md:left-auto md:right-4 md:max-w-md md:rounded-lg md:border">
-      <p className="text-sm text-muted-foreground">
-        当サイトでは、サービス向上やアクセス解析のためにCookieを使用しています。
-        サイトの利用を続けることで、Cookieの使用に同意したものとみなします。
-        詳しくは
-        <Link
-          href="/privacy"
-          className="text-primary underline underline-offset-4 hover:text-primary/80"
-        >
-          プライバシーポリシー
-        </Link>
-        をご確認ください。
-      </p>
-      <div className="mt-3 flex items-center justify-end gap-3">
+    <div className="fixed bottom-0 left-0 right-0 z-50 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 px-3 py-2 shadow-lg md:px-4 md:py-2.5">
+      <div className="mx-auto flex max-w-screen-xl items-center justify-between gap-3">
+        <p className="text-xs text-muted-foreground md:text-sm">
+          <span className="hidden sm:inline">当サイトではCookieを使用しています。</span>
+          <span className="sm:hidden">Cookie使用に同意しますか？</span>
+          <Link
+            href="/privacy"
+            className="ml-1 text-primary underline underline-offset-2 hover:text-primary/80"
+          >
+            詳細
+          </Link>
+        </p>
         <button
           onClick={handleAccept}
-          className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+          className="shrink-0 rounded bg-primary px-3 py-1 text-xs font-medium text-primary-foreground hover:bg-primary/90 transition-colors md:px-4 md:py-1.5 md:text-sm"
         >
           同意する
         </button>

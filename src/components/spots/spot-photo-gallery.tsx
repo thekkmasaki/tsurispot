@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Camera, X, ChevronLeft, ChevronRight, Mail } from "lucide-react";
+import { Camera, X, ChevronLeft, ChevronRight, ImagePlus, MapPin, Fish } from "lucide-react";
 import type { SpotPhoto } from "@/types";
 
 const SPOT_TYPE_DEFAULT_IMAGES: Record<string, { src: string; label: string }> = {
@@ -15,7 +15,46 @@ const SPOT_TYPE_DEFAULT_IMAGES: Record<string, { src: string; label: string }> =
   pier: { src: "/images/spot-types/pier.svg", label: "桟橋" },
 };
 
+const SPOT_TYPE_FEATURES: Record<string, { emoji: string; features: string[]; scenery: string }> = {
+  breakwater: {
+    emoji: "🏗️",
+    features: ["足場が安定", "柵があり安全", "ファミリー向け"],
+    scenery: "コンクリートの堤防から広がる海の景色が楽しめます",
+  },
+  port: {
+    emoji: "⚓",
+    features: ["常夜灯あり", "足場が良い", "車横付け可能な場所も"],
+    scenery: "漁船が停泊する港の風景の中で釣りが楽しめます",
+  },
+  beach: {
+    emoji: "🏖️",
+    features: ["広大な砂浜", "遠投が可能", "サーフキャスティング向き"],
+    scenery: "開放的な砂浜と波打ち際の美しい景観が広がります",
+  },
+  rocky: {
+    emoji: "🪨",
+    features: ["大物が期待", "潮通し良好", "上級者向け"],
+    scenery: "ダイナミックな岩場と磯の自然が広がっています",
+  },
+  river: {
+    emoji: "🌊",
+    features: ["汽水域の豊富な魚種", "潮の影響あり", "シーバス好ポイント"],
+    scenery: "川と海が交わる独特の水辺環境が見られます",
+  },
+  pier: {
+    emoji: "🌉",
+    features: ["水深がある", "足場が安定", "初心者も安心"],
+    scenery: "桟橋から見下ろす澄んだ水面が魅力です",
+  },
+};
+
 const DEFAULT_IMAGE = { src: "/images/spot-types/other.svg", label: "釣りスポット" };
+
+const DEFAULT_FEATURES = {
+  emoji: "🎣",
+  features: ["多彩な魚種", "自然豊かな環境", "四季の変化を楽しめる"],
+  scenery: "自然に囲まれた釣りスポットの景色が楽しめます",
+};
 
 interface SpotPhotoGalleryProps {
   photos?: SpotPhoto[];
@@ -29,31 +68,76 @@ export function SpotPhotoGallery({ photos, spotType, spotName }: SpotPhotoGaller
 
   if (!hasPhotos) {
     const defaultImg = SPOT_TYPE_DEFAULT_IMAGES[spotType] || DEFAULT_IMAGE;
+    const typeFeatures = SPOT_TYPE_FEATURES[spotType] || DEFAULT_FEATURES;
     return (
       <div>
         <h2 className="mb-3 flex items-center gap-2 text-lg font-bold sm:mb-4">
           <Camera className="size-5" />
           釣り場の様子
         </h2>
-        <div className="relative aspect-video max-w-lg overflow-hidden rounded-lg bg-muted">
-          <Image
-            src={defaultImg.src}
-            alt={`${spotName}（${defaultImg.label}）のイメージ`}
-            fill
-            className="object-cover"
-            sizes="(max-width: 768px) 100vw, 512px"
-          />
-          <div className="absolute inset-0 flex flex-col items-center justify-end bg-gradient-to-t from-black/40 to-transparent p-4">
-            <p className="text-sm text-white/90">
-              {spotName}の写真はまだ登録されていません
+
+        <div className="overflow-hidden rounded-xl border bg-card">
+          {/* Type illustration with overlay */}
+          <div className="relative aspect-[2/1] sm:aspect-[5/2] overflow-hidden bg-muted">
+            <Image
+              src={defaultImg.src}
+              alt={`${spotName}（${defaultImg.label}）のイメージイラスト`}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 640px"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+            <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-gray-700 backdrop-blur-sm">
+                <MapPin className="size-3" />
+                {defaultImg.label}タイプ
+              </span>
+            </div>
+          </div>
+
+          {/* Content area */}
+          <div className="p-4 sm:p-5">
+            {/* Spot type features */}
+            <p className="mb-3 text-sm text-muted-foreground">
+              {typeFeatures.scenery}
             </p>
-            <Link
-              href="/contact"
-              className="mt-2 inline-flex items-center gap-1.5 rounded-md bg-white/90 px-3 py-1.5 text-xs font-medium text-gray-800 transition-colors hover:bg-white"
-            >
-              <Mail className="size-3.5" />
-              写真を投稿する
-            </Link>
+
+            <div className="mb-4 flex flex-wrap gap-2">
+              {typeFeatures.features.map((feature) => (
+                <span
+                  key={feature}
+                  className="inline-flex items-center gap-1 rounded-full bg-blue-50 px-2.5 py-1 text-xs font-medium text-blue-700 dark:bg-blue-950/50 dark:text-blue-300"
+                >
+                  <Fish className="size-3 shrink-0" />
+                  {feature}
+                </span>
+              ))}
+            </div>
+
+            {/* Divider */}
+            <div className="mb-4 border-t" />
+
+            {/* Photo submission CTA */}
+            <div className="flex flex-col items-center gap-3 rounded-lg bg-gradient-to-br from-blue-50 to-sky-50 p-4 text-center dark:from-blue-950/30 dark:to-sky-950/30 sm:flex-row sm:text-left">
+              <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/50">
+                <ImagePlus className="size-6 text-blue-600 dark:text-blue-400" />
+              </div>
+              <div className="flex-1">
+                <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                  {spotName}の写真を募集中！
+                </p>
+                <p className="mt-0.5 text-xs text-muted-foreground">
+                  釣り場の雰囲気が伝わる写真をお持ちの方はぜひお寄せください。あなたの写真が釣り仲間の参考になります。
+                </p>
+              </div>
+              <Link
+                href="/contact"
+                className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-blue-700 hover:shadow-md active:scale-[0.98]"
+              >
+                <Camera className="size-4" />
+                写真を投稿する
+              </Link>
+            </div>
           </div>
         </div>
       </div>
