@@ -6,6 +6,7 @@ import { MobileNav } from "@/components/layout/mobile-nav";
 import { Footer } from "@/components/layout/footer";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { PWARegister } from "@/components/pwa-register";
+import { PWAInstallHint } from "@/components/pwa-install-hint";
 import { CookieBanner } from "@/components/layout/cookie-banner";
 import { BackToTop } from "@/components/ui/back-to-top";
 import { CompareBar } from "@/components/spots/compare-bar";
@@ -203,6 +204,7 @@ export default function RootLayout({
         <main className="min-h-screen pb-20 md:pb-0">{children}</main>
         <Footer />
         <MobileNav />
+        <PWAInstallHint />
         <CompareBar />
         <BackToTop />
         <CookieBanner />
