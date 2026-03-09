@@ -6,7 +6,13 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/shops/*/dashboard", "/spots/submit", "/favorites"],
+        disallow: [
+          "/shops/*/dashboard",
+          "/spots/submit",
+          "/favorites",
+          "/*/opengraph-image",
+          "/api/og",
+        ],
       },
       {
         userAgent: "Googlebot",
