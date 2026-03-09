@@ -1258,7 +1258,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.6, reviewCount: 178,
     catchableFish: [
-      { fish: fish("chinu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "投げ釣り" },
       { fish: fish("tachiuo"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ワインド" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -1300,7 +1300,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
       { fish: fish("buri"), monthStart: 9, monthEnd: 1, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("kanpachi"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("chinu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ウキフカセ" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
     tideAdvice: tideStandard, mazumeInfo: mazumeKyushu,
@@ -1356,7 +1356,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.4, reviewCount: 65,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
-      { fish: fish("chinu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
     ],
     bestTimes: btEvening, tackleRecommendations: [],
@@ -1398,7 +1398,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.6, reviewCount: 205,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("chinu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("saba"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "サビキ釣り" },
       { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
     ],
@@ -1439,7 +1439,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
       { fish: fish("tachiuo"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ワインド" },
       { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("chinu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
     ],
     bestTimes: btNight, tackleRecommendations: [],
     tideAdvice: tidePort, mazumeInfo: mazumeKyushu,
@@ -1458,7 +1458,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "投げ釣り" },
-      { fish: fish("chinu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
     ],
     bestTimes: btAllDay, tackleRecommendations: [],
     tideAdvice: tidePort, mazumeInfo: mazumeKyushu,
@@ -1555,7 +1555,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.6, reviewCount: 72,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("chinu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 1, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
     ],
     bestTimes: btEvening, tackleRecommendations: [],
@@ -1575,7 +1575,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kanpachi"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
-      { fish: fish("chinu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
     tideAdvice: tideStandard, mazumeInfo: mazumeKyushu,
@@ -1651,7 +1651,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.5, reviewCount: 125,
     catchableFish: [
       { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
-      { fish: fish("chinu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ワインド" },
     ],
@@ -1672,7 +1672,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("buri"), monthStart: 10, monthEnd: 2, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("chinu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
@@ -1695,7 +1695,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.8, reviewCount: 245,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("chinu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
     ],
     bestTimes: btEvening, tackleRecommendations: [],
@@ -1714,7 +1714,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.4, reviewCount: 128,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("chinu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ウキフカセ" },
     ],
     bestTimes: btEvening, tackleRecommendations: [],
     tideAdvice: tideReef, mazumeInfo: mazumeOkinawa,
@@ -1731,7 +1731,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.5, reviewCount: 155,
     catchableFish: [
-      { fish: fish("chinu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "投げ釣り" },
     ],
@@ -1751,7 +1751,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.6, reviewCount: 112,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("chinu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("aoriika"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
     ],
     bestTimes: btEvening, tackleRecommendations: [],
@@ -1770,7 +1770,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.5, reviewCount: 198,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("chinu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "打ち込み釣り" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "打ち込み釣り" },
       { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
     ],
     bestTimes: btEvening, tackleRecommendations: [],
@@ -1790,7 +1790,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kanpachi"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
-      { fish: fish("chinu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "打ち込み釣り" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "打ち込み釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
     tideAdvice: tidePort, mazumeInfo: mazumeOkinawa,
@@ -1807,7 +1807,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.7, reviewCount: 138,
     catchableFish: [
-      { fish: fish("chinu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("aoriika"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
     ],
@@ -1826,7 +1826,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.6, reviewCount: 185,
     catchableFish: [
-      { fish: fish("chinu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "投げ釣り" },
     ],
@@ -1846,7 +1846,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.5, reviewCount: 145,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("chinu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ウキフカセ" },
       { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
     ],
     bestTimes: btEvening, tackleRecommendations: [],
@@ -1865,7 +1865,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.5, reviewCount: 102,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("chinu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "打ち込み釣り" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "打ち込み釣り" },
       { fish: fish("aoriika"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
     ],
     bestTimes: btEvening, tackleRecommendations: [],
@@ -1903,7 +1903,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.4, reviewCount: 42,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("chinu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
     ],
     bestTimes: btAllDay, tackleRecommendations: [],
     tideAdvice: tidePort, mazumeInfo: mazumeOkinawa,
@@ -1921,7 +1921,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.7, reviewCount: 168,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("chinu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "打ち込み釣り" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "打ち込み釣り" },
       { fish: fish("kanpachi"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
@@ -1940,7 +1940,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.6, reviewCount: 75,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("chinu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("aoriika"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
     ],
     bestTimes: btEvening, tackleRecommendations: [],
@@ -1978,7 +1978,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.6, reviewCount: 195,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("chinu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "打ち込み釣り" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "打ち込み釣り" },
       { fish: fish("kanpachi"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
@@ -1996,7 +1996,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 4.0, reviewCount: 82,
     catchableFish: [
-      { fish: fish("chinu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("mejina"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "ウキフカセ" },
       { fish: fish("aoriika"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
     ],
@@ -2016,7 +2016,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.8, reviewCount: 72,
     catchableFish: [
       { fish: fish("kanpachi"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
-      { fish: fish("chinu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
     tideAdvice: tideReef, mazumeInfo: mazumeOkinawa,
@@ -2035,7 +2035,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kanpachi"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
-      { fish: fish("chinu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "打ち込み釣り" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "打ち込み釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
     tideAdvice: tideReef, mazumeInfo: mazumeOkinawa,
@@ -2054,7 +2054,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("kanpachi"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("buri"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
-      { fish: fish("chinu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
     tideAdvice: tideReef, mazumeInfo: mazumeOkinawa,
