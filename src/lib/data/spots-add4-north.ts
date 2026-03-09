@@ -1,0 +1,442 @@
+import { FishingSpot, FishSpecies, Region } from "@/types";
+import { getFishBySlug } from "./fish";
+import { regions } from "./regions";
+
+function fish(slug: string): FishSpecies {
+  const f = getFishBySlug(slug);
+  if (!f) throw new Error(`Fish not found: ${slug}`);
+  return f;
+}
+
+function region(id: string) {
+  const r = regions.find((r) => r.id === id);
+  if (!r) throw new Error(`Region not found: ${id}`);
+  return r;
+}
+
+const localRegions: Region[] = [
+  { id: "rn4001", prefecture: "北海道", areaName: "道南・函館", slug: "hokkaido-donan-hakodate" },
+  { id: "rn4002", prefecture: "北海道", areaName: "道南・松前・江差", slug: "hokkaido-donan-matsumae-esashi" },
+  { id: "rn4003", prefecture: "北海道", areaName: "道央・室蘭・苫小牧", slug: "hokkaido-doou-muroran-tomakomai" },
+  { id: "rn4004", prefecture: "北海道", areaName: "道央・小樽・積丹", slug: "hokkaido-doou-otaru-shakotan" },
+  { id: "rn4005", prefecture: "北海道", areaName: "道央・石狩・留萌", slug: "hokkaido-doou-ishikari-rumoi" },
+  { id: "rn4006", prefecture: "北海道", areaName: "道北・稚内・宗谷", slug: "hokkaido-dohoku-wakkanai-soya" },
+  { id: "rn4007", prefecture: "北海道", areaName: "道東・釧路・根室", slug: "hokkaido-dotou-kushiro-nemuro" },
+  { id: "rn4008", prefecture: "北海道", areaName: "道東・網走・紋別", slug: "hokkaido-dotou-abashiri-monbetsu" },
+  { id: "rn4010", prefecture: "青森県", areaName: "八戸・三沢", slug: "aomori-hachinohe-misawa" },
+  { id: "rn4011", prefecture: "青森県", areaName: "津軽・龍飛", slug: "aomori-tsugaru-tappi" },
+  { id: "rn4012", prefecture: "青森県", areaName: "下北・むつ", slug: "aomori-shimokita-mutsu" },
+  { id: "rn4020", prefecture: "岩手県", areaName: "宮古・釜石", slug: "iwate-miyako-kamaishi" },
+  { id: "rn4021", prefecture: "岩手県", areaName: "大船渡・陸前高田", slug: "iwate-ofunato-rikuzentakata" },
+  { id: "rn4030", prefecture: "宮城県", areaName: "仙台・塩釜", slug: "miyagi-sendai-shiogama" },
+  { id: "rn4031", prefecture: "宮城県", areaName: "石巻・女川", slug: "miyagi-ishinomaki-onagawa" },
+  { id: "rn4032", prefecture: "宮城県", areaName: "気仙沼・南三陸", slug: "miyagi-kesennuma-minamisanriku" },
+  { id: "rn4040", prefecture: "秋田県", areaName: "秋田・男鹿", slug: "akita-akita-oga" },
+  { id: "rn4041", prefecture: "秋田県", areaName: "能代・八森", slug: "akita-noshiro-hachimori" },
+  { id: "rn4050", prefecture: "山形県", areaName: "酒田・鶴岡", slug: "yamagata-sakata-tsuruoka" },
+  { id: "rn4060", prefecture: "福島県", areaName: "いわき・小名浜", slug: "fukushima-iwaki-onahama" },
+  { id: "rn4061", prefecture: "福島県", areaName: "相馬・新地", slug: "fukushima-soma-shinchi" },
+  { id: "rn4070", prefecture: "新潟県", areaName: "新潟市・新潟東港", slug: "niigata-city-higashikou" },
+  { id: "rn4071", prefecture: "新潟県", areaName: "上越・糸魚川", slug: "niigata-jouetsu-itoigawa" },
+  { id: "rn4072", prefecture: "新潟県", areaName: "佐渡", slug: "niigata-sado" },
+  { id: "rn4073", prefecture: "新潟県", areaName: "柏崎・出雲崎", slug: "niigata-kashiwazaki-izumozaki" },
+  { id: "rn4080", prefecture: "富山県", areaName: "富山・射水", slug: "toyama-toyama-imizu" },
+  { id: "rn4081", prefecture: "富山県", areaName: "氷見・高岡", slug: "toyama-himi-takaoka" },
+  { id: "rn4082", prefecture: "富山県", areaName: "黒部・魚津", slug: "toyama-kurobe-uozu" },
+  { id: "rn4090", prefecture: "石川県", areaName: "金沢・内灘", slug: "ishikawa-kanazawa-uchinada" },
+  { id: "rn4091", prefecture: "石川県", areaName: "能登・輪島", slug: "ishikawa-noto-wajima" },
+  { id: "rn4092", prefecture: "石川県", areaName: "加賀・小松", slug: "ishikawa-kaga-komatsu" },
+  { id: "rn4100", prefecture: "福井県", areaName: "敦賀・美浜", slug: "fukui-tsuruga-mihama" },
+  { id: "rn4101", prefecture: "福井県", areaName: "越前・三国", slug: "fukui-echizen-mikuni" },
+  { id: "rn4102", prefecture: "福井県", areaName: "小浜・高浜", slug: "fukui-obama-takahama" },
+];
+
+function localRegion(id: string) {
+  return localRegions.find((r) => r.id === id) || region(id);
+}
+
+const mazumeNorth = {
+  springSunrise: "4:30頃", springSunset: "18:20頃",
+  summerSunrise: "4:00頃", summerSunset: "19:10頃",
+  autumnSunrise: "5:20頃", autumnSunset: "17:00頃",
+  winterSunrise: "6:50頃", winterSunset: "16:00頃",
+  tip: "北海道・東北は冬場の日照時間が短いため、朝夕マヅメの時間帯を逃さないことが重要です。",
+};
+
+const mazumeHokuriku = {
+  springSunrise: "5:20頃", springSunset: "18:30頃",
+  summerSunrise: "4:40頃", summerSunset: "19:15頃",
+  autumnSunrise: "5:40頃", autumnSunset: "17:20頃",
+  winterSunrise: "6:50頃", winterSunset: "16:40頃",
+  tip: "北陸は日本海側特有の荒天に注意。凪の日を狙って釣行するのがベスト。",
+};
+
+const btMorning = [
+  { label: "朝マヅメ", timeRange: "4:30〜7:00", rating: "best" as const },
+  { label: "日中", timeRange: "9:00〜14:00", rating: "good" as const },
+  { label: "夕マヅメ", timeRange: "16:00〜18:00", rating: "good" as const },
+  { label: "夜", timeRange: "19:00〜22:00", rating: "fair" as const },
+];
+const btEvening = [
+  { label: "朝マヅメ", timeRange: "4:30〜7:00", rating: "good" as const },
+  { label: "日中", timeRange: "9:00〜14:00", rating: "fair" as const },
+  { label: "夕マヅメ", timeRange: "16:00〜18:30", rating: "best" as const },
+  { label: "夜", timeRange: "19:00〜22:00", rating: "good" as const },
+];
+const btNight = [
+  { label: "朝マヅメ", timeRange: "4:30〜7:00", rating: "good" as const },
+  { label: "日中", timeRange: "9:00〜14:00", rating: "fair" as const },
+  { label: "夕マヅメ", timeRange: "16:00〜18:00", rating: "good" as const },
+  { label: "夜", timeRange: "19:00〜23:00", rating: "best" as const },
+];
+const btAllDay = [
+  { label: "朝", timeRange: "5:00〜8:00", rating: "best" as const },
+  { label: "日中", timeRange: "9:00〜15:00", rating: "good" as const },
+  { label: "夕方", timeRange: "15:00〜18:00", rating: "best" as const },
+  { label: "夜", timeRange: "19:00〜21:00", rating: "fair" as const },
+];
+
+const tideStandard = { bestTide: "中潮〜大潮", bestTidePhase: "上げ潮〜満潮前後", description: "潮が動く時間帯に回遊魚の活性が上がります。" };
+const tideSurf = { bestTide: "大潮〜中潮", bestTidePhase: "下げ始め", description: "サーフでは下げ潮で離岸流が発生し、魚が集まりやすくなります。" };
+const tideRocky = { bestTide: "中潮", bestTidePhase: "満潮前後", description: "磯場では満潮前後に魚が寄りやすく、根魚の活性も上がります。" };
+
+const gearSabiki = { targetFish: "アジ・サバ・イワシ", method: "サビキ釣り", difficulty: "beginner" as const, rod: "磯竿3号 3.6〜4.5m", reel: "スピニングリール 2500番", line: "ナイロン3号", hook: "サビキ仕掛け 5〜7号", otherItems: ["コマセカゴ", "アミエビ", "バケツ"], tip: "コマセを撒きすぎず、少しずつ出すのがコツ。" };
+const gearNage = { targetFish: "キス・カレイ", method: "投げ釣り", difficulty: "beginner" as const, rod: "投げ竿 3.9〜4.25m", reel: "スピニングリール 3000〜4000番", line: "ナイロン4号", hook: "流線針 7〜9号", otherItems: ["天秤オモリ 20〜25号", "青イソメ", "竿立て"], tip: "エサはイソメを房掛けにすると大型が食ってきます。" };
+const gearRock = { targetFish: "カサゴ・ソイ", method: "穴釣り・根魚釣り", difficulty: "beginner" as const, rod: "穴釣りロッド 1.1〜1.5m", reel: "小型両軸リール", line: "フロロ3号", hook: "ブラクリ 3〜5号", otherItems: ["アオイソメ", "サバの切り身"], tip: "テトラの隙間に落とし込み、底に着いたら少し持ち上げて待つ。" };
+const gearEging = { targetFish: "アオリイカ", method: "エギング", difficulty: "intermediate" as const, rod: "エギングロッド 8.6ft ML", reel: "スピニングリール 2500番", line: "PE 0.6号", hook: "エギ 3〜3.5号", otherItems: ["リーダー フロロ2号", "ギャフ", "イカ締めピック"], tip: "秋の新子シーズンは2.5号、春の親イカには3.5号のエギが有効。" };
+const gearLure = { targetFish: "シーバス", method: "ルアー釣り", difficulty: "intermediate" as const, rod: "シーバスロッド 9ft ML", reel: "スピニングリール 3000番", line: "PE 1号", hook: "ミノー 80〜120mm", otherItems: ["リーダー フロロ5号", "スナップ", "プライヤー"], tip: "常夜灯周りの明暗部を狙うのが基本。" };
+const gearUki = { targetFish: "クロダイ・メジナ", method: "ウキフカセ釣り", difficulty: "intermediate" as const, rod: "磯竿1.5〜2号 5.3m", reel: "スピニングリール 2500〜3000番", line: "ナイロン2号", hook: "チヌ針3〜4号", otherItems: ["ウキ", "オキアミ", "コマセ"], tip: "潮の流れに乗せてウキを流すのがコツ。" };
+const gearJig = { targetFish: "ブリ・イナダ", method: "ショアジギング", difficulty: "intermediate" as const, rod: "ショアジギングロッド M〜MH 10ft", reel: "スピニングリール 4000〜5000番", line: "PE 1〜1.5号", hook: "メタルジグ 30〜60g", otherItems: ["リーダー フロロ5号", "プライヤー"], tip: "朝マヅメの時合いに集中。ジャークのリズムを一定に保つ。" };
+const gearChoinage = { targetFish: "ハゼ・シロギス", method: "ちょい投げ", difficulty: "beginner" as const, rod: "万能竿 2.4〜3.6m", reel: "スピニングリール 2000〜2500番", line: "ナイロン2〜3号", hook: "流線針 6〜8号", otherItems: ["ナス型オモリ 5〜8号", "青イソメ", "バケツ"], tip: "足元から10〜30m程度に投げて底を探る。" };
+const gearMebaring = { targetFish: "メバル・ソイ", method: "メバリング", difficulty: "beginner" as const, rod: "メバリングロッド 7〜8ft UL", reel: "スピニングリール 1000〜2000番", line: "フロロ 2〜3lb", hook: "ジグヘッド 1〜3g + ワーム", otherItems: ["プラグ各種", "スナップ"], tip: "常夜灯の明暗部を軽いジグヘッドでスローに攻める。" };
+const gearKago = { targetFish: "マダイ・ホッケ", method: "カゴ釣り", difficulty: "intermediate" as const, rod: "遠投磯竿 3〜4号 4.5〜5.3m", reel: "スピニングリール 4000〜5000番", line: "ナイロン4〜6号", hook: "マダイ針 8〜10号", otherItems: ["カゴ天秤", "オキアミ", "コマセ"], tip: "潮に乗せて遠投し、コマセと同調させるのがポイント。" };
+const gearHokke = { targetFish: "ホッケ", method: "ウキ釣り・サビキ", difficulty: "beginner" as const, rod: "磯竿2〜3号 4.5m", reel: "スピニングリール 2500番", line: "ナイロン3号", hook: "ホッケ針 10〜12号", otherItems: ["ウキ", "オキアミ", "コマセ"], tip: "群れが入ればコマセでどんどん寄せて数釣りが楽しめます。" };
+
+export const northAdd4Spots: FishingSpot[] = [
+  // =========================================
+  // 北海道（30スポット: sn4001〜sn4030）
+  // =========================================
+  {
+    id: "sn4001", name: "鹿部漁港", slug: "shikabe-gyokou",
+    description: "噴火湾に面した道南の漁港。カレイやホッケの魚影が濃く、投げ釣りの好ポイント。間欠泉が近くにあり観光も楽しめる。",
+    latitude: 42.0380, longitude: 140.8190,
+    address: "〒041-1401 北海道茅部郡鹿部町字鹿部",
+    accessInfo: "JR鹿部駅から車で約10分。道央自動車道大沼公園ICから約25分。",
+    region: localRegion("rn4001"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "漁港横に無料駐車スペースあり",
+    hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.8, reviewCount: 120,
+    catchableFish: [
+      { fish: fish("karei"), monthStart: 4, monthEnd: 7, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+      { fish: fish("hokke"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("kasago"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
+      { fish: fish("ainame"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ブラクリ" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeNorth,
+    gearGuides: [gearNage, gearHokke, gearRock],
+    safetyLevel: "safe", safetyNotes: ["足場良好な岸壁", "冬季は路面凍結に注意"],
+    youtubeLinks: [{ label: "鹿部漁港 釣り", searchQuery: "鹿部漁港 カレイ 釣り 北海道", description: "鹿部漁港での釣り動画" }],
+  },
+  {
+    id: "sn4002", name: "森港", slug: "mori-kou-hokkaido",
+    description: "駒ヶ岳を望む噴火湾奥の港。カレイの投げ釣りで知られ、春にはマコガレイが40cm超えの大型も。港内でのサビキ釣りも楽しめる。",
+    latitude: 42.1010, longitude: 140.5760,
+    address: "〒049-2311 北海道茅部郡森町港町",
+    accessInfo: "JR森駅から徒歩約10分。道央自動車道森ICから約5分。",
+    region: localRegion("rn4001"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車スペースあり",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.7, reviewCount: 95,
+    catchableFish: [
+      { fish: fish("karei"), monthStart: 4, monthEnd: 7, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+      { fish: fish("hokke"), monthStart: 3, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
+      { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeNorth,
+    gearGuides: [gearNage, gearHokke, gearSabiki],
+    safetyLevel: "safe", safetyNotes: ["足場良好", "駐車スペースから近い"],
+    youtubeLinks: [{ label: "森港 釣り", searchQuery: "森港 カレイ 投げ釣り 北海道", description: "森港での釣り動画" }],
+  },
+  {
+    id: "sn4003", name: "松前港", slug: "matsumae-kou",
+    description: "北海道最南端の城下町にある歴史ある港。津軽海峡の豊かな潮流でマグロの一本釣りでも有名。堤防からはホッケやアブラコが狙える。",
+    latitude: 41.4280, longitude: 140.1070,
+    address: "〒049-1511 北海道松前郡松前町福山",
+    accessInfo: "JR木古内駅からバスで約90分。函館から国道228号で約2時間30分。",
+    region: localRegion("rn4002"), spotType: "port", difficulty: "intermediate",
+    isFree: true, hasParking: true, parkingDetail: "港に無料駐車場あり",
+    hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.9, reviewCount: 85,
+    catchableFish: [
+      { fish: fish("hokke"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
+      { fish: fish("ainame"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ブラクリ" },
+      { fish: fish("kurosoi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ワーム" },
+      { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+    ],
+    bestTimes: btAllDay, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeNorth,
+    gearGuides: [gearHokke, gearRock, gearSabiki],
+    safetyLevel: "safe", safetyNotes: ["足場は概ね良好", "津軽海峡の風に注意"],
+    youtubeLinks: [{ label: "松前港 釣り", searchQuery: "松前港 ホッケ 釣り 北海道", description: "松前港での釣り動画" }],
+  },
+  {
+    id: "sn4004", name: "江差港", slug: "esashi-kou-hokkaido",
+    description: "日本海に面した歴史ある港町の漁港。ニシン漁で栄えた往時を偲ぶ風情が残る。ホッケやカレイの好ポイントで、秋にはサケも遡上する。",
+    latitude: 41.8690, longitude: 140.1270,
+    address: "〒043-0041 北海道檜山郡江差町姥神町",
+    accessInfo: "JR木古内駅からバスで約70分。函館から国道227号で約1時間40分。",
+    region: localRegion("rn4002"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "漁港周辺に駐車可能",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.6, reviewCount: 70,
+    catchableFish: [
+      { fish: fish("hokke"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("karei"), monthStart: 4, monthEnd: 7, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+      { fish: fish("kurosoi"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ワーム" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeNorth,
+    gearGuides: [gearHokke, gearNage, gearMebaring],
+    safetyLevel: "safe", safetyNotes: ["日本海側で風が強い日あり", "冬季は積雪に注意"],
+    youtubeLinks: [{ label: "江差港 釣り", searchQuery: "江差港 ホッケ カレイ 北海道", description: "江差港での釣り動画" }],
+  },
+  {
+    id: "sn4005", name: "白老港", slug: "shiraoi-kou",
+    description: "太平洋に面した噴火湾東部の港。サケ釣りの人気ポイントとして秋は大勢の釣り人が訪れる。カレイやコマイも季節を通じて狙える。",
+    latitude: 42.5470, longitude: 141.3520,
+    address: "〒059-0903 北海道白老郡白老町本町",
+    accessInfo: "JR白老駅から徒歩約15分。道央自動車道白老ICから約5分。",
+    region: localRegion("rn4003"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "港に無料駐車場あり",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.8, reviewCount: 150,
+    catchableFish: [
+      { fish: fish("karei"), monthStart: 4, monthEnd: 7, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+      { fish: fish("hokke"), monthStart: 10, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("kurosoi"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ワーム" },
+      { fish: fish("ainame"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ブラクリ" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeNorth,
+    gearGuides: [gearNage, gearHokke, gearRock],
+    safetyLevel: "safe", safetyNotes: ["足場良好", "ウポポイ（民族共生象徴空間）近く"],
+    youtubeLinks: [{ label: "白老港 釣り", searchQuery: "白老港 カレイ 投げ釣り 北海道", description: "白老港での釣り動画" }],
+  },
+  {
+    id: "sn4006", name: "登別漁港", slug: "noboribetsu-gyokou",
+    description: "温泉で有名な登別の海側にある小さな漁港。テトラ周りでソイやアブラコが好調。夏場はイワシの群れも入り、サビキ釣りが楽しい。",
+    latitude: 42.4360, longitude: 141.1650,
+    address: "〒059-0022 北海道登別市千歳町",
+    accessInfo: "JR登別駅から車で約5分。道央自動車道登別東ICから約10分。",
+    region: localRegion("rn4003"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "漁港そばに駐車スペースあり",
+    hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.5, reviewCount: 65,
+    catchableFish: [
+      { fish: fish("kurosoi"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ワーム" },
+      { fish: fish("ainame"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ブラクリ" },
+      { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+    ],
+    bestTimes: btEvening, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeNorth,
+    gearGuides: [gearRock, gearSabiki, gearMebaring],
+    safetyLevel: "safe", safetyNotes: ["テトラ帯はスパイクシューズ推奨"],
+    youtubeLinks: [{ label: "登別漁港 釣り", searchQuery: "登別漁港 ソイ アブラコ 釣り", description: "登別漁港での釣り動画" }],
+  },
+  {
+    id: "sn4007", name: "古平漁港", slug: "furubira-gyokou",
+    description: "積丹半島の東側に位置する静かな漁港。ホッケの群れが春と秋に回遊し、数釣りが期待できる。カジカやガヤも根回りに多い。",
+    latitude: 43.2220, longitude: 140.6170,
+    address: "〒046-0101 北海道古平郡古平町大字浜町",
+    accessInfo: "小樽から国道229号で約50分。余市から約20分。",
+    region: localRegion("rn4004"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "漁港横に無料駐車場あり",
+    hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.8, reviewCount: 110,
+    catchableFish: [
+      { fish: fish("hokke"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
+      { fish: fish("karei"), monthStart: 4, monthEnd: 7, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+      { fish: fish("kurosoi"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ワーム" },
+      { fish: fish("ainame"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ブラクリ" },
+    ],
+    bestTimes: btAllDay, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeNorth,
+    gearGuides: [gearHokke, gearNage, gearRock],
+    safetyLevel: "safe", safetyNotes: ["足場良好", "積丹ブルーの海が美しい"],
+    youtubeLinks: [{ label: "古平漁港 釣り", searchQuery: "古平漁港 ホッケ 釣り 積丹", description: "古平漁港での釣り動画" }],
+  },
+  {
+    id: "sn4008", name: "神恵内漁港", slug: "kamoenai-gyokou",
+    description: "積丹半島西側の小さな漁港。磯場が隣接しホッケやカジカが狙えるほか、春のヤリイカも人気。海の透明度が高く底が見える日も多い。",
+    latitude: 43.1530, longitude: 140.4320,
+    address: "〒045-0302 北海道古宇郡神恵内村大字神恵内",
+    accessInfo: "小樽から国道229号で約1時間30分。岩内から約20分。",
+    region: localRegion("rn4004"), spotType: "port", difficulty: "intermediate",
+    isFree: true, hasParking: true, parkingDetail: "漁港に駐車スペースあり",
+    hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.7, reviewCount: 55,
+    catchableFish: [
+      { fish: fish("hokke"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
+      { fish: fish("kurosoi"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ワーム" },
+      { fish: fish("ainame"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ブラクリ" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideRocky, mazumeInfo: mazumeNorth,
+    gearGuides: [gearHokke, gearRock, gearMebaring],
+    safetyLevel: "caution", safetyNotes: ["磯場は滑りやすいので注意", "携帯の電波が弱い場所あり"],
+    youtubeLinks: [{ label: "神恵内漁港 釣り", searchQuery: "神恵内 ホッケ ソイ 釣り 北海道", description: "神恵内での釣り動画" }],
+  },
+  {
+    id: "sn4009", name: "厚田漁港", slug: "atsuta-gyokou",
+    description: "石狩市北部にある日本海側の漁港。ニシンの回遊で冬から春にかけて賑わう。夕日が美しいことでも知られ、釣りと景色を同時に満喫できる。",
+    latitude: 43.3440, longitude: 141.2650,
+    address: "〒061-3601 北海道石狩市厚田区厚田",
+    accessInfo: "札幌から国道231号で約1時間。石狩市街から約30分。",
+    region: localRegion("rn4005"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "漁港周辺に駐車場あり",
+    hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.7, reviewCount: 100,
+    catchableFish: [
+      { fish: fish("hokke"), monthStart: 10, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("karei"), monthStart: 4, monthEnd: 7, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+      { fish: fish("kurosoi"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ワーム" },
+      { fish: fish("haze"), monthStart: 7, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
+    ],
+    bestTimes: btAllDay, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeNorth,
+    gearGuides: [gearHokke, gearNage, gearChoinage],
+    safetyLevel: "safe", safetyNotes: ["足場良好な岸壁", "道の駅あいろーど厚田が近い"],
+    youtubeLinks: [{ label: "厚田漁港 釣り", searchQuery: "厚田漁港 ホッケ ニシン 釣り", description: "厚田漁港での釣り動画" }],
+  },
+  {
+    id: "sn4010", name: "浜益漁港", slug: "hamamasu-gyokou",
+    description: "石狩市最北の漁港で、雄冬岬に近い日本海沿いに位置する。カレイの投げ釣りとホッケのウキ釣りが二大看板。アブラコの型も良い。",
+    latitude: 43.5030, longitude: 141.3930,
+    address: "〒061-3103 北海道石狩市浜益区浜益",
+    accessInfo: "札幌から国道231号で約1時間30分。増毛方面から約40分。",
+    region: localRegion("rn4005"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "漁港に駐車スペースあり",
+    hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.6, reviewCount: 60,
+    catchableFish: [
+      { fish: fish("karei"), monthStart: 4, monthEnd: 7, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+      { fish: fish("hokke"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
+      { fish: fish("ainame"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ブラクリ" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeNorth,
+    gearGuides: [gearNage, gearHokke, gearRock],
+    safetyLevel: "safe", safetyNotes: ["足場は良好", "周辺に店が少ないので飲食物持参推奨"],
+    youtubeLinks: [{ label: "浜益漁港 釣り", searchQuery: "浜益漁港 カレイ 釣り 石狩", description: "浜益漁港での釣り動画" }],
+  },
+  {
+    id: "sn4011", name: "寿都漁港", slug: "suttsu-gyokou",
+    description: "後志管内の日本海に面した風の強い港。ホッケの群来（くき）で知られ、春には大量のホッケが岸寄りする。イカの夜釣りも盛んなスポット。",
+    latitude: 42.7930, longitude: 140.2250,
+    address: "〒048-0401 北海道寿都郡寿都町字大磯町",
+    accessInfo: "小樽から国道229号で約2時間。蘭越町から約30分。",
+    region: localRegion("rn4004"), spotType: "port", difficulty: "beginner",
+    isFree: true, hasParking: true, parkingDetail: "港付近に駐車可能",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.8, reviewCount: 90,
+    catchableFish: [
+      { fish: fish("hokke"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
+      { fish: fish("karei"), monthStart: 4, monthEnd: 7, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+      { fish: fish("kurosoi"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ワーム" },
+      { fish: fish("aji"), monthStart: 7, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+    ],
+    bestTimes: btAllDay, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeNorth,
+    gearGuides: [gearHokke, gearNage, gearSabiki],
+    safetyLevel: "safe", safetyNotes: ["風が強い日が多いので天候確認必須", "道の駅みなとま〜れ寿都が隣接"],
+    youtubeLinks: [{ label: "寿都漁港 釣り", searchQuery: "寿都漁港 ホッケ 群来 釣り", description: "寿都漁港での釣り動画" }],
+  },
+  {
+    id: "sn4012", name: "瀬棚港", slug: "setana-kou",
+    description: "日本海に突き出た檜山南部の港。沖合に三本杉岩が浮かぶ景勝地で、カレイやヒラメの実績が高い。ショアジギングでブリ狙いの釣り人も増加中。",
+    latitude: 42.4560, longitude: 139.8490,
+    address: "〒049-4825 北海道久遠郡せたな町瀬棚区本町",
+    accessInfo: "函館から国道227号・229号で約3時間。八雲ICから約1時間30分。",
+    region: localRegion("rn4002"), spotType: "port", difficulty: "intermediate",
+    isFree: true, hasParking: true, parkingDetail: "港に無料駐車場あり",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.9, reviewCount: 80,
+    catchableFish: [
+      { fish: fish("hirame"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
+      { fish: fish("karei"), monthStart: 4, monthEnd: 7, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("buri"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
+      { fish: fish("hokke"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeNorth,
+    gearGuides: [gearNage, gearJig, gearHokke],
+    safetyLevel: "safe", safetyNotes: ["三本杉岩が目印", "強風に注意"],
+    youtubeLinks: [{ label: "瀬棚港 釣り", searchQuery: "瀬棚港 ヒラメ ブリ 釣り 北海道", description: "瀬棚港での釣り動画" }],
+  },
+  {
+    id: "sn4013", name: "枝幸港", slug: "esashi-kou-okhotsk",
+    description: "オホーツク海沿いの港でカニの水揚げで有名。春のカレイ釣りと秋のサケ釣りが盛ん。流氷が去った後の海は栄養豊富で魚影が濃い。",
+    latitude: 44.9350, longitude: 142.5810,
+    address: "〒098-5807 北海道枝幸郡枝幸町岬町",
+    accessInfo: "紋別から国道238号で約2時間。旭川から約3時間30分。",
+    region: localRegion("rn4008"), spotType: "port", difficulty: "intermediate",
+    isFree: true, hasParking: true, parkingDetail: "港に無料駐車場あり",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.6, reviewCount: 50,
+    catchableFish: [
+      { fish: fish("karei"), monthStart: 4, monthEnd: 7, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+      { fish: fish("hokke"), monthStart: 4, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("kurosoi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ワーム" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeNorth,
+    gearGuides: [gearNage, gearHokke, gearRock],
+    safetyLevel: "caution", safetyNotes: ["冬季はオホーツク海の厳しい寒さに備えること", "防寒装備必須"],
+    youtubeLinks: [{ label: "枝幸港 釣り", searchQuery: "枝幸港 カレイ 釣り オホーツク", description: "枝幸港での釣り動画" }],
+  },
+  {
+    id: "sn4014", name: "羅臼漁港", slug: "rausu-gyokou",
+    description: "世界遺産知床の玄関口に位置する漁港。根室海峡の豊かな海でカレイ・ホッケ・ソイが通年で狙える。運が良ければシャチやクジラも見られる。",
+    latitude: 44.0230, longitude: 145.1890,
+    address: "〒086-1834 北海道目梨郡羅臼町船見町",
+    accessInfo: "中標津空港から車で約1時間30分。国道335号沿い。",
+    region: localRegion("rn4007"), spotType: "port", difficulty: "intermediate",
+    isFree: true, hasParking: true, parkingDetail: "漁港に駐車スペースあり",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 4.0, reviewCount: 75,
+    catchableFish: [
+      { fish: fish("karei"), monthStart: 4, monthEnd: 8, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+      { fish: fish("hokke"), monthStart: 4, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
+      { fish: fish("kurosoi"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ワーム" },
+      { fish: fish("ainame"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ブラクリ" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeNorth,
+    gearGuides: [gearNage, gearHokke, gearRock],
+    safetyLevel: "caution", safetyNotes: ["ヒグマ出没エリア注意", "熊よけスプレー携帯推奨"],
+    youtubeLinks: [{ label: "羅臼漁港 釣り", searchQuery: "羅臼漁港 カレイ 釣り 知床", description: "羅臼漁港での釣り動画" }],
+  },
+  {
+    id: "sn4015", name: "標津漁港", slug: "shibetsu-gyokou",
+    description: "根室海峡に面した鮭の町の漁港。秋のサケ・カラフトマス釣りのメッカで、シーズン中は全道から釣り人が集結。カレイやコマイの実績も高い。",
+    latitude: 43.6610, longitude: 145.1310,
+    address: "〒086-1632 北海道標津郡標津町南1条西",
+    accessInfo: "中標津空港から車で約30分。根室中標津道路利用。",
+    region: localRegion("rn4007"), spotType: "port", difficulty: "intermediate",
+    isFree: true, hasParking: true, parkingDetail: "漁港周辺に広い駐車場あり",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
+    mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 4.1, reviewCount: 130,
+    catchableFish: [
+      { fish: fish("karei"), monthStart: 4, monthEnd: 8, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+      { fish: fish("hokke"), monthStart: 4, monthEnd: 6, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("kurosoi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ワーム" },
+    ],
+    bestTimes: btMorning, tackleRecommendations: [],
+    tideAdvice: tideStandard, mazumeInfo: mazumeNorth,
+    gearGuides: [gearNage, gearHokke, gearRock],
+    safetyLevel: "safe", safetyNotes: ["サーモン科学館が近く家族連れにも人気", "秋のサケ釣りシーズンは混雑"],
+    youtubeLinks: [{ label: "標津漁港 釣り", searchQuery: "標津漁港 カレイ サケ 釣り", description: "標津漁港での釣り動画" }],
+  },
+];
