@@ -336,6 +336,50 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
     return;
   }
 
+  // 使い方・ヘルプ → メニュー一覧
+  if (/使い方|ヘルプ|help|メニュー|menu/i.test(text)) {
+    const areaInfoHelp = userPref ? `\n📍 マイエリア: ${userPref.nameShort}` : "";
+    await replyMessage(
+      replyToken,
+      [
+        "━━━━━━━━━━━━━━",
+        "🎣 ツリスポ LINE",
+        "━━━━━━━━━━━━━━",
+        "",
+        "キーワードを送ってね👇",
+        "",
+        "📍「スポット」",
+        "　→ 釣り場を探す",
+        "",
+        "🐟「今釣れる」",
+        "　→ 今月釣れる魚",
+        "",
+        "📖「初心者」",
+        "　→ 始め方ガイド",
+        "",
+        "📊「釣果」",
+        "　→ 最新の釣果週報",
+        "",
+        "🎣「道具」",
+        "　→ おすすめタックル",
+        "",
+        "🔍「診断」",
+        "　→ あなたに合う釣りは？",
+        "",
+        "📅「潮」",
+        "　→ 釣りカレンダー",
+        "",
+        "都道府県名を送ると",
+        "マイエリアを登録できます",
+        areaInfoHelp,
+        "",
+        "━━━━━━━━━━━━━━",
+        "https://tsurispot.com",
+      ].join("\n")
+    );
+    return;
+  }
+
   // エリア変更・設定 → エリア案内
   if (/エリア|地域|変更|設定/i.test(text)) {
     const currentArea = userPref ? `現在の登録: ${userPref.nameShort}` : "まだ登録されていません";
