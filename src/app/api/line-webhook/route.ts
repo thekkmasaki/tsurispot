@@ -29,8 +29,21 @@ function verifySignature(body: string, signature: string): boolean {
   return hash === signature;
 }
 
-/** LINEにリプライメッセージを送信 */
-async function replyMessage(replyToken: string, text: string) {
+/** LINEにリプライメッセージを送信（quickReply対応） */
+async function replyMessage(
+  replyToken: string,
+  text: string,
+  quickReplyItems?: Array<{ label: string; text: string }>
+) {
+  const message: Record<string, unknown> = { type: "text", text };
+  if (quickReplyItems?.length) {
+    message.quickReply = {
+      items: quickReplyItems.map((item) => ({
+        type: "action",
+        action: { type: "message", label: item.label, text: item.text },
+      })),
+    };
+  }
   await fetch("https://api.line.me/v2/bot/message/reply", {
     method: "POST",
     headers: {
@@ -39,7 +52,7 @@ async function replyMessage(replyToken: string, text: string) {
     },
     body: JSON.stringify({
       replyToken,
-      messages: [{ type: "text", text }],
+      messages: [message],
     }),
   });
 }
@@ -276,7 +289,163 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
     return;
   }
 
-  // 道具・おすすめ → ギアページ
+  // 釣り方別の道具レコメンド
+  const methodGear: Record<string, { name: string; guide: string; items: string[] }> = {
+    サビキ: {
+      name: "サビキ釣り",
+      guide: "https://tsurispot.com/guide/sabiki",
+      items: [
+        "🔸 ロッド（万能竿 2-3m）",
+        "  https://amzn.to/4s4i64m",
+        "🔸 リール（2000-2500番）",
+        "  https://amzn.to/4atW7Om",
+        "🔸 コマセ（アミ姫）",
+        "  https://amzn.to/4c6gaUn",
+        "🔸 おもりセット",
+        "  https://amzn.to/4cFGDbl",
+      ],
+    },
+    ちょい投げ: {
+      name: "ちょい投げ釣り",
+      guide: "https://tsurispot.com/guide/choinage",
+      items: [
+        "🔸 ロッド（投げ竿 2.4-3m）",
+        "  https://amzn.to/4s4i64m",
+        "🔸 リール（2500-3000番）",
+        "  https://amzn.to/4atW7Om",
+        "🔸 ジェット天秤",
+        "  https://amzn.to/4l7BnQg",
+        "🔸 ナイロンライン（道糸）",
+        "  https://amzn.to/4s1SPaX",
+      ],
+    },
+    ウキ: {
+      name: "ウキ釣り",
+      guide: "https://tsurispot.com/guide/float-fishing",
+      items: [
+        "🔸 ロッド（磯竿 3-4m）",
+        "  https://amzn.to/4s4i64m",
+        "🔸 リール（2500番）",
+        "  https://amzn.to/4atW7Om",
+        "🔸 ハリス",
+        "  https://amzn.to/408jI1f",
+        "🔸 ナイロンライン（道糸）",
+        "  https://amzn.to/4s1SPaX",
+      ],
+    },
+    ルアー: {
+      name: "ルアー釣り",
+      guide: "https://tsurispot.com/guide/lure",
+      items: [
+        "🔸 ロッド（ルアーロッド）",
+        "  https://amzn.to/4s4i64m",
+        "🔸 リール（2500-3000番）",
+        "  https://amzn.to/4atW7Om",
+        "🔸 PEライン（道糸）",
+        "  https://amzn.to/4s45H0i",
+        "🔸 フロロリーダー",
+        "  https://amzn.to/4tKXyzu",
+      ],
+    },
+    エギング: {
+      name: "エギング",
+      guide: "https://tsurispot.com/guide/eging",
+      items: [
+        "🔸 ロッド（エギングロッド）",
+        "  https://amzn.to/4s4i64m",
+        "🔸 リール（2500番）",
+        "  https://amzn.to/4atW7Om",
+        "🔸 エギ10本セット",
+        "  https://amzn.to/3Nc9r10",
+        "🔸 PEライン（道糸）",
+        "  https://amzn.to/4s45H0i",
+      ],
+    },
+    ジギング: {
+      name: "ショアジギング",
+      guide: "https://tsurispot.com/guide/jigging",
+      items: [
+        "🔸 ロッド（ジギングロッド）",
+        "  https://amzn.to/4s4i64m",
+        "🔸 リール（3000-4000番）",
+        "  https://amzn.to/4atW7Om",
+        "🔸 PEライン（道糸）",
+        "  https://amzn.to/4s45H0i",
+        "🔸 スナップ",
+        "  https://amzn.to/4c9oMcU",
+      ],
+    },
+    穴釣り: {
+      name: "穴釣り",
+      guide: "https://tsurispot.com/guide/anazuri",
+      items: [
+        "🔸 ロッド（短竿 1-1.5m）",
+        "  https://amzn.to/4s4i64m",
+        "🔸 リール（小型1000番）",
+        "  https://amzn.to/4atW7Om",
+        "🔸 おもりセット",
+        "  https://amzn.to/4cFGDbl",
+        "🔸 ナイロンライン",
+        "  https://amzn.to/4s1SPaX",
+      ],
+    },
+    カゴ釣り: {
+      name: "遠投カゴ釣り",
+      guide: "https://tsurispot.com/guide/entou-kago",
+      items: [
+        "🔸 ロッド（遠投磯竿 4-5m）",
+        "  https://amzn.to/4s4i64m",
+        "🔸 リール（3000-4000番）",
+        "  https://amzn.to/4atW7Om",
+        "🔸 PEライン（道糸）",
+        "  https://amzn.to/4s45H0i",
+        "🔸 ハリス",
+        "  https://amzn.to/408jI1f",
+      ],
+    },
+    泳がせ: {
+      name: "泳がせ釣り",
+      guide: "https://tsurispot.com/guide/oyogase",
+      items: [
+        "🔸 ロッド（磯竿 3-4m）",
+        "  https://amzn.to/4s4i64m",
+        "🔸 リール（3000-4000番）",
+        "  https://amzn.to/4atW7Om",
+        "🔸 ハリス（太め）",
+        "  https://amzn.to/408jI1f",
+        "🔸 スナップ",
+        "  https://amzn.to/4c9oMcU",
+      ],
+    },
+  };
+
+  // 釣り方名にマッチ → 道具レコメンド
+  const matchedMethod = Object.entries(methodGear).find(([key]) => text.includes(key));
+  if (matchedMethod && /道具|タックル|装備|おすすめ|ギア/i.test(text)) {
+    const [, method] = matchedMethod;
+    await replyMessage(
+      replyToken,
+      [
+        "━━━━━━━━━━━━━━",
+        `🎣 ${method.name}のおすすめ道具`,
+        "━━━━━━━━━━━━━━",
+        "",
+        ...method.items,
+        "",
+        `▼ ${method.name}の詳しいガイド`,
+        method.guide,
+      ].join("\n"),
+      [
+        { label: "サビキ", text: "サビキの道具" },
+        { label: "ちょい投げ", text: "ちょい投げの道具" },
+        { label: "ルアー", text: "ルアーの道具" },
+        { label: "エギング", text: "エギングの道具" },
+      ]
+    );
+    return;
+  }
+
+  // 道具・おすすめ → 釣り方選択（クイックリプライ付き）
   if (/道具|おすすめ|タックル|ロッド|リール|gear|装備/i.test(text)) {
     await replyMessage(
       replyToken,
@@ -290,7 +459,22 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
         "",
         "▼ 釣り方別の道具ガイド",
         "https://tsurispot.com/guide",
-      ].join("\n")
+        "",
+        "━━━━━━━━━━━━━━",
+        "↓ 釣り方をタップすると",
+        "おすすめ道具を表示します",
+      ].join("\n"),
+      [
+        { label: "サビキ釣り", text: "サビキの道具" },
+        { label: "ちょい投げ", text: "ちょい投げの道具" },
+        { label: "ウキ釣り", text: "ウキの道具" },
+        { label: "ルアー釣り", text: "ルアーの道具" },
+        { label: "エギング", text: "エギングの道具" },
+        { label: "ジギング", text: "ジギングの道具" },
+        { label: "穴釣り", text: "穴釣りの道具" },
+        { label: "カゴ釣り", text: "カゴ釣りの道具" },
+        { label: "泳がせ釣り", text: "泳がせの道具" },
+      ]
     );
     return;
   }
