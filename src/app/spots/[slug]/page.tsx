@@ -132,7 +132,7 @@ export async function generateMetadata({
     description: description.slice(0, 160),
     keywords: [spot.name, spot.region.prefecture, spot.region.areaName, "釣り場", "釣りスポット", ...spot.catchableFish.slice(0, 5).map((cf) => cf.fish.name)],
     openGraph: {
-      title: `${spot.name}の釣り情報・釣果・アクセス | ツリスポ`,
+      title: `${spot.name}の釣り情報・釣果・アクセス`,
       description: ogDescription.slice(0, 120),
       type: "article",
       url: `https://tsurispot.com/spots/${spot.slug}`,
@@ -140,7 +140,7 @@ export async function generateMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title: `${spot.name}の釣り情報 | ツリスポ`,
+      title: `${spot.name}の釣り情報`,
       description: ogDescription.slice(0, 120),
     },
     alternates: {

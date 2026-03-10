@@ -8,11 +8,11 @@ import { tackleShops } from "@/lib/data/shops";
 import { prefectures } from "@/lib/data/prefectures";
 
 export const metadata: Metadata = {
-  title: "サイトマップ - ツリスポ",
+  title: "サイトマップ",
   description:
     "ツリスポの全ページ一覧。釣りスポット、魚種図鑑、エリア別ページ、ガイド記事、釣具店など、すべてのコンテンツに簡単にアクセスできます。",
   openGraph: {
-    title: "サイトマップ - ツリスポ",
+    title: "サイトマップ",
     description: "ツリスポの全ページ一覧。すべてのコンテンツに簡単にアクセスできます。",
     type: "website",
     url: "https://tsurispot.com/sitemap-page",
