@@ -27,6 +27,18 @@ export const metadata: Metadata = {
   },
 };
 
+// SpeakableSpecification for GEO (Generative Engine Optimization)
+const guideSpeakableJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "おもりの種類と選び方 完全ガイド - 形・重さ・素材で釣果が変わる！",
+  url: "https://tsurispot.com/guide/sinker",
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: ["h1", ".page-description", ".guide-summary"],
+  },
+};
+
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -448,7 +460,10 @@ function SinkerWeightScaleDiagram() {
 
 export default function SinkerGuidePage() {
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-6 sm:py-8">
+    <div className="container mx-auto max-w-4xl px-4 py-6 sm:py-8">      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSpeakableJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}

@@ -509,6 +509,18 @@ const faqItems = [
 
 /* ──────────── JSON-LD ──────────── */
 
+// SpeakableSpecification for GEO (Generative Engine Optimization)
+const guideSpeakableJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "釣りのトラブルシューティング｜よくある問題と解決法｜ツリスポ",
+  url: "https://tsurispot.com/guide/troubleshooting",
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: ["h1", ".page-description", ".guide-summary"],
+  },
+};
+
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -588,6 +600,10 @@ export default function TroubleshootingGuidePage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(breadcrumbJsonLd),
         }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSpeakableJsonLd) }}
       />
       <script
         type="application/ld+json"
