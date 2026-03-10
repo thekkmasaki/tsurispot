@@ -636,9 +636,9 @@ export default async function FishDetailPage({ params }: PageProps) {
             </h2>
             <div className="flex flex-wrap gap-1.5">
               {prefList.map(p => (
-                <Link key={p.prefSlug} href={`/prefecture/${p.prefSlug}/fish/${fish.slug}`}>
+                <Link key={p.prefSlug} href={`/prefecture/${p.prefSlug}/fish/${fish.slug}`} title={`${p.prefName}で${fish.name}が釣れるスポット${p.count}件`}>
                   <Badge variant="outline" className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-white">
-                    {p.prefName} ({p.count})
+                    {p.prefName}で{fish.name}が釣れるスポット ({p.count})
                   </Badge>
                 </Link>
               ))}
@@ -914,12 +914,13 @@ export default async function FishDetailPage({ params }: PageProps) {
         >
           {coOccurringFish.length > 0 && (
             <div className="mb-4">
-              <h3 className="mb-2 text-sm font-bold">一緒に釣れる魚</h3>
+              <h3 className="mb-2 text-sm font-bold">{fish.name}と一緒に釣れる魚</h3>
+              <p className="mb-2 text-xs text-muted-foreground">{fish.name}が釣れるスポットでは、以下の魚も同時に狙えます。</p>
               <div className="flex flex-wrap gap-1.5">
                 {coOccurringFish.map((cf) => (
-                  <Link key={cf.slug} href={`/fish/${cf.slug}`}>
+                  <Link key={cf.slug} href={`/fish/${cf.slug}`} title={`${cf.name}の釣り方・時期・おすすめスポット`}>
                     <Badge variant="outline" className="cursor-pointer px-2 py-1 text-xs transition-colors hover:bg-primary hover:text-primary-foreground">
-                      {cf.name}
+                      {cf.name}の釣り方
                     </Badge>
                   </Link>
                 ))}
@@ -928,12 +929,13 @@ export default async function FishDetailPage({ params }: PageProps) {
           )}
           {similarFish.length > 0 && (
             <div className="mb-4">
-              <h3 className="mb-2 text-sm font-bold">同じ難易度の魚種</h3>
+              <h3 className="mb-2 text-sm font-bold">{fish.name}と同じ難易度の魚種</h3>
+              <p className="mb-2 text-xs text-muted-foreground">{DIFFICULTY_LABELS[fish.difficulty]}レベルで狙える他の魚種です。</p>
               <div className="flex flex-wrap gap-1.5">
                 {similarFish.map((sf) => (
-                  <Link key={sf.id} href={`/fish/${sf.slug}`}>
+                  <Link key={sf.id} href={`/fish/${sf.slug}`} title={`${sf.name}の釣り方・時期・おすすめスポット`}>
                     <Badge variant="outline" className="cursor-pointer px-2 py-1 text-xs transition-colors hover:bg-primary hover:text-primary-foreground">
-                      {sf.name}
+                      {sf.name}の釣り方
                     </Badge>
                   </Link>
                 ))}
@@ -1047,12 +1049,12 @@ export default async function FishDetailPage({ params }: PageProps) {
           >
             {sameMethodFish.length > 0 && (
               <div className="mb-4">
-                <h3 className="mb-2 text-sm font-bold">同じ釣り方で釣れる魚</h3>
+                <h3 className="mb-2 text-sm font-bold">{fish.fishingMethods?.[0]?.methodName || "同じ釣り方"}で釣れる他の魚</h3>
                 <div className="flex flex-wrap gap-1.5">
                   {sameMethodFish.map((sf) => (
-                    <Link key={sf.slug} href={`/fish/${sf.slug}`}>
+                    <Link key={sf.slug} href={`/fish/${sf.slug}`} title={`${sf.name}の釣り方・時期・おすすめスポット`}>
                       <Badge variant="outline" className="cursor-pointer px-2 py-1 text-xs transition-colors hover:bg-primary hover:text-primary-foreground">
-                        {sf.name}
+                        {sf.name}の釣り方
                       </Badge>
                     </Link>
                   ))}
@@ -1061,12 +1063,12 @@ export default async function FishDetailPage({ params }: PageProps) {
             )}
             {sameSeasonFish.length > 0 && (
               <div>
-                <h3 className="mb-2 text-sm font-bold">同じ時期に旬を迎える魚</h3>
+                <h3 className="mb-2 text-sm font-bold">{fish.peakMonths.length > 0 ? `${fish.peakMonths[0]}月〜${fish.peakMonths[fish.peakMonths.length - 1]}月` : "同じ時期"}に旬を迎える魚</h3>
                 <div className="flex flex-wrap gap-1.5">
                   {sameSeasonFish.map((sf) => (
-                    <Link key={sf.slug} href={`/fish/${sf.slug}`}>
+                    <Link key={sf.slug} href={`/fish/${sf.slug}`} title={`${sf.name}の釣り方・時期・おすすめスポット`}>
                       <Badge variant="outline" className="cursor-pointer px-2 py-1 text-xs transition-colors hover:bg-primary hover:text-primary-foreground">
-                        {sf.name}
+                        {sf.name}の釣り方
                       </Badge>
                     </Link>
                   ))}
@@ -1161,6 +1163,37 @@ export default async function FishDetailPage({ params }: PageProps) {
           </ul>
         </div>
       </CollapsibleSection>
+
+      {/* 関連コンテンツリンク */}
+      <section className="mb-8">
+        <h2 className="mb-3 text-base font-bold sm:text-lg">関連コンテンツ</h2>
+        <div className="flex flex-wrap gap-2">
+          <Link href="/fish" className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1.5 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+            <Fish className="size-3" />
+            魚種図鑑トップ
+          </Link>
+          <Link href="/catchable-now" className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1.5 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+            <Calendar className="size-3" />
+            今釣れる魚一覧
+          </Link>
+          <Link href="/fishing-calendar" className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1.5 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+            <Calendar className="size-3" />
+            月別釣りカレンダー
+          </Link>
+          <Link href="/guide" className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1.5 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+            <BookOpen className="size-3" />
+            釣り方ガイド一覧
+          </Link>
+          <Link href="/spots" className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1.5 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+            <MapPin className="size-3" />
+            釣りスポット検索
+          </Link>
+          <Link href="/for-beginners" className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1.5 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+            <BookOpen className="size-3" />
+            初心者ガイド
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }
