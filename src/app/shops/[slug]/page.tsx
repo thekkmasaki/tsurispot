@@ -42,6 +42,9 @@ export async function generateMetadata({
     title: `${shop.name} - 釣具店情報 | ツリスポ`,
     description: `${shop.name}（${shop.address}）の営業時間・エサ在庫・サービス情報。${shop.description}`,
     ...(slug === "sample-premium" ? { robots: { index: false, follow: false } } : {}),
+    alternates: {
+      canonical: `https://tsurispot.com/shops/${slug}`,
+    },
     openGraph: {
       title: `${shop.name} - 釣具店情報`,
       description: shop.description,
