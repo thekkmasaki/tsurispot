@@ -45,8 +45,19 @@ export async function generateMetadata({
   if (!pref || !fish) return { title: "ページが見つかりません" };
 
   const spots = getSpotsByPrefectureAndFish(pref.name, fishSlug);
-  const title = `${pref.name}で${fish.name}が釣れる釣り場${spots.length}選【2026年最新】`;
-  const description = `${pref.name}で${fish.name}が釣れるおすすめ釣りスポット${spots.length}件を紹介。シーズン・釣り方・難易度・アクセス情報を完全ガイド。初心者から上級者まで${pref.name}で${fish.name}を釣るならツリスポ。`;
+
+  // ベストシーズン・釣り方をメタデータ用に取得
+  const metaPeakMonths = fish.peakMonths.sort((a, b) => a - b).map((m) => `${m}月`);
+  const metaSeasonMonths = fish.seasonMonths.sort((a, b) => a - b).map((m) => `${m}月`);
+  const metaMethodMap = new Map<string, number>();
+  for (const spot of spots) {
+    const cf = spot.catchableFish.find((c) => c.fish.slug === fishSlug);
+    if (cf) metaMethodMap.set(cf.method, (metaMethodMap.get(cf.method) || 0) + 1);
+  }
+  const metaTopMethods = Array.from(metaMethodMap.entries()).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([m]) => m);
+
+  const title = `${pref.name}で${fish.name}が釣れるスポット・時期・釣り方【完全ガイド】`;
+  const description = `${pref.name}で${fish.name}が釣れるおすすめスポット${spots.length}件を徹底紹介。${metaPeakMonths.length > 0 ? `ベストシーズンは${metaPeakMonths.join("・")}。` : metaSeasonMonths.length > 0 ? `シーズンは${metaSeasonMonths.join("・")}。` : ""}${metaTopMethods.length > 0 ? `おすすめの釣り方は${metaTopMethods.join("・")}。` : ""}初心者向けの穴場スポットから上級者向けポイントまで、${pref.name}で${fish.name}を釣るための情報を完全ガイド。`;
 
   return {
     title,
@@ -156,8 +167,8 @@ export default async function PrefectureFishPage({ params }: PageProps) {
     .map((m) => `${m}月`);
 
   const pageUrl = `https://tsurispot.com/prefecture/${pref.slug}/fish/${fish.slug}`;
-  const headline = `${pref.name}で${fish.name}を釣る - おすすめスポット・時期・釣り方`;
-  const pageDescription = `${pref.name}で${fish.name}が釣れるおすすめ釣りスポット${spots.length}件を紹介。シーズン・釣り方・難易度・アクセス情報を完全ガイド。`;
+  const headline = `${pref.name}で${fish.name}が釣れるスポット・時期・釣り方【完全ガイド】`;
+  const pageDescription = `${pref.name}で${fish.name}が釣れるおすすめスポット${spots.length}件を徹底紹介。ベストシーズン・おすすめ釣り方・初心者向け穴場スポットまで完全ガイド。`;
 
   // FAQ データ
   const faqItems = [
@@ -176,6 +187,15 @@ export default async function PrefectureFishPage({ params }: PageProps) {
       answer: methodBreakdown.length > 0
         ? `${pref.name}で${fish.name}を狙うなら、${methodBreakdown[0].method}が最も多く${methodBreakdown[0].count}件のスポットで実績があります。${methodBreakdown.length > 1 ? `他にも${methodBreakdown.slice(1, 3).map((m) => m.method).join("、")}でも狙えます。` : ""}各スポットの詳細ページで具体的な釣り方をご確認ください。`
         : `${fish.name}の釣り方の詳細は各スポットページでご確認ください。`,
+    },
+    {
+      question: `${pref.name}で${fish.name}釣りの初心者におすすめのスポットはどこですか？`,
+      answer: (() => {
+        const easySpots = spotsWithCatchInfo.filter(({ catchInfo }) => catchInfo?.catchDifficulty === "easy").map(({ spot }) => spot.name);
+        return easySpots.length > 0
+          ? `${pref.name}で${fish.name}を初心者が狙うなら、${easySpots.slice(0, 3).join("・")}がおすすめです。比較的難易度が低く、足場も安定しているスポットです。${methodBreakdown.length > 0 ? `${methodBreakdown[0].method}から始めてみましょう。` : ""}`
+          : `${pref.name}で${fish.name}を初心者が狙う場合は、堤防や漁港など足場が安定したスポットを選びましょう。${methodBreakdown.length > 0 ? `${methodBreakdown[0].method}なら初心者でも比較的釣りやすいです。` : ""}`;
+      })(),
     },
   ];
 
@@ -296,16 +316,17 @@ export default async function PrefectureFishPage({ params }: PageProps) {
       {/* ヘッダー */}
       <div className="mb-6 sm:mb-8">
         <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
-          {pref.name}で{fish.name}が釣れる釣り場一覧
+          {pref.name}で{fish.name}が釣れるスポット・時期・釣り方
         </h1>
         <p className="mt-2 text-sm text-muted-foreground sm:text-base">
-          {spots.length}件の釣りスポットで{fish.name}が狙えます
+          おすすめスポット{spots.length}件｜初心者向け穴場から人気ポイントまで
         </p>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          {pref.name}で{fish.name}が釣れる釣り場を{spots.length}件掲載しています。
-          {seasonMonthNames.length > 0 && `シーズンは${seasonMonthNames.join("・")}。`}
-          {peakMonthNames.length > 0 && `特に${peakMonthNames.join("・")}が最盛期です。`}
-          {methodBreakdown.length > 0 && `主な釣り方は${methodBreakdown.slice(0, 3).map((m) => m.method).join("、")}です。`}
+          {pref.name}で{fish.name}が釣れるおすすめの釣り場を{spots.length}件ご紹介します。
+          {seasonMonthNames.length > 0 && `釣れる時期は${seasonMonthNames.join("・")}。`}
+          {peakMonthNames.length > 0 && `特に${peakMonthNames.join("・")}がベストシーズンで、初心者でも釣果が期待できます。`}
+          {methodBreakdown.length > 0 && `おすすめの釣り方は${methodBreakdown.slice(0, 3).map((m) => m.method).join("・")}。`}
+          近くの釣り場探しにもご活用ください。
         </p>
       </div>
 
@@ -317,7 +338,7 @@ export default async function PrefectureFishPage({ params }: PageProps) {
             <CardContent className="p-4">
               <h2 className="mb-2 flex items-center gap-2 text-sm font-bold">
                 <Calendar className="size-4 text-primary" />
-                シーズン
+                {fish.name}のベストシーズン
               </h2>
               <div className="space-y-1">
                 <p className="text-sm text-muted-foreground">
@@ -339,7 +360,7 @@ export default async function PrefectureFishPage({ params }: PageProps) {
               <CardContent className="p-4">
                 <h2 className="mb-2 flex items-center gap-2 text-sm font-bold">
                   <Target className="size-4 text-primary" />
-                  主な釣り方
+                  {fish.name}のおすすめ釣り方
                 </h2>
                 <div className="flex flex-wrap gap-1.5">
                   {methodBreakdown.map(({ method, count }) => (
@@ -379,7 +400,7 @@ export default async function PrefectureFishPage({ params }: PageProps) {
       <section className="mb-8 sm:mb-10">
         <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
           <MapPin className="size-5 text-primary" />
-          {pref.name}で{fish.name}が釣れるスポット（{spots.length}件）
+          {pref.name}の{fish.name}おすすめ釣りスポット{spots.length}選
         </h2>
 
         {/* スポット詳細テーブル */}
@@ -447,7 +468,7 @@ export default async function PrefectureFishPage({ params }: PageProps) {
       {relatedFishInPref.length > 0 && (
         <section className="mb-8 sm:mb-10">
           <h2 className="mb-3 text-base font-bold sm:text-lg">
-            {pref.name}で釣れる他の魚種
+            {pref.name}で釣れるその他のおすすめ魚種
           </h2>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {relatedFishInPref.map((f) => (
@@ -469,7 +490,7 @@ export default async function PrefectureFishPage({ params }: PageProps) {
       {relatedPrefsForFish.length > 0 && (
         <section className="mb-8 sm:mb-10">
           <h2 className="mb-3 text-base font-bold sm:text-lg">
-            {fish.name}が釣れる他の都道府県
+            {fish.name}が釣れるその他の都道府県・おすすめエリア
           </h2>
           <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
             {relatedPrefsForFish.map((p) => (

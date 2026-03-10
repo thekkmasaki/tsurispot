@@ -52,8 +52,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const month = getMonthBySlug(monthSlug);
   if (!method || !month) return {};
 
-  const title = `${month.name}の${method.name}｜釣れる魚・おすすめスポット・タックル情報`;
-  const description = `${month.name}の${method.name}を徹底ガイド。この時期に釣れる魚一覧、おすすめの釣りスポットTOP10、水温・タックル情報を完全網羅。`;
+  const title = `${method.name} ${month.num}月の攻略法・釣れる魚とおすすめスポット【2026年版】`;
+  const description = `${month.name}の${method.name}を徹底攻略。${month.name}に${method.name}で釣れる魚一覧、初心者にもおすすめの釣り場TOP10、水温・タックル・仕掛け情報を完全ガイド。穴場スポットや季節別のコツも紹介。`;
 
   return {
     title,
@@ -221,9 +221,9 @@ export default async function MethodMonthPage({ params }: Props) {
         {/* ヘッダー */}
         <div className="mb-8">
           <h1 className="text-2xl sm:text-3xl font-bold mb-3">
-            {month.name}の{method.name}ガイド
+            {method.name} {month.num}月の攻略法
             <span className="block text-base sm:text-lg font-normal text-gray-600 mt-1">
-              釣れる魚とおすすめスポット
+              {month.name}に釣れる魚とおすすめスポット・仕掛けガイド
             </span>
           </h1>
 
@@ -250,7 +250,7 @@ export default async function MethodMonthPage({ params }: Props) {
         <section className="mb-10">
           <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Fish className="size-5" />
-            {month.name}に{method.name}で釣れる魚
+            {month.name}に{method.name}で狙えるおすすめの魚
             <Badge variant="secondary" className="text-xs">
               {fish.length}魚種
             </Badge>
@@ -381,7 +381,7 @@ export default async function MethodMonthPage({ params }: Props) {
         <section className="mb-10">
           <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
             <MapPin className="size-5" />
-            {month.name}の{method.name}おすすめスポット
+            {month.name}の{method.name}おすすめスポット・穴場ポイント
             {spots.length > 0 && (
               <Badge variant="secondary" className="text-xs">
                 TOP{Math.min(spots.length, 10)}
@@ -410,7 +410,7 @@ export default async function MethodMonthPage({ params }: Props) {
         <section className="mb-10">
           <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
             <Lightbulb className="size-5" />
-            {month.name}の{method.name}のコツ
+            {month.name}の{method.name}攻略のコツ・初心者向けアドバイス
           </h2>
           <Card>
             <CardContent className="p-4">
@@ -433,7 +433,7 @@ export default async function MethodMonthPage({ params }: Props) {
           <section className="mb-10">
             <h2 className="text-xl font-bold mb-1 flex items-center gap-2">
               <ShoppingBag className="size-5" />
-              {month.name}の{method.name}おすすめアイテム
+              {month.name}の{method.name}に必要なタックル・おすすめアイテム
             </h2>
             <p className="mb-4 text-sm text-muted-foreground">
               当日バタバタしないよう、事前にネットで揃えておくのがおすすめです
@@ -495,7 +495,7 @@ export default async function MethodMonthPage({ params }: Props) {
         <section className="mb-10">
           <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
             <HelpCircle className="size-5" />
-            よくある質問
+            {month.name}の{method.name}に関するよくある質問
           </h2>
           <div className="space-y-3">
             {faqs.map((faq, idx) => (
