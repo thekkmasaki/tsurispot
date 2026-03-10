@@ -45,6 +45,18 @@ export const metadata: Metadata = {
   },
 };
 
+// SpeakableSpecification for GEO (Generative Engine Optimization)
+const guideSpeakableJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "穴釣り完全ガイド - カサゴ・メバルの釣り方と仕掛け【初心者向け】",
+  url: "https://tsurispot.com/guide/anazuri",
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: ["h1", ".page-description", ".guide-summary"],
+  },
+};
+
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -429,6 +441,10 @@ export default function AnazuriGuidePage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSpeakableJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}

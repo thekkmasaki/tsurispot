@@ -30,6 +30,18 @@ export const metadata: Metadata = {
   },
 };
 
+// SpeakableSpecification for GEO (Generative Engine Optimization)
+const guideSpeakableJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "エギング入門ガイド - エギの選び方・シャクリ方・季節別攻略",
+  url: "https://tsurispot.com/guide/eging",
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: ["h1", ".page-description", ".guide-summary"],
+  },
+};
+
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -339,6 +351,10 @@ function EgiSizeDepthDiagram() {
 export default function EgingGuidePage() {
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSpeakableJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}

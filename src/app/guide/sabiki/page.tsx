@@ -76,6 +76,18 @@ export const metadata: Metadata = {
   },
 };
 
+// SpeakableSpecification for GEO (Generative Engine Optimization)
+const guideSpeakableJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "サビキ釣り完全ガイド - 初心者でも爆釣するコツと仕掛け",
+  url: "https://tsurispot.com/guide/sabiki",
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: ["h1", ".page-description", ".guide-summary"],
+  },
+};
+
 const articleJsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -884,6 +896,10 @@ export default function SabikiGuidePage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSpeakableJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}

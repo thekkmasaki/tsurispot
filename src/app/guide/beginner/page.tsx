@@ -47,6 +47,18 @@ export const metadata: Metadata = {
   },
 };
 
+// SpeakableSpecification for GEO (Generative Engine Optimization)
+const guideSpeakableJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "釣り初心者完全ガイド - ゼロから始める釣り入門【2025年版】",
+  url: "https://tsurispot.com/guide/beginner",
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: ["h1", ".page-description", ".guide-summary"],
+  },
+};
+
 const articleJsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
@@ -514,6 +526,10 @@ export default function BeginnerGuidePage() {
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSpeakableJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
