@@ -272,8 +272,9 @@ export default async function BlogPostPage({
                   key={fish!.slug}
                   href={`/fish/${fish!.slug}`}
                   className="inline-flex items-center gap-1.5 rounded-lg border bg-white px-3 py-2 text-sm font-medium transition-colors hover:border-primary hover:text-primary"
+                  title={`${fish!.name}の釣り方・時期・おすすめスポット`}
                 >
-                  {fish!.name}
+                  {fish!.name}の釣り方
                 </Link>
               ))}
             </div>
@@ -341,7 +342,7 @@ export default async function BlogPostPage({
           近くの釣りスポットを探してみよう
         </h2>
         <p className="mb-5 text-sm leading-relaxed text-muted-foreground sm:text-base">
-          ツリスポでは全国1,000か所以上の釣りスポット情報を掲載。今釣れる魚・混雑予想・アクセス情報をまとめてチェックできます。
+          ツリスポでは全国2,100か所以上の釣りスポット情報を掲載。今釣れる魚・混雑予想・アクセス情報をまとめてチェックできます。
         </p>
         <div className="flex flex-wrap gap-3">
           <Link
@@ -349,22 +350,34 @@ export default async function BlogPostPage({
             className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary/90"
           >
             <MapPin className="size-4" />
-            釣りスポットを探す
+            全国の釣りスポットを検索
           </Link>
           <Link
             href="/fish"
             className="inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-white px-5 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-primary/5"
           >
             <Fish className="size-4" />
-            魚図鑑を見る
+            {fishSpecies.length}種の魚種図鑑
           </Link>
           <Link
             href="/catchable-now"
             className="inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-white px-5 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-primary/5"
           >
             <Search className="size-4" />
-            今釣れる魚を調べる
+            今月釣れる魚を調べる
           </Link>
+        </div>
+        {/* 関連ガイドリンク */}
+        <div className="mt-4 flex flex-wrap gap-2 border-t border-primary/10 pt-4">
+          <Link href="/guide" className="text-xs font-medium text-primary hover:underline">釣り方ガイド一覧</Link>
+          <span className="text-xs text-muted-foreground">|</span>
+          <Link href="/for-beginners" className="text-xs font-medium text-primary hover:underline">初心者向けガイド</Link>
+          <span className="text-xs text-muted-foreground">|</span>
+          <Link href="/fishing-calendar" className="text-xs font-medium text-primary hover:underline">月別釣りカレンダー</Link>
+          <span className="text-xs text-muted-foreground">|</span>
+          <Link href="/prefecture" className="text-xs font-medium text-primary hover:underline">都道府県別スポット</Link>
+          <span className="text-xs text-muted-foreground">|</span>
+          <Link href="/map" className="text-xs font-medium text-primary hover:underline">地図で釣り場を探す</Link>
         </div>
       </section>
 
