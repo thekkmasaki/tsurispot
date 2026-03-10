@@ -27,6 +27,18 @@ export const metadata: Metadata = {
   },
 };
 
+// SpeakableSpecification for GEO (Generative Engine Optimization)
+const guideSpeakableJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "釣り糸（ライン）の選び方ガイド - PE・ナイロン・フロロカーボンの違いと号数別強度表",
+  url: "https://tsurispot.com/guide/line",
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: ["h1", ".page-description", ".guide-summary"],
+  },
+};
+
 const faqJsonLd = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
@@ -270,7 +282,10 @@ function LineStrengthDiagram() {
 
 export default function LineGuidePage() {
   return (
-    <div className="container mx-auto max-w-4xl px-4 py-6 sm:py-8">
+    <div className="container mx-auto max-w-4xl px-4 py-6 sm:py-8">      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSpeakableJsonLd) }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
