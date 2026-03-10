@@ -133,6 +133,19 @@ export default async function AreaGuideDetailPage({
     ],
   };
 
+  // SpeakableSpecification for GEO (Generative Engine Optimization)
+  const speakableJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: `${guide.name}の釣り場おすすめガイド`,
+    description: `${guide.name}のおすすめ釣りスポットを初心者〜上級者別に厳選紹介。釣れる魚・ベストシーズン・アクセス情報まで完全攻略。`,
+    url: `https://tsurispot.com/area-guide/${slug}`,
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", ".page-description", ".area-summary"],
+    },
+  };
+
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -171,6 +184,22 @@ export default async function AreaGuideDetailPage({
             : `${guide.name}には初心者でも楽しめる釣り場が多数あります。堤防や漁港がおすすめです。`,
         },
       },
+      {
+        "@type": "Question",
+        name: `${guide.name}で釣りをするのに必要な道具は？`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${guide.name}で釣りをするには、竿・リール・仕掛け・エサの基本装備に加え、クーラーボックス、バケツ、フィッシュグリップが必要です。${guide.mainFish.length > 0 ? `${guide.mainFish[0]}を狙う場合は${guide.mainFish[0]}用の仕掛けを用意しましょう。` : ""}各スポットの詳細ページで推奨タックルを確認できます。`,
+        },
+      },
+      {
+        "@type": "Question",
+        name: `${guide.name}の釣り場のルールやマナーは？`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: `${guide.name}の釣り場では、ゴミの持ち帰り、立入禁止区域の厳守、他の釣り人への配慮が基本マナーです。${guide.prefectures.length > 0 ? `${guide.prefectures.join("・")}の漁業権に注意が必要な場所もあります。` : ""}各スポットの詳細ページで個別のルールを確認してから釣行しましょう。`,
+        },
+      },
     ],
   };
 
@@ -179,6 +208,10 @@ export default async function AreaGuideDetailPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(speakableJsonLd) }}
       />
       <script
         type="application/ld+json"

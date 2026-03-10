@@ -447,6 +447,18 @@ export default async function PrefecturePage({ params }: PageProps) {
         ? `${pref.name}の釣り場は${spotTypeBreakdown.map((t) => `${t.type}${t.count}件（${Math.round((t.count / spots.length) * 100)}%）`).join("、")}です。${beginnerSpots.length > 0 ? `初心者向けスポットは${beginnerSpots.length}件、` : ""}${freeSpots.length > 0 ? `無料で楽しめるスポットは${freeSpots.length}件あります。` : ""}`
         : `${pref.name}の釣り場情報は現在準備中です。`,
     },
+    {
+      question: `${pref.name}で初心者におすすめの釣り場は？`,
+      answer: beginnerSpots.length > 0
+        ? `${pref.name}で初心者におすすめの釣り場は${beginnerSpots.slice(0, 3).map((s) => s.name).join("、")}です。いずれも${beginnerSpots.filter((s) => s.hasParking).length > 0 ? "駐車場あり、" : ""}${beginnerSpots.filter((s) => s.hasToilet).length > 0 ? "トイレ完備で" : ""}安心して釣りを楽しめるスポットです。堤防やサビキ釣りができるポイントが多く、ファミリーにもおすすめです。`
+        : `${pref.name}で初心者向けの釣り場をお探しの場合は、堤防や漁港がおすすめです。設備が整った釣り場を選びましょう。`,
+    },
+    {
+      question: `${pref.name}の釣り場へのアクセスは？`,
+      answer: spots.length > 0
+        ? `${pref.name}には${spots.length}件の釣りスポットがあり、${spots.filter((s) => s.hasParking).length > 0 ? `${spots.filter((s) => s.hasParking).length}件のスポットに駐車場があります。` : ""}各スポットの詳細ページで住所・アクセス方法・最寄り駐車場の情報を確認できます。`
+        : `${pref.name}の釣り場のアクセス情報は各スポットの詳細ページでご確認ください。`,
+    },
   ];
 
   // prefInfoのFAQがあればそちらを使い、なければ動的FAQを使用
@@ -466,10 +478,24 @@ export default async function PrefecturePage({ params }: PageProps) {
     })),
   } : null;
 
+  // SpeakableSpecification for GEO (Generative Engine Optimization)
+  const prefSpeakableJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: `${pref.name}の釣り場おすすめガイド`,
+    description: prefInfo?.description || `${pref.name}で人気の釣り場・穴場スポットを初心者向けに紹介。${spots.length}件のスポット掲載中。`,
+    url: `https://tsurispot.com/prefecture/${pref.slug}`,
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", ".page-description", ".prefecture-summary", ".season-info"],
+    },
+  };
+
   const jsonLdArray = [
     breadcrumbJsonLd,
     placeJsonLd,
     articleJsonLd,
+    prefSpeakableJsonLd,
     ...(faqJsonLd ? [faqJsonLd] : dynamicFaqJsonLd ? [dynamicFaqJsonLd] : []),
     ...(itemListJsonLd ? [itemListJsonLd] : []),
   ];

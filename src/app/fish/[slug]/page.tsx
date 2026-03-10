@@ -244,6 +244,28 @@ export default async function FishDetailPage({ params }: PageProps) {
             },
           }]
         : []),
+      ...(fish.dangerLevel && fish.dangerLevel !== "none"
+        ? [{
+            "@type": "Question" as const,
+            name: `${fish.name}は危険ですか？注意点は？`,
+            acceptedAnswer: {
+              "@type": "Answer" as const,
+              text: fish.dangerLevel === "high"
+                ? `${fish.name}は危険度が高い魚です。${fish.poisonType ? `${fish.poisonType}を持っているため、` : ""}素手で触らず、フィッシュグリップやプライヤーを使って扱いましょう。${fish.dangerNotes && fish.dangerNotes.length > 0 ? fish.dangerNotes[0] : "釣れた場合は十分注意してください。"}`
+                : `${fish.name}は取り扱いに注意が必要な魚です。${fish.poisonType ? `${fish.poisonType}があるため、` : ""}ヒレやトゲに気をつけて扱いましょう。${fish.dangerNotes && fish.dangerNotes.length > 0 ? fish.dangerNotes[0] : ""}`,
+            },
+          }]
+        : []),
+      {
+        "@type": "Question",
+        name: `${fish.name}釣りに必要な道具・装備は？`,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: fish.fishingMethods && fish.fishingMethods.length > 0
+            ? `${fish.name}釣りに必要な基本装備は、ロッド（${fish.fishingMethods[0].tackle.rod}）、リール（${fish.fishingMethods[0].tackle.reel}）、ライン（${fish.fishingMethods[0].tackle.line}）、仕掛け（${fish.fishingMethods[0].tackle.hookOrLure}）です。${fish.fishingMethods.length > 1 ? `${fish.fishingMethods[1].methodName}の場合は${fish.fishingMethods[1].tackle.rod}と${fish.fishingMethods[1].tackle.hookOrLure}を使います。` : ""}クーラーボックスやフィッシュグリップも持参しましょう。`
+            : `${fish.name}釣りには、対象魚に合った竿・リール・仕掛けのほか、クーラーボックス、フィッシュグリップ、バケツなどの基本装備が必要です。`,
+        },
+      },
     ],
   };
 
@@ -293,10 +315,11 @@ export default async function FishDetailPage({ params }: PageProps) {
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: `${fish.name}の釣り方・時期・おすすめスポット`,
+    description: `${fish.name}（${fish.scientificName}）の釣り方、ベストシーズン、おすすめスポット、必要な道具を初心者向けに完全解説。`,
     url: `https://tsurispot.com/fish/${fish.slug}`,
     speakable: {
       "@type": "SpeakableSpecification",
-      cssSelector: ["h1", ".fish-description", ".season-info"],
+      cssSelector: ["h1", ".fish-description", ".season-info", ".fishing-method-summary"],
     },
   };
 

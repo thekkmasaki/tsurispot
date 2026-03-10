@@ -156,6 +156,10 @@ export default async function BlogPostPage({
       "@type": "WebPage",
       "@id": `https://tsurispot.com/blog/${post.slug}`,
     },
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", ".page-description", "article"],
+    },
   };
 
   return (
