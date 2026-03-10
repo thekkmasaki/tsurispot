@@ -6,6 +6,10 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
+  // パフォーマンス: X-Powered-By ヘッダーを削除（不要な情報漏洩防止＋レスポンスサイズ削減）
+  poweredByHeader: false,
+  // パフォーマンス: gzip圧縮を確実に有効化
+  compress: true,
   redirects: async () => [
     {
       source: '/planner',

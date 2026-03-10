@@ -447,7 +447,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
                 >
                   <div className="size-10 shrink-0 overflow-hidden rounded-lg bg-primary/10">
                     {fish.imageUrl ? (
-                      <img src={fish.imageUrl} alt={fish.name} className="size-full object-cover" />
+                      <img src={fish.imageUrl} alt={fish.name} className="size-full object-cover" loading="lazy" />
                     ) : (
                       <div className="flex size-full items-center justify-center text-primary">
                         <Fish className="size-5" />

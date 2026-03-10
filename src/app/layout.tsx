@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
+import Script from "next/script";
 import { Header } from "@/components/layout/header";
 import { searchIndex } from "@/lib/data/search-index";
 import { MobileNav } from "@/components/layout/mobile-nav";
@@ -19,8 +20,9 @@ const SPOT_COUNT = fishingSpots.length.toLocaleString();
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["400", "500", "700"],
   display: "swap",
+  preload: true,
 });
 
 
@@ -91,6 +93,14 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="theme-color" content="#0369a1" />
+        {/* Preconnect: 外部ドメインへの接続を事前確立してCWV改善 */}
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
+        <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+        <link rel="dns-prefetch" href="https://tile.openstreetmap.org" />
+        <link rel="dns-prefetch" href="https://images.microcms-assets.io" />
         {/* Bing Webmaster Tools: .env.local に NEXT_PUBLIC_BING_VERIFICATION を設定 */}
         {process.env.NEXT_PUBLIC_BING_VERIFICATION && (
           <meta name="msvalidate.01" content={process.env.NEXT_PUBLIC_BING_VERIFICATION} />
@@ -111,13 +121,6 @@ export default function RootLayout({
         {/* AI/LLM向けサイト情報ドキュメント */}
         <link rel="help" type="text/markdown" href="/llms.txt" title="LLM Information" />
         <link rel="author" type="text/plain" href="/humans.txt" />
-        {process.env.NEXT_PUBLIC_ADSENSE_ID && (
-          <script
-            async
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_ID}`}
-            crossOrigin="anonymous"
-          />
-        )}
       </head>
       <body
         className={`${notoSansJP.variable} font-[family-name:var(--font-noto-sans-jp)] antialiased`}
@@ -205,6 +208,14 @@ export default function RootLayout({
           }}
         />
         <GoogleAnalytics />
+        {/* AdSense: afterInteractive戦略でLCP・FIDを阻害しない */}
+        {process.env.NEXT_PUBLIC_ADSENSE_ID && (
+          <Script
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_ID}`}
+            strategy="afterInteractive"
+            crossOrigin="anonymous"
+          />
+        )}
         <PWARegister />
         <Header searchItems={searchIndex} />
         <main className="min-h-screen pb-20 md:pb-0">{children}</main>
