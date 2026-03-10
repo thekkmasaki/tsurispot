@@ -64,24 +64,7 @@ export const metadata: Metadata = {
   },
 };
 
-// NearbySpots / LocationRecommendations 用の軽量スポットデータ
-// フルデータ(33MB+)ではなく必要フィールドだけ渡してRSCペイロードを削減
-const lightSpots = fishingSpots.map((s) => ({
-  id: s.id,
-  slug: s.slug,
-  name: s.name,
-  spotType: s.spotType,
-  rating: s.rating,
-  latitude: s.latitude,
-  longitude: s.longitude,
-  region: { prefecture: s.region.prefecture, areaName: s.region.areaName },
-  catchableFish: s.catchableFish.map((cf) => ({
-    fish: { id: cf.fish.id, name: cf.fish.name, slug: cf.fish.slug },
-    monthStart: cf.monthStart,
-    monthEnd: cf.monthEnd,
-    peakSeason: cf.peakSeason,
-  })),
-}));
+// lightSpots は廃止: NearbySpots が /api/spots/nearby からAPI取得するため不要
 
 // WebSite + Organization は layout.tsx に統一（重複排除）
 
@@ -191,11 +174,11 @@ const homeFaqJsonLd = {
 export default function Home() {
   const currentMonth = new Date().getMonth() + 1;
   const catchableNow = getCatchableNow(currentMonth);
-  // 評価順にトップ200件を軽量データ化してクライアントへ
+  // 評価順にトップ30件を軽量データ化してクライアントへ（200→30に削減でHTMLサイズ大幅縮小）
   const popularSpotsData = fishingSpots
     .slice()
     .sort((a, b) => b.rating - a.rating)
-    .slice(0, 200)
+    .slice(0, 30)
     .map((s) => ({
       id: s.id,
       slug: s.slug,
@@ -565,7 +548,7 @@ export default function Home() {
 
       {/* 近くの釣りスポット */}
       <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
-        <NearbySpots allSpots={lightSpots} />
+        <NearbySpots />
       </section>
 
       {/* 人気の釣りスポット（位置情報対応） */}
