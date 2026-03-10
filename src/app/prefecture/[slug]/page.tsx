@@ -12,6 +12,10 @@ import {
   TrendingUp,
   Flame,
   Compass,
+  Trophy,
+  BookOpen,
+  AlertTriangle,
+  Thermometer,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -26,6 +30,7 @@ import { getFishSlugByName } from "@/lib/data";
 import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { areaGuides, type AreaGuide } from "@/lib/data/area-guides";
 import { SpotSearchFilter } from "@/components/prefecture/spot-search-filter";
+import { monthlyGuides } from "@/lib/data/monthly-guides";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -156,6 +161,65 @@ function getTopSeasionalSpots(prefectureName: string, currentMonth: number) {
 }
 
 /**
+ * 人気の釣りスポットTOP10（評価順）
+ */
+function getTop10SpotsByRating(prefectureName: string) {
+  const prefSpots = getSpotsForPrefecture(prefectureName);
+  return [...prefSpots]
+    .sort((a, b) => b.rating - a.rating || b.catchableFish.length - a.catchableFish.length)
+    .slice(0, 10);
+}
+
+/**
+ * 季節別おすすめ魚種（スポットのcatchableFishデータから動的生成）
+ * Spring: 3-5, Summer: 6-8, Autumn: 9-11, Winter: 12-2
+ */
+function getSeasonalFishBreakdown(prefectureName: string) {
+  const seasonRanges = {
+    spring: [3, 4, 5],
+    summer: [6, 7, 8],
+    autumn: [9, 10, 11],
+    winter: [12, 1, 2],
+  } as const;
+
+  const result: Record<string, { name: string; slug: string; spotCount: number; isPeak: boolean }[]> = {};
+
+  for (const [season, months] of Object.entries(seasonRanges)) {
+    const fishMap = new Map<string, { name: string; slug: string; spotCount: number; isPeak: boolean }>();
+
+    for (const spot of fishingSpots) {
+      if (spot.region.prefecture !== prefectureName) continue;
+      for (const cf of spot.catchableFish) {
+        const inSeason = months.some((m) => cf.fish.seasonMonths.includes(m));
+        if (!inSeason) continue;
+        const existing = fishMap.get(cf.fish.id);
+        const isPeak = months.some((m) => cf.fish.peakMonths.includes(m));
+        if (existing) {
+          existing.spotCount++;
+          if (isPeak) existing.isPeak = true;
+        } else {
+          fishMap.set(cf.fish.id, {
+            name: cf.fish.name,
+            slug: cf.fish.slug,
+            spotCount: 1,
+            isPeak,
+          });
+        }
+      }
+    }
+
+    result[season] = Array.from(fishMap.values())
+      .sort((a, b) => {
+        if (a.isPeak !== b.isPeak) return a.isPeak ? -1 : 1;
+        return b.spotCount - a.spotCount;
+      })
+      .slice(0, 8);
+  }
+
+  return result;
+}
+
+/**
  * 今月この県で釣れる魚を収集（重複排除）
  */
 function getInSeasonFishForPrefecture(
@@ -221,14 +285,15 @@ export async function generateMetadata({
   const familyText = familyCount > 0 ? `子連れ向け ${familyCount}箇所` : "";
   const featureTexts = [beginnerText, familyText, freeText].filter(Boolean).join("・");
 
-  const title = `${pref.name}の釣り場おすすめ${spots.length > 0 ? spots.length : ""}選｜${featureTexts || "初心者・子連れ向け穴場スポットも"}【2026年最新】`;
-  const description = `${pref.name}のおすすめ釣りスポット${spots.length > 0 ? `${spots.length}箇所` : ""}を初心者〜上級者別にランキング形式で紹介。${familyCount > 0 ? `子連れ・ファミリー向け${familyCount}箇所。` : ""}${pref.name}近くの${spotTypeText || "堤防・漁港・磯"}で${topFishNames}が狙える穴場釣り場を厳選。駐車場・トイレ情報、ベストシーズン、アクセス方法まで完全ガイド。${featureTexts ? `【${featureTexts}】` : ""}`;
+  const currentYear = new Date().getFullYear();
+  const title = `${pref.name}の釣り場おすすめ完全ガイド${spots.length > 0 ? `【${spots.length}選】` : ""}初心者・穴場スポット${featureTexts ? `｜${featureTexts}` : ""}【${currentYear}年最新】`;
+  const description = `${pref.name}のおすすめ釣りスポット${spots.length > 0 ? `${spots.length}箇所` : ""}を初心者〜上級者別にランキング形式で紹介。${familyCount > 0 ? `子連れ・ファミリー向け${familyCount}箇所。` : ""}${pref.name}近くの${spotTypeText || "堤防・漁港・磯"}で${topFishNames}が狙える穴場釣り場を厳選。人気TOP10ランキング・季節別おすすめ魚種・駐車場・トイレ情報・ベストシーズン・アクセス方法まで完全ガイド。${featureTexts ? `【${featureTexts}】` : ""}`;
 
   return {
     title,
     description,
     openGraph: {
-      title: `${pref.name}の釣り場おすすめ${spots.length > 0 ? spots.length : ""}選【2026年最新】`,
+      title: `${pref.name}の釣り場おすすめ完全ガイド${spots.length > 0 ? `【${spots.length}選】` : ""}【${currentYear}年最新】`,
       description: `${pref.name}で人気の釣りスポットをエリア別に紹介。${topFishNames}が釣れるおすすめの釣り場情報。${featureTexts ? `${featureTexts}。` : ""}`,
       type: "website",
       url: `https://tsurispot.com/prefecture/${pref.slug}`,
@@ -379,6 +444,15 @@ export default async function PrefecturePage({ params }: PageProps) {
   const spotTypeBreakdown = getSpotTypeBreakdown(pref.name);
   const difficultyBreakdown = getDifficultyBreakdown(pref.name);
 
+  // TOP10スポット（評価順）
+  const top10Spots = getTop10SpotsByRating(pref.name);
+
+  // 季節別おすすめ魚種（動的生成）
+  const seasonalFishBreakdown = getSeasonalFishBreakdown(pref.name);
+
+  // 現在の年（動的）
+  const currentYear = new Date().getFullYear();
+
   // FAQ生成
   const faqs = prefInfo
     ? getPrefectureFAQs(slug, pref.name, spots.length, prefInfo.popularFish, prefInfo.bestSeason)
@@ -402,7 +476,7 @@ export default async function PrefecturePage({ params }: PageProps) {
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: `${pref.name}の釣り場おすすめ${spots.length > 0 ? spots.length : ""}選｜初心者向け穴場スポットも`,
+    headline: `${pref.name}の釣り場おすすめ完全ガイド${spots.length > 0 ? `【${spots.length}選】` : ""}`,
     description: prefInfo?.description || `${pref.name}で人気の釣り場・穴場スポットを紹介。近くのおすすめ釣りスポットが見つかります。`,
     author: {
       "@type": "Person",
@@ -458,6 +532,35 @@ export default async function PrefecturePage({ params }: PageProps) {
       answer: spots.length > 0
         ? `${pref.name}には${spots.length}件の釣りスポットがあり、${spots.filter((s) => s.hasParking).length > 0 ? `${spots.filter((s) => s.hasParking).length}件のスポットに駐車場があります。` : ""}各スポットの詳細ページで住所・アクセス方法・最寄り駐車場の情報を確認できます。`
         : `${pref.name}の釣り場のアクセス情報は各スポットの詳細ページでご確認ください。`,
+    },
+    {
+      question: `${pref.name}の釣り場の駐車場事情は？`,
+      answer: (() => {
+        const parkingSpots = spots.filter((s) => s.hasParking);
+        const toiletSpots = spots.filter((s) => s.hasToilet);
+        if (parkingSpots.length > 0) {
+          return `${pref.name}の釣り場${spots.length}件のうち、駐車場ありのスポットは${parkingSpots.length}件（${Math.round((parkingSpots.length / spots.length) * 100)}%）です。${toiletSpots.length > 0 ? `トイレ完備のスポットは${toiletSpots.length}件あります。` : ""}初心者やファミリーの方は、駐車場・トイレ完備のスポットを選ぶと安心して釣りを楽しめます。各スポットの詳細ページで最新の施設情報をご確認ください。`;
+        }
+        return `${pref.name}の各釣り場の駐車場情報は、スポット詳細ページでご確認いただけます。`;
+      })(),
+    },
+    {
+      question: `${pref.name}で人気の釣りスポットTOP3は？`,
+      answer: top10Spots.length >= 3
+        ? `${pref.name}で評価の高い人気釣りスポットTOP3は、1位「${top10Spots[0].name}」（${SPOT_TYPE_LABELS[top10Spots[0].spotType]}・評価${top10Spots[0].rating.toFixed(1)}）、2位「${top10Spots[1].name}」（${SPOT_TYPE_LABELS[top10Spots[1].spotType]}・評価${top10Spots[1].rating.toFixed(1)}）、3位「${top10Spots[2].name}」（${SPOT_TYPE_LABELS[top10Spots[2].spotType]}・評価${top10Spots[2].rating.toFixed(1)}）です。詳しくはページ内のランキングをご覧ください。`
+        : `${pref.name}の人気釣りスポットは各スポットの詳細ページでご確認ください。`,
+    },
+    {
+      question: `${pref.name}の釣りのベストシーズンは？`,
+      answer: (() => {
+        const seasonCounts = Object.entries(seasonalFishBreakdown).map(([season, fishes]) => ({
+          season,
+          count: fishes.length,
+        }));
+        const bestSeason = seasonCounts.sort((a, b) => b.count - a.count)[0];
+        const seasonNameMap: Record<string, string> = { spring: "春（3〜5月）", summer: "夏（6〜8月）", autumn: "秋（9〜11月）", winter: "冬（12〜2月）" };
+        return `${pref.name}では一年を通して釣りを楽しめますが、${bestSeason ? `最も多くの魚種が狙える${seasonNameMap[bestSeason.season]}が特におすすめ` : "春〜秋がおすすめ"}です。${prefInfo?.bestSeason || `季節ごとに異なる魚種が釣れるため、ターゲットに合わせた時期選びが重要です。`}`;
+      })(),
     },
   ];
 
@@ -528,22 +631,23 @@ export default async function PrefecturePage({ params }: PageProps) {
       {/* Header */}
       <div className="mb-6 sm:mb-8">
         <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
-          {pref.name}の釣りスポット一覧｜おすすめ釣り場ガイド
+          {pref.name}の釣り場おすすめ完全ガイド{spots.length > 0 && `【${spots.length}選】`}
         </h1>
-        <p className="mt-2 text-sm text-muted-foreground sm:text-base">
-          {spots.length > 0
-            ? `${spots.length}件の釣りスポットをエリア別に紹介`
+        <p className="mt-2 text-sm text-muted-foreground sm:text-base page-description">
+          {currentYear}年最新版｜{spots.length > 0
+            ? `${spots.length}件の釣りスポットをエリア別・ランキング形式で紹介`
             : `${pref.name}の釣りスポット情報`}
           {beginnerSpots.length > 0 &&
             `｜初心者向け${beginnerSpots.length}件`}
           {freeSpots.length > 0 && `｜無料${freeSpots.length}件`}
         </p>
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-3 text-sm leading-relaxed text-muted-foreground prefecture-summary">
           {pref.name}には{spots.length}件の釣りスポットが登録されています。
           {beginnerSpots.length > 0 ? `初心者向けスポットは${beginnerSpots.length}件あります。` : ""}
           {freeSpots.length > 0 ? `無料で釣りができるスポットは${freeSpots.length}件です。` : ""}
           {catchableFish.length > 0 ? `${pref.name}で人気の魚種は${catchableFish.slice(0, 4).map(f => f.name).join("、")}です。` : ""}
           {spotTypeBreakdown.length > 0 ? `釣り場のタイプは${spotTypeBreakdown.slice(0, 3).map(t => t.type).join("・")}が中心です。` : ""}
+          このページでは人気TOP10ランキング・季節別おすすめ魚種・エリア別スポット一覧を完全網羅しています。
         </p>
       </div>
 
@@ -572,6 +676,98 @@ export default async function PrefecturePage({ params }: PageProps) {
               </div>
             </CardContent>
           </Card>
+        </section>
+      )}
+
+      {/* 人気の釣りスポットTOP10ランキング */}
+      {top10Spots.length > 0 && (
+        <section className="mb-8 sm:mb-10" id="ranking">
+          <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
+            <Trophy className="size-5 text-yellow-500" />
+            {pref.name}の人気釣りスポットTOP10ランキング
+          </h2>
+          <p className="mb-4 text-sm text-muted-foreground">
+            {pref.name}で評価の高い人気釣りスポットをランキング形式でご紹介。初心者の方はまずこのTOP10から選ぶのがおすすめです。
+          </p>
+          <div className="grid gap-3 sm:gap-4">
+            {top10Spots.map((spot, index) => {
+              const topFish = spot.catchableFish
+                .slice(0, 3)
+                .map((cf) => cf.fish.name);
+              return (
+                <Link
+                  key={spot.id}
+                  href={`/spots/${spot.slug}`}
+                  title={`${spot.name}（${topFish.join("・")}が釣れる${SPOT_TYPE_LABELS[spot.spotType]}）`}
+                >
+                  <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
+                    <CardContent className="p-3 sm:p-4">
+                      <div className="flex items-start gap-3 sm:gap-4">
+                        <div
+                          className={`flex size-8 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white sm:size-10 sm:text-base ${
+                            index === 0
+                              ? "bg-yellow-500"
+                              : index === 1
+                                ? "bg-gray-400"
+                                : index === 2
+                                  ? "bg-amber-700"
+                                  : "bg-muted-foreground"
+                          }`}
+                        >
+                          {index + 1}
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
+                            {spot.name}（{topFish.join("・")}が釣れる{SPOT_TYPE_LABELS[spot.spotType]}）
+                          </h3>
+                          <p className="mt-0.5 text-xs text-muted-foreground">
+                            {spot.region.areaName}
+                            <span className="mx-1">|</span>
+                            {SPOT_TYPE_LABELS[spot.spotType]}
+                            <span className="mx-1">|</span>
+                            {DIFFICULTY_LABELS[spot.difficulty]}
+                          </p>
+                          <div className="mt-2 flex flex-wrap gap-1">
+                            {topFish.map((name) => (
+                              <Badge
+                                key={name}
+                                variant="secondary"
+                                className="text-xs"
+                              >
+                                <Fish className="mr-0.5 size-3" />
+                                {name}
+                              </Badge>
+                            ))}
+                            {spot.hasParking && (
+                              <Badge variant="outline" className="text-xs">
+                                駐車場あり
+                              </Badge>
+                            )}
+                            {spot.hasToilet && (
+                              <Badge variant="outline" className="text-xs">
+                                トイレあり
+                              </Badge>
+                            )}
+                          </div>
+                        </div>
+                        <div className="shrink-0 text-right">
+                          <div className="flex items-center gap-1 text-sm">
+                            <Star className="size-4 fill-yellow-400 text-yellow-400" />
+                            <span className="font-medium">
+                              {spot.rating.toFixed(1)}
+                            </span>
+                          </div>
+                          <p className="mt-1 text-xs text-muted-foreground">
+                            {spot.catchableFish.length}魚種
+                          </p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              );
+            })}
+          </div>
         </section>
       )}
 
@@ -769,6 +965,80 @@ export default async function PrefecturePage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      {/* 季節別おすすめ（動的データ版 - prefInfoのseasonalFishがない場合に表示） */}
+      {!prefInfo?.seasonalFish && Object.values(seasonalFishBreakdown).some((arr) => arr.length > 0) && (
+        <section className="mb-8 sm:mb-10 season-info" id="seasonal">
+          <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
+            <Thermometer className="size-5 text-emerald-500" />
+            {pref.name}の季節別おすすめ魚種ガイド
+          </h2>
+          <p className="mb-4 text-sm text-muted-foreground">
+            {pref.name}では四季を通じてさまざまな魚が釣れます。シーズンに合わせたターゲット選びの参考にどうぞ。
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {(["spring", "summer", "autumn", "winter"] as const).map((season) => {
+              const fishes = seasonalFishBreakdown[season] || [];
+              if (fishes.length === 0) return null;
+              return (
+                <Card
+                  key={season}
+                  className={`gap-0 py-0 border ${seasonColors[season]}`}
+                >
+                  <CardContent className="p-3 sm:p-4">
+                    <h3 className="mb-2 text-sm font-bold">
+                      {seasonLabels[season]}
+                    </h3>
+                    <div className="flex flex-wrap gap-1">
+                      {fishes.map((f) => {
+                        const fishInPref = catchableFish.find((cf) => cf.slug === f.slug);
+                        const href = fishInPref && fishInPref.count >= 3
+                          ? `/prefecture/${pref.slug}/fish/${f.slug}`
+                          : `/fish/${f.slug}`;
+                        return (
+                          <Link key={f.slug} href={href} title={`${pref.name}の${f.name}釣り情報`}>
+                            <Badge
+                              variant="secondary"
+                              className="cursor-pointer text-xs transition-colors hover:bg-primary hover:text-primary-foreground"
+                            >
+                              {f.name}
+                              {f.isPeak && (
+                                <Flame className="ml-0.5 size-3 text-orange-500" />
+                              )}
+                            </Badge>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </div>
+        </section>
+      )}
+
+      {/* 釣りルール・注意事項リンク */}
+      <section className="mb-8 sm:mb-10">
+        <Link href={`/fishing-rules/${slug}`}>
+          <Card className="gap-0 py-0 border-amber-200 bg-amber-50 transition-shadow hover:shadow-md">
+            <CardContent className="p-4 sm:p-5">
+              <div className="flex items-center gap-3">
+                <AlertTriangle className="size-6 shrink-0 text-amber-600" />
+                <div>
+                  <h2 className="text-sm font-bold sm:text-base">
+                    {pref.name}の釣りルール・注意事項
+                  </h2>
+                  <p className="mt-1 text-xs text-amber-700 sm:text-sm">
+                    釣り禁止エリア・遊漁券・釣り方の制限など、{pref.name}で釣りをする前に確認しておきたいルールをまとめています。
+                  </p>
+                </div>
+                <ChevronLeft className="size-5 shrink-0 rotate-180 text-amber-600" />
+              </div>
+            </CardContent>
+          </Card>
+        </Link>
+      </section>
 
       {/* Catchable fish in this prefecture */}
       {catchableFish.length > 0 && (
@@ -1115,107 +1385,153 @@ export default async function PrefecturePage({ params }: PageProps) {
         </section>
       )}
 
-      {/* 釣り方ガイド */}
+      {/* 関連ガイド（強化版内部リンクセクション） */}
       <section className="mt-8 sm:mt-12">
-        <h2 className="mb-3 text-base font-bold sm:mb-4 sm:text-lg">
-          {pref.name}でおすすめの釣り方ガイド
+        <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
+          <BookOpen className="size-5 text-primary" />
+          {pref.name}の釣りに役立つ関連ガイド
         </h2>
-        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            { href: "/guide/sabiki", label: "サビキ釣り", desc: "堤防でアジ・サバ・イワシを手軽に" },
-            { href: "/guide/choinage", label: "ちょい投げ", desc: "キスやハゼを狙う投げ釣り入門" },
-            { href: "/guide/eging", label: "エギング", desc: "アオリイカをエギで狙う" },
-            { href: "/guide/anazuri", label: "穴釣り", desc: "テトラでカサゴ・メバルを狙う" },
-            { href: "/guide/float-fishing", label: "ウキ釣り", desc: "メジナやクロダイをウキで狙う" },
-            { href: "/guide/jigging", label: "ショアジギング", desc: "メタルジグで青物を狙う" },
-          ].map((guide) => (
-            <Link key={guide.href} href={guide.href}>
-              <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                <CardContent className="p-3">
-                  <p className="text-sm font-semibold group-hover:text-primary">{guide.label}</p>
-                  <p className="mt-0.5 text-xs text-muted-foreground">{guide.desc}</p>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
-        </div>
-      </section>
 
-      {/* Internal links */}
-      <section className="mt-8 sm:mt-12">
-        <h2 className="mb-3 text-base font-bold sm:mb-4 sm:text-lg">
-          関連リンク
-        </h2>
-        <div className="flex flex-wrap gap-2">
-          {prefAreaGuides.map((guide) => (
+        {/* エリアガイド */}
+        {prefAreaGuides.length > 0 && (
+          <div className="mb-4">
+            <h3 className="mb-2 text-sm font-semibold text-muted-foreground">
+              {pref.name}のエリアガイド
+            </h3>
+            <div className="flex flex-wrap gap-2">
+              {prefAreaGuides.map((guide) => (
+                <Link
+                  key={guide.slug}
+                  href={`/area-guide/${guide.slug}`}
+                  className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
+                >
+                  {guide.name}の釣り場完全ガイド
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* 釣り方ガイド */}
+        <div className="mb-4">
+          <h3 className="mb-2 text-sm font-semibold text-muted-foreground">
+            釣り方ガイド
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {[
+              { href: "/guide/sabiki", label: "サビキ釣りガイド" },
+              { href: "/guide/choinage", label: "ちょい投げガイド" },
+              { href: "/guide/eging", label: "エギングガイド" },
+              { href: "/guide/anazuri", label: "穴釣りガイド" },
+              { href: "/guide/float-fishing", label: "ウキ釣りガイド" },
+              { href: "/guide/jigging", label: "ショアジギングガイド" },
+              { href: "/guide", label: "釣り方ガイド一覧" },
+            ].map((g) => (
+              <Link
+                key={g.href}
+                href={g.href}
+                className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
+              >
+                {g.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* 月別ガイド */}
+        <div className="mb-4">
+          <h3 className="mb-2 text-sm font-semibold text-muted-foreground">
+            月別釣りガイド
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {monthlyGuides.slice(0, 12).map((guide) => (
+              <Link
+                key={guide.slug}
+                href={`/monthly/${guide.slug}`}
+                className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
+              >
+                {guide.month}月の釣りガイド
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* 近隣県・その他リンク */}
+        <div className="mb-4">
+          <h3 className="mb-2 text-sm font-semibold text-muted-foreground">
+            近隣の都道府県・その他
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {adjacentPrefs.map((p) => (
+              <Link
+                key={p.slug}
+                href={`/prefecture/${p.slug}`}
+                className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
+              >
+                {p.name}の釣り場ガイド
+              </Link>
+            ))}
             <Link
-              key={guide.slug}
-              href={`/area-guide/${guide.slug}`}
+              href={`/fishing-rules/${slug}`}
+              className="rounded-full border border-amber-300 bg-amber-50 px-4 py-2 text-sm transition-colors hover:bg-amber-100"
+            >
+              {pref.name}の釣りルール
+            </Link>
+            <Link
+              href="/spots"
               className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
             >
-              {guide.name}の釣り場ガイド
+              全国の釣りスポット一覧
             </Link>
-          ))}
-          <Link
-            href={`/fishing-rules/${slug}`}
-            className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
-          >
-            {pref.name}の釣りルール
-          </Link>
-          <Link
-            href="/spots"
-            className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
-          >
-            全国の釣りスポット
-          </Link>
-          <Link
-            href="/prefecture"
-            className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
-          >
-            都道府県から探す
-          </Link>
-          <Link
-            href="/catchable-now"
-            className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
-          >
-            今釣れる魚
-          </Link>
-          <Link
-            href="/map"
-            className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
-          >
-            地図から探す
-          </Link>
-          <Link
-            href="/fish"
-            className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
-          >
-            魚種から探す
-          </Link>
-          <Link
-            href="/guide"
-            className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
-          >
-            釣り方ガイド一覧
-          </Link>
-          <Link
-            href="/ranking"
-            className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
-          >
-            釣り場ランキング
-          </Link>
-          <Link
-            href="/fishing-calendar"
-            className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
-          >
-            月別カレンダー
-          </Link>
-          <Link
-            href="/for-beginners"
-            className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
-          >
-            初心者ガイド
-          </Link>
+            <Link
+              href="/prefecture"
+              className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
+            >
+              都道府県から探す
+            </Link>
+            <Link
+              href="/catchable-now"
+              className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
+            >
+              今釣れる魚
+            </Link>
+            <Link
+              href="/map"
+              className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
+            >
+              地図から釣り場を探す
+            </Link>
+            <Link
+              href="/fish"
+              className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
+            >
+              魚種図鑑
+            </Link>
+            <Link
+              href="/ranking"
+              className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
+            >
+              全国釣り場ランキング
+            </Link>
+            <Link
+              href="/fishing-calendar"
+              className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
+            >
+              釣り月別カレンダー
+            </Link>
+            <Link
+              href="/for-beginners"
+              className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
+            >
+              初心者向け釣りガイド
+            </Link>
+            <Link
+              href="/blog"
+              className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
+            >
+              釣りブログ・コラム
+            </Link>
+          </div>
         </div>
       </section>
 
