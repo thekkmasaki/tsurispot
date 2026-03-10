@@ -6,7 +6,7 @@ import { Store } from "lucide-react";
 import { ShopUpdateForm } from "@/components/shops/shop-update-form";
 
 export const metadata: Metadata = {
-  title: "エサ在庫更新 | ツリスポ",
+  title: "エサ在庫更新",
   robots: { index: false, follow: false },
 };
 

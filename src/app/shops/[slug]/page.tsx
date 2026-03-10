@@ -39,7 +39,7 @@ export async function generateMetadata({
   if (!shop) return { title: "釣具店が見つかりません" };
 
   return {
-    title: `${shop.name} - 釣具店情報 | ツリスポ`,
+    title: `${shop.name} - 釣具店情報`,
     description: `${shop.name}（${shop.address}）の営業時間・エサ在庫・サービス情報。${shop.description}`,
     ...(slug === "sample-premium" ? { robots: { index: false, follow: false } } : {}),
     alternates: {

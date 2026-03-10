@@ -7,7 +7,7 @@ import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 
 export const metadata: Metadata = {
-  title: "釣り糸の結び方｜初心者はユニノットだけでOK｜ツリスポ",
+  title: "釣り糸の結び方｜初心者はユニノットだけでOK",
   description:
     "釣り初心者がまず覚えるべき結び方はユニノット1つだけ。針・サルカン・スナップ、なんでも結べる万能ノット。図解つきでわかりやすく解説。",
   openGraph: {

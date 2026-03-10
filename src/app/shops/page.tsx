@@ -16,7 +16,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { tackleShops } from "@/lib/data/shops";
 
 export const metadata: Metadata = {
-  title: "釣具店・エサ店ガイド | ツリスポ",
+  title: "釣具店・エサ店ガイド",
   description:
     "全国の釣具店・釣りエサ店を紹介。個人経営の地元密着店からチヌ釣り専門店、中古釣具店まで。エサの在庫状況もリアルタイムで確認できます。",
   openGraph: {

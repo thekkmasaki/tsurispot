@@ -37,7 +37,7 @@ export async function generateMetadata({
   const guide = seasonalGuides.find((g) => g.slug === month);
   if (!guide) return { title: "ページが見つかりません" };
 
-  const title = `${guide.season}の${guide.method}完全ガイド【2026年版】| ツリスポ`;
+  const title = `${guide.season}の${guide.method}完全ガイド【2026年版】`;
   const description = `${guide.season}の${guide.method}を徹底解説。${guide.description.slice(0, 100)}...おすすめスポット・必要な道具・釣り方のコツまで網羅。`;
 
   return {
