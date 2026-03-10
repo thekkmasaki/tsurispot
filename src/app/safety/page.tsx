@@ -16,11 +16,11 @@ import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
-  title: "釣りの安全ガイド - ツリスポ",
+  title: "釣りの安全ガイド",
   description:
     "釣りの安全対策7項目を徹底解説。ライフジャケット選び・天候確認・転落防止・毒魚の見分け方・子どもとの安全対策・緊急連絡先118番まで網羅。釣行前の安全チェックリスト付き。",
   openGraph: {
-    title: "釣りの安全ガイド - ツリスポ",
+    title: "釣りの安全ガイド",
     description:
       "釣りを安全に楽しむための総合ガイド。ライフジャケット、天候確認、転落リスク、毒魚、緊急連絡先まで網羅。",
     type: "article",

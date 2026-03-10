@@ -8,7 +8,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { fishSpecies, getPeakFish, getCatchableNow } from "@/lib/data/fish";
 
 export const metadata: Metadata = {
-  title: "月別釣りカレンダー - 何月に何が釣れる？ | ツリスポ",
+  title: "月別釣りカレンダー - 何月に何が釣れる？",
   description:
     "月ごとに釣れる魚を一覧で紹介。1月から12月まで各月のおすすめターゲット魚種、旬の釣りものがひと目でわかる釣りカレンダー。釣行計画にお役立てください。",
   openGraph: {

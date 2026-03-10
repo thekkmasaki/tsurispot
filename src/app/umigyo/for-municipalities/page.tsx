@@ -28,11 +28,11 @@ import { fishingSpots } from "@/lib/data/spots";
 const spotCount = fishingSpots.length;
 
 export const metadata: Metadata = {
-  title: "自治体・漁協向け 海業推進 × デジタル集客プラン - ツリスポ",
+  title: "自治体・漁協向け 海業推進 × デジタル集客プラン",
   description:
     "海業推進地区の自治体・漁協向け掲載プラン。ツリスポの月間数万PVの釣り情報プラットフォームで漁港への集客を支援します。無料プランから始められます。",
   openGraph: {
-    title: "自治体・漁協向け 海業推進 × デジタル集客プラン - ツリスポ",
+    title: "自治体・漁協向け 海業推進 × デジタル集客プラン",
     description:
       "釣り情報サイトNo.1を目指すツリスポで、海業推進地区の情報を発信しませんか？無料プランあり。",
     type: "website",

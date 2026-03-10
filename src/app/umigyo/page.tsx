@@ -23,11 +23,11 @@ import {
 import { UmigyoListClient } from "./umigyo-list-client";
 
 export const metadata: Metadata = {
-  title: "海業（うみぎょう）推進 | 釣りで地域を元気に - ツリスポ",
+  title: "海業（うみぎょう）推進 | 釣りで地域を元気に",
   description:
     "水産庁が推進する「海業」全86地区の情報を掲載。モデル地区12地区のハイライトや、漁港での釣りマナー、自治体向け掲載案内など、海業と釣り観光の最新情報をお届けします。",
   openGraph: {
-    title: "海業（うみぎょう）推進 | 釣りで地域を元気に - ツリスポ",
+    title: "海業（うみぎょう）推進 | 釣りで地域を元気に",
     description:
       "水産庁選定の海業推進全86地区を網羅。釣り観光を通じた漁港活性化の最前線を紹介します。",
     type: "website",

@@ -20,7 +20,7 @@ import {
 } from "@/lib/data/products";
 
 export const metadata: Metadata = {
-  title: "編集長が厳選した釣り道具 - 実際に使って選んだおすすめアイテム | ツリスポ",
+  title: "編集長が厳選した釣り道具 - 実際に使って選んだおすすめアイテム",
   description:
     "釣り歴10年以上の編集長が実際に使い込んで厳選した釣り道具を紹介。サビキセット、ロッド、リール、仕掛け、アクセサリーまでカテゴリ別にわかりやすく解説。Amazon・楽天で購入できます。",
   openGraph: {
