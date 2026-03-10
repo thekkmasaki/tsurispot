@@ -1050,6 +1050,70 @@ export default async function SpotDetailPage({ params }: PageProps) {
       {/* 広告 */}
       <InArticleAd className="mt-6" />
 
+      {/* この釣り場で使える釣り方ガイド（常時表示） */}
+      {(() => {
+        const METHOD_GUIDE_MAP: Record<string, { href: string; label: string; desc: string }> = {
+          "サビキ釣り": { href: "/guide/sabiki", label: "サビキ釣り完全ガイド", desc: "仕掛け・コマセの使い方を初心者向けに図解" },
+          "ちょい投げ": { href: "/guide/choinage", label: "ちょい投げ完全ガイド", desc: "キスやハゼを狙う投げ釣り入門" },
+          "ちょい投げ釣り": { href: "/guide/choinage", label: "ちょい投げ完全ガイド", desc: "キスやハゼを狙う投げ釣り入門" },
+          "エギング": { href: "/guide/eging", label: "エギング完全ガイド", desc: "エギの選び方とシャクリ方を解説" },
+          "ショアジギング": { href: "/guide/jigging", label: "ショアジギング完全ガイド", desc: "メタルジグで青物を狙う方法" },
+          "ウキ釣り": { href: "/guide/float-fishing", label: "ウキ釣り完全ガイド", desc: "ウキの種類・タナの取り方を解説" },
+          "穴釣り": { href: "/guide/anazuri", label: "穴釣り完全ガイド", desc: "テトラの隙間でカサゴ・メバルを狙う" },
+          "ルアー釣り": { href: "/guide/lure", label: "ルアー釣り完全ガイド", desc: "シーバスやヒラメをルアーで狙う" },
+          "泳がせ釣り": { href: "/guide/oyogase", label: "泳がせ釣り入門ガイド", desc: "活きエサで大物を狙う泳がせ釣り" },
+          "遠投カゴ釣り": { href: "/guide/entou-kago", label: "遠投カゴ釣りガイド", desc: "沖のタナを攻めるカゴ釣り" },
+          "投げ釣り": { href: "/guide/choinage", label: "ちょい投げ完全ガイド", desc: "投げ釣りの基本とコツ" },
+          "フカセ釣り": { href: "/guide/float-fishing", label: "ウキ釣り完全ガイド", desc: "フカセ釣りの基本テクニック" },
+        };
+        const methods = new Set(spot.catchableFish.map((cf) => cf.method));
+        const seenHref = new Set<string>();
+        const guides = Array.from(methods)
+          .map((m) => METHOD_GUIDE_MAP[m])
+          .filter((g): g is { href: string; label: string; desc: string } => {
+            if (!g || seenHref.has(g.href)) return false;
+            seenHref.add(g.href);
+            return true;
+          });
+        if (guides.length === 0) return null;
+        return (
+          <section className="mt-8 sm:mt-12">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold sm:text-xl">
+              <BookOpen className="size-5 text-primary" />
+              {spot.name}で使える釣り方ガイド
+            </h2>
+            <p className="mb-4 text-sm text-muted-foreground">
+              {spot.name}で実践できる釣り方を詳しく解説しています。初心者の方は仕掛けの準備から学べます。
+            </p>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {guides.map((guide) => (
+                <Link key={guide.href} href={guide.href}>
+                  <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                    <CardContent className="p-4">
+                      <h3 className="text-sm font-semibold group-hover:text-primary">{guide.label}</h3>
+                      <p className="mt-1 text-xs text-muted-foreground">{guide.desc}</p>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+            <div className="mt-3 flex flex-wrap gap-2">
+              <Link href="/guide" className="text-sm text-primary hover:underline">
+                すべての釣り方ガイドを見る →
+              </Link>
+              {isNightFishing && (
+                <Link href="/guide/night-fishing" className="text-sm text-primary hover:underline">
+                  ナイトフィッシングガイド →
+                </Link>
+              )}
+              <Link href="/guide/knots" className="text-sm text-primary hover:underline">
+                結び方ガイド →
+              </Link>
+            </div>
+          </section>
+        );
+      })()}
+
       {/* 関連スポット・記事 */}
       <h2 className="mt-8 text-xl font-bold sm:mt-12 sm:text-2xl">関連スポット・記事</h2>
 
@@ -1063,7 +1127,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
           <div className="flex gap-3 overflow-x-auto pb-2">
             {nearbySpots.map((nearSpot) => {
               const nearSpotTypeLabel = SPOT_TYPE_LABELS[nearSpot.spotType];
-              const nearSpotRichLabel = `${spot.region.prefecture}${spot.region.areaName}近くの${nearSpotTypeLabel}・${nearSpot.name}`;
+              const nearSpotFishNames = nearSpot.catchableFish.slice(0, 2).map((cf) => cf.fish.name).join("・");
+              const nearSpotRichLabel = nearSpotFishNames
+                ? `${nearSpot.name}（${nearSpot.region?.prefecture || spot.region.prefecture}の${nearSpotFishNames}釣り場）`
+                : `${nearSpot.name}（${nearSpot.region?.prefecture || spot.region.prefecture}の${nearSpotTypeLabel}）`;
               return (
               <Link
                 key={nearSpot.id}
@@ -1072,7 +1139,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 title={nearSpotRichLabel}
                 aria-label={nearSpotRichLabel}
               >
-                <div className="min-w-[200px] rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
+                <div className="min-w-[220px] rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
                   <p className="text-sm text-gray-500 mb-1">
                     約{nearSpot.distanceKm < 10
                       ? nearSpot.distanceKm.toFixed(1)
@@ -1080,13 +1147,13 @@ export default async function SpotDetailPage({ params }: PageProps) {
                   </p>
                   <p className="font-medium text-blue-600 hover:underline leading-snug">
                     {nearSpot.name}
-                    <span className="ml-1 text-xs font-normal text-gray-400">
-                      ({nearSpotTypeLabel})
-                    </span>
+                  </p>
+                  <p className="mt-0.5 text-xs text-gray-500">
+                    {nearSpot.region?.prefecture || spot.region.prefecture}の{nearSpotTypeLabel}
                   </p>
                   {nearSpot.catchableFish.length > 0 && (
-                    <p className="mt-2 text-xs text-muted-foreground">
-                      {nearSpot.catchableFish.slice(0, 3).map((cf) => cf.fish.name).join("・")}
+                    <p className="mt-1.5 text-xs text-muted-foreground">
+                      釣れる魚: {nearSpot.catchableFish.slice(0, 3).map((cf) => cf.fish.name).join("・")}
                     </p>
                   )}
                 </div>
@@ -1113,12 +1180,16 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <div className="mb-6">
               <h3 className="mb-3 text-sm font-bold">{spot.region.prefecture}の他の釣りスポット</h3>
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {samePrefSpots.map((ps) => (
-                  <Link key={ps.id} href={`/spots/${ps.slug}`}>
+                {samePrefSpots.map((ps) => {
+                  const psFishNames = ps.catchableFish?.slice(0, 2).map((cf: { fish: { name: string } }) => cf.fish.name).join("・") || "";
+                  const psTypeLabel = SPOT_TYPE_LABELS[ps.spotType] || "";
+                  return (
+                  <Link key={ps.id} href={`/spots/${ps.slug}`} title={psFishNames ? `${ps.name}（${psFishNames}が釣れる${psTypeLabel}）` : `${ps.name}（${spot.region.prefecture}の${psTypeLabel}）`}>
                     <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                       <CardContent className="p-3">
                         <h4 className="text-sm font-semibold group-hover:text-primary truncate">{ps.name}</h4>
-                        <p className="mt-0.5 text-xs text-muted-foreground">{ps.region.areaName}</p>
+                        <p className="mt-0.5 text-xs text-muted-foreground">{ps.region.areaName} - {psTypeLabel}</p>
+                        {psFishNames && <p className="mt-0.5 text-xs text-muted-foreground">{psFishNames}が狙える</p>}
                         <div className="mt-1 flex items-center gap-1 text-xs">
                           <Star className="size-3 fill-yellow-400 text-yellow-400" />
                           <span>{ps.rating.toFixed(1)}</span>
@@ -1126,7 +1197,8 @@ export default async function SpotDetailPage({ params }: PageProps) {
                       </CardContent>
                     </Card>
                   </Link>
-                ))}
+                  );
+                })}
               </div>
               {pref && (
                 <div className="mt-2 text-right">
@@ -1264,6 +1336,37 @@ export default async function SpotDetailPage({ params }: PageProps) {
               所在地は{spot.address}。{spot.accessInfo}
               詳しいアクセス・設備・仕掛け情報はツリスポ（tsurispot.com）で確認できます。
             </p>
+            {/* まとめ内の内部リンク */}
+            <div className="mt-4 flex flex-wrap gap-2">
+              {(() => {
+                const pref = getPrefectureByName(spot.region.prefecture);
+                if (!pref) return null;
+                return (
+                  <>
+                    <Link href={`/prefecture/${pref.slug}`} className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+                      <MapPin className="size-3" />
+                      {spot.region.prefecture}の釣りスポット一覧
+                    </Link>
+                    <Link href={`/fishing-rules/${pref.slug}`} className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+                      <Scale className="size-3" />
+                      {spot.region.prefecture}の釣りルール
+                    </Link>
+                  </>
+                );
+              })()}
+              <Link href={`/area/${spot.region.slug}`} className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+                <Compass className="size-3" />
+                {spot.region.areaName}エリアガイド
+              </Link>
+              <Link href="/fishing-calendar" className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+                <Fish className="size-3" />
+                月別釣りカレンダー
+              </Link>
+              <Link href="/for-beginners" className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+                <BookOpen className="size-3" />
+                釣りの始め方ガイド
+              </Link>
+            </div>
           </CardContent>
         </Card>
       </section>
