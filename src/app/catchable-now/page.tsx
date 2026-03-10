@@ -6,11 +6,11 @@ import { CatchableNowClient } from "./catchable-now-client";
 const currentMonth = new Date().getMonth() + 1;
 
 export const metadata: Metadata = {
-  title: `今釣れる魚一覧【${currentMonth}月】- 旬の魚と釣り方ガイド｜ツリスポ`,
+  title: `今釣れる魚一覧【${currentMonth}月】- 旬の魚と釣り方ガイド`,
   description:
     `${currentMonth}月に釣れる魚を「旬の魚」「シーズン中の魚」「来月から狙える魚」に分類して紹介。今月の堤防・磯・サーフで狙えるおすすめターゲットと釣り方がひと目でわかります。初心者でも釣りやすい旬の魚や穴場スポットを見つけて釣りに出かけましょう。`,
   openGraph: {
-    title: `今釣れる魚一覧【${currentMonth}月】- 旬の魚と釣り方ガイド｜ツリスポ`,
+    title: `今釣れる魚一覧【${currentMonth}月】- 旬の魚と釣り方ガイド`,
     description:
       `${currentMonth}月に釣れる魚を旬・シーズン・来月から狙える魚に分類して紹介。堤防・磯で狙えるおすすめターゲットと釣り方がわかります。`,
     type: "website",

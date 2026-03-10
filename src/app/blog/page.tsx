@@ -12,11 +12,11 @@ export const revalidate = 3600;
 export const maxDuration = 60;
 
 export const metadata: Metadata = {
-  title: "釣りコラム・ブログ | ツリスポ",
+  title: "釣りコラム・ブログ",
   description:
     "釣り初心者の道具選びから上級者のテクニックまで、実践的なコラムを多数掲載。堤防釣り・サビキ釣り・ルアー・季節別攻略法を編集部が解説。最新の釣り情報をチェック。",
   openGraph: {
-    title: "釣りコラム・ブログ | ツリスポ",
+    title: "釣りコラム・ブログ",
     description:
       "釣り初心者向けの道具選びから、季節ごとの釣り方テクニックまで。実践的な釣りコラムをお届けします。",
     type: "website",

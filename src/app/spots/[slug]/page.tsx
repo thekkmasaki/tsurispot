@@ -934,10 +934,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <section>
               <h3 className="mb-3 text-lg font-bold">魚種別の釣り方</h3>
               <div className="space-y-2">
-                {spot.catchableFish.map((cf) => {
+                {spot.catchableFish.map((cf, idx) => {
                   const methodExplanation = explainMethod(cf.method);
                   return (
-                    <div key={cf.fish.id} className="rounded-lg border p-3 text-sm">
+                    <div key={`${cf.fish.id}-${cf.method}-${idx}`} className="rounded-lg border p-3 text-sm">
                       <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2 min-w-0">
                           <Link href={`/fish/${cf.fish.slug}`} className="font-medium truncate hover:text-primary hover:underline">{cf.fish.name}</Link>

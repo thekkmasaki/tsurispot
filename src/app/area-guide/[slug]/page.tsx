@@ -48,7 +48,7 @@ export async function generateMetadata({
   const guide = getAreaGuideBySlug(slug);
   if (!guide) return {};
 
-  const title = `${guide.name}の釣り場おすすめガイド｜釣れる魚・時期・スポット一覧｜ツリスポ`;
+  const title = `${guide.name}の釣り場おすすめガイド｜釣れる魚・時期・スポット一覧`;
   const description = `${guide.name}のおすすめ釣りスポットを初心者〜上級者別に厳選紹介。釣れる魚・ベストシーズン・アクセス情報まで${guide.name}の釣りを完全攻略。`;
 
   return {
