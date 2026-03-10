@@ -833,7 +833,7 @@ export function TidesClient() {
                 </div>
               </div>
 
-              <div className="text-xs text-gray-400 p-2">
+              <div className="text-xs text-gray-500 p-2">
                 ※ 本ページの潮汐データは月齢を基にした簡易計算です。実際の潮位は地形・気象条件により異なります。正確な情報は気象庁の潮位表をご確認ください。
               </div>
             </CardContent>

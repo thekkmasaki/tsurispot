@@ -302,7 +302,7 @@ function SelectButton({
     >
       <span className="font-medium block">{children}</span>
       {subLabel && (
-        <span className={`text-[10px] mt-0.5 block ${selected ? "text-blue-100" : "text-gray-400"}`}>
+        <span className={`text-[10px] mt-0.5 block ${selected ? "text-blue-100" : "text-gray-500"}`}>
           {subLabel}
         </span>
       )}
@@ -690,7 +690,7 @@ export function BouzuCheckerClient() {
               {isComplete ? "ボウズ確率を診断する" : "すべての項目を選択してください"}
             </button>
             {!isComplete && (
-              <p className="text-center text-xs text-gray-400 mt-2">
+              <p className="text-center text-xs text-gray-500 mt-2">
                 全7項目を選択すると診断できます
               </p>
             )}

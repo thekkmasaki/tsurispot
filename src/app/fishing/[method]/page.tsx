@@ -256,7 +256,7 @@ export default async function MethodPage({ params }: Props) {
                         </div>
                       )}
                       {fish.length === 0 && (
-                        <p className="text-xs text-gray-400">
+                        <p className="text-xs text-gray-500">
                           対象魚が少なめの時期
                         </p>
                       )}

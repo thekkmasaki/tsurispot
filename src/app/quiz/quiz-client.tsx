@@ -303,7 +303,7 @@ function ChoiceCard({
     >
       <p className="font-semibold text-gray-800">{choice.label}</p>
       {choice.sub && (
-        <p className={`text-xs mt-1 ${selected ? "text-blue-600" : "text-gray-400"}`}>
+        <p className={`text-xs mt-1 ${selected ? "text-blue-600" : "text-gray-500"}`}>
           {choice.sub}
         </p>
       )}
