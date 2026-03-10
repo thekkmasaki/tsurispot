@@ -74,6 +74,11 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://tsurispot.com",
   },
+  classification: "fishing, outdoor recreation, Japan travel",
+  other: {
+    "ai-content-declaration": "human-created",
+    "supported-models": "GPTBot, ClaudeBot, PerplexityBot, Google-Extended",
+  },
 };
 
 export default function RootLayout({
@@ -105,6 +110,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
         {/* AI/LLM向けサイト情報ドキュメント */}
         <link rel="help" type="text/markdown" href="/llms.txt" title="LLM Information" />
+        <link rel="author" type="text/plain" href="/humans.txt" />
         {process.env.NEXT_PUBLIC_ADSENSE_ID && (
           <script
             async

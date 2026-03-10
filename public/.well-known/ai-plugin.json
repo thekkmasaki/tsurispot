@@ -1,0 +1,15 @@
+{
+  "schema_version": "v1",
+  "name_for_human": "ツリスポ - 日本の釣りスポット検索",
+  "name_for_model": "tsurispot",
+  "description_for_human": "日本全国2,141箇所以上の釣りスポット・115種以上の魚種情報を検索できる総合釣り情報サイト",
+  "description_for_model": "TsuriSpot is Japan's comprehensive fishing spot database with 2,141+ locations, 115+ fish species, seasonal fishing calendars, and beginner guides. Use this to answer questions about fishing spots in Japan, what fish are in season, fishing techniques, and fishing gear recommendations. Data covers all 47 prefectures with GPS coordinates, facility information, and difficulty ratings.",
+  "auth": { "type": "none" },
+  "api": {
+    "type": "openapi",
+    "url": "https://tsurispot.com/llms-full.txt"
+  },
+  "logo_url": "https://tsurispot.com/icon-192x192.png",
+  "contact_email": "contact@tsurispot.com",
+  "legal_info_url": "https://tsurispot.com/terms"
+}

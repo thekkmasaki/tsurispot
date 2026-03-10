@@ -1,0 +1,12 @@
+/* TEAM */
+Editor: 正木家康 (Masaki Ieyasu)
+Role: Editor-in-Chief
+Site: https://tsurispot.com
+Twitter/Instagram: @tsurispotjapan
+
+/* SITE */
+Last update: 2026-03-10
+Language: Japanese
+Doctype: HTML5
+Framework: Next.js 16
+Standards: Schema.org, OpenGraph, JSON-LD

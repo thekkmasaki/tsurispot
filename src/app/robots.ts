@@ -9,6 +9,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           "/shops/*/dashboard",
           "/spots/submit",
+          "/spots/compare",
           "/favorites",
           "/*/opengraph-image",
           "/api/og",
@@ -77,6 +78,30 @@ export default function robots(): MetadataRoute.Robots {
       },
       {
         userAgent: "Meta-ExternalAgent",
+        allow: "/",
+      },
+      {
+        userAgent: "Amazonbot",
+        allow: "/",
+      },
+      {
+        userAgent: "YouBot",
+        allow: "/",
+      },
+      {
+        userAgent: "AI2Bot",
+        allow: "/",
+      },
+      {
+        userAgent: "Timpibot",
+        allow: "/",
+      },
+      {
+        userAgent: "ImagesiftBot",
+        allow: "/",
+      },
+      {
+        userAgent: "Diffbot",
         allow: "/",
       },
     ],

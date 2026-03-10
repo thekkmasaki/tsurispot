@@ -1,0 +1,3 @@
+Contact: https://tsurispot.com/contact
+Preferred-Languages: ja, en
+Canonical: https://tsurispot.com/.well-known/security.txt
