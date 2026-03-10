@@ -761,6 +761,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
               spotType={spot.spotType}
               height="h-48 sm:h-56 md:h-72"
               priority
+              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 640px"
             />
           </div>
           {spot.imageAttribution && (

@@ -113,9 +113,10 @@ interface SpotImageProps {
   className?: string;
   height?: string;
   priority?: boolean;
+  sizes?: string;
 }
 
-export function SpotImage({ src, alt, spotType = "port", className = "", height = "h-32", priority = false }: SpotImageProps) {
+export function SpotImage({ src, alt, spotType = "port", className = "", height = "h-32", priority = false, sizes = "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" }: SpotImageProps) {
   const [error, setError] = useState(false);
 
   // alt属性を説明的に（SEO向上）
@@ -133,7 +134,7 @@ export function SpotImage({ src, alt, spotType = "port", className = "", height 
           alt={descriptiveAlt}
           fill
           className="object-cover"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 66vw, 50vw"
+          sizes={sizes}
           priority={priority}
           loading={priority ? undefined : "lazy"}
           onError={() => setError(true)}
@@ -195,9 +196,10 @@ interface FishImageProps {
   className?: string;
   height?: string;
   priority?: boolean;
+  sizes?: string;
 }
 
-export function FishImage({ src, alt, category = "sea", className = "", height = "h-24 sm:h-28", priority = false }: FishImageProps) {
+export function FishImage({ src, alt, category = "sea", className = "", height = "h-24 sm:h-28", priority = false, sizes = "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw" }: FishImageProps) {
   const [error, setError] = useState(false);
   const gradient = FISH_GRADIENTS[category] || FISH_GRADIENTS.sea;
 
@@ -219,7 +221,7 @@ export function FishImage({ src, alt, category = "sea", className = "", height =
         alt={alt}
         fill
         className="object-cover"
-        sizes="(max-width: 768px) 100vw, 50vw"
+        sizes={sizes}
         priority={priority}
         loading={priority ? undefined : "lazy"}
         onError={() => setError(true)}

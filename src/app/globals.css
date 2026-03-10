@@ -136,12 +136,6 @@
   }
 }
 
-/* Horizontal scroll indicator fade */
-.scroll-fade-right {
-  mask-image: linear-gradient(to right, black 85%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
-}
-
 /* Hide scrollbar for horizontal scroll areas */
 .scrollbar-hide {
   -ms-overflow-style: none;
@@ -149,14 +143,6 @@
 }
 .scrollbar-hide::-webkit-scrollbar {
   display: none;
-}
-
-/* Ensure minimum tap target size */
-@layer utilities {
-  .min-tap-target {
-    min-height: 44px;
-    min-width: 44px;
-  }
 }
 
 /* Slow pulse animation for danger wind warning banner */
