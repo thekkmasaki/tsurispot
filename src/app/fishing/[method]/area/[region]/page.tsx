@@ -88,8 +88,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const region = getRegionGroupBySlug(regionSlug);
   if (!method || !region) return {};
 
-  const title = `${region.name}の${method.name}スポット一覧｜おすすめ釣り場ガイド`;
-  const description = `${region.name}地方で${method.name}ができる釣りスポットを一覧で紹介。各スポットの基本情報、釣れる魚、アクセス情報を掲載。${region.name}で${method.name}を楽しむならツリスポ。`;
+  const title = `${region.name}の${method.name}おすすめスポットと攻略法【2026年版】`;
+  const description = `${region.name}地方で${method.name}ができるおすすめ釣りスポットを厳選紹介。初心者向けの穴場から上級者向けポイントまで、釣れる魚・アクセス・攻略法を掲載。${region.name}で${method.name}を楽しむならツリスポ。`;
 
   return {
     title,
@@ -120,8 +120,8 @@ export default async function MethodRegionPage({ params }: Props) {
   }
 
   const pageUrl = `https://tsurispot.com/fishing/${method.slug}/area/${region.slug}`;
-  const title = `${region.name}の${method.name}スポット一覧`;
-  const description = `${region.name}地方で${method.name}ができる釣りスポットを一覧で紹介。各スポットの基本情報、釣れる魚、アクセス情報を掲載。${region.name}で${method.name}を楽しむならツリスポ。`;
+  const title = `${region.name}の${method.name}おすすめスポットと攻略法`;
+  const description = `${region.name}地方で${method.name}ができるおすすめ釣りスポットを厳選紹介。初心者向けの穴場から上級者向けポイントまで掲載。`;
 
   // FAQ データ
   const faqItems = [
@@ -253,9 +253,9 @@ export default async function MethodRegionPage({ params }: Props) {
         {/* ヘッダー */}
         <div className="mb-8">
           <h1 className="text-2xl sm:text-3xl font-bold mb-3">
-            {region.name}の{method.name}スポット一覧
+            {region.name}の{method.name}おすすめスポットと攻略法
             <span className="block text-base sm:text-lg font-normal text-gray-600 mt-1">
-              {totalCount}件のスポットが見つかりました
+              初心者向けの穴場から人気ポイントまで{totalCount}件
             </span>
           </h1>
 
@@ -268,9 +268,9 @@ export default async function MethodRegionPage({ params }: Props) {
                 </span>
               </div>
               <p className="text-sm text-gray-700 dark:text-gray-300">
-                {region.name}地方で{method.name}ができるスポットをまとめました。
+                {region.name}地方で{method.name}ができるおすすめスポットを厳選してまとめました。
                 {spots.length > 0
-                  ? `${totalCount}件のスポットで${method.name}を楽しめます。`
+                  ? `${totalCount}件のスポットで${method.name}を楽しめます。初心者が入りやすいポイントから上級者向けの実績ポイントまで掲載しています。`
                   : `現在、${method.name}ができるスポットデータは準備中です。`}
               </p>
             </CardContent>
@@ -297,7 +297,7 @@ export default async function MethodRegionPage({ params }: Props) {
         <section className="mb-10">
           <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
             <MapPin className="size-5" />
-            スポット一覧
+            {region.name}の{method.name}おすすめスポット一覧
           </h2>
 
           {spots.length === 0 ? (
@@ -387,7 +387,7 @@ export default async function MethodRegionPage({ params }: Props) {
         {/* 他の地域 */}
         <section className="mb-10">
           <h2 className="text-xl font-bold mb-4">
-            他の地域の{method.name}スポット
+            {method.name}ができる他の地域のおすすめスポット
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {REGION_GROUPS.filter((r) => r.slug !== region.slug).map((r) => (
@@ -408,7 +408,7 @@ export default async function MethodRegionPage({ params }: Props) {
         {/* 他の釣り方 */}
         <section className="mb-10">
           <h2 className="text-xl font-bold mb-4">
-            {region.name}の他の釣り方
+            {region.name}で楽しめるその他の釣り方
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {FISHING_METHODS.filter((m) => m.slug !== method.slug).map((m) => (

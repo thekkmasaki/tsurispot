@@ -124,8 +124,8 @@ export async function generateMetadata({
   const metaFishNames = Array.from(metaInSeasonFish.values()).slice(0, 5).join("・");
   const metaSpotCount = fishingSpots.filter((s) => metaRegionPrefNames.has(s.region.prefecture)).length;
 
-  const title = `【${monthDef.name}】${regionName}で今釣れる魚とおすすめ釣り場【2026年最新】`;
-  const description = `${monthDef.name}（${monthDef.season}）に${regionName}地方で釣れる魚種と人気の釣り場を紹介。${metaFishNames ? `${metaFishNames}など` : "ベストシーズンの魚"}が狙えるおすすめスポット${metaSpotCount > 0 ? `${metaSpotCount}箇所` : ""}をご案内。初心者向けの釣り方・タックル情報も掲載。`;
+  const title = `${monthDef.num}月の${regionName}釣り情報・釣れる魚とおすすめスポット【2026年版】`;
+  const description = `${monthDef.name}（${monthDef.season}）に${regionName}地方で釣れる魚と人気の釣り場を完全ガイド。${metaFishNames ? `${metaFishNames}など旬の魚` : "ベストシーズンの魚"}が狙えるおすすめスポット${metaSpotCount > 0 ? `${metaSpotCount}箇所` : ""}を紹介。初心者でも楽しめる穴場ポイントや釣り方・タックル情報も掲載。`;
 
   return {
     title,
@@ -286,8 +286,8 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: `${monthDef.name}の${regionName}の釣り - 釣れる魚・おすすめスポット`,
-    description: `${monthDef.name}（${monthDef.season}）に${regionName}地方で釣れる魚${allFishList.length}種とおすすめ釣り場を紹介。`,
+    headline: `${monthDef.name}の${regionName}釣り情報・釣れる魚とおすすめスポット`,
+    description: `${monthDef.name}（${monthDef.season}）に${regionName}地方で釣れる魚${allFishList.length}種とおすすめ釣り場を完全ガイド。初心者向け穴場スポットも紹介。`,
     datePublished: "2025-06-01",
     dateModified: new Date().toISOString().split("T")[0],
     author: {
@@ -335,6 +335,10 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
         ? seasonalTips.slice(0, 2).join(" ")
         : `${monthDef.name}（${monthDef.season}）の釣りでは天候と水温の変化に注意し、魚の活性に合わせた釣り方を選びましょう。`,
     },
+    {
+      question: `${monthDef.name}の${regionName}で初心者におすすめの釣り方は？`,
+      answer: `${monthDef.name}の${regionName}では、堤防や漁港での${monthDef.season === "冬" ? "穴釣りや探り釣り" : monthDef.season === "夏" ? "サビキ釣りやちょい投げ" : "サビキ釣りやウキ釣り"}がおすすめです。足場が安定した場所を選べば初心者でも安心して釣りを楽しめます。`,
+    },
   ];
 
   const faqJsonLd = {
@@ -381,16 +385,17 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
       {/* ヘッダー */}
       <div className="mb-6 sm:mb-8">
         <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
-          {monthDef.name}に{regionName}で釣れる魚と釣り場
+          {monthDef.name}の{regionName}釣り情報・釣れる魚とおすすめスポット
         </h1>
         <p className="mt-2 text-sm text-muted-foreground sm:text-base">
           {monthDef.season}（{monthDef.name}）の{regionName}地方
-          ｜ 釣れる魚{allFishList.length}種 ・ 対象スポット{regionSpots.length}件
+          ｜ 釣れる魚{allFishList.length}種 ・ おすすめスポット{regionSpots.length}件
         </p>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          {monthDef.name}に{regionName}地方で釣れる魚を{allFishList.length}種掲載しています。
-          {peakFish.length > 0 && `特に${peakFish.slice(0, 4).map((f) => f.name).join("・")}は最盛期を迎えます。`}
-          {regionPrefs.length > 0 && `対象エリアは${regionPrefs.map((p) => p.nameShort).join("・")}です。`}
+          {monthDef.name}に{regionName}地方で釣れる魚を{allFishList.length}種ご紹介。
+          {peakFish.length > 0 && `特に${peakFish.slice(0, 4).map((f) => f.name).join("・")}は最盛期で、初心者にもおすすめです。`}
+          {regionPrefs.length > 0 && `${regionPrefs.map((p) => p.nameShort).join("・")}エリアの穴場スポットも掲載。`}
+          近くの釣り場を見つけて{monthDef.season}の釣りを楽しみましょう。
         </p>
       </div>
 
@@ -420,7 +425,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
         <section className="mb-8 sm:mb-10">
           <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
             <Flame className="size-5 text-orange-500" />
-            {monthDef.name}が最盛期の魚（{regionName}）
+            {monthDef.name}の{regionName}で今が旬の魚・ベストシーズン
           </h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {peakFish.map((f) => {
@@ -477,7 +482,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
         <section className="mb-8 sm:mb-10">
           <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
             <Fish className="size-5 text-blue-500" />
-            {monthDef.name}にシーズンの魚（{regionName}）
+            {monthDef.name}に{regionName}で釣れるシーズン中の魚一覧
           </h2>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
             {seasonFish.map((f) => {
@@ -535,7 +540,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
           <section className="mb-8 sm:mb-10">
             <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
               <MapPin className="size-5 text-primary" />
-              {monthDef.name}の{regionName}おすすめ釣り場
+              {monthDef.name}の{regionName}おすすめ釣り場・穴場スポット
             </h2>
             <MonthlySportsSorter spots={sortableSpots} monthName={monthDef.name} />
           </section>
@@ -547,7 +552,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
         <section className="mb-8 sm:mb-10">
           <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
             <Thermometer className="size-5 text-amber-600" />
-            {monthDef.name}（{monthDef.season}）の釣りのコツ
+            {monthDef.name}（{monthDef.season}）の{regionName}釣りのコツ・初心者向けアドバイス
           </h2>
           <Card className="gap-0 py-0 border-amber-200 bg-amber-50/50">
             <CardContent className="p-4 sm:p-5">
