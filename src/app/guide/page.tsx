@@ -258,6 +258,10 @@ const webPageJsonLd = {
   name: "釣りの始め方ガイド - 初心者が知るべき5つのステップ",
   url: "https://tsurispot.com/guide",
   dateModified: "2026-02-28",
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: ["h1", ".page-description", ".guide-summary"],
+  },
 };
 
 export default function GuidePage() {
