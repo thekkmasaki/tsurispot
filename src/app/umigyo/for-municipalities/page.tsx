@@ -469,10 +469,10 @@ export default function ForMunicipalitiesPage() {
                   ))}
                   {plan.notIncluded.map((f) => (
                     <div key={f} className="flex items-start gap-2 opacity-50">
-                      <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center text-xs text-gray-400">
+                      <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center text-xs text-gray-500">
                         -
                       </span>
-                      <span className="text-xs text-gray-400 line-through">
+                      <span className="text-xs text-gray-500 line-through">
                         {f}
                       </span>
                     </div>

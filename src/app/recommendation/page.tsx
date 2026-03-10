@@ -1162,7 +1162,7 @@ export default function RecommendationPage() {
                             <span className="block text-sm font-bold text-gray-700 group-hover:text-orange-700">
                               {pref.replace(/県|府|都/, "")}
                             </span>
-                            <span className="block text-[10px] text-gray-400 mt-0.5">
+                            <span className="block text-[10px] text-gray-500 mt-0.5">
                               {spotCount}スポット
                             </span>
                           </button>
@@ -1206,12 +1206,12 @@ export default function RecommendationPage() {
                           {region.label}
                         </span>
                         {region.value !== "all" && (
-                          <span className="block text-[10px] text-gray-400 mt-1">
+                          <span className="block text-[10px] text-gray-500 mt-1">
                             {region.prefectures.length}都道府県
                           </span>
                         )}
                         {region.value === "all" && (
-                          <span className="block text-[10px] text-gray-400 mt-1">
+                          <span className="block text-[10px] text-gray-500 mt-1">
                             エリア指定なし
                           </span>
                         )}
@@ -1298,7 +1298,7 @@ export default function RecommendationPage() {
                       <span className="block text-xs text-gray-500 mt-1">
                         {level.desc}
                       </span>
-                      <span className="block text-[10px] text-gray-400 mt-1">
+                      <span className="block text-[10px] text-gray-500 mt-1">
                         {level.detail}
                       </span>
                     </button>
@@ -1428,7 +1428,7 @@ export default function RecommendationPage() {
                     <span className="text-sm font-bold text-gray-600 group-hover:text-teal-700">
                       特に決めていない / スキップ
                     </span>
-                    <span className="block text-[10px] text-gray-400 mt-1">
+                    <span className="block text-[10px] text-gray-500 mt-1">
                       今釣れる魚すべてから提案します
                     </span>
                   </button>
@@ -1609,7 +1609,7 @@ export default function RecommendationPage() {
                     <p className="text-gray-500">
                       条件に合うスポットが見つかりませんでした
                     </p>
-                    <p className="text-sm text-gray-400 mt-1">
+                    <p className="text-sm text-gray-500 mt-1">
                       エリアを「全国」にするか、条件を変更してみてください
                     </p>
                     <Button
@@ -1813,7 +1813,7 @@ function SpotCard({
                 </Badge>
               ))}
               {catchableFishNow.length > 5 && (
-                <Badge variant="outline" className="text-[10px] text-gray-400">
+                <Badge variant="outline" className="text-[10px] text-gray-500">
                   +{catchableFishNow.length - 5}
                 </Badge>
               )}
@@ -1830,7 +1830,7 @@ function SpotCard({
           {/* スコアバー */}
           <div className="space-y-1">
             <div className="flex justify-between items-center">
-              <span className="text-[10px] text-gray-400">
+              <span className="text-[10px] text-gray-500">
                 おすすめスコア
               </span>
               <span className="text-xs font-bold text-orange-600">

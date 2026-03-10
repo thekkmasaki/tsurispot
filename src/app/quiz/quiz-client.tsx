@@ -447,7 +447,7 @@ export default function QuizClient() {
 
             {/* フッター */}
             <div className="border-t border-gray-100 bg-gray-50/50 px-6 py-3">
-              <div className="flex items-center justify-center gap-2 text-[10px] text-gray-400">
+              <div className="flex items-center justify-center gap-2 text-[10px] text-gray-500">
                 <Fish className="size-3" />
                 <span className="font-medium">tsurispot.com/quiz</span>
                 <span>|</span>
