@@ -3,6 +3,7 @@ import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
 import { getCatchableNow, fishSpecies } from "@/lib/data/fish";
 import { getLatestBlogPosts, BLOG_CATEGORIES } from "@/lib/data/blog";
+import { prefectures } from "@/lib/data/prefectures";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -572,6 +573,61 @@ export default function Home() {
 
       {/* 今釣れる魚セクション */}
       <HomeSeasonalFish fish={catchableNow} currentMonth={currentMonth} />
+
+      {/* 人気のエリア */}
+      <section className="bg-muted/50 py-8 sm:py-12">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <div className="mb-6 flex items-end justify-between sm:mb-8">
+            <div>
+              <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
+                人気のエリアで釣り場を探す
+              </h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                都道府県別の釣りスポット・釣れる魚情報
+              </p>
+            </div>
+            <Link
+              href="/prefecture"
+              className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
+            >
+              すべての都道府県
+              <ArrowRight className="size-4" />
+            </Link>
+          </div>
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+            {(() => {
+              // 人気の都道府県（スポット数順）
+              const prefSpotCounts = prefectures
+                .map((pref) => ({
+                  ...pref,
+                  spotCount: fishingSpots.filter((s) => s.region.prefecture === pref.name).length,
+                }))
+                .filter((p) => p.spotCount > 0)
+                .sort((a, b) => b.spotCount - a.spotCount)
+                .slice(0, 12);
+              return prefSpotCounts.map((pref) => (
+                <Link key={pref.slug} href={`/prefecture/${pref.slug}`} title={`${pref.name}の釣りスポット${pref.spotCount}件`}>
+                  <div className="flex items-center justify-between gap-2 rounded-lg border bg-white p-3 transition-shadow hover:shadow-md">
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold">{pref.nameShort}</p>
+                      <p className="text-xs text-muted-foreground">{pref.spotCount}スポット</p>
+                    </div>
+                    <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
+                  </div>
+                </Link>
+              ));
+            })()}
+          </div>
+          <div className="mt-6 flex justify-center sm:hidden">
+            <Link href="/prefecture">
+              <Button variant="outline" className="min-h-[44px] gap-1">
+                すべての都道府県を見る
+                <ArrowRight className="size-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* 最新コラム */}
       {latestPosts.length > 0 && (
