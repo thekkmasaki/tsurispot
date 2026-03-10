@@ -16,7 +16,7 @@ import { getAmazonUrl, getRakutenUrl } from "@/lib/affiliate-config";
 
 export const metadata: Metadata = {
   title:
-    "初心者向け釣り竿おすすめ8選 - 最初の1本はこれ！【2025年版】 | ツリスポ",
+    "初心者向け釣り竿おすすめ8選 - 最初の1本はこれ！【2025年版】",
   description:
     "初心者が最初に買うべき釣り竿おすすめ8選を厳選。万能竿・サビキ竿・ちょい投げ竿のカテゴリ別に、長さ・硬さの選び方からコスパ重視のランキングまで徹底解説。",
   openGraph: {

@@ -17,7 +17,7 @@ import { getAmazonUrl, getRakutenUrl } from "@/lib/affiliate-config";
 
 export const metadata: Metadata = {
   title:
-    "サビキ釣りセットおすすめ10選【2025年版】初心者向け完全ガイド | ツリスポ",
+    "サビキ釣りセットおすすめ10選【2025年版】初心者向け完全ガイド",
   description:
     "サビキ釣りセットのおすすめ10選を価格帯別にランキング形式で紹介。1000円以下・3000円以下・5000円以上のカテゴリ別に、初心者でも失敗しない選び方を解説。Amazon・楽天で購入可能。",
   openGraph: {

@@ -18,7 +18,7 @@ import { getAmazonUrl, getRakutenUrl } from "@/lib/affiliate-config";
 
 export const metadata: Metadata = {
   title:
-    "釣り道具一式セットおすすめ5選 - 手ぶらで始められる！【2025年版】 | ツリスポ",
+    "釣り道具一式セットおすすめ5選 - 手ぶらで始められる！【2025年版】",
   description:
     "釣り道具一式セットのおすすめ5選を厳選紹介。竿・リール・仕掛け・バケツまで全部入りの入門セットから、家族向けセット、コンパクト収納セットまで目的別に解説。",
   openGraph: {
