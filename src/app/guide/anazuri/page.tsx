@@ -842,6 +842,7 @@ export default function AnazuriGuidePage() {
                       key={spot.id}
                       href={`/spots/${spot.slug}`}
                       className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
+                      title={`${spot.name}（${spot.region.prefecture}の穴釣りスポット）`}
                     >
                       <MapPin className="size-4 shrink-0 text-primary" />
                       <div className="min-w-0 flex-1">
@@ -849,7 +850,7 @@ export default function AnazuriGuidePage() {
                           {spot.name}
                         </p>
                         <p className="truncate text-xs text-muted-foreground">
-                          {spot.region.prefecture} {spot.region.areaName}
+                          {spot.region.prefecture} {spot.region.areaName} - 穴釣りポイント
                         </p>
                       </div>
                     </Link>
@@ -858,7 +859,7 @@ export default function AnazuriGuidePage() {
                 <div className="mt-3 text-center">
                   <Button asChild variant="outline" size="sm">
                     <Link href="/spots">
-                      すべてのスポットを見る
+                      全国の釣りスポットから探す
                       <ChevronRight className="ml-1 size-4" />
                     </Link>
                   </Button>

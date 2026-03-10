@@ -1167,21 +1167,29 @@ export default function ChoinageGuidePage() {
             <MapPin className="size-5 text-primary" />
             ちょい投げにおすすめのスポット
           </h2>
+          <p className="mb-3 text-sm text-muted-foreground">
+            砂地の海底があり、キスやハゼが狙えるスポットを厳選しました。
+          </p>
           <div className="grid gap-2 sm:grid-cols-2">
             {fishingSpots
               .filter((s) => s.catchableFish.some((cf) => cf.method.includes("ちょい投げ") || cf.method.includes("投げ釣り")))
               .sort((a, b) => b.rating - a.rating)
               .slice(0, 6)
               .map((spot) => (
-                <Link key={spot.slug} href={`/spots/${spot.slug}`}>
+                <Link key={spot.slug} href={`/spots/${spot.slug}`} title={`${spot.name}（${spot.region.prefecture}のちょい投げスポット）`}>
                   <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                     <CardContent className="p-3">
                       <p className="text-sm font-semibold group-hover:text-primary truncate">{spot.name}</p>
-                      <p className="mt-0.5 text-xs text-muted-foreground">{spot.region.prefecture} {spot.region.areaName}</p>
+                      <p className="mt-0.5 text-xs text-muted-foreground">{spot.region.prefecture} {spot.region.areaName} - ちょい投げポイント</p>
                     </CardContent>
                   </Card>
                 </Link>
               ))}
+          </div>
+          <div className="mt-3 text-center">
+            <Link href="/spots" className="text-sm text-primary hover:underline">
+              全国の釣りスポットから探す →
+            </Link>
           </div>
         </section>
 
