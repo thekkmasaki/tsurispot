@@ -734,21 +734,29 @@ export default function EgingGuidePage() {
             <MapPin className="size-5 text-primary" />
             エギングにおすすめのスポット
           </h2>
+          <p className="mb-3 text-sm text-muted-foreground">
+            エギングに適した堤防・漁港・磯のスポットです。潮通しが良く、水深があるポイントを厳選しました。
+          </p>
           <div className="grid gap-2 sm:grid-cols-2">
             {fishingSpots
               .filter((s) => s.catchableFish.some((cf) => cf.method.includes("エギング")))
               .sort((a, b) => b.rating - a.rating)
               .slice(0, 6)
               .map((spot) => (
-                <Link key={spot.slug} href={`/spots/${spot.slug}`}>
+                <Link key={spot.slug} href={`/spots/${spot.slug}`} title={`${spot.name}（${spot.region.prefecture}のエギングスポット）`}>
                   <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                     <CardContent className="p-3">
                       <p className="text-sm font-semibold group-hover:text-primary truncate">{spot.name}</p>
-                      <p className="mt-0.5 text-xs text-muted-foreground">{spot.region.prefecture} {spot.region.areaName}</p>
+                      <p className="mt-0.5 text-xs text-muted-foreground">{spot.region.prefecture} {spot.region.areaName} - エギングポイント</p>
                     </CardContent>
                   </Card>
                 </Link>
               ))}
+          </div>
+          <div className="mt-3">
+            <Link href="/spots" className="text-sm text-primary hover:underline">
+              すべての釣りスポットを見る →
+            </Link>
           </div>
         </section>
 

@@ -849,24 +849,28 @@ export default function FloatFishingGuidePage() {
                   <MapPin className="size-5 text-primary" />
                   <h2 className="text-xl font-bold">ウキ釣りにおすすめのスポット</h2>
                 </div>
+                <p className="mb-3 text-sm text-muted-foreground">
+                  ウキ釣りに適した堤防・漁港・磯のスポットです。メジナやクロダイが狙えるポイントを厳選しました。
+                </p>
                 <div className="grid gap-2 sm:grid-cols-2">
                   {floatSpots.map((spot) => (
                     <Link
                       key={spot.id}
                       href={`/spots/${spot.slug}`}
                       className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
+                      title={`${spot.name}（${spot.region.prefecture}のウキ釣りスポット）`}
                     >
                       <MapPin className="size-4 shrink-0 text-primary" />
                       <div className="min-w-0 flex-1">
                         <p className="truncate text-sm font-medium group-hover:text-primary">{spot.name}</p>
-                        <p className="truncate text-xs text-muted-foreground">{spot.region.prefecture} {spot.region.areaName}</p>
+                        <p className="truncate text-xs text-muted-foreground">{spot.region.prefecture} {spot.region.areaName} - ウキ釣りポイント</p>
                       </div>
                     </Link>
                   ))}
                 </div>
                 <div className="mt-3 text-center">
                   <Link href="/spots" className="text-sm text-primary hover:underline">
-                    すべてのスポットを見る →
+                    全国の釣りスポットから探す →
                   </Link>
                 </div>
               </CardContent>
@@ -938,12 +942,27 @@ export default function FloatFishingGuidePage() {
           <p className="mb-4 text-sm text-muted-foreground">
             ウキ釣りの基本がわかったら、潮の読み方を学んで釣果アップを目指しましょう。
           </p>
-          <Link
-            href="/guide/tide"
-            className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
-          >
-            潮汐の読み方ガイドへ
-          </Link>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              href="/guide/tide"
+              className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
+            >
+              潮汐の読み方ガイドへ
+            </Link>
+            <Link
+              href="/spots"
+              className="inline-flex items-center rounded-full border border-primary px-6 py-3 text-sm font-medium text-primary transition-colors hover:bg-primary/5"
+            >
+              釣りスポットを探す
+            </Link>
+          </div>
+          <div className="mt-4 flex flex-wrap justify-center gap-3 text-sm">
+            <Link href="/catchable-now" className="text-primary hover:underline">今釣れる魚</Link>
+            <span className="text-muted-foreground">|</span>
+            <Link href="/for-beginners" className="text-primary hover:underline">初心者ガイド</Link>
+            <span className="text-muted-foreground">|</span>
+            <Link href="/guide" className="text-primary hover:underline">釣り方ガイド一覧</Link>
+          </div>
         </div>
       {/* LINE登録バナー */}
       <div className="mt-8 sm:mt-12">

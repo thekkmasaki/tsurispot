@@ -1299,11 +1299,18 @@ export default function SabikiGuidePage() {
             {sabikiSpots.length > 0 && (
               <div>
                 <div className="grid gap-2 sm:grid-cols-2">
-                  {sabikiSpots.map((spot) => (
+                  {sabikiSpots.map((spot) => {
+                    const spotFishNames = spot.catchableFish
+                      .filter((cf) => cf.method.includes("サビキ"))
+                      .slice(0, 2)
+                      .map((cf) => cf.fish.name)
+                      .join("・");
+                    return (
                     <Link
                       key={spot.id}
                       href={`/spots/${spot.slug}`}
                       className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
+                      title={`${spot.name}（${spot.region.prefecture}のサビキ釣りスポット）`}
                     >
                       <MapPin className="size-4 shrink-0 text-primary" />
                       <div className="min-w-0 flex-1">
@@ -1311,16 +1318,17 @@ export default function SabikiGuidePage() {
                           {spot.name}
                         </p>
                         <p className="truncate text-xs text-muted-foreground">
-                          {spot.region.prefecture} {spot.region.areaName}
+                          {spot.region.prefecture} {spot.region.areaName}{spotFishNames ? ` - ${spotFishNames}` : ""}
                         </p>
                       </div>
                     </Link>
-                  ))}
+                    );
+                  })}
                 </div>
                 <div className="mt-3 text-center">
                   <Button asChild variant="outline" size="sm">
                     <Link href="/spots">
-                      すべてのスポットを見る
+                      全国の釣りスポットから探す
                       <ChevronRight className="ml-1 size-4" />
                     </Link>
                   </Button>
@@ -1651,9 +1659,21 @@ export default function SabikiGuidePage() {
           <p className="mb-4 text-sm text-muted-foreground">
             サビキ釣りができるスポットを探してみよう
           </p>
-          <Button asChild size="lg" className="min-h-[48px] rounded-full px-8">
-            <Link href="/spots">スポットを探す</Link>
-          </Button>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Button asChild size="lg" className="min-h-[48px] rounded-full px-8">
+              <Link href="/spots">全国の釣りスポットを検索</Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="min-h-[48px] rounded-full px-6">
+              <Link href="/fish-finder">釣り場診断で探す</Link>
+            </Button>
+          </div>
+          <div className="mt-4 flex flex-wrap justify-center gap-3 text-sm">
+            <Link href="/for-beginners" className="text-primary hover:underline">初心者ガイド</Link>
+            <span className="text-muted-foreground">|</span>
+            <Link href="/catchable-now" className="text-primary hover:underline">今釣れる魚</Link>
+            <span className="text-muted-foreground">|</span>
+            <Link href="/fishing-calendar" className="text-primary hover:underline">月別カレンダー</Link>
+          </div>
         </div>
       {/* LINE登録バナー */}
       <div className="mt-8 sm:mt-12">
