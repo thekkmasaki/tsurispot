@@ -106,6 +106,7 @@ export async function generateMetadata({
 
   const fishNames = spot.catchableFish.map((cf) => cf.fish.name).join("・");
   const topFishNames = spot.catchableFish.slice(0, 2).map((cf) => cf.fish.name).join("・");
+  const top3FishNames = spot.catchableFish.slice(0, 3).map((cf) => cf.fish.name).join("・");
   const topMethodLabel = spot.catchableFish[0]?.method ?? "";
   const baseTitleText = `${spot.name}の釣り情報・釣果・アクセス`;
   const fullTitle = topMethodLabel && topFishNames
@@ -113,7 +114,18 @@ export async function generateMetadata({
     : baseTitleText;
   const title = fullTitle.length <= 60 ? fullTitle : baseTitleText;
   const isFamilyFriendly = spot.difficulty === "beginner" && spot.hasToilet && spot.hasParking;
-  const description = `${spot.name}（${spot.address}）は${spot.region.prefecture}${spot.region.areaName}にある${SPOT_TYPE_LABELS[spot.spotType]}の釣り場。${fishNames}が狙えるおすすめスポットです。${spot.hasParking ? '駐車場あり。' : ''}${spot.hasToilet ? 'トイレあり。' : ''}${spot.isFree ? '無料で釣りOK。' : ''}${isFamilyFriendly ? '子連れ・ファミリーにもおすすめ。' : ''}アクセス・釣れる魚・仕掛け情報を初心者向けに完全ガイド。`;
+  const popularityLabel = spot.rating >= 4.0 ? "人気" : spot.rating <= 3.0 ? "穴場" : "";
+  const descParts: string[] = [
+    `${spot.name}は${spot.region.prefecture}${spot.region.areaName}の${SPOT_TYPE_LABELS[spot.spotType]}。`,
+    top3FishNames ? `${top3FishNames}が狙える${popularityLabel ? popularityLabel + "の" : ""}釣り場。` : "",
+    spot.difficulty === "beginner" ? "初心者向け。" : "",
+    spot.hasParking ? "駐車場あり。" : "",
+    spot.hasToilet ? "トイレあり。" : "",
+    spot.isFree ? "無料。" : "",
+    isFamilyFriendly ? "ファミリーOK。" : "",
+    "アクセス・仕掛け・釣果を完全ガイド。",
+  ];
+  const description = descParts.filter(Boolean).join("").slice(0, 155);
   const ogDescription = `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）で${fishNames}が狙えます。${spot.description}`;
   return {
     title,
@@ -410,15 +422,44 @@ export default async function SpotDetailPage({ params }: PageProps) {
       ...(spot.catchableFish.length > 0
         ? [{
             "@type": "Question" as const,
-            name: `${spot.name}のおすすめ時期はいつですか？`,
+            name: `${spot.name}で一番釣れる魚は？`,
             acceptedAnswer: {
               "@type": "Answer" as const,
               text: (() => {
+                const easyFish = spot.catchableFish.filter(cf => cf.catchDifficulty === "easy");
+                const topFish = easyFish.length > 0 ? easyFish[0] : spot.catchableFish[0];
+                const mStart = monthNames[topFish.monthStart] || "";
+                const mEnd = monthNames[topFish.monthEnd] || "";
+                return `${spot.name}で最も釣りやすい魚は${topFish.fish.name}です。${topFish.method}で${mStart}〜${mEnd}に狙えます。${easyFish.length > 1 ? `他にも${easyFish.slice(1, 3).map(cf => cf.fish.name).join("、")}が比較的釣りやすい魚です。` : ""}`;
+              })(),
+            },
+          }]
+        : []),
+      ...(spot.catchableFish.length > 0
+        ? [{
+            "@type": "Question" as const,
+            name: `${spot.name}のベストシーズンはいつ？`,
+            acceptedAnswer: {
+              "@type": "Answer" as const,
+              text: (() => {
+                // 月ごとに釣れる魚数をカウントしてピーク月を算出
+                const monthCounts = Array.from({ length: 12 }, (_, i) => {
+                  const m = i + 1;
+                  return {
+                    month: m,
+                    count: spot.catchableFish.filter(cf => {
+                      if (cf.monthStart <= cf.monthEnd) return m >= cf.monthStart && m <= cf.monthEnd;
+                      return m >= cf.monthStart || m <= cf.monthEnd;
+                    }).length,
+                  };
+                });
+                const maxCount = Math.max(...monthCounts.map(mc => mc.count));
+                const bestMonths = monthCounts.filter(mc => mc.count === maxCount).map(mc => monthNames[mc.month]);
                 const peakFish = spot.catchableFish.filter(cf => cf.peakSeason);
-                if (peakFish.length > 0) {
-                  return `${spot.name}では${peakFish.slice(0, 3).map(cf => cf.fish.name).join("、")}が旬を迎える時期が特におすすめです。年間を通じて${spot.catchableFish.length}種類の魚が狙えます。`;
-                }
-                return `${spot.name}では年間を通じて${spot.catchableFish.length}種類の魚が狙えます。`;
+                const peakText = peakFish.length > 0
+                  ? `特に${peakFish.slice(0, 3).map(cf => cf.fish.name).join("、")}が旬を迎えます。`
+                  : "";
+                return `${spot.name}のベストシーズンは${bestMonths.slice(0, 3).join("・")}頃です。この時期は最大${maxCount}種類の魚が狙えます。${peakText}年間を通じて${spot.catchableFish.length}種類の魚が釣れるスポットです。`;
               })(),
             },
           }]
@@ -1114,6 +1155,130 @@ export default async function SpotDetailPage({ params }: PageProps) {
         );
       })()}
 
+      {/* この釣り場の攻略法 */}
+      {spot.catchableFish.length > 0 && (() => {
+        // ベストシーズン算出
+        const monthCountsForStrategy = Array.from({ length: 12 }, (_, i) => {
+          const m = i + 1;
+          return {
+            month: m,
+            count: spot.catchableFish.filter(cf => {
+              if (cf.monthStart <= cf.monthEnd) return m >= cf.monthStart && m <= cf.monthEnd;
+              return m >= cf.monthStart || m <= cf.monthEnd;
+            }).length,
+          };
+        });
+        const maxCountStrategy = Math.max(...monthCountsForStrategy.map(mc => mc.count));
+        const bestMonthsStrategy = monthCountsForStrategy.filter(mc => mc.count === maxCountStrategy).map(mc => monthNames[mc.month]);
+
+        // おすすめ釣り方トップ3（重複排除）
+        const seenMethodsStrategy = new Set<string>();
+        const topMethods = spot.catchableFish
+          .filter(cf => {
+            if (seenMethodsStrategy.has(cf.method)) return false;
+            seenMethodsStrategy.add(cf.method);
+            return true;
+          })
+          .slice(0, 3);
+
+        // 釣り方ガイドのリンクマップ
+        const METHOD_STRATEGY_MAP: Record<string, string> = {
+          "サビキ釣り": "/guide/sabiki",
+          "ちょい投げ": "/guide/choinage",
+          "ちょい投げ釣り": "/guide/choinage",
+          "エギング": "/guide/eging",
+          "ショアジギング": "/guide/jigging",
+          "ウキ釣り": "/guide/float-fishing",
+          "穴釣り": "/guide/anazuri",
+          "ルアー釣り": "/guide/lure",
+          "泳がせ釣り": "/guide/oyogase",
+          "遠投カゴ釣り": "/guide/entou-kago",
+          "投げ釣り": "/guide/choinage",
+          "フカセ釣り": "/guide/float-fishing",
+        };
+
+        // 釣り方の説明マップ
+        const METHOD_BRIEF: Record<string, string> = {
+          "サビキ釣り": "コマセで魚を寄せて数釣りできる初心者向けの釣り方",
+          "ちょい投げ": "仕掛けを軽く投げて砂底の魚を狙う手軽な釣り方",
+          "ちょい投げ釣り": "仕掛けを軽く投げて砂底の魚を狙う手軽な釣り方",
+          "エギング": "エギ（疑似餌）でイカを狙うゲーム性の高い釣り方",
+          "ショアジギング": "メタルジグを遠投して青物を狙うダイナミックな釣り方",
+          "ウキ釣り": "ウキで仕掛けを一定の深さに漂わせて多彩な魚種を狙う釣り方",
+          "穴釣り": "テトラポッドの隙間に仕掛けを落として根魚を狙う釣り方",
+          "ルアー釣り": "疑似餌で魚の捕食本能を刺激して釣るアクティブな釣り方",
+          "泳がせ釣り": "小魚を活きエサにして大物を狙う釣り方",
+          "遠投カゴ釣り": "カゴにコマセを詰めて沖のポイントを攻める釣り方",
+          "投げ釣り": "オモリと仕掛けを遠投して底物を狙う釣り方",
+          "フカセ釣り": "コマセを撒いてウキ仕掛けで自然に流す繊細な釣り方",
+        };
+
+        return (
+          <section className="mt-8 sm:mt-12">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold sm:text-xl">
+              <Compass className="size-5 text-primary" />
+              {spot.name}の攻略法
+            </h2>
+            <Card className="gap-0 py-0">
+              <CardContent className="space-y-5 p-4 sm:p-5">
+                {/* 狙い目の時間帯 */}
+                <div>
+                  <h3 className="mb-1.5 text-sm font-bold">狙い目の時間帯</h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {spot.name}では<strong>朝マヅメ（日の出前後）</strong>と<strong>夕マヅメ（日没前後）</strong>が最も釣果が期待できる時間帯です。
+                    {isNightFishing && "夜釣りも有効で、常夜灯周りではアジやメバルなどが狙えます。"}
+                    {spot.catchableFish.some(cf => cf.recommendedTime.includes("朝")) && "特に早朝の時間帯は魚の活性が高く、数釣りのチャンスです。"}
+                  </p>
+                </div>
+                {/* ベストシーズン */}
+                <div>
+                  <h3 className="mb-1.5 text-sm font-bold">ベストシーズン</h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {spot.name}の最も魚種が豊富な時期は<strong>{bestMonthsStrategy.slice(0, 3).join("・")}</strong>頃です（最大{maxCountStrategy}種類が狙えます）。
+                    {spot.catchableFish.filter(cf => cf.peakSeason).length > 0 &&
+                      `旬の魚: ${spot.catchableFish.filter(cf => cf.peakSeason).slice(0, 3).map(cf => `${cf.fish.name}（${monthNames[cf.monthStart]}〜${monthNames[cf.monthEnd]}）`).join("、")}。`}
+                  </p>
+                </div>
+                {/* おすすめ釣り方トップ3 */}
+                <div>
+                  <h3 className="mb-2 text-sm font-bold">おすすめの釣り方</h3>
+                  <div className="space-y-2">
+                    {topMethods.map((cf, idx) => {
+                      const guideHref = METHOD_STRATEGY_MAP[cf.method];
+                      const brief = METHOD_BRIEF[cf.method] || `${cf.method}で${cf.fish.name}を狙えます`;
+                      const targetFish = spot.catchableFish.filter(f => f.method === cf.method).slice(0, 3).map(f => f.fish.name).join("・");
+                      return (
+                        <div key={cf.fish.id + cf.method} className="rounded-lg border bg-muted/30 p-3">
+                          <div className="flex items-center gap-2">
+                            <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">{idx + 1}</span>
+                            <span className="text-sm font-bold">{cf.method}</span>
+                            {guideHref && (
+                              <Link href={guideHref} className="ml-auto text-xs text-primary hover:underline">
+                                ガイドを見る →
+                              </Link>
+                            )}
+                          </div>
+                          <p className="mt-1 text-xs text-muted-foreground">{brief}</p>
+                          <p className="mt-0.5 text-xs text-muted-foreground">対象魚: {targetFish}</p>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+                {/* 関連ガイドリンク */}
+                <div className="flex flex-wrap gap-2 border-t pt-3">
+                  <Link href="/guide" className="text-xs text-primary hover:underline">すべての釣り方ガイド →</Link>
+                  <Link href="/fishing-calendar" className="text-xs text-primary hover:underline">月別釣りカレンダー →</Link>
+                  {spot.difficulty === "beginner" && (
+                    <Link href="/for-beginners" className="text-xs text-primary hover:underline">釣りの始め方ガイド →</Link>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </section>
+        );
+      })()}
+
       {/* 関連スポット・記事 */}
       <h2 className="mt-8 text-xl font-bold sm:mt-12 sm:text-2xl">関連スポット・記事</h2>
 
@@ -1150,6 +1315,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                   </p>
                   <p className="mt-0.5 text-xs text-gray-500">
                     {nearSpot.region?.prefecture || spot.region.prefecture}の{nearSpotTypeLabel}
+                    {nearSpotFishNames ? ` | ${nearSpotFishNames}` : ""}
                   </p>
                   {nearSpot.catchableFish.length > 0 && (
                     <p className="mt-1.5 text-xs text-muted-foreground">
