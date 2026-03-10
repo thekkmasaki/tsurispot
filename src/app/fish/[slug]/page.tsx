@@ -244,7 +244,7 @@ export default async function FishDetailPage({ params }: PageProps) {
             },
           }]
         : []),
-      ...(fish.dangerLevel && fish.dangerLevel !== "none"
+      ...(fish.dangerLevel
         ? [{
             "@type": "Question" as const,
             name: `${fish.name}は危険ですか？注意点は？`,
