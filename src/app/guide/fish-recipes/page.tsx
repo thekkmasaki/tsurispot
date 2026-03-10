@@ -42,6 +42,18 @@ export const metadata: Metadata = {
 /*  JSON-LD structured data                                           */
 /* ------------------------------------------------------------------ */
 
+// SpeakableSpecification for GEO (Generative Engine Optimization)
+const guideSpeakableJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  name: "釣った魚の簡単レシピ集｜アジ・サバ・メバルなど10魚種｜ツリスポ",
+  url: "https://tsurispot.com/guide/fish-recipes",
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: ["h1", ".page-description", ".guide-summary"],
+  },
+};
+
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -1000,6 +1012,10 @@ export default function FishRecipesGuidePage() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(articleJsonLd),
         }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(guideSpeakableJsonLd) }}
       />
       {recipeJsonLdList.map((r, i) => (
         <script
