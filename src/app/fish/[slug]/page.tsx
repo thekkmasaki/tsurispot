@@ -84,7 +84,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     description: descText.slice(0, 160),
     keywords: [fish.name, fish.nameKana, ...(fish.aliases || []).slice(0, 3), "釣り方", "釣れる時期", "おすすめスポット"],
     openGraph: {
-      title: `${fish.name}の釣り方・時期・おすすめスポット | ツリスポ`,
+      title: `${fish.name}の釣り方・時期・おすすめスポット`,
       description: ogDesc.slice(0, 120),
       type: "article",
       url: `https://tsurispot.com/fish/${fish.slug}`,
@@ -92,7 +92,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     },
     twitter: {
       card: "summary_large_image",
-      title: `${fish.name}の釣り方・時期・おすすめスポット | ツリスポ`,
+      title: `${fish.name}の釣り方・時期・おすすめスポット`,
       description: ogDesc.slice(0, 120),
     },
     alternates: {

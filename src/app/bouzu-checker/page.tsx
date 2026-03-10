@@ -5,11 +5,11 @@ import { ChevronRight } from "lucide-react";
 import { BouzuCheckerClient } from "./bouzu-checker-client";
 
 export const metadata: Metadata = {
-  title: "ボウズ確率チェッカー｜釣れない対策を事前診断｜ツリスポ",
+  title: "ボウズ確率チェッカー｜釣れない対策を事前診断",
   description:
     "釣り場の種類・魚種・釣法・時期・天候・経験レベルを選ぶだけでボウズ確率を即診断。ボウズ回避の具体的な対策アドバイスも表示。釣行前に必ずチェック！",
   openGraph: {
-    title: "ボウズ確率チェッカー｜釣れない対策を事前診断｜ツリスポ",
+    title: "ボウズ確率チェッカー｜釣れない対策を事前診断",
     description:
       "釣り場・魚種・時期などを選ぶだけでボウズ確率を診断。対策アドバイスも表示する釣り人必携ツール。",
     type: "website",

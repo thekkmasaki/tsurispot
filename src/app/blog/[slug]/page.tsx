@@ -62,7 +62,7 @@ export async function generateMetadata({
   const post = await getBlogPostBySlugAsync(slug);
   if (!post) return {};
   return {
-    title: `${post.title} | 釣りコラム | ツリスポ`,
+    title: `${post.title} | 釣りコラム`,
     description: post.description,
     openGraph: {
       title: post.title,

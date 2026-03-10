@@ -8,11 +8,11 @@ import { areaGuides } from "@/lib/data/area-guides";
 import { fishingSpots } from "@/lib/data/spots";
 
 export const metadata: Metadata = {
-  title: "エリア別釣り場ガイド｜全国おすすめ釣りスポット完全攻略｜ツリスポ",
+  title: "エリア別釣り場ガイド｜全国おすすめ釣りスポット完全攻略",
   description:
     "東京湾・大阪湾・三浦半島など全国の主要釣りエリアを完全ガイド。エリアごとのおすすめ釣り場・釣れる魚・ベストシーズンを詳しく解説。初心者から上級者まで対応。",
   openGraph: {
-    title: "エリア別釣り場ガイド｜全国おすすめ釣りスポット完全攻略｜ツリスポ",
+    title: "エリア別釣り場ガイド｜全国おすすめ釣りスポット完全攻略",
     description:
       "東京湾・大阪湾など全国の主要釣りエリアをガイド。おすすめスポット・釣れる魚・ベストシーズンを詳解。",
     type: "website",
