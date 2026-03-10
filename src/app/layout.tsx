@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import Script from "next/script";
 import { Header } from "@/components/layout/header";
-import { searchIndex } from "@/lib/data/search-index";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Footer } from "@/components/layout/footer";
 import { GoogleAnalytics } from "@/components/google-analytics";
@@ -217,7 +216,7 @@ export default function RootLayout({
           />
         )}
         <PWARegister />
-        <Header searchItems={searchIndex} />
+        <Header />
         <main className="min-h-screen pb-20 md:pb-0">{children}</main>
         <Footer />
         <MobileNav />

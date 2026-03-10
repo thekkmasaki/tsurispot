@@ -26,8 +26,6 @@ import {
 import { cn } from "@/lib/utils";
 import { SearchOverlayClient } from "./search-overlay-client";
 import { LineButton } from "./line-button";
-import type { SearchItem } from "@/lib/data/search-index";
-
 // メインナビ（常時表示：最大5個）
 const mainNavItems = [
   { href: "/spots", label: "スポット", icon: MapPin },
@@ -135,7 +133,7 @@ function DropdownMenu() {
   );
 }
 
-export function Header({ searchItems }: { searchItems?: SearchItem[] }) {
+export function Header() {
   const pathname = usePathname();
   const { count: favCount } = useFavorites();
 
@@ -174,7 +172,7 @@ export function Header({ searchItems }: { searchItems?: SearchItem[] }) {
         </nav>
 
         <div className="flex items-center gap-2">
-          {searchItems && <SearchOverlayClient items={searchItems} />}
+          <SearchOverlayClient />
           <LineButton />
           <Link
             href="/favorites"
