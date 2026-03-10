@@ -62,8 +62,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     .filter(Boolean)
     .join("・");
 
-  const title = `${guide.nameJa}の釣り｜今釣れる魚・おすすめ釣り方・狙える魚種一覧【2026年版】`;
-  const description = `${guide.nameJa}に釣れる魚と釣り方を徹底解説。${guide.nameJa}のおすすめターゲットは${topFishNames}。初心者でも楽しめる${guide.nameJa}の釣りスポット・仕掛け・コツを紹介。`;
+  const title = `${guide.nameJa}に釣れる魚一覧・おすすめ釣り方と穴場スポット【2026年版】`;
+  const description = `${guide.nameJa}に釣れる魚と釣り方を徹底解説。おすすめターゲットは${topFishNames}。初心者でも楽しめる穴場スポット・仕掛け・釣り方のコツを紹介。${guide.nameJa}の釣り計画にお役立てください。`;
 
   return {
     title,
@@ -350,7 +350,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-2">
                 <h1 className="text-2xl font-bold sm:text-3xl">
-                  {guide.nameJa}の釣り｜今釣れる魚・おすすめ釣り方
+                  {guide.nameJa}に釣れる魚・おすすめ釣り方ガイド
                 </h1>
                 {isCurrentMonth && (
                   <Badge variant="default" className="text-sm">
@@ -388,7 +388,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
         <section className="mb-8">
           <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
             <Calendar className="size-5 text-primary" />
-            {guide.nameJa}の釣り条件
+            {guide.nameJa}の釣り条件・水温と天候
           </h2>
           <div className="grid gap-3 sm:grid-cols-3">
             <Card>
@@ -433,7 +433,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
         <section className="mb-8">
           <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
             <Fish className="size-5 text-primary" />
-            {guide.nameJa}のおすすめ魚種
+            {guide.nameJa}に釣れる魚・おすすめターゲット
           </h2>
           <div className="grid gap-3 sm:grid-cols-2">
             {displayFish.map((fish) => {
@@ -641,7 +641,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
           <section className="mb-8">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
               <Globe className="size-5 text-primary" />
-              {guide.nameJa}の釣り — 地域別ガイド
+              {guide.nameJa}の地域別おすすめ釣り場ガイド
             </h2>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
               {regionGroups.map((rg) => (
@@ -721,10 +721,10 @@ export default async function MonthlyGuidePage({ params }: Props) {
           <section className="mb-8">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
               <MapPin className="size-5 text-primary" />
-              {guide.nameJa}におすすめの釣りスポット
+              {guide.nameJa}のおすすめ釣りスポット・穴場ポイント
             </h2>
             <p className="mb-4 text-sm text-muted-foreground">
-              {guide.nameJa}に旬の魚が釣れる人気スポットを厳選しました。「現在地から近い順」で近くのスポットを表示できます。
+              {guide.nameJa}に旬の魚が釣れる人気スポットと穴場を厳選しました。初心者でも楽しめるポイントも掲載。「現在地から近い順」で近くのスポットを表示できます。
             </p>
             <MonthlySportsSorter
               spots={spotsForMonth.map((spot) => ({
@@ -779,7 +779,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
         <section className="mb-8">
           <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
             <Lightbulb className="size-5 text-amber-500" />
-            {guide.nameJa}の釣りTips
+            {guide.nameJa}の釣りのコツ・初心者向けアドバイス
           </h2>
           <Card>
             <CardContent className="pt-4">
@@ -960,7 +960,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
 
         {/* FAQ */}
         <CollapsibleSection
-          title={`${guide.nameJa}の釣りFAQ`}
+          title={`${guide.nameJa}の釣りに関するよくある質問`}
           icon={<HelpCircle className="size-5" />}
           previewText={`${allFaqs.length}件`}
         >

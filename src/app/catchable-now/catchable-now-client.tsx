@@ -93,10 +93,10 @@ export function CatchableNowClient({ fishSpecies, initialMonth }: CatchableNowCl
           </div>
           <div>
             <h1 className="text-xl font-bold tracking-tight sm:text-3xl">
-              {selectedMonth}月に釣れる魚
+              今釣れる魚一覧【{selectedMonth}月】
             </h1>
             <p className="text-sm text-muted-foreground">
-              {getSeasonLabel(selectedMonth)}の釣りターゲット
+              {getSeasonLabel(selectedMonth)}の旬の魚と釣り方ガイド
             </p>
           </div>
         </div>
@@ -142,7 +142,7 @@ export function CatchableNowClient({ fishSpecies, initialMonth }: CatchableNowCl
             <span className="text-xl" role="img" aria-label="fire">
               🔥
             </span>
-            <h2 className="text-lg font-bold">今が旬！</h2>
+            <h2 className="text-lg font-bold">{selectedMonth}月に最盛期の旬の魚</h2>
             <span className="text-sm text-muted-foreground">
               {peakFish.length}種
             </span>
@@ -162,7 +162,7 @@ export function CatchableNowClient({ fishSpecies, initialMonth }: CatchableNowCl
             <span className="text-xl" role="img" aria-label="calendar">
               📅
             </span>
-            <h2 className="text-lg font-bold">まだまだ釣れる</h2>
+            <h2 className="text-lg font-bold">{selectedMonth}月にまだ釣れるシーズン中の魚</h2>
             <span className="text-sm text-muted-foreground">
               {seasonFish.length}種
             </span>
@@ -182,7 +182,7 @@ export function CatchableNowClient({ fishSpecies, initialMonth }: CatchableNowCl
             <span className="text-xl" role="img" aria-label="blossom">
               🌸
             </span>
-            <h2 className="text-lg font-bold">来月から釣れ始める</h2>
+            <h2 className="text-lg font-bold">{getNextMonth(selectedMonth)}月から釣れ始める注目の魚</h2>
             <span className="text-sm text-muted-foreground">
               {upcomingFish.length}種
             </span>
@@ -227,7 +227,7 @@ export function CatchableNowClient({ fishSpecies, initialMonth }: CatchableNowCl
       <section className="mt-10">
         <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
           <Calendar className="size-5 text-primary" />
-          他の月の釣りガイドを見る
+          月別の釣りガイド・釣れる魚を見る
         </h2>
         <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 md:grid-cols-6">
           {MONTH_NAMES.map((name, i) => {

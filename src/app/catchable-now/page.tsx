@@ -2,14 +2,17 @@ import { Metadata } from "next";
 import { getFishSpeciesWithSpots } from "@/lib/data";
 import { CatchableNowClient } from "./catchable-now-client";
 
+// 現在の月を取得してタイトルに含める
+const currentMonth = new Date().getMonth() + 1;
+
 export const metadata: Metadata = {
-  title: "今釣れる魚｜今月のおすすめターゲットと釣り方ガイド｜ツリスポ",
+  title: `今釣れる魚一覧【${currentMonth}月】- 旬の魚と釣り方ガイド｜ツリスポ`,
   description:
-    "今の時期に釣れる魚を「旬の魚」「シーズン中の魚」「来月から狙える魚」に分類して紹介。今月の堤防・磯・サーフで狙えるターゲットと釣り方がひと目でわかります。初心者でも釣りやすい旬の魚を見つけて釣りに出かけましょう。",
+    `${currentMonth}月に釣れる魚を「旬の魚」「シーズン中の魚」「来月から狙える魚」に分類して紹介。今月の堤防・磯・サーフで狙えるおすすめターゲットと釣り方がひと目でわかります。初心者でも釣りやすい旬の魚や穴場スポットを見つけて釣りに出かけましょう。`,
   openGraph: {
-    title: "今釣れる魚｜今月のおすすめターゲットと釣り方ガイド｜ツリスポ",
+    title: `今釣れる魚一覧【${currentMonth}月】- 旬の魚と釣り方ガイド｜ツリスポ`,
     description:
-      "今の時期に釣れる魚を旬・シーズン・来月から狙える魚に分類して紹介。堤防・磯で狙えるターゲットと釣り方がわかります。",
+      `${currentMonth}月に釣れる魚を旬・シーズン・来月から狙える魚に分類して紹介。堤防・磯で狙えるおすすめターゲットと釣り方がわかります。`,
     type: "website",
     url: "https://tsurispot.com/catchable-now",
     siteName: "ツリスポ",
