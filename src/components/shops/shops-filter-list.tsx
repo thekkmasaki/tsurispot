@@ -97,7 +97,7 @@ export function ShopsFilterList({ shops }: ShopsFilterListProps) {
       if (filterParking && !shop.hasParking) return false;
       return true;
     });
-  }, [shops, searchQuery, selectedRegion, selectedPrefecture, selectedArea, filterLiveBait, filterFrozenBait, filterRental]);
+  }, [shops, searchQuery, selectedRegion, selectedPrefecture, selectedArea, filterLiveBait, filterFrozenBait, filterRental, filterParking]);
 
   // 地方ごとの店舗数
   const regionCounts = useMemo(() => {
