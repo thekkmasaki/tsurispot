@@ -24,6 +24,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "冷凍エサ販売",
       "中古釣具買取",
@@ -58,6 +59,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "冷凍エサ販売",
       "ソルトルアー充実",
@@ -92,6 +94,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "中古釣具販売",
       "釣具買取",
@@ -126,6 +129,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "冷凍エサ販売",
       "バス釣り用品充実",
@@ -162,6 +166,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -197,6 +202,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -233,6 +239,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -268,6 +275,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -303,6 +311,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -338,6 +347,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -373,6 +383,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -408,6 +419,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -443,6 +455,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -478,6 +491,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -513,6 +527,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -547,6 +562,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -584,6 +600,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -619,6 +636,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -654,6 +672,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -688,6 +707,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: true,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -723,6 +743,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -758,6 +779,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -795,6 +817,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: true,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -830,6 +853,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -864,6 +888,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -899,6 +924,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -936,6 +962,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "冷凍エサ販売",
       "ソルトルアー充実",
@@ -970,6 +997,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "冷凍エサ販売",
       "ソルトルアー充実",
@@ -1004,6 +1032,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1039,6 +1068,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "中古釣具販売",
       "釣具買取",
@@ -1073,6 +1103,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "中古釣具販売",
       "釣具買取",
@@ -1106,6 +1137,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "中古釣具販売",
       "釣具買取",
@@ -1141,6 +1173,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1177,6 +1210,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1212,6 +1246,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1248,6 +1283,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1284,6 +1320,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1319,6 +1356,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1354,6 +1392,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1391,6 +1430,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1426,6 +1466,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "中古釣具販売",
       "釣具買取",
@@ -1460,6 +1501,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1495,6 +1537,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1529,6 +1572,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1563,6 +1607,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1598,6 +1643,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1632,6 +1678,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1666,6 +1713,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1703,6 +1751,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1739,6 +1788,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1774,6 +1824,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "バスルアー専門",
       "トラウト用品",
@@ -1811,6 +1862,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1846,6 +1898,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1882,6 +1935,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1918,6 +1972,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "渓流釣り用品",
@@ -1954,6 +2009,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "渓流釣り用品",
@@ -1991,6 +2047,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "渓流釣り用品",
@@ -2027,6 +2084,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "渓流釣り用品",
@@ -2065,6 +2123,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "ヘラブナ用品",
@@ -2100,6 +2159,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "バスフィッシング用品",
@@ -2134,6 +2194,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "中古釣具販売",
       "釣具買取",
@@ -2170,6 +2231,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -2207,6 +2269,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "中古釣具販売",
       "釣具買取",
@@ -2240,6 +2303,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -2275,6 +2339,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -2310,6 +2375,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -2347,6 +2413,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "冷凍エサ販売",
       "バスフィッシング用品",
@@ -2384,6 +2451,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -2419,6 +2487,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -2455,6 +2524,7 @@ export const shopsKanto: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",

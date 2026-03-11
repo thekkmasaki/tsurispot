@@ -29,6 +29,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -63,6 +64,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "釣具販売",
       "仕掛け販売",
@@ -95,6 +97,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "釣具販売",
       "仕掛け販売",
@@ -127,6 +130,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "釣具販売",
       "仕掛け販売",
@@ -159,6 +163,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "釣具販売",
       "仕掛け販売",
@@ -191,6 +196,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "チヌ釣り専門用品",
       "配合エサ販売",
@@ -226,6 +232,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -258,6 +265,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -290,6 +298,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -323,6 +332,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -357,6 +367,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "釣具販売",
       "仕掛け販売",
@@ -389,6 +400,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -421,6 +433,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -454,6 +467,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -486,6 +500,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -517,6 +532,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -551,6 +567,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "釣具販売",
       "Webショップ",
@@ -583,6 +600,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -617,6 +635,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "釣り場情報提供",
@@ -648,6 +667,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "釣具販売",
       "Instagram釣果情報",
@@ -680,6 +700,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -713,6 +734,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "エサ販売",
     ],
@@ -744,6 +766,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -780,6 +803,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売（14種類以上）",
       "冷凍エサ販売",
@@ -813,6 +837,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -846,6 +871,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "ルアー専門販売",
       "Instagram釣果情報",
@@ -877,6 +903,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "釣具販売",
       "仕掛け販売",
@@ -908,6 +935,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -941,6 +969,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -974,6 +1003,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "釣具販売",
       "仕掛け販売",
@@ -1005,6 +1035,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "釣具販売",
       "仕掛け販売",
@@ -1038,6 +1069,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "釣具販売",
       "釣り場情報提供",
@@ -1069,6 +1101,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "釣具販売",
       "仕掛け販売",
@@ -1100,6 +1133,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "釣具販売",
       "仕掛け販売",
@@ -1131,6 +1165,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "釣具販売",
       "仕掛け販売",
@@ -1162,6 +1197,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "釣具販売",
       "仕掛け販売",
@@ -1195,6 +1231,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1229,6 +1266,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1263,6 +1301,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: true,
+    hasParking: false,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1298,6 +1337,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "釣具販売",
       "仕掛け販売",
@@ -1331,6 +1371,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "へらぶな専門用品販売",
       "楽天通販対応",
@@ -1364,6 +1405,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "フライフィッシング専門用品販売",
       "初心者スクール開催",
@@ -1397,6 +1439,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "ルアー専門販売（6000種以上）",
       "カフェ併設",
@@ -1430,6 +1473,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "へらぶな専門用品販売",
       "師光製竹竿専売",
@@ -1464,6 +1508,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "釣具販売",
       "希少商品取り寄せ",
@@ -1497,6 +1542,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1531,6 +1577,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1564,6 +1611,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "釣具販売",
       "ボート用品取扱",
@@ -1598,6 +1646,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1631,6 +1680,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "釣具販売",
       "仕掛け販売",
@@ -1663,6 +1713,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: false,
     services: [
       "釣具販売",
       "仕掛け販売",
@@ -1694,6 +1745,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "釣具販売",
       "仕掛け販売",
@@ -1726,6 +1778,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "中古ルアー専門販売",
       "ルアー買取",
@@ -1759,6 +1812,7 @@ const shopsKansai: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: true,
+    hasParking: true,
     services: [
       "活きエサ販売（アオイソメ・石ゴカイ・シラサエビ）",
       "冷凍エサ販売（オキアミ・アミエビ）",
