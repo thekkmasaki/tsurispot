@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Trophy } from "lucide-react";
 import { fishingSpots } from "@/lib/data/spots";
-import { RankingClient, type RankingSpot } from "./ranking-client";
+import { RankingClient } from "./ranking-client";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const metadata: Metadata = {
@@ -64,27 +64,6 @@ const itemListJsonLd = {
     })),
 };
 
-// サーバー側で軽量データに変換（RSCペイロードの30MB超過を防止）
-const rankingSpots: RankingSpot[] = fishingSpots.map((s) => ({
-  id: s.id,
-  slug: s.slug,
-  name: s.name,
-  rating: s.rating,
-  reviewCount: s.reviewCount,
-  prefecture: s.region.prefecture,
-  spotType: s.spotType,
-  difficulty: s.difficulty,
-  latitude: s.latitude,
-  longitude: s.longitude,
-  hasParking: s.hasParking,
-  hasToilet: s.hasToilet,
-  hasRentalRod: s.hasRentalRod,
-  isFree: s.isFree,
-  fishCount: s.catchableFish.length,
-  topFish: s.catchableFish.slice(0, 3).map((cf) => ({ id: cf.fish.id, name: cf.fish.name })),
-  bestTimes: s.bestTimes.map((t) => ({ label: t.label, rating: t.rating })),
-}));
-
 export default function RankingPage() {
   return (
     <div className="min-h-screen">
@@ -122,7 +101,7 @@ export default function RankingPage() {
       {/* メインコンテンツ */}
       <div className="container mx-auto max-w-4xl px-4 py-6 sm:py-8">
         <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "人気ランキング" }]} />
-        <RankingClient spots={rankingSpots} />
+        <RankingClient />
       </div>
     </div>
   );

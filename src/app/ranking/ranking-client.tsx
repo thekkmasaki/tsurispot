@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { Star, MapPin, Trophy, Fish, ChevronDown, Info, Navigation, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -267,17 +267,32 @@ function SpotCard({ spot, rank, distanceKm }: SpotCardProps) {
   );
 }
 
-interface RankingClientProps {
-  spots: RankingSpot[];
-}
-
-export function RankingClient({ spots }: RankingClientProps) {
+export function RankingClient() {
+  const [spots, setSpots] = useState<RankingSpot[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [activeTab, setActiveTab] = useState<TabKey>("all");
   const [activePrefecture, setActivePrefecture] = useState("全国");
   const [activeRegion, setActiveRegion] = useState<string | null>(null);
   const [nearbyMode, setNearbyMode] = useState(false);
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [locating, setLocating] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/ranking")
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch");
+        return res.json();
+      })
+      .then((data: RankingSpot[]) => {
+        setSpots(data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setError(true);
+        setLoading(false);
+      });
+  }, []);
 
   const handleLocate = useCallback(() => {
     if (!navigator.geolocation) return;
@@ -313,6 +328,31 @@ export function RankingClient({ spots }: RankingClientProps) {
     const filtered = filterSpots(byPref, activeTab);
     return sortSpots(filtered).slice(0, 10);
   }, [spots, activeTab, activePrefecture, nearbyMode, userLocation]);
+
+  if (loading) {
+    return (
+      <div className="space-y-3 py-4">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <div key={i} className="flex gap-3 rounded-xl border border-gray-100 bg-white p-4 animate-pulse">
+            <div className="h-9 w-9 shrink-0 rounded-full bg-gray-200" />
+            <div className="flex-1 space-y-2">
+              <div className="h-4 w-2/3 rounded bg-gray-200" />
+              <div className="h-3 w-1/3 rounded bg-gray-200" />
+              <div className="h-3 w-1/2 rounded bg-gray-200" />
+            </div>
+          </div>
+        ))}
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="rounded-xl border border-red-100 bg-red-50 py-12 text-center">
+        <p className="text-red-600">データの読み込みに失敗しました。ページを再読み込みしてください。</p>
+      </div>
+    );
+  }
 
   return (
     <div>
