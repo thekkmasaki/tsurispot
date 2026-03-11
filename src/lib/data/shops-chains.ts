@@ -866,7 +866,7 @@ export const shopsChains: TackleShop[] = [
   {
     id: "shop-chain-kameya-shokokenter",
     name: "かめや釣具 商工センター店",
-    slug: "kameya-shokokenter",
+    slug: "kameya-hiroshima-shokokenter",
     description:
       "広島市西区商工センターに位置する大型店。総本店と並ぶ品揃えで、特にルアーフィッシングとエギングの品揃えに力を入れている。金曜・土曜はオールナイト営業を実施しており、夜通しの釣り遠征前にも立ち寄れる利便性の高さが魅力。",
     latitude: 34.3683,

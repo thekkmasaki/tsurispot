@@ -940,6 +940,7 @@ export const shopsKanto: TackleShop[] = [
   },
 
   // ===== 東京都（追加分） =====
+  // キャスティング錦糸町店・品川シーサイド店はshops-chains.tsに統合済み
   {
     id: "shop-kanto-joshuya-kamata",
     name: "上州屋 蒲田店",
@@ -1082,43 +1083,6 @@ export const shopsKanto: TackleShop[] = [
 
   // ===== 神奈川県（追加分） =====
   {
-    id: "shop-kanto-casting-yokohama-kohoku",
-    name: "キャスティング 横浜港北店",
-    slug: "casting-yokohama-kohoku",
-    description:
-      "横浜市都筑区の池辺町に位置する大型釣具店。鴨居駅から徒歩約9分で、広い売り場にソルトからバスフィッシングまで幅広いジャンルの商品を展開。金曜・土曜・祝前日は23時まで営業しており、夜釣りの準備も余裕を持ってできる。駐車場完備で車釣行派にも便利。",
-    latitude: 35.5137,
-    longitude: 139.5608,
-    address: "神奈川県横浜市都筑区池辺町4261-14",
-    phone: "045-929-3723",
-    website: "https://castingnet.jp/",
-    businessHours: "月〜木・日・祝 10:00〜22:00 / 金・土・祝前 10:00〜23:00",
-    closedDays: "年中無休",
-    region: {
-      id: "r-kanagawa-yokohama-tsuzuki",
-      prefecture: "神奈川県",
-      areaName: "横浜市都筑区",
-      slug: "kanagawa-yokohama-tsuzuki",
-    },
-    hasLiveBait: true,
-    hasFrozenBait: true,
-    hasRentalRod: false,
-    hasParking: true,
-    services: [
-      "活きエサ販売",
-      "冷凍エサ販売",
-      "ルアーコーナー充実",
-      "中古釣具買取",
-      "駐車場完備",
-      "深夜営業（金土祝前）",
-    ],
-    baitStock: [],
-    nearbySpotSlugs: [],
-    imageUrl: "",
-    rating: 0,
-    isPremium: false,
-  },
-  {
     id: "shop-kanto-point-yokohama-konandai",
     name: "釣具のポイント 横浜港南台店",
     slug: "point-yokohama-konandai",
@@ -1184,43 +1148,6 @@ export const shopsKanto: TackleShop[] = [
       "ショアジギング用品",
       "エギング用品",
       "駐車場完備",
-    ],
-    baitStock: [],
-    nearbySpotSlugs: [],
-    imageUrl: "",
-    rating: 0,
-    isPremium: false,
-  },
-  {
-    id: "shop-kanto-casting-shonan-hiratsuka",
-    name: "キャスティング 湘南平塚店",
-    slug: "casting-shonan-hiratsuka",
-    description:
-      "平塚市田村にあるキャスティングの湘南エリア店舗。土日祝は朝4時から営業しており、相模湾の朝マズメに合わせた釣行が可能。駐車場66台と広く、無料の釣具洗い場も併設されている。湘南サーフでのフラットフィッシュ狙いや平塚新港の堤防釣りに最適な品揃え。",
-    latitude: 35.3451,
-    longitude: 139.3392,
-    address: "神奈川県平塚市田村5-2-22",
-    phone: "0463-51-3838",
-    website: "https://castingnet.jp/",
-    businessHours: "平日 10:00〜21:00 / 土日祝 4:00〜21:00",
-    closedDays: "年中無休",
-    region: {
-      id: "r-kanagawa-hiratsuka-2",
-      prefecture: "神奈川県",
-      areaName: "平塚",
-      slug: "kanagawa-hiratsuka",
-    },
-    hasLiveBait: true,
-    hasFrozenBait: true,
-    hasRentalRod: false,
-    hasParking: true,
-    services: [
-      "活きエサ販売",
-      "冷凍エサ販売",
-      "早朝営業（土日祝）",
-      "無料釣具洗い場",
-      "駐車場66台",
-      "中古釣具買取",
     ],
     baitStock: [],
     nearbySpotSlugs: [],
@@ -2321,42 +2248,6 @@ export const shopsKanto: TackleShop[] = [
   },
 
   // ===== 東京都（追加分2） =====
-  {
-    id: "shop-kanto-casting-hachioji",
-    name: "キャスティング 八王子店",
-    slug: "casting-hachioji",
-    description:
-      "八王子市緑町にある郊外型の大型釣具店。多摩川上流や相模湖、津久井湖でのバスフィッシングやワカサギ釣りに強い品揃え。渓流釣り用品も充実しており、奥多摩方面のヤマメ・イワナ狙いの準備もできる。中古釣具の取り扱いもあり、幅広い価格帯で対応。",
-    latitude: 35.6632,
-    longitude: 139.3215,
-    address: "東京都八王子市緑町927-1",
-    phone: "042-620-5581",
-    website: "https://castingnet.jp/",
-    businessHours: "10:00〜21:00",
-    closedDays: "年中無休",
-    region: {
-      id: "r-tokyo-hachioji",
-      prefecture: "東京都",
-      areaName: "八王子",
-      slug: "tokyo-hachioji",
-    },
-    hasLiveBait: false,
-    hasFrozenBait: true,
-    hasRentalRod: false,
-    hasParking: true,
-    services: [
-      "冷凍エサ販売",
-      "バスフィッシング用品",
-      "渓流釣り用品",
-      "中古釣具買取",
-      "駐車場完備",
-    ],
-    baitStock: [],
-    nearbySpotSlugs: [],
-    imageUrl: "",
-    rating: 0,
-    isPremium: false,
-  },
 
   // ===== 神奈川県（追加分3） =====
   {
