@@ -2861,9 +2861,9 @@ const shopsKansai: TackleShop[] = [
     ownerMessage:
       "当店は宮津湾を一望できる立地にあり、朝5時から営業しています。その日の潮や天気に合わせたエサ・仕掛けをご提案しますので、お気軽にご相談ください。レンタルロッドもご用意していますので、手ぶらでのお越しも大歓迎です！",
     coupon: {
-      title: "初回来店 10%OFF",
-      description: "この画面を店頭でご提示ください。釣具・エサ全品10%割引！",
-      validUntil: "2026年3月31日まで",
+      title: "期間限定 エサ全品10%OFF",
+      description: "この画面を店頭でご提示ください。エサ全品10%割引！",
+      validUntil: "2026年4月30日",
     },
     rating: 4.5,
     isPremium: true,

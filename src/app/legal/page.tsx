@@ -133,8 +133,8 @@ export default function LegalPage() {
                 </ul>
                 <p className="font-medium text-foreground">有料サービス（釣具店向け）</p>
                 <ul className="ml-4 list-disc space-y-1.5">
-                  <li>ベーシックプラン（初年度 月額500円・2年目〜月額980円・税込）― 公式バッジ、検索優先表示、写真3枚</li>
-                  <li>プロプラン（初年度 月額1,980円・2年目〜月額2,980円・税込）― ベーシック全機能に加え、写真20枚、店主メッセージ、エサ在庫1日50回更新、クーポン配信、商品PR、Googleビジネスプロフィール初期設定サポート</li>
+                  <li>ベーシックプラン（初年度 月額500円・2年目以降 月額980円・税込）― 公式バッジ、検索優先表示、写真3枚、Googleのお店情報を整備</li>
+                  <li>プロプラン（初年度 月額1,980円・2年目以降 月額2,980円・税込）― ベーシック全機能に加え、写真20枚、店主メッセージ、エサ在庫1日50回更新、クーポン配信、商品PR、Googleのお店情報を整備</li>
                 </ul>
                 <p>
                   アフィリエイトリンクを通じて外部のECサイト（Amazon.co.jp、楽天市場等）で商品をご購入いただく形となり、当サイトが商品を直接販売することはありません。
@@ -155,8 +155,8 @@ export default function LegalPage() {
               <div className="space-y-3 text-sm leading-relaxed text-muted-foreground">
                 <p className="font-medium text-foreground">有料掲載プラン</p>
                 <ul className="ml-4 list-disc space-y-1.5">
-                  <li>ベーシックプラン: 初年度 月額500円 / 2年目〜月額980円（税込）</li>
-                  <li>プロプラン: 初年度 月額1,980円 / 2年目〜月額2,980円（税込）</li>
+                  <li>ベーシックプラン: 初年度 月額500円 / 2年目以降 月額980円（税込）</li>
+                  <li>プロプラン: 初年度 月額1,980円 / 2年目以降 月額2,980円（税込）</li>
                 </ul>
                 <p>
                   上記は全て税込価格です。アフィリエイトリンク先の商品価格については、各ECサイトの表示価格が適用されます。

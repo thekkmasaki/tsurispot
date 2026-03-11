@@ -219,7 +219,7 @@ export default function PartnerPage() {
         price: "500",
         priceCurrency: "JPY",
         priceValidUntil: "2027-03-31",
-        description: "初年度月額500円（2年目〜980円）。公式バッジ、検索優先表示、写真3枚掲載",
+        description: "初年度月額500円（2年目以降980円）。公式バッジ、検索優先表示、写真3枚掲載、Googleのお店情報を整備",
       },
       {
         "@type": "Offer",
@@ -227,7 +227,7 @@ export default function PartnerPage() {
         price: "1980",
         priceCurrency: "JPY",
         priceValidUntil: "2027-03-31",
-        description: "初年度月額1,980円（2年目〜2,980円）。写真20枚、クーポン配信、Googleビジネスプロフィール設定サポート",
+        description: "初年度月額1,980円（2年目以降2,980円）。写真20枚、クーポン配信、Googleのお店情報を整備",
       },
     ],
     provider: {
@@ -656,13 +656,13 @@ export default function PartnerPage() {
                 </div>
                 <div>
                   <p className="font-bold text-blue-600 dark:text-blue-400 mb-1">ベーシック <span className="font-normal text-xs">初年度 月額500円</span></p>
-                  <p className="text-[10px] text-muted-foreground">2年目〜月額980円</p>
-                  <p className="text-xs text-muted-foreground">公式バッジ・検索優先表示・写真3枚</p>
+                  <p className="text-[10px] text-muted-foreground">2年目以降 月額980円</p>
+                  <p className="text-xs text-muted-foreground">公式バッジ・検索優先表示・写真3枚・Googleのお店情報を整備</p>
                   <p className="text-xs font-bold text-red-600">今なら3ヶ月無料！</p>
                 </div>
                 <div>
                   <p className="font-bold text-amber-600 dark:text-amber-400 mb-1">プロ <span className="font-normal text-xs">初年度 月額1,980円</span></p>
-                  <p className="text-[10px] text-muted-foreground">2年目〜月額2,980円</p>
+                  <p className="text-[10px] text-muted-foreground">2年目以降 月額2,980円</p>
                   <p className="text-xs text-muted-foreground">1日50回更新・写真20枚・クーポン配信・MEOサポート</p>
                   <p className="text-xs font-bold text-red-600">今なら3ヶ月無料！</p>
                 </div>

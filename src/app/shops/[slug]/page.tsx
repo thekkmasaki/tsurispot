@@ -401,13 +401,13 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                       <th className={`text-center py-3 px-3 ${isBasic ? "bg-blue-100 dark:bg-blue-950/30" : "bg-blue-50 dark:bg-blue-950/20"}`}>
                         <span className="font-bold text-blue-700">ベーシック</span><br />
                         <span className="text-xs font-normal">¥500/月</span><br />
-                        <span className="text-[9px] text-muted-foreground">2年目〜¥980</span><br />
+                        <span className="text-[9px] text-muted-foreground">2年目以降 ¥980</span><br />
                         <span className="text-[10px] font-bold text-red-600">3ヶ月無料</span>
                       </th>
                       <th className={`text-center py-3 px-3 ${isPro ? "bg-amber-100 dark:bg-amber-950/30" : "bg-amber-50 dark:bg-amber-950/20"}`}>
                         <span className="font-bold text-amber-700">プロ</span><br />
                         <span className="text-xs font-normal">¥1,980/月</span><br />
-                        <span className="text-[9px] text-muted-foreground">2年目〜¥2,980</span><br />
+                        <span className="text-[9px] text-muted-foreground">2年目以降 ¥2,980</span><br />
                         <span className="text-[10px] font-bold text-red-600">3ヶ月無料</span>
                       </th>
                     </tr>
@@ -415,7 +415,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                   <tbody className="text-sm">
                     {[
                       { feature: "基本情報の掲載", free: true, basic: true, pro: true },
-                      { feature: "近くの釣りスポットと連携", free: true, basic: true, pro: true, highlight: true, note: "2,100+スポットの詳細ページからお店を直接案内" },
+                      { feature: "ツリスポ内の近くの釣りスポットと連携", free: true, basic: true, pro: true, highlight: true, note: "2,500件のスポット詳細ページからお店を直接案内" },
                       { feature: "Google検索への配信", free: true, basic: true, pro: true },
                       { feature: "エサ在庫更新", free: "1日10回", basic: "1日10回", pro: "1日50回" },
                       { feature: "公式バッジ表示", free: false, basic: true, pro: true },
@@ -425,7 +425,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                       { feature: "店主からのメッセージ", free: false, basic: false, pro: true },
                       { feature: "クーポン配信", free: false, basic: false, pro: true },
                       { feature: "スポットページでの商品PR", free: false, basic: false, pro: true },
-                      { feature: "Googleビジネスプロフィール初期設定サポート", free: false, basic: false, pro: true },
+                      { feature: "Googleのお店情報を整備", free: false, basic: true, pro: true },
                     ].map((row, i) => (
                       <tr key={row.feature} className={`border-b last:border-0 ${row.highlight ? "bg-primary/5 dark:bg-primary/10" : i % 2 === 0 ? "bg-muted/20" : ""}`}>
                         <td className={`py-2.5 pl-4 pr-4 ${row.highlight ? "font-bold text-primary" : "font-medium"}`}>
@@ -534,18 +534,18 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                 ツリスポに<strong>無料で</strong>店舗情報を掲載・管理できます。エサの在庫状況をリアルタイム公開すれば、お客様からの「エサある？」の電話対応を減らせます。
               </p>
               <div className="flex flex-wrap gap-2 pt-1">
-                <a
-                  href={`mailto:fishingspotjapan@gmail.com?subject=店舗管理について&body=店舗名：${encodeURIComponent(shop.name)}%0A%0Aツリスポでの店舗情報の管理を希望します。`}
+                <Link
+                  href="/partner"
                   className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-bold text-white hover:bg-blue-700 transition-colors"
                 >
                   <Mail className="w-4 h-4" />
                   無料で店舗を管理する
-                </a>
+                </Link>
                 <Link
-                  href="/partner"
+                  href="/partner#plans"
                   className="inline-flex items-center gap-1 rounded-lg border border-blue-300 px-4 py-2 text-sm font-medium text-blue-700 hover:bg-blue-100 transition-colors dark:text-blue-400 dark:hover:bg-blue-950/30"
                 >
-                  詳しく見る
+                  プランを見る
                   <ChevronRight className="w-3.5 h-3.5" />
                 </Link>
               </div>
@@ -570,7 +570,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                   <p className="text-sm font-bold text-green-700">無料プラン</p>
                   <p className="text-lg font-bold">¥0<span className="text-xs font-bold text-green-600 ml-1">永久無料</span></p>
                   <ul className="mt-2 flex-1 space-y-1">
-                    {["基本情報の掲載", "近くの釣りスポットと連携", "Google検索への配信", "エサ在庫更新（1日10回）"].map((t) => (
+                    {["基本情報の掲載", "ツリスポ内の近くの釣りスポットと連携", "Google検索への配信", "エサ在庫更新（1日10回）"].map((t) => (
                       <li key={t} className="flex items-start gap-1.5 text-xs">
                         <CheckCircle className="mt-0.5 size-3 shrink-0 text-green-500" />
                         <span>{t}</span>
@@ -585,10 +585,10 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                 <div className="flex flex-col rounded-lg border border-blue-200 bg-blue-50/50 p-3 dark:bg-blue-950/20">
                   <p className="text-sm font-bold text-blue-600">ベーシック</p>
                   <p className="text-lg font-bold">¥500<span className="text-xs font-normal text-muted-foreground">/月</span></p>
-                  <p className="text-[10px] text-muted-foreground">初年度特別価格（2年目〜¥980/月）</p>
+                  <p className="text-[10px] text-muted-foreground">初年度特別価格（2年目以降 ¥980/月）</p>
                   <p className="text-xs font-bold text-red-600">今なら3ヶ月無料！</p>
                   <ul className="mt-2 flex-1 space-y-1">
-                    {["無料プランの全機能", "検索結果での優先表示", "写真3枚まで掲載", "公式バッジ表示"].map((t) => (
+                    {["無料プランの全機能", "検索結果での優先表示", "写真3枚まで掲載", "公式バッジ表示", "Googleのお店情報を整備"].map((t) => (
                       <li key={t} className="flex items-start gap-1.5 text-xs">
                         <CheckCircle className="mt-0.5 size-3 shrink-0 text-blue-500" />
                         <span>{t}</span>
@@ -603,10 +603,10 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                 <div className="flex flex-col rounded-lg border border-amber-200 bg-amber-50/50 p-3 dark:bg-amber-950/20">
                   <p className="text-sm font-bold text-amber-600">プロ</p>
                   <p className="text-lg font-bold">¥1,980<span className="text-xs font-normal text-muted-foreground">/月</span></p>
-                  <p className="text-[10px] text-muted-foreground">初年度特別価格（2年目〜¥2,980/月）</p>
+                  <p className="text-[10px] text-muted-foreground">初年度特別価格（2年目以降 ¥2,980/月）</p>
                   <p className="text-xs font-bold text-red-600">今なら3ヶ月無料！</p>
                   <ul className="mt-2 flex-1 space-y-1">
-                    {["ベーシックの全機能", "写真20枚・店主メッセージ", "詳細アクセス解析", "クーポン配信機能", "Googleビジネスプロフィール設定サポート"].map((t) => (
+                    {["ベーシックの全機能", "写真20枚・店主メッセージ", "詳細アクセス解析", "クーポン配信機能", "Googleのお店情報を整備"].map((t) => (
                       <li key={t} className="flex items-start gap-1.5 text-xs">
                         <CheckCircle className="mt-0.5 size-3 shrink-0 text-amber-500" />
                         <span>{t}</span>
