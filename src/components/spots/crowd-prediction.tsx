@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { Users, Clock, Sun, CloudRain, Wind } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -42,48 +42,93 @@ export function CrowdPredictionCard({
   hasParking,
   reviewCount,
 }: CrowdPredictionProps) {
-  const now = new Date();
-  const currentHour = now.getHours();
-  const currentDayOfWeek = now.getDay();
-  const currentMonth = now.getMonth() + 1;
+  // Hydration対策: new Date()はクライアント側でのみ取得する
+  const [timeInfo, setTimeInfo] = useState<{
+    hour: number;
+    dayOfWeek: number;
+    month: number;
+  } | null>(null);
 
-  const baseParams = {
-    month: currentMonth,
-    isHoliday: false,
-    weatherCode: "clear" as const,
-    spotPopularity: rating,
-    isFree,
-    difficulty,
-    prefecture,
-    hasParking,
-    reviewCount,
-  };
+  useEffect(() => {
+    const now = new Date();
+    setTimeInfo({
+      hour: now.getHours(),
+      dayOfWeek: now.getDay(),
+      month: now.getMonth() + 1,
+    });
+  }, []);
+
+  const baseParams = useMemo(
+    () =>
+      timeInfo
+        ? {
+            month: timeInfo.month,
+            isHoliday: false,
+            weatherCode: "clear" as const,
+            spotPopularity: rating,
+            isFree,
+            difficulty,
+            prefecture,
+            hasParking,
+            reviewCount,
+          }
+        : null,
+    [timeInfo, rating, isFree, difficulty, prefecture, hasParking, reviewCount]
+  );
 
   const currentPrediction = useMemo(
     () =>
-      calculateCrowdScore({
-        ...baseParams,
-        dayOfWeek: currentDayOfWeek,
-        hour: currentHour,
-      }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [currentDayOfWeek, currentHour, currentMonth, rating, isFree, difficulty, prefecture, hasParking, reviewCount]
+      baseParams && timeInfo
+        ? calculateCrowdScore({
+            ...baseParams,
+            dayOfWeek: timeInfo.dayOfWeek,
+            hour: timeInfo.hour,
+          })
+        : null,
+    [baseParams, timeInfo]
   );
 
   const hourlyPredictions = useMemo(
     () =>
-      getDailyPredictions({
-        ...baseParams,
-        dayOfWeek: currentDayOfWeek,
-      }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [currentDayOfWeek, currentMonth, rating, isFree, difficulty, prefecture, hasParking, reviewCount]
+      baseParams && timeInfo
+        ? getDailyPredictions({
+            ...baseParams,
+            dayOfWeek: timeInfo.dayOfWeek,
+          })
+        : null,
+    [baseParams, timeInfo]
   );
 
   // 表示する時間帯 (5:00〜21:00)
-  const displayHours = hourlyPredictions.filter(
+  const displayHours = hourlyPredictions?.filter(
     (h) => h.hour >= 5 && h.hour <= 21
   );
+
+  // マウント前はスケルトン表示（SSRとクライアント初回レンダリングが一致）
+  if (!timeInfo || !currentPrediction || !displayHours) {
+    return (
+      <Card className="gap-0 py-0">
+        <CardContent className="p-4 sm:p-5">
+          <h3 className="mb-3 flex items-center gap-2 text-sm font-bold sm:text-base">
+            <Users className="size-4 text-primary" />
+            混雑予想
+          </h3>
+          <div className="animate-pulse space-y-3">
+            <div className="h-8 w-24 rounded-lg bg-muted" />
+            <div className="h-4 w-40 rounded bg-muted" />
+            <div className="flex items-end gap-[2px]">
+              {Array.from({ length: 17 }, (_, i) => (
+                <div
+                  key={i}
+                  className="h-6 flex-1 rounded-sm bg-muted"
+                />
+              ))}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    );
+  }
 
   return (
     <Card className="gap-0 py-0">
@@ -101,7 +146,7 @@ export function CrowdPredictionCard({
             {currentPrediction.label}
           </div>
           <span className="text-xs text-muted-foreground">
-            現在 ({currentHour}:00)
+            現在 ({timeInfo.hour}:00)
           </span>
         </div>
 
