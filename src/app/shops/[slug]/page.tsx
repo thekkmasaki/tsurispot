@@ -375,27 +375,55 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
               このページの情報を充実させませんか？
             </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-5">
             <p className="text-sm leading-relaxed">
-              店舗オーナーの方へ ―
-              ツリスポでは無料で店舗基本情報を掲載しています。プレミアムプラン（月額1,980円）では、エサ在庫のリアルタイム更新・写真掲載・検索優先表示など、集客に役立つ機能をご利用いただけます。
+              店舗オーナーの方へ ― ツリスポでは無料で店舗基本情報を掲載しています。有料プランなら集客に役立つ機能をご利用いただけます。
             </p>
-            <div className="space-y-1.5 text-sm">
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                <span>無料: 基本情報の掲載・エサ在庫更新（1日10回まで）</span>
+
+            {/* 3段階プラン */}
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+              {/* 無料プラン */}
+              <div className="rounded-lg border bg-background p-3">
+                <p className="text-sm font-bold text-green-700">無料プラン</p>
+                <p className="text-lg font-bold">¥0</p>
+                <ul className="mt-2 space-y-1">
+                  {["基本情報の掲載", "近くの釣りスポットと連携", "Google検索への配信", "エサ在庫更新（1日10回）"].map((t) => (
+                    <li key={t} className="flex items-start gap-1.5 text-xs">
+                      <CheckCircle className="mt-0.5 size-3 shrink-0 text-green-500" />
+                      <span>{t}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 text-amber-500 flex-shrink-0" />
-                <span>
-                  プレミアム（月額1,980円）: 更新無制限・LINE連携・写真掲載・検索優先表示
-                </span>
+              {/* ベーシックプラン */}
+              <div className="rounded-lg border border-blue-200 bg-blue-50/50 p-3">
+                <p className="text-sm font-bold text-blue-600">ベーシック</p>
+                <p className="text-lg font-bold">¥500<span className="text-xs font-normal text-muted-foreground">/月</span></p>
+                <ul className="mt-2 space-y-1">
+                  {["無料プランの全機能", "検索結果での優先表示", "写真3枚まで掲載", "簡易アクセス解析", "公式バッジ表示"].map((t) => (
+                    <li key={t} className="flex items-start gap-1.5 text-xs">
+                      <CheckCircle className="mt-0.5 size-3 shrink-0 text-blue-500" />
+                      <span>{t}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <p className="text-xs text-muted-foreground pl-6">
-                年間契約なら19,800円（2ヶ月分おトク）
-              </p>
+              {/* プロプラン */}
+              <div className="rounded-lg border border-amber-200 bg-amber-50/50 p-3">
+                <p className="text-sm font-bold text-amber-600">プロ</p>
+                <p className="text-lg font-bold">¥2,980<span className="text-xs font-normal text-muted-foreground">/月</span></p>
+                <ul className="mt-2 space-y-1">
+                  {["ベーシックの全機能", "写真無制限・店主メッセージ", "詳細アクセス解析", "クーポン配信機能", "スポットページでの商品PR"].map((t) => (
+                    <li key={t} className="flex items-start gap-1.5 text-xs">
+                      <CheckCircle className="mt-0.5 size-3 shrink-0 text-amber-500" />
+                      <span>{t}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
-            <div className="flex flex-col gap-3 pt-2">
+
+            <div className="flex flex-col gap-3 pt-1">
               <Link
                 href="/shops/update?shop=sample-premium&token=demo"
                 className="inline-flex items-center justify-center gap-2 rounded-lg bg-amber-500 px-4 py-2.5 text-sm font-bold text-white hover:bg-amber-600 transition-colors"
