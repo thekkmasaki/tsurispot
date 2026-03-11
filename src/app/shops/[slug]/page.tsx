@@ -250,15 +250,10 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
             )}
             <Separator />
             <div className="flex flex-wrap gap-2">
-              <Badge variant={shop.hasLiveBait ? "default" : "outline"}>
-                {shop.hasLiveBait ? "活きエサあり" : "活きエサなし"}
-              </Badge>
-              <Badge variant={shop.hasFrozenBait ? "default" : "outline"}>
-                {shop.hasFrozenBait ? "冷凍エサあり" : "冷凍エサなし"}
-              </Badge>
-              <Badge variant={shop.hasRentalRod ? "default" : "outline"}>
-                {shop.hasRentalRod ? "レンタルロッドあり" : "レンタルなし"}
-              </Badge>
+              {shop.hasLiveBait && <Badge variant="default" className="bg-green-600">活きエサあり</Badge>}
+              {shop.hasFrozenBait && <Badge variant="default" className="bg-blue-600">冷凍エサあり</Badge>}
+              {shop.hasRentalRod && <Badge variant="default">レンタルロッドあり</Badge>}
+              {shop.hasParking && <Badge variant="outline">駐車場あり</Badge>}
             </div>
           </CardContent>
         </Card>
