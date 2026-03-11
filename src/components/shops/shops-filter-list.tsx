@@ -372,30 +372,11 @@ export function ShopsFilterList({ shops }: ShopsFilterListProps) {
                   <Clock className="size-4 shrink-0 text-muted-foreground" />
                   <span className="line-clamp-1">{shop.businessHours}</span>
                 </div>
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {shop.hasLiveBait && (
-                    <Badge variant="default" className="bg-green-600 text-xs hover:bg-green-700">
-                      活きエサ
-                    </Badge>
-                  )}
-                  {shop.hasFrozenBait && (
-                    <Badge variant="default" className="bg-blue-600 text-xs hover:bg-blue-700">
-                      冷凍エサ
-                    </Badge>
-                  )}
-                  {shop.hasRentalRod && (
-                    <Badge variant="outline" className="text-xs">レンタルロッド</Badge>
-                  )}
-                  {shop.hasParking && (
-                    <Badge variant="outline" className="text-xs">駐車場あり</Badge>
-                  )}
-                  {shop.services.some((s) => s.includes("中古")) && (
-                    <Badge variant="outline" className="text-xs">中古取扱</Badge>
-                  )}
-                  {shop.isPremium && (
+                {shop.isPremium && (
+                  <div className="pt-1">
                     <Badge className="bg-amber-100 text-xs text-amber-700 hover:bg-amber-100">公式</Badge>
-                  )}
-                </div>
+                  </div>
+                )}
                 <p className="line-clamp-2 pt-1 text-sm text-muted-foreground">
                   {shop.description}
                 </p>
