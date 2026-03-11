@@ -24,6 +24,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -58,6 +59,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -92,6 +94,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -127,6 +130,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "釣具販売",
       "ルアー専門用品販売",
@@ -162,6 +166,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -197,6 +202,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -232,6 +238,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -267,6 +274,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -302,6 +310,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -337,6 +346,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -372,6 +382,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -406,6 +417,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -441,6 +453,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -475,6 +488,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -510,6 +524,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -544,6 +559,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -578,6 +594,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -613,6 +630,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -647,6 +665,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -681,6 +700,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -716,6 +736,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -750,6 +771,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -784,6 +806,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -818,6 +841,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -853,6 +877,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -887,6 +912,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "中古釣具買取・販売",
       "新品釣具販売",
@@ -920,6 +946,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -955,6 +982,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -989,6 +1017,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "中古釣具買取・販売",
       "新品釣具販売",
@@ -1023,6 +1052,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1058,6 +1088,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1092,6 +1123,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1126,6 +1158,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1161,6 +1194,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1195,6 +1229,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1230,6 +1265,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: false,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "中古釣具買取・販売",
       "新品釣具販売",
@@ -1263,6 +1299,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1297,6 +1334,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: true,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1332,6 +1370,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: true,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1367,6 +1406,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1401,6 +1441,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1436,6 +1477,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1471,6 +1513,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: false,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "冷凍エサ販売",
       "ルアー用品販売",
@@ -1505,6 +1548,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: true,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1540,6 +1584,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1576,6 +1621,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1611,6 +1657,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1646,6 +1693,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1681,6 +1729,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
@@ -1716,6 +1765,7 @@ export const shopsKyushu: TackleShop[] = [
     hasLiveBait: true,
     hasFrozenBait: true,
     hasRentalRod: false,
+    hasParking: true,
     services: [
       "活きエサ販売",
       "冷凍エサ販売",
