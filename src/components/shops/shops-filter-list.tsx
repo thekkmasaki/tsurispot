@@ -8,8 +8,8 @@ import {
   Clock,
   ChevronRight,
   Search,
-  SlidersHorizontal,
   X,
+  Navigation,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -35,9 +35,10 @@ export function ShopsFilterList({ shops }: ShopsFilterListProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedRegion, setSelectedRegion] = useState<string | null>(null);
   const [selectedPrefecture, setSelectedPrefecture] = useState<string | null>(null);
+  const [selectedArea, setSelectedArea] = useState<string | null>(null);
   const [filterLiveBait, setFilterLiveBait] = useState(false);
+  const [filterFrozenBait, setFilterFrozenBait] = useState(false);
   const [filterRental, setFilterRental] = useState(false);
-  const [showFilters, setShowFilters] = useState(false);
 
   // 都道府県一覧（実際にデータがあるもののみ）
   const availablePrefectures = useMemo(() => {
@@ -53,10 +54,19 @@ export function ShopsFilterList({ shops }: ShopsFilterListProps) {
     return group.prefectures.filter((p) => availablePrefectures.includes(p));
   }, [selectedRegion, availablePrefectures]);
 
+  // 選択中の都道府県のエリア一覧
+  const prefectureAreas = useMemo(() => {
+    if (!selectedPrefecture) return [];
+    const areas = shops
+      .filter((s) => s.region.prefecture === selectedPrefecture)
+      .map((s) => s.region.areaName);
+    const uniqueAreas = [...new Set(areas)].sort();
+    return uniqueAreas;
+  }, [selectedPrefecture, shops]);
+
   // フィルタ適用
   const filteredShops = useMemo(() => {
     return shops.filter((shop) => {
-      // テキスト検索
       if (searchQuery) {
         const q = searchQuery.toLowerCase();
         if (
@@ -68,23 +78,24 @@ export function ShopsFilterList({ shops }: ShopsFilterListProps) {
           return false;
         }
       }
-      // 地方フィルタ
       if (selectedRegion && !selectedPrefecture) {
         const group = REGION_GROUPS.find((g) => g.name === selectedRegion);
         if (group && !group.prefectures.includes(shop.region.prefecture)) {
           return false;
         }
       }
-      // 都道府県フィルタ
       if (selectedPrefecture && shop.region.prefecture !== selectedPrefecture) {
         return false;
       }
-      // サービスフィルタ
+      if (selectedArea && shop.region.areaName !== selectedArea) {
+        return false;
+      }
       if (filterLiveBait && !shop.hasLiveBait) return false;
+      if (filterFrozenBait && !shop.hasFrozenBait) return false;
       if (filterRental && !shop.hasRentalRod) return false;
       return true;
     });
-  }, [shops, searchQuery, selectedRegion, selectedPrefecture, filterLiveBait, filterRental]);
+  }, [shops, searchQuery, selectedRegion, selectedPrefecture, selectedArea, filterLiveBait, filterFrozenBait, filterRental]);
 
   // 地方ごとの店舗数
   const regionCounts = useMemo(() => {
@@ -97,28 +108,39 @@ export function ShopsFilterList({ shops }: ShopsFilterListProps) {
     return counts;
   }, [shops]);
 
-  const hasActiveFilters = selectedRegion || selectedPrefecture || filterLiveBait || filterRental || searchQuery;
+  const hasActiveFilters = selectedRegion || selectedPrefecture || selectedArea || filterLiveBait || filterFrozenBait || filterRental || searchQuery;
 
   const clearFilters = () => {
     setSearchQuery("");
     setSelectedRegion(null);
     setSelectedPrefecture(null);
+    setSelectedArea(null);
     setFilterLiveBait(false);
+    setFilterFrozenBait(false);
     setFilterRental(false);
   };
+
+  // 現在の絞り込みラベル
+  const filterLabel = selectedArea
+    ? `${selectedPrefecture} ${selectedArea}`
+    : selectedPrefecture
+    ? selectedPrefecture
+    : selectedRegion
+    ? selectedRegion
+    : null;
 
   return (
     <div>
       {/* 検索バー */}
-      <div className="mb-4 flex gap-2">
-        <div className="relative flex-1">
+      <div className="mb-4">
+        <div className="relative">
           <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <input
             type="text"
             placeholder="店名・エリア・住所で検索..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-lg border bg-background py-2.5 pl-10 pr-4 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+            className="w-full rounded-lg border bg-background py-2.5 pl-10 pr-10 text-sm outline-none focus:border-primary focus:ring-1 focus:ring-primary"
           />
           {searchQuery && (
             <button
@@ -129,129 +151,164 @@ export function ShopsFilterList({ shops }: ShopsFilterListProps) {
             </button>
           )}
         </div>
-        <button
-          onClick={() => setShowFilters(!showFilters)}
-          className={`flex items-center gap-1.5 rounded-lg border px-3 py-2.5 text-sm font-medium transition-colors ${
-            showFilters || hasActiveFilters
-              ? "border-primary bg-primary/5 text-primary"
-              : "hover:bg-muted"
-          }`}
-        >
-          <SlidersHorizontal className="size-4" />
-          <span className="hidden sm:inline">絞り込み</span>
-          {hasActiveFilters && (
-            <span className="flex size-5 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
-              {[selectedRegion, selectedPrefecture, filterLiveBait, filterRental].filter(Boolean).length}
-            </span>
-          )}
-        </button>
       </div>
 
-      {/* フィルタパネル */}
-      {showFilters && (
-        <div className="mb-6 rounded-xl border bg-muted/30 p-4">
-          {/* 地方フィルタ */}
-          <div className="mb-3">
-            <p className="mb-2 text-xs font-bold text-muted-foreground">地方で絞り込み</p>
-            <div className="flex flex-wrap gap-1.5">
-              {REGION_GROUPS.map((group) => (
-                <button
-                  key={group.name}
-                  onClick={() => {
-                    if (selectedRegion === group.name) {
-                      setSelectedRegion(null);
-                      setSelectedPrefecture(null);
-                    } else {
-                      setSelectedRegion(group.name);
-                      setSelectedPrefecture(null);
-                    }
-                  }}
-                  className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
-                    selectedRegion === group.name
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-background border hover:bg-muted"
-                  }`}
-                >
-                  {group.name}
-                  <span className="ml-1 opacity-60">{regionCounts[group.name]}</span>
-                </button>
-              ))}
-            </div>
+      {/* 地方フィルタ（常時表示） */}
+      <div className="mb-4 rounded-xl border bg-muted/30 p-3 sm:p-4">
+        <div className="mb-3">
+          <div className="mb-2 flex items-center gap-2">
+            <Navigation className="size-3.5 text-muted-foreground" />
+            <p className="text-xs font-bold text-muted-foreground">エリアで探す</p>
           </div>
-
-          {/* 都道府県フィルタ（地方選択時のみ表示） */}
-          {selectedRegion && regionPrefectures.length > 1 && (
-            <div className="mb-3">
-              <p className="mb-2 text-xs font-bold text-muted-foreground">都道府県</p>
-              <div className="flex flex-wrap gap-1.5">
-                {regionPrefectures.map((pref) => {
-                  const count = shops.filter((s) => s.region.prefecture === pref).length;
-                  return (
-                    <button
-                      key={pref}
-                      onClick={() =>
-                        setSelectedPrefecture(selectedPrefecture === pref ? null : pref)
-                      }
-                      className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
-                        selectedPrefecture === pref
-                          ? "bg-primary text-primary-foreground"
-                          : "bg-background border hover:bg-muted"
-                      }`}
-                    >
-                      {pref.replace(/[都府県]$/, "")}
-                      <span className="ml-1 opacity-60">{count}</span>
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-
-          {/* サービスフィルタ */}
-          <div className="mb-2">
-            <p className="mb-2 text-xs font-bold text-muted-foreground">サービス</p>
-            <div className="flex flex-wrap gap-1.5">
+          <div className="flex flex-wrap gap-1.5">
+            {REGION_GROUPS.filter((g) => regionCounts[g.name] > 0).map((group) => (
               <button
-                onClick={() => setFilterLiveBait(!filterLiveBait)}
-                className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
-                  filterLiveBait
-                    ? "bg-green-600 text-white"
-                    : "bg-background border hover:bg-muted"
+                key={group.name}
+                onClick={() => {
+                  if (selectedRegion === group.name) {
+                    setSelectedRegion(null);
+                    setSelectedPrefecture(null);
+                    setSelectedArea(null);
+                  } else {
+                    setSelectedRegion(group.name);
+                    setSelectedPrefecture(null);
+                    setSelectedArea(null);
+                  }
+                }}
+                className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+                  selectedRegion === group.name
+                    ? "bg-primary text-primary-foreground shadow-sm"
+                    : "border bg-background hover:bg-muted"
                 }`}
               >
-                🪱 活きエサあり
+                {group.name}
+                <span className="ml-1 opacity-60">{regionCounts[group.name]}</span>
               </button>
-              <button
-                onClick={() => setFilterRental(!filterRental)}
-                className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
-                  filterRental
-                    ? "bg-blue-600 text-white"
-                    : "bg-background border hover:bg-muted"
-                }`}
-              >
-                🎣 レンタルロッド
-              </button>
-            </div>
+            ))}
           </div>
-
-          {hasActiveFilters && (
-            <button
-              onClick={clearFilters}
-              className="mt-2 text-xs text-primary hover:underline"
-            >
-              フィルタをクリア
-            </button>
-          )}
         </div>
-      )}
+
+        {/* 都道府県フィルタ（地方選択時） */}
+        {selectedRegion && regionPrefectures.length > 0 && (
+          <div className="mb-3 border-t pt-3">
+            <p className="mb-2 text-xs font-bold text-muted-foreground">都道府県</p>
+            <div className="flex flex-wrap gap-1.5">
+              {regionPrefectures.map((pref) => {
+                const count = shops.filter((s) => s.region.prefecture === pref).length;
+                return (
+                  <button
+                    key={pref}
+                    onClick={() => {
+                      if (selectedPrefecture === pref) {
+                        setSelectedPrefecture(null);
+                        setSelectedArea(null);
+                      } else {
+                        setSelectedPrefecture(pref);
+                        setSelectedArea(null);
+                      }
+                    }}
+                    className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+                      selectedPrefecture === pref
+                        ? "bg-primary text-primary-foreground shadow-sm"
+                        : "border bg-background hover:bg-muted"
+                    }`}
+                  >
+                    {pref.replace(/[都道府県]$/, "")}
+                    <span className="ml-1 opacity-60">{count}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* エリアフィルタ（都道府県選択時） */}
+        {selectedPrefecture && prefectureAreas.length > 1 && (
+          <div className="mb-3 border-t pt-3">
+            <p className="mb-2 text-xs font-bold text-muted-foreground">エリア</p>
+            <div className="flex flex-wrap gap-1.5">
+              {prefectureAreas.map((area) => {
+                const count = shops.filter(
+                  (s) => s.region.prefecture === selectedPrefecture && s.region.areaName === area
+                ).length;
+                return (
+                  <button
+                    key={area}
+                    onClick={() => setSelectedArea(selectedArea === area ? null : area)}
+                    className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+                      selectedArea === area
+                        ? "bg-primary text-primary-foreground shadow-sm"
+                        : "border bg-background hover:bg-muted"
+                    }`}
+                  >
+                    {area}
+                    <span className="ml-1 opacity-60">{count}</span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* サービスフィルタ */}
+        <div className={selectedRegion ? "border-t pt-3" : ""}>
+          <p className="mb-2 text-xs font-bold text-muted-foreground">サービスで絞り込み</p>
+          <div className="flex flex-wrap gap-1.5">
+            <button
+              onClick={() => setFilterLiveBait(!filterLiveBait)}
+              className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+                filterLiveBait
+                  ? "bg-green-600 text-white shadow-sm"
+                  : "border bg-background hover:bg-muted"
+              }`}
+            >
+              活きエサあり
+            </button>
+            <button
+              onClick={() => setFilterFrozenBait(!filterFrozenBait)}
+              className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+                filterFrozenBait
+                  ? "bg-blue-600 text-white shadow-sm"
+                  : "border bg-background hover:bg-muted"
+              }`}
+            >
+              冷凍エサあり
+            </button>
+            <button
+              onClick={() => setFilterRental(!filterRental)}
+              className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+                filterRental
+                  ? "bg-indigo-600 text-white shadow-sm"
+                  : "border bg-background hover:bg-muted"
+              }`}
+            >
+              レンタルロッド
+            </button>
+          </div>
+        </div>
+
+        {hasActiveFilters && (
+          <button
+            onClick={clearFilters}
+            className="mt-3 flex items-center gap-1 text-xs text-primary hover:underline"
+          >
+            <X className="size-3" />
+            フィルタをクリア
+          </button>
+        )}
+      </div>
 
       {/* 結果カウント */}
       <p className="mb-4 text-sm text-muted-foreground">
         {hasActiveFilters ? (
           <>
+            {filterLabel && (
+              <span className="mr-1 inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
+                <MapPin className="size-3" />
+                {filterLabel}
+              </span>
+            )}
             <span className="font-bold text-foreground">{filteredShops.length}</span>件の釣具店が見つかりました
-            {selectedPrefecture && <span>（{selectedPrefecture}）</span>}
-            {selectedRegion && !selectedPrefecture && <span>（{selectedRegion}）</span>}
           </>
         ) : (
           <>全国<span className="font-bold text-foreground">{shops.length}</span>件の釣具店</>

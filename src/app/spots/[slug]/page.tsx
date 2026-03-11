@@ -26,7 +26,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, getSpotsByFish, type NearbySpot } from "@/lib/data/spots";
-import { getShopsForSpot } from "@/lib/data/shops";
+import { getNearbyShopsWithDistance } from "@/lib/data/shops";
 import { getPrefectureByName } from "@/lib/data/prefectures";
 import { SeasonCalendar } from "@/components/spots/season-calendar";
 import { TackleCard } from "@/components/spots/tackle-card";
@@ -538,8 +538,8 @@ export default async function SpotDetailPage({ params }: PageProps) {
   // 県内スポット数（信頼性指標用）
   const prefSpotCount = fishingSpots.filter((s) => s.region.prefecture === spot.region.prefecture).length;
 
-  // Get nearby tackle shops
-  const nearbyShops = getShopsForSpot(spot.slug);
+  // Get nearby tackle shops (distance-based, within 50km)
+  const nearbyShopsWithDist = getNearbyShopsWithDistance(spot.latitude, spot.longitude, 5, 50);
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
@@ -898,6 +898,24 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <h3 className="mb-3 text-lg font-bold">天気・潮汐情報</h3>
             <SpotWeatherTide lat={spot.latitude} lng={spot.longitude} spotName={spot.name} />
           </section>
+          {/* LINE エリア釣果速報バナー */}
+          <a
+            href="https://line.me/R/ti/p/@710bvaxa"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-3 rounded-xl border border-[#06c755]/30 bg-[#06c755]/5 px-4 py-3 transition-colors hover:bg-[#06c755]/10"
+          >
+            <svg viewBox="0 0 24 24" fill="#06c755" className="h-8 w-8 flex-shrink-0" aria-hidden="true">
+              <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.271.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314" />
+            </svg>
+            <div className="min-w-0">
+              <div className="text-sm font-bold text-[#06c755]">{spot.region.areaName}エリアの最新釣果をLINEでお届け</div>
+              <div className="text-xs text-muted-foreground">友だち追加で釣果速報・潮汐情報を受け取る</div>
+            </div>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="ml-auto h-4 w-4 flex-shrink-0 text-[#06c755]" aria-hidden="true">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </a>
           <section>
             <h3 className="mb-3 text-lg font-bold">ボウズ確率</h3>
             <SpotBouzuCard spotType={spot.spotType} difficulty={spot.difficulty} rating={spot.rating} reviewCount={spot.reviewCount} prefecture={spot.region.prefecture} areaName={spot.region.areaName} isFree={spot.isFree} hasRentalRod={spot.hasRentalRod} catchableFishCount={spot.catchableFish.length} catchableFishDetails={spot.catchableFish.map((cf) => ({ fishSlug: cf.fish.slug, fishName: cf.fish.name, method: cf.method, catchDifficulty: cf.catchDifficulty, monthStart: cf.monthStart, monthEnd: cf.monthEnd, peakSeason: cf.peakSeason }))} />
@@ -1066,15 +1084,21 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <h3 className="mb-4 text-lg font-bold">現地の様子（ストリートビュー）</h3>
             <StreetViewSection latitude={spot.latitude} longitude={spot.longitude} spotName={spot.name} address={spot.address} />
           </section>
-          {nearbyShops.length > 0 && (
+          {nearbyShopsWithDist.length > 0 && (
             <section>
               <h3 className="mb-3 text-lg font-bold">近くの釣具店</h3>
               <div className="grid gap-3 sm:grid-cols-2">
-                {nearbyShops.map((shop) => (
+                {nearbyShopsWithDist.map(({ shop, distanceKm: dist }) => (
                   <Link key={shop.id} href={`/shops/${shop.slug}`}>
                     <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md"><CardContent className="p-4">
-                      <h3 className="truncate font-semibold group-hover:text-primary">{shop.name}</h3>
-                      <p className="mt-1 text-xs text-muted-foreground">{shop.businessHours}（定休: {shop.closedDays}）</p>
+                      <div className="flex items-start justify-between gap-2">
+                        <h3 className="truncate font-semibold group-hover:text-primary">{shop.name}</h3>
+                        <span className="shrink-0 rounded-full bg-muted px-2 py-0.5 text-xs font-medium text-muted-foreground">
+                          {dist < 1 ? `${Math.round(dist * 1000)}m` : `${dist.toFixed(1)}km`}
+                        </span>
+                      </div>
+                      <p className="mt-1 text-xs text-muted-foreground">{shop.address}</p>
+                      <p className="mt-0.5 text-xs text-muted-foreground">{shop.businessHours}</p>
                       <div className="mt-2 flex flex-wrap gap-1">
                         {shop.hasLiveBait && <Badge variant="outline" className="text-[10px] px-1.5 py-0">活きエサ</Badge>}
                         {shop.hasFrozenBait && <Badge variant="outline" className="text-[10px] px-1.5 py-0">冷凍エサ</Badge>}
@@ -1084,6 +1108,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
                   </Link>
                 ))}
               </div>
+              <p className="mt-2 text-right text-xs text-muted-foreground">
+                <Link href="/shops" className="text-primary hover:underline">全国の釣具店を探す →</Link>
+              </p>
             </section>
           )}
         </>}
