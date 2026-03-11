@@ -4,7 +4,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   // === 広島県 ===
   // かめや釣具 総本店は shops-chains.ts に記載
   {
-    id: "shop-hiroshima-2",
+    id: "angle-itsukaichi",
     name: "アングル 五日市店",
     slug: "angle-itsukaichi",
     description:
@@ -39,7 +39,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-hiroshima-3",
+    id: "angle-koyaura",
     name: "アングル 小屋浦店",
     slug: "angle-koyaura",
     description:
@@ -74,7 +74,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-hiroshima-4",
+    id: "time-fukuyama-honten",
     name: "釣具のタイム 福山本店",
     slug: "time-fukuyama-honten",
     description:
@@ -110,7 +110,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 岡山県 ===
   {
-    id: "shop-okayama-1",
+    id: "time-okayama-honten",
     name: "釣具のタイム 岡山本店",
     slug: "time-okayama-honten",
     description:
@@ -144,7 +144,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-okayama-2",
+    id: "kameya-okayama-senoo",
     name: "かめや釣具 岡山妹尾店",
     slug: "kameya-okayama-senoo",
     description:
@@ -180,7 +180,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 山口県 ===
   {
-    id: "shop-yamaguchi-1",
+    id: "angle-shin-shimonoseki",
     name: "アングル 新下関店",
     slug: "angle-shin-shimonoseki",
     description:
@@ -215,7 +215,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-yamaguchi-2",
+    id: "ikeda-tsurigu-hagi",
     name: "いけだ釣具店",
     slug: "ikeda-tsurigu-hagi",
     description:
@@ -250,7 +250,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-yamaguchi-3",
+    id: "cast-yamaguchi",
     name: "CAST 山口店",
     slug: "cast-yamaguchi",
     description:
@@ -285,7 +285,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 島根県 ===
   {
-    id: "shop-shimane-1",
+    id: "kameya-matsue",
     name: "かめや釣具 松江店",
     slug: "kameya-matsue",
     description:
@@ -320,7 +320,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-shimane-2",
+    id: "kameya-izumo",
     name: "かめや釣具 出雲店",
     slug: "kameya-izumo",
     description:
@@ -356,7 +356,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 鳥取県 ===
   {
-    id: "shop-tottori-1",
+    id: "kameya-tottori",
     name: "かめや釣具 鳥取店",
     slug: "kameya-tottori",
     description:
@@ -392,7 +392,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 愛媛県 ===
   {
-    id: "shop-ehime-1",
+    id: "friend-matsuyama-honten",
     name: "釣具のフレンド 松山本店",
     slug: "friend-matsuyama-honten",
     description:
@@ -428,7 +428,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-ehime-2",
+    id: "friend-imabari-toriu",
     name: "釣具のフレンド 今治鳥生店",
     slug: "friend-imabari-toriu",
     description:
@@ -464,7 +464,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 香川県 ===
   {
-    id: "shop-kagawa-1",
+    id: "kishimoto-tsurigu-takamatsu",
     name: "岸本釣具商会",
     slug: "kishimoto-tsurigu-takamatsu",
     description:
@@ -499,7 +499,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-kagawa-2",
+    id: "jumpworld-marugame",
     name: "ジャンプワールド 丸亀店",
     slug: "jumpworld-marugame",
     description:
@@ -534,7 +534,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 高知県 ===
   {
-    id: "shop-kochi-1",
+    id: "okabayashi-kamimachi-honten",
     name: "つりぐの岡林 上町本店",
     slug: "okabayashi-kamimachi-honten",
     description:
@@ -570,7 +570,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-kochi-2",
+    id: "yamato-tsurigu-kochi",
     name: "釣具のヤマト",
     slug: "yamato-tsurigu-kochi",
     description:
@@ -604,7 +604,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-kochi-3",
+    id: "nakamura-fishing",
     name: "中村フィッシング",
     slug: "nakamura-fishing",
     description:
@@ -641,7 +641,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 徳島県 ===
   {
-    id: "shop-tokushima-1",
+    id: "matsuura-tsurigu-kurosaki",
     name: "松浦つり具 黒崎バイパス店",
     slug: "matsuura-tsurigu-kurosaki",
     description:
@@ -677,7 +677,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 広島県（追加） ===
   {
-    id: "shop-hiroshima-5",
+    id: "kameya-kure",
     name: "かめや釣具 呉店",
     slug: "kameya-kure",
     description:
@@ -712,7 +712,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-hiroshima-6",
+    id: "point-kure-kegoya",
     name: "釣具のポイント 呉警固屋店",
     slug: "point-kure-kegoya",
     description:
@@ -747,7 +747,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-hiroshima-7",
+    id: "kameya-onomichi",
     name: "かめや釣具 尾道店",
     slug: "kameya-onomichi",
     description:
@@ -782,7 +782,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-hiroshima-8",
+    id: "kameya-higashihiroshima",
     name: "かめや釣具 東広島店",
     slug: "kameya-higashihiroshima",
     description:
@@ -818,7 +818,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 岡山県（追加） ===
   {
-    id: "shop-okayama-3",
+    id: "watanabe-tsurigu-hirai",
     name: "つり具のわたなべ 平井店",
     slug: "watanabe-tsurigu-hirai",
     description:
@@ -854,7 +854,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-okayama-4",
+    id: "point-okayama-nishi-bypass",
     name: "釣具のポイント 岡山西バイパス店",
     slug: "point-okayama-nishi-bypass",
     description:
@@ -889,7 +889,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-okayama-5",
+    id: "legrax-okayama",
     name: "レジャックス 岡山店",
     slug: "legrax-okayama",
     description:
@@ -924,7 +924,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 山口県（追加） ===
   {
-    id: "shop-yamaguchi-4",
+    id: "cast-ube",
     name: "CAST 宇部店",
     slug: "cast-ube",
     description:
@@ -958,7 +958,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-yamaguchi-5",
+    id: "uchiumi-gyogu-yanai",
     name: "内海漁具",
     slug: "uchiumi-gyogu-yanai",
     description:
@@ -993,7 +993,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-yamaguchi-6",
+    id: "anfee-yamaguchi",
     name: "アンフィ 山口店",
     slug: "anfee-yamaguchi",
     description:
@@ -1029,7 +1029,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 愛媛県（追加） ===
   {
-    id: "shop-ehime-3",
+    id: "kikuchi-tsurigu-yawatahama",
     name: "菊池つり具店",
     slug: "kikuchi-tsurigu-yawatahama",
     description:
@@ -1064,7 +1064,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-ehime-4",
+    id: "friend-niihama",
     name: "釣具のフレンド 新居浜店",
     slug: "friend-niihama",
     description:
@@ -1100,7 +1100,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 高知県（追加） ===
   {
-    id: "shop-kochi-4",
+    id: "marunaka-tsurigu-susaki",
     name: "まるなか釣具 須崎店",
     slug: "marunaka-tsurigu-susaki",
     description:
@@ -1136,7 +1136,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-kochi-5",
+    id: "fishing-hayashi-kochi",
     name: "フィッシングハヤシ",
     slug: "fishing-hayashi-kochi",
     description:
@@ -1172,7 +1172,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 島根県（追加） ===
   {
-    id: "shop-shimane-3",
+    id: "angle-hamada",
     name: "アングル 浜田店",
     slug: "angle-hamada",
     description:
@@ -1207,7 +1207,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-shimane-4",
+    id: "kameya-hamada",
     name: "かめや釣具 浜田店",
     slug: "kameya-hamada",
     description:
@@ -1243,7 +1243,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 鳥取県（追加） ===
   {
-    id: "shop-tottori-2",
+    id: "kameya-yonago",
     name: "かめや釣具 米子店",
     slug: "kameya-yonago",
     description:
@@ -1278,7 +1278,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-tottori-3",
+    id: "point-yonago-kaike",
     name: "釣具のポイント 米子皆生店",
     slug: "point-yonago-kaike",
     description:
@@ -1314,7 +1314,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 徳島県（追加） ===
   {
-    id: "shop-tokushima-2",
+    id: "kameya-tokushima",
     name: "かめや釣具 徳島店",
     slug: "kameya-tokushima",
     description:
@@ -1350,7 +1350,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 香川県（追加） ===
   {
-    id: "shop-kagawa-3",
+    id: "kameya-takamatsu-higashi",
     name: "かめや釣具 高松東店",
     slug: "kameya-takamatsu-higashi",
     description:
@@ -1386,7 +1386,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 広島県（追加2） ===
   {
-    id: "shop-hiroshima-9",
+    id: "kameya-shoko-center",
     name: "かめや釣具 商工センター店",
     slug: "kameya-shoko-center",
     description:
@@ -1422,7 +1422,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 徳島県（追加2） ===
   {
-    id: "shop-tokushima-3",
+    id: "point-tokushima-aizumi",
     name: "釣具のポイント 徳島藍住店",
     slug: "point-tokushima-aizumi",
     description:
@@ -1457,7 +1457,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-tokushima-4",
+    id: "kameya-tokushima-anan",
     name: "かめや釣具 徳島阿南店",
     slug: "kameya-tokushima-anan",
     description:
@@ -1493,7 +1493,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 香川県（追加2） ===
   {
-    id: "shop-kagawa-4",
+    id: "point-takamatsu-higashi",
     name: "釣具のポイント 高松東店",
     slug: "point-takamatsu-higashi",
     description:
@@ -1528,7 +1528,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-kagawa-5",
+    id: "kameya-marugame",
     name: "かめや釣具 丸亀店",
     slug: "kameya-marugame",
     description:
@@ -1563,7 +1563,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-kagawa-6",
+    id: "point-kanonji",
     name: "釣具のポイント 観音寺店",
     slug: "point-kanonji",
     description:
@@ -1599,7 +1599,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 愛媛県（追加2） ===
   {
-    id: "shop-ehime-5",
+    id: "friend-masaki",
     name: "釣具のフレンド 松前店",
     slug: "friend-masaki",
     description:
@@ -1634,7 +1634,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-ehime-6",
+    id: "kameya-matsuyama-chuo",
     name: "かめや釣具 松山中央店",
     slug: "kameya-matsuyama-chuo",
     description:
@@ -1669,7 +1669,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-ehime-7",
+    id: "jumpworld-saijo",
     name: "ジャンプワールド 西条店",
     slug: "jumpworld-saijo",
     description:
@@ -1704,7 +1704,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-ehime-8",
+    id: "kameya-uwajima",
     name: "かめや釣具 宇和島店",
     slug: "kameya-uwajima",
     description:
@@ -1740,7 +1740,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 広島県（追加3） ===
   {
-    id: "shop-hiroshima-10",
+    id: "point-hiroshima-yagi",
     name: "釣具のポイント 広島八木店",
     slug: "point-hiroshima-yagi",
     description:
@@ -1775,7 +1775,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-hiroshima-11",
+    id: "angle-takehara",
     name: "アングル 竹原店",
     slug: "angle-takehara",
     description:
@@ -1810,7 +1810,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-hiroshima-12",
+    id: "time-mihara",
     name: "釣具のタイム 三原店",
     slug: "time-mihara",
     description:
@@ -1846,7 +1846,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 岡山県（追加2） ===
   {
-    id: "shop-okayama-6",
+    id: "kameya-kurashiki",
     name: "かめや釣具 倉敷店",
     slug: "kameya-kurashiki",
     description:
@@ -1881,7 +1881,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-okayama-7",
+    id: "time-tamashima",
     name: "釣具のタイム 玉島店",
     slug: "time-tamashima",
     description:
@@ -1917,7 +1917,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 山口県（追加2） ===
   {
-    id: "shop-yamaguchi-7",
+    id: "kameya-shimonoseki-ayaragi",
     name: "かめや釣具 下関綾羅木店",
     slug: "kameya-shimonoseki-ayaragi",
     description:
@@ -1952,7 +1952,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-yamaguchi-8",
+    id: "angle-shunan",
     name: "アングル 周南店",
     slug: "angle-shunan",
     description:
@@ -1988,7 +1988,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 島根県（追加2） ===
   {
-    id: "shop-shimane-5",
+    id: "point-matsue-gakuen",
     name: "釣具のポイント 松江学園南店",
     slug: "point-matsue-gakuen",
     description:
@@ -2023,7 +2023,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-shimane-6",
+    id: "kameya-masuda",
     name: "かめや釣具 益田店",
     slug: "kameya-masuda",
     description:
@@ -2059,7 +2059,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 鳥取県（追加） ===
   {
-    id: "shop-tottori-4",
+    id: "point-tottori-koyama",
     name: "釣具のポイント 鳥取湖山店",
     slug: "point-tottori-koyama",
     description:
@@ -2095,7 +2095,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 高知県（追加2） ===
   {
-    id: "shop-kochi-6",
+    id: "kameya-kochi",
     name: "かめや釣具 高知店",
     slug: "kameya-kochi",
     description:
@@ -2130,7 +2130,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
     isPremium: false,
   },
   {
-    id: "shop-kochi-7",
+    id: "okabayashi-nankoku-bypass",
     name: "つりぐの岡林 南国バイパス店",
     slug: "okabayashi-nankoku-bypass",
     description:
@@ -2166,7 +2166,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 愛媛県（追加3） ===
   {
-    id: "shop-ehime-9",
+    id: "point-matsuyama-kume",
     name: "釣具のポイント 松山久米店",
     slug: "point-matsuyama-kume",
     description:
@@ -2202,7 +2202,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 山口県（追加3） ===
   {
-    id: "shop-yamaguchi-9",
+    id: "kameya-ube",
     name: "かめや釣具 宇部店",
     slug: "kameya-ube",
     description:
@@ -2238,7 +2238,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 香川県（追加3） ===
   {
-    id: "shop-kagawa-7",
+    id: "point-sakaide",
     name: "釣具のポイント 坂出店",
     slug: "point-sakaide",
     description:
@@ -2274,7 +2274,7 @@ export const shopsChugokuShikoku: TackleShop[] = [
   },
   // === 徳島県（追加3） ===
   {
-    id: "shop-tokushima-5",
+    id: "point-tokushima-anan",
     name: "釣具のポイント 徳島阿南店",
     slug: "point-tokushima-anan",
     description:
