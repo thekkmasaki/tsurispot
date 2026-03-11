@@ -290,6 +290,10 @@ export interface TackleShop {
   ownerMessage?: string;
   rating: number;
   isPremium: boolean;
+  /** 掲載プラン: free(デフォルト) / basic(初年度500円・2年目〜980円) / pro(初年度1,980円・2年目〜2,980円) */
+  planLevel?: "free" | "basic" | "pro";
+  /** クーポン情報（プロプラン） */
+  coupon?: { title: string; description: string; validUntil: string };
 }
 
 export interface BaitStock {

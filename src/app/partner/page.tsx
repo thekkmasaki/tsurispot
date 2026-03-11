@@ -32,11 +32,12 @@ const spotCount = fishingSpots.length;
 const fishCount = fishSpecies.length;
 
 export const metadata: Metadata = {
-  title: "釣具店様向け QRコード設置のご案内 - ツリスポ パートナー",
-  description: `全国${spotCount}+釣りスポット・${fishCount}魚種を掲載する釣り情報サイト「ツリスポ」のQRコードを店頭に設置しませんか？完全無料で、お客様の「どこで釣れる？」を解決します。`,
+  title: "釣具店の集客を無料で支援｜エサ在庫管理・店舗掲載 - ツリスポ パートナー",
+  description: `釣具店・エサ店の集客にお困りではありませんか？ツリスポなら無料で店舗ページを作成、エサ在庫をリアルタイム公開できます。全国${spotCount}+釣りスポットからの送客で新規顧客を獲得。初期費用0円、スマホだけで運用OK。`,
+  keywords: ["釣具店 集客", "釣具店 ホームページ", "エサ店 在庫管理", "釣具店 Googleマップ", "釣具店 無料掲載", "釣具店 MEO", "釣具店 SNS集客", "エサ 在庫 公開"],
   openGraph: {
-    title: "釣具店様向け QRコード設置のご案内 - ツリスポ パートナー",
-    description: `QRコード1枚で、店員さんの負担を軽減。全国${spotCount}+スポット・${fishCount}魚種の情報をお客様のスマホに。設置完全無料。`,
+    title: "釣具店の集客を無料で支援｜ツリスポ パートナー",
+    description: `初期費用0円で店舗ページ作成＋エサ在庫管理。全国${spotCount}+スポットの釣り人をお店に送客します。`,
     type: "website",
     url: "https://tsurispot.com/partner",
     siteName: "ツリスポ",
@@ -196,6 +197,47 @@ export default function PartnerPage() {
     })),
   };
 
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    name: "ツリスポ 釣具店パートナー",
+    description: "釣具店・エサ店向けの無料集客支援サービス。店舗ページ作成、エサ在庫リアルタイム公開、SEO最適化。",
+    url: "https://tsurispot.com/partner",
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    offers: [
+      {
+        "@type": "Offer",
+        name: "無料プラン",
+        price: "0",
+        priceCurrency: "JPY",
+        description: "店舗基本情報掲載、エサ在庫更新（1日10回）、近くの釣りスポットとの連携",
+      },
+      {
+        "@type": "Offer",
+        name: "ベーシックプラン",
+        price: "500",
+        priceCurrency: "JPY",
+        priceValidUntil: "2027-03-31",
+        description: "初年度月額500円（2年目〜980円）。公式バッジ、検索優先表示、写真3枚掲載",
+      },
+      {
+        "@type": "Offer",
+        name: "プロプラン",
+        price: "1980",
+        priceCurrency: "JPY",
+        priceValidUntil: "2027-03-31",
+        description: "初年度月額1,980円（2年目〜2,980円）。写真20枚、クーポン配信、Googleビジネスプロフィール設定サポート",
+      },
+    ],
+    provider: {
+      "@type": "Organization",
+      name: "ツリスポ",
+      url: "https://tsurispot.com",
+      email: "fishingspotjapan@gmail.com",
+    },
+  };
+
   return (
     <div className="mx-auto max-w-5xl px-4 py-6 sm:px-6 sm:py-12">
       <script
@@ -207,6 +249,10 @@ export default function PartnerPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceJsonLd) }}
       />
 
       <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "パートナー（釣具店様向け）" }]} />
@@ -434,7 +480,7 @@ export default function PartnerPage() {
               </div>
             </div>
             <p className="text-xs text-muted-foreground">
-              ※QRコード設置は無料です。エサ在庫管理などの追加機能は、無料プランとプレミアムプラン（月額1,980円）をご用意しています。
+              ※QRコード設置は無料です。エサ在庫管理などの追加機能は、無料プラン（永久無料）・ベーシック（初年度 月額500円）・プロ（初年度 月額1,980円）をご用意しています。今なら有料プランは3ヶ月無料でお試しいただけます。
             </p>
           </CardContent>
         </Card>
@@ -560,39 +606,37 @@ export default function PartnerPage() {
         </div>
       </section>
 
-      {/* ===== LINE餌在庫管理 ===== */}
+      {/* ===== エサ在庫管理サービス ===== */}
       <section className="mb-14 sm:mb-20">
         <div className="rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 p-6 dark:border-emerald-800 dark:from-emerald-950/30 dark:to-teal-950/30 sm:p-10">
           <div className="flex items-center gap-3 mb-6">
-            <div className="flex size-12 items-center justify-center rounded-xl bg-[#06c755]">
-              <svg viewBox="0 0 24 24" fill="white" className="size-7">
-                <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.271.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314" />
-              </svg>
+            <div className="flex size-12 items-center justify-center rounded-xl bg-emerald-600">
+              <Store className="size-7 text-white" />
             </div>
             <div>
-              <h2 className="text-xl font-bold sm:text-2xl">LINE餌在庫管理サービス</h2>
-              <p className="text-sm text-emerald-700 dark:text-emerald-400">LINEで簡単に餌の在庫状況をリアルタイム公開</p>
+              <h2 className="text-xl font-bold sm:text-2xl">エサ在庫管理サービス</h2>
+              <p className="text-sm text-emerald-700 dark:text-emerald-400">スマホから簡単に餌の在庫状況をリアルタイム公開</p>
             </div>
           </div>
 
           <p className="text-sm leading-relaxed text-emerald-900 dark:text-emerald-200 sm:text-base mb-6">
-            お客様からの「今日エサある？」の電話対応を減らせます。LINEで「更新」と送るだけで、餌の在庫状況をツリスポ上でリアルタイム公開。お客様はサイトやLINEからいつでも在庫を確認できます。
+            お客様からの「今日エサある？」の電話対応を減らせます。専用の管理画面から餌の在庫状況を更新するだけで、ツリスポ上でリアルタイム公開。お客様はサイトからいつでも在庫を確認できます。
           </p>
 
           <div className="grid gap-4 sm:grid-cols-3 mb-8">
             <div className="rounded-xl bg-white/70 p-4 dark:bg-gray-900/30">
               <div className="flex items-center gap-2 mb-2">
                 <span className="flex size-7 items-center justify-center rounded-full bg-emerald-100 text-sm font-bold text-emerald-700">1</span>
-                <h3 className="text-sm font-bold">友だち追加</h3>
+                <h3 className="text-sm font-bold">無料掲載を申請</h3>
               </div>
-              <p className="text-xs text-muted-foreground">ツリスポ公式LINEを友だち追加。ツリスポから店舗登録を行います。</p>
+              <p className="text-xs text-muted-foreground">店舗情報を送信するだけ。確認後すぐに掲載されます。</p>
             </div>
             <div className="rounded-xl bg-white/70 p-4 dark:bg-gray-900/30">
               <div className="flex items-center gap-2 mb-2">
                 <span className="flex size-7 items-center justify-center rounded-full bg-emerald-100 text-sm font-bold text-emerald-700">2</span>
-                <h3 className="text-sm font-bold">「更新」と送信</h3>
+                <h3 className="text-sm font-bold">管理URLを受け取る</h3>
               </div>
-              <p className="text-xs text-muted-foreground">LINEで「更新」と送ると、お店専用の在庫更新ページのURLが届きます。</p>
+              <p className="text-xs text-muted-foreground">掲載完了後、お店専用の管理ページURLをメールでお届けします。</p>
             </div>
             <div className="rounded-xl bg-white/70 p-4 dark:bg-gray-900/30">
               <div className="flex items-center gap-2 mb-2">
@@ -603,32 +647,27 @@ export default function PartnerPage() {
             </div>
           </div>
 
-          <div className="rounded-xl bg-white/80 p-5 dark:bg-gray-900/40 mb-6">
-            <h3 className="text-sm font-bold mb-3">店舗オーナー様が使えるコマンド</h3>
-            <div className="space-y-2 text-sm">
-              <div className="flex items-start gap-3">
-                <span className="shrink-0 rounded bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">更新</span>
-                <span className="text-muted-foreground">餌の在庫更新ページのURLが届きます</span>
-              </div>
-              <div className="flex items-start gap-3">
-                <span className="shrink-0 rounded bg-emerald-100 px-2 py-0.5 text-xs font-bold text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400">確認</span>
-                <span className="text-muted-foreground">現在の在庫状況をLINE上で確認できます</span>
-              </div>
-            </div>
-          </div>
-
           <div className="flex flex-col items-center gap-3 text-center">
             <div className="rounded-xl bg-white/80 p-4 dark:bg-gray-900/40 mb-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
                 <div>
-                  <p className="font-bold text-emerald-700 dark:text-emerald-400 mb-1">無料プラン</p>
+                  <p className="font-bold text-emerald-700 dark:text-emerald-400 mb-1">無料プラン <span className="text-xs">永久無料</span></p>
                   <p className="text-xs text-muted-foreground">エサ在庫更新（1日10回まで）・基本情報表示</p>
                 </div>
                 <div>
-                  <p className="font-bold text-amber-600 dark:text-amber-400 mb-1">プレミアム <span className="font-normal text-xs">月額1,980円</span></p>
-                  <p className="text-xs text-muted-foreground">更新無制限・LINE連携リアルタイム更新・検索優先表示</p>
+                  <p className="font-bold text-blue-600 dark:text-blue-400 mb-1">ベーシック <span className="font-normal text-xs">初年度 月額500円</span></p>
+                  <p className="text-[10px] text-muted-foreground">2年目〜月額980円</p>
+                  <p className="text-xs text-muted-foreground">公式バッジ・検索優先表示・写真3枚</p>
+                  <p className="text-xs font-bold text-red-600">今なら3ヶ月無料！</p>
+                </div>
+                <div>
+                  <p className="font-bold text-amber-600 dark:text-amber-400 mb-1">プロ <span className="font-normal text-xs">初年度 月額1,980円</span></p>
+                  <p className="text-[10px] text-muted-foreground">2年目〜月額2,980円</p>
+                  <p className="text-xs text-muted-foreground">1日50回更新・写真20枚・クーポン配信・MEOサポート</p>
+                  <p className="text-xs font-bold text-red-600">今なら3ヶ月無料！</p>
                 </div>
               </div>
+              <p className="text-[11px] text-muted-foreground mt-3">※ 有料プランは3ヶ月無料でお試しいただけます。無料期間中の解約も可能です。4ヶ月目から通常料金が適用されます。</p>
             </div>
             <div className="flex flex-wrap justify-center gap-3 text-xs text-emerald-700 dark:text-emerald-400">
               <div className="flex items-center gap-1.5">
@@ -644,13 +683,13 @@ export default function PartnerPage() {
                 <span>スマホだけでOK</span>
               </div>
             </div>
-            <a href="mailto:fishingspotjapan@gmail.com?subject=LINE餌在庫管理サービス希望&body=店舗名：%0A住所：%0Aご連絡先：%0Aご希望プラン（無料/プレミアム）：%0A">
+            <a href="mailto:fishingspotjapan@gmail.com?subject=エサ在庫管理サービス希望&body=店舗名：%0A住所：%0Aご連絡先：%0Aご希望プラン（無料/ベーシック/プロ）：%0A">
               <Button
                 size="lg"
-                className="min-h-[52px] gap-2 bg-[#06c755] px-10 text-base text-white hover:bg-[#05b04c]"
+                className="min-h-[52px] gap-2 bg-emerald-600 px-10 text-base text-white hover:bg-emerald-700"
               >
-                <Smartphone className="size-5" />
-                LINE在庫管理を始める
+                <Mail className="size-5" />
+                エサ在庫管理を始める
               </Button>
             </a>
             <p className="text-xs text-muted-foreground">

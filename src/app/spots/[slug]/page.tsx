@@ -884,6 +884,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
           )}
           {spot.spotType === "port" && <PortMannerSection />}
           <section>
+            <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><MessageSquare className="size-5" />みんなの釣果報告</h3>
+            <CatchReportList spotSlug={slug} initialReports={getCatchReportsBySpot(slug)} />
+            <CatchReportForm spotSlug={slug} spotName={spot.name} catchableFishNames={[...new Set(spot.catchableFish.map((cf) => cf.fish.name))]} />
+          </section>
+          <section>
             <h3 className="mb-3 text-lg font-bold">混雑予想</h3>
             <CrowdPredictionCard rating={spot.rating} isFree={spot.isFree} difficulty={spot.difficulty} prefecture={spot.region.prefecture} hasParking={spot.hasParking} reviewCount={spot.reviewCount} />
           </section>
@@ -1007,11 +1012,6 @@ export default async function SpotDetailPage({ params }: PageProps) {
           {spot.catchableFish.length > 0 && (
             <section><FishingReportSummary spotSlug={slug} fishList={spot.catchableFish.map((cf) => ({ slug: cf.fish.slug, name: cf.fish.name }))} /></section>
           )}
-          <section>
-            <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><MessageSquare className="size-5" />みんなの釣果報告</h3>
-            <CatchReportList reports={getCatchReportsBySpot(slug)} />
-            <CatchReportForm spotSlug={slug} spotName={spot.name} />
-          </section>
         </>}
         gearTab={<>
           <h2 className="sr-only">おすすめの仕掛け・装備</h2>
@@ -1099,7 +1099,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                       </div>
                       <div className="mt-1 flex items-center gap-1.5">
                         <p className="text-xs text-muted-foreground line-clamp-1">{shop.address}</p>
-                        <a href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(shop.address)}`} target="_blank" rel="noopener noreferrer" className="shrink-0 text-[10px] text-primary hover:underline" onClick={(e) => e.stopPropagation()}>ナビ</a>
+                        <a href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(shop.address)}`} target="_blank" rel="noopener noreferrer" className="relative z-10 shrink-0 text-[10px] text-primary hover:underline">ナビ</a>
                       </div>
                       <p className="mt-0.5 text-xs text-muted-foreground">{shop.businessHours}</p>
                       <div className="mt-2 flex flex-wrap gap-1">

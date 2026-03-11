@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
   }
 
   // デモ店舗はトークン不要
-  const isDemo = shop === "sample-premium";
+  const isDemo = shop === "sample-premium" || shop === "sample-basic" || shop === "sample-free";
   if (!isDemo) {
     // トークン検証: Redis に保存されたトークンと照合
     try {
@@ -92,17 +92,16 @@ export async function POST(request: NextRequest) {
     if (count === 1) {
       await withTimeout(redis.expire(rateLimitKey, 86400));
     }
-    // レートリミット: プレミアム店舗は無制限、デモ店舗は100回/日、無料店舗は10回/日
+    // レートリミット: planLevelに基づいて判定
     const shopData = getShopBySlug(shop);
-    const isPremium = shopData?.isPremium === true;
-    if (!isPremium) {
-      const dailyLimit = isDemo ? 100 : 10;
-      if (count && count > dailyLimit) {
-        return NextResponse.json(
-          { error: `本日の更新回数の上限に達しました（1日${dailyLimit}回まで）。プレミアムプラン（月額1,980円）なら無制限に更新できます。` },
-          { status: 429 }
-        );
-      }
+    const planLevel = shopData?.planLevel || "free";
+    const dailyLimits: Record<string, number> = { free: 10, basic: 10, pro: 50 };
+    const dailyLimit = isDemo ? 100 : (dailyLimits[planLevel] ?? 10);
+    if (count && count > dailyLimit) {
+      return NextResponse.json(
+        { error: `本日の更新回数の上限に達しました（1日${dailyLimit}回まで）。プロプラン（初年度 月額1,980円）なら1日50回まで更新できます。` },
+        { status: 429 }
+      );
     }
     await withTimeout(redis.set(`${REDIS_PREFIX}${shop}`, stockWithTime, { ex: 604800 }));
   } catch {

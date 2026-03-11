@@ -48,7 +48,7 @@ const breadcrumbJsonLd = {
 
 // Server ComponentでデータをシリアライズしてClient Componentに渡す
 const shopsData = tackleShops
-  .filter((s) => s.slug !== "sample-premium")
+  .filter((s) => s.slug !== "sample-premium" && s.slug !== "sample-basic")
   .map((s) => ({
     id: s.id,
     name: s.name,
@@ -165,7 +165,6 @@ export default function ShopsListPage() {
                       "無料プランの全機能",
                       "検索結果での優先表示",
                       "写真3枚まで掲載",
-                      "簡易アクセス解析",
                       "公式バッジ表示",
                     ].map((text) => (
                       <li key={text} className="flex items-start gap-2 text-sm">
@@ -191,7 +190,7 @@ export default function ShopsListPage() {
                   <ul className="space-y-2">
                     {[
                       "ベーシックの全機能",
-                      "写真無制限・店主メッセージ",
+                      "写真20枚・店主メッセージ",
                       "詳細アクセス解析",
                       "クーポン配信機能",
                       "スポットページでの商品PR",
@@ -207,19 +206,25 @@ export default function ShopsListPage() {
             </div>
 
             {/* デモ・サンプル */}
-            <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+            <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
               <Link
-                href="/shops/update?shop=sample-premium&token=demo"
-                className="inline-flex items-center justify-center gap-2 rounded-lg bg-amber-500 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-amber-600"
+                href="/shops/sample-basic"
+                className="inline-flex items-center justify-center gap-1 rounded-lg border border-blue-300 px-5 py-2.5 text-sm font-medium text-blue-700 transition-colors hover:bg-blue-50"
               >
-                エサ在庫管理のデモを試す
-                <ChevronRight className="size-4" />
+                ベーシックプランのサンプルを見る
               </Link>
               <Link
                 href="/shops/sample-premium"
+                className="inline-flex items-center justify-center gap-2 rounded-lg bg-amber-500 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-amber-600"
+              >
+                プロプランのサンプルを見る
+                <ChevronRight className="size-4" />
+              </Link>
+              <Link
+                href="/shops/update?shop=sample-premium&token=demo"
                 className="inline-flex items-center justify-center gap-1 rounded-lg border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-accent"
               >
-                プレミアムページのサンプルを見る
+                店舗管理のデモを試す
               </Link>
             </div>
 

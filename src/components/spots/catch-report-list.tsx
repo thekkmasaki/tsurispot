@@ -1,17 +1,55 @@
-import { Fish, Calendar, User } from "lucide-react";
+"use client";
+
+import { useEffect, useState } from "react";
+import { Fish, Calendar, User, Loader2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import type { CatchReport } from "@/lib/data/catch-reports";
 
 interface CatchReportListProps {
-  reports: CatchReport[];
+  spotSlug: string;
+  initialReports: CatchReport[];
 }
 
 function formatDate(dateStr: string): string {
-  const [year, month, day] = dateStr.split("-");
-  return `${Number(year)}年${Number(month)}月${Number(day)}日`;
+  const parts = dateStr.split("-");
+  if (parts.length !== 3) return dateStr;
+  return `${Number(parts[0])}年${Number(parts[1])}月${Number(parts[2])}日`;
 }
 
-export function CatchReportList({ reports }: CatchReportListProps) {
+export function CatchReportList({ spotSlug, initialReports }: CatchReportListProps) {
+  const [reports, setReports] = useState<CatchReport[]>(initialReports);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    setLoading(true);
+
+    fetch(`/api/catch-reports?spot=${encodeURIComponent(spotSlug)}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (!cancelled && data.ok && Array.isArray(data.reports)) {
+          setReports(data.reports);
+        }
+      })
+      .catch(() => {
+        // ハードコード分をそのまま使う
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+
+    return () => { cancelled = true; };
+  }, [spotSlug]);
+
+  if (loading && reports.length === 0) {
+    return (
+      <div className="flex items-center justify-center py-6 text-sm text-muted-foreground">
+        <Loader2 className="mr-2 size-4 animate-spin" />
+        読み込み中...
+      </div>
+    );
+  }
+
   if (reports.length === 0) {
     return (
       <div className="rounded-lg border border-dashed border-muted-foreground/30 p-6 text-center">
@@ -59,6 +97,12 @@ export function CatchReportList({ reports }: CatchReportListProps) {
           </CardContent>
         </Card>
       ))}
+      {loading && (
+        <div className="flex items-center justify-center py-2 text-xs text-muted-foreground">
+          <Loader2 className="mr-1 size-3 animate-spin" />
+          更新を確認中...
+        </div>
+      )}
     </div>
   );
 }

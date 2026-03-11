@@ -7,7 +7,7 @@ import { Shield } from "lucide-react";
 export const metadata: Metadata = {
   title: "プライバシーポリシー",
   description:
-    "ツリスポのプライバシーポリシーです。個人情報の取り扱い、Cookie、アクセス解析、広告配信について説明しています。",
+    "ツリスポのプライバシーポリシーです。個人情報の取り扱い方針、Cookie・アクセス解析（Google Analytics）の利用目的、広告配信（Amazon・楽天アフィリエイト）、データの保管・管理方法について説明しています。",
   alternates: {
     canonical: "https://tsurispot.com/privacy",
   },
@@ -27,7 +27,7 @@ export default function PrivacyPage() {
             プライバシーポリシー
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            最終更新日: 2026年2月20日
+            最終更新日: 2026年3月11日
           </p>
         </div>
       </section>
@@ -56,18 +56,28 @@ export default function PrivacyPage() {
                 <h2 className="text-lg font-semibold">収集する情報</h2>
               </div>
               <div className="space-y-3 text-sm leading-relaxed text-muted-foreground">
-                <p>当サイトでは、以下の情報を自動的に収集する場合があります。</p>
+                <p>当サイトでは、以下の情報を収集する場合があります。</p>
+                <p className="font-medium text-foreground">自動的に収集する情報</p>
                 <ul className="ml-4 list-disc space-y-1.5">
                   <li>
                     アクセスログ情報（IPアドレス、ブラウザの種類、アクセス日時、参照元URL等）
                   </li>
                   <li>Cookie及び類似技術により取得される情報</li>
+                </ul>
+                <p className="font-medium text-foreground">ユーザーが任意で提供する情報</p>
+                <ul className="ml-4 list-disc space-y-1.5">
                   <li>
                     お問い合わせ時にご入力いただく情報（メールアドレス、お名前等）
                   </li>
+                  <li>
+                    釣果報告の投稿時にご入力いただく情報（ニックネーム、コメント等）
+                  </li>
+                  <li>
+                    釣具店掲載申請・有料プランお問い合わせ時にご入力いただく情報（店舗名、ご担当者名、メールアドレス、電話番号、住所等）
+                  </li>
                 </ul>
                 <p>
-                  なお、当サイトは会員登録機能を提供しておらず、ユーザーの氏名・住所・電話番号等の個人情報を直接収集することは原則としてありません。
+                  なお、当サイトは会員登録機能を提供しておらず、上記のフォーム送信以外でユーザーの個人情報を直接収集することはありません。
                 </p>
               </div>
             </div>
@@ -185,6 +195,8 @@ export default function PrivacyPage() {
                   <li>
                     お問い合わせに対する回答（個別に連絡先をいただいた場合）
                   </li>
+                  <li>釣具店掲載の審査・掲載完了のご連絡</li>
+                  <li>有料プランに関するご案内・契約手続き</li>
                   <li>不正アクセスの防止</li>
                 </ul>
               </div>

@@ -6,7 +6,7 @@ import { Store } from "lucide-react";
 import { ShopUpdateForm } from "@/components/shops/shop-update-form";
 
 export const metadata: Metadata = {
-  title: "エサ在庫更新",
+  title: "店舗管理",
   robots: { index: false, follow: false },
 };
 
@@ -25,7 +25,7 @@ export default function ShopUpdatePage() {
             <span className="font-bold text-primary">ツリスポ</span>
           </Link>
           <span className="text-sm text-muted-foreground">
-            エサ在庫管理
+            店舗管理
           </span>
         </div>
       </div>
@@ -33,9 +33,9 @@ export default function ShopUpdatePage() {
       {/* メインコンテンツ */}
       <div className="container mx-auto px-4 py-6 max-w-md">
         <div className="mb-6">
-          <h1 className="text-xl font-bold">エサ在庫の更新</h1>
+          <h1 className="text-xl font-bold">店舗管理</h1>
           <p className="text-sm text-muted-foreground mt-1">
-            在庫状況を更新すると、お店のページにすぐ反映されます。
+            更新した情報はお店のページにすぐ反映されます。
           </p>
         </div>
 

@@ -232,7 +232,7 @@ function ContactClientInner() {
                 メールアプリで送信する
               </Button>
               <p className="mt-2 text-center text-xs text-muted-foreground">
-                ボタンを押すとメールアプリが開きます。内容を確認して送信してください。
+                ボタンを押すとメールアプリが開きます。内容を確認して送信してください。写真がある場合はメールアプリで画像を添付してください。
               </p>
             </div>
           </form>

@@ -1,17 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Send, CheckCircle, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 
+// そのスポットで釣れる魚名 + 汎用的な人気魚種
+const COMMON_FISH = ["アジ", "サバ", "イワシ", "メバル", "カサゴ", "シーバス", "クロダイ", "アオリイカ"];
+
 interface CatchReportFormProps {
   spotSlug: string;
   spotName: string;
+  catchableFishNames?: string[];
 }
 
-export function CatchReportForm({ spotSlug, spotName }: CatchReportFormProps) {
+export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }: CatchReportFormProps) {
+  const fishInputRef = useRef<HTMLInputElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [userName, setUserName] = useState("");
   const [fishName, setFishName] = useState("");
@@ -150,7 +155,56 @@ export function CatchReportForm({ spotSlug, spotName }: CatchReportFormProps) {
             <label htmlFor="cr-fishname" className="mb-1 block text-sm font-medium">
               釣った魚 <span className="text-destructive">*</span>
             </label>
+            {(() => {
+              // スポットの魚を優先、足りなければ汎用魚種で補完（重複排除）
+              const seen = new Set<string>();
+              const buttons: string[] = [];
+              for (const name of [...catchableFishNames, ...COMMON_FISH]) {
+                if (!seen.has(name) && buttons.length < 8) {
+                  seen.add(name);
+                  buttons.push(name);
+                }
+              }
+              // 現在選択中の魚名を配列で管理
+              const selected = fishName ? fishName.split("、").map(s => s.trim()).filter(Boolean) : [];
+              const selectedSet = new Set(selected);
+              const toggle = (name: string) => {
+                if (selectedSet.has(name)) {
+                  setFishName(selected.filter(s => s !== name).join("、"));
+                } else {
+                  setFishName([...selected, name].join("、"));
+                }
+              };
+              return buttons.length > 0 ? (
+                <div className="mb-1.5 flex flex-wrap gap-1">
+                  {buttons.map((name) => (
+                    <button
+                      key={name}
+                      type="button"
+                      onClick={() => toggle(name)}
+                      className={`rounded-full border px-2.5 py-0.5 text-xs transition-colors ${
+                        selectedSet.has(name)
+                          ? "border-emerald-500 bg-emerald-50 text-emerald-700"
+                          : "border-muted-foreground/20 text-muted-foreground hover:border-emerald-300 hover:bg-emerald-50/50"
+                      }`}
+                    >
+                      {name}
+                    </button>
+                  ))}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setTimeout(() => fishInputRef.current?.focus(), 0);
+                    }}
+                    className="rounded-full border border-muted-foreground/20 px-2.5 py-0.5 text-xs text-muted-foreground transition-colors hover:border-emerald-300 hover:bg-emerald-50/50"
+                  >
+                    その他
+                  </button>
+                </div>
+              ) : null;
+            })()}
             <Input
+              ref={fishInputRef}
               id="cr-fishname"
               type="text"
               placeholder="例: アジ、サバ"

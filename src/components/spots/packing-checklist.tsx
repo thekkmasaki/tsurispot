@@ -42,24 +42,21 @@ function buildChecklist(props: PackingChecklistProps) {
     {
       name: "釣り竿・リール",
       level: "normal",
-      ...(hasRentalRod
-        ? { badgeText: "現地レンタル可" }
-        : { affiliate: { label: "シマノ ロッド", url: "https://amzn.to/4s4i64m" } }),
+      affiliate: { label: "シマノ ロッド", url: "https://amzn.to/4s4i64m" },
+      ...(hasRentalRod ? { badgeText: "現地レンタル可" } : {}),
     },
     {
       name: "リール",
       note: "竿に合ったサイズを",
       level: "normal",
-      ...(hasRentalRod
-        ? { badgeText: "現地レンタル可" }
-        : { affiliate: { label: "シマノ リール", url: "https://amzn.to/4atW7Om" } }),
+      affiliate: { label: "シマノ リール", url: "https://amzn.to/4atW7Om" },
+      ...(hasRentalRod ? { badgeText: "現地レンタル可" } : {}),
     },
     {
       name: "仕掛け・エサ",
       level: "normal",
-      ...(hasFishingShop
-        ? { badgeText: "現地購入可" }
-        : { affiliate: { label: "おもりセット", url: "https://amzn.to/4cFGDbl" } }),
+      affiliate: { label: "おもりセット", url: "https://amzn.to/4cFGDbl" },
+      ...(hasFishingShop ? { badgeText: "現地購入可" } : {}),
     },
     {
       name: "道糸（ライン）",
@@ -230,21 +227,25 @@ function ChecklistItemRow({ item }: { item: ChecklistItem }) {
           {item.note}
         </span>
       )}
-      {item.badgeText && (
-        <Badge className="ml-auto bg-green-600 hover:bg-green-600 text-[10px] px-1.5 py-0">
-          {item.badgeText}
-        </Badge>
-      )}
-      {item.affiliate && (
-        <a
-          href={item.affiliate.url}
-          target="_blank"
-          rel="noopener noreferrer sponsored"
-          className="ml-auto inline-flex shrink-0 items-center gap-1 rounded bg-[#FF9900] px-2 py-1 text-[10px] font-bold text-white hover:bg-[#E88B00] transition-colors"
-        >
-          {item.affiliate.label}
-          <ExternalLink className="size-2.5" />
-        </a>
+      {(item.badgeText || item.affiliate) && (
+        <span className="ml-auto inline-flex shrink-0 items-center gap-1.5">
+          {item.badgeText && (
+            <Badge className="bg-green-600 hover:bg-green-600 text-[10px] px-1.5 py-0">
+              {item.badgeText}
+            </Badge>
+          )}
+          {item.affiliate && (
+            <a
+              href={item.affiliate.url}
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              className="inline-flex items-center gap-1 rounded bg-[#FF9900] px-2 py-1 text-[10px] font-bold text-white hover:bg-[#E88B00] transition-colors"
+            >
+              {item.affiliate.label}
+              <ExternalLink className="size-2.5" />
+            </a>
+          )}
+        </span>
       )}
     </div>
   );

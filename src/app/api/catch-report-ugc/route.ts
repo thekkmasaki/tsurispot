@@ -59,7 +59,7 @@ export async function POST(request: Request) {
     if (GAS_WEBHOOK_URL) {
       fetch(GAS_WEBHOOK_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json; charset=utf-8" },
         body: JSON.stringify(payload),
       }).catch((err) => {
         console.error("[釣果投稿] GAS送信エラー:", err);

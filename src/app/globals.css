@@ -129,10 +129,17 @@
   }
 }
 
-/* Safe area support for mobile nav */
+/* Safe area support for mobile nav & PWA standalone */
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
   .pb-safe {
     padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* PWA standalone mode: ensure footer isn't clipped by home indicator */
+@media all and (display-mode: standalone) {
+  body {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 }
 

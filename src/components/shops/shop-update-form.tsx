@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
 import { Loader2, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ShopInfoForm } from "./shop-info-form";
 
 type StockStatus = "available" | "low" | "out";
 
@@ -28,11 +29,14 @@ const PRESET_BAITS = [
   "コーン",
 ];
 
+type TabType = "bait" | "info";
+
 export function ShopUpdateForm({ shopName }: { shopName?: string }) {
   const searchParams = useSearchParams();
   const shop = searchParams.get("shop");
   const token = searchParams.get("token");
 
+  const [activeTab, setActiveTab] = useState<TabType>("bait");
   const [items, setItems] = useState<BaitItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -130,7 +134,7 @@ export function ShopUpdateForm({ shopName }: { shopName?: string }) {
     setSaving(false);
   };
 
-  const isDemo = shop === "sample-premium";
+  const isDemo = shop === "sample-premium" || shop === "sample-basic" || shop === "sample-free";
 
   if (!shop || (!token && !isDemo)) {
     return (
@@ -175,10 +179,10 @@ export function ShopUpdateForm({ shopName }: { shopName?: string }) {
             🎮 デモモード
           </p>
           <p className="text-xs text-blue-700 dark:text-blue-400">
-            これはお試し用のデモページです。実際にボタンをタップして操作感をお確かめください。無料プラン（1日10回まで更新可）またはプレミアムプラン（月額1,980円・更新無制限・LINE連携）をお選びいただけます。
+            これはお試し用のデモページです。実際にボタンをタップして操作感をお確かめください。無料プラン（1日10回まで更新可）のほか、ベーシック（初年度 月額500円・写真3枚・公式バッジ）、プロ（初年度 月額1,980円・1日50回更新・写真20枚・クーポン配信）もお選びいただけます。
           </p>
           <a
-            href="mailto:fishingspotjapan@gmail.com?subject=エサ在庫管理について"
+            href="mailto:fishingspotjapan@gmail.com?subject=店舗管理について"
             className="inline-block mt-2 text-xs font-medium text-blue-600 underline dark:text-blue-400"
           >
             お申し込み・お問い合わせ →
@@ -186,6 +190,37 @@ export function ShopUpdateForm({ shopName }: { shopName?: string }) {
         </div>
       )}
 
+      {/* タブ切り替え */}
+      <div className="flex rounded-lg border bg-muted/50 p-1">
+        <button
+          type="button"
+          onClick={() => setActiveTab("bait")}
+          className={`flex-1 py-2 text-sm font-medium rounded-md transition-colors ${
+            activeTab === "bait"
+              ? "bg-white dark:bg-gray-800 shadow-sm text-foreground"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          エサ在庫
+        </button>
+        <button
+          type="button"
+          onClick={() => setActiveTab("info")}
+          className={`flex-1 py-2 text-sm font-medium rounded-md transition-colors ${
+            activeTab === "info"
+              ? "bg-white dark:bg-gray-800 shadow-sm text-foreground"
+              : "text-muted-foreground hover:text-foreground"
+          }`}
+        >
+          店舗情報
+        </button>
+      </div>
+
+      {/* 店舗情報タブ */}
+      {activeTab === "info" && <ShopInfoForm />}
+
+      {/* エサ在庫タブ */}
+      {activeTab !== "bait" ? null : (<>
       {/* エサ一覧 */}
       {items.length === 0 ? (
         <div className="text-center py-8 rounded-xl border-2 border-dashed">
@@ -385,6 +420,7 @@ export function ShopUpdateForm({ shopName }: { shopName?: string }) {
           までお気軽にどうぞ。
         </p>
       </div>
+      </>)}
     </div>
   );
 }

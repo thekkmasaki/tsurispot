@@ -7,7 +7,7 @@ import { ScrollText } from "lucide-react";
 export const metadata: Metadata = {
   title: "利用規約",
   description:
-    "ツリスポの利用規約です。サービス内容、免責事項、禁止事項、著作権について定めています。",
+    "ツリスポの利用規約です。釣りスポット情報・釣具店掲載サービスの利用条件、免責事項、禁止事項、著作権、プライバシーに関する規定を定めています。ご利用前にご確認ください。",
   alternates: {
     canonical: "https://tsurispot.com/terms",
   },
@@ -27,7 +27,7 @@ export default function TermsPage() {
             利用規約
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            最終更新日: 2026年2月27日
+            最終更新日: 2026年3月11日
           </p>
         </div>
       </section>
@@ -56,6 +56,7 @@ export default function TermsPage() {
               </div>
               <div className="space-y-3 text-sm leading-relaxed text-muted-foreground">
                 <p>当サイトは、以下のサービスを提供する情報サイトです。</p>
+                <p className="font-medium text-foreground">一般ユーザー向け（無料）</p>
                 <ul className="ml-4 list-disc space-y-1.5">
                   <li>
                     釣りスポットに関する情報の掲載（場所、設備、アクセス等）
@@ -65,6 +66,12 @@ export default function TermsPage() {
                   </li>
                   <li>釣り初心者向けのガイド・解説コンテンツの提供</li>
                   <li>釣具・釣り関連商品のアフィリエイトリンクによる紹介</li>
+                </ul>
+                <p className="font-medium text-foreground">釣具店・エサ店向け</p>
+                <ul className="ml-4 list-disc space-y-1.5">
+                  <li>無料プラン：店舗基本情報の掲載、エサ在庫更新</li>
+                  <li>ベーシックプラン（初年度 月額500円・2年目〜月額980円・税込）：公式バッジ、検索優先表示、写真3枚</li>
+                  <li>プロプラン（初年度 月額1,980円・2年目〜月額2,980円・税込）：ベーシック全機能、写真20枚、店主メッセージ、エサ在庫1日50回更新、クーポン配信、商品PR、Googleビジネスプロフィール初期設定サポート</li>
                 </ul>
                 <p>
                   当サイトは、サービスの内容を予告なく変更・追加・削除することがあります。
@@ -114,11 +121,39 @@ export default function TermsPage() {
 
             <Separator />
 
-            {/* 3. 禁止事項 */}
+            {/* 有料プランについて */}
             <div>
               <div className="mb-4 flex items-center gap-2">
                 <Badge variant="secondary" className="text-xs">
                   第3条
+                </Badge>
+                <h2 className="text-lg font-semibold">有料掲載プランについて</h2>
+              </div>
+              <div className="space-y-3 text-sm leading-relaxed text-muted-foreground">
+                <ul className="ml-4 list-disc space-y-1.5">
+                  <li>
+                    有料プランは月額課金制です。契約は1ヶ月単位で自動更新されます。
+                  </li>
+                  <li>
+                    解約はいつでも可能です。月末までにご連絡いただければ、翌月から課金を停止いたします。月途中の日割り返金は行いません。
+                  </li>
+                  <li>
+                    掲載内容に虚偽の情報が含まれる場合、または法令・公序良俗に反する内容がある場合、当サイトの判断で掲載を停止することがあります。
+                  </li>
+                  <li>
+                    プランの料金・提供機能は、事前の通知をもって変更する場合があります。変更は通知後の次回更新日から適用されます。
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <Separator />
+
+            {/* 4. 禁止事項 */}
+            <div>
+              <div className="mb-4 flex items-center gap-2">
+                <Badge variant="secondary" className="text-xs">
+                  第4条
                 </Badge>
                 <h2 className="text-lg font-semibold">禁止事項</h2>
               </div>
@@ -148,11 +183,11 @@ export default function TermsPage() {
 
             <Separator />
 
-            {/* 4. 著作権 */}
+            {/* 5. 著作権 */}
             <div>
               <div className="mb-4 flex items-center gap-2">
                 <Badge variant="secondary" className="text-xs">
-                  第4条
+                  第5条
                 </Badge>
                 <h2 className="text-lg font-semibold">著作権・知的財産権</h2>
               </div>
@@ -170,11 +205,11 @@ export default function TermsPage() {
 
             <Separator />
 
-            {/* 5. リンクについて */}
+            {/* 6. リンクについて */}
             <div>
               <div className="mb-4 flex items-center gap-2">
                 <Badge variant="secondary" className="text-xs">
-                  第5条
+                  第6条
                 </Badge>
                 <h2 className="text-lg font-semibold">リンクについて</h2>
               </div>
@@ -193,11 +228,11 @@ export default function TermsPage() {
 
             <Separator />
 
-            {/* 6. 規約の変更 */}
+            {/* 7. 規約の変更 */}
             <div>
               <div className="mb-4 flex items-center gap-2">
                 <Badge variant="secondary" className="text-xs">
-                  第6条
+                  第7条
                 </Badge>
                 <h2 className="text-lg font-semibold">利用規約の変更</h2>
               </div>
@@ -212,11 +247,11 @@ export default function TermsPage() {
 
             <Separator />
 
-            {/* 7. 準拠法・管轄 */}
+            {/* 8. 準拠法・管轄 */}
             <div>
               <div className="mb-4 flex items-center gap-2">
                 <Badge variant="secondary" className="text-xs">
-                  第7条
+                  第8条
                 </Badge>
                 <h2 className="text-lg font-semibold">
                   準拠法および管轄裁判所
@@ -232,11 +267,11 @@ export default function TermsPage() {
 
             <Separator />
 
-            {/* 8. 漁業権・釣り禁止エリアについて */}
+            {/* 9. 漁業権・釣り禁止エリアについて */}
             <div>
               <div className="mb-4 flex items-center gap-2">
                 <Badge variant="secondary" className="text-xs">
-                  第8条
+                  第9条
                 </Badge>
                 <h2 className="text-lg font-semibold">
                   漁業権・釣り禁止エリアについて
@@ -276,11 +311,11 @@ export default function TermsPage() {
 
             <Separator />
 
-            {/* 9. 安全に関する注意事項 */}
+            {/* 10. 安全に関する注意事項 */}
             <div>
               <div className="mb-4 flex items-center gap-2">
                 <Badge variant="secondary" className="text-xs">
-                  第9条
+                  第10条
                 </Badge>
                 <h2 className="text-lg font-semibold">
                   安全に関する注意事項
