@@ -39,6 +39,7 @@ export function ShopsFilterList({ shops }: ShopsFilterListProps) {
   const [filterLiveBait, setFilterLiveBait] = useState(false);
   const [filterFrozenBait, setFilterFrozenBait] = useState(false);
   const [filterRental, setFilterRental] = useState(false);
+  const [filterParking, setFilterParking] = useState(false);
 
   // 都道府県一覧（実際にデータがあるもののみ）
   const availablePrefectures = useMemo(() => {
@@ -93,6 +94,7 @@ export function ShopsFilterList({ shops }: ShopsFilterListProps) {
       if (filterLiveBait && !shop.hasLiveBait) return false;
       if (filterFrozenBait && !shop.hasFrozenBait) return false;
       if (filterRental && !shop.hasRentalRod) return false;
+      if (filterParking && !shop.hasParking) return false;
       return true;
     });
   }, [shops, searchQuery, selectedRegion, selectedPrefecture, selectedArea, filterLiveBait, filterFrozenBait, filterRental]);
@@ -108,7 +110,7 @@ export function ShopsFilterList({ shops }: ShopsFilterListProps) {
     return counts;
   }, [shops]);
 
-  const hasActiveFilters = selectedRegion || selectedPrefecture || selectedArea || filterLiveBait || filterFrozenBait || filterRental || searchQuery;
+  const hasActiveFilters = selectedRegion || selectedPrefecture || selectedArea || filterLiveBait || filterFrozenBait || filterRental || filterParking || searchQuery;
 
   const clearFilters = () => {
     setSearchQuery("");
@@ -118,6 +120,7 @@ export function ShopsFilterList({ shops }: ShopsFilterListProps) {
     setFilterLiveBait(false);
     setFilterFrozenBait(false);
     setFilterRental(false);
+    setFilterParking(false);
   };
 
   // 現在の絞り込みラベル
@@ -284,6 +287,16 @@ export function ShopsFilterList({ shops }: ShopsFilterListProps) {
             >
               レンタルロッド
             </button>
+            <button
+              onClick={() => setFilterParking(!filterParking)}
+              className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+                filterParking
+                  ? "bg-amber-600 text-white shadow-sm"
+                  : "border bg-background hover:bg-muted"
+              }`}
+            >
+              駐車場あり
+            </button>
           </div>
         </div>
 
@@ -339,6 +352,15 @@ export function ShopsFilterList({ shops }: ShopsFilterListProps) {
                 <div className="flex items-center gap-2 text-sm">
                   <MapPin className="size-4 shrink-0 text-muted-foreground" />
                   <span className="line-clamp-1">{shop.address}</span>
+                  <a
+                    href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(shop.address)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="shrink-0 text-xs text-primary hover:underline"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    ナビ
+                  </a>
                 </div>
                 {shop.phone && (
                   <div className="flex items-center gap-2 text-sm">
@@ -363,6 +385,9 @@ export function ShopsFilterList({ shops }: ShopsFilterListProps) {
                   )}
                   {shop.hasRentalRod && (
                     <Badge variant="outline" className="text-xs">レンタルロッド</Badge>
+                  )}
+                  {shop.hasParking && (
+                    <Badge variant="outline" className="text-xs">駐車場あり</Badge>
                   )}
                   {shop.services.some((s) => s.includes("中古")) && (
                     <Badge variant="outline" className="text-xs">中古取扱</Badge>

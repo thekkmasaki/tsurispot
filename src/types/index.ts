@@ -280,6 +280,8 @@ export interface TackleShop {
   hasLiveBait: boolean;
   hasFrozenBait: boolean;
   hasRentalRod: boolean;
+  hasParking?: boolean;
+  parkingDetail?: string;
   services: string[];
   baitStock?: BaitStock[];
   nearbySpotSlugs: string[];

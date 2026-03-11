@@ -1097,12 +1097,16 @@ export default async function SpotDetailPage({ params }: PageProps) {
                           {dist < 1 ? `${Math.round(dist * 1000)}m` : `${dist.toFixed(1)}km`}
                         </span>
                       </div>
-                      <p className="mt-1 text-xs text-muted-foreground">{shop.address}</p>
+                      <div className="mt-1 flex items-center gap-1.5">
+                        <p className="text-xs text-muted-foreground line-clamp-1">{shop.address}</p>
+                        <a href={`https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(shop.address)}`} target="_blank" rel="noopener noreferrer" className="shrink-0 text-[10px] text-primary hover:underline" onClick={(e) => e.stopPropagation()}>ナビ</a>
+                      </div>
                       <p className="mt-0.5 text-xs text-muted-foreground">{shop.businessHours}</p>
                       <div className="mt-2 flex flex-wrap gap-1">
                         {shop.hasLiveBait && <Badge variant="outline" className="text-[10px] px-1.5 py-0">活きエサ</Badge>}
                         {shop.hasFrozenBait && <Badge variant="outline" className="text-[10px] px-1.5 py-0">冷凍エサ</Badge>}
                         {shop.hasRentalRod && <Badge variant="outline" className="text-[10px] px-1.5 py-0">レンタル竿</Badge>}
+                        {shop.hasParking && <Badge variant="outline" className="text-[10px] px-1.5 py-0">駐車場</Badge>}
                       </div>
                     </CardContent></Card>
                   </Link>

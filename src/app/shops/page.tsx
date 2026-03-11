@@ -60,6 +60,8 @@ const shopsData = tackleShops
     hasLiveBait: s.hasLiveBait,
     hasFrozenBait: s.hasFrozenBait,
     hasRentalRod: s.hasRentalRod,
+    hasParking: s.hasParking,
+    parkingDetail: s.parkingDetail,
     services: s.services,
     isPremium: s.isPremium,
     region: s.region,
