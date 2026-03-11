@@ -3510,10 +3510,10 @@ export const shopsKanto: TackleShop[] = [
     businessHours: "24時間営業",
     closedDays: "年中無休",
     region: {
-      id: "r-tokyo-koto-2",
+      id: "r-tokyo-koto-3",
       prefecture: "東京都",
       areaName: "江東区",
-      slug: "tokyo-koto",
+      slug: "tokyo-koto-3",
     },
     hasLiveBait: true,
     hasFrozenBait: true,
