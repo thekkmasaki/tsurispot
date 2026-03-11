@@ -1,13 +1,27 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { ArrowRight, Skull, TriangleAlert, ChevronDown } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FishImage } from "@/components/ui/spot-image";
-import type { FishSpecies } from "@/types";
+
+interface SeasonalFish {
+  id: string;
+  name: string;
+  slug: string;
+  category: "sea" | "freshwater" | "brackish";
+  difficulty: "beginner" | "intermediate" | "advanced";
+  description: string;
+  imageUrl: string;
+  peakMonths: number[];
+  seasonMonths: number[];
+  isPoisonous: boolean;
+  poisonType?: string;
+  dangerLevel?: "low" | "medium" | "high";
+}
 
 const FILTERS = [
   { key: "all", label: "すべて" },
@@ -19,16 +33,32 @@ const FILTERS = [
 
 type FilterKey = (typeof FILTERS)[number]["key"];
 
-interface HomeSeasonalFishProps {
-  fish: FishSpecies[];
-  currentMonth: number;
-}
-
 const INITIAL_COUNT = 8;
 
-export function HomeSeasonalFish({ fish, currentMonth }: HomeSeasonalFishProps) {
+export function HomeSeasonalFish() {
+  const [fish, setFish] = useState<SeasonalFish[]>([]);
+  const [currentMonth, setCurrentMonth] = useState<number>(new Date().getMonth() + 1);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
   const [filter, setFilter] = useState<FilterKey>("all");
   const [expanded, setExpanded] = useState(false);
+
+  useEffect(() => {
+    fetch("/api/fish/seasonal")
+      .then((res) => {
+        if (!res.ok) throw new Error("fetch failed");
+        return res.json();
+      })
+      .then((data: { currentMonth: number; fish: SeasonalFish[] }) => {
+        setFish(data.fish);
+        setCurrentMonth(data.currentMonth);
+        setLoading(false);
+      })
+      .catch(() => {
+        setError(true);
+        setLoading(false);
+      });
+  }, []);
 
   const filtered = useMemo(() => {
     switch (filter) {
@@ -44,6 +74,57 @@ export function HomeSeasonalFish({ fish, currentMonth }: HomeSeasonalFishProps) 
         return fish;
     }
   }, [fish, filter, currentMonth]);
+
+  // スケルトンUI
+  if (loading) {
+    return (
+      <section className="bg-muted/50 py-8 sm:py-12">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <div className="mb-4 sm:mb-6">
+            <div className="h-8 w-48 animate-pulse rounded bg-muted" />
+            <div className="mt-2 h-4 w-20 animate-pulse rounded bg-muted" />
+          </div>
+          <div className="mb-4 flex gap-1.5 sm:mb-6">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <div key={i} className="h-8 w-20 animate-pulse rounded-full bg-muted" />
+            ))}
+          </div>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div key={i} className="overflow-hidden rounded-xl border bg-background">
+                <div className="aspect-[4/3] animate-pulse bg-muted" />
+                <div className="space-y-2 p-3 sm:p-4">
+                  <div className="h-4 w-24 animate-pulse rounded bg-muted" />
+                  <div className="flex gap-1.5">
+                    <div className="h-5 w-12 animate-pulse rounded-full bg-muted" />
+                    <div className="h-5 w-10 animate-pulse rounded-full bg-muted" />
+                  </div>
+                  <div className="h-8 w-full animate-pulse rounded bg-muted" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="bg-muted/50 py-8 sm:py-12">
+        <div className="mx-auto max-w-5xl px-4 text-center sm:px-6">
+          <h2 className="text-xl font-bold tracking-tight sm:text-3xl">今月釣れる魚</h2>
+          <p className="mt-2 text-sm text-muted-foreground">データの読み込みに失敗しました</p>
+          <Link href="/fish" className="mt-4 inline-block">
+            <Button variant="outline" className="min-h-[44px] gap-1">
+              魚種図鑑を見る
+              <ArrowRight className="size-4" />
+            </Button>
+          </Link>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="bg-muted/50 py-8 sm:py-12">

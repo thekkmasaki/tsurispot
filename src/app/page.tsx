@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
-import { getCatchableNow, fishSpecies } from "@/lib/data/fish";
+import { fishSpecies } from "@/lib/data/fish";
 import { getLatestBlogPosts, BLOG_CATEGORIES } from "@/lib/data/blog";
 import { prefectures } from "@/lib/data/prefectures";
 import { Card, CardContent } from "@/components/ui/card";
@@ -172,8 +172,6 @@ const homeFaqJsonLd = {
 };
 
 export default function Home() {
-  const currentMonth = new Date().getMonth() + 1;
-  const catchableNow = getCatchableNow(currentMonth);
   // 評価順にトップ30件を軽量データ化してクライアントへ（200→30に削減でHTMLサイズ大幅縮小）
   const popularSpotsData = fishingSpots
     .slice()
@@ -555,7 +553,7 @@ export default function Home() {
       <HomePopularSpots spots={popularSpotsData} />
 
       {/* 今釣れる魚セクション */}
-      <HomeSeasonalFish fish={catchableNow} currentMonth={currentMonth} />
+      <HomeSeasonalFish />
 
       {/* 人気のエリア */}
       <section className="bg-muted/50 py-8 sm:py-12">
