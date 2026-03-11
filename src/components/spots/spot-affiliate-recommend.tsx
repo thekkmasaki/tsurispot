@@ -8,7 +8,7 @@ import {
   type AffiliateProduct,
   getRelevantAffiliateProducts,
 } from "@/lib/data/affiliate-products";
-import { trackAffiliateClick } from "@/lib/affiliate-config";
+import { getRakutenUrl, trackAffiliateClick } from "@/lib/affiliate-config";
 
 const CATEGORY_LABELS: Record<AffiliateProduct["category"], string> = {
   tackle: "仕掛け・ライン",
@@ -56,43 +56,60 @@ export function SpotAffiliateRecommend({ methods, isNightFishing = false, prefec
         当日バタバタしないよう、事前にネットで揃えておくのがおすすめです
       </p>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {products.map((product) => (
-          <a
-            key={product.id}
-            href={product.url}
-            target="_blank"
-            rel="noopener noreferrer sponsored"
-            onClick={() => trackAffiliateClick({
-              productName: product.name,
-              productCategory: product.category,
-              platform: "amazon",
-              pageType: "spot",
-            })}
-            className="block"
-          >
-            <Card className="group h-full gap-0 py-0 transition-all hover:shadow-md hover:border-primary/30">
-              <CardContent className="p-3 sm:p-4">
+        {products.map((product) => {
+          const rakutenUrl = getRakutenUrl(product.name);
+          return (
+            <Card key={product.id} className="group h-full gap-0 py-0 transition-all hover:shadow-md hover:border-primary/30">
+              <CardContent className="flex h-full flex-col p-3 sm:p-4">
                 <div className="flex items-start justify-between gap-2">
                   <Badge
                     className={`shrink-0 text-[10px] ${CATEGORY_COLORS[product.category]}`}
                   >
                     {CATEGORY_LABELS[product.category]}
                   </Badge>
-                  <ExternalLink className="size-3.5 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100" />
                 </div>
-                <h4 className="mt-2 text-sm font-semibold leading-tight group-hover:text-primary">
+                <h4 className="mt-2 text-sm font-semibold leading-tight">
                   {product.name}
                 </h4>
-                <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground line-clamp-3">
+                <p className="mt-1.5 flex-1 text-xs leading-relaxed text-muted-foreground line-clamp-3">
                   {product.description}
                 </p>
-                <div className="mt-3 flex items-center justify-center rounded-md bg-[#FF9900]/10 px-3 py-1.5 text-xs font-medium text-[#FF9900] transition-colors group-hover:bg-[#FF9900] group-hover:text-white">
-                  Amazonで見る
+                <div className="mt-3 flex flex-col gap-1.5">
+                  <a
+                    href={product.url}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    onClick={() => trackAffiliateClick({
+                      productName: product.name,
+                      productCategory: product.category,
+                      platform: "amazon",
+                      pageType: "spot",
+                    })}
+                    className="flex items-center justify-center gap-1 rounded-md bg-[#FF9900] px-3 py-2 text-xs font-bold text-white transition-colors hover:bg-[#E88B00]"
+                  >
+                    Amazonで見る
+                    <ExternalLink className="size-3" />
+                  </a>
+                  <a
+                    href={rakutenUrl}
+                    target="_blank"
+                    rel="noopener noreferrer sponsored"
+                    onClick={() => trackAffiliateClick({
+                      productName: product.name,
+                      productCategory: product.category,
+                      platform: "rakuten",
+                      pageType: "spot",
+                    })}
+                    className="flex items-center justify-center gap-1 rounded-md bg-[#BF0000] px-3 py-2 text-xs font-bold text-white transition-colors hover:bg-[#A00000]"
+                  >
+                    楽天で見る
+                    <ExternalLink className="size-3" />
+                  </a>
                 </div>
               </CardContent>
             </Card>
-          </a>
-        ))}
+          );
+        })}
       </div>
       <p className="mt-2 text-[10px] text-muted-foreground">
         ※ 上記リンクはアフィリエイトリンクを含みます。購入による追加費用は発生しません。

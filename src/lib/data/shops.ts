@@ -1,6 +1,12 @@
 import { TackleShop } from "@/types";
+import { shopsChains } from "./shops-chains";
+import { shopsKanto } from "./shops-kanto";
+import { shopsChubu } from "./shops-chubu";
+import { shopsTohokuHokkaido } from "./shops-tohoku-hokkaido";
+import { shopsChugokuShikoku } from "./shops-chugoku-shikoku";
+import { shopsKyushu } from "./shops-kyushu";
 
-export const tackleShops: TackleShop[] = [
+const shopsKansai: TackleShop[] = [
   {
     id: "shop-kyoto-1",
     name: "フィッシングナカジマ",
@@ -1775,6 +1781,16 @@ export const tackleShops: TackleShop[] = [
     rating: 4.5,
     isPremium: true,
   },
+];
+
+export const tackleShops: TackleShop[] = [
+  ...shopsKansai,
+  ...shopsChains,
+  ...shopsKanto,
+  ...shopsChubu,
+  ...shopsTohokuHokkaido,
+  ...shopsChugokuShikoku,
+  ...shopsKyushu,
 ];
 
 export function getShopBySlug(slug: string): TackleShop | undefined {

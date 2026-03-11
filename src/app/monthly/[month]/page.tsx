@@ -42,6 +42,8 @@ import { MonthlySportsSorter } from "@/components/monthly-spots-sorter";
 import type { MonthlySpot } from "@/components/monthly-spots-sorter";
 import { getAllBlogPosts } from "@/lib/data/blog";
 import { prefectures } from "@/lib/data/prefectures";
+import { products as allProducts } from "@/lib/data/products";
+import { MonthlyProductRecommend } from "@/components/monthly-product-recommend";
 
 interface Props {
   params: Promise<{ month: string }>;
@@ -216,6 +218,45 @@ export default async function MonthlyGuidePage({ params }: Props) {
       const postMonth = parseInt(post.publishedAt.split("-")[1]);
       return postMonth === guide.month;
     })
+    .slice(0, 6);
+
+  // この月の釣り方に関連する商品を取得
+  const monthMethods = new Set<string>();
+  for (const fish of displayFish) {
+    if (!fish) continue;
+    const spots = fishingSpots.filter((s) =>
+      s.catchableFish.some((cf) => cf.fish.slug === fish.slug)
+    );
+    for (const spot of spots) {
+      for (const cf of spot.catchableFish) {
+        if (cf.fish.slug === fish.slug) {
+          monthMethods.add(cf.method.toLowerCase().replace(/釣り$/, "").replace(/\s+/g, ""));
+        }
+      }
+    }
+  }
+  // メソッドスラッグにマッピング
+  const METHOD_TO_SLUG: Record<string, string> = {
+    "サビキ": "sabiki", "ルアー": "lure", "エギング": "eging",
+    "ショアジギング": "jigging", "投げ": "casting", "穴": "anazuri",
+    "泳がせ": "oyogase", "ちょい投げ": "choinage", "ウキ": "ukifishing",
+    "フカセ": "fukase", "遠投カゴ": "entou-kago", "アジング": "ajing",
+    "メバリング": "mebaring",
+  };
+  const topFishSlugs = new Set(guide.topFish);
+  const monthlyProducts = allProducts
+    .filter((p) => {
+      // 魚種マッチ
+      if (p.relatedFish.some((f) => topFishSlugs.has(f))) return true;
+      // 釣り方マッチ
+      return p.relatedMethods.some((m) => {
+        for (const [keyword, slug] of Object.entries(METHOD_TO_SLUG)) {
+          if (slug === m && [...monthMethods].some((mm) => mm.includes(keyword.toLowerCase()))) return true;
+        }
+        return false;
+      });
+    })
+    .sort((a, b) => a.priority - b.priority)
     .slice(0, 6);
 
   // 自動生成FAQ（guide.faqsに追加する動的Q&A）
@@ -715,6 +756,16 @@ export default async function MonthlyGuidePage({ params }: Props) {
 
         {/* おすすめ仕掛けセット */}
         <MonthlyRigSection monthName={guide.nameJa} rigs={monthlyRigs} />
+
+        {/* この時期に揃えたい釣り道具（アフィリエイト） */}
+        {monthlyProducts.length > 0 && (
+          <section className="mb-8">
+            <MonthlyProductRecommend
+              products={monthlyProducts}
+              monthName={guide.nameJa}
+            />
+          </section>
+        )}
 
         {/* おすすめスポット */}
         {spotsForMonth.length > 0 && (

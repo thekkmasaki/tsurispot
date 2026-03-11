@@ -3,12 +3,14 @@
 import { ShoppingBag } from "lucide-react";
 import { ProductCard } from "./product-card";
 import type { Product } from "@/lib/data/products";
+import type { PageType } from "@/lib/affiliate-config";
 
 interface ProductListProps {
   products: Product[];
   title?: string;
   description?: string;
   maxItems?: number;
+  pageType?: PageType;
 }
 
 export function ProductList({
@@ -16,6 +18,7 @@ export function ProductList({
   title,
   description,
   maxItems,
+  pageType,
 }: ProductListProps) {
   const displayProducts = maxItems ? products.slice(0, maxItems) : products;
 
@@ -36,7 +39,7 @@ export function ProductList({
       )}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {displayProducts.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.id} product={product} pageType={pageType} />
         ))}
       </div>
     </section>

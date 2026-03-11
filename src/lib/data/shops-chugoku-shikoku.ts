@@ -2,41 +2,7 @@ import { TackleShop } from "@/types";
 
 export const shopsChugokuShikoku: TackleShop[] = [
   // === 広島県 ===
-  {
-    id: "shop-hiroshima-1",
-    name: "かめや釣具 総本店",
-    slug: "kameya-sohonten",
-    description:
-      "広島市南区東雲に構えるかめや釣具の総本店。広大な店内に海釣りから淡水まであらゆるジャンルの釣具を取り揃え、活きエサ・冷凍エサも豊富に常備。早朝5時から営業しており、週末は早朝4時からオープンするため、朝マズメ狙いの釣行にも頼れる拠点。",
-    latitude: 34.3789,
-    longitude: 132.4744,
-    address: "広島県広島市南区東雲3-12-17",
-    phone: "082-581-3222",
-    website: "https://kameya-fishing.com/",
-    businessHours: "月〜木 5:00〜22:00 / 金・祝前日 5:00〜24:00 / 土 4:00〜24:00 / 日・祝 4:00〜20:00",
-    closedDays: "年中無休",
-    region: {
-      id: "r-hiroshima-city",
-      prefecture: "広島県",
-      areaName: "広島市",
-      slug: "hiroshima-city",
-    },
-    hasLiveBait: true,
-    hasFrozenBait: true,
-    hasRentalRod: false,
-    services: [
-      "活きエサ販売",
-      "冷凍エサ販売",
-      "中古釣具買取",
-      "釣果情報提供",
-      "仕掛け相談",
-    ],
-    baitStock: [],
-    nearbySpotSlugs: [],
-    imageUrl: "",
-    rating: 0,
-    isPremium: false,
-  },
+  // かめや釣具 総本店は shops-chains.ts に記載
   {
     id: "shop-hiroshima-2",
     name: "アングル 五日市店",
