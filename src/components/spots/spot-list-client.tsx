@@ -84,6 +84,8 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
   const [selectedDifficulty, setSelectedDifficulty] = useState<FishingSpot["difficulty"] | "">("");
   const [selectedFacilities, setSelectedFacilities] = useState<FacilityKey[]>([]);
   const [selectedFree, setSelectedFree] = useState<"" | "free" | "paid">("");
+  const [selectedMethods, setSelectedMethods] = useState<string[]>([]);
+  const [selectedFishNames, setSelectedFishNames] = useState<string[]>([]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [isPending, startTransition] = useTransition();
@@ -133,8 +135,37 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
       .map((r) => r.areaName);
   }, [selectedPrefecture]);
 
-  const hasFilters = searchText || selectedPrefecture || selectedArea || selectedType || selectedDifficulty || selectedFacilities.length > 0 || selectedFree;
-  const activeFilterCount = [selectedPrefecture, selectedArea, selectedType, selectedDifficulty, selectedFree].filter(Boolean).length + selectedFacilities.length;
+  const topMethods = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const spot of spots) {
+      const seen = new Set<string>();
+      for (const cf of spot.catchableFish) {
+        if (cf.method && !seen.has(cf.method)) {
+          seen.add(cf.method);
+          counts.set(cf.method, (counts.get(cf.method) || 0) + 1);
+        }
+      }
+    }
+    return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 12).map(([m]) => m);
+  }, [spots]);
+
+  const topFishNames = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const spot of spots) {
+      const seen = new Set<string>();
+      for (const cf of spot.catchableFish) {
+        const name = cf.fish.name;
+        if (!seen.has(name)) {
+          seen.add(name);
+          counts.set(name, (counts.get(name) || 0) + 1);
+        }
+      }
+    }
+    return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20).map(([n]) => n);
+  }, [spots]);
+
+  const hasFilters = searchText || selectedPrefecture || selectedArea || selectedType || selectedDifficulty || selectedFacilities.length > 0 || selectedFree || selectedMethods.length > 0 || selectedFishNames.length > 0;
+  const activeFilterCount = [selectedPrefecture, selectedArea, selectedType, selectedDifficulty, selectedFree].filter(Boolean).length + selectedFacilities.length + selectedMethods.length + selectedFishNames.length;
 
   // Precompute distances for all spots if user location is available
   const distanceMap = useMemo(() => {
@@ -166,6 +197,16 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
       for (const fac of selectedFacilities) {
         if (!spot[fac]) return false;
       }
+      // 釣法フィルタ（AND: 選択したすべての釣法が可能なスポット）
+      if (selectedMethods.length > 0) {
+        const spotMethods = new Set(spot.catchableFish.map(cf => cf.method));
+        if (!selectedMethods.every(m => spotMethods.has(m))) return false;
+      }
+      // 対象魚フィルタ（OR: 選択した魚のいずれかがいるスポット）
+      if (selectedFishNames.length > 0) {
+        const spotFish = new Set(spot.catchableFish.map(cf => cf.fish.name));
+        if (!selectedFishNames.some(f => spotFish.has(f))) return false;
+      }
       return true;
     });
 
@@ -175,7 +216,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
     }
 
     return filtered;
-  }, [spots, deferredSearchText, selectedPrefecture, selectedArea, selectedType, selectedDifficulty, selectedFacilities, selectedFree, sortByDistance, distanceMap]);
+  }, [spots, deferredSearchText, selectedPrefecture, selectedArea, selectedType, selectedDifficulty, selectedFacilities, selectedFree, selectedMethods, selectedFishNames, sortByDistance, distanceMap]);
 
   const totalPages = Math.ceil(filteredSpots.length / ITEMS_PER_PAGE);
   const paginatedSpots = filteredSpots.slice(
@@ -193,6 +234,8 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
       setSelectedDifficulty("");
       setSelectedFacilities([]);
       setSelectedFree("");
+      setSelectedMethods([]);
+      setSelectedFishNames([]);
       setCurrentPage(1);
     });
   };
@@ -282,7 +325,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
       {/* Filters - always visible on desktop, collapsible on mobile */}
       <div className={cn(
         "space-y-4 overflow-hidden transition-all duration-200",
-        isFilterOpen ? "max-h-[700px] opacity-100" : "max-h-0 opacity-0 sm:max-h-none sm:opacity-100"
+        isFilterOpen ? "max-h-[1200px] opacity-100" : "max-h-0 opacity-0 sm:max-h-none sm:opacity-100"
       )}>
         {/* Prefecture filter */}
         <div>
@@ -423,6 +466,62 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
             </div>
           </div>
         </div>
+
+        {/* 釣法フィルタ */}
+        {topMethods.length > 0 && (
+          <div>
+            <p className="mb-2 text-sm font-medium text-muted-foreground">釣法</p>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              {topMethods.map((method) => {
+                const active = selectedMethods.includes(method);
+                return (
+                  <Button
+                    key={method}
+                    variant={active ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => {
+                      startTransition(() => {
+                        setSelectedMethods(active ? selectedMethods.filter(m => m !== method) : [...selectedMethods, method]);
+                        setCurrentPage(1);
+                      });
+                    }}
+                    className="min-h-[40px] text-xs sm:text-sm"
+                  >
+                    {method}
+                  </Button>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {/* 対象魚フィルタ */}
+        {topFishNames.length > 0 && (
+          <div>
+            <p className="mb-2 text-sm font-medium text-muted-foreground">対象魚</p>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              {topFishNames.map((fishName) => {
+                const active = selectedFishNames.includes(fishName);
+                return (
+                  <Button
+                    key={fishName}
+                    variant={active ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => {
+                      startTransition(() => {
+                        setSelectedFishNames(active ? selectedFishNames.filter(f => f !== fishName) : [...selectedFishNames, fishName]);
+                        setCurrentPage(1);
+                      });
+                    }}
+                    className="min-h-[40px] text-xs sm:text-sm"
+                  >
+                    {fishName}
+                  </Button>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Active filters summary + clear */}
