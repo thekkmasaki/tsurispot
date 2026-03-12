@@ -9,6 +9,10 @@ export interface CatchReport {
   comment: string;
   date: string; // "2026-02-22" 形式
   approved: boolean;
+  photoUrl?: string;
+  sizeCm?: number;
+  method?: string; // 釣法
+  weather?: string; // 天候
 }
 
 // サンプル釣果データ（承認済み）

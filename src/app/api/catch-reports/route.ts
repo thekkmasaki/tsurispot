@@ -34,6 +34,10 @@ export async function GET(request: Request) {
             comment: r.comment || "",
             date: r.catchDate || r.date || "",
             approved: true,
+            photoUrl: r.photoUrl || undefined,
+            sizeCm: r.sizeCm ? Number(r.sizeCm) : undefined,
+            method: r.method || undefined,
+            weather: r.weather || undefined,
           }));
         }
       }

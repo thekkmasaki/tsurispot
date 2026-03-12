@@ -10,13 +10,17 @@ export async function POST(request: Request) {
 
   try {
     const body = await request.json().catch(() => ({}));
-    const { spotSlug, spotName, fishName, userName, comment, date } = body as {
+    const { spotSlug, spotName, fishName, userName, comment, date, photoUrl, sizeCm, method, weather } = body as {
       spotSlug?: string;
       spotName?: string;
       fishName?: string;
       userName?: string;
       comment?: string;
       date?: string;
+      photoUrl?: string;
+      sizeCm?: number;
+      method?: string;
+      weather?: string;
     };
 
     // バリデーション
@@ -44,6 +48,22 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "未来の日付は指定できません" }, { status: 400 });
     }
 
+    // オプショナルフィールドのバリデーション
+    if (photoUrl !== undefined && (typeof photoUrl !== "string" || !/^https?:\/\//.test(photoUrl))) {
+      return NextResponse.json({ error: "写真URLが不正です" }, { status: 400 });
+    }
+    if (sizeCm !== undefined && (typeof sizeCm !== "number" || sizeCm < 0 || sizeCm > 300)) {
+      return NextResponse.json({ error: "サイズは0〜300cmの範囲で入力してください" }, { status: 400 });
+    }
+    const ALLOWED_METHODS = ["サビキ", "投げ", "ルアー", "フカセ", "エギング", "ジギング", "穴釣り", "ウキ釣り", "その他"];
+    if (method !== undefined && (typeof method !== "string" || !ALLOWED_METHODS.includes(method))) {
+      return NextResponse.json({ error: "釣法が不正です" }, { status: 400 });
+    }
+    const ALLOWED_WEATHER = ["晴れ", "曇り", "雨", "風強い"];
+    if (weather !== undefined && (typeof weather !== "string" || !ALLOWED_WEATHER.includes(weather))) {
+      return NextResponse.json({ error: "天候が不正です" }, { status: 400 });
+    }
+
     const payload = {
       spotSlug,
       spotName,
@@ -51,6 +71,10 @@ export async function POST(request: Request) {
       userName,
       comment,
       date,
+      photoUrl: photoUrl || undefined,
+      sizeCm: sizeCm || undefined,
+      method: method || undefined,
+      weather: weather || undefined,
       submittedAt: new Date().toISOString(),
       spotUrl: `https://tsurispot.com/spots/${spotSlug}`,
     };
