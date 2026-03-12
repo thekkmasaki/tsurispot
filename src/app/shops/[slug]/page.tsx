@@ -12,12 +12,13 @@ import {
   Sparkles,
   Mail,
   Tag,
+  HelpCircle,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { tackleShops, getShopBySlug } from "@/lib/data/shops";
-import { getSpotBySlug } from "@/lib/data/spots";
+import { getSpotBySlug, fishingSpots } from "@/lib/data/spots";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { LiveBaitStock } from "@/components/shops/live-bait-stock";
 import { ShopInfoLive } from "@/components/shops/shop-info-live";
@@ -43,15 +44,15 @@ export async function generateMetadata({
   const isSample = slug === "sample-premium" || slug === "sample-basic" || slug === "sample-free";
 
   return {
-    title: `${shop.name} - 釣具店情報`,
-    description: `${shop.name}（${shop.address}）の営業時間・エサ在庫・サービス情報。${shop.description}`,
+    title: `${shop.name}（${shop.region.prefecture}${shop.region.areaName}）| 営業時間・アクセス・エサ情報`,
+    description: `${shop.region.prefecture}${shop.region.areaName}の${shop.name}。${shop.description} 営業時間: ${shop.businessHours}。${shop.hasLiveBait ? "活きエサ取扱あり。" : ""}${shop.hasFrozenBait ? "冷凍エサ取扱あり。" : ""}${shop.hasRentalRod ? "レンタルロッドあり。" : ""}${shop.hasParking ? "駐車場あり。" : ""}近くの釣りスポット情報も掲載。`,
     ...(isSample ? { robots: { index: false, follow: false } } : {}),
     alternates: {
       canonical: `https://tsurispot.com/shops/${slug}`,
     },
     openGraph: {
-      title: `${shop.name} - 釣具店情報`,
-      description: shop.description,
+      title: `${shop.name}（${shop.region.prefecture}${shop.region.areaName}）| 営業時間・アクセス・エサ情報`,
+      description: `${shop.region.prefecture}${shop.region.areaName}の${shop.name}。${shop.description} 営業時間: ${shop.businessHours}。${shop.hasLiveBait ? "活きエサ取扱あり。" : ""}${shop.hasFrozenBait ? "冷凍エサ取扱あり。" : ""}${shop.hasRentalRod ? "レンタルロッドあり。" : ""}${shop.hasParking ? "駐車場あり。" : ""}近くの釣りスポット情報も掲載。`,
       url: `https://tsurispot.com/shops/${slug}`,
       siteName: "ツリスポ",
     },
@@ -139,9 +140,54 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
   };
 
   // Resolve nearby spots
-  const nearbySpots = shop.nearbySpotSlugs
-    .map((s) => getSpotBySlug(s))
-    .filter(Boolean);
+  const nearbySpots = shop.nearbySpotSlugs.length > 0
+    ? shop.nearbySpotSlugs.map((s) => getSpotBySlug(s)).filter(Boolean)
+    : fishingSpots
+        .filter((s) => s.latitude && s.longitude)
+        .map((s) => ({
+          spot: s,
+          distance: getDistance(shop.latitude, shop.longitude, s.latitude, s.longitude),
+        }))
+        .sort((a, b) => a.distance - b.distance)
+        .slice(0, 5)
+        .map((entry) => entry.spot);
+
+  // FAQ data (non-sample only)
+  const faqs = [
+    {
+      q: `${shop.name}の営業時間は？`,
+      a: `${shop.name}の営業時間は${shop.businessHours || "お問い合わせください"}です。${shop.closedDays ? `定休日は${shop.closedDays}です。` : ""}`,
+    },
+    {
+      q: `${shop.name}の場所・アクセスは？`,
+      a: `${shop.name}は${shop.address}にあります。${shop.hasParking ? "駐車場があるので車でのアクセスも便利です。" : ""}`,
+    },
+    {
+      q: `${shop.name}で活きエサは買えますか？`,
+      a: shop.hasLiveBait
+        ? `はい、${shop.name}では活きエサを取り扱っています。在庫状況はページ上部のエサ在庫情報でご確認いただけます。`
+        : `${shop.name}では現在活きエサの取り扱い情報は登録されていません。${shop.hasFrozenBait ? "冷凍エサは取り扱いがあります。" : ""}詳しくは店舗に直接お問い合わせください。`,
+    },
+    ...(shop.hasRentalRod ? [{
+      q: `${shop.name}でレンタルロッドは借りられますか？`,
+      a: `はい、${shop.name}ではレンタルロッドのサービスがあります。手ぶらでの来店でも釣りを楽しめます。`,
+    }] : []),
+    {
+      q: `${shop.name}の近くの釣りスポットは？`,
+      a: `${shop.name}の周辺には複数の釣りスポットがあります。詳しくはページ内の「近くの釣りスポット」セクションをご覧ください。`,
+    },
+  ];
+
+  // FAQPage JSON-LD
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqs.map((faq) => ({
+      "@type": "Question",
+      name: faq.q,
+      acceptedAnswer: { "@type": "Answer", text: faq.a },
+    })),
+  };
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
@@ -155,6 +201,12 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
+      {shouldOutputJsonLd && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      )}
 
       {/* Breadcrumb */}
       <Breadcrumb
@@ -200,7 +252,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
           )}
           {isSample && (
             <Badge variant="outline" className="text-xs text-muted-foreground">
-              {slug === "sample-free" ? "無料プラン" : isPro ? "プロプラン ¥2,980/月" : "ベーシックプラン ¥500/月"} サンプル
+              {slug === "sample-free" ? "無料掲載" : isPro ? "プロプラン ¥2,980/月" : "ベーシックプラン ¥500/月"} サンプル
             </Badge>
           )}
         </div>
@@ -384,7 +436,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
             <CardHeader>
               <CardTitle className="text-lg flex items-center gap-2">
                 <Sparkles className={`w-5 h-5 ${isPro ? "text-amber-500" : isBasic ? "text-blue-500" : "text-gray-500"}`} />
-                {isPro ? "このページはプロプランのサンプルです" : isBasic ? "このページはベーシックプランのサンプルです" : "このページは無料プランのサンプルです"}
+                {isPro ? "このページはプロプランのサンプルです" : isBasic ? "このページはベーシックプランのサンプルです" : "このページは無料掲載のサンプルです"}
               </CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
@@ -420,12 +472,11 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                       { feature: "エサ在庫更新", free: "1日10回", basic: "1日10回", pro: "1日50回" },
                       { feature: "公式バッジ表示", free: false, basic: true, pro: true },
                       { feature: "検索結果の優先表示", free: false, basic: true, pro: true },
+                      { feature: "Googleのお店情報を整備", free: false, basic: true, pro: true },
                       { feature: "店舗写真の掲載", free: false, basic: "3枚まで", pro: "20枚まで" },
-                      { feature: "アクセス解析", free: false, basic: false, pro: "詳細" },
                       { feature: "店主からのメッセージ", free: false, basic: false, pro: true },
                       { feature: "クーポン配信", free: false, basic: false, pro: true },
                       { feature: "スポットページでの商品PR", free: false, basic: false, pro: true },
-                      { feature: "Googleのお店情報を整備", free: false, basic: true, pro: true },
                     ].map((row, i) => (
                       <tr key={row.feature} className={`border-b last:border-0 ${row.highlight ? "bg-primary/5 dark:bg-primary/10" : i % 2 === 0 ? "bg-muted/20" : ""}`}>
                         <td className={`py-2.5 pl-4 pr-4 ${row.highlight ? "font-bold text-primary" : "font-medium"}`}>
@@ -521,6 +572,30 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
         </div>
       )}
 
+      {/* FAQ（サンプル以外の全店舗ページに表示） */}
+      {!isSample && (
+        <div className="mt-8">
+          <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
+            <HelpCircle className="size-5 text-primary" />
+            {shop.name}のよくある質問
+          </h2>
+          <div className="space-y-3">
+            {faqs.map((faq) => (
+              <div key={faq.q} className="rounded-lg border p-4">
+                <p className="text-sm font-bold flex items-start gap-2">
+                  <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-blue-100 text-[10px] font-bold text-blue-700">Q</span>
+                  {faq.q}
+                </p>
+                <p className="mt-2 text-sm text-muted-foreground flex items-start gap-2">
+                  <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-green-100 text-[10px] font-bold text-green-700">A</span>
+                  {faq.a}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* オーナー向けCTA（サンプル以外の全店舗ページに表示） */}
       {!isSample && (
         <div className="mt-8 rounded-xl border-2 border-dashed border-blue-200 bg-blue-50/50 p-5 dark:border-blue-800 dark:bg-blue-950/20">
@@ -567,8 +642,9 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
             <CardContent>
               <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
                 <div className="flex flex-col rounded-lg border bg-background p-3">
-                  <p className="text-sm font-bold text-green-700">無料プラン</p>
+                  <p className="text-sm font-bold text-green-700">無料掲載</p>
                   <p className="text-lg font-bold">¥0<span className="text-xs font-bold text-green-600 ml-1">永久無料</span></p>
+                  <p className="text-[10px] text-muted-foreground">基本情報を送るだけでOK</p>
                   <ul className="mt-2 flex-1 space-y-1">
                     {["基本情報の掲載", "ツリスポ内の近くの釣りスポットと連携", "Google検索への配信", "エサ在庫更新（1日10回）"].map((t) => (
                       <li key={t} className="flex items-start gap-1.5 text-xs">
@@ -579,7 +655,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                   </ul>
                   <Link href="/shops/sample-free" className="mt-3 flex items-center justify-center gap-1 rounded-md border border-green-300 bg-green-50 px-3 py-1.5 text-xs font-bold text-green-700 transition-colors hover:bg-green-100 dark:bg-green-950/30 dark:border-green-800">
                     <ChevronRight className="size-3" />
-                    デモページを見る
+                    サンプルページを見る
                   </Link>
                 </div>
                 <div className="flex flex-col rounded-lg border border-blue-200 bg-blue-50/50 p-3 dark:bg-blue-950/20">
@@ -588,7 +664,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                   <p className="text-[10px] text-muted-foreground">初年度特別価格（2年目以降 ¥980/月）</p>
                   <p className="text-xs font-bold text-red-600">今なら3ヶ月無料！</p>
                   <ul className="mt-2 flex-1 space-y-1">
-                    {["無料プランの全機能", "検索結果での優先表示", "写真3枚まで掲載", "公式バッジ表示", "Googleのお店情報を整備"].map((t) => (
+                    {["無料掲載の全機能", "検索結果での優先表示", "写真3枚まで掲載", "公式バッジ表示", "Googleのお店情報を整備"].map((t) => (
                       <li key={t} className="flex items-start gap-1.5 text-xs">
                         <CheckCircle className="mt-0.5 size-3 shrink-0 text-blue-500" />
                         <span>{t}</span>
@@ -597,7 +673,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                   </ul>
                   <Link href="/shops/sample-basic" className="mt-3 flex items-center justify-center gap-1 rounded-md border border-blue-300 bg-blue-50 px-3 py-1.5 text-xs font-bold text-blue-700 transition-colors hover:bg-blue-100 dark:bg-blue-950/30 dark:border-blue-800">
                     <ChevronRight className="size-3" />
-                    デモページを見る
+                    サンプルページを見る
                   </Link>
                 </div>
                 <div className="flex flex-col rounded-lg border border-amber-200 bg-amber-50/50 p-3 dark:bg-amber-950/20">
@@ -606,7 +682,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                   <p className="text-[10px] text-muted-foreground">初年度特別価格（2年目以降 ¥2,980/月）</p>
                   <p className="text-xs font-bold text-red-600">今なら3ヶ月無料！</p>
                   <ul className="mt-2 flex-1 space-y-1">
-                    {["ベーシックの全機能", "写真20枚・店主メッセージ", "詳細アクセス解析", "クーポン配信機能", "Googleのお店情報を整備"].map((t) => (
+                    {["ベーシックの全機能", "写真20枚・店主メッセージ", "クーポン配信機能", "Googleのお店情報を整備"].map((t) => (
                       <li key={t} className="flex items-start gap-1.5 text-xs">
                         <CheckCircle className="mt-0.5 size-3 shrink-0 text-amber-500" />
                         <span>{t}</span>
@@ -615,12 +691,64 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                   </ul>
                   <Link href="/shops/sample-premium" className="mt-3 flex items-center justify-center gap-1 rounded-md border border-amber-300 bg-amber-50 px-3 py-1.5 text-xs font-bold text-amber-700 transition-colors hover:bg-amber-100 dark:bg-amber-950/30 dark:border-amber-800">
                     <ChevronRight className="size-3" />
-                    デモページを見る
+                    サンプルページを見る
                   </Link>
                 </div>
               </div>
             </CardContent>
           </Card>
+
+          {/* 機能比較表 */}
+          <div className="overflow-x-auto rounded-lg border">
+            <table className="w-full text-sm">
+              <thead>
+                <tr className="border-b bg-muted/50">
+                  <th className="text-left py-3 pl-4 pr-4 font-bold">機能</th>
+                  <th className="text-center py-3 px-3 bg-green-50 dark:bg-green-950/20">
+                    <span className="font-bold text-green-700">無料</span><br />
+                    <span className="text-xs font-bold text-green-600">¥0</span>
+                  </th>
+                  <th className="text-center py-3 px-3 bg-blue-50 dark:bg-blue-950/20">
+                    <span className="font-bold text-blue-700">ベーシック</span><br />
+                    <span className="text-xs font-normal">¥500/月</span><br />
+                    <span className="text-[9px] text-muted-foreground">2年目以降 ¥980</span><br />
+                    <span className="text-[10px] font-bold text-red-600">3ヶ月無料</span>
+                  </th>
+                  <th className="text-center py-3 px-3 bg-amber-50 dark:bg-amber-950/20">
+                    <span className="font-bold text-amber-700">プロ</span><br />
+                    <span className="text-xs font-normal">¥1,980/月</span><br />
+                    <span className="text-[9px] text-muted-foreground">2年目以降 ¥2,980</span><br />
+                    <span className="text-[10px] font-bold text-red-600">3ヶ月無料</span>
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="text-sm">
+                {[
+                  { feature: "基本情報の掲載", free: true, basic: true, pro: true },
+                  { feature: "ツリスポ内の近くの釣りスポットと連携", free: true, basic: true, pro: true, highlight: true, note: "2,500件のスポット詳細ページからお店を直接案内" },
+                  { feature: "Google検索への配信", free: true, basic: true, pro: true },
+                  { feature: "エサ在庫更新", free: "1日10回", basic: "1日10回", pro: "1日50回" },
+                  { feature: "公式バッジ表示", free: false, basic: true, pro: true },
+                  { feature: "検索結果の優先表示", free: false, basic: true, pro: true },
+                  { feature: "Googleのお店情報を整備", free: false, basic: true, pro: true },
+                  { feature: "店舗写真の掲載", free: false, basic: "3枚まで", pro: "20枚まで" },
+                  { feature: "店主からのメッセージ", free: false, basic: false, pro: true },
+                  { feature: "クーポン配信", free: false, basic: false, pro: true },
+                  { feature: "スポットページでの商品PR", free: false, basic: false, pro: true },
+                ].map((row, i) => (
+                  <tr key={row.feature} className={`border-b last:border-0 ${row.highlight ? "bg-primary/5 dark:bg-primary/10" : i % 2 === 0 ? "bg-muted/20" : ""}`}>
+                    <td className={`py-2.5 pl-4 pr-4 ${row.highlight ? "font-bold text-primary" : "font-medium"}`}>
+                      {row.feature}
+                      {row.note && <span className="block text-[11px] font-normal text-muted-foreground mt-0.5">{row.note}</span>}
+                    </td>
+                    <td className="text-center py-2.5 px-3">{renderCell(row.free)}</td>
+                    <td className="text-center py-2.5 px-3">{renderCell(row.basic)}</td>
+                    <td className="text-center py-2.5 px-3">{renderCell(row.pro)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
 
           <div className="text-center">
             <Link
@@ -635,6 +763,17 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
       )}
     </div>
   );
+}
+
+/** 2地点間の距離をハーバーサイン公式で計算（km） */
+function getDistance(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const R = 6371;
+  const dLat = (lat2 - lat1) * Math.PI / 180;
+  const dLon = (lon2 - lon1) * Math.PI / 180;
+  const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+    Math.sin(dLon / 2) * Math.sin(dLon / 2);
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
 /** 比較表のセル描画 */

@@ -25,19 +25,22 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { ShopListingForm } from "@/components/shops/shop-listing-form";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
+import { tackleShops } from "@/lib/data/shops";
 
 const spotCount = fishingSpots.length;
 const fishCount = fishSpecies.length;
+const tackleShopCount = tackleShops.length;
 
 export const metadata: Metadata = {
-  title: "釣具店の集客を無料で支援｜エサ在庫管理・店舗掲載 - ツリスポ パートナー",
-  description: `釣具店・エサ店の集客にお困りではありませんか？ツリスポなら無料で店舗ページを作成、エサ在庫をリアルタイム公開できます。全国${spotCount}+釣りスポットからの送客で新規顧客を獲得。初期費用0円、スマホだけで運用OK。`,
-  keywords: ["釣具店 集客", "釣具店 ホームページ", "エサ店 在庫管理", "釣具店 Googleマップ", "釣具店 無料掲載", "釣具店 MEO", "釣具店 SNS集客", "エサ 在庫 公開"],
+  title: "釣具店の集客を無料で強化｜店舗ページ作成・エサ在庫管理 - ツリスポ",
+  description: `釣具店・エサ店の集客にお困りではありませんか？ツリスポなら無料で店舗ページを作成、エサ在庫をリアルタイム公開。全国${spotCount}+の釣りスポットページからお店へ直接送客。初期費用0円・スマホだけで運用OK。個人経営の釣具店から大手チェーンまで全国${tackleShopCount}店舗が掲載中。`,
+  keywords: ["釣具店 集客", "釣具店 集客方法", "釣具店 ホームページ", "エサ店 在庫管理", "釣具店 Googleマップ", "釣具店 無料掲載", "釣具店 MEO対策", "釣具店 ネット集客", "釣具店 売上アップ", "エサ 在庫 公開", "釣具店 開業"],
   openGraph: {
-    title: "釣具店の集客を無料で支援｜ツリスポ パートナー",
-    description: `初期費用0円で店舗ページ作成＋エサ在庫管理。全国${spotCount}+スポットの釣り人をお店に送客します。`,
+    title: "釣具店の集客を無料で強化｜ツリスポ",
+    description: `初期費用0円で店舗ページ作成＋エサ在庫管理。全国${spotCount}+スポットの釣り人をお店に送客。${tackleShopCount}店舗が掲載中。`,
     type: "website",
     url: "https://tsurispot.com/partner",
     siteName: "ツリスポ",
@@ -139,28 +142,36 @@ const STEPS = [
 
 const FAQS = [
   {
-    q: "費用はかかりますか？",
-    a: "いいえ、現在QRコードの作成・設置は完全無料でご提供しています。追加費用も一切かかりません。",
+    q: "掲載に費用はかかりますか？",
+    a: "基本掲載は永久無料です。店舗名・住所・電話番号・営業時間・エサ在庫更新（1日10回）など、集客に必要な機能が初期費用0円・月額0円でご利用いただけます。より充実した集客機能が使える有料プラン（月額500円〜）もご用意しています。",
   },
   {
-    q: "QRコードはどのように届きますか？",
-    a: "メールでPDFファイルをお送りします。A4やポストカードサイズなど、ご希望のサイズで印刷してお使いいただけます。",
+    q: "掲載までどのくらいかかりますか？",
+    a: "基本情報をお送りいただいてから、通常1〜3営業日で掲載が完了します。掲載完了後、お店専用の管理URLをメールでお届けします。",
   },
   {
-    q: "掲載されている情報は定期的に更新されますか？",
-    a: "はい、釣りスポット情報・季節の魚種データ・釣り方ガイドなどは継続的に更新しています。QRコードの差し替えは不要で、常に最新情報が表示されます。",
+    q: "掲載するとどうやって集客につながるんですか？",
+    a: `ツリスポには全国${spotCount.toLocaleString()}件以上の釣りスポット詳細ページがあり、各ページに「近くの釣具店」として貴店が自動表示されます。釣り場に行く前にお店に寄る動線ができるため、新規のお客様の来店につながります。さらにGoogleの構造化データでお店の情報が検索結果にも表示されやすくなります。`,
   },
   {
-    q: "自分の店舗もサイトに掲載できますか？",
-    a: "はい、釣具店・船宿・管理釣り場などの店舗情報の掲載も承っています。お気軽にご相談ください。",
+    q: "個人経営の小さなお店でも掲載できますか？",
+    a: "はい、個人経営の釣具店やエサ店こそ大歓迎です。大手チェーンと並んで同じ条件で掲載されるため、地元のお客様にしっかりアピールできます。現在掲載中の店舗の多くが個人経営の地域密着型のお店です。",
   },
   {
-    q: "複数の種類のQRコードを設置できますか？",
-    a: "はい、全国版・都道府県版・初心者版・診断版など、複数のQRコードを組み合わせてお使いいただけます。すべて無料です。",
+    q: "エサの在庫管理はどうやって使うんですか？",
+    a: "掲載完了後にお届けする管理URLにスマホからアクセスするだけ。餌の名前・価格・在庫状況を入力すると、お店のページにリアルタイムで反映されます。パソコンは不要で、スマホだけで完結します。",
   },
   {
-    q: "QRコードのデザインをカスタマイズできますか？",
-    a: "基本デザインでのご提供となりますが、店舗名の記載など簡単なカスタマイズには対応可能です。お問い合わせ時にご相談ください。",
+    q: "掲載した情報は後から変更できますか？",
+    a: "はい、いつでも変更可能です。営業時間の変更、定休日の更新、取り扱い商品の追加など、メールでご連絡いただければ対応いたします。有料プランではご自身で管理画面から直接編集も可能です。",
+  },
+  {
+    q: "有料プランと無料掲載の違いは何ですか？",
+    a: "無料掲載では基本情報の掲載とエサ在庫更新（1日10回）が使えます。有料プランでは、検索結果での優先表示・公式バッジ・写真掲載・Googleのお店情報の整備など、集客力をさらに強化する機能が追加されます。まずは無料で試して、効果を実感してからアップグレードをご検討いただけます。",
+  },
+  {
+    q: "QRコードも設置できますか？",
+    a: "はい、QRコードの作成・送付も完全無料です。店頭に設置すると、お客様がスマホで読み取って近くの釣りスポットや釣り方を確認できます。「どこで釣れる？」「何が必要？」といったよくある質問への対応を減らせます。",
   },
 ];
 
@@ -261,29 +272,29 @@ export default function PartnerPage() {
       <section className="mb-14 text-center sm:mb-20">
         <Badge className="mb-4 bg-blue-100 text-blue-700 hover:bg-blue-100 dark:bg-blue-900/30 dark:text-blue-400">
           <Store className="mr-1 size-3" />
-          釣具店・船宿・管理釣り場 向け
+          全国{tackleShopCount}店舗が掲載中
         </Badge>
 
         <h1 className="text-2xl font-bold tracking-tight sm:text-4xl lg:text-5xl">
-          お客様の「よく聞かれる質問」
+          釣具店の集客を
           <br />
-          減らしませんか？
+          <span className="text-blue-600">無料</span>で強化しませんか？
         </h1>
 
         <p className="mx-auto mt-4 max-w-2xl text-base text-muted-foreground sm:text-lg">
-          <strong>QRコード1枚</strong>で、店員さんの負担を軽減。
+          ツリスポは全国{spotCount.toLocaleString()}件以上の釣りスポットを掲載する釣り情報サイトです。
           <br className="hidden sm:block" />
-          「どこで釣れる？」「何が必要？」をお客様自身のスマホで解決できます。
+          お店の情報を掲載するだけで、<strong>釣り人が自然にお店を見つけて来店</strong>します。
         </p>
 
-        <div className="mx-auto mt-6 flex max-w-md items-center justify-center gap-3 rounded-xl border-2 border-dashed border-blue-200 bg-blue-50/50 p-4 dark:border-blue-800 dark:bg-blue-950/20">
-          <QrCode className="size-10 shrink-0 text-blue-600 dark:text-blue-400" />
+        <div className="mx-auto mt-6 flex max-w-lg items-center justify-center gap-3 rounded-xl border-2 border-dashed border-green-200 bg-green-50/50 p-4 dark:border-green-800 dark:bg-green-950/20">
+          <Store className="size-10 shrink-0 text-green-600 dark:text-green-400" />
           <div className="text-left">
-            <p className="text-sm font-bold text-blue-800 dark:text-blue-300">
-              設置完全無料
+            <p className="text-sm font-bold text-green-800 dark:text-green-300">
+              初期費用0円・月額0円で掲載スタート
             </p>
-            <p className="text-xs text-blue-600 dark:text-blue-400">
-              QRコードの作成から送付まで、費用は一切かかりません
+            <p className="text-xs text-green-600 dark:text-green-400">
+              基本情報を送るだけ。確認後すぐにお店のページが公開されます
             </p>
           </div>
         </div>
@@ -293,11 +304,11 @@ export default function PartnerPage() {
           {[
             {
               value: `${spotCount.toLocaleString()}+`,
-              label: "掲載スポット数",
+              label: "掲載釣りスポット",
             },
-            { value: `${fishCount}+`, label: "対応魚種" },
+            { value: `${tackleShopCount}+`, label: "掲載釣具店" },
             { value: "47", label: "都道府県カバー" },
-            { value: "1,500+", label: "総ページ数" },
+            { value: `${fishCount}+`, label: "対応魚種" },
           ].map((stat) => (
             <div
               key={stat.label}
@@ -312,20 +323,50 @@ export default function PartnerPage() {
             </div>
           ))}
         </div>
+      </section>
 
-        <div className="mt-8">
-          <a href="mailto:fishingspotjapan@gmail.com?subject=QRコード設置希望">
-            <Button
-              size="lg"
-              className="min-h-[52px] gap-2 bg-blue-600 px-10 text-base text-white hover:bg-blue-700"
-            >
-              <Mail className="size-5" />
-              まずはお気軽にご相談ください
-            </Button>
-          </a>
-          <p className="mt-2 text-xs text-muted-foreground">
-            fishingspotjapan@gmail.com
-          </p>
+      {/* ===== 掲載のメリット ===== */}
+      <section className="mb-14 sm:mb-20">
+        <h2 className="mb-2 text-center text-xl font-bold sm:text-2xl">
+          ツリスポに掲載するとこうなります
+        </h2>
+        <p className="mb-8 text-center text-sm text-muted-foreground">
+          お店のページが釣り人の導線上に自動で表示されます
+        </p>
+        <div className="grid gap-4 sm:grid-cols-3">
+          <Card className="gap-0 py-0">
+            <CardContent className="p-5">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-green-50 dark:bg-green-900/20">
+                <MapPin className="size-5 text-green-600" />
+              </div>
+              <h3 className="mt-3 text-sm font-bold">釣りスポットページから送客</h3>
+              <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+                「○○漁港の近くの釣具店」として、{spotCount.toLocaleString()}件以上のスポット詳細ページからお店を直接案内。釣り場に行く前にお店に寄る動線を作ります。
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="gap-0 py-0">
+            <CardContent className="p-5">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-blue-50 dark:bg-blue-900/20">
+                <Search className="size-5 text-blue-600" />
+              </div>
+              <h3 className="mt-3 text-sm font-bold">Google検索に自動配信</h3>
+              <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+                お店の情報はLocalBusiness構造化データとしてGoogleに配信。「○○市 釣具店」「近くのエサ店」などの検索で表示されやすくなります。
+              </p>
+            </CardContent>
+          </Card>
+          <Card className="gap-0 py-0">
+            <CardContent className="p-5">
+              <div className="flex size-10 items-center justify-center rounded-xl bg-amber-50 dark:bg-amber-900/20">
+                <Smartphone className="size-5 text-amber-600" />
+              </div>
+              <h3 className="mt-3 text-sm font-bold">エサの在庫をリアルタイム公開</h3>
+              <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">
+                「今日エサある？」の電話対応を削減。スマホから在庫を更新するだけで、お客様がサイト上でいつでも確認できます。
+              </p>
+            </CardContent>
+          </Card>
         </div>
       </section>
 
@@ -606,97 +647,9 @@ export default function PartnerPage() {
         </div>
       </section>
 
-      {/* ===== エサ在庫管理サービス ===== */}
+      {/* ===== 無料掲載申し込み ===== */}
       <section className="mb-14 sm:mb-20">
-        <div className="rounded-2xl border-2 border-emerald-200 bg-gradient-to-br from-emerald-50 to-teal-50 p-6 dark:border-emerald-800 dark:from-emerald-950/30 dark:to-teal-950/30 sm:p-10">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="flex size-12 items-center justify-center rounded-xl bg-emerald-600">
-              <Store className="size-7 text-white" />
-            </div>
-            <div>
-              <h2 className="text-xl font-bold sm:text-2xl">エサ在庫管理サービス</h2>
-              <p className="text-sm text-emerald-700 dark:text-emerald-400">スマホから簡単に餌の在庫状況をリアルタイム公開</p>
-            </div>
-          </div>
-
-          <p className="text-sm leading-relaxed text-emerald-900 dark:text-emerald-200 sm:text-base mb-6">
-            お客様からの「今日エサある？」の電話対応を減らせます。専用の管理画面から餌の在庫状況を更新するだけで、ツリスポ上でリアルタイム公開。お客様はサイトからいつでも在庫を確認できます。
-          </p>
-
-          <div className="grid gap-4 sm:grid-cols-3 mb-8">
-            <div className="rounded-xl bg-white/70 p-4 dark:bg-gray-900/30">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="flex size-7 items-center justify-center rounded-full bg-emerald-100 text-sm font-bold text-emerald-700">1</span>
-                <h3 className="text-sm font-bold">無料掲載を申請</h3>
-              </div>
-              <p className="text-xs text-muted-foreground">店舗情報を送信するだけ。確認後すぐに掲載されます。</p>
-            </div>
-            <div className="rounded-xl bg-white/70 p-4 dark:bg-gray-900/30">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="flex size-7 items-center justify-center rounded-full bg-emerald-100 text-sm font-bold text-emerald-700">2</span>
-                <h3 className="text-sm font-bold">管理URLを受け取る</h3>
-              </div>
-              <p className="text-xs text-muted-foreground">掲載完了後、お店専用の管理ページURLをメールでお届けします。</p>
-            </div>
-            <div className="rounded-xl bg-white/70 p-4 dark:bg-gray-900/30">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="flex size-7 items-center justify-center rounded-full bg-emerald-100 text-sm font-bold text-emerald-700">3</span>
-                <h3 className="text-sm font-bold">在庫を入力</h3>
-              </div>
-              <p className="text-xs text-muted-foreground">餌の名前・価格・在庫状況を入力するだけ。サイトに即反映されます。</p>
-            </div>
-          </div>
-
-          <div className="flex flex-col items-center gap-3 text-center">
-            <div className="rounded-xl bg-white/80 p-4 dark:bg-gray-900/40 mb-4">
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-sm">
-                <div>
-                  <p className="font-bold text-emerald-700 dark:text-emerald-400 mb-1">無料プラン <span className="text-xs">永久無料</span></p>
-                  <p className="text-xs text-muted-foreground">エサ在庫更新（1日10回まで）・基本情報表示</p>
-                </div>
-                <div>
-                  <p className="font-bold text-blue-600 dark:text-blue-400 mb-1">ベーシック <span className="font-normal text-xs">初年度 月額500円</span></p>
-                  <p className="text-[10px] text-muted-foreground">2年目以降 月額980円</p>
-                  <p className="text-xs text-muted-foreground">公式バッジ・検索優先表示・写真3枚・Googleのお店情報を整備</p>
-                  <p className="text-xs font-bold text-red-600">今なら3ヶ月無料！</p>
-                </div>
-                <div>
-                  <p className="font-bold text-amber-600 dark:text-amber-400 mb-1">プロ <span className="font-normal text-xs">初年度 月額1,980円</span></p>
-                  <p className="text-[10px] text-muted-foreground">2年目以降 月額2,980円</p>
-                  <p className="text-xs text-muted-foreground">1日50回更新・写真20枚・クーポン配信・MEOサポート</p>
-                  <p className="text-xs font-bold text-red-600">今なら3ヶ月無料！</p>
-                </div>
-              </div>
-              <p className="text-[11px] text-muted-foreground mt-3">※ 有料プランは3ヶ月無料でお試しいただけます。無料期間中の解約も可能です。4ヶ月目から通常料金が適用されます。</p>
-            </div>
-            <div className="flex flex-wrap justify-center gap-3 text-xs text-emerald-700 dark:text-emerald-400">
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="size-3.5" />
-                <span>初期費用 0円</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="size-3.5" />
-                <span>無料プランあり</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <CheckCircle2 className="size-3.5" />
-                <span>スマホだけでOK</span>
-              </div>
-            </div>
-            <a href="mailto:fishingspotjapan@gmail.com?subject=エサ在庫管理サービス希望&body=店舗名：%0A住所：%0Aご連絡先：%0Aご希望プラン（無料/ベーシック/プロ）：%0A">
-              <Button
-                size="lg"
-                className="min-h-[52px] gap-2 bg-emerald-600 px-10 text-base text-white hover:bg-emerald-700"
-              >
-                <Mail className="size-5" />
-                エサ在庫管理を始める
-              </Button>
-            </a>
-            <p className="text-xs text-muted-foreground">
-              fishingspotjapan@gmail.com にメールが届きます
-            </p>
-          </div>
-        </div>
+        <ShopListingForm />
       </section>
 
       {/* ===== CTA ===== */}

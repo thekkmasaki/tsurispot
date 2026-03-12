@@ -119,16 +119,16 @@ export default function ShopsListPage() {
           </CardHeader>
           <CardContent className="space-y-6">
             <p className="text-base leading-relaxed">
-              ツリスポは全国の釣り人が利用する釣りスポット情報サイトです。
-              貴店の情報を掲載して、地元の釣り人にアピールしませんか？
+              ツリスポは全国{tackleShops.length}店舗以上が掲載中の釣り情報サイトです。
+              <strong>初期費用0円・月額0円</strong>で貴店の情報を掲載して、地元の釣り人にアピールしませんか？
             </p>
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-              {/* 無料プラン */}
+              {/* 無料掲載 */}
               <Card>
                 <CardHeader className="pb-2">
                   <CardTitle className="text-lg text-green-700 dark:text-green-400">
-                    無料プラン
+                    無料掲載
                   </CardTitle>
                   <p className="text-2xl font-bold">¥0</p>
                 </CardHeader>
@@ -162,7 +162,7 @@ export default function ShopsListPage() {
                 <CardContent>
                   <ul className="space-y-2">
                     {[
-                      "無料プランの全機能",
+                      "無料掲載の全機能",
                       "検索結果での優先表示",
                       "写真3枚まで掲載",
                       "公式バッジ表示",
@@ -191,7 +191,6 @@ export default function ShopsListPage() {
                     {[
                       "ベーシックの全機能",
                       "写真20枚・店主メッセージ",
-                      "詳細アクセス解析",
                       "クーポン配信機能",
                       "スポットページでの商品PR",
                     ].map((text) => (
@@ -228,16 +227,25 @@ export default function ShopsListPage() {
               </Link>
             </div>
 
-            {/* お問い合わせ */}
-            <div className="flex items-center gap-2 pt-2 text-sm">
-              <Mail className="size-4 text-primary" />
-              <span className="text-muted-foreground">お問い合わせ:</span>
-              <a
-                href="mailto:fishingspotjapan@gmail.com"
-                className="text-primary hover:underline"
+            {/* 詳細・お問い合わせ */}
+            <div className="flex flex-col gap-2 pt-2 text-sm sm:flex-row sm:items-center">
+              <Link
+                href="/partner"
+                className="inline-flex items-center gap-1 font-medium text-primary hover:underline"
               >
-                fishingspotjapan@gmail.com
-              </a>
+                掲載の詳細・お申し込みはこちら
+                <ChevronRight className="size-3.5" />
+              </Link>
+              <span className="hidden sm:inline text-muted-foreground">|</span>
+              <div className="flex items-center gap-2">
+                <Mail className="size-4 text-primary" />
+                <a
+                  href="mailto:fishingspotjapan@gmail.com"
+                  className="text-primary hover:underline"
+                >
+                  fishingspotjapan@gmail.com
+                </a>
+              </div>
             </div>
           </CardContent>
         </Card>
