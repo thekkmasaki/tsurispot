@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1080px;
+    font-family: 'Noto Sans JP', sans-serif;
+    background: #0f172a;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* 背景写真（海のグラデーションで代用） */
+  .bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, #1e3a5f 0%, #0c2340 50%, #0a1628 100%);
+  }
+  .bg::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(to top, rgba(10,22,40,0.95), transparent);
+  }
+
+  /* 上部: エリア名 */
+  .top-bar {
+    position: relative;
+    z-index: 1;
+    padding: 56px 64px 0;
+  }
+  .area-tag {
+    display: inline-block;
+    background: #0ea5e9;
+    color: white;
+    font-size: 24px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 8px;
+    letter-spacing: 1px;
+  }
+  .date {
+    margin-top: 16px;
+    font-size: 22px;
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* 中央: メイン数字 */
+  .center {
+    position: relative;
+    z-index: 1;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 64px;
+  }
+  .fish-name {
+    font-size: 40px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.8);
+    letter-spacing: 4px;
+  }
+  .big-number {
+    font-size: 180px;
+    font-weight: 900;
+    line-height: 1;
+    color: #fbbf24;
+    text-shadow: 0 4px 40px rgba(251,191,36,0.3);
+    margin: -10px 0;
+  }
+  .big-unit {
+    font-size: 80px;
+    font-weight: 900;
+    color: #fbbf24;
+  }
+  .spot-name {
+    font-size: 32px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    margin-top: 8px;
+  }
+  .method {
+    margin-top: 12px;
+    font-size: 24px;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* キャッチコピー */
+  .catch-copy {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 0 64px;
+    margin-bottom: 24px;
+  }
+  .catch-copy h2 {
+    font-size: 52px;
+    font-weight: 900;
+    line-height: 1.3;
+  }
+  .catch-copy .highlight {
+    color: #fbbf24;
+  }
+
+  /* 下部: 他の釣果 */
+  .bottom-results {
+    position: relative;
+    z-index: 1;
+    padding: 0 64px;
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .mini-card {
+    flex: 1;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 16px 20px;
+    text-align: center;
+  }
+  .mini-card .mini-spot {
+    font-size: 18px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.9);
+  }
+  .mini-card .mini-fish {
+    font-size: 15px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 2px;
+  }
+  .mini-card .mini-size {
+    font-size: 24px;
+    font-weight: 900;
+    color: #fbbf24;
+    margin-top: 6px;
+  }
+
+  /* フッター */
+  .footer {
+    position: relative;
+    z-index: 1;
+    padding: 20px 64px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .logo-box {
+    width: 44px;
+    height: 44px;
+    background: #0ea5e9;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 900;
+    color: white;
+  }
+  .logo-name {
+    font-size: 26px;
+    font-weight: 900;
+    letter-spacing: 1px;
+  }
+  .logo-sub {
+    font-size: 14px;
+    color: rgba(255,255,255,0.4);
+  }
+  .swipe {
+    font-size: 18px;
+    color: rgba(255,255,255,0.4);
+  }
+</style>
+</head>
+<body>
+  <div class="bg"></div>
+
+  <div class="top-bar">
+    <span class="area-tag">明石・神戸エリア</span>
+    <div class="date">2026年3月 第1週 釣果速報</div>
+  </div>
+
+  <div class="catch-copy">
+    <h2>チヌ<span class="highlight">乗っ込み</span>開幕</h2>
+  </div>
+
+  <div class="center">
+    <div class="fish-name">チヌ（クロダイ）</div>
+    <div>
+      <span class="big-number">49.5</span><span class="big-unit">cm</span>
+    </div>
+    <div class="spot-name">平磯海づり公園</div>
+    <div class="method">フカセ釣り</div>
+  </div>
+
+  <div class="bottom-results">
+    <div class="mini-card">
+      <div class="mini-spot">須磨海づり公園</div>
+      <div class="mini-fish">チヌ / エビ撒き</div>
+      <div class="mini-size">44.5cm</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-spot">アジュール舞子</div>
+      <div class="mini-fish">カレイ / 投げ釣り</div>
+      <div class="mini-size">釣れ出し</div>
+    </div>
+    <div class="mini-card">
+      <div class="mini-spot">東二見人工島</div>
+      <div class="mini-fish">ハネ・チヌ / エビ撒き</div>
+      <div class="mini-size">報告あり</div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="logo">
+      <div class="logo-box">釣</div>
+      <div>
+        <div class="logo-name">ツリスポ</div>
+        <div class="logo-sub">tsurispot.com</div>
+      </div>
+    </div>
+    <div class="swipe">詳しくはプロフィールから →</div>
+  </div>
+</body>
+</html>

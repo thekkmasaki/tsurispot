@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LINE BOT デモ - ツリスポ</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', sans-serif; background: #e8ecf1; display: flex; justify-content: center; gap: 32px; padding: 24px; flex-wrap: wrap; }
+.phone { width: 360px; background: #7494c0; border-radius: 36px; border: 6px solid #222; overflow: hidden; box-shadow: 0 24px 48px rgba(0,0,0,0.25); }
+.notch { background: #222; height: 28px; border-radius: 0 0 16px 16px; margin: 0 80px; }
+.phone-header { background: #06c755; color: white; padding: 10px 16px; display: flex; align-items: center; gap: 10px; }
+.phone-header .back { font-size: 20px; opacity: 0.8; }
+.phone-header .avatar { width: 32px; height: 32px; border-radius: 50%; background: white; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.phone-header .name { font-weight: 600; font-size: 14px; flex: 1; }
+.chat { background: #7494c0; padding: 10px 12px; min-height: 560px; display: flex; flex-direction: column; gap: 6px; }
+.msg { max-width: 82%; padding: 9px 12px; border-radius: 16px; font-size: 13px; line-height: 1.55; white-space: pre-line; word-break: break-all; }
+.bot { background: white; color: #333; align-self: flex-start; border-bottom-left-radius: 4px; box-shadow: 0 1px 1px rgba(0,0,0,0.08); }
+.user { background: #06c755; color: white; align-self: flex-end; border-bottom-right-radius: 4px; font-weight: 500; }
+.date { text-align: center; font-size: 11px; color: rgba(255,255,255,0.7); margin: 6px 0 2px; }
+.label { text-align: center; font-size: 11px; color: rgba(255,255,255,0.9); background: rgba(0,0,0,0.12); padding: 4px 12px; border-radius: 12px; margin: 6px auto 2px; display: inline-block; align-self: center; }
+.section-title { text-align: center; font-size: 16px; font-weight: 700; color: #333; padding: 8px; margin-bottom: 4px; }
+.section-sub { text-align: center; font-size: 12px; color: #666; margin-bottom: 8px; }
+.sep { color: #ccc; font-size: 12px; }
+.home-bar { background: #222; height: 5px; width: 120px; border-radius: 3px; margin: 8px auto 10px; }
+</style>
+</head>
+<body>
+
+<!-- 一般ユーザー画面 -->
+<div>
+<div class="section-title">一般ユーザーの画面</div>
+<div class="section-sub">釣り人がLINEで友だち追加した場合</div>
+<div class="phone">
+<div class="notch"></div>
+<div class="phone-header">
+  <span class="back">‹</span>
+  <div class="avatar">🎣</div>
+  <div class="name">ツリスポ公式</div>
+</div>
+<div class="chat">
+  <div class="date">友だち追加</div>
+
+  <div class="msg bot">━━━━━━━━━━━━━━
+🎣 ツリスポへようこそ！
+━━━━━━━━━━━━━━
+
+友だち追加ありがとうございます！
+
+まず、よく釣りするエリアを
+教えてください👇
+（都道府県名を送ってね）
+
+例: 「神奈川」「大阪」「北海道」
+
+━━━━━━━━━━━━━━
+
+キーワードで釣り情報も検索👇
+📍「スポット」🐟「今釣れる」
+📖「初心者」📊「釣果」
+🎣「道具」🔍「診断」📅「潮」
+
+━━━━━━━━━━━━━━
+https://tsurispot.com</div>
+
+  <div class="label">エリアを登録</div>
+  <div class="msg user">神奈川</div>
+
+  <div class="msg bot">📍 神奈川を登録しました！
+
+今後「スポット」「今釣れる」と送ると、神奈川の情報を優先してお届けします。
+
+変更したい場合は、別の都道府県名を送ってください。</div>
+
+  <div class="label">「スポット」と送信</div>
+  <div class="msg user">スポット</div>
+
+  <div class="msg bot">━━━━━━━━━━━━━━
+📍 釣りスポット検索
+━━━━━━━━━━━━━━
+
+▼ 神奈川の釣りスポット
+https://tsurispot.com/prefecture/kanagawa
+
+▼ スポット一覧から探す
+https://tsurispot.com/spots
+
+▼ 現在地から近い順で探す
+https://tsurispot.com/fishing-spots/near-me
+
+▼ 地図から探す
+https://tsurispot.com/map</div>
+
+  <div class="label">「今釣れる」と送信</div>
+  <div class="msg user">今釣れる</div>
+
+  <div class="msg bot">━━━━━━━━━━━━━━
+🐟 3月に釣れる魚
+━━━━━━━━━━━━━━
+
+▼ 神奈川の釣りスポット
+https://tsurispot.com/prefecture/kanagawa
+
+▼ 3月の釣りガイド
+https://tsurispot.com/monthly/3
+
+▼ 今釣れる魚の一覧
+https://tsurispot.com/catchable-now</div>
+
+</div>
+<div class="home-bar"></div>
+</div>
+</div>
+
+<!-- 店舗オーナー画面 -->
+<div>
+<div class="section-title">店舗オーナーの画面</div>
+<div class="section-sub">登録済みの釣具店オーナーの場合</div>
+<div class="phone">
+<div class="notch"></div>
+<div class="phone-header">
+  <span class="back">‹</span>
+  <div class="avatar">🎣</div>
+  <div class="name">ツリスポ公式</div>
+</div>
+<div class="chat">
+  <div class="date">友だち追加（登録済み店舗）</div>
+
+  <div class="msg bot">フィッシングナカジマさん、ツリスポ釣具店サポートへようこそ！
+
+「更新」と送ると、餌の在庫更新ページを開けます。</div>
+
+  <div class="label">「更新」と送信</div>
+  <div class="msg user">更新</div>
+
+  <div class="msg bot">フィッシングナカジマさんの餌在庫更新ページはこちらです👇
+
+https://tsurispot.com/shops/update?shop=fishing-nakajima&token=xxx</div>
+
+  <div class="label">在庫更新フォームで入力後「確認」</div>
+  <div class="msg user">確認</div>
+
+  <div class="msg bot">フィッシングナカジマの在庫状況:
+
+● アミ姫 500円 (3/8 14:30)
+● オキアミ 3kg 800円 (3/8 14:30)
+▲ 青イソメ 600円 (3/8 10:00)
+✕ 石ゴカイ (3/7 18:00)
+
+● 在庫あり ▲ 残りわずか ✕ 売り切れ</div>
+
+  <div class="label">不明なメッセージ</div>
+  <div class="msg user">こんにちは</div>
+
+  <div class="msg bot">━━━━━━━━━━━━━━
+【ツリスポ 釣具店サポート】
+━━━━━━━━━━━━━━
+
+「更新」→ 餌の在庫を更新
+「確認」→ 今の在庫状況を確認
+
+お困りの際はお問い合わせください。
+https://tsurispot.com/contact</div>
+
+</div>
+<div class="home-bar"></div>
+</div>
+</div>
+
+</body>
+</html>
