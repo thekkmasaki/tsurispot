@@ -1,13 +1,21 @@
 "use client";
 
 import { useState, useRef } from "react";
-import { Send, CheckCircle, AlertCircle } from "lucide-react";
+import { Send, CheckCircle, AlertCircle, Camera, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 
 // そのスポットで釣れる魚名 + 汎用的な人気魚種
 const COMMON_FISH = ["アジ", "サバ", "イワシ", "メバル", "カサゴ", "シーバス", "クロダイ", "アオリイカ"];
+
+const METHODS = ["サビキ", "投げ", "ルアー", "フカセ", "エギング", "ジギング", "穴釣り", "ウキ釣り", "その他"];
+const WEATHER_OPTIONS = [
+  { value: "晴れ", label: "晴れ", icon: "☀️" },
+  { value: "曇り", label: "曇り", icon: "☁️" },
+  { value: "雨", label: "雨", icon: "🌧️" },
+  { value: "風強い", label: "風強い", icon: "💨" },
+];
 
 interface CatchReportFormProps {
   spotSlug: string;
@@ -17,6 +25,7 @@ interface CatchReportFormProps {
 
 export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }: CatchReportFormProps) {
   const fishInputRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [userName, setUserName] = useState("");
   const [fishName, setFishName] = useState("");
@@ -25,8 +34,52 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
     return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
   });
   const [comment, setComment] = useState("");
+  const [photoUrl, setPhotoUrl] = useState("");
+  const [photoPreview, setPhotoPreview] = useState("");
+  const [photoUploading, setPhotoUploading] = useState(false);
+  const [sizeCm, setSizeCm] = useState("");
+  const [method, setMethod] = useState("");
+  const [weather, setWeather] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+
+  const handlePhotoSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    // プレビュー表示
+    const reader = new FileReader();
+    reader.onload = (ev) => setPhotoPreview(ev.target?.result as string);
+    reader.readAsDataURL(file);
+
+    // アップロード
+    setPhotoUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append("file", file);
+      const res = await fetch("/api/catch-photo", { method: "POST", body: formData });
+      const data = await res.json();
+      if (res.ok && data.ok) {
+        setPhotoUrl(data.url);
+      } else {
+        setErrorMessage(data.error || "写真のアップロードに失敗しました");
+        setStatus("error");
+        setPhotoPreview("");
+      }
+    } catch {
+      setErrorMessage("写真のアップロードに失敗しました");
+      setStatus("error");
+      setPhotoPreview("");
+    } finally {
+      setPhotoUploading(false);
+    }
+  };
+
+  const removePhoto = () => {
+    setPhotoUrl("");
+    setPhotoPreview("");
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,17 +110,23 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
     setErrorMessage("");
 
     try {
+      const body: Record<string, unknown> = {
+        spotSlug,
+        spotName,
+        fishName: fishName.trim(),
+        userName: userName.trim(),
+        comment: comment.trim(),
+        date,
+      };
+      if (photoUrl) body.photoUrl = photoUrl;
+      if (sizeCm) body.sizeCm = Number(sizeCm);
+      if (method) body.method = method;
+      if (weather) body.weather = weather;
+
       const res = await fetch("/api/catch-report-ugc", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          spotSlug,
-          spotName,
-          fishName: fishName.trim(),
-          userName: userName.trim(),
-          comment: comment.trim(),
-          date,
-        }),
+        body: JSON.stringify(body),
       });
 
       const data = await res.json();
@@ -78,6 +137,11 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
         setUserName("");
         setFishName("");
         setComment("");
+        setPhotoUrl("");
+        setPhotoPreview("");
+        setSizeCm("");
+        setMethod("");
+        setWeather("");
       } else {
         setErrorMessage(data.error || "送信に失敗しました");
         setStatus("error");
@@ -229,6 +293,115 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
             />
           </div>
 
+          {/* 写真アップロード */}
+          <div>
+            <label className="mb-1 block text-sm font-medium">
+              写真（任意）
+            </label>
+            {photoPreview ? (
+              <div className="relative inline-block">
+                <img
+                  src={photoPreview}
+                  alt="プレビュー"
+                  className="h-24 w-24 rounded-lg border object-cover"
+                />
+                <button
+                  type="button"
+                  onClick={removePhoto}
+                  className="absolute -right-2 -top-2 rounded-full bg-destructive p-0.5 text-white shadow-sm"
+                >
+                  <X className="size-3.5" />
+                </button>
+                {photoUploading && (
+                  <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-black/40">
+                    <span className="text-xs text-white">アップロード中...</span>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="flex h-24 w-24 items-center justify-center rounded-lg border-2 border-dashed border-muted-foreground/30 text-muted-foreground transition-colors hover:border-emerald-300 hover:bg-emerald-50/30"
+              >
+                <Camera className="size-6" />
+              </button>
+            )}
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              onChange={handlePhotoSelect}
+              className="hidden"
+            />
+          </div>
+
+          {/* サイズ入力 */}
+          <div>
+            <label htmlFor="cr-size" className="mb-1 block text-sm font-medium">
+              サイズ（任意）
+            </label>
+            <div className="flex items-center gap-2">
+              <Input
+                id="cr-size"
+                type="number"
+                placeholder="例: 25"
+                value={sizeCm}
+                onChange={(e) => setSizeCm(e.target.value)}
+                min={1}
+                max={300}
+                className="w-28"
+              />
+              <span className="text-sm text-muted-foreground">cm</span>
+            </div>
+          </div>
+
+          {/* 釣法セレクト */}
+          <div>
+            <label className="mb-1 block text-sm font-medium">
+              釣法（任意）
+            </label>
+            <div className="flex flex-wrap gap-1">
+              {METHODS.map((m) => (
+                <button
+                  key={m}
+                  type="button"
+                  onClick={() => setMethod(method === m ? "" : m)}
+                  className={`rounded-full border px-2.5 py-0.5 text-xs transition-colors ${
+                    method === m
+                      ? "border-blue-500 bg-blue-50 text-blue-700"
+                      : "border-muted-foreground/20 text-muted-foreground hover:border-blue-300 hover:bg-blue-50/50"
+                  }`}
+                >
+                  {m}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* 天候セレクト */}
+          <div>
+            <label className="mb-1 block text-sm font-medium">
+              天候（任意）
+            </label>
+            <div className="flex flex-wrap gap-1">
+              {WEATHER_OPTIONS.map((w) => (
+                <button
+                  key={w.value}
+                  type="button"
+                  onClick={() => setWeather(weather === w.value ? "" : w.value)}
+                  className={`rounded-full border px-2.5 py-0.5 text-xs transition-colors ${
+                    weather === w.value
+                      ? "border-amber-500 bg-amber-50 text-amber-700"
+                      : "border-muted-foreground/20 text-muted-foreground hover:border-amber-300 hover:bg-amber-50/50"
+                  }`}
+                >
+                  {w.icon} {w.label}
+                </button>
+              ))}
+            </div>
+          </div>
+
           <div>
             <label htmlFor="cr-comment" className="mb-1 block text-sm font-medium">
               ひとこと <span className="text-destructive">*</span>
@@ -257,7 +430,7 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
           <div className="flex items-center gap-2 pt-1">
             <Button
               type="submit"
-              disabled={status === "submitting"}
+              disabled={status === "submitting" || photoUploading}
               className="gap-2"
             >
               <Send className="size-4" />
