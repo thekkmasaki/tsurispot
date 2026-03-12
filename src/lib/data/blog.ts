@@ -2594,6 +2594,12 @@ export function getLatestBlogPosts(count: number = 3): BlogPost[] {
     .slice(0, count);
 }
 
+/** 最新記事を取得（microCMS含む全記事から） */
+export async function getLatestBlogPostsAsync(count: number = 3): Promise<BlogPost[]> {
+  const all = await getAllBlogPosts();
+  return all.slice(0, count);
+}
+
 /** 関連記事を取得（同カテゴリ、自分以外）— 全記事から */
 export async function getRelatedPostsAsync(post: BlogPost, count: number = 3): Promise<BlogPost[]> {
   const all = await getAllBlogPosts();

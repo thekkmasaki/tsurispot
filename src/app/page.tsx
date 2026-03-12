@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
-import { getLatestBlogPosts, BLOG_CATEGORIES } from "@/lib/data/blog";
+import { getLatestBlogPostsAsync, BLOG_CATEGORIES } from "@/lib/data/blog";
 import { prefectures } from "@/lib/data/prefectures";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -171,7 +171,7 @@ const homeFaqJsonLd = {
   ],
 };
 
-export default function Home() {
+export default async function Home() {
   // 評価順にトップ30件を軽量データ化してクライアントへ（200→30に削減でHTMLサイズ大幅縮小）
   const popularSpotsData = fishingSpots
     .slice()
@@ -191,7 +191,7 @@ export default function Home() {
       mainImageUrl: s.mainImageUrl,
       fishNames: s.catchableFish.slice(0, 6).map((cf) => cf.fish.name),
     }));
-  const latestPosts = getLatestBlogPosts(3);
+  const latestPosts = await getLatestBlogPostsAsync(3);
 
   // Stats for hero section
   const totalSpots = fishingSpots.length;
