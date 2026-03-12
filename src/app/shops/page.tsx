@@ -12,12 +12,15 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { tackleShops } from "@/lib/data/shops";
 import { ShopsFilterList } from "@/components/shops/shops-filter-list";
 
+const filteredShops = tackleShops.filter((s) => s.slug !== "sample-premium" && s.slug !== "sample-basic");
+const shopCount = filteredShops.length;
+
 export const metadata: Metadata = {
   title: "釣具店・エサ店ガイド｜全国の釣具店を探す",
-  description: `全国${tackleShops.length}件以上の釣具店・釣りエサ店を紹介。都道府県やサービスで絞り込み検索。個人経営の地元密着店から大手チェーンまで。活きエサ・冷凍エサの取り扱い情報も。`,
+  description: `全国${shopCount}件以上の釣具店・釣りエサ店を紹介。都道府県やサービスで絞り込み検索。個人経営の地元密着店から大手チェーンまで。活きエサ・冷凍エサの取り扱い情報も。`,
   openGraph: {
     title: "釣具店・エサ店ガイド｜全国の釣具店を探す",
-    description: `全国${tackleShops.length}件以上の釣具店・釣りエサ店を紹介。都道府県やサービスで絞り込み検索。`,
+    description: `全国${shopCount}件以上の釣具店・釣りエサ店を紹介。都道府県やサービスで絞り込み検索。`,
     type: "website",
     url: "https://tsurispot.com/shops",
     siteName: "ツリスポ",
@@ -47,8 +50,7 @@ const breadcrumbJsonLd = {
 };
 
 // Server ComponentでデータをシリアライズしてClient Componentに渡す
-const shopsData = tackleShops
-  .filter((s) => s.slug !== "sample-premium" && s.slug !== "sample-basic")
+const shopsData = filteredShops
   .map((s) => ({
     id: s.id,
     name: s.name,
@@ -99,7 +101,7 @@ export default function ShopsListPage() {
           </h1>
         </div>
         <p className="mt-2 text-base text-muted-foreground">
-          全国{tackleShops.length}件以上の釣具店・エサ店を掲載。釣り場の近くで装備を揃えよう。
+          全国{shopCount}件以上の釣具店・エサ店を掲載。釣り場の近くで装備を揃えよう。
         </p>
       </div>
 
