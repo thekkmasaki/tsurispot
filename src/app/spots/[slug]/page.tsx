@@ -57,6 +57,7 @@ import { PackingChecklist } from "@/components/spots/packing-checklist";
 import { getCatchReportsBySpot } from "@/lib/data/catch-reports";
 import { CatchReportList } from "@/components/spots/catch-report-list";
 import { CatchReportForm } from "@/components/spots/catch-report-form";
+import { NearbyAccommodation } from "@/components/spots/nearby-accommodation";
 import { SpotRulesCard } from "@/components/spots/spot-rules";
 const SpotPhotoGallery = dynamic(
   () => import("@/components/spots/spot-photo-gallery").then(m => ({ default: m.SpotPhotoGallery })),
@@ -1117,6 +1118,13 @@ export default async function SpotDetailPage({ params }: PageProps) {
               </p>
             </section>
           )}
+          <NearbyAccommodation
+            spotName={spot.name}
+            latitude={spot.latitude}
+            longitude={spot.longitude}
+            prefecture={spot.region.prefecture}
+            areaName={spot.region.areaName}
+          />
         </>}
       />
 
