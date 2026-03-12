@@ -31,19 +31,10 @@ const BASIC_INQUIRY_SHEET = "ベーシック問い合わせ";
 const PRO_INQUIRY_SHEET = "プロ問い合わせ";
 const NOTIFY_EMAIL = "fishingspotjapan@gmail.com";
 
-// UTF-8デコード（GASのLatin-1文字化け対策）
-function decodeUTF8(str) {
-  var bytes = [];
-  for (var i = 0; i < str.length; i++) {
-    bytes.push(str.charCodeAt(i));
-  }
-  return Utilities.newBlob(bytes).getDataAsString("UTF-8");
-}
-
 function doPost(e) {
   try {
-    var decoded = decodeUTF8(e.postData.contents);
-    var data = JSON.parse(decoded);
+    // GAS V8ランタイムはUTF-8を自動デコードするため直接パースする
+    var data = JSON.parse(e.postData.contents);
 
     // type で分岐
     if (data.type === "shop_listing") {
