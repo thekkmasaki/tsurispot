@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useFavorites, getFavorites } from "@/hooks/use-favorites";
@@ -8,6 +8,14 @@ import { useFavorites, getFavorites } from "@/hooks/use-favorites";
 export function FavoriteButton({ spotSlug }: { spotSlug: string }) {
   const { toggleFavorite, isFavorite } = useFavorites();
   const [isAnimating, setIsAnimating] = useState(false);
+  const [count, setCount] = useState<number | null>(null);
+
+  useEffect(() => {
+    fetch(`/api/favorites?slug=${encodeURIComponent(spotSlug)}`)
+      .then(res => res.json())
+      .then(data => setCount(data.count || 0))
+      .catch(() => {});
+  }, [spotSlug]);
 
   const handleClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -40,6 +48,9 @@ export function FavoriteButton({ spotSlug }: { spotSlug: string }) {
           isAnimating && "scale-125"
         )}
       />
+      {count !== null && count > 0 && (
+        <span className="ml-1 text-xs font-medium text-muted-foreground">{count}</span>
+      )}
     </button>
   );
 }

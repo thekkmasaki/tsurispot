@@ -39,6 +39,11 @@ export function useFavorites() {
     if (!current.includes(slug)) {
       saveFavorites([...current, slug]);
       setFavorites([...current, slug]);
+      fetch("/api/favorites", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug, action: "increment" }),
+      }).catch(() => {});
     }
   }, []);
 
@@ -47,6 +52,11 @@ export function useFavorites() {
     const next = current.filter((s) => s !== slug);
     saveFavorites(next);
     setFavorites(next);
+    fetch("/api/favorites", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ slug, action: "decrement" }),
+    }).catch(() => {});
   }, []);
 
   const toggleFavorite = useCallback((slug: string) => {
@@ -55,9 +65,19 @@ export function useFavorites() {
       const next = current.filter((s) => s !== slug);
       saveFavorites(next);
       setFavorites(next);
+      fetch("/api/favorites", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug, action: "decrement" }),
+      }).catch(() => {});
     } else {
       saveFavorites([...current, slug]);
       setFavorites([...current, slug]);
+      fetch("/api/favorites", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug, action: "increment" }),
+      }).catch(() => {});
     }
   }, []);
 
