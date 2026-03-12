@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1080 878" width="1080" height="878">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0369a1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#1e40af;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="wave1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:white;stop-opacity:0.08" />
+      <stop offset="100%" style="stop-color:white;stop-opacity:0.02" />
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1080" height="878" fill="url(#bg)" />
+
+  <!-- Decorative waves -->
+  <path d="M0 650 Q270 580 540 650 Q810 720 1080 650 L1080 878 L0 878 Z" fill="white" opacity="0.06"/>
+  <path d="M0 700 Q270 640 540 700 Q810 760 1080 700 L1080 878 L0 878 Z" fill="white" opacity="0.05"/>
+  <path d="M0 750 Q270 700 540 750 Q810 800 1080 750 L1080 878 L0 878 Z" fill="white" opacity="0.04"/>
+
+  <!-- Small fish decorations (scattered) -->
+  <g opacity="0.1" fill="white">
+    <!-- Fish 1 top-left -->
+    <g transform="translate(120, 150) scale(0.8)">
+      <ellipse cx="20" cy="15" rx="14" ry="8" />
+      <polygon points="32,15 42,7 42,23" />
+    </g>
+    <!-- Fish 2 top-right -->
+    <g transform="translate(880, 200) scale(0.6) rotate(-15)">
+      <ellipse cx="20" cy="15" rx="14" ry="8" />
+      <polygon points="32,15 42,7 42,23" />
+    </g>
+    <!-- Fish 3 middle-left -->
+    <g transform="translate(60, 420) scale(0.5) rotate(10)">
+      <ellipse cx="20" cy="15" rx="14" ry="8" />
+      <polygon points="32,15 42,7 42,23" />
+    </g>
+    <!-- Fish 4 middle-right -->
+    <g transform="translate(950, 380) scale(0.7) rotate(-5)">
+      <ellipse cx="20" cy="15" rx="14" ry="8" />
+      <polygon points="32,15 42,7 42,23" />
+    </g>
+  </g>
+
+  <!-- Center content area -->
+  <!-- Fish icon (large) -->
+  <g transform="translate(410, 250) scale(3.5)">
+    <ellipse cx="22" cy="20" rx="16" ry="10" fill="white" opacity="0.95"/>
+    <polygon points="36,20 46,10 46,30" fill="white" opacity="0.95"/>
+    <circle cx="14" cy="17" r="2.5" fill="#0369a1"/>
+    <path d="M8 2 L8 10" stroke="white" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+    <path d="M8 2 Q12 0 16 2" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+  </g>
+
+  <!-- Brand name -->
+  <text x="540" y="480" text-anchor="middle" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="72" font-weight="700" fill="white" letter-spacing="8">ツリスポ</text>
+
+  <!-- Tagline -->
+  <text x="540" y="540" text-anchor="middle" font-family="'Noto Sans JP', 'Hiragino Sans', sans-serif" font-size="24" font-weight="400" fill="white" opacity="0.75" letter-spacing="4">日本全国の釣りスポット情報</text>
+
+  <!-- URL -->
+  <text x="540" y="810" text-anchor="middle" font-family="'Inter', 'Noto Sans JP', sans-serif" font-size="20" font-weight="500" fill="white" opacity="0.4" letter-spacing="2">tsurispot.com</text>
+</svg>

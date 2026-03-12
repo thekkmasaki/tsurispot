@@ -71,7 +71,7 @@ const FACILITY_OPTIONS: { key: FacilityKey; label: string }[] = [
   { key: "hasParking", label: "駐車場" },
   { key: "hasToilet", label: "トイレ" },
   { key: "hasConvenienceStore", label: "コンビニ" },
-  { key: "hasFishingShop", label: "釣具店" },
+  // { key: "hasFishingShop", label: "釣具店" }, // データ精度見直し中のため一時非表示
   { key: "hasRentalRod", label: "レンタル竿" },
 ];
 
