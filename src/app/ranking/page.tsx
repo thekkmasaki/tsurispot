@@ -7,7 +7,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 export const metadata: Metadata = {
   title: "釣りスポット人気ランキング｜地域別おすすめ釣り場TOP10",
   description:
-    "全国1,000箇所以上の釣りスポットを評価順にランキング。北海道から沖縄まで47都道府県の地域別TOP10を公開。初心者向け・ファミリー・夜釣りなど条件別に今すぐ比較。",
+    "全国2,000箇所以上の釣りスポットを評価順にランキング。北海道から沖縄まで47都道府県の地域別TOP10を公開。初心者向け・ファミリー・夜釣りなど条件別に今すぐ比較。",
   openGraph: {
     title: "釣りスポット人気ランキング｜地域別おすすめ釣り場TOP10",
     description:

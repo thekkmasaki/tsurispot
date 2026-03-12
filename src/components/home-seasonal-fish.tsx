@@ -1,5 +1,4 @@
 "use client";
-
 import { useState, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { ArrowRight, Skull, TriangleAlert, ChevronDown } from "lucide-react";
@@ -35,6 +34,10 @@ type FilterKey = (typeof FILTERS)[number]["key"];
 
 const INITIAL_COUNT = 8;
 
+function ensureArray(val: unknown): SeasonalFish[] {
+  return Array.isArray(val) ? val : [];
+}
+
 export function HomeSeasonalFish() {
   const [fish, setFish] = useState<SeasonalFish[]>([]);
   const [currentMonth, setCurrentMonth] = useState<number>(new Date().getMonth() + 1);
@@ -49,9 +52,10 @@ export function HomeSeasonalFish() {
         if (!res.ok) throw new Error("fetch failed");
         return res.json();
       })
-      .then((data: { currentMonth: number; fish: SeasonalFish[] }) => {
-        setFish(data.fish);
-        setCurrentMonth(data.currentMonth);
+      .then((data) => {
+        if (!data || typeof data !== "object") throw new Error("invalid data");
+        setFish(ensureArray(data.fish));
+        setCurrentMonth(typeof data.currentMonth === "number" ? data.currentMonth : new Date().getMonth() + 1);
         setLoading(false);
       })
       .catch(() => {
@@ -60,20 +64,27 @@ export function HomeSeasonalFish() {
       });
   }, []);
 
+  // fish を安全な配列として取得
+  const safeFish = ensureArray(fish);
+
   const filtered = useMemo(() => {
+    if (safeFish.length === 0) return [];
     switch (filter) {
       case "sea":
-        return fish.filter((f) => f.category === "sea");
+        return safeFish.filter((f) => f.category === "sea");
       case "freshwater":
-        return fish.filter((f) => f.category === "freshwater" || f.category === "brackish");
+        return safeFish.filter((f) => f.category === "freshwater" || f.category === "brackish");
       case "peak":
-        return fish.filter((f) => f.peakMonths.includes(currentMonth));
+        return safeFish.filter((f) => Array.isArray(f.peakMonths) && f.peakMonths.includes(currentMonth));
       case "beginner":
-        return fish.filter((f) => f.difficulty === "beginner");
+        return safeFish.filter((f) => f.difficulty === "beginner");
       default:
-        return fish;
+        return safeFish;
     }
-  }, [fish, filter, currentMonth]);
+  }, [safeFish, filter, currentMonth]);
+
+  // filtered を安全に参照
+  const safeFiltered = ensureArray(filtered);
 
   // スケルトンUI
   if (loading) {
@@ -85,12 +96,12 @@ export function HomeSeasonalFish() {
             <div className="mt-2 h-4 w-20 animate-pulse rounded bg-muted" />
           </div>
           <div className="mb-4 flex gap-1.5 sm:mb-6">
-            {Array.from({ length: 5 }).map((_, i) => (
+            {[0, 1, 2, 3, 4].map((i) => (
               <div key={i} className="h-8 w-20 animate-pulse rounded-full bg-muted" />
             ))}
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {Array.from({ length: 8 }).map((_, i) => (
+            {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
               <div key={i} className="overflow-hidden rounded-xl border bg-background">
                 <div className="aspect-[4/3] animate-pulse bg-muted" />
                 <div className="space-y-2 p-3 sm:p-4">
@@ -126,6 +137,8 @@ export function HomeSeasonalFish() {
     );
   }
 
+  const visibleFish = expanded ? safeFiltered : safeFiltered.slice(0, INITIAL_COUNT);
+
   return (
     <section className="bg-muted/50 py-8 sm:py-12">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
@@ -135,7 +148,7 @@ export function HomeSeasonalFish() {
               {currentMonth}月に釣れる魚
             </h2>
             <p className="mt-1 text-sm text-muted-foreground">
-              {filtered.length}種類
+              {safeFiltered.length}種類
             </p>
           </div>
           <Link
@@ -167,8 +180,8 @@ export function HomeSeasonalFish() {
         {/* Fish cards */}
         <div className="relative">
           <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-4 scrollbar-hide sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4">
-            {(expanded ? filtered : filtered.slice(0, INITIAL_COUNT)).map((f) => {
-              const isPeak = f.peakMonths.includes(currentMonth);
+            {visibleFish.map((f) => {
+              const isPeak = Array.isArray(f.peakMonths) && f.peakMonths.includes(currentMonth);
               return (
                 <Link
                   key={f.id}
@@ -225,14 +238,14 @@ export function HomeSeasonalFish() {
         </div>
 
         {/* もっと見る / 折りたたむ */}
-        {filtered.length > INITIAL_COUNT && (
+        {safeFiltered.length > INITIAL_COUNT && (
           <div className="mt-4 flex justify-center">
             <Button
               variant="outline"
               className="min-h-[44px] gap-1"
               onClick={() => setExpanded(!expanded)}
             >
-              {expanded ? "折りたたむ" : `残り${filtered.length - INITIAL_COUNT}種類を見る`}
+              {expanded ? "折りたたむ" : `残り${safeFiltered.length - INITIAL_COUNT}種類を見る`}
               <ChevronDown className={`size-4 transition-transform ${expanded ? "rotate-180" : ""}`} />
             </Button>
           </div>

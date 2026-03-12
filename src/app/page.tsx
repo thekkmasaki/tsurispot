@@ -24,6 +24,7 @@ import dynamic from "next/dynamic";
 import { HomeSearchBar } from "@/components/home-search-bar";
 import { HomeSeasonalFish } from "@/components/home-seasonal-fish";
 import { HomePopularSpots } from "@/components/home-popular-spots";
+import { SectionErrorBoundary } from "@/components/ui/section-error-boundary";
 
 
 // Below-the-fold client components loaded lazily
@@ -553,7 +554,9 @@ export default async function Home() {
       <HomePopularSpots spots={popularSpotsData} />
 
       {/* 今釣れる魚セクション */}
-      <HomeSeasonalFish />
+      <SectionErrorBoundary>
+        <HomeSeasonalFish />
+      </SectionErrorBoundary>
 
       {/* 人気のエリア */}
       <section className="bg-muted/50 py-8 sm:py-12">

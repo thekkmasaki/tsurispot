@@ -191,7 +191,7 @@ export function Footer() {
         <div className="mt-6 border-t border-border/40 pt-6 text-center text-sm text-muted-foreground">
           <p>&copy; 2025-2026 ツリスポ All rights reserved.</p>
           <p className="mt-1 text-xs">
-            運営者: 正木 家康｜運営開始: 2025年｜掲載スポット: 1,000箇所以上
+            運営者: 正木 家康｜運営開始: 2025年｜掲載スポット: 2,000箇所以上
           </p>
           <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed">
             当サイトはAmazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。
