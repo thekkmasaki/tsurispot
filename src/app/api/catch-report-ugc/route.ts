@@ -81,13 +81,17 @@ export async function POST(request: Request) {
 
     // Google Apps Script Webhook に送信（Sheets保存 + メール通知）
     if (GAS_WEBHOOK_URL) {
-      fetch(GAS_WEBHOOK_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json; charset=utf-8" },
-        body: JSON.stringify(payload),
-      }).catch((err) => {
+      try {
+        const gasRes = await fetch(GAS_WEBHOOK_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json; charset=utf-8" },
+          body: JSON.stringify(payload),
+          redirect: "follow",
+        });
+        console.log("[釣果投稿] GAS応答:", gasRes.status);
+      } catch (err) {
         console.error("[釣果投稿] GAS送信エラー:", err);
-      });
+      }
     }
 
     console.log("[釣果投稿]", payload);
