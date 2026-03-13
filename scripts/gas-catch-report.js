@@ -31,10 +31,64 @@ const BASIC_INQUIRY_SHEET = "ベーシック問い合わせ";
 const PRO_INQUIRY_SHEET = "プロ問い合わせ";
 const NOTIFY_EMAIL = "fishingspotjapan@gmail.com";
 
+// UTF-8バイト列として解釈し直す（GASがLatin-1でデコードした場合の修正）
+function forceUTF8(str) {
+  try {
+    var bytes = [];
+    for (var i = 0; i < str.length; i++) {
+      var c = str.charCodeAt(i);
+      if (c <= 0xff) {
+        bytes.push(c);
+      } else {
+        // 既にUnicodeの場合はそのまま返す（修正不要）
+        return str;
+      }
+    }
+    return Utilities.newBlob(bytes).getDataAsString("UTF-8");
+  } catch (err) {
+    return str;
+  }
+}
+
 function doPost(e) {
   try {
-    // GAS V8ランタイムはUTF-8を自動デコードするため直接パースする
-    var data = JSON.parse(e.postData.contents);
+    var raw = e.postData.contents;
+
+    // デバッグモード: type=echo のときは受信データをそのまま返す
+    // これでエンコーディング問題の切り分けができる
+    try {
+      var peek = JSON.parse(raw);
+      if (peek.type === "echo") {
+        return ContentService.createTextOutput(
+          JSON.stringify({
+            ok: true,
+            rawLength: raw.length,
+            rawFirst100: raw.substring(0, 100),
+            parsed: peek,
+            charCodes: raw.substring(0, 30).split("").map(function(c) { return c.charCodeAt(0); })
+          })
+        ).setMimeType(ContentService.MimeType.JSON);
+      }
+    } catch (ignored) {}
+
+    // 通常パース: まずそのまま試す
+    var data = JSON.parse(raw);
+
+    // もし全文字が0xFF以下（Latin-1っぽい）ならUTF-8として再解釈
+    var testVal = data.fishName || data.shopName || "";
+    var needsFixing = false;
+    for (var i = 0; i < testVal.length; i++) {
+      if (testVal.charCodeAt(i) > 0x7f && testVal.charCodeAt(i) <= 0xff) {
+        needsFixing = true;
+        break;
+      }
+    }
+
+    if (needsFixing) {
+      // rawをUTF-8として再解釈
+      var fixed = forceUTF8(raw);
+      data = JSON.parse(fixed);
+    }
 
     // type で分岐
     if (data.type === "shop_listing") {

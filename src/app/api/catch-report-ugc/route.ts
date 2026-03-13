@@ -106,6 +106,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       ok: true,
       message: "投稿ありがとうございます！管理者の承認後に表示されます。",
+      _v: "ascii-v2",
     });
   } catch {
     return NextResponse.json(

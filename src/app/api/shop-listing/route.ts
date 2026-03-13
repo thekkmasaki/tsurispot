@@ -119,7 +119,7 @@ export async function POST(request: Request) {
       await fetch(GAS_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json; charset=utf-8" },
-        body: JSON.stringify(payload),
+        body: toAsciiJson(payload),
       });
     } catch (err) {
       console.error("[店舗掲載申請] GAS送信エラー:", err);
