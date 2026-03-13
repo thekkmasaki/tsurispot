@@ -101,12 +101,9 @@ export async function POST(request: Request) {
       }
     }
 
-    console.log("[釣果投稿]", payload);
-
     return NextResponse.json({
       ok: true,
       message: "投稿ありがとうございます！管理者の承認後に表示されます。",
-      _v: "ascii-v2",
     });
   } catch {
     return NextResponse.json(
