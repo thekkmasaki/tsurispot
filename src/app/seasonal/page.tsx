@@ -10,6 +10,7 @@ import {
   Anchor,
   Calendar,
   MapPin,
+  ChevronRight,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -413,6 +414,17 @@ export default function SeasonalPage() {
                     </li>
                   ))}
                 </ul>
+              </div>
+
+              {/* 季節詳細ページへのリンク */}
+              <div className="mt-6 border-t pt-4">
+                <Link
+                  href={`/seasonal/${season.id}`}
+                  className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
+                >
+                  {season.name}の釣り完全ガイドを見る
+                  <ChevronRight className="size-4" />
+                </Link>
               </div>
             </section>
           ))}

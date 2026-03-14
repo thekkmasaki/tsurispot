@@ -37,6 +37,7 @@ import {
 import { fishSpecies } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
+import { getSeasonByMonth } from "@/lib/data/seasonal-data";
 import { getMonthlyRigs } from "@/lib/data/monthly-rigs";
 import { MonthlyRigSection } from "@/components/monthly-rig-section";
 import { MonthlySportsSorter } from "@/components/monthly-spots-sorter";
@@ -1148,7 +1149,10 @@ export default async function MonthlyGuidePage({ params }: Props) {
           <div className="grid gap-x-6 gap-y-2 sm:grid-cols-2 lg:grid-cols-3">
             {[
               { href: "/catchable-now", label: "今釣れる魚" },
-              { href: `/seasonal/${month}`, label: `${guide.nameJa}の季節特集` },
+              ...((() => {
+                const seasonData = getSeasonByMonth(guide.month);
+                return seasonData ? [{ href: `/seasonal/${seasonData.slug}`, label: `${seasonData.nameJa}の釣りガイド` }] : [];
+              })()),
               { href: "/fishing-calendar", label: "釣りカレンダー" },
               { href: "/fishing-spots/near-me", label: "近くの釣り場" },
               { href: "/map", label: "地図で探す" },
