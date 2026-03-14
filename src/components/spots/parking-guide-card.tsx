@@ -177,7 +177,7 @@ export function ParkingGuideCard({
             </a>
           ) : parkingName ? (
             <a
-              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(parkingName)}&center=${spotLatitude},${spotLongitude}`}
+              href={`https://www.google.com/maps/search/${encodeURIComponent(parkingName)}/@${spotLatitude},${spotLongitude},15z`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-blue-700"
@@ -188,7 +188,7 @@ export function ParkingGuideCard({
             </a>
           ) : (
             <a
-              href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('駐車場')}&center=${spotLatitude},${spotLongitude}`}
+              href={`https://www.google.com/maps/search/${encodeURIComponent('駐車場')}/@${spotLatitude},${spotLongitude},15z`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-blue-700"
