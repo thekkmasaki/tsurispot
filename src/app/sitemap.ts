@@ -7,6 +7,7 @@ import { areaGuides } from "@/lib/data/area-guides";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
 import { getAllBlogPosts } from "@/lib/data/blog";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
+import { seasons as seasonCategories } from "@/lib/data/seasonal-data";
 import { tackleShops } from "@/lib/data/shops";
 import { FISHING_METHODS, MONTHS } from "@/lib/data/fishing-methods";
 import { REGION_GROUPS } from "@/lib/data/regions-group";
@@ -210,6 +211,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.6,
       })),
     ]),
+    // 季節カテゴリページ（春夏秋冬）
+    ...seasonCategories.map((season) => ({
+      url: `${baseUrl}/seasonal/${season.slug}`,
+      lastModified: contentDate,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+    // 季節ガイド詳細ページ
     ...seasonalGuides.map((guide) => ({
       url: `${baseUrl}/seasonal/${guide.slug}`,
       lastModified: contentDate,
