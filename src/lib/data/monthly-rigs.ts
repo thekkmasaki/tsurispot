@@ -124,7 +124,7 @@ export const monthlyRigsData: MonthlyRigs[] = [
       },
       {
         targetFish: "グレ（メジナ）",
-        fishSlug: "gure",
+        fishSlug: "mejina",
         method: "フカセ釣り（ウキ）",
         guideLink: "/guide/float-fishing",
         guideLinkLabel: "ウキ釣りガイド",

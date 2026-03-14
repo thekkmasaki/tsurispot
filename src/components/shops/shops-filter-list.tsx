@@ -40,6 +40,7 @@ export function ShopsFilterList({ shops }: ShopsFilterListProps) {
   const [filterFrozenBait, setFilterFrozenBait] = useState(false);
   const [filterRental, setFilterRental] = useState(false);
   const [filterParking, setFilterParking] = useState(false);
+  const [displayCount, setDisplayCount] = useState(20);
 
   // 都道府県一覧（実際にデータがあるもののみ）
   const availablePrefectures = useMemo(() => {
@@ -121,6 +122,7 @@ export function ShopsFilterList({ shops }: ShopsFilterListProps) {
     setFilterFrozenBait(false);
     setFilterRental(false);
     setFilterParking(false);
+    setDisplayCount(20);
   };
 
   // 現在の絞り込みラベル
@@ -330,7 +332,7 @@ export function ShopsFilterList({ shops }: ShopsFilterListProps) {
 
       {/* 店舗一覧 */}
       <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2">
-        {filteredShops.map((shop) => (
+        {filteredShops.slice(0, displayCount).map((shop) => (
           <Link
             key={shop.id}
             href={`/shops/${shop.slug}`}
@@ -385,6 +387,17 @@ export function ShopsFilterList({ shops }: ShopsFilterListProps) {
           </Link>
         ))}
       </div>
+
+      {filteredShops.length > displayCount && (
+        <div className="mt-6 text-center">
+          <button
+            onClick={() => setDisplayCount((prev) => prev + 20)}
+            className="rounded-lg border px-6 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
+          >
+            もっと見る（残り{filteredShops.length - displayCount}件）
+          </button>
+        </div>
+      )}
 
       {filteredShops.length === 0 && (
         <div className="py-12 text-center">
