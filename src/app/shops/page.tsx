@@ -6,11 +6,22 @@ import {
   Mail,
   CheckCircle,
   Sparkles,
+  Calendar,
+  Fish,
+  MapPin,
 } from "lucide-react";
+import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { tackleShops } from "@/lib/data/shops";
 import { ShopsFilterList } from "@/components/shops/shops-filter-list";
+import { getMonthlyGuideByMonth, monthSlugs } from "@/lib/data/monthly-guides";
+import { fishSpecies } from "@/lib/data/fish";
+import {
+  prefectures,
+  getPrefecturesByRegionGroup,
+  regionGroupOrder,
+} from "@/lib/data/prefectures";
 
 const filteredShops = tackleShops.filter((s) => s.slug !== "sample-premium" && s.slug !== "sample-basic");
 const shopCount = filteredShops.length;
@@ -97,6 +108,17 @@ const shopsData = filteredShops
     imageUrl: s.imageUrl,
     rating: s.rating,
   }));
+
+// 今月の釣りガイドデータ
+const currentMonth = new Date().getMonth() + 1;
+const currentGuide = getMonthlyGuideByMonth(currentMonth);
+const currentMonthSlug = monthSlugs[currentMonth - 1];
+const currentTopFish = currentGuide
+  ? currentGuide.topFish
+      .slice(0, 3)
+      .map((slug) => fishSpecies.find((f) => f.slug === slug))
+      .filter(Boolean)
+  : [];
 
 export default function ShopsListPage() {
   return (
@@ -277,6 +299,108 @@ export default function ShopsListPage() {
           </CardContent>
         </Card>
       </div>
+
+      {/* 都道府県別に釣具店を探す */}
+      <div className="mb-8">
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2 text-xl">
+              <MapPin className="size-6 text-primary" />
+              都道府県別に釣具店を探す
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-5">
+            {regionGroupOrder.map((regionName) => {
+              const regionPrefs = prefectures.filter(
+                (p) => p.regionGroup === regionName
+              );
+              return (
+                <div key={regionName}>
+                  <h3 className="mb-2 text-sm font-bold text-muted-foreground">
+                    {regionName}
+                  </h3>
+                  <div className="flex flex-wrap gap-1.5">
+                    {regionPrefs.map((pref) => {
+                      const shopCountForPref = filteredShops.filter(
+                        (s) => s.region.prefecture === pref.name
+                      ).length;
+                      return (
+                        <Link
+                          key={pref.slug}
+                          href={`/shops/area/${pref.slug}`}
+                          className="rounded-full border px-3 py-1.5 text-xs font-medium transition-colors hover:bg-muted hover:border-primary/30"
+                        >
+                          {pref.nameShort}
+                          {shopCountForPref > 0 && (
+                            <span className="ml-1 opacity-60">
+                              {shopCountForPref}
+                            </span>
+                          )}
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              );
+            })}
+          </CardContent>
+        </Card>
+      </div>
+
+      {/* 今月の釣り情報 */}
+      {currentGuide && (
+        <div className="mb-8 grid gap-4 sm:grid-cols-2">
+          <Card className="border-emerald-200 bg-gradient-to-br from-emerald-50/50 to-transparent dark:from-emerald-950/10">
+            <CardHeader className="pb-2">
+              <CardTitle className="flex items-center gap-2 text-base">
+                <Calendar className="size-5 text-emerald-600" />
+                {currentMonth}月の釣りガイド
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="mb-3 flex flex-wrap gap-1.5">
+                {currentTopFish.map((fish) => fish && (
+                  <Badge key={fish.slug} variant="secondary" className="flex items-center gap-1 text-xs">
+                    <Fish className="size-3" />
+                    {fish.name}
+                  </Badge>
+                ))}
+              </div>
+              <p className="mb-3 text-sm text-muted-foreground line-clamp-2">
+                {currentGuide.description}
+              </p>
+              <Link
+                href={`/monthly/${currentMonthSlug}`}
+                className="inline-flex items-center gap-1 text-sm font-medium text-emerald-700 hover:underline dark:text-emerald-400"
+              >
+                {currentMonth}月の釣りガイドを見る
+                <ChevronRight className="size-3.5" />
+              </Link>
+            </CardContent>
+          </Card>
+
+          <Card className="border-blue-200 bg-gradient-to-br from-blue-50/50 to-transparent dark:from-blue-950/10">
+            <CardHeader className="pb-2">
+              <CardTitle className="flex items-center gap-2 text-base">
+                <Calendar className="size-5 text-blue-600" />
+                月別釣りカレンダー
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="mb-3 text-sm text-muted-foreground">
+                1月〜12月の月ごとに釣れる魚・おすすめ釣り方・装備をまとめた完全ガイドです。
+              </p>
+              <Link
+                href="/monthly"
+                className="inline-flex items-center gap-1 text-sm font-medium text-blue-700 hover:underline dark:text-blue-400"
+              >
+                月別釣りカレンダーを見る
+                <ChevronRight className="size-3.5" />
+              </Link>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </div>
   );
 }

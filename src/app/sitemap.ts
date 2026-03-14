@@ -223,6 +223,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     })),
 
+    // ===== 都道府県別釣具店ページ =====
+    ...prefectures.map((pref) => ({
+      url: `${baseUrl}/shops/area/${pref.slug}`,
+      lastModified: contentDate,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+
     // ===== 都道府県×魚種ページ =====
     ...prefFishCombos.map(c => ({
       url: `${baseUrl}/prefecture/${c.prefSlug}/fish/${c.fishSlug}`,
