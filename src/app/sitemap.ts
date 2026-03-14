@@ -220,7 +220,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: `${baseUrl}/shops/${shop.slug}`,
       lastModified: contentDate,
       changeFrequency: "monthly" as const,
-      priority: 0.5,
+      priority: 0.6,
     })),
 
     // ===== 都道府県×魚種ページ =====

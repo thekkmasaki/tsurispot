@@ -17,7 +17,7 @@ const shopCount = filteredShops.length;
 
 export const metadata: Metadata = {
   title: "釣具店・エサ店ガイド｜全国の釣具店を探す",
-  description: `全国${shopCount}件以上の釣具店・釣りエサ店を紹介。都道府県やサービスで絞り込み検索。個人経営の地元密着店から大手チェーンまで。活きエサ・冷凍エサの取り扱い情報も。`,
+  description: `全国${shopCount}件以上の釣具店・釣りエサ店を掲載。都道府県・サービス（活きエサ・冷凍エサ・レンタルロッド等）で絞り込み検索。営業時間・アクセス・エサ在庫情報も確認できます。`,
   openGraph: {
     title: "釣具店・エサ店ガイド｜全国の釣具店を探す",
     description: `全国${shopCount}件以上の釣具店・釣りエサ店を紹介。都道府県やサービスで絞り込み検索。`,
@@ -47,6 +47,27 @@ const breadcrumbJsonLd = {
       item: "https://tsurispot.com/shops",
     },
   ],
+};
+
+// ItemList schema: プレミアム店舗を優先、上位20件をリスト化
+const itemListShops = [
+  ...filteredShops.filter((s) => s.isPremium),
+  ...filteredShops.filter((s) => !s.isPremium),
+].slice(0, 20);
+
+const itemListJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "全国の釣具店・エサ店一覧",
+  description: `全国${shopCount}件以上の釣具店・釣りエサ店を掲載。`,
+  url: "https://tsurispot.com/shops",
+  numberOfItems: shopCount,
+  itemListElement: itemListShops.map((shop, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: shop.name,
+    url: `https://tsurispot.com/shops/${shop.slug}`,
+  })),
 };
 
 // Server ComponentでデータをシリアライズしてClient Componentに渡す
@@ -83,6 +104,10 @@ export default function ShopsListPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
       />
 
       <Breadcrumb
