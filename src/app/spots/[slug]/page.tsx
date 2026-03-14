@@ -74,6 +74,8 @@ import { CollapsibleSection } from "@/components/ui/collapsible-section";
 import { PortMannerSection } from "@/components/spots/port-manner-section";
 import { UmigyoBadge } from "@/components/spots/umigyo-badge";
 import { umigyoDistricts } from "@/lib/data/umigyo";
+import { getDiagramData } from "@/lib/data/fishing-points";
+import { FishingPointDiagram } from "@/components/spots/fishing-point-diagram";
 
 // Below-the-fold client components loaded lazily
 const StreetViewSection = dynamic(() => import("@/components/spots/street-view-section").then((m) => m.StreetViewSection), {
@@ -168,6 +170,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const spot = getSpotBySlug(slug);
   if (!spot) notFound();
+  const fishingPoints = getDiagramData(slug);
 
   // 今月釣れる魚を算出（Event schema用）
   const currentMonth = new Date().getMonth() + 1; // 1-12
@@ -755,6 +758,12 @@ export default async function SpotDetailPage({ params }: PageProps) {
       {/* スポット写真ギャラリー */}
       <section className="mb-6 sm:mb-8">
         <SpotPhotoGallery photos={spot.spotPhotos} spotType={spot.spotType} spotName={spot.name} />
+        {/* 釣りポイント配置図（釣り場の様子に統合） */}
+        {fishingPoints && (
+          <div className="mt-4">
+            <FishingPointDiagram spotName={spot.name} data={fishingPoints} />
+          </div>
+        )}
       </section>
 
       {/* 安全警告 */}
@@ -845,6 +854,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
               </CardContent></Card>
             </section>
           )}
+          {/* 釣りポイント配置図は「釣り場の様子」セクションに統合済み */}
           <section>
             <h3 className="mb-3 text-lg font-bold">設備</h3>
             <div className="flex flex-wrap gap-2">
