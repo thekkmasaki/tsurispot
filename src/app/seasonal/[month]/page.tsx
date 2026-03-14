@@ -19,21 +19,55 @@ import { SpotCard } from "@/components/spots/spot-card";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
+import { seasons, seasonSlugs, getSeasonBySlug } from "@/lib/data/seasonal-data";
+import { SeasonalSeasonPage } from "@/components/seasonal-season-page";
 
 interface PageProps {
   params: Promise<{ month: string }>;
 }
 
 export async function generateStaticParams() {
-  return seasonalGuides.map((guide) => ({
-    month: guide.slug,
-  }));
+  return [
+    // 季節ページ: spring, summer, autumn, winter
+    ...seasonSlugs.map((slug) => ({ month: slug })),
+    // 既存の季節ガイド: winter-breakwater 等
+    ...seasonalGuides.map((guide) => ({ month: guide.slug })),
+  ];
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { month } = await params;
+
+  // 季節ページの場合
+  const seasonInfo = getSeasonBySlug(month);
+  if (seasonInfo) {
+    const monthLabels = seasonInfo.months.map((m) => `${m}月`).join("〜");
+    const topFishNames = seasonInfo.months
+      .slice(0, 2)
+      .map((m) => `${m}月`)
+      .join("・");
+    const title = `${seasonInfo.nameJa}の釣りガイド｜${seasonInfo.nameJa}に釣れる魚・おすすめ釣り方【2026年版】`;
+    const description = `${seasonInfo.nameJa}（${monthLabels}）に釣れる魚と釣り方を完全ガイド。${seasonInfo.description.slice(0, 80)}`;
+
+    return {
+      title,
+      description,
+      openGraph: {
+        title,
+        description,
+        type: "article",
+        url: `https://tsurispot.com/seasonal/${seasonInfo.slug}`,
+        siteName: "ツリスポ",
+      },
+      alternates: {
+        canonical: `https://tsurispot.com/seasonal/${seasonInfo.slug}`,
+      },
+    };
+  }
+
+  // 既存の季節ガイドの場合
   const guide = seasonalGuides.find((g) => g.slug === month);
   if (!guide) return { title: "ページが見つかりません" };
 
@@ -65,6 +99,13 @@ const SEASON_COLOR: Record<string, { bg: string; border: string; text: string; b
 
 export default async function SeasonalGuidePage({ params }: PageProps) {
   const { month } = await params;
+
+  // 季節ページの場合はSeasonalSeasonPageコンポーネントに委譲
+  const seasonInfo = getSeasonBySlug(month);
+  if (seasonInfo) {
+    return <SeasonalSeasonPage season={seasonInfo} />;
+  }
+
   const guide = seasonalGuides.find((g) => g.slug === month);
   if (!guide) notFound();
 
