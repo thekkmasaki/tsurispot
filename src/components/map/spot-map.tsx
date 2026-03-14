@@ -6,7 +6,7 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { fishingSpots } from '@/lib/data/spots';
 import Link from 'next/link';
-import { Star, Navigation, Loader2, Heart } from 'lucide-react';
+import { Star, Navigation, Loader2, Heart, Fish, ChevronDown, ChevronUp, SlidersHorizontal, MapPin } from 'lucide-react';
 import { DIFFICULTY_LABELS } from '@/types';
 import { Badge } from '@/components/ui/badge';
 import { useFavorites } from '@/hooks/use-favorites';
@@ -65,10 +65,26 @@ const userIcon = new L.DivIcon({
 export function SpotMap() {
   const [selectedPrefectures, setSelectedPrefectures] = useState<Set<string>>(new Set());
   const [selectedAreas, setSelectedAreas] = useState<Set<string>>(new Set());
+  const [selectedFish, setSelectedFish] = useState<Set<string>>(new Set());
+  const [showAllFish, setShowAllFish] = useState(false);
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [locating, setLocating] = useState(false);
   const [nearbyMode, setNearbyMode] = useState(false);
+  const [filtersOpen, setFiltersOpen] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
   const { toggleFavorite, isFavorite } = useFavorites();
+
+  // モバイル判定（デフォルト折りたたみ）
+  useEffect(() => {
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      if (mobile) setFiltersOpen(false);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
 
   useEffect(() => {
     // デフォルトで現在地の近くを表示
@@ -95,6 +111,8 @@ export function SpotMap() {
         setUserLocation(loc);
         setNearbyMode(true);
         setSelectedPrefectures(new Set());
+        setSelectedFish(new Set());
+        setShowAllFish(false);
         setLocating(false);
       },
       () => {
@@ -104,9 +122,24 @@ export function SpotMap() {
     );
   }, []);
 
+  const toggleFish = (fishSlug: string) => {
+    setSelectedFish((prev) => {
+      const next = new Set(prev);
+      if (next.has(fishSlug)) {
+        next.delete(fishSlug);
+      } else {
+        next.add(fishSlug);
+      }
+      return next;
+    });
+  };
+
   const togglePrefecture = (pref: string) => {
     setNearbyMode(false);
     setSelectedAreas(new Set());
+    setSelectedFish(new Set());
+    setShowAllFish(false);
+    setShowAllAreas(false);
     setSelectedPrefectures((prev) => {
       const next = new Set(prev);
       if (next.has(pref)) {
@@ -130,26 +163,36 @@ export function SpotMap() {
     });
   };
 
-  // 選択した都道府県内の利用可能なエリア一覧
-  const availableAreas = useMemo(() => {
+  const [showAllAreas, setShowAllAreas] = useState(false);
+
+  // 選択した都道府県内の利用可能なエリア一覧（都道府県別グループ）
+  const availableAreasByPref = useMemo(() => {
     if (selectedPrefectures.size === 0) return [];
-    const areaMap = new Map<string, number>();
+    const prefAreaMap = new Map<string, Map<string, number>>();
     fishingSpots
       .filter((s) => selectedPrefectures.has(s.region.prefecture))
       .forEach((s) => {
-        const key = s.region.areaName;
-        areaMap.set(key, (areaMap.get(key) || 0) + 1);
+        if (!prefAreaMap.has(s.region.prefecture)) {
+          prefAreaMap.set(s.region.prefecture, new Map());
+        }
+        const areaMap = prefAreaMap.get(s.region.prefecture)!;
+        areaMap.set(s.region.areaName, (areaMap.get(s.region.areaName) || 0) + 1);
       });
-    return Array.from(areaMap.entries())
-      .sort((a, b) => b[1] - a[1])
-      .map(([name, count]) => ({ name, count }));
+    return Array.from(prefAreaMap.entries()).map(([pref, areaMap]) => ({
+      prefecture: pref,
+      areas: Array.from(areaMap.entries())
+        .sort((a, b) => b[1] - a[1])
+        .map(([name, count]) => ({ name, count })),
+    }));
   }, [selectedPrefectures]);
 
-  const filteredSpots = useMemo(() => {
+  const totalAreaCount = useMemo(() => availableAreasByPref.reduce((sum, g) => sum + g.areas.length, 0), [availableAreasByPref]);
+
+  // 地域・エリアでフィルタしたスポット（魚種フィルタ前）
+  const locationFilteredSpots = useMemo(() => {
     if (nearbyMode && userLocation) {
-      // 現在地から30km以内のスポットを距離順で表示
       const toRad = (d: number) => (d * Math.PI) / 180;
-      return fishingSpots
+      const nearby = fishingSpots
         .map((s) => {
           const dLat = toRad(s.latitude - userLocation[0]);
           const dLon = toRad(s.longitude - userLocation[1]);
@@ -161,6 +204,9 @@ export function SpotMap() {
         })
         .filter((s) => s._dist <= 30)
         .sort((a, b) => a._dist - b._dist);
+      // 30km内に0件なら全スポット表示にフォールバック
+      if (nearby.length === 0) return fishingSpots;
+      return nearby;
     }
     if (selectedPrefectures.size === 0) return fishingSpots;
     const prefFiltered = fishingSpots.filter((s) => selectedPrefectures.has(s.region.prefecture));
@@ -168,8 +214,40 @@ export function SpotMap() {
     return prefFiltered.filter((s) => selectedAreas.has(s.region.areaName));
   }, [selectedPrefectures, selectedAreas, nearbyMode, userLocation]);
 
+  // 利用可能な魚種リスト（地域フィルタ後のスポットから集計）
+  const availableFish = useMemo(() => {
+    const fishMap = new Map<string, { name: string; slug: string; count: number }>();
+    locationFilteredSpots.forEach((s) => {
+      if (s.catchableFish && s.catchableFish.length > 0) {
+        s.catchableFish.forEach((cf) => {
+          if (cf.fish?.slug && cf.fish?.name) {
+            const existing = fishMap.get(cf.fish.slug);
+            if (existing) {
+              existing.count++;
+            } else {
+              fishMap.set(cf.fish.slug, { name: cf.fish.name, slug: cf.fish.slug, count: 1 });
+            }
+          }
+        });
+      }
+    });
+    return Array.from(fishMap.values()).sort((a, b) => b.count - a.count);
+  }, [locationFilteredSpots]);
+
+  // 魚種フィルタも適用した最終結果
+  const filteredSpots = useMemo(() => {
+    if (selectedFish.size === 0) return locationFilteredSpots;
+    return locationFilteredSpots.filter((s) =>
+      s.catchableFish?.some((cf) => cf.fish?.slug && selectedFish.has(cf.fish.slug))
+    );
+  }, [locationFilteredSpots, selectedFish]);
+
   const { mapCenter, mapZoom } = useMemo((): { mapCenter: [number, number]; mapZoom: number } => {
     if (nearbyMode && userLocation) {
+      // nearbyEmpty（30km内0件）の場合は日本全体を表示
+      if (locationFilteredSpots.length === fishingSpots.length) {
+        return { mapCenter: DEFAULT_CENTER, mapZoom: DEFAULT_ZOOM };
+      }
       return { mapCenter: userLocation, mapZoom: 12 };
     }
     if (selectedPrefectures.size === 0) {
@@ -191,16 +269,40 @@ export function SpotMap() {
       return { mapCenter: [centerLat, centerLng], mapZoom: 8 };
     }
     return { mapCenter: DEFAULT_CENTER, mapZoom: DEFAULT_ZOOM };
-  }, [selectedPrefectures, filteredSpots, nearbyMode, userLocation]);
+  }, [selectedPrefectures, filteredSpots, nearbyMode, userLocation, locationFilteredSpots]);
+
+  // nearbyModeで0件の場合の検出
+  const nearbyEmpty = nearbyMode && userLocation && locationFilteredSpots.length === fishingSpots.length;
 
   return (
-    <div className="space-y-3">
-      {/* Region filter */}
-      <div className="space-y-2">
-        <div className="flex items-center gap-2">
+    <div className="space-y-2">
+      {/* フィルター折りたたみヘッダー + 件数バッジ */}
+      <div className="flex items-center justify-between gap-2">
+        <button
+          onClick={() => setFiltersOpen((v) => !v)}
+          className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-foreground hover:bg-muted/60 transition-colors"
+        >
+          <SlidersHorizontal className="size-4" />
+          フィルター
+          {filtersOpen ? <ChevronUp className="size-4" /> : <ChevronDown className="size-4" />}
+          {(selectedPrefectures.size > 0 || selectedFish.size > 0 || nearbyMode) && (
+            <span className="ml-1 flex size-2 rounded-full bg-blue-600" />
+          )}
+        </button>
+        <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+          <MapPin className="size-3.5" />
+          <span className="font-medium tabular-nums">{filteredSpots.length.toLocaleString()}件</span>
+          <span className="hidden sm:inline">のスポットを表示中</span>
+        </div>
+      </div>
+
+      {/* 折りたたみ可能なフィルターセクション */}
+      {filtersOpen && (
+      <div className="space-y-2 rounded-lg border bg-card p-3">
+        <div className="flex flex-wrap items-center gap-2">
           <span className="text-xs font-medium text-muted-foreground sm:text-sm">地域:</span>
           <button
-            onClick={() => { setSelectedPrefectures(new Set()); setSelectedAreas(new Set()); setNearbyMode(false); }}
+            onClick={() => { setSelectedPrefectures(new Set()); setSelectedAreas(new Set()); setSelectedFish(new Set()); setShowAllFish(false); setNearbyMode(false); }}
             className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors min-h-[36px] sm:text-sm ${
               selectedPrefectures.size === 0 && !nearbyMode
                 ? 'bg-primary text-primary-foreground'
@@ -221,9 +323,14 @@ export function SpotMap() {
             {locating ? <Loader2 className="size-3.5 animate-spin" /> : <Navigation className="size-3.5" />}
             現在地の近く
           </button>
-          {nearbyMode && (
+          {nearbyMode && !nearbyEmpty && (
             <span className="text-xs text-blue-600 font-medium">
               半径30km内 {filteredSpots.length}件
+            </span>
+          )}
+          {nearbyMode && nearbyEmpty && (
+            <span className="text-xs text-amber-600 font-medium">
+              半径30km内にスポットがないため全表示中
             </span>
           )}
           {!nearbyMode && selectedPrefectures.size > 0 && (
@@ -247,44 +354,133 @@ export function SpotMap() {
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
-                {pref.replace(/[都道府県]$/, '')}
+                {pref === '北海道' ? '北海道' : pref.replace(/[都道府県]$/, '')}
               </button>
             ))}
           </div>
         ))}
-        {/* エリアフィルタ（都道府県選択時に表示） */}
-        {availableAreas.length > 0 && !nearbyMode && (
-          <div className="flex flex-wrap items-center gap-1.5 rounded-lg bg-muted/50 p-2">
-            <span className="w-14 shrink-0 text-[10px] font-medium text-muted-foreground sm:text-xs">
-              エリア
+        {/* エリアフィルタ（都道府県選択時に表示・都道府県別グループ） */}
+        {availableAreasByPref.length > 0 && !nearbyMode && (
+          <div className="space-y-1.5 rounded-lg bg-muted/50 p-2">
+            <div className="flex items-center gap-2">
+              <span className="text-[10px] font-medium text-muted-foreground sm:text-xs">エリア</span>
+              <button
+                onClick={() => setSelectedAreas(new Set())}
+                className={`rounded-full px-2.5 py-1 text-[10px] font-medium transition-colors min-h-[28px] sm:text-xs ${
+                  selectedAreas.size === 0
+                    ? 'bg-emerald-600 text-white'
+                    : 'bg-white text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                すべて
+              </button>
+              {selectedAreas.size > 0 && (
+                <span className="text-[10px] text-emerald-600 font-medium">{selectedAreas.size}エリア選択中</span>
+              )}
+              {totalAreaCount > 10 && (
+                <button
+                  onClick={() => setShowAllAreas((v) => !v)}
+                  className="ml-auto flex items-center gap-0.5 text-[10px] text-muted-foreground hover:text-foreground sm:text-xs"
+                >
+                  {showAllAreas ? <>閉じる <ChevronUp className="size-3" /></> : <>すべて表示 <ChevronDown className="size-3" /></>}
+                </button>
+              )}
+            </div>
+            {availableAreasByPref.map(({ prefecture, areas }) => {
+              const displayAreas = showAllAreas ? areas : areas.slice(0, 8);
+              const hiddenCount = areas.length - displayAreas.length;
+              return (
+                <div key={prefecture} className="flex flex-wrap items-center gap-1.5">
+                  <span className="w-14 shrink-0 text-[10px] font-medium text-emerald-700 sm:text-xs">
+                    {prefecture === '北海道' ? '北海道' : prefecture.replace(/[都道府県]$/, '')}
+                  </span>
+                  {displayAreas.map(({ name, count }) => (
+                    <button
+                      key={name}
+                      onClick={() => toggleArea(name)}
+                      className={`rounded-full px-2.5 py-1 text-[10px] font-medium transition-colors min-h-[28px] sm:text-xs ${
+                        selectedAreas.has(name)
+                          ? 'bg-emerald-600 text-white'
+                          : 'bg-white text-gray-700 hover:bg-gray-100'
+                      }`}
+                    >
+                      {name}
+                      <span className="ml-0.5 text-[9px] opacity-60">({count})</span>
+                    </button>
+                  ))}
+                  {hiddenCount > 0 && (
+                    <button
+                      onClick={() => setShowAllAreas(true)}
+                      className="text-[10px] text-muted-foreground hover:text-foreground sm:text-xs"
+                    >
+                      +{hiddenCount}
+                    </button>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        )}
+        {/* 魚種フィルタ */}
+        {availableFish.length > 0 && (
+          <div className="flex flex-wrap items-center gap-1.5 rounded-lg bg-orange-50 p-2">
+            <span className="flex w-14 shrink-0 items-center gap-0.5 text-[10px] font-medium text-orange-700 sm:text-xs">
+              <Fish className="size-3" />
+              魚種
             </span>
             <button
-              onClick={() => setSelectedAreas(new Set())}
+              onClick={() => setSelectedFish(new Set())}
               className={`rounded-full px-2.5 py-1 text-[10px] font-medium transition-colors min-h-[28px] sm:text-xs ${
-                selectedAreas.size === 0
-                  ? 'bg-emerald-600 text-white'
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
+                selectedFish.size === 0
+                  ? 'bg-orange-600 text-white'
+                  : 'bg-white text-orange-700 hover:bg-orange-100'
               }`}
             >
               すべて
             </button>
-            {availableAreas.map(({ name, count }) => (
+            {(showAllFish ? availableFish : availableFish.slice(0, 20)).map(({ name, slug, count }) => (
               <button
-                key={name}
-                onClick={() => toggleArea(name)}
+                key={slug}
+                onClick={() => toggleFish(slug)}
                 className={`rounded-full px-2.5 py-1 text-[10px] font-medium transition-colors min-h-[28px] sm:text-xs ${
-                  selectedAreas.has(name)
-                    ? 'bg-emerald-600 text-white'
-                    : 'bg-white text-gray-700 hover:bg-gray-100'
+                  selectedFish.has(slug)
+                    ? 'bg-orange-600 text-white'
+                    : 'bg-white text-orange-700 hover:bg-orange-100'
                 }`}
               >
                 {name}
                 <span className="ml-0.5 text-[9px] opacity-60">({count})</span>
               </button>
             ))}
+            {availableFish.length > 20 && (
+              <button
+                onClick={() => setShowAllFish((v) => !v)}
+                className="flex items-center gap-0.5 rounded-full px-2.5 py-1 text-[10px] font-medium text-orange-600 hover:bg-orange-100 min-h-[28px] sm:text-xs"
+              >
+                {showAllFish ? (
+                  <>閉じる <ChevronUp className="size-3" /></>
+                ) : (
+                  <>他{availableFish.length - 20}種 <ChevronDown className="size-3" /></>
+                )}
+              </button>
+            )}
+            {selectedFish.size > 0 && (
+              <span className="text-[10px] text-orange-600 font-medium sm:text-xs">
+                {filteredSpots.length}件
+              </span>
+            )}
           </div>
         )}
       </div>
+      )}
+
+      {/* 現在地取得中のローディング表示 */}
+      {locating && (
+        <div className="flex items-center gap-2 rounded-lg bg-blue-50 px-3 py-2 text-sm text-blue-700">
+          <Loader2 className="size-4 animate-spin" />
+          現在地を取得中...
+        </div>
+      )}
 
       <MapContainer
         center={DEFAULT_CENTER}
