@@ -13,11 +13,15 @@ import {
   Mail,
   Tag,
   HelpCircle,
+  Calendar,
+  Fish,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { tackleShops, getShopBySlug } from "@/lib/data/shops";
+import { getMonthlyGuideByMonth, monthSlugs } from "@/lib/data/monthly-guides";
+import { fishSpecies } from "@/lib/data/fish";
 import { getSpotBySlug, fishingSpots } from "@/lib/data/spots";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { LiveBaitStock } from "@/components/shops/live-bait-stock";
@@ -151,6 +155,17 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
         .sort((a, b) => a.distance - b.distance)
         .slice(0, 5)
         .map((entry) => entry.spot);
+
+  // 今月の釣りガイドデータ
+  const currentMonth = new Date().getMonth() + 1;
+  const currentGuide = getMonthlyGuideByMonth(currentMonth);
+  const currentMonthSlug = monthSlugs[currentMonth - 1];
+  const currentTopFish = currentGuide
+    ? currentGuide.topFish
+        .slice(0, 3)
+        .map((slug) => fishSpecies.find((f) => f.slug === slug))
+        .filter(Boolean)
+    : [];
 
   // FAQ data (non-sample only)
   const faqs = [
@@ -569,6 +584,38 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
       {isSample && slug === "sample-premium" && (
         <div className="mt-8">
           <PaidPlanInquiry plan="pro" />
+        </div>
+      )}
+
+      {/* 今月の釣り情報 */}
+      {currentGuide && (
+        <div className="mt-8">
+          <h2 className="text-lg font-bold mb-4 flex items-center gap-2">
+            <Calendar className="size-5 text-primary" />
+            {currentMonth}月の釣りガイド
+          </h2>
+          <Card className="border-emerald-200 bg-gradient-to-br from-emerald-50/50 to-transparent dark:from-emerald-950/10">
+            <CardContent className="pt-4">
+              <div className="mb-3 flex flex-wrap gap-2">
+                {currentTopFish.map((fish) => fish && (
+                  <Badge key={fish.slug} variant="secondary" className="flex items-center gap-1">
+                    <Fish className="size-3" />
+                    {fish.name}
+                  </Badge>
+                ))}
+              </div>
+              <p className="mb-4 text-sm leading-relaxed text-muted-foreground line-clamp-2">
+                {currentGuide.description}
+              </p>
+              <Link
+                href={`/monthly/${currentMonthSlug}`}
+                className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-emerald-700"
+              >
+                {currentMonth}月の釣りガイドを見る
+                <ChevronRight className="size-4" />
+              </Link>
+            </CardContent>
+          </Card>
         </div>
       )}
 

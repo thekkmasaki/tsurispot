@@ -21,6 +21,7 @@ import {
   Target,
   Newspaper,
   Globe,
+  Store,
 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -994,6 +995,28 @@ export default async function MonthlyGuidePage({ params }: Props) {
         </section>
         </CollapsibleSection>
 
+        {/* 釣具店で装備を揃えよう */}
+        <section className="mb-8">
+          <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
+            <Store className="size-5 text-primary" />
+            釣具店で装備を揃えよう
+          </h2>
+          <Card className="border-blue-200 bg-gradient-to-br from-blue-50/50 to-transparent dark:from-blue-950/10">
+            <CardContent className="pt-4">
+              <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+                釣り場の近くの釣具店でエサや仕掛けを調達しましょう。活きエサの在庫状況もリアルタイムで確認できます。
+              </p>
+              <Link
+                href="/shops"
+                className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90"
+              >
+                全国の釣具店を探す
+                <ChevronRight className="size-4" />
+              </Link>
+            </CardContent>
+          </Card>
+        </section>
+
         {/* 釣りポイント解説 */}
         <section className="mb-8">
           <h2 className="mb-4 flex items-center gap-2 text-lg font-bold">
@@ -1135,6 +1158,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
               { href: "/monthly", label: "月別ガイド一覧" },
               { href: "/fishing-rules", label: "都道府県別ルール" },
               { href: "/gear", label: "おすすめ釣り道具" },
+              { href: "/shops", label: "釣具店・エサ店ガイド" },
               { href: "/ranking", label: "人気ランキング" },
               { href: "/prefecture", label: "都道府県から探す" },
               { href: "/methods", label: "釣り方一覧" },
