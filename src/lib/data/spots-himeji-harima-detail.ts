@@ -141,7 +141,7 @@ export const himejiHarimaDetailSpots: FishingSpot[] = [
     latitude: 34.7660, longitude: 134.6320,
     address: "〒671-0111 兵庫県姫路市的形町福泊地先",
     accessInfo: "山陽電鉄「的形」駅からタクシー約10分。姫路バイパス姫路南ランプから約20分。",
-    region: lr("r412"), spotType: "fishing-park", difficulty: "beginner",
+    region: lr("r412"), spotType: "pier", difficulty: "beginner",
     isFree: false, hasParking: true, parkingDetail: "専用駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "竿・仕掛けのレンタルあり（有料）",
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.9, reviewCount: 280,
