@@ -814,7 +814,7 @@ export const chubuKinkiAdd4Spots: FishingSpot[] = [
   // =========================================
   {
     id: "sc4038", name: "洲本港", slug: "sumoto-kou-add4",
-    description: "淡路島東岸の中心港。ターミナル周辺の護岸ではサビキでアジ・サバが好調で、冬場のメバリングも人気。",
+    description: "淡路島東岸の中心港。ターミナル周辺の護岸ではサビキでアジ・サバが好調で、冬場のメバリングも人気。洲本一文字ではコブダイも狙え、投げ釣りでキス・カレイ、ルアーでシーバスも楽しめる。",
     latitude: 34.3430, longitude: 134.8980,
     address: "〒656-0021 兵庫県洲本市塩屋",
     accessInfo: "淡路島中央スマートICから約20分。高速バス洲本バスセンターから徒歩約10分。",
@@ -827,6 +827,10 @@ export const chubuKinkiAdd4Spots: FishingSpot[] = [
       { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "メバリング" },
       { fish: fish("kurodai"), monthStart: 3, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "投げ釣り", source: "書籍:関西海釣りドライブマップ" },
+      { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り", source: "書籍:関西海釣りドライブマップ" },
+      { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー", source: "書籍:関西海釣りドライブマップ" },
+      { fish: fish("kobudai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "hard", recommendedTime: "日中", method: "落とし込み", source: "書籍:関西海釣りドライブマップ" },
     ],
     bestTimes: btEvening, tackleRecommendations: [],
     tideAdvice: tideStandard, mazumeInfo: mazumeChubu,
