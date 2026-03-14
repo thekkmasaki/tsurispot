@@ -7,12 +7,13 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "*",
         allow: "/",
         disallow: [
+          "/api/",
+          "/_next/",
           "/shops/*/dashboard",
           "/spots/submit",
           "/spots/compare",
           "/favorites",
           "/*/opengraph-image",
-          "/api/og",
         ],
       },
       {
@@ -105,7 +106,10 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://tsurispot.com/sitemap.xml",
+    sitemap: [
+      "https://tsurispot.com/sitemap.xml",
+      "https://tsurispot.com/image-sitemap.xml",
+    ],
     host: "https://tsurispot.com",
   };
 }

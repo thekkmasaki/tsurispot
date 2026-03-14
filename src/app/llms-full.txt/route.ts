@@ -166,7 +166,7 @@ ${Array.from(spotsByType.entries())
 - サイト名: ツリスポ (TsuriSpot)
 - URL: https://tsurispot.com
 - 運営: TsuriSpot編集部
-- 編集長: 正木家康（釣り歴20年以上）
+- 編集長: 正木家康（釣り歴2年目）
 - Instagram: https://www.instagram.com/tsurispotjapan/
 - お問い合わせ: https://tsurispot.com/contact
 `;

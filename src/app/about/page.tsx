@@ -80,7 +80,7 @@ const personJsonLd = {
     url: "https://tsurispot.com",
   },
   description:
-    "釣り歴10年以上。明石・播磨エリアをホームグラウンドに、堤防釣りからショアジギングまで幅広く実践。ツリスポ編集長として全記事の監修を担当。",
+    "釣り歴2年目。明石・播磨エリアをホームグラウンドに、堤防釣りからショアジギングまで幅広く実践。ツリスポ編集長として全記事の監修を担当。",
   knowsAbout: [
     "堤防釣り",
     "サビキ釣り",
@@ -250,7 +250,7 @@ export default function AboutPage() {
               <div className="flex-1">
                 <h3 className="mb-1 text-xl font-bold">正木 家康</h3>
                 <p className="mb-3 text-sm text-muted-foreground">
-                  ツリスポ編集長 / 釣り歴10年以上
+                  ツリスポ編集長 / 釣り歴2年目
                 </p>
                 <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
                   明石・播磨エリアをホームグラウンドに、堤防釣りからショアジギングまで幅広く実践。
@@ -292,7 +292,7 @@ export default function AboutPage() {
             </h2>
           </div>
           <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-            ツリスポ編集部は、編集長を中心に釣り歴10年以上の経験者で構成されたチームです。
+            ツリスポ編集部は、編集長を中心に釣り歴2年目の経験者で構成されたチームです。
             堤防釣りからオフショアまで幅広いジャンルに精通したメンバーが、
             初心者にもわかりやすい情報発信を心がけています。
           </p>

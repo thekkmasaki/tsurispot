@@ -49,6 +49,9 @@ const OnlineUsersBadge = dynamic(() => import("@/components/online-users-badge")
 const spotCount = fishingSpots.length.toLocaleString();
 const fishCount = fishSpecies.length;
 
+// ブログ記事はmicroCMSから動的取得するため、ISRで定期更新
+export const revalidate = 3600;
+
 export const metadata: Metadata = {
   title: "ツリスポ - 近くの釣り場が見つかる釣りスポット検索",
   description: `全国${spotCount}箇所以上の釣りスポットと${fishCount}種以上の魚種図鑑を無料で検索。堤防・漁港・磯の海釣りから渓流・湖の川釣りまで網羅。今釣れる魚・混雑予想・初心者向け穴場・潮汐情報が一目でわかる。`,

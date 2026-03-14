@@ -15,10 +15,12 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { MonthlySportsSorter, type MonthlySpot } from "@/components/monthly-spots-sorter";
+import { SeasonalAffiliateSection } from "@/components/seasonal-affiliate-section";
 import { MONTHS } from "@/lib/data/fishing-methods";
 import { prefectures } from "@/lib/data/prefectures";
 import { fishSpecies } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
+import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 
 type PageProps = {
   params: Promise<{ month: string; regionGroup: string }>;
@@ -235,6 +237,19 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
 
   // 季節のコツ
   const seasonalTips = getSeasonalTips(monthDef.season, regionName);
+
+  // この地域の全釣り方を集約してアフィリエイト商品をマッチング
+  const allMethods = new Set<string>();
+  for (const f of allFishList) {
+    for (const m of f.methods) {
+      allMethods.add(m);
+    }
+  }
+  const affiliateProducts = getRelevantAffiliateProducts(
+    Array.from(allMethods),
+    monthDef.num,
+    6 // 最大6商品
+  );
 
   // JSON-LD
   const breadcrumbJsonLd = {
@@ -571,6 +586,13 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
           </Card>
         </section>
       )}
+
+      {/* おすすめ装備（アフィリエイト） */}
+      <SeasonalAffiliateSection
+        products={affiliateProducts}
+        seasonLabel={monthDef.name}
+        regionName={regionName}
+      />
 
       {/* よくある質問 */}
       <section className="mb-8 sm:mb-10">

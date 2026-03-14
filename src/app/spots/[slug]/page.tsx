@@ -564,31 +564,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(spotSpeakableJsonLd) }}
       />
-      {(() => {
-        const methods = spot.catchableFish.map((cf) => cf.method);
-        const vids = methods.length > 0
-          ? getVideosForMethods(methods, 1)
-          : getVideosForSpotType(spot.spotType, 1);
-        if (vids.length === 0) return null;
-        const v = vids[0];
-        return (
-          <script
-            type="application/ld+json"
-            dangerouslySetInnerHTML={{
-              __html: JSON.stringify({
-                "@context": "https://schema.org",
-                "@type": "VideoObject",
-                name: v.title,
-                description: `${spot.name}で使える釣り方の解説動画`,
-                thumbnailUrl: `https://i.ytimg.com/vi/${v.videoId}/hqdefault.jpg`,
-                uploadDate: "2025-01-01",
-                contentUrl: `https://www.youtube.com/watch?v=${v.videoId}`,
-                embedUrl: `https://www.youtube.com/embed/${v.videoId}`,
-              }),
-            }}
-          />
-        );
-      })()}
+      {/* VideoObject JSON-LD削除: 汎用釣り方動画をスポット固有のVideoObjectとして
+          出力していたが、Googlebotが初期HTMLで対応するiframeプレイヤーを見つけられず
+          Search Consoleで「動画再生ページに動画がありません」エラーが290ページで発生。
+          動画自体はYouTubeEmbedListで引き続きページ内に表示される。 */}
       {/* 最近見たスポット記録 */}
       <RecentlyViewedTracker spot={{ slug: spot.slug, name: spot.name, prefecture: spot.region.prefecture, areaName: spot.region.areaName, spotType: spot.spotType }} />
 
