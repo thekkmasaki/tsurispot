@@ -18,8 +18,9 @@ import { MonthlySportsSorter, type MonthlySpot } from "@/components/monthly-spot
 import { SeasonalAffiliateSection } from "@/components/seasonal-affiliate-section";
 import { MONTHS } from "@/lib/data/fishing-methods";
 import { prefectures } from "@/lib/data/prefectures";
-import { fishSpecies } from "@/lib/data/fish";
+import { fishSpecies, getFishSeasons } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
+import type { RegionSlug } from "@/types";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 
 type PageProps = {
@@ -46,6 +47,20 @@ function getRegionGroupBySlug(slug: string): string | undefined {
 
 function getRegionGroupSlug(name: string): string | undefined {
   return REGION_GROUP_SLUG_ENTRIES.find(([, v]) => v === name)?.[0];
+}
+
+function toRegionSlug(pageSlug: string): RegionSlug | undefined {
+  const map: Record<string, RegionSlug> = {
+    hokkaido: "hokkaido",
+    tohoku: "tohoku",
+    kanto: "kanto",
+    chubu: "chubu",
+    kinki: "kinki",
+    chugoku: "chugoku",
+    shikoku: "shikoku",
+    "kyushu-okinawa": "kyushu",
+  };
+  return map[pageSlug];
 }
 
 // 季節のコツテキスト
@@ -112,13 +127,14 @@ export async function generateMetadata({
   if (!monthDef || !regionName) return { title: "ページが見つかりません" };
 
   // メタデータ用に今月釣れる魚を取得
+  const metaRSlug = toRegionSlug(regionSlug);
   const metaRegionPrefs = prefectures.filter((p) => p.regionGroup === regionName);
   const metaRegionPrefNames = new Set(metaRegionPrefs.map((p) => p.name));
   const metaInSeasonFish = new Map<string, string>();
   for (const spot of fishingSpots) {
     if (!metaRegionPrefNames.has(spot.region.prefecture)) continue;
     for (const cf of spot.catchableFish) {
-      if (cf.fish.seasonMonths.includes(monthDef.num)) {
+      if (getFishSeasons(cf.fish, metaRSlug).seasonMonths.includes(monthDef.num)) {
         metaInSeasonFish.set(cf.fish.id, cf.fish.name);
       }
     }
@@ -151,6 +167,8 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
   const regionName = getRegionGroupBySlug(regionSlug);
   if (!monthDef || !regionName) notFound();
 
+  const rSlug = toRegionSlug(regionSlug);
+
   // この地域に含まれる都道府県
   const regionPrefs = prefectures.filter((p) => p.regionGroup === regionName);
   const regionPrefNames = new Set(regionPrefs.map((p) => p.name));
@@ -174,17 +192,18 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
 
   for (const spot of regionSpots) {
     for (const cf of spot.catchableFish) {
-      if (!cf.fish.seasonMonths.includes(monthDef.num)) continue;
+      const seasons = getFishSeasons(cf.fish, rSlug);
+      if (!seasons.seasonMonths.includes(monthDef.num)) continue;
       const existing = fishMap.get(cf.fish.slug);
       if (existing) {
         existing.spotCount++;
         if (cf.method) existing.methods.add(cf.method);
-        if (cf.fish.peakMonths.includes(monthDef.num)) existing.isPeak = true;
+        if (seasons.peakMonths.includes(monthDef.num)) existing.isPeak = true;
       } else {
         fishMap.set(cf.fish.slug, {
           slug: cf.fish.slug,
           name: cf.fish.name,
-          isPeak: cf.fish.peakMonths.includes(monthDef.num),
+          isPeak: seasons.peakMonths.includes(monthDef.num),
           spotCount: 1,
           methods: new Set(cf.method ? [cf.method] : []),
         });
@@ -208,7 +227,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
         s.catchableFish.some(
           (cf) =>
             cf.fish.slug === fishSlug &&
-            cf.fish.seasonMonths.includes(monthDef!.num)
+            getFishSeasons(cf.fish, rSlug).seasonMonths.includes(monthDef!.num)
         )
       )
       .sort((a, b) => b.rating - a.rating)
@@ -219,10 +238,10 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
   const topSpots = regionSpots
     .map((spot) => {
       const inSeasonCount = spot.catchableFish.filter((cf) =>
-        cf.fish.seasonMonths.includes(monthDef.num)
+        getFishSeasons(cf.fish, rSlug).seasonMonths.includes(monthDef.num)
       ).length;
       const peakCount = spot.catchableFish.filter((cf) =>
-        cf.fish.peakMonths.includes(monthDef.num)
+        getFishSeasons(cf.fish, rSlug).peakMonths.includes(monthDef.num)
       ).length;
       return { spot, inSeasonCount, peakCount };
     })
@@ -547,7 +566,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
           mainImageUrl: spot.mainImageUrl,
           region: { prefecture: spot.region.prefecture },
           catchableFishNames: spot.catchableFish
-            .filter((cf) => cf.fish.seasonMonths.includes(monthDef!.num))
+            .filter((cf) => getFishSeasons(cf.fish, rSlug).seasonMonths.includes(monthDef!.num))
             .map((cf) => cf.fish.name)
             .slice(0, 3),
         }));

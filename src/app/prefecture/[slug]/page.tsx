@@ -22,7 +22,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { regions } from "@/lib/data/regions";
 import { fishingSpots } from "@/lib/data/spots";
-import { fishSpecies } from "@/lib/data/fish";
+import { fishSpecies, getFishSeasons } from "@/lib/data/fish";
+import { REGION_NAME_TO_SLUG } from "@/lib/data/fish-regional-seasons";
+import type { RegionSlug } from "@/types";
 import { SpotCard } from "@/components/spots/spot-card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { getPrefectureInfoBySlug, adjacentPrefectures, getPrefectureFAQs } from "@/lib/data/prefecture-info";
@@ -139,13 +141,13 @@ function getDifficultyBreakdown(prefectureName: string) {
 /**
  * 今月旬の魚が多く釣れるスポットTOP5を算出
  */
-function getTopSeasionalSpots(prefectureName: string, currentMonth: number) {
+function getTopSeasionalSpots(prefectureName: string, currentMonth: number, regionSlug?: RegionSlug) {
   const prefSpots = getSpotsForPrefecture(prefectureName);
 
   const scored = prefSpots.map((spot) => {
     // このスポットのcatchableFishの中で、今月がseasonMonthsに含まれる魚の数をカウント
     const inSeasonFish = spot.catchableFish.filter((cf) =>
-      cf.fish.seasonMonths.includes(currentMonth)
+      getFishSeasons(cf.fish, regionSlug).seasonMonths.includes(currentMonth)
     );
     return {
       spot,
@@ -174,7 +176,7 @@ function getTop10SpotsByRating(prefectureName: string) {
  * 季節別おすすめ魚種（スポットのcatchableFishデータから動的生成）
  * Spring: 3-5, Summer: 6-8, Autumn: 9-11, Winter: 12-2
  */
-function getSeasonalFishBreakdown(prefectureName: string) {
+function getSeasonalFishBreakdown(prefectureName: string, regionSlug?: RegionSlug) {
   const seasonRanges = {
     spring: [3, 4, 5],
     summer: [6, 7, 8],
@@ -190,10 +192,11 @@ function getSeasonalFishBreakdown(prefectureName: string) {
     for (const spot of fishingSpots) {
       if (spot.region.prefecture !== prefectureName) continue;
       for (const cf of spot.catchableFish) {
-        const inSeason = months.some((m) => cf.fish.seasonMonths.includes(m));
+        const seasons = getFishSeasons(cf.fish, regionSlug);
+        const inSeason = months.some((m) => seasons.seasonMonths.includes(m));
         if (!inSeason) continue;
         const existing = fishMap.get(cf.fish.id);
-        const isPeak = months.some((m) => cf.fish.peakMonths.includes(m));
+        const isPeak = months.some((m) => seasons.peakMonths.includes(m));
         if (existing) {
           existing.spotCount++;
           if (isPeak) existing.isPeak = true;
@@ -224,7 +227,8 @@ function getSeasonalFishBreakdown(prefectureName: string) {
  */
 function getInSeasonFishForPrefecture(
   prefectureName: string,
-  currentMonth: number
+  currentMonth: number,
+  regionSlug?: RegionSlug
 ) {
   const fishMap = new Map<
     string,
@@ -234,18 +238,19 @@ function getInSeasonFishForPrefecture(
   for (const spot of fishingSpots) {
     if (spot.region.prefecture !== prefectureName) continue;
     for (const cf of spot.catchableFish) {
-      if (!cf.fish.seasonMonths.includes(currentMonth)) continue;
+      const seasons = getFishSeasons(cf.fish, regionSlug);
+      if (!seasons.seasonMonths.includes(currentMonth)) continue;
       const existing = fishMap.get(cf.fish.id);
       if (existing) {
         existing.spotCount++;
-        if (cf.fish.peakMonths.includes(currentMonth)) {
+        if (seasons.peakMonths.includes(currentMonth)) {
           existing.isPeak = true;
         }
       } else {
         fishMap.set(cf.fish.id, {
           name: cf.fish.name,
           slug: cf.fish.slug,
-          isPeak: cf.fish.peakMonths.includes(currentMonth),
+          isPeak: seasons.peakMonths.includes(currentMonth),
           spotCount: 1,
         });
       }
@@ -346,8 +351,9 @@ export default async function PrefecturePage({ params }: PageProps) {
   // 今月のデータ算出（SSGビルド時に確定）
   const currentMonth = new Date().getMonth() + 1;
   const currentMonthName = MONTH_NAMES[currentMonth - 1];
-  const topSeasonalSpots = getTopSeasionalSpots(pref.name, currentMonth);
-  const inSeasonFish = getInSeasonFishForPrefecture(pref.name, currentMonth);
+  const regionSlug = REGION_NAME_TO_SLUG[pref.regionGroup] as RegionSlug | undefined;
+  const topSeasonalSpots = getTopSeasionalSpots(pref.name, currentMonth, regionSlug);
+  const inSeasonFish = getInSeasonFishForPrefecture(pref.name, currentMonth, regionSlug);
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -448,7 +454,7 @@ export default async function PrefecturePage({ params }: PageProps) {
   const top10Spots = getTop10SpotsByRating(pref.name);
 
   // 季節別おすすめ魚種（動的生成）
-  const seasonalFishBreakdown = getSeasonalFishBreakdown(pref.name);
+  const seasonalFishBreakdown = getSeasonalFishBreakdown(pref.name, regionSlug);
 
   // 現在の年（動的）
   const currentYear = new Date().getFullYear();
@@ -1541,10 +1547,10 @@ export default async function PrefecturePage({ params }: PageProps) {
           出典・情報源
         </h2>
         <ul className="space-y-1 text-xs text-muted-foreground">
-          <li>・釣り場データ: ツリスポ編集部による現地調査・漁業協同組合公開情報・釣具店ヒアリングに基づく（{spots.length}スポット収録、{new Date().getFullYear()}年{new Date().getMonth() + 1}月時点）</li>
-          <li>・釣りルール: 各都道府県水産課・内水面漁業協同組合の公開規則に準拠</li>
-          <li>・シーズン情報: 水産試験場の漁獲統計・釣果報告データを参考に編集部が総合判断</li>
-          <li>・施設情報（駐車場・トイレ等）: 現地確認およびGoogle Maps情報に基づく</li>
+          <li>・釣り場データ: ツリスポ編集部調べ（{spots.length}スポット収録、{new Date().getFullYear()}年{new Date().getMonth() + 1}月時点）</li>
+          <li>・釣りルール: 各都道府県水産課・漁業協同組合の公開規則を参考</li>
+          <li>・シーズン情報: 公開情報を参考に編集部が総合判断</li>
+          <li>・施設情報（駐車場・トイレ等）: Google Maps情報等に基づく</li>
         </ul>
       </section>
     </div>

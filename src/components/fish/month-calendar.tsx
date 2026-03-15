@@ -1,6 +1,13 @@
+"use client";
+
+import { useState } from "react";
+import type { RegionSlug, RegionalSeasonData } from "@/types";
+import { REGION_SLUG_TO_NAME, ALL_REGION_SLUGS } from "@/lib/data/fish-regional-seasons";
+
 interface MonthCalendarProps {
   seasonMonths: number[];
   peakMonths: number[];
+  regionalData?: Partial<Record<RegionSlug, RegionalSeasonData>>;
 }
 
 const MONTH_LABELS = [
@@ -8,16 +15,61 @@ const MONTH_LABELS = [
   "7月", "8月", "9月", "10月", "11月", "12月",
 ];
 
-export function MonthCalendar({ seasonMonths, peakMonths }: MonthCalendarProps) {
+export function MonthCalendar({ seasonMonths, peakMonths, regionalData }: MonthCalendarProps) {
   const currentMonth = new Date().getMonth() + 1;
+  const [selectedRegion, setSelectedRegion] = useState<RegionSlug | null>(null);
+
+  // 選択地域に応じたデータを取得
+  const activeSeasonMonths = selectedRegion && regionalData?.[selectedRegion]
+    ? regionalData[selectedRegion]!.seasonMonths
+    : seasonMonths;
+  const activePeakMonths = selectedRegion && regionalData?.[selectedRegion]
+    ? regionalData[selectedRegion]!.peakMonths
+    : peakMonths;
+
+  // regionalDataに存在する地域のみ表示
+  const availableRegions = regionalData
+    ? ALL_REGION_SLUGS.filter((slug) => regionalData[slug])
+    : [];
 
   return (
     <div>
+      {/* 地域タブ（regionalDataがある場合のみ表示） */}
+      {availableRegions.length > 0 && (
+        <div className="mb-4 flex flex-wrap gap-1.5">
+          <button
+            type="button"
+            onClick={() => setSelectedRegion(null)}
+            className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+              selectedRegion === null
+                ? "bg-sky-600 text-white"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+            }`}
+          >
+            全国
+          </button>
+          {availableRegions.map((slug) => (
+            <button
+              key={slug}
+              type="button"
+              onClick={() => setSelectedRegion(slug)}
+              className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
+                selectedRegion === slug
+                  ? "bg-sky-600 text-white"
+                  : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+              }`}
+            >
+              {REGION_SLUG_TO_NAME[slug]}
+            </button>
+          ))}
+        </div>
+      )}
+
       <div className="space-y-1">
         {MONTH_LABELS.map((label, index) => {
           const month = index + 1;
-          const isPeak = peakMonths.includes(month);
-          const isSeason = seasonMonths.includes(month);
+          const isPeak = activePeakMonths.includes(month);
+          const isSeason = activeSeasonMonths.includes(month);
           const isCurrent = month === currentMonth;
 
           return (

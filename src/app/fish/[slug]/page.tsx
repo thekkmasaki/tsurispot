@@ -38,6 +38,7 @@ import { ShareButtons } from "@/components/ui/share-buttons";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { getPrefectureByName } from "@/lib/data/prefectures";
+import { fishRegionalSeasons } from "@/lib/data/fish-regional-seasons";
 import { CollapsibleSection } from "@/components/ui/collapsible-section";
 
 interface PageProps {
@@ -110,6 +111,7 @@ export default async function FishDetailPage({ params }: PageProps) {
   const currentMonth = new Date().getMonth() + 1;
   const isPeakNow = fish.peakMonths.includes(currentMonth);
   const isSeasonNow = fish.seasonMonths.includes(currentMonth);
+  const regionalData = fishRegionalSeasons[fish.slug];
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -588,6 +590,7 @@ export default async function FishDetailPage({ params }: PageProps) {
             <MonthCalendar
               seasonMonths={fish.seasonMonths}
               peakMonths={fish.peakMonths}
+              regionalData={regionalData}
             />
           </CardContent>
         </Card>
@@ -1157,8 +1160,8 @@ export default async function FishDetailPage({ params }: PageProps) {
           </h3>
           <ul className="space-y-1 text-xs text-muted-foreground">
             <li>・学名・分類情報: {fish.scientificName}（{fish.family}）— 日本産魚類検索 全種の同定 第三版（東海大学出版会）に準拠</li>
-            <li>・釣り場データ: ツリスポ編集部による現地調査・漁業協同組合公開情報・釣具店ヒアリングに基づく（{fish.spots.length}スポット収録、{new Date().getFullYear()}年{new Date().getMonth() + 1}月時点）</li>
-            <li>・シーズン情報: 全国の釣果報告データ・水産試験場の漁獲統計を参考に編集部が総合判断</li>
+            <li>・釣り場データ: ツリスポ編集部調べ（{fish.spots.length}スポット収録、{new Date().getFullYear()}年{new Date().getMonth() + 1}月時点）</li>
+            <li>・シーズン情報: 公開情報を参考に編集部が総合判断</li>
             {fish.isPoisonous && <li>・毒性情報: 厚生労働省「自然毒のリスクプロファイル」に準拠</li>}
           </ul>
         </div>
