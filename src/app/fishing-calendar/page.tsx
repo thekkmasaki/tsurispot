@@ -6,6 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { fishSpecies, getPeakFish, getCatchableNow } from "@/lib/data/fish";
+import { fishRegionalSeasons } from "@/lib/data/fish-regional-seasons";
+import { CalendarTableClient } from "@/components/fishing-calendar/calendar-table-client";
 
 export const metadata: Metadata = {
   title: "月別釣りカレンダー - 何月に何が釣れる？",
@@ -150,67 +152,19 @@ export default function FishingCalendarPage() {
           })}
         </nav>
 
-        {/* 年間シーズン概要テーブル */}
-        <div className="mb-10 overflow-x-auto rounded-lg border">
-          <table className="w-full min-w-[640px] text-sm">
-            <thead>
-              <tr className="border-b bg-muted/50">
-                <th className="whitespace-nowrap px-3 py-2 text-left font-medium">魚種</th>
-                {MONTH_NAMES.map((name) => (
-                  <th key={name} className="whitespace-nowrap px-1.5 py-2 text-center font-medium">
-                    {name.replace("月", "")}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody className="divide-y">
-              {fishSpecies
-                .filter((f) => !f.isPoisonous && f.category !== "freshwater")
-                .slice(0, 15)
-                .map((fish) => (
-                  <tr key={fish.slug} className="hover:bg-muted/30">
-                    <td className="whitespace-nowrap px-3 py-1.5">
-                      <Link
-                        href={`/fish/${fish.slug}`}
-                        className="font-medium text-foreground hover:text-primary"
-                      >
-                        {fish.name}
-                      </Link>
-                    </td>
-                    {Array.from({ length: 12 }, (_, i) => i + 1).map((month) => {
-                      const isPeak = fish.peakMonths.includes(month);
-                      const isSeason = fish.seasonMonths.includes(month);
-                      return (
-                        <td key={month} className="px-1.5 py-1.5 text-center">
-                          {isPeak ? (
-                            <span className="inline-block size-3 rounded-full bg-primary" title="旬" />
-                          ) : isSeason ? (
-                            <span className="inline-block size-3 rounded-full bg-primary/30" title="シーズン" />
-                          ) : (
-                            <span className="inline-block size-3 rounded-full bg-muted" title="-" />
-                          )}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                ))}
-            </tbody>
-          </table>
-          <div className="flex items-center gap-4 border-t bg-muted/30 px-3 py-2 text-xs text-muted-foreground">
-            <div className="flex items-center gap-1.5">
-              <span className="inline-block size-3 rounded-full bg-primary" />
-              旬（ベストシーズン）
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="inline-block size-3 rounded-full bg-primary/30" />
-              シーズン
-            </div>
-            <div className="flex items-center gap-1.5">
-              <span className="inline-block size-3 rounded-full bg-muted border" />
-              オフシーズン
-            </div>
-          </div>
-        </div>
+        {/* 年間シーズン概要テーブル（地域セレクター付き） */}
+        <CalendarTableClient
+          fishList={fishSpecies
+            .filter((f) => !f.isPoisonous && f.category !== "freshwater")
+            .slice(0, 15)
+            .map((f) => ({
+              slug: f.slug,
+              name: f.name,
+              seasonMonths: f.seasonMonths,
+              peakMonths: f.peakMonths,
+            }))}
+          regionalData={fishRegionalSeasons}
+        />
 
         {/* 月別詳細 */}
         <div className="space-y-8">
