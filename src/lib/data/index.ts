@@ -131,7 +131,8 @@ export function getSpotsByPrefectureAndFish(prefName: string, fishSlug: string):
 export { fishSpecies } from "./fish";
 export { fishingSpots } from "./spots";
 export { regions } from "./regions";
-export { getFishBySlug, getCatchableNow, getPeakFish } from "./fish";
+export { getFishBySlug, getCatchableNow, getPeakFish, getFishSeasons } from "./fish";
+export { fishRegionalSeasons, REGION_NAME_TO_SLUG, REGION_SLUG_TO_NAME, ALL_REGION_SLUGS } from "./fish-regional-seasons";
 export { getSpotBySlug, getNearbySpots, getSpotsByPrefecture } from "./spots";
 export { tackleShops, getShopBySlug, getNearbyShops, getShopsForSpot } from "./shops";
 export { prefectureInfoList, getPrefectureInfoBySlug } from "./prefecture-info";

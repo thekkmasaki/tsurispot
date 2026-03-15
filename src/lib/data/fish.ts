@@ -1,8 +1,9 @@
-import type { FishSpecies } from "@/types";
+import type { FishSpecies, RegionSlug } from "@/types";
 import { seaFish } from "./fish-sea";
 import { freshwaterFish } from "./fish-freshwater";
 import { brackishFish } from "./fish-brackish";
 import { fishMetadata } from "./fish-metadata";
+import { fishRegionalSeasons } from "./fish-regional-seasons";
 
 // メタデータ（aliases, popularity）をマージ
 function applyMetadata(list: FishSpecies[]): FishSpecies[] {
@@ -42,10 +43,32 @@ export function getFishBySlug(slug: string): FishSpecies | undefined {
   return fishSpecies.find((f) => f.slug === slug);
 }
 
-export function getCatchableNow(month: number): FishSpecies[] {
-  return fishSpecies.filter((f) => f.seasonMonths.includes(month));
+/**
+ * 地域を考慮したシーズンデータを取得
+ * region指定あり → 地域オーバーライドがあればそれ、なければ全国デフォルト
+ * region指定なし → 全国デフォルト
+ */
+export function getFishSeasons(
+  fish: FishSpecies,
+  region?: RegionSlug
+): { seasonMonths: number[]; peakMonths: number[] } {
+  if (region) {
+    const regional = fishRegionalSeasons[fish.slug]?.[region];
+    if (regional) return regional;
+  }
+  return { seasonMonths: fish.seasonMonths, peakMonths: fish.peakMonths };
 }
 
-export function getPeakFish(month: number): FishSpecies[] {
-  return fishSpecies.filter((f) => f.peakMonths.includes(month));
+export function getCatchableNow(month: number, region?: RegionSlug): FishSpecies[] {
+  return fishSpecies.filter((f) => {
+    const { seasonMonths } = getFishSeasons(f, region);
+    return seasonMonths.includes(month);
+  });
+}
+
+export function getPeakFish(month: number, region?: RegionSlug): FishSpecies[] {
+  return fishSpecies.filter((f) => {
+    const { peakMonths } = getFishSeasons(f, region);
+    return peakMonths.includes(month);
+  });
 }

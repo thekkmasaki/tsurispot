@@ -1,3 +1,20 @@
+/** 8地域（regions-group.ts 準拠） */
+export type RegionSlug =
+  | "hokkaido"
+  | "tohoku"
+  | "kanto"
+  | "chubu"
+  | "kinki"
+  | "chugoku"
+  | "shikoku"
+  | "kyushu";
+
+/** 地域別シーズンオーバーライド */
+export interface RegionalSeasonData {
+  seasonMonths: number[];
+  peakMonths: number[];
+}
+
 export interface Region {
   id: string;
   prefecture: string;
