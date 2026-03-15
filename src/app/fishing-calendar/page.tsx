@@ -154,15 +154,20 @@ export default function FishingCalendarPage() {
 
         {/* 年間シーズン概要テーブル（地域セレクター付き） */}
         <CalendarTableClient
-          fishList={fishSpecies
-            .filter((f) => !f.isPoisonous && f.category !== "freshwater")
-            .slice(0, 15)
-            .map((f) => ({
+          fishList={(() => {
+            const seaFish = fishSpecies.filter((f) => !f.isPoisonous && f.category !== "freshwater");
+            // 地域データを持つ魚を優先的に含める
+            const regionalSlugs = new Set(Object.keys(fishRegionalSeasons));
+            const withRegional = seaFish.filter((f) => regionalSlugs.has(f.slug));
+            const withoutRegional = seaFish.filter((f) => !regionalSlugs.has(f.slug));
+            const combined = [...withRegional, ...withoutRegional].slice(0, 20);
+            return combined.map((f) => ({
               slug: f.slug,
               name: f.name,
               seasonMonths: f.seasonMonths,
               peakMonths: f.peakMonths,
-            }))}
+            }));
+          })()}
           regionalData={fishRegionalSeasons}
         />
 

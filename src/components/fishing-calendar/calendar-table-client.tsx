@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
+import { MapPin, Navigation } from "lucide-react";
 import type { RegionSlug, RegionalSeasonData } from "@/types";
 import { REGION_SLUG_TO_NAME, ALL_REGION_SLUGS } from "@/lib/data/fish-regional-seasons";
+import { useAutoRegion } from "@/hooks/use-auto-region";
 
 const MONTH_NAMES = [
   "1月", "2月", "3月", "4月", "5月", "6月",
@@ -35,28 +36,57 @@ function getSeasonForFish(
 }
 
 export function CalendarTableClient({ fishList, regionalData }: CalendarTableClientProps) {
-  const [selectedRegion, setSelectedRegion] = useState<RegionSlug | null>(null);
+  const { selectedRegion, setSelectedRegion, detecting, detectRegion, regionLabel } = useAutoRegion();
 
   return (
     <div className="mb-10">
       {/* 地域セレクター */}
-      <div className="mb-3 flex items-center gap-2">
-        <label htmlFor="region-select" className="text-sm font-medium text-muted-foreground">
-          地域で絞り込み:
-        </label>
-        <select
-          id="region-select"
-          value={selectedRegion ?? ""}
-          onChange={(e) => setSelectedRegion(e.target.value === "" ? null : (e.target.value as RegionSlug))}
-          className="rounded-md border border-border bg-background px-3 py-1.5 text-sm text-foreground shadow-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-        >
-          <option value="">全国（デフォルト）</option>
+      <div className="mb-4 rounded-xl border-2 border-sky-200 bg-gradient-to-r from-sky-50 to-blue-50 p-4">
+        <div className="mb-3 flex items-center gap-2">
+          <MapPin className="size-5 text-sky-600" />
+          <h3 className="text-sm font-bold text-sky-900">地域別にシーズンを表示</h3>
+          <button
+            type="button"
+            onClick={detectRegion}
+            disabled={detecting}
+            className="ml-auto inline-flex items-center gap-1.5 rounded-full bg-sky-600 px-3 py-1.5 text-xs font-medium text-white shadow-sm transition-colors hover:bg-sky-700 disabled:opacity-50"
+          >
+            <Navigation className={`size-3.5 ${detecting ? "animate-spin" : ""}`} />
+            {detecting ? "取得中..." : "現在地から自動設定"}
+          </button>
+        </div>
+        <div className="flex flex-wrap gap-1.5">
+          <button
+            type="button"
+            onClick={() => setSelectedRegion(null)}
+            className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition-all ${
+              selectedRegion === null
+                ? "bg-sky-600 text-white shadow-md ring-2 ring-sky-300"
+                : "bg-white text-gray-600 shadow-sm hover:bg-sky-100 hover:text-sky-700"
+            }`}
+          >
+            全国
+          </button>
           {ALL_REGION_SLUGS.map((slug) => (
-            <option key={slug} value={slug}>
+            <button
+              key={slug}
+              type="button"
+              onClick={() => setSelectedRegion(slug)}
+              className={`rounded-full px-3.5 py-1.5 text-sm font-medium transition-all ${
+                selectedRegion === slug
+                  ? "bg-sky-600 text-white shadow-md ring-2 ring-sky-300"
+                  : "bg-white text-gray-600 shadow-sm hover:bg-sky-100 hover:text-sky-700"
+              }`}
+            >
               {REGION_SLUG_TO_NAME[slug]}
-            </option>
+            </button>
           ))}
-        </select>
+        </div>
+        {selectedRegion && (
+          <p className="mt-2 text-xs text-sky-700">
+            {regionLabel}地方のシーズンデータを表示中（地域データがない魚は全国データで表示）
+          </p>
+        )}
       </div>
 
       {/* テーブル */}
