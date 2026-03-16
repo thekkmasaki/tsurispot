@@ -154,7 +154,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
     feeDetail: "遊漁券: 日券1,100円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.6, reviewCount: 0,
     catchableFish: [
-      { fish: fish("hera"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
+      { fish: fish("herabuna"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
       { fish: fish("blackbass"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
@@ -221,7 +221,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
     feeDetail: "遊漁券: 日券500円。ボート代別途",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
-      { fish: fish("hera"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
+      { fish: fish("herabuna"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
@@ -322,7 +322,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
     feeDetail: "遊漁券: 日券500円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.4, reviewCount: 0,
     catchableFish: [
-      { fish: fish("hera"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
+      { fish: fish("herabuna"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
@@ -679,7 +679,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.6, reviewCount: 0,
     catchableFish: [
-      { fish: fish("hera"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
+      { fish: fish("herabuna"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
       { fish: fish("koi"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "吸い込み釣り" },
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
     ],
@@ -712,7 +712,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
-      { fish: fish("hera"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
+      { fish: fish("herabuna"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
@@ -728,7 +728,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
       { fish: fish("koi"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "吸い込み釣り" },
-      { fish: fish("hera"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
+      { fish: fish("herabuna"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
     ],
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
@@ -744,7 +744,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
     feeDetail: "遊漁券: 日券600円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
-      { fish: fish("hera"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
+      { fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
       { fish: fish("wakasagi"), monthStart: 11, monthEnd: 2, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ワカサギ釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
@@ -760,7 +760,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.4, reviewCount: 0,
     catchableFish: [
-      { fish: fish("hera"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
+      { fish: fish("herabuna"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
       { fish: fish("koi"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "吸い込み釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
@@ -810,7 +810,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
     feeDetail: "遊漁券: 日券500円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.4, reviewCount: 0,
     catchableFish: [
-      { fish: fish("hera"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
+      { fish: fish("herabuna"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
       { fish: fish("wakasagi"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ワカサギ釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
@@ -827,7 +827,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
     feeDetail: "入場料: 大人2,500円（1日）",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
-      { fish: fish("hera"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
+      { fish: fish("herabuna"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラブナ釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
