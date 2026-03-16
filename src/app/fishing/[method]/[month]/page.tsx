@@ -36,7 +36,7 @@ interface Props {
   params: Promise<{ method: string; month: string }>;
 }
 
-export const maxDuration = 60;
+export const dynamic = "force-dynamic";
 
 export async function generateStaticParams() {
   const params: { method: string; month: string }[] = [];

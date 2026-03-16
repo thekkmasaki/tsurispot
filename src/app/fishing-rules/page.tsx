@@ -26,8 +26,7 @@ import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { prefectures, regionGroupOrder } from "@/lib/data/prefectures";
 
-export const revalidate = 3600;
-export const maxDuration = 60;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "釣りのルールとマナー - 漁業権・禁漁期間・リリースサイズまとめ",

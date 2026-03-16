@@ -4,8 +4,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { AreaFilteredSpotList, type SpotCardData } from "@/components/spots/area-filter";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 
-export const revalidate = 3600;
-export const maxDuration = 60;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "初心者におすすめの川釣りスポット一覧【2026年版】",

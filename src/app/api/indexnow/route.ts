@@ -186,15 +186,52 @@ async function submitToIndexNow(urlList: string[]): Promise<{ submitted: number;
 }
 
 /**
- * GET: 全サイトURLをIndexNowに一括送信
+ * 重要ページのみを収集（デプロイ時のデフォルト送信用）
+ * Bingの推奨: Batch Modeの過度な使用を避ける
  */
-export async function GET() {
-  const urls = await collectAllUrls();
+function collectImportantUrls(): string[] {
+  const urls: string[] = [];
+
+  // トップページ・主要ナビゲーションページのみ
+  const importantPages = [
+    "", "/spots", "/fish", "/map", "/catchable-now", "/ranking",
+    "/fishing-calendar", "/for-beginners", "/fishing",
+    "/guide", "/gear", "/methods", "/glossary", "/seasonal",
+    "/fishing-rules", "/faq", "/shops", "/blog", "/area-guide",
+    "/monthly", "/prefecture", "/area",
+  ];
+  for (const page of importantPages) {
+    urls.push(`${BASE_URL}${page}`);
+  }
+
+  return urls;
+}
+
+/**
+ * GET: 重要ページのみIndexNowに送信（デフォルト）
+ * ?full=true で全URL送信（手動実行時のみ推奨）
+ */
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url);
+  const full = searchParams.get("full") === "true";
+
+  if (full) {
+    const urls = await collectAllUrls();
+    const result = await submitToIndexNow(urls);
+    return NextResponse.json({
+      success: true,
+      message: `IndexNowに${result.submitted}件の全URLを送信しました（${result.batches}バッチ）`,
+      ...result,
+    });
+  }
+
+  // デフォルト: 重要ページのみ送信（Bingの推奨に従い、バッチ送信を最小限に）
+  const urls = collectImportantUrls();
   const result = await submitToIndexNow(urls);
 
   return NextResponse.json({
     success: true,
-    message: `IndexNowに${result.submitted}件のURLを送信しました（${result.batches}バッチ）`,
+    message: `IndexNowに${result.submitted}件の重要ページを送信しました`,
     ...result,
   });
 }

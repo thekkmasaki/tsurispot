@@ -758,12 +758,12 @@ export default async function SpotDetailPage({ params }: PageProps) {
       {/* スポット写真ギャラリー */}
       <section className="mb-6 sm:mb-8">
         <SpotPhotoGallery photos={spot.spotPhotos} spotType={spot.spotType} spotName={spot.name} />
-        {/* 釣りポイント配置図（釣り場の様子に統合） */}
-        {fishingPoints && (
+        {/* 釣りポイント配置図 — 俯瞰マップ改修中のため一時非表示 */}
+        {/* fishingPoints && (
           <div className="mt-4">
             <FishingPointDiagram spotName={spot.name} data={fishingPoints} />
           </div>
-        )}
+        ) */}
       </section>
 
       {/* 安全警告 */}
@@ -960,7 +960,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                         <p className="text-xs text-muted-foreground shrink-0">{explainTime(cf.recommendedTime)}</p>
                       </div>
                       {methodExplanation && (<p className="mt-1.5 text-xs text-muted-foreground"><span className="mr-1">💡</span>{cf.method}とは… {methodExplanation}</p>)}
-                      {cf.source && (<p className="mt-1 text-[10px] text-muted-foreground/70">出典: {cf.source}</p>)}
+                      {/* source フィールドはUI非表示（内部管理用に残す） */}
                       <div className="mt-2"><FishLikeButton spotSlug={slug} fishSlug={cf.fish.slug} /></div>
                     </div>
                   );
@@ -1582,10 +1582,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
           出典・情報源
         </h2>
         <ul className="space-y-1 text-xs text-muted-foreground">
-          <li>・釣り場情報: ツリスポ編集部による現地調査および漁業協同組合の公開情報に基づく（{new Date().getFullYear()}年{new Date().getMonth() + 1}月更新）</li>
+          <li>・釣り場情報: ツリスポ編集部調べ（{new Date().getFullYear()}年{new Date().getMonth() + 1}月時点）</li>
           <li>・座標情報: Google Maps（緯度{spot.latitude.toFixed(4)}、経度{spot.longitude.toFixed(4)}）</li>
           {spot.googleRating && <li>・レビュー評価: Google マップのクチコミ（{spot.googleReviewCount}件）に基づく</li>}
-          <li>・釣れる魚情報: 釣果報告データおよび地元釣具店ヒアリングに基づく（{spot.catchableFish.length}魚種確認）</li>
+          <li>・釣れる魚情報: 公開情報および編集部調べに基づく（{spot.catchableFish.length}魚種確認）</li>
         </ul>
       </section>
     </div>
