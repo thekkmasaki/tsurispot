@@ -58,6 +58,11 @@ import { kyushuOkinawaAdd4Spots } from "./spots-add4-kyushu-okinawa";
 import { kobeKakogawaAddSpots } from "./spots-kobe-kakogawa-add";
 import { awajiDetailSpots } from "./spots-awaji-detail";
 import { himejiHarimaDetailSpots } from "./spots-himeji-harima-detail";
+import { eastAdd5Spots } from "./spots-add5-east";
+import { eastAdd5Spots2 } from "./spots-add5-east2";
+import { eastAdd5Spots3 } from "./spots-add5-east3";
+import { centralAdd5Spots } from "./spots-add5-central";
+import { westAdd5Spots } from "./spots-add5-west";
 
 function fish(slug: string): FishSpecies {
   const f = getFishBySlug(slug);
@@ -3092,7 +3097,7 @@ function deduplicateSpots(spots: FishingSpot[]): FishingSpot[] {
   return deduped;
 }
 
-const _allSpots: FishingSpot[] = [..._baseSpots, ...additionalSpots, ...osakaKinkiSpots, ...extraSpots, ...sagamiMiuraSpots, ...sagamiShonanSpots, ...sagamiIzuSpots, ...tohokuSpots, ...hokurikuSpots, ...shikokuSpots, ...kyushuSouthSpots, ...okinawaSpots, ...saninSpots, ...tokaiDetailSpots, ...kyushuChugokuDetailSpots, ...kantoDetailSpots, ...kansaiDetailSpots, ...hokkaidoTohokuDetailSpots, ...hyogoDetailSpots, ...southKyushuDetailSpots, ...chibaShizuokaDetailSpots, ...wakayamaMieNiigataSpots, ...aichiFukuokaHiroshimaSpots, ...akashiHarimaSpots, ...freshwaterSpots, ...freshwaterSpotsTohoku, ...freshwaterSpotsWest, ...freshwaterSpotsKantoAdd, ...freshwaterSpotsChubuAdd, ...freshwaterSpotsWestAdd, ...freshwaterSpotsKyoto, ...freshwaterSpotsTohokuAdd, ...freshwaterSpotsChubuKansaiAdd, ...freshwaterSpotsLowland, ...freshwaterSpotsLowland2, ...kinkiChugokuShikokuAddSpots, ...hokkaidoTohokuAdd2Spots, ...chugokuShikokuKyushuAdd2Spots, ...kantoKoshinetsuAdd2Spots, ...chubuKinkiAdd2Spots, ...chubuKinkiAdd3Spots, ...chugokuKyushuOkinawaAdd3Spots, ...hokkaidoTohokuHokurikuAdd3Spots, ...kantoKoshinetsuAdd3Spots, ...freshwaterSpotsMajor, ...expandKyushuSpots, ...expandNorthSpots, ...expandWestSpots, ...expandCentralSpots, ...kitakinkiSpots, ...northAdd4Spots, ...kantoAdd4Spots, ...chubuKinkiAdd4Spots, ...chugokuShikokuAdd4Spots, ...kyushuOkinawaAdd4Spots, ...kobeKakogawaAddSpots, ...himejiHarimaDetailSpots, ...awajiDetailSpots];
+const _allSpots: FishingSpot[] = [..._baseSpots, ...additionalSpots, ...osakaKinkiSpots, ...extraSpots, ...sagamiMiuraSpots, ...sagamiShonanSpots, ...sagamiIzuSpots, ...tohokuSpots, ...hokurikuSpots, ...shikokuSpots, ...kyushuSouthSpots, ...okinawaSpots, ...saninSpots, ...tokaiDetailSpots, ...kyushuChugokuDetailSpots, ...kantoDetailSpots, ...kansaiDetailSpots, ...hokkaidoTohokuDetailSpots, ...hyogoDetailSpots, ...southKyushuDetailSpots, ...chibaShizuokaDetailSpots, ...wakayamaMieNiigataSpots, ...aichiFukuokaHiroshimaSpots, ...akashiHarimaSpots, ...freshwaterSpots, ...freshwaterSpotsTohoku, ...freshwaterSpotsWest, ...freshwaterSpotsKantoAdd, ...freshwaterSpotsChubuAdd, ...freshwaterSpotsWestAdd, ...freshwaterSpotsKyoto, ...freshwaterSpotsTohokuAdd, ...freshwaterSpotsChubuKansaiAdd, ...freshwaterSpotsLowland, ...freshwaterSpotsLowland2, ...kinkiChugokuShikokuAddSpots, ...hokkaidoTohokuAdd2Spots, ...chugokuShikokuKyushuAdd2Spots, ...kantoKoshinetsuAdd2Spots, ...chubuKinkiAdd2Spots, ...chubuKinkiAdd3Spots, ...chugokuKyushuOkinawaAdd3Spots, ...hokkaidoTohokuHokurikuAdd3Spots, ...kantoKoshinetsuAdd3Spots, ...freshwaterSpotsMajor, ...expandKyushuSpots, ...expandNorthSpots, ...expandWestSpots, ...expandCentralSpots, ...kitakinkiSpots, ...northAdd4Spots, ...kantoAdd4Spots, ...chubuKinkiAdd4Spots, ...chugokuShikokuAdd4Spots, ...kyushuOkinawaAdd4Spots, ...kobeKakogawaAddSpots, ...himejiHarimaDetailSpots, ...awajiDetailSpots, ...eastAdd5Spots, ...eastAdd5Spots2, ...eastAdd5Spots3, ...centralAdd5Spots, ...westAdd5Spots];
 
 export const fishingSpots: FishingSpot[] = deduplicateSpots(_allSpots);
 // Debug: dedup removed (_allSpots.length - fishingSpots.length) duplicate spots
