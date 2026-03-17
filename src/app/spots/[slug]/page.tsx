@@ -75,6 +75,8 @@ import { PortMannerSection } from "@/components/spots/port-manner-section";
 import { UmigyoBadge } from "@/components/spots/umigyo-badge";
 import { umigyoDistricts } from "@/lib/data/umigyo";
 import { getDiagramData } from "@/lib/data/fishing-points";
+import { SatelliteAnalysisSection } from "@/components/patent/satellite-analysis-section";
+import { enrichSpotWithStructures } from "@/lib/patent/derive-structure-types";
 import { FishingPointDiagram } from "@/components/spots/fishing-point-diagram";
 import {
   generateSpotIntro,
@@ -179,8 +181,9 @@ export function generateStaticParams() {
 
 export default async function SpotDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const spot = getSpotBySlug(slug);
-  if (!spot) notFound();
+  const rawSpot = getSpotBySlug(slug);
+  if (!rawSpot) notFound();
+  const spot = enrichSpotWithStructures(rawSpot);
   const fishingPoints = getDiagramData(slug);
 
   // 今月釣れる魚を算出（Event schema用）
@@ -971,6 +974,13 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <h3 className="mb-4 text-lg font-bold">現地の様子（ストリートビュー）</h3>
             <StreetViewSection latitude={spot.latitude} longitude={spot.longitude} spotName={spot.name} address={spot.address} />
           </section>
+          {spot.structureTypes && spot.structureTypes.length > 0 && (
+            <SatelliteAnalysisSection
+              structureTypes={spot.structureTypes}
+              spotName={spot.name}
+              spotType={spot.spotType}
+            />
+          )}
           {nearbyShopsWithDist.length > 0 && (
             <section>
               <h3 className="mb-3 text-lg font-bold">近くの釣具店</h3>
