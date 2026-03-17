@@ -76,6 +76,17 @@ import { UmigyoBadge } from "@/components/spots/umigyo-badge";
 import { umigyoDistricts } from "@/lib/data/umigyo";
 import { getDiagramData } from "@/lib/data/fishing-points";
 import { FishingPointDiagram } from "@/components/spots/fishing-point-diagram";
+import {
+  generateSpotIntro,
+  generateSpotTips,
+  generateTimeAdvice,
+  generateSeasonDetail,
+  generateFacilityGuide,
+  generateSpotSummary,
+  generateContextMethodBrief,
+  generateImprovedFAQs,
+  generateAreaSeasonTrend,
+} from "@/lib/utils/spot-content-generator";
 
 // Below-the-fold client components loaded lazily
 const StreetViewSection = dynamic(() => import("@/components/spots/street-view-section").then((m) => m.StreetViewSection), {
@@ -351,153 +362,19 @@ export default async function SpotDetailPage({ params }: PageProps) {
         ? `${spot.name}は中級者向けの釣り場です。基本的な釣りの経験がある方におすすめです。`
         : `${spot.name}は上級者向けの釣り場です。十分な経験と装備が必要です。`;
 
+  // 改善版FAQ（スポット固有の実用的アドバイス付き）
+  const improvedFaqs = generateImprovedFAQs(spot);
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: `${spot.name}で何が釣れますか？`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: `${spot.name}では${fishNames}などが釣れます。`,
-        },
+    mainEntity: improvedFaqs.map(faq => ({
+      "@type": "Question" as const,
+      name: faq.question,
+      acceptedAnswer: {
+        "@type": "Answer" as const,
+        text: faq.answer,
       },
-      ...(spot.feeDetail || spot.isFree
-        ? [
-            {
-              "@type": "Question",
-              name: `${spot.name}の料金はいくらですか？`,
-              acceptedAnswer: {
-                "@type": "Answer",
-                text: spot.isFree
-                  ? `${spot.name}は無料で釣りを楽しめます。`
-                  : `${spot.name}の利用料金は${spot.feeDetail}です。`,
-              },
-            },
-          ]
-        : []),
-      {
-        "@type": "Question",
-        name: `${spot.name}に駐車場はありますか？`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: getParkingFaqAnswer(spot.name, spot.hasParking, spot.parkingDetail, spot.parkingGuide),
-        },
-      },
-      {
-        "@type": "Question",
-        name: `${spot.name}にトイレはありますか？`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: spot.hasToilet
-            ? `はい、${spot.name}にはトイレがあります。`
-            : `${spot.name}には専用トイレはありません。近隣のコンビニや公共施設のトイレをご利用ください。`,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `${spot.name}の難易度は？`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: difficultyAnswer,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `${spot.name}へのアクセスは？`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: `${spot.name}の所在地は${spot.address}です。${spot.accessInfo}`,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `${spot.name}は初心者でも釣れますか？`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: spot.difficulty === "beginner"
-            ? `はい、${spot.name}は初心者の方でも釣果が期待できる釣り場です。${spot.hasRentalRod ? "レンタル竿もあるので手ぶらでも楽しめます。" : ""}${spot.catchableFish.filter(cf => cf.catchDifficulty === "easy").length > 0 ? `${spot.catchableFish.filter(cf => cf.catchDifficulty === "easy").map(cf => cf.fish.name).slice(0, 3).join("、")}は比較的簡単に釣れます。` : ""}`
-            : spot.difficulty === "intermediate"
-              ? `${spot.name}は中級者向けの釣り場ですが、釣り方や時間帯を選べば初心者でも釣果を得られる可能性があります。${spot.catchableFish.filter(cf => cf.catchDifficulty === "easy").length > 0 ? `${spot.catchableFish.filter(cf => cf.catchDifficulty === "easy").map(cf => cf.fish.name).slice(0, 2).join("、")}は比較的狙いやすい魚です。` : ""}`
-              : `${spot.name}は上級者向けの釣り場です。初心者の方は経験者と一緒に訪れることをおすすめします。`,
-        },
-      },
-      ...(spot.catchableFish.length > 0
-        ? [{
-            "@type": "Question" as const,
-            name: `${spot.name}で一番釣れる魚は？`,
-            acceptedAnswer: {
-              "@type": "Answer" as const,
-              text: (() => {
-                const easyFish = spot.catchableFish.filter(cf => cf.catchDifficulty === "easy");
-                const topFish = easyFish.length > 0 ? easyFish[0] : spot.catchableFish[0];
-                const mStart = monthNames[topFish.monthStart] || "";
-                const mEnd = monthNames[topFish.monthEnd] || "";
-                return `${spot.name}で最も釣りやすい魚は${topFish.fish.name}です。${topFish.method}で${mStart}〜${mEnd}に狙えます。${easyFish.length > 1 ? `他にも${easyFish.slice(1, 3).map(cf => cf.fish.name).join("、")}が比較的釣りやすい魚です。` : ""}`;
-              })(),
-            },
-          }]
-        : []),
-      ...(spot.catchableFish.length > 0
-        ? [{
-            "@type": "Question" as const,
-            name: `${spot.name}のベストシーズンはいつ？`,
-            acceptedAnswer: {
-              "@type": "Answer" as const,
-              text: (() => {
-                // 月ごとに釣れる魚数をカウントしてピーク月を算出
-                const monthCounts = Array.from({ length: 12 }, (_, i) => {
-                  const m = i + 1;
-                  return {
-                    month: m,
-                    count: spot.catchableFish.filter(cf => {
-                      if (cf.monthStart <= cf.monthEnd) return m >= cf.monthStart && m <= cf.monthEnd;
-                      return m >= cf.monthStart || m <= cf.monthEnd;
-                    }).length,
-                  };
-                });
-                const maxCount = Math.max(...monthCounts.map(mc => mc.count));
-                const bestMonths = monthCounts.filter(mc => mc.count === maxCount).map(mc => monthNames[mc.month]);
-                const peakFish = spot.catchableFish.filter(cf => cf.peakSeason);
-                const peakText = peakFish.length > 0
-                  ? `特に${peakFish.slice(0, 3).map(cf => cf.fish.name).join("、")}が旬を迎えます。`
-                  : "";
-                return `${spot.name}のベストシーズンは${bestMonths.slice(0, 3).join("・")}頃です。この時期は最大${maxCount}種類の魚が狙えます。${peakText}年間を通じて${spot.catchableFish.length}種類の魚が釣れるスポットです。`;
-              })(),
-            },
-          }]
-        : []),
-      {
-        "@type": "Question",
-        name: `${spot.name}は混雑しますか？`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: `${spot.name}は${spot.isFree ? "無料の釣り場のため週末や祝日は混み合うことがあります" : "有料施設のため比較的快適に釣りを楽しめます"}。${spot.difficulty === "beginner" ? "初心者向けの人気スポットなのでハイシーズンは早めの場所取りがおすすめです。" : ""}朝マヅメの時間帯は釣り人が多くなる傾向があります。`,
-        },
-      },
-      {
-        "@type": "Question",
-        name: `${spot.name}の近くにコンビニや釣具店はありますか？`,
-        acceptedAnswer: {
-          "@type": "Answer",
-          text: (() => {
-            const parts: string[] = [];
-            if (spot.hasConvenienceStore) {
-              parts.push(`${spot.name}の近くにはコンビニがあります`);
-            } else {
-              parts.push(`${spot.name}の近くにはコンビニがないため、飲み物や食べ物は事前に用意しておくことをおすすめします`);
-            }
-            if (spot.hasFishingShop) {
-              parts.push("近くに釣具店もあるので、エサや仕掛けの補充も可能です");
-            } else {
-              parts.push("釣具店は近くにないため、タックルやエサは事前に準備しておきましょう");
-            }
-            return parts.join("。") + "。";
-          })(),
-        },
-      },
-    ],
+    })),
   };
 
   const spotSpeakableJsonLd = {
@@ -679,15 +556,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
           )}
         </div>
 
-        {/* 説明文 */}
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          {spot.description}
-          {spot.name}は{spot.region.prefecture}{spot.region.areaName}に位置する
-          {spot.difficulty === "beginner" ? "初心者にもおすすめ" : spot.difficulty === "intermediate" ? "中級者向け" : "上級者向け"}
-          の釣りスポットです。
-          {spot.catchableFish.length > 0 ? `${spot.catchableFish.slice(0, 3).map(f => f.fish.name).join("、")}などが狙えます。` : ""}
-          {spot.isFree ? "無料で釣りができます。" : spot.feeDetail ? `利用料金: ${spot.feeDetail}` : ""}
-        </p>
+        {/* 説明文（スポット固有の導入文） */}
+        <div className="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
+          <p>{spot.description}</p>
+          <p>{generateSpotIntro(spot)}</p>
+        </div>
 
         {/* データ信頼性指標 */}
         <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-1 rounded-lg border bg-muted/30 px-3 py-2 text-xs text-muted-foreground">
@@ -877,6 +750,30 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><MessageSquare className="size-5" />みんなの釣果報告</h3>
             <CatchReportList spotSlug={slug} initialReports={getCatchReportsBySpot(slug)} />
             <CatchReportForm spotSlug={slug} spotName={spot.name} catchableFishNames={[...new Set(spot.catchableFish.map((cf) => cf.fish.name))]} />
+            {/* エリアの釣果傾向（釣果報告の補完情報） */}
+            {(() => {
+              const areaTrend = generateAreaSeasonTrend(spot, fishingSpots);
+              if (areaTrend.length === 0) return null;
+              const currentMonthName = new Date().toLocaleDateString("ja-JP", { month: "long" });
+              return (
+                <div className="mt-4 rounded-lg border bg-muted/30 p-4">
+                  <h4 className="mb-2 text-sm font-bold text-muted-foreground">
+                    {spot.region.areaName}エリアの{currentMonthName}の釣果傾向
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {areaTrend.map(t => (
+                      <span key={t.fishName} className="inline-flex items-center gap-1 rounded-full bg-background px-2.5 py-1 text-xs">
+                        <Fish className="size-3 text-primary" />
+                        {t.fishName}（{t.method}）
+                      </span>
+                    ))}
+                  </div>
+                  <p className="mt-2 text-xs text-muted-foreground">
+                    ※ {spot.region.areaName}エリア内の他スポットのデータに基づく傾向です
+                  </p>
+                </div>
+              );
+            })()}
           </section>
           <section>
             <h3 className="mb-3 text-lg font-bold">混雑予想</h3>
@@ -1184,6 +1081,34 @@ export default async function SpotDetailPage({ params }: PageProps) {
         );
       })()}
 
+      {/* この釣り場のポイント（固有コンテンツ） */}
+      {(() => {
+        const spotTips = generateSpotTips(spot);
+        if (spotTips.length === 0) return null;
+        return (
+          <section className="mt-8 sm:mt-12">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold sm:text-xl">
+              <Star className="size-5 text-amber-500" />
+              {spot.name}のポイント
+            </h2>
+            <Card className="gap-0 py-0">
+              <CardContent className="p-4 sm:p-5">
+                <ul className="space-y-3">
+                  {spotTips.map((tip, idx) => (
+                    <li key={idx} className="flex gap-3">
+                      <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-amber-100 text-xs font-bold text-amber-700">
+                        {idx + 1}
+                      </span>
+                      <span className="text-sm leading-relaxed text-muted-foreground">{tip}</span>
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
+          </section>
+        );
+      })()}
+
       {/* この釣り場の攻略法 */}
       {spot.catchableFish.length > 0 && (() => {
         // ベストシーズン算出
@@ -1242,6 +1167,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
           "フカセ釣り": "コマセを撒いてウキ仕掛けで自然に流す繊細な釣り方",
         };
 
+        // 季節別アドバイス
+        const seasonDetails = generateSeasonDetail(spot);
+
         return (
           <section className="mt-8 sm:mt-12">
             <h2 className="mb-4 flex items-center gap-2 text-lg font-bold sm:text-xl">
@@ -1250,13 +1178,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
             </h2>
             <Card className="gap-0 py-0">
               <CardContent className="space-y-5 p-4 sm:p-5">
-                {/* 狙い目の時間帯 */}
+                {/* 狙い目の時間帯（スポット固有アドバイス） */}
                 <div>
                   <h3 className="mb-1.5 text-sm font-bold">狙い目の時間帯</h3>
                   <p className="text-sm leading-relaxed text-muted-foreground">
-                    {spot.name}では<strong>朝マヅメ（日の出前後）</strong>と<strong>夕マヅメ（日没前後）</strong>が最も釣果が期待できる時間帯です。
-                    {isNightFishing && "夜釣りも有効で、常夜灯周りではアジやメバルなどが狙えます。"}
-                    {spot.catchableFish.some(cf => cf.recommendedTime.includes("朝")) && "特に早朝の時間帯は魚の活性が高く、数釣りのチャンスです。"}
+                    {generateTimeAdvice(spot)}
                   </p>
                 </div>
                 {/* ベストシーズン */}
@@ -1268,13 +1194,28 @@ export default async function SpotDetailPage({ params }: PageProps) {
                       `旬の魚: ${spot.catchableFish.filter(cf => cf.peakSeason).slice(0, 3).map(cf => `${cf.fish.name}（${monthNames[cf.monthStart]}〜${monthNames[cf.monthEnd]}）`).join("、")}。`}
                   </p>
                 </div>
-                {/* おすすめ釣り方トップ3 */}
+                {/* 季節別の詳細アドバイス */}
+                {seasonDetails.length > 0 && (
+                  <div>
+                    <h3 className="mb-2 text-sm font-bold">季節ごとの釣りもの</h3>
+                    <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
+                      {seasonDetails.map(sd => (
+                        <div key={sd.season} className="rounded-lg border bg-muted/30 p-3">
+                          <p className="text-xs font-bold text-primary">{sd.season}</p>
+                          <p className="mt-0.5 text-xs font-medium">{sd.fish}</p>
+                          <p className="mt-1 text-xs text-muted-foreground">{sd.advice}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                {/* おすすめ釣り方トップ3（文脈別説明） */}
                 <div>
                   <h3 className="mb-2 text-sm font-bold">おすすめの釣り方</h3>
                   <div className="space-y-2">
                     {topMethods.map((cf, idx) => {
                       const guideHref = METHOD_STRATEGY_MAP[cf.method];
-                      const brief = METHOD_BRIEF[cf.method] || `${cf.method}で${cf.fish.name}を狙えます`;
+                      const brief = generateContextMethodBrief(cf.method, spot);
                       const targetFish = spot.catchableFish.filter(f => f.method === cf.method).slice(0, 3).map(f => f.fish.name).join("・");
                       return (
                         <div key={cf.fish.id + cf.method} className="rounded-lg border bg-muted/30 p-3">
@@ -1514,57 +1455,75 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
       {/* 都道府県ガイド・地域ガイドは上の折りたたみセクションに統合済み */}
 
-      {/* まとめ（GEO最適化：AI引用しやすい要約） */}
-      <section className="mt-8 sm:mt-12 spot-description">
-        <h3 className="mb-3 text-base font-bold sm:text-lg">まとめ：{spot.name}の釣り情報</h3>
-        <Card className="gap-0 py-0">
-          <CardContent className="p-4">
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              {spot.name}は{spot.region.prefecture}{spot.region.areaName}にある{SPOT_TYPE_LABELS[spot.spotType]}の釣り場です。
-              {spot.catchableFish.length > 0 && `${spot.catchableFish.slice(0, 5).map((cf) => cf.fish.name).join("・")}などが釣れます。`}
-              {spot.difficulty === "beginner" ? "初心者にもおすすめの釣り場です。" :
-               spot.difficulty === "intermediate" ? "中級者向けの釣り場です。" :
-               "上級者向けの釣り場です。"}
-              {spot.hasParking && "駐車場あり。"}
-              {spot.hasToilet && "トイレあり。"}
-              {spot.isFree && "無料で釣りができます。"}
-              所在地は{spot.address}。{spot.accessInfo}
-              詳しいアクセス・設備・仕掛け情報はツリスポ（tsurispot.com）で確認できます。
-            </p>
-            {/* まとめ内の内部リンク */}
-            <div className="mt-4 flex flex-wrap gap-2">
-              {(() => {
-                const pref = getPrefectureByName(spot.region.prefecture);
-                if (!pref) return null;
-                return (
-                  <>
-                    <Link href={`/prefecture/${pref.slug}`} className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
-                      <MapPin className="size-3" />
-                      {spot.region.prefecture}の釣りスポット一覧
-                    </Link>
-                    <Link href={`/fishing-rules/${pref.slug}`} className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
-                      <Scale className="size-3" />
-                      {spot.region.prefecture}の釣りルール
-                    </Link>
-                  </>
-                );
-              })()}
-              <Link href={`/area/${spot.region.slug}`} className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
-                <Compass className="size-3" />
-                {spot.region.areaName}エリアガイド
-              </Link>
-              <Link href="/fishing-calendar" className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
-                <Fish className="size-3" />
-                月別釣りカレンダー
-              </Link>
-              <Link href="/for-beginners" className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
-                <BookOpen className="size-3" />
-                釣りの始め方ガイド
-              </Link>
-            </div>
-          </CardContent>
-        </Card>
-      </section>
+      {/* まとめ（GEO最適化：AI引用しやすい要約 — スポット固有サマリー） */}
+      {(() => {
+        const summary = generateSpotSummary(spot);
+        return (
+          <section className="mt-8 sm:mt-12 spot-description">
+            <h3 className="mb-3 text-base font-bold sm:text-lg">{spot.name}の釣り情報まとめ</h3>
+            <Card className="gap-0 py-0">
+              <CardContent className="p-4">
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <span className="mt-0.5 text-primary">✓</span>
+                    <span>{summary.oneLineFeature}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="mt-0.5 text-primary">✓</span>
+                    <span>{summary.topFishAndSeason}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="mt-0.5 text-primary">✓</span>
+                    <span>{summary.recommendedMethod}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="mt-0.5 text-primary">✓</span>
+                    <span>{summary.facilityOverview}</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="mt-0.5 text-primary">✓</span>
+                    <span>{summary.difficultyComment}</span>
+                  </li>
+                </ul>
+                <p className="mt-3 text-xs text-muted-foreground">
+                  所在地: {spot.address}。{spot.accessInfo}
+                </p>
+                {/* まとめ内の内部リンク */}
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {(() => {
+                    const pref = getPrefectureByName(spot.region.prefecture);
+                    if (!pref) return null;
+                    return (
+                      <>
+                        <Link href={`/prefecture/${pref.slug}`} className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+                          <MapPin className="size-3" />
+                          {spot.region.prefecture}の釣りスポット一覧
+                        </Link>
+                        <Link href={`/fishing-rules/${pref.slug}`} className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+                          <Scale className="size-3" />
+                          {spot.region.prefecture}の釣りルール
+                        </Link>
+                      </>
+                    );
+                  })()}
+                  <Link href={`/area/${spot.region.slug}`} className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+                    <Compass className="size-3" />
+                    {spot.region.areaName}エリアガイド
+                  </Link>
+                  <Link href="/fishing-calendar" className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+                    <Fish className="size-3" />
+                    月別釣りカレンダー
+                  </Link>
+                  <Link href="/for-beginners" className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+                    <BookOpen className="size-3" />
+                    釣りの始め方ガイド
+                  </Link>
+                </div>
+              </CardContent>
+            </Card>
+          </section>
+        );
+      })()}
 
       {/* 最近見たスポット */}
       <RecentlyViewedSpots />
