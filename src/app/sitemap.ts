@@ -164,13 +164,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
 
     // ===== スポット詳細ページ（画像サイトマップ付き）=====
-    ...fishingSpots.map((spot) => ({
-      url: `${baseUrl}/spots/${spot.slug}`,
-      lastModified: dynamicDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-      images: spot.mainImageUrl?.startsWith("http") ? [spot.mainImageUrl] : [],
-    })),
+    ...fishingSpots.map((spot) => {
+      const descLen = (spot.description || "").length;
+      const priority = descLen >= 150 ? 0.8 : descLen >= 100 ? 0.7 : 0.5;
+      return {
+        url: `${baseUrl}/spots/${spot.slug}`,
+        lastModified: dynamicDate,
+        changeFrequency: "weekly" as const,
+        priority,
+        images: spot.mainImageUrl?.startsWith("http") ? [spot.mainImageUrl] : [],
+      };
+    }),
 
     // ===== 魚種詳細ページ =====
     ...fishSpecies.map((fish) => ({

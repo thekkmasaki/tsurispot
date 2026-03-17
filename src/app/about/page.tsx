@@ -24,10 +24,10 @@ import {
 export const metadata: Metadata = {
   title: "ツリスポについて｜釣りスポット総合情報サイト",
   description:
-    "ツリスポは全国2,100箇所以上の釣りスポット・115魚種以上を掲載する日本最大級の釣り情報サイトです。編集長が全記事を監修し、地図検索・魚種図鑑・季節別ガイド・初心者向け解説で最高の釣り体験をサポートします。",
+    "ツリスポは全国2,700箇所以上の釣りスポット・115魚種以上を掲載する日本最大級の釣り情報サイトです。編集長が全記事を監修し、地図検索・魚種図鑑・季節別ガイド・初心者向け解説で最高の釣り体験をサポートします。",
   openGraph: {
     title: "ツリスポについて｜釣りスポット総合情報サイト",
-    description: "全国2,100箇所以上の釣りスポット・115魚種を掲載する日本最大級の釣り総合情報サイト。地図検索・魚種図鑑・季節別ガイドで釣り体験をサポートします。",
+    description: "全国2,700箇所以上の釣りスポット・115魚種を掲載する日本最大級の釣り総合情報サイト。地図検索・魚種図鑑・季節別ガイドで釣り体験をサポートします。",
     type: "website",
     url: "https://tsurispot.com/about",
     siteName: "ツリスポ",
@@ -66,7 +66,7 @@ const webPageJsonLd = {
   "@type": "WebPage",
   name: "ツリスポについて｜釣りスポット総合情報サイト",
   url: "https://tsurispot.com/about",
-  dateModified: "2026-02-28",
+  dateModified: "2026-03-17",
 };
 
 const personJsonLd = {
@@ -376,7 +376,171 @@ export default function AboutPage() {
                 </div>
               </CardContent>
             </Card>
+            <Card className="border">
+              <CardContent className="p-5">
+                <div className="flex gap-3">
+                  <CheckCircle className="mt-0.5 size-5 shrink-0 text-emerald-600" />
+                  <div>
+                    <h3 className="font-semibold">複数ソースによるクロスチェック</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      Google Maps・自治体公式サイト・港湾情報を複数照合し、正確性を担保しています。座標情報はGoogle Mapsで個別に確認済みです。
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="border">
+              <CardContent className="p-5">
+                <div className="flex gap-3">
+                  <CheckCircle className="mt-0.5 size-5 shrink-0 text-emerald-600" />
+                  <div>
+                    <h3 className="font-semibold">月次更新サイクル</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      釣り場情報は月1回の定期更新を実施。季節の変化に合わせた釣れる魚データの見直し、新規スポットの追加、閉鎖・立入禁止情報の反映を行っています。
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+            <Card className="border">
+              <CardContent className="p-5">
+                <div className="flex gap-3">
+                  <CheckCircle className="mt-0.5 size-5 shrink-0 text-emerald-600" />
+                  <div>
+                    <h3 className="font-semibold">ユーザーフィードバック</h3>
+                    <p className="mt-1 text-sm text-muted-foreground">
+                      ユーザーからの修正報告を受け付けており、情報の誤りは確認後速やかに修正しています。お問い合わせフォームからご連絡ください。
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
+      </section>
+
+      {/* 掲載基準・編集方針 */}
+      <section className="bg-muted/30 py-12 sm:py-16">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6">
+          <div className="mx-auto max-w-2xl text-center">
+            <div className="mb-6 inline-flex items-center gap-2">
+              <FileText className="size-5 text-primary" />
+              <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+                掲載基準・編集方針
+              </h2>
+            </div>
+          </div>
+
+          <div className="mx-auto max-w-2xl space-y-4">
+            <Card className="border">
+              <CardContent className="p-5">
+                <h3 className="mb-3 font-semibold">掲載基準</h3>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex gap-2">
+                    <CheckCircle className="mt-0.5 size-4 shrink-0 text-emerald-600" />
+                    <span>一般に公開されている釣り場であること</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="mt-0.5 size-4 shrink-0 text-emerald-600" />
+                    <span>釣り禁止区域でないこと（自治体・漁協の規制を確認）</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="mt-0.5 size-4 shrink-0 text-emerald-600" />
+                    <span>Google Mapsで位置が確認できること</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="mt-0.5 size-4 shrink-0 text-emerald-600" />
+                    <span>危険度が極端に高い場所は注意喚起付きで掲載、または非掲載</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+            <Card className="border">
+              <CardContent className="p-5">
+                <h3 className="mb-3 font-semibold">非掲載の基準</h3>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex gap-2">
+                    <Shield className="mt-0.5 size-4 shrink-0 text-red-500" />
+                    <span>釣り禁止が明確な場所</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <Shield className="mt-0.5 size-4 shrink-0 text-red-500" />
+                    <span>私有地・立入禁止区域</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <Shield className="mt-0.5 size-4 shrink-0 text-red-500" />
+                    <span>情報の裏取りができない場所</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <Shield className="mt-0.5 size-4 shrink-0 text-red-500" />
+                    <span>ユーザーから「釣り禁止になった」と報告があった場所（確認後削除）</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+            <Card className="border">
+              <CardContent className="p-5">
+                <h3 className="mb-3 font-semibold">紹介文の作成方針</h3>
+                <ul className="space-y-2 text-sm text-muted-foreground">
+                  <li className="flex gap-2">
+                    <CheckCircle className="mt-0.5 size-4 shrink-0 text-emerald-600" />
+                    <span>他サイトからのコピーは一切行わず、すべてオリジナルで作成</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="mt-0.5 size-4 shrink-0 text-emerald-600" />
+                    <span>公開情報（自治体サイト、港湾情報等）を参考に編集部が独自にまとめています</span>
+                  </li>
+                  <li className="flex gap-2">
+                    <CheckCircle className="mt-0.5 size-4 shrink-0 text-emerald-600" />
+                    <span>釣れる魚の情報は複数の公開情報源からクロスチェック</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* ツリスポの実績 */}
+      <section className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
+        <div className="mx-auto max-w-2xl text-center">
+          <div className="mb-6 inline-flex items-center gap-2">
+            <Globe className="size-5 text-primary" />
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+              ツリスポの実績
+            </h2>
+          </div>
+        </div>
+
+        <div className="mx-auto grid max-w-3xl gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <Card className="border">
+            <CardContent className="flex flex-col items-center gap-2 p-6 text-center">
+              <MapPin className="size-8 text-blue-600" />
+              <p className="text-3xl font-bold text-foreground">2,700+</p>
+              <p className="text-sm text-muted-foreground">掲載スポット数</p>
+            </CardContent>
+          </Card>
+          <Card className="border">
+            <CardContent className="flex flex-col items-center gap-2 p-6 text-center">
+              <Fish className="size-8 text-cyan-600" />
+              <p className="text-3xl font-bold text-foreground">115+</p>
+              <p className="text-sm text-muted-foreground">掲載魚種数</p>
+            </CardContent>
+          </Card>
+          <Card className="border">
+            <CardContent className="flex flex-col items-center gap-2 p-6 text-center">
+              <BookOpen className="size-8 text-emerald-600" />
+              <p className="text-3xl font-bold text-foreground">60+</p>
+              <p className="text-sm text-muted-foreground">ガイド記事数</p>
+            </CardContent>
+          </Card>
+          <Card className="border">
+            <CardContent className="flex flex-col items-center gap-2 p-6 text-center">
+              <Calendar className="size-8 text-amber-600" />
+              <p className="text-3xl font-bold text-foreground">毎月</p>
+              <p className="text-sm text-muted-foreground">更新頻度</p>
+            </CardContent>
+          </Card>
+        </div>
       </section>
 
       {/* 社会課題への取り組み */}
