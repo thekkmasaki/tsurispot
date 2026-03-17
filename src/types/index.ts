@@ -1,3 +1,27 @@
+/** 構造物カテゴリ（特許 衛星画像解析 9分類） */
+export type StructureCategory =
+  | "seawall"          // 護岸
+  | "tetrapod"         // テトラポッド
+  | "rocky"            // 岩礁
+  | "sandy"            // 砂浜
+  | "pier"             // 桟橋
+  | "port-facility"    // 港湾施設
+  | "other-structure"  // その他構造物
+  | "water"            // 水域
+  | "land";            // 陸地
+
+export const STRUCTURE_CATEGORY_LABELS: Record<StructureCategory, string> = {
+  seawall: "護岸",
+  tetrapod: "テトラポッド",
+  rocky: "岩礁",
+  sandy: "砂浜",
+  pier: "桟橋",
+  "port-facility": "港湾施設",
+  "other-structure": "その他構造物",
+  water: "水域",
+  land: "陸地",
+};
+
 /** 8地域（regions-group.ts 準拠） */
 export type RegionSlug =
   | "hokkaido"
@@ -67,6 +91,10 @@ export interface FishingSpot {
   googleReviewCount?: number;
   managementInfo?: ManagementInfo;
   officialUrl?: string;
+  /** 構造物カテゴリ（特許: 衛星画像解析による自動分類） */
+  structureTypes?: StructureCategory[];
+  /** 衛星画像URL */
+  satelliteImageUrl?: string;
 }
 
 export interface SpotRules {
