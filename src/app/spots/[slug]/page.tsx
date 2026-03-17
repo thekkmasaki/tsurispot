@@ -634,12 +634,12 @@ export default async function SpotDetailPage({ params }: PageProps) {
       {/* スポット写真ギャラリー */}
       <section className="mb-6 sm:mb-8">
         <SpotPhotoGallery photos={spot.spotPhotos} spotType={spot.spotType} spotName={spot.name} />
-        {/* 釣りポイント配置図 — 俯瞰マップ改修中のため一時非表示 */}
-        {/* fishingPoints && (
+        {fishingPoints && (
           <div className="mt-4">
+            <h3 className="mb-3 text-lg font-bold">魚礁図・ポイント図</h3>
             <FishingPointDiagram spotName={spot.name} data={fishingPoints} />
           </div>
-        ) */}
+        )}
       </section>
 
       {/* 安全警告 */}
