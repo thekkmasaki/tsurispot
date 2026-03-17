@@ -4,6 +4,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 import { getLatestBlogPostsAsync, BLOG_CATEGORIES } from "@/lib/data/blog";
 import { prefectures } from "@/lib/data/prefectures";
+import { monthlyGuides } from "@/lib/data/monthly-guides";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -19,6 +20,8 @@ import {
   Tag,
   Target,
   Navigation,
+  Star,
+  Trophy,
 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { HomeSearchBar } from "@/components/home-search-bar";
@@ -548,6 +551,100 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* 季節の釣りガイド */}
+      {(() => {
+        const currentMonth = new Date().getMonth() + 1;
+        const nextMonth = currentMonth === 12 ? 1 : currentMonth + 1;
+        const currentGuide = monthlyGuides.find((g) => g.month === currentMonth);
+        const nextGuide = monthlyGuides.find((g) => g.month === nextMonth);
+        const seasonSlug = currentMonth >= 3 && currentMonth <= 5 ? "spring" : currentMonth >= 6 && currentMonth <= 8 ? "summer" : currentMonth >= 9 && currentMonth <= 11 ? "autumn" : "winter";
+        const seasonLabel = seasonSlug === "spring" ? "春" : seasonSlug === "summer" ? "夏" : seasonSlug === "autumn" ? "秋" : "冬";
+        return (
+          <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
+            <div className="mb-6 sm:mb-8">
+              <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
+                季節の釣りガイド
+              </h2>
+              <p className="mt-1 text-sm text-muted-foreground">
+                今の時期にぴったりの釣り情報をチェック
+              </p>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2">
+              {currentGuide && (
+                <Link href={`/monthly/${currentGuide.slug}`}>
+                  <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md border-primary/30 bg-primary/5">
+                    <CardContent className="p-4">
+                      <div className="mb-2 flex items-center gap-2">
+                        <Badge className="bg-primary text-white text-[10px]">今月</Badge>
+                        <span className="text-lg">{currentGuide.emoji}</span>
+                      </div>
+                      <h3 className="mb-1 font-semibold group-hover:text-primary">{currentGuide.nameJa}の釣りガイド</h3>
+                      <p className="line-clamp-2 text-xs text-muted-foreground leading-relaxed">{currentGuide.description.slice(0, 80)}...</p>
+                      <div className="mt-2 flex flex-wrap gap-1">
+                        {currentGuide.topFish.slice(0, 3).map((f) => {
+                          const fish = fishSpecies.find((fs) => fs.slug === f);
+                          return fish ? (
+                            <Badge key={f} variant="outline" className="text-[10px]">{fish.name}</Badge>
+                          ) : null;
+                        })}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              )}
+              {nextGuide && (
+                <Link href={`/monthly/${nextGuide.slug}`}>
+                  <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                    <CardContent className="p-4">
+                      <div className="mb-2 flex items-center gap-2">
+                        <Badge variant="secondary" className="text-[10px]">来月</Badge>
+                        <span className="text-lg">{nextGuide.emoji}</span>
+                      </div>
+                      <h3 className="mb-1 font-semibold group-hover:text-primary">{nextGuide.nameJa}の釣りガイド</h3>
+                      <p className="line-clamp-2 text-xs text-muted-foreground leading-relaxed">{nextGuide.description.slice(0, 80)}...</p>
+                      <div className="mt-2 flex flex-wrap gap-1">
+                        {nextGuide.topFish.slice(0, 3).map((f) => {
+                          const fish = fishSpecies.find((fs) => fs.slug === f);
+                          return fish ? (
+                            <Badge key={f} variant="outline" className="text-[10px]">{fish.name}</Badge>
+                          ) : null;
+                        })}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              )}
+              <Link href={`/seasonal/${seasonSlug}`}>
+                <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                  <CardContent className="flex items-center gap-3 p-4">
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-amber-100">
+                      <Calendar className="size-5 text-amber-600" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold group-hover:text-primary">{seasonLabel}の釣り総合ガイド</h3>
+                      <p className="text-xs text-muted-foreground">{seasonLabel}シーズンのおすすめスポット・魚種・釣り方</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+              <Link href="/fishing-calendar">
+                <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                  <CardContent className="flex items-center gap-3 p-4">
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-blue-100">
+                      <Calendar className="size-5 text-blue-600" />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold group-hover:text-primary">年間釣りカレンダー</h3>
+                      <p className="text-xs text-muted-foreground">月ごとの釣れる魚・おすすめの釣り方を一覧で</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            </div>
+          </section>
+        );
+      })()}
+
       {/* 近くの釣りスポット */}
       <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
         <NearbySpots />
@@ -560,6 +657,177 @@ export default async function Home() {
       <SectionErrorBoundary>
         <HomeSeasonalFish />
       </SectionErrorBoundary>
+
+      {/* 今月おすすめの釣り場 */}
+      {(() => {
+        const currentMonth = new Date().getMonth() + 1;
+        const SPOT_TYPE_LABELS: Record<string, string> = {
+          port: "漁港", beach: "砂浜", rocky: "磯", river: "河川", pier: "桟橋", breakwater: "堤防",
+        };
+        const DIFFICULTY_LABELS: Record<string, string> = {
+          beginner: "初心者向け", intermediate: "中級者向け", advanced: "上級者向け",
+        };
+        const DIFFICULTY_COLORS: Record<string, string> = {
+          beginner: "bg-green-100 text-green-800", intermediate: "bg-blue-100 text-blue-800", advanced: "bg-orange-100 text-orange-800",
+        };
+        const seasonalSpots = fishingSpots
+          .filter((spot) =>
+            spot.catchableFish.some((cf) => {
+              if (cf.monthStart <= cf.monthEnd) {
+                return cf.monthStart <= currentMonth && cf.monthEnd >= currentMonth;
+              }
+              return currentMonth >= cf.monthStart || currentMonth <= cf.monthEnd;
+            })
+          )
+          .sort((a, b) => b.rating - a.rating)
+          .slice(0, 6);
+
+        return seasonalSpots.length > 0 ? (
+          <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
+            <div className="mb-6 flex items-end justify-between sm:mb-8">
+              <div>
+                <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
+                  今月おすすめの釣り場
+                </h2>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  {currentMonth}月に釣れる魚がいるスポットをピックアップ
+                </p>
+              </div>
+              <Link
+                href="/catchable-now"
+                className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
+              >
+                もっと見る
+                <ArrowRight className="size-4" />
+              </Link>
+            </div>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {seasonalSpots.map((spot) => {
+                const catchableNow = spot.catchableFish
+                  .filter((cf) => {
+                    if (cf.monthStart <= cf.monthEnd) {
+                      return cf.monthStart <= currentMonth && cf.monthEnd >= currentMonth;
+                    }
+                    return currentMonth >= cf.monthStart || currentMonth <= cf.monthEnd;
+                  })
+                  .slice(0, 3);
+                return (
+                  <Link key={spot.id} href={`/spots/${spot.slug}`}>
+                    <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                      <CardContent className="p-4">
+                        <div className="mb-2 flex items-start justify-between gap-2">
+                          <div className="min-w-0">
+                            <h3 className="truncate font-semibold group-hover:text-primary">{spot.name}</h3>
+                            <p className="flex items-center gap-1 text-xs text-muted-foreground">
+                              <MapPin className="size-3 shrink-0" />
+                              {spot.region.prefecture} {spot.region.areaName}
+                            </p>
+                          </div>
+                          <Badge className={`shrink-0 text-[10px] ${DIFFICULTY_COLORS[spot.difficulty] || ""}`}>
+                            {DIFFICULTY_LABELS[spot.difficulty] || spot.difficulty}
+                          </Badge>
+                        </div>
+                        <div className="mb-2 flex items-center gap-2">
+                          <Badge variant="outline" className="text-[10px]">
+                            {SPOT_TYPE_LABELS[spot.spotType] || spot.spotType}
+                          </Badge>
+                          <div className="flex items-center gap-0.5 text-xs text-amber-600">
+                            <Star className="size-3 fill-amber-400 text-amber-400" />
+                            <span className="font-medium">{spot.rating.toFixed(1)}</span>
+                          </div>
+                        </div>
+                        <div className="flex flex-wrap gap-1">
+                          <span className="text-[10px] text-muted-foreground">今月釣れる:</span>
+                          {catchableNow.map((cf) => (
+                            <Badge key={cf.fish.slug} variant="secondary" className="text-[10px]">
+                              {cf.fish.name}
+                            </Badge>
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                );
+              })}
+            </div>
+            <div className="mt-6 flex justify-center sm:hidden">
+              <Link href="/catchable-now">
+                <Button variant="outline" className="min-h-[44px] gap-1">
+                  もっと見る
+                  <ArrowRight className="size-4" />
+                </Button>
+              </Link>
+            </div>
+          </section>
+        ) : null;
+      })()}
+
+      {/* 人気スポットTOP10 */}
+      {(() => {
+        const SPOT_TYPE_LABELS_TOP: Record<string, string> = {
+          port: "漁港", beach: "砂浜", rocky: "磯", river: "河川", pier: "桟橋", breakwater: "堤防",
+        };
+        const top10 = fishingSpots
+          .slice()
+          .sort((a, b) => (b.rating * b.reviewCount) - (a.rating * a.reviewCount))
+          .slice(0, 10);
+        return (
+          <section className="bg-muted/50 py-8 sm:py-12">
+            <div className="mx-auto max-w-5xl px-4 sm:px-6">
+              <div className="mb-6 flex items-end justify-between sm:mb-8">
+                <div>
+                  <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
+                    人気スポット TOP10
+                  </h2>
+                  <p className="mt-1 text-sm text-muted-foreground">
+                    評価とレビュー数で選ぶ注目の釣り場
+                  </p>
+                </div>
+                <Link
+                  href="/spots"
+                  className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
+                >
+                  すべて見る
+                  <ArrowRight className="size-4" />
+                </Link>
+              </div>
+              <div className="space-y-1.5">
+                {top10.map((spot, index) => (
+                  <Link key={spot.id} href={`/spots/${spot.slug}`} className="block">
+                    <div className="flex items-center gap-3 rounded-lg border bg-white p-3 transition-shadow hover:shadow-md">
+                      <div className={`flex size-8 shrink-0 items-center justify-center rounded-full font-bold text-sm ${index < 3 ? "bg-amber-100 text-amber-700" : "bg-muted text-muted-foreground"}`}>
+                        {index + 1}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="flex items-center gap-2">
+                          <p className="truncate text-sm font-semibold">{spot.name}</p>
+                          <Badge variant="outline" className="shrink-0 text-[10px]">
+                            {SPOT_TYPE_LABELS_TOP[spot.spotType] || spot.spotType}
+                          </Badge>
+                        </div>
+                        <p className="text-xs text-muted-foreground">{spot.region.prefecture} {spot.region.areaName}</p>
+                      </div>
+                      <div className="flex shrink-0 items-center gap-1 text-xs">
+                        <Star className="size-3.5 fill-amber-400 text-amber-400" />
+                        <span className="font-semibold">{spot.rating.toFixed(1)}</span>
+                      </div>
+                      <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
+                    </div>
+                  </Link>
+                ))}
+              </div>
+              <div className="mt-6 flex justify-center sm:hidden">
+                <Link href="/spots">
+                  <Button variant="outline" className="min-h-[44px] gap-1">
+                    すべてのスポットを見る
+                    <ArrowRight className="size-4" />
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </section>
+        );
+      })()}
 
       {/* 人気のエリア */}
       <section className="bg-muted/50 py-8 sm:py-12">
