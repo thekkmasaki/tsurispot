@@ -4,6 +4,9 @@ import { blogArticles3 } from "./blog-articles-3";
 import { blogArticles4 } from "./blog-articles-4";
 import { blogArticles5 } from "./blog-articles-5";
 import { blogArticles6 } from "./blog-articles-6";
+import { blogArticles7 } from "./blog-articles-7";
+import { blogArticles8 } from "./blog-articles-8";
+import { blogArticles9 } from "./blog-articles-9";
 
 export interface BlogPost {
   id: string;
@@ -2555,6 +2558,9 @@ export const blogPosts: BlogPost[] = [
   ...blogArticles4,
   ...blogArticles5,
   ...blogArticles6,
+  ...blogArticles7,
+  ...blogArticles8,
+  ...blogArticles9,
 ];
 
 /** slugで記事を取得（同期版、静的記事のみ） */
