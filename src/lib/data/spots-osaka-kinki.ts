@@ -104,7 +104,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   // ===== 大阪市エリア（南港・ベイエリア） =====
   {
     id: "s205", name: "シーサイドコスモ（魚釣り開放区域）", slug: "seaside-cosmo",
-    description: "大阪南港のATC前に広がる開放的な護岸釣り場。柵付きで安全、足場良好。サビキでアジ・サバ、ルアーでシーバスやタチウオが狙える都市型フィッシングスポット。",
+    description: "大阪南港のATC前に広がる開放的な護岸釣り場。柵付きで安全、足場良好。サビキでアジ・サバ、ルアーでシーバスやタチウオが狙える都市型フィッシングスポット。サビキ釣りやテンヤ・ウキ釣りといった釣り方で多くの釣り人が訪れます。watariganiやakaeiも狙えるため、ターゲットの幅が広いのが特徴です。初めて竿を出す方にも向いており、子供連れでの釣行にも適しています。",
     latitude: 34.6383, longitude: 135.421700, address: "〒559-0034 大阪府大阪市住之江区南港北1丁目32",
     accessInfo: "ニュートラム「トレードセンター前」駅下車すぐ。ATC隣接。",
     region: region("r131"), spotType: "breakwater", difficulty: "beginner",
@@ -137,7 +137,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   },
   {
     id: "s206", name: "南港北防波堤", slug: "nanko-kita-breakwater",
-    description: "南港エリアの北側に位置する防波堤。潮通しが良くアジの回遊が多い。サビキ釣りの好ポイントでファミリーにも人気。",
+    description: "南港エリアの北側に位置する防波堤。潮通しが良くアジの回遊が多い。サビキ釣りの好ポイントでファミリーにも人気。テンヤに加えてカゴ釣りも楽しめるため、一日中飽きません。イワシ・タチウオ・マダイの好ポイントとしても地元で知られています。堤防からの釣りは足場の安定感と魚種の豊富さが両立するのが強みです。釣り場への入場は無料で、コストを抑えた釣行が可能です。",
     latitude: 34.64280, longitude: 135.411200, address: "〒559-0034 大阪府大阪市住之江区南港北",
     accessInfo: "ニュートラム「ポートタウン西」駅から徒歩約15分。",
     region: region("r131"), spotType: "breakwater", difficulty: "beginner",
@@ -168,7 +168,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   },
   {
     id: "s207", name: "かもめ大橋下", slug: "kamome-ohashi",
-    description: "南港のランドマーク・かもめ大橋の下。橋脚周辺にシーバスやチヌが付き、ルアーマンに人気の実力派ポイント。タチウオの名所としても有名。",
+    description: "南港のランドマーク・かもめ大橋の下。橋脚周辺にシーバスやチヌが付き、ルアーマンに人気の実力派ポイント。タチウオの名所としても有名。テンヤ・ウキ釣りのほか、フカセ釣りでも好釣果が報告されています。時期によってはクロダイ・アジの釣果も期待できます。ある程度の経験を積んだ釣り人にとってやりがいのあるフィールドです。",
     latitude: 34.6250, longitude: 135.4050, address: "〒559-0032 大阪府大阪市住之江区南港南",
     accessInfo: "ニュートラム「南港東」駅から徒歩約20分。阪神高速4号湾岸線南港北出口から約5分。",
     region: region("r131"), spotType: "breakwater", difficulty: "intermediate",
@@ -197,7 +197,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   },
   {
     id: "s208", name: "南港大橋下（フェリーターミナル横）", slug: "nanko-ohashi",
-    description: "フェリーターミナル横のポイント。橋脚とフェリーの水流で魚が集まりやすい。シーバスとタチウオの好ポイント。",
+    description: "フェリーターミナル横のポイント。橋脚とフェリーの水流で魚が集まりやすい。シーバスとタチウオの好ポイント。ルアー・テンヤと釣り方のバリエーションが豊富です。アジなども回遊しており、シーズンを通して楽しめます。釣り慣れた方であればテクニック次第で良型が期待できるポイントです。堤防の先端付近は潮通しが良く、回遊魚の寄りが期待できます。",
     latitude: 34.6300, longitude: 135.4180, address: "〒559-0032 大阪府大阪市住之江区南港南2丁目1-1",
     accessInfo: "ニュートラム「フェリーターミナル」駅から徒歩約10分。",
     region: region("r131"), spotType: "breakwater", difficulty: "intermediate",
@@ -223,7 +223,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   // ===== 大正・此花エリア =====
   {
     id: "s209", name: "鶴浜地区護岸", slug: "tsuruhama-gogan",
-    description: "大正区の護岸釣りスポット。IKEAやコストコに近い便利な立地。チヌやシーバスの実績が高く、買い物ついでに立ち寄る人も。",
+    description: "大正区の護岸釣りスポット。IKEAやコストコに近い便利な立地。チヌやシーバスの実績が高く、買い物ついでに立ち寄る人も。フカセ釣りに加えてルアーも楽しめるため、一日中飽きません。クロダイ・アジの好ポイントとしても地元で知られています。ビギナーにもやさしいフィールドで、釣り入門にもおすすめの場所です。堤防の先端付近は潮通しが良く、回遊魚の寄りが期待できます。",
     latitude: 34.6478, longitude: 135.4437, address: "〒551-0023 大阪府大阪市大正区鶴町3丁目27",
     accessInfo: "大阪シティバス「鶴町四」停留所から徒歩約5分。阪神高速大正出口から約10分。",
     region: region("r132"), spotType: "breakwater", difficulty: "beginner",
@@ -248,7 +248,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   },
   {
     id: "s210", name: "舞洲地区護岸", slug: "maishima-gogan",
-    description: "大阪市此花区の人工島・舞洲の護岸。バーベキュー場やスポーツ施設の近くで釣りが楽しめる。タチウオ・シーバスの実績あり。",
+    description: "大阪市此花区の人工島・舞洲の護岸。バーベキュー場やスポーツ施設の近くで釣りが楽しめる。タチウオ・シーバスの実績あり。テンヤ・ルアーと釣り方のバリエーションが豊富です。アジなども回遊しており、シーズンを通して楽しめます。釣り初心者でも比較的簡単に釣果を得られる条件が整っています。堤防の先端付近は潮通しが良く、回遊魚の寄りが期待できます。",
     latitude: 34.6640, longitude: 135.3980, address: "〒554-0042 大阪府大阪市此花区3",
     accessInfo: "JR桜島駅からバスで約15分「舞洲スポーツアイランド」下車。",
     region: region("r132"), spotType: "breakwater", difficulty: "beginner",
@@ -274,7 +274,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   // ===== 泉大津エリア =====
   {
     id: "s211", name: "助松埠頭", slug: "sukematsu-wharf",
-    description: "泉大津の工業港。車横付けポイントが人気で、サビキでのアジ・サバの数釣りからタチウオまで狙える。大阪湾中部の安定ポイント。",
+    description: "泉大津の工業港。車横付けポイントが人気で、サビキでのアジ・サバの数釣りからタチウオまで狙える。大阪湾中部の安定ポイント。サビキ釣りやテンヤといった釣り方で多くの釣り人が訪れます。イワシやwatariganiやakaeiも狙えるため、ターゲットの幅が広いのが特徴です。エントリーしやすい釣り場で、初心者が最初の一匹を手にするのにぴったりです。",
     latitude: 34.511200, longitude: 135.38121200, address: "〒595-0074 大阪府泉大津市小津島町",
     accessInfo: "阪神高速湾岸線助松出口から約5分。泉大津大橋を渡って2つ目の信号を左折。",
     region: region("r133"), spotType: "port", difficulty: "beginner",
@@ -303,7 +303,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   },
   {
     id: "s212", name: "汐見埠頭 砂上げ場", slug: "shiomi-wharf",
-    description: "泉大津の人気ポイント。広い護岸で車横付けが可能。サビキ・タチウオ・チヌと多彩な魚種。夜間は封鎖される場合があるので注意。",
+    description: "泉大津の人気ポイント。広い護岸で車横付けが可能。サビキ・タチウオ・チヌと多彩な魚種。夜間は封鎖される場合があるので注意。サビキ釣りやウキ釣りなど複数の釣法に対応した好ポイントです。アジ・クロダイといった魚種の実績もあります。エントリーしやすい釣り場で、初心者が最初の一匹を手にするのにぴったりです。駐車場が整備されており、快適に釣行できます。",
     latitude: 34.5050, longitude: 135.3750, address: "〒595-0054 大阪府泉大津市汐見町106",
     accessInfo: "臨海線・汐見町交差点を曲がる。阪神高速湾岸線助松出口から約10分。",
     region: region("r133"), spotType: "port", difficulty: "beginner",
@@ -329,7 +329,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   // ===== 泉南・岬町エリア =====
   {
     id: "s213", name: "深日漁港", slug: "fuke-port",
-    description: "大阪府最南端に位置する歴史ある漁港。潮通し抜群でタチウオ・アオリイカ・グレなど多彩な魚種が狙える。隣接する海上釣り堀「岬」も人気。",
+    description: "大阪府最南端に位置する歴史ある漁港。潮通し抜群でタチウオ・アオリイカ・グレなど多彩な魚種が狙える。隣接する海上釣り堀「岬」も人気。テンヤやエギングといった釣り方で多くの釣り人が訪れます。アジやマダイやアイゴも狙えるため、ターゲットの幅が広いのが特徴です。経験者が通い込むだけの実力を秘めた釣り場です。周辺には駐車場やトイレがあり、釣り環境として不便がありません。",
     latitude: 34.3195, longitude: 135.1430, address: "〒599-0303 大阪府岬町深日",
     accessInfo: "南海多奈川線「深日港」駅から徒歩5分。阪和道泉南ICから約30分。",
     region: region("r134"), spotType: "port", difficulty: "intermediate",
@@ -359,7 +359,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   },
   {
     id: "s214", name: "小島漁港", slug: "kojima-port-osaka",
-    description: "岬町の小さな漁港。地元の釣り人が通う穴場スポット。アジのサビキ釣りやアオリイカのエギングが楽しめる。",
+    description: "岬町の小さな漁港。地元の釣り人が通う穴場スポット。アジのサビキ釣りやアオリイカのエギングが楽しめる。フカセ釣りと釣り方のバリエーションが豊富です。クロダイなども回遊しており、シーズンを通して楽しめます。中級者以上が腕を試すのに適した環境と魚影が魅力です。駐車場が近くにあるため長時間の釣りでも安心です。",
     latitude: 34.3100, longitude: 135.1300, address: "〒599-0314 大阪府岬町多奈川小島",
     accessInfo: "南海多奈川線「多奈川」駅からバスで約10分。",
     region: region("r134"), spotType: "port", difficulty: "intermediate",
@@ -384,7 +384,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   },
   {
     id: "s215", name: "谷川港", slug: "tanigawa-port",
-    description: "岬町多奈川の静かな漁港。地磯に隣接し、アオリイカやグレの穴場。秋のエギングシーズンが特に人気。",
+    description: "岬町多奈川の静かな漁港。地磯に隣接し、アオリイカやグレの穴場。秋のエギングシーズンが特に人気。サビキ釣り・フカセ釣りと釣り方のバリエーションが豊富です。アジやクロダイなども回遊しており、シーズンを通して楽しめます。中級者以上が腕を試すのに適した環境と魚影が魅力です。足場が整っているため安全に釣りを楽しめます。",
     latitude: 34.3150, longitude: 135.1350, address: "〒599-0311 大阪府岬町多奈川谷川",
     accessInfo: "南海多奈川線「多奈川」駅から徒歩約15分。",
     region: region("r134"), spotType: "port", difficulty: "intermediate",
@@ -410,7 +410,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   // ===== 兵庫県（阪神エリア） =====
   {
     id: "s216", name: "尼崎市立魚つり公園", slug: "amagasaki-fishing-park",
-    description: "大阪湾奥に位置する人気の海釣り施設。柵・トイレ・売店完備で安全。サビキでアジ・サバ、ルアーでシーバス・タチウオが狙える。",
+    description: "大阪湾奥に位置する人気の海釣り施設。柵・トイレ・売店完備で安全。サビキでアジ・サバ、ルアーでシーバス・タチウオが狙える。サビキ釣りのほか、テンヤでも好釣果が報告されています。釣り初心者でも比較的簡単に釣果を得られる条件が整っています。駐車場が整備されており、快適に釣行できます。水深や地形の変化に富み、探り釣りで思わぬ一匹に出会えることもあります。",
     latitude: 34.681200, longitude: 135.3800, address: "〒660-0087 兵庫県尼崎市平左衛門町66",
     accessInfo: "阪神「尼崎」駅からバスで約25分。阪神高速尼崎西出口から約10分。",
     region: region("r135"), spotType: "pier", difficulty: "beginner",
@@ -436,7 +436,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   },
   {
     id: "s217", name: "南芦屋浜", slug: "minami-ashiyahama",
-    description: "芦屋市の埋め立て地にある柵付き護岸。安全で足場良好、ファミリーに大人気。夜のクロダイ（黒鯛）狙いも盛ん。",
+    description: "芦屋市の埋め立て地にある柵付き護岸。安全で足場良好、ファミリーに大人気。夜のクロダイ（黒鯛）狙いも盛ん。フカセ釣りのほか、サビキ釣りでも好釣果が報告されています。時期によってはアジ・タチウオ・ハゼの釣果も期待できます。堤防からの釣りは足場の安定感と魚種の豊富さが両立するのが強みです。駐車場とトイレとコンビニが利用可能で、実用面でも優れた釣り場です。",
     latitude: 34.711200, longitude: 135.311700, address: "〒659-0034 兵庫県芦屋市陽光町4",
     accessInfo: "阪神「打出」駅からバスで約10分。阪神高速芦屋出口から約5分。",
     region: region("r135"), spotType: "breakwater", difficulty: "beginner",
@@ -465,7 +465,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   },
   {
     id: "s218", name: "神戸空港ベランダ", slug: "kobe-airport-veranda",
-    description: "神戸空港島の護岸釣り場。飛行機を眺めながら釣りが楽しめる開放的なスポット。サビキ・タチウオ・シーバスの実績あり。",
+    description: "神戸空港島の護岸釣り場。飛行機を眺めながら釣りが楽しめる開放的なスポット。サビキ・タチウオ・シーバスの実績あり。サビキ釣りやテンヤといった釣り方で多くの釣り人が訪れます。アジも狙えるため、ターゲットの幅が広いのが特徴です。初めて竿を出す方にも向いており、子供連れでの釣行にも適しています。堤防からの釣りは足場の安定感と魚種の豊富さが両立するのが強みです。",
     latitude: 34.6316, longitude: 135.2239, address: "〒650-0048 兵庫県神戸市中央区神戸空港",
     accessInfo: "ポートライナー「神戸空港」駅から徒歩約10分。",
     region: region("r135"), spotType: "breakwater", difficulty: "beginner",
@@ -491,7 +491,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   // s220 翼港: spots-additional.ts s116 と重複のため削除
   {
     id: "s221", name: "吹上浜", slug: "fukiage-hama-awaji",
-    description: "淡路島南部のサーフフィッシングスポット。ヒラメ・マゴチ・キスなどが狙える砂浜。投げ釣りやワームで楽しめる。",
+    description: "淡路島南部のサーフフィッシングスポット。ヒラメ・マゴチ・キスなどが狙える砂浜。投げ釣りやワームで楽しめる。ルアーと釣り方のバリエーションが豊富です。シロギスなども回遊しており、シーズンを通して楽しめます。ある程度の経験を積んだ釣り人にとってやりがいのあるフィールドです。駐車場とトイレが利用可能で、実用面でも優れた釣り場です。",
     latitude: 34.231200, longitude: 134.73580, address: "〒656-0542 兵庫県南あわじ市阿万吹上町",
     accessInfo: "神戸淡路鳴門道西淡三原ICから約15分。",
     region: region("r136"), spotType: "beach", difficulty: "intermediate",
@@ -516,7 +516,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   // ===== 京都府（日本海側） =====
   {
     id: "s223", name: "田井漁港", slug: "tai-port-maizuru",
-    description: "舞鶴市の静かな漁港。アジング・メバリングの穴場として知られ、夜の常夜灯周りが好ポイント。",
+    description: "舞鶴市の静かな漁港。アジング・メバリングの穴場として知られ、夜の常夜灯周りが好ポイント。投げ釣りに加えてカゴ釣りも楽しめるため、一日中飽きません。メバル・カレイ・マダイの好ポイントとしても地元で知られています。エントリーしやすい釣り場で、初心者が最初の一匹を手にするのにぴったりです。岸壁の足場がしっかりしており、安定した体勢で竿を振れます。",
     latitude: 35.491200, longitude: 135.431200, address: "〒625-0157 京都府舞鶴市田井1074",
     accessInfo: "舞鶴若狭道舞鶴東ICから約15分。",
     region: region("r137"), spotType: "port", difficulty: "beginner",
@@ -548,7 +548,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   },
   {
     id: "s224", name: "浅茂川漁港", slug: "asamogawa-port",
-    description: "京丹後市の漁港。日本海に面し、アジ・サゴシ・カレイなど多彩な魚種が狙える。周辺に温泉もあり観光がてら釣りが楽しめる。",
+    description: "京丹後市の漁港。日本海に面し、アジ・サゴシ・カレイなど多彩な魚種が狙える。周辺に温泉もあり観光がてら釣りが楽しめる。サビキ釣りのほか、投げ釣りでも好釣果が報告されています。時期によってはブリの釣果も期待できます。初めて竿を出す方にも向いており、子供連れでの釣行にも適しています。平坦な足場で釣りやすく、荷物の置き場にも困りません。",
     latitude: 35.721200, longitude: 135.061200, address: "〒629-3104 京都府京丹後市網野町浅茂川1400",
     accessInfo: "京都縦貫道京丹後大宮ICから約25分。",
     region: region("r137"), spotType: "port", difficulty: "beginner",
