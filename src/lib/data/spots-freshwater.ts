@@ -126,7 +126,7 @@ export const freshwaterSpots: FishingSpot[] = [
   // ===== バス釣り =====
   {
     id: "fw-001", name: "河口湖", slug: "kawaguchiko-lake",
-    description: "富士五湖の中でもバス釣りのメッカとして全国的に有名。おかっぱり・ボートともにポイントが豊富で、富士山を背景にした絶景の中で釣りが楽しめる。春のスポーニングシーズンには60cmオーバーの大物も。ルアーやドーム船といった釣り方で多くの釣り人が訪れます。blackbassやワカサギやnijimasuも狙えるため、ターゲットの幅が広いのが特徴です。",
+    description: "富士五湖の中でもバス釣りのメッカとして全国的に有名。おかっぱり・ボートともにポイントが豊富で、富士山を背景にした絶景の中で釣りが楽しめる。春のスポーニングシーズンには60cmオーバーの大物も。",
     latitude: 35.5133, longitude: 138.7012553, address: "〒401-0301 山梨県南都留郡富士河口湖町船津（河口湖）",
     accessInfo: "中央自動車道河口湖ICから約10分。富士急行線河口湖駅から徒歩約15分。",
     region: lr("r600"), spotType: "river", difficulty: "intermediate",
@@ -151,7 +151,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-002", name: "琵琶湖北湖（長浜エリア）", slug: "biwako-kitako-nagahama",
-    description: "琵琶湖北湖は水深が深く大型バスが潜む。長浜エリアはおかっぱりポイントが豊富で、姉川河口や豊公園が有名。冬はワカサギも楽しめる。ルアーやウキ釣りなど複数の釣法に対応した好ポイントです。blackbass・bluegill・hasuといった魚種の実績もあります。ある程度の経験を積んだ釣り人にとってやりがいのあるフィールドです。",
+    description: "琵琶湖北湖は水深が深く大型バスが潜む。長浜エリアはおかっぱりポイントが豊富で、姉川河口や豊公園が有名。冬はワカサギも楽しめる。",
     latitude: 35.3781, longitude: 136.2692, address: "〒526-0067 滋賀県長浜市港町4-17",
     accessInfo: "北陸自動車道長浜ICから約10分。JR長浜駅から徒歩約5分（豊公園）。",
     region: lr("r601"), spotType: "river", difficulty: "intermediate",
@@ -174,7 +174,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-003", name: "亀山ダム", slug: "kameyama-dam",
-    description: "千葉県君津市にある関東屈指のバス釣りフィールド。レンタルボートでの釣りがメインで、カバー撃ちやディープクランクが効果的。春のプリスポーンには50cmオーバーも頻出。ルアー・ウキ釣りと釣り方のバリエーションが豊富です。blackbassやbluegillなども回遊しており、シーズンを通して楽しめます。中級者以上が腕を試すのに適した環境と魚影が魅力です。",
+    description: "千葉県君津市にある関東屈指のバス釣りフィールド。レンタルボートでの釣りがメインで、カバー撃ちやディープクランクが効果的。春のプリスポーンには50cmオーバーも頻出。",
     latitude: 35.1803, longitude: 140.051775, address: "〒292-0524 千葉県君津市川俣旧川俣",
     accessInfo: "館山自動車道君津ICから約20分。JR君津駅から車で約30分。",
     region: lr("r602"), spotType: "river", difficulty: "intermediate",
@@ -197,7 +197,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-004", name: "相模湖", slug: "sagamiko-lake",
-    description: "神奈川県にある都心からアクセス抜群のバス釣りフィールド。ワカサギ釣りでも有名。レンタルボートでの釣りが中心で、秋原橋下や日相園前が人気ポイント。ルアーやドーム船など複数の釣法に対応した好ポイントです。blackbass・herabunaといった魚種の実績もあります。ある程度の経験を積んだ釣り人にとってやりがいのあるフィールドです。",
+    description: "神奈川県にある都心からアクセス抜群のバス釣りフィールド。ワカサギ釣りでも有名。レンタルボートでの釣りが中心で、秋原橋下や日相園前が人気ポイント。",
     latitude: 35.5978, longitude: 139.2064, address: "〒252-0171 神奈川県相模原市緑区与瀬（相模湖公園）",
     accessInfo: "中央自動車道相模湖ICから約5分。JR中央線相模湖駅から徒歩約10分。",
     region: lr("r603"), spotType: "river", difficulty: "intermediate",
@@ -221,7 +221,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-005", name: "津久井湖", slug: "tsukuiko-lake",
-    description: "相模湖の下流に位置するダム湖。バス釣りのフィールドとして人気があり、おかっぱりポイントも充実。津久井湖記念館前や沼本ボート前が好ポイント。ルアーのほか、へら竿でも好釣果が報告されています。時期によってはblackbass・herabunaの釣果も期待できます。経験者が通い込むだけの実力を秘めた釣り場です。",
+    description: "相模湖の下流に位置するダム湖。バス釣りのフィールドとして人気があり、おかっぱりポイントも充実。津久井湖記念館前や沼本ボート前が好ポイント。",
     latitude: 35.5883, longitude: 139.2447, address: "〒252-0151 神奈川県相模原市緑区三井",
     accessInfo: "中央自動車道相模湖東ICから約15分。JR橋本駅からバスで約20分。",
     region: lr("r604"), spotType: "river", difficulty: "intermediate",
@@ -244,7 +244,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-006", name: "池原ダム", slug: "ikehara-dam",
-    description: "奈良県下北山村にある日本屈指のビッグバスレイク。ロクマル（60cm超）の実績が豊富で、全国からバスアングラーが訪れる。レンタルボートでの釣りがメイン。ルアーなど複数の釣法に対応した好ポイントです。blackbassといった魚種の実績もあります。経験豊富なアングラーに人気の本格的なフィールドです。駐車場やトイレが近くにあるため長時間の釣りでも安心です。",
+    description: "奈良県下北山村にある日本屈指のビッグバスレイク。ロクマル（60cm超）の実績が豊富で、全国からバスアングラーが訪れる。レンタルボートでの釣りがメイン。",
     latitude: 34.1342, longitude: 135.8472, address: "〒639-3806 奈良県下北山村下池原",
     accessInfo: "名阪国道針ICから約2時間。紀勢自動車道尾鷲北ICから約1時間。",
     region: lr("r605"), spotType: "river", difficulty: "advanced",
@@ -266,7 +266,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-007", name: "七色ダム", slug: "nanairo-dam",
-    description: "池原ダムの上流に位置するリザーバー。池原と並ぶビッグバスフィールドで、特に春のプリスポーン期には大型が接岸する。アルミボートでの釣りが中心。ルアーと釣り方のバリエーションが豊富です。blackbassなども回遊しており、シーズンを通して楽しめます。経験豊富なアングラーに人気の本格的なフィールドです。駐車場とトイレが利用可能で、実用面でも優れた釣り場です。",
+    description: "池原ダムの上流に位置するリザーバー。池原と並ぶビッグバスフィールドで、特に春のプリスポーン期には大型が接岸する。アルミボートでの釣りが中心。",
     latitude: 34.1617, longitude: 135.8808, address: "〒639-3805 奈良県吉野郡下北山村上池原（七色ダム）",
     accessInfo: "名阪国道針ICから約2時間。池原ダムから車で約15分。",
     region: lr("r606"), spotType: "river", difficulty: "advanced",
@@ -288,7 +288,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-008", name: "霞ヶ浦", slug: "kasumigaura-lake",
-    description: "日本第2位の面積を誇る湖。バス釣りの人気フィールドで、おかっぱりポイントが無数にある。土浦港周辺や桜川河口、霞ヶ浦総合公園などが代表的なポイント。ルアーやトップウォーターなど複数の釣法に対応した好ポイントです。blackbass・namazu・コイといった魚種の実績もあります。釣り慣れた方であればテクニック次第で良型が期待できるポイントです。",
+    description: "日本第2位の面積を誇る湖。バス釣りの人気フィールドで、おかっぱりポイントが無数にある。土浦港周辺や桜川河口、霞ヶ浦総合公園などが代表的なポイント。",
     latitude: 36.0333, longitude: 140.2167, address: "〒300-0033 茨城県土浦市川口2丁目（霞ヶ浦総合公園）",
     accessInfo: "常磐自動車道土浦北ICから約10分。JR土浦駅から徒歩約15分（土浦港）。",
     region: lr("r607"), spotType: "river", difficulty: "intermediate",
@@ -312,7 +312,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-009", name: "北浦", slug: "kitaura-lake",
-    description: "霞ヶ浦の東に隣接する細長い湖。霞ヶ浦よりプレッシャーが低く、護岸からのおかっぱりで手軽にバス釣りが楽しめる。テナガエビ釣りの名所でもある。ルアーのほか、ミャク釣りでも好釣果が報告されています。時期によってはblackbass・tenagaebi・namazuの釣果も期待できます。釣り初心者でも比較的簡単に釣果を得られる条件が整っています。",
+    description: "霞ヶ浦の東に隣接する細長い湖。霞ヶ浦よりプレッシャーが低く、護岸からのおかっぱりで手軽にバス釣りが楽しめる。テナガエビ釣りの名所でもある。",
     latitude: 36.0500, longitude: 140.4500, address: "〒311-3512 茨城県行方市玉造甲（北浦・霞ヶ浦ふれあいランド）",
     accessInfo: "東関東自動車道潮来ICから約15分。",
     region: lr("r608"), spotType: "river", difficulty: "beginner",
@@ -336,7 +336,7 @@ export const freshwaterSpots: FishingSpot[] = [
   // ===== 渓流釣り =====
   {
     id: "fw-010", name: "日原川（奥多摩）", slug: "nipparagawa-okutama",
-    description: "東京都内とは思えない美しい渓流。奥多摩駅からアクセスでき、ヤマメ・イワナが狙える。解禁期間は3月〜9月。都心から日帰りで渓流釣りが楽しめる貴重なスポット。ミャク釣りのほか、テンカラでも好釣果が報告されています。時期によってはnijimasuの釣果も期待できます。中級者以上が腕を試すのに適した環境と魚影が魅力です。",
+    description: "東京都内とは思えない美しい渓流。奥多摩駅からアクセスでき、ヤマメ・イワナが狙える。解禁期間は3月〜9月。都心から日帰りで渓流釣りが楽しめる貴重なスポット。",
     latitude: 35.8167, longitude: 139.0833, address: "〒198-0211 東京都西多摩郡奥多摩町日原（日原川渓流）",
     accessInfo: "JR青梅線奥多摩駅からバスで約15分。圏央道青梅ICから約50分。",
     region: lr("r609"), spotType: "river", difficulty: "intermediate",
@@ -360,7 +360,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-011", name: "秋川（あきる野市）", slug: "akigawa-akiruno",
-    description: "東京都あきる野市を流れる多摩川の支流。都心から電車で約1時間とアクセス良好。ヤマメやニジマスが狙え、夏はBBQと合わせて楽しむファミリーも多い。ミャク釣りのほか、ルアーでも好釣果が報告されています。時期によってはnijimasu・アユの釣果も期待できます。駐車場・トイレ・コンビニが整備されており、快適に釣行できます。",
+    description: "東京都あきる野市を流れる多摩川の支流。都心から電車で約1時間とアクセス良好。ヤマメやニジマスが狙え、夏はBBQと合わせて楽しむファミリーも多い。",
     latitude: 35.7283, longitude: 139.2950, address: "〒197-0804 東京都あきる野市秋川",
     accessInfo: "JR五日市線武蔵五日市駅から徒歩約10分。圏央道あきる野ICから約15分。",
     region: lr("r610"), spotType: "river", difficulty: "beginner",
@@ -384,7 +384,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-012", name: "養沢毛鉤専用釣場", slug: "yozawa-kebari-senyo",
-    description: "東京都あきる野市にある日本でも珍しい毛鉤（フライ・テンカラ）専用の釣り場。豊かな自然の中でヤマメやイワナのキャッチ&リリースが楽しめる。フライフィッシャー憧れの地。フライフィッシングといった釣り方で多くの釣り人が訪れます。nijimasuも狙えるため、ターゲットの幅が広いのが特徴です。経験豊富なアングラーに人気の本格的なフィールドです。",
+    description: "東京都あきる野市にある日本でも珍しい毛鉤（フライ・テンカラ）専用の釣り場。豊かな自然の中でヤマメやイワナのキャッチ&リリースが楽しめる。フライフィッシャー憧れの地。",
     latitude: 35.7567, longitude: 139.2133, address: "〒190-0171 東京都あきる野市養沢103-1",
     accessInfo: "JR五日市線武蔵五日市駅からバスで約20分。圏央道あきる野ICから約30分。",
     region: lr("r611"), spotType: "river", difficulty: "advanced",
@@ -408,7 +408,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-013", name: "桂川（大月〜都留）", slug: "katsuragawa-otsuki",
-    description: "山梨県を流れる相模川の上流部。大月から都留にかけてヤマメ・イワナの好ポイントが続く。鮎の友釣りでも有名な清流。中央道沿いでアクセスも良好。ミャク釣り・テンカラと釣り方のバリエーションが豊富です。アユなども回遊しており、シーズンを通して楽しめます。ある程度の経験を積んだ釣り人にとってやりがいのあるフィールドです。",
+    description: "山梨県を流れる相模川の上流部。大月から都留にかけてヤマメ・イワナの好ポイントが続く。鮎の友釣りでも有名な清流。中央道沿いでアクセスも良好。",
     latitude: 35.6083, longitude: 138.941217, address: "〒401-0012 山梨県大月市大月1丁目2-5",
     accessInfo: "中央自動車道大月ICから約5分。JR中央線大月駅から徒歩約10分。",
     region: lr("r612"), spotType: "river", difficulty: "intermediate",
@@ -432,7 +432,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-014", name: "早戸川（宮ヶ瀬湖上流）", slug: "hayatogawa-miyagase",
-    description: "神奈川県の宮ヶ瀬湖に注ぐ清流。丹沢山系の美しい渓谷で、ヤマメ・イワナが生息する。早戸川国際マス釣場も隣接しており、初心者からベテランまで楽しめる。ルアーのほか、テンカラでも好釣果が報告されています。ある程度の経験を積んだ釣り人にとってやりがいのあるフィールドです。駐車場が利用可能で、実用面でも優れた釣り場です。",
+    description: "神奈川県の宮ヶ瀬湖に注ぐ清流。丹沢山系の美しい渓谷で、ヤマメ・イワナが生息する。早戸川国際マス釣場も隣接しており、初心者からベテランまで楽しめる。",
     latitude: 35.4883, longitude: 139.2283, address: "〒252-0155 神奈川県相模原市緑区鳥屋3627",
     accessInfo: "東名高速厚木ICから約40分。本厚木駅からバスで約40分。",
     region: lr("r614"), spotType: "river", difficulty: "intermediate",
@@ -456,7 +456,7 @@ export const freshwaterSpots: FishingSpot[] = [
   // ===== ヘラブナ =====
   {
     id: "fw-015", name: "三島湖", slug: "mishimako-herabuna",
-    description: "千葉県君津市にあるヘラブナ釣りの名所。関東を代表するヘラブナフィールドで、桟橋やボートからの釣りが楽しめる。40cmオーバーの大型ヘラブナも。へら竿・練りエサのほか、ルアーでも好釣果が報告されています。時期によってはherabuna・blackbassの釣果も期待できます。釣り慣れた方であればテクニック次第で良型が期待できるポイントです。",
+    description: "千葉県君津市にあるヘラブナ釣りの名所。関東を代表するヘラブナフィールドで、桟橋やボートからの釣りが楽しめる。40cmオーバーの大型ヘラブナも。",
     latitude: 35.2133, longitude: 139.9750, address: "〒292-1174 千葉県君津市正木152",
     accessInfo: "館山自動車道君津ICから約20分。JR君津駅から車で約30分。",
     region: lr("r615"), spotType: "river", difficulty: "intermediate",
@@ -479,7 +479,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-016", name: "戸面原ダム", slug: "tozurahara-dam",
-    description: "千葉県富津市にあるヘラブナ釣りの人気フィールド。三島湖と並ぶ房総のヘラブナの聖地。ボート釣りが中心で、新ベラ放流後は好釣果が期待できる。へら竿・練りエサや宙釣りといった釣り方で多くの釣り人が訪れます。herabunaも狙えるため、ターゲットの幅が広いのが特徴です。経験者が通い込むだけの実力を秘めた釣り場です。",
+    description: "千葉県富津市にあるヘラブナ釣りの人気フィールド。三島湖と並ぶ房総のヘラブナの聖地。ボート釣りが中心で、新ベラ放流後は好釣果が期待できる。",
     latitude: 35.1717, longitude: 139.9617, address: "〒299-1742 千葉県富津市豊岡",
     accessInfo: "館山自動車道富津中央ICから約20分。",
     region: lr("r616"), spotType: "river", difficulty: "intermediate",
@@ -501,7 +501,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-017", name: "円良田湖", slug: "tsurutako-herabuna",
-    description: "埼玉県寄居町にあるヘラブナ釣りの名所。周囲約4kmの小さな湖だが型の良いヘラブナが多い。桟橋とボートから釣りが楽しめ、秋にはワカサギ釣りも人気。へら竿のほか、ワカサギ仕掛けでも好釣果が報告されています。時期によってはherabunaの釣果も期待できます。ある程度の経験を積んだ釣り人にとってやりがいのあるフィールドです。",
+    description: "埼玉県寄居町にあるヘラブナ釣りの名所。周囲約4kmの小さな湖だが型の良いヘラブナが多い。桟橋とボートから釣りが楽しめ、秋にはワカサギ釣りも人気。",
     latitude: 36.1083, longitude: 139.2017, address: "〒369-1205 埼玉県寄居町末野2155",
     accessInfo: "関越自動車道花園ICから約20分。秩父鉄道波久礼駅から徒歩約20分。",
     region: lr("r617"), spotType: "river", difficulty: "intermediate",
@@ -525,7 +525,7 @@ export const freshwaterSpots: FishingSpot[] = [
   // ===== 管理釣り場 =====
   {
     id: "fw-018", name: "フィッシュオン鹿留", slug: "fishon-shishidome",
-    description: "山梨県都留市にある人気の管理釣り場。ポンドとストリームの2エリアがあり、ニジマスを中心にイワナ・ブラウントラウトなども放流されている。初心者にも安心の施設。ルアーでも好釣果が報告されています。時期によってはnijimasuの釣果も期待できます。駐車場・トイレが整備されており、快適に釣行できます。潮の流れと地形が良い条件を生み出し、年間を通じて釣果が安定しています。",
+    description: "山梨県都留市にある人気の管理釣り場。ポンドとストリームの2エリアがあり、ニジマスを中心にイワナ・ブラウントラウトなども放流されている。初心者にも安心の施設。",
     latitude: 35.5467, longitude: 138.8617, address: "〒402-0032 山梨県都留市鹿留1543",
     accessInfo: "中央自動車道都留ICから約15分。富士急行線都留市駅から車で約10分。",
     region: lr("r618"), spotType: "river", difficulty: "beginner",
@@ -548,7 +548,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-019", name: "加賀フィッシングエリア", slug: "kaga-fishing-area",
-    description: "石川県加賀市にある北陸最大級の管理釣り場。大型ポンドにニジマス・イワナなどが豊富に放流されており、初心者から上級者まで楽しめる。冬でも営業。ルアーも楽しめるため、一日中飽きません。nijimasuの好ポイントとしても地元で知られています。周辺には駐車場やトイレがあり、釣り環境として不便がありません。コンディション次第では予想外の大物と出会える可能性を秘めたフィールドです。",
+    description: "石川県加賀市にある北陸最大級の管理釣り場。大型ポンドにニジマス・イワナなどが豊富に放流されており、初心者から上級者まで楽しめる。冬でも営業。",
     latitude: 36.3017, longitude: 136.3517, address: "〒922-0862 石川県加賀市大聖寺錦町13-25-2",
     accessInfo: "北陸自動車道加賀ICから約10分。JR加賀温泉駅から車で約10分。",
     region: lr("r639"), spotType: "river", difficulty: "beginner",
@@ -572,7 +572,7 @@ export const freshwaterSpots: FishingSpot[] = [
   // ===== ワカサギ =====
   {
     id: "fw-020", name: "赤城大沼", slug: "akagi-onuma-wakasagi",
-    description: "群馬県前橋市にある赤城山山頂の火口湖。冬の氷上ワカサギ釣りの名所として全国的に有名。1月下旬〜3月上旬の結氷期には氷上にテントを張って穴釣りが楽しめる。氷上穴釣り・ボートのほか、氷上穴釣りでも好釣果が報告されています。釣り初心者でも比較的簡単に釣果を得られる条件が整っています。周辺には駐車場やトイレがあり、釣り環境として不便がありません。",
+    description: "群馬県前橋市にある赤城山山頂の火口湖。冬の氷上ワカサギ釣りの名所として全国的に有名。1月下旬〜3月上旬の結氷期には氷上にテントを張って穴釣りが楽しめる。",
     latitude: 36.5567, longitude: 139.1933, address: "〒371-0101 群馬県前橋市富士見町赤城山",
     accessInfo: "関越自動車道前橋ICから約1時間。冬季はチェーン規制あり。",
     region: lr("r620"), spotType: "river", difficulty: "beginner",
@@ -594,7 +594,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-021", name: "榛名湖", slug: "harunako-wakasagi",
-    description: "群馬県高崎市にある榛名山の火口湖。ワカサギ釣りの名所で、冬は氷上穴釣りも楽しめる。夏はボートでのバス釣りも人気。標高1,084mの高原湖で涼しい。氷上穴釣り・ボートやルアーなど複数の釣法に対応した好ポイントです。blackbass・nijimasuといった魚種の実績もあります。ビギナーにもやさしいフィールドで、釣り入門にもおすすめの場所です。",
+    description: "群馬県高崎市にある榛名山の火口湖。ワカサギ釣りの名所で、冬は氷上穴釣りも楽しめる。夏はボートでのバス釣りも人気。標高1,084mの高原湖で涼しい。",
     latitude: 36.4767, longitude: 138.8567, address: "〒370-3348 群馬県高崎市榛名湖町",
     accessInfo: "関越自動車道渋川伊香保ICから約50分。高崎駅からバスで約1時間30分。",
     region: lr("r621"), spotType: "river", difficulty: "beginner",
@@ -619,7 +619,7 @@ export const freshwaterSpots: FishingSpot[] = [
   // ===== 鮎釣り =====
   {
     id: "fw-022", name: "狩野川", slug: "kanogawa-ayu",
-    description: "静岡県伊豆を流れる鮎の友釣りの聖地。全国から鮎師が集まる一級河川で、天然遡上の鮎が多い。大見川・船原川などの支流もポイント豊富。ルアーも楽しめるため、一日中飽きません。アユ・amagoの好ポイントとしても地元で知られています。経験豊富なアングラーに人気の本格的なフィールドです。周辺には駐車場やコンビニがあり、釣り環境として不便がありません。",
+    description: "静岡県伊豆を流れる鮎の友釣りの聖地。全国から鮎師が集まる一級河川で、天然遡上の鮎が多い。大見川・船原川などの支流もポイント豊富。",
     latitude: 35.00580, longitude: 138.9400, address: "〒410-2325 静岡県伊豆の国市神島121",
     accessInfo: "伊豆縦貫自動車道大仁中央ICから約5分。伊豆箱根鉄道大仁駅から徒歩約5分。",
     region: lr("r622"), spotType: "river", difficulty: "advanced",
@@ -642,7 +642,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-023", name: "相模川（鮎釣りエリア）", slug: "sagamigawa-ayu",
-    description: "神奈川県を流れる一級河川。厚木〜相模原にかけて鮎の友釣りが盛んで、都心からのアクセスが良い。小鮎のサビキ釣りも人気で、初心者でも手軽に楽しめる。ミャク釣り・パン鯉と釣り方のバリエーションが豊富です。アユやオイカワやコイなども回遊しており、シーズンを通して楽しめます。経験者が通い込むだけの実力を秘めた釣り場です。",
+    description: "神奈川県を流れる一級河川。厚木〜相模原にかけて鮎の友釣りが盛んで、都心からのアクセスが良い。小鮎のサビキ釣りも人気で、初心者でも手軽に楽しめる。",
     latitude: 35.4342, longitude: 139.351200, address: "〒243-0211 神奈川県厚木市三田1928",
     accessInfo: "東名高速厚木ICから約10分。小田急線本厚木駅から徒歩約15分。",
     region: lr("r623"), spotType: "river", difficulty: "intermediate",
@@ -666,7 +666,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-024", name: "那珂川（栃木〜茨城）", slug: "nakagawa-ayu",
-    description: "関東随一の清流として知られる那珂川。天然遡上の鮎が豊富で、鮎の友釣りの名川。烏山〜大瀬にかけてが人気エリア。サクラマスの遡上も見られる。ルアーなど複数の釣法に対応した好ポイントです。アユ・ヤマメといった魚種の実績もあります。経験豊富なアングラーに人気の本格的なフィールドです。周辺には駐車場があり、釣り環境として不便がありません。",
+    description: "関東随一の清流として知られる那珂川。天然遡上の鮎が豊富で、鮎の友釣りの名川。烏山〜大瀬にかけてが人気エリア。サクラマスの遡上も見られる。",
     latitude: 36.651700, longitude: 140.1017000, address: "〒321-0611 栃木県那須烏山市興野38-1",
     accessInfo: "北関東自動車道宇都宮上三川ICから約50分。JR烏山線烏山駅から車で約10分。",
     region: lr("r624"), spotType: "river", difficulty: "advanced",
@@ -690,7 +690,7 @@ export const freshwaterSpots: FishingSpot[] = [
   // ===== 北海道 =====
   {
     id: "fw-025", name: "支笏湖", slug: "shikotsuko-trout",
-    description: "北海道千歳市にある日本有数の透明度を誇るカルデラ湖。ブラウントラウトやニジマスの大物が狙え、チップ（ヒメマス）釣りも人気。環境省の水質調査で何度も日本一に輝く清流。ルアーに加えてフライも楽しめるため、一日中飽きません。nijimasu・イワナの好ポイントとしても地元で知られています。釣り慣れた方であればテクニック次第で良型が期待できるポイントです。",
+    description: "北海道千歳市にある日本有数の透明度を誇るカルデラ湖。ブラウントラウトやニジマスの大物が狙え、チップ（ヒメマス）釣りも人気。環境省の水質調査で何度も日本一に輝く清流。",
     latitude: 42.7842, longitude: 141.351200, address: "〒006-0281 北海道千歳市支笏湖温泉番外地",
     accessInfo: "新千歳空港から車で約40分。道央自動車道千歳ICから約30分。",
     region: lr("r625"), spotType: "river", difficulty: "intermediate",
@@ -713,7 +713,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-026", name: "洞爺湖", slug: "toyako-trout",
-    description: "北海道の洞爺湖は周囲約43kmのカルデラ湖。ニジマスやヒメマスが狙え、特に春と秋の岸寄り時期は陸っぱりからも大物が期待できる。有珠山や昭和新山を望む絶景の釣り場。ルアーやワカサギ仕掛けなど複数の釣法に対応した好ポイントです。nijimasu・ワカサギといった魚種の実績もあります。経験者が通い込むだけの実力を秘めた釣り場です。",
+    description: "北海道の洞爺湖は周囲約43kmのカルデラ湖。ニジマスやヒメマスが狙え、特に春と秋の岸寄り時期は陸っぱりからも大物が期待できる。有珠山や昭和新山を望む絶景の釣り場。",
     latitude: 42.5833, longitude: 140.8333, address: "〒049-5721 北海道洞爺湖町洞爺湖温泉36",
     accessInfo: "道央自動車道虻田洞爺湖ICから約10分。JR洞爺駅からバスで約20分。",
     region: lr("r626"), spotType: "river", difficulty: "intermediate",
@@ -736,7 +736,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-027", name: "阿寒湖", slug: "akanko-trout",
-    description: "北海道釧路市の阿寒湖はマリモで有名なカルデラ湖。アメマス（エゾイワナ）やニジマスの大物が狙え、フライフィッシングの聖地としても知られる。ボッケ（泥火山）周辺が好ポイント。ルアーのほか、氷上穴釣りでも好釣果が報告されています。時期によってはnijimasu・ワカサギの釣果も期待できます。経験者が通い込むだけの実力を秘めた釣り場です。",
+    description: "北海道釧路市の阿寒湖はマリモで有名なカルデラ湖。アメマス（エゾイワナ）やニジマスの大物が狙え、フライフィッシングの聖地としても知られる。ボッケ（泥火山）周辺が好ポイント。",
     latitude: 43.448900, longitude: 144.0978000, address: "〒085-0467 北海道釧路市阿寒町阿寒湖温泉4丁目5-10",
     accessInfo: "釧路空港から車で約1時間。道東自動車道足寄ICから約1時間。",
     region: lr("r627"), spotType: "river", difficulty: "intermediate",
@@ -761,7 +761,7 @@ export const freshwaterSpots: FishingSpot[] = [
   // ===== 東北 =====
   {
     id: "fw-028", name: "十和田湖", slug: "towadako-trout",
-    description: "青森県と秋田県にまたがるカルデラ湖。ヒメマスの原産地として知られ、秋の解禁時期にはヒメマス釣りで賑わう。紅葉の美しさも見事で、観光と釣りを同時に楽しめる。ルアーのほか、フライでも好釣果が報告されています。時期によってはnijimasu・イワナの釣果も期待できます。経験者が通い込むだけの実力を秘めた釣り場です。",
+    description: "青森県と秋田県にまたがるカルデラ湖。ヒメマスの原産地として知られ、秋の解禁時期にはヒメマス釣りで賑わう。紅葉の美しさも見事で、観光と釣りを同時に楽しめる。",
     latitude: 40.451700, longitude: 140.8672, address: "〒018-5501 青森県十和田市奥瀬十和田湖畔休屋294-1",
     accessInfo: "東北自動車道十和田ICから約1時間。JR八戸駅からバスで約2時間。",
     region: lr("r629"), spotType: "river", difficulty: "intermediate",
@@ -784,7 +784,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-029", name: "田沢湖", slug: "tazawako-trout",
-    description: "秋田県にある日本一深い湖（最大水深423m）。クニマス再発見で話題になった湖で、サクラマスやイワナが狙える。瑠璃色の水面が美しい。ルアーに加えてフライも楽しめるため、一日中飽きません。ヤマメの好ポイントとしても地元で知られています。経験者が通い込むだけの実力を秘めた釣り場です。周辺には駐車場やトイレがあり、釣り環境として不便がありません。",
+    description: "秋田県にある日本一深い湖（最大水深423m）。クニマス再発見で話題になった湖で、サクラマスやイワナが狙える。瑠璃色の水面が美しい。",
     latitude: 39.7333, longitude: 140.6833, address: "〒014-1201 秋田県仙北市田沢湖生保内造道57",
     accessInfo: "東北自動車道盛岡ICから約1時間。JR田沢湖駅からバスで約15分。",
     region: lr("r628"), spotType: "river", difficulty: "intermediate",
@@ -808,7 +808,7 @@ export const freshwaterSpots: FishingSpot[] = [
   // ===== 九州 =====
   {
     id: "fw-030", name: "遠賀川", slug: "ongagawa-bass",
-    description: "福岡県を流れる一級河川。九州を代表するバス釣りフィールドで、河口から中流域まで広大なポイントが続く。テトラ帯やアシ際がメインポイント。ナマズゲームも人気。ルアーやトップウォーターといった釣り方で多くの釣り人が訪れます。blackbassやnamazuやコイも狙えるため、ターゲットの幅が広いのが特徴です。",
+    description: "福岡県を流れる一級河川。九州を代表するバス釣りフィールドで、河口から中流域まで広大なポイントが続く。テトラ帯やアシ際がメインポイント。ナマズゲームも人気。",
     latitude: 33.748900, longitude: 130.731200, address: "〒811-4307 福岡県遠賀町遠賀川1丁目1",
     accessInfo: "九州自動車道鞍手ICから約10分。JR筑豊本線直方駅から車で約5分。",
     region: lr("r630"), spotType: "river", difficulty: "beginner",
@@ -833,7 +833,7 @@ export const freshwaterSpots: FishingSpot[] = [
   // ===== 富士五湖（追加） =====
   {
     id: "fw-031", name: "西湖", slug: "saiko-lake",
-    description: "富士五湖の一つで、クニマス（絶滅したと思われていた田沢湖固有種）が再発見された湖。ヘラブナ・バス・ワカサギが楽しめる。青木ヶ原樹海に囲まれた神秘的な雰囲気。ルアーのほか、へら竿でも好釣果が報告されています。時期によってはblackbass・herabunaの釣果も期待できます。中級者以上が腕を試すのに適した環境と魚影が魅力です。",
+    description: "富士五湖の一つで、クニマス（絶滅したと思われていた田沢湖固有種）が再発見された湖。ヘラブナ・バス・ワカサギが楽しめる。青木ヶ原樹海に囲まれた神秘的な雰囲気。",
     latitude: 35.4928, longitude: 138.7000, address: "〒401-0332 山梨県富士河口湖町西湖",
     accessInfo: "中央自動車道河口湖ICから約20分。",
     region: lr("r631"), spotType: "river", difficulty: "intermediate",
@@ -857,7 +857,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-032", name: "精進湖", slug: "shojiko-lake",
-    description: "富士五湖で最も小さな湖。ヘラブナ釣りの名所として知られ、ボートからの底釣りが盛ん。バス釣りも楽しめる。富士山と子抱き富士の絶景が魅力。へら竿・ルアーと釣り方のバリエーションが豊富です。herabunaやblackbassやワカサギなども回遊しており、シーズンを通して楽しめます。釣り慣れた方であればテクニック次第で良型が期待できるポイントです。",
+    description: "富士五湖で最も小さな湖。ヘラブナ釣りの名所として知られ、ボートからの底釣りが盛ん。バス釣りも楽しめる。富士山と子抱き富士の絶景が魅力。",
     latitude: 35.4783, longitude: 138.6717, address: "〒401-0336 山梨県富士河口湖町精進",
     accessInfo: "中央自動車道河口湖ICから約25分。",
     region: lr("r632"), spotType: "river", difficulty: "intermediate",
@@ -881,7 +881,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-033", name: "本栖湖", slug: "motosuko-lake",
-    description: "富士五湖の中で最も深く透明度が高い。千円札の富士山の撮影地としても有名。ニジマス・ヒメマスの大物が狙え、ルアー・フライでの釣りが盛ん。nijimasuやblackbassも狙えるため、ターゲットの幅が広いのが特徴です。釣り慣れた方であればテクニック次第で良型が期待できるポイントです。駐車場・トイレが整備されており、快適に釣行できます。",
+    description: "富士五湖の中で最も深く透明度が高い。千円札の富士山の撮影地としても有名。ニジマス・ヒメマスの大物が狙え、ルアー・フライでの釣りが盛ん。",
     latitude: 35.4633, longitude: 138.5917, address: "〒401-0337 山梨県南都留郡富士河口湖町本栖（本栖湖）",
     accessInfo: "中央自動車道河口湖ICから約30分。",
     region: lr("r633"), spotType: "river", difficulty: "intermediate",
@@ -905,7 +905,7 @@ export const freshwaterSpots: FishingSpot[] = [
   // ===== 追加の渓流・湖 =====
   {
     id: "fw-034", name: "笛吹川", slug: "fuefukigawa-keiryu",
-    description: "山梨県を流れる富士川の支流。ヤマメ・イワナの渓流釣りから鮎の友釣りまで楽しめる。甲府盆地を流れるためアクセスが良く、ぶどう狩りと合わせて楽しむ釣り人も。ミャク釣りでも好釣果が報告されています。時期によってはアユ・オイカワの釣果も期待できます。中級者以上が腕を試すのに適した環境と魚影が魅力です。駐車場やコンビニが近くにあるため長時間の釣りでも安心です。",
+    description: "山梨県を流れる富士川の支流。ヤマメ・イワナの渓流釣りから鮎の友釣りまで楽しめる。甲府盆地を流れるためアクセスが良く、ぶどう狩りと合わせて楽しむ釣り人も。",
     latitude: 35.6617, longitude: 138.6833, address: "〒405-0043 山梨県山梨市江曽原1488",
     accessInfo: "中央自動車道勝沼ICから約15分。JR山梨市駅から車で約5分。",
     region: lr("r613"), spotType: "river", difficulty: "intermediate",
@@ -929,7 +929,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-035", name: "野尻湖", slug: "nojiriko-bass",
-    description: "長野県信濃町にある天然湖。スモールマウスバスの聖地として全国的に有名で、ボートフィッシングが盛ん。冬はワカサギのドーム船も人気。斑尾高原の麓に位置する。ルアーでも好釣果が報告されています。時期によってはblackbassの釣果も期待できます。釣り慣れた方であればテクニック次第で良型が期待できるポイントです。",
+    description: "長野県信濃町にある天然湖。スモールマウスバスの聖地として全国的に有名で、ボートフィッシングが盛ん。冬はワカサギのドーム船も人気。斑尾高原の麓に位置する。",
     latitude: 36.8283, longitude: 138.2167, address: "〒389-1303 長野県上水内郡信濃町野尻（野尻湖）",
     accessInfo: "上信越自動車道信濃町ICから約5分。JR黒姫駅からバスで約15分。",
     region: lr("r636"), spotType: "river", difficulty: "intermediate",
@@ -952,7 +952,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-036", name: "桧原湖", slug: "hibarako-bass",
-    description: "福島県裏磐梯にある桧原湖はスモールマウスバスの名フィールド。磐梯山を望む美しい景色の中でのボートフィッシングが人気。冬はワカサギの氷上穴釣りも。ルアーと釣り方のバリエーションが豊富です。blackbassなども回遊しており、シーズンを通して楽しめます。中級者以上が腕を試すのに適した環境と魚影が魅力です。",
+    description: "福島県裏磐梯にある桧原湖はスモールマウスバスの名フィールド。磐梯山を望む美しい景色の中でのボートフィッシングが人気。冬はワカサギの氷上穴釣りも。",
     latitude: 37.7012000, longitude: 140.0500, address: "〒969-2701 福島県北塩原村檜原剣ケ峯1093-955",
     accessInfo: "磐越自動車道猪苗代磐梯高原ICから約25分。",
     region: lr("r637"), spotType: "river", difficulty: "intermediate",
@@ -975,7 +975,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-037", name: "長良川（郡上八幡）", slug: "nagaragawa-gujo-ayu",
-    description: "岐阜県郡上八幡を流れる日本三大清流の一つ。鮎の友釣り発祥の地とも言われ、全国から鮎師が集まる聖地。郡上踊りの時期は釣りと祭りを同時に楽しめる。ルアーやテンカラといった釣り方で多くの釣り人が訪れます。アユやamagoやイワナも狙えるため、ターゲットの幅が広いのが特徴です。経験豊富なアングラーに人気の本格的なフィールドです。",
+    description: "岐阜県郡上八幡を流れる日本三大清流の一つ。鮎の友釣り発祥の地とも言われ、全国から鮎師が集まる聖地。郡上踊りの時期は釣りと祭りを同時に楽しめる。",
     latitude: 35.7500, longitude: 136.9600, address: "〒501-4215 岐阜県郡上市八幡町肴町873-6",
     accessInfo: "東海北陸自動車道郡上八幡ICから約5分。長良川鉄道郡上八幡駅から徒歩約10分。",
     region: lr("r638"), spotType: "river", difficulty: "advanced",
@@ -999,7 +999,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-038", name: "琵琶湖東岸（長命寺〜彦根）", slug: "biwako-east-shore",
-    description: "琵琶湖東岸は水路やヨシ原が多く、バス釣りのポイントが豊富。長命寺川河口・彦根旧港・曽根沼など有名ポイントが点在。おかっぱりで手軽に楽しめる。ルアーやウキ釣りといった釣り方で多くの釣り人が訪れます。blackbassやbluegillやhasuも狙えるため、ターゲットの幅が広いのが特徴です。経験者が通い込むだけの実力を秘めた釣り場です。",
+    description: "琵琶湖東岸は水路やヨシ原が多く、バス釣りのポイントが豊富。長命寺川河口・彦根旧港・曽根沼など有名ポイントが点在。おかっぱりで手軽に楽しめる。",
     latitude: 35.1842, longitude: 136.1012000, address: "〒523-0808 滋賀県近江八幡市長命寺町157",
     accessInfo: "名神高速竜王ICから約20分。JR近江八幡駅からバスで約10分。",
     region: region("r43"), spotType: "river", difficulty: "intermediate",
@@ -1023,7 +1023,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-039", name: "琵琶湖西岸（志賀〜高島）", slug: "biwako-west-shore",
-    description: "琵琶湖西岸はウィードエリアが豊富でバス釣りのメッカ。和邇浜・志賀浜・近江舞子内湖など人気ポイントが並ぶ。大型バスの実績も高い。ルアーやウキ釣りといった釣り方で多くの釣り人が訪れます。blackbassやbluegillやコイも狙えるため、ターゲットの幅が広いのが特徴です。中級者以上が腕を試すのに適した環境と魚影が魅力です。",
+    description: "琵琶湖西岸はウィードエリアが豊富でバス釣りのメッカ。和邇浜・志賀浜・近江舞子内湖など人気ポイントが並ぶ。大型バスの実績も高い。",
     latitude: 35.151200, longitude: 135.9342, address: "〒520-0514 滋賀県大津市木戸1547-1",
     accessInfo: "湖西道路志賀ICから約5分。JR湖西線近江舞子駅から徒歩約5分。",
     region: region("r43"), spotType: "river", difficulty: "intermediate",
@@ -1046,7 +1046,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-040", name: "芝川（静岡県）", slug: "shibakawa-keiryu",
-    description: "富士宮市を流れる富士山の湧水を源とする清流。ニジマスやアマゴが狙え、水がきれいで魚影も濃い。白糸の滝に近く、観光と合わせて楽しめる。ルアーやミャク釣りなど複数の釣法に対応した好ポイントです。nijimasu・amago・アユといった魚種の実績もあります。釣り慣れた方であればテクニック次第で良型が期待できるポイントです。",
+    description: "富士宮市を流れる富士山の湧水を源とする清流。ニジマスやアマゴが狙え、水がきれいで魚影も濃い。白糸の滝に近く、観光と合わせて楽しめる。",
     latitude: 35.2833, longitude: 138.5833, address: "〒419-0316 静岡県富士宮市羽鮒",
     accessInfo: "新東名高速新富士ICから約30分。JR身延線芝川駅から車で約10分。",
     region: lr("r634"), spotType: "river", difficulty: "intermediate",
@@ -1070,7 +1070,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-041", name: "鬼怒川（栃木県）", slug: "kinugawa-keiryu",
-    description: "栃木県を流れる利根川水系の一級河川。上流部は渓流魚のフィールド、中流域は鮎の友釣り、下流域はバス・ナマズのルアーフィールドと多彩な釣りが楽しめる。テンカラに加えて渓流ルアーも楽しめるため、一日中飽きません。ヤマメ・イワナ・アユの好ポイントとしても地元で知られています。釣り慣れた方であればテクニック次第で良型が期待できるポイントです。",
+    description: "栃木県を流れる利根川水系の一級河川。上流部は渓流魚のフィールド、中流域は鮎の友釣り、下流域はバス・ナマズのルアーフィールドと多彩な釣りが楽しめる。",
     latitude: 36.7333, longitude: 139.7167, address: "〒321-2526 栃木県日光市鬼怒川温泉滝861-3",
     accessInfo: "日光宇都宮道路今市ICから約20分。東武鬼怒川温泉駅から徒歩約10分。",
     region: lr("r619"), spotType: "river", difficulty: "intermediate",
@@ -1096,7 +1096,7 @@ export const freshwaterSpots: FishingSpot[] = [
   // ===== さらに人気スポット追加 =====
   {
     id: "fw-042", name: "琵琶湖瀬田川（南郷洗堰周辺）", slug: "setagawa-nangoarai",
-    description: "琵琶湖から流れ出る唯一の河川・瀬田川。南郷洗堰周辺はバス・コイ・ヘラブナなど多彩な魚種が楽しめる。護岸が整備されておりファミリーにも安心。ルアーやパン鯉など複数の釣法に対応した好ポイントです。blackbass・herabuna・オイカワといった魚種の実績もあります。駐車場とトイレとコンビニが利用可能で、実用面でも優れた釣り場です。",
+    description: "琵琶湖から流れ出る唯一の河川・瀬田川。南郷洗堰周辺はバス・コイ・ヘラブナなど多彩な魚種が楽しめる。護岸が整備されておりファミリーにも安心。",
     latitude: 34.951700, longitude: 135.9178, address: "〒520-2279 滋賀県大津市南郷",
     accessInfo: "京滋バイパス石山ICから約10分。JR石山駅からバスで約20分。",
     region: region("r43"), spotType: "river", difficulty: "beginner",
@@ -1120,7 +1120,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-043", name: "名栗川（入間川上流）", slug: "nagurigawa-keiryu",
-    description: "埼玉県飯能市を流れる入間川の上流部。都心から最も近い渓流の一つで、ヤマメやイワナが狙える。名栗温泉と合わせて日帰り渓流釣りが楽しめる。ミャク釣りに加えてテンカラも楽しめるため、一日中飽きません。nijimasuの好ポイントとしても地元で知られています。中級者以上が腕を試すのに適した環境と魚影が魅力です。",
+    description: "埼玉県飯能市を流れる入間川の上流部。都心から最も近い渓流の一つで、ヤマメやイワナが狙える。名栗温泉と合わせて日帰り渓流釣りが楽しめる。",
     latitude: 35.8667, longitude: 139.1833, address: "〒357-0112 埼玉県飯能市下名栗 新シ",
     accessInfo: "圏央道狭山日高ICから約40分。西武池袋線飯能駅から車で約30分。",
     region: lr("r635"), spotType: "river", difficulty: "intermediate",
@@ -1144,7 +1144,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-044", name: "諏訪湖（ワカサギ）", slug: "suwako-wakasagi",
-    description: "長野県のシンボル・諏訪湖は冬のワカサギドーム船で有名。暖房付きドーム船で快適にワカサギ釣りが楽しめ、初心者やファミリーにも大人気。御神渡りも見られることがある。パン鯉といった釣り方で多くの釣り人が訪れます。コイも狙えるため、ターゲットの幅が広いのが特徴です。駐車場とトイレとコンビニが利用可能で、実用面でも優れた釣り場です。",
+    description: "長野県のシンボル・諏訪湖は冬のワカサギドーム船で有名。暖房付きドーム船で快適にワカサギ釣りが楽しめ、初心者やファミリーにも大人気。御神渡りも見られることがある。",
     latitude: 36.0500, longitude: 138.0833, address: "〒392-0027 長野県諏訪市湖岸通り5丁目2-10",
     accessInfo: "中央自動車道諏訪ICから約15分。JR上諏訪駅から徒歩約10分。",
     region: region("r45"), spotType: "river", difficulty: "beginner",
@@ -1167,7 +1167,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-045", name: "中禅寺湖（トラウト）", slug: "chuzenji-trout",
-    description: "栃木県日光市の中禅寺湖はトラウト釣りの聖地。ホンマスやレイクトラウト、ブラウントラウトの大型が狙える。解禁日（4月1日）には全国からアングラーが集結。紅葉の名所としても有名。ルアーのほか、フライでも好釣果が報告されています。時期によってはnijimasu・イワナの釣果も期待できます。経験豊富なアングラーに人気の本格的なフィールドです。",
+    description: "栃木県日光市の中禅寺湖はトラウト釣りの聖地。ホンマスやレイクトラウト、ブラウントラウトの大型が狙える。解禁日（4月1日）には全国からアングラーが集結。紅葉の名所としても有名。",
     latitude: 36.7378, longitude: 139.481200, address: "〒321-1661 栃木県日光市",
     accessInfo: "日光宇都宮道路清滝ICから約30分。JR日光駅からバスで約45分。",
     region: region("r39"), spotType: "river", difficulty: "advanced",
@@ -1190,7 +1190,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-046", name: "利根川（群馬県渋川エリア）", slug: "tonegawa-shibukawa",
-    description: "日本最大の流域面積を持つ利根川の上流部。渋川付近ではヤマメ・イワナ・鮎が狙え、下流に行くとバスやコイも。初夏の鮎釣りシーズンは特に賑わう。友釣り・ルアーと釣り方のバリエーションが豊富です。アユやオイカワなども回遊しており、シーズンを通して楽しめます。経験者が通い込むだけの実力を秘めた釣り場です。周辺には駐車場やコンビニがあり、釣り環境として不便がありません。",
+    description: "日本最大の流域面積を持つ利根川の上流部。渋川付近ではヤマメ・イワナ・鮎が狙え、下流に行くとバスやコイも。初夏の鮎釣りシーズンは特に賑わう。",
     latitude: 36.5000, longitude: 139.0167, address: "〒377-0063 群馬県渋川市北橘町分郷八崎757",
     accessInfo: "関越自動車道渋川伊香保ICから約10分。JR渋川駅から徒歩約15分。",
     region: region("r40"), spotType: "river", difficulty: "intermediate",
@@ -1215,7 +1215,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-047", name: "多摩川（中流域・府中エリア）", slug: "tamagawa-fuchu",
-    description: "東京都心からアクセス抜群の多摩川中流域。府中〜調布エリアではコイ・ナマズ・バスなどが狙える。河川敷が整備されており、ファミリーでも安心して楽しめる。パン鯉のほか、トップウォーターでも好釣果が報告されています。時期によってはnamazu・オイカワ・blackbassの釣果も期待できます。駐車場やトイレやコンビニが近くにあるため長時間の釣りでも安心です。",
+    description: "東京都心からアクセス抜群の多摩川中流域。府中〜調布エリアではコイ・ナマズ・バスなどが狙える。河川敷が整備されており、ファミリーでも安心して楽しめる。",
     latitude: 35.6617, longitude: 139.4750, address: "〒183-0014 東京都府中市多摩川かぜのみち",
     accessInfo: "中央自動車道国立府中ICから約15分。西武多摩川線是政駅から徒歩約5分。",
     region: region("r5"), spotType: "river", difficulty: "beginner",
@@ -1239,7 +1239,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-048", name: "荒川（秋ヶ瀬〜笹目橋）", slug: "arakawa-akigase",
-    description: "埼玉県さいたま市を流れる荒川中流域。秋ヶ瀬公園周辺はバス・ナマズ・コイ・ヘラブナなど多魚種が楽しめる。都心から近く、電車でもアクセス可能なお手軽フィールド。ルアーのほか、トップウォーターでも好釣果が報告されています。時期によってはblackbass・namazu・herabunaの釣果も期待できます。",
+    description: "埼玉県さいたま市を流れる荒川中流域。秋ヶ瀬公園周辺はバス・ナマズ・コイ・ヘラブナなど多魚種が楽しめる。都心から近く、電車でもアクセス可能なお手軽フィールド。",
     latitude: 35.8283, longitude: 139.6233, address: "〒353-0008 埼玉県志木市宗岡",
     accessInfo: "首都高速埼玉大宮線浦和南ICから約10分。JR武蔵野線西浦和駅から徒歩約15分。",
     region: region("r5"), spotType: "river", difficulty: "beginner",
@@ -1263,7 +1263,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-049", name: "印旛沼", slug: "inbanuma-bass",
-    description: "千葉県北部にある関東有数のバス釣りフィールド。テナガエビ釣りやヘラブナ釣りも盛んで、護岸が整備されておりアクセスも良好。ナマズ・雷魚の実績も高い。ルアー・トップウォーターと釣り方のバリエーションが豊富です。blackbassやnamazuやraigyoなども回遊しており、シーズンを通して楽しめます。エントリーしやすい釣り場で、初心者が最初の一匹を手にするのにぴったりです。",
+    description: "千葉県北部にある関東有数のバス釣りフィールド。テナガエビ釣りやヘラブナ釣りも盛んで、護岸が整備されておりアクセスも良好。ナマズ・雷魚の実績も高い。",
     latitude: 35.7667, longitude: 140.1833, address: "〒285-0861 千葉県佐倉市臼井田（印旛沼）",
     accessInfo: "東関東自動車道佐倉ICから約10分。京成臼井駅から徒歩約15分。",
     region: region("r4"), spotType: "river", difficulty: "beginner",
@@ -1288,7 +1288,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-050", name: "富士五湖・山中湖（バス釣り）", slug: "yamanakako-bass",
-    description: "富士五湖で最もバス釣りが盛んな山中湖。水深が浅くウィードが豊富でバスの生息密度が高い。レンタルボートでの釣りが主流で、富士山を間近に望む絶景フィールド。ルアーに加えてウキ釣りも楽しめるため、一日中飽きません。blackbass・bluegillの好ポイントとしても地元で知られています。中級者以上が腕を試すのに適した環境と魚影が魅力です。",
+    description: "富士五湖で最もバス釣りが盛んな山中湖。水深が浅くウィードが豊富でバスの生息密度が高い。レンタルボートでの釣りが主流で、富士山を間近に望む絶景フィールド。",
     latitude: 35.4117, longitude: 138.8717, address: "〒401-0502 山梨県山中湖村平野506-296",
     accessInfo: "東富士五湖道路山中湖ICから約5分。",
     region: region("r44"), spotType: "river", difficulty: "intermediate",
@@ -1311,7 +1311,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-051", name: "牛久沼", slug: "ushikunuma-bass",
-    description: "茨城県牛久市にある天然湖沼。バス釣りの古参フィールドで、護岸からのおかっぱりで手軽に楽しめる。テナガエビ釣り・ナマズゲームも人気。うな丼発祥の地としても知られる。ルアー・トップウォーターと釣り方のバリエーションが豊富です。blackbassやnamazuやtenagaebiなども回遊しており、シーズンを通して楽しめます。",
+    description: "茨城県牛久市にある天然湖沼。バス釣りの古参フィールドで、護岸からのおかっぱりで手軽に楽しめる。テナガエビ釣り・ナマズゲームも人気。うな丼発祥の地としても知られる。",
     latitude: 35.9333, longitude: 140.0833, address: "〒301-0033 茨城県龍ケ崎市佐貫町",
     accessInfo: "圏央道牛久阿見ICから約15分。JR佐貫駅から徒歩約10分。",
     region: region("r20"), spotType: "river", difficulty: "beginner",
@@ -1335,7 +1335,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-052", name: "高滝湖", slug: "takatakiko-bass",
-    description: "千葉県市原市にあるダム湖。バス釣りとヘラブナ釣りの両方が楽しめる。レンタルボートが充実しており、アクセスも良好。ワカサギ釣りのドーム船も冬季に人気。ルアーに加えてへら竿も楽しめるため、一日中飽きません。blackbass・herabunaの好ポイントとしても地元で知られています。釣り初心者でも比較的簡単に釣果を得られる条件が整っています。",
+    description: "千葉県市原市にあるダム湖。バス釣りとヘラブナ釣りの両方が楽しめる。レンタルボートが充実しており、アクセスも良好。ワカサギ釣りのドーム船も冬季に人気。",
     latitude: 35.3167, longitude: 140.1167, address: "〒290-0557 千葉県市原市養老1012-1",
     accessInfo: "圏央道市原鶴舞ICから約10分。小湊鉄道高滝駅から徒歩約15分。",
     region: region("r4"), spotType: "river", difficulty: "beginner",
@@ -1359,7 +1359,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-053", name: "奥利根（みなかみ）渓流", slug: "okutonegawa-keiryu",
-    description: "群馬県みなかみ町の利根川源流域。ヤマメ・イワナの渓流釣りの名所で、豊かな自然の中で本格的な渓流釣りが楽しめる。水上温泉と合わせて訪れる釣り人が多い。テンカラに加えてミャク釣りも楽しめるため、一日中飽きません。ある程度の経験を積んだ釣り人にとってやりがいのあるフィールドです。駐車場が利用可能で、実用面でも優れた釣り場です。",
+    description: "群馬県みなかみ町の利根川源流域。ヤマメ・イワナの渓流釣りの名所で、豊かな自然の中で本格的な渓流釣りが楽しめる。水上温泉と合わせて訪れる釣り人が多い。",
     latitude: 36.7667, longitude: 138.9833, address: "〒379-1724 群馬県みなかみ町向山39",
     accessInfo: "関越自動車道水上ICから約15分。JR上越線水上駅から車で約10分。",
     region: region("r40"), spotType: "river", difficulty: "intermediate",
@@ -1382,7 +1382,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-054", name: "丹沢湖", slug: "tanzawako-bass",
-    description: "神奈川県山北町にあるダム湖。バス釣り・ワカサギ釣り・ヘラブナ釣りが楽しめる。丹沢山系に囲まれた美しいロケーションで、秋の紅葉シーズンは特に人気。ルアーやボートなど複数の釣法に対応した好ポイントです。blackbass・herabunaといった魚種の実績もあります。ある程度の経験を積んだ釣り人にとってやりがいのあるフィールドです。",
+    description: "神奈川県山北町にあるダム湖。バス釣り・ワカサギ釣り・ヘラブナ釣りが楽しめる。丹沢山系に囲まれた美しいロケーションで、秋の紅葉シーズンは特に人気。",
     latitude: 35.3842, longitude: 139.051700, address: "〒258-0203 神奈川県山北町神尾田",
     accessInfo: "東名高速大井松田ICから約30分。JR御殿場線谷峨駅から車で約15分。",
     region: region("r7"), spotType: "river", difficulty: "intermediate",
@@ -1406,7 +1406,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-055", name: "吉野川（徳島県）", slug: "yoshinogawa-ayu",
-    description: "四国を代表する一級河川。鮎の友釣りの名川として知られ、天然遡上の鮎が多い。中流域の美馬〜池田エリアが特に人気。四国三郎の異名を持つ大河。ルアーと釣り方のバリエーションが豊富です。アユやamagoなども回遊しており、シーズンを通して楽しめます。経験豊富なアングラーに人気の本格的なフィールドです。駐車場とコンビニが利用可能で、実用面でも優れた釣り場です。",
+    description: "四国を代表する一級河川。鮎の友釣りの名川として知られ、天然遡上の鮎が多い。中流域の美馬〜池田エリアが特に人気。四国三郎の異名を持つ大河。",
     latitude: 34.0667, longitude: 134.0667, address: "〒777-0006 徳島県美馬市穴吹町口山仕出原175",
     accessInfo: "徳島自動車道脇町ICから約10分。JR穴吹駅から徒歩約10分。",
     region: region("r29"), spotType: "river", difficulty: "advanced",
@@ -1430,7 +1430,7 @@ export const freshwaterSpots: FishingSpot[] = [
   // ===== 関東・甲信越 淡水スポット (fw-056〜fw-070) =====
   {
     id: "fw-056", name: "荒川上流（秩父エリア）", slug: "arakawa-chichibu",
-    description: "秩父を流れる荒川上流域はヤマメ・イワナの渓流釣りの宝庫。大滝〜浦山口エリアは透明度の高い清流で、春から秋にかけて渓流ファンで賑わう。秋のアユ釣りも人気がある。ルアー・テンカラと釣り方のバリエーションが豊富です。オイカワなども回遊しており、シーズンを通して楽しめます。中級者以上が腕を試すのに適した環境と魚影が魅力です。",
+    description: "秩父を流れる荒川上流域はヤマメ・イワナの渓流釣りの宝庫。大滝〜浦山口エリアは透明度の高い清流で、春から秋にかけて渓流ファンで賑わう。秋のアユ釣りも人気がある。",
     latitude: 35.9567, longitude: 139.0728, address: "〒369-1802 埼玉県秩父市荒川上田野",
     accessInfo: "関越自動車道花園ICから国道140号で約60分。秩父鉄道三峰口駅から徒歩約10分。",
     region: lr("r682"), spotType: "river", difficulty: "intermediate",
@@ -1455,7 +1455,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-057", name: "入間川", slug: "irumagawa-fishing",
-    description: "埼玉県を流れる荒川の支流。飯能〜狭山エリアは都心からのアクセスが良く、オイカワやヤマメが手軽に狙える。河川敷は整備されファミリーにも人気。秋にはアユの釣りも楽しめる。ウキ釣りやルアーなど複数の釣法に対応した好ポイントです。コイといった魚種の実績もあります。駐車場・トイレ・コンビニが整備されており、快適に釣行できます。",
+    description: "埼玉県を流れる荒川の支流。飯能〜狭山エリアは都心からのアクセスが良く、オイカワやヤマメが手軽に狙える。河川敷は整備されファミリーにも人気。秋にはアユの釣りも楽しめる。",
     latitude: 35.8583, longitude: 139.3194, address: "〒358-0053 埼玉県入間市仏子64",
     accessInfo: "圏央道狭山日高ICから約10分。西武池袋線飯能駅から徒歩約15分。",
     region: lr("r683"), spotType: "river", difficulty: "beginner",
@@ -1480,7 +1480,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-058", name: "渡良瀬川（桐生〜足利）", slug: "watarasegawa-kiryu",
-    description: "群馬県桐生市から栃木県足利市にかけて流れる渡良瀬川。鮎の友釣りで有名な中流域は、天然遡上の鮎が多く釣り人に人気。ヤマメやニジマスの放流も行われている。ルアーのほか、ウキ釣りでも好釣果が報告されています。時期によってはアユ・nijimasu・オイカワの釣果も期待できます。釣り慣れた方であればテクニック次第で良型が期待できるポイントです。",
+    description: "群馬県桐生市から栃木県足利市にかけて流れる渡良瀬川。鮎の友釣りで有名な中流域は、天然遡上の鮎が多く釣り人に人気。ヤマメやニジマスの放流も行われている。",
     latitude: 36.4064, longitude: 139.3308, address: "〒376-0013 群馬県桐生市広沢町（渡良瀬川）",
     accessInfo: "北関東自動車道太田桐生ICから約20分。東武桐生線新桐生駅から車で約10分。",
     region: lr("r684"), spotType: "river", difficulty: "intermediate",
@@ -1505,7 +1505,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-059", name: "神流川", slug: "kannagawa-trout",
-    description: "群馬県と埼玉県の県境を流れる清流。上流域は渓流釣りの聖地として知られ、天然のヤマメ・イワナが生息。神流町周辺はC&R区間もあり、大型のヤマメが狙える。フライやテンカラといった釣り方で多くの釣り人が訪れます。アユも狙えるため、ターゲットの幅が広いのが特徴です。経験豊富なアングラーに人気の本格的なフィールドです。",
+    description: "群馬県と埼玉県の県境を流れる清流。上流域は渓流釣りの聖地として知られ、天然のヤマメ・イワナが生息。神流町周辺はC&R区間もあり、大型のヤマメが狙える。",
     latitude: 36.1275, longitude: 138.9364, address: "〒370-1616 群馬県上野村乙父",
     accessInfo: "関越自動車道本庄児玉ICから国道462号で約50分。",
     region: lr("r685"), spotType: "river", difficulty: "advanced",
@@ -1529,7 +1529,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-060", name: "大谷川（日光）", slug: "daiyagawa-nikko",
-    description: "日光を流れる大谷川は男体山の伏流水が流入する清冽な渓流。ヤマメ・イワナの魚影が濃く、含満ヶ淵や霧降高原入口付近が好ポイント。日光観光と合わせて楽しめる。ルアー・テンカラと釣り方のバリエーションが豊富です。nijimasuなども回遊しており、シーズンを通して楽しめます。経験者が通い込むだけの実力を秘めた釣り場です。",
+    description: "日光を流れる大谷川は男体山の伏流水が流入する清冽な渓流。ヤマメ・イワナの魚影が濃く、含満ヶ淵や霧降高原入口付近が好ポイント。日光観光と合わせて楽しめる。",
     latitude: 36.7350, longitude: 139.6167, address: "〒321-1263 栃木県日光市瀬川844",
     accessInfo: "日光宇都宮道路日光ICから約5分。JR日光線日光駅から車で約5分。",
     region: lr("r686"), spotType: "river", difficulty: "intermediate",
@@ -1553,7 +1553,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-061", name: "渡良瀬遊水地", slug: "watarase-yusuichi",
-    description: "栃木・群馬・埼玉・茨城の4県にまたがる広大な遊水地。谷中湖を中心にバス・へらぶな・ナマズなど多彩な魚種が狙える。ラムサール条約登録湿地でもあり、自然観察も楽しめる。ルアーのほか、へら竿でも好釣果が報告されています。時期によってはblackbass・herabuna・namazuの釣果も期待できます。エントリーしやすい釣り場で、初心者が最初の一匹を手にするのにぴったりです。",
+    description: "栃木・群馬・埼玉・茨城の4県にまたがる広大な遊水地。谷中湖を中心にバス・へらぶな・ナマズなど多彩な魚種が狙える。ラムサール条約登録湿地でもあり、自然観察も楽しめる。",
     latitude: 36.2333, longitude: 139.7000, address: "〒323-1104 栃木県栃木市藤岡町藤岡",
     accessInfo: "東北自動車道佐野藤岡ICから約20分。東武日光線藤岡駅から徒歩約20分。",
     region: lr("r687"), spotType: "river", difficulty: "beginner",
@@ -1579,7 +1579,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-062", name: "諏訪湖", slug: "suwako-lake",
-    description: "長野県のほぼ中央に位置する信州最大の湖。冬のワカサギ釣りが特に有名で、ドーム船から手軽に楽しめる。バスやコイも生息し年間を通じて釣りが可能。諏訪大社や温泉も近い。ルアーに加えて吸い込み釣りも楽しめるため、一日中飽きません。blackbass・herabunaの好ポイントとしても地元で知られています。エントリーしやすい釣り場で、初心者が最初の一匹を手にするのにぴったりです。",
+    description: "長野県のほぼ中央に位置する信州最大の湖。冬のワカサギ釣りが特に有名で、ドーム船から手軽に楽しめる。バスやコイも生息し年間を通じて釣りが可能。諏訪大社や温泉も近い。",
     latitude: 36.0475, longitude: 138.0853, address: "〒392-0027 長野県諏訪市湖岸通り（諏訪湖畔公園）",
     accessInfo: "中央自動車道諏訪ICから約10分。JR中央本線上諏訪駅から徒歩約10分。",
     region: lr("r688"), spotType: "river", difficulty: "beginner",
@@ -1604,7 +1604,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-063", name: "松原湖", slug: "matsubarako-lake",
-    description: "八ヶ岳山麓に位置する標高1,123mの高原湖。冬の氷上ワカサギ釣りが名物で、結氷した湖面に穴を開けて楽しむ。夏はへらぶなやコイも狙える。静かな環境で大自然を満喫できる。氷上穴釣りのほか、へら竿でも好釣果が報告されています。時期によってはherabunaの釣果も期待できます。エントリーしやすい釣り場で、初心者が最初の一匹を手にするのにぴったりです。",
+    description: "八ヶ岳山麓に位置する標高1,123mの高原湖。冬の氷上ワカサギ釣りが名物で、結氷した湖面に穴を開けて楽しむ。夏はへらぶなやコイも狙える。静かな環境で大自然を満喫できる。",
     latitude: 36.0225, longitude: 138.4722, address: "〒384-1103 長野県小海町豊里",
     accessInfo: "中部横断自動車道八千穂高原ICから約15分。JR小海線小海駅から車で約10分。",
     region: lr("r689"), spotType: "river", difficulty: "beginner",
@@ -1628,7 +1628,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-064", name: "梓川（上高地〜松本）", slug: "azusagawa-kamikochi",
-    description: "北アルプスを源流とする梓川は、上高地から松本平野へ流れる清流。上流域はイワナ・ヤマメの渓流釣りの聖地。中流の波田〜梓橋エリアではアユやニジマスも狙える。テンカラやルアーなど複数の釣法に対応した好ポイントです。nijimasuといった魚種の実績もあります。中級者以上が腕を試すのに適した環境と魚影が魅力です。",
+    description: "北アルプスを源流とする梓川は、上高地から松本平野へ流れる清流。上流域はイワナ・ヤマメの渓流釣りの聖地。中流の波田〜梓橋エリアではアユやニジマスも狙える。",
     latitude: 36.2450, longitude: 137.8333, address: "〒390-1516 長野県松本市安曇上高地",
     accessInfo: "長野自動車道松本ICから約20分。松本電鉄上高地線波田駅から徒歩約15分。",
     region: lr("r690"), spotType: "river", difficulty: "intermediate",
@@ -1653,7 +1653,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-065", name: "阿賀野川（新潟県）", slug: "aganogawa-niigata",
-    description: "福島県から新潟県に流れる大河。新潟県内の中〜下流域ではサケの遡上が見られ、秋のサーモンフィッシングが人気。アユやマス類も豊富で年間を通じて多彩な釣りが楽しめる。友釣りに加えてルアーも楽しめるため、一日中飽きません。ヤマメ・イワナ・コイの好ポイントとしても地元で知られています。釣り慣れた方であればテクニック次第で良型が期待できるポイントです。",
+    description: "福島県から新潟県に流れる大河。新潟県内の中〜下流域ではサケの遡上が見られ、秋のサーモンフィッシングが人気。アユやマス類も豊富で年間を通じて多彩な釣りが楽しめる。",
     latitude: 37.8583, longitude: 139.2694, address: "〒959-1614 新潟県五泉市馬下（阿賀野川）",
     accessInfo: "磐越自動車道安田ICから約10分。JR磐越西線馬下駅から徒歩約10分。",
     region: lr("r691"), spotType: "river", difficulty: "intermediate",
@@ -1678,7 +1678,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-066", name: "魚野川", slug: "uonogawa-fishing",
-    description: "新潟県南魚沼を流れる信濃川の支流。鮎の友釣りの名川として全国的に有名。天然遡上鮎が豊富で、大型鮎の実績も高い。六日町〜小出エリアが特に人気のポイント。ルアーやテンカラといった釣り方で多くの釣り人が訪れます。アユやヤマメやイワナも狙えるため、ターゲットの幅が広いのが特徴です。中級者以上が腕を試すのに適した環境と魚影が魅力です。",
+    description: "新潟県南魚沼を流れる信濃川の支流。鮎の友釣りの名川として全国的に有名。天然遡上鮎が豊富で、大型鮎の実績も高い。六日町〜小出エリアが特に人気のポイント。",
     latitude: 37.0658, longitude: 138.8853, address: "〒949-6680 新潟県南魚沼市六日町（魚野川）",
     accessInfo: "関越自動車道六日町ICから約5分。JR上越線六日町駅から車で約5分。",
     region: lr("r692"), spotType: "river", difficulty: "intermediate",
@@ -1702,7 +1702,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-067", name: "道志川", slug: "doshigawa-trout",
-    description: "山梨県道志村を流れる相模川の支流。都心から2時間弱のアクセスで本格的な渓流釣りが楽しめる。ヤマメ・イワナの魚影が濃く、キャンプ場も多いため釣りとキャンプを両立できる。ルアー・テンカラと釣り方のバリエーションが豊富です。nijimasuなども回遊しており、シーズンを通して楽しめます。経験者が通い込むだけの実力を秘めた釣り場です。",
+    description: "山梨県道志村を流れる相模川の支流。都心から2時間弱のアクセスで本格的な渓流釣りが楽しめる。ヤマメ・イワナの魚影が濃く、キャンプ場も多いため釣りとキャンプを両立できる。",
     latitude: 35.5100, longitude: 139.0617, address: "〒402-0200 山梨県南都留郡道志村（道志川）",
     accessInfo: "中央自動車道相模湖ICから国道413号で約30分。",
     region: lr("r693"), spotType: "river", difficulty: "intermediate",
@@ -1726,7 +1726,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-068", name: "小貝川", slug: "kokaigawa-fishing",
-    description: "茨城県南部を流れる利根川の支流。へらぶな・コイ・ナマズなどの釣りが楽しめる穏やかな里川。河川敷は整備されておりファミリーフィッシングに最適。バス釣りのポイントも多い。へら竿のほか、吸い込み釣りでも好釣果が報告されています。時期によってはherabuna・namazu・blackbassの釣果も期待できます。",
+    description: "茨城県南部を流れる利根川の支流。へらぶな・コイ・ナマズなどの釣りが楽しめる穏やかな里川。河川敷は整備されておりファミリーフィッシングに最適。バス釣りのポイントも多い。",
     latitude: 36.0667, longitude: 140.0167, address: "〒300-2502 茨城県つくば市高良田212",
     accessInfo: "常磐自動車道谷和原ICから約10分。つくばエクスプレス小絹駅から車で約5分。",
     region: lr("r694"), spotType: "river", difficulty: "beginner",
@@ -1752,7 +1752,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-069", name: "印旛沼", slug: "inbanuma-lake",
-    description: "千葉県北部に位置する関東有数の大型沼。バス・へらぶな・ナマズ・雷魚など多彩な魚種が生息。特にナマズ・雷魚のトップウォーターゲームで全国的に有名。ボート釣りも可能。ルアー・フロッグと釣り方のバリエーションが豊富です。blackbassやnamazuやraigyoなども回遊しており、シーズンを通して楽しめます。",
+    description: "千葉県北部に位置する関東有数の大型沼。バス・へらぶな・ナマズ・雷魚など多彩な魚種が生息。特にナマズ・雷魚のトップウォーターゲームで全国的に有名。ボート釣りも可能。",
     latitude: 35.7708, longitude: 140.1742, address: "〒270-1615 千葉県印西市師戸（印旛沼・北印旛沼）",
     accessInfo: "東関東自動車道佐倉ICから約20分。京成本線京成佐倉駅から車で約15分。",
     region: lr("r695"), spotType: "river", difficulty: "intermediate",
@@ -1778,7 +1778,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-070", name: "荒川（村上エリア）", slug: "arakawa-murakami",
-    description: "新潟県村上市を流れる荒川は日本有数のサケ・サクラマスの遡上河川。秋のサーモンフィッシングは全国から釣り人が集まる。イワナ・ヤマメの渓流釣りやアユの友釣りも盛ん。ルアーやテンカラなど複数の釣法に対応した好ポイントです。経験豊富なアングラーに人気の本格的なフィールドです。周辺には駐車場やコンビニがあり、釣り環境として不便がありません。",
+    description: "新潟県村上市を流れる荒川は日本有数のサケ・サクラマスの遡上河川。秋のサーモンフィッシングは全国から釣り人が集まる。イワナ・ヤマメの渓流釣りやアユの友釣りも盛ん。",
     latitude: 38.2167, longitude: 139.5083, address: "〒959-3124 新潟県村上市金屋",
     accessInfo: "日本海東北自動車道荒川胎内ICから約15分。JR羽越本線村上駅から車で約10分。",
     region: lr("r696"), spotType: "river", difficulty: "advanced",
