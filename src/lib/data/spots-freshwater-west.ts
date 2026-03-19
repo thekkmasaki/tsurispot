@@ -47,7 +47,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   // ===== 愛知県 =====
   {
     id: "fw-086", name: "矢作川", slug: "yahagigawa-river",
-    description: "愛知県を代表する一級河川。上流域はアユ・アマゴの渓流釣り、中下流域はブラックバスやコイ、ナマズが狙える多彩なフィールド。豊田市〜岡崎市にかけての中流域はおかっぱりポイントが豊富。",
+    description: "愛知県を代表する一級河川。上流域はアユ・アマゴの渓流釣り、中下流域はブラックバスやコイ、ナマズが狙える多彩なフィールド。豊田市〜岡崎市にかけての中流域はおかっぱりポイントが豊富。ルアーや吸い込み釣りなど複数の釣法に対応した好ポイントです。blackbass・namazu・オイカワといった魚種の実績もあります。",
     latitude: 34.9556, longitude: 137.1722, address: "〒471-0818 愛知県豊田市室町7丁目",
     accessInfo: "東名高速岡崎ICから約10分。名鉄東岡崎駅から徒歩約15分。",
     region: lr("r712"), spotType: "river", difficulty: "beginner",
@@ -75,7 +75,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   },
   {
     id: "fw-087", name: "豊川", slug: "toyogawa-river",
-    description: "愛知県東部を流れる一級河川。設楽町から豊橋市まで流域が広く、上流ではアマゴ・アユ、中下流域ではブラックバス・コイ・ナマズが釣れる。牟呂松原頭首工下流は有名ポイント。",
+    description: "愛知県東部を流れる一級河川。設楽町から豊橋市まで流域が広く、上流ではアマゴ・アユ、中下流域ではブラックバス・コイ・ナマズが釣れる。牟呂松原頭首工下流は有名ポイント。ルアーや吸い込み釣りなど複数の釣法に対応した好ポイントです。blackbass・namazu・amagoといった魚種の実績もあります。初めて竿を出す方にも向いており、子供連れでの釣行にも適しています。",
     latitude: 34.7881, longitude: 137.3939, address: "〒440-0083 愛知県豊橋市下地町1-42",
     accessInfo: "東名高速豊川ICから約15分。JR豊橋駅から車で約10分。",
     region: lr("r713"), spotType: "river", difficulty: "beginner",
@@ -104,7 +104,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   // ===== 三重県 =====
   {
     id: "fw-088", name: "青蓮寺湖", slug: "shorenji-lake",
-    description: "三重県名張市にある青蓮寺ダムのダム湖。ブラックバスの穴場スポットとして知られ、50cmクラスの実績も。秋〜冬はワカサギ釣りも楽しめる。周囲は自然豊かでのんびりと釣りができる。",
+    description: "三重県名張市にある青蓮寺ダムのダム湖。ブラックバスの穴場スポットとして知られ、50cmクラスの実績も。秋〜冬はワカサギ釣りも楽しめる。周囲は自然豊かでのんびりと釣りができる。ルアーやウキ釣りといった釣り方で多くの釣り人が訪れます。blackbassやbluegillやherabunaも狙えるため、ターゲットの幅が広いのが特徴です。",
     latitude: 34.5994, longitude: 136.1128, address: "〒518-0443 三重県名張市青蓮寺",
     accessInfo: "名阪国道上野ICから約30分。近鉄名張駅から車で約15分。",
     region: lr("r714"), spotType: "river", difficulty: "intermediate",
@@ -130,7 +130,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   },
   {
     id: "fw-089", name: "銚子川", slug: "choshigawa-river-mie",
-    description: "三重県紀北町を流れる清流。「奇跡の川」とも呼ばれる透明度の高さが特徴で、アユ・アマゴの釣り場として全国的に有名。夏は川遊びの観光客も多い。",
+    description: "三重県紀北町を流れる清流。「奇跡の川」とも呼ばれる透明度の高さが特徴で、アユ・アマゴの釣り場として全国的に有名。夏は川遊びの観光客も多い。友釣りに加えてエサ釣りも楽しめるため、一日中飽きません。amago・オイカワ・uguiの好ポイントとしても地元で知られています。経験者が通い込むだけの実力を秘めた釣り場です。",
     latitude: 34.1417, longitude: 136.3325, address: "〒519-3406 三重県北牟婁郡紀北町便ノ山271",
     accessInfo: "紀勢自動車道海山ICから約5分。JR紀伊長島駅から車で約15分。",
     region: lr("r715"), spotType: "river", difficulty: "intermediate",
@@ -157,7 +157,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   // ===== 岐阜県 =====
   {
     id: "fw-090", name: "揖斐川", slug: "ibigawa-river",
-    description: "岐阜県西部を流れる木曽三川のひとつ。上流域はアマゴ・イワナの渓流釣り、中流域はアユの友釣り、下流域はコイやナマズが狙える。揖斐川上流の徳山ダム周辺は豊かな自然が残る。",
+    description: "岐阜県西部を流れる木曽三川のひとつ。上流域はアマゴ・イワナの渓流釣り、中流域はアユの友釣り、下流域はコイやナマズが狙える。揖斐川上流の徳山ダム周辺は豊かな自然が残る。ルアーや吸い込み釣りなど複数の釣法に対応した好ポイントです。amago・namazu・オイカワといった魚種の実績もあります。ある程度の経験を積んだ釣り人にとってやりがいのあるフィールドです。",
     latitude: 35.3917, longitude: 136.5889, address: "〒501-0619 岐阜県揖斐郡揖斐川町三輪581-1",
     accessInfo: "東海環状自動車道大野神戸ICから約20分。養老鉄道揖斐駅から車で約15分。",
     region: lr("r716"), spotType: "river", difficulty: "intermediate",
@@ -186,7 +186,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   },
   {
     id: "fw-091", name: "木曽川（中流域）", slug: "kisogawa-middle-river",
-    description: "日本三大河川のひとつ。岐阜県〜愛知県を流れる中流域は、コイ・ナマズ・ブラックバスの好ポイント。犬山城周辺や各務原市エリアはおかっぱりが楽しめる。木曽川水園も人気。",
+    description: "日本三大河川のひとつ。岐阜県〜愛知県を流れる中流域は、コイ・ナマズ・ブラックバスの好ポイント。犬山城周辺や各務原市エリアはおかっぱりが楽しめる。木曽川水園も人気。吸い込み釣りに加えてルアーも楽しめるため、一日中飽きません。blackbass・namazu・bluegillの好ポイントとしても地元で知られています。",
     latitude: 35.3847, longitude: 136.9386, address: "〒484-0081 愛知県犬山市犬山大門先40-3",
     accessInfo: "東海北陸自動車道岐阜各務原ICから約10分。名鉄新鵜沼駅から車で約10分。",
     region: lr("r717"), spotType: "river", difficulty: "beginner",
@@ -216,7 +216,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   // ===== 富山県 =====
   {
     id: "fw-092", name: "黒部川", slug: "kurobegawa-river",
-    description: "北アルプスを源流とする急流河川。イワナ・ヤマメの渓流釣りのメッカとして知られ、上流域は手つかずの自然が残る。秋はサケの遡上も見られる。下流域ではアユ釣りも盛ん。",
+    description: "北アルプスを源流とする急流河川。イワナ・ヤマメの渓流釣りのメッカとして知られ、上流域は手つかずの自然が残る。秋はサケの遡上も見られる。下流域ではアユ釣りも盛ん。エサ釣り・ルアーと釣り方のバリエーションが豊富です。uguiなども回遊しており、シーズンを通して楽しめます。経験豊富なアングラーに人気の本格的なフィールドです。",
     latitude: 36.8244, longitude: 137.4406, address: "〒938-0282 富山県黒部市宇奈月町浦山1451",
     accessInfo: "北陸自動車道黒部ICから約20分。富山地方鉄道宇奈月温泉駅から徒歩約5分。",
     region: lr("r718"), spotType: "river", difficulty: "advanced",
@@ -242,7 +242,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   // ===== 福井県 =====
   {
     id: "fw-093", name: "九頭竜川", slug: "kuzuryugawa-river",
-    description: "福井県を代表する一級河川。全国的にアユ・サクラマスの名川として知られる。中流域の大野市〜勝山市エリアは渓流釣りのメッカ。秋にはサケの遡上も見られる。",
+    description: "福井県を代表する一級河川。全国的にアユ・サクラマスの名川として知られる。中流域の大野市〜勝山市エリアは渓流釣りのメッカ。秋にはサケの遡上も見られる。友釣りのほか、ルアーでも好釣果が報告されています。時期によってはヤマメ・イワナ・オイカワの釣果も期待できます。釣り慣れた方であればテクニック次第で良型が期待できるポイントです。",
     latitude: 35.9897, longitude: 136.4922, address: "〒912-0081 福井県大野市中荒井町一丁目",
     accessInfo: "北陸自動車道福井ICから約40分。JR越前大野駅から車で約10分。",
     region: lr("r719"), spotType: "river", difficulty: "intermediate",
@@ -270,7 +270,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   // ===== 滋賀県 =====
   {
     id: "fw-094", name: "安曇川", slug: "adogawa-river",
-    description: "滋賀県高島市を流れ琵琶湖に注ぐ河川。アユの友釣りで全国的に有名で、解禁日には多くの釣り人が訪れる。上流域はイワナ・アマゴの渓流釣りも楽しめる。",
+    description: "滋賀県高島市を流れ琵琶湖に注ぐ河川。アユの友釣りで全国的に有名で、解禁日には多くの釣り人が訪れる。上流域はイワナ・アマゴの渓流釣りも楽しめる。エサ釣りやルアーなど複数の釣法に対応した好ポイントです。amago・オイカワ・uguiといった魚種の実績もあります。ある程度の経験を積んだ釣り人にとってやりがいのあるフィールドです。",
     latitude: 35.2967, longitude: 135.9847, address: "〒520-1212 滋賀県高島市安曇川町西万木",
     accessInfo: "湖西道路真野ICから約30分。JR湖西線安曇川駅から車で約10分。",
     region: lr("r720"), spotType: "river", difficulty: "intermediate",
@@ -297,7 +297,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   },
   {
     id: "fw-095", name: "余呉湖", slug: "yogoko-lake",
-    description: "滋賀県長浜市にある琵琶湖北方の小さな湖。冬のワカサギ釣りで有名で、桟橋から手軽に楽しめる。へらぶな釣りのフィールドとしても長い歴史がある。静かな環境でのんびり釣りが楽しめる。",
+    description: "滋賀県長浜市にある琵琶湖北方の小さな湖。冬のワカサギ釣りで有名で、桟橋から手軽に楽しめる。へらぶな釣りのフィールドとしても長い歴史がある。静かな環境でのんびり釣りが楽しめる。桟橋釣り・へら竿と釣り方のバリエーションが豊富です。herabunaやコイやmabunaなども回遊しており、シーズンを通して楽しめます。",
     latitude: 35.5153, longitude: 136.1817, address: "〒529-0523 滋賀県長浜市余呉町川並",
     accessInfo: "北陸自動車道木之本ICから約10分。JR北陸線余呉駅から徒歩約10分。",
     region: lr("r721"), spotType: "river", difficulty: "beginner",
@@ -324,7 +324,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   // ===== 京都府 =====
   {
     id: "fw-096", name: "由良川", slug: "yuragawa-river",
-    description: "京都府北部を流れる一級河川。上流域はアマゴの渓流釣り、中流域はアユの友釣りで知られる。綾部市〜福知山市周辺がメインフィールドで、豊かな自然環境が魅力。",
+    description: "京都府北部を流れる一級河川。上流域はアマゴの渓流釣り、中流域はアユの友釣りで知られる。綾部市〜福知山市周辺がメインフィールドで、豊かな自然環境が魅力。エサ釣りに加えて吸い込み釣りも楽しめるため、一日中飽きません。amago・コイ・オイカワの好ポイントとしても地元で知られています。釣り慣れた方であればテクニック次第で良型が期待できるポイントです。",
     latitude: 35.2981, longitude: 135.2456, address: "〒620-0013 京都府福知山市池部",
     accessInfo: "舞鶴若狭自動車道綾部ICから約10分。JR綾部駅から車で約10分。",
     region: lr("r722"), spotType: "river", difficulty: "intermediate",
@@ -352,7 +352,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   },
   {
     id: "fw-097", name: "桂川（保津川）", slug: "katsuragawa-hozu-river",
-    description: "京都府を流れる淀川水系の河川。上流部は保津峡として知られ、アマゴ・アユの好フィールド。亀岡市エリアはブラックバスやコイも狙える。嵐山周辺の桂川はアクセス良好。",
+    description: "京都府を流れる淀川水系の河川。上流部は保津峡として知られ、アマゴ・アユの好フィールド。亀岡市エリアはブラックバスやコイも狙える。嵐山周辺の桂川はアクセス良好。ルアーや吸い込み釣りといった釣り方で多くの釣り人が訪れます。blackbassやオイカワやnamazuも狙えるため、ターゲットの幅が広いのが特徴です。",
     latitude: 35.0144, longitude: 135.6611, address: "〒616-8386 京都府京都市右京区嵯峨亀ノ尾町13-616 8386",
     accessInfo: "京都縦貫自動車道亀岡ICから約10分。JR嵯峨野線亀岡駅から車で約5分。",
     region: lr("r723"), spotType: "river", difficulty: "beginner",
@@ -381,7 +381,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   // ===== 兵庫県 =====
   {
     id: "fw-098", name: "円山川", slug: "maruyamagawa-river",
-    description: "兵庫県北部を流れる一級河川。アユ・ヤマメの釣りで有名で、特に養父市〜朝来市エリアが好フィールド。コウノトリの野生復帰で知られる豊岡市周辺の下流域ではコイやナマズも。",
+    description: "兵庫県北部を流れる一級河川。アユ・ヤマメの釣りで有名で、特に養父市〜朝来市エリアが好フィールド。コウノトリの野生復帰で知られる豊岡市周辺の下流域ではコイやナマズも。友釣りのほか、エサ釣りでも好釣果が報告されています。時期によってはnamazu・オイカワ・uguiの釣果も期待できます。ある程度の経験を積んだ釣り人にとってやりがいのあるフィールドです。",
     latitude: 35.3947, longitude: 134.8256, address: "〒669-5242 兵庫県朝来市和田山町宮田",
     accessInfo: "北近畿豊岡自動車道八鹿氷ノ山ICから約5分。JR山陰本線八鹿駅から徒歩約10分。",
     region: lr("r724"), spotType: "river", difficulty: "intermediate",
@@ -411,7 +411,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   // ===== 奈良県 =====
   {
     id: "fw-099", name: "津風呂湖", slug: "tsufuroko-lake",
-    description: "奈良県吉野町にあるダム湖。ブラックバスやへらぶなの釣り場として関西のアングラーに親しまれている。秋冬はワカサギ釣りも楽しめる。ボート釣りがメインだがおかっぱりポイントもある。",
+    description: "奈良県吉野町にあるダム湖。ブラックバスやへらぶなの釣り場として関西のアングラーに親しまれている。秋冬はワカサギ釣りも楽しめる。ボート釣りがメインだがおかっぱりポイントもある。ルアーのほか、へら竿でも好釣果が報告されています。時期によってはblackbass・herabuna・bluegillの釣果も期待できます。",
     latitude: 34.3861, longitude: 135.8631, address: "〒639-3102 奈良県吉野町河原屋849",
     accessInfo: "南阪奈道路葛城ICから約50分。近鉄大和上市駅から車で約15分。",
     region: lr("r725"), spotType: "river", difficulty: "beginner",
@@ -438,7 +438,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   // ===== 広島県 =====
   {
     id: "fw-100", name: "芦田川", slug: "ashidagawa-river",
-    description: "広島県東部を流れる一級河川。福山市〜府中市にかけての流域で、アユの友釣りやコイ釣りが楽しめる。中流域の河佐峡はキャンプと合わせた渓流釣りが人気。",
+    description: "広島県東部を流れる一級河川。福山市〜府中市にかけての流域で、アユの友釣りやコイ釣りが楽しめる。中流域の河佐峡はキャンプと合わせた渓流釣りが人気。エサ釣りや吸い込み釣りなど複数の釣法に対応した好ポイントです。amago・オイカワ・uguiといった魚種の実績もあります。初心者や家族連れでも安心して釣りを楽しめる環境が揃っています。",
     latitude: 34.5261, longitude: 133.2228, address: "〒720-1133 広島県福山市駅家町近田",
     accessInfo: "山陽自動車道福山東ICから約30分。JR福塩線河佐駅から徒歩約10分。",
     region: lr("r726"), spotType: "river", difficulty: "beginner",
@@ -467,7 +467,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   // ===== 島根県 =====
   {
     id: "fw-101", name: "宍道湖", slug: "shinjiko-lake",
-    description: "島根県松江市にある汽水湖。淡水と海水が混じる独特の環境で、テナガエビやハゼなどの汽水魚が狙える。宍道湖七珍（スズキ・ヤマトシジミなど）で有名。夕陽の美しさも全国屈指。",
+    description: "島根県松江市にある汽水湖。淡水と海水が混じる独特の環境で、テナガエビやハゼなどの汽水魚が狙える。宍道湖七珍（スズキ・ヤマトシジミなど）で有名。夕陽の美しさも全国屈指。ウキ釣りに加えて吸い込み釣りも楽しめるため、一日中飽きません。tenagaebi・コイ・オイカワの好ポイントとしても地元で知られています。",
     latitude: 35.4406, longitude: 132.9383, address: "〒690-0049 島根県松江市袖師町5-1",
     accessInfo: "山陰自動車道松江西ICから約10分。JR松江駅から徒歩約15分。",
     region: lr("r727"), spotType: "river", difficulty: "beginner",
@@ -493,7 +493,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   // ===== 高知県 =====
   {
     id: "fw-102", name: "仁淀川", slug: "niyodogawa-river",
-    description: "「仁淀ブルー」の愛称で知られる日本一の水質を誇る清流。アユ・アマゴの釣り場として全国トップクラスの人気を誇る。上流の支流（安居渓谷・中津渓谷）は絶景の渓流釣りが楽しめる。",
+    description: "「仁淀ブルー」の愛称で知られる日本一の水質を誇る清流。アユ・アマゴの釣り場として全国トップクラスの人気を誇る。上流の支流（安居渓谷・中津渓谷）は絶景の渓流釣りが楽しめる。友釣りのほか、ルアーでも好釣果が報告されています。時期によってはamago・オイカワ・uguiの釣果も期待できます。釣り慣れた方であればテクニック次第で良型が期待できるポイントです。",
     latitude: 33.5272, longitude: 133.1722, address: "〒781-2128 高知県吾川郡いの町波川192",
     accessInfo: "高知自動車道伊野ICから約5分。JR土讃線伊野駅から車で約5分。",
     region: lr("r728"), spotType: "river", difficulty: "intermediate",
@@ -521,7 +521,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   // ===== 大分県 =====
   {
     id: "fw-103", name: "大野川上流", slug: "onogawa-upper-river",
-    description: "大分県竹田市を流れる大野川の上流域。岡城跡で有名な竹田の清流で、ヤマメ・アマゴの渓流釣りが楽しめる。九重連山を源流とする豊かな水量が魅力。夏はアユ釣りも盛ん。",
+    description: "大分県竹田市を流れる大野川の上流域。岡城跡で有名な竹田の清流で、ヤマメ・アマゴの渓流釣りが楽しめる。九重連山を源流とする豊かな水量が魅力。夏はアユ釣りも盛ん。エサ釣り・友釣りと釣り方のバリエーションが豊富です。オイカワやuguiやkawamutsuなども回遊しており、シーズンを通して楽しめます。中級者以上が腕を試すのに適した環境と魚影が魅力です。",
     latitude: 32.9667, longitude: 131.3944, address: "〒879-6115 大分県竹田市荻町馬場426-1",
     accessInfo: "中九州横断道路竹田ICから約10分。JR豊肥本線豊後竹田駅から車で約10分。",
     region: lr("r729"), spotType: "river", difficulty: "intermediate",
@@ -548,7 +548,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   // ===== 熊本県 =====
   {
     id: "fw-104", name: "緑川", slug: "midorikawa-river",
-    description: "熊本県中部を流れる一級河川。上流の甲佐町〜美里町エリアはアユ・ヤマメの好フィールド。緑川ダム周辺はブラックバスも狙える。阿蘇外輪山を源流とする清流が魅力。",
+    description: "熊本県中部を流れる一級河川。上流の甲佐町〜美里町エリアはアユ・ヤマメの好フィールド。緑川ダム周辺はブラックバスも狙える。阿蘇外輪山を源流とする清流が魅力。友釣りのほか、エサ釣りでも好釣果が報告されています。時期によってはコイ・オイカワ・uguiの釣果も期待できます。ビギナーにもやさしいフィールドで、釣り入門にもおすすめの場所です。",
     latitude: 32.7278, longitude: 130.8833, address: "〒861-3845 熊本県山都町緑川",
     accessInfo: "九州自動車道松橋ICから約20分。JR豊肥本線肥後大津駅から車で約30分。",
     region: lr("r730"), spotType: "river", difficulty: "beginner",
@@ -577,7 +577,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   // ===== 宮崎県 =====
   {
     id: "fw-105", name: "耳川", slug: "mimikawa-river",
-    description: "宮崎県日向市〜美郷町を流れる清流。アユの友釣りで有名で、全国から釣り人が訪れる。上流域ではヤマメの渓流釣りも楽しめる。椎葉村周辺の源流域は手つかずの自然が残る秘境。",
+    description: "宮崎県日向市〜美郷町を流れる清流。アユの友釣りで有名で、全国から釣り人が訪れる。上流域ではヤマメの渓流釣りも楽しめる。椎葉村周辺の源流域は手つかずの自然が残る秘境。ルアーやウキ釣りなど複数の釣法に対応した好ポイントです。オイカワ・ugui・kawamutsuといった魚種の実績もあります。経験者が通い込むだけの実力を秘めた釣り場です。",
     latitude: 32.4142, longitude: 131.5228, address: "〒883-0111 宮崎県日向市東郷町迫野内",
     accessInfo: "東九州自動車道日向ICから約30分。JR日豊本線日向市駅から車で約40分。",
     region: lr("r731"), spotType: "river", difficulty: "intermediate",
