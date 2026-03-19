@@ -20,7 +20,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   // ===== 奈良県（淡水） =====
   {
     id: "s-kcsadd-001", name: "布目ダム", slug: "nunomedam-bass",
-    description: "奈良市北野山町に位置するダム湖。ブラックバス・ヘラブナ・ワカサギが楽しめる奈良県屈指の淡水釣り場。おかっぱりポイントが豊富で、足場が良くファミリーにも人気。周囲の自然が美しく、東大寺から車で約30分とアクセスも良好。",
+    description: "奈良市北野山町に位置するダム湖。ブラックバス・ヘラブナ・ワカサギが楽しめる奈良県屈指の淡水釣り場。おかっぱりポイントが豊富で、足場が良くファミリーにも人気。周囲の自然が美しく、東大寺から車で約30分とアクセスも良好。ワーム・クランクベイトに加えてへら竿も楽しめるため、一日中飽きません。blackbass・herabuna・bluegillの好ポイントとしても地元で知られています。",
     latitude: 34.6878, longitude: 135.9456, address: "〒630-1234 奈良県奈良市北野山町",
     accessInfo: "名阪国道針ICから約20分。山添ICから約30分。",
     region: region("r3000"), spotType: "river", difficulty: "beginner",
@@ -46,7 +46,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-002", name: "室生ダム", slug: "muroudam-bass",
-    description: "奈良県宇陀市にある室生ダム。バス釣りとコイ釣りが人気で、室生寺の近くに位置する自然豊かなダム湖。遊漁券が必要だが、整備された足場から気軽に釣りが楽しめる。秋の紅葉シーズンは景色も格別。",
+    description: "奈良県宇陀市にある室生ダム。バス釣りとコイ釣りが人気で、室生寺の近くに位置する自然豊かなダム湖。遊漁券が必要だが、整備された足場から気軽に釣りが楽しめる。秋の紅葉シーズンは景色も格別。ワーム・スピナーベイトに加えて吸い込み仕掛けも楽しめるため、一日中飽きません。blackbass・herabuna・bluegillの好ポイントとしても地元で知られています。",
     latitude: 34.5367, longitude: 136.0289, address: "〒633-0315 奈良県宇陀市室生大野3846",
     accessInfo: "名阪国道針ICから約20分。近鉄室生口大野駅から車で約5分。",
     region: region("r3001"), spotType: "river", difficulty: "beginner",
@@ -71,7 +71,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-003", name: "十津川（熊野川上流）", slug: "totsukawa-river",
-    description: "奈良県十津川村を流れる熊野川の上流域。日本一長い路線バスでも有名な秘境の清流。アマゴ・アユの渓流釣りが盛んで、手つかずの自然が残る美しい渓谷。温泉宿に泊まりながらの釣行が人気。",
+    description: "奈良県十津川村を流れる熊野川の上流域。日本一長い路線バスでも有名な秘境の清流。アマゴ・アユの渓流釣りが盛んで、手つかずの自然が残る美しい渓谷。温泉宿に泊まりながらの釣行が人気。エサ釣り・フライに加えて友釣りも楽しめるため、一日中飽きません。amago・イワナ・uguiの好ポイントとしても地元で知られています。",
     latitude: 34.0978, longitude: 135.7156, address: "〒637-1554 奈良県吉野郡十津川村平谷",
     accessInfo: "五條市から国道168号で約1時間30分。南紀白浜から約2時間。",
     region: region("r3002"), spotType: "river", difficulty: "intermediate",
@@ -96,7 +96,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-004", name: "池原ダム（バス釣り）", slug: "ikehara-dam-bass-detail",
-    description: "奈良県下北山村にある西日本最大級のリザーバー。60cmオーバーのブラックバスが狙えることで全国的に有名。レンタルボートでの釣りが主流で、広大なダム湖には無数のワンドやインレットが点在。バスアングラー憧れのフィールド。",
+    description: "奈良県下北山村にある西日本最大級のリザーバー。60cmオーバーのブラックバスが狙えることで全国的に有名。レンタルボートでの釣りが主流で、広大なダム湖には無数のワンドやインレットが点在。バスアングラー憧れのフィールド。テキサスリグ・クランクベイトに加えてミミズ餌も楽しめるため、一日中飽きません。blackbass・bluegill・herabunaの好ポイントとしても地元で知られています。",
     latitude: 34.1667, longitude: 135.8833, address: "〒639-3806 奈良県下北山村下池原",
     accessInfo: "名阪国道針ICから国道169号で約2時間。紀勢自動車道尾鷲北ICから約1時間。",
     region: region("r605"), spotType: "river", difficulty: "intermediate",
@@ -120,7 +120,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-005", name: "津風呂湖（バス・ワカサギ）", slug: "tsufuroko-bass-wakasagi",
-    description: "奈良県吉野町にあるダム湖。ブラックバスとワカサギの両方が楽しめるフィールド。冬はワカサギのドーム船が運行され、ファミリーに大人気。春〜秋はバス釣りのおかっぱりやボートが楽しめる。吉野山の桜の名所にも近い。",
+    description: "奈良県吉野町にあるダム湖。ブラックバスとワカサギの両方が楽しめるフィールド。冬はワカサギのドーム船が運行され、ファミリーに大人気。春〜秋はバス釣りのおかっぱりやボートが楽しめる。吉野山の桜の名所にも近い。ワーム・スピナーベイト・ワカサギ仕掛けと釣り方のバリエーションが豊富です。blackbassやherabunaやbluegillなども回遊しており、シーズンを通して楽しめます。",
     latitude: 34.3756, longitude: 135.8378, address: "〒639-3102 奈良県吉野町河原屋849",
     accessInfo: "南阪奈道路葛城ICから約40分。近鉄大和上市駅から車で約15分。",
     region: region("r725"), spotType: "river", difficulty: "beginner",
@@ -145,7 +145,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-006", name: "初瀬川（大和川上流）", slug: "hatsusegawa-river",
-    description: "奈良県桜井市を流れる大和川の上流域。長谷寺の門前を流れる歴史ある清流で、オイカワやカワムツなどの小物釣りから始められる初心者向きの川。春にはアマゴも放流される。万葉集にも詠まれた由緒ある川。",
+    description: "奈良県桜井市を流れる大和川の上流域。長谷寺の門前を流れる歴史ある清流で、オイカワやカワムツなどの小物釣りから始められる初心者向きの川。春にはアマゴも放流される。万葉集にも詠まれた由緒ある川。ウキ釣りに加えてエサ釣りも楽しめるため、一日中飽きません。kawamutsu・amago・アユの好ポイントとしても地元で知られています。",
     latitude: 34.5356, longitude: 135.9012, address: "〒633-0112 奈良県桜井市初瀬731-1",
     accessInfo: "西名阪自動車道天理ICから約30分。近鉄長谷寺駅から徒歩約10分。",
     region: region("r3004"), spotType: "river", difficulty: "beginner",
@@ -170,7 +170,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-007", name: "大台ヶ原・上北山川", slug: "kamikitayama-keiryu",
-    description: "奈良県上北山村を流れる北山川上流域。大台ヶ原の麓に広がる原生林に囲まれた渓流で、アマゴ・イワナの宝庫。手付かずの自然が残る本格的な渓流釣り場。日本有数の多雨地帯で水量が豊富。",
+    description: "奈良県上北山村を流れる北山川上流域。大台ヶ原の麓に広がる原生林に囲まれた渓流で、アマゴ・イワナの宝庫。手付かずの自然が残る本格的な渓流釣り場。日本有数の多雨地帯で水量が豊富。エサ釣り・ルアーに加えてエサ釣りも楽しめるため、一日中飽きません。amago・アユの好ポイントとしても地元で知られています。経験豊富なアングラーに人気の本格的なフィールドです。",
     latitude: 34.2156, longitude: 136.0189, address: "〒639-3701 奈良県上北山村河合552-2",
     accessInfo: "名阪国道針ICから国道169号で約2時間。",
     region: region("r3003"), spotType: "river", difficulty: "advanced",
@@ -194,7 +194,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-008", name: "七色ダム（詳細）", slug: "nanairo-dam-detail",
-    description: "奈良県下北山村と三重県熊野市にまたがるダム湖。池原ダムと並ぶ紀伊半島のビッグバスフィールド。水質がクリアで、サイトフィッシングが可能な場所も多い。レンタルボートで広大なダム湖を攻略する。",
+    description: "奈良県下北山村と三重県熊野市にまたがるダム湖。池原ダムと並ぶ紀伊半島のビッグバスフィールド。水質がクリアで、サイトフィッシングが可能な場所も多い。レンタルボートで広大なダム湖を攻略する。ワーム・クランクベイトのほか、ミミズ餌でも好釣果が報告されています。時期によってはblackbass・bluegillの釣果も期待できます。",
     latitude: 34.1189, longitude: 135.9278, address: "〒639-3805 奈良県吉野郡下北山村上池原（七色ダム）",
     accessInfo: "名阪国道針ICから国道169号で約2時間。",
     region: region("r606"), spotType: "river", difficulty: "intermediate",
@@ -217,7 +217,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-009", name: "天ノ川（天川村・詳細）", slug: "tennokawa-detail",
-    description: "奈良県天川村を流れる清流。修験道の聖地・大峯山の麓に位置し、アマゴ・イワナの渓流釣りの名所。天川村はキャンプ場も多く、夏の避暑地としても人気。みたらい渓谷の美しい景観も魅力。",
+    description: "奈良県天川村を流れる清流。修験道の聖地・大峯山の麓に位置し、アマゴ・イワナの渓流釣りの名所。天川村はキャンプ場も多く、夏の避暑地としても人気。みたらい渓谷の美しい景観も魅力。エサ釣り・ルアー・エサ釣りと釣り方のバリエーションが豊富です。amagoやアユやオイカワなども回遊しており、シーズンを通して楽しめます。",
     latitude: 34.2478, longitude: 135.8289, address: "〒638-0305 奈良県天川村沢谷60",
     accessInfo: "南阪奈道路葛城ICから約1時間30分。近鉄下市口駅からバスで約1時間。",
     region: region("r2213"), spotType: "river", difficulty: "intermediate",
@@ -242,7 +242,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-010", name: "吉野川（五條・詳細）", slug: "yoshinogawa-gojo-detail",
-    description: "奈良県五條市を流れる吉野川の中流域。紀の川の上流にあたり、アユの友釣りが盛ん。河川敷が広く、初心者でもエントリーしやすい。秋の落ちアユシーズンも人気。柿の産地としても有名な五條市の風景が美しい。",
+    description: "奈良県五條市を流れる吉野川の中流域。紀の川の上流にあたり、アユの友釣りが盛ん。河川敷が広く、初心者でもエントリーしやすい。秋の落ちアユシーズンも人気。柿の産地としても有名な五條市の風景が美しい。エサ釣りに加えてウキ釣りも楽しめるため、一日中飽きません。amago・オイカワ・コイの好ポイントとしても地元で知られています。",
     latitude: 34.3512, longitude: 135.6945, address: "〒637-0041 奈良県五條市本町2丁目7-7",
     accessInfo: "京奈和自動車道五條ICから約5分。JR五条駅から徒歩約10分。",
     region: region("r788"), spotType: "river", difficulty: "beginner",
@@ -268,7 +268,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   // ===== 滋賀県（琵琶湖エリア） =====
   {
     id: "s-kcsadd-011", name: "琵琶湖・におの浜", slug: "biwako-nionohama",
-    description: "滋賀県大津市のにおの浜は琵琶湖南湖の超メジャーバス釣りポイント。1km以上の石積み護岸が続き、足場が良くおかっぱりに最適。諸子川・堂の川・総門川の流れ込みがあり、ベイトフィッシュが集まりやすい。JR膳所駅からのアクセスも良好で電車釣行も可能。",
+    description: "滋賀県大津市のにおの浜は琵琶湖南湖の超メジャーバス釣りポイント。1km以上の石積み護岸が続き、足場が良くおかっぱりに最適。諸子川・堂の川・総門川の流れ込みがあり、ベイトフィッシュが集まりやすい。JR膳所駅からのアクセスも良好で電車釣行も可能。ワーム・シャッドのほか、ミミズ餌でも好釣果が報告されています。",
     latitude: 35.0078, longitude: 135.8756, address: "〒520-0801 滋賀県大津市におの浜",
     accessInfo: "JR膳所駅から徒歩約15分。名神高速大津ICから約10分。",
     region: region("r3005"), spotType: "river", difficulty: "beginner",
@@ -293,7 +293,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-012", name: "琵琶湖・浜大津港", slug: "biwako-hamaotsu",
-    description: "大津市浜大津にある護岸エリア。京阪びわ湖浜大津駅から徒歩圏内で、電車釣行に最適な都市型バスフィッシングポイント。大津港周辺の遊歩道から手軽にバス釣りが楽しめ、夜はビワコオオナマズも狙える。",
+    description: "大津市浜大津にある護岸エリア。京阪びわ湖浜大津駅から徒歩圏内で、電車釣行に最適な都市型バスフィッシングポイント。大津港周辺の遊歩道から手軽にバス釣りが楽しめ、夜はビワコオオナマズも狙える。ワーム・ミノー・ミミズ餌と釣り方のバリエーションが豊富です。blackbassやbluegillやbiwako-oonamazuなども回遊しており、シーズンを通して楽しめます。",
     latitude: 35.0134, longitude: 135.8589, address: "〒520-0047 滋賀県〒520-0047 滋賀 県 大津 市 浜大津 5 丁目 3-10, 5丁目-3-10 浜大津 大津市",
     accessInfo: "京阪びわ湖浜大津駅から徒歩約5分。名神大津ICから約10分。",
     region: region("r3005"), spotType: "river", difficulty: "beginner",
@@ -317,7 +317,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-013", name: "琵琶湖・彦根港", slug: "biwako-hikone-port",
-    description: "滋賀県彦根市の彦根港周辺。国宝彦根城のお膝元で、琵琶湖東岸の好ポイント。バス釣りのほかワカサギやハスも狙える。竹島への渡船場所でもあり、港内は足場が良くファミリーにも人気。彦根城観光と合わせて。",
+    description: "滋賀県彦根市の彦根港周辺。国宝彦根城のお膝元で、琵琶湖東岸の好ポイント。バス釣りのほかワカサギやハスも狙える。竹島への渡船場所でもあり、港内は足場が良くファミリーにも人気。彦根城観光と合わせて。ワーム・クランクや小型ルアーといった釣り方で多くの釣り人が訪れます。blackbassやhasuやbluegillも狙えるため、ターゲットの幅が広いのが特徴です。",
     latitude: 35.2838, longitude: 136.2424, address: "〒522-0002 滋賀県彦根市松原2丁目2-2",
     accessInfo: "JR彦根駅から徒歩約20分。名神高速彦根ICから約15分。",
     region: region("r3006"), spotType: "river", difficulty: "beginner",
@@ -342,7 +342,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-014", name: "琵琶湖・長浜港", slug: "biwako-nagahama-port",
-    description: "滋賀県長浜市の長浜港周辺。琵琶湖北湖のバス釣りの拠点で、竹生島への渡船場でもある。港内は足場が良く、豊公園周辺の護岸ではウェーディングも可能。北湖ならではの大型バスが狙えるエリア。",
+    description: "滋賀県長浜市の長浜港周辺。琵琶湖北湖のバス釣りの拠点で、竹生島への渡船場でもある。港内は足場が良く、豊公園周辺の護岸ではウェーディングも可能。北湖ならではの大型バスが狙えるエリア。ワーム・バイブレーションや小型ルアーといった釣り方で多くの釣り人が訪れます。blackbassやhasuやbluegillも狙えるため、ターゲットの幅が広いのが特徴です。",
     latitude: 35.3720, longitude: 136.2631, address: "〒526-0067 滋賀県長浜市港町",
     accessInfo: "JR長浜駅から徒歩約10分。北陸自動車道長浜ICから約15分。",
     region: region("r3011"), spotType: "river", difficulty: "beginner",
@@ -367,7 +367,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-015", name: "琵琶湖・マキノ知内浜", slug: "biwako-makino-chinaihama",
-    description: "滋賀県高島市マキノ町の知内川河口周辺。琵琶湖北西岸に位置し、知内川の流れ込みがベイトを集める好ポイント。バス釣りのほか、ワカサギやビワマスも回遊する。マキノサニービーチに隣接し、夏はキャンプと合わせて楽しめる。",
+    description: "滋賀県高島市マキノ町の知内川河口周辺。琵琶湖北西岸に位置し、知内川の流れ込みがベイトを集める好ポイント。バス釣りのほか、ワカサギやビワマスも回遊する。マキノサニービーチに隣接し、夏はキャンプと合わせて楽しめる。ミノー・ワーム・ルアーと釣り方のバリエーションが豊富です。blackbassやbiwamasuやアユなども回遊しており、シーズンを通して楽しめます。",
     latitude: 35.4678, longitude: 136.0578, address: "〒520-1814 滋賀県高島市マキノ町知内2010-1",
     accessInfo: "JRマキノ駅から徒歩約20分。北陸自動車道木之本ICから約30分。",
     region: region("r3007"), spotType: "river", difficulty: "intermediate",
@@ -392,7 +392,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-016", name: "琵琶湖・今津浜", slug: "biwako-imazu",
-    description: "滋賀県高島市今津町の湖岸。琵琶湖北西部に位置し、今津港からは竹生島への連絡船が出ている。周辺はバス釣りの好ポイントが点在し、ウェーディングでの釣りも盛ん。近くにはザゼンソウ群落がある自然豊かなエリア。",
+    description: "滋賀県高島市今津町の湖岸。琵琶湖北西部に位置し、今津港からは竹生島への連絡船が出ている。周辺はバス釣りの好ポイントが点在し、ウェーディングでの釣りも盛ん。近くにはザゼンソウ群落がある自然豊かなエリア。ワーム・クランクに加えてミノーも楽しめるため、一日中飽きません。blackbass・biwamasu・hasuの好ポイントとしても地元で知られています。",
     latitude: 35.4184, longitude: 136.0463, address: "〒520-1604 滋賀県高島市今津町浜分7",
     accessInfo: "JR近江今津駅から徒歩約10分。名神京都東ICから約1時間。",
     region: region("r3007"), spotType: "river", difficulty: "intermediate",
@@ -416,7 +416,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-017", name: "余呉湖（詳細）", slug: "yogoko-detail",
-    description: "滋賀県長浜市にある琵琶湖の北にある小さな湖。冬のワカサギ釣りで有名で、桟橋からのワカサギ釣りが気軽に楽しめる。天女の衣掛柳の伝説がある神秘的な湖。四季折々の美しい景色も魅力。春〜秋はヘラブナやコイも狙える。",
+    description: "滋賀県長浜市にある琵琶湖の北にある小さな湖。冬のワカサギ釣りで有名で、桟橋からのワカサギ釣りが気軽に楽しめる。天女の衣掛柳の伝説がある神秘的な湖。四季折々の美しい景色も魅力。春〜秋はヘラブナやコイも狙える。桟橋ワカサギ釣りやへら竿といった釣り方で多くの釣り人が訪れます。herabunaも狙えるため、ターゲットの幅が広いのが特徴です。",
     latitude: 35.5078, longitude: 136.2145, address: "〒529-0523 滋賀県長浜市余呉町川並",
     accessInfo: "JR余呉駅から徒歩約10分。北陸自動車道木之本ICから約15分。",
     region: region("r721"), spotType: "river", difficulty: "beginner",
@@ -440,7 +440,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-018", name: "琵琶湖・草津烏丸半島", slug: "biwako-kusatsu-karasuma",
-    description: "滋賀県草津市の烏丸半島周辺。琵琶湖博物館に隣接する南湖東岸の人気ポイント。広大なハス群生地（蓮）があり、バスのストラクチャーが豊富。足場の良い護岸からおかっぱりバス釣りが楽しめ、ファミリーにも人気。",
+    description: "滋賀県草津市の烏丸半島周辺。琵琶湖博物館に隣接する南湖東岸の人気ポイント。広大なハス群生地（蓮）があり、バスのストラクチャーが豊富。足場の良い護岸からおかっぱりバス釣りが楽しめ、ファミリーにも人気。ワーム・フロッグに加えてミミズ餌も楽しめるため、一日中飽きません。blackbass・bluegill・biwako-oonamazuの好ポイントとしても地元で知られています。",
     latitude: 35.0578, longitude: 135.9389, address: "〒525-0001 滋賀県草津市下物町",
     accessInfo: "JR草津駅からバス約25分。名神高速栗東ICから約20分。",
     region: region("r3008"), spotType: "river", difficulty: "beginner",
@@ -464,7 +464,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-019", name: "琵琶湖・近江八幡水郷", slug: "biwako-omihachiman-suigo",
-    description: "滋賀県近江八幡市の西の湖・水郷エリア。琵琶湖に繋がる内湖で、葦の群生が広がる独特の景観。バス釣りの穴場として知られ、プレッシャーが低い。水郷めぐりの観光船と同じエリアでの釣りが楽しめる。",
+    description: "滋賀県近江八幡市の西の湖・水郷エリア。琵琶湖に繋がる内湖で、葦の群生が広がる独特の景観。バス釣りの穴場として知られ、プレッシャーが低い。水郷めぐりの観光船と同じエリアでの釣りが楽しめる。ワーム・フロッグやミミズ餌といった釣り方で多くの釣り人が訪れます。blackbassやbluegillやnamazuも狙えるため、ターゲットの幅が広いのが特徴です。",
     latitude: 35.1378, longitude: 136.0912, address: "〒523-0837 滋賀県近江八幡市大杉町30-1",
     accessInfo: "JR近江八幡駅から車で約15分。名神高速竜王ICから約20分。",
     region: region("r3009"), spotType: "river", difficulty: "intermediate",
@@ -489,7 +489,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-020", name: "琵琶湖・堅田浮御堂", slug: "biwako-katata-ukimido",
-    description: "滋賀県大津市堅田の浮御堂周辺。琵琶湖大橋の西詰に位置し、南湖と北湖の境目にあたる好ポイント。バスの回遊ルートに当たり、春のスポーニングシーズンは特に実績が高い。近江八景の一つとしても名高い景勝地。",
+    description: "滋賀県大津市堅田の浮御堂周辺。琵琶湖大橋の西詰に位置し、南湖と北湖の境目にあたる好ポイント。バスの回遊ルートに当たり、春のスポーニングシーズンは特に実績が高い。近江八景の一つとしても名高い景勝地。ワーム・ジャークベイトに加えてミミズ餌も楽しめるため、一日中飽きません。blackbass・bluegill・hasuの好ポイントとしても地元で知られています。",
     latitude: 35.1189, longitude: 135.9078, address: "〒520-0242 滋賀県大津市本堅田1丁目16-18",
     accessInfo: "JR堅田駅からバス約10分。名神京都東ICから約30分。",
     region: region("r3010"), spotType: "river", difficulty: "intermediate",
@@ -513,7 +513,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-021", name: "琵琶湖・米原磯", slug: "biwako-maibara-iso",
-    description: "滋賀県米原市の磯周辺。琵琶湖北東岸に位置し、伊吹山を背景にした雄大な景色の中で釣りが楽しめる。天然の岩場が点在し、バスやビワマスが狙える。レンタルボートでの沖釣りも人気。",
+    description: "滋賀県米原市の磯周辺。琵琶湖北東岸に位置し、伊吹山を背景にした雄大な景色の中で釣りが楽しめる。天然の岩場が点在し、バスやビワマスが狙える。レンタルボートでの沖釣りも人気。ワーム・シャッドのほか、ミノー・スプーンでも好釣果が報告されています。時期によってはblackbass・biwamasu・アユの釣果も期待できます。",
     latitude: 35.3312, longitude: 136.2878, address: "〒521-0004 滋賀県米原市磯",
     accessInfo: "JR米原駅から車で約15分。北陸自動車道米原ICから約10分。",
     region: region("r3011"), spotType: "river", difficulty: "intermediate",
@@ -537,7 +537,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-022", name: "琵琶湖・安曇川河口", slug: "biwako-adogawa-kakou",
-    description: "滋賀県高島市の安曇川河口周辺。琵琶湖に注ぐ安曇川の河口デルタは広大なウィードエリアが広がり、バスのストラクチャーが豊富。秋はアユの落ちパターンでビッグバスが狙える。高島市の自然豊かなエリア。",
+    description: "滋賀県高島市の安曇川河口周辺。琵琶湖に注ぐ安曇川の河口デルタは広大なウィードエリアが広がり、バスのストラクチャーが豊富。秋はアユの落ちパターンでビッグバスが狙える。高島市の自然豊かなエリア。ミノー・ワーム・友釣りと釣り方のバリエーションが豊富です。blackbassやhasuやオイカワなども回遊しており、シーズンを通して楽しめます。",
     latitude: 35.3289, longitude: 136.0478, address: "〒520-1232 滋賀県高島市安曇川町北船木",
     accessInfo: "JR安曇川駅から車で約10分。名神京都東ICから約50分。",
     region: region("r3012"), spotType: "river", difficulty: "intermediate",
@@ -562,7 +562,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-023", name: "琵琶湖・瀬田川洗堰（詳細）", slug: "biwako-setagawa-arai-detail",
-    description: "滋賀県大津市の瀬田川洗堰周辺。琵琶湖から唯一流れ出す瀬田川の起点で、流れがある独特のフィールド。スモールマウスバスの実績もあり、他のポイントとは一味違う釣りが楽しめる。石山寺の近くで観光アクセスも良い。",
+    description: "滋賀県大津市の瀬田川洗堰周辺。琵琶湖から唯一流れ出す瀬田川の起点で、流れがある独特のフィールド。スモールマウスバスの実績もあり、他のポイントとは一味違う釣りが楽しめる。石山寺の近くで観光アクセスも良い。ワーム・シャッドやミミズ餌など複数の釣法に対応した好ポイントです。blackbass・bluegill・hasuといった魚種の実績もあります。",
     latitude: 34.9645, longitude: 135.9178, address: "〒520-2279 滋賀県大津市黒津",
     accessInfo: "京阪石山寺駅から徒歩約15分。名神瀬田西ICから約10分。",
     region: region("r641"), spotType: "river", difficulty: "intermediate",
@@ -587,7 +587,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-024", name: "琵琶湖・守山なぎさ公園", slug: "biwako-moriyama-nagisa",
-    description: "滋賀県守山市のなぎさ公園周辺。琵琶湖大橋の東側に広がる護岸エリアで、足場が良くファミリーフィッシングに最適。バス釣りの入門ポイントとして人気で、目の前にはおしゃれなカフェやレストランも。ピエリ守山に隣接。",
+    description: "滋賀県守山市のなぎさ公園周辺。琵琶湖大橋の東側に広がる護岸エリアで、足場が良くファミリーフィッシングに最適。バス釣りの入門ポイントとして人気で、目の前にはおしゃれなカフェやレストランも。ピエリ守山に隣接。ワーム・シャッドのほか、ミミズ餌でも好釣果が報告されています。時期によってはblackbass・bluegillの釣果も期待できます。",
     latitude: 35.0912, longitude: 135.9645, address: "〒524-0101 滋賀県守山市今浜町2876",
     accessInfo: "JR守山駅からバス約15分。名神栗東ICから約20分。",
     region: region("r3008"), spotType: "river", difficulty: "beginner",
@@ -611,7 +611,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   // ===== 島根県 =====
   {
     id: "s-kcsadd-025", name: "温泉津港", slug: "yunotsu-port",
-    description: "島根県大田市温泉津町にある漁港。世界遺産・石見銀山の積出港として栄えた歴史ある港。アジ・メバルの好ポイントで、秋にはアオリイカも好調。温泉津温泉に浸かった後の夜釣りが贅沢。",
+    description: "島根県大田市温泉津町にある漁港。世界遺産・石見銀山の積出港として栄えた歴史ある港。アジ・メバルの好ポイントで、秋にはアオリイカも好調。温泉津温泉に浸かった後の夜釣りが贅沢。サビキ釣り・メバリングと釣り方のバリエーションが豊富です。カサゴやシロギスなども回遊しており、シーズンを通して楽しめます。ビギナーにもやさしいフィールドで、釣り入門にもおすすめの場所です。",
     latitude: 35.0942, longitude: 132.3388, address: "〒699-2501 島根県大田市温泉津町温泉津イ794-1",
     accessInfo: "JR温泉津駅から徒歩約15分。山陰自動車道温泉津ICから約10分。",
     region: region("r3013"), spotType: "port", difficulty: "beginner",
@@ -637,7 +637,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-026", name: "境水道・美保関", slug: "sakai-suido-mihonoseki",
-    description: "島根県松江市美保関町の境水道周辺。鳥取県境港市との間を流れる境水道は潮通しが良く、多彩な魚種が狙える。特にアジ・メバル・チヌが好調で、秋にはサゴシ（サワラの若魚）の回遊も。美保神社の参拝と合わせて。",
+    description: "島根県松江市美保関町の境水道周辺。鳥取県境港市との間を流れる境水道は潮通しが良く、多彩な魚種が狙える。特にアジ・メバル・チヌが好調で、秋にはサゴシ（サワラの若魚）の回遊も。美保神社の参拝と合わせて。サビキ・アジングやメバリングなど複数の釣法に対応した好ポイントです。クロダイ・シロギスといった魚種の実績もあります。",
     latitude: 35.5612, longitude: 133.2389, address: "〒690-1312 島根県松江市美保関町森山",
     accessInfo: "JR境港駅から車で約20分。松江市内から約40分。",
     region: region("r3014"), spotType: "port", difficulty: "beginner",
@@ -663,7 +663,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-027", name: "出雲市・十六島鼻", slug: "izumo-jushimanohana",
-    description: "島根県出雲市十六島町の岩場。日本海に突き出した磯場で、グレ・チヌ・イシダイなどの磯釣りが楽しめる本格ポイント。十六島海苔（うっぷるいのり）でも有名な地域。荒々しい日本海の波を受ける迫力ある釣り場。",
+    description: "島根県出雲市十六島町の岩場。日本海に突き出した磯場で、グレ・チヌ・イシダイなどの磯釣りが楽しめる本格ポイント。十六島海苔（うっぷるいのり）でも有名な地域。荒々しい日本海の波を受ける迫力ある釣り場。フカセ釣りに加えて石鯛仕掛けも楽しめるため、一日中飽きません。メジナ・クロダイ・hirasuzukiの好ポイントとしても地元で知られています。",
     latitude: 35.4478, longitude: 132.7689, address: "〒691-0042 島根県出雲市十六島町",
     accessInfo: "出雲市内から車で約30分。山陰自動車道出雲ICから約25分。",
     region: region("r3015"), spotType: "rocky", difficulty: "advanced",
@@ -688,7 +688,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-028", name: "松江・中海", slug: "matsue-nakaumi",
-    description: "島根県松江市の中海沿岸。宍道湖と境水道を結ぶ汽水湖で、シーバスの聖地として全国的に有名。夜のシーバスゲームが特に人気で、ランカーサイズの実績も多い。ハゼやチヌも豊富。",
+    description: "島根県松江市の中海沿岸。宍道湖と境水道を結ぶ汽水湖で、シーバスの聖地として全国的に有名。夜のシーバスゲームが特に人気で、ランカーサイズの実績も多い。ハゼやチヌも豊富。ルアーのほか、ちょい投げでも好釣果が報告されています。時期によってはクロダイの釣果も期待できます。釣り慣れた方であればテクニック次第で良型が期待できるポイントです。",
     latitude: 35.4589, longitude: 133.1478, address: "〒699-0101 島根県松江市富士見町",
     accessInfo: "JR松江駅から車で約20分。山陰自動車道松江東ICから約10分。",
     region: region("r3016"), spotType: "river", difficulty: "intermediate",
@@ -712,7 +712,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-029", name: "宍道湖（詳細・シーバス）", slug: "shinjiko-seabass",
-    description: "島根県松江市〜出雲市にかかる汽水湖。日本有数のシーバスフィールドとして知られ、全国からアングラーが訪れる。特に秋のコノシロパターンは爆発的な釣果をもたらす。夕日の名所でもあり、日本百景に選ばれた絶景の中で釣りが楽しめる。",
+    description: "島根県松江市〜出雲市にかかる汽水湖。日本有数のシーバスフィールドとして知られ、全国からアングラーが訪れる。特に秋のコノシロパターンは爆発的な釣果をもたらす。夕日の名所でもあり、日本百景に選ばれた絶景の中で釣りが楽しめる。ルアー（ミノー・バイブレーション）やちょい投げなど複数の釣法に対応した好ポイントです。",
     latitude: 35.4389, longitude: 132.9478, address: "〒699-0204 島根県松江市玉湯町林445-2",
     accessInfo: "JR松江駅から車で約10分。出雲空港から約20分。",
     region: region("r727"), spotType: "river", difficulty: "intermediate",
@@ -736,7 +736,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-030", name: "隠岐の島・西郷港（詳細）", slug: "oki-saigo-detail",
-    description: "島根県隠岐の島町の西郷港。隠岐諸島の玄関口で、港内でもアジ・メバル・チヌが好調。島全体が釣りの楽園で、磯からはヒラマサ・マダイ・イシダイなどの大物が狙える。離島ならではの魚影の濃さが魅力。",
+    description: "島根県隠岐の島町の西郷港。隠岐諸島の玄関口で、港内でもアジ・メバル・チヌが好調。島全体が釣りの楽園で、磯からはヒラマサ・マダイ・イシダイなどの大物が狙える。離島ならではの魚影の濃さが魅力。サビキ・アジングやメバリングなど複数の釣法に対応した好ポイントです。クロダイ・hiramasa・アオリイカといった魚種の実績もあります。",
     latitude: 36.2089, longitude: 133.3178, address: "〒685-0013 島根県隠岐の島町中町目貫の四",
     accessInfo: "境港からフェリーで約2時間30分。出雲空港から飛行機で約30分。",
     region: region("r196"), spotType: "port", difficulty: "beginner",
@@ -763,7 +763,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-031", name: "出雲大社・稲佐の浜（詳細）", slug: "izumo-inasa-detail",
-    description: "島根県出雲市大社町の稲佐の浜。出雲大社のすぐ西にある砂浜で、キス・ヒラメ・マゴチがサーフフィッシングで狙える。神話の舞台としても有名で、弁天島が象徴的な景観。秋にはショアジギングでサゴシも。",
+    description: "島根県出雲市大社町の稲佐の浜。出雲大社のすぐ西にある砂浜で、キス・ヒラメ・マゴチがサーフフィッシングで狙える。神話の舞台としても有名で、弁天島が象徴的な景観。秋にはショアジギングでサゴシも。投げ釣りやルアーといった釣り方で多くの釣り人が訪れます。シロギスやmagochiやサワラも狙えるため、ターゲットの幅が広いのが特徴です。",
     latitude: 35.3945, longitude: 132.6756, address: "〒699-0702 島根県出雲市大社町杵築北",
     accessInfo: "一畑電鉄出雲大社前駅から徒歩約20分。山陰道出雲ICから約20分。",
     region: region("r3015"), spotType: "beach", difficulty: "intermediate",
@@ -789,7 +789,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   // ===== 岡山県 =====
   {
     id: "s-kcsadd-032", name: "日生港", slug: "hinase-port",
-    description: "岡山県備前市日生町の漁港。カキ養殖で有名な日生諸島の玄関口。漁港周辺ではアジ・メバル・カサゴ・チヌなどが狙え、秋にはタチウオやアオリイカも。日生の牡蠣お好み焼き（カキオコ）のグルメも楽しみの一つ。",
+    description: "岡山県備前市日生町の漁港。カキ養殖で有名な日生諸島の玄関口。漁港周辺ではアジ・メバル・カサゴ・チヌなどが狙え、秋にはタチウオやアオリイカも。日生の牡蠣お好み焼き（カキオコ）のグルメも楽しみの一つ。サビキ釣りに加えてメバリングも楽しめるため、一日中飽きません。クロダイの好ポイントとしても地元で知られています。",
     latitude: 34.7289, longitude: 134.2678, address: "〒701-3204 岡山県備前市日生町日生",
     accessInfo: "JR赤穂線日生駅から徒歩約10分。山陽自動車道備前ICから約20分。",
     region: region("r3017"), spotType: "port", difficulty: "beginner",
@@ -816,7 +816,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-033", name: "児島・田の口港", slug: "kojima-tanokuchi",
-    description: "岡山県倉敷市児島の田の口港。瀬戸大橋のすぐ近くに位置し、瀬戸内海の好漁場。チヌ・メバル・カサゴの根魚が豊富で、秋にはタチウオの回遊もある。国産ジーンズの聖地・児島観光と合わせて楽しめる。",
+    description: "岡山県倉敷市児島の田の口港。瀬戸大橋のすぐ近くに位置し、瀬戸内海の好漁場。チヌ・メバル・カサゴの根魚が豊富で、秋にはタチウオの回遊もある。国産ジーンズの聖地・児島観光と合わせて楽しめる。フカセ・落とし込みのほか、メバリングでも好釣果が報告されています。時期によってはクロダイの釣果も期待できます。初めて竿を出す方にも向いており、子供連れでの釣行にも適しています。",
     latitude: 34.4312, longitude: 133.8189, address: "〒711-0903 岡山県倉敷市児島田の口6丁目4",
     accessInfo: "JR児島駅から車で約10分。瀬戸中央自動車道児島ICから約5分。",
     region: region("r3020"), spotType: "port", difficulty: "beginner",
@@ -841,7 +841,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-034", name: "牛窓港（詳細）", slug: "ushimado-port-detail",
-    description: "岡山県瀬戸内市牛窓町の牛窓港。「日本のエーゲ海」と称される瀬戸内海の美しい風景の中で釣りが楽しめる。チヌの落とし込み釣りのメッカとして有名で、メバル・カサゴ・アジなども豊富。フェリー乗り場周辺は足場も良くファミリー向き。",
+    description: "岡山県瀬戸内市牛窓町の牛窓港。「日本のエーゲ海」と称される瀬戸内海の美しい風景の中で釣りが楽しめる。チヌの落とし込み釣りのメッカとして有名で、メバル・カサゴ・アジなども豊富。フェリー乗り場周辺は足場も良くファミリー向き。落とし込み・フカセ・メバリングと釣り方のバリエーションが豊富です。クロダイやシロギスやヒラメなども回遊しており、シーズンを通して楽しめます。",
     latitude: 34.6189, longitude: 134.1578, address: "〒701-4302 岡山県瀬戸内市牛窓町牛窓3009",
     accessInfo: "JR邑久駅からバス約20分。岡山ブルーライン邑久ICから約15分。",
     region: region("r106"), spotType: "port", difficulty: "beginner",
@@ -868,7 +868,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-035", name: "下津井港（詳細）", slug: "shimotsui-port-detail",
-    description: "岡山県倉敷市下津井の漁港。瀬戸大橋の真下に位置し、タコ・メバル・チヌなどが好調。下津井ダコで有名な漁師町で、鮮度抜群のタコ料理も楽しめる。潮通しが非常に良く、大型の回遊魚も期待できる。",
+    description: "岡山県倉敷市下津井の漁港。瀬戸大橋の真下に位置し、タコ・メバル・チヌなどが好調。下津井ダコで有名な漁師町で、鮮度抜群のタコ料理も楽しめる。潮通しが非常に良く、大型の回遊魚も期待できる。タコエギに加えてフカセも楽しめるため、一日中飽きません。madako・クロダイ・カサゴの好ポイントとしても地元で知られています。",
     latitude: 34.4078, longitude: 133.8012, address: "〒711-0926 香川県坂出市櫃石瀬戸中央自動車道;国道30号バイパス",
     accessInfo: "JR児島駅から車で約15分。瀬戸中央自動車道児島ICから約10分。",
     region: region("r107"), spotType: "port", difficulty: "intermediate",
@@ -894,7 +894,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-036", name: "玉島港・E地区", slug: "tamashima-e-chiku",
-    description: "岡山県倉敷市玉島の工業港周辺。E地区と呼ばれる護岸エリアが釣り人に開放されており、チヌ・シーバス・ヒラメなどが狙える。足場が良く、車を横付けして釣りができるポイントもある。夜のシーバスゲームが特に人気。",
+    description: "岡山県倉敷市玉島の工業港周辺。E地区と呼ばれる護岸エリアが釣り人に開放されており、チヌ・シーバス・ヒラメなどが狙える。足場が良く、車を横付けして釣りができるポイントもある。夜のシーバスゲームが特に人気。フカセ・落とし込み・ルアーと釣り方のバリエーションが豊富です。クロダイやハゼなども回遊しており、シーズンを通して楽しめます。",
     latitude: 34.5412, longitude: 133.6878, address: "〒713-8103 岡山県倉敷市玉島乙島",
     accessInfo: "JR新倉敷駅から車で約15分。山陽自動車道玉島ICから約10分。",
     region: region("r3018"), spotType: "port", difficulty: "beginner",
@@ -919,7 +919,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-037", name: "玉野・宇野港", slug: "tamano-uno-port",
-    description: "岡山県玉野市の宇野港。直島への玄関口で、アート観光と合わせた釣行が可能。港内はチヌ・メバル・アジが好調で、足場も良くファミリー向き。瀬戸内海の穏やかな景色の中で釣りが楽しめる。",
+    description: "岡山県玉野市の宇野港。直島への玄関口で、アート観光と合わせた釣行が可能。港内はチヌ・メバル・アジが好調で、足場も良くファミリー向き。瀬戸内海の穏やかな景色の中で釣りが楽しめる。フカセのほか、サビキでも好釣果が報告されています。時期によってはクロダイ・ハゼの釣果も期待できます。駐車場とトイレとコンビニが利用可能で、実用面でも優れた釣り場です。",
     latitude: 34.4921, longitude: 133.9538, address: "〒706-0002 岡山県玉野市築港1丁目2",
     accessInfo: "JR宇野駅から徒歩約5分。瀬戸中央自動車道早島ICから約30分。",
     region: region("r3019"), spotType: "port", difficulty: "beginner",
@@ -945,7 +945,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   // ===== 徳島県（追加） =====
   {
     id: "s-kcsadd-038", name: "小松島港（詳細）", slug: "komatsushima-detail",
-    description: "徳島県小松島市の小松島港。紀伊水道に面し、潮通しが良い好漁場。秋のタチウオ釣りが特に有名で、多くの釣り人が集まる。サビキでアジ・イワシ、投げ釣りでキスも狙える。阿波おどりの時期は観光と合わせて。",
+    description: "徳島県小松島市の小松島港。紀伊水道に面し、潮通しが良い好漁場。秋のタチウオ釣りが特に有名で、多くの釣り人が集まる。サビキでアジ・イワシ、投げ釣りでキスも狙える。阿波おどりの時期は観光と合わせて。テンヤ・ウキ釣りやショアジギングといった釣り方で多くの釣り人が訪れます。シロギスやサワラも狙えるため、ターゲットの幅が広いのが特徴です。",
     latitude: 34.0048, longitude: 134.5907, address: "〒773-0001 徳島県小松島市小松島町新港",
     accessInfo: "JR南小松島駅から徒歩約10分。徳島自動車道徳島ICから約20分。",
     region: region("r151"), spotType: "port", difficulty: "beginner",
@@ -971,7 +971,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-039", name: "阿南市・今津漁港", slug: "anan-imatsu-port",
-    description: "徳島県阿南市の今津漁港。波止とT字突堤が複数あり、ポイントが豊富。アジ・メバル・チヌのほか、アオリイカのエギングも人気。県南部の穏やかな海で、のんびりした釣りが楽しめる。",
+    description: "徳島県阿南市の今津漁港。波止とT字突堤が複数あり、ポイントが豊富。アジ・メバル・チヌのほか、アオリイカのエギングも人気。県南部の穏やかな海で、のんびりした釣りが楽しめる。サビキ・アジングのほか、フカセでも好釣果が報告されています。時期によってはクロダイの釣果も期待できます。初めて竿を出す方にも向いており、子供連れでの釣行にも適しています。",
     latitude: 33.9178, longitude: 134.6645, address: "〒779-1111 徳島県阿南市",
     accessInfo: "JR阿南駅から車で約15分。徳島自動車道徳島ICから約40分。",
     region: region("r112"), spotType: "port", difficulty: "beginner",
@@ -996,7 +996,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-040", name: "日和佐港（詳細）", slug: "hiwasa-port-detail",
-    description: "徳島県美波町の日和佐港。ウミガメの産卵地として有名な大浜海岸に近い港。アオリイカの好ポイントとして知られ、秋のエギングシーズンには多くのアングラーが訪れる。グレ・チヌのフカセ釣りも好調。",
+    description: "徳島県美波町の日和佐港。ウミガメの産卵地として有名な大浜海岸に近い港。アオリイカの好ポイントとして知られ、秋のエギングシーズンには多くのアングラーが訪れる。グレ・チヌのフカセ釣りも好調。サビキでも好釣果が報告されています。時期によってはメジナ・クロダイ・アジの釣果も期待できます。釣り慣れた方であればテクニック次第で良型が期待できるポイントです。",
     latitude: 33.7312, longitude: 134.5312, address: "〒779-2304 徳島県美波町日和佐浦1-3",
     accessInfo: "JR日和佐駅から徒歩約15分。徳島自動車道徳島ICから約1時間20分。",
     region: region("r3021"), spotType: "port", difficulty: "intermediate",
@@ -1021,7 +1021,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-041", name: "鳴門・亀浦観光港", slug: "naruto-kameura",
-    description: "徳島県鳴門市の亀浦観光港。うずしお観光船の発着港で、鳴門海峡の潮流が生み出す豊かな漁場に近い。足場が良くファミリーにも人気で、アジ・チヌ・タチウオなどが狙える。鳴門の渦潮観光と合わせて楽しめる。",
+    description: "徳島県鳴門市の亀浦観光港。うずしお観光船の発着港で、鳴門海峡の潮流が生み出す豊かな漁場に近い。足場が良くファミリーにも人気で、アジ・チヌ・タチウオなどが狙える。鳴門の渦潮観光と合わせて楽しめる。サビキに加えてフカセも楽しめるため、一日中飽きません。クロダイ・シロギスの好ポイントとしても地元で知られています。",
     latitude: 34.2312, longitude: 134.6178, address: "〒772-0053 徳島県鳴門市鳴門町土佐泊浦",
     accessInfo: "JR鳴門駅からバスで約15分。高松自動車道鳴門ICから約10分。",
     region: region("r29"), spotType: "port", difficulty: "beginner",
@@ -1046,7 +1046,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-042", name: "徳島・マリンピア沖洲", slug: "tokushima-marinpia-okisu",
-    description: "徳島市沖洲のマリンピア護岸。徳島市中心部から最も近い海釣りスポットで、足場の良い護岸からチヌ・シーバス・ハゼなどが狙える。夜の常夜灯周りでのアジングやメバリングが人気。仕事帰りの釣行にも便利な都市型フィッシングポイント。",
+    description: "徳島市沖洲のマリンピア護岸。徳島市中心部から最も近い海釣りスポットで、足場の良い護岸からチヌ・シーバス・ハゼなどが狙える。夜の常夜灯周りでのアジングやメバリングが人気。仕事帰りの釣行にも便利な都市型フィッシングポイント。フカセ・落とし込みやルアーといった釣り方で多くの釣り人が訪れます。クロダイも狙えるため、ターゲットの幅が広いのが特徴です。",
     latitude: 34.0578, longitude: 134.5978, address: "〒770-0873 徳島県徳島市東沖洲2丁目",
     accessInfo: "徳島駅から車で約15分。徳島自動車道徳島ICから約15分。",
     region: region("r3022"), spotType: "port", difficulty: "beginner",
@@ -1072,7 +1072,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   // ===== 和歌山県（追加） =====
   {
     id: "s-kcsadd-043", name: "串本・袋港", slug: "kushimoto-fukuro-port",
-    description: "和歌山県串本町の袋港。本州最南端の町にある漁港で、黒潮の影響を受けて熱帯魚が見られるほど水温が高い。グレ・イシダイの磯釣りの拠点でもあり、港内ではアオリイカやアジも好調。橋杭岩の絶景が近い。",
+    description: "和歌山県串本町の袋港。本州最南端の町にある漁港で、黒潮の影響を受けて熱帯魚が見られるほど水温が高い。グレ・イシダイの磯釣りの拠点でもあり、港内ではアオリイカやアジも好調。橋杭岩の絶景が近い。フカセ・石鯛仕掛けと釣り方のバリエーションが豊富です。メジナやマダイなども回遊しており、シーズンを通して楽しめます。",
     latitude: 33.4772, longitude: 135.7716, address: "〒649-3503 和歌山県串本町串本",
     accessInfo: "JR串本駅から車で約10分。紀勢自動車道すさみ南ICから約30分。",
     region: region("r504"), spotType: "port", difficulty: "intermediate",
@@ -1098,7 +1098,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-044", name: "那智勝浦・天満漁港", slug: "nachikatsura-temma",
-    description: "和歌山県那智勝浦町の天満漁港。まぐろの水揚げ日本一で有名な勝浦港に隣接。港内ではアジ・サバのサビキ釣りが好調で、外側の堤防ではグレ・チヌも狙える。那智の滝観光と合わせた釣行が人気。",
+    description: "和歌山県那智勝浦町の天満漁港。まぐろの水揚げ日本一で有名な勝浦港に隣接。港内ではアジ・サバのサビキ釣りが好調で、外側の堤防ではグレ・チヌも狙える。那智の滝観光と合わせた釣行が人気。フカセに加えてエギングも楽しめるため、一日中飽きません。メジナ・クロダイ・アオリイカの好ポイントとしても地元で知られています。",
     latitude: 33.6312, longitude: 135.9478, address: "〒649-5142 和歌山県那智勝浦町下里308",
     accessInfo: "JR紀伊勝浦駅から徒歩約15分。紀勢自動車道那智勝浦ICから約10分。",
     region: region("r505"), spotType: "port", difficulty: "beginner",
@@ -1125,7 +1125,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   // ===== 広島県（追加） =====
   {
     id: "s-kcsadd-045", name: "音戸大橋下", slug: "ondo-ohashi-shita",
-    description: "広島県呉市の音戸大橋下周辺。音戸の瀬戸は潮流が速く、カレイ・メバル・マダイなどの好ポイント。瀬戸内海を代表する潮通しの良い釣り場で、大物の実績も高い。平清盛が一日で切り開いたという伝説の海峡。",
+    description: "広島県呉市の音戸大橋下周辺。音戸の瀬戸は潮流が速く、カレイ・メバル・マダイなどの好ポイント。瀬戸内海を代表する潮通しの良い釣り場で、大物の実績も高い。平清盛が一日で切り開いたという伝説の海峡。投げ釣りに加えてメバリングも楽しめるため、一日中飽きません。クロダイ・カサゴの好ポイントとしても地元で知られています。",
     latitude: 34.1912, longitude: 132.5312, address: "〒737-0012 広島県呉市警固屋",
     accessInfo: "JR呉駅から車で約15分。広島呉道路呉ICから約20分。",
     region: region("r3024"), spotType: "port", difficulty: "intermediate",
@@ -1151,7 +1151,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-046", name: "江田島・切串港（詳細）", slug: "etajima-kirikushi-detail",
-    description: "広島県江田島市の切串港。広島市内からフェリーで約30分でアクセスでき、島ならではの魚影の濃さが魅力。アジ・メバル・チヌが好調で、アオリイカの実績も高い。海上自衛隊の第1術科学校がある島としても有名。",
+    description: "広島県江田島市の切串港。広島市内からフェリーで約30分でアクセスでき、島ならではの魚影の濃さが魅力。アジ・メバル・チヌが好調で、アオリイカの実績も高い。海上自衛隊の第1術科学校がある島としても有名。サビキ・アジングのほか、メバリングでも好釣果が報告されています。時期によってはクロダイ・カサゴの釣果も期待できます。",
     latitude: 34.2878, longitude: 132.4812, address: "〒737-2111 広島県江田島市江田島町切串1丁目1",
     accessInfo: "広島港からフェリーで約30分。呉市からは早瀬大橋経由で車約40分。",
     region: region("r3025"), spotType: "port", difficulty: "beginner",
@@ -1177,7 +1177,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-047", name: "蒲刈・大地蔵港", slug: "kamagari-daijizo-port",
-    description: "広島県呉市下蒲刈島の大地蔵港。とびしま海道沿いの好ポイントで、安芸灘大橋を渡ってすぐにアクセスできる。メバル・カサゴ・アジなどの実績が高く、春はメバリングの聖地として多くのアングラーが訪れる。",
+    description: "広島県呉市下蒲刈島の大地蔵港。とびしま海道沿いの好ポイントで、安芸灘大橋を渡ってすぐにアクセスできる。メバル・カサゴ・アジなどの実績が高く、春はメバリングの聖地として多くのアングラーが訪れる。穴釣りのほか、アジングでも好釣果が報告されています。時期によってはクロダイ・アオリイカの釣果も期待できます。手軽に楽しめる釣り場なので、家族のレジャーにもおすすめです。",
     latitude: 34.1978, longitude: 132.6312, address: "〒737-0302 広島県呉市下蒲刈町下島",
     accessInfo: "JR仁方駅から車で約10分。安芸灘大橋を渡ってすぐ。広島呉道路呉ICから約30分。",
     region: region("r3026"), spotType: "port", difficulty: "beginner",
@@ -1204,7 +1204,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   // ===== 山口県（追加） =====
   {
     id: "s-kcsadd-048", name: "角島・大浜（詳細）", slug: "tsunoshima-ohama-detail",
-    description: "山口県下関市豊北町の角島大浜海岸。角島大橋で本土と繋がる離島で、エメラルドグリーンの海が美しい。サーフからのキス・ヒラメ釣りが人気で、磯場ではグレ・チヌも。日本有数の絶景ドライブスポットとしても有名。",
+    description: "山口県下関市豊北町の角島大浜海岸。角島大橋で本土と繋がる離島で、エメラルドグリーンの海が美しい。サーフからのキス・ヒラメ釣りが人気で、磯場ではグレ・チヌも。日本有数の絶景ドライブスポットとしても有名。投げ釣りやルアーなど複数の釣法に対応した好ポイントです。シロギス・メジナ・クロダイといった魚種の実績もあります。",
     latitude: 34.3545, longitude: 130.8975, address: "〒759-5332 山口県下関市豊北町大字角島893番地1",
     accessInfo: "JR特牛駅から車で約15分。下関ICから約1時間20分。",
     region: region("r3027"), spotType: "beach", difficulty: "intermediate",
@@ -1230,7 +1230,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-049", name: "下関・関門海峡護岸", slug: "shimonoseki-kanmon-gogan",
-    description: "山口県下関市の関門海峡沿いの護岸。唐戸市場やあるかぽーと周辺から手軽に釣りが楽しめ、関門海峡の速い潮流がもたらす豊かな漁場。フグ・アジ・チヌ・シーバスなどが狙える。ふぐの本場で観光グルメも充実。",
+    description: "山口県下関市の関門海峡沿いの護岸。唐戸市場やあるかぽーと周辺から手軽に釣りが楽しめ、関門海峡の速い潮流がもたらす豊かな漁場。フグ・アジ・チヌ・シーバスなどが狙える。ふぐの本場で観光グルメも充実。サビキやフカセなど複数の釣法に対応した好ポイントです。クロダイ・fugu・メバルといった魚種の実績もあります。",
     latitude: 33.9578, longitude: 130.9412, address: "〒751-0813 山口県下関市みもすそ川町22-22",
     accessInfo: "JR下関駅からバス約10分。中国自動車道下関ICから約15分。",
     region: region("r3028"), spotType: "port", difficulty: "beginner",
@@ -1256,7 +1256,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-050", name: "萩・菊ヶ浜", slug: "hagi-kikugahama",
-    description: "山口県萩市の菊ヶ浜。萩城跡のすぐ近くに広がる白砂の海岸で、キス・ヒラメのサーフフィッシングが楽しめる。城下町萩の風情ある街並みと日本海の絶景を同時に味わえる。夏は海水浴客で賑わう。",
+    description: "山口県萩市の菊ヶ浜。萩城跡のすぐ近くに広がる白砂の海岸で、キス・ヒラメのサーフフィッシングが楽しめる。城下町萩の風情ある街並みと日本海の絶景を同時に味わえる。夏は海水浴客で賑わう。投げ釣りやルアーなど複数の釣法に対応した好ポイントです。シロギス・magochiといった魚種の実績もあります。手軽に楽しめる釣り場なので、家族のレジャーにもおすすめです。",
     latitude: 34.4178, longitude: 131.3889, address: "〒758-0057 山口県萩市堀内2区",
     accessInfo: "JR東萩駅から車で約10分。中国自動車道美祢東ICから約40分。",
     region: region("r844"), spotType: "beach", difficulty: "beginner",
@@ -1280,7 +1280,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-051", name: "周防大島・片添ヶ浜", slug: "suo-oshima-katazoe",
-    description: "山口県大島郡周防大島町の片添ヶ浜。「瀬戸内のハワイ」と呼ばれる周防大島の人気スポット。海水浴場に隣接する波止から、アジ・キス・メバル・チヌ・アオリイカなどが狙える。アジングの聖地としても全国的に有名な島。",
+    description: "山口県大島郡周防大島町の片添ヶ浜。「瀬戸内のハワイ」と呼ばれる周防大島の人気スポット。海水浴場に隣接する波止から、アジ・キス・メバル・チヌ・アオリイカなどが狙える。アジングの聖地としても全国的に有名な島。アジング・サビキや投げ釣りといった釣り方で多くの釣り人が訪れます。シロギスやクロダイやタチウオも狙えるため、ターゲットの幅が広いのが特徴です。",
     latitude: 33.9003, longitude: 132.3638, address: "〒742-2512 山口県周防大島町平野",
     accessInfo: "JR大畠駅から車で約30分。大島大橋を渡って島内へ。山陽自動車道玖珂ICから約40分。",
     region: region("r111"), spotType: "port", difficulty: "beginner",
