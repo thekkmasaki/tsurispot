@@ -103,7 +103,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   // ===== 逗子・葉山エリア (r7 湘南) =====
   {
     id: "ss1", name: "逗子海岸", slug: "zushi-beach",
-    description: "逗子湾に面した遠浅の砂浜。投げ釣りでキスやカレイが狙え、夏場はサーフィンとの共存エリア。秋口からはヒラメも回遊する。穏やかな波で初心者にも優しい。",
+    description: "逗子湾に面した遠浅の砂浜。投げ釣りでキスやカレイが狙え、夏場はサーフィンとの共存エリア。秋口からはヒラメも回遊する。穏やかな波で初心者にも優しい。泳がせ釣りも楽しめるため、一日中飽きません。シロギスの好ポイントとしても地元で知られています。駐車場・トイレ・コンビニが整備されており、快適に釣行できます。",
     latitude: 35.2965, longitude: 139.571280, address: "〒249-0007 神奈川県逗子市新宿2丁目3",
     accessInfo: "JR逗子駅から徒歩約15分。逗葉新道出口から約5分。",
     region: region("r7"), spotType: "beach", difficulty: "beginner",
@@ -132,7 +132,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss2", name: "小坪漁港", slug: "kotsubo-port",
-    description: "逗子マリーナ隣の小さな漁港。堤防先端は潮通しが良く、メバルやカサゴの根魚が豊富。夜釣りでのメバリングが人気。静かな雰囲気で落ち着いて釣りが楽しめる。",
+    description: "逗子マリーナ隣の小さな漁港。堤防先端は潮通しが良く、メバルやカサゴの根魚が豊富。夜釣りでのメバリングが人気。静かな雰囲気で落ち着いて釣りが楽しめる。穴釣り・ブラクリのほか、フカセ釣りでも好釣果が報告されています。時期によってはクロダイの釣果も期待できます。ある程度の経験を積んだ釣り人にとってやりがいのあるフィールドです。",
     latitude: 35.2983, longitude: 139.5595, address: "〒249-0008 神奈川県逗子市小坪4丁目27-8",
     accessInfo: "JR逗子駅からバス「小坪」下車徒歩3分。逗葉新道出口から約10分。",
     region: region("r7"), spotType: "port", difficulty: "intermediate",
@@ -161,7 +161,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss3", name: "葉山港（あぶずり港）", slug: "hayama-port",
-    description: "葉山御用邸近くの港。堤防周辺ではサビキでアジやイワシが釣れ、秋にはカワハギも好調。相模湾を望む景観が素晴らしく、釣りと観光を兼ねて訪れる人も多い。",
+    description: "葉山御用邸近くの港。堤防周辺ではサビキでアジやイワシが釣れ、秋にはカワハギも好調。相模湾を望む景観が素晴らしく、釣りと観光を兼ねて訪れる人も多い。サビキ釣りに加えて胴突き仕掛けも楽しめるため、一日中飽きません。初心者や家族連れでも安心して釣りを楽しめる環境が揃っています。駐車場やトイレが近くにあるため長時間の釣りでも安心です。",
     latitude: 35.2685, longitude: 139.5780, address: "〒240-0112 神奈川県葉山町堀内50",
     accessInfo: "JR逗子駅からバス「鐙摺」下車すぐ。横浜横須賀道路逗子ICから約10分。",
     region: region("r7"), spotType: "port", difficulty: "beginner",
@@ -192,7 +192,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss4", name: "森戸海岸", slug: "morito-beach",
-    description: "葉山を代表するビーチ。遠浅の砂浜で投げ釣りのキスが有名。沖の森戸磯周辺は根魚も豊富。富士山と江の島を望む絶景ロケーション。",
+    description: "葉山を代表するビーチ。遠浅の砂浜で投げ釣りのキスが有名。沖の森戸磯周辺は根魚も豊富。富士山と江の島を望む絶景ロケーション。ちょい投げや泳がせ・ルアーなど複数の釣法に対応した好ポイントです。シロギス・ハゼ・ヒラメといった魚種の実績もあります。釣り初心者でも比較的簡単に釣果を得られる条件が整っています。周辺には駐車場やトイレがあり、釣り環境として不便がありません。",
     latitude: 35.2640, longitude: 139.5690, address: "〒240-0112 神奈川県葉山町堀内",
     accessInfo: "JR逗子駅からバス「森戸海岸」下車すぐ。横横道路逗子ICから約15分。",
     region: region("r7"), spotType: "beach", difficulty: "beginner",
@@ -227,7 +227,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss5", name: "一色海岸", slug: "isshiki-beach",
-    description: "葉山御用邸前の美しいビーチ。サーフからのキス釣りが中心。両端の磯場ではメバルやカサゴも。水質が良く、神奈川屈指の美しさを誇る海岸。",
+    description: "葉山御用邸前の美しいビーチ。サーフからのキス釣りが中心。両端の磯場ではメバルやカサゴも。水質が良く、神奈川屈指の美しさを誇る海岸。投げ釣りのほか、ルアーでも好釣果が報告されています。時期によってはシロギス・アオリイカ・マダイの釣果も期待できます。初めて竿を出す方にも向いており、子供連れでの釣行にも適しています。",
     latitude: 35.2590, longitude: 139.5730, address: "〒240-0111 神奈川県葉山町一色",
     accessInfo: "JR逗子駅からバス「一色海岸」下車すぐ。",
     region: region("r7"), spotType: "beach", difficulty: "beginner",
@@ -260,7 +260,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss6", name: "長者ヶ崎", slug: "chojagasaki",
-    description: "葉山と横須賀の境にある岬。磯場が広がりクロダイやメジナの好ポイント。夕暮れ時は富士山のシルエットが美しく、景勝地としても有名。上級者向けの磯釣り場。",
+    description: "葉山と横須賀の境にある岬。磯場が広がりクロダイやメジナの好ポイント。夕暮れ時は富士山のシルエットが美しく、景勝地としても有名。上級者向けの磯釣り場。フカセ釣りや穴釣り・ブラクリといった釣り方で多くの釣り人が訪れます。カサゴやアオリイカやberaも狙えるため、ターゲットの幅が広いのが特徴です。岩礁帯が発達しており、大物の根魚が潜む好ポイントです。",
     latitude: 35.25280, longitude: 139.5700, address: "〒240-0116 神奈川県葉山町下山口長者ヶ崎",
     accessInfo: "JR逗子駅からバス「長者ヶ崎」下車すぐ。横横道路逗子ICから約20分。",
     region: region("r7"), spotType: "rocky", difficulty: "advanced",
@@ -292,7 +292,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   // ===== 鎌倉エリア (r7 湘南) =====
   {
     id: "ss7", name: "稲村ヶ崎", slug: "inamuragasaki",
-    description: "鎌倉の名勝・稲村ヶ崎の磯場。クロダイやメジナのフカセ釣りの名所。相模湾に突き出した地形で潮通しが良く、秋にはカマスの回遊もある。新田義貞の古戦場としても有名。",
+    description: "鎌倉の名勝・稲村ヶ崎の磯場。クロダイやメジナのフカセ釣りの名所。相模湾に突き出した地形で潮通しが良く、秋にはカマスの回遊もある。新田義貞の古戦場としても有名。穴釣り・ルアー・サビキと釣り方のバリエーションが豊富です。カサゴなども回遊しており、シーズンを通して楽しめます。中級者以上が腕を試すのに適した環境と魚影が魅力です。",
     latitude: 35.3030, longitude: 139.5220, address: "〒248-0024 神奈川県鎌倉市稲村ガ崎",
     accessInfo: "江ノ電「稲村ヶ崎」駅から徒歩5分。",
     region: region("r7"), spotType: "rocky", difficulty: "intermediate",
@@ -322,7 +322,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss8", name: "由比ヶ浜", slug: "yuigahama",
-    description: "鎌倉を代表する広大な砂浜。投げ釣りでキスやイシモチが狙える。秋冬はヒラメやマゴチのフラットフィッシュゲームも人気。海水浴シーズン外が釣りのベストタイム。",
+    description: "鎌倉を代表する広大な砂浜。投げ釣りでキスやイシモチが狙える。秋冬はヒラメやマゴチのフラットフィッシュゲームも人気。海水浴シーズン外が釣りのベストタイム。ルアー・泳がせのほか、ルアーでも好釣果が報告されています。時期によってはシロギス・シーバスの釣果も期待できます。ビギナーにもやさしいフィールドで、釣り入門にもおすすめの場所です。",
     latitude: 35.3050, longitude: 139.5380, address: "〒248-0016 神奈川県鎌倉市長谷2丁目",
     accessInfo: "江ノ電「由比ヶ浜」駅から徒歩5分。JR鎌倉駅から徒歩15分。",
     region: region("r7"), spotType: "beach", difficulty: "beginner",
@@ -351,7 +351,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss9", name: "材木座海岸", slug: "zaimokuza-beach",
-    description: "鎌倉の東寄りに位置する穏やかな砂浜。遠浅でちょい投げのキスやハゼが手軽に釣れる。和賀江島の磯場も隣接し、根魚も狙える。ファミリーフィッシングに最適。",
+    description: "鎌倉の東寄りに位置する穏やかな砂浜。遠浅でちょい投げのキスやハゼが手軽に釣れる。和賀江島の磯場も隣接し、根魚も狙える。ファミリーフィッシングに最適。穴釣り（和賀江島）など複数の釣法に対応した好ポイントです。シロギス・カサゴといった魚種の実績もあります。駐車場とトイレが利用可能で、実用面でも優れた釣り場です。",
     latitude: 35.3010, longitude: 139.5530, address: "〒248-0013 神奈川県鎌倉市材木座",
     accessInfo: "JR鎌倉駅から徒歩約20分。バス「材木座」下車すぐ。",
     region: region("r7"), spotType: "beach", difficulty: "beginner",
@@ -380,7 +380,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss10", name: "腰越漁港", slug: "koshigoe-port",
-    description: "江の島の東側に位置する小さな漁港。堤防からサビキでアジやイワシが手軽に釣れる。しらす漁で有名な漁港で、地元感あふれる雰囲気。江ノ電腰越駅からのアクセスも良い。",
+    description: "江の島の東側に位置する小さな漁港。堤防からサビキでアジやイワシが手軽に釣れる。しらす漁で有名な漁港で、地元感あふれる雰囲気。江ノ電腰越駅からのアクセスも良い。サビキ釣りに加えてウキ釣りも楽しめるため、一日中飽きません。サヨリの好ポイントとしても地元で知られています。初めて竿を出す方にも向いており、子供連れでの釣行にも適しています。",
     latitude: 35.3080, longitude: 139.4920, address: "〒248-0033 神奈川県鎌倉市腰越2丁目9-1",
     accessInfo: "江ノ電「腰越」駅から徒歩5分。",
     region: region("r7"), spotType: "port", difficulty: "beginner",
@@ -409,7 +409,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss11", name: "七里ヶ浜", slug: "shichirigahama",
-    description: "江の島と稲村ヶ崎の間に広がるサーフスポット。ルアーフィッシングでシーバスやヒラメが狙える。サーファーが多いため釣りは早朝か夕方以降がおすすめ。",
+    description: "江の島と稲村ヶ崎の間に広がるサーフスポット。ルアーフィッシングでシーバスやヒラメが狙える。サーファーが多いため釣りは早朝か夕方以降がおすすめ。投げ釣りでも好釣果が報告されています。時期によってはシロギスの釣果も期待できます。ある程度の経験を積んだ釣り人にとってやりがいのあるフィールドです。駐車場とトイレとコンビニが利用可能で、実用面でも優れた釣り場です。",
     latitude: 35.30670, longitude: 139.511200, address: "〒248-0026 神奈川県鎌倉市七里ガ浜東2丁目1 七里ガ浜",
     accessInfo: "江ノ電「七里ヶ浜」駅から徒歩5分。",
     region: region("r7"), spotType: "beach", difficulty: "intermediate",
@@ -439,7 +439,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   // ===== 藤沢・茅ヶ崎エリア (r7 湘南) =====
   {
     id: "ss12", name: "江の島・表磯", slug: "enoshima-omote-iso",
-    description: "江の島南側に広がる本格磯釣り場。クロダイ、メジナのフカセ釣りの聖地。潮通しが抜群で大型も期待できる。岩場を降りる必要があり上級者向け。",
+    description: "江の島南側に広がる本格磯釣り場。クロダイ、メジナのフカセ釣りの聖地。潮通しが抜群で大型も期待できる。岩場を降りる必要があり上級者向け。穴釣りやエギングなど複数の釣法に対応した好ポイントです。カサゴ・アオリイカ・beraといった魚種の実績もあります。磯場特有の複雑な地形が根魚の絶好の住処となっています。",
     latitude: 35.2950, longitude: 139.4770, address: "〒251-0036 神奈川県藤沢市江の島2丁目5",
     accessInfo: "小田急片瀬江ノ島駅から徒歩約30分。江の島島内を南側に進む。",
     region: region("r7"), spotType: "rocky", difficulty: "advanced",
@@ -477,7 +477,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss13", name: "江の島・裏磯", slug: "enoshima-ura-iso",
-    description: "江の島の南西側に位置する磯。表磯より更に潮通しが良く、青物の回遊も期待できる。カゴ釣りでイナダやマダイを狙う釣り師も多い。アクセスは険しいが魚影は濃い。",
+    description: "江の島の南西側に位置する磯。表磯より更に潮通しが良く、青物の回遊も期待できる。カゴ釣りでイナダやマダイを狙う釣り師も多い。アクセスは険しいが魚影は濃い。カゴ釣り・ショアジギのほか、フカセ釣りでも好釣果が報告されています。時期によってはクロダイ・メジナ・soudagatuoの釣果も期待できます。経験豊富なアングラーに人気の本格的なフィールドです。",
     latitude: 35.2940, longitude: 139.4740, address: "〒251-0036 神奈川県藤沢市江の島2丁目5",
     accessInfo: "小田急片瀬江ノ島駅から徒歩約40分。稚児ヶ淵方面から磯に降りる。",
     region: region("r7"), spotType: "rocky", difficulty: "advanced",
@@ -509,7 +509,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss14", name: "湘南港北緑地広場", slug: "shonan-ko-kita-ryokuchi",
-    description: "江の島ヨットハーバー隣の緑地護岸。柵付きで足場が良く、ファミリーに大人気。サビキでアジやイワシ、ちょい投げでキスが釣れる。駐車場・トイレ完備の優良ポイント。",
+    description: "江の島ヨットハーバー隣の緑地護岸。柵付きで足場が良く、ファミリーに大人気。サビキでアジやイワシ、ちょい投げでキスが釣れる。駐車場・トイレ完備の優良ポイント。サビキ釣り・ウキ釣りと釣り方のバリエーションが豊富です。シロギスやサヨリやカサゴなども回遊しており、シーズンを通して楽しめます。堤防からの釣りは足場の安定感と魚種の豊富さが両立するのが強みです。",
     latitude: 35.3010, longitude: 139.4830, address: "〒251-0036 神奈川県藤沢市江の島1丁目1-2",
     accessInfo: "小田急片瀬江ノ島駅から徒歩10分。江の島大橋を渡ってすぐ左。",
     region: region("r7"), spotType: "breakwater", difficulty: "beginner",
@@ -547,7 +547,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss15", name: "片瀬西浜", slug: "katase-nishihama",
-    description: "片瀬海岸の西側に広がるサーフエリア。投げ釣りでキスが狙え、秋にはショアジギでイナダの回遊も。江の島を背景にした景観が良い。境川河口との合流点も好ポイント。",
+    description: "片瀬海岸の西側に広がるサーフエリア。投げ釣りでキスが狙え、秋にはショアジギでイナダの回遊も。江の島を背景にした景観が良い。境川河口との合流点も好ポイント。ルアーのほか、穴釣りでも好釣果が報告されています。時期によってはシロギス・シーバス・カサゴの釣果も期待できます。手軽に楽しめる釣り場なので、家族のレジャーにもおすすめです。",
     latitude: 35.3080, longitude: 139.4870, address: "〒251-0035 神奈川県藤沢市片瀬海岸3丁目",
     accessInfo: "小田急片瀬江ノ島駅から徒歩3分。",
     region: region("r7"), spotType: "beach", difficulty: "beginner",
@@ -581,7 +581,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss16", name: "鵠沼海岸", slug: "kugenuma-beach",
-    description: "湘南を代表するサーフスポット。サーファーが多いが、早朝・夕方はキス投げ釣りが楽しめる。引地川河口付近はシーバスポイントとしても知られる。",
+    description: "湘南を代表するサーフスポット。サーファーが多いが、早朝・夕方はキス投げ釣りが楽しめる。引地川河口付近はシーバスポイントとしても知られる。ルアーなど複数の釣法に対応した好ポイントです。シロギス・magochiといった魚種の実績もあります。初めて竿を出す方にも向いており、子供連れでの釣行にも適しています。",
     latitude: 35.3130, longitude: 139.4680, address: "〒251-0037 神奈川県藤沢市鵠沼海岸",
     accessInfo: "小田急「鵠沼海岸」駅から徒歩10分。",
     region: region("r7"), spotType: "beach", difficulty: "beginner",
@@ -610,7 +610,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss17", name: "辻堂海岸", slug: "tsujido-beach",
-    description: "辻堂海浜公園前に広がる砂浜。サーフフィッシングでキスやヒラメが狙える広大なビーチ。駐車場やトイレなど設備が充実しており、初心者のサーフデビューにも最適。",
+    description: "辻堂海浜公園前に広がる砂浜。サーフフィッシングでキスやヒラメが狙える広大なビーチ。駐車場やトイレなど設備が充実しており、初心者のサーフデビューにも最適。投げ釣りのほか、ルアーでも好釣果が報告されています。時期によってはシロギス・シーバス・magochiの釣果も期待できます。釣り場への入場は無料で、コストを抑えた釣行が可能です。",
     latitude: 35.3190, longitude: 139.4470, address: "〒251-0046 神奈川県藤沢市辻堂西海岸3丁目",
     accessInfo: "JR辻堂駅南口からバス「辻堂海浜公園前」下車すぐ。",
     region: region("r7"), spotType: "beach", difficulty: "beginner",
@@ -641,7 +641,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss18", name: "茅ヶ崎漁港", slug: "chigasaki-port",
-    description: "茅ヶ崎のシンボル・えぼし岩を望む漁港。堤防からサビキでアジやイワシ、投げ釣りでキスが狙える。烏帽子岩への渡船の拠点でもある。足場が良くファミリーにも人気。",
+    description: "茅ヶ崎のシンボル・えぼし岩を望む漁港。堤防からサビキでアジやイワシ、投げ釣りでキスが狙える。烏帽子岩への渡船の拠点でもある。足場が良くファミリーにも人気。サビキ釣り・ルアー・サビキと釣り方のバリエーションが豊富です。シロギスやカマスやコノシロなども回遊しており、シーズンを通して楽しめます。駐車場・トイレが整備されており、快適に釣行できます。",
     latitude: 35.3200, longitude: 139.4100, address: "〒253-0061 神奈川県茅ヶ崎市南湖4丁目24-14",
     accessInfo: "JR茅ヶ崎駅南口からバス「茅ヶ崎漁港前」下車すぐ。",
     region: region("r7"), spotType: "port", difficulty: "beginner",
@@ -678,7 +678,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss19", name: "茅ヶ崎ヘッドランド", slug: "chigasaki-headland",
-    description: "茅ヶ崎海岸に設置されたT字型突堤群。周辺はキスの好ポイントで、秋にはヒラメやマゴチも。ヘッドランド周辺は潮の流れが変化し魚が集まりやすい地形。",
+    description: "茅ヶ崎海岸に設置されたT字型突堤群。周辺はキスの好ポイントで、秋にはヒラメやマゴチも。ヘッドランド周辺は潮の流れが変化し魚が集まりやすい地形。投げ釣りに加えてルアー・泳がせも楽しめるため、一日中飽きません。シロギス・シーバス・magochiの好ポイントとしても地元で知られています。釣り慣れた方であればテクニック次第で良型が期待できるポイントです。",
     latitude: 35.3220, longitude: 139.3980, address: "〒253-0054 神奈川県茅ヶ崎市東海岸南6丁目4",
     accessInfo: "JR茅ヶ崎駅南口からバス約15分。柳島方面へ。",
     region: region("r7"), spotType: "beach", difficulty: "intermediate",
@@ -715,7 +715,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss20", name: "柳島海岸", slug: "yanagishima-beach",
-    description: "相模川河口西側に広がるサーフエリア。キスの投げ釣りで有名で、大会も開催される。河口部ではシーバスも狙える。茅ヶ崎と平塚の境に位置する穴場的ビーチ。",
+    description: "相模川河口西側に広がるサーフエリア。キスの投げ釣りで有名で、大会も開催される。河口部ではシーバスも狙える。茅ヶ崎と平塚の境に位置する穴場的ビーチ。ルアーに加えて穴釣りも楽しめるため、一日中飽きません。シロギス・magochi・カサゴの好ポイントとしても地元で知られています。手軽に楽しめる釣り場なので、家族のレジャーにもおすすめです。",
     latitude: 35.3260, longitude: 139.3870, address: "〒253-0063 神奈川県茅ヶ崎市柳島海岸",
     accessInfo: "JR茅ヶ崎駅からバス「浜見平団地」下車徒歩10分。",
     region: region("r7"), spotType: "beach", difficulty: "beginner",
@@ -750,7 +750,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss21", name: "相模川河口", slug: "sagamigawa-kakou",
-    description: "相模川が相模湾に注ぐ河口部。シーバスの超一級ポイントで、秋にはランカーサイズも。ハゼやキスも狙え、多彩な釣りが楽しめる。平塚側・茅ヶ崎側の両岸から狙える。",
+    description: "相模川が相模湾に注ぐ河口部。シーバスの超一級ポイントで、秋にはランカーサイズも。ハゼやキスも狙え、多彩な釣りが楽しめる。平塚側・茅ヶ崎側の両岸から狙える。ルアーに加えてちょい投げも楽しめるため、一日中飽きません。シロギス・アユの好ポイントとしても地元で知られています。経験者が通い込むだけの実力を秘めた釣り場です。",
     latitude: 35.3280, longitude: 139.3790, address: "〒253-0063 神奈川県茅ヶ崎市柳島海岸15-8",
     accessInfo: "JR平塚駅南口からバス「須賀港」下車徒歩10分。",
     region: region("r7"), spotType: "beach", difficulty: "intermediate",
@@ -783,7 +783,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   // ===== 平塚・大磯エリア (r7 湘南) =====
   {
     id: "ss22", name: "平塚新港（ひらつかタマ三郎漁港）", slug: "hiratsuka-shinko",
-    description: "平塚市のメイン漁港。愛称「ひらつかタマ三郎漁港」。堤防釣りでアジ・サバのサビキが好調。秋冬はタチウオの名所としても有名。釣り場が広く混雑しにくい。",
+    description: "平塚市のメイン漁港。愛称「ひらつかタマ三郎漁港」。堤防釣りでアジ・サバのサビキが好調。秋冬はタチウオの名所としても有名。釣り場が広く混雑しにくい。サビキ釣りに加えてウキ釣り・テンヤも楽しめるため、一日中飽きません。シロギス・コノシロの好ポイントとしても地元で知られています。ビギナーにもやさしいフィールドで、釣り入門にもおすすめの場所です。",
     latitude: 35.3190, longitude: 139.3590, address: "〒254-0803 神奈川県平塚市千石河岸57",
     accessInfo: "JR平塚駅南口からバス「須賀港」下車徒歩5分。",
     region: region("r7"), spotType: "port", difficulty: "beginner",
@@ -817,7 +817,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss23", name: "平塚海岸", slug: "hiratsuka-beach",
-    description: "平塚市内を流れる花水川河口を含む広大なサーフ。投げ釣りでキスの数釣りが楽しめる湘南屈指のサーフポイント。秋冬はショアジギでイナダやサワラの回遊も。",
+    description: "平塚市内を流れる花水川河口を含む広大なサーフ。投げ釣りでキスの数釣りが楽しめる湘南屈指のサーフポイント。秋冬はショアジギでイナダやサワラの回遊も。ルアーに加えて投げ釣り（外道）も楽しめるため、一日中飽きません。シロギス・ヒラメ・magochiの好ポイントとしても地元で知られています。経験者が通い込むだけの実力を秘めた釣り場です。",
     latitude: 35.3210, longitude: 139.3480, address: "〒254-0803 神奈川県平塚市千石河岸49-24",
     accessInfo: "JR平塚駅南口から徒歩約20分。湘南海岸公園方面。",
     region: region("r7"), spotType: "beach", difficulty: "intermediate",
@@ -848,7 +848,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss24", name: "花水川河口", slug: "hanamizugawa-kakou",
-    description: "金目川と花水川の合流地点が相模湾に注ぐ河口。シーバスの実績が高く、秋にはランカーも出る。ハゼ釣りのポイントとしても有名。平塚海岸のサーフとも連続する。",
+    description: "金目川と花水川の合流地点が相模湾に注ぐ河口。シーバスの実績が高く、秋にはランカーも出る。ハゼ釣りのポイントとしても有名。平塚海岸のサーフとも連続する。ルアーやちょい投げなど複数の釣法に対応した好ポイントです。シロギス・magochiといった魚種の実績もあります。ある程度の経験を積んだ釣り人にとってやりがいのあるフィールドです。",
     latitude: 35.3230, longitude: 139.3420, address: "〒254-0814 神奈川県平塚市花水台1",
     accessInfo: "JR平塚駅南口からバス「花水台」下車徒歩10分。",
     region: region("r7"), spotType: "beach", difficulty: "intermediate",
@@ -878,7 +878,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss25", name: "大磯海岸（照ヶ崎）", slug: "oiso-terugasaki",
-    description: "大磯港西側に広がる照ヶ崎海岸。磯場と砂浜が混在し、クロダイのフカセ釣りやキスの投げ釣りが楽しめる。アオバトの飛来地としても有名な景勝地。",
+    description: "大磯港西側に広がる照ヶ崎海岸。磯場と砂浜が混在し、クロダイのフカセ釣りやキスの投げ釣りが楽しめる。アオバトの飛来地としても有名な景勝地。穴釣りに加えてウキフカセも楽しめるため、一日中飽きません。シロギス・カサゴ・メジナの好ポイントとしても地元で知られています。経験者が通い込むだけの実力を秘めた釣り場です。",
     latitude: 35.3050, longitude: 139.3100, address: "〒255-0003 神奈川県大磯町大磯",
     accessInfo: "JR大磯駅から徒歩10分。大磯港から西へ徒歩5分。",
     region: region("r7"), spotType: "rocky", difficulty: "intermediate",
@@ -914,7 +914,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   // ===== 西湘エリア (r47 西湘) =====
   {
     id: "ss26", name: "二宮海岸", slug: "ninomiya-beach",
-    description: "西湘バイパス沿いの砂利浜。投げ釣りでキスやカレイが狙え、秋にはショアジギでイナダも。吾妻山公園を背にした風光明媚なポイント。混雑が少なくのんびり釣りができる。",
+    description: "西湘バイパス沿いの砂利浜。投げ釣りでキスやカレイが狙え、秋にはショアジギでイナダも。吾妻山公園を背にした風光明媚なポイント。混雑が少なくのんびり釣りができる。シロギスの好ポイントとしても地元で知られています。初心者や家族連れでも安心して釣りを楽しめる環境が揃っています。駐車場やコンビニが近くにあるため長時間の釣りでも安心です。",
     latitude: 35.3020, longitude: 139.2580, address: "〒259-0124 神奈川県二宮町山西",
     accessInfo: "JR二宮駅から徒歩15分。西湘バイパス二宮IC付近。",
     region: region("r47"), spotType: "beach", difficulty: "beginner",
@@ -943,7 +943,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss27", name: "酒匂海岸", slug: "sakawa-beach",
-    description: "酒匂川河口を中心とした広大なサーフエリア。キスの投げ釣りの超メジャーポイントで大会も多数開催。河口ではシーバスも好調。秋のショアジギで青物も狙える。",
+    description: "酒匂川河口を中心とした広大なサーフエリア。キスの投げ釣りの超メジャーポイントで大会も多数開催。河口ではシーバスも好調。秋のショアジギで青物も狙える。ルアーや投げ釣り（外道）といった釣り方で多くの釣り人が訪れます。シロギスやイナダやmagochiも狙えるため、ターゲットの幅が広いのが特徴です。釣り慣れた方であればテクニック次第で良型が期待できるポイントです。",
     latitude: 35.2670, longitude: 139.1780, address: "〒256-0817 神奈川県小田原市西酒匂1丁目",
     accessInfo: "JR鴨宮駅から徒歩約20分。西湘バイパス小田原IC付近。",
     region: region("r47"), spotType: "beach", difficulty: "intermediate",
@@ -974,7 +974,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss28", name: "米神漁港", slug: "yonegami-port",
-    description: "根府川と早川の間にある小さな漁港。水深があり回遊魚の寄りが良い。アジのサビキ釣りやカゴ釣りでイナダも。穴場的な存在で混雑が少ない。",
+    description: "根府川と早川の間にある小さな漁港。水深があり回遊魚の寄りが良い。アジのサビキ釣りやカゴ釣りでイナダも。穴場的な存在で混雑が少ない。穴釣りといった釣り方で多くの釣り人が訪れます。カサゴも狙えるため、ターゲットの幅が広いのが特徴です。釣り慣れた方であればテクニック次第で良型が期待できるポイントです。駐車場が整備されており、快適に釣行できます。",
     latitude: 35.2170, longitude: 139.1440, address: "〒250-0023 神奈川県小田原市米神476",
     accessInfo: "JR根府川駅から徒歩約20分。国道135号沿い。",
     region: region("r47"), spotType: "port", difficulty: "intermediate",
@@ -1003,7 +1003,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss29", name: "根府川港", slug: "nebukawa-port",
-    description: "JR根府川駅下の小さな港。水深が深く、カゴ釣りでイナダやマダイが狙える。堤防からのサビキでアジも好調。相模湾の絶景を望む隠れた好ポイント。",
+    description: "JR根府川駅下の小さな港。水深が深く、カゴ釣りでイナダやマダイが狙える。堤防からのサビキでアジも好調。相模湾の絶景を望む隠れた好ポイント。サビキ釣りやカゴ釣り・ショアジギといった釣り方で多くの釣り人が訪れます。中級者以上が腕を試すのに適した環境と魚影が魅力です。駐車場が近くにあるため長時間の釣りでも安心です。",
     latitude: 35.2100, longitude: 139.1370, address: "〒250-0023 神奈川県小田原市米神481",
     accessInfo: "JR根府川駅から徒歩約15分（急坂あり）。国道135号から入る。",
     region: region("r47"), spotType: "port", difficulty: "intermediate",
@@ -1032,7 +1032,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss30", name: "江之浦港", slug: "enoura-port",
-    description: "小田原市江之浦の漁港。堤防周辺は根が荒くカサゴやメバルの宝庫。エギングでアオリイカも実績あり。小田原方面の漁港の中では比較的アクセスしやすい。",
+    description: "小田原市江之浦の漁港。堤防周辺は根が荒くカサゴやメバルの宝庫。エギングでアオリイカも実績あり。小田原方面の漁港の中では比較的アクセスしやすい。穴釣り・ブラクリに加えてメバリングも楽しめるため、一日中飽きません。中級者以上が腕を試すのに適した環境と魚影が魅力です。駐車場が近くにあるため長時間の釣りでも安心です。",
     latitude: 35.2020, longitude: 139.1280, address: "〒250-0025 神奈川県小田原市江之浦",
     accessInfo: "JR根府川駅から徒歩約25分。国道135号から入る。",
     region: region("r47"), spotType: "port", difficulty: "intermediate",
@@ -1061,7 +1061,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss31", name: "真鶴岬（三ツ石海岸）", slug: "manazuru-misaki-mitsuishi",
-    description: "真鶴半島の先端に位置する景勝地。三ツ石を望む磯場は潮通し抜群で、クロダイ・メジナのフカセ釣りの聖地。カゴ釣りでイナダやマダイも。本格磯釣り師に人気。",
+    description: "真鶴半島の先端に位置する景勝地。三ツ石を望む磯場は潮通し抜群で、クロダイ・メジナのフカセ釣りの聖地。カゴ釣りでイナダやマダイも。本格磯釣り師に人気。カゴ釣り・ルアーに加えてウキフカセも楽しめるため、一日中飽きません。イシダイ・カサゴ・メバルの好ポイントとしても地元で知られています。経験豊富なアングラーに人気の本格的なフィールドです。",
     latitude: 35.1530, longitude: 139.1370, address: "〒259-0201 神奈川県真鶴町真鶴1175-1",
     accessInfo: "JR真鶴駅からバス「ケープ真鶴」下車徒歩10分。真鶴道路出口から約10分。",
     region: region("r47"), spotType: "rocky", difficulty: "advanced",
@@ -1100,7 +1100,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss32", name: "岩海岸", slug: "iwa-beach",
-    description: "真鶴駅から最も近いビーチ。小さな入り江で波が穏やか。夏は海水浴場、それ以外のシーズンはキスの投げ釣りやシュノーケリングが楽しめる。家族連れに最適。",
+    description: "真鶴駅から最も近いビーチ。小さな入り江で波が穏やか。夏は海水浴場、それ以外のシーズンはキスの投げ釣りやシュノーケリングが楽しめる。家族連れに最適。穴釣りでも好釣果が報告されています。時期によってはシロギス・カサゴの釣果も期待できます。駐車場・トイレが整備されており、快適に釣行できます。釣り場への入場は無料で、コストを抑えた釣行が可能です。",
     latitude: 35.1610, longitude: 139.1340, address: "〒259-0202 神奈川県真鶴町岩",
     accessInfo: "JR真鶴駅から徒歩約15分。",
     region: region("r47"), spotType: "beach", difficulty: "beginner",
@@ -1128,7 +1128,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss33", name: "福浦港", slug: "fukuura-port",
-    description: "真鶴半島の東側付け根に位置する漁港。水深があり魚種豊富。アジのサビキ釣りからカゴ釣り、エギングまで多彩な釣りが楽しめる。堤防が広く釣り座が確保しやすい。",
+    description: "真鶴半島の東側付け根に位置する漁港。水深があり魚種豊富。アジのサビキ釣りからカゴ釣り、エギングまで多彩な釣りが楽しめる。堤防が広く釣り座が確保しやすい。穴釣りや胴突き仕掛けなど複数の釣法に対応した好ポイントです。アオリイカ・カサゴ・カワハギといった魚種の実績もあります。エントリーしやすい釣り場で、初心者が最初の一匹を手にするのにぴったりです。",
     latitude: 35.1660, longitude: 139.1490, address: "〒259-0311 神奈川県湯河原町福浦",
     accessInfo: "JR真鶴駅から徒歩約20分。国道135号から福浦方面へ。",
     region: region("r47"), spotType: "port", difficulty: "beginner",
