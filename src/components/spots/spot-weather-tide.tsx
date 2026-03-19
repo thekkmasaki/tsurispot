@@ -34,6 +34,13 @@ interface SpotWeatherTideProps {
   spotName: string;
 }
 
+interface HourlyWeatherData {
+  temp: number;
+  weatherCode: number;
+  windSpeed: number; // km/h
+  windDirection: number;
+}
+
 interface DailyWeatherData {
   weatherCode: number;
   maxTemp: number;
@@ -43,6 +50,7 @@ interface DailyWeatherData {
   windSpeedMax: number;
   windDirection: number;
   seaTemp: number | null;
+  hourly: HourlyWeatherData[]; // 24時間分
 }
 
 interface WeatherData {
@@ -238,7 +246,10 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [selectedHour, setSelectedHour] = useState<number | null>(null); // null=終日
+  const [expandedGroup, setExpandedGroup] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const hourScrollRef = useRef<HTMLDivElement>(null);
 
   // 14日間の日付
   const dates = generate14Days();
@@ -247,21 +258,34 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
   // 選択日の潮汐情報
   const tideInfo = getTideInfo(getMoonAge(selectedDate), lng);
 
+  // 時間帯グループ（釣り人向け）
+  const TIME_GROUPS = [
+    { key: "dawn", label: "朝マズメ", hours: [4, 5, 6, 7], icon: "🌅" },
+    { key: "morning", label: "午前", hours: [8, 9, 10, 11], icon: "☀️" },
+    { key: "afternoon", label: "午後", hours: [12, 13, 14, 15], icon: "🌤" },
+    { key: "dusk", label: "夕マズメ", hours: [16, 17, 18, 19], icon: "🌇" },
+    { key: "night", label: "夜", hours: [20, 21, 22, 23, 0, 1, 2, 3], icon: "🌙" },
+  ] as const;
+
+  // 今日の場合、現在時刻に最も近い時間をデフォルト選択
+  const currentHourRef = useRef(new Date().getHours());
+
   // 日付ヘッダーテキスト
   const getHeaderText = useCallback(() => {
-    if (selectedIndex === 0) return "今日のコンディション";
+    const hourLabel = selectedHour !== null ? ` ${selectedHour}時` : "";
+    if (selectedIndex === 0) return `今日${hourLabel}のコンディション`;
     const m = selectedDate.getMonth() + 1;
     const d = selectedDate.getDate();
     const dow = DAY_LABELS[selectedDate.getDay()];
-    return `${m}/${d}(${dow})のコンディション`;
-  }, [selectedIndex, selectedDate]);
+    return `${m}/${d}(${dow})${hourLabel}のコンディション`;
+  }, [selectedIndex, selectedDate, selectedHour]);
 
   useEffect(() => {
     async function fetchWeather() {
       try {
-        // 天気API（14日間予報）
+        // 天気API（14日間予報 + 時間別）
         const weatherPromise = fetch(
-          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,wind_speed_10m_max,wind_direction_10m_dominant&timezone=Asia%2FTokyo&forecast_days=14`
+          `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m&hourly=temperature_2m,weather_code,wind_speed_10m,wind_direction_10m&daily=weather_code,temperature_2m_max,temperature_2m_min,sunrise,sunset,wind_speed_10m_max,wind_direction_10m_dominant&timezone=Asia%2FTokyo&forecast_days=14`
         ).then(r => r.json());
 
         // 海水温API（Marine API、14日間）
@@ -271,10 +295,22 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
 
         const [data, marine] = await Promise.all([weatherPromise, marinePromise]);
 
-        // 14日間のdailyデータを構築
+        // 14日間のdailyデータを構築（時間別データ含む）
         const dailyData: DailyWeatherData[] = [];
         const dailyCount = data.daily?.time?.length ?? 0;
         for (let i = 0; i < dailyCount; i++) {
+          // この日の時間別データ（24時間分）
+          const hourlyForDay: HourlyWeatherData[] = [];
+          const hourlyBase = i * 24;
+          for (let h = 0; h < 24; h++) {
+            const idx = hourlyBase + h;
+            hourlyForDay.push({
+              temp: data.hourly?.temperature_2m?.[idx] ?? 0,
+              weatherCode: data.hourly?.weather_code?.[idx] ?? 0,
+              windSpeed: data.hourly?.wind_speed_10m?.[idx] ?? 0,
+              windDirection: data.hourly?.wind_direction_10m?.[idx] ?? 0,
+            });
+          }
           dailyData.push({
             weatherCode: data.daily.weather_code[i],
             maxTemp: data.daily.temperature_2m_max[i],
@@ -284,6 +320,7 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
             windSpeedMax: data.daily.wind_speed_10m_max[i],
             windDirection: data.daily.wind_direction_10m_dominant[i],
             seaTemp: marine?.daily?.sea_surface_temperature_max?.[i] ?? null,
+            hourly: hourlyForDay,
           });
         }
 
@@ -306,12 +343,21 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
   // 選択日のデータ取得
   const isToday = selectedIndex === 0;
   const dailyData = weather?.daily[selectedIndex] ?? null;
+  const hourlyData = selectedHour !== null ? dailyData?.hourly?.[selectedHour] ?? null : null;
 
-  // 表示用の天気コード・温度・風速
-  const displayWeatherCode = isToday ? weather?.currentWeatherCode ?? dailyData?.weatherCode ?? 0 : dailyData?.weatherCode ?? 0;
-  const displayTemp = isToday ? weather?.currentTemp ?? 0 : null; // 未来日は現在気温なし
-  const displayWindSpeed = isToday ? weather?.currentWindSpeed ?? 0 : dailyData?.windSpeedMax ?? 0; // km/h
-  const displayWindDirection = isToday ? weather?.currentWindDirection ?? 0 : dailyData?.windDirection ?? 0;
+  // 表示用の天気コード・温度・風速（時間選択時はhourlyデータを優先）
+  const displayWeatherCode = selectedHour !== null && hourlyData
+    ? hourlyData.weatherCode
+    : isToday ? weather?.currentWeatherCode ?? dailyData?.weatherCode ?? 0 : dailyData?.weatherCode ?? 0;
+  const displayTemp = selectedHour !== null && hourlyData
+    ? hourlyData.temp
+    : isToday ? weather?.currentTemp ?? 0 : null;
+  const displayWindSpeed = selectedHour !== null && hourlyData
+    ? hourlyData.windSpeed
+    : isToday ? weather?.currentWindSpeed ?? 0 : dailyData?.windSpeedMax ?? 0;
+  const displayWindDirection = selectedHour !== null && hourlyData
+    ? hourlyData.windDirection
+    : isToday ? weather?.currentWindDirection ?? 0 : dailyData?.windDirection ?? 0;
 
   const weatherInfo = weather ? getWeatherInfo(displayWeatherCode) : null;
   const WeatherIcon = weatherInfo?.icon ?? Sun;
@@ -343,7 +389,7 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
           return (
             <button
               key={i}
-              onClick={() => setSelectedIndex(i)}
+              onClick={() => { setSelectedIndex(i); setSelectedHour(null); }}
               className={cn(
                 "flex-shrink-0 flex flex-col items-center justify-center rounded-lg px-2 py-1.5 min-w-[40px] transition-colors",
                 isSelected
@@ -381,6 +427,76 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
         })}
       </div>
 
+      {/* 時間帯セレクター */}
+      <div className="px-3 py-1.5 border-b space-y-1.5">
+        <div className="flex gap-1 overflow-x-auto scrollbar-hide" style={{ WebkitOverflowScrolling: "touch" }}>
+          <button
+            onClick={() => { setSelectedHour(null); setExpandedGroup(null); }}
+            className={cn(
+              "flex-shrink-0 rounded-full px-2.5 py-1 text-[11px] font-medium transition-colors",
+              selectedHour === null && expandedGroup === null
+                ? "bg-sky-600 text-white"
+                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+            )}
+          >
+            終日
+          </button>
+          {TIME_GROUPS.map((group) => {
+            const isActiveGroup = expandedGroup === group.key;
+            const hasSelectedHour = selectedHour !== null && (group.hours as readonly number[]).includes(selectedHour);
+            const isNowGroup = isToday && selectedHour === null && expandedGroup === null && (group.hours as readonly number[]).includes(currentHourRef.current);
+            return (
+              <button
+                key={group.key}
+                onClick={() => {
+                  if (isActiveGroup) {
+                    setExpandedGroup(null);
+                  } else {
+                    setExpandedGroup(group.key);
+                  }
+                }}
+                className={cn(
+                  "flex-shrink-0 rounded-full px-2.5 py-1 text-[11px] font-medium transition-colors whitespace-nowrap",
+                  hasSelectedHour
+                    ? "bg-sky-600 text-white"
+                    : isActiveGroup
+                    ? "bg-sky-100 text-sky-700 ring-1 ring-sky-400"
+                    : isNowGroup
+                    ? "bg-sky-50 text-sky-600 ring-1 ring-sky-300"
+                    : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                )}
+              >
+                {group.icon} {group.label}
+              </button>
+            );
+          })}
+        </div>
+        {/* 展開された時間帯の個別時刻 */}
+        {expandedGroup && (
+          <div ref={hourScrollRef} className="flex gap-1 overflow-x-auto scrollbar-hide" style={{ WebkitOverflowScrolling: "touch" }}>
+            {TIME_GROUPS.find(g => g.key === expandedGroup)?.hours.map((h) => {
+              const isNowHour = isToday && currentHourRef.current === h;
+              return (
+                <button
+                  key={h}
+                  onClick={() => setSelectedHour(h)}
+                  className={cn(
+                    "flex-shrink-0 rounded-full px-2 py-0.5 text-[11px] font-medium transition-colors min-w-[36px]",
+                    selectedHour === h
+                      ? "bg-sky-600 text-white"
+                      : isNowHour
+                      ? "bg-amber-100 text-amber-700 ring-1 ring-amber-400"
+                      : "bg-gray-50 text-gray-500 hover:bg-gray-200"
+                  )}
+                >
+                  {h}時
+                </button>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
       <CardContent className="p-4">
         <div className="grid grid-cols-2 gap-4">
           {/* 天気セクション */}
@@ -399,7 +515,12 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
                 <div className="flex items-center gap-2">
                   <WeatherIcon className={cn("h-8 w-8", weatherInfo?.color)} />
                   <div>
-                    {isToday ? (
+                    {selectedHour !== null ? (
+                      <>
+                        <div className="text-2xl font-bold">{displayTemp}°</div>
+                        <div className="text-xs text-muted-foreground">{weatherInfo?.label}</div>
+                      </>
+                    ) : isToday ? (
                       <>
                         <div className="text-2xl font-bold">{displayTemp}°</div>
                         <div className="text-xs text-muted-foreground">{weatherInfo?.label}</div>
@@ -415,12 +536,17 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
                   </div>
                 </div>
                 <div className="space-y-1 text-xs text-muted-foreground">
-                  {isToday && (
+                  {selectedHour !== null ? (
+                    <div className="flex items-center gap-1.5">
+                      <ThermometerSun className="h-3 w-3" />
+                      <span>気温 {displayTemp}°C（日中 {dailyData.minTemp}〜{dailyData.maxTemp}°C）</span>
+                    </div>
+                  ) : isToday ? (
                     <div className="flex items-center gap-1.5">
                       <ThermometerSun className="h-3 w-3" />
                       <span>気温 {dailyData.minTemp}〜{dailyData.maxTemp}°C</span>
                     </div>
-                  )}
+                  ) : null}
                   {dailyData.seaTemp !== null && (
                     <div className="flex items-center gap-1.5">
                       <ThermometerSnowflake className="h-3 w-3 text-cyan-500" />
@@ -436,7 +562,9 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
                   </div>
                   <div className="flex items-center gap-1.5">
                     <Wind className="h-3 w-3" />
-                    {isToday ? (
+                    {selectedHour !== null ? (
+                      <span>風速 {(displayWindSpeed / 3.6).toFixed(1)}m/s</span>
+                    ) : isToday ? (
                       <span>風速 {(displayWindSpeed / 3.6).toFixed(1)}m/s</span>
                     ) : (
                       <span>最大風速 {(dailyData.windSpeedMax / 3.6).toFixed(1)}m/s</span>
