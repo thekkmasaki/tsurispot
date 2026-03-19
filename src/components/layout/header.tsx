@@ -26,13 +26,14 @@ import {
 import { cn } from "@/lib/utils";
 import { SearchOverlayClient } from "./search-overlay-client";
 import { LineButton } from "./line-button";
-// メインナビ（常時表示：最大5個）
+// メインナビ（常時表示：最大6個）
 const mainNavItems = [
   { href: "/spots", label: "スポット", icon: MapPin },
   { href: "/map", label: "地図", icon: Map },
   { href: "/fish", label: "図鑑", icon: BookOpen },
   { href: "/ranking", label: "ランキング", icon: Trophy },
   { href: "/catchable-now", label: "今釣れる", icon: Fish },
+  { href: "/blog", label: "コラム", icon: FileText },
 ];
 
 // ドロップダウン「もっと見る」
@@ -40,7 +41,6 @@ const moreNavItems = [
   { href: "/methods", label: "釣り方ガイド", icon: Anchor },
   { href: "/area", label: "エリア一覧", icon: Compass },
   { href: "/area-guide", label: "エリアガイド記事", icon: MapPin },
-  { href: "/blog", label: "コラム", icon: FileText },
   { href: "/monthly", label: "月別釣りガイド", icon: Calendar },
   { href: "/guide", label: "釣りガイド", icon: GraduationCap },
   { href: "/bouzu-checker", label: "ボウズ確率チェッカー", icon: Target },

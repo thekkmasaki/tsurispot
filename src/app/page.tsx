@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
-import { getLatestBlogPostsAsync, BLOG_CATEGORIES } from "@/lib/data/blog";
+import { getLatestBlogPostsAsync, getBlogPostsByCategoryAsync, BLOG_CATEGORIES } from "@/lib/data/blog";
 import { prefectures } from "@/lib/data/prefectures";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
 import { Card, CardContent } from "@/components/ui/card";
@@ -22,6 +22,7 @@ import {
   Navigation,
   Star,
   Trophy,
+  GraduationCap,
 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { HomeSearchBar } from "@/components/home-search-bar";
@@ -198,7 +199,14 @@ export default async function Home() {
       mainImageUrl: s.mainImageUrl,
       fishNames: s.catchableFish.slice(0, 6).map((cf) => cf.fish.name),
     }));
-  const latestPosts = await getLatestBlogPostsAsync(3);
+  const latestPosts = await getLatestBlogPostsAsync(6);
+
+  // カテゴリ別おすすめ記事（AdSense対策: ブログコンテンツの露出強化）
+  const [beginnerPosts, techniquePosts, seasonalPosts] = await Promise.all([
+    getBlogPostsByCategoryAsync("beginner", 3),
+    getBlogPostsByCategoryAsync("technique", 3),
+    getBlogPostsByCategoryAsync("seasonal", 3),
+  ]);
 
   // Stats for hero section
   const totalSpots = fishingSpots.length;
@@ -884,7 +892,7 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 最新コラム */}
+      {/* 最新コラム（6件表示） */}
       {latestPosts.length > 0 && (
         <section className="bg-muted/50 py-8 sm:py-12">
           <div className="mx-auto max-w-5xl px-4 sm:px-6">
@@ -951,6 +959,159 @@ export default async function Home() {
               <Link href="/blog">
                 <Button variant="outline" className="min-h-[44px] gap-1">
                   すべてのコラムを見る
+                  <ArrowRight className="size-4" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* カテゴリ別おすすめ記事 */}
+      {(beginnerPosts.length > 0 || techniquePosts.length > 0 || seasonalPosts.length > 0) && (
+        <section className="py-8 sm:py-12">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6">
+            <h2 className="mb-6 text-xl font-bold tracking-tight text-pretty sm:mb-8 sm:text-3xl">
+              カテゴリ別おすすめ記事
+            </h2>
+
+            <div className="space-y-8 sm:space-y-10">
+              {/* 初心者向け */}
+              {beginnerPosts.length > 0 && (
+                <div>
+                  <div className="mb-4 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <GraduationCap className="size-5 text-green-600" />
+                      <h3 className="text-lg font-bold text-foreground">初心者向け</h3>
+                      <Badge variant="secondary" className="text-xs">おすすめ</Badge>
+                    </div>
+                    <Link
+                      href="/blog?category=beginner"
+                      className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
+                    >
+                      もっと見る
+                      <ChevronRight className="size-3.5" />
+                    </Link>
+                  </div>
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {beginnerPosts.map((post) => (
+                      <Link key={post.id} href={`/blog/${post.slug}`}>
+                        <Card className="group h-full transition-shadow hover:shadow-md">
+                          <CardContent className="flex h-full flex-col gap-2.5 p-4">
+                            <Badge variant="secondary" className="w-fit text-xs">
+                              {BLOG_CATEGORIES[post.category]}
+                            </Badge>
+                            <h4 className="text-sm font-semibold leading-snug group-hover:text-primary sm:text-base">
+                              {post.title}
+                            </h4>
+                            <p className="line-clamp-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                              {post.description}
+                            </p>
+                            <div className="flex items-center gap-1 text-sm font-medium text-primary">
+                              続きを読む
+                              <ChevronRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* テクニック */}
+              {techniquePosts.length > 0 && (
+                <div>
+                  <div className="mb-4 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Target className="size-5 text-blue-600" />
+                      <h3 className="text-lg font-bold text-foreground">テクニック</h3>
+                      <Badge variant="secondary" className="text-xs">スキルアップ</Badge>
+                    </div>
+                    <Link
+                      href="/blog?category=technique"
+                      className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
+                    >
+                      もっと見る
+                      <ChevronRight className="size-3.5" />
+                    </Link>
+                  </div>
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {techniquePosts.map((post) => (
+                      <Link key={post.id} href={`/blog/${post.slug}`}>
+                        <Card className="group h-full transition-shadow hover:shadow-md">
+                          <CardContent className="flex h-full flex-col gap-2.5 p-4">
+                            <Badge variant="secondary" className="w-fit text-xs">
+                              {BLOG_CATEGORIES[post.category]}
+                            </Badge>
+                            <h4 className="text-sm font-semibold leading-snug group-hover:text-primary sm:text-base">
+                              {post.title}
+                            </h4>
+                            <p className="line-clamp-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                              {post.description}
+                            </p>
+                            <div className="flex items-center gap-1 text-sm font-medium text-primary">
+                              続きを読む
+                              <ChevronRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* 季節の釣り */}
+              {seasonalPosts.length > 0 && (
+                <div>
+                  <div className="mb-4 flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Calendar className="size-5 text-orange-600" />
+                      <h3 className="text-lg font-bold text-foreground">季節の釣り</h3>
+                      <Badge variant="secondary" className="text-xs">旬の情報</Badge>
+                    </div>
+                    <Link
+                      href="/blog?category=seasonal"
+                      className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
+                    >
+                      もっと見る
+                      <ChevronRight className="size-3.5" />
+                    </Link>
+                  </div>
+                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {seasonalPosts.map((post) => (
+                      <Link key={post.id} href={`/blog/${post.slug}`}>
+                        <Card className="group h-full transition-shadow hover:shadow-md">
+                          <CardContent className="flex h-full flex-col gap-2.5 p-4">
+                            <Badge variant="secondary" className="w-fit text-xs">
+                              {BLOG_CATEGORIES[post.category]}
+                            </Badge>
+                            <h4 className="text-sm font-semibold leading-snug group-hover:text-primary sm:text-base">
+                              {post.title}
+                            </h4>
+                            <p className="line-clamp-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                              {post.description}
+                            </p>
+                            <div className="flex items-center gap-1 text-sm font-medium text-primary">
+                              続きを読む
+                              <ChevronRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* すべてのコラムへのリンク */}
+            <div className="mt-8 flex justify-center">
+              <Link href="/blog">
+                <Button variant="outline" size="lg" className="min-h-[44px] gap-2">
+                  <BookOpen className="size-4" />
+                  すべてのコラムを見る（{latestPosts.length}件以上）
                   <ArrowRight className="size-4" />
                 </Button>
               </Link>

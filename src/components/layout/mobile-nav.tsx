@@ -31,6 +31,7 @@ const mainNavItems = [
   { href: "/spots", label: "スポット", icon: MapPin },
   { href: "/map", label: "地図", icon: Map },
   { href: "/catchable-now", label: "今釣れる", icon: Fish },
+  { href: "/blog", label: "コラム", icon: FileText },
   { href: "/favorites", label: "お気に入り", icon: Heart },
 ];
 
@@ -41,7 +42,6 @@ const moreNavItems = [
   { href: "/methods", label: "釣り方", icon: Anchor },
   { href: "/area", label: "エリア一覧", icon: Compass },
   { href: "/area-guide", label: "エリアガイド", icon: MapPin },
-  { href: "/blog", label: "コラム", icon: FileText },
   { href: "/monthly", label: "月別ガイド", icon: Calendar },
   { href: "/guide", label: "釣りガイド", icon: GraduationCap },
   { href: "/shops", label: "釣具店ガイド", icon: Store },

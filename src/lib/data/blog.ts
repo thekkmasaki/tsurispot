@@ -2593,6 +2593,13 @@ export function getBlogPostsByCategory(category: BlogPost["category"]): BlogPost
   return blogPosts.filter((post) => post.category === category);
 }
 
+/** カテゴリで記事をフィルタ（microCMS含む全記事から） */
+export async function getBlogPostsByCategoryAsync(category: BlogPost["category"], count?: number): Promise<BlogPost[]> {
+  const all = await getAllBlogPosts();
+  const filtered = all.filter((post) => post.category === category);
+  return count ? filtered.slice(0, count) : filtered;
+}
+
 /** 最新順に取得 */
 export function getLatestBlogPosts(count: number = 3): BlogPost[] {
   return [...blogPosts]
@@ -2644,4 +2651,118 @@ export function getAdjacentPosts(post: BlogPost): { prev: BlogPost | null; next:
     prev: index > 0 ? sorted[index - 1] : null,
     next: index < sorted.length - 1 ? sorted[index + 1] : null,
   };
+}
+
+/**
+ * スポット詳細ページ向け関連ブログ記事を取得（同期版、静的記事のみ）
+ * マッチングロジック:
+ *   1. 同じ都道府県のブログ記事（タグに都道府県名・エリア名を含む）
+ *   2. 同じ釣り方（サビキ、投げ釣り等）に関するブログ記事
+ *   3. 同じスポットタイプ（堤防、磯、サーフ等）に関するブログ記事
+ *   4. 季節が近いブログ記事（現在月に対応）
+ * スコアリングで優先度をつけ、上位count件を返す。
+ */
+export function getRelatedBlogPostsForSpot(options: {
+  prefecture: string;
+  areaName: string;
+  spotType: string;
+  methods: string[];
+  fishNames: string[];
+  currentMonth: number;
+  count?: number;
+}): BlogPost[] {
+  const { prefecture, areaName, spotType, methods, fishNames, currentMonth, count = 5 } = options;
+
+  // スポットタイプ→タグ/タイトルマッチ用キーワード
+  const spotTypeKeywords: Record<string, string[]> = {
+    port: ["漁港", "港"],
+    beach: ["砂浜", "サーフ", "ビーチ"],
+    rocky: ["磯", "岩場", "地磯"],
+    river: ["川", "河川", "渓流", "河口"],
+    pier: ["桟橋", "釣り桟橋"],
+    breakwater: ["堤防", "防波堤", "波止"],
+  };
+
+  // 月→季節キーワード
+  const seasonKeywords: Record<number, string[]> = {
+    1: ["冬", "1月"], 2: ["冬", "2月"], 3: ["春", "3月"],
+    4: ["春", "4月"], 5: ["春", "5月"], 6: ["夏", "6月"],
+    7: ["夏", "7月"], 8: ["夏", "8月"], 9: ["秋", "9月"],
+    10: ["秋", "10月"], 11: ["秋", "11月"], 12: ["冬", "12月"],
+  };
+
+  const typeKws = spotTypeKeywords[spotType] ?? [];
+  const seasonKws = seasonKeywords[currentMonth] ?? [];
+
+  // 各釣り方のキーワード（methodフィールドの値をそのまま + よくある表記揺れ）
+  const methodKeywords = methods.flatMap((m) => {
+    const kws = [m];
+    if (m.includes("サビキ")) kws.push("サビキ");
+    if (m.includes("投げ")) kws.push("投げ釣り", "ちょい投げ", "サーフフィッシング");
+    if (m.includes("ルアー")) kws.push("ルアー", "ルアー釣り");
+    if (m.includes("エギング")) kws.push("エギング");
+    if (m.includes("ウキ")) kws.push("ウキ釣り", "ウキフカセ");
+    if (m.includes("穴釣り")) kws.push("穴釣り", "ブラクリ");
+    if (m.includes("メバリング")) kws.push("メバリング");
+    if (m.includes("アジング")) kws.push("アジング");
+    if (m.includes("ショアジギング")) kws.push("ショアジギング");
+    return kws;
+  });
+
+  const scored = blogPosts.map((post) => {
+    let score = 0;
+    const tagsAndTitle = [...post.tags, post.title].join(" ");
+
+    // 1. 都道府県・エリア名マッチ（最も関連性高い）
+    if (tagsAndTitle.includes(prefecture.replace("県", "").replace("府", "").replace("都", "").replace("道", ""))) {
+      score += 10;
+    }
+    if (tagsAndTitle.includes(areaName)) {
+      score += 8;
+    }
+
+    // 2. 釣り方マッチ
+    for (const kw of methodKeywords) {
+      if (tagsAndTitle.includes(kw)) {
+        score += 5;
+        break; // 1記事につき釣り方ボーナスは1回
+      }
+    }
+
+    // 3. 魚種名マッチ
+    for (const fishName of fishNames) {
+      if (tagsAndTitle.includes(fishName)) {
+        score += 3;
+      }
+    }
+
+    // 4. スポットタイプマッチ
+    for (const kw of typeKws) {
+      if (tagsAndTitle.includes(kw)) {
+        score += 4;
+        break;
+      }
+    }
+
+    // 5. 季節マッチ
+    for (const kw of seasonKws) {
+      if (tagsAndTitle.includes(kw)) {
+        score += 2;
+        break;
+      }
+    }
+
+    // 初心者向け記事はボーナス（汎用性が高い）
+    if (post.category === "beginner") {
+      score += 1;
+    }
+
+    return { post, score };
+  });
+
+  return scored
+    .filter((s) => s.score > 0)
+    .sort((a, b) => b.score - a.score || new Date(b.post.publishedAt).getTime() - new Date(a.post.publishedAt).getTime())
+    .slice(0, count)
+    .map((s) => s.post);
 }
