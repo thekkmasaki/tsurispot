@@ -268,6 +268,15 @@ export const affiliateProducts: AffiliateProduct[] = [
     category: "accessory",
   },
   {
+    id: "af-shimano-polarized-wellington",
+    name: "シマノ 偏光グラス ウェリントングラス01",
+    url: "https://amzn.to/4rzZOHr",
+    description: "普段使いから釣りまで使えるシマノの定番偏光グラス。水面の反射を抑え、地形や潮の流れが見えるようになり釣果アップに直結。軽量フレームとテンプル特殊素材で長時間でも快適。紫外線カットで目の保護にも。",
+    methodKeywords: ["サイトフィッシング", "エギング", "アジング", "メバリング", "渓流ルアー", "ショアジギ", "ルアー", "フカセ"],
+    seasons: ["all"],
+    category: "accessory",
+  },
+  {
     id: "af-line-recycler",
     name: "第一精工 高速リサイクラー2.0",
     url: "https://amzn.to/40kfHGS",
