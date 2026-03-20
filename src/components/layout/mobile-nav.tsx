@@ -100,7 +100,7 @@ export function MobileNav() {
         <div
           ref={menuRef}
           role="menu"
-          className="fixed bottom-[60px] left-2 right-2 z-50 rounded-2xl border bg-white shadow-2xl md:hidden animate-in slide-in-from-bottom-4 duration-200 overscroll-contain"
+          className="fixed bottom-[calc(60px+env(safe-area-inset-bottom,0px))] left-2 right-2 z-50 rounded-2xl border bg-white shadow-2xl md:hidden animate-in slide-in-from-bottom-4 duration-200 overscroll-contain"
         >
           <div className="flex items-center justify-between px-4 py-3 border-b">
             <span className="text-sm font-bold text-gray-800">メニュー</span>
@@ -151,7 +151,7 @@ export function MobileNav() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "relative flex flex-col items-center justify-center gap-0.5 px-3 py-2 text-xs transition-colors min-h-[52px] min-w-[52px] touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+                  "relative flex flex-col items-center justify-center gap-0.5 px-1 py-2 text-[10px] transition-colors min-h-[48px] touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
                   isActive
                     ? "text-primary"
                     : "text-muted-foreground"
@@ -168,7 +168,7 @@ export function MobileNav() {
                     </span>
                   )}
                 </div>
-                <span className="font-medium">{item.label}</span>
+                <span className="font-medium whitespace-nowrap">{item.label}</span>
               </Link>
             );
           })}
@@ -179,12 +179,12 @@ export function MobileNav() {
             aria-haspopup="true"
             aria-label="その他のメニュー"
             className={cn(
-              "relative flex flex-col items-center justify-center gap-0.5 px-3 py-2 text-xs transition-colors min-h-[52px] min-w-[52px] touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+              "relative flex flex-col items-center justify-center gap-0.5 px-1 py-2 text-[10px] transition-colors min-h-[48px] touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
               moreOpen || hasActiveMore ? "text-primary" : "text-muted-foreground"
             )}
           >
             <MoreHorizontal aria-hidden="true" className={cn("h-5 w-5", (moreOpen || hasActiveMore) && "fill-primary/20")} />
-            <span className="font-medium">もっと</span>
+            <span className="font-medium whitespace-nowrap">もっと</span>
           </button>
         </div>
       </nav>

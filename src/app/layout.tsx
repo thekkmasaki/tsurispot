@@ -217,7 +217,7 @@ export default function RootLayout({
         )}
         <PWARegister />
         <Header />
-        <main className="min-h-screen pb-20 md:pb-0">{children}</main>
+        <main className="min-h-screen pb-24 md:pb-0">{children}</main>
         <Footer />
         <MobileNav />
         <PWAInstallHint />

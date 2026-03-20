@@ -326,8 +326,6 @@ export function generateSpotIntro(spot: FishingSpot): string {
     intro += `特に${easyFish.slice(0, 2).map(cf => cf.fish.name).join("や")}は初心者でも比較的釣りやすい魚種です。`;
   }
 
-  intro += `${REGION_CLIMATE[regionGroup]}です。`;
-
   return intro;
 }
 

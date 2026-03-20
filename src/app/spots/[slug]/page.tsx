@@ -568,9 +568,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
         </div>
 
         {/* 説明文（スポット固有の導入文） */}
-        <div className="mt-3 space-y-2 text-sm leading-relaxed text-muted-foreground">
+        <div className="mt-3 space-y-3 text-sm leading-relaxed text-muted-foreground">
           <p>{spot.description}</p>
-          <p>{generateSpotIntro(spot)}</p>
+          <p className="border-t border-border/30 pt-3">{generateSpotIntro(spot)}</p>
         </div>
 
         {/* データ信頼性指標 */}
