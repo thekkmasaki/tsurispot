@@ -342,11 +342,32 @@ export function FishingPointDiagram({ data }: FishingPointDiagramProps) {
           ))}
 
           {/* ===== 魚種ラベル ===== */}
-          {seaFishLabels.map((lb, i) => (
-            <text key={`fl-${i}`} x={lb.x} y={lb.y} textAnchor="start"
-              fontSize="11" fontWeight="700" fill="rgba(255,255,255,0.9)"
-              filter="url(#dg-ts)">{lb.text}</text>
-          ))}
+          {seaFishLabels.map((lb, i) => {
+            const fishNames = lb.text.split('・');
+            const cols = fishNames.length > 6 ? 2 : 1;
+            const perCol = Math.ceil(fishNames.length / cols);
+            return (
+              <g key={`fl-${i}`}>
+                {/* 背景 */}
+                <rect x={lb.x - 4} y={lb.y - 12}
+                  width={cols === 2 ? 220 : 120}
+                  height={perCol * 16 + 8}
+                  rx="4" fill="rgba(0,40,80,0.5)" />
+                {fishNames.map((name, j) => {
+                  const col = Math.floor(j / perCol);
+                  const row = j % perCol;
+                  return (
+                    <text key={j}
+                      x={lb.x + col * 110}
+                      y={lb.y + row * 16}
+                      textAnchor="start"
+                      fontSize="11" fontWeight="700" fill="rgba(255,255,255,0.95)"
+                    >{name}</text>
+                  );
+                })}
+              </g>
+            );
+          })}
 
           {/* 海名 */}
           <text x="500" y={LY.deepTop + 28} textAnchor="middle" fontSize="14" fontWeight="500"

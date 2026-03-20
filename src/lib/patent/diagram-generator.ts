@@ -101,7 +101,7 @@ function generatePositions(analysis: SpotAnalysisResult): DiagramPosition[] {
     const zone = findZoneForPosition(zones, relativeX);
 
     // ゾーン情報から魚種・評価を取得
-    const fish = zone
+    const fish = zone?.estimatedFish
       ? zone.estimatedFish
           .filter((f) => f.probability >= 0.40)
           .map((f) => ({
@@ -212,6 +212,7 @@ function generateFishLabels(zones: AnalysisZone[]): SeaFishLabel[] {
   const labels: SeaFishLabel[] = [];
 
   for (const zone of zones) {
+    if (!zone.estimatedFish) continue;
     if (zone.estimatedFish.length === 0) continue;
 
     const centerX =
@@ -267,6 +268,7 @@ function generateFishLabels(zones: AnalysisZone[]): SeaFishLabel[] {
   // 底物ラベル（全ゾーン統合）
   const allBottomFish = new Set<string>();
   for (const zone of zones) {
+    if (!zone.estimatedFish) continue;
     for (const f of zone.estimatedFish) {
       if (isBottomFish(f.name) && f.probability >= 0.50) {
         allBottomFish.add(f.name);
@@ -297,6 +299,7 @@ function generateFishNotes(zones: AnalysisZone[]): string[] {
   // 全域で出現する魚種を特定
   const fishZoneCount = new Map<string, number>();
   for (const zone of zones) {
+    if (!zone.estimatedFish) continue;
     const fishNames = new Set(
       zone.estimatedFish.filter((f) => f.probability >= 0.70).map((f) => f.name)
     );
@@ -312,6 +315,7 @@ function generateFishNotes(zones: AnalysisZone[]): string[] {
   if (ubiquitousFish.length > 0) {
     const methods = new Set<string>();
     for (const zone of zones) {
+      if (!zone.estimatedFish) continue;
       for (const f of zone.estimatedFish) {
         if (ubiquitousFish.includes(f.name)) methods.add(f.method);
       }
@@ -328,6 +332,7 @@ function generateFishNotes(zones: AnalysisZone[]): string[] {
   if (tetrapodZones.length > 0) {
     const rootFish = new Set<string>();
     for (const z of tetrapodZones) {
+      if (!z.estimatedFish) continue;
       for (const f of z.estimatedFish) {
         if (isRockFish(f.name)) rootFish.add(f.name);
       }
@@ -340,6 +345,7 @@ function generateFishNotes(zones: AnalysisZone[]): string[] {
   // 底物
   const bottomFishNames = new Set<string>();
   for (const zone of zones) {
+    if (!zone.estimatedFish) continue;
     for (const f of zone.estimatedFish) {
       if (isBottomFish(f.name) && f.probability >= 0.50)
         bottomFishNames.add(f.name);
@@ -355,7 +361,7 @@ function generateFishNotes(zones: AnalysisZone[]): string[] {
   const endZoneEgi = zones.filter(
     (z) =>
       (z.xRange[0] < 0.1 || z.xRange[1] > 0.9) &&
-      z.estimatedFish.some(
+      z.estimatedFish?.some(
         (f) => f.method.includes("エギング") && f.probability >= 0.60
       )
   );
@@ -365,11 +371,12 @@ function generateFishNotes(zones: AnalysisZone[]): string[] {
 
   // 大型青物
   const bigGameZones = zones.filter((z) =>
-    z.estimatedFish.some((f) => isBigGameFish(f.name) && f.probability >= 0.40)
+    z.estimatedFish?.some((f) => isBigGameFish(f.name) && f.probability >= 0.40)
   );
   if (bigGameZones.length > 0) {
     const bigFishNames = new Set<string>();
     for (const z of bigGameZones) {
+      if (!z.estimatedFish) continue;
       for (const f of z.estimatedFish) {
         if (isBigGameFish(f.name)) bigFishNames.add(f.name);
       }
