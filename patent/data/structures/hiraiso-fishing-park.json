@@ -1,0 +1,237 @@
+{
+  "spotSlug": "hiraiso-fishing-park",
+  "coordinates": {
+    "lat": 34.6264,
+    "lng": 135.0661
+  },
+  "imageMetadata": {
+    "source": "sentinel-2",
+    "date": "2026-03-01",
+    "resolution": 10,
+    "imageSize": { "width": 640, "height": 640 }
+  },
+  "layoutType": "seawall",
+  "structureLabel": "護岸（ベランダ）",
+  "seaLabel": "大阪湾",
+  "detectedStructures": [
+    {
+      "id": "str-001",
+      "category": "seawall",
+      "confidence": 0.96,
+      "bbox": { "x": 20, "y": 290, "width": 600, "height": 35 },
+      "areaRatio": 0.051,
+      "relativePosition": 0.5,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "str-002",
+      "category": "tetrapod",
+      "confidence": 0.89,
+      "bbox": { "x": 20, "y": 325, "width": 115, "height": 50 },
+      "areaRatio": 0.014,
+      "relativePosition": 0.09,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "str-003",
+      "category": "port-facility",
+      "confidence": 0.82,
+      "bbox": { "x": 40, "y": 255, "width": 560, "height": 35 },
+      "areaRatio": 0.048,
+      "relativePosition": 0.5,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "str-004",
+      "category": "water",
+      "confidence": 0.99,
+      "bbox": { "x": 0, "y": 375, "width": 640, "height": 265 },
+      "areaRatio": 0.65,
+      "relativePosition": 0.5,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "str-005",
+      "category": "land",
+      "confidence": 0.98,
+      "bbox": { "x": 0, "y": 0, "width": 640, "height": 255 },
+      "areaRatio": 0.30,
+      "relativePosition": 0.5,
+      "distanceFromShore": "onshore"
+    }
+  ],
+  "seaBottomFeatures": [
+    {
+      "type": "tetrapod",
+      "xRange": [0.0, 0.18],
+      "distanceFromShore": "near",
+      "estimatedDepth": 3,
+      "confidence": 0.89
+    },
+    {
+      "type": "reef-stone",
+      "xRange": [0.24, 0.44],
+      "distanceFromShore": "medium",
+      "estimatedDepth": 8,
+      "confidence": 0.72
+    },
+    {
+      "type": "reef-concrete",
+      "xRange": [0.48, 0.66],
+      "distanceFromShore": "medium",
+      "estimatedDepth": 10,
+      "confidence": 0.68
+    },
+    {
+      "type": "reef-hex",
+      "xRange": [0.72, 0.90],
+      "distanceFromShore": "medium",
+      "estimatedDepth": 8,
+      "confidence": 0.65
+    }
+  ],
+  "zones": [
+    {
+      "id": "zone-west",
+      "name": "西端エリア",
+      "xRange": [0.0, 0.15],
+      "structures": ["seawall", "tetrapod"],
+      "seaBottomFeatures": ["tetrapod"],
+      "estimatedDepth": { "shore": 5, "offshore": 8 },
+      "currentFlow": 0.85,
+      "estimatedFish": [
+        { "name": "タチウオ", "method": "テンヤ/ワインド", "season": "8〜12月", "difficulty": "medium", "probability": 0.78 },
+        { "name": "サヨリ", "method": "ウキ釣り", "season": "9〜12月", "difficulty": "easy", "probability": 0.72 },
+        { "name": "アオリイカ", "method": "エギング", "season": "9〜11月", "difficulty": "medium", "probability": 0.75 },
+        { "name": "チヌ", "method": "ウキフカセ", "season": "4〜11月", "difficulty": "medium", "probability": 0.80 },
+        { "name": "スズキ", "method": "ルアー/エビ撒き", "season": "通年", "difficulty": "medium", "probability": 0.82 },
+        { "name": "グレ", "method": "ウキフカセ", "season": "10〜5月", "difficulty": "medium", "probability": 0.70 },
+        { "name": "メバル", "method": "メバリング", "season": "11〜4月", "difficulty": "medium", "probability": 0.88 },
+        { "name": "マルハギ", "method": "胴突き", "season": "8〜12月", "difficulty": "medium", "probability": 0.60 },
+        { "name": "アイナメ", "method": "投げ釣り", "season": "10〜3月", "difficulty": "medium", "probability": 0.55 }
+      ],
+      "rating": "good"
+    },
+    {
+      "id": "zone-west-inner",
+      "name": "西側テトラ帯",
+      "xRange": [0.10, 0.20],
+      "structures": ["seawall", "tetrapod"],
+      "seaBottomFeatures": ["tetrapod"],
+      "estimatedDepth": { "shore": 4, "offshore": 5 },
+      "currentFlow": 0.60,
+      "estimatedFish": [
+        { "name": "ガシラ", "method": "穴釣り/胴突き", "season": "通年", "difficulty": "easy", "probability": 0.92 },
+        { "name": "メバル", "method": "メバリング", "season": "11〜4月", "difficulty": "medium", "probability": 0.85 },
+        { "name": "アジ", "method": "サビキ釣り", "season": "5〜11月", "difficulty": "easy", "probability": 0.78 }
+      ],
+      "rating": "normal"
+    },
+    {
+      "id": "zone-center-west",
+      "name": "中央西エリア（捨石魚礁前）",
+      "xRange": [0.24, 0.44],
+      "structures": ["seawall"],
+      "seaBottomFeatures": ["reef-stone"],
+      "estimatedDepth": { "shore": 4, "offshore": 8 },
+      "currentFlow": 0.65,
+      "estimatedFish": [
+        { "name": "アジ", "method": "サビキ釣り", "season": "5〜11月", "difficulty": "easy", "probability": 0.90 },
+        { "name": "サバ", "method": "サビキ/ジグサビキ", "season": "6〜10月", "difficulty": "easy", "probability": 0.80 },
+        { "name": "キス", "method": "投げ釣り", "season": "5〜10月", "difficulty": "easy", "probability": 0.65 },
+        { "name": "カレイ", "method": "投げ釣り", "season": "10〜3月", "difficulty": "medium", "probability": 0.55 }
+      ],
+      "rating": "good"
+    },
+    {
+      "id": "zone-center",
+      "name": "中央エリア（縁石変化点）",
+      "xRange": [0.42, 0.56],
+      "structures": ["seawall", "port-facility"],
+      "seaBottomFeatures": ["reef-stone", "reef-concrete"],
+      "estimatedDepth": { "shore": 4, "offshore": 8 },
+      "currentFlow": 0.70,
+      "estimatedFish": [
+        { "name": "アジ", "method": "サビキ釣り", "season": "6〜10月", "difficulty": "easy", "probability": 0.95 },
+        { "name": "メバル", "method": "メバリング", "season": "通年", "difficulty": "medium", "probability": 0.85 },
+        { "name": "ガシラ", "method": "胴突き", "season": "通年", "difficulty": "easy", "probability": 0.88 },
+        { "name": "ウミタナゴ", "method": "ウキ釣り", "season": "通年", "difficulty": "easy", "probability": 0.70 },
+        { "name": "ウマヅラハギ", "method": "胴突き", "season": "8〜12月", "difficulty": "medium", "probability": 0.62 },
+        { "name": "カワハギ", "method": "胴突き", "season": "8〜12月", "difficulty": "medium", "probability": 0.58 },
+        { "name": "アオリイカ", "method": "エギング", "season": "9〜11月", "difficulty": "medium", "probability": 0.65 },
+        { "name": "スズキ", "method": "ルアー/エビ撒き", "season": "通年", "difficulty": "medium", "probability": 0.78 },
+        { "name": "チヌ", "method": "ウキフカセ", "season": "4〜11月", "difficulty": "medium", "probability": 0.75 },
+        { "name": "グレ", "method": "ウキフカセ", "season": "10〜5月", "difficulty": "medium", "probability": 0.72 }
+      ],
+      "rating": "hot"
+    },
+    {
+      "id": "zone-center-east",
+      "name": "中央東エリア（コンクリ魚礁前）",
+      "xRange": [0.55, 0.70],
+      "structures": ["seawall"],
+      "seaBottomFeatures": ["reef-concrete"],
+      "estimatedDepth": { "shore": 4, "offshore": 6 },
+      "currentFlow": 0.65,
+      "estimatedFish": [
+        { "name": "アジ", "method": "サビキ釣り", "season": "5〜11月", "difficulty": "easy", "probability": 0.88 },
+        { "name": "メバル", "method": "メバリング", "season": "11〜4月", "difficulty": "medium", "probability": 0.80 },
+        { "name": "スズキ", "method": "ルアー/エビ撒き", "season": "通年", "difficulty": "medium", "probability": 0.72 },
+        { "name": "グレ", "method": "ウキフカセ", "season": "10〜5月", "difficulty": "medium", "probability": 0.68 },
+        { "name": "ウマヅラハギ", "method": "胴突き", "season": "8〜12月", "difficulty": "medium", "probability": 0.58 },
+        { "name": "マルハギ", "method": "胴突き", "season": "8〜12月", "difficulty": "medium", "probability": 0.55 }
+      ],
+      "rating": "good"
+    },
+    {
+      "id": "zone-east-inner",
+      "name": "東側エリア（六角錐魚礁前）",
+      "xRange": [0.72, 0.88],
+      "structures": ["seawall"],
+      "seaBottomFeatures": ["reef-hex"],
+      "estimatedDepth": { "shore": 4, "offshore": 6 },
+      "currentFlow": 0.70,
+      "estimatedFish": [
+        { "name": "アジ", "method": "サビキ釣り", "season": "5〜11月", "difficulty": "easy", "probability": 0.88 },
+        { "name": "イワシ", "method": "サビキ釣り", "season": "5〜10月", "difficulty": "easy", "probability": 0.82 },
+        { "name": "ガシラ", "method": "穴釣り/胴突き", "season": "通年", "difficulty": "easy", "probability": 0.85 },
+        { "name": "メバル", "method": "メバリング", "season": "11〜4月", "difficulty": "medium", "probability": 0.80 }
+      ],
+      "rating": "good"
+    },
+    {
+      "id": "zone-east",
+      "name": "東端エリア",
+      "xRange": [0.88, 1.0],
+      "structures": ["seawall"],
+      "seaBottomFeatures": ["reef-hex"],
+      "estimatedDepth": { "shore": 5, "offshore": 10 },
+      "currentFlow": 0.95,
+      "estimatedFish": [
+        { "name": "アオリイカ", "method": "エギング", "season": "9〜11月", "difficulty": "medium", "probability": 0.80 },
+        { "name": "ハマチ", "method": "のませ釣り", "season": "9〜12月", "difficulty": "medium", "probability": 0.72 },
+        { "name": "メジロ", "method": "のませ釣り", "season": "10〜12月", "difficulty": "hard", "probability": 0.55 },
+        { "name": "ブリ", "method": "のませ釣り", "season": "11〜1月", "difficulty": "hard", "probability": 0.40 },
+        { "name": "スズキ", "method": "ルアー/エビ撒き", "season": "通年", "difficulty": "medium", "probability": 0.85 },
+        { "name": "アコウ", "method": "ルアー/穴釣り", "season": "6〜9月", "difficulty": "hard", "probability": 0.45 },
+        { "name": "マダイ", "method": "カゴ釣り", "season": "4〜6月, 10〜11月", "difficulty": "medium", "probability": 0.50 },
+        { "name": "グレ", "method": "ウキフカセ", "season": "10〜5月", "difficulty": "medium", "probability": 0.72 },
+        { "name": "ウマヅラハギ", "method": "胴突き", "season": "8〜12月", "difficulty": "medium", "probability": 0.60 }
+      ],
+      "rating": "hot"
+    }
+  ],
+  "facilities": [
+    { "id": "fac-001", "name": "駐車場", "icon": "\uD83C\uDD7F\uFE0F", "relativePosition": 0.08 },
+    { "id": "fac-002", "name": "料金所", "icon": "\uD83C\uDFAB", "relativePosition": 0.21 },
+    { "id": "fac-003", "name": "管理事務所", "icon": "\uD83C\uDFE2", "relativePosition": 0.36 },
+    { "id": "fac-004", "name": "売店", "icon": "\uD83C\uDFEA", "relativePosition": 0.49 },
+    { "id": "fac-005", "name": "自販機", "icon": "\uD83E\uDD64", "relativePosition": 0.58 },
+    { "id": "fac-006", "name": "レストハウス", "icon": "\uD83C\uDFE0", "relativePosition": 0.73 },
+    { "id": "fac-007", "name": "BBQ場", "icon": "\uD83C\uDF56", "relativePosition": 0.90 }
+  ],
+  "structureLength": 700,
+  "positionCount": 14,
+  "analyzedAt": "2026-03-17T10:00:00Z",
+  "pipelineVersion": "0.1.0"
+}
