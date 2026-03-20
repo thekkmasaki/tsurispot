@@ -177,18 +177,11 @@ export async function generateMetadata({
   };
 }
 
-export const dynamicParams = true;
-export const revalidate = 3600;
-
-// Vercel Pro: ISR関数タイムアウトを60秒に延長（デフォルト10秒）
-export const maxDuration = 60;
+export const dynamicParams = false;
 
 export function generateStaticParams() {
-  // 上位500件はSSGで事前生成、残りはISRでオンデマンド生成
-  return fishingSpots
-    .sort((a, b) => b.rating - a.rating)
-    .slice(0, 500)
-    .map((spot) => ({ slug: spot.slug }));
+  // 全スポットをSSGで事前生成（standalone出力ではISRが動かないため）
+  return fishingSpots.map((spot) => ({ slug: spot.slug }));
 }
 
 export default async function SpotDetailPage({ params }: PageProps) {

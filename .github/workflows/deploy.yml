@@ -1,0 +1,68 @@
+name: Deploy to App Runner
+
+on:
+  push:
+    branches: [master]
+
+env:
+  AWS_REGION: ap-northeast-1
+  ECR_REPOSITORY: tsurispot
+  APP_RUNNER_SERVICE_ARN: arn:aws:apprunner:ap-northeast-1:179503922406:service/tsurispot/5a8d55c727a94c029c2666e7fc3b5108
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push Docker image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build \
+            --build-arg NEXT_PUBLIC_GA_ID=${{ secrets.NEXT_PUBLIC_GA_ID }} \
+            --build-arg NEXT_PUBLIC_LINE_ADD_FRIEND_URL=${{ secrets.NEXT_PUBLIC_LINE_ADD_FRIEND_URL }} \
+            --build-arg MICROCMS_SERVICE_DOMAIN=${{ secrets.MICROCMS_SERVICE_DOMAIN }} \
+            --build-arg MICROCMS_API_KEY=${{ secrets.MICROCMS_API_KEY }} \
+            -t $ECR_REGISTRY/$ECR_REPOSITORY:latest \
+            -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
+            .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      - name: Deploy to App Runner
+        run: |
+          aws apprunner start-deployment \
+            --service-arn ${{ env.APP_RUNNER_SERVICE_ARN }}
+
+      - name: Wait for deployment
+        run: |
+          echo "Deployment started. Waiting for App Runner to update..."
+          for i in $(seq 1 30); do
+            STATUS=$(aws apprunner describe-service \
+              --service-arn ${{ env.APP_RUNNER_SERVICE_ARN }} \
+              --query "Service.Status" --output text)
+            echo "Status: $STATUS"
+            if [ "$STATUS" = "RUNNING" ]; then
+              echo "Deployment complete!"
+              exit 0
+            fi
+            sleep 30
+          done
+          echo "Deployment timed out"
+          exit 1

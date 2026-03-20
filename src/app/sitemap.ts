@@ -164,9 +164,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
 
     // ===== スポット詳細ページ（画像サイトマップ付き）=====
+    // AdSense対策: 低品質スポット（description<100文字 or catchableFish≤2）はpriority 0.3に下げる
     ...fishingSpots.map((spot) => {
       const descLen = (spot.description || "").length;
-      const priority = descLen >= 150 ? 0.8 : descLen >= 100 ? 0.7 : 0.5;
+      const fishCount = spot.catchableFish.length;
+      const isLowQuality = descLen < 100 || fishCount <= 2;
+      const priority = isLowQuality ? 0.3 : descLen >= 150 ? 0.8 : 0.7;
       return {
         url: `${baseUrl}/spots/${spot.slug}`,
         lastModified: dynamicDate,

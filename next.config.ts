@@ -6,6 +6,8 @@ const withBundleAnalyzer = bundleAnalyzer({
 });
 
 const nextConfig: NextConfig = {
+  // Docker/App Runner用: 最小限のスタンドアロン出力を生成
+  output: "standalone",
   // パフォーマンス: X-Powered-By ヘッダーを削除（不要な情報漏洩防止＋レスポンスサイズ削減）
   poweredByHeader: false,
   // パフォーマンス: gzip圧縮を確実に有効化
@@ -65,6 +67,10 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "*.public.blob.vercel-storage.com",
+      },
+      {
+        protocol: "https",
+        hostname: "d1e2nn2dhqfows.cloudfront.net",
       },
     ],
     dangerouslyAllowSVG: true,
