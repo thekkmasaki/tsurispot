@@ -28,6 +28,8 @@ export interface Product {
   relatedMethods: string[];
   relatedFish: string[];
   priority: number;
+  /** ユーザー提供の直接アフィリエイトURL（設定時はAmazon検索URLの代わりに使用） */
+  amazonDirectUrl?: string;
 }
 
 export const products: Product[] = [
@@ -363,6 +365,22 @@ export const products: Product[] = [
     relatedMethods: ["shorejigging", "lure"],
     relatedFish: ["sawara"],
     priority: 25,
+  },
+  {
+    id: "p26",
+    name: "タコ釣りボール（12粒セット・貝殻容器2個付）",
+    description:
+      "タコエギに付けるだけで集魚効果がアップする専用エサ。貝殻容器付きで手軽にセットでき、初心者からベテランまで使いやすい。タコエギのアピール力を底上げしたい方に。",
+    priceRange: "1,000〜1,500円",
+    imageDescription: "タコ釣りボール 12粒セット",
+    amazonAsin: "",
+    amazonDirectUrl: "https://amzn.to/3NNwHmh",
+    rakutenSearchQuery: "タコ釣りボール 釣りエサ 集魚",
+    category: "tackle",
+    difficulty: "beginner",
+    relatedMethods: ["takoegi", "tenya"],
+    relatedFish: ["madako"],
+    priority: 26,
   },
 ];
 

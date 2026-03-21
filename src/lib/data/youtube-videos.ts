@@ -85,6 +85,12 @@ export const fishingMethodVideos: Record<string, YouTubeVideo[]> = {
       title: "堀田光哉さん 簡単FGノット - 仕掛け作りの基本",
     },
   ],
+  takoegi: [
+    {
+      videoId: "XFRj2PT-Dgo",
+      title: "タコ釣りボールの使い方解説 - タコエギの集魚力をアップする方法",
+    },
+  ],
   "night-fishing": [
     {
       videoId: "5CiB0XtXDVw",
@@ -125,6 +131,9 @@ const methodNameToCategory: Record<string, string> = {
   落とし込み: "float-fishing",
   フライ: "lure",
   テンカラ: "lure",
+  タコエギ釣り: "takoegi",
+  タコエギ: "takoegi",
+  テンヤ釣り: "takoegi",
 };
 
 /**

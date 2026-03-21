@@ -42,7 +42,7 @@ interface ProductCardProps {
 }
 
 export function ProductCard({ product, pageType = "gear" }: ProductCardProps) {
-  const amazonUrl = getAmazonUrl(product.amazonAsin, product.name);
+  const amazonUrl = product.amazonDirectUrl || getAmazonUrl(product.amazonAsin, product.name);
   const rakutenUrl = getRakutenUrl(product.rakutenSearchQuery);
   const stripe = CATEGORY_STRIPE[product.category] || CATEGORY_STRIPE.other;
   const categoryLabel = CATEGORY_LABEL[product.category] || "";

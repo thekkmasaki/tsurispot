@@ -362,6 +362,15 @@ export const affiliateProducts: AffiliateProduct[] = [
     category: "book",
     prefectures: ["神奈川県", "静岡県"],
   },
+  {
+    id: "af-tako-ball",
+    name: "タコ釣りボール（12粒セット・貝殻容器付）",
+    url: "https://amzn.to/3NNwHmh",
+    description: "タコエギに付けるだけで集魚効果がアップする専用エサ。貝殻容器付きでセットも簡単。初心者からベテランまでタコ釣りの釣果アップに。",
+    methodKeywords: ["タコエギ", "タコ", "テンヤ", "タコジグ"],
+    seasons: ["summer", "autumn"],
+    category: "bait",
+  },
 ];
 
 /**
