@@ -12,6 +12,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${baseUrl}/instructor-exam/manners`,
   },
+  openGraph: {
+    title: "第3章 釣りマナーと指導法 | 公認釣りインストラクター試験対策 | ツリスポ",
+    description: "先行者優先・ゴミ問題・漁業者との共存・指導法の知識を解説。章末確認クイズ40問付き。",
+    url: `${baseUrl}/instructor-exam/manners`,
+    type: "article",
+    siteName: "ツリスポ",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "第3章 釣りマナーと指導法 | 釣りインストラクター試験対策",
+    description: "先行者優先・ゴミ問題・漁業者との共存・指導法を解説。確認クイズ40問付き。",
+  },
 };
 
 /* ============================================================

@@ -13,6 +13,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${baseUrl}/instructor-exam/law/quiz`,
   },
+  openGraph: {
+    title: "漁業関連法規 確認クイズ（全50問）| 釣りインストラクター試験対策 | ツリスポ",
+    description: "漁業法・漁業権・遊漁船業法・水産資源保護法の知識を全50問の4択クイズでチェック。",
+    url: `${baseUrl}/instructor-exam/law/quiz`,
+    type: "website",
+    siteName: "ツリスポ",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "漁業関連法規 確認クイズ（全50問）| 試験対策",
+    description: "漁業法・漁業権・遊漁船業法の知識を4択クイズでチェック。合格目安80点以上。",
+  },
 };
 
 export default function LawQuizPage() {
@@ -33,6 +45,23 @@ export default function LawQuizPage() {
           }),
         }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Quiz",
+            name: "漁業関連法規 確認クイズ（全50問）",
+            description: "漁業法・漁業権・遊漁船業法・水産資源保護法の知識を4択クイズで確認",
+            educationalLevel: "advanced",
+            about: { "@type": "Thing", name: "漁業関連法規" },
+            provider: { "@type": "Organization", name: "ツリスポ", url: baseUrl },
+            isPartOf: { "@type": "Course", name: "公認釣りインストラクター試験対策ガイド", url: `${baseUrl}/instructor-exam` },
+            numberOfQuestions: 50,
+            typicalAgeRange: "20-",
+          }),
+        }}
+      />
 
       <div className="mx-auto max-w-3xl px-4 py-8">
         <nav aria-label="パンくずリスト" className="mb-6 text-sm text-muted-foreground">
@@ -49,7 +78,7 @@ export default function LawQuizPage() {
 
         <div className="mb-8 rounded-2xl bg-gradient-to-br from-sky-800 to-blue-900 px-6 py-8 text-white sm:px-10">
           <p className="text-sm text-sky-300">第1章 漁業関連法規</p>
-          <h1 className="mt-1 text-2xl font-bold sm:text-3xl">確認クイズ</h1>
+          <h1 className="mt-1 text-2xl font-bold sm:text-3xl">漁業関連法規 確認クイズ</h1>
           <p className="mt-2 text-sky-200">
             全{lawQuestions.length}問の4択クイズで理解度をチェックしましょう。
           </p>

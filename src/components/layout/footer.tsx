@@ -72,7 +72,7 @@ export function Footer() {
             <h3 className="mb-3 text-sm font-semibold">釣りを学ぶ</h3>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><Link href="/blog" className="hover:text-foreground">コラム</Link></li>
-              <li><Link href="/quiz" className="hover:text-foreground">釣りスタイル診断</Link></li>
+              <li><Link href="/quiz" className="hover:text-foreground">釣りクイズ</Link></li>
               <li><Link href="/bouzu-checker" className="hover:text-foreground">ボウズ確率チェッカー</Link></li>
               <li><Link href="/guide" className="hover:text-foreground">釣りの始め方</Link></li>
               <li><Link href="/fish" className="hover:text-foreground">魚種図鑑</Link></li>

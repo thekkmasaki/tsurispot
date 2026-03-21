@@ -168,6 +168,20 @@ export default function QuizListPage() {
             </div>
           </section>
 
+          {/* インストラクター試験対策リンク */}
+          <div className="mt-8 rounded-xl border border-indigo-200 bg-indigo-50 p-5">
+            <h2 className="text-lg font-bold text-indigo-800">釣りインストラクター試験対策</h2>
+            <p className="mt-1 text-sm text-indigo-700">
+              公認釣りインストラクター試験の筆記対策に特化した学習ガイドと確認クイズ（全130問）もご利用いただけます。
+            </p>
+            <Link
+              href="/instructor-exam"
+              className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-indigo-600 hover:text-indigo-800"
+            >
+              試験対策ガイドを見る →
+            </Link>
+          </div>
+
           {/* 関連コンテンツ */}
           <section className="mt-12">
             <h2 className="flex items-center gap-2 text-lg font-bold text-gray-900 sm:text-xl">

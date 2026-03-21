@@ -410,6 +410,15 @@ export default function InstructorExamPage() {
               </Link>{" "}
               -- 試験で出る用語の確認に
             </li>
+            <li>
+              <Link
+                href="/quiz"
+                className="font-medium text-green-700 underline hover:text-green-900"
+              >
+                釣りクイズ
+              </Link>{" "}
+              -- 遊びながら学べる釣り検定（全240問）
+            </li>
           </ul>
         </section>
 

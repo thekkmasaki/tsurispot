@@ -12,6 +12,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${baseUrl}/instructor-exam/law`,
   },
+  openGraph: {
+    title: "第1章 漁業関連法規 | 公認釣りインストラクター試験対策 | ツリスポ",
+    description: "漁業法・漁業権・遊漁船業法・水産資源保護法の知識を体系的に解説。章末確認クイズ50問付き。",
+    url: `${baseUrl}/instructor-exam/law`,
+    type: "article",
+    siteName: "ツリスポ",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "第1章 漁業関連法規 | 釣りインストラクター試験対策",
+    description: "漁業法・漁業権・遊漁船業法・水産資源保護法を体系的に解説。確認クイズ50問付き。",
+  },
 };
 
 /* ============================================================

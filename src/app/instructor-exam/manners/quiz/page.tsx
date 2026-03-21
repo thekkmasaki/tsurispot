@@ -13,6 +13,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${baseUrl}/instructor-exam/manners/quiz`,
   },
+  openGraph: {
+    title: "釣りマナーと指導法 確認クイズ（全40問）| 釣りインストラクター試験対策 | ツリスポ",
+    description: "先行者優先・ゴミ問題・漁業者との共存・指導法の知識を全40問の4択クイズでチェック。",
+    url: `${baseUrl}/instructor-exam/manners/quiz`,
+    type: "website",
+    siteName: "ツリスポ",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "釣りマナーと指導法 確認クイズ（全40問）| 試験対策",
+    description: "釣りマナー・指導法の知識を4択クイズでチェック。合格目安80点以上。",
+  },
 };
 
 export default function MannersQuizPage() {
@@ -33,6 +45,23 @@ export default function MannersQuizPage() {
           }),
         }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Quiz",
+            name: "釣りマナーと指導法 確認クイズ（全40問）",
+            description: "先行者優先・ゴミ問題・漁業者との共存・指導法の知識を4択クイズで確認",
+            educationalLevel: "advanced",
+            about: { "@type": "Thing", name: "釣りマナーと指導法" },
+            provider: { "@type": "Organization", name: "ツリスポ", url: baseUrl },
+            isPartOf: { "@type": "Course", name: "公認釣りインストラクター試験対策ガイド", url: `${baseUrl}/instructor-exam` },
+            numberOfQuestions: 40,
+            typicalAgeRange: "20-",
+          }),
+        }}
+      />
 
       <div className="mx-auto max-w-3xl px-4 py-8">
         <nav aria-label="パンくずリスト" className="mb-6 text-sm text-muted-foreground">
@@ -49,7 +78,7 @@ export default function MannersQuizPage() {
 
         <div className="mb-8 rounded-2xl bg-gradient-to-br from-teal-700 to-emerald-800 px-6 py-8 text-white sm:px-10">
           <p className="text-sm text-teal-300">第3章 釣りマナーと指導法</p>
-          <h1 className="mt-1 text-2xl font-bold sm:text-3xl">確認クイズ</h1>
+          <h1 className="mt-1 text-2xl font-bold sm:text-3xl">釣りマナーと指導法 確認クイズ</h1>
           <p className="mt-2 text-teal-200">
             全{mannersQuestions.length}問の4択クイズで理解度をチェックしましょう。
           </p>

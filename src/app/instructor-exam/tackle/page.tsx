@@ -12,6 +12,18 @@ export const metadata: Metadata = {
   alternates: {
     canonical: `${baseUrl}/instructor-exam/tackle`,
   },
+  openGraph: {
+    title: "第5章 釣り具の知識 | 公認釣りインストラクター試験対策 | ツリスポ",
+    description: "ロッド・リール・ライン・針・仕掛けの基本構造と選び方を体系的に解説。確認クイズ40問付き。",
+    url: `${baseUrl}/instructor-exam/tackle`,
+    type: "article",
+    siteName: "ツリスポ",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "第5章 釣り具の知識 | 釣りインストラクター試験対策",
+    description: "ロッド・リール・ライン・針・仕掛けの基本構造と選び方を解説。確認クイズ40問付き。",
+  },
 };
 
 /* ============================================================
