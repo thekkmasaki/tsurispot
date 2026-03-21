@@ -27,12 +27,14 @@ export const metadata: Metadata = {
     url: `${baseUrl}/instructor-exam`,
     type: "website",
     siteName: "ツリスポ",
+    images: [{ url: "https://tsurispot.com/api/og?title=公認釣りインストラクター試験対策&emoji=📝", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "公認釣りインストラクター試験対策ガイド | ツリスポ",
     description:
       "漁業法・マナー・釣り具の知識を全7章・確認クイズ130問以上で学べる無料ガイド。",
+    images: ["https://tsurispot.com/api/og?title=公認釣りインストラクター試験対策&emoji=📝"],
   },
   keywords: [
     "釣りインストラクター",

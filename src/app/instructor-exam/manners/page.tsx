@@ -18,12 +18,15 @@ export const metadata: Metadata = {
     url: `${baseUrl}/instructor-exam/manners`,
     type: "article",
     siteName: "ツリスポ",
+    images: [{ url: "https://tsurispot.com/api/og?title=釣りマナーと指導法&emoji=📝", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "第3章 釣りマナーと指導法 | 釣りインストラクター試験対策",
     description: "先行者優先・ゴミ問題・漁業者との共存・指導法を解説。確認クイズ40問付き。",
+    images: ["https://tsurispot.com/api/og?title=釣りマナーと指導法&emoji=📝"],
   },
+  keywords: ["釣りマナー", "先行者優先", "指導法", "JOFI", "釣りインストラクター", "試験対策"],
 };
 
 /* ============================================================
@@ -55,6 +58,37 @@ export default function MannersPage() {
                 item: `${baseUrl}/instructor-exam/manners`,
               },
             ],
+          }),
+        }}
+      />
+      {/* JSON-LD: Article */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: "第3章 釣りマナーと指導法 | 公認釣りインストラクター試験対策",
+            description: "先行者優先・ゴミ問題・漁業者との共存・指導法の知識を解説。確認クイズ40問付き。",
+            url: `${baseUrl}/instructor-exam/manners`,
+            datePublished: "2025-12-01",
+            dateModified: "2026-03-01",
+            author: {
+              "@type": "Organization",
+              name: "ツリスポ編集部",
+              url: "https://tsurispot.com/about",
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "ツリスポ",
+              url: "https://tsurispot.com",
+            },
+            isPartOf: {
+              "@type": "Course",
+              name: "公認釣りインストラクター試験対策ガイド",
+              url: `${baseUrl}/instructor-exam`,
+            },
+            inLanguage: "ja",
           }),
         }}
       />

@@ -18,12 +18,15 @@ export const metadata: Metadata = {
     url: `${baseUrl}/instructor-exam/tackle`,
     type: "article",
     siteName: "ツリスポ",
+    images: [{ url: "https://tsurispot.com/api/og?title=釣り具の知識&emoji=📝", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "第5章 釣り具の知識 | 釣りインストラクター試験対策",
     description: "ロッド・リール・ライン・針・仕掛けの基本構造と選び方を解説。確認クイズ40問付き。",
+    images: ["https://tsurispot.com/api/og?title=釣り具の知識&emoji=📝"],
   },
+  keywords: ["釣り具", "ロッド", "リール", "ライン", "釣り針", "釣りインストラクター", "試験対策"],
 };
 
 /* ============================================================
@@ -55,6 +58,37 @@ export default function TacklePage() {
                 item: `${baseUrl}/instructor-exam/tackle`,
               },
             ],
+          }),
+        }}
+      />
+      {/* JSON-LD: Article */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: "第5章 釣り具の知識 | 公認釣りインストラクター試験対策",
+            description: "ロッド・リール・ライン・針・仕掛けの基本構造と選び方を体系的に解説。確認クイズ40問付き。",
+            url: `${baseUrl}/instructor-exam/tackle`,
+            datePublished: "2025-12-01",
+            dateModified: "2026-03-01",
+            author: {
+              "@type": "Organization",
+              name: "ツリスポ編集部",
+              url: "https://tsurispot.com/about",
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "ツリスポ",
+              url: "https://tsurispot.com",
+            },
+            isPartOf: {
+              "@type": "Course",
+              name: "公認釣りインストラクター試験対策ガイド",
+              url: `${baseUrl}/instructor-exam`,
+            },
+            inLanguage: "ja",
           }),
         }}
       />

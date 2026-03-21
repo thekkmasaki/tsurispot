@@ -19,12 +19,15 @@ export const metadata: Metadata = {
     url: `${baseUrl}/instructor-exam/law/quiz`,
     type: "website",
     siteName: "ツリスポ",
+    images: [{ url: "https://tsurispot.com/api/og?title=漁業関連法規 確認クイズ&emoji=📝", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "漁業関連法規 確認クイズ（全50問）| 試験対策",
     description: "漁業法・漁業権・遊漁船業法の知識を4択クイズでチェック。合格目安80点以上。",
+    images: ["https://tsurispot.com/api/og?title=漁業関連法規 確認クイズ&emoji=📝"],
   },
+  keywords: ["漁業法クイズ", "漁業権問題", "遊漁船業法クイズ", "釣りインストラクター", "試験問題"],
 };
 
 export default function LawQuizPage() {

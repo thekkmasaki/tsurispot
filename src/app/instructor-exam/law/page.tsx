@@ -18,12 +18,15 @@ export const metadata: Metadata = {
     url: `${baseUrl}/instructor-exam/law`,
     type: "article",
     siteName: "ツリスポ",
+    images: [{ url: "https://tsurispot.com/api/og?title=漁業関連法規&emoji=📝", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "第1章 漁業関連法規 | 釣りインストラクター試験対策",
     description: "漁業法・漁業権・遊漁船業法・水産資源保護法を体系的に解説。確認クイズ50問付き。",
+    images: ["https://tsurispot.com/api/og?title=漁業関連法規&emoji=📝"],
   },
+  keywords: ["漁業法", "漁業権", "遊漁船業法", "水産資源保護法", "釣りインストラクター", "試験対策"],
 };
 
 /* ============================================================
@@ -55,6 +58,37 @@ export default function LawPage() {
                 item: `${baseUrl}/instructor-exam/law`,
               },
             ],
+          }),
+        }}
+      />
+      {/* JSON-LD: Article */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: "第1章 漁業関連法規 | 公認釣りインストラクター試験対策",
+            description: "漁業法・漁業権・遊漁船業法・水産資源保護法の知識を体系的に解説。章末確認クイズ50問付き。",
+            url: `${baseUrl}/instructor-exam/law`,
+            datePublished: "2025-12-01",
+            dateModified: "2026-03-01",
+            author: {
+              "@type": "Organization",
+              name: "ツリスポ編集部",
+              url: "https://tsurispot.com/about",
+            },
+            publisher: {
+              "@type": "Organization",
+              name: "ツリスポ",
+              url: "https://tsurispot.com",
+            },
+            isPartOf: {
+              "@type": "Course",
+              name: "公認釣りインストラクター試験対策ガイド",
+              url: `${baseUrl}/instructor-exam`,
+            },
+            inLanguage: "ja",
           }),
         }}
       />
