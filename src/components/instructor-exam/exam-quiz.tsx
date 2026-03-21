@@ -19,6 +19,8 @@ export interface ExamQuizProps {
   questions: ExamQuizQuestion[];
   showNumbers?: boolean;
   startNumber?: number;
+  /** "one" = 1問ずつ表示（デフォルト）, "all" = 全問一覧表示（旧仕様） */
+  mode?: "all" | "one";
 }
 
 /* ------------------------------------------------------------------ */
@@ -28,15 +30,48 @@ export interface ExamQuizProps {
 const LABELS = ["A", "B", "C", "D"] as const;
 
 /* ------------------------------------------------------------------ */
+/*  Progress Bar                                                       */
+/* ------------------------------------------------------------------ */
+
+function ProgressBar({
+  current,
+  total,
+}: {
+  current: number;
+  total: number;
+}) {
+  const pct = total > 0 ? Math.round((current / total) * 100) : 0;
+
+  return (
+    <div className="mb-6">
+      <div className="mb-2 flex items-center justify-between text-sm font-semibold">
+        <span className="text-purple-700">
+          問題 {current} / {total}
+        </span>
+        <span className="text-slate-400">{pct}%</span>
+      </div>
+      <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-200">
+        <div
+          className="h-full rounded-full bg-purple-500 transition-all duration-500 ease-out"
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
 /*  Score Summary                                                      */
 /* ------------------------------------------------------------------ */
 
 function ScoreSummary({
   total,
   answeredMap,
+  onRetry,
 }: {
   total: number;
   answeredMap: Map<string, boolean>;
+  onRetry?: () => void;
 }) {
   const answeredCount = answeredMap.size;
   const correctCount = Array.from(answeredMap.values()).filter(Boolean).length;
@@ -62,8 +97,30 @@ function ScoreSummary({
           <p className="text-2xl font-extrabold text-slate-900">
             {total}問中{" "}
             <span className="text-purple-600">{correctCount}問正解</span>
-            <span className="ml-1 text-lg text-slate-500">（{pct}%）</span>
+            <span className="ml-1 text-lg text-slate-500">({pct}%)</span>
           </p>
+          {pct >= 80 ? (
+            <p className="mt-2 text-sm text-green-600 font-medium">
+              素晴らしい！合格ラインです
+            </p>
+          ) : pct >= 60 ? (
+            <p className="mt-2 text-sm text-yellow-600 font-medium">
+              もう少し！間違えた問題を復習しましょう
+            </p>
+          ) : (
+            <p className="mt-2 text-sm text-red-600 font-medium">
+              もう一度しっかり復習しましょう
+            </p>
+          )}
+          {onRetry && (
+            <button
+              type="button"
+              onClick={onRetry}
+              className="mt-4 inline-flex items-center gap-2 rounded-lg bg-purple-600 px-6 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-purple-700 active:bg-purple-800"
+            >
+              もう一度挑戦する
+            </button>
+          )}
         </>
       ) : (
         <p className="text-sm text-slate-500">
@@ -82,30 +139,103 @@ export function ExamQuiz({
   questions,
   showNumbers = true,
   startNumber = 1,
+  mode = "one",
 }: ExamQuizProps) {
   const [answeredMap, setAnsweredMap] = useState<Map<string, boolean>>(
     new Map()
   );
+  const [currentIndex, setCurrentIndex] = useState(0);
+  // Track whether the user has clicked "次の問題へ" after the last question
+  const [showResult, setShowResult] = useState(false);
+
+  const handleAnswer = useCallback(
+    (id: string, correct: boolean) => {
+      setAnsweredMap((prev) => {
+        const next = new Map(prev);
+        next.set(id, correct);
+        return next;
+      });
+    },
+    []
+  );
+
+  const handleRetry = useCallback(() => {
+    setAnsweredMap(new Map());
+    setCurrentIndex(0);
+    setShowResult(false);
+  }, []);
+
+  /* ---------- "all" mode: original behaviour ---------- */
+  if (mode === "all") {
+    return (
+      <div className="space-y-6">
+        {questions.map((q, i) => (
+          <QuestionCard
+            key={q.id}
+            q={q}
+            index={startNumber + i}
+            showNumber={showNumbers}
+            onAnswer={(correct) => handleAnswer(q.id, correct)}
+          />
+        ))}
+        <ScoreSummary total={questions.length} answeredMap={answeredMap} onRetry={handleRetry} />
+      </div>
+    );
+  }
+
+  /* ---------- "one" mode: sequential, one at a time ---------- */
+  const total = questions.length;
+  const isLastQuestion = currentIndex === total - 1;
+  const currentQ = questions[currentIndex];
+  const isCurrentAnswered = currentQ ? answeredMap.has(currentQ.id) : false;
+
+  // Show final result screen
+  if (showResult) {
+    return (
+      <div className="space-y-6">
+        <ProgressBar current={total} total={total} />
+        <ScoreSummary total={total} answeredMap={answeredMap} onRetry={handleRetry} />
+      </div>
+    );
+  }
+
+  if (!currentQ) return null;
 
   return (
     <div className="space-y-6">
-      {questions.map((q, i) => (
-        <QuestionCard
-          key={q.id}
-          q={q}
-          index={startNumber + i}
-          showNumber={showNumbers}
-          onAnswer={(correct) => {
-            setAnsweredMap((prev) => {
-              const next = new Map(prev);
-              next.set(q.id, correct);
-              return next;
-            });
-          }}
-        />
-      ))}
+      <ProgressBar current={currentIndex + 1} total={total} />
 
-      <ScoreSummary total={questions.length} answeredMap={answeredMap} />
+      <QuestionCard
+        key={currentQ.id}
+        q={currentQ}
+        index={startNumber + currentIndex}
+        showNumber={showNumbers}
+        onAnswer={(correct) => handleAnswer(currentQ.id, correct)}
+      />
+
+      {/* Navigation button (only after answering) */}
+      {isCurrentAnswered && (
+        <div className="flex justify-center pt-2">
+          {isLastQuestion ? (
+            <button
+              type="button"
+              onClick={() => setShowResult(true)}
+              className="inline-flex items-center gap-2 rounded-lg bg-purple-600 px-8 py-3 text-base font-bold text-white shadow-sm transition-colors hover:bg-purple-700 active:bg-purple-800"
+            >
+              結果を見る
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => setCurrentIndex((prev) => prev + 1)}
+              className="inline-flex items-center gap-2 rounded-lg bg-purple-600 px-8 py-3 text-base font-bold text-white shadow-sm transition-colors hover:bg-purple-700 active:bg-purple-800"
+            >
+              次の問題へ
+              <span aria-hidden="true">&rarr;</span>
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }
