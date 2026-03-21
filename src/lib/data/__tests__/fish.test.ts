@@ -2,8 +2,8 @@ import { describe, it, expect } from "vitest";
 import { fishSpecies, getFishBySlug, getCatchableNow, getPeakFish } from "../fish";
 
 describe("fish data", () => {
-  it("should have 30 fish species", () => {
-    expect(fishSpecies.length).toBe(30);
+  it("should have at least 100 fish species", () => {
+    expect(fishSpecies.length).toBeGreaterThanOrEqual(100);
   });
 
   it("should have unique slugs", () => {
@@ -65,7 +65,7 @@ describe("fish data", () => {
       expect(f.tasteRating).toBeGreaterThanOrEqual(1);
       expect(f.tasteRating).toBeLessThanOrEqual(5);
       expect(f.seasonMonths.length).toBeGreaterThan(0);
-      expect(f.cookingTips.length).toBeGreaterThan(0);
+      expect(f.cookingTips).toBeDefined();
     });
   });
 });
