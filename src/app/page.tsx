@@ -23,6 +23,8 @@ import {
   Star,
   Trophy,
   GraduationCap,
+  ClipboardCheck,
+  Sparkles,
 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { HomeSearchBar } from "@/components/home-search-bar";
@@ -422,7 +424,7 @@ export default async function Home() {
 
       {/* クイックアクション */}
       <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
-        <div className="grid grid-cols-3 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-6">
+        <div className="grid grid-cols-4 gap-2 sm:gap-3 lg:grid-cols-8">
           <Link href="/map">
             <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-sky-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
               <div className="flex size-10 items-center justify-center rounded-full bg-sky-100 sm:size-12">
@@ -480,6 +482,26 @@ export default async function Home() {
               </div>
               <span className="text-center text-[11px] font-medium leading-tight sm:text-xs">
                 近くの釣り場
+              </span>
+            </div>
+          </Link>
+          <Link href="/quiz">
+            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-rose-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
+              <div className="flex size-10 items-center justify-center rounded-full bg-rose-100 sm:size-12">
+                <Sparkles className="size-5 text-rose-600 sm:size-6" />
+              </div>
+              <span className="text-center text-[11px] font-medium leading-tight sm:text-xs">
+                釣りクイズ
+              </span>
+            </div>
+          </Link>
+          <Link href="/instructor-exam">
+            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-indigo-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
+              <div className="flex size-10 items-center justify-center rounded-full bg-indigo-100 sm:size-12">
+                <ClipboardCheck className="size-5 text-indigo-600 sm:size-6" />
+              </div>
+              <span className="text-center text-[11px] font-medium leading-tight sm:text-xs">
+                試験対策
               </span>
             </div>
           </Link>
