@@ -45,10 +45,10 @@ const moreNavItems = [
   { href: "/monthly", label: "月別釣りガイド", icon: Calendar },
   { href: "/guide", label: "釣りガイド", icon: GraduationCap },
   { href: "/bouzu-checker", label: "ボウズ確率チェッカー", icon: Target },
-  { href: "/quiz", label: "釣りスタイル診断", icon: Sparkles },
   { href: "/shops", label: "釣具店ガイド", icon: Store },
   { href: "/gear", label: "おすすめ道具", icon: Package },
   { href: "/fishing-rules", label: "ルールとマナー", icon: Scale },
+  { href: "/quiz", label: "釣りクイズ", icon: Sparkles },
   { href: "/instructor-exam", label: "インストラクター試験", icon: ClipboardCheck },
   { href: "/umigyo", label: "海業推進", icon: Anchor },
 ];
