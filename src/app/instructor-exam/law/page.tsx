@@ -562,10 +562,10 @@ export default function LawPage() {
             目次に戻る
           </Link>
           <Link
-            href="/instructor-exam/manners"
+            href="/instructor-exam/safety"
             className="rounded-lg bg-sky-600 px-4 py-2 text-sm font-medium text-white hover:bg-sky-700"
           >
-            第3章 マナーと指導法 &rarr;
+            第2章 気象海象と安全対策 &rarr;
           </Link>
         </div>
 

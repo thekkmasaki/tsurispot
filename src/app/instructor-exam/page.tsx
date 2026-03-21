@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "公認釣りインストラクター試験対策ガイド | ツリスポ",
     description:
-      "公認釣りインストラクター試験の筆記対策をオンラインで学べる無料ガイド。全7章・確認クイズ130問以上。",
+      "公認釣りインストラクター試験の筆記対策をオンラインで学べる無料ガイド。全7章・確認クイズ290問以上。",
     url: `${baseUrl}/instructor-exam`,
     type: "website",
     siteName: "ツリスポ",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "公認釣りインストラクター試験対策ガイド | ツリスポ",
     description:
-      "漁業法・マナー・釣り具の知識を全7章・確認クイズ130問以上で学べる無料ガイド。",
+      "漁業法・マナー・釣り具の知識を全7章・確認クイズ290問以上で学べる無料ガイド。",
     images: ["https://tsurispot.com/api/og?title=公認釣りインストラクター試験対策&emoji=📝"],
   },
   keywords: [
@@ -78,8 +78,8 @@ const chapters: {
     icon: CloudRain,
     description:
       "天気図の読み方、潮汐、波浪、落雷・落水事故の予防策など安全管理の知識を解説します。",
-    quizCount: 0,
-    ready: false,
+    quizCount: 40,
+    ready: true,
   },
   {
     num: 3,
@@ -98,8 +98,8 @@ const chapters: {
     icon: ScrollText,
     description:
       "日本の釣り文化の歴史、和竿・テンカラなどの伝統技法、釣り文学の名作を紹介します。",
-    quizCount: 0,
-    ready: false,
+    quizCount: 40,
+    ready: true,
   },
   {
     num: 5,
@@ -118,8 +118,8 @@ const chapters: {
     icon: Fish,
     description:
       "キャスティング、合わせ方、取り込み、魚の締め方など実技に関わる知識を学びます。",
-    quizCount: 0,
-    ready: false,
+    quizCount: 40,
+    ready: true,
   },
   {
     num: 7,
@@ -128,8 +128,8 @@ const chapters: {
     icon: Leaf,
     description:
       "魚類の生態、水質環境、プランクトン、潮流と釣果の関係など自然科学の基礎を学びます。",
-    quizCount: 0,
-    ready: false,
+    quizCount: 40,
+    ready: true,
   },
 ];
 
@@ -169,7 +169,7 @@ export default function InstructorExamPage() {
             "@type": "Course",
             name: "公認釣りインストラクター試験対策ガイド",
             description:
-              "公認釣りインストラクター試験（JOFI）の筆記試験対策に役立つ無料学習ガイド。漁業法・マナー・釣り具の知識を全7章・確認クイズ130問以上で体系的に学べます。",
+              "公認釣りインストラクター試験（JOFI）の筆記試験対策に役立つ無料学習ガイド。漁業法・マナー・釣り具の知識を全7章・確認クイズ290問以上で体系的に学べます。",
             url: `${baseUrl}/instructor-exam`,
             provider: {
               "@type": "Organization",
@@ -231,7 +231,7 @@ export default function InstructorExamPage() {
                 name: "試験対策にはどのくらいの勉強時間が必要ですか？",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "個人差はありますが、筆記試験の範囲（漁業法・マナー・釣り具の知識など全7分野）をカバーするには約20〜30時間の学習が目安です。当サイトの学習ガイドと確認クイズ130問以上を活用すれば、効率的に知識を整理できます。",
+                  text: "個人差はありますが、筆記試験の範囲（漁業法・マナー・釣り具の知識など全7分野）をカバーするには約20〜30時間の学習が目安です。当サイトの学習ガイドと確認クイズ290問以上を活用すれば、効率的に知識を整理できます。",
                 },
               },
             ],
@@ -406,17 +406,33 @@ export default function InstructorExamPage() {
         <section className="mb-10">
           <h2 className="mb-4 text-xl font-bold">その他の試験対策</h2>
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-xl border border-dashed p-5 opacity-60">
+            <div className="rounded-xl border p-5 transition-colors hover:border-primary/20">
               <h3 className="font-bold">論文対策</h3>
               <p className="mt-1 text-sm text-muted-foreground">
-                頻出テーマと書き方のポイントを解説（準備中）
+                頻出テーマ5選と800字論文の構成フレームワークを解説
               </p>
+              <div className="mt-4">
+                <Link
+                  href="/instructor-exam/essay"
+                  className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50"
+                >
+                  論文対策を見る
+                </Link>
+              </div>
             </div>
-            <div className="rounded-xl border border-dashed p-5 opacity-60">
+            <div className="rounded-xl border p-5 transition-colors hover:border-primary/20">
               <h3 className="font-bold">実技対策</h3>
               <p className="mt-1 text-sm text-muted-foreground">
-                キャスティング・結び方の実技試験対策（準備中）
+                キャスティング・結び方・仕掛け作りの手順と減点ポイントを解説
               </p>
+              <div className="mt-4">
+                <Link
+                  href="/instructor-exam/practical"
+                  className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50"
+                >
+                  実技対策を見る
+                </Link>
+              </div>
             </div>
           </div>
         </section>

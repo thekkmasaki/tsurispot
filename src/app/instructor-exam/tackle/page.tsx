@@ -713,16 +713,16 @@ export default function TacklePage() {
         {/* ナビ */}
         <div className="mt-12 flex items-center justify-between border-t pt-6">
           <Link
-            href="/instructor-exam/manners"
+            href="/instructor-exam/history"
             className="rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium hover:bg-gray-200"
           >
-            &larr; 第3章 マナーと指導法
+            &larr; 第4章 釣りの文化史
           </Link>
           <Link
-            href="/instructor-exam"
+            href="/instructor-exam/technique"
             className="rounded-lg bg-sky-600 px-4 py-2 text-sm font-medium text-white hover:bg-sky-700"
           >
-            目次に戻る
+            第6章 釣り技術と知識 &rarr;
           </Link>
         </div>
 

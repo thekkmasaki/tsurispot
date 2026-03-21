@@ -495,16 +495,16 @@ export default function MannersPage() {
         {/* ナビ */}
         <div className="mt-12 flex items-center justify-between border-t pt-6">
           <Link
-            href="/instructor-exam/law"
+            href="/instructor-exam/safety"
             className="rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium hover:bg-gray-200"
           >
-            &larr; 第1章 漁業関連法規
+            &larr; 第2章 気象海象と安全対策
           </Link>
           <Link
-            href="/instructor-exam/tackle"
+            href="/instructor-exam/history"
             className="rounded-lg bg-sky-600 px-4 py-2 text-sm font-medium text-white hover:bg-sky-700"
           >
-            第5章 釣り具の知識 &rarr;
+            第4章 釣りの文化史 &rarr;
           </Link>
         </div>
 
