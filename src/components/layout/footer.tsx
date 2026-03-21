@@ -83,6 +83,7 @@ export function Footer() {
               <li><Link href="/fishing-calendar" className="hover:text-foreground">釣りカレンダー</Link></li>
               <li><Link href="/beginner-checklist" className="hover:text-foreground">持ち物チェックリスト</Link></li>
               <li><Link href="/fishing-rules" className="hover:text-foreground">ルールとマナー</Link></li>
+              <li><Link href="/instructor-exam" className="hover:text-foreground">釣りインストラクター試験対策</Link></li>
               <li><Link href="/gear" className="hover:text-foreground">編集長厳選の釣り道具</Link></li>
             </ul>
           </div>

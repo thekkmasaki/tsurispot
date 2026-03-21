@@ -133,6 +133,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/contact`, lastModified: legalDate, changeFrequency: "yearly", priority: 0.4 },
     { url: `${baseUrl}/partner`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.6 },
     { url: `${baseUrl}/umigyo`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.7 },
+    // 釣りインストラクター試験対策
+    { url: `${baseUrl}/instructor-exam`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${baseUrl}/instructor-exam/law`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${baseUrl}/instructor-exam/manners`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.6 },
+    { url: `${baseUrl}/instructor-exam/tackle`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.6 },
     { url: `${baseUrl}/umigyo/for-municipalities`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.6 },
     { url: `${baseUrl}/about`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/legal`, lastModified: legalDate, changeFrequency: "yearly", priority: 0.3 },
