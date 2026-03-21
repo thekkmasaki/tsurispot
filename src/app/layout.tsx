@@ -167,7 +167,7 @@ export default function RootLayout({
               founder: {
                 "@type": "Person",
                 name: "正木 家康",
-                jobTitle: "編集長",
+                jobTitle: "創設者・編集長",
               },
               contactPoint: {
                 "@type": "ContactPoint",

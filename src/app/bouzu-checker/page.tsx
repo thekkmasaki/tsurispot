@@ -70,6 +70,45 @@ export default function BouzuCheckerPage() {
         </section>
 
         <BouzuCheckerClient />
+
+        {/* ボウズ回避のための導線 */}
+        <section className="mx-auto max-w-3xl px-4 pb-12">
+          <div className="rounded-xl border-2 border-indigo-200 bg-gradient-to-r from-indigo-50 to-purple-50 p-6">
+            <h2 className="mb-2 text-lg font-bold text-indigo-900">ボウズを回避するために</h2>
+            <p className="mb-4 text-sm text-indigo-700">
+              条件の良い釣り場と適切な道具選びで、ボウズの確率を大幅に下げられます。
+            </p>
+            <div className="grid gap-3 sm:grid-cols-3">
+              <Link
+                href="/spots"
+                className="rounded-lg border border-indigo-200 bg-white p-4 text-center transition-shadow hover:shadow-md"
+              >
+                <p className="font-semibold text-indigo-800">好条件のスポットを探す</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  全国2,100箇所以上の釣り場
+                </p>
+              </Link>
+              <Link
+                href="/catchable-now"
+                className="rounded-lg border border-indigo-200 bg-white p-4 text-center transition-shadow hover:shadow-md"
+              >
+                <p className="font-semibold text-indigo-800">今釣れる魚を確認</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  旬の魚を狙ってボウズ回避
+                </p>
+              </Link>
+              <Link
+                href="/gear"
+                className="rounded-lg border border-indigo-200 bg-white p-4 text-center transition-shadow hover:shadow-md"
+              >
+                <p className="font-semibold text-indigo-800">おすすめの釣り道具</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  適切な道具で釣果アップ
+                </p>
+              </Link>
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );

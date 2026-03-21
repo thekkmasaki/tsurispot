@@ -103,6 +103,18 @@ export default function GlossaryQuizPage() {
                 <p className="text-xs text-gray-500">全7章・確認クイズ130問</p>
               </div>
             </Link>
+            <Link href="/spots">
+              <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 transition-all hover:border-blue-400 hover:shadow-sm">
+                <p className="text-sm font-semibold text-blue-800">🗺️ 釣りスポットを探す</p>
+                <p className="text-xs text-blue-600">学んだ知識を活かして釣りに行こう</p>
+              </div>
+            </Link>
+            <Link href="/gear">
+              <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 transition-all hover:border-blue-400 hover:shadow-sm">
+                <p className="text-sm font-semibold text-blue-800">🎣 おすすめ釣り道具</p>
+                <p className="text-xs text-blue-600">初心者向けの道具選びガイド</p>
+              </div>
+            </Link>
           </div>
         </section>
       </main>

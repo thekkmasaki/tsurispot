@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BookOpen, Compass, GraduationCap, Lightbulb } from "lucide-react";
+import { BookOpen, Compass, Fish, GraduationCap, Lightbulb, MapPin } from "lucide-react";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { QuizCategoryCard } from "@/components/quiz/quiz-category-card";
 import { QUIZ_CATEGORIES } from "@/types/quiz";
@@ -113,6 +113,27 @@ const relatedLinks = [
     icon: Lightbulb,
     label: "釣り用語集",
     sub: "知っておきたい釣り用語",
+  },
+];
+
+const revenueLinks = [
+  {
+    href: "/spots",
+    icon: MapPin,
+    label: "近くの釣りスポットを探す",
+    sub: "全国2,100箇所以上の釣り場データベース",
+  },
+  {
+    href: "/catchable-now",
+    icon: Fish,
+    label: "今釣れる魚を見る",
+    sub: "今月狙えるターゲットをチェック",
+  },
+  {
+    href: "/gear",
+    icon: Compass,
+    label: "おすすめの釣り道具",
+    sub: "編集長が実際に使って選んだ道具",
   },
 ];
 
@@ -229,6 +250,36 @@ export default function QuizListPage() {
                   <div className="flex items-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3 transition-all hover:border-amber-300 hover:shadow-sm">
                     <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-amber-50">
                       <link.icon className="size-5 text-amber-600" />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-sm font-semibold text-gray-800">
+                        {link.label}
+                      </p>
+                      <p className="text-xs text-gray-500 truncate">
+                        {link.sub}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </section>
+
+          {/* 知識を実践に活かそう */}
+          <section className="mt-8">
+            <h2 className="flex items-center gap-2 text-lg font-bold text-gray-900 sm:text-xl">
+              <span>🎣</span>
+              知識を実践に活かそう
+            </h2>
+            <p className="mt-1 text-sm text-gray-500">
+              クイズで学んだ知識を持って、実際の釣りに出かけよう
+            </p>
+            <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
+              {revenueLinks.map((link) => (
+                <Link key={link.href} href={link.href}>
+                  <div className="flex items-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3 transition-all hover:border-blue-300 hover:shadow-sm">
+                    <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-blue-50">
+                      <link.icon className="size-5 text-blue-600" />
                     </div>
                     <div className="min-w-0">
                       <p className="text-sm font-semibold text-gray-800">

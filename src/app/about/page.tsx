@@ -80,14 +80,16 @@ const personJsonLd = {
     url: "https://tsurispot.com",
   },
   description:
-    "釣り歴2年目。明石・播磨エリアをホームグラウンドに、堤防釣りからショアジギングまで幅広く実践。ツリスポ編集長として全記事の監修を担当。",
+    "ツリスポ創設者・編集長。自身が釣り初心者として情報収集に苦労した経験から、2025年にツリスポを立ち上げ。全国2,100箇所以上の釣り場データベースを構築し、水産庁統計・自治体公開情報のクロスチェックによるデータ駆動型の釣り情報プラットフォームを運営。初心者が本当に必要な情報にすぐアクセスできるサイトを目指している。",
   knowsAbout: [
+    "釣りスポットデータベース構築",
+    "釣り情報プラットフォーム運営",
+    "初心者向け釣りガイド",
     "堤防釣り",
     "サビキ釣り",
     "ショアジギング",
     "エギング",
-    "釣り道具",
-    "釣りスポット情報",
+    "データ分析・情報設計",
   ],
   sameAs: ["https://www.instagram.com/tsurispotjapan/"],
 };
@@ -132,7 +134,7 @@ export default function AboutPage() {
               ツリスポについて
             </h1>
             <p className="max-w-lg text-base text-blue-100 sm:text-lg">
-              みんなのための、いちばん使いやすい釣りスポット情報サイト
+              初心者目線 × データ重視。日本最大級の釣りスポットデータベース
             </p>
           </div>
         </div>
@@ -250,12 +252,15 @@ export default function AboutPage() {
               <div className="flex-1">
                 <h3 className="mb-1 text-xl font-bold">正木 家康</h3>
                 <p className="mb-3 text-sm text-muted-foreground">
-                  ツリスポ編集長 / 釣り歴2年目
+                  ツリスポ創設者・編集長
                 </p>
                 <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-                  明石・播磨エリアをホームグラウンドに、堤防釣りからショアジギングまで幅広く実践。
-                  「初心者がもっと気軽に釣りを始められる世界を作りたい」という想いから2025年にツリスポを立ち上げ。
-                  全記事の監修と品質管理を担当し、おすすめ道具は実際に自分で使って納得したものだけを厳選して紹介しています。
+                  「釣りを始めたいけど、情報がバラバラで何を信じていいか分からない」――
+                  自身がまさにその壁にぶつかった経験から、2025年にツリスポを創設しました。
+                  初心者だからこそ分かる「本当に知りたい情報」を、全国2,100箇所以上のデータベースと
+                  公的情報のクロスチェックで提供しています。
+                  明石・播磨エリアをホームグラウンドに堤防釣りからショアジギングまで実践中。
+                  道具は自分で使って納得したものだけを紹介しています。
                 </p>
                 <div className="flex flex-wrap gap-2">
                   <Badge variant="outline" className="text-xs">堤防釣り</Badge>
@@ -292,9 +297,10 @@ export default function AboutPage() {
             </h2>
           </div>
           <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
-            ツリスポ編集部は、編集長を中心に釣り歴2年目の経験者で構成されたチームです。
-            堤防釣りからオフショアまで幅広いジャンルに精通したメンバーが、
-            初心者にもわかりやすい情報発信を心がけています。
+            ツリスポ編集部は「初心者目線 × データ重視」を編集方針に掲げています。
+            水産庁の統計データ、自治体の公開情報、Google Mapsでの位置確認など
+            複数ソースのクロスチェックに基づく正確な情報発信を徹底。
+            初心者が本当に必要な情報に迷わずたどり着けるサイトを目指しています。
           </p>
         </div>
 
@@ -304,9 +310,9 @@ export default function AboutPage() {
               <div className="flex size-12 items-center justify-center rounded-full bg-sky-100">
                 <MapPin className="size-6 text-sky-600" />
               </div>
-              <h3 className="text-sm font-semibold">現地取材</h3>
+              <h3 className="text-sm font-semibold">データ駆動</h3>
               <p className="text-xs leading-relaxed text-muted-foreground">
-                編集部メンバーが実際に釣り場を訪問し、アクセス・設備・釣果情報を確認しています。
+                水産庁統計・自治体情報・Google Mapsなど複数ソースをクロスチェックし、正確なデータを提供しています。
               </p>
             </CardContent>
           </Card>
@@ -326,9 +332,9 @@ export default function AboutPage() {
               <div className="flex size-12 items-center justify-center rounded-full bg-amber-100">
                 <Fish className="size-6 text-amber-600" />
               </div>
-              <h3 className="text-sm font-semibold">定期更新</h3>
+              <h3 className="text-sm font-semibold">毎月更新</h3>
               <p className="text-xs leading-relaxed text-muted-foreground">
-                季節ごとの釣果情報や釣り場の変化を定期的にチェックし、常に最新の情報を提供しています。
+                季節・釣果・釣り場の変化を毎月チェック。閉鎖・禁止情報もユーザー報告と合わせて反映しています。
               </p>
             </CardContent>
           </Card>

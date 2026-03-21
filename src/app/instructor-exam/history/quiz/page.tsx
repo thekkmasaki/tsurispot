@@ -9,13 +9,13 @@ const baseUrl = "https://tsurispot.com";
 export const metadata: Metadata = {
   title: "第4章 釣りの文化史 確認クイズ（全40問）| 公認釣りインストラクター試験対策",
   description:
-    "日本の釣り文化の起源・江戸時代の釣り・和竿・テンカラ・釣り文学の知識を全40問の4択クイズでチェック。1問ずつ回答して理解度を確認しよう。",
+    "日本の釣り文化史・和竿・テンカラ・釣り文学の知識を全40問の4択クイズでチェック。",
   alternates: {
     canonical: `${baseUrl}/instructor-exam/history/quiz`,
   },
   openGraph: {
     title: "釣りの文化史 確認クイズ（全40問）| 釣りインストラクター試験対策 | ツリスポ",
-    description: "日本の釣り文化の起源・江戸時代の釣り・和竿・テンカラ・釣り文学の知識を全40問の4択クイズでチェック。",
+    description: "日本の釣り文化史・和竿・テンカラ・釣り文学の知識を全40問でチェック。",
     url: `${baseUrl}/instructor-exam/history/quiz`,
     type: "website",
     siteName: "ツリスポ",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "釣りの文化史 確認クイズ（全40問）| 試験対策",
-    description: "釣りの文化史の知識を4択クイズでチェック。合格目安80点以上。",
+    description: "釣り文化史の知識を4択クイズでチェック。合格目安80点以上。",
     images: ["https://tsurispot.com/api/og?title=釣りの文化史 確認クイズ&emoji=📜"],
   },
   keywords: ["釣り文化史クイズ", "和竿問題", "テンカラクイズ", "釣りインストラクター", "試験問題"],
@@ -55,7 +55,7 @@ export default function HistoryQuizPage() {
             "@context": "https://schema.org",
             "@type": "Quiz",
             name: "釣りの文化史 確認クイズ（全40問）",
-            description: "日本の釣り文化の起源・江戸時代の釣り・和竿・テンカラ・釣り文学の知識を4択クイズで確認",
+            description: "日本の釣り文化史・和竿・テンカラ・釣り文学の知識を4択クイズで確認",
             educationalLevel: "advanced",
             about: { "@type": "Thing", name: "釣りの文化史" },
             provider: { "@type": "Organization", name: "ツリスポ", url: baseUrl },
@@ -80,9 +80,9 @@ export default function HistoryQuizPage() {
         </nav>
 
         <div className="mb-8 rounded-2xl bg-gradient-to-br from-amber-700 to-yellow-800 px-6 py-8 text-white sm:px-10">
-          <p className="text-sm text-amber-200">第4章 釣りの文化史</p>
-          <h1 className="mt-1 text-2xl font-bold sm:text-3xl">確認クイズ</h1>
-          <p className="mt-2 text-amber-100">
+          <p className="text-sm text-amber-300">第4章 釣りの文化史</p>
+          <h1 className="mt-1 text-2xl font-bold sm:text-3xl">釣りの文化史 確認クイズ</h1>
+          <p className="mt-2 text-amber-200">
             全{historyQuestions.length}問の4択クイズで理解度をチェックしましょう。
           </p>
         </div>

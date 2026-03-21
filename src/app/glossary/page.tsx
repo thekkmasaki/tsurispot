@@ -194,6 +194,81 @@ export default function GlossaryPage() {
         {/* Client-side search and glossary content */}
         <GlossaryClient glossaryData={glossaryData} />
 
+        {/* 用語を覚えたら釣りに行こう */}
+        <div className="mt-10 rounded-xl border-2 border-blue-200 bg-gradient-to-r from-blue-50 to-sky-50 p-6">
+          <h2 className="mb-2 text-lg font-bold text-blue-900">用語を覚えたら、実際に釣りに行こう</h2>
+          <p className="mb-4 text-sm text-blue-700">
+            用語の知識があれば釣り場での情報収集がスムーズに。まずは近くの釣りスポットを探してみましょう。
+          </p>
+          <div className="grid gap-3 sm:grid-cols-3">
+            <Link
+              href="/spots"
+              className="rounded-lg border border-blue-200 bg-white p-4 text-center transition-shadow hover:shadow-md"
+            >
+              <p className="font-semibold text-blue-800">釣りスポットを探す</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                全国2,100箇所以上の釣り場
+              </p>
+            </Link>
+            <Link
+              href="/catchable-now"
+              className="rounded-lg border border-blue-200 bg-white p-4 text-center transition-shadow hover:shadow-md"
+            >
+              <p className="font-semibold text-blue-800">今釣れる魚を見る</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                今月のおすすめターゲット
+              </p>
+            </Link>
+            <Link
+              href="/gear"
+              className="rounded-lg border border-blue-200 bg-white p-4 text-center transition-shadow hover:shadow-md"
+            >
+              <p className="font-semibold text-blue-800">おすすめ釣り道具</p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                初心者向けの道具ガイド
+              </p>
+            </Link>
+          </div>
+        </div>
+
+        {/* おすすめ書籍：海釣りドライブマップ */}
+        <div className="mt-8 rounded-xl border border-amber-200 bg-amber-50 p-6">
+          <h2 className="mb-2 text-lg font-bold text-amber-900">釣り場ガイドブックで実践力アップ</h2>
+          <p className="mb-4 text-sm text-amber-800">
+            用語を覚えたら次はポイント選び。ドライブマップがあれば現地での釣り場探しがスムーズになります。
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            <a
+              href="https://amzn.to/4sp5Go3"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 rounded-lg border border-amber-200 bg-white p-4 transition-shadow hover:shadow-md"
+            >
+              <span className="text-2xl">🗺️</span>
+              <div>
+                <p className="font-semibold text-amber-900">関西海釣りドライブマップ(1)</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  伊勢湾～紀東エリアの釣り場ガイド
+                </p>
+              </div>
+            </a>
+            <a
+              href="https://amzn.to/4qTgsSj"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-3 rounded-lg border border-amber-200 bg-white p-4 transition-shadow hover:shadow-md"
+            >
+              <span className="text-2xl">🗺️</span>
+              <div>
+                <p className="font-semibold text-amber-900">関西海釣りドライブマップ(2)</p>
+                <p className="mt-1 text-xs text-muted-foreground">
+                  大阪湾～播磨灘エリアの釣り場ガイド
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+
         {/* Internal links */}
         <div className="mt-12 rounded-xl border bg-muted/30 p-6">
           <h2 className="mb-4 text-lg font-bold">関連ページ</h2>

@@ -500,6 +500,24 @@ export default function InstructorExamPage() {
               </Link>{" "}
               -- 遊びながら学べる釣り検定（全240問）
             </li>
+            <li>
+              <Link
+                href="/spots"
+                className="font-medium text-green-700 underline hover:text-green-900"
+              >
+                全国の釣りスポット
+              </Link>{" "}
+              -- 学んだ知識を活かして実際に釣りに行こう
+            </li>
+            <li>
+              <Link
+                href="/gear"
+                className="font-medium text-green-700 underline hover:text-green-900"
+              >
+                おすすめ釣り道具
+              </Link>{" "}
+              -- 試験の釣り具知識を実際の道具選びに活用
+            </li>
           </ul>
         </section>
 
