@@ -261,9 +261,10 @@ export default function InstructorExamPage() {
           </div>
         </section>
 
-        {/* 章一覧カード */}
+        {/* 学習ガイド（解説ページ） */}
         <section className="mb-10">
-          <h2 className="mb-4 text-xl font-bold">学習ガイド 全7章</h2>
+          <h2 className="mb-2 text-xl font-bold">学習ガイド</h2>
+          <p className="mb-4 text-sm text-muted-foreground">各科目の重要ポイントを教科書形式で解説。講習前の予習に最適です。</p>
           <div className="grid gap-4 sm:grid-cols-2">
             {chapters.map((ch) =>
               ch.ready ? (
@@ -284,9 +285,6 @@ export default function InstructorExamPage() {
                     </h3>
                     <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
                       {ch.description}
-                    </p>
-                    <p className="mt-2 text-xs font-medium text-purple-600">
-                      確認クイズ {ch.quizCount}問
                     </p>
                   </div>
                 </Link>
@@ -314,6 +312,32 @@ export default function InstructorExamPage() {
               )
             )}
           </div>
+        </section>
+
+        {/* 確認クイズ */}
+        <section className="mb-10">
+          <h2 className="mb-2 text-xl font-bold">確認クイズ</h2>
+          <p className="mb-4 text-sm text-muted-foreground">4択問題で知識の定着度をチェック。各章の学習後に挑戦してみましょう。</p>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {chapters.filter((ch) => ch.ready && ch.quizCount > 0).map((ch) => (
+              <Link
+                key={`quiz-${ch.slug}`}
+                href={`/instructor-exam/${ch.slug}#summary`}
+                className="group rounded-xl border p-5 text-center transition-colors hover:border-purple-400 hover:bg-purple-50"
+              >
+                <span className="text-3xl">{ch.icon}</span>
+                <h3 className="mt-2 font-bold group-hover:text-purple-700">
+                  第{ch.num}章 {ch.title}
+                </h3>
+                <p className="mt-1 text-lg font-bold text-purple-600">
+                  {ch.quizCount}問
+                </p>
+              </Link>
+            ))}
+          </div>
+          <p className="mt-3 text-center text-sm text-muted-foreground">
+            全{chapters.reduce((sum, ch) => sum + ch.quizCount, 0)}問収録（今後さらに追加予定）
+          </p>
         </section>
 
         {/* 論文・実技対策 */}

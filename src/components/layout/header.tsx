@@ -49,7 +49,7 @@ const moreNavItems = [
   { href: "/shops", label: "釣具店ガイド", icon: Store },
   { href: "/gear", label: "おすすめ道具", icon: Package },
   { href: "/fishing-rules", label: "ルールとマナー", icon: Scale },
-  { href: "/instructor-exam", label: "試験対策", icon: ClipboardCheck },
+  { href: "/instructor-exam", label: "インストラクター試験", icon: ClipboardCheck },
   { href: "/umigyo", label: "海業推進", icon: Anchor },
 ];
 

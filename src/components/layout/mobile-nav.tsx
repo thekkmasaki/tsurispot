@@ -50,7 +50,7 @@ const moreNavItems = [
   { href: "/bouzu-checker", label: "ボウズ確率", icon: Target },
   { href: "/quiz", label: "スタイル診断", icon: Sparkles },
   { href: "/fishing-rules", label: "ルール・マナー", icon: Scale },
-  { href: "/instructor-exam", label: "試験対策", icon: ClipboardCheck },
+  { href: "/instructor-exam", label: "インストラクター試験", icon: ClipboardCheck },
   { href: "/umigyo", label: "海業推進", icon: Anchor },
 ];
 
