@@ -88,6 +88,11 @@ function LiveScoreBoard({
           {answered > 0 ? `正答率 ${accuracyPct}%` : ""}
         </span>
       </div>
+
+      {/* 合格目安 */}
+      <div className="rounded-lg border border-purple-200 bg-purple-50 px-3 py-2 text-xs text-purple-700">
+        合格目安: <span className="font-bold">80点以上</span>（{total}問中{Math.ceil(total * 0.8)}問正解）
+      </div>
     </div>
   );
 }
