@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useMemo } from "react";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -19,7 +19,7 @@ export interface ExamQuizProps {
   questions: ExamQuizQuestion[];
   showNumbers?: boolean;
   startNumber?: number;
-  /** "one" = 1問ずつ表示（デフォルト）, "all" = 全問一覧表示（旧仕様） */
+  /** "one" = 1問ずつ表示（デフォルト）, "all" = 全問一覧表示 */
   mode?: "all" | "one";
 }
 
@@ -30,38 +30,209 @@ export interface ExamQuizProps {
 const LABELS = ["A", "B", "C", "D"] as const;
 
 /* ------------------------------------------------------------------ */
-/*  Progress Bar                                                       */
+/*  Live Score Board (常時表示)                                         */
 /* ------------------------------------------------------------------ */
 
-function ProgressBar({
+function LiveScoreBoard({
   current,
   total,
+  correctCount,
+  wrongCount,
 }: {
   current: number;
   total: number;
+  correctCount: number;
+  wrongCount: number;
 }) {
+  const answered = correctCount + wrongCount;
   const pct = total > 0 ? Math.round((current / total) * 100) : 0;
+  const accuracyPct = answered > 0 ? Math.round((correctCount / answered) * 100) : 0;
 
   return (
-    <div className="mb-6">
-      <div className="mb-2 flex items-center justify-between text-sm font-semibold">
-        <span className="text-purple-700">
-          問題 {current} / {total}
+    <div className="mb-6 space-y-3">
+      {/* 進捗バー */}
+      <div className="flex items-center justify-between text-sm">
+        <span className="font-bold text-slate-700">
+          問 {current} / {total}
         </span>
-        <span className="text-slate-400">{pct}%</span>
+        <span className="text-xs text-slate-400">{pct}%</span>
       </div>
-      <div className="h-2.5 w-full overflow-hidden rounded-full bg-slate-200">
-        <div
-          className="h-full rounded-full bg-purple-500 transition-all duration-500 ease-out"
-          style={{ width: `${pct}%` }}
-        />
+      <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-slate-100">
+        {/* 正解分 */}
+        {correctCount > 0 && (
+          <div
+            className="h-full bg-green-500 transition-all duration-500"
+            style={{ width: `${(correctCount / total) * 100}%` }}
+          />
+        )}
+        {/* 不正解分 */}
+        {wrongCount > 0 && (
+          <div
+            className="h-full bg-red-400 transition-all duration-500"
+            style={{ width: `${(wrongCount / total) * 100}%` }}
+          />
+        )}
+      </div>
+
+      {/* スコア表示 */}
+      <div className="flex items-center gap-3 text-xs">
+        <span className="flex items-center gap-1 font-semibold text-green-600">
+          <span className="inline-block size-2 rounded-full bg-green-500" />
+          正解 {correctCount}
+        </span>
+        <span className="flex items-center gap-1 font-semibold text-red-500">
+          <span className="inline-block size-2 rounded-full bg-red-400" />
+          不正解 {wrongCount}
+        </span>
+        <span className="ml-auto text-slate-500">
+          {answered > 0 ? `正答率 ${accuracyPct}%` : ""}
+        </span>
       </div>
     </div>
   );
 }
 
 /* ------------------------------------------------------------------ */
-/*  Score Summary                                                      */
+/*  Final Result Screen                                                */
+/* ------------------------------------------------------------------ */
+
+function FinalResult({
+  questions,
+  answeredMap,
+  onRetry,
+  onReviewWrong,
+}: {
+  questions: ExamQuizQuestion[];
+  answeredMap: Map<string, boolean>;
+  onRetry: () => void;
+  onReviewWrong: () => void;
+}) {
+  const total = questions.length;
+  const correctCount = Array.from(answeredMap.values()).filter(Boolean).length;
+  const wrongCount = total - correctCount;
+  const pct = Math.round((correctCount / total) * 100);
+
+  // 合格判定
+  const passed = pct >= 80;
+  const grade =
+    pct >= 90
+      ? "S"
+      : pct >= 80
+      ? "A"
+      : pct >= 70
+      ? "B"
+      : pct >= 60
+      ? "C"
+      : "D";
+  const gradeColor =
+    grade === "S"
+      ? "text-yellow-500"
+      : grade === "A"
+      ? "text-green-600"
+      : grade === "B"
+      ? "text-blue-600"
+      : grade === "C"
+      ? "text-orange-500"
+      : "text-red-500";
+
+  // 間違えた問題リスト
+  const wrongQuestions = questions.filter((q) => answeredMap.get(q.id) === false);
+
+  return (
+    <div className="space-y-6">
+      {/* メインスコア */}
+      <div className="rounded-2xl border-2 border-purple-300 bg-gradient-to-b from-purple-50 to-white p-6 text-center sm:p-8">
+        <p className="mb-1 text-sm font-semibold text-purple-500">試験結果</p>
+
+        {/* グレード */}
+        <div className="mb-3">
+          <span className={`text-6xl font-black ${gradeColor}`}>{grade}</span>
+        </div>
+
+        {/* 点数 */}
+        <p className="text-3xl font-extrabold text-slate-900">
+          {total}問中{" "}
+          <span className="text-purple-600">{correctCount}問正解</span>
+        </p>
+        <p className="mt-1 text-lg font-bold text-slate-500">{pct}点 / 100点</p>
+
+        {/* 合否 */}
+        <div
+          className={`mx-auto mt-4 inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-bold ${
+            passed
+              ? "bg-green-100 text-green-700"
+              : "bg-red-100 text-red-700"
+          }`}
+        >
+          {passed ? "合格ライン到達！" : "合格ライン未達（80%以上で合格）"}
+        </div>
+
+        {/* 内訳 */}
+        <div className="mt-6 flex justify-center gap-6 text-sm">
+          <div>
+            <p className="text-2xl font-bold text-green-600">{correctCount}</p>
+            <p className="text-slate-500">正解</p>
+          </div>
+          <div className="h-10 w-px bg-slate-200" />
+          <div>
+            <p className="text-2xl font-bold text-red-500">{wrongCount}</p>
+            <p className="text-slate-500">不正解</p>
+          </div>
+          <div className="h-10 w-px bg-slate-200" />
+          <div>
+            <p className="text-2xl font-bold text-purple-600">{pct}%</p>
+            <p className="text-slate-500">正答率</p>
+          </div>
+        </div>
+      </div>
+
+      {/* 間違えた問題一覧 */}
+      {wrongQuestions.length > 0 && (
+        <div className="rounded-xl border border-red-200 bg-red-50/50 p-5">
+          <h3 className="mb-3 text-sm font-bold text-red-700">
+            間違えた問題（{wrongQuestions.length}問）
+          </h3>
+          <ul className="space-y-2">
+            {wrongQuestions.map((q, i) => (
+              <li key={q.id} className="rounded-lg border border-red-100 bg-white px-4 py-3">
+                <p className="text-sm text-slate-800">
+                  <span className="mr-1.5 font-bold text-red-500">Q{questions.indexOf(q) + 1}.</span>
+                  {q.question}
+                </p>
+                <p className="mt-1 text-xs text-green-700">
+                  正解: {LABELS[q.correctIndex]}. {q.choices[q.correctIndex]}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* アクション */}
+      <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+        {wrongQuestions.length > 0 && (
+          <button
+            type="button"
+            onClick={onReviewWrong}
+            className="inline-flex items-center gap-2 rounded-lg border-2 border-red-300 bg-white px-6 py-3 text-sm font-bold text-red-600 transition-colors hover:bg-red-50"
+          >
+            間違えた問題だけ復習
+          </button>
+        )}
+        <button
+          type="button"
+          onClick={onRetry}
+          className="inline-flex items-center gap-2 rounded-lg bg-purple-600 px-6 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-purple-700"
+        >
+          もう一度全問挑戦する
+        </button>
+      </div>
+    </div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  Score Summary (for "all" mode)                                     */
 /* ------------------------------------------------------------------ */
 
 function ScoreSummary({
@@ -91,32 +262,17 @@ function ScoreSummary({
     >
       {allDone ? (
         <>
-          <p className="mb-1 text-sm font-semibold text-purple-600">
-            全問回答完了！
-          </p>
+          <p className="mb-1 text-sm font-semibold text-purple-600">全問回答完了！</p>
           <p className="text-2xl font-extrabold text-slate-900">
             {total}問中{" "}
             <span className="text-purple-600">{correctCount}問正解</span>
             <span className="ml-1 text-lg text-slate-500">({pct}%)</span>
           </p>
-          {pct >= 80 ? (
-            <p className="mt-2 text-sm text-green-600 font-medium">
-              素晴らしい！合格ラインです
-            </p>
-          ) : pct >= 60 ? (
-            <p className="mt-2 text-sm text-yellow-600 font-medium">
-              もう少し！間違えた問題を復習しましょう
-            </p>
-          ) : (
-            <p className="mt-2 text-sm text-red-600 font-medium">
-              もう一度しっかり復習しましょう
-            </p>
-          )}
           {onRetry && (
             <button
               type="button"
               onClick={onRetry}
-              className="mt-4 inline-flex items-center gap-2 rounded-lg bg-purple-600 px-6 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-purple-700 active:bg-purple-800"
+              className="mt-4 inline-flex items-center gap-2 rounded-lg bg-purple-600 px-6 py-2.5 text-sm font-bold text-white shadow-sm transition-colors hover:bg-purple-700"
             >
               もう一度挑戦する
             </button>
@@ -136,40 +292,58 @@ function ScoreSummary({
 /* ------------------------------------------------------------------ */
 
 export function ExamQuiz({
-  questions,
+  questions: allQuestions,
   showNumbers = true,
   startNumber = 1,
   mode = "one",
 }: ExamQuizProps) {
-  const [answeredMap, setAnsweredMap] = useState<Map<string, boolean>>(
-    new Map()
-  );
+  const [answeredMap, setAnsweredMap] = useState<Map<string, boolean>>(new Map());
   const [currentIndex, setCurrentIndex] = useState(0);
-  // Track whether the user has clicked "次の問題へ" after the last question
   const [showResult, setShowResult] = useState(false);
+  const [reviewWrongOnly, setReviewWrongOnly] = useState(false);
 
-  const handleAnswer = useCallback(
-    (id: string, correct: boolean) => {
-      setAnsweredMap((prev) => {
-        const next = new Map(prev);
-        next.set(id, correct);
-        return next;
-      });
-    },
-    []
-  );
+  // 現在出題中の問題リスト（復習モード対応）
+  const questions = useMemo(() => {
+    if (!reviewWrongOnly) return allQuestions;
+    return allQuestions.filter((q) => answeredMap.get(q.id) === false);
+  }, [reviewWrongOnly, allQuestions, answeredMap]);
+
+  const correctCount = Array.from(answeredMap.values()).filter(Boolean).length;
+  const wrongCount = answeredMap.size - correctCount;
+
+  const handleAnswer = useCallback((id: string, correct: boolean) => {
+    setAnsweredMap((prev) => {
+      const next = new Map(prev);
+      next.set(id, correct);
+      return next;
+    });
+  }, []);
 
   const handleRetry = useCallback(() => {
     setAnsweredMap(new Map());
     setCurrentIndex(0);
     setShowResult(false);
+    setReviewWrongOnly(false);
   }, []);
 
-  /* ---------- "all" mode: original behaviour ---------- */
+  const handleReviewWrong = useCallback(() => {
+    // 間違えた問題だけで再出題（スコアはリセット）
+    setReviewWrongOnly(true);
+    setCurrentIndex(0);
+    setShowResult(false);
+    // answeredMapはリセットしない（wrongの判定に使う）
+    // → 次のレンダリングでquestionsが絞り込まれる
+    // → その後answeredMapをリセット
+    setTimeout(() => {
+      setAnsweredMap(new Map());
+    }, 0);
+  }, []);
+
+  /* ---------- "all" mode ---------- */
   if (mode === "all") {
     return (
       <div className="space-y-6">
-        {questions.map((q, i) => (
+        {allQuestions.map((q, i) => (
           <QuestionCard
             key={q.id}
             q={q}
@@ -178,49 +352,66 @@ export function ExamQuiz({
             onAnswer={(correct) => handleAnswer(q.id, correct)}
           />
         ))}
-        <ScoreSummary total={questions.length} answeredMap={answeredMap} onRetry={handleRetry} />
+        <ScoreSummary total={allQuestions.length} answeredMap={answeredMap} onRetry={handleRetry} />
       </div>
     );
   }
 
-  /* ---------- "one" mode: sequential, one at a time ---------- */
+  /* ---------- "one" mode ---------- */
   const total = questions.length;
-  const isLastQuestion = currentIndex === total - 1;
-  const currentQ = questions[currentIndex];
-  const isCurrentAnswered = currentQ ? answeredMap.has(currentQ.id) : false;
 
-  // Show final result screen
+  // 結果画面
   if (showResult) {
     return (
-      <div className="space-y-6">
-        <ProgressBar current={total} total={total} />
-        <ScoreSummary total={total} answeredMap={answeredMap} onRetry={handleRetry} />
-      </div>
+      <FinalResult
+        questions={reviewWrongOnly ? questions : allQuestions}
+        answeredMap={answeredMap}
+        onRetry={handleRetry}
+        onReviewWrong={handleReviewWrong}
+      />
     );
   }
 
-  if (!currentQ) return null;
+  if (total === 0 || !questions[currentIndex]) return null;
+
+  const currentQ = questions[currentIndex];
+  const isCurrentAnswered = answeredMap.has(currentQ.id);
+  const isLastQuestion = currentIndex === total - 1;
 
   return (
-    <div className="space-y-6">
-      <ProgressBar current={currentIndex + 1} total={total} />
+    <div className="space-y-4">
+      {/* 復習モードラベル */}
+      {reviewWrongOnly && (
+        <div className="rounded-lg bg-red-50 border border-red-200 px-4 py-2 text-center text-sm font-semibold text-red-600">
+          復習モード — 間違えた{total}問に再挑戦中
+        </div>
+      )}
 
+      {/* リアルタイムスコアボード */}
+      <LiveScoreBoard
+        current={currentIndex + 1}
+        total={total}
+        correctCount={Array.from(answeredMap.values()).filter(Boolean).length}
+        wrongCount={answeredMap.size - Array.from(answeredMap.values()).filter(Boolean).length}
+      />
+
+      {/* 問題カード */}
       <QuestionCard
         key={currentQ.id}
         q={currentQ}
-        index={startNumber + currentIndex}
+        index={reviewWrongOnly ? currentIndex + 1 : startNumber + allQuestions.indexOf(currentQ)}
         showNumber={showNumbers}
         onAnswer={(correct) => handleAnswer(currentQ.id, correct)}
       />
 
-      {/* Navigation button (only after answering) */}
+      {/* ナビゲーションボタン */}
       {isCurrentAnswered && (
         <div className="flex justify-center pt-2">
           {isLastQuestion ? (
             <button
               type="button"
               onClick={() => setShowResult(true)}
-              className="inline-flex items-center gap-2 rounded-lg bg-purple-600 px-8 py-3 text-base font-bold text-white shadow-sm transition-colors hover:bg-purple-700 active:bg-purple-800"
+              className="inline-flex items-center gap-2 rounded-lg bg-purple-600 px-8 py-3 text-base font-bold text-white shadow-sm transition-colors hover:bg-purple-700"
             >
               結果を見る
             </button>
@@ -228,10 +419,9 @@ export function ExamQuiz({
             <button
               type="button"
               onClick={() => setCurrentIndex((prev) => prev + 1)}
-              className="inline-flex items-center gap-2 rounded-lg bg-purple-600 px-8 py-3 text-base font-bold text-white shadow-sm transition-colors hover:bg-purple-700 active:bg-purple-800"
+              className="inline-flex items-center gap-2 rounded-lg bg-purple-600 px-8 py-3 text-base font-bold text-white shadow-sm transition-colors hover:bg-purple-700"
             >
-              次の問題へ
-              <span aria-hidden="true">&rarr;</span>
+              次の問題へ →
             </button>
           )}
         </div>
@@ -347,27 +537,18 @@ function QuestionCard({
         })}
       </div>
 
-      {/* Result & Explanation (shown after answering) */}
+      {/* Explanation */}
       {answered && (
         <div className="border-t border-slate-100 px-5 py-4 sm:px-6">
-          {/* Correct / Incorrect banner */}
           <div
             className={`mb-4 flex items-center gap-2 rounded-lg px-4 py-3 ${
               isCorrect ? "bg-green-50" : "bg-red-50"
             }`}
           >
-            <span
-              className={`text-xl font-bold ${
-                isCorrect ? "text-green-600" : "text-red-600"
-              }`}
-            >
+            <span className={`text-xl font-bold ${isCorrect ? "text-green-600" : "text-red-600"}`}>
               {isCorrect ? "\u25CB" : "\u2715"}
             </span>
-            <span
-              className={`text-base font-bold ${
-                isCorrect ? "text-green-700" : "text-red-700"
-              }`}
-            >
+            <span className={`text-base font-bold ${isCorrect ? "text-green-700" : "text-red-700"}`}>
               {isCorrect ? "正解です！" : "不正解です"}
             </span>
             <span className="ml-auto text-sm font-semibold text-slate-600">
@@ -375,17 +556,11 @@ function QuestionCard({
             </span>
           </div>
 
-          {/* Main explanation */}
           <div className="mb-4 rounded-lg bg-slate-50 p-4">
-            <p className="mb-1 text-xs font-bold uppercase tracking-wide text-slate-500">
-              解説
-            </p>
-            <p className="text-sm leading-relaxed text-slate-700">
-              {q.explanation}
-            </p>
+            <p className="mb-1 text-xs font-bold uppercase tracking-wide text-slate-500">解説</p>
+            <p className="text-sm leading-relaxed text-slate-700">{q.explanation}</p>
           </div>
 
-          {/* Per-choice explanations */}
           {q.choiceExplanations && (
             <div className="space-y-2">
               <p className="text-xs font-bold uppercase tracking-wide text-slate-500">
@@ -406,20 +581,12 @@ function QuestionCard({
                     <p className="text-sm">
                       <span
                         className={`mr-1.5 font-bold ${
-                          isChoiceCorrect
-                            ? "text-green-600"
-                            : "text-slate-500"
+                          isChoiceCorrect ? "text-green-600" : "text-slate-500"
                         }`}
                       >
                         {LABELS[idx]}.
                       </span>
-                      <span
-                        className={
-                          isChoiceCorrect
-                            ? "text-green-800"
-                            : "text-slate-600"
-                        }
-                      >
+                      <span className={isChoiceCorrect ? "text-green-800" : "text-slate-600"}>
                         {exp}
                       </span>
                     </p>
