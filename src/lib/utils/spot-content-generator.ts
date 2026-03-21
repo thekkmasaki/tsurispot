@@ -302,31 +302,76 @@ function getFacilityText(spot: FishingSpot): string {
 export function generateSpotIntro(spot: FishingSpot): string {
   const typeLabel = SPOT_TYPE_LABELS[spot.spotType];
   const typeFeatures = SPOT_TYPE_FEATURES[spot.spotType];
-  const regionGroup = getRegionGroup(spot.region.prefecture);
   const topFish = getTopFishNames(spot);
   const easyFish = getEasyFish(spot);
   const methods = getUniqueMethods(spot);
   const bestMonths = getBestMonths(spot);
 
-  let intro = `${spot.name}は${spot.region.prefecture}${spot.region.areaName}に位置する${typeLabel}の釣り場です。`;
-  intro += `${typeFeatures.atmosphere}${spot.difficulty === "beginner" ? "ため、釣り初心者にもおすすめです" : spot.difficulty === "intermediate" ? "ため、ある程度の経験がある方に適しています" : "ため、腕に覚えのある方におすすめです"}。`;
+  // slug-based deterministic hash for variety
+  let h = 0;
+  for (let i = 0; i < spot.slug.length; i++) h = ((h << 5) - h + spot.slug.charCodeAt(i)) | 0;
+  const v = Math.abs(h);
 
+  const intro: string[] = [];
+  const diffText = spot.difficulty === "beginner"
+    ? "初心者でも安心して楽しめる"
+    : spot.difficulty === "intermediate"
+    ? "ある程度の経験があると楽しめる"
+    : "経験豊富な釣り人に向いている";
+  const areaName = spot.region.areaName;
+  const meritShort = typeFeatures.merit.split("。")[0];
+
+  // Opening（5パターン、slug hashで決定的に選択）
+  switch (v % 5) {
+    case 0:
+      intro.push(`${typeFeatures.atmosphere}。${diffText}釣り場。`);
+      break;
+    case 1:
+      if (spot.catchableFish.length >= 2) {
+        intro.push(`${topFish}が狙える${areaName}の${typeLabel}。${meritShort}。`);
+      } else {
+        intro.push(`${areaName}で${diffText}${typeLabel}。${meritShort}。`);
+      }
+      break;
+    case 2:
+      intro.push(`${meritShort}。${diffText}${areaName}の${typeLabel}。`);
+      break;
+    case 3:
+      intro.push(`${areaName}${spot.difficulty === "beginner" ? "で手軽に楽しめる" : "の本格的な"}${typeLabel}。`);
+      break;
+    default:
+      if (spot.catchableFish.length >= 3) {
+        intro.push(`${spot.catchableFish.length}種の魚が集まる${areaName}の${typeLabel}。`);
+      } else {
+        intro.push(`${diffText}${typeLabel}。${meritShort}。`);
+      }
+      break;
+  }
+
+  // Fish & methods
   if (spot.catchableFish.length > 0) {
-    intro += `${topFish}をはじめ${spot.catchableFish.length}種類の魚が狙えます。`;
-    if (methods.length > 0) {
-      intro += `${methods.slice(0, 2).join("や")}が人気の釣り方です。`;
+    const firstFish = spot.catchableFish[0].fish.name;
+    const alreadyMentioned = intro[0].includes(firstFish);
+    if (!alreadyMentioned && methods.length > 0) {
+      intro.push(`${methods.slice(0, 2).join("や")}で${topFish}を狙える。`);
+    } else if (!alreadyMentioned) {
+      intro.push(`${topFish}をはじめ${spot.catchableFish.length}種の魚が集まる。`);
+    } else if (methods.length > 0) {
+      intro.push(`${methods.slice(0, 2).join("や")}が人気の釣り方。`);
     }
   }
 
+  // Season
   if (bestMonths.length > 0) {
-    intro += `ベストシーズンは${bestMonths.slice(0, 3).join("・")}頃。`;
+    intro.push(`ベストシーズンは${bestMonths.slice(0, 3).join("・")}頃。`);
   }
 
+  // Beginner bonus
   if (easyFish.length > 0 && spot.difficulty === "beginner") {
-    intro += `特に${easyFish.slice(0, 2).map(cf => cf.fish.name).join("や")}は初心者でも比較的釣りやすい魚種です。`;
+    intro.push(`${easyFish.slice(0, 2).map(cf => cf.fish.name).join("・")}は初心者でも比較的釣りやすい。`);
   }
 
-  return intro;
+  return intro.join("");
 }
 
 /**

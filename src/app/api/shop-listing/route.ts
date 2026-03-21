@@ -3,13 +3,6 @@ import { redis } from "@/lib/redis";
 
 const GAS_URL = process.env.GAS_CATCH_REPORT_URL;
 
-// GASのUTF-8文字化け対策: 非ASCII文字を\uXXXXエスケープに変換
-function toAsciiJson(obj: unknown): string {
-  return JSON.stringify(obj).replace(/[\u0080-\uffff]/g, (ch) =>
-    "\\u" + ch.charCodeAt(0).toString(16).padStart(4, "0")
-  );
-}
-
 // 簡易メールバリデーション
 function isValidEmail(email: string): boolean {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -73,8 +66,9 @@ export async function POST(request: Request) {
       try {
         await fetch(GAS_URL, {
           method: "POST",
-          headers: { "Content-Type": "application/json; charset=utf-8" },
-          body: toAsciiJson(payload),
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          redirect: "follow",
         });
       } catch (err) {
         console.error("[有料プラン問い合わせ] GAS送信エラー:", err);
@@ -118,8 +112,9 @@ export async function POST(request: Request) {
     try {
       await fetch(GAS_URL, {
         method: "POST",
-        headers: { "Content-Type": "application/json; charset=utf-8" },
-        body: toAsciiJson(payload),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+        redirect: "follow",
       });
     } catch (err) {
       console.error("[店舗掲載申請] GAS送信エラー:", err);

@@ -2,13 +2,6 @@ import { NextResponse } from "next/server";
 
 const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;
 
-// GASのUTF-8文字化け対策: 非ASCII文字を\uXXXXエスケープに変換
-function toAsciiJson(obj: unknown): string {
-  return JSON.stringify(obj).replace(/[\u0080-\uffff]/g, (ch) =>
-    "\\u" + ch.charCodeAt(0).toString(16).padStart(4, "0")
-  );
-}
-
 // POST: ユーザー釣果投稿を受け取る
 export async function POST(request: Request) {
   if (!process.env.GAS_CATCH_REPORT_URL) {
@@ -91,8 +84,8 @@ export async function POST(request: Request) {
       try {
         const gasRes = await fetch(GAS_WEBHOOK_URL, {
           method: "POST",
-          headers: { "Content-Type": "application/json; charset=utf-8" },
-          body: toAsciiJson(payload),
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
           redirect: "follow",
         });
         console.log("[釣果投稿] GAS応答:", gasRes.status);
