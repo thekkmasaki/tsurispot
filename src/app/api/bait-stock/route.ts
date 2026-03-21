@@ -47,7 +47,13 @@ export async function GET(request: NextRequest) {
 // POST /api/bait-stock
 // Body: { shop: string, token: string, stock: BaitStockEntry[] }
 export async function POST(request: NextRequest) {
-  const body = await request.json();
+  let body: Record<string, unknown>;
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "invalid JSON body" }, { status: 400 });
+  }
+
   const { shop, token, stock } = body as {
     shop: string;
     token: string;
@@ -56,6 +62,11 @@ export async function POST(request: NextRequest) {
 
   if (!shop || !token || !stock) {
     return NextResponse.json({ error: "shop, token, stock required" }, { status: 400 });
+  }
+
+  // stock が配列であることを検証
+  if (!Array.isArray(stock)) {
+    return NextResponse.json({ error: "stock must be an array" }, { status: 400 });
   }
 
   // デモ店舗はトークン不要
@@ -73,7 +84,8 @@ export async function POST(request: NextRequest) {
   }
 
   // ショップの存在確認
-  if (!getShopBySlug(shop)) {
+  const shopData = getShopBySlug(shop);
+  if (!shopData) {
     return NextResponse.json({ error: "shop not found" }, { status: 404 });
   }
 
@@ -93,8 +105,7 @@ export async function POST(request: NextRequest) {
       await withTimeout(redis.expire(rateLimitKey, 86400));
     }
     // レートリミット: planLevelに基づいて判定
-    const shopData = getShopBySlug(shop);
-    const planLevel = shopData?.planLevel || "free";
+    const planLevel = shopData.planLevel || "free";
     const dailyLimits: Record<string, number> = { free: 10, basic: 10, pro: 50 };
     const dailyLimit = isDemo ? 100 : (dailyLimits[planLevel] ?? 10);
     if (count && count > dailyLimit) {
