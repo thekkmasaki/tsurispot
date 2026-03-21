@@ -1,5 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  Scale,
+  CloudRain,
+  ClipboardList,
+  ScrollText,
+  Anchor,
+  Fish,
+  Leaf,
+  type LucideIcon,
+} from "lucide-react";
 
 const baseUrl = "https://tsurispot.com";
 
@@ -40,12 +50,20 @@ export const metadata: Metadata = {
 };
 
 /** 章データ */
-const chapters = [
+const chapters: {
+  num: number;
+  title: string;
+  slug: string;
+  icon: LucideIcon;
+  description: string;
+  quizCount: number;
+  ready: boolean;
+}[] = [
   {
     num: 1,
     title: "漁業関連法規",
     slug: "law",
-    icon: "\u2696\uFE0F",
+    icon: Scale,
     description:
       "漁業法・遊漁船業法・水産資源保護法など、インストラクターに必要な法規知識を体系的に学びます。",
     quizCount: 50,
@@ -55,7 +73,7 @@ const chapters = [
     num: 2,
     title: "気象海象と安全対策",
     slug: "safety",
-    icon: "\uD83C\uDF0A",
+    icon: CloudRain,
     description:
       "天気図の読み方、潮汐、波浪、落雷・落水事故の予防策など安全管理の知識を解説します。",
     quizCount: 0,
@@ -65,7 +83,7 @@ const chapters = [
     num: 3,
     title: "釣りマナーと指導法",
     slug: "manners",
-    icon: "\uD83D\uDCCB",
+    icon: ClipboardList,
     description:
       "先行者優先の原則、ゴミの持ち帰り、周辺住民への配慮など、インストラクターとしての指導法を学びます。",
     quizCount: 40,
@@ -75,7 +93,7 @@ const chapters = [
     num: 4,
     title: "釣りの文化史",
     slug: "history",
-    icon: "\uD83D\uDCDC",
+    icon: ScrollText,
     description:
       "日本の釣り文化の歴史、和竿・テンカラなどの伝統技法、釣り文学の名作を紹介します。",
     quizCount: 0,
@@ -85,7 +103,7 @@ const chapters = [
     num: 5,
     title: "釣り具の知識",
     slug: "tackle",
-    icon: "\uD83C\uDFA3",
+    icon: Anchor,
     description:
       "竿・リール・糸・針・仕掛けなど、釣り具の基本構造と選び方を体系的に解説します。",
     quizCount: 40,
@@ -95,7 +113,7 @@ const chapters = [
     num: 6,
     title: "釣り技術と知識",
     slug: "technique",
-    icon: "\uD83D\uDC1F",
+    icon: Fish,
     description:
       "キャスティング、合わせ方、取り込み、魚の締め方など実技に関わる知識を学びます。",
     quizCount: 0,
@@ -105,7 +123,7 @@ const chapters = [
     num: 7,
     title: "水域の自然環境知識",
     slug: "environment",
-    icon: "\uD83C\uDF3F",
+    icon: Leaf,
     description:
       "魚類の生態、水質環境、プランクトン、潮流と釣果の関係など自然科学の基礎を学びます。",
     quizCount: 0,
@@ -261,79 +279,58 @@ export default function InstructorExamPage() {
           </div>
         </section>
 
-        {/* 学習ガイド（解説ページ） */}
+        {/* 学習ガイド & 確認クイズ */}
         <section className="mb-10">
-          <h2 className="mb-2 text-xl font-bold">学習ガイド</h2>
-          <p className="mb-4 text-sm text-muted-foreground">各科目の重要ポイントを教科書形式で解説。講習前の予習に最適です。</p>
+          <h2 className="mb-2 text-xl font-bold">学習ガイド & 確認クイズ</h2>
+          <p className="mb-4 text-sm text-muted-foreground">各科目の重要ポイントを教科書形式で解説。学習後はクイズで知識を定着させましょう。</p>
           <div className="grid gap-4 sm:grid-cols-2">
-            {chapters.map((ch) =>
-              ch.ready ? (
-                <Link
-                  key={ch.slug}
-                  href={`/instructor-exam/${ch.slug}`}
-                  className="group flex gap-4 rounded-xl border p-5 transition-colors hover:border-primary/40 hover:bg-primary/5"
-                >
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-sky-100 text-2xl">
-                    {ch.icon}
-                  </span>
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold text-muted-foreground">
-                      第{ch.num}章
-                    </p>
-                    <h3 className="font-bold group-hover:text-primary">
-                      {ch.title}
-                    </h3>
-                    <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
-                      {ch.description}
-                    </p>
+            {chapters.map((ch) => {
+              const Icon = ch.icon;
+              return ch.ready ? (
+                <div key={ch.slug} className="rounded-xl border p-5 transition-colors hover:border-primary/20">
+                  <div className="flex gap-4">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-sky-100">
+                      <Icon className="size-6 text-sky-700" />
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-xs font-semibold text-muted-foreground">第{ch.num}章</p>
+                      <h3 className="font-bold">{ch.title}</h3>
+                      <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{ch.description}</p>
+                    </div>
                   </div>
-                </Link>
-              ) : (
-                <div
-                  key={ch.slug}
-                  className="flex gap-4 rounded-xl border border-dashed p-5 opacity-60"
-                >
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gray-100 text-2xl">
-                    {ch.icon}
-                  </span>
-                  <div className="min-w-0">
-                    <p className="text-xs font-semibold text-muted-foreground">
-                      第{ch.num}章
-                    </p>
-                    <h3 className="font-bold">{ch.title}</h3>
-                    <p className="mt-1 text-sm text-muted-foreground line-clamp-2">
-                      {ch.description}
-                    </p>
-                    <p className="mt-2 text-xs font-medium text-gray-400">
-                      準備中
-                    </p>
+                  <div className="mt-4 flex gap-2">
+                    <Link
+                      href={`/instructor-exam/${ch.slug}`}
+                      className="flex-1 rounded-lg border border-slate-200 px-3 py-2 text-center text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50 cursor-pointer"
+                    >
+                      学習する
+                    </Link>
+                    {ch.quizCount > 0 && (
+                      <Link
+                        href={`/instructor-exam/${ch.slug}/quiz`}
+                        className="flex-1 rounded-lg bg-purple-600 px-3 py-2 text-center text-sm font-medium text-white transition-colors hover:bg-purple-700 cursor-pointer"
+                      >
+                        クイズ {ch.quizCount}問
+                      </Link>
+                    )}
                   </div>
                 </div>
-              )
-            )}
-          </div>
-        </section>
-
-        {/* 確認クイズ */}
-        <section className="mb-10">
-          <h2 className="mb-2 text-xl font-bold">確認クイズ</h2>
-          <p className="mb-4 text-sm text-muted-foreground">4択問題で知識の定着度をチェック。各章の学習後に挑戦してみましょう。</p>
-          <div className="grid gap-4 sm:grid-cols-3">
-            {chapters.filter((ch) => ch.ready && ch.quizCount > 0).map((ch) => (
-              <Link
-                key={`quiz-${ch.slug}`}
-                href={`/instructor-exam/${ch.slug}#summary`}
-                className="group rounded-xl border p-5 text-center transition-colors hover:border-purple-400 hover:bg-purple-50"
-              >
-                <span className="text-3xl">{ch.icon}</span>
-                <h3 className="mt-2 font-bold group-hover:text-purple-700">
-                  第{ch.num}章 {ch.title}
-                </h3>
-                <p className="mt-1 text-lg font-bold text-purple-600">
-                  {ch.quizCount}問
-                </p>
-              </Link>
-            ))}
+              ) : (
+                <div key={ch.slug} className="rounded-xl border border-dashed p-5 opacity-60">
+                  <div className="flex gap-4">
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-gray-100">
+                      <Icon className="size-6 text-gray-400" />
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-xs font-semibold text-muted-foreground">第{ch.num}章</p>
+                      <h3 className="font-bold">{ch.title}</h3>
+                      <p className="mt-1 text-sm text-muted-foreground line-clamp-2">{ch.description}</p>
+                      <p className="mt-2 text-xs font-medium text-gray-400">準備中</p>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
           <p className="mt-3 text-center text-sm text-muted-foreground">
             全{chapters.reduce((sum, ch) => sum + ch.quizCount, 0)}問収録（今後さらに追加予定）

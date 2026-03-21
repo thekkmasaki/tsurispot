@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArrowLeft, ListOrdered } from "lucide-react";
 import { ExamQuiz } from "@/components/instructor-exam/exam-quiz";
 import { mannersQuestions } from "@/lib/data/instructor-exam/manners-questions";
 
@@ -59,14 +60,16 @@ export default function MannersQuizPage() {
         <div className="mt-8 flex justify-center gap-4">
           <Link
             href="/instructor-exam/manners"
-            className="rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50"
           >
+            <ArrowLeft className="size-4" />
             学習ページに戻る
           </Link>
           <Link
             href="/instructor-exam"
-            className="rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50"
           >
+            <ListOrdered className="size-4" />
             章の一覧へ
           </Link>
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useRef } from "react";
 
 /* ------------------------------------------------------------------ */
 /*  Types                                                              */
@@ -57,7 +57,14 @@ function LiveScoreBoard({
         </span>
         <span className="text-xs text-slate-400">{pct}%</span>
       </div>
-      <div className="flex h-2.5 w-full overflow-hidden rounded-full bg-slate-100">
+      <div
+        className="flex h-2.5 w-full overflow-hidden rounded-full bg-slate-100"
+        role="progressbar"
+        aria-valuenow={current}
+        aria-valuemin={0}
+        aria-valuemax={total}
+        aria-label={`進捗: ${total}問中${current}問目`}
+      >
         {/* 正解分 */}
         {correctCount > 0 && (
           <div
@@ -108,12 +115,17 @@ function FinalResult({
   onReviewWrong,
 }: {
   questions: ExamQuizQuestion[];
-  answeredMap: Map<string, boolean>;
+  answeredMap: Map<string, number>;
   onRetry: () => void;
   onReviewWrong: () => void;
 }) {
   const total = questions.length;
-  const correctCount = Array.from(answeredMap.values()).filter(Boolean).length;
+  const correctCount = Array.from(answeredMap.entries()).filter(
+    ([id, idx]) => {
+      const q = questions.find((q) => q.id === id);
+      return q && idx === q.correctIndex;
+    }
+  ).length;
   const wrongCount = total - correctCount;
   const pct = Math.round((correctCount / total) * 100);
 
@@ -141,7 +153,10 @@ function FinalResult({
       : "text-red-500";
 
   // 間違えた問題リスト
-  const wrongQuestions = questions.filter((q) => answeredMap.get(q.id) === false);
+  const wrongQuestions = questions.filter((q) => {
+    const sel = answeredMap.get(q.id);
+    return sel !== undefined && sel !== q.correctIndex;
+  });
 
   return (
     <div className="space-y-6">
@@ -198,17 +213,23 @@ function FinalResult({
             間違えた問題（{wrongQuestions.length}問）
           </h3>
           <ul className="space-y-2">
-            {wrongQuestions.map((q, i) => (
-              <li key={q.id} className="rounded-lg border border-red-100 bg-white px-4 py-3">
-                <p className="text-sm text-slate-800">
-                  <span className="mr-1.5 font-bold text-red-500">Q{questions.indexOf(q) + 1}.</span>
-                  {q.question}
-                </p>
-                <p className="mt-1 text-xs text-green-700">
-                  正解: {LABELS[q.correctIndex]}. {q.choices[q.correctIndex]}
-                </p>
-              </li>
-            ))}
+            {wrongQuestions.map((q, i) => {
+              const userSelectedIndex = answeredMap.get(q.id)!;
+              return (
+                <li key={q.id} className="rounded-lg border border-red-100 bg-white px-4 py-3">
+                  <p className="text-sm text-slate-800">
+                    <span className="mr-1.5 font-bold text-red-500">Q{questions.indexOf(q) + 1}.</span>
+                    {q.question}
+                  </p>
+                  <p className="mt-1 text-xs text-red-600">
+                    あなたの回答: {LABELS[userSelectedIndex]}. {q.choices[userSelectedIndex]}
+                  </p>
+                  <p className="mt-0.5 text-xs text-green-700">
+                    正解: {LABELS[q.correctIndex]}. {q.choices[q.correctIndex]}
+                  </p>
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}
@@ -243,14 +264,21 @@ function FinalResult({
 function ScoreSummary({
   total,
   answeredMap,
+  questions,
   onRetry,
 }: {
   total: number;
-  answeredMap: Map<string, boolean>;
+  answeredMap: Map<string, number>;
+  questions: ExamQuizQuestion[];
   onRetry?: () => void;
 }) {
   const answeredCount = answeredMap.size;
-  const correctCount = Array.from(answeredMap.values()).filter(Boolean).length;
+  const correctCount = Array.from(answeredMap.entries()).filter(
+    ([id, idx]) => {
+      const q = questions.find((q) => q.id === id);
+      return q && idx === q.correctIndex;
+    }
+  ).length;
 
   if (answeredCount === 0) return null;
 
@@ -302,7 +330,8 @@ export function ExamQuiz({
   startNumber = 1,
   mode = "one",
 }: ExamQuizProps) {
-  const [answeredMap, setAnsweredMap] = useState<Map<string, boolean>>(new Map());
+  const [answeredMap, setAnsweredMap] = useState<Map<string, number>>(new Map());
+  const containerRef = useRef<HTMLDivElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [reviewWrongOnly, setReviewWrongOnly] = useState(false);
@@ -310,16 +339,24 @@ export function ExamQuiz({
   // 現在出題中の問題リスト（復習モード対応）
   const questions = useMemo(() => {
     if (!reviewWrongOnly) return allQuestions;
-    return allQuestions.filter((q) => answeredMap.get(q.id) === false);
+    return allQuestions.filter((q) => {
+      const sel = answeredMap.get(q.id);
+      return sel !== undefined && sel !== q.correctIndex;
+    });
   }, [reviewWrongOnly, allQuestions, answeredMap]);
 
-  const correctCount = Array.from(answeredMap.values()).filter(Boolean).length;
+  const correctCount = Array.from(answeredMap.entries()).filter(
+    ([id, idx]) => {
+      const q = allQuestions.find((q) => q.id === id);
+      return q && idx === q.correctIndex;
+    }
+  ).length;
   const wrongCount = answeredMap.size - correctCount;
 
-  const handleAnswer = useCallback((id: string, correct: boolean) => {
+  const handleAnswer = useCallback((id: string, selectedIndex: number) => {
     setAnsweredMap((prev) => {
       const next = new Map(prev);
-      next.set(id, correct);
+      next.set(id, selectedIndex);
       return next;
     });
   }, []);
@@ -354,10 +391,10 @@ export function ExamQuiz({
             q={q}
             index={startNumber + i}
             showNumber={showNumbers}
-            onAnswer={(correct) => handleAnswer(q.id, correct)}
+            onAnswer={(selectedIndex) => handleAnswer(q.id, selectedIndex)}
           />
         ))}
-        <ScoreSummary total={allQuestions.length} answeredMap={answeredMap} onRetry={handleRetry} />
+        <ScoreSummary total={allQuestions.length} answeredMap={answeredMap} questions={allQuestions} onRetry={handleRetry} />
       </div>
     );
   }
@@ -384,7 +421,7 @@ export function ExamQuiz({
   const isLastQuestion = currentIndex === total - 1;
 
   return (
-    <div className="space-y-4">
+    <div ref={containerRef} className="space-y-4">
       {/* 復習モードラベル */}
       {reviewWrongOnly && (
         <div className="rounded-lg bg-red-50 border border-red-200 px-4 py-2 text-center text-sm font-semibold text-red-600">
@@ -396,18 +433,19 @@ export function ExamQuiz({
       <LiveScoreBoard
         current={currentIndex + 1}
         total={total}
-        correctCount={Array.from(answeredMap.values()).filter(Boolean).length}
-        wrongCount={answeredMap.size - Array.from(answeredMap.values()).filter(Boolean).length}
+        correctCount={correctCount}
+        wrongCount={wrongCount}
       />
 
       {/* 問題カード */}
-      <QuestionCard
-        key={currentQ.id}
-        q={currentQ}
-        index={reviewWrongOnly ? currentIndex + 1 : startNumber + allQuestions.indexOf(currentQ)}
-        showNumber={showNumbers}
-        onAnswer={(correct) => handleAnswer(currentQ.id, correct)}
-      />
+      <div key={currentQ.id} className="animate-in fade-in duration-300">
+        <QuestionCard
+          q={currentQ}
+          index={reviewWrongOnly ? currentIndex + 1 : startNumber + allQuestions.indexOf(currentQ)}
+          showNumber={showNumbers}
+          onAnswer={(selectedIndex) => handleAnswer(currentQ.id, selectedIndex)}
+        />
+      </div>
 
       {/* ナビゲーションボタン */}
       {isCurrentAnswered && (
@@ -415,7 +453,10 @@ export function ExamQuiz({
           {isLastQuestion ? (
             <button
               type="button"
-              onClick={() => setShowResult(true)}
+              onClick={() => {
+                setShowResult(true);
+                containerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
               className="inline-flex items-center gap-2 rounded-lg bg-purple-600 px-8 py-3 text-base font-bold text-white shadow-sm transition-colors hover:bg-purple-700"
             >
               結果を見る
@@ -423,7 +464,10 @@ export function ExamQuiz({
           ) : (
             <button
               type="button"
-              onClick={() => setCurrentIndex((prev) => prev + 1)}
+              onClick={() => {
+                setCurrentIndex((prev) => prev + 1);
+                containerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
               className="inline-flex items-center gap-2 rounded-lg bg-purple-600 px-8 py-3 text-base font-bold text-white shadow-sm transition-colors hover:bg-purple-700"
             >
               次の問題へ →
@@ -448,7 +492,7 @@ function QuestionCard({
   q: ExamQuizQuestion;
   index: number;
   showNumber: boolean;
-  onAnswer: (correct: boolean) => void;
+  onAnswer: (selectedIndex: number) => void;
 }) {
   const [selected, setSelected] = useState<number | null>(null);
   const answered = selected !== null;
@@ -458,9 +502,9 @@ function QuestionCard({
     (idx: number) => {
       if (answered) return;
       setSelected(idx);
-      onAnswer(idx === q.correctIndex);
+      onAnswer(idx);
     },
-    [answered, onAnswer, q.correctIndex]
+    [answered, onAnswer]
   );
 
   return (
