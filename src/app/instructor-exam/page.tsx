@@ -13,10 +13,30 @@ export const metadata: Metadata = {
   openGraph: {
     title: "公認釣りインストラクター試験対策ガイド | ツリスポ",
     description:
-      "公認釣りインストラクター試験の筆記対策をオンラインで学べる無料ガイド。全7章・確認クイズ付き。",
+      "公認釣りインストラクター試験の筆記対策をオンラインで学べる無料ガイド。全7章・確認クイズ130問以上。",
     url: `${baseUrl}/instructor-exam`,
     type: "website",
+    siteName: "ツリスポ",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "公認釣りインストラクター試験対策ガイド | ツリスポ",
+    description:
+      "漁業法・マナー・釣り具の知識を全7章・確認クイズ130問以上で学べる無料ガイド。",
+  },
+  keywords: [
+    "釣りインストラクター",
+    "試験対策",
+    "公認釣りインストラクター",
+    "JOFI",
+    "全釣協",
+    "漁業法",
+    "釣りマナー",
+    "釣り具",
+    "過去問",
+    "問題集",
+    "釣り資格",
+  ],
 };
 
 /** 章データ */
@@ -28,7 +48,7 @@ const chapters = [
     icon: "\u2696\uFE0F",
     description:
       "漁業法・遊漁船業法・水産資源保護法など、インストラクターに必要な法規知識を体系的に学びます。",
-    quizCount: 15,
+    quizCount: 50,
     ready: true,
   },
   {
@@ -48,7 +68,7 @@ const chapters = [
     icon: "\uD83D\uDCCB",
     description:
       "先行者優先の原則、ゴミの持ち帰り、周辺住民への配慮など、インストラクターとしての指導法を学びます。",
-    quizCount: 10,
+    quizCount: 40,
     ready: true,
   },
   {
@@ -68,7 +88,7 @@ const chapters = [
     icon: "\uD83C\uDFA3",
     description:
       "竿・リール・糸・針・仕掛けなど、釣り具の基本構造と選び方を体系的に解説します。",
-    quizCount: 12,
+    quizCount: 40,
     ready: true,
   },
   {
@@ -120,17 +140,41 @@ export default function InstructorExamPage() {
           }),
         }}
       />
-      {/* JSON-LD: WebPage */}
+      {/* JSON-LD: Course (LearningResource) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "WebPage",
+            "@type": "Course",
             name: "公認釣りインストラクター試験対策ガイド",
             description:
-              "公認釣りインストラクター試験（JOFI）の筆記試験対策に役立つ無料学習ガイド。全7章・確認クイズ付き。",
+              "公認釣りインストラクター試験（JOFI）の筆記試験対策に役立つ無料学習ガイド。漁業法・マナー・釣り具の知識を全7章・確認クイズ130問以上で体系的に学べます。",
             url: `${baseUrl}/instructor-exam`,
+            provider: {
+              "@type": "Organization",
+              name: "ツリスポ",
+              url: baseUrl,
+            },
+            isAccessibleForFree: true,
+            inLanguage: "ja",
+            coursePrerequisites: "20歳以上、釣りに興味がある方",
+            hasCourseInstance: {
+              "@type": "CourseInstance",
+              courseMode: "online",
+              courseWorkload: "PT4H",
+            },
+            about: [
+              { "@type": "Thing", name: "漁業法" },
+              { "@type": "Thing", name: "釣りマナー" },
+              { "@type": "Thing", name: "釣り具の知識" },
+              { "@type": "Thing", name: "公認釣りインストラクター" },
+            ],
+            hasPart: chapters.filter(c => c.ready).map((c) => ({
+              "@type": "CreativeWork",
+              name: `第${c.num}章 ${c.title}`,
+              url: `${baseUrl}/instructor-exam/${c.slug}`,
+            })),
             isPartOf: {
               "@id": `${baseUrl}/#website`,
             },

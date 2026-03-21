@@ -6,13 +6,13 @@ import { QuizCategoryCard } from "@/components/quiz/quiz-category-card";
 import { QUIZ_CATEGORIES } from "@/types/quiz";
 
 export const metadata: Metadata = {
-  title: "釣りクイズ — 遊んで学べる釣り検定｜全300問以上 | ツリスポ",
+  title: "釣りクイズ — 遊んで学べる釣り検定｜全240問 | ツリスポ",
   description:
-    "釣りの知識を楽しくテスト！魚の名前、旬の時期、釣り方、毒魚の見分け方など全8カテゴリ300問以上。初心者から上級者まで楽しめる4択クイズで、釣りの知識を身につけよう。",
+    "釣りの知識を楽しくテスト！魚の名前、旬の時期、釣り方、毒魚の見分け方など全8カテゴリ240問。初心者から上級者まで楽しめる4択クイズで、釣りの知識を身につけよう。",
   openGraph: {
     title: "釣りクイズ — 遊んで学べる釣り検定 | ツリスポ",
     description:
-      "全8カテゴリ300問以上！釣りの知識を楽しくテストしよう。",
+      "全8カテゴリ240問！釣りの知識を楽しくテストしよう。",
     type: "website",
     url: "https://tsurispot.com/quiz",
     siteName: "ツリスポ",
@@ -20,6 +20,23 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://tsurispot.com/quiz",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "釣りクイズ — 遊んで学べる釣り検定 | ツリスポ",
+    description: "全8カテゴリ240問！釣りの知識を楽しくテストしよう。",
+  },
+  keywords: [
+    "釣りクイズ",
+    "釣り検定",
+    "魚クイズ",
+    "釣り知識",
+    "毒魚クイズ",
+    "釣り用語",
+    "釣り方クイズ",
+    "釣り問題",
+    "釣りテスト",
+    "魚の名前クイズ",
+  ],
 };
 
 const breadcrumbJsonLd = {
@@ -46,7 +63,7 @@ const webPageJsonLd = {
   "@type": "WebPage",
   name: "釣りクイズ — 遊んで学べる釣り検定",
   description:
-    "釣りの知識を楽しくテスト！魚の名前、旬の時期、釣り方、毒魚の見分け方など全8カテゴリ300問以上。初心者から上級者まで楽しめる4択クイズ。",
+    "釣りの知識を楽しくテスト！魚の名前、旬の時期、釣り方、毒魚の見分け方など全8カテゴリ240問。初心者から上級者まで楽しめる4択クイズ。",
   url: "https://tsurispot.com/quiz",
   isPartOf: {
     "@type": "WebSite",
