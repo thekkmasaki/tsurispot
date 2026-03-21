@@ -19,12 +19,15 @@ export const metadata: Metadata = {
     url: `${baseUrl}/instructor-exam/manners/quiz`,
     type: "website",
     siteName: "ツリスポ",
+    images: [{ url: "https://tsurispot.com/api/og?title=釣りマナーと指導法 確認クイズ&emoji=📝", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "釣りマナーと指導法 確認クイズ（全40問）| 試験対策",
     description: "釣りマナー・指導法の知識を4択クイズでチェック。合格目安80点以上。",
+    images: ["https://tsurispot.com/api/og?title=釣りマナーと指導法 確認クイズ&emoji=📝"],
   },
+  keywords: ["釣りマナークイズ", "先行者優先", "指導法問題", "釣りインストラクター", "試験問題"],
 };
 
 export default function MannersQuizPage() {

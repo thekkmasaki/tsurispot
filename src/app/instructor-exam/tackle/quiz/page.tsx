@@ -19,12 +19,15 @@ export const metadata: Metadata = {
     url: `${baseUrl}/instructor-exam/tackle/quiz`,
     type: "website",
     siteName: "ツリスポ",
+    images: [{ url: "https://tsurispot.com/api/og?title=釣り具の知識 確認クイズ&emoji=📝", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "釣り具の知識 確認クイズ（全40問）| 試験対策",
     description: "ロッド・リール・ライン・針・仕掛けの知識を4択クイズでチェック。合格目安80点以上。",
+    images: ["https://tsurispot.com/api/og?title=釣り具の知識 確認クイズ&emoji=📝"],
   },
+  keywords: ["釣り具クイズ", "ロッド問題", "リール問題", "釣りインストラクター", "試験問題"],
 };
 
 export default function TackleQuizPage() {
