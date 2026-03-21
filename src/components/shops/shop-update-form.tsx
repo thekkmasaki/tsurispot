@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { Loader2, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ShopInfoForm } from "./shop-info-form";
@@ -146,12 +147,12 @@ export function ShopUpdateForm({ shopName }: { shopName?: string }) {
           リンクが不明な場合は fishingspotjapan@gmail.com までご連絡ください。
         </p>
         <div className="pt-4 border-t">
-          <a
+          <Link
             href="/shops/update?shop=sample-premium&token=demo"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-colors"
           >
             デモを体験してみる →
-          </a>
+          </Link>
         </div>
       </div>
     );

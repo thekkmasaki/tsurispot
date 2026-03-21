@@ -754,7 +754,7 @@ export default function RecommendationPage() {
     );
     scored.sort((a, b) => b.totalScore - a.totalScore);
     // 今月釣れる魚がないスポットは除外
-    let result = scored.filter((s) => s.catchableFishNow.length > 0);
+    const result = scored.filter((s) => s.catchableFishNow.length > 0);
     // 現在地ソート
     if (selectedRegion === "geolocation" && userLocation) {
       result.sort((a, b) => {

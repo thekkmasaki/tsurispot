@@ -11,6 +11,7 @@ import { DIFFICULTY_LABELS } from '@/types';
 import { Badge } from '@/components/ui/badge';
 import { useFavorites } from '@/hooks/use-favorites';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl:
