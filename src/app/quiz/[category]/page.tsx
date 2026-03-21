@@ -29,10 +29,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "website",
       url: `https://tsurispot.com/quiz/${cat.slug}`,
       siteName: "ツリスポ",
+      images: [{ url: `https://tsurispot.com/api/og?title=${encodeURIComponent(cat.name)}&emoji=${encodeURIComponent(cat.icon)}`, width: 1200, height: 630 }],
+    },
+    twitter: {
+      card: "summary_large_image" as const,
+      title: `${cat.icon} ${cat.name} | ツリスポ`,
+      description: cat.description,
+      images: [`https://tsurispot.com/api/og?title=${encodeURIComponent(cat.name)}&emoji=${encodeURIComponent(cat.icon)}`],
     },
     alternates: {
       canonical: `https://tsurispot.com/quiz/${cat.slug}`,
     },
+    keywords: [cat.name, "釣りクイズ", "4択クイズ", "釣り知識", cat.nameShort],
   };
 }
 
@@ -89,6 +97,18 @@ export default async function QuizCategoryPage({ params }: Props) {
         }
       : null;
 
+  const quizJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Quiz",
+    name: `${cat.name}（全${cat.questionCount}問）`,
+    description: cat.description,
+    educationalLevel: "beginner",
+    about: { "@type": "Thing", name: cat.name },
+    provider: { "@type": "Organization", name: "ツリスポ", url: "https://tsurispot.com" },
+    numberOfQuestions: cat.questionCount,
+    typicalAgeRange: "10-",
+  };
+
   // カテゴリごとのグラデーション色マッピング
   const colorMap: Record<string, string> = {
     blue: "from-blue-500 to-cyan-500",
@@ -115,6 +135,10 @@ export default async function QuizCategoryPage({ params }: Props) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       )}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(quizJsonLd) }}
+      />
 
       <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
         {/* ヒーローセクション */}

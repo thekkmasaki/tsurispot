@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://tsurispot.com/quiz",
     siteName: "ツリスポ",
+    images: [{ url: "https://tsurispot.com/api/og?title=釣りクイズ&emoji=🎯", width: 1200, height: 630 }],
   },
   alternates: {
     canonical: "https://tsurispot.com/quiz",
@@ -24,6 +25,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "釣りクイズ — 遊んで学べる釣り検定 | ツリスポ",
     description: "全8カテゴリ240問！釣りの知識を楽しくテストしよう。",
+    images: ["https://tsurispot.com/api/og?title=釣りクイズ&emoji=🎯"],
   },
   keywords: [
     "釣りクイズ",
@@ -166,6 +168,36 @@ export default function QuizListPage() {
                 />
               ))}
             </div>
+          </section>
+
+          {/* クイズの特徴（GEO: 統計データ追加） */}
+          <section className="mt-8 rounded-xl border border-gray-200 bg-white p-5">
+            <h2 className="text-lg font-bold text-gray-900">ツリスポ釣りクイズの特徴</h2>
+            <p className="mt-2 text-sm text-gray-600 leading-relaxed">
+              ツリスポの釣りクイズは、<strong>全国2,141か所以上の釣り場データ</strong>と<strong>115種以上の魚種データベース</strong>をもとに作成された本格的な釣り知識テストです。
+              全{QUIZ_CATEGORIES.length}カテゴリ・{totalQuestions}問以上を収録し、初心者から上級者まで幅広いレベルに対応しています。
+            </p>
+            <ul className="mt-3 grid grid-cols-2 gap-2 text-sm sm:grid-cols-4">
+              <li className="rounded-lg bg-amber-50 px-3 py-2 text-center">
+                <span className="block text-lg font-bold text-amber-600">{QUIZ_CATEGORIES.length}</span>
+                <span className="text-xs text-gray-500">カテゴリ</span>
+              </li>
+              <li className="rounded-lg bg-amber-50 px-3 py-2 text-center">
+                <span className="block text-lg font-bold text-amber-600">{totalQuestions}+</span>
+                <span className="text-xs text-gray-500">問題数</span>
+              </li>
+              <li className="rounded-lg bg-amber-50 px-3 py-2 text-center">
+                <span className="block text-lg font-bold text-amber-600">2,141+</span>
+                <span className="text-xs text-gray-500">釣り場データ</span>
+              </li>
+              <li className="rounded-lg bg-amber-50 px-3 py-2 text-center">
+                <span className="block text-lg font-bold text-amber-600">115+</span>
+                <span className="text-xs text-gray-500">魚種</span>
+              </li>
+            </ul>
+            <p className="mt-3 text-xs text-gray-400">
+              出典: ツリスポ独自データベース（2026年3月時点）。各クイズの問題は釣り場・魚種の実データに基づいて作成しています。
+            </p>
           </section>
 
           {/* インストラクター試験対策リンク */}

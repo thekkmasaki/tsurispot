@@ -202,6 +202,43 @@ export default function InstructorExamPage() {
         }}
       />
 
+      {/* JSON-LD: FAQPage (GEO最適化) */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: [
+              {
+                "@type": "Question",
+                name: "公認釣りインストラクターとは何ですか？",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "公認釣りインストラクターは、一般社団法人 全日本釣り団体協議会（全釣り協 / JOFI）が認定する公認資格です。釣りの安全指導、マナー啓発、技術指導を目的とし、全国で約2,000名以上が活動しています。受験資格は20歳以上で、筆記・論文・実技・面接の4科目からなる試験に合格する必要があります。",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "釣りインストラクター試験の費用はいくらですか？",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "費用の目安は、受講料 約1万円 + 受験料 約1万円 + 登録費 約2万円 = 計約4万円です。合格後は3年ごとに更新研修を受ける必要があります。",
+                },
+              },
+              {
+                "@type": "Question",
+                name: "試験対策にはどのくらいの勉強時間が必要ですか？",
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: "個人差はありますが、筆記試験の範囲（漁業法・マナー・釣り具の知識など全7分野）をカバーするには約20〜30時間の学習が目安です。当サイトの学習ガイドと確認クイズ130問以上を活用すれば、効率的に知識を整理できます。",
+                },
+              },
+            ],
+          }),
+        }}
+      />
+
       <div className="mx-auto max-w-4xl px-4 py-8">
         {/* パンくず */}
         <nav aria-label="パンくずリスト" className="mb-6 text-sm text-muted-foreground">
@@ -279,6 +316,32 @@ export default function InstructorExamPage() {
               </tbody>
             </table>
           </div>
+        </section>
+
+        {/* 試験の統計情報（GEO: 統計・出典追加） */}
+        <section className="mb-10 rounded-xl border border-sky-200 bg-sky-50 p-5">
+          <h2 className="mb-3 text-lg font-bold text-sky-900">公認釣りインストラクター資格について</h2>
+          <p className="text-sm text-sky-800 leading-relaxed">
+            公認釣りインストラクター制度は、<strong>一般社団法人 全日本釣り団体協議会（全釣り協 / JOFI）</strong>が運営する公認資格です。
+            釣りの安全指導、マナー啓発、技術向上を目的とし、全国で<strong>約2,000名以上</strong>のインストラクターが活動しています。
+            試験は年に数回実施され、筆記（選択式60分）・論文・実技・面接の4科目で構成されます。
+          </p>
+          <p className="mt-2 text-sm text-sky-800 leading-relaxed">
+            当ガイドでは筆記試験の主要範囲を<strong>全7章・確認クイズ{chapters.reduce((sum, ch) => sum + ch.quizCount, 0)}問</strong>でカバーしています。
+            漁業法（令和2年12月施行の改正法）、遊漁船業法、水産資源保護法などの最新法規に対応した内容です。
+          </p>
+          <p className="mt-2 text-xs text-sky-600">
+            出典:{" "}
+            <a
+              href="https://www.zenturi-jofi.or.jp/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-sky-800"
+            >
+              全日本釣り団体協議会 公式サイト
+            </a>
+            。資格制度の詳細・最新の試験日程は公式サイトをご確認ください。
+          </p>
         </section>
 
         {/* 学習ガイド & 確認クイズ */}
@@ -422,6 +485,31 @@ export default function InstructorExamPage() {
               -- 遊びながら学べる釣り検定（全240問）
             </li>
           </ul>
+        </section>
+
+        {/* よくある質問（GEO: FAQ表示 + FAQPage schema連動） */}
+        <section className="mb-10">
+          <h2 className="mb-4 text-xl font-bold">よくある質問</h2>
+          <div className="space-y-4">
+            <details className="rounded-xl border p-4">
+              <summary className="cursor-pointer font-semibold text-sm">公認釣りインストラクターとは何ですか？</summary>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                一般社団法人 全日本釣り団体協議会（全釣り協 / JOFI）が認定する公認資格です。釣りの安全指導、マナー啓発、技術指導を目的とし、全国で約2,000名以上が活動しています。受験資格は20歳以上で、筆記・論文・実技・面接の4科目からなる試験に合格する必要があります。
+              </p>
+            </details>
+            <details className="rounded-xl border p-4">
+              <summary className="cursor-pointer font-semibold text-sm">試験の費用はいくらですか？</summary>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                費用の目安は、受講料 約1万円 + 受験料 約1万円 + 登録費 約2万円 = 計約4万円です。合格後は3年ごとに更新研修を受ける必要があります。
+              </p>
+            </details>
+            <details className="rounded-xl border p-4">
+              <summary className="cursor-pointer font-semibold text-sm">試験対策にはどのくらいの勉強時間が必要ですか？</summary>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                個人差はありますが、筆記試験の範囲（漁業法・マナー・釣り具の知識など全7分野）をカバーするには約20〜30時間の学習が目安です。当サイトの学習ガイドと確認クイズ{chapters.reduce((sum, ch) => sum + ch.quizCount, 0)}問以上を活用すれば、効率的に知識を整理できます。
+              </p>
+            </details>
+          </div>
         </section>
 
         {/* 免責表示 */}
