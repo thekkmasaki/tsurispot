@@ -1,0 +1,27 @@
+name: X (Twitter) クイズ自動投稿
+
+on:
+  schedule:
+    - cron: '0 22 * * *' # UTC 22:00 = JST 07:00
+  workflow_dispatch:
+
+jobs:
+  post-quiz:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: twitter-api-v2 インストール
+        run: npm install twitter-api-v2
+
+      - name: クイズ投稿
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_KEY_SECRET: ${{ secrets.X_API_KEY_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+        run: node scripts/twitter/post-quiz.mjs

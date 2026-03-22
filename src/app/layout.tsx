@@ -62,6 +62,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
+    site: "@tsurispot_jp",
     title: "ツリスポ - 釣りスポット総合情報サイト",
     description: `近くの釣り場を地図で簡単検索。全国${SPOT_COUNT}箇所以上の釣りスポットから、今の時期に釣れる魚・仕掛け情報まで網羅。`,
   },
@@ -182,6 +183,7 @@ export default function RootLayout({
               },
               sameAs: [
                 "https://www.instagram.com/tsurispotjapan/",
+                "https://x.com/tsurispot_jp",
               ],
             }),
           }}
