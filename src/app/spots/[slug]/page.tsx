@@ -399,6 +399,22 @@ export default async function SpotDetailPage({ params }: PageProps) {
     },
   };
 
+  // VideoObject JSON-LD（YouTube動画の構造化データ）
+  const spotMethods = spot.catchableFish.map((cf) => cf.method);
+  const spotMethodVideos = spotMethods.length > 0
+    ? getVideosForMethods(spotMethods, 2)
+    : getVideosForSpotType(spot.spotType, 2);
+  const videoJsonLd = spotMethodVideos.map(video => ({
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: video.title,
+    description: `${spot.name}で使える釣り方の解説動画`,
+    thumbnailUrl: `https://i.ytimg.com/vi/${video.videoId}/hqdefault.jpg`,
+    uploadDate: "2025-01-01",
+    contentUrl: `https://www.youtube.com/watch?v=${video.videoId}`,
+    embedUrl: `https://www.youtube.com/embed/${video.videoId}`,
+  }));
+
   // 夜釣り可能かどうかの判定（catchableFishのrecommendedTimeに「夜」を含む場合）
   const isNightFishing =
     spot.catchableFish.some((cf) => cf.recommendedTime.includes("夜"));
@@ -455,10 +471,13 @@ export default async function SpotDetailPage({ params }: PageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(spotSpeakableJsonLd) }}
       />
-      {/* VideoObject JSON-LD削除: 汎用釣り方動画をスポット固有のVideoObjectとして
-          出力していたが、Googlebotが初期HTMLで対応するiframeプレイヤーを見つけられず
-          Search Consoleで「動画再生ページに動画がありません」エラーが290ページで発生。
-          動画自体はYouTubeEmbedListで引き続きページ内に表示される。 */}
+      {videoJsonLd.map((vld, i) => (
+        <script
+          key={`video-${i}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(vld) }}
+        />
+      ))}
       {/* 最近見たスポット記録 */}
       <RecentlyViewedTracker spot={{ slug: spot.slug, name: spot.name, prefecture: spot.region.prefecture, areaName: spot.region.areaName, spotType: spot.spotType }} />
 

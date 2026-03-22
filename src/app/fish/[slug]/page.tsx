@@ -325,6 +325,20 @@ export default async function FishDetailPage({ params }: PageProps) {
     },
   };
 
+  // VideoObject JSON-LD（YouTube動画の構造化データ）
+  const fishMethods = fish.fishingMethods?.map(m => m.methodName) || [];
+  const fishMethodVideos = getVideosForMethods(fishMethods, 2);
+  const fishVideoJsonLd = fishMethodVideos.map(video => ({
+    "@context": "https://schema.org",
+    "@type": "VideoObject",
+    name: video.title,
+    description: `${fish.name}の釣り方を解説する動画`,
+    thumbnailUrl: `https://i.ytimg.com/vi/${video.videoId}/hqdefault.jpg`,
+    uploadDate: "2025-01-01",
+    contentUrl: `https://www.youtube.com/watch?v=${video.videoId}`,
+    embedUrl: `https://www.youtube.com/embed/${video.videoId}`,
+  }));
+
   // Co-occurring fish (よく一緒に釣れる魚)
   const coOccurringFish = getCoOccurringFish(fish.slug, 8);
 
@@ -362,6 +376,13 @@ export default async function FishDetailPage({ params }: PageProps) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(howToJsonLd) }}
         />
       )}
+      {fishVideoJsonLd.map((vld, i) => (
+        <script
+          key={`video-${i}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(vld) }}
+        />
+      ))}
       {/* パンくず */}
       <Breadcrumb
         items={[

@@ -80,6 +80,42 @@ const regionDescriptions: Record<string, string> = {
     "那覇エリアは亜熱帯の豊かな海で独特の釣りが楽しめます。色鮮やかなミーバイ（ハタ）やタマン（フエフキダイ）など、沖縄ならではの魚種が狙えます。",
 };
 
+function generateAreaDescription(
+  region: { slug: string; areaName: string; prefecture: string; id: string },
+  spots: typeof fishingSpots,
+): string {
+  if (regionDescriptions[region.slug]) return regionDescriptions[region.slug];
+  if (spots.length === 0) return "";
+
+  const topFish = getCatchableFishForRegion(region.id).slice(0, 4);
+  const fishNames = topFish.map(f => f.name).join("・");
+  const parkingCount = spots.filter(s => s.hasParking).length;
+  const freeCount = spots.filter(s => s.isFree).length;
+  const topSpots = [...spots].sort((a, b) => b.rating - a.rating).slice(0, 3);
+  const topSpotNames = topSpots.map(s => s.name).join("、");
+
+  const methods = new Map<string, number>();
+  for (const spot of spots) {
+    for (const cf of spot.catchableFish) {
+      methods.set(cf.method, (methods.get(cf.method) || 0) + 1);
+    }
+  }
+  const topMethods = [...methods.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3).map(m => m[0]);
+
+  const parts: string[] = [];
+  parts.push(`${region.areaName}（${region.prefecture}）は${spots.length}箇所の釣りスポットがあるエリアです。`);
+  if (fishNames) parts.push(`${fishNames}などが釣れ、`);
+  if (topMethods.length > 0) parts.push(`${topMethods.join("・")}が人気の釣り方です。`);
+  if (topSpotNames) parts.push(`おすすめは${topSpotNames}。`);
+
+  const facilities: string[] = [];
+  if (parkingCount > 0) facilities.push(`駐車場あり${parkingCount}箇所`);
+  if (freeCount > 0) facilities.push(`無料${freeCount}箇所`);
+  if (facilities.length > 0) parts.push(`${facilities.join("、")}で手軽に楽しめます。`);
+
+  return parts.join("");
+}
+
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
@@ -107,9 +143,14 @@ export async function generateMetadata({
 
   const titleSuffix = familyCount > 0 ? "子連れ・穴場スポットも紹介" : "穴場スポットも紹介";
 
+  const isLowContent = spots.length <= 1;
+
   return {
     title: `${region.areaName}（${region.prefecture}）の釣り場おすすめ${spots.length}選｜${titleSuffix}`,
     description: `${region.areaName}（${region.prefecture}）のおすすめ釣りスポット${spots.length}箇所を厳選。${topFishNames}が釣れる初心者やファミリーにもおすすめの穴場釣り場を紹介。${facilityText}アクセス・地図情報も完全掲載。`,
+    ...(isLowContent && {
+      robots: { index: false, follow: true },
+    }),
     openGraph: {
       title: `${region.areaName}（${region.prefecture}）の釣り場おすすめ${spots.length}選｜${titleSuffix}`,
       description: `${region.areaName}（${region.prefecture}）のおすすめ釣りスポット${spots.length}箇所を厳選。${topFishNames}が釣れる初心者やファミリーにもおすすめの穴場釣り場を紹介。${facilityText}アクセス・地図情報も完全掲載。`,
@@ -134,7 +175,7 @@ export default async function AreaDetailPage({ params }: PageProps) {
 
   const spots = getSpotsForRegion(region.id);
   const catchableFish = getCatchableFishForRegion(region.id);
-  const description = regionDescriptions[slug] || "";
+  const description = generateAreaDescription(region, spots);
 
   // Find other regions in the same prefecture for internal linking
   const samePreRegions = regions.filter(

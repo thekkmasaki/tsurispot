@@ -190,20 +190,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
 
     // ===== スポット詳細ページ（画像サイトマップ付き）=====
-    // AdSense対策: 低品質スポット（description<100文字 or catchableFish≤2）はpriority 0.3に下げる
-    ...fishingSpots.map((spot) => {
-      const descLen = (spot.description || "").length;
-      const fishCount = spot.catchableFish.length;
-      const isLowQuality = descLen < 100 || fishCount <= 2;
-      const priority = isLowQuality ? 0.3 : descLen >= 150 ? 0.8 : 0.7;
-      return {
-        url: `${baseUrl}/spots/${spot.slug}`,
-        lastModified: dynamicDate,
-        changeFrequency: "weekly" as const,
-        priority,
-        images: spot.mainImageUrl?.startsWith("http") ? [spot.mainImageUrl] : [],
-      };
-    }),
+    // noindex対象（description<100文字 or catchableFish≤2）はサイトマップから除外
+    ...fishingSpots
+      .filter((spot) => {
+        const descLen = (spot.description || "").length;
+        const fishCount = spot.catchableFish.length;
+        return descLen >= 100 && fishCount > 2;
+      })
+      .map((spot) => {
+        const descLen = (spot.description || "").length;
+        const priority = descLen >= 150 ? 0.8 : 0.7;
+        return {
+          url: `${baseUrl}/spots/${spot.slug}`,
+          lastModified: dynamicDate,
+          changeFrequency: "weekly" as const,
+          priority,
+          images: spot.mainImageUrl?.startsWith("http") ? [spot.mainImageUrl] : [],
+        };
+      }),
 
     // ===== 魚種詳細ページ =====
     ...fishSpecies.map((fish) => ({
@@ -222,12 +226,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     })),
     { url: `${baseUrl}/area`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.9 },
-    ...regions.map((region) => ({
-      url: `${baseUrl}/area/${region.slug}`,
-      lastModified: dynamicDate,
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    })),
+    // 低コンテンツarea（スポット1件以下）はサイトマップから除外
+    ...regions
+      .filter((region) => {
+        const spotCount = fishingSpots.filter((s) => s.region.id === region.id).length;
+        return spotCount >= 2;
+      })
+      .map((region) => ({
+        url: `${baseUrl}/area/${region.slug}`,
+        lastModified: dynamicDate,
+        changeFrequency: "weekly" as const,
+        priority: 0.8,
+      })),
 
     // ===== 釣り方×月マトリクス + 季節ガイド + 釣具店 =====
     ...FISHING_METHODS.flatMap((method) => [
