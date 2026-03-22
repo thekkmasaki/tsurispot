@@ -26,7 +26,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, getSpotsByFish, type NearbySpot } from "@/lib/data/spots";
+import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, type NearbySpot } from "@/lib/data/spots";
 import { getNearbyShopsWithDistance } from "@/lib/data/shops";
 import { getPrefectureByName } from "@/lib/data/prefectures";
 import { SeasonCalendar } from "@/components/spots/season-calendar";
@@ -423,8 +423,16 @@ export default async function SpotDetailPage({ params }: PageProps) {
   const allNearby: NearbySpot[] = getNearbySpots(spot.latitude, spot.longitude, 21)
     .filter((s) => s.id !== spot.id);
 
-  // Top 5 for internal linking
-  const nearbySpots: NearbySpot[] = allNearby.slice(0, 5);
+  // Top 5 for internal linking — 必要フィールドのみ抽出（RSCペイロード軽量化）
+  const nearbySpots = allNearby.slice(0, 5).map((s) => ({
+    id: s.id,
+    slug: s.slug,
+    name: s.name,
+    spotType: s.spotType,
+    distanceKm: s.distanceKm,
+    prefecture: s.region.prefecture,
+    fishNames: s.catchableFish.slice(0, 3).map((cf) => cf.fish.name),
+  }));
 
   // Up to 20 for GPS search (client component) - lightweight data only
   const gpsNearbyData = allNearby.slice(0, 20).map((s) => ({
@@ -1304,10 +1312,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
           <div className="flex gap-3 overflow-x-auto pb-2">
             {nearbySpots.map((nearSpot) => {
               const nearSpotTypeLabel = SPOT_TYPE_LABELS[nearSpot.spotType];
-              const nearSpotFishNames = nearSpot.catchableFish.slice(0, 2).map((cf) => cf.fish.name).join("・");
-              const nearSpotRichLabel = nearSpotFishNames
-                ? `${nearSpot.name}（${nearSpot.region?.prefecture || spot.region.prefecture}の${nearSpotFishNames}釣り場）`
-                : `${nearSpot.name}（${nearSpot.region?.prefecture || spot.region.prefecture}の${nearSpotTypeLabel}）`;
+              const nearSpotFishStr = nearSpot.fishNames.slice(0, 2).join("・");
+              const nearSpotRichLabel = nearSpotFishStr
+                ? `${nearSpot.name}（${nearSpot.prefecture}の${nearSpotFishStr}釣り場）`
+                : `${nearSpot.name}（${nearSpot.prefecture}の${nearSpotTypeLabel}）`;
               return (
               <Link
                 key={nearSpot.id}
@@ -1326,12 +1334,12 @@ export default async function SpotDetailPage({ params }: PageProps) {
                     {nearSpot.name}
                   </p>
                   <p className="mt-0.5 text-xs text-gray-500">
-                    {nearSpot.region?.prefecture || spot.region.prefecture}の{nearSpotTypeLabel}
-                    {nearSpotFishNames ? ` | ${nearSpotFishNames}` : ""}
+                    {nearSpot.prefecture}の{nearSpotTypeLabel}
+                    {nearSpotFishStr ? ` | ${nearSpotFishStr}` : ""}
                   </p>
-                  {nearSpot.catchableFish.length > 0 && (
+                  {nearSpot.fishNames.length > 0 && (
                     <p className="mt-1.5 text-xs text-muted-foreground">
-                      釣れる魚: {nearSpot.catchableFish.slice(0, 3).map((cf) => cf.fish.name).join("・")}
+                      釣れる魚: {nearSpot.fishNames.join("・")}
                     </p>
                   )}
                 </div>
@@ -1351,7 +1359,16 @@ export default async function SpotDetailPage({ params }: PageProps) {
       >
         {/* 同じ都道府県の釣りスポット */}
         {(() => {
-          const samePrefSpots = getSpotsByPrefecture(spot.region.prefecture, spot.slug, 6);
+          const samePrefSpots = getSpotsByPrefecture(spot.region.prefecture, spot.slug, 6)
+            .map((ps) => ({
+              id: ps.id,
+              slug: ps.slug,
+              name: ps.name,
+              spotType: ps.spotType,
+              areaName: ps.region.areaName,
+              rating: ps.rating,
+              fishNames: ps.catchableFish?.slice(0, 2).map((cf) => cf.fish.name) || [],
+            }));
           if (samePrefSpots.length === 0) return null;
           const pref = getPrefectureByName(spot.region.prefecture);
           return (
@@ -1359,15 +1376,15 @@ export default async function SpotDetailPage({ params }: PageProps) {
               <h3 className="mb-3 text-sm font-bold">{spot.region.prefecture}の他の釣りスポット</h3>
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {samePrefSpots.map((ps) => {
-                  const psFishNames = ps.catchableFish?.slice(0, 2).map((cf: { fish: { name: string } }) => cf.fish.name).join("・") || "";
+                  const psFishStr = ps.fishNames.join("・");
                   const psTypeLabel = SPOT_TYPE_LABELS[ps.spotType] || "";
                   return (
-                  <Link key={ps.id} href={`/spots/${ps.slug}`} title={psFishNames ? `${ps.name}（${psFishNames}が釣れる${psTypeLabel}）` : `${ps.name}（${spot.region.prefecture}の${psTypeLabel}）`}>
+                  <Link key={ps.id} href={`/spots/${ps.slug}`} title={psFishStr ? `${ps.name}（${psFishStr}が釣れる${psTypeLabel}）` : `${ps.name}（${spot.region.prefecture}の${psTypeLabel}）`}>
                     <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                       <CardContent className="p-3">
                         <h4 className="text-sm font-semibold group-hover:text-primary truncate">{ps.name}</h4>
-                        <p className="mt-0.5 text-xs text-muted-foreground">{ps.region.areaName} - {psTypeLabel}</p>
-                        {psFishNames && <p className="mt-0.5 text-xs text-muted-foreground">{psFishNames}が狙える</p>}
+                        <p className="mt-0.5 text-xs text-muted-foreground">{ps.areaName} - {psTypeLabel}</p>
+                        {psFishStr && <p className="mt-0.5 text-xs text-muted-foreground">{psFishStr}が狙える</p>}
                         <div className="mt-1 flex items-center gap-1 text-xs">
                           <Star className="size-3 fill-yellow-400 text-yellow-400" />
                           <span>{ps.rating.toFixed(1)}</span>
