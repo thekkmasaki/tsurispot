@@ -4,6 +4,10 @@ on:
   push:
     branches: [master]
 
+concurrency:
+  group: deploy-apprunner
+  cancel-in-progress: false
+
 env:
   AWS_REGION: ap-northeast-1
   ECR_REPOSITORY: tsurispot
@@ -58,6 +62,24 @@ jobs:
             .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+      - name: Wait for App Runner to be RUNNING
+        run: |
+          echo "Checking App Runner status before deployment..."
+          for i in $(seq 1 20); do
+            STATUS=$(aws apprunner describe-service \
+              --service-arn ${{ env.APP_RUNNER_SERVICE_ARN }} \
+              --query "Service.Status" --output text)
+            echo "Attempt $i: Status = $STATUS"
+            if [ "$STATUS" = "RUNNING" ]; then
+              echo "App Runner is ready for deployment."
+              exit 0
+            fi
+            echo "Waiting 30s for previous deployment to finish..."
+            sleep 30
+          done
+          echo "::error::App Runner is still not RUNNING after 10 minutes. Aborting."
+          exit 1
 
       - name: Deploy to App Runner
         run: |
