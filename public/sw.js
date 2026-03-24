@@ -1,4 +1,4 @@
-const CACHE_NAME = "tsurispot-v2";
+const CACHE_NAME = "tsurispot-v3";
 const STATIC_ASSETS = [
   "/favicon.svg",
   "/icon-192.png",
@@ -43,9 +43,8 @@ self.addEventListener("fetch", (event) => {
   const accept = event.request.headers.get("Accept") || "";
   if (accept.includes("text/html")) return;
 
-  // 静的アセット（画像・フォント・CSS・JS）のみキャッシュ
+  // 静的アセット（画像・フォント）のみキャッシュ — JSバンドルはキャッシュしない（デプロイ時の不整合防止）
   const isStaticAsset =
-    url.pathname.startsWith("/_next/static/") ||
     url.pathname.startsWith("/images/") ||
     /\.(ico|svg|png|jpg|webp|avif|woff2?)$/.test(url.pathname);
 

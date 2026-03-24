@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     template: "%s | ツリスポ",
   },
   description:
-    "地図で直感的に釣りスポットを探せる総合情報サイト。今の時期に何が釣れるか、ベストな時間帯、おすすめの仕掛けまで、釣りに必要な情報をすべて掲載。",
+    "地図で直感的に釣りスポットを探せる総合情報サイト。潮汐・水温・風速予報から今釣れる魚・混雑予想・航空写真まで、釣りに必要な情報をすべて掲載。",
   keywords: [
     "釣りスポット",
     "釣り場",
@@ -53,6 +53,11 @@ export const metadata: Metadata = {
     "川釣り スポット",
     "釣り場 穴場",
     "海釣り 初心者",
+    "潮見表",
+    "潮汐 釣り",
+    "水温 釣り",
+    "風速 釣り",
+    "釣り 天気",
   ],
   openGraph: {
     type: "website",
@@ -64,7 +69,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@tsurispot_jp",
     title: "ツリスポ - 釣りスポット総合情報サイト",
-    description: `近くの釣り場を地図で簡単検索。全国${SPOT_COUNT}箇所以上の釣りスポットから、今の時期に釣れる魚・仕掛け情報まで網羅。`,
+    description: `近くの釣り場を地図で簡単検索。全国${SPOT_COUNT}箇所以上の釣りスポットの潮汐・水温・風速予報・混雑予想を網羅。`,
   },
   robots: {
     index: true,

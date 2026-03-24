@@ -60,11 +60,11 @@ export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "ツリスポ - 近くの釣り場が見つかる釣りスポット検索",
-  description: `全国${spotCount}箇所以上の釣りスポットと${fishCount}種以上の魚種図鑑を無料で検索。堤防・漁港・磯の海釣りから渓流・湖の川釣りまで網羅。今釣れる魚・混雑予想・初心者向け穴場・潮汐情報が一目でわかる。`,
+  description: `全国${spotCount}箇所以上の釣りスポットと${fishCount}種以上の魚種図鑑を無料で検索。堤防・漁港・磯の海釣りから渓流・湖の川釣りまで網羅。潮汐・水温・風速予報・混雑予想・今釣れる魚・航空写真が一目でわかる。`,
   openGraph: {
     title: "ツリスポ - 近くの釣り場が見つかる釣りスポット検索",
     description:
-      "近くの釣り場を地図で簡単検索。全国の釣りスポットから今釣れる魚やおすすめの仕掛け情報まで網羅。",
+      "近くの釣り場を地図で簡単検索。潮汐・水温・風速予報から混雑予想まで、釣りに必要な情報をすべて網羅。",
     type: "website",
     url: "https://tsurispot.com",
     siteName: "ツリスポ",
@@ -93,7 +93,7 @@ const homeDatasetJsonLd = {
   "@context": "https://schema.org",
   "@type": "Dataset",
   name: "ツリスポ - 日本の釣りスポット・魚種総合データベース",
-  description: `日本全国${fishingSpots.length}箇所以上の釣りスポットと${fishSpecies.length}種以上の魚種情報を収録した総合釣り情報データベース。位置情報・釣れる魚・設備・混雑予想・おすすめタックルなどを網羅。`,
+  description: `日本全国${fishingSpots.length}箇所以上の釣りスポットと${fishSpecies.length}種以上の魚種情報を収録した総合釣り情報データベース。位置情報・釣れる魚・潮汐・水温・風速予報・混雑予想・航空写真・おすすめタックルを網羅。`,
   url: "https://tsurispot.com",
   license: "https://tsurispot.com/terms",
   creator: {
@@ -129,6 +129,10 @@ const homeDatasetJsonLd = {
     "釣れる魚種・旬の時期",
     "難易度・設備情報",
     "混雑予想・おすすめタックル",
+    "潮汐情報（満潮・干潮・月齢・潮回り）",
+    "海水温（リアルタイム海面水温）",
+    "風速・風向（14日間予報）",
+    "航空写真（国土地理院タイル）",
   ],
   measurementTechnique: "現地調査・公開情報の集約・専門家による監修",
   keywords: ["釣りスポット", "釣り場", "魚種図鑑", "フィッシング", "日本", "釣り情報"],
@@ -282,13 +286,13 @@ export default async function Home() {
             </div>
 
             <h1 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-white text-balance sm:mb-4 sm:text-4xl lg:text-5xl">
-              今週末、
+              初心者も安心の
               <br className="sm:hidden" />
-              釣りに行こう。
+              釣り場探し。
             </h1>
 
-            <p className="mb-4 max-w-lg text-sm text-blue-100 sm:mb-5 sm:text-lg">
-              道具がなくても、経験がなくても大丈夫。
+            <p className="hero-description mb-4 max-w-lg text-sm text-blue-100 sm:mb-5 sm:text-lg">
+              潮汐・水温・風速・混雑予想まで全部わかる。
               <br className="hidden sm:inline" />
               近くの釣り場で、最高の1匹に出会おう。
             </p>
@@ -309,6 +313,19 @@ export default async function Home() {
                 <Compass className="size-3.5 sm:size-4" />
                 <span><strong className="font-bold text-white">{totalPrefectures}</strong>都道府県</span>
               </Link>
+            </div>
+
+            {/* わかる情報バッジ */}
+            <div className="mb-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-[11px] text-blue-200/80 sm:mb-6 sm:gap-x-4 sm:text-xs">
+              <span className="flex items-center gap-1"><span aria-hidden="true">☀️</span>天気予報</span>
+              <span className="flex items-center gap-1"><span aria-hidden="true">🌡️</span>気温</span>
+              <span className="flex items-center gap-1"><span aria-hidden="true">🌊</span>水温</span>
+              <span className="flex items-center gap-1"><span aria-hidden="true">💨</span>風速・風向</span>
+              <span className="flex items-center gap-1"><span aria-hidden="true">🌅</span>日出・日入</span>
+              <span className="flex items-center gap-1"><span aria-hidden="true">🌙</span>潮回り・月齢</span>
+              <span className="flex items-center gap-1"><span aria-hidden="true">⏰</span>満潮・干潮</span>
+              <span className="flex items-center gap-1"><span aria-hidden="true">👥</span>混雑予想</span>
+              <span className="flex items-center gap-1"><span aria-hidden="true">🛰️</span>航空写真</span>
             </div>
 
             {/* 検索バー */}

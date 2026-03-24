@@ -297,7 +297,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
   {
     id: "sh006", name: "アジュール舞子", slug: "azure-maiko",
     description: "明石海峡大橋の真下に広がる白砂青松の公園。東側波止と西側護岸が釣りポイントで、潮通し抜群の好漁場。ショアジギングで青物、エギングでアオリイカ、投げ釣りでキスの実績が非常に高い。明石海峡大橋を見上げながらの釣りは絶景。",
-    latitude: 34.6310, longitude: 135.0290,
+    latitude: 34.6315, longitude: 135.0310,
     address: "〒655-0036 兵庫県神戸市垂水区海岸通11",
     accessInfo: "JR「舞子」駅・山陽電鉄「舞子公園」駅から徒歩約5分。第二神明道路名谷ICから約15分。",
     region: lr("r401"), spotType: "breakwater", difficulty: "intermediate",

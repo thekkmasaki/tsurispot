@@ -13,8 +13,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## コマンド
 
 ```bash
-# ビルド（OneDrive上のためEPERMエラー回避で.next削除が必要）
-rm -rf .next && npx next build
+# ビルド
+npx next build
 
 # 開発サーバー（ポート3000が占有されやすいので注意）
 npx next dev
@@ -120,7 +120,7 @@ npx tsc --noEmit
 
 ## 注意事項
 
-- OneDrive上のプロジェクト → `.next` の EPERM エラーが頻発。ビルド前に `rm -rf .next`
+- `.next` キャッシュの問題が出たら `rm -rf .next` してからビルド
 - 日本語パスを含むためbash操作時は引用符で囲む
 - アフィリエイトリンク一覧: `C:\Users\kk471\OneDrive\デスクトップ\saas\アフィリエイト\リンク一覧.txt`
 - スポット紹介文の他サイトからの丸パクリは絶対NG

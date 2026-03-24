@@ -155,9 +155,18 @@ export const affiliateProducts: AffiliateProduct[] = [
     name: "エギ ルアー 10本セット（ラトル内蔵・夜光）",
     url: "https://amzn.to/3Nc9r10",
     description: "2.5号・3.0号・3.5号の餌木10本セット。ラトル内蔵で集魚力抜群、夜光タイプで夜釣りにも対応。アオリイカ・ヤリイカ・タコ狙いに。",
-    methodKeywords: ["エギング"],
+    methodKeywords: ["エギング", "タコエギ"],
     seasons: ["all"],
     category: "tackle",
+  },
+  {
+    id: "af-tako-ball",
+    name: "タコ釣りボール（12粒セット・貝殻容器付）",
+    url: "https://amzn.to/3NNwHmh",
+    description: "タコエギに付けるだけで集魚効果がアップする専用エサ。貝殻容器付きでセットも簡単。初心者からベテランまでタコ釣りの釣果アップに。",
+    methodKeywords: ["タコエギ", "タコ", "テンヤ", "タコジグ"],
+    seasons: ["summer", "autumn"],
+    category: "bait",
   },
   {
     id: "af-eging-rod",
@@ -361,15 +370,6 @@ export const affiliateProducts: AffiliateProduct[] = [
     seasons: ["all"],
     category: "book",
     prefectures: ["神奈川県", "静岡県"],
-  },
-  {
-    id: "af-tako-ball",
-    name: "タコ釣りボール（12粒セット・貝殻容器付）",
-    url: "https://amzn.to/3NNwHmh",
-    description: "タコエギに付けるだけで集魚効果がアップする専用エサ。貝殻容器付きでセットも簡単。初心者からベテランまでタコ釣りの釣果アップに。",
-    methodKeywords: ["タコエギ", "タコ", "テンヤ", "タコジグ"],
-    seasons: ["summer", "autumn"],
-    category: "bait",
   },
 ];
 

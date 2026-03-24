@@ -243,7 +243,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
     hasMap: `https://www.google.com/maps?q=${spot.latitude},${spot.longitude}`,
     isAccessibleForFree: spot.isFree,
     publicAccess: true,
-    ...(spot.mainImageUrl?.startsWith("http") ? { image: spot.mainImageUrl } : {}),
+    image: `https://tsurispot.com/api/og?title=${encodeURIComponent(spot.name)}&emoji=${encodeURIComponent("🎣")}`,
     amenityFeature: [
       ...(spot.hasParking ? [{ "@type": "LocationFeatureSpecification", name: "駐車場", value: true, description: getParkingAmenityDescription(spot.hasParking, spot.parkingDetail, spot.parkingGuide) }] : []),
       ...(spot.hasToilet ? [{ "@type": "LocationFeatureSpecification", name: "トイレ", value: true }] : []),
@@ -316,7 +316,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
       longitude: spot.longitude,
     },
     hasMap: `https://www.google.com/maps?q=${spot.latitude},${spot.longitude}`,
-    ...(spot.mainImageUrl?.startsWith("http") ? { image: spot.mainImageUrl } : {}),
+    image: `https://tsurispot.com/api/og?title=${encodeURIComponent(spot.name)}&emoji=${encodeURIComponent("🎣")}`,
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: (spot.googleRating || spot.rating).toFixed(1),
@@ -645,30 +645,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
         </div>
       </div>
 
-      {/* Photo area - 実際の写真がある場合のみ表示 */}
-      {(spot.mainImageUrl?.startsWith("http") || spot.mainImageUrl?.startsWith("/images/spots/wikimedia/")) && (
-        <div className="mb-6 sm:mb-8">
-          <div className="overflow-hidden rounded-xl">
-            <SpotImage
-              src={spot.mainImageUrl}
-              alt={spot.name}
-              spotType={spot.spotType}
-              height="h-48 sm:h-56 md:h-72"
-              priority
-              sizes="(max-width: 768px) 100vw, (max-width: 1024px) 100vw, 640px"
-            />
-          </div>
-          {spot.imageAttribution && (
-            <p className="mt-1 text-right text-xs text-muted-foreground">
-              {spot.imageAttribution}
-            </p>
-          )}
-        </div>
-      )}
-
-      {/* スポット写真ギャラリー */}
+      {/* スポット写真ギャラリー（航空写真マップ or ユーザー投稿写真） */}
       <section className="mb-6 sm:mb-8">
-        <SpotPhotoGallery photos={spot.spotPhotos} spotType={spot.spotType} spotName={spot.name} />
+        <SpotPhotoGallery photos={spot.spotPhotos} spotType={spot.spotType} spotName={spot.name} latitude={spot.latitude} longitude={spot.longitude} />
         {fishingPoints && (
           <div className="mt-4">
             <h3 className="mb-3 text-lg font-bold">魚礁図・ポイント図</h3>

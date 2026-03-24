@@ -46,6 +46,24 @@ const CATEGORY_DEFAULT_IMAGE: Record<BlogPost["category"], string> = {
   report: "/images/blog/defaults/report.svg",
 };
 
+/** 週報エリアID一覧（航空写真ヒーロー画像に対応） */
+const WEEKLY_AREA_IDS = [
+  "akashi-kobe", "osaka-sennan", "tokyobay", "fukuoka-kitakyushu",
+  "suruga-izu", "chita-mikawa", "nanki-shirahama", "setouchi-hiroshima",
+  "sendai-ishinomaki", "otaru-ishikari", "shonan-kamakura", "boso",
+  "beppu-oita", "tango-maizuru", "nagasaki-hirado",
+];
+
+/** 週報slugからエリア航空写真パスを取得 */
+function getWeeklyReportImage(slug: string): string | null {
+  for (const areaId of WEEKLY_AREA_IDS) {
+    if (slug.startsWith(areaId + "-")) {
+      return `/images/blog/weekly/${areaId}.jpg`;
+    }
+  }
+  return null;
+}
+
 // 静的記事のslugのみ事前生成（microCMS記事はオンデマンド）
 export function generateStaticParams() {
   return blogPosts.map((post) => ({
@@ -196,7 +214,7 @@ export default async function BlogPostPage({
 
       {/* ヒーロービジュアル */}
       {(() => {
-        const heroImage = post.image || CATEGORY_DEFAULT_IMAGE[post.category];
+        const heroImage = post.image || getWeeklyReportImage(post.slug) || CATEGORY_DEFAULT_IMAGE[post.category];
         const isExternal = heroImage.startsWith("http");
         return (
           <div className="relative mb-8 h-48 w-full overflow-hidden rounded-xl sm:h-64">

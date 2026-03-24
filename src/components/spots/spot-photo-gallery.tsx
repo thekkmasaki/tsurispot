@@ -1,9 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import type { SpotPhoto } from "@/types";
+
+const AerialPhotoMap = dynamic(
+  () => import("./aerial-photo-map").then((m) => ({ default: m.AerialPhotoMap })),
+  { ssr: false, loading: () => <div className="h-full w-full animate-pulse bg-muted" /> },
+);
 
 // Inline SVG icons to avoid Turbopack module resolution issues with lucide-react
 const svgProps = { xmlns: "http://www.w3.org/2000/svg", width: 24, height: 24, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
@@ -130,11 +136,14 @@ interface SpotPhotoGalleryProps {
   photos?: SpotPhoto[];
   spotType: string;
   spotName: string;
+  latitude?: number;
+  longitude?: number;
 }
 
-export function SpotPhotoGallery({ photos, spotType, spotName }: SpotPhotoGalleryProps) {
+export function SpotPhotoGallery({ photos, spotType, spotName, latitude, longitude }: SpotPhotoGalleryProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const hasPhotos = photos && photos.length > 0;
+  const hasCoordinates = typeof latitude === "number" && typeof longitude === "number";
 
   if (!hasPhotos) {
     const defaultImg = SPOT_TYPE_DEFAULT_IMAGES[spotType] || DEFAULT_IMAGE;
@@ -147,20 +156,26 @@ export function SpotPhotoGallery({ photos, spotType, spotName }: SpotPhotoGaller
         </h2>
 
         <div className="overflow-hidden rounded-xl border bg-card">
-          {/* Type illustration with overlay */}
+          {/* Aerial photo or fallback illustration */}
           <div className="relative aspect-[2/1] sm:aspect-[5/2] overflow-hidden bg-muted">
-            <Image
-              src={defaultImg.src}
-              alt={`${spotName}（${defaultImg.label}）のイメージイラスト`}
-              fill
-              className="object-cover"
-              sizes="(max-width: 768px) 100vw, 640px"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
-            <div className="absolute bottom-3 left-3 sm:bottom-4 sm:left-4">
+            {hasCoordinates ? (
+              <AerialPhotoMap latitude={latitude} longitude={longitude} />
+            ) : (
+              <>
+                <Image
+                  src={defaultImg.src}
+                  alt={`${spotName}（${defaultImg.label}）のイメージイラスト`}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 640px"
+                />
+                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+              </>
+            )}
+            <div className="pointer-events-none absolute bottom-3 left-3 sm:bottom-4 sm:left-4 z-[400]">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-gray-700 backdrop-blur-sm">
                 <MapPinIcon className="size-3" />
-                {defaultImg.label}タイプ
+                {hasCoordinates ? "航空写真" : `${defaultImg.label}タイプ`}
               </span>
             </div>
           </div>
