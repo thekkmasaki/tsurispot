@@ -5,233 +5,1565 @@
     "lng": 135.0661
   },
   "imageMetadata": {
-    "source": "sentinel-2",
-    "date": "2026-03-01",
-    "resolution": 10,
-    "imageSize": { "width": 640, "height": 640 }
+    "source": "gsi-aerial",
+    "date": "2024",
+    "resolution": 0.25,
+    "imageSize": {
+      "width": 1536,
+      "height": 1536
+    }
   },
   "layoutType": "seawall",
-  "structureLabel": "護岸（ベランダ）",
+  "structureEndpoints": {
+    "west": {
+      "lat": 34.6261,
+      "lng": 135.0629
+    },
+    "east": {
+      "lat": 34.6273,
+      "lng": 135.0692
+    }
+  },
+  "structureLabel": "護岸",
   "seaLabel": "大阪湾",
   "detectedStructures": [
     {
-      "id": "str-001",
-      "category": "seawall",
-      "confidence": 0.96,
-      "bbox": { "x": 20, "y": 290, "width": 600, "height": 35 },
-      "areaRatio": 0.051,
-      "relativePosition": 0.5,
-      "distanceFromShore": "onshore"
-    },
-    {
-      "id": "str-002",
+      "id": "mask-001",
       "category": "tetrapod",
-      "confidence": 0.89,
-      "bbox": { "x": 20, "y": 325, "width": 115, "height": 50 },
-      "areaRatio": 0.014,
-      "relativePosition": 0.09,
+      "confidence": 0.248,
+      "bbox": {
+        "x": 146,
+        "y": 536,
+        "width": 286,
+        "height": 204
+      },
+      "areaRatio": 0.0171,
+      "relativePosition": 0.188,
       "distanceFromShore": "near"
     },
     {
-      "id": "str-003",
+      "id": "mask-003",
+      "category": "tetrapod",
+      "confidence": 0.235,
+      "bbox": {
+        "x": 0,
+        "y": 678,
+        "width": 146,
+        "height": 111
+      },
+      "areaRatio": 0.0051,
+      "relativePosition": 0.048,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-005",
+      "category": "other-structure",
+      "confidence": 0.231,
+      "bbox": {
+        "x": 1104,
+        "y": 226,
+        "width": 105,
+        "height": 109
+      },
+      "areaRatio": 0.0038,
+      "relativePosition": 0.753,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-006",
+      "category": "tetrapod",
+      "confidence": 0.236,
+      "bbox": {
+        "x": 1208,
+        "y": 328,
+        "width": 110,
+        "height": 129
+      },
+      "areaRatio": 0.0043,
+      "relativePosition": 0.822,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-007",
+      "category": "tetrapod",
+      "confidence": 0.233,
+      "bbox": {
+        "x": 1291,
+        "y": 92,
+        "width": 244,
+        "height": 193
+      },
+      "areaRatio": 0.014,
+      "relativePosition": 0.92,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-008",
+      "category": "tetrapod",
+      "confidence": 0.223,
+      "bbox": {
+        "x": 451,
+        "y": 343,
+        "width": 219,
+        "height": 89
+      },
+      "areaRatio": 0.0032,
+      "relativePosition": 0.365,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-010",
+      "category": "pier",
+      "confidence": 0.258,
+      "bbox": {
+        "x": 415,
+        "y": 360,
+        "width": 123,
+        "height": 103
+      },
+      "areaRatio": 0.0039,
+      "relativePosition": 0.31,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-012",
+      "category": "seawall",
+      "confidence": 0.247,
+      "bbox": {
+        "x": 451,
+        "y": 501,
+        "width": 107,
+        "height": 93
+      },
+      "areaRatio": 0.0031,
+      "relativePosition": 0.328,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-014",
+      "category": "tetrapod",
+      "confidence": 0.265,
+      "bbox": {
+        "x": 834,
+        "y": 222,
+        "width": 248,
+        "height": 139
+      },
+      "areaRatio": 0.0094,
+      "relativePosition": 0.624,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-015",
+      "category": "tetrapod",
+      "confidence": 0.23,
+      "bbox": {
+        "x": 778,
+        "y": 397,
+        "width": 86,
+        "height": 86
+      },
+      "areaRatio": 0.0023,
+      "relativePosition": 0.535,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-017",
       "category": "port-facility",
-      "confidence": 0.82,
-      "bbox": { "x": 40, "y": 255, "width": 560, "height": 35 },
-      "areaRatio": 0.048,
+      "confidence": 0.26,
+      "bbox": {
+        "x": 0,
+        "y": 477,
+        "width": 1535,
+        "height": 408
+      },
+      "areaRatio": 0.0359,
       "relativePosition": 0.5,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-018",
+      "category": "tetrapod",
+      "confidence": 0.247,
+      "bbox": {
+        "x": 892,
+        "y": 363,
+        "width": 89,
+        "height": 81
+      },
+      "areaRatio": 0.0022,
+      "relativePosition": 0.61,
       "distanceFromShore": "onshore"
     },
     {
-      "id": "str-004",
-      "category": "water",
-      "confidence": 0.99,
-      "bbox": { "x": 0, "y": 375, "width": 640, "height": 265 },
-      "areaRatio": 0.65,
-      "relativePosition": 0.5,
-      "distanceFromShore": "far"
+      "id": "mask-019",
+      "category": "tetrapod",
+      "confidence": 0.233,
+      "bbox": {
+        "x": 722,
+        "y": 563,
+        "width": 51,
+        "height": 54
+      },
+      "areaRatio": 0.0009,
+      "relativePosition": 0.487,
+      "distanceFromShore": "onshore"
     },
     {
-      "id": "str-005",
-      "category": "land",
-      "confidence": 0.98,
-      "bbox": { "x": 0, "y": 0, "width": 640, "height": 255 },
-      "areaRatio": 0.30,
-      "relativePosition": 0.5,
+      "id": "mask-021",
+      "category": "seawall",
+      "confidence": 0.259,
+      "bbox": {
+        "x": 1220,
+        "y": 201,
+        "width": 66,
+        "height": 111
+      },
+      "areaRatio": 0.0017,
+      "relativePosition": 0.816,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-025",
+      "category": "tetrapod",
+      "confidence": 0.255,
+      "bbox": {
+        "x": 1315,
+        "y": 258,
+        "width": 220,
+        "height": 97
+      },
+      "areaRatio": 0.0054,
+      "relativePosition": 0.928,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-029",
+      "category": "tetrapod",
+      "confidence": 0.211,
+      "bbox": {
+        "x": 13,
+        "y": 0,
+        "width": 94,
+        "height": 73
+      },
+      "areaRatio": 0.0026,
+      "relativePosition": 0.039,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-030",
+      "category": "seawall",
+      "confidence": 0.25,
+      "bbox": {
+        "x": 611,
+        "y": 433,
+        "width": 81,
+        "height": 45
+      },
+      "areaRatio": 0.001,
+      "relativePosition": 0.424,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-031",
+      "category": "seawall",
+      "confidence": 0.234,
+      "bbox": {
+        "x": 736,
+        "y": 199,
+        "width": 329,
+        "height": 92
+      },
+      "areaRatio": 0.0034,
+      "relativePosition": 0.586,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-032",
+      "category": "tetrapod",
+      "confidence": 0.256,
+      "bbox": {
+        "x": 60,
+        "y": 372,
+        "width": 238,
+        "height": 75
+      },
+      "areaRatio": 0.003,
+      "relativePosition": 0.117,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-033",
+      "category": "tetrapod",
+      "confidence": 0.205,
+      "bbox": {
+        "x": 719,
+        "y": 423,
+        "width": 53,
+        "height": 54
+      },
+      "areaRatio": 0.001,
+      "relativePosition": 0.485,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-035",
+      "category": "tetrapod",
+      "confidence": 0.24,
+      "bbox": {
+        "x": 551,
+        "y": 452,
+        "width": 56,
+        "height": 28
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.377,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-036",
+      "category": "seawall",
+      "confidence": 0.254,
+      "bbox": {
+        "x": 797,
+        "y": 490,
+        "width": 65,
+        "height": 52
+      },
+      "areaRatio": 0.0011,
+      "relativePosition": 0.54,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-037",
+      "category": "tetrapod",
+      "confidence": 0.25,
+      "bbox": {
+        "x": 699,
+        "y": 304,
+        "width": 70,
+        "height": 41
+      },
+      "areaRatio": 0.0009,
+      "relativePosition": 0.478,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-038",
+      "category": "tetrapod",
+      "confidence": 0.247,
+      "bbox": {
+        "x": 951,
+        "y": 495,
+        "width": 41,
+        "height": 51
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.632,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-039",
+      "category": "tetrapod",
+      "confidence": 0.243,
+      "bbox": {
+        "x": 1463,
+        "y": 93,
+        "width": 72,
+        "height": 150
+      },
+      "areaRatio": 0.0035,
+      "relativePosition": 0.976,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-040",
+      "category": "tetrapod",
+      "confidence": 0.255,
+      "bbox": {
+        "x": 847,
+        "y": 20,
+        "width": 74,
+        "height": 29
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.576,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-041",
+      "category": "tetrapod",
+      "confidence": 0.226,
+      "bbox": {
+        "x": 358,
+        "y": 403,
+        "width": 26,
+        "height": 37
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.242,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-042",
+      "category": "seawall",
+      "confidence": 0.241,
+      "bbox": {
+        "x": 196,
+        "y": 241,
+        "width": 44,
+        "height": 46
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.142,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-044",
+      "category": "tetrapod",
+      "confidence": 0.251,
+      "bbox": {
+        "x": 922,
+        "y": 0,
+        "width": 174,
+        "height": 41
+      },
+      "areaRatio": 0.0015,
+      "relativePosition": 0.657,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-045",
+      "category": "tetrapod",
+      "confidence": 0.232,
+      "bbox": {
+        "x": 624,
+        "y": 521,
+        "width": 48,
+        "height": 44
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.422,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-046",
+      "category": "tetrapod",
+      "confidence": 0.238,
+      "bbox": {
+        "x": 570,
+        "y": 533,
+        "width": 45,
+        "height": 46
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.386,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-048",
+      "category": "seawall",
+      "confidence": 0.269,
+      "bbox": {
+        "x": 1316,
+        "y": 253,
+        "width": 219,
+        "height": 165
+      },
+      "areaRatio": 0.0057,
+      "relativePosition": 0.928,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-049",
+      "category": "tetrapod",
+      "confidence": 0.258,
+      "bbox": {
+        "x": 0,
+        "y": 708,
+        "width": 393,
+        "height": 122
+      },
+      "areaRatio": 0.0047,
+      "relativePosition": 0.128,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-050",
+      "category": "seawall",
+      "confidence": 0.24,
+      "bbox": {
+        "x": 149,
+        "y": 245,
+        "width": 27,
+        "height": 44
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.106,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-051",
+      "category": "seawall",
+      "confidence": 0.236,
+      "bbox": {
+        "x": 487,
+        "y": 0,
+        "width": 49,
+        "height": 31
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.333,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-053",
+      "category": "tetrapod",
+      "confidence": 0.242,
+      "bbox": {
+        "x": 1196,
+        "y": 485,
+        "width": 52,
+        "height": 38
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.796,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-058",
+      "category": "seawall",
+      "confidence": 0.23,
+      "bbox": {
+        "x": 301,
+        "y": 0,
+        "width": 86,
+        "height": 35
+      },
+      "areaRatio": 0.0009,
+      "relativePosition": 0.224,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-059",
+      "category": "tetrapod",
+      "confidence": 0.226,
+      "bbox": {
+        "x": 7,
+        "y": 589,
+        "width": 23,
+        "height": 30
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.012,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-061",
+      "category": "tetrapod",
+      "confidence": 0.235,
+      "bbox": {
+        "x": 1207,
+        "y": 207,
+        "width": 112,
+        "height": 250
+      },
+      "areaRatio": 0.0046,
+      "relativePosition": 0.822,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-063",
+      "category": "tetrapod",
+      "confidence": 0.214,
+      "bbox": {
+        "x": 623,
+        "y": 0,
+        "width": 51,
+        "height": 34
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.422,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-064",
+      "category": "seawall",
+      "confidence": 0.23,
+      "bbox": {
+        "x": 301,
+        "y": 0,
+        "width": 56,
+        "height": 34
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.214,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-065",
+      "category": "tetrapod",
+      "confidence": 0.241,
+      "bbox": {
+        "x": 1394,
+        "y": 354,
+        "width": 141,
+        "height": 53
+      },
+      "areaRatio": 0.002,
+      "relativePosition": 0.953,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-067",
+      "category": "seawall",
+      "confidence": 0.27,
+      "bbox": {
+        "x": 981,
+        "y": 548,
+        "width": 85,
+        "height": 51
+      },
+      "areaRatio": 0.0014,
+      "relativePosition": 0.666,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-069",
+      "category": "seawall",
+      "confidence": 0.237,
+      "bbox": {
+        "x": 205,
+        "y": 17,
+        "width": 42,
+        "height": 95
+      },
+      "areaRatio": 0.0011,
+      "relativePosition": 0.147,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-071",
+      "category": "tetrapod",
+      "confidence": 0.257,
+      "bbox": {
+        "x": 771,
+        "y": 625,
+        "width": 27,
+        "height": 27
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.511,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-073",
+      "category": "seawall",
+      "confidence": 0.235,
+      "bbox": {
+        "x": 203,
+        "y": 113,
+        "width": 26,
+        "height": 42
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.141,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-074",
+      "category": "pier",
+      "confidence": 0.224,
+      "bbox": {
+        "x": 691,
+        "y": 317,
+        "width": 104,
+        "height": 86
+      },
+      "areaRatio": 0.0024,
+      "relativePosition": 0.484,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-075",
+      "category": "tetrapod",
+      "confidence": 0.228,
+      "bbox": {
+        "x": 1403,
+        "y": 104,
+        "width": 30,
+        "height": 17
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.923,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-078",
+      "category": "tetrapod",
+      "confidence": 0.245,
+      "bbox": {
+        "x": 564,
+        "y": 12,
+        "width": 57,
+        "height": 49
+      },
+      "areaRatio": 0.0009,
+      "relativePosition": 0.386,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-081",
+      "category": "seawall",
+      "confidence": 0.244,
+      "bbox": {
+        "x": 782,
+        "y": 301,
+        "width": 42,
+        "height": 79
+      },
+      "areaRatio": 0.0009,
+      "relativePosition": 0.523,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-084",
+      "category": "seawall",
+      "confidence": 0.244,
+      "bbox": {
+        "x": 131,
+        "y": 56,
+        "width": 52,
+        "height": 58
+      },
+      "areaRatio": 0.0011,
+      "relativePosition": 0.102,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-085",
+      "category": "tetrapod",
+      "confidence": 0.245,
+      "bbox": {
+        "x": 584,
+        "y": 727,
+        "width": 31,
+        "height": 17
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.39,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-086",
+      "category": "tetrapod",
+      "confidence": 0.241,
+      "bbox": {
+        "x": 492,
+        "y": 768,
+        "width": 29,
+        "height": 30
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.33,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-087",
+      "category": "tetrapod",
+      "confidence": 0.225,
+      "bbox": {
+        "x": 1224,
+        "y": 24,
+        "width": 9,
+        "height": 9
+      },
+      "areaRatio": 0.0,
+      "relativePosition": 0.8,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-091",
+      "category": "other-structure",
+      "confidence": 0.221,
+      "bbox": {
+        "x": 50,
+        "y": 87,
+        "width": 34,
+        "height": 36
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.044,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-092",
+      "category": "tetrapod",
+      "confidence": 0.235,
+      "bbox": {
+        "x": 1351,
+        "y": 359,
+        "width": 19,
+        "height": 15
+      },
+      "areaRatio": 0.0001,
+      "relativePosition": 0.886,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-093",
+      "category": "seawall",
+      "confidence": 0.231,
+      "bbox": {
+        "x": 880,
+        "y": 462,
+        "width": 29,
+        "height": 119
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.582,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-096",
+      "category": "tetrapod",
+      "confidence": 0.228,
+      "bbox": {
+        "x": 163,
+        "y": 0,
+        "width": 35,
+        "height": 28
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.118,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-098",
+      "category": "tetrapod",
+      "confidence": 0.242,
+      "bbox": {
+        "x": 1032,
+        "y": 364,
+        "width": 63,
+        "height": 167
+      },
+      "areaRatio": 0.0011,
+      "relativePosition": 0.692,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-100",
+      "category": "tetrapod",
+      "confidence": 0.232,
+      "bbox": {
+        "x": 620,
+        "y": 590,
+        "width": 52,
+        "height": 52
+      },
+      "areaRatio": 0.0009,
+      "relativePosition": 0.421,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-102",
+      "category": "tetrapod",
+      "confidence": 0.231,
+      "bbox": {
+        "x": 884,
+        "y": 633,
+        "width": 13,
+        "height": 24
+      },
+      "areaRatio": 0.0001,
+      "relativePosition": 0.58,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-106",
+      "category": "tetrapod",
+      "confidence": 0.228,
+      "bbox": {
+        "x": 928,
+        "y": 587,
+        "width": 17,
+        "height": 19
+      },
+      "areaRatio": 0.0001,
+      "relativePosition": 0.61,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-107",
+      "category": "tetrapod",
+      "confidence": 0.238,
+      "bbox": {
+        "x": 23,
+        "y": 481,
+        "width": 30,
+        "height": 35
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.025,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-108",
+      "category": "tetrapod",
+      "confidence": 0.222,
+      "bbox": {
+        "x": 354,
+        "y": 691,
+        "width": 12,
+        "height": 10
+      },
+      "areaRatio": 0.0,
+      "relativePosition": 0.234,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-109",
+      "category": "tetrapod",
+      "confidence": 0.24,
+      "bbox": {
+        "x": 676,
+        "y": 474,
+        "width": 61,
+        "height": 54
+      },
+      "areaRatio": 0.0009,
+      "relativePosition": 0.46,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-112",
+      "category": "tetrapod",
+      "confidence": 0.233,
+      "bbox": {
+        "x": 883,
+        "y": 630,
+        "width": 16,
+        "height": 29
+      },
+      "areaRatio": 0.0001,
+      "relativePosition": 0.58,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-113",
+      "category": "tetrapod",
+      "confidence": 0.223,
+      "bbox": {
+        "x": 889,
+        "y": 110,
+        "width": 8,
+        "height": 8
+      },
+      "areaRatio": 0.0,
+      "relativePosition": 0.581,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-114",
+      "category": "tetrapod",
+      "confidence": 0.217,
+      "bbox": {
+        "x": 832,
+        "y": 112,
+        "width": 12,
+        "height": 11
+      },
+      "areaRatio": 0.0,
+      "relativePosition": 0.546,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-115",
+      "category": "tetrapod",
+      "confidence": 0.238,
+      "bbox": {
+        "x": 1163,
+        "y": 216,
+        "width": 71,
+        "height": 96
+      },
+      "areaRatio": 0.0012,
+      "relativePosition": 0.78,
       "distanceFromShore": "onshore"
     }
   ],
-  "seaBottomFeatures": [
-    {
-      "type": "tetrapod",
-      "xRange": [0.0, 0.18],
-      "distanceFromShore": "near",
-      "estimatedDepth": 3,
-      "confidence": 0.89
-    },
-    {
-      "type": "reef-stone",
-      "xRange": [0.24, 0.44],
-      "distanceFromShore": "medium",
-      "estimatedDepth": 8,
-      "confidence": 0.72
-    },
-    {
-      "type": "reef-concrete",
-      "xRange": [0.48, 0.66],
-      "distanceFromShore": "medium",
-      "estimatedDepth": 10,
-      "confidence": 0.68
-    },
-    {
-      "type": "reef-hex",
-      "xRange": [0.72, 0.90],
-      "distanceFromShore": "medium",
-      "estimatedDepth": 8,
-      "confidence": 0.65
-    }
-  ],
+  "seaBottomFeatures": [],
   "zones": [
     {
-      "id": "zone-west",
+      "id": "zone-0",
       "name": "西端エリア",
-      "xRange": [0.0, 0.15],
-      "structures": ["seawall", "tetrapod"],
-      "seaBottomFeatures": ["tetrapod"],
-      "estimatedDepth": { "shore": 5, "offshore": 8 },
-      "currentFlow": 0.85,
-      "estimatedFish": [
-        { "name": "タチウオ", "method": "テンヤ/ワインド", "season": "8〜12月", "difficulty": "medium", "probability": 0.78 },
-        { "name": "サヨリ", "method": "ウキ釣り", "season": "9〜12月", "difficulty": "easy", "probability": 0.72 },
-        { "name": "アオリイカ", "method": "エギング", "season": "9〜11月", "difficulty": "medium", "probability": 0.75 },
-        { "name": "チヌ", "method": "ウキフカセ", "season": "4〜11月", "difficulty": "medium", "probability": 0.80 },
-        { "name": "スズキ", "method": "ルアー/エビ撒き", "season": "通年", "difficulty": "medium", "probability": 0.82 },
-        { "name": "グレ", "method": "ウキフカセ", "season": "10〜5月", "difficulty": "medium", "probability": 0.70 },
-        { "name": "メバル", "method": "メバリング", "season": "11〜4月", "difficulty": "medium", "probability": 0.88 },
-        { "name": "マルハギ", "method": "胴突き", "season": "8〜12月", "difficulty": "medium", "probability": 0.60 },
-        { "name": "アイナメ", "method": "投げ釣り", "season": "10〜3月", "difficulty": "medium", "probability": 0.55 }
+      "xRange": [
+        0.0,
+        0.143
       ],
-      "rating": "good"
-    },
-    {
-      "id": "zone-west-inner",
-      "name": "西側テトラ帯",
-      "xRange": [0.10, 0.20],
-      "structures": ["seawall", "tetrapod"],
-      "seaBottomFeatures": ["tetrapod"],
-      "estimatedDepth": { "shore": 4, "offshore": 5 },
-      "currentFlow": 0.60,
-      "estimatedFish": [
-        { "name": "ガシラ", "method": "穴釣り/胴突き", "season": "通年", "difficulty": "easy", "probability": 0.92 },
-        { "name": "メバル", "method": "メバリング", "season": "11〜4月", "difficulty": "medium", "probability": 0.85 },
-        { "name": "アジ", "method": "サビキ釣り", "season": "5〜11月", "difficulty": "easy", "probability": 0.78 }
+      "structures": [
+        "tetrapod",
+        "other-structure",
+        "port-facility",
+        "seawall"
       ],
-      "rating": "normal"
-    },
-    {
-      "id": "zone-center-west",
-      "name": "中央西エリア（捨石魚礁前）",
-      "xRange": [0.24, 0.44],
-      "structures": ["seawall"],
-      "seaBottomFeatures": ["reef-stone"],
-      "estimatedDepth": { "shore": 4, "offshore": 8 },
-      "currentFlow": 0.65,
-      "estimatedFish": [
-        { "name": "アジ", "method": "サビキ釣り", "season": "5〜11月", "difficulty": "easy", "probability": 0.90 },
-        { "name": "サバ", "method": "サビキ/ジグサビキ", "season": "6〜10月", "difficulty": "easy", "probability": 0.80 },
-        { "name": "キス", "method": "投げ釣り", "season": "5〜10月", "difficulty": "easy", "probability": 0.65 },
-        { "name": "カレイ", "method": "投げ釣り", "season": "10〜3月", "difficulty": "medium", "probability": 0.55 }
+      "seaBottomFeatures": [
+        "tetrapod"
       ],
-      "rating": "good"
-    },
-    {
-      "id": "zone-center",
-      "name": "中央エリア（縁石変化点）",
-      "xRange": [0.42, 0.56],
-      "structures": ["seawall", "port-facility"],
-      "seaBottomFeatures": ["reef-stone", "reef-concrete"],
-      "estimatedDepth": { "shore": 4, "offshore": 8 },
-      "currentFlow": 0.70,
+      "estimatedDepth": {
+        "shore": 4.5,
+        "offshore": 7.0
+      },
+      "currentFlow": 0.93,
       "estimatedFish": [
-        { "name": "アジ", "method": "サビキ釣り", "season": "6〜10月", "difficulty": "easy", "probability": 0.95 },
-        { "name": "メバル", "method": "メバリング", "season": "通年", "difficulty": "medium", "probability": 0.85 },
-        { "name": "ガシラ", "method": "胴突き", "season": "通年", "difficulty": "easy", "probability": 0.88 },
-        { "name": "ウミタナゴ", "method": "ウキ釣り", "season": "通年", "difficulty": "easy", "probability": 0.70 },
-        { "name": "ウマヅラハギ", "method": "胴突き", "season": "8〜12月", "difficulty": "medium", "probability": 0.62 },
-        { "name": "カワハギ", "method": "胴突き", "season": "8〜12月", "difficulty": "medium", "probability": 0.58 },
-        { "name": "アオリイカ", "method": "エギング", "season": "9〜11月", "difficulty": "medium", "probability": 0.65 },
-        { "name": "スズキ", "method": "ルアー/エビ撒き", "season": "通年", "difficulty": "medium", "probability": 0.78 },
-        { "name": "チヌ", "method": "ウキフカセ", "season": "4〜11月", "difficulty": "medium", "probability": 0.75 },
-        { "name": "グレ", "method": "ウキフカセ", "season": "10〜5月", "difficulty": "medium", "probability": 0.72 }
+        {
+          "name": "アジ",
+          "probability": 0.95,
+          "season": "5月〜11月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "メバル",
+          "probability": 0.85,
+          "season": "11月〜4月",
+          "method": "メバリング",
+          "difficulty": "easy"
+        },
+        {
+          "name": "イワシ",
+          "probability": 0.8,
+          "season": "5月〜10月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "カサゴ",
+          "probability": 0.7,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アイナメ",
+          "probability": 0.55,
+          "season": "10月〜3月",
+          "method": "ブラクリ",
+          "difficulty": "medium"
+        },
+        {
+          "name": "スズキ",
+          "probability": 0.5,
+          "season": "3月〜12月",
+          "method": "ルアー",
+          "difficulty": "medium"
+        },
+        {
+          "name": "クロダイ",
+          "probability": 0.45,
+          "season": "4月〜11月",
+          "method": "ヘチ釣り",
+          "difficulty": "medium"
+        },
+        {
+          "name": "ソイ",
+          "probability": 0.4,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "medium"
+        }
       ],
       "rating": "hot"
     },
     {
-      "id": "zone-center-east",
-      "name": "中央東エリア（コンクリ魚礁前）",
-      "xRange": [0.55, 0.70],
-      "structures": ["seawall"],
-      "seaBottomFeatures": ["reef-concrete"],
-      "estimatedDepth": { "shore": 4, "offshore": 6 },
-      "currentFlow": 0.65,
+      "id": "zone-1",
+      "name": "西寄りエリア",
+      "xRange": [
+        0.143,
+        0.286
+      ],
+      "structures": [
+        "tetrapod",
+        "pier",
+        "port-facility",
+        "seawall"
+      ],
+      "seaBottomFeatures": [
+        "tetrapod"
+      ],
+      "estimatedDepth": {
+        "shore": 5.7,
+        "offshore": 9.9
+      },
+      "currentFlow": 0.79,
       "estimatedFish": [
-        { "name": "アジ", "method": "サビキ釣り", "season": "5〜11月", "difficulty": "easy", "probability": 0.88 },
-        { "name": "メバル", "method": "メバリング", "season": "11〜4月", "difficulty": "medium", "probability": 0.80 },
-        { "name": "スズキ", "method": "ルアー/エビ撒き", "season": "通年", "difficulty": "medium", "probability": 0.72 },
-        { "name": "グレ", "method": "ウキフカセ", "season": "10〜5月", "difficulty": "medium", "probability": 0.68 },
-        { "name": "ウマヅラハギ", "method": "胴突き", "season": "8〜12月", "difficulty": "medium", "probability": 0.58 },
-        { "name": "マルハギ", "method": "胴突き", "season": "8〜12月", "difficulty": "medium", "probability": 0.55 }
+        {
+          "name": "メバル",
+          "probability": 0.95,
+          "season": "11月〜4月",
+          "method": "メバリング",
+          "difficulty": "easy"
+        },
+        {
+          "name": "スズキ",
+          "probability": 0.9,
+          "season": "3月〜12月",
+          "method": "ルアー",
+          "difficulty": "easy"
+        },
+        {
+          "name": "イワシ",
+          "probability": 0.8,
+          "season": "5月〜10月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "カサゴ",
+          "probability": 0.7,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アジ",
+          "probability": 0.6,
+          "season": "5月〜11月",
+          "method": "アジング",
+          "difficulty": "medium"
+        },
+        {
+          "name": "アイナメ",
+          "probability": 0.55,
+          "season": "10月〜3月",
+          "method": "ブラクリ",
+          "difficulty": "medium"
+        },
+        {
+          "name": "クロダイ",
+          "probability": 0.55,
+          "season": "4月〜11月",
+          "method": "ヘチ釣り",
+          "difficulty": "medium"
+        },
+        {
+          "name": "ソイ",
+          "probability": 0.4,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "medium"
+        }
       ],
       "rating": "good"
     },
     {
-      "id": "zone-east-inner",
-      "name": "東側エリア（六角錐魚礁前）",
-      "xRange": [0.72, 0.88],
-      "structures": ["seawall"],
-      "seaBottomFeatures": ["reef-hex"],
-      "estimatedDepth": { "shore": 4, "offshore": 6 },
-      "currentFlow": 0.70,
+      "id": "zone-2",
+      "name": "中央西エリア",
+      "xRange": [
+        0.286,
+        0.428
+      ],
+      "structures": [
+        "tetrapod",
+        "pier",
+        "port-facility",
+        "seawall"
+      ],
+      "seaBottomFeatures": [
+        "tetrapod"
+      ],
+      "estimatedDepth": {
+        "shore": 6.0,
+        "offshore": 10.3
+      },
+      "currentFlow": 0.64,
       "estimatedFish": [
-        { "name": "アジ", "method": "サビキ釣り", "season": "5〜11月", "difficulty": "easy", "probability": 0.88 },
-        { "name": "イワシ", "method": "サビキ釣り", "season": "5〜10月", "difficulty": "easy", "probability": 0.82 },
-        { "name": "ガシラ", "method": "穴釣り/胴突き", "season": "通年", "difficulty": "easy", "probability": 0.85 },
-        { "name": "メバル", "method": "メバリング", "season": "11〜4月", "difficulty": "medium", "probability": 0.80 }
+        {
+          "name": "メバル",
+          "probability": 0.95,
+          "season": "11月〜4月",
+          "method": "メバリング",
+          "difficulty": "easy"
+        },
+        {
+          "name": "スズキ",
+          "probability": 0.9,
+          "season": "3月〜12月",
+          "method": "ルアー",
+          "difficulty": "easy"
+        },
+        {
+          "name": "イワシ",
+          "probability": 0.8,
+          "season": "5月〜10月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "カサゴ",
+          "probability": 0.7,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アジ",
+          "probability": 0.6,
+          "season": "5月〜11月",
+          "method": "アジング",
+          "difficulty": "medium"
+        },
+        {
+          "name": "アイナメ",
+          "probability": 0.55,
+          "season": "10月〜3月",
+          "method": "ブラクリ",
+          "difficulty": "medium"
+        },
+        {
+          "name": "クロダイ",
+          "probability": 0.55,
+          "season": "4月〜11月",
+          "method": "ヘチ釣り",
+          "difficulty": "medium"
+        },
+        {
+          "name": "ソイ",
+          "probability": 0.4,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "medium"
+        }
       ],
       "rating": "good"
     },
     {
-      "id": "zone-east",
+      "id": "zone-3",
+      "name": "中央エリア",
+      "xRange": [
+        0.428,
+        0.571
+      ],
+      "structures": [
+        "tetrapod",
+        "pier",
+        "port-facility",
+        "seawall"
+      ],
+      "seaBottomFeatures": [
+        "tetrapod"
+      ],
+      "estimatedDepth": {
+        "shore": 6.2,
+        "offshore": 10.7
+      },
+      "currentFlow": 0.5,
+      "estimatedFish": [
+        {
+          "name": "メバル",
+          "probability": 0.95,
+          "season": "11月〜4月",
+          "method": "メバリング",
+          "difficulty": "easy"
+        },
+        {
+          "name": "スズキ",
+          "probability": 0.9,
+          "season": "3月〜12月",
+          "method": "ルアー",
+          "difficulty": "easy"
+        },
+        {
+          "name": "イワシ",
+          "probability": 0.8,
+          "season": "5月〜10月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "カサゴ",
+          "probability": 0.7,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アジ",
+          "probability": 0.6,
+          "season": "5月〜11月",
+          "method": "アジング",
+          "difficulty": "medium"
+        },
+        {
+          "name": "アイナメ",
+          "probability": 0.55,
+          "season": "10月〜3月",
+          "method": "ブラクリ",
+          "difficulty": "medium"
+        },
+        {
+          "name": "クロダイ",
+          "probability": 0.55,
+          "season": "4月〜11月",
+          "method": "ヘチ釣り",
+          "difficulty": "medium"
+        },
+        {
+          "name": "ソイ",
+          "probability": 0.4,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "medium"
+        }
+      ],
+      "rating": "good"
+    },
+    {
+      "id": "zone-4",
+      "name": "中央東エリア",
+      "xRange": [
+        0.571,
+        0.714
+      ],
+      "structures": [
+        "tetrapod",
+        "port-facility",
+        "seawall"
+      ],
+      "seaBottomFeatures": [
+        "tetrapod"
+      ],
+      "estimatedDepth": {
+        "shore": 5.1,
+        "offshore": 7.9
+      },
+      "currentFlow": 0.64,
+      "estimatedFish": [
+        {
+          "name": "アジ",
+          "probability": 0.95,
+          "season": "5月〜11月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "メバル",
+          "probability": 0.85,
+          "season": "11月〜4月",
+          "method": "メバリング",
+          "difficulty": "easy"
+        },
+        {
+          "name": "イワシ",
+          "probability": 0.8,
+          "season": "5月〜10月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "カサゴ",
+          "probability": 0.7,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アイナメ",
+          "probability": 0.55,
+          "season": "10月〜3月",
+          "method": "ブラクリ",
+          "difficulty": "medium"
+        },
+        {
+          "name": "スズキ",
+          "probability": 0.5,
+          "season": "3月〜12月",
+          "method": "ルアー",
+          "difficulty": "medium"
+        },
+        {
+          "name": "クロダイ",
+          "probability": 0.45,
+          "season": "4月〜11月",
+          "method": "ヘチ釣り",
+          "difficulty": "medium"
+        },
+        {
+          "name": "ソイ",
+          "probability": 0.4,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "medium"
+        }
+      ],
+      "rating": "good"
+    },
+    {
+      "id": "zone-5",
+      "name": "東寄りエリア",
+      "xRange": [
+        0.714,
+        0.857
+      ],
+      "structures": [
+        "tetrapod",
+        "other-structure",
+        "port-facility",
+        "seawall"
+      ],
+      "seaBottomFeatures": [
+        "tetrapod"
+      ],
+      "estimatedDepth": {
+        "shore": 4.9,
+        "offshore": 7.6
+      },
+      "currentFlow": 0.79,
+      "estimatedFish": [
+        {
+          "name": "アジ",
+          "probability": 0.95,
+          "season": "5月〜11月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "メバル",
+          "probability": 0.85,
+          "season": "11月〜4月",
+          "method": "メバリング",
+          "difficulty": "easy"
+        },
+        {
+          "name": "イワシ",
+          "probability": 0.8,
+          "season": "5月〜10月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "カサゴ",
+          "probability": 0.7,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アイナメ",
+          "probability": 0.55,
+          "season": "10月〜3月",
+          "method": "ブラクリ",
+          "difficulty": "medium"
+        },
+        {
+          "name": "スズキ",
+          "probability": 0.5,
+          "season": "3月〜12月",
+          "method": "ルアー",
+          "difficulty": "medium"
+        },
+        {
+          "name": "クロダイ",
+          "probability": 0.45,
+          "season": "4月〜11月",
+          "method": "ヘチ釣り",
+          "difficulty": "medium"
+        },
+        {
+          "name": "ソイ",
+          "probability": 0.4,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "medium"
+        }
+      ],
+      "rating": "good"
+    },
+    {
+      "id": "zone-6",
       "name": "東端エリア",
-      "xRange": [0.88, 1.0],
-      "structures": ["seawall"],
-      "seaBottomFeatures": ["reef-hex"],
-      "estimatedDepth": { "shore": 5, "offshore": 10 },
-      "currentFlow": 0.95,
+      "xRange": [
+        0.857,
+        0.999
+      ],
+      "structures": [
+        "tetrapod",
+        "port-facility",
+        "seawall"
+      ],
+      "seaBottomFeatures": [
+        "tetrapod"
+      ],
+      "estimatedDepth": {
+        "shore": 4.7,
+        "offshore": 7.3
+      },
+      "currentFlow": 0.93,
       "estimatedFish": [
-        { "name": "アオリイカ", "method": "エギング", "season": "9〜11月", "difficulty": "medium", "probability": 0.80 },
-        { "name": "ハマチ", "method": "のませ釣り", "season": "9〜12月", "difficulty": "medium", "probability": 0.72 },
-        { "name": "メジロ", "method": "のませ釣り", "season": "10〜12月", "difficulty": "hard", "probability": 0.55 },
-        { "name": "ブリ", "method": "のませ釣り", "season": "11〜1月", "difficulty": "hard", "probability": 0.40 },
-        { "name": "スズキ", "method": "ルアー/エビ撒き", "season": "通年", "difficulty": "medium", "probability": 0.85 },
-        { "name": "アコウ", "method": "ルアー/穴釣り", "season": "6〜9月", "difficulty": "hard", "probability": 0.45 },
-        { "name": "マダイ", "method": "カゴ釣り", "season": "4〜6月, 10〜11月", "difficulty": "medium", "probability": 0.50 },
-        { "name": "グレ", "method": "ウキフカセ", "season": "10〜5月", "difficulty": "medium", "probability": 0.72 },
-        { "name": "ウマヅラハギ", "method": "胴突き", "season": "8〜12月", "difficulty": "medium", "probability": 0.60 }
+        {
+          "name": "アジ",
+          "probability": 0.95,
+          "season": "5月〜11月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "メバル",
+          "probability": 0.85,
+          "season": "11月〜4月",
+          "method": "メバリング",
+          "difficulty": "easy"
+        },
+        {
+          "name": "イワシ",
+          "probability": 0.8,
+          "season": "5月〜10月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "カサゴ",
+          "probability": 0.7,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アイナメ",
+          "probability": 0.55,
+          "season": "10月〜3月",
+          "method": "ブラクリ",
+          "difficulty": "medium"
+        },
+        {
+          "name": "スズキ",
+          "probability": 0.5,
+          "season": "3月〜12月",
+          "method": "ルアー",
+          "difficulty": "medium"
+        },
+        {
+          "name": "クロダイ",
+          "probability": 0.45,
+          "season": "4月〜11月",
+          "method": "ヘチ釣り",
+          "difficulty": "medium"
+        },
+        {
+          "name": "ソイ",
+          "probability": 0.4,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "medium"
+        }
       ],
       "rating": "hot"
     }
   ],
-  "facilities": [
-    { "id": "fac-001", "name": "駐車場", "icon": "\uD83C\uDD7F\uFE0F", "relativePosition": 0.08 },
-    { "id": "fac-002", "name": "料金所", "icon": "\uD83C\uDFAB", "relativePosition": 0.21 },
-    { "id": "fac-003", "name": "管理事務所", "icon": "\uD83C\uDFE2", "relativePosition": 0.36 },
-    { "id": "fac-004", "name": "売店", "icon": "\uD83C\uDFEA", "relativePosition": 0.49 },
-    { "id": "fac-005", "name": "自販機", "icon": "\uD83E\uDD64", "relativePosition": 0.58 },
-    { "id": "fac-006", "name": "レストハウス", "icon": "\uD83C\uDFE0", "relativePosition": 0.73 },
-    { "id": "fac-007", "name": "BBQ場", "icon": "\uD83C\uDF56", "relativePosition": 0.90 }
-  ],
-  "structureLength": 700,
-  "positionCount": 14,
-  "analyzedAt": "2026-03-17T10:00:00Z",
-  "pipelineVersion": "0.1.0"
+  "facilities": [],
+  "structureLength": 0,
+  "analyzedAt": "2026-03-25T21:44:22.744040",
+  "pipelineVersion": "1.0.0"
 }

@@ -1,0 +1,533 @@
+{
+  "spotSlug": "akashi-shinhato",
+  "coordinates": {
+    "lat": 34.6387,
+    "lng": 134.9773
+  },
+  "imageMetadata": {
+    "source": "gsi-aerial",
+    "date": "2024",
+    "resolution": 0.25,
+    "imageSize": {
+      "width": 1536,
+      "height": 1536
+    }
+  },
+  "layoutType": "pier",
+  "structureEndpoints": {
+    "west": {
+      "lat": 34.638,
+      "lng": 134.976
+    },
+    "east": {
+      "lat": 34.6395,
+      "lng": 134.979
+    }
+  },
+  "structureLabel": "護岸",
+  "seaLabel": "明石海峡",
+  "detectedStructures": [
+    {
+      "id": "mask-001",
+      "category": "tetrapod",
+      "confidence": 0.25,
+      "bbox": {
+        "x": 0,
+        "y": 1363,
+        "width": 1535,
+        "height": 172
+      },
+      "areaRatio": 0.0852,
+      "relativePosition": 0.5,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-007",
+      "category": "port-facility",
+      "confidence": 0.284,
+      "bbox": {
+        "x": 1326,
+        "y": 0,
+        "width": 209,
+        "height": 402
+      },
+      "areaRatio": 0.0279,
+      "relativePosition": 0.931,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-010",
+      "category": "tetrapod",
+      "confidence": 0.25,
+      "bbox": {
+        "x": 96,
+        "y": 0,
+        "width": 104,
+        "height": 66
+      },
+      "areaRatio": 0.0015,
+      "relativePosition": 0.096,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-011",
+      "category": "tetrapod",
+      "confidence": 0.238,
+      "bbox": {
+        "x": 1422,
+        "y": 0,
+        "width": 113,
+        "height": 86
+      },
+      "areaRatio": 0.0032,
+      "relativePosition": 0.963,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-012",
+      "category": "seawall",
+      "confidence": 0.226,
+      "bbox": {
+        "x": 1437,
+        "y": 271,
+        "width": 34,
+        "height": 43
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.947,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-013",
+      "category": "tetrapod",
+      "confidence": 0.227,
+      "bbox": {
+        "x": 1457,
+        "y": 148,
+        "width": 78,
+        "height": 53
+      },
+      "areaRatio": 0.0013,
+      "relativePosition": 0.974,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-014",
+      "category": "tetrapod",
+      "confidence": 0.228,
+      "bbox": {
+        "x": 1493,
+        "y": 341,
+        "width": 19,
+        "height": 31
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.978,
+      "distanceFromShore": "onshore"
+    }
+  ],
+  "seaBottomFeatures": [],
+  "zones": [
+    {
+      "id": "zone-0",
+      "name": "西端エリア",
+      "xRange": [
+        0.863,
+        0.89
+      ],
+      "structures": [
+        "tetrapod",
+        "port-facility"
+      ],
+      "seaBottomFeatures": [
+        "tetrapod"
+      ],
+      "estimatedDepth": {
+        "shore": 4.5,
+        "offshore": 7.0
+      },
+      "currentFlow": 0.9,
+      "estimatedFish": [
+        {
+          "name": "メバル",
+          "probability": 0.85,
+          "season": "11月〜4月",
+          "method": "メバリング",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アジ",
+          "probability": 0.85,
+          "season": "5月〜11月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "カサゴ",
+          "probability": 0.7,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "イワシ",
+          "probability": 0.7,
+          "season": "5月〜10月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アイナメ",
+          "probability": 0.55,
+          "season": "10月〜3月",
+          "method": "ブラクリ",
+          "difficulty": "medium"
+        },
+        {
+          "name": "ソイ",
+          "probability": 0.4,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "medium"
+        },
+        {
+          "name": "スズキ",
+          "probability": 0.4,
+          "season": "3月〜12月",
+          "method": "ルアー",
+          "difficulty": "medium"
+        },
+        {
+          "name": "クロダイ",
+          "probability": 0.35,
+          "season": "4月〜11月",
+          "method": "ヘチ釣り",
+          "difficulty": "hard"
+        }
+      ],
+      "rating": "hot"
+    },
+    {
+      "id": "zone-1",
+      "name": "西寄りエリア",
+      "xRange": [
+        0.89,
+        0.918
+      ],
+      "structures": [
+        "tetrapod",
+        "port-facility"
+      ],
+      "seaBottomFeatures": [
+        "tetrapod"
+      ],
+      "estimatedDepth": {
+        "shore": 4.8,
+        "offshore": 7.4
+      },
+      "currentFlow": 0.7,
+      "estimatedFish": [
+        {
+          "name": "メバル",
+          "probability": 0.85,
+          "season": "11月〜4月",
+          "method": "メバリング",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アジ",
+          "probability": 0.85,
+          "season": "5月〜11月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "カサゴ",
+          "probability": 0.7,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "イワシ",
+          "probability": 0.7,
+          "season": "5月〜10月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アイナメ",
+          "probability": 0.55,
+          "season": "10月〜3月",
+          "method": "ブラクリ",
+          "difficulty": "medium"
+        },
+        {
+          "name": "ソイ",
+          "probability": 0.4,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "medium"
+        },
+        {
+          "name": "スズキ",
+          "probability": 0.4,
+          "season": "3月〜12月",
+          "method": "ルアー",
+          "difficulty": "medium"
+        },
+        {
+          "name": "クロダイ",
+          "probability": 0.35,
+          "season": "4月〜11月",
+          "method": "ヘチ釣り",
+          "difficulty": "hard"
+        }
+      ],
+      "rating": "good"
+    },
+    {
+      "id": "zone-2",
+      "name": "中央西エリア",
+      "xRange": [
+        0.918,
+        0.945
+      ],
+      "structures": [
+        "tetrapod",
+        "port-facility",
+        "seawall"
+      ],
+      "seaBottomFeatures": [
+        "tetrapod"
+      ],
+      "estimatedDepth": {
+        "shore": 5.0,
+        "offshore": 7.8
+      },
+      "currentFlow": 0.5,
+      "estimatedFish": [
+        {
+          "name": "アジ",
+          "probability": 0.95,
+          "season": "5月〜11月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "メバル",
+          "probability": 0.85,
+          "season": "11月〜4月",
+          "method": "メバリング",
+          "difficulty": "easy"
+        },
+        {
+          "name": "イワシ",
+          "probability": 0.8,
+          "season": "5月〜10月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "カサゴ",
+          "probability": 0.7,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アイナメ",
+          "probability": 0.55,
+          "season": "10月〜3月",
+          "method": "ブラクリ",
+          "difficulty": "medium"
+        },
+        {
+          "name": "スズキ",
+          "probability": 0.5,
+          "season": "3月〜12月",
+          "method": "ルアー",
+          "difficulty": "medium"
+        },
+        {
+          "name": "クロダイ",
+          "probability": 0.45,
+          "season": "4月〜11月",
+          "method": "ヘチ釣り",
+          "difficulty": "medium"
+        },
+        {
+          "name": "ソイ",
+          "probability": 0.4,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "medium"
+        }
+      ],
+      "rating": "good"
+    },
+    {
+      "id": "zone-3",
+      "name": "中央エリア",
+      "xRange": [
+        0.945,
+        0.972
+      ],
+      "structures": [
+        "tetrapod",
+        "port-facility",
+        "seawall"
+      ],
+      "seaBottomFeatures": [
+        "tetrapod"
+      ],
+      "estimatedDepth": {
+        "shore": 5.0,
+        "offshore": 7.8
+      },
+      "currentFlow": 0.7,
+      "estimatedFish": [
+        {
+          "name": "アジ",
+          "probability": 0.95,
+          "season": "5月〜11月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "メバル",
+          "probability": 0.85,
+          "season": "11月〜4月",
+          "method": "メバリング",
+          "difficulty": "easy"
+        },
+        {
+          "name": "イワシ",
+          "probability": 0.8,
+          "season": "5月〜10月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "カサゴ",
+          "probability": 0.7,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アイナメ",
+          "probability": 0.55,
+          "season": "10月〜3月",
+          "method": "ブラクリ",
+          "difficulty": "medium"
+        },
+        {
+          "name": "スズキ",
+          "probability": 0.5,
+          "season": "3月〜12月",
+          "method": "ルアー",
+          "difficulty": "medium"
+        },
+        {
+          "name": "クロダイ",
+          "probability": 0.45,
+          "season": "4月〜11月",
+          "method": "ヘチ釣り",
+          "difficulty": "medium"
+        },
+        {
+          "name": "ソイ",
+          "probability": 0.4,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "medium"
+        }
+      ],
+      "rating": "good"
+    },
+    {
+      "id": "zone-4",
+      "name": "中央東エリア",
+      "xRange": [
+        0.972,
+        0.999
+      ],
+      "structures": [
+        "tetrapod",
+        "port-facility"
+      ],
+      "seaBottomFeatures": [
+        "tetrapod"
+      ],
+      "estimatedDepth": {
+        "shore": 4.8,
+        "offshore": 7.4
+      },
+      "currentFlow": 0.9,
+      "estimatedFish": [
+        {
+          "name": "メバル",
+          "probability": 0.85,
+          "season": "11月〜4月",
+          "method": "メバリング",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アジ",
+          "probability": 0.85,
+          "season": "5月〜11月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "カサゴ",
+          "probability": 0.7,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "イワシ",
+          "probability": 0.7,
+          "season": "5月〜10月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アイナメ",
+          "probability": 0.55,
+          "season": "10月〜3月",
+          "method": "ブラクリ",
+          "difficulty": "medium"
+        },
+        {
+          "name": "ソイ",
+          "probability": 0.4,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "medium"
+        },
+        {
+          "name": "スズキ",
+          "probability": 0.4,
+          "season": "3月〜12月",
+          "method": "ルアー",
+          "difficulty": "medium"
+        },
+        {
+          "name": "クロダイ",
+          "probability": 0.35,
+          "season": "4月〜11月",
+          "method": "ヘチ釣り",
+          "difficulty": "hard"
+        }
+      ],
+      "rating": "hot"
+    }
+  ],
+  "facilities": [],
+  "structureLength": 0,
+  "analyzedAt": "2026-03-25T21:44:49.955934",
+  "pipelineVersion": "1.0.0"
+}

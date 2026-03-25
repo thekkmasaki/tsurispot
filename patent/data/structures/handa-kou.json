@@ -1,0 +1,4429 @@
+{
+  "spotSlug": "handa-kou",
+  "coordinates": {
+    "lat": 34.8917,
+    "lng": 136.9367
+  },
+  "imageMetadata": {
+    "source": "gsi-aerial",
+    "date": "2024",
+    "resolution": 0.25,
+    "imageSize": {
+      "width": 1536,
+      "height": 1536
+    }
+  },
+  "layoutType": "port",
+  "structureEndpoints": {
+    "west": {
+      "lat": 34.891,
+      "lng": 136.935
+    },
+    "east": {
+      "lat": 34.8925,
+      "lng": 136.9385
+    }
+  },
+  "structureLabel": "護岸",
+  "seaLabel": "衣浦湾",
+  "detectedStructures": [
+    {
+      "id": "mask-000",
+      "category": "pier",
+      "confidence": 0.237,
+      "bbox": {
+        "x": 1172,
+        "y": 812,
+        "width": 122,
+        "height": 167
+      },
+      "areaRatio": 0.0078,
+      "relativePosition": 0.803,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-001",
+      "category": "seawall",
+      "confidence": 0.236,
+      "bbox": {
+        "x": 1365,
+        "y": 341,
+        "width": 159,
+        "height": 323
+      },
+      "areaRatio": 0.0192,
+      "relativePosition": 0.94,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-002",
+      "category": "port-facility",
+      "confidence": 0.238,
+      "bbox": {
+        "x": 974,
+        "y": 761,
+        "width": 144,
+        "height": 50
+      },
+      "areaRatio": 0.0026,
+      "relativePosition": 0.681,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-003",
+      "category": "tetrapod",
+      "confidence": 0.244,
+      "bbox": {
+        "x": 0,
+        "y": 685,
+        "width": 59,
+        "height": 71
+      },
+      "areaRatio": 0.0016,
+      "relativePosition": 0.019,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-004",
+      "category": "port-facility",
+      "confidence": 0.25,
+      "bbox": {
+        "x": 534,
+        "y": 1423,
+        "width": 153,
+        "height": 112
+      },
+      "areaRatio": 0.0066,
+      "relativePosition": 0.397,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-005",
+      "category": "tetrapod",
+      "confidence": 0.25,
+      "bbox": {
+        "x": 0,
+        "y": 1393,
+        "width": 58,
+        "height": 73
+      },
+      "areaRatio": 0.0016,
+      "relativePosition": 0.019,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-006",
+      "category": "port-facility",
+      "confidence": 0.247,
+      "bbox": {
+        "x": 1171,
+        "y": 744,
+        "width": 115,
+        "height": 73
+      },
+      "areaRatio": 0.0031,
+      "relativePosition": 0.8,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-008",
+      "category": "seawall",
+      "confidence": 0.238,
+      "bbox": {
+        "x": 504,
+        "y": 0,
+        "width": 120,
+        "height": 570
+      },
+      "areaRatio": 0.016,
+      "relativePosition": 0.367,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-009",
+      "category": "port-facility",
+      "confidence": 0.242,
+      "bbox": {
+        "x": 1001,
+        "y": 968,
+        "width": 144,
+        "height": 100
+      },
+      "areaRatio": 0.0056,
+      "relativePosition": 0.699,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-010",
+      "category": "tetrapod",
+      "confidence": 0.236,
+      "bbox": {
+        "x": 503,
+        "y": 1278,
+        "width": 79,
+        "height": 145
+      },
+      "areaRatio": 0.004,
+      "relativePosition": 0.353,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-011",
+      "category": "tetrapod",
+      "confidence": 0.231,
+      "bbox": {
+        "x": 386,
+        "y": 1490,
+        "width": 100,
+        "height": 45
+      },
+      "areaRatio": 0.0013,
+      "relativePosition": 0.284,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-012",
+      "category": "seawall",
+      "confidence": 0.248,
+      "bbox": {
+        "x": 256,
+        "y": 1040,
+        "width": 107,
+        "height": 187
+      },
+      "areaRatio": 0.0069,
+      "relativePosition": 0.201,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-013",
+      "category": "seawall",
+      "confidence": 0.256,
+      "bbox": {
+        "x": 993,
+        "y": 811,
+        "width": 86,
+        "height": 63
+      },
+      "areaRatio": 0.0021,
+      "relativePosition": 0.674,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-014",
+      "category": "tetrapod",
+      "confidence": 0.235,
+      "bbox": {
+        "x": 43,
+        "y": 187,
+        "width": 47,
+        "height": 53
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.043,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-015",
+      "category": "seawall",
+      "confidence": 0.244,
+      "bbox": {
+        "x": 109,
+        "y": 0,
+        "width": 45,
+        "height": 85
+      },
+      "areaRatio": 0.0016,
+      "relativePosition": 0.086,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-016",
+      "category": "tetrapod",
+      "confidence": 0.238,
+      "bbox": {
+        "x": 1015,
+        "y": 1199,
+        "width": 33,
+        "height": 32
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.672,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-017",
+      "category": "tetrapod",
+      "confidence": 0.251,
+      "bbox": {
+        "x": 1336,
+        "y": 709,
+        "width": 107,
+        "height": 37
+      },
+      "areaRatio": 0.0014,
+      "relativePosition": 0.905,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-019",
+      "category": "tetrapod",
+      "confidence": 0.244,
+      "bbox": {
+        "x": 1101,
+        "y": 587,
+        "width": 34,
+        "height": 71
+      },
+      "areaRatio": 0.001,
+      "relativePosition": 0.728,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-020",
+      "category": "port-facility",
+      "confidence": 0.254,
+      "bbox": {
+        "x": 257,
+        "y": 955,
+        "width": 106,
+        "height": 272
+      },
+      "areaRatio": 0.0069,
+      "relativePosition": 0.202,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-021",
+      "category": "tetrapod",
+      "confidence": 0.239,
+      "bbox": {
+        "x": 1270,
+        "y": 1266,
+        "width": 44,
+        "height": 32
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.841,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-022",
+      "category": "tetrapod",
+      "confidence": 0.235,
+      "bbox": {
+        "x": 617,
+        "y": 1026,
+        "width": 49,
+        "height": 40
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.418,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-023",
+      "category": "seawall",
+      "confidence": 0.237,
+      "bbox": {
+        "x": 1505,
+        "y": 948,
+        "width": 30,
+        "height": 63
+      },
+      "areaRatio": 0.0008,
+      "relativePosition": 0.99,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-024",
+      "category": "port-facility",
+      "confidence": 0.244,
+      "bbox": {
+        "x": 926,
+        "y": 0,
+        "width": 609,
+        "height": 196
+      },
+      "areaRatio": 0.0179,
+      "relativePosition": 0.801,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-026",
+      "category": "seawall",
+      "confidence": 0.251,
+      "bbox": {
+        "x": 84,
+        "y": 1487,
+        "width": 56,
+        "height": 36
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.073,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-027",
+      "category": "tetrapod",
+      "confidence": 0.215,
+      "bbox": {
+        "x": 942,
+        "y": 1159,
+        "width": 54,
+        "height": 68
+      },
+      "areaRatio": 0.0013,
+      "relativePosition": 0.631,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-028",
+      "category": "tetrapod",
+      "confidence": 0.244,
+      "bbox": {
+        "x": 0,
+        "y": 638,
+        "width": 59,
+        "height": 119
+      },
+      "areaRatio": 0.0017,
+      "relativePosition": 0.019,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-030",
+      "category": "tetrapod",
+      "confidence": 0.237,
+      "bbox": {
+        "x": 603,
+        "y": 366,
+        "width": 114,
+        "height": 110
+      },
+      "areaRatio": 0.0044,
+      "relativePosition": 0.43,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-032",
+      "category": "pier",
+      "confidence": 0.245,
+      "bbox": {
+        "x": 1176,
+        "y": 530,
+        "width": 68,
+        "height": 145
+      },
+      "areaRatio": 0.0034,
+      "relativePosition": 0.788,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-034",
+      "category": "tetrapod",
+      "confidence": 0.228,
+      "bbox": {
+        "x": 630,
+        "y": 1189,
+        "width": 32,
+        "height": 39
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.421,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-035",
+      "category": "port-facility",
+      "confidence": 0.252,
+      "bbox": {
+        "x": 1398,
+        "y": 1064,
+        "width": 81,
+        "height": 71
+      },
+      "areaRatio": 0.0021,
+      "relativePosition": 0.937,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-036",
+      "category": "tetrapod",
+      "confidence": 0.241,
+      "bbox": {
+        "x": 287,
+        "y": 586,
+        "width": 199,
+        "height": 232
+      },
+      "areaRatio": 0.0129,
+      "relativePosition": 0.252,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-037",
+      "category": "tetrapod",
+      "confidence": 0.255,
+      "bbox": {
+        "x": 1160,
+        "y": 339,
+        "width": 69,
+        "height": 51
+      },
+      "areaRatio": 0.0014,
+      "relativePosition": 0.778,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-038",
+      "category": "seawall",
+      "confidence": 0.245,
+      "bbox": {
+        "x": 298,
+        "y": 1281,
+        "width": 41,
+        "height": 104
+      },
+      "areaRatio": 0.0015,
+      "relativePosition": 0.207,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-040",
+      "category": "tetrapod",
+      "confidence": 0.224,
+      "bbox": {
+        "x": 186,
+        "y": 763,
+        "width": 78,
+        "height": 110
+      },
+      "areaRatio": 0.0029,
+      "relativePosition": 0.146,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-041",
+      "category": "tetrapod",
+      "confidence": 0.25,
+      "bbox": {
+        "x": 810,
+        "y": 1024,
+        "width": 34,
+        "height": 41
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.538,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-042",
+      "category": "pier",
+      "confidence": 0.257,
+      "bbox": {
+        "x": 646,
+        "y": 150,
+        "width": 115,
+        "height": 70
+      },
+      "areaRatio": 0.0029,
+      "relativePosition": 0.458,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-043",
+      "category": "tetrapod",
+      "confidence": 0.247,
+      "bbox": {
+        "x": 0,
+        "y": 1123,
+        "width": 95,
+        "height": 93
+      },
+      "areaRatio": 0.0035,
+      "relativePosition": 0.031,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-044",
+      "category": "tetrapod",
+      "confidence": 0.24,
+      "bbox": {
+        "x": 0,
+        "y": 1466,
+        "width": 48,
+        "height": 63
+      },
+      "areaRatio": 0.001,
+      "relativePosition": 0.016,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-045",
+      "category": "tetrapod",
+      "confidence": 0.233,
+      "bbox": {
+        "x": 512,
+        "y": 0,
+        "width": 45,
+        "height": 31
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.348,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-046",
+      "category": "tetrapod",
+      "confidence": 0.249,
+      "bbox": {
+        "x": 408,
+        "y": 373,
+        "width": 58,
+        "height": 41
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.285,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-047",
+      "category": "tetrapod",
+      "confidence": 0.237,
+      "bbox": {
+        "x": 999,
+        "y": 286,
+        "width": 62,
+        "height": 36
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.671,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-049",
+      "category": "seawall",
+      "confidence": 0.252,
+      "bbox": {
+        "x": 1061,
+        "y": 633,
+        "width": 42,
+        "height": 30
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.704,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-050",
+      "category": "tetrapod",
+      "confidence": 0.242,
+      "bbox": {
+        "x": 1392,
+        "y": 826,
+        "width": 76,
+        "height": 65
+      },
+      "areaRatio": 0.0017,
+      "relativePosition": 0.931,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-051",
+      "category": "seawall",
+      "confidence": 0.253,
+      "bbox": {
+        "x": 482,
+        "y": 118,
+        "width": 66,
+        "height": 84
+      },
+      "areaRatio": 0.0021,
+      "relativePosition": 0.335,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-052",
+      "category": "tetrapod",
+      "confidence": 0.223,
+      "bbox": {
+        "x": 214,
+        "y": 1193,
+        "width": 49,
+        "height": 34
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.155,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-053",
+      "category": "tetrapod",
+      "confidence": 0.239,
+      "bbox": {
+        "x": 782,
+        "y": 1293,
+        "width": 26,
+        "height": 35
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.518,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-054",
+      "category": "tetrapod",
+      "confidence": 0.247,
+      "bbox": {
+        "x": 29,
+        "y": 1073,
+        "width": 83,
+        "height": 53
+      },
+      "areaRatio": 0.0014,
+      "relativePosition": 0.046,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-056",
+      "category": "pier",
+      "confidence": 0.247,
+      "bbox": {
+        "x": 1268,
+        "y": 1310,
+        "width": 53,
+        "height": 24
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.843,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-057",
+      "category": "tetrapod",
+      "confidence": 0.239,
+      "bbox": {
+        "x": 58,
+        "y": 388,
+        "width": 79,
+        "height": 78
+      },
+      "areaRatio": 0.0019,
+      "relativePosition": 0.063,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-058",
+      "category": "tetrapod",
+      "confidence": 0.228,
+      "bbox": {
+        "x": 48,
+        "y": 515,
+        "width": 41,
+        "height": 40
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.045,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-059",
+      "category": "seawall",
+      "confidence": 0.248,
+      "bbox": {
+        "x": 0,
+        "y": 633,
+        "width": 35,
+        "height": 55
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.011,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-060",
+      "category": "tetrapod",
+      "confidence": 0.228,
+      "bbox": {
+        "x": 1478,
+        "y": 1070,
+        "width": 33,
+        "height": 61
+      },
+      "areaRatio": 0.0008,
+      "relativePosition": 0.973,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-061",
+      "category": "tetrapod",
+      "confidence": 0.239,
+      "bbox": {
+        "x": 1109,
+        "y": 1443,
+        "width": 68,
+        "height": 55
+      },
+      "areaRatio": 0.0011,
+      "relativePosition": 0.744,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-062",
+      "category": "seawall",
+      "confidence": 0.273,
+      "bbox": {
+        "x": 1323,
+        "y": 949,
+        "width": 144,
+        "height": 69
+      },
+      "areaRatio": 0.0034,
+      "relativePosition": 0.908,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-063",
+      "category": "tetrapod",
+      "confidence": 0.254,
+      "bbox": {
+        "x": 795,
+        "y": 27,
+        "width": 740,
+        "height": 264
+      },
+      "areaRatio": 0.0232,
+      "relativePosition": 0.758,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-064",
+      "category": "tetrapod",
+      "confidence": 0.227,
+      "bbox": {
+        "x": 18,
+        "y": 1076,
+        "width": 26,
+        "height": 29
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.02,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-065",
+      "category": "seawall",
+      "confidence": 0.239,
+      "bbox": {
+        "x": 266,
+        "y": 1268,
+        "width": 73,
+        "height": 117
+      },
+      "areaRatio": 0.0015,
+      "relativePosition": 0.197,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-066",
+      "category": "tetrapod",
+      "confidence": 0.257,
+      "bbox": {
+        "x": 1463,
+        "y": 1152,
+        "width": 72,
+        "height": 43
+      },
+      "areaRatio": 0.001,
+      "relativePosition": 0.976,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-067",
+      "category": "tetrapod",
+      "confidence": 0.24,
+      "bbox": {
+        "x": 362,
+        "y": 182,
+        "width": 62,
+        "height": 36
+      },
+      "areaRatio": 0.0009,
+      "relativePosition": 0.256,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-068",
+      "category": "seawall",
+      "confidence": 0.243,
+      "bbox": {
+        "x": 1288,
+        "y": 724,
+        "width": 54,
+        "height": 169
+      },
+      "areaRatio": 0.0031,
+      "relativePosition": 0.856,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-069",
+      "category": "tetrapod",
+      "confidence": 0.229,
+      "bbox": {
+        "x": 774,
+        "y": 496,
+        "width": 23,
+        "height": 42
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.511,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-070",
+      "category": "tetrapod",
+      "confidence": 0.221,
+      "bbox": {
+        "x": 181,
+        "y": 556,
+        "width": 53,
+        "height": 68
+      },
+      "areaRatio": 0.0011,
+      "relativePosition": 0.135,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-071",
+      "category": "tetrapod",
+      "confidence": 0.229,
+      "bbox": {
+        "x": 1353,
+        "y": 826,
+        "width": 116,
+        "height": 64
+      },
+      "areaRatio": 0.0017,
+      "relativePosition": 0.919,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-072",
+      "category": "tetrapod",
+      "confidence": 0.249,
+      "bbox": {
+        "x": 1153,
+        "y": 721,
+        "width": 133,
+        "height": 56
+      },
+      "areaRatio": 0.0014,
+      "relativePosition": 0.794,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-073",
+      "category": "tetrapod",
+      "confidence": 0.234,
+      "bbox": {
+        "x": 580,
+        "y": 1351,
+        "width": 62,
+        "height": 62
+      },
+      "areaRatio": 0.0011,
+      "relativePosition": 0.398,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-074",
+      "category": "port-facility",
+      "confidence": 0.245,
+      "bbox": {
+        "x": 1344,
+        "y": 790,
+        "width": 136,
+        "height": 132
+      },
+      "areaRatio": 0.0055,
+      "relativePosition": 0.919,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-076",
+      "category": "tetrapod",
+      "confidence": 0.247,
+      "bbox": {
+        "x": 84,
+        "y": 1212,
+        "width": 56,
+        "height": 63
+      },
+      "areaRatio": 0.0012,
+      "relativePosition": 0.073,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-077",
+      "category": "tetrapod",
+      "confidence": 0.238,
+      "bbox": {
+        "x": 770,
+        "y": 0,
+        "width": 98,
+        "height": 119
+      },
+      "areaRatio": 0.0029,
+      "relativePosition": 0.533,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-078",
+      "category": "seawall",
+      "confidence": 0.241,
+      "bbox": {
+        "x": 289,
+        "y": 943,
+        "width": 48,
+        "height": 76
+      },
+      "areaRatio": 0.0011,
+      "relativePosition": 0.204,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-079",
+      "category": "tetrapod",
+      "confidence": 0.236,
+      "bbox": {
+        "x": 1097,
+        "y": 1339,
+        "width": 37,
+        "height": 46
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.726,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-080",
+      "category": "tetrapod",
+      "confidence": 0.243,
+      "bbox": {
+        "x": 785,
+        "y": 787,
+        "width": 64,
+        "height": 47
+      },
+      "areaRatio": 0.001,
+      "relativePosition": 0.532,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-081",
+      "category": "tetrapod",
+      "confidence": 0.236,
+      "bbox": {
+        "x": 309,
+        "y": 921,
+        "width": 131,
+        "height": 63
+      },
+      "areaRatio": 0.0015,
+      "relativePosition": 0.244,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-082",
+      "category": "tetrapod",
+      "confidence": 0.241,
+      "bbox": {
+        "x": 247,
+        "y": 56,
+        "width": 44,
+        "height": 51
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.175,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-083",
+      "category": "seawall",
+      "confidence": 0.228,
+      "bbox": {
+        "x": 1461,
+        "y": 764,
+        "width": 54,
+        "height": 117
+      },
+      "areaRatio": 0.0017,
+      "relativePosition": 0.969,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-084",
+      "category": "seawall",
+      "confidence": 0.248,
+      "bbox": {
+        "x": 665,
+        "y": 1136,
+        "width": 41,
+        "height": 72
+      },
+      "areaRatio": 0.0011,
+      "relativePosition": 0.446,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-085",
+      "category": "tetrapod",
+      "confidence": 0.234,
+      "bbox": {
+        "x": 387,
+        "y": 869,
+        "width": 27,
+        "height": 25
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.261,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-086",
+      "category": "tetrapod",
+      "confidence": 0.232,
+      "bbox": {
+        "x": 1261,
+        "y": 484,
+        "width": 86,
+        "height": 68
+      },
+      "areaRatio": 0.0014,
+      "relativePosition": 0.849,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-087",
+      "category": "pier",
+      "confidence": 0.232,
+      "bbox": {
+        "x": 376,
+        "y": 1052,
+        "width": 85,
+        "height": 126
+      },
+      "areaRatio": 0.0036,
+      "relativePosition": 0.272,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-088",
+      "category": "tetrapod",
+      "confidence": 0.227,
+      "bbox": {
+        "x": 56,
+        "y": 674,
+        "width": 71,
+        "height": 70
+      },
+      "areaRatio": 0.0016,
+      "relativePosition": 0.06,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-090",
+      "category": "tetrapod",
+      "confidence": 0.255,
+      "bbox": {
+        "x": 278,
+        "y": 1409,
+        "width": 40,
+        "height": 37
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.194,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-091",
+      "category": "tetrapod",
+      "confidence": 0.244,
+      "bbox": {
+        "x": 384,
+        "y": 1187,
+        "width": 80,
+        "height": 42
+      },
+      "areaRatio": 0.0012,
+      "relativePosition": 0.276,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-092",
+      "category": "tetrapod",
+      "confidence": 0.245,
+      "bbox": {
+        "x": 1093,
+        "y": 665,
+        "width": 42,
+        "height": 32
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.725,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-093",
+      "category": "tetrapod",
+      "confidence": 0.246,
+      "bbox": {
+        "x": 1206,
+        "y": 1438,
+        "width": 33,
+        "height": 31
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.796,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-094",
+      "category": "seawall",
+      "confidence": 0.232,
+      "bbox": {
+        "x": 1408,
+        "y": 900,
+        "width": 43,
+        "height": 62
+      },
+      "areaRatio": 0.0011,
+      "relativePosition": 0.931,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-095",
+      "category": "tetrapod",
+      "confidence": 0.237,
+      "bbox": {
+        "x": 14,
+        "y": 884,
+        "width": 22,
+        "height": 18
+      },
+      "areaRatio": 0.0001,
+      "relativePosition": 0.016,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-096",
+      "category": "tetrapod",
+      "confidence": 0.241,
+      "bbox": {
+        "x": 1289,
+        "y": 1495,
+        "width": 40,
+        "height": 35
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.852,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-097",
+      "category": "tetrapod",
+      "confidence": 0.243,
+      "bbox": {
+        "x": 194,
+        "y": 350,
+        "width": 44,
+        "height": 76
+      },
+      "areaRatio": 0.0011,
+      "relativePosition": 0.141,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-098",
+      "category": "seawall",
+      "confidence": 0.245,
+      "bbox": {
+        "x": 865,
+        "y": 747,
+        "width": 33,
+        "height": 52
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.574,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-099",
+      "category": "tetrapod",
+      "confidence": 0.244,
+      "bbox": {
+        "x": 1150,
+        "y": 395,
+        "width": 35,
+        "height": 37
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.76,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-100",
+      "category": "seawall",
+      "confidence": 0.267,
+      "bbox": {
+        "x": 25,
+        "y": 0,
+        "width": 80,
+        "height": 42
+      },
+      "areaRatio": 0.0013,
+      "relativePosition": 0.042,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-102",
+      "category": "tetrapod",
+      "confidence": 0.254,
+      "bbox": {
+        "x": 179,
+        "y": 1084,
+        "width": 74,
+        "height": 53
+      },
+      "areaRatio": 0.0013,
+      "relativePosition": 0.141,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-103",
+      "category": "tetrapod",
+      "confidence": 0.233,
+      "bbox": {
+        "x": 340,
+        "y": 1315,
+        "width": 29,
+        "height": 28
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.231,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-104",
+      "category": "tetrapod",
+      "confidence": 0.246,
+      "bbox": {
+        "x": 0,
+        "y": 1391,
+        "width": 82,
+        "height": 78
+      },
+      "areaRatio": 0.0023,
+      "relativePosition": 0.027,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-106",
+      "category": "tetrapod",
+      "confidence": 0.224,
+      "bbox": {
+        "x": 436,
+        "y": 0,
+        "width": 119,
+        "height": 50
+      },
+      "areaRatio": 0.0016,
+      "relativePosition": 0.323,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-107",
+      "category": "tetrapod",
+      "confidence": 0.221,
+      "bbox": {
+        "x": 307,
+        "y": 1458,
+        "width": 63,
+        "height": 63
+      },
+      "areaRatio": 0.0013,
+      "relativePosition": 0.22,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-108",
+      "category": "port-facility",
+      "confidence": 0.25,
+      "bbox": {
+        "x": 1036,
+        "y": 397,
+        "width": 81,
+        "height": 44
+      },
+      "areaRatio": 0.0014,
+      "relativePosition": 0.701,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-110",
+      "category": "tetrapod",
+      "confidence": 0.245,
+      "bbox": {
+        "x": 340,
+        "y": 1400,
+        "width": 40,
+        "height": 65
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.234,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-111",
+      "category": "tetrapod",
+      "confidence": 0.202,
+      "bbox": {
+        "x": 160,
+        "y": 1430,
+        "width": 55,
+        "height": 63
+      },
+      "areaRatio": 0.001,
+      "relativePosition": 0.122,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-112",
+      "category": "tetrapod",
+      "confidence": 0.228,
+      "bbox": {
+        "x": 983,
+        "y": 723,
+        "width": 106,
+        "height": 26
+      },
+      "areaRatio": 0.001,
+      "relativePosition": 0.674,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-113",
+      "category": "seawall",
+      "confidence": 0.254,
+      "bbox": {
+        "x": 1186,
+        "y": 400,
+        "width": 68,
+        "height": 36
+      },
+      "areaRatio": 0.0008,
+      "relativePosition": 0.794,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-114",
+      "category": "tetrapod",
+      "confidence": 0.243,
+      "bbox": {
+        "x": 673,
+        "y": 1063,
+        "width": 36,
+        "height": 37
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.45,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-115",
+      "category": "tetrapod",
+      "confidence": 0.245,
+      "bbox": {
+        "x": 1485,
+        "y": 1340,
+        "width": 33,
+        "height": 35
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.978,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-116",
+      "category": "seawall",
+      "confidence": 0.22,
+      "bbox": {
+        "x": 249,
+        "y": 1134,
+        "width": 24,
+        "height": 49
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.17,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-117",
+      "category": "tetrapod",
+      "confidence": 0.238,
+      "bbox": {
+        "x": 1300,
+        "y": 537,
+        "width": 40,
+        "height": 26
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.859,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-118",
+      "category": "tetrapod",
+      "confidence": 0.228,
+      "bbox": {
+        "x": 402,
+        "y": 252,
+        "width": 24,
+        "height": 55
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.27,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-119",
+      "category": "tetrapod",
+      "confidence": 0.257,
+      "bbox": {
+        "x": 343,
+        "y": 307,
+        "width": 61,
+        "height": 40
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.243,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-120",
+      "category": "tetrapod",
+      "confidence": 0.233,
+      "bbox": {
+        "x": 646,
+        "y": 618,
+        "width": 249,
+        "height": 107
+      },
+      "areaRatio": 0.0026,
+      "relativePosition": 0.502,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-121",
+      "category": "tetrapod",
+      "confidence": 0.23,
+      "bbox": {
+        "x": 191,
+        "y": 875,
+        "width": 31,
+        "height": 24
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.134,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-123",
+      "category": "tetrapod",
+      "confidence": 0.216,
+      "bbox": {
+        "x": 743,
+        "y": 836,
+        "width": 39,
+        "height": 44
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.496,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-124",
+      "category": "tetrapod",
+      "confidence": 0.244,
+      "bbox": {
+        "x": 1451,
+        "y": 1464,
+        "width": 84,
+        "height": 71
+      },
+      "areaRatio": 0.0019,
+      "relativePosition": 0.972,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-125",
+      "category": "tetrapod",
+      "confidence": 0.246,
+      "bbox": {
+        "x": 380,
+        "y": 422,
+        "width": 88,
+        "height": 60
+      },
+      "areaRatio": 0.0013,
+      "relativePosition": 0.276,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-126",
+      "category": "tetrapod",
+      "confidence": 0.246,
+      "bbox": {
+        "x": 195,
+        "y": 1011,
+        "width": 31,
+        "height": 26
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.137,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-127",
+      "category": "seawall",
+      "confidence": 0.233,
+      "bbox": {
+        "x": 980,
+        "y": 775,
+        "width": 101,
+        "height": 150
+      },
+      "areaRatio": 0.0038,
+      "relativePosition": 0.671,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-129",
+      "category": "tetrapod",
+      "confidence": 0.232,
+      "bbox": {
+        "x": 778,
+        "y": 981,
+        "width": 27,
+        "height": 33
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.515,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-130",
+      "category": "tetrapod",
+      "confidence": 0.229,
+      "bbox": {
+        "x": 116,
+        "y": 497,
+        "width": 56,
+        "height": 55
+      },
+      "areaRatio": 0.0011,
+      "relativePosition": 0.094,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-131",
+      "category": "tetrapod",
+      "confidence": 0.221,
+      "bbox": {
+        "x": 151,
+        "y": 1166,
+        "width": 19,
+        "height": 43
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.104,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-132",
+      "category": "tetrapod",
+      "confidence": 0.226,
+      "bbox": {
+        "x": 1282,
+        "y": 1344,
+        "width": 54,
+        "height": 31
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.852,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-133",
+      "category": "tetrapod",
+      "confidence": 0.242,
+      "bbox": {
+        "x": 206,
+        "y": 256,
+        "width": 44,
+        "height": 97
+      },
+      "areaRatio": 0.0012,
+      "relativePosition": 0.148,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-135",
+      "category": "seawall",
+      "confidence": 0.245,
+      "bbox": {
+        "x": 962,
+        "y": 515,
+        "width": 109,
+        "height": 40
+      },
+      "areaRatio": 0.0015,
+      "relativePosition": 0.662,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-136",
+      "category": "tetrapod",
+      "confidence": 0.251,
+      "bbox": {
+        "x": 1471,
+        "y": 916,
+        "width": 64,
+        "height": 34
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.979,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-137",
+      "category": "seawall",
+      "confidence": 0.256,
+      "bbox": {
+        "x": 648,
+        "y": 7,
+        "width": 55,
+        "height": 100
+      },
+      "areaRatio": 0.0019,
+      "relativePosition": 0.44,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-138",
+      "category": "tetrapod",
+      "confidence": 0.239,
+      "bbox": {
+        "x": 7,
+        "y": 831,
+        "width": 34,
+        "height": 42
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.016,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-139",
+      "category": "tetrapod",
+      "confidence": 0.238,
+      "bbox": {
+        "x": 754,
+        "y": 301,
+        "width": 38,
+        "height": 37
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.503,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-140",
+      "category": "tetrapod",
+      "confidence": 0.254,
+      "bbox": {
+        "x": 585,
+        "y": 661,
+        "width": 91,
+        "height": 56
+      },
+      "areaRatio": 0.0011,
+      "relativePosition": 0.41,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-142",
+      "category": "port-facility",
+      "confidence": 0.232,
+      "bbox": {
+        "x": 1053,
+        "y": 546,
+        "width": 40,
+        "height": 25
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.699,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-143",
+      "category": "tetrapod",
+      "confidence": 0.245,
+      "bbox": {
+        "x": 0,
+        "y": 365,
+        "width": 69,
+        "height": 70
+      },
+      "areaRatio": 0.001,
+      "relativePosition": 0.022,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-144",
+      "category": "seawall",
+      "confidence": 0.263,
+      "bbox": {
+        "x": 184,
+        "y": 38,
+        "width": 41,
+        "height": 121
+      },
+      "areaRatio": 0.0017,
+      "relativePosition": 0.133,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-145",
+      "category": "tetrapod",
+      "confidence": 0.226,
+      "bbox": {
+        "x": 592,
+        "y": 1281,
+        "width": 27,
+        "height": 53
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.394,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-146",
+      "category": "tetrapod",
+      "confidence": 0.253,
+      "bbox": {
+        "x": 1005,
+        "y": 1257,
+        "width": 36,
+        "height": 31
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.666,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-148",
+      "category": "tetrapod",
+      "confidence": 0.237,
+      "bbox": {
+        "x": 618,
+        "y": 757,
+        "width": 33,
+        "height": 92
+      },
+      "areaRatio": 0.0009,
+      "relativePosition": 0.413,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-149",
+      "category": "tetrapod",
+      "confidence": 0.236,
+      "bbox": {
+        "x": 103,
+        "y": 1410,
+        "width": 31,
+        "height": 31
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.077,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-150",
+      "category": "tetrapod",
+      "confidence": 0.239,
+      "bbox": {
+        "x": 209,
+        "y": 211,
+        "width": 21,
+        "height": 21
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.143,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-151",
+      "category": "tetrapod",
+      "confidence": 0.234,
+      "bbox": {
+        "x": 833,
+        "y": 903,
+        "width": 19,
+        "height": 43
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.549,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-152",
+      "category": "tetrapod",
+      "confidence": 0.233,
+      "bbox": {
+        "x": 871,
+        "y": 572,
+        "width": 23,
+        "height": 30
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.575,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-153",
+      "category": "tetrapod",
+      "confidence": 0.233,
+      "bbox": {
+        "x": 811,
+        "y": 247,
+        "width": 45,
+        "height": 46
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.543,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-155",
+      "category": "seawall",
+      "confidence": 0.223,
+      "bbox": {
+        "x": 153,
+        "y": 0,
+        "width": 29,
+        "height": 75
+      },
+      "areaRatio": 0.0008,
+      "relativePosition": 0.109,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-156",
+      "category": "tetrapod",
+      "confidence": 0.235,
+      "bbox": {
+        "x": 154,
+        "y": 790,
+        "width": 21,
+        "height": 22
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.107,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-157",
+      "category": "tetrapod",
+      "confidence": 0.248,
+      "bbox": {
+        "x": 190,
+        "y": 633,
+        "width": 56,
+        "height": 55
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.142,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-158",
+      "category": "tetrapod",
+      "confidence": 0.238,
+      "bbox": {
+        "x": 139,
+        "y": 88,
+        "width": 39,
+        "height": 36
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.103,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-159",
+      "category": "seawall",
+      "confidence": 0.225,
+      "bbox": {
+        "x": 489,
+        "y": 552,
+        "width": 108,
+        "height": 91
+      },
+      "areaRatio": 0.0027,
+      "relativePosition": 0.354,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-160",
+      "category": "tetrapod",
+      "confidence": 0.234,
+      "bbox": {
+        "x": 1436,
+        "y": 1454,
+        "width": 33,
+        "height": 42
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.946,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-161",
+      "category": "tetrapod",
+      "confidence": 0.255,
+      "bbox": {
+        "x": 219,
+        "y": 391,
+        "width": 57,
+        "height": 45
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.161,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-162",
+      "category": "tetrapod",
+      "confidence": 0.221,
+      "bbox": {
+        "x": 63,
+        "y": 572,
+        "width": 36,
+        "height": 32
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.053,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-163",
+      "category": "tetrapod",
+      "confidence": 0.237,
+      "bbox": {
+        "x": 1252,
+        "y": 1459,
+        "width": 46,
+        "height": 44
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.83,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-164",
+      "category": "tetrapod",
+      "confidence": 0.231,
+      "bbox": {
+        "x": 1281,
+        "y": 688,
+        "width": 47,
+        "height": 35
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.849,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-165",
+      "category": "tetrapod",
+      "confidence": 0.243,
+      "bbox": {
+        "x": 1113,
+        "y": 1274,
+        "width": 36,
+        "height": 27
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.736,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-166",
+      "category": "tetrapod",
+      "confidence": 0.255,
+      "bbox": {
+        "x": 1065,
+        "y": 1349,
+        "width": 31,
+        "height": 25
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.703,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-167",
+      "category": "tetrapod",
+      "confidence": 0.24,
+      "bbox": {
+        "x": 791,
+        "y": 1439,
+        "width": 23,
+        "height": 34
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.522,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-168",
+      "category": "tetrapod",
+      "confidence": 0.23,
+      "bbox": {
+        "x": 185,
+        "y": 1041,
+        "width": 40,
+        "height": 45
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.133,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-169",
+      "category": "tetrapod",
+      "confidence": 0.237,
+      "bbox": {
+        "x": 1159,
+        "y": 467,
+        "width": 94,
+        "height": 45
+      },
+      "areaRatio": 0.0015,
+      "relativePosition": 0.785,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-170",
+      "category": "tetrapod",
+      "confidence": 0.253,
+      "bbox": {
+        "x": 286,
+        "y": 726,
+        "width": 54,
+        "height": 42
+      },
+      "areaRatio": 0.0008,
+      "relativePosition": 0.204,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-171",
+      "category": "tetrapod",
+      "confidence": 0.25,
+      "bbox": {
+        "x": 201,
+        "y": 1501,
+        "width": 31,
+        "height": 29
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.141,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-172",
+      "category": "tetrapod",
+      "confidence": 0.226,
+      "bbox": {
+        "x": 879,
+        "y": 979,
+        "width": 22,
+        "height": 34
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.579,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-176",
+      "category": "seawall",
+      "confidence": 0.241,
+      "bbox": {
+        "x": 947,
+        "y": 1225,
+        "width": 65,
+        "height": 310
+      },
+      "areaRatio": 0.0067,
+      "relativePosition": 0.638,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-177",
+      "category": "seawall",
+      "confidence": 0.233,
+      "bbox": {
+        "x": 436,
+        "y": 0,
+        "width": 76,
+        "height": 50
+      },
+      "areaRatio": 0.0015,
+      "relativePosition": 0.309,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-178",
+      "category": "tetrapod",
+      "confidence": 0.24,
+      "bbox": {
+        "x": 141,
+        "y": 91,
+        "width": 31,
+        "height": 30
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.102,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-179",
+      "category": "tetrapod",
+      "confidence": 0.227,
+      "bbox": {
+        "x": 875,
+        "y": 1023,
+        "width": 26,
+        "height": 29
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.578,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-180",
+      "category": "tetrapod",
+      "confidence": 0.255,
+      "bbox": {
+        "x": 742,
+        "y": 1076,
+        "width": 38,
+        "height": 38
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.495,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-181",
+      "category": "seawall",
+      "confidence": 0.241,
+      "bbox": {
+        "x": 425,
+        "y": 1398,
+        "width": 32,
+        "height": 42
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.287,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-182",
+      "category": "tetrapod",
+      "confidence": 0.232,
+      "bbox": {
+        "x": 442,
+        "y": 254,
+        "width": 21,
+        "height": 30
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.295,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-183",
+      "category": "tetrapod",
+      "confidence": 0.252,
+      "bbox": {
+        "x": 619,
+        "y": 552,
+        "width": 42,
+        "height": 53
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.417,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-184",
+      "category": "tetrapod",
+      "confidence": 0.233,
+      "bbox": {
+        "x": 58,
+        "y": 356,
+        "width": 21,
+        "height": 27
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.045,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-185",
+      "category": "tetrapod",
+      "confidence": 0.227,
+      "bbox": {
+        "x": 293,
+        "y": 147,
+        "width": 45,
+        "height": 26
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.205,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-186",
+      "category": "tetrapod",
+      "confidence": 0.257,
+      "bbox": {
+        "x": 230,
+        "y": 397,
+        "width": 45,
+        "height": 37
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.164,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-187",
+      "category": "seawall",
+      "confidence": 0.241,
+      "bbox": {
+        "x": 34,
+        "y": 1258,
+        "width": 49,
+        "height": 29
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.038,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-190",
+      "category": "seawall",
+      "confidence": 0.254,
+      "bbox": {
+        "x": 1157,
+        "y": 428,
+        "width": 107,
+        "height": 40
+      },
+      "areaRatio": 0.0015,
+      "relativePosition": 0.788,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-191",
+      "category": "seawall",
+      "confidence": 0.247,
+      "bbox": {
+        "x": 352,
+        "y": 1080,
+        "width": 41,
+        "height": 148
+      },
+      "areaRatio": 0.0014,
+      "relativePosition": 0.243,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-192",
+      "category": "tetrapod",
+      "confidence": 0.241,
+      "bbox": {
+        "x": 359,
+        "y": 965,
+        "width": 73,
+        "height": 69
+      },
+      "areaRatio": 0.0015,
+      "relativePosition": 0.257,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-193",
+      "category": "tetrapod",
+      "confidence": 0.235,
+      "bbox": {
+        "x": 1298,
+        "y": 1392,
+        "width": 43,
+        "height": 39
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.859,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-195",
+      "category": "tetrapod",
+      "confidence": 0.225,
+      "bbox": {
+        "x": 918,
+        "y": 410,
+        "width": 34,
+        "height": 277
+      },
+      "areaRatio": 0.0023,
+      "relativePosition": 0.609,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-196",
+      "category": "tetrapod",
+      "confidence": 0.237,
+      "bbox": {
+        "x": 0,
+        "y": 960,
+        "width": 43,
+        "height": 35
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.014,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-197",
+      "category": "tetrapod",
+      "confidence": 0.249,
+      "bbox": {
+        "x": 1200,
+        "y": 1346,
+        "width": 64,
+        "height": 45
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.802,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-198",
+      "category": "tetrapod",
+      "confidence": 0.228,
+      "bbox": {
+        "x": 1307,
+        "y": 379,
+        "width": 28,
+        "height": 56
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.86,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-199",
+      "category": "port-facility",
+      "confidence": 0.239,
+      "bbox": {
+        "x": 1172,
+        "y": 984,
+        "width": 98,
+        "height": 77
+      },
+      "areaRatio": 0.0029,
+      "relativePosition": 0.795,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-200",
+      "category": "seawall",
+      "confidence": 0.227,
+      "bbox": {
+        "x": 1370,
+        "y": 1261,
+        "width": 29,
+        "height": 66
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.901,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-201",
+      "category": "tetrapod",
+      "confidence": 0.224,
+      "bbox": {
+        "x": 679,
+        "y": 687,
+        "width": 38,
+        "height": 43
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.454,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-204",
+      "category": "tetrapod",
+      "confidence": 0.244,
+      "bbox": {
+        "x": 920,
+        "y": 1406,
+        "width": 30,
+        "height": 43
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.609,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-205",
+      "category": "tetrapod",
+      "confidence": 0.238,
+      "bbox": {
+        "x": 667,
+        "y": 1101,
+        "width": 36,
+        "height": 33
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.446,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-206",
+      "category": "seawall",
+      "confidence": 0.235,
+      "bbox": {
+        "x": 1296,
+        "y": 893,
+        "width": 50,
+        "height": 61
+      },
+      "areaRatio": 0.0012,
+      "relativePosition": 0.86,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-207",
+      "category": "tetrapod",
+      "confidence": 0.235,
+      "bbox": {
+        "x": 1018,
+        "y": 1170,
+        "width": 149,
+        "height": 22
+      },
+      "areaRatio": 0.001,
+      "relativePosition": 0.711,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-208",
+      "category": "pier",
+      "confidence": 0.242,
+      "bbox": {
+        "x": 1304,
+        "y": 1009,
+        "width": 99,
+        "height": 42
+      },
+      "areaRatio": 0.0015,
+      "relativePosition": 0.881,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-209",
+      "category": "tetrapod",
+      "confidence": 0.245,
+      "bbox": {
+        "x": 0,
+        "y": 1215,
+        "width": 93,
+        "height": 41
+      },
+      "areaRatio": 0.0013,
+      "relativePosition": 0.03,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-211",
+      "category": "seawall",
+      "confidence": 0.252,
+      "bbox": {
+        "x": 965,
+        "y": 811,
+        "width": 38,
+        "height": 143
+      },
+      "areaRatio": 0.0016,
+      "relativePosition": 0.641,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-212",
+      "category": "seawall",
+      "confidence": 0.254,
+      "bbox": {
+        "x": 1265,
+        "y": 672,
+        "width": 270,
+        "height": 40
+      },
+      "areaRatio": 0.0025,
+      "relativePosition": 0.911,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-213",
+      "category": "tetrapod",
+      "confidence": 0.254,
+      "bbox": {
+        "x": 269,
+        "y": 490,
+        "width": 65,
+        "height": 40
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.196,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-214",
+      "category": "tetrapod",
+      "confidence": 0.246,
+      "bbox": {
+        "x": 247,
+        "y": 187,
+        "width": 38,
+        "height": 32
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.173,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-215",
+      "category": "tetrapod",
+      "confidence": 0.232,
+      "bbox": {
+        "x": 853,
+        "y": 1387,
+        "width": 50,
+        "height": 54
+      },
+      "areaRatio": 0.0008,
+      "relativePosition": 0.572,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-216",
+      "category": "seawall",
+      "confidence": 0.235,
+      "bbox": {
+        "x": 1055,
+        "y": 565,
+        "width": 47,
+        "height": 68
+      },
+      "areaRatio": 0.0011,
+      "relativePosition": 0.702,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-217",
+      "category": "tetrapod",
+      "confidence": 0.242,
+      "bbox": {
+        "x": 249,
+        "y": 552,
+        "width": 73,
+        "height": 111
+      },
+      "areaRatio": 0.0017,
+      "relativePosition": 0.186,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-218",
+      "category": "tetrapod",
+      "confidence": 0.242,
+      "bbox": {
+        "x": 1337,
+        "y": 1339,
+        "width": 45,
+        "height": 37
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.885,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-219",
+      "category": "tetrapod",
+      "confidence": 0.261,
+      "bbox": {
+        "x": 236,
+        "y": 1498,
+        "width": 45,
+        "height": 37
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.168,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-220",
+      "category": "tetrapod",
+      "confidence": 0.228,
+      "bbox": {
+        "x": 632,
+        "y": 1150,
+        "width": 34,
+        "height": 39
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.423,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-221",
+      "category": "tetrapod",
+      "confidence": 0.244,
+      "bbox": {
+        "x": 861,
+        "y": 1300,
+        "width": 32,
+        "height": 36
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.571,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-222",
+      "category": "seawall",
+      "confidence": 0.228,
+      "bbox": {
+        "x": 1264,
+        "y": 977,
+        "width": 45,
+        "height": 71
+      },
+      "areaRatio": 0.0011,
+      "relativePosition": 0.838,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-223",
+      "category": "tetrapod",
+      "confidence": 0.226,
+      "bbox": {
+        "x": 142,
+        "y": 1106,
+        "width": 30,
+        "height": 48
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.102,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-224",
+      "category": "tetrapod",
+      "confidence": 0.243,
+      "bbox": {
+        "x": 875,
+        "y": 1137,
+        "width": 26,
+        "height": 46
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.578,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-225",
+      "category": "tetrapod",
+      "confidence": 0.239,
+      "bbox": {
+        "x": 401,
+        "y": 1402,
+        "width": 19,
+        "height": 34
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.267,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-226",
+      "category": "tetrapod",
+      "confidence": 0.249,
+      "bbox": {
+        "x": 155,
+        "y": 240,
+        "width": 20,
+        "height": 35
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.107,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-227",
+      "category": "tetrapod",
+      "confidence": 0.23,
+      "bbox": {
+        "x": 600,
+        "y": 258,
+        "width": 148,
+        "height": 220
+      },
+      "areaRatio": 0.005,
+      "relativePosition": 0.439,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-228",
+      "category": "seawall",
+      "confidence": 0.238,
+      "bbox": {
+        "x": 373,
+        "y": 0,
+        "width": 54,
+        "height": 37
+      },
+      "areaRatio": 0.0008,
+      "relativePosition": 0.26,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-229",
+      "category": "tetrapod",
+      "confidence": 0.237,
+      "bbox": {
+        "x": 883,
+        "y": 639,
+        "width": 24,
+        "height": 46
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.583,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-230",
+      "category": "tetrapod",
+      "confidence": 0.243,
+      "bbox": {
+        "x": 303,
+        "y": 434,
+        "width": 64,
+        "height": 58
+      },
+      "areaRatio": 0.0011,
+      "relativePosition": 0.218,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-231",
+      "category": "tetrapod",
+      "confidence": 0.223,
+      "bbox": {
+        "x": 1064,
+        "y": 1188,
+        "width": 22,
+        "height": 37
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.7,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-232",
+      "category": "tetrapod",
+      "confidence": 0.229,
+      "bbox": {
+        "x": 1487,
+        "y": 725,
+        "width": 48,
+        "height": 42
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.984,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-233",
+      "category": "tetrapod",
+      "confidence": 0.246,
+      "bbox": {
+        "x": 1422,
+        "y": 1188,
+        "width": 113,
+        "height": 50
+      },
+      "areaRatio": 0.0019,
+      "relativePosition": 0.963,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-234",
+      "category": "tetrapod",
+      "confidence": 0.236,
+      "bbox": {
+        "x": 774,
+        "y": 1017,
+        "width": 27,
+        "height": 30
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.513,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-235",
+      "category": "tetrapod",
+      "confidence": 0.242,
+      "bbox": {
+        "x": 141,
+        "y": 1346,
+        "width": 38,
+        "height": 39
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.104,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-236",
+      "category": "tetrapod",
+      "confidence": 0.249,
+      "bbox": {
+        "x": 831,
+        "y": 1074,
+        "width": 32,
+        "height": 47
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.551,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-237",
+      "category": "tetrapod",
+      "confidence": 0.227,
+      "bbox": {
+        "x": 837,
+        "y": 481,
+        "width": 18,
+        "height": 25
+      },
+      "areaRatio": 0.0001,
+      "relativePosition": 0.551,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-239",
+      "category": "tetrapod",
+      "confidence": 0.237,
+      "bbox": {
+        "x": 253,
+        "y": 1449,
+        "width": 56,
+        "height": 55
+      },
+      "areaRatio": 0.0009,
+      "relativePosition": 0.183,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-240",
+      "category": "seawall",
+      "confidence": 0.232,
+      "bbox": {
+        "x": 547,
+        "y": 929,
+        "width": 19,
+        "height": 73
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.362,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-241",
+      "category": "tetrapod",
+      "confidence": 0.237,
+      "bbox": {
+        "x": 147,
+        "y": 391,
+        "width": 36,
+        "height": 27
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.107,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-242",
+      "category": "tetrapod",
+      "confidence": 0.25,
+      "bbox": {
+        "x": 279,
+        "y": 384,
+        "width": 59,
+        "height": 49
+      },
+      "areaRatio": 0.0008,
+      "relativePosition": 0.201,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-243",
+      "category": "pier",
+      "confidence": 0.23,
+      "bbox": {
+        "x": 761,
+        "y": 1196,
+        "width": 172,
+        "height": 67
+      },
+      "areaRatio": 0.0019,
+      "relativePosition": 0.551,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-244",
+      "category": "tetrapod",
+      "confidence": 0.242,
+      "bbox": {
+        "x": 396,
+        "y": 1269,
+        "width": 36,
+        "height": 80
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.27,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-245",
+      "category": "pier",
+      "confidence": 0.245,
+      "bbox": {
+        "x": 0,
+        "y": 420,
+        "width": 86,
+        "height": 61
+      },
+      "areaRatio": 0.0018,
+      "relativePosition": 0.028,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-246",
+      "category": "pier",
+      "confidence": 0.235,
+      "bbox": {
+        "x": 862,
+        "y": 0,
+        "width": 113,
+        "height": 1133
+      },
+      "areaRatio": 0.0124,
+      "relativePosition": 0.598,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-247",
+      "category": "tetrapod",
+      "confidence": 0.236,
+      "bbox": {
+        "x": 329,
+        "y": 955,
+        "width": 112,
+        "height": 78
+      },
+      "areaRatio": 0.0016,
+      "relativePosition": 0.251,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-248",
+      "category": "tetrapod",
+      "confidence": 0.229,
+      "bbox": {
+        "x": 633,
+        "y": 1103,
+        "width": 30,
+        "height": 28
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.422,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-251",
+      "category": "tetrapod",
+      "confidence": 0.222,
+      "bbox": {
+        "x": 19,
+        "y": 81,
+        "width": 15,
+        "height": 59
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.017,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-252",
+      "category": "tetrapod",
+      "confidence": 0.241,
+      "bbox": {
+        "x": 647,
+        "y": 105,
+        "width": 101,
+        "height": 51
+      },
+      "areaRatio": 0.0018,
+      "relativePosition": 0.454,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-253",
+      "category": "seawall",
+      "confidence": 0.248,
+      "bbox": {
+        "x": 1338,
+        "y": 740,
+        "width": 105,
+        "height": 54
+      },
+      "areaRatio": 0.002,
+      "relativePosition": 0.905,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-254",
+      "category": "tetrapod",
+      "confidence": 0.232,
+      "bbox": {
+        "x": 204,
+        "y": 1266,
+        "width": 44,
+        "height": 15
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.147,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-255",
+      "category": "tetrapod",
+      "confidence": 0.249,
+      "bbox": {
+        "x": 192,
+        "y": 159,
+        "width": 159,
+        "height": 30
+      },
+      "areaRatio": 0.001,
+      "relativePosition": 0.177,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-256",
+      "category": "tetrapod",
+      "confidence": 0.241,
+      "bbox": {
+        "x": 239,
+        "y": 530,
+        "width": 41,
+        "height": 54
+      },
+      "areaRatio": 0.0008,
+      "relativePosition": 0.169,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-258",
+      "category": "seawall",
+      "confidence": 0.246,
+      "bbox": {
+        "x": 997,
+        "y": 870,
+        "width": 82,
+        "height": 55
+      },
+      "areaRatio": 0.0017,
+      "relativePosition": 0.676,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-259",
+      "category": "tetrapod",
+      "confidence": 0.238,
+      "bbox": {
+        "x": 889,
+        "y": 1270,
+        "width": 19,
+        "height": 16
+      },
+      "areaRatio": 0.0001,
+      "relativePosition": 0.585,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-261",
+      "category": "tetrapod",
+      "confidence": 0.244,
+      "bbox": {
+        "x": 1403,
+        "y": 1024,
+        "width": 47,
+        "height": 23
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.929,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-262",
+      "category": "tetrapod",
+      "confidence": 0.245,
+      "bbox": {
+        "x": 374,
+        "y": 101,
+        "width": 45,
+        "height": 75
+      },
+      "areaRatio": 0.0012,
+      "relativePosition": 0.258,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-263",
+      "category": "tetrapod",
+      "confidence": 0.243,
+      "bbox": {
+        "x": 62,
+        "y": 153,
+        "width": 42,
+        "height": 37
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.054,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-264",
+      "category": "tetrapod",
+      "confidence": 0.247,
+      "bbox": {
+        "x": 19,
+        "y": 297,
+        "width": 50,
+        "height": 44
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.029,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-266",
+      "category": "tetrapod",
+      "confidence": 0.228,
+      "bbox": {
+        "x": 161,
+        "y": 1026,
+        "width": 22,
+        "height": 17
+      },
+      "areaRatio": 0.0001,
+      "relativePosition": 0.112,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-267",
+      "category": "tetrapod",
+      "confidence": 0.236,
+      "bbox": {
+        "x": 244,
+        "y": 1403,
+        "width": 32,
+        "height": 34
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.169,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-269",
+      "category": "tetrapod",
+      "confidence": 0.242,
+      "bbox": {
+        "x": 1010,
+        "y": 1331,
+        "width": 55,
+        "height": 46
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.675,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-271",
+      "category": "pier",
+      "confidence": 0.247,
+      "bbox": {
+        "x": 942,
+        "y": 344,
+        "width": 200,
+        "height": 53
+      },
+      "areaRatio": 0.0034,
+      "relativePosition": 0.678,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-272",
+      "category": "tetrapod",
+      "confidence": 0.263,
+      "bbox": {
+        "x": 1015,
+        "y": 1504,
+        "width": 67,
+        "height": 31
+      },
+      "areaRatio": 0.0007,
+      "relativePosition": 0.683,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-273",
+      "category": "tetrapod",
+      "confidence": 0.237,
+      "bbox": {
+        "x": 886,
+        "y": 1102,
+        "width": 18,
+        "height": 28
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.583,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-274",
+      "category": "tetrapod",
+      "confidence": 0.239,
+      "bbox": {
+        "x": 238,
+        "y": 304,
+        "width": 35,
+        "height": 46
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.166,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-275",
+      "category": "tetrapod",
+      "confidence": 0.233,
+      "bbox": {
+        "x": 765,
+        "y": 241,
+        "width": 35,
+        "height": 26
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.509,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-276",
+      "category": "seawall",
+      "confidence": 0.234,
+      "bbox": {
+        "x": 602,
+        "y": 851,
+        "width": 50,
+        "height": 175
+      },
+      "areaRatio": 0.0033,
+      "relativePosition": 0.408,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-277",
+      "category": "tetrapod",
+      "confidence": 0.254,
+      "bbox": {
+        "x": 1202,
+        "y": 623,
+        "width": 81,
+        "height": 60
+      },
+      "areaRatio": 0.0012,
+      "relativePosition": 0.809,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-278",
+      "category": "tetrapod",
+      "confidence": 0.26,
+      "bbox": {
+        "x": 386,
+        "y": 398,
+        "width": 76,
+        "height": 39
+      },
+      "areaRatio": 0.0008,
+      "relativePosition": 0.276,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-279",
+      "category": "port-facility",
+      "confidence": 0.253,
+      "bbox": {
+        "x": 1163,
+        "y": 1172,
+        "width": 292,
+        "height": 85
+      },
+      "areaRatio": 0.006,
+      "relativePosition": 0.852,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-280",
+      "category": "tetrapod",
+      "confidence": 0.223,
+      "bbox": {
+        "x": 161,
+        "y": 581,
+        "width": 17,
+        "height": 19
+      },
+      "areaRatio": 0.0001,
+      "relativePosition": 0.11,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-281",
+      "category": "tetrapod",
+      "confidence": 0.241,
+      "bbox": {
+        "x": 237,
+        "y": 1017,
+        "width": 40,
+        "height": 29
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.167,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-282",
+      "category": "tetrapod",
+      "confidence": 0.234,
+      "bbox": {
+        "x": 882,
+        "y": 1349,
+        "width": 36,
+        "height": 34
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.586,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-283",
+      "category": "tetrapod",
+      "confidence": 0.224,
+      "bbox": {
+        "x": 766,
+        "y": 1336,
+        "width": 28,
+        "height": 39
+      },
+      "areaRatio": 0.0003,
+      "relativePosition": 0.508,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-284",
+      "category": "tetrapod",
+      "confidence": 0.246,
+      "bbox": {
+        "x": 278,
+        "y": 1016,
+        "width": 76,
+        "height": 26
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.206,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-285",
+      "category": "tetrapod",
+      "confidence": 0.245,
+      "bbox": {
+        "x": 622,
+        "y": 307,
+        "width": 53,
+        "height": 56
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.422,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-287",
+      "category": "tetrapod",
+      "confidence": 0.225,
+      "bbox": {
+        "x": 685,
+        "y": 1389,
+        "width": 31,
+        "height": 146
+      },
+      "areaRatio": 0.0016,
+      "relativePosition": 0.456,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-288",
+      "category": "seawall",
+      "confidence": 0.255,
+      "bbox": {
+        "x": 383,
+        "y": 1166,
+        "width": 83,
+        "height": 63
+      },
+      "areaRatio": 0.0018,
+      "relativePosition": 0.276,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-289",
+      "category": "tetrapod",
+      "confidence": 0.229,
+      "bbox": {
+        "x": 143,
+        "y": 794,
+        "width": 38,
+        "height": 51
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.105,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-290",
+      "category": "tetrapod",
+      "confidence": 0.254,
+      "bbox": {
+        "x": 1106,
+        "y": 1396,
+        "width": 46,
+        "height": 44
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.735,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-291",
+      "category": "seawall",
+      "confidence": 0.225,
+      "bbox": {
+        "x": 679,
+        "y": 850,
+        "width": 34,
+        "height": 79
+      },
+      "areaRatio": 0.001,
+      "relativePosition": 0.453,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-292",
+      "category": "tetrapod",
+      "confidence": 0.238,
+      "bbox": {
+        "x": 706,
+        "y": 1160,
+        "width": 38,
+        "height": 33
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.472,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-293",
+      "category": "tetrapod",
+      "confidence": 0.246,
+      "bbox": {
+        "x": 152,
+        "y": 396,
+        "width": 30,
+        "height": 22
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.109,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-294",
+      "category": "tetrapod",
+      "confidence": 0.226,
+      "bbox": {
+        "x": 692,
+        "y": 1206,
+        "width": 15,
+        "height": 31
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.455,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-297",
+      "category": "tetrapod",
+      "confidence": 0.248,
+      "bbox": {
+        "x": 296,
+        "y": 330,
+        "width": 96,
+        "height": 67
+      },
+      "areaRatio": 0.0015,
+      "relativePosition": 0.224,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-298",
+      "category": "seawall",
+      "confidence": 0.24,
+      "bbox": {
+        "x": 400,
+        "y": 249,
+        "width": 27,
+        "height": 72
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.269,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-300",
+      "category": "tetrapod",
+      "confidence": 0.235,
+      "bbox": {
+        "x": 729,
+        "y": 973,
+        "width": 24,
+        "height": 44
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.482,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-301",
+      "category": "tetrapod",
+      "confidence": 0.242,
+      "bbox": {
+        "x": 453,
+        "y": 1348,
+        "width": 30,
+        "height": 29
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.305,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-302",
+      "category": "tetrapod",
+      "confidence": 0.252,
+      "bbox": {
+        "x": 1343,
+        "y": 1414,
+        "width": 52,
+        "height": 34
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.891,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-303",
+      "category": "tetrapod",
+      "confidence": 0.232,
+      "bbox": {
+        "x": 485,
+        "y": 1400,
+        "width": 23,
+        "height": 45
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.323,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-305",
+      "category": "tetrapod",
+      "confidence": 0.24,
+      "bbox": {
+        "x": 226,
+        "y": 1351,
+        "width": 48,
+        "height": 40
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.163,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-306",
+      "category": "tetrapod",
+      "confidence": 0.229,
+      "bbox": {
+        "x": 1076,
+        "y": 1418,
+        "width": 19,
+        "height": 36
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.707,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-307",
+      "category": "seawall",
+      "confidence": 0.235,
+      "bbox": {
+        "x": 657,
+        "y": 250,
+        "width": 98,
+        "height": 125
+      },
+      "areaRatio": 0.0038,
+      "relativePosition": 0.46,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-308",
+      "category": "tetrapod",
+      "confidence": 0.237,
+      "bbox": {
+        "x": 645,
+        "y": 5,
+        "width": 103,
+        "height": 149
+      },
+      "areaRatio": 0.0037,
+      "relativePosition": 0.453,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-309",
+      "category": "port-facility",
+      "confidence": 0.235,
+      "bbox": {
+        "x": 293,
+        "y": 60,
+        "width": 41,
+        "height": 36
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.204,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-310",
+      "category": "seawall",
+      "confidence": 0.246,
+      "bbox": {
+        "x": 718,
+        "y": 1412,
+        "width": 44,
+        "height": 35
+      },
+      "areaRatio": 0.0006,
+      "relativePosition": 0.482,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-312",
+      "category": "tetrapod",
+      "confidence": 0.236,
+      "bbox": {
+        "x": 152,
+        "y": 283,
+        "width": 37,
+        "height": 38
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.111,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-313",
+      "category": "tetrapod",
+      "confidence": 0.235,
+      "bbox": {
+        "x": 784,
+        "y": 787,
+        "width": 65,
+        "height": 78
+      },
+      "areaRatio": 0.0017,
+      "relativePosition": 0.532,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-314",
+      "category": "tetrapod",
+      "confidence": 0.239,
+      "bbox": {
+        "x": 686,
+        "y": 1302,
+        "width": 33,
+        "height": 62
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.457,
+      "distanceFromShore": "far"
+    },
+    {
+      "id": "mask-315",
+      "category": "seawall",
+      "confidence": 0.234,
+      "bbox": {
+        "x": 103,
+        "y": 827,
+        "width": 26,
+        "height": 38
+      },
+      "areaRatio": 0.0004,
+      "relativePosition": 0.076,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-316",
+      "category": "tetrapod",
+      "confidence": 0.242,
+      "bbox": {
+        "x": 1091,
+        "y": 666,
+        "width": 43,
+        "height": 51
+      },
+      "areaRatio": 0.0005,
+      "relativePosition": 0.724,
+      "distanceFromShore": "near"
+    },
+    {
+      "id": "mask-317",
+      "category": "tetrapod",
+      "confidence": 0.242,
+      "bbox": {
+        "x": 747,
+        "y": 0,
+        "width": 122,
+        "height": 141
+      },
+      "areaRatio": 0.0045,
+      "relativePosition": 0.526,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-318",
+      "category": "tetrapod",
+      "confidence": 0.249,
+      "bbox": {
+        "x": 1300,
+        "y": 92,
+        "width": 235,
+        "height": 67
+      },
+      "areaRatio": 0.0046,
+      "relativePosition": 0.923,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-320",
+      "category": "tetrapod",
+      "confidence": 0.245,
+      "bbox": {
+        "x": 723,
+        "y": 1030,
+        "width": 24,
+        "height": 26
+      },
+      "areaRatio": 0.0002,
+      "relativePosition": 0.479,
+      "distanceFromShore": "medium"
+    },
+    {
+      "id": "mask-321",
+      "category": "tetrapod",
+      "confidence": 0.232,
+      "bbox": {
+        "x": 408,
+        "y": 343,
+        "width": 107,
+        "height": 56
+      },
+      "areaRatio": 0.001,
+      "relativePosition": 0.3,
+      "distanceFromShore": "onshore"
+    },
+    {
+      "id": "mask-322",
+      "category": "seawall",
+      "confidence": 0.245,
+      "bbox": {
+        "x": 671,
+        "y": 850,
+        "width": 52,
+        "height": 182
+      },
+      "areaRatio": 0.003,
+      "relativePosition": 0.454,
+      "distanceFromShore": "medium"
+    }
+  ],
+  "seaBottomFeatures": [],
+  "zones": [
+    {
+      "id": "zone-0",
+      "name": "西端エリア",
+      "xRange": [
+        0.0,
+        0.167
+      ],
+      "structures": [
+        "tetrapod",
+        "pier",
+        "seawall"
+      ],
+      "seaBottomFeatures": [
+        "tetrapod"
+      ],
+      "estimatedDepth": {
+        "shore": 5.5,
+        "offshore": 9.5
+      },
+      "currentFlow": 0.92,
+      "estimatedFish": [
+        {
+          "name": "メバル",
+          "probability": 0.95,
+          "season": "11月〜4月",
+          "method": "メバリング",
+          "difficulty": "easy"
+        },
+        {
+          "name": "スズキ",
+          "probability": 0.8,
+          "season": "3月〜12月",
+          "method": "ルアー",
+          "difficulty": "easy"
+        },
+        {
+          "name": "カサゴ",
+          "probability": 0.7,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "サバ",
+          "probability": 0.7,
+          "season": "6月〜10月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アイナメ",
+          "probability": 0.55,
+          "season": "10月〜3月",
+          "method": "ブラクリ",
+          "difficulty": "medium"
+        },
+        {
+          "name": "イワシ",
+          "probability": 0.55,
+          "season": "5月〜10月",
+          "method": "サビキ釣り",
+          "difficulty": "medium"
+        },
+        {
+          "name": "アジ",
+          "probability": 0.5,
+          "season": "5月〜11月",
+          "method": "アジング",
+          "difficulty": "medium"
+        },
+        {
+          "name": "クロダイ",
+          "probability": 0.45,
+          "season": "4月〜11月",
+          "method": "ヘチ釣り",
+          "difficulty": "medium"
+        }
+      ],
+      "rating": "hot"
+    },
+    {
+      "id": "zone-1",
+      "name": "西寄りエリア",
+      "xRange": [
+        0.167,
+        0.333
+      ],
+      "structures": [
+        "tetrapod",
+        "pier",
+        "port-facility",
+        "seawall"
+      ],
+      "seaBottomFeatures": [
+        "tetrapod"
+      ],
+      "estimatedDepth": {
+        "shore": 5.8,
+        "offshore": 10.0
+      },
+      "currentFlow": 0.75,
+      "estimatedFish": [
+        {
+          "name": "メバル",
+          "probability": 0.95,
+          "season": "11月〜4月",
+          "method": "メバリング",
+          "difficulty": "easy"
+        },
+        {
+          "name": "スズキ",
+          "probability": 0.9,
+          "season": "3月〜12月",
+          "method": "ルアー",
+          "difficulty": "easy"
+        },
+        {
+          "name": "イワシ",
+          "probability": 0.8,
+          "season": "5月〜10月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "カサゴ",
+          "probability": 0.7,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アジ",
+          "probability": 0.6,
+          "season": "5月〜11月",
+          "method": "アジング",
+          "difficulty": "medium"
+        },
+        {
+          "name": "アイナメ",
+          "probability": 0.55,
+          "season": "10月〜3月",
+          "method": "ブラクリ",
+          "difficulty": "medium"
+        },
+        {
+          "name": "クロダイ",
+          "probability": 0.55,
+          "season": "4月〜11月",
+          "method": "ヘチ釣り",
+          "difficulty": "medium"
+        },
+        {
+          "name": "ソイ",
+          "probability": 0.4,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "medium"
+        }
+      ],
+      "rating": "good"
+    },
+    {
+      "id": "zone-2",
+      "name": "中央西エリア",
+      "xRange": [
+        0.333,
+        0.5
+      ],
+      "structures": [
+        "tetrapod",
+        "pier",
+        "port-facility",
+        "seawall"
+      ],
+      "seaBottomFeatures": [
+        "tetrapod"
+      ],
+      "estimatedDepth": {
+        "shore": 6.1,
+        "offshore": 10.5
+      },
+      "currentFlow": 0.58,
+      "estimatedFish": [
+        {
+          "name": "メバル",
+          "probability": 0.95,
+          "season": "11月〜4月",
+          "method": "メバリング",
+          "difficulty": "easy"
+        },
+        {
+          "name": "スズキ",
+          "probability": 0.9,
+          "season": "3月〜12月",
+          "method": "ルアー",
+          "difficulty": "easy"
+        },
+        {
+          "name": "イワシ",
+          "probability": 0.8,
+          "season": "5月〜10月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "カサゴ",
+          "probability": 0.7,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アジ",
+          "probability": 0.6,
+          "season": "5月〜11月",
+          "method": "アジング",
+          "difficulty": "medium"
+        },
+        {
+          "name": "アイナメ",
+          "probability": 0.55,
+          "season": "10月〜3月",
+          "method": "ブラクリ",
+          "difficulty": "medium"
+        },
+        {
+          "name": "クロダイ",
+          "probability": 0.55,
+          "season": "4月〜11月",
+          "method": "ヘチ釣り",
+          "difficulty": "medium"
+        },
+        {
+          "name": "ソイ",
+          "probability": 0.4,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "medium"
+        }
+      ],
+      "rating": "good"
+    },
+    {
+      "id": "zone-3",
+      "name": "中央エリア",
+      "xRange": [
+        0.5,
+        0.666
+      ],
+      "structures": [
+        "tetrapod",
+        "pier",
+        "port-facility",
+        "seawall"
+      ],
+      "seaBottomFeatures": [
+        "tetrapod"
+      ],
+      "estimatedDepth": {
+        "shore": 6.3,
+        "offshore": 10.9
+      },
+      "currentFlow": 0.58,
+      "estimatedFish": [
+        {
+          "name": "メバル",
+          "probability": 0.95,
+          "season": "11月〜4月",
+          "method": "メバリング",
+          "difficulty": "easy"
+        },
+        {
+          "name": "スズキ",
+          "probability": 0.9,
+          "season": "3月〜12月",
+          "method": "ルアー",
+          "difficulty": "easy"
+        },
+        {
+          "name": "イワシ",
+          "probability": 0.8,
+          "season": "5月〜10月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "カサゴ",
+          "probability": 0.7,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アジ",
+          "probability": 0.6,
+          "season": "5月〜11月",
+          "method": "アジング",
+          "difficulty": "medium"
+        },
+        {
+          "name": "アイナメ",
+          "probability": 0.55,
+          "season": "10月〜3月",
+          "method": "ブラクリ",
+          "difficulty": "medium"
+        },
+        {
+          "name": "クロダイ",
+          "probability": 0.55,
+          "season": "4月〜11月",
+          "method": "ヘチ釣り",
+          "difficulty": "medium"
+        },
+        {
+          "name": "ソイ",
+          "probability": 0.4,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "medium"
+        }
+      ],
+      "rating": "good"
+    },
+    {
+      "id": "zone-4",
+      "name": "中央東エリア",
+      "xRange": [
+        0.666,
+        0.833
+      ],
+      "structures": [
+        "tetrapod",
+        "pier",
+        "port-facility",
+        "seawall"
+      ],
+      "seaBottomFeatures": [
+        "tetrapod"
+      ],
+      "estimatedDepth": {
+        "shore": 6.1,
+        "offshore": 10.5
+      },
+      "currentFlow": 0.75,
+      "estimatedFish": [
+        {
+          "name": "メバル",
+          "probability": 0.95,
+          "season": "11月〜4月",
+          "method": "メバリング",
+          "difficulty": "easy"
+        },
+        {
+          "name": "スズキ",
+          "probability": 0.9,
+          "season": "3月〜12月",
+          "method": "ルアー",
+          "difficulty": "easy"
+        },
+        {
+          "name": "イワシ",
+          "probability": 0.8,
+          "season": "5月〜10月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "カサゴ",
+          "probability": 0.7,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アジ",
+          "probability": 0.6,
+          "season": "5月〜11月",
+          "method": "アジング",
+          "difficulty": "medium"
+        },
+        {
+          "name": "アイナメ",
+          "probability": 0.55,
+          "season": "10月〜3月",
+          "method": "ブラクリ",
+          "difficulty": "medium"
+        },
+        {
+          "name": "クロダイ",
+          "probability": 0.55,
+          "season": "4月〜11月",
+          "method": "ヘチ釣り",
+          "difficulty": "medium"
+        },
+        {
+          "name": "ソイ",
+          "probability": 0.4,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "medium"
+        }
+      ],
+      "rating": "good"
+    },
+    {
+      "id": "zone-5",
+      "name": "東寄りエリア",
+      "xRange": [
+        0.833,
+        0.999
+      ],
+      "structures": [
+        "tetrapod",
+        "pier",
+        "port-facility",
+        "seawall"
+      ],
+      "seaBottomFeatures": [
+        "tetrapod"
+      ],
+      "estimatedDepth": {
+        "shore": 5.8,
+        "offshore": 10.0
+      },
+      "currentFlow": 0.92,
+      "estimatedFish": [
+        {
+          "name": "メバル",
+          "probability": 0.95,
+          "season": "11月〜4月",
+          "method": "メバリング",
+          "difficulty": "easy"
+        },
+        {
+          "name": "スズキ",
+          "probability": 0.9,
+          "season": "3月〜12月",
+          "method": "ルアー",
+          "difficulty": "easy"
+        },
+        {
+          "name": "イワシ",
+          "probability": 0.8,
+          "season": "5月〜10月",
+          "method": "サビキ釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "カサゴ",
+          "probability": 0.7,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "easy"
+        },
+        {
+          "name": "アジ",
+          "probability": 0.6,
+          "season": "5月〜11月",
+          "method": "アジング",
+          "difficulty": "medium"
+        },
+        {
+          "name": "アイナメ",
+          "probability": 0.55,
+          "season": "10月〜3月",
+          "method": "ブラクリ",
+          "difficulty": "medium"
+        },
+        {
+          "name": "クロダイ",
+          "probability": 0.55,
+          "season": "4月〜11月",
+          "method": "ヘチ釣り",
+          "difficulty": "medium"
+        },
+        {
+          "name": "ソイ",
+          "probability": 0.4,
+          "season": "通年",
+          "method": "穴釣り",
+          "difficulty": "medium"
+        }
+      ],
+      "rating": "hot"
+    }
+  ],
+  "facilities": [],
+  "structureLength": 0,
+  "analyzedAt": "2026-03-25T21:44:59.610775",
+  "pipelineVersion": "1.0.0"
+}
