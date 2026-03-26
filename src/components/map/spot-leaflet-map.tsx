@@ -341,9 +341,22 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
   }, [data.zones]);
   const allFishSame = allZoneFishKeys.length > 1 && allZoneFishKeys.every((k) => k === allZoneFishKeys[0]);
 
+  // 各ゾーンのおすすめ釣法（最頻出メソッド）
+  const zoneTopMethod = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const z of data.zones) {
+      if (z.estimatedFish.length > 0) {
+        const best = z.estimatedFish.reduce((a, b) => b.probability > a.probability ? b : a);
+        map.set(z.id, best.method);
+      }
+    }
+    return map;
+  }, [data.zones]);
+
   // ズームレベルに応じたラベル表示制御
   const showZoneNames = zoom >= 15;
   const showFishLabels = zoom >= 17;
+  const showDepthLabels = zoom >= 16;
   const showNearbySpots = zoom <= 14;
 
   return (
@@ -391,27 +404,30 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
                 weight: 3,
               }}
             >
-              {/* ゾーン名バッジ: zoom>=15で表示 */}
-              {showZoneNames && (
-                <Tooltip direction="center" permanent className="zone-tooltip">
-                  <div style={{
-                    display: "inline-flex",
-                    alignItems: "center",
-                    gap: "3px",
-                    background: style.color,
-                    color: "white",
-                    padding: "1px 6px",
-                    borderRadius: "8px",
-                    fontSize: "11px",
-                    fontWeight: 700,
-                    whiteSpace: "nowrap",
-                    boxShadow: "0 1px 4px rgba(0,0,0,0.25)",
-                    lineHeight: "1.4",
-                  }}>
-                    {style.emoji} {zone.name.replace("エリア", "")}
-                  </div>
-                </Tooltip>
-              )}
+              {/* ゾーン名バッジ+釣法: zoom>=15で表示 */}
+              {showZoneNames && (() => {
+                const method = zoneTopMethod.get(zone.id);
+                return (
+                  <Tooltip direction="center" permanent className="zone-tooltip">
+                    <div style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "3px",
+                      background: style.color,
+                      color: "white",
+                      padding: "1px 6px",
+                      borderRadius: "8px",
+                      fontSize: "11px",
+                      fontWeight: 700,
+                      whiteSpace: "nowrap",
+                      boxShadow: "0 1px 4px rgba(0,0,0,0.25)",
+                      lineHeight: "1.4",
+                    }}>
+                      {style.emoji} {zone.name.replace("エリア", "")}{method ? ` ${method}` : ""}
+                    </div>
+                  </Tooltip>
+                );
+              })()}
               <Popup maxWidth={320}>
                 <div className="min-w-[260px] space-y-2 p-1">
                   <div className="flex items-center gap-2">
@@ -457,6 +473,31 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
                 </div>
               </Popup>
             </Polygon>
+          );
+        })}
+
+        {/* 水深ラベル: zoom>=16で海側に常時表示 */}
+        {showDepthLabels && zoneBounds.map(({ zone, center }) => {
+          const depthText = zone.estimatedDepth.shore === zone.estimatedDepth.offshore
+            ? `${zone.estimatedDepth.shore}m`
+            : `${zone.estimatedDepth.shore}-${zone.estimatedDepth.offshore}m`;
+          // 海側にオフセット（perpの反対方向）
+          const depthPos: [number, number] = [
+            center[0] - perpLat * 0.6,
+            center[1] - perpLng * 0.6,
+          ];
+          return (
+            <Marker
+              key={`depth-${zone.id}`}
+              position={depthPos}
+              interactive={false}
+              icon={L.divIcon({
+                className: "",
+                html: `<div style="white-space:nowrap;font-size:10px;font-weight:600;color:#0369a1;background:rgba(224,242,254,0.9);padding:1px 5px;border-radius:6px;pointer-events:none;text-align:center;border:1px solid rgba(3,105,161,0.3)">\u{1F30A} ${depthText}</div>`,
+                iconSize: [70, 18],
+                iconAnchor: [35, 9],
+              })}
+            />
           );
         })}
 
