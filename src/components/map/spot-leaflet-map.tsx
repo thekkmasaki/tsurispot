@@ -335,7 +335,8 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
   const showNearbySpots = zoom <= 14;
 
   return (
-    <div className="relative overflow-hidden rounded-lg border">
+    <div className="overflow-hidden rounded-lg border">
+      <div className="relative" style={{ height: "480px" }}>
       <MapContainer
         center={[data.coordinates.lat, data.coordinates.lng]}
         zoom={16}
@@ -579,7 +580,7 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
       {/* 情報パネル（左下オーバーレイ） */}
       {data.spotInfo && (
         <div
-          className="absolute bottom-10 left-2 z-[1000] max-w-[240px] rounded-lg border bg-white/95 px-3 py-2 shadow-lg backdrop-blur-sm sm:max-w-[280px]"
+          className="absolute bottom-2 left-2 z-[1000] max-w-[200px] rounded-lg border bg-white/95 px-3 py-2 shadow-lg backdrop-blur-sm sm:max-w-[260px]"
         >
           <div className="mb-1 text-sm font-bold leading-tight">{data.spotInfo.name}</div>
           <div className="mb-1 text-[10px] text-gray-500 leading-tight">{data.spotInfo.address}</div>
@@ -609,6 +610,7 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
           )}
         </div>
       )}
+      </div>{/* end relative wrapper */}
 
       {/* 凡例 */}
       <div className="flex flex-wrap items-center gap-x-5 gap-y-1 border-t bg-muted/30 px-4 py-2.5">
