@@ -1,27 +1,27 @@
 {
   "spotSlug": "hiraiso-fishing-park",
   "coordinates": {
-    "lat": 34.6264,
-    "lng": 135.0661
+    "lat": 34.6271,
+    "lng": 135.067
   },
   "imageMetadata": {
     "source": "gsi-aerial",
     "date": "2024",
     "resolution": 0.25,
     "imageSize": {
-      "width": 1536,
-      "height": 1536
+      "width": 4608,
+      "height": 4608
     }
   },
   "layoutType": "seawall",
   "structureEndpoints": {
     "west": {
-      "lat": 34.6261,
-      "lng": 135.0629
+      "lat": 34.6259,
+      "lng": 135.0595
     },
     "east": {
-      "lat": 34.6273,
-      "lng": 135.0692
+      "lat": 34.6283,
+      "lng": 135.0745
     }
   },
   "structureLabel": "護岸",
@@ -779,7 +779,7 @@
         "width": 9,
         "height": 9
       },
-      "areaRatio": 0.0,
+      "areaRatio": 0,
       "relativePosition": 0.8,
       "distanceFromShore": "onshore"
     },
@@ -919,7 +919,7 @@
         "width": 12,
         "height": 10
       },
-      "areaRatio": 0.0,
+      "areaRatio": 0,
       "relativePosition": 0.234,
       "distanceFromShore": "near"
     },
@@ -961,7 +961,7 @@
         "width": 8,
         "height": 8
       },
-      "areaRatio": 0.0,
+      "areaRatio": 0,
       "relativePosition": 0.581,
       "distanceFromShore": "onshore"
     },
@@ -975,7 +975,7 @@
         "width": 12,
         "height": 11
       },
-      "areaRatio": 0.0,
+      "areaRatio": 0,
       "relativePosition": 0.546,
       "distanceFromShore": "onshore"
     },
@@ -1000,7 +1000,7 @@
       "id": "zone-0",
       "name": "西端エリア",
       "xRange": [
-        0.0,
+        0,
         0.143
       ],
       "structures": [
@@ -1014,7 +1014,7 @@
       ],
       "estimatedDepth": {
         "shore": 4.5,
-        "offshore": 7.0
+        "offshore": 7
       },
       "currentFlow": 0.93,
       "estimatedFish": [
@@ -1175,7 +1175,7 @@
         "tetrapod"
       ],
       "estimatedDepth": {
-        "shore": 6.0,
+        "shore": 6,
         "offshore": 10.3
       },
       "currentFlow": 0.64,
@@ -1562,8 +1562,281 @@
       "rating": "hot"
     }
   ],
-  "facilities": [],
-  "structureLength": 0,
+  "facilities": [
+    {
+      "id": "fac-parking",
+      "name": "駐車場（700円/日）",
+      "icon": "🅿️",
+      "relativePosition": 0.08
+    },
+    {
+      "id": "fac-toilet1",
+      "name": "トイレ",
+      "icon": "🚻",
+      "relativePosition": 0.2
+    },
+    {
+      "id": "fac-toilet2",
+      "name": "トイレ",
+      "icon": "🚻",
+      "relativePosition": 0.7
+    },
+    {
+      "id": "fac-shop",
+      "name": "売店・釣具店",
+      "icon": "🏣",
+      "relativePosition": 0.12
+    },
+    {
+      "id": "fac-rental",
+      "name": "レンタル竿（800円/日）",
+      "icon": "🎣",
+      "relativePosition": 0.15
+    }
+  ],
+  "structureLength": 1400,
   "analyzedAt": "2026-03-25T21:44:22.744040",
-  "pipelineVersion": "1.0.0"
+  "pipelineVersion": "1.0.0",
+  "detectedTetrapods": [
+    {
+      "lat": 34.625788,
+      "lng": 135.05955,
+      "brightness": 123.7
+    },
+    {
+      "lat": 34.625779,
+      "lng": 135.059588,
+      "brightness": 136.3
+    },
+    {
+      "lat": 34.625757,
+      "lng": 135.059604,
+      "brightness": 115.7
+    },
+    {
+      "lat": 34.625766,
+      "lng": 135.059626,
+      "brightness": 137.0
+    },
+    {
+      "lat": 34.62573,
+      "lng": 135.059636,
+      "brightness": 121.7
+    },
+    {
+      "lat": 34.625316,
+      "lng": 135.060017,
+      "brightness": 79.0
+    },
+    {
+      "lat": 34.625594,
+      "lng": 135.060076,
+      "brightness": 147.7
+    },
+    {
+      "lat": 34.626066,
+      "lng": 135.062774,
+      "brightness": 64.3
+    },
+    {
+      "lat": 34.626075,
+      "lng": 135.062909,
+      "brightness": 73.7
+    },
+    {
+      "lat": 34.626092,
+      "lng": 135.06301,
+      "brightness": 66.3
+    },
+    {
+      "lat": 34.626079,
+      "lng": 135.063032,
+      "brightness": 71.7
+    },
+    {
+      "lat": 34.626132,
+      "lng": 135.063214,
+      "brightness": 69.7
+    },
+    {
+      "lat": 34.626039,
+      "lng": 135.063204,
+      "brightness": 69.0
+    },
+    {
+      "lat": 34.626128,
+      "lng": 135.06322,
+      "brightness": 64.7
+    },
+    {
+      "lat": 34.626379,
+      "lng": 135.064502,
+      "brightness": 119.7
+    },
+    {
+      "lat": 34.626362,
+      "lng": 135.06448,
+      "brightness": 114.0
+    },
+    {
+      "lat": 34.626379,
+      "lng": 135.064507,
+      "brightness": 127.7
+    },
+    {
+      "lat": 34.626357,
+      "lng": 135.064545,
+      "brightness": 132.7
+    },
+    {
+      "lat": 34.626335,
+      "lng": 135.064534,
+      "brightness": 116.7
+    },
+    {
+      "lat": 34.626406,
+      "lng": 135.064588,
+      "brightness": 103.0
+    },
+    {
+      "lat": 34.626366,
+      "lng": 135.064566,
+      "brightness": 106.0
+    },
+    {
+      "lat": 34.626622,
+      "lng": 135.06573,
+      "brightness": 127.0
+    },
+    {
+      "lat": 34.626618,
+      "lng": 135.065736,
+      "brightness": 128.7
+    },
+    {
+      "lat": 34.626706,
+      "lng": 135.066218,
+      "brightness": 93.0
+    },
+    {
+      "lat": 34.626693,
+      "lng": 135.066234,
+      "brightness": 92.0
+    },
+    {
+      "lat": 34.626724,
+      "lng": 135.066304,
+      "brightness": 88.0
+    },
+    {
+      "lat": 34.626728,
+      "lng": 135.066304,
+      "brightness": 97.0
+    },
+    {
+      "lat": 34.626719,
+      "lng": 135.066336,
+      "brightness": 94.3
+    },
+    {
+      "lat": 34.626702,
+      "lng": 135.066417,
+      "brightness": 92.0
+    },
+    {
+      "lat": 34.626688,
+      "lng": 135.066428,
+      "brightness": 88.0
+    },
+    {
+      "lat": 34.626604,
+      "lng": 135.066411,
+      "brightness": 81.0
+    },
+    {
+      "lat": 34.626746,
+      "lng": 135.066465,
+      "brightness": 89.0
+    },
+    {
+      "lat": 34.626715,
+      "lng": 135.066481,
+      "brightness": 82.0
+    },
+    {
+      "lat": 34.626785,
+      "lng": 135.06669,
+      "brightness": 79.7
+    },
+    {
+      "lat": 34.626777,
+      "lng": 135.066792,
+      "brightness": 80.0
+    },
+    {
+      "lat": 34.626931,
+      "lng": 135.067543,
+      "brightness": 59.0
+    },
+    {
+      "lat": 34.627112,
+      "lng": 135.068273,
+      "brightness": 135.7
+    },
+    {
+      "lat": 34.627112,
+      "lng": 135.068321,
+      "brightness": 143.3
+    },
+    {
+      "lat": 34.627072,
+      "lng": 135.068316,
+      "brightness": 111.7
+    },
+    {
+      "lat": 34.627117,
+      "lng": 135.0683,
+      "brightness": 138.0
+    },
+    {
+      "lat": 34.627117,
+      "lng": 135.068332,
+      "brightness": 141.3
+    },
+    {
+      "lat": 34.627112,
+      "lng": 135.068332,
+      "brightness": 133.7
+    },
+    {
+      "lat": 34.627068,
+      "lng": 135.068364,
+      "brightness": 129.0
+    },
+    {
+      "lat": 34.62833,
+      "lng": 135.074501,
+      "brightness": 149.3
+    },
+    {
+      "lat": 34.628335,
+      "lng": 135.074506,
+      "brightness": 160.0
+    },
+    {
+      "lat": 34.628361,
+      "lng": 135.074539,
+      "brightness": 163.3
+    },
+    {
+      "lat": 34.628383,
+      "lng": 135.07456,
+      "brightness": 163.3
+    },
+    {
+      "lat": 34.628392,
+      "lng": 135.074571,
+      "brightness": 158.7
+    }
+  ]
 }

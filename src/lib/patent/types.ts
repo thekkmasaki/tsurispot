@@ -147,6 +147,11 @@ export interface SpotAnalysisResult {
   };
   /** 主要構造物のレイアウトタイプ */
   layoutType: "seawall" | "pier" | "port" | "beach";
+  /** 構造物の端点座標（xRange→実座標変換用） */
+  structureEndpoints?: {
+    west: { lat: number; lng: number };
+    east: { lat: number; lng: number };
+  };
   /** 構造物ラベル */
   structureLabel: string;
   /** 海域名 */
@@ -163,6 +168,8 @@ export interface SpotAnalysisResult {
   structureLength: number;
   /** 推奨ポジション数 */
   positionCount: number;
+  /** 航空写真から検出されたテトラポッド座標 */
+  detectedTetrapods?: { lat: number; lng: number; brightness: number }[];
   /** 解析日時 */
   analyzedAt: string;
   /** パイプラインバージョン */
