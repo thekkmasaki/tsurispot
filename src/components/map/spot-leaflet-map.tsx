@@ -318,35 +318,17 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
                       <tr className="border-b text-left text-gray-500">
                         <th className="py-1 pr-2">魚種</th>
                         <th className="py-1 pr-2">釣り方</th>
-                        <th className="py-1 pr-2">時期</th>
-                        <th className="py-1 text-right">期待度</th>
+                        <th className="py-1">時期</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {topFish.map((f) => {
-                        const pct = Math.round(f.probability * 100);
-                        return (
+                      {topFish.map((f) => (
                           <tr key={f.name} className="border-b border-gray-100">
                             <td className="py-1 pr-2 font-medium">{f.name}</td>
                             <td className="py-1 pr-2 text-gray-600">{f.method}</td>
-                            <td className="py-1 pr-2 text-gray-500">{f.season}</td>
-                            <td className="py-1 text-right">
-                              <div className="flex items-center justify-end gap-1">
-                                <div className="h-1.5 w-12 overflow-hidden rounded-full bg-gray-200">
-                                  <div
-                                    className="h-full rounded-full"
-                                    style={{
-                                      width: `${pct}%`,
-                                      backgroundColor: pct >= 80 ? "#f59e0b" : pct >= 60 ? "#3b82f6" : "#9ca3af",
-                                    }}
-                                  />
-                                </div>
-                                <span className="text-[10px] text-gray-500 tabular-nums">{pct}%</span>
-                              </div>
-                            </td>
+                            <td className="py-1 text-gray-500">{f.season}</td>
                           </tr>
-                        );
-                      })}
+                        ))}
                     </tbody>
                   </table>
                 </div>
