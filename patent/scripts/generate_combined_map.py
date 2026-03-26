@@ -319,12 +319,26 @@ def generate_combined_map(slug):
     depth_east = fetch_gebco_depth(east_ep["lat"] - 0.001, east_ep["lng"])
     print(f"   GEBCO: 近={depth_near}m, 沖={depth_far}m, 西={depth_west}m, 東={depth_east}m")
 
-    # 護岸ラインのピクセル座標を求める
+    # 護岸ラインのピクセル座標を求める（OSM海岸線の実形状を使用）
     coast_pts = []
-    for t in [i / 20 for i in range(21)]:
-        lat = west_ep["lat"] + (east_ep["lat"] - west_ep["lat"]) * t
-        lng = west_ep["lng"] + (east_ep["lng"] - west_ep["lng"]) * t
-        coast_pts.append(to_px(lat, lng))
+    if coastlines and park_polygon:
+        # OSM海岸線から公園内セグメントの頂点を集める
+        for coords in coastlines:
+            segments = classify_coastline(coords, park_polygon)
+            for seg in segments:
+                if seg["type"] in ("platform", "tetrapod"):
+                    coast_pts.append(to_px(*seg["start"]))
+                    coast_pts.append(to_px(*seg["end"]))
+        # X座標順にソート（重複は保持して精度を維持）
+        coast_pts = sorted(coast_pts, key=lambda p: p[0])
+    if len(coast_pts) < 3:
+        # フォールバック: structureEndpointsの直線補間
+        coast_pts = []
+        for t in [i / 20 for i in range(21)]:
+            lat = west_ep["lat"] + (east_ep["lat"] - west_ep["lat"]) * t
+            lng = west_ep["lng"] + (east_ep["lng"] - west_ep["lng"]) * t
+            coast_pts.append(to_px(lat, lng))
+    print(f"   海岸線ポイント数: {len(coast_pts)}")
 
     # 護岸からの距離ベースで水深グラデーション帯を描画
     # 各ピクセルについて護岸ラインからの最短距離を計算 → 距離に応じた水深色
@@ -349,11 +363,21 @@ def generate_combined_map(slug):
             min_d = min(min_d, d)
         return min_d
 
-    # 護岸ラインのY座標をX座標ごとにルックアップテーブル化
-    # coast_pts はX昇順でない場合があるのでソート
+    # 護岸ラインのY座標をピクセル幅のルックアップテーブルに変換
+    # 各X座標での最小Y値（最も陸寄り）をマッピング
+    coast_y_lut = {}
+    for cx, cy in coast_pts:
+        bx = cx // 2 * 2  # 2px単位のバケット
+        if bx not in coast_y_lut or cy < coast_y_lut[bx]:
+            coast_y_lut[bx] = cy
+
     sorted_coast = sorted(coast_pts, key=lambda p: p[0])
     def coast_y_at_x(px_x):
-        """指定X座標での護岸のY座標を線形補間"""
+        """指定X座標での護岸のY座標（LUT→線形補間フォールバック）"""
+        bx = px_x // 2 * 2
+        if bx in coast_y_lut:
+            return coast_y_lut[bx]
+        # LUTにない場合はソート済みリストから線形補間
         if px_x <= sorted_coast[0][0]:
             return sorted_coast[0][1]
         if px_x >= sorted_coast[-1][0]:
@@ -368,14 +392,32 @@ def generate_combined_map(slug):
 
     # ストライプ間隔 (px) — 4px刻みで高速化
     step = 4
+    img_pixels = img.load()
     for py in range(0, h, step):
         for px_x in range(0, w, step):
-            # 護岸ラインより上（陸側）は完全スキップ
+            # 1. 護岸ラインより上（陸側）は完全スキップ
             coast_y = coast_y_at_x(px_x)
-            if py < coast_y + 10:  # 護岸の少し下から描画開始
+            if py < coast_y + 15:  # 護岸の少し下から描画開始
                 continue
 
+            # 2. ピクセル色で陸地判定（明るい=陸、暗い=海）
+            sx, sy = min(px_x, w-1), min(py, h-1)
+            try:
+                r_val, g_val, b_val = img_pixels[sx, sy][:3]
+            except:
+                continue
+            brightness = (r_val + g_val + b_val) / 3
+            # 航空写真で海は暗い（<120）、陸は明るい
+            # 護岸から近い場所は閾値を厳しく
             dist = coast_distance_px(px_x, py)
+            dist_m = dist * 0.25
+            if dist_m < 30:
+                # 護岸近く: 明るいピクセルはスキップ（コンクリ・石畳等）
+                if brightness > 100:
+                    continue
+            elif brightness > 160:
+                continue  # 遠くても明るすぎるのは陸地
+
             if dist < 8:
                 continue  # 護岸直上はスキップ
 
@@ -418,27 +460,47 @@ def generate_combined_map(slug):
     img_rgba = img.convert("RGBA")
     img_rgba = Image.alpha_composite(img_rgba, overlay)
 
-    # --- 2b. 距離目盛り線（50m / 100m）---
+    # --- ヘルパー: 海岸線からオフセットしたライン生成 ---
+    def offset_coast_line(dist_m):
+        """coast_ptsの各点から沖方向にdist_mオフセットしたラインを生成"""
+        dist_px = dist_m / 0.25
+        pts = []
+        for i, (cx, cy) in enumerate(coast_pts):
+            # 各点での法線方向を求める（隣接点から接線→90度回転）
+            if i == 0:
+                dx, dy = coast_pts[1][0] - cx, coast_pts[1][1] - cy
+            elif i == len(coast_pts) - 1:
+                dx, dy = cx - coast_pts[-2][0], cy - coast_pts[-2][1]
+            else:
+                dx = coast_pts[i+1][0] - coast_pts[i-1][0]
+                dy = coast_pts[i+1][1] - coast_pts[i-1][1]
+            length = math.sqrt(dx*dx + dy*dy)
+            if length < 1:
+                pts.append((cx, cy + int(dist_px)))
+                continue
+            # 法線（沖方向 = 接線の右90度回転）
+            nx, ny = dy / length, -dx / length
+            # 沖方向判定: nyが正（下方向）ならOK、負なら反転
+            if ny < 0:
+                nx, ny = -nx, -ny
+            pts.append((int(cx + nx * dist_px), int(cy + ny * dist_px)))
+        return pts
+
+    # --- 2b. 距離目盛り線（50m / 100m / 150m）---
     draw_temp = ImageDraw.Draw(img_rgba)
     for dist_m, label in [(50, "50m"), (100, "100m"), (150, "150m")]:
-        dist_px = dist_m / 0.25  # メートル→ピクセル
-        # 護岸から dist_px ピクセル南の線を描く
-        line_pts = []
-        for t in [i / 40 for i in range(41)]:
-            lat = west_ep["lat"] + (east_ep["lat"] - west_ep["lat"]) * t
-            lng = west_ep["lng"] + (east_ep["lng"] - west_ep["lng"]) * t
-            bx, by = to_px(lat, lng)
-            line_pts.append((bx, by + int(dist_px)))
-        # 破線で描画（目立つように太く）
+        line_pts = offset_coast_line(dist_m)
+        # 破線で描画
         for i in range(0, len(line_pts) - 1, 2):
-            if 0 <= line_pts[i][1] < h:
-                # 黒アウトライン + 白い破線
-                draw_temp.line([line_pts[i], line_pts[min(i+1, len(line_pts)-1)]],
+            if 0 <= line_pts[i][1] < h and 0 <= line_pts[i+1 if i+1 < len(line_pts) else i][1] < h:
+                j = min(i+1, len(line_pts)-1)
+                draw_temp.line([line_pts[i], line_pts[j]],
                              fill=(0, 0, 0, 100), width=4)
-                draw_temp.line([line_pts[i], line_pts[min(i+1, len(line_pts)-1)]],
+                draw_temp.line([line_pts[i], line_pts[j]],
                              fill=(255, 255, 255, 200), width=2)
-        # ラベル（右寄りに配置して見やすく）
-        lx, ly = line_pts[-6]  # 右寄りに配置
+        # ラベル（右寄り）
+        label_idx = max(0, len(line_pts) - 6)
+        lx, ly = line_pts[label_idx]
         if 0 <= ly < h:
             dist_label = f"← {label} →"
             bbox_d = draw_temp.textbbox((0, 0), dist_label, font=font_medium)
@@ -452,21 +514,15 @@ def generate_combined_map(slug):
                           fill=(255, 255, 255), font=font_medium)
 
     # --- 2c. 捨て石帯ライン（護岸から18m）---
-    rip_rap_m = 18
-    rip_rap_px = rip_rap_m / 0.25
-    rip_rap_pts = []
-    for t in [i / 40 for i in range(41)]:
-        lat = west_ep["lat"] + (east_ep["lat"] - west_ep["lat"]) * t
-        lng = west_ep["lng"] + (east_ep["lng"] - west_ep["lng"]) * t
-        bx, by = to_px(lat, lng)
-        rip_rap_pts.append((bx, by + int(rip_rap_px)))
-    # オレンジの点線で描画
+    rip_rap_pts = offset_coast_line(18)
     for i in range(0, len(rip_rap_pts) - 1, 2):
+        j = min(i+1, len(rip_rap_pts)-1)
         if 0 <= rip_rap_pts[i][1] < h:
-            draw_temp.line([rip_rap_pts[i], rip_rap_pts[min(i+1, len(rip_rap_pts)-1)]],
+            draw_temp.line([rip_rap_pts[i], rip_rap_pts[j]],
                          fill=(255, 165, 0, 180), width=3)
     # ラベル
-    rr_lx, rr_ly = rip_rap_pts[len(rip_rap_pts) // 4]
+    rr_idx = len(rip_rap_pts) // 4
+    rr_lx, rr_ly = rip_rap_pts[rr_idx]
     if 0 <= rr_ly < h:
         rr_label = "捨て石帯 (18m) 根掛かり注意"
         bbox_rr = draw_temp.textbbox((0, 0), rr_label, font=font_small)
@@ -552,50 +608,7 @@ def generate_combined_map(slug):
         draw.text((px - tw // 2 + 14, py - th // 2 + 7), label,
                   fill=(200, 240, 255), font=font_depth)
 
-    # --- 5. ゾーン名ラベル ---
-    print("5. ゾーンラベル配置...")
-    zones = structure.get("zones", [])
-    for zone in zones:
-        x_range = zone.get("xRange", [0, 0])
-        x_mid = (x_range[0] + x_range[1]) / 2
-        # endpointsに沿った座標
-        zone_lat = west_ep["lat"] + (east_ep["lat"] - west_ep["lat"]) * x_mid
-        zone_lng = west_ep["lng"] + (east_ep["lng"] - west_ep["lng"]) * x_mid
-        px, py = to_px(zone_lat, zone_lng)
-        if 0 <= px < w:
-            zone_name = zone.get("name", "").replace("エリア", "")
-            rating = zone.get("rating", "normal")
-            if rating == "hot":
-                bg_color = (200, 30, 30, 230)
-                border_color = (255, 100, 100)
-                icon = "🔥"
-            elif rating == "good":
-                bg_color = (20, 70, 170, 230)
-                border_color = (100, 160, 255)
-                icon = "👍"
-            else:
-                bg_color = (60, 60, 60, 200)
-                border_color = (160, 160, 160)
-                icon = "◎"
-            text = zone_name
-            bbox_t = draw.textbbox((0, 0), text, font=font_medium)
-            tw = bbox_t[2] - bbox_t[0] + 30
-            th = bbox_t[3] - bbox_t[1] + 16
-            # 護岸の上（陸側）
-            label_y = py - 50
-            draw.rounded_rectangle(
-                [px - tw // 2, label_y - th // 2, px + tw // 2, label_y + th // 2],
-                radius=8,
-                fill=bg_color,
-                outline=border_color,
-                width=2,
-            )
-            draw.text((px - tw // 2 + 14, label_y - th // 2 + 6), text,
-                      fill=(255, 255, 255), font=font_medium)
-            # 下向き三角（護岸を指す）
-            tri_y = label_y + th // 2
-            draw.polygon([(px - 6, tri_y), (px + 6, tri_y), (px, tri_y + 10)],
-                         fill=bg_color)
+    # （ゾーン名ラベルは削除 — Leafletマップ側で表示するため不要）
 
     # --- 6. 凡例 ---
     print("6. 凡例...")
