@@ -349,29 +349,35 @@ def generate_combined_map(slug):
             min_d = min(min_d, d)
         return min_d
 
-    # 護岸の平均Y座標（これより下が海側）
-    coast_avg_y = sum(p[1] for p in coast_pts) / len(coast_pts)
+    # 護岸ラインのY座標をX座標ごとにルックアップテーブル化
+    # coast_pts はX昇順でない場合があるのでソート
+    sorted_coast = sorted(coast_pts, key=lambda p: p[0])
+    def coast_y_at_x(px_x):
+        """指定X座標での護岸のY座標を線形補間"""
+        if px_x <= sorted_coast[0][0]:
+            return sorted_coast[0][1]
+        if px_x >= sorted_coast[-1][0]:
+            return sorted_coast[-1][1]
+        for i in range(len(sorted_coast) - 1):
+            x1, y1 = sorted_coast[i]
+            x2, y2 = sorted_coast[i + 1]
+            if x1 <= px_x <= x2:
+                t = (px_x - x1) / (x2 - x1) if x2 != x1 else 0
+                return y1 + t * (y2 - y1)
+        return sorted_coast[-1][1]
 
     # ストライプ間隔 (px) — 4px刻みで高速化
     step = 4
     for py in range(0, h, step):
         for px_x in range(0, w, step):
-            # 護岸より上（陸側）はスキップ
-            if py < coast_avg_y - 30:
-                continue
-            # 航空写真で陸地判定
-            try:
-                r_val, g_val, b_val = img.getpixel((min(px_x, w-1), min(py, h-1)))[:3]
-            except:
-                continue
-            brightness = (r_val + g_val + b_val) / 3
-            # 明るすぎる = 陸地 or コンクリ
-            if brightness > 140:
+            # 護岸ラインより上（陸側）は完全スキップ
+            coast_y = coast_y_at_x(px_x)
+            if py < coast_y + 10:  # 護岸の少し下から描画開始
                 continue
 
             dist = coast_distance_px(px_x, py)
-            if dist < 5:
-                continue  # 護岸上はスキップ
+            if dist < 8:
+                continue  # 護岸直上はスキップ
 
             # 距離を実際のメートルに換算 (0.25m/px)
             dist_m = dist * 0.25
@@ -444,6 +450,34 @@ def generate_combined_map(slug):
                 outline=(100, 200, 255, 200), width=2)
             draw_temp.text((lx - dtw // 2 + 12, ly - dth // 2 + 5), dist_label,
                           fill=(255, 255, 255), font=font_medium)
+
+    # --- 2c. 捨て石帯ライン（護岸から18m）---
+    rip_rap_m = 18
+    rip_rap_px = rip_rap_m / 0.25
+    rip_rap_pts = []
+    for t in [i / 40 for i in range(41)]:
+        lat = west_ep["lat"] + (east_ep["lat"] - west_ep["lat"]) * t
+        lng = west_ep["lng"] + (east_ep["lng"] - west_ep["lng"]) * t
+        bx, by = to_px(lat, lng)
+        rip_rap_pts.append((bx, by + int(rip_rap_px)))
+    # オレンジの点線で描画
+    for i in range(0, len(rip_rap_pts) - 1, 2):
+        if 0 <= rip_rap_pts[i][1] < h:
+            draw_temp.line([rip_rap_pts[i], rip_rap_pts[min(i+1, len(rip_rap_pts)-1)]],
+                         fill=(255, 165, 0, 180), width=3)
+    # ラベル
+    rr_lx, rr_ly = rip_rap_pts[len(rip_rap_pts) // 4]
+    if 0 <= rr_ly < h:
+        rr_label = "捨て石帯 (18m) 根掛かり注意"
+        bbox_rr = draw_temp.textbbox((0, 0), rr_label, font=font_small)
+        rrw = bbox_rr[2] - bbox_rr[0] + 20
+        rrh = bbox_rr[3] - bbox_rr[1] + 10
+        draw_temp.rounded_rectangle(
+            [rr_lx - rrw // 2, rr_ly - rrh // 2, rr_lx + rrw // 2, rr_ly + rrh // 2],
+            radius=6, fill=(180, 80, 0, 220),
+            outline=(255, 200, 100, 200), width=2)
+        draw_temp.text((rr_lx - rrw // 2 + 10, rr_ly - rrh // 2 + 4), rr_label,
+                      fill=(255, 255, 200), font=font_small)
 
     # --- 3. 海岸線描画 ---
     print("3. 海岸線描画...")
@@ -566,17 +600,17 @@ def generate_combined_map(slug):
     # --- 6. 凡例 ---
     print("6. 凡例...")
     legend_x = 20
-    legend_y = h - 210
+    legend_y = h - 220
     # 半透明背景
     draw.rounded_rectangle(
-        [legend_x - 10, legend_y - 10, legend_x + 440, legend_y + 195],
+        [legend_x - 10, legend_y - 10, legend_x + 480, legend_y + 200],
         radius=12,
         fill=(0, 0, 0, 200),
     )
 
     items = [
         ((0, 230, 80), f"護岸（釣り座） {platform_m:.0f}m"),
-        ((255, 60, 40), f"テトラ帯 {tetrapod_m:.0f}m"),
+        ((255, 165, 0), "捨て石帯（〜18m）根掛かり注意"),
         ((80, 200, 240), "足元〜50m（ちょい投げ）"),
         ((20, 80, 220), "50m〜100m（投げ釣り）"),
         ((10, 30, 190), "100m〜（遠投）"),
