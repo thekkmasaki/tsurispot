@@ -139,7 +139,7 @@ export interface SpotMapAnalysis {
 // 座標変換ヘルパー
 // ---------------------------------------------------------------------------
 
-const ZONE_HALF_WIDTH = 0.0003; // 約33m
+const ZONE_HALF_WIDTH = 0.0009; // 約100m — ゾーンを視認可能な幅にする
 
 function makeConverters(data: SpotMapAnalysis) {
   const west = data.structureEndpoints?.west ?? { lat: data.coordinates.lat, lng: data.coordinates.lng - 0.003 };
@@ -251,8 +251,8 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
         const eLat = xToLat(x1);
         const eLng = xToLng(x1);
 
-        const landFactor = 0.3;
-        const seaFactor = 0.7;
+        const landFactor = 0.1;
+        const seaFactor = 0.9;
         const positions: [number, number][] = [
           [wLat + perpLat * landFactor, wLng + perpLng * landFactor],
           [eLat + perpLat * landFactor, eLng + perpLng * landFactor],
@@ -275,8 +275,8 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
     () =>
       data.facilities.map((fac) => {
         const x = fac.relativePosition;
-        const lat = xToLat(x) + ZONE_HALF_WIDTH + 0.00025;
-        const lng = xToLng(x);
+        const lat = xToLat(x) + perpLat * 0.2 + 0.0003;
+        const lng = xToLng(x) + perpLng * 0.2;
         return { fac, position: [lat, lng] as [number, number] };
       }),
     [data.facilities, xToLat, xToLng, perpLat, perpLng]
@@ -356,7 +356,6 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
   // ズームレベルに応じたラベル表示制御
   const showZoneNames = zoom >= 15;
   const showFishLabels = zoom >= 17;
-  const showDepthLabels = zoom >= 16;
   const showNearbySpots = zoom <= 14;
 
   return (
@@ -404,26 +403,48 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
                 weight: 3,
               }}
             >
-              {/* ゾーン名バッジ+釣法: zoom>=15で表示 */}
+              {/* ゾーン名バッジ+釣法+水深: zoom>=15で表示 */}
               {showZoneNames && (() => {
                 const method = zoneTopMethod.get(zone.id);
+                const depth = zone.estimatedDepth.shore === zone.estimatedDepth.offshore
+                  ? `${zone.estimatedDepth.shore}m`
+                  : `${zone.estimatedDepth.shore}-${zone.estimatedDepth.offshore}m`;
                 return (
                   <Tooltip direction="center" permanent className="zone-tooltip">
                     <div style={{
-                      display: "inline-flex",
+                      display: "flex",
+                      flexDirection: "column",
                       alignItems: "center",
-                      gap: "3px",
-                      background: style.color,
-                      color: "white",
-                      padding: "1px 6px",
-                      borderRadius: "8px",
-                      fontSize: "11px",
-                      fontWeight: 700,
-                      whiteSpace: "nowrap",
-                      boxShadow: "0 1px 4px rgba(0,0,0,0.25)",
-                      lineHeight: "1.4",
+                      gap: "1px",
+                      pointerEvents: "none",
                     }}>
-                      {style.emoji} {zone.name.replace("エリア", "")}{method ? ` ${method}` : ""}
+                      <div style={{
+                        display: "inline-flex",
+                        alignItems: "center",
+                        gap: "3px",
+                        background: style.color,
+                        color: "white",
+                        padding: "2px 8px",
+                        borderRadius: "8px",
+                        fontSize: "11px",
+                        fontWeight: 700,
+                        whiteSpace: "nowrap",
+                        boxShadow: "0 1px 4px rgba(0,0,0,0.25)",
+                        lineHeight: "1.3",
+                      }}>
+                        {style.emoji} {zone.name.replace("エリア", "")}{method ? ` ${method}` : ""}
+                      </div>
+                      <div style={{
+                        fontSize: "9px",
+                        fontWeight: 600,
+                        color: "#0369a1",
+                        background: "rgba(224,242,254,0.9)",
+                        padding: "0px 5px",
+                        borderRadius: "4px",
+                        whiteSpace: "nowrap",
+                      }}>
+                        水深{depth}
+                      </div>
                     </div>
                   </Tooltip>
                 );
@@ -476,31 +497,6 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
           );
         })}
 
-        {/* 水深ラベル: zoom>=16で海側に常時表示 */}
-        {showDepthLabels && zoneBounds.map(({ zone, center }) => {
-          const depthText = zone.estimatedDepth.shore === zone.estimatedDepth.offshore
-            ? `${zone.estimatedDepth.shore}m`
-            : `${zone.estimatedDepth.shore}-${zone.estimatedDepth.offshore}m`;
-          // 海側にオフセット（perpの反対方向）
-          const depthPos: [number, number] = [
-            center[0] - perpLat * 0.6,
-            center[1] - perpLng * 0.6,
-          ];
-          return (
-            <Marker
-              key={`depth-${zone.id}`}
-              position={depthPos}
-              interactive={false}
-              icon={L.divIcon({
-                className: "",
-                html: `<div style="white-space:nowrap;font-size:10px;font-weight:600;color:#0369a1;background:rgba(224,242,254,0.9);padding:1px 5px;border-radius:6px;pointer-events:none;text-align:center;border:1px solid rgba(3,105,161,0.3)">\u{1F30A} ${depthText}</div>`,
-                iconSize: [70, 18],
-                iconAnchor: [35, 9],
-              })}
-            />
-          );
-        })}
-
         {/* 魚種ラベル: zoom>=17で表示。全ゾーン同じ魚種ならhotのみ */}
         {showFishLabels && zoneBounds
           .filter(({ zone }) => !allFishSame || zone.rating === "hot")
@@ -513,8 +509,8 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
 
             const style = RATING_STYLE[zone.rating] || RATING_STYLE.normal;
             const fishLabelPos: [number, number] = [
-              center[0] - perpLat * 1.5,
-              center[1] - perpLng * 1.5,
+              center[0] - perpLat * 0.7,
+              center[1] - perpLng * 0.7,
             ];
 
             return (
