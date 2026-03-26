@@ -329,9 +329,21 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
     return markers;
   }, [data.spotFacilities, data.facilities, data.coordinates]);
 
+  // 全ゾーンで同じ魚種かチェック（同じなら個別ラベル不要）
+  const allZoneFishKeys = useMemo(() => {
+    return data.zones.map((z) =>
+      z.estimatedFish
+        .sort((a, b) => b.probability - a.probability)
+        .slice(0, 3)
+        .map((f) => f.name)
+        .join(",")
+    );
+  }, [data.zones]);
+  const allFishSame = allZoneFishKeys.length > 1 && allZoneFishKeys.every((k) => k === allZoneFishKeys[0]);
+
   // ズームレベルに応じたラベル表示制御
   const showZoneNames = zoom >= 15;
-  const showFishLabels = zoom >= 16;
+  const showFishLabels = zoom >= 17;
   const showNearbySpots = zoom <= 14;
 
   return (
@@ -379,23 +391,24 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
                 weight: 3,
               }}
             >
-              {/* ゾーン名+評価バッジ: zoom>=15で表示 */}
+              {/* ゾーン名バッジ: zoom>=15で表示 */}
               {showZoneNames && (
                 <Tooltip direction="center" permanent className="zone-tooltip">
                   <div style={{
                     display: "inline-flex",
                     alignItems: "center",
-                    gap: "4px",
+                    gap: "3px",
                     background: style.color,
                     color: "white",
-                    padding: "2px 8px",
-                    borderRadius: "10px",
-                    fontSize: "13px",
+                    padding: "1px 6px",
+                    borderRadius: "8px",
+                    fontSize: "11px",
                     fontWeight: 700,
                     whiteSpace: "nowrap",
-                    boxShadow: "0 2px 6px rgba(0,0,0,0.3)",
+                    boxShadow: "0 1px 4px rgba(0,0,0,0.25)",
+                    lineHeight: "1.4",
                   }}>
-                    {style.emoji} {zone.name}
+                    {style.emoji} {zone.name.replace("エリア", "")}
                   </div>
                 </Tooltip>
               )}
@@ -447,34 +460,36 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
           );
         })}
 
-        {/* 魚種ラベル: zoom>=16で全ゾーン表示 */}
-        {showFishLabels && zoneBounds.map(({ zone, center }) => {
-          const topFish = zone.estimatedFish
-            .sort((a, b) => b.probability - a.probability)
-            .slice(0, 3)
-            .map((f) => f.name);
-          if (topFish.length === 0) return null;
+        {/* 魚種ラベル: zoom>=17で表示。全ゾーン同じ魚種ならhotのみ */}
+        {showFishLabels && zoneBounds
+          .filter(({ zone }) => !allFishSame || zone.rating === "hot")
+          .map(({ zone, center }) => {
+            const topFish = zone.estimatedFish
+              .sort((a, b) => b.probability - a.probability)
+              .slice(0, 3)
+              .map((f) => f.name);
+            if (topFish.length === 0) return null;
 
-          const style = RATING_STYLE[zone.rating] || RATING_STYLE.normal;
-          const fishLabelPos: [number, number] = [
-            center[0] - perpLat * 1.5,
-            center[1] - perpLng * 1.5,
-          ];
+            const style = RATING_STYLE[zone.rating] || RATING_STYLE.normal;
+            const fishLabelPos: [number, number] = [
+              center[0] - perpLat * 1.5,
+              center[1] - perpLng * 1.5,
+            ];
 
-          return (
-            <Marker
-              key={`fish-${zone.id}`}
-              position={fishLabelPos}
-              interactive={false}
-              icon={L.divIcon({
-                className: "",
-                html: `<div style="white-space:nowrap;font-size:11px;font-weight:600;color:#1e3a5f;background:rgba(255,255,255,0.95);padding:3px 10px;border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.15);pointer-events:none;text-align:center;border:2px solid ${style.borderColor}">\uD83D\uDC1F ${topFish.join("\u30FB")}</div>`,
-                iconSize: [200, 24],
-                iconAnchor: [100, 12],
-              })}
-            />
-          );
-        })}
+            return (
+              <Marker
+                key={`fish-${zone.id}`}
+                position={fishLabelPos}
+                interactive={false}
+                icon={L.divIcon({
+                  className: "",
+                  html: `<div style="white-space:nowrap;font-size:10px;font-weight:600;color:#1e3a5f;background:rgba(255,255,255,0.92);padding:2px 8px;border-radius:10px;box-shadow:0 1px 4px rgba(0,0,0,0.12);pointer-events:none;text-align:center;border:1.5px solid ${style.borderColor}">\uD83D\uDC1F ${topFish.join("\u30FB")}</div>`,
+                  iconSize: [180, 22],
+                  iconAnchor: [90, 11],
+                })}
+              />
+            );
+          })}
 
         {/* 施設マーカー（analysis JSONからの既存分） */}
         {facilityMarkers.map(({ fac, position }) => (
