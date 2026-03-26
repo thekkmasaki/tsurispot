@@ -4,11 +4,56 @@ import type { SpotAnalysisResult } from "@/lib/patent/types";
 import type { SpotMapAnalysis } from "./spot-leaflet-map";
 import React, { useState, useEffect, useRef } from "react";
 
-interface LeafletMapSectionProps {
-  analysisResult: SpotAnalysisResult;
+interface SpotBasicInfo {
+  name: string;
+  address: string;
+  spotType: string;
+  isFree: boolean;
+  feeDetail?: string;
+  managementInfo?: {
+    organizationName: string;
+    contactPhone?: string;
+    openingHours?: string;
+    closedDays?: string;
+    fishingFee?: string;
+  };
 }
 
-function toMapData(r: SpotAnalysisResult): SpotMapAnalysis {
+interface SpotFacilitiesInfo {
+  hasParking: boolean;
+  parkingDetail?: string;
+  parkingGuide?: { parkingLatitude?: number; parkingLongitude?: number };
+  hasToilet: boolean;
+  hasConvenienceStore: boolean;
+  hasFishingShop: boolean;
+  hasRentalRod: boolean;
+  rentalDetail?: string;
+}
+
+interface NearbySpotData {
+  slug: string;
+  name: string;
+  latitude: number;
+  longitude: number;
+  spotType: string;
+  distanceKm: number;
+}
+
+interface LeafletMapSectionProps {
+  analysisResult: SpotAnalysisResult;
+  spot?: SpotBasicInfo;
+  spotFacilities?: SpotFacilitiesInfo;
+  restrictedAreas?: string[];
+  nearbySpots?: NearbySpotData[];
+}
+
+function toMapData(
+  r: SpotAnalysisResult,
+  spot?: SpotBasicInfo,
+  spotFacilities?: SpotFacilitiesInfo,
+  restrictedAreas?: string[],
+  nearbySpots?: NearbySpotData[],
+): SpotMapAnalysis {
   return {
     coordinates: r.coordinates,
     zones: r.zones.map((z) => ({
@@ -39,10 +84,14 @@ function toMapData(r: SpotAnalysisResult): SpotMapAnalysis {
     seaLabel: r.seaLabel,
     structureEndpoints: r.structureEndpoints,
     detectedTetrapods: r.detectedTetrapods,
+    spotInfo: spot,
+    spotFacilities,
+    restrictedAreas,
+    nearbySpots,
   };
 }
 
-export function LeafletMapSection({ analysisResult }: LeafletMapSectionProps) {
+export function LeafletMapSection({ analysisResult, spot, spotFacilities, restrictedAreas, nearbySpots }: LeafletMapSectionProps) {
   const [MapComp, setMapComp] = useState<React.ComponentType<{ data: SpotMapAnalysis }> | null>(null);
   const [error, setError] = useState<string | null>(null);
   const loaded = useRef(false);
@@ -90,7 +139,7 @@ export function LeafletMapSection({ analysisResult }: LeafletMapSectionProps) {
     <div className="mt-6">
       <h3 className="mb-3 text-lg font-bold">AI解析 釣りマップ</h3>
       <ErrorCatcher onError={(msg) => setError(msg)}>
-        <MapComp data={toMapData(analysisResult)} />
+        <MapComp data={toMapData(analysisResult, spot, spotFacilities, restrictedAreas, nearbySpots)} />
       </ErrorCatcher>
     </div>
   );
