@@ -608,30 +608,75 @@ def generate_combined_map(slug):
             draw_temp.text((lx - dtw // 2 + 8, ly - dth // 2 + 3), label,
                           fill=(255, 255, 255), font=font_small)
 
-    # --- 3. 構造物描画（テトラ帯: 海岸線の先に描画、緑ラインの下に来る）---
-    print("3. 捨て石・テトラ帯描画...")
+    # --- 3. 構造物検出（航空写真からテトラポッドを個別検出）---
+    print("3. テトラポッド検出（航空写真解析）...")
     rip_rap_px = int(18 / 0.25)  # 72px = 18m
-    coast_offset = 14  # 護岸線の下(3.5m)
+    orig_pix = img.load()  # 元の航空写真ピクセル（オーバーレイなし）
 
-    struct_overlay = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-    struct_pixels = struct_overlay.load()
-    for px_x in range(w):
+    # グリッドベース: 8px(2m)セルで明るいピクセルを抽出
+    cell_size = 8
+    best_in_cell = {}
+    for px_x in range(0, w):
         cy = int(coast_y_at_x(px_x))
-        y_start = cy + coast_offset
-        y_end = min(cy + coast_offset + rip_rap_px, h)
-        for py in range(max(0, y_start), y_end):
-            if (px_x + py) % 16 < 10:
-                struct_pixels[px_x, py] = (255, 140, 20, 140)
-            else:
-                struct_pixels[px_x, py] = (255, 160, 40, 80)
-        for lw in range(3):
-            if 0 <= y_start + lw < h:
-                struct_pixels[px_x, y_start + lw] = (255, 120, 0, 230)
-            if 0 <= y_end - 1 - lw < h:
-                struct_pixels[px_x, y_end - 1 - lw] = (255, 100, 0, 200)
-    struct_overlay = struct_overlay.filter(ImageFilter.GaussianBlur(radius=1))
+        y_start = max(0, cy + 6)
+        y_end = min(h - 1, cy + rip_rap_px + 6)
+        for py in range(y_start, y_end):
+            r, g, b = orig_pix[px_x, py][:3]
+            brt = (r + g + b) / 3
+            # 水の青っぽさをチェック: テトラはグレー、水は青い
+            blue_ratio = b / max(r + g + b, 1)
+            # テトラ候補: 水より明るく(>50)、青すぎない(<0.38)
+            if brt < 50 or blue_ratio > 0.38:
+                continue
+            gx, gy = px_x // cell_size, py // cell_size
+            if (gx, gy) not in best_in_cell or brt > best_in_cell[(gx, gy)][0]:
+                best_in_cell[(gx, gy)] = (brt, px_x, py)
+
+    # 周囲セルより明るいセル = テトラポッド候補
+    tetrapod_markers = []
+    for (gx, gy), (brt, x, y) in best_in_cell.items():
+        neighbor_brts = []
+        for dx in range(-2, 3):
+            for dy in range(-2, 3):
+                if dx == 0 and dy == 0:
+                    continue
+                key = (gx + dx, gy + dy)
+                if key in best_in_cell:
+                    neighbor_brts.append(best_in_cell[key][0])
+        if neighbor_brts:
+            avg_n = sum(neighbor_brts) / len(neighbor_brts)
+            if brt > 55 and brt > avg_n + 8:
+                tetrapod_markers.append((x, y, brt))
+        elif brt > 70:
+            tetrapod_markers.append((x, y, brt))
+
+    print(f"   検出テトラ: {len(tetrapod_markers)}個")
+
+    # テトラポッドを個別マーカーで描画
+    struct_overlay = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    struct_draw = ImageDraw.Draw(struct_overlay)
+    for tx, ty, brt in tetrapod_markers:
+        r = 6
+        # 明るさに応じてマーカーの色を調整
+        alpha = min(220, int(120 + brt))
+        struct_draw.ellipse(
+            [tx - r, ty - r, tx + r, ty + r],
+            fill=(255, 160, 30, alpha),
+            outline=(255, 255, 255, 230), width=2
+        )
+
+    # テトラ帯の範囲を薄い破線で表示（18mライン）
+    for px_x in range(0, w, 8):
+        cy = int(coast_y_at_x(px_x))
+        y_bottom = cy + 6 + rip_rap_px
+        if 0 <= y_bottom < h and px_x % 16 < 10:
+            struct_draw.line(
+                [(px_x, y_bottom), (min(px_x + 8, w - 1), y_bottom)],
+                fill=(255, 140, 0, 140), width=2
+            )
+
     img_rgba = Image.alpha_composite(img_rgba, struct_overlay)
-    print(f"   捨て石・テトラ帯: 護岸全域（18m幅）")
+    print(f"   テトラマーカー描画完了")
 
     # --- 4. 海岸線描画（緑ライン: テトラ帯の上に描画）---
     print("4. 海岸線描画...")
@@ -737,7 +782,7 @@ def generate_combined_map(slug):
         radius=12, fill=(0, 0, 0, 200))
     items = [
         ((0, 230, 80), f"護岸（釣り座） {platform_m:.0f}m"),
-        ((255, 160, 40), "捨て石・テトラ帯（〜18m）根掛かり注意"),
+        ((255, 160, 30), f"テトラポッド（検出{len(tetrapod_markers)}個）"),
     ]
     for i, (color, label) in enumerate(items):
         y = legend_y + i * 36
