@@ -460,80 +460,46 @@ def generate_combined_map(slug):
     img_rgba = img.convert("RGBA")
     img_rgba = Image.alpha_composite(img_rgba, overlay)
 
-    # --- ヘルパー: 海岸線からオフセットしたライン生成 ---
-    def offset_coast_line(dist_m):
-        """coast_ptsの各点から沖方向にdist_mオフセットしたラインを生成"""
+    # --- ヘルパー: structureEndpointsから沖方向にオフセットしたライン ---
+    def ep_offset_line(dist_m, num_pts=41):
+        """structureEndpointsの直線から沖方向にdist_mオフセット"""
         dist_px = dist_m / 0.25
         pts = []
-        for i, (cx, cy) in enumerate(coast_pts):
-            # 各点での法線方向を求める（隣接点から接線→90度回転）
-            if i == 0:
-                dx, dy = coast_pts[1][0] - cx, coast_pts[1][1] - cy
-            elif i == len(coast_pts) - 1:
-                dx, dy = cx - coast_pts[-2][0], cy - coast_pts[-2][1]
-            else:
-                dx = coast_pts[i+1][0] - coast_pts[i-1][0]
-                dy = coast_pts[i+1][1] - coast_pts[i-1][1]
-            length = math.sqrt(dx*dx + dy*dy)
-            if length < 1:
-                pts.append((cx, cy + int(dist_px)))
-                continue
-            # 法線（沖方向 = 接線の右90度回転）
-            nx, ny = dy / length, -dx / length
-            # 沖方向判定: nyが正（下方向）ならOK、負なら反転
-            if ny < 0:
-                nx, ny = -nx, -ny
-            pts.append((int(cx + nx * dist_px), int(cy + ny * dist_px)))
+        for i in range(num_pts):
+            t = i / (num_pts - 1)
+            lat = west_ep["lat"] + (east_ep["lat"] - west_ep["lat"]) * t
+            lng = west_ep["lng"] + (east_ep["lng"] - west_ep["lng"]) * t
+            bx, by = to_px(lat, lng)
+            pts.append((bx, by + int(dist_px)))
         return pts
 
-    # --- 2b. 距離目盛り線（50m / 100m / 150m）---
+    # --- 2b. 距離目盛り線（捨て石18m / 50m / 100m）---
     draw_temp = ImageDraw.Draw(img_rgba)
-    for dist_m, label in [(50, "50m"), (100, "100m"), (150, "150m")]:
-        line_pts = offset_coast_line(dist_m)
+    dist_lines = [
+        (18, "捨て石 18m（根掛かり注意）", (255, 165, 0, 200), 3),
+        (50, "50m", (255, 255, 255, 180), 2),
+        (100, "100m", (255, 255, 255, 140), 2),
+    ]
+    for dist_m, label, color, lw in dist_lines:
+        line_pts = ep_offset_line(dist_m)
         # 破線で描画
         for i in range(0, len(line_pts) - 1, 2):
-            if 0 <= line_pts[i][1] < h and 0 <= line_pts[i+1 if i+1 < len(line_pts) else i][1] < h:
-                j = min(i+1, len(line_pts)-1)
-                draw_temp.line([line_pts[i], line_pts[j]],
-                             fill=(0, 0, 0, 100), width=4)
-                draw_temp.line([line_pts[i], line_pts[j]],
-                             fill=(255, 255, 255, 200), width=2)
-        # ラベル（右寄り）
-        label_idx = max(0, len(line_pts) - 6)
-        lx, ly = line_pts[label_idx]
+            j = min(i+1, len(line_pts)-1)
+            if 0 <= line_pts[i][1] < h and 0 <= line_pts[j][1] < h:
+                draw_temp.line([line_pts[i], line_pts[j]], fill=color, width=lw)
+        # ラベル
+        li = len(line_pts) * 3 // 4  # 3/4地点
+        lx, ly = line_pts[li]
         if 0 <= ly < h:
-            dist_label = f"← {label} →"
-            bbox_d = draw_temp.textbbox((0, 0), dist_label, font=font_medium)
-            dtw = bbox_d[2] - bbox_d[0] + 24
-            dth = bbox_d[3] - bbox_d[1] + 12
+            bbox_d = draw_temp.textbbox((0, 0), label, font=font_small)
+            dtw = bbox_d[2] - bbox_d[0] + 16
+            dth = bbox_d[3] - bbox_d[1] + 8
+            bg = (0, 60, 130, 200) if dist_m > 18 else (150, 70, 0, 220)
             draw_temp.rounded_rectangle(
                 [lx - dtw // 2, ly - dth // 2, lx + dtw // 2, ly + dth // 2],
-                radius=8, fill=(0, 60, 130, 220),
-                outline=(100, 200, 255, 200), width=2)
-            draw_temp.text((lx - dtw // 2 + 12, ly - dth // 2 + 5), dist_label,
-                          fill=(255, 255, 255), font=font_medium)
-
-    # --- 2c. 捨て石帯ライン（護岸から18m）---
-    rip_rap_pts = offset_coast_line(18)
-    for i in range(0, len(rip_rap_pts) - 1, 2):
-        j = min(i+1, len(rip_rap_pts)-1)
-        if 0 <= rip_rap_pts[i][1] < h:
-            draw_temp.line([rip_rap_pts[i], rip_rap_pts[j]],
-                         fill=(255, 165, 0, 180), width=3)
-    # ラベル
-    rr_idx = len(rip_rap_pts) // 4
-    rr_lx, rr_ly = rip_rap_pts[rr_idx]
-    if 0 <= rr_ly < h:
-        rr_label = "捨て石帯 (18m) 根掛かり注意"
-        bbox_rr = draw_temp.textbbox((0, 0), rr_label, font=font_small)
-        rrw = bbox_rr[2] - bbox_rr[0] + 20
-        rrh = bbox_rr[3] - bbox_rr[1] + 10
-        draw_temp.rounded_rectangle(
-            [rr_lx - rrw // 2, rr_ly - rrh // 2, rr_lx + rrw // 2, rr_ly + rrh // 2],
-            radius=6, fill=(180, 80, 0, 220),
-            outline=(255, 200, 100, 200), width=2)
-        draw_temp.text((rr_lx - rrw // 2 + 10, rr_ly - rrh // 2 + 4), rr_label,
-                      fill=(255, 255, 200), font=font_small)
+                radius=6, fill=bg)
+            draw_temp.text((lx - dtw // 2 + 8, ly - dth // 2 + 3), label,
+                          fill=(255, 255, 255), font=font_small)
 
     # --- 3. 海岸線描画 ---
     print("3. 海岸線描画...")
@@ -559,74 +525,134 @@ def generate_combined_map(slug):
                 draw.line([(px1, py1), (px2, py2)], fill=(255, 60, 40), width=5)
                 tetrapod_m += seg["dist"]
 
-    # --- 4. 水深ラベル ---
-    print("4. 水深ラベル配置...")
+    # --- 4. 構造物描画 ---
+    print("4. 構造物描画...")
+    detected = structure.get("detectedStructures", [])
+    # 構造物のbboxは解析画像(1535x885相当)基準 → structureEndpointsで地理座標に変換
+    # relativePositionとdistanceFromShoreを使って位置を推定
+    STRUCT_COLORS = {
+        "tetrapod": (255, 140, 0, 160),   # オレンジ
+        "pier": (200, 200, 50, 160),       # 黄
+        "seawall": (100, 200, 100, 140),   # 薄緑
+        "port-facility": (150, 150, 200, 100),  # 薄紫
+    }
+    STRUCT_LABELS = {
+        "tetrapod": "テトラ",
+        "pier": "桟橋",
+        "seawall": "護岸",
+        "port-facility": "港湾施設",
+    }
+    struct_overlay = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    struct_draw = ImageDraw.Draw(struct_overlay)
+    struct_count = {"tetrapod": 0, "pier": 0}
+    for det in detected:
+        cat = det["category"]
+        if cat not in ("tetrapod", "pier"):
+            continue
+        dist_shore = det.get("distanceFromShore", "onshore")
+        if dist_shore == "onshore":
+            continue  # 陸上はスキップ
+        rel_pos = det["relativePosition"]
+        color = STRUCT_COLORS.get(cat, (180, 180, 180, 120))
+        # 位置をstructureEndpointsで計算
+        s_lat = west_ep["lat"] + (east_ep["lat"] - west_ep["lat"]) * rel_pos
+        s_lng = west_ep["lng"] + (east_ep["lng"] - west_ep["lng"]) * rel_pos
+        sx, sy = to_px(s_lat, s_lng)
+        # "near"は護岸のすぐ沖 → 護岸から15m(60px)下
+        sy += 60
+        # 小さな丸マーカー（固定サイズ）
+        radius = 12
+        struct_draw.ellipse(
+            [sx - radius, sy - radius, sx + radius, sy + radius],
+            fill=color, outline=(255, 255, 255, 180), width=2)
+        struct_count[cat] = struct_count.get(cat, 0) + 1
+    img_rgba = Image.alpha_composite(img_rgba, struct_overlay)
+    draw = ImageDraw.Draw(img_rgba)
+    print(f"   テトラ: {struct_count.get('tetrapod', 0)}個, 桟橋: {struct_count.get('pier', 0)}個")
 
-    # ゾーン毎に護岸沖30m地点の推定水深をラベル表示
-    # GEBCOはこの距離では精度不足なので、ゾーンJSONの estimatedDepth を使う
-    label_points = []
-    for zone in zones:
+    # --- 5. 水深表示（直感的: 少数の代表ラベル + カラーバー）---
+    print("5. 水深ラベル配置...")
+
+    # 代表3点のみ: 西端・中央・東端の足元水深
+    representative_zones = [
+        zones[0],   # 西端
+        zones[3],   # 中央
+        zones[6],   # 東端
+    ] if len(zones) >= 7 else zones[:3]
+    for zone in representative_zones:
         x_mid = (zone["xRange"][0] + zone["xRange"][1]) / 2
-        lat = west_ep["lat"] + (east_ep["lat"] - west_ep["lat"]) * x_mid
-        lng = west_ep["lng"] + (east_ep["lng"] - west_ep["lng"]) * x_mid
-        shore_d = zone.get("estimatedDepth", {}).get("shore", None)
-        offshore_d = zone.get("estimatedDepth", {}).get("offshore", None)
-        if shore_d is not None:
-            # 護岸から沖30m ≒ 0.00027度
-            label_points.append((f"{shore_d}m", lat - 0.00027, lng, shore_d))
-        if offshore_d is not None:
-            # 護岸から沖80m ≒ 0.00072度
-            label_points.append((f"{offshore_d}m", lat - 0.00072, lng, offshore_d))
+        lat_z = west_ep["lat"] + (east_ep["lat"] - west_ep["lat"]) * x_mid
+        lng_z = west_ep["lng"] + (east_ep["lng"] - west_ep["lng"]) * x_mid
+        shore_d = zone.get("estimatedDepth", {}).get("shore", 5)
+        offshore_d = zone.get("estimatedDepth", {}).get("offshore", 8)
+        # 足元ラベル（護岸から15m沖）
+        px_s, py_s = to_px(lat_z, lng_z)
+        py_s += 60  # 護岸の少し沖
+        if 0 <= px_s < w and 0 <= py_s < h:
+            label = f"足元 {shore_d}m"
+            bbox_t = draw.textbbox((0, 0), label, font=font_depth)
+            tw = bbox_t[2] - bbox_t[0] + 24
+            th = bbox_t[3] - bbox_t[1] + 14
+            draw.rounded_rectangle(
+                [px_s - tw // 2, py_s - th // 2, px_s + tw // 2, py_s + th // 2],
+                radius=th // 2, fill=(0, 80, 160, 230),
+                outline=(120, 210, 255, 220), width=2)
+            draw.text((px_s - tw // 2 + 12, py_s - th // 2 + 5), label,
+                      fill=(220, 245, 255), font=font_depth)
+        # 沖ラベル（護岸から80m沖）
+        py_o = py_s + int(65 / 0.25)  # 65m先
+        if 0 <= px_s < w and 0 <= py_o < h:
+            label = f"沖 {offshore_d}m"
+            bbox_t = draw.textbbox((0, 0), label, font=font_depth)
+            tw = bbox_t[2] - bbox_t[0] + 24
+            th = bbox_t[3] - bbox_t[1] + 14
+            draw.rounded_rectangle(
+                [px_s - tw // 2, py_o - th // 2, px_s + tw // 2, py_o + th // 2],
+                radius=th // 2, fill=(0, 40, 100, 230),
+                outline=(80, 160, 220, 220), width=2)
+            draw.text((px_s - tw // 2 + 12, py_o - th // 2 + 5), label,
+                      fill=(180, 220, 255), font=font_depth)
 
-    seen_positions = []
-    for label_text, lat, lng, depth_val in label_points:
-        px, py = to_px(lat, lng)
-        if not (0 <= px < w and 0 <= py < h):
-            continue
-        # 近すぎるラベルは間引く（間隔を広めに）
-        too_close = False
-        for sx, sy in seen_positions:
-            if abs(px - sx) < 180 and abs(py - sy) < 80:
-                too_close = True
-                break
-        if too_close:
-            continue
-        seen_positions.append((px, py))
-
-        label = f"{depth_val}m"
-        bbox_t = draw.textbbox((0, 0), label, font=font_depth)
-        tw = bbox_t[2] - bbox_t[0] + 30
-        th = bbox_t[3] - bbox_t[1] + 18
-        # 丸みのある水深バッジ
-        draw.rounded_rectangle(
-            [px - tw // 2, py - th // 2, px + tw // 2, py + th // 2],
-            radius=th // 2,
-            fill=(0, 50, 120, 230),
-            outline=(100, 200, 255, 220),
-            width=3,
-        )
-        draw.text((px - tw // 2 + 14, py - th // 2 + 7), label,
-                  fill=(200, 240, 255), font=font_depth)
-
-    # （ゾーン名ラベルは削除 — Leafletマップ側で表示するため不要）
-
-    # --- 6. 凡例 ---
-    print("6. 凡例...")
-    legend_x = 20
-    legend_y = h - 220
-    # 半透明背景
+    # --- 6. カラーバー（右端に縦型）---
+    print("6. カラーバー＋凡例...")
+    bar_x = w - 80
+    bar_y_start = 80
+    bar_height = 300
+    bar_width = 30
+    # 背景
     draw.rounded_rectangle(
-        [legend_x - 10, legend_y - 10, legend_x + 480, legend_y + 200],
-        radius=12,
-        fill=(0, 0, 0, 200),
-    )
+        [bar_x - 15, bar_y_start - 30, bar_x + bar_width + 60, bar_y_start + bar_height + 40],
+        radius=10, fill=(0, 0, 0, 200))
+    draw.text((bar_x - 5, bar_y_start - 25), "水深", fill=(255, 255, 255), font=font_small)
+    # グラデーションバー
+    for i in range(bar_height):
+        t = i / bar_height  # 0=浅い, 1=深い
+        r_c = int(80 * (1 - t))
+        g_c = int(200 - 170 * t)
+        b_c = int(240 - 50 * t)
+        draw.line([(bar_x, bar_y_start + i), (bar_x + bar_width, bar_y_start + i)],
+                  fill=(r_c, g_c, b_c))
+    # 目盛り
+    depth_min = min(z.get("estimatedDepth", {}).get("shore", 5) for z in zones)
+    depth_max = max(z.get("estimatedDepth", {}).get("offshore", 10) for z in zones)
+    for depth_val in [depth_min, (depth_min + depth_max) / 2, depth_max]:
+        t = (depth_val - depth_min) / (depth_max - depth_min) if depth_max > depth_min else 0
+        y_pos = bar_y_start + int(t * bar_height)
+        draw.line([(bar_x + bar_width, y_pos), (bar_x + bar_width + 8, y_pos)],
+                  fill=(255, 255, 255), width=2)
+        draw.text((bar_x + bar_width + 10, y_pos - 8), f"{depth_val:.0f}m",
+                  fill=(255, 255, 255), font=font_small)
 
+    # --- 7. 凡例（左下、コンパクト）---
+    legend_x = 20
+    legend_y = h - 140
+    draw.rounded_rectangle(
+        [legend_x - 10, legend_y - 10, legend_x + 380, legend_y + 125],
+        radius=12, fill=(0, 0, 0, 200))
     items = [
         ((0, 230, 80), f"護岸（釣り座） {platform_m:.0f}m"),
-        ((255, 165, 0), "捨て石帯（〜18m）根掛かり注意"),
-        ((80, 200, 240), "足元〜50m（ちょい投げ）"),
-        ((20, 80, 220), "50m〜100m（投げ釣り）"),
-        ((10, 30, 190), "100m〜（遠投）"),
+        ((255, 165, 0), "捨て石帯（〜18m）"),
+        ((255, 140, 0), "テトラポッド（海中）"),
     ]
     for i, (color, label) in enumerate(items):
         y = legend_y + i * 36
@@ -635,29 +661,19 @@ def generate_combined_map(slug):
         draw.text((legend_x + 38, y + 2), label,
                   fill=(255, 255, 255), font=font_small)
 
-    # タイトル
-    # slug→日本語名のマッピング（nameフィールドがない場合）
+    # --- タイトル ---
     SLUG_NAMES = {
         "hiraiso-fishing-park": "平磯海づり公園",
     }
     title = structure.get("name") or SLUG_NAMES.get(slug, slug)
-    title_text = f"{title} 水深マップ"
+    title_text = f"{title} 水深・構造物マップ"
     bbox_t = draw.textbbox((0, 0), title_text, font=font_large)
     ttw = bbox_t[2] - bbox_t[0] + 40
     draw.rounded_rectangle(
         [w // 2 - ttw // 2, 8, w // 2 + ttw // 2, 50],
-        radius=10,
-        fill=(0, 0, 0, 220),
-        outline=(255, 255, 255, 100),
-    )
+        radius=10, fill=(0, 0, 0, 220), outline=(255, 255, 255, 100))
     draw.text((w // 2 - ttw // 2 + 20, 14), title_text,
               fill=(255, 255, 255), font=font_large)
-
-    # 公園ポリゴン境界
-    if park_polygon:
-        poly_px = [to_px(lat, lon) for lat, lon in park_polygon]
-        for i in range(len(poly_px) - 1):
-            draw.line([poly_px[i], poly_px[i + 1]], fill=(0, 200, 255), width=2)
 
     # --- 保存 ---
     output = img_rgba.convert("RGB")
