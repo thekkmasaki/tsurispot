@@ -234,6 +234,110 @@ def classify_coastline(coords, park_polygon):
     return segments
 
 
+def detect_coastline_from_image(img, hint_pts, scan_step=2):
+    """航空写真から海岸線を検出（海側から陸に向かうbottom-upスキャン）。
+
+    海側（暗い）→ 陸側（明るい）に向かってスキャンし、
+    最初に見つかる「暗→明」境界を海岸線とする。
+    影やコンクリートの誤検出を回避。
+    """
+    w, h = img.size
+    pix = img.load()
+
+    sorted_hints = sorted(hint_pts, key=lambda p: p[0])
+
+    def hint_y(x):
+        if not sorted_hints:
+            return h // 2
+        if x <= sorted_hints[0][0]:
+            return sorted_hints[0][1]
+        if x >= sorted_hints[-1][0]:
+            return sorted_hints[-1][1]
+        for i in range(len(sorted_hints) - 1):
+            x1, y1 = sorted_hints[i]
+            x2, y2 = sorted_hints[i + 1]
+            if x1 <= x <= x2:
+                t = (x - x1) / (x2 - x1) if x2 != x1 else 0
+                return y1 + t * (y2 - y1)
+        return sorted_hints[-1][1]
+
+    raw_detected = {}
+    win = 8  # 比較ウィンドウ
+
+    for col_x in range(0, w, scan_step):
+        hy = int(hint_y(col_x))
+        # 海側の開始点（ヒントの80px下 = 確実に海）
+        y_sea = min(h - win - 2, hy + 80)
+        # 陸側の終了点（ヒントの40px上 = 確実に陸）
+        y_land = max(win + 2, hy - 40)
+
+        if y_sea <= y_land:
+            continue
+
+        # 海側から陸に向かってスキャン（Y減少方向）
+        found = False
+        for y in range(y_sea, y_land, -1):
+            above_b = 0
+            for dy in range(win):
+                pixel = pix[col_x, max(0, y - dy - 1)]
+                above_b += sum(pixel[:3]) / 3
+            above_b /= win
+
+            below_b = 0
+            for dy in range(win):
+                pixel = pix[col_x, min(h - 1, y + dy + 1)]
+                below_b += sum(pixel[:3]) / 3
+            below_b /= win
+
+            # 厳格な境界条件:
+            # - 上(陸): 明るい (>115 = コンクリート)
+            # - 下(海): 暗い (<85 = 水面)
+            # - 差が大きい (>35)
+            if above_b < 115 or below_b > 85 or above_b - below_b < 35:
+                continue
+
+            # 持続的水面チェック: 15-30px下が全て暗い（影でなく本当の水面）
+            sustained = True
+            for check_dy in range(12, 30):
+                check_y = min(h - 1, y + check_dy)
+                check_b = sum(pix[col_x, check_y][:3]) / 3
+                if check_b > 105:
+                    sustained = False
+                    break
+            if sustained:
+                raw_detected[col_x] = y
+                found = True
+                break
+
+        if not found:
+            raw_detected[col_x] = hy
+
+    # 外れ値除去（中央値フィルタ）
+    xs = sorted(raw_detected.keys())
+    median_filtered = {}
+    for x in xs:
+        neighbors = sorted([raw_detected[nx] for nx in xs if abs(nx - x) <= 40])
+        if len(neighbors) >= 3:
+            median_val = neighbors[len(neighbors) // 2]
+            if abs(raw_detected[x] - median_val) < 25:
+                median_filtered[x] = raw_detected[x]
+            else:
+                median_filtered[x] = median_val
+        else:
+            median_filtered[x] = raw_detected[x]
+
+    # 移動平均で平滑化
+    xs2 = sorted(median_filtered.keys())
+    smoothed = {}
+    radius_s = 40  # 80px ≈ 20m
+    for x in xs2:
+        neighbors = [median_filtered[nx] for nx in xs2 if abs(nx - x) <= radius_s]
+        if neighbors:
+            smoothed[x] = int(sum(neighbors) / len(neighbors))
+
+    return smoothed
+
+
 # --- メイン描画 ---
 def generate_combined_map(slug):
     # 構造JSON
@@ -363,32 +467,35 @@ def generate_combined_map(slug):
             min_d = min(min_d, d)
         return min_d
 
-    # 護岸ラインのY座標をピクセル幅のルックアップテーブルに変換
-    # 各X座標での最小Y値（最も陸寄り）をマッピング
-    coast_y_lut = {}
-    for cx, cy in coast_pts:
-        bx = cx // 2 * 2  # 2px単位のバケット
-        if bx not in coast_y_lut or cy < coast_y_lut[bx]:
-            coast_y_lut[bx] = cy
+    # 航空写真から高精度海岸線を検出（bottom-upスキャン）
+    print("   航空写真から海岸線を検出中（bottom-up）...")
+    detected_coast = detect_coastline_from_image(img, coast_pts)
+    print(f"   検出ポイント: {len(detected_coast)}")
 
-    sorted_coast = sorted(coast_pts, key=lambda p: p[0])
+    coast_y_lut = detected_coast
+    detected_xs = sorted(detected_coast.keys()) if detected_coast else []
+
     def coast_y_at_x(px_x):
-        """指定X座標での護岸のY座標（LUT→線形補間フォールバック）"""
+        """指定X座標での護岸Y（航空写真検出ベース）"""
         bx = px_x // 2 * 2
         if bx in coast_y_lut:
             return coast_y_lut[bx]
-        # LUTにない場合はソート済みリストから線形補間
-        if px_x <= sorted_coast[0][0]:
-            return sorted_coast[0][1]
-        if px_x >= sorted_coast[-1][0]:
-            return sorted_coast[-1][1]
-        for i in range(len(sorted_coast) - 1):
-            x1, y1 = sorted_coast[i]
-            x2, y2 = sorted_coast[i + 1]
-            if x1 <= px_x <= x2:
-                t = (px_x - x1) / (x2 - x1) if x2 != x1 else 0
-                return y1 + t * (y2 - y1)
-        return sorted_coast[-1][1]
+        if not detected_xs:
+            return coast_pts[0][1] if coast_pts else h // 2
+        if px_x <= detected_xs[0]:
+            return coast_y_lut[detected_xs[0]]
+        if px_x >= detected_xs[-1]:
+            return coast_y_lut[detected_xs[-1]]
+        lo, hi = 0, len(detected_xs) - 1
+        while lo < hi - 1:
+            mid = (lo + hi) // 2
+            if detected_xs[mid] <= px_x:
+                lo = mid
+            else:
+                hi = mid
+        x1, x2 = detected_xs[lo], detected_xs[hi]
+        t = (px_x - x1) / (x2 - x1) if x2 != x1 else 0
+        return coast_y_lut[x1] + t * (coast_y_lut[x2] - coast_y_lut[x1])
 
     # ストライプ間隔 (px) — 4px刻みで高速化
     step = 4
@@ -501,8 +608,33 @@ def generate_combined_map(slug):
             draw_temp.text((lx - dtw // 2 + 8, ly - dth // 2 + 3), label,
                           fill=(255, 255, 255), font=font_small)
 
-    # --- 3. 海岸線描画 ---
-    print("3. 海岸線描画...")
+    # --- 3. 構造物描画（テトラ帯: 海岸線の先に描画、緑ラインの下に来る）---
+    print("3. 捨て石・テトラ帯描画...")
+    rip_rap_px = int(18 / 0.25)  # 72px = 18m
+    coast_offset = 14  # 護岸線の下(3.5m)
+
+    struct_overlay = Image.new("RGBA", (w, h), (0, 0, 0, 0))
+    struct_pixels = struct_overlay.load()
+    for px_x in range(w):
+        cy = int(coast_y_at_x(px_x))
+        y_start = cy + coast_offset
+        y_end = min(cy + coast_offset + rip_rap_px, h)
+        for py in range(max(0, y_start), y_end):
+            if (px_x + py) % 16 < 10:
+                struct_pixels[px_x, py] = (255, 140, 20, 140)
+            else:
+                struct_pixels[px_x, py] = (255, 160, 40, 80)
+        for lw in range(3):
+            if 0 <= y_start + lw < h:
+                struct_pixels[px_x, y_start + lw] = (255, 120, 0, 230)
+            if 0 <= y_end - 1 - lw < h:
+                struct_pixels[px_x, y_end - 1 - lw] = (255, 100, 0, 200)
+    struct_overlay = struct_overlay.filter(ImageFilter.GaussianBlur(radius=1))
+    img_rgba = Image.alpha_composite(img_rgba, struct_overlay)
+    print(f"   捨て石・テトラ帯: 護岸全域（18m幅）")
+
+    # --- 4. 海岸線描画（緑ライン: テトラ帯の上に描画）---
+    print("4. 海岸線描画...")
     draw = ImageDraw.Draw(img_rgba)
 
     platform_m = 0
@@ -516,7 +648,6 @@ def generate_combined_map(slug):
             px1, py1 = to_px(*seg["start"])
             px2, py2 = to_px(*seg["end"])
             if seg["type"] == "platform":
-                # 白アウトライン + 緑の太線
                 draw.line([(px1, py1), (px2, py2)], fill=(255, 255, 255), width=10)
                 draw.line([(px1, py1), (px2, py2)], fill=(0, 230, 80), width=7)
                 platform_m += seg["dist"]
@@ -524,37 +655,6 @@ def generate_combined_map(slug):
                 draw.line([(px1, py1), (px2, py2)], fill=(255, 255, 255), width=8)
                 draw.line([(px1, py1), (px2, py2)], fill=(255, 60, 40), width=5)
                 tetrapod_m += seg["dist"]
-
-    # --- 4. 構造物描画 ---
-    print("4. 構造物描画...")
-    detected = structure.get("detectedStructures", [])
-    # 構造物のbboxは解析画像(1535x885相当)基準 → structureEndpointsで地理座標に変換
-    # relativePositionとdistanceFromShoreを使って位置を推定
-    STRUCT_COLORS = {
-        "tetrapod": (255, 140, 0, 160),   # オレンジ
-        "pier": (200, 200, 50, 160),       # 黄
-        "seawall": (100, 200, 100, 140),   # 薄緑
-        "port-facility": (150, 150, 200, 100),  # 薄紫
-    }
-    STRUCT_LABELS = {
-        "tetrapod": "テトラ",
-        "pier": "桟橋",
-        "seawall": "護岸",
-        "port-facility": "港湾施設",
-    }
-    # 捨て石・テトラ帯をオレンジ半透明の帯で表示（護岸〜18m沖）
-    struct_overlay = Image.new("RGBA", (w, h), (0, 0, 0, 0))
-    struct_draw = ImageDraw.Draw(struct_overlay)
-    # 護岸ラインと18mラインの間をポリゴンで塗りつぶし
-    rip_rap_line = ep_offset_line(18)
-    coast_line_ep = ep_offset_line(0)
-    if len(coast_line_ep) == len(rip_rap_line):
-        # 護岸→捨て石端→逆順で閉じたポリゴン
-        poly_pts = coast_line_ep + list(reversed(rip_rap_line))
-        struct_draw.polygon(poly_pts, fill=(255, 160, 40, 70))
-    img_rgba = Image.alpha_composite(img_rgba, struct_overlay)
-    draw = ImageDraw.Draw(img_rgba)
-    print(f"   捨て石・テトラ帯: 護岸全域（18m幅）")
 
     # --- 5. 水深表示（直感的: 少数の代表ラベル + カラーバー）---
     print("5. 水深ラベル配置...")
