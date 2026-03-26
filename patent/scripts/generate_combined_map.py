@@ -542,33 +542,19 @@ def generate_combined_map(slug):
         "seawall": "護岸",
         "port-facility": "港湾施設",
     }
+    # 捨て石・テトラ帯をオレンジ半透明の帯で表示（護岸〜18m沖）
     struct_overlay = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     struct_draw = ImageDraw.Draw(struct_overlay)
-    struct_count = {"tetrapod": 0, "pier": 0}
-    for det in detected:
-        cat = det["category"]
-        if cat not in ("tetrapod", "pier"):
-            continue
-        dist_shore = det.get("distanceFromShore", "onshore")
-        if dist_shore == "onshore":
-            continue  # 陸上はスキップ
-        rel_pos = det["relativePosition"]
-        color = STRUCT_COLORS.get(cat, (180, 180, 180, 120))
-        # 位置をstructureEndpointsで計算
-        s_lat = west_ep["lat"] + (east_ep["lat"] - west_ep["lat"]) * rel_pos
-        s_lng = west_ep["lng"] + (east_ep["lng"] - west_ep["lng"]) * rel_pos
-        sx, sy = to_px(s_lat, s_lng)
-        # "near"は護岸のすぐ沖 → 護岸から15m(60px)下
-        sy += 60
-        # 小さな丸マーカー（固定サイズ）
-        radius = 12
-        struct_draw.ellipse(
-            [sx - radius, sy - radius, sx + radius, sy + radius],
-            fill=color, outline=(255, 255, 255, 180), width=2)
-        struct_count[cat] = struct_count.get(cat, 0) + 1
+    # 護岸ラインと18mラインの間をポリゴンで塗りつぶし
+    rip_rap_line = ep_offset_line(18)
+    coast_line_ep = ep_offset_line(0)
+    if len(coast_line_ep) == len(rip_rap_line):
+        # 護岸→捨て石端→逆順で閉じたポリゴン
+        poly_pts = coast_line_ep + list(reversed(rip_rap_line))
+        struct_draw.polygon(poly_pts, fill=(255, 160, 40, 70))
     img_rgba = Image.alpha_composite(img_rgba, struct_overlay)
     draw = ImageDraw.Draw(img_rgba)
-    print(f"   テトラ: {struct_count.get('tetrapod', 0)}個, 桟橋: {struct_count.get('pier', 0)}個")
+    print(f"   捨て石・テトラ帯: 護岸全域（18m幅）")
 
     # --- 5. 水深表示（直感的: 少数の代表ラベル + カラーバー）---
     print("5. 水深ラベル配置...")
@@ -645,14 +631,13 @@ def generate_combined_map(slug):
 
     # --- 7. 凡例（左下、コンパクト）---
     legend_x = 20
-    legend_y = h - 140
+    legend_y = h - 100
     draw.rounded_rectangle(
-        [legend_x - 10, legend_y - 10, legend_x + 380, legend_y + 125],
+        [legend_x - 10, legend_y - 10, legend_x + 480, legend_y + 85],
         radius=12, fill=(0, 0, 0, 200))
     items = [
         ((0, 230, 80), f"護岸（釣り座） {platform_m:.0f}m"),
-        ((255, 165, 0), "捨て石帯（〜18m）"),
-        ((255, 140, 0), "テトラポッド（海中）"),
+        ((255, 160, 40), "捨て石・テトラ帯（〜18m）根掛かり注意"),
     ]
     for i, (color, label) in enumerate(items):
         y = legend_y + i * 36
