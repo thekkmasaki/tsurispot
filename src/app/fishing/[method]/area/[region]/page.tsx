@@ -30,6 +30,8 @@ interface Props {
   params: Promise<{ method: string; region: string }>;
 }
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   const params: { method: string; region: string }[] = [];
   for (const method of FISHING_METHODS) {

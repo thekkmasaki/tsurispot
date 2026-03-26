@@ -11,6 +11,8 @@ type Props = {
   params: Promise<{ category: string }>;
 };
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return QUIZ_CATEGORIES.map((c) => ({ category: c.slug }));
 }

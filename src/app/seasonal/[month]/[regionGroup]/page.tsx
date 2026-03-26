@@ -108,6 +108,8 @@ function getSeasonalTips(season: string, regionName: string): string[] {
 }
 
 // 12ヶ月 × 8地域 = 96ページ
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   const params: { month: string; regionGroup: string }[] = [];
   for (const m of MONTHS) {

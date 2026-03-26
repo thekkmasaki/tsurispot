@@ -32,6 +32,8 @@ import { PaidPlanInquiry } from "@/components/shops/paid-plan-inquiry";
 
 type Params = Promise<{ slug: string }>;
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return tackleShops.map((shop) => ({ slug: shop.slug }));
 }

@@ -35,6 +35,8 @@ function getFishSlug(fishName: string): string | null {
   return found ? found.slug : null;
 }
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return areaGuides.map((g) => ({ slug: g.slug }));
 }

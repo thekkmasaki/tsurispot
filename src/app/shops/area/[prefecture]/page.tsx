@@ -43,6 +43,8 @@ function getShopsForPrefecture(prefName: string) {
 }
 
 // ----- generateStaticParams -----
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return prefectures.map((pref) => ({ prefecture: pref.slug }));
 }

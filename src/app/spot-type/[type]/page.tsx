@@ -27,6 +27,8 @@ const SPOT_TYPE_DESCRIPTIONS: Record<FishingSpot["spotType"], string> = {
   breakwater: "堤防は最も身近で人気のある釣り場タイプです。サビキ釣り、ウキ釣り、投げ釣り、ルアー釣りなどあらゆる釣り方が楽しめます。初心者からベテランまで幅広い釣り人に愛される、日本の釣りの原点とも言える釣り場です。",
 };
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   const types = new Set<string>();
   for (const spot of fishingSpots) {

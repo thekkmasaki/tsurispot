@@ -33,6 +33,8 @@ interface Props {
   params: Promise<{ prefecture: string }>;
 }
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return prefectures.map((pref) => ({ prefecture: pref.slug }));
 }

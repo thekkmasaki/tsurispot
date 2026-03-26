@@ -17,6 +17,8 @@ type PageProps = {
 
 const SPOT_TYPE_KEYS = Object.keys(SPOT_TYPE_LABELS) as FishingSpot["spotType"][];
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   const combos: { type: string; prefecture: string }[] = [];
   const seen = new Set<string>();

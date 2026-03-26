@@ -17,6 +17,8 @@ type PageProps = {
 };
 
 // generateStaticParams: 実データに基づく組み合わせのみ生成
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   const combos: { slug: string; fishSlug: string }[] = [];
   const seen = new Set<string>();

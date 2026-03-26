@@ -25,6 +25,8 @@ type PageProps = {
 };
 
 // 47都道府県 × 12月 = 564ページ
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   const combos: { slug: string; month: string }[] = [];
   for (const pref of prefectures) {

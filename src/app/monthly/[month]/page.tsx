@@ -51,6 +51,8 @@ interface Props {
   params: Promise<{ month: string }>;
 }
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return monthSlugs.map((slug) => ({ month: slug }));
 }

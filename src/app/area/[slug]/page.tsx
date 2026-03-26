@@ -164,6 +164,8 @@ export async function generateMetadata({
   };
 }
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return regions.map((region) => ({ slug: region.slug }));
 }

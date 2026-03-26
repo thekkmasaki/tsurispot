@@ -310,6 +310,8 @@ export async function generateMetadata({
   };
 }
 
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   return prefectures.map((pref) => ({ slug: pref.slug }));
 }

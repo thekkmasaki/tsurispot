@@ -30,7 +30,7 @@ export async function GET() {
     // OGP画像
     xml += `
     <image:image>
-      <image:loc>${baseUrl}/api/og/spot/${spot.slug}</image:loc>
+      <image:loc>${baseUrl}/api/og?title=${encodeURIComponent(spot.name + ' | ツリスポ')}&amp;emoji=%F0%9F%8E%A3</image:loc>
       <image:title>${escapeXml(`${spot.name} | ツリスポ`)}</image:title>
     </image:image>`;
 
@@ -72,7 +72,7 @@ export async function GET() {
 
     xml += `
     <image:image>
-      <image:loc>${baseUrl}/api/og/fish/${fish.slug}</image:loc>
+      <image:loc>${baseUrl}/api/og?title=${encodeURIComponent(fish.name + ' | ツリスポ')}&amp;emoji=%F0%9F%90%9F</image:loc>
       <image:title>${escapeXml(`${fish.name} | ツリスポ`)}</image:title>
     </image:image>
   </url>`;

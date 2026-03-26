@@ -23,6 +23,8 @@ interface Props {
   params: Promise<{ method: string }>;
 }
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return FISHING_METHODS.map((m) => ({ method: m.slug }));
 }

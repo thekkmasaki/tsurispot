@@ -568,6 +568,8 @@ const methods: FishingMethod[] = [
   },
 ];
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return methods.map((method) => ({
     slug: method.slug,

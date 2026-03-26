@@ -26,6 +26,8 @@ interface PageProps {
   params: Promise<{ month: string }>;
 }
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return [
     // 季節ページ: spring, summer, autumn, winter

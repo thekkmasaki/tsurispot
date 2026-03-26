@@ -33,6 +33,8 @@ type PageProps = {
 };
 
 // generateStaticParams: 魚のfishingMethods × FISHING_METHODSの照合
+export const dynamicParams = false;
+
 export function generateStaticParams() {
   const combos: { slug: string; method: string }[] = [];
   const seen = new Set<string>();

@@ -60,6 +60,8 @@ const METHOD_NAME_TO_SLUG: Record<string, string> = {
   "穴釣り": "ana-zuri",
 };
 
+export const dynamicParams = false;
+
 export async function generateStaticParams() {
   return allFish.map((fish) => ({
     slug: fish.slug,
