@@ -124,12 +124,18 @@ function BlogCard({ post }: { post: BlogPostSummary }) {
 const INITIAL_TAG_COUNT = 15;
 
 const EMPTY_SET = () => new Set<string>();
+const INITIAL_DISPLAY = 20;
+
+/** 釣果週報記事のタグから除外するパターン（エリア名以外） */
+const NON_AREA_TAG_PATTERN = /^(釣果週報|20\d{2}年|初心者|安全|サビキ|エギング|投げ釣り|ルアー|ショアジギング|メバリング|アジング|堤防釣り|釣り場)$/;
 
 export function BlogListClient({ posts }: { posts: BlogPostSummary[] }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [activeTags, setActiveTags] = useState<Set<string>>(EMPTY_SET);
+  const [activeArea, setActiveArea] = useState<string | null>(null);
   const [showAllTags, setShowAllTags] = useState(false);
+  const [displayCount, setDisplayCount] = useState(INITIAL_DISPLAY);
 
   const allCategories = Object.entries(BLOG_CATEGORIES) as [
     BlogPost["category"],
@@ -143,6 +149,23 @@ export function BlogListClient({ posts }: { posts: BlogPostSummary[] }) {
       counts.set(post.category, (counts.get(post.category) ?? 0) + 1);
     }
     return counts;
+  }, [posts]);
+
+  // エリアタグ抽出（釣果週報記事のタグからエリア名を抽出）
+  const areaTags = useMemo(() => {
+    const areaCounts = new Map<string, number>();
+    for (const post of posts) {
+      if (!post.tags.includes("釣果週報")) continue;
+      for (const tag of post.tags) {
+        if (NON_AREA_TAG_PATTERN.test(tag)) continue;
+        // 魚名っぽいタグも除外（カタカナ2-5文字のみ）
+        if (/^[ァ-ヶー]{2,5}$/.test(tag)) continue;
+        areaCounts.set(tag, (areaCounts.get(tag) ?? 0) + 1);
+      }
+    }
+    return [...areaCounts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .map(([area, count]) => ({ area, count }));
   }, [posts]);
 
   // タグ一覧を出現回数順にソート
@@ -166,20 +189,26 @@ export function BlogListClient({ posts }: { posts: BlogPostSummary[] }) {
   const filteredPosts = useMemo(() => {
     let result = posts;
 
-    // テキスト検索
+    // テキスト検索（タイトル・説明・タグ・関連スポット）
     if (searchQuery.trim()) {
       const q = searchQuery.trim().toLowerCase();
       result = result.filter(
         (p) =>
           p.title.toLowerCase().includes(q) ||
           p.description.toLowerCase().includes(q) ||
-          p.tags.some((t) => t.toLowerCase().includes(q)),
+          p.tags.some((t) => t.toLowerCase().includes(q)) ||
+          (p.relatedSpots && p.relatedSpots.some((s) => s.toLowerCase().replace(/-/g, " ").includes(q))),
       );
     }
 
     // カテゴリフィルター
     if (activeCategory) {
       result = result.filter((p) => p.category === activeCategory);
+    }
+
+    // エリアフィルター
+    if (activeArea) {
+      result = result.filter((p) => p.tags.includes(activeArea));
     }
 
     // タグフィルター（OR: いずれかのタグを含む）
@@ -190,11 +219,12 @@ export function BlogListClient({ posts }: { posts: BlogPostSummary[] }) {
     }
 
     return result;
-  }, [posts, searchQuery, activeCategory, activeTags]);
+  }, [posts, searchQuery, activeCategory, activeArea, activeTags]);
 
   const hasActiveFilter =
     searchQuery.trim() !== "" ||
     activeCategory !== null ||
+    activeArea !== null ||
     activeTags.size > 0;
 
   const toggleTag = useCallback((tag: string) => {
@@ -212,7 +242,9 @@ export function BlogListClient({ posts }: { posts: BlogPostSummary[] }) {
   const resetFilters = useCallback(() => {
     setSearchQuery("");
     setActiveCategory(null);
+    setActiveArea(null);
     setActiveTags(new Set());
+    setDisplayCount(INITIAL_DISPLAY);
   }, []);
 
   return (
@@ -226,7 +258,7 @@ export function BlogListClient({ posts }: { posts: BlogPostSummary[] }) {
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="記事を検索（例: サビキ、初心者、冬）"
+            placeholder="記事を検索（例: 明石、仙台、サビキ、初心者）"
             className="h-12 w-full rounded-xl border border-input bg-background pl-10 pr-10 text-base outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-2 focus:ring-primary/20 sm:h-10 sm:text-sm"
           />
           {searchQuery ? (
@@ -275,6 +307,36 @@ export function BlogListClient({ posts }: { posts: BlogPostSummary[] }) {
             );
           })}
         </div>
+
+        {/* エリアフィルター */}
+        {areaTags.length > 0 ? (
+          <div>
+            <div className="mb-2 flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
+              <MapPin className="size-3" />
+              エリアで絞り込み
+            </div>
+            <div className="flex flex-wrap gap-1.5">
+              {areaTags.map(({ area, count }) => (
+                <button
+                  key={area}
+                  onClick={() => {
+                    setActiveArea(activeArea === area ? null : area);
+                    setDisplayCount(INITIAL_DISPLAY);
+                  }}
+                  className="focus:outline-none"
+                >
+                  <Badge
+                    variant={activeArea === area ? "default" : "outline"}
+                    className="cursor-pointer px-2.5 py-1 text-xs transition-colors hover:bg-sky-50 hover:text-sky-700 hover:border-sky-300"
+                  >
+                    {area}
+                    <span className="ml-1 opacity-60">({count})</span>
+                  </Badge>
+                </button>
+              ))}
+            </div>
+          </div>
+        ) : null}
 
         {/* タグフィルター */}
         {sortedTags.length > 0 ? (
@@ -350,10 +412,22 @@ export function BlogListClient({ posts }: { posts: BlogPostSummary[] }) {
 
       {/* 記事一覧 */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-2">
-        {filteredPosts.map((post) => (
+        {filteredPosts.slice(0, displayCount).map((post) => (
           <BlogCard key={post.id} post={post} />
         ))}
       </div>
+
+      {filteredPosts.length > displayCount ? (
+        <div className="mt-6 flex justify-center">
+          <button
+            onClick={() => setDisplayCount((prev) => prev + 20)}
+            className="inline-flex items-center gap-1.5 rounded-full border border-primary/20 bg-primary/5 px-6 py-2.5 text-sm font-medium text-primary transition-colors hover:bg-primary/10"
+          >
+            もっと見る（残り{filteredPosts.length - displayCount}件）
+            <ChevronRight className="size-3.5" />
+          </button>
+        </div>
+      ) : null}
 
       {filteredPosts.length === 0 ? (
         <div className="py-20 text-center text-muted-foreground">

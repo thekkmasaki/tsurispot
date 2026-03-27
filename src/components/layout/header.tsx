@@ -34,7 +34,7 @@ const mainNavItems = [
   { href: "/fish", label: "図鑑", icon: BookOpen },
   { href: "/ranking", label: "ランキング", icon: Trophy },
   { href: "/catchable-now", label: "今釣れる", icon: Fish },
-  { href: "/blog", label: "エリア釣果レポート", icon: FileText },
+  { href: "/blog", label: "釣果レポート", icon: FileText },
 ];
 
 // ドロップダウン「もっと見る」
