@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { put, del } from "@vercel/blob";
+import { uploadToS3, deleteFromS3 } from "@/lib/s3";
 import { redis } from "@/lib/redis";
 import { getShopBySlug } from "@/lib/data/shops";
 
@@ -120,29 +120,27 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // Vercel Blob にアップロード
+  // S3 にアップロード
   const ext = file.name.split(".").pop() || "jpg";
-  const filename = `shops/${shop}/${Date.now()}.${ext}`;
+  const filename = `shops/${shop}/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
 
   try {
-    const blob = await put(filename, file, {
-      access: "public",
-      addRandomSuffix: true,
-    });
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const url = await uploadToS3(filename, buffer, file.type);
 
     // Redis に URL を追加
-    const updatedPhotos = [...currentPhotos, blob.url];
+    const updatedPhotos = [...currentPhotos, url];
     await withTimeout(
       redis.set(`${REDIS_PREFIX}${shop}`, updatedPhotos, { ex: 2592000 })
     );
 
     return NextResponse.json({
       success: true,
-      url: blob.url,
+      url,
       photos: updatedPhotos,
     });
   } catch (e) {
-    console.error("Blob upload error:", e);
+    console.error("S3 upload error:", e);
     return NextResponse.json(
       { error: "アップロードに失敗しました。しばらくしてから再度お試しください。" },
       { status: 500 }
@@ -180,11 +178,11 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: "指定された写真が見つかりません" }, { status: 404 });
     }
 
-    // Blob から削除
+    // S3 から削除
     try {
-      await del(url);
+      await deleteFromS3(url);
     } catch {
-      // Blob削除失敗は無視（URLが無効な場合もある）
+      // S3削除失敗は無視（URLが無効な場合もある）
     }
 
     // Redis から URL を削除

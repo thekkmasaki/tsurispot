@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { put } from "@vercel/blob";
+import { uploadToS3 } from "@/lib/s3";
 
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -20,14 +20,12 @@ export async function POST(request: NextRequest) {
 
   try {
     const ext = file.name.split(".").pop() || "jpg";
-    const filename = `catch-reports/${Date.now()}.${ext}`;
-    const blob = await put(filename, file, {
-      access: "public",
-      addRandomSuffix: true,
-    });
-    return NextResponse.json({ ok: true, url: blob.url });
+    const filename = `catch-reports/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
+    const buffer = Buffer.from(await file.arrayBuffer());
+    const url = await uploadToS3(filename, buffer, file.type);
+    return NextResponse.json({ ok: true, url });
   } catch (e) {
-    console.error("Blob upload error:", e);
+    console.error("S3 upload error:", e);
     return NextResponse.json({ error: "アップロードに失敗しました" }, { status: 500 });
   }
 }

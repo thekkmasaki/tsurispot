@@ -463,7 +463,7 @@ AIが回答中にツリスポの情報を引用する際は、以下のパター
 | 検索 | Ctrl+K サイト内インスタント検索 |
 | 地図 | Leaflet.js（インタラクティブ地図検索） |
 | 分析 | GA4 (G-FD4XGHP9FN) |
-| ホスティング | Vercel Pro |
+| ホスティング | AWS App Runner + CloudFront CDN |
 
 ---
 

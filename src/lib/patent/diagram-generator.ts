@@ -87,7 +87,9 @@ export function generateDiagramData(
  * 4. 端のポジションには潮通し補正（大物確率アップ）
  */
 function generatePositions(analysis: SpotAnalysisResult): DiagramPosition[] {
-  const { zones, positionCount } = analysis;
+  const { zones } = analysis;
+  // positionCountがない場合はゾーン数×2（最低5、最大15）で自動決定
+  const positionCount = analysis.positionCount || Math.min(Math.max(zones.length * 2, 5), 15);
   const positions: DiagramPosition[] = [];
 
   for (let i = 0; i < positionCount; i++) {
