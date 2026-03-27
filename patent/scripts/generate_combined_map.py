@@ -37,6 +37,17 @@ def latlng_to_pixel(lat, lng, zoom, tx_min, ty_min):
     return int((tx - tx_min) * 256), int((ty - ty_min) * 256)
 
 
+def pixel_to_latlng(px, py, zoom, tx_min, ty_min):
+    """ピクセル座標 → 緯度経度（latlng_to_pixelの逆変換）"""
+    tx = tx_min + px / 256
+    ty = ty_min + py / 256
+    n = 2 ** zoom
+    lng = tx / n * 360.0 - 180.0
+    lat_rad = math.atan(math.sinh(math.pi * (1 - 2 * ty / n)))
+    lat = math.degrees(lat_rad)
+    return lat, lng
+
+
 def to_web_mercator(lat, lng):
     x = lng * 20037508.34 / 180
     y_rad = math.log(math.tan((90 + lat) * math.pi / 360)) / (math.pi / 180)
@@ -676,7 +687,25 @@ def generate_combined_map(slug):
             )
 
     img_rgba = Image.alpha_composite(img_rgba, struct_overlay)
-    print(f"   テトラマーカー描画完了")
+
+    # テトラ座標を緯度経度に変換してJSONに保存
+    def from_px(px_x, py):
+        return pixel_to_latlng(px_x + crop_left, py + crop_top, zoom, tx_min, ty_min)
+
+    tetrapod_geo = []
+    for tx, ty, brt in tetrapod_markers:
+        lat, lng = from_px(tx, ty)
+        tetrapod_geo.append({
+            "lat": round(lat, 6),
+            "lng": round(lng, 6),
+            "brightness": round(brt, 1),
+        })
+
+    # 構造JSONにdetectedTetrapodsを追加
+    structure["detectedTetrapods"] = tetrapod_geo
+    with open(json_path, "w", encoding="utf-8") as f:
+        json.dump(structure, f, ensure_ascii=False, indent=2)
+    print(f"   テトラ{len(tetrapod_geo)}個の座標をJSONに保存")
 
     # --- 4. 海岸線描画（緑ライン: テトラ帯の上に描画）---
     print("4. 海岸線描画...")
