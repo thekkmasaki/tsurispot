@@ -92,8 +92,8 @@ function DropdownMenu() {
         className={cn(
           "flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
           hasActiveChild
-            ? "bg-primary/10 text-primary"
-            : "text-muted-foreground hover:bg-muted hover:text-foreground"
+            ? "bg-ocean-mid/10 text-ocean-mid"
+            : "text-driftwood hover:bg-sand-light hover:text-foreground"
         )}
       >
         もっと見る
@@ -106,7 +106,7 @@ function DropdownMenu() {
         />
       </button>
       {open && (
-        <div role="menu" className="absolute right-0 top-full mt-1 w-56 rounded-xl border bg-white py-2 shadow-lg">
+        <div role="menu" className="absolute right-0 top-full mt-1 w-56 rounded-2xl border bg-white py-2 shadow-xl shadow-ocean-deep/5">
           {moreNavItems.map((item) => {
             const isActive =
               pathname === item.href ||
@@ -120,8 +120,8 @@ function DropdownMenu() {
                 className={cn(
                   "flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary",
                   isActive
-                    ? "bg-primary/5 font-medium text-primary"
-                    : "text-gray-700 hover:bg-gray-50"
+                    ? "bg-ocean-mid/5 font-medium text-ocean-mid"
+                    : "text-driftwood hover:bg-sand-light/50"
                 )}
               >
                 <item.icon className="h-4 w-4" aria-hidden="true" />
@@ -140,13 +140,13 @@ export function Header() {
   const { count: favCount } = useFavorites();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/40 bg-white/80 backdrop-blur-lg">
+    <header className="sticky top-0 z-50 border-b border-border/40 bg-gradient-to-r from-white/95 via-white/90 to-sand-light/80 backdrop-blur-lg">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
-          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-primary-foreground">
+          <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-ocean-mid to-ocean-deep text-white">
             <Fish className="h-5 w-5" aria-hidden="true" />
           </div>
-          <span className="text-lg font-bold text-foreground">ツリスポ</span>
+          <span className="bg-gradient-to-r from-ocean-deep to-ocean-mid bg-clip-text text-lg font-bold text-transparent font-[family-name:var(--font-zen-maru)]">ツリスポ</span>
         </Link>
 
         <nav aria-label="メインナビゲーション" className="hidden items-center gap-1 md:flex">
@@ -161,8 +161,8 @@ export function Header() {
                 className={cn(
                   "flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                   isActive
-                    ? "bg-primary/10 text-primary"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                    ? "bg-ocean-mid/10 text-ocean-mid"
+                    : "text-driftwood hover:bg-sand-light hover:text-foreground"
                 )}
               >
                 <item.icon className="h-4 w-4" aria-hidden="true" />
@@ -181,8 +181,8 @@ export function Header() {
             className={cn(
               "relative flex items-center justify-center rounded-lg p-2 transition-colors",
               pathname === "/favorites"
-                ? "bg-primary/10 text-primary"
-                : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                ? "bg-ocean-mid/10 text-ocean-mid"
+                : "text-driftwood hover:bg-sand-light hover:text-foreground"
             )}
             aria-label="お気に入り"
           >

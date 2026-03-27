@@ -3,18 +3,25 @@ import { Fish } from "lucide-react";
 
 export function Footer() {
   return (
-    <footer className="border-t border-border/40 bg-muted/30">
+    <footer className="relative">
+      {/* SVG波ボーダー */}
+      <div className="relative -mb-px">
+        <svg viewBox="0 0 1440 60" fill="none" className="w-full" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M0,30 C240,60 480,0 720,30 C960,60 1200,0 1440,30 L1440,60 L0,60 Z" className="fill-[oklch(0.20_0.08_230)]" />
+        </svg>
+      </div>
+      <div className="bg-gradient-to-b from-[oklch(0.20_0.08_230)] to-[oklch(0.15_0.06_235)]">
       {/* Desktop footer - full version */}
       <div className="mx-auto hidden max-w-7xl px-4 py-8 md:block">
         <div className="grid grid-cols-5 gap-8">
           <div>
             <Link href="/" className="flex items-center gap-2">
-              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-primary text-primary-foreground">
-                <Fish className="h-4 w-4" aria-hidden="true" />
+              <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-white/10">
+                <Fish className="h-4 w-4 text-sea-foam" aria-hidden="true" />
               </div>
-              <span className="font-bold">ツリスポ</span>
+              <span className="font-bold text-white font-[family-name:var(--font-zen-maru)]">ツリスポ</span>
             </Link>
-            <p className="mt-2 text-sm text-muted-foreground">
+            <p className="mt-2 text-sm text-blue-100/70">
               みんなが使いやすい
               <br />
               釣りスポット総合情報サイト
@@ -25,7 +32,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="公式Instagram"
-                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="inline-flex items-center gap-2 text-sm text-blue-100/70 hover:text-white transition-colors"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -42,7 +49,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="公式X（Twitter）"
-                className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+                className="inline-flex items-center gap-2 text-sm text-blue-100/70 hover:text-white transition-colors"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -72,141 +79,141 @@ export function Footer() {
             </div>
           </div>
           <div>
-            <h3 className="mb-3 text-sm font-semibold">釣りスポットを探す</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/spots" className="hover:text-foreground">全国の釣りスポット一覧</Link></li>
-              <li><Link href="/fishing-spots/near-me" className="hover:text-foreground">近くの釣り場を探す</Link></li>
-              <li><Link href="/ranking" className="hover:text-foreground">釣りスポット人気ランキング</Link></li>
-              <li><Link href="/fishing-spots/breakwater-beginner" className="hover:text-foreground">堤防釣り初心者おすすめ</Link></li>
-              <li><Link href="/fishing-spots/best-saltwater" className="hover:text-foreground">海釣りおすすめスポット</Link></li>
-              <li><Link href="/fishing-spots/river-beginner" className="hover:text-foreground">川釣り初心者おすすめ</Link></li>
-              <li><Link href="/area" className="hover:text-foreground">エリアで探す</Link></li>
-              <li><Link href="/map" className="hover:text-foreground">地図で探す</Link></li>
-              <li><Link href="/catchable-now" className="hover:text-foreground">今釣れる魚</Link></li>
+            <h3 className="mb-3 text-sm font-semibold text-sea-foam">釣りスポットを探す</h3>
+            <ul className="space-y-2 text-sm text-blue-100/70">
+              <li><Link href="/spots" className="hover:text-white">全国の釣りスポット一覧</Link></li>
+              <li><Link href="/fishing-spots/near-me" className="hover:text-white">近くの釣り場を探す</Link></li>
+              <li><Link href="/ranking" className="hover:text-white">釣りスポット人気ランキング</Link></li>
+              <li><Link href="/fishing-spots/breakwater-beginner" className="hover:text-white">堤防釣り初心者おすすめ</Link></li>
+              <li><Link href="/fishing-spots/best-saltwater" className="hover:text-white">海釣りおすすめスポット</Link></li>
+              <li><Link href="/fishing-spots/river-beginner" className="hover:text-white">川釣り初心者おすすめ</Link></li>
+              <li><Link href="/area" className="hover:text-white">エリアで探す</Link></li>
+              <li><Link href="/map" className="hover:text-white">地図で探す</Link></li>
+              <li><Link href="/catchable-now" className="hover:text-white">今釣れる魚</Link></li>
             </ul>
           </div>
           <div>
-            <h3 className="mb-3 text-sm font-semibold">釣りを学ぶ</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/blog" className="hover:text-foreground">コラム</Link></li>
-              <li><Link href="/quiz" className="hover:text-foreground">釣りクイズ</Link></li>
-              <li><Link href="/bouzu-checker" className="hover:text-foreground">ボウズ確率チェッカー</Link></li>
-              <li><Link href="/guide" className="hover:text-foreground">釣りの始め方</Link></li>
-              <li><Link href="/fish" className="hover:text-foreground">魚種図鑑</Link></li>
-              <li><Link href="/glossary" className="hover:text-foreground">釣り用語集</Link></li>
-              <li><Link href="/methods" className="hover:text-foreground">釣り方から探す</Link></li>
-              <li><Link href="/monthly" className="hover:text-foreground">月別釣りガイド</Link></li>
-              <li><Link href="/seasonal" className="hover:text-foreground">季節別ガイド</Link></li>
-              <li><Link href="/fishing-calendar" className="hover:text-foreground">釣りカレンダー</Link></li>
-              <li><Link href="/beginner-checklist" className="hover:text-foreground">持ち物チェックリスト</Link></li>
-              <li><Link href="/fishing-rules" className="hover:text-foreground">ルールとマナー</Link></li>
-              <li><Link href="/instructor-exam" className="hover:text-foreground">釣りインストラクター試験対策</Link></li>
-              <li><Link href="/gear" className="hover:text-foreground">編集長厳選の釣り道具</Link></li>
+            <h3 className="mb-3 text-sm font-semibold text-sea-foam">釣りを学ぶ</h3>
+            <ul className="space-y-2 text-sm text-blue-100/70">
+              <li><Link href="/blog" className="hover:text-white">コラム</Link></li>
+              <li><Link href="/quiz" className="hover:text-white">釣りクイズ</Link></li>
+              <li><Link href="/bouzu-checker" className="hover:text-white">ボウズ確率チェッカー</Link></li>
+              <li><Link href="/guide" className="hover:text-white">釣りの始め方</Link></li>
+              <li><Link href="/fish" className="hover:text-white">魚種図鑑</Link></li>
+              <li><Link href="/glossary" className="hover:text-white">釣り用語集</Link></li>
+              <li><Link href="/methods" className="hover:text-white">釣り方から探す</Link></li>
+              <li><Link href="/monthly" className="hover:text-white">月別釣りガイド</Link></li>
+              <li><Link href="/seasonal" className="hover:text-white">季節別ガイド</Link></li>
+              <li><Link href="/fishing-calendar" className="hover:text-white">釣りカレンダー</Link></li>
+              <li><Link href="/beginner-checklist" className="hover:text-white">持ち物チェックリスト</Link></li>
+              <li><Link href="/fishing-rules" className="hover:text-white">ルールとマナー</Link></li>
+              <li><Link href="/instructor-exam" className="hover:text-white">釣りインストラクター試験対策</Link></li>
+              <li><Link href="/gear" className="hover:text-white">編集長厳選の釣り道具</Link></li>
             </ul>
           </div>
           <div>
-            <h3 className="mb-3 text-sm font-semibold">サポート</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/safety" className="hover:text-foreground">安全ガイド</Link></li>
-              <li><Link href="/faq" className="hover:text-foreground">よくある質問</Link></li>
-              <li><Link href="/contact" className="hover:text-foreground">お問い合わせ</Link></li>
-              <li><Link href="/partner" className="hover:text-foreground font-medium text-blue-600 dark:text-blue-400">釣具店・遊漁船の方へ</Link></li>
+            <h3 className="mb-3 text-sm font-semibold text-sea-foam">サポート</h3>
+            <ul className="space-y-2 text-sm text-blue-100/70">
+              <li><Link href="/safety" className="hover:text-white">安全ガイド</Link></li>
+              <li><Link href="/faq" className="hover:text-white">よくある質問</Link></li>
+              <li><Link href="/contact" className="hover:text-white">お問い合わせ</Link></li>
+              <li><Link href="/partner" className="hover:text-white font-medium text-sea-foam">釣具店・遊漁船の方へ</Link></li>
             </ul>
           </div>
           <div>
-            <h3 className="mb-3 text-sm font-semibold">サイト情報</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><Link href="/about" className="hover:text-foreground">ツリスポについて</Link></li>
-              <li><Link href="/partner" className="hover:text-foreground">事業者様向け（掲載案内）</Link></li>
-              <li><Link href="/privacy" className="hover:text-foreground">プライバシーポリシー</Link></li>
-              <li><Link href="/terms" className="hover:text-foreground">利用規約</Link></li>
-              <li><Link href="/legal" className="hover:text-foreground">特定商取引法に基づく表記</Link></li>
+            <h3 className="mb-3 text-sm font-semibold text-sea-foam">サイト情報</h3>
+            <ul className="space-y-2 text-sm text-blue-100/70">
+              <li><Link href="/about" className="hover:text-white">ツリスポについて</Link></li>
+              <li><Link href="/partner" className="hover:text-white">事業者様向け（掲載案内）</Link></li>
+              <li><Link href="/privacy" className="hover:text-white">プライバシーポリシー</Link></li>
+              <li><Link href="/terms" className="hover:text-white">利用規約</Link></li>
+              <li><Link href="/legal" className="hover:text-white">特定商取引法に基づく表記</Link></li>
             </ul>
           </div>
         </div>
         {/* 人気魚種リンク */}
-        <div className="mt-6 border-t border-border/40 pt-6">
-          <h3 className="mb-3 text-sm font-semibold">人気の釣りターゲット</h3>
-          <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
-            <Link href="/fish/aji" className="hover:text-foreground">アジの釣り方</Link>
+        <div className="mt-6 border-t border-white/10 pt-6">
+          <h3 className="mb-3 text-sm font-semibold text-sea-foam">人気の釣りターゲット</h3>
+          <div className="flex flex-wrap gap-2 text-xs text-blue-100/60">
+            <Link href="/fish/aji" className="hover:text-white">アジの釣り方</Link>
             <span>·</span>
-            <Link href="/fish/saba" className="hover:text-foreground">サバの釣り方</Link>
+            <Link href="/fish/saba" className="hover:text-white">サバの釣り方</Link>
             <span>·</span>
-            <Link href="/fish/kasago" className="hover:text-foreground">カサゴの釣り方</Link>
+            <Link href="/fish/kasago" className="hover:text-white">カサゴの釣り方</Link>
             <span>·</span>
-            <Link href="/fish/iwashi" className="hover:text-foreground">イワシの釣り方</Link>
+            <Link href="/fish/iwashi" className="hover:text-white">イワシの釣り方</Link>
             <span>·</span>
-            <Link href="/fish/kisu" className="hover:text-foreground">キスの釣り方</Link>
+            <Link href="/fish/kisu" className="hover:text-white">キスの釣り方</Link>
             <span>·</span>
-            <Link href="/fish/suzuki" className="hover:text-foreground">スズキの釣り方</Link>
+            <Link href="/fish/suzuki" className="hover:text-white">スズキの釣り方</Link>
             <span>·</span>
-            <Link href="/fish/kurodai" className="hover:text-foreground">クロダイの釣り方</Link>
+            <Link href="/fish/kurodai" className="hover:text-white">クロダイの釣り方</Link>
             <span>·</span>
-            <Link href="/fish/aori-ika" className="hover:text-foreground">アオリイカの釣り方</Link>
+            <Link href="/fish/aori-ika" className="hover:text-white">アオリイカの釣り方</Link>
             <span>·</span>
-            <Link href="/fish/mebaru" className="hover:text-foreground">メバルの釣り方</Link>
+            <Link href="/fish/mebaru" className="hover:text-white">メバルの釣り方</Link>
             <span>·</span>
-            <Link href="/fish/karei" className="hover:text-foreground">カレイの釣り方</Link>
+            <Link href="/fish/karei" className="hover:text-white">カレイの釣り方</Link>
             <span>·</span>
             <Link href="/fish" className="hover:text-foreground font-medium">魚種図鑑一覧 →</Link>
           </div>
         </div>
 
         {/* 釣り方ガイドリンク */}
-        <div className="mt-6 border-t border-border/40 pt-6">
-          <h3 className="mb-3 text-sm font-semibold">釣り方ガイド</h3>
-          <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
-            <Link href="/methods/sabiki" className="hover:text-foreground">サビキ釣り</Link>
+        <div className="mt-6 border-t border-white/10 pt-6">
+          <h3 className="mb-3 text-sm font-semibold text-sea-foam">釣り方ガイド</h3>
+          <div className="flex flex-wrap gap-2 text-xs text-blue-100/60">
+            <Link href="/methods/sabiki" className="hover:text-white">サビキ釣り</Link>
             <span>·</span>
-            <Link href="/methods/choi-nage" className="hover:text-foreground">ちょい投げ</Link>
+            <Link href="/methods/choi-nage" className="hover:text-white">ちょい投げ</Link>
             <span>·</span>
-            <Link href="/methods/uki-zuri" className="hover:text-foreground">ウキ釣り</Link>
+            <Link href="/methods/uki-zuri" className="hover:text-white">ウキ釣り</Link>
             <span>·</span>
-            <Link href="/methods/ajing" className="hover:text-foreground">アジング</Link>
+            <Link href="/methods/ajing" className="hover:text-white">アジング</Link>
             <span>·</span>
-            <Link href="/methods/eging" className="hover:text-foreground">エギング</Link>
+            <Link href="/methods/eging" className="hover:text-white">エギング</Link>
             <span>·</span>
-            <Link href="/methods/mebaring" className="hover:text-foreground">メバリング</Link>
+            <Link href="/methods/mebaring" className="hover:text-white">メバリング</Link>
             <span>·</span>
-            <Link href="/methods/shore-jigging" className="hover:text-foreground">ショアジギング</Link>
+            <Link href="/methods/shore-jigging" className="hover:text-white">ショアジギング</Link>
             <span>·</span>
-            <Link href="/methods/ana-zuri" className="hover:text-foreground">穴釣り</Link>
+            <Link href="/methods/ana-zuri" className="hover:text-white">穴釣り</Link>
             <span>·</span>
             <Link href="/methods" className="hover:text-foreground font-medium">釣り方一覧 →</Link>
           </div>
         </div>
 
         {/* 人気都道府県リンク */}
-        <div className="mt-6 border-t border-border/40 pt-6">
-          <h3 className="mb-3 text-sm font-semibold">人気エリアの釣りスポット</h3>
-          <div className="flex flex-wrap gap-2 text-xs text-muted-foreground">
-            <Link href="/prefecture/hokkaido" className="hover:text-foreground">北海道の釣り場</Link>
+        <div className="mt-6 border-t border-white/10 pt-6">
+          <h3 className="mb-3 text-sm font-semibold text-sea-foam">人気エリアの釣りスポット</h3>
+          <div className="flex flex-wrap gap-2 text-xs text-blue-100/60">
+            <Link href="/prefecture/hokkaido" className="hover:text-white">北海道の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/tokyo" className="hover:text-foreground">東京の釣り場</Link>
+            <Link href="/prefecture/tokyo" className="hover:text-white">東京の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/kanagawa" className="hover:text-foreground">神奈川の釣り場</Link>
+            <Link href="/prefecture/kanagawa" className="hover:text-white">神奈川の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/chiba" className="hover:text-foreground">千葉の釣り場</Link>
+            <Link href="/prefecture/chiba" className="hover:text-white">千葉の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/shizuoka" className="hover:text-foreground">静岡の釣り場</Link>
+            <Link href="/prefecture/shizuoka" className="hover:text-white">静岡の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/aichi" className="hover:text-foreground">愛知の釣り場</Link>
+            <Link href="/prefecture/aichi" className="hover:text-white">愛知の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/osaka" className="hover:text-foreground">大阪の釣り場</Link>
+            <Link href="/prefecture/osaka" className="hover:text-white">大阪の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/hyogo" className="hover:text-foreground">兵庫の釣り場</Link>
+            <Link href="/prefecture/hyogo" className="hover:text-white">兵庫の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/hiroshima" className="hover:text-foreground">広島の釣り場</Link>
+            <Link href="/prefecture/hiroshima" className="hover:text-white">広島の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/fukuoka" className="hover:text-foreground">福岡の釣り場</Link>
+            <Link href="/prefecture/fukuoka" className="hover:text-white">福岡の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/okinawa" className="hover:text-foreground">沖縄の釣り場</Link>
+            <Link href="/prefecture/okinawa" className="hover:text-white">沖縄の釣り場</Link>
             <span>·</span>
             <Link href="/prefecture" className="hover:text-foreground font-medium">全都道府県一覧 →</Link>
           </div>
         </div>
 
-        <div className="mt-6 border-t border-border/40 pt-6 text-center text-sm text-muted-foreground">
+        <div className="mt-6 border-t border-white/10 pt-6 text-center text-sm text-blue-100/60">
           <p>&copy; 2025-2026 ツリスポ All rights reserved.</p>
           <p className="mt-1 text-xs">
             創設者・編集長: 正木 家康｜運営開始: 2025年｜掲載スポット: 2,100箇所以上｜特許出願中（特願2026-042836）
@@ -214,7 +221,7 @@ export function Footer() {
           <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed">
             当サイトはAmazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。
           </p>
-          <p className="mx-auto mt-1 max-w-xl text-xs leading-relaxed text-muted-foreground">
+          <p className="mx-auto mt-1 max-w-xl text-xs leading-relaxed text-blue-100/50">
             また、楽天アフィリエイトにも参加しています。商品リンクからの購入で当サイトに報酬が支払われることがありますが、ユーザーに追加費用は発生しません。
           </p>
         </div>
@@ -228,7 +235,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="公式Instagram"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-blue-100/70 hover:text-white transition-colors"
           >
             <svg
               viewBox="0 0 24 24"
@@ -245,7 +252,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="公式X（Twitter）"
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-blue-100/70 hover:text-white transition-colors"
           >
             <svg
               viewBox="0 0 24 24"
@@ -272,29 +279,30 @@ export function Footer() {
             </a>
           )}
         </div>
-        <div className="flex flex-wrap justify-center gap-x-3 gap-y-2 text-xs text-muted-foreground mb-3">
-          <Link href="/fishing-spots/near-me" className="hover:text-foreground font-medium">近くの釣り場</Link>
-          <Link href="/fishing-spots/breakwater-beginner" className="hover:text-foreground">堤防釣り初心者</Link>
-          <Link href="/fishing-spots/best-saltwater" className="hover:text-foreground">海釣りおすすめ</Link>
-          <Link href="/ranking" className="hover:text-foreground">人気ランキング</Link>
+        <div className="flex flex-wrap justify-center gap-x-3 gap-y-2 text-xs text-blue-100/60 mb-3">
+          <Link href="/fishing-spots/near-me" className="hover:text-white font-medium">近くの釣り場</Link>
+          <Link href="/fishing-spots/breakwater-beginner" className="hover:text-white">堤防釣り初心者</Link>
+          <Link href="/fishing-spots/best-saltwater" className="hover:text-white">海釣りおすすめ</Link>
+          <Link href="/ranking" className="hover:text-white">人気ランキング</Link>
         </div>
-        <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-muted-foreground">
-          <Link href="/blog" className="hover:text-foreground">コラム</Link>
-          <Link href="/about" className="hover:text-foreground">ツリスポについて</Link>
-          <Link href="/partner" className="hover:text-foreground">事業者様向け</Link>
-          <Link href="/privacy" className="hover:text-foreground">プライバシーポリシー</Link>
-          <Link href="/terms" className="hover:text-foreground">利用規約</Link>
-          <Link href="/legal" className="hover:text-foreground">特商法表記</Link>
+        <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-blue-100/60">
+          <Link href="/blog" className="hover:text-white">コラム</Link>
+          <Link href="/about" className="hover:text-white">ツリスポについて</Link>
+          <Link href="/partner" className="hover:text-white">事業者様向け</Link>
+          <Link href="/privacy" className="hover:text-white">プライバシーポリシー</Link>
+          <Link href="/terms" className="hover:text-white">利用規約</Link>
+          <Link href="/legal" className="hover:text-white">特商法表記</Link>
         </div>
-        <p className="mt-3 text-center text-xs text-muted-foreground">
+        <p className="mt-3 text-center text-xs text-blue-100/60">
           &copy; 2025-2026 ツリスポ
         </p>
-        <p className="mt-1 text-center text-[10px] text-muted-foreground">
+        <p className="mt-1 text-center text-[10px] text-blue-100/50">
           創設者: 正木 家康｜特許出願中
         </p>
-        <p className="mx-auto mt-2 max-w-xs text-center text-[11px] leading-relaxed text-muted-foreground">
+        <p className="mx-auto mt-2 max-w-xs text-center text-[11px] leading-relaxed text-blue-100/50">
           Amazonアソシエイト・プログラム参加者｜楽天アフィリエイト参加
         </p>
+      </div>
       </div>
     </footer>
   );

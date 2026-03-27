@@ -14,7 +14,7 @@ export function SpotCard({ spot, distance }: { spot: FishingSpot; distance?: num
 
   return (
     <Link href={`/spots/${spot.slug}`}>
-      <Card className="group gap-0 overflow-hidden py-0 transition-shadow hover:shadow-md">
+      <Card className="group gap-0 overflow-hidden py-0 transition-all duration-200 hover:shadow-lg hover:shadow-ocean-deep/8 hover:-translate-y-1">
         {/* スポット画像 */}
         <div className="relative">
           <SpotImage
@@ -23,7 +23,8 @@ export function SpotCard({ spot, distance }: { spot: FishingSpot; distance?: num
             spotType={spot.spotType}
             height="h-40"
           />
-          <span className="absolute bottom-2 right-2 rounded bg-black/40 px-2 py-0.5 text-xs text-white">
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/30 to-transparent" />
+          <span className="absolute bottom-2 right-2 rounded-lg bg-ocean-deep/70 px-2 py-0.5 text-xs text-white backdrop-blur-sm">
             {SPOT_TYPE_LABELS[spot.spotType]}
           </span>
           <div className="absolute top-2 right-2 flex items-center gap-1">
@@ -52,7 +53,7 @@ export function SpotCard({ spot, distance }: { spot: FishingSpot; distance?: num
           {/* Fish badges */}
           <div className="flex flex-wrap gap-1">
             {displayFish.map((name) => (
-              <Badge key={name} variant="secondary" className="text-xs">
+              <Badge key={name} variant="secondary" className="text-xs bg-sea-foam/20 text-ocean-deep border-sea-foam/30">
                 {name}
               </Badge>
             ))}

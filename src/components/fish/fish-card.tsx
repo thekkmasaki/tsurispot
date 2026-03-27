@@ -15,7 +15,7 @@ interface FishCardProps {
 export function FishCard({ fish, showPeakBadge, showSpots = false }: FishCardProps) {
   return (
     <Link href={`/fish/${fish.slug}`}>
-      <Card className={`group h-full gap-0 overflow-hidden py-0 transition-shadow hover:shadow-md ${fish.isPoisonous ? "ring-2 ring-red-200" : ""}`}>
+      <Card className={`group h-full gap-0 overflow-hidden py-0 transition-all duration-200 hover:shadow-lg hover:shadow-ocean-deep/8 hover:-translate-y-1 ${fish.isPoisonous ? "ring-2 ring-red-300/60" : ""}`}>
         {/* 魚画像 */}
         <div className="relative">
           <FishImage
