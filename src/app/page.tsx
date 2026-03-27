@@ -3,9 +3,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
-import { getLatestBlogPostsAsync, getBlogPostsByCategoryAsync, BLOG_CATEGORIES } from "@/lib/data/blog";
+import { getLatestBlogPostsAsync, BLOG_CATEGORIES } from "@/lib/data/blog";
 import { prefectures } from "@/lib/data/prefectures";
-import { monthlyGuides } from "@/lib/data/monthly-guides";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -22,15 +21,12 @@ import {
   Target,
   Navigation,
   Star,
-  Trophy,
-  GraduationCap,
   ClipboardCheck,
   Sparkles,
 } from "lucide-react";
 import dynamic from "next/dynamic";
 import { HomeSearchBar } from "@/components/home-search-bar";
 import { HomeSeasonalFish } from "@/components/home-seasonal-fish";
-import { HomePopularSpots } from "@/components/home-popular-spots";
 import { HomeTop10Client } from "@/components/home-top10-client";
 import { SectionErrorBoundary } from "@/components/ui/section-error-boundary";
 
@@ -54,14 +50,6 @@ function getFishImage(tags: string[], id: string): string {
 }
 
 // Below-the-fold client components loaded lazily
-const NearbySpots = dynamic(() => import("@/components/nearby-spots").then((m) => m.NearbySpots), {
-  loading: () => (
-    <div className="space-y-4">
-      <div className="h-7 w-48 animate-pulse rounded bg-muted" />
-      <div className="h-64 w-full animate-pulse rounded-xl bg-muted" />
-    </div>
-  ),
-});
 const LocationPromptBanner = dynamic(() => import("@/components/location-prompt-banner").then((m) => m.LocationPromptBanner), {
   loading: () => <div className="h-12 w-full animate-pulse rounded-lg bg-muted" />,
 });
@@ -227,14 +215,6 @@ export default async function Home() {
     }));
   const allPosts = await getLatestBlogPostsAsync(100);
   const weeklyReports = allPosts.filter((p) => p.tags.includes("釣果週報")).slice(0, 6);
-  const latestPosts = allPosts.slice(0, 6);
-
-  // カテゴリ別おすすめ記事（AdSense対策: ブログコンテンツの露出強化）
-  const [beginnerPosts, techniquePosts, seasonalPosts] = await Promise.all([
-    getBlogPostsByCategoryAsync("beginner", 3),
-    getBlogPostsByCategoryAsync("technique", 3),
-    getBlogPostsByCategoryAsync("seasonal", 3),
-  ]);
 
   // Stats for hero section
   const totalSpots = fishingSpots.length;
