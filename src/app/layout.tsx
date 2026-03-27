@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP } from "next/font/google";
+import { Noto_Sans_JP, Zen_Maru_Gothic } from "next/font/google";
 import Script from "next/script";
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
@@ -22,6 +22,14 @@ const notoSansJP = Noto_Sans_JP({
   weight: ["400", "500", "700"],
   display: "swap",
   preload: true,
+});
+
+const zenMaruGothic = Zen_Maru_Gothic({
+  variable: "--font-zen-maru",
+  subsets: ["latin"],
+  weight: ["500", "700", "900"],
+  display: "swap",
+  preload: false,
 });
 
 
@@ -128,7 +136,7 @@ export default function RootLayout({
         <link rel="author" type="text/plain" href="/humans.txt" />
       </head>
       <body
-        className={`${notoSansJP.variable} font-[family-name:var(--font-noto-sans-jp)] antialiased`}
+        className={`${notoSansJP.variable} ${zenMaruGothic.variable} font-[family-name:var(--font-noto-sans-jp)] antialiased`}
       >
         {/* WebSite schema: サイト名をGoogleに正しく認識させるため独立したscriptタグ */}
         <script

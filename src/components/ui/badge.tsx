@@ -11,13 +11,16 @@ const badgeVariants = cva(
       variant: {
         default: "bg-primary text-primary-foreground [a&]:hover:bg-primary/90",
         secondary:
-          "bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90",
+          "bg-sea-foam/20 text-ocean-deep border-sea-foam/30 [a&]:hover:bg-sea-foam/30",
         destructive:
           "bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
         outline:
-          "border-border text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
+          "border-border text-foreground [a&]:hover:bg-sand-light [a&]:hover:text-foreground",
         ghost: "[a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
         link: "text-primary underline-offset-4 [a&]:hover:underline",
+        beginner: "bg-forest-green/15 text-forest-green border-forest-green/25",
+        free: "bg-sunset-coral/15 text-sunset-coral border-sunset-coral/25",
+        season: "bg-sunset-gold/15 text-driftwood border-sunset-gold/30",
       },
     },
     defaultVariants: {
