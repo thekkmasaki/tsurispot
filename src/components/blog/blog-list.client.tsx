@@ -5,7 +5,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { ChevronRight, Tag, FileText, Search, X } from "lucide-react";
+import {
+  ChevronRight,
+  Tag,
+  FileText,
+  Search,
+  X,
+  GraduationCap,
+  Wrench,
+  Calendar,
+  Target,
+  MapPin,
+  Scale,
+  Lightbulb,
+  Fish,
+} from "lucide-react";
 import { BLOG_CATEGORIES, type BlogPost } from "@/lib/data/blog";
 
 /** リスト表示用の軽量型（content除外） */
@@ -23,18 +37,42 @@ const CATEGORY_DEFAULT_IMAGE: Record<BlogPost["category"], string> = {
   report: "/images/blog/defaults/report.svg",
 };
 
-function BlogThumbnail({ post }: { post: BlogPostSummary }) {
-  const imageSrc = post.image || CATEGORY_DEFAULT_IMAGE[post.category];
+/** カテゴリ別グラデーション＋アイコン（画像なし時のフォールバック） */
+const CATEGORY_STYLE: Record<BlogPost["category"], { gradient: string; Icon: typeof Fish }> = {
+  beginner: { gradient: "from-emerald-400 to-teal-500", Icon: GraduationCap },
+  gear: { gradient: "from-slate-500 to-zinc-600", Icon: Wrench },
+  seasonal: { gradient: "from-amber-400 to-orange-500", Icon: Calendar },
+  technique: { gradient: "from-sky-400 to-blue-600", Icon: Target },
+  "spot-guide": { gradient: "from-cyan-400 to-teal-500", Icon: MapPin },
+  manner: { gradient: "from-violet-400 to-purple-600", Icon: Scale },
+  knowledge: { gradient: "from-blue-400 to-indigo-600", Icon: Lightbulb },
+  report: { gradient: "from-sky-400 to-cyan-500", Icon: Fish },
+};
 
+function BlogThumbnail({ post }: { post: BlogPostSummary }) {
+  const hasImage = !!post.image;
+
+  if (hasImage) {
+    return (
+      <div className="relative h-40 w-full shrink-0 overflow-hidden sm:h-auto sm:w-[120px]">
+        <Image
+          src={post.image!}
+          alt={post.title}
+          fill
+          className="object-cover"
+          sizes="(max-width: 640px) 100vw, 120px"
+        />
+      </div>
+    );
+  }
+
+  // 画像なし: カテゴリ別グラデーション + アイコン
+  const style = CATEGORY_STYLE[post.category];
+  const { Icon } = style;
   return (
-    <div className="relative h-40 w-full shrink-0 overflow-hidden sm:h-auto sm:w-[120px]">
-      <Image
-        src={imageSrc}
-        alt={post.title}
-        fill
-        className="object-cover"
-        sizes="(max-width: 640px) 100vw, 120px"
-      />
+    <div className={`relative flex h-40 w-full shrink-0 items-center justify-center overflow-hidden bg-gradient-to-br ${style.gradient} sm:h-auto sm:w-[120px]`}>
+      <Icon className="size-10 text-white/40 sm:size-8" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(255,255,255,0.15),transparent_60%)]" />
     </div>
   );
 }

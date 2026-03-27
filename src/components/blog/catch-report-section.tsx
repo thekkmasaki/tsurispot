@@ -32,13 +32,20 @@ function ReportCard({ post, featured }: { post: BlogPostSummary; featured?: bool
         <div className="flex h-full flex-col">
           {/* サムネイル */}
           <div className="relative h-44 w-full overflow-hidden sm:h-48">
-            <Image
-              src={post.image || "/images/blog/defaults/report.svg"}
-              alt={post.title}
-              fill
-              className="object-cover transition-transform duration-300 group-hover:scale-105"
-              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-            />
+            {post.image ? (
+              <Image
+                src={post.image}
+                alt={post.title}
+                fill
+                className="object-cover transition-transform duration-300 group-hover:scale-105"
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-sky-400 to-cyan-500">
+                <Fish className="size-14 text-white/30" />
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(255,255,255,0.15),transparent_60%)]" />
+              </div>
+            )}
             {featured ? (
               <div className="absolute left-3 top-3">
                 <Badge className="bg-orange-500 text-white shadow-md hover:bg-orange-500">
@@ -100,8 +107,8 @@ function ReportCard({ post, featured }: { post: BlogPostSummary; featured?: bool
   );
 }
 
-export function CatchReportSection({ posts }: { posts: BlogPostSummary[] }) {
-  const [showAll, setShowAll] = useState(false);
+export function CatchReportSection({ posts, showAll: initialShowAll = false }: { posts: BlogPostSummary[]; showAll?: boolean }) {
+  const [showAll, setShowAll] = useState(initialShowAll);
   const visiblePosts = showAll ? posts : posts.slice(0, INITIAL_SHOW);
 
   if (posts.length === 0) return null;

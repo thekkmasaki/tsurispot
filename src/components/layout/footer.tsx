@@ -95,7 +95,7 @@ export function Footer() {
           <div>
             <h3 className="mb-3 text-sm font-semibold text-sea-foam">釣りを学ぶ</h3>
             <ul className="space-y-2 text-sm text-blue-100/70">
-              <li><Link href="/blog" className="hover:text-white">コラム</Link></li>
+              <li><Link href="/blog" className="hover:text-white">エリア釣果レポート</Link></li>
               <li><Link href="/quiz" className="hover:text-white">釣りクイズ</Link></li>
               <li><Link href="/bouzu-checker" className="hover:text-white">ボウズ確率チェッカー</Link></li>
               <li><Link href="/guide" className="hover:text-white">釣りの始め方</Link></li>
@@ -286,7 +286,7 @@ export function Footer() {
           <Link href="/ranking" className="hover:text-white">人気ランキング</Link>
         </div>
         <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-blue-100/60">
-          <Link href="/blog" className="hover:text-white">コラム</Link>
+          <Link href="/blog" className="hover:text-white">エリア釣果レポート</Link>
           <Link href="/about" className="hover:text-white">ツリスポについて</Link>
           <Link href="/partner" className="hover:text-white">事業者様向け</Link>
           <Link href="/privacy" className="hover:text-white">プライバシーポリシー</Link>

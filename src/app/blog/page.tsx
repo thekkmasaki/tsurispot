@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { getAllBlogPosts } from "@/lib/data/blog";
-import { FileText } from "lucide-react";
+import { MapPin } from "lucide-react";
 import { BlogListClient } from "@/components/blog/blog-list.client";
-import { CatchReportSection } from "@/components/blog/catch-report-section";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import Link from "next/link";
 
 // ISR: 1時間ごとに再検証
 export const revalidate = 3600;
@@ -12,13 +12,13 @@ export const revalidate = 3600;
 export const maxDuration = 60;
 
 export const metadata: Metadata = {
-  title: "釣果レポート・釣りコラム",
+  title: "エリア釣果レポート｜全国の最新釣果情報",
   description:
-    "最新の釣果レポートと実践的な釣りコラムを多数掲載。実際の釣行記録から堤防釣り・サビキ釣り・ルアーフィッシングのテクニックまで。編集部がわかりやすく解説します。",
+    "全国各エリアの最新釣果情報をお届け。エリアごとの釣果週報、今釣れている魚、おすすめタックル情報を毎週更新。釣り場選びの参考に。",
   openGraph: {
-    title: "釣果レポート・釣りコラム",
+    title: "エリア釣果レポート｜全国の最新釣果情報",
     description:
-      "最新の釣果レポートと実践的な釣りコラム。実際の釣行記録からテクニック・タックルレビューまでお届けします。",
+      "全国各エリアの最新釣果情報をお届け。エリアごとの釣果週報を毎週更新。",
     type: "website",
     url: "https://tsurispot.com/blog",
     siteName: "ツリスポ",
@@ -41,7 +41,7 @@ const breadcrumbJsonLd = {
     {
       "@type": "ListItem",
       position: 2,
-      name: "釣果・コラム",
+      name: "エリア釣果レポート",
       item: "https://tsurispot.com/blog",
     },
   ],
@@ -56,10 +56,8 @@ function stripContent<T extends { content: string }>(
 
 export default async function BlogListPage() {
   const posts = await getAllBlogPosts();
-  const reportPosts = stripContent(
-    posts.filter((p) => p.category === "report"),
-  );
-  const columnPosts = stripContent(
+  // 個人釣行レポートは /catch-reports に分離、ここではそれ以外を表示
+  const areaPosts = stripContent(
     posts.filter((p) => p.category !== "report"),
   );
 
@@ -70,29 +68,36 @@ export default async function BlogListPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
-      <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "釣果・コラム" }]} />
+      <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "エリア釣果レポート" }]} />
 
-      {/* 釣果レポートセクション（目立つ） */}
-      <CatchReportSection posts={reportPosts} />
-
-      {/* コラムセクション */}
-      <div className="mt-12">
-        <div className="mb-8">
-          <div className="mb-2 flex items-center gap-3">
-            <div className="flex size-10 items-center justify-center rounded-xl bg-primary/10">
-              <FileText className="size-5 text-primary" />
-            </div>
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-              釣りコラム
-            </h2>
+      <div className="mb-8">
+        <div className="mb-2 flex items-center gap-3">
+          <div className="flex size-10 items-center justify-center rounded-xl bg-gradient-to-br from-sky-500 to-blue-600 shadow-md">
+            <MapPin className="size-5 text-white" />
           </div>
-          <p className="text-sm text-muted-foreground sm:text-base">
-            初心者向けガイドから季節の釣り情報、テクニックまで。役立つ釣りコラムをお届けします。
-          </p>
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
+              エリア釣果レポート
+            </h1>
+            <p className="text-xs text-muted-foreground sm:text-sm">
+              全国各エリアの最新釣果情報
+            </p>
+          </div>
         </div>
-
-        <BlogListClient posts={columnPosts} />
+        <p className="mt-1 text-sm text-muted-foreground">
+          エリアごとの釣果週報、釣り場ガイド、テクニック情報をお届けします。
+        </p>
+        <div className="mt-3">
+          <Link
+            href="/catch-reports"
+            className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-medium text-sky-700 transition-colors hover:bg-sky-100"
+          >
+            🎣 編集部の釣行レポートはこちら
+          </Link>
+        </div>
       </div>
+
+      <BlogListClient posts={areaPosts} />
     </div>
   );
 }

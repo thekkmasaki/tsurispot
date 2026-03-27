@@ -34,7 +34,7 @@ const mainNavItems = [
   { href: "/fish", label: "図鑑", icon: BookOpen },
   { href: "/ranking", label: "ランキング", icon: Trophy },
   { href: "/catchable-now", label: "今釣れる", icon: Fish },
-  { href: "/blog", label: "コラム", icon: FileText },
+  { href: "/blog", label: "エリア釣果レポート", icon: FileText },
 ];
 
 // ドロップダウン「もっと見る」
@@ -50,6 +50,7 @@ const moreNavItems = [
   { href: "/fishing-rules", label: "ルールとマナー", icon: Scale },
   { href: "/quiz", label: "釣りクイズ", icon: Sparkles },
   { href: "/instructor-exam", label: "インストラクター試験", icon: ClipboardCheck },
+  { href: "/catch-reports", label: "釣行レポート", icon: Fish },
   { href: "/umigyo", label: "海業推進", icon: Anchor },
 ];
 

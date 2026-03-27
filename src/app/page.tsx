@@ -30,6 +30,7 @@ import dynamic from "next/dynamic";
 import { HomeSearchBar } from "@/components/home-search-bar";
 import { HomeSeasonalFish } from "@/components/home-seasonal-fish";
 import { HomePopularSpots } from "@/components/home-popular-spots";
+import { HomeTop10Client } from "@/components/home-top10-client";
 import { SectionErrorBoundary } from "@/components/ui/section-error-boundary";
 
 
@@ -800,72 +801,21 @@ export default async function Home() {
         ) : null;
       })()}
 
-      {/* 人気スポットTOP10 */}
-      {(() => {
-        const SPOT_TYPE_LABELS_TOP: Record<string, string> = {
-          port: "漁港", beach: "砂浜", rocky: "磯", river: "河川", pier: "桟橋", breakwater: "堤防",
-        };
-        const top10 = fishingSpots
-          .slice()
-          .sort((a, b) => (b.rating * b.reviewCount) - (a.rating * a.reviewCount))
-          .slice(0, 10);
-        return (
-          <section className="bg-muted/50 py-8 sm:py-12">
-            <div className="mx-auto max-w-5xl px-4 sm:px-6">
-              <div className="mb-6 flex items-end justify-between sm:mb-8">
-                <div>
-                  <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
-                    人気スポット TOP10
-                  </h2>
-                  <p className="mt-1 text-sm text-muted-foreground">
-                    評価とレビュー数で選ぶ注目の釣り場
-                  </p>
-                </div>
-                <Link
-                  href="/spots"
-                  className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
-                >
-                  すべて見る
-                  <ArrowRight className="size-4" />
-                </Link>
-              </div>
-              <div className="space-y-1.5">
-                {top10.map((spot, index) => (
-                  <Link key={spot.id} href={`/spots/${spot.slug}`} className="block">
-                    <div className="flex items-center gap-3 rounded-lg border bg-white p-3 transition-shadow hover:shadow-md">
-                      <div className={`flex size-8 shrink-0 items-center justify-center rounded-full font-bold text-sm ${index < 3 ? "bg-amber-100 text-amber-700" : "bg-muted text-muted-foreground"}`}>
-                        {index + 1}
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="flex items-center gap-2">
-                          <p className="truncate text-sm font-semibold">{spot.name}</p>
-                          <Badge variant="outline" className="shrink-0 text-[10px]">
-                            {SPOT_TYPE_LABELS_TOP[spot.spotType] || spot.spotType}
-                          </Badge>
-                        </div>
-                        <p className="text-xs text-muted-foreground">{spot.region.prefecture} {spot.region.areaName}</p>
-                      </div>
-                      <div className="flex shrink-0 items-center gap-1 text-xs">
-                        <Star className="size-3.5 fill-amber-400 text-amber-400" />
-                        <span className="font-semibold">{spot.rating.toFixed(1)}</span>
-                      </div>
-                      <ChevronRight className="size-4 shrink-0 text-muted-foreground" />
-                    </div>
-                  </Link>
-                ))}
-              </div>
-              <div className="mt-6 flex justify-center sm:hidden">
-                <Link href="/spots">
-                  <Button variant="outline" className="min-h-[44px] gap-1">
-                    すべてのスポットを見る
-                    <ArrowRight className="size-4" />
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </section>
-        );
-      })()}
+      {/* 人気スポットTOP10（近い順ソート対応） */}
+      <HomeTop10Client
+        spots={fishingSpots.map((s) => ({
+          id: s.id,
+          slug: s.slug,
+          name: s.name,
+          spotType: s.spotType,
+          rating: s.rating,
+          reviewCount: s.reviewCount,
+          latitude: s.latitude,
+          longitude: s.longitude,
+          prefecture: s.region.prefecture,
+          areaName: s.region.areaName,
+        }))}
+      />
 
       {/* 人気のエリア */}
       <section className="bg-muted/50 py-8 sm:py-12">
