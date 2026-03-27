@@ -62,20 +62,28 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const guide = getMonthlyGuide(month);
   if (!guide) return {};
 
+  // その月に釣れる全魚種数（検索結果で網羅性をアピール）
+  const totalFishCount = fishSpecies.filter((f) =>
+    f.seasonMonths.includes(guide.month)
+  ).length;
+
   const topFishNames = guide.topFish
-    .slice(0, 4)
+    .slice(0, 3)
     .map((slug) => fishSpecies.find((f) => f.slug === slug)?.name)
     .filter(Boolean)
     .join("・");
 
-  const title = `${guide.nameJa}に釣れる魚一覧・おすすめ釣り方と穴場スポット【2026年版】`;
-  const description = `${guide.nameJa}に釣れる魚と釣り方を徹底解説。おすすめターゲットは${topFishNames}。初心者でも楽しめる穴場スポット・仕掛け・釣り方のコツを紹介。${guide.nameJa}の釣り計画にお役立てください。`;
+  // CTR最適化: 【年月】先頭で鮮度シグナル + 魚種数で網羅性 + 具体的な魚名
+  const title = `【2026年${guide.nameJa}】釣れる魚${totalFishCount}種と釣り方 - ${topFishNames}を解説`;
+  const description = `${guide.nameJa}（2026年）に堤防・漁港で釣れる魚${totalFishCount}種を完全網羅。${topFishNames}など今狙えるターゲットの仕掛け・釣り方・おすすめスポットを解説。水温${guide.conditions.waterTemp}の${guide.nameJa}攻略法。初心者向けから上級テクニックまで。`;
+  // OG用タイトル（テンプレート「| ツリスポ」が付かないため少し長めに）
+  const ogTitle = `【2026年${guide.nameJa}】釣れる魚${totalFishCount}種と釣り方 - ${topFishNames}など｜ツリスポ`;
 
   return {
     title,
     description,
     openGraph: {
-      title,
+      title: ogTitle,
       description,
       type: "article",
       url: `https://tsurispot.com/monthly/${month}`,
