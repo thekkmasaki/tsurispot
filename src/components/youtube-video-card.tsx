@@ -93,7 +93,7 @@ interface YouTubeVideoResult {
   thumbnail: string;
 }
 
-function YouTubeSearchEmbed({ query }: { query: string }) {
+function YouTubeSearchEmbed({ query, link, thumbnailUrl }: { query: string; link?: YouTubeSearchLink; thumbnailUrl?: string }) {
   const [videos, setVideos] = useState<YouTubeVideoResult[]>([]);
   const [loading, setLoading] = useState(true);
   const [failed, setFailed] = useState(false);
@@ -120,7 +120,11 @@ function YouTubeSearchEmbed({ query }: { query: string }) {
     );
   }
 
-  if (failed || videos.length === 0) return null;
+  if (failed || videos.length === 0) {
+    // 動画が取れなくてもYouTube検索リンクを表示
+    if (link) return <YouTubeFallbackCard link={link} thumbnailUrl={thumbnailUrl} />;
+    return null;
+  }
 
   return (
     <>
@@ -175,7 +179,7 @@ export function YouTubeVideoList({ links, thumbnailUrl }: { links?: YouTubeSearc
   return (
     <div className="grid gap-3 sm:grid-cols-2 sm:gap-4">
       {links.map((link, i) => (
-        <YouTubeSearchEmbed key={`${link.searchQuery}-${i}`} query={link.searchQuery} />
+        <YouTubeSearchEmbed key={`${link.searchQuery}-${i}`} query={link.searchQuery} link={link} thumbnailUrl={thumbnailUrl} />
       ))}
     </div>
   );
