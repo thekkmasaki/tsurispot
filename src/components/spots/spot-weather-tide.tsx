@@ -227,6 +227,113 @@ function FishingScoreBar({ score }: { score: number }) {
   );
 }
 
+// おすすめ時間帯の算出
+interface BestTimeResult {
+  startHour: number;
+  endHour: number;
+  score: number;
+  reasons: string[];
+}
+
+function calcBestFishingTime(
+  hourly: HourlyWeatherData[],
+  sunriseStr: string,
+  sunsetStr: string,
+  highTides: string[],
+  lowTides: string[],
+): BestTimeResult | null {
+  if (!hourly || hourly.length < 24) return null;
+
+  const sunriseH = parseInt(sunriseStr.split(":")[0], 10);
+  const sunsetH = parseInt(sunsetStr.split(":")[0], 10);
+
+  // 潮の変わり目時刻（時単位）
+  const tideChangeHours = [...highTides, ...lowTides].map((t) => {
+    const h = parseInt(t.split(":")[0], 10);
+    const m = parseInt(t.split(":")[1], 10);
+    return h + m / 60;
+  });
+
+  // 各時間のスコア計算
+  const scores = hourly.map((h, hour) => {
+    let s = 0;
+    const reasons: string[] = [];
+    const windMs = h.windSpeed / 3.6;
+
+    // マズメ（日出前後1h、日没前後1h）
+    if (Math.abs(hour - sunriseH) <= 1) {
+      s += 4;
+      reasons.push("朝マズメ");
+    } else if (Math.abs(hour - sunsetH) <= 1) {
+      s += 4;
+      reasons.push("夕マズメ");
+    }
+
+    // 潮の変わり目（±1h）
+    for (const tc of tideChangeHours) {
+      if (Math.abs(hour - tc) <= 1.5) {
+        s += 3;
+        reasons.push("潮の動き出し");
+        break;
+      }
+    }
+
+    // 天気: 晴れ〜曇りは良い、雨は減点
+    if (h.weatherCode <= 3) {
+      s += 1;
+    } else if (h.weatherCode >= 51) {
+      s -= 2;
+      reasons.push("雨");
+    }
+
+    // 風速: 弱風は良い、強風は減点
+    if (windMs < 3) {
+      s += 2;
+      reasons.push("穏やか");
+    } else if (windMs < 5) {
+      s += 1;
+    } else if (windMs >= 7) {
+      s -= 1;
+    } else if (windMs >= 10) {
+      s -= 3;
+    }
+
+    // 深夜帯は減点（0-3時）
+    if (hour >= 0 && hour <= 3) {
+      s -= 1;
+    }
+
+    return { hour, score: s, reasons };
+  });
+
+  // 連続2時間の最高スコアウィンドウを探す
+  let bestStart = 0;
+  let bestSum = -Infinity;
+  for (let i = 0; i < 23; i++) {
+    const sum = scores[i].score + scores[i + 1].score;
+    if (sum > bestSum) {
+      bestSum = sum;
+      bestStart = i;
+    }
+  }
+
+  // 理由を集約（重複排除）
+  const reasonSet = new Set<string>();
+  for (let i = bestStart; i <= bestStart + 1; i++) {
+    scores[i].reasons.filter((r) => r !== "雨" && r !== "穏やか").forEach((r) => reasonSet.add(r));
+  }
+  // 風が穏やかなら追加
+  const avgWind = (hourly[bestStart].windSpeed + hourly[bestStart + 1].windSpeed) / 2 / 3.6;
+  if (avgWind < 3) reasonSet.add("風が穏やか");
+
+  return {
+    startHour: bestStart,
+    endHour: bestStart + 2,
+    score: bestSum,
+    reasons: Array.from(reasonSet),
+  };
+}
+
 // 14日間の日付リストを生成
 function generate14Days(): Date[] {
   const days: Date[] = [];
@@ -628,10 +735,41 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
           </div>
         </div>
 
-        {/* 潮の解説 */}
-        <div className="mt-3 rounded-lg bg-gray-50 px-3 py-2">
-          <p className="text-xs text-muted-foreground leading-relaxed">{tideInfo.description}</p>
-        </div>
+        {/* おすすめ時間帯 + 潮の解説 */}
+        {dailyData && (() => {
+          const best = calcBestFishingTime(
+            dailyData.hourly,
+            dailyData.sunrise,
+            dailyData.sunset,
+            tideInfo.highTides,
+            tideInfo.lowTides,
+          );
+          return best && best.score > 0 ? (
+            <div className="mt-3 rounded-lg bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 px-3 py-2.5">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-base">🎯</span>
+                <span className="text-xs font-bold text-amber-900">おすすめ時間帯</span>
+                <span className="rounded-full bg-amber-500 px-2 py-0.5 text-xs font-bold text-white">
+                  {best.startHour}:00〜{best.endHour}:00
+                </span>
+              </div>
+              {best.reasons.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 mb-1.5">
+                  {best.reasons.map((r) => (
+                    <span key={r} className="rounded-full bg-white/80 border border-amber-200 px-2 py-0.5 text-[10px] font-medium text-amber-800">
+                      {r}
+                    </span>
+                  ))}
+                </div>
+              )}
+              <p className="text-[11px] text-amber-700 leading-relaxed">{tideInfo.description}</p>
+            </div>
+          ) : (
+            <div className="mt-3 rounded-lg bg-gray-50 px-3 py-2">
+              <p className="text-xs text-muted-foreground leading-relaxed">{tideInfo.description}</p>
+            </div>
+          );
+        })()}
 
         {/* 風速警告バナー */}
         {weather && dailyData && (() => {
