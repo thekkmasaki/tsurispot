@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>平磯海釣り公園 - 特許パイプライン解説</title>
+<style>
+  :root {
+    --blue: #2563eb;
+    --green: #16a34a;
+    --orange: #ea580c;
+    --red: #dc2626;
+    --purple: #9333ea;
+    --slate: #475569;
+    --bg: #f8fafc;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', 'Hiragino Sans', 'Meiryo', sans-serif; background: var(--bg); color: #1e293b; line-height: 1.7; }
+  .container { max-width: 960px; margin: 0 auto; padding: 24px 20px; }
+
+  h1 { font-size: 1.8em; margin-bottom: 8px; }
+  h1 small { font-size: 0.5em; color: var(--slate); font-weight: 400; display: block; }
+  h2 { font-size: 1.35em; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 3px solid var(--blue); color: var(--blue); }
+  h3 { font-size: 1.1em; margin: 24px 0 8px; color: #334155; }
+
+  .badge { display: inline-block; padding: 2px 10px; border-radius: 999px; font-size: 0.75em; font-weight: 700; }
+  .badge-patent { background: #4f46e5; color: #fff; }
+  .badge-step { background: #dbeafe; color: #1e40af; }
+
+  .card { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 16px 0; box-shadow: 0 1px 3px rgba(0,0,0,0.06); }
+  .card-header { font-weight: 700; font-size: 1.05em; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+
+  .pipeline-flow { display: flex; flex-direction: column; gap: 0; align-items: center; margin: 24px 0; }
+  .pipeline-box { background: #fff; border: 2px solid var(--blue); border-radius: 12px; padding: 16px 24px; width: 100%; max-width: 600px; text-align: center; position: relative; }
+  .pipeline-box.active { border-color: var(--green); background: #f0fdf4; }
+  .pipeline-arrow { font-size: 28px; color: var(--blue); line-height: 1; padding: 4px 0; }
+
+  /* SVG図 */
+  .diagram-wrap { overflow-x: auto; margin: 16px 0; border: 1px solid #e2e8f0; border-radius: 12px; background: #fff; }
+  .diagram-wrap svg { display: block; width: 100%; min-width: 700px; }
+
+  .code-block { background: #1e293b; color: #e2e8f0; padding: 16px; border-radius: 8px; font-family: 'Consolas', 'Monaco', monospace; font-size: 0.85em; overflow-x: auto; margin: 12px 0; white-space: pre; }
+  .code-comment { color: #94a3b8; }
+  .code-key { color: #93c5fd; }
+  .code-val { color: #86efac; }
+  .code-num { color: #fbbf24; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 640px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .tag { display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 0.8em; font-weight: 600; margin: 2px; }
+  .tag-seawall { background: #dbeafe; color: #1e40af; }
+  .tag-tetrapod { background: #fef3c7; color: #92400e; }
+  .tag-water { background: #e0f2fe; color: #0369a1; }
+  .tag-land { background: #f1f5f9; color: #475569; }
+  .tag-port { background: #ede9fe; color: #6b21a8; }
+  .tag-reef { background: #dcfce7; color: #166534; }
+  .tag-hot { background: #fee2e2; color: #991b1b; }
+  .tag-good { background: #dbeafe; color: #1e40af; }
+  .tag-normal { background: #f1f5f9; color: #475569; }
+
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 0.9em; }
+  th { background: #f1f5f9; text-align: left; padding: 8px 12px; border-bottom: 2px solid #e2e8f0; }
+  td { padding: 8px 12px; border-bottom: 1px solid #f1f5f9; }
+  tr:hover td { background: #f8fafc; }
+
+  .note { background: #fffbeb; border-left: 4px solid #f59e0b; padding: 12px 16px; border-radius: 0 8px 8px 0; margin: 16px 0; font-size: 0.9em; }
+  .note-blue { background: #eff6ff; border-left-color: var(--blue); }
+
+  .legend-item { display: inline-flex; align-items: center; gap: 6px; margin-right: 16px; font-size: 0.85em; }
+  .legend-dot { width: 14px; height: 14px; border-radius: 3px; }
+
+  .confidence-bar { height: 8px; border-radius: 4px; background: #e2e8f0; overflow: hidden; }
+  .confidence-fill { height: 100%; border-radius: 4px; }
+
+  .toc { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 20px; margin: 24px 0; }
+  .toc h3 { margin: 0 0 12px; font-size: 1em; }
+  .toc ol { padding-left: 24px; }
+  .toc li { margin: 4px 0; }
+  .toc a { color: var(--blue); text-decoration: none; }
+  .toc a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>
+  平磯海釣り公園 — 特許パイプライン解説
+  <small>特願2026-042836「衛星画像解析による釣り場ポイント情報自動生成システム」</small>
+</h1>
+<p style="color: var(--slate); margin-bottom: 24px;">
+  衛星画像から構造物を検出し、魚種を推定し、釣りポイントマップを自動生成するまでの全工程を図解します。
+</p>
+
+<!-- 目次 -->
+<div class="toc">
+  <h3>目次</h3>
+  <ol>
+    <li><a href="#overview">パイプライン全体像</a></li>
+    <li><a href="#step1">STEP 1: 衛星画像の取得</a></li>
+    <li><a href="#step2">STEP 2: SAM2で領域分割（セグメンテーション）</a></li>
+    <li><a href="#step3">STEP 3: CLIPで構造物分類</a></li>
+    <li><a href="#step4">STEP 4: ゾーン分割</a></li>
+    <li><a href="#step5">STEP 5: 海底地物の配置</a></li>
+    <li><a href="#step6">STEP 6: 魚種推定</a></li>
+    <li><a href="#step7">STEP 7: ポイントマップ自動生成</a></li>
+    <li><a href="#files">ファイル構成</a></li>
+  </ol>
+</div>
+
+<!-- ===== 1. 全体像 ===== -->
+<h2 id="overview">1. パイプライン全体像</h2>
+
+<div class="pipeline-flow">
+  <div class="pipeline-box">
+    <strong>STEP 1</strong> 衛星画像取得<br>
+    <small>Sentinel-2 / 640×640px / 座標: 34.6264, 135.0661</small>
+  </div>
+  <div class="pipeline-arrow">▼</div>
+  <div class="pipeline-box">
+    <strong>STEP 2</strong> SAM2 セグメンテーション<br>
+    <small>画像を意味のある領域（マスク）に自動分割</small>
+  </div>
+  <div class="pipeline-arrow">▼</div>
+  <div class="pipeline-box">
+    <strong>STEP 3</strong> CLIP 構造物分類<br>
+    <small>各マスクを9カテゴリ（護岸/テトラ/岩礁/...）に判定</small>
+  </div>
+  <div class="pipeline-arrow">▼</div>
+  <div class="pipeline-box">
+    <strong>STEP 4</strong> ゾーン分割<br>
+    <small>構造物の配置パターンから釣りゾーンを自動決定</small>
+  </div>
+  <div class="pipeline-arrow">▼</div>
+  <div class="pipeline-box">
+    <strong>STEP 5</strong> 海底地物の配置<br>
+    <small>水上構造物は衛星画像で検出 / 水中構造物は公知データから統合</small>
+  </div>
+  <div class="pipeline-arrow">▼</div>
+  <div class="pipeline-box">
+    <strong>STEP 6</strong> 魚種推定<br>
+    <small>構造物×水深×潮通し → 各ゾーンで釣れる魚を自動導出</small>
+  </div>
+  <div class="pipeline-arrow">▼</div>
+  <div class="pipeline-box active">
+    <strong>STEP 7</strong> ポイントマップ自動生成 <span class="badge badge-patent">特許技術</span><br>
+    <small>テント番号・海底地物・魚種ラベルを配置した俯瞰図を出力</small>
+  </div>
+</div>
+
+<!-- ===== STEP 1 ===== -->
+<h2 id="step1">2. STEP 1: 衛星画像の取得</h2>
+
+<div class="card">
+  <div class="card-header">
+    <span class="badge badge-step">入力</span>
+    座標: 北緯 34.6264° / 東経 135.0661°
+  </div>
+  <p>
+    Sentinel-2衛星（ESA/EU）がこの座標周辺を撮影した画像を取得する。
+    解像度10m（1ピクセル = 地上10m四方）、画像サイズ640×640px。
+  </p>
+</div>
+
+<div class="diagram-wrap">
+  <svg viewBox="0 0 700 340" xmlns="http://www.w3.org/2000/svg">
+    <!-- 衛星画像（模式図） -->
+    <defs>
+      <linearGradient id="g-land" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#a8c686"/><stop offset="100%" stop-color="#8fb06a"/></linearGradient>
+      <linearGradient id="g-sea" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#64b5f6"/><stop offset="100%" stop-color="#1565c0"/></linearGradient>
+    </defs>
+    <rect x="40" y="20" width="320" height="300" rx="4" fill="#1e293b" stroke="#94a3b8" stroke-width="1"/>
+    <text x="200" y="12" text-anchor="middle" font-size="11" fill="#64748b">衛星画像 640×640px</text>
+
+    <!-- 陸 -->
+    <rect x="42" y="22" width="316" height="120" fill="url(#g-land)" rx="2"/>
+    <text x="200" y="75" text-anchor="middle" font-size="13" fill="#fff" font-weight="700" opacity="0.6">陸地（建物・駐車場・道路）</text>
+
+    <!-- 護岸ライン -->
+    <rect x="42" y="142" width="316" height="18" fill="#b0a090"/>
+    <text x="200" y="155" text-anchor="middle" font-size="10" fill="#fff" font-weight="600">護岸（ベランダ）</text>
+
+    <!-- テトラ -->
+    <rect x="42" y="160" width="58" height="28" fill="#c9b896" stroke="#a09070" stroke-width="1"/>
+    <text x="71" y="178" text-anchor="middle" font-size="9" fill="#5a4a3a" font-weight="600">テトラ帯</text>
+
+    <!-- 海 -->
+    <rect x="42" y="160" width="316" height="158" fill="url(#g-sea)" rx="0 0 2 2" opacity="0.85"/>
+    <rect x="42" y="160" width="58" height="28" fill="#c9b896" opacity="0.7"/>
+    <text x="200" y="250" text-anchor="middle" font-size="16" fill="#fff" font-weight="700" opacity="0.4">大阪湾</text>
+
+    <!-- 座標注釈 -->
+    <circle cx="200" cy="155" r="5" fill="#ef4444" stroke="#fff" stroke-width="2"/>
+    <text x="210" y="162" font-size="10" fill="#ef4444" font-weight="600">中心座標</text>
+
+    <!-- 右側: 説明 -->
+    <g transform="translate(400, 30)">
+      <text font-size="13" font-weight="700" fill="#1e293b">取得パラメータ</text>
+      <text y="28" font-size="11" fill="#475569">ソース: Sentinel-2 (AWS Open Data)</text>
+      <text y="48" font-size="11" fill="#475569">日付: 2026-03-01</text>
+      <text y="68" font-size="11" fill="#475569">解像度: 10m/px</text>
+      <text y="88" font-size="11" fill="#475569">サイズ: 640 × 640 px</text>
+      <text y="108" font-size="11" fill="#475569">= 約 6.4km × 6.4km の範囲</text>
+
+      <text y="148" font-size="13" font-weight="700" fill="#1e293b">この画像から読み取れること</text>
+      <text y="172" font-size="11" fill="#16a34a">✓ 護岸の形状・長さ（約700m）</text>
+      <text y="192" font-size="11" fill="#16a34a">✓ テトラポッドの位置（西端）</text>
+      <text y="212" font-size="11" fill="#16a34a">✓ 建物・施設の配置</text>
+      <text y="232" font-size="11" fill="#16a34a">✓ 海の色の変化（浅瀬・深場）</text>
+      <text y="252" font-size="11" fill="#ea580c">△ 水中の魚礁（公知データから配置、衛星では検出不可）</text>
+      <text y="272" font-size="11" fill="#dc2626">✗ 水深・潮流（別データ源が必要）</text>
+    </g>
+  </svg>
+</div>
+
+<!-- ===== STEP 2 ===== -->
+<h2 id="step2">3. STEP 2: SAM2で領域分割</h2>
+
+<div class="card">
+  <div class="card-header">
+    <span class="badge badge-step">処理</span>
+    SAM2 = Segment Anything Model 2（Meta社の無料AI）
+  </div>
+  <p>
+    衛星画像を入力すると、意味のある「かたまり」ごとに輪郭線（マスク）を自動生成する。<br>
+    人間が「ここを囲って」と指示しなくても、AIが自動的に全領域を分割する。
+  </p>
+</div>
+
+<div class="diagram-wrap">
+  <svg viewBox="0 0 700 350" xmlns="http://www.w3.org/2000/svg">
+    <!-- Before: 元画像 -->
+    <text x="130" y="16" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">入力: 衛星画像</text>
+    <rect x="10" y="24" width="240" height="200" rx="4" fill="#8fb06a"/>
+    <rect x="10" y="124" width="240" height="18" fill="#b0a090"/>
+    <rect x="10" y="142" width="45" height="22" fill="#c9b896"/>
+    <rect x="10" y="142" width="240" height="80" fill="#4a90d9" opacity="0.8"/>
+    <rect x="10" y="142" width="45" height="22" fill="#c9b896" opacity="0.7"/>
+
+    <!-- Arrow -->
+    <text x="280" y="120" font-size="11" font-weight="700" fill="#2563eb">SAM2</text>
+    <path d="M260,130 L310,130" stroke="#2563eb" stroke-width="3" marker-end="url(#arrow)"/>
+    <defs><marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#2563eb"/></marker></defs>
+
+    <!-- After: マスク分割 -->
+    <text x="470" y="16" text-anchor="middle" font-size="12" font-weight="700" fill="#475569">出力: 5つのマスク（領域）</text>
+    <rect x="340" y="24" width="250" height="200" rx="4" fill="none" stroke="#94a3b8" stroke-width="1"/>
+
+    <!-- マスク1: 陸地 -->
+    <rect x="342" y="26" width="246" height="96" fill="#a8c686" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="6,3" rx="2"/>
+    <text x="465" y="70" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="700">マスク5</text>
+    <text x="465" y="86" text-anchor="middle" font-size="9" fill="#dc2626">面積比30% / スコア0.98</text>
+
+    <!-- マスク2: 護岸 -->
+    <rect x="342" y="124" width="246" height="18" fill="#d4c4a8" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="6,3"/>
+    <text x="465" y="137" text-anchor="middle" font-size="9" fill="#1e40af" font-weight="700">マスク1 (5.1%/0.96)</text>
+
+    <!-- マスク3: テトラ -->
+    <rect x="342" y="142" width="47" height="22" fill="#e8d8b8" stroke="#f59e0b" stroke-width="2.5" stroke-dasharray="6,3"/>
+    <text x="366" y="157" text-anchor="middle" font-size="7" fill="#92400e" font-weight="700">マスク2</text>
+
+    <!-- マスク4: 施設 -->
+    <rect x="352" y="30" width="226" height="30" fill="#c8b898" stroke="#9333ea" stroke-width="2" stroke-dasharray="6,3" opacity="0.6"/>
+    <text x="465" y="50" text-anchor="middle" font-size="8" fill="#7c3aed" font-weight="700">マスク3 (施設帯)</text>
+
+    <!-- マスク5: 海 -->
+    <rect x="342" y="142" width="246" height="80" fill="#4a90d9" stroke="#16a34a" stroke-width="2.5" stroke-dasharray="6,3" opacity="0.8"/>
+    <text x="465" y="190" text-anchor="middle" font-size="12" fill="#fff" font-weight="700">マスク4</text>
+    <text x="465" y="205" text-anchor="middle" font-size="9" fill="#fff">面積比65% / スコア0.99</text>
+
+    <!-- 凡例 -->
+    <g transform="translate(10, 250)">
+      <text font-size="12" font-weight="700" fill="#1e293b">SAM2が出力するもの（各マスクに付く情報）</text>
+      <g transform="translate(0, 24)">
+        <rect width="12" height="12" rx="2" fill="#ef4444"/>
+        <text x="18" y="11" font-size="10" fill="#475569">mask: ピクセルごとの true/false（この領域に含まれるか）</text>
+      </g>
+      <g transform="translate(0, 44)">
+        <rect width="12" height="12" rx="2" fill="#2563eb"/>
+        <text x="18" y="11" font-size="10" fill="#475569">bbox: バウンディングボックス（x, y, width, height）</text>
+      </g>
+      <g transform="translate(0, 64)">
+        <rect width="12" height="12" rx="2" fill="#16a34a"/>
+        <text x="18" y="11" font-size="10" fill="#475569">area: 面積（ピクセル数）/ predicted_iou: 信頼度スコア</text>
+      </g>
+    </g>
+
+    <text x="10" y="336" font-size="10" fill="#94a3b8">※ この時点では「形」は分かるが「何であるか」は分からない。次のCLIPで判定する。</text>
+  </svg>
+</div>
+
+<!-- ===== STEP 3 ===== -->
+<h2 id="step3">4. STEP 3: CLIPで構造物分類</h2>
+
+<div class="card">
+  <div class="card-header">
+    <span class="badge badge-step">処理</span>
+    CLIP = 画像とテキストを紐づけるAI（OpenAI無料公開）
+  </div>
+  <p>
+    SAM2が切り出した各マスクをCLIPに見せて、「これは何？」と9つの選択肢から分類する。<br>
+    具体的には、マスク画像と9カテゴリのテキスト説明のcos類似度（似ている度合い）を計算し、最も似ているカテゴリに判定する。
+  </p>
+</div>
+
+<div class="diagram-wrap">
+  <svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg">
+    <!-- マスク1を取り出す -->
+    <rect x="20" y="20" width="120" height="60" rx="6" fill="#d4c4a8" stroke="#2563eb" stroke-width="2"/>
+    <text x="80" y="45" text-anchor="middle" font-size="10" font-weight="700" fill="#1e40af">マスク1</text>
+    <text x="80" y="58" text-anchor="middle" font-size="8" fill="#475569">切り抜き画像</text>
+
+    <!-- → CLIP -->
+    <path d="M150,50 L200,50" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow)"/>
+    <rect x="200" y="10" width="100" height="80" rx="8" fill="#2563eb"/>
+    <text x="250" y="42" text-anchor="middle" font-size="14" fill="#fff" font-weight="800">CLIP</text>
+    <text x="250" y="60" text-anchor="middle" font-size="8" fill="#dbeafe">画像↔テキスト</text>
+    <text x="250" y="72" text-anchor="middle" font-size="8" fill="#dbeafe">cos類似度</text>
+
+    <!-- → 9カテゴリとの比較 -->
+    <path d="M310,50 L350,50" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow)"/>
+
+    <!-- スコアバー -->
+    <g transform="translate(355, 10)">
+      <text font-size="10" font-weight="700" fill="#1e293b">各カテゴリとの類似度スコア</text>
+
+      <!-- seawall: 0.96 -->
+      <g transform="translate(0, 18)">
+        <text y="10" font-size="10" fill="#475569" font-weight="600">護岸 (seawall)</text>
+        <rect x="130" y="2" width="200" height="10" rx="5" fill="#e2e8f0"/>
+        <rect x="130" y="2" width="192" height="10" rx="5" fill="#16a34a"/>
+        <text x="335" y="11" font-size="9" fill="#16a34a" font-weight="700">0.96 ★</text>
+      </g>
+      <!-- tetrapod: 0.31 -->
+      <g transform="translate(0, 36)">
+        <text y="10" font-size="10" fill="#475569">テトラ (tetrapod)</text>
+        <rect x="130" y="2" width="200" height="10" rx="5" fill="#e2e8f0"/>
+        <rect x="130" y="2" width="62" height="10" rx="5" fill="#94a3b8"/>
+        <text x="335" y="11" font-size="9" fill="#94a3b8">0.31</text>
+      </g>
+      <!-- rocky: 0.18 -->
+      <g transform="translate(0, 54)">
+        <text y="10" font-size="10" fill="#475569">岩礁 (rocky)</text>
+        <rect x="130" y="2" width="200" height="10" rx="5" fill="#e2e8f0"/>
+        <rect x="130" y="2" width="36" height="10" rx="5" fill="#94a3b8"/>
+        <text x="335" y="11" font-size="9" fill="#94a3b8">0.18</text>
+      </g>
+      <!-- sandy: 0.12 -->
+      <g transform="translate(0, 72)">
+        <text y="10" font-size="10" fill="#475569">砂浜 / 桟橋 / 港湾 / ... </text>
+        <rect x="130" y="2" width="200" height="10" rx="5" fill="#e2e8f0"/>
+        <rect x="130" y="2" width="24" height="10" rx="5" fill="#cbd5e1"/>
+        <text x="335" y="11" font-size="9" fill="#cbd5e1">0.12以下</text>
+      </g>
+    </g>
+
+    <!-- 結論 -->
+    <rect x="400" y="100" width="260" height="36" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+    <text x="530" y="123" text-anchor="middle" font-size="12" font-weight="700" fill="#16a34a">→ 判定: 護岸 (seawall) 信頼度96%</text>
+
+    <!-- 全5マスクの結果一覧 -->
+    <line x1="20" y1="150" x2="680" y2="150" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="20" y="172" font-size="13" font-weight="700" fill="#1e293b">平磯の全マスク分類結果</text>
+
+    <g transform="translate(20, 185)">
+      <!-- ヘッダー -->
+      <rect width="660" height="28" rx="4" fill="#f1f5f9"/>
+      <text x="10" y="19" font-size="10" font-weight="700" fill="#475569">ID</text>
+      <text x="100" y="19" font-size="10" font-weight="700" fill="#475569">カテゴリ</text>
+      <text x="230" y="19" font-size="10" font-weight="700" fill="#475569">信頼度</text>
+      <text x="340" y="19" font-size="10" font-weight="700" fill="#475569">面積比</text>
+      <text x="430" y="19" font-size="10" font-weight="700" fill="#475569">位置</text>
+      <text x="540" y="19" font-size="10" font-weight="700" fill="#475569">海岸からの距離</text>
+
+      <!-- str-001 -->
+      <text x="10" y="48" font-size="10" fill="#475569">str-001</text>
+      <rect x="100" y="37" width="60" height="18" rx="9" fill="#dbeafe"/><text x="130" y="50" text-anchor="middle" font-size="9" fill="#1e40af" font-weight="600">護岸</text>
+      <rect x="230" y="42" width="80" height="8" rx="4" fill="#e2e8f0"/><rect x="230" y="42" width="77" height="8" rx="4" fill="#16a34a"/>
+      <text x="315" y="50" font-size="9" fill="#16a34a" font-weight="600">96%</text>
+      <text x="340" y="50" font-size="10" fill="#475569">5.1%</text>
+      <text x="430" y="50" font-size="10" fill="#475569">中央（全長）</text>
+      <text x="540" y="50" font-size="10" fill="#475569">海岸上</text>
+
+      <!-- str-002 -->
+      <text x="10" y="72" font-size="10" fill="#475569">str-002</text>
+      <rect x="100" y="61" width="60" height="18" rx="9" fill="#fef3c7"/><text x="130" y="74" text-anchor="middle" font-size="9" fill="#92400e" font-weight="600">テトラ</text>
+      <rect x="230" y="66" width="80" height="8" rx="4" fill="#e2e8f0"/><rect x="230" y="66" width="71" height="8" rx="4" fill="#eab308"/>
+      <text x="315" y="74" font-size="9" fill="#eab308" font-weight="600">89%</text>
+      <text x="340" y="74" font-size="10" fill="#475569">1.4%</text>
+      <text x="430" y="74" font-size="10" fill="#475569">左端9%</text>
+      <text x="540" y="74" font-size="10" fill="#475569">近い</text>
+
+      <!-- str-003 -->
+      <text x="10" y="96" font-size="10" fill="#475569">str-003</text>
+      <rect x="100" y="85" width="60" height="18" rx="9" fill="#ede9fe"/><text x="130" y="98" text-anchor="middle" font-size="9" fill="#6b21a8" font-weight="600">港湾施設</text>
+      <rect x="230" y="90" width="80" height="8" rx="4" fill="#e2e8f0"/><rect x="230" y="90" width="66" height="8" rx="4" fill="#9333ea"/>
+      <text x="315" y="98" font-size="9" fill="#9333ea" font-weight="600">82%</text>
+      <text x="340" y="98" font-size="10" fill="#475569">4.8%</text>
+      <text x="430" y="98" font-size="10" fill="#475569">中央</text>
+      <text x="540" y="98" font-size="10" fill="#475569">海岸上</text>
+
+      <!-- str-004（背景ノイズ → 除外） -->
+      <rect x="0" y="108" width="660" height="22" fill="#f1f5f9" opacity="0.5"/>
+      <text x="10" y="120" font-size="10" fill="#94a3b8" text-decoration="line-through">str-004</text>
+      <rect x="100" y="109" width="60" height="18" rx="9" fill="#e0f2fe" opacity="0.4"/><text x="130" y="122" text-anchor="middle" font-size="9" fill="#94a3b8">水域</text>
+      <rect x="230" y="114" width="80" height="8" rx="4" fill="#e2e8f0"/><rect x="230" y="114" width="80" height="8" rx="4" fill="#0ea5e9" opacity="0.3"/>
+      <text x="315" y="122" font-size="9" fill="#94a3b8">99%</text>
+      <text x="340" y="122" font-size="10" fill="#94a3b8">65%</text>
+      <text x="430" y="122" font-size="10" fill="#94a3b8">全域</text>
+      <text x="540" y="122" font-size="10" fill="#dc2626" font-weight="700">→ 背景として除外</text>
+
+      <!-- str-005（背景ノイズ → 除外） -->
+      <rect x="0" y="130" width="660" height="22" fill="#f1f5f9" opacity="0.5"/>
+      <text x="10" y="144" font-size="10" fill="#94a3b8" text-decoration="line-through">str-005</text>
+      <rect x="100" y="133" width="60" height="18" rx="9" fill="#f1f5f9" opacity="0.4"/><text x="130" y="146" text-anchor="middle" font-size="9" fill="#94a3b8">陸地</text>
+      <rect x="230" y="138" width="80" height="8" rx="4" fill="#e2e8f0"/><rect x="230" y="138" width="78" height="8" rx="4" fill="#64748b" opacity="0.3"/>
+      <text x="315" y="146" font-size="9" fill="#94a3b8">98%</text>
+      <text x="340" y="146" font-size="10" fill="#94a3b8">30%</text>
+      <text x="430" y="146" font-size="10" fill="#94a3b8">全域</text>
+      <text x="540" y="146" font-size="10" fill="#dc2626" font-weight="700">→ 背景として除外</text>
+
+      <!-- フィルタリング結果サマリー -->
+      <line x1="0" y1="158" x2="660" y2="158" stroke="#e2e8f0" stroke-width="1"/>
+      <rect x="0" y="164" width="660" height="28" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+      <text x="330" y="182" text-anchor="middle" font-size="10" fill="#16a34a" font-weight="700">フィルタ後: 構造物3件（護岸・テトラ・港湾施設）のみ次ステップへ → 水域・陸地は背景ノイズとして除外</text>
+    </g>
+  </svg>
+</div>
+
+<div class="note">
+  <strong>ノイズ除外の仕組み:</strong> SAM2は画像内の「全ての」領域を分割するため、水域（65%）と陸地（30%）という背景が必ず検出される。
+  これらはカテゴリが「water」「land」のものを自動除外するフィルタで取り除く。
+  結果、画像面積の<strong>わずか11.3%</strong>（護岸5.1% + テトラ1.4% + 港湾施設4.8%）が有用な構造物として残る。
+</div>
+
+<!-- ===== STEP 4 ===== -->
+<h2 id="step4">5. STEP 4: ゾーン分割</h2>
+
+<div class="card">
+  <div class="card-header">
+    <span class="badge badge-step">処理</span>
+    構造物の配置パターンから釣りゾーンを自動決定
+  </div>
+  <p>
+    護岸の全長700mを、構造物の種類が変わるポイントで区切り、7つのゾーンに分割する。<br>
+    各ゾーンには「どんな構造物があるか」「潮通しの良さ」が数値化される。
+  </p>
+</div>
+
+<div class="diagram-wrap">
+  <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg">
+    <!-- 護岸ライン -->
+    <rect x="20" y="60" width="660" height="24" rx="2" fill="#d4c4a8" stroke="#a09070" stroke-width="1.5"/>
+    <text x="350" y="76" text-anchor="middle" font-size="9" fill="#5a4a3a" font-weight="600">護岸（ベランダ） 全長700m</text>
+    <text x="22" y="55" font-size="9" fill="#64748b" font-weight="600">← 西端</text>
+    <text x="678" y="55" text-anchor="end" font-size="9" fill="#64748b" font-weight="600">東端 →</text>
+
+    <!-- ゾーン区分 -->
+    <!-- Zone1: 0-15% = 西端 -->
+    <rect x="20" y="90" width="99" height="40" rx="4" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+    <text x="69" y="108" text-anchor="middle" font-size="8" fill="#92400e" font-weight="700">西端</text>
+    <text x="69" y="120" text-anchor="middle" font-size="7" fill="#92400e">護岸+テトラ</text>
+
+    <!-- Zone2: 10-20% = テトラ帯 -->
+    <rect x="86" y="136" width="66" height="32" rx="4" fill="#fef9c3" stroke="#eab308" stroke-width="1" stroke-dasharray="4,2"/>
+    <text x="119" y="155" text-anchor="middle" font-size="7" fill="#854d0e" font-weight="600">テトラ帯</text>
+
+    <!-- Zone3: 24-44% = 捨石魚礁前 -->
+    <rect x="178" y="90" width="132" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="244" y="108" text-anchor="middle" font-size="8" fill="#1e40af" font-weight="700">中央西</text>
+    <text x="244" y="120" text-anchor="middle" font-size="7" fill="#1e40af">捨石魚礁前</text>
+
+    <!-- Zone4: 42-56% = 中央（hot） -->
+    <rect x="297" y="90" width="92" height="40" rx="4" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="343" y="106" text-anchor="middle" font-size="8" fill="#991b1b" font-weight="700">★ 中央</text>
+    <text x="343" y="118" text-anchor="middle" font-size="7" fill="#991b1b">縁石変化点</text>
+    <text x="343" y="128" text-anchor="middle" font-size="7" fill="#dc2626" font-weight="700">一級ポイント</text>
+
+    <!-- Zone5: 55-70% = コンクリ魚礁前 -->
+    <rect x="383" y="90" width="99" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="432" y="108" text-anchor="middle" font-size="8" fill="#1e40af" font-weight="700">中央東</text>
+    <text x="432" y="120" text-anchor="middle" font-size="7" fill="#1e40af">コンクリ魚礁前</text>
+
+    <!-- Zone6: 72-88% = 六角錐魚礁前 -->
+    <rect x="495" y="90" width="105" height="40" rx="4" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="547" y="108" text-anchor="middle" font-size="8" fill="#1e40af" font-weight="700">東側</text>
+    <text x="547" y="120" text-anchor="middle" font-size="7" fill="#1e40af">六角錐魚礁前</text>
+
+    <!-- Zone7: 88-100% = 東端（hot） -->
+    <rect x="600" y="90" width="80" height="40" rx="4" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+    <text x="640" y="106" text-anchor="middle" font-size="8" fill="#991b1b" font-weight="700">★ 東端</text>
+    <text x="640" y="118" text-anchor="middle" font-size="7" fill="#991b1b">潮通し最高</text>
+    <text x="640" y="128" text-anchor="middle" font-size="7" fill="#dc2626" font-weight="700">一級ポイント</text>
+
+    <!-- 潮通しスコア -->
+    <text x="20" y="190" font-size="11" font-weight="700" fill="#1e293b">潮通しスコア（端ほど高い = 大物が来やすい）</text>
+    <rect x="20" y="198" width="660" height="12" rx="6" fill="#e2e8f0"/>
+    <!-- グラデーション -->
+    <rect x="20" y="198" width="99" height="12" rx="6" fill="#f97316" opacity="0.8"/>
+    <rect x="600" y="198" width="80" height="12" rx="0 6 6 0" fill="#ef4444" opacity="0.9"/>
+    <rect x="297" y="198" width="92" height="12" fill="#fbbf24" opacity="0.5"/>
+    <text x="69" y="225" text-anchor="middle" font-size="9" fill="#ea580c" font-weight="600">0.85</text>
+    <text x="244" y="225" text-anchor="middle" font-size="9" fill="#64748b">0.65</text>
+    <text x="343" y="225" text-anchor="middle" font-size="9" fill="#eab308" font-weight="600">0.70</text>
+    <text x="432" y="225" text-anchor="middle" font-size="9" fill="#64748b">0.65</text>
+    <text x="547" y="225" text-anchor="middle" font-size="9" fill="#64748b">0.70</text>
+    <text x="640" y="225" text-anchor="middle" font-size="9" fill="#ef4444" font-weight="700">0.95</text>
+
+    <text x="20" y="250" font-size="9" fill="#94a3b8">※ 潮通しスコア = 端までの距離から算出。端は外海に面するため魚の回遊路になりやすい。</text>
+  </svg>
+</div>
+
+<!-- ===== STEP 5 ===== -->
+<h2 id="step5">6. STEP 5: 海底地物の配置</h2>
+
+<div class="card">
+  <div class="card-header">
+    <span class="badge badge-step">処理</span>
+    水面上の構造物は衛星画像で検出 / 水面下の構造物は公知データから配置
+  </div>
+  <p>
+    <strong>テトラポッド</strong>は水面に頭が出ているため、衛星画像から直接検出できる。<br>
+    <strong>沈設魚礁（捨石・コンクリ・六角錐）</strong>は水深8〜10mにあり、衛星画像の色変化だけでは検出不可能。
+    漁礁設置記録・海図・漁協公開データなどの<strong>公知情報</strong>から位置と種類を取得し、護岸との相対位置にマッピングする。
+  </p>
+</div>
+
+<div class="note">
+  <strong>正直に言うと:</strong> 水深5m以上の海底構造物を衛星画像の色だけで判別するのは現在の技術では困難です。
+  このパイプラインの本質は「衛星画像による水上構造物の検出」＋「公知データベースによる水中構造物の統合」の<strong>マッシュアップ</strong>です。
+</div>
+
+<div class="diagram-wrap">
+  <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="g-sea2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#81d4fa"/><stop offset="100%" stop-color="#0277bd"/></linearGradient>
+    </defs>
+
+    <!-- 護岸 -->
+    <rect x="20" y="20" width="660" height="16" rx="2" fill="#d4c4a8"/>
+    <text x="350" y="31" text-anchor="middle" font-size="8" fill="#5a4a3a" font-weight="600">護岸</text>
+
+    <!-- 海 -->
+    <rect x="20" y="36" width="660" height="140" fill="url(#g-sea2)" rx="0 0 4 4"/>
+
+    <!-- テトラ帯 0-18% — 衛星画像で検出 -->
+    <rect x="20" y="38" width="119" height="40" fill="#c9b896" opacity="0.7" stroke="#16a34a" stroke-width="2"/>
+    <text x="79" y="55" text-anchor="middle" font-size="9" fill="#5a4a3a" font-weight="700">テトラ帯</text>
+    <text x="79" y="67" text-anchor="middle" font-size="7" fill="#5a4a3a">水深3m</text>
+    <line x1="20" y1="80" x2="139" y2="80" stroke="#16a34a" stroke-width="2" stroke-dasharray="6,3"/>
+    <!-- ラベル: 衛星画像で検出 -->
+    <rect x="25" y="82" width="110" height="14" rx="3" fill="#f0fdf4" stroke="#16a34a" stroke-width="1"/>
+    <text x="80" y="92" text-anchor="middle" font-size="7" fill="#16a34a" font-weight="700">衛星画像で直接検出</text>
+
+    <!-- 捨石魚礁 24-44% — 公知データから配置 -->
+    <g opacity="0.8">
+      <rect x="178" y="80" width="132" height="45" rx="4" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="5,3"/>
+      <polygon points="200,115 210,95 220,115" fill="#d4a030" opacity="0.7"/>
+      <polygon points="230,115 240,95 250,115" fill="#d4a030" opacity="0.7"/>
+      <polygon points="260,115 270,95 280,115" fill="#d4a030" opacity="0.7"/>
+      <text x="244" y="90" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">捨石魚礁</text>
+      <text x="244" y="130" text-anchor="middle" font-size="7" fill="#fef3c7">水深8m</text>
+    </g>
+    <!-- ラベル: 公知データ -->
+    <rect x="183" y="128" width="122" height="14" rx="3" fill="#fffbeb" stroke="#f59e0b" stroke-width="1"/>
+    <text x="244" y="138" text-anchor="middle" font-size="7" fill="#92400e" font-weight="700">公知データ（漁礁設置記録）</text>
+
+    <!-- コンクリート魚礁 48-66% — 公知データから配置 -->
+    <g opacity="0.8">
+      <rect x="337" y="90" width="119" height="45" rx="4" fill="none" stroke="#64748b" stroke-width="2" stroke-dasharray="5,3"/>
+      <rect x="352" y="105" width="16" height="10" rx="1" fill="#8a9aaa" opacity="0.7"/>
+      <rect x="378" y="105" width="16" height="10" rx="1" fill="#8a9aaa" opacity="0.7"/>
+      <rect x="404" y="105" width="16" height="10" rx="1" fill="#8a9aaa" opacity="0.7"/>
+      <text x="396" y="100" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">コンクリ魚礁</text>
+      <text x="396" y="142" text-anchor="middle" font-size="7" fill="#e0f2fe">水深10m</text>
+    </g>
+    <!-- ラベル: 公知データ -->
+    <rect x="342" y="148" width="109" height="14" rx="3" fill="#fffbeb" stroke="#f59e0b" stroke-width="1"/>
+    <text x="396" y="158" text-anchor="middle" font-size="7" fill="#92400e" font-weight="700">公知データ（海図・漁協）</text>
+
+    <!-- 六角錐魚礁 72-90% — 公知データから配置 -->
+    <g opacity="0.8">
+      <rect x="495" y="80" width="119" height="45" rx="4" fill="none" stroke="#16a34a" stroke-width="2" stroke-dasharray="5,3"/>
+      <polygon points="520,115 527,100 534,115" fill="#7a8a7a" opacity="0.7"/>
+      <polygon points="545,115 552,100 559,115" fill="#7a8a7a" opacity="0.7"/>
+      <polygon points="570,115 577,100 584,115" fill="#7a8a7a" opacity="0.7"/>
+      <text x="554" y="92" text-anchor="middle" font-size="9" fill="#fff" font-weight="700">六角錐魚礁</text>
+      <text x="554" y="130" text-anchor="middle" font-size="7" fill="#dcfce7">水深8m</text>
+    </g>
+    <!-- ラベル: 公知データ -->
+    <rect x="500" y="128" width="109" height="14" rx="3" fill="#fffbeb" stroke="#f59e0b" stroke-width="1"/>
+    <text x="554" y="138" text-anchor="middle" font-size="7" fill="#92400e" font-weight="700">公知データ（漁礁設置記録）</text>
+
+    <!-- X軸ラベル -->
+    <text x="20" y="192" font-size="8" fill="#64748b">0%</text>
+    <text x="139" y="192" text-anchor="middle" font-size="8" fill="#64748b">18%</text>
+    <text x="244" y="192" text-anchor="middle" font-size="8" fill="#64748b">24-44%</text>
+    <text x="396" y="192" text-anchor="middle" font-size="8" fill="#64748b">48-66%</text>
+    <text x="554" y="192" text-anchor="middle" font-size="8" fill="#64748b">72-90%</text>
+    <text x="678" y="192" text-anchor="end" font-size="8" fill="#64748b">100%</text>
+
+    <!-- 凡例 -->
+    <g transform="translate(20, 202)">
+      <text font-size="10" font-weight="700" fill="#1e293b">データソース凡例:</text>
+      <rect x="120" y="-8" width="10" height="10" rx="2" fill="none" stroke="#16a34a" stroke-width="2"/>
+      <text x="134" y="0" font-size="9" fill="#16a34a" font-weight="600">衛星画像から検出（水面上）</text>
+      <rect x="310" y="-8" width="10" height="10" rx="2" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="3,2"/>
+      <text x="324" y="0" font-size="9" fill="#92400e" font-weight="600">公知データから配置（水面下）</text>
+    </g>
+
+    <text x="20" y="250" font-size="9" fill="#94a3b8">※ xRange は護岸全長に対する水平位置（0%=西端, 100%=東端）。水中の魚礁は衛星画像では見えないため公知データに依存。</text>
+  </svg>
+</div>
+
+<!-- ===== STEP 6 ===== -->
+<h2 id="step6">7. STEP 6: 魚種推定</h2>
+
+<div class="card">
+  <div class="card-header">
+    <span class="badge badge-step">処理</span>
+    構造物 × 水深 × 潮通し → 魚種を自動導出
+  </div>
+  <p>
+    特許明細書【0031】の構造物→魚種マッピングテーブルを使って、各ゾーンで釣れる魚を推定する。<br>
+    これは機械学習ではなく、<strong>ルールベースの静的計算</strong>。「テトラがあるなら根魚がいる」「端で潮通しが良いなら青物が来る」という釣りの知識をコード化したもの。
+  </p>
+</div>
+
+<div class="diagram-wrap">
+  <svg viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg">
+    <!-- マッピングテーブル -->
+    <text x="20" y="18" font-size="12" font-weight="700" fill="#1e293b">構造物 → 魚種マッピングテーブル（特許【0031】）</text>
+
+    <g transform="translate(20, 28)">
+      <rect width="320" height="24" rx="4" fill="#1e40af"/><text x="160" y="17" text-anchor="middle" font-size="10" fill="#fff" font-weight="700">構造物カテゴリ → 対応する魚種</text>
+
+      <rect y="28" width="320" height="22" fill="#dbeafe"/><text x="8" y="43" font-size="9" fill="#1e40af" font-weight="600">護岸 (seawall)</text><text x="120" y="43" font-size="9" fill="#475569">アジ・サバ・イワシ・スズキ・クロダイ</text>
+      <rect y="52" width="320" height="22" fill="#fff"/><text x="8" y="67" font-size="9" fill="#92400e" font-weight="600">テトラ (tetrapod)</text><text x="120" y="67" font-size="9" fill="#475569">メバル・カサゴ・アイナメ・ソイ・クロダイ</text>
+      <rect y="76" width="320" height="22" fill="#dbeafe"/><text x="8" y="91" font-size="9" fill="#6b21a8" font-weight="600">港湾施設</text><text x="120" y="91" font-size="9" fill="#475569">アジ・イワシ・クロダイ・スズキ・サバ</text>
+      <rect y="100" width="320" height="22" fill="#fff"/><text x="8" y="115" font-size="9" fill="#475569" font-weight="600">岩礁 (rocky)</text><text x="120" y="115" font-size="9" fill="#475569">メジナ・クロダイ・アコウ・イシダイ</text>
+      <rect y="124" width="320" height="22" fill="#dbeafe"/><text x="8" y="139" font-size="9" fill="#475569" font-weight="600">砂浜 (sandy)</text><text x="120" y="139" font-size="9" fill="#475569">カレイ・キス・ヒラメ</text>
+    </g>
+
+    <!-- 推定ロジック -->
+    <g transform="translate(370, 28)">
+      <text font-size="11" font-weight="700" fill="#1e293b">推定ロジック（ゾーンごと）</text>
+
+      <text y="26" font-size="10" fill="#475569">① ゾーンの構造物を確認</text>
+      <text y="44" font-size="10" fill="#475569">② マッピングテーブルで魚種を検索</text>
+      <text y="62" font-size="10" fill="#475569">③ 重複排除＋確率スコア算出</text>
+      <text y="80" font-size="10" fill="#475569">④ 潮通し補正（端ほど+15%）</text>
+      <text y="98" font-size="10" fill="#475569">⑤ 水深補正（深場で大物+10%）</text>
+
+      <rect y="112" width="300" height="40" rx="6" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5"/>
+      <text x="150" y="130" text-anchor="middle" font-size="9" fill="#16a34a" font-weight="600">例: 東端ゾーン</text>
+      <text x="150" y="143" text-anchor="middle" font-size="8" fill="#16a34a">護岸(seawall) + 潮通し0.95 + 水深10m</text>
+    </g>
+
+    <!-- 具体例: 東端ゾーンの推定結果 -->
+    <line x1="20" y1="195" x2="680" y2="195" stroke="#e2e8f0" stroke-width="1"/>
+    <text x="20" y="215" font-size="12" font-weight="700" fill="#1e293b">具体例: 東端ゾーンの推定魚種（rating = ★一級ポイント）</text>
+
+    <g transform="translate(20, 230)">
+      <rect width="660" height="24" rx="4" fill="#f1f5f9"/>
+      <text x="10" y="17" font-size="9" font-weight="700" fill="#475569">魚種名</text>
+      <text x="100" y="17" font-size="9" font-weight="700" fill="#475569">釣法</text>
+      <text x="240" y="17" font-size="9" font-weight="700" fill="#475569">シーズン</text>
+      <text x="350" y="17" font-size="9" font-weight="700" fill="#475569">推定確率</text>
+      <text x="510" y="17" font-size="9" font-weight="700" fill="#475569">根拠</text>
+
+      <text x="10" y="42" font-size="9" fill="#475569" font-weight="600">スズキ</text>
+      <text x="100" y="42" font-size="9" fill="#475569">ルアー/エビ撒き</text>
+      <text x="240" y="42" font-size="9" fill="#475569">通年</text>
+      <rect x="350" y="34" width="120" height="8" rx="4" fill="#e2e8f0"/><rect x="350" y="34" width="102" height="8" rx="4" fill="#16a34a"/>
+      <text x="478" y="42" font-size="8" fill="#16a34a" font-weight="600">85%</text>
+      <text x="510" y="42" font-size="8" fill="#64748b">護岸魚種 + 潮通し0.95</text>
+
+      <text x="10" y="60" font-size="9" fill="#475569" font-weight="600">アオリイカ</text>
+      <text x="100" y="60" font-size="9" fill="#475569">エギング</text>
+      <text x="240" y="60" font-size="9" fill="#475569">9〜11月</text>
+      <rect x="350" y="52" width="120" height="8" rx="4" fill="#e2e8f0"/><rect x="350" y="52" width="96" height="8" rx="4" fill="#16a34a"/>
+      <text x="478" y="60" font-size="8" fill="#16a34a" font-weight="600">80%</text>
+      <text x="510" y="60" font-size="8" fill="#64748b">端 + 潮通し良好</text>
+
+      <text x="10" y="78" font-size="9" fill="#475569" font-weight="600">ハマチ</text>
+      <text x="100" y="78" font-size="9" fill="#475569">のませ釣り</text>
+      <text x="240" y="78" font-size="9" fill="#475569">9〜12月</text>
+      <rect x="350" y="70" width="120" height="8" rx="4" fill="#e2e8f0"/><rect x="350" y="70" width="86" height="8" rx="4" fill="#eab308"/>
+      <text x="478" y="78" font-size="8" fill="#eab308" font-weight="600">72%</text>
+      <text x="510" y="78" font-size="8" fill="#64748b">潮通し + 水深10m</text>
+
+      <text x="10" y="96" font-size="9" fill="#475569" font-weight="600">グレ</text>
+      <text x="100" y="96" font-size="9" fill="#475569">ウキフカセ</text>
+      <text x="240" y="96" font-size="9" fill="#475569">10〜5月</text>
+      <rect x="350" y="88" width="120" height="8" rx="4" fill="#e2e8f0"/><rect x="350" y="88" width="86" height="8" rx="4" fill="#eab308"/>
+      <text x="478" y="96" font-size="8" fill="#eab308" font-weight="600">72%</text>
+      <text x="510" y="96" font-size="8" fill="#64748b">護岸魚種</text>
+
+      <text x="10" y="114" font-size="9" fill="#dc2626" font-weight="600">ブリ</text>
+      <text x="100" y="114" font-size="9" fill="#475569">のませ釣り</text>
+      <text x="240" y="114" font-size="9" fill="#475569">11〜1月</text>
+      <rect x="350" y="106" width="120" height="8" rx="4" fill="#e2e8f0"/><rect x="350" y="106" width="48" height="8" rx="4" fill="#f97316"/>
+      <text x="478" y="114" font-size="8" fill="#f97316" font-weight="600">40%</text>
+      <text x="510" y="114" font-size="8" fill="#64748b">潮通し最大 + 水深最大</text>
+    </g>
+  </svg>
+</div>
+
+<div class="note">
+  <strong>ポイント:</strong> 「ブリが40%」は「40%の確率で釣れる」ではなく、「この構造物・環境条件でブリが出現する可能性の相対スコア」。
+  潮通しが最も良い東端 + 水深10mという条件が揃っているため、他のゾーンより高いスコアが付く。
+</div>
+
+<!-- ===== STEP 7 ===== -->
+<h2 id="step7">8. STEP 7: ポイントマップ自動生成</h2>
+
+<div class="card">
+  <div class="card-header">
+    <span class="badge badge-patent">特許技術</span>
+    diagram-generator.ts がSpotDiagramDataを自動生成
+  </div>
+  <p>
+    STEP 1〜6の結果を統合して、FishingPointDiagram（SVG俯瞰マップ）用のデータを自動出力する。<br>
+    これが特許の「マップ生成部(140)」の実装。手動でデータを書く必要がなく、<strong>衛星画像さえあれば自動でマップが生成される</strong>。
+  </p>
+</div>
+
+<h3>自動生成の処理フロー</h3>
+
+<div class="code-block"><span class="code-comment">// diagram-generator.ts の処理フロー</span>
+
+<span class="code-key">入力</span>: SpotAnalysisResult (検出結果JSON)
+  │
+  ├─ <span class="code-key">generatePositions()</span>
+  │   護岸全長を positionCount(=14) で等分割
+  │   各ポジションが属するゾーンを特定
+  │   ゾーンの評価(hot/good/normal) + 魚種情報を付与
+  │   <span class="code-val">→ DiagramPosition[] (テント14番〜1番)</span>
+  │
+  ├─ <span class="code-key">generateSeaFeatures()</span>
+  │   seaBottomFeatures の xRange を SVG座標に変換
+  │   テトラ: y=218付近（浅い）、魚礁: y=350付近（深い）
+  │   <span class="code-val">→ SeaFeature[] (テトラ帯/捨石魚礁/コンクリ魚礁/六角錐魚礁)</span>
+  │
+  ├─ <span class="code-key">generateFishLabels()</span>
+  │   各ゾーンの推定魚種から海上にラベルを配置
+  │   表層魚: y=280付近、大型魚: y=340付近、底物: y=490付近
+  │   近接ラベルは自動マージ
+  │   <span class="code-val">→ SeaFishLabel[]</span>
+  │
+  ├─ <span class="code-key">generateFishNotes()</span>
+  │   全域で出現する魚種を抽出 → 「アジは全域でOK」
+  │   テトラ付近の根魚を抽出 → 「ガシラはテトラ付近に多い」
+  │   <span class="code-val">→ string[]</span>
+  │
+  └─ <span class="code-key">generateFacilities()</span>
+      relativePosition を SVG座標に変換
+      <span class="code-val">→ DiagramFacility[] (駐車場/料金所/売店/...)</span>
+
+<span class="code-key">出力</span>: SpotDiagramData (FishingPointDiagram が表示するデータ)</div>
+
+<h3>出力データ構造（自動生成された SpotDiagramData の中身）</h3>
+
+<div class="code-block"><span class="code-comment">// 自動生成結果の一部（14ポジション中、東端と西端を抜粋）</span>
+{
+  <span class="code-key">"layout"</span>: <span class="code-val">"seawall"</span>,
+  <span class="code-key">"structureLabel"</span>: <span class="code-val">"護岸（ベランダ）"</span>,
+  <span class="code-key">"seaLabel"</span>: <span class="code-val">"大阪湾"</span>,
+
+  <span class="code-key">"positions"</span>: [
+    {
+      <span class="code-key">"number"</span>: <span class="code-num">14</span>, <span class="code-key">"shortName"</span>: <span class="code-val">"西端"</span>,
+      <span class="code-key">"rating"</span>: <span class="code-val">"good"</span>,
+      <span class="code-key">"x"</span>: <span class="code-num">50</span>,   <span class="code-comment">// SVG座標 (左端)</span>
+      <span class="code-key">"depth"</span>: <span class="code-val">"足元5m / 沖8m"</span>,
+      <span class="code-key">"fish"</span>: [
+        { <span class="code-key">"name"</span>: <span class="code-val">"メバル"</span>, <span class="code-key">"method"</span>: <span class="code-val">"メバリング"</span> },
+        { <span class="code-key">"name"</span>: <span class="code-val">"スズキ"</span>, <span class="code-key">"method"</span>: <span class="code-val">"ルアー/エビ撒き"</span> },
+        <span class="code-comment">// ... 9魚種 (確率40%以上のもの)</span>
+      ]
+    },
+    <span class="code-comment">// ... T13〜T2 ...</span>
+    {
+      <span class="code-key">"number"</span>: <span class="code-num">1</span>, <span class="code-key">"shortName"</span>: <span class="code-val">"東端"</span>,
+      <span class="code-key">"rating"</span>: <span class="code-val">"hot"</span>,   <span class="code-comment">// ★一級ポイント</span>
+      <span class="code-key">"x"</span>: <span class="code-num">950</span>,  <span class="code-comment">// SVG座標 (右端)</span>
+      <span class="code-key">"depth"</span>: <span class="code-val">"足元5m / 沖10m"</span>,
+      <span class="code-key">"fish"</span>: [
+        { <span class="code-key">"name"</span>: <span class="code-val">"ブリ"</span>, <span class="code-key">"method"</span>: <span class="code-val">"のませ釣り"</span> },
+        { <span class="code-key">"name"</span>: <span class="code-val">"スズキ"</span>, <span class="code-key">"method"</span>: <span class="code-val">"ルアー/エビ撒き"</span> },
+        <span class="code-comment">// ... 9魚種</span>
+      ]
+    }
+  ],
+
+  <span class="code-key">"seaFeatures"</span>: [
+    { <span class="code-key">"name"</span>: <span class="code-val">"テトラ帯"</span>, <span class="code-key">"left"</span>: <span class="code-num">0</span>, <span class="code-key">"width"</span>: <span class="code-num">18</span>, <span class="code-key">"type"</span>: <span class="code-val">"tetrapod"</span> },
+    { <span class="code-key">"name"</span>: <span class="code-val">"捨石魚礁"</span>, <span class="code-key">"left"</span>: <span class="code-num">24</span>, <span class="code-key">"width"</span>: <span class="code-num">20</span>, <span class="code-key">"type"</span>: <span class="code-val">"reef-stone"</span> },
+    { <span class="code-key">"name"</span>: <span class="code-val">"コンクリート魚礁"</span>, <span class="code-key">"left"</span>: <span class="code-num">48</span>, <span class="code-key">"width"</span>: <span class="code-num">18</span>, <span class="code-key">"type"</span>: <span class="code-val">"reef-concrete"</span> },
+    { <span class="code-key">"name"</span>: <span class="code-val">"六角錐魚礁"</span>, <span class="code-key">"left"</span>: <span class="code-num">72</span>, <span class="code-key">"width"</span>: <span class="code-num">18</span>, <span class="code-key">"type"</span>: <span class="code-val">"reef-hex"</span> }
+  ]
+}</div>
+
+<!-- ===== ファイル構成 ===== -->
+<h2 id="files">9. ファイル構成</h2>
+
+<div class="card">
+  <div class="card-header">作成・変更したファイル一覧</div>
+  <table>
+    <tr><th>ファイル</th><th>役割</th><th>行数</th></tr>
+    <tr>
+      <td><code>src/lib/patent/types.ts</code></td>
+      <td>検出結果の型定義（DetectedStructure, SpotAnalysisResult等）</td>
+      <td>~120</td>
+    </tr>
+    <tr>
+      <td><code>src/lib/patent/diagram-generator.ts</code></td>
+      <td>検出結果 → SpotDiagramData 自動変換エンジン</td>
+      <td>~420</td>
+    </tr>
+    <tr>
+      <td><code>src/lib/patent/load-analysis.ts</code></td>
+      <td>検出結果JSONの読み込み + パイプライン統合</td>
+      <td>~55</td>
+    </tr>
+    <tr>
+      <td><code>patent/data/structures/hiraiso-fishing-park.json</code></td>
+      <td>平磯の構造物検出結果（SAM2+CLIPの出力に相当）</td>
+      <td>~240</td>
+    </tr>
+    <tr>
+      <td><code>patent/scripts/detect_structures.py</code></td>
+      <td>SAM2+CLIP構造物検出パイプライン（GPU実行用）</td>
+      <td>~310</td>
+    </tr>
+    <tr>
+      <td><code>patent/scripts/requirements.txt</code></td>
+      <td>Python依存パッケージ</td>
+      <td>~15</td>
+    </tr>
+    <tr>
+      <td><code>src/app/spots/[slug]/page.tsx</code></td>
+      <td>自動生成ダイアグラム優先のフォールバック統合</td>
+      <td>変更3箇所</td>
+    </tr>
+  </table>
+</div>
+
+<div class="note note-blue">
+  <strong>データの流れまとめ:</strong><br>
+  <code>衛星画像</code> →
+  <code>detect_structures.py</code> (SAM2+CLIP) →
+  <code>hiraiso-fishing-park.json</code> →
+  <code>load-analysis.ts</code> (読み込み) →
+  <code>diagram-generator.ts</code> (変換) →
+  <code>SpotDiagramData</code> →
+  <code>FishingPointDiagram</code> (SVG表示)
+</div>
+
+<p style="margin-top: 40px; color: #94a3b8; font-size: 0.85em; text-align: center;">
+  特願2026-042836「衛星画像解析による釣り場ポイント情報自動生成システム」<br>
+  TsuriSpot Patent Pipeline v0.1.0
+</p>
+
+</div>
+</body>
+</html>

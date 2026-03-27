@@ -1,0 +1,31 @@
+# 特許パイプライン: 衛星画像構造物検出
+# GPU環境（Google Colab Pro推奨）で実行
+
+# SAM2 セグメンテーション
+segment-anything-2>=0.3.0
+torch>=2.1.0
+torchvision>=0.16.0
+
+# CLIP 分類
+open-clip-torch>=2.24.0
+
+# 衛星画像処理
+rasterio>=1.3.0
+geopandas>=0.14.0
+shapely>=2.0.0
+
+# 画像処理
+Pillow>=10.0.0
+opencv-python>=4.8.0
+numpy>=1.24.0
+
+# データ処理
+geojson>=3.1.0
+
+# Sentinel-2 ダウンロード
+sentinelhub>=3.9.0
+pystac-client>=0.7.0
+
+# ユーティリティ
+tqdm>=4.66.0
+requests>=2.31.0

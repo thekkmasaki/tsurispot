@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1350px;
+    font-family: 'Noto Sans JP', sans-serif;
+    overflow: hidden;
+    position: relative;
+    color: white;
+  }
+
+  /* 実写写真背景（Unsplash free） */
+  .photo-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1504309092620-4d0ec726efa4?w=1200&q=90');
+    background-size: cover;
+    background-position: center 30%;
+    filter: saturate(1.2) contrast(1.1);
+  }
+
+  /* シネマティックグラデーション */
+  .gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg,
+        rgba(0,0,0,0.15) 0%,
+        rgba(0,0,0,0) 20%,
+        rgba(0,0,0,0) 40%,
+        rgba(0,0,0,0.4) 60%,
+        rgba(0,0,0,0.85) 82%,
+        rgba(0,0,0,0.97) 100%
+      );
+  }
+
+  /* フィルムグレイン */
+  .grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  /* シネマティックビネット */
+  .vignette {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, transparent 50%, rgba(0,0,0,0.4) 100%);
+    pointer-events: none;
+  }
+
+  /* テキストコンテンツ（下部に集約） */
+  .content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    padding: 0 72px 72px;
+  }
+
+  .area-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(255,255,255,0.18);
+    font-size: 22px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+  }
+
+  .title {
+    font-size: 80px;
+    font-weight: 900;
+    line-height: 1.12;
+    margin-bottom: 16px;
+    letter-spacing: -2px;
+    text-shadow:
+      0 2px 4px rgba(0,0,0,0.8),
+      0 8px 30px rgba(0,0,0,0.4);
+  }
+  .title .accent {
+    color: #fb923c;
+    text-shadow:
+      0 0 30px rgba(251,146,60,0.5),
+      0 2px 4px rgba(0,0,0,0.8);
+  }
+
+  .subtitle {
+    font-size: 28px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.75);
+    line-height: 1.4;
+    margin-bottom: 28px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
+  }
+
+  .chips {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+  .chip {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 12px 22px;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .brand-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .brand-icon {
+    width: 44px;
+    height: 44px;
+    background: #0ea5e9;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 900;
+  }
+  .brand-name { font-size: 22px; font-weight: 900; }
+  .brand-url { font-size: 16px; color: rgba(255,255,255,0.5); }
+  .brand-cta { font-size: 20px; color: rgba(255,255,255,0.45); font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="photo-bg"></div>
+  <div class="gradient-overlay"></div>
+  <div class="vignette"></div>
+  <div class="grain"></div>
+
+  <div class="content">
+    <div class="area-tag">📍 明石・神戸</div>
+    <div class="title">
+      春の<span class="accent">チヌ</span>が<br>
+      爆釣する堤防。
+    </div>
+    <div class="subtitle">
+      平磯海づり公園 — 乗っ込みシーズン突入
+    </div>
+    <div class="chips">
+      <div class="chip">🐟 チヌ 40cm超</div>
+      <div class="chip">🅿️ 駐車場あり</div>
+      <div class="chip">👨‍👩‍👧 柵あり安全</div>
+    </div>
+    <div class="brand">
+      <div class="brand-left">
+        <div class="brand-icon">釣</div>
+        <div>
+          <div class="brand-name">ツリスポ</div>
+          <div class="brand-url">tsurispot.com</div>
+        </div>
+      </div>
+      <div class="brand-cta">→ プロフィールから</div>
+    </div>
+  </div>
+</body>
+</html>

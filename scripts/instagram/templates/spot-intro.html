@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1350px;
+    font-family: 'Noto Sans JP', sans-serif;
+    overflow: hidden;
+    position: relative;
+    color: white;
+  }
+
+  /* AI生成画像のプレースホルダー（実際はurl()で差し替え） */
+  .photo-bg {
+    position: absolute;
+    inset: 0;
+    /* ドラマチックな朝焼けの海を模擬 */
+    background:
+      radial-gradient(ellipse at 50% 30%, #ff6b35 0%, transparent 50%),
+      radial-gradient(ellipse at 30% 60%, #1a5276 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 80%, #0c2461 0%, transparent 50%),
+      linear-gradient(180deg, #2c1810 0%, #1a3a4a 30%, #0a2540 60%, #050d1a 100%);
+    filter: saturate(1.3);
+  }
+  .photo-bg::after {
+    content: '※ここにGeminiで生成した写真が入ります';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 28px;
+    color: rgba(255,255,255,0.15);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  /* 下部グラデーション（テキスト可読性確保） */
+  .gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg,
+        rgba(0,0,0,0) 0%,
+        rgba(0,0,0,0) 35%,
+        rgba(0,0,0,0.3) 55%,
+        rgba(0,0,0,0.75) 80%,
+        rgba(0,0,0,0.92) 100%
+      );
+  }
+
+  /* テクスチャ（映画っぽいグレイン） */
+  .grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.06;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  /* メインコンテンツ（下部に集中） */
+  .content {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    padding: 0 72px 80px;
+  }
+
+  /* エリアタグ */
+  .area-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255,255,255,0.2);
+    font-size: 22px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+  }
+
+  /* メインタイトル: デカく、太く、1行で目に飛び込む */
+  .title {
+    font-size: 84px;
+    font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    letter-spacing: -2px;
+    text-shadow: 0 4px 30px rgba(0,0,0,0.5);
+  }
+  .title .accent {
+    color: #ff6b35;
+    text-shadow: 0 0 40px rgba(255,107,53,0.4);
+  }
+
+  /* サブテキスト */
+  .subtitle {
+    font-size: 30px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.5;
+    margin-bottom: 32px;
+  }
+
+  /* 情報チップ（最小限） */
+  .chips {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+  .chip {
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 12px 22px;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  /* ブランド */
+  .brand {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .brand-icon {
+    width: 44px;
+    height: 44px;
+    background: #0ea5e9;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 900;
+  }
+  .brand-name {
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 1px;
+  }
+  .brand-url {
+    font-size: 16px;
+    color: rgba(255,255,255,0.5);
+  }
+  .brand-cta {
+    font-size: 20px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+  <div class="photo-bg"></div>
+  <div class="gradient-overlay"></div>
+  <div class="grain"></div>
+
+  <div class="content">
+    <div class="area-tag">📍 明石・神戸</div>
+    <div class="title">
+      春の<span class="accent">チヌ</span>が<br>
+      爆釣する堤防。
+    </div>
+    <div class="subtitle">
+      平磯海づり公園 — 乗っ込みシーズン突入
+    </div>
+    <div class="chips">
+      <div class="chip">🐟 チヌ 40cm超</div>
+      <div class="chip">🅿️ 駐車場あり</div>
+      <div class="chip">👨‍👩‍👧 柵あり安全</div>
+    </div>
+    <div class="brand">
+      <div class="brand-left">
+        <div class="brand-icon">釣</div>
+        <div>
+          <div class="brand-name">ツリスポ</div>
+          <div class="brand-url">tsurispot.com</div>
+        </div>
+      </div>
+      <div class="brand-cta">→ プロフィールから</div>
+    </div>
+  </div>
+</body>
+</html>

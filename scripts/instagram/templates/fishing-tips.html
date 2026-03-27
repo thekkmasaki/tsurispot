@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    width: 1080px;
+    height: 1350px;
+    font-family: 'Noto Sans JP', sans-serif;
+    overflow: hidden;
+    position: relative;
+    color: white;
+  }
+
+  .photo-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 50% 50%, #1e1b4b 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, #312e81 0%, transparent 40%),
+      linear-gradient(180deg, #0c0a1a 0%, #1a1744 40%, #0a0820 100%);
+  }
+  .photo-bg::after {
+    content: '※ドラマチックな釣りシーンの写真';
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 28px;
+    color: rgba(255,255,255,0.1);
+    white-space: nowrap;
+  }
+
+  .gradient-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg,
+      rgba(0,0,0,0.7) 0%,
+      rgba(0,0,0,0.05) 30%,
+      rgba(0,0,0,0.05) 50%,
+      rgba(0,0,0,0.8) 85%,
+      rgba(0,0,0,0.95) 100%
+    );
+  }
+
+  .grain {
+    position: absolute;
+    inset: 0;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  /* 上部: フック */
+  .top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    padding: 64px 72px 0;
+  }
+  .category {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(139,92,246,0.25);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(139,92,246,0.3);
+    font-size: 22px;
+    font-weight: 700;
+    padding: 10px 24px;
+    border-radius: 100px;
+    margin-bottom: 28px;
+    color: #c4b5fd;
+  }
+  .hook {
+    font-size: 88px;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: -3px;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.6);
+  }
+  .hook .em {
+    color: #a78bfa;
+    text-shadow: 0 0 50px rgba(167,139,250,0.3);
+  }
+
+  /* 下部 */
+  .bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    padding: 0 72px 80px;
+  }
+
+  /* ステップ（最小限・太字のみ） */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 32px;
+  }
+  .step {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    font-size: 48px;
+    font-weight: 900;
+    color: rgba(167,139,250,0.4);
+    min-width: 60px;
+    line-height: 1;
+  }
+  .step-text {
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 1.3;
+  }
+  .step-text .sub {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.45);
+    margin-top: 4px;
+  }
+
+  /* コツ（ガラスモーフィズム） */
+  .tip {
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(30px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 20px;
+    padding: 28px 32px;
+    margin-bottom: 36px;
+  }
+  .tip-label {
+    font-size: 18px;
+    font-weight: 900;
+    color: #fbbf24;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+  }
+  .tip-text {
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .brand-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  .brand-icon {
+    width: 44px;
+    height: 44px;
+    background: #0ea5e9;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: 900;
+  }
+  .brand-name { font-size: 22px; font-weight: 900; }
+  .brand-url { font-size: 16px; color: rgba(255,255,255,0.5); }
+  .brand-cta { font-size: 20px; color: rgba(255,255,255,0.4); font-weight: 700; }
+</style>
+</head>
+<body>
+  <div class="photo-bg"></div>
+  <div class="gradient-overlay"></div>
+  <div class="grain"></div>
+
+  <div class="top">
+    <div class="category">🎣 HOW TO</div>
+    <div class="hook">
+      <span class="em">サビキ</span>で<br>
+      アジ爆釣する<br>
+      3つのコツ。
+    </div>
+  </div>
+
+  <div class="bottom">
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-text">
+          コマセは8分目まで
+          <span class="sub">詰めすぎると沈みが遅くなる</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-text">
+          底まで落として3回シャクる
+          <span class="sub">コマセの煙幕を作るイメージ</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-text">
+          群れが来たら手返し命
+          <span class="sub">コマセ切らさず連打で数を伸ばす</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tip">
+      <div class="tip-label">PRO TIP</div>
+      <div class="tip-text">朝マズメの回遊タイミングを逃すな。<br>日の出30分前にはスタンバイ。</div>
+    </div>
+
+    <div class="brand">
+      <div class="brand-left">
+        <div class="brand-icon">釣</div>
+        <div>
+          <div class="brand-name">ツリスポ</div>
+          <div class="brand-url">tsurispot.com</div>
+        </div>
+      </div>
+      <div class="brand-cta">→ 保存して次の釣行で使おう</div>
+    </div>
+  </div>
+</body>
+</html>

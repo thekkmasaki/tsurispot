@@ -1,0 +1,31 @@
+{
+  "name": "instagram",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "post": "node post-reel.mjs",
+    "post:dry": "node post-reel.mjs --dry-run",
+    "refresh-token": "node refresh-token.mjs",
+    "studio": "npx remotion studio src/index.ts",
+    "render": "npx remotion render src/index.ts SpotReveal out/demo-reel.mp4",
+    "preview": "npx remotion preview src/index.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@remotion/cli": "^4.0.438",
+    "@remotion/media-utils": "^4.0.438",
+    "@remotion/renderer": "^4.0.438",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "remotion": "^4.0.438"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "typescript": "^5.9.3"
+  }
+}
