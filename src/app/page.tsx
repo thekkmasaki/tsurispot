@@ -417,41 +417,6 @@ export default async function Home() {
       </section>
 
 
-      {/* 名言セクション + コンパクト統計 */}
-      <section className="bg-sand-light/50 bg-wave-pattern py-6 sm:py-8">
-        <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
-          <blockquote className="space-y-3">
-            <div className="space-y-1 text-xs leading-relaxed text-slate-400 sm:text-sm sm:leading-loose">
-              <p>一時間、幸せになりたかったら酒を飲みなさい。</p>
-              <p>三日間、幸せになりたかったら結婚しなさい。</p>
-              <p>八日間、幸せになりたかったら豚を殺して食べなさい。</p>
-            </div>
-            <p className="text-sm font-semibold tracking-wide text-slate-700 sm:text-base">
-              永遠に、幸せになりたかったら釣りを覚えなさい。
-            </p>
-            <footer className="text-[10px] text-slate-400 sm:text-xs">
-              ― 開高健『オーパ！』より
-            </footer>
-          </blockquote>
-          <div className="mt-5 flex items-center justify-center gap-4 text-xs text-muted-foreground sm:gap-8 sm:text-sm">
-            <Link href="/spots" className="transition-colors hover:text-primary">
-              <span className="block text-lg font-bold text-primary sm:text-2xl">{totalSpots.toLocaleString()}+</span>
-              釣りスポット
-            </Link>
-            <div className="h-8 w-px bg-border" />
-            <Link href="/fish" className="transition-colors hover:text-primary">
-              <span className="block text-lg font-bold text-primary sm:text-2xl">{totalFishSpecies}+</span>
-              魚種図鑑
-            </Link>
-            <div className="h-8 w-px bg-border" />
-            <Link href="/prefecture" className="transition-colors hover:text-primary">
-              <span className="block text-lg font-bold text-primary sm:text-2xl">{totalPrefectures}</span>
-              都道府県
-            </Link>
-          </div>
-        </div>
-      </section>
-
       {/* クイックアクション */}
       <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
         <div className="grid grid-cols-4 gap-2 sm:gap-3 lg:grid-cols-8">
@@ -538,185 +503,114 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 人気の釣り方ガイド */}
-      <section className="bg-sand-light/30 bg-wave-pattern py-8 sm:py-12">
-        <div className="mx-auto max-w-5xl px-4 sm:px-6">
-          <div className="mb-6 flex items-end justify-between sm:mb-8">
-            <div>
-              <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
-                釣り方ガイド
-              </h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                初心者から上級者まで、釣り方を完全解説
-              </p>
-            </div>
-            <Link
-              href="/guide"
-              className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
-            >
-              すべて見る
-              <ArrowRight className="size-4" />
-            </Link>
-          </div>
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { href: "/guide/sabiki", title: "サビキ釣り", desc: "堤防で手軽にアジ・サバ・イワシ", badge: "初心者向け", badgeClass: "bg-green-100 text-green-800" },
-              { href: "/guide/choinage", title: "ちょい投げ", desc: "キスやハゼを狙う投げ釣り入門", badge: "初心者向け", badgeClass: "bg-green-100 text-green-800" },
-              { href: "/guide/eging", title: "エギング", desc: "アオリイカを狙うルアー釣り", badge: "中級", badgeClass: "bg-blue-100 text-blue-800" },
-              { href: "/guide/jigging", title: "ショアジギング", desc: "メタルジグで青物を狙う", badge: "中〜上級", badgeClass: "bg-orange-100 text-orange-800" },
-              { href: "/guide/float-fishing", title: "ウキ釣り", desc: "メジナやクロダイをウキで狙う", badge: "初〜中級", badgeClass: "bg-blue-100 text-blue-800" },
-              { href: "/guide/anazuri", title: "穴釣り", desc: "テトラの隙間でカサゴ・メバル", badge: "初心者向け", badgeClass: "bg-green-100 text-green-800" },
-              { href: "/guide/lure", title: "ルアー釣り", desc: "シーバスやヒラメをルアーで", badge: "中級", badgeClass: "bg-blue-100 text-blue-800" },
-              { href: "/guide/night-fishing", title: "ナイトフィッシング", desc: "夜の堤防でメバル・アジを狙う", badge: "初〜中級", badgeClass: "bg-blue-100 text-blue-800" },
-            ].map((guide) => (
-              <Link key={guide.href} href={guide.href}>
-                <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                  <CardContent className="p-4">
-                    <div className="mb-2 flex items-center justify-between">
-                      <h3 className="font-semibold group-hover:text-primary">{guide.title}</h3>
-                      <Badge className={`text-[10px] ${guide.badgeClass}`}>{guide.badge}</Badge>
-                    </div>
-                    <p className="text-xs text-muted-foreground leading-relaxed">{guide.desc}</p>
-                  </CardContent>
-                </Card>
-              </Link>
-            ))}
-          </div>
-          <div className="mt-4 flex flex-wrap justify-center gap-2">
-            {[
-              { href: "/guide/knots", label: "結び方" },
-              { href: "/guide/line", label: "ライン" },
-              { href: "/guide/rigs", label: "仕掛け" },
-              { href: "/guide/sinker", label: "オモリ" },
-              { href: "/guide/tide", label: "潮汐" },
-              { href: "/guide/casting", label: "キャスティング" },
-              { href: "/guide/budget", label: "予算別" },
-              { href: "/guide/family", label: "ファミリー" },
-            ].map((item) => (
-              <Link key={item.href} href={item.href}>
-                <Badge variant="outline" className="cursor-pointer px-2.5 py-1 text-xs transition-colors hover:bg-primary hover:text-white">
-                  {item.label}
-                </Badge>
-              </Link>
-            ))}
-          </div>
-          <div className="mt-6 flex justify-center sm:hidden">
-            <Link href="/guide">
-              <Button variant="outline" className="min-h-[44px] gap-1">
-                すべてのガイドを見る
-                <ArrowRight className="size-4" />
-              </Button>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* 季節の釣りガイド */}
-      {(() => {
-        const currentMonth = new Date().getMonth() + 1;
-        const nextMonth = currentMonth === 12 ? 1 : currentMonth + 1;
-        const currentGuide = monthlyGuides.find((g) => g.month === currentMonth);
-        const nextGuide = monthlyGuides.find((g) => g.month === nextMonth);
-        const seasonSlug = currentMonth >= 3 && currentMonth <= 5 ? "spring" : currentMonth >= 6 && currentMonth <= 8 ? "summer" : currentMonth >= 9 && currentMonth <= 11 ? "autumn" : "winter";
-        const seasonLabel = seasonSlug === "spring" ? "春" : seasonSlug === "summer" ? "夏" : seasonSlug === "autumn" ? "秋" : "冬";
-        return (
-          <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
-            <div className="mb-6 sm:mb-8">
-              <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
-                季節の釣りガイド
-              </h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                今の時期にぴったりの釣り情報をチェック
-              </p>
-            </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {currentGuide && (
-                <Link href={`/monthly/${currentGuide.slug}`}>
-                  <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md border-primary/30 bg-primary/5">
-                    <CardContent className="p-4">
-                      <div className="mb-2 flex items-center gap-2">
-                        <Badge className="bg-primary text-white text-[10px]">今月</Badge>
-                        <span className="text-lg">{currentGuide.emoji}</span>
-                      </div>
-                      <h3 className="mb-1 font-semibold group-hover:text-primary">{currentGuide.nameJa}の釣りガイド</h3>
-                      <p className="line-clamp-2 text-xs text-muted-foreground leading-relaxed">{currentGuide.description.slice(0, 80)}...</p>
-                      <div className="mt-2 flex flex-wrap gap-1">
-                        {currentGuide.topFish.slice(0, 3).map((f) => {
-                          const fish = fishSpecies.find((fs) => fs.slug === f);
-                          return fish ? (
-                            <Badge key={f} variant="outline" className="text-[10px]">{fish.name}</Badge>
-                          ) : null;
-                        })}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              )}
-              {nextGuide && (
-                <Link href={`/monthly/${nextGuide.slug}`}>
-                  <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                    <CardContent className="p-4">
-                      <div className="mb-2 flex items-center gap-2">
-                        <Badge variant="secondary" className="text-[10px]">来月</Badge>
-                        <span className="text-lg">{nextGuide.emoji}</span>
-                      </div>
-                      <h3 className="mb-1 font-semibold group-hover:text-primary">{nextGuide.nameJa}の釣りガイド</h3>
-                      <p className="line-clamp-2 text-xs text-muted-foreground leading-relaxed">{nextGuide.description.slice(0, 80)}...</p>
-                      <div className="mt-2 flex flex-wrap gap-1">
-                        {nextGuide.topFish.slice(0, 3).map((f) => {
-                          const fish = fishSpecies.find((fs) => fs.slug === f);
-                          return fish ? (
-                            <Badge key={f} variant="outline" className="text-[10px]">{fish.name}</Badge>
-                          ) : null;
-                        })}
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              )}
-              <Link href={`/seasonal/${seasonSlug}`}>
-                <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                  <CardContent className="flex items-center gap-3 p-4">
-                    <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-amber-100">
-                      <Calendar className="size-5 text-amber-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold group-hover:text-primary">{seasonLabel}の釣り総合ガイド</h3>
-                      <p className="text-xs text-muted-foreground">{seasonLabel}シーズンのおすすめスポット・魚種・釣り方</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-              <Link href="/fishing-calendar">
-                <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
-                  <CardContent className="flex items-center gap-3 p-4">
-                    <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-blue-100">
-                      <Calendar className="size-5 text-blue-600" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold group-hover:text-primary">年間釣りカレンダー</h3>
-                      <p className="text-xs text-muted-foreground">月ごとの釣れる魚・おすすめの釣り方を一覧で</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
-            </div>
-          </section>
-        );
-      })()}
-
-      {/* 近くの釣りスポット */}
-      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
-        <NearbySpots />
-      </section>
-
-      {/* 人気の釣りスポット（位置情報対応） */}
-      <HomePopularSpots spots={popularSpotsData} />
+      {/* 人気スポットTOP10（近い順ソート対応） */}
+      <HomeTop10Client
+        spots={fishingSpots
+          .slice()
+          .sort((a, b) => b.rating * b.reviewCount - a.rating * a.reviewCount)
+          .slice(0, 100)
+          .map((s) => ({
+            id: s.id,
+            slug: s.slug,
+            name: s.name,
+            spotType: s.spotType,
+            rating: s.rating,
+            reviewCount: s.reviewCount,
+            latitude: s.latitude,
+            longitude: s.longitude,
+            prefecture: s.region.prefecture,
+            areaName: s.region.areaName,
+          }))}
+      />
 
       {/* 今釣れる魚セクション */}
       <SectionErrorBoundary>
         <HomeSeasonalFish />
       </SectionErrorBoundary>
+
+      {/* 最新釣果週報（6件表示） */}
+      {weeklyReports.length > 0 && (
+        <section className="bg-muted/50 py-8 sm:py-12">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6">
+            <div className="mb-6 flex items-end justify-between sm:mb-8">
+              <div>
+                <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
+                  最新釣果週報
+                </h2>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  全国の今週の釣果をエリア別にお届け
+                </p>
+              </div>
+              <Link
+                href="/blog?tag=釣果週報"
+                className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
+              >
+                すべて見る
+                <ArrowRight className="size-4" />
+              </Link>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {weeklyReports.map((post) => (
+                <Link key={post.id} href={`/blog/${post.slug}`}>
+                  <Card className="group h-full overflow-hidden py-0 transition-shadow hover:shadow-md">
+                    <div className="relative h-36 w-full overflow-hidden">
+                      <Image
+                        src={post.image || getFishImage(post.tags, post.id)}
+                        alt={post.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    </div>
+                    <CardContent className="flex h-full flex-col gap-2 p-4">
+                      <div className="flex items-center gap-2">
+                        <Badge variant="secondary" className="text-xs">
+                          {BLOG_CATEGORIES[post.category]}
+                        </Badge>
+                        <span className="text-xs text-muted-foreground">
+                          {post.publishedAt}
+                        </span>
+                      </div>
+                      <h3 className="text-sm font-semibold leading-snug group-hover:text-primary sm:text-base">
+                        {post.title}
+                      </h3>
+                      <p className="line-clamp-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                        {post.description}
+                      </p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {post.tags.slice(0, 3).map((tag) => (
+                          <span
+                            key={tag}
+                            className="inline-flex items-center gap-0.5 rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground"
+                          >
+                            <Tag className="size-2.5" />
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="flex items-center gap-1 text-sm font-medium text-primary">
+                        続きを読む
+                        <ChevronRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+
+            {/* モバイル用「すべて見る」リンク */}
+            <div className="mt-6 flex justify-center sm:hidden">
+              <Link href="/blog?tag=釣果週報">
+                <Button variant="outline" className="min-h-[44px] gap-1">
+                  すべての釣果週報を見る
+                  <ArrowRight className="size-4" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* 今月おすすめの釣り場 */}
       {(() => {
@@ -822,26 +716,6 @@ export default async function Home() {
         ) : null;
       })()}
 
-      {/* 人気スポットTOP10（近い順ソート対応） */}
-      <HomeTop10Client
-        spots={fishingSpots
-          .slice()
-          .sort((a, b) => b.rating * b.reviewCount - a.rating * a.reviewCount)
-          .slice(0, 100)
-          .map((s) => ({
-            id: s.id,
-            slug: s.slug,
-            name: s.name,
-            spotType: s.spotType,
-            rating: s.rating,
-            reviewCount: s.reviewCount,
-            latitude: s.latitude,
-            longitude: s.longitude,
-            prefecture: s.region.prefecture,
-            areaName: s.region.areaName,
-          }))}
-      />
-
       {/* 人気のエリア */}
       <section className="bg-muted/50 py-8 sm:py-12">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
@@ -897,242 +771,18 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 最新釣果週報（6件表示） */}
-      {weeklyReports.length > 0 && (
-        <section className="bg-muted/50 py-8 sm:py-12">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6">
-            <div className="mb-6 flex items-end justify-between sm:mb-8">
-              <div>
-                <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
-                  最新釣果週報
-                </h2>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  全国の今週の釣果をエリア別にお届け
-                </p>
-              </div>
-              <Link
-                href="/blog?tag=釣果週報"
-                className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
-              >
-                すべて見る
-                <ArrowRight className="size-4" />
-              </Link>
-            </div>
-
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {weeklyReports.map((post) => (
-                <Link key={post.id} href={`/blog/${post.slug}`}>
-                  <Card className="group h-full overflow-hidden py-0 transition-shadow hover:shadow-md">
-                    <div className="relative h-36 w-full overflow-hidden">
-                      <Image
-                        src={post.image || getFishImage(post.tags, post.id)}
-                        alt={post.title}
-                        fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      />
-                    </div>
-                    <CardContent className="flex h-full flex-col gap-2 p-4">
-                      <div className="flex items-center gap-2">
-                        <Badge variant="secondary" className="text-xs">
-                          {BLOG_CATEGORIES[post.category]}
-                        </Badge>
-                        <span className="text-xs text-muted-foreground">
-                          {post.publishedAt}
-                        </span>
-                      </div>
-                      <h3 className="text-sm font-semibold leading-snug group-hover:text-primary sm:text-base">
-                        {post.title}
-                      </h3>
-                      <p className="line-clamp-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                        {post.description}
-                      </p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {post.tags.slice(0, 3).map((tag) => (
-                          <span
-                            key={tag}
-                            className="inline-flex items-center gap-0.5 rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground"
-                          >
-                            <Tag className="size-2.5" />
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="flex items-center gap-1 text-sm font-medium text-primary">
-                        続きを読む
-                        <ChevronRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-
-            {/* モバイル用「すべて見る」リンク */}
-            <div className="mt-6 flex justify-center sm:hidden">
-              <Link href="/blog?tag=釣果週報">
-                <Button variant="outline" className="min-h-[44px] gap-1">
-                  すべての釣果週報を見る
-                  <ArrowRight className="size-4" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* カテゴリ別おすすめ記事 */}
-      {(beginnerPosts.length > 0 || techniquePosts.length > 0 || seasonalPosts.length > 0) && (
-        <section className="py-8 sm:py-12">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6">
-            <h2 className="mb-6 text-xl font-bold tracking-tight text-pretty sm:mb-8 sm:text-3xl">
-              カテゴリ別おすすめ記事
-            </h2>
-
-            <div className="space-y-8 sm:space-y-10">
-              {/* 初心者向け */}
-              {beginnerPosts.length > 0 && (
-                <div>
-                  <div className="mb-4 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <GraduationCap className="size-5 text-green-600" />
-                      <h3 className="text-lg font-bold text-foreground">初心者向け</h3>
-                      <Badge variant="secondary" className="text-xs">おすすめ</Badge>
-                    </div>
-                    <Link
-                      href="/blog?category=beginner"
-                      className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
-                    >
-                      もっと見る
-                      <ChevronRight className="size-3.5" />
-                    </Link>
-                  </div>
-                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {beginnerPosts.map((post) => (
-                      <Link key={post.id} href={`/blog/${post.slug}`}>
-                        <Card className="group h-full transition-shadow hover:shadow-md">
-                          <CardContent className="flex h-full flex-col gap-2.5 p-4">
-                            <Badge variant="secondary" className="w-fit text-xs">
-                              {BLOG_CATEGORIES[post.category]}
-                            </Badge>
-                            <h4 className="text-sm font-semibold leading-snug group-hover:text-primary sm:text-base">
-                              {post.title}
-                            </h4>
-                            <p className="line-clamp-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                              {post.description}
-                            </p>
-                            <div className="flex items-center gap-1 text-sm font-medium text-primary">
-                              続きを読む
-                              <ChevronRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* テクニック */}
-              {techniquePosts.length > 0 && (
-                <div>
-                  <div className="mb-4 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Target className="size-5 text-blue-600" />
-                      <h3 className="text-lg font-bold text-foreground">テクニック</h3>
-                      <Badge variant="secondary" className="text-xs">スキルアップ</Badge>
-                    </div>
-                    <Link
-                      href="/blog?category=technique"
-                      className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
-                    >
-                      もっと見る
-                      <ChevronRight className="size-3.5" />
-                    </Link>
-                  </div>
-                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {techniquePosts.map((post) => (
-                      <Link key={post.id} href={`/blog/${post.slug}`}>
-                        <Card className="group h-full transition-shadow hover:shadow-md">
-                          <CardContent className="flex h-full flex-col gap-2.5 p-4">
-                            <Badge variant="secondary" className="w-fit text-xs">
-                              {BLOG_CATEGORIES[post.category]}
-                            </Badge>
-                            <h4 className="text-sm font-semibold leading-snug group-hover:text-primary sm:text-base">
-                              {post.title}
-                            </h4>
-                            <p className="line-clamp-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                              {post.description}
-                            </p>
-                            <div className="flex items-center gap-1 text-sm font-medium text-primary">
-                              続きを読む
-                              <ChevronRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              {/* 季節の釣り */}
-              {seasonalPosts.length > 0 && (
-                <div>
-                  <div className="mb-4 flex items-center justify-between">
-                    <div className="flex items-center gap-2">
-                      <Calendar className="size-5 text-orange-600" />
-                      <h3 className="text-lg font-bold text-foreground">季節の釣り</h3>
-                      <Badge variant="secondary" className="text-xs">旬の情報</Badge>
-                    </div>
-                    <Link
-                      href="/blog?category=seasonal"
-                      className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
-                    >
-                      もっと見る
-                      <ChevronRight className="size-3.5" />
-                    </Link>
-                  </div>
-                  <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                    {seasonalPosts.map((post) => (
-                      <Link key={post.id} href={`/blog/${post.slug}`}>
-                        <Card className="group h-full transition-shadow hover:shadow-md">
-                          <CardContent className="flex h-full flex-col gap-2.5 p-4">
-                            <Badge variant="secondary" className="w-fit text-xs">
-                              {BLOG_CATEGORIES[post.category]}
-                            </Badge>
-                            <h4 className="text-sm font-semibold leading-snug group-hover:text-primary sm:text-base">
-                              {post.title}
-                            </h4>
-                            <p className="line-clamp-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                              {post.description}
-                            </p>
-                            <div className="flex items-center gap-1 text-sm font-medium text-primary">
-                              続きを読む
-                              <ChevronRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
-                            </div>
-                          </CardContent>
-                        </Card>
-                      </Link>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* すべてのコラムへのリンク */}
-            <div className="mt-8 flex justify-center">
-              <Link href="/blog">
-                <Button variant="outline" size="lg" className="min-h-[44px] gap-2">
-                  <BookOpen className="size-4" />
-                  すべてのコラムを見る（{latestPosts.length}件以上）
-                  <ArrowRight className="size-4" />
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </section>
-      )}
+      {/* 釣り方コンパクトリンク */}
+      <section className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8">
+        <h2 className="mb-3 text-sm font-bold text-foreground">人気の釣り方</h2>
+        <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
+          <Link href="/fishing/sabiki" className="text-primary transition-colors hover:text-primary/80">サビキ釣り</Link>
+          <Link href="/fishing/nagezuri" className="text-primary transition-colors hover:text-primary/80">投げ釣り</Link>
+          <Link href="/fishing/ukizuri" className="text-primary transition-colors hover:text-primary/80">ウキ釣り</Link>
+          <Link href="/fishing/lure" className="text-primary transition-colors hover:text-primary/80">ルアー</Link>
+          <Link href="/fishing/eging" className="text-primary transition-colors hover:text-primary/80">エギング</Link>
+          <Link href="/fishing/fukasezuri" className="text-primary transition-colors hover:text-primary/80">フカセ釣り</Link>
+        </div>
+      </section>
 
       {/* 今月のおすすめアイテム */}
       <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
