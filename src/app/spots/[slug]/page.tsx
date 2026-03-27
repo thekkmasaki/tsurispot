@@ -880,7 +880,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <p className="mb-4 text-sm text-muted-foreground">YouTubeで{spot.name}の実際の釣り動画を探せます。</p>
             {spot.youtubeLinks && spot.youtubeLinks.length > 0 && (
               <div className="mb-4">
-                <YouTubeVideoList links={spot.youtubeLinks} />
+                <YouTubeVideoList links={spot.youtubeLinks} thumbnailUrl={spot.mainImageUrl} />
               </div>
             )}
             <a

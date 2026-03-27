@@ -233,6 +233,7 @@ interface BestTimeResult {
   endHour: number;
   score: number;
   reasons: string[];
+  detail: string; // 具体的な根拠説明
 }
 
 function calcBestFishingTime(
@@ -247,12 +248,11 @@ function calcBestFishingTime(
   const sunriseH = parseInt(sunriseStr.split(":")[0], 10);
   const sunsetH = parseInt(sunsetStr.split(":")[0], 10);
 
-  // 潮の変わり目時刻（時単位）
-  const tideChangeHours = [...highTides, ...lowTides].map((t) => {
-    const h = parseInt(t.split(":")[0], 10);
-    const m = parseInt(t.split(":")[1], 10);
-    return h + m / 60;
-  });
+  // 潮の変わり目時刻（時単位 + 元の文字列）
+  const tideChanges = [
+    ...highTides.map((t) => ({ time: t, type: "満潮" as const, h: parseInt(t.split(":")[0], 10) + parseInt(t.split(":")[1], 10) / 60 })),
+    ...lowTides.map((t) => ({ time: t, type: "干潮" as const, h: parseInt(t.split(":")[0], 10) + parseInt(t.split(":")[1], 10) / 60 })),
+  ];
 
   // 各時間のスコア計算
   const scores = hourly.map((h, hour) => {
@@ -263,17 +263,17 @@ function calcBestFishingTime(
     // マズメ（日出前後1h、日没前後1h）
     if (Math.abs(hour - sunriseH) <= 1) {
       s += 4;
-      reasons.push("朝マズメ");
+      reasons.push(`朝マズメ（日出${sunriseStr}）`);
     } else if (Math.abs(hour - sunsetH) <= 1) {
       s += 4;
-      reasons.push("夕マズメ");
+      reasons.push(`夕マズメ（日没${sunsetStr}）`);
     }
 
-    // 潮の変わり目（±1h）
-    for (const tc of tideChangeHours) {
-      if (Math.abs(hour - tc) <= 1.5) {
+    // 潮の変わり目（±1.5h）
+    for (const tc of tideChanges) {
+      if (Math.abs(hour - tc.h) <= 1.5) {
         s += 3;
-        reasons.push("潮の動き出し");
+        reasons.push(`${tc.type}${tc.time}前後`);
         break;
       }
     }
@@ -283,19 +283,17 @@ function calcBestFishingTime(
       s += 1;
     } else if (h.weatherCode >= 51) {
       s -= 2;
-      reasons.push("雨");
     }
 
     // 風速: 弱風は良い、強風は減点
     if (windMs < 3) {
       s += 2;
-      reasons.push("穏やか");
     } else if (windMs < 5) {
       s += 1;
-    } else if (windMs >= 7) {
-      s -= 1;
     } else if (windMs >= 10) {
       s -= 3;
+    } else if (windMs >= 7) {
+      s -= 1;
     }
 
     // 深夜帯は減点（0-3時）
@@ -317,20 +315,41 @@ function calcBestFishingTime(
     }
   }
 
-  // 理由を集約（重複排除）
+  // 理由を集約（重複排除、具体時刻付き）
   const reasonSet = new Set<string>();
   for (let i = bestStart; i <= bestStart + 1; i++) {
-    scores[i].reasons.filter((r) => r !== "雨" && r !== "穏やか").forEach((r) => reasonSet.add(r));
+    scores[i].reasons.forEach((r) => reasonSet.add(r));
   }
-  // 風が穏やかなら追加
+
+  // 風情報
   const avgWind = (hourly[bestStart].windSpeed + hourly[bestStart + 1].windSpeed) / 2 / 3.6;
-  if (avgWind < 3) reasonSet.add("風が穏やか");
+
+  // 詳細説明を生成
+  const detailParts: string[] = [];
+  for (const r of reasonSet) {
+    detailParts.push(r);
+  }
+  if (avgWind < 3) {
+    detailParts.push(`風速${avgWind.toFixed(1)}m/sで穏やか`);
+  } else if (avgWind < 5) {
+    detailParts.push(`風速${avgWind.toFixed(1)}m/s`);
+  }
+
+  // reasonsはタグ用（短いラベル）
+  const tags: string[] = [];
+  for (const r of reasonSet) {
+    if (r.includes("朝マズメ")) tags.push("朝マズメ");
+    else if (r.includes("夕マズメ")) tags.push("夕マズメ");
+    else if (r.includes("満潮") || r.includes("干潮")) tags.push("潮の変わり目");
+  }
+  if (avgWind < 3) tags.push("風が穏やか");
 
   return {
     startHour: bestStart,
     endHour: bestStart + 2,
     score: bestSum,
-    reasons: Array.from(reasonSet),
+    reasons: tags,
+    detail: detailParts.join("、"),
   };
 }
 
@@ -754,7 +773,7 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
                 </span>
               </div>
               {best.reasons.length > 0 && (
-                <div className="flex flex-wrap gap-1.5 mb-1.5">
+                <div className="flex flex-wrap gap-1.5 mb-1">
                   {best.reasons.map((r) => (
                     <span key={r} className="rounded-full bg-white/80 border border-amber-200 px-2 py-0.5 text-[10px] font-medium text-amber-800">
                       {r}
@@ -762,7 +781,7 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
                   ))}
                 </div>
               )}
-              <p className="text-[11px] text-amber-700 leading-relaxed">{tideInfo.description}</p>
+              <p className="text-[11px] text-amber-700 leading-relaxed">{best.detail}</p>
             </div>
           ) : (
             <div className="mt-3 rounded-lg bg-gray-50 px-3 py-2">
