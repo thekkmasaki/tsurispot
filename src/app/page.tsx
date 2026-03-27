@@ -503,11 +503,6 @@ export default async function Home() {
           }))}
       />
 
-      {/* 今釣れる魚セクション */}
-      <SectionErrorBoundary>
-        <HomeSeasonalFish />
-      </SectionErrorBoundary>
-
       {/* 最新釣果週報（6件表示） */}
       {weeklyReports.length > 0 && (
         <section className="bg-muted/50 py-8 sm:py-12">
@@ -591,6 +586,11 @@ export default async function Home() {
           </div>
         </section>
       )}
+
+      {/* 今釣れる魚セクション */}
+      <SectionErrorBoundary>
+        <HomeSeasonalFish />
+      </SectionErrorBoundary>
 
       {/* 今月おすすめの釣り場 */}
       {(() => {

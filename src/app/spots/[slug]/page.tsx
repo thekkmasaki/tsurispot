@@ -38,8 +38,6 @@ import { GoTodayButton } from "@/components/spots/go-today-button";
 import { GearGuideList } from "@/components/spots/gear-guide";
 import { SafetyWarning } from "@/components/spots/safety-warning";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
-import { YouTubeEmbedList } from "@/components/youtube-embed";
-import { getVideosForMethods, getVideosForSpotType } from "@/lib/data/youtube-videos";
 import {
   SPOT_TYPE_LABELS,
   DIFFICULTY_LABELS,
@@ -394,21 +392,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
     },
   };
 
-  // VideoObject JSON-LD（YouTube動画の構造化データ）
-  const spotMethods = spot.catchableFish.map((cf) => cf.method);
-  const spotMethodVideos = spotMethods.length > 0
-    ? getVideosForMethods(spotMethods, 2)
-    : getVideosForSpotType(spot.spotType, 2);
-  const videoJsonLd = spotMethodVideos.map(video => ({
-    "@context": "https://schema.org",
-    "@type": "VideoObject",
-    name: video.title,
-    description: `${spot.name}で使える釣り方の解説動画`,
-    thumbnailUrl: `https://i.ytimg.com/vi/${video.videoId}/hqdefault.jpg`,
-    uploadDate: "2025-01-01",
-    contentUrl: `https://www.youtube.com/watch?v=${video.videoId}`,
-    embedUrl: `https://www.youtube.com/embed/${video.videoId}`,
-  }));
+  const videoJsonLd: object[] = [];
 
   // 夜釣り可能かどうかの判定（catchableFishのrecommendedTimeに「夜」を含む場合）
   const isNightFishing =
@@ -725,6 +709,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
       <div className="lg:grid lg:grid-cols-[1fr_320px] lg:gap-8">
       {/* メインコンテンツ */}
       <div className="min-w-0">
+      {/* 天気・潮汐情報（常時表示） */}
+      <section className="mb-6">
+        <SpotWeatherTide lat={spot.latitude} lng={spot.longitude} spotName={spot.name} />
+      </section>
+
       {/* タブレイアウト */}
       <SpotDetailTabs
         overviewTab={<>
@@ -864,10 +853,6 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <FamilyInfoCard familyInfo={spot.familyInfo} spotType={spot.spotType} hasToilet={spot.hasToilet} hasParking={spot.hasParking} difficulty={spot.difficulty} />
           </section>
           )}
-          <section>
-            <h3 className="mb-3 text-lg font-bold">天気・潮汐情報</h3>
-            <SpotWeatherTide lat={spot.latitude} lng={spot.longitude} spotName={spot.name} />
-          </section>
           {/* LINE エリア釣果速報バナー */}
           <a
             href="https://line.me/R/ti/p/@710bvaxa"
@@ -890,26 +875,25 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <h3 className="mb-3 text-lg font-bold">ボウズ確率</h3>
             <SpotBouzuCard spotType={spot.spotType} difficulty={spot.difficulty} rating={spot.rating} reviewCount={spot.reviewCount} prefecture={spot.region.prefecture} areaName={spot.region.areaName} isFree={spot.isFree} hasRentalRod={spot.hasRentalRod} catchableFishCount={spot.catchableFish.length} catchableFishDetails={spot.catchableFish.map((cf) => ({ fishSlug: cf.fish.slug, fishName: cf.fish.name, method: cf.method, catchDifficulty: cf.catchDifficulty, monthStart: cf.monthStart, monthEnd: cf.monthEnd, peakSeason: cf.peakSeason }))} />
           </section>
-          {spot.youtubeLinks && spot.youtubeLinks.length > 0 && (
-            <section>
-              <h3 className="mb-4 flex items-center gap-2 text-lg font-bold"><Play className="size-5" />参考動画</h3>
-              <p className="mb-4 text-sm text-muted-foreground">このスポットでの釣りの様子がわかるYouTube動画です。</p>
-              <YouTubeVideoList links={spot.youtubeLinks} />
-            </section>
-          )}
-          {(() => {
-            const methods = spot.catchableFish.map((cf) => cf.method);
-            const methodVideos = methods.length > 0
-              ? getVideosForMethods(methods, 2)
-              : getVideosForSpotType(spot.spotType, 2);
-            return methodVideos.length > 0 ? (
-              <YouTubeEmbedList
-                videos={methodVideos}
-                sectionTitle="関連する釣り方動画"
-                description={`${spot.name}で使える釣り方の解説動画です。`}
-              />
-            ) : null;
-          })()}
+          <section>
+            <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><Play className="size-5" />{spot.name}の釣り動画</h3>
+            <p className="mb-4 text-sm text-muted-foreground">YouTubeで{spot.name}の実際の釣り動画を探せます。</p>
+            {spot.youtubeLinks && spot.youtubeLinks.length > 0 && (
+              <div className="mb-4">
+                <YouTubeVideoList links={spot.youtubeLinks} />
+              </div>
+            )}
+            <a
+              href={`https://www.youtube.com/results?search_query=${encodeURIComponent(spot.name + " 釣り")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-2.5 text-sm font-medium text-red-700 transition-colors hover:bg-red-100"
+            >
+              <Play className="size-4 fill-red-600 text-red-600" />
+              「{spot.name} 釣り」でYouTube検索
+              <ExternalLink className="size-3.5" />
+            </a>
+          </section>
         </>}
         fishTab={<>
           <h2 className="sr-only">{spot.name}の釣り情報</h2>

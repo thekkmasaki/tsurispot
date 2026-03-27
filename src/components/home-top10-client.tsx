@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import { Star, ChevronRight, Loader2, ArrowRight, MapPin, Waves, TreePine, Navigation } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -52,23 +52,7 @@ const SEA_TYPES = new Set(["port", "beach", "rocky", "pier", "breakwater"]);
 export function HomeTop10Client({ spots }: { spots: Top10Spot[] }) {
   const [waterFilter, setWaterFilter] = useState<"all" | "sea" | "river">("all");
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
-  const [locating, setLocating] = useState(true);
-
-  // 初回マウント時に位置情報を自動取得
-  useEffect(() => {
-    if (!navigator.geolocation) {
-      setLocating(false);
-      return;
-    }
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        setUserLocation([pos.coords.latitude, pos.coords.longitude]);
-        setLocating(false);
-      },
-      () => setLocating(false),
-      { enableHighAccuracy: false, timeout: 5000 },
-    );
-  }, []);
+  const [locating, setLocating] = useState(false);
 
   const filteredSpots = useMemo(() => {
     if (waterFilter === "all") return spots;
