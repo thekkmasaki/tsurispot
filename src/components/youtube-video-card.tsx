@@ -132,13 +132,12 @@ function YouTubeSearchEmbed({ query }: { query: string }) {
 }
 
 export function YouTubeVideoList({ links, thumbnailUrl }: { links?: YouTubeSearchLink[]; thumbnailUrl?: string }) {
-  if (!links || links.length === 0) return null;
-
   const [useEmbed, setUseEmbed] = useState(true);
   const [checked, setChecked] = useState(false);
 
   // APIキーがあるかチェック（最初のクエリで判定）
   useEffect(() => {
+    if (!links || links.length === 0) return;
     fetch(`/api/youtube-search?q=${encodeURIComponent(links[0].searchQuery)}`)
       .then((r) => r.json())
       .then((data) => {
@@ -147,6 +146,8 @@ export function YouTubeVideoList({ links, thumbnailUrl }: { links?: YouTubeSearc
       .catch(() => setUseEmbed(false))
       .finally(() => setChecked(true));
   }, [links]);
+
+  if (!links || links.length === 0) return null;
 
   if (!checked) {
     return (
