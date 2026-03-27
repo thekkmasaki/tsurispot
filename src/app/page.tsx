@@ -483,26 +483,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 人気スポットTOP10（近い順ソート対応） */}
-      <HomeTop10Client
-        spots={fishingSpots
-          .slice()
-          .sort((a, b) => b.rating * b.reviewCount - a.rating * a.reviewCount)
-          .slice(0, 100)
-          .map((s) => ({
-            id: s.id,
-            slug: s.slug,
-            name: s.name,
-            spotType: s.spotType,
-            rating: s.rating,
-            reviewCount: s.reviewCount,
-            latitude: s.latitude,
-            longitude: s.longitude,
-            prefecture: s.region.prefecture,
-            areaName: s.region.areaName,
-          }))}
-      />
-
       {/* 最新釣果週報（6件表示） */}
       {weeklyReports.length > 0 && (
         <section className="bg-muted/50 py-8 sm:py-12">
@@ -522,6 +502,16 @@ export default async function Home() {
               >
                 すべて見る
                 <ArrowRight className="size-4" />
+              </Link>
+            </div>
+
+            {/* モバイル用「すべて見る」リンク — カード一覧の上 */}
+            <div className="mb-4 flex justify-center sm:hidden">
+              <Link href="/blog?tag=釣果週報">
+                <Button variant="outline" className="min-h-[44px] gap-1">
+                  すべての釣果週報を見る
+                  <ArrowRight className="size-4" />
+                </Button>
               </Link>
             </div>
 
@@ -573,19 +563,29 @@ export default async function Home() {
                 </Link>
               ))}
             </div>
-
-            {/* モバイル用「すべて見る」リンク */}
-            <div className="mt-6 flex justify-center sm:hidden">
-              <Link href="/blog?tag=釣果週報">
-                <Button variant="outline" className="min-h-[44px] gap-1">
-                  すべての釣果週報を見る
-                  <ArrowRight className="size-4" />
-                </Button>
-              </Link>
-            </div>
           </div>
         </section>
       )}
+
+      {/* 人気スポットTOP10（近い順ソート対応） */}
+      <HomeTop10Client
+        spots={fishingSpots
+          .slice()
+          .sort((a, b) => b.rating * b.reviewCount - a.rating * a.reviewCount)
+          .slice(0, 100)
+          .map((s) => ({
+            id: s.id,
+            slug: s.slug,
+            name: s.name,
+            spotType: s.spotType,
+            rating: s.rating,
+            reviewCount: s.reviewCount,
+            latitude: s.latitude,
+            longitude: s.longitude,
+            prefecture: s.region.prefecture,
+            areaName: s.region.areaName,
+          }))}
+      />
 
       {/* 今釣れる魚セクション */}
       <SectionErrorBoundary>

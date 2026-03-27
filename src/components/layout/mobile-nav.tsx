@@ -30,9 +30,9 @@ import { useFavorites } from "@/hooks/use-favorites";
 
 const mainNavItems = [
   { href: "/spots", label: "スポット", icon: MapPin },
-  { href: "/map", label: "地図", icon: Map },
-  { href: "/catchable-now", label: "今釣れる", icon: Fish },
   { href: "/blog", label: "釣果レポート", icon: FileText },
+  { href: "/catchable-now", label: "今釣れる", icon: Fish },
+  { href: "/map", label: "地図", icon: Map },
   { href: "/favorites", label: "お気に入り", icon: Heart },
 ];
 
@@ -110,12 +110,12 @@ export function MobileNav() {
             <button
               onClick={() => setMoreOpen(false)}
               aria-label="メニューを閉じる"
-              className="rounded-full p-1.5 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              className="rounded-full p-2 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
-              <X className="size-4 text-gray-500" aria-hidden="true" />
+              <X className="size-5 text-gray-500" aria-hidden="true" />
             </button>
           </div>
-          <div className="grid grid-cols-3 gap-1 p-3">
+          <div className="grid grid-cols-3 gap-1.5 p-3">
             {moreNavItems.map((item) => {
               const isActive =
                 pathname === item.href ||
@@ -126,7 +126,7 @@ export function MobileNav() {
                   href={item.href}
                   role="menuitem"
                   className={cn(
-                    "flex flex-col items-center gap-1.5 rounded-xl px-2 py-3 text-xs transition-colors touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+                    "flex flex-col items-center gap-1.5 rounded-xl px-2 py-3.5 text-xs transition-colors touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
                     isActive
                       ? "bg-ocean-mid/10 text-ocean-mid font-medium"
                       : "text-gray-600 hover:bg-sand-light/50"
@@ -154,7 +154,7 @@ export function MobileNav() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "relative flex flex-col items-center justify-center gap-0.5 px-1 py-2 text-[10px] transition-colors min-h-[48px] touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+                  "relative flex flex-col items-center justify-center gap-0.5 px-1 py-2 text-[11px] transition-colors min-h-[48px] touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
                   isActive
                     ? "text-ocean-mid"
                     : "text-muted-foreground"
@@ -182,7 +182,7 @@ export function MobileNav() {
             aria-haspopup="true"
             aria-label="その他のメニュー"
             className={cn(
-              "relative flex flex-col items-center justify-center gap-0.5 px-1 py-2 text-[10px] transition-colors min-h-[48px] touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+              "relative flex flex-col items-center justify-center gap-0.5 px-1 py-2 text-[11px] transition-colors min-h-[48px] touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
               moreOpen || hasActiveMore ? "text-ocean-mid" : "text-muted-foreground"
             )}
           >

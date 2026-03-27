@@ -30,11 +30,11 @@ import { LineButton } from "./line-button";
 // メインナビ（常時表示：最大6個）
 const mainNavItems = [
   { href: "/spots", label: "スポット", icon: MapPin },
-  { href: "/map", label: "地図", icon: Map },
-  { href: "/fish", label: "図鑑", icon: BookOpen },
-  { href: "/ranking", label: "ランキング", icon: Trophy },
-  { href: "/catchable-now", label: "今釣れる", icon: Fish },
   { href: "/blog", label: "釣果レポート", icon: FileText },
+  { href: "/catchable-now", label: "今釣れる", icon: Fish },
+  { href: "/map", label: "地図", icon: Map },
+  { href: "/ranking", label: "ランキング", icon: Trophy },
+  { href: "/fish", label: "図鑑", icon: BookOpen },
 ];
 
 // ドロップダウン「もっと見る」
