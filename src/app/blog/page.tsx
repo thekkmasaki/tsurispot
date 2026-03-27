@@ -1,24 +1,24 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { getAllBlogPosts } from "@/lib/data/blog";
 import { FileText } from "lucide-react";
 import { BlogListClient } from "@/components/blog/blog-list.client";
+import { CatchReportSection } from "@/components/blog/catch-report-section";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 
-// ISR: 1時間ごとに再検証（Vercel無料プランのISR Reads節約）
+// ISR: 1時間ごとに再検証
 export const revalidate = 3600;
 
-// Vercel Pro: microCMS API呼び出しのタイムアウト対策
+// microCMS API呼び出しのタイムアウト対策
 export const maxDuration = 60;
 
 export const metadata: Metadata = {
-  title: "釣りコラム・ブログ",
+  title: "釣果レポート・釣りコラム",
   description:
-    "釣り初心者の道具選びから上級者のテクニックまで、実践的な釣りコラムを多数掲載。堤防釣り・サビキ釣り・ルアーフィッシング・季節別攻略法を編集部がわかりやすく解説。最新の釣り情報とおすすめタックル情報をお届けします。",
+    "最新の釣果レポートと実践的な釣りコラムを多数掲載。実際の釣行記録から堤防釣り・サビキ釣り・ルアーフィッシングのテクニックまで。編集部がわかりやすく解説します。",
   openGraph: {
-    title: "釣りコラム・ブログ",
+    title: "釣果レポート・釣りコラム",
     description:
-      "釣り初心者向けの道具選びから、季節ごとの釣り方テクニック・タックルレビューまで。実践的な釣りコラムを編集部がお届けします。",
+      "最新の釣果レポートと実践的な釣りコラム。実際の釣行記録からテクニック・タックルレビューまでお届けします。",
     type: "website",
     url: "https://tsurispot.com/blog",
     siteName: "ツリスポ",
@@ -41,14 +41,27 @@ const breadcrumbJsonLd = {
     {
       "@type": "ListItem",
       position: 2,
-      name: "コラム",
+      name: "釣果・コラム",
       item: "https://tsurispot.com/blog",
     },
   ],
 };
 
+/** リスト表示に必要なフィールドだけ抽出（server-serialization: content除外で転送量削減） */
+function stripContent<T extends { content: string }>(
+  posts: T[],
+): Omit<T, "content">[] {
+  return posts.map(({ content, ...rest }) => rest);
+}
+
 export default async function BlogListPage() {
   const posts = await getAllBlogPosts();
+  const reportPosts = stripContent(
+    posts.filter((p) => p.category === "report"),
+  );
+  const columnPosts = stripContent(
+    posts.filter((p) => p.category !== "report"),
+  );
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
@@ -57,25 +70,29 @@ export default async function BlogListPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
 
-      <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "コラム" }]} />
+      <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "釣果・コラム" }]} />
 
-      {/* ヘッダー */}
-      <div className="mb-8">
-        <div className="mb-2 flex items-center gap-3">
-          <div className="flex size-10 items-center justify-center rounded-xl bg-primary/10">
-            <FileText className="size-5 text-primary" />
+      {/* 釣果レポートセクション（目立つ） */}
+      <CatchReportSection posts={reportPosts} />
+
+      {/* コラムセクション */}
+      <div className="mt-12">
+        <div className="mb-8">
+          <div className="mb-2 flex items-center gap-3">
+            <div className="flex size-10 items-center justify-center rounded-xl bg-primary/10">
+              <FileText className="size-5 text-primary" />
+            </div>
+            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
+              釣りコラム
+            </h2>
           </div>
-          <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">
-            釣りコラム
-          </h1>
+          <p className="text-sm text-muted-foreground sm:text-base">
+            初心者向けガイドから季節の釣り情報、テクニックまで。役立つ釣りコラムをお届けします。
+          </p>
         </div>
-        <p className="text-sm text-muted-foreground sm:text-base">
-          初心者向けガイドから季節の釣り情報、テクニックまで。役立つ釣りコラムをお届けします。
-        </p>
-      </div>
 
-      {/* クライアントサイドフィルター付き記事一覧 */}
-      <BlogListClient posts={posts} />
+        <BlogListClient posts={columnPosts} />
+      </div>
     </div>
   );
 }
