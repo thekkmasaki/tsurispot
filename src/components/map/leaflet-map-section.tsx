@@ -130,7 +130,7 @@ export function LeafletMapSection({ analysisResult, spot, spotFacilities, restri
     return (
       <div className="mt-6">
         <h3 className="mb-3 text-lg font-bold">AI解析 釣りマップ</h3>
-        <div className="h-[480px] w-full animate-pulse rounded-lg bg-muted" />
+        <div className="h-[360px] w-full animate-pulse rounded-lg bg-muted sm:h-[480px]" />
       </div>
     );
   }
@@ -164,7 +164,13 @@ class ErrorCatcher extends React.Component<
   }
 
   render() {
-    if (this.state.hasError) return null;
+    if (this.state.hasError) {
+      return (
+        <div className="flex h-[360px] items-center justify-center rounded-lg border bg-muted/30 text-sm text-muted-foreground sm:h-[480px]">
+          地図の読み込みに失敗しました
+        </div>
+      );
+    }
     return this.props.children;
   }
 }

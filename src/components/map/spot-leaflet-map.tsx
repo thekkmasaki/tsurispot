@@ -360,11 +360,11 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
 
   return (
     <div className="overflow-hidden rounded-lg border">
-      <div className="relative" style={{ height: "480px" }}>
+      <div className="relative h-[360px] sm:h-[480px]">
       <MapContainer
         center={[data.coordinates.lat, data.coordinates.lng]}
         zoom={16}
-        style={{ height: "480px", width: "100%" }}
+        style={{ height: "100%", width: "100%" }}
         scrollWheelZoom={true}
       >
         <InvalidateSizeOnVisible />

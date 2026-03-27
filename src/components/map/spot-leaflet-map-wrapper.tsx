@@ -11,7 +11,7 @@ const SpotLeafletMap = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="h-[400px] w-full animate-pulse rounded-lg bg-muted sm:h-[450px]" />
+      <div className="h-[360px] w-full animate-pulse rounded-lg bg-muted sm:h-[480px]" />
     ),
   }
 );
@@ -19,7 +19,7 @@ const SpotLeafletMap = dynamic(
 export function SpotLeafletMapWrapper({ data }: { data: SpotMapAnalysis }) {
   return (
     <>
-      <style>{`.spot-analysis-map .leaflet-container { height: 450px !important; }`}</style>
+      <style>{`.spot-analysis-map .leaflet-container { height: 100% !important; }`}</style>
       <div className="spot-analysis-map">
         <SpotLeafletMap data={data} />
       </div>
