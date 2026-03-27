@@ -22,6 +22,7 @@ import {
   BookOpen,
   Scale,
   FileText,
+  Waves,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -713,6 +714,17 @@ export default async function SpotDetailPage({ params }: PageProps) {
         <div className="mb-4"><SafetyWarning level="safe" notes={spot.safetyNotes} isKuchikomi={true} /></div>
       )}
 
+      {/* セクション区切り */}
+      <div className="my-6 flex items-center gap-4" aria-hidden="true">
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+        <Waves className="size-5 text-ocean-mid/40" />
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+      </div>
+
+      {/* 2カラムレイアウト */}
+      <div className="lg:grid lg:grid-cols-[1fr_320px] lg:gap-8">
+      {/* メインコンテンツ */}
+      <div className="min-w-0">
       {/* タブレイアウト */}
       <SpotDetailTabs
         overviewTab={<>
@@ -1636,6 +1648,63 @@ export default async function SpotDetailPage({ params }: PageProps) {
           <li>・釣れる魚情報: 公開情報および編集部調べに基づく（{spot.catchableFish.length}魚種確認）</li>
         </ul>
       </section>
+      </div>{/* メインコンテンツ閉じ */}
+
+      {/* デスクトップ右サイドバー */}
+      <aside className="hidden lg:block">
+        <div className="sticky top-20 space-y-4">
+          {/* 評価・所在地 */}
+          <Card className="gap-0 py-0">
+            <CardContent className="p-4 space-y-3">
+              <div className="flex items-center gap-2">
+                <Star className="size-5 fill-yellow-400 text-yellow-400" />
+                <span className="text-lg font-bold">{spot.rating.toFixed(1)}</span>
+                <span className="text-xs text-muted-foreground">/ 5.0</span>
+              </div>
+              <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+                <MapPin className="size-4" />
+                <span>{spot.region.prefecture} {spot.region.areaName}</span>
+              </div>
+              <div className="flex flex-wrap gap-1.5">
+                {spot.difficulty === "beginner" && (
+                  <Badge className="bg-forest-green/15 text-forest-green border-forest-green/25 text-xs">初心者OK</Badge>
+                )}
+                {spot.isFree && (
+                  <Badge className="bg-sunset-coral/15 text-sunset-coral border-sunset-coral/25 text-xs">無料</Badge>
+                )}
+                <Badge variant="outline" className="text-xs">{SPOT_TYPE_LABELS[spot.spotType]}</Badge>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* GoTodayボタン */}
+          <Card className="gap-0 py-0">
+            <CardContent className="p-4">
+              <GoTodayButton slug={spot.slug} spotName={spot.name} />
+              <a
+                href={`https://www.google.com/maps/dir/?api=1&destination=${spot.latitude},${spot.longitude}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-2 flex items-center justify-center gap-2 rounded-xl border-2 border-ocean-mid px-4 py-2.5 text-sm font-bold text-ocean-mid transition-colors hover:bg-ocean-mid/5"
+              >
+                <Navigation2 className="size-4" />
+                ナビで行く
+              </a>
+            </CardContent>
+          </Card>
+
+          {/* シーズンカレンダーミニ */}
+          {spot.catchableFish.length > 0 && (
+            <Card className="gap-0 py-0">
+              <CardContent className="p-4">
+                <h3 className="mb-2 text-sm font-bold font-[family-name:var(--font-zen-maru)]">シーズンカレンダー</h3>
+                <SeasonCalendar catchableFish={spot.catchableFish.slice(0, 5)} />
+              </CardContent>
+            </Card>
+          )}
+        </div>
+      </aside>
+      </div>{/* 2カラムグリッド閉じ */}
     </div>
   );
 }

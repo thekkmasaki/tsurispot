@@ -26,12 +26,12 @@ export function SpotDetailTabs({
 }: SpotDetailTabsProps) {
   return (
     <Tabs defaultValue="overview" className="mt-6">
-      <TabsList className="w-full overflow-x-auto scrollbar-hide">
+      <TabsList className="w-full overflow-x-auto scrollbar-hide bg-sand-light/50 rounded-2xl p-1.5">
         {TAB_ITEMS.map(({ value, label, icon: Icon }) => (
           <TabsTrigger
             key={value}
             value={value}
-            className="flex items-center gap-1 px-2 py-2 text-xs sm:gap-1.5 sm:px-3 sm:text-sm min-h-[40px]"
+            className="flex items-center gap-1 px-2 py-2 text-xs rounded-xl font-[family-name:var(--font-zen-maru)] data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-ocean-deep sm:gap-1.5 sm:px-3 sm:text-sm min-h-[40px]"
           >
             <Icon className="size-3.5 sm:size-4" />
             {label}

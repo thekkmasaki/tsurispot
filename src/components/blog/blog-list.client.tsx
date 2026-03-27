@@ -42,7 +42,7 @@ function BlogThumbnail({ post }: { post: BlogPostSummary }) {
 function BlogCard({ post }: { post: BlogPostSummary }) {
   return (
     <Link href={`/blog/${post.slug}`}>
-      <Card className="group h-full overflow-hidden py-0 transition-shadow hover:shadow-md">
+      <Card className="group h-full overflow-hidden py-0 transition-all duration-200 hover:shadow-lg hover:shadow-ocean-deep/8 hover:-translate-y-0.5">
         <div className="flex h-full flex-col sm:flex-row">
           <BlogThumbnail post={post} />
           <CardContent className="flex flex-1 flex-col gap-3 p-5">
@@ -71,7 +71,7 @@ function BlogCard({ post }: { post: BlogPostSummary }) {
                 </span>
               ))}
             </div>
-            <div className="flex items-center gap-1 text-sm font-medium text-primary">
+            <div className="flex items-center gap-1 text-sm font-medium text-ocean-mid">
               続きを読む
               <ChevronRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
             </div>

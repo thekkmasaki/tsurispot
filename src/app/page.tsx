@@ -248,29 +248,20 @@ export default async function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLdArray) }}
       />
       {/* ヒーローセクション */}
-      <section className="relative overflow-x-hidden bg-gradient-to-br from-sky-600 via-[#0C4A6E] to-indigo-800">
-        {/* 装飾的な波パターン */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute bottom-0 left-0 right-0 h-32">
-            <svg
-              viewBox="0 0 1440 120"
-              fill="none"
-              className="absolute bottom-0 w-full"
-              preserveAspectRatio="none"
-              aria-hidden="true"
-            >
-              <path
-                d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,80 1440,60 L1440,120 L0,120 Z"
-                fill="white"
-                fillOpacity="0.3"
-              />
-              <path
-                d="M0,80 C360,20 720,100 1080,40 C1260,20 1380,50 1440,80 L1440,120 L0,120 Z"
-                fill="white"
-                fillOpacity="0.2"
-              />
-            </svg>
-          </div>
+      <section className="relative overflow-x-hidden bg-gradient-to-b from-sky-400 via-[oklch(0.45_0.14_220)] to-[oklch(0.30_0.10_235)]">
+        {/* 水平線グロー（夕焼け/朝焼け感） */}
+        <div className="pointer-events-none absolute inset-0">
+          <div className="absolute left-0 right-0 top-[45%] h-24 bg-gradient-to-r from-transparent via-sunset-gold/15 to-transparent blur-2xl" />
+        </div>
+
+        {/* 波アニメーション 2レイヤー */}
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 h-24 overflow-hidden">
+          <svg viewBox="0 0 2880 120" fill="none" className="absolute bottom-0 w-[200%] animate-wave" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0,60 C360,120 720,0 1080,60 C1260,90 1380,80 1440,60 C1800,120 2160,0 2520,60 C2700,90 2820,80 2880,60 L2880,120 L0,120 Z" fill="white" fillOpacity="0.15" />
+          </svg>
+          <svg viewBox="0 0 2880 120" fill="none" className="absolute bottom-0 w-[200%] animate-wave-slow" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M0,80 C360,20 720,100 1080,40 C1260,20 1380,50 1440,80 C1800,20 2160,100 2520,40 C2700,20 2820,50 2880,80 L2880,120 L0,120 Z" fill="white" fillOpacity="0.10" />
+          </svg>
         </div>
 
         <div className="relative mx-auto max-w-5xl px-4 pb-12 pt-10 sm:px-6 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-24">
@@ -285,7 +276,7 @@ export default async function Home() {
               <span>海釣り・川釣り 総合情報サイト</span>
             </div>
 
-            <h1 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-white text-balance sm:mb-4 sm:text-4xl lg:text-5xl">
+            <h1 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-white text-balance font-[family-name:var(--font-zen-maru)] drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] sm:mb-4 sm:text-4xl lg:text-5xl">
               初心者も安心の
               <br className="sm:hidden" />
               釣り場探し。
@@ -334,7 +325,7 @@ export default async function Home() {
             {/* メインCTA */}
             <div className="mb-4 flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
               <Link href="/map" className="w-full sm:w-auto">
-                <Button size="lg" className="w-full gap-2 bg-amber-500 px-8 py-6 text-base font-bold text-white shadow-lg transition-[background-color,box-shadow,transform] hover:bg-amber-400 hover:shadow-xl hover:scale-[1.02] sm:w-auto sm:text-lg min-h-[52px]">
+                <Button size="lg" className="w-full gap-2 bg-gradient-to-r from-sunset-coral to-sunset-gold px-8 py-6 text-base font-bold text-white shadow-lg shadow-sunset-coral/25 transition-[box-shadow,transform] hover:shadow-xl hover:shadow-sunset-coral/30 hover:scale-[1.02] sm:w-auto sm:text-lg min-h-[52px]">
                   <MapPin className="size-5" />
                   近くの釣り場を探す
                 </Button>
@@ -358,27 +349,27 @@ export default async function Home() {
             {/* フィルタータグ */}
             <div className="flex flex-wrap items-center justify-center gap-2">
               <Link href="/spots?type=breakwater">
-                <Badge variant="outline" className="cursor-pointer border-white/40 bg-white/10 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/20 min-h-[40px]">
+                <Badge variant="outline" className="cursor-pointer border-white/25 bg-white/8 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/15 min-h-[40px]">
                   堤防
                 </Badge>
               </Link>
               <Link href="/spots?type=port">
-                <Badge variant="outline" className="cursor-pointer border-white/40 bg-white/10 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/20 min-h-[40px]">
+                <Badge variant="outline" className="cursor-pointer border-white/25 bg-white/8 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/15 min-h-[40px]">
                   漁港
                 </Badge>
               </Link>
               <Link href="/spots?type=rocky">
-                <Badge variant="outline" className="cursor-pointer border-white/40 bg-white/10 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/20 min-h-[40px]">
+                <Badge variant="outline" className="cursor-pointer border-white/25 bg-white/8 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/15 min-h-[40px]">
                   磯
                 </Badge>
               </Link>
               <Link href="/spots?type=river">
-                <Badge variant="outline" className="cursor-pointer border-emerald-300/50 bg-emerald-500/15 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-emerald-500/25 min-h-[40px]">
+                <Badge variant="outline" className="cursor-pointer border-emerald-300/40 bg-emerald-500/10 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-emerald-500/20 min-h-[40px]">
                   川・湖
                 </Badge>
               </Link>
               <Link href="/spots">
-                <Badge variant="outline" className="cursor-pointer border-white/40 bg-white/10 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/20 min-h-[40px]">
+                <Badge variant="outline" className="cursor-pointer border-white/25 bg-white/8 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/15 min-h-[40px]">
                   すべて
                 </Badge>
               </Link>
@@ -387,7 +378,7 @@ export default async function Home() {
         </div>
 
         {/* セクション下部の波形 */}
-        <div className="absolute bottom-0 left-0 right-0">
+        <div className="absolute bottom-0 left-0 right-0 z-10">
           <svg
             viewBox="0 0 1440 60"
             fill="none"
@@ -405,7 +396,7 @@ export default async function Home() {
 
 
       {/* 名言セクション + コンパクト統計 */}
-      <section className="bg-slate-50/80 py-6 sm:py-8">
+      <section className="bg-sand-light/50 bg-wave-pattern py-6 sm:py-8">
         <div className="mx-auto max-w-3xl px-4 text-center sm:px-6">
           <blockquote className="space-y-3">
             <div className="space-y-1 text-xs leading-relaxed text-slate-400 sm:text-sm sm:leading-loose">
@@ -526,7 +517,7 @@ export default async function Home() {
       </section>
 
       {/* 人気の釣り方ガイド */}
-      <section className="bg-muted/50 py-8 sm:py-12">
+      <section className="bg-sand-light/30 bg-wave-pattern py-8 sm:py-12">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <div className="mb-6 flex items-end justify-between sm:mb-8">
             <div>
