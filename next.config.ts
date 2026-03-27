@@ -8,6 +8,8 @@ const withBundleAnalyzer = bundleAnalyzer({
 const nextConfig: NextConfig = {
   // Docker/App Runner用: 最小限のスタンドアロン出力を生成
   output: "standalone",
+  // react-leaflet ESM + Webpack互換性修正
+  transpilePackages: ['react-leaflet', '@react-leaflet/core'],
   // パフォーマンス: X-Powered-By ヘッダーを削除（不要な情報漏洩防止＋レスポンスサイズ削減）
   poweredByHeader: false,
   // パフォーマンス: gzip圧縮を確実に有効化
@@ -66,7 +68,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "*.public.blob.vercel-storage.com",
+        hostname: "tsurispot-uploads.s3.ap-northeast-1.amazonaws.com",
       },
       {
         protocol: "https",

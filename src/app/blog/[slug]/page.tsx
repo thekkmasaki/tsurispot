@@ -25,10 +25,10 @@ import {
   Search,
 } from "lucide-react";
 
-// ISR: 1時間ごとに再検証（Vercel無料プランのISR Reads節約）
+// ISR: 1時間ごとに再検証
 export const revalidate = 3600;
 
-// Vercel Pro: microCMS API呼び出しのタイムアウト対策
+// microCMS API呼び出しのタイムアウト対策
 export const maxDuration = 60;
 
 // microCMS記事はビルド時に存在しないのでオンデマンドSSR

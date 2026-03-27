@@ -26,7 +26,7 @@ npx vitest run src/lib/data/__tests__/spots.test.ts  # 単一テスト
 # Lint
 npx eslint
 
-# デプロイ（Vercel Pro）+ IndexNow自動通知
+# デプロイ（AWS App Runner）+ IndexNow自動通知
 npm run deploy
 
 # TypeScript型チェック

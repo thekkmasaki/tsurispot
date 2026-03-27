@@ -10,6 +10,9 @@ export default function RootError({
   error: Error & { digest?: string };
   reset: () => void;
 }) {
+  // デバッグ用: コンソールにエラー詳細を出力
+  console.error("[RootError]", error.message, error.stack, error.digest);
+
   return (
     <div
       className="relative min-h-screen overflow-hidden"
