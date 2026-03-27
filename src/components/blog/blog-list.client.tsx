@@ -49,30 +49,55 @@ const CATEGORY_STYLE: Record<BlogPost["category"], { gradient: string; Icon: typ
   report: { gradient: "from-sky-400 to-cyan-500", Icon: Fish },
 };
 
-function BlogThumbnail({ post }: { post: BlogPostSummary }) {
-  const hasImage = !!post.image;
+/** タグの魚名 → 画像slug マッピング */
+const FISH_TAG_TO_SLUG: Record<string, string> = {
+  "アジ": "aji", "サバ": "saba", "カサゴ": "kasago", "ガシラ": "kasago",
+  "メバル": "mebaru", "イワシ": "iwashi", "シーバス": "seabass",
+  "タチウオ": "tachiuo", "マダイ": "madai", "キス": "kisu",
+  "カレイ": "karei", "イシガレイ": "karei", "マコガレイ": "karei",
+  "アオリイカ": "aoriika", "カワハギ": "kawahagi", "サヨリ": "sayori",
+  "ヒラメ": "hirame", "イナダ": "inada", "カマス": "kamasu",
+  "マダコ": "madako", "ヤリイカ": "yariika", "スルメイカ": "surumeika",
+  "コウイカ": "kouika", "ワタリガニ": "watarigani", "アイナメ": "ainame",
+  "クロソイ": "kurosoi", "ブリ": "buri", "アナゴ": "anago",
+  "マゴチ": "magochi", "メジナ": "mejina", "グレ": "mejina",
+  "クロダイ": "kurodai", "チヌ": "kurodai", "ホッケ": "hokke",
+  "シャコ": "saba", "フグ": "fugu", "ハゼ": "haze",
+  "イサキ": "isaki", "カンパチ": "kanpachi", "ヒラマサ": "hiramasa",
+  "イシダイ": "ishidai", "コブダイ": "kobudai", "アマダイ": "amadai",
+  "ハタ": "hata", "アカハタ": "akahata", "シマアジ": "shimaaji",
+  "サクラマス": "sakuramasu", "ヤマメ": "yamame", "イワナ": "iwana",
+  "ニジマス": "nijimasu", "アユ": "ayu", "ブラックバス": "blackbass",
+  "ワカサギ": "wakasagi", "コイ": "koi", "テナガエビ": "tenagaebi",
+  "シイラ": "shiira", "カツオ": "katsuo", "ウナギ": "unagi",
+};
 
-  if (hasImage) {
-    return (
-      <div className="relative h-40 w-full shrink-0 overflow-hidden sm:h-auto sm:w-[120px]">
-        <Image
-          src={post.image!}
-          alt={post.title}
-          fill
-          className="object-cover"
-          sizes="(max-width: 640px) 100vw, 120px"
-        />
-      </div>
-    );
+const FALLBACK_FISH = ["aji", "madai", "mebaru", "kasago", "seabass", "buri"];
+
+function getFallbackImage(tags: string[], postId: string): string {
+  // タグから魚名を探して対応する写真を返す
+  for (const tag of tags) {
+    const slug = FISH_TAG_TO_SLUG[tag];
+    if (slug) return `/images/fish/${slug}.jpg`;
   }
+  // マッチしなければローテーション
+  let hash = 0;
+  for (let i = 0; i < postId.length; i++) hash = (hash * 31 + postId.charCodeAt(i)) | 0;
+  return `/images/fish/${FALLBACK_FISH[Math.abs(hash) % FALLBACK_FISH.length]}.jpg`;
+}
 
-  // 画像なし: カテゴリ別グラデーション + アイコン
-  const style = CATEGORY_STYLE[post.category];
-  const { Icon } = style;
+function BlogThumbnail({ post }: { post: BlogPostSummary }) {
+  const imgSrc = post.image || getFallbackImage(post.tags, post.id);
+
   return (
-    <div className={`relative flex h-40 w-full shrink-0 items-center justify-center overflow-hidden bg-gradient-to-br ${style.gradient} sm:h-auto sm:w-[120px]`}>
-      <Icon className="size-10 text-white/40 sm:size-8" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_40%,rgba(255,255,255,0.15),transparent_60%)]" />
+    <div className="relative aspect-[16/9] w-full shrink-0 overflow-hidden sm:aspect-auto sm:h-full sm:w-[140px]">
+      <Image
+        src={imgSrc}
+        alt={post.title}
+        fill
+        className="object-cover"
+        sizes="(max-width: 640px) 100vw, 140px"
+      />
     </div>
   );
 }
@@ -126,8 +151,13 @@ const INITIAL_TAG_COUNT = 15;
 const EMPTY_SET = () => new Set<string>();
 const INITIAL_DISPLAY = 20;
 
-/** 釣果週報記事のタグから除外するパターン（エリア名以外） */
-const NON_AREA_TAG_PATTERN = /^(釣果週報|20\d{2}年|初心者|安全|サビキ|エギング|投げ釣り|ルアー|ショアジギング|メバリング|アジング|堤防釣り|釣り場)$/;
+/** エリアフィルターに表示する主要エリア名（週報エリア中心に厳選） */
+const AREA_WHITELIST = new Set([
+  "北海道", "東北", "関東", "中部", "近畿", "中国", "四国", "九州", "沖縄",
+  "小樽・石狩", "仙台・石巻", "東京湾", "駿河湾・伊豆",
+  "知多・三河", "大阪湾・泉南", "明石・神戸", "南紀・白浜",
+  "瀬戸内・広島", "福岡・北九州",
+]);
 
 export function BlogListClient({ posts }: { posts: BlogPostSummary[] }) {
   const [searchQuery, setSearchQuery] = useState("");
@@ -151,16 +181,14 @@ export function BlogListClient({ posts }: { posts: BlogPostSummary[] }) {
     return counts;
   }, [posts]);
 
-  // エリアタグ抽出（釣果週報記事のタグからエリア名を抽出）
+  // エリアタグ抽出（ホワイトリストに一致するタグのみ）
   const areaTags = useMemo(() => {
     const areaCounts = new Map<string, number>();
     for (const post of posts) {
-      if (!post.tags.includes("釣果週報")) continue;
       for (const tag of post.tags) {
-        if (NON_AREA_TAG_PATTERN.test(tag)) continue;
-        // 魚名っぽいタグも除外（カタカナ2-5文字のみ）
-        if (/^[ァ-ヶー]{2,5}$/.test(tag)) continue;
-        areaCounts.set(tag, (areaCounts.get(tag) ?? 0) + 1);
+        if (AREA_WHITELIST.has(tag)) {
+          areaCounts.set(tag, (areaCounts.get(tag) ?? 0) + 1);
+        }
       }
     }
     return [...areaCounts.entries()]

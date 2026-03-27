@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
@@ -33,6 +34,24 @@ import { HomePopularSpots } from "@/components/home-popular-spots";
 import { HomeTop10Client } from "@/components/home-top10-client";
 import { SectionErrorBoundary } from "@/components/ui/section-error-boundary";
 
+/** タグの魚名→画像パス */
+const FISH_TAG_IMG: Record<string, string> = {
+  "アジ": "aji", "サバ": "saba", "カサゴ": "kasago", "ガシラ": "kasago",
+  "メバル": "mebaru", "イワシ": "iwashi", "シーバス": "seabass",
+  "タチウオ": "tachiuo", "マダイ": "madai", "キス": "kisu",
+  "カレイ": "karei", "イシガレイ": "karei", "アオリイカ": "aoriika",
+  "カワハギ": "kawahagi", "サヨリ": "sayori", "ヒラメ": "hirame",
+  "イナダ": "inada", "カマス": "kamasu", "ブリ": "buri",
+  "クロダイ": "kurodai", "チヌ": "kurodai", "メジナ": "mejina",
+  "グレ": "mejina", "ホッケ": "hokke", "フグ": "fugu", "ハゼ": "haze",
+  "コブダイ": "kobudai", "ヒラマサ": "hiramasa", "アカハタ": "akahata",
+};
+const FALLBACK_FISH = ["aji", "madai", "mebaru", "kasago", "seabass", "buri"];
+function getFishImage(tags: string[], id: string): string {
+  for (const t of tags) { const s = FISH_TAG_IMG[t]; if (s) return `/images/fish/${s}.jpg`; }
+  let h = 0; for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) | 0;
+  return `/images/fish/${FALLBACK_FISH[Math.abs(h) % FALLBACK_FISH.length]}.jpg`;
+}
 
 // Below-the-fold client components loaded lazily
 const NearbySpots = dynamic(() => import("@/components/nearby-spots").then((m) => m.NearbySpots), {
@@ -206,7 +225,9 @@ export default async function Home() {
       mainImageUrl: s.mainImageUrl,
       fishNames: s.catchableFish.slice(0, 6).map((cf) => cf.fish.name),
     }));
-  const latestPosts = await getLatestBlogPostsAsync(6);
+  const allPosts = await getLatestBlogPostsAsync(100);
+  const weeklyReports = allPosts.filter((p) => p.tags.includes("釣果週報")).slice(0, 6);
+  const latestPosts = allPosts.slice(0, 6);
 
   // カテゴリ別おすすめ記事（AdSense対策: ブログコンテンツの露出強化）
   const [beginnerPosts, techniquePosts, seasonalPosts] = await Promise.all([
@@ -480,7 +501,7 @@ export default async function Home() {
                 <Calendar className="size-5 text-blue-600 sm:size-6" />
               </div>
               <span className="text-center text-[11px] font-medium leading-tight sm:text-xs">
-                月別カレンダー
+                月別ガイド
               </span>
             </div>
           </Link>
@@ -803,18 +824,22 @@ export default async function Home() {
 
       {/* 人気スポットTOP10（近い順ソート対応） */}
       <HomeTop10Client
-        spots={fishingSpots.map((s) => ({
-          id: s.id,
-          slug: s.slug,
-          name: s.name,
-          spotType: s.spotType,
-          rating: s.rating,
-          reviewCount: s.reviewCount,
-          latitude: s.latitude,
-          longitude: s.longitude,
-          prefecture: s.region.prefecture,
-          areaName: s.region.areaName,
-        }))}
+        spots={fishingSpots
+          .slice()
+          .sort((a, b) => b.rating * b.reviewCount - a.rating * a.reviewCount)
+          .slice(0, 100)
+          .map((s) => ({
+            id: s.id,
+            slug: s.slug,
+            name: s.name,
+            spotType: s.spotType,
+            rating: s.rating,
+            reviewCount: s.reviewCount,
+            latitude: s.latitude,
+            longitude: s.longitude,
+            prefecture: s.region.prefecture,
+            areaName: s.region.areaName,
+          }))}
       />
 
       {/* 人気のエリア */}
@@ -872,21 +897,21 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* 最新コラム（6件表示） */}
-      {latestPosts.length > 0 && (
+      {/* 最新釣果週報（6件表示） */}
+      {weeklyReports.length > 0 && (
         <section className="bg-muted/50 py-8 sm:py-12">
           <div className="mx-auto max-w-5xl px-4 sm:px-6">
             <div className="mb-6 flex items-end justify-between sm:mb-8">
               <div>
                 <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
-                  最新コラム
+                  最新釣果週報
                 </h2>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  釣りに役立つ情報をお届け
+                  全国の今週の釣果をエリア別にお届け
                 </p>
               </div>
               <Link
-                href="/blog"
+                href="/blog?tag=釣果週報"
                 className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
               >
                 すべて見る
@@ -895,10 +920,19 @@ export default async function Home() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {latestPosts.map((post) => (
+              {weeklyReports.map((post) => (
                 <Link key={post.id} href={`/blog/${post.slug}`}>
-                  <Card className="group h-full transition-shadow hover:shadow-md">
-                    <CardContent className="flex h-full flex-col gap-3 p-5">
+                  <Card className="group h-full overflow-hidden py-0 transition-shadow hover:shadow-md">
+                    <div className="relative h-36 w-full overflow-hidden">
+                      <Image
+                        src={post.image || getFishImage(post.tags, post.id)}
+                        alt={post.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    </div>
+                    <CardContent className="flex h-full flex-col gap-2 p-4">
                       <div className="flex items-center gap-2">
                         <Badge variant="secondary" className="text-xs">
                           {BLOG_CATEGORIES[post.category]}
@@ -907,10 +941,10 @@ export default async function Home() {
                           {post.publishedAt}
                         </span>
                       </div>
-                      <h3 className="text-base font-semibold leading-snug group-hover:text-primary">
+                      <h3 className="text-sm font-semibold leading-snug group-hover:text-primary sm:text-base">
                         {post.title}
                       </h3>
-                      <p className="line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">
+                      <p className="line-clamp-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
                         {post.description}
                       </p>
                       <div className="flex flex-wrap gap-1.5">
@@ -936,9 +970,9 @@ export default async function Home() {
 
             {/* モバイル用「すべて見る」リンク */}
             <div className="mt-6 flex justify-center sm:hidden">
-              <Link href="/blog">
+              <Link href="/blog?tag=釣果週報">
                 <Button variant="outline" className="min-h-[44px] gap-1">
-                  すべてのコラムを見る
+                  すべての釣果週報を見る
                   <ArrowRight className="size-4" />
                 </Button>
               </Link>
