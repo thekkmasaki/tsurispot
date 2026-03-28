@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import { useFavorites } from "@/hooks/use-favorites";
+import { getTitle } from "@/lib/titles";
 import {
   Fish,
   Map,
@@ -139,10 +141,25 @@ function DropdownMenu() {
 
 export function Header() {
   const pathname = usePathname();
+  const { data: session } = useSession();
   const { count: favCount } = useFavorites();
+  const [reportCount, setReportCount] = useState(0);
+
+  useEffect(() => {
+    if (session?.user?.tsuriId) {
+      fetch("/api/user/catch-reports")
+        .then((r) => r.json())
+        .then((data) => setReportCount(data.reportCount || 0))
+        .catch(() => {});
+    }
+  }, [session?.user?.tsuriId]);
+
+  const headerBg = session?.user?.tsuriId
+    ? getTitle(reportCount).headerClass
+    : "from-white/95 via-white/90 to-sand-light/80";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/40 bg-gradient-to-r from-white/95 via-white/90 to-sand-light/80 backdrop-blur-lg">
+    <header className={`sticky top-0 z-50 border-b border-border/40 bg-gradient-to-r ${headerBg} backdrop-blur-lg transition-colors duration-500`}>
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-ocean-mid to-ocean-deep text-white">
