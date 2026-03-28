@@ -62,12 +62,12 @@ export function UserMenu() {
   const user = session.user;
 
   return (
-    <div ref={ref} className="relative flex items-center gap-1.5">
+    <div ref={ref} className="relative flex shrink-0 items-center gap-1">
       {(() => {
         const title = getTitle(reportCount);
         return (
-          <span className={`inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] leading-none ${title.className}`}>
-            {title.emoji}{title.label}
+          <span className={`inline-flex shrink-0 items-center gap-0.5 rounded-full text-[10px] leading-none px-1 py-0.5 sm:px-1.5 ${title.className}`}>
+            {title.emoji}<span className="hidden sm:inline">{title.label}</span>
           </span>
         );
       })()}
