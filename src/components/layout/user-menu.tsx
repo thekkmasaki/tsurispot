@@ -4,11 +4,22 @@ import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { User, LogOut, Settings, ChevronDown } from "lucide-react";
+import { getTitle } from "@/lib/titles";
 
 export function UserMenu() {
   const { data: session, status } = useSession();
   const [open, setOpen] = useState(false);
+  const [reportCount, setReportCount] = useState(0);
   const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (session?.user?.tsuriId) {
+      fetch("/api/user/catch-reports")
+        .then((r) => r.json())
+        .then((data) => setReportCount(data.reportCount || 0))
+        .catch(() => {});
+    }
+  }, [session?.user?.tsuriId]);
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -39,10 +50,10 @@ export function UserMenu() {
     return (
       <Link
         href="/login"
-        className="flex items-center gap-1.5 rounded-lg px-2.5 py-1.5 text-sm font-medium text-driftwood transition-colors hover:bg-sand-light hover:text-foreground"
+        className="flex items-center justify-center rounded-lg p-2 text-driftwood transition-colors hover:bg-sand-light hover:text-foreground"
+        aria-label="ログイン"
       >
-        <User className="h-4 w-4" />
-        <span className="hidden sm:inline">ログイン</span>
+        <User className="h-5 w-5" />
       </Link>
     );
   }
@@ -78,6 +89,17 @@ export function UserMenu() {
         <div className="absolute right-0 top-full mt-1 w-52 rounded-2xl border bg-white py-2 shadow-xl shadow-ocean-deep/5">
           <div className="border-b px-4 pb-2">
             <p className="truncate text-sm font-medium">{user.nickname}</p>
+            {(() => {
+              const title = getTitle(reportCount);
+              if (!title) return null;
+              return (
+                <p className="mt-0.5">
+                  <span className={`inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] leading-none ${title.className}`}>
+                    {title.emoji}{title.label}
+                  </span>
+                </p>
+              );
+            })()}
           </div>
           <Link
             href="/mypage"

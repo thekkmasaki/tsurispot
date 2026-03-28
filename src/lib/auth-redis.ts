@@ -7,6 +7,7 @@ export interface TsuriSpotUser {
   provider: string;
   providerId: string;
   createdAt: string;
+  reportCount?: number;
 }
 
 const USER_PREFIX = "auth:user:";
@@ -77,6 +78,26 @@ export async function deleteUser(userId: string): Promise<boolean> {
   await redis.del(`auth:user_reports:${userId}`);
   await redis.del(`auth:user_photos:${userId}`);
   return true;
+}
+
+/** reportCount を+1 */
+export async function incrementReportCount(userId: string): Promise<number> {
+  const user = await getUserById(userId);
+  if (!user) return 0;
+  const count = (user.reportCount || 0) + 1;
+  user.reportCount = count;
+  await redis.set(`${USER_PREFIX}${userId}`, user);
+  return count;
+}
+
+/** reportCount を-1（最小0） */
+export async function decrementReportCount(userId: string): Promise<number> {
+  const user = await getUserById(userId);
+  if (!user) return 0;
+  const count = Math.max(0, (user.reportCount || 0) - 1);
+  user.reportCount = count;
+  await redis.set(`${USER_PREFIX}${userId}`, user);
+  return count;
 }
 
 /** お気に入り取得 */

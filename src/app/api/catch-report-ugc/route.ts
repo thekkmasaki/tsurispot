@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { redis } from "@/lib/redis";
 import { auth } from "@/lib/auth";
 import { checkNgWords } from "@/lib/moderation";
+import { incrementReportCount, decrementReportCount } from "@/lib/auth-redis";
 
 const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;
 
@@ -99,9 +100,10 @@ export async function POST(request: Request) {
     try {
       await redis.lpush(redisKey, JSON.stringify(reportData));
       await redis.expire(redisKey, TTL_SECONDS);
-      // 認証ユーザーの場合、ユーザー別レポートリストにも追加
+      // 認証ユーザーの場合、ユーザー別レポートリストにも追加（検索不要で取得できるよう全データ保存）
       if (userId) {
-        await redis.lpush(`auth:user_reports:${userId}`, reportId);
+        await redis.lpush(`auth:user_reports:${userId}`, JSON.stringify(reportData));
+        await incrementReportCount(userId);
       }
     } catch (err) {
       console.error("[釣果投稿] Redis保存エラー:", err);
@@ -130,6 +132,64 @@ export async function POST(request: Request) {
   } catch {
     return NextResponse.json(
       { error: "投稿の処理中にエラーが発生しました" },
+      { status: 500 }
+    );
+  }
+}
+
+// DELETE: 自分の釣果を削除
+export async function DELETE(request: Request) {
+  try {
+    const session = await auth();
+    const userId = session?.user?.tsuriId;
+    if (!userId) {
+      return NextResponse.json({ error: "認証が必要です" }, { status: 401 });
+    }
+
+    const body = await request.json().catch(() => ({}));
+    const { reportId, spotSlug } = body as { reportId?: string; spotSlug?: string };
+
+    if (!reportId || typeof reportId !== "string") {
+      return NextResponse.json({ error: "レポートIDが必要です" }, { status: 400 });
+    }
+
+    // ユーザーのレポートリストから該当レポートを探して削除
+    const userKey = `auth:user_reports:${userId}`;
+    const userReports = await redis.lrange(userKey, 0, -1);
+    let removed = false;
+
+    for (const item of userReports) {
+      const parsed = typeof item === "string" ? JSON.parse(item) : item;
+      if (parsed.id === reportId && parsed.userId === userId) {
+        await redis.lrem(userKey, 1, typeof item === "string" ? item : JSON.stringify(item));
+        removed = true;
+        break;
+      }
+    }
+
+    if (!removed) {
+      return NextResponse.json({ error: "レポートが見つかりません" }, { status: 404 });
+    }
+
+    await decrementReportCount(userId);
+
+    // スポットのレポートリストからも削除
+    if (spotSlug) {
+      const spotKey = `ugc_reports:${spotSlug}`;
+      const spotReports = await redis.lrange(spotKey, 0, -1);
+      for (const item of spotReports) {
+        const parsed = typeof item === "string" ? JSON.parse(item) : item;
+        if (parsed.id === reportId) {
+          await redis.lrem(spotKey, 1, typeof item === "string" ? item : JSON.stringify(item));
+          break;
+        }
+      }
+    }
+
+    return NextResponse.json({ ok: true, message: "釣果を削除しました" });
+  } catch {
+    return NextResponse.json(
+      { error: "削除処理中にエラーが発生しました" },
       { status: 500 }
     );
   }

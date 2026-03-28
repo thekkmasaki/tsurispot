@@ -1,14 +1,15 @@
 "use client";
 
 import { useSession } from "next-auth/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { signOut } from "next-auth/react";
 import Link from "next/link";
-import { User, Heart, Trash2, Fish, ArrowLeft } from "lucide-react";
+import { User, Heart, Trash2, Fish, ArrowLeft, MapPin, Calendar, Ruler, Award } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { useFavorites } from "@/hooks/use-favorites";
+import { getTitle, getNextTier } from "@/lib/titles";
 
 export default function MyPage() {
   const { data: session, status, update } = useSession();
@@ -18,6 +19,26 @@ export default function MyPage() {
   const [saved, setSaved] = useState(false);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [catchReports, setCatchReports] = useState<Array<{
+    id: string; spotSlug: string; spotName: string; fishName: string;
+    date: string; photoUrl?: string; sizeCm?: number; method?: string;
+    weather?: string; comment: string;
+  }>>([]);
+  const [reportsLoading, setReportsLoading] = useState(true);
+  const [reportCount, setReportCount] = useState(0);
+
+  useEffect(() => {
+    if (status === "authenticated") {
+      fetch("/api/user/catch-reports")
+        .then((r) => r.json())
+        .then((data) => {
+          setCatchReports(data.reports || []);
+          setReportCount(data.reportCount || data.reports?.length || 0);
+        })
+        .catch(() => {})
+        .finally(() => setReportsLoading(false));
+    }
+  }, [status]);
 
   if (status === "loading") {
     return (
@@ -100,10 +121,34 @@ export default function MyPage() {
               </div>
             )}
             <div>
-              <p className="font-bold">{user.nickname}</p>
+              <div className="flex items-center gap-1.5">
+                <p className="font-bold">{user.nickname}</p>
+                {(() => {
+                  const title = getTitle(reportCount);
+                  if (!title) return null;
+                  return (
+                    <span className={`inline-flex items-center gap-0.5 rounded-full px-2 py-0.5 text-xs leading-none ${title.className}`}>
+                      {title.emoji}{title.label}
+                    </span>
+                  );
+                })()}
+              </div>
               <p className="text-xs text-muted-foreground">
                 {user.provider === "line" ? "LINE" : user.provider}でログイン中
               </p>
+              {(() => {
+                const next = getNextTier(reportCount);
+                if (!next) return (
+                  <p className="mt-1 text-xs font-medium text-amber-600">
+                    🌟 最高ランク到達！
+                  </p>
+                );
+                return (
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    あと{next.remaining}件で{next.emoji}{next.label}！
+                  </p>
+                );
+              })()}
             </div>
           </div>
 
@@ -152,11 +197,70 @@ export default function MyPage() {
       {/* 釣果レポート */}
       <Card className="mb-4">
         <CardContent className="p-4">
-          <div className="flex items-center gap-2">
-            <Fish className="h-5 w-5 text-ocean-mid" />
-            <span className="font-medium">投稿した釣果</span>
-            <span className="text-xs text-muted-foreground">（近日実装）</span>
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Fish className="h-5 w-5 text-ocean-mid" />
+              <span className="font-medium">投稿した釣果</span>
+            </div>
+            <span className="text-sm text-muted-foreground">
+              {reportsLoading ? "..." : `${catchReports.length}件`}
+            </span>
           </div>
+
+          {reportsLoading ? (
+            <div className="mt-3 flex justify-center py-4">
+              <div className="h-5 w-5 animate-spin rounded-full border-2 border-ocean-mid border-t-transparent" />
+            </div>
+          ) : catchReports.length === 0 ? (
+            <p className="mt-3 text-sm text-muted-foreground">
+              まだ釣果を投稿していません。スポットページから投稿できます。
+            </p>
+          ) : (
+            <div className="mt-3 space-y-3">
+              {catchReports.map((report) => (
+                <Link
+                  key={report.id}
+                  href={`/spots/${report.spotSlug}`}
+                  className="block rounded-lg border p-3 transition-colors hover:bg-muted/50"
+                >
+                  <div className="flex gap-3">
+                    {report.photoUrl && (
+                      <img
+                        src={report.photoUrl}
+                        alt=""
+                        className="h-16 w-16 rounded-md object-cover"
+                      />
+                    )}
+                    <div className="min-w-0 flex-1">
+                      <p className="font-medium">{report.fishName}</p>
+                      <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-muted-foreground">
+                        <span className="flex items-center gap-0.5">
+                          <MapPin className="h-3 w-3" />
+                          {report.spotName}
+                        </span>
+                        <span className="flex items-center gap-0.5">
+                          <Calendar className="h-3 w-3" />
+                          {report.date}
+                        </span>
+                        {report.sizeCm && (
+                          <span className="flex items-center gap-0.5">
+                            <Ruler className="h-3 w-3" />
+                            {report.sizeCm}cm
+                          </span>
+                        )}
+                        {report.method && <span>{report.method}</span>}
+                      </div>
+                      {report.comment && (
+                        <p className="mt-1 truncate text-xs text-muted-foreground">
+                          {report.comment}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
+          )}
         </CardContent>
       </Card>
 
