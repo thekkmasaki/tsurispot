@@ -1,5 +1,6 @@
 "use client";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
+import { useSession } from "next-auth/react";
 
 const STORAGE_KEY = "tsurispot-favorites";
 
@@ -20,8 +21,12 @@ function saveFavorites(slugs: string[]) {
 }
 
 export function useFavorites() {
+  const { data: session } = useSession();
+  const isLoggedIn = !!session?.user?.tsuriId;
   const [favorites, setFavorites] = useState<string[]>([]);
+  const syncedRef = useRef(false);
 
+  // 初期読み込み: localStorageから復元
   useEffect(() => {
     setFavorites(getFavorites());
 
@@ -34,30 +39,73 @@ export function useFavorites() {
     };
   }, []);
 
+  // 認証時: サーバーから同期（初回のみ）
+  useEffect(() => {
+    if (!isLoggedIn || syncedRef.current) return;
+    syncedRef.current = true;
+
+    (async () => {
+      try {
+        const res = await fetch("/api/user/favorites");
+        if (!res.ok) return;
+        const data = await res.json();
+        const serverFavs: string[] = data.favorites || [];
+        const localFavs = getFavorites();
+
+        // マージ（重複排除）: ローカルとサーバーの和集合
+        const merged = [...new Set([...serverFavs, ...localFavs])];
+
+        saveFavorites(merged);
+        setFavorites(merged);
+
+        // マージ結果をサーバーに保存
+        if (merged.length !== serverFavs.length || !merged.every((s) => serverFavs.includes(s))) {
+          fetch("/api/user/favorites", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ favorites: merged }),
+          }).catch(() => {});
+        }
+      } catch { /* ignore */ }
+    })();
+  }, [isLoggedIn]);
+
+  const syncToServer = useCallback((slugs: string[]) => {
+    if (!isLoggedIn) return;
+    fetch("/api/user/favorites", {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ favorites: slugs }),
+    }).catch(() => {});
+  }, [isLoggedIn]);
+
   const addFavorite = useCallback((slug: string) => {
     const current = getFavorites();
     if (!current.includes(slug)) {
-      saveFavorites([...current, slug]);
-      setFavorites([...current, slug]);
+      const next = [...current, slug];
+      saveFavorites(next);
+      setFavorites(next);
+      syncToServer(next);
       fetch("/api/favorites", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ slug, action: "increment" }),
       }).catch(() => {});
     }
-  }, []);
+  }, [syncToServer]);
 
   const removeFavorite = useCallback((slug: string) => {
     const current = getFavorites();
     const next = current.filter((s) => s !== slug);
     saveFavorites(next);
     setFavorites(next);
+    syncToServer(next);
     fetch("/api/favorites", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ slug, action: "decrement" }),
     }).catch(() => {});
-  }, []);
+  }, [syncToServer]);
 
   const toggleFavorite = useCallback((slug: string) => {
     const current = getFavorites();
@@ -65,21 +113,24 @@ export function useFavorites() {
       const next = current.filter((s) => s !== slug);
       saveFavorites(next);
       setFavorites(next);
+      syncToServer(next);
       fetch("/api/favorites", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ slug, action: "decrement" }),
       }).catch(() => {});
     } else {
-      saveFavorites([...current, slug]);
-      setFavorites([...current, slug]);
+      const next = [...current, slug];
+      saveFavorites(next);
+      setFavorites(next);
+      syncToServer(next);
       fetch("/api/favorites", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ slug, action: "increment" }),
       }).catch(() => {});
     }
-  }, []);
+  }, [syncToServer]);
 
   const isFavorite = useCallback((slug: string) => favorites.includes(slug), [favorites]);
 
