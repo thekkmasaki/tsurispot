@@ -196,7 +196,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: region("r10"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺に路肩駐車スペース（マナー順守）",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Shiomicho_freight_station.jpg/960px-Shiomicho_freight_station.jpg", imageAttribution: "Photo: Tam0031 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 134,
+    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.8, reviewCount: 134,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ・夕マヅメ", method: "ヘチ釣り", source: "イシグロ" },
       { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "イシグロ" },
@@ -506,7 +506,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r904"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に無料駐車スペース（20台）",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/ff/Street_view_on_north_side_of_Meinohama_Station_20160326.JPG/960px-Street_view_on_north_side_of_Meinohama_Station_20160326.JPG", imageAttribution: "Photo: そらみみ (Soramimi) / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.7, reviewCount: 92, googleRating: 3.4, googleReviewCount: 22,
+    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.7, reviewCount: 92, googleRating: 3.4, googleReviewCount: 22,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング・サビキ", source: "ポイント" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング", source: "ポイント" },
@@ -558,7 +558,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r904"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港横に無料駐車スペース（15台）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f7/Kafuri_Station_20170419.jpg/960px-Kafuri_Station_20170419.jpg", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.6, reviewCount: 58, googleRating: 5, googleReviewCount: 1,
+    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.6, reviewCount: 58, googleRating: 5, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "ポイント" },
       { fish: fish("kisu"), monthStart: 6, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ", source: "ポイント" },
@@ -940,7 +940,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     region: lr("r908"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "公園駐車場（無料・30台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8d/Koneshima_Island_from_train_of_Kure_Line_6.jpg/960px-Koneshima_Island_from_train_of_Kure_Line_6.jpg", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 112, googleRating: 4.2, googleReviewCount: 502,
+    mainImageUrl: "", imageAttribution: "", images: [], rating: 4.0, reviewCount: 112, googleRating: 4.2, googleReviewCount: 502,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "かめや釣具" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ・夕マヅメ", method: "エギング", source: "かめや釣具" },

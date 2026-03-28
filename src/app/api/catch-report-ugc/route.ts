@@ -96,6 +96,7 @@ export async function POST(request: Request) {
     };
 
     // Redis に即時保存（自動承認）
+    let newReportCount: number | undefined;
     const redisKey = `ugc_reports:${spotSlug}`;
     try {
       await redis.lpush(redisKey, JSON.stringify(reportData));
@@ -103,7 +104,7 @@ export async function POST(request: Request) {
       // 認証ユーザーの場合、ユーザー別レポートリストにも追加（検索不要で取得できるよう全データ保存）
       if (userId) {
         await redis.lpush(`auth:user_reports:${userId}`, JSON.stringify(reportData));
-        await incrementReportCount(userId);
+        newReportCount = await incrementReportCount(userId);
       }
     } catch (err) {
       console.error("[釣果投稿] Redis保存エラー:", err);
@@ -128,6 +129,7 @@ export async function POST(request: Request) {
     return NextResponse.json({
       ok: true,
       message: "釣果が投稿されました！",
+      ...(newReportCount !== undefined && { newReportCount }),
     });
   } catch {
     return NextResponse.json(

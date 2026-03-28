@@ -13,6 +13,7 @@ interface SpotPhotoEntry {
   url: string;
   token: string;
   userId?: string;
+  userName?: string;
   uploadedAt: number;
 }
 
@@ -23,10 +24,21 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "slug parameter required" }, { status: 400 });
   }
 
+  // 認証ユーザーの場合、自分の写真を判定するためにuserIdを取得
+  const session = await auth();
+  const userId = session?.user?.tsuriId;
+
   try {
     const photos = (await redis.get<SpotPhotoEntry[]>(`${REDIS_PREFIX}${slug}`)) || [];
     return NextResponse.json(
-      { photos: photos.map((p) => ({ url: p.url, uploadedAt: p.uploadedAt })) },
+      {
+        photos: photos.map((p) => ({
+          url: p.url,
+          uploadedAt: p.uploadedAt,
+          userName: p.userName || undefined,
+          mine: !!(userId && p.userId === userId),
+        })),
+      },
       { headers: { "Cache-Control": "no-cache" } },
     );
   } catch {
@@ -91,7 +103,8 @@ export async function POST(request: NextRequest) {
     const session = await auth();
     const userId = session?.user?.tsuriId || undefined;
 
-    const entry: SpotPhotoEntry = { url, token, userId, uploadedAt: Date.now() };
+    const userName = session?.user?.nickname || undefined;
+    const entry: SpotPhotoEntry = { url, token, userId, userName, uploadedAt: Date.now() };
     const updatedPhotos = [...currentPhotos, entry];
     await redis.set(`${REDIS_PREFIX}${slug}`, updatedPhotos);
 

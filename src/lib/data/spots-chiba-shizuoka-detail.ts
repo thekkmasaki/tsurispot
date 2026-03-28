@@ -87,7 +87,7 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
     region: lr("r1050"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "千葉ポートパーク駐車場（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Chiba-Minato_Station_west20111028.jpg/960px-Chiba-Minato_Station_west20111028.jpg", imageAttribution: "Photo: 掬茶 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.6, reviewCount: 134, googleRating: 4.1, googleReviewCount: 37,
+    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.6, reviewCount: 134, googleRating: 4.1, googleReviewCount: 37,
     catchableFish: [
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
       { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
@@ -132,7 +132,7 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
     region: lr("r1050"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺の路肩駐車スペース",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Ichikawa-Shiohama_Station_south_side_20140702.jpg/960px-Ichikawa-Shiohama_Station_south_side_20140702.jpg", imageAttribution: "Photo: DAJF  This photo was taken with Sony SLT-A77 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.4, reviewCount: 87, googleRating: 3.3, googleReviewCount: 35,
+    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.4, reviewCount: 87, googleRating: 3.3, googleReviewCount: 35,
     catchableFish: [
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
       { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
@@ -327,7 +327,7 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
     region: lr("r1052"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺の駐車スペース（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8b/Chiba_Prefectural_Road_Route_186_%28Minamihara_Station_Maru_Line%29_at_Wada-cho_Kuroiwa%2C_Minamiboso_City.jpg/960px-Chiba_Prefectural_Road_Route_186_%28Minamihara_Station_Maru_Line%29_at_Wada-cho_Kuroiwa%2C_Minamiboso_City.jpg", imageAttribution: "Photo: 小石川人晃 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.7, reviewCount: 65, googleRating: 4.2, googleReviewCount: 6,
+    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.7, reviewCount: 65, googleRating: 4.2, googleReviewCount: 6,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },

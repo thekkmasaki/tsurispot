@@ -1270,7 +1270,7 @@ export const extraSpots: FishingSpot[] = [
     region: localRegion("r80"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "無料駐車場あり（フェリーターミナル周辺）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d8/The_old_train_%40_Sado_%283652224114%29.jpg/960px-The_old_train_%40_Sado_%283652224114%29.jpg", imageAttribution: "Photo: Yamaguchi Yoshiaki from Japan / Wikimedia Commons (CC BY-SA 2.0)", images: [], rating: 4.2, reviewCount: 72, googleRating: 3.7, googleReviewCount: 1243,
+    mainImageUrl: "", imageAttribution: "", images: [], rating: 4.2, reviewCount: 72, googleRating: 3.7, googleReviewCount: 1243,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "上州屋" },
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ", source: "上州屋" },
@@ -1424,7 +1424,7 @@ export const extraSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 日券1,800円",
     hasParking: true, parkingDetail: "河川沿い駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Joyama_power_station.jpg/960px-Joyama_power_station.jpg", imageAttribution: "Photo: Qurren / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.0, reviewCount: 48,
+    mainImageUrl: "", imageAttribution: "", images: [], rating: 4.0, reviewCount: 48,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "渓流エサ釣り", source: "HONDA釣り倶楽部" },
       { fish: fish("nijimasu"), monthStart: 3, monthEnd: 9, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー", source: "HONDA釣り倶楽部" },
@@ -1846,7 +1846,7 @@ export const extraSpots: FishingSpot[] = [
     region: localRegion("r99"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "有料駐車場あり（周辺）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Keihan_Hama-Otsu_Station_%285799857395%29.jpg/960px-Keihan_Hama-Otsu_Station_%285799857395%29.jpg", imageAttribution: "Photo: m-louis .® from Osaka, Japan / Wikimedia Commons (CC BY-SA 2.0)", images: [], rating: 3.8, reviewCount: 98, googleRating: 4.2, googleReviewCount: 83,
+    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.8, reviewCount: 98, googleRating: 4.2, googleReviewCount: 83,
     catchableFish: [
       { fish: fish("tenagaebi"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ミャク釣り", source: "HONDA釣り倶楽部" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ", source: "HONDA釣り倶楽部" },
@@ -2183,7 +2183,7 @@ export const extraSpots: FishingSpot[] = [
     region: localRegion("r108"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "有料駐車場あり（周辺）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Japan_National_Route_185_near_Hiro_Station_2.jpg/960px-Japan_National_Route_185_near_Hiro_Station_2.jpg", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 92, googleRating: 4.4, googleReviewCount: 15,
+    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.8, reviewCount: 92, googleRating: 4.4, googleReviewCount: 15,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "かめや釣具" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング", source: "かめや釣具" },
@@ -2360,7 +2360,7 @@ export const extraSpots: FishingSpot[] = [
     region: localRegion("r114"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "無料駐車場あり（15台）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/39/Uwazama_station2.JPG/960px-Uwazama_station2.JPG", imageAttribution: "Photo: ぺ有家音 / Wikimedia Commons (CC0)", images: [], rating: 4.0, reviewCount: 72, googleRating: 3.8, googleReviewCount: 14,
+    mainImageUrl: "", imageAttribution: "", images: [], rating: 4.0, reviewCount: 72, googleRating: 3.8, googleReviewCount: 14,
     catchableFish: [
       { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り", source: "アングラーズ" },
       { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "アングラーズ" },
@@ -2402,7 +2402,7 @@ export const extraSpots: FishingSpot[] = [
     region: localRegion("r116"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "無料駐車場あり（20台）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Susaki_station_2010.jpg/960px-Susaki_station_2010.jpg", imageAttribution: "Photo: Navian / Wikimedia Commons (Public domain)", images: [], rating: 3.8, reviewCount: 55,
+    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.8, reviewCount: 55,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "アングラーズ" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ちょい投げ", source: "アングラーズ" },
@@ -2492,7 +2492,7 @@ export const extraSpots: FishingSpot[] = [
     region: region("r55"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "無料駐車場あり（20台）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/View_of_Wakamatsu_Station.jpg/960px-View_of_Wakamatsu_Station.jpg", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 85, googleRating: 3.8, googleReviewCount: 15,
+    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.8, reviewCount: 85, googleRating: 3.8, googleReviewCount: 15,
     catchableFish: [
       { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "ポイント" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ", source: "ポイント" },

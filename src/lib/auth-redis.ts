@@ -102,6 +102,25 @@ export async function decrementReportCount(userId: string): Promise<number> {
   return count;
 }
 
+/** プロバイダーマッピングを新しいproviderIdに移行（旧キー削除+新キー作成） */
+export async function migrateProviderMapping(
+  provider: string,
+  oldProviderId: string,
+  newProviderId: string,
+  userId: string,
+): Promise<void> {
+  // 新しいマッピングを作成
+  await redis.set(`${PROVIDER_PREFIX}${provider}:${newProviderId}`, userId);
+  // 旧マッピングを削除
+  await redis.del(`${PROVIDER_PREFIX}${provider}:${oldProviderId}`);
+  // ユーザーのproviderIdも更新
+  const user = await getUserById(userId);
+  if (user) {
+    user.providerId = newProviderId;
+    await redis.set(`${USER_PREFIX}${userId}`, user);
+  }
+}
+
 /** お気に入り取得 */
 export async function getUserFavorites(userId: string): Promise<string[]> {
   return (await redis.get<string[]>(`auth:favorites:${userId}`)) || [];

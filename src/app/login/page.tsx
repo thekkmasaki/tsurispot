@@ -10,10 +10,13 @@ export default function LoginPage() {
       <div className="w-full max-w-sm space-y-6">
         {/* ロゴ */}
         <div className="text-center">
-          <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-ocean-mid to-ocean-deep text-white">
-            <Fish className="h-8 w-8" />
+          <div className="mx-auto flex items-center gap-2">
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-ocean-mid to-ocean-deep text-white">
+              <Fish className="h-5 w-5" aria-hidden="true" />
+            </div>
+            <span className="bg-gradient-to-r from-ocean-deep to-ocean-mid bg-clip-text text-lg font-bold text-transparent font-[family-name:var(--font-zen-maru)]">ツリスポ</span>
           </div>
-          <h1 className="mt-3 text-xl font-bold">ツリスポにログイン</h1>
+          <h1 className="mt-3 text-xl font-bold">ログイン</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             お気に入りや釣果をクラウドに保存
           </p>

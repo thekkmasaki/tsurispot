@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import type { NextAuthConfig } from "next-auth";
 import type { OAuthConfig } from "next-auth/providers";
-import { getUserByProvider, getUserById, createUser } from "@/lib/auth-redis";
+import { getUserByProvider, getUserById, createUser, migrateProviderMapping } from "@/lib/auth-redis";
 
 /**
  * LINE Login プロバイダー（Auth.js v5 OAuth）
@@ -46,12 +46,21 @@ const config: NextAuthConfig = {
   },
   callbacks: {
     async signIn({ user, account }) {
-      if (!account || !user.id) return false;
+      if (!account?.providerAccountId) return false;
       const provider = account.provider;
-      const providerId = user.id;
+      const providerId = account.providerAccountId;
 
-      // 既存ユーザーチェック
-      const existing = await getUserByProvider(provider, providerId);
+      // 既存ユーザーチェック（正しいプロバイダーIDで検索）
+      let existing = await getUserByProvider(provider, providerId);
+
+      if (!existing && user.id && user.id !== providerId) {
+        // 移行: 旧形式（user.id = Auth.jsが生成したUUID）で検索
+        existing = await getUserByProvider(provider, user.id);
+        if (existing) {
+          await migrateProviderMapping(provider, user.id, providerId, existing.id);
+        }
+      }
+
       if (!existing) {
         // 新規ユーザー作成
         const tsuriId = crypto.randomUUID();
@@ -63,17 +72,22 @@ const config: NextAuthConfig = {
           providerId,
           createdAt: new Date().toISOString(),
         });
+      } else if (user.image && existing.avatarUrl !== user.image) {
+        // 再ログイン時にアバターを最新に更新
+        existing.avatarUrl = user.image;
+        const { redis } = await import("@/lib/redis");
+        await redis.set(`auth:user:${existing.id}`, existing);
       }
       return true;
     },
 
     async jwt({ token, account, user, trigger, session: updateData }) {
       // 初回ログイン時にトークンにTsuriSpot情報を埋め込み
-      if (account && user?.id) {
-        // signInコールバック前は既存ユーザーがいないので、ここで再取得
+      if (account?.providerAccountId) {
+        // signInコールバック後に再取得（providerAccountIdで検索）
         const existing = await getUserByProvider(
           account.provider,
-          user.id,
+          account.providerAccountId,
         );
         if (existing) {
           token.tsuriId = existing.id;
@@ -91,7 +105,9 @@ const config: NextAuthConfig = {
           token.nickname = fresh.nickname;
           token.avatarUrl = fresh.avatarUrl;
           token.isNewUser = !fresh.nicknameSetAt;
-        } else if (updateData && typeof updateData === "object" && "nickname" in updateData) {
+        }
+        // クライアントからのニックネーム更新を優先（Redis反映のタイミングずれ対策）
+        if (updateData && typeof updateData === "object" && "nickname" in updateData) {
           token.nickname = (updateData as { nickname: string }).nickname;
           token.isNewUser = false;
         }
