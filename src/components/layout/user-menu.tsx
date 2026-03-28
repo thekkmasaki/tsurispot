@@ -66,7 +66,7 @@ export function UserMenu() {
       {(() => {
         const title = getTitle(reportCount);
         return (
-          <span className={`hidden sm:inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] leading-none ${title.className}`}>
+          <span className={`inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] leading-none ${title.className}`}>
             {title.emoji}{title.label}
           </span>
         );
