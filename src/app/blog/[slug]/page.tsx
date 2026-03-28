@@ -57,7 +57,7 @@ const WEEKLY_AREA_IDS = [
 /** 週報slugからエリア航空写真パスを取得 */
 function getWeeklyReportImage(slug: string): string | null {
   for (const areaId of WEEKLY_AREA_IDS) {
-    if (slug.startsWith(areaId + "-")) {
+    if (slug.includes(areaId)) {
       return `/images/blog/weekly/${areaId}.jpg`;
     }
   }
@@ -90,9 +90,12 @@ export async function generateMetadata({
       siteName: "ツリスポ",
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt || post.publishedAt,
-      ...(post.image && {
-        images: [{ url: post.image.startsWith("http") ? post.image : `https://tsurispot.com${post.image}`, width: 1200, height: 630 }],
-      }),
+      ...(() => {
+        const img = post.image || getWeeklyReportImage(post.slug);
+        if (!img) return {};
+        const url = img.startsWith("http") ? img : `https://tsurispot.com${img}`;
+        return { images: [{ url, width: 1200, height: 630 }] };
+      })(),
     },
     alternates: {
       canonical: `https://tsurispot.com/blog/${post.slug}`,
