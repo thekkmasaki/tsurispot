@@ -159,7 +159,7 @@ export function Header() {
     : "from-white/95 via-white/90 to-sand-light/80";
 
   return (
-    <header className={`sticky top-0 z-50 overflow-hidden border-b border-border/40 bg-gradient-to-r ${headerBg} backdrop-blur-lg transition-colors duration-500`}>
+    <header className={`sticky top-0 z-50 border-b border-border/40 bg-gradient-to-r ${headerBg} backdrop-blur-lg transition-colors duration-500`}>
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-ocean-mid to-ocean-deep text-white">
