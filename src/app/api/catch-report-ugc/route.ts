@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/redis";
+import { auth } from "@/lib/auth";
 import { checkNgWords } from "@/lib/moderation";
 
 const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;
@@ -71,13 +72,18 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: modResult.reason }, { status: 400 });
     }
 
+    // 認証済みユーザーの場合はuserIdを付与
+    const session = await auth();
+    const userId = session?.user?.tsuriId || undefined;
+
     const reportId = `ugc-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     const reportData = {
       id: reportId,
       spotSlug,
       spotName: spotName || "",
       fishName,
-      userName,
+      userName: userId ? session!.user.nickname : userName,
+      userId,
       comment,
       date,
       approved: true,
@@ -93,6 +99,10 @@ export async function POST(request: Request) {
     try {
       await redis.lpush(redisKey, JSON.stringify(reportData));
       await redis.expire(redisKey, TTL_SECONDS);
+      // 認証ユーザーの場合、ユーザー別レポートリストにも追加
+      if (userId) {
+        await redis.lpush(`auth:user_reports:${userId}`, reportId);
+      }
     } catch (err) {
       console.error("[釣果投稿] Redis保存エラー:", err);
       // Redis障害時もGASに送信するため続行

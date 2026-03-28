@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import { Send, CheckCircle, AlertCircle, Camera, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -54,10 +55,19 @@ interface CatchReportFormProps {
 }
 
 export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }: CatchReportFormProps) {
+  const { data: session } = useSession();
+  const isLoggedIn = !!session?.user?.tsuriId;
   const fishInputRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [userName, setUserName] = useState("");
+
+  // 認証時はニックネームを自動セット
+  useEffect(() => {
+    if (session?.user?.nickname && !userName) {
+      setUserName(session.user.nickname);
+    }
+  }, [session?.user?.nickname]); // eslint-disable-line react-hooks/exhaustive-deps
   const [fishName, setFishName] = useState("");
   const [date, setDate] = useState(() => {
     const d = new Date();
@@ -248,6 +258,8 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
               onChange={(e) => setUserName(e.target.value)}
               maxLength={20}
               required
+              readOnly={isLoggedIn}
+              className={isLoggedIn ? "bg-muted" : ""}
             />
           </div>
 
