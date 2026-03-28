@@ -70,9 +70,17 @@ function YouTubeFallbackCard({ link, thumbnailUrl }: { link: YouTubeSearchLink; 
           </div>
         </div>
       ) : (
-        <div className="flex items-center gap-2 bg-gradient-to-r from-red-600 to-red-500 px-3 py-2">
-          <Play className="size-4 fill-white text-white" />
-          <span className="text-xs font-bold text-white">YouTube で動画を検索</span>
+        <div className="relative flex aspect-video items-center justify-center overflow-hidden bg-gradient-to-br from-slate-800 to-slate-900">
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute left-1/4 top-1/4 size-32 rounded-full bg-red-500 blur-3xl" />
+            <div className="absolute bottom-1/4 right-1/4 size-24 rounded-full bg-red-600 blur-3xl" />
+          </div>
+          <div className="relative z-10 flex flex-col items-center gap-3">
+            <div className="flex size-14 items-center justify-center rounded-2xl bg-red-600 shadow-lg transition-transform group-hover:scale-110">
+              <Play className="size-6 fill-white text-white" />
+            </div>
+            <span className="text-xs font-bold text-white/80">YouTube で動画を検索</span>
+          </div>
         </div>
       )}
       <div className="bg-card px-3 py-2.5">

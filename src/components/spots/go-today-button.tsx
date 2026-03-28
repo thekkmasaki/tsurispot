@@ -88,7 +88,9 @@ export function GoTodayButton({
   const [count, setCount] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
 
-  const dateRange = useMemo(() => getDateRange(8), []);
+  // SSGビルド時とのハイドレーション不一致防止: マウント後に日付レンジを生成
+  const [dateRange, setDateRange] = useState<ReturnType<typeof getDateRange>>([]);
+  useEffect(() => { setDateRange(getDateRange(8)); }, []);
 
   const selectedDate = dateRange[selectedIndex];
 

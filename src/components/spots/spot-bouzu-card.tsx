@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { useMemo, useState, useEffect } from "react";
 import { AlertTriangle, CheckCircle, Fish, HelpCircle, BarChart3 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
@@ -196,15 +196,19 @@ function getDataDrivenTip(
 const MONTH_NAMES = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
 
 export function SpotBouzuCard(props: SpotBouzuCardProps) {
-  const currentMonth = useMemo(() => new Date().getMonth() + 1, []);
-  const probability = useMemo(() => calcSpotBouzuProbability(props, currentMonth), [props, currentMonth]);
+  // useEffect でマウント後に月を設定（SSGビルド時とのハイドレーション不一致防止）
+  const [currentMonth, setCurrentMonth] = useState(0);
+  useEffect(() => { setCurrentMonth(new Date().getMonth() + 1); }, []);
+  const probability = useMemo(() => currentMonth ? calcSpotBouzuProbability(props, currentMonth) : 0, [props, currentMonth]);
   const result = useMemo(() => getResultInfo(probability), [probability]);
-  const breakdown = useMemo(() => getBreakdown(props, currentMonth), [props, currentMonth]);
-  const dataTip = useMemo(() => getDataDrivenTip(props, currentMonth, probability), [props, currentMonth, probability]);
+  const breakdown = useMemo(() => currentMonth ? getBreakdown(props, currentMonth) : [], [props, currentMonth]);
+  const dataTip = useMemo(() => currentMonth ? getDataDrivenTip(props, currentMonth, probability) : "", [props, currentMonth, probability]);
 
   const hasDataEnhancement = props.catchableFishDetails && props.catchableFishDetails.length > 0;
 
   const Icon = result.icon;
+
+  if (!currentMonth) return null;
 
   return (
     <Card className="overflow-hidden">

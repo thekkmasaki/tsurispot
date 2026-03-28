@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Component, type ErrorInfo, type ReactNode } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,6 +10,14 @@ const AerialPhotoMap = dynamic(
   () => import("./aerial-photo-map").then((m) => ({ default: m.AerialPhotoMap })),
   { ssr: false, loading: () => <div className="h-full w-full animate-pulse bg-muted" /> },
 );
+
+// Leafletクラッシュ時にSVGフォールバックにならないようError Boundaryでガード
+class MapErrorBoundary extends Component<{ children: ReactNode; fallback: ReactNode }, { hasError: boolean }> {
+  state = { hasError: false };
+  static getDerivedStateFromError() { return { hasError: true }; }
+  componentDidCatch(error: Error, info: ErrorInfo) { console.error("AerialPhotoMap error:", error, info); }
+  render() { return this.state.hasError ? this.props.fallback : this.props.children; }
+}
 
 // Inline SVG icons to avoid Turbopack module resolution issues with lucide-react
 const svgProps = { xmlns: "http://www.w3.org/2000/svg", width: 24, height: 24, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 2, strokeLinecap: "round" as const, strokeLinejoin: "round" as const };
@@ -159,7 +167,9 @@ export function SpotPhotoGallery({ photos, spotType, spotName, latitude, longitu
           {/* Aerial photo or fallback illustration */}
           <div className="relative aspect-[2/1] sm:aspect-[5/2] overflow-hidden bg-muted">
             {hasCoordinates ? (
-              <AerialPhotoMap latitude={latitude} longitude={longitude} />
+              <MapErrorBoundary fallback={<div className="flex h-full w-full items-center justify-center bg-muted text-sm text-muted-foreground">地図を読み込めませんでした</div>}>
+                <AerialPhotoMap latitude={latitude} longitude={longitude} />
+              </MapErrorBoundary>
             ) : (
               <>
                 <Image

@@ -10,7 +10,8 @@
     "test": "vitest",
     "test:run": "vitest run",
     "deploy": "git push origin master && echo 'GitHub Actions → App Runner デプロイ開始'",
-    "analyze": "ANALYZE=true next build"
+    "analyze": "ANALYZE=true next build",
+    "download-fish-images": "node scripts/download-fish-images.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-rekognition": "^3.1019.0",
