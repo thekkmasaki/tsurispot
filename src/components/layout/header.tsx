@@ -218,7 +218,7 @@ export function Header() {
             return (
               <Link
                 href="/titles"
-                className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] leading-none ${title.className}`}
+                className={`shrink-0 rounded-full px-3 py-1 text-xs font-bold shadow-md ring-2 ring-white/50 ${title.className}`}
                 title={`称号: ${title.emoji}${title.label}`}
               >
                 {title.emoji}{title.label}
