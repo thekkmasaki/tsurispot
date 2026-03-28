@@ -62,21 +62,13 @@ export function UserMenu() {
   const user = session.user;
 
   return (
-    <div ref={ref} className="relative flex shrink-0 items-center gap-1">
-      {(() => {
-        const title = getTitle(reportCount);
-        return (
-          <span className={`inline-flex shrink-0 items-center gap-0.5 rounded-full text-[10px] leading-none px-1 py-0.5 sm:px-1.5 ${title.className}`}>
-            {title.emoji}<span className="hidden sm:inline">{title.label}</span>
-          </span>
-        );
-      })()}
+    <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
         aria-expanded={open}
         aria-haspopup="true"
         aria-label="ユーザーメニュー"
-        className="flex items-center gap-1.5 rounded-lg px-1.5 py-1 transition-colors hover:bg-sand-light"
+        className="relative flex items-center gap-1.5 rounded-lg px-1.5 py-1 transition-colors hover:bg-sand-light"
       >
         {user.avatarUrl ? (
           <img
@@ -91,6 +83,14 @@ export function UserMenu() {
           </div>
         )}
         <ChevronDown className="h-3 w-3 text-muted-foreground" />
+        {(() => {
+          const title = getTitle(reportCount);
+          return (
+            <span className={`absolute -bottom-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-1 py-px text-[8px] leading-none ${title.className}`}>
+              {title.emoji}{title.label}
+            </span>
+          );
+        })()}
       </button>
 
       {open && (
