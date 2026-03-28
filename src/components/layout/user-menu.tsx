@@ -83,14 +83,6 @@ export function UserMenu() {
           </div>
         )}
         <ChevronDown className="h-3 w-3 text-muted-foreground" />
-        {(() => {
-          const title = getTitle(reportCount);
-          return (
-            <span className={`absolute -bottom-2.5 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full px-1 py-px text-[8px] leading-none ${title.className}`}>
-              {title.emoji}{title.label}
-            </span>
-          );
-        })()}
       </button>
 
       {open && (
