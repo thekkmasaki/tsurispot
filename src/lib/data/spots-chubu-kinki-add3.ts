@@ -1268,7 +1268,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
     region: localRegion("r3286"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "無料駐車場あり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.9, reviewCount: 245,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Izumisano_station_east_entrance.jpeg/960px-Izumisano_station_east_entrance.jpeg", imageAttribution: "Photo: 鈴見咲 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.9, reviewCount: 245,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -2004,7 +2004,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
     region: localRegion("r3309"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.7, reviewCount: 110, googleRating: 3.3, googleReviewCount: 14,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Nishigobou_station001.JPG/960px-Nishigobou_station001.JPG", imageAttribution: "Photo: Vanquish0 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.7, reviewCount: 110, googleRating: 3.3, googleReviewCount: 14,
     catchableFish: [
       { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -2406,7 +2406,7 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
     region: localRegion("r3266"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.5, reviewCount: 95, googleRating: 4.2, googleReviewCount: 5,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/16/Kintetsu_Shiratsuka_station.jpg/960px-Kintetsu_Shiratsuka_station.jpg", imageAttribution: "Photo: Miyuki Meinaka / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.5, reviewCount: 95, googleRating: 4.2, googleReviewCount: 5,
     catchableFish: [
       { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },

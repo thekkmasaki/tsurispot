@@ -197,7 +197,6 @@ function removeToken(url: string) {
 interface CommunityPhoto {
   url: string;
   uploadedAt: number;
-  userName?: string;
   mine?: boolean;
   token?: string;
 }
@@ -317,7 +316,7 @@ function CommunityPhotoStrip({ photos, spotSlug, onDeleted }: { photos: Communit
   const [deleting, setDeleting] = useState<string | null>(null);
 
   const handleDelete = useCallback(async (photo: CommunityPhoto) => {
-    if (!photo.mine || !confirm("この写真を削除しますか？")) return;
+    if (!photo.token || !confirm("この写真を削除しますか？")) return;
     setDeleting(photo.url);
     try {
       const res = await fetch("/api/spot-photo", {
@@ -326,7 +325,7 @@ function CommunityPhotoStrip({ photos, spotSlug, onDeleted }: { photos: Communit
         body: JSON.stringify({ slug: spotSlug, url: photo.url, token: photo.token }),
       });
       if (res.ok) {
-        if (photo.token) removeToken(photo.url);
+        removeToken(photo.url);
         onDeleted();
       }
     } catch { /* pass */ }
@@ -340,7 +339,7 @@ function CommunityPhotoStrip({ photos, spotSlug, onDeleted }: { photos: Communit
       <p className="mb-2 text-xs font-semibold text-muted-foreground">みんなの投稿写真</p>
       <div className="flex gap-2 overflow-x-auto pb-2">
         {photos.map((photo) => (
-          <div key={photo.url} className="shrink-0">
+          <div key={photo.url} className="relative shrink-0">
             <div className="relative h-20 w-28 overflow-hidden rounded-md border">
               <img src={photo.url} alt="投稿写真" className="size-full object-cover" loading="lazy" />
               {deleting === photo.url && (
@@ -349,22 +348,16 @@ function CommunityPhotoStrip({ photos, spotSlug, onDeleted }: { photos: Communit
                 </div>
               )}
             </div>
-            <div className="mt-1 flex w-28 items-center justify-between text-[10px]">
-              <span className="truncate text-muted-foreground">
-                {photo.userName ? `by ${photo.userName}` : ""}
-              </span>
-              {photo.mine && deleting !== photo.url && (
-                <button
-                  type="button"
-                  onClick={() => handleDelete(photo)}
-                  className="shrink-0 flex items-center gap-0.5 text-red-500 hover:text-red-600"
-                  aria-label="この写真を削除"
-                >
-                  <TrashIcon className="size-3" />
-                  削除
-                </button>
-              )}
-            </div>
+            {photo.mine && !deleting && (
+              <button
+                type="button"
+                onClick={() => handleDelete(photo)}
+                className="absolute -right-1.5 -top-1.5 rounded-full bg-red-500 p-0.5 text-white shadow-sm transition-colors hover:bg-red-600"
+                aria-label="この写真を削除"
+              >
+                <TrashIcon className="size-3" />
+              </button>
+            )}
           </div>
         ))}
       </div>
@@ -385,9 +378,9 @@ export function SpotPhotoGallery({ photos, spotType, spotName, spotSlug, latitud
         if (data.photos) {
           const tokens = getSavedTokens();
           setCommunityPhotos(
-            data.photos.map((p: { url: string; uploadedAt: number; userName?: string; mine?: boolean }) => ({
+            data.photos.map((p: { url: string; uploadedAt: number }) => ({
               ...p,
-              mine: p.mine || !!tokens[p.url],
+              mine: !!tokens[p.url],
               token: tokens[p.url],
             })),
           );

@@ -1033,7 +1033,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2513"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.7, reviewCount: 150, googleRating: 3.8, googleReviewCount: 29,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7c/Abekawastationplatforms-march2014.jpg/960px-Abekawastationplatforms-march2014.jpg", imageAttribution: "Photo: Nesnad / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 150, googleRating: 3.8, googleReviewCount: 29,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
@@ -1266,7 +1266,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2571"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海水浴場駐車場あり（夏季有料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.5, reviewCount: 130, googleRating: 3.9, googleReviewCount: 966,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Turuhara_station.jpeg/960px-Turuhara_station.jpeg", imageAttribution: "Photo: 鈴見咲 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.5, reviewCount: 130, googleRating: 3.9, googleReviewCount: 966,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
@@ -1575,7 +1575,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
     region: localRegion("r2610"), spotType: "river", difficulty: "intermediate",
     isFree: false, hasParking: true, parkingDetail: "河川敷駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 4.0, reviewCount: 110, googleRating: 3, googleReviewCount: 1,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Hashimoto_station.JPG/960px-Hashimoto_station.JPG", imageAttribution: "Photo: Vanquish0 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 110, googleRating: 3, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "渓流釣り" },

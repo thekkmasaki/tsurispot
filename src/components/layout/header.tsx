@@ -3,9 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
-import { useSession } from "next-auth/react";
 import { useFavorites } from "@/hooks/use-favorites";
-import { getTitle } from "@/lib/titles";
 import {
   Fish,
   Map,
@@ -29,23 +27,22 @@ import {
 import { cn } from "@/lib/utils";
 import { SearchOverlayClient } from "./search-overlay-client";
 import { LineButton } from "./line-button";
-import { UserMenu } from "./user-menu";
 // メインナビ（常時表示：最大6個）
 const mainNavItems = [
   { href: "/spots", label: "スポット", icon: MapPin },
   { href: "/blog", label: "釣果レポート", icon: FileText },
-  { href: "/monthly", label: "月別ガイド", icon: Calendar },
+  { href: "/catchable-now", label: "今釣れる", icon: Fish },
   { href: "/map", label: "地図", icon: Map },
-  { href: "/area", label: "エリア", icon: Compass },
+  { href: "/ranking", label: "ランキング", icon: Trophy },
+  { href: "/fish", label: "図鑑", icon: BookOpen },
 ];
 
 // ドロップダウン「もっと見る」
 const moreNavItems = [
-  { href: "/catchable-now", label: "今釣れる", icon: Fish },
-  { href: "/ranking", label: "ランキング", icon: Trophy },
-  { href: "/fish", label: "図鑑", icon: BookOpen },
   { href: "/methods", label: "釣り方ガイド", icon: Anchor },
+  { href: "/area", label: "エリア一覧", icon: Compass },
   { href: "/area-guide", label: "エリアガイド記事", icon: MapPin },
+  { href: "/monthly", label: "月別釣りガイド", icon: Calendar },
   { href: "/guide", label: "釣りガイド", icon: GraduationCap },
   { href: "/bouzu-checker", label: "ボウズ確率チェッカー", icon: Target },
   { href: "/shops", label: "釣具店ガイド", icon: Store },
@@ -94,7 +91,7 @@ function DropdownMenu() {
         aria-haspopup="true"
         aria-label="その他のメニュー"
         className={cn(
-          "flex items-center gap-1 whitespace-nowrap rounded-lg px-2 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+          "flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
           hasActiveChild
             ? "bg-ocean-mid/10 text-ocean-mid"
             : "text-driftwood hover:bg-sand-light hover:text-foreground"
@@ -141,25 +138,10 @@ function DropdownMenu() {
 
 export function Header() {
   const pathname = usePathname();
-  const { data: session } = useSession();
   const { count: favCount } = useFavorites();
-  const [reportCount, setReportCount] = useState(0);
-
-  useEffect(() => {
-    if (session?.user?.tsuriId) {
-      fetch("/api/user/catch-reports")
-        .then((r) => r.json())
-        .then((data) => setReportCount(data.reportCount || 0))
-        .catch(() => {});
-    }
-  }, [session?.user?.tsuriId]);
-
-  const headerBg = session?.user?.tsuriId
-    ? getTitle(reportCount).headerClass
-    : "from-white/95 via-white/90 to-sand-light/80";
 
   return (
-    <header className={`sticky top-0 z-50 border-b border-border/40 bg-gradient-to-r ${headerBg} backdrop-blur-lg transition-colors duration-500`}>
+    <header className="sticky top-0 z-50 border-b border-border/40 bg-gradient-to-r from-white/95 via-white/90 to-sand-light/80 backdrop-blur-lg">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-ocean-mid to-ocean-deep text-white">
@@ -178,12 +160,13 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "whitespace-nowrap rounded-lg px-2 py-2 text-sm font-medium transition-colors",
+                  "flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                   isActive
                     ? "bg-ocean-mid/10 text-ocean-mid"
                     : "text-driftwood hover:bg-sand-light hover:text-foreground"
                 )}
               >
+                <item.icon className="h-4 w-4" aria-hidden="true" />
                 {item.label}
               </Link>
             );
@@ -191,11 +174,9 @@ export function Header() {
           <DropdownMenu />
         </nav>
 
-        <div className="flex shrink-0 items-center gap-2">
+        <div className="flex items-center gap-2">
           <SearchOverlayClient />
-          {/* LINE LOGIN一時停止中 */}
-          {/* <LineButton /> */}
-          {/* <UserMenu /> */}
+          <LineButton />
           <Link
             href="/favorites"
             className={cn(
@@ -213,18 +194,6 @@ export function Header() {
               </span>
             )}
           </Link>
-          {session?.user?.tsuriId && (() => {
-            const title = getTitle(reportCount);
-            return (
-              <Link
-                href="/titles"
-                className={`shrink-0 rounded-full px-3 py-1 text-xs font-bold shadow-md ring-2 ring-white/50 ${title.className}`}
-                title={`称号: ${title.emoji}${title.label}`}
-              >
-                {title.emoji}{title.label}
-              </Link>
-            );
-          })()}
         </div>
       </div>
     </header>

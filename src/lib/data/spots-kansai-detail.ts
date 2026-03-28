@@ -552,7 +552,7 @@ export const kansaiDetailSpots: FishingSpot[] = [
     region: lr("r884"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "明石海浜公園駐車場（第1：242台/第2：244台）1時間100円、9時間超〜24時間1,000円",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.9, reviewCount: 287, googleRating: 3.6, googleReviewCount: 80,
+    mainImageUrl: "/images/spots/wikimedia/futami-jinkoutou.webp", imageAttribution: "Photo: 由紀奈 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.9, reviewCount: 287, googleRating: 3.6, googleReviewCount: 80,
     catchableFish: [
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },

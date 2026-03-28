@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { getCatchReportsBySpot, type CatchReport } from "@/lib/data/catch-reports";
 import { redis } from "@/lib/redis";
-import { getUserById } from "@/lib/auth-redis";
 
 const GAS_READ_URL = process.env.GAS_CATCH_REPORT_URL;
 
@@ -33,7 +32,6 @@ export async function GET(request: Request) {
             spotName: r.spotName || "",
             fishName: r.fishName || "",
             userName: r.userName || "",
-            userId: r.userId || undefined,
             comment: r.comment || "",
             date: r.catchDate || r.date || "",
             approved: true,
@@ -83,22 +81,6 @@ export async function GET(request: Request) {
   }
 
   allReports.sort((a, b) => b.date.localeCompare(a.date));
-
-  // 各レポートの userId から reportCount を取得（同一ユーザーはキャッシュ）
-  const userCountCache = new Map<string, number>();
-  for (const r of allReports) {
-    if (r.userId) {
-      if (!userCountCache.has(r.userId)) {
-        try {
-          const u = await getUserById(r.userId);
-          userCountCache.set(r.userId, u?.reportCount || 0);
-        } catch {
-          userCountCache.set(r.userId, 0);
-        }
-      }
-      r.reportCount = userCountCache.get(r.userId) || 0;
-    }
-  }
 
   return NextResponse.json(
     { ok: true, reports: allReports },

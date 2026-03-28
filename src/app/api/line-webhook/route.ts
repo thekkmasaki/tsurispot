@@ -90,36 +90,6 @@ function getCurrentMonthGuideUrl(): string {
   return `https://tsurispot.com/monthly/${month}`;
 }
 
-// ─── Push配信 ─────────────────────────────────────────────
-
-/** 都道府県slug → 週報エリアslug マッピング */
-const PREF_TO_AREA: Record<string, string> = {
-  hokkaido: "otaru-ishikari",
-  miyagi: "sendai-ishinomaki",
-  tokyo: "tokyobay",
-  chiba: "tokyobay",
-  kanagawa: "tokyobay",
-  shizuoka: "suruga-izu",
-  aichi: "chita-mikawa",
-  osaka: "osaka-sennan",
-  hyogo: "akashi-kobe",
-  wakayama: "nanki-shirahama",
-  hiroshima: "setouchi-hiroshima",
-  fukuoka: "fukuoka-kitakyushu",
-};
-
-/** LINE Push APIでメッセージ送信 */
-async function pushMessage(userId: string, text: string) {
-  await fetch("https://api.line.me/v2/bot/message/push", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${CHANNEL_ACCESS_TOKEN}`,
-    },
-    body: JSON.stringify({ to: userId, messages: [{ type: "text", text }] }),
-  });
-}
-
 // ─── エリア記憶 ─────────────────────────────────────────────
 
 /** ユーザーの釣りエリア（都道府県slug）を取得 */
@@ -201,113 +171,20 @@ async function handleShopOwnerMessage(
 
 // ─── 一般ユーザー向けメッセージハンドラ ─────────────────────────
 async function handleGeneralUserMessage(replyToken: string, text: string, userId: string) {
-  // ─── 釣果配信 opt-in ───
-  if (/^釣果配信ON$/i.test(text) || text === "受け取る") {
-    try {
-      await redis.sadd("line:push:subscribers", userId);
-      await redis.set(`line:user:${userId}:push`, "on");
-    } catch { /* ignore */ }
-
-    const userArea = await getUserArea(userId);
-    const areaSlug = userArea ? PREF_TO_AREA[userArea] : null;
-
-    // 最新週報があればPush送信
-    if (areaSlug) {
-      try {
-        const latest = await redis.get<{ title: string; slug: string; description: string }>(
-          `line:push:latest:${areaSlug}`
-        );
-        if (latest) {
-          const pushTitle = latest.title.replace(/【釣果週報】\s*/, "");
-          await pushMessage(
-            userId,
-            [
-              "━━━━━━━━━━━━━━",
-              `📊 ${pushTitle}`,
-              "━━━━━━━━━━━━━━",
-              "",
-              latest.description,
-              "",
-              "▼ 詳しくはこちら",
-              `https://tsurispot.com/blog/${latest.slug}`,
-              "",
-              "配信停止は「配信停止」と送信",
-            ].join("\n")
-          );
-        }
-      } catch { /* ignore */ }
-    }
-
-    await replyMessage(
-      replyToken,
-      [
-        "📊 釣果週報の配信をONにしました！",
-        "",
-        "毎週、エリアの最新釣果レポートを",
-        "お届けします。",
-        "",
-        "停止するには「配信停止」と送ってね。",
-      ].join("\n")
-    );
-    return;
-  }
-
-  // ─── 釣果配信 opt-out ───
-  if (/配信停止|釣果配信OFF/i.test(text) || text === "受け取らない") {
-    try {
-      await redis.srem("line:push:subscribers", userId);
-      await redis.del(`line:user:${userId}:push`);
-    } catch { /* ignore */ }
-    await replyMessage(
-      replyToken,
-      [
-        "📊 釣果週報の配信を停止しました。",
-        "",
-        "再開するには「釣果配信ON」と送ってね。",
-      ].join("\n")
-    );
-    return;
-  }
-
   // 都道府県名にマッチ → エリアを記憶
   const prefMatch = matchPrefecture(text);
   if (prefMatch) {
     await setUserArea(userId, prefMatch.slug);
-
-    // 週報対応エリアならopt-in確認のクイックリプライ付き
-    const hasArea = !!PREF_TO_AREA[prefMatch.slug];
-    if (hasArea) {
-      await replyMessage(
-        replyToken,
-        [
-          `📍 ${prefMatch.name}を登録しました！`,
-          "",
-          `今後「スポット」「今釣れる」と送ると、${prefMatch.name}の情報を優先してお届けします。`,
-          "",
-          "━━━━━━━━━━━━━━",
-          "",
-          `📊 ${prefMatch.name}の釣果週報を`,
-          "LINEで受け取りますか？",
-        ].join("\n"),
-        [
-          { label: "受け取る", text: "釣果配信ON" },
-          { label: "受け取らない", text: "受け取らない" },
-        ]
-      );
-    } else {
-      await replyMessage(
-        replyToken,
-        [
-          `📍 ${prefMatch.name}を登録しました！`,
-          "",
-          `今後「スポット」「今釣れる」と送ると、${prefMatch.name}の情報を優先してお届けします。`,
-          "",
-          "変更したい場合は、別の都道府県名を送ってください。",
-          "",
-          `※ ${prefMatch.name}の釣果週報は現在準備中です。`,
-        ].join("\n")
-      );
-    }
+    await replyMessage(
+      replyToken,
+      [
+        `📍 ${prefMatch.name}を登録しました！`,
+        "",
+        `今後「スポット」「今釣れる」と送ると、${prefMatch.name}の情報を優先してお届けします。`,
+        "",
+        "変更したい場合は、別の都道府県名を送ってください。",
+      ].join("\n")
+    );
     return;
   }
 
@@ -676,9 +553,6 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
         "📅「潮」",
         "　→ 釣りカレンダー",
         "",
-        "📊「釣果配信ON」",
-        "　→ 週報をLINEで受信",
-        "",
         "都道府県名を送ると",
         "マイエリアを登録できます",
         areaInfoHelp,
@@ -742,9 +616,6 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
       "",
       "📅「潮」",
       "　→ 釣りカレンダー",
-      "",
-      "📊「釣果配信ON」",
-      "　→ 週報をLINEで受信",
       "",
       "都道府県名を送ると",
       "マイエリアを登録できます",

@@ -1,12 +1,10 @@
 "use client";
 
 import { useEffect, useState, useCallback } from "react";
-import { useSession } from "next-auth/react";
-import { Fish, Calendar, User, Loader2, Ruler, Flag, Trash2 } from "lucide-react";
+import { Fish, Calendar, User, Loader2, Ruler, Flag } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import type { CatchReport } from "@/lib/data/catch-reports";
-import { getTitle } from "@/lib/titles";
 
 interface CatchReportListProps {
   spotSlug: string;
@@ -37,11 +35,9 @@ function getSessionId(): string {
 }
 
 export function CatchReportList({ spotSlug, initialReports }: CatchReportListProps) {
-  const { data: session } = useSession();
   const [reports, setReports] = useState<CatchReport[]>(initialReports);
   const [loading, setLoading] = useState(false);
   const [flaggedIds, setFlaggedIds] = useState<Set<string>>(new Set());
-  const [deletingIds, setDeletingIds] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     let cancelled = false;
@@ -62,32 +58,6 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
       });
 
     return () => { cancelled = true; };
-  }, [spotSlug]);
-
-  const handleDelete = useCallback(async (reportId: string) => {
-    if (!confirm("この釣果を削除しますか？")) return;
-
-    setDeletingIds((prev) => new Set(prev).add(reportId));
-    try {
-      const res = await fetch("/api/catch-report-ugc", {
-        method: "DELETE",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ reportId, spotSlug }),
-      });
-      const data = await res.json();
-      if (res.ok && data.ok) {
-        setReports((prev) => prev.filter((r) => r.id !== reportId));
-      } else {
-        alert(data.error || "削除に失敗しました");
-      }
-    } catch {
-      alert("削除に失敗しました。もう一度お試しください。");
-    }
-    setDeletingIds((prev) => {
-      const next = new Set(prev);
-      next.delete(reportId);
-      return next;
-    });
   }, [spotSlug]);
 
   const handleFlag = useCallback(async (reportId: string) => {
@@ -123,9 +93,6 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
         <p className="mt-2 text-sm text-muted-foreground">
           まだ釣果報告がありません。最初の報告者になりましょう！
         </p>
-        <p className="mt-1.5 text-xs text-muted-foreground/70">
-          🎣 投稿すると<a href="/titles" className="font-medium text-ocean-mid underline hover:text-ocean-deep">称号</a>がもらえます！投稿するほどランクアップ！
-        </p>
       </div>
     );
   }
@@ -135,7 +102,7 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
       {reports.map((report) => (
         <Card key={report.id} className="group relative py-3">
           <CardContent className="px-4">
-            {/* 通報ボタン（ホバーで表示） */}
+            {/* 通報ボタン */}
             {!flaggedIds.has(report.id) && (
               <button
                 onClick={() => handleFlag(report.id)}
@@ -161,15 +128,6 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-medium leading-snug">
                   <span className="text-emerald-700">{report.userName}</span>
-                  {(() => {
-                    const title = report.reportCount ? getTitle(report.reportCount) : null;
-                    if (!title) return null;
-                    return (
-                      <span className={`ml-1 inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] leading-none ${title.className}`}>
-                        {title.emoji}{title.label}
-                      </span>
-                    );
-                  })()}
                   さんが
                   <span className="font-bold text-foreground">{report.fishName}</span>
                   を釣りました！
@@ -204,20 +162,6 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
                   <p className="mt-2 rounded-md bg-muted/50 px-3 py-2 text-sm leading-relaxed text-muted-foreground">
                     {report.comment}
                   </p>
-                )}
-                {/* 自分の投稿の削除ボタン */}
-                {session?.user?.tsuriId && report.userId === session.user.tsuriId && (
-                  <button
-                    onClick={() => handleDelete(report.id)}
-                    disabled={deletingIds.has(report.id)}
-                    className="mt-2 inline-flex items-center gap-1 rounded-md px-2 py-1 text-xs text-red-500 transition-colors hover:bg-red-50 hover:text-red-600 disabled:opacity-50"
-                  >
-                    {deletingIds.has(report.id) ? (
-                      <><Loader2 className="size-3 animate-spin" />削除中...</>
-                    ) : (
-                      <><Trash2 className="size-3" />この投稿を削除</>
-                    )}
-                  </button>
                 )}
               </div>
             </div>

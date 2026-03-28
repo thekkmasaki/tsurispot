@@ -460,7 +460,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
     region: localRegion("r3004"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [], rating: 3.6, reviewCount: 47, googleRating: 3.7, googleReviewCount: 43,
+    mainImageUrl: "/images/spots/wikimedia/samani-gyoko.webp", imageAttribution: "Photo: Rory trains / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.6, reviewCount: 47, googleRating: 3.7, googleReviewCount: 43,
     catchableFish: [
       { fish: fish("karei"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("ainame"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ブラクリ" },

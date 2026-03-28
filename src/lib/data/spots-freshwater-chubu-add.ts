@@ -228,7 +228,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "", imageAttribution: "", images: [],
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Toyama_Freight_Station.jpg/960px-Toyama_Freight_Station.jpg", imageAttribution: "Photo: 赤座 / Wikimedia Commons (CC BY-SA 4.0)", images: [],
     rating: 4.0, reviewCount: 98, googleRating: 3.7, googleReviewCount: 3,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },
