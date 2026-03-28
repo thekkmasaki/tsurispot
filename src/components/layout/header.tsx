@@ -34,18 +34,18 @@ import { UserMenu } from "./user-menu";
 const mainNavItems = [
   { href: "/spots", label: "スポット", icon: MapPin },
   { href: "/blog", label: "釣果レポート", icon: FileText },
-  { href: "/catchable-now", label: "今釣れる", icon: Fish },
+  { href: "/monthly", label: "月別ガイド", icon: Calendar },
   { href: "/map", label: "地図", icon: Map },
   { href: "/area", label: "エリア", icon: Compass },
 ];
 
 // ドロップダウン「もっと見る」
 const moreNavItems = [
+  { href: "/catchable-now", label: "今釣れる", icon: Fish },
   { href: "/ranking", label: "ランキング", icon: Trophy },
   { href: "/fish", label: "図鑑", icon: BookOpen },
   { href: "/methods", label: "釣り方ガイド", icon: Anchor },
   { href: "/area-guide", label: "エリアガイド記事", icon: MapPin },
-  { href: "/monthly", label: "月別釣りガイド", icon: Calendar },
   { href: "/guide", label: "釣りガイド", icon: GraduationCap },
   { href: "/bouzu-checker", label: "ボウズ確率チェッカー", icon: Target },
   { href: "/shops", label: "釣具店ガイド", icon: Store },
