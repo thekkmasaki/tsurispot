@@ -221,7 +221,7 @@ export function Header() {
                 className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] leading-none ${title.className}`}
                 title={`称号: ${title.emoji}${title.label}`}
               >
-                {title.emoji}<span className="hidden lg:inline">{title.label}</span>
+                {title.emoji}{title.label}
               </Link>
             );
           })()}
