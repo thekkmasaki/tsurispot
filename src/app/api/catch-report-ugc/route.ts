@@ -52,7 +52,7 @@ export async function POST(request: Request) {
     }
 
     // オプショナルフィールドのバリデーション
-    if (photoUrl !== undefined && (typeof photoUrl !== "string" || !/^https?:\/\//.test(photoUrl))) {
+    if (photoUrl !== undefined && (typeof photoUrl !== "string" || !photoUrl.startsWith("https://tsurispot-uploads.s3.ap-northeast-1.amazonaws.com/"))) {
       return NextResponse.json({ error: "写真URLが不正です" }, { status: 400 });
     }
     if (sizeCm !== undefined && (typeof sizeCm !== "number" || sizeCm < 0 || sizeCm > 300)) {
