@@ -45,15 +45,38 @@ const config: NextAuthConfig = {
     error: "/login",
   },
   callbacks: {
-    async signIn() {
-      // LINE LOGIN一時停止中（認証バグ修正まで）
-      return false;
+    async signIn({ account, user }) {
+      // account.providerAccountId = LINE user ID（Auth.js内部で profile().id から設定）
+      // 注意: user.id はAuth.jsが生成するランダムUUIDであり、LINE IDではない
+      if (!account?.providerAccountId) return false;
+      const provider = account.provider;
+      const providerId = account.providerAccountId;
+
+      const existing = await getUserByProvider(provider, providerId);
+
+      if (!existing) {
+        const tsuriId = crypto.randomUUID();
+        await createUser({
+          id: tsuriId,
+          nickname: user.name || `釣り人${tsuriId.slice(0, 6)}`,
+          avatarUrl: user.image || undefined,
+          provider,
+          providerId,
+          createdAt: new Date().toISOString(),
+        });
+      } else if (user.image && existing.avatarUrl !== user.image) {
+        existing.avatarUrl = user.image;
+        const { redis } = await import("@/lib/redis");
+        await redis.set(`auth:user:${existing.id}`, existing);
+      }
+      return true;
     },
 
-    async jwt({ token, account, user, trigger, session: updateData }) {
-      // 新規ログイン時: 古いセッションデータを必ずクリアしてから新ユーザーを設定
+    async jwt({ token, account, trigger, session: updateData }) {
+      // 新規ログイン時: Auth.jsが生成するdefaultTokenは常に新規オブジェクト
+      // （name, email, picture, sub のみ）なので旧セッションデータは含まれない。
+      // ただし安全のため明示的にクリアする。
       if (account?.providerAccountId) {
-        // 前のユーザーのデータが残らないように全フィールドをリセット
         token.tsuriId = undefined;
         token.nickname = undefined;
         token.avatarUrl = undefined;
