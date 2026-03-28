@@ -8,6 +8,7 @@ declare module "next-auth" {
       nickname: string;
       avatarUrl?: string;
       provider: string;
+      isNewUser?: boolean;
     };
   }
 }
@@ -18,5 +19,6 @@ declare module "next-auth/jwt" {
     nickname?: string;
     avatarUrl?: string;
     provider?: string;
+    isNewUser?: boolean;
   }
 }

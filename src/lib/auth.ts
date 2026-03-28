@@ -70,6 +70,7 @@ const config: NextAuthConfig = {
     async jwt({ token, account, user, trigger, session: updateData }) {
       // 初回ログイン時にトークンにTsuriSpot情報を埋め込み
       if (account && user?.id) {
+        // signInコールバック前は既存ユーザーがいないので、ここで再取得
         const existing = await getUserByProvider(
           account.provider,
           user.id,
@@ -79,6 +80,8 @@ const config: NextAuthConfig = {
           token.nickname = existing.nickname;
           token.avatarUrl = existing.avatarUrl;
           token.provider = existing.provider;
+          // nicknameSetAt が無い = まだニックネーム未設定の新規ユーザー
+          token.isNewUser = !existing.nicknameSetAt;
         }
       }
       // セッション更新時（ニックネーム変更など）にRedisから最新データを再取得
@@ -87,9 +90,10 @@ const config: NextAuthConfig = {
         if (fresh) {
           token.nickname = fresh.nickname;
           token.avatarUrl = fresh.avatarUrl;
+          token.isNewUser = !fresh.nicknameSetAt;
         } else if (updateData && typeof updateData === "object" && "nickname" in updateData) {
-          // Redisフォールバック: クライアントから渡されたデータを使用
           token.nickname = (updateData as { nickname: string }).nickname;
+          token.isNewUser = false;
         }
       }
       return token;
@@ -101,6 +105,7 @@ const config: NextAuthConfig = {
         session.user.nickname = (token.nickname as string) || "";
         session.user.avatarUrl = token.avatarUrl as string | undefined;
         session.user.provider = (token.provider as string) || "";
+        session.user.isNewUser = Boolean(token.isNewUser);
       }
       return session;
     },

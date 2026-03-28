@@ -8,6 +8,7 @@ export interface TsuriSpotUser {
   providerId: string;
   createdAt: string;
   reportCount?: number;
+  nicknameSetAt?: string; // ニックネームを自分で設定した日時
 }
 
 const USER_PREFIX = "auth:user:";
@@ -49,6 +50,7 @@ export async function updateNickname(
   const user = await getUserById(userId);
   if (!user) return false;
   user.nickname = nickname;
+  user.nicknameSetAt = new Date().toISOString();
   await redis.set(`${USER_PREFIX}${userId}`, user);
   return true;
 }
