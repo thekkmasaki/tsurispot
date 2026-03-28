@@ -103,6 +103,13 @@ jobs:
           echo "Deployment timed out"
           exit 1
 
+      - name: Invalidate CloudFront cache
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id E366L8IETD0MRP \
+            --paths "/*"
+          echo "CloudFront cache invalidation started"
+
       - name: Discord通知（成功）
         if: success()
         env:
