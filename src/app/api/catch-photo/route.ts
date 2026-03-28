@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { uploadToS3 } from "@/lib/s3";
+import { uploadToS3, deleteFromS3 } from "@/lib/s3";
+import { moderateImage } from "@/lib/rekognition";
 
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -23,6 +24,24 @@ export async function POST(request: NextRequest) {
     const filename = `catch-reports/${Date.now()}-${Math.random().toString(36).slice(2, 8)}.${ext}`;
     const buffer = Buffer.from(await file.arrayBuffer());
     const url = await uploadToS3(filename, buffer, file.type);
+
+    // Rekognitionモデレーションチェック
+    try {
+      const result = await moderateImage(filename);
+      if (!result.safe) {
+        // NG画像を削除
+        await deleteFromS3(url);
+        console.warn("[catch-photo] モデレーションNG:", result.reason, result.labels);
+        return NextResponse.json(
+          { error: "この画像はアップロードできません。別の写真をお試しください。" },
+          { status: 400 },
+        );
+      }
+    } catch (err) {
+      // Rekognition障害時はスルー（可用性優先）
+      console.error("[catch-photo] Rekognitionエラー（スルー）:", err);
+    }
+
     return NextResponse.json({ ok: true, url });
   } catch (e) {
     console.error("S3 upload error:", e);

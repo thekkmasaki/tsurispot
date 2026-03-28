@@ -1,13 +1,14 @@
 import { NextResponse } from "next/server";
+import { redis } from "@/lib/redis";
+import { checkNgWords } from "@/lib/moderation";
 
 const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;
 
+// Redis TTL: 365日
+const TTL_SECONDS = 365 * 24 * 60 * 60;
+
 // POST: ユーザー釣果投稿を受け取る
 export async function POST(request: Request) {
-  if (!process.env.GAS_CATCH_REPORT_URL) {
-    return Response.json({ error: "Not configured" }, { status: 503 });
-  }
-
   try {
     const body = await request.json().catch(() => ({}));
     const { spotSlug, spotName, fishName, userName, comment, date, photoUrl, sizeCm, method, weather } = body as {
@@ -64,39 +65,57 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "天候が不正です" }, { status: 400 });
     }
 
-    const payload = {
+    // NGワードチェック
+    const modResult = checkNgWords([userName, fishName, comment]);
+    if (!modResult.ok) {
+      return NextResponse.json({ error: modResult.reason }, { status: 400 });
+    }
+
+    const reportId = `ugc-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+    const reportData = {
+      id: reportId,
       spotSlug,
-      spotName,
+      spotName: spotName || "",
       fishName,
       userName,
       comment,
       date,
+      approved: true,
       photoUrl: photoUrl || undefined,
       sizeCm: sizeCm || undefined,
       method: method || undefined,
       weather: weather || undefined,
       submittedAt: new Date().toISOString(),
-      spotUrl: `https://tsurispot.com/spots/${spotSlug}`,
     };
 
-    // Google Apps Script Webhook に送信（Sheets保存 + メール通知）
+    // Redis に即時保存（自動承認）
+    const redisKey = `ugc_reports:${spotSlug}`;
+    try {
+      await redis.lpush(redisKey, JSON.stringify(reportData));
+      await redis.expire(redisKey, TTL_SECONDS);
+    } catch (err) {
+      console.error("[釣果投稿] Redis保存エラー:", err);
+      // Redis障害時もGASに送信するため続行
+    }
+
+    // Google Apps Script Webhook に送信（記録・通知用、fire-and-forget）
     if (GAS_WEBHOOK_URL) {
-      try {
-        const gasRes = await fetch(GAS_WEBHOOK_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-          redirect: "follow",
-        });
-        console.log("[釣果投稿] GAS応答:", gasRes.status);
-      } catch (err) {
+      fetch(GAS_WEBHOOK_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...reportData,
+          spotUrl: `https://tsurispot.com/spots/${spotSlug}`,
+        }),
+        redirect: "follow",
+      }).catch((err) => {
         console.error("[釣果投稿] GAS送信エラー:", err);
-      }
+      });
     }
 
     return NextResponse.json({
       ok: true,
-      message: "投稿ありがとうございます！管理者の承認後に表示されます。",
+      message: "釣果が投稿されました！",
     });
   } catch {
     return NextResponse.json(

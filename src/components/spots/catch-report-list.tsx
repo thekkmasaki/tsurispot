@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Fish, Calendar, User, Loader2, Ruler } from "lucide-react";
+import { useEffect, useState, useCallback } from "react";
+import { Fish, Calendar, User, Loader2, Ruler, Flag } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import type { CatchReport } from "@/lib/data/catch-reports";
@@ -24,9 +24,20 @@ function formatDate(dateStr: string): string {
   return `${Number(parts[0])}年${Number(parts[1])}月${Number(parts[2])}日`;
 }
 
+function getSessionId(): string {
+  const key = "tsurispot_sid";
+  let sid = sessionStorage.getItem(key);
+  if (!sid) {
+    sid = `${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+    sessionStorage.setItem(key, sid);
+  }
+  return sid;
+}
+
 export function CatchReportList({ spotSlug, initialReports }: CatchReportListProps) {
   const [reports, setReports] = useState<CatchReport[]>(initialReports);
   const [loading, setLoading] = useState(false);
+  const [flaggedIds, setFlaggedIds] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     let cancelled = false;
@@ -48,6 +59,23 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
 
     return () => { cancelled = true; };
   }, [spotSlug]);
+
+  const handleFlag = useCallback(async (reportId: string) => {
+    if (!confirm("この投稿を不適切として通報しますか？")) return;
+
+    try {
+      const res = await fetch("/api/report-flag", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ reportId, sessionId: getSessionId() }),
+      });
+      const data = await res.json();
+      alert(data.message || "通報を受け付けました");
+      setFlaggedIds((prev) => new Set(prev).add(reportId));
+    } catch {
+      alert("通報に失敗しました。もう一度お試しください。");
+    }
+  }, []);
 
   if (loading && reports.length === 0) {
     return (
@@ -72,8 +100,19 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
   return (
     <div className="space-y-3">
       {reports.map((report) => (
-        <Card key={report.id} className="py-3">
+        <Card key={report.id} className="group relative py-3">
           <CardContent className="px-4">
+            {/* 通報ボタン */}
+            {!flaggedIds.has(report.id) && (
+              <button
+                onClick={() => handleFlag(report.id)}
+                className="absolute right-2 top-2 rounded-md p-1 text-muted-foreground/30 opacity-0 transition-all hover:bg-destructive/10 hover:text-destructive group-hover:opacity-100"
+                title="不適切な投稿を通報"
+                aria-label="通報"
+              >
+                <Flag className="size-3.5" />
+              </button>
+            )}
             <div className="flex items-start gap-3">
               {report.photoUrl ? (
                 <img

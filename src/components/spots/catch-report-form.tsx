@@ -176,7 +176,7 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
                 投稿ありがとうございます！
               </p>
               <p className="mt-1 text-sm text-emerald-700">
-                管理者の承認後に表示されます。
+                ページを再読み込みすると表示されます。
               </p>
               <Button
                 onClick={() => {
