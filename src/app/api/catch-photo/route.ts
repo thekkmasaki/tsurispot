@@ -3,7 +3,7 @@ import { uploadToS3, deleteFromS3 } from "@/lib/s3";
 import { moderateImage } from "@/lib/rekognition";
 
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
-const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB（クライアント側で自動圧縮済み、iPhone対応）
 
 export async function POST(request: NextRequest) {
   const formData = await request.formData();
@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "JPG、PNG、WebPのみアップロード可能です" }, { status: 400 });
   }
   if (file.size > MAX_FILE_SIZE) {
-    return NextResponse.json({ error: "ファイルサイズは5MB以下にしてください" }, { status: 400 });
+    return NextResponse.json({ error: "ファイルサイズは20MB以下にしてください" }, { status: 400 });
   }
 
   try {

@@ -17,6 +17,36 @@ const WEATHER_OPTIONS = [
   { value: "風強い", label: "風強い", icon: "💨" },
 ];
 
+/** クライアント側で画像をリサイズ・JPEG圧縮してからアップロード */
+function compressImage(file: File, maxWidth = 1600, quality = 0.82): Promise<File> {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => {
+      let { width, height } = img;
+      if (width > maxWidth) {
+        height = Math.round((height * maxWidth) / width);
+        width = maxWidth;
+      }
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) { resolve(file); return; }
+      ctx.drawImage(img, 0, 0, width, height);
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) { resolve(file); return; }
+          resolve(new File([blob], file.name.replace(/\.\w+$/, ".jpg"), { type: "image/jpeg" }));
+        },
+        "image/jpeg",
+        quality,
+      );
+    };
+    img.onerror = () => reject(new Error("画像の読み込みに失敗しました"));
+    img.src = URL.createObjectURL(file);
+  });
+}
+
 interface CatchReportFormProps {
   spotSlug: string;
   spotName: string;
@@ -47,16 +77,22 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
     const file = e.target.files?.[0];
     if (!file) return;
 
-    // プレビュー表示
-    const reader = new FileReader();
-    reader.onload = (ev) => setPhotoPreview(ev.target?.result as string);
-    reader.readAsDataURL(file);
-
-    // アップロード
     setPhotoUploading(true);
+    setErrorMessage("");
+    setStatus("idle");
+
     try {
+      // クライアント側で自動圧縮（iPhone写真10MB超対策）
+      const compressed = await compressImage(file);
+
+      // プレビュー表示
+      const reader = new FileReader();
+      reader.onload = (ev) => setPhotoPreview(ev.target?.result as string);
+      reader.readAsDataURL(compressed);
+
+      // アップロード
       const formData = new FormData();
-      formData.append("file", file);
+      formData.append("file", compressed);
       const res = await fetch("/api/catch-photo", { method: "POST", body: formData });
       const data = await res.json();
       if (res.ok && data.ok) {
@@ -330,7 +366,7 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
             <input
               ref={fileInputRef}
               type="file"
-              accept="image/jpeg,image/png,image/webp"
+              accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
               onChange={handlePhotoSelect}
               className="hidden"
             />
