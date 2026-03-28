@@ -36,11 +36,11 @@ const mainNavItems = [
   { href: "/blog", label: "釣果レポート", icon: FileText },
   { href: "/catchable-now", label: "今釣れる", icon: Fish },
   { href: "/map", label: "地図", icon: Map },
-  { href: "/ranking", label: "ランキング", icon: Trophy },
 ];
 
 // ドロップダウン「もっと見る」
 const moreNavItems = [
+  { href: "/ranking", label: "ランキング", icon: Trophy },
   { href: "/fish", label: "図鑑", icon: BookOpen },
   { href: "/methods", label: "釣り方ガイド", icon: Anchor },
   { href: "/area", label: "エリア一覧", icon: Compass },
@@ -94,7 +94,7 @@ function DropdownMenu() {
         aria-haspopup="true"
         aria-label="その他のメニュー"
         className={cn(
-          "flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+          "flex items-center gap-1 whitespace-nowrap rounded-lg px-2 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
           hasActiveChild
             ? "bg-ocean-mid/10 text-ocean-mid"
             : "text-driftwood hover:bg-sand-light hover:text-foreground"
@@ -159,7 +159,7 @@ export function Header() {
     : "from-white/95 via-white/90 to-sand-light/80";
 
   return (
-    <header className={`sticky top-0 z-50 border-b border-border/40 bg-gradient-to-r ${headerBg} backdrop-blur-lg transition-colors duration-500`}>
+    <header className={`sticky top-0 z-50 overflow-hidden border-b border-border/40 bg-gradient-to-r ${headerBg} backdrop-blur-lg transition-colors duration-500`}>
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-ocean-mid to-ocean-deep text-white">
@@ -178,13 +178,12 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                  "whitespace-nowrap rounded-lg px-2 py-2 text-sm font-medium transition-colors",
                   isActive
                     ? "bg-ocean-mid/10 text-ocean-mid"
                     : "text-driftwood hover:bg-sand-light hover:text-foreground"
                 )}
               >
-                <item.icon className="h-4 w-4" aria-hidden="true" />
                 {item.label}
               </Link>
             );

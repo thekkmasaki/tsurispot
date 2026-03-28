@@ -33,12 +33,12 @@ export default function TitlesPage() {
             key={tier.min}
             className="flex items-center gap-4 rounded-xl border p-4 transition-colors hover:bg-muted/30"
           >
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center text-2xl">
+            <div className={`flex h-10 w-10 shrink-0 items-center justify-center text-2xl ${tier.min >= 10 ? "animate-bounce" : ""}`}>
               {tier.emoji}
             </div>
             <div className="min-w-0 flex-1">
               <div className="flex items-center gap-2">
-                <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs leading-none ${tier.className}`}>
+                <span className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs leading-none ${tier.className} ${tier.min >= 10 ? "animate-pulse" : ""}`}>
                   {tier.emoji} {tier.label}
                 </span>
                 {i === 0 && (
