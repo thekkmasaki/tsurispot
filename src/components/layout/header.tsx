@@ -213,6 +213,18 @@ export function Header() {
               </span>
             )}
           </Link>
+          {session?.user?.tsuriId && (() => {
+            const title = getTitle(reportCount);
+            return (
+              <Link
+                href="/titles"
+                className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] leading-none ${title.className}`}
+                title={`称号: ${title.emoji}${title.label}`}
+              >
+                {title.emoji}<span className="hidden sm:inline">{title.label}</span>
+              </Link>
+            );
+          })()}
         </div>
       </div>
     </header>
