@@ -1,9 +1,8 @@
 "use client";
 
-import { useState, Component, type ErrorInfo, type ReactNode } from "react";
+import { useState, useEffect, useCallback, useRef, Component, type ErrorInfo, type ReactNode } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import Link from "next/link";
 import type { SpotPhoto } from "@/types";
 
 const AerialPhotoMap = dynamic(
@@ -144,14 +143,253 @@ interface SpotPhotoGalleryProps {
   photos?: SpotPhoto[];
   spotType: string;
   spotName: string;
+  spotSlug: string;
   latitude?: number;
   longitude?: number;
 }
 
-export function SpotPhotoGallery({ photos, spotType, spotName, latitude, longitude }: SpotPhotoGalleryProps) {
+// クライアント側で画像をリサイズ・JPEG圧縮
+function compressImage(file: File, maxWidth = 1600, quality = 0.82): Promise<File> {
+  return new Promise((resolve, reject) => {
+    const img = new window.Image();
+    img.onload = () => {
+      let { width, height } = img;
+      if (width > maxWidth) {
+        height = Math.round((height * maxWidth) / width);
+        width = maxWidth;
+      }
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext("2d");
+      if (!ctx) { resolve(file); return; }
+      ctx.drawImage(img, 0, 0, width, height);
+      canvas.toBlob(
+        (blob) => {
+          if (!blob) { resolve(file); return; }
+          resolve(new File([blob], file.name.replace(/\.\w+$/, ".jpg"), { type: "image/jpeg" }));
+        },
+        "image/jpeg",
+        quality,
+      );
+    };
+    img.onerror = () => reject(new Error("画像の読み込みに失敗しました"));
+    img.src = URL.createObjectURL(file);
+  });
+}
+
+const SPOT_PHOTO_TOKENS_KEY = "spot-photo-tokens";
+
+function getSavedTokens(): Record<string, string> {
+  try { return JSON.parse(localStorage.getItem(SPOT_PHOTO_TOKENS_KEY) || "{}"); } catch { return {}; }
+}
+function saveToken(url: string, token: string) {
+  const tokens = getSavedTokens();
+  tokens[url] = token;
+  localStorage.setItem(SPOT_PHOTO_TOKENS_KEY, JSON.stringify(tokens));
+}
+function removeToken(url: string) {
+  const tokens = getSavedTokens();
+  delete tokens[url];
+  localStorage.setItem(SPOT_PHOTO_TOKENS_KEY, JSON.stringify(tokens));
+}
+
+interface CommunityPhoto {
+  url: string;
+  uploadedAt: number;
+  mine?: boolean;
+  token?: string;
+}
+
+function UploadIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="17 8 12 3 7 8" />
+      <line x1="12" y1="3" x2="12" y2="15" />
+    </svg>
+  );
+}
+
+function TrashIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" />
+    </svg>
+  );
+}
+
+function CheckIcon({ className }: { className?: string }) {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className={className}>
+      <path d="M20 6 9 17l-5-5" />
+    </svg>
+  );
+}
+
+function SpotPhotoUploader({ spotSlug, spotName, onUploaded }: { spotSlug: string; spotName: string; onUploaded: () => void }) {
+  const fileRef = useRef<HTMLInputElement>(null);
+  const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
+
+  const handleFile = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    setError("");
+    setSuccess(false);
+
+    try {
+      const compressed = await compressImage(file);
+      const formData = new FormData();
+      formData.append("file", compressed);
+      formData.append("slug", spotSlug);
+      const res = await fetch("/api/spot-photo", { method: "POST", body: formData });
+      const data = await res.json();
+      if (res.ok && data.ok) {
+        saveToken(data.url, data.token);
+        setSuccess(true);
+        onUploaded();
+        setTimeout(() => setSuccess(false), 3000);
+      } else {
+        setError(data.error || "アップロードに失敗しました");
+      }
+    } catch {
+      setError("アップロードに失敗しました");
+    } finally {
+      setUploading(false);
+      if (fileRef.current) fileRef.current.value = "";
+    }
+  }, [spotSlug, onUploaded]);
+
+  return (
+    <div className="flex flex-col items-center gap-3 rounded-lg bg-gradient-to-br from-blue-50 to-sky-50 p-4 text-center dark:from-blue-950/30 dark:to-sky-950/30 sm:flex-row sm:text-left">
+      <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/50">
+        <ImagePlusIcon className="size-6 text-blue-600 dark:text-blue-400" />
+      </div>
+      <div className="flex-1">
+        <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+          {spotName}の写真を募集中！
+        </p>
+        <p className="mt-0.5 text-xs text-muted-foreground">
+          釣り場の雰囲気が伝わる写真をお持ちの方はぜひお寄せください。あなたの写真が釣り仲間の参考になります。
+        </p>
+        {error && <p className="mt-1 text-xs text-red-600">{error}</p>}
+        {success && (
+          <p className="mt-1 flex items-center gap-1 text-xs text-emerald-600">
+            <CheckIcon className="size-3" /> アップロードしました！ありがとうございます
+          </p>
+        )}
+      </div>
+      <button
+        type="button"
+        onClick={() => fileRef.current?.click()}
+        disabled={uploading}
+        className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-blue-700 hover:shadow-md active:scale-[0.98] disabled:opacity-60"
+      >
+        {uploading ? (
+          <>
+            <span className="size-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+            圧縮・アップ中...
+          </>
+        ) : (
+          <>
+            <CameraIcon className="size-4" />
+            写真を投稿する
+          </>
+        )}
+      </button>
+      <input
+        ref={fileRef}
+        type="file"
+        accept="image/jpeg,image/png,image/webp,image/heic,image/heif"
+        onChange={handleFile}
+        className="hidden"
+      />
+    </div>
+  );
+}
+
+function CommunityPhotoStrip({ photos, spotSlug, onDeleted }: { photos: CommunityPhoto[]; spotSlug: string; onDeleted: () => void }) {
+  const [deleting, setDeleting] = useState<string | null>(null);
+
+  const handleDelete = useCallback(async (photo: CommunityPhoto) => {
+    if (!photo.token || !confirm("この写真を削除しますか？")) return;
+    setDeleting(photo.url);
+    try {
+      const res = await fetch("/api/spot-photo", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug: spotSlug, url: photo.url, token: photo.token }),
+      });
+      if (res.ok) {
+        removeToken(photo.url);
+        onDeleted();
+      }
+    } catch { /* pass */ }
+    setDeleting(null);
+  }, [spotSlug, onDeleted]);
+
+  if (photos.length === 0) return null;
+
+  return (
+    <div className="mt-4">
+      <p className="mb-2 text-xs font-semibold text-muted-foreground">みんなの投稿写真</p>
+      <div className="flex gap-2 overflow-x-auto pb-2">
+        {photos.map((photo) => (
+          <div key={photo.url} className="relative shrink-0">
+            <div className="relative h-20 w-28 overflow-hidden rounded-md border">
+              <img src={photo.url} alt="投稿写真" className="size-full object-cover" loading="lazy" />
+              {deleting === photo.url && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+                  <span className="size-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />
+                </div>
+              )}
+            </div>
+            {photo.mine && !deleting && (
+              <button
+                type="button"
+                onClick={() => handleDelete(photo)}
+                className="absolute -right-1.5 -top-1.5 rounded-full bg-red-500 p-0.5 text-white shadow-sm transition-colors hover:bg-red-600"
+                aria-label="この写真を削除"
+              >
+                <TrashIcon className="size-3" />
+              </button>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+export function SpotPhotoGallery({ photos, spotType, spotName, spotSlug, latitude, longitude }: SpotPhotoGalleryProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [communityPhotos, setCommunityPhotos] = useState<CommunityPhoto[]>([]);
   const hasPhotos = photos && photos.length > 0;
   const hasCoordinates = typeof latitude === "number" && typeof longitude === "number";
+
+  const loadCommunityPhotos = useCallback(() => {
+    fetch(`/api/spot-photo?slug=${encodeURIComponent(spotSlug)}`)
+      .then((r) => r.json())
+      .then((data) => {
+        if (data.photos) {
+          const tokens = getSavedTokens();
+          setCommunityPhotos(
+            data.photos.map((p: { url: string; uploadedAt: number }) => ({
+              ...p,
+              mine: !!tokens[p.url],
+              token: tokens[p.url],
+            })),
+          );
+        }
+      })
+      .catch(() => {});
+  }, [spotSlug]);
+
+  useEffect(() => { loadCommunityPhotos(); }, [loadCommunityPhotos]);
 
   if (!hasPhotos) {
     const defaultImg = SPOT_TYPE_DEFAULT_IMAGES[spotType] || DEFAULT_IMAGE;
@@ -209,30 +447,14 @@ export function SpotPhotoGallery({ photos, spotType, spotName, latitude, longitu
               ))}
             </div>
 
-            {/* Divider */}
-            <div className="mb-4 border-t" />
+            {/* Community photos */}
+            <CommunityPhotoStrip photos={communityPhotos} spotSlug={spotSlug} onDeleted={loadCommunityPhotos} />
 
-            {/* Photo submission CTA */}
-            <div className="flex flex-col items-center gap-3 rounded-lg bg-gradient-to-br from-blue-50 to-sky-50 p-4 text-center dark:from-blue-950/30 dark:to-sky-950/30 sm:flex-row sm:text-left">
-              <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-900/50">
-                <ImagePlusIcon className="size-6 text-blue-600 dark:text-blue-400" />
-              </div>
-              <div className="flex-1">
-                <p className="text-sm font-semibold text-gray-900 dark:text-gray-100">
-                  {spotName}の写真を募集中！
-                </p>
-                <p className="mt-0.5 text-xs text-muted-foreground">
-                  釣り場の雰囲気が伝わる写真をお持ちの方はぜひお寄せください。あなたの写真が釣り仲間の参考になります。
-                </p>
-              </div>
-              <Link
-                href="/contact"
-                className="inline-flex shrink-0 items-center gap-2 rounded-lg bg-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-all hover:bg-blue-700 hover:shadow-md active:scale-[0.98]"
-              >
-                <CameraIcon className="size-4" />
-                写真を投稿する
-              </Link>
-            </div>
+            {/* Divider */}
+            <div className={communityPhotos.length > 0 ? "my-4 border-t" : "mb-4 border-t"} />
+
+            {/* Photo upload CTA */}
+            <SpotPhotoUploader spotSlug={spotSlug} spotName={spotName} onUploaded={loadCommunityPhotos} />
           </div>
         </div>
       </div>
@@ -313,6 +535,12 @@ export function SpotPhotoGallery({ photos, spotType, spotName, latitude, longitu
           Photo: {photos[0].credit}
         </p>
       )}
+
+      {/* Community photos + upload */}
+      <CommunityPhotoStrip photos={communityPhotos} spotSlug={spotSlug} onDeleted={loadCommunityPhotos} />
+      <div className="mt-4">
+        <SpotPhotoUploader spotSlug={spotSlug} spotName={spotName} onUploaded={loadCommunityPhotos} />
+      </div>
 
       {/* Lightbox */}
       {lightboxIndex !== null && (

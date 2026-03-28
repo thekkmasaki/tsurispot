@@ -626,7 +626,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
       {/* スポット写真ギャラリー（航空写真マップ or ユーザー投稿写真） */}
       <section className="mb-6 sm:mb-8">
-        <SpotPhotoGallery photos={spot.spotPhotos} spotType={spot.spotType} spotName={spot.name} latitude={spot.latitude} longitude={spot.longitude} />
+        <SpotPhotoGallery photos={spot.spotPhotos} spotType={spot.spotType} spotName={spot.name} spotSlug={spot.slug} latitude={spot.latitude} longitude={spot.longitude} />
         {/* SVG図: 一旦非表示 */}
         {/* {fishingPoints && (
           <div className="mt-4">
