@@ -193,8 +193,9 @@ export function Header() {
 
         <div className="flex shrink-0 items-center gap-2">
           <SearchOverlayClient />
-          <LineButton />
-          <UserMenu />
+          {/* LINE LOGIN一時停止中 */}
+          {/* <LineButton /> */}
+          {/* <UserMenu /> */}
           <Link
             href="/favorites"
             className={cn(
