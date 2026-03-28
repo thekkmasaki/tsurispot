@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import type { NextAuthConfig } from "next-auth";
 import type { OAuthConfig } from "next-auth/providers";
-import { getUserByProvider, getUserById, createUser, migrateProviderMapping } from "@/lib/auth-redis";
+import { getUserByProvider, getUserById, createUser } from "@/lib/auth-redis";
 
 /**
  * LINE Login プロバイダー（Auth.js v5 OAuth）
@@ -50,16 +50,8 @@ const config: NextAuthConfig = {
       const provider = account.provider;
       const providerId = account.providerAccountId;
 
-      // 既存ユーザーチェック（正しいプロバイダーIDで検索）
-      let existing = await getUserByProvider(provider, providerId);
-
-      if (!existing && user.id && user.id !== providerId) {
-        // 移行: 旧形式（user.id = Auth.jsが生成したUUID）で検索
-        existing = await getUserByProvider(provider, user.id);
-        if (existing) {
-          await migrateProviderMapping(provider, user.id, providerId, existing.id);
-        }
-      }
+      // 既存ユーザーチェック（providerAccountIdで検索）
+      const existing = await getUserByProvider(provider, providerId);
 
       if (!existing) {
         // 新規ユーザー作成
@@ -82,9 +74,15 @@ const config: NextAuthConfig = {
     },
 
     async jwt({ token, account, user, trigger, session: updateData }) {
-      // 初回ログイン時にトークンにTsuriSpot情報を埋め込み
+      // 新規ログイン時: 古いセッションデータを必ずクリアしてから新ユーザーを設定
       if (account?.providerAccountId) {
-        // signInコールバック後に再取得（providerAccountIdで検索）
+        // 前のユーザーのデータが残らないように全フィールドをリセット
+        token.tsuriId = undefined;
+        token.nickname = undefined;
+        token.avatarUrl = undefined;
+        token.provider = undefined;
+        token.isNewUser = undefined;
+
         const existing = await getUserByProvider(
           account.provider,
           account.providerAccountId,
@@ -94,7 +92,6 @@ const config: NextAuthConfig = {
           token.nickname = existing.nickname;
           token.avatarUrl = existing.avatarUrl;
           token.provider = existing.provider;
-          // nicknameSetAt が無い = まだニックネーム未設定の新規ユーザー
           token.isNewUser = !existing.nicknameSetAt;
         }
       }
