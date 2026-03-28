@@ -45,32 +45,9 @@ const config: NextAuthConfig = {
     error: "/login",
   },
   callbacks: {
-    async signIn({ user, account }) {
-      if (!account?.providerAccountId) return false;
-      const provider = account.provider;
-      const providerId = account.providerAccountId;
-
-      // 既存ユーザーチェック（providerAccountIdで検索）
-      const existing = await getUserByProvider(provider, providerId);
-
-      if (!existing) {
-        // 新規ユーザー作成
-        const tsuriId = crypto.randomUUID();
-        await createUser({
-          id: tsuriId,
-          nickname: user.name || `釣り人${tsuriId.slice(0, 6)}`,
-          avatarUrl: user.image || undefined,
-          provider,
-          providerId,
-          createdAt: new Date().toISOString(),
-        });
-      } else if (user.image && existing.avatarUrl !== user.image) {
-        // 再ログイン時にアバターを最新に更新
-        existing.avatarUrl = user.image;
-        const { redis } = await import("@/lib/redis");
-        await redis.set(`auth:user:${existing.id}`, existing);
-      }
-      return true;
+    async signIn() {
+      // LINE LOGIN一時停止中（認証バグ修正まで）
+      return false;
     },
 
     async jwt({ token, account, user, trigger, session: updateData }) {
