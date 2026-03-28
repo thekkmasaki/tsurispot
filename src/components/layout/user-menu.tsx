@@ -70,18 +70,23 @@ export function UserMenu() {
         aria-label="ユーザーメニュー"
         className="relative flex items-center gap-1.5 rounded-lg px-1.5 py-1 transition-colors hover:bg-sand-light"
       >
-        {user.avatarUrl ? (
-          <img
-            src={user.avatarUrl}
-            alt=""
-            className="h-7 w-7 rounded-full object-cover"
-            referrerPolicy="no-referrer"
-          />
-        ) : (
-          <div className="flex h-7 w-7 items-center justify-center rounded-full bg-ocean-mid text-xs font-bold text-white">
-            {user.nickname.charAt(0)}
-          </div>
-        )}
+        <span className="relative">
+          {user.avatarUrl ? (
+            <img
+              src={user.avatarUrl}
+              alt=""
+              className="h-7 w-7 rounded-full object-cover"
+              referrerPolicy="no-referrer"
+            />
+          ) : (
+            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-ocean-mid text-xs font-bold text-white">
+              {user.nickname.charAt(0)}
+            </div>
+          )}
+          <span className="absolute -bottom-1 -right-1 text-xs leading-none drop-shadow">
+            {getTitle(reportCount).emoji}
+          </span>
+        </span>
         <ChevronDown className="h-3 w-3 text-muted-foreground" />
       </button>
 
