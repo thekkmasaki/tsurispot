@@ -168,7 +168,7 @@ export function Header() {
           <span className="bg-gradient-to-r from-ocean-deep to-ocean-mid bg-clip-text text-lg font-bold text-transparent font-[family-name:var(--font-zen-maru)]">ツリスポ</span>
         </Link>
 
-        <nav aria-label="メインナビゲーション" className="hidden min-w-0 items-center gap-1 overflow-x-auto md:flex">
+        <nav aria-label="メインナビゲーション" className="hidden items-center gap-1 md:flex">
           {mainNavItems.map((item) => {
             const isActive =
               pathname === item.href ||
@@ -178,7 +178,7 @@ export function Header() {
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                  "flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                   isActive
                     ? "bg-ocean-mid/10 text-ocean-mid"
                     : "text-driftwood hover:bg-sand-light hover:text-foreground"
@@ -221,7 +221,7 @@ export function Header() {
                 className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] leading-none ${title.className}`}
                 title={`称号: ${title.emoji}${title.label}`}
               >
-                {title.emoji}<span className="hidden sm:inline">{title.label}</span>
+                {title.emoji}<span className="hidden lg:inline">{title.label}</span>
               </Link>
             );
           })()}
