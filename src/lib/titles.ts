@@ -16,16 +16,17 @@ const TIERS: { min: number; label: string; emoji: string; className: string }[] 
   { min: 5,   label: "一人前",       emoji: "🐟", className: "bg-teal-500 text-white" },
   { min: 3,   label: "見習い釣り師", emoji: "🎣", className: "bg-green-500 text-white" },
   { min: 1,   label: "釣りデビュー", emoji: "🔰", className: "bg-gray-400 text-white" },
+  { min: 0,   label: "新人釣り師", emoji: "🎒", className: "bg-gray-300 text-gray-700" },
 ];
 
-/** 投稿数から称号を取得。0件の場合は null */
-export function getTitle(reportCount: number): Title | null {
+/** 投稿数から称号を取得。ログイン済みなら必ず返る */
+export function getTitle(reportCount: number): Title {
   for (const tier of TIERS) {
     if (reportCount >= tier.min) {
       return { label: tier.label, emoji: tier.emoji, className: tier.className };
     }
   }
-  return null;
+  return { label: "新人釣り師", emoji: "🎒", className: "bg-gray-300 text-gray-700" };
 }
 
 /** 次のランクまでの情報を取得 */

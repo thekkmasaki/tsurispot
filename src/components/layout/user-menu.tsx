@@ -91,7 +91,6 @@ export function UserMenu() {
             <p className="truncate text-sm font-medium">{user.nickname}</p>
             {(() => {
               const title = getTitle(reportCount);
-              if (!title) return null;
               return (
                 <p className="mt-0.5">
                   <span className={`inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] leading-none ${title.className}`}>

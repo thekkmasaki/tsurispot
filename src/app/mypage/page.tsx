@@ -125,7 +125,6 @@ export default function MyPage() {
                 <p className="font-bold">{user.nickname}</p>
                 {(() => {
                   const title = getTitle(reportCount);
-                  if (!title) return null;
                   return (
                     <span className={`inline-flex items-center gap-0.5 rounded-full px-2 py-0.5 text-xs leading-none ${title.className}`}>
                       {title.emoji}{title.label}
