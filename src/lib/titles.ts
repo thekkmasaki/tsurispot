@@ -7,18 +7,21 @@ export interface Title {
   headerClass: string; // ヘッダー背景用
 }
 
-const TIERS: { min: number; label: string; emoji: string; className: string; headerClass: string }[] = [
-  { min: 200, label: "釣神",         emoji: "🌟", className: "bg-gradient-to-r from-red-500 to-amber-500 text-white font-bold animate-pulse", headerClass: "from-red-50/90 via-amber-50/80 to-yellow-50/70" },
-  { min: 100, label: "伝説の釣り師", emoji: "👑", className: "bg-gradient-to-r from-yellow-400 to-amber-500 text-white font-bold",            headerClass: "from-yellow-50/90 via-amber-50/80 to-orange-50/70" },
-  { min: 50,  label: "釣りの達人",   emoji: "💎", className: "bg-gradient-to-r from-pink-500 to-rose-400 text-white font-bold",               headerClass: "from-pink-50/90 via-rose-50/80 to-white/70" },
-  { min: 30,  label: "凄腕アングラー", emoji: "🔥", className: "bg-orange-500 text-white font-semibold",                                       headerClass: "from-orange-50/90 via-amber-50/80 to-white/70" },
-  { min: 20,  label: "マスター",     emoji: "⭐", className: "bg-purple-500 text-white font-semibold",                                         headerClass: "from-purple-50/90 via-violet-50/80 to-white/70" },
-  { min: 10,  label: "ベテラン",     emoji: "🏅", className: "bg-blue-500 text-white",                                                         headerClass: "from-blue-50/90 via-sky-50/80 to-white/70" },
-  { min: 5,   label: "一人前",       emoji: "🐟", className: "bg-teal-500 text-white",                                                         headerClass: "from-teal-50/90 via-cyan-50/80 to-white/70" },
-  { min: 3,   label: "見習い釣り師", emoji: "🎣", className: "bg-green-500 text-white",                                                        headerClass: "from-green-50/90 via-emerald-50/80 to-white/70" },
-  { min: 1,   label: "釣りデビュー", emoji: "🔰", className: "bg-gray-400 text-white",                                                         headerClass: "from-gray-50/90 via-slate-50/80 to-white/70" },
-  { min: 0,   label: "新人釣り師",   emoji: "🎒", className: "bg-gray-300 text-gray-700",                                                      headerClass: "from-white/95 via-white/90 to-sand-light/80" },
+const TIERS: (Title & { min: number })[] = [
+  { min: 200, label: "釣神",           emoji: "🌟", className: "bg-gradient-to-r from-red-500 to-amber-500 text-white font-bold animate-pulse", headerClass: "from-red-500/90 via-amber-500/80 to-yellow-400/70" },
+  { min: 100, label: "伝説の釣り師",   emoji: "👑", className: "bg-gradient-to-r from-yellow-400 to-amber-500 text-white font-bold",            headerClass: "from-yellow-400/80 via-amber-400/70 to-orange-300/60" },
+  { min: 50,  label: "釣りの達人",     emoji: "💎", className: "bg-gradient-to-r from-pink-500 to-rose-400 text-white font-bold",               headerClass: "from-pink-400/70 via-rose-300/60 to-fuchsia-300/50" },
+  { min: 30,  label: "凄腕アングラー", emoji: "🔥", className: "bg-orange-500 text-white font-semibold",                                        headerClass: "from-orange-400/70 via-amber-300/60 to-yellow-200/50" },
+  { min: 20,  label: "マスター",       emoji: "⭐", className: "bg-purple-500 text-white font-semibold",                                        headerClass: "from-purple-400/60 via-violet-300/50 to-indigo-200/40" },
+  { min: 10,  label: "ベテラン",       emoji: "🏅", className: "bg-blue-500 text-white",                                                        headerClass: "from-blue-300/50 via-sky-200/40 to-cyan-100/30" },
+  { min: 5,   label: "一人前",         emoji: "🐟", className: "bg-teal-500 text-white",                                                        headerClass: "from-teal-200/40 via-cyan-100/30 to-white/80" },
+  { min: 3,   label: "見習い釣り師",   emoji: "🎣", className: "bg-green-500 text-white",                                                       headerClass: "from-green-100/40 via-emerald-50/30 to-white/80" },
+  { min: 1,   label: "釣りデビュー",   emoji: "🔰", className: "bg-gray-400 text-white",                                                        headerClass: "from-gray-100/40 via-slate-50/30 to-white/80" },
+  { min: 0,   label: "新人釣り師",     emoji: "🎒", className: "bg-gray-300 text-gray-700",                                                     headerClass: "from-white/95 via-white/90 to-sand-light/80" },
 ];
+
+/** 全ティア情報（ページ表示用） */
+export const ALL_TIERS = TIERS.map(({ min, label, emoji, className }) => ({ min, label, emoji, className }));
 
 /** 投稿数から称号を取得。ログイン済みなら必ず返る */
 export function getTitle(reportCount: number): Title {

@@ -139,12 +139,12 @@ export default function MyPage() {
                 const next = getNextTier(reportCount);
                 if (!next) return (
                   <p className="mt-1 text-xs font-medium text-amber-600">
-                    🌟 最高ランク到達！
+                    🌟 最高ランク到達！ <Link href="/titles" className="underline hover:text-amber-700">称号一覧</Link>
                   </p>
                 );
                 return (
                   <p className="mt-1 text-xs text-muted-foreground">
-                    あと{next.remaining}件で{next.emoji}{next.label}！
+                    あと{next.remaining}件で{next.emoji}{next.label}！ <Link href="/titles" className="underline hover:text-foreground">称号一覧</Link>
                   </p>
                 );
               })()}
