@@ -123,6 +123,9 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
         <p className="mt-2 text-sm text-muted-foreground">
           まだ釣果報告がありません。最初の報告者になりましょう！
         </p>
+        <p className="mt-1.5 text-xs text-muted-foreground/70">
+          🎣 投稿すると<a href="/titles" className="font-medium text-ocean-mid underline hover:text-ocean-deep">称号</a>がもらえます！投稿するほどランクアップ！
+        </p>
       </div>
     );
   }
