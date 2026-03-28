@@ -27,6 +27,7 @@ import {
 import { cn } from "@/lib/utils";
 import { SearchOverlayClient } from "./search-overlay-client";
 import { LineButton } from "./line-button";
+import { UserMenu } from "./user-menu";
 // メインナビ（常時表示：最大6個）
 const mainNavItems = [
   { href: "/spots", label: "スポット", icon: MapPin },
@@ -177,6 +178,7 @@ export function Header() {
         <div className="flex items-center gap-2">
           <SearchOverlayClient />
           <LineButton />
+          <UserMenu />
           <Link
             href="/favorites"
             className={cn(
