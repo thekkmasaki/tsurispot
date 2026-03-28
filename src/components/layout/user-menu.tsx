@@ -62,7 +62,15 @@ export function UserMenu() {
   const user = session.user;
 
   return (
-    <div ref={ref} className="relative">
+    <div ref={ref} className="relative flex items-center gap-1.5">
+      {(() => {
+        const title = getTitle(reportCount);
+        return (
+          <span className={`hidden sm:inline-flex items-center gap-0.5 rounded-full px-1.5 py-0.5 text-[10px] leading-none ${title.className}`}>
+            {title.emoji}{title.label}
+          </span>
+        );
+      })()}
       <button
         onClick={() => setOpen(!open)}
         aria-expanded={open}
