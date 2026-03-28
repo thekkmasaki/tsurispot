@@ -1,11 +1,11 @@
 import NextAuth from "next-auth";
 import type { NextAuthConfig } from "next-auth";
-import type { OIDCConfig } from "next-auth/providers";
-import { getUserByProvider, createUser } from "@/lib/auth-redis";
+import type { OAuthConfig } from "next-auth/providers";
+import { getUserByProvider, getUserById, createUser } from "@/lib/auth-redis";
 
 /**
- * LINE Login プロバイダー（Auth.js v5 カスタム）
- * LINE Login は OpenID Connect 準拠だが Auth.js 組み込みではないため手動定義
+ * LINE Login プロバイダー（Auth.js v5 OAuth）
+ * OIDC discovery との競合を避けるため type: "oauth" で手動エンドポイント指定
  */
 interface LineProfile {
   userId: string;
@@ -13,15 +13,14 @@ interface LineProfile {
   pictureUrl?: string;
 }
 
-function LineProvider(): OIDCConfig<LineProfile> {
+function LineProvider(): OAuthConfig<LineProfile> {
   return {
     id: "line",
     name: "LINE",
-    type: "oidc",
-    issuer: "https://access.line.me",
+    type: "oauth",
     authorization: {
       url: "https://access.line.me/oauth2/v2.1/authorize",
-      params: { scope: "profile openid" },
+      params: { scope: "profile" },
     },
     token: "https://api.line.me/oauth2/v2.1/token",
     userinfo: "https://api.line.me/v2/profile",
@@ -43,6 +42,7 @@ const config: NextAuthConfig = {
   session: { strategy: "jwt", maxAge: 30 * 24 * 60 * 60 }, // 30日
   pages: {
     signIn: "/login",
+    error: "/login",
   },
   callbacks: {
     async signIn({ user, account }) {
@@ -67,7 +67,7 @@ const config: NextAuthConfig = {
       return true;
     },
 
-    async jwt({ token, account, user }) {
+    async jwt({ token, account, user, trigger, session: updateData }) {
       // 初回ログイン時にトークンにTsuriSpot情報を埋め込み
       if (account && user?.id) {
         const existing = await getUserByProvider(
@@ -79,6 +79,17 @@ const config: NextAuthConfig = {
           token.nickname = existing.nickname;
           token.avatarUrl = existing.avatarUrl;
           token.provider = existing.provider;
+        }
+      }
+      // セッション更新時（ニックネーム変更など）にRedisから最新データを再取得
+      if (trigger === "update" && token.tsuriId) {
+        const fresh = await getUserById(token.tsuriId as string);
+        if (fresh) {
+          token.nickname = fresh.nickname;
+          token.avatarUrl = fresh.avatarUrl;
+        } else if (updateData && typeof updateData === "object" && "nickname" in updateData) {
+          // Redisフォールバック: クライアントから渡されたデータを使用
+          token.nickname = (updateData as { nickname: string }).nickname;
         }
       }
       return token;

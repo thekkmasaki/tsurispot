@@ -76,9 +76,14 @@ export default function MyPage() {
         body: JSON.stringify({ nickname: trimmed }),
       });
       if (res.ok) {
-        await update(); // セッションを更新
+        // JWTを強制更新してセッションに反映
+        await update({ nickname: trimmed });
+        setNickname("");
         setSaved(true);
         setTimeout(() => setSaved(false), 2000);
+      } else {
+        const data = await res.json().catch(() => ({}));
+        alert(data.error || "保存に失敗しました");
       }
     } catch { /* ignore */ }
     setSaving(false);
