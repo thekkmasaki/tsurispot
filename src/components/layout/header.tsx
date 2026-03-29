@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import { useFavorites } from "@/hooks/use-favorites";
+import { getTitle } from "@/lib/titles";
 import {
   Fish,
   Map,
@@ -27,6 +29,7 @@ import {
 import { cn } from "@/lib/utils";
 import { SearchOverlayClient } from "./search-overlay-client";
 import { LineButton } from "./line-button";
+import { UserMenu } from "./user-menu";
 // メインナビ（常時表示：最大6個）
 const mainNavItems = [
   { href: "/spots", label: "スポット", icon: MapPin },
@@ -138,10 +141,25 @@ function DropdownMenu() {
 
 export function Header() {
   const pathname = usePathname();
+  const { data: session } = useSession();
   const { count: favCount } = useFavorites();
+  const [reportCount, setReportCount] = useState(0);
+
+  useEffect(() => {
+    if (session?.user?.tsuriId) {
+      fetch("/api/user/catch-reports")
+        .then((r) => r.json())
+        .then((data) => setReportCount(data.reportCount || 0))
+        .catch(() => {});
+    }
+  }, [session?.user?.tsuriId]);
+
+  const headerBg = session?.user?.tsuriId
+    ? getTitle(reportCount).headerClass
+    : "from-white/95 via-white/90 to-sand-light/80";
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/40 bg-gradient-to-r from-white/95 via-white/90 to-sand-light/80 backdrop-blur-lg">
+    <header className={`sticky top-0 z-50 border-b border-border/40 bg-gradient-to-r ${headerBg} backdrop-blur-lg transition-colors duration-500`}>
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-ocean-mid to-ocean-deep text-white">
@@ -174,9 +192,10 @@ export function Header() {
           <DropdownMenu />
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex shrink-0 items-center gap-2">
           <SearchOverlayClient />
           <LineButton />
+          <UserMenu />
           <Link
             href="/favorites"
             className={cn(
@@ -194,6 +213,18 @@ export function Header() {
               </span>
             )}
           </Link>
+          {session?.user?.tsuriId && (() => {
+            const title = getTitle(reportCount);
+            return (
+              <Link
+                href="/titles"
+                className={`shrink-0 rounded-full px-3 py-1 text-xs font-bold shadow-md ring-2 ring-white/50 ${title.className}`}
+                title={`称号: ${title.emoji}${title.label}`}
+              >
+                {title.emoji}{title.label}
+              </Link>
+            );
+          })()}
         </div>
       </div>
     </header>
