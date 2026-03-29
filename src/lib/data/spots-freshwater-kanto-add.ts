@@ -166,7 +166,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "御岳渓谷駐車場（1,000円/日）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tamagawa-mitake.webp", imageAttribution: "Photo: Rory trains / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/tamagawa-mitake.webp"],
+    mainImageUrl: "", imageAttribution: "", images: ["/images/spots/wikimedia/tamagawa-mitake.webp"],
     rating: 4.1, reviewCount: 156, googleRating: 4.4, googleReviewCount: 546,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" },

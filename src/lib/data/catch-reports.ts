@@ -6,6 +6,7 @@ export interface CatchReport {
   spotName: string;
   fishName: string;
   userName: string;
+  userId?: string;
   comment: string;
   date: string; // "2026-02-22" 形式
   approved: boolean;
@@ -13,6 +14,7 @@ export interface CatchReport {
   sizeCm?: number;
   method?: string; // 釣法
   weather?: string; // 天候
+  reportCount?: number; // 投稿者の累計投稿数（称号表示用）
 }
 
 // サンプル釣果データ（承認済み）

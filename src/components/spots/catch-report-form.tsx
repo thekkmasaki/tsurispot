@@ -1,10 +1,12 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { Send, CheckCircle, AlertCircle, Camera, X } from "lucide-react";
+import { useState, useRef, useEffect } from "react";
+import { useSession } from "next-auth/react";
+import { Send, CheckCircle, AlertCircle, Camera, X, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
+import { getTitle, getNextTier } from "@/lib/titles";
 
 // そのスポットで釣れる魚名 + 汎用的な人気魚種
 const COMMON_FISH = ["アジ", "サバ", "イワシ", "メバル", "カサゴ", "シーバス", "クロダイ", "アオリイカ"];
@@ -54,10 +56,19 @@ interface CatchReportFormProps {
 }
 
 export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }: CatchReportFormProps) {
+  const { data: session } = useSession();
+  const isLoggedIn = !!session?.user?.tsuriId;
   const fishInputRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [userName, setUserName] = useState("");
+
+  // 認証時はニックネームを自動セット
+  useEffect(() => {
+    if (session?.user?.nickname && !userName) {
+      setUserName(session.user.nickname);
+    }
+  }, [session?.user?.nickname]); // eslint-disable-line react-hooks/exhaustive-deps
   const [fishName, setFishName] = useState("");
   const [date, setDate] = useState(() => {
     const d = new Date();
@@ -72,6 +83,11 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
   const [weather, setWeather] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const [rankUpInfo, setRankUpInfo] = useState<{
+    isRankUp: boolean;
+    newTitle?: { label: string; emoji: string; className: string };
+    nextTier?: { label: string; emoji: string; remaining: number } | null;
+  } | null>(null);
 
   const handlePhotoSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -168,6 +184,19 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
       const data = await res.json();
 
       if (res.ok && data.ok) {
+        // ランクアップ判定
+        if (data.newReportCount != null) {
+          const prevTitle = getTitle(data.newReportCount - 1);
+          const newTitle = getTitle(data.newReportCount);
+          const ranked = prevTitle.label !== newTitle.label;
+          setRankUpInfo({
+            isRankUp: ranked,
+            newTitle: ranked ? newTitle : undefined,
+            nextTier: getNextTier(data.newReportCount),
+          });
+        } else {
+          setRankUpInfo(null);
+        }
         setStatus("success");
         // フォームリセット
         setUserName("");
@@ -202,6 +231,75 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
   }
 
   if (status === "success") {
+    // ランクアップ演出
+    if (rankUpInfo?.isRankUp && rankUpInfo.newTitle) {
+      const { newTitle } = rankUpInfo;
+      return (
+        <Card className="relative mt-3 overflow-hidden border-amber-300 bg-gradient-to-b from-amber-50 to-white py-4">
+          <style>{`
+            @keyframes rankup-badge {
+              0% { transform: scale(0) rotate(-10deg); opacity: 0; }
+              60% { transform: scale(1.2) rotate(3deg); opacity: 1; }
+              80% { transform: scale(0.95) rotate(-1deg); }
+              100% { transform: scale(1) rotate(0deg); }
+            }
+            @keyframes rankup-glow {
+              0%, 100% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.3); }
+              50% { box-shadow: 0 0 40px rgba(251, 191, 36, 0.6), 0 0 60px rgba(251, 191, 36, 0.2); }
+            }
+            @keyframes confetti-fall {
+              0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+              100% { transform: translateY(120px) rotate(360deg); opacity: 0; }
+            }
+            .rankup-badge { animation: rankup-badge 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+            .rankup-glow { animation: rankup-glow 2s ease-in-out infinite; }
+            .confetti { position: absolute; width: 8px; height: 8px; border-radius: 2px; animation: confetti-fall 1.5s ease-in forwards; }
+          `}</style>
+          {/* 紙吹雪 */}
+          <div aria-hidden="true">
+            <div className="confetti" style={{ left: "10%", top: 0, background: "#f59e0b", animationDelay: "0s" }} />
+            <div className="confetti" style={{ left: "25%", top: 0, background: "#ec4899", animationDelay: "0.2s" }} />
+            <div className="confetti" style={{ left: "45%", top: 0, background: "#8b5cf6", animationDelay: "0.4s" }} />
+            <div className="confetti" style={{ left: "65%", top: 0, background: "#10b981", animationDelay: "0.1s" }} />
+            <div className="confetti" style={{ left: "80%", top: 0, background: "#3b82f6", animationDelay: "0.3s" }} />
+            <div className="confetti" style={{ left: "90%", top: 0, background: "#f43f5e", animationDelay: "0.5s" }} />
+          </div>
+          <CardContent className="relative z-10 px-4">
+            <div className="flex flex-col items-center text-center">
+              <div className="flex items-center gap-1.5 text-amber-600">
+                <Trophy className="size-5" />
+                <p className="text-sm font-bold tracking-wide">ランクアップ！</p>
+              </div>
+              <div className="rankup-badge rankup-glow mt-3 rounded-full px-5 py-2">
+                <span className={`inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-base ${newTitle.className}`}>
+                  {newTitle.emoji} {newTitle.label}
+                </span>
+              </div>
+              <p className="mt-3 text-sm text-amber-800">
+                おめでとうございます！称号が上がりました！
+              </p>
+              <p className="mt-1 text-xs text-muted-foreground">
+                ページを再読み込みすると釣果が表示されます。
+              </p>
+              <Button
+                onClick={() => {
+                  setStatus("idle");
+                  setIsOpen(false);
+                  setRankUpInfo(null);
+                }}
+                variant="ghost"
+                size="sm"
+                className="mt-3 text-amber-700 hover:text-amber-800"
+              >
+                閉じる
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
+      );
+    }
+
+    // 通常の成功画面（ランクアップなし）
     return (
       <Card className="mt-3 border-emerald-200 bg-emerald-50/50 py-4">
         <CardContent className="px-4">
@@ -211,13 +309,24 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
               <p className="font-medium text-emerald-800">
                 投稿ありがとうございます！
               </p>
-              <p className="mt-1 text-sm text-emerald-700">
-                ページを再読み込みすると表示されます。
-              </p>
+              {rankUpInfo?.nextTier ? (
+                <p className="mt-1 text-sm text-emerald-700">
+                  次の「{rankUpInfo.nextTier.emoji} {rankUpInfo.nextTier.label}」まであと{rankUpInfo.nextTier.remaining}件！
+                </p>
+              ) : rankUpInfo && !rankUpInfo.nextTier ? (
+                <p className="mt-1 text-sm text-emerald-700">
+                  最高ランクに到達しています！
+                </p>
+              ) : (
+                <p className="mt-1 text-sm text-emerald-700">
+                  ページを再読み込みすると表示されます。
+                </p>
+              )}
               <Button
                 onClick={() => {
                   setStatus("idle");
                   setIsOpen(false);
+                  setRankUpInfo(null);
                 }}
                 variant="ghost"
                 size="sm"
@@ -248,6 +357,8 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
               onChange={(e) => setUserName(e.target.value)}
               maxLength={20}
               required
+              readOnly={isLoggedIn}
+              className={isLoggedIn ? "bg-muted" : ""}
             />
           </div>
 
@@ -266,24 +377,42 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
                 }
               }
               // 現在選択中の魚名を配列で管理
+              const isBouzu = fishName === "ボウズ";
               const selected = fishName ? fishName.split("、").map(s => s.trim()).filter(Boolean) : [];
               const selectedSet = new Set(selected);
               const toggle = (name: string) => {
+                if (name === "ボウズ") {
+                  setFishName(isBouzu ? "" : "ボウズ");
+                  return;
+                }
+                // ボウズ選択中に魚を選んだらボウズ解除
+                const base = selected.filter(s => s !== "ボウズ" && s !== name);
                 if (selectedSet.has(name)) {
-                  setFishName(selected.filter(s => s !== name).join("、"));
+                  setFishName(base.join("、"));
                 } else {
-                  setFishName([...selected, name].join("、"));
+                  setFishName([...base, name].join("、"));
                 }
               };
               return buttons.length > 0 ? (
                 <div className="mb-1.5 flex flex-wrap gap-1">
+                  <button
+                    type="button"
+                    onClick={() => toggle("ボウズ")}
+                    className={`rounded-full border px-2.5 py-0.5 text-xs transition-colors ${
+                      isBouzu
+                        ? "border-amber-500 bg-amber-50 text-amber-700"
+                        : "border-muted-foreground/20 text-muted-foreground hover:border-amber-300 hover:bg-amber-50/50"
+                    }`}
+                  >
+                    ボウズ
+                  </button>
                   {buttons.map((name) => (
                     <button
                       key={name}
                       type="button"
                       onClick={() => toggle(name)}
                       className={`rounded-full border px-2.5 py-0.5 text-xs transition-colors ${
-                        selectedSet.has(name)
+                        selectedSet.has(name) && !isBouzu
                           ? "border-emerald-500 bg-emerald-50 text-emerald-700"
                           : "border-muted-foreground/20 text-muted-foreground hover:border-emerald-300 hover:bg-emerald-50/50"
                       }`}
@@ -372,25 +501,27 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
             />
           </div>
 
-          {/* サイズ入力 */}
-          <div>
-            <label htmlFor="cr-size" className="mb-1 block text-sm font-medium">
-              サイズ（任意）
-            </label>
-            <div className="flex items-center gap-2">
-              <Input
-                id="cr-size"
-                type="number"
-                placeholder="例: 25"
-                value={sizeCm}
-                onChange={(e) => setSizeCm(e.target.value)}
-                min={1}
-                max={300}
-                className="w-28"
-              />
-              <span className="text-sm text-muted-foreground">cm</span>
+          {/* サイズ入力（ボウズ時は非表示） */}
+          {fishName !== "ボウズ" && (
+            <div>
+              <label htmlFor="cr-size" className="mb-1 block text-sm font-medium">
+                サイズ（任意）
+              </label>
+              <div className="flex items-center gap-2">
+                <Input
+                  id="cr-size"
+                  type="number"
+                  placeholder="例: 25"
+                  value={sizeCm}
+                  onChange={(e) => setSizeCm(e.target.value)}
+                  min={1}
+                  max={300}
+                  className="w-28"
+                />
+                <span className="text-sm text-muted-foreground">cm</span>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* 釣法セレクト */}
           <div>

@@ -1,11 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { uploadToS3, deleteFromS3 } from "@/lib/s3";
 import { moderateImage } from "@/lib/rekognition";
+import { auth } from "@/lib/auth";
 
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB（クライアント側で自動圧縮済み、iPhone対応）
 
 export async function POST(request: NextRequest) {
+  // 認証チェック: ログインユーザーのみアップロード可
+  const session = await auth();
+  if (!session?.user?.tsuriId) {
+    return NextResponse.json({ error: "ログインが必要です" }, { status: 401 });
+  }
+
   const formData = await request.formData();
   const file = formData.get("file") as File | null;
 
