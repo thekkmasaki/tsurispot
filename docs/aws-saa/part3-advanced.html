@@ -1,0 +1,1954 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWS SAA-C03 完全攻略ガイド Part 3: 応用・実戦編 〜ツリスポで学ぶAWS〜</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif; line-height: 1.9; color: #1e293b; background: #f8fafc; }
+.container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+h1 { font-size: 2rem; color: #0c4a6e; border-bottom: 3px solid #0ea5e9; padding-bottom: 0.5rem; margin: 2rem 0 1rem; }
+h2 { font-size: 1.6rem; color: #0369a1; margin: 3rem 0 1rem; border-left: 4px solid #0ea5e9; padding-left: 0.8rem; }
+h3 { font-size: 1.25rem; color: #334155; margin: 2rem 0 0.8rem; }
+h4 { font-size: 1.05rem; color: #475569; margin: 1.2rem 0 0.5rem; }
+p { margin-bottom: 1rem; }
+ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+li { margin-bottom: 0.3rem; }
+.header-bar { background: linear-gradient(135deg, #0c4a6e, #0369a1); color: #fff; padding: 2rem 1.5rem; text-align: center; }
+.header-bar h1 { color: #fff; border: none; margin: 0; font-size: 1.8rem; }
+.header-bar p { color: #bae6fd; margin: 0.5rem 0 0; }
+.nav { display: flex; gap: 0.8rem; margin: 1.5rem 0; flex-wrap: wrap; }
+.nav a { background: #e2e8f0; color: #334155; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+.nav a.current { background: #0c4a6e; color: #fff; }
+.nav a:hover { background: #0ea5e9; color: #fff; }
+.toc { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem 2rem; margin: 1.5rem 0; }
+.toc h3 { margin-top: 0; }
+.toc ul { list-style: none; padding: 0; }
+.toc li { margin: 0.4rem 0; padding-left: 1rem; border-left: 2px solid #e2e8f0; }
+.toc a { color: #0369a1; text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.tsurispot { background: #f0fdf4; border: 1px solid #86efac; border-radius: 12px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+.tsurispot::before { content: '\1F3A3 ツリスポで理解する'; display: block; font-weight: 700; color: #166534; margin-bottom: 0.5rem; font-size: 1.05rem; }
+.exam { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 12px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+.exam::before { content: '\1F4DD 試験に出る！'; display: block; font-weight: 700; color: #92400e; margin-bottom: 0.5rem; font-size: 1.05rem; }
+.point { background: #eff6ff; border: 1px solid #93c5fd; border-radius: 12px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+.point::before { content: '\1F4A1 重要ポイント'; display: block; font-weight: 700; color: #1d4ed8; margin-bottom: 0.5rem; font-size: 1.05rem; }
+.warn { background: #fef2f2; border: 1px solid #fca5a5; border-radius: 12px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+.warn::before { content: '\26A0\FE0F 注意'; display: block; font-weight: 700; color: #dc2626; margin-bottom: 0.5rem; }
+.diagram { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; text-align: center; overflow-x: auto; }
+.diagram figcaption { font-size: 0.85rem; color: #64748b; margin-top: 0.8rem; }
+table { width: 100%; border-collapse: collapse; margin: 1.2rem 0; font-size: 0.9rem; }
+th { background: #0c4a6e; color: #fff; padding: 0.7rem 0.8rem; text-align: left; }
+td { padding: 0.7rem 0.8rem; border-bottom: 1px solid #e2e8f0; }
+tr:nth-child(even) { background: #f8fafc; }
+code { background: #f1f5f9; padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.88em; color: #be185d; }
+pre { background: #1e293b; color: #e2e8f0; padding: 1.2rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; font-size: 0.85rem; line-height: 1.6; }
+.chapter-num { display: inline-block; background: #0ea5e9; color: #fff; width: 2rem; height: 2rem; line-height: 2rem; text-align: center; border-radius: 50%; font-weight: 700; margin-right: 0.5rem; font-size: 0.9rem; }
+.summary-box { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border: 2px solid #0ea5e9; border-radius: 12px; padding: 1.5rem; margin: 2rem 0; }
+.summary-box h4 { color: #0c4a6e; margin-top: 0; }
+.quiz { background: #faf5ff; border: 1px solid #d8b4fe; border-radius: 12px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+.quiz::before { content: '\2753 確認クイズ'; display: block; font-weight: 700; color: #7c3aed; margin-bottom: 0.5rem; }
+.quiz details { margin-top: 0.5rem; }
+.quiz summary { cursor: pointer; color: #7c3aed; font-weight: 600; }
+.analogy { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 12px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+.analogy::before { content: '\1F3E0 身近な例えで理解'; display: block; font-weight: 700; color: #c2410c; margin-bottom: 0.5rem; }
+.question-card { background: #fff; border: 2px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; }
+.question-card h4 { color: #0c4a6e; margin-top: 0; }
+.question-card .choices { list-style: upper-alpha; margin: 1rem 0 1rem 1.5rem; }
+.question-card .choices li { margin: 0.5rem 0; padding: 0.3rem 0; }
+.question-card details { margin-top: 1rem; border-top: 1px solid #e2e8f0; padding-top: 1rem; }
+.question-card summary { cursor: pointer; color: #0369a1; font-weight: 700; }
+.question-card .answer { margin-top: 0.5rem; }
+.question-card .answer .correct { color: #166534; font-weight: 700; }
+</style>
+</head>
+<body>
+<div class="header-bar">
+  <h1>AWS SAA-C03 完全攻略ガイド</h1>
+  <p>Part 3: 応用・実戦編（第13章〜第18章）〜ツリスポで学ぶAWS〜</p>
+</div>
+<div class="container">
+<div class="nav">
+  <a href="part1-foundations.html">Part 1: 基礎編</a>
+  <a href="part2-architecture.html">Part 2: 設計編</a>
+  <a href="part3-advanced.html" class="current">Part 3: 応用・実戦編</a>
+</div>
+<div class="toc">
+  <h3>目次 - Part 3: 応用・実戦編</h3>
+  <ul>
+    <li><a href="#ch13"><span class="chapter-num">13</span> モニタリングと運用</a></li>
+    <li><a href="#ch14"><span class="chapter-num">14</span> メッセージングとデカップリング</a></li>
+    <li><a href="#ch15"><span class="chapter-num">15</span> データ分析サービス</a></li>
+    <li><a href="#ch16"><span class="chapter-num">16</span> 移行と転送</a></li>
+    <li><a href="#ch17"><span class="chapter-num">17</span> コスト最適化とWell-Architected Framework</a></li>
+    <li><a href="#ch18"><span class="chapter-num">18</span> 模擬問題50問</a></li>
+  </ul>
+</div>
+
+<h1 id="ch13"><span class="chapter-num">13</span> モニタリングと運用 〜システムの健康状態を監視する〜</h1>
+
+<p>AWSで本番環境を運用する上で最も重要なことの一つが「モニタリング（監視）」です。サーバーが落ちていることに気づかない、CPU使用率が100%に張り付いているのに誰も知らない――そんな事態を防ぐのが、この章で学ぶサービス群です。</p>
+
+<div class="analogy">
+<p>モニタリングは「車のダッシュボード」に例えられます。速度計、燃料計、エンジン警告灯など、車の状態を一目で確認できますよね。AWSのモニタリングサービスは、システム全体のダッシュボードを提供し、問題があれば警告を鳴らしてくれます。</p>
+</div>
+
+<h2>13.1 CloudWatch 〜AWSの統合監視サービス〜</h2>
+
+<p>Amazon CloudWatchは、AWSリソースとアプリケーションの監視サービスです。メトリクス（数値データ）の収集、ログの管理、アラームの設定など、監視に関するほぼすべてを担います。</p>
+
+<h3>13.1.1 メトリクス（Metrics）</h3>
+
+<p>メトリクスとは、時系列で記録される数値データのことです。「EC2のCPU使用率」「ALBのリクエスト数」「RDSの接続数」などがメトリクスにあたります。</p>
+
+<h4>標準メトリクス vs カスタムメトリクス</h4>
+
+<table>
+<tr><th>種類</th><th>説明</th><th>例</th><th>費用</th></tr>
+<tr><td><strong>標準メトリクス</strong></td><td>AWSが自動で収集</td><td>EC2: CPUUtilization, NetworkIn/Out<br>ALB: RequestCount, TargetResponseTime</td><td>無料</td></tr>
+<tr><td><strong>カスタムメトリクス</strong></td><td>ユーザーが独自に送信</td><td>メモリ使用率、ディスク使用率、アプリ固有の数値</td><td>有料（$0.30/メトリクス/月）</td></tr>
+</table>
+
+<div class="exam">
+<p><strong>EC2の「メモリ使用率」は標準メトリクスに含まれない！</strong> EC2のCPU使用率は自動で取得できますが、メモリ使用率はOSの中の情報なのでCloudWatch Agentをインストールしてカスタムメトリクスとして送信する必要があります。これは超頻出問題です。</p>
+</div>
+
+<h4>メトリクスの基本概念</h4>
+<ul>
+<li><strong>名前空間（Namespace）</strong>: メトリクスのグループ分け。例: <code>AWS/EC2</code>、<code>AWS/RDS</code>、<code>Custom/TsuriSpot</code></li>
+<li><strong>ディメンション（Dimension）</strong>: メトリクスを細分化する属性。例: <code>InstanceId=i-12345</code> で特定のEC2を指定</li>
+<li><strong>統計（Statistics）</strong>: Average（平均）、Sum（合計）、Maximum、Minimum、SampleCount、pNN（パーセンタイル）</li>
+<li><strong>期間（Period）</strong>: データの集計間隔。標準5分、詳細モニタリング（有料）で1分</li>
+</ul>
+
+<h3>13.1.2 CloudWatch Alarms</h3>
+
+<p>メトリクスが閾値（しきいち）を超えたときに通知やアクションを実行します。</p>
+
+<p>アラームの3つの状態:</p>
+<ul>
+<li><strong>OK</strong>: 閾値の範囲内（正常）</li>
+<li><strong>ALARM</strong>: 閾値を超えた（異常）</li>
+<li><strong>INSUFFICIENT_DATA</strong>: データ不足で判定不可</li>
+</ul>
+
+<p>発動時のアクション:</p>
+<ul>
+<li><strong>SNS通知</strong>: メール・SMSで関係者に通知</li>
+<li><strong>Auto Scalingアクション</strong>: インスタンスを増減</li>
+<li><strong>EC2アクション</strong>: 停止・終了・再起動・復旧</li>
+</ul>
+
+<h4>コンポジットアラーム</h4>
+<p>複数のアラームをAND/OR条件で組み合わせた上位アラーム。「CPU 80%超え AND メモリ 70%超え」のときだけ通知、のように設定でき、アラームの嵐を防げます。</p>
+
+<div class="tsurispot">
+<p><strong>ツリスポのApp Runner監視</strong>: App RunnerのCPU使用率が80%を超えたらCloudWatch Alarm → SNS → 運営者メールに通知。コンポジットアラームで「CPU高 AND メモリ高」のときだけ緊急通知にすれば、一時的なスパイクによる誤報を減らせます。</p>
+</div>
+
+<h3>13.1.3 CloudWatch Logs</h3>
+
+<p>アプリケーションやAWSサービスのログを集中管理するサービスです。</p>
+
+<ul>
+<li><strong>ロググループ（Log Group）</strong>: ログの大きなまとまり。アプリごとに1つ（例: <code>/app-runner/tsurispot</code>）</li>
+<li><strong>ログストリーム（Log Stream）</strong>: ロググループ内の個別ログの流れ。インスタンスごとに1つ</li>
+<li><strong>保持期間</strong>: 1日〜10年、または無期限</li>
+</ul>
+
+<h4>主要機能</h4>
+<ul>
+<li><strong>メトリクスフィルター</strong>: ログから特定パターン（"ERROR"等）を検出 → メトリクス化 → アラーム設定可能</li>
+<li><strong>Logs Insights</strong>: SQLライクなクエリでログ分析</li>
+<li><strong>S3エクスポート</strong>: 長期保管用（最大12時間の遅延あり）</li>
+<li><strong>サブスクリプションフィルター</strong>: リアルタイムで他サービス（Lambda、Kinesis Data Firehose、OpenSearch）に転送</li>
+</ul>
+
+<div class="exam">
+<p><strong>S3エクスポート vs サブスクリプションフィルター</strong>: S3エクスポートは最大12時間遅延。リアルタイム処理にはサブスクリプションフィルター → Kinesis Data Firehose → S3 を使う。「リアルタイム」が出たらサブスクリプションフィルター！</p>
+</div>
+
+<h3>13.1.4 CloudWatch Agent</h3>
+
+<p>EC2やオンプレミスサーバーにインストールし、OS内部の情報を取得してCloudWatchに送信するエージェントです。</p>
+
+<ul>
+<li><strong>カスタムメトリクス</strong>: メモリ使用率、ディスク使用率、スワップ使用率</li>
+<li><strong>ログ収集</strong>: アプリケーションログ、OSログをCloudWatch Logsに転送</li>
+</ul>
+
+<div class="exam">
+<p><strong>定番問題</strong>:「EC2のメモリ使用率を監視したい」→ CloudWatch Agent。「アプリログをCloudWatch Logsに送りたい」→ CloudWatch Agent。エージェントが必要な場面は必ず出題されます。</p>
+</div>
+
+<h3>13.1.5 その他のCloudWatch機能</h3>
+<ul>
+<li><strong>Dashboards</strong>: メトリクス一覧表示。リージョン横断で表示可能</li>
+<li><strong>Contributor Insights</strong>: ログからTop-Nの要因を特定（最もエラーを出すIPなど）</li>
+<li><strong>Metric Streams</strong>: メトリクスをKinesis Data Firehose経由で外部（Datadog等）に配信</li>
+</ul>
+
+<div class="diagram">
+<svg viewBox="0 0 780 320" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <defs><marker id="a1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/></marker></defs>
+  <rect x="15" y="120" width="100" height="55" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="65" y="143" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">App / EC2</text>
+  <text x="65" y="162" text-anchor="middle" font-size="10" fill="#3b82f6">ログ出力</text>
+  <rect x="150" y="120" width="95" height="55" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="197" y="143" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">CW Agent</text>
+  <text x="197" y="162" text-anchor="middle" font-size="10" fill="#b45309">収集・転送</text>
+  <rect x="280" y="100" width="120" height="95" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="340" y="128" text-anchor="middle" font-size="13" fill="#1e40af" font-weight="bold">CloudWatch</text>
+  <text x="340" y="148" text-anchor="middle" font-size="13" fill="#1e40af" font-weight="bold">Logs</text>
+  <text x="340" y="172" text-anchor="middle" font-size="10" fill="#3b82f6">ロググループ</text>
+  <text x="340" y="188" text-anchor="middle" font-size="10" fill="#3b82f6">ログストリーム</text>
+  <rect x="460" y="15" width="130" height="42" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="525" y="33" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">メトリクスフィルター</text>
+  <text x="525" y="49" text-anchor="middle" font-size="9" fill="#b45309">パターン検出→数値化</text>
+  <rect x="640" y="15" width="110" height="42" rx="8" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+  <text x="695" y="33" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">Alarm → SNS</text>
+  <text x="695" y="49" text-anchor="middle" font-size="9" fill="#dc2626">メール通知</text>
+  <rect x="460" y="80" width="130" height="42" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <text x="525" y="98" text-anchor="middle" font-size="10" fill="#166534" font-weight="bold">Logs Insights</text>
+  <text x="525" y="114" text-anchor="middle" font-size="9" fill="#15803d">SQLクエリ分析</text>
+  <rect x="460" y="145" width="130" height="42" rx="8" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="525" y="163" text-anchor="middle" font-size="10" fill="#6d28d9" font-weight="bold">サブスクリプション</text>
+  <text x="525" y="179" text-anchor="middle" font-size="9" fill="#7c3aed">リアルタイム転送</text>
+  <rect x="640" y="145" width="110" height="42" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+  <text x="695" y="163" text-anchor="middle" font-size="10" fill="#be185d" font-weight="bold">Lambda/Firehose</text>
+  <text x="695" y="179" text-anchor="middle" font-size="9" fill="#be185d">→ S3/OpenSearch</text>
+  <rect x="460" y="210" width="130" height="42" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <text x="525" y="228" text-anchor="middle" font-size="10" fill="#166534" font-weight="bold">S3エクスポート</text>
+  <text x="525" y="244" text-anchor="middle" font-size="9" fill="#15803d">最大12h遅延</text>
+  <rect x="640" y="210" width="110" height="42" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="695" y="236" text-anchor="middle" font-size="12" fill="#92400e" font-weight="bold">S3</text>
+  <line x1="115" y1="148" x2="150" y2="148" stroke="#64748b" stroke-width="2" marker-end="url(#a1)"/>
+  <line x1="245" y1="148" x2="280" y2="148" stroke="#64748b" stroke-width="2" marker-end="url(#a1)"/>
+  <line x1="400" y1="120" x2="460" y2="36" stroke="#64748b" stroke-width="1.5" marker-end="url(#a1)"/>
+  <line x1="400" y1="135" x2="460" y2="101" stroke="#64748b" stroke-width="1.5" marker-end="url(#a1)"/>
+  <line x1="400" y1="158" x2="460" y2="166" stroke="#64748b" stroke-width="1.5" marker-end="url(#a1)"/>
+  <line x1="400" y1="180" x2="460" y2="231" stroke="#64748b" stroke-width="1.5" marker-end="url(#a1)"/>
+  <line x1="590" y1="36" x2="640" y2="36" stroke="#64748b" stroke-width="1.5" marker-end="url(#a1)"/>
+  <line x1="590" y1="166" x2="640" y2="166" stroke="#64748b" stroke-width="1.5" marker-end="url(#a1)"/>
+  <line x1="590" y1="231" x2="640" y2="231" stroke="#64748b" stroke-width="1.5" marker-end="url(#a1)"/>
+</svg>
+<figcaption>図13-1: CloudWatch Logsのデータフロー</figcaption>
+</div>
+
+<h2>13.2 CloudTrail 〜誰が何をしたかの記録〜</h2>
+
+<p>AWS CloudTrailは、AWSアカウント内で「誰が」「いつ」「どのAPI操作を行ったか」を記録する監査ログサービスです。CloudWatchが「システムの状態」を監視するのに対し、CloudTrailは「人やプログラムの操作」を記録します。</p>
+
+<div class="analogy">
+<p>CloudTrailは「監視カメラの録画」です。オフィスの出入り口のカメラが誰がいつ入退室したかを記録するように、AWSの全API操作を記録します。何か問題が起きたとき「誰がやったのか」を特定するために不可欠です。</p>
+</div>
+
+<h3>イベントの種類</h3>
+
+<table>
+<tr><th>イベント種類</th><th>内容</th><th>デフォルト</th><th>例</th></tr>
+<tr><td><strong>管理イベント</strong></td><td>リソースの作成・変更・削除</td><td>有効（無料）</td><td>EC2起動、IAMロール作成</td></tr>
+<tr><td><strong>データイベント</strong></td><td>リソース内のデータ操作</td><td>無効（有料）</td><td>S3のGet/Put、Lambda実行</td></tr>
+<tr><td><strong>インサイトイベント</strong></td><td>異常なAPIアクティビティ検出</td><td>無効（有料）</td><td>大量のTerminateInstances</td></tr>
+</table>
+
+<div class="exam">
+<p><strong>CloudTrailのログ配信先</strong>: S3バケットに保存。CloudWatch Logsにも配信可能で、「ルートユーザーがログインしたら通知」のようなセキュリティ監視に使えます。ログの整合性チェック機能で改ざん検知もできます。</p>
+</div>
+
+<div class="tsurispot">
+<p><strong>ツリスポのCloudTrail活用</strong>: 「誰がS3バケットの権限を変更したか」「いつApp Runnerが更新されたか」が全て記録されます。不正アクセス調査や、昨日のデプロイで何が変わったかの振り返りにも使えます。</p>
+</div>
+
+<h2>13.3 EventBridge 〜イベント駆動の心臓部〜</h2>
+
+<p>Amazon EventBridge（旧CloudWatch Events）は、イベントを検知しターゲットにルーティングする「イベントバス」です。</p>
+
+<div class="analogy">
+<p>EventBridgeは「郵便局の仕分けシステム」です。差出人（AWSサービスやアプリ）からの手紙（イベント）を、宛先ルールに基づいて届け先（Lambda、SQSなど）に仕分けます。</p>
+</div>
+
+<h3>イベントバスの種類</h3>
+<ul>
+<li><strong>デフォルトイベントバス</strong>: AWSサービスからのイベント</li>
+<li><strong>パートナーイベントバス</strong>: SaaSパートナーからのイベント</li>
+<li><strong>カスタムイベントバス</strong>: 自作アプリからのイベント</li>
+</ul>
+
+<h3>ルールとターゲット</h3>
+<ul>
+<li><strong>イベントパターン</strong>: 特定イベントに反応（EC2停止、S3オブジェクト作成など）</li>
+<li><strong>スケジュール</strong>: cron式（<code>cron(0 9 * * ? *)</code> = 毎日UTC 9:00）やrate式で定期実行</li>
+</ul>
+
+<p>ターゲット: Lambda、SQS、SNS、Step Functions、ECSタスク等150以上のサービス</p>
+
+<div class="exam">
+<p><strong>EventBridgeのスキーマレジストリ</strong>: イベントの構造（スキーマ）を自動検出・保存する機能。開発者がイベント形式を調べる手間を省けます。</p>
+</div>
+
+<div class="diagram">
+<svg viewBox="0 0 760 270" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <defs><marker id="a2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/></marker></defs>
+  <rect x="10" y="15" width="125" height="38" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="72" y="39" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">EC2 状態変化</text>
+  <rect x="10" y="65" width="125" height="38" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="72" y="89" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">S3 Put/Delete</text>
+  <rect x="10" y="115" width="125" height="38" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <text x="72" y="139" text-anchor="middle" font-size="11" fill="#166534" font-weight="bold">カスタムアプリ</text>
+  <rect x="10" y="165" width="125" height="38" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="72" y="189" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">cron スケジュール</text>
+  <rect x="220" y="45" width="155" height="140" rx="12" fill="#ede9fe" stroke="#8b5cf6" stroke-width="3"/>
+  <text x="297" y="90" text-anchor="middle" font-size="15" fill="#6d28d9" font-weight="bold">EventBridge</text>
+  <text x="297" y="115" text-anchor="middle" font-size="11" fill="#7c3aed">イベントバス</text>
+  <text x="297" y="138" text-anchor="middle" font-size="11" fill="#7c3aed">+ ルール</text>
+  <text x="297" y="160" text-anchor="middle" font-size="10" fill="#7c3aed">(フィルタリング)</text>
+  <rect x="470" y="5" width="115" height="36" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+  <text x="527" y="28" text-anchor="middle" font-size="11" fill="#be185d" font-weight="bold">Lambda</text>
+  <rect x="470" y="55" width="115" height="36" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="527" y="78" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">SQS</text>
+  <rect x="470" y="105" width="115" height="36" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <text x="527" y="128" text-anchor="middle" font-size="11" fill="#166534" font-weight="bold">SNS → Email</text>
+  <rect x="470" y="155" width="115" height="36" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="527" y="178" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">Step Functions</text>
+  <rect x="470" y="205" width="115" height="36" rx="8" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+  <text x="527" y="228" text-anchor="middle" font-size="11" fill="#dc2626" font-weight="bold">ECS タスク</text>
+  <line x1="135" y1="34" x2="220" y2="85" stroke="#64748b" stroke-width="1.5" marker-end="url(#a2)"/>
+  <line x1="135" y1="84" x2="220" y2="105" stroke="#64748b" stroke-width="1.5" marker-end="url(#a2)"/>
+  <line x1="135" y1="134" x2="220" y2="125" stroke="#64748b" stroke-width="1.5" marker-end="url(#a2)"/>
+  <line x1="135" y1="184" x2="220" y2="155" stroke="#64748b" stroke-width="1.5" marker-end="url(#a2)"/>
+  <line x1="375" y1="85" x2="470" y2="23" stroke="#64748b" stroke-width="1.5" marker-end="url(#a2)"/>
+  <line x1="375" y1="100" x2="470" y2="73" stroke="#64748b" stroke-width="1.5" marker-end="url(#a2)"/>
+  <line x1="375" y1="118" x2="470" y2="123" stroke="#64748b" stroke-width="1.5" marker-end="url(#a2)"/>
+  <line x1="375" y1="138" x2="470" y2="173" stroke="#64748b" stroke-width="1.5" marker-end="url(#a2)"/>
+  <line x1="375" y1="160" x2="470" y2="223" stroke="#64748b" stroke-width="1.5" marker-end="url(#a2)"/>
+</svg>
+<figcaption>図13-2: EventBridgeのイベントバスパターン</figcaption>
+</div>
+
+<div class="tsurispot">
+<p><strong>ツリスポの自動化</strong>: EventBridgeで毎週月曜朝9時にLambda起動 → microCMS APIで記事の公開状態を自動チェック。App Runnerデプロイ完了イベント → SNS → Slack通知。手作業ゼロの運用自動化が実現できます。</p>
+</div>
+
+<h2>13.4 X-Ray 〜分散トレーシング〜</h2>
+
+<p>AWS X-Rayは、マイクロサービスでリクエストが複数サービスを通過する様子を可視化する「分散トレーシング」サービスです。API Gateway → Lambda → DynamoDB のどこで遅延が発生しているかを特定できます。</p>
+
+<div class="exam">
+<p><strong>X-Rayの出題キーワード</strong>:「レイテンシの原因特定」「分散アプリのデバッグ」「サービスマップ」「トレース」「ボトルネック」→ 全てX-Ray。</p>
+</div>
+
+<h2>13.5 Config / Trusted Advisor / Health Dashboard</h2>
+
+<h3>AWS Config</h3>
+<p>リソースの設定変更を記録し、コンプライアンスルールへの準拠を評価。「S3がパブリックでないか」「EC2にタグがあるか」を自動チェックします。</p>
+
+<div class="point">
+<p><strong>CloudTrail vs Config</strong>: CloudTrail=「誰が何をした」（API操作ログ）、Config=「設定がどう変わった、正しいか」（設定変更履歴+評価）。</p>
+</div>
+
+<h3>Trusted Advisor</h3>
+<p>5カテゴリでベストプラクティスを提案: コスト最適化/パフォーマンス/セキュリティ/耐障害性/サービス制限。</p>
+
+<div class="warn">
+<p>全チェック項目は<strong>Business以上のサポートプラン</strong>が必要。Basic/Developerでは一部のみ。</p>
+</div>
+
+<h3>Health Dashboard</h3>
+<ul>
+<li><strong>Service Health</strong>: AWSサービス全体の稼働状況</li>
+<li><strong>Your Account Health</strong>: 自分のアカウントに影響するイベント通知</li>
+</ul>
+
+<div class="diagram">
+<svg viewBox="0 0 760 310" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <text x="380" y="22" text-anchor="middle" font-size="14" fill="#0c4a6e" font-weight="bold">モニタリング・運用サービス全体図</text>
+  <rect x="15" y="40" width="165" height="110" rx="10" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="97" y="65" text-anchor="middle" font-size="13" fill="#1e40af" font-weight="bold">CloudWatch</text>
+  <text x="97" y="85" text-anchor="middle" font-size="10" fill="#3b82f6">メトリクス / ログ</text>
+  <text x="97" y="102" text-anchor="middle" font-size="10" fill="#3b82f6">アラーム / ダッシュボード</text>
+  <text x="97" y="140" text-anchor="middle" font-size="9" fill="#64748b" font-style="italic">「今の状態は？」</text>
+  <rect x="200" y="40" width="165" height="110" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="282" y="65" text-anchor="middle" font-size="13" fill="#92400e" font-weight="bold">CloudTrail</text>
+  <text x="282" y="85" text-anchor="middle" font-size="10" fill="#b45309">API操作ログ / 監査</text>
+  <text x="282" y="102" text-anchor="middle" font-size="10" fill="#b45309">整合性チェック</text>
+  <text x="282" y="140" text-anchor="middle" font-size="9" fill="#64748b" font-style="italic">「誰が何をした？」</text>
+  <rect x="385" y="40" width="165" height="110" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="467" y="65" text-anchor="middle" font-size="13" fill="#6d28d9" font-weight="bold">EventBridge</text>
+  <text x="467" y="85" text-anchor="middle" font-size="10" fill="#7c3aed">イベント駆動</text>
+  <text x="467" y="102" text-anchor="middle" font-size="10" fill="#7c3aed">スケジュール(cron)</text>
+  <text x="467" y="140" text-anchor="middle" font-size="9" fill="#64748b" font-style="italic">「何か起きたら実行」</text>
+  <rect x="570" y="40" width="165" height="110" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+  <text x="652" y="65" text-anchor="middle" font-size="13" fill="#be185d" font-weight="bold">X-Ray</text>
+  <text x="652" y="85" text-anchor="middle" font-size="10" fill="#db2777">分散トレーシング</text>
+  <text x="652" y="102" text-anchor="middle" font-size="10" fill="#db2777">サービスマップ</text>
+  <text x="652" y="140" text-anchor="middle" font-size="9" fill="#64748b" font-style="italic">「どこが遅い？」</text>
+  <rect x="15" y="175" width="165" height="100" rx="10" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <text x="97" y="200" text-anchor="middle" font-size="13" fill="#166534" font-weight="bold">AWS Config</text>
+  <text x="97" y="220" text-anchor="middle" font-size="10" fill="#15803d">設定記録 / 評価</text>
+  <text x="97" y="260" text-anchor="middle" font-size="9" fill="#64748b" font-style="italic">「設定は正しい？」</text>
+  <rect x="200" y="175" width="165" height="100" rx="10" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+  <text x="282" y="200" text-anchor="middle" font-size="13" fill="#c2410c" font-weight="bold">Trusted Advisor</text>
+  <text x="282" y="220" text-anchor="middle" font-size="10" fill="#ea580c">5カテゴリBP</text>
+  <text x="282" y="260" text-anchor="middle" font-size="9" fill="#64748b" font-style="italic">「改善点はある？」</text>
+  <rect x="385" y="175" width="165" height="100" rx="10" fill="#f0f9ff" stroke="#38bdf8" stroke-width="2"/>
+  <text x="467" y="200" text-anchor="middle" font-size="13" fill="#0369a1" font-weight="bold">Health Dashboard</text>
+  <text x="467" y="220" text-anchor="middle" font-size="10" fill="#0284c7">サービス / アカウント</text>
+  <text x="467" y="260" text-anchor="middle" font-size="9" fill="#64748b" font-style="italic">「AWS側は大丈夫？」</text>
+</svg>
+<figcaption>図13-3: モニタリング・運用サービスの全体像</figcaption>
+</div>
+
+<div class="summary-box">
+<h4>第13章まとめ</h4>
+<ul>
+<li><strong>CloudWatch</strong>: メトリクス + ログ + アラームの統合監視</li>
+<li>EC2の<strong>メモリ使用率</strong>はCloudWatch Agent必須（標準メトリクスに含まれない）</li>
+<li>ログのリアルタイム転送は<strong>サブスクリプションフィルター</strong>。S3エクスポートは最大12h遅延</li>
+<li><strong>CloudTrail</strong> = API操作ログ（誰が何をしたか）</li>
+<li><strong>EventBridge</strong> = イベント駆動 + cron スケジュール</li>
+<li><strong>X-Ray</strong> = 分散トレーシング（ボトルネック特定）</li>
+<li><strong>Config</strong> = リソース設定の記録・評価（CloudTrailとは別物）</li>
+<li><strong>Trusted Advisor</strong> = 5カテゴリのBPチェック（Business以上で全機能）</li>
+</ul>
+</div>
+
+<div class="quiz">
+<p><strong>Q1.</strong> EC2のメモリ使用率を監視するのに必要なものは？</p>
+<details><summary>答えを見る</summary><p>CloudWatch Agentをインストールしカスタムメトリクスとして送信。メモリはOS内部情報のため標準メトリクスでは取得不可。</p></details>
+</div>
+<div class="quiz">
+<p><strong>Q2.</strong> CloudWatch Logsをリアルタイムで処理するには？</p>
+<details><summary>答えを見る</summary><p>サブスクリプションフィルター → Kinesis Data Firehose → S3/Lambda/OpenSearch。S3エクスポートは最大12h遅延で不適切。</p></details>
+</div>
+<div class="quiz">
+<p><strong>Q3.</strong> 「誰がS3をパブリックにしたか」を調べるサービスは？</p>
+<details><summary>答えを見る</summary><p>CloudTrail。API操作ログからPutBucketPolicy等の呼び出し元を特定できる。</p></details>
+</div>
+<div class="quiz">
+<p><strong>Q4.</strong> CloudWatch / CloudTrail / Config の違いを一言ずつで。</p>
+<details><summary>答えを見る</summary><p>CloudWatch=「今の状態は？」、CloudTrail=「誰が何をした？」、Config=「設定は正しい？」</p></details>
+</div>
+
+<h1 id="ch14"><span class="chapter-num">14</span> メッセージングとデカップリング 〜マイクロサービス設計の基本〜</h1>
+
+<p>大規模なシステムでは、すべてのコンポーネント（部品）が直接つながっていると、一箇所の障害が全体に波及します。これを「密結合（きつけつごう）」と呼びます。AWSでは「メッセージング」サービスを使ってコンポーネント間を「疎結合（そけつごう）」にし、障害に強いシステムを作ります。</p>
+
+<div class="analogy">
+<p><strong>密結合</strong>: 電話のように相手がいないと通信できない。片方が忙しいと止まる。<br>
+<strong>疎結合</strong>: メールのように相手が不在でも送れる。相手は好きなタイミングで読む。<br>
+SQS/SNSはこの「メール」のような役割を果たし、送り手と受け手を切り離します。</p>
+</div>
+
+<h2>14.1 SQS（Simple Queue Service）〜メッセージキュー〜</h2>
+
+<p>SQSは「キュー（待ち行列）」にメッセージを入れて、別のサービスが取り出すというシンプルな仕組みです。送り手（Producer）がメッセージをキューに入れ、受け手（Consumer）がキューからメッセージを取り出して処理します。</p>
+
+<h3>Standard Queue vs FIFO Queue</h3>
+
+<table>
+<tr><th>特性</th><th>Standard Queue</th><th>FIFO Queue</th></tr>
+<tr><td><strong>スループット</strong></td><td>ほぼ無制限</td><td>300 msg/秒（バッチで3,000）</td></tr>
+<tr><td><strong>順序保証</strong></td><td>ベストエフォート（順番が入れ替わることがある）</td><td>厳密に順序保証</td></tr>
+<tr><td><strong>重複配信</strong></td><td>まれに重複配信あり（At-Least-Once）</td><td>重複なし（Exactly-Once）</td></tr>
+<tr><td><strong>キュー名</strong></td><td>自由</td><td>末尾に <code>.fifo</code> が必須</td></tr>
+<tr><td><strong>ユースケース</strong></td><td>大量処理、順序不問</td><td>注文処理、金融取引など順序が重要な場面</td></tr>
+</table>
+
+<div class="exam">
+<p><strong>SQSの重要パラメータ</strong>:</p>
+<ul>
+<li><strong>可視性タイムアウト（Visibility Timeout）</strong>: メッセージ取得後、他のConsumerから見えなくなる時間。デフォルト30秒、最大12時間。処理時間より長く設定する</li>
+<li><strong>メッセージ保持期間</strong>: 1分〜14日（デフォルト4日）</li>
+<li><strong>最大メッセージサイズ</strong>: 256KB。大きいデータはS3に保存しポインタ（URL）をSQSに送る</li>
+<li><strong>ロングポーリング</strong>: キューが空のとき最大20秒待ってからレスポンスを返す。API呼び出し回数とコストを削減。<strong>ショートポーリング</strong>は即座に空レスポンスを返す（無駄なAPI呼び出しが増える）</li>
+</ul>
+</div>
+
+<h3>デッドレターキュー（DLQ）</h3>
+<p>処理に何度も失敗したメッセージを退避させる専用キューです。例えば「5回処理に失敗したメッセージはDLQに移動」と設定でき、問題のあるメッセージを後から調査できます。通常のキューの処理が詰まることを防ぐ安全弁です。</p>
+
+<h3>遅延キュー（Delay Queue）</h3>
+<p>メッセージを送信してから一定時間（0秒〜15分）はConsumerに見えなくする設定。「注文後5分間はキャンセル可能にしたい」といった場面で使います。</p>
+
+<h3>SQS + Auto Scaling</h3>
+<p>SQSのキュー内メッセージ数（ApproximateNumberOfMessages）をCloudWatchメトリクスとして監視し、メッセージが増えたらEC2やECSタスクをスケールアウトする構成です。</p>
+
+<div class="tsurispot">
+<p><strong>ツリスポの釣果投稿処理</strong>: 将来、ユーザーが釣果写真を投稿できる機能を追加した場合の構成例。ユーザー → API Gateway → SQS（Standard Queue）→ Lambda（画像リサイズ+DynamoDB保存）。大量投稿が来てもSQSがバッファになるので、Lambdaが処理しきれなくても投稿は受け付けられます。5回リサイズに失敗した画像はDLQに退避して後で調査。</p>
+</div>
+
+<div class="diagram">
+<svg viewBox="0 0 780 250" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <defs><marker id="a3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/></marker></defs>
+  <text x="390" y="20" text-anchor="middle" font-size="13" fill="#0c4a6e" font-weight="bold">SQS + Auto Scaling スケーリング構成</text>
+  <rect x="20" y="80" width="100" height="50" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="70" y="100" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">Producer</text>
+  <text x="70" y="118" text-anchor="middle" font-size="9" fill="#3b82f6">メッセージ送信</text>
+  <rect x="180" y="60" width="130" height="90" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="245" y="85" text-anchor="middle" font-size="13" fill="#92400e" font-weight="bold">SQS Queue</text>
+  <text x="245" y="105" text-anchor="middle" font-size="10" fill="#b45309">メッセージ蓄積</text>
+  <text x="245" y="125" text-anchor="middle" font-size="9" fill="#b45309">キュー長をCWで監視</text>
+  <text x="245" y="142" text-anchor="middle" font-size="9" fill="#b45309">↓ メトリクス</text>
+  <rect x="180" y="175" width="130" height="45" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="245" y="195" text-anchor="middle" font-size="10" fill="#1e40af" font-weight="bold">CloudWatch Alarm</text>
+  <text x="245" y="212" text-anchor="middle" font-size="9" fill="#3b82f6">キュー長 > 閾値</text>
+  <rect x="380" y="175" width="130" height="45" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <text x="445" y="195" text-anchor="middle" font-size="10" fill="#166534" font-weight="bold">Auto Scaling</text>
+  <text x="445" y="212" text-anchor="middle" font-size="9" fill="#15803d">スケールアウト/イン</text>
+  <rect x="380" y="60" width="130" height="90" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+  <text x="445" y="85" text-anchor="middle" font-size="13" fill="#be185d" font-weight="bold">Consumer群</text>
+  <text x="445" y="105" text-anchor="middle" font-size="10" fill="#db2777">EC2 / Lambda</text>
+  <text x="445" y="125" text-anchor="middle" font-size="10" fill="#db2777">ECS タスク</text>
+  <rect x="580" y="80" width="110" height="50" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="635" y="100" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">DB / S3</text>
+  <text x="635" y="118" text-anchor="middle" font-size="9" fill="#3b82f6">処理結果保存</text>
+  <line x1="120" y1="105" x2="180" y2="105" stroke="#64748b" stroke-width="2" marker-end="url(#a3)"/>
+  <line x1="310" y1="105" x2="380" y2="105" stroke="#64748b" stroke-width="2" marker-end="url(#a3)"/>
+  <line x1="510" y1="105" x2="580" y2="105" stroke="#64748b" stroke-width="2" marker-end="url(#a3)"/>
+  <line x1="245" y1="150" x2="245" y2="175" stroke="#64748b" stroke-width="1.5" marker-end="url(#a3)"/>
+  <line x1="310" y1="197" x2="380" y2="197" stroke="#64748b" stroke-width="1.5" marker-end="url(#a3)"/>
+  <line x1="445" y1="175" x2="445" y2="150" stroke="#22c55e" stroke-width="1.5" marker-end="url(#a3)"/>
+</svg>
+<figcaption>図14-1: SQS + Auto Scaling のキュー長ベーススケーリング</figcaption>
+</div>
+
+<h2>14.2 SNS（Simple Notification Service）〜Pub/Subメッセージング〜</h2>
+
+<p>SNSは「Pub/Sub（パブリッシュ/サブスクライブ）」モデルのメッセージングサービスです。Publisher（発行者）がトピック（テーマ）にメッセージを発行し、そのトピックを購読しているSubscriber（購読者）全員にメッセージが届きます。1対多の配信です。</p>
+
+<h3>サブスクリプションの種類</h3>
+<ul>
+<li><strong>SQS</strong>: キューにメッセージを送信</li>
+<li><strong>Lambda</strong>: 関数を呼び出し</li>
+<li><strong>HTTP/HTTPS</strong>: WebhookでURLに通知</li>
+<li><strong>Email / Email-JSON</strong>: メール送信</li>
+<li><strong>SMS</strong>: ショートメッセージ送信</li>
+<li><strong>Kinesis Data Firehose</strong>: ストリームに配信</li>
+</ul>
+
+<h3>SNS + SQS ファンアウトパターン</h3>
+<p>1つのSNSトピックに複数のSQSキューをサブスクライブさせ、1回のメッセージ送信で複数の処理を並行実行するパターンです。これは試験で超頻出のアーキテクチャパターンです。</p>
+
+<div class="exam">
+<p><strong>ファンアウトパターン</strong>: 「1つのイベントを複数のサービスに同時に配信したい」→ SNS + SQS ファンアウト。SNSトピックに複数のSQSキューをサブスクライブし、各キューから独立した処理を実行。これにより処理間の依存がなくなり、片方が失敗しても他方に影響しません。</p>
+</div>
+
+<h4>メッセージフィルタリング</h4>
+<p>サブスクリプションにフィルターポリシーを設定し、特定の属性を持つメッセージだけを受信できます。例: 注文トピックで「東京」の注文だけを受け取るSQSキュー。</p>
+
+<div class="diagram">
+<svg viewBox="0 0 780 280" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <defs><marker id="a4" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/></marker></defs>
+  <text x="390" y="20" text-anchor="middle" font-size="13" fill="#0c4a6e" font-weight="bold">SNS + SQS ファンアウトパターン</text>
+  <rect x="20" y="100" width="110" height="55" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="75" y="122" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">Publisher</text>
+  <text x="75" y="142" text-anchor="middle" font-size="9" fill="#3b82f6">メッセージ発行</text>
+  <rect x="200" y="80" width="140" height="90" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="3"/>
+  <text x="270" y="110" text-anchor="middle" font-size="14" fill="#92400e" font-weight="bold">SNS Topic</text>
+  <text x="270" y="130" text-anchor="middle" font-size="10" fill="#b45309">釣果投稿トピック</text>
+  <text x="270" y="150" text-anchor="middle" font-size="9" fill="#b45309">1回発行 → 全員に配信</text>
+  <rect x="430" y="35" width="140" height="45" rx="8" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="500" y="53" text-anchor="middle" font-size="10" fill="#6d28d9" font-weight="bold">SQS: DB保存用</text>
+  <text x="500" y="70" text-anchor="middle" font-size="9" fill="#7c3aed">→ Lambda → DynamoDB</text>
+  <rect x="430" y="100" width="140" height="45" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+  <text x="500" y="118" text-anchor="middle" font-size="10" fill="#be185d" font-weight="bold">SQS: 画像リサイズ用</text>
+  <text x="500" y="135" text-anchor="middle" font-size="9" fill="#be185d">→ Lambda → S3</text>
+  <rect x="430" y="165" width="140" height="45" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <text x="500" y="183" text-anchor="middle" font-size="10" fill="#166534" font-weight="bold">SQS: 通知用</text>
+  <text x="500" y="200" text-anchor="middle" font-size="9" fill="#15803d">→ Lambda → Push通知</text>
+  <rect x="430" y="230" width="140" height="38" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="500" y="254" text-anchor="middle" font-size="10" fill="#1e40af" font-weight="bold">Lambda: ログ記録</text>
+  <line x1="130" y1="127" x2="200" y2="127" stroke="#64748b" stroke-width="2" marker-end="url(#a4)"/>
+  <line x1="340" y1="100" x2="430" y2="57" stroke="#64748b" stroke-width="1.5" marker-end="url(#a4)"/>
+  <line x1="340" y1="122" x2="430" y2="122" stroke="#64748b" stroke-width="1.5" marker-end="url(#a4)"/>
+  <line x1="340" y1="145" x2="430" y2="187" stroke="#64748b" stroke-width="1.5" marker-end="url(#a4)"/>
+  <line x1="340" y1="160" x2="430" y2="249" stroke="#64748b" stroke-width="1.5" marker-end="url(#a4)"/>
+</svg>
+<figcaption>図14-2: SNS + SQS ファンアウトパターン（1メッセージ → 4つの独立した処理）</figcaption>
+</div>
+
+<div class="tsurispot">
+<p><strong>ツリスポのファンアウト</strong>: ユーザーが釣果を投稿したら、SNSトピック「釣果投稿」に1回発行。サブスクライバーとして (1) SQS→DynamoDB保存、(2) SQS→画像リサイズ+S3保存、(3) SQS→フォロワーへのプッシュ通知、(4) Lambda→アクセスログ記録。各処理は完全に独立しているので、画像リサイズが失敗しても通知やDB保存には影響しません。</p>
+</div>
+
+<h2>14.3 Kinesis 〜リアルタイムストリーミング〜</h2>
+
+<p>Amazon Kinesisは、大量のストリーミングデータ（リアルタイムに流れ続けるデータ）を収集・処理するサービス群です。</p>
+
+<h3>Kinesisファミリー</h3>
+
+<table>
+<tr><th>サービス</th><th>用途</th><th>特徴</th></tr>
+<tr><td><strong>Kinesis Data Streams</strong></td><td>リアルタイム処理</td><td>シャード単位のスケーリング。複数Consumerが同じデータを読める。24h〜365日保持</td></tr>
+<tr><td><strong>Kinesis Data Firehose</strong></td><td>配信（S3/Redshift/OpenSearch等）</td><td>ニアリアルタイム（60秒バッファ）。完全マネージド、自動スケーリング</td></tr>
+<tr><td><strong>Kinesis Data Analytics</strong></td><td>ストリーム分析</td><td>SQLまたはApache Flinkでリアルタイム分析</td></tr>
+</table>
+
+<div class="exam">
+<p><strong>SQS vs Kinesis の使い分け（超頻出！）</strong></p>
+<table>
+<tr><th>観点</th><th>SQS</th><th>Kinesis Data Streams</th></tr>
+<tr><td><strong>処理モデル</strong></td><td>メッセージを取り出して消す（キュー）</td><td>データを読むが消えない（ストリーム）</td></tr>
+<tr><td><strong>Consumer数</strong></td><td>1つのメッセージは1Consumerが処理</td><td>複数Consumerが同じデータを読める</td></tr>
+<tr><td><strong>順序</strong></td><td>Standard: 順序保証なし / FIFO: 保証あり</td><td>シャード内で順序保証</td></tr>
+<tr><td><strong>スケーリング</strong></td><td>自動</td><td>シャード数を手動で管理</td></tr>
+<tr><td><strong>データ保持</strong></td><td>最大14日</td><td>24h〜365日</td></tr>
+<tr><td><strong>ユースケース</strong></td><td>タスクキュー、非同期処理</td><td>ログ集約、IoT、リアルタイム分析</td></tr>
+</table>
+<p>キーワード: 「デカップリング」「非同期処理」→ SQS。「リアルタイム」「ストリーミング」「複数Consumer」→ Kinesis。</p>
+</div>
+
+<h2>14.4 Amazon MQ 〜レガシー移行向けメッセージブローカー〜</h2>
+
+<p>Amazon MQは、Apache ActiveMQやRabbitMQのマネージドサービスです。オンプレミスで既にActiveMQ/RabbitMQを使っている場合の移行先として使います。新規開発ではSQS/SNSを使うのがAWSのベストプラクティスです。</p>
+
+<div class="exam">
+<p><strong>Amazon MQの出題パターン</strong>:「オンプレミスのActiveMQ/RabbitMQをAWSに移行」「MQTT/AMQP/STOMPプロトコルを使いたい」→ Amazon MQ。新規開発でメッセージングが必要ならSQS/SNS。</p>
+</div>
+
+<div class="summary-box">
+<h4>第14章まとめ</h4>
+<ul>
+<li><strong>SQS</strong>: メッセージキュー。Standard（高スループット）vs FIFO（順序保証）</li>
+<li>可視性タイムアウト、DLQ、遅延キュー、ロングポーリングは試験頻出</li>
+<li><strong>SNS</strong>: Pub/Subメッセージング。1対多の配信</li>
+<li><strong>ファンアウトパターン</strong>: SNS → 複数SQS で1イベントを複数処理に分散</li>
+<li><strong>Kinesis</strong>: リアルタイムストリーミング。SQSとの使い分けを確実に</li>
+<li><strong>SQS vs Kinesis</strong>:「非同期処理」→SQS、「リアルタイム+複数Consumer」→Kinesis</li>
+<li><strong>Amazon MQ</strong>: ActiveMQ/RabbitMQの移行用。新規はSQS/SNS</li>
+<li>メッセージサイズ上限はSQS=256KB。大きいデータはS3+ポインタ</li>
+</ul>
+</div>
+
+<div class="quiz">
+<p><strong>Q1.</strong> SQSのStandard QueueとFIFO Queueの最大の違いは？</p>
+<details><summary>答えを見る</summary><p>Standard=ほぼ無制限スループットだが順序保証なし・重複あり。FIFO=厳密な順序保証・重複なしだが300msg/秒の制限あり。</p></details>
+</div>
+<div class="quiz">
+<p><strong>Q2.</strong> 1つのイベントを複数のサービスに同時配信するアーキテクチャパターンは？</p>
+<details><summary>答えを見る</summary><p>SNS + SQS ファンアウトパターン。SNSトピックに複数のSQSキューをサブスクライブさせる。</p></details>
+</div>
+<div class="quiz">
+<p><strong>Q3.</strong> SQSとKinesisの使い分けの基準は？</p>
+<details><summary>答えを見る</summary><p>SQS=「非同期処理」「デカップリング」「タスクキュー」。Kinesis=「リアルタイムストリーミング」「複数Consumer」「ログ集約」「IoT」。</p></details>
+</div>
+<div class="quiz">
+<p><strong>Q4.</strong> SQSで処理に5回失敗したメッセージを退避させる仕組みは？</p>
+<details><summary>答えを見る</summary><p>デッドレターキュー（DLQ）。maxReceiveCount=5に設定すると、5回処理に失敗したメッセージは自動的にDLQに移動する。</p></details>
+</div>
+<div class="quiz">
+<p><strong>Q5.</strong> オンプレミスのRabbitMQをAWSに移行する場合のサービスは？</p>
+<details><summary>答えを見る</summary><p>Amazon MQ。既存のActiveMQ/RabbitMQのマネージドサービスで、プロトコル互換性がある。新規開発ならSQS/SNS。</p></details>
+</div>
+
+<h1 id="ch15"><span class="chapter-num">15</span> データ分析サービス 〜ビッグデータを活用する〜</h1>
+
+<p>AWSには膨大なデータを分析するためのサービスが多数あります。SAA試験では「どのサービスをどの場面で使うか」の選択が問われます。ここでは各サービスの特徴と使い分けを明確にしましょう。</p>
+
+<div class="analogy">
+<p>データ分析を「釣りの記録」に例えると: 生データ（釣果記録ノート）→ ETL（ノートを整理してExcelに入力）→ データレイク（Excelファイルの保管庫）→ 分析（ピボットテーブルで集計）→ 可視化（グラフ作成）。AWSにはこの各段階に特化したサービスがあります。</p>
+</div>
+
+<h2>15.1 Athena 〜S3にSQLを実行〜</h2>
+
+<p>Amazon Athenaは、S3に保存されたデータに対して直接SQLクエリを実行できるサーバーレスサービスです。サーバーの構築やデータベースへのロードが不要で、S3にデータを置くだけですぐにクエリできます。</p>
+
+<h3>Athenaの特徴</h3>
+<ul>
+<li><strong>サーバーレス</strong>: インフラ管理不要</li>
+<li><strong>課金体系</strong>: スキャンしたデータ量に対して課金（$5/TB）</li>
+<li><strong>対応形式</strong>: CSV、JSON、Parquet、ORC、Avroなど</li>
+<li><strong>Glueカタログ連携</strong>: テーブル定義をGlue Data Catalogで管理</li>
+</ul>
+
+<div class="exam">
+<p><strong>Athenaのコスト最適化（超頻出）</strong>: データを<strong>Parquet</strong>や<strong>ORC</strong>などの列指向フォーマットに変換すると、必要な列だけスキャンするためコストが劇的に下がります。CSVの100分の1以下になることも。さらにデータを<strong>パーティション分割</strong>（例: 年/月/日でフォルダ分け）すると、スキャン範囲が限定されてさらにコスト削減。試験では「Athenaのコスト最適化」=「Parquet/ORC変換 + パーティション」が正解です。</p>
+</div>
+
+<div class="tsurispot">
+<p><strong>ツリスポのアクセスログ分析</strong>: CloudFrontのアクセスログをS3に保存 → Athenaで「どのスポットページが最もアクセスされているか」「どの地域からのアクセスが多いか」をSQLで集計。Parquet形式にしておけば月間50万PVのログ分析でもクエリ1回あたり$0.01以下で済みます。</p>
+</div>
+
+<h2>15.2 AWS Glue 〜ETLとデータカタログ〜</h2>
+
+<p>AWS Glueは、データの抽出・変換・ロード（ETL: Extract, Transform, Load）を行うサーバーレスサービスです。</p>
+
+<h3>主要コンポーネント</h3>
+<ul>
+<li><strong>Glue Data Catalog</strong>: データのメタデータ（テーブル定義、スキーマ情報）を管理する中央カタログ。Athena、Redshift Spectrum、EMRから参照される</li>
+<li><strong>Glue Crawler</strong>: S3やRDSなどのデータソースを自動スキャンし、スキーマを検出してData Catalogに登録する</li>
+<li><strong>Glue Job</strong>: PythonやSparkでデータ変換処理を実行（例: CSVをParquetに変換）</li>
+<li><strong>Glue Studio</strong>: ビジュアルなGUIでETLジョブを作成</li>
+</ul>
+
+<div class="exam">
+<p><strong>Glue Data CatalogはAthenaに必須</strong>: AthenaでS3データにクエリするには、まずGlue Data Catalogでテーブル定義を作成する必要があります。Crawlerで自動検出するか、手動でテーブルを定義します。</p>
+</div>
+
+<h2>15.3 EMR（Elastic MapReduce）</h2>
+
+<p>Amazon EMRは、Apache Hadoop、Apache Spark、Prestoなどのビッグデータフレームワークをマネージドで実行するサービスです。ペタバイト級のデータ処理に使います。</p>
+
+<div class="point">
+<p><strong>Athena vs EMR</strong>: 軽量な分析（アドホッククエリ）→ Athena。大規模で複雑な処理（機械学習、大量のETL）→ EMR。EMRはクラスターの管理が必要なため、手軽さではAthenaに劣ります。</p>
+</div>
+
+<h2>15.4 Redshift 〜データウェアハウス〜</h2>
+
+<p>Amazon Redshiftは、大規模データの分析に特化した列指向のデータウェアハウスサービスです。ペタバイト級のデータに対して高速なSQLクエリを実行できます。</p>
+
+<h3>Redshiftの特徴</h3>
+<ul>
+<li><strong>列指向ストレージ</strong>: 分析クエリ（特定の列を集計するなど）に最適化</li>
+<li><strong>ノードベースの課金</strong>: 常時稼働型（Athenaのようなクエリ単位ではない）</li>
+<li><strong>Redshift Spectrum</strong>: Redshiftから直接S3のデータにクエリ（Redshiftにロード不要）</li>
+<li><strong>Redshift Serverless</strong>: サーバーレス版。使った分だけ課金</li>
+</ul>
+
+<div class="exam">
+<p><strong>Athena vs Redshift の使い分け</strong>:</p>
+<ul>
+<li><strong>Athena</strong>: アドホック（その場限り）クエリ、不定期な分析、小〜中規模データ、サーバーレス</li>
+<li><strong>Redshift</strong>: 定期的な大量データ分析、複雑な結合、ダッシュボード用の高速クエリ、常時稼働</li>
+</ul>
+<p>キーワード: 「サーバーレス」「S3上のデータに直接クエリ」「アドホック」→ Athena。「データウェアハウス」「ペタバイト」「BI」「高速ダッシュボード」→ Redshift。</p>
+</div>
+
+<h2>15.5 OpenSearch（旧Elasticsearch）</h2>
+
+<p>Amazon OpenSearch Serviceは、全文検索とログ分析のためのマネージドサービスです。Kibanaダッシュボード（OpenSearch Dashboards）で可視化もできます。</p>
+
+<p>よくあるパターン: CloudWatch Logs → サブスクリプションフィルター → Lambda → OpenSearch → ダッシュボードで可視化</p>
+
+<div class="exam">
+<p><strong>OpenSearchの出題キーワード</strong>:「全文検索」「ログ分析とダッシュボード」「Elasticsearch」「Kibana」→ OpenSearch。Athenaとの違い: AthenaはS3上のデータへのSQLクエリ、OpenSearchは全文検索とリアルタイムログ分析に特化。</p>
+</div>
+
+<h2>15.6 QuickSight 〜BIダッシュボード〜</h2>
+
+<p>Amazon QuickSightは、BI（ビジネスインテリジェンス）ダッシュボードサービスです。様々なデータソース（Athena、Redshift、RDS、S3など）からデータを取得し、グラフやチャートで可視化します。機械学習ベースのインサイト機能（ML Insights）もあります。</p>
+
+<h2>15.7 その他のデータ分析サービス</h2>
+
+<ul>
+<li><strong>Lake Formation</strong>: データレイク（S3上の大規模データ保管庫）の構築・管理・セキュリティを簡素化するサービス</li>
+<li><strong>MSK（Managed Streaming for Apache Kafka）</strong>: Apache Kafkaのマネージドサービス。Kinesisの代替で、既にKafkaを使っている環境の移行先</li>
+<li><strong>Data Pipeline</strong>: データの移動・変換をスケジュール実行するオーケストレーションサービス（レガシー。新規はStep Functions + Glueが推奨）</li>
+</ul>
+
+<div class="diagram">
+<svg viewBox="0 0 780 380" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <defs><marker id="a5" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/></marker></defs>
+  <text x="390" y="22" text-anchor="middle" font-size="14" fill="#0c4a6e" font-weight="bold">データ分析パイプライン全体図</text>
+
+  <!-- データソース -->
+  <rect x="15" y="55" width="110" height="35" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="70" y="78" text-anchor="middle" font-size="10" fill="#1e40af" font-weight="bold">CloudFront ログ</text>
+  <rect x="15" y="105" width="110" height="35" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="70" y="128" text-anchor="middle" font-size="10" fill="#1e40af" font-weight="bold">RDS / DynamoDB</text>
+  <rect x="15" y="155" width="110" height="35" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="70" y="178" text-anchor="middle" font-size="10" fill="#1e40af" font-weight="bold">IoT / アプリログ</text>
+  <text x="70" y="48" text-anchor="middle" font-size="11" fill="#64748b" font-weight="bold">データソース</text>
+
+  <!-- Glue -->
+  <rect x="175" y="70" width="120" height="110" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="235" y="95" text-anchor="middle" font-size="12" fill="#92400e" font-weight="bold">AWS Glue</text>
+  <text x="235" y="115" text-anchor="middle" font-size="10" fill="#b45309">Crawler</text>
+  <text x="235" y="132" text-anchor="middle" font-size="10" fill="#b45309">ETL Job</text>
+  <text x="235" y="149" text-anchor="middle" font-size="10" fill="#b45309">Data Catalog</text>
+  <text x="235" y="170" text-anchor="middle" font-size="9" fill="#b45309">CSV→Parquet変換</text>
+
+  <!-- S3 データレイク -->
+  <rect x="345" y="70" width="130" height="110" rx="10" fill="#f0fdf4" stroke="#22c55e" stroke-width="3"/>
+  <text x="410" y="100" text-anchor="middle" font-size="14" fill="#166534" font-weight="bold">S3</text>
+  <text x="410" y="120" text-anchor="middle" font-size="11" fill="#15803d">データレイク</text>
+  <text x="410" y="140" text-anchor="middle" font-size="10" fill="#15803d">Parquet/ORC形式</text>
+  <text x="410" y="157" text-anchor="middle" font-size="9" fill="#15803d">パーティション分割</text>
+
+  <!-- 分析サービス群 -->
+  <rect x="540" y="40" width="120" height="42" rx="8" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="600" y="58" text-anchor="middle" font-size="11" fill="#6d28d9" font-weight="bold">Athena</text>
+  <text x="600" y="74" text-anchor="middle" font-size="9" fill="#7c3aed">SQLクエリ(サーバーレス)</text>
+  <rect x="540" y="100" width="120" height="42" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+  <text x="600" y="118" text-anchor="middle" font-size="11" fill="#be185d" font-weight="bold">Redshift</text>
+  <text x="600" y="134" text-anchor="middle" font-size="9" fill="#be185d">DWH(大規模分析)</text>
+  <rect x="540" y="160" width="120" height="42" rx="8" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+  <text x="600" y="178" text-anchor="middle" font-size="11" fill="#c2410c" font-weight="bold">EMR</text>
+  <text x="600" y="194" text-anchor="middle" font-size="9" fill="#ea580c">Spark/Hadoop</text>
+
+  <!-- QuickSight -->
+  <rect x="540" y="240" width="120" height="50" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="600" y="260" text-anchor="middle" font-size="12" fill="#1e40af" font-weight="bold">QuickSight</text>
+  <text x="600" y="280" text-anchor="middle" font-size="9" fill="#3b82f6">BIダッシュボード</text>
+
+  <!-- 矢印 -->
+  <line x1="125" y1="72" x2="175" y2="100" stroke="#64748b" stroke-width="1.5" marker-end="url(#a5)"/>
+  <line x1="125" y1="122" x2="175" y2="125" stroke="#64748b" stroke-width="1.5" marker-end="url(#a5)"/>
+  <line x1="125" y1="172" x2="175" y2="150" stroke="#64748b" stroke-width="1.5" marker-end="url(#a5)"/>
+  <line x1="295" y1="125" x2="345" y2="125" stroke="#64748b" stroke-width="2" marker-end="url(#a5)"/>
+  <line x1="475" y1="100" x2="540" y2="61" stroke="#64748b" stroke-width="1.5" marker-end="url(#a5)"/>
+  <line x1="475" y1="120" x2="540" y2="121" stroke="#64748b" stroke-width="1.5" marker-end="url(#a5)"/>
+  <line x1="475" y1="140" x2="540" y2="181" stroke="#64748b" stroke-width="1.5" marker-end="url(#a5)"/>
+  <line x1="600" y1="82" x2="600" y2="240" stroke="#93c5fd" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#a5)"/>
+  <text x="625" y="220" font-size="9" fill="#64748b">可視化</text>
+</svg>
+<figcaption>図15-1: データ分析パイプライン全体図</figcaption>
+</div>
+
+<div class="diagram">
+<svg viewBox="0 0 700 300" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <text x="350" y="22" text-anchor="middle" font-size="14" fill="#0c4a6e" font-weight="bold">Athena vs Redshift 使い分けフローチャート</text>
+  <rect x="220" y="40" width="260" height="40" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="350" y="65" text-anchor="middle" font-size="12" fill="#1e40af" font-weight="bold">S3上のデータを分析したい</text>
+  <rect x="100" y="120" width="220" height="40" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="210" y="145" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">不定期 / アドホック / 小〜中規模？</text>
+  <rect x="380" y="120" width="220" height="40" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="490" y="145" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">定期的 / 大規模 / 高速BI？</text>
+  <rect x="110" y="200" width="200" height="55" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="3"/>
+  <text x="210" y="222" text-anchor="middle" font-size="14" fill="#6d28d9" font-weight="bold">Athena</text>
+  <text x="210" y="244" text-anchor="middle" font-size="10" fill="#7c3aed">サーバーレス / スキャン量課金</text>
+  <rect x="390" y="200" width="200" height="55" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="3"/>
+  <text x="490" y="222" text-anchor="middle" font-size="14" fill="#be185d" font-weight="bold">Redshift</text>
+  <text x="490" y="244" text-anchor="middle" font-size="10" fill="#be185d">DWH / ノード課金 / 高速</text>
+  <line x1="300" y1="80" x2="210" y2="120" stroke="#64748b" stroke-width="1.5" marker-end="url(#a5)"/>
+  <line x1="400" y1="80" x2="490" y2="120" stroke="#64748b" stroke-width="1.5" marker-end="url(#a5)"/>
+  <line x1="210" y1="160" x2="210" y2="200" stroke="#64748b" stroke-width="1.5" marker-end="url(#a5)"/>
+  <line x1="490" y1="160" x2="490" y2="200" stroke="#64748b" stroke-width="1.5" marker-end="url(#a5)"/>
+  <text x="210" y="108" text-anchor="middle" font-size="10" fill="#22c55e" font-weight="bold">YES</text>
+  <text x="490" y="108" text-anchor="middle" font-size="10" fill="#22c55e" font-weight="bold">YES</text>
+</svg>
+<figcaption>図15-2: Athena vs Redshift の使い分けフローチャート</figcaption>
+</div>
+
+<div class="tsurispot">
+<p><strong>ツリスポのデータ分析パイプライン</strong>: CloudFrontアクセスログ → S3に蓄積 → Glue CrawlerでスキーマをData Catalogに登録 → Glue JobでParquet形式に変換 → AthenaでSQL集計（人気スポットランキング、地域別アクセス数）→ QuickSightでダッシュボード化。月間50万PVのログをParquet形式でクエリすれば1回あたり$0.01以下。年間コストは数ドルで済みます。</p>
+</div>
+
+<div class="summary-box">
+<h4>第15章まとめ</h4>
+<ul>
+<li><strong>Athena</strong>: S3にSQL。サーバーレス、スキャン量課金。Parquet/ORC変換でコスト大幅削減</li>
+<li><strong>Glue</strong>: ETL + Data Catalog + Crawler。AthenaやRedshiftのメタデータ管理</li>
+<li><strong>EMR</strong>: Hadoop/Sparkの大規模ビッグデータ処理</li>
+<li><strong>Redshift</strong>: 列指向DWH。大規模・定期分析・高速BI向け</li>
+<li><strong>OpenSearch</strong>: 全文検索 + リアルタイムログ分析 + ダッシュボード</li>
+<li><strong>QuickSight</strong>: BIダッシュボード。多数のデータソースに対応</li>
+<li>Athena vs Redshift: 「アドホック・サーバーレス」→ Athena、「大規模・常時」→ Redshift</li>
+</ul>
+</div>
+
+<div class="quiz">
+<p><strong>Q1.</strong> AthenaのクエリコストをCSV対比で大幅に下げる方法は？</p>
+<details><summary>答えを見る</summary><p>データをParquetまたはORC（列指向フォーマット）に変換する。必要な列だけスキャンするため、コストが数十〜数百分の1になる。パーティション分割も有効。</p></details>
+</div>
+<div class="quiz">
+<p><strong>Q2.</strong> S3のデータのスキーマを自動検出してAthenaで使えるようにするには？</p>
+<details><summary>答えを見る</summary><p>Glue Crawlerを実行してスキーマを自動検出し、Glue Data Catalogにテーブル定義を登録する。AthenaはGlue Data Catalogを参照してクエリを実行する。</p></details>
+</div>
+<div class="quiz">
+<p><strong>Q3.</strong> アドホッククエリにAthena、常時稼働の大規模分析にRedshiftを使う理由は？</p>
+<details><summary>答えを見る</summary><p>Athenaはスキャン量課金のサーバーレスで不定期利用に最適。Redshiftはノード課金で常時稼働だが、大規模データの複雑なクエリを高速処理できる。</p></details>
+</div>
+
+<h1 id="ch16"><span class="chapter-num">16</span> 移行と転送 〜オンプレミスからクラウドへ〜</h1>
+
+<p>多くの企業がオンプレミス（自社サーバー）からAWSへの移行を検討しています。SAA試験では「どの移行戦略を選ぶか」「どのデータ転送サービスを使うか」が頻出です。</p>
+
+<h2>16.1 クラウド移行の6R戦略</h2>
+
+<p>AWSが提唱する移行戦略は6つあり、「6R」と呼ばれます。アプリケーションごとに最適な戦略を選びます。</p>
+
+<table>
+<tr><th>戦略</th><th>内容</th><th>変更度</th><th>例</th></tr>
+<tr><td><strong>Rehost</strong><br>(リフト&シフト)</td><td>そのままAWSに移行</td><td>最小</td><td>EC2にそのまま載せ替え</td></tr>
+<tr><td><strong>Replatform</strong><br>(リフト&最適化)</td><td>少し最適化して移行</td><td>小</td><td>DBをRDSに変更、OSはそのまま</td></tr>
+<tr><td><strong>Repurchase</strong></td><td>SaaS製品に置き換え</td><td>中</td><td>自社CRM → Salesforce</td></tr>
+<tr><td><strong>Refactor</strong><br>(リアーキテクト)</td><td>クラウドネイティブに再設計</td><td>大</td><td>モノリス → マイクロサービス</td></tr>
+<tr><td><strong>Retire</strong></td><td>廃止</td><td>-</td><td>使われていないシステムを停止</td></tr>
+<tr><td><strong>Retain</strong></td><td>現状維持（移行しない）</td><td>-</td><td>移行が困難なレガシーシステム</td></tr>
+</table>
+
+<div class="diagram">
+<svg viewBox="0 0 760 260" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <text x="380" y="22" text-anchor="middle" font-size="14" fill="#0c4a6e" font-weight="bold">6R移行戦略（変更度 vs クラウドネイティブ度）</text>
+  <!-- 軸 -->
+  <line x1="80" y1="230" x2="720" y2="230" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="80" y1="230" x2="80" y2="45" stroke="#94a3b8" stroke-width="2"/>
+  <text x="400" y="255" text-anchor="middle" font-size="11" fill="#64748b">クラウドネイティブ度 →</text>
+  <text x="35" y="140" text-anchor="middle" font-size="11" fill="#64748b" transform="rotate(-90,35,140)">変更の労力 →</text>
+  <!-- 各R -->
+  <rect x="100" y="190" width="90" height="35" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="145" y="212" text-anchor="middle" font-size="10" fill="#1e40af" font-weight="bold">Retain</text>
+  <rect x="210" y="175" width="90" height="35" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <text x="255" y="197" text-anchor="middle" font-size="10" fill="#166534" font-weight="bold">Rehost</text>
+  <rect x="320" y="145" width="90" height="35" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="365" y="167" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">Replatform</text>
+  <rect x="430" y="110" width="90" height="35" rx="8" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="475" y="132" text-anchor="middle" font-size="10" fill="#6d28d9" font-weight="bold">Repurchase</text>
+  <rect x="540" y="70" width="90" height="35" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+  <text x="585" y="92" text-anchor="middle" font-size="10" fill="#be185d" font-weight="bold">Refactor</text>
+  <rect x="650" y="190" width="70" height="35" rx="8" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+  <text x="685" y="212" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">Retire</text>
+</svg>
+<figcaption>図16-1: 6R移行戦略の比較</figcaption>
+</div>
+
+<div class="tsurispot">
+<p><strong>ツリスポのVercel→AWS移行</strong>: Replatform戦略を採用しました。コード自体は大きく変更せず（Next.js standalone）、インフラだけVercel → App Runner（Docker）に変更。データベースを後から導入する場合は、オンプレMySQL → Aurora PostgreSQL への異種DB移行にDMSを使うことになります。</p>
+</div>
+
+<h2>16.2 DMS（Database Migration Service）</h2>
+
+<p>AWS DMSは、データベースの移行を行うサービスです。ソース（移行元）からターゲット（移行先）にデータを転送します。</p>
+
+<h3>DMSの特徴</h3>
+<ul>
+<li><strong>同種DB間移行</strong>: MySQL → MySQL、Oracle → Oracle（簡単）</li>
+<li><strong>異種DB間移行</strong>: Oracle → Aurora PostgreSQL（SCTが必要）</li>
+<li><strong>CDC（Change Data Capture）</strong>: 初期データロード後も、差分を継続的にレプリケーション（ダウンタイム最小化）</li>
+<li><strong>ソースDBは稼働したまま</strong>移行可能</li>
+</ul>
+
+<h4>SCT（Schema Conversion Tool）</h4>
+<p>異種DB間移行で必要なスキーマ変換ツール。OracleのストアドプロシージャをPostgreSQL形式に変換するなど、スキーマレベルの変換を自動化します。</p>
+
+<div class="exam">
+<p><strong>DMS出題パターン</strong>:「ダウンタイムを最小限にDBを移行」→ DMS + CDC。「Oracle → Aurora PostgreSQL」→ DMS + SCT。「移行中もソースDBは稼働」→ DMSの特徴。</p>
+</div>
+
+<div class="diagram">
+<svg viewBox="0 0 760 180" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <defs><marker id="a6" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/></marker></defs>
+  <text x="380" y="20" text-anchor="middle" font-size="13" fill="#0c4a6e" font-weight="bold">DMS移行パターン</text>
+  <rect x="20" y="55" width="150" height="80" rx="10" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+  <text x="95" y="80" text-anchor="middle" font-size="12" fill="#dc2626" font-weight="bold">ソースDB</text>
+  <text x="95" y="100" text-anchor="middle" font-size="10" fill="#dc2626">Oracle (オンプレ)</text>
+  <text x="95" y="118" text-anchor="middle" font-size="9" fill="#ef4444">稼働したまま移行可能</text>
+  <rect x="235" y="40" width="120" height="45" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="295" y="60" text-anchor="middle" font-size="11" fill="#92400e" font-weight="bold">SCT</text>
+  <text x="295" y="78" text-anchor="middle" font-size="9" fill="#b45309">スキーマ変換</text>
+  <rect x="235" y="95" width="120" height="55" rx="8" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="295" y="117" text-anchor="middle" font-size="12" fill="#6d28d9" font-weight="bold">DMS</text>
+  <text x="295" y="137" text-anchor="middle" font-size="9" fill="#7c3aed">データ転送+CDC</text>
+  <rect x="420" y="55" width="160" height="80" rx="10" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <text x="500" y="80" text-anchor="middle" font-size="12" fill="#166534" font-weight="bold">ターゲットDB</text>
+  <text x="500" y="100" text-anchor="middle" font-size="10" fill="#15803d">Aurora PostgreSQL</text>
+  <text x="500" y="118" text-anchor="middle" font-size="9" fill="#22c55e">(AWS)</text>
+  <line x1="170" y1="80" x2="235" y2="62" stroke="#64748b" stroke-width="1.5" marker-end="url(#a6)"/>
+  <line x1="170" y1="105" x2="235" y2="122" stroke="#64748b" stroke-width="1.5" marker-end="url(#a6)"/>
+  <line x1="355" y1="62" x2="420" y2="80" stroke="#64748b" stroke-width="1.5" marker-end="url(#a6)"/>
+  <line x1="355" y1="122" x2="420" y2="105" stroke="#64748b" stroke-width="1.5" marker-end="url(#a6)"/>
+</svg>
+<figcaption>図16-2: DMS + SCT による異種DB移行パターン</figcaption>
+</div>
+
+<h2>16.3 Snow Family 〜物理デバイスでのデータ移行〜</h2>
+
+<p>ネットワーク経由では時間がかかりすぎる大量データの移行に、AWSが物理デバイスを郵送して使う「Snow Family」があります。</p>
+
+<table>
+<tr><th>デバイス</th><th>容量</th><th>用途</th></tr>
+<tr><td><strong>Snowcone</strong></td><td>8TB HDD / 14TB SSD</td><td>小規模移行、エッジコンピューティング。2.1kgで最小・最軽量</td></tr>
+<tr><td><strong>Snowball Edge Storage Optimized</strong></td><td>80TB</td><td>中規模データ移行。EC2互換のコンピューティング機能あり</td></tr>
+<tr><td><strong>Snowball Edge Compute Optimized</strong></td><td>42TB</td><td>エッジでの処理が必要な場合。より強力なCPU/GPU</td></tr>
+<tr><td><strong>Snowmobile</strong></td><td>100PB</td><td>超大規模移行。トラック1台で運搬。10PB以上ならSnowmobile推奨</td></tr>
+</table>
+
+<div class="exam">
+<p><strong>Snow Familyの選択基準</strong>: 数TB → Snowcone。数十TB〜数百TB → Snowball Edge。10PB以上 → Snowmobile。「ネットワーク帯域が限られている」「数週間以上かかる」→ Snow Family。転送にかかる日数の計算問題も出ます。</p>
+</div>
+
+<div class="diagram">
+<svg viewBox="0 0 760 170" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <text x="380" y="20" text-anchor="middle" font-size="13" fill="#0c4a6e" font-weight="bold">Snow Family データ容量比較</text>
+  <!-- Snowcone -->
+  <rect x="30" y="50" width="120" height="90" rx="10" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="90" y="75" text-anchor="middle" font-size="12" fill="#1e40af" font-weight="bold">Snowcone</text>
+  <text x="90" y="95" text-anchor="middle" font-size="22" fill="#3b82f6" font-weight="bold">8-14TB</text>
+  <text x="90" y="115" text-anchor="middle" font-size="9" fill="#64748b">2.1kg / 小型</text>
+  <text x="90" y="130" text-anchor="middle" font-size="9" fill="#64748b">エッジ対応</text>
+  <!-- Snowball -->
+  <rect x="190" y="40" width="160" height="100" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="270" y="65" text-anchor="middle" font-size="12" fill="#92400e" font-weight="bold">Snowball Edge</text>
+  <text x="270" y="90" text-anchor="middle" font-size="22" fill="#f59e0b" font-weight="bold">42-80TB</text>
+  <text x="270" y="110" text-anchor="middle" font-size="9" fill="#64748b">Storage / Compute</text>
+  <text x="270" y="125" text-anchor="middle" font-size="9" fill="#64748b">EC2互換コンピューティング</text>
+  <!-- Snowmobile -->
+  <rect x="400" y="30" width="200" height="110" rx="10" fill="#fce7f3" stroke="#ec4899" stroke-width="3"/>
+  <text x="500" y="55" text-anchor="middle" font-size="12" fill="#be185d" font-weight="bold">Snowmobile</text>
+  <text x="500" y="85" text-anchor="middle" font-size="28" fill="#ec4899" font-weight="bold">100PB</text>
+  <text x="500" y="110" text-anchor="middle" font-size="10" fill="#64748b">トレーラートラック1台</text>
+  <text x="500" y="128" text-anchor="middle" font-size="9" fill="#64748b">10PB以上ならSnowmobile</text>
+</svg>
+<figcaption>図16-3: Snow Family のデータ容量比較</figcaption>
+</div>
+
+<h2>16.4 DataSync 〜高速データ転送〜</h2>
+
+<p>AWS DataSyncは、オンプレミスとAWS間、またはAWSサービス間のデータ転送を高速に行うサービスです。NFS、SMB、HDFS、S3、EFS、FSxに対応しています。</p>
+
+<div class="point">
+<p><strong>DataSync vs Snow Family</strong>: DataSyncはネットワーク経由（オンライン転送）。帯域が十分あれば高速。Snow Familyは物理デバイス（オフライン転送）。ネットワークが遅い・大量データのときに使う。</p>
+</div>
+
+<h2>16.5 その他の移行サービス</h2>
+
+<ul>
+<li><strong>Transfer Family</strong>: SFTP/FTPS/FTPでS3やEFSにファイル転送。既存のファイル転送ワークフローをそのまま使える</li>
+<li><strong>Migration Hub</strong>: 移行プロジェクト全体の進捗を一元管理するダッシュボード</li>
+<li><strong>Application Discovery Service</strong>: オンプレミス環境を調査し、サーバーの依存関係やリソース使用状況をマッピング</li>
+<li><strong>Application Migration Service（MGN）</strong>: サーバーのRehost（リフト&シフト）移行を自動化</li>
+<li><strong>Outposts</strong>: AWSのインフラ（ラック）をオンプレミスに物理的に設置。低レイテンシやデータ主権要件に対応</li>
+</ul>
+
+<div class="exam">
+<p><strong>移行サービスの使い分け</strong>:</p>
+<ul>
+<li>「サーバーをそのまま移行（Rehost）」→ <strong>MGN</strong></li>
+<li>「DB移行」→ <strong>DMS</strong></li>
+<li>「大量データ（TB/PB級）をオフラインで」→ <strong>Snow Family</strong></li>
+<li>「NFS/SMBデータをオンラインで」→ <strong>DataSync</strong></li>
+<li>「FTP/SFTPで既存ワークフローのまま」→ <strong>Transfer Family</strong></li>
+<li>「オンプレ環境を調査」→ <strong>Application Discovery Service</strong></li>
+<li>「AWSをオンプレに設置」→ <strong>Outposts</strong></li>
+</ul>
+</div>
+
+<div class="tsurispot">
+<p><strong>ツリスポの移行を例に考える</strong>: もしツリスポがオンプレのMySQLに2,000件のスポットデータを持っていた場合、Aurora PostgreSQLへの移行はDMS+SCTで実現します。画像データが数百GBあればDataSyncでS3に転送。数PBの動画データがあればSnowball Edgeを使います。移行全体の進捗はMigration Hubで管理します。</p>
+</div>
+
+<div class="summary-box">
+<h4>第16章まとめ</h4>
+<ul>
+<li><strong>6R戦略</strong>: Rehost/Replatform/Repurchase/Refactor/Retire/Retain</li>
+<li><strong>DMS</strong>: DB移行。CDC（継続レプリケーション）でダウンタイム最小化。異種DBはSCT併用</li>
+<li><strong>Snow Family</strong>: 物理デバイスで大量データ移行。Snowcone(〜14TB)/Snowball(〜80TB)/Snowmobile(100PB)</li>
+<li><strong>DataSync</strong>: オンラインデータ転送（NFS/SMB/S3/EFS/FSx対応）</li>
+<li><strong>Transfer Family</strong>: SFTP/FTPでS3/EFSへ転送</li>
+<li><strong>MGN</strong>: サーバーのRehost移行を自動化</li>
+<li><strong>Outposts</strong>: AWSインフラをオンプレミスに設置</li>
+</ul>
+</div>
+
+<div class="quiz">
+<p><strong>Q1.</strong> Oracle → Aurora PostgreSQL の移行に必要なサービスの組み合わせは？</p>
+<details><summary>答えを見る</summary><p>DMS（データ転送）+ SCT（スキーマ変換）。異種DB間移行ではSCTでスキーマを変換してからDMSでデータを転送する。</p></details>
+</div>
+<div class="quiz">
+<p><strong>Q2.</strong> 50TBのデータをAWSに移行。ネットワーク帯域が100Mbpsで転送に46日かかる場合の最適な方法は？</p>
+<details><summary>答えを見る</summary><p>Snowball Edge Storage Optimized（80TB）を使用。物理デバイスの配送・データ転送・返送で1〜2週間程度と、ネットワーク転送の46日より大幅に短縮。</p></details>
+</div>
+<div class="quiz">
+<p><strong>Q3.</strong> オンプレミスのNFSサーバーからS3へ定期的にデータを同期する場合は？</p>
+<details><summary>答えを見る</summary><p>AWS DataSync。NFS/SMBに対応し、増分転送、スケジュール実行、データ整合性チェックが可能。</p></details>
+</div>
+
+<h1 id="ch17"><span class="chapter-num">17</span> コスト最適化とWell-Architected Framework 〜賢くAWSを使う〜</h1>
+
+<p>SAA試験の約20%はコスト最適化に関する問題です。また、Well-Architected Frameworkは試験全体を通じて問われる「設計思想」の基盤です。この章は試験の得点源になりますので、しっかり理解しましょう。</p>
+
+<h2>17.1 Well-Architected Framework の6本柱</h2>
+
+<p>AWSが推奨する「良い設計」の指針で、6つの柱（ピラー）で構成されています。</p>
+
+<table>
+<tr><th>柱</th><th>概要</th><th>関連サービス例</th></tr>
+<tr><td><strong>1. 運用上の優秀性</strong><br>(Operational Excellence)</td><td>運用の自動化、改善の継続</td><td>CloudFormation, Systems Manager, CodeDeploy, Config</td></tr>
+<tr><td><strong>2. セキュリティ</strong></td><td>データ保護、権限管理、検知</td><td>IAM, KMS, VPC, Shield, WAF, CloudTrail, GuardDuty</td></tr>
+<tr><td><strong>3. 信頼性</strong><br>(Reliability)</td><td>障害からの自動復旧、スケーリング</td><td>Multi-AZ, Auto Scaling, Route 53, バックアップ</td></tr>
+<tr><td><strong>4. パフォーマンス効率</strong></td><td>リソースの効率的な使用</td><td>Auto Scaling, CloudFront, ElastiCache, Lambda</td></tr>
+<tr><td><strong>5. コスト最適化</strong></td><td>不要な支出の排除</td><td>RI, Savings Plans, Spot, S3ライフサイクル, Compute Optimizer</td></tr>
+<tr><td><strong>6. サステナビリティ</strong><br>(2022年追加)</td><td>環境への影響の最小化</td><td>適切なリージョン選択、効率的なリソース使用</td></tr>
+</table>
+
+<div class="exam">
+<p><strong>Well-Architected Tool</strong>: ワークロード（アプリケーション）を6本柱に基づいてレビューし、改善点を提案するAWSのツール。試験では「ワークロードのベストプラクティスへの準拠を確認したい」→ Well-Architected Toolが正解。</p>
+</div>
+
+<div class="diagram">
+<svg viewBox="0 0 760 320" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <text x="380" y="25" text-anchor="middle" font-size="14" fill="#0c4a6e" font-weight="bold">Well-Architected Framework 6本柱</text>
+  <!-- 中心 -->
+  <circle cx="380" cy="175" r="55" fill="#eff6ff" stroke="#3b82f6" stroke-width="2"/>
+  <text x="380" y="168" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">Well-</text>
+  <text x="380" y="185" text-anchor="middle" font-size="11" fill="#1e40af" font-weight="bold">Architected</text>
+  <!-- 柱1: 運用 -->
+  <rect x="310" y="45" width="140" height="38" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="380" y="69" text-anchor="middle" font-size="10" fill="#1e40af" font-weight="bold">1. 運用上の優秀性</text>
+  <line x1="380" y1="83" x2="380" y2="120" stroke="#3b82f6" stroke-width="1.5"/>
+  <!-- 柱2: セキュリティ -->
+  <rect x="545" y="80" width="140" height="38" rx="8" fill="#fef2f2" stroke="#ef4444" stroke-width="2"/>
+  <text x="615" y="104" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">2. セキュリティ</text>
+  <line x1="545" y1="99" x2="435" y2="155" stroke="#ef4444" stroke-width="1.5"/>
+  <!-- 柱3: 信頼性 -->
+  <rect x="565" y="175" width="140" height="38" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <text x="635" y="199" text-anchor="middle" font-size="10" fill="#166534" font-weight="bold">3. 信頼性</text>
+  <line x1="565" y1="194" x2="435" y2="180" stroke="#22c55e" stroke-width="1.5"/>
+  <!-- 柱4: パフォーマンス -->
+  <rect x="520" y="255" width="160" height="38" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="600" y="279" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">4. パフォーマンス効率</text>
+  <line x1="520" y1="270" x2="420" y2="210" stroke="#f59e0b" stroke-width="1.5"/>
+  <!-- 柱5: コスト -->
+  <rect x="80" y="255" width="160" height="38" rx="8" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="160" y="279" text-anchor="middle" font-size="10" fill="#6d28d9" font-weight="bold">5. コスト最適化</text>
+  <line x1="240" y1="265" x2="340" y2="210" stroke="#8b5cf6" stroke-width="1.5"/>
+  <!-- 柱6: サステナビリティ -->
+  <rect x="60" y="145" width="160" height="38" rx="8" fill="#fff7ed" stroke="#f97316" stroke-width="2"/>
+  <text x="140" y="169" text-anchor="middle" font-size="10" fill="#c2410c" font-weight="bold">6. サステナビリティ</text>
+  <line x1="220" y1="164" x2="325" y2="170" stroke="#f97316" stroke-width="1.5"/>
+</svg>
+<figcaption>図17-1: Well-Architected Framework の6本柱</figcaption>
+</div>
+
+<h2>17.2 コスト管理サービス</h2>
+
+<h3>AWS Cost Explorer</h3>
+<p>過去のコストデータを分析し、将来のコストを予測するツール。サービス別、リージョン別、タグ別などで可視化できます。</p>
+
+<h3>AWS Budgets</h3>
+<p>予算を設定し、予算の超過（またはその予測）をSNSやメールで通知。実コスト予算、使用量予算、RI/Savings Plansの活用率予算を設定可能。</p>
+
+<h3>Cost and Usage Report（CUR）</h3>
+<p>最も詳細なコストデータ。1時間単位のリソースレベルまでの明細が含まれ、S3に出力されます。Athenaで分析可能。</p>
+
+<h3>AWS Compute Optimizer</h3>
+<p>EC2、EBS、Lambda、ECSのリソースサイズが適切かどうかを機械学習で分析し、最適なサイズを推奨します。</p>
+
+<h2>17.3 EC2購入オプション（コスト最適化の核心）</h2>
+
+<table>
+<tr><th>購入オプション</th><th>割引率</th><th>期間</th><th>特徴</th></tr>
+<tr><td><strong>オンデマンド</strong></td><td>0%（定価）</td><td>なし</td><td>従量課金。いつでも開始・停止可能</td></tr>
+<tr><td><strong>Reserved Instances (RI)</strong></td><td>最大72% OFF</td><td>1年 or 3年</td><td>インスタンスタイプ・リージョン・OSを予約。全額前払い/一部前払い/前払いなし</td></tr>
+<tr><td><strong>Savings Plans</strong></td><td>最大72% OFF</td><td>1年 or 3年</td><td>コンピューティング使用量（$/時）を約束。EC2/Fargate/Lambdaに適用。RIより柔軟</td></tr>
+<tr><td><strong>Spot Instances</strong></td><td>最大90% OFF</td><td>なし</td><td>余剰キャパシティ。<strong>2分前通知で中断される可能性あり</strong>。バッチ処理、CI/CD、ビッグデータ分析など中断耐性のあるワークロード向け</td></tr>
+<tr><td><strong>Dedicated Hosts</strong></td><td>-</td><td>-</td><td>物理サーバーを専有。ライセンス要件（BYOL）やコンプライアンス要件</td></tr>
+<tr><td><strong>Dedicated Instances</strong></td><td>-</td><td>-</td><td>ハードウェアは専有だが物理サーバーの指定はできない</td></tr>
+</table>
+
+<div class="exam">
+<p><strong>RI vs Savings Plans</strong>: どちらも1年/3年のコミットで最大72%割引。RIはインスタンスタイプが固定、Savings Plansは使用量（$/h）を約束するので柔軟。試験では「最もコスト効率が良い」=「3年全額前払いのRI or Savings Plans」、「柔軟性が必要」=「Savings Plans」が正解パターン。</p>
+</div>
+
+<div class="exam">
+<p><strong>Spot Instancesの注意点</strong>: 最大90%割引だが中断される可能性がある。「中断耐性」が必要。本番Webサーバーには不適切。バッチ処理、データ分析、CI/CD、テスト環境に使う。Spot Fleet（複数Spotの組み合わせ）やEC2 Auto Scaling Groupのミックスインスタンスポリシーで活用。</p>
+</div>
+
+<div class="diagram">
+<svg viewBox="0 0 760 280" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <text x="380" y="22" text-anchor="middle" font-size="14" fill="#0c4a6e" font-weight="bold">EC2購入オプション コスト比較</text>
+  <!-- Y軸 -->
+  <line x1="100" y1="50" x2="100" y2="240" stroke="#94a3b8" stroke-width="2"/>
+  <text x="50" y="150" text-anchor="middle" font-size="11" fill="#64748b" transform="rotate(-90,50,150)">コスト</text>
+  <!-- X軸 -->
+  <line x1="100" y1="240" x2="700" y2="240" stroke="#94a3b8" stroke-width="2"/>
+  <!-- オンデマンド 100% -->
+  <rect x="140" y="60" width="80" height="180" rx="4" fill="#ef4444" opacity="0.8"/>
+  <text x="180" y="55" text-anchor="middle" font-size="10" fill="#dc2626" font-weight="bold">100%</text>
+  <text x="180" y="260" text-anchor="middle" font-size="10" fill="#64748b">オンデマンド</text>
+  <!-- RI 1年 -->
+  <rect x="260" y="105" width="80" height="135" rx="4" fill="#f59e0b" opacity="0.8"/>
+  <text x="300" y="100" text-anchor="middle" font-size="10" fill="#92400e" font-weight="bold">〜40% OFF</text>
+  <text x="300" y="260" text-anchor="middle" font-size="10" fill="#64748b">RI (1年)</text>
+  <!-- RI 3年 / Savings Plans -->
+  <rect x="380" y="140" width="80" height="100" rx="4" fill="#22c55e" opacity="0.8"/>
+  <text x="420" y="135" text-anchor="middle" font-size="10" fill="#166534" font-weight="bold">〜72% OFF</text>
+  <text x="420" y="260" text-anchor="middle" font-size="9" fill="#64748b">RI (3年)</text>
+  <text x="420" y="273" text-anchor="middle" font-size="9" fill="#64748b">Savings Plans</text>
+  <!-- Spot -->
+  <rect x="500" y="198" width="80" height="42" rx="4" fill="#8b5cf6" opacity="0.8"/>
+  <text x="540" y="193" text-anchor="middle" font-size="10" fill="#6d28d9" font-weight="bold">〜90% OFF</text>
+  <text x="540" y="260" text-anchor="middle" font-size="10" fill="#64748b">Spot</text>
+  <text x="540" y="273" text-anchor="middle" font-size="8" fill="#dc2626">(中断リスクあり)</text>
+</svg>
+<figcaption>図17-2: EC2購入オプションのコスト比較</figcaption>
+</div>
+
+<div class="tsurispot">
+<p><strong>ツリスポのコスト最適化</strong>: App Runnerは使った分だけ課金（アイドル時は最小インスタンスのみ）で、小規模サイトには最適。将来トラフィックが増えてEC2に移行するなら、Savings Plans（3年、全額前払い=最大72%OFF）を検討。SSGビルドのようなバッチ処理にはSpot Instancesを使えば最大90%OFF。S3の画像はライフサイクルポリシーで30日後にIA、90日後にGlacierへ自動移行。</p>
+</div>
+
+<h2>17.4 インフラ自動化（IaC）</h2>
+
+<h3>CloudFormation</h3>
+<p>Infrastructure as Code（IaC）サービス。YAMLまたはJSON形式のテンプレートでAWSリソースを定義し、「スタック」として一括作成・更新・削除できます。</p>
+
+<ul>
+<li><strong>テンプレート</strong>: リソース定義（必須セクション: Resources）</li>
+<li><strong>スタック</strong>: テンプレートから作成されたリソースの集合</li>
+<li><strong>スタックセット</strong>: 複数アカウント・リージョンに同じスタックを展開</li>
+<li><strong>ドリフト検出</strong>: テンプレートと実際のリソースの差異を検出</li>
+</ul>
+
+<div class="exam">
+<p><strong>CloudFormationの出題パターン</strong>:「インフラの再現性」「複数環境を同じ構成で」「設定をバージョン管理」→ CloudFormation。テンプレートのResourcesセクションは唯一の必須セクション。</p>
+</div>
+
+<h3>CDK（Cloud Development Kit）</h3>
+<p>TypeScript、Python、Javaなどのプログラミング言語でインフラを定義し、CloudFormationテンプレートを生成するツール。プログラマにとってはYAMLより書きやすい。</p>
+
+<h3>Elastic Beanstalk</h3>
+<p>PaaS（Platform as a Service）。コードをアップロードするだけで、EC2、ALB、Auto Scaling、RDSなどのインフラを自動構築。開発者はコードに集中できます。裏ではCloudFormationが動いています。</p>
+
+<h3>SAM（Serverless Application Model）</h3>
+<p>サーバーレスアプリ（Lambda + API Gateway + DynamoDB等）に特化したIaCフレームワーク。CloudFormationの拡張版です。</p>
+
+<h3>Systems Manager</h3>
+<p>EC2やオンプレミスサーバーの運用を自動化するサービス群。</p>
+<ul>
+<li><strong>Run Command</strong>: コマンドをリモート実行（SSHなしで）</li>
+<li><strong>Patch Manager</strong>: OSパッチの自動適用</li>
+<li><strong>Session Manager</strong>: ブラウザからシェルアクセス（SSHポート不要、セキュア）</li>
+<li><strong>Parameter Store</strong>: 設定値やシークレットの安全な保存</li>
+</ul>
+
+<div class="diagram">
+<svg viewBox="0 0 760 240" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <defs><marker id="a7" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#64748b"/></marker></defs>
+  <text x="380" y="22" text-anchor="middle" font-size="14" fill="#0c4a6e" font-weight="bold">CloudFormation ワークフロー</text>
+  <rect x="30" y="70" width="150" height="80" rx="10" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="105" y="100" text-anchor="middle" font-size="12" fill="#92400e" font-weight="bold">テンプレート</text>
+  <text x="105" y="120" text-anchor="middle" font-size="10" fill="#b45309">YAML / JSON</text>
+  <text x="105" y="140" text-anchor="middle" font-size="9" fill="#b45309">Gitでバージョン管理</text>
+  <rect x="250" y="70" width="150" height="80" rx="10" fill="#ede9fe" stroke="#8b5cf6" stroke-width="2"/>
+  <text x="325" y="95" text-anchor="middle" font-size="12" fill="#6d28d9" font-weight="bold">CloudFormation</text>
+  <text x="325" y="115" text-anchor="middle" font-size="10" fill="#7c3aed">スタック作成</text>
+  <text x="325" y="135" text-anchor="middle" font-size="9" fill="#7c3aed">変更セット / ロールバック</text>
+  <rect x="480" y="40" width="120" height="38" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="540" y="64" text-anchor="middle" font-size="10" fill="#1e40af" font-weight="bold">VPC / Subnet</text>
+  <rect x="480" y="90" width="120" height="38" rx="8" fill="#f0fdf4" stroke="#22c55e" stroke-width="2"/>
+  <text x="540" y="114" text-anchor="middle" font-size="10" fill="#166534" font-weight="bold">EC2 / ALB</text>
+  <rect x="480" y="140" width="120" height="38" rx="8" fill="#fce7f3" stroke="#ec4899" stroke-width="2"/>
+  <text x="540" y="164" text-anchor="middle" font-size="10" fill="#be185d" font-weight="bold">RDS / S3</text>
+  <rect x="630" y="80" width="85" height="55" rx="8" fill="#fff7ed" stroke="#f97316" stroke-width="2" stroke-dasharray="4"/>
+  <text x="672" y="102" text-anchor="middle" font-size="10" fill="#c2410c" font-weight="bold">スタック</text>
+  <text x="672" y="122" text-anchor="middle" font-size="9" fill="#ea580c">= リソース群</text>
+  <line x1="180" y1="110" x2="250" y2="110" stroke="#64748b" stroke-width="2" marker-end="url(#a7)"/>
+  <line x1="400" y1="90" x2="480" y2="59" stroke="#64748b" stroke-width="1.5" marker-end="url(#a7)"/>
+  <line x1="400" y1="110" x2="480" y2="109" stroke="#64748b" stroke-width="1.5" marker-end="url(#a7)"/>
+  <line x1="400" y1="130" x2="480" y2="159" stroke="#64748b" stroke-width="1.5" marker-end="url(#a7)"/>
+</svg>
+<figcaption>図17-3: CloudFormationのワークフロー（テンプレート → スタック → リソース群）</figcaption>
+</div>
+
+<div class="tsurispot">
+<p><strong>ツリスポのインフラ管理</strong>: ツリスポのAWSインフラ（App Runner、S3バケット、CloudFront、Route 53）をCloudFormationテンプレートで管理すれば、環境を簡単に複製できます。開発環境と本番環境を同じテンプレートから作成し、パラメータだけ変更。テンプレートはGitで管理するので「いつ何を変更したか」が追跡可能です。</p>
+</div>
+
+<div class="summary-box">
+<h4>第17章まとめ</h4>
+<ul>
+<li><strong>Well-Architected Framework</strong>: 6本柱（運用/セキュリティ/信頼性/パフォーマンス/コスト/サステナビリティ）</li>
+<li><strong>Cost Explorer</strong>: コスト分析・予測。<strong>Budgets</strong>: 予算アラート。<strong>CUR</strong>: 最詳細データ</li>
+<li><strong>RI</strong>: インスタンスタイプ固定で最大72%OFF。<strong>Savings Plans</strong>: $/h約束で柔軟+最大72%OFF</li>
+<li><strong>Spot</strong>: 最大90%OFFだが中断あり。バッチ処理・テスト向け</li>
+<li><strong>CloudFormation</strong>: IaC。テンプレート(YAML/JSON)でインフラをコード管理</li>
+<li><strong>Elastic Beanstalk</strong>: PaaS。コードアップロードだけでインフラ自動構築</li>
+<li><strong>Systems Manager</strong>: Run Command（リモート実行）、Session Manager（SSHなしシェル）、Patch Manager</li>
+<li><strong>Compute Optimizer</strong>: 機械学習でEC2/EBS/Lambda/ECSの最適サイズを推奨</li>
+</ul>
+</div>
+
+<div class="quiz">
+<p><strong>Q1.</strong> EC2の長期利用で最もコスト効率が良い購入方法は？</p>
+<details><summary>答えを見る</summary><p>3年全額前払いのReserved Instances または Savings Plans。最大72%の割引が得られる。柔軟性が必要ならSavings Plans。</p></details>
+</div>
+<div class="quiz">
+<p><strong>Q2.</strong> Spot Instancesが適切なワークロードは？</p>
+<details><summary>答えを見る</summary><p>中断耐性のあるワークロード: バッチ処理、ビッグデータ分析、CI/CD、テスト環境、画像/動画処理。2分前通知で中断されるため、本番Webサーバーには不適切。</p></details>
+</div>
+<div class="quiz">
+<p><strong>Q3.</strong> CloudFormationテンプレートで唯一の必須セクションは？</p>
+<details><summary>答えを見る</summary><p>Resources セクション。作成するAWSリソースを定義する部分。他のセクション（Parameters、Mappings、Outputs等）はオプション。</p></details>
+</div>
+<div class="quiz">
+<p><strong>Q4.</strong> Well-Architected Framework の6本柱を全て挙げよ。</p>
+<details><summary>答えを見る</summary><p>1.運用上の優秀性、2.セキュリティ、3.信頼性、4.パフォーマンス効率、5.コスト最適化、6.サステナビリティ</p></details>
+</div>
+
+<h1 id="ch18"><span class="chapter-num">18</span> 模擬問題50問 〜本番形式で力試し〜</h1>
+
+<p>SAA-C03本番と同等の難易度で50問を出題します。各問題に詳細な解説付き。カテゴリ配分: セキュア(15問)/弾力性(13問)/パフォーマンス(12問)/コスト最適化(10問)。</p>
+
+<div class="point">
+<p>解答を見る前に自分で考えてみてください。間違えた問題は解説をしっかり読んで理解しましょう。合格ラインは72%（36/50問）です。</p>
+</div>
+
+<!-- Q1 -->
+<div class="question-card">
+  <h4>問題 1 / 50 <span style="font-size:0.8em;color:#64748b">（セキュアなアーキテクチャ）</span></h4>
+  <p>ある釣り情報サイトでは、S3バケットに保存された画像をCloudFront経由で配信しています。S3バケットへの直接アクセスを防ぎ、CloudFront経由のアクセスのみを許可するために、最も適切な方法はどれですか？</p>
+  <ol class="choices">
+    <li>S3バケットポリシーでCloudFrontのIPレンジのみを許可する</li>
+    <li>CloudFront Origin Access Control（OAC）を設定し、S3バケットポリシーでOACからのアクセスのみを許可する</li>
+    <li>S3バケットをパブリックに設定し、CloudFrontのカスタムヘッダーで認証する</li>
+    <li>S3バケットにVPCエンドポイントを設定する</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p><strong>OAC（Origin Access Control）</strong>は、CloudFrontからS3への安全なアクセスを実現するAWS推奨の方法です。OACを使うと、S3バケットをパブリックにする必要がなく、CloudFront経由のみでアクセスが可能になります。</p>
+      <p>A: CloudFrontのIPレンジは変更される可能性があり、メンテナンスが困難。B: OACが正解。旧OAI（Origin Access Identity）の後継で現在の推奨。C: バケットをパブリックにするのはセキュリティ上不適切。D: VPCエンドポイントはVPC内からのアクセス用で、CloudFrontとは無関係。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q2 -->
+<div class="question-card">
+  <h4>問題 2 / 50 <span style="font-size:0.8em;color:#64748b">（セキュアなアーキテクチャ）</span></h4>
+  <p>EC2インスタンスからS3バケットにアクセスする必要があります。アクセスキーをコードに埋め込まずに安全に実現する方法として、最も適切なものはどれですか？</p>
+  <ol class="choices">
+    <li>EC2インスタンスにIAMユーザーのアクセスキーを環境変数として設定する</li>
+    <li>IAMロールを作成してEC2インスタンスプロファイルにアタッチする</li>
+    <li>S3バケットをパブリック読み取り可能にする</li>
+    <li>EC2のセキュリティグループでS3へのアウトバウンドを許可する</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>IAMロールをEC2インスタンスプロファイルにアタッチすると、EC2内のアプリケーションは一時的な認証情報を自動取得してS3にアクセスできます。アクセスキーの管理が不要で、認証情報の自動ローテーションも行われます。</p>
+      <p>A: アクセスキーの使用はベストプラクティスに反する（キーの漏洩リスク）。C: パブリックアクセスはセキュリティ上不適切。D: セキュリティグループはネットワークレベルの制御で、IAM認証とは別。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q3 -->
+<div class="question-card">
+  <h4>問題 3 / 50 <span style="font-size:0.8em;color:#64748b">（セキュアなアーキテクチャ）</span></h4>
+  <p>VPC内のプライベートサブネットにあるEC2インスタンスからS3バケットにアクセスする際、トラフィックがインターネットを経由しないようにしたい。最も適切な方法はどれですか？</p>
+  <ol class="choices">
+    <li>NATゲートウェイを設定する</li>
+    <li>S3用のVPCゲートウェイエンドポイントを作成する</li>
+    <li>インターネットゲートウェイを追加する</li>
+    <li>VPNを設定する</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>VPCゲートウェイエンドポイントを使うと、VPC内からS3（およびDynamoDB）へのトラフィックがAWSの内部ネットワークを通り、インターネットを経由しません。追加費用もかかりません。</p>
+      <p>A: NATゲートウェイはインターネット経由でアクセスするため要件を満たさない。C: インターネットゲートウェイも同様にインターネット経由。D: VPNはオンプレミスとの接続用。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q4 -->
+<div class="question-card">
+  <h4>問題 4 / 50 <span style="font-size:0.8em;color:#64748b">（セキュアなアーキテクチャ）</span></h4>
+  <p>アプリケーションのデータベース接続パスワードを安全に管理し、定期的に自動ローテーションする必要があります。最も適切なAWSサービスはどれですか？</p>
+  <ol class="choices">
+    <li>AWS Systems Manager Parameter Store（Standard）</li>
+    <li>AWS Secrets Manager</li>
+    <li>AWS KMS</li>
+    <li>AWS IAM</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>AWS Secrets Managerは、シークレット（パスワード、APIキーなど）の安全な保存と<strong>自動ローテーション</strong>機能を備えたサービスです。RDSやRedshiftのパスワードをLambdaと連携して自動的にローテーションできます。</p>
+      <p>A: Parameter Storeでもシークレットは保存できるが、自動ローテーション機能が組み込まれていない。B: Secrets Managerは自動ローテーションが最大の特徴。C: KMSは暗号化キーの管理サービスでシークレット管理とは異なる。D: IAMはアクセス制御で、シークレット管理機能はない。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q5 -->
+<div class="question-card">
+  <h4>問題 5 / 50 <span style="font-size:0.8em;color:#64748b">（セキュアなアーキテクチャ）</span></h4>
+  <p>S3バケットに保存するデータを暗号化する必要があります。暗号化キーをAWSに管理させつつ、キーの使用を監査ログで追跡したい場合、最も適切な暗号化方式はどれですか？</p>
+  <ol class="choices">
+    <li>SSE-S3（S3管理キー）</li>
+    <li>SSE-KMS（KMS管理キー）</li>
+    <li>SSE-C（お客様提供キー）</li>
+    <li>クライアントサイド暗号化</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>SSE-KMSは、AWS KMSで管理されるキーを使ってS3オブジェクトを暗号化します。KMSではキーの使用がCloudTrailに記録されるため、「誰がいつキーを使ったか」を監査できます。</p>
+      <p>A: SSE-S3はAWSが完全管理するが、個別のキー使用ログは取得できない。B: SSE-KMSはCloudTrailで監査可能。C: SSE-Cはお客様がキーを管理するため、AWSに管理させる要件に合わない。D: クライアントサイド暗号化もキーの自己管理。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q6 -->
+<div class="question-card">
+  <h4>問題 6 / 50 <span style="font-size:0.8em;color:#64748b">（セキュアなアーキテクチャ）</span></h4>
+  <p>WebアプリケーションをSQLインジェクションやクロスサイトスクリプティング（XSS）などの一般的なWeb攻撃から保護するために使用するAWSサービスはどれですか？</p>
+  <ol class="choices">
+    <li>AWS Shield Standard</li>
+    <li>AWS WAF</li>
+    <li>Amazon GuardDuty</li>
+    <li>Amazon Inspector</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>AWS WAF（Web Application Firewall）は、SQLインジェクション、XSS、その他のWeb攻撃パターンをフィルタリングします。ALB、CloudFront、API Gatewayに適用可能です。</p>
+      <p>A: Shield StandardはDDoS攻撃からの保護（レイヤー3/4）で、SQLインジェクション等のレイヤー7攻撃には対応しない。C: GuardDutyは脅威検知（不正なAPI呼び出し、不正なネットワーク通信の検出）。D: InspectorはEC2やコンテナの脆弱性スキャン。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q7 -->
+<div class="question-card">
+  <h4>問題 7 / 50 <span style="font-size:0.8em;color:#64748b">（セキュアなアーキテクチャ）</span></h4>
+  <p>IAMポリシーで、特定のS3バケットへのアクセスをExplicit Deny（明示的拒否）したユーザーに対して、別のポリシーでAllowを追加した場合、結果はどうなりますか？</p>
+  <ol class="choices">
+    <li>Allowが優先されアクセスできる</li>
+    <li>Explicit Denyが常に優先されアクセスできない</li>
+    <li>最後に評価されたポリシーが適用される</li>
+    <li>エラーが発生する</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>IAMポリシーの評価ロジックでは、<strong>Explicit Deny（明示的拒否）は常にAllowより優先</strong>されます。これはIAMの最も重要な原則です。デフォルトはDeny（暗黙の拒否）→ Allowがあれば許可 → ただしExplicit Denyがあれば無条件で拒否、という順序で評価されます。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q8 -->
+<div class="question-card">
+  <h4>問題 8 / 50 <span style="font-size:0.8em;color:#64748b">（弾力性に優れたアーキテクチャ）</span></h4>
+  <p>RDSインスタンスの可用性を高めるために、自動フェイルオーバーを設定したい。最も適切な構成はどれですか？</p>
+  <ol class="choices">
+    <li>RDSリードレプリカを作成する</li>
+    <li>RDS Multi-AZデプロイメントを有効にする</li>
+    <li>RDSのバックアップを有効にする</li>
+    <li>RDSをElastiCacheと組み合わせる</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>RDS Multi-AZは、プライマリDBと別のAZにスタンバイレプリカを配置し、プライマリに障害が発生した場合に<strong>自動フェイルオーバー</strong>（60-120秒）します。</p>
+      <p>A: リードレプリカは読み取りスケーリング用で、自動フェイルオーバー機能はない（手動でプロモーション可能）。C: バックアップはデータの復元用で可用性向上とは異なる。D: ElastiCacheはキャッシュでDB可用性とは直接関係ない。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q9 -->
+<div class="question-card">
+  <h4>問題 9 / 50 <span style="font-size:0.8em;color:#64748b">（弾力性に優れたアーキテクチャ）</span></h4>
+  <p>ある釣り情報サイトは3つのAZにまたがるALBとAuto Scaling Groupで運用されています。1つのAZで障害が発生した場合、サイトの動作について正しい説明はどれですか？</p>
+  <ol class="choices">
+    <li>サイト全体が停止する</li>
+    <li>残り2つのAZのインスタンスで自動的にトラフィックが処理される</li>
+    <li>手動で障害AZのインスタンスを削除する必要がある</li>
+    <li>Route 53で手動でDNSを切り替える必要がある</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>ALBは複数AZのヘルスチェックを行い、障害AZのインスタンスへのルーティングを自動停止します。Auto Scaling Groupは障害AZの不足分を残りのAZで自動補充します。これがMulti-AZ構成の信頼性の核心です。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q10 -->
+<div class="question-card">
+  <h4>問題 10 / 50 <span style="font-size:0.8em;color:#64748b">（弾力性に優れたアーキテクチャ）</span></h4>
+  <p>S3バケットに保存されたオブジェクトの誤削除を防ぐために、最も効果的な方法はどれですか？（2つ選択）</p>
+  <ol class="choices">
+    <li>S3バージョニングを有効にする</li>
+    <li>S3 MFA Deleteを有効にする</li>
+    <li>S3のクロスリージョンレプリケーションを設定する</li>
+    <li>S3のサーバーサイド暗号化を有効にする</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: A, B</p>
+      <p>A: バージョニングを有効にすると、削除してもバージョンが残り復元可能。B: MFA Deleteは、バージョンの完全削除にMFA認証を要求し、誤削除・不正削除を防止。</p>
+      <p>C: クロスリージョンレプリケーションはDR用だが、誤削除はレプリカにも伝播する。D: 暗号化はデータ保護で誤削除対策ではない。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q11 -->
+<div class="question-card">
+  <h4>問題 11 / 50 <span style="font-size:0.8em;color:#64748b">（弾力性に優れたアーキテクチャ）</span></h4>
+  <p>ある企業のDR（災害復旧）戦略で、本番リージョンの障害発生時にRTO（目標復旧時間）を数分以内にする必要があります。コストを考慮した上で最も適切なDR戦略はどれですか？</p>
+  <ol class="choices">
+    <li>バックアップ&リストア</li>
+    <li>パイロットライト</li>
+    <li>ウォームスタンバイ</li>
+    <li>マルチサイトアクティブ-アクティブ</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: C</p>
+      <p>ウォームスタンバイは、DRリージョンに本番の縮小版（最小構成）を常時稼働させておく戦略です。障害時にスケールアップするだけで数分以内に復旧可能。</p>
+      <p>A: バックアップ&リストアはRTO数時間。B: パイロットライトはコア部分のみ稼働でRTO数十分。C: ウォームスタンバイはRTO数分でコストとのバランスが良い。D: マルチサイトは最速だがコストが最も高い。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q12 -->
+<div class="question-card">
+  <h4>問題 12 / 50 <span style="font-size:0.8em;color:#64748b">（弾力性に優れたアーキテクチャ）</span></h4>
+  <p>Auto Scaling Groupで、CPU使用率が70%を超えたらインスタンスを追加し、30%を下回ったら削除するポリシーを設定したい。最も適切なスケーリングポリシーはどれですか？</p>
+  <ol class="choices">
+    <li>シンプルスケーリング</li>
+    <li>ステップスケーリング</li>
+    <li>ターゲット追跡スケーリング</li>
+    <li>スケジュールスケーリング</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: C</p>
+      <p>ターゲット追跡スケーリングは、指定したターゲット値（例: CPU使用率50%）を維持するように自動でスケールイン/アウトします。最もシンプルで推奨される方法です。</p>
+      <p>A: シンプルスケーリングはアラーム発動後のクールダウン期間中は反応しない。B: ステップスケーリングは閾値の段階に応じた増減。C: ターゲット追跡が最も適切で推奨。D: スケジュールは時間ベースで、負荷ベースではない。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q13 -->
+<div class="question-card">
+  <h4>問題 13 / 50 <span style="font-size:0.8em;color:#64748b">（弾力性に優れたアーキテクチャ）</span></h4>
+  <p>SQSキューのメッセージ処理が何度も失敗するメッセージがあります。このメッセージが通常のキュー処理をブロックしないようにする最善の方法は？</p>
+  <ol class="choices">
+    <li>メッセージの保持期間を短くする</li>
+    <li>デッドレターキュー（DLQ）を設定する</li>
+    <li>可視性タイムアウトを長くする</li>
+    <li>FIFO Queueに変更する</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>DLQ（デッドレターキュー）は、指定した回数（maxReceiveCount）処理に失敗したメッセージを自動的に別のキューに移動します。問題のあるメッセージを隔離して後から調査でき、通常の処理フローをブロックしません。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q14 -->
+<div class="question-card">
+  <h4>問題 14 / 50 <span style="font-size:0.8em;color:#64748b">（セキュアなアーキテクチャ）</span></h4>
+  <p>複数のAWSアカウントを一元管理し、共通のSCP（サービスコントロールポリシー）を適用したい。使用するサービスはどれですか？</p>
+  <ol class="choices">
+    <li>AWS IAM</li>
+    <li>AWS Organizations</li>
+    <li>AWS Control Tower</li>
+    <li>AWS Config</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>AWS Organizationsは複数AWSアカウントを組織単位（OU）で管理し、SCP（サービスコントロールポリシー）で組織全体のアクセス制御を行います。</p>
+      <p>A: IAMは単一アカウント内の権限管理。C: Control Towerはマルチアカウント環境のセットアップを自動化するが、SCPの適用自体はOrganizationsの機能。D: Configはリソース設定の監査。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q15 -->
+<div class="question-card">
+  <h4>問題 15 / 50 <span style="font-size:0.8em;color:#64748b">（セキュアなアーキテクチャ）</span></h4>
+  <p>CloudTrailのログが改ざんされていないことを証明する必要があるコンプライアンス要件があります。最も適切な方法は？</p>
+  <ol class="choices">
+    <li>CloudTrailログをS3のGlacierに保存する</li>
+    <li>CloudTrailのログファイル整合性検証を有効にする</li>
+    <li>CloudTrailログを暗号化する</li>
+    <li>CloudTrailログのS3バケットにMFA Deleteを設定する</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>CloudTrailのログファイル整合性検証（Log File Integrity Validation）を有効にすると、ダイジェストファイルが生成され、ログが作成後に変更・削除されていないことを暗号学的に証明できます。</p>
+      <p>A: Glacierは長期保管のみで改ざん証明にはならない。C: 暗号化は転送中・保管中の保護で改ざん検知ではない。D: MFA Deleteは削除防止だが改ざん証明ではない。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q16 -->
+<div class="question-card">
+  <h4>問題 16 / 50 <span style="font-size:0.8em;color:#64748b">（セキュアなアーキテクチャ）</span></h4>
+  <p>VPC内のセキュリティグループとネットワークACL（NACL）の違いについて正しい記述はどれですか？</p>
+  <ol class="choices">
+    <li>セキュリティグループはステートレスで、NACLはステートフルである</li>
+    <li>セキュリティグループはステートフルで、NACLはステートレスである</li>
+    <li>どちらもステートフルである</li>
+    <li>どちらもステートレスである</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p><strong>セキュリティグループはステートフル</strong>: インバウンドを許可すれば、対応するアウトバウンドの戻りトラフィックは自動許可。<strong>NACLはステートレス</strong>: インバウンドとアウトバウンドのルールを別々に設定する必要がある。これは非常に頻出の問題です。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q17 -->
+<div class="question-card">
+  <h4>問題 17 / 50 <span style="font-size:0.8em;color:#64748b">（弾力性に優れたアーキテクチャ）</span></h4>
+  <p>ある釣り情報サイトのデータベースで、読み取りクエリが書き込みの10倍あり、読み取りパフォーマンスを向上させたい。最も適切な方法はどれですか？</p>
+  <ol class="choices">
+    <li>RDSインスタンスをスケールアップ（より大きいインスタンスタイプ）する</li>
+    <li>RDS Multi-AZを有効にする</li>
+    <li>RDSリードレプリカを作成し、読み取りクエリをリードレプリカに分散する</li>
+    <li>ElastiCacheを追加してDBへのアクセスを減らす</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: C</p>
+      <p>リードレプリカは読み取り専用のDBコピーで、読み取りクエリを複数のレプリカに分散できます。読み取りが圧倒的に多い場合に最も効果的です。</p>
+      <p>A: スケールアップには限界がありコスト増。B: Multi-AZは可用性向上で読み取りスケーリングではない。D: ElastiCacheも有効だが、問題は「読み取りパフォーマンス向上」に特化しており、リードレプリカが最も直接的。（実務ではC+Dの併用が多い）</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q18 -->
+<div class="question-card">
+  <h4>問題 18 / 50 <span style="font-size:0.8em;color:#64748b">（高パフォーマンスなアーキテクチャ）</span></h4>
+  <p>世界中のユーザーにWebコンテンツを低レイテンシで配信するために使用すべきサービスはどれですか？</p>
+  <ol class="choices">
+    <li>Amazon S3 Transfer Acceleration</li>
+    <li>Amazon CloudFront</li>
+    <li>AWS Global Accelerator</li>
+    <li>Amazon Route 53 レイテンシーベースルーティング</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>CloudFrontは世界中のエッジロケーションにコンテンツをキャッシュし、ユーザーに最も近い場所から配信するCDNです。静的コンテンツ（画像、CSS、JS）だけでなく動的コンテンツも高速化します。</p>
+      <p>A: S3 Transfer Accelerationはアップロード高速化。C: Global Acceleratorは固定IPとAWSネットワーク最適化だがキャッシュなし。D: Route 53は最も近いリージョンへルーティングするがキャッシュなし。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q19 -->
+<div class="question-card">
+  <h4>問題 19 / 50 <span style="font-size:0.8em;color:#64748b">（高パフォーマンスなアーキテクチャ）</span></h4>
+  <p>ALBとNLBの使い分けについて正しい記述はどれですか？</p>
+  <ol class="choices">
+    <li>ALBはレイヤー4で動作し、NLBはレイヤー7で動作する</li>
+    <li>ALBはHTTP/HTTPSに対応し、NLBはTCP/UDP/TLSに対応する</li>
+    <li>NLBはパスベースルーティングをサポートする</li>
+    <li>ALBは固定IPアドレスを提供する</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>ALBはレイヤー7（HTTP/HTTPS）で動作し、パスベース/ホストベースルーティングが可能。NLBはレイヤー4（TCP/UDP/TLS）で動作し、超低レイテンシと固定IP（Elastic IP）を提供します。</p>
+      <p>A: 逆。ALB=L7、NLB=L4。C: パスベースルーティングはALBの機能。D: 固定IPはNLBの特徴。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q20 -->
+<div class="question-card">
+  <h4>問題 20 / 50 <span style="font-size:0.8em;color:#64748b">（高パフォーマンスなアーキテクチャ）</span></h4>
+  <p>ある釣り情報サイトで、頻繁にアクセスされるスポット情報のDBクエリ結果をキャッシュしてレイテンシを削減したい。最も適切なサービスはどれですか？</p>
+  <ol class="choices">
+    <li>Amazon DynamoDB DAX</li>
+    <li>Amazon ElastiCache</li>
+    <li>Amazon CloudFront</li>
+    <li>Amazon RDS リードレプリカ</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>ElastiCache（Redis/Memcached）は汎用的なインメモリキャッシュで、RDS等のDBクエリ結果をキャッシュしてレイテンシを大幅に削減します。</p>
+      <p>A: DAXはDynamoDB専用のキャッシュ。問題文がRDSならDAXは不適切。B: ElastiCacheは汎用キャッシュで最適。C: CloudFrontはCDNでHTTPレスポンスのキャッシュ。DBクエリ結果の直接キャッシュではない。D: リードレプリカはDB負荷分散だがキャッシュではない。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q21 -->
+<div class="question-card">
+  <h4>問題 21 / 50 <span style="font-size:0.8em;color:#64748b">（高パフォーマンスなアーキテクチャ）</span></h4>
+  <p>Lambda関数のタイムアウトが15分では足りない長時間処理を実行する必要があります。サーバーレスで実現する最も適切な方法は？</p>
+  <ol class="choices">
+    <li>Lambdaのタイムアウトを延長する</li>
+    <li>AWS Step Functionsで処理を複数のLambda関数に分割する</li>
+    <li>EC2インスタンスで処理する</li>
+    <li>ECS Fargateでコンテナを実行する</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>Lambdaの最大タイムアウトは15分で延長不可。Step Functionsで処理を複数のLambdaに分割し、ワークフローとして実行すれば、最大1年間の長時間処理が可能です（サーバーレスのまま）。</p>
+      <p>A: 15分が最大で延長不可。C: EC2はサーバーレスではない。D: Fargateはサーバーレスだが、Step Functionsの方が問題の趣旨（Lambda処理の延長）に合っている。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q22 -->
+<div class="question-card">
+  <h4>問題 22 / 50 <span style="font-size:0.8em;color:#64748b">（高パフォーマンスなアーキテクチャ）</span></h4>
+  <p>Route 53で、ユーザーを最も近いリージョンのリソースにルーティングしたい。使用すべきルーティングポリシーは？</p>
+  <ol class="choices">
+    <li>シンプルルーティング</li>
+    <li>加重ルーティング</li>
+    <li>レイテンシーベースルーティング</li>
+    <li>フェイルオーバールーティング</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: C</p>
+      <p>レイテンシーベースルーティングは、ユーザーとAWSリージョン間のレイテンシを測定し、最もレイテンシの低いリージョンにルーティングします。</p>
+      <p>A: シンプルは1つのリソースにルーティング。B: 加重は割合でトラフィック配分（A/Bテスト等）。D: フェイルオーバーはプライマリ障害時にセカンダリへ。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q23 -->
+<div class="question-card">
+  <h4>問題 23 / 50 <span style="font-size:0.8em;color:#64748b">（高パフォーマンスなアーキテクチャ）</span></h4>
+  <p>IoTデバイスから毎秒数千件のデータを受信し、リアルタイムでダッシュボードに表示する必要があります。データ収集に最も適切なサービスは？</p>
+  <ol class="choices">
+    <li>Amazon SQS</li>
+    <li>Amazon Kinesis Data Streams</li>
+    <li>Amazon SNS</li>
+    <li>Amazon MQ</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>Kinesis Data Streamsはリアルタイムストリーミングデータの収集・処理に特化しています。IoTデバイスからの大量データをシャード単位で並列処理し、複数のConsumerが同時に読み取れます。</p>
+      <p>A: SQSは非同期タスクキューでリアルタイムストリーミングには不向き。C: SNSはPub/Sub通知。D: MQはレガシー移行用。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q24 -->
+<div class="question-card">
+  <h4>問題 24 / 50 <span style="font-size:0.8em;color:#64748b">（高パフォーマンスなアーキテクチャ）</span></h4>
+  <p>ECS上でコンテナを実行する際、インフラ管理を一切行わずにコンテナだけに集中したい。最も適切な起動タイプは？</p>
+  <ol class="choices">
+    <li>ECS on EC2</li>
+    <li>ECS on Fargate</li>
+    <li>EKS on EC2</li>
+    <li>Amazon Lightsail</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>Fargateはサーバーレスのコンテナ実行環境です。EC2インスタンスの管理（プロビジョニング、パッチ適用、スケーリング）が一切不要で、コンテナの定義だけに集中できます。</p>
+      <p>A: ECS on EC2はEC2の管理が必要。C: EKS on EC2も同様。D: Lightsailは仮想サーバーのシンプル版。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q25 -->
+<div class="question-card">
+  <h4>問題 25 / 50 <span style="font-size:0.8em;color:#64748b">（弾力性に優れたアーキテクチャ）</span></h4>
+  <p>Aurora Serverlessが最も適しているワークロードはどれですか？</p>
+  <ol class="choices">
+    <li>常時高負荷のOLTPデータベース</li>
+    <li>アクセスパターンが不規則で、アイドル時間が長い開発/テスト環境</li>
+    <li>大規模なデータウェアハウス分析</li>
+    <li>グローバルに分散した読み取り負荷</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>Aurora Serverlessは需要に応じてキャパシティを自動スケーリングし、アイドル時には一時停止してコストをゼロにできます。アクセスパターンが不規則なワークロード、開発/テスト環境、新規アプリケーション（トラフィック予測が困難）に最適です。</p>
+      <p>A: 常時高負荷ならプロビジョンドAuroraの方がコスト効率が良い。C: DWHはRedshift。D: グローバル読み取りはAurora Global Database。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q26 -->
+<div class="question-card">
+  <h4>問題 26 / 50 <span style="font-size:0.8em;color:#64748b">（コスト最適化されたアーキテクチャ）</span></h4>
+  <p>アクセス頻度が30日後に激減し、90日後にはほぼアクセスされないS3オブジェクトのストレージコストを最適化する方法は？</p>
+  <ol class="choices">
+    <li>S3 Standard-IA を使用する</li>
+    <li>S3ライフサイクルポリシーで30日後にStandard-IA、90日後にGlacierへ自動移行</li>
+    <li>すべてのオブジェクトをS3 Glacierに保存する</li>
+    <li>S3 Intelligent-Tieringを使用する</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>S3ライフサイクルポリシーで段階的にストレージクラスを変更するのが最適。30日後にStandard-IA（低頻度アクセス、安価だが取得費用あり）、90日後にGlacier（アーカイブ、最安だが取り出しに時間がかかる）。</p>
+      <p>A: 最初からIAにすると30日間は過剰。C: 最初からGlacierだとアクセスに時間がかかる。D: Intelligent-Tieringも有効だが、アクセスパターンが明確な場合はライフサイクルポリシーの方が確実。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q27 -->
+<div class="question-card">
+  <h4>問題 27 / 50 <span style="font-size:0.8em;color:#64748b">（コスト最適化されたアーキテクチャ）</span></h4>
+  <p>ある釣り情報サイトで、毎週日曜深夜にSSGビルド（バッチ処理）を実行しています。処理は約2時間で完了し、中断されても再実行可能です。最もコスト効率の良いEC2購入オプションは？</p>
+  <ol class="choices">
+    <li>オンデマンドインスタンス</li>
+    <li>Reserved Instances（1年）</li>
+    <li>Spot Instances</li>
+    <li>Dedicated Hosts</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: C</p>
+      <p>Spot Instancesは最大90%OFFの割引があり、「中断されても再実行可能」なバッチ処理に最適です。毎週2時間のみの使用なので、RIのような長期コミットは不要。</p>
+      <p>A: オンデマンドは定価で割引なし。B: 週2時間の利用にRIは過剰。C: 中断耐性あり+短時間使用=Spot最適。D: Dedicated HostsはBYOLライセンス要件向け。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q28 -->
+<div class="question-card">
+  <h4>問題 28 / 50 <span style="font-size:0.8em;color:#64748b">（コスト最適化されたアーキテクチャ）</span></h4>
+  <p>EC2インスタンスのサイズが適切かどうかを分析し、最適なインスタンスタイプを推奨してくれるサービスは？</p>
+  <ol class="choices">
+    <li>AWS Trusted Advisor</li>
+    <li>AWS Cost Explorer</li>
+    <li>AWS Compute Optimizer</li>
+    <li>Amazon CloudWatch</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: C</p>
+      <p>AWS Compute Optimizerは機械学習を使ってCloudWatchメトリクスを分析し、EC2/EBS/Lambda/ECSの最適なリソースサイズを推奨します。</p>
+      <p>A: Trusted Advisorもサイズ推奨はあるが、Compute Optimizerの方が詳細で精度が高い。B: Cost Explorerはコスト分析。D: CloudWatchはメトリクス監視で推奨はしない。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q29 -->
+<div class="question-card">
+  <h4>問題 29 / 50 <span style="font-size:0.8em;color:#64748b">（高パフォーマンスなアーキテクチャ）</span></h4>
+  <p>S3に保存されたCloudFrontアクセスログを、サーバーを構築せずにSQLでアドホック分析したい。最も適切なサービスは？</p>
+  <ol class="choices">
+    <li>Amazon Redshift</li>
+    <li>Amazon Athena</li>
+    <li>Amazon EMR</li>
+    <li>Amazon RDS</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>AthenaはサーバーレスでS3上のデータに直接SQLクエリを実行できます。「サーバーを構築せず」「S3のデータに」「SQLで」「アドホック分析」=全てAthenaのキーワードです。</p>
+      <p>A: Redshiftはデータウェアハウスでサーバー（クラスター）の管理が必要。C: EMRもクラスター管理が必要。D: RDSはRDBMSでログ分析向きではない。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q30 -->
+<div class="question-card">
+  <h4>問題 30 / 50 <span style="font-size:0.8em;color:#64748b">（弾力性に優れたアーキテクチャ）</span></h4>
+  <p>ステートレスなWebアプリケーションで、ユーザーセッション情報をEC2インスタンスから切り離して管理する最も適切な方法は？</p>
+  <ol class="choices">
+    <li>各EC2インスタンスのローカルディスクにセッションを保存</li>
+    <li>ElastiCache（Redis）やDynamoDBにセッションを保存</li>
+    <li>ALBのスティッキーセッションを有効にする</li>
+    <li>EBSボリュームにセッションを保存する</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>セッション情報をElastiCache（Redis）やDynamoDBなどの外部ストアに保存することで、どのEC2インスタンスがリクエストを処理してもセッションを共有できます。これによりEC2はステートレスになり、Auto Scalingでのスケーリングが容易になります。</p>
+      <p>A: ローカルディスクだとインスタンス終了でセッション消失。C: スティッキーセッションは特定インスタンスに固定するが、スケーリング時に問題。D: EBSはインスタンスに紐づくため共有不可。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q31 -->
+<div class="question-card">
+  <h4>問題 31 / 50 <span style="font-size:0.8em;color:#64748b">（セキュアなアーキテクチャ）</span></h4>
+  <p>EC2インスタンスにSSHでログインせずに、安全にコマンドを実行する方法は？</p>
+  <ol class="choices">
+    <li>EC2 Instance Connect</li>
+    <li>AWS Systems Manager Session Manager</li>
+    <li>AWS CloudShell</li>
+    <li>AWS Lambda</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>Systems Manager Session Managerは、SSHポートを開放せずにブラウザやCLIからEC2にシェルアクセスできます。IAMで認証し、操作ログがCloudTrailに記録されるため監査にも対応。セキュリティグループでSSH(22)を開ける必要がありません。</p>
+      <p>A: EC2 Instance ConnectもSSH不要だが、一時的なSSHキーを使う。B: Session Managerの方が包括的でSSHポート不要。C: CloudShellはAWS CLI用の環境でEC2へのアクセスではない。D: LambdaはEC2操作用ではない。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q32 -->
+<div class="question-card">
+  <h4>問題 32 / 50 <span style="font-size:0.8em;color:#64748b">（高パフォーマンスなアーキテクチャ）</span></h4>
+  <p>DynamoDBテーブルで、読み取り/書き込みキャパシティを自動的に調整したい。最も適切な方法は？</p>
+  <ol class="choices">
+    <li>プロビジョンドキャパシティモードで手動調整</li>
+    <li>オンデマンドキャパシティモード</li>
+    <li>DynamoDB Auto Scaling</li>
+    <li>DynamoDB DAX</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>オンデマンドキャパシティモードは、トラフィックに応じてキャパシティを自動調整し、使った分だけ課金されます。トラフィックが予測できない場合に最適。</p>
+      <p>A: 手動調整は自動ではない。B: オンデマンドが最もシンプルに自動調整。C: Auto Scalingもプロビジョンドモードでの自動調整だが、オンデマンドの方がシンプル。D: DAXはキャッシュ。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q33 -->
+<div class="question-card">
+  <h4>問題 33 / 50 <span style="font-size:0.8em;color:#64748b">（弾力性に優れたアーキテクチャ）</span></h4>
+  <p>ある釣り情報サイトで、ユーザーが釣果写真をアップロードする機能を追加します。大量の同時アップロードを処理する最も堅牢なアーキテクチャは？</p>
+  <ol class="choices">
+    <li>ユーザー → EC2（直接受信）→ S3保存</li>
+    <li>ユーザー → S3 Presigned URL（直接アップロード）→ S3イベント通知 → Lambda（リサイズ処理）</li>
+    <li>ユーザー → API Gateway → Lambda → S3保存</li>
+    <li>ユーザー → CloudFront → EC2 → S3保存</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: B</p>
+      <p>S3 Presigned URLを使うと、ユーザーがS3に直接アップロードでき、サーバーの負荷がゼロです。S3のイベント通知でLambdaを起動し、リサイズ等の後処理を行います。最もスケーラブルでコスト効率が良い構成です。</p>
+      <p>A: EC2がボトルネックになる。C: API Gateway+Lambdaは10MBのペイロード制限がある。D: EC2がボトルネック。</p>
+    </div>
+  </details>
+</div>
+
+<!-- Q34 -->
+<div class="question-card">
+  <h4>問題 34 / 50 <span style="font-size:0.8em;color:#64748b">（コスト最適化されたアーキテクチャ）</span></h4>
+  <p>EC2、Fargate、Lambdaのコンピューティング使用量に対して割引を受けたいが、インスタンスタイプやリージョンの変更に柔軟に対応したい。最適な購入オプションは？</p>
+  <ol class="choices">
+    <li>Standard Reserved Instances</li>
+    <li>Convertible Reserved Instances</li>
+    <li>Compute Savings Plans</li>
+    <li>EC2 Instance Savings Plans</li>
+  </ol>
+  <details>
+    <summary>解答と解説を見る</summary>
+    <div class="answer">
+      <p class="correct">正解: C</p>
+      <p>Compute Savings Plansは、EC2/Fargate/Lambdaに適用でき、インスタンスファミリー、リージョン、OS、テナンシーを変更しても割引が継続します。最も柔軟な割引オプション。</p>
+      <p>A: Standard RIはインスタンスタイプ・リージョン固定。B: Convertible RIは変更可能だがFargate/Lambdaに適用不可。C: Compute SPが最も柔軟。D: EC2 Instance SPはEC2専用でFargate/Lambdaに適用不可。</p>
+    </div>
+  </details>
+</div>

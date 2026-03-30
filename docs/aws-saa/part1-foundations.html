@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AWS SAA-C03 完全攻略ガイド Part 1: 基礎編 〜ツリスポで学ぶAWS〜</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Segoe UI', 'Hiragino Sans', 'Noto Sans JP', sans-serif; line-height: 1.9; color: #1e293b; background: #f8fafc; }
+.container { max-width: 900px; margin: 0 auto; padding: 2rem 1.5rem; }
+h1 { font-size: 2rem; color: #0c4a6e; border-bottom: 3px solid #0ea5e9; padding-bottom: 0.5rem; margin: 2rem 0 1rem; }
+h2 { font-size: 1.6rem; color: #0369a1; margin: 3rem 0 1rem; border-left: 4px solid #0ea5e9; padding-left: 0.8rem; }
+h3 { font-size: 1.25rem; color: #334155; margin: 2rem 0 0.8rem; }
+h4 { font-size: 1.05rem; color: #475569; margin: 1.2rem 0 0.5rem; }
+p { margin-bottom: 1rem; }
+ul, ol { margin: 0.5rem 0 1rem 1.5rem; }
+li { margin-bottom: 0.3rem; }
+.header-bar { background: linear-gradient(135deg, #0c4a6e, #0369a1); color: #fff; padding: 2rem 1.5rem; text-align: center; }
+.header-bar h1 { color: #fff; border: none; margin: 0; font-size: 1.8rem; }
+.header-bar p { color: #bae6fd; margin: 0.5rem 0 0; }
+.nav { display: flex; gap: 0.8rem; margin: 1.5rem 0; flex-wrap: wrap; }
+.nav a { background: #e2e8f0; color: #334155; padding: 0.5rem 1rem; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem; }
+.nav a.current { background: #0c4a6e; color: #fff; }
+.nav a:hover { background: #0ea5e9; color: #fff; }
+.toc { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem 2rem; margin: 1.5rem 0; }
+.toc h3 { margin-top: 0; }
+.toc ul { list-style: none; padding: 0; }
+.toc li { margin: 0.4rem 0; padding-left: 1rem; border-left: 2px solid #e2e8f0; }
+.toc a { color: #0369a1; text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.tsurispot { background: #f0fdf4; border: 1px solid #86efac; border-radius: 12px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+.tsurispot::before { content: '🎣 ツリスポで理解する'; display: block; font-weight: 700; color: #166534; margin-bottom: 0.5rem; font-size: 1.05rem; }
+.exam { background: #fef3c7; border: 1px solid #fcd34d; border-radius: 12px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+.exam::before { content: '📝 試験に出る！'; display: block; font-weight: 700; color: #92400e; margin-bottom: 0.5rem; font-size: 1.05rem; }
+.point { background: #eff6ff; border: 1px solid #93c5fd; border-radius: 12px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+.point::before { content: '💡 重要ポイント'; display: block; font-weight: 700; color: #1d4ed8; margin-bottom: 0.5rem; font-size: 1.05rem; }
+.warn { background: #fef2f2; border: 1px solid #fca5a5; border-radius: 12px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+.warn::before { content: '⚠️ 注意'; display: block; font-weight: 700; color: #dc2626; margin-bottom: 0.5rem; }
+.diagram { background: #fff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 1.5rem; margin: 1.5rem 0; text-align: center; overflow-x: auto; }
+.diagram figcaption { font-size: 0.85rem; color: #64748b; margin-top: 0.8rem; }
+table { width: 100%; border-collapse: collapse; margin: 1.2rem 0; font-size: 0.9rem; }
+th { background: #0c4a6e; color: #fff; padding: 0.7rem 0.8rem; text-align: left; }
+td { padding: 0.7rem 0.8rem; border-bottom: 1px solid #e2e8f0; }
+tr:nth-child(even) { background: #f8fafc; }
+code { background: #f1f5f9; padding: 0.15em 0.4em; border-radius: 4px; font-size: 0.88em; color: #be185d; }
+pre { background: #1e293b; color: #e2e8f0; padding: 1.2rem; border-radius: 8px; overflow-x: auto; margin: 1rem 0; font-size: 0.85rem; line-height: 1.6; }
+.chapter-num { display: inline-block; background: #0ea5e9; color: #fff; width: 2rem; height: 2rem; line-height: 2rem; text-align: center; border-radius: 50%; font-weight: 700; margin-right: 0.5rem; font-size: 0.9rem; }
+.summary-box { background: linear-gradient(135deg, #f0f9ff, #e0f2fe); border: 2px solid #0ea5e9; border-radius: 12px; padding: 1.5rem; margin: 2rem 0; }
+.summary-box h4 { color: #0c4a6e; margin-top: 0; }
+.quiz { background: #faf5ff; border: 1px solid #d8b4fe; border-radius: 12px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+.quiz::before { content: '❓ 確認クイズ'; display: block; font-weight: 700; color: #7c3aed; margin-bottom: 0.5rem; }
+.quiz details { margin-top: 0.5rem; }
+.quiz summary { cursor: pointer; color: #7c3aed; font-weight: 600; }
+.analogy { background: #fff7ed; border: 1px solid #fed7aa; border-radius: 12px; padding: 1.2rem 1.5rem; margin: 1.5rem 0; }
+.analogy::before { content: '🏠 身近な例えで理解'; display: block; font-weight: 700; color: #c2410c; margin-bottom: 0.5rem; }
+</style>
+</head>
+<body>
+<div class="header-bar">
+<h1>AWS SAA-C03 完全攻略ガイド</h1>
+<p>Part 1: 基礎編（第1章〜第6章） 〜ツリスポで学ぶAWS〜</p>
+</div>
+<div class="container">
+<div class="nav">
+<a href="part1-foundations.html" class="current">Part 1: 基礎編</a>
+<a href="part2-architecture.html">Part 2: 設計編</a>
+<a href="part3-advanced.html">Part 3: 応用・実戦編</a>
+</div>
+<div class="toc">
+<h3>目次</h3>
+<ul>
+<li><a href="#ch1"><span class="chapter-num">1</span> AWSの全体像とグローバルインフラストラクチャ</a></li>
+<li><a href="#ch2"><span class="chapter-num">2</span> IAM（アイデンティティとアクセス管理）</a></li>
+<li><a href="#ch3"><span class="chapter-num">3</span> EC2（Elastic Compute Cloud）</a></li>
+<li><a href="#ch4"><span class="chapter-num">4</span> ストレージサービス</a></li>
+<li><a href="#ch5"><span class="chapter-num">5</span> VPCとネットワーキング</a></li>
+<li><a href="#ch6"><span class="chapter-num">6</span> データベースサービス</a></li>
+</ul>
+</div>
+
+<!-- ============================== 第1章 ============================== -->
+<h1 id="ch1"><span class="chapter-num">1</span> AWSの全体像とグローバルインフラストラクチャ</h1>
+
+<h2>1.1 そもそもクラウドコンピューティングって何？</h2>
+
+<p>まず最初に、<strong>クラウドコンピューティング</strong>とは何かを理解しましょう。難しい言葉に聞こえるかもしれませんが、実はあなたも毎日使っています。Gmailでメールを送る、Google Driveにファイルを保存する、Netflixで動画を見る。これらは全て「クラウド」です。自分のパソコンの中ではなく、<strong>インターネットの向こう側にある誰かのコンピューター</strong>がデータを保存し、処理しているのです。</p>
+
+<p>AWS（Amazon Web Services）は、この「インターネットの向こう側のコンピューター」を<strong>誰でも借りられるサービス</strong>です。もともとAmazon.comが自社のECサイトを動かすために構築した大規模なインフラを、2006年に外部にも開放したのが始まりです。</p>
+
+<div class="analogy">
+<p><strong>レンタカーに例えると：</strong></p>
+<ul>
+<li><strong>オンプレミス（自前のサーバー）</strong> = 車を購入する。初期費用が高い（数百万円）。メンテナンスも自分。使わない日も駐車場代がかかる。</li>
+<li><strong>クラウド（AWS等）</strong> = レンタカーを借りる。使いたい時だけ借りて、使った分だけ払う。メンテナンスはレンタカー会社任せ。急に大きな車が必要でもすぐ交換できる。</li>
+</ul>
+</div>
+
+<h3>オンプレミスとクラウドの詳細比較</h3>
+<table>
+<tr><th>項目</th><th>オンプレミス（自社サーバー）</th><th>クラウド（AWS等）</th></tr>
+<tr><td>初期費用</td><td>数百万〜数千万円</td><td>0円（従量課金）</td></tr>
+<tr><td>構築時間</td><td>数週間〜数ヶ月</td><td>数分〜数時間</td></tr>
+<tr><td>スケーリング</td><td>物理サーバー追加（数週間）</td><td>ボタン1つ or 自動で数分</td></tr>
+<tr><td>メンテナンス</td><td>自社対応（人件費大）</td><td>AWS対応（ハードウェア障害等）</td></tr>
+<tr><td>災害対策</td><td>別拠点DC必要（高額）</td><td>マルチAZ/マルチリージョン（安価）</td></tr>
+<tr><td>グローバル展開</td><td>各国にDC必要</td><td>リージョン選択だけ</td></tr>
+<tr><td>費用モデル</td><td>CapEx（設備投資）中心</td><td>OpEx（運用費）中心</td></tr>
+</table>
+
+<div class="point">
+<p><strong>CapExとOpExの違い（試験頻出ワード）：</strong></p>
+<ul>
+<li><strong>CapEx（Capital Expenditure = 設備投資）</strong>: サーバーを「購入」する費用。先に大金が出ていく。</li>
+<li><strong>OpEx（Operational Expenditure = 運用費）</strong>: サーバーを「利用」する月額費用。使った分だけ払う。</li>
+</ul>
+<p>クラウド移行 = CapEx から OpEx への変換。これが試験で最も問われるクラウドのメリットです。</p>
+</div>
+
+<h3>AWSが公式に掲げるクラウドの6大メリット</h3>
+<ol>
+<li><strong>設備投資を変動費に</strong>: CapEx → OpExへの変換</li>
+<li><strong>スケールメリットの恩恵</strong>: AWSの大量購入で単価が安い</li>
+<li><strong>キャパシティ予測が不要</strong>: 需要に応じて自動スケール</li>
+<li><strong>速度と俊敏性の向上</strong>: 新サーバーを数分で起動</li>
+<li><strong>データセンター運用費が不要</strong>: アプリ開発に集中</li>
+<li><strong>数分でグローバル展開</strong>: 世界中のリージョンにワンクリック</li>
+</ol>
+
+<div class="exam">
+<p><strong>問題パターン</strong>: 「企業がクラウドに移行するメリットは？」→ <strong>CapExをOpExに変換</strong>、<strong>需要予測が不要</strong>、<strong>規模の経済</strong>が頻出キーワード。</p>
+</div>
+
+<h2>1.2 AWSの歴史と市場シェア</h2>
+<p>AWSは2006年にS3（ストレージ）とSQS（メッセージキュー）でサービスを開始。現在は200以上のサービスを提供し、クラウド市場シェア約31%で首位です。</p>
+
+<table>
+<tr><th>プロバイダー</th><th>シェア</th><th>特徴</th></tr>
+<tr><td><strong>AWS</strong></td><td>約31%</td><td>サービス数最多、エコシステム最大</td></tr>
+<tr><td>Azure</td><td>約25%</td><td>エンタープライズ・Windows統合に強い</td></tr>
+<tr><td>GCP</td><td>約11%</td><td>データ分析・ML・Kubernetesに強い</td></tr>
+</table>
+
+<h2>1.3 AWSグローバルインフラストラクチャ</h2>
+
+<p>AWSのインフラは<strong>リージョン</strong>、<strong>アベイラビリティゾーン（AZ）</strong>、<strong>エッジロケーション</strong>の3階層です。</p>
+
+<h3>リージョン（Region）</h3>
+<p>世界各地に設置されたデータセンター群のまとまり。2025年時点で<strong>33リージョン</strong>。各リージョンは完全に独立しています。</p>
+<ul>
+<li><code>ap-northeast-1</code>: 東京（日本企業の標準選択、AZ 3つ）</li>
+<li><code>ap-northeast-3</code>: 大阪（DR用途に最適、AZ 3つ）</li>
+<li><code>us-east-1</code>: バージニア北部（最安、新サービス先行提供）</li>
+</ul>
+
+<div class="point">
+<p><strong>リージョン選択の4つの考慮点：</strong></p>
+<ol>
+<li><strong>レイテンシー</strong>: ユーザーに近いリージョン</li>
+<li><strong>コスト</strong>: リージョンで料金が異なる（us-east-1が最安）</li>
+<li><strong>コンプライアンス</strong>: データの国外持ち出し規制</li>
+<li><strong>サービス可用性</strong>: 新サービスはus-east-1から</li>
+</ol>
+</div>
+
+<h3>アベイラビリティゾーン（AZ）</h3>
+<p>各リージョン内に<strong>2つ以上（通常3つ）</strong>。物理的に離れた独立したデータセンター群。独自の電源・冷却・ネットワークを持ち、AZ間は高速プライベート光ファイバーで接続（1ms以下のレイテンシー）。</p>
+
+<div class="analogy">
+<p><strong>マンションに例えると：</strong></p>
+<ul>
+<li><strong>リージョン</strong> = 都市（東京、大阪）</li>
+<li><strong>AZ</strong> = 都市内の別々のマンション（独立した電気・水道）</li>
+<li><strong>エッジロケーション</strong> = コンビニ（各地に大量にあり、人気商品をすぐ届ける）</li>
+</ul>
+</div>
+
+<h3>エッジロケーション</h3>
+<p>CloudFront（CDN）やRoute 53（DNS）のキャッシュサーバー設置場所。世界<strong>400箇所以上</strong>。最寄りのエッジからコンテンツ配信することで表示速度を向上させます。</p>
+
+<figure class="diagram">
+<svg viewBox="0 0 800 400" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <defs><filter id="sh1" x="-5%" y="-5%" width="110%" height="115%"><feDropShadow dx="2" dy="2" stdDeviation="3" flood-opacity="0.15"/></filter></defs>
+  <rect x="30" y="15" width="740" height="370" rx="16" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="2" filter="url(#sh1)"/>
+  <text x="400" y="48" text-anchor="middle" font-size="17" font-weight="700" fill="#0c4a6e">AWS グローバルインフラストラクチャ</text>
+  <rect x="55" y="65" width="330" height="295" rx="12" fill="#fff" stroke="#0369a1" stroke-width="2"/>
+  <text x="220" y="90" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">東京リージョン (ap-northeast-1)</text>
+  <rect x="75" y="105" width="130" height="90" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="140" y="125" text-anchor="middle" font-size="11" font-weight="600" fill="#1e40af">AZ 1a</text>
+  <rect x="88" y="135" width="104" height="22" rx="5" fill="#fff" stroke="#93c5fd"/>
+  <text x="140" y="150" text-anchor="middle" font-size="9" fill="#334155">EC2 / RDS / EBS</text>
+  <rect x="88" y="162" width="104" height="22" rx="5" fill="#fff" stroke="#93c5fd"/>
+  <text x="140" y="177" text-anchor="middle" font-size="9" fill="#334155">独立電源・冷却</text>
+  <rect x="230" y="105" width="130" height="90" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="295" y="125" text-anchor="middle" font-size="11" font-weight="600" fill="#1e40af">AZ 1c</text>
+  <rect x="243" y="135" width="104" height="22" rx="5" fill="#fff" stroke="#93c5fd"/>
+  <text x="295" y="150" text-anchor="middle" font-size="9" fill="#334155">EC2 / RDS / EBS</text>
+  <rect x="243" y="162" width="104" height="22" rx="5" fill="#fff" stroke="#93c5fd"/>
+  <text x="295" y="177" text-anchor="middle" font-size="9" fill="#334155">独立電源・冷却</text>
+  <rect x="150" y="215" width="130" height="90" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="215" y="235" text-anchor="middle" font-size="11" font-weight="600" fill="#1e40af">AZ 1d</text>
+  <rect x="163" y="245" width="104" height="22" rx="5" fill="#fff" stroke="#93c5fd"/>
+  <text x="215" y="260" text-anchor="middle" font-size="9" fill="#334155">EC2 / RDS / EBS</text>
+  <rect x="163" y="272" width="104" height="22" rx="5" fill="#fff" stroke="#93c5fd"/>
+  <text x="215" y="287" text-anchor="middle" font-size="9" fill="#334155">独立電源・冷却</text>
+  <line x1="205" y1="150" x2="230" y2="150" stroke="#0ea5e9" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="185" y1="195" x2="200" y2="215" stroke="#0ea5e9" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="260" y1="195" x2="245" y2="215" stroke="#0ea5e9" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="220" y="340" text-anchor="middle" font-size="9" fill="#64748b">高速プライベートネットワーク接続</text>
+  <rect x="415" y="65" width="340" height="130" rx="12" fill="#fff" stroke="#0369a1" stroke-width="2"/>
+  <text x="585" y="90" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">大阪リージョン (ap-northeast-3)</text>
+  <rect x="430" y="105" width="95" height="65" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="477" y="143" text-anchor="middle" font-size="10" font-weight="600" fill="#1e40af">AZ 3a</text>
+  <rect x="540" y="105" width="95" height="65" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="587" y="143" text-anchor="middle" font-size="10" font-weight="600" fill="#1e40af">AZ 3b</text>
+  <rect x="650" y="105" width="95" height="65" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="697" y="143" text-anchor="middle" font-size="10" font-weight="600" fill="#1e40af">AZ 3c</text>
+  <rect x="415" y="220" width="340" height="100" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="585" y="248" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">エッジロケーション (400箇所以上)</text>
+  <text x="585" y="272" text-anchor="middle" font-size="11" fill="#78350f">東京 / 大阪 / 福岡 / NY / ロンドン ...</text>
+  <text x="585" y="296" text-anchor="middle" font-size="11" fill="#92400e">CloudFront / Route 53 / WAF / Shield</text>
+</svg>
+<figcaption>図1-1: AWSグローバルインフラストラクチャの階層構造</figcaption>
+</figure>
+
+<div class="tsurispot">
+<p>ツリスポは<strong>東京リージョン（ap-northeast-1）</strong>のApp Runnerで運用中。日本のユーザーがターゲットなので東京リージョンが最適です。将来、海外展開するなら<code>us-east-1</code>にもデプロイし、Route 53のレイテンシーベースルーティングで自動振り分けします。</p>
+</div>
+
+<div class="tsurispot">
+<p>ツリスポの画像をCloudFront経由で配信すれば、エッジロケーションにキャッシュされ、北海道のユーザーにも福岡のユーザーにも高速配信。5,000+ページのサイトにCDNは必須施策です。</p>
+</div>
+
+<h2>1.4 AWSのサービスカテゴリ概要</h2>
+<table>
+<tr><th>カテゴリ</th><th>主要サービス</th><th>一言説明</th></tr>
+<tr><td>コンピューティング</td><td>EC2, Lambda, ECS, Fargate, App Runner</td><td>プログラムを動かす場所</td></tr>
+<tr><td>ストレージ</td><td>S3, EBS, EFS, FSx</td><td>データを保存する場所</td></tr>
+<tr><td>データベース</td><td>RDS, Aurora, DynamoDB, ElastiCache</td><td>データを整理・検索</td></tr>
+<tr><td>ネットワーク</td><td>VPC, Route 53, CloudFront, ELB</td><td>通信の道路</td></tr>
+<tr><td>セキュリティ</td><td>IAM, KMS, WAF, Shield, GuardDuty</td><td>システムを守る</td></tr>
+<tr><td>監視</td><td>CloudWatch, CloudTrail, Config</td><td>システムを見張る</td></tr>
+<tr><td>アプリ統合</td><td>SQS, SNS, EventBridge, Step Functions</td><td>サービス同士を繋ぐ</td></tr>
+</table>
+
+<h2>1.5 Well-Architected Frameworkの6本柱</h2>
+<ol>
+<li><strong>運用上の優秀性</strong>: IaCで管理、継続的改善</li>
+<li><strong>セキュリティ</strong>: 全レイヤーで保護、最小権限</li>
+<li><strong>信頼性</strong>: 障害回復、自動スケーリング</li>
+<li><strong>パフォーマンス効率</strong>: 適切なリソース選択</li>
+<li><strong>コスト最適化</strong>: 無駄を排除</li>
+<li><strong>持続可能性</strong>: 環境影響の最小化（<strong>2021年追加の最新柱</strong>）</li>
+</ol>
+
+<div class="exam">
+<p><strong>問題パターン</strong>: 「Well-Architected Frameworkの柱は？」→ 6本柱。「持続可能性」が最新追加。古い情報は5本柱だが現在は6つ。</p>
+</div>
+
+<h2>1.6 共有責任モデル</h2>
+<p>AWSとユーザーの責任分担を定めたモデル。<strong>ほぼ確実に出題</strong>されます。</p>
+<ul>
+<li><strong>AWSの責任("of" the Cloud)</strong>: 物理インフラ（DC、ハードウェア、ネットワーク、ハイパーバイザー）</li>
+<li><strong>ユーザーの責任("in" the Cloud)</strong>: データ、OS（EC2の場合）、アプリ、IAM、暗号化設定、SG/NACL</li>
+</ul>
+
+<figure class="diagram">
+<svg viewBox="0 0 780 340" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <defs><filter id="sh2" x="-3%" y="-3%" width="106%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter></defs>
+  <text x="390" y="25" text-anchor="middle" font-size="16" font-weight="700" fill="#0c4a6e">共有責任モデル</text>
+  <rect x="40" y="40" width="700" height="130" rx="12" fill="#fef2f2" stroke="#f87171" stroke-width="2" filter="url(#sh2)"/>
+  <text x="390" y="65" text-anchor="middle" font-size="13" font-weight="700" fill="#dc2626">ユーザーの責任 ("in" the Cloud)</text>
+  <rect x="60" y="78" width="155" height="38" rx="8" fill="#fff" stroke="#fca5a5"/>
+  <text x="137" y="102" text-anchor="middle" font-size="10" fill="#7f1d1d">顧客データ・暗号化</text>
+  <rect x="225" y="78" width="155" height="38" rx="8" fill="#fff" stroke="#fca5a5"/>
+  <text x="302" y="102" text-anchor="middle" font-size="10" fill="#7f1d1d">アプリケーション</text>
+  <rect x="390" y="78" width="155" height="38" rx="8" fill="#fff" stroke="#fca5a5"/>
+  <text x="467" y="102" text-anchor="middle" font-size="10" fill="#7f1d1d">IAM・アクセス管理</text>
+  <rect x="555" y="78" width="165" height="38" rx="8" fill="#fff" stroke="#fca5a5"/>
+  <text x="637" y="102" text-anchor="middle" font-size="10" fill="#7f1d1d">OS・ネットワーク設定</text>
+  <rect x="140" y="125" width="240" height="33" rx="8" fill="#fff" stroke="#fca5a5"/>
+  <text x="260" y="146" text-anchor="middle" font-size="10" fill="#7f1d1d">クライアント側暗号化</text>
+  <rect x="400" y="125" width="240" height="33" rx="8" fill="#fff" stroke="#fca5a5"/>
+  <text x="520" y="146" text-anchor="middle" font-size="10" fill="#7f1d1d">サーバー側暗号化・TLS</text>
+  <rect x="40" y="185" width="700" height="130" rx="12" fill="#f0fdf4" stroke="#4ade80" stroke-width="2" filter="url(#sh2)"/>
+  <text x="390" y="210" text-anchor="middle" font-size="13" font-weight="700" fill="#166534">AWSの責任 ("of" the Cloud)</text>
+  <rect x="60" y="222" width="155" height="38" rx="8" fill="#fff" stroke="#86efac"/>
+  <text x="137" y="246" text-anchor="middle" font-size="10" fill="#14532d">ハードウェア</text>
+  <rect x="225" y="222" width="155" height="38" rx="8" fill="#fff" stroke="#86efac"/>
+  <text x="302" y="246" text-anchor="middle" font-size="10" fill="#14532d">ネットワークインフラ</text>
+  <rect x="390" y="222" width="155" height="38" rx="8" fill="#fff" stroke="#86efac"/>
+  <text x="467" y="246" text-anchor="middle" font-size="10" fill="#14532d">仮想化 (Nitro)</text>
+  <rect x="555" y="222" width="165" height="38" rx="8" fill="#fff" stroke="#86efac"/>
+  <text x="637" y="246" text-anchor="middle" font-size="10" fill="#14532d">物理セキュリティ</text>
+  <rect x="190" y="270" width="400" height="33" rx="8" fill="#fff" stroke="#86efac"/>
+  <text x="390" y="291" text-anchor="middle" font-size="11" fill="#14532d">グローバルインフラ（リージョン・AZ・エッジ）</text>
+</svg>
+<figcaption>図1-2: 共有責任モデル（赤=ユーザー責任、緑=AWS責任）</figcaption>
+</figure>
+
+<div class="warn">
+<p>サービスの種類で境界線が変わる！</p>
+<ul>
+<li><strong>IaaS（EC2）</strong>: OS以上は全てユーザー責任</li>
+<li><strong>PaaS（RDS, App Runner）</strong>: AWSがOS管理。ユーザーはデータとアプリ</li>
+<li><strong>サーバーレス（Lambda, S3）</strong>: AWSが大部分管理。ユーザーはコード/データのみ</li>
+</ul>
+</div>
+
+<div class="exam">
+<p><strong>問題パターン1</strong>: 「EC2のOSパッチは誰の責任？」→ <strong>ユーザー</strong>（IaaSだから）</p>
+<p><strong>問題パターン2</strong>: 「RDSのOSパッチは？」→ <strong>AWS</strong>（マネージドサービスだから）</p>
+<p><strong>問題パターン3</strong>: 「DCの物理警備は？」→ <strong>AWS</strong></p>
+</div>
+
+<div class="tsurispot">
+<p>ツリスポのApp RunnerはPaaS寄り。AWSがOS・パッチ・スケーリングを管理。ユーザー責任はアプリコードのセキュリティ、IAM設定、環境変数の秘密管理（microCMS APIキー等）。</p>
+</div>
+
+<h3>CLIコマンド例</h3>
+<pre>
+# 利用可能なリージョン一覧
+aws ec2 describe-regions --output table
+
+# 東京リージョンのAZ一覧
+aws ec2 describe-availability-zones --region ap-northeast-1
+
+# 現在の設定リージョン確認
+aws configure get region
+</pre>
+
+<div class="summary-box">
+<h4>第1章まとめ</h4>
+<ul>
+<li>クラウド = CapEx → OpExの転換が最大メリット</li>
+<li>AWS = クラウド市場シェア約31%で首位</li>
+<li>リージョン(33) &gt; AZ(2-6/リージョン) &gt; エッジロケーション(400+)</li>
+<li>リージョン選択: レイテンシー/コスト/コンプライアンス/サービス可用性</li>
+<li>Well-Architected = 6本柱（持続可能性が最新追加）</li>
+<li>共有責任: AWS="of" the Cloud、ユーザー="in" the Cloud</li>
+<li>マネージドサービスほどAWS責任範囲が広がる</li>
+</ul>
+</div>
+
+<div class="quiz">
+<p><strong>Q1.</strong> 東京リージョンのコードは？</p>
+<details><summary>答えを見る</summary><p><code>ap-northeast-1</code></p></details>
+<p><strong>Q2.</strong> リージョンには最低いくつのAZがある？</p>
+<details><summary>答えを見る</summary><p><strong>2つ以上</strong>（通常3つ）</p></details>
+<p><strong>Q3.</strong> EC2のOSパッチは誰の責任？</p>
+<details><summary>答えを見る</summary><p><strong>ユーザー</strong>。EC2はIaaS。RDSならAWSの責任。</p></details>
+<p><strong>Q4.</strong> WAFの6本柱で2021年追加の最新は？</p>
+<details><summary>答えを見る</summary><p><strong>持続可能性（Sustainability）</strong></p></details>
+</div>
+
+<!-- ============================== 第2章 ============================== -->
+<h1 id="ch2"><span class="chapter-num">2</span> IAM（Identity and Access Management）</h1>
+
+<p>IAMは<strong>AWSセキュリティの基盤</strong>であり、SAA試験で最も重要な分野の一つです。「誰が」「何に」「何をできるか」をコントロールするサービスです。IAMはグローバルサービスで、リージョンに依存しません（どこで設定しても全リージョンに適用されます）。</p>
+
+<div class="analogy">
+<p><strong>会社のセキュリティに例えると：</strong></p>
+<ul>
+<li><strong>ルートユーザー</strong> = 会社の社長（全権限を持つが、日常業務には出てこない）</li>
+<li><strong>IAMユーザー</strong> = 社員（社員証で入館、権限は役職に応じて異なる）</li>
+<li><strong>IAMグループ</strong> = 部署（開発部、営業部。部署ごとにアクセスできる場所が違う）</li>
+<li><strong>IAMロール</strong> = 来客用バッジ（一時的に権限を貸し出す仕組み）</li>
+<li><strong>IAMポリシー</strong> = 権限規定書（「開発部は3階のサーバールームに入れる」等の規則）</li>
+</ul>
+</div>
+
+<h2>2.1 ルートユーザー vs IAMユーザー</h2>
+
+<p><strong>ルートユーザー</strong>はAWSアカウント作成時に自動的に作られる最高権限のアカウントです。全てのAWSサービスとリソースに無制限にアクセスできます。</p>
+
+<div class="warn">
+<p><strong>ルートユーザーは日常作業に絶対使わないこと！</strong> これはAWSのベストプラクティスで、試験でも頻繁に問われます。</p>
+<p>ルートユーザーでしかできない操作（例外）：</p>
+<ul>
+<li>AWSアカウントの解約</li>
+<li>ルートユーザーのMFA設定</li>
+<li>請求情報の変更</li>
+<li>サポートプランの変更</li>
+<li>IAMユーザーの請求アクセス有効化</li>
+<li>S3バケットポリシーでの全拒否からの復旧</li>
+</ul>
+</div>
+
+<p><strong>IAMユーザー</strong>は、ルートユーザーが作成する個別のユーザーアカウントです。各IAMユーザーには必要最小限の権限だけを付与します。</p>
+
+<h3>セキュリティのベストプラクティス</h3>
+<ol>
+<li>ルートユーザーにMFA（多要素認証）を設定する</li>
+<li>日常作業用のIAMユーザーを作成する</li>
+<li>ルートユーザーのアクセスキーは作らない（作成済みなら削除する）</li>
+<li>強力なパスワードポリシーを設定する</li>
+</ol>
+
+<h2>2.2 IAMポリシーの構造</h2>
+
+<p>IAMポリシーは<strong>JSON形式</strong>で記述され、「誰が何をできるか」を定義します。ポリシーの構造を理解することは試験で必須です。</p>
+
+<pre>
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "AllowS3ReadOnly",
+      "Effect": "Allow",
+      "Action": [
+        "s3:GetObject",
+        "s3:ListBucket"
+      ],
+      "Resource": [
+        "arn:aws:s3:::tsurispot-images",
+        "arn:aws:s3:::tsurispot-images/*"
+      ],
+      "Condition": {
+        "IpAddress": {
+          "aws:SourceIp": "203.0.113.0/24"
+        }
+      }
+    }
+  ]
+}
+</pre>
+
+<p>各要素の意味：</p>
+<table>
+<tr><th>要素</th><th>説明</th><th>必須？</th></tr>
+<tr><td><code>Version</code></td><td>ポリシー言語のバージョン。常に"2012-10-17"</td><td>推奨</td></tr>
+<tr><td><code>Statement</code></td><td>1つ以上の許可/拒否ルールの配列</td><td>必須</td></tr>
+<tr><td><code>Sid</code></td><td>ステートメントの識別名（任意の文字列）</td><td>任意</td></tr>
+<tr><td><code>Effect</code></td><td>"Allow" または "Deny"</td><td>必須</td></tr>
+<tr><td><code>Action</code></td><td>許可/拒否するアクション（例: s3:GetObject）</td><td>必須</td></tr>
+<tr><td><code>Resource</code></td><td>対象リソースのARN</td><td>必須</td></tr>
+<tr><td><code>Condition</code></td><td>条件（IPアドレス制限、時間制限等）</td><td>任意</td></tr>
+</table>
+
+<div class="point">
+<p><strong>ポリシー評価ロジック（超重要！）：</strong></p>
+<ol>
+<li>デフォルトは全て<strong>暗黙的なDeny（拒否）</strong></li>
+<li>明示的なAllow（許可）があれば、暗黙的Denyを上書きして許可</li>
+<li>明示的なDeny（拒否）は、どんなAllowよりも<strong>常に優先</strong></li>
+</ol>
+<p>つまり: <strong>Deny &gt; Allow &gt; デフォルトDeny</strong></p>
+</div>
+
+<h3>ポリシーの種類</h3>
+<table>
+<tr><th>種類</th><th>説明</th><th>管理者</th></tr>
+<tr><td>AWS管理ポリシー</td><td>AWSが事前に用意したポリシー（ReadOnlyAccess等）</td><td>AWS</td></tr>
+<tr><td>カスタマー管理ポリシー</td><td>ユーザーが独自に作成するポリシー。再利用可能</td><td>ユーザー</td></tr>
+<tr><td>インラインポリシー</td><td>特定のユーザー/グループ/ロールに直接埋め込む。再利用不可</td><td>ユーザー</td></tr>
+</table>
+
+<div class="exam">
+<p><strong>問題パターン</strong>: 「複数のIAMユーザーに同じ権限を付与する最も効率的な方法は？」→ <strong>IAMグループを作成し、グループにポリシーをアタッチ</strong>。ユーザーをグループに追加する。個別にポリシーをアタッチするのは管理が煩雑。</p>
+</div>
+
+<h2>2.3 IAMロール</h2>
+
+<p>IAMロールは<strong>AWSサービスやアプリケーションに権限を付与する仕組み</strong>です。IAMユーザーとの最大の違いは、<strong>長期的な認証情報（パスワードやアクセスキー）を持たない</strong>点です。一時的なセキュリティトークンを使用します。</p>
+
+<h4>ロールの主な用途</h4>
+<ul>
+<li><strong>EC2インスタンスロール</strong>: EC2からS3にアクセスする際、アクセスキーをEC2に置くのではなく（危険！）、ロールをアタッチする</li>
+<li><strong>Lambdaの実行ロール</strong>: Lambda関数がDynamoDBに書き込む権限等</li>
+<li><strong>クロスアカウントアクセス</strong>: 別のAWSアカウントのリソースにアクセスする（AssumeRole）</li>
+<li><strong>外部ID連携</strong>: GitHub Actions、SAML/OIDC連携</li>
+</ul>
+
+<figure class="diagram">
+<svg viewBox="0 0 780 300" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <defs>
+    <marker id="arrow1" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#0ea5e9"/></marker>
+    <filter id="sh3" x="-3%" y="-3%" width="106%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.12"/></filter>
+  </defs>
+  <text x="390" y="25" text-anchor="middle" font-size="16" font-weight="700" fill="#0c4a6e">IAMの構成要素と関係</text>
+  <!-- Root -->
+  <rect x="300" y="45" width="180" height="45" rx="8" fill="#fef2f2" stroke="#f87171" stroke-width="2" filter="url(#sh3)"/>
+  <text x="390" y="73" text-anchor="middle" font-size="12" font-weight="600" fill="#dc2626">ルートユーザー（使わない!）</text>
+  <!-- Groups -->
+  <rect x="40" y="130" width="160" height="45" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" filter="url(#sh3)"/>
+  <text x="120" y="158" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">開発チーム（グループ）</text>
+  <rect x="220" y="130" width="160" height="45" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" filter="url(#sh3)"/>
+  <text x="300" y="158" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">運用チーム（グループ）</text>
+  <!-- Users -->
+  <rect x="40" y="205" width="70" height="35" rx="6" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="1.5"/>
+  <text x="75" y="227" text-anchor="middle" font-size="10" fill="#0369a1">User A</text>
+  <rect x="130" y="205" width="70" height="35" rx="6" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="1.5"/>
+  <text x="165" y="227" text-anchor="middle" font-size="10" fill="#0369a1">User B</text>
+  <rect x="260" y="205" width="70" height="35" rx="6" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="1.5"/>
+  <text x="295" y="227" text-anchor="middle" font-size="10" fill="#0369a1">User C</text>
+  <!-- Roles -->
+  <rect x="460" y="130" width="140" height="45" rx="22" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" filter="url(#sh3)"/>
+  <text x="530" y="158" text-anchor="middle" font-size="12" font-weight="600" fill="#92400e">IAMロール</text>
+  <!-- Policies -->
+  <rect x="460" y="210" width="140" height="40" rx="8" fill="#f0fdf4" stroke="#4ade80" stroke-width="2"/>
+  <text x="530" y="235" text-anchor="middle" font-size="11" font-weight="600" fill="#166534">IAMポリシー(JSON)</text>
+  <!-- Services -->
+  <rect x="640" y="115" width="120" height="35" rx="6" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="700" y="137" text-anchor="middle" font-size="10" fill="#1d4ed8">EC2</text>
+  <rect x="640" y="160" width="120" height="35" rx="6" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="700" y="182" text-anchor="middle" font-size="10" fill="#1d4ed8">Lambda</text>
+  <!-- Arrows -->
+  <line x1="120" y1="175" x2="100" y2="205" stroke="#0ea5e9" stroke-width="1.5" marker-end="url(#arrow1)"/>
+  <line x1="120" y1="175" x2="155" y2="205" stroke="#0ea5e9" stroke-width="1.5" marker-end="url(#arrow1)"/>
+  <line x1="300" y1="175" x2="295" y2="205" stroke="#0ea5e9" stroke-width="1.5" marker-end="url(#arrow1)"/>
+  <line x1="530" y1="175" x2="530" y2="210" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arrow1)"/>
+  <line x1="600" y1="148" x2="640" y2="135" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arrow1)"/>
+  <line x1="600" y1="158" x2="640" y2="172" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arrow1)"/>
+  <text x="620" y="108" font-size="9" fill="#92400e">ロールを引き受ける</text>
+  <!-- Policy arrows to groups -->
+  <line x1="460" y1="230" x2="200" y2="165" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow1)"/>
+  <line x1="460" y1="230" x2="380" y2="170" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arrow1)"/>
+  <text x="350" y="270" font-size="9" fill="#166534">ポリシーをアタッチ</text>
+</svg>
+<figcaption>図2-1: IAMの構成要素（ルートユーザー、グループ、ユーザー、ロール、ポリシーの関係）</figcaption>
+</figure>
+
+<h2>2.4 クロスアカウントアクセス（AssumeRole）</h2>
+
+<p><strong>AssumeRole</strong>は、あるAWSアカウント（またはサービス）が、別のアカウントのIAMロールを<strong>一時的に引き受ける</strong>仕組みです。一時的なセキュリティ認証情報（アクセスキー + シークレットキー + セッショントークン）が発行されます。</p>
+
+<figure class="diagram">
+<svg viewBox="0 0 750 200" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <defs><marker id="arrow2" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#0ea5e9"/></marker></defs>
+  <rect x="20" y="30" width="200" height="140" rx="12" fill="#e0f2fe" stroke="#0369a1" stroke-width="2"/>
+  <text x="120" y="55" text-anchor="middle" font-size="12" font-weight="700" fill="#0369a1">アカウントA (開発)</text>
+  <rect x="50" y="70" width="140" height="40" rx="8" fill="#fff" stroke="#93c5fd"/>
+  <text x="120" y="95" text-anchor="middle" font-size="11" fill="#334155">IAMユーザー: dev01</text>
+  <rect x="530" y="30" width="200" height="140" rx="12" fill="#f0fdf4" stroke="#4ade80" stroke-width="2"/>
+  <text x="630" y="55" text-anchor="middle" font-size="12" font-weight="700" fill="#166534">アカウントB (本番)</text>
+  <rect x="555" y="70" width="150" height="40" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="630" y="95" text-anchor="middle" font-size="11" fill="#92400e">IAMロール: ProdAccess</text>
+  <rect x="555" y="120" width="150" height="35" rx="6" fill="#fff" stroke="#86efac"/>
+  <text x="630" y="142" text-anchor="middle" font-size="10" fill="#166534">S3 / RDS etc.</text>
+  <line x1="220" y1="90" x2="530" y2="80" stroke="#0ea5e9" stroke-width="2" marker-end="url(#arrow2)"/>
+  <text x="375" y="72" text-anchor="middle" font-size="11" font-weight="600" fill="#0ea5e9">1. AssumeRole (STS)</text>
+  <line x1="530" y1="105" x2="220" y2="120" stroke="#22c55e" stroke-width="2" marker-end="url(#arrow2)" stroke-dasharray="6,3"/>
+  <text x="375" y="128" text-anchor="middle" font-size="10" fill="#166534">2. 一時的な認証情報を返す</text>
+  <line x1="220" y1="140" x2="530" y2="140" stroke="#ea580c" stroke-width="2" marker-end="url(#arrow2)"/>
+  <text x="375" y="160" text-anchor="middle" font-size="10" fill="#ea580c">3. 一時認証情報でリソースにアクセス</text>
+</svg>
+<figcaption>図2-2: クロスアカウントアクセス（AssumeRole）のフロー</figcaption>
+</figure>
+
+<div class="exam">
+<p><strong>問題パターン</strong>: 「別のAWSアカウントのS3にアクセスするには？」→ <strong>クロスアカウントIAMロール</strong>を作成し、AssumeRoleで引き受ける。アクセスキーを共有するのはNG（セキュリティリスク）。</p>
+</div>
+
+<h2>2.5 MFA（多要素認証）</h2>
+<p>パスワードだけでなく、<strong>物理デバイスやアプリが生成するワンタイムコード</strong>も要求する認証方式。ルートユーザーには必須で設定すべきです。</p>
+<ul>
+<li><strong>仮想MFAデバイス</strong>: Google Authenticator、Authy等のスマホアプリ</li>
+<li><strong>U2Fセキュリティキー</strong>: YubiKey等の物理キー</li>
+<li><strong>ハードウェアMFAデバイス</strong>: Gemalto等の専用トークンデバイス</li>
+</ul>
+
+<h2>2.6 AWS Organizations と SCP</h2>
+
+<p><strong>AWS Organizations</strong>は、複数のAWSアカウントを一元管理するサービスです。大企業では開発用・本番用・セキュリティ用など複数のアカウントを使い分けます。</p>
+
+<ul>
+<li><strong>OU（Organizational Unit）</strong>: アカウントをグループ化する単位</li>
+<li><strong>SCP（Service Control Policy）</strong>: OU全体に適用する権限の上限。<strong>IAMポリシーよりも優先される</strong>（SCPでDenyされたらIAMでAllowしてもアクセス不可）</li>
+<li><strong>一括請求</strong>: 全アカウントの利用料をまとめて支払い（ボリュームディスカウント適用）</li>
+</ul>
+
+<div class="exam">
+<p><strong>問題パターン</strong>: 「開発アカウントでEC2の高額インスタンスタイプの起動を禁止するには？」→ <strong>SCP</strong>で該当インスタンスタイプのRunInstancesをDeny。SCPはIAMの上位にある「ガードレール」。</p>
+</div>
+
+<h2>2.7 IAM Identity Center（旧AWS SSO）</h2>
+<p>複数のAWSアカウントやビジネスアプリケーション（Salesforce等）へのシングルサインオン（SSO = 1回のログインで複数サービスにアクセス）を実現するサービス。Active DirectoryやOkta等の外部IDプロバイダーとも連携可能。</p>
+
+<h2>2.8 IAM Access Analyzer</h2>
+<p>S3バケットやIAMロール等のリソースが<strong>外部（別アカウントやインターネット）からアクセス可能になっていないか</strong>を自動検出するサービス。意図しない公開設定を発見できます。</p>
+
+<div class="exam">
+<p><strong>問題パターン</strong>: 「S3バケットが意図せず公開されていないか確認するには？」→ <strong>IAM Access Analyzer</strong>を使用。外部アクセスを検出し、セキュリティリスクを可視化。</p>
+</div>
+
+<div class="tsurispot">
+<p>ツリスポのGitHub ActionsがECRにDockerイメージをpushするとき、IAMロールを使っています。GitHub Actionsに直接アクセスキーを渡す方法もありますが、これはキー漏洩のリスクがあり危険です。代わりに<strong>OIDC（OpenID Connect）でIAMロールを引き受ける</strong>方式を採用。一時的な認証情報のみが使われ、長期キーがGitHub側に保存されません。</p>
+</div>
+
+<div class="tsurispot">
+<p>ツリスポのApp Runnerには<strong>インスタンスロール</strong>がアタッチされています。このロールのポリシーには「ECRからのイメージpull権限」だけを付与（最小権限の原則）。S3への書き込み権限やRDSへのアクセス権限は含めません。必要になったら、その時に最小限の権限を追加します。</p>
+</div>
+
+<h3>CLIコマンド例</h3>
+<pre>
+# IAMユーザー一覧
+aws iam list-users
+
+# IAMユーザーにポリシーをアタッチ
+aws iam attach-user-policy \
+  --user-name dev-user \
+  --policy-arn arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess
+
+# IAMロール作成
+aws iam create-role \
+  --role-name TsurispotAppRole \
+  --assume-role-policy-document file://trust-policy.json
+
+# MFAデバイス一覧
+aws iam list-mfa-devices --user-name dev-user
+
+# パスワードポリシー設定
+aws iam update-account-password-policy \
+  --minimum-password-length 14 \
+  --require-symbols \
+  --require-numbers \
+  --require-uppercase-characters \
+  --max-password-age 90
+</pre>
+
+<div class="summary-box">
+<h4>第2章まとめ</h4>
+<ul>
+<li>ルートユーザーは日常使いしない。MFAを必ず設定。アクセスキーは作らない</li>
+<li>IAMポリシーはJSON形式: Effect, Action, Resource, Condition</li>
+<li>ポリシー評価: <strong>明示的Deny &gt; Allow &gt; 暗黙的Deny</strong></li>
+<li>IAMロール = 一時的な認証情報。EC2やLambdaに権限を付与する安全な方法</li>
+<li>AssumeRole = クロスアカウントアクセスの仕組み（STS経由）</li>
+<li>AWS Organizations + SCP = 複数アカウントのガードレール</li>
+<li>最小権限の原則 = 必要最小限の権限だけを付与する</li>
+</ul>
+</div>
+
+<div class="quiz">
+<p><strong>Q1.</strong> ルートユーザーでしかできない操作は？</p>
+<details><summary>答えを見る</summary><p>AWSアカウントの解約、請求情報の変更、サポートプランの変更など。日常作業にはIAMユーザーを使う。</p></details>
+<p><strong>Q2.</strong> IAMポリシーでAllowとDenyが同時に存在する場合、どちらが優先される？</p>
+<details><summary>答えを見る</summary><p><strong>明示的なDenyが常に優先</strong>。Deny &gt; Allow &gt; 暗黙的Deny。</p></details>
+<p><strong>Q3.</strong> EC2からS3にアクセスする最も安全な方法は？</p>
+<details><summary>答えを見る</summary><p><strong>IAMロールをEC2にアタッチ</strong>する。アクセスキーをEC2上に配置するのは漏洩リスクがあり非推奨。</p></details>
+<p><strong>Q4.</strong> 複数AWSアカウントの権限を一元管理するサービスは？</p>
+<details><summary>答えを見る</summary><p><strong>AWS Organizations</strong>。SCP（サービスコントロールポリシー）でOU全体の権限上限を設定。</p></details>
+<p><strong>Q5.</strong> IAM Access Analyzerの役割は？</p>
+<details><summary>答えを見る</summary><p>リソースが外部（別アカウントやインターネット）から<strong>意図せずアクセス可能になっていないか</strong>を自動検出する。</p></details>
+</div>
+
+<!-- ============================== 第3章 ============================== -->
+<h1 id="ch3"><span class="chapter-num">3</span> EC2（Elastic Compute Cloud）</h1>
+
+<p>EC2はAWSの<strong>最も基本的なコンピューティングサービス</strong>で、クラウド上に仮想サーバー（インスタンス）を立ち上げることができます。「必要な時に、必要なスペックのサーバーを、数分で起動できる」のがEC2の価値です。</p>
+
+<div class="analogy">
+<p><strong>パソコンの購入に例えると：</strong></p>
+<ul>
+<li><strong>AMI</strong> = パソコンに入れるOS（Windows? Mac? Linux?）</li>
+<li><strong>インスタンスタイプ</strong> = パソコンのスペック（CPU、メモリ、どれくらい速い？）</li>
+<li><strong>EBS</strong> = ハードディスク（データを保存する場所、容量は？SSD? HDD?）</li>
+<li><strong>セキュリティグループ</strong> = ファイアウォール（どの通信を許可する？）</li>
+<li><strong>キーペア</strong> = パソコンのログインパスワード（SSH接続の鍵）</li>
+</ul>
+</div>
+
+<h2>3.1 インスタンスタイプの命名規則</h2>
+
+<p>EC2のインスタンスタイプ名には規則があります。例えば <code>m5.xlarge</code> は：</p>
+<ul>
+<li><strong>m</strong> = ファミリー（汎用 = General Purpose）</li>
+<li><strong>5</strong> = 世代（第5世代、数字が大きいほど新しく高性能）</li>
+<li><strong>xlarge</strong> = サイズ（nano &lt; micro &lt; small &lt; medium &lt; large &lt; xlarge &lt; 2xlarge ...）</li>
+</ul>
+
+<p>追加属性がつく場合もあります。例: <code>m5a.xlarge</code> の「a」はAMDプロセッサー、<code>m6g.xlarge</code> の「g」はAWS Graviton（ARM）プロセッサー。</p>
+
+<h3>主要なインスタンスファミリー</h3>
+<table>
+<tr><th>ファミリー</th><th>最適な用途</th><th>覚え方</th></tr>
+<tr><td><strong>T系</strong> (T3, T3a, T4g)</td><td>バースト可能な汎用。開発環境、小規模Webサーバー</td><td><strong>T</strong>urbo（バーストするから）</td></tr>
+<tr><td><strong>M系</strong> (M5, M6i, M7g)</td><td>バランスの取れた汎用。アプリサーバー、中規模DB</td><td><strong>M</strong>ain（メイン＝汎用）</td></tr>
+<tr><td><strong>C系</strong> (C5, C6i, C7g)</td><td>コンピューティング最適化。バッチ処理、科学計算、ゲームサーバー</td><td><strong>C</strong>ompute</td></tr>
+<tr><td><strong>R系</strong> (R5, R6i, R7g)</td><td>メモリ最適化。インメモリDB、リアルタイム分析</td><td><strong>R</strong>AM</td></tr>
+<tr><td><strong>X系</strong> (X1, X2idn)</td><td>超大容量メモリ。SAP HANA等</td><td>e<strong>X</strong>tra memory</td></tr>
+<tr><td><strong>I系</strong> (I3, I4i)</td><td>ストレージ最適化。高IOPS。NoSQL DB</td><td><strong>I</strong>/O（入出力）</td></tr>
+<tr><td><strong>D系</strong> (D2, D3)</td><td>ストレージ密度最適化。データウェアハウス、分散ファイルシステム</td><td><strong>D</strong>ense storage</td></tr>
+<tr><td><strong>P系</strong> (P3, P4d, P5)</td><td>GPU。機械学習トレーニング</td><td>GPU <strong>P</strong>rocessing</td></tr>
+<tr><td><strong>G系</strong> (G4dn, G5)</td><td>GPU。グラフィック処理、動画エンコーディング</td><td><strong>G</strong>raphics</td></tr>
+</table>
+
+<div class="point">
+<p><strong>T系インスタンスのバーストクレジット：</strong></p>
+<p>T系は「バースト」方式で動作します。通常はベースラインのCPU性能で動き、クレジットを蓄積。高負荷時にクレジットを消費して一時的に高速化。クレジットがなくなるとベースライン性能に戻ります。</p>
+<ul>
+<li><strong>T3 Unlimited</strong>を有効にすると、クレジット枯渇後も高性能を維持（ただし追加課金あり）</li>
+<li>常に高負荷ならT系ではなくM系やC系を選ぶべき</li>
+</ul>
+</div>
+
+<div class="exam">
+<p><strong>問題パターン</strong>: 「メモリ集約型のワークロードに最適なインスタンスは？」→ <strong>R系（メモリ最適化）</strong>。「R = RAM」と覚える。</p>
+<p><strong>問題パターン</strong>: 「機械学習のトレーニングに最適なインスタンスは？」→ <strong>P系（GPU）</strong>。推論（inference）ならG系やInf系も可。</p>
+</div>
+
+<h2>3.2 AMI（Amazon Machine Image）</h2>
+<p>AMIはEC2インスタンスの<strong>テンプレート（設計図）</strong>です。OS、ミドルウェア、アプリケーションの設定をまとめて保存したもので、AMIからインスタンスを起動すると、毎回同じ環境が再現されます。</p>
+<ul>
+<li><strong>AWS提供AMI</strong>: Amazon Linux 2023, Ubuntu, Windows Server等</li>
+<li><strong>Marketplace AMI</strong>: サードパーティが作成した有料/無料AMI</li>
+<li><strong>カスタムAMI</strong>: 自分で作成。自社アプリを入れた状態で保存し、複数のインスタンスに展開</li>
+</ul>
+<p>AMIはリージョン固有ですが、別リージョンにコピーできます。</p>
+
+<h2>3.3 セキュリティグループ</h2>
+<p>EC2のインスタンスレベルの<strong>仮想ファイアウォール</strong>です。どのトラフィック（通信）を許可するかを制御します。</p>
+
+<div class="point">
+<p><strong>セキュリティグループの重要な特徴：</strong></p>
+<ul>
+<li><strong>ステートフル</strong>: インバウンド（入り）を許可すると、そのレスポンス（出）は自動的に許可される</li>
+<li><strong>許可ルールのみ</strong>: 「拒否」ルールは設定できない。デフォルトは全拒否で、許可したいものだけを追加</li>
+<li><strong>インスタンスレベル</strong>: 各インスタンスに個別にアタッチ</li>
+<li>複数のSGを1つのインスタンスにアタッチ可能（ルールは全て合算される）</li>
+<li>他のSGをソースに指定可能（例: ALBのSGからの通信のみ許可）</li>
+</ul>
+</div>
+
+<h2>3.4 購入オプション（コスト最適化の要）</h2>
+
+<p>EC2のコスト最適化は試験の超頻出分野です。各購入オプションの特徴と使い分けを完全に理解しましょう。</p>
+
+<table>
+<tr><th>購入オプション</th><th>割引率</th><th>特徴</th><th>最適な用途</th></tr>
+<tr><td><strong>オンデマンド</strong></td><td>なし（定価）</td><td>秒単位課金、いつでも起動/停止</td><td>短期・予測不能なワークロード</td></tr>
+<tr><td><strong>リザーブド (RI)</strong></td><td>最大72%</td><td>1年 or 3年契約。全前払い/一部前払い/前払いなし</td><td>安定した常時稼働ワークロード</td></tr>
+<tr><td><strong>Savings Plans</strong></td><td>最大72%</td><td>1年 or 3年。時間あたりの使用量をコミット。柔軟</td><td>EC2/Fargate/Lambdaを横断的に使用</td></tr>
+<tr><td><strong>スポット</strong></td><td>最大90%</td><td>余剰キャパシティを使用。<strong>中断のリスクあり</strong></td><td>バッチ処理、CI/CD、データ分析</td></tr>
+<tr><td><strong>専用ホスト</strong></td><td>-</td><td>物理サーバーを占有。ソケット/コア単位のライセンス用</td><td>コンプライアンス要件、ライセンス要件</td></tr>
+<tr><td><strong>専用インスタンス</strong></td><td>-</td><td>他のAWS顧客とHWを共有しない</td><td>規制要件</td></tr>
+<tr><td><strong>Capacity Reservations</strong></td><td>なし</td><td>特定AZのキャパシティを事前確保</td><td>DRサイト、確実にインスタンスを起動したい時</td></tr>
+</table>
+
+<figure class="diagram">
+<svg viewBox="0 0 780 280" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <defs><filter id="sh4" x="-3%" y="-3%" width="106%" height="110%"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.1"/></filter></defs>
+  <text x="390" y="25" text-anchor="middle" font-size="16" font-weight="700" fill="#0c4a6e">EC2 購入オプションの比較（コスト vs 柔軟性）</text>
+  <!-- Axes -->
+  <line x1="80" y1="250" x2="740" y2="250" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="80" y1="250" x2="80" y2="50" stroke="#94a3b8" stroke-width="2"/>
+  <text x="410" y="275" text-anchor="middle" font-size="12" fill="#64748b">柔軟性（高い →）</text>
+  <text x="40" y="150" text-anchor="middle" font-size="12" fill="#64748b" transform="rotate(-90, 40, 150)">コスト（安い →）</text>
+  <!-- Spot -->
+  <rect x="600" y="70" width="110" height="40" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="2" filter="url(#sh4)"/>
+  <text x="655" y="88" text-anchor="middle" font-size="11" font-weight="600" fill="#166534">スポット</text>
+  <text x="655" y="102" text-anchor="middle" font-size="9" fill="#166534">最大90%OFF</text>
+  <!-- RI -->
+  <rect x="180" y="90" width="110" height="40" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="2" filter="url(#sh4)"/>
+  <text x="235" y="108" text-anchor="middle" font-size="11" font-weight="600" fill="#1e40af">リザーブド</text>
+  <text x="235" y="122" text-anchor="middle" font-size="9" fill="#1e40af">最大72%OFF</text>
+  <!-- Savings Plans -->
+  <rect x="350" y="100" width="120" height="40" rx="8" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="2" filter="url(#sh4)"/>
+  <text x="410" y="118" text-anchor="middle" font-size="11" font-weight="600" fill="#0369a1">Savings Plans</text>
+  <text x="410" y="132" text-anchor="middle" font-size="9" fill="#0369a1">最大72%OFF</text>
+  <!-- On-Demand -->
+  <rect x="550" y="180" width="110" height="40" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" filter="url(#sh4)"/>
+  <text x="605" y="198" text-anchor="middle" font-size="11" font-weight="600" fill="#92400e">オンデマンド</text>
+  <text x="605" y="212" text-anchor="middle" font-size="9" fill="#92400e">定価（割引なし）</text>
+  <!-- Dedicated -->
+  <rect x="120" y="200" width="110" height="40" rx="8" fill="#fef2f2" stroke="#f87171" stroke-width="2" filter="url(#sh4)"/>
+  <text x="175" y="218" text-anchor="middle" font-size="11" font-weight="600" fill="#dc2626">専用ホスト</text>
+  <text x="175" y="232" text-anchor="middle" font-size="9" fill="#dc2626">最も高額</text>
+  <!-- Annotations -->
+  <text x="655" y="60" text-anchor="middle" font-size="9" fill="#166534">中断リスクあり!</text>
+  <text x="235" y="80" text-anchor="middle" font-size="9" fill="#1e40af">1-3年契約</text>
+</svg>
+<figcaption>図3-1: EC2購入オプション比較マトリクス</figcaption>
+</figure>
+
+<div class="exam">
+<p><strong>問題パターン1</strong>: 「24時間365日稼働するWebサーバーのコスト最適化は？」→ <strong>リザーブドインスタンス or Savings Plans</strong>（長期契約で割引）</p>
+<p><strong>問題パターン2</strong>: 「中断されても問題ないバッチ処理のコスト最適化は？」→ <strong>スポットインスタンス</strong>（最大90%OFF、ただし中断リスクあり）</p>
+<p><strong>問題パターン3</strong>: 「コアベースのソフトウェアライセンスを使いたい」→ <strong>専用ホスト</strong>（物理サーバー占有でCPUコア数を把握可能）</p>
+</div>
+
+<h2>3.5 EBS（Elastic Block Store）</h2>
+
+<p>EBSはEC2にアタッチする<strong>永続的なブロックストレージ</strong>（仮想ハードディスク）です。EC2を停止・終了してもデータが保持されます（削除保護設定時）。</p>
+
+<h3>EBSボリュームタイプ</h3>
+<table>
+<tr><th>タイプ</th><th>名称</th><th>IOPS</th><th>用途</th></tr>
+<tr><td><code>gp3</code></td><td>汎用SSD（最新）</td><td>3,000〜16,000</td><td>一般的なワークロード。<strong>最もコスパが良い</strong></td></tr>
+<tr><td><code>gp2</code></td><td>汎用SSD（旧世代）</td><td>容量に比例(最大16,000)</td><td>gp3への移行推奨</td></tr>
+<tr><td><code>io2/io1</code></td><td>プロビジョンドIOPS SSD</td><td>最大64,000 (io2 Block Express: 256,000)</td><td>高性能DB。ミッションクリティカル</td></tr>
+<tr><td><code>st1</code></td><td>スループット最適化HDD</td><td>500 IOPS</td><td>ビッグデータ、ログ処理</td></tr>
+<tr><td><code>sc1</code></td><td>コールドHDD</td><td>250 IOPS</td><td>アクセス頻度の低いデータ。最安</td></tr>
+</table>
+
+<figure class="diagram">
+<svg viewBox="0 0 780 260" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <text x="390" y="25" text-anchor="middle" font-size="15" font-weight="700" fill="#0c4a6e">EBSボリュームタイプの比較</text>
+  <!-- SSD side -->
+  <rect x="30" y="45" width="360" height="195" rx="12" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="2"/>
+  <text x="210" y="68" text-anchor="middle" font-size="13" font-weight="700" fill="#0369a1">SSD（低レイテンシー）</text>
+  <rect x="50" y="80" width="155" height="70" rx="8" fill="#fff" stroke="#0ea5e9"/>
+  <text x="127" y="100" text-anchor="middle" font-size="12" font-weight="600" fill="#0369a1">gp3 / gp2</text>
+  <text x="127" y="118" text-anchor="middle" font-size="10" fill="#334155">汎用SSD</text>
+  <text x="127" y="135" text-anchor="middle" font-size="9" fill="#64748b">一般的なワークロード</text>
+  <rect x="220" y="80" width="155" height="70" rx="8" fill="#fff" stroke="#0ea5e9"/>
+  <text x="297" y="100" text-anchor="middle" font-size="12" font-weight="600" fill="#0369a1">io2 / io1</text>
+  <text x="297" y="118" text-anchor="middle" font-size="10" fill="#334155">高性能SSD</text>
+  <text x="297" y="135" text-anchor="middle" font-size="9" fill="#64748b">DB、ミッションクリティカル</text>
+  <text x="210" y="175" text-anchor="middle" font-size="10" fill="#0369a1">ブートボリューム: OK</text>
+  <text x="210" y="195" text-anchor="middle" font-size="10" fill="#0369a1">ランダムI/Oに強い</text>
+  <!-- HDD side -->
+  <rect x="410" y="45" width="350" height="195" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="585" y="68" text-anchor="middle" font-size="13" font-weight="700" fill="#92400e">HDD（高スループット）</text>
+  <rect x="425" y="80" width="155" height="70" rx="8" fill="#fff" stroke="#f59e0b"/>
+  <text x="502" y="100" text-anchor="middle" font-size="12" font-weight="600" fill="#92400e">st1</text>
+  <text x="502" y="118" text-anchor="middle" font-size="10" fill="#334155">スループット最適化</text>
+  <text x="502" y="135" text-anchor="middle" font-size="9" fill="#64748b">ビッグデータ、ログ</text>
+  <rect x="595" y="80" width="155" height="70" rx="8" fill="#fff" stroke="#f59e0b"/>
+  <text x="672" y="100" text-anchor="middle" font-size="12" font-weight="600" fill="#92400e">sc1</text>
+  <text x="672" y="118" text-anchor="middle" font-size="10" fill="#334155">コールドHDD</text>
+  <text x="672" y="135" text-anchor="middle" font-size="9" fill="#64748b">アクセス頻度低、最安</text>
+  <text x="585" y="175" text-anchor="middle" font-size="10" fill="#92400e">ブートボリューム: NG</text>
+  <text x="585" y="195" text-anchor="middle" font-size="10" fill="#92400e">シーケンシャルI/Oに強い</text>
+</svg>
+<figcaption>図3-2: EBSボリュームタイプの比較（SSD vs HDD）</figcaption>
+</figure>
+
+<div class="point">
+<p><strong>EBSの重要な特徴：</strong></p>
+<ul>
+<li>EBSは<strong>特定のAZに固定</strong>される。別AZのEC2にはアタッチ不可（スナップショット経由で移動可能）</li>
+<li><strong>スナップショット</strong>: EBSのバックアップ。S3に保存される。増分バックアップ（変更分のみ保存）</li>
+<li><strong>暗号化</strong>: AES-256。KMSキーを使用。暗号化は無料</li>
+<li><strong>マルチアタッチ</strong>: io1/io2のみ、同じAZの最大16のEC2に同時アタッチ可能</li>
+</ul>
+</div>
+
+<h2>3.6 インスタンスストア</h2>
+<p>EC2ホストマシンに物理的に接続された<strong>一時的なストレージ</strong>。EBSよりも高速（特にI/O集約型タスク）ですが、<strong>インスタンス停止・終了でデータが消失</strong>します。キャッシュやバッファに最適。</p>
+
+<div class="exam">
+<p><strong>問題パターン</strong>: 「高IOPSが必要だが、データ消失が許容されるワークロードに最適なストレージは？」→ <strong>インスタンスストア</strong>。永続性が必要ならio2 EBS。</p>
+</div>
+
+<div class="tsurispot">
+<p>ツリスポをEC2で運用する場合: <code>t3.medium</code>（2vCPU, 4GB RAM）で月間5万PVまで対応可能。月額約$30。gp3 EBS 20GBをアタッチ（月額約$1.6）。月間50万PVになったら<code>m6i.large</code>（2vCPU, 8GB RAM）にスケールアップし、リザーブドインスタンス3年全前払いで<strong>年間コスト約40%削減</strong>。</p>
+</div>
+
+<div class="tsurispot">
+<p>現在のApp Runnerは内部的にFargate（EC2の代わりにAWSが管理するコンテナ実行環境）で動いています。EC2の場合と違い、OS管理・パッチ適用・スケーリング設定が不要。ただしEC2ほど細かいチューニング（インスタンスタイプ選択、EBSタイプ指定等）はできません。</p>
+</div>
+
+<h3>CLIコマンド例</h3>
+<pre>
+# EC2インスタンスの起動
+aws ec2 run-instances \
+  --image-id ami-0abcdef1234567890 \
+  --instance-type t3.medium \
+  --key-name my-key \
+  --security-group-ids sg-0123456789abcdef0 \
+  --subnet-id subnet-0123456789abcdef0
+
+# インスタンス一覧
+aws ec2 describe-instances --query 'Reservations[*].Instances[*].[InstanceId,State.Name,InstanceType]' --output table
+
+# EBSボリューム作成
+aws ec2 create-volume \
+  --volume-type gp3 \
+  --size 100 \
+  --availability-zone ap-northeast-1a
+
+# スナップショット作成
+aws ec2 create-snapshot --volume-id vol-0123456789abcdef0 --description "Daily backup"
+</pre>
+
+<div class="summary-box">
+<h4>第3章まとめ</h4>
+<ul>
+<li>インスタンスタイプ: ファミリー + 世代 + サイズ（例: m5.xlarge）</li>
+<li>T系=バースト汎用、M系=汎用、C系=コンピュート、R系=メモリ、I/D系=ストレージ、P/G系=GPU</li>
+<li>AMI = インスタンスのテンプレート。OS + ミドルウェアのスナップショット</li>
+<li>SG = ステートフルなファイアウォール。許可ルールのみ</li>
+<li>購入: オンデマンド（定価） &lt; Savings Plans/RI（最大72%OFF） &lt; スポット（最大90%OFF、中断あり）</li>
+<li>EBS: gp3が最もコスパ良い。io2は高性能DB向け。st1/sc1はHDD</li>
+<li>EBSはAZ固定。スナップショットでバックアップ（S3に保存、増分）</li>
+<li>インスタンスストア = 一時的だが超高速。停止でデータ消失</li>
+</ul>
+</div>
+
+<div class="quiz">
+<p><strong>Q1.</strong> メモリ最適化インスタンスのファミリーは？</p>
+<details><summary>答えを見る</summary><p><strong>R系</strong>（R = RAM）。超大容量メモリが必要ならX系。</p></details>
+<p><strong>Q2.</strong> 中断されても問題ないバッチ処理に最適な購入オプションは？</p>
+<details><summary>答えを見る</summary><p><strong>スポットインスタンス</strong>。最大90%OFFだが、AWSが2分前通知で中断する可能性あり。</p></details>
+<p><strong>Q3.</strong> EBSボリュームを別のAZに移動するには？</p>
+<details><summary>答えを見る</summary><p><strong>スナップショットを取得</strong>し、それを別のAZで新しいEBSボリュームとして復元する。EBSは直接AZ間移動できない。</p></details>
+<p><strong>Q4.</strong> ブートボリュームに使えないEBSタイプは？</p>
+<details><summary>答えを見る</summary><p><strong>st1（スループットHDD）とsc1（コールドHDD）</strong>。ブートボリュームはSSD（gp2/gp3/io1/io2）のみ。</p></details>
+</div>
+
+<!-- ============================== 第4章 ============================== -->
+<h1 id="ch4"><span class="chapter-num">4</span> ストレージサービス</h1>
+
+<p>AWSのストレージサービスの中でも、<strong>S3（Simple Storage Service）は試験で最も出題頻度が高いサービスの一つ</strong>です。S3だけで10問以上出ることもあります。完全に理解しましょう。</p>
+
+<div class="analogy">
+<p><strong>ストレージの種類を倉庫に例えると：</strong></p>
+<ul>
+<li><strong>S3（オブジェクトストレージ）</strong> = 貸し倉庫。モノ（ファイル）を箱に入れてラベル（キー）を付けて保管。中身を部分的に書き換えるのは不得意。丸ごと出し入れ向き。</li>
+<li><strong>EBS（ブロックストレージ）</strong> = 自分の机の引き出し。高速にアクセスでき、中身の一部だけ書き換え可能。ただし1つのPC（EC2）にしか接続できない。</li>
+<li><strong>EFS（ファイルストレージ）</strong> = 共有フォルダ。複数のPC（EC2）から同時に読み書きできる。</li>
+</ul>
+</div>
+
+<h2>4.1 S3の基本概念</h2>
+
+<p>S3は<strong>オブジェクトストレージ</strong>サービスで、画像、動画、バックアップ、ログなどあらゆるファイルを保存できます。容量は実質無制限で、1オブジェクトあたり最大<strong>5TB</strong>まで。</p>
+
+<h4>バケットとオブジェクト</h4>
+<ul>
+<li><strong>バケット</strong>: ファイルを保存するコンテナ。名前は<strong>グローバルに一意</strong>（世界中で重複不可）</li>
+<li><strong>オブジェクト</strong>: バケット内のファイル。キー（パス名）、データ本体、メタデータで構成</li>
+<li>キーの例: <code>images/spots/akashi-port.jpg</code></li>
+<li>S3に「フォルダ」という概念は実は存在しない。キー名にスラッシュを含めることで、コンソール上ではフォルダのように見える</li>
+</ul>
+
+<h4>バケットの命名規則</h4>
+<ul>
+<li>3〜63文字。小文字、数字、ハイフンのみ</li>
+<li>先頭は英小文字 or 数字</li>
+<li>IPアドレス形式（192.168.1.1等）は不可</li>
+<li><strong>グローバルに一意</strong>であること</li>
+</ul>
+
+<h2>4.2 S3ストレージクラス（超重要！）</h2>
+
+<p>S3にはデータのアクセス頻度に応じた<strong>7つのストレージクラス</strong>があり、使い分けによってコストを最適化できます。</p>
+
+<table>
+<tr><th>ストレージクラス</th><th>アクセス頻度</th><th>最小保存期間</th><th>取り出しコスト</th><th>用途</th></tr>
+<tr><td><strong>S3 Standard</strong></td><td>頻繁</td><td>なし</td><td>なし</td><td>アクティブなデータ</td></tr>
+<tr><td><strong>S3 Intelligent-Tiering</strong></td><td>不明/変動</td><td>なし</td><td>なし</td><td>アクセスパターンが読めないデータ</td></tr>
+<tr><td><strong>S3 Standard-IA</strong></td><td>月1回程度</td><td>30日</td><td>あり</td><td>バックアップ、DR</td></tr>
+<tr><td><strong>S3 One Zone-IA</strong></td><td>月1回程度</td><td>30日</td><td>あり</td><td>再作成可能なデータ（サムネイル等）</td></tr>
+<tr><td><strong>Glacier Instant Retrieval</strong></td><td>四半期1回</td><td>90日</td><td>あり</td><td>即時アクセスが必要なアーカイブ</td></tr>
+<tr><td><strong>Glacier Flexible Retrieval</strong></td><td>年1-2回</td><td>90日</td><td>あり（分〜時間）</td><td>アーカイブ（取り出しに時間OK）</td></tr>
+<tr><td><strong>Glacier Deep Archive</strong></td><td>年1回未満</td><td>180日</td><td>あり（12時間）</td><td>法令遵守の長期保存。<strong>最安</strong></td></tr>
+</table>
+
+<figure class="diagram">
+<svg viewBox="0 0 780 300" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <text x="390" y="25" text-anchor="middle" font-size="15" font-weight="700" fill="#0c4a6e">S3ストレージクラス: コスト vs アクセス頻度</text>
+  <line x1="80" y1="260" x2="740" y2="260" stroke="#94a3b8" stroke-width="2"/>
+  <line x1="80" y1="260" x2="80" y2="50" stroke="#94a3b8" stroke-width="2"/>
+  <text x="410" y="285" text-anchor="middle" font-size="11" fill="#64748b">保存コスト（安い →）</text>
+  <text x="35" y="155" text-anchor="middle" font-size="11" fill="#64748b" transform="rotate(-90, 35, 155)">アクセス頻度（高い →）</text>
+  <rect x="100" y="60" width="115" height="40" rx="8" fill="#0ea5e9" stroke="#0369a1" stroke-width="1.5"/>
+  <text x="157" y="78" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Standard</text>
+  <text x="157" y="92" text-anchor="middle" font-size="8" fill="#e0f2fe">$0.023/GB</text>
+  <rect x="240" y="85" width="115" height="40" rx="8" fill="#38bdf8" stroke="#0369a1" stroke-width="1.5"/>
+  <text x="297" y="103" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Intelligent-Tiering</text>
+  <text x="297" y="117" text-anchor="middle" font-size="8" fill="#e0f2fe">自動最適化</text>
+  <rect x="310" y="130" width="115" height="40" rx="8" fill="#7dd3fc" stroke="#0369a1" stroke-width="1.5"/>
+  <text x="367" y="148" text-anchor="middle" font-size="10" font-weight="600" fill="#0c4a6e">Standard-IA</text>
+  <text x="367" y="162" text-anchor="middle" font-size="8" fill="#0c4a6e">$0.0125/GB</text>
+  <rect x="390" y="145" width="115" height="40" rx="8" fill="#bae6fd" stroke="#0369a1" stroke-width="1.5"/>
+  <text x="447" y="163" text-anchor="middle" font-size="10" font-weight="600" fill="#0c4a6e">One Zone-IA</text>
+  <text x="447" y="177" text-anchor="middle" font-size="8" fill="#0c4a6e">$0.01/GB</text>
+  <rect x="480" y="175" width="115" height="40" rx="8" fill="#93c5fd" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="537" y="193" text-anchor="middle" font-size="9" font-weight="600" fill="#fff">Glacier Instant</text>
+  <text x="537" y="207" text-anchor="middle" font-size="8" fill="#e0f2fe">$0.004/GB</text>
+  <rect x="570" y="200" width="115" height="40" rx="8" fill="#3b82f6" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="627" y="218" text-anchor="middle" font-size="9" font-weight="600" fill="#fff">Glacier Flexible</text>
+  <text x="627" y="232" text-anchor="middle" font-size="8" fill="#dbeafe">$0.0036/GB</text>
+  <rect x="650" y="225" width="115" height="40" rx="8" fill="#1e40af" stroke="#1e3a5f" stroke-width="1.5"/>
+  <text x="707" y="243" text-anchor="middle" font-size="9" font-weight="600" fill="#fff">Deep Archive</text>
+  <text x="707" y="257" text-anchor="middle" font-size="8" fill="#bfdbfe">$0.00099/GB</text>
+</svg>
+<figcaption>図4-1: S3ストレージクラスの階層（左上=高頻度・高コスト、右下=低頻度・低コスト）</figcaption>
+</figure>
+
+<div class="exam">
+<p><strong>問題パターン1</strong>: 「アクセスパターンが予測できないデータに最適なストレージクラスは？」→ <strong>S3 Intelligent-Tiering</strong>（自動的に最適なクラスに移行、取り出し料金なし）</p>
+<p><strong>問題パターン2</strong>: 「法令で7年間保存が必要だが、ほぼアクセスしないデータは？」→ <strong>Glacier Deep Archive</strong>（最安、取り出しに12時間、180日最小保存期間）</p>
+<p><strong>問題パターン3</strong>: 「再作成可能なサムネイル画像を安く保存したい」→ <strong>S3 One Zone-IA</strong>（1つのAZのみに保存するため安い、データ消失リスクはあるが再作成可能）</p>
+</div>
+
+<h2>4.3 S3ライフサイクルポリシー</h2>
+<p>オブジェクトを自動的にストレージクラス間で移行したり、削除するルールを設定できます。</p>
+
+<figure class="diagram">
+<svg viewBox="0 0 780 120" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <defs><marker id="arr4" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#0ea5e9"/></marker></defs>
+  <rect x="20" y="30" width="120" height="55" rx="8" fill="#0ea5e9" stroke="#0369a1" stroke-width="1.5"/>
+  <text x="80" y="55" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Standard</text>
+  <text x="80" y="72" text-anchor="middle" font-size="9" fill="#e0f2fe">作成日</text>
+  <line x1="140" y1="57" x2="175" y2="57" stroke="#0ea5e9" stroke-width="2" marker-end="url(#arr4)"/>
+  <text x="157" y="48" text-anchor="middle" font-size="8" fill="#0369a1">30日後</text>
+  <rect x="175" y="30" width="120" height="55" rx="8" fill="#7dd3fc" stroke="#0369a1" stroke-width="1.5"/>
+  <text x="235" y="55" text-anchor="middle" font-size="11" font-weight="600" fill="#0c4a6e">Standard-IA</text>
+  <text x="235" y="72" text-anchor="middle" font-size="9" fill="#0c4a6e">月1回程度</text>
+  <line x1="295" y1="57" x2="340" y2="57" stroke="#0ea5e9" stroke-width="2" marker-end="url(#arr4)"/>
+  <text x="317" y="48" text-anchor="middle" font-size="8" fill="#0369a1">90日後</text>
+  <rect x="340" y="30" width="130" height="55" rx="8" fill="#3b82f6" stroke="#1d4ed8" stroke-width="1.5"/>
+  <text x="405" y="55" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Glacier Flexible</text>
+  <text x="405" y="72" text-anchor="middle" font-size="9" fill="#dbeafe">年1-2回</text>
+  <line x1="470" y1="57" x2="510" y2="57" stroke="#0ea5e9" stroke-width="2" marker-end="url(#arr4)"/>
+  <text x="490" y="48" text-anchor="middle" font-size="8" fill="#0369a1">365日後</text>
+  <rect x="510" y="30" width="130" height="55" rx="8" fill="#1e40af" stroke="#1e3a5f" stroke-width="1.5"/>
+  <text x="575" y="55" text-anchor="middle" font-size="10" font-weight="600" fill="#fff">Deep Archive</text>
+  <text x="575" y="72" text-anchor="middle" font-size="9" fill="#bfdbfe">長期保存</text>
+  <line x1="640" y1="57" x2="680" y2="57" stroke="#dc2626" stroke-width="2" marker-end="url(#arr4)"/>
+  <text x="660" y="48" text-anchor="middle" font-size="8" fill="#dc2626">2555日後</text>
+  <rect x="680" y="30" width="80" height="55" rx="8" fill="#fef2f2" stroke="#f87171" stroke-width="1.5"/>
+  <text x="720" y="55" text-anchor="middle" font-size="11" font-weight="600" fill="#dc2626">削除</text>
+  <text x="720" y="72" text-anchor="middle" font-size="9" fill="#dc2626">7年後</text>
+</svg>
+<figcaption>図4-2: S3ライフサイクルポリシーの例（Standard → IA → Glacier → Deep Archive → 削除）</figcaption>
+</figure>
+
+<h2>4.4 S3の重要な機能</h2>
+
+<h3>バージョニング</h3>
+<p>同じキーのオブジェクトの<strong>全バージョンを保持</strong>します。誤って上書き・削除しても復元可能。バケットレベルで有効化します。</p>
+
+<h3>暗号化</h3>
+<table>
+<tr><th>方式</th><th>鍵の管理</th><th>説明</th></tr>
+<tr><td><strong>SSE-S3</strong></td><td>AWS（S3が管理）</td><td>デフォルトの暗号化。AES-256。最も手軽</td></tr>
+<tr><td><strong>SSE-KMS</strong></td><td>AWS KMS</td><td>鍵の使用履歴をCloudTrailで監査可能。権限管理が細かい</td></tr>
+<tr><td><strong>SSE-C</strong></td><td>ユーザーが提供</td><td>リクエストごとに鍵を送信。HTTPS必須</td></tr>
+<tr><td><strong>クライアント側暗号化</strong></td><td>ユーザーが完全管理</td><td>アップロード前にクライアントで暗号化</td></tr>
+</table>
+
+<h3>レプリケーション</h3>
+<ul>
+<li><strong>CRR（Cross-Region Replication）</strong>: 別リージョンに自動コピー。DR、低レイテンシーアクセス</li>
+<li><strong>SRR（Same-Region Replication）</strong>: 同リージョン内の別バケットに自動コピー。ログ集約等</li>
+<li>バージョニングの有効化が前提条件</li>
+</ul>
+
+<h3>その他の重要機能</h3>
+<ul>
+<li><strong>S3 Transfer Acceleration</strong>: CloudFrontエッジロケーション経由で高速アップロード</li>
+<li><strong>プレサインドURL</strong>: 一時的なアクセス許可URL。有効期限付き。非公開オブジェクトの一時共有に便利</li>
+<li><strong>S3 Select / Glacier Select</strong>: SQLライクなクエリでオブジェクト内の一部データだけ取得（全データ取得より安く速い）</li>
+<li><strong>イベント通知</strong>: オブジェクトの作成/削除をトリガーに Lambda/SQS/SNS/EventBridge に通知</li>
+<li><strong>S3 Object Lock</strong>: WORM（Write Once Read Many）モデル。規制遵守のため、一度書いたら変更/削除不可</li>
+<li><strong>MFA Delete</strong>: 削除操作にMFA認証を要求。バージョニング有効化が前提</li>
+<li><strong>Multipart Upload</strong>: 100MB以上のファイルは分割アップロードを推奨。5GBを超えるファイルは必須</li>
+</ul>
+
+<div class="exam">
+<p><strong>問題パターン</strong>: 「規制により、一度保存したデータを一定期間変更・削除不可にしたい」→ <strong>S3 Object Lock</strong>（WORMモデル）。Glacierの Vault Lock も同様。</p>
+<p><strong>問題パターン</strong>: 「大量のクライアントが世界中からS3に大きなファイルをアップロードする際の高速化」→ <strong>S3 Transfer Acceleration</strong> + <strong>Multipart Upload</strong></p>
+</div>
+
+<h2>4.5 EFS（Elastic File System）</h2>
+<p>Linux用のマネージドNFS（Network File System）。複数のEC2インスタンスから<strong>同時にマウント（接続）</strong>できるのが最大の特徴。EBSは基本1対1だが、EFSは多対多。</p>
+<ul>
+<li><strong>POSIX互換</strong>: Linux標準のファイルシステム</li>
+<li><strong>自動スケーリング</strong>: 容量を事前指定する必要なし（使った分だけ課金）</li>
+<li><strong>マルチAZ</strong>: デフォルトで複数AZにデータを複製</li>
+<li>ストレージクラス: Standard / Infrequent Access（IA）。ライフサイクル管理あり</li>
+</ul>
+
+<h2>4.6 FSx</h2>
+<ul>
+<li><strong>FSx for Windows File Server</strong>: Windows向けのマネージドファイルサーバー。SMBプロトコル、Active Directory統合</li>
+<li><strong>FSx for Lustre</strong>: 高性能計算（HPC）向け。機械学習、動画処理。S3と統合可能</li>
+<li><strong>FSx for NetApp ONTAP</strong>: マルチプロトコル（NFS/SMB/iSCSI）</li>
+<li><strong>FSx for OpenZFS</strong>: ZFSファイルシステム</li>
+</ul>
+
+<h2>4.7 Storage Gateway</h2>
+<p>オンプレミス環境とAWSストレージを統合するハイブリッドストレージサービス。</p>
+<table>
+<tr><th>種類</th><th>説明</th><th>用途</th></tr>
+<tr><td><strong>S3 File Gateway</strong></td><td>NFS/SMBでアクセスし、裏でS3に保存</td><td>ファイル共有のクラウド移行</td></tr>
+<tr><td><strong>Volume Gateway</strong></td><td>iSCSIでブロックストレージ提供。Stored/Cached</td><td>オンプレミスのブロックストレージバックアップ</td></tr>
+<tr><td><strong>Tape Gateway</strong></td><td>仮想テープライブラリ(VTL)をS3/Glacierにバックアップ</td><td>テープバックアップの置き換え</td></tr>
+</table>
+
+<h2>4.8 Snow Family</h2>
+<p>大容量データの<strong>物理的な移行</strong>に使うデバイス。ネットワーク転送では何週間もかかるデータを、デバイスに入れてAWSに郵送します。</p>
+<table>
+<tr><th>デバイス</th><th>容量</th><th>用途</th></tr>
+<tr><td><strong>Snowcone</strong></td><td>8TB HDD / 14TB SSD</td><td>小規模データ移行、エッジコンピューティング</td></tr>
+<tr><td><strong>Snowball Edge</strong></td><td>80TB（Storage Optimized）</td><td>大規模データ移行、エッジ処理</td></tr>
+<tr><td><strong>Snowmobile</strong></td><td>100PB</td><td>超大規模移行（トラック1台分！）</td></tr>
+</table>
+
+<div class="exam">
+<p><strong>問題パターン</strong>: 「10PBのデータをAWSに移行。ネットワークでは3ヶ月かかる」→ <strong>Snowball Edge</strong>を複数台使用。100PBならSnowmobile。</p>
+</div>
+
+<figure class="diagram">
+<svg viewBox="0 0 780 250" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <defs><marker id="arr5" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#0ea5e9"/></marker></defs>
+  <text x="390" y="25" text-anchor="middle" font-size="15" font-weight="700" fill="#0c4a6e">ストレージサービス選択フローチャート</text>
+  <!-- Start -->
+  <rect x="290" y="45" width="200" height="35" rx="17" fill="#0ea5e9" stroke="#0369a1" stroke-width="2"/>
+  <text x="390" y="67" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">データの種類は？</text>
+  <!-- Branches -->
+  <line x1="310" y1="80" x2="140" y2="110" stroke="#0ea5e9" stroke-width="1.5" marker-end="url(#arr5)"/>
+  <line x1="390" y1="80" x2="390" y2="110" stroke="#0ea5e9" stroke-width="1.5" marker-end="url(#arr5)"/>
+  <line x1="470" y1="80" x2="640" y2="110" stroke="#0ea5e9" stroke-width="1.5" marker-end="url(#arr5)"/>
+  <text x="210" y="95" font-size="9" fill="#64748b">オブジェクト</text>
+  <text x="395" y="100" font-size="9" fill="#64748b">ファイル共有</text>
+  <text x="560" y="95" font-size="9" fill="#64748b">ブロック</text>
+  <!-- Object -->
+  <rect x="60" y="110" width="160" height="45" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="140" y="130" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">S3</text>
+  <text x="140" y="146" text-anchor="middle" font-size="9" fill="#334155">画像/動画/バックアップ/ログ</text>
+  <!-- File -->
+  <rect x="280" y="110" width="100" height="45" rx="8" fill="#f0fdf4" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="330" y="130" text-anchor="middle" font-size="11" font-weight="600" fill="#166534">EFS</text>
+  <text x="330" y="146" text-anchor="middle" font-size="9" fill="#334155">Linux NFS</text>
+  <rect x="395" y="110" width="110" height="45" rx="8" fill="#f0fdf4" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="450" y="130" text-anchor="middle" font-size="11" font-weight="600" fill="#166534">FSx</text>
+  <text x="450" y="146" text-anchor="middle" font-size="9" fill="#334155">Windows/Lustre</text>
+  <!-- Block -->
+  <rect x="560" y="110" width="160" height="45" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="640" y="130" text-anchor="middle" font-size="12" font-weight="600" fill="#92400e">EBS</text>
+  <text x="640" y="146" text-anchor="middle" font-size="9" fill="#334155">EC2にアタッチ（単独AZ）</text>
+  <!-- Hybrid / Migration -->
+  <rect x="130" y="185" width="180" height="40" rx="8" fill="#faf5ff" stroke="#d8b4fe" stroke-width="1.5"/>
+  <text x="220" y="205" text-anchor="middle" font-size="10" font-weight="600" fill="#7c3aed">ハイブリッド: Storage Gateway</text>
+  <text x="220" y="218" text-anchor="middle" font-size="8" fill="#7c3aed">オンプレとの統合</text>
+  <rect x="450" y="185" width="180" height="40" rx="8" fill="#faf5ff" stroke="#d8b4fe" stroke-width="1.5"/>
+  <text x="540" y="205" text-anchor="middle" font-size="10" font-weight="600" fill="#7c3aed">大量移行: Snow Family</text>
+  <text x="540" y="218" text-anchor="middle" font-size="8" fill="#7c3aed">物理デバイスで郵送</text>
+</svg>
+<figcaption>図4-3: ストレージサービスの選択フローチャート</figcaption>
+</figure>
+
+<div class="tsurispot">
+<p>ツリスポの画像ファイル（スポット写真、魚の写真、OGP画像）を<strong>S3 Standard</strong>に保存。頻繁にアクセスされる人気スポットの画像はStandard、3ヶ月アクセスのない古い写真は<strong>ライフサイクルポリシーでS3 Standard-IAに自動移行</strong>。CloudFront経由で配信すれば日本全国どこからでも高速アクセス。コスト試算: 画像10GB = S3 Standard: 月$0.23 + CloudFront配信コスト。</p>
+</div>
+
+<div class="tsurispot">
+<p>ツリスポで将来ユーザーが釣果写真をアップロードする機能を追加する場合: <strong>プレサインドURL</strong>を発行してブラウザから直接S3にアップロード（サーバーを経由しないので高速・低負荷）。アップロード後にS3イベント通知でLambdaを起動し、画像のリサイズとサムネイル生成を自動実行。</p>
+</div>
+
+<h3>CLIコマンド例</h3>
+<pre>
+# バケット作成
+aws s3 mb s3://tsurispot-images-prod --region ap-northeast-1
+
+# ファイルアップロード
+aws s3 cp ./images/spots/ s3://tsurispot-images-prod/spots/ --recursive
+
+# バケット内のオブジェクト一覧
+aws s3 ls s3://tsurispot-images-prod/spots/ --human-readable
+
+# ライフサイクルポリシー設定
+aws s3api put-bucket-lifecycle-configuration \
+  --bucket tsurispot-images-prod \
+  --lifecycle-configuration file://lifecycle.json
+
+# プレサインドURL発行（1時間有効）
+aws s3 presign s3://tsurispot-images-prod/spots/photo.jpg --expires-in 3600
+</pre>
+
+<div class="summary-box">
+<h4>第4章まとめ</h4>
+<ul>
+<li>S3 = オブジェクトストレージ。容量無制限、1オブジェクト最大5TB</li>
+<li>7つのストレージクラス: Standard &gt; Intelligent-Tiering &gt; Standard-IA &gt; One Zone-IA &gt; Glacier Instant &gt; Glacier Flexible &gt; Deep Archive</li>
+<li>ライフサイクルポリシーでストレージクラスを自動移行（コスト最適化）</li>
+<li>暗号化: SSE-S3(デフォルト) / SSE-KMS(監査可能) / SSE-C(ユーザー鍵) / クライアント側</li>
+<li>レプリケーション: CRR(クロスリージョン) / SRR(同一リージョン)。バージョニング必須</li>
+<li>EFS = Linux NFS共有。複数EC2から同時マウント。自動スケーリング</li>
+<li>FSx = Windows(SMB)やHPC(Lustre)向けマネージドファイルシステム</li>
+<li>Storage Gateway = オンプレミスとAWSストレージのハイブリッド接続</li>
+<li>Snow Family = 大容量データの物理移行（Snowcone/Snowball/Snowmobile）</li>
+</ul>
+</div>
+
+<div class="quiz">
+<p><strong>Q1.</strong> アクセスパターンが予測できないデータに最適なS3ストレージクラスは？</p>
+<details><summary>答えを見る</summary><p><strong>S3 Intelligent-Tiering</strong>。自動的にアクセス頻度に基づいてクラスを移行。取り出し料金なし。</p></details>
+<p><strong>Q2.</strong> S3レプリケーションの前提条件は？</p>
+<details><summary>答えを見る</summary><p>ソース・ターゲット両方のバケットで<strong>バージョニングが有効</strong>であること。</p></details>
+<p><strong>Q3.</strong> 複数のEC2から同時にファイル共有したい（Linux環境）。最適なサービスは？</p>
+<details><summary>答えを見る</summary><p><strong>EFS（Elastic File System）</strong>。EBSは基本1つのEC2にしかアタッチできない（io1/io2のマルチアタッチは例外だが同一AZ限定）。</p></details>
+<p><strong>Q4.</strong> 5TBのファイルをS3にアップロードする方法は？</p>
+<details><summary>答えを見る</summary><p><strong>Multipart Upload</strong>を使用。5GBを超えるファイルはMultipart Upload必須。100MB以上で推奨。</p></details>
+</div>
+
+<!-- ============================== 第5章 ============================== -->
+<h1 id="ch5"><span class="chapter-num">5</span> VPCとネットワーキング</h1>
+
+<p>VPC（Virtual Private Cloud）は<strong>AWSの中に自分専用のプライベートネットワーク空間を作る</strong>サービスです。初心者が最もつまずきやすい分野ですが、SAA試験では非常に重要。ここを丁寧に理解しましょう。</p>
+
+<div class="analogy">
+<p><strong>VPCを「家」に例えると：</strong></p>
+<ul>
+<li><strong>VPC</strong> = あなたの家（敷地全体）。外の世界とは壁で区切られている。</li>
+<li><strong>サブネット</strong> = 家の中の部屋（リビング、寝室、書斎）。用途ごとに分ける。</li>
+<li><strong>インターネットゲートウェイ（IGW）</strong> = 玄関ドア。外の世界（インターネット）との出入口。</li>
+<li><strong>NATゲートウェイ</strong> = 郵便受け。中から外へは手紙を出せるが、外から勝手に入ることはできない。</li>
+<li><strong>ルートテーブル</strong> = 道案内の看板。「この部屋に行くにはこの廊下を通れ」</li>
+<li><strong>セキュリティグループ</strong> = 各部屋の鍵。誰を入れるか部屋ごとに決める。</li>
+<li><strong>NACL</strong> = 門番。家の入口で出入りをチェックする。</li>
+</ul>
+</div>
+
+<h2>5.1 IPアドレスの基礎</h2>
+
+<p>VPCを理解するには、まず<strong>IPアドレス</strong>の基本を知る必要があります。</p>
+
+<p>IPアドレスは、ネットワーク上のデバイスの<strong>住所</strong>です。IPv4アドレスは「192.168.1.10」のように、0〜255の数字4つをドットで区切った形式で表されます。</p>
+
+<h3>CIDR（Classless Inter-Domain Routing）表記</h3>
+<p>CIDRは<strong>IPアドレスの範囲</strong>を表す書き方です。例：<code>10.0.0.0/16</code></p>
+<ul>
+<li><code>/16</code> の部分は「ネットワーク部分が先頭16ビット」を意味する</li>
+<li>残りのビット（32-16=16ビット）がホスト部分 → 2^16 = <strong>65,536個</strong>のIPアドレスが使える</li>
+</ul>
+
+<table>
+<tr><th>CIDR</th><th>IPアドレス数</th><th>用途の目安</th></tr>
+<tr><td><code>/16</code></td><td>65,536個</td><td>VPC全体（最大サイズ）</td></tr>
+<tr><td><code>/20</code></td><td>4,096個</td><td>大きめのサブネット</td></tr>
+<tr><td><code>/24</code></td><td>256個</td><td>一般的なサブネット</td></tr>
+<tr><td><code>/28</code></td><td>16個</td><td>小さなサブネット（最小サイズ）</td></tr>
+</table>
+
+<div class="point">
+<p><strong>AWSがサブネットごとに予約するIPアドレス（5個）：</strong></p>
+<p>例: サブネット <code>10.0.1.0/24</code>（256個）の場合、実際に使えるのは<strong>251個</strong>。</p>
+<ul>
+<li><code>10.0.1.0</code> : ネットワークアドレス</li>
+<li><code>10.0.1.1</code> : VPCルーター用</li>
+<li><code>10.0.1.2</code> : DNS用</li>
+<li><code>10.0.1.3</code> : 将来の利用用に予約</li>
+<li><code>10.0.1.255</code> : ブロードキャストアドレス</li>
+</ul>
+</div>
+
+<h2>5.2 VPC、サブネット、ルートテーブル</h2>
+
+<h3>VPCの作成</h3>
+<p>VPCはリージョン単位で作成します。1つのVPCは1つのリージョン内に存在し、複数のAZにまたがることができます。CIDRブロックは<code>/16</code>〜<code>/28</code>の範囲で指定します。</p>
+
+<h3>パブリックサブネットとプライベートサブネット</h3>
+<ul>
+<li><strong>パブリックサブネット</strong>: ルートテーブルにインターネットゲートウェイ（IGW）へのルートがあるサブネット。Webサーバーやロードバランサーを配置</li>
+<li><strong>プライベートサブネット</strong>: IGWへのルートがないサブネット。データベースやアプリケーションサーバーを配置。外部から直接アクセス不可</li>
+</ul>
+
+<h3>インターネットゲートウェイ（IGW）</h3>
+<p>VPCとインターネットを接続する<strong>ゲートウェイ</strong>。VPCに1つだけアタッチ可能。IGWがないとVPC内からインターネットに出られません。高可用性で冗長化済み（AWS管理）。</p>
+
+<h3>NATゲートウェイ / NATインスタンス</h3>
+<p>プライベートサブネットのインスタンスが<strong>インターネットに出るため</strong>のサービス（例: OSパッチのダウンロード、npm install等）。外からプライベートサブネットへの直接接続は引き続き不可。</p>
+
+<table>
+<tr><th></th><th>NATゲートウェイ（推奨）</th><th>NATインスタンス（レガシー）</th></tr>
+<tr><td>管理</td><td>AWSマネージド</td><td>ユーザーが管理</td></tr>
+<tr><td>可用性</td><td>AZ内で自動冗長化</td><td>自分で冗長化設定</td></tr>
+<tr><td>帯域幅</td><td>最大100Gbps</td><td>インスタンスタイプ依存</td></tr>
+<tr><td>コスト</td><td>時間+データ処理量課金</td><td>インスタンス費用のみ（安い場合あり）</td></tr>
+<tr><td>SG</td><td>不要</td><td>必要</td></tr>
+</table>
+
+<div class="exam">
+<p><strong>問題パターン</strong>: 「プライベートサブネットのEC2がインターネットからパッケージをダウンロードするには？」→ パブリックサブネットに<strong>NATゲートウェイ</strong>を配置し、プライベートサブネットのルートテーブルにNAT GWへのルートを追加。</p>
+</div>
+
+<h3>ルートテーブル</h3>
+<p>通信先を決めるルール表。サブネットごとにルートテーブルを関連付けます。</p>
+<pre>
+# パブリックサブネットのルートテーブル例
+送信先              ターゲット
+10.0.0.0/16        local       (VPC内通信)
+0.0.0.0/0          igw-xxxxx   (その他は全てIGWへ = インターネット)
+
+# プライベートサブネットのルートテーブル例
+送信先              ターゲット
+10.0.0.0/16        local       (VPC内通信)
+0.0.0.0/0          nat-xxxxx   (その他は全てNAT GWへ)
+</pre>
+
+<figure class="diagram">
+<svg viewBox="0 0 800 480" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <defs>
+    <marker id="arr6" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#0ea5e9"/></marker>
+    <marker id="arr6r" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#dc2626"/></marker>
+    <marker id="arr6g" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#22c55e"/></marker>
+    <filter id="sh5"><feDropShadow dx="2" dy="2" stdDeviation="2" flood-opacity="0.1"/></filter>
+  </defs>
+  <text x="400" y="25" text-anchor="middle" font-size="16" font-weight="700" fill="#0c4a6e">VPC全体構成図（最重要図解）</text>
+  <!-- Internet -->
+  <rect x="310" y="38" width="180" height="35" rx="17" fill="#f97316" stroke="#ea580c" stroke-width="2"/>
+  <text x="400" y="60" text-anchor="middle" font-size="12" font-weight="600" fill="#fff">インターネット</text>
+  <!-- IGW -->
+  <rect x="340" y="90" width="120" height="35" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="2" filter="url(#sh5)"/>
+  <text x="400" y="112" text-anchor="middle" font-size="11" font-weight="600" fill="#92400e">IGW</text>
+  <line x1="400" y1="73" x2="400" y2="90" stroke="#ea580c" stroke-width="2" marker-end="url(#arr6)"/>
+  <!-- VPC -->
+  <rect x="40" y="135" width="720" height="330" rx="16" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="2"/>
+  <text x="400" y="160" text-anchor="middle" font-size="14" font-weight="700" fill="#0369a1">VPC 10.0.0.0/16</text>
+  <line x1="400" y1="125" x2="400" y2="140" stroke="#f59e0b" stroke-width="2" marker-end="url(#arr6)"/>
+  <!-- AZ a -->
+  <rect x="60" y="170" width="320" height="275" rx="12" fill="rgba(255,255,255,0.6)" stroke="#94a3b8" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="220" y="190" text-anchor="middle" font-size="11" font-weight="600" fill="#64748b">AZ: ap-northeast-1a</text>
+  <!-- Public Subnet a -->
+  <rect x="75" y="200" width="290" height="80" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="220" y="218" text-anchor="middle" font-size="10" font-weight="600" fill="#166534">パブリックサブネット 10.0.1.0/24</text>
+  <rect x="90" y="230" width="100" height="35" rx="6" fill="#fff" stroke="#86efac"/>
+  <text x="140" y="252" text-anchor="middle" font-size="10" fill="#166534">ALB</text>
+  <rect x="210" y="230" width="100" height="35" rx="6" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="260" y="252" text-anchor="middle" font-size="10" fill="#92400e">NAT GW</text>
+  <!-- Private Subnet a -->
+  <rect x="75" y="295" width="290" height="80" rx="8" fill="#fef2f2" stroke="#f87171" stroke-width="1.5"/>
+  <text x="220" y="313" text-anchor="middle" font-size="10" font-weight="600" fill="#dc2626">プライベートサブネット 10.0.2.0/24</text>
+  <rect x="90" y="325" width="100" height="35" rx="6" fill="#fff" stroke="#fca5a5"/>
+  <text x="140" y="347" text-anchor="middle" font-size="10" fill="#dc2626">EC2 (App)</text>
+  <rect x="210" y="325" width="100" height="35" rx="6" fill="#fff" stroke="#fca5a5"/>
+  <text x="260" y="347" text-anchor="middle" font-size="10" fill="#dc2626">RDS (DB)</text>
+  <!-- AZ c -->
+  <rect x="420" y="170" width="320" height="275" rx="12" fill="rgba(255,255,255,0.6)" stroke="#94a3b8" stroke-width="1" stroke-dasharray="6,3"/>
+  <text x="580" y="190" text-anchor="middle" font-size="11" font-weight="600" fill="#64748b">AZ: ap-northeast-1c</text>
+  <!-- Public Subnet c -->
+  <rect x="435" y="200" width="290" height="80" rx="8" fill="#dcfce7" stroke="#22c55e" stroke-width="1.5"/>
+  <text x="580" y="218" text-anchor="middle" font-size="10" font-weight="600" fill="#166534">パブリックサブネット 10.0.3.0/24</text>
+  <rect x="500" y="230" width="100" height="35" rx="6" fill="#fff" stroke="#86efac"/>
+  <text x="550" y="252" text-anchor="middle" font-size="10" fill="#166534">ALB</text>
+  <!-- Private Subnet c -->
+  <rect x="435" y="295" width="290" height="80" rx="8" fill="#fef2f2" stroke="#f87171" stroke-width="1.5"/>
+  <text x="580" y="313" text-anchor="middle" font-size="10" font-weight="600" fill="#dc2626">プライベートサブネット 10.0.4.0/24</text>
+  <rect x="500" y="325" width="100" height="35" rx="6" fill="#fff" stroke="#fca5a5"/>
+  <text x="550" y="347" text-anchor="middle" font-size="10" fill="#dc2626">EC2 (App)</text>
+  <rect x="620" y="325" width="100" height="35" rx="6" fill="#fff" stroke="#fca5a5"/>
+  <text x="670" y="347" text-anchor="middle" font-size="10" fill="#dc2626">RDS (Stand-by)</text>
+  <!-- Arrows: ALB to EC2 -->
+  <line x1="140" y1="265" x2="140" y2="325" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arr6g)"/>
+  <line x1="550" y1="265" x2="550" y2="325" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arr6g)"/>
+  <!-- Arrow: NAT to internet -->
+  <line x1="260" y1="230" x2="370" y2="125" stroke="#f59e0b" stroke-width="1.5" stroke-dasharray="4,3" marker-end="url(#arr6)"/>
+  <!-- Security labels -->
+  <rect x="75" y="390" width="90" height="25" rx="4" fill="#dbeafe" stroke="#3b82f6"/>
+  <text x="120" y="407" text-anchor="middle" font-size="9" fill="#1e40af">SG (各インスタンス)</text>
+  <rect x="180" y="390" width="80" height="25" rx="4" fill="#fef3c7" stroke="#f59e0b"/>
+  <text x="220" y="407" text-anchor="middle" font-size="9" fill="#92400e">NACL (サブネット)</text>
+  <rect x="275" y="390" width="90" height="25" rx="4" fill="#f0fdf4" stroke="#4ade80"/>
+  <text x="320" y="407" text-anchor="middle" font-size="9" fill="#166534">ルートテーブル</text>
+</svg>
+<figcaption>図5-1: VPC全体構成図（パブリック/プライベートサブネット、IGW、NAT GW、ALB、EC2、RDS）</figcaption>
+</figure>
+
+<h2>5.3 セキュリティグループ vs NACL</h2>
+
+<p>VPCには2種類のファイアウォールがあり、それぞれの違いは試験で<strong>必ず</strong>出題されます。</p>
+
+<table>
+<tr><th></th><th>セキュリティグループ（SG）</th><th>ネットワークACL（NACL）</th></tr>
+<tr><td>レベル</td><td><strong>インスタンス</strong>レベル</td><td><strong>サブネット</strong>レベル</td></tr>
+<tr><td>ステート</td><td><strong>ステートフル</strong>（戻りの通信は自動許可）</td><td><strong>ステートレス</strong>（行きと戻り両方のルール必要）</td></tr>
+<tr><td>ルール</td><td><strong>許可ルールのみ</strong></td><td><strong>許可 + 拒否ルール</strong></td></tr>
+<tr><td>評価</td><td>全ルールを評価してから判定</td><td><strong>番号順</strong>に評価（最初にマッチしたルールで決定）</td></tr>
+<tr><td>デフォルト</td><td>インバウンド: 全拒否 / アウトバウンド: 全許可</td><td>インバウンド・アウトバウンドとも全許可</td></tr>
+</table>
+
+<figure class="diagram">
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <defs><marker id="arr7" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#0ea5e9"/></marker></defs>
+  <!-- Internet -->
+  <rect x="10" y="70" width="100" height="50" rx="8" fill="#f97316" stroke="#ea580c" stroke-width="2"/>
+  <text x="60" y="100" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Internet</text>
+  <!-- NACL -->
+  <rect x="155" y="40" width="130" height="110" rx="12" fill="#fef3c7" stroke="#f59e0b" stroke-width="2"/>
+  <text x="220" y="65" text-anchor="middle" font-size="11" font-weight="700" fill="#92400e">NACL</text>
+  <text x="220" y="83" text-anchor="middle" font-size="9" fill="#92400e">サブネットレベル</text>
+  <text x="220" y="100" text-anchor="middle" font-size="9" fill="#92400e">ステートレス</text>
+  <text x="220" y="117" text-anchor="middle" font-size="9" fill="#92400e">許可+拒否</text>
+  <text x="220" y="134" text-anchor="middle" font-size="9" fill="#92400e">番号順で評価</text>
+  <!-- SG -->
+  <rect x="340" y="40" width="130" height="110" rx="12" fill="#dbeafe" stroke="#3b82f6" stroke-width="2"/>
+  <text x="405" y="65" text-anchor="middle" font-size="11" font-weight="700" fill="#1e40af">SG</text>
+  <text x="405" y="83" text-anchor="middle" font-size="9" fill="#1e40af">インスタンスレベル</text>
+  <text x="405" y="100" text-anchor="middle" font-size="9" fill="#1e40af">ステートフル</text>
+  <text x="405" y="117" text-anchor="middle" font-size="9" fill="#1e40af">許可のみ</text>
+  <text x="405" y="134" text-anchor="middle" font-size="9" fill="#1e40af">全ルール評価</text>
+  <!-- EC2 -->
+  <rect x="530" y="60" width="120" height="70" rx="8" fill="#f0fdf4" stroke="#4ade80" stroke-width="2"/>
+  <text x="590" y="95" text-anchor="middle" font-size="12" font-weight="600" fill="#166534">EC2</text>
+  <text x="590" y="115" text-anchor="middle" font-size="9" fill="#166534">インスタンス</text>
+  <!-- Arrows -->
+  <line x1="110" y1="95" x2="155" y2="95" stroke="#0ea5e9" stroke-width="2" marker-end="url(#arr7)"/>
+  <line x1="285" y1="95" x2="340" y2="95" stroke="#0ea5e9" stroke-width="2" marker-end="url(#arr7)"/>
+  <line x1="470" y1="95" x2="530" y2="95" stroke="#0ea5e9" stroke-width="2" marker-end="url(#arr7)"/>
+  <text x="130" y="85" text-anchor="middle" font-size="8" fill="#64748b">1st</text>
+  <text x="315" y="85" text-anchor="middle" font-size="8" fill="#64748b">2nd</text>
+</svg>
+<figcaption>図5-2: 通信はNACL（サブネットの門番）→ SG（インスタンスの鍵）の順にチェックされる</figcaption>
+</figure>
+
+<div class="exam">
+<p><strong>問題パターン1</strong>: 「特定のIPアドレスからのアクセスを拒否したい」→ <strong>NACL</strong>（拒否ルールが使えるのはNACLだけ。SGは許可ルールのみ）</p>
+<p><strong>問題パターン2</strong>: 「インバウンドを許可したら、レスポンスも自動で許可されるのは？」→ <strong>SG</strong>（ステートフル）。NACLはステートレスなので戻りの通信も明示的に許可が必要。</p>
+</div>
+
+<h2>5.4 VPCピアリングとTransit Gateway</h2>
+
+<h3>VPCピアリング</h3>
+<p>2つのVPCをプライベートに接続します。異なるリージョン、異なるアカウント間でも可能。</p>
+<div class="warn">
+<p><strong>VPCピアリングは推移的ではない！</strong> A-B間とB-C間がピアリングされていても、A-Cは直接通信できない。A-C間にも別途ピアリングが必要。これは試験で頻出。</p>
+</div>
+
+<h3>Transit Gateway</h3>
+<p>VPCピアリングは「1対1」接続。VPCが多数あるとピアリングだらけで複雑に。Transit Gatewayは<strong>ハブ型</strong>で、1つのTGWに全VPCを接続すれば全VPC間で通信可能。推移的ルーティングをサポート。</p>
+
+<h2>5.5 VPCエンドポイント</h2>
+<p>VPCからS3やDynamoDB等のAWSサービスに<strong>インターネットを経由せず</strong>プライベートに接続する仕組み。セキュリティ向上とデータ転送コスト削減。</p>
+
+<table>
+<tr><th>種類</th><th>対象サービス</th><th>仕組み</th><th>コスト</th></tr>
+<tr><td><strong>ゲートウェイエンドポイント</strong></td><td>S3, DynamoDB のみ</td><td>ルートテーブルにエントリ追加</td><td><strong>無料</strong></td></tr>
+<tr><td><strong>インターフェースエンドポイント</strong></td><td>その他多数のサービス</td><td>ENI（PrivateLink）をサブネットに配置</td><td>時間+データ課金</td></tr>
+</table>
+
+<div class="exam">
+<p><strong>問題パターン</strong>: 「プライベートサブネットのEC2からS3にインターネットを経由せずアクセスしたい」→ <strong>S3ゲートウェイエンドポイント</strong>（無料！）。NATゲートウェイ経由でもアクセスはできるが、データ転送料金がかかる。</p>
+</div>
+
+<h2>5.6 VPN接続とDirect Connect</h2>
+
+<h3>Site-to-Site VPN</h3>
+<p>オンプレミスのネットワークとVPCを<strong>暗号化されたインターネット経由のトンネル</strong>で接続。数分で構築可能。</p>
+<ul>
+<li>VPC側: <strong>Virtual Private Gateway (VGW)</strong> をアタッチ</li>
+<li>オンプレ側: <strong>Customer Gateway (CGW)</strong> を設定</li>
+<li>IPsec暗号化、冗長化のため2つのトンネルが自動作成</li>
+</ul>
+
+<h3>AWS Direct Connect</h3>
+<p>AWSとオンプレミスを<strong>専用線（物理的な光ファイバー）</strong>で接続。低レイテンシー、高帯域幅、安定した通信。構築に数週間〜数ヶ月かかる。</p>
+<ul>
+<li>帯域幅: 1Gbps / 10Gbps / 100Gbps</li>
+<li>VPNよりも高額だが、大容量・安定通信に優れる</li>
+<li>暗号化はデフォルトでは行われない（Direct Connect + VPNの組み合わせで暗号化可能）</li>
+</ul>
+
+<div class="exam">
+<p><strong>問題パターン</strong>: 「大量のデータをオンプレミスからAWSに安定・高速に転送したい」→ <strong>Direct Connect</strong>。すぐに必要なら<strong>Site-to-Site VPN</strong>（暫定）+ Direct Connect（本番）の組み合わせ。</p>
+</div>
+
+<h2>5.7 VPCフローログ</h2>
+<p>VPC内のネットワークインターフェースを通過するIPトラフィックのログを記録します。CloudWatch LogsまたはS3に保存。セキュリティ監査やトラブルシューティングに使用。</p>
+
+<div class="tsurispot">
+<p>ツリスポのApp RunnerはAWSが管理するVPC内で動いていますが、もしEC2で構築するなら以下の構成：</p>
+<ul>
+<li>VPC: <code>10.0.0.0/16</code></li>
+<li>パブリックサブネット: <code>10.0.1.0/24</code>（AZ-a）と<code>10.0.3.0/24</code>（AZ-c）にALB配置</li>
+<li>プライベートサブネット: <code>10.0.2.0/24</code>（AZ-a）と<code>10.0.4.0/24</code>（AZ-c）にEC2とRDS</li>
+<li>NATゲートウェイ経由でEC2がnpm install等のインターネットアクセス</li>
+<li>S3へはゲートウェイエンドポイント（無料）でプライベート接続</li>
+<li>外部ユーザーはALB経由でのみアクセス可能（EC2に直接アクセス不可）</li>
+</ul>
+</div>
+
+<div class="tsurispot">
+<p>ツリスポが将来microCMSではなく自前のヘッドレスCMSをEC2上で運用する場合、CMSのEC2はプライベートサブネットに配置。管理画面へのアクセスはClient VPN経由。データベースはプライベートサブネットのRDS Aurora Serverless。VPCフローログでセキュリティ監視。</p>
+</div>
+
+<h3>CLIコマンド例</h3>
+<pre>
+# VPC作成
+aws ec2 create-vpc --cidr-block 10.0.0.0/16 --tag-specifications 'ResourceType=vpc,Tags=[{Key=Name,Value=tsurispot-vpc}]'
+
+# サブネット作成
+aws ec2 create-subnet --vpc-id vpc-xxxxx --cidr-block 10.0.1.0/24 --availability-zone ap-northeast-1a
+
+# インターネットゲートウェイ作成・アタッチ
+aws ec2 create-internet-gateway
+aws ec2 attach-internet-gateway --internet-gateway-id igw-xxxxx --vpc-id vpc-xxxxx
+
+# NATゲートウェイ作成（Elastic IPが必要）
+aws ec2 allocate-address --domain vpc
+aws ec2 create-nat-gateway --subnet-id subnet-public --allocation-id eipalloc-xxxxx
+
+# VPCエンドポイント（S3ゲートウェイ型）
+aws ec2 create-vpc-endpoint --vpc-id vpc-xxxxx --service-name com.amazonaws.ap-northeast-1.s3 --route-table-ids rtb-xxxxx
+</pre>
+
+<div class="summary-box">
+<h4>第5章まとめ</h4>
+<ul>
+<li>VPC = AWS内の自分専用ネットワーク。リージョン単位、複数AZにまたがる</li>
+<li>CIDR: /16=65,536IP、/24=256IP。AWSはサブネットごとに5つ予約</li>
+<li>パブリックサブネット = IGWへのルートあり。プライベートサブネット = なし</li>
+<li>NATゲートウェイ: プライベート → インターネットの片方向通信を実現</li>
+<li>SG = ステートフル・許可のみ・インスタンスレベル。NACL = ステートレス・許可+拒否・サブネットレベル</li>
+<li>VPCピアリングは推移的でない（A-B, B-CでA-C不可）。Transit Gatewayはハブ型</li>
+<li>VPCエンドポイント: S3/DynamoDBはゲートウェイ型（無料）、その他はインターフェース型</li>
+<li>Direct Connect = 専用線（高速安定、構築に時間）。VPN = 暗号化トンネル（すぐ構築可能）</li>
+</ul>
+</div>
+
+<div class="quiz">
+<p><strong>Q1.</strong> 特定のIPアドレスからのアクセスを「拒否」するにはSGとNACLどちらを使う？</p>
+<details><summary>答えを見る</summary><p><strong>NACL</strong>。セキュリティグループには拒否ルールがない（許可ルールのみ）。</p></details>
+<p><strong>Q2.</strong> VPCピアリングは推移的か？</p>
+<details><summary>答えを見る</summary><p><strong>推移的ではない</strong>。A-B, B-C間がピアリングされていても、A-Cは直接通信不可。別途A-C間のピアリングが必要。多数のVPCにはTransit Gatewayを使う。</p></details>
+<p><strong>Q3.</strong> プライベートサブネットからS3にインターネット経由せずアクセスするには？</p>
+<details><summary>答えを見る</summary><p><strong>S3ゲートウェイエンドポイント</strong>（無料）。ルートテーブルにエントリが追加される。</p></details>
+<p><strong>Q4.</strong> Direct Connectのデフォルトで暗号化は行われる？</p>
+<details><summary>答えを見る</summary><p><strong>いいえ</strong>。暗号化が必要な場合はDirect Connect上にVPNを構築する。</p></details>
+<p><strong>Q5.</strong> NATゲートウェイとNATインスタンスの主な違いは？</p>
+<details><summary>答えを見る</summary><p>NATゲートウェイはAWSマネージドで自動冗長化、最大100Gbps。NATインスタンスはユーザー管理でSGも必要だが、場合によってはコストが安い。AWS公式はNATゲートウェイ推奨。</p></details>
+</div>
+
+<!-- ============================== 第6章 ============================== -->
+<h1 id="ch6"><span class="chapter-num">6</span> データベースサービス</h1>
+
+<p>AWSには用途に応じた多数のデータベースサービスがあります。SAA試験では<strong>RDS vs DynamoDB の使い分け</strong>が最頻出。「どんなデータにどのDBを使うか」を判断できるようになりましょう。</p>
+
+<div class="analogy">
+<p><strong>データベースの種類を整理棚に例えると：</strong></p>
+<ul>
+<li><strong>RDS（リレーショナルDB）</strong> = Excel表。行と列がきっちり決まっている。「社員名簿」のように構造化されたデータ向き。</li>
+<li><strong>DynamoDB（NoSQL）</strong> = 付箋メモの箱。自由な形式のデータを高速に出し入れ。「いいね数」「セッション情報」等の柔軟なデータ向き。</li>
+<li><strong>ElastiCache</strong> = 手元のメモ帳（キャッシュ）。よく使うデータを一時的に書き留めておいて超高速にアクセス。</li>
+<li><strong>Redshift</strong> = 巨大な集計表。大量のデータを集計・分析する専用ツール。</li>
+</ul>
+</div>
+
+<h2>6.1 リレーショナルDB vs NoSQL</h2>
+
+<table>
+<tr><th></th><th>リレーショナルDB（RDS, Aurora）</th><th>NoSQL（DynamoDB）</th></tr>
+<tr><td>データ構造</td><td>行と列のテーブル（スキーマ固定）</td><td>キーバリュー / ドキュメント（スキーマ柔軟）</td></tr>
+<tr><td>クエリ</td><td>SQL（複雑なJOINが可能）</td><td>プライマリキーベース（JOINは不得意）</td></tr>
+<tr><td>スケーリング</td><td>垂直（インスタンスサイズアップ）</td><td>水平（パーティション自動分割）</td></tr>
+<tr><td>トランザクション</td><td>ACID準拠</td><td>結果整合性（強い整合性も選択可）</td></tr>
+<tr><td>最適な用途</td><td>ユーザー情報、注文管理、在庫管理</td><td>セッション管理、IoTデータ、ゲームリーダーボード</td></tr>
+</table>
+
+<h2>6.2 RDS（Relational Database Service）</h2>
+
+<p>RDSはAWSが提供する<strong>マネージドなリレーショナルデータベース</strong>です。OSパッチ、バックアップ、フェイルオーバーをAWSが管理するため、運用負荷が大幅に軽減されます。</p>
+
+<h3>対応エンジン</h3>
+<ul>
+<li><strong>MySQL</strong> / <strong>MariaDB</strong> / <strong>PostgreSQL</strong> : オープンソース系</li>
+<li><strong>Oracle</strong> / <strong>SQL Server</strong> : 商用DB</li>
+<li><strong>Amazon Aurora</strong> : AWS独自開発（MySQL/PostgreSQL互換で高性能）</li>
+</ul>
+
+<h3>マルチAZデプロイ（高可用性）</h3>
+<p>プライマリDBのデータを別のAZのスタンバイに<strong>同期レプリケーション（リアルタイム複製）</strong>。プライマリに障害が起きると、自動的にスタンバイにフェイルオーバー（切り替え）します。通常60〜120秒で復旧。</p>
+<ul>
+<li>スタンバイは<strong>読み取りには使えない</strong>（フェイルオーバー専用）</li>
+<li>同じリージョン内の別AZ</li>
+<li>DNSエンドポイントは変わらない（アプリの接続先変更不要）</li>
+</ul>
+
+<h3>リードレプリカ（読み取りスケーリング）</h3>
+<p>プライマリDBのデータを<strong>非同期レプリケーション</strong>で複製した読み取り専用DB。読み取り負荷をレプリカに分散します。</p>
+<ul>
+<li>最大<strong>15個</strong>のリードレプリカを作成可能（Aurora）。RDSは最大5個</li>
+<li><strong>別リージョン</strong>にも作成可能（クロスリージョンリードレプリカ）</li>
+<li>読み取り専用なので書き込みはプライマリのみ</li>
+<li>レプリカをプライマリに昇格（プロモーション）可能</li>
+</ul>
+
+<figure class="diagram">
+<svg viewBox="0 0 780 300" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <defs>
+    <marker id="arr8" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#0ea5e9"/></marker>
+    <marker id="arr8g" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#22c55e"/></marker>
+    <marker id="arr8o" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#f59e0b"/></marker>
+    <filter id="sh6"><feDropShadow dx="1" dy="2" stdDeviation="2" flood-opacity="0.1"/></filter>
+  </defs>
+  <text x="390" y="25" text-anchor="middle" font-size="15" font-weight="700" fill="#0c4a6e">RDS マルチAZ + リードレプリカ構成</text>
+  <!-- AZ a -->
+  <rect x="30" y="45" width="220" height="230" rx="12" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="1.5"/>
+  <text x="140" y="68" text-anchor="middle" font-size="11" font-weight="600" fill="#0369a1">AZ-a</text>
+  <rect x="55" y="82" width="170" height="65" rx="8" fill="#0ea5e9" stroke="#0369a1" stroke-width="2" filter="url(#sh6)"/>
+  <text x="140" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">プライマリ DB</text>
+  <text x="140" y="128" text-anchor="middle" font-size="10" fill="#e0f2fe">読み書き両方OK</text>
+  <!-- AZ c -->
+  <rect x="290" y="45" width="220" height="230" rx="12" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="1.5"/>
+  <text x="400" y="68" text-anchor="middle" font-size="11" font-weight="600" fill="#0369a1">AZ-c (別AZ)</text>
+  <rect x="315" y="82" width="170" height="65" rx="8" fill="#f59e0b" stroke="#92400e" stroke-width="2" filter="url(#sh6)"/>
+  <text x="400" y="108" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">スタンバイ DB</text>
+  <text x="400" y="128" text-anchor="middle" font-size="10" fill="#fff">フェイルオーバー専用</text>
+  <!-- Sync replication -->
+  <line x1="225" y1="110" x2="315" y2="110" stroke="#dc2626" stroke-width="2" marker-end="url(#arr8)"/>
+  <text x="270" y="100" text-anchor="middle" font-size="9" font-weight="600" fill="#dc2626">同期レプリケーション</text>
+  <!-- Read Replicas -->
+  <rect x="555" y="45" width="200" height="230" rx="12" fill="#f0fdf4" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="655" y="68" text-anchor="middle" font-size="11" font-weight="600" fill="#166534">リードレプリカ</text>
+  <rect x="580" y="82" width="150" height="50" rx="8" fill="#22c55e" stroke="#166534" stroke-width="1.5"/>
+  <text x="655" y="107" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">レプリカ 1</text>
+  <text x="655" y="122" text-anchor="middle" font-size="9" fill="#fff">読み取り専用</text>
+  <rect x="580" y="145" width="150" height="50" rx="8" fill="#22c55e" stroke="#166534" stroke-width="1.5"/>
+  <text x="655" y="170" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">レプリカ 2</text>
+  <text x="655" y="185" text-anchor="middle" font-size="9" fill="#fff">読み取り専用</text>
+  <rect x="580" y="210" width="150" height="50" rx="8" fill="#86efac" stroke="#166534" stroke-width="1.5"/>
+  <text x="655" y="235" text-anchor="middle" font-size="10" font-weight="600" fill="#166534">レプリカ 3</text>
+  <text x="655" y="250" text-anchor="middle" font-size="9" fill="#166534">別リージョンも可</text>
+  <!-- Async replication -->
+  <line x1="225" y1="130" x2="580" y2="107" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr8g)"/>
+  <line x1="225" y1="135" x2="580" y2="165" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr8g)"/>
+  <line x1="225" y1="140" x2="580" y2="230" stroke="#22c55e" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr8g)"/>
+  <text x="420" y="178" text-anchor="middle" font-size="9" fill="#22c55e" font-weight="600">非同期レプリケーション</text>
+</svg>
+<figcaption>図6-1: RDSマルチAZ（同期/フェイルオーバー）+ リードレプリカ（非同期/読み取り分散）</figcaption>
+</figure>
+
+<div class="exam">
+<p><strong>問題パターン1</strong>: 「DB障害時に自動で切り替える仕組みは？」→ <strong>マルチAZデプロイ</strong>（同期レプリケーション + 自動フェイルオーバー）</p>
+<p><strong>問題パターン2</strong>: 「読み取り負荷を分散したい」→ <strong>リードレプリカ</strong>を追加し、読み取りクエリをレプリカに向ける</p>
+<p><strong>問題パターン3</strong>: 「マルチAZは読み取りスケーリングに使える？」→ <strong>いいえ</strong>。スタンバイは読み取りに使えない（フェイルオーバー専用）。読み取りスケーリングはリードレプリカ。</p>
+</div>
+
+<h3>RDS Proxy</h3>
+<p>Lambda関数からRDSに接続する際の問題を解決するサービス。Lambda は同時に何百もの関数が起動するため、DB接続が爆発的に増える。RDS Proxyが<strong>コネクションプーリング</strong>（接続を使い回す）を行い、DBの負荷を軽減します。</p>
+
+<h2>6.3 Amazon Aurora</h2>
+
+<p>AuroraはAWSが独自開発したリレーショナルDB。MySQL互換またはPostgreSQL互換で動作し、標準のMySQL/PostgreSQLより<strong>最大5倍高速</strong>。</p>
+
+<h3>Auroraの特長</h3>
+<ul>
+<li><strong>ストレージ</strong>: 10GB〜128TB自動拡張。6コピーを3AZに分散 = 18コピーのデータ冗長性</li>
+<li><strong>リードレプリカ</strong>: 最大15個。フェイルオーバーの優先度設定可能</li>
+<li><strong>自動フェイルオーバー</strong>: 通常30秒以内（RDSの60-120秒より高速）</li>
+<li><strong>バックトラック</strong>: DBを過去の任意の時点に巻き戻し（MySQL互換のみ）</li>
+<li><strong>クローニング</strong>: 本番DBのコピーを高速作成（テスト環境構築に便利）</li>
+</ul>
+
+<h3>Aurora Serverless v2</h3>
+<p>必要に応じて<strong>自動でスケールアップ/ダウン</strong>するAurora。アクセスがない時は最小キャパシティに縮小し、コスト削減。アクセスパターンが予測できないワークロードに最適。ACU（Aurora Capacity Unit）単位で課金。</p>
+
+<h3>Aurora Global Database</h3>
+<p>プライマリリージョンから他リージョンへ<strong>1秒未満のレイテンシー</strong>でレプリケーション。DR（災害復旧）に最適。RPO（Recovery Point Objective = データ損失許容量）は1秒。</p>
+
+<div class="exam">
+<p><strong>問題パターン</strong>: 「MySQL互換で最高のパフォーマンスと可用性が必要」→ <strong>Aurora</strong>。「さらにグローバルDRが必要」→ <strong>Aurora Global Database</strong>（RPO 1秒）。</p>
+</div>
+
+<h2>6.4 DynamoDB</h2>
+
+<p>DynamoDBは<strong>フルマネージドのNoSQLデータベース</strong>。サーバーの管理が一切不要で、<strong>単一桁ミリ秒（1〜9ms）のレイテンシー</strong>を実現します。</p>
+
+<h3>基本概念</h3>
+<ul>
+<li><strong>テーブル</strong>: データを格納する単位</li>
+<li><strong>項目（Item）</strong>: テーブル内の1レコード（最大400KB）</li>
+<li><strong>属性（Attribute）</strong>: 項目内の各フィールド</li>
+<li><strong>パーティションキー</strong>: 必須の主キー。データの分散先を決定</li>
+<li><strong>ソートキー</strong>: オプション。パーティションキーと組み合わせて複合キーを作成</li>
+</ul>
+
+<figure class="diagram">
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <text x="350" y="22" text-anchor="middle" font-size="14" font-weight="700" fill="#0c4a6e">DynamoDB テーブル構造の例（釣果投稿）</text>
+  <!-- Table header -->
+  <rect x="40" y="40" width="150" height="35" rx="4" fill="#0c4a6e"/>
+  <text x="115" y="62" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">SpotId (PK)</text>
+  <rect x="190" y="40" width="150" height="35" rx="4" fill="#0c4a6e"/>
+  <text x="265" y="62" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">PostedAt (SK)</text>
+  <rect x="340" y="40" width="120" height="35" rx="4" fill="#0369a1"/>
+  <text x="400" y="62" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">FishName</text>
+  <rect x="460" y="40" width="100" height="35" rx="4" fill="#0369a1"/>
+  <text x="510" y="62" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">Size (cm)</text>
+  <rect x="560" y="40" width="110" height="35" rx="4" fill="#0369a1"/>
+  <text x="615" y="62" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">UserName</text>
+  <!-- Rows -->
+  <rect x="40" y="78" width="150" height="30" fill="#dbeafe" stroke="#93c5fd"/>
+  <text x="115" y="98" text-anchor="middle" font-size="10" fill="#334155">akashi-port</text>
+  <rect x="190" y="78" width="150" height="30" fill="#dbeafe" stroke="#93c5fd"/>
+  <text x="265" y="98" text-anchor="middle" font-size="10" fill="#334155">2026-03-20T08:30</text>
+  <rect x="340" y="78" width="120" height="30" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="400" y="98" text-anchor="middle" font-size="10" fill="#334155">メバル</text>
+  <rect x="460" y="78" width="100" height="30" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="510" y="98" text-anchor="middle" font-size="10" fill="#334155">25</text>
+  <rect x="560" y="78" width="110" height="30" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="615" y="98" text-anchor="middle" font-size="10" fill="#334155">tanaka123</text>
+
+  <rect x="40" y="110" width="150" height="30" fill="#e0f2fe" stroke="#93c5fd"/>
+  <text x="115" y="130" text-anchor="middle" font-size="10" fill="#334155">akashi-port</text>
+  <rect x="190" y="110" width="150" height="30" fill="#e0f2fe" stroke="#93c5fd"/>
+  <text x="265" y="130" text-anchor="middle" font-size="10" fill="#334155">2026-03-20T14:15</text>
+  <rect x="340" y="110" width="120" height="30" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="400" y="130" text-anchor="middle" font-size="10" fill="#334155">アジ</text>
+  <rect x="460" y="110" width="100" height="30" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="510" y="130" text-anchor="middle" font-size="10" fill="#334155">18</text>
+  <rect x="560" y="110" width="110" height="30" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="615" y="130" text-anchor="middle" font-size="10" fill="#334155">fishing_mike</text>
+
+  <rect x="40" y="142" width="150" height="30" fill="#dbeafe" stroke="#93c5fd"/>
+  <text x="115" y="162" text-anchor="middle" font-size="10" fill="#334155">kobe-harbor</text>
+  <rect x="190" y="142" width="150" height="30" fill="#dbeafe" stroke="#93c5fd"/>
+  <text x="265" y="162" text-anchor="middle" font-size="10" fill="#334155">2026-03-19T17:00</text>
+  <rect x="340" y="142" width="120" height="30" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="400" y="162" text-anchor="middle" font-size="10" fill="#334155">タチウオ</text>
+  <rect x="460" y="142" width="100" height="30" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="510" y="162" text-anchor="middle" font-size="10" fill="#334155">80</text>
+  <rect x="560" y="142" width="110" height="30" fill="#f8fafc" stroke="#e2e8f0"/>
+  <text x="615" y="162" text-anchor="middle" font-size="10" fill="#334155">sato_angler</text>
+  <!-- Legend -->
+  <text x="115" y="190" text-anchor="middle" font-size="9" fill="#0c4a6e" font-weight="600">パーティションキー</text>
+  <text x="265" y="190" text-anchor="middle" font-size="9" fill="#0c4a6e" font-weight="600">ソートキー</text>
+  <text x="480" y="190" text-anchor="middle" font-size="9" fill="#64748b">その他の属性（自由に追加可能）</text>
+</svg>
+<figcaption>図6-2: DynamoDBのパーティションキー/ソートキーの例（釣果投稿テーブル）</figcaption>
+</figure>
+
+<h3>キャパシティモード</h3>
+<table>
+<tr><th>モード</th><th>特徴</th><th>最適な用途</th></tr>
+<tr><td><strong>オンデマンド</strong></td><td>使った分だけ課金。キャパシティ設定不要</td><td>アクセスパターンが予測できない、新サービス</td></tr>
+<tr><td><strong>プロビジョニング</strong></td><td>事前にRCU/WCUを設定。Auto Scaling併用可</td><td>アクセスパターンが安定しているサービス</td></tr>
+</table>
+
+<h3>セカンダリインデックス</h3>
+<ul>
+<li><strong>GSI（グローバルセカンダリインデックス）</strong>: 元テーブルとは異なるパーティションキー/ソートキーでクエリ可能。テーブル作成後にも追加可能</li>
+<li><strong>LSI（ローカルセカンダリインデックス）</strong>: 同じパーティションキーで別のソートキーを使用。テーブル作成時にのみ定義可能</li>
+</ul>
+
+<h3>DynamoDB Streams</h3>
+<p>テーブルへの変更（INSERT/UPDATE/DELETE）をストリームとしてキャプチャ。Lambda関数をトリガーして変更に反応する処理が可能。</p>
+
+<h3>DAX（DynamoDB Accelerator）</h3>
+<p>DynamoDB用のインメモリキャッシュ。読み取りレイテンシーを<strong>ミリ秒からマイクロ秒</strong>に短縮。DynamoDBのAPIと互換性があるため、コード変更が最小限。</p>
+
+<h3>DynamoDB Global Tables</h3>
+<p>複数リージョンでのマルチアクティブレプリケーション。どのリージョンでも読み書き可能。DynamoDB Streamsの有効化が前提。</p>
+
+<div class="exam">
+<p><strong>問題パターン</strong>: 「ミリ秒のレイテンシーで大量の読み書きが必要なキーバリュー型データ」→ <strong>DynamoDB</strong></p>
+<p><strong>問題パターン</strong>: 「DynamoDBの読み取りレイテンシーをさらに改善したい」→ <strong>DAX</strong>（マイクロ秒レベルのキャッシュ）</p>
+</div>
+
+<h2>6.5 ElastiCache</h2>
+
+<p>マネージドなインメモリキャッシュサービス。DBの前段に置いて、頻繁にアクセスされるデータをメモリに保持し超高速（マイクロ秒〜ミリ秒）でレスポンスします。</p>
+
+<table>
+<tr><th></th><th>Redis</th><th>Memcached</th></tr>
+<tr><td>データ構造</td><td>文字列、リスト、セット、ハッシュ等（リッチ）</td><td>文字列のみ（シンプル）</td></tr>
+<tr><td>永続性</td><td>あり（スナップショット、AOF）</td><td>なし</td></tr>
+<tr><td>レプリケーション</td><td>あり（リードレプリカ対応）</td><td>なし</td></tr>
+<tr><td>マルチAZ</td><td>対応（自動フェイルオーバー）</td><td>非対応</td></tr>
+<tr><td>クラスタリング</td><td>対応</td><td>対応</td></tr>
+<tr><td>最適な用途</td><td>セッション管理、リアルタイムリーダーボード、パブサブ</td><td>シンプルなキャッシュ（DBクエリ結果の一時保存）</td></tr>
+</table>
+
+<div class="point">
+<p><strong>キャッシュ戦略：</strong></p>
+<ul>
+<li><strong>Lazy Loading（遅延読み込み）</strong>: キャッシュにデータがなければDBから取得し、キャッシュに保存。キャッシュミスが発生するが、不要なデータをキャッシュしない</li>
+<li><strong>Write-Through（書き込み時キャッシュ）</strong>: DBに書き込む時に同時にキャッシュにも書く。常に最新だが、書き込みが遅い</li>
+<li><strong>TTL（Time to Live）</strong>: キャッシュの有効期限。古いデータが残るのを防ぐ</li>
+</ul>
+</div>
+
+<div class="exam">
+<p><strong>問題パターン</strong>: 「Redis vs Memcachedの違いは？」→ <strong>Redis</strong>: リッチなデータ構造、永続性、レプリケーション、マルチAZ。<strong>Memcached</strong>: シンプル、マルチスレッド。リーダーボードやセッション管理なら<strong>Redis</strong>。</p>
+</div>
+
+<h2>6.6 その他のDBサービス</h2>
+
+<table>
+<tr><th>サービス</th><th>種類</th><th>最適な用途</th></tr>
+<tr><td><strong>Redshift</strong></td><td>データウェアハウス（列指向、OLAP）</td><td>大量データの集計・分析（BI）。PB級データ</td></tr>
+<tr><td><strong>Neptune</strong></td><td>グラフDB</td><td>SNSの友達関係、不正検出、推薦エンジン</td></tr>
+<tr><td><strong>DocumentDB</strong></td><td>ドキュメントDB（MongoDB互換）</td><td>JSON形式のコンテンツ管理</td></tr>
+<tr><td><strong>Keyspaces</strong></td><td>ワイドカラム（Cassandra互換）</td><td>IoTデバイスデータ、時系列</td></tr>
+<tr><td><strong>QLDB</strong></td><td>台帳DB（不変のログ）</td><td>金融取引履歴、監査ログ（改ざん不可）</td></tr>
+<tr><td><strong>Timestream</strong></td><td>時系列DB</td><td>IoTセンサーデータ、アプリメトリクス</td></tr>
+</table>
+
+<figure class="diagram">
+<svg viewBox="0 0 780 280" xmlns="http://www.w3.org/2000/svg" font-family="Segoe UI, Hiragino Sans, sans-serif">
+  <defs><marker id="arr9" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#0ea5e9"/></marker></defs>
+  <text x="390" y="22" text-anchor="middle" font-size="15" font-weight="700" fill="#0c4a6e">データベースサービス選択フローチャート</text>
+  <rect x="280" y="40" width="220" height="35" rx="17" fill="#0ea5e9" stroke="#0369a1" stroke-width="2"/>
+  <text x="390" y="62" text-anchor="middle" font-size="11" font-weight="600" fill="#fff">データの構造は？</text>
+  <!-- Branches -->
+  <line x1="330" y1="75" x2="160" y2="105" stroke="#0ea5e9" stroke-width="1.5" marker-end="url(#arr9)"/>
+  <line x1="390" y1="75" x2="390" y2="105" stroke="#0ea5e9" stroke-width="1.5" marker-end="url(#arr9)"/>
+  <line x1="450" y1="75" x2="620" y2="105" stroke="#0ea5e9" stroke-width="1.5" marker-end="url(#arr9)"/>
+  <text x="230" y="90" font-size="9" fill="#64748b">テーブル型(SQL)</text>
+  <text x="390" y="95" font-size="9" fill="#64748b">キーバリュー</text>
+  <text x="540" y="90" font-size="9" fill="#64748b">特殊</text>
+  <!-- SQL -->
+  <rect x="50" y="105" width="220" height="40" rx="8" fill="#dbeafe" stroke="#3b82f6" stroke-width="1.5"/>
+  <text x="160" y="130" text-anchor="middle" font-size="12" font-weight="600" fill="#1e40af">RDS / Aurora</text>
+  <line x1="120" y1="145" x2="120" y2="170" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr9)"/>
+  <line x1="200" y1="145" x2="200" y2="170" stroke="#3b82f6" stroke-width="1.5" marker-end="url(#arr9)"/>
+  <rect x="50" y="170" width="120" height="35" rx="6" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="110" y="192" text-anchor="middle" font-size="10" fill="#1d4ed8">高性能: Aurora</text>
+  <rect x="180" y="170" width="120" height="35" rx="6" fill="#eff6ff" stroke="#93c5fd"/>
+  <text x="240" y="192" text-anchor="middle" font-size="10" fill="#1d4ed8">標準: RDS MySQL等</text>
+  <!-- NoSQL -->
+  <rect x="300" y="105" width="180" height="40" rx="8" fill="#fef3c7" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="390" y="130" text-anchor="middle" font-size="12" font-weight="600" fill="#92400e">DynamoDB</text>
+  <line x1="390" y1="145" x2="390" y2="170" stroke="#f59e0b" stroke-width="1.5" marker-end="url(#arr9)"/>
+  <rect x="320" y="170" width="140" height="35" rx="6" fill="#fef3c7" stroke="#fcd34d"/>
+  <text x="390" y="192" text-anchor="middle" font-size="10" fill="#92400e">+DAX (キャッシュ)</text>
+  <!-- Special -->
+  <rect x="530" y="105" width="90" height="35" rx="6" fill="#faf5ff" stroke="#d8b4fe"/>
+  <text x="575" y="127" text-anchor="middle" font-size="10" fill="#7c3aed">グラフ: Neptune</text>
+  <rect x="630" y="105" width="100" height="35" rx="6" fill="#faf5ff" stroke="#d8b4fe"/>
+  <text x="680" y="127" text-anchor="middle" font-size="10" fill="#7c3aed">分析: Redshift</text>
+  <rect x="530" y="148" width="90" height="35" rx="6" fill="#faf5ff" stroke="#d8b4fe"/>
+  <text x="575" y="170" text-anchor="middle" font-size="10" fill="#7c3aed">台帳: QLDB</text>
+  <rect x="630" y="148" width="100" height="35" rx="6" fill="#faf5ff" stroke="#d8b4fe"/>
+  <text x="680" y="170" text-anchor="middle" font-size="10" fill="#7c3aed">時系列: Timestream</text>
+  <!-- Cache -->
+  <rect x="260" y="230" width="260" height="35" rx="8" fill="#f0fdf4" stroke="#4ade80" stroke-width="1.5"/>
+  <text x="390" y="252" text-anchor="middle" font-size="11" font-weight="600" fill="#166534">キャッシュ: ElastiCache (Redis / Memcached)</text>
+</svg>
+<figcaption>図6-3: データベースサービスの選択フローチャート</figcaption>
+</figure>
+
+<div class="tsurispot">
+<p>ツリスポは現在TypeScriptファイルにデータをハードコード（2,141スポット）していますが、将来ユーザー投稿機能を追加する場合の設計：</p>
+<ul>
+<li><strong>釣果投稿</strong>: DynamoDB（パーティションキー=SpotId、ソートキー=PostedAt）。1日数千件の投稿でも余裕</li>
+<li><strong>ユーザー情報</strong>: RDS Aurora Serverless v2（PostgreSQL）。ユーザー間のフォロー関係等、JOINが必要なデータ</li>
+<li><strong>人気スポットランキング</strong>: ElastiCache Redis（Sorted Set）。リアルタイムランキングをマイクロ秒で返す</li>
+<li><strong>検索</strong>: DynamoDB + GSI（地域別スポット検索、魚種別スポット検索）</li>
+</ul>
+</div>
+
+<div class="tsurispot">
+<p>コスト試算: 月間50万PVの場合、DynamoDB（オンデマンドモード）は月$5〜$20程度。Aurora Serverless v2は最小ACUなら月$50〜。ElastiCache Redis（cache.t3.micro）は月$15程度。合計で月$70〜$100で本格的なDB構成が実現できます。</p>
+</div>
+
+<h3>CLIコマンド例</h3>
+<pre>
+# RDSインスタンス作成（Aurora PostgreSQL）
+aws rds create-db-cluster \
+  --db-cluster-identifier tsurispot-db \
+  --engine aurora-postgresql \
+  --master-username admin \
+  --master-user-password MySecurePass123! \
+  --db-subnet-group-name my-subnet-group
+
+# DynamoDBテーブル作成
+aws dynamodb create-table \
+  --table-name CatchReports \
+  --attribute-definitions \
+    AttributeName=SpotId,AttributeType=S \
+    AttributeName=PostedAt,AttributeType=S \
+  --key-schema \
+    AttributeName=SpotId,KeyType=HASH \
+    AttributeName=PostedAt,KeyType=RANGE \
+  --billing-mode PAY_PER_REQUEST
+
+# DynamoDBにアイテム追加
+aws dynamodb put-item \
+  --table-name CatchReports \
+  --item '{
+    "SpotId": {"S": "akashi-port"},
+    "PostedAt": {"S": "2026-03-20T08:30:00Z"},
+    "FishName": {"S": "メバル"},
+    "Size": {"N": "25"}
+  }'
+
+# ElastiCache Redisクラスター作成
+aws elasticache create-cache-cluster \
+  --cache-cluster-id tsurispot-cache \
+  --engine redis \
+  --cache-node-type cache.t3.micro \
+  --num-cache-nodes 1
+</pre>
+
+<div class="summary-box">
+<h4>第6章まとめ</h4>
+<ul>
+<li>RDS = マネージドなリレーショナルDB。MySQL/PostgreSQL/Oracle/SQL Server/Aurora対応</li>
+<li>マルチAZ = 同期レプリケーション + 自動フェイルオーバー（高可用性、読み取りは不可）</li>
+<li>リードレプリカ = 非同期レプリケーション。読み取り負荷分散（最大15個 for Aurora）</li>
+<li>Aurora = AWS独自。MySQL/PgSQL互換で最大5倍高速。6コピー3AZ。Serverless v2で自動スケール</li>
+<li>DynamoDB = フルマネージドNoSQL。ミリ秒レイテンシー。DAXでマイクロ秒に高速化</li>
+<li>ElastiCache = インメモリキャッシュ。Redis（リッチ機能）vs Memcached（シンプル）</li>
+<li>Redshift = データウェアハウス（大量データ分析）。Neptune = グラフDB。QLDB = 台帳DB</li>
+<li>RDS Proxy = Lambda→RDSのコネクションプーリング</li>
+</ul>
+</div>
+
+<div class="quiz">
+<p><strong>Q1.</strong> RDSマルチAZのスタンバイは読み取りに使える？</p>
+<details><summary>答えを見る</summary><p><strong>使えない</strong>。スタンバイはフェイルオーバー専用。読み取り分散には<strong>リードレプリカ</strong>を使う。</p></details>
+<p><strong>Q2.</strong> DynamoDBのレイテンシーをさらに改善するサービスは？</p>
+<details><summary>答えを見る</summary><p><strong>DAX（DynamoDB Accelerator）</strong>。読み取りレイテンシーをミリ秒からマイクロ秒に短縮するインメモリキャッシュ。</p></details>
+<p><strong>Q3.</strong> Auroraのストレージは何コピー何AZに分散？</p>
+<details><summary>答えを見る</summary><p><strong>6コピーを3つのAZ</strong>に分散（各AZに2コピー = 合計6コピー）。非常に高い耐久性。</p></details>
+<p><strong>Q4.</strong> ElastiCacheでセッション管理やリーダーボードに適しているのは？</p>
+<details><summary>答えを見る</summary><p><strong>Redis</strong>。リッチなデータ構造（Sorted Set等）、永続性、レプリケーション、マルチAZをサポート。Memcachedはシンプルなキャッシュ専用。</p></details>
+<p><strong>Q5.</strong> 金融取引の改ざん不可能な変更履歴を記録するのに最適なDBは？</p>
+<details><summary>答えを見る</summary><p><strong>QLDB（Quantum Ledger Database）</strong>。不変で暗号的に検証可能な変更履歴（台帳）を提供。</p></details>
+</div>
+
+<!-- ============================== 全体の締め ============================== -->
+
+<div style="margin-top: 4rem; padding: 2rem; background: linear-gradient(135deg, #0c4a6e, #0369a1); border-radius: 16px; color: #fff; text-align: center;">
+<h2 style="color: #fff; border: none; margin: 0 0 1rem;">Part 1 基礎編 完了！</h2>
+<p style="color: #bae6fd; font-size: 1.1rem;">お疲れさまでした。6章分の基礎知識を学びました。</p>
+<p style="color: #e0f2fe; margin-top: 1rem;">ここまでの内容で試験の約40%をカバーしています。<br>次はPart 2: 設計編（高可用性、スケーリング、疎結合アーキテクチャ等）に進みましょう。</p>
+<div style="margin-top: 1.5rem;">
+<a href="part2-architecture.html" style="display: inline-block; background: #fff; color: #0c4a6e; padding: 0.8rem 2rem; border-radius: 8px; text-decoration: none; font-weight: 700; font-size: 1.05rem;">Part 2: 設計編へ進む &rarr;</a>
+</div>
+</div>
+
+<div class="nav" style="margin-top: 2rem;">
+<a href="part1-foundations.html" class="current">Part 1: 基礎編</a>
+<a href="part2-architecture.html">Part 2: 設計編</a>
+<a href="part3-advanced.html">Part 3: 応用・実戦編</a>
+</div>
+
+</div><!-- /.container -->
+</body>
+</html>

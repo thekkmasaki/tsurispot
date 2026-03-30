@@ -39,6 +39,24 @@ next-env.d.ts
 
 # Patent pipeline cache
 patent/data/cache/
+patent/scripts/models/
+patent/scripts/satellite/cache/
+patent/scripts/satellite/*.jpg
+patent/scripts/satellite/*.png
+
+# Large media files (sync via OneDrive)
+*.mp4
+*.MOV
+photo/
+insta/
+scripts/instagram/out/
+
+# Sensitive
+cookies.txt
+
+# Test artifacts
+playwright-report/
+test-results/
 
 # Claude Code
 .agents/
