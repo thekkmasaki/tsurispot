@@ -3,6 +3,12 @@ import type { NextAuthConfig } from "next-auth";
 import type { OAuthConfig } from "next-auth/providers";
 import { getUserByProvider, getUserById, createUser, updateAvatarUrl } from "@/lib/auth-redis";
 
+/** 4バイトUTF-8文字（絵文字等）を除去。JWTクッキーでの文字化け防止 */
+function sanitizeNickname(name: string): string {
+  const cleaned = name.replace(/[\u{10000}-\u{10FFFF}]/gu, "").trim();
+  return cleaned || "";
+}
+
 /**
  * LINE Login プロバイダー（Auth.js v5 OAuth）
  */
@@ -60,9 +66,10 @@ const config: NextAuthConfig = {
         if (!existing) {
           // 新規ユーザー作成
           const tsuriId = crypto.randomUUID();
+          const safeName = sanitizeNickname(user.name || "");
           await createUser({
             id: tsuriId,
-            nickname: user.name || `釣り人${tsuriId.slice(0, 6)}`,
+            nickname: safeName || `釣り人${tsuriId.slice(0, 6)}`,
             avatarUrl: user.image || undefined,
             provider,
             providerId,
@@ -101,7 +108,7 @@ const config: NextAuthConfig = {
           );
           if (existing) {
             token.tsuriId = existing.id;
-            token.nickname = existing.nickname;
+            token.nickname = sanitizeNickname(existing.nickname);
             token.avatarUrl = existing.avatarUrl;
             token.provider = existing.provider;
             token.isNewUser = !existing.nicknameSetAt;
@@ -119,7 +126,7 @@ const config: NextAuthConfig = {
         try {
           const fresh = await getUserById(token.tsuriId as string);
           if (fresh) {
-            token.nickname = fresh.nickname;
+            token.nickname = sanitizeNickname(fresh.nickname);
             token.avatarUrl = fresh.avatarUrl;
             token.isNewUser = !fresh.nicknameSetAt;
           }
@@ -137,7 +144,7 @@ const config: NextAuthConfig = {
     session({ session, token }) {
       if (token.tsuriId) {
         session.user.tsuriId = token.tsuriId as string;
-        session.user.nickname = (token.nickname as string) || "";
+        session.user.nickname = (token.nickname as string) || "釣り人";
         session.user.avatarUrl = token.avatarUrl as string | undefined;
         session.user.provider = (token.provider as string) || "";
         session.user.isNewUser = Boolean(token.isNewUser);
