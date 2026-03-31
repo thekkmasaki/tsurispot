@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getCatchReportsBySpot, type CatchReport } from "@/lib/data/catch-reports";
 import { redis } from "@/lib/redis";
 import { getUserById } from "@/lib/auth-redis";
+import { toWebpUrl } from "@/lib/s3";
 
 const GAS_READ_URL = process.env.GAS_CATCH_REPORT_URL;
 
@@ -83,6 +84,11 @@ export async function GET(request: Request) {
   }
 
   allReports.sort((a, b) => b.date.localeCompare(a.date));
+
+  // S3画像をWebP URLに変換
+  for (const r of allReports) {
+    if (r.photoUrl) r.photoUrl = toWebpUrl(r.photoUrl);
+  }
 
   // 各レポートの userId から reportCount を取得（同一ユーザーはキャッシュ）
   const userCountCache = new Map<string, number>();

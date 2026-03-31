@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { uploadToS3, deleteFromS3 } from "@/lib/s3";
+import { uploadToS3, deleteFromS3, toWebpUrl } from "@/lib/s3";
 import { moderateImage } from "@/lib/rekognition";
 import { redis } from "@/lib/redis";
 import { auth } from "@/lib/auth";
@@ -33,7 +33,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(
       {
         photos: photos.map((p) => ({
-          url: p.url,
+          url: toWebpUrl(p.url),
           uploadedAt: p.uploadedAt,
           userName: p.userName || undefined,
           mine: !!(userId && p.userId === userId),
