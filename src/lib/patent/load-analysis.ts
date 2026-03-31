@@ -71,6 +71,8 @@ function getAnalysisDataMap(): Record<string, SpotAnalysisResult> {
 export function getAnalysisResult(
   slug: string
 ): SpotAnalysisResult | null {
+  // AI解析マップは hiraiso-fishing-park のみ有効
+  if (slug !== "hiraiso-fishing-park") return null;
   return getAnalysisDataMap()[slug] ?? null;
 }
 
