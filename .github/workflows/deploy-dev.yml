@@ -1,0 +1,99 @@
+name: Deploy to App Runner (dev)
+
+on:
+  push:
+    branches: [dev]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-apprunner-dev
+  cancel-in-progress: true
+
+env:
+  AWS_REGION: ap-northeast-1
+  ECR_REPOSITORY: tsurispot-dev
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    outputs:
+      image_tag: ${{ github.sha }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+      - name: Install dependencies
+        run: npm ci
+      - name: TypeScript type check
+        run: npx tsc --noEmit
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v5
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push Docker image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build \
+            --build-arg NEXT_PUBLIC_GA_ID="" \
+            --build-arg NEXT_PUBLIC_LINE_ADD_FRIEND_URL=${{ secrets.NEXT_PUBLIC_LINE_ADD_FRIEND_URL }} \
+            --build-arg MICROCMS_SERVICE_DOMAIN=${{ secrets.MICROCMS_SERVICE_DOMAIN }} \
+            --build-arg MICROCMS_API_KEY=${{ secrets.MICROCMS_API_KEY }} \
+            -t $ECR_REGISTRY/$ECR_REPOSITORY:latest \
+            -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
+            .
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+  deploy:
+    needs: build-and-push
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      APP_RUNNER_SERVICE_ARN: arn:aws:apprunner:ap-northeast-1:179503922406:service/tsurispot-dev/ecbc9560c4e347109313a41496cf874d
+
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v5
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-1
+
+      - name: Deploy to App Runner
+        run: |
+          aws apprunner start-deployment \
+            --service-arn ${{ env.APP_RUNNER_SERVICE_ARN }}
+
+      - name: Wait for deployment
+        run: |
+          echo "Deployment started. Waiting for App Runner to update..."
+          for i in $(seq 1 30); do
+            STATUS=$(aws apprunner describe-service \
+              --service-arn ${{ env.APP_RUNNER_SERVICE_ARN }} \
+              --query "Service.Status" --output text)
+            echo "Status: $STATUS"
+            if [ "$STATUS" = "RUNNING" ]; then
+              echo "Deployment complete!"
+              exit 0
+            fi
+            sleep 30
+          done
+          echo "Deployment timed out"
+          exit 1
