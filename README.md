@@ -116,16 +116,6 @@ git push origin master
 | ブログ | 静的記事 SSG + microCMS ISR | 60+ |
 | 月別ガイド | ISR (revalidate=3600) | 12 |
 
-## コスト
-
-| サービス | 月額 |
-|---------|------|
-| App Runner | $5〜10 |
-| S3 + CloudFront | $1〜3 |
-| Lambda | 無料枠内 |
-| Route 53 | $0.50 |
-| **合計** | **$6.5〜13.5** |
-
 ## ライセンス
 
 All rights reserved.
