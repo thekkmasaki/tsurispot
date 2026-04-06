@@ -55,6 +55,7 @@ jobs:
           docker build \
             --build-arg NEXT_PUBLIC_GA_ID=${{ secrets.NEXT_PUBLIC_GA_ID }} \
             --build-arg NEXT_PUBLIC_LINE_ADD_FRIEND_URL=${{ secrets.NEXT_PUBLIC_LINE_ADD_FRIEND_URL }} \
+            --build-arg NEXT_PUBLIC_ADSENSE_ID=${{ secrets.NEXT_PUBLIC_ADSENSE_ID }} \
             --build-arg MICROCMS_SERVICE_DOMAIN=${{ secrets.MICROCMS_SERVICE_DOMAIN }} \
             --build-arg MICROCMS_API_KEY=${{ secrets.MICROCMS_API_KEY }} \
             -t $ECR_REGISTRY/$ECR_REPOSITORY:latest \
