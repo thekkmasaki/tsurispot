@@ -1,9 +1,17 @@
 import type { NextConfig } from "next";
 import bundleAnalyzer from "@next/bundle-analyzer";
+import spotRedirects from "./src/lib/data/spot-redirects.json";
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
+
+// 重複除去で消失したslugのリダイレクト（665件）+ 手動リダイレクト
+const spotRedirectEntries = Object.entries(spotRedirects).map(([oldSlug, newSlug]) => ({
+  source: `/spots/${oldSlug}`,
+  destination: `/spots/${newSlug}`,
+  permanent: true as const,
+}));
 
 const nextConfig: NextConfig = {
   // Docker/App Runner用: 最小限のスタンドアロン出力を生成
@@ -20,37 +28,8 @@ const nextConfig: NextConfig = {
       destination: '/for-beginners',
       permanent: true,
     },
-    // 存在しないslugへのアクセスを正しいスポットへリダイレクト
-    {
-      source: '/spots/soma-ko',
-      destination: '/spots/soma-ko-add3',
-      permanent: true,
-    },
-    {
-      source: '/spots/tsubasa-port-detail',
-      destination: '/spots/tsubasa-port',
-      permanent: true,
-    },
-    {
-      source: '/spots/awaji-tsubasa-port',
-      destination: '/spots/tsubasa-port',
-      permanent: true,
-    },
-    {
-      source: '/spots/hachinohe-ko',
-      destination: '/spots/hachinohe-port',
-      permanent: true,
-    },
-    {
-      source: '/spots/kushiro-ko',
-      destination: '/spots/kushiro-port',
-      permanent: true,
-    },
-    {
-      source: '/spots/hakodate-ko',
-      destination: '/spots/hakodate-port',
-      permanent: true,
-    },
+    // 重複除去で消失したslug → 正しいslugへ301リダイレクト
+    ...spotRedirectEntries,
   ],
   images: {
     remotePatterns: [
@@ -87,7 +66,7 @@ const nextConfig: NextConfig = {
       headers: [
         {
           key: "Content-Security-Policy",
-          value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.googlesyndication.com https://partner.googleadservices.com https://*.doubleclick.net https://*.google.com https://adservice.google.com https://adservice.google.co.jp https://fundingchoicesmessages.google.com https://*.gstatic.com https://*.adtrafficquality.google; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; img-src 'self' data: blob: https: http:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.microcms.io https://*.upstash.io https://api.open-meteo.com https://marine-api.open-meteo.com; frame-src https://*.google.com https://www.youtube.com https://*.googlesyndication.com https://*.doubleclick.net https://fundingchoicesmessages.google.com;",
+          value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://*.googlesyndication.com https://partner.googleadservices.com https://*.doubleclick.net https://*.google.com https://adservice.google.com https://adservice.google.co.jp https://fundingchoicesmessages.google.com https://*.gstatic.com https://*.adtrafficquality.google; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; img-src 'self' data: blob: https: http:; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://*.googlesyndication.com https://*.doubleclick.net https://*.google.com https://*.adtrafficquality.google https://*.microcms.io https://*.upstash.io https://api.open-meteo.com https://marine-api.open-meteo.com; frame-src https://*.google.com https://www.youtube.com https://*.googlesyndication.com https://*.doubleclick.net https://fundingchoicesmessages.google.com https://*.adtrafficquality.google;",
         },
         { key: "X-Content-Type-Options", value: "nosniff" },
         { key: "X-Frame-Options", value: "DENY" },

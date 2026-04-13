@@ -139,10 +139,10 @@ export async function generateMetadata({
   const description = descParts.filter(Boolean).join("").slice(0, 155);
   const ogDescription = `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）で${fishNames}が狙えます。${spot.description}`;
 
-  // AdSense対策: 極端に薄いページのみnoindex（説明文なし AND 魚種0件）
+  // サイトマップ除外基準と統一: 薄いページはnoindex（クロールバジェット節約）
   const descLength = (spot.description || "").length;
   const fishCount = spot.catchableFish.length;
-  const isLowQuality = descLength === 0 && fishCount === 0;
+  const isLowQuality = descLength < 100 || fishCount <= 2;
 
   return {
     title,

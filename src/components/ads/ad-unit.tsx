@@ -101,7 +101,7 @@ export function PreFooterAd() {
   if (!ADSENSE_ID) return null;
   return (
     <div className="mx-auto max-w-5xl px-4 py-6">
-      <div className="rounded-xl bg-gray-50 p-4">
+      <div className="rounded-xl bg-gray-50 p-4" style={{ minWidth: "300px" }}>
         <MultiplexAd />
       </div>
     </div>
