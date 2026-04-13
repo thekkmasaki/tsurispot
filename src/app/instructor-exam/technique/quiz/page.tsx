@@ -3,6 +3,7 @@ import Link from "next/link";
 import { ArrowLeft, ListOrdered } from "lucide-react";
 import { ExamQuiz } from "@/components/instructor-exam/exam-quiz";
 import { techniqueQuestions } from "@/lib/data/instructor-exam/technique-questions";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 const baseUrl = "https://tsurispot.com";
 
@@ -88,6 +89,8 @@ export default function TechniqueQuizPage() {
         </div>
 
         <ExamQuiz questions={techniqueQuestions} />
+
+        <InArticleAd className="my-8" />
 
         <div className="mt-8 flex justify-center gap-4">
           <Link
