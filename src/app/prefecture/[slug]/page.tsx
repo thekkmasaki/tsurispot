@@ -33,6 +33,7 @@ import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { areaGuides, type AreaGuide } from "@/lib/data/area-guides";
 import { SpotSearchFilter } from "@/components/prefecture/spot-search-filter";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -856,6 +857,8 @@ export default async function PrefecturePage({ params }: PageProps) {
         </section>
       )}
 
+      <InArticleAd className="my-8" />
+
       {/* 今月この県で釣れる魚 */}
       {inSeasonFish.length > 0 && (
         <section className="mb-8 sm:mb-10">
@@ -1233,6 +1236,8 @@ export default async function PrefecturePage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      <InArticleAd className="my-8" />
 
       {/* FAQ Section */}
       {finalFaqItems.length > 0 && (

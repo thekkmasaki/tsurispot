@@ -24,6 +24,7 @@ import {
   Fish,
   Search,
 } from "lucide-react";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 // ISR: 1時間ごとに再検証
 export const revalidate = 3600;
@@ -276,6 +277,8 @@ export default async function BlogPostPage({
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
 
+      <InArticleAd className="my-8" />
+
       {/* 関連魚種リンク */}
       {post.relatedFish && post.relatedFish.length > 0 && (() => {
         const relatedFishData = post.relatedFish
@@ -401,6 +404,8 @@ export default async function BlogPostPage({
           <Link href="/map" className="text-xs font-medium text-primary hover:underline">地図で釣り場を探す</Link>
         </div>
       </section>
+
+      <InArticleAd className="my-8" />
 
       {/* 前後の記事ナビゲーション */}
       <nav className="mt-12 grid gap-4 border-t pt-8 sm:grid-cols-2" aria-label="前後の記事">

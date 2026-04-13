@@ -46,6 +46,7 @@ import { getAllBlogPosts } from "@/lib/data/blog";
 import { prefectures } from "@/lib/data/prefectures";
 import { products as allProducts } from "@/lib/data/products";
 import { MonthlyProductRecommend } from "@/components/monthly-product-recommend";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 interface Props {
   params: Promise<{ month: string }>;
@@ -572,6 +573,8 @@ export default async function MonthlyGuidePage({ params }: Props) {
           </div>
         </section>
 
+        <InArticleAd className="my-8" />
+
         {/* この月のおすすめ釣り方ガイド */}
         {(() => {
           const monthGuideLinks: Record<number, { href: string; title: string; description: string }[]> = {
@@ -1042,6 +1045,8 @@ export default async function MonthlyGuidePage({ params }: Props) {
             </CardContent>
           </Card>
         </section>
+
+        <InArticleAd className="my-8" />
 
         {/* FAQ */}
         <CollapsibleSection
