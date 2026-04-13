@@ -333,53 +333,68 @@ export function getAreaPressure(prefecture: string, areaName: string): number {
   return PREFECTURE_PRESSURE_DEFAULT[key] ?? 0;
 }
 
-// 月別の釣れやすさ補正
-// 実測データ: 冬（12-2月）は海水温低下で魚の活性が大幅ダウン。
-// 特に1-2月は堤防からの釣果がほぼゼロになることも珍しくない。
-// 2026-03-01修正: 冬の補正を大幅強化。
-// 実測データ(2026-02-28 二見人工島): 2月土曜、胴突きメバル狙い→全員ボウズ。
-// 水位低下で穴釣り不可。半日でヒトデのみ。同日の釣り人3組全員ボウズ。
-export function getMonthCorrection(month: number, spotType?: string): number {
-  // 河川は海水温ではなく河川水温・渓流解禁期に基づく補正
+// 地域別の月間平均気温（℃）推定テーブル
+// 気象庁データベースに基づく代表値。ボウズ率・混雑予想の共通基盤。
+const REGIONAL_AVG_TEMP: Record<string, number[]> = {
+  // index 0=1月, 11=12月
+  "北日本":   [ 0,  1,  4,  10, 16, 20, 23, 25, 21, 14,  8,  2],
+  "東日本":   [ 5,  6,  9,  14, 19, 22, 26, 27, 24, 18, 12,  7],
+  "中日本":   [ 5,  6, 10,  15, 20, 23, 27, 28, 25, 19, 13,  7],
+  "西日本":   [ 6,  7, 10,  15, 20, 24, 28, 29, 25, 19, 14,  8],
+  "南西日本": [15, 15, 18,  21, 24, 27, 29, 29, 27, 24, 20, 17],
+};
+
+const PREFECTURE_REGION_MAP: Record<string, string> = {
+  "北海道": "北日本", "青森": "北日本", "岩手": "北日本", "秋田": "北日本", "山形": "北日本",
+  "宮城": "東日本", "福島": "東日本", "茨城": "東日本", "栃木": "東日本", "群馬": "東日本",
+  "埼玉": "東日本", "千葉": "東日本", "東京": "東日本", "神奈川": "東日本", "新潟": "東日本",
+  "富山": "中日本", "石川": "中日本", "福井": "中日本", "山梨": "中日本", "長野": "中日本",
+  "岐阜": "中日本", "静岡": "中日本", "愛知": "中日本", "三重": "中日本",
+  "滋賀": "西日本", "京都": "西日本", "大阪": "西日本", "兵庫": "西日本", "奈良": "西日本",
+  "和歌山": "西日本", "鳥取": "西日本", "島根": "西日本", "岡山": "西日本", "広島": "西日本",
+  "山口": "西日本", "徳島": "西日本", "香川": "西日本", "愛媛": "西日本", "高知": "西日本",
+  "福岡": "西日本", "佐賀": "西日本", "長崎": "西日本", "熊本": "西日本",
+  "大分": "西日本", "宮崎": "西日本", "鹿児島": "南西日本", "沖縄": "南西日本",
+};
+
+/** 都道府県と月から推定気温を取得 */
+export function getEstimatedTemp(prefecture: string | undefined, month: number): number {
+  const key = (prefecture ?? "").replace(/[都道府県]$/, "");
+  const regionKey = PREFECTURE_REGION_MAP[key] ?? "中日本";
+  const temps = REGIONAL_AVG_TEMP[regionKey] ?? REGIONAL_AVG_TEMP["中日本"];
+  return temps[month - 1] ?? 15;
+}
+
+/** 推定気温からボウズ率の月補正を算出（固定月値ではなく気温駆動） */
+export function getMonthCorrection(month: number, spotType?: string, prefecture?: string): number {
+  // 河川は解禁期ベース（気温よりルールが支配的）
   if (spotType === "river") {
     const riverCorrections: Record<number, number> = {
-      1: 25,   // 冬: 多くの渓流が禁漁、水温も低い
-      2: 20,   // 厳冬: 一部2月解禁あるが基本的に厳しい
-      3: 5,    // 早春: 渓流解禁、水温は低いが魚は動き出す
-      4: -8,   // 春: 水温上昇し活性UP
-      5: -12,  // 初夏: ベストシーズン
-      6: -8,   // 梅雨: 増水リスクあるが活性高い
-      7: -5,   // 盛夏: 朝夕が勝負
-      8: 0,    // 晩夏: 水温高め
-      9: -8,   // 初秋: 再び好シーズン
-      10: 5,   // 秋: 禁漁に入る河川あり
-      11: 20,  // 晩秋: ほぼ禁漁
-      12: 25,  // 冬: 禁漁
+      1: 25, 2: 20, 3: 5, 4: -8, 5: -12, 6: -8,
+      7: -5, 8: 0, 9: -8, 10: 5, 11: 20, 12: 25,
     };
     return riverCorrections[month] ?? 0;
   }
-  const corrections: Record<number, number> = {
-    1: 50,  // 真冬: 海水温8-10℃、魚活性最低、堤防はほぼ釣果ゼロ
-    2: 48,  // 厳冬期: 海水温9-11℃、実測で全員ボウズ
-    3: 30,  // 早春: 海水温11-13℃、回復し始めるがまだ厳しい
-    4: 5,   // 春本番: 海水温13-16℃、活性上昇中だがまだ本調子ではない
-    5: -8,  // 初夏: 海水温16-19℃、活性が高くなる
-    6: -12, // 梅雨: 海水温19-22℃、多くの魚種が活発
-    7: -15, // 盛夏: 海水温22-25℃、活性ピーク
-    8: -12, // 晩夏: 海水温24-26℃、活性維持
-    9: -8,  // 初秋: 海水温22-24℃、まだ好調
-    10: 0,  // 秋: 海水温18-22℃、徐々に活性低下
-    11: 15, // 晩秋: 海水温14-17℃、冬に向かって厳しくなる
-    12: 38, // 冬入口: 海水温11-14℃、急激に厳しくなる
-  };
-  return corrections[month] ?? 0;
+
+  const temp = getEstimatedTemp(prefecture, month);
+
+  // 気温→海水温の大まかな対応で魚活性を推定
+  // 気温15-25℃ ≈ 海水温15-23℃: 活性高い
+  // 気温5-10℃ ≈ 海水温10-14℃: 活性低い
+  if (temp <= 3) return 35;       // 極寒: ボウズ率大幅UP
+  if (temp <= 7) return 25;       // 厳冬
+  if (temp <= 10) return 15;      // 寒い
+  if (temp <= 14) return 5;       // 肌寒い
+  if (temp <= 19) return -5;      // 快適: やや釣れやすい
+  if (temp <= 25) return -10;     // ベスト: 活性ピーク
+  if (temp <= 30) return -5;      // 暑い: まだ良い
+  return 0;                       // 猛暑: 高水温で活性低下
 }
 
-// 季節による釣り方別ボウズ率の補正係数
-// 冬は全ての釣り方で難易度が上がる（海水温低下で魚の活性が落ちるため）
-// 実測(2026-02-28): 胴突きメバル狙い・穴釣り→全員ボウズ。冬は全釣法で大幅に難易度UP。
-export function getSeasonalMethodMultiplier(month: number, spotType?: string): number {
-  // 河川は海とは異なる季節パターン
+// 気温ベースの釣り方別ボウズ率補正係数
+// 固定月値ではなく推定気温から乗数を算出。暖冬・寒冬に動的対応。
+export function getSeasonalMethodMultiplier(month: number, spotType?: string, prefecture?: string): number {
+  // 河川は解禁期ベース
   if (spotType === "river") {
     const riverMultipliers: Record<number, number> = {
       1: 1.4, 2: 1.3, 3: 1.1, 4: 1.0, 5: 0.9, 6: 0.95,
@@ -387,25 +402,21 @@ export function getSeasonalMethodMultiplier(month: number, spotType?: string): n
     };
     return riverMultipliers[month] ?? 1.0;
   }
-  const multipliers: Record<number, number> = {
-    1: 2.0,  // 真冬: ボウズ率2.0倍（穴釣り20%→40%、メバリング40%→80%）
-    2: 1.9,  // 厳冬期: 1.9倍（実測で全釣法ボウズ）
-    3: 1.5,  // 早春: 1.5倍（まだ水温低い）
-    4: 1.1,  // 春: ほぼ通常
-    5: 1.0,  // 初夏: 通常
-    6: 0.9,  // 梅雨: やや釣れやすい
-    7: 0.85, // 盛夏: 活性ピーク
-    8: 0.9,  // 晩夏: 好調
-    9: 0.95, // 初秋: ほぼ通常
-    10: 1.0, // 秋: 通常
-    11: 1.2, // 晩秋: やや厳しくなる
-    12: 1.6, // 冬入口: 1.6倍
-  };
-  return multipliers[month] ?? 1.0;
+
+  const temp = getEstimatedTemp(prefecture, month);
+
+  if (temp <= 3) return 1.8;      // 極寒: 大幅に難化
+  if (temp <= 7) return 1.5;      // 厳冬
+  if (temp <= 10) return 1.3;     // 寒い
+  if (temp <= 14) return 1.1;     // 肌寒い
+  if (temp <= 19) return 1.0;     // 標準
+  if (temp <= 25) return 0.9;     // 活性ピーク
+  if (temp <= 30) return 0.95;    // 暑いがまだ良い
+  return 1.0;                     // 猛暑
 }
 
 // 釣り方別のボウズ率補正を計算
-export function getMethodCorrection(details: CatchableFishInfo[], currentMonth: number, spotType?: string): {
+export function getMethodCorrection(details: CatchableFishInfo[], currentMonth: number, spotType?: string, prefecture?: string): {
   correction: number;
   primaryMethod: string | null;
   primaryMethodRate: number | null;
@@ -426,8 +437,8 @@ export function getMethodCorrection(details: CatchableFishInfo[], currentMonth: 
 
   const fishToUse = inSeasonFish.length > 0 ? inSeasonFish : details;
 
-  // 季節補正係数を取得
-  const seasonalMultiplier = getSeasonalMethodMultiplier(currentMonth, spotType);
+  // 季節補正係数を取得（気温ベース）
+  const seasonalMultiplier = getSeasonalMethodMultiplier(currentMonth, spotType, prefecture);
 
   // 釣り方ごとの出現回数（対象魚種数）をカウントし、最も多い釣り方を主要メソッドとする
   const methodCount: Record<string, number> = {};
@@ -621,28 +632,22 @@ export function calcSpotBouzuProbability(
     advanced: 8,
   };
   score += difficultyMod[props.difficulty] ?? 0;
-  // 冬は初心者でも上級者でも難しい（海水温低下で魚の活性が落ちる）
-  // 実測: 2月は全員ボウズ。冬の堤防は技術関係なく厳しい。
-  if (props.spotType === "river") {
-    // 河川は海ほど冬の影響を受けない（渓流は3月解禁で釣れる）
-    if ([1, 2].includes(currentMonth)) score += 5;
-    else if (currentMonth === 12) score += 5;
-    else if ([3, 11].includes(currentMonth)) score += 2;
+  // 気温が低いと難易度に関係なくボウズしやすい
+  const estTemp = getEstimatedTemp(props.prefecture, currentMonth);
+  if (props.spotType !== "river") {
+    if (estTemp <= 5) score += 12;
+    else if (estTemp <= 10) score += 6;
+    else if (estTemp <= 14) score += 2;
   } else {
-    if ([1, 2].includes(currentMonth)) {
-      score += 15; // 真冬はどの難易度でも+15
-    } else if (currentMonth === 12) {
-      score += 10;
-    } else if ([3, 11].includes(currentMonth)) {
-      score += 5;
-    }
+    if (estTemp <= 5) score += 5;
+    else if (estTemp <= 10) score += 2;
   }
 
   // 3. 地域差（エリア単位で判定）
   score += getAreaPressure(props.prefecture, props.areaName);
 
-  // 4. 月別補正
-  score += getMonthCorrection(currentMonth, props.spotType);
+  // 4. 月別補正（気温ベース）
+  score += getMonthCorrection(currentMonth, props.spotType, props.prefecture);
 
   // 5. 評価スコアによる補正（高評価＝釣れやすい）
   if (props.rating >= 4.5) score -= 8;
@@ -663,8 +668,8 @@ export function calcSpotBouzuProbability(
 
   // === 釣果データベースに基づく新しい補正 ===
   if (props.catchableFishDetails && props.catchableFishDetails.length > 0) {
-    // 9. 釣り方別ボウズ率データによる補正
-    const methodResult = getMethodCorrection(props.catchableFishDetails, currentMonth, props.spotType);
+    // 9. 釣り方別ボウズ率データによる補正（気温ベース）
+    const methodResult = getMethodCorrection(props.catchableFishDetails, currentMonth, props.spotType, props.prefecture);
     score += methodResult.correction;
 
     // 10. 魚種別の釣りやすさ補正

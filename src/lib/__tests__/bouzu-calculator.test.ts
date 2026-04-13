@@ -26,8 +26,9 @@ describe("bouzu-calculator", () => {
     }
   });
 
-  it("海の冬(1月)は月補正が+50", () => {
-    expect(getMonthCorrection(1)).toBe(50);
+  it("海の冬(1月)は気温ベースで高い補正", () => {
+    // 中日本デフォルト: 1月平均5℃ → 補正+25
+    expect(getMonthCorrection(1)).toBe(25);
   });
 
   it("河川の冬(1月)は月補正が+25", () => {
