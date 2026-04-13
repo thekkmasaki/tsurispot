@@ -30,6 +30,7 @@ import type { YouTubeSearchLink } from "@/types";
 import { RigDiagram } from "@/components/rig-diagram";
 import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
 import { CollapsibleSection } from "@/components/ui/collapsible-section";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 const sabikiVideos: YouTubeSearchLink[] = [
   {
@@ -1013,6 +1014,8 @@ export default function SabikiGuidePage() {
           {/* 仕掛け図 */}
           <RigDiagram type="sabiki" />
 
+          <InArticleAd className="my-8" />
+
           {/* 釣り方の手順 */}
           <SectionCard title="釣り方の手順" icon={Footprints}>
             <ol className="list-none space-y-4">
@@ -1285,6 +1288,8 @@ export default function SabikiGuidePage() {
               </li>
             </ul>
           </SectionCard>
+
+          <InArticleAd className="my-8" />
 
           {/* おすすめスポット */}
           <CollapsibleSection

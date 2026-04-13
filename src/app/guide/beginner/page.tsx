@@ -24,6 +24,7 @@ import { getBeginnerEssentials } from "@/lib/data/products";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { NearbyBeginnerSpots } from "@/components/guide/nearby-beginner-spots";
 import { CollapsibleSection } from "@/components/ui/collapsible-section";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "釣り初心者完全ガイド - ゼロから始める釣り入門【2025年版】",
@@ -868,6 +869,8 @@ export default function BeginnerGuidePage() {
             </SectionCard>
           </section>
 
+          <InArticleAd className="my-8" />
+
           {/* 初心者におすすめの釣り方 */}
           <section id="methods">
             <SectionCard title="初心者におすすめの釣り方" icon={Fish}>
@@ -1143,6 +1146,8 @@ export default function BeginnerGuidePage() {
               )}
             </SectionCard>
           </section>
+
+          <InArticleAd className="my-8" />
 
           {/* 釣りの基本マナーとルール */}
           <section id="manner">

@@ -7,6 +7,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "エギング入門ガイド - エギの選び方・シャクリ方・季節別攻略",
@@ -543,6 +544,8 @@ export default function EgingGuidePage() {
 
           <EgiSizeDepthDiagram />
 
+          <InArticleAd className="my-8" />
+
           {/* シャクリ方とフォールの使い分け */}
           <SectionCard title="シャクリ方とフォールの使い分け" icon={Waves}>
             <p className="mb-4 text-sm text-muted-foreground">
@@ -698,6 +701,8 @@ export default function EgingGuidePage() {
             </Hint>
           </SectionCard>
         </div>
+
+        <InArticleAd className="my-8" />
 
         {/* 参考動画 */}
         <div className="mt-8 sm:mt-12">

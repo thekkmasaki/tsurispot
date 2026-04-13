@@ -9,6 +9,7 @@ import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import { fishingSpots } from "@/lib/data/spots";
 import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "ウキ釣り完全ガイド - ウキの種類・仕掛け・アタリの取り方",
@@ -710,6 +711,8 @@ export default function FloatFishingGuidePage() {
             <TanaAdjustSvg />
           </SectionCard>
 
+          <InArticleAd className="my-8" />
+
           {/* エサの付け方 */}
           <SectionCard title="エサの付け方" icon={Bug}>
             <p className="mb-4 text-sm text-muted-foreground">
@@ -839,6 +842,8 @@ export default function FloatFishingGuidePage() {
             </div>
           </SectionCard>
         </div>
+
+        <InArticleAd className="my-8" />
 
         {/* ウキ釣りにおすすめのスポット */}
         {floatSpots.length > 0 && (

@@ -7,6 +7,7 @@ import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import { fishingSpots } from "@/lib/data/spots";
 import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "ショアジギング入門ガイド - メタルジグで青物を狙う",
@@ -490,6 +491,8 @@ export default function JiggingGuidePage() {
             </Warning>
           </SectionCard>
 
+          <InArticleAd className="my-8" />
+
           {/* キャスト方法とアクション */}
           <SectionCard title="キャスト方法とアクション" icon={Target}>
             <h3 className="mb-3 font-medium text-foreground">キャスト（投げ方）</h3>
@@ -668,6 +671,8 @@ export default function JiggingGuidePage() {
             </Danger>
           </SectionCard>
         </div>
+
+        <InArticleAd className="my-8" />
 
         {/* ショアジギングで狙える魚 */}
         <section className="mt-8 sm:mt-12">
