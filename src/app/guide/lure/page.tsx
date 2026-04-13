@@ -7,6 +7,7 @@ import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import { fishingSpots } from "@/lib/data/spots";
 import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "ルアー釣り入門ガイド - ルアーの種類・選び方・アクションを解説",
@@ -501,6 +502,8 @@ export default function LureGuidePage() {
             </Warning>
           </SectionCard>
 
+          <InArticleAd className="my-8" />
+
           {/* アクションの付け方 */}
           <SectionCard title="アクションの付け方" icon={Zap}>
             <p className="mb-4 text-sm text-muted-foreground">
@@ -625,6 +628,8 @@ export default function LureGuidePage() {
             </CardContent>
           </Card>
         </section>
+
+        <InArticleAd className="my-8" />
 
         {/* ルアー釣りにおすすめのスポット */}
         {lureSpots.length > 0 && (

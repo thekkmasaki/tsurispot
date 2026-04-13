@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import { fishingSpots } from "@/lib/data/spots";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "夜釣り入門ガイド - 必要装備・釣れる魚・安全対策を解説",
@@ -486,6 +487,8 @@ export default function NightFishingGuidePage() {
             </div>
           </SectionCard>
 
+          <InArticleAd className="my-8" />
+
           {/* 安全対策 */}
           <SectionCard title="安全対策" icon={ShieldAlert}>
             <p className="mb-4 text-sm text-muted-foreground">
@@ -627,6 +630,8 @@ export default function NightFishingGuidePage() {
             </Warning>
           </SectionCard>
         </div>
+
+        <InArticleAd className="my-8" />
 
         {/* 夜釣りにおすすめのスポット */}
         {nightSpots.length > 0 && (

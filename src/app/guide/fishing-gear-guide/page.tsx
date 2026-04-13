@@ -19,6 +19,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "釣り道具の選び方完全ガイド｜初心者が揃えるべき道具と予算【2026年版】",
@@ -557,6 +558,8 @@ export default function FishingGearGuidePage() {
             </div>
           </SectionCard>
 
+          <InArticleAd className="my-8" />
+
           {/* 4. 仕掛け・ルアー */}
           <SectionCard id="rig" title="仕掛け・ルアーの選び方" icon={Anchor}>
             <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
@@ -724,6 +727,8 @@ export default function FishingGearGuidePage() {
               ))}
             </div>
           </SectionCard>
+
+          <InArticleAd className="my-8" />
 
           {/* 8. メンテナンス方法 */}
           <SectionCard id="maintenance" title="道具のメンテナンス方法" icon={ShieldCheck}>

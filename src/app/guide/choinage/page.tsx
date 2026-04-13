@@ -20,6 +20,7 @@ import { ProductList } from "@/components/affiliate/product-list";
 import { getProductsByMethod } from "@/lib/data/products";
 import { RigDiagram } from "@/components/rig-diagram";
 import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "ちょい投げ釣り完全ガイド - キス・ハゼの釣り方と仕掛け【初心者向け】",
@@ -794,6 +795,8 @@ export default function ChoinageGuidePage() {
 
           <ChoinageRigDetailSvg />
 
+          <InArticleAd className="my-8" />
+
           {/* 釣り方の手順 */}
           <SectionCard title="釣り方の手順" icon={Footprints}>
             <ol className="list-none space-y-4">
@@ -1016,6 +1019,8 @@ export default function ChoinageGuidePage() {
               </li>
             </ul>
           </SectionCard>
+
+          <InArticleAd className="my-8" />
 
           {/* おすすめスポット */}
           <SectionCard title="おすすめスポット" icon={MapPin}>
