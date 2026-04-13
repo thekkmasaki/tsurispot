@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { getFishSpeciesWithSpots } from "@/lib/data";
 import { CatchableNowClient } from "./catchable-now-client";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 // 現在の月を取得してタイトルに含める
 const currentMonth = new Date().getMonth() + 1;
@@ -51,6 +52,7 @@ export default function CatchableNowPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
       />
+      <InArticleAd className="my-8" />
       <CatchableNowClient
         fishSpecies={fishSpecies}
         initialMonth={currentMonth}

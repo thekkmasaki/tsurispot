@@ -14,6 +14,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "釣りの安全ガイド",
@@ -193,6 +194,8 @@ export default function SafetyPage() {
               </div>
             </div>
           </section>
+
+          <InArticleAd className="my-8" />
 
           {/* 3. 転落リスク */}
           <section>
@@ -386,6 +389,8 @@ export default function SafetyPage() {
               </div>
             </div>
           </section>
+
+          <InArticleAd className="my-8" />
 
           {/* 6. 緊急時の連絡先 */}
           <section>

@@ -8,6 +8,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { fishSpecies, getPeakFish, getCatchableNow } from "@/lib/data/fish";
 import { fishRegionalSeasons } from "@/lib/data/fish-regional-seasons";
 import { CalendarTableClient } from "@/components/fishing-calendar/calendar-table-client";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "月別釣りカレンダー - 何月に何が釣れる？",
@@ -171,6 +172,8 @@ export default function FishingCalendarPage() {
           regionalData={fishRegionalSeasons}
         />
 
+        <InArticleAd className="my-8" />
+
         {/* 月別詳細 */}
         <div className="space-y-8">
           {MONTH_NAMES.map((name, index) => {
@@ -268,6 +271,8 @@ export default function FishingCalendarPage() {
             );
           })}
         </div>
+
+        <InArticleAd className="my-8" />
 
         {/* 関連ページ */}
         <div className="mt-12 rounded-xl border bg-muted/30 p-6">

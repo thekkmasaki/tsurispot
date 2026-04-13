@@ -16,6 +16,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { fishingSpots } from "@/lib/data/spots";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "釣り方・釣法ガイド - 9つの釣法を徹底解説",
@@ -276,6 +277,8 @@ export default function MethodsIndexPage() {
             </Link>
           ))}
         </div>
+
+        <InArticleAd className="my-8" />
 
         {/* 関連ページ */}
         <div className="mt-12 rounded-xl border bg-muted/30 p-6">

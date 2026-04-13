@@ -28,6 +28,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { fishSpecies } from "@/lib/data/fish";
 import { products } from "@/lib/data/products";
 import { ProductCard } from "@/components/affiliate/product-card";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "はじめての釣り完全ガイド",
@@ -494,6 +495,8 @@ export default function ForBeginnersPage() {
             </Card>
           </section>
 
+          <InArticleAd className="my-8" />
+
           {/* セクション4: どこで釣ればいい？ */}
           <section id="where">
             <Card className="overflow-hidden">
@@ -758,6 +761,8 @@ export default function ForBeginnersPage() {
               </CardContent>
             </Card>
           </section>
+
+          <InArticleAd className="my-8" />
 
           {/* セクション7: よくある質問 */}
           <section id="faq">
