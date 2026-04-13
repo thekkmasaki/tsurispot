@@ -11,10 +11,18 @@ declare global {
 
 const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_ID;
 
+// ---- AdSense スロットID ----
+const SLOTS = {
+  display: "9949278874",
+  multiplex: "8230049272",
+  inArticle: "4852864864",
+} as const;
+
 // ---- 基本AdSenseユニット ----
 interface AdUnitProps {
   slot?: string;
   format?: "auto" | "horizontal" | "vertical" | "rectangle" | "fluid" | "autorelaxed";
+  layout?: string;
   layoutKey?: string;
   className?: string;
   style?: React.CSSProperties;
@@ -24,6 +32,7 @@ interface AdUnitProps {
 export function AdUnit({
   slot,
   format = "auto",
+  layout,
   layoutKey,
   className = "",
   style,
@@ -51,8 +60,9 @@ export function AdUnit({
         className="adsbygoogle"
         style={style || { display: "block" }}
         data-ad-client={ADSENSE_ID}
-        {...(slot && { "data-ad-slot": slot })}
+        data-ad-slot={slot}
         data-ad-format={format}
+        {...(layout && { "data-ad-layout": layout })}
         {...(layoutKey && { "data-ad-layout-key": layoutKey })}
         {...(responsive && { "data-full-width-responsive": "true" })}
         ref={adRef}
@@ -101,8 +111,9 @@ export function InArticleAd({ className = "" }: { className?: string }) {
   return (
     <AdWrapper className={`my-8 ${className}`}>
       <AdUnit
+        slot={SLOTS.inArticle}
         format="fluid"
-        layoutKey="-gw-3+1f-3d+2z"
+        layout="in-article"
         style={{ display: "block", textAlign: "center" }}
       />
     </AdWrapper>
@@ -113,7 +124,7 @@ export function InArticleAd({ className = "" }: { className?: string }) {
 export function DisplayAd({ className = "" }: { className?: string }) {
   return (
     <AdWrapper className={`my-6 ${className}`}>
-      <AdUnit format="auto" />
+      <AdUnit slot={SLOTS.display} format="auto" />
     </AdWrapper>
   );
 }
@@ -131,7 +142,7 @@ export function NativeAdBreak({ className = "" }: { className?: string }) {
         <div className="h-px flex-1 bg-gradient-to-l from-transparent via-ocean-mid/20 to-transparent" />
       </div>
       <div className="rounded-2xl border border-border/50 bg-card/60 p-3 sm:p-5 shadow-sm shadow-ocean-deep/[0.03]">
-        <AdUnit format="fluid" layoutKey="-gw-3+1f-3d+2z" style={{ display: "block", textAlign: "center" }} />
+        <AdUnit slot={SLOTS.display} format="auto" />
       </div>
     </div>
   );
@@ -141,6 +152,7 @@ export function NativeAdBreak({ className = "" }: { className?: string }) {
 export function MultiplexAd({ className = "" }: { className?: string }) {
   return (
     <AdUnit
+      slot={SLOTS.multiplex}
       format="autorelaxed"
       className={`my-8 ${className}`}
     />
@@ -176,9 +188,9 @@ export function SidebarAd({ className = "" }: { className?: string }) {
     <div className={className}>
       <AdWrapper variant="sidebar" label={false}>
         <AdUnit
-          format="vertical"
+          slot={SLOTS.display}
+          format="auto"
           className="min-h-[250px]"
-          style={{ display: "block", minWidth: "160px" }}
         />
       </AdWrapper>
     </div>
@@ -189,6 +201,7 @@ export function SidebarAd({ className = "" }: { className?: string }) {
 export function InFeedAd({ className = "" }: { className?: string }) {
   return (
     <AdUnit
+      slot={SLOTS.display}
       format="fluid"
       layoutKey="-6t+ed+2i-1n-4w"
       className={`my-4 ${className}`}
@@ -203,8 +216,8 @@ export function ParallelAds({ className = "" }: { className?: string }) {
   return (
     <AdWrapper className={`my-8 ${className}`}>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <AdUnit format="rectangle" style={{ display: "block", width: "100%", height: "250px" }} />
-        <AdUnit format="rectangle" style={{ display: "block", width: "100%", height: "250px" }} />
+        <AdUnit slot={SLOTS.display} format="rectangle" style={{ display: "block", width: "100%", height: "250px" }} />
+        <AdUnit slot={SLOTS.display} format="rectangle" style={{ display: "block", width: "100%", height: "250px" }} />
       </div>
     </AdWrapper>
   );
