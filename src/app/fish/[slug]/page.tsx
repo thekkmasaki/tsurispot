@@ -35,7 +35,7 @@ import { getProductsByFish, getTopProducts } from "@/lib/data/products";
 import { getHookSizeData } from "@/lib/data/hook-sizes";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
-import { InArticleAd } from "@/components/ads/ad-unit";
+import { InArticleAd, DisplayAd, LazyAd } from "@/components/ads/ad-unit";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { getPrefectureByName } from "@/lib/data/prefectures";
 import { fishRegionalSeasons } from "@/lib/data/fish-regional-seasons";
@@ -859,6 +859,9 @@ export default async function FishDetailPage({ params }: PageProps) {
         </section>
       )}
 
+
+      {/* 広告（釣り方セクション後） */}
+      <LazyAd className="my-6"><DisplayAd /></LazyAd>
 
       {/* おすすめの食べ方 */}
       {fish.cookingTips.length > 0 && (

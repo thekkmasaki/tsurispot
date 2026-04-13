@@ -46,7 +46,7 @@ import { SpotImage } from "@/components/ui/spot-image";
 import { SpotBouzuCard } from "@/components/spots/spot-bouzu-card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
-import { InArticleAd } from "@/components/ads/ad-unit";
+import { InArticleAd, DisplayAd, LazyAd } from "@/components/ads/ad-unit";
 import { FishLikeButton } from "@/components/spots/fish-like-button";
 import { FishingReportSummary } from "@/components/spots/fishing-report-summary";
 import { SpotAffiliateRecommend } from "@/components/spots/spot-affiliate-recommend";
@@ -1275,6 +1275,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
         );
       })()}
 
+      {/* 広告（攻略法の後） */}
+      <LazyAd className="my-8"><DisplayAd /></LazyAd>
+
       {/* 関連スポット・記事 */}
       <h2 className="mt-8 text-xl font-bold sm:mt-12 sm:text-2xl">関連スポット・記事</h2>
 
@@ -1489,6 +1492,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
       </section>
 
       {/* 都道府県ガイド・地域ガイドは上の折りたたみセクションに統合済み */}
+
+      {/* 広告（FAQ後） */}
+      <LazyAd className="my-6"><InArticleAd /></LazyAd>
 
       {/* 関連コラム（ブログ記事への内部リンク — AdSense対策） */}
       {(() => {

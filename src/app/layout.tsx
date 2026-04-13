@@ -10,6 +10,7 @@ import { PWAInstallHint } from "@/components/pwa-install-hint";
 import { CookieBanner } from "@/components/layout/cookie-banner";
 import { BackToTop } from "@/components/ui/back-to-top";
 import { CompareBar } from "@/components/spots/compare-bar";
+import { PreFooterAd } from "@/components/ads/ad-unit";
 import { fishingSpots } from "@/lib/data/spots";
 import "./globals.css";
 
@@ -233,6 +234,7 @@ export default function RootLayout({
         <PWARegister />
         <Header />
         <main className="min-h-screen pb-24 md:pb-0">{children}</main>
+        <PreFooterAd />
         <Footer />
         <MobileNav />
         <PWAInstallHint />
