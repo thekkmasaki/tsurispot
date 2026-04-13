@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Point, Exam, Analogy, TsuriSpotBox } from "@/components/instructor-exam/callouts";
 import { ArrowRight } from "lucide-react";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 const baseUrl = "https://tsurispot.com";
 
@@ -539,6 +540,8 @@ export default function HistoryPage() {
             </li>
           </ul>
         </div>
+
+        <InArticleAd className="my-8" />
 
         {/* ===== 章末確認クイズ CTA ===== */}
         <div className="mt-8 rounded-xl border-2 border-purple-200 bg-purple-50 p-6 text-center">

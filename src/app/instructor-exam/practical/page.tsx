@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Point, Exam } from "@/components/instructor-exam/callouts";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 const baseUrl = "https://tsurispot.com";
 
@@ -490,6 +491,8 @@ export default function PracticalPage() {
             実技試験の対策で最も大切なのは<strong>繰り返しの練習</strong>です。結び方は目を閉じてもできるレベルまで反復し、キャスティングは実際の釣り場やキャスティング練習場で体に染み込ませましょう。試験本番の緊張下でも確実に遂行できることが合格の条件です。
           </p>
         </Point>
+
+        <InArticleAd className="my-8" />
 
         {/* ナビ */}
         <div className="mt-12 flex items-center justify-between border-t pt-6">

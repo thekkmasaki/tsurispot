@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Point, Exam } from "@/components/instructor-exam/callouts";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 const baseUrl = "https://tsurispot.com";
 
@@ -445,6 +446,8 @@ export default function EssayPage() {
             論文は「知識」だけでなく「インストラクターとしての自覚」が問われます。テーマの知識を示した上で、<strong>指導者として具体的にどう行動するか</strong>を書くことが合格への最短ルートです。
           </p>
         </Point>
+
+        <InArticleAd className="my-8" />
 
         {/* ===== テーマ別チェックリスト ===== */}
         <h2
