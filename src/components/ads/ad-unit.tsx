@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { Waves } from "lucide-react";
 
 declare global {
   interface Window {
@@ -60,25 +61,79 @@ export function AdUnit({
   );
 }
 
+// ---- 広告ラベル付きラッパー（3バリアント） ----
+type AdVariant = "default" | "sidebar" | "minimal";
+
+const AD_WRAPPER_STYLES: Record<AdVariant, string> = {
+  default: "rounded-2xl border border-border/50 bg-card/60 p-3 sm:p-4 shadow-sm shadow-ocean-deep/[0.03]",
+  sidebar: "rounded-xl border border-border/40 bg-muted/20 p-3",
+  minimal: "py-2",
+};
+
+function AdWrapper({
+  children,
+  className = "",
+  label = true,
+  variant = "default",
+}: {
+  children: React.ReactNode;
+  className?: string;
+  label?: boolean;
+  variant?: AdVariant;
+}) {
+  if (!ADSENSE_ID) return null;
+  return (
+    <div className={`relative ${AD_WRAPPER_STYLES[variant]} ${className}`}>
+      {label && (
+        <div className="mb-2 flex items-center justify-center gap-3">
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+          <span className="text-[10px] font-medium tracking-widest text-muted-foreground/40">スポンサー</span>
+          <div className="h-px flex-1 bg-gradient-to-l from-transparent via-border to-transparent" />
+        </div>
+      )}
+      {children}
+    </div>
+  );
+}
+
 // ---- 記事内広告（コンテンツのセクション間） ----
 export function InArticleAd({ className = "" }: { className?: string }) {
   return (
-    <AdUnit
-      format="fluid"
-      layoutKey="-gw-3+1f-3d+2z"
-      className={`my-8 ${className}`}
-      style={{ display: "block", textAlign: "center" }}
-    />
+    <AdWrapper className={`my-8 ${className}`}>
+      <AdUnit
+        format="fluid"
+        layoutKey="-gw-3+1f-3d+2z"
+        style={{ display: "block", textAlign: "center" }}
+      />
+    </AdWrapper>
   );
 }
 
 // ---- ディスプレイ広告（レスポンシブ） ----
 export function DisplayAd({ className = "" }: { className?: string }) {
   return (
-    <AdUnit
-      format="auto"
-      className={`my-6 ${className}`}
-    />
+    <AdWrapper className={`my-6 ${className}`}>
+      <AdUnit format="auto" />
+    </AdWrapper>
+  );
+}
+
+// ---- セクション間ネイティブ広告（波デザインでサイトに馴染む） ----
+export function NativeAdBreak({ className = "" }: { className?: string }) {
+  if (!ADSENSE_ID) return null;
+  return (
+    <div className={`mx-auto max-w-4xl px-4 py-10 ${className}`}>
+      <div className="flex items-center justify-center gap-3 mb-4">
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-ocean-mid/20 to-transparent" />
+        <Waves className="size-4 text-ocean-mid/30" />
+        <span className="text-[10px] font-medium tracking-widest text-muted-foreground/40">おすすめ</span>
+        <Waves className="size-4 text-ocean-mid/30" />
+        <div className="h-px flex-1 bg-gradient-to-l from-transparent via-ocean-mid/20 to-transparent" />
+      </div>
+      <div className="rounded-2xl border border-border/50 bg-card/60 p-3 sm:p-5 shadow-sm shadow-ocean-deep/[0.03]">
+        <AdUnit format="fluid" layoutKey="-gw-3+1f-3d+2z" style={{ display: "block", textAlign: "center" }} />
+      </div>
+    </div>
   );
 }
 
@@ -94,31 +149,38 @@ export function MultiplexAd({ className = "" }: { className?: string }) {
 
 // ---- アンカー広告（モバイル下部固定） ----
 // AdSense Auto Adsが自動で出すため、手動実装は不要
-// → AdSense管理画面で「アンカー広告」をONにするだけ
+// → AdSense管理画面で「ページ内フォーマット」をONにする
+// → 「オーバーレイ フォーマット」のアンカー広告はOFF推奨（UXが悪い）
 
 // ---- フッター前広告（全ページ共通） ----
 export function PreFooterAd() {
   if (!ADSENSE_ID) return null;
   return (
-    <div className="mx-auto max-w-5xl px-4 py-6">
-      <div className="rounded-xl bg-gray-50 p-4" style={{ minWidth: "300px" }}>
+    <div className="mx-auto max-w-5xl px-4 py-8">
+      <div className="flex items-center justify-center gap-3 mb-3">
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+        <span className="text-[10px] font-medium tracking-widest text-muted-foreground/40 uppercase">おすすめ</span>
+        <div className="h-px flex-1 bg-gradient-to-l from-transparent via-border to-transparent" />
+      </div>
+      <div className="rounded-2xl border border-border/50 bg-card/60 p-4 sm:p-6 shadow-sm shadow-ocean-deep/[0.03]" style={{ minWidth: "300px" }}>
         <MultiplexAd />
       </div>
     </div>
   );
 }
 
-// ---- サイドバー広告（デスクトップのみ、sticky） ----
+// ---- サイドバー広告（デスクトップのみ、スポット詳細sidebar内に配置） ----
 export function SidebarAd({ className = "" }: { className?: string }) {
+  if (!ADSENSE_ID) return null;
   return (
-    <div className={`hidden lg:block ${className}`}>
-      <div className="sticky top-24">
+    <div className={className}>
+      <AdWrapper variant="sidebar" label={false}>
         <AdUnit
           format="vertical"
           className="min-h-[250px]"
           style={{ display: "block", minWidth: "160px" }}
         />
-      </div>
+      </AdWrapper>
     </div>
   );
 }
@@ -139,10 +201,12 @@ export function InFeedAd({ className = "" }: { className?: string }) {
 export function ParallelAds({ className = "" }: { className?: string }) {
   if (!ADSENSE_ID) return null;
   return (
-    <div className={`my-8 grid grid-cols-1 gap-4 md:grid-cols-2 ${className}`}>
-      <AdUnit format="rectangle" style={{ display: "block", width: "100%", height: "250px" }} />
-      <AdUnit format="rectangle" style={{ display: "block", width: "100%", height: "250px" }} />
-    </div>
+    <AdWrapper className={`my-8 ${className}`}>
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <AdUnit format="rectangle" style={{ display: "block", width: "100%", height: "250px" }} />
+        <AdUnit format="rectangle" style={{ display: "block", width: "100%", height: "250px" }} />
+      </div>
+    </AdWrapper>
   );
 }
 
