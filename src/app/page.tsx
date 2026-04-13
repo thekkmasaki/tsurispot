@@ -60,7 +60,7 @@ const OnlineUsersBadge = dynamic(() => import("@/components/online-users-badge")
   loading: () => <div className="inline-flex h-7 w-28 animate-pulse rounded-full bg-white/10" />,
 });
 const NativeAdBreak = dynamic(() => import("@/components/ads/ad-unit").then((m) => m.NativeAdBreak), {
-  ssr: false,
+  loading: () => null,
 });
 
 const spotCount = fishingSpots.length.toLocaleString();
