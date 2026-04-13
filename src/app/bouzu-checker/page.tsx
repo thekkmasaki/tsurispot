@@ -3,6 +3,7 @@ import { Fish } from "lucide-react";
 import Link from "next/link";
 import { ChevronRight } from "lucide-react";
 import { BouzuCheckerClient } from "./bouzu-checker-client";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "ボウズ確率チェッカー｜釣れない対策を事前診断",
@@ -70,6 +71,8 @@ export default function BouzuCheckerPage() {
         </section>
 
         <BouzuCheckerClient />
+
+        <InArticleAd className="my-8" />
 
         {/* ボウズ回避のための導線 */}
         <section className="mx-auto max-w-3xl px-4 pb-12">

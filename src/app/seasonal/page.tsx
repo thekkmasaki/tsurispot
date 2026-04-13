@@ -16,6 +16,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { MONTHS } from "@/lib/data/fishing-methods";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "季節別釣りガイド - 春夏秋冬のおすすめ釣り",
@@ -430,6 +431,8 @@ export default function SeasonalPage() {
           ))}
         </div>
 
+        <InArticleAd className="my-8" />
+
         {/* 月×地域別ガイド */}
         <section className="mt-12">
           <div className="mb-4 flex items-center gap-2">
@@ -496,6 +499,8 @@ export default function SeasonalPage() {
             </table>
           </div>
         </section>
+
+        <InArticleAd className="my-8" />
 
         {/* CTA */}
         <div className="mt-12 rounded-xl border bg-muted/30 p-6">

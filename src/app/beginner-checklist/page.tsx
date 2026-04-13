@@ -17,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { ProductList } from "@/components/affiliate/product-list";
 import { getBeginnerEssentials } from "@/lib/data/products";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 const STORAGE_KEY = "tsurispot-checklist";
 
@@ -481,6 +482,8 @@ function ChecklistPageContent() {
         </p>
       </div>
 
+      <InArticleAd className="my-8" />
+
       {/* おすすめの道具 */}
       <div className="mt-8">
         <ProductList
@@ -491,6 +494,8 @@ function ChecklistPageContent() {
         />
       </div>
 
+
+      <InArticleAd className="my-8" />
 
       {/* Internal links */}
       <div className="mt-8 rounded-xl border bg-muted/30 p-6">

@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { areaGuides } from "@/lib/data/area-guides";
+import { InArticleAd } from "@/components/ads/ad-unit";
 import { fishingSpots } from "@/lib/data/spots";
 
 export const metadata: Metadata = {
@@ -72,6 +73,8 @@ export default function AreaGuidePage() {
             </p>
           </div>
         </div>
+
+        <InArticleAd className="my-8" />
 
         {/* Guide Cards */}
         <div className="mx-auto max-w-7xl px-4 py-10">

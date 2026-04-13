@@ -25,6 +25,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { prefectures, regionGroupOrder } from "@/lib/data/prefectures";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const dynamic = "force-dynamic";
 
@@ -268,6 +269,8 @@ export default function FishingRulesPage() {
             </div>
           </section>
 
+          <InArticleAd className="my-8" />
+
           {/* 4. サイズ制限（リリースサイズ） */}
           <section>
             <div className="mb-4 flex items-center gap-2">
@@ -425,6 +428,8 @@ export default function FishingRulesPage() {
             </div>
           </section>
         </div>
+
+        <InArticleAd className="my-8" />
 
         {/* 都道府県別の釣りルール */}
         <section className="mt-10 sm:mt-14">
