@@ -15,6 +15,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { getAmazonUrl, getRakutenUrl } from "@/lib/affiliate-config";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title:
@@ -557,6 +558,8 @@ export default function GearTackleBoxPage() {
           </div>
         </section>
 
+        <InArticleAd className="my-8" />
+
         {/* --- ランキング --- */}
         <section className="mb-12">
           <h2 className="mb-6 text-xl font-bold sm:text-2xl">
@@ -662,6 +665,8 @@ export default function GearTackleBoxPage() {
             ))}
           </div>
         </section>
+
+        <InArticleAd className="my-8" />
 
         {/* --- FAQ --- */}
         <section className="mb-12">

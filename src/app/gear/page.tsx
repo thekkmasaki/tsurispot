@@ -13,6 +13,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ProductList } from "@/components/affiliate/product-list";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { InArticleAd } from "@/components/ads/ad-unit";
 import {
   products,
   getProductsByCategory,
@@ -214,6 +215,8 @@ export default function GearPage() {
           />
         </div>
 
+        <InArticleAd className="my-8" />
+
         {/* 仕掛け・小物 */}
         <div className="mb-10 sm:mb-14">
           <ProductList
@@ -240,6 +243,8 @@ export default function GearPage() {
             description="安全のためのライフジャケットから、あると便利な小物まで。"
           />
         </div>
+
+        <InArticleAd className="my-8" />
 
         {/* 関連リンク */}
         <div className="rounded-xl border bg-muted/30 p-6">

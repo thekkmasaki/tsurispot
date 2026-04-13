@@ -14,6 +14,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { getAmazonUrl, getRakutenUrl } from "@/lib/affiliate-config";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title:
@@ -600,6 +601,8 @@ export default function GearSabikiPage() {
           </div>
         </section>
 
+        <InArticleAd className="my-8" />
+
         {/* --- セクション2: ランキング --- */}
         <section id="ranking" className="mb-12">
           <h2 className="mb-6 text-xl font-bold sm:text-2xl">
@@ -671,6 +674,8 @@ export default function GearSabikiPage() {
             </div>
           </div>
         </section>
+
+        <InArticleAd className="my-8" />
 
         {/* --- セクション4: 一緒に買いたい --- */}
         <section id="extras" className="mb-12">

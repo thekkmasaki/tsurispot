@@ -9,6 +9,7 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "よくある質問（FAQ） - 釣り初心者のギモンを解決",
@@ -787,6 +788,8 @@ export default function FAQPage() {
             </section>
           ))}
         </div>
+
+        <InArticleAd className="my-8" />
 
         {/* カテゴリ別FAQ */}
         <div className="mt-12 rounded-xl border bg-muted/30 p-6">
