@@ -10,6 +10,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { FishRecipeTabs } from "./fish-recipe-tabs";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 /* ------------------------------------------------------------------ */
 /*  Metadata                                                          */
@@ -1173,6 +1174,8 @@ export default function FishRecipesGuidePage() {
           </SectionCard>
         </div>
 
+        <InArticleAd className="my-8" />
+
         {/* ---- 魚種別レシピ（タブ切り替え） ---- */}
         <div id="recipes" className="mb-8">
           <h2 className="mb-4 text-xl font-bold sm:text-2xl">
@@ -1282,6 +1285,8 @@ export default function FishRecipesGuidePage() {
             </div>
           </SectionCard>
         </div>
+
+        <InArticleAd className="my-8" />
 
         {/* ---- FAQ ---- */}
         <div id="faq" className="mb-8">

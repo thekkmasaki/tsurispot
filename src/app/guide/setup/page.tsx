@@ -7,6 +7,7 @@ import { YouTubeVideoList } from "@/components/youtube-video-card";
 import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import type { YouTubeSearchLink } from "@/types";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 const setupVideos: YouTubeSearchLink[] = [
   {
@@ -962,6 +963,8 @@ export default function SetupGuidePage() {
             <DragAnimationSvg />
           </div>
 
+          <InArticleAd className="my-8" />
+
           {/* 糸の通し方 */}
           <SectionCard title="糸の通し方（ラインの通し方）">
             <ol className="list-none space-y-4">
@@ -1025,6 +1028,8 @@ export default function SetupGuidePage() {
               糸が細くて通しにくい場合は、糸の先端をセロテープで太くすると通しやすくなります。
             </Hint>
           </SectionCard>
+
+          <InArticleAd className="my-8" />
 
           {/* リールの糸巻き方向の注意 */}
           <div id="line-direction" className="scroll-mt-20">

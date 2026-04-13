@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ChevronLeft, Waves, BookOpen, Clock, Sunrise, PauseCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "潮汐の読み方ガイド - 大潮・小潮・潮見表の見方を解説",
@@ -460,6 +461,8 @@ export default function TideGuidePage() {
             </div>
           </SectionCard>
 
+          <InArticleAd className="my-8" />
+
           {/* 潮見表の読み方 */}
           <SectionCard title="潮見表の読み方" icon={BookOpen}>
             <TideChartReadingDiagram />
@@ -665,6 +668,8 @@ export default function TideGuidePage() {
             </Warning>
           </SectionCard>
         </div>
+
+        <InArticleAd className="my-8" />
 
         {/* まとめ */}
         <div className="mt-8 sm:mt-12">

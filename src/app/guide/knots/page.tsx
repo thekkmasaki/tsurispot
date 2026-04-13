@@ -5,6 +5,7 @@ import { ChevronLeft, Play, CheckCircle2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "釣り糸の結び方｜初心者はユニノットだけでOK",
@@ -420,6 +421,8 @@ export default function KnotsGuidePage() {
             </ul>
           </CardContent>
         </Card>
+
+        <InArticleAd className="my-8" />
 
         {/* 参考動画 */}
         <section className="mb-8">

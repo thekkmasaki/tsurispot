@@ -7,6 +7,7 @@ import { YouTubeVideoList } from "@/components/youtube-video-card";
 import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import type { YouTubeSearchLink } from "@/types";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 const castingVideos: YouTubeSearchLink[] = [
   {
@@ -879,6 +880,8 @@ export default function CastingGuidePage() {
             </Hint>
           </SectionCard>
 
+          <InArticleAd className="my-8" />
+
           {/* オーバーヘッドキャスト */}
           <SectionCard title="オーバーヘッドキャスト（基本の投げ方）">
             <p className="mb-4 text-sm text-muted-foreground">
@@ -1011,6 +1014,8 @@ export default function CastingGuidePage() {
 
           {/* 着水点と飛距離の関係 */}
           <CastDistanceDiagram />
+
+          <InArticleAd className="my-8" />
 
           {/* よくある失敗と対策 */}
           <SectionCard title="よくある失敗と対策">
