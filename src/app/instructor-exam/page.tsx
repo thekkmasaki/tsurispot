@@ -10,6 +10,7 @@ import {
   Leaf,
   type LucideIcon,
 } from "lucide-react";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 const baseUrl = "https://tsurispot.com";
 
@@ -401,6 +402,8 @@ export default function InstructorExamPage() {
             全{chapters.reduce((sum, ch) => sum + ch.quizCount, 0)}問収録（今後さらに追加予定）
           </p>
         </section>
+
+        <InArticleAd className="my-8" />
 
         {/* 論文・実技対策 */}
         <section className="mb-10">

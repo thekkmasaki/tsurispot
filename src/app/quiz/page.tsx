@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { BookOpen, Compass, Fish, GraduationCap, Lightbulb, MapPin } from "lucide-react";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { InArticleAd } from "@/components/ads/ad-unit";
 import { QuizCategoryCard } from "@/components/quiz/quiz-category-card";
 import { QUIZ_CATEGORIES } from "@/types/quiz";
 
@@ -220,6 +221,8 @@ export default function QuizListPage() {
               出典: ツリスポ独自データベース（2026年3月時点）。各クイズの問題は釣り場・魚種の実データに基づいて作成しています。
             </p>
           </section>
+
+          <InArticleAd className="my-8" />
 
           {/* インストラクター試験対策リンク */}
           <div className="mt-8 rounded-xl border border-indigo-200 bg-indigo-50 p-5">

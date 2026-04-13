@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { QuizClient } from "./quiz-client";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "釣り用語クイズ｜あなたの釣り知識をテスト！",
@@ -76,6 +77,7 @@ export default function GlossaryQuizPage() {
           </p>
         </div>
         <QuizClient />
+        <InArticleAd className="my-8" />
         <section className="mt-12">
           <h2 className="mb-4 text-lg font-bold text-gray-900">関連コンテンツ</h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">

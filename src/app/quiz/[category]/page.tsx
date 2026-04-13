@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { QuizGame } from "@/components/quiz/quiz-game";
+import { InArticleAd } from "@/components/ads/ad-unit";
 import { QUIZ_CATEGORIES } from "@/types/quiz";
 import { getQuestions, getQuestionsByCategory } from "@/lib/data/quiz-questions";
 
@@ -185,6 +186,8 @@ export default async function QuizCategoryPage({ params }: Props) {
               categoryIcon={cat.icon}
             />
           </div>
+
+          <InArticleAd className="my-8" />
         </div>
       </div>
     </>
