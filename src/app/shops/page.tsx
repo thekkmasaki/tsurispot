@@ -21,6 +21,7 @@ import {
   prefectures,
   regionGroupOrder,
 } from "@/lib/data/prefectures";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 const filteredShops = tackleShops.filter((s) => s.slug !== "sample-premium" && s.slug !== "sample-basic");
 const shopCount = filteredShops.length;
@@ -370,6 +371,8 @@ export default function ShopsListPage() {
             </CardContent>
           </Card>
         </div>
+
+        <InArticleAd className="my-8" />
       </div>
     </>
   );

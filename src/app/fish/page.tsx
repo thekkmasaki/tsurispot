@@ -4,6 +4,7 @@ import { Fish } from "lucide-react";
 import { getFishSpeciesWithSpots } from "@/lib/data";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { FishListClient } from "@/components/fish/fish-list-client";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "魚種図鑑100種以上｜釣りで狙える魚の旬・釣り方・食べ方ガイド",
@@ -142,6 +143,8 @@ function FishListContent() {
 
       {/* クライアントサイドのフィルター＋一覧 */}
       <FishListClient fishSpecies={fishSpecies} />
+
+      <InArticleAd className="my-8" />
     </div>
   );
 }

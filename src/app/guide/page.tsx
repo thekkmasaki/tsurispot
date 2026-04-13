@@ -34,6 +34,7 @@ import { getTopProducts } from "@/lib/data/products";
 import { type LucideIcon } from "lucide-react";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { GuideListFilter } from "@/components/guide/guide-list-filter";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 interface GuideItem {
   href: string;
@@ -459,6 +460,8 @@ export default function GuidePage() {
           <Link href="/spots">スポットを探す</Link>
         </Button>
       </div>
+
+      <InArticleAd className="my-8" />
     </main>
   );
 }

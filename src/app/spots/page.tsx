@@ -4,6 +4,7 @@ import { PlusCircle, ArrowRight } from "lucide-react";
 import { fishingSpots } from "@/lib/data/spots";
 import { SpotListClient } from "@/components/spots/spot-list-client";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 const sc = fishingSpots.length.toLocaleString();
 
@@ -252,6 +253,8 @@ export default async function SpotsPage({
           <Link href="/prefecture" className="font-medium hover:text-primary">全都道府県 →</Link>
         </div>
       </div>
+
+      <InArticleAd className="my-8" />
     </div>
   );
 }

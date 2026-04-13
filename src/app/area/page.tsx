@@ -3,6 +3,7 @@ import { regions } from "@/lib/data/regions";
 import { fishingSpots } from "@/lib/data/spots";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { AreaListFilter } from "@/components/area/area-list-filter";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "全国の釣りエリア一覧 - 都道府県別に釣りスポットを探す",
@@ -135,6 +136,8 @@ export default function AreaListPage() {
       </div>
 
       <AreaListFilter groups={groups} />
+
+      <InArticleAd className="my-8" />
     </div>
   );
 }

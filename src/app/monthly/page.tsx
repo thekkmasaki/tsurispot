@@ -6,6 +6,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { MonthlyHeroImage } from "@/components/monthly-hero-image";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
 import { fishSpecies } from "@/lib/data/fish";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "月別釣りカレンダー｜1月〜12月の釣れる魚・おすすめ釣法一覧【2026年版】",
@@ -391,6 +392,8 @@ export default function MonthlyPage() {
             </div>
           </div>
         </div>
+
+        <InArticleAd className="my-8" />
       </main>
     </>
   );

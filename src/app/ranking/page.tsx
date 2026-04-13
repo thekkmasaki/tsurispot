@@ -3,6 +3,7 @@ import { Trophy } from "lucide-react";
 import { fishingSpots } from "@/lib/data/spots";
 import { RankingClient } from "./ranking-client";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "釣りスポット人気ランキング｜地域別おすすめ釣り場TOP10",
@@ -102,6 +103,8 @@ export default function RankingPage() {
       <div className="container mx-auto max-w-4xl px-4 py-6 sm:py-8">
         <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "人気ランキング" }]} />
         <RankingClient />
+
+        <InArticleAd className="my-8" />
       </div>
     </div>
   );

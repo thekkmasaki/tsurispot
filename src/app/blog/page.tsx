@@ -4,6 +4,7 @@ import { MapPin } from "lucide-react";
 import { BlogListClient } from "@/components/blog/blog-list.client";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import Link from "next/link";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 // ISR: 1時間ごとに再検証
 export const revalidate = 3600;
@@ -98,6 +99,8 @@ export default async function BlogListPage() {
       </div>
 
       <BlogListClient posts={areaPosts} />
+
+      <InArticleAd className="my-8" />
     </div>
   );
 }
