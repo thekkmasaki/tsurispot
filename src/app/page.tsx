@@ -702,6 +702,9 @@ export default async function Home() {
         ) : null;
       })()}
 
+      {/* モバイル広告: おすすめ釣り場後 */}
+      <div className="lg:hidden"><NativeAdBreak /></div>
+
       {/* 人気のエリア */}
       <section className="bg-muted/50 py-8 sm:py-12">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
@@ -756,6 +759,9 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* 広告: エリアセクション後 */}
+      <NativeAdBreak />
 
       {/* 釣り方コンパクトリンク */}
       <section className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8">

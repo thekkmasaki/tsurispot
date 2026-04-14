@@ -256,7 +256,7 @@ export function LazyAd({ className = "", children }: { className?: string; child
           observer.disconnect();
         }
       },
-      { rootMargin: "200px" }
+      { rootMargin: "600px" }
     );
 
     if (containerRef.current) {
@@ -268,7 +268,7 @@ export function LazyAd({ className = "", children }: { className?: string; child
 
   return (
     <div ref={containerRef} className={className}>
-      {isVisible ? (children || <InArticleAd />) : <div className="min-h-[100px]" />}
+      {isVisible ? (children || <InArticleAd />) : <div className="min-h-[250px]" />}
     </div>
   );
 }

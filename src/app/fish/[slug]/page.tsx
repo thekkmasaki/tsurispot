@@ -642,6 +642,11 @@ export default async function FishDetailPage({ params }: PageProps) {
         );
       })()}
 
+      {/* モバイル広告（スポット一覧後） */}
+      <div className="lg:hidden">
+        <LazyAd className="my-6"><InArticleAd /></LazyAd>
+      </div>
+
       {/* 都道府県別リンク */}
       {fish.spots.length > 0 && (() => {
         const prefMap = new Map<string, { prefSlug: string; prefName: string; count: number }>();

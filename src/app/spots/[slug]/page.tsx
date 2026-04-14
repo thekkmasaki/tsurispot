@@ -46,7 +46,7 @@ import { SpotImage } from "@/components/ui/spot-image";
 import { SpotBouzuCard } from "@/components/spots/spot-bouzu-card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
-import { InArticleAd, DisplayAd, LazyAd, SidebarAd } from "@/components/ads/ad-unit";
+import { InArticleAd, DisplayAd, LazyAd, SidebarAd, NativeAdBreak } from "@/components/ads/ad-unit";
 import { FishLikeButton } from "@/components/spots/fish-like-button";
 import { FishingReportSummary } from "@/components/spots/fishing-report-summary";
 import { SpotAffiliateRecommend } from "@/components/spots/spot-affiliate-recommend";
@@ -698,6 +698,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
         <div className="mb-4"><SafetyWarning level="safe" notes={spot.safetyNotes} isKuchikomi={true} /></div>
       )}
 
+      {/* モバイル広告A: ギャラリー・安全警告後 */}
+      <div className="lg:hidden"><InArticleAd className="my-4" /></div>
+
       {/* セクション区切り */}
       <div className="my-6 flex items-center gap-4" aria-hidden="true">
         <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
@@ -841,6 +844,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 </div>
               );
             })()}
+
+            {/* モバイル広告B: エリア釣果傾向後 */}
+            <div className="lg:hidden mt-4">
+              <LazyAd className="my-4"><DisplayAd /></LazyAd>
+            </div>
           </section>
           <section>
             <h3 className="mb-3 text-lg font-bold">混雑予想</h3>
@@ -1545,6 +1553,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
           </section>
         );
       })()}
+
+      {/* モバイル広告C: 関連コラム後 */}
+      <div className="lg:hidden my-6"><NativeAdBreak /></div>
 
       {/* まとめ（GEO最適化：AI引用しやすい要約 — スポット固有サマリー） */}
       {(() => {

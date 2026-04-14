@@ -271,11 +271,26 @@ export default async function BlogPostPage({
         </div>
       </header>
 
-      {/* 記事本文 */}
-      <article
-        className="prose prose-gray max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-h2:mt-10 prose-h2:mb-4 prose-h2:text-xl prose-h2:border-l-4 prose-h2:border-primary prose-h2:pl-3 prose-h3:mt-6 prose-h3:mb-3 prose-h3:text-lg prose-p:leading-relaxed prose-p:text-gray-700 prose-li:text-gray-700 prose-ul:my-4 prose-li:my-1 sm:prose-h2:text-2xl sm:prose-h3:text-xl"
-        dangerouslySetInnerHTML={{ __html: post.content }}
-      />
+      {/* 記事本文（h2で分割し、長い記事には中間広告を挿入） */}
+      {(() => {
+        const proseClass = "prose prose-gray max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-h2:mt-10 prose-h2:mb-4 prose-h2:text-xl prose-h2:border-l-4 prose-h2:border-primary prose-h2:pl-3 prose-h3:mt-6 prose-h3:mb-3 prose-h3:text-lg prose-p:leading-relaxed prose-p:text-gray-700 prose-li:text-gray-700 prose-ul:my-4 prose-li:my-1 sm:prose-h2:text-2xl sm:prose-h3:text-xl";
+        const sections = post.content.split(/(?=<h2[\s>])/);
+        if (sections.length <= 3) {
+          return (
+            <article className={proseClass} dangerouslySetInnerHTML={{ __html: post.content }} />
+          );
+        }
+        const insertAfter = 2;
+        const before = sections.slice(0, insertAfter).join("");
+        const after = sections.slice(insertAfter).join("");
+        return (
+          <>
+            <article className={proseClass} dangerouslySetInnerHTML={{ __html: before }} />
+            <InArticleAd className="my-8" />
+            <article className={proseClass} dangerouslySetInnerHTML={{ __html: after }} />
+          </>
+        );
+      })()}
 
       <InArticleAd className="my-8" />
 
