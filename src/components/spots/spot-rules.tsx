@@ -1,4 +1,4 @@
-import { Check, X, AlertTriangle, Info, Shield, Moon } from "lucide-react";
+import { Check, X, AlertTriangle, Info, Shield } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SpotRules, SPOT_TYPE_LABELS } from "@/types";
