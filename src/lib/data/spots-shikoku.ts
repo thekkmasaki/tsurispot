@@ -172,30 +172,6 @@ export const shikokuSpots: FishingSpot[] = [
       { label: "丸亀港 釣り", searchQuery: "丸亀港 チヌ 釣り", description: "丸亀港での釣り動画" },
     ],
   },
-  {
-    id: "s465", name: "小豆島土庄港", slug: "shodoshima-tonosho-port",
-    description: "瀬戸内海の小豆島・土庄港。離島ならではの魚影の濃さが魅力。アジやメバル、チヌが安定して釣れ、オリーブの島観光と合わせて楽しめる。",
-    latitude: 34.4870, longitude: 134.1820,
-    address: "〒761-4101 香川県土庄町",
-    accessInfo: "高松港からフェリーで約60分。土庄港下船すぐ。",
-    region: region("r30"), spotType: "port", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり",
-    hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/shodoshima-tonosho-port.jpg", images: [], rating: 4.0, reviewCount: 72,
-    catchableFish: [
-      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
-      { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
-    ],
-    bestTimes: btStandard, tackleRecommendations: [],
-    tideAdvice: tideStandard, mazumeInfo: mazumeShikoku,
-    gearGuides: [gearSabiki],
-    safetyLevel: "safe", safetyNotes: ["フェリー時刻に注意", "離島のため釣具は事前準備"],
-    youtubeLinks: [
-      { label: "小豆島 釣り", searchQuery: "小豆島 土庄港 釣り", description: "小豆島での釣り動画" },
-    ],
-  },
-
   // ========================================
   // 徳島県 (4スポット)
   // ========================================

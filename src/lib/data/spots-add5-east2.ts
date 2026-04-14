@@ -786,22 +786,6 @@ export const eastAdd5Spots2: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeNorth,
   },
   {
-    id: "se5089", name: "七ヶ浜花渕浜", slug: "shichigahama-hanabuchihama",
-    description: "仙台市近郊の七ヶ浜町にある護岸。ハゼやカレイの実績が高く、仙台から30分圏内で気軽に海釣りが楽しめるスポット。",
-    latitude: 38.2990, longitude: 141.0630,
-    address: "〒985-0803 宮城県宮城郡七ヶ浜町花渕浜",
-    accessInfo: "JR多賀城駅から車で約15分。三陸自動車道利府塩釜ICから約15分。",
-    region: localRegion("re5071"), spotType: "pier", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
-    hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.5, reviewCount: 0,
-    catchableFish: [
-      { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
-      { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "投げ釣り" },
-    ],
-    bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeNorth,
-  },
-  {
     id: "se5090", name: "雄勝港", slug: "ogatsu-kou",
     description: "石巻市の三陸海岸にある漁港。硯の産地として知られる静かな漁村で、ソイやアイナメの根魚が豊富な穴場スポット。",
     latitude: 38.5280, longitude: 141.4660,

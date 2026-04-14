@@ -945,29 +945,6 @@ export const kyushuSouthSpots: FishingSpot[] = [
     safetyLevel: "caution", safetyNotes: ["離島のため天候が急変しやすい", "玄界灘は波が荒れることがある"],
     youtubeLinks: [{ label: "壱岐 ヒラマサ", searchQuery: "壱岐島 ヒラマサ ショアジギング 長崎", description: "壱岐島でのヒラマサ釣り動画" }],
   },
-  {
-    id: "s1125", name: "対馬市厳原港", slug: "tsushima-izuhara-port",
-    description: "日本最北西端の離島・対馬の中心港。韓国との国境に近い海域は魚種が豊富で、ヒラマサやクロダイの大物が期待できる究極の離島釣り。",
-    latitude: 34.19390, longitude: 129.29150,
-    address: "〒817-0016 長崎県対馬市厳原町東里",
-    accessInfo: "福岡空港から対馬やまねこ空港まで約35分。博多港からフェリーで約4時間45分。",
-    region: region("r32"), spotType: "port", difficulty: "intermediate",
-    isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
-    hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/tsushima-izuhara-port.jpg", images: [], rating: 4.4, reviewCount: 98,
-    catchableFish: [
-      { fish: fish("hiramasa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
-      { fish: fish("mejina"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
-      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
-      { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
-    ],
-    bestTimes: btMorning, tackleRecommendations: [],
-    tideAdvice: tideRock, mazumeInfo: mazumeKyushuSouth,
-    gearGuides: [gearJigging, gearEging],
-    safetyLevel: "caution", safetyNotes: ["離島のため天候急変に注意", "フェリーの運休を考慮した日程計画が必要"],
-    youtubeLinks: [{ label: "対馬 磯釣り", searchQuery: "対馬 ヒラマサ 磯釣り 長崎", description: "対馬での磯釣り動画" }],
-  },
-
   // ========================================
   // 追加: 各県追加スポット
   // ========================================

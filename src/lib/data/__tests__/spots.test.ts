@@ -13,8 +13,8 @@ describe("spots data", () => {
     if (duplicates.length > 0) {
       console.warn(`重複slug ${duplicates.length}件検出: ${[...new Set(duplicates)].slice(0, 5).join(", ")}...`);
     }
-    // 重複は0が理想だが、既存データに重複があるため閾値で管理
-    expect(duplicates.length).toBeLessThan(100);
+    // 重複slug: 0件を維持すること（2026-04-14に全重複解消済み）
+    expect(duplicates.length).toBe(0);
   });
 
   it("should have unique ids", () => {

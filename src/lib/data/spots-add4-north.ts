@@ -2173,27 +2173,6 @@ export const northAdd4Spots: FishingSpot[] = [
   // 福井県（6スポット: sn4095〜sn4100）
   // =========================================
   {
-    id: "sn4095", name: "三国サンセットビーチ", slug: "mikuni-sunset-beach",
-    description: "坂井市三国町の日本海に面した美しいビーチ。東尋坊に近い観光地で、夏のキス釣りが特に人気。サーフからのヒラメやマゴチも実績あり。",
-    latitude: 36.2520, longitude: 136.1370,
-    address: "〒913-0056 福井県坂井市三国町宿・米ケ脇",
-    accessInfo: "えちぜん鉄道三国港駅から徒歩約10分。北陸自動車道金津ICから約25分。",
-    region: localRegion("rn4101"), spotType: "beach", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "ビーチに大駐車場あり（夏季有料）",
-    hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.8, reviewCount: 95,
-    catchableFish: [
-      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
-      { fish: fish("hirame"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
-      { fish: fish("magochi"), monthStart: 6, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ルアー" },
-    ],
-    bestTimes: btMorning, tackleRecommendations: [],
-    tideAdvice: tideSurf, mazumeInfo: mazumeHokuriku,
-    gearGuides: [gearNage, gearLure],
-    safetyLevel: "safe", safetyNotes: ["東尋坊が近い", "夏は海水浴客に注意"],
-    youtubeLinks: [{ label: "三国サンセットビーチ 釣り", searchQuery: "三国サンセットビーチ キス 投げ釣り 福井", description: "三国サンセットビーチでの釣り動画" }],
-  },
-  {
     id: "sn4096", name: "越前港", slug: "echizen-kou",
     description: "越前がにの水揚げで知られる日本海の漁港。越前海岸の磯が隣接し、マダイやグレの磯釣りが盛ん。堤防からのアジ釣りも手軽に楽しめる。",
     latitude: 35.9730, longitude: 135.9440,

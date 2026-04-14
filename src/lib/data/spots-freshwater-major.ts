@@ -397,28 +397,6 @@ export const freshwaterSpotsMajor: FishingSpot[] = [
     safetyLevel: "caution", safetyNotes: ["洗堰の放水による水位変動に注意", "流れが速い区間あり"],
   },
   // ===== 安曇川上流（朽木渓流） =====
-  {
-    id: "fw-413", name: "安曇川上流（朽木渓流）", slug: "adogawa-upper-kutsuki",
-    description: "琵琶湖に注ぐ安曇川の上流部、高島市朽木エリア。アマゴ・イワナの渓流釣りの名所で、清流と深い緑に囲まれた美しい渓谷。夏はアユの友釣りも盛ん。朽木温泉と合わせて楽しめる。",
-    latitude: 35.2358, longitude: 135.8672, address: "〒520-1401 滋賀県高島市朽木市場",
-    accessInfo: "湖西道路志賀ICから約30分。JR安曇川駅から車で約25分。",
-    region: lr("r4040"), spotType: "river", difficulty: "intermediate",
-    isFree: false, feeDetail: "遊漁券（日券）大人2,000円",
-    hasParking: true, parkingDetail: "朽木いきものふれあいの里駐車場（無料）",
-    hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/adogawa-upper-kutsuki.webp", imageAttribution: "Photo: Akeiro Torii / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/adogawa-upper-kutsuki.webp"],
-    rating: 4.2, reviewCount: 89, googleRating: 4.1, googleReviewCount: 34,
-    catchableFish: [
-      { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー・フライ" },
-      { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "エサ釣り" },
-      { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
-    ],
-    bestTimes: [{ label: "朝マヅメ", timeRange: "05:00〜07:30", rating: "best" }, { label: "日中", timeRange: "09:00〜14:00", rating: "good" }],
-    tackleRecommendations: [],
-    tideAdvice: tideFresh,
-    mazumeInfo: { springSunrise: "05:35", springSunset: "18:20", summerSunrise: "04:55", summerSunset: "19:10", autumnSunrise: "05:45", autumnSunset: "17:15", winterSunrise: "07:00", winterSunset: "16:50", tip: "春先のアマゴは餌釣りでブドウ虫が効果的。" },
-    safetyLevel: "caution", safetyNotes: ["増水時は入渓しない", "足場が不安定な箇所あり"],
-  },
   // ===== 遠賀川中流（直方エリア） =====
   {
     id: "fw-414", name: "遠賀川中流（直方エリア）", slug: "ongagawa-nogata",
