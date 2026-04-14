@@ -1,10 +1,12 @@
 import { TackleShop } from "@/types";
 import { shopsChains } from "./shops-chains";
+import { shopsChainsAdd } from "./shops-chains-add";
 import { shopsKanto } from "./shops-kanto";
 import { shopsChubu } from "./shops-chubu";
 import { shopsTohokuHokkaido } from "./shops-tohoku-hokkaido";
 import { shopsChugokuShikoku } from "./shops-chugoku-shikoku";
 import { shopsKyushu } from "./shops-kyushu";
+import { shopsLocalAdd } from "./shops-local-add";
 
 const shopsKansai: TackleShop[] = [
   {
@@ -2874,11 +2876,13 @@ const shopsKansai: TackleShop[] = [
 export const tackleShops: TackleShop[] = [
   ...shopsKansai,
   ...shopsChains,
+  ...shopsChainsAdd,
   ...shopsKanto,
   ...shopsChubu,
   ...shopsTohokuHokkaido,
   ...shopsChugokuShikoku,
   ...shopsKyushu,
+  ...shopsLocalAdd,
 ];
 
 export function getShopBySlug(slug: string): TackleShop | undefined {
