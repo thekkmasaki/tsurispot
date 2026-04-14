@@ -1,4 +1,4 @@
-import { Check, X, AlertTriangle, Info, Shield } from "lucide-react";
+import { Check, X, AlertTriangle, Info, Shield, Moon } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { SpotRules, SPOT_TYPE_LABELS } from "@/types";
@@ -26,6 +26,7 @@ function getDefaultRules(spotType: string): {
           { label: "投げ釣り", value: "partial", description: "場所によって禁止されていることがあります" },
           { label: "ルアー釣り", value: true, description: "ルアーやワームを使った釣りができます" },
           { label: "コマセ（撒き餌）", value: "partial", description: "禁止されている漁港もあるため現地で確認してください" },
+          { label: "夜釣り", value: "partial", description: "漁港によっては夜間立入禁止の場合があります" },
         ],
         licenseRequired: false,
       };
@@ -35,6 +36,7 @@ function getDefaultRules(spotType: string): {
           { label: "投げ釣り", value: true, description: "振りかぶって遠くに投げる釣り方ができます" },
           { label: "ルアー釣り", value: true, description: "ルアーやワームを使った釣りができます" },
           { label: "コマセ（撒き餌）", value: true, description: "撒き餌を使った釣りができます" },
+          { label: "夜釣り", value: true, description: "夜間も釣りができます（足元注意）" },
         ],
         licenseRequired: false,
       };
@@ -44,6 +46,7 @@ function getDefaultRules(spotType: string): {
           { label: "投げ釣り", value: true, description: "振りかぶって遠くに投げる釣り方ができます" },
           { label: "ルアー釣り", value: true, description: "ルアーやワームを使った釣りができます" },
           { label: "コマセ（撒き餌）", value: true, description: "撒き餌を使った釣りができます" },
+          { label: "夜釣り", value: "partial", description: "磯場は夜間の足場が危険なため十分注意してください" },
         ],
         licenseRequired: false,
       };
@@ -53,6 +56,7 @@ function getDefaultRules(spotType: string): {
           { label: "投げ釣り", value: true, description: "振りかぶって遠くに投げる釣り方ができます" },
           { label: "ルアー釣り", value: true, description: "ルアーやワームを使った釣りができます" },
           { label: "コマセ（撒き餌）", value: false, description: "河川ではコマセが禁止されている場所が多いです" },
+          { label: "夜釣り", value: "partial", description: "河川によって夜間の釣りが制限されていることがあります" },
         ],
         licenseRequired: "maybe",
       };
@@ -62,6 +66,7 @@ function getDefaultRules(spotType: string): {
           { label: "投げ釣り", value: false, description: "桟橋では投げ釣り禁止のことが多いです" },
           { label: "ルアー釣り", value: "partial", description: "軽めのルアーのみ許可されていることがあります" },
           { label: "コマセ（撒き餌）", value: false, description: "桟橋ではコマセ禁止のことが多いです" },
+          { label: "夜釣り", value: false, description: "管理施設は営業時間外の利用ができないことが多いです" },
         ],
         licenseRequired: false,
       };
@@ -71,6 +76,7 @@ function getDefaultRules(spotType: string): {
           { label: "投げ釣り", value: "partial", description: "場所によって禁止されていることがあります" },
           { label: "ルアー釣り", value: true, description: "ルアーやワームを使った釣りができます" },
           { label: "コマセ（撒き餌）", value: "partial", description: "禁止されている堤防もあるため現地で確認してください" },
+          { label: "夜釣り", value: "partial", description: "堤防によって夜間の立入が制限されていることがあります" },
         ],
         licenseRequired: false,
       };
@@ -80,6 +86,7 @@ function getDefaultRules(spotType: string): {
           { label: "投げ釣り", value: "partial", description: "現地の案内をご確認ください" },
           { label: "ルアー釣り", value: "partial", description: "現地の案内をご確認ください" },
           { label: "コマセ（撒き餌）", value: "partial", description: "現地の案内をご確認ください" },
+          { label: "夜釣り", value: "partial", description: "現地の案内をご確認ください" },
         ],
         licenseRequired: false,
       };
@@ -146,6 +153,16 @@ export function SpotRulesCard({ rules, spotType, spotName }: SpotRulesCardProps)
           : "このスポットではコマセ（撒き餌）が禁止されています",
       },
     ];
+    // 夜釣り情報が定義されている場合のみ表示
+    if (rules.nightFishing !== undefined) {
+      ruleItems.push({
+        label: "夜釣り",
+        value: rules.nightFishing,
+        description: rules.nightFishing
+          ? "夜間も釣りができます"
+          : "このスポットでは夜間の釣りが禁止されています",
+      });
+    }
     showLicenseWarning = rules.fishingLicenseRequired;
     licenseLabel = rules.fishingLicenseRequired
       ? "遊漁券が必要です"

@@ -101,6 +101,7 @@ export interface SpotRules {
   castingAllowed: boolean;
   lureAllowed: boolean;
   chumAllowed: boolean;
+  nightFishing?: boolean;
   fishingLicenseRequired: boolean;
   maxRods?: number;
   minKeepSize?: string;
