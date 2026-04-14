@@ -1493,7 +1493,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
     tideAdvice: tideStandard, mazumeInfo: mazumeKanto,
     gearGuides: [gearSabiki, gearRock, gearMebaring],
     safetyLevel: "safe", safetyNotes: ["護岸に安全壁あり", "24時間利用可能・夜間照明あり", "投げ釣り禁止"],
-    rules: { castingAllowed: false, lureAllowed: false, chumAllowed: true, fishingLicenseRequired: false, otherRules: ["投げ釣り全面禁止（釣竿を振る行為そのものが禁止）", "ペット放し飼い禁止", "喫煙禁止"] },
+    rules: { castingAllowed: false, lureAllowed: false, chumAllowed: true, nightFishing: true, fishingLicenseRequired: false, otherRules: ["投げ釣り全面禁止（釣竿を振る行為そのものが禁止）", "ペット放し飼い禁止", "喫煙禁止"] },
     youtubeLinks: [{ label: "金沢水際線緑地 釣り", searchQuery: "金沢水際線緑地 福浦岸壁 サビキ 根魚 釣り", description: "金沢水際線緑地での釣り動画" }],
   },
   {
@@ -1519,7 +1519,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
     tideAdvice: tideStandard, mazumeInfo: mazumeKanto,
     gearGuides: [gearSabiki, gearChoinage, gearUki],
     safetyLevel: "safe", safetyNotes: ["砂浜から釣りが可能", "トイレ完備", "駐車場大規模"],
-    rules: { castingAllowed: false, lureAllowed: true, chumAllowed: true, fishingLicenseRequired: false, otherRules: ["投げ釣り禁止（危険防止のため）", "公園区域外の海域で釣り可能"] },
+    rules: { castingAllowed: false, lureAllowed: true, chumAllowed: true, nightFishing: false, fishingLicenseRequired: false, otherRules: ["投げ釣り禁止（危険防止のため）", "公園区域外の海域で釣り可能"] },
     youtubeLinks: [{ label: "海の公園 釣り", searchQuery: "海の公園 横浜 金沢区 釣り サビキ メバル", description: "海の公園での釣り動画" }],
   },
   {
