@@ -64,6 +64,7 @@ import { eastAdd5Spots3 } from "./spots-add5-east3";
 import { centralAdd5Spots } from "./spots-add5-central";
 import { westAdd5Spots } from "./spots-add5-west";
 import { tokyoOsakaBaySpots } from "./spots-tokyo-osaka-bay";
+import { spotRulesBatch } from "./spots-rules-batch";
 
 function fish(slug: string): FishSpecies {
   const f = getFishBySlug(slug);
@@ -3100,7 +3101,19 @@ function deduplicateSpots(spots: FishingSpot[]): FishingSpot[] {
 
 const _allSpots: FishingSpot[] = [..._baseSpots, ...additionalSpots, ...osakaKinkiSpots, ...extraSpots, ...sagamiMiuraSpots, ...sagamiShonanSpots, ...sagamiIzuSpots, ...tohokuSpots, ...hokurikuSpots, ...shikokuSpots, ...kyushuSouthSpots, ...okinawaSpots, ...saninSpots, ...tokaiDetailSpots, ...kyushuChugokuDetailSpots, ...kantoDetailSpots, ...kansaiDetailSpots, ...hokkaidoTohokuDetailSpots, ...hyogoDetailSpots, ...southKyushuDetailSpots, ...chibaShizuokaDetailSpots, ...wakayamaMieNiigataSpots, ...aichiFukuokaHiroshimaSpots, ...akashiHarimaSpots, ...freshwaterSpots, ...freshwaterSpotsTohoku, ...freshwaterSpotsWest, ...freshwaterSpotsKantoAdd, ...freshwaterSpotsChubuAdd, ...freshwaterSpotsWestAdd, ...freshwaterSpotsKyoto, ...freshwaterSpotsTohokuAdd, ...freshwaterSpotsChubuKansaiAdd, ...freshwaterSpotsLowland, ...freshwaterSpotsLowland2, ...kinkiChugokuShikokuAddSpots, ...hokkaidoTohokuAdd2Spots, ...chugokuShikokuKyushuAdd2Spots, ...kantoKoshinetsuAdd2Spots, ...chubuKinkiAdd2Spots, ...chubuKinkiAdd3Spots, ...chugokuKyushuOkinawaAdd3Spots, ...hokkaidoTohokuHokurikuAdd3Spots, ...kantoKoshinetsuAdd3Spots, ...freshwaterSpotsMajor, ...expandKyushuSpots, ...expandNorthSpots, ...expandWestSpots, ...expandCentralSpots, ...kitakinkiSpots, ...northAdd4Spots, ...kantoAdd4Spots, ...chubuKinkiAdd4Spots, ...chugokuShikokuAdd4Spots, ...kyushuOkinawaAdd4Spots, ...kobeKakogawaAddSpots, ...himejiHarimaDetailSpots, ...awajiDetailSpots, ...eastAdd5Spots, ...eastAdd5Spots2, ...eastAdd5Spots3, ...centralAdd5Spots, ...westAdd5Spots, ...tokyoOsakaBaySpots];
 
-export const fishingSpots: FishingSpot[] = deduplicateSpots(_allSpots);
+// ルールデータの一括適用（既にrulesが設定されているスポットは上書きしない）
+function applyBatchRules(spots: FishingSpot[]): FishingSpot[] {
+  return spots.map((spot) => {
+    if (spot.rules) return spot; // 既にルールがある場合はスキップ
+    const batchRules = spotRulesBatch[spot.slug];
+    if (batchRules) {
+      return { ...spot, rules: batchRules };
+    }
+    return spot;
+  });
+}
+
+export const fishingSpots: FishingSpot[] = applyBatchRules(deduplicateSpots(_allSpots));
 // Debug: dedup removed (_allSpots.length - fishingSpots.length) duplicate spots
 
 export function getSpotBySlug(slug: string): FishingSpot | undefined {
