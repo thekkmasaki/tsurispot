@@ -6,9 +6,9 @@ import { InArticleAd } from "@/components/ads/ad-unit";
 const baseUrl = "https://tsurispot.com";
 
 export const metadata: Metadata = {
-  title: "論文対策 | 公認釣りインストラクター試験対策",
+  title: "論文対策・頻出テーマ5選｜釣りインストラクター試験【800字の書き方】",
   description:
-    "公認釣りインストラクター試験の論文対策。頻出テーマ5選、800字論文の構成フレームワーク、テーマ別のポイント整理。",
+    "釣りインストラクター試験の論文対策を徹底解説。頻出テーマ5選と800字論文の構成フレームワーク、テーマ別のポイント整理で合格答案が書ける。",
   alternates: {
     canonical: `${baseUrl}/instructor-exam/essay`,
   },

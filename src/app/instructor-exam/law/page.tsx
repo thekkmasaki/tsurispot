@@ -7,9 +7,9 @@ import { InArticleAd } from "@/components/ads/ad-unit";
 const baseUrl = "https://tsurispot.com";
 
 export const metadata: Metadata = {
-  title: "第1章 漁業関連法規 | 公認釣りインストラクター試験対策",
+  title: "漁業法・漁業権まとめ｜釣りインストラクター試験【第1章・クイズ50問】",
   description:
-    "公認釣りインストラクター試験対策 第1章。漁業法、漁業権の3種類、都道府県漁業調整規則、遊漁船業法、水産資源保護法、罰則を体系的に解説。章末確認クイズ50問付き。",
+    "釣りインストラクター試験の頻出分野「漁業関連法規」を徹底解説。漁業法、漁業権の3種類（共同・区画・定置）、遊漁船業法、水産資源保護法、罰則を体系的にまとめ。確認クイズ50問で合格力をチェック。",
   alternates: {
     canonical: `${baseUrl}/instructor-exam/law`,
   },
@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     description: "漁業法・漁業権・遊漁船業法・水産資源保護法を体系的に解説。確認クイズ50問付き。",
     images: ["https://tsurispot.com/api/og?title=漁業関連法規&emoji=📝"],
   },
-  keywords: ["漁業法", "漁業権", "遊漁船業法", "水産資源保護法", "釣りインストラクター", "試験対策"],
+  keywords: ["漁業法 わかりやすく", "漁業権 種類", "遊漁船業法", "水産資源保護法", "釣りインストラクター 試験 漁業法", "釣り 法律"],
 };
 
 /* ============================================================

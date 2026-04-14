@@ -7,9 +7,9 @@ import { InArticleAd } from "@/components/ads/ad-unit";
 const baseUrl = "https://tsurispot.com";
 
 export const metadata: Metadata = {
-  title: "第2章 気象海象と安全対策 | 公認釣りインストラクター試験対策",
+  title: "気象・安全対策まとめ｜釣りインストラクター試験【第2章・クイズ40問】",
   description:
-    "公認釣りインストラクター試験対策 第2章。天気図の読み方、潮汐・潮流、波浪判断、落水事故対処、落雷・熱中症対策、救命胴衣の種類を体系的に解説。確認クイズ40問付き。",
+    "釣りインストラクター試験「気象海象と安全対策」を徹底解説。天気図の読み方、潮汐・潮流、波浪判断、落水事故の対処法、救命胴衣の種類を体系的にまとめ。確認クイズ40問で理解度チェック。",
   alternates: {
     canonical: `${baseUrl}/instructor-exam/safety`,
   },

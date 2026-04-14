@@ -836,6 +836,23 @@ export default function ForBeginnersPage() {
             </Card>
           </section>
 
+          {/* 釣りインストラクター試験への誘導 */}
+          <section className="rounded-xl border border-amber-200 bg-amber-50/50 p-6">
+            <div className="flex items-start gap-3">
+              <span className="mt-0.5 text-2xl">🏆</span>
+              <div>
+                <h2 className="text-base font-bold text-amber-900">釣りをもっと極めたい方へ</h2>
+                <p className="mt-1 text-sm text-amber-800">
+                  全釣り協が認定する「公認釣りインストラクター」の資格取得を目指しませんか？ツリスポでは無料の試験対策ガイド（全7章・クイズ290問以上）を公開中です。
+                </p>
+                <Link href="/instructor-exam" className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-amber-700 hover:text-amber-900">
+                  釣りインストラクター試験対策ガイドを見る
+                  <ChevronRight className="size-4" />
+                </Link>
+              </div>
+            </div>
+          </section>
+
           {/* セクション8: CTA */}
           <section className="rounded-2xl bg-gradient-to-br from-sky-500 to-blue-600 p-8 text-center text-white sm:p-12">
             <Fish className="mx-auto mb-4 size-12 text-sky-200" />

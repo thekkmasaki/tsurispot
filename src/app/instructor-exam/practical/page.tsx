@@ -6,9 +6,9 @@ import { InArticleAd } from "@/components/ads/ad-unit";
 const baseUrl = "https://tsurispot.com";
 
 export const metadata: Metadata = {
-  title: "実技対策 | 公認釣りインストラクター試験対策",
+  title: "実技対策・減点ポイント解説｜釣りインストラクター試験【合格のコツ】",
   description:
-    "公認釣りインストラクター試験の実技対策。キャスティング、結び方、仕掛け作りの手順と減点ポイントを解説。",
+    "釣りインストラクター試験の実技対策を徹底解説。キャスティングの基本フォーム、結び方（ノット）、仕掛け作りの手順と減点ポイントを把握して合格を目指そう。",
   alternates: {
     canonical: `${baseUrl}/instructor-exam/practical`,
   },

@@ -464,6 +464,18 @@ export default function FishingRulesPage() {
           </div>
         </section>
 
+        {/* インストラクター試験誘導 */}
+        <div className="mt-10 rounded-xl border border-blue-200 bg-blue-50/50 p-5 sm:mt-14">
+          <p className="text-sm font-bold text-blue-900">漁業法・釣りマナーをもっと深く学びたい方へ</p>
+          <p className="mt-1 text-sm text-blue-800">
+            全釣り協認定「公認釣りインストラクター」の試験対策ガイドでは、漁業法・遊漁船業法・釣りマナーなどを体系的に学べます。確認クイズ290問以上で無料。
+          </p>
+          <Link href="/instructor-exam" className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-blue-700 hover:text-blue-900">
+            釣りインストラクター試験対策ガイド
+            <ChevronRight className="size-4" />
+          </Link>
+        </div>
+
         {/* CTA */}
         <div className="mt-10 text-center sm:mt-14">
           <p className="mb-4 text-base font-medium sm:text-lg">

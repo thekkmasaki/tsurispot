@@ -7,9 +7,9 @@ import { InArticleAd } from "@/components/ads/ad-unit";
 const baseUrl = "https://tsurispot.com";
 
 export const metadata: Metadata = {
-  title: "第5章 釣り具の知識 | 公認釣りインストラクター試験対策",
+  title: "釣り具の知識まとめ｜釣りインストラクター試験【第5章・クイズ40問】",
   description:
-    "公認釣りインストラクター試験対策 第5章。釣りの六物（竿・糸・針・浮き・重り・餌）、ロッド・リール・ラインの種類と特性、針の部位名称、仕掛けの基礎を体系的に解説。章末確認クイズ40問付き。",
+    "釣りインストラクター試験「釣り具の知識」を徹底解説。釣りの六物（竿・糸・針・浮き・重り・餌）、ロッド・リール・ラインの種類、針の部位名称、仕掛けの基礎を体系的にまとめ。確認クイズ40問付き。",
   alternates: {
     canonical: `${baseUrl}/instructor-exam/tackle`,
   },

@@ -7,9 +7,9 @@ import { InArticleAd } from "@/components/ads/ad-unit";
 const baseUrl = "https://tsurispot.com";
 
 export const metadata: Metadata = {
-  title: "第4章 釣りの文化史 | 公認釣りインストラクター試験対策",
+  title: "釣りの文化史まとめ｜釣りインストラクター試験【第4章・クイズ40問】",
   description:
-    "公認釣りインストラクター試験対策 第4章。日本の釣り文化の起源から江戸時代の釣り文化、和竿の伝統技法、テンカラ釣り、釣り文学の名作まで体系的に解説。章末確認クイズ40問付き。",
+    "釣りインストラクター試験「釣りの文化史」を徹底解説。日本の釣り文化の起源、江戸時代の何羨録、和竿の伝統技法、テンカラ釣り、釣り文学の名作を体系的にまとめ。確認クイズ40問付き。",
   alternates: {
     canonical: `${baseUrl}/instructor-exam/history`,
   },

@@ -7,9 +7,9 @@ import { InArticleAd } from "@/components/ads/ad-unit";
 const baseUrl = "https://tsurispot.com";
 
 export const metadata: Metadata = {
-  title: "第7章 水域の自然環境知識 | 公認釣りインストラクター試験対策",
+  title: "水域の自然環境まとめ｜釣りインストラクター試験【第7章・クイズ40問】",
   description:
-    "公認釣りインストラクター試験対策 第7章。魚類の生態と分類、水温と魚の行動、プランクトンと食物連鎖、潮流・水流、水質環境と人間活動の影響を体系的に解説。章末確認クイズ40問付き。",
+    "釣りインストラクター試験「水域の自然環境知識」を徹底解説。魚類の生態と分類、水温と魚の行動、プランクトンと食物連鎖、潮流・水流、水質環境を体系的にまとめ。確認クイズ40問付き。",
   alternates: {
     canonical: `${baseUrl}/instructor-exam/environment`,
   },

@@ -7,9 +7,9 @@ import { InArticleAd } from "@/components/ads/ad-unit";
 const baseUrl = "https://tsurispot.com";
 
 export const metadata: Metadata = {
-  title: "第3章 釣りマナーと指導法 | 公認釣りインストラクター試験対策",
+  title: "釣りマナー・指導法まとめ｜釣りインストラクター試験【第3章・クイズ40問】",
   description:
-    "公認釣りインストラクター試験対策 第3章。先行者優先の原則、ゴミの持ち帰り、漁業者との共存、初心者への指導法、JOFI地域機構での活動を解説。確認クイズ40問付き。",
+    "釣りインストラクター試験「釣りマナーと指導法」を徹底解説。先行者優先の原則、ゴミの持ち帰り、漁業者との共存、初心者への指導法、JOFI活動を体系的にまとめ。確認クイズ40問付き。",
   alternates: {
     canonical: `${baseUrl}/instructor-exam/manners`,
   },

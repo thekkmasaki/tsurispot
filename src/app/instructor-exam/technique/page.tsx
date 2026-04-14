@@ -7,9 +7,9 @@ import { InArticleAd } from "@/components/ads/ad-unit";
 const baseUrl = "https://tsurispot.com";
 
 export const metadata: Metadata = {
-  title: "第6章 釣り技術と知識 | 公認釣りインストラクター試験対策",
+  title: "釣り技術まとめ｜釣りインストラクター試験【第6章・クイズ40問】",
   description:
-    "公認釣りインストラクター試験対策 第6章。キャスティング、アタリとアワセ、ランディング、魚の締め方、釣行計画を体系的に解説。章末確認クイズ40問付き。",
+    "釣りインストラクター試験「釣り技術と知識」を徹底解説。キャスティング、アタリとアワセ、ランディング、魚の締め方、釣行計画の立て方を体系的にまとめ。確認クイズ40問付き。",
   alternates: {
     canonical: `${baseUrl}/instructor-exam/technique`,
   },
