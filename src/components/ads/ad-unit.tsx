@@ -38,34 +38,54 @@ export function AdUnit({
   style,
   responsive = true,
 }: AdUnitProps) {
-  const adRef = useRef<HTMLModElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const pushed = useRef(false);
 
   useEffect(() => {
-    if (!ADSENSE_ID) return;
-    if (pushed.current) return;
-    try {
-      (window.adsbygoogle = window.adsbygoogle || []).push({});
-      pushed.current = true;
-    } catch {
-      // AdSense not loaded
-    }
+    if (!ADSENSE_ID || pushed.current) return;
+
+    const el = containerRef.current;
+    if (!el) return;
+
+    const tryPush = () => {
+      if (pushed.current) return true;
+      if (el.offsetWidth > 0) {
+        try {
+          (window.adsbygoogle = window.adsbygoogle || []).push({});
+          pushed.current = true;
+        } catch {
+          // AdSense not loaded
+        }
+        return true;
+      }
+      return false;
+    };
+
+    // 即座に幅があれば実行
+    if (tryPush()) return;
+
+    // 幅0の場合はResizeObserverで待つ
+    const observer = new ResizeObserver(() => {
+      if (tryPush()) observer.disconnect();
+    });
+    observer.observe(el);
+
+    return () => observer.disconnect();
   }, []);
 
   if (!ADSENSE_ID) return null;
 
   return (
-    <div className={`ad-container flex justify-center ${className}`}>
+    <div ref={containerRef} className={`ad-container w-full ${className}`}>
       <ins
         className="adsbygoogle"
-        style={style || { display: "block" }}
+        style={style || { display: "block", width: "100%" }}
         data-ad-client={ADSENSE_ID}
         data-ad-slot={slot}
         data-ad-format={format}
         {...(layout && { "data-ad-layout": layout })}
         {...(layoutKey && { "data-ad-layout-key": layoutKey })}
         {...(responsive && { "data-full-width-responsive": "true" })}
-        ref={adRef}
       />
     </div>
   );

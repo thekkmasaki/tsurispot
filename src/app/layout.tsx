@@ -37,13 +37,17 @@ const zenMaruGothic = Zen_Maru_Gothic({
 export const metadata: Metadata = {
   metadataBase: new URL("https://tsurispot.com"),
   title: {
-    default: "ツリスポ - 釣りスポット総合情報サイト",
-    template: "%s | ツリスポ",
+    default: "ツリスポ（つりすぽ）- 近くの釣りスポット検索",
+    template: "%s | ツリスポ（つりすぽ）",
   },
   description:
-    "地図で直感的に釣りスポットを探せる総合情報サイト。潮汐・水温・風速予報から今釣れる魚・混雑予想・航空写真まで、釣りに必要な情報をすべて掲載。",
+    "近くの釣りスポットを地図で直感的に探せる総合情報サイト「つりすぽ」。潮汐・水温・風速予報から今釣れる魚・混雑予想・航空写真まで、釣りに必要な情報をすべて掲載。",
   keywords: [
+    "ツリスポ",
+    "つりすぽ",
     "釣りスポット",
+    "近く 釣りスポット",
+    "釣りスポット 近く",
     "釣り場",
     "近くの釣り場",
     "近く 釣り場所",
@@ -77,8 +81,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@tsurispot_jp",
-    title: "ツリスポ - 釣りスポット総合情報サイト",
-    description: `近くの釣り場を地図で簡単検索。全国${SPOT_COUNT}箇所以上の釣りスポットの潮汐・水温・風速予報・混雑予想を網羅。`,
+    title: "ツリスポ（つりすぽ）- 近くの釣りスポット検索",
+    description: `近くの釣りスポットを地図で簡単検索。全国${SPOT_COUNT}箇所以上の釣り場の潮汐・水温・風速予報・混雑予想を網羅。`,
   },
   robots: {
     index: true,

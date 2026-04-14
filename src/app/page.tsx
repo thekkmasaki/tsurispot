@@ -70,12 +70,12 @@ const fishCount = fishSpecies.length;
 export const revalidate = 3600;
 
 export const metadata: Metadata = {
-  title: "ツリスポ - 近くの釣り場が見つかる釣りスポット検索",
-  description: `全国${spotCount}箇所以上の釣りスポットと${fishCount}種以上の魚種図鑑を無料で検索。堤防・漁港・磯の海釣りから渓流・湖の川釣りまで網羅。潮汐・水温・風速予報・混雑予想・今釣れる魚・航空写真が一目でわかる。`,
+  title: "ツリスポ（つりすぽ）- 近くの釣りスポット検索｜釣り場が地図で見つかる",
+  description: `近くの釣りスポットを地図で簡単検索。全国${spotCount}箇所以上の釣り場と${fishCount}種以上の魚種図鑑を無料で掲載。堤防・漁港・磯の海釣りから渓流・湖の川釣りまで網羅。潮汐・水温・風速予報・混雑予想・今釣れる魚が一目でわかる。つりすぽで最高の1匹に出会おう。`,
   openGraph: {
-    title: "ツリスポ - 近くの釣り場が見つかる釣りスポット検索",
+    title: "ツリスポ（つりすぽ）- 近くの釣りスポットが地図で見つかる",
     description:
-      "近くの釣り場を地図で簡単検索。潮汐・水温・風速予報から混雑予想まで、釣りに必要な情報をすべて網羅。",
+      "近くの釣りスポットを地図で簡単検索。潮汐・水温・風速予報から混雑予想まで、釣りに必要な情報をすべて網羅。",
     type: "website",
     url: "https://tsurispot.com",
     siteName: "ツリスポ",
@@ -92,7 +92,7 @@ export const metadata: Metadata = {
 const homeSpeakableJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: "ツリスポ - 近くの釣り場・釣りスポット検索",
+  name: "ツリスポ（つりすぽ）- 近くの釣りスポット検索",
   url: "https://tsurispot.com",
   speakable: {
     "@type": "SpeakableSpecification",
@@ -282,9 +282,9 @@ export default async function Home() {
             </div>
 
             <h1 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-white text-balance font-[family-name:var(--font-zen-maru)] drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] sm:mb-4 sm:text-4xl lg:text-5xl">
-              初心者も安心の
+              近くの釣りスポットが
               <br className="sm:hidden" />
-              釣り場探し。
+              すぐ見つかる。
             </h1>
 
             <p className="hero-description mb-4 max-w-lg text-sm text-blue-100 sm:mb-5 sm:text-lg">
