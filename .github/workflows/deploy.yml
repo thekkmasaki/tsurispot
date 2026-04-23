@@ -3,6 +3,11 @@ name: Deploy to App Runner
 on:
   push:
     branches: [master]
+    paths-ignore:
+      - '**/*.md'
+      - 'docs/**'
+      - '.company/**'
+      - 'memory/**'
 
 concurrency:
   group: deploy-apprunner
@@ -50,7 +55,6 @@ jobs:
       - name: Build and push Docker image
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
-          IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build \
             --build-arg NEXT_PUBLIC_GA_ID=${{ secrets.NEXT_PUBLIC_GA_ID }} \
@@ -59,10 +63,8 @@ jobs:
             --build-arg MICROCMS_SERVICE_DOMAIN=${{ secrets.MICROCMS_SERVICE_DOMAIN }} \
             --build-arg MICROCMS_API_KEY=${{ secrets.MICROCMS_API_KEY }} \
             -t $ECR_REGISTRY/$ECR_REPOSITORY:latest \
-            -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
             .
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: Wait for App Runner to be RUNNING
         run: |
