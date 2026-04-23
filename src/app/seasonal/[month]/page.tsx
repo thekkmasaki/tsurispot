@@ -21,6 +21,7 @@ import { fishSpecies } from "@/lib/data/fish";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { seasons, seasonSlugs, getSeasonBySlug } from "@/lib/data/seasonal-data";
 import { SeasonalSeasonPage } from "@/components/seasonal-season-page";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 interface PageProps {
   params: Promise<{ month: string }>;
@@ -325,6 +326,9 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
             </Link>
           </p>
         </section>
+
+        {/* 広告: セクション間 */}
+        <InArticleAd className="my-6" />
 
         {/* おすすめスポット */}
         <section id="spots" className="mb-8 sm:mb-10">

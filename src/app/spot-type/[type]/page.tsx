@@ -11,6 +11,7 @@ import { prefectures } from "@/lib/data/prefectures";
 import { regionGroupOrder } from "@/lib/data/prefectures";
 import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import type { FishingSpot } from "@/types";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 type PageProps = {
   params: Promise<{ type: string }>;
@@ -268,6 +269,9 @@ export default async function SpotTypePage({ params }: PageProps) {
           </Card>
         </div>
       </section>
+
+      {/* 広告: セクション間 */}
+      <InArticleAd className="my-6" />
 
       {/* 都道府県別一覧 */}
       <section className="mb-8 sm:mb-10">

@@ -10,6 +10,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import type { FishingSpot } from "@/types";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 type PageProps = {
   params: Promise<{ type: string; prefecture: string }>;
@@ -366,6 +367,9 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
           )}
         </div>
       </section>
+
+      {/* 広告: セクション間 */}
+      <InArticleAd className="my-6" />
 
       {/* スポット一覧 */}
       <section className="mb-8 sm:mb-10">

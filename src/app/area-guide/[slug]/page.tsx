@@ -20,6 +20,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 import { getPrefectureByName } from "@/lib/data/prefectures";
 import { DIFFICULTY_LABELS } from "@/types";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 // エリアガイドの魚名 → fishSpecies の名前へのマッピング（表記揺れ対応）
 const FISH_NAME_ALIASES: Record<string, string> = {
@@ -381,6 +382,8 @@ export default async function AreaGuideDetailPage({
             )}
           </section>
 
+          <InArticleAd />
+
           {/* レベル別おすすめ */}
           <section>
             <h2 className="mb-4 text-xl font-bold flex items-center gap-2">
@@ -556,6 +559,8 @@ export default async function AreaGuideDetailPage({
               </CardContent>
             </Card>
           </section>
+
+          <InArticleAd />
 
           {/* エリア固有のTips */}
           <section>

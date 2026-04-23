@@ -21,6 +21,7 @@ import { YouTubeVideoList } from "@/components/youtube-video-card";
 import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { getVideosForMethods } from "@/lib/data/youtube-videos";
 import { SpotCard } from "@/components/spots/spot-card";
+import { InArticleAd } from "@/components/ads/ad-unit";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 import type { YouTubeSearchLink, FishingSpot } from "@/types";
@@ -822,6 +823,8 @@ export default async function MethodDetailPage({ params }: PageProps) {
         </Card>
       </section>
 
+      <InArticleAd />
+
       {/* 釣果アップのコツ */}
       <section className="mb-6 sm:mb-8">
         <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:mb-4 sm:text-lg">
@@ -896,6 +899,8 @@ export default async function MethodDetailPage({ params }: PageProps) {
           })}
         </div>
       </section>
+
+      <InArticleAd />
 
       {/* この釣り方ができるスポット一覧 */}
       {matchingSpots.length > 0 && (

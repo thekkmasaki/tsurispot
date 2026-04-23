@@ -7,6 +7,7 @@ import { SpotCard } from "@/components/spots/spot-card";
 import { Button } from "@/components/ui/button";
 import { fishingSpots } from "@/lib/data/spots";
 import { useFavorites, getFavorites } from "@/hooks/use-favorites";
+import { DisplayAd } from "@/components/ads/ad-unit";
 
 export function FavoritesClient() {
   const { favorites: favoritesSlugs, removeFavorite } = useFavorites();
@@ -47,6 +48,7 @@ export function FavoritesClient() {
               <SpotCard key={spot.id} spot={spot} />
             ))}
           </div>
+          <DisplayAd />
         </>
       ) : (
         <div className="flex flex-col items-center justify-center py-20 text-center">

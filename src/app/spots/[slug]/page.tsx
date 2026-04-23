@@ -624,6 +624,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
         </div>
       </div>
 
+      {/* ATF広告: ヒーロー直後 */}
+      <DisplayAd className="mt-4" />
+
       {/* スポット写真ギャラリー（航空写真マップ or ユーザー投稿写真） */}
       <section className="mb-6 sm:mb-8">
         <SpotPhotoGallery photos={spot.spotPhotos} spotType={spot.spotType} spotName={spot.name} spotSlug={spot.slug} latitude={spot.latitude} longitude={spot.longitude} />

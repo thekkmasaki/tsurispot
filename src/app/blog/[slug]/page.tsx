@@ -271,6 +271,9 @@ export default async function BlogPostPage({
         </div>
       </header>
 
+      {/* ATF広告: 記事タイトル・メタ情報の直後 */}
+      <InArticleAd className="my-6" />
+
       {/* 記事本文（h2で分割し、長い記事には中間広告を挿入） */}
       {(() => {
         const proseClass = "prose prose-gray max-w-none prose-headings:font-bold prose-headings:tracking-tight prose-h2:mt-10 prose-h2:mb-4 prose-h2:text-xl prose-h2:border-l-4 prose-h2:border-primary prose-h2:pl-3 prose-h3:mt-6 prose-h3:mb-3 prose-h3:text-lg prose-p:leading-relaxed prose-p:text-gray-700 prose-li:text-gray-700 prose-ul:my-4 prose-li:my-1 sm:prose-h2:text-2xl sm:prose-h3:text-xl";

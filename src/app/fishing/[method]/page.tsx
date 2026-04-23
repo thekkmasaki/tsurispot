@@ -11,6 +11,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { InArticleAd } from "@/components/ads/ad-unit";
 import {
   FISHING_METHODS,
   MONTHS,
@@ -173,6 +174,8 @@ export default async function MethodPage({ params }: Props) {
           </Link>
         </div>
 
+        <InArticleAd />
+
         {/* 12ヶ月カード */}
         <section className="mb-12">
           <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
@@ -269,6 +272,8 @@ export default async function MethodPage({ params }: Props) {
             })}
           </div>
         </section>
+
+        <InArticleAd />
 
         {/* 他の釣り方 */}
         <section>

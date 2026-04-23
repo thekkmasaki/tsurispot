@@ -256,7 +256,7 @@ export function LazyAd({ className = "", children }: { className?: string; child
           observer.disconnect();
         }
       },
-      { rootMargin: "600px" }
+      { rootMargin: "200px" }
     );
 
     if (containerRef.current) {

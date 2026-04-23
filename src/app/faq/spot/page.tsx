@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { MapPin } from "lucide-react";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "釣り場FAQ - 堤防・漁港・管理釣り場のコツとマナー",
@@ -424,6 +425,8 @@ export default function FAQSpotPage() {
             </details>
           ))}
         </div>
+
+        <InArticleAd />
 
         <div className="mt-12 rounded-xl border bg-muted/30 p-6">
           <h2 className="mb-4 text-lg font-bold">関連するFAQ・ガイド</h2>

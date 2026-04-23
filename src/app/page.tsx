@@ -62,6 +62,9 @@ const OnlineUsersBadge = dynamic(() => import("@/components/online-users-badge")
 const NativeAdBreak = dynamic(() => import("@/components/ads/ad-unit").then((m) => m.NativeAdBreak), {
   loading: () => null,
 });
+const InArticleAd = dynamic(() => import("@/components/ads/ad-unit").then((m) => m.InArticleAd), {
+  loading: () => null,
+});
 
 const spotCount = fishingSpots.length.toLocaleString();
 const fishCount = fishSpecies.length;
@@ -570,6 +573,9 @@ export default async function Home() {
         </section>
       )}
 
+      {/* 広告: 釣果週報後 */}
+      <div className="mx-auto max-w-5xl px-4"><InArticleAd className="my-4" /></div>
+
       {/* 人気スポットTOP10（近い順ソート対応） */}
       <HomeTop10Client
         spots={fishingSpots
@@ -613,6 +619,9 @@ export default async function Home() {
           }))}
         />
       </SectionErrorBoundary>
+
+      {/* 広告: 今釣れる魚セクション後 */}
+      <div className="mx-auto max-w-5xl px-4"><InArticleAd className="my-4" /></div>
 
       {/* 今月おすすめの釣り場 */}
       {(() => {

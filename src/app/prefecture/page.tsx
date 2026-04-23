@@ -12,6 +12,7 @@ import { regions } from "@/lib/data/regions";
 import { fishingSpots } from "@/lib/data/spots";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { getPrefectureInfoBySlug } from "@/lib/data/prefecture-info";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "都道府県から釣り場を探す｜全国47都道府県の釣りスポット完全ガイド",
@@ -181,6 +182,8 @@ export default function PrefectureListPage() {
           );
         })}
       </div>
+
+      <InArticleAd />
 
       {/* Internal links */}
       <section className="mt-8 sm:mt-12">

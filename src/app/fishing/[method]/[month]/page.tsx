@@ -31,6 +31,7 @@ import {
   type SpotForFilter,
 } from "@/components/fishing/spot-list-with-filter";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 interface Props {
   params: Promise<{ method: string; month: string }>;
@@ -407,6 +408,8 @@ export default async function MethodMonthPage({ params }: Props) {
             />
           )}
         </section>
+
+        <InArticleAd />
 
         {/* 釣り方のコツ */}
         <section className="mb-10">

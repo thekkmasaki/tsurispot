@@ -28,6 +28,7 @@ import {
   COMMON_RULES,
 } from "@/lib/data/fishing-rules-data";
 import { fishingSpots } from "@/lib/data/spots";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 interface Props {
   params: Promise<{ prefecture: string }>;
@@ -587,6 +588,8 @@ export default async function PrefectureFishingRulesPage({ params }: Props) {
               </Card>
             </section>
           )}
+
+          <InArticleAd />
 
           {/* よくある質問 */}
           {faqItems.length > 0 && (

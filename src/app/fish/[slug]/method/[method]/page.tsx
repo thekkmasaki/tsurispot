@@ -26,6 +26,7 @@ import {
   getSeasonFromMonth,
 } from "@/lib/data/affiliate-products";
 import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
+import { InArticleAd } from "@/components/ads/ad-unit";
 import type { FishingMethod } from "@/types";
 
 type PageProps = {
@@ -521,6 +522,8 @@ export default async function FishMethodPage({ params }: PageProps) {
           </CardContent>
         </Card>
       </section>
+
+      <InArticleAd />
 
       {/* アフィリエイト商品 */}
       {relevantProducts.length > 0 && (

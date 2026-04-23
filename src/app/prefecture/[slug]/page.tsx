@@ -33,7 +33,7 @@ import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { areaGuides, type AreaGuide } from "@/lib/data/area-guides";
 import { SpotSearchFilter } from "@/components/prefecture/spot-search-filter";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
-import { InArticleAd } from "@/components/ads/ad-unit";
+import { InArticleAd, DisplayAd } from "@/components/ads/ad-unit";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -687,6 +687,8 @@ export default async function PrefecturePage({ params }: PageProps) {
           </Card>
         </section>
       )}
+
+      <DisplayAd />
 
       {/* 人気の釣りスポットTOP10ランキング */}
       {top10Spots.length > 0 && (

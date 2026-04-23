@@ -22,6 +22,7 @@ import { fishSpecies, getFishSeasons } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
 import type { RegionSlug } from "@/types";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 type PageProps = {
   params: Promise<{ month: string; regionGroup: string }>;
@@ -512,6 +513,9 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      {/* 広告: セクション間 */}
+      <InArticleAd className="my-6" />
 
       {/* シーズン中の魚 */}
       {seasonFish.length > 0 && (

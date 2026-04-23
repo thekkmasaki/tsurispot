@@ -8,6 +8,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { getPrefectureByName } from "@/lib/data/prefectures";
 import { AreaSpotList } from "@/components/area/area-spot-list";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -405,6 +406,8 @@ export default async function AreaDetailPage({ params }: PageProps) {
         areaName={region.areaName}
       />
 
+      <InArticleAd />
+
       {/* よくある質問 */}
       <section className="mt-8 mb-8 sm:mt-10 sm:mb-10">
         <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
@@ -426,6 +429,8 @@ export default async function AreaDetailPage({ params }: PageProps) {
           ))}
         </div>
       </section>
+
+      <InArticleAd />
 
       {/* Same prefecture regions for internal linking */}
       {samePreRegions.length > 0 && (

@@ -19,6 +19,7 @@ import { fishSpecies } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
 import { MONTHS, getMonthBySlug, isMonthInRange } from "@/lib/data/fishing-methods";
 import { SPOT_TYPE_LABELS } from "@/types";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 type PageProps = {
   params: Promise<{ slug: string; month: string }>;
@@ -476,6 +477,8 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
         </section>
       )}
 
+      <InArticleAd />
+
       {/* 釣り方別集計 */}
       {methodBreakdown.length > 0 && (
         <section className="mb-8 sm:mb-10">
@@ -578,6 +581,8 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
           )}
         </section>
       )}
+
+      <InArticleAd />
 
       {/* 都道府県×魚リンク（この月に釣れる魚への内部リンク） */}
       {catchableFishList.length > 0 && (

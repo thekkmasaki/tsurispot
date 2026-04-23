@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { CalendarDays } from "lucide-react";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
   title: "季節・時期別の釣りFAQ - サビキ釣りの時期・朝マヅメ・冬の釣り",
@@ -445,6 +446,8 @@ export default function FAQSeasonPage() {
             </details>
           ))}
         </div>
+
+        <InArticleAd />
 
         <div className="mt-12 rounded-xl border bg-muted/30 p-6">
           <h2 className="mb-4 text-lg font-bold">関連するFAQ・ガイド</h2>

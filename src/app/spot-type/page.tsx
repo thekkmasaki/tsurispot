@@ -8,6 +8,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { prefectures } from "@/lib/data/prefectures";
 import { SPOT_TYPE_LABELS } from "@/types";
 import type { FishingSpot } from "@/types";
+import { InArticleAd } from "@/components/ads/ad-unit";
 
 const SPOT_TYPE_ICONS: Record<FishingSpot["spotType"], typeof MapPin> = {
   port: Anchor,
@@ -192,6 +193,9 @@ export default function SpotTypeIndexPage() {
           );
         })}
       </div>
+
+      {/* 広告: セクション間 */}
+      <InArticleAd className="my-6" />
 
       {/* 関連リンク */}
       <section className="mt-8 sm:mt-12">

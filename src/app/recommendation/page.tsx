@@ -32,6 +32,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { InArticleAd } from "@/components/ads/ad-unit";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 import type { FishingSpot, FishSpecies } from "@/types";
@@ -1637,6 +1638,8 @@ export default function RecommendationPage() {
               )}
             </div>
           )}
+
+          <InArticleAd />
 
           {/* 関連ページリンク */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-8">
