@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import { useGeolocation } from "@/hooks/use-geolocation";
 import { SPOT_TYPE_LABELS } from "@/types";
@@ -11,7 +11,7 @@ import { MapPin, Navigation, Star, Loader2, Waves, TreePine } from "lucide-react
 
 type WaterFilter = "all" | "sea" | "freshwater";
 
-interface NearbySpotData {
+interface LightSpot {
   id: string;
   slug: string;
   name: string;
@@ -20,7 +20,6 @@ interface NearbySpotData {
   latitude: number;
   longitude: number;
   region: { prefecture: string; areaName: string };
-  distanceKm?: number;
   catchableFish: {
     fish: { id: string; name: string; slug: string };
     monthStart: number;
@@ -29,64 +28,58 @@ interface NearbySpotData {
   }[];
 }
 
+interface NearbySpotData extends LightSpot {
+  distanceKm?: number;
+}
+
+/** Haversine distance in km */
+function getDistanceKm(lat1: number, lng1: number, lat2: number, lng2: number): number {
+  const R = 6371;
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLng = ((lng2 - lng1) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
 function formatDistance(km: number): string {
   if (km < 1) return `${Math.round(km * 1000)}m`;
   if (km < 10) return `${km.toFixed(1)}km`;
   return `${Math.round(km)}km`;
 }
 
-export function NearbySpots() {
+export function NearbySpots({ allSpots }: { allSpots: LightSpot[] }) {
   const [waterFilter, setWaterFilter] = useState<WaterFilter>("all");
-  const [spots, setSpots] = useState<NearbySpotData[]>([]);
-  const [fetching, setFetching] = useState(false);
-  const [hasLocation, setHasLocation] = useState(false);
 
   const { latitude, longitude, error, loading, permissionDenied, requestLocation } =
     useGeolocation();
 
-  const fetchSpots = useCallback(
-    async (lat: number | null, lng: number | null, filter: WaterFilter) => {
-      setFetching(true);
-      try {
-        const params = new URLSearchParams({ limit: "6" });
-        if (lat != null && lng != null) {
-          params.set("lat", lat.toFixed(4));
-          params.set("lng", lng.toFixed(4));
-        }
-        if (filter === "sea") params.set("filter", "sea");
-        if (filter === "freshwater") params.set("filter", "freshwater");
+  const hasLocation = latitude != null && longitude != null;
 
-        const res = await fetch(`/api/spots/nearby?${params.toString()}`);
-        if (res.ok) {
-          const data: NearbySpotData[] = await res.json();
-          setSpots(data);
-        }
-      } catch {
-        // ネットワークエラーは静かに失敗
-      } finally {
-        setFetching(false);
-      }
-    },
-    [],
-  );
+  const spots: NearbySpotData[] = useMemo(() => {
+    if (!hasLocation) return [];
 
-  // 位置情報が取得されたらAPI呼び出し
-  useEffect(() => {
-    if (latitude && longitude) {
-      setHasLocation(true);
-      fetchSpots(latitude, longitude, waterFilter);
+    let filtered = allSpots;
+    if (waterFilter === "sea") {
+      filtered = filtered.filter((s) => s.spotType !== "river");
+    } else if (waterFilter === "freshwater") {
+      filtered = filtered.filter((s) => s.spotType === "river");
     }
-  }, [latitude, longitude, waterFilter, fetchSpots]);
 
-  // フィルタ変更時（位置情報ありの場合のみ再取得）
-  const handleFilterChange = (newFilter: WaterFilter) => {
-    setWaterFilter(newFilter);
-    // useEffect で自動再取得される（latitude/longitude/waterFilter依存）
-  };
+    return filtered
+      .map((s) => ({
+        ...s,
+        distanceKm: getDistanceKm(latitude!, longitude!, s.latitude, s.longitude),
+      }))
+      .sort((a, b) => (a.distanceKm ?? 0) - (b.distanceKm ?? 0))
+      .slice(0, 6);
+  }, [allSpots, latitude, longitude, waterFilter, hasLocation]);
 
   // 位置情報が取得できていない場合
   if (!hasLocation) {
-    // 許可拒否された場合は何も出さない
     if (permissionDenied) return null;
 
     return (
@@ -123,23 +116,8 @@ export function NearbySpots() {
     );
   }
 
-  // APIからデータ取得中
-  if (fetching && spots.length === 0) {
-    return (
-      <div className="space-y-4">
-        <div className="h-7 w-48 animate-pulse rounded bg-muted" />
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="h-32 animate-pulse rounded-xl bg-muted" />
-          ))}
-        </div>
-      </div>
-    );
-  }
-
   if (spots.length === 0) return null;
 
-  // 最も近いスポットのエリア名を見出しに活用
   const nearestArea = spots[0]?.region.areaName;
   const nearestPref = spots[0]?.region.prefecture;
   const headingText = nearestArea
@@ -168,7 +146,7 @@ export function NearbySpots() {
           ] as const).map((opt) => (
             <button
               key={opt.value}
-              onClick={() => handleFilterChange(opt.value)}
+              onClick={() => setWaterFilter(opt.value)}
               className={`flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium transition-all ${
                 waterFilter === opt.value
                   ? "bg-white text-foreground shadow-sm"

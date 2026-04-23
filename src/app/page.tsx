@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
-import { fishSpecies } from "@/lib/data/fish";
+import { fishSpecies, getCatchableNow } from "@/lib/data/fish";
 import { getLatestBlogPostsAsync, BLOG_CATEGORIES } from "@/lib/data/blog";
 import { prefectures } from "@/lib/data/prefectures";
 import { Card, CardContent } from "@/components/ui/card";
@@ -85,7 +85,7 @@ export const metadata: Metadata = {
   },
 };
 
-// lightSpots は廃止: NearbySpots が /api/spots/nearby からAPI取得するため不要
+// lightSpots は廃止: NearbySpots はクライアント側で距離計算（APIなし）
 
 // WebSite + Organization は layout.tsx に統一（重複排除）
 
@@ -595,7 +595,23 @@ export default async function Home() {
 
       {/* 今釣れる魚セクション */}
       <SectionErrorBoundary>
-        <HomeSeasonalFish />
+        <HomeSeasonalFish
+          currentMonth={new Date().getMonth() + 1}
+          fish={getCatchableNow(new Date().getMonth() + 1).map((f) => ({
+            id: f.id,
+            name: f.name,
+            slug: f.slug,
+            category: f.category,
+            difficulty: f.difficulty,
+            description: f.description,
+            imageUrl: f.imageUrl,
+            peakMonths: f.peakMonths,
+            seasonMonths: f.seasonMonths,
+            isPoisonous: f.isPoisonous ?? false,
+            poisonType: f.poisonType,
+            dangerLevel: f.dangerLevel,
+          }))}
+        />
       </SectionErrorBoundary>
 
       {/* 今月おすすめの釣り場 */}
