@@ -2,7 +2,7 @@ name: Deploy to App Runner
 
 on:
   push:
-    branches: [master]
+    branches: [master, refactor/split-large-files]
     paths-ignore:
       - '**/*.md'
       - 'docs/**'
@@ -42,6 +42,7 @@ jobs:
         run: npm run test:run
 
       - name: Configure AWS credentials
+        if: github.ref == 'refs/heads/master'
         uses: aws-actions/configure-aws-credentials@v5
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -49,10 +50,12 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Login to ECR
+        if: github.ref == 'refs/heads/master'
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
       - name: Build and push Docker image
+        if: github.ref == 'refs/heads/master'
         env:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
@@ -67,6 +70,7 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
 
       - name: Wait for App Runner to be RUNNING
+        if: github.ref == 'refs/heads/master'
         run: |
           echo "Checking App Runner status before deployment..."
           for i in $(seq 1 20); do
@@ -85,11 +89,13 @@ jobs:
           exit 1
 
       - name: Deploy to App Runner
+        if: github.ref == 'refs/heads/master'
         run: |
           aws apprunner start-deployment \
             --service-arn ${{ env.APP_RUNNER_SERVICE_ARN }}
 
       - name: Wait for deployment
+        if: github.ref == 'refs/heads/master'
         run: |
           echo "Deployment started. Waiting for App Runner to update..."
           for i in $(seq 1 30); do
@@ -107,6 +113,7 @@ jobs:
           exit 1
 
       - name: Invalidate CloudFront cache
+        if: github.ref == 'refs/heads/master'
         run: |
           aws cloudfront create-invalidation \
             --distribution-id E366L8IETD0MRP \
@@ -114,7 +121,7 @@ jobs:
           echo "CloudFront cache invalidation started"
 
       - name: Discord通知（成功）
-        if: success()
+        if: success() && github.ref == 'refs/heads/master'
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
@@ -123,7 +130,7 @@ jobs:
           fi
 
       - name: Discord通知（失敗）
-        if: failure()
+        if: failure() && github.ref == 'refs/heads/master'
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
