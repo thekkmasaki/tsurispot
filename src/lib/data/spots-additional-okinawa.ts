@@ -1,0 +1,201 @@
+import type { FishingSpot, FishSpecies } from "@/types";
+import { getFishBySlug } from "./fish";
+import { regions } from "./regions";
+
+function fish(slug: string): FishSpecies {
+  const f = getFishBySlug(slug);
+  if (!f) throw new Error(`Fish not found: ${slug}`);
+  return f;
+}
+
+function region(id: string) {
+  const r = regions.find((r) => r.id === id);
+  if (!r) throw new Error(`Region not found: ${id}`);
+  return r;
+}
+
+export const additionalSpotsOkinawa: FishingSpot[] = [
+  // ===== 沖縄県 (r17) s101-s103 =====
+  {
+    id: "s101",
+    name: "宜野湾マリーナ",
+    slug: "ginowan-marina",
+    description: "沖縄本島中部の宜野湾市にあるマリーナ。護岸から手軽にガーラ（カスミアジ）やタマン（ハマフエフキ）が狙える。リゾート気分で釣りが楽しめる。",
+    latitude: 26.2780,
+    longitude: 127.7540,
+    address: "〒901-2227 沖縄県宜野湾市宇地泊3丁目18-1",
+    accessInfo: "那覇空港から車で約30分。沖縄自動車道北中城ICから約10分。",
+    region: region("r17"),
+    spotType: "breakwater",
+    difficulty: "beginner",
+    isFree: true,
+    hasParking: true,
+    parkingDetail: "無料駐車場あり",
+    hasToilet: true,
+    hasConvenienceStore: true,
+    hasFishingShop: false,
+    hasRentalRod: false,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/JP_%E6%97%A5%E6%9C%AC_Japan_%E6%B2%96%E7%B9%A9_OKINAWA_Naha_shuttle_bus_view_from_Chatan_city_to_%E9%82%A3%E9%9C%B8%E6%A9%9F%E5%A0%B4_Naha_Airport_via_%E5%9C%8B%E9%81%9358%E8%99%9F_National_Route_morning_1134am_January_2025_R12S_234.jpg/960px-thumbnail.jpg", imageAttribution: "Photo: Naha Mama Pavilionz / Wikimedia Commons (CC0)",
+    images: [],
+    rating: 3.6,
+    reviewCount: 78, googleRating: 4.1, googleReviewCount: 100,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+    ],
+    bestTimes: [
+      { label: "朝マヅメ", timeRange: "06:00〜08:00", rating: "best" },
+      { label: "日中", timeRange: "10:00〜14:00", rating: "good" },
+      { label: "夕マヅメ", timeRange: "17:00〜19:00", rating: "best" },
+      { label: "夜", timeRange: "20:00〜23:00", rating: "good" },
+    ],
+    tackleRecommendations: [],
+    tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ5分", description: "サンゴ礁域で上げ潮時に魚が浅場に入る。" },
+    mazumeInfo: { springSunrise: "06:15", springSunset: "18:30", summerSunrise: "05:40", summerSunset: "19:20", autumnSunrise: "06:15", autumnSunset: "17:40", winterSunrise: "07:10", winterSunset: "17:30", tip: "沖縄は年中温暖で釣りシーズンが長い。" },
+    gearGuides: [
+      { targetFish: "アジ", method: "サビキ釣り", difficulty: "beginner", rod: "磯竿2号 3.0m", reel: "スピニング2500番", line: "ナイロン3号", hook: "サビキ仕掛け6号", otherItems: ["コマセカゴ", "アミエビ"], tip: "リゾート気分で手軽に楽しめる。" },
+    ],
+    safetyLevel: "safe",
+    safetyNotes: ["マリーナ施設内で整備済み", "日焼け対策必須"],
+    youtubeLinks: [
+      { label: "宜野湾 釣り", searchQuery: "宜野湾マリーナ 釣り 沖縄", description: "宜野湾での釣り動画" },
+    ],
+  },
+  {
+    id: "s102",
+    name: "名護漁港",
+    slug: "nago-port",
+    description: "沖縄本島北部の名護市にある漁港。やんばるの豊かな自然に囲まれた港でアジやカマスが釣れる。名護のオリオンビール工場見学と合わせて。",
+    latitude: 26.5917,
+    longitude: 127.9783,
+    address: "〒905-0013 沖縄県名護市城3丁目9",
+    accessInfo: "那覇空港から車で約90分。沖縄自動車道許田ICから約10分。",
+    region: region("r17"),
+    spotType: "port",
+    difficulty: "beginner",
+    isFree: true,
+    hasParking: true,
+    parkingDetail: "無料駐車スペースあり",
+    hasToilet: true,
+    hasConvenienceStore: true,
+    hasFishingShop: false,
+    hasRentalRod: false,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/44/%E3%82%B7%E3%83%A3%E3%83%BC%E3%83%99%E3%83%83%E3%83%88_%2815880596423%29.jpg/960px-%E3%82%B7%E3%83%A3%E3%83%BC%E3%83%99%E3%83%83%E3%83%88_%2815880596423%29.jpg", imageAttribution: "Photo: Nelo Hotsuma from Rockwall / Wikimedia Commons (CC BY 2.0)",
+    images: [],
+    rating: 3.5,
+    reviewCount: 56, googleRating: 3.8, googleReviewCount: 186,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("kamasu"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" },
+    ],
+    bestTimes: [
+      { label: "朝マヅメ", timeRange: "06:00〜08:00", rating: "best" },
+      { label: "日中", timeRange: "10:00〜14:00", rating: "good" },
+      { label: "夕マヅメ", timeRange: "17:00〜19:00", rating: "good" },
+      { label: "夜", timeRange: "20:00〜23:00", rating: "fair" },
+    ],
+    tackleRecommendations: [],
+    tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ3分〜5分", description: "珊瑚礁の浅場に魚が寄るタイミング。" },
+    mazumeInfo: { springSunrise: "06:15", springSunset: "18:30", summerSunrise: "05:40", summerSunset: "19:20", autumnSunrise: "06:15", autumnSunset: "17:40", winterSunrise: "07:10", winterSunset: "17:30", tip: "やんばるの自然を感じながらのんびり釣り。" },
+    gearGuides: [
+      { targetFish: "アジ", method: "サビキ釣り", difficulty: "beginner", rod: "磯竿2号 3.0m", reel: "スピニング2000番", line: "ナイロン2号", hook: "サビキ仕掛け5号", otherItems: ["コマセカゴ", "アミエビ"], tip: "やんばるドライブのついでに立ち寄れる。" },
+    ],
+    safetyLevel: "safe",
+    safetyNotes: ["漁港内で穏やか", "日焼け・熱中症対策必須"],
+    youtubeLinks: [
+      { label: "名護 釣り", searchQuery: "名護漁港 釣り 沖縄", description: "名護漁港での釣り動画" },
+    ],
+  },
+  {
+    id: "s103",
+    name: "石垣島底地ビーチ",
+    slug: "ishigaki-sukuji-beach",
+    description: "石垣島西部の美しいビーチ。サンゴ礁の浅場で多彩な熱帯魚が狙える。投げ釣りでキスやコチ、リーフエッジではカスミアジも。リゾート釣りの決定版。",
+    latitude: 24.451900,
+    longitude: 124.1378,
+    address: "〒907-0453 沖縄県石垣市川平",
+    accessInfo: "石垣空港から車で約40分。",
+    region: region("r17"),
+    spotType: "beach",
+    difficulty: "intermediate",
+    isFree: true,
+    hasParking: true,
+    parkingDetail: "無料駐車場あり",
+    hasToilet: true,
+    hasConvenienceStore: false,
+    hasFishingShop: false,
+    hasRentalRod: false,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Kabira_Bay_Ishigaki_Island21bs5s4410.jpg/960px-Kabira_Bay_Ishigaki_Island21bs5s4410.jpg", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY 2.5)",
+    images: [],
+    rating: 4.0,
+    reviewCount: 45, googleRating: 4.3, googleReviewCount: 639,
+    catchableFish: [
+      { fish: fish("kisu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+      { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+    ],
+    bestTimes: [
+      { label: "朝マヅメ", timeRange: "06:10〜08:00", rating: "best" },
+      { label: "日中", timeRange: "10:00〜14:00", rating: "good" },
+      { label: "夕マヅメ", timeRange: "17:00〜19:00", rating: "best" },
+      { label: "夜", timeRange: "20:00〜23:00", rating: "fair" },
+    ],
+    tackleRecommendations: [],
+    tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ5分〜満潮前", description: "サンゴ礁のリーフ内に魚が入ってくる。" },
+    mazumeInfo: { springSunrise: "06:25", springSunset: "18:40", summerSunrise: "06:00", summerSunset: "19:25", autumnSunrise: "06:25", autumnSunset: "17:50", winterSunrise: "07:15", winterSunset: "17:40", tip: "透明度抜群の海で魚が見える。サイトフィッシング可能。" },
+    gearGuides: [
+      { targetFish: "キス", method: "投げ釣り", difficulty: "beginner", rod: "投げ竿3.6m", reel: "スピニング3000番", line: "PE1号", hook: "キス仕掛け7号", otherItems: ["天秤", "ジャリメ"], tip: "サンゴ礁の切れ目を狙う。リーフエッジが好ポイント。" },
+    ],
+    safetyLevel: "caution",
+    safetyNotes: ["サンゴ礁で足を切る恐れあり", "離岸流注意", "日焼け・熱中症対策必須", "マリンシューズ推奨"],
+    youtubeLinks: [
+      { label: "石垣島 釣り", searchQuery: "石垣島 釣り ビーチ リーフ", description: "石垣島での釣り動画" },
+      { label: "石垣島 ルアー", searchQuery: "石垣島 ルアー カスミアジ", description: "石垣島でのルアー釣り動画" },
+    ],
+  },
+  // ===== 三重追加 (r60 尾鷲) =====// ===== 沖縄追加 (r50 宮古島) =====
+  {
+    id: "s126", name: "宮古島平良港", slug: "miyako-hirara-port",
+    description: "宮古島の中心港。サンゴ礁に囲まれた美しい海。ガーラ（カスミアジ）やタマン（ハマフエフキ）など南国の大型魚が狙える。",
+    latitude: 24.7934, longitude: 125.2812, address: "〒906-0013 沖縄県宮古島市平良下里",
+    accessInfo: "宮古空港から車で約15分。",
+    region: region("r50"), spotType: "port", difficulty: "intermediate",
+    isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
+    hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Miyako_Post_Office_Okinawa.jpg/960px-Miyako_Post_Office_Okinawa.jpg", imageAttribution: "Photo: Ray_go / Wikimedia Commons (CC BY-SA 3.0)", images: [],
+    rating: 4.1, reviewCount: 56, googleRating: 3.8, googleReviewCount: 18,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+      { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
+    ],
+    bestTimes: [{ label: "朝マヅメ", timeRange: "06:15〜08:00", rating: "best" }, { label: "夕マヅメ", timeRange: "17:30〜19:30", rating: "best" }],
+    tackleRecommendations: [],
+    tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ5分〜満潮前", description: "リーフ内に魚が入ってくるタイミング。" },
+    mazumeInfo: { springSunrise: "06:20", springSunset: "18:40", summerSunrise: "05:55", summerSunset: "19:25", autumnSunrise: "06:20", autumnSunset: "17:50", winterSunrise: "07:10", winterSunset: "17:40", tip: "南国の魚はパワフル。タックルは強めに。" },
+    gearGuides: [{ targetFish: "アジ", method: "サビキ釣り", difficulty: "beginner", rod: "磯竿3号3.6m", reel: "スピニング3000番", line: "ナイロン4号", hook: "サビキ仕掛け8号", otherItems: ["コマセカゴ", "アミエビ"], tip: "南国の魚は引きが強いのでやや太仕掛けで。" }],
+    safetyLevel: "caution", safetyNotes: ["日焼け対策必須", "サンゴ礁で足を切る恐れあり"],
+    youtubeLinks: [{ label: "宮古島 釣り", searchQuery: "宮古島 釣り 港 ガーラ", description: "宮古島での釣り動画" }],
+  },
+  {
+    id: "s184", name: "宮古島来間大橋下", slug: "miyako-kurima-bridge",
+    description: "宮古島と来間島を結ぶ橋の下。透明度抜群の海でサンゴ礁に住む熱帯魚やGTが狙える。絶景ポイント。",
+    latitude: 24.7312, longitude: 125.2534, address: "〒906-0000 沖縄県宮古島市",
+    accessInfo: "宮古空港から車で約20分。",
+    region: region("r50"), spotType: "beach", difficulty: "intermediate",
+    isFree: true, hasParking: true, parkingDetail: "橋周辺に駐車スペースあり",
+    hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a4/View_from_Ryu-gu-jo_Observatory_%28Kurima-jima_Is.%29_-_panoramio.jpg/960px-View_from_Ryu-gu-jo_Observatory_%28Kurima-jima_Is.%29_-_panoramio.jpg", imageAttribution: "Photo: Kaz Ish / Wikimedia Commons (CC BY-SA 3.0)", images: [],
+    rating: 4.3, reviewCount: 34,
+    catchableFish: [
+      { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+      { fish: fish("kisu"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+    ],
+    bestTimes: [{ label: "朝マヅメ", timeRange: "06:15〜08:00", rating: "best" }, { label: "夕マヅメ", timeRange: "17:30〜19:30", rating: "best" }],
+    tackleRecommendations: [],
+    tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ5分〜満潮前", description: "リーフ内に魚が入ってくるタイミング。" },
+    mazumeInfo: { springSunrise: "06:20", springSunset: "18:40", summerSunrise: "05:55", summerSunset: "19:25", autumnSunrise: "06:20", autumnSunset: "17:50", winterSunrise: "07:10", winterSunset: "17:40", tip: "宮古ブルーの海での釣りは最高の贅沢。" },
+    gearGuides: [{ targetFish: "GT", method: "ルアー", difficulty: "intermediate", rod: "ショアジギングロッド10ft", reel: "スピニング5000番", line: "PE2号", hook: "ポッパー100mm", otherItems: ["リーダーフロロ10号"], tip: "リーフエッジがポイント。大物に備えて強めのタックル。" }],
+    safetyLevel: "caution", safetyNotes: ["サンゴ礁で足を切る恐れ", "日焼け対策必須", "マリンシューズ推奨"],
+    isKuchikomiSpot: true,
+    youtubeLinks: [{ label: "宮古島 釣り", searchQuery: "宮古島 来間大橋 釣り GT", description: "宮古島での釣り動画" }],
+  },
+];
