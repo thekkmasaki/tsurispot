@@ -40,6 +40,10 @@ next-env.d.ts
 # Patent pipeline cache
 patent/data/cache/
 
+# Twitter投稿データキャッシュ
+scripts/twitter/.cache/
+scripts/twitter/.posted-*.json
+
 # Claude Code
 .agents/
 .claude/

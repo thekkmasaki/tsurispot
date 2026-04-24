@@ -7,41 +7,11 @@
  *   node scripts/twitter/post-weekly-digest.mjs --dry-run  # 投稿せずに内容を確認
  */
 
-import { TwitterApi } from "twitter-api-v2";
 import { readFileSync, readdirSync } from "fs";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
+import { join } from "path";
+import { loadEnv, getClient, isDryRun, ROOT, stripHtml, truncate } from "./lib/x-client.mjs";
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = join(__dirname, "../..");
 const REPORTS_DIR = join(ROOT, "scripts/weekly-reports");
-
-// .env.local を手動パース
-function loadEnv() {
-  try {
-    const envPath = join(ROOT, ".env.local");
-    const content = readFileSync(envPath, "utf-8");
-    for (const line of content.split("\n")) {
-      const trimmed = line.trim();
-      if (!trimmed || trimmed.startsWith("#")) continue;
-      const eqIndex = trimmed.indexOf("=");
-      if (eqIndex === -1) continue;
-      const key = trimmed.slice(0, eqIndex);
-      let value = trimmed.slice(eqIndex + 1);
-      if (
-        (value.startsWith('"') && value.endsWith('"')) ||
-        (value.startsWith("'") && value.endsWith("'"))
-      ) {
-        value = value.slice(1, -1);
-      }
-      if (!process.env[key]) {
-        process.env[key] = value;
-      }
-    }
-  } catch {
-    // GitHub Actions では環境変数で渡す
-  }
-}
 
 loadEnv();
 
@@ -61,17 +31,6 @@ const AREA_NAME_MAP = {
 };
 
 // ── ユーティリティ ──
-
-/** HTMLタグを除去する */
-function stripHtml(text) {
-  return text.replace(/<[^>]*>/g, "").trim();
-}
-
-/** テキストを指定文字数以内に短縮する */
-function truncate(text, maxLen) {
-  if (text.length <= maxLen) return text;
-  return text.slice(0, maxLen - 1) + "…";
-}
 
 /** 指定ミリ秒待機する */
 function sleep(ms) {
@@ -205,7 +164,6 @@ function buildReplyTweet(areaName, description, slug) {
 // ── メイン処理 ──
 
 const args = process.argv.slice(2);
-const dryRun = args.includes("--dry-run");
 
 async function main() {
   const { files, year, month, week } = getLatestWeekFiles();
@@ -243,37 +201,13 @@ async function main() {
     console.log(`（${replies[i].length}文字）\n`);
   }
 
-  if (dryRun) {
+  if (isDryRun) {
     console.log("[dry-run] 投稿はスキップ");
     return;
   }
 
   // Twitter API クライアント初期化
-  const {
-    X_API_KEY,
-    X_API_KEY_SECRET,
-    X_ACCESS_TOKEN,
-    X_ACCESS_TOKEN_SECRET,
-  } = process.env;
-  if (
-    !X_API_KEY ||
-    !X_API_KEY_SECRET ||
-    !X_ACCESS_TOKEN ||
-    !X_ACCESS_TOKEN_SECRET
-  ) {
-    console.error("X API の環境変数が設定されていません");
-    console.error(
-      "必要: X_API_KEY, X_API_KEY_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET"
-    );
-    process.exit(1);
-  }
-
-  const client = new TwitterApi({
-    appKey: X_API_KEY,
-    appSecret: X_API_KEY_SECRET,
-    accessToken: X_ACCESS_TOKEN,
-    accessSecret: X_ACCESS_TOKEN_SECRET,
-  });
+  const client = getClient();
 
   // メインツイート投稿
   console.log("メインツイート投稿中...");

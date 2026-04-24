@@ -120,6 +120,35 @@ jobs:
             --paths "/*"
           echo "CloudFront cache invalidation started"
 
+      - name: デプロイ後ヘルスチェック
+        if: success() && github.ref == 'refs/heads/master'
+        run: |
+          echo "Running post-deploy health checks..."
+          FAILED=0
+          URLS=(
+            "https://tsurispot.com"
+            "https://tsurispot.com/spots"
+            "https://tsurispot.com/fish"
+            "https://tsurispot.com/prefectures"
+            "https://tsurispot.com/blog"
+            "https://tsurispot.com/guides"
+            "https://tsurispot.com/sitemap.xml"
+          )
+          for URL in "${URLS[@]}"; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 "$URL")
+            if [ "$STATUS" = "200" ]; then
+              echo "✅ $URL → $STATUS"
+            else
+              echo "❌ $URL → $STATUS"
+              FAILED=$((FAILED + 1))
+            fi
+          done
+          if [ "$FAILED" -gt 0 ]; then
+            echo "::warning::$FAILED ページでヘルスチェック失敗"
+          else
+            echo "All health checks passed!"
+          fi
+
       - name: Discord通知（成功）
         if: success() && github.ref == 'refs/heads/master'
         env:

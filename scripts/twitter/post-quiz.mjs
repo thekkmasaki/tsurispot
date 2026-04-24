@@ -9,38 +9,12 @@
  *   node scripts/twitter/post-quiz.mjs --type spot # スポットクイズのみ
  */
 
-import { TwitterApi } from "twitter-api-v2";
 import { readFileSync, writeFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
+import { loadEnv, getClient, isDryRun } from "./lib/x-client.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const ROOT = join(__dirname, "../..");
-
-// .env.local を手動パース
-function loadEnv() {
-  try {
-    const envPath = join(ROOT, ".env.local");
-    const content = readFileSync(envPath, "utf-8");
-    for (const line of content.split("\n")) {
-      const trimmed = line.trim();
-      if (!trimmed || trimmed.startsWith("#")) continue;
-      const eqIndex = trimmed.indexOf("=");
-      if (eqIndex === -1) continue;
-      const key = trimmed.slice(0, eqIndex);
-      let value = trimmed.slice(eqIndex + 1);
-      if ((value.startsWith('"') && value.endsWith('"')) ||
-          (value.startsWith("'") && value.endsWith("'"))) {
-        value = value.slice(1, -1);
-      }
-      if (!process.env[key]) {
-        process.env[key] = value;
-      }
-    }
-  } catch {
-    // GitHub Actions では環境変数で渡す
-  }
-}
 
 loadEnv();
 
@@ -163,7 +137,6 @@ const spotQuizzes = [
 // ── メイン処理 ──
 
 const args = process.argv.slice(2);
-const dryRun = args.includes("--dry-run");
 const typeFilter = args.includes("--type") ? args[args.indexOf("--type") + 1] : null;
 
 const POSTED_FILE = join(__dirname, ".posted-quizzes.json");
@@ -211,24 +184,12 @@ async function main() {
   console.log(replyText);
   console.log(`\n文字数: 本文${tweetText.length}字 / リプライ${replyText.length}字`);
 
-  if (dryRun) {
+  if (isDryRun) {
     console.log("\n[dry-run] 投稿はスキップ");
     return;
   }
 
-  const { X_API_KEY, X_API_KEY_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET } = process.env;
-  if (!X_API_KEY || !X_API_KEY_SECRET || !X_ACCESS_TOKEN || !X_ACCESS_TOKEN_SECRET) {
-    console.error("❌ X API の環境変数が設定されていません");
-    console.error("必要: X_API_KEY, X_API_KEY_SECRET, X_ACCESS_TOKEN, X_ACCESS_TOKEN_SECRET");
-    process.exit(1);
-  }
-
-  const client = new TwitterApi({
-    appKey: X_API_KEY,
-    appSecret: X_API_KEY_SECRET,
-    accessToken: X_ACCESS_TOKEN,
-    accessSecret: X_ACCESS_TOKEN_SECRET,
-  });
+  const client = getClient();
 
   console.log("\n投稿中...");
   const tweet = await client.v2.tweet(tweetText);

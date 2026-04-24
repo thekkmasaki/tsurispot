@@ -125,3 +125,140 @@ npx tsc --noEmit
 - アフィリエイトリンク一覧: `C:\Users\kk471\OneDrive\デスクトップ\saas\アフィリエイト\リンク一覧.txt`
 - スポット紹介文の他サイトからの丸パクリは絶対NG
 - デプロイ前に `npx tsc --noEmit` で型チェック必須
+
+## 禁止事項
+
+以下は**いかなる状況でも実行してはならない**:
+
+| 禁止事項 | 理由 |
+|---------|------|
+| `next build` / `next dev` のローカル実行 | OneDriveパスでEPERMエラー、メモリ5GB超消費 |
+| `npm install` / `npm add` | 依存関係変更は手動承認が必要 |
+| `npx vercel` | デプロイはGitHub Actions経由のみ |
+| スポット紹介文の他サイト丸パクリ | 著作権違反・SEOペナルティ |
+| AI生成の魚写真の使用 | 実写またはSVGイラストのみ許可 |
+| 「兵庫県在住」の記述 | 虚偽情報 |
+| `rm -rf node_modules` | 復旧に時間がかかる |
+| Co-Authored-By の付与 | プロジェクトルールで禁止 |
+
+## トラブルシューティング
+
+### ポート3000が占有される
+```bash
+netstat -ano | grep :3000
+# PIDを確認して kill
+taskkill /PID <PID> /F
+```
+
+### EPERMエラー（.nextディレクトリ）
+OneDrive上のプロジェクトで頻発。対処:
+1. `.next` を削除: `rm -rf .next`
+2. OneDriveの同期を一時停止してからビルド
+3. **そもそもローカルビルドはしない** → `npx tsc --noEmit` で型チェックのみ
+
+### 型エラーの確認
+```bash
+npx tsc --noEmit
+```
+エラーが出た場合は該当ファイルを修正してから push。
+
+### テスト失敗
+```bash
+npx vitest run                    # 全テスト
+npx vitest run <ファイルパス>       # 特定テスト
+```
+失敗したテストの原因を特定し、データまたはテストを修正。
+
+### slug重複エラー
+スポットや魚種のslugが重複するとビルドエラーになる。
+```bash
+# slugの重複チェック（テストで検出可能）
+npx vitest run src/lib/data/__tests__/spots.test.ts
+```
+
+### GitHub Actions 失敗
+1. GitHub リポジトリの Actions タブでログを確認
+2. 多くの場合、型エラーかテスト失敗が原因
+3. ローカルで `npx tsc --noEmit` と `npx vitest run` を実行して再現
+
+### microCMS エラー
+- API キーが `.env.local` に正しく設定されているか確認
+- `MICROCMS_SERVICE_DOMAIN` と `MICROCMS_API_KEY` の2つが必要
+- dynamic import を使っているか確認（top-level import はNG）
+
+## よくあるタスクのレシピ
+
+### スポット追加手順
+
+1. 対象地域の既存ファイルを確認: `src/lib/data/spots-{地域名}.ts`
+2. slug重複チェック: 既存slugを検索
+3. 座標をGoogle Mapsで確認
+4. FishingSpot型に準拠してデータ追加（紹介文はオリジナルで）
+5. `spots.ts` に新ファイルの場合はimport追加
+6. 型チェック: `npx tsc --noEmit`
+7. WIPコミット（5ファイルごと）
+
+### ブログ記事追加（静的）
+
+1. `src/lib/data/blog-articles-*.ts` の適切なファイルに追加
+2. BlogArticle型に準拠
+3. slug重複チェック
+4. 内部リンク（関連スポット・魚種）を含める
+5. アフィリエイトリンクを文脈に合わせて自然に配置
+6. 型チェック → コミット
+
+### ブログ記事追加（microCMS）
+
+```bash
+curl -X POST "https://tsurispot.microcms.io/api/v1/blogs" \
+  -H "X-MICROCMS-API-KEY: ${MICROCMS_API_KEY}" \
+  -H "Content-Type: application/json" \
+  -d '{"title":"タイトル","slug":"slug","content":"<p>本文</p>"}'
+```
+
+### 魚種データ追加
+
+1. 対象: `src/lib/data/fish-sea.ts` / `fish-freshwater.ts` / `fish-brackish.ts`
+2. FishSpecies型に準拠（学名、分類、生息域、旬、釣り方）
+3. `fish.ts` の統合配列に含まれるか確認
+4. 型チェック → コミット
+
+### デプロイ前チェックリスト
+
+```bash
+# 1. 型チェック（必須）
+npx tsc --noEmit
+
+# 2. Lint
+npx eslint src/
+
+# 3. テスト
+npx vitest run
+
+# 4. 変更内容の確認
+git diff --stat
+
+# 5. コミット & プッシュ
+git add <ファイル>
+git commit -m "変更内容"
+git push origin master
+# → GitHub Actions が自動でビルド・デプロイ
+```
+
+## カスタムエージェント
+
+`.claude/agents/` に以下の専門エージェントが利用可能:
+
+| エージェント | ファイル | 用途 |
+|------------|---------|------|
+| スポット追加 | `spot-adder.md` | スポットデータの追加・修正 |
+| コンテンツライター | `content-writer.md` | ブログ記事・魚種解説の作成 |
+| データ検証 | `data-validator.md` | テスト実行・整合性チェック（Read-only志向） |
+| SEO最適化 | `seo-optimizer.md` | メタデータ・構造化データ・内部リンク改善 |
+
+### 推奨並列作業パターン
+
+- **スポット大量追加**: spot-adder ×2 + data-validator ×1（追加しながら検証）
+- **コンテンツ拡充**: content-writer ×1 + seo-optimizer ×1 + data-validator ×1
+- **品質改善**: data-validator ×1 + seo-optimizer ×2
+- **注意**: 並列エージェントは最大3まで（ネットワーク負荷軽減）

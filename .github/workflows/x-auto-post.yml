@@ -1,0 +1,99 @@
+name: X 自動投稿
+
+on:
+  schedule:
+    - cron: '0 22 * * *'   # JST 07:00 毎日（クイズ）
+    - cron: '0 3 * * 1'    # JST 12:00 月曜（週報ダイジェスト）
+    - cron: '0 9 * * 2,4'  # JST 18:00 火・木（魚の豆知識）
+    - cron: '0 3 * * 3'    # JST 12:00 水曜（釣果速報）
+    - cron: '0 3 * * 5'    # JST 12:00 金曜（週末おすすめスポット）
+    - cron: '0 3 * * 6'    # JST 12:00 土曜（旬魚ガイド）
+    - cron: '0 9 * * 0'    # JST 18:00 日曜（今週のベスト釣果）
+  workflow_dispatch:
+    inputs:
+      script:
+        description: '実行するスクリプト名'
+        required: true
+        type: choice
+        options:
+          - post-quiz.mjs
+          - post-fish-tips.mjs
+          - post-weekly-digest.mjs
+          - post-catch-report.mjs
+          - post-weekend-spot.mjs
+          - post-seasonal-fish.mjs
+          - post-best-catch.mjs
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: twitter-api-v2 インストール
+        run: npm install twitter-api-v2
+
+      - name: 実行スクリプトを判定
+        id: detect
+        run: |
+          if [ -n "${{ github.event.inputs.script }}" ]; then
+            SCRIPT="${{ github.event.inputs.script }}"
+          else
+            HOUR=$(date -u +%H)
+            DOW=$(date -u +%u)  # 1=月, 2=火, ..., 7=日
+
+            if [ "$HOUR" = "22" ]; then
+              SCRIPT="post-quiz.mjs"
+            elif [ "$HOUR" = "03" ]; then
+              case "$DOW" in
+                1) SCRIPT="post-weekly-digest.mjs" ;;
+                3) SCRIPT="post-catch-report.mjs" ;;
+                5) SCRIPT="post-weekend-spot.mjs" ;;
+                6) SCRIPT="post-seasonal-fish.mjs" ;;
+                *) SCRIPT="post-quiz.mjs" ;;
+              esac
+            elif [ "$HOUR" = "09" ]; then
+              case "$DOW" in
+                2|4) SCRIPT="post-fish-tips.mjs" ;;
+                7) SCRIPT="post-best-catch.mjs" ;;
+                *) SCRIPT="post-fish-tips.mjs" ;;
+              esac
+            else
+              SCRIPT="post-quiz.mjs"
+            fi
+          fi
+
+          echo "script=$SCRIPT" >> $GITHUB_OUTPUT
+          echo "実行スクリプト: $SCRIPT"
+
+      - name: スクリプト実行
+        env:
+          X_API_KEY: ${{ secrets.X_API_KEY }}
+          X_API_KEY_SECRET: ${{ secrets.X_API_KEY_SECRET }}
+          X_ACCESS_TOKEN: ${{ secrets.X_ACCESS_TOKEN }}
+          X_ACCESS_TOKEN_SECRET: ${{ secrets.X_ACCESS_TOKEN_SECRET }}
+        run: node scripts/twitter/${{ steps.detect.outputs.script }}
+
+      - name: Discord通知（成功）
+        if: success() && env.DISCORD_WEBHOOK_URL != ''
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          SCRIPT="${{ steps.detect.outputs.script }}"
+          curl -s -H "Content-Type: application/json" \
+            -d "{\"content\":\"✅ **X 自動投稿** 成功: ${SCRIPT}\"}" \
+            "$DISCORD_WEBHOOK_URL"
+
+      - name: Discord通知（失敗）
+        if: failure() && env.DISCORD_WEBHOOK_URL != ''
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          SCRIPT="${{ steps.detect.outputs.script }}"
+          curl -s -H "Content-Type: application/json" \
+            -d "{\"content\":\"❌ **X 自動投稿** 失敗: ${SCRIPT}\\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
+            "$DISCORD_WEBHOOK_URL"
