@@ -82,6 +82,31 @@ const nextConfig: NextConfig = {
         },
       ],
     },
+    // SSGページのCloudFrontキャッシュ最適化（App Runnerへのリクエスト削減）
+    {
+      source: "/spots/:slug",
+      headers: [
+        { key: "Cache-Control", value: "public, s-maxage=604800, stale-while-revalidate=86400" },
+      ],
+    },
+    {
+      source: "/fish/:slug",
+      headers: [
+        { key: "Cache-Control", value: "public, s-maxage=604800, stale-while-revalidate=86400" },
+      ],
+    },
+    {
+      source: "/prefecture/:slug",
+      headers: [
+        { key: "Cache-Control", value: "public, s-maxage=604800, stale-while-revalidate=86400" },
+      ],
+    },
+    {
+      source: "/area/:slug",
+      headers: [
+        { key: "Cache-Control", value: "public, s-maxage=604800, stale-while-revalidate=86400" },
+      ],
+    },
     {
       source: "/images/(.*)",
       headers: [
