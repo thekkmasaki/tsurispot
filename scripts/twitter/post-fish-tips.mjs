@@ -490,6 +490,92 @@ function formatPeakMonths(months) {
   return `${sorted[0]}\u301C${sorted[sorted.length - 1]}月`;
 }
 
+// Twitter加重文字数を計算（CJK=2, URL=23, その他=1）
+function twitterWeightedLength(text) {
+  // URLを固定長23に置換して計算
+  const urlRegex = /https?:\/\/\S+/g;
+  let weight = 0;
+  let lastIndex = 0;
+  let match;
+
+  while ((match = urlRegex.exec(text)) !== null) {
+    // URL前のテキスト
+    weight += calcTextWeight(text.slice(lastIndex, match.index));
+    // URL = 23
+    weight += 23;
+    lastIndex = match.index + match[0].length;
+  }
+  // 残りのテキスト
+  weight += calcTextWeight(text.slice(lastIndex));
+  return weight;
+}
+
+function calcTextWeight(text) {
+  let weight = 0;
+  for (const char of text) {
+    const code = char.codePointAt(0);
+    if (
+      (code >= 0x1100 && code <= 0x11ff) ||  // Hangul Jamo
+      (code >= 0x2e80 && code <= 0x9fff) ||  // CJK
+      (code >= 0xac00 && code <= 0xd7af) ||  // Hangul Syllables
+      (code >= 0xf900 && code <= 0xfaff) ||  // CJK Compatibility
+      (code >= 0xfe30 && code <= 0xfe4f) ||  // CJK Compatibility Forms
+      (code >= 0xff00 && code <= 0xffef) ||  // Fullwidth Forms
+      (code >= 0x20000 && code <= 0x2fa1f) || // CJK Extension
+      (code >= 0x3000 && code <= 0x303f) ||  // CJK Symbols
+      (code >= 0x3040 && code <= 0x309f) ||  // Hiragana
+      (code >= 0x30a0 && code <= 0x30ff) ||  // Katakana
+      (code >= 0x31f0 && code <= 0x31ff) ||  // Katakana Extension
+      (code >= 0x2600 && code <= 0x27bf) ||  // Misc Symbols + Dingbats (★等)
+      (code >= 0x1f000 && code <= 0x1faff)   // Emoji
+    ) {
+      weight += 2;
+    } else {
+      weight += 1;
+    }
+  }
+  return weight;
+}
+
+// 豆知識テキストを280加重文字以内に収まるよう切り詰め
+function truncateTipForTweet(tip, maxTipWeight) {
+  let result = "";
+  let weight = 0;
+  for (const char of tip) {
+    const code = char.codePointAt(0);
+    const charWeight =
+      (code >= 0x1100 && code <= 0x11ff) ||
+      (code >= 0x2e80 && code <= 0x9fff) ||
+      (code >= 0xac00 && code <= 0xd7af) ||
+      (code >= 0xf900 && code <= 0xfaff) ||
+      (code >= 0xfe30 && code <= 0xfe4f) ||
+      (code >= 0xff00 && code <= 0xffef) ||
+      (code >= 0x20000 && code <= 0x2fa1f) ||
+      (code >= 0x3000 && code <= 0x303f) ||
+      (code >= 0x3040 && code <= 0x309f) ||
+      (code >= 0x30a0 && code <= 0x30ff) ||
+      (code >= 0x31f0 && code <= 0x31ff) ||
+      (code >= 0x2600 && code <= 0x27bf) ||
+      (code >= 0x1f000 && code <= 0x1faff)
+        ? 2
+        : 1;
+    if (weight + charWeight > maxTipWeight) break;
+    result += char;
+    weight += charWeight;
+  }
+  // 文末を「。」か「…」で終わるように
+  if (result.length < tip.length) {
+    // 最後の「。」まで戻る
+    const lastPeriod = result.lastIndexOf("。");
+    if (lastPeriod > result.length * 0.5) {
+      result = result.slice(0, lastPeriod + 1);
+    } else {
+      result = result.trimEnd() + "…";
+    }
+  }
+  return result;
+}
+
 function pickTip() {
   const posted = getPostedTips();
   const postedSlugs = new Set(posted.map((p) => p.slug));
@@ -510,22 +596,39 @@ async function main() {
   const difficultyStars = formatDifficulty(tip.difficulty);
   const peakMonthsJa = formatPeakMonths(tip.peakMonths);
 
+  // テンプレート部分（豆知識テキスト以外）の加重文字数を計算
+  const templateParts = [
+    `\uD83D\uDCA1 ${tip.name}の豆知識`,
+    "",
+    "", // ← ここにtip.tipが入る
+    "",
+    `\uD83C\uDFA3 ${difficultyStars} | \uD83D\uDCC5 ${peakMonthsJa}`,
+    "",
+    `\u2192 https://tsurispot.com/fish/${tip.slug}`,
+    `#釣り #${tip.name} #ツリスポ`,
+  ];
+  const templateText = templateParts.join("\n");
+  const templateWeight = twitterWeightedLength(templateText);
+
+  // 豆知識テキストに使える加重文字数（280 - テンプレート分 - 余裕5）
+  const maxTipWeight = 280 - templateWeight - 5;
+  const tipText = truncateTipForTweet(tip.tip, maxTipWeight);
+
   const tweetText = [
     `\uD83D\uDCA1 ${tip.name}の豆知識`,
     "",
-    tip.tip,
+    tipText,
     "",
-    `\uD83C\uDFA3 難易度: ${difficultyStars}`,
-    `\uD83D\uDCC5 旬: ${peakMonthsJa}`,
-    `\uD83C\uDF73 おすすめ料理: ${tip.cookingTip}`,
+    `\uD83C\uDFA3 ${difficultyStars} | \uD83D\uDCC5 ${peakMonthsJa}`,
     "",
-    `詳しくは\u2192 https://tsurispot.com/fish/${tip.slug}`,
-    `#釣り #${tip.name} #魚図鑑 #ツリスポ`,
+    `\u2192 https://tsurispot.com/fish/${tip.slug}`,
+    `#釣り #${tip.name} #ツリスポ`,
   ].join("\n");
 
+  const weightedLen = twitterWeightedLength(tweetText);
   console.log("=== ツイート内容 ===");
   console.log(tweetText);
-  console.log(`\n文字数: ${tweetText.length}字`);
+  console.log(`\n文字数: ${tweetText.length}字（加重: ${weightedLen}/280）`);
 
   if (dryRun) {
     console.log("\n[dry-run] 投稿はスキップ");
