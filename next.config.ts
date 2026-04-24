@@ -1,13 +1,42 @@
 import type { NextConfig } from "next";
 import bundleAnalyzer from "@next/bundle-analyzer";
 import spotRedirects from "./src/lib/data/spot-redirects.json";
+import { dedupRedirects, fishingSpots } from "./src/lib/data/spots";
 
 const withBundleAnalyzer = bundleAnalyzer({
   enabled: process.env.ANALYZE === "true",
 });
 
-// 重複除去で消失したslugのリダイレクト（665件）+ 手動リダイレクト
-const spotRedirectEntries = Object.entries(spotRedirects).map(([oldSlug, newSlug]) => ({
+// 生存しているslugの集合
+const liveSlugSet = new Set(fishingSpots.map(s => s.slug));
+
+// spot-redirects.json + dedup自動リダイレクトを統合
+// リダイレクト先が生存していない場合はdedupRedirectsで解決を試みる
+const allRedirects = new Map<string, string>();
+
+// 1. dedup自動リダイレクト（最優先: 確実に正しいターゲットを持つ）
+for (const [oldSlug, newSlug] of dedupRedirects) {
+  if (liveSlugSet.has(newSlug)) {
+    allRedirects.set(oldSlug, newSlug);
+  }
+}
+
+// 2. spot-redirects.jsonの手動リダイレクト（ターゲット検証付き）
+for (const [oldSlug, newSlug] of Object.entries(spotRedirects)) {
+  if (allRedirects.has(oldSlug)) continue; // dedup自動が優先
+  if (liveSlugSet.has(newSlug as string)) {
+    allRedirects.set(oldSlug, newSlug as string);
+  } else {
+    // ターゲットが消えている → dedupRedirectsで解決を試みる
+    const resolved = dedupRedirects.get(newSlug as string);
+    if (resolved && liveSlugSet.has(resolved)) {
+      allRedirects.set(oldSlug, resolved);
+    }
+    // それでも解決できない場合はスキップ（壊れたリダイレクトを防止）
+  }
+}
+
+const spotRedirectEntries = Array.from(allRedirects.entries()).map(([oldSlug, newSlug]) => ({
   source: `/spots/${oldSlug}`,
   destination: `/spots/${newSlug}`,
   permanent: true as const,

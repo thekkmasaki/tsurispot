@@ -2,6 +2,9 @@ import { FishingSpot } from "@/types";
 import { allRawSpots } from "./spots-registry";
 import { spotRulesBatch } from "./spots-rules-batch";
 
+// 重複排除で消えたslugから勝者slugへのマップ（自動リダイレクト用）
+export const dedupRedirects = new Map<string, string>();
+
 // Deduplication: remove duplicate spots by name (and near-duplicates within ~500m)
 // Keeps the entry with the most catchable fish as a proxy for data completeness.
 // _baseSpots are listed first so they are preferred when catchableFish counts tie.
@@ -14,7 +17,12 @@ function deduplicateSpots(spots: FishingSpot[]): FishingSpot[] {
       seen.set(key, spot);
     } else {
       if (spot.catchableFish.length > existing.catchableFish.length) {
+        // 既存のslugは負け → 新しいslugへリダイレクト
+        dedupRedirects.set(existing.slug, spot.slug);
         seen.set(key, spot);
+      } else {
+        // 新しいslugは負け → 既存のslugへリダイレクト
+        dedupRedirects.set(spot.slug, existing.slug);
       }
     }
   }
@@ -31,12 +39,27 @@ function deduplicateSpots(spots: FishingSpot[]): FishingSpot[] {
       deduped.push(spot);
     } else if (existing.name.trim() === spot.name.trim()) {
       if (spot.catchableFish.length > existing.catchableFish.length) {
+        dedupRedirects.set(existing.slug, spot.slug);
         const idx = deduped.indexOf(existing);
         if (idx !== -1) deduped[idx] = spot;
         coordMap.set(ck, spot);
+      } else {
+        dedupRedirects.set(spot.slug, existing.slug);
       }
     } else {
       deduped.push(spot);
+    }
+  }
+  // チェーン解決: A→B→C の場合、A→C に修正
+  for (const [loser, winner] of dedupRedirects) {
+    let finalWinner = winner;
+    let depth = 0;
+    while (dedupRedirects.has(finalWinner) && depth < 10) {
+      finalWinner = dedupRedirects.get(finalWinner)!;
+      depth++;
+    }
+    if (finalWinner !== winner) {
+      dedupRedirects.set(loser, finalWinner);
     }
   }
   return deduped;
