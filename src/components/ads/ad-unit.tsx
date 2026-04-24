@@ -246,10 +246,10 @@ export function SideRailAds() {
   if (!ADSENSE_ID) return null;
   return (
     <>
-      {/* 左サイドレール */}
+      {/* 左サイドレール: 1680px以上でのみ表示（コンテンツ1280px+広告160px×2+余白80px） */}
       <div
-        className="hidden 2xl:block fixed top-1/2 -translate-y-1/2 z-40"
-        style={{ left: "max(0px, calc((100vw - 1280px) / 2 - 176px))" }}
+        className="fixed top-1/2 -translate-y-1/2 z-40"
+        style={{ left: "max(8px, calc((100vw - 1280px) / 2 - 176px))", display: "var(--side-rail-display, none)" }}
       >
         <div className="w-[160px]">
           <AdUnit
@@ -262,8 +262,8 @@ export function SideRailAds() {
       </div>
       {/* 右サイドレール */}
       <div
-        className="hidden 2xl:block fixed top-1/2 -translate-y-1/2 z-40"
-        style={{ right: "max(0px, calc((100vw - 1280px) / 2 - 176px))" }}
+        className="fixed top-1/2 -translate-y-1/2 z-40"
+        style={{ right: "max(8px, calc((100vw - 1280px) / 2 - 176px))", display: "var(--side-rail-display, none)" }}
       >
         <div className="w-[160px]">
           <AdUnit
@@ -274,6 +274,11 @@ export function SideRailAds() {
           />
         </div>
       </div>
+      {/* 1680px未満ではサイドレール非表示 */}
+      <style>{`
+        :root { --side-rail-display: none; }
+        @media (min-width: 1680px) { :root { --side-rail-display: block; } }
+      `}</style>
     </>
   );
 }
@@ -301,6 +306,60 @@ export function ParallelAds({ className = "" }: { className?: string }) {
         <AdUnit slot={SLOTS.display} format="rectangle" style={{ display: "block", width: "100%", height: "250px" }} />
       </div>
     </AdWrapper>
+  );
+}
+
+// ---- モバイル固定フッター広告（kabutan.jp式、MobileNav上部に固定） ----
+export function MobileStickyAd() {
+  const [visible, setVisible] = useState(false);
+  const [dismissed, setDismissed] = useState(false);
+
+  useEffect(() => {
+    if (!ADSENSE_ID) return;
+    // 3秒後に表示（初回表示を邪魔しない）
+    const timer = setTimeout(() => setVisible(true), 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!ADSENSE_ID || dismissed || !visible) return null;
+
+  return (
+    <div
+      className="fixed bottom-[calc(60px+env(safe-area-inset-bottom,0px))] left-0 right-0 z-40 md:hidden border-t border-border/30 bg-background/95 backdrop-blur-sm"
+    >
+      <div className="relative px-2 py-1">
+        <button
+          onClick={() => setDismissed(true)}
+          className="absolute -top-5 right-2 z-50 flex size-5 items-center justify-center rounded-full bg-muted/90 text-[10px] text-muted-foreground shadow-sm"
+          aria-label="広告を閉じる"
+        >
+          ✕
+        </button>
+        <AdUnit
+          slot={SLOTS.display}
+          format="horizontal"
+          style={{ display: "block", width: "100%", height: "50px" }}
+          responsive
+        />
+      </div>
+    </div>
+  );
+}
+
+// ---- モバイルヘッダーバナー広告（モバイルのみ表示） ----
+export function MobileHeaderBannerAd() {
+  if (!ADSENSE_ID) return null;
+  return (
+    <div className="md:hidden border-b border-border/20 bg-muted/5">
+      <div className="mx-auto max-w-lg px-2 py-1">
+        <AdUnit
+          slot={SLOTS.display}
+          format="horizontal"
+          style={{ display: "block", width: "100%", height: "50px" }}
+          responsive
+        />
+      </div>
+    </div>
   );
 }
 
