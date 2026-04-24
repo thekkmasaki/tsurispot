@@ -57,7 +57,7 @@ import { PackingChecklist } from "@/components/spots/packing-checklist";
 import { getCatchReportsBySpot } from "@/lib/data/catch-reports";
 import { CatchReportList } from "@/components/spots/catch-report-list";
 import { CatchReportForm } from "@/components/spots/catch-report-form";
-import { NearbyAccommodation } from "@/components/spots/nearby-accommodation";
+import { NearbyAccommodation, RakutenTravelCta } from "@/components/spots/nearby-accommodation";
 import { SpotRulesCard } from "@/components/spots/spot-rules";
 const SpotPhotoGallery = dynamic(
   () => import("@/components/spots/spot-photo-gallery").then(m => ({ default: m.SpotPhotoGallery })),
@@ -139,10 +139,10 @@ export async function generateMetadata({
   const description = descParts.filter(Boolean).join("").slice(0, 155);
   const ogDescription = `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）で${fishNames}が狙えます。${spot.description}`;
 
-  // サイトマップ除外基準と統一: 薄いページはnoindex（クロールバジェット節約）
+  // 本当に薄いページのみnoindex: 説明文50文字未満 かつ 魚種1種以下
   const descLength = (spot.description || "").length;
   const fishCount = spot.catchableFish.length;
-  const isLowQuality = descLength < 100 || fishCount <= 2;
+  const isLowQuality = descLength < 50 && fishCount <= 1;
 
   return {
     title,
@@ -905,6 +905,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
               <ExternalLink className="size-3.5" />
             </a>
           </section>
+          {/* モバイル広告: YouTube動画セクション後 */}
+          <div className="lg:hidden mt-4">
+            <LazyAd className="my-4"><DisplayAd /></LazyAd>
+          </div>
         </>}
         fishTab={<>
           <h2 className="sr-only">{spot.name}の釣り情報</h2>
@@ -1341,6 +1345,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
         </section>
       )}
 
+      {/* モバイル広告: 近くのスポット後 */}
+      <div className="lg:hidden my-4">
+        <LazyAd><InArticleAd /></LazyAd>
+      </div>
+
       {/* 関連スポット・ガイド（折りたたみ） */}
       <CollapsibleSection
         title={`${spot.region.prefecture}の関連スポット・ガイド`}
@@ -1629,6 +1638,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
           </section>
         );
       })()}
+
+      {/* 遠征釣り宿泊CTA（楽天トラベルアフィリエイト） */}
+      <RakutenTravelCta spotName={spot.name} latitude={spot.latitude} longitude={spot.longitude} areaName={spot.region.areaName} />
 
       {/* 最近見たスポット */}
       <RecentlyViewedSpots />

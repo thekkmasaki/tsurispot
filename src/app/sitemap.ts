@@ -190,12 +190,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })),
 
     // ===== スポット詳細ページ（画像サイトマップ付き）=====
-    // noindex対象（description<100文字 or catchableFish≤2）はサイトマップから除外（spots/[slug]のnoindex基準と統一）
+    // noindex対象（description<50文字 かつ catchableFish≤1）のみサイトマップから除外
     ...fishingSpots
       .filter((spot) => {
         const descLen = (spot.description || "").length;
         const fishCount = spot.catchableFish.length;
-        return descLen >= 100 && fishCount > 2;
+        return descLen >= 50 || fishCount > 1;
       })
       .map((spot) => {
         const descLen = (spot.description || "").length;
