@@ -295,18 +295,19 @@ export async function generateMetadata({
   const featureTexts = [beginnerText, familyText, freeText].filter(Boolean).join("・");
 
   const currentYear = new Date().getFullYear();
-  const title = `${pref.name}の釣り場おすすめ完全ガイド${spots.length > 0 ? `【${spots.length}選】` : ""}初心者・穴場スポット${featureTexts ? `｜${featureTexts}` : ""}【${currentYear}年最新】`;
+  const title = `${pref.name}の釣り場おすすめ${spots.length > 0 ? `${spots.length}選` : ""}【${currentYear}年】初心者・穴場`;
   const description = `${pref.name}のおすすめ釣りスポット${spots.length > 0 ? `${spots.length}箇所` : ""}を初心者〜上級者別にランキング形式で紹介。${familyCount > 0 ? `子連れ・ファミリー向け${familyCount}箇所。` : ""}${pref.name}近くの${spotTypeText || "堤防・漁港・磯"}で${topFishNames}が狙える穴場釣り場を厳選。人気TOP10ランキング・季節別おすすめ魚種・駐車場・トイレ情報・ベストシーズン・アクセス方法まで完全ガイド。${featureTexts ? `【${featureTexts}】` : ""}`;
 
   return {
     title,
     description,
     openGraph: {
-      title: `${pref.name}の釣り場おすすめ完全ガイド${spots.length > 0 ? `【${spots.length}選】` : ""}【${currentYear}年最新】`,
+      title: `${pref.name}の釣り場おすすめ${spots.length > 0 ? `${spots.length}選` : ""}【${currentYear}年】`,
       description: `${pref.name}で人気の釣りスポットをエリア別に紹介。${topFishNames}が釣れるおすすめの釣り場情報。${featureTexts ? `${featureTexts}。` : ""}`,
       type: "website",
       url: `https://tsurispot.com/prefecture/${pref.slug}`,
       siteName: "ツリスポ",
+      images: [{ url: `https://tsurispot.com/api/og?title=${encodeURIComponent(`${pref.name}の釣り場ガイド`)}&emoji=🗾`, width: 1200, height: 630 }],
     },
     alternates: {
       canonical: `https://tsurispot.com/prefecture/${pref.slug}`,

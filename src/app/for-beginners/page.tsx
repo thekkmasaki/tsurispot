@@ -41,6 +41,7 @@ export const metadata: Metadata = {
     type: "article",
     url: "https://tsurispot.com/for-beginners",
     siteName: "ツリスポ",
+    images: [{ url: "https://tsurispot.com/api/og?title=はじめての釣り完全ガイド&emoji=🎣", width: 1200, height: 630 }],
   },
   alternates: {
     canonical: "https://tsurispot.com/for-beginners",

@@ -15,6 +15,8 @@ const BackToTop = dynamic(() => import("@/components/ui/back-to-top").then(m => 
 const CompareBar = dynamic(() => import("@/components/spots/compare-bar").then(m => ({ default: m.CompareBar })));
 const PreFooterAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.PreFooterAd })));
 const HeaderBannerAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.HeaderBannerAd })));
+const MobileHeaderBannerAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.MobileHeaderBannerAd })));
+const MobileStickyAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.MobileStickyAd })));
 const SideRailAds = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.SideRailAds })));
 import "./globals.css";
 
@@ -84,8 +86,6 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@tsurispot_jp",
-    title: "ツリスポ（つりすぽ）- 近くの釣りスポット検索",
-    description: `近くの釣りスポットを地図で簡単検索。全国${SPOT_COUNT}箇所以上の釣り場の潮汐・水温・風速予報・混雑予想を網羅。`,
   },
   robots: {
     index: true,
@@ -242,10 +242,12 @@ export default function RootLayout({
         <SideRailAds />
         <Header />
         <HeaderBannerAd />
+        <MobileHeaderBannerAd />
         <main className="min-h-screen pb-24 md:pb-0">{children}</main>
         <PreFooterAd />
         <Footer />
         <MobileNav />
+        <MobileStickyAd />
         <PWAInstallHint />
         <CompareBar />
         <BackToTop />

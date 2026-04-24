@@ -17,6 +17,7 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://tsurispot.com/fish",
     siteName: "ツリスポ",
+    images: [{ url: "https://tsurispot.com/api/og?title=魚種図鑑｜釣りで狙える魚ガイド&emoji=🐟", width: 1200, height: 630 }],
   },
   alternates: {
     canonical: "https://tsurispot.com/fish",
