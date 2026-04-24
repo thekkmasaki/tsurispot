@@ -108,7 +108,7 @@ const seasons: SeasonData[] = [
       { name: "イワシ", slug: "iwashi", description: "大群で回遊。入れ食いになることも。" },
       { name: "キス", slug: "kisu", description: "砂浜からのちょい投げで手軽に狙える夏の定番。", peak: true },
       { name: "タチウオ", slug: "tachiuo", description: "夏の夜釣りのターゲット。電気ウキで狙える。" },
-      { name: "シーバス", slug: "seabass", description: "バチ抜けパターンなどでルアーで狙える。" },
+      { name: "シーバス", slug: "suzuki", description: "バチ抜けパターンなどでルアーで狙える。" },
     ],
     methods: [
       { name: "サビキ釣り", description: "夏のファミリーフィッシングの定番。アジ・サバ・イワシが狙える。" },

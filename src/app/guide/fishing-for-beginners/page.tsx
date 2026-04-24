@@ -698,7 +698,7 @@ export default function FishingForBeginnersPage() {
                 { name: "ハゼ", slug: "haze", desc: "河口のちょい投げで。天ぷらが絶品", season: "秋" },
                 { name: "アオリイカ", slug: "aoriika", desc: "エギングの人気ターゲット。刺身が美味", season: "秋" },
                 { name: "カレイ", slug: "karei", desc: "投げ釣りの定番。煮付け・唐揚げに", season: "冬" },
-                { name: "シーバス", slug: "seabass", desc: "ルアー釣りの王道。大型の引きが魅力", season: "通年" },
+                { name: "シーバス", slug: "suzuki", desc: "ルアー釣りの王道。大型の引きが魅力", season: "通年" },
               ].map((fish, i) => (
                 <Link
                   key={fish.slug}

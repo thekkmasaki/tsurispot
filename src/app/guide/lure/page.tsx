@@ -602,7 +602,7 @@ export default function LureGuidePage() {
                 {[
                   { slug: "aji", name: "アジ", badge: "アジング" },
                   { slug: "mebaru", name: "メバル", badge: "メバリング" },
-                  { slug: "seabass", name: "シーバス", badge: "人気No.1" },
+                  { slug: "suzuki", name: "シーバス", badge: "人気No.1" },
                   { slug: "buri", name: "ブリ", badge: "ショアジギング" },
                   { slug: "hirame", name: "ヒラメ", badge: "サーフ" },
                   { slug: "kasago", name: "カサゴ", badge: "ロックフィッシュ" },

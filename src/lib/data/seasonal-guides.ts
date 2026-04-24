@@ -254,7 +254,7 @@ export const seasonalGuides: SeasonalGuide[] = [
     months: [6, 7, 8, 9],
     method: "夜釣り",
     spotTypes: ["breakwater", "port", "pier", "beach"],
-    targetFish: ["tachiuo", "aji", "seabass", "mebaru"],
+    targetFish: ["tachiuo", "aji", "suzuki", "mebaru"],
     description:
       "夏の日中は暑さが厳しいですが、夜になれば涼しい海風の中で快適な釣りが楽しめます。夏の夜釣りはタチウオ、アジ、シーバスなど魅力的なターゲットが多く、常夜灯周りの漁港が好ポイント。電気ウキで狙うタチウオ釣りは、ウキがスッと沈む瞬間のドキドキ感がたまりません。ルアーでのアジングやシーバスゲームも夜がメインの時間帯。涼しく快適な夏の夜釣りは、暑さを避けながら魚釣りを満喫できる最高の選択肢です。",
     tips: [

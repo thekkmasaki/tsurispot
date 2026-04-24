@@ -380,7 +380,7 @@ export default function OyogasePage() {
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
           {[
             { name: "ヒラメ", slug: "hirame", desc: "砂地底の高級魚" },
-            { name: "シーバス", slug: "seabass", desc: "港湾・河口で狙える" },
+            { name: "シーバス", slug: "suzuki", desc: "港湾・河口で狙える" },
             { name: "ブリ・イナダ", slug: "buri", desc: "回遊次第で大物" },
             { name: "マゴチ", slug: "magochi", desc: "砂底のフラットフィッシュ" },
             { name: "アオリイカ", slug: "aoriika", desc: "ウキ泳がせで狙う" },

@@ -1,30 +1,30 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import Link from "next/link";
 import { Heart, Map, List } from "lucide-react";
 import { SpotCard } from "@/components/spots/spot-card";
 import { Button } from "@/components/ui/button";
-import { fishingSpots } from "@/lib/data/spots";
+import type { FishingSpot } from "@/types";
 import { useFavorites, getFavorites } from "@/hooks/use-favorites";
 import { DisplayAd } from "@/components/ads/ad-unit";
 
-export function FavoritesClient() {
+type LightSpot = Pick<FishingSpot, "id" | "slug" | "name" | "mainImageUrl" | "spotType" | "region" | "catchableFish" | "rating" | "difficulty" | "isFree" | "hasParking" | "hasToilet" | "hasRentalRod" | "hasConvenienceStore">;
+
+export function FavoritesClient({ spotMap }: { spotMap: Record<string, LightSpot> }) {
   const { favorites: favoritesSlugs, removeFavorite } = useFavorites();
+  const validSlugs = useMemo(() => new Set(Object.keys(spotMap)), [spotMap]);
 
   // 存在しないスポットのslugをクリーンアップ
   useEffect(() => {
     const savedSlugs = getFavorites();
-    const invalidSlugs = savedSlugs.filter(
-      (slug) => !fishingSpots.some((spot) => spot.slug === slug)
-    );
-    // 無効なスラッグがある場合のみ削除
+    const invalidSlugs = savedSlugs.filter((slug) => !validSlugs.has(slug));
     invalidSlugs.forEach((slug) => removeFavorite(slug));
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const favoriteSpots = fishingSpots.filter((spot) =>
-    favoritesSlugs.includes(spot.slug)
-  );
+  const favoriteSpots = favoritesSlugs
+    .map((slug) => spotMap[slug])
+    .filter(Boolean);
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
@@ -45,7 +45,7 @@ export function FavoritesClient() {
           </p>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
             {favoriteSpots.map((spot) => (
-              <SpotCard key={spot.id} spot={spot} />
+              <SpotCard key={spot.id} spot={spot as FishingSpot} />
             ))}
           </div>
           <DisplayAd />

@@ -382,7 +382,7 @@ export const freshwaterSpotsWestAdd: FishingSpot[] = [
       { fish: fish("ayu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
       { fish: fish("blackbass"), monthStart: 3, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("koi"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "吸い込み釣り" },
-      { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー" },
+      { fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー" },
     ],
     bestTimes: [{ label: "朝マヅメ", timeRange: "05:30〜07:30", rating: "best" }, { label: "夕マヅメ", timeRange: "16:30〜18:30", rating: "good" }],
     tackleRecommendations: [],

@@ -33,7 +33,7 @@ import { SectionErrorBoundary } from "@/components/ui/section-error-boundary";
 /** タグの魚名→画像パス */
 const FISH_TAG_IMG: Record<string, string> = {
   "アジ": "aji", "サバ": "saba", "カサゴ": "kasago", "ガシラ": "kasago",
-  "メバル": "mebaru", "イワシ": "iwashi", "シーバス": "seabass",
+  "メバル": "mebaru", "イワシ": "iwashi", "シーバス": "suzuki",
   "タチウオ": "tachiuo", "マダイ": "madai", "キス": "kisu",
   "カレイ": "karei", "イシガレイ": "karei", "アオリイカ": "aoriika",
   "カワハギ": "kawahagi", "サヨリ": "sayori", "ヒラメ": "hirame",
@@ -42,7 +42,7 @@ const FISH_TAG_IMG: Record<string, string> = {
   "グレ": "mejina", "ホッケ": "hokke", "フグ": "fugu", "ハゼ": "haze",
   "コブダイ": "kobudai", "ヒラマサ": "hiramasa", "アカハタ": "akahata",
 };
-const FALLBACK_FISH = ["aji", "madai", "mebaru", "kasago", "seabass", "buri"];
+const FALLBACK_FISH = ["aji", "madai", "mebaru", "kasago", "suzuki", "buri"];
 function getFishImage(tags: string[], id: string): string {
   for (const t of tags) { const s = FISH_TAG_IMG[t]; if (s) return `/images/fish/${s}.jpg`; }
   let h = 0; for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) | 0;

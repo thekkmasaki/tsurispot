@@ -466,7 +466,7 @@ export const extraSpots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り", source: "アングラーズ" },
       { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り", source: "アングラーズ" },
-      { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "アングラーズ" },
+      { fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "アングラーズ" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "アングラーズ" },
     ],
     bestTimes: btStandard, tackleRecommendations: [],
@@ -620,7 +620,7 @@ export const extraSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/b/bb/JR_east_Type_111_DC_%40Sakata_%284020939059%29.jpg", imageAttribution: "Photo: Yamaguchi Yoshiaki from Japan / Wikimedia Commons (CC BY-SA 2.0)", images: [], rating: 4.1, reviewCount: 120, googleRating: 3.6, googleReviewCount: 16,
     catchableFish: [
-      { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "アングラーズ" },
+      { fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "アングラーズ" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "アングラーズ" },
       { fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング", source: "アングラーズ" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "アングラーズ" },
@@ -688,7 +688,7 @@ export const extraSpots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ", source: "アングラーズ" },
       { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り", source: "アングラーズ" },
-      { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "アングラーズ" },
+      { fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "アングラーズ" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "アングラーズ" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
@@ -822,7 +822,7 @@ export const extraSpots: FishingSpot[] = [
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/wikimedia/arakawa-onpaisui.webp", imageAttribution: "Photo: Takashi Hososhima / Wikimedia Commons (CC BY-SA 2.0)", images: [], rating: 3.8, reviewCount: 88, googleRating: 3.5, googleReviewCount: 27,
     catchableFish: [
-      { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "HONDA釣り倶楽部" },
+      { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "HONDA釣り倶楽部" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ", source: "HONDA釣り倶楽部" },
       { fish: fish("tenagaebi"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ミャク釣り", source: "HONDA釣り倶楽部" },
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り・毛針", source: "HONDA釣り倶楽部" },
@@ -915,7 +915,7 @@ export const extraSpots: FishingSpot[] = [
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Laika_ac_Hello_Kitty_Squid%21_%287641808434%29.jpg/960px-Laika_ac_Hello_Kitty_Squid%21_%287641808434%29.jpg", imageAttribution: "Photo: Laika ac from USA / Wikimedia Commons (CC BY-SA 2.0)", images: [], rating: 3.5, reviewCount: 95, googleRating: 4.4, googleReviewCount: 15153,
     catchableFish: [
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ", source: "上州屋" },
-      { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "上州屋" },
+      { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "上州屋" },
       { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り", source: "上州屋" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
@@ -1023,7 +1023,7 @@ export const extraSpots: FishingSpot[] = [
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/86/Ibaraki_prefectural_road_route_117_%28Fukashibahama-Hasaki_line%29_in_Kodamadai%2CHasaki%2CKamisu_city.JPG/960px-Ibaraki_prefectural_road_route_117_%28Fukashibahama-Hasaki_line%29_in_Kodamadai%2CHasaki%2CKamisu_city.JPG", imageAttribution: "Photo: 小石川人晃 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 75, googleRating: 4.3, googleReviewCount: 19,
     catchableFish: [
-      { fish: fish("seabass"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "HONDA釣り倶楽部" },
+      { fish: fish("suzuki"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "HONDA釣り倶楽部" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ", source: "HONDA釣り倶楽部" },
       { fish: fish("tenagaebi"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ミャク釣り", source: "HONDA釣り倶楽部" },
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り・毛針", source: "HONDA釣り倶楽部" },
@@ -1112,7 +1112,7 @@ export const extraSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/%E9%89%84%E5%A1%94_-_panoramio.jpg/960px-%E9%89%84%E5%A1%94_-_panoramio.jpg", imageAttribution: "Photo: suzune konoo / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.0, reviewCount: 195, googleRating: 5, googleReviewCount: 1,
     catchableFish: [
-      { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "HONDA釣り倶楽部" },
+      { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "HONDA釣り倶楽部" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ", source: "HONDA釣り倶楽部" },
       { fish: fish("tenagaebi"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ミャク釣り", source: "HONDA釣り倶楽部" },
     ],
@@ -1162,7 +1162,7 @@ export const extraSpots: FishingSpot[] = [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り", source: "上州屋" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り", source: "上州屋" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ", source: "上州屋" },
-      { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "上州屋" },
+      { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "上州屋" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "上州屋" },
     ],
     bestTimes: btStandard, tackleRecommendations: [],
@@ -1183,7 +1183,7 @@ export const extraSpots: FishingSpot[] = [
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/View_of_Kasai_Kaihin_Park_20080524.JPG/960px-View_of_Kasai_Kaihin_Park_20080524.JPG", imageAttribution: "Photo: 掬茶 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 155, googleRating: 4.3, googleReviewCount: 18489,
     catchableFish: [
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ", source: "上州屋" },
-      { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "上州屋" },
+      { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "上州屋" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "上州屋" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
@@ -1410,7 +1410,7 @@ export const extraSpots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "イシグロ" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ", source: "イシグロ" },
-      { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "イシグロ" },
+      { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "イシグロ" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "イシグロ" },
     ],
     bestTimes: btStandard, tackleRecommendations: [],
@@ -1649,7 +1649,7 @@ export const extraSpots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ", source: "イシグロ" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ちょい投げ", source: "イシグロ" },
-      { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "イシグロ" },
+      { fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "イシグロ" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "イシグロ" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
@@ -1671,7 +1671,7 @@ export const extraSpots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ", source: "イシグロ" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ちょい投げ", source: "イシグロ" },
-      { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "イシグロ" },
+      { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "イシグロ" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "イシグロ" },
     ],
     bestTimes: btStandard, tackleRecommendations: [],
@@ -1717,7 +1717,7 @@ export const extraSpots: FishingSpot[] = [
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/Takumicho%2C_Sakai_Ward%2C_Sakai%2C_Osaka_Prefecture_590-0908%2C_Japan_-_panoramio.jpg/960px-Takumicho%2C_Sakai_Ward%2C_Sakai%2C_Osaka_Prefecture_590-0908%2C_Japan_-_panoramio.jpg", imageAttribution: "Photo: Nagono / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 118, googleRating: 3.4, googleReviewCount: 102,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "フィッシングマックス" },
-      { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "フィッシングマックス" },
+      { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "フィッシングマックス" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ", source: "フィッシングマックス" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "フィッシングマックス" },
     ],
@@ -2031,7 +2031,7 @@ export const extraSpots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ", source: "フィッシングマックス" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "フィッシングマックス" },
-      { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "フィッシングマックス" },
+      { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "フィッシングマックス" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "フィッシングマックス" },
     ],
     bestTimes: btNight, tackleRecommendations: [],
@@ -2229,7 +2229,7 @@ export const extraSpots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "かめや釣具" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング", source: "かめや釣具" },
-      { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "かめや釣具" },
+      { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "かめや釣具" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "かめや釣具" },
     ],
     bestTimes: btStandard, tackleRecommendations: [],
@@ -2402,7 +2402,7 @@ export const extraSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Urado_Bay_in_Kochi_%2802%29_-_panoramio.jpg/960px-Urado_Bay_in_Kochi_%2802%29_-_panoramio.jpg", imageAttribution: "Photo: ikm / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.2, reviewCount: 115, googleRating: 3.8, googleReviewCount: 14,
     catchableFish: [
-      { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "アングラーズ" },
+      { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "アングラーズ" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ", source: "アングラーズ" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ", source: "アングラーズ" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "アングラーズ" },
@@ -2450,7 +2450,7 @@ export const extraSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7d/View_of_Wakamatsu_Station.jpg/960px-View_of_Wakamatsu_Station.jpg", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 85, googleRating: 3.8, googleReviewCount: 15,
     catchableFish: [
-      { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "ポイント" },
+      { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "ポイント" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ", source: "ポイント" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "ポイント" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "ポイント" },
@@ -2711,7 +2711,7 @@ export const extraSpots: FishingSpot[] = [
     mainImageUrl: "/images/spots/naha-tomari.jpg", images: [], rating: 3.6, reviewCount: 85,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "アングラーズ" },
-      { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "アングラーズ" },
+      { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "アングラーズ" },
       { fish: fish("taman"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ウキフカセ", source: "アングラーズ" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "アングラーズ" },
     ],
@@ -2734,7 +2734,7 @@ export const extraSpots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "アングラーズ" },
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ", source: "アングラーズ" },
-      { fish: fish("seabass"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "アングラーズ" },
+      { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "アングラーズ" },
       { fish: fish("taman"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ウキフカセ", source: "アングラーズ" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "アングラーズ" },
     ],

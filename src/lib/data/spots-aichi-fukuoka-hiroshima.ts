@@ -124,7 +124,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/150117_Handa_City_Hall.jpg/960px-150117_Handa_City_Hall.jpg", imageAttribution: "Photo: 名古屋太郎 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.6, reviewCount: 78, googleRating: 3.4, googleReviewCount: 22,
     catchableFish: [
       { fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ", source: "イシグロ" },
-      { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "イシグロ" },
+      { fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "イシグロ" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り", source: "イシグロ" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
@@ -145,7 +145,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/French-Fries-Oneday-Fes-Isshiki.jpg/960px-French-Fries-Oneday-Fes-Isshiki.jpg", imageAttribution: "Photo: HQA02330 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.9, reviewCount: 112, googleRating: 3.5, googleReviewCount: 30,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ヘチ釣り・ウキフカセ", source: "イシグロ" },
-      { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "イシグロ" },
+      { fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "イシグロ" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "イシグロ" },
       { fish: fish("haze"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ", source: "イシグロ" },
           { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "メバリング", source: "イシグロ" },
@@ -199,7 +199,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/78/Shiomicho_freight_station.jpg/960px-Shiomicho_freight_station.jpg", imageAttribution: "Photo: Tam0031 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 134,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ・夕マヅメ", method: "ヘチ釣り", source: "イシグロ" },
-      { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "イシグロ" },
+      { fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "イシグロ" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ・ワインド", source: "イシグロ" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "イシグロ" },
           { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り", source: "イシグロ" },
@@ -250,7 +250,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/%E6%B8%AF%E6%B9%BE%E6%8A%80%E8%83%BD%E7%A0%94%E4%BF%AE%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC_%E9%81%A0%E6%99%AF.jpg/960px-%E6%B8%AF%E6%B9%BE%E6%8A%80%E8%83%BD%E7%A0%94%E4%BF%AE%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC_%E9%81%A0%E6%99%AF.jpg", imageAttribution: "Photo: Mikkabie / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.9, reviewCount: 98, googleRating: 3.6, googleReviewCount: 16,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ヘチ釣り", source: "イシグロ" },
-      { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "イシグロ" },
+      { fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "イシグロ" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ", source: "イシグロ" },
       { fish: fish("anago"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "ぶっこみ釣り", source: "イシグロ" },
           { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り", source: "イシグロ" },
@@ -326,7 +326,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f3/Jofuku-ji-Nishio-002.jpg/960px-Jofuku-ji-Nishio-002.jpg", imageAttribution: "Photo: HQA02330 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.1, reviewCount: 95,
     catchableFish: [
-      { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜・朝マヅメ", method: "ルアー", source: "イシグロ" },
+      { fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜・朝マヅメ", method: "ルアー", source: "イシグロ" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ぶっこみ釣り", source: "イシグロ" },
       { fish: fish("magochi"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ルアー", source: "イシグロ" },
       { fish: fish("haze"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ", source: "イシグロ" },
@@ -395,7 +395,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/200209_FD3S_Chubu_Centrair_International_Airport.jpg/960px-200209_FD3S_Chubu_Centrair_International_Airport.jpg", imageAttribution: "Photo: 名古屋太郎 / Wikimedia Commons (CC0)", images: [], rating: 3.7, reviewCount: 62, googleRating: 3.5, googleReviewCount: 10,
     catchableFish: [
-      { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "イシグロ" },
+      { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "イシグロ" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ヘチ釣り", source: "イシグロ" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング", source: "イシグロ" },
           { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り", source: "イシグロ" },
@@ -450,7 +450,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Nagoya_20210221-048.jpg/960px-Nagoya_20210221-048.jpg", imageAttribution: "Photo: 円周率３パーセント / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.0, reviewCount: 108,
     catchableFish: [
-      { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜・朝マヅメ", method: "ルアー", source: "イシグロ" },
+      { fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜・朝マヅメ", method: "ルアー", source: "イシグロ" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ぶっこみ釣り", source: "イシグロ" },
       { fish: fish("haze"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ", source: "イシグロ" },
     ],
@@ -510,7 +510,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング・サビキ", source: "ポイント" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング", source: "ポイント" },
-      { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "ポイント" },
+      { fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "ポイント" },
           { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "ポイント" },
           { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング", source: "ポイント" },
           { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り", source: "ポイント" },
@@ -665,7 +665,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ・夜", method: "アジング・サビキ", source: "ポイント" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ウキ釣り", source: "ポイント" },
-      { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "ポイント" },
+      { fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "ポイント" },
     ],
     bestTimes: btNight, tackleRecommendations: [],
     tideAdvice: tideStandard, mazumeInfo: mazumeFukuoka,
@@ -686,7 +686,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング", source: "ポイント" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中・夜", method: "穴釣り", source: "ポイント" },
-      { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "ポイント" },
+      { fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "ポイント" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ウキ釣り", source: "ポイント" },
           { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り", source: "ポイント" },
           { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング", source: "ポイント" },
@@ -712,7 +712,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/wikimedia/ashiya-gyoko-teibo-fukuoka.webp", imageAttribution: "Photo: アラツク / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 76, googleRating: 3.6, googleReviewCount: 35,
     catchableFish: [
-      { fish: fish("seabass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜・朝マヅメ", method: "ルアー", source: "ポイント" },
+      { fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜・朝マヅメ", method: "ルアー", source: "ポイント" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "ポイント" },
       { fish: fish("hirame"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "泳がせ釣り", source: "ポイント" },
       { fish: fish("sawara"), monthStart: 9, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング", source: "ポイント" },
@@ -735,7 +735,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b3/Entrance_of_Fukuoka_Tower.JPG/960px-Entrance_of_Fukuoka_Tower.JPG", imageAttribution: "Photo: そらみみ (Soramimi) / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.7, reviewCount: 88, googleRating: 4.1, googleReviewCount: 6583,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ・夜", method: "アジング", source: "ポイント" },
-      { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "ポイント" },
+      { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "ポイント" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング", source: "ポイント" },
           { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り", source: "ポイント" },
           { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "ポイント" },
@@ -790,7 +790,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Kagami_Temman_Shrine_from_northern_side.JPG/960px-Kagami_Temman_Shrine_from_northern_side.JPG", imageAttribution: "Photo: そらみみ / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 98, googleRating: 3.6, googleReviewCount: 141,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "アジング", source: "ポイント" },
-      { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "ポイント" },
+      { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "ポイント" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ウキ釣り", source: "ポイント" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り", source: "ポイント" },
           { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り", source: "ポイント" },
@@ -843,7 +843,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
       { fish: fish("hirame"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "泳がせ釣り・ルアー", source: "ポイント" },
       { fish: fish("magochi"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ルアー", source: "ポイント" },
       { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り", source: "ポイント" },
-      { fish: fish("seabass"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー", source: "ポイント" },
+      { fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー", source: "ポイント" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
     tideAdvice: tideStandard, mazumeInfo: mazumeFukuoka,
@@ -1088,7 +1088,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/52/Ota_River_Bridge_sunset.jpg/960px-Ota_River_Bridge_sunset.jpg", imageAttribution: "Photo: Brianhe / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.6, reviewCount: 78, googleRating: 4, googleReviewCount: 183,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ・夜", method: "アジング", source: "かめや釣具" },
-      { fish: fish("seabass"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "かめや釣具" },
+      { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "かめや釣具" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング", source: "かめや釣具" },
       { fish: fish("haze"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ", source: "かめや釣具" },
           { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り", source: "かめや釣具" },

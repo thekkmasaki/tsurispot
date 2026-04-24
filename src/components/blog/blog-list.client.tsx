@@ -52,7 +52,7 @@ const CATEGORY_STYLE: Record<BlogPost["category"], { gradient: string; Icon: typ
 /** タグの魚名 → 画像slug マッピング */
 const FISH_TAG_TO_SLUG: Record<string, string> = {
   "アジ": "aji", "サバ": "saba", "カサゴ": "kasago", "ガシラ": "kasago",
-  "メバル": "mebaru", "イワシ": "iwashi", "シーバス": "seabass",
+  "メバル": "mebaru", "イワシ": "iwashi", "シーバス": "suzuki",
   "タチウオ": "tachiuo", "マダイ": "madai", "キス": "kisu",
   "カレイ": "karei", "イシガレイ": "karei", "マコガレイ": "karei",
   "アオリイカ": "aoriika", "カワハギ": "kawahagi", "サヨリ": "sayori",
@@ -72,7 +72,7 @@ const FISH_TAG_TO_SLUG: Record<string, string> = {
   "シイラ": "shiira", "カツオ": "katsuo", "ウナギ": "unagi",
 };
 
-const FALLBACK_FISH = ["aji", "madai", "mebaru", "kasago", "seabass", "buri"];
+const FALLBACK_FISH = ["aji", "madai", "mebaru", "kasago", "suzuki", "buri"];
 
 function getFallbackImage(tags: string[], postId: string): string {
   // タグから魚名を探して対応する写真を返す

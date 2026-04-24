@@ -7,7 +7,7 @@ export const seaFishTaiSuzuki: FishSpecies[] = [
     nameKana: "シーバス",
     nameEnglish: "Japanese Sea Bass",
     scientificName: "Lateolabrax japonicus",
-    slug: "seabass",
+    slug: "suzuki",
     description:
       "ルアーフィッシングの大人気ターゲットで、海のルアー釣りの代名詞的存在。港湾部・河口・磯・サーフと幅広いフィールドに生息し、年間を通じて狙える。成長に伴い「セイゴ→フッコ→スズキ」と名前が変わる出世魚。最大1m・10kgに達する。水面を割る「エラ洗い」と呼ばれる強烈なジャンプファイトが醍醐味。夜間の常夜灯周りや橋脚下がポイントで、バチ抜け（ゴカイの産卵）パターンやコノシロパターンなど、シーズンごとのパターンを読むゲーム性が高い。",
     category: "sea",
@@ -15,7 +15,7 @@ export const seaFishTaiSuzuki: FishSpecies[] = [
     difficulty: "intermediate",
     tasteRating: 3,
     sizeCm: "40~90cm",
-    imageUrl: "/images/fish/seabass.jpg",
+    imageUrl: "/images/fish/suzuki.jpg",
     seasonMonths: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
     peakMonths: [4, 5, 9, 10],
     cookingTips: ["刺身", "ムニエル", "塩焼き", "カルパッチョ"],

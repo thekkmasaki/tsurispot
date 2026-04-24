@@ -28,6 +28,18 @@ const nextConfig: NextConfig = {
       destination: '/for-beginners',
       permanent: true,
     },
+    // 魚種slug変更リダイレクト
+    {
+      source: '/fish/seabass',
+      destination: '/fish/suzuki',
+      permanent: true,
+    },
+    // /login等の不正パスをトップへ
+    {
+      source: '/login',
+      destination: '/',
+      permanent: false,
+    },
     // 重複除去で消失したslug → 正しいslugへ301リダイレクト
     ...spotRedirectEntries,
   ],

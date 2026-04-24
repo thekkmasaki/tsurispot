@@ -20,7 +20,7 @@ export const fishMetadata: Record<string, FishMeta> = {
   // カサゴ: 関西でガシラ、九州でアラカブ、東海でカサ
   kasago:         { aliases: ["ガシラ", "アラカブ", "笠子", "カサ", "ボッカ", "ホゴ"], popularity: 5 },
   // シーバス: 出世魚。関東セイゴ→フッコ→スズキ、関西ハネ→スズキ
-  seabass:        { aliases: ["スズキ", "鱸", "セイゴ", "フッコ", "ハネ", "マダカ"], popularity: 6 },
+  suzuki:         { aliases: ["シーバス", "スズキ", "鱸", "セイゴ", "フッコ", "ハネ", "マダカ"], popularity: 6 },
   // タチウオ: 九州でタチ、大阪ではタチウオバリ
   tachiuo:        { aliases: ["タチ", "太刀魚", "タツ", "サーベルフィッシュ"], popularity: 7 },
   // マダイ: 各地でタイ、幼魚はカスゴ

@@ -192,7 +192,7 @@ export const FISH_CATCHABILITY: Record<string, {
   "takobe": { coefficient: 0.65, category: "resident", label: "タケノコメバル（居着き・まずまず）" },
 
   // フィッシュイーター（やや難しい）
-  "seabass": { coefficient: 0.40, category: "predator", label: "シーバス（技術依存・やや難しい）" },
+  "suzuki": { coefficient: 0.40, category: "predator", label: "シーバス（技術依存・やや難しい）" },
   "kurodai": { coefficient: 0.50, category: "predator", label: "クロダイ（技術依存・やや難しい）" },
   "aoriika": { coefficient: 0.38, category: "predator", label: "アオリイカ（回遊依存・難しい）" },
   "buri": { coefficient: 0.30, category: "predator", label: "ブリ（回遊依存・難しい）" },

@@ -158,7 +158,7 @@ export const monthlyGuides: MonthlyGuide[] = [
       weather: "暖かい日と寒い日が交互に。花粉シーズン",
       daylight: "日の出6:00頃 日の入18:00頃",
     },
-    topFish: ["mebaru", "kasago", "kurodai", "karei", "madai", "seabass"],
+    topFish: ["mebaru", "kasago", "kurodai", "karei", "madai", "suzuki"],
     tips: [
       "春告魚のメバルは3月がピーク。産卵後の荒食い期を逃さずに",
       "クロダイのノッコミは水温13℃前後から始まる。潮が大きく動く大潮狙い",
@@ -267,7 +267,7 @@ export const monthlyGuides: MonthlyGuide[] = [
       weather: "過ごしやすい。後半は初夏の暑さも",
       daylight: "日の出4:50頃 日の入18:55頃",
     },
-    topFish: ["kisu", "aoriika", "aji", "kurodai", "madai", "kasago", "seabass"],
+    topFish: ["kisu", "aoriika", "aji", "kurodai", "madai", "kasago", "suzuki"],
     tips: [
       "GW期間は釣り場が混雑するため、早朝の釣行が鍵",
       "キスのちょい投げは砂浜の波打ち際から20〜50m先を狙う",
@@ -323,7 +323,7 @@ export const monthlyGuides: MonthlyGuide[] = [
       weather: "梅雨シーズン。雨具必携",
       daylight: "日の出4:30頃 日の入19:10頃",
     },
-    topFish: ["aji", "iwashi", "isaki", "kisu", "seabass", "kurodai"],
+    topFish: ["aji", "iwashi", "isaki", "kisu", "suzuki", "kurodai"],
     tips: [
       "雨後の濁りを利用すると魚の警戒心が下がり釣果が上がることも",
       "雷が鳴ったら即撤退。カーボンロッドは落雷リスクあり",
@@ -375,7 +375,7 @@ export const monthlyGuides: MonthlyGuide[] = [
       weather: "猛暑。熱中症対策必須",
       daylight: "日の出4:35頃 日の入19:05頃",
     },
-    topFish: ["aji", "saba", "iwashi", "tachiuo", "kisu", "seabass", "inada"],
+    topFish: ["aji", "saba", "iwashi", "tachiuo", "kisu", "suzuki", "inada"],
     tips: [
       "熱中症対策が最重要。帽子・日焼け止め・水分補給を徹底",
       "早朝（4〜7時）が最も涼しく魚の活性も高い",
@@ -427,7 +427,7 @@ export const monthlyGuides: MonthlyGuide[] = [
       weather: "最猛暑。早朝が必須",
       daylight: "日の出5:00頃 日の入18:50頃",
     },
-    topFish: ["aji", "saba", "iwashi", "tachiuo", "inada", "kisu", "seabass"],
+    topFish: ["aji", "saba", "iwashi", "tachiuo", "inada", "kisu", "suzuki"],
     tips: [
       "早朝（4〜7時）の釣行を強く推奨。日中は熱中症の危険大",
       "サビキ釣りは入れ食いになることも。バケツと氷の準備を万全に",
@@ -483,7 +483,7 @@ export const monthlyGuides: MonthlyGuide[] = [
       weather: "残暑あり。台風に注意",
       daylight: "日の出5:30頃 日の入18:00頃",
     },
-    topFish: ["aoriika", "tachiuo", "aji", "inada", "seabass", "kamasu"],
+    topFish: ["aoriika", "tachiuo", "aji", "inada", "suzuki", "kamasu"],
     tips: [
       "アオリイカ新子シーズン開幕。エギ2〜2.5号でシャロー（浅場）を攻める",
       "タチウオは夕マズメ〜20時頃が最高潮。テンヤにキビナゴが定番",
@@ -535,7 +535,7 @@ export const monthlyGuides: MonthlyGuide[] = [
       weather: "過ごしやすい。朝晩は肌寒い",
       daylight: "日の出5:50頃 日の入17:20頃",
     },
-    topFish: ["inada", "aoriika", "tachiuo", "aji", "seabass", "kurodai", "kamasu"],
+    topFish: ["inada", "aoriika", "tachiuo", "aji", "suzuki", "kurodai", "kamasu"],
     tips: [
       "青物回遊情報をSNS・釣果情報サイトで毎朝チェック",
       "アオリイカは秋になるにつれてサイズアップ。3号以上のエギも用意",
@@ -591,7 +591,7 @@ export const monthlyGuides: MonthlyGuide[] = [
       weather: "晩秋の冷え込み。防寒対策開始",
       daylight: "日の出6:10頃 日の入16:50頃",
     },
-    topFish: ["kawahagi", "kasago", "mebaru", "seabass", "kurodai", "hirame"],
+    topFish: ["kawahagi", "kasago", "mebaru", "suzuki", "kurodai", "hirame"],
     tips: [
       "カワハギは肝が最大になる時期。船釣りや堤防からのちょい投げで狙う",
       "根魚（カサゴ・メバル）は水温低下とともに活性が上がる",

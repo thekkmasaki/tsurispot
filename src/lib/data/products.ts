@@ -288,7 +288,7 @@ export const products: Product[] = [
     category: "rod",
     difficulty: "advanced",
     relatedMethods: ["lure"],
-    relatedFish: ["akame", "seabass", "hiramasa", "buri"],
+    relatedFish: ["akame", "suzuki", "hiramasa", "buri"],
     priority: 20,
   },
   {
@@ -303,7 +303,7 @@ export const products: Product[] = [
     category: "reel",
     difficulty: "advanced",
     relatedMethods: ["lure"],
-    relatedFish: ["akame", "seabass", "hiramasa", "buri"],
+    relatedFish: ["akame", "suzuki", "hiramasa", "buri"],
     priority: 21,
   },
   {
@@ -318,7 +318,7 @@ export const products: Product[] = [
     category: "tackle",
     difficulty: "advanced",
     relatedMethods: ["lure"],
-    relatedFish: ["akame", "seabass", "hiramasa", "buri", "shiira"],
+    relatedFish: ["akame", "suzuki", "hiramasa", "buri", "shiira"],
     priority: 22,
   },
   {
@@ -333,7 +333,7 @@ export const products: Product[] = [
     category: "tackle",
     difficulty: "advanced",
     relatedMethods: ["lure"],
-    relatedFish: ["akame", "seabass", "hiramasa", "buri"],
+    relatedFish: ["akame", "suzuki", "hiramasa", "buri"],
     priority: 23,
   },
   {
@@ -348,7 +348,7 @@ export const products: Product[] = [
     category: "accessory",
     difficulty: "advanced",
     relatedMethods: ["lure"],
-    relatedFish: ["akame", "seabass", "hiramasa", "buri", "shiira", "magochi"],
+    relatedFish: ["akame", "suzuki", "hiramasa", "buri", "shiira", "magochi"],
     priority: 24,
   },
   {

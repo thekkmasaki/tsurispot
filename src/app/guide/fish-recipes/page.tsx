@@ -771,9 +771,9 @@ const fishRecipeData: FishRecipeData[] = [
     ],
   },
   {
-    id: "seabass",
+    id: "suzuki",
     name: "シーバス（スズキ）",
-    slug: "seabass",
+    slug: "suzuki",
     emoji: "🐟",
     preparation:
       "ウロコが大きく硬いので、ウロコ取りでしっかり処理します。頭を落とし、内臓を出して血合いを流水でよく洗い流します。大型が多いので三枚おろしが基本。身は淡泊で臭みの少ない上質な白身です。",
