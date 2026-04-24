@@ -33,7 +33,10 @@ import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { areaGuides, type AreaGuide } from "@/lib/data/area-guides";
 import { SpotSearchFilter } from "@/components/prefecture/spot-search-filter";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
+import { MONTHS } from "@/lib/data/fishing-methods";
 import { InArticleAd, DisplayAd, StickySidebarAd } from "@/components/ads/ad-unit";
+import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
+import { ShoppingBag, ExternalLink, ArrowRight } from "lucide-react";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -357,6 +360,24 @@ export default async function PrefecturePage({ params }: PageProps) {
   const regionSlug = REGION_NAME_TO_SLUG[pref.regionGroup] as RegionSlug | undefined;
   const topSeasonalSpots = getTopSeasionalSpots(pref.name, currentMonth, regionSlug);
   const inSeasonFish = getInSeasonFishForPrefecture(pref.name, currentMonth, regionSlug);
+
+  // 県の主要釣り方を集計してアフィリエイト商品を取得
+  const prefMethodMap = new Map<string, number>();
+  for (const spot of spots) {
+    for (const cf of spot.catchableFish) {
+      prefMethodMap.set(cf.method, (prefMethodMap.get(cf.method) || 0) + 1);
+    }
+  }
+  const prefTopMethods = Array.from(prefMethodMap.entries())
+    .sort((a, b) => b[1] - a[1])
+    .map(([method]) => method);
+  const prefRecommendedProducts = getRelevantAffiliateProducts(
+    prefTopMethods,
+    currentMonth,
+    6,
+    false,
+    pref.name
+  );
 
   const breadcrumbJsonLd = {
     "@context": "https://schema.org",
@@ -1031,6 +1052,48 @@ export default async function PrefecturePage({ params }: PageProps) {
         </section>
       )}
 
+      {/* おすすめ装備 */}
+      {prefRecommendedProducts.length > 0 && (
+        <section className="mb-8 sm:mb-10">
+          <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
+            <ShoppingBag className="size-5 text-primary" />
+            {pref.name}の釣りにおすすめの装備
+          </h2>
+          <p className="mb-4 text-sm text-muted-foreground">
+            {pref.name}で
+            {prefTopMethods.slice(0, 3).join("・")}
+            などを楽しむのにおすすめのアイテムです。
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {prefRecommendedProducts.map((product) => (
+              <a
+                key={product.id}
+                href={product.url}
+                target="_blank"
+                rel="nofollow noopener sponsored"
+                className="group flex flex-col rounded-lg border p-4 transition-all hover:border-primary/50 hover:shadow-md"
+              >
+                <div className="mb-1 flex items-center justify-between">
+                  <span className="text-sm font-bold group-hover:text-primary">
+                    {product.name}
+                  </span>
+                  <ExternalLink className="size-3.5 text-muted-foreground" />
+                </div>
+                <p className="mt-1 flex-1 text-xs leading-relaxed text-muted-foreground">
+                  {product.description}
+                </p>
+                <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary">
+                  Amazonで見る
+                  <ArrowRight className="size-3" />
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <InArticleAd />
+
       {/* 釣りルール・注意事項リンク */}
       <section className="mb-8 sm:mb-10">
         <Link href={`/fishing-rules/${slug}`}>
@@ -1405,6 +1468,45 @@ export default async function PrefecturePage({ params }: PageProps) {
       )}
 
       {/* 関連ガイド（強化版内部リンクセクション） */}
+      {/* 今月の釣り CTA */}
+      <section className="mb-8 rounded-xl border-2 border-primary/20 bg-primary/5 p-6 sm:mb-10">
+        <h2 className="mb-4 text-center text-base font-bold sm:text-lg">
+          {pref.name}で{currentMonthName}の釣りを楽しもう
+        </h2>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <Link
+            href={`/prefecture/${slug}/${MONTHS[currentMonth - 1].slug}`}
+            className="flex items-center gap-3 rounded-lg bg-background p-4 shadow-sm transition-all hover:shadow-md"
+          >
+            <Calendar className="size-8 text-primary" />
+            <div>
+              <div className="text-sm font-bold">{pref.name}の{currentMonthName}の釣り情報</div>
+              <div className="text-xs text-muted-foreground">今釣れる魚・おすすめスポット</div>
+            </div>
+          </Link>
+          <Link
+            href="/catchable-now"
+            className="flex items-center gap-3 rounded-lg bg-background p-4 shadow-sm transition-all hover:shadow-md"
+          >
+            <Fish className="size-8 text-primary" />
+            <div>
+              <div className="text-sm font-bold">今釣れる魚をチェック</div>
+              <div className="text-xs text-muted-foreground">全国の旬の魚情報</div>
+            </div>
+          </Link>
+          <Link
+            href="/map"
+            className="flex items-center gap-3 rounded-lg bg-background p-4 shadow-sm transition-all hover:shadow-md"
+          >
+            <MapPin className="size-8 text-primary" />
+            <div>
+              <div className="text-sm font-bold">地図から釣り場を探す</div>
+              <div className="text-xs text-muted-foreground">全国の釣りスポットを地図で検索</div>
+            </div>
+          </Link>
+        </div>
+      </section>
+
       <section className="mt-8 sm:mt-12">
         <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
           <BookOpen className="size-5 text-primary" />

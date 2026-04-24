@@ -9,6 +9,9 @@ import {
   ChevronRight,
   HelpCircle,
   Thermometer,
+  ShoppingBag,
+  ExternalLink,
+  ArrowRight,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -20,6 +23,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { MONTHS, getMonthBySlug, isMonthInRange } from "@/lib/data/fishing-methods";
 import { SPOT_TYPE_LABELS } from "@/types";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 
 type PageProps = {
   params: Promise<{ slug: string; month: string }>;
@@ -170,6 +174,16 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
   const methodBreakdown = Array.from(methodMap.entries())
     .map(([method, count]) => ({ method, count }))
     .sort((a, b) => b.count - a.count);
+
+  // おすすめアフィリエイト商品（釣り方×月×都道府県でマッチング）
+  const topMethods = methodBreakdown.map((m) => m.method);
+  const recommendedProducts = getRelevantAffiliateProducts(
+    topMethods,
+    month.num,
+    6,
+    false,
+    pref.name
+  );
 
   // 前月・翌月
   const prevMonth = MONTHS[(month.num - 2 + 12) % 12];
@@ -496,6 +510,46 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
         </section>
       )}
 
+      {/* おすすめ装備 */}
+      {recommendedProducts.length > 0 && (
+        <section className="mb-8 sm:mb-10">
+          <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
+            <ShoppingBag className="size-5 text-primary" />
+            {pref.name}の{month.name}の釣りにおすすめの装備
+          </h2>
+          <p className="mb-4 text-sm text-muted-foreground">
+            {month.name}の{pref.name}で
+            {methodBreakdown.slice(0, 3).map((m) => m.method).join("・")}
+            などを楽しむのにおすすめのアイテムをピックアップしました。
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {recommendedProducts.map((product) => (
+              <a
+                key={product.id}
+                href={product.url}
+                target="_blank"
+                rel="nofollow noopener sponsored"
+                className="group flex flex-col rounded-lg border p-4 transition-all hover:border-primary/50 hover:shadow-md"
+              >
+                <div className="mb-1 flex items-center justify-between">
+                  <span className="text-sm font-bold group-hover:text-primary">
+                    {product.name}
+                  </span>
+                  <ExternalLink className="size-3.5 text-muted-foreground" />
+                </div>
+                <p className="mt-1 flex-1 text-xs leading-relaxed text-muted-foreground">
+                  {product.description}
+                </p>
+                <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary">
+                  Amazonで見る
+                  <ArrowRight className="size-3" />
+                </span>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
       {/* おすすめスポットTOP10 */}
       {topSpots.length > 0 && (
         <section className="mb-8 sm:mb-10">
@@ -569,13 +623,15 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
 
           {/* 全スポット表示リンク */}
           {spotsWithMatchCount.length > 10 && (
-            <div className="mt-4 text-center">
+            <div className="mt-6 text-center">
               <Link
                 href={`/prefecture/${pref.slug}`}
-                className="text-sm text-primary hover:underline"
+                className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90"
               >
+                <MapPin className="size-4" />
                 {pref.name}の全{spotsWithMatchCount.length}
                 スポットを見る
+                <ArrowRight className="size-4" />
               </Link>
             </div>
           )}
@@ -630,6 +686,8 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
         </div>
       </section>
 
+      <InArticleAd />
+
       {/* 他の月への内部リンク */}
       <section className="mb-8 sm:mb-10">
         <h2 className="mb-3 text-base font-bold sm:text-lg">
@@ -648,6 +706,45 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
               </span>
             </Link>
           ))}
+        </div>
+      </section>
+
+      {/* 次のアクションCTA */}
+      <section className="mb-8 rounded-xl border-2 border-primary/20 bg-primary/5 p-6 sm:mb-10">
+        <h2 className="mb-4 text-center text-base font-bold sm:text-lg">
+          {pref.name}で{month.name}の釣りを楽しもう
+        </h2>
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          <Link
+            href={`/prefecture/${pref.slug}`}
+            className="flex items-center gap-3 rounded-lg bg-background p-4 shadow-sm transition-all hover:shadow-md"
+          >
+            <MapPin className="size-8 text-primary" />
+            <div>
+              <div className="text-sm font-bold">{pref.name}の全釣りスポット</div>
+              <div className="text-xs text-muted-foreground">{prefSpots.length}件のスポットを探す</div>
+            </div>
+          </Link>
+          <Link
+            href="/catchable-now"
+            className="flex items-center gap-3 rounded-lg bg-background p-4 shadow-sm transition-all hover:shadow-md"
+          >
+            <Fish className="size-8 text-primary" />
+            <div>
+              <div className="text-sm font-bold">今釣れる魚をチェック</div>
+              <div className="text-xs text-muted-foreground">全国の旬の魚情報</div>
+            </div>
+          </Link>
+          <Link
+            href={`/monthly/${month.slug}`}
+            className="flex items-center gap-3 rounded-lg bg-background p-4 shadow-sm transition-all hover:shadow-md"
+          >
+            <Calendar className="size-8 text-primary" />
+            <div>
+              <div className="text-sm font-bold">{month.name}の全国釣りガイド</div>
+              <div className="text-xs text-muted-foreground">他の地域も見る</div>
+            </div>
+          </Link>
         </div>
       </section>
 
@@ -686,6 +783,12 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             今釣れる魚
+          </Link>
+          <Link
+            href={`/prefecture/${pref.slug}/${nextMonth.slug}`}
+            className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
+          >
+            {pref.name}の{nextMonth.name}の釣り
           </Link>
         </div>
       </section>
