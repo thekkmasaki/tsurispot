@@ -12,6 +12,8 @@ import {
   ShoppingBag,
   ExternalLink,
   ArrowRight,
+  Star,
+  Tag,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -529,20 +531,31 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
                 href={product.url}
                 target="_blank"
                 rel="nofollow noopener sponsored"
-                className="group flex flex-col rounded-lg border p-4 transition-all hover:border-primary/50 hover:shadow-md"
+                className="group relative flex flex-col rounded-lg border p-4 transition-all hover:border-primary/50 hover:shadow-lg"
               >
-                <div className="mb-1 flex items-center justify-between">
+                {product.isRecommended && (
+                  <span className="absolute -top-2 right-3 flex items-center gap-1 rounded-full bg-orange-500 px-2 py-0.5 text-[10px] font-bold text-white">
+                    <Star className="size-2.5 fill-current" />
+                    編集長おすすめ
+                  </span>
+                )}
+                <div className="mb-1">
                   <span className="text-sm font-bold group-hover:text-primary">
                     {product.name}
                   </span>
-                  <ExternalLink className="size-3.5 text-muted-foreground" />
                 </div>
-                <p className="mt-1 flex-1 text-xs leading-relaxed text-muted-foreground">
+                {product.priceRange && (
+                  <div className="flex items-center gap-1">
+                    <Tag className="size-3 text-red-500" />
+                    <span className="text-sm font-bold text-red-600">{product.priceRange}</span>
+                  </div>
+                )}
+                <p className="mt-1 flex-1 text-xs leading-relaxed text-muted-foreground line-clamp-2">
                   {product.description}
                 </p>
-                <span className="mt-3 inline-flex items-center gap-1 text-xs font-medium text-primary">
-                  Amazonで見る
-                  <ArrowRight className="size-3" />
+                <span className="mt-3 inline-flex items-center justify-center gap-1.5 rounded-md bg-[#FF9900] px-3 py-2 text-xs font-bold text-white transition-colors hover:bg-[#E88B00]">
+                  Amazonで詳細を見る
+                  <ExternalLink className="size-3" />
                 </span>
               </a>
             ))}

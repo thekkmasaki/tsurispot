@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ExternalLink, ShoppingBag } from "lucide-react";
+import { ExternalLink, ShoppingBag, Star, Tag } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -26,54 +26,96 @@ const CATEGORY_COLORS: Record<AffiliateProduct["category"], string> = {
   book: "bg-amber-100 text-amber-700",
 };
 
+const SEASON_MESSAGES: Record<string, string> = {
+  spring: "春の釣りシーズン到来！GW前に装備を揃えよう",
+  summer: "夏の爆釣シーズン！熱中症対策も忘れずに",
+  autumn: "秋は年間ベストシーズン！大物狙いの装備を",
+  winter: "冬の釣りは防寒が命！暖かく快適に楽しもう",
+};
+
+function getSeasonKey(month: number): string {
+  if (month >= 3 && month <= 5) return "spring";
+  if (month >= 6 && month <= 8) return "summer";
+  if (month >= 9 && month <= 11) return "autumn";
+  return "winter";
+}
+
 interface SpotAffiliateRecommendProps {
-  /** スポットのcatchableFishから取得した釣り方の配列 */
   methods: string[];
-  /** 夜釣りが可能なスポットかどうか */
   isNightFishing?: boolean;
-  /** スポットの都道府県（地域限定商品のフィルタ用） */
   prefecture?: string;
 }
 
 export function SpotAffiliateRecommend({ methods, isNightFishing = false, prefecture }: SpotAffiliateRecommendProps) {
   const [products, setProducts] = useState<AffiliateProduct[]>([]);
+  const [currentMonth, setCurrentMonth] = useState(1);
 
   useEffect(() => {
-    const currentMonth = new Date().getMonth() + 1; // 1-12
-    const relevant = getRelevantAffiliateProducts(methods, currentMonth, 6, isNightFishing, prefecture);
+    const month = new Date().getMonth() + 1;
+    setCurrentMonth(month);
+    const relevant = getRelevantAffiliateProducts(methods, month, 6, isNightFishing, prefecture);
     setProducts(relevant);
   }, [methods, isNightFishing, prefecture]);
 
   if (products.length === 0) return null;
 
+  const seasonKey = getSeasonKey(currentMonth);
+  const seasonMessage = SEASON_MESSAGES[seasonKey];
+
   return (
     <div className="mt-6">
-      <h3 className="mb-1 flex items-center gap-2 text-sm font-bold text-muted-foreground">
-        <ShoppingBag className="size-4" />
-        この釣り場でおすすめの装備
-      </h3>
-      <p className="mb-3 text-xs text-muted-foreground">
-        当日バタバタしないよう、事前にネットで揃えておくのがおすすめです
-      </p>
+      {/* ヘッダー */}
+      <div className="mb-4 rounded-lg bg-gradient-to-r from-primary/10 to-primary/5 p-4">
+        <h3 className="flex items-center gap-2 text-base font-bold">
+          <ShoppingBag className="size-5 text-primary" />
+          この釣り場で使える装備
+        </h3>
+        <p className="mt-1 text-sm text-muted-foreground">
+          {seasonMessage}
+        </p>
+      </div>
+
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((product) => {
           const rakutenUrl = getRakutenUrl(product.name);
           return (
-            <Card key={product.id} className="group h-full gap-0 py-0 transition-all hover:shadow-md hover:border-primary/30">
-              <CardContent className="flex h-full flex-col p-3 sm:p-4">
-                <div className="flex items-start justify-between gap-2">
+            <Card key={product.id} className="group relative h-full gap-0 overflow-hidden py-0 transition-all hover:shadow-lg hover:border-primary/40">
+              {/* 編集長おすすめバッジ */}
+              {product.isRecommended && (
+                <div className="absolute right-0 top-0 z-10">
+                  <div className="flex items-center gap-1 rounded-bl-lg bg-orange-500 px-2 py-1 text-[10px] font-bold text-white">
+                    <Star className="size-3 fill-current" />
+                    編集長おすすめ
+                  </div>
+                </div>
+              )}
+
+              <CardContent className="flex h-full flex-col p-4">
+                <div className="flex items-start gap-2">
                   <Badge
                     className={`shrink-0 text-[10px] ${CATEGORY_COLORS[product.category]}`}
                   >
                     {CATEGORY_LABELS[product.category]}
                   </Badge>
                 </div>
-                <h4 className="mt-2 text-sm font-semibold leading-tight">
+
+                <h4 className="mt-2 text-sm font-bold leading-tight group-hover:text-primary">
                   {product.name}
                 </h4>
-                <p className="mt-1.5 flex-1 text-xs leading-relaxed text-muted-foreground line-clamp-3">
+
+                {/* 価格帯 */}
+                {product.priceRange && (
+                  <div className="mt-1.5 flex items-center gap-1">
+                    <Tag className="size-3 text-red-500" />
+                    <span className="text-sm font-bold text-red-600">{product.priceRange}</span>
+                  </div>
+                )}
+
+                <p className="mt-1.5 flex-1 text-xs leading-relaxed text-muted-foreground line-clamp-2">
                   {product.description}
                 </p>
+
+                {/* CTAボタン */}
                 <div className="mt-3 flex flex-col gap-1.5">
                   <a
                     href={product.url}
@@ -85,9 +127,9 @@ export function SpotAffiliateRecommend({ methods, isNightFishing = false, prefec
                       platform: "amazon",
                       pageType: "spot",
                     })}
-                    className="flex items-center justify-center gap-1 rounded-md bg-[#FF9900] px-3 py-2 text-xs font-bold text-white transition-colors hover:bg-[#E88B00]"
+                    className="flex items-center justify-center gap-1.5 rounded-md bg-[#FF9900] px-3 py-2.5 text-xs font-bold text-white transition-all hover:bg-[#E88B00] hover:shadow-md"
                   >
-                    Amazonで見る
+                    Amazonで詳細を見る
                     <ExternalLink className="size-3" />
                   </a>
                   <a
@@ -100,9 +142,9 @@ export function SpotAffiliateRecommend({ methods, isNightFishing = false, prefec
                       platform: "rakuten",
                       pageType: "spot",
                     })}
-                    className="flex items-center justify-center gap-1 rounded-md bg-[#BF0000] px-3 py-2 text-xs font-bold text-white transition-colors hover:bg-[#A00000]"
+                    className="flex items-center justify-center gap-1.5 rounded-md bg-[#BF0000] px-3 py-2.5 text-xs font-bold text-white transition-all hover:bg-[#A00000] hover:shadow-md"
                   >
-                    楽天で見る
+                    楽天で詳細を見る
                     <ExternalLink className="size-3" />
                   </a>
                 </div>
@@ -112,7 +154,7 @@ export function SpotAffiliateRecommend({ methods, isNightFishing = false, prefec
         })}
       </div>
       <p className="mt-2 text-[10px] text-muted-foreground">
-        ※ 上記リンクはアフィリエイトリンクを含みます。購入による追加費用は発生しません。
+        ※ 上記リンクはアフィリエイトリンクを含みます。購入による追加費用は発生しません。価格は変動する場合があります。
       </p>
     </div>
   );

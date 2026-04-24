@@ -17,6 +17,10 @@ export interface AffiliateProduct {
   category: "tackle" | "bait" | "wear" | "accessory" | "book";
   /** 特定の都道府県でのみ表示する（未指定なら全国対象） */
   prefectures?: string[];
+  /** 価格帯の目安（表示用） */
+  priceRange?: string;
+  /** 編集長おすすめフラグ（高単価・高品質商品に設定） */
+  isRecommended?: boolean;
 }
 
 /**
@@ -30,116 +34,35 @@ export function getSeasonFromMonth(month: number): "spring" | "summer" | "autumn
 }
 
 /**
+ * 高単価商品ID（紹介料が高い商品を優先表示する）
+ * ハリス¥300→紹介料¥12 vs 入門セット¥10,000→紹介料¥400
+ */
+const HIGH_VALUE_PRODUCT_IDS = new Set([
+  "af-beginner-set",      // 入門セット ¥8,000-12,000
+  "af-rod-shimano",       // ロッド ¥5,000-8,000
+  "af-reel-shimano",      // リール ¥4,000-7,000
+  "af-eging-rod",         // エギングロッド ¥5,000-10,000
+  "af-tackle-box",        // タックルボックス ¥3,000-5,000
+  "af-fishing-bag-large", // バッグ40L ¥3,000-5,000
+  "af-heated-vest",       // 電熱ベスト ¥3,000-6,000
+  "af-lifejacket",        // ライフジャケット ¥3,000-8,000
+  "af-shimano-polarized-wellington", // 偏光グラス ¥5,000-10,000
+]);
+
+/**
  * 提供済みアフィリエイト商品一覧
  */
 export const affiliateProducts: AffiliateProduct[] = [
   {
-    id: "af-harris",
-    name: "ハリス（フロロカーボン）",
-    url: "https://amzn.to/408jI1f",
-    description: "フカセ釣りやウキ釣りに欠かせないハリス。魚に警戒されにくいフロロカーボン素材で、食い渋り時にも効果的です。",
-    methodKeywords: ["フカセ", "ウキ釣り", "ウキフカセ", "カゴ釣り", "落とし込み", "ヘチ釣り", "胴突き", "探り釣り"],
+    id: "af-beginner-set",
+    name: "釣り入門セット（ロッド・リール・仕掛け付き）",
+    url: "https://amzn.to/4l80eDk",
+    description: "ロッド・リール・仕掛けがすべて揃った初心者向け豪華セット。これ1つで釣りを始められます。",
+    methodKeywords: ["サビキ", "ちょい投げ", "ウキ釣り", "探り釣り", "胴突き"],
     seasons: ["all"],
     category: "tackle",
-  },
-  {
-    id: "af-fluorocarbon-line",
-    name: "フロロカーボンライン",
-    url: "https://amzn.to/4tKXyzu",
-    description: "感度が高く根ズレに強いフロロカーボンライン。ルアーフィッシングのリーダーやメインラインに最適です。",
-    methodKeywords: ["ルアー", "エギング", "アジング", "メバリング", "ショアジギ", "サーフルアー", "ワインド", "渓流ルアー"],
-    seasons: ["all"],
-    category: "tackle",
-  },
-  {
-    id: "af-winter-gloves",
-    name: "防寒フィッシンググローブ",
-    url: "https://amzn.to/3ZOdinM",
-    description: "冬の釣りの必需品。指先が出せるタイプで、仕掛けの操作もしやすい防寒手袋です。",
-    methodKeywords: [], // 全釣法対象（冬季のみ）
-    seasons: ["winter"],
-    category: "wear",
-  },
-  {
-    id: "af-heated-vest",
-    name: "電熱ベスト",
-    url: "https://amzn.to/40sdGZ6",
-    description: "普段使いもできる電熱ベスト。大容量バッテリー付きで長持ちし、腰まで暖かいと好評。冬の長時間釣行の必需品です。",
-    methodKeywords: [], // 全釣法対象（冬季のみ）
-    seasons: ["winter"],
-    category: "wear",
-  },
-  {
-    id: "af-mobile-battery",
-    name: "モバイルバッテリー",
-    url: "https://amzn.to/4s3kDvE",
-    description: "釣り場でのスマホ充電やライト・電熱ベストの給電に。大容量タイプで1日安心の備えです。",
-    methodKeywords: [], // 全釣法対象（通年）
-    seasons: ["all"],
-    category: "accessory",
-  },
-  {
-    id: "af-amihime",
-    name: "マルキュー アミ姫（コマセ）",
-    url: "https://amzn.to/4c6gaUn",
-    description: "チューブタイプで手が汚れにくいコマセ。フルーティーな香りでにおいも少なく、サビキ釣りの必須アイテムです。",
-    methodKeywords: ["サビキ"],
-    seasons: ["all"],
-    category: "bait",
-  },
-  {
-    id: "af-pe-line",
-    name: "東レ PEライン（道糸）",
-    url: "https://amzn.to/4s45H0i",
-    description: "日本繊維メーカー最大手・東レ製のPEライン。感度と強度に優れ、ルアーフィッシングやショアジギングの道糸に最適です。",
-    methodKeywords: ["ルアー", "ショアジギ", "エギング", "アジング", "メバリング", "サーフルアー", "ワインド", "ジギング"],
-    seasons: ["all"],
-    category: "tackle",
-  },
-  {
-    id: "af-nylon-line",
-    name: "東レ ナイロンライン（道糸）",
-    url: "https://amzn.to/4s1SPaX",
-    description: "視認性が高く天候を選ばず見やすいナイロンライン。強度も高く風にも強い。アタリの把握がしやすいと好評です。",
-    methodKeywords: ["サビキ", "ウキ釣り", "フカセ", "カゴ釣り", "投げ釣り", "ちょい投げ", "胴突き"],
-    seasons: ["all"],
-    category: "tackle",
-  },
-  {
-    id: "af-anker-charger",
-    name: "Anker モバイルバッテリー",
-    url: "https://amzn.to/4s2zhmT",
-    description: "信頼のAnker製モバイルバッテリー。電熱ベストの給電やスマホ充電に。釣り場での長時間使用も安心です。",
-    methodKeywords: [],
-    seasons: ["all"],
-    category: "accessory",
-  },
-  {
-    id: "af-balaclava",
-    name: "バラクラバ ネックウォーマー",
-    url: "https://amzn.to/3ZMtLc7",
-    description: "首元からの冷風をしっかりガード。保温性が高く、釣りだけでなく普段使いもできるネックウォーマーです。",
-    methodKeywords: [],
-    seasons: ["winter"],
-    category: "wear",
-  },
-  {
-    id: "af-fishing-bag-rakuten",
-    name: "釣りバッグ",
-    url: "https://a.r10.to/h5iiZA",
-    description: "釣り道具の持ち運びに便利なフィッシングバッグ。あると無難な必需品です。",
-    methodKeywords: [],
-    seasons: ["all"],
-    category: "accessory",
-  },
-  {
-    id: "af-fishing-bag-large",
-    name: "大容量フィッシングバッグ（40L）",
-    url: "https://amzn.to/4aOYPgo",
-    description: "約40Lの大容量で釣り道具を一式収納。2層構造で整理しやすく、前後左右のポケットで効率よく分けて収納できます。",
-    methodKeywords: [],
-    seasons: ["all"],
-    category: "accessory",
+    priceRange: "¥8,000〜12,000",
+    isRecommended: true,
   },
   {
     id: "af-rod-shimano",
@@ -149,51 +72,8 @@ export const affiliateProducts: AffiliateProduct[] = [
     methodKeywords: ["サビキ", "ウキ釣り", "ちょい投げ", "投げ釣り", "カゴ釣り", "探り釣り"],
     seasons: ["all"],
     category: "tackle",
-  },
-  {
-    id: "af-egi-set",
-    name: "エギ ルアー 10本セット（ラトル内蔵・夜光）",
-    url: "https://amzn.to/3Nc9r10",
-    description: "2.5号・3.0号・3.5号の餌木10本セット。ラトル内蔵で集魚力抜群、夜光タイプで夜釣りにも対応。アオリイカ・ヤリイカ・タコ狙いに。",
-    methodKeywords: ["エギング", "タコエギ"],
-    seasons: ["all"],
-    category: "tackle",
-  },
-  {
-    id: "af-tako-ball",
-    name: "タコ釣りボール（12粒セット・貝殻容器付）",
-    url: "https://amzn.to/3NNwHmh",
-    description: "タコエギに付けるだけで集魚効果がアップする専用エサ。貝殻容器付きでセットも簡単。初心者からベテランまでタコ釣りの釣果アップに。",
-    methodKeywords: ["タコエギ", "タコ", "テンヤ", "タコジグ"],
-    seasons: ["summer", "autumn"],
-    category: "bait",
-  },
-  {
-    id: "af-eging-rod",
-    name: "エギングロッド",
-    url: "https://amzn.to/4rLFPqc",
-    description: "エギング専用ロッド。しゃくりやすい軽量設計で、アオリイカやヤリイカ狙いに最適です。",
-    methodKeywords: ["エギング"],
-    seasons: ["all"],
-    category: "tackle",
-  },
-  {
-    id: "af-beginner-set",
-    name: "釣り入門セット（ロッド・リール・仕掛け付き）",
-    url: "https://amzn.to/4l80eDk",
-    description: "ロッド・リール・仕掛けがすべて揃った初心者向け豪華セット。これ1つで釣りを始められます。",
-    methodKeywords: ["サビキ", "ちょい投げ", "ウキ釣り", "探り釣り", "胴突き"],
-    seasons: ["all"],
-    category: "tackle",
-  },
-  {
-    id: "af-rod-holder",
-    name: "第一精工 受太郎 竿受け",
-    url: "https://amzn.to/4cuGPu5",
-    description: "堤防の柵やパイプに取り付けられる竿受け。ぶっこみ釣りやサビキの置き竿に便利で、両手が空くので仕掛け交換も楽々。",
-    methodKeywords: ["サビキ", "ちょい投げ", "投げ釣り", "ぶっこみ", "胴突き", "泳がせ"],
-    seasons: ["all"],
-    category: "accessory",
+    priceRange: "¥5,000〜8,000",
+    isRecommended: true,
   },
   {
     id: "af-reel-shimano",
@@ -203,51 +83,19 @@ export const affiliateProducts: AffiliateProduct[] = [
     methodKeywords: ["サビキ", "ウキ釣り", "ちょい投げ", "投げ釣り", "カゴ釣り", "ルアー", "エギング", "ショアジギ"],
     seasons: ["all"],
     category: "tackle",
+    priceRange: "¥4,000〜7,000",
+    isRecommended: true,
   },
   {
-    id: "af-sinker",
-    name: "おもりセット",
-    url: "https://amzn.to/4cFGDbl",
-    description: "意外と忘れがちなおもり。まとめ買いがお得です。",
-    methodKeywords: ["ちょい投げ", "投げ釣り", "ウキ釣り", "カゴ釣り", "胴突き", "探り釣り", "ぶっこみ"],
+    id: "af-eging-rod",
+    name: "エギングロッド",
+    url: "https://amzn.to/4rLFPqc",
+    description: "エギング専用ロッド。しゃくりやすい軽量設計で、アオリイカやヤリイカ狙いに最適です。",
+    methodKeywords: ["エギング"],
     seasons: ["all"],
     category: "tackle",
-  },
-  {
-    id: "af-snap",
-    name: "スナップ（まとめ買い）",
-    url: "https://amzn.to/4c9oMcU",
-    description: "ルアーや仕掛けの交換に必須のスナップ。まとめ買いが断然お得です。",
-    methodKeywords: ["ルアー", "エギング", "アジング", "メバリング", "ショアジギ", "サーフルアー", "ワインド"],
-    seasons: ["all"],
-    category: "tackle",
-  },
-  {
-    id: "af-tackle-box",
-    name: "釣りボックス（座れる大容量）",
-    url: "https://amzn.to/4rvRhGx",
-    description: "大容量の収納力で座れるタックルボックス。ぶっこみ釣りや泳がせ釣りの待ち時間も快適です。",
-    methodKeywords: [],
-    seasons: ["all"],
-    category: "accessory",
-  },
-  {
-    id: "af-rod-stand",
-    name: "ロッドスタンド",
-    url: "https://amzn.to/3OwwVy8",
-    description: "タックルボックスに設置できるロッドスタンド。ぶっこみ釣りや泳がせ釣りがとても楽になります。",
-    methodKeywords: ["ぶっこみ", "泳がせ", "投げ釣り", "ちょい投げ"],
-    seasons: ["all"],
-    category: "accessory",
-  },
-  {
-    id: "af-basket",
-    name: "買い物かご（釣り用）",
-    url: "https://amzn.to/3ME1wt6",
-    description: "たまにしか釣りしない方に。買い物かごで道具をまとめて持ち運べます。座れないのが難点ですが、手軽に始められます。",
-    methodKeywords: [],
-    seasons: ["all"],
-    category: "accessory",
+    priceRange: "¥5,000〜10,000",
+    isRecommended: true,
   },
   {
     id: "af-lifejacket",
@@ -257,15 +105,170 @@ export const affiliateProducts: AffiliateProduct[] = [
     methodKeywords: [],
     seasons: ["all"],
     category: "wear",
+    priceRange: "¥3,000〜8,000",
+    isRecommended: true,
   },
   {
-    id: "af-fishing-vest",
-    name: "釣り用ベスト",
-    url: "https://amzn.to/4kLuCTM",
-    description: "小物をすぐ取り出せるフィッシングベスト。仕掛けやハサミなどをポケットに整理でき、釣りが格段に楽になります。",
+    id: "af-shimano-polarized-wellington",
+    name: "シマノ 偏光グラス ウェリントングラス01",
+    url: "https://amzn.to/4rzZOHr",
+    description: "普段使いから釣りまで使えるシマノの定番偏光グラス。水面の反射を抑え、地形や潮の流れが見えるようになり釣果アップに直結。",
+    methodKeywords: ["サイトフィッシング", "エギング", "アジング", "メバリング", "渓流ルアー", "ショアジギ", "ルアー", "フカセ"],
+    seasons: ["all"],
+    category: "accessory",
+    priceRange: "¥5,000〜10,000",
+    isRecommended: true,
+  },
+  {
+    id: "af-tackle-box",
+    name: "釣りボックス（座れる大容量）",
+    url: "https://amzn.to/4rvRhGx",
+    description: "大容量の収納力で座れるタックルボックス。ぶっこみ釣りや泳がせ釣りの待ち時間も快適です。",
     methodKeywords: [],
     seasons: ["all"],
+    category: "accessory",
+    priceRange: "¥3,000〜5,000",
+  },
+  {
+    id: "af-fishing-bag-large",
+    name: "大容量フィッシングバッグ（40L）",
+    url: "https://amzn.to/4aOYPgo",
+    description: "約40Lの大容量で釣り道具を一式収納。2層構造で整理しやすく、前後左右のポケットで効率よく分けて収納できます。",
+    methodKeywords: [],
+    seasons: ["all"],
+    category: "accessory",
+    priceRange: "¥3,000〜5,000",
+  },
+  {
+    id: "af-egi-set",
+    name: "エギ ルアー 10本セット（ラトル内蔵・夜光）",
+    url: "https://amzn.to/3Nc9r10",
+    description: "2.5号・3.0号・3.5号の餌木10本セット。ラトル内蔵で集魚力抜群、夜光タイプで夜釣りにも対応。アオリイカ・ヤリイカ・タコ狙いに。",
+    methodKeywords: ["エギング", "タコエギ"],
+    seasons: ["all"],
+    category: "tackle",
+    priceRange: "¥1,500〜2,500",
+  },
+  {
+    id: "af-rod-holder",
+    name: "第一精工 受太郎 竿受け",
+    url: "https://amzn.to/4cuGPu5",
+    description: "堤防の柵やパイプに取り付けられる竿受け。ぶっこみ釣りやサビキの置き竿に便利で、両手が空くので仕掛け交換も楽々。",
+    methodKeywords: ["サビキ", "ちょい投げ", "投げ釣り", "ぶっこみ", "胴突き", "泳がせ"],
+    seasons: ["all"],
+    category: "accessory",
+    priceRange: "¥1,000〜2,000",
+  },
+  {
+    id: "af-harris",
+    name: "ハリス（フロロカーボン）",
+    url: "https://amzn.to/408jI1f",
+    description: "フカセ釣りやウキ釣りに欠かせないハリス。魚に警戒されにくいフロロカーボン素材で、食い渋り時にも効果的です。",
+    methodKeywords: ["フカセ", "ウキ釣り", "ウキフカセ", "カゴ釣り", "落とし込み", "ヘチ釣り", "胴突き", "探り釣り"],
+    seasons: ["all"],
+    category: "tackle",
+    priceRange: "¥300〜800",
+  },
+  {
+    id: "af-fluorocarbon-line",
+    name: "フロロカーボンライン",
+    url: "https://amzn.to/4tKXyzu",
+    description: "感度が高く根ズレに強いフロロカーボンライン。ルアーフィッシングのリーダーやメインラインに最適です。",
+    methodKeywords: ["ルアー", "エギング", "アジング", "メバリング", "ショアジギ", "サーフルアー", "ワインド", "渓流ルアー"],
+    seasons: ["all"],
+    category: "tackle",
+    priceRange: "¥500〜1,500",
+  },
+  {
+    id: "af-winter-gloves",
+    name: "防寒フィッシンググローブ",
+    url: "https://amzn.to/3ZOdinM",
+    description: "冬の釣りの必需品。指先が出せるタイプで、仕掛けの操作もしやすい防寒手袋です。",
+    methodKeywords: [],
+    seasons: ["winter"],
     category: "wear",
+    priceRange: "¥1,500〜3,000",
+  },
+  {
+    id: "af-heated-vest",
+    name: "電熱ベスト",
+    url: "https://amzn.to/40sdGZ6",
+    description: "普段使いもできる電熱ベスト。大容量バッテリー付きで長持ちし、腰まで暖かいと好評。冬の長時間釣行の必需品です。",
+    methodKeywords: [],
+    seasons: ["winter"],
+    category: "wear",
+    priceRange: "¥3,000〜6,000",
+    isRecommended: true,
+  },
+  {
+    id: "af-mobile-battery",
+    name: "モバイルバッテリー",
+    url: "https://amzn.to/4s3kDvE",
+    description: "釣り場でのスマホ充電やライト・電熱ベストの給電に。大容量タイプで1日安心の備えです。",
+    methodKeywords: [],
+    seasons: ["all"],
+    category: "accessory",
+    priceRange: "¥2,000〜4,000",
+  },
+  {
+    id: "af-amihime",
+    name: "マルキュー アミ姫（コマセ）",
+    url: "https://amzn.to/4c6gaUn",
+    description: "チューブタイプで手が汚れにくいコマセ。フルーティーな香りでにおいも少なく、サビキ釣りの必須アイテムです。",
+    methodKeywords: ["サビキ"],
+    seasons: ["all"],
+    category: "bait",
+    priceRange: "¥500〜800",
+  },
+  {
+    id: "af-pe-line",
+    name: "東レ PEライン（道糸）",
+    url: "https://amzn.to/4s45H0i",
+    description: "日本繊維メーカー最大手・東レ製のPEライン。感度と強度に優れ、ルアーフィッシングやショアジギングの道糸に最適です。",
+    methodKeywords: ["ルアー", "ショアジギ", "エギング", "アジング", "メバリング", "サーフルアー", "ワインド", "ジギング"],
+    seasons: ["all"],
+    category: "tackle",
+    priceRange: "¥1,000〜2,500",
+  },
+  {
+    id: "af-nylon-line",
+    name: "東レ ナイロンライン（道糸）",
+    url: "https://amzn.to/4s1SPaX",
+    description: "視認性が高く天候を選ばず見やすいナイロンライン。強度も高く風にも強い。アタリの把握がしやすいと好評です。",
+    methodKeywords: ["サビキ", "ウキ釣り", "フカセ", "カゴ釣り", "投げ釣り", "ちょい投げ", "胴突き"],
+    seasons: ["all"],
+    category: "tackle",
+    priceRange: "¥500〜1,500",
+  },
+  {
+    id: "af-anker-charger",
+    name: "Anker モバイルバッテリー",
+    url: "https://amzn.to/4s2zhmT",
+    description: "信頼のAnker製モバイルバッテリー。電熱ベストの給電やスマホ充電に。釣り場での長時間使用も安心です。",
+    methodKeywords: [],
+    seasons: ["all"],
+    category: "accessory",
+    priceRange: "¥3,000〜5,000",
+  },
+  {
+    id: "af-balaclava",
+    name: "バラクラバ ネックウォーマー",
+    url: "https://amzn.to/3ZMtLc7",
+    description: "首元からの冷風をしっかりガード。保温性が高く、釣りだけでなく普段使いもできるネックウォーマーです。",
+    methodKeywords: [],
+    seasons: ["winter"],
+    category: "wear",
+    priceRange: "¥1,000〜2,000",
+  },
+  {
+    id: "af-fishing-bag-rakuten",
+    name: "釣りバッグ",
+    url: "https://a.r10.to/h5iiZA",
+    description: "釣り道具の持ち運びに便利なフィッシングバッグ。あると無難な必需品です。",
+    methodKeywords: [],
+    seasons: ["all"],
+    category: "accessory",
+    priceRange: "¥2,000〜4,000",
   },
   {
     id: "af-polarized-glasses",
@@ -275,15 +278,67 @@ export const affiliateProducts: AffiliateProduct[] = [
     methodKeywords: ["サイトフィッシング", "エギング", "アジング", "メバリング", "渓流ルアー"],
     seasons: ["all"],
     category: "accessory",
+    priceRange: "¥2,000〜5,000",
   },
   {
-    id: "af-shimano-polarized-wellington",
-    name: "シマノ 偏光グラス ウェリントングラス01",
-    url: "https://amzn.to/4rzZOHr",
-    description: "普段使いから釣りまで使えるシマノの定番偏光グラス。水面の反射を抑え、地形や潮の流れが見えるようになり釣果アップに直結。軽量フレームとテンプル特殊素材で長時間でも快適。紫外線カットで目の保護にも。",
-    methodKeywords: ["サイトフィッシング", "エギング", "アジング", "メバリング", "渓流ルアー", "ショアジギ", "ルアー", "フカセ"],
+    id: "af-fishing-vest",
+    name: "釣り用ベスト",
+    url: "https://amzn.to/4kLuCTM",
+    description: "小物をすぐ取り出せるフィッシングベスト。仕掛けやハサミなどをポケットに整理でき、釣りが格段に楽になります。",
+    methodKeywords: [],
+    seasons: ["all"],
+    category: "wear",
+    priceRange: "¥2,000〜5,000",
+  },
+  {
+    id: "af-tako-ball",
+    name: "タコ釣りボール（12粒セット・貝殻容器付）",
+    url: "https://amzn.to/3NNwHmh",
+    description: "タコエギに付けるだけで集魚効果がアップする専用エサ。貝殻容器付きでセットも簡単。初心者からベテランまでタコ釣りの釣果アップに。",
+    methodKeywords: ["タコエギ", "タコ", "テンヤ", "タコジグ"],
+    seasons: ["summer", "autumn"],
+    category: "bait",
+    priceRange: "¥800〜1,200",
+  },
+  {
+    id: "af-sinker",
+    name: "おもりセット",
+    url: "https://amzn.to/4cFGDbl",
+    description: "意外と忘れがちなおもり。まとめ買いがお得です。",
+    methodKeywords: ["ちょい投げ", "投げ釣り", "ウキ釣り", "カゴ釣り", "胴突き", "探り釣り", "ぶっこみ"],
+    seasons: ["all"],
+    category: "tackle",
+    priceRange: "¥300〜800",
+  },
+  {
+    id: "af-snap",
+    name: "スナップ（まとめ買い）",
+    url: "https://amzn.to/4c9oMcU",
+    description: "ルアーや仕掛けの交換に必須のスナップ。まとめ買いが断然お得です。",
+    methodKeywords: ["ルアー", "エギング", "アジング", "メバリング", "ショアジギ", "サーフルアー", "ワインド"],
+    seasons: ["all"],
+    category: "tackle",
+    priceRange: "¥300〜600",
+  },
+  {
+    id: "af-rod-stand",
+    name: "ロッドスタンド",
+    url: "https://amzn.to/3OwwVy8",
+    description: "タックルボックスに設置できるロッドスタンド。ぶっこみ釣りや泳がせ釣りがとても楽になります。",
+    methodKeywords: ["ぶっこみ", "泳がせ", "投げ釣り", "ちょい投げ"],
     seasons: ["all"],
     category: "accessory",
+    priceRange: "¥1,500〜3,000",
+  },
+  {
+    id: "af-basket",
+    name: "買い物かご（釣り用）",
+    url: "https://amzn.to/3ME1wt6",
+    description: "たまにしか釣りしない方に。買い物かごで道具をまとめて持ち運べます。座れないのが難点ですが、手軽に始められます。",
+    methodKeywords: [],
+    seasons: ["all"],
+    category: "accessory",
+    priceRange: "¥500〜1,000",
   },
   {
     id: "af-line-recycler",
@@ -293,6 +348,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     methodKeywords: [],
     seasons: ["all"],
     category: "accessory",
+    priceRange: "¥2,000〜3,000",
   },
   {
     id: "af-water",
@@ -302,6 +358,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     methodKeywords: [],
     seasons: ["all"],
     category: "accessory",
+    priceRange: "¥1,000〜2,000",
   },
   {
     id: "af-sagoshiz",
@@ -311,6 +368,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     methodKeywords: ["ショアジギ", "ルアー", "キャスティング"],
     seasons: ["spring", "autumn"],
     category: "tackle",
+    priceRange: "¥1,200〜1,800",
   },
   {
     id: "af-jet-sinker",
@@ -320,6 +378,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     methodKeywords: ["ちょい投げ", "投げ釣り", "カレイ", "キス"],
     seasons: ["all"],
     category: "tackle",
+    priceRange: "¥300〜600",
   },
   {
     id: "af-drivemap-osaka-harima",
@@ -330,6 +389,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     seasons: ["all"],
     category: "book",
     prefectures: ["大阪府", "兵庫県"],
+    priceRange: "¥1,500〜2,000",
   },
   {
     id: "af-drivemap-ise-kito",
@@ -340,6 +400,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     seasons: ["all"],
     category: "book",
     prefectures: ["三重県", "和歌山県"],
+    priceRange: "¥1,500〜2,000",
   },
   {
     id: "af-drivemap-tokyo-boso",
@@ -350,6 +411,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     seasons: ["all"],
     category: "book",
     prefectures: ["東京都", "神奈川県", "千葉県"],
+    priceRange: "¥1,500〜2,000",
   },
   {
     id: "af-drivemap-tokyo-miura",
@@ -360,6 +422,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     seasons: ["all"],
     category: "book",
     prefectures: ["東京都", "神奈川県"],
+    priceRange: "¥1,500〜2,000",
   },
   {
     id: "af-drivemap-sagami",
@@ -370,16 +433,19 @@ export const affiliateProducts: AffiliateProduct[] = [
     seasons: ["all"],
     category: "book",
     prefectures: ["神奈川県", "静岡県"],
+    priceRange: "¥1,500〜2,000",
   },
 ];
 
 /**
  * スポットの釣り方リストと現在の月に基づいて、関連するアフィリエイト商品を返す
- * @param methods スポットのcatchableFishから取得した釣り方の配列
- * @param currentMonth 現在の月 (1-12)
- * @param maxItems 最大表示数（デフォルト3）
- * @param isNightFishing 夜釣りが可能なスポットかどうか
- * @param prefecture スポットの都道府県（地域限定商品のフィルタに使用）
+ *
+ * スコアリングロジック:
+ * - 高単価商品にボーナス（+30点）→ 紹介料の高い商品を優先
+ * - 編集長おすすめにボーナス（+20点）
+ * - 釣り方マッチ（+10点/マッチ、上限30点）→ 安い消耗品の過剰優先を防止
+ * - 都道府県限定書籍（+15点）
+ * - 夜釣りスポットでのバッテリー（+15点）
  */
 export function getRelevantAffiliateProducts(
   methods: string[],
@@ -390,15 +456,11 @@ export function getRelevantAffiliateProducts(
 ): AffiliateProduct[] {
   const currentSeason = getSeasonFromMonth(currentMonth);
 
-  // 夜釣り関連の商品ID
   const nightFishingProductIds = ["af-mobile-battery", "af-anker-charger"];
 
-  // 各商品のスコアリング
   const scored = affiliateProducts
     .filter((product) => {
-      // 季節フィルタ: "all" を含むか、現在の季節と一致するもののみ
       if (!product.seasons.includes("all") && !product.seasons.includes(currentSeason)) return false;
-      // 都道府県限定商品: 対象外なら除外
       if (product.prefectures && product.prefectures.length > 0) {
         if (!prefecture || !product.prefectures.includes(prefecture)) return false;
       }
@@ -407,26 +469,36 @@ export function getRelevantAffiliateProducts(
     .map((product) => {
       let score = 0;
 
+      // 高単価商品ボーナス（紹介料が高い商品を優先）
+      if (HIGH_VALUE_PRODUCT_IDS.has(product.id)) {
+        score += 30;
+      }
+
+      // 編集長おすすめボーナス
+      if (product.isRecommended) {
+        score += 20;
+      }
+
       if (product.methodKeywords.length === 0) {
-        // 全釣法対象商品（手袋、バッテリー等）は低めのベーススコア
-        score = 1;
-        // 都道府県限定の書籍はスコアブースト
+        score += 1;
         if (product.prefectures && product.prefectures.length > 0) {
-          score = 8;
+          score += 15;
         }
       } else {
-        // 釣り方のキーワードマッチでスコアリング
+        // 釣り方マッチ（上限30点 = 3マッチまで）
+        let matchCount = 0;
         for (const method of methods) {
+          if (matchCount >= 3) break;
           for (const keyword of product.methodKeywords) {
             if (method.includes(keyword)) {
               score += 10;
-              break; // 1メソッドにつき1回のみカウント
+              matchCount++;
+              break;
             }
           }
         }
       }
 
-      // 夜釣り可能なスポットではモバイルバッテリー系のスコアをブースト
       if (isNightFishing && nightFishingProductIds.includes(product.id)) {
         score += 15;
       }
