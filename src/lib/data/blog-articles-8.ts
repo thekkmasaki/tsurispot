@@ -560,7 +560,7 @@ export const blogArticles8: BlogPost[] = [
     category: "report",
     tags: ["釣行レポート", "田井漁港", "アジング", "アジ", "舞鶴", "穴場", "夜釣り"],
     publishedAt: "2024-09-15",
-    relatedSpots: ["tai-gyoko"],
+    relatedSpots: ["tai-port-maizuru"],
     relatedFish: ["aji"],
     content: `
 <h2>田井漁港？ どこそれ？</h2>

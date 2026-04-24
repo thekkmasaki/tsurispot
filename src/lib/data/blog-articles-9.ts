@@ -87,7 +87,7 @@ export const blogArticles9: BlogPost[] = [
     category: "report",
     tags: ["メバリング", "メバル", "小橋漁港", "舞鶴", "春", "磯場", "煮付け"],
     publishedAt: "2025-03-15",
-    relatedSpots: ["kobashi-gyoko"],
+    relatedSpots: ["obashi-gyoko"],
     relatedFish: ["mebaru"],
     content: `
 <h2>3月、春の海が始まる</h2>
@@ -380,9 +380,9 @@ export const blogArticles9: BlogPost[] = [
     relatedSpots: [
       "maizuru-shinkai-park",
       "shirasugi-gyoko",
-      "kobashi-gyoko",
+      "obashi-gyoko",
       "maejima-futo",
-      "tai-gyoko",
+      "tai-port-maizuru",
     ],
     relatedFish: ["aji", "saba", "aoriika", "mebaru", "kisu", "karei", "kurodai"],
     content: `
@@ -410,13 +410,13 @@ export const blogArticles9: BlogPost[] = [
 <ul>
 <li><strong><a href="/spots/maizuru-shinkai-park">舞鶴親海公園</a></strong>（ICから約20分）— 初心者・ファミリー向け。レンタル竿あり</li>
 <li><strong><a href="/spots/shirasugi-gyoko">白杉漁港</a></strong>（ICから約25分）— エギング・メバリングの穴場</li>
-<li><strong><a href="/spots/kobashi-gyoko">小橋漁港</a></strong>（ICから約30分）— 磯場あり、メバリングに最適</li>
+<li><strong><a href="/spots/obashi-gyoko">小橋漁港</a></strong>（ICから約30分）— 磯場あり、メバリングに最適</li>
 </ul>
 <p><strong>舞鶴東IC</strong>から近いスポット:</p>
 <ul>
 <li><strong><a href="/spots/maejima-futo">前島埠頭</a></strong>（ICから約10分）— 車横付け、夜釣りの定番</li>
 <li><strong>舞鶴漁港（東舞鶴）</strong>（ICから約15分）— サビキで大量のアジ</li>
-<li><strong><a href="/spots/tai-gyoko">田井漁港</a></strong>（ICから約20分）— アジングの穴場</li>
+<li><strong><a href="/spots/tai-port-maizuru">田井漁港</a></strong>（ICから約20分）— アジングの穴場</li>
 </ul>
 
 <h2>道具の準備</h2>
