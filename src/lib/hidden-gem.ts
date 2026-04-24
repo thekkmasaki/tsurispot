@@ -47,7 +47,7 @@ const CONFIG = {
     bottom10Pct: 10,
     bottom25Pct: 6,
     ratingMid: 5, // 3.0-3.8
-    ratingHighPenalty: -8, // 4.0以上
+    ratingHighPenalty: -8, // 4.0-4.19（4.2以上はハードカットで除外済み）
   },
 
   // 軸5: 魚種の豊富さ（最大20点）
@@ -58,7 +58,7 @@ const CONFIG = {
 
   // 穴場認定条件
   threshold: {
-    minTotalScore: 55, // 5軸合計（最大100点中）
+    minTotalScore: 50, // 5軸合計（最大100点中）
     minAxesAbove: 3, // 最低3軸でこのスコア以上
     perAxisMin: 6, // 各軸の「一定以上」の基準
   },
@@ -179,9 +179,9 @@ function getPopularityScore(spot: FishingSpot): number {
   if (reviews <= stats.p10) score += CONFIG.popularity.bottom10Pct;
   else if (reviews <= stats.p25) score += CONFIG.popularity.bottom25Pct;
 
-  // rating評価（中程度が穴場らしい、高評価は人気 → 減点）
-  if (spot.rating >= 3.0 && spot.rating <= 3.8) score += CONFIG.popularity.ratingMid;
-  else if (spot.rating >= 4.0) score += CONFIG.popularity.ratingHighPenalty;
+  // rating評価（中程度が穴場らしい、高評価は人気 → 減点。4.2以上はハードカット済み）
+  if (spot.rating >= 4.0) score += CONFIG.popularity.ratingHighPenalty;
+  else if (spot.rating >= 3.0 && spot.rating <= 3.8) score += CONFIG.popularity.ratingMid;
 
   return Math.max(Math.min(score, 20), 0);
 }
@@ -207,6 +207,8 @@ export function getHiddenGemScore(spot: FishingSpot): number {
   if (isLargeScaleSpot(spot)) return 0;
   // beginner は穴場に不向き
   if (spot.difficulty === "beginner") return 0;
+  // 高評価スポットは穴場では��い
+  if (spot.rating >= 4.2) return 0;
 
   const axes = [
     getSmallScaleScore(spot),
@@ -238,6 +240,8 @@ export function isHiddenGem(spot: FishingSpot): boolean {
   if (getPremiumFishForSpot(spot).length === 0) return false;
   // 魚種3種以上（必須）
   if (spot.catchableFish.length < 3) return false;
+  // 高評価スポットは人気があるので穴場ではない
+  if (spot.rating >= 4.2) return false;
 
   // 5軸スコア
   const axes = [
@@ -248,7 +252,8 @@ export function isHiddenGem(spot: FishingSpot): boolean {
     getFishDiversityScore(spot),
   ];
 
-  const total = axes.reduce((sum, v) => sum + v, 0);
+  // 合計スコア（高評価ペナルティ込み = getHiddenGemScoreと同じ値）
+  const total = getHiddenGemScore(spot);
   if (total < CONFIG.threshold.minTotalScore) return false;
 
   // 3軸以上で一定スコア
