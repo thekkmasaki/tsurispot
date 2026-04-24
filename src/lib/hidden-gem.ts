@@ -6,7 +6,10 @@ import { fishingSpots } from "@/lib/data/spots";
 // ========================================
 const CONFIG = {
   // 大規模スポット除外キーワード
-  excludeKeywords: ["港", "フィッシングパーク", "海釣り公園", "釣り堀", "釣り公園", "マリーナ"],
+  excludeKeywords: ["港", "フィッシングパーク", "海釣り公園", "海釣公園", "釣り堀", "釣り公園", "マリーナ", "人工島"],
+
+  // レビュー数の絶対閾値（これ以上は有名スポット → 穴場ではない）
+  maxReviewCount: 200,
 
   // 軸1: 小規模さシグナル（最大20点）
   smallScale: {
@@ -175,9 +178,12 @@ function getPopularityScore(spot: FishingSpot): number {
   let score = 0;
   const reviews = spot.googleReviewCount ?? spot.reviewCount;
 
-  // 県内の相対的な位置
-  if (reviews <= stats.p10) score += CONFIG.popularity.bottom10Pct;
-  else if (reviews <= stats.p25) score += CONFIG.popularity.bottom25Pct;
+  // レビュー0はデータ未設定 → 「知名度が低い」とは判断できないので加点しない
+  if (reviews > 0) {
+    // 県内の相対的な位置
+    if (reviews <= stats.p10) score += CONFIG.popularity.bottom10Pct;
+    else if (reviews <= stats.p25) score += CONFIG.popularity.bottom25Pct;
+  }
 
   // rating評価（中程度が穴場らしい、高評価は人気 → 減点。4.2以上はハードカット済み）
   if (spot.rating >= 4.0) score += CONFIG.popularity.ratingHighPenalty;
@@ -209,6 +215,9 @@ export function getHiddenGemScore(spot: FishingSpot): number {
   if (spot.difficulty === "beginner") return 0;
   // 高評価スポットは穴場ではない
   if (spot.rating >= 4.2) return 0;
+  // レビュー数が多い = 有名スポット → 穴場ではない
+  const reviews = spot.googleReviewCount ?? spot.reviewCount;
+  if (reviews >= CONFIG.maxReviewCount) return 0;
 
   const axes = [
     getSmallScaleScore(spot),
@@ -242,6 +251,9 @@ export function isHiddenGem(spot: FishingSpot): boolean {
   if (spot.catchableFish.length < 3) return false;
   // 高評価スポットは人気があるので穴場ではない
   if (spot.rating >= 4.2) return false;
+  // レビュー数が多い = 有名スポット → 穴場ではない
+  const reviews = spot.googleReviewCount ?? spot.reviewCount;
+  if (reviews >= CONFIG.maxReviewCount) return false;
 
   // 5軸スコア
   const axes = [
