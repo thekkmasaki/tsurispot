@@ -207,7 +207,7 @@ export function getHiddenGemScore(spot: FishingSpot): number {
   if (isLargeScaleSpot(spot)) return 0;
   // beginner は穴場に不向き
   if (spot.difficulty === "beginner") return 0;
-  // 高評価スポットは穴場では��い
+  // 高評価スポットは穴場ではない
   if (spot.rating >= 4.2) return 0;
 
   const axes = [
