@@ -1,8 +1,102 @@
 import type { FishingSpot, FishSpecies } from "@/types";
+import { fishingSpots } from "@/lib/data/spots";
+
+// ========================================
+// 設定値（閾値・重み）を1箇所で管理
+// ========================================
+const CONFIG = {
+  // 大規模スポット除外キーワード
+  excludeKeywords: ["港", "フィッシングパーク", "海釣り公園", "釣り堀", "釣り公園", "マリーナ"],
+
+  // 軸1: 小規模さシグナル（最大20点）
+  smallScale: {
+    spotType: {
+      rocky: 8,
+      beach: 6,
+      breakwater: 4,
+      pier: 3,
+      port: 0,
+      river: 0,
+    } as Record<string, number>,
+    noToilet: 3,
+    noParking: 3,
+    noRentalRod: 2,
+    noConvenience: 2,
+    noFishingShop: 2,
+  },
+
+  // 軸2: 高級魚ポテンシャル（最大20点）
+  premiumFish: {
+    one: 10,
+    two: 15,
+    threeOrMore: 20,
+  },
+
+  // 軸3: 難易度（最大20点）
+  difficulty: {
+    spotAdvanced: 10,
+    spotIntermediate: 5,
+    hardFishEach: 3, // 1匹あたり（最大9点）
+    hardFishMax: 9,
+    cautionSafety: 3,
+    dangerSafety: 5,
+  },
+
+  // 軸4: 知名度の低さ（最大20点）
+  popularity: {
+    bottom10Pct: 10,
+    bottom25Pct: 6,
+    ratingMid: 5, // 3.0-3.8
+    ratingHighPenalty: -8, // 4.0以上
+  },
+
+  // 軸5: 魚種の豊富さ（最大20点）
+  fishDiversity: {
+    fiveOrMore: 10,
+    eightOrMore: 20,
+  },
+
+  // 穴場認定条件
+  threshold: {
+    minTotalScore: 55, // 5軸合計（最大100点中）
+    minAxesAbove: 3, // 最低3軸でこのスコア以上
+    perAxisMin: 6, // 各軸の「一定以上」の基準
+  },
+} as const;
+
+// ========================================
+// 都道府県別reviewCount統計キャッシュ
+// ========================================
+let prefectureStatsCache: Map<string, { p10: number; p25: number }> | null = null;
+
+function getPrefectureReviewStats(): Map<string, { p10: number; p25: number }> {
+  if (prefectureStatsCache) return prefectureStatsCache;
+
+  const byPrefecture = new Map<string, number[]>();
+  for (const spot of fishingSpots) {
+    const pref = spot.region.prefecture;
+    const reviews = spot.googleReviewCount ?? spot.reviewCount;
+    if (!byPrefecture.has(pref)) byPrefecture.set(pref, []);
+    byPrefecture.get(pref)!.push(reviews);
+  }
+
+  prefectureStatsCache = new Map();
+  for (const [pref, reviews] of byPrefecture) {
+    const sorted = reviews.slice().sort((a, b) => a - b);
+    const p10 = sorted[Math.floor(sorted.length * 0.1)] ?? 0;
+    const p25 = sorted[Math.floor(sorted.length * 0.25)] ?? 0;
+    prefectureStatsCache.set(pref, { p10, p25 });
+  }
+
+  return prefectureStatsCache;
+}
+
+// ========================================
+// 公開API（シグネチャ維持）
+// ========================================
 
 /**
  * 高級魚の判定: 上級者向け + 食味4以上
- * 動画「激レア高級魚の通り道」にインスパイアされた分類
  */
 export function isPremiumFish(fish: FishSpecies): boolean {
   return fish.difficulty === "advanced" && fish.tasteRating >= 4;
@@ -23,49 +117,145 @@ export function getPremiumFishForSpot(spot: FishingSpot): FishSpecies[] {
   return result;
 }
 
-/**
- * 穴場スコアを算出（0-100）
- * 口コミが少なく、魚種が豊富で、高級魚が釣れるスポットほど高スコア
- */
-export function getHiddenGemScore(spot: FishingSpot): number {
+// ========================================
+// 大規模スポット除外判定
+// ========================================
+function isLargeScaleSpot(spot: FishingSpot): boolean {
+  return CONFIG.excludeKeywords.some((kw) => spot.name.includes(kw));
+}
+
+// ========================================
+// 5軸スコアリング
+// ========================================
+
+/** 軸1: 小規模さシグナル（最大20点） */
+function getSmallScaleScore(spot: FishingSpot): number {
+  let score = CONFIG.smallScale.spotType[spot.spotType] ?? 0;
+  if (!spot.hasToilet) score += CONFIG.smallScale.noToilet;
+  if (!spot.hasParking) score += CONFIG.smallScale.noParking;
+  if (!spot.hasRentalRod) score += CONFIG.smallScale.noRentalRod;
+  if (!spot.hasConvenienceStore) score += CONFIG.smallScale.noConvenience;
+  if (!spot.hasFishingShop) score += CONFIG.smallScale.noFishingShop;
+  return Math.min(score, 20);
+}
+
+/** 軸2: 高級魚ポテンシャル（最大20点） */
+function getPremiumFishScore(spot: FishingSpot): number {
+  const count = getPremiumFishForSpot(spot).length;
+  if (count >= 3) return CONFIG.premiumFish.threeOrMore;
+  if (count >= 2) return CONFIG.premiumFish.two;
+  if (count >= 1) return CONFIG.premiumFish.one;
+  return 0;
+}
+
+/** 軸3: 難易度の高さ（最大20点） */
+function getDifficultyScore(spot: FishingSpot): number {
   let score = 0;
 
-  // 口コミ数が少ない = 知名度が低い = 穴場度UP（最大30点）
+  // スポット自体の難易度
+  if (spot.difficulty === "advanced") score += CONFIG.difficulty.spotAdvanced;
+  else if (spot.difficulty === "intermediate") score += CONFIG.difficulty.spotIntermediate;
+
+  // hard難易度の魚
+  const hardCount = spot.catchableFish.filter((cf) => cf.catchDifficulty === "hard").length;
+  score += Math.min(hardCount * CONFIG.difficulty.hardFishEach, CONFIG.difficulty.hardFishMax);
+
+  // 安全レベル（足場が悪い = 穴場らしい）
+  if (spot.safetyLevel === "danger") score += CONFIG.difficulty.dangerSafety;
+  else if (spot.safetyLevel === "caution") score += CONFIG.difficulty.cautionSafety;
+
+  return Math.min(score, 20);
+}
+
+/** 軸4: 知名度の低さ（最大20点） */
+function getPopularityScore(spot: FishingSpot): number {
+  const stats = getPrefectureReviewStats().get(spot.region.prefecture);
+  if (!stats) return 0;
+
+  let score = 0;
   const reviews = spot.googleReviewCount ?? spot.reviewCount;
-  if (reviews <= 30) score += 30;
-  else if (reviews <= 60) score += 25;
-  else if (reviews <= 100) score += 15;
-  else if (reviews <= 150) score += 5;
 
-  // 釣れる魚種が多い = 実力あるスポット（最大25点）
-  const fishCount = spot.catchableFish.length;
-  if (fishCount >= 8) score += 25;
-  else if (fishCount >= 5) score += 20;
-  else if (fishCount >= 3) score += 10;
+  // 県内の相対的な位置
+  if (reviews <= stats.p10) score += CONFIG.popularity.bottom10Pct;
+  else if (reviews <= stats.p25) score += CONFIG.popularity.bottom25Pct;
 
-  // 高級魚が釣れる = 価値が高い（最大25点）
-  const premiumCount = getPremiumFishForSpot(spot).length;
-  if (premiumCount >= 3) score += 25;
-  else if (premiumCount >= 2) score += 20;
-  else if (premiumCount >= 1) score += 12;
+  // rating評価（中程度が穴場らしい、高評価は人気 → 減点）
+  if (spot.rating >= 3.0 && spot.rating <= 3.8) score += CONFIG.popularity.ratingMid;
+  else if (spot.rating >= 4.0) score += CONFIG.popularity.ratingHighPenalty;
 
-  // 「hard」難易度の魚がいる = 上級者向けの面白さ（最大10点）
-  const hardFishCount = spot.catchableFish.filter(cf => cf.catchDifficulty === "hard").length;
-  if (hardFishCount >= 2) score += 10;
-  else if (hardFishCount >= 1) score += 5;
+  return Math.max(Math.min(score, 20), 0);
+}
 
-  // 磯・岩場は穴場のイメージにマッチ（最大10点）
-  if (spot.spotType === "rocky") score += 10;
-  else if (spot.spotType === "breakwater" || spot.spotType === "beach") score += 5;
+/** 軸5: 魚種の豊富さ（最大20点） */
+function getFishDiversityScore(spot: FishingSpot): number {
+  const count = spot.catchableFish.length;
+  if (count >= 8) return CONFIG.fishDiversity.eightOrMore;
+  if (count >= 5) return CONFIG.fishDiversity.fiveOrMore;
+  return 0;
+}
 
-  return Math.min(score, 100);
+// ========================================
+// メインスコア計算
+// ========================================
+
+/**
+ * 穴場スコアを算出（0-100）
+ * 5軸スコアリング: 小規模さ + 高級魚 + 難易度 + 知名度低さ + 魚種豊富さ
+ */
+export function getHiddenGemScore(spot: FishingSpot): number {
+  // 大規模スポットは即0
+  if (isLargeScaleSpot(spot)) return 0;
+  // beginner は穴場に不向き
+  if (spot.difficulty === "beginner") return 0;
+
+  const axes = [
+    getSmallScaleScore(spot),
+    getPremiumFishScore(spot),
+    getDifficultyScore(spot),
+    getPopularityScore(spot),
+    getFishDiversityScore(spot),
+  ];
+
+  return axes.reduce((sum, v) => sum + v, 0);
 }
 
 /**
- * 穴場スポット判定（スコア60以上 かつ 魚種3種以上）
+ * 穴場スポット判定
+ * AND条件:
+ * 1. 大規模スポット除外に該当しない
+ * 2. 高級魚が1種以上
+ * 3. catchableFish 3種以上
+ * 4. difficulty != "beginner"
+ * 5. 5軸合計が閾値以上
+ * 6. 5軸のうち少なくとも3軸で一定スコア以上
  */
 export function isHiddenGem(spot: FishingSpot): boolean {
-  return getHiddenGemScore(spot) >= 60 && spot.catchableFish.length >= 3;
+  // 大規模スポット除外
+  if (isLargeScaleSpot(spot)) return false;
+  // beginner除外
+  if (spot.difficulty === "beginner") return false;
+  // 高級魚1種以上（必須）
+  if (getPremiumFishForSpot(spot).length === 0) return false;
+  // 魚種3種以上（必須）
+  if (spot.catchableFish.length < 3) return false;
+
+  // 5軸スコア
+  const axes = [
+    getSmallScaleScore(spot),
+    getPremiumFishScore(spot),
+    getDifficultyScore(spot),
+    getPopularityScore(spot),
+    getFishDiversityScore(spot),
+  ];
+
+  const total = axes.reduce((sum, v) => sum + v, 0);
+  if (total < CONFIG.threshold.minTotalScore) return false;
+
+  // 3軸以上で一定スコア
+  const axesAboveMin = axes.filter((v) => v >= CONFIG.threshold.perAxisMin).length;
+  if (axesAboveMin < CONFIG.threshold.minAxesAbove) return false;
+
+  return true;
 }
 
 /**
@@ -73,15 +263,15 @@ export function isHiddenGem(spot: FishingSpot): boolean {
  */
 export function getHiddenGemSpotsForPrefecture(
   spots: FishingSpot[],
-  limit = 5
+  limit = 3
 ): (FishingSpot & { hiddenGemScore: number; premiumFish: FishSpecies[] })[] {
   return spots
-    .map(spot => ({
+    .filter((spot) => isHiddenGem(spot))
+    .map((spot) => ({
       ...spot,
       hiddenGemScore: getHiddenGemScore(spot),
       premiumFish: getPremiumFishForSpot(spot),
     }))
-    .filter(s => s.hiddenGemScore >= 55 && s.premiumFish.length > 0)
     .sort((a, b) => b.hiddenGemScore - a.hiddenGemScore)
     .slice(0, limit);
 }

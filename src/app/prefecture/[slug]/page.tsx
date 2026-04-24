@@ -480,7 +480,7 @@ export default async function PrefecturePage({ params }: PageProps) {
   const top10Spots = getTop10SpotsByRating(pref.name);
 
   // 穴場×高級魚スポット
-  const hiddenGemSpots = getHiddenGemSpotsForPrefecture(spots, 5);
+  const hiddenGemSpots = getHiddenGemSpotsForPrefecture(spots, 3);
 
   // 季節別おすすめ魚種（動的生成）
   const seasonalFishBreakdown = getSeasonalFishBreakdown(pref.name, regionSlug);
@@ -816,8 +816,8 @@ export default async function PrefecturePage({ params }: PageProps) {
             {pref.name}の穴場×高級魚スポット
           </h2>
           <p className="mb-4 text-sm text-muted-foreground">
-            口コミが少なく知る人ぞ知る穴場でありながら、マダイ・ヒラメ・クエなどの高級魚が狙えるスポットを厳選。
-            人が少ない分、のんびりと大物を狙えるチャンスがあります。
+            小規模で設備が少なく、人の少ない場所でありながら高級魚が狙える知る人ぞ知るスポットを厳選。
+            アクセスや足場の難易度は高めですが、中上級者なら大物を独り占めできるチャンスがあります。
           </p>
           <div className="grid gap-3 sm:gap-4">
             {hiddenGemSpots.map((spot) => (
@@ -862,7 +862,7 @@ export default async function PrefecturePage({ params }: PageProps) {
                           </span>
                         </div>
                         <p className="mt-1 text-xs font-medium text-emerald-600">
-                          穴場度{spot.hiddenGemScore}
+                          <Gem className="mr-0.5 inline size-3" />穴場
                         </p>
                       </div>
                     </div>
