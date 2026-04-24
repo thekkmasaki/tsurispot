@@ -1229,27 +1229,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
     safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "半島の磯は注意が必要"],
     youtubeLinks: [{ label: "真鶴港 釣り", searchQuery: "真鶴港 サビキ メジナ エギング 釣り", description: "真鶴港での釣り動画" }],
   },
-  {
-    id: "s3177", name: "茅ヶ崎ヘッドランド", slug: "chigasaki-headland",
-    description: "茅ヶ崎海岸に設置されたT字型のヘッドランド。サーフフィッシングの好ポイントで、ヒラメ・シーバス・キスが狙える。烏帽子岩を望む絶景ポイントでもある。",
-    latitude: 35.3200, longitude: 139.4050,
-    address: "〒253-0054 神奈川県茅ヶ崎市東海岸南6丁目4",
-    accessInfo: "JR東海道線茅ヶ崎駅から車で約10分。新湘南バイパス茅ヶ崎海岸ICから約5分。",
-    region: localRegion("r3131"), spotType: "beach", difficulty: "intermediate",
-    isFree: true, hasParking: true, parkingDetail: "海岸沿い有料駐車場あり",
-    hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/chigasaki-headland.webp", imageAttribution: "Photo: 運転太郎 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.7, reviewCount: 155, googleRating: 4.3, googleReviewCount: 154,
-    catchableFish: [
-      { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
-      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
-      { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
-    ],
-    bestTimes: btMorning, tackleRecommendations: [],
-    tideAdvice: tideSurf, mazumeInfo: mazumeKanto,
-    gearGuides: [gearNage, gearLure],
-    safetyLevel: "caution", safetyNotes: ["離岸流に注意", "波の高い日は危険"],
-    youtubeLinks: [{ label: "茅ヶ崎 サーフ", searchQuery: "茅ヶ崎 ヘッドランド サーフ ヒラメ キス", description: "茅ヶ崎ヘッドランドでの釣り動画" }],
-  },
+  // s3177 茅ヶ崎ヘッドランド は spots-sagami-shonan.ts (ss19) と重複のため削除
   {
     id: "s3178", name: "葉山港", slug: "hayama-kou",
     description: "葉山マリーナに隣接する漁港。御用邸近くの上品なエリアで、堤防からアジ・メバル・カワハギが狙える。富士山と江の島を望む景観が美しく、カゴ釣りでマダイの実績も。",
