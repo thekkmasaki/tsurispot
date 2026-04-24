@@ -135,10 +135,10 @@ export function SeasonalRecommend({ maxItems = 4 }: SeasonalRecommendProps) {
         <div>
           <h2 className="flex items-center gap-2 text-base font-bold sm:text-lg">
             <ShoppingBag className="size-4 text-primary" />
-            {month}月のおすすめアイテム
+            {month}月の釣りに役立つ装備
           </h2>
           <p className="text-xs text-muted-foreground">
-            {config.label}の釣りに役立つアイテムをピックアップ
+            {config.label}の釣りで実際に使って良かったアイテムを厳選
           </p>
         </div>
       </div>

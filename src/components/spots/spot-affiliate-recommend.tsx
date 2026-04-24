@@ -68,10 +68,11 @@ export function SpotAffiliateRecommend({ methods, isNightFishing = false, prefec
       <div className="mb-4 rounded-lg bg-gradient-to-r from-primary/10 to-primary/5 p-4">
         <h3 className="flex items-center gap-2 text-base font-bold">
           <ShoppingBag className="size-5 text-primary" />
-          この釣り場で使える装備
+          この釣り場の釣り方に合った装備ガイド
         </h3>
         <p className="mt-1 text-sm text-muted-foreground">
           {seasonMessage}
+          {methods.length > 0 && `この釣り場で対応できる${methods.join("・")}に適した道具をご紹介します。`}
         </p>
       </div>
 

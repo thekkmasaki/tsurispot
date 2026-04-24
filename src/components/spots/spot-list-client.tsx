@@ -10,6 +10,19 @@ import { InFeedAd } from "@/components/ads/ad-unit";
 import { FishingSpot, SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { regions } from "@/lib/data/regions";
 
+type RegionKey = "hokkaido" | "tohoku" | "kanto" | "chubu" | "kinki" | "chugoku" | "shikoku" | "kyushu";
+
+const REGION_CONFIG: Record<RegionKey, { label: string; prefectures: string[] }> = {
+  hokkaido: { label: "北海道", prefectures: ["北海道"] },
+  tohoku: { label: "東北", prefectures: ["青森県", "岩手県", "宮城県", "秋田県", "山形県", "福島県"] },
+  kanto: { label: "関東", prefectures: ["茨城県", "栃木県", "群馬県", "埼玉県", "千葉県", "東京都", "神奈川県"] },
+  chubu: { label: "中部", prefectures: ["新潟県", "富山県", "石川県", "福井県", "山梨県", "長野県", "岐阜県", "静岡県", "愛知県"] },
+  kinki: { label: "近畿", prefectures: ["三重県", "滋賀県", "京都府", "大阪府", "兵庫県", "奈良県", "和歌山県"] },
+  chugoku: { label: "中国", prefectures: ["鳥取県", "島根県", "岡山県", "広島県", "山口県"] },
+  shikoku: { label: "四国", prefectures: ["徳島県", "香川県", "愛媛県", "高知県"] },
+  kyushu: { label: "九州・沖縄", prefectures: ["福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"] },
+};
+
 // カタカナ → ひらがな変換
 function katakanaToHiragana(str: string): string {
   return str.replace(/[\u30A1-\u30F6]/g, (ch) =>
@@ -79,6 +92,7 @@ const FACILITY_OPTIONS: { key: FacilityKey; label: string }[] = [
 export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpot[]; initialQuery?: string }) {
   const [searchText, setSearchText] = useState(initialQuery);
   const deferredSearchText = useDeferredValue(searchText);
+  const [selectedRegion, setSelectedRegion] = useState<RegionKey | "">("");
   const [selectedPrefecture, setSelectedPrefecture] = useState<string>("");
   const [selectedArea, setSelectedArea] = useState<string>("");
   const [selectedType, setSelectedType] = useState<FishingSpot["spotType"] | "">("");
@@ -165,8 +179,8 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
     return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20).map(([n]) => n);
   }, [spots]);
 
-  const hasFilters = searchText || selectedPrefecture || selectedArea || selectedType || selectedDifficulty || selectedFacilities.length > 0 || selectedFree || selectedMethods.length > 0 || selectedFishNames.length > 0;
-  const activeFilterCount = [selectedPrefecture, selectedArea, selectedType, selectedDifficulty, selectedFree].filter(Boolean).length + selectedFacilities.length + selectedMethods.length + selectedFishNames.length;
+  const hasFilters = searchText || selectedRegion || selectedPrefecture || selectedArea || selectedType || selectedDifficulty || selectedFacilities.length > 0 || selectedFree || selectedMethods.length > 0 || selectedFishNames.length > 0;
+  const activeFilterCount = [selectedRegion, selectedPrefecture, selectedArea, selectedType, selectedDifficulty, selectedFree].filter(Boolean).length + selectedFacilities.length + selectedMethods.length + selectedFishNames.length;
 
   // Precompute distances for all spots if user location is available
   const distanceMap = useMemo(() => {
@@ -189,6 +203,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
           spot.address,
         )) return false;
       }
+      if (selectedRegion && !REGION_CONFIG[selectedRegion].prefectures.includes(spot.region.prefecture)) return false;
       if (selectedPrefecture && spot.region.prefecture !== selectedPrefecture) return false;
       if (selectedArea && spot.region.areaName !== selectedArea) return false;
       if (selectedType && spot.spotType !== selectedType) return false;
@@ -217,7 +232,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
     }
 
     return filtered;
-  }, [spots, deferredSearchText, selectedPrefecture, selectedArea, selectedType, selectedDifficulty, selectedFacilities, selectedFree, selectedMethods, selectedFishNames, sortByDistance, distanceMap]);
+  }, [spots, deferredSearchText, selectedRegion, selectedPrefecture, selectedArea, selectedType, selectedDifficulty, selectedFacilities, selectedFree, selectedMethods, selectedFishNames, sortByDistance, distanceMap]);
 
   const totalPages = Math.ceil(filteredSpots.length / ITEMS_PER_PAGE);
   const paginatedSpots = filteredSpots.slice(
@@ -229,6 +244,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
   const clearFilters = () => {
     setSearchText("");
     startTransition(() => {
+      setSelectedRegion("");
       setSelectedPrefecture("");
       setSelectedArea("");
       setSelectedType("");
@@ -328,30 +344,58 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
         "space-y-4 overflow-hidden transition-all duration-200",
         isFilterOpen ? "max-h-[1200px] opacity-100" : "max-h-0 opacity-0 sm:max-h-none sm:opacity-100"
       )}>
-        {/* Prefecture filter */}
+        {/* Region block filter (1段目: 地方ブロック) */}
         <div>
-          <p className="mb-2 text-sm font-medium text-muted-foreground">地域</p>
+          <p className="mb-2 text-sm font-medium text-muted-foreground">地方</p>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
-            {prefectures.map((pref) => (
+            {(Object.keys(REGION_CONFIG) as RegionKey[]).map((key) => (
               <Button
-                key={pref}
-                variant={selectedPrefecture === pref ? "default" : "outline"}
+                key={key}
+                variant={selectedRegion === key ? "default" : "outline"}
                 size="sm"
                 onClick={() => {
-                  const newPref = selectedPrefecture === pref ? "" : pref;
+                  const newRegion = selectedRegion === key ? "" : key;
                   startTransition(() => {
-                    setSelectedPrefecture(newPref);
+                    setSelectedRegion(newRegion);
+                    setSelectedPrefecture("");
                     setSelectedArea("");
                     setCurrentPage(1);
                   });
                 }}
                 className="min-h-[40px] text-xs sm:text-sm"
               >
-                {pref}
+                {REGION_CONFIG[key].label}
               </Button>
             ))}
           </div>
         </div>
+
+        {/* Prefecture filter (2段目: 選択した地方の都道府県) */}
+        {selectedRegion && (
+          <div>
+            <p className="mb-2 text-sm font-medium text-muted-foreground">都道府県</p>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              {REGION_CONFIG[selectedRegion].prefectures.map((pref) => (
+                <Button
+                  key={pref}
+                  variant={selectedPrefecture === pref ? "default" : "outline"}
+                  size="sm"
+                  onClick={() => {
+                    const newPref = selectedPrefecture === pref ? "" : pref;
+                    startTransition(() => {
+                      setSelectedPrefecture(newPref);
+                      setSelectedArea("");
+                      setCurrentPage(1);
+                    });
+                  }}
+                  className="min-h-[40px] text-xs sm:text-sm"
+                >
+                  {pref}
+                </Button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Area filter - shown when a prefecture is selected */}
         {selectedPrefecture && areasForPrefecture.length > 0 && (

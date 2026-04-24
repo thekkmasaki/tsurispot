@@ -207,3 +207,11 @@
   }
 }
 
+/* モバイルのセクション見出し左ボーダー */
+@media (max-width: 639px) {
+  .spot-detail-section h3 {
+    border-left: 3px solid var(--color-primary);
+    padding-left: 0.75rem;
+  }
+}
+

@@ -26,7 +26,7 @@ export function SpotDetailTabs({
 }: SpotDetailTabsProps) {
   return (
     <Tabs defaultValue="overview" className="mt-6">
-      <TabsList className="w-full overflow-x-auto scrollbar-hide bg-sand-light/50 rounded-2xl p-1.5">
+      <TabsList className="w-full overflow-x-auto scrollbar-hide bg-sand-light/80 rounded-2xl p-1.5 sticky top-14 z-20 backdrop-blur-sm shadow-sm">
         {TAB_ITEMS.map(({ value, label, icon: Icon }) => (
           <TabsTrigger
             key={value}

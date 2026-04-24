@@ -29,6 +29,7 @@ import { HomeSearchBar } from "@/components/home-search-bar";
 import { HomeSeasonalFish } from "@/components/home-seasonal-fish";
 import { HomeTop10Client } from "@/components/home-top10-client";
 import { SectionErrorBoundary } from "@/components/ui/section-error-boundary";
+import { ContentDivider } from "@/components/ui/content-divider";
 
 /** タグの魚名→画像パス */
 const FISH_TAG_IMG: Record<string, string> = {
@@ -574,7 +575,10 @@ export default async function Home() {
       )}
 
       {/* 広告: 釣果週報後 */}
-      <div className="mx-auto max-w-5xl px-4"><InArticleAd className="my-4" /></div>
+      <div className="mx-auto max-w-5xl px-4">
+        <ContentDivider variant="line" />
+        <InArticleAd className="my-4" />
+      </div>
 
       {/* 人気スポットTOP10（近い順ソート対応） */}
       <HomeTop10Client
@@ -597,6 +601,7 @@ export default async function Home() {
       />
 
       {/* 広告（below fold） */}
+      <div className="mx-auto max-w-5xl px-4"><ContentDivider variant="line" /></div>
       <NativeAdBreak />
 
       {/* 今釣れる魚セクション */}

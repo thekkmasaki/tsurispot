@@ -16,7 +16,7 @@ const CompareBar = dynamic(() => import("@/components/spots/compare-bar").then(m
 const PreFooterAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.PreFooterAd })));
 const HeaderBannerAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.HeaderBannerAd })));
 const MobileHeaderBannerAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.MobileHeaderBannerAd })));
-const MobileStickyAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.MobileStickyAd })));
+const SmartMobileStickyAd = dynamic(() => import("@/components/layout/smart-mobile-ad").then(m => ({ default: m.SmartMobileStickyAd })));
 const SideRailAds = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.SideRailAds })));
 import "./globals.css";
 
@@ -247,7 +247,7 @@ export default function RootLayout({
         <PreFooterAd />
         <Footer />
         <MobileNav />
-        <MobileStickyAd />
+        <SmartMobileStickyAd />
         <PWAInstallHint />
         <CompareBar />
         <BackToTop />

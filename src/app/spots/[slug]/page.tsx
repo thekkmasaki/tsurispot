@@ -74,6 +74,7 @@ import { getRelatedBlogPostsForSpot, BLOG_CATEGORIES } from "@/lib/data/blog";
 import { RecentlyViewedTracker } from "@/components/spots/recently-viewed-tracker";
 import { RecentlyViewedSpots } from "@/components/spots/recently-viewed";
 import { CollapsibleSection } from "@/components/ui/collapsible-section";
+import { ContentDivider } from "@/components/ui/content-divider";
 import { PortMannerSection } from "@/components/spots/port-manner-section";
 import { UmigyoBadge } from "@/components/spots/umigyo-badge";
 import { umigyoDistricts } from "@/lib/data/umigyo";
@@ -1506,29 +1507,34 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
       {/* よくある質問（FAQ） */}
       <section className="mt-6 sm:mt-8">
-        <h3 className="mb-4 flex items-center gap-2 text-lg font-bold">
-          <HelpCircle className="size-5 text-primary" />
-          {spot.name}のよくある質問
-        </h3>
-        <div className="space-y-3">
-          {faqJsonLd.mainEntity.slice(0, 6).map((q: { name: string; acceptedAnswer: { text: string } }, i: number) => (
-            <Card key={i} className="gap-0 py-0">
-              <CardContent className="p-4">
-                <h3 className="mb-2 text-sm font-bold">
-                  Q. {q.name}
-                </h3>
-                <p className="text-sm leading-relaxed text-muted-foreground">
-                  {q.acceptedAnswer.text}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
+        <CollapsibleSection
+          title={`${spot.name}のよくある質問`}
+          icon={<HelpCircle className="size-5 text-primary" />}
+          mobileOnly={true}
+          defaultOpen={false}
+          previewText={`${faqJsonLd.mainEntity.length}件のQ&A`}
+        >
+          <div className="space-y-3">
+            {faqJsonLd.mainEntity.slice(0, 6).map((q: { name: string; acceptedAnswer: { text: string } }, i: number) => (
+              <Card key={i} className="gap-0 py-0">
+                <CardContent className="p-4">
+                  <h3 className="mb-2 text-sm font-bold">
+                    Q. {q.name}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {q.acceptedAnswer.text}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </CollapsibleSection>
       </section>
 
       {/* 都道府県ガイド・地域ガイドは上の折りたたみセクションに統合済み */}
 
       {/* 広告（FAQ後） */}
+      <ContentDivider variant="dots" />
       <LazyAd className="my-6"><InArticleAd /></LazyAd>
 
       {/* 関連コラム（ブログ記事への内部リンク — AdSense対策） */}
@@ -1544,44 +1550,49 @@ export default async function SpotDetailPage({ params }: PageProps) {
         if (relatedPosts.length === 0) return null;
         return (
           <section className="mt-6 sm:mt-8">
-            <h3 className="mb-4 flex items-center gap-2 text-lg font-bold">
-              <FileText className="size-5 text-primary" />
-              関連コラム・釣り方ガイド
-            </h3>
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              {relatedPosts.slice(0, 5).map((post) => (
-                <Link key={post.slug} href={`/blog/${post.slug}`} className="group">
-                  <Card className="h-full gap-0 py-0 transition-colors group-hover:border-primary/40 group-hover:bg-primary/5">
-                    <CardContent className="p-4">
-                      <Badge variant="secondary" className="mb-2 text-[10px]">
-                        {BLOG_CATEGORIES[post.category]}
-                      </Badge>
-                      <h4 className="mb-1.5 text-sm font-bold leading-snug line-clamp-2 group-hover:text-primary">
-                        {post.title}
-                      </h4>
-                      <p className="text-xs leading-relaxed text-muted-foreground line-clamp-2">
-                        {post.description.slice(0, 80)}
-                        {post.description.length > 80 ? "..." : ""}
-                      </p>
-                    </CardContent>
-                  </Card>
+            <CollapsibleSection
+              title="関連コラム・釣り方ガイド"
+              icon={<FileText className="size-5 text-primary" />}
+              mobileOnly={true}
+              defaultOpen={false}
+              previewText={`${relatedPosts.length}件の記事`}
+            >
+              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                {relatedPosts.slice(0, 5).map((post) => (
+                  <Link key={post.slug} href={`/blog/${post.slug}`} className="group">
+                    <Card className="h-full gap-0 py-0 transition-colors group-hover:border-primary/40 group-hover:bg-primary/5">
+                      <CardContent className="p-4">
+                        <Badge variant="secondary" className="mb-2 text-[10px]">
+                          {BLOG_CATEGORIES[post.category]}
+                        </Badge>
+                        <h4 className="mb-1.5 text-sm font-bold leading-snug line-clamp-2 group-hover:text-primary">
+                          {post.title}
+                        </h4>
+                        <p className="text-xs leading-relaxed text-muted-foreground line-clamp-2">
+                          {post.description.slice(0, 80)}
+                          {post.description.length > 80 ? "..." : ""}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
+              <div className="mt-3 text-right">
+                <Link
+                  href="/blog"
+                  className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
+                >
+                  <BookOpen className="size-3" />
+                  コラム一覧を見る
                 </Link>
-              ))}
-            </div>
-            <div className="mt-3 text-right">
-              <Link
-                href="/blog"
-                className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
-              >
-                <BookOpen className="size-3" />
-                コラム一覧を見る
-              </Link>
-            </div>
+              </div>
+            </CollapsibleSection>
           </section>
         );
       })()}
 
       {/* モバイル広告C: 関連コラム後 */}
+      <ContentDivider variant="dots" className="lg:hidden" />
       <div className="lg:hidden my-6"><NativeAdBreak /></div>
 
       {/* まとめ（GEO最適化：AI引用しやすい要約 — スポット固有サマリー） */}
@@ -1589,7 +1600,12 @@ export default async function SpotDetailPage({ params }: PageProps) {
         const summary = generateSpotSummary(spot);
         return (
           <section className="mt-8 sm:mt-12 spot-description">
-            <h3 className="mb-3 text-base font-bold sm:text-lg">{spot.name}の釣り情報まとめ</h3>
+            <CollapsibleSection
+              title={`${spot.name}の釣り情報まとめ`}
+              mobileOnly={true}
+              defaultOpen={false}
+              previewText="要約を見る"
+            >
             <Card className="gap-0 py-0">
               <CardContent className="p-4">
                 <ul className="space-y-2 text-sm text-muted-foreground">
@@ -1650,6 +1666,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 </div>
               </CardContent>
             </Card>
+            </CollapsibleSection>
           </section>
         );
       })()}

@@ -166,7 +166,15 @@ export function HomeTop10Client({ spots }: { spots: Top10Spot[] }) {
         <div className="space-y-1.5">
           {displaySpots.map((spot, index) => (
             <Link key={spot.id} href={`/spots/${spot.slug}`} className="block">
-              <div className="flex items-center gap-3 rounded-lg border bg-white p-3 transition-shadow hover:shadow-md">
+              <div className={cn(
+                "flex items-center gap-3 rounded-lg border bg-white",
+                index < 3
+                  ? "p-4 hover:shadow-lg hover:-translate-y-0.5 transition-all border-l-3"
+                  : "p-3 transition-shadow hover:shadow-md",
+                index === 0 && "border-l-amber-400 bg-amber-50/50",
+                index === 1 && "border-l-gray-400 bg-gray-50/50",
+                index === 2 && "border-l-orange-400 bg-orange-50/30",
+              )}>
                 <div
                   className={`flex size-8 shrink-0 items-center justify-center rounded-full font-bold text-sm ${
                     index < 3
