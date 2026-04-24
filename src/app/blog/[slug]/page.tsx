@@ -24,7 +24,7 @@ import {
   Fish,
   Search,
 } from "lucide-react";
-import { InArticleAd } from "@/components/ads/ad-unit";
+import { InArticleAd, StickySidebarAd } from "@/components/ads/ad-unit";
 
 // ISR: 1時間ごとに再検証
 export const revalidate = 3600;
@@ -185,7 +185,7 @@ export default async function BlogPostPage({
   };
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12">
+    <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
@@ -195,6 +195,8 @@ export default async function BlogPostPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleJsonLd) }}
       />
 
+      <div className="lg:grid lg:grid-cols-[1fr_300px] lg:gap-8">
+      <div className="min-w-0">
       {/* パンくずリスト */}
       <nav className="mb-6 text-sm text-muted-foreground" aria-label="パンくず">
         <ol className="flex items-center gap-1.5 flex-wrap">
@@ -513,6 +515,11 @@ export default async function BlogPostPage({
           コラム一覧に戻る
         </Link>
       </div>
+      </div>{/* min-w-0 閉じ */}
+      <aside className="hidden lg:block mt-8">
+        <StickySidebarAd />
+      </aside>
+      </div>{/* lg:grid 閉じ */}
     </div>
   );
 }

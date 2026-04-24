@@ -217,6 +217,30 @@ export function SidebarAd({ className = "" }: { className?: string }) {
   );
 }
 
+// ---- スティッキーサイドバー広告（スクロール追従） ----
+export function StickySidebarAd({ className = "" }: { className?: string }) {
+  if (!ADSENSE_ID) return null;
+  return (
+    <div className={`sticky top-20 ${className}`}>
+      <AdWrapper variant="sidebar" label={false}>
+        <AdUnit slot={SLOTS.display} format="auto" className="min-h-[250px]" />
+      </AdWrapper>
+    </div>
+  );
+}
+
+// ---- ヘッダー下リーダーボード広告（PCのみ） ----
+export function HeaderBannerAd() {
+  if (!ADSENSE_ID) return null;
+  return (
+    <div className="hidden lg:block border-b border-border/30 bg-muted/10">
+      <div className="mx-auto max-w-5xl px-4 py-2">
+        <AdUnit slot={SLOTS.display} format="horizontal" responsive />
+      </div>
+    </div>
+  );
+}
+
 // ---- リスト間広告（カードリスト内に挿入） ----
 export function InFeedAd({ className = "" }: { className?: string }) {
   return (

@@ -46,7 +46,7 @@ import { SpotImage } from "@/components/ui/spot-image";
 import { SpotBouzuCard } from "@/components/spots/spot-bouzu-card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
-import { InArticleAd, DisplayAd, LazyAd, SidebarAd, NativeAdBreak } from "@/components/ads/ad-unit";
+import { InArticleAd, DisplayAd, LazyAd, StickySidebarAd, NativeAdBreak } from "@/components/ads/ad-unit";
 import { FishLikeButton } from "@/components/spots/fish-like-button";
 import { FishingReportSummary } from "@/components/spots/fishing-report-summary";
 import { SpotAffiliateRecommend } from "@/components/spots/spot-affiliate-recommend";
@@ -1708,7 +1708,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           )}
 
           {/* サイドバー広告（デスクトップのみ） */}
-          <SidebarAd />
+          <StickySidebarAd />
         </div>
       </aside>
       </div>{/* 2カラムグリッド閉じ */}

@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, Fragment } from "react";
 import { Search, CalendarCheck, Fish as FishIcon } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { FishCard } from "@/components/fish/fish-card";
 import { DIFFICULTY_LABELS } from "@/types";
 import type { FishSpecies } from "@/types";
+import { InFeedAd } from "@/components/ads/ad-unit";
 
 // 釣れやすい順ソート（難易度→スポット数→人気順）
 function sortByEase<
@@ -500,13 +501,19 @@ export function FishListClient({
       {/* 魚カードグリッド */}
       {filteredFish.length > 0 ? (
         <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-          {filteredFish.map((fish) => (
-            <FishCard
-              key={fish.slug}
-              fish={fish}
-              showPeakBadge={fish.peakMonths.includes(currentMonth)}
-              showSpots
-            />
+          {filteredFish.map((fish, index) => (
+            <Fragment key={fish.slug}>
+              <FishCard
+                fish={fish}
+                showPeakBadge={fish.peakMonths.includes(currentMonth)}
+                showSpots
+              />
+              {index === 7 && (
+                <div className="col-span-full">
+                  <InFeedAd />
+                </div>
+              )}
+            </Fragment>
           ))}
         </div>
       ) : (

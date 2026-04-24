@@ -33,7 +33,7 @@ import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { areaGuides, type AreaGuide } from "@/lib/data/area-guides";
 import { SpotSearchFilter } from "@/components/prefecture/spot-search-filter";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
-import { InArticleAd, DisplayAd } from "@/components/ads/ad-unit";
+import { InArticleAd, DisplayAd, StickySidebarAd } from "@/components/ads/ad-unit";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -1240,6 +1240,10 @@ export default async function PrefecturePage({ params }: PageProps) {
       )}
 
       <InArticleAd className="my-8" />
+
+      <div className="hidden lg:block mt-8">
+        <StickySidebarAd />
+      </div>
 
       {/* FAQ Section */}
       {finalFaqItems.length > 0 && (

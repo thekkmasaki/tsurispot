@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useMemo, useCallback, useDeferredValue, useTransition } from "react";
+import { useState, useMemo, useCallback, useDeferredValue, useTransition, Fragment } from "react";
 import { Search, X, SlidersHorizontal, ChevronDown, ChevronLeft, ChevronRight, MapPin, Navigation, Loader2 } from "lucide-react";
 import { SpotCard } from "@/components/spots/spot-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import { InFeedAd } from "@/components/ads/ad-unit";
 import { FishingSpot, SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { regions } from "@/lib/data/regions";
 
@@ -541,12 +542,18 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
       {paginatedSpots.length > 0 ? (
         <>
           <div className={cn("grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3 transition-opacity duration-200", isPending && "opacity-50")}>
-            {paginatedSpots.map((spot) => (
-              <SpotCard
-                key={spot.id}
-                spot={spot}
-                distance={sortByDistance && distanceMap ? distanceMap.get(spot.id) : undefined}
-              />
+            {paginatedSpots.map((spot, index) => (
+              <Fragment key={spot.id}>
+                <SpotCard
+                  spot={spot}
+                  distance={sortByDistance && distanceMap ? distanceMap.get(spot.id) : undefined}
+                />
+                {(index === 5 || index === 11) && (
+                  <div className="col-span-full">
+                    <InFeedAd />
+                  </div>
+                )}
+              </Fragment>
             ))}
           </div>
 

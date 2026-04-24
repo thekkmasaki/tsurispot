@@ -6,16 +6,18 @@ import { MobileNav } from "@/components/layout/mobile-nav";
 import { Footer } from "@/components/layout/footer";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { PWARegister } from "@/components/pwa-register";
-import { PWAInstallHint } from "@/components/pwa-install-hint";
-import { CookieBanner } from "@/components/layout/cookie-banner";
-import { BackToTop } from "@/components/ui/back-to-top";
-import { CompareBar } from "@/components/spots/compare-bar";
-import { PreFooterAd } from "@/components/ads/ad-unit";
-import { fishingSpots } from "@/lib/data/spots";
+import dynamic from "next/dynamic";
+import { SPOT_COUNT_FORMATTED } from "@/lib/data/spot-count";
+
+const PWAInstallHint = dynamic(() => import("@/components/pwa-install-hint").then(m => ({ default: m.PWAInstallHint })), { ssr: false });
+const CookieBanner = dynamic(() => import("@/components/layout/cookie-banner").then(m => ({ default: m.CookieBanner })), { ssr: false });
+const BackToTop = dynamic(() => import("@/components/ui/back-to-top").then(m => ({ default: m.BackToTop })), { ssr: false });
+const CompareBar = dynamic(() => import("@/components/spots/compare-bar").then(m => ({ default: m.CompareBar })), { ssr: false });
+const PreFooterAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.PreFooterAd })), { ssr: false });
+const HeaderBannerAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.HeaderBannerAd })), { ssr: false });
 import "./globals.css";
 
-// ビルド時にスポット数を自動算出
-const SPOT_COUNT = fishingSpots.length.toLocaleString();
+const SPOT_COUNT = SPOT_COUNT_FORMATTED;
 
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
@@ -237,6 +239,7 @@ export default function RootLayout({
         )}
         <PWARegister />
         <Header />
+        <HeaderBannerAd />
         <main className="min-h-screen pb-24 md:pb-0">{children}</main>
         <PreFooterAd />
         <Footer />
