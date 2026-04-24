@@ -241,6 +241,43 @@ export function HeaderBannerAd() {
   );
 }
 
+// ---- 左右固定サイドバナー広告（kabutan.jp式、PCワイド画面のみ） ----
+export function SideRailAds() {
+  if (!ADSENSE_ID) return null;
+  return (
+    <>
+      {/* 左サイドレール */}
+      <div
+        className="hidden 2xl:block fixed top-1/2 -translate-y-1/2 z-40"
+        style={{ left: "max(0px, calc((100vw - 1280px) / 2 - 176px))" }}
+      >
+        <div className="w-[160px]">
+          <AdUnit
+            slot={SLOTS.display}
+            format="vertical"
+            style={{ display: "block", width: "160px", minHeight: "600px" }}
+            responsive={false}
+          />
+        </div>
+      </div>
+      {/* 右サイドレール */}
+      <div
+        className="hidden 2xl:block fixed top-1/2 -translate-y-1/2 z-40"
+        style={{ right: "max(0px, calc((100vw - 1280px) / 2 - 176px))" }}
+      >
+        <div className="w-[160px]">
+          <AdUnit
+            slot={SLOTS.display}
+            format="vertical"
+            style={{ display: "block", width: "160px", minHeight: "600px" }}
+            responsive={false}
+          />
+        </div>
+      </div>
+    </>
+  );
+}
+
 // ---- リスト間広告（カードリスト内に挿入） ----
 export function InFeedAd({ className = "" }: { className?: string }) {
   return (

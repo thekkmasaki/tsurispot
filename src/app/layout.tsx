@@ -15,6 +15,7 @@ const BackToTop = dynamic(() => import("@/components/ui/back-to-top").then(m => 
 const CompareBar = dynamic(() => import("@/components/spots/compare-bar").then(m => ({ default: m.CompareBar })));
 const PreFooterAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.PreFooterAd })));
 const HeaderBannerAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.HeaderBannerAd })));
+const SideRailAds = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.SideRailAds })));
 import "./globals.css";
 
 const SPOT_COUNT = SPOT_COUNT_FORMATTED;
@@ -238,6 +239,7 @@ export default function RootLayout({
           />
         )}
         <PWARegister />
+        <SideRailAds />
         <Header />
         <HeaderBannerAd />
         <main className="min-h-screen pb-24 md:pb-0">{children}</main>
