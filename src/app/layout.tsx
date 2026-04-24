@@ -9,12 +9,12 @@ import { PWARegister } from "@/components/pwa-register";
 import dynamic from "next/dynamic";
 import { SPOT_COUNT_FORMATTED } from "@/lib/data/spot-count";
 
-const PWAInstallHint = dynamic(() => import("@/components/pwa-install-hint").then(m => ({ default: m.PWAInstallHint })), { ssr: false });
-const CookieBanner = dynamic(() => import("@/components/layout/cookie-banner").then(m => ({ default: m.CookieBanner })), { ssr: false });
-const BackToTop = dynamic(() => import("@/components/ui/back-to-top").then(m => ({ default: m.BackToTop })), { ssr: false });
-const CompareBar = dynamic(() => import("@/components/spots/compare-bar").then(m => ({ default: m.CompareBar })), { ssr: false });
-const PreFooterAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.PreFooterAd })), { ssr: false });
-const HeaderBannerAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.HeaderBannerAd })), { ssr: false });
+const PWAInstallHint = dynamic(() => import("@/components/pwa-install-hint").then(m => ({ default: m.PWAInstallHint })));
+const CookieBanner = dynamic(() => import("@/components/layout/cookie-banner").then(m => ({ default: m.CookieBanner })));
+const BackToTop = dynamic(() => import("@/components/ui/back-to-top").then(m => ({ default: m.BackToTop })));
+const CompareBar = dynamic(() => import("@/components/spots/compare-bar").then(m => ({ default: m.CompareBar })));
+const PreFooterAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.PreFooterAd })));
+const HeaderBannerAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.HeaderBannerAd })));
 import "./globals.css";
 
 const SPOT_COUNT = SPOT_COUNT_FORMATTED;
