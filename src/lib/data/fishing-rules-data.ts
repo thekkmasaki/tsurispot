@@ -34,6 +34,8 @@ export interface PrefectureFishingRule {
   authority: string;
   /** 参考情報（公式リンクのテキスト説明） */
   referenceText: string;
+  /** 公式ルールページURL */
+  referenceUrl?: string;
   /** 海面の釣りルール */
   seaRules?: SeaFishingRules;
 }
@@ -73,7 +75,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
       "冬季は結氷する湖沼でのワカサギ釣りが人気ですが、氷の厚さを必ず確認してください。",
     ],
     authority: "北海道",
-    referenceText: "北海道の内水面漁業調整規則は北海道庁のウェブサイトで確認できます。",
+    referenceText: "北海道の釣り・遊漁に関するルール・マナーは北海道庁の公式ページで確認できます。サケの河口規制、漁業権対象種、禁漁期間など詳細が掲載されています。",
+    referenceUrl: "https://www.pref.hokkaido.lg.jp/sr/ggk/ggs/turi-r-m/rule-manner.html",
     seaRules: {
       fishingRightsNotes: [
         "ケガニ（毛ガニ）は全道で漁業権の対象。遊漁者の採捕は禁止されています。",

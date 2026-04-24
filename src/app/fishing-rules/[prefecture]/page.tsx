@@ -581,6 +581,16 @@ export default async function PrefectureFishingRulesPage({ params }: Props) {
                   <p className="text-sm text-muted-foreground">
                     {rule.referenceText}
                   </p>
+                  {rule.referenceUrl && (
+                    <a
+                      href={rule.referenceUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-800 hover:underline"
+                    >
+                      公式サイトで詳細を確認 →
+                    </a>
+                  )}
                   <p className="mt-2 text-xs text-muted-foreground">
                     管轄: {rule.authority}
                   </p>
