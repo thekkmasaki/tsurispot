@@ -353,6 +353,29 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.6,
     })),
 
+    // ===== 都道府県×釣り方ページ（品質フィルタ: 3スポット以上） =====
+    ...(() => {
+      const prefMethodCombos: { prefSlug: string; methodSlug: string }[] = [];
+      for (const pref of prefectures) {
+        for (const method of FISHING_METHODS) {
+          const count = fishingSpots.filter(
+            (s) =>
+              s.region.prefecture === pref.name &&
+              s.catchableFish.some((cf) => method.methods.includes(cf.method))
+          ).length;
+          if (count >= 3) {
+            prefMethodCombos.push({ prefSlug: pref.slug, methodSlug: method.slug });
+          }
+        }
+      }
+      return prefMethodCombos;
+    })().map(c => ({
+      url: `${baseUrl}/prefecture/${c.prefSlug}/fishing/${c.methodSlug}`,
+      lastModified: dynamicDate,
+      changeFrequency: "monthly" as const,
+      priority: 0.6,
+    })),
+
     // ===== 釣り場タイプページ =====
     { url: `${baseUrl}/spot-type`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.8 },
     ...["port", "beach", "rocky", "river", "pier", "breakwater"].map(type => ({
