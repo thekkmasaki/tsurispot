@@ -1,16 +1,19 @@
 import Link from "next/link";
-import { Star, Car, Toilet, Fish, ShoppingBag, Navigation } from "lucide-react";
+import { Star, Car, Toilet, Fish, ShoppingBag, Navigation, Gem, Crown } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { FishingSpot, SPOT_TYPE_LABELS } from "@/types";
 import { SpotImage } from "@/components/ui/spot-image";
 import { FavoriteButton } from "@/components/spots/favorite-button";
 import { CompareToggleButton } from "@/components/spots/compare-bar";
+import { isHiddenGem, getPremiumFishForSpot } from "@/lib/hidden-gem";
 
 export function SpotCard({ spot, distance }: { spot: FishingSpot; distance?: number | null }) {
   const fishNames = spot.catchableFish.map((cf) => cf.fish.name);
   const displayFish = fishNames.slice(0, 3);
   const remainingCount = fishNames.length - 3;
+  const hiddenGem = isHiddenGem(spot);
+  const premiumFish = getPremiumFishForSpot(spot);
 
   return (
     <Link href={`/spots/${spot.slug}`}>
@@ -27,6 +30,12 @@ export function SpotCard({ spot, distance }: { spot: FishingSpot; distance?: num
           <span className="absolute bottom-2 right-2 rounded-lg bg-ocean-deep/70 px-2 py-0.5 text-xs text-white backdrop-blur-sm">
             {SPOT_TYPE_LABELS[spot.spotType]}
           </span>
+          {hiddenGem && (
+            <span className="absolute top-2 left-2 flex items-center gap-1 rounded-lg bg-emerald-600/90 px-2 py-0.5 text-xs font-medium text-white backdrop-blur-sm">
+              <Gem className="size-3" />
+              穴場
+            </span>
+          )}
           <div className="absolute top-2 right-2 flex items-center gap-1">
             <CompareToggleButton slug={spot.slug} name={spot.name} />
             <FavoriteButton spotSlug={spot.slug} />
@@ -72,6 +81,12 @@ export function SpotCard({ spot, distance }: { spot: FishingSpot; distance?: num
 
           {/* Badges and facilities */}
           <div className="flex flex-wrap items-center gap-1.5">
+            {premiumFish.length > 0 && (
+              <Badge className="bg-amber-600 text-xs hover:bg-amber-600">
+                <Crown className="mr-0.5 size-3" />
+                高級魚
+              </Badge>
+            )}
             {spot.difficulty === "beginner" && (
               <Badge className="bg-green-600 text-xs hover:bg-green-600">
                 初心者OK

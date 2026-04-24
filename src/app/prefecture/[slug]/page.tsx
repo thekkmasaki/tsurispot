@@ -36,7 +36,8 @@ import { monthlyGuides } from "@/lib/data/monthly-guides";
 import { MONTHS } from "@/lib/data/fishing-methods";
 import { InArticleAd, DisplayAd, StickySidebarAd } from "@/components/ads/ad-unit";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
-import { ShoppingBag, ExternalLink, ArrowRight, Tag } from "lucide-react";
+import { ShoppingBag, ExternalLink, ArrowRight, Tag, Gem, Crown } from "lucide-react";
+import { getHiddenGemSpotsForPrefecture } from "@/lib/hidden-gem";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -478,6 +479,9 @@ export default async function PrefecturePage({ params }: PageProps) {
   // TOP10スポット（評価順）
   const top10Spots = getTop10SpotsByRating(pref.name);
 
+  // 穴場×高級魚スポット
+  const hiddenGemSpots = getHiddenGemSpotsForPrefecture(spots, 5);
+
   // 季節別おすすめ魚種（動的生成）
   const seasonalFishBreakdown = getSeasonalFishBreakdown(pref.name, regionSlug);
 
@@ -800,6 +804,72 @@ export default async function PrefecturePage({ params }: PageProps) {
                 </Link>
               );
             })}
+          </div>
+        </section>
+      )}
+
+      {/* 穴場×高級魚スポット */}
+      {hiddenGemSpots.length > 0 && (
+        <section className="mb-8 sm:mb-10" id="hidden-gems">
+          <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
+            <Gem className="size-5 text-emerald-500" />
+            {pref.name}の穴場×高級魚スポット
+          </h2>
+          <p className="mb-4 text-sm text-muted-foreground">
+            口コミが少なく知る人ぞ知る穴場でありながら、マダイ・ヒラメ・クエなどの高級魚が狙えるスポットを厳選。
+            人が少ない分、のんびりと大物を狙えるチャンスがあります。
+          </p>
+          <div className="grid gap-3 sm:gap-4">
+            {hiddenGemSpots.map((spot) => (
+              <Link key={spot.id} href={`/spots/${spot.slug}`}>
+                <Card className="group gap-0 py-0 transition-shadow hover:shadow-md border-emerald-200/50">
+                  <CardContent className="p-3 sm:p-4">
+                    <div className="flex items-start gap-3 sm:gap-4">
+                      <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-emerald-100 text-emerald-700 sm:size-10">
+                        <Gem className="size-4 sm:size-5" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
+                          {spot.name}
+                        </h3>
+                        <p className="mt-0.5 text-xs text-muted-foreground">
+                          {spot.region.areaName}
+                          <span className="mx-1">|</span>
+                          {SPOT_TYPE_LABELS[spot.spotType]}
+                        </p>
+                        <div className="mt-2 flex flex-wrap gap-1">
+                          {spot.premiumFish.slice(0, 4).map((fish) => (
+                            <Badge
+                              key={fish.slug}
+                              className="bg-amber-100 text-amber-800 hover:bg-amber-100 text-xs border-amber-200"
+                            >
+                              <Crown className="mr-0.5 size-3" />
+                              {fish.name}
+                            </Badge>
+                          ))}
+                          {spot.catchableFish.length > spot.premiumFish.length && (
+                            <Badge variant="outline" className="text-xs">
+                              +{spot.catchableFish.length - spot.premiumFish.length}種
+                            </Badge>
+                          )}
+                        </div>
+                      </div>
+                      <div className="shrink-0 text-right">
+                        <div className="flex items-center gap-1 text-sm">
+                          <Star className="size-4 fill-yellow-400 text-yellow-400" />
+                          <span className="font-medium">
+                            {spot.rating.toFixed(1)}
+                          </span>
+                        </div>
+                        <p className="mt-1 text-xs font-medium text-emerald-600">
+                          穴場度{spot.hiddenGemScore}
+                        </p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
           </div>
         </section>
       )}
