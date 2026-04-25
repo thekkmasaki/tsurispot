@@ -40,7 +40,7 @@ const shopsKansai: TackleShop[] = [
       "仕掛け相談",
     ],
     baitStock: [],
-    nearbySpotSlugs: ["miyazu-port", "amanohashidate-fishing", "amanohashidate-asokai"],
+    nearbySpotSlugs: ["miyazu-port", "amanohashidate-k8", "amanohashidate-asokai"],
     imageUrl: "",
     rating: 0,
     isPremium: false,
