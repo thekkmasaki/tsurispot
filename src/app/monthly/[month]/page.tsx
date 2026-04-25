@@ -89,18 +89,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       url: `https://tsurispot.com/monthly/${month}`,
       siteName: "ツリスポ",
-      ...(guide.heroImage
-        ? {
-            images: [
-              {
-                url: `https://tsurispot.com${guide.heroImage}`,
-                width: 1200,
-                height: 630,
-                alt: guide.heroImageAlt || `${guide.nameJa}の釣り`,
-              },
-            ],
-          }
-        : {}),
+      images: guide.heroImage
+        ? [
+            {
+              url: `https://tsurispot.com${guide.heroImage}`,
+              width: 1200,
+              height: 630,
+              alt: guide.heroImageAlt || `${guide.nameJa}の釣り`,
+            },
+          ]
+        : [
+            {
+              url: `https://tsurispot.com/api/og?title=${encodeURIComponent(ogTitle)}&emoji=%F0%9F%93%85`,
+              width: 1200,
+              height: 630,
+            },
+          ],
     },
     alternates: {
       canonical: `https://tsurispot.com/monthly/${month}`,

@@ -91,11 +91,13 @@ export async function generateMetadata({
       siteName: "ツリスポ",
       publishedTime: post.publishedAt,
       modifiedTime: post.updatedAt || post.publishedAt,
-      ...(() => {
+      images: (() => {
         const img = post.image || getWeeklyReportImage(post.slug);
-        if (!img) return {};
-        const url = img.startsWith("http") ? img : `https://tsurispot.com${img}`;
-        return { images: [{ url, width: 1200, height: 630 }] };
+        if (img) {
+          const url = img.startsWith("http") ? img : `https://tsurispot.com${img}`;
+          return [{ url, width: 1200, height: 630 }];
+        }
+        return [{ url: `https://tsurispot.com/api/og?title=${encodeURIComponent(post.title)}&emoji=%F0%9F%8E%A3`, width: 1200, height: 630 }];
       })(),
     },
     alternates: {
