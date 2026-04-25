@@ -26,6 +26,7 @@ import { MONTHS, getMonthBySlug, isMonthInRange } from "@/lib/data/fishing-metho
 import { SPOT_TYPE_LABELS } from "@/types";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
+import { ShareButtons } from "@/components/ui/share-buttons";
 
 type PageProps = {
   params: Promise<{ slug: string; month: string }>;
@@ -366,6 +367,12 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
           おすすめ釣りスポットを紹介します。
           {SEASON_OVERVIEW[month.num]}
         </p>
+        <div className="mt-4">
+          <ShareButtons
+            url={`https://tsurispot.com/prefecture/${slug}/${monthSlug}`}
+            title={`${pref.name}の${month.name}の釣り情報｜ツリスポ`}
+          />
+        </div>
       </div>
 
       {/* 前月/翌月ナビ */}

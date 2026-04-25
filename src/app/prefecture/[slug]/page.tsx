@@ -38,6 +38,7 @@ import { InArticleAd, DisplayAd, StickySidebarAd } from "@/components/ads/ad-uni
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 import { ShoppingBag, ExternalLink, ArrowRight, Tag, Gem, Crown } from "lucide-react";
 import { getHiddenGemSpotsForPrefecture } from "@/lib/hidden-gem";
+import { ShareButtons } from "@/components/ui/share-buttons";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -617,6 +618,12 @@ export default async function PrefecturePage({ params }: PageProps) {
         return `${pref.name}では一年を通して釣りを楽しめますが、${bestSeason ? `最も多くの魚種が狙える${seasonNameMap[bestSeason.season]}が特におすすめ` : "春〜秋がおすすめ"}です。${prefInfo?.bestSeason || `季節ごとに異なる魚種が釣れるため、ターゲットに合わせた時期選びが重要です。`}`;
       })(),
     },
+    {
+      question: `${pref.name}でおすすめの釣り方は？`,
+      answer: prefTopMethods.length > 0
+        ? `${pref.name}で人気の釣り方は${prefTopMethods.slice(0, 5).join("・")}です。${spots.length}件の釣り場で${prefTopMethods.length}種類の釣り方が楽しめます。${prefTopMethods[0] ? `特に${prefTopMethods[0]}は対応スポットが最も多く、初心者にもおすすめです。` : ""}各スポットの詳細ページで対応する釣り方をご確認ください。`
+        : `${pref.name}の釣り方の情報は各スポットの詳細ページでご確認ください。`,
+    },
   ];
 
   // prefInfoのFAQがあればそちらを使い、なければ動的FAQを使用
@@ -704,6 +711,12 @@ export default async function PrefecturePage({ params }: PageProps) {
           {spotTypeBreakdown.length > 0 ? `釣り場のタイプは${spotTypeBreakdown.slice(0, 3).map(t => t.type).join("・")}が中心です。` : ""}
           このページでは人気TOP10ランキング・季節別おすすめ魚種・エリア別スポット一覧を完全網羅しています。
         </p>
+        <div className="mt-4">
+          <ShareButtons
+            url={`https://tsurispot.com/prefecture/${slug}`}
+            title={`${pref.name}の釣り情報｜ツリスポ`}
+          />
+        </div>
       </div>
 
       {/* Prefecture overview */}
