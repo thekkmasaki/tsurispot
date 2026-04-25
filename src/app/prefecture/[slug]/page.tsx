@@ -33,7 +33,7 @@ import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { areaGuides, type AreaGuide } from "@/lib/data/area-guides";
 import { SpotSearchFilter } from "@/components/prefecture/spot-search-filter";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
-import { MONTHS } from "@/lib/data/fishing-methods";
+import { MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
 import { InArticleAd, DisplayAd, StickySidebarAd } from "@/components/ads/ad-unit";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 import { ShoppingBag, ExternalLink, ArrowRight, Tag, Gem, Crown } from "lucide-react";
@@ -362,6 +362,26 @@ export default async function PrefecturePage({ params }: PageProps) {
   const regionSlug = REGION_NAME_TO_SLUG[pref.regionGroup] as RegionSlug | undefined;
   const topSeasonalSpots = getTopSeasionalSpots(pref.name, currentMonth, regionSlug);
   const inSeasonFish = getInSeasonFishForPrefecture(pref.name, currentMonth, regionSlug);
+
+  // 今月釣れる魚（pSEOページへの内部リンク用、catchableFishのmonthStart/monthEnd基準）
+  const currentMonthDef = MONTHS[currentMonth - 1];
+  const currentMonthFishMap = new Map<string, { name: string; slug: string; count: number }>();
+  for (const spot of spots) {
+    for (const cf of spot.catchableFish) {
+      if (isMonthInRange(currentMonth, cf.monthStart, cf.monthEnd)) {
+        const existing = currentMonthFishMap.get(cf.fish.slug);
+        if (existing) {
+          existing.count++;
+        } else {
+          currentMonthFishMap.set(cf.fish.slug, { name: cf.fish.name, slug: cf.fish.slug, count: 1 });
+        }
+      }
+    }
+  }
+  const currentMonthFishList = Array.from(currentMonthFishMap.values())
+    .filter(f => f.count >= 2)
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 12);
 
   // 県の主要釣り方を集計してアフィリエイト商品を取得
   const prefMethodMap = new Map<string, number>();
@@ -1006,6 +1026,42 @@ export default async function PrefecturePage({ params }: PageProps) {
                 </Link>
               );
             })}
+          </div>
+        </section>
+      )}
+
+      {/* 今月の都道府県×月×魚種 pSEOページへの内部リンク */}
+      {currentMonthFishList.length > 0 && (
+        <section className="mb-8 sm:mb-10">
+          <h2 className="mb-3 text-base font-bold sm:text-lg">
+            {currentMonthDef.name}の{pref.name}で釣れる魚
+          </h2>
+          <p className="mb-3 text-sm text-muted-foreground">
+            今の時期に{pref.name}で狙える魚種の詳しい情報
+          </p>
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
+            {currentMonthFishList.map((f) => (
+              <Link
+                key={f.slug}
+                href={`/prefecture/${pref.slug}/${currentMonthDef.slug}/${f.slug}`}
+              >
+                <Badge
+                  variant="outline"
+                  className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
+                >
+                  {f.name}
+                  <span className="ml-1 text-muted-foreground">({f.count}件)</span>
+                </Badge>
+              </Link>
+            ))}
+          </div>
+          <div className="mt-3">
+            <Link
+              href={`/prefecture/${pref.slug}/${currentMonthDef.slug}`}
+              className="text-sm text-primary hover:underline"
+            >
+              {pref.name}の{currentMonthDef.name}の釣り情報をもっと見る →
+            </Link>
           </div>
         </section>
       )}
