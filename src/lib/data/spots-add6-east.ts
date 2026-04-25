@@ -6946,7 +6946,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "渓谷沿い駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: true,
-    fee: "渓流釣り遊漁券1日1,500円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "エサ釣り" },
@@ -7251,7 +7250,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    fee: "遊漁券1日1,000円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -7332,7 +7330,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "beach", difficulty: "beginner",
     isFree: false, hasParking: true, parkingDetail: "施設駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true,
-    fee: "大人900円、小中学生450円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 4.2, reviewCount: 0,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝夕", method: "サビキ釣り" },
@@ -7740,7 +7737,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "湖畔に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true,
-    fee: "遊漁券1日1,300円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 4.1, reviewCount: 0,
     catchableFish: [
       { fish: fish("bass"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "ルアー" },
@@ -7801,7 +7797,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    fee: "アユ遊漁券1日2,000円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.6, reviewCount: 0,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -7922,7 +7917,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "湖畔に駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    fee: "遊漁券1日1,000円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
       { fish: fish("bass"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "ルアー" },
@@ -7964,7 +7958,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "beach", difficulty: "beginner",
     isFree: false, hasParking: true, parkingDetail: "施設駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true,
-    fee: "大人500円、子供300円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.9, reviewCount: 0,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝夕", method: "サビキ釣り" },
@@ -8026,7 +8019,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    fee: "アユ遊漁券1日2,500円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -8047,7 +8039,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "湖畔に多数の駐車場あり（有料・無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true,
-    fee: "遊漁券1日1,050円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 4.3, reviewCount: 0,
     catchableFish: [
       { fish: fish("bass"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "ルアー" },
@@ -8068,7 +8059,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "湖畔に駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true,
-    fee: "遊漁券1日600円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 4.2, reviewCount: 0,
     catchableFish: [
       { fish: fish("wakasagi"), monthStart: 9, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ワカサギ釣り" },
@@ -8089,7 +8079,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "湖畔に駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: true,
-    fee: "遊漁券1日1,050円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.9, reviewCount: 0,
     catchableFish: [
       { fish: fish("bass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "ルアー" },
@@ -8110,7 +8099,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "湖畔に駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    fee: "遊漁券1日1,050円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.6, reviewCount: 0,
     catchableFish: [
       { fish: fish("bass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "ルアー" },
@@ -8131,7 +8119,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "湖畔に駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    fee: "遊漁券1日1,050円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 4.0, reviewCount: 0,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "ルアー" },
@@ -8152,7 +8139,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    fee: "遊漁券1日2,000円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -8173,7 +8159,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    fee: "アユ遊漁券1日2,000円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.6, reviewCount: 0,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -8194,7 +8179,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "林道沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    fee: "遊漁券1日1,500円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.9, reviewCount: 0,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝", method: "フライ" },
@@ -8215,7 +8199,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    fee: "遊漁券1日2,000円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -8256,7 +8239,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "渓流沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    fee: "遊漁券1日1,500円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "ルアー" },
@@ -8277,7 +8259,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    fee: "遊漁券1日2,000円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -8298,7 +8279,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "忍野八海駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    fee: "遊漁券1日1,500円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "フライ" },
@@ -8339,7 +8319,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "林道沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    fee: "遊漁券1日1,500円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝", method: "テンカラ" },
@@ -8360,7 +8339,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "渓流沿いに駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    fee: "遊漁券1日2,000円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "ルアー" },
@@ -8381,7 +8359,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    fee: "遊漁券1日1,500円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "エサ釣り" },
@@ -8462,7 +8439,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "渓流沿いに駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    fee: "遊漁券1日2,000円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 4.0, reviewCount: 0,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝", method: "テンカラ" },
@@ -8483,7 +8459,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    fee: "遊漁券1日1,500円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.6, reviewCount: 0,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "ルアー" },
@@ -8524,7 +8499,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "川沿いに駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: true,
-    fee: "遊漁券1日1,000円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.4, reviewCount: 0,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "エサ釣り" },
@@ -8545,7 +8519,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "湖畔に駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: true,
-    fee: "ボート1日2,000円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
       { fish: fish("funa"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "ウキ釣り" },
@@ -8566,7 +8539,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "川沿いに駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: true,
-    fee: "遊漁券1日1,500円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "エサ釣り" },
@@ -8587,7 +8559,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "渓谷沿いに駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    fee: "遊漁券1日1,500円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.6, reviewCount: 0,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "ルアー" },
@@ -8628,7 +8599,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "渓谷入口に駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    fee: "遊漁券1日1,500円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.9, reviewCount: 0,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝", method: "テンカラ" },
@@ -8649,7 +8619,6 @@ export const eastAdd6Spots: FishingSpot[] = [
     spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    fee: "遊漁券1日2,000円",
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.6, reviewCount: 0,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
