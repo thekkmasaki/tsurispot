@@ -67,6 +67,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type: "article",
       url: `https://tsurispot.com/fishing/${method.slug}/${month.slug}`,
       siteName: "ツリスポ",
+      images: [
+        {
+          url: `https://tsurispot.com/api/og?title=${encodeURIComponent(title)}&emoji=%F0%9F%8E%A3`,
+          width: 1200,
+          height: 630,
+        },
+      ],
     },
     alternates: {
       canonical: `https://tsurispot.com/fishing/${method.slug}/${month.slug}`,

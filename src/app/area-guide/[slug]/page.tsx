@@ -63,6 +63,13 @@ export async function generateMetadata({
       type: "article",
       url: `https://tsurispot.com/area-guide/${slug}`,
       siteName: "ツリスポ",
+      images: [
+        {
+          url: `https://tsurispot.com/api/og?title=${encodeURIComponent(title)}&emoji=%F0%9F%93%8D`,
+          width: 1200,
+          height: 630,
+        },
+      ],
     },
     alternates: {
       canonical: `https://tsurispot.com/area-guide/${slug}`,

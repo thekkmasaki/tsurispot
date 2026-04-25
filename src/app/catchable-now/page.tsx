@@ -17,6 +17,13 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://tsurispot.com/catchable-now",
     siteName: "ツリスポ",
+    images: [
+      {
+        url: `https://tsurispot.com/api/og?title=${encodeURIComponent(`今釣れる魚一覧【${currentMonth}月】`)}&emoji=%F0%9F%90%9F`,
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
   alternates: {
     canonical: "https://tsurispot.com/catchable-now",

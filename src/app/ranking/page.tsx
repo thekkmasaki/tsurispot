@@ -16,6 +16,13 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://tsurispot.com/ranking",
     siteName: "ツリスポ",
+    images: [
+      {
+        url: `https://tsurispot.com/api/og?title=${encodeURIComponent("釣りスポット人気ランキング")}&emoji=%F0%9F%8E%A3`,
+        width: 1200,
+        height: 630,
+      },
+    ],
   },
   alternates: {
     canonical: "https://tsurispot.com/ranking",
