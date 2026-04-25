@@ -157,6 +157,13 @@ export async function generateMetadata({
       type: "website",
       url: `https://tsurispot.com/seasonal/${monthSlug}/${regionSlug}`,
       siteName: "ツリスポ",
+      images: [
+        {
+          url: `https://tsurispot.com/api/og?title=${encodeURIComponent(title)}&emoji=%F0%9F%93%85`,
+          width: 1200,
+          height: 630,
+        },
+      ],
     },
     alternates: {
       canonical: `https://tsurispot.com/seasonal/${monthSlug}/${regionSlug}`,

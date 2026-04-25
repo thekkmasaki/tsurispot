@@ -61,6 +61,13 @@ export async function generateMetadata({
       description: `${shop.region.prefecture}${shop.region.areaName}の${shop.name}。${shop.description} 営業時間: ${shop.businessHours}。${shop.hasLiveBait ? "活きエサ取扱あり。" : ""}${shop.hasFrozenBait ? "冷凍エサ取扱あり。" : ""}${shop.hasRentalRod ? "レンタルロッドあり。" : ""}${shop.hasParking ? "駐車場あり。" : ""}近くの釣りスポット情報も掲載。`,
       url: `https://tsurispot.com/shops/${slug}`,
       siteName: "ツリスポ",
+      images: [
+        {
+          url: `https://tsurispot.com/api/og?title=${encodeURIComponent(shop.name)}&emoji=%F0%9F%93%8D`,
+          width: 1200,
+          height: 630,
+        },
+      ],
     },
   };
 }

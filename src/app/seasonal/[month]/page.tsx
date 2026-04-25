@@ -63,6 +63,13 @@ export async function generateMetadata({
         type: "article",
         url: `https://tsurispot.com/seasonal/${seasonInfo.slug}`,
         siteName: "ツリスポ",
+        images: [
+          {
+            url: `https://tsurispot.com/api/og?title=${encodeURIComponent(title)}&emoji=%F0%9F%93%85`,
+            width: 1200,
+            height: 630,
+          },
+        ],
       },
       alternates: {
         canonical: `https://tsurispot.com/seasonal/${seasonInfo.slug}`,
@@ -86,6 +93,13 @@ export async function generateMetadata({
       type: "article",
       url: `https://tsurispot.com/seasonal/${guide.slug}`,
       siteName: "ツリスポ",
+      images: [
+        {
+          url: `https://tsurispot.com/api/og?title=${encodeURIComponent(`${guide.season}の${guide.method}完全ガイド`)}&emoji=%F0%9F%93%85`,
+          width: 1200,
+          height: 630,
+        },
+      ],
     },
     alternates: {
       canonical: `https://tsurispot.com/seasonal/${guide.slug}`,
