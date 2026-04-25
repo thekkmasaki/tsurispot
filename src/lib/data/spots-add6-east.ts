@@ -5959,7 +5959,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 4.2, reviewCount: 0,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝夕", method: "サビキ釣り" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝夕", method: "フカセ釣り" },
@@ -5981,7 +5981,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "サビキ釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "ルアー" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝夕", method: "フカセ釣り" },
     ],
@@ -6022,7 +6022,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("hirame"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マズメ", method: "ルアー" },
       { fish: fish("magochi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "ルアー" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("inada"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マズメ", method: "ルアー" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
     ],
@@ -6081,7 +6081,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("magochi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝夕", method: "ルアー" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
@@ -6141,7 +6141,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("haze"), monthStart: 8, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
       { fish: fish("hirame"), monthStart: 3, monthEnd: 12, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マズメ", method: "ルアー" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
@@ -6203,7 +6203,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝夕", method: "サビキ釣り" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("iwashi"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝夕", method: "フカセ釣り" },
       { fish: fish("suzuki"), monthStart: 5, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -6244,7 +6244,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝夕", method: "サビキ釣り" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -6344,7 +6344,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("hirame"), monthStart: 3, monthEnd: 12, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マズメ", method: "ルアー" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
@@ -6388,7 +6388,7 @@ export const eastAdd6Spots: FishingSpot[] = [
       { fish: fish("hirame"), monthStart: 9, monthEnd: 4, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マズメ", method: "ルアー" },
       { fish: fish("magochi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "ルアー" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("inada"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マズメ", method: "ルアー" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeEast,
@@ -6485,7 +6485,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -6506,7 +6506,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝夕", method: "サビキ釣り" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -6528,7 +6528,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("hirame"), monthStart: 9, monthEnd: 4, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マズメ", method: "ルアー" },
       { fish: fish("magochi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "ルアー" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("inada"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マズメ", method: "ルアー" },
     ],
@@ -6546,7 +6546,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("suzuki"), monthStart: 5, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -6629,7 +6629,7 @@ export const eastAdd6Spots: FishingSpot[] = [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝夕", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝夕", method: "フカセ釣り" },
     ],
@@ -6667,7 +6667,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -6711,7 +6711,7 @@ export const eastAdd6Spots: FishingSpot[] = [
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeEast,
   },
@@ -6769,7 +6769,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝夕", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝夕", method: "フカセ釣り" },
@@ -6869,7 +6869,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.6, reviewCount: 0,
     catchableFish: [
       { fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
@@ -7336,7 +7336,7 @@ export const eastAdd6Spots: FishingSpot[] = [
       { fish: fish("iwashi"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "フカセ釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeEast,
@@ -7375,7 +7375,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 4.1, reviewCount: 0,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝夕", method: "サビキ釣り" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("iwashi"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝夕", method: "フカセ釣り" },
@@ -7396,7 +7396,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.9, reviewCount: 0,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝夕", method: "サビキ釣り" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("iwashi"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝夕", method: "フカセ釣り" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -7436,7 +7436,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("hirame"), monthStart: 9, monthEnd: 4, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マズメ", method: "ルアー" },
       { fish: fish("magochi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝夕", method: "ルアー" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -7479,7 +7479,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝夕", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝夕", method: "フカセ釣り" },
       { fish: fish("suzuki"), monthStart: 5, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
     ],
@@ -7500,7 +7500,7 @@ export const eastAdd6Spots: FishingSpot[] = [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝夕", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝夕", method: "フカセ釣り" },
     ],
@@ -7539,7 +7539,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.9, reviewCount: 0,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝夕", method: "サビキ釣り" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("iwashi"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝夕", method: "フカセ釣り" },
       { fish: fish("suzuki"), monthStart: 5, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -7559,7 +7559,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝夕", method: "サビキ釣り" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("iwashi"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -7639,7 +7639,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.6, reviewCount: 0,
     catchableFish: [
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("hirame"), monthStart: 9, monthEnd: 4, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マズメ", method: "ルアー" },
       { fish: fish("suzuki"), monthStart: 5, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -7659,7 +7659,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("hirame"), monthStart: 9, monthEnd: 4, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マズメ", method: "ルアー" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -7720,7 +7720,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝夕", method: "サビキ釣り" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("iwashi"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝夕", method: "フカセ釣り" },
       { fish: fish("suzuki"), monthStart: 5, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -7780,7 +7780,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.9, reviewCount: 0,
     catchableFish: [
       { fish: fish("inada"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マズメ", method: "ルアー" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("hirame"), monthStart: 9, monthEnd: 4, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マズメ", method: "ルアー" },
       { fish: fish("magochi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝夕", method: "ルアー" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -7841,7 +7841,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("hirame"), monthStart: 9, monthEnd: 4, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マズメ", method: "ルアー" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
     ],
@@ -7879,7 +7879,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("inada"), monthStart: 8, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マズメ", method: "ルアー" },
       { fish: fish("hirame"), monthStart: 9, monthEnd: 4, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マズメ", method: "ルアー" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -7900,7 +7900,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝夕", method: "サビキ釣り" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("iwashi"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
       { fish: fish("suzuki"), monthStart: 5, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -7940,7 +7940,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.9, reviewCount: 0,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝夕", method: "サビキ釣り" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("iwashi"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝夕", method: "フカセ釣り" },
       { fish: fish("suzuki"), monthStart: 5, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -7964,7 +7964,7 @@ export const eastAdd6Spots: FishingSpot[] = [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕", method: "フカセ釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("iwashi"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "ルアー" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeEast,
@@ -7981,7 +7981,7 @@ export const eastAdd6Spots: FishingSpot[] = [
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/default-spot.jpg", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
-      { fish: fish("shirogisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+      { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("inada"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マズメ", method: "ルアー" },
       { fish: fish("hirame"), monthStart: 9, monthEnd: 4, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マズメ", method: "ルアー" },
       { fish: fish("magochi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝夕", method: "ルアー" },
