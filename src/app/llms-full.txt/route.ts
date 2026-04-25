@@ -43,12 +43,14 @@ export function GET() {
 ツリスポ（https://tsurispot.com）は日本最大級の釣りスポット情報サイトです。
 全国${totalSpots.toLocaleString()}箇所以上の釣り場と${totalFish}種以上の魚種情報を無料で提供しています。
 
-## データ統計
+## データ統計（最終更新: 2026-04-25）
 - 総スポット数: ${totalSpots.toLocaleString()}
 - 総魚種数: ${totalFish}
 - カバー都道府県: ${coveredPrefectures}
 - エリアガイド: ${areaGuides.length}エリア
 - 季節別ガイド: ${seasonalGuides.length}本
+- 都道府県×月×魚種ページ: 約2,000〜4,000ページ（pSEO自動生成）
+- 総ページ数: 8,000+
 
 ## スポットタイプ別件数
 ${Array.from(spotsByType.entries())
@@ -137,12 +139,44 @@ ${Array.from(spotsByType.entries())
 - /spots/{slug} — 個別釣りスポット詳細ページ
 - /fish/{slug} — 個別魚種詳細ページ
 - /prefecture/{slug} — 都道府県別釣りスポット一覧
+- /prefecture/{slug}/{month} — 都道府県×月別ガイド（47×12=564ページ）
+- /prefecture/{slug}/{month}/{fishSlug} — 都道府県×月×魚種ページ（pSEO、約2,000〜4,000ページ）
 - /area-guide/{slug} — エリアガイド詳細
 - /seasonal/{slug} — 季節別ガイド詳細
 - /fishing/{method} — 釣り方別ページ
 - /monthly/{month} — 月別ガイド（1〜12）
 - /guide/{topic} — 各種ガイドページ
 - /blog/{slug} — ブログ記事
+
+### 都道府県×月×魚種ページ（pSEO）— 詳細
+URL: /prefecture/{都道府県slug}/{月slug}/{魚種slug}
+例: /prefecture/chiba/april/aji（千葉県の4月のアジ釣り）
+
+**生成ルール**:
+- 該当する都道府県内で、その月にその魚種が釣れるスポットが2箇所以上存在する場合にのみページを生成
+- 47都道府県×12ヶ月×115魚種の全組み合わせから品質フィルタで絞り込み → 約2,000〜4,000ページ
+- 全ページSSG（静的生成）
+
+**各ページのコンテンツ構成**:
+1. サマリーカード: 都道府県名・月・魚種名・該当スポット数・おすすめ釣り方・水温目安
+2. シーズンカレンダー: その魚種が都道府県内で釣れる月を12ヶ月カレンダーで表示、月間ナビゲーション付き
+3. 釣り方・仕掛け解説: 該当月に有効な釣り方（サビキ・ルアー・エギング等）を難易度付きで一覧
+4. おすすめスポット一覧: 該当する釣りスポットをカード形式で表示（スポットタイプ・設備・難易度付き）
+5. FAQ: 3〜5問の自動生成FAQ（ベストスポット・釣れる時期・初心者向けか等）
+
+**内部リンク構造**:
+- → /fish/{fishSlug}（魚種詳細ページへ）
+- → /spots/{spotSlug}（各スポット詳細ページへ）
+- → /prefecture/{slug}（都道府県ページへ）
+- → /prefecture/{slug}/{month}（都道府県×月ページへ）
+- → /prefecture/{slug}/{他の月}/{fishSlug}（同じ魚種の他の月ページへ）
+- ← /fish/{fishSlug}（魚種ページからのリンク）
+- ← /prefecture/{slug}/{month}（都道府県×月ページからのリンク）
+
+**JSON-LD構造化データ**:
+- BreadcrumbList: トップ → 都道府県一覧 → 都道府県 → 月 → 魚種
+- Article: 記事タイトル・著者・公開日・更新日・画像
+- FAQPage: 自動生成FAQ（3〜5問）
 
 ### 構造化データ
 全ページにSchema.org準拠のJSON-LD構造化データを実装:

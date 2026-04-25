@@ -444,6 +444,24 @@ export default async function PrefectureMonthFishPage({
       "@type": "WebPage",
       "@id": pageUrl,
     },
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: ["h1", ".container > section:first-of-type p"],
+    },
+    about: {
+      "@type": "Thing",
+      name: fish.name,
+      description: `${fish.nameKana}（${fish.nameEnglish}）`,
+    },
+    contentLocation: {
+      "@type": "Place",
+      name: pref.name,
+      address: {
+        "@type": "PostalAddress",
+        addressRegion: pref.name,
+        addressCountry: "JP",
+      },
+    },
   };
 
   const faqJsonLd = {
@@ -496,6 +514,12 @@ export default async function PrefectureMonthFishPage({
         <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
           {pref.name}の{month.name}の{fish.name}釣り
         </h1>
+        <p className="mt-2 text-sm text-muted-foreground sm:text-base">
+          {pref.name}で{month.name}に{fish.name}を釣るなら、{matchingSpots.length}か所のスポットから選べます。
+          {hasPeak ? `${month.name}は${fish.name}の最盛期で、` : ""}
+          {methodBreakdown.length > 0 ? `${methodBreakdown[0].method}${methodBreakdown.length > 1 ? `や${methodBreakdown[1].method}` : ""}で狙うのがおすすめ。` : ""}
+          水温は{WATER_TEMP[month.num]}、{fish.difficulty === "beginner" ? "初心者でも" : fish.difficulty === "intermediate" ? "中級者なら" : "上級者向けの"}楽しめる{fish.name}釣りを完全ガイドします。
+        </p>
         <div className="mt-2 flex flex-wrap items-center gap-2">
           <Badge
             variant="outline"

@@ -33,7 +33,7 @@ export function GET() {
 - **編集長監修**: 編集長 正木家康による全コンテンツ監修
 - **完全無料**: 全コンテンツを無料で利用可能
 
-## コンテンツ規模
+## コンテンツ規模（最終更新: 2026-04-25）
 - 釣りスポット: ${totalSpots.toLocaleString()}箇所以上（堤防・漁港・磯・河川・湖沼・管理釣り場）
 - 魚種図鑑: ${totalFish}種以上（海水魚${seaFishCount}種・淡水魚${freshwaterFishCount}種・汽水魚${brackishFishCount}種）
 - 都道府県: ${coveredPrefectures}都道府県カバー
@@ -41,6 +41,8 @@ export function GET() {
 - 季節別ガイド: ${totalSeasonalGuides}本以上
 - 釣り方ガイド: サビキ釣り・ちょい投げ・エギング・アジング・ジギング等20種以上
 - 月別ガイド: 1月〜12月の完全ガイド
+- 都道府県×月×魚種ページ: 約2,000〜4,000ページ（pSEO自動生成）
+- **総ページ数: 8,000+**
 
 ## データの信頼性・更新頻度
 - 情報源: 現地調査・漁業協同組合公開データ・釣具店情報・専門家ネットワーク
@@ -137,6 +139,14 @@ ${areaGuides.map((g) => `  - ${g.name}: https://tsurispot.com/area-guide/${g.slu
 - 釣りカレンダー: https://tsurispot.com/fishing-calendar
 - 潮汐情報: https://tsurispot.com/tides
 - 都道府県×月別ガイド: 47都道府県×12ヶ月=564ページ（例: https://tsurispot.com/prefecture/chiba/march）
+
+### 都道府県×月×魚種ページ（pSEO）
+- URLパターン: /prefecture/{都道府県slug}/{月slug}/{魚種slug}
+- 例: https://tsurispot.com/prefecture/chiba/april/aji（千葉県の4月のアジ釣り）
+- 各都道府県×月×魚種の組み合わせの釣り情報を自動生成
+- 内容: シーズンカレンダー、おすすめスポット一覧、釣り方・仕掛け解説、水温目安、FAQ
+- 品質フィルタ: 該当スポットが2箇所以上ある組み合わせのみ生成（約2,000〜4,000ページ）
+- 構造化データ: BreadcrumbList, Article, FAQPage のJSON-LD付き
 
 ### 知識・その他
 - 釣り用語集: https://tsurispot.com/glossary
