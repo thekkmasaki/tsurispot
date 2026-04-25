@@ -950,7 +950,7 @@ export const centralAdd6Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeWest,
   },
   {
-    id: "sc6043", name: "岩瀬浜海水浴場", slug: "iwasehama-toyama",
+    id: "sc6043", name: "岩瀬浜海水浴場", slug: "iwasehama-toyama-beach6",
     description: "富山市の代表的な海水浴場。遠浅の砂浜でキスの投げ釣りが盛んで、夏場はファミリーで賑わう。富山港に隣接し便利な立地。",
     latitude: 36.7590, longitude: 137.2440,
     address: "〒931-8377 富山県富山市岩瀬浜町",
@@ -1525,7 +1525,7 @@ export const centralAdd6Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeWest,
   },
   {
-    id: "sc6073", name: "白山市・美川漁港", slug: "hakusan-mikawa-gyokou",
+    id: "sc6073", name: "白山市・美川漁港", slug: "hakusan-mikawa-gyokou6",
     description: "白山市の手取川河口近くにある漁港。ふぐの子糠漬けで有名な港で、堤防からアジやクロダイが狙える。河口ではシーバスの実績も高い。",
     latitude: 36.4800, longitude: 136.5200,
     address: "〒929-0233 石川県白山市美川浜町",
