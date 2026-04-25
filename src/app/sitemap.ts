@@ -9,7 +9,7 @@ import { getAllBlogPosts } from "@/lib/data/blog";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { seasons as seasonCategories } from "@/lib/data/seasonal-data";
 import { tackleShops } from "@/lib/data/shops";
-import { FISHING_METHODS, MONTHS } from "@/lib/data/fishing-methods";
+import { FISHING_METHODS, MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
 import { REGION_GROUPS } from "@/lib/data/regions-group";
 
 const baseUrl = "https://tsurispot.com";
@@ -374,6 +374,35 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: dynamicDate,
       changeFrequency: "monthly" as const,
       priority: 0.6,
+    })),
+
+    // ===== 都道府県×月×魚種ページ（品質フィルタ: 2スポット以上） =====
+    ...(() => {
+      const prefMonthFishCombos: { prefSlug: string; monthSlug: string; fishSlug: string }[] = [];
+      for (const pref of prefectures) {
+        const prefSpots = fishingSpots.filter(s => s.region.prefecture === pref.name);
+        for (const month of MONTHS) {
+          const fishMap = new Map<string, number>();
+          for (const spot of prefSpots) {
+            for (const cf of spot.catchableFish) {
+              if (isMonthInRange(month.num, cf.monthStart, cf.monthEnd)) {
+                fishMap.set(cf.fish.slug, (fishMap.get(cf.fish.slug) || 0) + 1);
+              }
+            }
+          }
+          for (const [fSlug, count] of fishMap) {
+            if (count >= 2) {
+              prefMonthFishCombos.push({ prefSlug: pref.slug, monthSlug: month.slug, fishSlug: fSlug });
+            }
+          }
+        }
+      }
+      return prefMonthFishCombos;
+    })().map(c => ({
+      url: `${baseUrl}/prefecture/${c.prefSlug}/${c.monthSlug}/${c.fishSlug}`,
+      lastModified: dynamicDate,
+      changeFrequency: "monthly" as const,
+      priority: 0.5,
     })),
 
     // ===== 釣り場タイプページ =====

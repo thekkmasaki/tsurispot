@@ -456,7 +456,7 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
               </h3>
               <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {peakFishList.map((f) => (
-                  <Link key={f.slug} href={`/fish/${f.slug}`}>
+                  <Link key={f.slug} href={f.count >= 2 ? `/prefecture/${pref.slug}/${month.slug}/${f.slug}` : `/fish/${f.slug}`}>
                     <Badge
                       variant="outline"
                       className="cursor-pointer border-orange-300 bg-orange-50 px-2.5 py-1.5 text-xs transition-colors hover:bg-orange-100 sm:text-sm"
@@ -477,7 +477,7 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
             {catchableFishList
               .filter((f) => !f.isPeak)
               .map((f) => (
-                <Link key={f.slug} href={`/fish/${f.slug}`}>
+                <Link key={f.slug} href={f.count >= 2 ? `/prefecture/${pref.slug}/${month.slug}/${f.slug}` : `/fish/${f.slug}`}>
                   <Badge
                     variant="outline"
                     className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
