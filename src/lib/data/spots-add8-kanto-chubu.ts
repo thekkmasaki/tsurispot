@@ -93,7 +93,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
   // 茨城県（15スポット: se8001〜se8015）
   // =========================================
   {
-    id: "se8001", name: "大洗港", slug: "oarai-kou-e8",
+    id: "se8201", name: "大洗港", slug: "oarai-kou-e8",
     description: "茨城県を代表する大型漁港で、広い岸壁から四季を通じて多彩な魚種が狙える。秋のアジ・サバの回遊は特に盛んで、サビキ釣りのファミリー客で賑わう。冬のカレイ投げ釣りも定番。",
     latitude: 36.313, longitude: 140.575,
     address: "〒311-1301 茨城県東茨城郡大洗町磯浜町",
@@ -112,7 +112,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8002", name: "那珂湊港", slug: "nakaminato-kou-e8",
+    id: "se8202", name: "那珂湊港", slug: "nakaminato-kou-e8",
     description: "おさかな市場が隣接する人気漁港。堤防からのサビキ釣りでアジやイワシが手軽に狙え、冬場はメバルやカサゴの根魚も楽しめる。家族連れに最適な足場の良さが魅力。",
     latitude: 36.343, longitude: 140.601,
     address: "〒311-1221 茨城県ひたちなか市湊本町",
@@ -130,7 +130,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8003", name: "鹿島港南防波堤", slug: "kashima-minami-bouhatei-e8",
+    id: "se8203", name: "鹿島港南防波堤", slug: "kashima-minami-bouhatei-e8",
     description: "鹿島灘に面した長大な防波堤で、潮通し抜群のため青物やヒラメの実績が非常に高い。秋のイナダやワカシ狙いのショアジギングが特に人気のポイント。",
     latitude: 35.935, longitude: 140.698,
     address: "〒314-0103 茨城県神栖市東深芝",
@@ -148,7 +148,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8004", name: "波崎新港", slug: "hasaki-shinkou-e8",
+    id: "se8204", name: "波崎新港", slug: "hasaki-shinkou-e8",
     description: "利根川河口に近い漁港で、シーバスの聖地として知られる。河口域特有の汽水環境がベイトを集め、年間を通じてスズキの実績が抜群。秋にはヒラメも寄る。",
     latitude: 35.770, longitude: 140.831,
     address: "〒314-0408 茨城県神栖市波崎",
@@ -166,7 +166,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8005", name: "日立港第5埠頭", slug: "hitachi-kou-daigo-e8",
+    id: "se8205", name: "日立港第5埠頭", slug: "hitachi-kou-daigo-e8",
     description: "日立市の主要漁港で、広い岸壁が家族連れに人気。アジやサバのサビキ釣りが安定しており、冬にはアイナメやカサゴなどの根魚も狙える好ポイント。",
     latitude: 36.488, longitude: 140.646,
     address: "〒317-0071 茨城県日立市久慈町",
@@ -184,7 +184,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8006", name: "平磯海岸", slug: "hiraiso-kaigan-e8",
+    id: "se8206", name: "平磯海岸", slug: "hiraiso-kaigan-e8",
     description: "ひたちなか市の岩礁帯が広がる海岸で、メジナやクロダイの磯釣りが楽しめる。足場は滑りやすいが潮通しが良く、春から秋にかけて良型のメジナが出る実績場。",
     latitude: 36.367, longitude: 140.623,
     address: "〒311-1203 茨城県ひたちなか市平磯町",
@@ -202,7 +202,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8007", name: "鹿島サーフ", slug: "kashima-surf-e8",
+    id: "se8207", name: "鹿島サーフ", slug: "kashima-surf-e8",
     description: "鹿島灘に面した広大なサーフで、ヒラメやマゴチの実績が茨城県随一。秋から冬にかけてヒラメの大物が出やすく、ルアーアングラーに人気の聖地的存在。",
     latitude: 35.970, longitude: 140.700,
     address: "〒314-0014 茨城県鹿嶋市荒野",
@@ -220,7 +220,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8008", name: "久慈漁港", slug: "kuji-gyokou-ibaraki-e8",
+    id: "se8208", name: "久慈漁港", slug: "kuji-gyokou-ibaraki-e8",
     description: "日立市北部の静かな漁港で、岸壁からハゼやカレイがよく釣れる穴場スポット。混雑が少なくのんびり釣りが楽しめ、秋にはアジの回遊も見られる。",
     latitude: 36.518, longitude: 140.647,
     address: "〒319-1222 茨城県日立市久慈町",
@@ -237,7 +237,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8009", name: "大津漁港", slug: "otsu-gyokou-kitaibaraki-e8",
+    id: "se8209", name: "大津漁港", slug: "otsu-gyokou-kitaibaraki-e8",
     description: "北茨城市の大型漁港で、県北エリアの主要釣り場。水深があるため冬場のアイナメやドンコの実績が高く、堤防先端では青物の回遊も期待できる。",
     latitude: 36.795, longitude: 140.772,
     address: "〒319-1702 茨城県北茨城市大津町",
@@ -255,7 +255,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8010", name: "涸沼", slug: "hinuma-ibaraki-e8",
+    id: "se8210", name: "涸沼", slug: "hinuma-ibaraki-e8",
     description: "茨城町に位置する汽水湖で、ハゼ釣りの名所として全国的に有名。夏から秋にかけてマハゼが大量に釣れ、初心者や子供連れに最適。スズキの実績も高い。",
     latitude: 36.301, longitude: 140.440,
     address: "〒311-3131 茨城県東茨城郡茨城町下石崎",
@@ -272,7 +272,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8011", name: "磯崎港", slug: "isozaki-kou-e8",
+    id: "se8211", name: "磯崎港", slug: "isozaki-kou-e8",
     description: "ひたちなか市の小さな漁港で、知る人ぞ知る穴場。堤防からのメバリングやアジングが楽しめ、春先にはウミタナゴも多い。水がきれいで根魚のストックが豊富。",
     latitude: 36.385, longitude: 140.629,
     address: "〒311-1202 茨城県ひたちなか市磯崎町",
@@ -290,7 +290,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8012", name: "河原子海岸", slug: "kawarago-kaigan-e8",
+    id: "se8212", name: "河原子海岸", slug: "kawarago-kaigan-e8",
     description: "日立市の美しい砂浜で、キスの投げ釣りが盛んなポイント。夏場は遠浅の地形でピンギスが数釣りでき、秋にはヒラメ狙いのルアー勢も集まる。",
     latitude: 36.493, longitude: 140.648,
     address: "〒316-0005 茨城県日立市河原子町",
@@ -307,7 +307,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8013", name: "神栖市日川浜", slug: "kamisu-nikawahama-e8",
+    id: "se8213", name: "神栖市日川浜", slug: "kamisu-nikawahama-e8",
     description: "鹿島灘に面した広い砂浜で、キスやイシモチの投げ釣りが人気。駐車場・トイレ完備でファミリーにも優しく、秋のイシモチは数・型ともに期待できる。",
     latitude: 35.875, longitude: 140.738,
     address: "〒314-0146 茨城県神栖市日川",
@@ -324,7 +324,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8014", name: "会瀬港", slug: "ose-kou-e8",
+    id: "se8214", name: "会瀬港", slug: "ose-kou-e8",
     description: "日立市の中心部に近い小規模漁港。テトラ帯が豊富で根魚の魚影が濃く、メバルやカサゴの夜釣りに定評がある。春のメバリングシーズンは特におすすめ。",
     latitude: 36.473, longitude: 140.642,
     address: "〒317-0073 茨城県日立市会瀬町",
@@ -342,7 +342,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8015", name: "大洗海岸サーフ", slug: "oarai-kaigan-surf-e8",
+    id: "se8215", name: "大洗海岸サーフ", slug: "oarai-kaigan-surf-e8",
     description: "大洗水族館近くの砂浜エリアで、キスやイシモチの投げ釣りが楽しめる。潮流の変化が大きく秋口にはヒラメの回遊も見られ、ルアー釣りの実績も上がっている。",
     latitude: 36.320, longitude: 140.586,
     address: "〒311-1301 茨城県東茨城郡大洗町磯浜町",
@@ -362,7 +362,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
   // 栃木県（10スポット: se8016〜se8025）
   // =========================================
   {
-    id: "se8016", name: "中禅寺湖", slug: "chuzenji-ko-e8",
+    id: "se8216", name: "中禅寺湖", slug: "chuzenji-ko-e8",
     description: "標高1,269mに位置する日本を代表する高原湖。マス類の管理釣り場として有名で、特にレイクトラウトやブラウントラウトの大物が狙える。解禁期間は4月〜9月。",
     latitude: 36.737, longitude: 139.479,
     address: "〒321-1661 栃木県日光市中宮祠",
@@ -379,7 +379,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8017", name: "鬼怒川", slug: "kinugawa-tochigi-e8",
+    id: "se8217", name: "鬼怒川", slug: "kinugawa-tochigi-e8",
     description: "栃木県を流れる一級河川で、渓流から中流域まで多彩な釣りが楽しめる。上流域ではヤマメやイワナの渓流釣り、中流域ではアユの友釣りが盛ん。",
     latitude: 36.780, longitude: 139.710,
     address: "〒321-2521 栃木県日光市藤原",
@@ -397,7 +397,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8018", name: "那珂川（栃木区間）", slug: "nakagawa-tochigi-e8",
+    id: "se8218", name: "那珂川（栃木区間）", slug: "nakagawa-tochigi-e8",
     description: "アユの友釣りで全国的に有名な清流。毎年6月の解禁日には多くの釣り人で賑わう。中流域の馬頭・烏山エリアは特にアユの魚影が濃い好ポイント。",
     latitude: 36.728, longitude: 140.130,
     address: "〒324-0613 栃木県那須郡那珂川町馬頭",
@@ -414,7 +414,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8019", name: "大芦川", slug: "oashigawa-e8",
+    id: "se8219", name: "大芦川", slug: "oashigawa-e8",
     description: "鹿沼市を流れる清流で、ヤマメとイワナの渓流釣りが楽しめる穴場。水質が抜群に良く、新緑の季節には渓谷美も堪能できる。比較的人が少なく静かに釣りが楽しめる。",
     latitude: 36.618, longitude: 139.618,
     address: "〒322-0254 栃木県鹿沼市上久我",
@@ -430,7 +430,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8020", name: "渡良瀬遊水地", slug: "watarase-yusuichi-e8",
+    id: "se8220", name: "渡良瀬遊水地", slug: "watarase-yusuichi-e8",
     description: "栃木・群馬・埼玉・茨城の4県にまたがる広大な遊水地。ヘラブナの放流が行われており、関東屈指のヘラブナ釣り場として知られる。バスやナマズも生息。",
     latitude: 36.235, longitude: 139.695,
     address: "〒329-0111 栃木県下都賀郡野木町",
@@ -447,7 +447,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8021", name: "箒川", slug: "hokigawa-e8",
+    id: "se8221", name: "箒川", slug: "hokigawa-e8",
     description: "那須塩原市を流れる渓流で、ニジマスの放流が盛んに行われている。温泉街の近くで釣りと温泉を両方楽しめるのが魅力。初心者向けの管理区間もある。",
     latitude: 36.957, longitude: 139.832,
     address: "〒329-2921 栃木県那須塩原市塩原",
@@ -464,7 +464,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8022", name: "余笹川", slug: "yosasagawa-e8",
+    id: "se8222", name: "余笹川", slug: "yosasagawa-e8",
     description: "那須町を流れる渓流で、ヤマメとイワナの天然魚が残る貴重な川。入渓点は限られるが、手つかずの自然の中で本格的な渓流釣りが堪能できる。",
     latitude: 37.020, longitude: 139.920,
     address: "〒325-0302 栃木県那須郡那須町高久乙",
@@ -480,7 +480,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8023", name: "思川", slug: "omoigawa-e8",
+    id: "se8223", name: "思川", slug: "omoigawa-e8",
     description: "小山市〜栃木市を流れる穏やかな川で、コイやヘラブナの釣り場として地元で親しまれている。河川敷が広くのんびりとした雰囲気で、ファミリーにもおすすめ。",
     latitude: 36.333, longitude: 139.790,
     address: "〒323-0012 栃木県小山市羽川",
@@ -497,7 +497,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8024", name: "塩原ダム湖", slug: "shiobara-dam-e8",
+    id: "se8224", name: "塩原ダム湖", slug: "shiobara-dam-e8",
     description: "那須塩原市の山間にあるダム湖で、ニジマスやヤマメが放流されている。静かな湖面でボートフィッシングも楽しめ、紅葉シーズンの景観も素晴らしい。",
     latitude: 36.952, longitude: 139.790,
     address: "〒329-2801 栃木県那須塩原市関谷",
@@ -514,7 +514,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8025", name: "男鹿川", slug: "ojikagawa-e8",
+    id: "se8225", name: "男鹿川", slug: "ojikagawa-e8",
     description: "日光市の山奥を流れる清流で、イワナの聖地として知られる。源流部は険しい渓谷だが、美しい天然イワナに出会える。経験者向けの本格渓流フィールド。",
     latitude: 36.945, longitude: 139.620,
     address: "〒321-2717 栃木県日光市川治温泉",
@@ -533,7 +533,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
   // 群馬県（10スポット: se8026〜se8035）
   // =========================================
   {
-    id: "se8026", name: "利根川（沼田エリア）", slug: "tonegawa-numata-e8",
+    id: "se8226", name: "利根川（沼田エリア）", slug: "tonegawa-numata-e8",
     description: "沼田市周辺の利根川上流域で、アユの友釣りとヤマメの渓流釣りが楽しめる。川幅が広く開けたポイントが多いため、フライフィッシングにも最適。",
     latitude: 36.645, longitude: 139.032,
     address: "〒378-0045 群馬県沼田市材木町",
@@ -551,7 +551,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8027", name: "榛名湖", slug: "haruna-ko-e8",
+    id: "se8227", name: "榛名湖", slug: "haruna-ko-e8",
     description: "榛名山の火口湖で、標高約1,100mの高原に位置する。ワカサギの穴釣りが冬の風物詩として有名で、夏場はバス釣りも楽しめる。貸しボートも充実。",
     latitude: 36.478, longitude: 138.852,
     address: "〒370-3348 群馬県高崎市榛名湖町",
@@ -568,7 +568,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8028", name: "赤城大沼", slug: "akagi-onuma-e8",
+    id: "se8228", name: "赤城大沼", slug: "akagi-onuma-e8",
     description: "赤城山の山頂カルデラ湖で、冬のワカサギ穴釣りが関東随一の人気を誇る。氷上に小屋が立ち並ぶ風景は群馬の冬の風物詩。夏場はニジマスも狙える。",
     latitude: 36.558, longitude: 139.190,
     address: "〒371-0101 群馬県前橋市富士見町赤城山",
@@ -584,7 +584,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8029", name: "神流川", slug: "kannagawa-e8",
+    id: "se8229", name: "神流川", slug: "kannagawa-e8",
     description: "群馬県南部を流れる清流で、ヤマメの渓流釣りとアユの友釣りが楽しめる。神流湖ではワカサギやヘラブナも狙え、多彩な釣りが一つのエリアで体験できる。",
     latitude: 36.118, longitude: 139.035,
     address: "〒370-1503 群馬県多野郡神流町万場",
@@ -601,7 +601,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8030", name: "碓氷川", slug: "usuigawa-e8",
+    id: "se8230", name: "碓氷川", slug: "usuigawa-e8",
     description: "安中市を流れる碓氷川は、ニジマスやヤマメの放流が行われる人気の渓流。磯部温泉周辺はアクセスも良く、釣りと温泉を組み合わせたレジャーに最適。",
     latitude: 36.350, longitude: 138.858,
     address: "〒379-0127 群馬県安中市磯部",
@@ -618,7 +618,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8031", name: "片品川", slug: "katashina-gawa-e8",
+    id: "se8231", name: "片品川", slug: "katashina-gawa-e8",
     description: "尾瀬の麓から流れ出す清流で、イワナやヤマメの宝庫。上流域は本格的な源流釣りが楽しめ、中流域ではアユの友釣りも盛ん。自然豊かな渓谷美が魅力。",
     latitude: 36.738, longitude: 139.205,
     address: "〒378-0414 群馬県利根郡片品村花咲",
@@ -635,7 +635,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8032", name: "烏川", slug: "karasugawa-e8",
+    id: "se8232", name: "烏川", slug: "karasugawa-e8",
     description: "高崎市を流れる利根川の支流で、市街地からアクセスしやすいコイ・フナ釣り場。河川敷が整備されており、のんびりとした雰囲気で初心者にも親しみやすい。",
     latitude: 36.320, longitude: 139.005,
     address: "〒370-0849 群馬県高崎市八島町",
@@ -652,7 +652,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8033", name: "丸沼", slug: "marunuma-e8",
+    id: "se8233", name: "丸沼", slug: "marunuma-e8",
     description: "片品村の標高1,430mに位置する高原湖で、ニジマスやブラウントラウトの大物が狙える。レンタルボートが充実しており、秋の紅葉と合わせて楽しめる。",
     latitude: 36.808, longitude: 139.370,
     address: "〒378-0414 群馬県利根郡片品村東小川",
@@ -668,7 +668,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8034", name: "吾妻川", slug: "agatsumagawa-e8",
+    id: "se8234", name: "吾妻川", slug: "agatsumagawa-e8",
     description: "中之条町・東吾妻町を流れる利根川の支流。ヤマメとイワナの放流が行われ、四万温泉や草津温泉からのアクセスも良い。温泉地の渓流釣りが楽しめる。",
     latitude: 36.585, longitude: 138.808,
     address: "〒377-0541 群馬県吾妻郡中之条町伊勢町",
@@ -685,7 +685,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8035", name: "鳴沢湖", slug: "narusawa-ko-e8",
+    id: "se8235", name: "鳴沢湖", slug: "narusawa-ko-e8",
     description: "高崎市の農業用ため池で、ヘラブナ釣りの名所。桟橋が整備されており快適に釣りができる。春から秋にかけてヘラブナの活性が高く、大会も開催される。",
     latitude: 36.393, longitude: 138.935,
     address: "〒370-3345 群馬県高崎市箕郷町富岡",
@@ -704,7 +704,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
   // 埼玉県（10スポット: se8036〜se8045）
   // =========================================
   {
-    id: "se8036", name: "荒川（秩父エリア）", slug: "arakawa-chichibu-e8",
+    id: "se8236", name: "荒川（秩父エリア）", slug: "arakawa-chichibu-e8",
     description: "秩父市を流れる荒川上流域で、ヤマメとイワナの渓流釣りが楽しめる。長瀞周辺は特にアクセスが良く、岩畳の景勝地を眺めながらの釣りは格別。",
     latitude: 36.100, longitude: 139.120,
     address: "〒369-1305 埼玉県秩父郡長瀞町長瀞",
@@ -722,7 +722,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8037", name: "入間川", slug: "irumagawa-e8",
+    id: "se8237", name: "入間川", slug: "irumagawa-e8",
     description: "狭山市・入間市を流れる荒川の支流で、都心からのアクセスが良い淡水釣り場。コイやヘラブナが手軽に狙え、ファミリーでのんびり楽しめる。オイカワの毛ばり釣りも人気。",
     latitude: 35.852, longitude: 139.408,
     address: "〒350-1305 埼玉県狭山市入間川",
@@ -739,7 +739,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8038", name: "荒川（志木・朝霞エリア）", slug: "arakawa-shiki-asaka-e8",
+    id: "se8238", name: "荒川（志木・朝霞エリア）", slug: "arakawa-shiki-asaka-e8",
     description: "都心近郊の荒川中流域で、テナガエビやハゼの釣り場として人気。秋葉の瀬や彩湖周辺は足場が良く、子供連れにも安全。マルタウグイの遡上シーズンも狙い目。",
     latitude: 35.825, longitude: 139.583,
     address: "〒351-0034 埼玉県朝霞市膝折町",
@@ -757,7 +757,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8039", name: "名栗川", slug: "naguri-gawa-e8",
+    id: "se8239", name: "名栗川", slug: "naguri-gawa-e8",
     description: "飯能市の山間を流れる清流で、ヤマメの渓流釣りが人気。都心から約1時間半とアクセスが良く、日帰りの渓流釣り入門に最適なフィールド。",
     latitude: 35.883, longitude: 139.195,
     address: "〒357-0112 埼玉県飯能市下名栗",
@@ -774,7 +774,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8040", name: "びん沼川", slug: "binnuma-gawa-e8",
+    id: "se8240", name: "びん沼川", slug: "binnuma-gawa-e8",
     description: "富士見市のびん沼自然公園に隣接する釣り場で、ヘラブナ釣りのメッカとして知られる。桟橋からの釣りが中心で足場が良く、年間を通じて多くの釣り人が集まる。",
     latitude: 35.855, longitude: 139.557,
     address: "〒354-0003 埼玉県富士見市大字南畑",
@@ -791,7 +791,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8041", name: "浦山ダム（秩父さくら湖）", slug: "urayama-dam-e8",
+    id: "se8241", name: "浦山ダム（秩父さくら湖）", slug: "urayama-dam-e8",
     description: "秩父市の大型ダム湖で、ワカサギ釣りやヘラブナ釣りが楽しめる。ダム直下ではニジマスの放流も行われ、季節ごとに異なるターゲットが楽しめる。",
     latitude: 35.965, longitude: 139.085,
     address: "〒369-1801 埼玉県秩父市浦山",
@@ -808,7 +808,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8042", name: "柳瀬川", slug: "yanasegawa-e8",
+    id: "se8242", name: "柳瀬川", slug: "yanasegawa-e8",
     description: "所沢市・清瀬市を流れる新河岸川の支流で、都心近郊の手軽な淡水釣り場。オイカワやカワムツの小物釣りが中心で、子供の釣り入門にぴったり。",
     latitude: 35.780, longitude: 139.513,
     address: "〒359-1105 埼玉県所沢市青葉台",
@@ -824,7 +824,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8043", name: "中津川（秩父）", slug: "nakatsugawa-chichibu-e8",
+    id: "se8243", name: "中津川（秩父）", slug: "nakatsugawa-chichibu-e8",
     description: "秩父市の奥地を流れる渓流で、イワナの天然魚が残る貴重な川。中津峡の紅葉は埼玉屈指の美しさで、秋の渓流釣りは景色とともに格別の体験。",
     latitude: 35.975, longitude: 138.910,
     address: "〒369-1903 埼玉県秩父市中津川",
@@ -840,7 +840,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8044", name: "荒川（川越エリア）", slug: "arakawa-kawagoe-e8",
+    id: "se8244", name: "荒川（川越エリア）", slug: "arakawa-kawagoe-e8",
     description: "川越市周辺の荒川で、コイやフナの大物釣りが楽しめる。河川敷が広く整備されており、バーベキューエリアも近いためファミリーレジャーと合わせて楽しめる。",
     latitude: 35.920, longitude: 139.460,
     address: "〒350-0836 埼玉県川越市大字平塚",
@@ -857,7 +857,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8045", name: "大栗川合流点", slug: "okurigawa-goryuten-e8",
+    id: "se8245", name: "大栗川合流点", slug: "okurigawa-goryuten-e8",
     description: "多摩川と大栗川の合流点付近は、コイやナマズの好ポイント。流れの変化がベイトを集め、夕方から夜にかけてナマズのトップウォーターが特に熱い。",
     latitude: 35.655, longitude: 139.435,
     address: "〒206-0011 東京都多摩市関戸",
@@ -877,7 +877,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
   // 千葉県（25スポット: se8046〜se8070）
   // =========================================
   {
-    id: "se8046", name: "勝浦港", slug: "katsuura-kou-e8",
+    id: "se8246", name: "勝浦港", slug: "katsuura-kou-e8",
     description: "外房を代表する大型漁港で、カツオ・マグロの水揚げで有名。岸壁からはアジやサバのサビキ釣りが安定し、秋にはカマスやソウダガツオの回遊も見られる。",
     latitude: 35.143, longitude: 140.319,
     address: "〒299-5233 千葉県勝浦市浜勝浦",
@@ -895,7 +895,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8047", name: "鵜原海岸", slug: "ubara-kaigan-e8",
+    id: "se8247", name: "鵜原海岸", slug: "ubara-kaigan-e8",
     description: "勝浦市の景勝地で、リアス式海岸の岩場からメジナやクロダイが狙える。透明度の高い海と入り組んだ磯場が特徴で、磯釣りの入門にも適した穴場ポイント。",
     latitude: 35.131, longitude: 140.340,
     address: "〒299-5243 千葉県勝浦市鵜原",
@@ -912,7 +912,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8048", name: "富津岬", slug: "futtsu-misaki-e8",
+    id: "se8248", name: "富津岬", slug: "futtsu-misaki-e8",
     description: "東京湾に突き出た砂嘴で、キスの投げ釣りやシーバス狙いのルアーフィッシングが盛ん。遠浅のサーフで初心者にも釣りやすく、潮干狩りとセットで楽しめる。",
     latitude: 35.315, longitude: 139.795,
     address: "〒293-0021 千葉県富津市富津",
@@ -929,7 +929,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8049", name: "館山港", slug: "tateyama-kou-e8",
+    id: "se8249", name: "館山港", slug: "tateyama-kou-e8",
     description: "南房総を代表する港で、透明度の高い海に多くの魚種が集まる。堤防からのサビキでアジが安定し、クロダイやメジナの実績も高い。秋にはカンパチの幼魚も回遊。",
     latitude: 34.991, longitude: 139.867,
     address: "〒294-0036 千葉県館山市館山",
@@ -948,7 +948,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8050", name: "銚子港外堤防", slug: "choshi-soto-boutei-e8",
+    id: "se8250", name: "銚子港外堤防", slug: "choshi-soto-boutei-e8",
     description: "利根川河口と太平洋が交わる銚子港の外堤防で、潮通しが抜群。秋のイナダやヒラマサの回遊が有名で、ショアジギングの聖地的存在。冬はヒラメも狙える。",
     latitude: 35.738, longitude: 140.851,
     address: "〒288-0001 千葉県銚子市川口町",
@@ -966,7 +966,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8051", name: "洲崎灯台下磯", slug: "sunosaki-iso-e8",
+    id: "se8251", name: "洲崎灯台下磯", slug: "sunosaki-iso-e8",
     description: "館山市の洲崎灯台直下に広がる磯場で、イシダイやメジナの大物実績がある。潮通しが良くダイナミックな釣りが楽しめるが、足場が不安定なため経験者向け。",
     latitude: 34.970, longitude: 139.745,
     address: "〒294-0316 千葉県館山市洲崎",
@@ -983,7 +983,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8052", name: "旭市飯岡港", slug: "iioka-kou-e8",
+    id: "se8252", name: "旭市飯岡港", slug: "iioka-kou-e8",
     description: "九十九里浜の北端に位置する漁港で、キスやイシモチの投げ釣りが盛ん。港内ではハゼも狙え、隣接するサーフではヒラメの実績がある。ファミリー向き。",
     latitude: 35.725, longitude: 140.711,
     address: "〒289-2704 千葉県旭市下永井",
@@ -1000,7 +1000,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8053", name: "御宿岩和田港", slug: "onjuku-iwawada-kou-e8",
+    id: "se8253", name: "御宿岩和田港", slug: "onjuku-iwawada-kou-e8",
     description: "御宿町の小さな漁港で、堤防からアジやイワシが安定して釣れる。水がきれいで根魚のストックも豊富。夏はファミリーで賑わい、秋は大型アジの回遊も。",
     latitude: 35.165, longitude: 140.360,
     address: "〒299-5106 千葉県夷隅郡御宿町岩和田",
@@ -1017,7 +1017,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8054", name: "金谷港", slug: "kanaya-kou-e8",
+    id: "se8254", name: "金谷港", slug: "kanaya-kou-e8",
     description: "東京湾フェリー発着場のある港で、アジの泳がせ釣りでヒラメやマゴチが狙える好ポイント。堤防からの五目釣りが楽しめ、アクセスの良さも魅力。",
     latitude: 35.156, longitude: 139.825,
     address: "〒299-1861 千葉県富津市金谷",
@@ -1035,7 +1035,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8055", name: "九十九里浜（片貝エリア）", slug: "kujukuri-katakai-e8",
+    id: "se8255", name: "九十九里浜（片貝エリア）", slug: "kujukuri-katakai-e8",
     description: "日本最大級の砂浜海岸で、キスの投げ釣りとヒラメのルアーフィッシングが定番。片貝漁港周辺はアクセスも良く、サーフ初心者にも入りやすいポイント。",
     latitude: 35.516, longitude: 140.510,
     address: "〒283-0104 千葉県山武郡九十九里町片貝",
@@ -1052,7 +1052,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8056", name: "千倉港", slug: "chikura-kou-e8",
+    id: "se8256", name: "千倉港", slug: "chikura-kou-e8",
     description: "南房総市の漁港で、アジやイサキの実績が高い。堤防先端は潮通しが良くカゴ釣りでイサキの大物が出る。冬場はメジナの磯釣りも楽しめる。",
     latitude: 34.947, longitude: 139.948,
     address: "〒295-0004 千葉県南房総市千倉町瀬戸",
@@ -1070,7 +1070,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8057", name: "保田港", slug: "hota-kou-e8",
+    id: "se8257", name: "保田港", slug: "hota-kou-e8",
     description: "鋸南町の穏やかな港で、初心者向けの釣りスポット。アジやイワシのサビキ釣りが安定しており、お子様連れにも安心。隣接する道の駅で食事も充実。",
     latitude: 35.130, longitude: 139.837,
     address: "〒299-1902 千葉県安房郡鋸南町吉浜",
@@ -1087,7 +1087,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8058", name: "大原港", slug: "ohara-kou-e8",
+    id: "se8258", name: "大原港", slug: "ohara-kou-e8",
     description: "いすみ市の港で、タコ釣りの名所として有名。堤防からエギやテンヤでマダコが狙え、秋にはイナダの回遊も。アジやサバのサビキも安定している。",
     latitude: 35.248, longitude: 140.393,
     address: "〒298-0004 千葉県いすみ市大原",
@@ -1097,7 +1097,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0,
     catchableFish: [
-      { fish: fish("tako"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
+      { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "投げ釣り" },
@@ -1105,7 +1105,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8059", name: "木更津内港", slug: "kisarazu-uchikou-e8",
+    id: "se8259", name: "木更津内港", slug: "kisarazu-uchikou-e8",
     description: "東京湾アクアラインの近くに位置する港で、ハゼ釣りの聖地として有名。夏から秋にかけてマハゼが大量に釣れ、初心者から上級者まで楽しめる。",
     latitude: 35.373, longitude: 139.923,
     address: "〒292-0831 千葉県木更津市富士見",
@@ -1122,7 +1122,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8060", name: "白子海岸", slug: "shirako-kaigan-e8",
+    id: "se8260", name: "白子海岸", slug: "shirako-kaigan-e8",
     description: "九十九里浜の中部に位置する砂浜で、キスの数釣りが楽しめる人気エリア。遠浅の地形が続きちょい投げでも十分に釣果が出るため、投げ釣り入門に最適。",
     latitude: 35.430, longitude: 140.388,
     address: "〒299-4211 千葉県長生郡白子町中里",
@@ -1138,7 +1138,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8061", name: "天津港", slug: "amatsu-kou-e8",
+    id: "se8261", name: "天津港", slug: "amatsu-kou-e8",
     description: "鴨川市の小さな漁港で、アオリイカのエギングポイントとして知られる。秋のアオリイカシーズンは多くのエギンガーが訪れ、墨跡が港中に残る人気スポット。",
     latitude: 35.088, longitude: 140.183,
     address: "〒299-5503 千葉県鴨川市天津",
@@ -1148,14 +1148,14 @@ export const kantoAdd8Spots: FishingSpot[] = [
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0,
     catchableFish: [
-      { fish: fish("aori-ika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("mebaru"), monthStart: 12, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
     ],
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8062", name: "小湊港", slug: "kominato-kou-e8",
+    id: "se8262", name: "小湊港", slug: "kominato-kou-e8",
     description: "鯛の浦で有名な小湊の漁港。マダイやクロダイの実績が高く、堤防からのカゴ釣りで良型が期待できる。冬場のメジナも人気がある。",
     latitude: 35.110, longitude: 140.180,
     address: "〒299-5501 千葉県鴨川市小湊",
@@ -1172,7 +1172,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8063", name: "竹岡港", slug: "takeoka-kou-e8",
+    id: "se8263", name: "竹岡港", slug: "takeoka-kou-e8",
     description: "富津市の小さな漁港で、クロダイ釣りの名所として地元で有名。堤防際のヘチ釣りで大型クロダイが出る実績場。カワハギやメバルも周年狙える。",
     latitude: 35.108, longitude: 139.838,
     address: "〒299-1621 千葉県富津市竹岡",
@@ -1189,7 +1189,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8064", name: "犬吠埼灯台下", slug: "inubosaki-todaishita-e8",
+    id: "se8264", name: "犬吠埼灯台下", slug: "inubosaki-todaishita-e8",
     description: "銚子市の最東端に位置する磯場で、太平洋の荒波が打ち付けるダイナミックなポイント。イシダイやヒラスズキの実績があり、上級者向けの迫力ある磯釣りが楽しめる。",
     latitude: 35.708, longitude: 140.868,
     address: "〒288-0012 千葉県銚子市犬吠埼",
@@ -1206,7 +1206,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8065", name: "袖ケ浦海浜公園", slug: "sodegaura-kaihin-e8",
+    id: "se8265", name: "袖ケ浦海浜公園", slug: "sodegaura-kaihin-e8",
     description: "東京湾に面した公園で、整備された護岸から安全に釣りが楽しめる。ハゼやカレイの実績が良く、シーバスのナイトゲームも人気。ファミリー向きの釣り場。",
     latitude: 35.428, longitude: 139.938,
     address: "〒299-0268 千葉県袖ケ浦市南袖",
@@ -1223,7 +1223,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8066", name: "白浜フラワーパーク下磯", slug: "shirahama-flowerpark-iso-e8",
+    id: "se8266", name: "白浜フラワーパーク下磯", slug: "shirahama-flowerpark-iso-e8",
     description: "南房総市白浜の磯場で、メジナとクロダイの好ポイント。南房総では比較的足場が安定した磯で、中級者の磯釣りデビューにも向いている。",
     latitude: 34.920, longitude: 139.893,
     address: "〒295-0102 千葉県南房総市白浜町根本",
@@ -1240,7 +1240,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8067", name: "興津港", slug: "okitsu-kou-chiba-e8",
+    id: "se8267", name: "興津港", slug: "okitsu-kou-chiba-e8",
     description: "勝浦市の小さな港で、地元釣り師に愛される穴場。堤防からのメバリングやアジングが楽しめ、夜釣りの実績が特に良い。静かに釣りを楽しみたい人向け。",
     latitude: 35.150, longitude: 140.295,
     address: "〒299-5245 千葉県勝浦市興津",
@@ -1257,7 +1257,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8068", name: "岩井袋港", slug: "iwaibukuro-kou-e8",
+    id: "se8268", name: "岩井袋港", slug: "iwaibukuro-kou-e8",
     description: "南房総市の奥まった入り江にある港で、クロダイのダンゴ釣りが特に有名。入り江の穏やかな環境でのんびりと大型クロダイが狙える渋い釣り場。",
     latitude: 35.080, longitude: 139.848,
     address: "〒299-2216 千葉県南房総市久枝",
@@ -1274,7 +1274,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8069", name: "養老川河口", slug: "yorogawa-kakou-e8",
+    id: "se8269", name: "養老川河口", slug: "yorogawa-kakou-e8",
     description: "市原市の養老川河口域で、シーバスフィッシングの好ポイント。河口特有の地形変化がベイトを集め、秋のランカーシーバスの実績が非常に高い。",
     latitude: 35.455, longitude: 140.010,
     address: "〒290-0045 千葉県市原市五井海岸",
@@ -1291,7 +1291,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8070", name: "南白亀川河口", slug: "nabakigawa-kakou-e8",
+    id: "se8270", name: "南白亀川河口", slug: "nabakigawa-kakou-e8",
     description: "白子町の河口域で、スズキとハゼの好ポイント。九十九里浜との合流点は地形変化に富み、特に秋のハゼ釣りが盛ん。投げ釣りでイシモチも狙える。",
     latitude: 35.430, longitude: 140.370,
     address: "〒299-4212 千葉県長生郡白子町五井",
@@ -1311,7 +1311,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
   // 東京都（15スポット: se8071〜se8085）
   // =========================================
   {
-    id: "se8071", name: "若洲海浜公園", slug: "wakasu-kaihin-e8",
+    id: "se8271", name: "若洲海浜公園", slug: "wakasu-kaihin-e8",
     description: "東京ゲートブリッジのたもとに位置する都内屈指の釣りスポット。護岸や人工磯から手軽にサビキ釣りやちょい投げが楽しめ、都心から電車でアクセスできる利便性が魅力。",
     latitude: 35.618, longitude: 139.828,
     address: "〒136-0083 東京都江東区若洲三丁目",
@@ -1330,7 +1330,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8072", name: "豊洲ぐるり公園", slug: "toyosu-gururi-e8",
+    id: "se8272", name: "豊洲ぐるり公園", slug: "toyosu-gururi-e8",
     description: "豊洲市場の隣にある海沿いの公園で、シーバスやクロダイが都心で狙える貴重なポイント。夜景を眺めながらのナイトフィッシングが人気で、ハゼ釣りも手軽。",
     latitude: 35.645, longitude: 139.785,
     address: "〒135-0061 東京都江東区豊洲六丁目",
@@ -1347,7 +1347,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8073", name: "大井ふ頭中央海浜公園", slug: "oifuto-kaihin-e8",
+    id: "se8273", name: "大井ふ頭中央海浜公園", slug: "oifuto-kaihin-e8",
     description: "品川区の運河沿いに広がる公園で、ハゼ釣りの定番スポット。夏から秋にかけてマハゼが大量に釣れ、子供の釣りデビューに最適な環境が整っている。",
     latitude: 35.600, longitude: 139.745,
     address: "〒140-0003 東京都品川区八潮四丁目",
@@ -1363,7 +1363,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8074", name: "葛西臨海公園", slug: "kasai-rinkai-e8",
+    id: "se8274", name: "葛西臨海公園", slug: "kasai-rinkai-e8",
     description: "東京湾に面した広大な公園で、護岸からハゼやカレイが狙える。園内は整備が行き届き安全で、水族館や観覧車とセットでファミリーレジャーに最適。",
     latitude: 35.638, longitude: 139.862,
     address: "〒134-0086 東京都江戸川区臨海町六丁目",
@@ -1380,7 +1380,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8075", name: "城南島海浜公園", slug: "jonanjima-kaihin-e8",
+    id: "se8275", name: "城南島海浜公園", slug: "jonanjima-kaihin-e8",
     description: "大田区の人工島に位置する公園で、羽田空港の離着陸を間近に見ながら釣りが楽しめるユニークなスポット。投げ釣りでカレイやキスが狙え、夜のシーバスも実績あり。",
     latitude: 35.582, longitude: 139.772,
     address: "〒143-0002 東京都大田区城南島四丁目",
@@ -1398,7 +1398,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8076", name: "旧江戸川河口", slug: "kyu-edogawa-kakou-e8",
+    id: "se8276", name: "旧江戸川河口", slug: "kyu-edogawa-kakou-e8",
     description: "東京ディズニーランド近くの河口域で、シーバスフィッシングの超人気ポイント。都内有数のランカーシーバス実績場で、バチ抜けシーズンは特に熱い。",
     latitude: 35.645, longitude: 139.883,
     address: "〒272-0103 千葉県市川市本行徳",
@@ -1415,7 +1415,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8077", name: "隅田川テラス（汐入公園）", slug: "sumidagawa-terrace-e8",
+    id: "se8277", name: "隅田川テラス（汐入公園）", slug: "sumidagawa-terrace-e8",
     description: "荒川区の隅田川沿いに整備された遊歩道で、都心の河川で手軽にハゼやテナガエビが狙える。スカイツリーを眺めながらの釣りは東京ならではの体験。",
     latitude: 35.728, longitude: 139.810,
     address: "〒116-0003 東京都荒川区南千住八丁目",
@@ -1431,7 +1431,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8078", name: "東扇島西公園", slug: "higashiogishima-nishi-e8",
+    id: "se8278", name: "東扇島西公園", slug: "higashiogishima-nishi-e8",
     description: "川崎市の人工島にある公園で、東京湾奥随一の釣りスポット。サビキでアジ・イワシ、投げ釣りでカレイ・アイナメと多彩な魚種が年間を通じて楽しめる。",
     latitude: 35.480, longitude: 139.748,
     address: "〒210-0869 神奈川県川崎市川崎区東扇島",
@@ -1450,7 +1450,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8079", name: "多摩川六郷橋", slug: "tamagawa-rokugo-e8",
+    id: "se8279", name: "多摩川六郷橋", slug: "tamagawa-rokugo-e8",
     description: "大田区と川崎市を結ぶ六郷橋付近の多摩川河口域で、シーバスやハゼの好ポイント。都内屈指のシーバスフィールドで、バチ抜けパターンの春が特に有名。",
     latitude: 35.545, longitude: 139.715,
     address: "〒144-0046 東京都大田区東六郷",
@@ -1466,7 +1466,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8080", name: "奥多摩・日原川", slug: "okutama-nipparagawa-e8",
+    id: "se8280", name: "奥多摩・日原川", slug: "okutama-nipparagawa-e8",
     description: "奥多摩町の源流域を流れる清流で、イワナとヤマメの渓流釣りが楽しめる。東京都内とは思えない深い渓谷で、本格的な渓流釣りが都心から日帰りで体験できる。",
     latitude: 35.827, longitude: 139.050,
     address: "〒198-0211 東京都西多摩郡奥多摩町日原",
@@ -1483,7 +1483,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8081", name: "新木場公園護岸", slug: "shinkiba-koen-e8",
+    id: "se8281", name: "新木場公園護岸", slug: "shinkiba-koen-e8",
     description: "江東区の運河沿い護岸で、クロダイのヘチ釣りやシーバスのルアーフィッシングが楽しめる。都心から電車で来られる手軽さと、思わぬ大物が出る実績が両立。",
     latitude: 35.635, longitude: 139.832,
     address: "〒136-0082 東京都江東区新木場",
@@ -1500,7 +1500,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8082", name: "伊豆大島・元町港", slug: "izu-oshima-motomachi-e8",
+    id: "se8282", name: "伊豆大島・元町港", slug: "izu-oshima-motomachi-e8",
     description: "伊豆大島の玄関口である元町港は、堤防から多彩な魚種が狙える。アオリイカのエギングや回遊魚のショアジギングが特に人気で、島ならではの魚影の濃さが魅力。",
     latitude: 34.762, longitude: 139.338,
     address: "〒100-0101 東京都大島町元町",
@@ -1510,7 +1510,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.3, reviewCount: 0,
     catchableFish: [
-      { fish: fish("aori-ika"), monthStart: 9, monthEnd: 1, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 1, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
       { fish: fish("kanpachi"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("mejina"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("ishidai"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ぶっ込み釣り" },
@@ -1518,7 +1518,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8083", name: "暁ふ頭公園", slug: "akatsuki-futo-e8",
+    id: "se8283", name: "暁ふ頭公園", slug: "akatsuki-futo-e8",
     description: "お台場近くの隠れた釣りスポット。護岸からハゼやシーバスが狙え、レインボーブリッジを間近に見るロケーションが最高。平日は空いていてのんびり釣りが楽しめる。",
     latitude: 35.625, longitude: 139.766,
     address: "〒135-0064 東京都江東区青海二丁目",
@@ -1534,7 +1534,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8084", name: "秋川（あきる野エリア）", slug: "akigawa-akiruno-e8",
+    id: "se8284", name: "秋川（あきる野エリア）", slug: "akigawa-akiruno-e8",
     description: "あきる野市を流れる多摩川の支流で、都心から最も近い本格渓流フィールド。ヤマメやニジマスの放流が行われ、BBQ施設も近くにあるため家族でも楽しめる。",
     latitude: 35.728, longitude: 139.210,
     address: "〒190-0164 東京都あきる野市五日市",
@@ -1551,7 +1551,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland,
   },
   {
-    id: "se8085", name: "荒川・砂町運河", slug: "arakawa-sunamachi-e8",
+    id: "se8285", name: "荒川・砂町運河", slug: "arakawa-sunamachi-e8",
     description: "江東区の運河で、都心のド真ん中でシーバスやクロダイが狙える異色のフィールド。護岸が整備されていてアクセス抜群。夜のルアー釣りで80cm超のシーバスも出る。",
     latitude: 35.658, longitude: 139.848,
     address: "〒136-0073 東京都江東区北砂",
@@ -1571,7 +1571,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
   // 神奈川県（25スポット: se8086〜se8110）
   // =========================================
   {
-    id: "se8086", name: "三崎港", slug: "misaki-kou-e8",
+    id: "se8286", name: "三崎港", slug: "misaki-kou-e8",
     description: "マグロの水揚げで有名な三浦半島先端の大型漁港。堤防からアジ・サバのサビキ釣りが安定し、秋にはカマスの回遊も見られる。マグロを食べた後の釣りも楽しい。",
     latitude: 35.138, longitude: 139.621,
     address: "〒238-0243 神奈川県三浦市三崎",
@@ -1589,7 +1589,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8087", name: "城ヶ島磯", slug: "jogashima-iso-e8",
+    id: "se8287", name: "城ヶ島磯", slug: "jogashima-iso-e8",
     description: "三浦半島の最南端に浮かぶ島の磯場で、メジナやクロダイの大物実績が神奈川県随一。潮通しが良く磯釣りの醍醐味を存分に味わえるが、足場に注意が必要。",
     latitude: 35.127, longitude: 139.615,
     address: "〒238-0237 神奈川県三浦市三崎町城ヶ島",
@@ -1607,7 +1607,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8088", name: "茅ヶ崎ヘッドランド", slug: "chigasaki-headland-e8",
+    id: "se8288", name: "茅ヶ崎ヘッドランド", slug: "chigasaki-headland-e8",
     description: "茅ヶ崎市のサーフに突き出たT字型のヘッドランドで、キスの投げ釣りとシーバスのルアーフィッシングが人気。潮の流れが集まる構造のため魚が付きやすい。",
     latitude: 35.310, longitude: 139.403,
     address: "〒253-0055 神奈川県茅ヶ崎市中海岸",
@@ -1624,7 +1624,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8089", name: "真鶴半島・三ツ石", slug: "manazuru-mitsuishi-e8",
+    id: "se8289", name: "真鶴半島・三ツ石", slug: "manazuru-mitsuishi-e8",
     description: "真鶴町の先端に位置する景勝地で、干潮時に姿を現す三ツ石周辺は磯釣りの好ポイント。メジナやカサゴの実績が高く、美しい海と磯の風景も楽しめる。",
     latitude: 35.137, longitude: 139.145,
     address: "〒259-0201 神奈川県足柄下郡真鶴町真鶴",
@@ -1637,12 +1637,12 @@ export const kantoAdd8Spots: FishingSpot[] = [
       { fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
-      { fish: fish("aori-ika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8090", name: "横浜・本牧海づり施設", slug: "honmoku-umizuri-e8",
+    id: "se8290", name: "横浜・本牧海づり施設", slug: "honmoku-umizuri-e8",
     description: "横浜市の有料海釣り施設で、桟橋や護岸から安全に釣りが楽しめる。アジやサバのサビキからカレイの投げ釣りまで幅広く対応し、レンタル竿も充実。",
     latitude: 35.423, longitude: 139.668,
     address: "〒231-0827 神奈川県横浜市中区本牧ふ頭",
@@ -1661,7 +1661,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8091", name: "小田原港（早川港）", slug: "odawara-hayakawa-kou-e8",
+    id: "se8291", name: "小田原港（早川港）", slug: "odawara-hayakawa-kou-e8",
     description: "小田原市の漁港で、相模湾の新鮮な魚が水揚げされる。堤防からアジやカマスが手軽に狙え、駅からも近いためアクセス抜群。お昼は港の食堂で海鮮も楽しめる。",
     latitude: 35.237, longitude: 139.137,
     address: "〒250-0021 神奈川県小田原市早川",
@@ -1679,7 +1679,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8092", name: "横須賀・うみかぜ公園", slug: "yokosuka-umikaze-e8",
+    id: "se8292", name: "横須賀・うみかぜ公園", slug: "yokosuka-umikaze-e8",
     description: "横須賀市の海沿い公園で、護岸から手軽に釣りが楽しめる。アジのサビキ釣りやタチウオの引き釣りが人気で、夜景を見ながらの夜釣りも風情がある。",
     latitude: 35.275, longitude: 139.665,
     address: "〒238-0013 神奈川県横須賀市平成町三丁目",
@@ -1697,7 +1697,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8093", name: "江の島裏磯", slug: "enoshima-uraiso-e8",
+    id: "se8293", name: "江の島裏磯", slug: "enoshima-uraiso-e8",
     description: "湘南のシンボル江の島の裏側に広がる磯場で、メジナやクロダイの人気釣り場。太平洋に面した潮通しの良い磯で、秋にはイナダの回遊も見られる。",
     latitude: 35.295, longitude: 139.475,
     address: "〒251-0036 神奈川県藤沢市江の島",
@@ -1715,7 +1715,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8094", name: "大磯港", slug: "oiso-kou-e8",
+    id: "se8294", name: "大磯港", slug: "oiso-kou-e8",
     description: "大磯町の歴史ある漁港で、堤防からアジ・イワシのサビキ釣りが楽しめる。港内は穏やかでファミリーに最適。秋にはカマスの群れが入り、ルアーで入れ食いになることも。",
     latitude: 35.302, longitude: 139.303,
     address: "〒255-0003 神奈川県中郡大磯町大磯",
@@ -1733,7 +1733,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8095", name: "横浜・大黒海づり施設", slug: "daikoku-umizuri-e8",
+    id: "se8295", name: "横浜・大黒海づり施設", slug: "daikoku-umizuri-e8",
     description: "横浜ベイブリッジを間近に望む有料釣り施設。350mの桟橋から投げ釣り・サビキ釣りが楽しめ、レンタル竿完備で手ぶらでも釣りが体験できる。",
     latitude: 35.465, longitude: 139.675,
     address: "〒230-0054 神奈川県横浜市鶴見区大黒ふ頭",
@@ -1751,7 +1751,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8096", name: "三浦海岸サーフ", slug: "miura-kaigan-surf-e8",
+    id: "se8296", name: "三浦海岸サーフ", slug: "miura-kaigan-surf-e8",
     description: "三浦市の砂浜海岸で、キスの投げ釣りが定番。遠浅の地形が続くため初心者でも投げやすく、夏場はピンギスの数釣りが楽しめる。秋にはマゴチも回遊。",
     latitude: 35.172, longitude: 139.660,
     address: "〒238-0101 神奈川県三浦市南下浦町上宮田",
@@ -1768,7 +1768,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8097", name: "佐島港", slug: "sajima-kou-e8",
+    id: "se8297", name: "佐島港", slug: "sajima-kou-e8",
     description: "横須賀市の小さな漁港で、アオリイカのエギングスポットとして神奈川では有名。秋のシーズンは墨跡だらけになる人気ぶり。アジのアジングも楽しめる。",
     latitude: 35.218, longitude: 139.595,
     address: "〒240-0103 神奈川県横須賀市佐島",
@@ -1778,14 +1778,14 @@ export const kantoAdd8Spots: FishingSpot[] = [
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0,
     catchableFish: [
-      { fish: fish("aori-ika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
       { fish: fish("mebaru"), monthStart: 12, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
     ],
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8098", name: "国府津海岸", slug: "kozu-kaigan-e8",
+    id: "se8298", name: "国府津海岸", slug: "kozu-kaigan-e8",
     description: "小田原市の急深サーフで、ショアジギングの人気スポット。駅から徒歩圏内でアクセス抜群、目の前で急に深くなるためイナダやソウダガツオが岸近くまで回遊する。",
     latitude: 35.272, longitude: 139.200,
     address: "〒256-0812 神奈川県小田原市国府津",
@@ -1802,7 +1802,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8099", name: "鶴見川河口", slug: "tsurumigawa-kakou-e8",
+    id: "se8299", name: "鶴見川河口", slug: "tsurumigawa-kakou-e8",
     description: "横浜市鶴見区の河口域で、シーバスフィッシングの激戦区。バチ抜けシーズンの春とコノシロパターンの秋冬は特にランカーシーバスの実績が高い。",
     latitude: 35.492, longitude: 139.685,
     address: "〒230-0045 神奈川県横浜市鶴見区末広町",
@@ -1819,7 +1819,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8100", name: "長井漁港", slug: "nagai-gyokou-e8",
+    id: "se8300", name: "長井漁港", slug: "nagai-gyokou-e8",
     description: "横須賀市の漁港で、マダイやイサキのカゴ釣りが盛ん。相模湾に面した好立地で潮通しが良く、青物の回遊も期待できる。荒崎方面の磯へのアクセス拠点にも。",
     latitude: 35.195, longitude: 139.585,
     address: "〒238-0316 神奈川県横須賀市長井",
@@ -1836,7 +1836,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8101", name: "平塚新港", slug: "hiratsuka-shinkou-e8",
+    id: "se8301", name: "平塚新港", slug: "hiratsuka-shinkou-e8",
     description: "平塚市の漁港で、相模湾に面した好条件の釣り場。サビキでアジ・イワシが安定し、秋はタチウオの引き釣りでも有名。足場が良く初心者にもおすすめ。",
     latitude: 35.323, longitude: 139.343,
     address: "〒254-0803 神奈川県平塚市千石河岸",
@@ -1854,7 +1854,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8102", name: "葉山港（あぶずり港）", slug: "hayama-abuzuri-kou-e8",
+    id: "se8302", name: "葉山港（あぶずり港）", slug: "hayama-abuzuri-kou-e8",
     description: "葉山町の小さな港で、クロダイのヘチ釣りやカワハギの胴突き釣りが人気。海の透明度が高く磯場が近いため、多彩な魚種が楽しめる上品な釣り場。",
     latitude: 35.270, longitude: 139.573,
     address: "〒240-0112 神奈川県三浦郡葉山町堀内",
@@ -1871,7 +1871,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8103", name: "相模川河口", slug: "sagamigawa-kakou-e8",
+    id: "se8303", name: "相模川河口", slug: "sagamigawa-kakou-e8",
     description: "平塚市と茅ヶ崎市の境を流れる相模川河口域で、シーバスの超人気ポイント。落ちアユパターンの秋は特に熱く、ランカーサイズが連発する日も。",
     latitude: 35.328, longitude: 139.373,
     address: "〒254-0014 神奈川県平塚市四之宮",
@@ -1888,7 +1888,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8104", name: "米神堤防", slug: "komegami-boutei-e8",
+    id: "se8304", name: "米神堤防", slug: "komegami-boutei-e8",
     description: "真鶴町の小さな堤防で、アオリイカとメジナの穴場スポット。磯場に隣接しているため根魚のストックも豊富で、カサゴやメバルの夜釣りに定評がある。",
     latitude: 35.160, longitude: 139.155,
     address: "〒259-0201 神奈川県足柄下郡真鶴町真鶴",
@@ -1898,7 +1898,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
-      { fish: fish("aori-ika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
       { fish: fish("mejina"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
       { fish: fish("mebaru"), monthStart: 12, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
@@ -1906,7 +1906,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8105", name: "野島公園", slug: "nojima-koen-e8",
+    id: "se8305", name: "野島公園", slug: "nojima-koen-e8",
     description: "横浜市金沢区の小島にある公園で、護岸からハゼやカレイが狙える穏やかな釣り場。八景島シーパラダイスの近くにあり、家族連れの行楽と釣りを両立できる。",
     latitude: 35.340, longitude: 139.625,
     address: "〒236-0025 神奈川県横浜市金沢区野島町",
@@ -1923,7 +1923,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8106", name: "腰越漁港", slug: "koshigoe-gyokou-e8",
+    id: "se8306", name: "腰越漁港", slug: "koshigoe-gyokou-e8",
     description: "鎌倉市の小さな漁港で、しらす漁で有名。堤防からサビキでアジやイワシが手軽に釣れ、鎌倉観光とセットで楽しめる。カマスの回遊時は特に盛り上がる。",
     latitude: 35.305, longitude: 139.493,
     address: "〒248-0033 神奈川県鎌倉市腰越",
@@ -1940,7 +1940,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8107", name: "湯河原海岸", slug: "yugawara-kaigan-e8",
+    id: "se8307", name: "湯河原海岸", slug: "yugawara-kaigan-e8",
     description: "湯河原町のサーフで、キスの投げ釣りとシロギスの数釣りが楽しめる。温泉街が近く、釣りの後に温泉でリフレッシュできるのが嬉しいポイント。",
     latitude: 35.142, longitude: 139.098,
     address: "〒259-0305 神奈川県足柄下郡湯河原町門川",
@@ -1956,7 +1956,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8108", name: "福浦港", slug: "fukuura-kou-kanagawa-e8",
+    id: "se8308", name: "福浦港", slug: "fukuura-kou-kanagawa-e8",
     description: "真鶴半島の裏側にある静かな漁港で、根魚の魚影が非常に濃い。カサゴやメバルの穴釣りが楽しめ、夏場はアオリイカのエギングも好調。",
     latitude: 35.148, longitude: 139.148,
     address: "〒259-0201 神奈川県足柄下郡真鶴町真鶴",
@@ -1968,12 +1968,12 @@ export const kantoAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
       { fish: fish("mebaru"), monthStart: 12, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
-      { fish: fish("aori-ika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
     ],
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8109", name: "金沢八景護岸", slug: "kanazawa-hakkei-gogan-e8",
+    id: "se8309", name: "金沢八景護岸", slug: "kanazawa-hakkei-gogan-e8",
     description: "横浜市金沢区の海沿い護岸で、ハゼやアジが手軽に釣れる市民の憩いの場。夏場のハゼ釣りは家族連れに大人気で、冬はカレイの投げ釣りも楽しめる。",
     latitude: 35.332, longitude: 139.638,
     address: "〒236-0027 神奈川県横浜市金沢区瀬戸",
@@ -1990,7 +1990,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKanto,
   },
   {
-    id: "se8110", name: "早川河口テトラ", slug: "hayakawa-kakou-tetra-e8",
+    id: "se8310", name: "早川河口テトラ", slug: "hayakawa-kakou-tetra-e8",
     description: "小田原市の早川河口に並ぶテトラ帯で、メバルやカサゴの穴釣りと、シーバスのルアーフィッシングが両立するポイント。河口ならではの魚影の濃さが特徴。",
     latitude: 35.240, longitude: 139.140,
     address: "〒250-0021 神奈川県小田原市早川",
@@ -2010,7 +2010,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
   // 新潟県（20スポット: se8111〜se8130）
   // =========================================
   {
-    id: "se8111", name: "直江津港", slug: "naoetsu-kou-e8",
+    id: "se8311", name: "直江津港", slug: "naoetsu-kou-e8",
     description: "上越市の大型漁港で、日本海の豊かな漁場に面している。秋のアジ・サバの回遊が特に盛んで、冬場のマダイやメバルの実績も高い。足場が良く初心者にも安心。",
     latitude: 37.173, longitude: 138.225,
     address: "〒942-0011 新潟県上越市港町",
@@ -2029,7 +2029,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8112", name: "柏崎港", slug: "kashiwazaki-kou-e8",
+    id: "se8312", name: "柏崎港", slug: "kashiwazaki-kou-e8",
     description: "柏崎市の主要漁港で、アジやメバルの実績が高い。冬の日本海は荒れやすいが、港内は比較的穏やかでカレイやアイナメが安定して釣れる。",
     latitude: 37.360, longitude: 138.545,
     address: "〒945-0066 新潟県柏崎市西港町",
@@ -2047,7 +2047,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8113", name: "新潟西港", slug: "niigata-nishi-kou-e8",
+    id: "se8313", name: "新潟西港", slug: "niigata-nishi-kou-e8",
     description: "信濃川河口に位置する大型港で、シーバスの聖地として全国的に有名。河口特有の汽水環境がベイトを集め、秋のランカーシーバスは90cm超えも珍しくない。",
     latitude: 37.918, longitude: 139.015,
     address: "〒951-8051 新潟県新潟市中央区新光町",
@@ -2065,7 +2065,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8114", name: "出雲崎港", slug: "izumozaki-kou-e8",
+    id: "se8314", name: "出雲崎港", slug: "izumozaki-kou-e8",
     description: "出雲崎町の歴史ある漁港で、夕日が美しいロケーション。堤防からアジやメバルが手軽に狙え、秋にはサゴシ（サワラの幼魚）の回遊も見られる。",
     latitude: 37.530, longitude: 138.680,
     address: "〒949-4352 新潟県三島郡出雲崎町尼瀬",
@@ -2082,7 +2082,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8115", name: "村上・岩船港", slug: "murakami-iwafune-kou-e8",
+    id: "se8315", name: "村上・岩船港", slug: "murakami-iwafune-kou-e8",
     description: "村上市の漁港で、マダイの一つテンヤ釣りの発祥地として有名。堤防からでもマダイやクロダイが狙え、秋のアジサバの回遊も安定している。",
     latitude: 38.068, longitude: 139.480,
     address: "〒958-0873 新潟県村上市岩船上大町",
@@ -2099,7 +2099,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8116", name: "笹川流れ", slug: "sasagawa-nagare-e8",
+    id: "se8316", name: "笹川流れ", slug: "sasagawa-nagare-e8",
     description: "村上市の国指定名勝で、奇岩が並ぶ美しい海岸線。磯釣りでクロダイやメジナが狙え、透明度の高い海でのアオリイカのエギングも人気。景観と釣りの両方を楽しめる。",
     latitude: 38.170, longitude: 139.512,
     address: "〒959-3665 新潟県村上市浜新保",
@@ -2111,12 +2111,12 @@ export const kantoAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("mejina"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
-      { fish: fish("aori-ika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8117", name: "寺泊港", slug: "teradomari-kou-e8",
+    id: "se8317", name: "寺泊港", slug: "teradomari-kou-e8",
     description: "長岡市の「魚のアメ横」として知られる漁港。鮮魚市場が隣接し、釣りの前後に新鮮な魚介類が楽しめる。堤防からのサビキ釣りでアジが安定して釣れる。",
     latitude: 37.630, longitude: 138.770,
     address: "〒940-2502 新潟県長岡市寺泊下荒町",
@@ -2133,7 +2133,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8118", name: "聖籠海岸サーフ", slug: "seiro-kaigan-surf-e8",
+    id: "se8318", name: "聖籠海岸サーフ", slug: "seiro-kaigan-surf-e8",
     description: "聖籠町の砂浜海岸で、キスの投げ釣りとヒラメのルアーフィッシングが盛ん。新潟市からのアクセスも良く、夏場のキス釣りは家族連れに人気。",
     latitude: 37.960, longitude: 139.140,
     address: "〒957-0117 新潟県北蒲原郡聖籠町網代浜",
@@ -2150,7 +2150,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8119", name: "能生漁港", slug: "nou-gyokou-e8",
+    id: "se8319", name: "能生漁港", slug: "nou-gyokou-e8",
     description: "糸魚川市の漁港で、カニの直売所が隣接する人気スポット。堤防からアジやメバルが手軽に釣れ、秋にはアオリイカのエギングも好調。",
     latitude: 37.073, longitude: 137.870,
     address: "〒949-1352 新潟県糸魚川市能生",
@@ -2162,12 +2162,12 @@ export const kantoAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
-      { fish: fish("aori-ika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
     ],
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8120", name: "鯨波海岸", slug: "kujiranami-kaigan-e8",
+    id: "se8320", name: "鯨波海岸", slug: "kujiranami-kaigan-e8",
     description: "柏崎市の砂浜と岩場が入り混じる海岸で、投げ釣りと磯釣りの両方が楽しめる。キスの投げ釣りが夏の定番で、岩場ではメバルやカサゴも狙える。",
     latitude: 37.335, longitude: 138.510,
     address: "〒945-0855 新潟県柏崎市鯨波",
@@ -2184,7 +2184,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8121", name: "新潟東港", slug: "niigata-higashi-kou-e8",
+    id: "se8321", name: "新潟東港", slug: "niigata-higashi-kou-e8",
     description: "新潟市の巨大港湾で、シーバスやヒラメの実績が非常に高い。広大な岸壁から多彩な釣りが楽しめ、冬場はアイナメやカジカも狙える。",
     latitude: 37.960, longitude: 139.085,
     address: "〒950-3134 新潟県新潟市北区太郎代",
@@ -2202,7 +2202,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8122", name: "上越市・谷浜海岸", slug: "tanihama-kaigan-e8",
+    id: "se8322", name: "上越市・谷浜海岸", slug: "tanihama-kaigan-e8",
     description: "上越市の砂利浜で、キスの投げ釣りやアオリイカのエギングが楽しめる。夕日が美しいポイントで、夕マヅメの時間帯にマダイの実績もある穴場。",
     latitude: 37.137, longitude: 138.163,
     address: "〒949-3102 新潟県上越市大字長浜",
@@ -2213,13 +2213,13 @@ export const kantoAdd8Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
-      { fish: fish("aori-ika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
       { fish: fish("madai"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "夕マヅメ", method: "カゴ釣り" },
     ],
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8123", name: "名立港", slug: "nadachi-kou-e8",
+    id: "se8323", name: "名立港", slug: "nadachi-kou-e8",
     description: "上越市名立区の漁港で、道の駅が隣接する便利なスポット。堤防からアジやメバルが手軽に釣れ、冬のホッケの回遊も期待できる穴場。",
     latitude: 37.103, longitude: 138.100,
     address: "〒949-1602 新潟県上越市名立区名立大町",
@@ -2236,7 +2236,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8124", name: "瀬波温泉海岸", slug: "senami-onsen-kaigan-e8",
+    id: "se8324", name: "瀬波温泉海岸", slug: "senami-onsen-kaigan-e8",
     description: "村上市の温泉街に面した海岸で、キスの投げ釣りが楽しめる。釣りの後は温泉でリフレッシュできるのが嬉しい。夕日が美しい絶景ポイントでもある。",
     latitude: 38.078, longitude: 139.468,
     address: "〒958-0037 新潟県村上市瀬波温泉",
@@ -2252,7 +2252,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8125", name: "間瀬港", slug: "maze-kou-e8",
+    id: "se8325", name: "間瀬港", slug: "maze-kou-e8",
     description: "長岡市の小さな漁港で、日本海に面した穴場スポット。テトラ帯が豊富で根魚の魚影が濃く、メバルやカサゴの夜釣りに定評がある。",
     latitude: 37.680, longitude: 138.790,
     address: "〒940-2305 新潟県長岡市寺泊野積",
@@ -2269,7 +2269,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8126", name: "関屋浜サーフ", slug: "sekiya-hama-surf-e8",
+    id: "se8326", name: "関屋浜サーフ", slug: "sekiya-hama-surf-e8",
     description: "新潟市の市街地からアクセス抜群のサーフで、シーバスとヒラメの実績が高い。秋にはイナダの回遊も見られ、ショアジギングを楽しむアングラーが集まる。",
     latitude: 37.905, longitude: 138.995,
     address: "〒951-8134 新潟県新潟市中央区関屋浜",
@@ -2286,7 +2286,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8127", name: "糸魚川港", slug: "itoigawa-kou-e8",
+    id: "se8327", name: "糸魚川港", slug: "itoigawa-kou-e8",
     description: "糸魚川市の漁港で、北アルプスから流れ込む清流が海に注ぐポイント。アジやメバルのライトゲームが楽しめ、春にはサクラマスの回遊も期待できる。",
     latitude: 37.050, longitude: 137.862,
     address: "〒941-0061 新潟県糸魚川市大町",
@@ -2303,7 +2303,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8128", name: "巻漁港", slug: "maki-gyokou-e8",
+    id: "se8328", name: "巻漁港", slug: "maki-gyokou-e8",
     description: "新潟市西蒲区の小さな漁港で、メバルとアジのライトゲームが楽しめる穴場。テトラ帯が豊富でカサゴも狙えるため、根魚好きにはたまらないスポット。",
     latitude: 37.800, longitude: 138.870,
     address: "〒953-0012 新潟県新潟市西蒲区角田浜",
@@ -2320,7 +2320,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8129", name: "親不知海岸", slug: "oyashirazu-kaigan-e8",
+    id: "se8329", name: "親不知海岸", slug: "oyashirazu-kaigan-e8",
     description: "糸魚川市の断崖絶壁が続く海岸で、磯釣りの超上級者向けスポット。クロダイやマダイの大物実績があるが、波や足場には十分な注意が必要。",
     latitude: 36.988, longitude: 137.755,
     address: "〒949-0308 新潟県糸魚川市外波",
@@ -2337,7 +2337,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8130", name: "阿賀野川河口", slug: "aganogawa-kakou-e8",
+    id: "se8330", name: "阿賀野川河口", slug: "aganogawa-kakou-e8",
     description: "新潟市の阿賀野川河口域で、シーバスとマゴチの実績が高い。河口の広大なフラットが広がり、ウェーディングでのシーバスフィッシングが人気。",
     latitude: 37.945, longitude: 139.120,
     address: "〒950-3112 新潟県新潟市北区太夫浜",
@@ -2357,7 +2357,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
   // 富山県（15スポット: se8131〜se8145）
   // =========================================
   {
-    id: "se8131", name: "氷見漁港", slug: "himi-gyokou-e8",
+    id: "se8331", name: "氷見漁港", slug: "himi-gyokou-e8",
     description: "寒ブリで全国的に有名な漁港。堤防からアジやサバのサビキ釣りが手軽に楽しめ、冬にはフクラギ（ブリの幼魚）の回遊も期待できる。",
     latitude: 36.860, longitude: 136.975,
     address: "〒935-0012 新潟県氷見市比美町",
@@ -2375,7 +2375,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8132", name: "魚津港", slug: "uozu-kou-e8",
+    id: "se8332", name: "魚津港", slug: "uozu-kou-e8",
     description: "蜃気楼で有名な魚津市の漁港。富山湾の深い海溝からの潮が入り、アジやメバルの魚影が濃い。ホタルイカの身投げシーズンは観光客でも賑わう。",
     latitude: 36.827, longitude: 137.405,
     address: "〒937-0067 新潟県魚津市港町",
@@ -2392,7 +2392,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8133", name: "黒部漁港", slug: "kurobe-gyokou-e8",
+    id: "se8333", name: "黒部漁港", slug: "kurobe-gyokou-e8",
     description: "黒部川の河口に位置する漁港で、スズキやヒラメの実績が高い。河口域の汽水環境が魚を集め、秋にはサケの遡上も見られる。",
     latitude: 36.878, longitude: 137.437,
     address: "〒938-0066 新潟県黒部市生地",
@@ -2409,7 +2409,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8134", name: "射水市・新湊漁港", slug: "shinminato-gyokou-e8",
+    id: "se8334", name: "射水市・新湊漁港", slug: "shinminato-gyokou-e8",
     description: "内川沿いに広がる漁港で、「日本のベニス」と呼ばれる風情ある港町。堤防からアジやハゼが手軽に釣れ、冬にはカレイの投げ釣りも楽しめる。",
     latitude: 36.773, longitude: 137.090,
     address: "〒934-0023 新潟県射水市海王町",
@@ -2426,7 +2426,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8135", name: "高岡市・伏木港", slug: "fushiki-kou-e8",
+    id: "se8335", name: "高岡市・伏木港", slug: "fushiki-kou-e8",
     description: "小矢部川河口に位置する港で、シーバスフィッシングの人気ポイント。河口域のストラクチャーが豊富でスズキが居つきやすく、ナイトゲームの実績が高い。",
     latitude: 36.795, longitude: 137.020,
     address: "〒933-0116 新潟県高岡市伏木湊町",
@@ -2443,7 +2443,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8136", name: "雨晴海岸", slug: "amaharashi-kaigan-e8",
+    id: "se8336", name: "雨晴海岸", slug: "amaharashi-kaigan-e8",
     description: "高岡市の景勝地で、晴れた日には富山湾越しの立山連峰を望む絶景ポイント。磯場からメバルやカサゴが狙え、景色と釣りの両方を堪能できる。",
     latitude: 36.808, longitude: 137.005,
     address: "〒933-0133 新潟県高岡市太田",
@@ -2460,7 +2460,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8137", name: "滑川漁港", slug: "namerikawa-gyokou-e8",
+    id: "se8337", name: "滑川漁港", slug: "namerikawa-gyokou-e8",
     description: "ホタルイカの町として知られる滑川市の漁港。堤防からアジやメバルが手軽に狙え、ホタルイカシーズンにはアオリイカのエギングも好調になる。",
     latitude: 36.770, longitude: 137.333,
     address: "〒936-0023 新潟県滑川市中川原",
@@ -2472,12 +2472,12 @@ export const kantoAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
-      { fish: fish("aori-ika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
     ],
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8138", name: "富山港", slug: "toyama-kou-e8",
+    id: "se8338", name: "富山港", slug: "toyama-kou-e8",
     description: "神通川河口に位置する大型港で、シーバスとクロダイの実績が高い。河口域の汽水環境が魚を集め、年間を通じて多彩な魚種が狙える。",
     latitude: 36.748, longitude: 137.225,
     address: "〒931-8325 新潟県富山市東岩瀬町",
@@ -2495,7 +2495,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8139", name: "入善海岸サーフ", slug: "nyuzen-kaigan-surf-e8",
+    id: "se8339", name: "入善海岸サーフ", slug: "nyuzen-kaigan-surf-e8",
     description: "入善町の海岸で、キスの投げ釣りとヒラメのサーフルアーが楽しめる。北アルプスの伏流水が海に注ぐ「杉沢の沢スギ」の近くで、自然豊かな環境。",
     latitude: 36.922, longitude: 137.505,
     address: "〒939-0626 新潟県下新川郡入善町芦崎",
@@ -2511,7 +2511,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8140", name: "四方漁港", slug: "yokata-gyokou-e8",
+    id: "se8340", name: "四方漁港", slug: "yokata-gyokou-e8",
     description: "富山市の小さな漁港で、地元釣り師に親しまれる穴場。カレイの投げ釣りとメバルの夜釣りが特に実績があり、冬場でも安定した釣果が期待できる。",
     latitude: 36.755, longitude: 137.175,
     address: "〒930-2243 新潟県富山市四方荒屋",
@@ -2528,7 +2528,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8141", name: "経田漁港", slug: "kyoden-gyokou-e8",
+    id: "se8341", name: "経田漁港", slug: "kyoden-gyokou-e8",
     description: "魚津市の小漁港で、アジのアジングスポットとして密かに人気。常夜灯の下に良型のアジが集まり、ライトゲームを静かに楽しめる穴場的存在。",
     latitude: 36.843, longitude: 137.418,
     address: "〒937-0012 新潟県魚津市経田",
@@ -2544,7 +2544,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8142", name: "氷見・島尾海岸", slug: "himi-shimao-kaigan-e8",
+    id: "se8342", name: "氷見・島尾海岸", slug: "himi-shimao-kaigan-e8",
     description: "氷見市の砂浜海岸で、キスの投げ釣りが夏の風物詩。富山湾越しに立山連峰を望む絶景の中での釣りは格別。秋にはハゼ釣りも楽しめる。",
     latitude: 36.850, longitude: 136.988,
     address: "〒935-0036 新潟県氷見市島尾",
@@ -2560,7 +2560,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8143", name: "庄川河口", slug: "shogawa-kakou-e8",
+    id: "se8343", name: "庄川河口", slug: "shogawa-kakou-e8",
     description: "射水市の庄川河口域で、サクラマスの遡上で有名。シーバスフィッシングの実績も高く、河口特有の地形変化がベイトを集める。春のサクラマスシーズンは特に人気。",
     latitude: 36.773, longitude: 137.072,
     address: "〒934-0039 新潟県射水市海竜町",
@@ -2576,7 +2576,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8144", name: "海老江海浜公園", slug: "ebie-kaihin-toyama-e8",
+    id: "se8344", name: "海老江海浜公園", slug: "ebie-kaihin-toyama-e8",
     description: "射水市の海浜公園で、キスの投げ釣りとサーフルアーが楽しめる整備されたビーチ。駐車場・トイレ完備でファミリーにも最適。夕日の名所でもある。",
     latitude: 36.765, longitude: 137.110,
     address: "〒934-0022 新潟県射水市海老江浜開",
@@ -2592,7 +2592,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu,
   },
   {
-    id: "se8145", name: "朝日ヒスイ海岸", slug: "asahi-hisui-kaigan-e8",
+    id: "se8345", name: "朝日ヒスイ海岸", slug: "asahi-hisui-kaigan-e8",
     description: "朝日町のヒスイ海岸で、キスの投げ釣りが人気。翡翠（ヒスイ）が拾える珍しい海岸で、釣りと宝探しを同時に楽しめるユニークなスポット。",
     latitude: 36.958, longitude: 137.555,
     address: "〒939-0723 新潟県下新川郡朝日町宮崎",
@@ -2610,127 +2610,127 @@ export const kantoAdd8Spots: FishingSpot[] = [
   // =========================================
   // 石川県（15スポット: se8146〜se8160）
   // =========================================
-  { id: "se8146", name: "輪島港", slug: "wajima-kou-e8", description: "能登半島の先端に位置する漁港で、朝市が有名。堤防からアジやメバルが安定して釣れ、秋にはアオリイカのエギングも好調。日本海の荒波が育む魚は脂の乗りが抜群。", latitude: 37.395, longitude: 136.905, address: "〒928-0001 石川県輪島市河井町", accessInfo: "のと鉄道穴水駅からバスで約30分", region: localRegion("re8028"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("aori-ika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }, { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8147", name: "金沢港", slug: "kanazawa-kou-e8", description: "金沢市の主要港で、大型クルーズ船も寄港する。岸壁からアジやサバのサビキ釣りが手軽に楽しめ、冬にはブリの回遊情報で沸き立つこともある。", latitude: 36.620, longitude: 136.613, address: "〒920-0332 石川県金沢市無量寺町", accessInfo: "JR金沢駅からバスで約20分", region: localRegion("re8029"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港内に無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" }, { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8148", name: "内灘海岸サーフ", slug: "uchinada-kaigan-surf-e8", description: "内灘町の広大な砂浜で、キスの投げ釣りが盛ん。遠浅の地形が続くため初心者にも投げやすく、秋にはヒラメのサーフルアーも人気。金沢市街から近い。", latitude: 36.650, longitude: 136.625, address: "〒920-0267 石川県河北郡内灘町大学", accessInfo: "北陸鉄道浅野川線内灘駅から車で約5分", region: localRegion("re8029"), spotType: "beach", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "海岸沿いに無料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("hirame"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("suzuki"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
-  { id: "se8149", name: "能登島・向田漁港", slug: "notojima-koda-gyokou-e8", description: "七尾湾に浮かぶ能登島の漁港で、穏やかな内海でアジやメバルが手軽に狙える。のとじま水族館の近くでファミリーにもおすすめ。アオリイカの実績も高い。", latitude: 37.118, longitude: 136.990, address: "〒926-0211 石川県七尾市能登島向田町", accessInfo: "能登島大橋経由、JR七尾駅から車で約30分", region: localRegion("re8028"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("aori-ika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }, { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8150", name: "加賀・橋立漁港", slug: "kaga-hashidate-gyokou-e8", description: "加賀市の漁港で、ズワイガニの水揚げで有名。堤防からアジやメバルが安定して釣れ、冬場のカレイやアイナメの実績も高い。", latitude: 36.330, longitude: 136.268, address: "〒922-0554 石川県加賀市橋立町", accessInfo: "JR北陸本線加賀温泉駅から車で約15分", region: localRegion("re8030"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港内に無料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8151", name: "珠洲・蛸島漁港", slug: "suzu-takoshima-gyokou-e8", description: "能登半島の先端近くにある漁港で、マダイやクロダイの実績が高い。能登の透き通った海でカゴ釣りやフカセ釣りを楽しめる上級者好みのスポット。", latitude: 37.460, longitude: 137.325, address: "〒927-1222 石川県珠洲市蛸島町", accessInfo: "のと里山海道経由、JR金沢駅から車で約3時間", region: localRegion("re8028"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.1, reviewCount: 0, catchableFish: [{ fish: fish("madai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" }, { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8152", name: "七尾港", slug: "nanao-kou-e8", description: "七尾湾の穏やかな内海に面した港で、アジやキスが手軽に狙える。和倉温泉からも近く、観光と合わせて楽しめる。冬の能登かきの時期も魅力的。", latitude: 37.048, longitude: 136.963, address: "〒926-0041 石川県七尾市府中町", accessInfo: "JR七尾線七尾駅から徒歩約15分", region: localRegion("re8028"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "投げ釣り" }, { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }], bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8153", name: "小松・安宅漁港", slug: "komatsu-ataka-gyokou-e8", description: "安宅の関で有名な小松市の漁港。梯川河口に近く、スズキやクロダイの実績がある。堤防からのサビキでアジも安定して釣れる穏やかなスポット。", latitude: 36.385, longitude: 136.420, address: "〒923-0003 石川県小松市安宅町", accessInfo: "JR北陸本線小松駅から車で約10分", region: localRegion("re8030"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("aji"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8154", name: "志賀町・富来漁港", slug: "shika-togi-gyokou-e8", description: "能登半島西海岸の漁港で、荒波に育まれた魚の旨さに定評あり。クロダイのフカセ釣りとメバルのルアーフィッシングが人気。", latitude: 37.007, longitude: 136.715, address: "〒925-0447 石川県羽咋郡志賀町富来領家町", accessInfo: "のと里山海道西山IC経由、JR金沢駅から車で約1時間半", region: localRegion("re8028"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港内に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("aji"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8155", name: "千里浜海岸", slug: "chirihama-kaigan-e8", description: "車で走れる砂浜として有名な千里浜なぎさドライブウェイ。キスの投げ釣りが盛んで、砂浜に車を停めてすぐ釣りが始められる手軽さが最大の魅力。", latitude: 36.805, longitude: 136.717, address: "〒925-0054 石川県羽咋市千里浜町", accessInfo: "のと里山海道千里浜IC直結", region: localRegion("re8029"), spotType: "beach", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "砂浜に駐車可能", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("hirame"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
-  { id: "se8156", name: "穴水港", slug: "anamizu-kou-e8", description: "七尾湾の奥まった場所にある港で、カキ養殖でも有名。穏やかな内海でアジやキスが安定して釣れ、冬のアイナメやカレイの実績も良い。", latitude: 37.232, longitude: 136.903, address: "〒927-0027 石川県鳳珠郡穴水町大町", accessInfo: "のと鉄道穴水駅から徒歩約10分", region: localRegion("re8028"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("ainame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "ブラクリ" }, { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8157", name: "禄剛埼灯台下磯", slug: "rokkosaki-iso-e8", description: "能登半島の最先端に位置する磯場で、日本海と富山湾の潮がぶつかるダイナミックなポイント。マダイやクロダイの大物実績がある上級者向けの磯。", latitude: 37.530, longitude: 137.330, address: "〒927-1441 石川県珠洲市狼煙町", accessInfo: "JR金沢駅から車で約3時間", region: localRegion("re8028"), spotType: "rocky", difficulty: "advanced", isFree: true, hasParking: true, parkingDetail: "灯台周辺に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.2, reviewCount: 0, catchableFish: [{ fish: fish("madai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" }, { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("mejina"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeChubu },
-  { id: "se8158", name: "片山津温泉海岸", slug: "katayamazu-onsen-kaigan-e8", description: "加賀市の温泉街に近い海岸で、キスの投げ釣りが楽しめる。温泉に入った後にのんびり夕マヅメの釣りを楽しむのが地元スタイル。", latitude: 36.330, longitude: 136.345, address: "〒922-0414 石川県加賀市片山津温泉", accessInfo: "JR北陸本線加賀温泉駅から車で約10分", region: localRegion("re8030"), spotType: "beach", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "温泉街周辺に駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("suzuki"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
-  { id: "se8159", name: "犀川河口", slug: "saigawa-kakou-e8", description: "金沢市の犀川河口域で、シーバスフィッシングの好ポイント。市街地から近く仕事帰りのナイトゲームが楽しめる。秋のコノシロパターンが特に有名。", latitude: 36.590, longitude: 136.605, address: "〒920-0341 石川県金沢市金石", accessInfo: "JR金沢駅から車で約15分", region: localRegion("re8029"), spotType: "river", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "河口付近に駐車スペースあり", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }], bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8160", name: "大聖寺川河口", slug: "daishojigawa-kakou-e8", description: "加賀市の大聖寺川河口で、スズキとクロダイの実績がある。河口域特有の地形変化が魚を集め、春から秋にかけて安定した釣果が期待できる穴場。", latitude: 36.302, longitude: 136.258, address: "〒922-0554 石川県加賀市塩屋町", accessInfo: "JR北陸本線加賀温泉駅から車で約15分", region: localRegion("re8030"), spotType: "river", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "河口付近に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8346", name: "輪島港", slug: "wajima-kou-e8", description: "能登半島の先端に位置する漁港で、朝市が有名。堤防からアジやメバルが安定して釣れ、秋にはアオリイカのエギングも好調。日本海の荒波が育む魚は脂の乗りが抜群。", latitude: 37.395, longitude: 136.905, address: "〒928-0001 石川県輪島市河井町", accessInfo: "のと鉄道穴水駅からバスで約30分", region: localRegion("re8028"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }, { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8347", name: "金沢港", slug: "kanazawa-kou-e8", description: "金沢市の主要港で、大型クルーズ船も寄港する。岸壁からアジやサバのサビキ釣りが手軽に楽しめ、冬にはブリの回遊情報で沸き立つこともある。", latitude: 36.620, longitude: 136.613, address: "〒920-0332 石川県金沢市無量寺町", accessInfo: "JR金沢駅からバスで約20分", region: localRegion("re8029"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港内に無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" }, { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8348", name: "内灘海岸サーフ", slug: "uchinada-kaigan-surf-e8", description: "内灘町の広大な砂浜で、キスの投げ釣りが盛ん。遠浅の地形が続くため初心者にも投げやすく、秋にはヒラメのサーフルアーも人気。金沢市街から近い。", latitude: 36.650, longitude: 136.625, address: "〒920-0267 石川県河北郡内灘町大学", accessInfo: "北陸鉄道浅野川線内灘駅から車で約5分", region: localRegion("re8029"), spotType: "beach", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "海岸沿いに無料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("hirame"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("suzuki"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
+  { id: "se8349", name: "能登島・向田漁港", slug: "notojima-koda-gyokou-e8", description: "七尾湾に浮かぶ能登島の漁港で、穏やかな内海でアジやメバルが手軽に狙える。のとじま水族館の近くでファミリーにもおすすめ。アオリイカの実績も高い。", latitude: 37.118, longitude: 136.990, address: "〒926-0211 石川県七尾市能登島向田町", accessInfo: "能登島大橋経由、JR七尾駅から車で約30分", region: localRegion("re8028"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }, { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8350", name: "加賀・橋立漁港", slug: "kaga-hashidate-gyokou-e8", description: "加賀市の漁港で、ズワイガニの水揚げで有名。堤防からアジやメバルが安定して釣れ、冬場のカレイやアイナメの実績も高い。", latitude: 36.330, longitude: 136.268, address: "〒922-0554 石川県加賀市橋立町", accessInfo: "JR北陸本線加賀温泉駅から車で約15分", region: localRegion("re8030"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港内に無料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8351", name: "珠洲・蛸島漁港", slug: "suzu-takoshima-gyokou-e8", description: "能登半島の先端近くにある漁港で、マダイやクロダイの実績が高い。能登の透き通った海でカゴ釣りやフカセ釣りを楽しめる上級者好みのスポット。", latitude: 37.460, longitude: 137.325, address: "〒927-1222 石川県珠洲市蛸島町", accessInfo: "のと里山海道経由、JR金沢駅から車で約3時間", region: localRegion("re8028"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.1, reviewCount: 0, catchableFish: [{ fish: fish("madai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" }, { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8352", name: "七尾港", slug: "nanao-kou-e8", description: "七尾湾の穏やかな内海に面した港で、アジやキスが手軽に狙える。和倉温泉からも近く、観光と合わせて楽しめる。冬の能登かきの時期も魅力的。", latitude: 37.048, longitude: 136.963, address: "〒926-0041 石川県七尾市府中町", accessInfo: "JR七尾線七尾駅から徒歩約15分", region: localRegion("re8028"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "投げ釣り" }, { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }], bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8353", name: "小松・安宅漁港", slug: "komatsu-ataka-gyokou-e8", description: "安宅の関で有名な小松市の漁港。梯川河口に近く、スズキやクロダイの実績がある。堤防からのサビキでアジも安定して釣れる穏やかなスポット。", latitude: 36.385, longitude: 136.420, address: "〒923-0003 石川県小松市安宅町", accessInfo: "JR北陸本線小松駅から車で約10分", region: localRegion("re8030"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("aji"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8354", name: "志賀町・富来漁港", slug: "shika-togi-gyokou-e8", description: "能登半島西海岸の漁港で、荒波に育まれた魚の旨さに定評あり。クロダイのフカセ釣りとメバルのルアーフィッシングが人気。", latitude: 37.007, longitude: 136.715, address: "〒925-0447 石川県羽咋郡志賀町富来領家町", accessInfo: "のと里山海道西山IC経由、JR金沢駅から車で約1時間半", region: localRegion("re8028"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港内に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("aji"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8355", name: "千里浜海岸", slug: "chirihama-kaigan-e8", description: "車で走れる砂浜として有名な千里浜なぎさドライブウェイ。キスの投げ釣りが盛んで、砂浜に車を停めてすぐ釣りが始められる手軽さが最大の魅力。", latitude: 36.805, longitude: 136.717, address: "〒925-0054 石川県羽咋市千里浜町", accessInfo: "のと里山海道千里浜IC直結", region: localRegion("re8029"), spotType: "beach", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "砂浜に駐車可能", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("hirame"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
+  { id: "se8356", name: "穴水港", slug: "anamizu-kou-e8", description: "七尾湾の奥まった場所にある港で、カキ養殖でも有名。穏やかな内海でアジやキスが安定して釣れ、冬のアイナメやカレイの実績も良い。", latitude: 37.232, longitude: 136.903, address: "〒927-0027 石川県鳳珠郡穴水町大町", accessInfo: "のと鉄道穴水駅から徒歩約10分", region: localRegion("re8028"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("ainame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "ブラクリ" }, { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8357", name: "禄剛埼灯台下磯", slug: "rokkosaki-iso-e8", description: "能登半島の最先端に位置する磯場で、日本海と富山湾の潮がぶつかるダイナミックなポイント。マダイやクロダイの大物実績がある上級者向けの磯。", latitude: 37.530, longitude: 137.330, address: "〒927-1441 石川県珠洲市狼煙町", accessInfo: "JR金沢駅から車で約3時間", region: localRegion("re8028"), spotType: "rocky", difficulty: "advanced", isFree: true, hasParking: true, parkingDetail: "灯台周辺に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.2, reviewCount: 0, catchableFish: [{ fish: fish("madai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" }, { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("mejina"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeChubu },
+  { id: "se8358", name: "片山津温泉海岸", slug: "katayamazu-onsen-kaigan-e8", description: "加賀市の温泉街に近い海岸で、キスの投げ釣りが楽しめる。温泉に入った後にのんびり夕マヅメの釣りを楽しむのが地元スタイル。", latitude: 36.330, longitude: 136.345, address: "〒922-0414 石川県加賀市片山津温泉", accessInfo: "JR北陸本線加賀温泉駅から車で約10分", region: localRegion("re8030"), spotType: "beach", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "温泉街周辺に駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("suzuki"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
+  { id: "se8359", name: "犀川河口", slug: "saigawa-kakou-e8", description: "金沢市の犀川河口域で、シーバスフィッシングの好ポイント。市街地から近く仕事帰りのナイトゲームが楽しめる。秋のコノシロパターンが特に有名。", latitude: 36.590, longitude: 136.605, address: "〒920-0341 石川県金沢市金石", accessInfo: "JR金沢駅から車で約15分", region: localRegion("re8029"), spotType: "river", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "河口付近に駐車スペースあり", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }], bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8360", name: "大聖寺川河口", slug: "daishojigawa-kakou-e8", description: "加賀市の大聖寺川河口で、スズキとクロダイの実績がある。河口域特有の地形変化が魚を集め、春から秋にかけて安定した釣果が期待できる穴場。", latitude: 36.302, longitude: 136.258, address: "〒922-0554 石川県加賀市塩屋町", accessInfo: "JR北陸本線加賀温泉駅から車で約15分", region: localRegion("re8030"), spotType: "river", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "河口付近に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
   // =========================================
   // 福井県（15スポット: se8161〜se8175）
   // =========================================
-  { id: "se8161", name: "敦賀港", slug: "tsuruga-kou-e8", description: "若狭湾に面した大型港で、アジやサバのサビキ釣りが安定。冬のマダイやカレイの実績も高く、年間を通じて多彩な魚種が楽しめる。駅からも近くアクセス抜群。", latitude: 35.658, longitude: 136.073, address: "〒914-0079 福井県敦賀市港町", accessInfo: "JR北陸本線敦賀駅から車で約10分", region: localRegion("re8031"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港内に無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" }, { fish: fish("madai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" }, { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8162", name: "越前海岸・鮎川", slug: "echizen-ayukawa-e8", description: "越前町の岩場が続く海岸で、磯釣りの名所。クロダイやメジナの大物実績があり、秋にはアオリイカのエギングも盛ん。越前ガニの産地としても有名。", latitude: 35.970, longitude: 135.958, address: "〒916-0311 福井県丹生郡越前町玉川", accessInfo: "JR武生駅から車で約30分", region: localRegion("re8032"), spotType: "rocky", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "海岸沿いに無料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.1, reviewCount: 0, catchableFish: [{ fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("mejina"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("aori-ika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeChubu },
-  { id: "se8163", name: "小浜港", slug: "obama-kou-e8", description: "若狭湾奥部の穏やかな港で、アジやキスが手軽に釣れる。オバマ大統領で話題になった小浜市の漁港。冬のカレイ・アイナメも安定した実績がある。", latitude: 35.488, longitude: 135.746, address: "〒917-0081 福井県小浜市川崎", accessInfo: "JR小浜線小浜駅から徒歩約15分", region: localRegion("re8033"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "投げ釣り" }, { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8164", name: "美浜・日向漁港", slug: "mihama-higa-gyokou-e8", description: "美浜町の小さな漁港で、アオリイカのエギングスポットとして有名。若狭湾の透明度の高い海でサイトフィッシングが楽しめる。秋は特に好シーズン。", latitude: 35.595, longitude: 135.973, address: "〒919-1141 福井県三方郡美浜町日向", accessInfo: "JR小浜線美浜駅から車で約10分", region: localRegion("re8031"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("aori-ika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }, { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8165", name: "三国港", slug: "mikuni-kou-e8", description: "坂井市の九頭竜川河口に位置する港で、越前がにの水揚げで有名。堤防からアジやクロダイが狙え、河口域ではシーバスの実績も高い。", latitude: 36.247, longitude: 136.148, address: "〒913-0056 福井県坂井市三国町宿", accessInfo: "えちぜん鉄道三国港駅から徒歩約5分", region: localRegion("re8032"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8166", name: "敦賀新港（鞠山海遊パーク）", slug: "tsuruga-shinkou-mariyama-e8", description: "敦賀市の釣り公園で、護岸から安全にアジやサバが釣れる。投げ釣りでキスやカレイも狙え、トイレ・駐車場完備のファミリー向け施設。", latitude: 35.673, longitude: 136.082, address: "〒914-0274 福井県敦賀市鞠山", accessInfo: "JR敦賀駅から車で約15分", region: localRegion("re8031"), spotType: "pier", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "施設内に無料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "投げ釣り" }, { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8167", name: "食見海岸", slug: "shikimi-kaigan-e8", description: "若狭町の海岸で、福井県立海浜自然センターが隣接。透明度の高い海でアオリイカやメバルが狙え、磯場ではクロダイの実績もある。自然観察と釣りを両立。", latitude: 35.555, longitude: 135.853, address: "〒919-1464 福井県三方上中郡若狭町世久見", accessInfo: "JR小浜線三方駅から車で約15分", region: localRegion("re8033"), spotType: "rocky", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "自然センター駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("aori-ika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }, { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeChubu },
-  { id: "se8168", name: "河野海岸", slug: "kouno-kaigan-e8", description: "南越前町の砂利浜で、キスの投げ釣りとアオリイカのエギングが楽しめる。北陸道の河野ICから近く、ドライブの途中に立ち寄れる手軽さが魅力。", latitude: 35.810, longitude: 135.985, address: "〒915-0802 福井県南条郡南越前町河野", accessInfo: "北陸自動車道河野ICから車で約5分", region: localRegion("re8032"), spotType: "beach", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "海岸沿いに駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("aori-ika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
-  { id: "se8169", name: "高浜漁港", slug: "takahama-gyokou-e8", description: "高浜町の漁港で、若狭湾西部の好漁場に面する。アジやサバのサビキ釣りが安定し、冬にはカレイやアイナメも狙える。高浜ビーチが近くファミリーに人気。", latitude: 35.485, longitude: 135.555, address: "〒919-2226 福井県大飯郡高浜町宮崎", accessInfo: "JR小浜線若狭高浜駅から徒歩約10分", region: localRegion("re8033"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" }, { fish: fish("ainame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "ブラクリ" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8170", name: "越前岬", slug: "echizen-misaki-e8", description: "越前海岸の突端にあたる磯場で、メジナやイシダイの大物実績がある。断崖絶壁の迫力ある地形で、上級者向けの本格的な磯釣りが堪能できる。", latitude: 35.970, longitude: 135.942, address: "〒916-0422 福井県丹生郡越前町血ケ平", accessInfo: "JR武生駅から車で約40分", region: localRegion("re8032"), spotType: "rocky", difficulty: "advanced", isFree: true, hasParking: true, parkingDetail: "越前岬灯台周辺に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.2, reviewCount: 0, catchableFish: [{ fish: fish("mejina"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("ishidai"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ぶっ込み釣り" }, { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeChubu },
-  { id: "se8171", name: "常神半島・神子漁港", slug: "tsunekami-miko-gyokou-e8", description: "若狭町の半島先端にある漁港で、若狭湾屈指のアオリイカポイント。透明度抜群の海でサイトエギングが楽しめ、春にはマダイの実績もある。", latitude: 35.580, longitude: 135.803, address: "〒919-1461 福井県三方上中郡若狭町神子", accessInfo: "JR小浜線三方駅から車で約25分", region: localRegion("re8033"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("aori-ika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }, { fish: fish("madai"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" }, { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8172", name: "福井新港", slug: "fukui-shinkou-e8", description: "福井市の九頭竜川河口に近い大型港。シーバスの好ポイントとして知られ、サワラの回遊情報も多い。足場が良い岸壁からの釣りが中心。", latitude: 36.198, longitude: 136.128, address: "〒910-3635 福井県福井市松蔭町", accessInfo: "北陸自動車道福井ICから車で約20分", region: localRegion("re8032"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港内に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("sawara"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" }, { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }], bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8173", name: "水晶浜海水浴場", slug: "suisho-hama-e8", description: "美浜町の美しい砂浜で、名前の通り水晶のように透明な海が特徴。夏場のキス釣りが人気で、澄んだ海でのエギングも楽しめる。海水浴シーズン以外がおすすめ。", latitude: 35.605, longitude: 135.988, address: "〒919-1143 福井県三方郡美浜町竹波", accessInfo: "JR小浜線美浜駅から車で約15分", region: localRegion("re8031"), spotType: "beach", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "海水浴場駐車場あり（夏季有料）", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("aori-ika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
-  { id: "se8174", name: "おおい町・大島漁港", slug: "ooi-oshima-gyokou-e8", description: "おおい町の漁港で、若狭湾の穏やかな内海に面する。アジのサビキ釣りやアオリイカのエギングが人気で、きのこの森公園が近くファミリーにもおすすめ。", latitude: 35.470, longitude: 135.612, address: "〒919-2104 福井県大飯郡おおい町大島", accessInfo: "舞鶴若狭自動車道小浜西ICから車で約20分", region: localRegion("re8033"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("aori-ika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8175", name: "九頭竜川河口", slug: "kuzuryugawa-kakou-e8", description: "坂井市の九頭竜川河口域で、シーバスフィッシングの超人気ポイント。北陸屈指のランカー実績を誇り、秋の落ちアユパターンは全国からアングラーが集結する。", latitude: 36.238, longitude: 136.140, address: "〒913-0056 福井県坂井市三国町宿", accessInfo: "えちぜん鉄道三国港駅から徒歩約5分", region: localRegion("re8032"), spotType: "river", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "河口付近に駐車スペースあり", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.2, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("hirame"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8361", name: "敦賀港", slug: "tsuruga-kou-e8", description: "若狭湾に面した大型港で、アジやサバのサビキ釣りが安定。冬のマダイやカレイの実績も高く、年間を通じて多彩な魚種が楽しめる。駅からも近くアクセス抜群。", latitude: 35.658, longitude: 136.073, address: "〒914-0079 福井県敦賀市港町", accessInfo: "JR北陸本線敦賀駅から車で約10分", region: localRegion("re8031"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港内に無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" }, { fish: fish("madai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" }, { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8362", name: "越前海岸・鮎川", slug: "echizen-ayukawa-e8", description: "越前町の岩場が続く海岸で、磯釣りの名所。クロダイやメジナの大物実績があり、秋にはアオリイカのエギングも盛ん。越前ガニの産地としても有名。", latitude: 35.970, longitude: 135.958, address: "〒916-0311 福井県丹生郡越前町玉川", accessInfo: "JR武生駅から車で約30分", region: localRegion("re8032"), spotType: "rocky", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "海岸沿いに無料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.1, reviewCount: 0, catchableFish: [{ fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("mejina"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeChubu },
+  { id: "se8363", name: "小浜港", slug: "obama-kou-e8", description: "若狭湾奥部の穏やかな港で、アジやキスが手軽に釣れる。オバマ大統領で話題になった小浜市の漁港。冬のカレイ・アイナメも安定した実績がある。", latitude: 35.488, longitude: 135.746, address: "〒917-0081 福井県小浜市川崎", accessInfo: "JR小浜線小浜駅から徒歩約15分", region: localRegion("re8033"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "投げ釣り" }, { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8364", name: "美浜・日向漁港", slug: "mihama-higa-gyokou-e8", description: "美浜町の小さな漁港で、アオリイカのエギングスポットとして有名。若狭湾の透明度の高い海でサイトフィッシングが楽しめる。秋は特に好シーズン。", latitude: 35.595, longitude: 135.973, address: "〒919-1141 福井県三方郡美浜町日向", accessInfo: "JR小浜線美浜駅から車で約10分", region: localRegion("re8031"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }, { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8365", name: "三国港", slug: "mikuni-kou-e8", description: "坂井市の九頭竜川河口に位置する港で、越前がにの水揚げで有名。堤防からアジやクロダイが狙え、河口域ではシーバスの実績も高い。", latitude: 36.247, longitude: 136.148, address: "〒913-0056 福井県坂井市三国町宿", accessInfo: "えちぜん鉄道三国港駅から徒歩約5分", region: localRegion("re8032"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8366", name: "敦賀新港（鞠山海遊パーク）", slug: "tsuruga-shinkou-mariyama-e8", description: "敦賀市の釣り公園で、護岸から安全にアジやサバが釣れる。投げ釣りでキスやカレイも狙え、トイレ・駐車場完備のファミリー向け施設。", latitude: 35.673, longitude: 136.082, address: "〒914-0274 福井県敦賀市鞠山", accessInfo: "JR敦賀駅から車で約15分", region: localRegion("re8031"), spotType: "pier", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "施設内に無料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "投げ釣り" }, { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8367", name: "食見海岸", slug: "shikimi-kaigan-e8", description: "若狭町の海岸で、福井県立海浜自然センターが隣接。透明度の高い海でアオリイカやメバルが狙え、磯場ではクロダイの実績もある。自然観察と釣りを両立。", latitude: 35.555, longitude: 135.853, address: "〒919-1464 福井県三方上中郡若狭町世久見", accessInfo: "JR小浜線三方駅から車で約15分", region: localRegion("re8033"), spotType: "rocky", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "自然センター駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }, { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeChubu },
+  { id: "se8368", name: "河野海岸", slug: "kouno-kaigan-e8", description: "南越前町の砂利浜で、キスの投げ釣りとアオリイカのエギングが楽しめる。北陸道の河野ICから近く、ドライブの途中に立ち寄れる手軽さが魅力。", latitude: 35.810, longitude: 135.985, address: "〒915-0802 福井県南条郡南越前町河野", accessInfo: "北陸自動車道河野ICから車で約5分", region: localRegion("re8032"), spotType: "beach", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "海岸沿いに駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
+  { id: "se8369", name: "高浜漁港", slug: "takahama-gyokou-e8", description: "高浜町の漁港で、若狭湾西部の好漁場に面する。アジやサバのサビキ釣りが安定し、冬にはカレイやアイナメも狙える。高浜ビーチが近くファミリーに人気。", latitude: 35.485, longitude: 135.555, address: "〒919-2226 福井県大飯郡高浜町宮崎", accessInfo: "JR小浜線若狭高浜駅から徒歩約10分", region: localRegion("re8033"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" }, { fish: fish("ainame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "ブラクリ" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8370", name: "越前岬", slug: "echizen-misaki-e8", description: "越前海岸の突端にあたる磯場で、メジナやイシダイの大物実績がある。断崖絶壁の迫力ある地形で、上級者向けの本格的な磯釣りが堪能できる。", latitude: 35.970, longitude: 135.942, address: "〒916-0422 福井県丹生郡越前町血ケ平", accessInfo: "JR武生駅から車で約40分", region: localRegion("re8032"), spotType: "rocky", difficulty: "advanced", isFree: true, hasParking: true, parkingDetail: "越前岬灯台周辺に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.2, reviewCount: 0, catchableFish: [{ fish: fish("mejina"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("ishidai"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ぶっ込み釣り" }, { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeChubu },
+  { id: "se8371", name: "常神半島・神子漁港", slug: "tsunekami-miko-gyokou-e8", description: "若狭町の半島先端にある漁港で、若狭湾屈指のアオリイカポイント。透明度抜群の海でサイトエギングが楽しめ、春にはマダイの実績もある。", latitude: 35.580, longitude: 135.803, address: "〒919-1461 福井県三方上中郡若狭町神子", accessInfo: "JR小浜線三方駅から車で約25分", region: localRegion("re8033"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }, { fish: fish("madai"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" }, { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8372", name: "福井新港", slug: "fukui-shinkou-e8", description: "福井市の九頭竜川河口に近い大型港。シーバスの好ポイントとして知られ、サワラの回遊情報も多い。足場が良い岸壁からの釣りが中心。", latitude: 36.198, longitude: 136.128, address: "〒910-3635 福井県福井市松蔭町", accessInfo: "北陸自動車道福井ICから車で約20分", region: localRegion("re8032"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港内に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("sawara"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" }, { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }], bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8373", name: "水晶浜海水浴場", slug: "suisho-hama-e8", description: "美浜町の美しい砂浜で、名前の通り水晶のように透明な海が特徴。夏場のキス釣りが人気で、澄んだ海でのエギングも楽しめる。海水浴シーズン以外がおすすめ。", latitude: 35.605, longitude: 135.988, address: "〒919-1143 福井県三方郡美浜町竹波", accessInfo: "JR小浜線美浜駅から車で約15分", region: localRegion("re8031"), spotType: "beach", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "海水浴場駐車場あり（夏季有料）", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
+  { id: "se8374", name: "おおい町・大島漁港", slug: "ooi-oshima-gyokou-e8", description: "おおい町の漁港で、若狭湾の穏やかな内海に面する。アジのサビキ釣りやアオリイカのエギングが人気で、きのこの森公園が近くファミリーにもおすすめ。", latitude: 35.470, longitude: 135.612, address: "〒919-2104 福井県大飯郡おおい町大島", accessInfo: "舞鶴若狭自動車道小浜西ICから車で約20分", region: localRegion("re8033"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8375", name: "九頭竜川河口", slug: "kuzuryugawa-kakou-e8", description: "坂井市の九頭竜川河口域で、シーバスフィッシングの超人気ポイント。北陸屈指のランカー実績を誇り、秋の落ちアユパターンは全国からアングラーが集結する。", latitude: 36.238, longitude: 136.140, address: "〒913-0056 福井県坂井市三国町宿", accessInfo: "えちぜん鉄道三国港駅から徒歩約5分", region: localRegion("re8032"), spotType: "river", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "河口付近に駐車スペースあり", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.2, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("hirame"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
   // =========================================
   // 山梨県（10スポット: se8176〜se8185）
   // =========================================
-  { id: "se8176", name: "山中湖", slug: "yamanakako-e8", description: "富士五湖の一つで、ワカサギ釣りとブラックバス釣りの名所。冬のドーム船でのワカサギ釣りは暖かく快適で、初心者やファミリーに大人気。富士山の絶景も堪能。", latitude: 35.412, longitude: 138.870, address: "〒401-0501 山梨県南都留郡山中湖村山中", accessInfo: "富士急行線富士山駅からバスで約30分", region: localRegion("re8034"), spotType: "river", difficulty: "beginner", isFree: false, hasParking: true, parkingDetail: "湖畔に有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.2, reviewCount: 0, catchableFish: [{ fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ドーム船" }, { fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("koi"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "吸い込み釣り" }], bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8177", name: "河口湖", slug: "kawaguchiko-e8", description: "富士五湖の中心的な湖で、ブラックバスとワカサギが主なターゲット。岸からの釣りもボート釣りも楽しめ、湖畔の観光地からのアクセスも抜群。", latitude: 35.510, longitude: 138.753, address: "〒401-0301 山梨県南都留郡富士河口湖町船津", accessInfo: "富士急行線河口湖駅から徒歩約15分", region: localRegion("re8034"), spotType: "river", difficulty: "beginner", isFree: false, hasParking: true, parkingDetail: "湖畔に有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ボート釣り" }, { fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラウキ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8178", name: "精進湖", slug: "shojiko-e8", description: "富士五湖で最も小さな湖で、ヘラブナ釣りの聖地として全国的に有名。静寂な湖面でじっくりヘラブナと向き合う贅沢な時間が過ごせる。", latitude: 35.478, longitude: 138.628, address: "〒401-0336 山梨県南都留郡富士河口湖町精進", accessInfo: "富士急行線河口湖駅からバスで約40分", region: localRegion("re8034"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "湖畔に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラウキ釣り" }, { fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ボート釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8179", name: "桂川（大月エリア）", slug: "katsuragawa-otsuki-e8", description: "大月市を流れる桂川で、ヤマメやアユの渓流釣りが楽しめる。都心から特急で1時間圏内とアクセスが良く、手軽に渓流釣りを体験できる。", latitude: 35.613, longitude: 138.938, address: "〒401-0013 山梨県大月市大月町", accessInfo: "JR中央本線大月駅から徒歩約10分", region: localRegion("re8035"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "河川沿いに駐車スペースあり", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" }, { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8180", name: "西湖", slug: "saiko-e8", description: "富士五湖の一つで、ヒメマスの放流が行われている。2010年にクニマスが再発見された湖としても有名。静かな湖面でトラウトフィッシングが楽しめる。", latitude: 35.490, longitude: 138.672, address: "〒401-0332 山梨県南都留郡富士河口湖町西湖", accessInfo: "富士急行線河口湖駅からバスで約30分", region: localRegion("re8034"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "湖畔に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0, catchableFish: [{ fish: fish("himemasu"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "トローリング" }, { fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8181", name: "笛吹川", slug: "fuefukigawa-e8", description: "甲府盆地を流れる笛吹川で、アユの友釣りが夏の風物詩。ぶどう畑に囲まれた風景の中での釣りは山梨ならでは。解禁日には多くの釣り人が集まる。", latitude: 35.640, longitude: 138.670, address: "〒406-0031 山梨県笛吹市石和町", accessInfo: "JR中央本線石和温泉駅から徒歩約10分", region: localRegion("re8035"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "河川敷に駐車可能", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("oikawa"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "毛ばり釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8182", name: "本栖湖", slug: "motosuko-e8", description: "千円札の裏面に描かれた富士山ビューで有名な湖。ワカサギやニジマスが釣れ、特にボートからのルアーフィッシングで大型トラウトの実績がある。", latitude: 35.462, longitude: 138.590, address: "〒401-0337 山梨県南都留郡富士河口湖町本栖", accessInfo: "富士急行線河口湖駅からバスで約50分", region: localRegion("re8034"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "湖畔に有料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ボート釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8183", name: "早川（南アルプス）", slug: "hayakawa-minamialps-e8", description: "南アルプスの麓を流れる清流で、イワナの天然魚が残る貴重な渓流。険しい渓谷で本格的な源流釣りが堪能でき、手つかずの自然が魅力。上級者向け。", latitude: 35.365, longitude: 138.350, address: "〒409-2713 山梨県南巨摩郡早川町奈良田", accessInfo: "JR身延線下部温泉駅からバスで約60分", region: localRegion("re8035"), spotType: "river", difficulty: "advanced", isFree: false, hasParking: true, parkingDetail: "入渓点付近に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.1, reviewCount: 0, catchableFish: [{ fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" }, { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フライ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8184", name: "富士川（鰍沢エリア）", slug: "fujikawa-kajikazawa-e8", description: "富士川町の中流域で、アユの友釣りとニジマスのルアーフィッシングが楽しめる。急流の中でのダイナミックな釣りが魅力で、秋の落ちアユシーズンは特に人気。", latitude: 35.505, longitude: 138.448, address: "〒400-0601 山梨県南巨摩郡富士川町鰍沢", accessInfo: "JR身延線鰍沢口駅から徒歩約15分", region: localRegion("re8035"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "河川沿いに駐車スペースあり", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8185", name: "道志川", slug: "doshigawa-e8", description: "道志村を流れる清流で、ヤマメとイワナの渓流釣りが楽しめる。キャンプ場が多く、キャンプと渓流釣りを合わせたアウトドアレジャーに最適。都心から約2時間。", latitude: 35.522, longitude: 139.035, address: "〒402-0209 山梨県南都留郡道志村", accessInfo: "中央自動車道都留ICから車で約30分", region: localRegion("re8035"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "キャンプ場周辺に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" }, { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" }, { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8376", name: "山中湖", slug: "yamanakako-e8", description: "富士五湖の一つで、ワカサギ釣りとブラックバス釣りの名所。冬のドーム船でのワカサギ釣りは暖かく快適で、初心者やファミリーに大人気。富士山の絶景も堪能。", latitude: 35.412, longitude: 138.870, address: "〒401-0501 山梨県南都留郡山中湖村山中", accessInfo: "富士急行線富士山駅からバスで約30分", region: localRegion("re8034"), spotType: "river", difficulty: "beginner", isFree: false, hasParking: true, parkingDetail: "湖畔に有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.2, reviewCount: 0, catchableFish: [{ fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ドーム船" }, { fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("koi"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "吸い込み釣り" }], bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8377", name: "河口湖", slug: "kawaguchiko-e8", description: "富士五湖の中心的な湖で、ブラックバスとワカサギが主なターゲット。岸からの釣りもボート釣りも楽しめ、湖畔の観光地からのアクセスも抜群。", latitude: 35.510, longitude: 138.753, address: "〒401-0301 山梨県南都留郡富士河口湖町船津", accessInfo: "富士急行線河口湖駅から徒歩約15分", region: localRegion("re8034"), spotType: "river", difficulty: "beginner", isFree: false, hasParking: true, parkingDetail: "湖畔に有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ボート釣り" }, { fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラウキ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8378", name: "精進湖", slug: "shojiko-e8", description: "富士五湖で最も小さな湖で、ヘラブナ釣りの聖地として全国的に有名。静寂な湖面でじっくりヘラブナと向き合う贅沢な時間が過ごせる。", latitude: 35.478, longitude: 138.628, address: "〒401-0336 山梨県南都留郡富士河口湖町精進", accessInfo: "富士急行線河口湖駅からバスで約40分", region: localRegion("re8034"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "湖畔に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラウキ釣り" }, { fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ボート釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8379", name: "桂川（大月エリア）", slug: "katsuragawa-otsuki-e8", description: "大月市を流れる桂川で、ヤマメやアユの渓流釣りが楽しめる。都心から特急で1時間圏内とアクセスが良く、手軽に渓流釣りを体験できる。", latitude: 35.613, longitude: 138.938, address: "〒401-0013 山梨県大月市大月町", accessInfo: "JR中央本線大月駅から徒歩約10分", region: localRegion("re8035"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "河川沿いに駐車スペースあり", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" }, { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8380", name: "西湖", slug: "saiko-e8", description: "富士五湖の一つで、ヒメマスの放流が行われている。2010年にクニマスが再発見された湖としても有名。静かな湖面でトラウトフィッシングが楽しめる。", latitude: 35.490, longitude: 138.672, address: "〒401-0332 山梨県南都留郡富士河口湖町西湖", accessInfo: "富士急行線河口湖駅からバスで約30分", region: localRegion("re8034"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "湖畔に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0, catchableFish: [{ fish: fish("himemasu"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "トローリング" }, { fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8381", name: "笛吹川", slug: "fuefukigawa-e8", description: "甲府盆地を流れる笛吹川で、アユの友釣りが夏の風物詩。ぶどう畑に囲まれた風景の中での釣りは山梨ならでは。解禁日には多くの釣り人が集まる。", latitude: 35.640, longitude: 138.670, address: "〒406-0031 山梨県笛吹市石和町", accessInfo: "JR中央本線石和温泉駅から徒歩約10分", region: localRegion("re8035"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "河川敷に駐車可能", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("oikawa"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "毛ばり釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8382", name: "本栖湖", slug: "motosuko-e8", description: "千円札の裏面に描かれた富士山ビューで有名な湖。ワカサギやニジマスが釣れ、特にボートからのルアーフィッシングで大型トラウトの実績がある。", latitude: 35.462, longitude: 138.590, address: "〒401-0337 山梨県南都留郡富士河口湖町本栖", accessInfo: "富士急行線河口湖駅からバスで約50分", region: localRegion("re8034"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "湖畔に有料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ボート釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8383", name: "早川（南アルプス）", slug: "hayakawa-minamialps-e8", description: "南アルプスの麓を流れる清流で、イワナの天然魚が残る貴重な渓流。険しい渓谷で本格的な源流釣りが堪能でき、手つかずの自然が魅力。上級者向け。", latitude: 35.365, longitude: 138.350, address: "〒409-2713 山梨県南巨摩郡早川町奈良田", accessInfo: "JR身延線下部温泉駅からバスで約60分", region: localRegion("re8035"), spotType: "river", difficulty: "advanced", isFree: false, hasParking: true, parkingDetail: "入渓点付近に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.1, reviewCount: 0, catchableFish: [{ fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" }, { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フライ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8384", name: "富士川（鰍沢エリア）", slug: "fujikawa-kajikazawa-e8", description: "富士川町の中流域で、アユの友釣りとニジマスのルアーフィッシングが楽しめる。急流の中でのダイナミックな釣りが魅力で、秋の落ちアユシーズンは特に人気。", latitude: 35.505, longitude: 138.448, address: "〒400-0601 山梨県南巨摩郡富士川町鰍沢", accessInfo: "JR身延線鰍沢口駅から徒歩約15分", region: localRegion("re8035"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "河川沿いに駐車スペースあり", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8385", name: "道志川", slug: "doshigawa-e8", description: "道志村を流れる清流で、ヤマメとイワナの渓流釣りが楽しめる。キャンプ場が多く、キャンプと渓流釣りを合わせたアウトドアレジャーに最適。都心から約2時間。", latitude: 35.522, longitude: 139.035, address: "〒402-0209 山梨県南都留郡道志村", accessInfo: "中央自動車道都留ICから車で約30分", region: localRegion("re8035"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "キャンプ場周辺に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" }, { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" }, { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
   // =========================================
   // 長野県（10スポット: se8186〜se8195）
   // =========================================
-  { id: "se8186", name: "諏訪湖", slug: "suwako-e8", description: "長野県のほぼ中央に位置する大きな湖で、冬のワカサギ釣りが風物詩。ドーム船での釣りは暖かく快適で、初心者やファミリーにも大人気。夏はブラックバスも。", latitude: 36.050, longitude: 138.085, address: "〒392-0027 長野県諏訪市湖岸通り", accessInfo: "JR中央本線上諏訪駅から徒歩約10分", region: localRegion("re8036"), spotType: "river", difficulty: "beginner", isFree: false, hasParking: true, parkingDetail: "湖畔に有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.2, reviewCount: 0, catchableFish: [{ fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ドーム船" }, { fish: fish("koi"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "吸い込み釣り" }, { fish: fish("herabuna"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラウキ釣り" }], bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8187", name: "野尻湖", slug: "nojiriko-e8", description: "長野県北部のカルデラ湖で、スモールマウスバスの聖地として全国的に有名。クリアウォーターの中での繊細なバスフィッシングが楽しめ、上級者に人気。", latitude: 36.828, longitude: 138.225, address: "〒389-1303 長野県上水内郡信濃町野尻", accessInfo: "しなの鉄道北しなの線黒姫駅から車で約10分", region: localRegion("re8037"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "湖畔に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.1, reviewCount: 0, catchableFish: [{ fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ドーム船" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8188", name: "犀川（安曇野）", slug: "saigawa-azumino-e8", description: "安曇野を流れる犀川はトラウトフィッシングの名川。大型ニジマスやブラウントラウトの実績が高く、北アルプスを望みながらの釣りは格別。", latitude: 36.335, longitude: 137.902, address: "〒399-8204 長野県安曇野市豊科高家", accessInfo: "JR大糸線豊科駅から車で約10分", region: localRegion("re8037"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "河川沿いに駐車スペースあり", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8189", name: "千曲川（佐久エリア）", slug: "chikumagawa-saku-e8", description: "日本一長い信濃川の上流にあたる千曲川。佐久エリアは流れが穏やかでヤマメやイワナの渓流釣りに適し、夏にはアユの友釣りも楽しめる。", latitude: 36.247, longitude: 138.477, address: "〒385-0011 長野県佐久市猿久保", accessInfo: "JR小海線佐久平駅から車で約15分", region: localRegion("re8036"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "河川敷に駐車可能", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" }, { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8190", name: "木崎湖", slug: "kizakiko-e8", description: "大町市の仁科三湖の一つで、ワカサギとバス釣りの人気湖。周囲が小さく穴場的な雰囲気で、ボートからも岸からも手軽に楽しめる。", latitude: 36.582, longitude: 137.858, address: "〒398-0001 長野県大町市平木崎湖", accessInfo: "JR大糸線稲尾駅から徒歩約5分", region: localRegion("re8037"), spotType: "river", difficulty: "beginner", isFree: false, hasParking: true, parkingDetail: "湖畔に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ドーム船" }, { fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8191", name: "天竜川（伊那エリア）", slug: "tenryugawa-ina-e8", description: "諏訪湖から太平洋に注ぐ天竜川の上流域。伊那谷を流れる区間はアユの友釣りが盛んで、解禁日には河原が釣り人で賑わう。南アルプスの眺望も素晴らしい。", latitude: 35.832, longitude: 137.960, address: "〒396-0025 長野県伊那市荒井", accessInfo: "JR飯田線伊那市駅から車で約10分", region: localRegion("re8036"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "河川敷に駐車スペースあり", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0, catchableFish: [{ fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "ルアー" }, { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8192", name: "白樺湖", slug: "shirakabako-e8", description: "茅野市と立科町にまたがる高原の湖。標高1,400mの涼しい環境でニジマス釣りが楽しめ、レンタルボートも充実。夏の避暑地としても人気。", latitude: 36.107, longitude: 138.218, address: "〒391-0301 長野県茅野市北山白樺湖", accessInfo: "中央自動車道諏訪ICから車で約40分", region: localRegion("re8036"), spotType: "river", difficulty: "beginner", isFree: false, hasParking: true, parkingDetail: "湖畔に有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ドーム船" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8193", name: "梓川（上高地入口）", slug: "azusagawa-kamikochi-e8", description: "北アルプスから流れ出る梓川で、イワナの渓流釣りが体験できる。上高地に向かう途中の美しい渓谷で、圧倒的な自然の中での釣りは至極の体験。", latitude: 36.190, longitude: 137.705, address: "〒390-1516 長野県松本市安曇", accessInfo: "松本電鉄新島々駅から車で約30分", region: localRegion("re8037"), spotType: "river", difficulty: "advanced", isFree: false, hasParking: true, parkingDetail: "入渓点付近に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" }, { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フライ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8194", name: "松原湖", slug: "matsubarako-e8", description: "小海町にある高原の湖で、標高1,123mに位置する。冬は氷上ワカサギ釣りの名所として知られ、氷の上にテントを張る独特の風景が広がる。", latitude: 36.068, longitude: 138.468, address: "〒384-1103 長野県南佐久郡小海町豊里", accessInfo: "JR小海線松原湖駅から車で約5分", region: localRegion("re8036"), spotType: "river", difficulty: "beginner", isFree: false, hasParking: true, parkingDetail: "湖畔に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("wakasagi"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "氷上穴釣り" }, { fish: fish("herabuna"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラウキ釣り" }], bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8195", name: "奈良井川", slug: "naraigawa-e8", description: "塩尻市を流れる奈良井川で、中山道の宿場町を背景にした渓流釣りが楽しめる。ヤマメやイワナが生息し、歴史ある街道沿いでの穏やかな釣行が魅力。", latitude: 36.082, longitude: 137.932, address: "〒399-6303 長野県塩尻市奈良井", accessInfo: "JR中央本線奈良井駅から徒歩約5分", region: localRegion("re8036"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "駅周辺に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" }, { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8386", name: "諏訪湖", slug: "suwako-e8", description: "長野県のほぼ中央に位置する大きな湖で、冬のワカサギ釣りが風物詩。ドーム船での釣りは暖かく快適で、初心者やファミリーにも大人気。夏はブラックバスも。", latitude: 36.050, longitude: 138.085, address: "〒392-0027 長野県諏訪市湖岸通り", accessInfo: "JR中央本線上諏訪駅から徒歩約10分", region: localRegion("re8036"), spotType: "river", difficulty: "beginner", isFree: false, hasParking: true, parkingDetail: "湖畔に有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.2, reviewCount: 0, catchableFish: [{ fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ドーム船" }, { fish: fish("koi"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "吸い込み釣り" }, { fish: fish("herabuna"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラウキ釣り" }], bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8387", name: "野尻湖", slug: "nojiriko-e8", description: "長野県北部のカルデラ湖で、スモールマウスバスの聖地として全国的に有名。クリアウォーターの中での繊細なバスフィッシングが楽しめ、上級者に人気。", latitude: 36.828, longitude: 138.225, address: "〒389-1303 長野県上水内郡信濃町野尻", accessInfo: "しなの鉄道北しなの線黒姫駅から車で約10分", region: localRegion("re8037"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "湖畔に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.1, reviewCount: 0, catchableFish: [{ fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ドーム船" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8388", name: "犀川（安曇野）", slug: "saigawa-azumino-e8", description: "安曇野を流れる犀川はトラウトフィッシングの名川。大型ニジマスやブラウントラウトの実績が高く、北アルプスを望みながらの釣りは格別。", latitude: 36.335, longitude: 137.902, address: "〒399-8204 長野県安曇野市豊科高家", accessInfo: "JR大糸線豊科駅から車で約10分", region: localRegion("re8037"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "河川沿いに駐車スペースあり", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8389", name: "千曲川（佐久エリア）", slug: "chikumagawa-saku-e8", description: "日本一長い信濃川の上流にあたる千曲川。佐久エリアは流れが穏やかでヤマメやイワナの渓流釣りに適し、夏にはアユの友釣りも楽しめる。", latitude: 36.247, longitude: 138.477, address: "〒385-0011 長野県佐久市猿久保", accessInfo: "JR小海線佐久平駅から車で約15分", region: localRegion("re8036"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "河川敷に駐車可能", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" }, { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8390", name: "木崎湖", slug: "kizakiko-e8", description: "大町市の仁科三湖の一つで、ワカサギとバス釣りの人気湖。周囲が小さく穴場的な雰囲気で、ボートからも岸からも手軽に楽しめる。", latitude: 36.582, longitude: 137.858, address: "〒398-0001 長野県大町市平木崎湖", accessInfo: "JR大糸線稲尾駅から徒歩約5分", region: localRegion("re8037"), spotType: "river", difficulty: "beginner", isFree: false, hasParking: true, parkingDetail: "湖畔に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ドーム船" }, { fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8391", name: "天竜川（伊那エリア）", slug: "tenryugawa-ina-e8", description: "諏訪湖から太平洋に注ぐ天竜川の上流域。伊那谷を流れる区間はアユの友釣りが盛んで、解禁日には河原が釣り人で賑わう。南アルプスの眺望も素晴らしい。", latitude: 35.832, longitude: 137.960, address: "〒396-0025 長野県伊那市荒井", accessInfo: "JR飯田線伊那市駅から車で約10分", region: localRegion("re8036"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "河川敷に駐車スペースあり", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0, catchableFish: [{ fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝", method: "ルアー" }, { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8392", name: "白樺湖", slug: "shirakabako-e8", description: "茅野市と立科町にまたがる高原の湖。標高1,400mの涼しい環境でニジマス釣りが楽しめ、レンタルボートも充実。夏の避暑地としても人気。", latitude: 36.107, longitude: 138.218, address: "〒391-0301 長野県茅野市北山白樺湖", accessInfo: "中央自動車道諏訪ICから車で約40分", region: localRegion("re8036"), spotType: "river", difficulty: "beginner", isFree: false, hasParking: true, parkingDetail: "湖畔に有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ドーム船" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8393", name: "梓川（上高地入口）", slug: "azusagawa-kamikochi-e8", description: "北アルプスから流れ出る梓川で、イワナの渓流釣りが体験できる。上高地に向かう途中の美しい渓谷で、圧倒的な自然の中での釣りは至極の体験。", latitude: 36.190, longitude: 137.705, address: "〒390-1516 長野県松本市安曇", accessInfo: "松本電鉄新島々駅から車で約30分", region: localRegion("re8037"), spotType: "river", difficulty: "advanced", isFree: false, hasParking: true, parkingDetail: "入渓点付近に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" }, { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フライ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8394", name: "松原湖", slug: "matsubarako-e8", description: "小海町にある高原の湖で、標高1,123mに位置する。冬は氷上ワカサギ釣りの名所として知られ、氷の上にテントを張る独特の風景が広がる。", latitude: 36.068, longitude: 138.468, address: "〒384-1103 長野県南佐久郡小海町豊里", accessInfo: "JR小海線松原湖駅から車で約5分", region: localRegion("re8036"), spotType: "river", difficulty: "beginner", isFree: false, hasParking: true, parkingDetail: "湖畔に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("wakasagi"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "氷上穴釣り" }, { fish: fish("herabuna"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラウキ釣り" }], bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8395", name: "奈良井川", slug: "naraigawa-e8", description: "塩尻市を流れる奈良井川で、中山道の宿場町を背景にした渓流釣りが楽しめる。ヤマメやイワナが生息し、歴史ある街道沿いでの穏やかな釣行が魅力。", latitude: 36.082, longitude: 137.932, address: "〒399-6303 長野県塩尻市奈良井", accessInfo: "JR中央本線奈良井駅から徒歩約5分", region: localRegion("re8036"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "駅周辺に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" }, { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
   // =========================================
   // 岐阜県（10スポット: se8196〜se8205）
   // =========================================
-  { id: "se8196", name: "長良川（郡上八幡）", slug: "nagaragawa-gujohachiman-e8", description: "日本三大清流の一つ、長良川の郡上八幡エリア。アユの友釣り発祥の地ともされ、夏の解禁期間は全国から釣り師が集まる。城下町の風情も堪能できる。", latitude: 35.752, longitude: 136.965, address: "〒501-4226 岐阜県郡上市八幡町", accessInfo: "長良川鉄道郡上八幡駅から徒歩約10分", region: localRegion("re8038"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "河川沿いに駐車スペースあり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.5, reviewCount: 0, catchableFish: [{ fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" }, { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8197", name: "高原川（奥飛騨）", slug: "takaharagawa-okuhida-e8", description: "北アルプスの麓を流れる高原川で、イワナの天然魚が生息する渓流。奥飛騨温泉郷の近くにあり、釣りと温泉を楽しむ贅沢な旅が人気。", latitude: 36.280, longitude: 137.390, address: "〒506-1421 岐阜県高山市奥飛騨温泉郷", accessInfo: "JR高山本線高山駅からバスで約60分", region: localRegion("re8038"), spotType: "river", difficulty: "advanced", isFree: false, hasParking: true, parkingDetail: "温泉施設周辺に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.1, reviewCount: 0, catchableFish: [{ fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" }, { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フライ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8198", name: "揖斐川（揖斐川町）", slug: "ibigawa-ibigawacho-e8", description: "揖斐川町の上流域で、アユやアマゴの渓流釣りが楽しめる。深い渓谷を流れる清流で、自然豊かな環境での釣りは心身のリフレッシュに最適。", latitude: 35.498, longitude: 136.572, address: "〒501-0619 岐阜県揖斐郡揖斐川町", accessInfo: "養老鉄道揖斐駅から車で約20分", region: localRegion("re8039"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "河川沿いに駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8199", name: "付知川", slug: "tsukechigawa-e8", description: "中津川市を流れる付知川は「森林浴の森100選」にも選ばれた渓谷美の中での釣りが魅力。清流でのアマゴ釣りが有名で、夏場は川遊びとの共存が楽しい。", latitude: 35.618, longitude: 137.322, address: "〒508-0351 岐阜県中津川市付知町", accessInfo: "JR中央本線中津川駅から車で約30分", region: localRegion("re8038"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "川沿いに駐車スペースあり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0, catchableFish: [{ fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" }, { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8200", name: "馬瀬川", slug: "mazegawa-e8", description: "下呂市を流れる馬瀬川は、全国屈指のアユの友釣り名川。清冽な水質と豊富な水量で、良型のアユが育つ。毎年解禁日は多くの太公望で賑わう。", latitude: 35.810, longitude: 137.112, address: "〒509-2615 岐阜県下呂市馬瀬", accessInfo: "JR高山本線飛騨萩原駅から車で約20分", region: localRegion("re8038"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "河川沿いに駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.2, reviewCount: 0, catchableFish: [{ fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8201", name: "板取川", slug: "itadorigawa-e8", description: "関市と美濃市を流れる板取川は「日本一きれいな川」にも選ばれた清流。エメラルドグリーンの水にアユやアマゴが泳ぎ、透明度の高さは別格。", latitude: 35.705, longitude: 136.878, address: "〒501-2901 岐阜県関市板取", accessInfo: "東海北陸自動車道美濃ICから車で約30分", region: localRegion("re8038"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "川沿いに駐車スペースあり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8202", name: "飛騨川（下呂温泉）", slug: "hidagawa-gero-e8", description: "日本三名泉の下呂温泉を流れる飛騨川。アユとアマゴが主な対象魚で、温泉街を流れる川で釣りができるのは下呂ならではの贅沢。夕方は温泉で疲れを癒せる。", latitude: 35.805, longitude: 137.240, address: "〒509-2202 岐阜県下呂市森", accessInfo: "JR高山本線下呂駅から徒歩約10分", region: localRegion("re8038"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "温泉街に有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8203", name: "根尾川", slug: "neogawa-e8", description: "本巣市を流れる根尾川で、アユの友釣りとアマゴの渓流釣りが楽しめる。淡墨桜で有名な根尾谷の自然に囲まれた静かな環境が魅力。", latitude: 35.585, longitude: 136.598, address: "〒501-1532 岐阜県本巣市根尾", accessInfo: "樽見鉄道樽見駅から徒歩約10分", region: localRegion("re8039"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "駅周辺に駐車スペースあり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8204", name: "木曽川（各務原エリア）", slug: "kisogawa-kakamigahara-e8", description: "各務原市の木曽川河川敷はバスフィッシングとコイ釣りの人気ポイント。広大な河川敷でのんびり釣りができ、犬山城を眺めながらの釣りも楽しめる。", latitude: 35.405, longitude: 136.968, address: "〒509-0141 岐阜県各務原市鵜沼各務原町", accessInfo: "名鉄各務原線鵜沼宿駅から徒歩約15分", region: localRegion("re8039"), spotType: "river", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("koi"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "吸い込み釣り" }, { fish: fish("oikawa"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "毛ばり釣り" }, { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }], bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
-  { id: "se8205", name: "大垣・水門川", slug: "ogaki-suimongawa-e8", description: "大垣市の中心部を流れる水門川。「水の都」と呼ばれる大垣の象徴的な川で、ヘラブナやコイの釣りが市街地で手軽に楽しめる。桜の季節は特に風情がある。", latitude: 35.362, longitude: 136.613, address: "〒503-0905 岐阜県大垣市宮町", accessInfo: "JR東海道本線大垣駅から徒歩約10分", region: localRegion("re8039"), spotType: "river", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "周辺にコインパーキングあり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.3, reviewCount: 0, catchableFish: [{ fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラウキ釣り" }, { fish: fish("koi"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "吸い込み釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8396", name: "長良川（郡上八幡）", slug: "nagaragawa-gujohachiman-e8", description: "日本三大清流の一つ、長良川の郡上八幡エリア。アユの友釣り発祥の地ともされ、夏の解禁期間は全国から釣り師が集まる。城下町の風情も堪能できる。", latitude: 35.752, longitude: 136.965, address: "〒501-4226 岐阜県郡上市八幡町", accessInfo: "長良川鉄道郡上八幡駅から徒歩約10分", region: localRegion("re8038"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "河川沿いに駐車スペースあり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.5, reviewCount: 0, catchableFish: [{ fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" }, { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8397", name: "高原川（奥飛騨）", slug: "takaharagawa-okuhida-e8", description: "北アルプスの麓を流れる高原川で、イワナの天然魚が生息する渓流。奥飛騨温泉郷の近くにあり、釣りと温泉を楽しむ贅沢な旅が人気。", latitude: 36.280, longitude: 137.390, address: "〒506-1421 岐阜県高山市奥飛騨温泉郷", accessInfo: "JR高山本線高山駅からバスで約60分", region: localRegion("re8038"), spotType: "river", difficulty: "advanced", isFree: false, hasParking: true, parkingDetail: "温泉施設周辺に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.1, reviewCount: 0, catchableFish: [{ fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" }, { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フライ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8398", name: "揖斐川（揖斐川町）", slug: "ibigawa-ibigawacho-e8", description: "揖斐川町の上流域で、アユやアマゴの渓流釣りが楽しめる。深い渓谷を流れる清流で、自然豊かな環境での釣りは心身のリフレッシュに最適。", latitude: 35.498, longitude: 136.572, address: "〒501-0619 岐阜県揖斐郡揖斐川町", accessInfo: "養老鉄道揖斐駅から車で約20分", region: localRegion("re8039"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "河川沿いに駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8399", name: "付知川", slug: "tsukechigawa-e8", description: "中津川市を流れる付知川は「森林浴の森100選」にも選ばれた渓谷美の中での釣りが魅力。清流でのアマゴ釣りが有名で、夏場は川遊びとの共存が楽しい。", latitude: 35.618, longitude: 137.322, address: "〒508-0351 岐阜県中津川市付知町", accessInfo: "JR中央本線中津川駅から車で約30分", region: localRegion("re8038"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "川沿いに駐車スペースあり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0, catchableFish: [{ fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" }, { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8400", name: "馬瀬川", slug: "mazegawa-e8", description: "下呂市を流れる馬瀬川は、全国屈指のアユの友釣り名川。清冽な水質と豊富な水量で、良型のアユが育つ。毎年解禁日は多くの太公望で賑わう。", latitude: 35.810, longitude: 137.112, address: "〒509-2615 岐阜県下呂市馬瀬", accessInfo: "JR高山本線飛騨萩原駅から車で約20分", region: localRegion("re8038"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "河川沿いに駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.2, reviewCount: 0, catchableFish: [{ fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8401", name: "板取川", slug: "itadorigawa-e8", description: "関市と美濃市を流れる板取川は「日本一きれいな川」にも選ばれた清流。エメラルドグリーンの水にアユやアマゴが泳ぎ、透明度の高さは別格。", latitude: 35.705, longitude: 136.878, address: "〒501-2901 岐阜県関市板取", accessInfo: "東海北陸自動車道美濃ICから車で約30分", region: localRegion("re8038"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "川沿いに駐車スペースあり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8402", name: "飛騨川（下呂温泉）", slug: "hidagawa-gero-e8", description: "日本三名泉の下呂温泉を流れる飛騨川。アユとアマゴが主な対象魚で、温泉街を流れる川で釣りができるのは下呂ならではの贅沢。夕方は温泉で疲れを癒せる。", latitude: 35.805, longitude: 137.240, address: "〒509-2202 岐阜県下呂市森", accessInfo: "JR高山本線下呂駅から徒歩約10分", region: localRegion("re8038"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "温泉街に有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8403", name: "根尾川", slug: "neogawa-e8", description: "本巣市を流れる根尾川で、アユの友釣りとアマゴの渓流釣りが楽しめる。淡墨桜で有名な根尾谷の自然に囲まれた静かな環境が魅力。", latitude: 35.585, longitude: 136.598, address: "〒501-1532 岐阜県本巣市根尾", accessInfo: "樽見鉄道樽見駅から徒歩約10分", region: localRegion("re8039"), spotType: "river", difficulty: "intermediate", isFree: false, hasParking: true, parkingDetail: "駅周辺に駐車スペースあり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }, { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8404", name: "木曽川（各務原エリア）", slug: "kisogawa-kakamigahara-e8", description: "各務原市の木曽川河川敷はバスフィッシングとコイ釣りの人気ポイント。広大な河川敷でのんびり釣りができ、犬山城を眺めながらの釣りも楽しめる。", latitude: 35.405, longitude: 136.968, address: "〒509-0141 岐阜県各務原市鵜沼各務原町", accessInfo: "名鉄各務原線鵜沼宿駅から徒歩約15分", region: localRegion("re8039"), spotType: "river", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("koi"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "吸い込み釣り" }, { fish: fish("oikawa"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "毛ばり釣り" }, { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" }], bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
+  { id: "se8405", name: "大垣・水門川", slug: "ogaki-suimongawa-e8", description: "大垣市の中心部を流れる水門川。「水の都」と呼ばれる大垣の象徴的な川で、ヘラブナやコイの釣りが市街地で手軽に楽しめる。桜の季節は特に風情がある。", latitude: 35.362, longitude: 136.613, address: "〒503-0905 岐阜県大垣市宮町", accessInfo: "JR東海道本線大垣駅から徒歩約10分", region: localRegion("re8039"), spotType: "river", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "周辺にコインパーキングあり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.3, reviewCount: 0, catchableFish: [{ fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "ヘラウキ釣り" }, { fish: fish("koi"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "吸い込み釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeInland },
   // =========================================
   // 静岡県（25スポット: se8206〜se8230）
   // =========================================
-  { id: "se8206", name: "沼津港外防波堤", slug: "numazu-sotobouchoutei-e8", description: "沼津港の外側に伸びる大型防波堤で、回遊魚の実績が抜群。青物のナブラが立つこともあり、ショアジギングファンには外せないポイント。富士山と駿河湾の絶景。", latitude: 35.093, longitude: 138.860, address: "〒410-0845 静岡県沼津市千本港町", accessInfo: "JR東海道本線沼津駅からバスで約15分", region: localRegion("re8040"), spotType: "breakwater", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.3, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" }, { fish: fish("saba"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8207", name: "戸田港", slug: "heda-kou-e8", description: "伊豆半島西岸の天然の良港。深い入り江で波が穏やかなため、家族連れにも安心。タカアシガニで有名な戸田だが、釣りでもアジやメジナが狙える。", latitude: 34.970, longitude: 138.780, address: "〒410-3402 静岡県沼津市戸田", accessInfo: "伊豆箱根鉄道修善寺駅からバスで約50分", region: localRegion("re8040"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8208", name: "土肥港", slug: "toi-kou-e8", description: "伊豆半島西岸の港で、駿河湾に面した穏やかな釣り場。港内でのサビキ釣りが手軽で、夕方のアジの回遊は数釣りが期待できる。土肥温泉も近い。", latitude: 34.910, longitude: 138.772, address: "〒410-3302 静岡県伊豆市土肥", accessInfo: "伊豆箱根鉄道修善寺駅からバスで約50分", region: localRegion("re8040"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8209", name: "焼津港・小川港", slug: "yaizu-ogawa-kou-e8", description: "カツオの水揚げで日本一を誇る焼津の港。堤防からのサビキ釣りでアジやイワシが狙え、秋にはタチウオの回遊もある。港町の活気を感じながらの釣り。", latitude: 34.867, longitude: 138.327, address: "〒425-0021 静岡県焼津市中港", accessInfo: "JR東海道本線焼津駅から徒歩約20分", region: localRegion("re8041"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("iwashi"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" }, { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8210", name: "御前崎港", slug: "omaezaki-kou-e8", description: "静岡県最南端の岬にある港で、黒潮の影響を受ける好漁場。カツオやシイラなどの回遊魚が狙え、磯釣りではイシダイの実績も高い。風が強い日が多いので注意。", latitude: 34.598, longitude: 138.225, address: "〒437-1621 静岡県御前崎市御前崎", accessInfo: "JR東海道本線菊川駅からバスで約40分", region: localRegion("re8041"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.1, reviewCount: 0, catchableFish: [{ fish: fish("ishidai"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ぶっ込み釣り" }, { fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" }, { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8211", name: "浜名湖・舞阪漁港", slug: "hamanako-maisaka-e8", description: "浜名湖の入り口にあたる舞阪漁港。汽水域と外海の魚が交じり合い、クロダイ・キビレ・シーバスなど多彩なターゲットが狙える。今切口の激流ポイントも有名。", latitude: 34.682, longitude: 137.595, address: "〒431-0211 静岡県浜松市中央区舞阪町舞阪", accessInfo: "JR東海道本線舞阪駅から徒歩約15分", region: localRegion("re8042"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.2, reviewCount: 0, catchableFish: [{ fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8212", name: "浜名湖・村櫛海岸", slug: "hamanako-murakushi-e8", description: "浜名湖の南岸に位置する遠浅の海岸。ウェーディングでのシーバスやクロダイ狙いが人気で、広大な干潟が広がる潮干狩りスポットとしても知られる。", latitude: 34.708, longitude: 137.612, address: "〒431-1207 静岡県浜松市中央区村櫛町", accessInfo: "JR東海道本線弁天島駅から車で約10分", region: localRegion("re8042"), spotType: "beach", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "海岸沿いに駐車スペースあり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー" }, { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8213", name: "清水港・日の出埠頭", slug: "shimizu-hinode-futou-e8", description: "清水港の公共埠頭で、富士山をバックにした釣りが楽しめる。足場が広く安全で、アジやサバのサビキ釣りからタチウオの夜釣りまで多彩に楽しめる。", latitude: 35.012, longitude: 138.498, address: "〒424-0922 静岡県静岡市清水区日の出町", accessInfo: "JR東海道本線清水駅からバスで約10分", region: localRegion("re8043"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "埠頭に無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ" }, { fish: fish("saba"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8214", name: "由比港", slug: "yui-kou-e8", description: "桜えびで有名な由比の小さな港。東海道の宿場町の風情が残り、堤防からのんびりアジやメバルを狙える。春の桜えび漁の時期は港が活気づく。", latitude: 35.098, longitude: 138.470, address: "〒421-3113 静岡県静岡市清水区由比", accessInfo: "JR東海道本線由比駅から徒歩約15分", region: localRegion("re8043"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "メバリング" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8215", name: "用宗港", slug: "mochimune-kou-e8", description: "静岡市の小さな漁港で、シラス漁で知られる。堤防先端からの投げ釣りでキスが狙え、秋にはアオリイカのエギングも人気。港内は足場が良く初心者にも安心。", latitude: 34.945, longitude: 138.368, address: "〒421-0122 静岡県静岡市駿河区用宗", accessInfo: "JR東海道本線用宗駅から徒歩約10分", region: localRegion("re8043"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("aori-ika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }, { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8216", name: "大井川港", slug: "oigawa-kou-e8", description: "大井川河口に位置する港で、シーバスの好ポイント。河口特有の濁りがシーバスを呼び、秋の落ちアユパターンは特に熱い。投げ釣りでキスやハゼも。", latitude: 34.805, longitude: 138.283, address: "〒421-0213 静岡県焼津市飯淵", accessInfo: "JR東海道本線焼津駅から車で約15分", region: localRegion("re8041"), spotType: "river", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "河口付近に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }], bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8217", name: "遠州灘サーフ（中田島）", slug: "enshuunada-nakatajima-e8", description: "浜松市の中田島砂丘前に広がるサーフ。遠州灘のサーフフィッシングは全国的に有名で、ヒラメやマゴチの砂物狙いが熱い。秋にはブリクラスの青物も回遊する。", latitude: 34.635, longitude: 137.755, address: "〒430-0845 静岡県浜松市中央区中田島町", accessInfo: "JR東海道本線浜松駅から車で約15分", region: localRegion("re8042"), spotType: "beach", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "砂丘入口に無料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.2, reviewCount: 0, catchableFish: [{ fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("magochi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
-  { id: "se8218", name: "新居海釣公園", slug: "arai-umizuri-kouen-e8", description: "浜名湖の入り口近くにある海釣り公園で、足場が良く柵もあるため初心者やファミリーに最適。クロダイやキスなど多彩な魚種が狙え、レンタル竿もある。", latitude: 34.688, longitude: 137.565, address: "〒431-0302 静岡県湖西市新居町新居", accessInfo: "JR東海道本線新居町駅から徒歩約15分", region: localRegion("re8042"), spotType: "park", difficulty: "beginner", isFree: false, hasParking: true, parkingDetail: "公園駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8219", name: "田子の浦港", slug: "tagonoura-kou-e8", description: "富士市の港で、富士山を間近に望みながらの釣りが楽しめる。しらす漁で有名だが、堤防からのサビキ釣りやルアーでのシーバスも人気。田子の浦しらす丼も名物。", latitude: 35.142, longitude: 138.682, address: "〒416-0937 静岡県富士市前田", accessInfo: "JR東海道本線吉原駅から車で約10分", region: localRegion("re8040"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8220", name: "三保海岸", slug: "miho-kaigan-e8", description: "世界遺産・三保の松原で有名な砂浜。投げ釣りでキスが狙え、ルアーでヒラメやマゴチも。駿河湾の向こうに富士山を望む絶景の中での釣りは格別の体験。", latitude: 34.990, longitude: 138.522, address: "〒424-0901 静岡県静岡市清水区三保", accessInfo: "JR東海道本線清水駅からバスで約25分", region: localRegion("re8043"), spotType: "beach", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "三保の松原駐車場あり（無料）", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("magochi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
-  { id: "se8221", name: "福田港", slug: "fukude-kou-e8", description: "磐田市の遠州灘に面した港で、しらす漁の基地として知られる。堤防からの投げ釣りでキスやカレイが狙え、秋にはタチウオの夜釣りも人気。", latitude: 34.633, longitude: 137.875, address: "〒437-1203 静岡県磐田市福田", accessInfo: "JR東海道本線磐田駅から車で約20分", region: localRegion("re8042"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8222", name: "下田港・犬走島", slug: "shimoda-inubashiri-e8", description: "下田港内にある犬走島の堤防で、黒潮の恩恵を受ける豊かな海。グレやイシダイの磯釣りから、アオリイカのエギングまで幅広く楽しめる。下田の観光とセットで。", latitude: 34.670, longitude: 138.950, address: "〒415-0023 静岡県下田市三丁目", accessInfo: "伊豆急下田駅から徒歩約15分", region: localRegion("re8040"), spotType: "breakwater", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("aori-ika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }, { fish: fish("ishidai"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ぶっ込み釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeChubu },
-  { id: "se8223", name: "相良港", slug: "sagara-kou-e8", description: "牧之原市の小さな漁港で、駿河湾に面する。堤防からの投げ釣りでキスやカレイが狙え、春秋にはアオリイカのエギングも人気。のどかな雰囲気が魅力。", latitude: 34.688, longitude: 138.195, address: "〒421-0522 静岡県牧之原市相良", accessInfo: "JR東海道本線菊川駅からバスで約25分", region: localRegion("re8041"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("aori-ika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8224", name: "熱海港海釣り施設", slug: "atami-umizuri-shisetsu-e8", description: "熱海温泉街に近い海釣り施設で、初心者やファミリーに人気。レンタル竿や仕掛けも充実し、手ぶらで楽しめる。相模灘に面し、アジやメジナなどが狙える。", latitude: 35.095, longitude: 139.078, address: "〒413-0023 静岡県熱海市和田浜南町", accessInfo: "JR東海道本線熱海駅からバスで約10分", region: localRegion("re8040"), spotType: "park", difficulty: "beginner", isFree: false, hasParking: true, parkingDetail: "施設駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8225", name: "天竜川河口", slug: "tenryugawa-kakou-e8", description: "天竜川が太平洋に注ぐ河口域で、シーバスフィッシングの超有名ポイント。広大な砂州が広がり、ヒラメやマゴチも狙える。秋の落ちアユパターンは必見。", latitude: 34.652, longitude: 137.802, address: "〒431-0302 静岡県浜松市中央区中田島町", accessInfo: "JR東海道本線浜松駅から車で約20分", region: localRegion("re8042"), spotType: "river", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "河口付近に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.1, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー" }, { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("magochi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8226", name: "西伊豆・安良里港", slug: "nishiizu-arari-kou-e8", description: "西伊豆の入り江にある小さな漁港。透明度が高い海でアオリイカのサイトエギングが楽しめ、秋のエギングシーズンは特に人気。のどかな漁村の雰囲気も良い。", latitude: 34.845, longitude: 138.765, address: "〒410-3502 静岡県賀茂郡西伊豆町安良里", accessInfo: "伊豆箱根鉄道修善寺駅からバスで約70分", region: localRegion("re8040"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("aori-ika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }, { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8227", name: "掛川・菊川河口", slug: "kakegawa-kikugawa-kakou-e8", description: "掛川市と菊川の河口域。シーバスとクロダイのルアーフィッシングが盛んで、秋の落ちアユパターンではランカーシーバスの実績もある。夜釣りが特におすすめ。", latitude: 34.660, longitude: 138.105, address: "〒437-1302 静岡県掛川市大坂", accessInfo: "JR東海道本線菊川駅から車で約15分", region: localRegion("re8041"), spotType: "river", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "河口付近に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8228", name: "稲取港", slug: "inatori-kou-e8", description: "東伊豆の温泉町にある港で、金目鯛で有名。堤防からのサビキ釣りでアジが手軽に釣れ、磯場ではメジナやイシダイも。稲取温泉の帰りに立ち寄れる好立地。", latitude: 34.777, longitude: 139.045, address: "〒413-0411 静岡県賀茂郡東伊豆町稲取", accessInfo: "伊豆急行線伊豆稲取駅から徒歩約10分", region: localRegion("re8040"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8229", name: "伊東港・白灯台堤防", slug: "ito-shirotoudai-e8", description: "伊東市の港にある白灯台堤防は、相模灘に面した人気の釣り場。アジやサバのサビキ釣りから、青物のショアジギングまで楽しめる。伊東温泉も近い。", latitude: 34.968, longitude: 139.108, address: "〒414-0002 静岡県伊東市湯川", accessInfo: "JR伊東線伊東駅から徒歩約15分", region: localRegion("re8040"), spotType: "breakwater", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" }, { fish: fish("saba"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8230", name: "湖西・表鷲津", slug: "kosai-omotewashizu-e8", description: "湖西市の浜名湖北岸エリアで、クロダイとキビレのルアーフィッシングが盛ん。浅瀬のフラットが広がり、ウェーディングでの釣りが楽しめる。", latitude: 34.718, longitude: 137.530, address: "〒431-0431 静岡県湖西市鷲津", accessInfo: "JR東海道本線鷲津駅から車で約10分", region: localRegion("re8042"), spotType: "beach", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "湖岸に駐車スペースあり", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8406", name: "沼津港外防波堤", slug: "numazu-sotobouchoutei-e8", description: "沼津港の外側に伸びる大型防波堤で、回遊魚の実績が抜群。青物のナブラが立つこともあり、ショアジギングファンには外せないポイント。富士山と駿河湾の絶景。", latitude: 35.093, longitude: 138.860, address: "〒410-0845 静岡県沼津市千本港町", accessInfo: "JR東海道本線沼津駅からバスで約15分", region: localRegion("re8040"), spotType: "breakwater", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.3, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" }, { fish: fish("saba"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8407", name: "戸田港", slug: "heda-kou-e8", description: "伊豆半島西岸の天然の良港。深い入り江で波が穏やかなため、家族連れにも安心。タカアシガニで有名な戸田だが、釣りでもアジやメジナが狙える。", latitude: 34.970, longitude: 138.780, address: "〒410-3402 静岡県沼津市戸田", accessInfo: "伊豆箱根鉄道修善寺駅からバスで約50分", region: localRegion("re8040"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8408", name: "土肥港", slug: "toi-kou-e8", description: "伊豆半島西岸の港で、駿河湾に面した穏やかな釣り場。港内でのサビキ釣りが手軽で、夕方のアジの回遊は数釣りが期待できる。土肥温泉も近い。", latitude: 34.910, longitude: 138.772, address: "〒410-3302 静岡県伊豆市土肥", accessInfo: "伊豆箱根鉄道修善寺駅からバスで約50分", region: localRegion("re8040"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8409", name: "焼津港・小川港", slug: "yaizu-ogawa-kou-e8", description: "カツオの水揚げで日本一を誇る焼津の港。堤防からのサビキ釣りでアジやイワシが狙え、秋にはタチウオの回遊もある。港町の活気を感じながらの釣り。", latitude: 34.867, longitude: 138.327, address: "〒425-0021 静岡県焼津市中港", accessInfo: "JR東海道本線焼津駅から徒歩約20分", region: localRegion("re8041"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("iwashi"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" }, { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8410", name: "御前崎港", slug: "omaezaki-kou-e8", description: "静岡県最南端の岬にある港で、黒潮の影響を受ける好漁場。カツオやシイラなどの回遊魚が狙え、磯釣りではイシダイの実績も高い。風が強い日が多いので注意。", latitude: 34.598, longitude: 138.225, address: "〒437-1621 静岡県御前崎市御前崎", accessInfo: "JR東海道本線菊川駅からバスで約40分", region: localRegion("re8041"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.1, reviewCount: 0, catchableFish: [{ fish: fish("ishidai"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ぶっ込み釣り" }, { fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" }, { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8411", name: "浜名湖・舞阪漁港", slug: "hamanako-maisaka-e8", description: "浜名湖の入り口にあたる舞阪漁港。汽水域と外海の魚が交じり合い、クロダイ・キビレ・シーバスなど多彩なターゲットが狙える。今切口の激流ポイントも有名。", latitude: 34.682, longitude: 137.595, address: "〒431-0211 静岡県浜松市中央区舞阪町舞阪", accessInfo: "JR東海道本線舞阪駅から徒歩約15分", region: localRegion("re8042"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.2, reviewCount: 0, catchableFish: [{ fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8412", name: "浜名湖・村櫛海岸", slug: "hamanako-murakushi-e8", description: "浜名湖の南岸に位置する遠浅の海岸。ウェーディングでのシーバスやクロダイ狙いが人気で、広大な干潟が広がる潮干狩りスポットとしても知られる。", latitude: 34.708, longitude: 137.612, address: "〒431-1207 静岡県浜松市中央区村櫛町", accessInfo: "JR東海道本線弁天島駅から車で約10分", region: localRegion("re8042"), spotType: "beach", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "海岸沿いに駐車スペースあり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー" }, { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8413", name: "清水港・日の出埠頭", slug: "shimizu-hinode-futou-e8", description: "清水港の公共埠頭で、富士山をバックにした釣りが楽しめる。足場が広く安全で、アジやサバのサビキ釣りからタチウオの夜釣りまで多彩に楽しめる。", latitude: 35.012, longitude: 138.498, address: "〒424-0922 静岡県静岡市清水区日の出町", accessInfo: "JR東海道本線清水駅からバスで約10分", region: localRegion("re8043"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "埠頭に無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ" }, { fish: fish("saba"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8414", name: "由比港", slug: "yui-kou-e8", description: "桜えびで有名な由比の小さな港。東海道の宿場町の風情が残り、堤防からのんびりアジやメバルを狙える。春の桜えび漁の時期は港が活気づく。", latitude: 35.098, longitude: 138.470, address: "〒421-3113 静岡県静岡市清水区由比", accessInfo: "JR東海道本線由比駅から徒歩約15分", region: localRegion("re8043"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "メバリング" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8415", name: "用宗港", slug: "mochimune-kou-e8", description: "静岡市の小さな漁港で、シラス漁で知られる。堤防先端からの投げ釣りでキスが狙え、秋にはアオリイカのエギングも人気。港内は足場が良く初心者にも安心。", latitude: 34.945, longitude: 138.368, address: "〒421-0122 静岡県静岡市駿河区用宗", accessInfo: "JR東海道本線用宗駅から徒歩約10分", region: localRegion("re8043"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }, { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8416", name: "大井川港", slug: "oigawa-kou-e8", description: "大井川河口に位置する港で、シーバスの好ポイント。河口特有の濁りがシーバスを呼び、秋の落ちアユパターンは特に熱い。投げ釣りでキスやハゼも。", latitude: 34.805, longitude: 138.283, address: "〒421-0213 静岡県焼津市飯淵", accessInfo: "JR東海道本線焼津駅から車で約15分", region: localRegion("re8041"), spotType: "river", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "河口付近に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }], bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8417", name: "遠州灘サーフ（中田島）", slug: "enshuunada-nakatajima-e8", description: "浜松市の中田島砂丘前に広がるサーフ。遠州灘のサーフフィッシングは全国的に有名で、ヒラメやマゴチの砂物狙いが熱い。秋にはブリクラスの青物も回遊する。", latitude: 34.635, longitude: 137.755, address: "〒430-0845 静岡県浜松市中央区中田島町", accessInfo: "JR東海道本線浜松駅から車で約15分", region: localRegion("re8042"), spotType: "beach", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "砂丘入口に無料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.2, reviewCount: 0, catchableFish: [{ fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("magochi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
+  { id: "se8418", name: "新居海釣公園", slug: "arai-umizuri-kouen-e8", description: "浜名湖の入り口近くにある海釣り公園で、足場が良く柵もあるため初心者やファミリーに最適。クロダイやキスなど多彩な魚種が狙え、レンタル竿もある。", latitude: 34.688, longitude: 137.565, address: "〒431-0302 静岡県湖西市新居町新居", accessInfo: "JR東海道本線新居町駅から徒歩約15分", region: localRegion("re8042"), spotType: "pier", difficulty: "beginner", isFree: false, hasParking: true, parkingDetail: "公園駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8419", name: "田子の浦港", slug: "tagonoura-kou-e8", description: "富士市の港で、富士山を間近に望みながらの釣りが楽しめる。しらす漁で有名だが、堤防からのサビキ釣りやルアーでのシーバスも人気。田子の浦しらす丼も名物。", latitude: 35.142, longitude: 138.682, address: "〒416-0937 静岡県富士市前田", accessInfo: "JR東海道本線吉原駅から車で約10分", region: localRegion("re8040"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8420", name: "三保海岸", slug: "miho-kaigan-e8", description: "世界遺産・三保の松原で有名な砂浜。投げ釣りでキスが狙え、ルアーでヒラメやマゴチも。駿河湾の向こうに富士山を望む絶景の中での釣りは格別の体験。", latitude: 34.990, longitude: 138.522, address: "〒424-0901 静岡県静岡市清水区三保", accessInfo: "JR東海道本線清水駅からバスで約25分", region: localRegion("re8043"), spotType: "beach", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "三保の松原駐車場あり（無料）", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("magochi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
+  { id: "se8421", name: "福田港", slug: "fukude-kou-e8", description: "磐田市の遠州灘に面した港で、しらす漁の基地として知られる。堤防からの投げ釣りでキスやカレイが狙え、秋にはタチウオの夜釣りも人気。", latitude: 34.633, longitude: 137.875, address: "〒437-1203 静岡県磐田市福田", accessInfo: "JR東海道本線磐田駅から車で約20分", region: localRegion("re8042"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8422", name: "下田港・犬走島", slug: "shimoda-inubashiri-e8", description: "下田港内にある犬走島の堤防で、黒潮の恩恵を受ける豊かな海。グレやイシダイの磯釣りから、アオリイカのエギングまで幅広く楽しめる。下田の観光とセットで。", latitude: 34.670, longitude: 138.950, address: "〒415-0023 静岡県下田市三丁目", accessInfo: "伊豆急下田駅から徒歩約15分", region: localRegion("re8040"), spotType: "breakwater", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }, { fish: fish("ishidai"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ぶっ込み釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeChubu },
+  { id: "se8423", name: "相良港", slug: "sagara-kou-e8", description: "牧之原市の小さな漁港で、駿河湾に面する。堤防からの投げ釣りでキスやカレイが狙え、春秋にはアオリイカのエギングも人気。のどかな雰囲気が魅力。", latitude: 34.688, longitude: 138.195, address: "〒421-0522 静岡県牧之原市相良", accessInfo: "JR東海道本線菊川駅からバスで約25分", region: localRegion("re8041"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8424", name: "熱海港海釣り施設", slug: "atami-umizuri-shisetsu-e8", description: "熱海温泉街に近い海釣り施設で、初心者やファミリーに人気。レンタル竿や仕掛けも充実し、手ぶらで楽しめる。相模灘に面し、アジやメジナなどが狙える。", latitude: 35.095, longitude: 139.078, address: "〒413-0023 静岡県熱海市和田浜南町", accessInfo: "JR東海道本線熱海駅からバスで約10分", region: localRegion("re8040"), spotType: "pier", difficulty: "beginner", isFree: false, hasParking: true, parkingDetail: "施設駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8425", name: "天竜川河口", slug: "tenryugawa-kakou-e8", description: "天竜川が太平洋に注ぐ河口域で、シーバスフィッシングの超有名ポイント。広大な砂州が広がり、ヒラメやマゴチも狙える。秋の落ちアユパターンは必見。", latitude: 34.652, longitude: 137.802, address: "〒431-0302 静岡県浜松市中央区中田島町", accessInfo: "JR東海道本線浜松駅から車で約20分", region: localRegion("re8042"), spotType: "river", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "河口付近に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.1, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー" }, { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("magochi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8426", name: "西伊豆・安良里港", slug: "nishiizu-arari-kou-e8", description: "西伊豆の入り江にある小さな漁港。透明度が高い海でアオリイカのサイトエギングが楽しめ、秋のエギングシーズンは特に人気。のどかな漁村の雰囲気も良い。", latitude: 34.845, longitude: 138.765, address: "〒410-3502 静岡県賀茂郡西伊豆町安良里", accessInfo: "伊豆箱根鉄道修善寺駅からバスで約70分", region: localRegion("re8040"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" }, { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8427", name: "掛川・菊川河口", slug: "kakegawa-kikugawa-kakou-e8", description: "掛川市と菊川の河口域。シーバスとクロダイのルアーフィッシングが盛んで、秋の落ちアユパターンではランカーシーバスの実績もある。夜釣りが特におすすめ。", latitude: 34.660, longitude: 138.105, address: "〒437-1302 静岡県掛川市大坂", accessInfo: "JR東海道本線菊川駅から車で約15分", region: localRegion("re8041"), spotType: "river", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "河口付近に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8428", name: "稲取港", slug: "inatori-kou-e8", description: "東伊豆の温泉町にある港で、金目鯛で有名。堤防からのサビキ釣りでアジが手軽に釣れ、磯場ではメジナやイシダイも。稲取温泉の帰りに立ち寄れる好立地。", latitude: 34.777, longitude: 139.045, address: "〒413-0411 静岡県賀茂郡東伊豆町稲取", accessInfo: "伊豆急行線伊豆稲取駅から徒歩約10分", region: localRegion("re8040"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8429", name: "伊東港・白灯台堤防", slug: "ito-shirotoudai-e8", description: "伊東市の港にある白灯台堤防は、相模灘に面した人気の釣り場。アジやサバのサビキ釣りから、青物のショアジギングまで楽しめる。伊東温泉も近い。", latitude: 34.968, longitude: 139.108, address: "〒414-0002 静岡県伊東市湯川", accessInfo: "JR伊東線伊東駅から徒歩約15分", region: localRegion("re8040"), spotType: "breakwater", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" }, { fish: fish("saba"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8430", name: "湖西・表鷲津", slug: "kosai-omotewashizu-e8", description: "湖西市の浜名湖北岸エリアで、クロダイとキビレのルアーフィッシングが盛ん。浅瀬のフラットが広がり、ウェーディングでの釣りが楽しめる。", latitude: 34.718, longitude: 137.530, address: "〒431-0431 静岡県湖西市鷲津", accessInfo: "JR東海道本線鷲津駅から車で約10分", region: localRegion("re8042"), spotType: "beach", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "湖岸に駐車スペースあり", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
   // =========================================
   // 愛知県（20スポット: se8231〜se8250）
   // =========================================
-  { id: "se8231", name: "師崎港", slug: "morozaki-kou-e8", description: "知多半島の先端にある港で、三河湾と伊勢湾の潮が交わる好漁場。大型のクロダイや青物の回遊があり、堤防釣りでも多彩なターゲットが狙える。篠島や日間賀島への船も出る。", latitude: 34.690, longitude: 136.955, address: "〒470-3503 愛知県知多郡南知多町師崎", accessInfo: "名鉄河和線河和駅からバスで約30分", region: localRegion("re8044"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.2, reviewCount: 0, catchableFish: [{ fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8232", name: "豊浜釣り桟橋", slug: "toyohama-tsuri-sanbashi-e8", description: "南知多町の釣り専用桟橋で、知多半島を代表する釣りスポット。足場が良くファミリーにも人気で、アジのサビキ釣りからカレイの投げ釣りまで四季を通じて楽しめる。", latitude: 34.712, longitude: 136.938, address: "〒470-3412 愛知県知多郡南知多町豊浜", accessInfo: "名鉄河和線河和駅からバスで約20分", region: localRegion("re8044"), spotType: "breakwater", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "桟橋周辺に無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.1, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8233", name: "常滑りんくう釣り護岸", slug: "tokoname-rinku-e8", description: "中部国際空港の対岸に位置する釣り護岸。飛行機の離着陸を見ながらの釣りが独特の体験。足場が良くファミリー向きで、サビキ釣りやちょい投げが楽しめる。", latitude: 34.855, longitude: 136.845, address: "〒479-0882 愛知県常滑市りんくう町", accessInfo: "名鉄常滑線りんくう常滑駅から徒歩約10分", region: localRegion("re8044"), spotType: "breakwater", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "りんくう駐車場あり（有料）", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }, { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8234", name: "渥美半島・伊良湖港", slug: "irago-kou-e8", description: "渥美半島の先端にある港で、太平洋と三河湾の潮が出会う絶好のポイント。大物の青物やマダイの実績が高く、伊良湖岬からの磯釣りも人気。風光明媚なロケーション。", latitude: 34.580, longitude: 137.020, address: "〒441-3624 愛知県田原市伊良湖町", accessInfo: "豊橋鉄道渥美線三河田原駅からバスで約50分", region: localRegion("re8045"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.3, reviewCount: 0, catchableFish: [{ fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" }, { fish: fish("madai"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" }, { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8235", name: "田原サーフ（赤羽根海岸）", slug: "tahara-surf-akabane-e8", description: "渥美半島の太平洋側に面するサーフで、遠州灘サーフフィッシングの延長線上にある人気ポイント。ヒラメやマゴチの砂物が主なターゲットで、秋にはブリの回遊もある。", latitude: 34.602, longitude: 137.165, address: "〒441-3502 愛知県田原市赤羽根町", accessInfo: "豊橋鉄道渥美線三河田原駅から車で約20分", region: localRegion("re8045"), spotType: "beach", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "海岸沿いに駐車スペースあり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("magochi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
-  { id: "se8236", name: "名古屋港・ガーデンふ頭", slug: "nagoya-garden-futou-e8", description: "名古屋港のガーデンふ頭周辺は都市型の釣りスポット。名古屋港水族館の近くで、ハゼやセイゴが狙える。夜釣りではメバルやシーバスも。アクセスの良さが魅力。", latitude: 35.085, longitude: 136.882, address: "〒455-0033 愛知県名古屋市港区港町", accessInfo: "地下鉄名港線名古屋港駅から徒歩約5分", region: localRegion("re8046"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "ガーデンふ頭有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0, catchableFish: [{ fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }, { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "メバリング" }], bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8237", name: "碧南海釣り広場", slug: "hekinan-umizuri-hiroba-e8", description: "碧南市の無料海釣り施設で、三河湾に面した足場の良い護岸から釣りが楽しめる。サビキ釣りのアジやサバから、投げ釣りのキスまで初心者にもおすすめ。", latitude: 34.867, longitude: 136.972, address: "〒447-0824 愛知県碧南市港南町", accessInfo: "名鉄三河線碧南駅から車で約10分", region: localRegion("re8047"), spotType: "park", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "施設駐車場あり（無料）", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8238", name: "蒲郡竹島ふ頭", slug: "gamagori-takeshima-futou-e8", description: "蒲郡市のシンボル・竹島の近くにあるふ頭。三河湾に面した穏やかな海で、ファミリーフィッシングに最適。ハゼやキスが手軽に釣れ、温泉街からも近い。", latitude: 34.825, longitude: 137.225, address: "〒443-0031 愛知県蒲郡市竹島町", accessInfo: "JR東海道本線蒲郡駅から徒歩約15分", region: localRegion("re8047"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "竹島周辺に有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8239", name: "衣浦港", slug: "kinuura-kou-e8", description: "半田市と碧南市にまたがる大きな港。シーバスのルアーフィッシングが盛んで、夜のナイトゲームは特に実績が高い。クロダイのヘチ釣りも人気。", latitude: 34.878, longitude: 136.938, address: "〒475-0831 愛知県半田市岩滑中町", accessInfo: "名鉄河和線知多半田駅から車で約10分", region: localRegion("re8044"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ヘチ釣り" }], bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8240", name: "東海市・新宝緑地", slug: "tokai-shinpo-ryokuchi-e8", description: "東海市の臨海部にある緑地で、護岸から伊勢湾を望みながら釣りが楽しめる。ハゼ釣りの名所として知られ、秋には大勢のハゼ釣りファンで賑わう。", latitude: 35.018, longitude: 136.878, address: "〒476-0003 愛知県東海市新宝町", accessInfo: "名鉄常滑線太田川駅から車で約15分", region: localRegion("re8046"), spotType: "breakwater", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "緑地内に無料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0, catchableFish: [{ fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }, { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }], bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8241", name: "西尾市・一色さかな広場", slug: "nishio-isshiki-sakana-e8", description: "一色漁港に隣接する釣りスポットで、三河湾の穏やかな海が広がる。アサリ漁で有名な一色だが、堤防からのサビキ釣りやハゼ釣りも手軽に楽しめる。", latitude: 34.808, longitude: 137.065, address: "〒444-0424 愛知県西尾市一色町小薮", accessInfo: "名鉄西尾線西尾駅から車で約20分", region: localRegion("re8047"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "さかな広場駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0, catchableFish: [{ fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }, { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }], bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8242", name: "日間賀島・東港", slug: "himakajima-higashi-kou-e8", description: "知多半島沖の離島・日間賀島の東港。タコの島として有名だが、堤防からのアジ釣りやカワハギ釣りも人気。島ならではの豊かな魚影が魅力。", latitude: 34.690, longitude: 136.985, address: "〒470-3504 愛知県知多郡南知多町日間賀島", accessInfo: "師崎港から高速船で約10分", region: localRegion("re8044"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: false, parkingDetail: "師崎港に駐車し船で渡る", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("kawahagi"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "胴付き仕掛け" }, { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8243", name: "三河大島", slug: "mikawa-oshima-e8", description: "蒲郡市沖の無人島で、夏の渡船でのみアクセスできる。手付かずの自然が残り、磯釣りでメジナやイシダイが狙える穴場中の穴場。上級者向けの冒険的なポイント。", latitude: 34.790, longitude: 137.202, address: "〒443-0031 愛知県蒲郡市三谷町", accessInfo: "蒲郡港から渡船で約15分（夏季のみ）", region: localRegion("re8047"), spotType: "rocky", difficulty: "advanced", isFree: true, hasParking: false, parkingDetail: "蒲郡港に駐車し渡船利用", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("ishidai"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ぶっ込み釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeChubu },
-  { id: "se8244", name: "矢作川河口", slug: "yahagigawa-kakou-e8", description: "西尾市の矢作川河口域で、シーバスフィッシングの愛知県内屈指のポイント。秋の落ちハゼパターンではランカーサイズも狙え、ウェーディングでの釣りが主流。", latitude: 34.800, longitude: 137.098, address: "〒444-0512 愛知県西尾市鳥羽町", accessInfo: "名鉄西尾線西尾駅から車で約15分", region: localRegion("re8047"), spotType: "river", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "河口付近に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー" }, { fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }, { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8245", name: "豊橋・表浜サーフ", slug: "toyohashi-omotehama-surf-e8", description: "豊橋市の太平洋に面した広大なサーフ。遠州灘サーフフィッシングの東端にあたり、ヒラメやマゴチの好ポイント。秋冬のヒラメシーズンは特に熱い。", latitude: 34.632, longitude: 137.348, address: "〒441-3143 愛知県豊橋市大崎町", accessInfo: "JR東海道本線豊橋駅から車で約30分", region: localRegion("re8045"), spotType: "beach", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "海岸入口に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0, catchableFish: [{ fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("magochi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
-  { id: "se8246", name: "庄内川河口", slug: "shonai-gawa-kakou-e8", description: "名古屋市港区の庄内川河口域。都市河川だがシーバスの魚影が濃く、名古屋のアーバンフィッシングの代表格。夜のルアーフィッシングが特に人気。", latitude: 35.075, longitude: 136.828, address: "〒455-0012 愛知県名古屋市港区稲永", accessInfo: "あおなみ線稲永駅から徒歩約15分", region: localRegion("re8046"), spotType: "river", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "稲永公園駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }], bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8247", name: "篠島・釣り天国", slug: "shinojima-tsuri-tengoku-e8", description: "師崎港から船で渡る篠島は、周囲の海が豊かで多彩な魚が狙える離島。堤防からのアジ釣りや投げ釣りのキスが手軽で、島の新鮮な魚介料理も楽しみ。", latitude: 34.682, longitude: 136.968, address: "〒470-3505 愛知県知多郡南知多町篠島", accessInfo: "師崎港から高速船で約10分", region: localRegion("re8044"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: false, parkingDetail: "師崎港に駐車し船で渡る", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
-  { id: "se8248", name: "知多半島・内海海岸", slug: "chita-utsumi-kaigan-e8", description: "南知多の人気海水浴場で、シーズンオフにはキス釣りの好ポイントに変わる。遠浅の砂浜から投げ釣りでキスが狙え、秋にはカレイの実績もある。", latitude: 34.725, longitude: 136.880, address: "〒470-3321 愛知県知多郡南知多町内海", accessInfo: "名鉄知多新線内海駅から徒歩約15分", region: localRegion("re8044"), spotType: "beach", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "海水浴場駐車場あり（夏季有料）", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
-  { id: "se8249", name: "豊川河口・前芝港", slug: "toyokawa-maeshiba-kou-e8", description: "豊橋市の豊川河口にある前芝港。汽水域でシーバスやクロダイが狙え、秋のハゼ釣りは地元の風物詩。足場が良い岸壁から気軽に楽しめる。", latitude: 34.752, longitude: 137.298, address: "〒441-0152 愛知県豊橋市前芝町", accessInfo: "JR東海道本線豊橋駅から車で約20分", region: localRegion("re8047"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }, { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
-  { id: "se8250", name: "大野海水浴場・護岸", slug: "ohno-kaigan-gogan-e8", description: "常滑市の知多半島西岸にある海水浴場の護岸。伊勢湾に面し、夕日を見ながらの釣りが楽しめる。投げ釣りでキスやハゼが釣れ、のんびりした雰囲気が魅力。", latitude: 34.918, longitude: 136.825, address: "〒479-0868 愛知県常滑市大野町", accessInfo: "名鉄常滑線大野町駅から徒歩約10分", region: localRegion("re8044"), spotType: "beach", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "海水浴場駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.4, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
+  { id: "se8431", name: "師崎港", slug: "morozaki-kou-e8", description: "知多半島の先端にある港で、三河湾と伊勢湾の潮が交わる好漁場。大型のクロダイや青物の回遊があり、堤防釣りでも多彩なターゲットが狙える。篠島や日間賀島への船も出る。", latitude: 34.690, longitude: 136.955, address: "〒470-3503 愛知県知多郡南知多町師崎", accessInfo: "名鉄河和線河和駅からバスで約30分", region: localRegion("re8044"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.2, reviewCount: 0, catchableFish: [{ fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8432", name: "豊浜釣り桟橋", slug: "toyohama-tsuri-sanbashi-e8", description: "南知多町の釣り専用桟橋で、知多半島を代表する釣りスポット。足場が良くファミリーにも人気で、アジのサビキ釣りからカレイの投げ釣りまで四季を通じて楽しめる。", latitude: 34.712, longitude: 136.938, address: "〒470-3412 愛知県知多郡南知多町豊浜", accessInfo: "名鉄河和線河和駅からバスで約20分", region: localRegion("re8044"), spotType: "breakwater", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "桟橋周辺に無料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.1, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8433", name: "常滑りんくう釣り護岸", slug: "tokoname-rinku-e8", description: "中部国際空港の対岸に位置する釣り護岸。飛行機の離着陸を見ながらの釣りが独特の体験。足場が良くファミリー向きで、サビキ釣りやちょい投げが楽しめる。", latitude: 34.855, longitude: 136.845, address: "〒479-0882 愛知県常滑市りんくう町", accessInfo: "名鉄常滑線りんくう常滑駅から徒歩約10分", region: localRegion("re8044"), spotType: "breakwater", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "りんくう駐車場あり（有料）", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }, { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8434", name: "渥美半島・伊良湖港", slug: "irago-kou-e8", description: "渥美半島の先端にある港で、太平洋と三河湾の潮が出会う絶好のポイント。大物の青物やマダイの実績が高く、伊良湖岬からの磯釣りも人気。風光明媚なロケーション。", latitude: 34.580, longitude: 137.020, address: "〒441-3624 愛知県田原市伊良湖町", accessInfo: "豊橋鉄道渥美線三河田原駅からバスで約50分", region: localRegion("re8045"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.3, reviewCount: 0, catchableFish: [{ fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" }, { fish: fish("madai"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" }, { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8435", name: "田原サーフ（赤羽根海岸）", slug: "tahara-surf-akabane-e8", description: "渥美半島の太平洋側に面するサーフで、遠州灘サーフフィッシングの延長線上にある人気ポイント。ヒラメやマゴチの砂物が主なターゲットで、秋にはブリの回遊もある。", latitude: 34.602, longitude: 137.165, address: "〒441-3502 愛知県田原市赤羽根町", accessInfo: "豊橋鉄道渥美線三河田原駅から車で約20分", region: localRegion("re8045"), spotType: "beach", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "海岸沿いに駐車スペースあり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("magochi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
+  { id: "se8436", name: "名古屋港・ガーデンふ頭", slug: "nagoya-garden-futou-e8", description: "名古屋港のガーデンふ頭周辺は都市型の釣りスポット。名古屋港水族館の近くで、ハゼやセイゴが狙える。夜釣りではメバルやシーバスも。アクセスの良さが魅力。", latitude: 35.085, longitude: 136.882, address: "〒455-0033 愛知県名古屋市港区港町", accessInfo: "地下鉄名港線名古屋港駅から徒歩約5分", region: localRegion("re8046"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "ガーデンふ頭有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0, catchableFish: [{ fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }, { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "メバリング" }], bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8437", name: "碧南海釣り広場", slug: "hekinan-umizuri-hiroba-e8", description: "碧南市の無料海釣り施設で、三河湾に面した足場の良い護岸から釣りが楽しめる。サビキ釣りのアジやサバから、投げ釣りのキスまで初心者にもおすすめ。", latitude: 34.867, longitude: 136.972, address: "〒447-0824 愛知県碧南市港南町", accessInfo: "名鉄三河線碧南駅から車で約10分", region: localRegion("re8047"), spotType: "pier", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "施設駐車場あり（無料）", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8438", name: "蒲郡竹島ふ頭", slug: "gamagori-takeshima-futou-e8", description: "蒲郡市のシンボル・竹島の近くにあるふ頭。三河湾に面した穏やかな海で、ファミリーフィッシングに最適。ハゼやキスが手軽に釣れ、温泉街からも近い。", latitude: 34.825, longitude: 137.225, address: "〒443-0031 愛知県蒲郡市竹島町", accessInfo: "JR東海道本線蒲郡駅から徒歩約15分", region: localRegion("re8047"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "竹島周辺に有料駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8439", name: "衣浦港", slug: "kinuura-kou-e8", description: "半田市と碧南市にまたがる大きな港。シーバスのルアーフィッシングが盛んで、夜のナイトゲームは特に実績が高い。クロダイのヘチ釣りも人気。", latitude: 34.878, longitude: 136.938, address: "〒475-0831 愛知県半田市岩滑中町", accessInfo: "名鉄河和線知多半田駅から車で約10分", region: localRegion("re8044"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ヘチ釣り" }], bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8440", name: "東海市・新宝緑地", slug: "tokai-shinpo-ryokuchi-e8", description: "東海市の臨海部にある緑地で、護岸から伊勢湾を望みながら釣りが楽しめる。ハゼ釣りの名所として知られ、秋には大勢のハゼ釣りファンで賑わう。", latitude: 35.018, longitude: 136.878, address: "〒476-0003 愛知県東海市新宝町", accessInfo: "名鉄常滑線太田川駅から車で約15分", region: localRegion("re8046"), spotType: "breakwater", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "緑地内に無料駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0, catchableFish: [{ fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }, { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }], bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8441", name: "西尾市・一色さかな広場", slug: "nishio-isshiki-sakana-e8", description: "一色漁港に隣接する釣りスポットで、三河湾の穏やかな海が広がる。アサリ漁で有名な一色だが、堤防からのサビキ釣りやハゼ釣りも手軽に楽しめる。", latitude: 34.808, longitude: 137.065, address: "〒444-0424 愛知県西尾市一色町小薮", accessInfo: "名鉄西尾線西尾駅から車で約20分", region: localRegion("re8047"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "さかな広場駐車場あり", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0, catchableFish: [{ fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }, { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }], bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8442", name: "日間賀島・東港", slug: "himakajima-higashi-kou-e8", description: "知多半島沖の離島・日間賀島の東港。タコの島として有名だが、堤防からのアジ釣りやカワハギ釣りも人気。島ならではの豊かな魚影が魅力。", latitude: 34.690, longitude: 136.985, address: "〒470-3504 愛知県知多郡南知多町日間賀島", accessInfo: "師崎港から高速船で約10分", region: localRegion("re8044"), spotType: "port", difficulty: "intermediate", isFree: true, hasParking: false, parkingDetail: "師崎港に駐車し船で渡る", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("kawahagi"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "胴付き仕掛け" }, { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8443", name: "三河大島", slug: "mikawa-oshima-e8", description: "蒲郡市沖の無人島で、夏の渡船でのみアクセスできる。手付かずの自然が残り、磯釣りでメジナやイシダイが狙える穴場中の穴場。上級者向けの冒険的なポイント。", latitude: 34.790, longitude: 137.202, address: "〒443-0031 愛知県蒲郡市三谷町", accessInfo: "蒲郡港から渡船で約15分（夏季のみ）", region: localRegion("re8047"), spotType: "rocky", difficulty: "advanced", isFree: true, hasParking: false, parkingDetail: "蒲郡港に駐車し渡船利用", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }, { fish: fish("ishidai"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ぶっ込み釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeChubu },
+  { id: "se8444", name: "矢作川河口", slug: "yahagigawa-kakou-e8", description: "西尾市の矢作川河口域で、シーバスフィッシングの愛知県内屈指のポイント。秋の落ちハゼパターンではランカーサイズも狙え、ウェーディングでの釣りが主流。", latitude: 34.800, longitude: 137.098, address: "〒444-0512 愛知県西尾市鳥羽町", accessInfo: "名鉄西尾線西尾駅から車で約15分", region: localRegion("re8047"), spotType: "river", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "河口付近に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー" }, { fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }, { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8445", name: "豊橋・表浜サーフ", slug: "toyohashi-omotehama-surf-e8", description: "豊橋市の太平洋に面した広大なサーフ。遠州灘サーフフィッシングの東端にあたり、ヒラメやマゴチの好ポイント。秋冬のヒラメシーズンは特に熱い。", latitude: 34.632, longitude: 137.348, address: "〒441-3143 愛知県豊橋市大崎町", accessInfo: "JR東海道本線豊橋駅から車で約30分", region: localRegion("re8045"), spotType: "beach", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "海岸入口に駐車スペースあり", hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0, catchableFish: [{ fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("magochi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
+  { id: "se8446", name: "庄内川河口", slug: "shonai-gawa-kakou-e8", description: "名古屋市港区の庄内川河口域。都市河川だがシーバスの魚影が濃く、名古屋のアーバンフィッシングの代表格。夜のルアーフィッシングが特に人気。", latitude: 35.075, longitude: 136.828, address: "〒455-0012 愛知県名古屋市港区稲永", accessInfo: "あおなみ線稲永駅から徒歩約15分", region: localRegion("re8046"), spotType: "river", difficulty: "intermediate", isFree: true, hasParking: true, parkingDetail: "稲永公園駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0, catchableFish: [{ fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }], bestTimes: btNight, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8447", name: "篠島・釣り天国", slug: "shinojima-tsuri-tengoku-e8", description: "師崎港から船で渡る篠島は、周囲の海が豊かで多彩な魚が狙える離島。堤防からのアジ釣りや投げ釣りのキスが手軽で、島の新鮮な魚介料理も楽しみ。", latitude: 34.682, longitude: 136.968, address: "〒470-3505 愛知県知多郡南知多町篠島", accessInfo: "師崎港から高速船で約10分", region: localRegion("re8044"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: false, parkingDetail: "師崎港に駐車し船で渡る", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0, catchableFish: [{ fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" }, { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeChubu },
+  { id: "se8448", name: "知多半島・内海海岸", slug: "chita-utsumi-kaigan-e8", description: "南知多の人気海水浴場で、シーズンオフにはキス釣りの好ポイントに変わる。遠浅の砂浜から投げ釣りでキスが狙え、秋にはカレイの実績もある。", latitude: 34.725, longitude: 136.880, address: "〒470-3321 愛知県知多郡南知多町内海", accessInfo: "名鉄知多新線内海駅から徒歩約15分", region: localRegion("re8044"), spotType: "beach", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "海水浴場駐車場あり（夏季有料）", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
+  { id: "se8449", name: "豊川河口・前芝港", slug: "toyokawa-maeshiba-kou-e8", description: "豊橋市の豊川河口にある前芝港。汽水域でシーバスやクロダイが狙え、秋のハゼ釣りは地元の風物詩。足場が良い岸壁から気軽に楽しめる。", latitude: 34.752, longitude: 137.298, address: "〒441-0152 愛知県豊橋市前芝町", accessInfo: "JR東海道本線豊橋駅から車で約20分", region: localRegion("re8047"), spotType: "port", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり", hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0, catchableFish: [{ fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }, { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" }, { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" }], bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeChubu },
+  { id: "se8450", name: "大野海水浴場・護岸", slug: "ohno-kaigan-gogan-e8", description: "常滑市の知多半島西岸にある海水浴場の護岸。伊勢湾に面し、夕日を見ながらの釣りが楽しめる。投げ釣りでキスやハゼが釣れ、のんびりした雰囲気が魅力。", latitude: 34.918, longitude: 136.825, address: "〒479-0868 愛知県常滑市大野町", accessInfo: "名鉄常滑線大野町駅から徒歩約10分", region: localRegion("re8044"), spotType: "beach", difficulty: "beginner", isFree: true, hasParking: true, parkingDetail: "海水浴場駐車場あり", hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false, mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.4, reviewCount: 0, catchableFish: [{ fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" }, { fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" }], bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeChubu },
 ];

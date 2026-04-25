@@ -70,6 +70,11 @@ import { eastAdd6Spots } from "./spots-add6-east";
 import { centralAdd6Spots } from "./spots-add6-central";
 import { westAdd6Spots } from "./spots-add6-west";
 import { westAdd7Spots } from "./spots-add7-west";
+import { hokkaidoTohokuAdd8Spots } from "./spots-add8-hokkaido-tohoku";
+import { kantoAdd8Spots } from "./spots-add8-kanto-chubu";
+import { kinkiAdd8Spots } from "./spots-add8-kinki";
+import { chugokuShikokuAdd8Spots } from "./spots-add8-chugoku-shikoku";
+import { kyushuOkinawaAdd8Spots } from "./spots-add8-kyushu-okinawa";
 
 export const allRawSpots: FishingSpot[] = [
   ..._baseSpots,
@@ -143,4 +148,9 @@ export const allRawSpots: FishingSpot[] = [
   ...centralAdd6Spots,
   ...westAdd6Spots,
   ...westAdd7Spots,
+  ...hokkaidoTohokuAdd8Spots,
+  ...kantoAdd8Spots,
+  ...kinkiAdd8Spots,
+  ...chugokuShikokuAdd8Spots,
+  ...kyushuOkinawaAdd8Spots,
 ];
