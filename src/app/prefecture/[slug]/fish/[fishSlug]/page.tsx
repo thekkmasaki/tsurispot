@@ -70,6 +70,13 @@ export async function generateMetadata({
       type: "website",
       url: `https://tsurispot.com/prefecture/${slug}/fish/${fishSlug}`,
       siteName: "ツリスポ",
+      images: [
+        {
+          url: `https://tsurispot.com/api/og?title=${encodeURIComponent(title)}&emoji=%F0%9F%90%9F`,
+          width: 1200,
+          height: 630,
+        },
+      ],
     },
     alternates: {
       canonical: `https://tsurispot.com/prefecture/${slug}/fish/${fishSlug}`,

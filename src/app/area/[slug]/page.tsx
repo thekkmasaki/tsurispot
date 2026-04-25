@@ -158,6 +158,13 @@ export async function generateMetadata({
       type: "website",
       url: `https://tsurispot.com/area/${region.slug}`,
       siteName: "ツリスポ",
+      images: [
+        {
+          url: `https://tsurispot.com/api/og?title=${encodeURIComponent(`${region.areaName}（${region.prefecture}）の釣り場ガイド`)}&emoji=%F0%9F%93%8D`,
+          width: 1200,
+          height: 630,
+        },
+      ],
     },
     alternates: {
       canonical: `https://tsurispot.com/area/${region.slug}`,
