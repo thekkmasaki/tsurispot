@@ -66,6 +66,9 @@ import { tokyoOsakaBaySpots } from "./spots-tokyo-osaka-bay";
 import { freshwaterSpotsAdd2 } from "./spots-freshwater-add2";
 import { freshwaterSpotsAdd3 } from "./spots-freshwater-add3";
 import { freshwaterSpotsAdd4 } from "./spots-freshwater-add4";
+import { eastAdd6Spots } from "./spots-add6-east";
+import { centralAdd6Spots } from "./spots-add6-central";
+import { westAdd6Spots } from "./spots-add6-west";
 
 export const allRawSpots: FishingSpot[] = [
   ..._baseSpots,
@@ -135,4 +138,7 @@ export const allRawSpots: FishingSpot[] = [
   ...freshwaterSpotsAdd2,
   ...freshwaterSpotsAdd3,
   ...freshwaterSpotsAdd4,
+  ...eastAdd6Spots,
+  ...centralAdd6Spots,
+  ...westAdd6Spots,
 ];

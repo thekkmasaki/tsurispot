@@ -14,8 +14,9 @@ const CookieBanner = dynamic(() => import("@/components/layout/cookie-banner").t
 const BackToTop = dynamic(() => import("@/components/ui/back-to-top").then(m => ({ default: m.BackToTop })));
 const CompareBar = dynamic(() => import("@/components/spots/compare-bar").then(m => ({ default: m.CompareBar })));
 const PreFooterAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.PreFooterAd })));
-const HeaderBannerAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.HeaderBannerAd })));
-const MobileHeaderBannerAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.MobileHeaderBannerAd })));
+// ATF広告はCLS悪化・順位下落の原因のため削除 (2026-04-25)
+// const HeaderBannerAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.HeaderBannerAd })));
+// const MobileHeaderBannerAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.MobileHeaderBannerAd })));
 const SmartMobileStickyAd = dynamic(() => import("@/components/layout/smart-mobile-ad").then(m => ({ default: m.SmartMobileStickyAd })));
 const SideRailAds = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.SideRailAds })));
 import "./globals.css";
@@ -241,8 +242,6 @@ export default function RootLayout({
         <PWARegister />
         <SideRailAds />
         <Header />
-        <HeaderBannerAd />
-        <MobileHeaderBannerAd />
         <main className="min-h-screen pb-24 md:pb-0">{children}</main>
         <PreFooterAd />
         <Footer />
