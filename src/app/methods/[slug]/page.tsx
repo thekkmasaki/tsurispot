@@ -591,6 +591,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: "article",
       url: `https://tsurispot.com/methods/${method.slug}`,
       siteName: "ツリスポ",
+      images: [
+        {
+          url: `https://tsurispot.com/api/og?title=${encodeURIComponent(`${method.name}完全ガイド`)}&emoji=%F0%9F%8E%A3`,
+          width: 1200,
+          height: 630,
+        },
+      ],
     },
     alternates: {
       canonical: `https://tsurispot.com/methods/${method.slug}`,

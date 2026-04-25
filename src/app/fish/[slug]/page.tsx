@@ -37,7 +37,9 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
 import { InArticleAd, DisplayAd, LazyAd } from "@/components/ads/ad-unit";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
-import { getPrefectureByName } from "@/lib/data/prefectures";
+import { getPrefectureByName, prefectures } from "@/lib/data/prefectures";
+import { MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
+import { fishingSpots } from "@/lib/data/spots";
 import { fishRegionalSeasons } from "@/lib/data/fish-regional-seasons";
 import { CollapsibleSection } from "@/components/ui/collapsible-section";
 
@@ -92,6 +94,13 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
       type: "article",
       url: `https://tsurispot.com/fish/${fish.slug}`,
       siteName: "ツリスポ",
+      images: [
+        {
+          url: `https://tsurispot.com/api/og?title=${encodeURIComponent(`${fish.name}の釣り方ガイド`)}&emoji=%F0%9F%90%9F`,
+          width: 1200,
+          height: 630,
+        },
+      ],
     },
     twitter: {
       card: "summary_large_image",
@@ -678,6 +687,55 @@ export default async function FishDetailPage({ params }: PageProps) {
         ) : null;
       })()}
 
+      {/* 都道府県×月の釣り情報 */}
+      {(() => {
+        const prefMonthFishLinks: { prefName: string; prefSlug: string; monthName: string; monthSlug: string; count: number }[] = [];
+        for (const pref of prefectures) {
+          for (const month of MONTHS) {
+            if (!fish.seasonMonths.includes(month.num)) continue;
+            let count = 0;
+            for (const spot of fishingSpots.filter(s => s.region.prefecture === pref.name)) {
+              for (const cf of spot.catchableFish) {
+                if (cf.fish.slug === fish.slug && isMonthInRange(month.num, cf.monthStart, cf.monthEnd)) {
+                  count++;
+                  break;
+                }
+              }
+            }
+            if (count >= 2) {
+              prefMonthFishLinks.push({ prefName: pref.name, prefSlug: pref.slug, monthName: month.name, monthSlug: month.slug, count });
+            }
+          }
+        }
+        const topPrefMonthLinks = prefMonthFishLinks.sort((a, b) => b.count - a.count).slice(0, 18);
+        if (topPrefMonthLinks.length === 0) return null;
+        return (
+          <section className="mb-8 sm:mb-10">
+            <h2 className="mb-3 text-base font-bold sm:text-lg">
+              都道府県×月の{fish.name}釣り情報
+            </h2>
+            <p className="mb-3 text-sm text-muted-foreground">
+              {fish.name}が釣れる都道府県と時期の詳しい情報はこちら
+            </p>
+            <div className="flex flex-wrap gap-1.5 sm:gap-2">
+              {topPrefMonthLinks.map((link) => (
+                <Link
+                  key={`${link.prefSlug}-${link.monthSlug}`}
+                  href={`/prefecture/${link.prefSlug}/${link.monthSlug}/${fish.slug}`}
+                >
+                  <Badge
+                    variant="outline"
+                    className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
+                  >
+                    {link.prefName}の{link.monthName}
+                    <span className="ml-1 text-muted-foreground">({link.count}件)</span>
+                  </Badge>
+                </Link>
+              ))}
+            </div>
+          </section>
+        );
+      })()}
 
       {/* この魚の狙い方 */}
       {fish.fishingMethods && fish.fishingMethods.length > 0 && (
