@@ -11,6 +11,23 @@ declare global {
 
 const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_ID;
 
+/** body[data-no-ads="true"] が付与されていれば広告を抑制（有料店舗ページ等） */
+function useAdsSuppressed(): boolean {
+  const [suppressed, setSuppressed] = useState(false);
+  useEffect(() => {
+    if (document.body.getAttribute("data-no-ads") === "true") {
+      setSuppressed(true);
+    }
+    // NoAdsSignal が後からマウントされるケースに備えて監視
+    const observer = new MutationObserver(() => {
+      setSuppressed(document.body.getAttribute("data-no-ads") === "true");
+    });
+    observer.observe(document.body, { attributes: true, attributeFilter: ["data-no-ads"] });
+    return () => observer.disconnect();
+  }, []);
+  return suppressed;
+}
+
 // ---- AdSense スロットID ----
 const SLOTS = {
   display: "9949278874",
@@ -40,9 +57,10 @@ export function AdUnit({
 }: AdUnitProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const pushed = useRef(false);
+  const suppressed = useAdsSuppressed();
 
   useEffect(() => {
-    if (!ADSENSE_ID || pushed.current) return;
+    if (!ADSENSE_ID || pushed.current || suppressed) return;
 
     const el = containerRef.current;
     if (!el) return;
@@ -73,7 +91,7 @@ export function AdUnit({
     return () => observer.disconnect();
   }, []);
 
-  if (!ADSENSE_ID) return null;
+  if (!ADSENSE_ID || suppressed) return null;
 
   return (
     <div ref={containerRef} className={`ad-container w-full ${className}`}>

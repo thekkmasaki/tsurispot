@@ -29,6 +29,7 @@ import { ShopInfoLive } from "@/components/shops/shop-info-live";
 import { ShopPhotoGallery } from "@/components/shops/shop-photo-gallery";
 import { ShopListingForm } from "@/components/shops/shop-listing-form";
 import { PaidPlanInquiry } from "@/components/shops/paid-plan-inquiry";
+import { NoAdsSignal } from "@/components/ads/no-ads-signal";
 
 type Params = Promise<{ slug: string }>;
 
@@ -215,6 +216,8 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
+      {/* 有料プラン店舗は広告非表示 */}
+      {isPaid && !isSample && <NoAdsSignal />}
       {shouldOutputJsonLd && (
         <script
           type="application/ld+json"
@@ -439,7 +442,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
           <CardContent>
             <div className="aspect-video w-full rounded-lg overflow-hidden">
               <iframe
-                src={`https://www.google.com/maps?q=${shop.latitude},${shop.longitude}&z=15&output=embed`}
+                src={`https://www.google.com/maps?q=${encodeURIComponent(shop.name + ' ' + shop.address)}&z=15&output=embed`}
                 width="100%"
                 height="100%"
                 style={{ border: 0 }}
