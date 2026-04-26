@@ -3582,4 +3582,30 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
     ],
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeOkinawa,
   },
+  // =========================================
+  // 佐賀県（管理釣り場 特別掲載）
+  // =========================================
+  {
+    id: "ss8201", name: "フィッシングパークひらの", slug: "fishing-park-hirano",
+    description: "標高約400mの山間部に位置する「天空のエリアトラウトフィッシング」。廃校になった旧厳木小学校平之分校のプールを活用して2018年に開園した管理釣り場で、国土交通省「水質が最も良好な河川」に選出された厳木川上流の清流で自家養殖したヒレピン（ヒレが欠けていない美しい個体）のニジマスが放流されている。2つのポンドがあり、第1ポンドはフライ・ルアー対応でニジマスとホウライマスが泳ぎ、第2ポンドは30m×25mのプール型。レンタルロッド完備で手ぶらでもOK。九州では数少ないエリアトラウトスポットで、福岡都市圏から約90分とアクセスも良好。バーブレスフック必須・ラバーネット使用など魚体保護のルールが徹底されており、釣りマナーを大切にする釣り場。限界集落の維持・再生を目指す地域おこしプロジェクトとしての側面もある。",
+    latitude: 33.2750, longitude: 130.0550,
+    address: "〒849-3115 佐賀県唐津市厳木町平之705-1",
+    accessInfo: "厳木・多久道路 牧瀬ICから車で約10分。九州自動車道 多久ICから約20分。福岡市内から約90分。",
+    region: localRegion("rs8006"), spotType: "river", difficulty: "beginner",
+    isFree: false, feeDetail: "2時間券1,000円〜、半日券2,000円〜、1日券2,500円〜（子ども割引あり）。レンタルロッド1,000円。ニジマス持ち帰り1匹500円。",
+    hasParking: true, parkingDetail: "無料駐車場あり（約30台）",
+    hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
+    mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.3, reviewCount: 0,
+    catchableFish: [
+      { fish: fish("nijimasu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝〜日中", method: "ルアー（スプーン）" },
+    ],
+    bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeKyushuN,
+    rules: {
+      castingAllowed: false,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["バーブレスフック（返しなし）必須", "ラバーネット使用必須", "基本キャッチ＆リリース（持ち帰りは別料金）", "ワーム・パワーエッグ等の使用禁止", "前日までにメールで利用予約が必要", "近隣にコンビニ・店舗なし、飲食物持参推奨"],
+    },
+  },
 ];
