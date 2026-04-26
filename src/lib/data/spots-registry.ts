@@ -79,6 +79,7 @@ import { eastAdd9Spots } from "./spots-add9-east";
 import { centralAdd9Spots } from "./spots-add9-central";
 import { westAdd9Spots } from "./spots-add9-west";
 import { northAdd10Spots } from "./spots-add10-north";
+import { eastAdd10Spots } from "./spots-add10-east";
 
 export const allRawSpots: FishingSpot[] = [
   ..._baseSpots,
@@ -161,4 +162,5 @@ export const allRawSpots: FishingSpot[] = [
   ...centralAdd9Spots,
   ...westAdd9Spots,
   ...northAdd10Spots,
+  ...eastAdd10Spots,
 ];
