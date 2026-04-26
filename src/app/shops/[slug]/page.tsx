@@ -7,7 +7,6 @@ import {
   ChevronLeft,
   ChevronRight,
   CheckCircle,
-  XCircle,
   Store,
   Sparkles,
   Mail,
@@ -365,45 +364,8 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
           ownerMessage={shop.ownerMessage}
         />
 
-        {/* Bait Stock Card — プロはリアルタイム、それ以外は静的 */}
-        {isPro && shop.baitStock && shop.baitStock.length > 0 ? (
-          <LiveBaitStock shopSlug={shop.slug} fallbackStock={shop.baitStock} />
-        ) : (
-          shop.baitStock && shop.baitStock.length > 0 && (
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-lg">エサ在庫状況</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  {shop.baitStock.map((bait) => (
-                    <div
-                      key={bait.name}
-                      className="flex items-center justify-between text-sm"
-                    >
-                      <div className="flex items-center gap-2">
-                        {bait.available ? (
-                          <CheckCircle className="w-4 h-4 text-green-500" />
-                        ) : (
-                          <XCircle className="w-4 h-4 text-red-400" />
-                        )}
-                        <span>{bait.name}</span>
-                      </div>
-                      <div className="text-right text-muted-foreground">
-                        {bait.price && <span>{bait.price}</span>}
-                        {bait.updatedAt && (
-                          <span className="ml-2 text-xs">
-                            ({bait.updatedAt}更新)
-                          </span>
-                        )}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          )
-        )}
+        {/* Bait Stock Card — 全プランでリアルタイム対応 */}
+        <LiveBaitStock shopSlug={shop.slug} fallbackStock={shop.baitStock ?? []} />
 
         {/* Nearby Spots Card */}
         {nearbySpots.length > 0 && (
