@@ -41,6 +41,8 @@ export function DashboardClient() {
 
   const [baitStock, setBaitStock] = useState<BaitStock[]>([]);
   const [saved, setSaved] = useState(false);
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState("");
 
   useEffect(() => {
     if (!shop) return;
@@ -105,9 +107,6 @@ export function DashboardClient() {
     );
     setSaved(false);
   }
-
-  const [saving, setSaving] = useState(false);
-  const [saveError, setSaveError] = useState("");
 
   async function handleSave() {
     const filtered = baitStock.filter((b) => b.name.trim() !== "");
