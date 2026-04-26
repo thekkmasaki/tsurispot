@@ -64,7 +64,6 @@ export function CrowdPredictionCard({
         ? {
             month: timeInfo.month,
             isHoliday: false,
-            weatherCode: "clear" as const,
             spotPopularity: rating,
             isFree,
             difficulty,

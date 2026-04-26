@@ -39,12 +39,86 @@ interface PredictionInput {
   reviewCount?: number; // レビュー数（人気の直接指標）
 }
 
+// --- 地域グループ定義 ---
+type RegionGroup = "hokkaido" | "tohoku" | "kanto_koshinetsu" | "chubu" | "kinki" | "chugoku_shikoku" | "kyushu_okinawa";
+
+const PREFECTURE_TO_REGION: Record<string, RegionGroup> = {
+  "北海道": "hokkaido",
+  "青森県": "tohoku", "岩手県": "tohoku", "宮城県": "tohoku", "秋田県": "tohoku", "山形県": "tohoku", "福島県": "tohoku",
+  "東京都": "kanto_koshinetsu", "神奈川県": "kanto_koshinetsu", "千葉県": "kanto_koshinetsu", "埼玉県": "kanto_koshinetsu",
+  "茨城県": "kanto_koshinetsu", "栃木県": "kanto_koshinetsu", "群馬県": "kanto_koshinetsu",
+  "山梨県": "kanto_koshinetsu", "長野県": "kanto_koshinetsu", "新潟県": "kanto_koshinetsu",
+  "愛知県": "chubu", "静岡県": "chubu", "岐阜県": "chubu", "三重県": "chubu",
+  "富山県": "chubu", "石川県": "chubu", "福井県": "chubu",
+  "大阪府": "kinki", "兵庫県": "kinki", "京都府": "kinki", "滋賀県": "kinki", "奈良県": "kinki", "和歌山県": "kinki",
+  "鳥取県": "chugoku_shikoku", "島根県": "chugoku_shikoku", "岡山県": "chugoku_shikoku", "広島県": "chugoku_shikoku",
+  "山口県": "chugoku_shikoku", "徳島県": "chugoku_shikoku", "香川県": "chugoku_shikoku", "愛媛県": "chugoku_shikoku", "高知県": "chugoku_shikoku",
+  "福岡県": "kyushu_okinawa", "佐賀県": "kyushu_okinawa", "長崎県": "kyushu_okinawa", "熊本県": "kyushu_okinawa",
+  "大分県": "kyushu_okinawa", "宮崎県": "kyushu_okinawa", "鹿児島県": "kyushu_okinawa", "沖縄県": "kyushu_okinawa",
+};
+
+// --- 月別平均気温テーブル（地域グループ × 12ヶ月、単位: 度C）---
+// インデックス0 = 1月, インデックス11 = 12月
+const MONTHLY_TEMPERATURE: Record<RegionGroup, number[]> = {
+  hokkaido:         [-4, -3,  1,  7, 12, 16, 21, 22, 18, 11,  4, -1],
+  tohoku:           [ 1,  1,  4, 10, 15, 19, 23, 24, 20, 14,  8,  3],
+  kanto_koshinetsu: [ 5,  6,  9, 14, 19, 22, 26, 27, 23, 18, 12,  7],
+  chubu:            [ 4,  5,  8, 14, 18, 22, 26, 27, 24, 18, 12,  7],
+  kinki:            [ 5,  6,  9, 14, 19, 23, 27, 28, 25, 18, 13,  7],
+  chugoku_shikoku:  [ 5,  6,  9, 14, 19, 22, 27, 28, 24, 18, 13,  8],
+  kyushu_okinawa:   [ 7,  8, 11, 16, 20, 23, 28, 28, 25, 20, 14,  9],
+};
+
+// --- 月別典型天気テーブル ---
+// インデックス0 = 1月, インデックス11 = 12月
+const MONTHLY_WEATHER: string[] = [
+  "clear",  // 1月: 冬晴れ
+  "clear",  // 2月
+  "clouds", // 3月: 春の変わりやすい天気
+  "clouds", // 4月: 春雨・曇り
+  "clear",  // 5月: 五月晴れ
+  "rain",   // 6月: 梅雨
+  "clear",  // 7月: 梅雨明け
+  "clear",  // 8月: 夏の晴天
+  "clouds", // 9月: 秋雨前線
+  "clear",  // 10月: 秋晴れ
+  "clear",  // 11月
+  "clear",  // 12月: 冬晴れ
+];
+
+/**
+ * 都道府県と月から平均気温を推定する
+ */
+function estimateTemperature(prefecture: string, month: number): number | undefined {
+  const region = PREFECTURE_TO_REGION[prefecture];
+  if (!region) return undefined;
+  return MONTHLY_TEMPERATURE[region][month - 1];
+}
+
+/**
+ * 月から典型的な天気コードを取得する
+ */
+function estimateWeather(month: number): string {
+  return MONTHLY_WEATHER[month - 1];
+}
+
 /**
  * 混雑スコアを計算する (0-100)
  */
 export function calculateCrowdScore(input: PredictionInput): CrowdPrediction {
-  let score = 30; // baseline
+  let score = 15; // baseline（釣り場はデフォルトで空いている）
   const factors: string[] = [];
+
+  // --- 気温の自動推定 ---
+  // temperatureが直接指定されていない場合、prefecture+monthから推定する
+  let temperature = input.temperature;
+  if (temperature === undefined && input.prefecture) {
+    temperature = estimateTemperature(input.prefecture, input.month);
+  }
+
+  // --- 天気の自動推定 ---
+  // weatherCodeが直接指定されていない場合、monthから推定する
+  const weatherCode = input.weatherCode ?? estimateWeather(input.month);
 
   // --- 曜日の影響 (最大+30) ---
   if (input.dayOfWeek === 0 || input.dayOfWeek === 6 || input.isHoliday) {
@@ -74,8 +148,8 @@ export function calculateCrowdScore(input: PredictionInput): CrowdPrediction {
   }
 
   // --- 天気の影響 (最大+15) ---
-  if (input.weatherCode) {
-    switch (input.weatherCode) {
+  if (weatherCode) {
+    switch (weatherCode) {
       case "clear":
         score += 15;
         factors.push("晴れ");
@@ -109,41 +183,45 @@ export function calculateCrowdScore(input: PredictionInput): CrowdPrediction {
 
   // --- 気温の影響（混雑の主要因子）---
   // 釣り人の行動は気温に最も強く相関する。シーズンより気温が直接的。
-  if (input.temperature !== undefined) {
-    if (input.temperature < 0) {
+  if (temperature !== undefined) {
+    if (temperature < 0) {
       score -= 45;
       factors.push("氷点下（ほぼ人がいない）");
-    } else if (input.temperature < 5) {
+    } else if (temperature < 5) {
       score -= 35;
       factors.push("寒さで人が少ない");
-    } else if (input.temperature < 10) {
+    } else if (temperature < 10) {
       score -= 20;
       factors.push("肌寒い");
-    } else if (input.temperature < 15) {
-      score -= 8;
-    } else if (input.temperature >= 15 && input.temperature <= 28) {
+    } else if (temperature < 15) {
+      score -= 12;
+      factors.push("やや肌寒い");
+    } else if (temperature >= 15 && temperature <= 28) {
       score += 12;
       factors.push("快適な気温");
-    } else if (input.temperature > 35) {
+    } else if (temperature > 35) {
       score -= 15;
       factors.push("猛暑");
-    } else if (input.temperature > 30) {
+    } else if (temperature > 30) {
       score -= 5;
       factors.push("暑い");
     }
+    // 29-30度は加算なし（暑くもなく猛暑でもない）
   } else {
-    // 気温データがない場合のみ月別フォールバック（控えめ）
-    if (input.month === 1 || input.month === 2) {
-      score -= 25;
-      factors.push("冬（空きやすい）");
-    } else if (input.month === 12) {
-      score -= 18;
-      factors.push("冬（空きやすい）");
-    } else if (input.month === 3) {
-      score -= 10;
-      factors.push("早春");
-    } else if (input.month === 11) {
-      score -= 8;
+    // 気温データがない場合のみ月別フォールバック（全月カバー）
+    const monthFallback: Record<number, number> = {
+      1: -25, 2: -25, 3: -10, 4: -5, 5: 0,
+      6: -8, 7: 0, 8: 0, 9: -3, 10: -3,
+      11: -8, 12: -18,
+    };
+    const fallbackScore = monthFallback[input.month] ?? 0;
+    score += fallbackScore;
+    if (input.month <= 3 || input.month >= 11) {
+      factors.push("冬〜早春（空きやすい）");
+    } else if (input.month === 4) {
+      factors.push("春先（やや肌寒い）");
+    } else if (input.month === 6) {
+      factors.push("梅雨（空きやすい）");
     }
   }
 
@@ -198,7 +276,7 @@ export function calculateCrowdScore(input: PredictionInput): CrowdPrediction {
   }
 
   // 気温が低い時は週末ボーナスを減らす（寒いと週末でも来ない）
-  if (input.temperature !== undefined && input.temperature < 8 && (input.dayOfWeek === 0 || input.dayOfWeek === 6 || input.isHoliday)) {
+  if (temperature !== undefined && temperature < 8 && (input.dayOfWeek === 0 || input.dayOfWeek === 6 || input.isHoliday)) {
     score -= 10;
     factors.push("寒い日は週末でも人が少ない");
   }
