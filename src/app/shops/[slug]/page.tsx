@@ -216,8 +216,8 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
-      {/* 有料プラン店舗は広告非表示 */}
-      {isPaid && !isSample && <NoAdsSignal />}
+      {/* 有料プラン店舗・サンプルページは広告非表示 */}
+      {(isPaid || isSample) && <NoAdsSignal />}
       {shouldOutputJsonLd && (
         <script
           type="application/ld+json"
