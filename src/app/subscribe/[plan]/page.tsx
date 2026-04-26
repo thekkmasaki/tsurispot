@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import Link from "next/link";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -89,7 +90,9 @@ export default async function SubscribePage({ params }: { params: Promise<{ plan
       </Card>
 
       <div className="flex flex-col gap-3 sm:flex-row">
-        <SubscribeButton plan={plan as "basic" | "pro"} />
+        <Suspense fallback={<div className="flex-1"><Button disabled className="w-full gap-2">読み込み中...</Button></div>}>
+          <SubscribeButton plan={plan as "basic" | "pro"} />
+        </Suspense>
         <Link href="/partner" className="flex-1">
           <Button variant="outline" className="w-full">キャンセル</Button>
         </Link>
