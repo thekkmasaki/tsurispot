@@ -76,6 +76,7 @@ import { kinkiAdd8Spots } from "./spots-add8-kinki";
 import { chugokuShikokuAdd8Spots } from "./spots-add8-chugoku-shikoku";
 import { kyushuOkinawaAdd8Spots } from "./spots-add8-kyushu-okinawa";
 import { eastAdd9Spots } from "./spots-add9-east";
+import { centralAdd9Spots } from "./spots-add9-central";
 
 export const allRawSpots: FishingSpot[] = [
   ..._baseSpots,
@@ -155,4 +156,5 @@ export const allRawSpots: FishingSpot[] = [
   ...chugokuShikokuAdd8Spots,
   ...kyushuOkinawaAdd8Spots,
   ...eastAdd9Spots,
+  ...centralAdd9Spots,
 ];
