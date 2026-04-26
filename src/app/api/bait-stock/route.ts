@@ -71,15 +71,26 @@ export async function POST(request: NextRequest) {
 
   // デモ店舗はトークン不要
   const isDemo = shop === "sample-premium" || shop === "sample-basic" || shop === "sample-free";
+
+  // 静的トークン（掲載店舗向け）
+  const STATIC_TOKENS: Record<string, string> = {
+    "barbless-karatsu": "barbless-2026",
+  };
+
   if (!isDemo) {
-    // トークン検証: Redis に保存されたトークンと照合
-    try {
-      const storedToken = await withTimeout(redis.get<string>(`shoptoken:${shop}`));
-      if (!storedToken || storedToken !== token) {
-        return NextResponse.json({ error: "invalid token" }, { status: 403 });
+    const staticToken = STATIC_TOKENS[shop];
+    const staticMatch = staticToken && staticToken === token;
+
+    if (!staticMatch) {
+      // Redis に保存されたトークンと照合
+      try {
+        const storedToken = await withTimeout(redis.get<string>(`shoptoken:${shop}`));
+        if (!storedToken || storedToken !== token) {
+          return NextResponse.json({ error: "invalid token" }, { status: 403 });
+        }
+      } catch {
+        return NextResponse.json({ error: "サーバーエラーが発生しました" }, { status: 500 });
       }
-    } catch {
-      return NextResponse.json({ error: "サーバーエラーが発生しました" }, { status: 500 });
     }
   }
 

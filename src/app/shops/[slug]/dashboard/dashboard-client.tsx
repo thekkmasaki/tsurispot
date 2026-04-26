@@ -23,6 +23,7 @@ const TOKENS: Record<string, string> = {
   "casting-toyosu": "demo1234",
   "joshunya-wakayama": "demo1234",
   "fishing-yu-oiso": "demo1234",
+  "barbless-karatsu": "barbless-2026",
 };
 
 function getStorageKey(slug: string) {
@@ -105,12 +106,35 @@ export function DashboardClient() {
     setSaved(false);
   }
 
-  function handleSave() {
+  const [saving, setSaving] = useState(false);
+  const [saveError, setSaveError] = useState("");
+
+  async function handleSave() {
     const filtered = baitStock.filter((b) => b.name.trim() !== "");
     setBaitStock(filtered);
     localStorage.setItem(getStorageKey(slug), JSON.stringify(filtered));
-    setSaved(true);
-    setTimeout(() => setSaved(false), 3000);
+
+    // APIにも送信してリアルタイム反映
+    setSaving(true);
+    setSaveError("");
+    try {
+      const res = await fetch("/api/bait-stock", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ shop: slug, token: token || "", stock: filtered }),
+      });
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({ error: "保存に失敗しました" }));
+        setSaveError(data.error || "保存に失敗しました");
+      } else {
+        setSaved(true);
+        setTimeout(() => setSaved(false), 3000);
+      }
+    } catch {
+      setSaveError("ネットワークエラーが発生しました");
+    } finally {
+      setSaving(false);
+    }
   }
 
   return (
@@ -204,13 +228,18 @@ export function DashboardClient() {
           )}
 
           <div className="mt-5 flex items-center gap-3">
-            <Button onClick={handleSave} className="gap-1.5">
+            <Button onClick={handleSave} disabled={saving} className="gap-1.5">
               <Save className="size-4" />
-              保存する
+              {saving ? "保存中..." : "保存する"}
             </Button>
             {saved && (
               <span className="text-sm text-emerald-600 font-medium">
                 保存しました
+              </span>
+            )}
+            {saveError && (
+              <span className="text-sm text-red-600 font-medium">
+                {saveError}
               </span>
             )}
           </div>
