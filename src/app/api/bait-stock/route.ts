@@ -76,10 +76,11 @@ export async function POST(request: NextRequest) {
   const STATIC_TOKENS: Record<string, string> = {
     "barbless-karatsu": "barbless-2026",
   };
+  const staticMatch = !!(STATIC_TOKENS[shop] && STATIC_TOKENS[shop] === token);
+  // Redis障害時にも保存成功扱いにする対象
+  const isVerified = isDemo || staticMatch;
 
   if (!isDemo) {
-    const staticToken = STATIC_TOKENS[shop];
-    const staticMatch = staticToken && staticToken === token;
 
     if (!staticMatch) {
       // Redis に保存されたトークンと照合
@@ -118,7 +119,7 @@ export async function POST(request: NextRequest) {
     // レートリミット: planLevelに基づいて判定
     const planLevel = shopData.planLevel || "free";
     const dailyLimits: Record<string, number> = { free: 10, basic: 10, pro: 50 };
-    const dailyLimit = isDemo ? 100 : (dailyLimits[planLevel] ?? 10);
+    const dailyLimit = isVerified ? 100 : (dailyLimits[planLevel] ?? 10);
     if (count && count > dailyLimit) {
       return NextResponse.json(
         { error: `本日の更新回数の上限に達しました（1日${dailyLimit}回まで）。プロプラン（初年度 月額1,980円）なら1日50回まで更新できます。` },
@@ -127,8 +128,8 @@ export async function POST(request: NextRequest) {
     }
     await withTimeout(redis.set(`${REDIS_PREFIX}${shop}`, stockWithTime, { ex: 604800 }));
   } catch {
-    // Redis接続エラー時もデモでは成功扱い
-    if (!isDemo) {
+    // Redis接続エラー時は認証済み店舗なら成功扱い
+    if (!isVerified) {
       return NextResponse.json({ error: "サーバーエラーが発生しました。しばらくしてから再度お試しください。" }, { status: 500 });
     }
   }
