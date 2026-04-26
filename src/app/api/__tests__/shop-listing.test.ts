@@ -1,11 +1,8 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
-// Redis モック
-vi.mock("@/lib/redis", () => ({
-  redis: {
-    incr: vi.fn().mockResolvedValue(1),
-    expire: vi.fn().mockResolvedValue(1),
-  },
+// DynamoDB モック
+vi.mock("@/lib/dynamodb", () => ({
+  dbIncr: vi.fn().mockResolvedValue(1),
 }));
 
 const originalEnv = { ...process.env };

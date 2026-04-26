@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { redis } from "@/lib/redis";
+import { dbExists, dbPut, dbIncr } from "@/lib/dynamodb";
 
 const FLAG_THRESHOLD = 3;
 
@@ -19,22 +19,20 @@ export async function POST(request: Request) {
     }
 
     // 二重通報防止
-    const userFlagKey = `report_user_flag:${sessionId}:${reportId}`;
-    const alreadyFlagged = await redis.exists(userFlagKey);
+    const alreadyFlagged = await dbExists(`REPORT#${reportId}`, `USERFLAG#${sessionId}`);
     if (alreadyFlagged) {
       return NextResponse.json({ ok: true, message: "既に通報済みです" });
     }
 
     // 通報記録
-    await redis.set(userFlagKey, "1", { ex: 365 * 24 * 60 * 60 });
+    await dbPut(`REPORT#${reportId}`, `USERFLAG#${sessionId}`, "1", 365 * 24 * 60 * 60);
 
     // 通報カウントをインクリメント
-    const flagKey = `report_flags:${reportId}`;
-    const count = await redis.incr(flagKey);
+    const count = await dbIncr(`REPORT#${reportId}`, "FLAGCOUNT");
 
     // 閾値超え → 自動非表示
     if (count && count >= FLAG_THRESHOLD) {
-      await redis.set(`report_flagged:${reportId}`, "1");
+      await dbPut(`REPORT#${reportId}`, "FLAGGED", "1");
     }
 
     return NextResponse.json({

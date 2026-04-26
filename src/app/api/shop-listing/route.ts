@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { redis } from "@/lib/redis";
+import { dbIncr } from "@/lib/dynamodb";
 
 const GAS_URL = process.env.GAS_CATCH_REPORT_URL;
 
@@ -11,14 +11,10 @@ function isValidEmail(email: string): boolean {
 // IPベースのレート制限（1IP 1分間に5回まで）
 async function checkRateLimit(ip: string): Promise<boolean> {
   try {
-    const key = `shoplisting_rl:${ip}`;
-    const count = await redis.incr(key);
-    if (count === 1) {
-      await redis.expire(key, 60);
-    }
+    const count = await dbIncr(`RATELIMIT#${ip}`, "SHOPLISTING", 1, 60);
     return count <= 5;
   } catch {
-    return true; // Redis障害時は通す
+    return true; // DB障害時は通す
   }
 }
 

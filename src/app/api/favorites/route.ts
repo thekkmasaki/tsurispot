@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { redis } from "@/lib/redis";
-
-const PREFIX = "fav:";
+import { dbGet, dbBatchGet, dbIncr, dbDecr } from "@/lib/dynamodb";
 
 // GET /api/favorites?slug=xxx or ?slugs=a,b,c (一括)
 export async function GET(request: NextRequest) {
@@ -10,7 +8,7 @@ export async function GET(request: NextRequest) {
   const slugs = searchParams.get("slugs");
 
   if (slug) {
-    const count = await redis.get<number>(`${PREFIX}${slug}`);
+    const count = await dbGet<number>(`SPOT#${slug}`, "FAVCOUNT");
     return NextResponse.json({ slug, count: count || 0 }, {
       headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300" },
     });
@@ -18,8 +16,8 @@ export async function GET(request: NextRequest) {
 
   if (slugs) {
     const slugList = slugs.split(",").slice(0, 50); // 最大50件
-    const keys = slugList.map(s => `${PREFIX}${s}`);
-    const values = await redis.mget<(number | null)[]>(...keys);
+    const keys = slugList.map(s => ({ pk: `SPOT#${s}`, sk: "FAVCOUNT" }));
+    const values = await dbBatchGet<number>(keys);
     const counts: Record<string, number> = {};
     slugList.forEach((s, i) => { counts[s] = values[i] || 0; });
     return NextResponse.json({ counts }, {
@@ -40,12 +38,12 @@ export async function POST(request: NextRequest) {
   }
 
   if (action === "increment") {
-    const count = await redis.incr(`${PREFIX}${slug}`);
+    const count = await dbIncr(`SPOT#${slug}`, "FAVCOUNT");
     return NextResponse.json({ slug, count });
   } else if (action === "decrement") {
-    const current = await redis.get<number>(`${PREFIX}${slug}`);
+    const current = await dbGet<number>(`SPOT#${slug}`, "FAVCOUNT");
     if (current && current > 0) {
-      const count = await redis.decr(`${PREFIX}${slug}`);
+      const count = await dbDecr(`SPOT#${slug}`, "FAVCOUNT");
       return NextResponse.json({ slug, count });
     }
     return NextResponse.json({ slug, count: 0 });

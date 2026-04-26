@@ -1,14 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { NextRequest } from "next/server";
 
-// Redis モック
-vi.mock("@/lib/redis", () => ({
-  redis: {
-    get: vi.fn(),
-    set: vi.fn(),
-    incr: vi.fn(),
-    expire: vi.fn(),
-  },
+// DynamoDB モック
+vi.mock("@/lib/dynamodb", () => ({
+  dbGet: vi.fn(),
+  dbPut: vi.fn(),
+  dbIncr: vi.fn(),
 }));
 
 // shops モック - sample-premium/basic/free のみ存在扱い
@@ -24,7 +21,7 @@ vi.mock("@/lib/data/shops", () => ({
 }));
 
 import { GET, POST } from "../bait-stock/route";
-import { redis } from "@/lib/redis";
+import { dbGet, dbPut, dbIncr } from "@/lib/dynamodb";
 
 describe("bait-stock API", () => {
   beforeEach(() => {
@@ -40,9 +37,9 @@ describe("bait-stock API", () => {
       expect(data.error).toBeDefined();
     });
 
-    it("Redis にデータがある場合 live=true で返す", async () => {
+    it("DynamoDB にデータがある場合 live=true で返す", async () => {
       const mockStock = [{ name: "アオイソメ", available: true, updatedAt: "3/21 10:00" }];
-      vi.mocked(redis.get).mockResolvedValue(mockStock);
+      vi.mocked(dbGet).mockResolvedValue(mockStock);
 
       const req = new NextRequest("http://localhost/api/bait-stock?shop=sample-premium");
       const res = await GET(req);
@@ -53,8 +50,8 @@ describe("bait-stock API", () => {
       expect(data.shop).toBe("sample-premium");
     });
 
-    it("Redis にデータがない場合は静的データにフォールバック (live=false)", async () => {
-      vi.mocked(redis.get).mockResolvedValue(null);
+    it("DynamoDB にデータがない場合は静的データにフォールバック (live=false)", async () => {
+      vi.mocked(dbGet).mockResolvedValue(null);
 
       const req = new NextRequest("http://localhost/api/bait-stock?shop=sample-premium");
       const res = await GET(req);
@@ -65,7 +62,7 @@ describe("bait-stock API", () => {
     });
 
     it("存在しない shop でも 200 (空の静的データ)", async () => {
-      vi.mocked(redis.get).mockResolvedValue(null);
+      vi.mocked(dbGet).mockResolvedValue(null);
 
       const req = new NextRequest("http://localhost/api/bait-stock?shop=nonexistent");
       const res = await GET(req);
@@ -75,8 +72,8 @@ describe("bait-stock API", () => {
       expect(data.stock).toEqual([]);
     });
 
-    it("Redis エラー時も静的データにフォールバック", async () => {
-      vi.mocked(redis.get).mockRejectedValue(new Error("connection failed"));
+    it("DynamoDB エラー時も静的データにフォールバック", async () => {
+      vi.mocked(dbGet).mockRejectedValue(new Error("connection failed"));
 
       const req = new NextRequest("http://localhost/api/bait-stock?shop=sample-premium");
       const res = await GET(req);
@@ -88,9 +85,8 @@ describe("bait-stock API", () => {
 
   describe("POST", () => {
     it("デモ店舗はトークン不要で在庫更新成功", async () => {
-      vi.mocked(redis.incr).mockResolvedValue(1);
-      vi.mocked(redis.expire).mockResolvedValue(1);
-      vi.mocked(redis.set).mockResolvedValue("OK");
+      vi.mocked(dbIncr).mockResolvedValue(1);
+      vi.mocked(dbPut).mockResolvedValue(undefined);
 
       const req = new NextRequest("http://localhost/api/bait-stock", {
         method: "POST",
@@ -149,7 +145,7 @@ describe("bait-stock API", () => {
     });
 
     it("非デモ店舗で無効なトークンは 403", async () => {
-      vi.mocked(redis.get).mockResolvedValue("correct-token");
+      vi.mocked(dbGet).mockResolvedValue("correct-token");
 
       const req = new NextRequest("http://localhost/api/bait-stock", {
         method: "POST",
@@ -163,8 +159,8 @@ describe("bait-stock API", () => {
       expect(res.status).toBe(403);
     });
 
-    it("非デモ店舗で Redis にトークンがない場合も 403", async () => {
-      vi.mocked(redis.get).mockResolvedValue(null);
+    it("非デモ店舗で DynamoDB にトークンがない場合も 403", async () => {
+      vi.mocked(dbGet).mockResolvedValue(null);
 
       const req = new NextRequest("http://localhost/api/bait-stock", {
         method: "POST",
@@ -179,12 +175,9 @@ describe("bait-stock API", () => {
     });
 
     it("存在しない shop で 404", async () => {
-      // デモ店舗なのでトークン検証はスキップされるが、shop存在確認で404
-      // → sample-xxx 以外で getShopBySlug が undefined を返す場合
-      // 非デモ店舗はまずトークン検証 → トークンが一致しても shop がなければ 404
-      vi.mocked(redis.get).mockResolvedValue("valid-token");
-      vi.mocked(redis.incr).mockResolvedValue(1);
-      vi.mocked(redis.expire).mockResolvedValue(1);
+      vi.mocked(dbGet).mockResolvedValue("valid-token");
+      vi.mocked(dbIncr).mockResolvedValue(1);
+      vi.mocked(dbPut).mockResolvedValue(undefined);
 
       const req = new NextRequest("http://localhost/api/bait-stock", {
         method: "POST",
@@ -199,8 +192,8 @@ describe("bait-stock API", () => {
     });
 
     it("レートリミット超過で 429", async () => {
-      vi.mocked(redis.incr).mockResolvedValue(101);
-      vi.mocked(redis.set).mockResolvedValue("OK");
+      vi.mocked(dbIncr).mockResolvedValue(101);
+      vi.mocked(dbPut).mockResolvedValue(undefined);
 
       const req = new NextRequest("http://localhost/api/bait-stock", {
         method: "POST",

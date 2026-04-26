@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 import { getCatchReportsBySpot, type CatchReport } from "@/lib/data/catch-reports";
-import { redis } from "@/lib/redis";
+import { dbGet, dbBatchGet } from "@/lib/dynamodb";
 
 const GAS_READ_URL = process.env.GAS_CATCH_REPORT_URL;
 
-// GET: ハードコード + GAS + Redis UGCデータをマージして返す
+// GET: ハードコード + GAS + DynamoDB UGCデータをマージして返す
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const spot = searchParams.get("spot");
@@ -47,33 +47,29 @@ export async function GET(request: Request) {
     }
   }
 
-  // Redis UGCデータを取得（最新50件）
-  let redisReports: CatchReport[] = [];
+  // DynamoDB UGCデータを取得（最新50件）
+  let dbReports: CatchReport[] = [];
   try {
-    const raw = await redis.lrange(`ugc_reports:${spot}`, 0, 49);
-    if (Array.isArray(raw)) {
-      // 通報で非表示になったレポートIDを一括チェック
-      const parsed = raw.map((item) => {
-        if (typeof item === "string") return JSON.parse(item);
-        return item; // Upstash auto-deserialize
-      }) as CatchReport[];
+    const allReportsFromDb = await dbGet<CatchReport[]>(`SPOT#${spot}`, "UGC_REPORTS");
+    if (Array.isArray(allReportsFromDb) && allReportsFromDb.length > 0) {
+      const parsed = allReportsFromDb.slice(0, 50);
 
       if (parsed.length > 0) {
-        // 通報フラグチェック（パイプラインで一括取得）
-        const flagKeys = parsed.map((r) => `report_flagged:${r.id}`);
-        const flags = await Promise.all(flagKeys.map((key) => redis.exists(key)));
-        redisReports = parsed.filter((_, i) => !flags[i]);
+        // 通報フラグチェック（一括取得）
+        const flagKeys = parsed.map((r) => ({ pk: `REPORT#${r.id}`, sk: "FLAGGED" }));
+        const flags = await dbBatchGet(flagKeys);
+        dbReports = parsed.filter((_, i) => flags[i] === null);
       }
     }
   } catch (err) {
-    console.error("[catch-reports] Redis fetch error:", err);
+    console.error("[catch-reports] DynamoDB fetch error:", err);
   }
 
   // マージ（重複排除: idベース）
   const idSet = new Set(hardcoded.map((r) => r.id));
   const allReports = [...hardcoded];
 
-  for (const r of [...gasReports, ...redisReports]) {
+  for (const r of [...gasReports, ...dbReports]) {
     if (!idSet.has(r.id)) {
       idSet.add(r.id);
       allReports.push(r);

@@ -1,19 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { uploadToS3, deleteFromS3 } from "@/lib/s3";
-import { redis } from "@/lib/redis";
+import { dbGet, dbPut } from "@/lib/dynamodb";
 import { getShopBySlug } from "@/lib/data/shops";
 
-const REDIS_PREFIX = "shopphotos:";
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 const PLAN_LIMITS: Record<string, number> = { basic: 3, pro: 20 };
-
-function withTimeout<T>(promise: Promise<T>, ms = 5000): Promise<T | null> {
-  return Promise.race([
-    promise,
-    new Promise<null>((resolve) => setTimeout(() => resolve(null), ms)),
-  ]);
-}
 
 async function authenticate(
   shop: string,
@@ -23,7 +15,7 @@ async function authenticate(
   if (isDemo && token === "demo") return { ok: true };
 
   try {
-    const stored = await withTimeout(redis.get<string>(`shoptoken:${shop}`));
+    const stored = await dbGet<string>(`SHOP#${shop}`, "TOKEN");
     if (!stored || stored !== token) {
       return { ok: false, error: "invalid token", status: 403 };
     }
@@ -41,7 +33,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const photos = await withTimeout(redis.get<string[]>(`${REDIS_PREFIX}${slug}`));
+    const photos = await dbGet<string[]>(`SHOP#${slug}`, "PHOTOS");
     return NextResponse.json(
       { photos: photos || [], shop: slug },
       { headers: { "Cache-Control": "no-cache" } }
@@ -104,7 +96,7 @@ export async function POST(request: NextRequest) {
   let currentPhotos: string[] = [];
   try {
     currentPhotos =
-      (await withTimeout(redis.get<string[]>(`${REDIS_PREFIX}${shop}`))) || [];
+      (await dbGet<string[]>(`SHOP#${shop}`, "PHOTOS")) || [];
   } catch {
     // pass
   }
@@ -128,11 +120,9 @@ export async function POST(request: NextRequest) {
     const buffer = Buffer.from(await file.arrayBuffer());
     const url = await uploadToS3(filename, buffer, file.type);
 
-    // Redis に URL を追加
+    // DynamoDB に URL を追加
     const updatedPhotos = [...currentPhotos, url];
-    await withTimeout(
-      redis.set(`${REDIS_PREFIX}${shop}`, updatedPhotos, { ex: 2592000 })
-    );
+    await dbPut(`SHOP#${shop}`, "PHOTOS", updatedPhotos, 2592000);
 
     return NextResponse.json({
       success: true,
@@ -170,10 +160,10 @@ export async function DELETE(request: NextRequest) {
     return NextResponse.json({ error: auth.error }, { status: auth.status });
   }
 
-  // Redis から現在の写真一覧を取得し、削除対象URLがこのshopに属するか確認
+  // DynamoDB から現在の写真一覧を取得し、削除対象URLがこのshopに属するか確認
   try {
     const currentPhotos =
-      (await withTimeout(redis.get<string[]>(`${REDIS_PREFIX}${shop}`))) || [];
+      (await dbGet<string[]>(`SHOP#${shop}`, "PHOTOS")) || [];
     if (!currentPhotos.includes(url)) {
       return NextResponse.json({ error: "指定された写真が見つかりません" }, { status: 404 });
     }
@@ -185,11 +175,9 @@ export async function DELETE(request: NextRequest) {
       // S3削除失敗は無視（URLが無効な場合もある）
     }
 
-    // Redis から URL を削除
+    // DynamoDB から URL を削除
     const updatedPhotos = currentPhotos.filter((p) => p !== url);
-    await withTimeout(
-      redis.set(`${REDIS_PREFIX}${shop}`, updatedPhotos, { ex: 2592000 })
-    );
+    await dbPut(`SHOP#${shop}`, "PHOTOS", updatedPhotos, 2592000);
     return NextResponse.json({ success: true, photos: updatedPhotos });
   } catch {
     return NextResponse.json(

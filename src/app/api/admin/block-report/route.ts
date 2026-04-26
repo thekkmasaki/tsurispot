@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { redis } from "@/lib/redis";
+import { dbPut } from "@/lib/dynamodb";
 import { deleteFromS3 } from "@/lib/s3";
 
 const ADMIN_SECRET = process.env.ADMIN_SECRET;
@@ -23,17 +23,11 @@ export async function POST(request: Request) {
     }
 
     // 非表示フラグをセット
-    await redis.set(`report_flagged:${reportId}`, "1");
+    await dbPut(`REPORT#${reportId}`, "FLAGGED", "1");
 
     // 写真削除（オプション）
     if (deletePhoto) {
-      // Redisからレポートデータを探して写真URLを取得
-      // ugc_reports:* のリストを走査するのはコストが高いため、
-      // 写真URLを直接指定する方式に変更可能だが、簡易実装として
-      // reportIdからレポートを特定する
       try {
-        // reportIdの形式: ugc-{timestamp}-{random}
-        // スポットslugは不明なため、管理者がphotoUrlも指定できるよう拡張
         const { photoUrl } = body as { photoUrl?: string };
         if (photoUrl && typeof photoUrl === "string" && photoUrl.startsWith("https://")) {
           await deleteFromS3(photoUrl);

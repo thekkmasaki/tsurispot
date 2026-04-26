@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { redis } from "@/lib/redis";
+import { dbGet, dbPut, dbIncr } from "@/lib/dynamodb";
 import { getShopBySlug } from "@/lib/data/shops";
-
-const REDIS_PREFIX = "shopinfo:";
 
 export interface ShopInfoOverride {
   businessHours?: string;
@@ -12,13 +10,6 @@ export interface ShopInfoOverride {
   ownerMessage?: string;
   services?: string[];
   updatedAt: string;
-}
-
-function withTimeout<T>(promise: Promise<T>, ms = 5000): Promise<T | null> {
-  return Promise.race([
-    promise,
-    new Promise<null>((resolve) => setTimeout(() => resolve(null), ms)),
-  ]);
 }
 
 // GET /api/shop-info?shop=slug
@@ -31,12 +22,12 @@ export async function GET(request: NextRequest) {
   const headers = { "Cache-Control": "no-cache" };
 
   try {
-    const data = await withTimeout(redis.get<ShopInfoOverride>(`${REDIS_PREFIX}${slug}`));
+    const data = await dbGet<ShopInfoOverride>(`SHOP#${slug}`, "INFO");
     if (data) {
       return NextResponse.json({ info: data, shop: slug, live: true }, { headers });
     }
   } catch {
-    // Redis失敗時は空を返す
+    // DynamoDB失敗時は空を返す
   }
 
   return NextResponse.json({ info: null, shop: slug, live: false }, { headers });
@@ -60,7 +51,7 @@ export async function POST(request: NextRequest) {
   const isDemo = shop === "sample-premium" || shop === "sample-basic" || shop === "sample-free";
   if (!isDemo) {
     try {
-      const storedToken = await withTimeout(redis.get<string>(`shoptoken:${shop}`));
+      const storedToken = await dbGet<string>(`SHOP#${shop}`, "TOKEN");
       if (!storedToken || storedToken !== token) {
         return NextResponse.json({ error: "invalid token" }, { status: 403 });
       }
@@ -76,13 +67,10 @@ export async function POST(request: NextRequest) {
 
   // レート制限: 1店舗あたり1日30回まで（デモは100回）
   try {
-    const rateLimitKey = `shopinfolimit:${shop}:${new Date().toISOString().slice(0, 10)}`;
-    const count = await withTimeout(redis.incr(rateLimitKey));
-    if (count === 1) {
-      await withTimeout(redis.expire(rateLimitKey, 86400));
-    }
+    const date = new Date().toISOString().slice(0, 10);
+    const count = await dbIncr(`SHOP#${shop}`, `INFOLIMIT#${date}`, 1, 86400);
     const dailyLimit = isDemo ? 100 : 30;
-    if (count && count > dailyLimit) {
+    if (count > dailyLimit) {
       return NextResponse.json(
         { error: "本日の更新回数の上限に達しました。明日以降にお試しください。" },
         { status: 429 }
@@ -100,9 +88,9 @@ export async function POST(request: NextRequest) {
     updatedAt: timeStr,
   };
 
-  // Redisに保存（30日TTL）
+  // DynamoDBに保存（30日TTL）
   try {
-    await withTimeout(redis.set(`${REDIS_PREFIX}${shop}`, infoWithTime, { ex: 2592000 }));
+    await dbPut(`SHOP#${shop}`, "INFO", infoWithTime, 2592000);
   } catch {
     if (!isDemo) {
       return NextResponse.json({ error: "サーバーエラーが発生しました。しばらくしてから再度お試しください。" }, { status: 500 });

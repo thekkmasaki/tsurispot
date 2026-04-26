@@ -1,11 +1,27 @@
 import { NextResponse } from "next/server";
-import { redis } from "@/lib/redis";
+import { dbGet, dbPut } from "@/lib/dynamodb";
 import { checkNgWords } from "@/lib/moderation";
 
 const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;
 
-// Redis TTL: 365日
+// TTL: 365日
 const TTL_SECONDS = 365 * 24 * 60 * 60;
+
+interface CatchReport {
+  id: string;
+  spotSlug: string;
+  spotName: string;
+  fishName: string;
+  userName: string;
+  comment: string;
+  date: string;
+  approved: boolean;
+  photoUrl?: string;
+  sizeCm?: number;
+  method?: string;
+  weather?: string;
+  submittedAt?: string;
+}
 
 // POST: ユーザー釣果投稿を受け取る
 export async function POST(request: Request) {
@@ -72,7 +88,7 @@ export async function POST(request: Request) {
     }
 
     const reportId = `ugc-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
-    const reportData = {
+    const reportData: CatchReport = {
       id: reportId,
       spotSlug,
       spotName: spotName || "",
@@ -88,14 +104,14 @@ export async function POST(request: Request) {
       submittedAt: new Date().toISOString(),
     };
 
-    // Redis に即時保存（自動承認）
-    const redisKey = `ugc_reports:${spotSlug}`;
+    // DynamoDB に即時保存（自動承認）- read-modify-write
     try {
-      await redis.lpush(redisKey, JSON.stringify(reportData));
-      await redis.expire(redisKey, TTL_SECONDS);
+      const existing = await dbGet<CatchReport[]>(`SPOT#${spotSlug}`, "UGC_REPORTS") ?? [];
+      const updated = [reportData, ...existing].slice(0, 200); // 最大200件保持
+      await dbPut(`SPOT#${spotSlug}`, "UGC_REPORTS", updated, TTL_SECONDS);
     } catch (err) {
-      console.error("[釣果投稿] Redis保存エラー:", err);
-      // Redis障害時もGASに送信するため続行
+      console.error("[釣果投稿] DynamoDB保存エラー:", err);
+      // DynamoDB障害時もGASに送信するため続行
     }
 
     // Google Apps Script Webhook に送信（記録・通知用、fire-and-forget）

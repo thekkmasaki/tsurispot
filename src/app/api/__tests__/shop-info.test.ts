@@ -1,14 +1,11 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { NextRequest } from "next/server";
 
-// Redis モック
-vi.mock("@/lib/redis", () => ({
-  redis: {
-    get: vi.fn(),
-    set: vi.fn(),
-    incr: vi.fn(),
-    expire: vi.fn(),
-  },
+// DynamoDB モック
+vi.mock("@/lib/dynamodb", () => ({
+  dbGet: vi.fn(),
+  dbPut: vi.fn(),
+  dbIncr: vi.fn(),
 }));
 
 // shops モック
@@ -24,7 +21,7 @@ vi.mock("@/lib/data/shops", () => ({
 }));
 
 import { GET, POST } from "../shop-info/route";
-import { redis } from "@/lib/redis";
+import { dbGet, dbPut, dbIncr } from "@/lib/dynamodb";
 
 describe("shop-info API", () => {
   beforeEach(() => {
@@ -40,9 +37,9 @@ describe("shop-info API", () => {
       expect(data.error).toBeDefined();
     });
 
-    it("Redis にデータがある場合 live=true で返す", async () => {
+    it("DynamoDB にデータがある場合 live=true で返す", async () => {
       const mockInfo = { businessHours: "9:00-18:00", updatedAt: "3/21 10:00" };
-      vi.mocked(redis.get).mockResolvedValue(mockInfo);
+      vi.mocked(dbGet).mockResolvedValue(mockInfo);
 
       const req = new NextRequest("http://localhost/api/shop-info?shop=sample-premium");
       const res = await GET(req);
@@ -53,8 +50,8 @@ describe("shop-info API", () => {
       expect(data.shop).toBe("sample-premium");
     });
 
-    it("Redis にデータがない場合 live=false で null を返す", async () => {
-      vi.mocked(redis.get).mockResolvedValue(null);
+    it("DynamoDB にデータがない場合 live=false で null を返す", async () => {
+      vi.mocked(dbGet).mockResolvedValue(null);
 
       const req = new NextRequest("http://localhost/api/shop-info?shop=sample-free");
       const res = await GET(req);
@@ -64,8 +61,8 @@ describe("shop-info API", () => {
       expect(data.info).toBeNull();
     });
 
-    it("Redis エラー時も live=false で返す", async () => {
-      vi.mocked(redis.get).mockRejectedValue(new Error("connection failed"));
+    it("DynamoDB エラー時も live=false で返す", async () => {
+      vi.mocked(dbGet).mockRejectedValue(new Error("connection failed"));
 
       const req = new NextRequest("http://localhost/api/shop-info?shop=sample-premium");
       const res = await GET(req);
@@ -78,9 +75,8 @@ describe("shop-info API", () => {
 
   describe("POST", () => {
     it("デモ店舗で情報更新成功", async () => {
-      vi.mocked(redis.incr).mockResolvedValue(1);
-      vi.mocked(redis.expire).mockResolvedValue(1);
-      vi.mocked(redis.set).mockResolvedValue("OK");
+      vi.mocked(dbIncr).mockResolvedValue(1);
+      vi.mocked(dbPut).mockResolvedValue(undefined);
 
       const req = new NextRequest("http://localhost/api/shop-info", {
         method: "POST",
@@ -109,7 +105,7 @@ describe("shop-info API", () => {
     });
 
     it("非デモ店舗で無効トークンは 403", async () => {
-      vi.mocked(redis.get).mockResolvedValue("correct-token");
+      vi.mocked(dbGet).mockResolvedValue("correct-token");
 
       const req = new NextRequest("http://localhost/api/shop-info", {
         method: "POST",
@@ -123,8 +119,8 @@ describe("shop-info API", () => {
       expect(res.status).toBe(403);
     });
 
-    it("非デモ店舗で Redis にトークンがない場合も 403", async () => {
-      vi.mocked(redis.get).mockResolvedValue(null);
+    it("非デモ店舗で DynamoDB にトークンがない場合も 403", async () => {
+      vi.mocked(dbGet).mockResolvedValue(null);
 
       const req = new NextRequest("http://localhost/api/shop-info", {
         method: "POST",
@@ -139,9 +135,9 @@ describe("shop-info API", () => {
     });
 
     it("存在しない shop で 404 (正しいトークンでも)", async () => {
-      vi.mocked(redis.get).mockResolvedValue("valid-token");
-      vi.mocked(redis.incr).mockResolvedValue(1);
-      vi.mocked(redis.expire).mockResolvedValue(1);
+      vi.mocked(dbGet).mockResolvedValue("valid-token");
+      vi.mocked(dbIncr).mockResolvedValue(1);
+      vi.mocked(dbPut).mockResolvedValue(undefined);
 
       const req = new NextRequest("http://localhost/api/shop-info", {
         method: "POST",
@@ -156,8 +152,8 @@ describe("shop-info API", () => {
     });
 
     it("レートリミット超過で 429", async () => {
-      vi.mocked(redis.incr).mockResolvedValue(101);
-      vi.mocked(redis.set).mockResolvedValue("OK");
+      vi.mocked(dbIncr).mockResolvedValue(101);
+      vi.mocked(dbPut).mockResolvedValue(undefined);
 
       const req = new NextRequest("http://localhost/api/shop-info", {
         method: "POST",

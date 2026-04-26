@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { redis } from "@/lib/redis";
+import { dbGet, dbPut, dbIncr } from "@/lib/dynamodb";
 import { getShopBySlug } from "@/lib/data/shops";
-
-const REDIS_PREFIX = "baitstock:";
 
 export interface BaitStockEntry {
   name: string;
@@ -10,14 +8,6 @@ export interface BaitStockEntry {
   status?: "available" | "low" | "out";
   price?: string;
   updatedAt: string;
-}
-
-// Redis呼び出しに5秒タイムアウトを設定
-function withTimeout<T>(promise: Promise<T>, ms = 5000): Promise<T | null> {
-  return Promise.race([
-    promise,
-    new Promise<null>((resolve) => setTimeout(() => resolve(null), ms)),
-  ]);
 }
 
 // GET /api/bait-stock?shop=slug
@@ -29,14 +19,14 @@ export async function GET(request: NextRequest) {
 
   const headers = { "Cache-Control": "no-cache" };
 
-  // Redis優先、なければ静的データにフォールバック
+  // DynamoDB優先、なければ静的データにフォールバック
   try {
-    const data = await withTimeout(redis.get<BaitStockEntry[]>(`${REDIS_PREFIX}${slug}`));
+    const data = await dbGet<BaitStockEntry[]>(`SHOP#${slug}`, "BAITSTOCK");
     if (data && Array.isArray(data) && data.length > 0) {
       return NextResponse.json({ stock: data, shop: slug, live: true }, { headers });
     }
   } catch {
-    // Redis失敗時は静的データにフォールバック
+    // DynamoDB失敗時は静的データにフォールバック
   }
 
   const shopData = getShopBySlug(slug);
@@ -77,15 +67,15 @@ export async function POST(request: NextRequest) {
     "barbless-karatsu": "barbless-2026",
   };
   const staticMatch = !!(STATIC_TOKENS[shop] && STATIC_TOKENS[shop] === token);
-  // Redis障害時にも保存成功扱いにする対象
+  // DynamoDB障害時にも保存成功扱いにする対象
   const isVerified = isDemo || staticMatch;
 
   if (!isDemo) {
 
     if (!staticMatch) {
-      // Redis に保存されたトークンと照合
+      // DynamoDB に保存されたトークンと照合
       try {
-        const storedToken = await withTimeout(redis.get<string>(`shoptoken:${shop}`));
+        const storedToken = await dbGet<string>(`SHOP#${shop}`, "TOKEN");
         if (!storedToken || storedToken !== token) {
           return NextResponse.json({ error: "invalid token" }, { status: 403 });
         }
@@ -109,26 +99,23 @@ export async function POST(request: NextRequest) {
     updatedAt: timeStr,
   }));
 
-  // Redisに保存（7日間TTL）+ レートリミット
+  // DynamoDBに保存（7日間TTL）+ レートリミット
   try {
-    const rateLimitKey = `baitlimit:${shop}:${new Date().toISOString().slice(0, 10)}`;
-    const count = await withTimeout(redis.incr(rateLimitKey));
-    if (count === 1) {
-      await withTimeout(redis.expire(rateLimitKey, 86400));
-    }
+    const date = new Date().toISOString().slice(0, 10);
+    const count = await dbIncr(`SHOP#${shop}`, `BAITLIMIT#${date}`, 1, 86400);
     // レートリミット: planLevelに基づいて判定
     const planLevel = shopData.planLevel || "free";
     const dailyLimits: Record<string, number> = { free: 10, basic: 10, pro: 50 };
     const dailyLimit = isVerified ? 100 : (dailyLimits[planLevel] ?? 10);
-    if (count && count > dailyLimit) {
+    if (count > dailyLimit) {
       return NextResponse.json(
         { error: `本日の更新回数の上限に達しました（1日${dailyLimit}回まで）。プロプラン（初年度 月額1,980円）なら1日50回まで更新できます。` },
         { status: 429 }
       );
     }
-    await withTimeout(redis.set(`${REDIS_PREFIX}${shop}`, stockWithTime, { ex: 604800 }));
+    await dbPut(`SHOP#${shop}`, "BAITSTOCK", stockWithTime, 604800);
   } catch {
-    // Redis接続エラー時は認証済み店舗なら成功扱い
+    // DynamoDB接続エラー時は認証済み店舗なら成功扱い
     if (!isVerified) {
       return NextResponse.json({ error: "サーバーエラーが発生しました。しばらくしてから再度お試しください。" }, { status: 500 });
     }

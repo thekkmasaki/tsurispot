@@ -35,14 +35,6 @@ export function CatchReportButton({ spotSlug }: CatchReportButtonProps) {
     if (savedTime && Date.now() - parseInt(savedTime) < 86400000) {
       setReported(true);
     }
-
-    // サーバーからカウント取得
-    fetch(`/api/catch-report?spot=${encodeURIComponent(spotSlug)}`)
-      .then((r) => r.json())
-      .then((data) => {
-        if (typeof data.count === "number") setCount(data.count);
-      })
-      .catch(() => {});
   }, [spotSlug, localKey]);
 
   const handleReport = useCallback(async () => {

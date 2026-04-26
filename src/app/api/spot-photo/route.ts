@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { uploadToS3, deleteFromS3 } from "@/lib/s3";
 import { moderateImage } from "@/lib/rekognition";
-import { redis } from "@/lib/redis";
+import { dbGet, dbPut } from "@/lib/dynamodb";
 
-const REDIS_PREFIX = "spotphotos:";
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB（クライアント側で自動圧縮済み）
 const MAX_PHOTOS_PER_SPOT = 20;
@@ -22,7 +21,7 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const photos = (await redis.get<SpotPhotoEntry[]>(`${REDIS_PREFIX}${slug}`)) || [];
+    const photos = (await dbGet<SpotPhotoEntry[]>(`SPOT#${slug}`, "PHOTOS")) || [];
     return NextResponse.json(
       { photos: photos.map((p) => ({ url: p.url, uploadedAt: p.uploadedAt })) },
       { headers: { "Cache-Control": "no-cache" } },
@@ -51,7 +50,7 @@ export async function POST(request: NextRequest) {
   // 枚数制限チェック
   let currentPhotos: SpotPhotoEntry[] = [];
   try {
-    currentPhotos = (await redis.get<SpotPhotoEntry[]>(`${REDIS_PREFIX}${slug}`)) || [];
+    currentPhotos = (await dbGet<SpotPhotoEntry[]>(`SPOT#${slug}`, "PHOTOS")) || [];
   } catch { /* pass */ }
 
   if (currentPhotos.length >= MAX_PHOTOS_PER_SPOT) {
@@ -87,7 +86,7 @@ export async function POST(request: NextRequest) {
 
     const entry: SpotPhotoEntry = { url, token, uploadedAt: Date.now() };
     const updatedPhotos = [...currentPhotos, entry];
-    await redis.set(`${REDIS_PREFIX}${slug}`, updatedPhotos);
+    await dbPut(`SPOT#${slug}`, "PHOTOS", updatedPhotos);
 
     return NextResponse.json({ ok: true, url, token });
   } catch (e) {
@@ -106,7 +105,7 @@ export async function DELETE(request: NextRequest) {
   }
 
   try {
-    const currentPhotos = (await redis.get<SpotPhotoEntry[]>(`${REDIS_PREFIX}${slug}`)) || [];
+    const currentPhotos = (await dbGet<SpotPhotoEntry[]>(`SPOT#${slug}`, "PHOTOS")) || [];
     const target = currentPhotos.find((p) => p.url === url && p.token === token);
     if (!target) {
       return NextResponse.json({ error: "写真が見つからないか、削除権限がありません" }, { status: 404 });
@@ -115,7 +114,7 @@ export async function DELETE(request: NextRequest) {
     try { await deleteFromS3(url); } catch { /* S3削除失敗は無視 */ }
 
     const updatedPhotos = currentPhotos.filter((p) => p.url !== url);
-    await redis.set(`${REDIS_PREFIX}${slug}`, updatedPhotos);
+    await dbPut(`SPOT#${slug}`, "PHOTOS", updatedPhotos);
 
     return NextResponse.json({ ok: true });
   } catch {
