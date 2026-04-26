@@ -521,10 +521,91 @@ export default function PartnerPage() {
               </div>
             </div>
             <p className="text-xs text-muted-foreground">
-              ※QRコード設置は無料です。エサ在庫管理などの追加機能は、無料プラン（永久無料）・ベーシック（初年度 月額500円）・プロ（初年度 月額1,980円）をご用意しています。今なら有料プランは3ヶ月無料でお試しいただけます。
+              ※QRコード設置は無料です。エサ在庫管理などの追加機能は、無料プラン（永久無料）・ベーシック（初年度 月額500円）・プロ（初年度 月額1,980円）をご用意しています。
             </p>
           </CardContent>
         </Card>
+      </section>
+
+      {/* ===== 料金プラン ===== */}
+      <section className="mb-14 sm:mb-20">
+        <h2 className="mb-2 text-center text-xl font-bold sm:text-2xl">
+          料金プラン
+        </h2>
+        <p className="mb-8 text-center text-sm text-muted-foreground">
+          まずは無料で始めて、効果を実感してからアップグレード
+        </p>
+
+        <div className="grid gap-4 sm:grid-cols-3">
+          {/* 無料プラン */}
+          <Card className="gap-0 py-0">
+            <CardContent className="p-5 sm:p-6">
+              <h3 className="text-base font-bold">無料プラン</h3>
+              <p className="mt-1 text-2xl font-bold">¥0<span className="text-sm font-normal text-muted-foreground">/月</span></p>
+              <p className="mt-1 text-xs text-muted-foreground">永久無料</p>
+              <ul className="mt-4 space-y-2 text-sm">
+                {["店舗基本情報の掲載", "エサ在庫更新（1日10回）", "近くの釣りスポットと連携", "Google構造化データ配信"].map((f) => (
+                  <li key={f} className="flex items-start gap-2">
+                    <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-emerald-500" />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-5">
+                <Button variant="outline" className="w-full" asChild>
+                  <a href="#contact">無料で掲載する</a>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* ベーシックプラン */}
+          <Card className="gap-0 border-blue-200 py-0">
+            <CardContent className="p-5 sm:p-6">
+              <h3 className="text-base font-bold text-blue-700">ベーシックプラン</h3>
+              <p className="mt-1 text-2xl font-bold">¥500<span className="text-sm font-normal text-muted-foreground">/月</span></p>
+              <p className="mt-1 text-xs text-muted-foreground">初年度価格（2年目以降 ¥980/月）</p>
+              <ul className="mt-4 space-y-2 text-sm">
+                {["無料プランの全機能", "公式バッジ表示", "検索結果の優先表示", "写真3枚まで掲載", "Googleのお店情報を整備"].map((f) => (
+                  <li key={f} className="flex items-start gap-2">
+                    <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-blue-500" />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-5">
+                <Button className="w-full bg-blue-600 hover:bg-blue-700" asChild>
+                  <Link href="/subscribe/basic">ベーシックプランに申し込む</Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* プロプラン */}
+          <Card className="relative gap-0 border-2 border-amber-200 py-0">
+            <div className="absolute -top-3 left-1/2 -translate-x-1/2">
+              <Badge className="bg-amber-500 text-white hover:bg-amber-500">おすすめ</Badge>
+            </div>
+            <CardContent className="p-5 pt-6 sm:p-6 sm:pt-7">
+              <h3 className="text-base font-bold text-amber-700">プロプラン</h3>
+              <p className="mt-1 text-2xl font-bold">¥1,980<span className="text-sm font-normal text-muted-foreground">/月</span></p>
+              <p className="mt-1 text-xs text-muted-foreground">初年度価格（2年目以降 ¥2,980/月）</p>
+              <ul className="mt-4 space-y-2 text-sm">
+                {["ベーシックの全機能", "写真20枚・店主メッセージ", "エサ在庫1日50回更新", "クーポン配信・商品PR", "Googleのお店情報を整備"].map((f) => (
+                  <li key={f} className="flex items-start gap-2">
+                    <CheckCircle2 className="mt-0.5 size-3.5 shrink-0 text-amber-500" />
+                    <span>{f}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-5">
+                <Button className="w-full bg-amber-500 hover:bg-amber-600" asChild>
+                  <Link href="/subscribe/pro">プロプランに申し込む</Link>
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </section>
 
       {/* ===== サイトの特徴 ===== */}

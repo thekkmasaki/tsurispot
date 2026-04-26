@@ -28,7 +28,7 @@ export default function LegalPage() {
             特定商取引法に基づく表記
           </h1>
           <p className="mt-3 text-sm text-muted-foreground">
-            最終更新日: 2026年3月11日
+            最終更新日: 2026年4月26日
           </p>
         </div>
       </section>
@@ -176,7 +176,9 @@ export default function LegalPage() {
               </div>
               <div className="space-y-3 text-sm leading-relaxed text-muted-foreground">
                 <p>
-                  有料掲載プランのお支払い方法は、お問い合わせ後に個別にご案内いたします（銀行振込等）。
+                  クレジットカード（Visa / Mastercard / American Express / JCB）
+                  <br />
+                  ※ Stripe決済を利用しています。カード情報は当サイトでは保持せず、Stripeが安全に管理します。
                 </p>
               </div>
             </div>
@@ -195,7 +197,7 @@ export default function LegalPage() {
               </div>
               <div className="space-y-3 text-sm leading-relaxed text-muted-foreground">
                 <p>
-                  お支払い時期はお申し込み後に個別にご案内いたします。サービスはお支払い確認後、1〜3営業日以内に開始いたします。
+                  お申し込み時に初回課金が行われ、以降毎月同日に自動課金されます。決済完了後、即時サービスが開始されます。
                 </p>
               </div>
             </div>
@@ -215,13 +217,36 @@ export default function LegalPage() {
               <div className="space-y-3 text-sm leading-relaxed text-muted-foreground">
                 <p className="font-medium text-foreground">有料掲載プラン</p>
                 <p>
-                  有料プランはいつでも解約可能です。解約のお申し出は月末までにご連絡いただければ、翌月から課金が停止されます。日割り計算による返金は行っておりません。
+                  有料プランは管理画面からいつでも即時解約可能です。解約後も現在の課金期間終了までサービスをご利用いただけます。日割り計算による返金は行っておりません。
                 </p>
                 <p className="font-medium text-foreground">アフィリエイト商品</p>
                 <p>
                   アフィリエイトリンク経由でご購入された商品に関する返品・交換については、
                   各購入先のECサイト（Amazon.co.jp、楽天市場等）の規約に従ってご対応ください。
                 </p>
+              </div>
+            </div>
+
+            <Separator />
+
+            {/* サブスクリプション自動更新 */}
+            <div>
+              <div className="mb-4 flex items-center gap-2">
+                <Badge variant="secondary" className="text-xs">
+                  10
+                </Badge>
+                <h2 className="text-lg font-semibold">
+                  サブスクリプション自動更新に関する事項
+                </h2>
+              </div>
+              <div className="space-y-3 text-sm leading-relaxed text-muted-foreground">
+                <ul className="ml-4 list-disc space-y-1.5">
+                  <li>有料プランは月額制のサブスクリプションサービスです。</li>
+                  <li>毎月自動的にクレジットカードへの課金が行われます。</li>
+                  <li>解約手続きを行わない限り、自動更新されます。</li>
+                  <li>解約は管理画面の「プランを管理」からいつでも可能です。</li>
+                  <li>初年度割引: ベーシックプラン 月額500円→980円（13ヶ月目から通常価格）、プロプラン 月額1,980円→2,980円（13ヶ月目から通常価格）。</li>
+                </ul>
               </div>
             </div>
 

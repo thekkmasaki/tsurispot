@@ -16,6 +16,7 @@ import {
   Store,
   ShieldCheck,
 } from "lucide-react";
+import { PlanManagement } from "@/components/shops/plan-management";
 
 const TOKENS: Record<string, string> = {
   "point-honmoku": "demo1234",
@@ -244,6 +245,8 @@ export function DashboardClient() {
           </div>
         </CardContent>
       </Card>
+
+      <PlanManagement shopSlug={slug} token={token || ""} />
 
       <p className="mt-4 text-xs text-muted-foreground">
         ※ 現在はブラウザのローカルストレージに保存されます。同じブラウザからのみ変更内容が反映されます。

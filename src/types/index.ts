@@ -349,6 +349,15 @@ export interface BaitStock {
   updatedAt: string;
 }
 
+/** Stripe サブスクリプション情報（DynamoDB保存） */
+export interface SubscriptionData {
+  stripeSubscriptionId: string;
+  plan: "basic" | "pro";
+  status: "active" | "past_due" | "canceled" | "unpaid";
+  currentPeriodEnd: string;
+  cancelAtPeriodEnd?: boolean;
+}
+
 export type SpotTypeLabel = {
   [key in FishingSpot["spotType"]]: string;
 };

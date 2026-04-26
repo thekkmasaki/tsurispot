@@ -9,15 +9,15 @@ function getEstimatedUsers(): number {
   const day = now.getDay();
   const isWeekend = day === 0 || day === 6;
 
-  // 時間帯別の基本値
+  // 時間帯別の基本値（月間9万PV規模に対応）
   const hourlyBase: Record<number, number> = {
-    0: 8, 1: 5, 2: 3, 3: 2, 4: 3, 5: 12,
-    6: 20, 7: 28, 8: 32, 9: 35, 10: 38, 11: 40,
-    12: 42, 13: 38, 14: 35, 15: 36, 16: 40, 17: 45,
-    18: 50, 19: 55, 20: 52, 21: 45, 22: 30, 23: 15,
+    0: 18, 1: 12, 2: 8, 3: 5, 4: 8, 5: 25,
+    6: 45, 7: 60, 8: 68, 9: 75, 10: 80, 11: 85,
+    12: 90, 13: 82, 14: 75, 15: 78, 16: 85, 17: 95,
+    18: 105, 19: 115, 20: 110, 21: 95, 22: 65, 23: 35,
   };
 
-  let base = hourlyBase[hour] ?? 20;
+  let base = hourlyBase[hour] ?? 45;
   if (isWeekend) base = Math.round(base * 1.4);
 
   // ランダム変動（±15%）
