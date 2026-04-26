@@ -41,6 +41,29 @@ jobs:
       - name: Run tests
         run: npm run test:run
 
+      # Next.jsビルドキャッシュ（.next/cache）を復元
+      - name: Restore Next.js build cache
+        if: github.ref == 'refs/heads/master'
+        uses: actions/cache@v4
+        with:
+          path: .next/cache
+          key: nextjs-build-${{ hashFiles('package-lock.json') }}-${{ hashFiles('src/**') }}
+          restore-keys: |
+            nextjs-build-${{ hashFiles('package-lock.json') }}-
+            nextjs-build-
+
+      # Next.jsビルドをDocker外で実行（キャッシュ活用で高速化）
+      - name: Build Next.js
+        if: github.ref == 'refs/heads/master'
+        run: npm run build
+        env:
+          NODE_OPTIONS: "--max-old-space-size=8192"
+          NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID }}
+          NEXT_PUBLIC_LINE_ADD_FRIEND_URL: ${{ secrets.NEXT_PUBLIC_LINE_ADD_FRIEND_URL }}
+          NEXT_PUBLIC_ADSENSE_ID: ${{ secrets.NEXT_PUBLIC_ADSENSE_ID }}
+          MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
+          MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
+
       - name: Configure AWS credentials
         if: github.ref == 'refs/heads/master'
         uses: aws-actions/configure-aws-credentials@v5
@@ -58,6 +81,7 @@ jobs:
         if: github.ref == 'refs/heads/master'
         uses: docker/setup-buildx-action@v3
 
+      # Dockerはpre-built成果物をCOPYするだけ（npm ci/next build不要）
       - name: Build and push Docker image
         if: github.ref == 'refs/heads/master'
         uses: docker/build-push-action@v6
@@ -67,12 +91,6 @@ jobs:
           tags: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
-          build-args: |
-            NEXT_PUBLIC_GA_ID=${{ secrets.NEXT_PUBLIC_GA_ID }}
-            NEXT_PUBLIC_LINE_ADD_FRIEND_URL=${{ secrets.NEXT_PUBLIC_LINE_ADD_FRIEND_URL }}
-            NEXT_PUBLIC_ADSENSE_ID=${{ secrets.NEXT_PUBLIC_ADSENSE_ID }}
-            MICROCMS_SERVICE_DOMAIN=${{ secrets.MICROCMS_SERVICE_DOMAIN }}
-            MICROCMS_API_KEY=${{ secrets.MICROCMS_API_KEY }}
 
       - name: Wait for App Runner to be RUNNING
         if: github.ref == 'refs/heads/master'
@@ -87,10 +105,10 @@ jobs:
               echo "App Runner is ready for deployment."
               exit 0
             fi
-            echo "Waiting 30s for previous deployment to finish..."
+            echo "Waiting for previous deployment to finish..."
             sleep 15
           done
-          echo "::error::App Runner is still not RUNNING after 10 minutes. Aborting."
+          echo "::error::App Runner is still not RUNNING after 5 minutes. Aborting."
           exit 1
 
       - name: Deploy to App Runner

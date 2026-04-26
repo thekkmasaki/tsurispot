@@ -2,8 +2,7 @@
 node_modules
 npm-debug.log*
 
-# Build output
-.next
+# Build output（.nextはCI側でpre-buildしてDockerにCOPYするため除外しない）
 out
 
 # IDE / OS
