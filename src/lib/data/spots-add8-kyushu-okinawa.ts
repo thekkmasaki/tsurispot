@@ -3595,7 +3595,13 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
     isFree: false, feeDetail: "2時間券2,000円〜、半日券4,000円〜、1日券5,000円〜。レンタルロッド1,000円。釣り堀 基本料3,000円。",
     hasParking: true, parkingDetail: "無料駐車場あり（40台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
-    mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.3, reviewCount: 0,
+    mainImageUrl: "/images/spots/fishing-park-hirano/main.jpg", images: [
+      "/images/spots/fishing-park-hirano/pond-green.jpg",
+      "/images/spots/fishing-park-hirano/pond-mountain.jpg",
+      "/images/spots/fishing-park-hirano/overview.jpg",
+      "/images/spots/fishing-park-hirano/tsurubori.jpg",
+      "/images/spots/fishing-park-hirano/rods.jpg",
+    ], rating: 4.3, reviewCount: 0,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "午前中がおすすめ（潮や時合いの影響なし）", method: "ルアー（クランクベイト・スプーン）・フライ・餌釣り（期間限定）" },
     ],
