@@ -3583,7 +3583,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeOkinawa,
   },
   // =========================================
-  // 佐賀県（管理釣り場 特別掲載）
+  // 佐賀県（管理釣り場 特別掲載 — フィッシングパークひらの様より修正依頼対応済み）
   // =========================================
   {
     id: "ss8201", name: "フィッシングパークひらの", slug: "fishing-park-hirano",
