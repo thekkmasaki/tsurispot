@@ -8,8 +8,8 @@ WORKDIR /app
 ENV NODE_ENV=production
 ENV PORT=3000
 ENV HOSTNAME="0.0.0.0"
-# 本番ランタイム用メモリ上限（2GBコンテナ向け）
-ENV NODE_OPTIONS="--max-old-space-size=1536"
+# 本番ランタイム用メモリ上限（4GBコンテナ向け）
+ENV NODE_OPTIONS="--max-old-space-size=3072"
 
 # セキュリティ: non-rootユーザーで実行
 RUN addgroup --system --gid 1001 nodejs && \
