@@ -63,7 +63,7 @@ describe("spots data", () => {
       expect(s.address).toBeTruthy();
       expect(s.region).toBeDefined();
       expect(s.region.prefecture).toBeTruthy();
-      expect(s.spotType).toMatch(/^(port|beach|rocky|river|pier|breakwater)$/);
+      expect(s.spotType).toMatch(/^(port|beach|rocky|river|pier|breakwater|surf|lake)$/);
       expect(s.difficulty).toMatch(/^(beginner|intermediate|advanced)$/);
       expect(s.bestTimes.length).toBeGreaterThan(0);
     });
@@ -83,7 +83,7 @@ describe("spots data", () => {
   });
 
   it("全スポットのspotTypeが有効値", () => {
-    const validTypes = ["port", "breakwater", "rocky", "river", "beach", "pier"];
+    const validTypes = ["port", "breakwater", "rocky", "river", "beach", "pier", "surf", "lake"];
     fishingSpots.forEach((s) => {
       expect(validTypes).toContain(s.spotType);
     });
