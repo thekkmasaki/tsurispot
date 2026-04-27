@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 interface PackingChecklistProps {
-  spotType: "port" | "beach" | "rocky" | "river" | "pier" | "breakwater";
+  spotType: "port" | "beach" | "rocky" | "river" | "pier" | "breakwater" | "surf" | "lake";
   hasConvenienceStore: boolean;
   hasToilet: boolean;
   hasFishingShop: boolean;

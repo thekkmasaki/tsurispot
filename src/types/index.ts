@@ -56,7 +56,7 @@ export interface FishingSpot {
   address: string;
   accessInfo: string;
   region: Region;
-  spotType: "port" | "beach" | "rocky" | "river" | "pier" | "breakwater";
+  spotType: "port" | "beach" | "rocky" | "river" | "pier" | "breakwater" | "surf" | "lake";
   difficulty: "beginner" | "intermediate" | "advanced";
   isFree: boolean;
   feeDetail?: string;
@@ -369,6 +369,8 @@ export const SPOT_TYPE_LABELS: SpotTypeLabel = {
   river: "河川",
   pier: "桟橋",
   breakwater: "堤防",
+  surf: "サーフ",
+  lake: "湖沼",
 };
 
 export const DIFFICULTY_LABELS = {

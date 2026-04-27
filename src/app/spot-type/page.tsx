@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { MapPin, Waves, Mountain, Ship, TreePine, Fence, Anchor } from "lucide-react";
+import { MapPin, Waves, Mountain, Ship, TreePine, Fence, Anchor, Droplets } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
@@ -17,6 +17,8 @@ const SPOT_TYPE_ICONS: Record<FishingSpot["spotType"], typeof MapPin> = {
   river: TreePine,
   pier: Ship,
   breakwater: Fence,
+  surf: Waves,
+  lake: Droplets,
 };
 
 const SPOT_TYPE_DESCRIPTIONS: Record<FishingSpot["spotType"], string> = {
@@ -26,15 +28,19 @@ const SPOT_TYPE_DESCRIPTIONS: Record<FishingSpot["spotType"], string> = {
   river: "河川では渓流釣りからシーバスまで多彩な釣りが楽しめます。淡水魚も汽水域の魚も狙えます。",
   pier: "桟橋は足場が安定しており、家族連れにも人気。アジやイワシなど回遊魚のサビキ釣りに最適です。",
   breakwater: "堤防は最も身近な釣り場。初心者からベテランまで幅広い釣りが楽しめる定番ポイントです。",
+  surf: "サーフ（砂浜からルアーで狙う釣り場）。ヒラメやマゴチなどフラットフィッシュが主なターゲットです。",
+  lake: "湖沼（バス・トラウトなど淡水の釣り場）。静かな環境でじっくりルアーフィッシングが楽しめます。",
 };
 
 const SPOT_TYPE_ORDER: FishingSpot["spotType"][] = [
   "breakwater",
   "port",
   "beach",
+  "surf",
   "rocky",
   "river",
   "pier",
+  "lake",
 ];
 
 export const metadata: Metadata = {

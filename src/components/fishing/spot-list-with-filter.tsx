@@ -18,7 +18,7 @@ export interface SpotForFilter {
   name: string;
   address: string;
   prefecture: string;
-  spotType: "port" | "beach" | "rocky" | "river" | "pier" | "breakwater";
+  spotType: "port" | "beach" | "rocky" | "river" | "pier" | "breakwater" | "surf" | "lake";
   difficulty: "beginner" | "intermediate" | "advanced";
   rating: number;
   latitude: number;
