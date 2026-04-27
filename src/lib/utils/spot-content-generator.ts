@@ -101,6 +101,19 @@ const SPOT_TYPE_FEATURES: Record<SpotType, {
   },
 };
 
+// 管理釣り場用のオーバーライド（descriptionに「管理釣り場」を含むスポットに適用）
+const MANAGED_POND_FEATURES = {
+  atmosphere: "管理された釣り場で、足場がしっかりしており初心者やお子様でも安心安全",
+  merit: "ルアー・フライで数釣りが楽しめる。年中無休で誰でもいつでも釣りが楽しめる",
+  caution: "管理釣り場には明確なルールあり。釣行前にHPでレギュレーションを確認すること",
+  familyTip: "足場が安定しレンタル完備で手ぶらOK。スタッフ常駐で初心者の方でも安心",
+};
+
+function getSpotTypeFeatures(spot: FishingSpot) {
+  if (spot.description.includes("管理釣り場")) return MANAGED_POND_FEATURES;
+  return SPOT_TYPE_FEATURES[spot.spotType];
+}
+
 // ── difficulty別の総評テンプレート ──────────────────
 const DIFFICULTY_SUMMARIES: Record<Difficulty, (name: string, topFish: string) => string> = {
   beginner: (name, topFish) =>
@@ -301,7 +314,7 @@ function getFacilityText(spot: FishingSpot): string {
  */
 export function generateSpotIntro(spot: FishingSpot): string {
   const typeLabel = SPOT_TYPE_LABELS[spot.spotType];
-  const typeFeatures = SPOT_TYPE_FEATURES[spot.spotType];
+  const typeFeatures = getSpotTypeFeatures(spot);
   const topFish = getTopFishNames(spot);
   const easyFish = getEasyFish(spot);
   const methods = getUniqueMethods(spot);
@@ -379,7 +392,7 @@ export function generateSpotIntro(spot: FishingSpot): string {
  */
 export function generateSpotTips(spot: FishingSpot): string[] {
   const tips: string[] = [];
-  const typeFeatures = SPOT_TYPE_FEATURES[spot.spotType];
+  const typeFeatures = getSpotTypeFeatures(spot);
   const typeLabel = SPOT_TYPE_LABELS[spot.spotType];
   const easyFish = getEasyFish(spot);
   const methods = getUniqueMethods(spot);
@@ -600,7 +613,7 @@ export function generateSpotSummary(spot: FishingSpot): {
   const topFish = getTopFishNames(spot, 3);
   const bestMonths = getBestMonths(spot);
   const methods = getUniqueMethods(spot);
-  const typeFeatures = SPOT_TYPE_FEATURES[spot.spotType];
+  const typeFeatures = getSpotTypeFeatures(spot);
 
   // 一言特徴
   let oneLineFeature = "";
@@ -648,7 +661,7 @@ export function generateContextMethodBrief(method: string, spot: FishingSpot): s
 export function generateImprovedFAQs(spot: FishingSpot): { question: string; answer: string }[] {
   const faqs: { question: string; answer: string }[] = [];
   const typeLabel = SPOT_TYPE_LABELS[spot.spotType];
-  const typeFeatures = SPOT_TYPE_FEATURES[spot.spotType];
+  const typeFeatures = getSpotTypeFeatures(spot);
   const easyFish = getEasyFish(spot);
   const methods = getUniqueMethods(spot);
   const bestMonths = getBestMonths(spot);
