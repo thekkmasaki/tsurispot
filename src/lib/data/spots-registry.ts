@@ -75,19 +75,20 @@ import { kantoAdd8Spots } from "./spots-add8-kanto-chubu";
 import { kinkiAdd8Spots } from "./spots-add8-kinki";
 import { chugokuShikokuAdd8Spots } from "./spots-add8-chugoku-shikoku";
 import { kyushuOkinawaAdd8Spots } from "./spots-add8-kyushu-okinawa";
-import { eastAdd9Spots } from "./spots-add9-east";
-import { centralAdd9Spots } from "./spots-add9-central";
-import { westAdd9Spots } from "./spots-add9-west";
-import { northAdd10Spots } from "./spots-add10-north";
-import { eastAdd10Spots } from "./spots-add10-east";
-import { westAdd10Spots } from "./spots-add10-west";
-import { northAdd11Spots } from "./spots-add11-north";
-import { eastAdd11Spots } from "./spots-add11-east";
-import { westAdd11Spots } from "./spots-add11-west";
-import { northAdd12Spots } from "./spots-add12-north";
-import { eastAdd12Spots } from "./spots-add12-east";
-import { westAdd12Spots } from "./spots-add12-west";
-import { eastAdd13Spots } from "./spots-add13-east";
+// TEMPORARILY DISABLED: add9-13 spots causing App Runner deployment failure (image too large)
+// import { eastAdd9Spots } from "./spots-add9-east";
+// import { centralAdd9Spots } from "./spots-add9-central";
+// import { westAdd9Spots } from "./spots-add9-west";
+// import { northAdd10Spots } from "./spots-add10-north";
+// import { eastAdd10Spots } from "./spots-add10-east";
+// import { westAdd10Spots } from "./spots-add10-west";
+// import { northAdd11Spots } from "./spots-add11-north";
+// import { eastAdd11Spots } from "./spots-add11-east";
+// import { westAdd11Spots } from "./spots-add11-west";
+// import { northAdd12Spots } from "./spots-add12-north";
+// import { eastAdd12Spots } from "./spots-add12-east";
+// import { westAdd12Spots } from "./spots-add12-west";
+// import { eastAdd13Spots } from "./spots-add13-east";
 
 export const allRawSpots: FishingSpot[] = [
   ..._baseSpots,
@@ -166,17 +167,18 @@ export const allRawSpots: FishingSpot[] = [
   ...kinkiAdd8Spots,
   ...chugokuShikokuAdd8Spots,
   ...kyushuOkinawaAdd8Spots,
-  ...eastAdd9Spots,
-  ...centralAdd9Spots,
-  ...westAdd9Spots,
-  ...northAdd10Spots,
-  ...eastAdd10Spots,
-  ...westAdd10Spots,
-  ...northAdd11Spots,
-  ...eastAdd11Spots,
-  ...westAdd11Spots,
-  ...northAdd12Spots,
-  ...eastAdd12Spots,
-  ...westAdd12Spots,
-  ...eastAdd13Spots,
+  // TEMPORARILY DISABLED: add9-13 spots
+  // ...eastAdd9Spots,
+  // ...centralAdd9Spots,
+  // ...westAdd9Spots,
+  // ...northAdd10Spots,
+  // ...eastAdd10Spots,
+  // ...westAdd10Spots,
+  // ...northAdd11Spots,
+  // ...eastAdd11Spots,
+  // ...westAdd11Spots,
+  // ...northAdd12Spots,
+  // ...eastAdd12Spots,
+  // ...westAdd12Spots,
+  // ...eastAdd13Spots,
 ];
