@@ -121,18 +121,49 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: |
           echo "Deployment started. Waiting for App Runner to update..."
+          PREV_STATUS=""
           for i in $(seq 1 30); do
             STATUS=$(aws apprunner describe-service \
               --service-arn ${{ env.APP_RUNNER_SERVICE_ARN }} \
               --query "Service.Status" --output text)
-            echo "Status: $STATUS"
-            if [ "$STATUS" = "RUNNING" ]; then
+            echo "Attempt $i: Status = $STATUS"
+
+            # ROLLBACK検出: 前回OPERATION_IN_PROGRESSで今回RUNNINGならROLLBACK
+            if [ "$STATUS" = "RUNNING" ] && [ "$PREV_STATUS" = "OPERATION_IN_PROGRESS" ]; then
+              # 最新オペレーションを確認
+              OP_STATUS=$(aws apprunner list-operations \
+                --service-arn ${{ env.APP_RUNNER_SERVICE_ARN }} \
+                --query "OperationSummaryList[0].Status" --output text 2>/dev/null || echo "UNKNOWN")
+              echo "Latest operation status: $OP_STATUS"
+              if [ "$OP_STATUS" = "ROLLBACK_SUCCEEDED" ] || [ "$OP_STATUS" = "ROLLBACK_FAILED" ]; then
+                echo "::error::Deployment ROLLED BACK! Status: $OP_STATUS"
+                exit 1
+              fi
               echo "Deployment complete!"
               exit 0
             fi
+
+            if [ "$STATUS" = "RUNNING" ] && [ -z "$PREV_STATUS" ]; then
+              # 初回チェックでRUNNING = デプロイが既に完了（高速デプロイ時）
+              # 念のためオペレーション確認
+              OP_STATUS=$(aws apprunner list-operations \
+                --service-arn ${{ env.APP_RUNNER_SERVICE_ARN }} \
+                --query "OperationSummaryList[0].Status" --output text 2>/dev/null || echo "UNKNOWN")
+              echo "Latest operation status: $OP_STATUS"
+              if [ "$OP_STATUS" = "ROLLBACK_SUCCEEDED" ] || [ "$OP_STATUS" = "ROLLBACK_FAILED" ]; then
+                echo "::error::Deployment ROLLED BACK! Status: $OP_STATUS"
+                exit 1
+              fi
+              if [ "$OP_STATUS" = "SUCCEEDED" ]; then
+                echo "Deployment complete!"
+                exit 0
+              fi
+            fi
+
+            PREV_STATUS="$STATUS"
             sleep 15
           done
-          echo "Deployment timed out"
+          echo "::error::Deployment timed out after 7.5 minutes"
           exit 1
 
       - name: Invalidate CloudFront cache
@@ -149,6 +180,7 @@ jobs:
           echo "Running post-deploy health checks..."
           FAILED=0
           URLS=(
+            "https://tsurispot.com/api/health"
             "https://tsurispot.com"
             "https://tsurispot.com/spots"
             "https://tsurispot.com/fish"
