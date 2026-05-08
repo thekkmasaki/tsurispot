@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { MapWrapper } from "@/components/map/map-wrapper";
+import { FeaturedAreas } from "@/components/map/featured-areas";
 
 export const metadata: Metadata = {
   title: "地図で釣りスポットを探す - 全国の釣り場マップ",
@@ -52,6 +53,7 @@ export default function MapPage() {
           マーカーをタップしてスポットの詳細を確認できます。
         </p>
       </div>
+      <FeaturedAreas />
       <MapWrapper />
     </main>
   );
