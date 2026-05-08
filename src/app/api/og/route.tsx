@@ -174,6 +174,9 @@ export async function GET(request: NextRequest) {
       width: 1200,
       height: 630,
       fonts: fonts.length > 0 ? fonts : undefined,
+      headers: {
+        "Cache-Control": "public, max-age=31536000, immutable",
+      },
     }
   );
 }

@@ -24,7 +24,7 @@ export async function GET(request: NextRequest) {
     const photos = (await dbGet<SpotPhotoEntry[]>(`SPOT#${slug}`, "PHOTOS")) || [];
     return NextResponse.json(
       { photos: photos.map((p) => ({ url: p.url, uploadedAt: p.uploadedAt })) },
-      { headers: { "Cache-Control": "no-cache" } },
+      { headers: { "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300" } },
     );
   } catch {
     return NextResponse.json({ photos: [] });
