@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ChevronLeft, Fish, AlertTriangle, CheckCircle2, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -391,8 +392,7 @@ export default function OyogasePage() {
                 <CardContent className="p-3">
                   <div className="flex items-center gap-2">
                     <div className="size-8 shrink-0 overflow-hidden rounded-md bg-primary/10">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={`/images/fish/${fish.slug}.jpg`} alt={fish.name} className="size-full object-cover" loading="lazy" />
+                      <Image src={`/images/fish/${fish.slug}.jpg`} alt={fish.name} width={32} height={32} className="size-full object-cover" />
                     </div>
                     <span className="text-sm font-bold group-hover:text-primary">{fish.name}</span>
                   </div>

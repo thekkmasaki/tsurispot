@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { ChevronLeft, Zap, Settings, Target, ShieldAlert, Fish, MapPin } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -697,8 +698,7 @@ export default function JiggingGuidePage() {
                     className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
                   >
                     <div className="size-8 shrink-0 overflow-hidden rounded-md bg-primary/10">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={`/images/fish/${fish.slug}.jpg`} alt={fish.name} className="size-full object-cover" loading="lazy" />
+                      <Image src={`/images/fish/${fish.slug}.jpg`} alt={fish.name} width={32} height={32} className="size-full object-cover" />
                     </div>
                     <div className="min-w-0 flex-1">
                       <span className="text-sm font-medium group-hover:text-primary">{fish.name}</span>

@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ChevronDown, ChevronRight, Fish, Wrench, ExternalLink } from "lucide-react";
@@ -56,7 +57,7 @@ function RigSetCard({ set }: { set: MonthlyRigSet }) {
         <div className="flex items-center gap-3">
           <div className="size-9 shrink-0 overflow-hidden rounded-lg bg-primary/10">
             {set.fishSlug ? (
-              <img src={`/images/fish/${set.fishSlug}.jpg`} alt={set.targetFish} className="size-full object-cover" loading="lazy" />
+              <Image src={`/images/fish/${set.fishSlug}.jpg`} alt={set.targetFish} width={36} height={36} className="size-full object-cover" />
             ) : (
               <div className="flex size-full items-center justify-center text-primary">
                 <Fish className="size-4" />

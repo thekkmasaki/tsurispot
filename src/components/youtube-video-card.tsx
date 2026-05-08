@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { YouTubeSearchLink } from "@/types";
 import { ExternalLink, Play } from "lucide-react";
 
@@ -13,7 +14,7 @@ function YouTubeFallbackCard({ link, thumbnailUrl }: { link: YouTubeSearchLink; 
     <a href={searchUrl} target="_blank" rel="noopener noreferrer" className="group block overflow-hidden rounded-lg border transition-shadow hover:shadow-md">
       {showThumb ? (
         <div className="relative flex aspect-video items-center justify-center overflow-hidden bg-slate-800">
-          <img src={thumbnailUrl} alt="" className="absolute inset-0 size-full object-cover brightness-[0.6] transition-transform duration-300 group-hover:scale-105" loading="lazy" onError={() => setImgError(true)} />
+          <Image src={thumbnailUrl!} alt="" fill className="object-cover brightness-[0.6] transition-transform duration-300 group-hover:scale-105" sizes="(max-width: 640px) 100vw, 50vw" onError={() => setImgError(true)} />
           <div className="relative z-10 flex size-12 items-center justify-center rounded-xl bg-red-600/90 shadow-lg transition-transform group-hover:scale-110">
             <Play className="size-5 fill-white text-white" />
           </div>

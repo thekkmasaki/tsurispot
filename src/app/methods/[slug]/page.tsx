@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   ArrowLeft,
@@ -889,7 +890,7 @@ export default async function MethodDetailPage({ params }: PageProps) {
                   <CardContent className="flex items-center gap-3 p-4">
                     <div className="size-10 shrink-0 overflow-hidden rounded-lg bg-primary/10">
                       {fishImageUrl ? (
-                        <img src={fishImageUrl} alt={fish.name} className="size-full object-cover" loading="lazy" />
+                        <Image src={fishImageUrl} alt={fish.name} width={40} height={40} className="size-full object-cover" />
                       ) : (
                         <div className="flex size-full items-center justify-center text-primary">
                           <Fish className="size-5" />
