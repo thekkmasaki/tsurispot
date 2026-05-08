@@ -29,6 +29,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { trimDescription } from "@/lib/utils/seo";
 import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, type NearbySpot } from "@/lib/data/spots";
 // import { getNearbyShopsWithDistance } from "@/lib/data/shops"; // 有料プラン機能として温存中
 import { getPrefectureByName } from "@/lib/data/prefectures";
@@ -140,7 +141,7 @@ export async function generateMetadata({
     isFamilyFriendly ? "ファミリーOK。" : "",
     "アクセス・仕掛け・釣果を完全ガイド。",
   ];
-  const description = descParts.filter(Boolean).join("").slice(0, 155);
+  const description = trimDescription(descParts.filter(Boolean).join(""), 158);
   const ogDescription = `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）で${fishNames}が狙えます。${spot.description}`;
 
   // 本当に薄いページのみnoindex: 説明文50文字未満 かつ 魚種1種以下
@@ -150,14 +151,14 @@ export async function generateMetadata({
 
   return {
     title,
-    description: description.slice(0, 160),
+    description,
     keywords: [spot.name, spot.region.prefecture, spot.region.areaName, "釣り場", "釣りスポット", ...spot.catchableFish.slice(0, 5).map((cf) => cf.fish.name)],
     ...(isLowQuality && {
       robots: { index: false, follow: true },
     }),
     openGraph: {
       title: `${spot.name}の釣り情報・釣果・アクセス`,
-      description: ogDescription.slice(0, 120),
+      description: trimDescription(ogDescription, 120),
       type: "article",
       url: `https://tsurispot.com/spots/${spot.slug}`,
       siteName: "ツリスポ",
@@ -172,7 +173,7 @@ export async function generateMetadata({
     twitter: {
       card: "summary_large_image",
       title: `${spot.name}の釣り情報`,
-      description: ogDescription.slice(0, 120),
+      description: trimDescription(ogDescription, 120),
     },
     alternates: {
       canonical: `https://tsurispot.com/spots/${spot.slug}`,

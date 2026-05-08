@@ -25,6 +25,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { getFishSpeciesWithSpots, getCoOccurringFish, getFishBySameMethod, getFishBySameSeason } from "@/lib/data";
 import { DIFFICULTY_LABELS, CATCH_RATING_LABELS } from "@/types";
+import { trimDescription } from "@/lib/utils/seo";
 import { MonthCalendar } from "@/components/fish/month-calendar";
 import { NearbySpotsSorter } from "@/components/fish/nearby-spots-sorter";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
@@ -86,11 +87,11 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
   return {
     title: titleText,
-    description: descText.slice(0, 160),
+    description: trimDescription(descText, 158),
     keywords: [fish.name, fish.nameKana, ...(fish.aliases || []).slice(0, 3), "釣り方", "釣れる時期", "おすすめスポット"],
     openGraph: {
       title: `${fish.name}の釣り方・時期・おすすめスポット`,
-      description: ogDesc.slice(0, 120),
+      description: trimDescription(ogDesc, 120),
       type: "article",
       url: `https://tsurispot.com/fish/${fish.slug}`,
       siteName: "ツリスポ",
@@ -105,7 +106,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     twitter: {
       card: "summary_large_image",
       title: `${fish.name}の釣り方・時期・おすすめスポット`,
-      description: ogDesc.slice(0, 120),
+      description: trimDescription(ogDesc, 120),
     },
     alternates: {
       canonical: `https://tsurispot.com/fish/${fish.slug}`,

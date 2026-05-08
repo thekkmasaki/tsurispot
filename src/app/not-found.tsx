@@ -1,21 +1,15 @@
-"use client";
-
+import type { Metadata } from "next";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { Home, MapPin, TrendingUp, Fish, Search } from "lucide-react";
+import { Home, MapPin, TrendingUp, Fish } from "lucide-react";
+import { NotFoundSearch } from "@/components/not-found-search";
+
+export const metadata: Metadata = {
+  title: "ページが見つかりません | ツリスポ（つりすぽ）",
+  description: "お探しのページが見つかりませんでした。釣りスポット・魚種図鑑・釣り方ガイドから目的の情報を探してみてください。",
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
-  const router = useRouter();
-  const [query, setQuery] = useState("");
-
-  function handleSearch(e: React.FormEvent) {
-    e.preventDefault();
-    if (query.trim()) {
-      router.push(`/spots?q=${encodeURIComponent(query.trim())}`);
-    }
-  }
-
   return (
     <div
       className="relative min-h-screen overflow-hidden"
@@ -60,28 +54,7 @@ export default function NotFound() {
           大物は逃しましたが、まだまだ釣れるスポットはたくさんあります！
         </p>
 
-        {/* 検索ボックス */}
-        <form
-          onSubmit={handleSearch}
-          className="mb-10 flex w-full max-w-sm gap-2"
-        >
-          <div className="relative flex-1">
-            <Search className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-gray-400" />
-            <input
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="釣りスポットを検索..."
-              className="w-full rounded-lg border border-gray-300 bg-white py-3 pl-9 pr-4 text-sm shadow-sm outline-none focus:border-blue-400 focus:ring-2 focus:ring-blue-100"
-            />
-          </div>
-          <button
-            type="submit"
-            className="rounded-lg bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          >
-            検索
-          </button>
-        </form>
+        <NotFoundSearch />
 
         {/* 誘導ボタン */}
         <div className="flex flex-wrap justify-center gap-3">

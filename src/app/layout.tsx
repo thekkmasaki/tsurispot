@@ -36,7 +36,7 @@ const zenMaruGothic = Zen_Maru_Gothic({
   subsets: ["latin"],
   weight: ["500", "700", "900"],
   display: "swap",
-  preload: false,
+  preload: true,
 });
 
 
@@ -231,11 +231,11 @@ export default function RootLayout({
           }}
         />
         <GoogleAnalytics />
-        {/* AdSense: afterInteractive戦略でLCP・FIDを阻害しない */}
+        {/* AdSense: lazyOnload で初回ロードのレンダリングブロックを回避（CLS/LCP優先） */}
         {process.env.NEXT_PUBLIC_ADSENSE_ID && (
           <Script
             src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_ID}`}
-            strategy="afterInteractive"
+            strategy="lazyOnload"
             crossOrigin="anonymous"
           />
         )}
