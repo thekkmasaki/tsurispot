@@ -8,6 +8,15 @@ on:
       - 'docs/**'
       - '.company/**'
       - 'memory/**'
+      - 'blog-drafts/**'
+      - 'scripts/weekly-reports/**'
+      - 'sns-videos/**'
+      - 'photo/**'
+      - 'insta/**'
+      - '**/*.mov'
+      - '**/*.mp4'
+      - '**/*.png'
+      - '**/*.jpg'
 
 concurrency:
   group: deploy-apprunner
@@ -57,7 +66,7 @@ jobs:
         if: github.ref == 'refs/heads/master'
         run: npm run build
         env:
-          NODE_OPTIONS: "--max-old-space-size=8192"
+          NODE_OPTIONS: "--max-old-space-size=4096"
           NEXT_PUBLIC_GA_ID: ${{ secrets.NEXT_PUBLIC_GA_ID }}
           NEXT_PUBLIC_LINE_ADD_FRIEND_URL: ${{ secrets.NEXT_PUBLIC_LINE_ADD_FRIEND_URL }}
           NEXT_PUBLIC_ADSENSE_ID: ${{ secrets.NEXT_PUBLIC_ADSENSE_ID }}
@@ -173,6 +182,13 @@ jobs:
             --distribution-id E366L8IETD0MRP \
             --paths "/*"
           echo "CloudFront cache invalidation started"
+
+      - name: IndexNow 通知（重要ページのみ）
+        if: success() && github.ref == 'refs/heads/master'
+        run: |
+          curl -X GET "https://tsurispot.com/api/indexnow" \
+            -H "User-Agent: GitHub Actions/tsurispot-deploy" \
+            --max-time 30 || echo "IndexNow notify failed (non-fatal)"
 
       - name: デプロイ後ヘルスチェック
         if: success() && github.ref == 'refs/heads/master'
