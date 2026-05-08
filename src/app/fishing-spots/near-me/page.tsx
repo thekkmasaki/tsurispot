@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { Star, Car, MapPin, Fish, Anchor } from "lucide-react";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies, getCatchableNow } from "@/lib/data/fish";
@@ -396,7 +397,7 @@ export default function NearMePage() {
             >
               <div className="size-10 shrink-0 overflow-hidden rounded-lg bg-primary/10">
                 {fish.imageUrl ? (
-                  <img src={fish.imageUrl} alt={fish.name} className="size-full object-cover" loading="lazy" />
+                  <Image src={fish.imageUrl} alt={fish.name} width={40} height={40} className="size-full object-cover" />
                 ) : (
                   <div className="flex size-full items-center justify-center text-primary">
                     <Fish className="size-5" />

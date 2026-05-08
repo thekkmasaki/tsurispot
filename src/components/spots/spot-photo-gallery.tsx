@@ -342,7 +342,7 @@ function CommunityPhotoStrip({ photos, spotSlug, onDeleted }: { photos: Communit
         {photos.map((photo) => (
           <div key={photo.url} className="relative shrink-0">
             <div className="relative h-20 w-28 overflow-hidden rounded-md border">
-              <img src={photo.url} alt="投稿写真" className="size-full object-cover" loading="lazy" />
+              <Image src={photo.url} alt="投稿写真" fill className="object-cover" sizes="112px" />
               {deleting === photo.url && (
                 <div className="absolute inset-0 flex items-center justify-center bg-black/50">
                   <span className="size-4 animate-spin rounded-full border-2 border-white/30 border-t-white" />

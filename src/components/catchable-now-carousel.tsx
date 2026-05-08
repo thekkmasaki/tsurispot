@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Fish, ChevronRight } from "lucide-react";
 
@@ -40,7 +41,7 @@ function CarouselCard({ fish }: { fish: CarouselFish }) {
         <div className="mb-2 flex items-center justify-between">
           <div className="size-8 shrink-0 overflow-hidden rounded-lg bg-primary/10">
             {fish.imageUrl ? (
-              <img src={fish.imageUrl} alt={fish.name} className="size-full object-cover" loading="lazy" />
+              <Image src={fish.imageUrl} alt={fish.name} width={32} height={32} className="size-full object-cover" />
             ) : (
               <div className="flex size-full items-center justify-center">
                 <Fish className={`size-4 ${iconColor}`} />
