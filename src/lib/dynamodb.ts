@@ -6,6 +6,7 @@ import {
   DeleteCommand,
   UpdateCommand,
   BatchGetCommand,
+  ScanCommand,
 } from "@aws-sdk/lib-dynamodb";
 
 const TABLE = "tsurispot";
@@ -129,4 +130,33 @@ export async function dbBatchGet<T = unknown>(
   }
 
   return keys.map((k) => resultMap.get(`${k.pk}#${k.sk}`) ?? null);
+}
+
+/** スポット別釣果カウントを全件取得（pk が SPOT# で sk=CATCHCOUNT）*/
+export async function dbScanCatchCounts(): Promise<Record<string, number>> {
+  const counts: Record<string, number> = {};
+  let lastKey: Record<string, unknown> | undefined = undefined;
+  do {
+    const res = await doc.send(
+      new ScanCommand({
+        TableName: TABLE,
+        FilterExpression: "sk = :sk AND begins_with(pk, :pkPrefix)",
+        ExpressionAttributeValues: {
+          ":sk": "CATCHCOUNT",
+          ":pkPrefix": "SPOT#",
+        },
+        ProjectionExpression: "pk, #d",
+        ExpressionAttributeNames: { "#d": "data" },
+        ExclusiveStartKey: lastKey,
+      }),
+    );
+    res.Items?.forEach((item) => {
+      const pk = item.pk as string;
+      const slug = pk.replace(/^SPOT#/, "");
+      const v = item.data;
+      if (typeof v === "number" && v > 0) counts[slug] = v;
+    });
+    lastKey = res.LastEvaluatedKey as Record<string, unknown> | undefined;
+  } while (lastKey);
+  return counts;
 }

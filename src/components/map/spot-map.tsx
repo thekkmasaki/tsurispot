@@ -162,21 +162,40 @@ function clusterIconHtml(count: number): string {
   return `<div style="background:${bg};color:#fff;border:3px solid #fff;border-radius:50%;width:${size}px;height:${size}px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,0.3)">${count}</div>`;
 }
 
-function HeatLayer({ spots, enabled }: { spots: FishingSpot[]; enabled: boolean }) {
+function HeatLayer({
+  spots,
+  enabled,
+  catchCounts,
+}: {
+  spots: FishingSpot[];
+  enabled: boolean;
+  catchCounts: Record<string, number> | null;
+}) {
   const map = useMap();
 
   useEffect(() => {
     if (!enabled || spots.length === 0) return;
 
+    // 釣果データがあればそれを優先、無ければ rating×reviewCount にフォールバック
+    const useCatch = catchCounts && Object.keys(catchCounts).length > 0;
+    const maxCatch = useCatch ? Math.max(1, ...Object.values(catchCounts!)) : 0;
+
     const points: [number, number, number][] = spots.map((s) => {
-      const rating = Math.max(0, Math.min(5, s.rating || 3));
-      const reviews = Math.max(0, s.reviewCount || 0);
-      // 0..1 に正規化した「人気度」: rating(0..1) × log スケールのレビュー(0..1)
-      const intensity = Math.min(
-        1,
-        (rating / 5) * (Math.log10(reviews + 1) / Math.log10(101))
-      );
-      return [s.latitude, s.longitude, Math.max(0.1, intensity)];
+      let intensity: number;
+      if (useCatch) {
+        const c = catchCounts![s.slug] ?? 0;
+        // 対数スケールで正規化（0件のスポットも僅かに表示しないよう 0.05 を下限）
+        intensity = c > 0 ? Math.min(1, Math.log10(c + 1) / Math.log10(maxCatch + 1)) : 0.05;
+      } else {
+        const rating = Math.max(0, Math.min(5, s.rating || 3));
+        const reviews = Math.max(0, s.reviewCount || 0);
+        intensity = Math.min(
+          1,
+          (rating / 5) * (Math.log10(reviews + 1) / Math.log10(101))
+        );
+        intensity = Math.max(0.1, intensity);
+      }
+      return [s.latitude, s.longitude, intensity];
     });
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -198,7 +217,7 @@ function HeatLayer({ spots, enabled }: { spots: FishingSpot[]; enabled: boolean 
     return () => {
       map.removeLayer(heat);
     };
-  }, [spots, enabled, map]);
+  }, [spots, enabled, catchCounts, map]);
 
   return null;
 }
@@ -295,6 +314,18 @@ export function SpotMap() {
   const [showAllAreas, setShowAllAreas] = useState(false);
   const [heatEnabled, setHeatEnabled] = useState(false);
   const [listOpen, setListOpen] = useState(false);
+  const [catchCounts, setCatchCounts] = useState<Record<string, number> | null>(null);
+
+  // ヒートマップ ON 時に釣果カウントを 1 回だけ取得（CDN キャッシュ前提）
+  useEffect(() => {
+    if (!heatEnabled || catchCounts !== null) return;
+    fetch('/api/catch-report/all-counts')
+      .then((r) => (r.ok ? r.json() : { counts: {} }))
+      .then((d: { counts?: Record<string, number> }) => {
+        setCatchCounts(d.counts ?? {});
+      })
+      .catch(() => setCatchCounts({}));
+  }, [heatEnabled, catchCounts]);
   const [flyTarget, setFlyTarget] = useState<{
     lat: number;
     lng: number;
@@ -557,7 +588,7 @@ export function SpotMap() {
                 ? 'bg-orange-600 text-white shadow-sm'
                 : 'bg-muted text-muted-foreground hover:bg-orange-100 hover:text-orange-700'
             }`}
-            title="人気度ヒートマップ（評価×レビュー数）"
+            title="釣果ヒート（釣果データを優先、無い場合は人気度を表示）"
           >
             <Flame className="size-3.5" />
             <span>ヒート</span>
@@ -813,7 +844,7 @@ export function SpotMap() {
             />
           </>
         )}
-        <HeatLayer spots={filteredSpots} enabled={heatEnabled} />
+        <HeatLayer spots={filteredSpots} enabled={heatEnabled} catchCounts={catchCounts} />
         <ClusteredSpotMarkers spots={filteredSpots} />
       </MapContainer>
 
