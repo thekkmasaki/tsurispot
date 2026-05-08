@@ -4,7 +4,7 @@ export interface SeasonalGuide {
   season: string;
   months: number[];
   method: string;
-  spotTypes: ("port" | "breakwater" | "beach" | "rocky" | "river" | "pier" | "surf" | "lake")[];
+  spotTypes: ("port" | "breakwater" | "beach" | "rocky" | "river" | "pier" | "surf" | "lake" | "pond")[];
   targetFish: string[];
   description: string;
   tips: string[];

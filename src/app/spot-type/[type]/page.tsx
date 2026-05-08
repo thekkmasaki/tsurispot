@@ -28,6 +28,7 @@ const SPOT_TYPE_DESCRIPTIONS: Record<FishingSpot["spotType"], string> = {
   breakwater: "堤防は最も身近で人気のある釣り場タイプです。サビキ釣り、ウキ釣り、投げ釣り、ルアー釣りなどあらゆる釣り方が楽しめます。初心者からベテランまで幅広い釣り人に愛される、日本の釣りの原点とも言える釣り場です。",
   surf: "サーフ（砂浜）はルアーフィッシングの人気フィールドです。ヒラメ・マゴチ・シーバスなどのフラットフィッシュが主なターゲット。遠投力と広大なポイントを読む力が求められますが、大物が狙える魅力的な釣り場です。朝マヅメの時合いを逃さないのが釣果アップの鍵。",
   lake: "湖沼はバスフィッシングやトラウトフィッシングなど淡水ルアーの聖地です。ブラックバス・ニジマス・ワカサギなど多彩な魚種が楽しめます。ボート釣りやおかっぱりなどスタイルも様々で、自然に囲まれた静かな環境でじっくり釣りに没頭できます。",
+  pond: "管理釣り場（ポンド）は管理者がトラウト・コイ・ヘラブナなどを放流した有料施設です。レンタル竿・餌・トイレ・休憩所が整い、初心者やファミリー、お子様連れでも安心して釣りが楽しめます。天候や時期を問わず一定の釣果が期待できるため、入門に最適です。",
 };
 
 export const dynamicParams = false;
@@ -111,7 +112,12 @@ export default async function SpotTypePage({ params }: PageProps) {
   }
 
   // 難易度集計
-  const difficultyCount = { beginner: 0, intermediate: 0, advanced: 0 };
+  const difficultyCount: Record<FishingSpot["difficulty"], number> = {
+    beginner: 0,
+    intermediate: 0,
+    advanced: 0,
+    all: 0,
+  };
   const freeCount = spots.filter((s) => s.isFree).length;
   for (const spot of spots) {
     difficultyCount[spot.difficulty]++;

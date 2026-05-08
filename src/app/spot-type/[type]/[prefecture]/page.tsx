@@ -87,7 +87,12 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
   if (spots.length === 0) notFound();
 
   // 難易度集計
-  const difficultyCount = { beginner: 0, intermediate: 0, advanced: 0 };
+  const difficultyCount: Record<FishingSpot["difficulty"], number> = {
+    beginner: 0,
+    intermediate: 0,
+    advanced: 0,
+    all: 0,
+  };
   for (const spot of spots) {
     difficultyCount[spot.difficulty]++;
   }
