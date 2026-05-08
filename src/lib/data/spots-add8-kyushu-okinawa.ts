@@ -65,6 +65,7 @@ const tidePort = { bestTide: "中潮〜大潮", bestTidePhase: "満潮前後", d
 const tideRiver = { bestTide: "中潮", bestTidePhase: "上げ潮", description: "河川は潮汐の影響は少ないが気圧変化で活性が変わる。" };
 const tideRocky = { bestTide: "中潮〜大潮", bestTidePhase: "上げ七分〜満潮", description: "磯では潮位が上がるタイミングで魚の活性が最も高くなります。" };
 const tideBreakwater = { bestTide: "中潮〜大潮", bestTidePhase: "上げ潮〜満潮", description: "堤防では潮が動く時間帯にアジやサバの回遊が活発になる。" };
+const tideManagedPond = { bestTide: "影響なし", bestTidePhase: "終日", description: "管理釣り場（ポンド）は潮や時合いの影響を受けません。午前中の方が魚の反応が良い傾向あり。" };
 
 export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   // =========================================
@@ -3591,7 +3592,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
     latitude: 33.2750, longitude: 130.0550,
     address: "〒849-3115 佐賀県唐津市厳木町平之705-1",
     accessInfo: "厳木・多久道路 牧瀬ICから車で約10分。九州自動車道 多久ICから約20分。福岡市内から約90分。駐車場40台（無料）。",
-    region: localRegion("rs8006"), spotType: "river", difficulty: "beginner",
+    region: localRegion("rs8006"), spotType: "pond", difficulty: "all",
     isFree: false, feeDetail: "2時間券2,000円〜、半日券4,000円〜、1日券5,000円〜。レンタルロッド1,000円。釣り堀 基本料3,000円。",
     hasParking: true, parkingDetail: "無料駐車場あり（40台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
@@ -3603,9 +3604,10 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
       "/images/spots/fishing-park-hirano/rods.jpg",
     ], rating: 4.3, reviewCount: 0,
     catchableFish: [
-      { fish: fish("nijimasu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "午前中がおすすめ（潮や時合いの影響なし）", method: "ルアー（クランクベイト・スプーン）・フライ・餌釣り（期間限定）" },
+      { fish: fish("nijimasu"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "午前中がおすすめ（潮や時合いの影響なし）。年中無休で年間を通して釣果が期待できる。", method: "ルアー（クランクベイト・スプーン）・フライ・餌釣り（期間限定）" },
+      { fish: fish("houraimasu"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "午前中がおすすめ（潮や時合いの影響なし）", method: "ルアー（クランクベイト・スプーン）・フライ" },
     ],
-    bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeKyushuN,
+    bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tideManagedPond, mazumeInfo: mazumeKyushuN,
     rules: {
       castingAllowed: false,
       lureAllowed: true,

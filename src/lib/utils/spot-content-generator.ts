@@ -111,6 +111,12 @@ const SPOT_TYPE_FEATURES: Record<SpotType, {
     caution: "遊漁券が必要な場合が多い。現地のルールを事前に確認すること",
     familyTip: "岸釣りポイントなら足場も安定しており、ファミリーでも安心して楽しめる",
   },
+  pond: {
+    atmosphere: "管理された釣り場で、足場がしっかりしており初心者やお子様でも安心安全",
+    merit: "ルアー・フライで数釣りが楽しめる。年中無休で誰でもいつでも釣りが楽しめる",
+    caution: "管理釣り場には明確なルールあり。釣行前にHPでレギュレーションを確認すること",
+    familyTip: "足場が安定しレンタル完備で手ぶらOK。スタッフ常駐で初心者の方でも安心",
+  },
 };
 
 // 管理釣り場用のオーバーライド（descriptionに「管理釣り場」を含むスポットに適用）
@@ -122,7 +128,7 @@ const MANAGED_POND_FEATURES = {
 };
 
 function getSpotTypeFeatures(spot: FishingSpot) {
-  if (spot.description.includes("管理釣り場")) return MANAGED_POND_FEATURES;
+  if (spot.spotType === "pond" || spot.description.includes("管理釣り場")) return MANAGED_POND_FEATURES;
   return SPOT_TYPE_FEATURES[spot.spotType];
 }
 
@@ -134,6 +140,8 @@ const DIFFICULTY_SUMMARIES: Record<Difficulty, (name: string, topFish: string) =
     `${name}は基本的な釣りの経験がある方に適した釣り場です。${topFish}など釣りごたえのあるターゲットが揃っています`,
   advanced: (name, topFish) =>
     `${name}は経験豊富な釣り人向けの釣り場です。${topFish}など大物や難易度の高いターゲットに挑戦できます`,
+  all: (name, topFish) =>
+    `${name}は初心者から熟練者まで楽しめる釣り場です。${topFish}など幅広いレベルに対応したターゲットが揃っており、誰でも自分のスタイルで釣りを楽しめます`,
 };
 
 // ── 魚種別の狙い方ヒント ──────────────────────
@@ -495,6 +503,7 @@ export function generateTimeAdvice(spot: FishingSpot): string {
     pier: `${spot.name}は管理された釣り場のため営業時間内での釣りとなります。${hasMorning ? "開場直後の朝イチは先行者が少なく好ポイントを確保しやすい。" : ""}潮の動く時間帯に合わせて訪問するのがベストです。`,
     surf: `${spot.name}でのサーフフィッシングは朝マヅメが最も熱い時間帯。${hasMorning ? "日の出前から準備し、マヅメの時合いを逃さないのがコツ。" : ""}潮位が低い時間帯にブレイクラインの位置を確認し、上げ潮のタイミングでヒラメやマゴチを狙いましょう。`,
     lake: `${spot.name}では早朝と夕方が魚の活性が高まるゴールデンタイム。${hasMorning ? "朝イチはトップウォーターで水面を探るのが効果的。" : ""}水温が安定する時間帯を見極め、ポイントを絞って攻めるのがコツです。`,
+    pond: `${spot.name}は管理釣り場のため、潮や時合いの影響を受けません。${hasMorning ? "午前中の方が魚の反応が良い傾向にあります。" : ""}営業時間内ならいつでも釣りが楽しめ、シーズンで反応するルアーが変わるのでスタッフに最新情報を聞くと良いでしょう。`,
   };
 
   return spotTypeTime[spot.spotType];
