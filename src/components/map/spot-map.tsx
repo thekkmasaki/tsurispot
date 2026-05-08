@@ -9,11 +9,19 @@ import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import 'leaflet.heat';
 import { fishingSpots } from '@/lib/data/spots';
-import { Navigation, Loader2, Fish, ChevronDown, ChevronUp, SlidersHorizontal, MapPin, Flame } from 'lucide-react';
+import { Navigation, Loader2, Fish, ChevronDown, ChevronUp, SlidersHorizontal, MapPin, Flame, List } from 'lucide-react';
 import { DIFFICULTY_LABELS } from '@/types';
 import type { FishingSpot } from '@/types';
 import { getFavorites } from '@/hooks/use-favorites';
 import { SpotSearch } from '@/components/map/spot-search';
+import { SpotMapList } from '@/components/map/spot-map-list';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetDescription,
+} from '@/components/ui/sheet';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -286,6 +294,7 @@ export function SpotMap() {
   const [filtersOpen, setFiltersOpen] = useState(true);
   const [showAllAreas, setShowAllAreas] = useState(false);
   const [heatEnabled, setHeatEnabled] = useState(false);
+  const [listOpen, setListOpen] = useState(false);
   const [flyTarget, setFlyTarget] = useState<{
     lat: number;
     lng: number;
@@ -300,6 +309,16 @@ export function SpotMap() {
       zoom: 14,
       tick: Date.now(),
     });
+  }, []);
+
+  const handleListSelect = useCallback((spot: FishingSpot) => {
+    setFlyTarget({
+      lat: spot.latitude,
+      lng: spot.longitude,
+      zoom: 14,
+      tick: Date.now(),
+    });
+    setListOpen(false);
   }, []);
 
   useEffect(() => {
@@ -522,6 +541,14 @@ export function SpotMap() {
           )}
         </button>
         <div className="flex items-center gap-2">
+          <button
+            onClick={() => setListOpen(true)}
+            className="flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors min-h-[36px] hover:bg-muted/80 hover:text-foreground sm:text-sm"
+            title="フィルタ済みのスポットをリスト表示"
+          >
+            <List className="size-3.5" />
+            <span className="hidden sm:inline">リスト</span>
+          </button>
           <button
             onClick={() => setHeatEnabled((v) => !v)}
             aria-pressed={heatEnabled}
@@ -789,6 +816,27 @@ export function SpotMap() {
         <HeatLayer spots={filteredSpots} enabled={heatEnabled} />
         <ClusteredSpotMarkers spots={filteredSpots} />
       </MapContainer>
+
+      <Sheet open={listOpen} onOpenChange={setListOpen}>
+        <SheetContent
+          side="right"
+          className="w-full overflow-y-auto sm:max-w-md"
+        >
+          <SheetHeader className="border-b">
+            <SheetTitle className="flex items-center gap-2 text-base">
+              <List className="size-4 text-primary" />
+              スポット一覧
+              <span className="text-xs font-normal text-muted-foreground">
+                {filteredSpots.length.toLocaleString()}件
+              </span>
+            </SheetTitle>
+            <SheetDescription className="text-xs">
+              カードをタップすると地図がそのスポットに移動します。
+            </SheetDescription>
+          </SheetHeader>
+          <SpotMapList spots={filteredSpots} onSelect={handleListSelect} />
+        </SheetContent>
+      </Sheet>
     </div>
   );
 }
