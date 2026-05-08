@@ -16,12 +16,15 @@ type PageProps = {
   params: Promise<{ slug: string; fishSlug: string }>;
 };
 
-// generateStaticParams: 実データに基づく組み合わせのみ生成
-export const dynamicParams = false;
+// 全1,370件 SSG はビルドサイズ肥大化の原因。スポット数が多い上位300件のみSSG、残りはISR。
+export const dynamic = "force-static";
+export const dynamicParams = true;
+export const revalidate = 86400;
+export const maxDuration = 60;
 
 export function generateStaticParams() {
-  const combos: { slug: string; fishSlug: string }[] = [];
-  const seen = new Set<string>();
+  // (prefecture, fish) ごとにスポット数を集計し、上位300件のみSSG
+  const counts = new Map<string, { slug: string; fishSlug: string; count: number }>();
 
   for (const spot of fishingSpots) {
     const pref = prefectures.find((p) => p.name === spot.region.prefecture);
@@ -29,13 +32,19 @@ export function generateStaticParams() {
 
     for (const cf of spot.catchableFish) {
       const key = `${pref.slug}/${cf.fish.slug}`;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      combos.push({ slug: pref.slug, fishSlug: cf.fish.slug });
+      const existing = counts.get(key);
+      if (existing) {
+        existing.count++;
+      } else {
+        counts.set(key, { slug: pref.slug, fishSlug: cf.fish.slug, count: 1 });
+      }
     }
   }
 
-  return combos;
+  return Array.from(counts.values())
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 300)
+    .map(({ slug, fishSlug }) => ({ slug, fishSlug }));
 }
 
 export async function generateMetadata({

@@ -121,6 +121,7 @@ const nextConfig: NextConfig = {
           key: "Strict-Transport-Security",
           value: "max-age=63072000; includeSubDomains; preload",
         },
+        { key: "X-Robots-Tag", value: "noai, noimageai" },
       ],
     },
     // SSGページのCloudFrontキャッシュ最適化（App Runnerへのリクエスト削減）

@@ -9,7 +9,8 @@ import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { NearMeClient } from "./near-me-client";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
+export const revalidate = 86400;
 
 /* ---------- スポット数を動的カウント ---------- */
 const totalSpotCount = fishingSpots.length;

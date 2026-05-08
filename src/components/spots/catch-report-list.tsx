@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useState, useCallback } from "react";
-import { Fish, Calendar, User, Loader2, Ruler, Flag } from "lucide-react";
+import { useState, useCallback } from "react";
+import { Fish, Calendar, User, Ruler, Flag } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import type { CatchReport } from "@/lib/data/catch-reports";
@@ -35,30 +35,8 @@ function getSessionId(): string {
 }
 
 export function CatchReportList({ spotSlug, initialReports }: CatchReportListProps) {
-  const [reports, setReports] = useState<CatchReport[]>(initialReports);
-  const [loading, setLoading] = useState(false);
+  const [reports] = useState<CatchReport[]>(initialReports);
   const [flaggedIds, setFlaggedIds] = useState<Set<string>>(new Set());
-
-  useEffect(() => {
-    let cancelled = false;
-    setLoading(true);
-
-    fetch(`/api/catch-reports?spot=${encodeURIComponent(spotSlug)}`)
-      .then((res) => res.json())
-      .then((data) => {
-        if (!cancelled && data.ok && Array.isArray(data.reports)) {
-          setReports(data.reports);
-        }
-      })
-      .catch(() => {
-        // ハードコード分をそのまま使う
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false);
-      });
-
-    return () => { cancelled = true; };
-  }, [spotSlug]);
 
   const handleFlag = useCallback(async (reportId: string) => {
     if (!confirm("この投稿を不適切として通報しますか？")) return;
@@ -76,15 +54,6 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
       alert("通報に失敗しました。もう一度お試しください。");
     }
   }, []);
-
-  if (loading && reports.length === 0) {
-    return (
-      <div className="flex items-center justify-center py-6 text-sm text-muted-foreground">
-        <Loader2 className="mr-2 size-4 animate-spin" />
-        読み込み中...
-      </div>
-    );
-  }
 
   if (reports.length === 0) {
     return (
@@ -168,12 +137,6 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
           </CardContent>
         </Card>
       ))}
-      {loading && (
-        <div className="flex items-center justify-center py-2 text-xs text-muted-foreground">
-          <Loader2 className="mr-1 size-3 animate-spin" />
-          更新を確認中...
-        </div>
-      )}
     </div>
   );
 }

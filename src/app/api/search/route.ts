@@ -130,7 +130,7 @@ export async function GET(request: NextRequest) {
   // 空クエリは空配列
   if (!q) {
     return NextResponse.json([], {
-      headers: { "Cache-Control": "public, max-age=60" },
+      headers: { "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400" },
     });
   }
 
@@ -163,6 +163,6 @@ export async function GET(request: NextRequest) {
   const response = results.map(({ searchText: _st, ...rest }) => rest);
 
   return NextResponse.json(response, {
-    headers: { "Cache-Control": "public, max-age=60" },
+    headers: { "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400" },
   });
 }

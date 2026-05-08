@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef, Component, type ErrorInfo, type ReactNode } from "react";
+import { useState, useCallback, useRef, Component, type ErrorInfo, type ReactNode } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import type { SpotPhoto } from "@/types";
@@ -146,6 +146,7 @@ interface SpotPhotoGalleryProps {
   spotSlug: string;
   latitude?: number;
   longitude?: number;
+  initialCommunityPhotos?: { url: string; uploadedAt: number }[];
 }
 
 // クライアント側で画像をリサイズ・JPEG圧縮
@@ -365,9 +366,15 @@ function CommunityPhotoStrip({ photos, spotSlug, onDeleted }: { photos: Communit
   );
 }
 
-export function SpotPhotoGallery({ photos, spotType, spotName, spotSlug, latitude, longitude }: SpotPhotoGalleryProps) {
+export function SpotPhotoGallery({ photos, spotType, spotName, spotSlug, latitude, longitude, initialCommunityPhotos = [] }: SpotPhotoGalleryProps) {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
-  const [communityPhotos, setCommunityPhotos] = useState<CommunityPhoto[]>([]);
+  const [communityPhotos, setCommunityPhotos] = useState<CommunityPhoto[]>(() =>
+    initialCommunityPhotos.map((p) => {
+      if (typeof window === "undefined") return { ...p, mine: false };
+      const tokens = getSavedTokens();
+      return { ...p, mine: !!tokens[p.url], token: tokens[p.url] };
+    }),
+  );
   const hasPhotos = photos && photos.length > 0;
   const hasCoordinates = typeof latitude === "number" && typeof longitude === "number";
 
@@ -388,8 +395,6 @@ export function SpotPhotoGallery({ photos, spotType, spotName, spotSlug, latitud
       })
       .catch(() => {});
   }, [spotSlug]);
-
-  useEffect(() => { loadCommunityPhotos(); }, [loadCommunityPhotos]);
 
   if (!hasPhotos) {
     const defaultImg = SPOT_TYPE_DEFAULT_IMAGES[spotType] || DEFAULT_IMAGE;

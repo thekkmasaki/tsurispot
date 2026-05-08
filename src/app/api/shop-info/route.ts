@@ -19,7 +19,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: "shop parameter required" }, { status: 400 });
   }
 
-  const headers = { "Cache-Control": "no-cache" };
+  const headers = { "Cache-Control": "public, s-maxage=300, stale-while-revalidate=600" };
 
   try {
     const data = await dbGet<ShopInfoOverride>(`SHOP#${slug}`, "INFO");
