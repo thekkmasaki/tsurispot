@@ -622,6 +622,7 @@ export function calcSpotBouzuProbability(
     beach: 40,
     rocky: 38,
     river: 35,
+    pond: 5,
   };
   let score = spotTypeBase[props.spotType] ?? 30;
 

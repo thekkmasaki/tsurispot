@@ -176,11 +176,11 @@ export function HomePopularSpots({ spots }: HomePopularSpotsProps) {
                     </Badge>
                     <Badge
                       variant="outline"
-                      className={`text-xs ${spot.spotType === "river" ? "border-emerald-200 text-emerald-700" : "border-sky-200 text-sky-700"}`}
+                      className={`text-xs ${["river", "lake", "pond"].includes(spot.spotType) ? "border-emerald-200 text-emerald-700" : "border-sky-200 text-sky-700"}`}
                     >
-                      {spot.spotType === "river" ? "川釣り" : "海釣り"}
+                      {spot.spotType === "pond" ? "管理釣り場" : ["river", "lake"].includes(spot.spotType) ? "川釣り" : "海釣り"}
                     </Badge>
-                    {spot.difficulty === "beginner" && (
+                    {(spot.difficulty === "beginner" || spot.difficulty === "all") && (
                       <Badge className="bg-emerald-100 text-xs text-emerald-700 hover:bg-emerald-100">
                         初心者OK
                       </Badge>

@@ -18,8 +18,8 @@ export interface SpotForFilter {
   name: string;
   address: string;
   prefecture: string;
-  spotType: "port" | "beach" | "rocky" | "river" | "pier" | "breakwater" | "surf" | "lake";
-  difficulty: "beginner" | "intermediate" | "advanced";
+  spotType: "port" | "beach" | "rocky" | "river" | "pier" | "breakwater" | "surf" | "lake" | "pond";
+  difficulty: "beginner" | "intermediate" | "advanced" | "all";
   rating: number;
   latitude: number;
   longitude: number;

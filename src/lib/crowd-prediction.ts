@@ -33,7 +33,7 @@ interface PredictionInput {
   temperature?: number; // Celsius
   spotPopularity?: number; // 1-5 rating as popularity proxy
   isFree?: boolean;
-  difficulty?: "beginner" | "intermediate" | "advanced";
+  difficulty?: "beginner" | "intermediate" | "advanced" | "all";
   prefecture?: string; // 都道府県（都市度推定に使用）
   hasParking?: boolean; // 駐車場の有無（アクセス性）
   reviewCount?: number; // レビュー数（人気の直接指標）
@@ -246,7 +246,7 @@ export function calculateCrowdScore(input: PredictionInput): CrowdPrediction {
   }
 
   // --- 初心者スポットは混みやすい ---
-  if (input.difficulty === "beginner") {
+  if (input.difficulty === "beginner" || input.difficulty === "all") {
     score += 5;
   }
 
