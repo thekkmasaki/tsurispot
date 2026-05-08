@@ -206,6 +206,8 @@ export function MonthlySportsSorter({ spots, monthName }: MonthlySportsSorterPro
                     ? "初心者向け"
                     : spot.difficulty === "intermediate"
                     ? "中級者向け"
+                    : spot.difficulty === "all"
+                    ? "初心者〜上級者向け"
                     : "上級者向け"}
                 </p>
                 {spot.catchableFishNames.length > 0 && (

@@ -12,7 +12,7 @@ import {
 interface CrowdPredictionProps {
   rating: number;
   isFree: boolean;
-  difficulty: "beginner" | "intermediate" | "advanced";
+  difficulty: "beginner" | "intermediate" | "advanced" | "all";
   prefecture?: string;
   hasParking?: boolean;
   reviewCount?: number;

@@ -3,12 +3,12 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 
 interface PackingChecklistProps {
-  spotType: "port" | "beach" | "rocky" | "river" | "pier" | "breakwater" | "surf" | "lake";
+  spotType: "port" | "beach" | "rocky" | "river" | "pier" | "breakwater" | "surf" | "lake" | "pond";
   hasConvenienceStore: boolean;
   hasToilet: boolean;
   hasFishingShop: boolean;
   hasRentalRod: boolean;
-  difficulty: "beginner" | "intermediate" | "advanced";
+  difficulty: "beginner" | "intermediate" | "advanced" | "all";
   safetyLevel?: "safe" | "caution" | "danger";
   isNightFishing: boolean;
 }
@@ -136,6 +136,24 @@ function buildChecklist(props: PackingChecklistProps) {
     });
     conditional.push({
       name: "虫除けスプレー",
+      level: "normal",
+    });
+  }
+
+  if (spotType === "pond") {
+    conditional.push({
+      name: "バーブレスのシングルフック",
+      note: "管理釣り場のレギュレーション（必須の場合あり）",
+      level: "warning",
+    });
+    conditional.push({
+      name: "ラバーランディングネット",
+      note: "魚体保護のため",
+      level: "warning",
+    });
+    conditional.push({
+      name: "施設のレギュレーション確認",
+      note: "釣行前にHPでルールを確認",
       level: "normal",
     });
   }

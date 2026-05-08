@@ -25,6 +25,9 @@ function YesNo({ value }: { value: boolean }) {
 }
 
 function getDefaultMessage(spotType: string, difficulty: string): string {
+  if (spotType === "pond") {
+    return "管理釣り場（ポンド）は足場が安定し、最初から魚が放流されているので、小さなお子様や釣り初心者でも安心して楽しめます。レンタル道具・トイレ・手洗い場も完備されているスポットが多いです。";
+  }
   if (spotType === "rocky") {
     return "磯は足場が不安定なため、小さなお子様には不向きです。ライフジャケットの着用を必ずお願いします。";
   }
@@ -34,8 +37,8 @@ function getDefaultMessage(spotType: string, difficulty: string): string {
   ) {
     return "堤防・桟橋は柵がある場所が多く、比較的安全にファミリーフィッシングを楽しめます。";
   }
-  if (difficulty === "beginner") {
-    return "初心者向けの釣り場のため、比較的ファミリーフレンドリーなスポットです。";
+  if (difficulty === "beginner" || difficulty === "all") {
+    return "初心者でも楽しめる釣り場のため、比較的ファミリーフレンドリーなスポットです。";
   }
   if (difficulty === "advanced") {
     return "上級者向けの釣り場のため、小さなお子様連れにはおすすめしません。";

@@ -80,6 +80,16 @@ function getDefaultRules(spotType: string): {
         ],
         licenseRequired: false,
       };
+    case "pond":
+      return {
+        items: [
+          { label: "投げ釣り", value: false, description: "管理釣り場（ポンド）では投げ釣りはできません" },
+          { label: "ルアー釣り", value: true, description: "ルアー・フライが基本。施設のレギュレーション（バーブレス・シングルフック等）を必ず確認してください" },
+          { label: "コマセ（撒き餌）", value: false, description: "管理釣り場ではコマセは禁止です" },
+          { label: "夜釣り", value: false, description: "営業時間内のみ釣行可能です" },
+        ],
+        licenseRequired: false,
+      };
     default:
       return {
         items: [
