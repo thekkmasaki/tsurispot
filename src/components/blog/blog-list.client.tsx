@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
+import { Fragment, useState, useMemo, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
+import { InFeedAd } from "@/components/ads/ad-unit";
 import {
   ChevronRight,
   Tag,
@@ -440,8 +441,15 @@ export function BlogListClient({ posts }: { posts: BlogPostSummary[] }) {
 
       {/* 記事一覧 */}
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-2">
-        {filteredPosts.slice(0, displayCount).map((post) => (
-          <BlogCard key={post.id} post={post} />
+        {filteredPosts.slice(0, displayCount).map((post, index) => (
+          <Fragment key={post.id}>
+            <BlogCard post={post} />
+            {(index === 5 || index === 11) && (
+              <div className="col-span-full">
+                <InFeedAd />
+              </div>
+            )}
+          </Fragment>
         ))}
       </div>
 

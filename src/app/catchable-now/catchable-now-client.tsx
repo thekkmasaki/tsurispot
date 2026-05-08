@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { FishCard } from "@/components/fish/fish-card";
+import { InArticleAd } from "@/components/ads/ad-unit";
 import type { FishSpecies } from "@/types";
 
 const SEASONAL_TIPS: Record<string, string> = {
@@ -137,42 +138,48 @@ export function CatchableNowClient({ fishSpecies, initialMonth }: CatchableNowCl
 
       {/* Peak fish */}
       {peakFish.length > 0 && (
-        <section className="mb-10">
-          <div className="mb-4 flex items-center gap-2">
-            <span className="text-xl" role="img" aria-label="fire">
-              🔥
-            </span>
-            <h2 className="text-lg font-bold">{selectedMonth}月に最盛期の旬の魚</h2>
-            <span className="text-sm text-muted-foreground">
-              {peakFish.length}種
-            </span>
-          </div>
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-            {peakFish.map((fish) => (
-              <FishCard key={fish.id} fish={fish} showPeakBadge />
-            ))}
-          </div>
-        </section>
+        <>
+          <section className="mb-10">
+            <div className="mb-4 flex items-center gap-2">
+              <span className="text-xl" role="img" aria-label="fire">
+                🔥
+              </span>
+              <h2 className="text-lg font-bold">{selectedMonth}月に最盛期の旬の魚</h2>
+              <span className="text-sm text-muted-foreground">
+                {peakFish.length}種
+              </span>
+            </div>
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+              {peakFish.map((fish) => (
+                <FishCard key={fish.id} fish={fish} showPeakBadge />
+              ))}
+            </div>
+          </section>
+          <InArticleAd className="my-6" />
+        </>
       )}
 
       {/* Still catchable */}
       {seasonFish.length > 0 && (
-        <section className="mb-10">
-          <div className="mb-4 flex items-center gap-2">
-            <span className="text-xl" role="img" aria-label="calendar">
-              📅
-            </span>
-            <h2 className="text-lg font-bold">{selectedMonth}月にまだ釣れるシーズン中の魚</h2>
-            <span className="text-sm text-muted-foreground">
-              {seasonFish.length}種
-            </span>
-          </div>
-          <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-            {seasonFish.map((fish) => (
-              <FishCard key={fish.id} fish={fish} />
-            ))}
-          </div>
-        </section>
+        <>
+          <section className="mb-10">
+            <div className="mb-4 flex items-center gap-2">
+              <span className="text-xl" role="img" aria-label="calendar">
+                📅
+              </span>
+              <h2 className="text-lg font-bold">{selectedMonth}月にまだ釣れるシーズン中の魚</h2>
+              <span className="text-sm text-muted-foreground">
+                {seasonFish.length}種
+              </span>
+            </div>
+            <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+              {seasonFish.map((fish) => (
+                <FishCard key={fish.id} fish={fish} />
+              ))}
+            </div>
+          </section>
+          <InArticleAd className="my-6" />
+        </>
       )}
 
       {/* Upcoming fish */}
