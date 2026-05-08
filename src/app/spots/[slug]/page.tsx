@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import dynamic from "next/dynamic";
+import nextDynamic from "next/dynamic";
 import { notFound } from "next/navigation";
 import {
   Star,
@@ -61,7 +61,7 @@ import { CatchReportList } from "@/components/spots/catch-report-list";
 import { CatchReportForm } from "@/components/spots/catch-report-form";
 import { NearbyAccommodation, RakutenTravelCta } from "@/components/spots/nearby-accommodation";
 import { SpotRulesCard } from "@/components/spots/spot-rules";
-const SpotPhotoGallery = dynamic(
+const SpotPhotoGallery = nextDynamic(
   () => import("@/components/spots/spot-photo-gallery").then(m => ({ default: m.SpotPhotoGallery })),
 );
 import { areaGuides } from "@/lib/data/area-guides";
@@ -97,13 +97,13 @@ import {
 } from "@/lib/utils/spot-content-generator";
 
 // Below-the-fold client components loaded lazily
-const SpotWeatherTide = dynamic(() => import("@/components/spots/spot-weather-tide").then((m) => m.SpotWeatherTide), {
+const SpotWeatherTide = nextDynamic(() => import("@/components/spots/spot-weather-tide").then((m) => m.SpotWeatherTide), {
   loading: () => <div className="h-48 w-full animate-pulse rounded-xl bg-muted" />,
 });
-const CrowdPredictionCard = dynamic(() => import("@/components/spots/crowd-prediction").then((m) => m.CrowdPredictionCard), {
+const CrowdPredictionCard = nextDynamic(() => import("@/components/spots/crowd-prediction").then((m) => m.CrowdPredictionCard), {
   loading: () => <div className="h-40 w-full animate-pulse rounded-xl bg-muted" />,
 });
-const NearbyGpsSearch = dynamic(() => import("@/components/spots/nearby-gps-search").then((m) => m.NearbyGpsSearch), {
+const NearbyGpsSearch = nextDynamic(() => import("@/components/spots/nearby-gps-search").then((m) => m.NearbyGpsSearch), {
   loading: () => <div className="h-32 w-full animate-pulse rounded-xl bg-muted" />,
 });
 import { LeafletMapSection } from "@/components/map/leaflet-map-section";
@@ -180,11 +180,20 @@ export async function generateMetadata({
   };
 }
 
-export const dynamicParams = false;
+export const dynamic = "force-static";
+export const dynamicParams = true;
+export const revalidate = 86400;
+export const maxDuration = 60;
 
 export function generateStaticParams() {
-  // 全スポットをSSGで事前生成（standalone出力ではISRが動かないため）
-  return fishingSpots.map((spot) => ({ slug: spot.slug }));
+  // 上位500件のみSSG。残りはISRで初回アクセス時に生成。
+  return [...fishingSpots]
+    .sort(
+      (a, b) =>
+        b.rating - a.rating || b.reviewCount - a.reviewCount,
+    )
+    .slice(0, 500)
+    .map((spot) => ({ slug: spot.slug }));
 }
 
 export default async function SpotDetailPage({ params }: PageProps) {

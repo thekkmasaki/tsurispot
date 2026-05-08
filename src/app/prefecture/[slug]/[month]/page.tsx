@@ -32,17 +32,17 @@ type PageProps = {
   params: Promise<{ slug: string; month: string }>;
 };
 
-// 47都道府県 × 12月 = 564ページ
-export const dynamicParams = false;
+// 47都道府県 × 12月 = 564ページ。ビルドサイズが肥大化するため、
+// 「現在月のみ全都道府県SSG」+ 残りはISRに変更（47件 SSG）。
+export const dynamic = "force-static";
+export const dynamicParams = true;
+export const revalidate = 86400;
+export const maxDuration = 60;
 
 export function generateStaticParams() {
-  const combos: { slug: string; month: string }[] = [];
-  for (const pref of prefectures) {
-    for (const m of MONTHS) {
-      combos.push({ slug: pref.slug, month: m.slug });
-    }
-  }
-  return combos;
+  // 現在月のみ全都道府県SSG。他月は初回アクセス時にISR生成。
+  const currentMonth = MONTHS[new Date().getMonth()];
+  return prefectures.map((pref) => ({ slug: pref.slug, month: currentMonth.slug }));
 }
 
 export async function generateMetadata({
