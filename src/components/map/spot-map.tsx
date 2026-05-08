@@ -12,6 +12,7 @@ import { Navigation, Loader2, Fish, ChevronDown, ChevronUp, SlidersHorizontal, M
 import { DIFFICULTY_LABELS } from '@/types';
 import type { FishingSpot } from '@/types';
 import { getFavorites } from '@/hooks/use-favorites';
+import { SpotSearch } from '@/components/map/spot-search';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -52,6 +53,20 @@ function MapController({ center, zoom }: { center: [number, number]; zoom: numbe
   useMemo(() => {
     map.setView(center, zoom);
   }, [map, center, zoom]);
+  return null;
+}
+
+function FlyToHandler({
+  target,
+}: {
+  target: { lat: number; lng: number; zoom: number; tick: number } | null;
+}) {
+  const map = useMap();
+  useEffect(() => {
+    if (target) {
+      map.flyTo([target.lat, target.lng], target.zoom, { duration: 1.2 });
+    }
+  }, [target, map]);
   return null;
 }
 
@@ -228,6 +243,21 @@ export function SpotMap() {
   const [nearbyMode, setNearbyMode] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(true);
   const [showAllAreas, setShowAllAreas] = useState(false);
+  const [flyTarget, setFlyTarget] = useState<{
+    lat: number;
+    lng: number;
+    zoom: number;
+    tick: number;
+  } | null>(null);
+
+  const handleSearchSelect = useCallback((spot: FishingSpot) => {
+    setFlyTarget({
+      lat: spot.latitude,
+      lng: spot.longitude,
+      zoom: 14,
+      tick: Date.now(),
+    });
+  }, []);
 
   useEffect(() => {
     const checkMobile = () => {
@@ -435,6 +465,7 @@ export function SpotMap() {
 
   return (
     <div className="space-y-2">
+      <SpotSearch onSelect={handleSearchSelect} />
       <div className="flex items-center justify-between gap-2">
         <button
           onClick={() => setFiltersOpen((v) => !v)}
@@ -673,6 +704,7 @@ export function SpotMap() {
         scrollWheelZoom={true}
       >
         <MapController center={mapCenter} zoom={mapZoom} />
+        <FlyToHandler target={flyTarget} />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
