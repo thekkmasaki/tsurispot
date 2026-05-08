@@ -7,8 +7,9 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet.markercluster';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
+import 'leaflet.heat';
 import { fishingSpots } from '@/lib/data/spots';
-import { Navigation, Loader2, Fish, ChevronDown, ChevronUp, SlidersHorizontal, MapPin } from 'lucide-react';
+import { Navigation, Loader2, Fish, ChevronDown, ChevronUp, SlidersHorizontal, MapPin, Flame } from 'lucide-react';
 import { DIFFICULTY_LABELS } from '@/types';
 import type { FishingSpot } from '@/types';
 import { getFavorites } from '@/hooks/use-favorites';
@@ -153,6 +154,47 @@ function clusterIconHtml(count: number): string {
   return `<div style="background:${bg};color:#fff;border:3px solid #fff;border-radius:50%;width:${size}px;height:${size}px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:13px;box-shadow:0 2px 8px rgba(0,0,0,0.3)">${count}</div>`;
 }
 
+function HeatLayer({ spots, enabled }: { spots: FishingSpot[]; enabled: boolean }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (!enabled || spots.length === 0) return;
+
+    const points: [number, number, number][] = spots.map((s) => {
+      const rating = Math.max(0, Math.min(5, s.rating || 3));
+      const reviews = Math.max(0, s.reviewCount || 0);
+      // 0..1 に正規化した「人気度」: rating(0..1) × log スケールのレビュー(0..1)
+      const intensity = Math.min(
+        1,
+        (rating / 5) * (Math.log10(reviews + 1) / Math.log10(101))
+      );
+      return [s.latitude, s.longitude, Math.max(0.1, intensity)];
+    });
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const heat = (L as any).heatLayer(points, {
+      radius: 28,
+      blur: 38,
+      maxZoom: 11,
+      max: 1.0,
+      gradient: {
+        0.2: '#3b82f6',
+        0.4: '#10b981',
+        0.6: '#f59e0b',
+        0.8: '#ef4444',
+        1.0: '#dc2626',
+      },
+    });
+
+    map.addLayer(heat);
+    return () => {
+      map.removeLayer(heat);
+    };
+  }, [spots, enabled, map]);
+
+  return null;
+}
+
 function ClusteredSpotMarkers({ spots }: { spots: FishingSpot[] }) {
   const map = useMap();
 
@@ -243,6 +285,7 @@ export function SpotMap() {
   const [nearbyMode, setNearbyMode] = useState(false);
   const [filtersOpen, setFiltersOpen] = useState(true);
   const [showAllAreas, setShowAllAreas] = useState(false);
+  const [heatEnabled, setHeatEnabled] = useState(false);
   const [flyTarget, setFlyTarget] = useState<{
     lat: number;
     lng: number;
@@ -478,10 +521,25 @@ export function SpotMap() {
             <span className="ml-1 flex size-2 rounded-full bg-blue-600" />
           )}
         </button>
-        <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-          <MapPin className="size-3.5" />
-          <span className="font-medium tabular-nums">{filteredSpots.length.toLocaleString()}件</span>
-          <span className="hidden sm:inline">のスポットを表示中</span>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => setHeatEnabled((v) => !v)}
+            aria-pressed={heatEnabled}
+            className={`flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium transition-colors min-h-[36px] sm:text-sm ${
+              heatEnabled
+                ? 'bg-orange-600 text-white shadow-sm'
+                : 'bg-muted text-muted-foreground hover:bg-orange-100 hover:text-orange-700'
+            }`}
+            title="人気度ヒートマップ（評価×レビュー数）"
+          >
+            <Flame className="size-3.5" />
+            <span>ヒート</span>
+          </button>
+          <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
+            <MapPin className="size-3.5" />
+            <span className="font-medium tabular-nums">{filteredSpots.length.toLocaleString()}件</span>
+            <span className="hidden sm:inline">のスポットを表示中</span>
+          </div>
         </div>
       </div>
 
@@ -728,6 +786,7 @@ export function SpotMap() {
             />
           </>
         )}
+        <HeatLayer spots={filteredSpots} enabled={heatEnabled} />
         <ClusteredSpotMarkers spots={filteredSpots} />
       </MapContainer>
     </div>
