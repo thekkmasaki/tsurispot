@@ -27,7 +27,8 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { prefectures, regionGroupOrder } from "@/lib/data/prefectures";
 import { InArticleAd } from "@/components/ads/ad-unit";
 
-export const dynamic = "force-dynamic";
+export const dynamic = "force-static";
+export const revalidate = 86400;
 
 export const metadata: Metadata = {
   title: "釣りのルールとマナー - 漁業権・禁漁期間・リリースサイズまとめ",
