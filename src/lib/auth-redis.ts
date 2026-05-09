@@ -21,6 +21,8 @@ const FOLLOWING_PREFIX = "auth:following:";
 const FOLLOWERS_PREFIX = "auth:followers:";
 const WISHLIST_PREFIX = "wish:list:";
 const WISH_MEMO_PREFIX = "wish:memo:";
+const CHECKIN_PREFIX = "checkin:";
+const PUSH_SUB_PREFIX = "notif:sub:";
 
 /**
  * Redisから取得した値を確実にオブジェクトにする。
@@ -337,4 +339,101 @@ export async function setWishMemo(
     return;
   }
   await redis.set(`${WISH_MEMO_PREFIX}${userId}:${slug}`, memo);
+}
+
+export interface Checkin {
+  id: string;
+  spotSlug: string;
+  spotName?: string;
+  date: string; // YYYY-MM-DD
+  memo?: string;
+  createdAt: string;
+}
+
+/** 釣行チェックインを追加（最新100件保持） */
+export async function addCheckin(userId: string, checkin: Checkin): Promise<void> {
+  await redis.lpush(`${CHECKIN_PREFIX}${userId}`, JSON.stringify(checkin));
+  await redis.ltrim(`${CHECKIN_PREFIX}${userId}`, 0, 99);
+}
+
+/** 釣行チェックイン一覧（新しい順） */
+export async function getCheckins(
+  userId: string,
+  limit = 50,
+): Promise<Checkin[]> {
+  const raw = await redis.lrange(`${CHECKIN_PREFIX}${userId}`, 0, limit - 1);
+  return (raw || [])
+    .map((item) => {
+      if (typeof item === "string") {
+        try {
+          return JSON.parse(item) as Checkin;
+        } catch {
+          return null;
+        }
+      }
+      return item as Checkin;
+    })
+    .filter((c): c is Checkin => Boolean(c));
+}
+
+/** 釣行チェックイン削除（id一致を除外して再構築） */
+export async function removeCheckin(
+  userId: string,
+  checkinId: string,
+): Promise<boolean> {
+  const checkins = await getCheckins(userId, 100);
+  const filtered = checkins.filter((c) => c.id !== checkinId);
+  if (filtered.length === checkins.length) return false;
+  await redis.del(`${CHECKIN_PREFIX}${userId}`);
+  if (filtered.length > 0) {
+    // 古い順に lpush すると、最後に push した最新が先頭に来る
+    const reversed = [...filtered].reverse();
+    for (const c of reversed) {
+      await redis.lpush(`${CHECKIN_PREFIX}${userId}`, JSON.stringify(c));
+    }
+  }
+  return true;
+}
+
+export interface StoredPushSubscription {
+  endpoint: string;
+  keys: { p256dh: string; auth: string };
+}
+
+/** Push購読を保存（endpoint をフィールド名にする Hash） */
+export async function savePushSubscription(
+  userId: string,
+  sub: StoredPushSubscription,
+): Promise<void> {
+  await redis.hset(`${PUSH_SUB_PREFIX}${userId}`, {
+    [sub.endpoint]: JSON.stringify(sub),
+  });
+}
+
+/** Push購読を解除（endpoint指定） */
+export async function removePushSubscription(
+  userId: string,
+  endpoint: string,
+): Promise<void> {
+  await redis.hdel(`${PUSH_SUB_PREFIX}${userId}`, endpoint);
+}
+
+/** Push購読一覧（端末ごと） */
+export async function getPushSubscriptions(
+  userId: string,
+): Promise<StoredPushSubscription[]> {
+  const data = await redis.hgetall(`${PUSH_SUB_PREFIX}${userId}`);
+  if (!data) return [];
+  return Object.values(data)
+    .map((v) => {
+      if (typeof v === "string") {
+        try {
+          return JSON.parse(v) as StoredPushSubscription;
+        } catch {
+          return null;
+        }
+      }
+      return v as StoredPushSubscription;
+    })
+    .filter((x): x is StoredPushSubscription => Boolean(x));
 }

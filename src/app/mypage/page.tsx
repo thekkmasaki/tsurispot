@@ -5,8 +5,9 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   User, Heart, Trash2, Fish, ArrowLeft, MapPin, Calendar, Ruler,
-  Edit3, Check, X, Trophy, Sparkles, Waves, Moon, Bookmark,
+  Edit3, Check, X, Trophy, Sparkles, Waves, Moon, Bookmark, Anchor, Bell,
 } from "lucide-react";
+import { NotificationSubscribeButton } from "@/components/notification-subscribe-button";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -87,6 +88,15 @@ interface WishlistItem {
   memo: string;
 }
 
+interface CheckinItem {
+  id: string;
+  spotSlug: string;
+  spotName?: string;
+  date: string;
+  memo?: string;
+  createdAt: string;
+}
+
 const PROVIDER_LABELS: Record<string, string> = {
   google: "Google",
   signinwithapple: "Apple",
@@ -132,6 +142,7 @@ export default function MyPage() {
   const [profile, setProfile] = useState<ProfileData | null>(null);
   const [dashboard, setDashboard] = useState<DashboardData | null>(null);
   const [wishlist, setWishlist] = useState<WishlistItem[]>([]);
+  const [checkins, setCheckins] = useState<CheckinItem[]>([]);
   const [catchReports, setCatchReports] = useState<CatchReport[]>([]);
   const [reportsLoading, setReportsLoading] = useState(true);
   const [showAllBadges, setShowAllBadges] = useState(false);
@@ -145,13 +156,15 @@ export default function MyPage() {
       fetch("/api/user/profile").then((r) => (r.ok ? r.json() : null)),
       fetch("/api/user/dashboard").then((r) => (r.ok ? r.json() : null)),
       fetch("/api/user/wishlist").then((r) => (r.ok ? r.json() : { items: [] })),
+      fetch("/api/user/checkins").then((r) => (r.ok ? r.json() : { checkins: [] })),
     ])
-      .then(([reportsRes, statsRes, badgesRes, profileRes, dashboardRes, wishlistRes]) => {
+      .then(([reportsRes, statsRes, badgesRes, profileRes, dashboardRes, wishlistRes, checkinsRes]) => {
         setCatchReports(reportsRes.reports || []);
         setStats(statsRes);
         setBadgesData(badgesRes);
         setDashboard(dashboardRes);
         setWishlist(wishlistRes?.items || []);
+        setCheckins(checkinsRes?.checkins || []);
         const u = profileRes?.user;
         if (u) {
           setProfile({ bio: u.bio, headerImage: u.headerImage, createdAt: u.createdAt });
@@ -169,6 +182,19 @@ export default function MyPage() {
         method: "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ slug }),
+      });
+    } catch {
+      /* ignore */
+    }
+  };
+
+  const handleRemoveCheckin = async (id: string) => {
+    setCheckins((prev) => prev.filter((c) => c.id !== id));
+    try {
+      await fetch("/api/user/checkins", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id }),
       });
     } catch {
       /* ignore */
@@ -570,6 +596,75 @@ export default function MyPage() {
               </div>
               <span className="text-sm text-muted-foreground">{favorites.length}件</span>
             </Link>
+          </CardContent>
+        </Card>
+
+        {/* プッシュ通知 */}
+        <Card className="mt-4">
+          <CardContent className="p-4">
+            <div className="mb-2 flex items-center gap-2">
+              <Bell className="h-5 w-5 text-ocean-mid" />
+              <span className="font-medium">プッシュ通知</span>
+            </div>
+            <p className="mb-3 text-xs text-muted-foreground">
+              お気に入りスポットの今日の好機（潮汐ベスト時刻）をプッシュ通知で受け取れます。
+            </p>
+            <NotificationSubscribeButton />
+          </CardContent>
+        </Card>
+
+        {/* 過去の釣行（プライベート） */}
+        <Card className="mt-4">
+          <CardContent className="p-4">
+            <div className="mb-3 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Anchor className="h-5 w-5 text-emerald-600" />
+                <span className="font-medium">過去の釣行</span>
+                <span className="text-xs text-muted-foreground">公開されません</span>
+              </div>
+              <span className="text-sm text-muted-foreground">{checkins.length}件</span>
+            </div>
+            {checkins.length === 0 ? (
+              <p className="text-sm text-muted-foreground">
+                スポット詳細ページの「ここに行った」ボタンで記録できます。
+              </p>
+            ) : (
+              <ul className="space-y-2">
+                {checkins.map((c) => (
+                  <li
+                    key={c.id}
+                    className="flex items-start gap-2 rounded-lg border p-3"
+                  >
+                    <Link
+                      href={`/spots/${c.spotSlug}`}
+                      className="min-w-0 flex-1"
+                    >
+                      <div className="flex flex-wrap items-baseline gap-x-2">
+                        <span className="font-medium">
+                          {c.spotName || c.spotSlug}
+                        </span>
+                        <span className="text-xs text-muted-foreground">
+                          {c.date}
+                        </span>
+                      </div>
+                      {c.memo && (
+                        <p className="mt-1 whitespace-pre-wrap text-xs text-foreground">
+                          {c.memo}
+                        </p>
+                      )}
+                    </Link>
+                    <button
+                      onClick={() => handleRemoveCheckin(c.id)}
+                      className="shrink-0 rounded-md p-1 text-muted-foreground/40 hover:bg-destructive/10 hover:text-destructive"
+                      aria-label="釣行記録を削除"
+                      title="削除"
+                    >
+                      <X className="h-3.5 w-3.5" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
           </CardContent>
         </Card>
 

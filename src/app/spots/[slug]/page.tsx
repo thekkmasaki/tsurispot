@@ -38,6 +38,7 @@ import { TackleCard } from "@/components/spots/tackle-card";
 import { TideMazumeInfo } from "@/components/spots/tide-mazume-info";
 import { FavoriteButton } from "@/components/spots/favorite-button";
 import { WishlistButton } from "@/components/spots/wishlist-button";
+import { CheckinButton } from "@/components/spots/checkin-button";
 import { GoTodayButton } from "@/components/spots/go-today-button";
 import { GearGuideList } from "@/components/spots/gear-guide";
 import { SafetyWarning } from "@/components/spots/safety-warning";
@@ -534,6 +535,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <WishlistButton slug={spot.slug} />
             <FavoriteButton spotSlug={spot.slug} />
           </div>
+        </div>
+
+        {/* 釣行記録ボタン（プライベート、ログイン時のみ表示） */}
+        <div className="mt-2">
+          <CheckinButton slug={spot.slug} />
         </div>
 
         {/* 評価 + エリア情報 */}
