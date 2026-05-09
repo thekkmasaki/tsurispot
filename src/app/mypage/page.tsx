@@ -487,7 +487,9 @@ export default function MyPage() {
                 <span className="font-medium">今日の好機</span>
                 <span className="text-xs text-muted-foreground">
                   <Moon className="mr-0.5 inline h-3 w-3" />
-                  月齢 {dashboard.moonAge.toFixed(1)}
+                  {dashboard.items[0]?.tideLabel
+                    ? `${dashboard.items[0].tideLabel}（月齢${dashboard.moonAge.toFixed(1)}）`
+                    : `月齢 ${dashboard.moonAge.toFixed(1)}`}
                 </span>
               </div>
               {dashboard.items.length === 0 ? (
