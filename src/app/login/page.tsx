@@ -1,7 +1,7 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { Fish, Loader2, AlertTriangle, Copy } from "lucide-react";
+import { Fish, Loader2, AlertTriangle, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
@@ -30,17 +30,36 @@ export default function LoginPage() {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    setInAppBrowser(detectInAppBrowser());
+    const detected = detectInAppBrowser();
+    setInAppBrowser(detected);
+    // LINE は ?openExternalBrowser=1 を読み取り、リンクタップ時に外部Safari で開く仕様。
+    // ユーザーが既にアプリ内ブラウザに居る場合、URL を上記付きに置換すると、
+    // 一部の LINE バージョンでは外部 Safari に切替えられる（ベストエフォート）。
+    if (
+      detected.appName === "LINE" &&
+      typeof window !== "undefined" &&
+      !window.location.search.includes("openExternalBrowser=1")
+    ) {
+      const newUrl = new URL(window.location.href);
+      newUrl.searchParams.set("openExternalBrowser", "1");
+      window.history.replaceState({}, "", newUrl.toString());
+    }
   }, []);
 
-  const handleCopyUrl = async () => {
+  const handleOpenInSafari = async () => {
+    const targetUrl = "https://tsurispot.com/login?openExternalBrowser=1";
+    if (inAppBrowser.appName === "LINE") {
+      // LINE: openExternalBrowser=1 で外部Safari にジャンプする
+      window.location.href = targetUrl;
+      return;
+    }
+    // 他のアプリ内ブラウザは URL コピーで手動 Safari 起動を促す
     try {
-      const url = "https://tsurispot.com/login";
       if (navigator.clipboard) {
-        await navigator.clipboard.writeText(url);
+        await navigator.clipboard.writeText(targetUrl);
       }
       setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
+      setTimeout(() => setCopied(false), 2500);
     } catch {
       /* ignore */
     }
@@ -82,34 +101,42 @@ export default function LoginPage() {
 
         {inAppBrowser.inApp && (
           <div className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm">
-            <div className="mb-2 flex items-start gap-2">
+            <div className="mb-3 flex items-start gap-2">
               <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden="true" />
               <div>
                 <p className="font-medium text-amber-900">
-                  {inAppBrowser.appName} のアプリ内ブラウザでは Google ログインが使えません
+                  {inAppBrowser.appName} のアプリ内ブラウザではログインできません
                 </p>
                 <p className="mt-1 text-xs text-amber-800">
-                  Google のセキュリティポリシーで、アプリ内ブラウザ経由のログインが
-                  ブロックされています。Safari など標準ブラウザで開き直してください。
+                  Google のセキュリティポリシーにより、{inAppBrowser.appName}
+                  だけでなくInstagram・X・Slack 等、すべてのアプリ内ブラウザで
+                  ログインが拒否されます。Safari で開き直してください。
                 </p>
               </div>
             </div>
-            <div className="mt-3 space-y-2 text-xs">
-              <p className="font-medium text-amber-900">対処方法</p>
-              <ol className="list-decimal pl-5 text-amber-800">
-                <li>画面右下/上の「⋯」または「↗」メニューを開く</li>
-                <li>「他のアプリで開く」「Safariで開く」を選択</li>
-                <li>Safari でログインボタンを押す</li>
-              </ol>
-              <button
-                type="button"
-                onClick={handleCopyUrl}
-                className="mt-2 inline-flex items-center gap-1.5 rounded-md border border-amber-400 bg-white px-2.5 py-1 text-xs font-medium text-amber-800 hover:bg-amber-100"
-              >
-                <Copy className="h-3 w-3" />
-                {copied ? "コピー済" : "URL をコピー"}
-              </button>
-            </div>
+
+            <button
+              type="button"
+              onClick={handleOpenInSafari}
+              className="flex w-full items-center justify-center gap-2 rounded-lg bg-amber-600 px-4 py-2.5 text-sm font-medium text-white hover:bg-amber-700"
+            >
+              <ExternalLink className="h-4 w-4" />
+              {inAppBrowser.appName === "LINE"
+                ? "Safari で開く"
+                : copied
+                  ? "URLコピー済 → Safariに貼り付け"
+                  : "URL をコピーして Safari で開く"}
+            </button>
+
+            {inAppBrowser.appName !== "LINE" && (
+              <div className="mt-3 space-y-1 text-xs text-amber-800">
+                <p className="font-medium">手動の場合</p>
+                <ol className="list-decimal pl-5">
+                  <li>画面の「⋯」または「↗」メニューを開く</li>
+                  <li>「Safariで開く」「他のブラウザで開く」を選択</li>
+                </ol>
+              </div>
+            )}
           </div>
         )}
 
