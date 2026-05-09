@@ -1,14 +1,50 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import { Fish, Loader2 } from "lucide-react";
+import { Fish, Loader2, AlertTriangle, Copy } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type LoadingState = null | "google" | "apple";
 
+function detectInAppBrowser(): { inApp: boolean; appName: string | null } {
+  if (typeof navigator === "undefined") return { inApp: false, appName: null };
+  const ua = navigator.userAgent;
+  if (/Line\/[\d.]+/i.test(ua)) return { inApp: true, appName: "LINE" };
+  if (/FBAN|FBAV/i.test(ua)) return { inApp: true, appName: "Facebook" };
+  if (/Instagram/i.test(ua)) return { inApp: true, appName: "Instagram" };
+  if (/Twitter/i.test(ua)) return { inApp: true, appName: "X (Twitter)" };
+  // iOS WKWebView の単純検知 (Safari の標準は Safari/ 含む、内蔵 WebView は含まない)
+  if (/iPhone|iPad|iPod/.test(ua) && !/Safari/.test(ua) && !/CriOS|FxiOS/.test(ua)) {
+    return { inApp: true, appName: "アプリ内ブラウザ" };
+  }
+  return { inApp: false, appName: null };
+}
+
 export default function LoginPage() {
   const [loading, setLoading] = useState<LoadingState>(null);
+  const [inAppBrowser, setInAppBrowser] = useState<{
+    inApp: boolean;
+    appName: string | null;
+  }>({ inApp: false, appName: null });
+  const [copied, setCopied] = useState(false);
+
+  useEffect(() => {
+    setInAppBrowser(detectInAppBrowser());
+  }, []);
+
+  const handleCopyUrl = async () => {
+    try {
+      const url = "https://tsurispot.com/login";
+      if (navigator.clipboard) {
+        await navigator.clipboard.writeText(url);
+      }
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* ignore */
+    }
+  };
 
   const handleGoogle = () => {
     if (loading) return;
@@ -43,6 +79,39 @@ export default function LoginPage() {
             お気に入りや釣果をクラウドに保存
           </p>
         </div>
+
+        {inAppBrowser.inApp && (
+          <div className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm">
+            <div className="mb-2 flex items-start gap-2">
+              <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0 text-amber-600" aria-hidden="true" />
+              <div>
+                <p className="font-medium text-amber-900">
+                  {inAppBrowser.appName} のアプリ内ブラウザでは Google ログインが使えません
+                </p>
+                <p className="mt-1 text-xs text-amber-800">
+                  Google のセキュリティポリシーで、アプリ内ブラウザ経由のログインが
+                  ブロックされています。Safari など標準ブラウザで開き直してください。
+                </p>
+              </div>
+            </div>
+            <div className="mt-3 space-y-2 text-xs">
+              <p className="font-medium text-amber-900">対処方法</p>
+              <ol className="list-decimal pl-5 text-amber-800">
+                <li>画面右下/上の「⋯」または「↗」メニューを開く</li>
+                <li>「他のアプリで開く」「Safariで開く」を選択</li>
+                <li>Safari でログインボタンを押す</li>
+              </ol>
+              <button
+                type="button"
+                onClick={handleCopyUrl}
+                className="mt-2 inline-flex items-center gap-1.5 rounded-md border border-amber-400 bg-white px-2.5 py-1 text-xs font-medium text-amber-800 hover:bg-amber-100"
+              >
+                <Copy className="h-3 w-3" />
+                {copied ? "コピー済" : "URL をコピー"}
+              </button>
+            </div>
+          </div>
+        )}
 
         <div className="space-y-3">
           <button
