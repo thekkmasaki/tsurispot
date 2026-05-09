@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback } from "react";
+import Link from "next/link";
 import { Fish, Calendar, User, Ruler, Flag } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -96,7 +97,16 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
               )}
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-medium leading-snug">
-                  <span className="text-emerald-700">{report.userName}</span>
+                  {report.tsuriId ? (
+                    <Link
+                      href={`/users/${report.tsuriId}`}
+                      className="text-emerald-700 hover:underline"
+                    >
+                      {report.userName}
+                    </Link>
+                  ) : (
+                    <span className="text-emerald-700">{report.userName}</span>
+                  )}
                   さんが
                   <span className="font-bold text-foreground">{report.fishName}</span>
                   を釣りました！
@@ -108,7 +118,16 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
                   </span>
                   <span className="flex items-center gap-1">
                     <User className="size-3" />
-                    {report.userName}
+                    {report.tsuriId ? (
+                      <Link
+                        href={`/users/${report.tsuriId}`}
+                        className="hover:underline hover:text-foreground"
+                      >
+                        {report.userName}
+                      </Link>
+                    ) : (
+                      report.userName
+                    )}
                   </span>
                   {report.sizeCm && (
                     <Badge variant="secondary" className="gap-0.5 px-1.5 py-0 text-xs font-normal">

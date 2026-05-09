@@ -6,6 +6,7 @@ export interface CatchReport {
   spotName: string;
   fishName: string;
   userName: string;
+  tsuriId?: string; // ログインユーザー投稿時に設定。公開プロフィール /users/[tsuriId] への導線用
   comment: string;
   date: string; // "2026-02-22" 形式
   approved: boolean;

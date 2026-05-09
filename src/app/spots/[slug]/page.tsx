@@ -37,6 +37,7 @@ import { SeasonCalendar } from "@/components/spots/season-calendar";
 import { TackleCard } from "@/components/spots/tackle-card";
 import { TideMazumeInfo } from "@/components/spots/tide-mazume-info";
 import { FavoriteButton } from "@/components/spots/favorite-button";
+import { WishlistButton } from "@/components/spots/wishlist-button";
 import { GoTodayButton } from "@/components/spots/go-today-button";
 import { GearGuideList } from "@/components/spots/gear-guide";
 import { SafetyWarning } from "@/components/spots/safety-warning";
@@ -529,7 +530,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
         {/* スポット名 + お気に入り（最上段） */}
         <div className="flex items-start justify-between gap-3">
           <h1 className="min-w-0 text-xl font-bold leading-tight text-pretty sm:text-2xl md:text-3xl">{spot.name}</h1>
-          <FavoriteButton spotSlug={spot.slug} />
+          <div className="flex shrink-0 items-center gap-2">
+            <WishlistButton slug={spot.slug} />
+            <FavoriteButton spotSlug={spot.slug} />
+          </div>
         </div>
 
         {/* 評価 + エリア情報 */}

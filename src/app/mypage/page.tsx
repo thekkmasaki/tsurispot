@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   User, Heart, Trash2, Fish, ArrowLeft, MapPin, Calendar, Ruler,
-  Edit3, Check, X, Trophy, Sparkles,
+  Edit3, Check, X, Trophy, Sparkles, Waves, Moon, Bookmark,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -60,6 +60,33 @@ interface ProfileData {
   createdAt?: string;
 }
 
+interface DashboardItem {
+  slug: string;
+  name: string;
+  prefecture: string;
+  spotType: string;
+  tideLabel: string;
+  tideType: string;
+  fishingScore: number;
+  highTides: string[];
+  lowTides: string[];
+  description: string;
+}
+
+interface DashboardData {
+  items: DashboardItem[];
+  moonAge: number;
+  date: string;
+}
+
+interface WishlistItem {
+  slug: string;
+  name: string;
+  prefecture: string;
+  spotType: string;
+  memo: string;
+}
+
 const PROVIDER_LABELS: Record<string, string> = {
   google: "Google",
   signinwithapple: "Apple",
@@ -103,6 +130,8 @@ export default function MyPage() {
   const [stats, setStats] = useState<Stats | null>(null);
   const [badgesData, setBadgesData] = useState<BadgesResponse | null>(null);
   const [profile, setProfile] = useState<ProfileData | null>(null);
+  const [dashboard, setDashboard] = useState<DashboardData | null>(null);
+  const [wishlist, setWishlist] = useState<WishlistItem[]>([]);
   const [catchReports, setCatchReports] = useState<CatchReport[]>([]);
   const [reportsLoading, setReportsLoading] = useState(true);
   const [showAllBadges, setShowAllBadges] = useState(false);
@@ -114,11 +143,15 @@ export default function MyPage() {
       fetch("/api/user/stats").then((r) => (r.ok ? r.json() : null)),
       fetch("/api/user/badges").then((r) => (r.ok ? r.json() : null)),
       fetch("/api/user/profile").then((r) => (r.ok ? r.json() : null)),
+      fetch("/api/user/dashboard").then((r) => (r.ok ? r.json() : null)),
+      fetch("/api/user/wishlist").then((r) => (r.ok ? r.json() : { items: [] })),
     ])
-      .then(([reportsRes, statsRes, badgesRes, profileRes]) => {
+      .then(([reportsRes, statsRes, badgesRes, profileRes, dashboardRes, wishlistRes]) => {
         setCatchReports(reportsRes.reports || []);
         setStats(statsRes);
         setBadgesData(badgesRes);
+        setDashboard(dashboardRes);
+        setWishlist(wishlistRes?.items || []);
         const u = profileRes?.user;
         if (u) {
           setProfile({ bio: u.bio, headerImage: u.headerImage, createdAt: u.createdAt });
@@ -128,6 +161,19 @@ export default function MyPage() {
       .catch(() => {})
       .finally(() => setReportsLoading(false));
   }, [status]);
+
+  const handleRemoveWish = async (slug: string) => {
+    setWishlist((prev) => prev.filter((w) => w.slug !== slug));
+    try {
+      await fetch("/api/user/wishlist", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug }),
+      });
+    } catch {
+      /* ignore */
+    }
+  };
 
   if (status === "loading") {
     return (
@@ -392,6 +438,71 @@ export default function MyPage() {
           />
         </div>
 
+        {/* 今日の好機（お気に入りスポット潮汐ダッシュボード） */}
+        {dashboard && (
+          <Card className="mt-6">
+            <CardContent className="p-4">
+              <div className="mb-3 flex flex-wrap items-center gap-2">
+                <Waves className="h-5 w-5 text-ocean-mid" />
+                <span className="font-medium">今日の好機</span>
+                <span className="text-xs text-muted-foreground">
+                  <Moon className="mr-0.5 inline h-3 w-3" />
+                  月齢 {dashboard.moonAge.toFixed(1)}
+                </span>
+              </div>
+              {dashboard.items.length === 0 ? (
+                <p className="text-sm text-muted-foreground">
+                  お気に入りスポットを登録すると、今日の潮汐とおすすめ度が一覧で見られます。
+                  <Link href="/spots" className="ml-1 underline hover:text-foreground">
+                    スポットを探す
+                  </Link>
+                </p>
+              ) : (
+                <ul className="space-y-2">
+                  {dashboard.items.slice(0, 5).map((item) => (
+                    <li key={item.slug}>
+                      <Link
+                        href={`/spots/${item.slug}`}
+                        className="block rounded-lg border p-3 transition-colors hover:bg-muted/50"
+                      >
+                        <div className="flex items-start justify-between gap-2">
+                          <div className="min-w-0 flex-1">
+                            <div className="truncate font-medium">{item.name}</div>
+                            <div className="text-xs text-muted-foreground">
+                              {item.prefecture}・{item.tideLabel}
+                            </div>
+                          </div>
+                          <span
+                            className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${
+                              item.fishingScore >= 80
+                                ? "bg-rose-100 text-rose-700"
+                                : item.fishingScore >= 60
+                                  ? "bg-amber-100 text-amber-700"
+                                  : "bg-slate-100 text-slate-600"
+                            }`}
+                          >
+                            ★{Math.max(1, Math.round(item.fishingScore / 20))}
+                          </span>
+                        </div>
+                        {(item.highTides.length > 0 || item.lowTides.length > 0) && (
+                          <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-muted-foreground">
+                            {item.highTides.length > 0 && (
+                              <span>満潮 {item.highTides.join(" / ")}</span>
+                            )}
+                            {item.lowTides.length > 0 && (
+                              <span>干潮 {item.lowTides.join(" / ")}</span>
+                            )}
+                          </div>
+                        )}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </CardContent>
+          </Card>
+        )}
+
         {/* バッジ */}
         <Card className="mt-6">
           <CardContent className="p-4">
@@ -459,6 +570,53 @@ export default function MyPage() {
               </div>
               <span className="text-sm text-muted-foreground">{favorites.length}件</span>
             </Link>
+          </CardContent>
+        </Card>
+
+        {/* 行きたいスポット */}
+        <Card className="mt-4">
+          <CardContent className="p-4">
+            <div className="mb-3 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <Bookmark className="h-5 w-5 text-amber-500" />
+                <span className="font-medium">行きたいスポット</span>
+              </div>
+              <span className="text-sm text-muted-foreground">{wishlist.length}件</span>
+            </div>
+            {wishlist.length === 0 ? (
+              <p className="text-sm text-muted-foreground">
+                スポット詳細ページの「行きたい」ボタンで登録できます。
+              </p>
+            ) : (
+              <ul className="space-y-2">
+                {wishlist.map((item) => (
+                  <li
+                    key={item.slug}
+                    className="flex items-start gap-2 rounded-lg border p-3"
+                  >
+                    <Link href={`/spots/${item.slug}`} className="min-w-0 flex-1">
+                      <div className="truncate font-medium">{item.name}</div>
+                      <div className="text-xs text-muted-foreground">
+                        {item.prefecture}
+                      </div>
+                      {item.memo && (
+                        <p className="mt-1 whitespace-pre-wrap text-xs text-foreground">
+                          {item.memo}
+                        </p>
+                      )}
+                    </Link>
+                    <button
+                      onClick={() => handleRemoveWish(item.slug)}
+                      className="shrink-0 rounded-md p-1 text-muted-foreground/40 hover:bg-destructive/10 hover:text-destructive"
+                      aria-label="行きたいリストから外す"
+                      title="外す"
+                    >
+                      <X className="h-3.5 w-3.5" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
           </CardContent>
         </Card>
 

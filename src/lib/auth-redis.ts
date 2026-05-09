@@ -19,6 +19,8 @@ const USER_PREFIX = "auth:user:";
 const PROVIDER_PREFIX = "auth:provider:";
 const FOLLOWING_PREFIX = "auth:following:";
 const FOLLOWERS_PREFIX = "auth:followers:";
+const WISHLIST_PREFIX = "wish:list:";
+const WISH_MEMO_PREFIX = "wish:memo:";
 
 /**
  * Redisから取得した値を確実にオブジェクトにする。
@@ -285,4 +287,54 @@ export async function getFollowersList(
     { rev: true },
   );
   return (members as string[]) || [];
+}
+
+/** 行きたいスポットに追加 */
+export async function addToWishlist(userId: string, slug: string): Promise<void> {
+  await redis.zadd(`${WISHLIST_PREFIX}${userId}`, {
+    score: Date.now(),
+    member: slug,
+  });
+}
+
+/** 行きたいスポットから削除 */
+export async function removeFromWishlist(userId: string, slug: string): Promise<void> {
+  await redis.zrem(`${WISHLIST_PREFIX}${userId}`, slug);
+  await redis.del(`${WISH_MEMO_PREFIX}${userId}:${slug}`);
+}
+
+/** 行きたいスポットに含まれるか */
+export async function isInWishlist(userId: string, slug: string): Promise<boolean> {
+  const score = await redis.zscore(`${WISHLIST_PREFIX}${userId}`, slug);
+  return score !== null && score !== undefined;
+}
+
+/** 行きたいスポット slug 配列（追加が新しい順） */
+export async function getWishlist(userId: string, limit = 100): Promise<string[]> {
+  const members = await redis.zrange(
+    `${WISHLIST_PREFIX}${userId}`,
+    0,
+    limit - 1,
+    { rev: true },
+  );
+  return (members as string[]) || [];
+}
+
+/** 行きたいスポットのメモ取得 */
+export async function getWishMemo(userId: string, slug: string): Promise<string> {
+  const memo = await redis.get<string>(`${WISH_MEMO_PREFIX}${userId}:${slug}`);
+  return memo || "";
+}
+
+/** 行きたいスポットのメモ保存（空文字は削除） */
+export async function setWishMemo(
+  userId: string,
+  slug: string,
+  memo: string,
+): Promise<void> {
+  if (!memo) {
+    await redis.del(`${WISH_MEMO_PREFIX}${userId}:${slug}`);
+    return;
+  }
+  await redis.set(`${WISH_MEMO_PREFIX}${userId}:${slug}`, memo);
 }

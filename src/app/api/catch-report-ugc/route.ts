@@ -1,6 +1,8 @@
 import { NextResponse } from "next/server";
 import { dbGet, dbPut } from "@/lib/dynamodb";
 import { checkNgWords } from "@/lib/moderation";
+import { auth } from "@/lib/auth";
+import { incrementReportCount } from "@/lib/auth-redis";
 
 const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;
 
@@ -13,6 +15,7 @@ interface CatchReport {
   spotName: string;
   fishName: string;
   userName: string;
+  tsuriId?: string;
   comment: string;
   date: string;
   approved: boolean;
@@ -26,6 +29,9 @@ interface CatchReport {
 // POST: ユーザー釣果投稿を受け取る
 export async function POST(request: Request) {
   try {
+    const session = await auth();
+    const tsuriId = session?.user?.tsuriId;
+
     const body = await request.json().catch(() => ({}));
     const { spotSlug, spotName, fishName, userName, comment, date, photoUrl, sizeCm, method, weather } = body as {
       spotSlug?: string;
@@ -94,6 +100,7 @@ export async function POST(request: Request) {
       spotName: spotName || "",
       fishName,
       userName,
+      tsuriId,
       comment,
       date,
       approved: true,
@@ -112,6 +119,15 @@ export async function POST(request: Request) {
     } catch (err) {
       console.error("[釣果投稿] DynamoDB保存エラー:", err);
       // DynamoDB障害時もGASに送信するため続行
+    }
+
+    // ログインユーザーの釣果数カウントを更新（バッジ・称号反映）
+    if (tsuriId) {
+      try {
+        await incrementReportCount(tsuriId);
+      } catch (err) {
+        console.error("[釣果投稿] reportCount更新エラー:", err);
+      }
     }
 
     // Google Apps Script Webhook に送信（記録・通知用、fire-and-forget）
