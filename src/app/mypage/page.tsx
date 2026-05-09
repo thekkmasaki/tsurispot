@@ -809,7 +809,7 @@ export default function MyPage() {
 
         {/* アカウント削除 */}
         <div className="mt-8 border-t pt-6">
-          <h2 className="mb-2 text-sm font-medium text-destructive">危険な操作</h2>
+          <h2 className="mb-2 text-xs font-medium text-muted-foreground">アカウント管理</h2>
           {!deleteConfirm ? (
             <Button
               variant="outline"
