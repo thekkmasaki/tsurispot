@@ -493,12 +493,21 @@ export default function MyPage() {
                 </span>
               </div>
               {dashboard.items.length === 0 ? (
-                <p className="text-sm text-muted-foreground">
-                  お気に入りスポットを登録すると、今日の潮汐とおすすめ度が一覧で見られます。
-                  <Link href="/spots" className="ml-1 underline hover:text-foreground">
-                    スポットを探す
-                  </Link>
-                </p>
+                <div className="space-y-2 text-sm text-muted-foreground">
+                  <p>
+                    お気に入りスポットを登録すると、今日の潮汐とおすすめ度が一覧で見られます。
+                    <Link href="/spots" className="ml-1 underline hover:text-foreground">
+                      スポットを探す
+                    </Link>
+                  </p>
+                  <p>
+                    ツリスポに無いスポットは
+                    <Link href="/spots/submit" className="ml-1 underline hover:text-foreground">
+                      投稿
+                    </Link>
+                    できます。
+                  </p>
+                </div>
               ) : (
                 <ul className="space-y-2">
                   {dashboard.items.slice(0, 5).map((item) => (
@@ -511,7 +520,7 @@ export default function MyPage() {
                           <div className="min-w-0 flex-1">
                             <div className="truncate font-medium">{item.name}</div>
                             <div className="text-xs text-muted-foreground">
-                              {item.prefecture}・{item.tideLabel}
+                              {item.prefecture}・{item.tideLabel}・月齢{dashboard.moonAge.toFixed(1)}
                             </div>
                           </div>
                           <span
@@ -541,6 +550,16 @@ export default function MyPage() {
                   ))}
                 </ul>
               )}
+              {/* スポット投稿導線（リスト有無に関わらず常時表示） */}
+              <div className="mt-3 border-t pt-3 text-center">
+                <Link
+                  href="/spots/submit"
+                  className="inline-flex items-center gap-1.5 rounded-lg border border-ocean-mid/30 bg-ocean-mid/5 px-3 py-1.5 text-xs font-medium text-ocean-mid hover:bg-ocean-mid/10"
+                >
+                  <MapPin className="h-3.5 w-3.5" />
+                  ツリスポにないスポットを投稿する
+                </Link>
+              </div>
             </CardContent>
           </Card>
         )}
