@@ -6,8 +6,11 @@ import Link from "next/link";
 import {
   User, Heart, Trash2, Fish, ArrowLeft, MapPin, Calendar, Ruler,
   Edit3, Check, X, Trophy, Sparkles, Waves, Moon, Bookmark, Anchor, Bell,
+  Flame,
 } from "lucide-react";
 import { NotificationSubscribeButton } from "@/components/notification-subscribe-button";
+import { CalendarHeatmap } from "@/components/mypage/calendar-heatmap";
+import { PersonalBestCard } from "@/components/mypage/personal-best-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -97,6 +100,27 @@ interface CheckinItem {
   createdAt: string;
 }
 
+interface StreakData {
+  streak: {
+    current: number;
+    longest: number;
+    lastDate: string | null;
+    totalDays: number;
+  };
+  dailyCounts: Record<string, number>;
+}
+
+interface StatsExt {
+  reportCount: number;
+  uniqueFishCount: number;
+  uniqueSpotCount: number;
+  fishingDayCount: number;
+  uniqueMethodCount: number;
+  maxSizeCm: number;
+  photoCount: number;
+  maxByFish?: Record<string, number>;
+}
+
 const PROVIDER_LABELS: Record<string, string> = {
   google: "Google",
   signinwithapple: "Apple",
@@ -137,13 +161,14 @@ export default function MyPage() {
   const [profileMsg, setProfileMsg] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const [deleting, setDeleting] = useState(false);
-  const [stats, setStats] = useState<Stats | null>(null);
+  const [stats, setStats] = useState<StatsExt | null>(null);
   const [badgesData, setBadgesData] = useState<BadgesResponse | null>(null);
   const [profile, setProfile] = useState<ProfileData | null>(null);
   const [dashboard, setDashboard] = useState<DashboardData | null>(null);
   const [wishlist, setWishlist] = useState<WishlistItem[]>([]);
   const [checkins, setCheckins] = useState<CheckinItem[]>([]);
   const [catchReports, setCatchReports] = useState<CatchReport[]>([]);
+  const [streakData, setStreakData] = useState<StreakData | null>(null);
   const [reportsLoading, setReportsLoading] = useState(true);
   const [showAllBadges, setShowAllBadges] = useState(false);
 
@@ -157,14 +182,16 @@ export default function MyPage() {
       fetch("/api/user/dashboard").then((r) => (r.ok ? r.json() : null)),
       fetch("/api/user/wishlist").then((r) => (r.ok ? r.json() : { items: [] })),
       fetch("/api/user/checkins").then((r) => (r.ok ? r.json() : { checkins: [] })),
+      fetch("/api/user/streak").then((r) => (r.ok ? r.json() : null)),
     ])
-      .then(([reportsRes, statsRes, badgesRes, profileRes, dashboardRes, wishlistRes, checkinsRes]) => {
+      .then(([reportsRes, statsRes, badgesRes, profileRes, dashboardRes, wishlistRes, checkinsRes, streakRes]) => {
         setCatchReports(reportsRes.reports || []);
         setStats(statsRes);
         setBadgesData(badgesRes);
         setDashboard(dashboardRes);
         setWishlist(wishlistRes?.items || []);
         setCheckins(checkinsRes?.checkins || []);
+        setStreakData(streakRes);
         const u = profileRes?.user;
         if (u) {
           setProfile({ bio: u.bio, headerImage: u.headerImage, createdAt: u.createdAt });
@@ -436,6 +463,21 @@ export default function MyPage() {
           </Card>
         )}
 
+        {/* 釣行ストリーク */}
+        {streakData && streakData.streak.current > 0 && (
+          <div className="mt-6 flex items-center gap-3 rounded-xl border border-orange-200 bg-gradient-to-r from-orange-50 to-amber-50 p-4">
+            <Flame className="h-8 w-8 shrink-0 text-orange-500" />
+            <div className="flex-1">
+              <div className="text-sm font-medium text-orange-900">
+                {streakData.streak.current}日連続 釣行中！
+              </div>
+              <div className="text-xs text-orange-700">
+                最長記録 {streakData.streak.longest}日 / 通算 {streakData.streak.totalDays}日
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* 統計 */}
         <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
           <StatCard
@@ -559,6 +601,29 @@ export default function MyPage() {
                   <MapPin className="h-3.5 w-3.5" />
                   ツリスポにないスポットを投稿する
                 </Link>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* 自己ベスト */}
+        {stats?.maxByFish && Object.keys(stats.maxByFish).length > 0 && (
+          <PersonalBestCard maxByFish={stats.maxByFish} />
+        )}
+
+        {/* 釣行カレンダー（半年分） */}
+        {streakData && (
+          <Card className="mt-4">
+            <CardContent className="p-4">
+              <div className="mb-3 flex items-center gap-2">
+                <Calendar className="h-5 w-5 text-emerald-600" />
+                <span className="font-medium">釣行カレンダー</span>
+                <span className="text-xs text-muted-foreground">
+                  直近半年・色が濃いほど釣行多数
+                </span>
+              </div>
+              <div className="overflow-x-auto pb-1">
+                <CalendarHeatmap dailyCounts={streakData.dailyCounts} weeks={26} />
               </div>
             </CardContent>
           </Card>

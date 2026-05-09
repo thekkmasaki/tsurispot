@@ -8,6 +8,7 @@ import { prefectures } from "@/lib/data/prefectures";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { LoginPromoBanner } from "@/components/home/login-promo-banner";
 import {
   MapPin,
   Fish,
@@ -403,6 +404,8 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* ログイン誘導バナー（未ログイン時のみ表示） */}
+      <LoginPromoBanner />
 
       {/* クイックアクション */}
       <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
