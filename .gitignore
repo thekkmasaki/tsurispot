@@ -49,3 +49,7 @@ scripts/twitter/.posted-*.json
 .claude/
 skills-lock.json
 scripts/instagram/node_modules/
+
+# Capacitor (iOS / Android のネイティブ project は再生成可能)
+/ios/
+/android/
