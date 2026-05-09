@@ -1,11 +1,18 @@
 import { createClient } from "microcms-js-sdk";
 import type { BlogPost } from "./data/blog";
 
-// microCMS クライアント
-export const client = createClient({
-  serviceDomain: process.env.MICROCMS_SERVICE_DOMAIN || "",
-  apiKey: process.env.MICROCMS_API_KEY || "",
-});
+type MicroCMSClient = ReturnType<typeof createClient>;
+
+// env 欠落時にモジュール評価でthrowしないよう lazy 生成
+let _client: MicroCMSClient | null = null;
+function getClient(): MicroCMSClient | null {
+  if (_client) return _client;
+  const serviceDomain = process.env.MICROCMS_SERVICE_DOMAIN;
+  const apiKey = process.env.MICROCMS_API_KEY;
+  if (!serviceDomain || !apiKey) return null;
+  _client = createClient({ serviceDomain, apiKey });
+  return _client;
+}
 
 /** microCMS側のブログ記事レスポンス型（デフォルトテンプレート準拠） */
 export interface MicroCMSBlogResponse {
@@ -81,16 +88,10 @@ export function microCMSToBlogPost(item: MicroCMSBlogResponse): BlogPost {
   };
 }
 
-/** microCMSの設定が有効かチェック */
-function isMicroCMSConfigured(): boolean {
-  return !!(process.env.MICROCMS_SERVICE_DOMAIN && process.env.MICROCMS_API_KEY);
-}
-
 /** microCMSからブログ記事一覧を取得 */
 export async function fetchMicroCMSBlogPosts(): Promise<BlogPost[]> {
-  if (!isMicroCMSConfigured()) {
-    return [];
-  }
+  const client = getClient();
+  if (!client) return [];
 
   try {
     const data = await client.get<MicroCMSListResponse>({
@@ -108,9 +109,8 @@ export async function fetchMicroCMSBlogPosts(): Promise<BlogPost[]> {
 export async function fetchMicroCMSBlogBySlug(
   slug: string
 ): Promise<BlogPost | null> {
-  if (!isMicroCMSConfigured()) {
-    return null;
-  }
+  const client = getClient();
+  if (!client) return null;
 
   try {
     // まずslugフィールドで検索

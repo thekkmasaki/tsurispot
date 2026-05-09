@@ -6,6 +6,7 @@ import { MobileNav } from "@/components/layout/mobile-nav";
 import { Footer } from "@/components/layout/footer";
 import { GoogleAnalytics } from "@/components/google-analytics";
 import { PWARegister } from "@/components/pwa-register";
+import { Providers } from "@/components/providers";
 import dynamic from "next/dynamic";
 import { SPOT_COUNT_FORMATTED } from "@/lib/data/spot-count";
 
@@ -239,18 +240,20 @@ export default function RootLayout({
             crossOrigin="anonymous"
           />
         )}
-        <PWARegister />
-        <SideRailAds />
-        <Header />
-        <main className="min-h-screen pb-24 md:pb-0">{children}</main>
-        <PreFooterAd />
-        <Footer />
-        <MobileNav />
-        <SmartMobileStickyAd />
-        <PWAInstallHint />
-        <CompareBar />
-        <BackToTop />
-        <CookieBanner />
+        <Providers>
+          <PWARegister />
+          <SideRailAds />
+          <Header />
+          <main className="min-h-screen pb-24 md:pb-0">{children}</main>
+          <PreFooterAd />
+          <Footer />
+          <MobileNav />
+          <SmartMobileStickyAd />
+          <PWAInstallHint />
+          <CompareBar />
+          <BackToTop />
+          <CookieBanner />
+        </Providers>
       </body>
     </html>
   );
