@@ -42,6 +42,7 @@ export const regions: Region[] = [
   { id: "r39", prefecture: "栃木県", areaName: "中禅寺湖", slug: "tochigi-chuzenji" },
   { id: "r40", prefecture: "群馬県", areaName: "利根川", slug: "gunma-tone" },
   { id: "r41", prefecture: "佐賀県", areaName: "唐津", slug: "saga-karatsu" },
+  { id: "rs8006", prefecture: "佐賀県", areaName: "唐津・呼子", slug: "saga-karatsu-yobuko-s8" },
   { id: "r42", prefecture: "岡山県", areaName: "倉敷", slug: "okayama-kurashiki" },
   { id: "r43", prefecture: "滋賀県", areaName: "琵琶湖", slug: "shiga-biwako" },
   { id: "r44", prefecture: "山梨県", areaName: "山中湖", slug: "yamanashi-yamanakako" },

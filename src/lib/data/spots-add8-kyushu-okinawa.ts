@@ -13,7 +13,7 @@ const localRegions: Region[] = [
   { id: "rs8004", prefecture: "福岡県", areaName: "宗像・遠賀", slug: "fukuoka-munakata-onga-s8" },
   { id: "rs8005", prefecture: "福岡県", areaName: "筑豊・朝倉", slug: "fukuoka-chikuho-asakura-s8" },
   // 佐賀県
-  { id: "rs8006", prefecture: "佐賀県", areaName: "唐津・呼子", slug: "saga-karatsu-yobuko-s8" },
+  // rs8006 (唐津・呼子) は regions.ts に移動（フィッシングパークひらの動線確保のため）
   { id: "rs8007", prefecture: "佐賀県", areaName: "有明海・鹿島", slug: "saga-ariake-kashima-s8" },
   { id: "rs8008", prefecture: "佐賀県", areaName: "伊万里・玄海", slug: "saga-imari-genkai-s8" },
   // 長崎県
