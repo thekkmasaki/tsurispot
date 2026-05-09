@@ -465,7 +465,21 @@ export default function MyPage() {
         </div>
 
         {/* 今日の好機（お気に入りスポット潮汐ダッシュボード） */}
-        {dashboard && (
+        {!dashboard ? (
+          <Card className="mt-6">
+            <CardContent className="p-4">
+              <div className="mb-3 flex items-center gap-2">
+                <Waves className="h-5 w-5 text-ocean-mid" />
+                <span className="font-medium">今日の好機</span>
+              </div>
+              <div className="space-y-2">
+                {[0, 1, 2].map((i) => (
+                  <div key={i} className="h-14 animate-pulse rounded-lg bg-muted" />
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        ) : (
           <Card className="mt-6">
             <CardContent className="p-4">
               <div className="mb-3 flex flex-wrap items-center gap-2">
@@ -552,8 +566,16 @@ export default function MyPage() {
               )}
             </div>
             {!badgesData ? (
-              <div className="flex justify-center py-4">
-                <div className="h-5 w-5 animate-spin rounded-full border-2 border-ocean-mid border-t-transparent" />
+              <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">
+                {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+                  <div
+                    key={i}
+                    className="flex flex-col items-center gap-1 rounded-lg border p-3"
+                  >
+                    <div className="h-10 w-10 animate-pulse rounded-full bg-muted" />
+                    <div className="h-3 w-16 animate-pulse rounded bg-muted" />
+                  </div>
+                ))}
               </div>
             ) : (
               <div className="grid grid-cols-3 gap-2 sm:grid-cols-4">

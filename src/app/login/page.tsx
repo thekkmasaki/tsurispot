@@ -68,7 +68,7 @@ export default function LoginPage() {
   const handleGoogle = () => {
     if (loading) return;
     setLoading("google");
-    signIn("cognito", { callbackUrl: "/" }, { identity_provider: "Google" });
+    signIn("cognito", { callbackUrl: "/mypage" }, { identity_provider: "Google" });
   };
 
   const handleApple = () => {
@@ -76,7 +76,7 @@ export default function LoginPage() {
     setLoading("apple");
     signIn(
       "cognito",
-      { callbackUrl: "/" },
+      { callbackUrl: "/mypage" },
       { identity_provider: "SignInWithApple" },
     );
   };
