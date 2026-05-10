@@ -733,9 +733,18 @@ export default function MyPage() {
               <span className="text-sm text-muted-foreground">{checkins.length}件</span>
             </div>
             {checkins.length === 0 ? (
-              <p className="text-sm text-muted-foreground">
-                スポット詳細ページの「ここに行った」ボタンで記録できます。
-              </p>
+              <div>
+                <p className="text-sm text-muted-foreground">
+                  スポット詳細ページの「ここに行った」ボタンで記録できます。
+                </p>
+                <Link
+                  href="/map"
+                  className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-medium text-emerald-700 hover:bg-emerald-100"
+                >
+                  <MapPin className="h-4 w-4" />
+                  スポットを探す
+                </Link>
+              </div>
             ) : (
               <ul className="space-y-2">
                 {checkins.map((c) => (
@@ -787,9 +796,18 @@ export default function MyPage() {
               <span className="text-sm text-muted-foreground">{wishlist.length}件</span>
             </div>
             {wishlist.length === 0 ? (
-              <p className="text-sm text-muted-foreground">
-                スポット詳細ページの「行きたい」ボタンで登録できます。
-              </p>
+              <div>
+                <p className="text-sm text-muted-foreground">
+                  スポット詳細ページの「行きたい」ボタンで登録できます。
+                </p>
+                <Link
+                  href="/map"
+                  className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm font-medium text-amber-700 hover:bg-amber-100"
+                >
+                  <MapPin className="h-4 w-4" />
+                  スポットを探す
+                </Link>
+              </div>
             ) : (
               <ul className="space-y-2">
                 {wishlist.map((item) => (
@@ -841,9 +859,18 @@ export default function MyPage() {
                 <div className="h-5 w-5 animate-spin rounded-full border-2 border-ocean-mid border-t-transparent" />
               </div>
             ) : catchReports.length === 0 ? (
-              <p className="text-sm text-muted-foreground">
-                まだ釣果を投稿していません。スポットページから投稿できます。
-              </p>
+              <div>
+                <p className="text-sm text-muted-foreground">
+                  まだ釣果を投稿していません。スポットページから投稿できます。
+                </p>
+                <Link
+                  href="/map"
+                  className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 text-sm font-medium text-blue-700 hover:bg-blue-100"
+                >
+                  <MapPin className="h-4 w-4" />
+                  スポットを探す
+                </Link>
+              </div>
             ) : (
               <div className="space-y-3">
                 {catchReports.map((report) => (
