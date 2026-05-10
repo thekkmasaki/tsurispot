@@ -55,9 +55,6 @@ const config: NextAuthConfig = {
   // AUTH_URL/AUTH_TRUST_HOST/VERCEL いずれも未設定の本番では trustHost が
   // false になり Configuration error → /login?error=Configuration に飛ぶ。
   trustHost: true,
-  // Configuration error の原因切り分け用 debug logging (一時的)
-  // CloudWatch logs に Auth.js 内部の詳細エラーを吐かせる
-  debug: true,
   providers: [
     Cognito({
       clientId: process.env.COGNITO_CLIENT_ID,
