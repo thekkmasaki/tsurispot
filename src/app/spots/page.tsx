@@ -6,6 +6,11 @@ import { SpotListClient } from "@/components/spots/spot-list-client";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { InArticleAd } from "@/components/ads/ad-unit";
 
+// SSG 化: searchParams を Server Component で読まずクライアント側で読む。
+// これにより /spots が CDN キャッシュ可能になり、CloudFront コストを大幅削減。
+export const dynamic = "force-static";
+export const revalidate = 86400;
+
 const sc = fishingSpots.length.toLocaleString();
 
 export const metadata: Metadata = {
@@ -149,14 +154,7 @@ const spotsFaqJsonLd = {
   ],
 };
 
-export default async function SpotsPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ q?: string; type?: string }>;
-}) {
-  const params = await searchParams;
-  const initialQuery = params.q || "";
-
+export default function SpotsPage() {
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
@@ -197,7 +195,7 @@ export default async function SpotsPage({
           <span className="sm:hidden">投稿</span>
         </Link>
       </div>
-      <SpotListClient spots={fishingSpots} initialQuery={initialQuery} />
+      <SpotListClient spots={fishingSpots} />
 
       {/* 初心者CTA */}
       <div className="mt-8 rounded-2xl border-2 border-emerald-200 bg-gradient-to-r from-emerald-50 to-teal-50 p-5 sm:p-6">
