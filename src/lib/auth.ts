@@ -51,6 +51,10 @@ function extractUpstreamProvider(profile: CognitoProfile | undefined): string {
 }
 
 const config: NextAuthConfig = {
+  // App Runner / CloudFront 経由のため、Host ヘッダーを信頼してよい。
+  // AUTH_URL/AUTH_TRUST_HOST/VERCEL いずれも未設定の本番では trustHost が
+  // false になり Configuration error → /login?error=Configuration に飛ぶ。
+  trustHost: true,
   providers: [
     Cognito({
       clientId: process.env.COGNITO_CLIENT_ID,
