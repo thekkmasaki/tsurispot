@@ -5,7 +5,7 @@ import { AreaFilteredSpotList, type SpotCardData } from "@/components/spots/area
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 
 export const dynamic = "force-static";
-export const revalidate = 86400;
+export const revalidate = 604800;
 
 export const metadata: Metadata = {
   title: "海釣りおすすめスポット一覧｜全国の人気釣り場【2026年版】",

@@ -7,7 +7,7 @@ import Link from "next/link";
 import { InArticleAd, NativeAdBreak } from "@/components/ads/ad-unit";
 
 // ISR: 1時間ごとに再検証
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 // microCMS API呼び出しのタイムアウト対策
 export const maxDuration = 60;

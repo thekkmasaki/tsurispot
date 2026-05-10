@@ -36,7 +36,7 @@ type PageProps = {
 // 「現在月のみ全都道府県SSG」+ 残りはISRに変更（47件 SSG）。
 export const dynamic = "force-static";
 export const dynamicParams = true;
-export const revalidate = 86400;
+export const revalidate = 604800;
 export const maxDuration = 60;
 
 export function generateStaticParams() {

@@ -80,16 +80,19 @@ export function FishCard({ fish, showPeakBadge, showSpots = false }: FishCardPro
           {/* サイズ */}
           <p className="text-xs text-muted-foreground">{fish.sizeCm}</p>
 
-          {/* 主な釣りスポット */}
-          {showSpots && fish.spots.length > 0 && (
-            <div className="flex items-start gap-1 border-t pt-1.5 mt-0.5">
-              <MapPin className="mt-0.5 size-3 shrink-0 text-muted-foreground" />
-              <p className="text-xs text-muted-foreground line-clamp-2">
-                {fish.spots.slice(0, 3).map((s) => s.name).join("、")}
-                {fish.spots.length > 3 && ` 他${fish.spots.length - 3}件`}
-              </p>
-            </div>
-          )}
+          {/* 主な釣りスポット - spotCount は軽量版（リスト用）の総数、無ければ spots.length */}
+          {(() => {
+            const totalSpotCount = fish.spotCount ?? fish.spots.length;
+            return showSpots && totalSpotCount > 0 ? (
+              <div className="flex items-start gap-1 border-t pt-1.5 mt-0.5">
+                <MapPin className="mt-0.5 size-3 shrink-0 text-muted-foreground" />
+                <p className="text-xs text-muted-foreground line-clamp-2">
+                  {fish.spots.slice(0, 3).map((s) => s.name).join("、")}
+                  {totalSpotCount > 3 && ` 他${totalSpotCount - 3}件`}
+                </p>
+              </div>
+            ) : null;
+          })()}
         </CardContent>
       </Card>
     </Link>

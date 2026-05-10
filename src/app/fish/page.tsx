@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { Fish } from "lucide-react";
-import { getFishSpeciesWithSpots } from "@/lib/data";
+import { getFishSpeciesForList } from "@/lib/data";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { FishListClient } from "@/components/fish/fish-list-client";
 import { InArticleAd, NativeAdBreak } from "@/components/ads/ad-unit";
@@ -81,7 +81,7 @@ const fishDatasetJsonLd = {
 };
 
 function FishListContent() {
-  const fishSpecies = getFishSpeciesWithSpots();
+  const fishSpecies = getFishSpeciesForList();
 
   const fishItemListJsonLd = {
     "@context": "https://schema.org",

@@ -93,7 +93,11 @@ const nextConfig: NextConfig = {
     contentDispositionType: "attachment",
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     minimumCacheTTL: 31536000,
-    formats: ['image/avif', 'image/webp'],
+    formats: ['image/avif'],
+    // variant 数削減: deviceSizes default 8 + imageSizes default 8 = 16 sizes × 2 format = 32 variant/画像
+    // → deviceSizes 4 + imageSizes 2 = 6 sizes × 1 format = 6 variant/画像 (1/5 に削減)
+    deviceSizes: [640, 1080, 1920, 2560],
+    imageSizes: [256, 512],
   },
   headers: async () => [
     {
@@ -119,6 +123,20 @@ const nextConfig: NextConfig = {
       ],
     },
     // SSGページのCloudFrontキャッシュ最適化（App Runnerへのリクエスト削減）
+    {
+      // /spots（リスト一覧）専用 - SSG 化でデフォルト挙動 OK だが念のため明示
+      source: "/spots",
+      headers: [
+        { key: "Cache-Control", value: "public, s-maxage=86400, stale-while-revalidate=604800" },
+      ],
+    },
+    {
+      // /fish（リスト一覧）専用 - 軽量化済み
+      source: "/fish",
+      headers: [
+        { key: "Cache-Control", value: "public, s-maxage=86400, stale-while-revalidate=604800" },
+      ],
+    },
     {
       source: "/spots/:slug",
       headers: [

@@ -2,7 +2,7 @@ import { FishSpecies, FishingSpot, SpotSummary } from "@/types";
 import { fishSpecies } from "./fish";
 import { fishingSpots } from "./spots";
 
-// 魚種データにスポット情報を自動付与
+// 魚種データにスポット情報を自動付与（個別魚詳細ページ用、全件）
 export function getFishSpeciesWithSpots(): FishSpecies[] {
   return fishSpecies.map((fish) => ({
     ...fish,
@@ -24,6 +24,31 @@ export function getFishSpeciesWithSpots(): FishSpecies[] {
         };
       }),
   }));
+}
+
+// 魚種一覧ページ用（軽量版）: 各魚種にスポットは先頭3件のみ + 総数。
+// 元の getFishSpeciesWithSpots は 100 魚種 × 数百スポットを HTML に埋め込み
+// 5.6 MB / 1 ページの巨大 HTML を生成していたため、リスト用に分離。
+export function getFishSpeciesForList(): FishSpecies[] {
+  return fishSpecies.map((fish) => {
+    const matching = fishingSpots.filter((spot) =>
+      spot.catchableFish.some((cf) => cf.fish.slug === fish.slug)
+    );
+    const top3: SpotSummary[] = matching.slice(0, 3).map((spot): SpotSummary => {
+      const cf = spot.catchableFish.find((cf) => cf.fish.slug === fish.slug)!;
+      return {
+        id: spot.id,
+        name: spot.name,
+        slug: spot.slug,
+        region: spot.region,
+        rating: spot.rating,
+        catchRating: cf.peakSeason ? "excellent" : "good",
+        latitude: spot.latitude,
+        longitude: spot.longitude,
+      };
+    });
+    return { ...fish, spots: top3, spotCount: matching.length };
+  });
 }
 
 /**

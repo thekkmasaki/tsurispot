@@ -38,7 +38,7 @@ interface Props {
 }
 
 export const dynamic = "force-static";
-export const revalidate = 3600;
+export const revalidate = 86400;
 
 export async function generateStaticParams() {
   const params: { method: string; month: string }[] = [];

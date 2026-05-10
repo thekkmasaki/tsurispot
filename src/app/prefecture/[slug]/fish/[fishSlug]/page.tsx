@@ -19,7 +19,7 @@ type PageProps = {
 // 全1,370件 SSG はビルドサイズ肥大化の原因。スポット数が多い上位300件のみSSG、残りはISR。
 export const dynamic = "force-static";
 export const dynamicParams = true;
-export const revalidate = 86400;
+export const revalidate = 604800;
 export const maxDuration = 60;
 
 export function generateStaticParams() {

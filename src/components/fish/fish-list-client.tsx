@@ -9,8 +9,9 @@ import type { FishSpecies } from "@/types";
 import { InFeedAd } from "@/components/ads/ad-unit";
 
 // 釣れやすい順ソート（難易度→スポット数→人気順）
+// spotCount があればそれを優先（軽量版データ用）
 function sortByEase<
-  T extends { difficulty: string; popularity?: number; spots: unknown[] },
+  T extends { difficulty: string; popularity?: number; spots: unknown[]; spotCount?: number },
 >(list: T[]): T[] {
   const diffOrder: Record<string, number> = {
     beginner: 0,
@@ -21,7 +22,9 @@ function sortByEase<
     const dDiff =
       (diffOrder[a.difficulty] ?? 2) - (diffOrder[b.difficulty] ?? 2);
     if (dDiff !== 0) return dDiff;
-    const spotDiff = (b.spots?.length ?? 0) - (a.spots?.length ?? 0);
+    const aCount = a.spotCount ?? a.spots?.length ?? 0;
+    const bCount = b.spotCount ?? b.spots?.length ?? 0;
+    const spotDiff = bCount - aCount;
     if (spotDiff !== 0) return spotDiff;
     return (a.popularity ?? 999) - (b.popularity ?? 999);
   });

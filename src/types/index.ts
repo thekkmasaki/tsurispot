@@ -182,6 +182,7 @@ export interface FishSpecies {
   peakMonths: number[];
   cookingTips: string[];
   spots: SpotSummary[];
+  spotCount?: number; // /fish リストページ用の軽量化フィールド: spots は先頭3件のみ、総数を保持
   aliases?: string[];
   popularity?: number;
   fishingMethods?: FishingMethod[];
