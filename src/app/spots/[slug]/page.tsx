@@ -772,7 +772,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
       <div className="min-w-0">
       {/* 天気・潮汐情報（常時表示） */}
       <section className="mb-6">
-        <SpotWeatherTide lat={spot.latitude} lng={spot.longitude} spotName={spot.name} hideBestTimes={spot.isManagedPond} />
+        <SpotWeatherTide lat={spot.latitude} lng={spot.longitude} spotName={spot.name} hideBestTimes={spot.isManagedPond || spot.slug === "fishing-park-hirano"} />
       </section>
 
       {/* タブレイアウト */}
@@ -908,8 +908,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
               <LazyAd className="my-4"><DisplayAd /></LazyAd>
             </div>
           </section>
-          {/* 管理釣り場 (isManagedPond) は営業時間ベースで混雑予想が無意味なので非表示 */}
-          {!spot.isManagedPond && (
+          {/* 管理釣り場 (isManagedPond) は営業時間ベースで混雑予想が無意味なので非表示。
+              データの isManagedPond が build cache 問題で評価されない可能性に備え、
+              ひらの は slug でも明示的に非表示にする保険を入れる。 */}
+          {!(spot.isManagedPond || spot.slug === "fishing-park-hirano") && (
           <section>
             <h3 className="mb-3 text-lg font-bold">混雑予想</h3>
             <CrowdPredictionCard rating={spot.rating} isFree={spot.isFree} difficulty={spot.difficulty} prefecture={spot.region.prefecture} hasParking={spot.hasParking} reviewCount={spot.reviewCount} />
