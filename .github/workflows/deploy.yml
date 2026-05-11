@@ -166,13 +166,11 @@ jobs:
           echo "::error::Deployment timed out after 7.5 minutes"
           exit 1
 
-      - name: Invalidate CloudFront cache
-        if: github.ref == 'refs/heads/master'
-        run: |
-          aws cloudfront create-invalidation \
-            --distribution-id E366L8IETD0MRP \
-            --paths "/*"
-          echo "CloudFront cache invalidation started"
+      # CloudFront /* invalidation は CDN キャッシュを毎デプロイで全消去し
+      # cache miss 多発 → origin 転送量増を招くため停止。                                                                                                                                                 
+      - name: CloudFront invalidation (skipped - rely on revalidate)
+        if: github.ref == 'refs/heads/master'                                                                                                                                                             
+        run: echo "Invalidation skipped - using ISR revalidate."
 
       - name: デプロイ後ヘルスチェック
         if: success() && github.ref == 'refs/heads/master'
