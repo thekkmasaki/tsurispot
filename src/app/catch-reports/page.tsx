@@ -5,7 +5,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { InArticleAd } from "@/components/ads/ad-unit";
 
 // ISR: 1時間ごとに再検証
-export const revalidate = 3600;
+export const revalidate = 7200;
 
 export const maxDuration = 60;
 

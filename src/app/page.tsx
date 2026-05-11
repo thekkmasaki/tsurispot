@@ -72,7 +72,7 @@ const spotCount = fishingSpots.length.toLocaleString();
 const fishCount = fishSpecies.length;
 
 // ブログ記事はmicroCMSから動的取得するため、ISRで定期更新
-export const revalidate = 3600;
+export const revalidate = 21600;
 
 export const metadata: Metadata = {
   title: "ツリスポ（つりすぽ）- 近くの釣りスポット検索｜釣り場が地図で見つかる",
