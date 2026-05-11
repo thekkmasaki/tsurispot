@@ -72,18 +72,26 @@ export default function LoginPage() {
     }
   };
 
-  const handleGoogle = () => {
+  const handleGoogle = async () => {
     if (loading) return;
     setLoading("google");
-    signIn("cognito", { callbackUrl: "/mypage" }, { identity_provider: "Google" });
+    // CSRF cookie を確実に取得してから signIn() を呼ぶ。
+    // signIn() 内部の /api/auth/csrf fetch がレース状態で間に合わないケースを排除する。
+    await fetch("/api/auth/csrf", { credentials: "same-origin" }).catch(() => {});
+    await signIn(
+      "cognito",
+      { callbackUrl: "https://tsurispot.com/mypage" },
+      { identity_provider: "Google" },
+    );
   };
 
-  const handleApple = () => {
+  const handleApple = async () => {
     if (loading) return;
     setLoading("apple");
-    signIn(
+    await fetch("/api/auth/csrf", { credentials: "same-origin" }).catch(() => {});
+    await signIn(
       "cognito",
-      { callbackUrl: "/mypage" },
+      { callbackUrl: "https://tsurispot.com/mypage" },
       { identity_provider: "SignInWithApple" },
     );
   };
