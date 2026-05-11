@@ -3602,6 +3602,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
       "/images/spots/fishing-park-hirano/overview.jpg",
       "/images/spots/fishing-park-hirano/tsurubori.jpg",
       "/images/spots/fishing-park-hirano/rods.jpg",
+      "/images/spots/fishing-park-hirano/barbless-sign.jpg",
     ], rating: 4.3, reviewCount: 0,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "午前中がおすすめ（潮や時合いの影響なし）。年中無休で年間を通して釣果が期待できる。", method: "ルアー（クランクベイト・スプーン）・フライ・餌釣り（期間限定）" },
