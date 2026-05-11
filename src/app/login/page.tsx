@@ -27,13 +27,11 @@ export default function LoginPage() {
     appName: string | null;
   }>({ inApp: false, appName: null });
   const [copied, setCopied] = useState(false);
+  const [csrfToken, setCsrfToken] = useState<string>("");
 
   useEffect(() => {
     const detected = detectInAppBrowser();
     setInAppBrowser(detected);
-    // LINE は ?openExternalBrowser=1 を読み取り、リンクタップ時に外部Safari で開く仕様。
-    // ユーザーが既にアプリ内ブラウザに居る場合、URL を上記付きに置換すると、
-    // 一部の LINE バージョンでは外部 Safari に切替えられる（ベストエフォート）。
     if (
       detected.appName === "LINE" &&
       typeof window !== "undefined" &&
@@ -43,13 +41,12 @@ export default function LoginPage() {
       newUrl.searchParams.set("openExternalBrowser", "1");
       window.history.replaceState({}, "", newUrl.toString());
     }
-    // CSRF cookie を pre-fetch。signIn() は内部で /api/auth/csrf を叩いて
-    // CSRF token を取得→ POST /api/auth/signin/{provider} を投げる。
-    // 初回 click 時に CSRF cookie が無いと内部 fetch がタイミング遅れで失敗し、
-    // 「2 回押すと入れる」現象になっていた。先回りで cookie を取得しておく。
-    fetch("/api/auth/csrf", { credentials: "same-origin" }).catch(() => {
-      /* ignore - signIn() 内部で再取得される */
-    });
+    // CSRF token をページロード時に取得して JSX hidden input に持たせる。
+    // これで click 時のレース状態を完全排除し、1 回押下で確実に動く。
+    fetch("/api/auth/csrf", { credentials: "same-origin" })
+      .then((r) => r.json())
+      .then((d: { csrfToken: string }) => setCsrfToken(d.csrfToken))
+      .catch(() => {});
   }, []);
 
   const handleOpenInSafari = async () => {
@@ -71,48 +68,12 @@ export default function LoginPage() {
     }
   };
 
-  // signIn() の代わりに native form submission を使う。
-  // NextAuth React の signIn() は内部 fetch で Cognito Hosted UI への redirect を
-  // follow しようとして cross-origin CORS エラーになり、結果 error=Configuration に
-  // フォールバックしていた（特にシークレットモードで顕著）。
-  // form submission は top-level navigation で CORS チェックなしで 302 を follow できる。
-  const submitSignIn = async (provider: "google" | "apple") => {
-    if (loading) return;
+  // JSX で <form> + hidden input + submit ボタン構成。
+  // client JS の動的 form 作成や fetch を click 後に行わないので race condition なし。
+  // CSRF token は useEffect で取得して state に保持、button は token 未取得中は disabled。
+  const handleSubmitClick = (provider: "google" | "apple") => {
     setLoading(provider);
-
-    // 1. CSRF token を取得（Set-Cookie で __Host-authjs.csrf-token も同時にセット）
-    const res = await fetch("/api/auth/csrf", { credentials: "same-origin" });
-    const { csrfToken } = (await res.json()) as { csrfToken: string };
-
-    // 2. hidden form を作って POST /api/auth/signin/cognito
-    const form = document.createElement("form");
-    form.method = "POST";
-    form.action = "/api/auth/signin/cognito";
-
-    const params: Record<string, string> = {
-      csrfToken,
-      callbackUrl: "https://tsurispot.com/mypage",
-      identity_provider: provider === "google" ? "Google" : "SignInWithApple",
-    };
-
-    for (const [name, value] of Object.entries(params)) {
-      const input = document.createElement("input");
-      input.type = "hidden";
-      input.name = name;
-      input.value = value;
-      form.appendChild(input);
-    }
-
-    document.body.appendChild(form);
-    form.submit();
-  };
-
-  const handleGoogle = () => {
-    submitSignIn("google");
-  };
-
-  const handleApple = () => {
-    submitSignIn("apple");
+    // form は default action で submit される。loading state だけ管理。
   };
 
   return (
@@ -175,10 +136,13 @@ export default function LoginPage() {
         )}
 
         <div className="space-y-3">
+          <form method="POST" action="/api/auth/signin/cognito" onSubmit={() => handleSubmitClick("google")}>
+            <input type="hidden" name="csrfToken" value={csrfToken} />
+            <input type="hidden" name="callbackUrl" value="https://tsurispot.com/mypage" />
+            <input type="hidden" name="identity_provider" value="Google" />
           <button
-            type="button"
-            onClick={handleGoogle}
-            disabled={loading !== null}
+            type="submit"
+            disabled={!csrfToken || loading !== null}
             aria-busy={loading === "google"}
             className="flex w-full items-center justify-center gap-2.5 rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-800 transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60"
           >
@@ -211,11 +175,15 @@ export default function LoginPage() {
               </>
             )}
           </button>
+          </form>
 
+          <form method="POST" action="/api/auth/signin/cognito" onSubmit={() => handleSubmitClick("apple")}>
+            <input type="hidden" name="csrfToken" value={csrfToken} />
+            <input type="hidden" name="callbackUrl" value="https://tsurispot.com/mypage" />
+            <input type="hidden" name="identity_provider" value="SignInWithApple" />
           <button
-            type="button"
-            onClick={handleApple}
-            disabled={loading !== null}
+            type="submit"
+            disabled={!csrfToken || loading !== null}
             aria-busy={loading === "apple"}
             className="flex w-full items-center justify-center gap-2.5 rounded-xl bg-black px-4 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
           >
@@ -238,6 +206,7 @@ export default function LoginPage() {
               </>
             )}
           </button>
+          </form>
 
           {loading && (
             <p className="text-center text-xs text-muted-foreground">
