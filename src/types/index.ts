@@ -50,6 +50,7 @@ export interface FishingSpot {
   id: string;
   name: string;
   slug: string;
+  isManagedPond?: boolean; // 管理釣り場 (営業時間あり): 混雑予想・タマヅメ等のおすすめ時間帯を非表示
   description: string;
   latitude: number;
   longitude: number;

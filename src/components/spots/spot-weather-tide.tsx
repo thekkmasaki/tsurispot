@@ -39,12 +39,13 @@ interface SpotWeatherTideProps {
   lat: number;
   lng: number;
   spotName: string;
+  hideBestTimes?: boolean; // 管理釣り場では潮汐・タマヅメ無関係なので「おすすめ時間帯」を隠す
 }
 
 // 曜日ラベル
 const DAY_LABELS = ["日", "月", "火", "水", "木", "金", "土"];
 
-export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
+export function SpotWeatherTide({ lat, lng, spotName, hideBestTimes }: SpotWeatherTideProps) {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -430,8 +431,8 @@ export function SpotWeatherTide({ lat, lng, spotName }: SpotWeatherTideProps) {
           </div>
         </div>
 
-        {/* おすすめ時間帯 + 潮の解説 */}
-        {dailyData && (() => {
+        {/* おすすめ時間帯 + 潮の解説 (管理釣り場では非表示) */}
+        {!hideBestTimes && dailyData && (() => {
           const best = calcBestFishingTime(
             dailyData.hourly,
             dailyData.sunrise,
