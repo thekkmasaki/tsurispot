@@ -1,6 +1,5 @@
 "use client";
 
-import { signIn } from "next-auth/react";
 import { Fish, Loader2, AlertTriangle, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect } from "react";
@@ -72,28 +71,48 @@ export default function LoginPage() {
     }
   };
 
-  const handleGoogle = async () => {
+  // signIn() の代わりに native form submission を使う。
+  // NextAuth React の signIn() は内部 fetch で Cognito Hosted UI への redirect を
+  // follow しようとして cross-origin CORS エラーになり、結果 error=Configuration に
+  // フォールバックしていた（特にシークレットモードで顕著）。
+  // form submission は top-level navigation で CORS チェックなしで 302 を follow できる。
+  const submitSignIn = async (provider: "google" | "apple") => {
     if (loading) return;
-    setLoading("google");
-    // CSRF cookie を確実に取得してから signIn() を呼ぶ。
-    // signIn() 内部の /api/auth/csrf fetch がレース状態で間に合わないケースを排除する。
-    await fetch("/api/auth/csrf", { credentials: "same-origin" }).catch(() => {});
-    await signIn(
-      "cognito",
-      { callbackUrl: "https://tsurispot.com/mypage" },
-      { identity_provider: "Google" },
-    );
+    setLoading(provider);
+
+    // 1. CSRF token を取得（Set-Cookie で __Host-authjs.csrf-token も同時にセット）
+    const res = await fetch("/api/auth/csrf", { credentials: "same-origin" });
+    const { csrfToken } = (await res.json()) as { csrfToken: string };
+
+    // 2. hidden form を作って POST /api/auth/signin/cognito
+    const form = document.createElement("form");
+    form.method = "POST";
+    form.action = "/api/auth/signin/cognito";
+
+    const params: Record<string, string> = {
+      csrfToken,
+      callbackUrl: "https://tsurispot.com/mypage",
+      identity_provider: provider === "google" ? "Google" : "SignInWithApple",
+    };
+
+    for (const [name, value] of Object.entries(params)) {
+      const input = document.createElement("input");
+      input.type = "hidden";
+      input.name = name;
+      input.value = value;
+      form.appendChild(input);
+    }
+
+    document.body.appendChild(form);
+    form.submit();
   };
 
-  const handleApple = async () => {
-    if (loading) return;
-    setLoading("apple");
-    await fetch("/api/auth/csrf", { credentials: "same-origin" }).catch(() => {});
-    await signIn(
-      "cognito",
-      { callbackUrl: "https://tsurispot.com/mypage" },
-      { identity_provider: "SignInWithApple" },
-    );
+  const handleGoogle = () => {
+    submitSignIn("google");
+  };
+
+  const handleApple = () => {
+    submitSignIn("apple");
   };
 
   return (
