@@ -44,6 +44,13 @@ export default function LoginPage() {
       newUrl.searchParams.set("openExternalBrowser", "1");
       window.history.replaceState({}, "", newUrl.toString());
     }
+    // CSRF cookie を pre-fetch。signIn() は内部で /api/auth/csrf を叩いて
+    // CSRF token を取得→ POST /api/auth/signin/{provider} を投げる。
+    // 初回 click 時に CSRF cookie が無いと内部 fetch がタイミング遅れで失敗し、
+    // 「2 回押すと入れる」現象になっていた。先回りで cookie を取得しておく。
+    fetch("/api/auth/csrf", { credentials: "same-origin" }).catch(() => {
+      /* ignore - signIn() 内部で再取得される */
+    });
   }, []);
 
   const handleOpenInSafari = async () => {
