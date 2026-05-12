@@ -94,6 +94,10 @@ const nextConfig: NextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     minimumCacheTTL: 31536000,
     formats: ['image/avif'],
+    // App Runner の Next.js Image Optimization が同じ画像を返すバグ発生中。
+    // S3 直接配信に切替えて optimization なしで素のファイルを配信する。
+    // avif/webp 変換は失うが、元 jpeg/webp が S3 にあるので OK。
+    unoptimized: true,
     // variant 数削減: deviceSizes default 8 + imageSizes default 8 = 16 sizes × 2 format = 32 variant/画像
     // → deviceSizes 4 + imageSizes 2 = 6 sizes × 1 format = 6 variant/画像 (1/5 に削減)
     deviceSizes: [640, 1080, 1920, 2560],
