@@ -942,10 +942,13 @@ export default async function SpotDetailPage({ params }: PageProps) {
               <path d="M9 18l6-6-6-6" />
             </svg>
           </a>
+          {/* ボウズ確率: フィッシングパークひらの は確実に釣れるため非表示 (施設様要望) */}
+          {spot.slug !== "fishing-park-hirano" && (
           <section>
             <h3 className="mb-3 text-lg font-bold">ボウズ確率</h3>
             <SpotBouzuCard spotType={spot.spotType} difficulty={spot.difficulty} rating={spot.rating} reviewCount={spot.reviewCount} prefecture={spot.region.prefecture} areaName={spot.region.areaName} isFree={spot.isFree} hasRentalRod={spot.hasRentalRod} catchableFishCount={spot.catchableFish.length} catchableFishDetails={spot.catchableFish.map((cf) => ({ fishSlug: cf.fish.slug, fishName: cf.fish.name, method: cf.method, catchDifficulty: cf.catchDifficulty, monthStart: cf.monthStart, monthEnd: cf.monthEnd, peakSeason: cf.peakSeason }))} />
           </section>
+          )}
           <section>
             <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><Play className="size-5" />{spot.name}の釣り動画</h3>
             <p className="mb-4 text-sm text-muted-foreground">YouTubeで{spot.name}の実際の釣り動画を探せます。</p>
