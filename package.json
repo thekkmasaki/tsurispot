@@ -9,6 +9,7 @@
     "lint": "eslint",
     "test": "vitest",
     "test:run": "vitest run",
+    "test:smoke": "playwright test --config=playwright.smoke.config.ts",
     "deploy": "git push origin master && echo 'GitHub Actions → App Runner デプロイ開始'",
     "analyze": "ANALYZE=true next build",
     "download-fish-images": "node scripts/download-fish-images.mjs"

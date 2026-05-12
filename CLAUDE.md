@@ -35,7 +35,37 @@ npx tsc --noEmit
 
 ## Git ルール
 
-- ブランチ: `master`
+### master 直 push 禁止 (受け入れ検証ゲート)
+
+**`master` ブランチは保護されている。Claude が master に直接 push することは禁止。**
+過去の連続障害（Cognito 設定全消し、ログイン壊れ、画像表示崩壊等）を踏まえ、
+ユーザの merge ボタン押下が唯一の本番反映トリガー。
+
+### Claude 標準ワークフロー（毎タスク必須）
+
+1. `feature/<task-name>` ブランチを切る
+2. 変更を commit + push（feature ブランチ）
+3. **手元検証**：
+   - `npx tsc --noEmit` PASS
+   - `npx eslint src/` PASS（警告は許容、エラーはブロック）
+   - `npm run test:smoke` PASS（Playwright smoke test）
+4. `gh pr create` で PR 作成
+5. PR description は `.github/PULL_REQUEST_TEMPLATE.md` の項目を全て埋める
+6. ユーザに「PR #X 作成しました、確認お願いします」と通知
+7. ユーザが GitHub UI で merge → master 反映 → 本番 deploy
+8. deploy 完了後、Claude が本番 curl 再検証 → 結果通知
+
+### 緊急 hotfix の例外
+
+本番障害（ログイン完全停止、500 連発、課金暴走等）に限り fast-track 可。
+1. ユーザに「緊急障害です、hotfix で対応します」と事前通知
+2. `hotfix/<issue>` ブランチで PR 作成
+3. 直後にユーザに最終結果報告
+
+通常の機能追加・最適化は使用禁止。判断基準は「現在サイトが完全に使えない」レベル。
+
+### その他
+
 - email: `dev@tsurispot.jp`
 - **Co-Authored-By は絶対に付けない**
 - **5ファイル修正ごと、または大きな修正1件ごとに WIP コミットする**（レート切れ対策）
