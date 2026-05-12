@@ -27,7 +27,9 @@ export default function LoginPage() {
     appName: string | null;
   }>({ inApp: false, appName: null });
   const [copied, setCopied] = useState(false);
-  const [csrfToken, setCsrfToken] = useState<string>("");
+  // null = まだ取得中, "" = 取得失敗, string = 取得済み。null 中は form をレンダリングしない
+  // ことで「1 回目押下で csrfToken="" が submit される」race condition を構造的に排除。
+  const [csrfToken, setCsrfToken] = useState<string | null>(null);
 
   useEffect(() => {
     const detected = detectInAppBrowser();
@@ -136,13 +138,20 @@ export default function LoginPage() {
         )}
 
         <div className="space-y-3">
+          {csrfToken === null ? (
+            <div className="flex items-center justify-center py-8 text-sm text-muted-foreground">
+              <Loader2 className="mr-2 h-5 w-5 animate-spin" aria-hidden="true" />
+              準備中...
+            </div>
+          ) : (
+          <>
           <form method="POST" action="/api/auth/signin/cognito" onSubmit={() => handleSubmitClick("google")}>
             <input type="hidden" name="csrfToken" value={csrfToken} />
             <input type="hidden" name="callbackUrl" value="https://tsurispot.com/mypage" />
             <input type="hidden" name="identity_provider" value="Google" />
           <button
             type="submit"
-            disabled={!csrfToken || loading !== null}
+            disabled={loading !== null}
             aria-busy={loading === "google"}
             className="flex w-full items-center justify-center gap-2.5 rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-800 transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60"
           >
@@ -183,7 +192,7 @@ export default function LoginPage() {
             <input type="hidden" name="identity_provider" value="SignInWithApple" />
           <button
             type="submit"
-            disabled={!csrfToken || loading !== null}
+            disabled={loading !== null}
             aria-busy={loading === "apple"}
             className="flex w-full items-center justify-center gap-2.5 rounded-xl bg-black px-4 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
           >
@@ -207,6 +216,8 @@ export default function LoginPage() {
             )}
           </button>
           </form>
+          </>
+          )}
 
           {loading && (
             <p className="text-center text-xs text-muted-foreground">
