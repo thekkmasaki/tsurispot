@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { updateProfile, deleteUser, getUserById } from "@/lib/auth-redis";
+import { updateProfile, deleteUser, getUserById, STYLE_TAGS } from "@/lib/auth-redis";
 import { checkNgWords } from "@/lib/moderation";
 
 interface ProfilePatch {
@@ -9,6 +9,7 @@ interface ProfilePatch {
   headerImage?: string;
   isPublic?: boolean;
   bestCatchId?: string;
+  styles?: string[];
 }
 
 export async function GET() {
@@ -33,6 +34,7 @@ export async function GET() {
       provider: user.provider,
       upstreamProvider: user.upstreamProvider,
       bestCatchId: user.bestCatchId,
+      styles: user.styles,
     },
   });
 }
@@ -100,6 +102,20 @@ export async function PATCH(request: Request) {
       return NextResponse.json({ error: "Best Catch IDの形式が不正です" }, { status: 400 });
     }
     patch.bestCatchId = body.bestCatchId;
+  }
+
+  if (body.styles !== undefined) {
+    if (!Array.isArray(body.styles)) {
+      return NextResponse.json({ error: "スタイルタグの形式が不正です" }, { status: 400 });
+    }
+    if (body.styles.length > 5) {
+      return NextResponse.json({ error: "スタイルタグは最大5個まで選べます" }, { status: 400 });
+    }
+    const validTags = new Set<string>(STYLE_TAGS);
+    const filtered = body.styles.filter(
+      (s): s is string => typeof s === "string" && validTags.has(s),
+    );
+    patch.styles = Array.from(new Set(filtered));
   }
 
   if (Object.keys(patch).length === 0) {
