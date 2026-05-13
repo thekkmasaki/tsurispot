@@ -13,6 +13,7 @@ export interface TsuriSpotUser {
   createdAt: string;
   reportCount?: number;
   nicknameSetAt?: string;
+  bestCatchId?: string;
 }
 
 const USER_PREFIX = "auth:user:";
@@ -117,7 +118,7 @@ export async function updateNickname(
   return true;
 }
 
-/** プロフィール一括更新（nickname / bio / headerImage / isPublic を任意指定） */
+/** プロフィール一括更新（nickname / bio / headerImage / isPublic / bestCatchId を任意指定） */
 export async function updateProfile(
   userId: string,
   patch: {
@@ -125,6 +126,7 @@ export async function updateProfile(
     bio?: string;
     headerImage?: string;
     isPublic?: boolean;
+    bestCatchId?: string;
   },
 ): Promise<TsuriSpotUser | null> {
   const user = await getUserById(userId);
@@ -137,6 +139,7 @@ export async function updateProfile(
     ...(patch.bio !== undefined ? { bio: patch.bio } : {}),
     ...(patch.headerImage !== undefined ? { headerImage: patch.headerImage } : {}),
     ...(patch.isPublic !== undefined ? { isPublic: patch.isPublic } : {}),
+    ...(patch.bestCatchId !== undefined ? { bestCatchId: patch.bestCatchId } : {}),
   };
   await redis.set(`${USER_PREFIX}${userId}`, updated);
   return updated;

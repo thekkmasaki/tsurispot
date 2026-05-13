@@ -44,6 +44,7 @@ interface ProfileFetchResult {
     total: number;
   };
   reports: CatchReport[];
+  bestCatch: CatchReport | null;
   follow: { followingCount: number; followersCount: number };
 }
 
@@ -88,6 +89,10 @@ async function fetchProfile(tsuriId: string): Promise<ProfileFetchResult | null>
   const followingCount = await getFollowingCount(tsuriId);
   const followersCount = await getFollowersCount(tsuriId);
 
+  const bestCatch = target.bestCatchId
+    ? allReports.find((r) => r.id === target.bestCatchId) || null
+    : null;
+
   return {
     user: {
       tsuriId: target.id,
@@ -101,6 +106,7 @@ async function fetchProfile(tsuriId: string): Promise<ProfileFetchResult | null>
     stats: { reportCount, uniqueFishCount, uniqueSpotCount, maxSizeCm },
     badges: { earned: earnedBadges, total: ALL_TIERS.length },
     reports: recentReports,
+    bestCatch,
     follow: { followingCount, followersCount },
   };
 }
@@ -184,6 +190,7 @@ export default async function UserProfilePage({
         stats: profile.stats,
         badges: profile.badges,
         reports: profile.reports,
+        bestCatch: profile.bestCatch,
         follow: {
           followingCount: profile.follow.followingCount,
           followersCount: profile.follow.followersCount,

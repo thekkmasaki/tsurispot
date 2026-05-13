@@ -5,12 +5,24 @@ import { useSession } from "next-auth/react";
 import Link from "next/link";
 import {
   ArrowLeft, MapPin, Calendar, Ruler,
-  Fish, Sparkles, UserPlus, UserMinus, Trophy,
+  Fish, Sparkles, UserPlus, UserMinus, Trophy, Award,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ShareButtons } from "@/components/ui/share-buttons";
 import { getTitle } from "@/lib/titles";
+
+interface CatchReportItem {
+  id?: string;
+  spotSlug?: string;
+  spotName?: string;
+  fishName?: string;
+  date?: string;
+  photoUrl?: string;
+  sizeCm?: number;
+  method?: string;
+  comment?: string;
+}
 
 interface ProfileData {
   user: {
@@ -37,17 +49,8 @@ interface ProfileData {
     }>;
     total: number;
   };
-  reports: Array<{
-    id?: string;
-    spotSlug?: string;
-    spotName?: string;
-    fishName?: string;
-    date?: string;
-    photoUrl?: string;
-    sizeCm?: number;
-    method?: string;
-    comment?: string;
-  }>;
+  reports: CatchReportItem[];
+  bestCatch: CatchReportItem | null;
   follow: {
     followingCount: number;
     followersCount: number;
@@ -113,7 +116,7 @@ export function ProfileClient({ data, shareUrl }: Props) {
     setFollowLoading(false);
   };
 
-  const { user, stats, badges, reports } = data;
+  const { user, stats, badges, reports, bestCatch } = data;
   const title = getTitle(stats.reportCount);
   const joinDate = formatJoinDate(user.createdAt);
 
@@ -210,6 +213,58 @@ export function ProfileClient({ data, shareUrl }: Props) {
             <span className="ml-1 text-muted-foreground">フォロワー</span>
           </span>
         </div>
+
+        {bestCatch && (
+          <Card className="mt-6 overflow-hidden border-amber-200 bg-gradient-to-br from-amber-50 to-orange-50">
+            <CardContent className="p-0">
+              <div className="flex items-center gap-2 border-b border-amber-200 bg-amber-100/60 px-4 py-2">
+                <Award className="h-4 w-4 text-amber-600" />
+                <span className="text-sm font-semibold text-amber-900">Best Catch</span>
+              </div>
+              <Link
+                href={bestCatch.spotSlug ? `/spots/${bestCatch.spotSlug}` : "#"}
+                className="flex gap-3 p-4 transition-colors hover:bg-amber-100/40"
+              >
+                {bestCatch.photoUrl && (
+                  <img
+                    src={bestCatch.photoUrl}
+                    alt=""
+                    className="h-24 w-24 shrink-0 rounded-md object-cover shadow"
+                  />
+                )}
+                <div className="min-w-0 flex-1">
+                  <p className="text-lg font-bold text-amber-900">{bestCatch.fishName}</p>
+                  <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-amber-800">
+                    {bestCatch.spotName && (
+                      <span className="flex items-center gap-0.5">
+                        <MapPin className="h-3 w-3" />
+                        {bestCatch.spotName}
+                      </span>
+                    )}
+                    {bestCatch.date && (
+                      <span className="flex items-center gap-0.5">
+                        <Calendar className="h-3 w-3" />
+                        {bestCatch.date}
+                      </span>
+                    )}
+                    {bestCatch.sizeCm && (
+                      <span className="flex items-center gap-0.5 font-semibold">
+                        <Ruler className="h-3 w-3" />
+                        {bestCatch.sizeCm}cm
+                      </span>
+                    )}
+                    {bestCatch.method && <span>{bestCatch.method}</span>}
+                  </div>
+                  {bestCatch.comment && (
+                    <p className="mt-1.5 text-xs leading-relaxed text-amber-900/80">
+                      {bestCatch.comment}
+                    </p>
+                  )}
+                </div>
+              </Link>
+            </CardContent>
+          </Card>
+        )}
 
         <div className="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
           <StatCard

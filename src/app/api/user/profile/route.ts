@@ -8,6 +8,7 @@ interface ProfilePatch {
   bio?: string;
   headerImage?: string;
   isPublic?: boolean;
+  bestCatchId?: string;
 }
 
 export async function GET() {
@@ -31,6 +32,7 @@ export async function GET() {
       reportCount: user.reportCount,
       provider: user.provider,
       upstreamProvider: user.upstreamProvider,
+      bestCatchId: user.bestCatchId,
     },
   });
 }
@@ -91,6 +93,13 @@ export async function PATCH(request: Request) {
       return NextResponse.json({ error: "公開設定の形式が不正です" }, { status: 400 });
     }
     patch.isPublic = body.isPublic;
+  }
+
+  if (body.bestCatchId !== undefined) {
+    if (typeof body.bestCatchId !== "string" || body.bestCatchId.length > 200) {
+      return NextResponse.json({ error: "Best Catch IDの形式が不正です" }, { status: 400 });
+    }
+    patch.bestCatchId = body.bestCatchId;
   }
 
   if (Object.keys(patch).length === 0) {
