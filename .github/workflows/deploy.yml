@@ -166,11 +166,17 @@ jobs:
           echo "::error::Deployment timed out after 7.5 minutes"
           exit 1
 
-      # CloudFront /* invalidation は CDN キャッシュを毎デプロイで全消去し
-      # cache miss 多発 → origin 転送量増を招くため停止。                                                                                                                                                 
-      - name: CloudFront invalidation (skipped - rely on revalidate)
-        if: github.ref == 'refs/heads/master'                                                                                                                                                             
-        run: echo "Invalidation skipped - using ISR revalidate."
+      # CloudFront HTML パスを限定 invalidate。
+      # /* 全消去は origin 転送量増を招くため避け、HTML を返す主要パスのみ。
+      # /_next/static/* は hash 付き URL のため invalidate 不要。
+      # ※ HTML は s-maxage=31536000 でキャッシュされるため、これを消さないと
+      #   deploy しても古い HTML が返り続け「シークレットで治らない」事故になる。
+      - name: CloudFront invalidation (HTML パス限定)
+        if: github.ref == 'refs/heads/master'
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id E366L8IETD0MRP \
+            --paths "/" "/login*" "/spots*" "/fish*" "/prefectures*" "/blog*" "/guides*" "/users*" "/mypage*" "/shops*"
 
       - name: デプロイ後ヘルスチェック
         if: success() && github.ref == 'refs/heads/master'
