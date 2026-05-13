@@ -1,8 +1,55 @@
 "use client";
 
-import { Fish, Loader2, AlertTriangle, ExternalLink } from "lucide-react";
+import { Fish, Loader2, AlertTriangle, ExternalLink, Info } from "lucide-react";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+
+const ERROR_MESSAGES: Record<string, string> = {
+  Configuration:
+    "ログイン処理の途中で問題が発生しました。お手数ですが、もう一度お試しください。",
+  AccessDenied: "アクセスが拒否されました。もう一度お試しください。",
+  Verification: "認証に失敗しました。もう一度お試しください。",
+  OAuthSignin: "認証プロバイダーへの接続でエラーが発生しました。",
+  OAuthCallback: "認証コールバックでエラーが発生しました。",
+  OAuthCreateAccount: "アカウント作成中にエラーが発生しました。",
+  EmailCreateAccount: "アカウント作成中にエラーが発生しました。",
+  Callback: "コールバック処理でエラーが発生しました。",
+  OAuthAccountNotLinked: "このメールアドレスは別の方法で既に登録されています。",
+  EmailSignin: "メール送信でエラーが発生しました。",
+  CredentialsSignin: "ログイン情報が正しくありません。",
+  SessionRequired: "ログインが必要です。",
+  MissingCSRF: "セッションが切れました。ページを再読み込みしてください。",
+  Default: "エラーが発生しました。もう一度お試しください。",
+};
+
+function LoginErrorBanner() {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const error = searchParams.get("error");
+  const [shown, setShown] = useState(false);
+
+  useEffect(() => {
+    if (!error) return;
+    setShown(true);
+    // URL から error クエリだけ除去 (履歴を汚さず replace)
+    const params = new URLSearchParams(searchParams.toString());
+    params.delete("error");
+    const newQuery = params.toString();
+    router.replace(newQuery ? `/login?${newQuery}` : "/login", { scroll: false });
+  }, [error, router, searchParams]);
+
+  if (!shown || !error) return null;
+  const message = ERROR_MESSAGES[error] ?? ERROR_MESSAGES.Default;
+  return (
+    <div className="rounded-xl border border-amber-300 bg-amber-50 p-3 text-sm">
+      <div className="flex items-start gap-2">
+        <Info className="mt-0.5 h-4 w-4 shrink-0 text-amber-700" aria-hidden="true" />
+        <p className="text-amber-900">{message}</p>
+      </div>
+    </div>
+  );
+}
 
 type LoadingState = null | "google" | "apple";
 
@@ -95,6 +142,10 @@ export default function LoginPage() {
             お気に入りや釣果をクラウドに保存
           </p>
         </div>
+
+        <Suspense fallback={null}>
+          <LoginErrorBanner />
+        </Suspense>
 
         {inAppBrowser.inApp && (
           <div className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm">
