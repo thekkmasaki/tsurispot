@@ -62,6 +62,7 @@ interface ProfileData {
   bio?: string;
   headerImage?: string;
   createdAt?: string;
+  bestCatchId?: string;
 }
 
 interface DashboardItem {
@@ -157,6 +158,9 @@ export default function MyPage() {
   const [editing, setEditing] = useState(false);
   const [nickname, setNickname] = useState("");
   const [bio, setBio] = useState("");
+  const [headerImage, setHeaderImage] = useState("");
+  const [bestCatchId, setBestCatchId] = useState("");
+  const [uploadingCover, setUploadingCover] = useState(false);
   const [savingProfile, setSavingProfile] = useState(false);
   const [profileMsg, setProfileMsg] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
@@ -194,8 +198,15 @@ export default function MyPage() {
         setStreakData(streakRes);
         const u = profileRes?.user;
         if (u) {
-          setProfile({ bio: u.bio, headerImage: u.headerImage, createdAt: u.createdAt });
+          setProfile({
+            bio: u.bio,
+            headerImage: u.headerImage,
+            createdAt: u.createdAt,
+            bestCatchId: u.bestCatchId,
+          });
           setBio(u.bio || "");
+          setHeaderImage(u.headerImage || "");
+          setBestCatchId(u.bestCatchId || "");
         }
       })
       .catch(() => {})
@@ -260,8 +271,36 @@ export default function MyPage() {
   const startEdit = () => {
     setNickname(user.nickname || "");
     setBio(profile?.bio || "");
+    setHeaderImage(profile?.headerImage || "");
+    setBestCatchId(profile?.bestCatchId || "");
     setProfileMsg(null);
     setEditing(true);
+  };
+
+  const handleCoverUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    if (file.size > 20 * 1024 * 1024) {
+      setProfileMsg({ type: "error", text: "ファイルサイズは20MB以下にしてください" });
+      return;
+    }
+    setUploadingCover(true);
+    setProfileMsg(null);
+    try {
+      const fd = new FormData();
+      fd.append("file", file);
+      const res = await fetch("/api/cover-photo", { method: "POST", body: fd });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.url) {
+        setHeaderImage(data.url);
+        setProfileMsg({ type: "success", text: "カバー画像をアップロードしました" });
+      } else {
+        setProfileMsg({ type: "error", text: data.error || "アップロードに失敗しました" });
+      }
+    } catch {
+      setProfileMsg({ type: "error", text: "通信エラー" });
+    }
+    setUploadingCover(false);
   };
 
   const handleSaveProfile = async () => {
@@ -280,12 +319,17 @@ export default function MyPage() {
       const res = await fetch("/api/user/profile", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nickname: trimmedNick, bio }),
+        body: JSON.stringify({
+          nickname: trimmedNick,
+          bio,
+          headerImage,
+          bestCatchId,
+        }),
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok) {
         await update({ nickname: trimmedNick });
-        setProfile((prev) => ({ ...(prev || {}), bio }));
+        setProfile((prev) => ({ ...(prev || {}), bio, headerImage, bestCatchId }));
         setProfileMsg({ type: "success", text: "保存しました" });
         setTimeout(() => {
           setEditing(false);
@@ -327,8 +371,19 @@ export default function MyPage() {
 
   return (
     <div className="mx-auto max-w-2xl pb-8">
-      {/* グラデーションカバー */}
-      <div className={`relative h-24 bg-gradient-to-r ${title.headerClass}`}>
+      {/* グラデーションカバー or カスタムカバー画像 */}
+      <div
+        className={`relative h-24 bg-gradient-to-r ${title.headerClass}`}
+        style={
+          profile?.headerImage
+            ? {
+                backgroundImage: `url(${profile.headerImage})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+              }
+            : undefined
+        }
+      >
         <Link
           href="/"
           className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-white/85 px-3 py-1 text-xs text-foreground backdrop-blur-sm hover:bg-white"
@@ -436,6 +491,57 @@ export default function MyPage() {
                   placeholder="得意な釣り方・狙う魚種・ホームの海など"
                 />
               </div>
+              <div>
+                <label className="mb-1 block text-xs font-medium">カバー画像</label>
+                {headerImage && (
+                  <div
+                    className="mb-2 h-20 rounded-md border bg-cover bg-center"
+                    style={{ backgroundImage: `url(${headerImage})` }}
+                  />
+                )}
+                <div className="flex items-center gap-2">
+                  <input
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    onChange={handleCoverUpload}
+                    disabled={uploadingCover}
+                    className="block w-full text-xs file:mr-2 file:rounded-md file:border-0 file:bg-ocean-mid file:px-2 file:py-1 file:text-xs file:text-white"
+                  />
+                  {headerImage && (
+                    <button
+                      type="button"
+                      onClick={() => setHeaderImage("")}
+                      className="rounded-md border px-2 py-1 text-xs text-muted-foreground hover:bg-muted"
+                    >
+                      削除
+                    </button>
+                  )}
+                </div>
+                {uploadingCover && (
+                  <p className="mt-1 text-xs text-muted-foreground">アップロード中...</p>
+                )}
+              </div>
+              {catchReports.length > 0 && (
+                <div>
+                  <label className="mb-1 block text-xs font-medium">
+                    Best Catch (プロフィール最上部に表示)
+                  </label>
+                  <select
+                    value={bestCatchId}
+                    onChange={(e) => setBestCatchId(e.target.value)}
+                    className="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ocean-mid"
+                  >
+                    <option value="">設定しない</option>
+                    {catchReports.map((r) => (
+                      <option key={r.id} value={r.id}>
+                        {r.fishName}
+                        {r.sizeCm ? ` ${r.sizeCm}cm` : ""}
+                        {r.spotName ? ` @${r.spotName}` : ""}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+              )}
               {profileMsg && (
                 <p
                   className={`text-xs ${
