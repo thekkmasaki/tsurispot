@@ -770,6 +770,44 @@ export default async function SpotDetailPage({ params }: PageProps) {
       <div className="lg:grid lg:grid-cols-[1fr_320px] lg:gap-8">
       {/* メインコンテンツ */}
       <div className="min-w-0">
+      {/* スポット画像ギャラリー: mainImageUrl をヘッダー、images 配列をサブ画像で表示 */}
+      {(spot.mainImageUrl || (spot.images && spot.images.length > 0)) && (() => {
+        const isValidImage = (url: string | undefined): url is string =>
+          !!url && (url.startsWith("http") || url.startsWith("/images/spots/"));
+        const main = isValidImage(spot.mainImageUrl) ? spot.mainImageUrl : undefined;
+        const subs = (spot.images ?? []).filter(isValidImage);
+        return (
+          <section className="mb-6">
+            {main && (
+              <div className="overflow-hidden rounded-2xl shadow-sm">
+                <SpotImage
+                  src={main}
+                  alt={`${spot.name}のメイン写真`}
+                  spotType={spot.spotType}
+                  height="h-56 sm:h-72 lg:h-96"
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 800px"
+                />
+              </div>
+            )}
+            {subs.length > 0 && (
+              <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+                {subs.slice(0, 8).map((img, i) => (
+                  <div key={img} className="overflow-hidden rounded-lg">
+                    <SpotImage
+                      src={img}
+                      alt={`${spot.name}の写真 ${i + 1}`}
+                      spotType={spot.spotType}
+                      height="h-24 sm:h-28 lg:h-32"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+          </section>
+        );
+      })()}
+
       {/* 天気・潮汐情報（常時表示） */}
       <section className="mb-6">
         <SpotWeatherTide lat={spot.latitude} lng={spot.longitude} spotName={spot.name} hideBestTimes={spot.isManagedPond || spot.slug === "fishing-park-hirano"} />
