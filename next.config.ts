@@ -183,6 +183,33 @@ const nextConfig: NextConfig = {
         { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
       ],
     },
+    // 認証必要なページ: ユーザー固有HTMLなのでCloudFrontに共有キャッシュさせない
+    // Next.js App Router の "use client" ページは default で s-maxage=31536000 が
+    // 付くため、古いログイン状態のHTMLが返って「1回目ログインできない」症状を起こす。
+    {
+      source: "/mypage/:path*",
+      headers: [
+        { key: "Cache-Control", value: "private, no-store, max-age=0, must-revalidate" },
+      ],
+    },
+    {
+      source: "/mypage",
+      headers: [
+        { key: "Cache-Control", value: "private, no-store, max-age=0, must-revalidate" },
+      ],
+    },
+    {
+      source: "/favorites",
+      headers: [
+        { key: "Cache-Control", value: "private, no-store, max-age=0, must-revalidate" },
+      ],
+    },
+    {
+      source: "/login",
+      headers: [
+        { key: "Cache-Control", value: "private, no-store, max-age=0, must-revalidate" },
+      ],
+    },
   ],
 };
 
