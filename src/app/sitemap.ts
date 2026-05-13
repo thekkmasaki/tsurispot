@@ -11,6 +11,8 @@ import { seasons as seasonCategories } from "@/lib/data/seasonal-data";
 import { tackleShops } from "@/lib/data/shops";
 import { FISHING_METHODS, MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
 import { REGION_GROUPS } from "@/lib/data/regions-group";
+import { redis } from "@/lib/redis";
+import { getUserById } from "@/lib/auth-redis";
 
 const baseUrl = "https://tsurispot.com";
 
@@ -25,8 +27,48 @@ const dynamicDate = new Date(BUILD_DATE);
 const contentDate = new Date(BUILD_DATE);
 const legalDate = new Date("2025-06-01");
 
+// 釣果1件以上 & isPublic!=false のユーザーを sitemap に含める
+// (Redis SCAN は数百ユーザー規模なら問題ないが、将来規模拡大時は別途インデックス化検討)
+async function getSitemapUsers(): Promise<
+  { tsuriId: string; updatedAt: Date }[]
+> {
+  try {
+    const userIds: string[] = [];
+    let cursor: string | number = 0;
+    let iterations = 0;
+    do {
+      const result = (await redis.scan(cursor, {
+        match: "auth:user:*",
+        count: 200,
+      })) as [string | number, string[]];
+      cursor = result[0];
+      for (const key of result[1] || []) {
+        const id = key.replace(/^auth:user:/, "");
+        if (id) userIds.push(id);
+      }
+      iterations++;
+      if (iterations > 50) break; // 安全弁: 1万ユーザー上限
+    } while (cursor !== "0" && cursor !== 0);
+
+    const users = await Promise.all(
+      userIds.map(async (id) => {
+        const u = await getUserById(id);
+        if (!u) return null;
+        if (u.isPublic === false) return null;
+        if ((u.reportCount || 0) < 1) return null;
+        return { tsuriId: id, updatedAt: new Date(u.createdAt) };
+      }),
+    );
+    return users.filter((u): u is { tsuriId: string; updatedAt: Date } => Boolean(u));
+  } catch (err) {
+    console.error("[sitemap] getSitemapUsers failed:", err);
+    return [];
+  }
+}
+
 // 単一サイトマップ（generateSitemapsを削除 → Google が確実に取得できる1ファイル構成）
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const sitemapUsers = await getSitemapUsers();
   // 都道府県×魚種の組み合わせを事前計算
   const prefFishCombos: { prefSlug: string; fishSlug: string }[] = [];
   const seen = new Set<string>();
@@ -433,6 +475,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: dynamicDate,
       changeFrequency: "weekly" as const,
       priority: 0.6,
+    })),
+
+    // ===== ユーザープロフィール（釣果1件以上の公開ユーザー） =====
+    ...sitemapUsers.map((u) => ({
+      url: `${baseUrl}/users/${u.tsuriId}`,
+      lastModified: u.updatedAt,
+      changeFrequency: "weekly" as const,
+      priority: 0.5,
     })),
   ];
 }
