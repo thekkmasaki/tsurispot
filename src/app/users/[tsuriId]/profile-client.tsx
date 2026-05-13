@@ -33,6 +33,7 @@ interface ProfileData {
     headerImage?: string;
     createdAt?: string;
     reportCount: number;
+    styles?: string[];
   };
   stats: {
     reportCount: number;
@@ -201,6 +202,19 @@ export function ProfileClient({ data, shareUrl }: Props) {
           <p className="mt-3 whitespace-pre-wrap text-sm leading-relaxed text-foreground">
             {user.bio}
           </p>
+        )}
+
+        {user.styles && user.styles.length > 0 && (
+          <div className="mt-3 flex flex-wrap gap-1">
+            {user.styles.map((s) => (
+              <span
+                key={s}
+                className="rounded-full border border-ocean-mid/30 bg-ocean-mid/5 px-2 py-0.5 text-xs text-ocean-mid"
+              >
+                {s}
+              </span>
+            ))}
+          </div>
         )}
 
         <div className="mt-3 flex gap-4 text-sm">

@@ -32,6 +32,7 @@ interface ProfileFetchResult {
     headerImage?: string;
     createdAt?: string;
     reportCount: number;
+    styles?: string[];
   };
   stats: {
     reportCount: number;
@@ -102,6 +103,7 @@ async function fetchProfile(tsuriId: string): Promise<ProfileFetchResult | null>
       headerImage: target.headerImage,
       createdAt: target.createdAt,
       reportCount,
+      styles: target.styles,
     },
     stats: { reportCount, uniqueFishCount, uniqueSpotCount, maxSizeCm },
     badges: { earned: earnedBadges, total: ALL_TIERS.length },

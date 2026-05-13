@@ -63,7 +63,36 @@ interface ProfileData {
   headerImage?: string;
   createdAt?: string;
   bestCatchId?: string;
+  styles?: string[];
 }
+
+interface FeedItem {
+  id?: string;
+  spotSlug?: string;
+  spotName?: string;
+  fishName?: string;
+  date?: string;
+  photoUrl?: string;
+  sizeCm?: number;
+  method?: string;
+  comment?: string;
+  authorId: string;
+  authorNickname: string;
+  authorAvatarUrl?: string;
+}
+
+const STYLE_OPTIONS = [
+  "磯",
+  "堤防",
+  "沖",
+  "船",
+  "管理釣場",
+  "ルアー",
+  "エサ",
+  "投げ",
+  "夜釣り",
+  "ファミリー",
+] as const;
 
 interface DashboardItem {
   slug: string;
@@ -160,6 +189,8 @@ export default function MyPage() {
   const [bio, setBio] = useState("");
   const [headerImage, setHeaderImage] = useState("");
   const [bestCatchId, setBestCatchId] = useState("");
+  const [styles, setStyles] = useState<string[]>([]);
+  const [feedItems, setFeedItems] = useState<FeedItem[]>([]);
   const [uploadingCover, setUploadingCover] = useState(false);
   const [savingProfile, setSavingProfile] = useState(false);
   const [profileMsg, setProfileMsg] = useState<{ type: "success" | "error"; text: string } | null>(null);
@@ -203,14 +234,21 @@ export default function MyPage() {
             headerImage: u.headerImage,
             createdAt: u.createdAt,
             bestCatchId: u.bestCatchId,
+            styles: u.styles,
           });
           setBio(u.bio || "");
           setHeaderImage(u.headerImage || "");
           setBestCatchId(u.bestCatchId || "");
+          setStyles(Array.isArray(u.styles) ? u.styles : []);
         }
       })
       .catch(() => {})
       .finally(() => setReportsLoading(false));
+
+    fetch("/api/user/feed")
+      .then((r) => (r.ok ? r.json() : { items: [] }))
+      .then((data) => setFeedItems(data.items || []))
+      .catch(() => {});
   }, [status]);
 
   const handleRemoveWish = async (slug: string) => {
@@ -273,8 +311,19 @@ export default function MyPage() {
     setBio(profile?.bio || "");
     setHeaderImage(profile?.headerImage || "");
     setBestCatchId(profile?.bestCatchId || "");
+    setStyles(Array.isArray(profile?.styles) ? profile.styles : []);
     setProfileMsg(null);
     setEditing(true);
+  };
+
+  const toggleStyle = (tag: string) => {
+    setStyles((prev) =>
+      prev.includes(tag)
+        ? prev.filter((s) => s !== tag)
+        : prev.length >= 5
+          ? prev
+          : [...prev, tag],
+    );
   };
 
   const handleCoverUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -324,12 +373,13 @@ export default function MyPage() {
           bio,
           headerImage,
           bestCatchId,
+          styles,
         }),
       });
       const data = await res.json().catch(() => ({}));
       if (res.ok) {
         await update({ nickname: trimmedNick });
-        setProfile((prev) => ({ ...(prev || {}), bio, headerImage, bestCatchId }));
+        setProfile((prev) => ({ ...(prev || {}), bio, headerImage, bestCatchId, styles }));
         setProfileMsg({ type: "success", text: "保存しました" });
         setTimeout(() => {
           setEditing(false);
@@ -445,6 +495,19 @@ export default function MyPage() {
               </p>
             )}
 
+            {profile?.styles && profile.styles.length > 0 && (
+              <div className="mt-3 flex flex-wrap gap-1">
+                {profile.styles.map((s) => (
+                  <span
+                    key={s}
+                    className="rounded-full border border-ocean-mid/30 bg-ocean-mid/5 px-2 py-0.5 text-xs text-ocean-mid"
+                  >
+                    {s}
+                  </span>
+                ))}
+              </div>
+            )}
+
             {nextTier ? (
               <p className="mt-3 text-xs text-muted-foreground">
                 次の称号「{nextTier.emoji}
@@ -542,6 +605,32 @@ export default function MyPage() {
                   </select>
                 </div>
               )}
+              <div>
+                <label className="mb-1 block text-xs font-medium">
+                  釣行スタイル ({styles.length}/5)
+                </label>
+                <div className="flex flex-wrap gap-1.5">
+                  {STYLE_OPTIONS.map((tag) => {
+                    const active = styles.includes(tag);
+                    const disabled = !active && styles.length >= 5;
+                    return (
+                      <button
+                        key={tag}
+                        type="button"
+                        onClick={() => toggleStyle(tag)}
+                        disabled={disabled}
+                        className={`rounded-full border px-3 py-1 text-xs transition-colors ${
+                          active
+                            ? "border-ocean-mid bg-ocean-mid text-white"
+                            : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-40"
+                        }`}
+                      >
+                        {tag}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
               {profileMsg && (
                 <p
                   className={`text-xs ${
@@ -826,6 +915,77 @@ export default function MyPage() {
             <NotificationSubscribeButton />
           </CardContent>
         </Card>
+
+        {/* フォロー中の新着釣果 */}
+        {feedItems.length > 0 && (
+          <Card className="mt-4">
+            <CardContent className="p-4">
+              <div className="mb-3 flex items-center gap-2">
+                <Sparkles className="h-5 w-5 text-cyan-500" />
+                <span className="font-medium">フォロー中の新着</span>
+                <span className="text-xs text-muted-foreground">
+                  ({feedItems.length}件)
+                </span>
+              </div>
+              <ul className="space-y-2">
+                {feedItems.slice(0, 10).map((item, idx) => (
+                  <li
+                    key={`${item.authorId}-${item.id || idx}`}
+                    className="flex gap-3 rounded-lg border p-3"
+                  >
+                    {item.photoUrl ? (
+                      <img
+                        src={item.photoUrl}
+                        alt=""
+                        className="h-14 w-14 shrink-0 rounded-md object-cover"
+                      />
+                    ) : (
+                      <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-md bg-muted text-2xl">
+                        🐟
+                      </div>
+                    )}
+                    <div className="min-w-0 flex-1">
+                      <div className="flex items-center gap-1.5">
+                        <Link
+                          href={`/users/${item.authorId}`}
+                          className="text-xs font-medium text-ocean-mid hover:underline"
+                        >
+                          {item.authorNickname}
+                        </Link>
+                        {item.date && (
+                          <span className="text-xs text-muted-foreground">
+                            ・{item.date}
+                          </span>
+                        )}
+                      </div>
+                      <Link
+                        href={item.spotSlug ? `/spots/${item.spotSlug}` : "#"}
+                        className="block"
+                      >
+                        <p className="text-sm font-medium">{item.fishName}</p>
+                        <div className="mt-0.5 flex flex-wrap gap-x-2 text-xs text-muted-foreground">
+                          {item.spotName && (
+                            <span className="flex items-center gap-0.5">
+                              <MapPin className="h-3 w-3" />
+                              {item.spotName}
+                            </span>
+                          )}
+                          {item.sizeCm && (
+                            <span className="flex items-center gap-0.5">
+                              <Ruler className="h-3 w-3" />
+                              {item.sizeCm}cm
+                            </span>
+                          )}
+                          {item.method && <span>{item.method}</span>}
+                        </div>
+                      </Link>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        )}
 
         {/* 過去の釣行（プライベート） */}
         <Card className="mt-4">
