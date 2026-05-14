@@ -13,6 +13,8 @@ export default function robots(): MetadataRoute.Robots {
           "/spots/submit",
           "/spots/compare",
           "/favorites",
+          "/login",
+          "/mypage",
           "/*/opengraph-image",
         ],
       },
