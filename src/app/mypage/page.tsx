@@ -183,6 +183,18 @@ function formatJoinDate(iso?: string): string {
 
 export default function MyPage() {
   const { data: session, status, update } = useSession();
+  // 認証直後の cookie 反映タイミングで一瞬 unauthenticated が返るケースがある。
+  // 1度だけ 1.2秒後に session を再取得する。これで「ログイン1回目失敗」誤表示を抑止。
+  const [authRetried, setAuthRetried] = useState(false);
+  useEffect(() => {
+    if (status === "unauthenticated" && !authRetried) {
+      setAuthRetried(true);
+      const t = setTimeout(() => {
+        update();
+      }, 1200);
+      return () => clearTimeout(t);
+    }
+  }, [status, authRetried, update]);
   const { favorites } = useFavorites();
   const [editing, setEditing] = useState(false);
   const [nickname, setNickname] = useState("");
@@ -277,7 +289,8 @@ export default function MyPage() {
     }
   };
 
-  if (status === "loading") {
+  // retry 中 (status==unauthenticated && !authRetried) もスピナー表示で session 確立を待つ
+  if (status === "loading" || (status === "unauthenticated" && !authRetried)) {
     return (
       <div className="flex min-h-[40vh] items-center justify-center">
         <div className="h-8 w-8 animate-spin rounded-full border-2 border-ocean-mid border-t-transparent" />
