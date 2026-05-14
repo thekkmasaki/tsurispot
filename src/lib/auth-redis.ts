@@ -14,7 +14,23 @@ export interface TsuriSpotUser {
   reportCount?: number;
   nicknameSetAt?: string;
   bestCatchId?: string;
+  styles?: string[];
 }
+
+/** 釣行スタイル タグ候補 (whitelist) */
+export const STYLE_TAGS = [
+  "磯",
+  "堤防",
+  "沖",
+  "船",
+  "管理釣場",
+  "ルアー",
+  "エサ",
+  "投げ",
+  "夜釣り",
+  "ファミリー",
+] as const;
+export type StyleTag = (typeof STYLE_TAGS)[number];
 
 const USER_PREFIX = "auth:user:";
 const PROVIDER_PREFIX = "auth:provider:";
@@ -118,7 +134,7 @@ export async function updateNickname(
   return true;
 }
 
-/** プロフィール一括更新（nickname / bio / headerImage / isPublic / bestCatchId を任意指定） */
+/** プロフィール一括更新（nickname / bio / headerImage / isPublic / bestCatchId / styles を任意指定） */
 export async function updateProfile(
   userId: string,
   patch: {
@@ -127,6 +143,7 @@ export async function updateProfile(
     headerImage?: string;
     isPublic?: boolean;
     bestCatchId?: string;
+    styles?: string[];
   },
 ): Promise<TsuriSpotUser | null> {
   const user = await getUserById(userId);
@@ -140,6 +157,7 @@ export async function updateProfile(
     ...(patch.headerImage !== undefined ? { headerImage: patch.headerImage } : {}),
     ...(patch.isPublic !== undefined ? { isPublic: patch.isPublic } : {}),
     ...(patch.bestCatchId !== undefined ? { bestCatchId: patch.bestCatchId } : {}),
+    ...(patch.styles !== undefined ? { styles: patch.styles } : {}),
   };
   await redis.set(`${USER_PREFIX}${userId}`, updated);
   return updated;
