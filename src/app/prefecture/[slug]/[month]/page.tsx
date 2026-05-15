@@ -27,6 +27,13 @@ import { SPOT_TYPE_LABELS } from "@/types";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 import { ShareButtons } from "@/components/ui/share-buttons";
+import {
+  REGIONAL_WATER_TEMP,
+  REGIONAL_SEASON_OVERVIEW,
+  MONTHLY_TIPS,
+  MONTHLY_CAUTIONS,
+  type RegionGroup,
+} from "@/lib/data/prefecture-month-enrichment";
 
 type PageProps = {
   params: Promise<{ slug: string; month: string }>;
@@ -80,36 +87,13 @@ export async function generateMetadata({
   };
 }
 
-// 水温目安（地域別・月別）
-const WATER_TEMP: Record<number, string> = {
-  1: "8〜12℃",
-  2: "7〜10℃",
-  3: "10〜14℃",
-  4: "13〜17℃",
-  5: "16〜20℃",
-  6: "19〜23℃",
-  7: "22〜27℃",
-  8: "25〜29℃",
-  9: "23〜27℃",
-  10: "19〜23℃",
-  11: "15〜19℃",
-  12: "11〜15℃",
-};
+function getWaterTemp(regionGroup: string, monthNum: number): string {
+  return REGIONAL_WATER_TEMP[regionGroup as RegionGroup]?.[monthNum] ?? "—";
+}
 
-const SEASON_OVERVIEW: Record<number, string> = {
-  1: "厳寒期で魚の活性は低め。根魚や底物狙いがメインとなる時期です。防寒対策を万全にして、日中の暖かい時間帯を狙いましょう。",
-  2: "年間最低水温期。メバルやカサゴなど冬に強い魚がターゲットです。数は少なくても型の良い魚が狙えます。",
-  3: "水温が徐々に上昇し、春の魚が動き出す時期。メバルやチヌの活性が高まり始めます。",
-  4: "乗っ込みシーズン開始。チヌやメバルの活性が高まり、回遊魚も徐々に接岸してきます。",
-  5: "多くの魚が活発に動き出す好シーズン。回遊魚も接岸し始め、釣りものが豊富になります。",
-  6: "梅雨時期で濁りが入りやすいですが、魚の活性は高い時期。アジやイワシの回遊が期待できます。",
-  7: "夏本番。回遊魚の回遊が活発化し、数釣りが楽しめます。朝夕のマズメ時が狙い目です。",
-  8: "水温ピーク。朝夕のマズメ時を狙うのが効果的。暑さ対策・水分補給を忘れずに。",
-  9: "秋の荒食いシーズン開始。多くの魚種が好調で、サイズアップも期待できます。",
-  10: "秋の釣りシーズン最盛期。大型の回遊魚も狙え、年間でも屈指の好シーズンです。",
-  11: "越冬前の荒食いで釣果が上がりやすい時期。秋のラストスパートを楽しみましょう。",
-  12: "水温低下で魚の活性が下がり始めます。根魚シーズンに突入し、カサゴやメバルが狙い目です。",
-};
+function getSeasonOverview(regionGroup: string, monthNum: number): string {
+  return REGIONAL_SEASON_OVERVIEW[regionGroup as RegionGroup]?.[monthNum] ?? "";
+}
 
 export default async function PrefectureMonthPage({ params }: PageProps) {
   const { slug, month: monthSlug } = await params;
@@ -241,7 +225,7 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
     },
     {
       question: `${pref.name}の${month.name}の水温と釣り方のコツは？`,
-      answer: `${month.name}の水温目安は${WATER_TEMP[month.num]}です。${SEASON_OVERVIEW[month.num]}${
+      answer: `${month.name}の${pref.name}（${pref.regionGroup}地方）の水温目安は${getWaterTemp(pref.regionGroup, month.num)}です。${getSeasonOverview(pref.regionGroup, month.num)}${
         methodBreakdown.length > 0
           ? `${pref.name}では${methodBreakdown
               .slice(0, 3)
@@ -249,6 +233,14 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
               .join("・")}が特に人気の釣り方です。`
           : ""
       }`,
+    },
+    {
+      question: `${pref.name}の${month.name}の釣行で気をつけるべきポイントは？`,
+      answer: MONTHLY_CAUTIONS[month.num] ?? "",
+    },
+    {
+      question: `${pref.name}の${month.name}に釣果を伸ばすコツは？`,
+      answer: MONTHLY_TIPS[month.num] ?? "",
     },
   ];
 
@@ -365,7 +357,7 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
           {pref.name}で{month.name}（{month.season}）に釣れる魚と
           おすすめ釣りスポットを紹介します。
-          {SEASON_OVERVIEW[month.num]}
+          {getSeasonOverview(pref.regionGroup, month.num)}
         </p>
         <div className="mt-4">
           <ShareButtons
@@ -407,7 +399,7 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
                 水温目安
               </h2>
               <p className="text-lg font-bold text-primary">
-                {WATER_TEMP[month.num]}
+                {getWaterTemp(pref.regionGroup, month.num)}
               </p>
               <p className="mt-1 text-xs text-muted-foreground">
                 {month.season}シーズン
@@ -525,6 +517,50 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      {/* 地域別シーズン概要 + 釣行のコツ + 注意点 */}
+      <section className="mb-8 sm:mb-10">
+        <h2 className="mb-4 text-base font-bold sm:text-lg">
+          {pref.name}（{pref.regionGroup}地方）の{month.name}の釣りシーズン解説
+        </h2>
+        <div className="space-y-4">
+          {/* 地域別シーズン概要 */}
+          <Card className="gap-0 py-0">
+            <CardContent className="p-4">
+              <h3 className="mb-2 text-sm font-bold sm:text-base">
+                {pref.regionGroup}地方の{month.name}の海況
+              </h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                {getSeasonOverview(pref.regionGroup, month.num)}
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* 月別の釣行のコツ */}
+          <Card className="gap-0 py-0">
+            <CardContent className="p-4">
+              <h3 className="mb-2 text-sm font-bold sm:text-base">
+                {month.name}に釣果を伸ばすコツ（時間帯・タックル）
+              </h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                {MONTHLY_TIPS[month.num] ?? ""}
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* 月別の注意点 */}
+          <Card className="gap-0 py-0">
+            <CardContent className="p-4">
+              <h3 className="mb-2 text-sm font-bold sm:text-base">
+                {month.name}の釣行で気をつけるポイント
+              </h3>
+              <p className="text-sm leading-relaxed text-muted-foreground">
+                {MONTHLY_CAUTIONS[month.num] ?? ""}
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
 
       {/* おすすめ装備 */}
       {recommendedProducts.length > 0 && (
