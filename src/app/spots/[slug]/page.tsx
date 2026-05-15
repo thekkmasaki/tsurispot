@@ -30,7 +30,9 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { trimDescription } from "@/lib/utils/seo";
-import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, type NearbySpot } from "@/lib/data/spots";
+import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, getSpotsByFish, getSpotsByMethod, type NearbySpot } from "@/lib/data/spots";
+import { RelatedSpotsByFish } from "@/components/spots/related-spots-by-fish";
+import { RelatedSpotsByMethod } from "@/components/spots/related-spots-by-method";
 // import { getNearbyShopsWithDistance } from "@/lib/data/shops"; // 有料プラン機能として温存中
 import { getPrefectureByName } from "@/lib/data/prefectures";
 import { SeasonCalendar } from "@/components/spots/season-calendar";
@@ -1504,6 +1506,26 @@ export default async function SpotDetailPage({ params }: PageProps) {
               )}
             </div>
           );
+        })()}
+
+        {/* 同じ魚が釣れる他のスポット (Phase A 内部リンク強化) */}
+        {(() => {
+          const fishSlugs = Array.from(new Set(spot.catchableFish.map((cf) => cf.fish.slug).filter(Boolean)));
+          const topFishName = spot.catchableFish[0]?.fish.name || "";
+          if (fishSlugs.length === 0 || !topFishName) return null;
+          const fishSpots = getSpotsByFish(fishSlugs, spot.slug, 6);
+          if (fishSpots.length === 0) return null;
+          return <RelatedSpotsByFish spots={fishSpots} fishName={topFishName} />;
+        })()}
+
+        {/* 同じ釣り方の他のスポット (Phase A 内部リンク強化) */}
+        {(() => {
+          const methods = Array.from(new Set(spot.catchableFish.map((cf) => cf.method).filter(Boolean)));
+          if (methods.length === 0) return null;
+          const methodLabel = methods[0];
+          const methodSpots = getSpotsByMethod(methods, spot.slug, 6);
+          if (methodSpots.length === 0) return null;
+          return <RelatedSpotsByMethod spots={methodSpots} methodLabel={methodLabel} />;
         })()}
 
         {/* 魚種リンク */}

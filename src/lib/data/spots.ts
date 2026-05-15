@@ -144,3 +144,22 @@ export function getSpotsByFish(fishSlugs: string[], excludeSlug: string, limit =
   matched.sort((a, b) => b.matchCount - a.matchCount || b.spot.rating - a.spot.rating);
   return matched.slice(0, limit).map((m) => m.spot);
 }
+
+export function getSpotsByMethod(methods: string[], excludeSlug: string, limit = 5): FishingSpot[] {
+  const methodSet = new Set(methods);
+  const matched: { spot: FishingSpot; matchCount: number }[] = [];
+  for (const s of fishingSpots) {
+    if (s.slug === excludeSlug) continue;
+    const seen = new Set<string>();
+    let count = 0;
+    for (const cf of s.catchableFish) {
+      if (cf.method && methodSet.has(cf.method) && !seen.has(cf.method)) {
+        seen.add(cf.method);
+        count++;
+      }
+    }
+    if (count > 0) matched.push({ spot: s, matchCount: count });
+  }
+  matched.sort((a, b) => b.matchCount - a.matchCount || b.spot.rating - a.spot.rating);
+  return matched.slice(0, limit).map((m) => m.spot);
+}
