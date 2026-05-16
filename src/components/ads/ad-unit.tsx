@@ -356,7 +356,7 @@ export function MobileStickyAd() {
         <AdUnit
           slot={SLOTS.display}
           format="horizontal"
-          style={{ display: "block", width: "100%", height: "50px" }}
+          style={{ display: "block", width: "100%", height: "90px" }}
           responsive
         />
       </div>
