@@ -404,6 +404,48 @@ export function generateSpotIntro(spot: FishingSpot): string {
     intro.push(`${easyFish.slice(0, 2).map(cf => cf.fish.name).join("・")}は初心者でも比較的釣りやすい。`);
   }
 
+  // ===== 追加情報セクション (+200字目安、SEO/UX強化) =====
+
+  // 1) アクセス情報 (50-80字)
+  const accessShort = (spot.accessInfo || "").trim();
+  if (accessShort.length > 0 && accessShort.length <= 120) {
+    intro.push(`アクセスは${accessShort}。`);
+  } else if (spot.region.areaName) {
+    intro.push(`${spot.region.prefecture}${spot.region.areaName}に位置し、近隣からのアクセスがよい。`);
+  }
+
+  // 2) 設備情報 (40-60字)
+  const facilityShort: string[] = [];
+  if (spot.hasParking) facilityShort.push("駐車場");
+  if (spot.hasToilet) facilityShort.push("トイレ");
+  if (spot.hasConvenienceStore) facilityShort.push("コンビニ近接");
+  if (spot.hasFishingShop) facilityShort.push("釣具店近く");
+  if (spot.hasRentalRod) facilityShort.push("レンタル竿");
+  if (facilityShort.length >= 2) {
+    intro.push(`${facilityShort.join("・")}など設備が整い、釣行前後の利便性も良好。`);
+  } else if (facilityShort.length === 1) {
+    intro.push(`${facilityShort[0]}を備え、初訪問でも安心。`);
+  } else {
+    intro.push(`設備は最小限のため、トイレや飲料の確保は釣行前に済ませておきたい。`);
+  }
+
+  // 3) 狙い方のコツ (50-80字) — top fishに対応するFISH_TIPSがあれば引用
+  if (spot.catchableFish.length > 0) {
+    const topFishName = spot.catchableFish[0].fish.name;
+    const tip = FISH_TIPS[topFishName];
+    if (tip) {
+      intro.push(`${topFishName}を狙うなら${tip}。`);
+    } else if (methods.length > 0) {
+      const methodCtx = METHOD_CONTEXT[methods[0]]?.[spot.spotType];
+      if (methodCtx) {
+        intro.push(`${methods[0]}の場合、${methodCtx}。`);
+      }
+    }
+  }
+
+  // 4) 注意点 (30-50字) — typeFeaturesから
+  intro.push(typeFeatures.caution + "。");
+
   return intro.join("");
 }
 
