@@ -11,6 +11,7 @@ import {
 import { NotificationSubscribeButton } from "@/components/notification-subscribe-button";
 import { CalendarHeatmap } from "@/components/mypage/calendar-heatmap";
 import { PersonalBestCard } from "@/components/mypage/personal-best-card";
+import { CatchReportCard } from "@/components/mypage/catch-report-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -1153,46 +1154,18 @@ export default function MyPage() {
             ) : (
               <div className="space-y-3">
                 {catchReports.map((report) => (
-                  <Link
+                  <CatchReportCard
                     key={report.id}
-                    href={`/spots/${report.spotSlug}`}
-                    className="block rounded-lg border p-3 transition-colors hover:bg-muted/50"
-                  >
-                    <div className="flex gap-3">
-                      {report.photoUrl && (
-                        <img
-                          src={report.photoUrl}
-                          alt=""
-                          className="h-16 w-16 rounded-md object-cover"
-                        />
-                      )}
-                      <div className="min-w-0 flex-1">
-                        <p className="font-medium">{report.fishName}</p>
-                        <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-muted-foreground">
-                          <span className="flex items-center gap-0.5">
-                            <MapPin className="h-3 w-3" />
-                            {report.spotName}
-                          </span>
-                          <span className="flex items-center gap-0.5">
-                            <Calendar className="h-3 w-3" />
-                            {report.date}
-                          </span>
-                          {report.sizeCm && (
-                            <span className="flex items-center gap-0.5">
-                              <Ruler className="h-3 w-3" />
-                              {report.sizeCm}cm
-                            </span>
-                          )}
-                          {report.method && <span>{report.method}</span>}
-                        </div>
-                        {report.comment && (
-                          <p className="mt-1 truncate text-xs text-muted-foreground">
-                            {report.comment}
-                          </p>
-                        )}
-                      </div>
-                    </div>
-                  </Link>
+                    report={report}
+                    onUpdate={(updated) =>
+                      setCatchReports((prev) =>
+                        prev.map((r) => (r.id === updated.id ? { ...r, ...updated } : r)),
+                      )
+                    }
+                    onDelete={(id) =>
+                      setCatchReports((prev) => prev.filter((r) => r.id !== id))
+                    }
+                  />
                 ))}
               </div>
             )}
