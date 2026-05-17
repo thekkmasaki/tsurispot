@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { dbGet, dbPut } from "@/lib/dynamodb";
+import { redis } from "@/lib/redis";
 import { checkNgWords } from "@/lib/moderation";
 import { auth } from "@/lib/auth";
 import { incrementReportCount } from "@/lib/auth-redis";
@@ -127,6 +128,16 @@ export async function POST(request: Request) {
         await incrementReportCount(tsuriId);
       } catch (err) {
         console.error("[釣果投稿] reportCount更新エラー:", err);
+      }
+      // Redis LIST に追加 (マイページ・統計・図鑑・ストリーク等の集計ソース)
+      try {
+        await redis.lpush(
+          `auth:user_reports:${tsuriId}`,
+          JSON.stringify(reportData),
+        );
+        await redis.ltrim(`auth:user_reports:${tsuriId}`, 0, 999);
+      } catch (err) {
+        console.error("[釣果投稿] Redis LIST push エラー:", err);
       }
     }
 

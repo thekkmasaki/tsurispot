@@ -35,10 +35,7 @@ const BLOCKED_UA_PATTERNS = [
 
 export function middleware(req: NextRequest) {
   const ua = req.headers.get("user-agent") || "";
-  if (!ua) {
-    return new NextResponse("Forbidden", { status: 403 });
-  }
-  if (BLOCKED_UA_PATTERNS.some((p) => p.test(ua))) {
+  if (ua && BLOCKED_UA_PATTERNS.some((p) => p.test(ua))) {
     return new NextResponse("Forbidden", { status: 403 });
   }
   return NextResponse.next();
@@ -46,6 +43,6 @@ export function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|images|api/health).*)",
+    "/((?!_next/static|_next/image|favicon.ico|images|api/health|api/og).*)",
   ],
 };
