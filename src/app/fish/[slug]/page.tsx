@@ -74,7 +74,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const fish = allFish.find((f) => f.slug === slug);
-  if (!fish) return { title: "魚種が見つかりません" };
+  if (!fish) permanentRedirect("/fish");
 
   const methodNames = fish.fishingMethods?.map(m => m.methodName).slice(0, 2).join("・") || "";
   const peakMonthsStr = fish.peakMonths.length > 0

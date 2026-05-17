@@ -122,7 +122,7 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const spot = getSpotBySlug(slug);
-  if (!spot) return { title: "スポットが見つかりません" };
+  if (!spot) permanentRedirect("/spots");
 
   const fishNames = spot.catchableFish.map((cf) => cf.fish.name).join("・");
   const topFishNames = spot.catchableFish.slice(0, 2).map((cf) => cf.fish.name).join("・");
