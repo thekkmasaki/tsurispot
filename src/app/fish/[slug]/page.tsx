@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import {
   Fish,
   Star,
@@ -117,7 +117,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function FishDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const fish = allFish.find((f) => f.slug === slug);
-  if (!fish) notFound();
+  if (!fish) permanentRedirect("/fish");
 
   const isSea = fish.category === "sea";
   const currentMonth = new Date().getMonth() + 1;

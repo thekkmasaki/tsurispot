@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import nextDynamic from "next/dynamic";
-import { notFound } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import {
   Star,
   MapPin,
@@ -215,7 +215,7 @@ async function getInitialCommunityPhotos(slug: string): Promise<{ url: string; u
 export default async function SpotDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const rawSpot = getSpotBySlug(slug);
-  if (!rawSpot) notFound();
+  if (!rawSpot) permanentRedirect("/spots");
   const spot = enrichSpotWithStructures(rawSpot);
   const initialCommunityPhotos = await getInitialCommunityPhotos(slug);
   // 特許パイプライン: 自動生成ダイアグラム優先、なければ手動データにフォールバック
