@@ -42,6 +42,7 @@
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "react-leaflet": "^5.0.0",
+    "recharts": "^3.8.1",
     "stripe": "^22.1.0",
     "tailwind-merge": "^3.5.0",
     "twitter-api-v2": "^1.29.0",
