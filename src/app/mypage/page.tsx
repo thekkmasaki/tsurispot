@@ -12,6 +12,7 @@ import { NotificationSubscribeButton } from "@/components/notification-subscribe
 import { CalendarHeatmap } from "@/components/mypage/calendar-heatmap";
 import { PersonalBestCard } from "@/components/mypage/personal-best-card";
 import { CatchReportCard } from "@/components/mypage/catch-report-card";
+import { OnThisDay } from "@/components/mypage/on-this-day";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
@@ -1120,6 +1121,9 @@ export default function MyPage() {
             )}
           </CardContent>
         </Card>
+
+        {/* 振り返り (On This Day / 同月過去 / 直近1週間) */}
+        <OnThisDay />
 
         {/* 釣果 */}
         <Card className="mt-4">
