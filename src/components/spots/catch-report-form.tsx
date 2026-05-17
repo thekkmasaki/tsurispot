@@ -1,6 +1,8 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
+import { useSession } from "next-auth/react";
 import { Send, CheckCircle, AlertCircle, Camera, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -54,10 +56,22 @@ interface CatchReportFormProps {
 }
 
 export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }: CatchReportFormProps) {
+  const { data: session, status: authStatus } = useSession();
   const fishInputRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [userName, setUserName] = useState("");
+  const [profileNickname, setProfileNickname] = useState<string>("");
+
+  // ログインユーザーのニックネームを auto-fill
+  useEffect(() => {
+    if (authStatus !== "authenticated") return;
+    const nickname = session?.user?.nickname || "";
+    if (!nickname) return;
+    setProfileNickname(nickname);
+    setUserName((prev) => (prev ? prev : nickname));
+  }, [authStatus, session?.user?.nickname]);
+
   const [fishName, setFishName] = useState("");
   const [date, setDate] = useState(() => {
     const d = new Date();
@@ -169,8 +183,8 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
 
       if (res.ok && data.ok) {
         setStatus("success");
-        // フォームリセット
-        setUserName("");
+        // フォームリセット (ログイン中はニックネームは保持)
+        setUserName(profileNickname || "");
         setFishName("");
         setComment("");
         setPhotoUrl("");
@@ -213,6 +227,16 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
               </p>
               <p className="mt-1 text-sm text-emerald-700">
                 ページを再読み込みすると表示されます。
+                {!session?.user && (
+                  <>
+                    <br />
+                    ※マイページに記録するには
+                    <Link href="/login" className="ml-1 underline">
+                      ログイン
+                    </Link>
+                    が必要です。
+                  </>
+                )}
               </p>
               <Button
                 onClick={() => {
