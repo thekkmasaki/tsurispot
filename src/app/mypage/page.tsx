@@ -1122,6 +1122,43 @@ export default function MyPage() {
           </CardContent>
         </Card>
 
+        {/* ダッシュボード4ボタン (統計 / 図鑑 / マップ / 記録) */}
+        <Card className="mt-4">
+          <CardContent className="p-4">
+            <h2 className="mb-3 text-sm font-bold sm:text-base">釣り日記</h2>
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+              <Link
+                href="/mypage/stats"
+                className="flex flex-col items-center gap-1 rounded-lg border bg-card p-3 transition-all hover:border-primary/50 hover:shadow-md"
+              >
+                <span className="text-2xl">📊</span>
+                <span className="text-xs font-medium">統計</span>
+              </Link>
+              <Link
+                href="/mypage/fishdex"
+                className="flex flex-col items-center gap-1 rounded-lg border bg-card p-3 transition-all hover:border-primary/50 hover:shadow-md"
+              >
+                <span className="text-2xl">🐟</span>
+                <span className="text-xs font-medium">魚種図鑑</span>
+              </Link>
+              <Link
+                href="/mypage/prefecture-map"
+                className="flex flex-col items-center gap-1 rounded-lg border bg-card p-3 transition-all hover:border-primary/50 hover:shadow-md"
+              >
+                <span className="text-2xl">🗾</span>
+                <span className="text-xs font-medium">都道府県</span>
+              </Link>
+              <Link
+                href="/mypage/records"
+                className="flex flex-col items-center gap-1 rounded-lg border bg-card p-3 transition-all hover:border-primary/50 hover:shadow-md"
+              >
+                <span className="text-2xl">🏆</span>
+                <span className="text-xs font-medium">個人記録</span>
+              </Link>
+            </div>
+          </CardContent>
+        </Card>
+
         {/* 振り返り (On This Day / 同月過去 / 直近1週間) */}
         <OnThisDay />
 
