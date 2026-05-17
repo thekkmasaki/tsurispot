@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { notFound } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import {
   MapPin,
   Fish,
@@ -341,7 +341,7 @@ const seasonColors = {
 export default async function PrefecturePage({ params }: PageProps) {
   const { slug } = await params;
   const pref = getPrefectureBySlug(slug);
-  if (!pref) notFound();
+  if (!pref) permanentRedirect("/prefecture");
 
   const spots = getSpotsForPrefecture(pref.name);
   const prefRegions = getRegionsForPrefecture(pref.name);
