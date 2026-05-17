@@ -276,7 +276,7 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const pref = getPrefectureBySlug(slug);
-  if (!pref) return { title: "都道府県が見つかりません" };
+  if (!pref) permanentRedirect("/prefecture");
 
   const spots = getSpotsForPrefecture(pref.name);
   const fishList = getCatchableFishForPrefecture(pref.name);

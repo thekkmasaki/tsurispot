@@ -74,19 +74,21 @@ async function getSitemapUsers(): Promise<
 // 単一サイトマップ（generateSitemapsを削除 → Google が確実に取得できる1ファイル構成）
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sitemapUsers = await getSitemapUsers();
-  // 都道府県×魚種の組み合わせを事前計算
+  // 都道府県×魚種の組み合わせを事前計算 (品質フィルタ: その都道府県でその魚が3スポット以上)
   const prefFishCombos: { prefSlug: string; fishSlug: string }[] = [];
-  const seen = new Set<string>();
+  const prefFishCountMap = new Map<string, number>();
   for (const spot of fishingSpots) {
     const pref = prefectures.find(p => p.name === spot.region.prefecture);
     if (!pref) continue;
     for (const cf of spot.catchableFish) {
       const key = `${pref.slug}|${cf.fish.slug}`;
-      if (!seen.has(key)) {
-        seen.add(key);
-        prefFishCombos.push({ prefSlug: pref.slug, fishSlug: cf.fish.slug });
-      }
+      prefFishCountMap.set(key, (prefFishCountMap.get(key) || 0) + 1);
     }
+  }
+  for (const [key, count] of prefFishCountMap) {
+    if (count < 3) continue;
+    const [prefSlug, fishSlug] = key.split("|");
+    prefFishCombos.push({ prefSlug, fishSlug });
   }
 
   const MONTHS_SLUGS = ["january","february","march","april","may","june","july","august","september","october","november","december"];
@@ -443,7 +445,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.5,
     })),
 
-    // ===== 都道府県×月×魚種ページ（品質フィルタ厳格化: その都道府県×月で釣れる魚が 3 種以上、かつその魚の該当スポット 2 件以上） =====
+    // ===== 都道府県×月×魚種ページ（品質フィルタ厳格化: その都道府県×月で釣れる魚が 5 種以上、かつその魚の該当スポット 5 件以上） =====
     ...(() => {
       const prefMonthFishCombos: { prefSlug: string; monthSlug: string; monthNum: number; fishSlug: string }[] = [];
       for (const pref of prefectures) {
@@ -457,9 +459,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
               }
             }
           }
-          if (fishMap.size < 3) continue;
+          if (fishMap.size < 5) continue;
           for (const [fSlug, count] of fishMap) {
-            if (count >= 2) {
+            if (count >= 5) {
               prefMonthFishCombos.push({ prefSlug: pref.slug, monthSlug: month.slug, monthNum: month.num, fishSlug: fSlug });
             }
           }
