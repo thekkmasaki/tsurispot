@@ -3,6 +3,7 @@ import { dbGet, dbPut } from "@/lib/dynamodb";
 import { redis } from "@/lib/redis";
 import { auth } from "@/lib/auth";
 import { checkNgWords } from "@/lib/moderation";
+import { decrementReportCount } from "@/lib/auth-redis";
 
 interface CatchReport {
   id: string;
@@ -150,6 +151,11 @@ export async function DELETE(
   const filtered = existing.filter((r) => r.id !== id);
   await dbPut(`SPOT#${spotSlug}`, "UGC_REPORTS", filtered, TTL_SECONDS);
   await syncRedisItem(tsuriId, id, null);
+  try {
+    await decrementReportCount(tsuriId);
+  } catch (err) {
+    console.error("[釣果削除] reportCount デクリメントエラー:", err);
+  }
 
   return NextResponse.json({ ok: true });
 }

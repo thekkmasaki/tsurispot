@@ -19,6 +19,8 @@ export default function robots(): MetadataRoute.Robots {
         ],
       },
       { userAgent: "Googlebot", allow: "/" },
+      { userAgent: "Mediapartners-Google", allow: "/" },
+      { userAgent: "AdsBot-Google", allow: "/" },
       { userAgent: "Bingbot", allow: "/" },
       { userAgent: "Yandex", allow: "/" },
       { userAgent: "Baiduspider", allow: "/" },
