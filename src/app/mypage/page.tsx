@@ -1128,9 +1128,17 @@ export default function MyPage() {
                 <Fish className="h-5 w-5 text-ocean-mid" />
                 <span className="font-medium">投稿した釣果</span>
               </div>
-              <span className="text-sm text-muted-foreground">
-                {reportsLoading ? "..." : `${catchReports.length}件`}
-              </span>
+              <div className="flex items-center gap-2">
+                <Link
+                  href="/mypage/stats"
+                  className="inline-flex items-center gap-1 rounded-full border border-primary/30 bg-primary/5 px-2.5 py-1 text-xs font-medium text-primary hover:bg-primary/10"
+                >
+                  📊 統計
+                </Link>
+                <span className="text-sm text-muted-foreground">
+                  {reportsLoading ? "..." : `${catchReports.length}件`}
+                </span>
+              </div>
             </div>
 
             {reportsLoading ? (
