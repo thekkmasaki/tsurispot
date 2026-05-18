@@ -445,35 +445,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.5,
     })),
 
-    // ===== 都道府県×月×魚種ページ（品質フィルタ厳格化: その都道府県×月で釣れる魚が 7 種以上、かつその魚の該当スポット 10 件以上） =====
-    ...(() => {
-      const prefMonthFishCombos: { prefSlug: string; monthSlug: string; monthNum: number; fishSlug: string }[] = [];
-      for (const pref of prefectures) {
-        const prefSpots = fishingSpots.filter(s => s.region.prefecture === pref.name);
-        for (const month of MONTHS) {
-          const fishMap = new Map<string, number>();
-          for (const spot of prefSpots) {
-            for (const cf of spot.catchableFish) {
-              if (isMonthInRange(month.num, cf.monthStart, cf.monthEnd)) {
-                fishMap.set(cf.fish.slug, (fishMap.get(cf.fish.slug) || 0) + 1);
-              }
-            }
-          }
-          if (fishMap.size < 7) continue;
-          for (const [fSlug, count] of fishMap) {
-            if (count >= 10) {
-              prefMonthFishCombos.push({ prefSlug: pref.slug, monthSlug: month.slug, monthNum: month.num, fishSlug: fSlug });
-            }
-          }
-        }
-      }
-      return prefMonthFishCombos;
-    })().map(c => ({
-      url: `${baseUrl}/prefecture/${c.prefSlug}/${c.monthSlug}/${c.fishSlug}`,
-      lastModified: monthDate(c.monthNum),
-      changeFrequency: "monthly" as const,
-      priority: 0.5,
-    })),
+    // 都道府県×月×魚種マトリクスページは sitemap から除外。
+    // ページは ISR で生きてるが、Google「クロール済み未登録」の主因のため sitemap 非掲載で crawl budget 集中。
 
     // ===== 釣り場タイプページ =====
     { url: `${baseUrl}/spot-type`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.8 },

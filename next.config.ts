@@ -144,19 +144,19 @@ const nextConfig: NextConfig = {
     {
       source: "/spots/:slug",
       headers: [
-        { key: "Cache-Control", value: "public, s-maxage=604800, stale-while-revalidate=86400" },
+        { key: "Cache-Control", value: "public, s-maxage=3600, stale-while-revalidate=86400" },
       ],
     },
     {
       source: "/fish/:slug",
       headers: [
-        { key: "Cache-Control", value: "public, s-maxage=604800, stale-while-revalidate=86400" },
+        { key: "Cache-Control", value: "public, s-maxage=3600, stale-while-revalidate=86400" },
       ],
     },
     {
       source: "/prefecture/:slug",
       headers: [
-        { key: "Cache-Control", value: "public, s-maxage=604800, stale-while-revalidate=86400" },
+        { key: "Cache-Control", value: "public, s-maxage=3600, stale-while-revalidate=86400" },
       ],
     },
     {
