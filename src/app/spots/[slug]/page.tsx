@@ -61,7 +61,7 @@ import { SpotDetailTabs } from "@/components/spots/spot-detail-tabs";
 import { ParkingGuideCard, getParkingBadgeText, getParkingAmenityDescription, getParkingFaqAnswer } from "@/components/spots/parking-guide-card";
 import { FamilyInfoCard } from "@/components/spots/family-info";
 import { PackingChecklist } from "@/components/spots/packing-checklist";
-import { getCatchReportsBySpot } from "@/lib/data/catch-reports";
+import { getCatchReportsBySpotAsync } from "@/lib/data/catch-reports";
 import { CatchReportList } from "@/components/spots/catch-report-list";
 import { CatchReportForm } from "@/components/spots/catch-report-form";
 import { NearbyAccommodation, RakutenTravelCta } from "@/components/spots/nearby-accommodation";
@@ -187,7 +187,7 @@ export async function generateMetadata({
 
 export const dynamic = "force-static";
 export const dynamicParams = true;
-export const revalidate = 604800;
+export const revalidate = 3600;
 export const maxDuration = 60;
 
 export function generateStaticParams() {
@@ -916,7 +916,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           {spot.spotType === "port" && <PortMannerSection />}
           <section>
             <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><MessageSquare className="size-5" />みんなの釣果報告</h3>
-            <CatchReportList spotSlug={slug} initialReports={getCatchReportsBySpot(slug)} />
+            <CatchReportList spotSlug={slug} initialReports={await getCatchReportsBySpotAsync(slug)} />
             <CatchReportForm spotSlug={slug} spotName={spot.name} catchableFishNames={[...new Set(spot.catchableFish.map((cf) => cf.fish.name))]} />
             {/* エリアの釣果傾向（釣果報告の補完情報） */}
             {(() => {

@@ -71,10 +71,45 @@ export const catchReports: CatchReport[] = [
 ];
 
 /**
- * 指定スポットの承認済み釣果を取得
+ * 指定スポットの承認済み釣果を取得 (静的データのみ)
  */
 export function getCatchReportsBySpot(spotSlug: string): CatchReport[] {
   return catchReports
     .filter((r) => r.spotSlug === spotSlug && r.approved)
     .sort((a, b) => b.date.localeCompare(a.date));
+}
+
+/**
+ * 指定スポットの承認済み釣果を取得 (静的データ + DynamoDB UGC を merge)
+ * Server Component専用。client から呼ぶと dbGet が動かない。
+ */
+export async function getCatchReportsBySpotAsync(
+  spotSlug: string,
+): Promise<CatchReport[]> {
+  const { dbGet, dbBatchGet } = await import("@/lib/dynamodb");
+  const hardcoded = getCatchReportsBySpot(spotSlug);
+
+  let ugcReports: CatchReport[] = [];
+  try {
+    const raw = await dbGet<CatchReport[]>(`SPOT#${spotSlug}`, "UGC_REPORTS");
+    if (Array.isArray(raw) && raw.length > 0) {
+      const parsed = raw.slice(0, 50).filter((r) => r.approved);
+      if (parsed.length > 0) {
+        const flagKeys = parsed.map((r) => ({ pk: `REPORT#${r.id}`, sk: "FLAGGED" }));
+        const flags = await dbBatchGet(flagKeys);
+        ugcReports = parsed.filter((_, i) => flags[i] === null);
+      }
+    }
+  } catch (err) {
+    console.error("[catch-reports] DynamoDB fetch error:", err);
+  }
+
+  const idSet = new Set(hardcoded.map((r) => r.id));
+  const merged = [...hardcoded];
+  for (const r of ugcReports) {
+    if (idSet.has(r.id)) continue;
+    idSet.add(r.id);
+    merged.push(r);
+  }
+  return merged.sort((a, b) => b.date.localeCompare(a.date));
 }
