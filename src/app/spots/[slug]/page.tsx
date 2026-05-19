@@ -54,6 +54,7 @@ import { SpotBouzuCard } from "@/components/spots/spot-bouzu-card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
 import { InArticleAd, DisplayAd, LazyAd, StickySidebarAd, NativeAdBreak } from "@/components/ads/ad-unit";
+import { SpotAccommodations } from "@/components/spots/spot-accommodations";
 import { FishLikeButton } from "@/components/spots/fish-like-button";
 import { FishingReportSummary } from "@/components/spots/fishing-report-summary";
 import { SpotAffiliateRecommend } from "@/components/spots/spot-affiliate-recommend";
@@ -1699,6 +1700,13 @@ export default async function SpotDetailPage({ params }: PageProps) {
       {/* モバイル広告C: 関連コラム後 */}
       <ContentDivider variant="dots" className="lg:hidden" />
       <div className="lg:hidden my-6"><NativeAdBreak /></div>
+
+      {/* 近くの釣り宿 (Phase 2: 旅行 affiliate 取り込み。 affiliate link 未設定なら自動 skip) */}
+      <SpotAccommodations
+        spotPrefecture={spot.region.prefecture}
+        spotLat={spot.latitude}
+        spotLng={spot.longitude}
+      />
 
       {/* まとめ（GEO最適化：AI引用しやすい要約 — スポット固有サマリー） */}
       {(() => {

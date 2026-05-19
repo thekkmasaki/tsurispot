@@ -1808,6 +1808,25 @@ export default async function PrefecturePage({ params }: PageProps) {
         </div>
       </section>
 
+      {/* Phase 2: [県] の釣り宿一覧 CTA */}
+      <section className="mb-8 rounded-2xl border-2 border-orange-200 bg-gradient-to-r from-orange-50 to-amber-50 p-5 sm:p-6">
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2 className="text-base font-bold text-orange-900 sm:text-lg">{pref.name}の釣り宿を探す</h2>
+            <p className="mt-1 text-sm text-orange-700">
+              早朝出船・釣果料理・タックルレンタル対応の {pref.name} の宿を厳選掲載。
+            </p>
+          </div>
+          <Link
+            href={`/accommodations/${pref.slug}`}
+            className="inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-orange-600 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-orange-700 min-h-[44px]"
+          >
+            釣り宿を見る
+            <ArrowRight className="size-4" />
+          </Link>
+        </div>
+      </section>
+
       {/* 出典・情報源 */}
       <section className="mb-8">
         <h2 className="mb-3 text-sm font-bold text-muted-foreground">
