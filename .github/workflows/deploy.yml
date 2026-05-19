@@ -90,6 +90,7 @@ jobs:
       # Dockerはpre-built成果物をCOPYするだけ（npm ci/next build不要）
       - name: Build and push Docker image
         if: github.ref == 'refs/heads/master'
+        id: docker-build
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -120,8 +121,23 @@ jobs:
       - name: Deploy to App Runner
         if: github.ref == 'refs/heads/master'
         run: |
-          aws apprunner start-deployment \
-            --service-arn ${{ env.APP_RUNNER_SERVICE_ARN }}
+          # docker/build-push-action が push した新 image の digest を直接取得（race-condition なし）
+          DIGEST="${{ steps.docker-build.outputs.digest }}"
+          echo "New image digest: $DIGEST"
+
+          # App Runner の現状 SourceConfiguration を保持しつつ ImageIdentifier だけ差し替え。
+          # start-deployment だけでは古い digest を pull し続けるため、必ず update-service で
+          # 新 digest を ImageIdentifier に書き込む。
+          NEW_IMAGE="${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}@${DIGEST}"
+          aws apprunner describe-service \
+            --service-arn ${{ env.APP_RUNNER_SERVICE_ARN }} \
+            --query "Service.SourceConfiguration" > /tmp/source-config.json
+          jq --arg img "$NEW_IMAGE" '.ImageRepository.ImageIdentifier = $img' /tmp/source-config.json > /tmp/source-config-new.json
+
+          echo "Calling update-service with new image: $NEW_IMAGE"
+          aws apprunner update-service \
+            --service-arn ${{ env.APP_RUNNER_SERVICE_ARN }} \
+            --source-configuration file:///tmp/source-config-new.json
 
       - name: Wait for deployment
         if: github.ref == 'refs/heads/master'
