@@ -334,8 +334,8 @@ export function MobileStickyAd() {
 
   useEffect(() => {
     if (!ADSENSE_ID) return;
-    // 3秒後に表示（初回表示を邪魔しない）
-    const timer = setTimeout(() => setVisible(true), 3000);
+    // 1秒後に表示（viewability を稼ぐため遅延を短縮、 AdSense ポリシー的に即時もOKだが UX 重視で 1s）
+    const timer = setTimeout(() => setVisible(true), 1000);
     return () => clearTimeout(timer);
   }, []);
 

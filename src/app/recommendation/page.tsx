@@ -3,7 +3,8 @@ import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 import { RecommendationClient } from "./recommendation-client";
 
-export const dynamic = "force-dynamic";
+// ISR: 1時間ごとに再検証 (Cloudflare cache 効率と App Runner 負荷低減のため)
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "おすすめ釣りスポット診断｜あなたにぴったりの釣り場を提案",
