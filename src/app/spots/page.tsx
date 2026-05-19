@@ -6,8 +6,8 @@ import { SpotListClient } from "@/components/spots/spot-list-client";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { InArticleAd } from "@/components/ads/ad-unit";
 
-// 一時的に force-dynamic で build時 SSG をスキップ (PR #34 以降の空HTML問題対策)
-export const dynamic = "force-dynamic";
+// ISR: 1時間ごとに再検証 (Cloudflare cache 効率と App Runner 負荷低減のため SSG/ISR を採用)
+export const revalidate = 3600;
 
 const sc = fishingSpots.length.toLocaleString();
 
