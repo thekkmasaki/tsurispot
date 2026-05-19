@@ -444,7 +444,7 @@ export function BlogListClient({ posts }: { posts: BlogPostSummary[] }) {
         {filteredPosts.slice(0, displayCount).map((post, index) => (
           <Fragment key={post.id}>
             <BlogCard post={post} />
-            {(index === 5 || index === 11) && (
+            {(index === 3 || index === 7 || index === 11 || index === 15) && (
               <div className="col-span-full">
                 <InFeedAd />
               </div>

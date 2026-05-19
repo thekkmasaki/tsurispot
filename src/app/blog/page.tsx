@@ -6,8 +6,8 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import Link from "next/link";
 import { InArticleAd, NativeAdBreak } from "@/components/ads/ad-unit";
 
-// 一時的に force-dynamic (PR #34 以降の空HTML問題対策)
-export const dynamic = "force-dynamic";
+// ISR: 1時間ごとに再検証 (microCMS の新着記事を取り込みつつ Cloudflare cache 効率を維持)
+export const revalidate = 3600;
 
 // microCMS API呼び出しのタイムアウト対策
 export const maxDuration = 60;

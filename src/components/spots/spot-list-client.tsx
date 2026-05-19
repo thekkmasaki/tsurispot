@@ -592,7 +592,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
                   spot={spot}
                   distance={sortByDistance && distanceMap ? distanceMap.get(spot.id) : undefined}
                 />
-                {(index === 5 || index === 11) && (
+                {(index === 3 || index === 7 || index === 11 || index === 15) && (
                   <div className="col-span-full">
                     <InFeedAd />
                   </div>

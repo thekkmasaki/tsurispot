@@ -53,7 +53,7 @@ import { SpotImage } from "@/components/ui/spot-image";
 import { SpotBouzuCard } from "@/components/spots/spot-bouzu-card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
-import { InArticleAd, DisplayAd, LazyAd, StickySidebarAd, NativeAdBreak } from "@/components/ads/ad-unit";
+import { InArticleAd, DisplayAd, LazyAd, StickySidebarAd, NativeAdBreak, HeaderBannerAd } from "@/components/ads/ad-unit";
 import { SpotAccommodations } from "@/components/spots/spot-accommodations";
 import { FishLikeButton } from "@/components/spots/fish-like-button";
 import { FishingReportSummary } from "@/components/spots/fishing-report-summary";
@@ -517,6 +517,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
           { label: spot.name },
         ]}
       />
+
+      {/* PC ヘッダー下リーダーボード広告 (above-fold, lg:1024px+ のみ表示。 mobile は MobileStickyAd で対応するためスキップ) */}
+      <HeaderBannerAd />
 
       {/* Back link */}
       <Link
