@@ -9,6 +9,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { LoginPromoBanner } from "@/components/home/login-promo-banner";
+import { PushSubscribe } from "@/components/notifications/push-subscribe";
 import {
   MapPin,
   Fish,
@@ -406,6 +407,21 @@ export default async function Home() {
 
       {/* ログイン誘導バナー（未ログイン時のみ表示） */}
       <LoginPromoBanner />
+
+      {/* Phase 4: 釣果通知 (Web Push) CTA — リピート率改善 */}
+      <section className="mx-auto w-full max-w-5xl px-4 py-4">
+        <div className="rounded-2xl border-2 border-sky-200 bg-gradient-to-r from-sky-50 to-cyan-50 p-4 sm:p-5">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-sm font-bold text-sky-900 sm:text-base">釣果情報をブラウザで受け取る</h2>
+              <p className="mt-1 text-xs text-sky-700 sm:text-sm">
+                週次の釣果週報・新着スポットをプッシュ通知でお届け。 いつでも解除できます。
+              </p>
+            </div>
+            <PushSubscribe />
+          </div>
+        </div>
+      </section>
 
       {/* クイックアクション */}
       <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
