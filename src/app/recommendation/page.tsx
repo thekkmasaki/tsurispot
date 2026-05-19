@@ -3,8 +3,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 import { RecommendationClient } from "./recommendation-client";
 
-export const dynamic = "force-static";
-export const revalidate = 86400;
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "おすすめ釣りスポット診断｜あなたにぴったりの釣り場を提案",
