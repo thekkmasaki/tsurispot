@@ -16,10 +16,8 @@ type PageProps = {
   params: Promise<{ slug: string; fishSlug: string }>;
 };
 
-// 全1,370件 SSG はビルドサイズ肥大化の原因。スポット数が多い上位300件のみSSG、残りはISR。
-export const dynamic = "force-static";
-export const dynamicParams = true;
-export const revalidate = 604800;
+// 一時的に force-dynamic (build時 SSG で空HTML 焼き付き問題対策)
+export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
 export function generateStaticParams() {

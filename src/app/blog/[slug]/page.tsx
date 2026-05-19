@@ -26,14 +26,11 @@ import {
 } from "lucide-react";
 import { InArticleAd, StickySidebarAd } from "@/components/ads/ad-unit";
 
-// ISR: 1時間ごとに再検証
-export const revalidate = 86400;
+// 一時的に force-dynamic (build時SSGで空HTML焼き付き問題対策)
+export const dynamic = "force-dynamic";
 
 // microCMS API呼び出しのタイムアウト対策
 export const maxDuration = 60;
-
-// microCMS記事はビルド時に存在しないのでオンデマンドSSR
-export const dynamicParams = true;
 
 /** カテゴリ別のデフォルトサムネイル画像パス */
 const CATEGORY_DEFAULT_IMAGE: Record<BlogPost["category"], string> = {
