@@ -24,7 +24,7 @@ import {
   Fish,
   Search,
 } from "lucide-react";
-import { InArticleAd, StickySidebarAd } from "@/components/ads/ad-unit";
+import { InArticleAd, StickySidebarAd, MultiplexAd } from "@/components/ads/ad-unit";
 
 // 一時的に force-dynamic (build時SSGで空HTML焼き付き問題対策)
 export const dynamic = "force-dynamic";
@@ -297,6 +297,9 @@ export default async function BlogPostPage({
       })()}
 
       <InArticleAd className="my-8" />
+
+      {/* Phase 5: in-content Native Multiplex (本文末尾、 関連魚種の前。 CTR +15% 想定) */}
+      <MultiplexAd className="my-6" />
 
       {/* 関連魚種リンク */}
       {post.relatedFish && post.relatedFish.length > 0 && (() => {
