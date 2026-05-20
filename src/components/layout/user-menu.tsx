@@ -2,6 +2,7 @@
 
 import { useSession, signOut } from "next-auth/react";
 import Link from "next/link";
+import Image from "next/image";
 import { useState, useRef, useEffect } from "react";
 import { User, LogOut, Heart, ChevronDown } from "lucide-react";
 import { getTitle } from "@/lib/titles";
@@ -59,11 +60,14 @@ export function UserMenu() {
         className="relative flex items-center gap-1.5 rounded-lg px-1.5 py-1 transition-colors hover:bg-sand-light"
       >
         {user.avatarUrl ? (
-          <img
+          <Image
             src={user.avatarUrl}
             alt=""
+            width={28}
+            height={28}
             className="h-7 w-7 rounded-full object-cover"
             referrerPolicy="no-referrer"
+            unoptimized
           />
         ) : (
           <div className="flex h-7 w-7 items-center justify-center rounded-full bg-ocean-mid text-xs font-bold text-white">

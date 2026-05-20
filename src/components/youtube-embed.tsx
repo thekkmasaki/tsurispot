@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect, useCallback } from "react";
+import Image from "next/image";
 import { Play } from "lucide-react";
 
 interface YouTubeEmbedProps {
@@ -53,12 +54,14 @@ function YouTubeEmbed({ videoId, title }: YouTubeEmbedProps) {
             className="group absolute inset-0 flex cursor-pointer items-center justify-center bg-black"
             aria-label={`${title || "動画"}を再生`}
           >
-            {/* サムネイル画像 */}
-            <img
+            {/* サムネイル画像 (next/image で WebP 変換 + lazy 自動) */}
+            <Image
               src={thumbnailUrl}
               alt={title || "YouTube動画サムネイル"}
-              className="absolute inset-0 size-full object-cover transition-opacity group-hover:opacity-80"
-              loading="lazy"
+              fill
+              sizes="(max-width: 768px) 100vw, 768px"
+              className="object-cover transition-opacity group-hover:opacity-80"
+              unoptimized
             />
             {/* 再生ボタン */}
             <div className="relative z-10 flex size-16 items-center justify-center rounded-xl bg-red-600 shadow-lg transition-transform group-hover:scale-110 sm:size-18">

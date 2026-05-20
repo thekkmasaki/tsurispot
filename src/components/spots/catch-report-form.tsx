@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
+import NextImage from "next/image";
 import { useSession } from "next-auth/react";
 import { Send, CheckCircle, AlertCircle, Camera, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -360,10 +361,13 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
             </label>
             {photoPreview ? (
               <div className="relative inline-block">
-                <img
+                <NextImage
                   src={photoPreview}
                   alt="プレビュー"
+                  width={96}
+                  height={96}
                   className="h-24 w-24 rounded-lg border object-cover"
+                  unoptimized
                 />
                 <button
                   type="button"

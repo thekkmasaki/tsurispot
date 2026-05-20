@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import {
   ChevronLeft,
@@ -306,11 +307,12 @@ export default async function MethodMonthPage({ params }: Props) {
                             <div className="flex items-start gap-3">
                               <div className="w-12 h-12 rounded-lg bg-orange-50 dark:bg-orange-950/30 flex items-center justify-center shrink-0 overflow-hidden">
                                 {f.imageUrl && f.imageUrl !== "/images/fish/default.jpg" ? (
-                                  <img
+                                  <Image
                                     src={f.imageUrl}
                                     alt={f.name}
+                                    width={48}
+                                    height={48}
                                     className="w-full h-full object-cover rounded-lg"
-                                    loading="lazy"
                                   />
                                 ) : (
                                   <Fish className="size-6 text-orange-400" />
@@ -355,11 +357,12 @@ export default async function MethodMonthPage({ params }: Props) {
                             <div className="flex items-start gap-3">
                               <div className="w-12 h-12 rounded-lg bg-gray-50 dark:bg-gray-800 flex items-center justify-center shrink-0 overflow-hidden">
                                 {f.imageUrl && f.imageUrl !== "/images/fish/default.jpg" ? (
-                                  <img
+                                  <Image
                                     src={f.imageUrl}
                                     alt={f.name}
+                                    width={48}
+                                    height={48}
                                     className="w-full h-full object-cover rounded-lg"
-                                    loading="lazy"
                                   />
                                 ) : (
                                   <Fish className="size-6 text-gray-400" />
