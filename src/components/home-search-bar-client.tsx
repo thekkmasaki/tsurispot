@@ -184,7 +184,7 @@ export function HomeSearchBarClient() {
   return (
     <div ref={containerRef} className="relative w-full max-w-lg mb-5 sm:mb-6">
       {/* 検索入力 */}
-      <div className="flex items-center gap-3 rounded-xl bg-white/95 px-4 py-3.5 shadow-lg backdrop-blur-sm transition-shadow hover:shadow-xl sm:px-5 sm:py-4">
+      <div className="flex items-center gap-3 rounded-xl bg-white/95 px-4 py-3.5 shadow-lg backdrop-blur-sm transition-shadow hover:shadow-xl focus-within:ring-2 focus-within:ring-primary focus-within:ring-offset-2 sm:px-5 sm:py-4">
         <Search className="size-5 shrink-0 text-muted-foreground" />
         <input
           ref={inputRef}

@@ -222,8 +222,8 @@ export function SearchOverlayClient() {
 
           <div className="fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:absolute sm:inset-x-auto sm:right-0 sm:top-full sm:mt-2 sm:w-[28rem] sm:px-0 sm:pt-0">
             <div className="rounded-xl border border-border bg-white shadow-lg">
-              {/* Search input */}
-              <div className="flex items-center gap-2 border-b px-4 py-3">
+              {/* Search input (focus-within で wrapper に ring 表示、 a11y 強化) */}
+              <div className="flex items-center gap-2 border-b px-4 py-3 focus-within:bg-primary/5">
                 <Search className="size-5 shrink-0 text-muted-foreground" />
                 <input
                   ref={inputRef}
