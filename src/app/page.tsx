@@ -10,6 +10,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { LoginPromoBanner } from "@/components/home/login-promo-banner";
 import { PushSubscribe } from "@/components/notifications/push-subscribe";
+import { JoinCTA } from "@/components/home/join-cta";
+import { CommunityStats } from "@/components/home/community-stats";
 import {
   MapPin,
   Fish,
@@ -405,7 +407,13 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* ログイン誘導バナー（未ログイン時のみ表示） */}
+      {/* Phase 6: Hero 直下 Green Join CTA (community pattern、 登録率改善) */}
+      <JoinCTA />
+
+      {/* Phase 6: Active community showcase (実数で community 形成中を訴求) */}
+      <CommunityStats />
+
+      {/* ログイン誘導バナー（未ログイン時のみ表示、 features 詳細訴求） */}
       <LoginPromoBanner />
 
       {/* Phase 4: 釣果通知 (Web Push) CTA — リピート率改善 */}
