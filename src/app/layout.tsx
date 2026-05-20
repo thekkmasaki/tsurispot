@@ -241,10 +241,17 @@ export default function RootLayout({
           />
         )}
         <Providers>
+          {/* Phase 6 audit: skip link (a11y、 keyboard 利用者がナビをスキップしてメインへ) */}
+          <a
+            href="#main-content"
+            className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-primary-foreground focus:shadow-lg focus:ring-2 focus:ring-primary"
+          >
+            メインコンテンツへスキップ
+          </a>
           <PWARegister />
           <SideRailAds />
           <Header />
-          <main className="min-h-screen pb-24 md:pb-0">{children}</main>
+          <main id="main-content" className="min-h-screen pb-24 md:pb-0">{children}</main>
           <PreFooterAd />
           <Footer />
           <MobileNav />
