@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import {
   Fish,
   Calendar,
@@ -246,11 +247,12 @@ export function SeasonalSeasonPage({ season }: SeasonPageProps) {
                 >
                   <div className="size-10 shrink-0 overflow-hidden rounded-lg bg-primary/10">
                     {fish.imageUrl ? (
-                      <img
+                      <Image
                         src={fish.imageUrl}
                         alt={fish.name}
+                        width={40}
+                        height={40}
                         className="size-full object-cover"
-                        loading="lazy"
                       />
                     ) : (
                       <div className="flex size-full items-center justify-center text-primary">
