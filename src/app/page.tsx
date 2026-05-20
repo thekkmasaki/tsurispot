@@ -11,7 +11,9 @@ import { Button } from "@/components/ui/button";
 import { LoginPromoBanner } from "@/components/home/login-promo-banner";
 import { PushSubscribe } from "@/components/notifications/push-subscribe";
 import { JoinCTA } from "@/components/home/join-cta";
-import { CommunityStats } from "@/components/home/community-stats";
+// CommunityStats は数字が小さいうち (釣り人 26 人等) は逆効果なので一時 hide。
+// 数字が育ったら以下 1 行 + 下記 render を復活。 component 自体は残してある。
+// import { CommunityStats } from "@/components/home/community-stats";
 import {
   MapPin,
   Fish,
@@ -410,8 +412,7 @@ export default async function Home() {
       {/* Phase 6: Hero 直下 Green Join CTA (community pattern、 登録率改善) */}
       <JoinCTA />
 
-      {/* Phase 6: Active community showcase (実数で community 形成中を訴求) */}
-      <CommunityStats />
+      {/* CommunityStats は数字が育ってから復活 (現状 26人/1件 が逆効果) */}
 
       {/* ログイン誘導バナー（未ログイン時のみ表示、 features 詳細訴求） */}
       <LoginPromoBanner />
