@@ -4,10 +4,11 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import NextImage from "next/image";
 import { useSession } from "next-auth/react";
-import { Send, CheckCircle, AlertCircle, Camera, X } from "lucide-react";
+import { Send, CheckCircle, AlertCircle, Camera, X, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
+import { getTitle, getNextTier } from "@/lib/titles";
 
 // そのスポットで釣れる魚名 + 汎用的な人気魚種
 const COMMON_FISH = ["アジ", "サバ", "イワシ", "メバル", "カサゴ", "シーバス", "クロダイ", "アオリイカ"];
@@ -278,6 +279,31 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
           </Link>
           <span className="ml-1">で書き方のコツを確認できます</span>
         </div>
+
+        {/* PR-INV-2: 称号 progress (ログイン user のみ表示) */}
+        {(() => {
+          const reportCount = session?.user?.reportCount;
+          if (typeof reportCount !== "number") return null;
+          const currentTitle = getTitle(reportCount);
+          const next = getNextTier(reportCount);
+          if (!next) {
+            return (
+              <div className="mb-3 flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs">
+                <Trophy className="size-3.5 text-amber-600" />
+                <span className="text-amber-900">最高称号 {currentTitle.emoji} {currentTitle.label} 達成中! 投稿し続けて記録更新を</span>
+              </div>
+            );
+          }
+          return (
+            <div className="mb-3 flex items-center gap-2 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs">
+              <Trophy className="size-3.5 text-amber-600" />
+              <span className="text-amber-900">
+                現在 {currentTitle.emoji} {currentTitle.label} ({reportCount}件)
+                — あと <strong>{next.remaining}件</strong> で {next.emoji} {next.label}
+              </span>
+            </div>
+          );
+        })()}
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
             <label htmlFor="cr-username" className="mb-1 block text-sm font-medium">
