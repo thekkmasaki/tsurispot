@@ -428,7 +428,13 @@ export default async function FishDetailPage({ params }: PageProps) {
           priority
         />
         <div className="text-center pb-2">
-          <h1 className="text-xl font-bold sm:text-3xl">{fish.name}</h1>
+          <h1 className="text-xl font-bold sm:text-3xl">
+            {fish.name}
+            {/* SEO-1: H1 にキーワード追加 (旬・釣り方を補足) */}
+            <span className="ml-2 text-sm font-medium text-muted-foreground sm:text-base">
+              の旬・釣り方・食べ方
+            </span>
+          </h1>
           {fish.aliases && fish.aliases.length > 0 && (
             <p className="mt-0.5 text-sm font-medium text-muted-foreground">
               別名: {fish.aliases.slice(0, 3).join("・")}

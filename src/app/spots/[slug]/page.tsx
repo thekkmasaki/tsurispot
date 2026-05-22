@@ -534,7 +534,17 @@ export default async function SpotDetailPage({ params }: PageProps) {
       <div className="mb-5 sm:mb-6">
         {/* スポット名 + お気に入り（最上段） */}
         <div className="flex items-start justify-between gap-3">
-          <h1 className="min-w-0 text-xl font-bold leading-tight text-pretty sm:text-2xl md:text-3xl">{spot.name}</h1>
+          <h1 className="min-w-0 text-xl font-bold leading-tight text-pretty sm:text-2xl md:text-3xl">
+            {spot.name}
+            {/* SEO-1: H1 にキーワード追加 (検索意図キーワードを補足、 視覚的にも文脈が伝わる) */}
+            {spot.catchableFish.length > 0 && (
+              <span className="ml-2 text-sm font-medium text-muted-foreground sm:text-base">
+                — {spot.catchableFish.slice(0, 2).map((cf) => cf.fish.name).join("・")}
+                {spot.catchableFish[0]?.method && ` が ${spot.catchableFish[0].method} で釣れる`}
+                {SPOT_TYPE_LABELS[spot.spotType]}
+              </span>
+            )}
+          </h1>
           <div className="flex shrink-0 items-center gap-2">
             <WishlistButton slug={spot.slug} />
             <FavoriteButton spotSlug={spot.slug} />
