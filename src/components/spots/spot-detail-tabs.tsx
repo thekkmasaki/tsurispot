@@ -1,6 +1,7 @@
 "use client";
 
-import { type ReactNode } from "react";
+import { type ReactNode, useEffect, useState } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { Fish, Wrench, Car, Info } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
@@ -18,14 +19,41 @@ const TAB_ITEMS = [
   { value: "access", label: "アクセス", icon: Car },
 ] as const;
 
+const VALID_TAB_VALUES = new Set(TAB_ITEMS.map((t) => t.value));
+
 export function SpotDetailTabs({
   overviewTab,
   fishTab,
   gearTab,
   accessTab,
 }: SpotDetailTabsProps) {
+  // UX-5: tab state を URL に同期 (share/back/reload で復元)
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const urlTab = searchParams.get("tab") ?? "";
+  const initialTab = VALID_TAB_VALUES.has(urlTab as typeof TAB_ITEMS[number]["value"])
+    ? urlTab
+    : "overview";
+
+  const [activeTab, setActiveTab] = useState(initialTab);
+
+  // tab 変更 → URL 更新
+  useEffect(() => {
+    const params = new URLSearchParams(searchParams.toString());
+    if (activeTab === "overview") {
+      params.delete("tab");
+    } else {
+      params.set("tab", activeTab);
+    }
+    const query = params.toString();
+    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab]);
+
   return (
-    <Tabs defaultValue="overview" className="mt-6">
+    <Tabs value={activeTab} onValueChange={setActiveTab} className="mt-6">
       <TabsList className="w-full overflow-x-auto scrollbar-hide bg-sand-light/80 rounded-2xl p-1.5 sticky top-14 z-20 backdrop-blur-sm shadow-sm">
         {TAB_ITEMS.map(({ value, label, icon: Icon }) => (
           <TabsTrigger
