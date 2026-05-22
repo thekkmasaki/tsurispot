@@ -230,7 +230,7 @@ export function SearchOverlayClient() {
                   type="text"
                   value={query}
                   onChange={(e) => handleQueryChange(e.target.value)}
-                  placeholder="スポット・魚種・ガイド・コラムを検索..."
+                  placeholder="釣り場・魚種・ガイド・コラムを検索..."
                   className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
                 />
                 {isLoading && (
@@ -263,7 +263,7 @@ export function SearchOverlayClient() {
                       ))}
                     </div>
                     <p className="mt-4 text-center text-xs text-muted-foreground/70">
-                      スポット名・魚種名・ガイド・コラムなど何でも検索できます
+                      釣り場名・魚種名・ガイド・コラムなど何でも検索できます
                     </p>
                   </div>
                 ) : isLoading ? (

@@ -197,7 +197,7 @@ export function HomeSearchBarClient() {
           onChange={(e) => handleQueryChange(e.target.value)}
           onFocus={() => setIsFocused(true)}
           onKeyDown={handleKeyDown}
-          placeholder="スポット名・地域・魚種で検索..."
+          placeholder="釣り場名・地域・魚種で検索..."
           className="min-w-0 flex-1 bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground sm:text-base"
         />
         {isLoading && (
