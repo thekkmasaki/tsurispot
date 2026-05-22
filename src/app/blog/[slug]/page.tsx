@@ -12,6 +12,7 @@ import {
 } from "@/lib/data/blog";
 import { fishSpecies } from "@/lib/data/fish";
 import { prefectures } from "@/lib/data/prefectures";
+import { trimDescription } from "@/lib/utils/seo";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -77,12 +78,13 @@ export async function generateMetadata({
   const { slug } = await params;
   const post = await getBlogPostBySlugAsync(slug);
   if (!post) return {};
+  const description = trimDescription(post.description, 158);
   return {
     title: { absolute: `${post.title} | ツリスポ（つりすぽ）` },
-    description: post.description,
+    description,
     openGraph: {
       title: post.title,
-      description: post.description,
+      description,
       type: "article",
       url: `https://tsurispot.com/blog/${post.slug}`,
       siteName: "ツリスポ",
