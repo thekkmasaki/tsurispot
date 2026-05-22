@@ -205,14 +205,24 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
 
   if (!isOpen) {
     return (
-      <Button
-        onClick={() => setIsOpen(true)}
-        variant="outline"
-        className="mt-3 gap-2"
-      >
-        <Send className="size-4" />
-        釣果を報告する
-      </Button>
+      <div className="mt-3 flex flex-col items-start gap-1.5">
+        <Button
+          onClick={() => setIsOpen(true)}
+          variant="outline"
+          className="gap-2"
+        >
+          <Send className="size-4" />
+          {session?.user ? "釣果を報告する" : "釣果を報告する (ログイン不要)"}
+        </Button>
+        {!session?.user && (
+          <p className="text-xs text-muted-foreground">
+            <Link href="/login" className="underline hover:text-foreground">
+              ログイン
+            </Link>
+            するとマイページに記録され、 連続釣行ストリーク等の機能も使えます
+          </p>
+        )}
+      </div>
     );
   }
 
