@@ -1711,7 +1711,7 @@ export default async function PrefecturePage({ params }: PageProps) {
           </div>
         </div>
 
-        {/* 月別ガイド */}
+        {/* 月別ガイド (全国共通) */}
         <div className="mb-4">
           <h3 className="mb-2 text-sm font-semibold text-muted-foreground">
             月別釣りガイド
@@ -1724,6 +1724,24 @@ export default async function PrefecturePage({ params }: PageProps) {
                 className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
               >
                 {guide.month}月の釣りガイド
+              </Link>
+            ))}
+          </div>
+        </div>
+
+        {/* SEO-4: 県別月別ガイド (/prefecture/{slug}/{month} への内部リンクで indexing 救済) */}
+        <div className="mb-4">
+          <h3 className="mb-2 text-sm font-semibold text-muted-foreground">
+            {pref.name}の月別釣り情報
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {MONTHS.map((m) => (
+              <Link
+                key={m.slug}
+                href={`/prefecture/${slug}/${m.slug}`}
+                className="rounded-full border px-3 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:px-4 sm:py-2 sm:text-sm"
+              >
+                {pref.name}の{m.name}
               </Link>
             ))}
           </div>
