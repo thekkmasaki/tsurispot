@@ -46,6 +46,7 @@ export function HomeSearchBarClient() {
   const [hasSearched, setHasSearched] = useState(false);
   const [isFocused, setIsFocused] = useState(false);
   const [activeIndex, setActiveIndex] = useState(-1);
+  const [searchError, setSearchError] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -70,6 +71,7 @@ export function HomeSearchBarClient() {
     abortControllerRef.current = controller;
 
     try {
+      setSearchError(null);
       const res = await fetch(`/api/search?q=${encodeURIComponent(q)}`, {
         signal: controller.signal,
       });
@@ -81,6 +83,8 @@ export function HomeSearchBarClient() {
       if (err instanceof DOMException && err.name === "AbortError") {
         return;
       }
+      // UX-2: silent fail を解消、 user に検索失敗を明示 (Nielsen H1, H9)
+      setSearchError("検索に失敗しました。 ネットワーク接続を確認してもう一度お試しください。");
       setResults([]);
       setHasSearched(true);
     } finally {
@@ -221,6 +225,16 @@ export function HomeSearchBarClient() {
               <div className="flex items-center justify-center gap-2 px-3 py-6">
                 <LoaderCircle className="size-5 animate-spin text-primary" />
                 <p className="text-sm text-muted-foreground">検索中...</p>
+              </div>
+            ) : searchError ? (
+              <div className="px-3 py-4 text-center">
+                <p className="text-sm font-medium text-destructive">{searchError}</p>
+                <button
+                  onClick={() => fetchResults(query)}
+                  className="mt-2 text-sm font-medium text-primary hover:underline"
+                >
+                  もう一度試す
+                </button>
               </div>
             ) : hasSearched && results.length === 0 ? (
               <div className="px-3 py-4 text-center">
