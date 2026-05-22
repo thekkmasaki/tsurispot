@@ -521,6 +521,15 @@ export default async function SpotDetailPage({ params }: PageProps) {
       {/* PC ヘッダー下リーダーボード広告 (above-fold, lg:1024px+ のみ表示。 mobile は MobileStickyAd で対応するためスキップ) */}
       <HeaderBannerAd />
 
+      {/* PR-INV-1: 投稿動線強化 - 上部に釣果投稿 CTA */}
+      <a
+        href="#catch-report"
+        className="my-3 inline-flex w-full items-center justify-between rounded-lg border-2 border-primary/30 bg-primary/5 px-4 py-2.5 text-sm font-medium text-primary transition-colors hover:bg-primary/10 sm:w-auto"
+      >
+        <span>釣果を投稿する (ログイン不要)</span>
+        <span className="ml-3 text-xs text-muted-foreground">↓ 報告セクションへ</span>
+      </a>
+
       {/* Back link */}
       <Link
         href="/spots"
@@ -926,7 +935,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           </section>
           )}
           {spot.spotType === "port" && <PortMannerSection />}
-          <section>
+          <section id="catch-report">
             <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><MessageSquare className="size-5" />みんなの釣果報告</h3>
             <CatchReportList spotSlug={slug} initialReports={await getCatchReportsBySpotAsync(slug)} />
             <CatchReportForm spotSlug={slug} spotName={spot.name} catchableFishNames={[...new Set(spot.catchableFish.map((cf) => cf.fish.name))]} />
