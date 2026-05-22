@@ -60,10 +60,12 @@ function getFishImage(tags: string[], id: string): string {
 
 // Below-the-fold client components loaded lazily
 const LocationPromptBanner = dynamic(() => import("@/components/location-prompt-banner").then((m) => m.LocationPromptBanner), {
-  loading: () => <div className="h-12 w-full animate-pulse rounded-lg bg-muted" />,
+  // CWV: 実 component は fixed positioning (normal flow 外) なので、 skeleton の h-12 空 box は不要。 CLS 削減のため null
+  loading: () => null,
 });
 const SeasonalRecommend = dynamic(() => import("@/components/affiliate/seasonal-recommend").then((m) => m.SeasonalRecommend), {
-  loading: () => <div className="h-32 w-full animate-pulse rounded-xl bg-muted" />,
+  // CWV: 実 component 高さ (200-250px) に近づけて CLS 削減
+  loading: () => <div className="h-64 sm:h-72 w-full animate-pulse rounded-xl bg-muted" />,
 });
 const OnlineUsersBadge = dynamic(() => import("@/components/online-users-badge").then((m) => m.OnlineUsersBadge), {
   loading: () => <div className="inline-flex h-7 w-28 animate-pulse rounded-full bg-white/10" />,
