@@ -511,6 +511,16 @@ export default async function Home() {
               </span>
             </div>
           </Link>
+          <Link href="/ranking/reporters">
+            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-amber-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
+              <div className="flex size-10 items-center justify-center rounded-full bg-amber-100 sm:size-12">
+                <Star className="size-5 text-amber-600 sm:size-6" />
+              </div>
+              <span className="text-center text-[11px] font-medium leading-tight sm:text-xs">
+                投稿ランキング
+              </span>
+            </div>
+          </Link>
           <Link href="/instructor-exam">
             <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-indigo-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
               <div className="flex size-10 items-center justify-center rounded-full bg-indigo-100 sm:size-12">
