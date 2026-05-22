@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { buildArticleJsonLd } from "@/lib/seo/article-jsonld";
 import {
   Baby,
   Users,
@@ -209,6 +210,14 @@ function Warning({ children }: { children: React.ReactNode }) {
   );
 }
 
+// SEO-3: Article schema 追加 (rich result + ranking factor)
+const familyArticleJsonLd = buildArticleJsonLd({
+  headline: "ファミリーフィッシングガイド - 子供と楽しむ釣りの始め方",
+  description: "子供と一緒に釣りを楽しむための完全ガイド。 年齢別おすすめ、 安全対策、 持ち物リスト、 飽きないコツまで網羅。",
+  url: "https://tsurispot.com/guide/family",
+  datePublished: "2025-03-01",
+});
+
 export default function FamilyGuidePage() {
   return (
     <>
@@ -219,6 +228,10 @@ export default function FamilyGuidePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(familyArticleJsonLd) }}
       />
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
         <Breadcrumb items={[{ label: "ホーム", href: "/" }, { label: "釣りガイド", href: "/guide" }, { label: "ファミリーフィッシングガイド" }]} />
