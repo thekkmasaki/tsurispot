@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useMemo, useCallback, useDeferredValue, useTransition, Fragment } from "react";
+import { useState, useMemo, useCallback, useDeferredValue, useTransition, useEffect, Fragment } from "react";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 import { Search, X, SlidersHorizontal, ChevronDown, ChevronLeft, ChevronRight, MapPin, Navigation, Loader2 } from "lucide-react";
 import { SpotCard } from "@/components/spots/spot-card";
 import { Button } from "@/components/ui/button";
@@ -90,13 +91,23 @@ const FACILITY_OPTIONS: { key: FacilityKey; label: string }[] = [
 ];
 
 export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpot[]; initialQuery?: string }) {
-  const [searchText, setSearchText] = useState(initialQuery);
+  // UX-3: URL query から filter 初期値を取得 (share/back/reload で復元可能に)
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const initialPrefecture = searchParams.get("prefecture") ?? "";
+  const initialType = (searchParams.get("type") ?? "") as FishingSpot["spotType"] | "";
+  const initialDifficulty = (searchParams.get("difficulty") ?? "") as FishingSpot["difficulty"] | "";
+  const urlQuery = searchParams.get("q") ?? initialQuery;
+
+  const [searchText, setSearchText] = useState(urlQuery);
   const deferredSearchText = useDeferredValue(searchText);
   const [selectedRegion, setSelectedRegion] = useState<RegionKey | "">("");
-  const [selectedPrefecture, setSelectedPrefecture] = useState<string>("");
+  const [selectedPrefecture, setSelectedPrefecture] = useState<string>(initialPrefecture);
   const [selectedArea, setSelectedArea] = useState<string>("");
-  const [selectedType, setSelectedType] = useState<FishingSpot["spotType"] | "">("");
-  const [selectedDifficulty, setSelectedDifficulty] = useState<FishingSpot["difficulty"] | "">("");
+  const [selectedType, setSelectedType] = useState<FishingSpot["spotType"] | "">(initialType);
+  const [selectedDifficulty, setSelectedDifficulty] = useState<FishingSpot["difficulty"] | "">(initialDifficulty);
   const [selectedFacilities, setSelectedFacilities] = useState<FacilityKey[]>([]);
   const [selectedFree, setSelectedFree] = useState<"" | "free" | "paid">("");
   const [selectedMethods, setSelectedMethods] = useState<string[]>([]);
@@ -104,6 +115,17 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [isPending, startTransition] = useTransition();
+
+  // UX-3: state 変更時に URL query を同期 (share/back/reload で復元可能に)
+  useEffect(() => {
+    const params = new URLSearchParams();
+    if (searchText) params.set("q", searchText);
+    if (selectedPrefecture) params.set("prefecture", selectedPrefecture);
+    if (selectedType) params.set("type", selectedType);
+    if (selectedDifficulty) params.set("difficulty", selectedDifficulty);
+    const query = params.toString();
+    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+  }, [searchText, selectedPrefecture, selectedType, selectedDifficulty, router, pathname]);
 
   // Geolocation state
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
