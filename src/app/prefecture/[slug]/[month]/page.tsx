@@ -345,7 +345,11 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
       {/* ヘッダー */}
       <div className="mb-6 sm:mb-8">
         <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
-          {pref.name}の{month.name}の釣り情報
+          {pref.name}の{month.name}の釣り
+          {/* SEO-1: H1 にキーワード補足 (狙える魚数・スポット数を明示) */}
+          <span className="ml-2 text-sm font-medium text-muted-foreground sm:text-base">
+            — 釣れる魚{catchableFishList.length}種 / 釣り場{topSpots.length}件
+          </span>
         </h1>
         <p className="mt-2 text-sm text-muted-foreground sm:text-base">
           {catchableFishList.length}種の魚が狙える・おすすめスポット
