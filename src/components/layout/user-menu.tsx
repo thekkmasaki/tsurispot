@@ -62,7 +62,7 @@ export function UserMenu() {
         {user.avatarUrl ? (
           <Image
             src={user.avatarUrl}
-            alt=""
+            alt={`${user.nickname} のアイコン`}
             width={28}
             height={28}
             className="h-7 w-7 rounded-full object-cover"
