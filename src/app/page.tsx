@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { LoginPromoBanner } from "@/components/home/login-promo-banner";
 import { PushSubscribe } from "@/components/notifications/push-subscribe";
 import { LoggedInOnly } from "@/components/auth/logged-in-only";
+import { RecentlyViewedSpots } from "@/components/spots/recently-viewed";
 import { JoinCTA } from "@/components/home/join-cta";
 // CommunityStats は数字が小さいうち (釣り人 26 人等) は逆効果なので一時 hide。
 // 数字が育ったら以下 1 行 + 下記 render を復活。 component 自体は残してある。
@@ -609,6 +610,11 @@ export default async function Home() {
       <div className="mx-auto max-w-5xl px-4">
         <ContentDivider variant="line" />
         <InArticleAd className="my-4" />
+      </div>
+
+      {/* UX-7: 最近見た釣り場 carousel (RecentlyViewedTracker のデータを使用、 spot 詳細を見た user のみ表示) */}
+      <div className="mx-auto w-full max-w-5xl px-4">
+        <RecentlyViewedSpots />
       </div>
 
       {/* 人気スポットTOP10（近い順ソート対応） */}
