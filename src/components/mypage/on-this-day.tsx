@@ -42,7 +42,7 @@ function MiniReport({ report }: { report: CatchReport }) {
           // eslint-disable-next-line @next/next/no-img-element
           <img
             src={report.photoUrl}
-            alt=""
+            alt={`${report.fishName ?? "釣果"}の写真`}
             className="h-10 w-10 shrink-0 rounded object-cover"
           />
         )}

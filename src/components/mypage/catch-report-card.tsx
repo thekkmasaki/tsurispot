@@ -118,7 +118,7 @@ export function CatchReportCard({ report, onUpdate, onDelete }: Props) {
         <div className="flex gap-3">
           {report.photoUrl && (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={report.photoUrl} alt="" className="h-16 w-16 rounded-md object-cover" />
+            <img src={report.photoUrl} alt={`${report.fishName}の釣果写真`} className="h-16 w-16 rounded-md object-cover" />
           )}
           <div className="min-w-0 flex-1">
             <p className="pr-16 font-medium">{report.fishName}</p>
