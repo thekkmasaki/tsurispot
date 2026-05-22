@@ -245,8 +245,12 @@ export function HomeSearchBarClient() {
                   onClick={handleSearch}
                   className="mt-2 text-sm font-medium text-primary hover:underline"
                 >
-                  スポット一覧で検索する →
+                  釣り場一覧で検索する →
                 </button>
+                {/* UX-9: ヘルプ導線 (Nielsen H10) */}
+                <div className="mt-3 text-xs text-muted-foreground">
+                  検索のコツ: 「アジ」 「明石」 等の短い keyword、 漢字/カナ混在 OK
+                </div>
               </div>
             ) : results.length > 0 ? (
               <ul>

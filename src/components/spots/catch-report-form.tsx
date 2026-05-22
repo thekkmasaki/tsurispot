@@ -270,6 +270,14 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
   return (
     <Card className="mt-3 py-4">
       <CardContent className="px-4">
+        {/* UX-9: 初投稿者向けヘルプ link (Nielsen H10) */}
+        <div className="mb-3 rounded-lg bg-muted/40 px-3 py-2 text-xs text-muted-foreground">
+          初めての投稿ですか？
+          <Link href="/guide/beginner" className="ml-1 font-medium text-primary underline">
+            初心者向けガイドを見る
+          </Link>
+          <span className="ml-1">で書き方のコツを確認できます</span>
+        </div>
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
             <label htmlFor="cr-username" className="mb-1 block text-sm font-medium">
