@@ -230,6 +230,22 @@ jobs:
             echo "All health checks passed!"
           fi
 
+      # Bing/Yandex に新規 deploy 内容を IndexNow で即時通知。
+      # `?full=true` で全 URL (7,000+) を一括 ping。健康チェック後・通知前に実行。
+      # 失敗してもデプロイ自体は成功扱い (continue-on-error)。
+      - name: IndexNow auto ping (Bing/Yandex)
+        if: success() && github.ref == 'refs/heads/master'
+        continue-on-error: true
+        run: |
+          echo "Triggering IndexNow ping for all URLs..."
+          RESPONSE=$(curl -sS --max-time 180 "https://tsurispot.com/api/indexnow?full=true")
+          echo "Response: $RESPONSE"
+          if echo "$RESPONSE" | grep -q '"success":true'; then
+            echo "IndexNow ping succeeded."
+          else
+            echo "::warning::IndexNow ping failed or returned non-success response"
+          fi
+
       - name: Discord通知（成功）
         if: success() && github.ref == 'refs/heads/master'
         env:
