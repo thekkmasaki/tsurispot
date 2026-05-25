@@ -147,6 +147,22 @@ async function collectAllUrls(): Promise<string[]> {
     urls.push(`${BASE_URL}/fishing-rules/${pref.slug}`);
   }
 
+  // 釣りインストラクター試験 (290 問 quiz・章別解説、 sitemap には含むが従来 ping 漏れ)
+  const instructorExamPaths = [
+    "/instructor-exam",
+    "/instructor-exam/law", "/instructor-exam/law/quiz",
+    "/instructor-exam/manners", "/instructor-exam/manners/quiz",
+    "/instructor-exam/tackle", "/instructor-exam/tackle/quiz",
+    "/instructor-exam/safety", "/instructor-exam/safety/quiz",
+    "/instructor-exam/history", "/instructor-exam/history/quiz",
+    "/instructor-exam/technique", "/instructor-exam/technique/quiz",
+    "/instructor-exam/environment", "/instructor-exam/environment/quiz",
+    "/instructor-exam/essay", "/instructor-exam/practical",
+  ];
+  for (const p of instructorExamPaths) {
+    urls.push(`${BASE_URL}${p}`);
+  }
+
   return urls;
 }
 
