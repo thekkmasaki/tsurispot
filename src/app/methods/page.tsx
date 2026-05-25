@@ -223,9 +223,68 @@ export default function MethodsIndexPage() {
           ))}
         </div>
 
-        {/* 釣法カード一覧 */}
+        <InArticleAd className="mb-6" />
+
+        {/* 釣法カード一覧 (前半 5 件) */}
         <div className="grid gap-4 sm:grid-cols-2">
-          {methods.map((method) => (
+          {methods.slice(0, 5).map((method) => (
+            <Link key={method.slug} href={`/methods/${method.slug}`}>
+              <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                <CardContent className="p-4 sm:p-5">
+                  <div className="mb-3 flex items-start justify-between gap-2">
+                    <div className="flex items-center gap-3">
+                      <div className="flex size-11 shrink-0 items-center justify-center rounded-lg bg-muted/50">
+                        {method.icon}
+                      </div>
+                      <div>
+                        <h2 className="text-base font-bold group-hover:text-primary sm:text-lg">
+                          {method.name}
+                        </h2>
+                        <p className="text-xs text-muted-foreground">
+                          {method.nameEn}
+                        </p>
+                      </div>
+                    </div>
+                    <Badge
+                      className={`shrink-0 text-xs ${DIFFICULTY_MAP[method.difficulty].className}`}
+                    >
+                      {DIFFICULTY_MAP[method.difficulty].label}
+                    </Badge>
+                  </div>
+                  <p className="mb-3 text-sm leading-relaxed text-muted-foreground">
+                    {method.description}
+                  </p>
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    {method.targetFish.map((fish) => (
+                      <Badge
+                        key={fish}
+                        variant="outline"
+                        className="text-xs"
+                      >
+                        {fish}
+                      </Badge>
+                    ))}
+                    {(() => {
+                      const count = getSpotCountForMethod(method.methodKeys);
+                      return count > 0 ? (
+                        <Badge variant="secondary" className="text-xs">
+                          <MapPin className="mr-0.5 size-3" />
+                          {count}スポット
+                        </Badge>
+                      ) : null;
+                    })()}
+                  </div>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
+
+        <InArticleAd className="my-6" />
+
+        {/* 釣法カード一覧 (後半 4 件) */}
+        <div className="grid gap-4 sm:grid-cols-2">
+          {methods.slice(5).map((method) => (
             <Link key={method.slug} href={`/methods/${method.slug}`}>
               <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                 <CardContent className="p-4 sm:p-5">

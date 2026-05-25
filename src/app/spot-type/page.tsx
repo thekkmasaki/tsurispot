@@ -124,6 +124,8 @@ export default function SpotTypeIndexPage() {
         </p>
       </div>
 
+      <InArticleAd className="mb-6" />
+
       {/* タイプ一覧 */}
       <div className="grid gap-6">
         {SPOT_TYPE_ORDER.map((type) => {

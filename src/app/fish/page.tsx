@@ -142,6 +142,8 @@ function FishListContent() {
         </p>
       </div>
 
+      <InArticleAd className="mb-6" />
+
       {/* クライアントサイドのフィルター＋一覧 */}
       <FishListClient fishSpecies={fishSpecies} />
 
