@@ -158,7 +158,10 @@ export async function generateMetadata({
       ],
     },
     alternates: {
-      canonical: pageUrl,
+      // 月別ページは親「都道府県×魚種」 ページに canonical 統一。
+      // GSC「クロール済み - インデックス未登録」 を解消するため、
+      // 評価を親 page に集約する (page 自体は UX 維持のため残す)。
+      canonical: `https://tsurispot.com/prefecture/${slug}/fish/${fishSlug}`,
     },
   };
 }
