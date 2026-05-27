@@ -30,9 +30,10 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { trimDescription } from "@/lib/utils/seo";
-import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, getSpotsByFish, getSpotsByMethod, type NearbySpot } from "@/lib/data/spots";
+import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, getSpotsByFish, getSpotsByMethod, getSpotsBySpotType, getSpotsByDifficulty, type NearbySpot } from "@/lib/data/spots";
 import { RelatedSpotsByFish } from "@/components/spots/related-spots-by-fish";
 import { RelatedSpotsByMethod } from "@/components/spots/related-spots-by-method";
+import { RelatedSpotsGeneric } from "@/components/spots/related-spots-generic";
 // import { getNearbyShopsWithDistance } from "@/lib/data/shops"; // 有料プラン機能として温存中
 import { getPrefectureByName } from "@/lib/data/prefectures";
 import { SeasonCalendar } from "@/components/spots/season-calendar";
@@ -1534,7 +1535,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           const fishSlugs = Array.from(new Set(spot.catchableFish.map((cf) => cf.fish.slug).filter(Boolean)));
           const topFishName = spot.catchableFish[0]?.fish.name || "";
           if (fishSlugs.length === 0 || !topFishName) return null;
-          const fishSpots = getSpotsByFish(fishSlugs, spot.slug, 6);
+          const fishSpots = getSpotsByFish(fishSlugs, spot.slug, 12);
           if (fishSpots.length === 0) return null;
           return <RelatedSpotsByFish spots={fishSpots} fishName={topFishName} />;
         })()}
@@ -1544,9 +1545,39 @@ export default async function SpotDetailPage({ params }: PageProps) {
           const methods = Array.from(new Set(spot.catchableFish.map((cf) => cf.method).filter(Boolean)));
           if (methods.length === 0) return null;
           const methodLabel = methods[0];
-          const methodSpots = getSpotsByMethod(methods, spot.slug, 6);
+          const methodSpots = getSpotsByMethod(methods, spot.slug, 12);
           if (methodSpots.length === 0) return null;
           return <RelatedSpotsByMethod spots={methodSpots} methodLabel={methodLabel} />;
+        })()}
+
+        {/* 同じ釣り場タイプ (Phase C 内部リンク強化) */}
+        {(() => {
+          const sameTypeSpots = getSpotsBySpotType(spot.spotType, spot.region.prefecture, spot.slug, 6);
+          if (sameTypeSpots.length === 0) return null;
+          const typeLabel = SPOT_TYPE_LABELS[spot.spotType];
+          return (
+            <RelatedSpotsGeneric
+              spots={sameTypeSpots}
+              title={`${spot.region.prefecture}の他の${typeLabel}スポット`}
+              description={`同じ${typeLabel}での釣りを楽しめるスポット`}
+              Icon={MapPin}
+            />
+          );
+        })()}
+
+        {/* 同じ難易度 (Phase C 内部リンク強化) */}
+        {(() => {
+          const sameDiffSpots = getSpotsByDifficulty(spot.difficulty, spot.region.prefecture, spot.slug, 6);
+          if (sameDiffSpots.length === 0) return null;
+          const diffLabel = DIFFICULTY_LABELS[spot.difficulty];
+          return (
+            <RelatedSpotsGeneric
+              spots={sameDiffSpots}
+              title={`${spot.region.prefecture}の${diffLabel}スポット`}
+              description={`同じ難易度で楽しめる他のスポット`}
+              Icon={Compass}
+            />
+          );
         })()}
 
         {/* 魚種リンク */}

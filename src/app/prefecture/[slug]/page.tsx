@@ -839,6 +839,19 @@ export default async function PrefecturePage({ params }: PageProps) {
               );
             })}
           </div>
+
+          {/* 全スポット一覧ページへの導線 */}
+          {spots.length > 10 && (
+            <div className="mt-6 text-center">
+              <Link
+                href={`/prefecture/${pref.slug}/all`}
+                className="inline-flex items-center gap-2 rounded-lg border bg-card px-6 py-3 text-sm font-medium transition-colors hover:bg-muted"
+              >
+                {pref.name}の全{spots.length}件の釣り場を見る
+                <ArrowRight className="size-4" />
+              </Link>
+            </div>
+          )}
         </section>
       )}
 

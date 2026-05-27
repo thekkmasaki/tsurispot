@@ -178,3 +178,31 @@ export function getSpotsByMethod(methods: string[], excludeSlug: string, limit =
   matched.sort((a, b) => b.matchCount - a.matchCount || b.spot.rating - a.spot.rating);
   return matched.slice(0, limit).map((m) => m.spot);
 }
+
+// 同じ釣り場タイプ (port, breakwater, beach 等) で同じ都道府県のスポットを返す。
+// マイナースポットへの内部リンク経路を増やす目的。
+export function getSpotsBySpotType(
+  spotType: FishingSpot["spotType"],
+  prefecture: string,
+  excludeSlug: string,
+  limit = 6
+): FishingSpot[] {
+  return fishingSpots
+    .filter((s) => s.spotType === spotType && s.region.prefecture === prefecture && s.slug !== excludeSlug)
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, limit);
+}
+
+// 同じ難易度・同じ都道府県のスポットを返す。
+// 初心者→初心者向け、上級者→上級者向けの推薦として機能。
+export function getSpotsByDifficulty(
+  difficulty: FishingSpot["difficulty"],
+  prefecture: string,
+  excludeSlug: string,
+  limit = 6
+): FishingSpot[] {
+  return fishingSpots
+    .filter((s) => s.difficulty === difficulty && s.region.prefecture === prefecture && s.slug !== excludeSlug)
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, limit);
+}

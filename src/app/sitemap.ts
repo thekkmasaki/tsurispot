@@ -277,6 +277,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "weekly" as const,
       priority: 0.8,
     })),
+    // 都道府県別 全スポット一覧ページ（マイナースポットへの内部リンク経路）
+    ...prefectures
+      .filter((pref) => fishingSpots.some((s) => s.region.prefecture === pref.name))
+      .map((pref) => ({
+        url: `${baseUrl}/prefecture/${pref.slug}/all`,
+        lastModified: dynamicDate,
+        changeFrequency: "weekly" as const,
+        priority: 0.6,
+      })),
     { url: `${baseUrl}/area`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.9 },
     // 低コンテンツarea（スポット1件以下）はサイトマップから除外
     ...regions
