@@ -47,6 +47,9 @@ scripts/twitter/.posted-*.json
 # Claude Code
 .agents/
 .claude/
+# 例外: spot-generator skill だけは repo 管理（再現性のため）。
+# git add -f で強制追跡しているので gitignore は触らない。
+# checkpoint state (.claude/state/spot-generation-progress.json) はマシン固有なので追跡しない。
 skills-lock.json
 scripts/instagram/node_modules/
 
