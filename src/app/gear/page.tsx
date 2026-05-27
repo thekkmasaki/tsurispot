@@ -158,6 +158,8 @@ export default function GearPage() {
           </div>
         </div>
 
+        <InArticleAd className="mb-10 sm:mb-14" />
+
         {/* ========== 特集記事カード ========== */}
         <section className="mb-12 sm:mb-16">
           <h2 className="mb-6 flex items-center gap-2 text-xl font-bold sm:text-2xl">
