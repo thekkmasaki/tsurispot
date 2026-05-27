@@ -63,8 +63,8 @@ const METHOD_NAME_TO_SLUG: Record<string, string> = {
   "穴釣り": "ana-zuri",
 };
 
-export const dynamicParams = false;
-
+// dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため
+// デフォルト (true) に戻し、未知 slug は permanentRedirect("/fish") で 301 する。
 export async function generateStaticParams() {
   return allFish.map((fish) => ({
     slug: fish.slug,

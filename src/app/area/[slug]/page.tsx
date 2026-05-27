@@ -172,8 +172,8 @@ export async function generateMetadata({
   };
 }
 
-export const dynamicParams = false;
-
+// dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため
+// デフォルト (true) に戻し、未知 slug は L184 の notFound() で 404 化する。
 export function generateStaticParams() {
   return regions.map((region) => ({ slug: region.slug }));
 }
