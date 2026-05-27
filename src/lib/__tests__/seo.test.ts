@@ -10,12 +10,13 @@ describe("SEO validation", () => {
     });
   });
 
-  it("descriptionが100文字以上のスポット数をレポート", () => {
+  it("descriptionが100文字以上のスポット比率が95%以上", () => {
     const longDescSpots = fishingSpots.filter((s) => s.description.length >= 100);
     const ratio = longDescSpots.length / fishingSpots.length;
     console.log(`description >= 100文字: ${longDescSpots.length}/${fishingSpots.length}件 (${(ratio * 100).toFixed(1)}%)`);
-    // 現状はレポートのみ（将来的に改善目標として閾値を上げる）
-    expect(fishingSpots.length).toBeGreaterThan(0);
+    // spots.ts の enrichDescriptions() で <100字 を generateSpotIntro で補完するため、
+    // 95%+ を満たすことを期待。sitemap.ts:251 の品質フィルタを通過する基盤。
+    expect(ratio).toBeGreaterThanOrEqual(0.95);
   });
 
   it("スポットslugに不正文字がない", () => {

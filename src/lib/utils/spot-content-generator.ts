@@ -6,8 +6,10 @@
  * AdSense審査で「有用性の低いコンテンツ」と判定されないよう、テンプレート感を排除。
  */
 
-import type { FishingSpot, CatchableFish } from "@/types";
-import { SPOT_TYPE_LABELS } from "@/types";
+// next.config.ts → spots.ts 経由でこのファイルがビルド時 transpile されるため、
+// @/ エイリアスではなく相対パスで参照する。
+import type { FishingSpot, CatchableFish } from "../../types";
+import { SPOT_TYPE_LABELS } from "../../types";
 
 // ── 型定義 ────────────────────────────────────
 type SpotType = FishingSpot["spotType"];

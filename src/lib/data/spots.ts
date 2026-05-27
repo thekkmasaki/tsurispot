@@ -1,6 +1,9 @@
 import { FishingSpot } from "@/types";
 import { allRawSpots } from "./spots-registry";
 import { spotRulesBatch } from "./spots-rules-batch";
+// next.config.ts が spots.ts を import する都合上、@/ エイリアスではなく
+// 相対パスで参照する必要がある (path mapping がビルド時 transpile では効かない)。
+import { generateSpotIntro } from "../utils/spot-content-generator";
 
 // 重複排除で消えたslugから勝者slugへのマップ（自動リダイレクト用）
 export const dedupRedirects = new Map<string, string>();
@@ -77,7 +80,19 @@ function applyBatchRules(spots: FishingSpot[]): FishingSpot[] {
   });
 }
 
-export const fishingSpots: FishingSpot[] = applyBatchRules(deduplicateSpots(allRawSpots));
+// description が薄い (<100字) スポットを generateSpotIntro で補完する。
+// sitemap.ts の品質フィルタ (description>=100字) を満たすことが目的。
+// 既存の 100字以上の description には触らず、人間が書いた文章を尊重する。
+function enrichDescriptions(spots: FishingSpot[]): FishingSpot[] {
+  return spots.map((spot) => {
+    if ((spot.description || "").length >= 100) return spot;
+    return { ...spot, description: generateSpotIntro(spot) };
+  });
+}
+
+export const fishingSpots: FishingSpot[] = enrichDescriptions(
+  applyBatchRules(deduplicateSpots(allRawSpots))
+);
 
 export function getSpotBySlug(slug: string): FishingSpot | undefined {
   return fishingSpots.find((s) => s.slug === slug);
