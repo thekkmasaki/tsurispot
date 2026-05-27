@@ -62,7 +62,6 @@ async function parseUser(key: string, val: unknown): Promise<TsuriSpotUser | nul
     // 正しい形式で上書き保存（次回以降のパース不要にする）
     try {
       await redis.set(key, user);
-      console.log(`[auth-redis] Fixed double-serialized data: ${key}`);
     } catch {
       // 書き込み失敗しても読み取りは続行
     }

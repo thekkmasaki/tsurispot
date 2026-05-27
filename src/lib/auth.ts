@@ -53,8 +53,8 @@ function extractUpstreamProvider(profile: CognitoProfile | undefined): string {
 const config: NextAuthConfig = {
   // App Runner / CloudFront 経由のため、Host ヘッダーを信頼してよい。
   trustHost: true,
-  // Google OAuth callback で Configuration error 発生中 — 原因切り分け用 debug 再有効化
-  debug: true,
+  // 本番デフォルト OFF。OAuth トラブル調査時のみ App Runner 環境変数 NEXTAUTH_DEBUG=true で一時 ON。
+  debug: process.env.NEXTAUTH_DEBUG === "true",
   providers: [
     Cognito({
       clientId: process.env.COGNITO_CLIENT_ID,
@@ -88,8 +88,6 @@ const config: NextAuthConfig = {
           undefined;
         const picture = cognitoProfile?.picture;
 
-        console.log(`[auth] login: provider=${provider}, sub=${providerId}, upstream=${upstream}`);
-
         try {
           let user = await getUserByProvider(provider, providerId);
 
@@ -108,7 +106,6 @@ const config: NextAuthConfig = {
             // createUser は SETNX で原子化済み (auth-redis.ts:88)。
             // newUser をそのまま使うことで Redis ラウンドトリップ -1 (50-150ms 削減)。
             user = newUser;
-            console.log(`[auth] created user tsuriId=${user.id}`);
           } else if (picture && user.avatarUrl !== picture) {
             await updateAvatarUrl(user.id, picture);
             user.avatarUrl = picture;

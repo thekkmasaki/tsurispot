@@ -28,8 +28,8 @@ interface PageProps {
   params: Promise<{ month: string }>;
 }
 
-export const dynamicParams = false;
-
+// dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため
+// デフォルト (true) に戻し、未知 slug は L128 の notFound() で 404 化する。
 export async function generateStaticParams() {
   return [
     // 季節ページ: spring, summer, autumn, winter
