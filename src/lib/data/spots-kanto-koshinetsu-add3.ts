@@ -1772,6 +1772,8 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
     rentalDetail: "ワカサギ釣りドーム船にレンタルタックルあり",
     mainImageUrl: "/images/spots/wikimedia/suwako.webp", imageAttribution: "Photo: Tab-chan / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.1, reviewCount: 350, googleRating: 4.3, googleReviewCount: 1309,
     catchableFish: [
+      { fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "穴釣り" },
+      { fish: fish("koi"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
       { fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" },
     ],
     bestTimes: btAllDay, tackleRecommendations: [],
@@ -1813,6 +1815,8 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
     rentalDetail: "ワカサギ釣りセット・ボートレンタルあり",
     mainImageUrl: "/images/spots/wikimedia/kizakiko.webp", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.9, reviewCount: 170,
     catchableFish: [
+      { fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "穴釣り" },
+      { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" },
     ],
     bestTimes: btAllDay, tackleRecommendations: [],
@@ -1854,6 +1858,8 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
     rentalDetail: "ボート・タックルレンタルあり",
     mainImageUrl: "/images/spots/wikimedia/nojiriko.webp", imageAttribution: "Photo: jenterri / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.0, reviewCount: 220, googleRating: 4.2, googleReviewCount: 434,
     catchableFish: [
+      { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
+      { fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "穴釣り" },
       { fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
@@ -1894,6 +1900,8 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
     rentalDetail: "ワカサギ釣りセットレンタルあり",
     mainImageUrl: "/images/spots/wikimedia/matsubarako.webp", imageAttribution: "Photo: くろふね / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.7, reviewCount: 130, googleRating: 4.1, googleReviewCount: 190,
     catchableFish: [
+      { fish: fish("wakasagi"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "穴釣り" },
+      { fish: fish("herabuna"), monthStart: 4, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ウキ釣り" },
       { fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" },
     ],
     bestTimes: btAllDay, tackleRecommendations: [],
