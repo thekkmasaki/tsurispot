@@ -490,6 +490,8 @@ export const freshwaterSpots: FishingSpot[] = [
     rating: 4.0, reviewCount: 123, googleRating: 3.8, googleReviewCount: 12,
     catchableFish: [
       { fish: fish("herabuna"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "へら竿・練りエサ" },
+      { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
+      { fish: fish("koi"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
     ],
     bestTimes: [{ label: "朝マヅメ", timeRange: "05:30〜08:00", rating: "best" }, { label: "日中", timeRange: "09:00〜14:00", rating: "good" }],
     tackleRecommendations: [],
