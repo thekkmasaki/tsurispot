@@ -288,7 +288,24 @@ git push origin master
 
 ### 推奨並列作業パターン
 
-- **スポット大量追加**: spot-adder ×2 + data-validator ×1（追加しながら検証）
+- **スポット大量追加**: `/spot-generator` skill を使う（後述）
 - **コンテンツ拡充**: content-writer ×1 + seo-optimizer ×1 + data-validator ×1
 - **品質改善**: data-validator ×1 + seo-optimizer ×2
 - **注意**: 並列エージェントは最大3まで（ネットワーク負荷軽減）
+
+## カスタム skill
+
+| skill | パス | 用途 |
+|-------|------|------|
+| spot-generator | `.claude/skills/spot-generator/SKILL.md` | スポットを LLM/外部API/CSV から大量生成。checkpoint resume、容量チェック、PR自動作成つき |
+| weekly-report | `.claude/skills/weekly-report/SKILL.md` | 主要10エリアの釣果週報を生成して microCMS に投稿（ユーザー管理） |
+
+### /spot-generator 運用ルール
+
+- 並列上限 **3**、 1バッチ50件、5ファイル / バッチ完了ごとに WIP コミット
+- 紹介文は **オリジナル200-400字**（80字未満は format-spot.mjs が自動拒否）
+- 容量上限: 総スポット **8,500件 / TS合計 18MB**（どちらか超えたら停止）
+- 必ず `feature/spot-gen-<region>-<date>` ブランチで PR 経由（master 直 push 禁止）
+- checkpoint は `.claude/state/spot-generation-progress.json` （マシン固有、gitignored）
+- レート切れ中断後は `/spot-generator --resume` で再開
+- 詳細手順: `.claude/skills/spot-generator/SKILL.md`
