@@ -2,6 +2,7 @@ import { ImageResponse } from "next/og";
 import { getSpotBySlug } from "@/lib/data/spots";
 import { SPOT_TYPE_LABELS } from "@/types";
 import { getOgFont } from "@/lib/og-font";
+import { OG_IMAGE_CACHE_HEADERS } from "@/lib/og-cache";
 
 export const runtime = "nodejs";
 export const alt = "ツリスポ - 釣りスポット情報";
@@ -60,7 +61,7 @@ export default async function Image({
           </div>
         </div>
       ),
-      { ...size }
+      { ...size, headers: OG_IMAGE_CACHE_HEADERS }
     );
   }
 
@@ -289,6 +290,7 @@ export default async function Image({
     ),
     {
       ...size,
+      headers: OG_IMAGE_CACHE_HEADERS,
       fonts: fontData
         ? [
             {
