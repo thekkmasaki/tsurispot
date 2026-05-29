@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import { getFishBySlug } from "@/lib/data/fish";
 import { getOgFont } from "@/lib/og-font";
+import { OG_IMAGE_CACHE_HEADERS } from "@/lib/og-cache";
 
 export const runtime = "nodejs";
 export const alt = "ツリスポ - 魚種情報";
@@ -63,7 +64,7 @@ export default async function Image({
           </div>
         </div>
       ),
-      { ...size }
+      { ...size, headers: OG_IMAGE_CACHE_HEADERS }
     );
   }
 
@@ -357,6 +358,7 @@ export default async function Image({
     ),
     {
       ...size,
+      headers: OG_IMAGE_CACHE_HEADERS,
       fonts: fontData
         ? [
             {

@@ -188,17 +188,32 @@ jobs:
           echo "::error::Deployment timed out after 7.5 minutes"
           exit 1
 
-      # CloudFront HTML パスを限定 invalidate。
-      # /* 全消去は origin 転送量増を招くため避け、HTML を返す主要パスのみ。
-      # /_next/static/* は hash 付き URL のため invalidate 不要。
-      # ※ HTML は s-maxage=31536000 でキャッシュされるため、これを消さないと
-      #   deploy しても古い HTML が返り続け「シークレットで治らない」事故になる。
-      - name: CloudFront invalidation (HTML パス限定)
+      # Cloudflare キャッシュ purge。
+      # 本番 DNS は Cloudflare に移行済みで CloudFront はバイパス（アイドル）。
+      # Cloudflare で HTML をエッジキャッシュするため、deploy 後に purge しないと
+      # 古い HTML が返り続け「シークレットでも治らない」事故になる。
+      # 静的アセットは hash 付き immutable URL のため purge_everything でも実害なし。
+      # CF_API_TOKEN / CF_ZONE_ID 未設定時は skip（段階導入のため非致命）。
+      - name: Cloudflare cache purge
         if: github.ref == 'refs/heads/master'
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
         run: |
-          aws cloudfront create-invalidation \
-            --distribution-id E366L8IETD0MRP \
-            --paths "/" "/login*" "/spots*" "/fish*" "/prefectures*" "/blog*" "/guides*" "/users*" "/mypage*" "/shops*"
+          if [ -z "$CF_API_TOKEN" ] || [ -z "$CF_ZONE_ID" ]; then
+            echo "::warning::CF_API_TOKEN / CF_ZONE_ID 未設定のため Cloudflare purge を skip しました。"
+            exit 0
+          fi
+          resp=$(curl -sS -X POST \
+            "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
+            -H "Authorization: Bearer ${CF_API_TOKEN}" \
+            -H "Content-Type: application/json" \
+            --data '{"purge_everything":true}')
+          echo "$resp"
+          echo "$resp" | grep -q '"success":true' || {
+            echo "::error::Cloudflare purge failed"; exit 1;
+          }
+          echo "Cloudflare cache purged."
 
       - name: デプロイ後ヘルスチェック
         if: success() && github.ref == 'refs/heads/master'
