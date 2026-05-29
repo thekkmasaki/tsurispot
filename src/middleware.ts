@@ -65,6 +65,11 @@ function checkOriginLockdown(req: NextRequest): NextResponse | null {
   return new NextResponse("Forbidden", { status: 403 });
 }
 
+// RSC / プリフェッチ要求かどうか（App Router がクライアントナビ用に付与）。
+function isRscRequest(req: NextRequest): boolean {
+  return req.headers.has("rsc") || req.headers.has("next-router-prefetch");
+}
+
 export function middleware(req: NextRequest) {
   const ua = req.headers.get("user-agent") || "";
   if (ua && BLOCKED_UA_PATTERNS.some((p) => p.test(ua))) {
@@ -74,7 +79,18 @@ export function middleware(req: NextRequest) {
   const lockdown = checkOriginLockdown(req);
   if (lockdown) return lockdown;
 
-  return NextResponse.next();
+  const res = NextResponse.next();
+
+  // CDN(Cloudflare)が HTML をエッジキャッシュできるよう Vary を正規化する。
+  // App Router は全ページ応答に `Vary: RSC, Next-Router-State-Tree, ...` を付与するが、
+  // Cloudflare は Accept-Encoding 以外の Vary を持つ応答をキャッシュしない（cf-cache-status: DYNAMIC）。
+  // ドキュメント要求(=RSCヘッダ無しのGET)は常に同一HTMLを返すため、Vary を Accept-Encoding に
+  // 揃えても安全。RSC/プリフェッチ要求は CDN 側で明示バイパス済みなので、そちらは元の挙動のまま残す。
+  if (req.method === "GET" && !isRscRequest(req)) {
+    res.headers.set("vary", "Accept-Encoding");
+  }
+
+  return res;
 }
 
 export const config = {
