@@ -33,12 +33,64 @@ const BLOCKED_UA_PATTERNS = [
   /SeznamBot/i,
 ];
 
+// オリジン直アクセス遮断（コスト＆セキュリティ）。
+// App Runner の URL は直接到達可能なため、Cloudflare をバイパスした bot/スクレイパが
+// キャッシュを無視して origin を叩き、課金（vCPU/egress）を発生させ得る。
+// Cloudflare 側で全 origin リクエストに秘密ヘッダ `x-origin-verify` を付与し、
+// ここで検証することで「Cloudflare 経由のみ許可」にする。
+//
+// fail-safe 段階導入（全 403 事故を防ぐ）:
+//   - ORIGIN_VERIFY_SECRET 未設定     → 無効（素通り）
+//   - ORIGIN_LOCKDOWN_MODE="log"      → 不一致を warn ログのみ・ブロックしない（計測フェーズ）
+//   - ORIGIN_LOCKDOWN_MODE="enforce"  → 不一致を 403（本番遮断）
+//   - それ以外/未設定                  → 無効（素通り）
+// ※ Cloudflare 側のヘッダ付与を確認後に "enforce" へ切り替える運用。
+const ORIGIN_VERIFY_SECRET = process.env.ORIGIN_VERIFY_SECRET;
+const ORIGIN_LOCKDOWN_MODE = process.env.ORIGIN_LOCKDOWN_MODE;
+
+function checkOriginLockdown(req: NextRequest): NextResponse | null {
+  if (!ORIGIN_VERIFY_SECRET) return null;
+  if (ORIGIN_LOCKDOWN_MODE !== "log" && ORIGIN_LOCKDOWN_MODE !== "enforce") return null;
+
+  const provided = req.headers.get("x-origin-verify");
+  if (provided === ORIGIN_VERIFY_SECRET) return null; // Cloudflare 経由 = 許可
+
+  if (ORIGIN_LOCKDOWN_MODE === "log") {
+    console.warn(
+      `[origin-lockdown] direct-origin access (mode=log): ${req.method} ${req.nextUrl.pathname}`,
+    );
+    return null;
+  }
+  // enforce
+  return new NextResponse("Forbidden", { status: 403 });
+}
+
+// RSC / プリフェッチ要求かどうか（App Router がクライアントナビ用に付与）。
+function isRscRequest(req: NextRequest): boolean {
+  return req.headers.has("rsc") || req.headers.has("next-router-prefetch");
+}
+
 export function middleware(req: NextRequest) {
   const ua = req.headers.get("user-agent") || "";
   if (ua && BLOCKED_UA_PATTERNS.some((p) => p.test(ua))) {
     return new NextResponse("Forbidden", { status: 403 });
   }
-  return NextResponse.next();
+
+  const lockdown = checkOriginLockdown(req);
+  if (lockdown) return lockdown;
+
+  const res = NextResponse.next();
+
+  // CDN(Cloudflare)が HTML をエッジキャッシュできるよう Vary を正規化する。
+  // App Router は全ページ応答に `Vary: RSC, Next-Router-State-Tree, ...` を付与するが、
+  // Cloudflare は Accept-Encoding 以外の Vary を持つ応答をキャッシュしない（cf-cache-status: DYNAMIC）。
+  // ドキュメント要求(=RSCヘッダ無しのGET)は常に同一HTMLを返すため、Vary を Accept-Encoding に
+  // 揃えても安全。RSC/プリフェッチ要求は CDN 側で明示バイパス済みなので、そちらは元の挙動のまま残す。
+  if (req.method === "GET" && !isRscRequest(req)) {
+    res.headers.set("vary", "Accept-Encoding");
+  }
+
+  return res;
 }
 
 export const config = {
