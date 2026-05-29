@@ -70,6 +70,8 @@ import { NearbyAccommodation, RakutenTravelCta } from "@/components/spots/nearby
 import { SpotRulesCard } from "@/components/spots/spot-rules";
 const SpotPhotoGallery = nextDynamic(
   () => import("@/components/spots/spot-photo-gallery").then(m => ({ default: m.SpotPhotoGallery })),
+  // CLS対策: ほぼファーストビュー圏にあるギャラリーの高さを予約（他の遅延importと同様）
+  { loading: () => <div className="aspect-video w-full animate-pulse rounded-xl bg-muted" /> },
 );
 import { areaGuides } from "@/lib/data/area-guides";
 import { explainTime, explainMethod } from "@/lib/fishing-term-helper";

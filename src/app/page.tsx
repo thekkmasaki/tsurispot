@@ -327,7 +327,7 @@ export default async function Home() {
             </div>
 
             {/* わかる情報バッジ */}
-            <div className="mb-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-[11px] text-blue-200/80 sm:mb-6 sm:gap-x-4 sm:text-xs">
+            <div className="mb-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-[11px] text-blue-100 sm:mb-6 sm:gap-x-4 sm:text-xs">
               <span className="flex items-center gap-1"><span aria-hidden="true">☀️</span>天気予報</span>
               <span className="flex items-center gap-1"><span aria-hidden="true">🌡️</span>気温</span>
               <span className="flex items-center gap-1"><span aria-hidden="true">🌊</span>水温</span>

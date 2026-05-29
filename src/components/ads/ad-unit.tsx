@@ -148,10 +148,13 @@ function AdWrapper({
 export function InArticleAd({ className = "" }: { className?: string }) {
   return (
     <AdWrapper className={`my-8 ${className}`}>
+      {/* CLS対策: lazyOnloadで遅延挿入される広告が下のコンテンツを押し下げないよう
+          最小高さを予約する（SidebarAd/DisplayAd と同じ250px基準）。 */}
       <AdUnit
         slot={SLOTS.inArticle}
         format="fluid"
         layout="in-article"
+        className="min-h-[250px]"
         style={{ display: "block", textAlign: "center" }}
       />
     </AdWrapper>
@@ -304,11 +307,13 @@ export function SideRailAds() {
 // ---- リスト間広告（カードリスト内に挿入） ----
 export function InFeedAd({ className = "" }: { className?: string }) {
   return (
+    // CLS対策: スポット一覧グリッド(col-span-full)に遅延挿入されても
+    // カード列を押し下げないよう最小高さを予約する。
     <AdUnit
       slot={SLOTS.display}
       format="fluid"
       layoutKey="-6t+ed+2i-1n-4w"
-      className={`my-4 ${className}`}
+      className={`my-4 min-h-[250px] ${className}`}
       style={{ display: "block" }}
     />
   );

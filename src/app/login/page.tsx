@@ -95,7 +95,8 @@ export default function LoginPage() {
     fetch("/api/auth/csrf", { credentials: "same-origin" })
       .then((r) => r.json())
       .then((d: { csrfToken: string }) => setCsrfToken(d.csrfToken))
-      .catch(() => {});
+      // 取得失敗時は "" をセットしてエラー表示へ。null のままだと「準備中…」が永久ループする。
+      .catch(() => setCsrfToken(""));
   }, []);
 
   const handleOpenInSafari = async () => {
@@ -193,6 +194,19 @@ export default function LoginPage() {
             <div className="flex items-center justify-center py-8 text-sm text-muted-foreground">
               <Loader2 className="mr-2 h-5 w-5 animate-spin" aria-hidden="true" />
               準備中...
+            </div>
+          ) : csrfToken === "" ? (
+            <div className="flex flex-col items-center gap-3 py-8 text-center">
+              <p className="text-sm text-destructive">
+                読み込みに失敗しました。通信環境を確認して再読み込みしてください。
+              </p>
+              <button
+                type="button"
+                onClick={() => window.location.reload()}
+                className="inline-flex items-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+              >
+                再読み込み
+              </button>
             </div>
           ) : (
           <>

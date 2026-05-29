@@ -292,6 +292,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
       <div className="relative">
         <Search className="absolute left-3 top-1/2 size-5 -translate-y-1/2 text-muted-foreground" />
         <Input
+          aria-label="スポット名・地域名で検索"
           placeholder="スポット名・地域名で検索..."
           value={searchText}
           onChange={(e) => { setSearchText(e.target.value); startTransition(() => { setCurrentPage(1); }); }}
@@ -593,7 +594,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
 
       {/* Active filters summary + clear */}
       <div className="flex items-center justify-between">
-        <p className="text-sm text-muted-foreground">
+        <p aria-live="polite" className="text-sm text-muted-foreground">
           {filteredSpots.length}件のスポット
         </p>
         {hasFilters && (

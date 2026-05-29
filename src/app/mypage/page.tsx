@@ -210,6 +210,7 @@ export default function MyPage() {
   const [profileMsg, setProfileMsg] = useState<{ type: "success" | "error"; text: string } | null>(null);
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const [deleting, setDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
   const [stats, setStats] = useState<StatsExt | null>(null);
   const [badgesData, setBadgesData] = useState<BadgesResponse | null>(null);
   const [profile, setProfile] = useState<ProfileData | null>(null);
@@ -411,13 +412,17 @@ export default function MyPage() {
 
   const handleDeleteAccount = async () => {
     setDeleting(true);
+    setDeleteError(null);
     try {
       const res = await fetch("/api/user/profile", { method: "DELETE" });
       if (res.ok) {
         signOut({ callbackUrl: "/" });
+        return;
       }
+      const data = await res.json().catch(() => ({}));
+      setDeleteError(data.error || "削除に失敗しました。時間をおいて再度お試しください");
     } catch {
-      /* ignore */
+      setDeleteError("通信エラーが発生しました。時間をおいて再度お試しください");
     }
     setDeleting(false);
   };
@@ -464,6 +469,9 @@ export default function MyPage() {
             <img
               src={user.avatarUrl}
               alt=""
+              width={96}
+              height={96}
+              decoding="async"
               className="h-24 w-24 rounded-full border-4 border-white object-cover shadow-md"
               referrerPolicy="no-referrer"
             />
@@ -952,6 +960,10 @@ export default function MyPage() {
                       <img
                         src={item.photoUrl}
                         alt=""
+                        width={56}
+                        height={56}
+                        loading="lazy"
+                        decoding="async"
                         className="h-14 w-14 shrink-0 rounded-md object-cover"
                       />
                     ) : (
@@ -1252,6 +1264,11 @@ export default function MyPage() {
                   キャンセル
                 </Button>
               </div>
+              {deleteError && (
+                <p role="alert" className="text-sm text-destructive">
+                  {deleteError}
+                </p>
+              )}
             </div>
           )}
         </div>

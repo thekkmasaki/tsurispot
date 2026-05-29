@@ -44,21 +44,31 @@ export function NicknameModal() {
   };
 
   const handleSkip = async () => {
+    setSaving(true);
+    setError("");
     try {
-      await fetch("/api/user/profile", {
+      const res = await fetch("/api/user/profile", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ nickname: session.user.nickname }),
       });
-      await update({ nickname: session.user.nickname });
-    } catch { /* ignore */ }
+      if (res.ok) {
+        await update({ nickname: session.user.nickname });
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setError(data.error || "保存に失敗しました。もう一度お試しください");
+      }
+    } catch {
+      setError("通信エラーが発生しました");
+    }
+    setSaving(false);
   };
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="mx-4 w-full max-w-sm rounded-2xl bg-white p-6 shadow-2xl">
         <div className="text-center">
-          <span className="text-4xl">🎣</span>
+          <span className="text-4xl" aria-hidden="true">🎣</span>
           <h2 className="mt-2 text-lg font-bold">ようこそ、ツリスポへ！</h2>
           <p className="mt-1 text-sm text-muted-foreground">
             釣果投稿で使うニックネームを設定しましょう
@@ -85,7 +95,8 @@ export function NicknameModal() {
           </Button>
           <button
             onClick={handleSkip}
-            className="text-xs text-muted-foreground underline hover:text-foreground"
+            disabled={saving}
+            className="text-xs text-muted-foreground underline hover:text-foreground disabled:opacity-50"
           >
             「{session.user.nickname}」のままにする
           </button>

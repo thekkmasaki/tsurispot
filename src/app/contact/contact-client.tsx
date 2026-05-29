@@ -129,6 +129,7 @@ function ContactClientInner() {
               <button
                 key={cat.value}
                 type="button"
+                aria-pressed={isSelected}
                 onClick={() => setCategory(isSelected ? "" : cat.value)}
                 className={`flex flex-col items-center gap-1.5 rounded-xl border-2 p-3 text-center transition-all sm:p-4 ${
                   isSelected
@@ -136,7 +137,7 @@ function ContactClientInner() {
                     : "border-border hover:border-primary/30 hover:bg-muted/50"
                 }`}
               >
-                <Icon className={`h-5 w-5 ${isSelected ? "text-primary" : "text-muted-foreground"}`} />
+                <Icon aria-hidden="true" className={`h-5 w-5 ${isSelected ? "text-primary" : "text-muted-foreground"}`} />
                 <span className="text-xs font-medium sm:text-sm">{cat.label}</span>
                 <span className="hidden text-[10px] text-muted-foreground sm:block">
                   {cat.description}
