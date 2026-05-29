@@ -130,7 +130,7 @@ function handleCatchReport(data) {
     data.comment || "",
     data.date || "",
     data.spotUrl || "",
-    "未承認"
+    "自動公開済み"
   ]);
 
   var subject = "【ツリスポ】新しい釣果報告: " + (data.fishName || "不明") + " @ " + (data.spotName || "不明");
@@ -148,7 +148,8 @@ function handleCatchReport(data) {
     "スポットページ: " + (data.spotUrl || ""),
     "スプレッドシート: https://docs.google.com/spreadsheets/d/" + SPREADSHEET_ID,
     "",
-    "承認するにはスプレッドシートの「承認」列を「承認済み」に変更してください。"
+    "※この投稿はサイトに自動公開済みです（スポット詳細ページ＋トップの「みんなの最近の釣果」に反映）。",
+    "　スプレッドシートは記録・バックアップ用です。不適切な投稿はサイト上の「通報」または開発者にご連絡ください。"
   ].join("\n");
 
   MailApp.sendEmail(NOTIFY_EMAIL, subject, body);

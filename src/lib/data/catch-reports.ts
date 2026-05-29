@@ -14,6 +14,7 @@ export interface CatchReport {
   sizeCm?: number;
   method?: string; // 釣法
   weather?: string; // 天候
+  submittedAt?: string; // 投稿日時(ISO)。UGC投稿時に設定。型と実値の整合用
 }
 
 // サンプル釣果データ（承認済み）
