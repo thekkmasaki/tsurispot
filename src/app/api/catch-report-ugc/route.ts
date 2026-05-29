@@ -122,6 +122,15 @@ export async function POST(request: Request) {
       // DynamoDB障害時もGASに送信するため続行
     }
 
+    // 全スポット横断の最新釣果フィード（トップ「みんなの最近の釣果」用）。
+    // 匿名・ログインを問わず push する（ログイン別の user_reports とは別系統）。
+    try {
+      await redis.lpush("recent_reports:global", JSON.stringify(reportData));
+      await redis.ltrim("recent_reports:global", 0, 49); // 最新50件保持
+    } catch (err) {
+      console.error("[釣果投稿] グローバル recent push エラー:", err);
+    }
+
     // ログインユーザーの釣果数カウントを更新（バッジ・称号反映）
     if (tsuriId) {
       try {

@@ -1,18 +1,46 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Fish, Calendar, MapPin, Camera, ArrowRight } from "lucide-react";
-import { catchReports } from "@/lib/data/catch-reports";
+import { catchReports, type CatchReport } from "@/lib/data/catch-reports";
 
 /**
  * PR-INV-1: ホームに「最近の釣果」 mini feed 表示。
  * 投稿動線改善 + chicken-and-egg 解消の第一歩。
  *
- * 既存 catch-reports.ts の approved データから最新 5 件を pick。
+ * 表示ソース: /api/catch-reports/recent（全スポット横断の実投稿 = Redis グローバルリスト）。
+ * SSR/JS無効時・API失敗時はハードコードのサンプル承認済みデータを fallback として描画する。
  */
+const fallbackReports: CatchReport[] = catchReports
+  .filter((r) => r.approved)
+  .sort((a, b) => b.date.localeCompare(a.date))
+  .slice(0, 5);
+
 export function RecentCatchReports() {
-  const recent = catchReports
-    .filter((r) => r.approved)
-    .sort((a, b) => b.date.localeCompare(a.date))
-    .slice(0, 5);
+  const [recent, setRecent] = useState<CatchReport[]>(fallbackReports);
+
+  useEffect(() => {
+    let active = true;
+    fetch("/api/catch-reports/recent?limit=5")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (
+          active &&
+          data?.ok &&
+          Array.isArray(data.reports) &&
+          data.reports.length > 0
+        ) {
+          setRecent(data.reports as CatchReport[]);
+        }
+      })
+      .catch(() => {
+        // 取得失敗時は fallback 表示のまま
+      });
+    return () => {
+      active = false;
+    };
+  }, []);
 
   if (recent.length === 0) return null;
 
