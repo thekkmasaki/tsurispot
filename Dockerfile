@@ -24,9 +24,12 @@ COPY public ./public
 COPY --chown=nextjs:nodejs .next/standalone ./
 # 静的アセット（CSS/JS）
 COPY --chown=nextjs:nodejs .next/static ./.next/static
+# Vary 正規化エントリ（Cloudflare が HTML をエッジキャッシュできるようにする）
+COPY --chown=nextjs:nodejs docker/standalone-entry.js ./standalone-entry.js
 
 USER nextjs
 
 EXPOSE 3000
 
-CMD ["node", "server.js"]
+# server.js を直接でなく Vary 正規化ラッパ経由で起動
+CMD ["node", "standalone-entry.js"]
