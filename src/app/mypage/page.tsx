@@ -554,10 +554,11 @@ export default function MyPage() {
           <Card className="mt-4">
             <CardContent className="space-y-3 p-4">
               <div>
-                <label className="mb-1 block text-xs font-medium">
+                <label htmlFor="profile-nickname" className="mb-1 block text-xs font-medium">
                   ニックネーム（{nickname.length}/20）
                 </label>
                 <Input
+                  id="profile-nickname"
                   value={nickname}
                   onChange={(e) => setNickname(e.target.value)}
                   maxLength={20}
@@ -565,10 +566,11 @@ export default function MyPage() {
                 />
               </div>
               <div>
-                <label className="mb-1 block text-xs font-medium">
+                <label htmlFor="profile-bio" className="mb-1 block text-xs font-medium">
                   自己紹介（{bio.length}/140）
                 </label>
                 <textarea
+                  id="profile-bio"
                   value={bio}
                   onChange={(e) => setBio(e.target.value)}
                   maxLength={140}
@@ -578,7 +580,7 @@ export default function MyPage() {
                 />
               </div>
               <div>
-                <label className="mb-1 block text-xs font-medium">カバー画像</label>
+                <label htmlFor="profile-cover" className="mb-1 block text-xs font-medium">カバー画像</label>
                 {headerImage && (
                   <div
                     className="mb-2 h-20 rounded-md border bg-cover bg-center"
@@ -587,6 +589,7 @@ export default function MyPage() {
                 )}
                 <div className="flex items-center gap-2">
                   <input
+                    id="profile-cover"
                     type="file"
                     accept="image/jpeg,image/png,image/webp"
                     onChange={handleCoverUpload}
@@ -609,10 +612,11 @@ export default function MyPage() {
               </div>
               {catchReports.length > 0 && (
                 <div>
-                  <label className="mb-1 block text-xs font-medium">
+                  <label htmlFor="profile-bestcatch" className="mb-1 block text-xs font-medium">
                     Best Catch (プロフィール最上部に表示)
                   </label>
                   <select
+                    id="profile-bestcatch"
                     value={bestCatchId}
                     onChange={(e) => setBestCatchId(e.target.value)}
                     className="w-full rounded-md border bg-background px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-ocean-mid"
@@ -629,10 +633,10 @@ export default function MyPage() {
                 </div>
               )}
               <div>
-                <label className="mb-1 block text-xs font-medium">
+                <span id="profile-styles-label" className="mb-1 block text-xs font-medium">
                   釣行スタイル ({styles.length}/5)
-                </label>
-                <div className="flex flex-wrap gap-1.5">
+                </span>
+                <div role="group" aria-labelledby="profile-styles-label" className="flex flex-wrap gap-1.5">
                   {STYLE_OPTIONS.map((tag) => {
                     const active = styles.includes(tag);
                     const disabled = !active && styles.length >= 5;
@@ -642,6 +646,7 @@ export default function MyPage() {
                         type="button"
                         onClick={() => toggleStyle(tag)}
                         disabled={disabled}
+                        aria-pressed={active}
                         className={`rounded-full border px-3 py-1 text-xs transition-colors ${
                           active
                             ? "border-ocean-mid bg-ocean-mid text-white"
@@ -656,6 +661,7 @@ export default function MyPage() {
               </div>
               {profileMsg && (
                 <p
+                  role="status"
                   className={`text-xs ${
                     profileMsg.type === "success" ? "text-emerald-600" : "text-red-600"
                   }`}

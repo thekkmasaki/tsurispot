@@ -49,7 +49,7 @@ export function CheckinButton({ slug, className }: CheckinButtonProps) {
         setError(data.error || "保存に失敗しました");
       }
     } catch {
-      setError("通信エラー");
+      setError("通信エラーが発生しました。もう一度お試しください");
     }
     setSaving(false);
   };
@@ -64,7 +64,7 @@ export function CheckinButton({ slug, className }: CheckinButtonProps) {
           className,
         )}
       >
-        <Anchor className="h-4 w-4" />
+        <Anchor className="h-4 w-4" aria-hidden="true" />
         ここに行った
       </button>
     );
@@ -73,24 +73,26 @@ export function CheckinButton({ slug, className }: CheckinButtonProps) {
   return (
     <div className="space-y-2 rounded-lg border bg-card p-3 shadow-sm">
       <div className="mb-1 flex items-center gap-1.5 text-sm font-medium text-emerald-700">
-        <Anchor className="h-4 w-4" />
+        <Anchor className="h-4 w-4" aria-hidden="true" />
         釣行を記録（公開されません）
       </div>
       <div>
-        <label className="mb-1 block text-xs font-medium">行った日</label>
+        <label htmlFor="checkin-date" className="mb-1 block text-xs font-medium">行った日</label>
         <input
+          id="checkin-date"
           type="date"
           value={date}
           onChange={(e) => setDate(e.target.value)}
           max={new Date().toISOString().slice(0, 10)}
-          className="w-full rounded-md border bg-background px-2 py-1.5 text-sm"
+          className="w-full rounded-md border bg-background px-2 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-300"
         />
       </div>
       <div>
-        <label className="mb-1 block text-xs font-medium">
+        <label htmlFor="checkin-memo" className="mb-1 block text-xs font-medium">
           メモ（{memo.length}/200）
         </label>
         <textarea
+          id="checkin-memo"
           value={memo}
           onChange={(e) => setMemo(e.target.value)}
           maxLength={200}
@@ -100,9 +102,9 @@ export function CheckinButton({ slug, className }: CheckinButtonProps) {
         />
       </div>
       {saved && (
-        <p className="text-xs text-emerald-600">✓ 釣行を記録しました</p>
+        <p role="status" className="text-xs text-emerald-600">✓ 釣行を記録しました</p>
       )}
-      {error && <p className="text-xs text-red-600">{error}</p>}
+      {error && <p role="alert" className="text-xs text-red-600">{error}</p>}
       <div className="flex gap-2">
         <button
           type="button"
@@ -110,7 +112,7 @@ export function CheckinButton({ slug, className }: CheckinButtonProps) {
           disabled={saving}
           className="inline-flex items-center gap-1 rounded-md bg-emerald-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-emerald-700 disabled:opacity-50"
         >
-          <CheckCircle2 className="h-3.5 w-3.5" />
+          <CheckCircle2 className="h-3.5 w-3.5" aria-hidden="true" />
           {saving ? "保存中..." : "記録する"}
         </button>
         <button

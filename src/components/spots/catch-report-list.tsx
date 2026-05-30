@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Fish, Calendar, User, Ruler, Flag } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { toast } from "@/components/ui/toast";
 import type { CatchReport } from "@/lib/data/catch-reports";
 
 interface CatchReportListProps {
@@ -37,24 +38,34 @@ function getSessionId(): string {
 }
 
 export function CatchReportList({ spotSlug, initialReports }: CatchReportListProps) {
-  const [reports] = useState<CatchReport[]>(initialReports);
+  // initialReports を useState で固定すると router.refresh() 後も古い一覧のままになるため、
+  // prop を直接使う（投稿成功時の router.refresh() で新しい釣果が反映される）。
+  const reports = initialReports;
   const [flaggedIds, setFlaggedIds] = useState<Set<string>>(new Set());
+  const [confirmingId, setConfirmingId] = useState<string | null>(null);
+  const [submittingId, setSubmittingId] = useState<string | null>(null);
 
-  const handleFlag = useCallback(async (reportId: string) => {
-    if (!confirm("この投稿を不適切として通報しますか？")) return;
-
+  // ネイティブ confirm()/alert() を排除し、インライン確認 + 二重送信ガード + トースト通知に置換。
+  const submitFlag = useCallback(async (reportId: string) => {
+    setSubmittingId(reportId);
     try {
       const res = await fetch("/api/report-flag", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ reportId, sessionId: getSessionId() }),
       });
-      const data = await res.json();
-      alert(data.message || "通報を受け付けました");
-      setFlaggedIds((prev) => new Set(prev).add(reportId));
+      const data = await res.json().catch(() => ({}));
+      if (res.ok) {
+        toast.success(data.message || "通報を受け付けました");
+        setFlaggedIds((prev) => new Set(prev).add(reportId));
+      } else {
+        toast.error(data.message || "通報に失敗しました。もう一度お試しください。");
+      }
     } catch {
-      alert("通報に失敗しました。もう一度お試しください。");
+      toast.error("通報に失敗しました。もう一度お試しください。");
     }
+    setSubmittingId(null);
+    setConfirmingId(null);
   }, []);
 
   if (reports.length === 0) {
@@ -73,16 +84,34 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
       {reports.map((report) => (
         <Card key={report.id} className="group relative py-3">
           <CardContent className="px-4">
-            {/* 通報ボタン */}
+            {/* 通報ボタン（インライン確認方式） */}
             {!flaggedIds.has(report.id) && (
-              <button
-                onClick={() => handleFlag(report.id)}
-                className="absolute right-2 top-2 rounded-md p-1 text-muted-foreground/30 opacity-0 transition-all hover:bg-destructive/10 hover:text-destructive group-hover:opacity-100"
-                title="不適切な投稿を通報"
-                aria-label="通報"
-              >
-                <Flag className="size-3.5" />
-              </button>
+              confirmingId === report.id ? (
+                <div className="absolute right-2 top-2 flex items-center gap-1">
+                  <button
+                    onClick={() => submitFlag(report.id)}
+                    disabled={submittingId === report.id}
+                    className="rounded-md bg-destructive px-2 py-0.5 text-xs font-medium text-white transition-opacity disabled:opacity-50"
+                  >
+                    {submittingId === report.id ? "送信中..." : "通報する"}
+                  </button>
+                  <button
+                    onClick={() => setConfirmingId(null)}
+                    className="rounded-md border px-2 py-0.5 text-xs text-muted-foreground hover:bg-muted"
+                  >
+                    キャンセル
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => setConfirmingId(report.id)}
+                  className="absolute right-2 top-2 rounded-md p-1 text-muted-foreground/30 opacity-0 transition-all hover:bg-destructive/10 hover:text-destructive group-hover:opacity-100 focus-visible:opacity-100"
+                  title="不適切な投稿を通報"
+                  aria-label="通報"
+                >
+                  <Flag className="size-3.5" aria-hidden="true" />
+                </button>
+              )
             )}
             <div className="flex items-start gap-3">
               {report.photoUrl ? (
@@ -146,7 +175,7 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
                   )}
                   {report.weather && (
                     <span className="flex items-center gap-0.5">
-                      {WEATHER_ICONS[report.weather] || ""} {report.weather}
+                      <span aria-hidden="true">{WEATHER_ICONS[report.weather] || ""}</span> {report.weather}
                     </span>
                   )}
                 </div>
