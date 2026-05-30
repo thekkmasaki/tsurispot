@@ -277,6 +277,8 @@ function TideChart({
         viewBox={`0 0 ${width} ${height}`}
         className="w-full min-w-[480px]"
         preserveAspectRatio="xMidYMid meet"
+        role="img"
+        aria-label="潮汐グラフ。満潮・干潮の時刻と潮位の推移。詳細は下の表で確認できます。"
       >
         <defs>
           <linearGradient id="tideGrad" x1="0" y1="0" x2="0" y2="1">
