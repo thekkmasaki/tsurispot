@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Heart } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useFavorites, getFavorites } from "@/hooks/use-favorites";
+import { toast } from "@/components/ui/toast";
 
 export function FavoriteButton({ spotSlug }: { spotSlug: string }) {
   const { toggleFavorite, isFavorite } = useFavorites();
@@ -13,7 +14,10 @@ export function FavoriteButton({ spotSlug }: { spotSlug: string }) {
     e.preventDefault();
     e.stopPropagation();
 
+    const willRemove = isFavorite(spotSlug);
     toggleFavorite(spotSlug);
+    // 従来はアニメのみで操作結果が無音だったため、トーストで明示（aria-liveでSRにも通知）。
+    toast.success(willRemove ? "お気に入りから削除しました" : "お気に入りに追加しました");
 
     setIsAnimating(true);
     setTimeout(() => setIsAnimating(false), 300);
@@ -25,6 +29,7 @@ export function FavoriteButton({ spotSlug }: { spotSlug: string }) {
     <button
       onClick={handleClick}
       aria-label={fav ? "お気に入りから削除" : "お気に入りに追加"}
+      aria-pressed={fav}
       className={cn(
         "flex items-center justify-center rounded-full p-3 transition-all active:scale-90 min-w-[44px] min-h-[44px]",
         fav
@@ -33,6 +38,7 @@ export function FavoriteButton({ spotSlug }: { spotSlug: string }) {
       )}
     >
       <Heart
+        aria-hidden="true"
         className={cn(
           "size-6 transition-transform duration-300",
           fav && "fill-red-500 text-red-500",

@@ -16,6 +16,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/toast";
 
 const CONTACT_EMAIL = "fishingspotjapan@gmail.com";
 
@@ -89,11 +90,14 @@ function ContactClientInner() {
     const body = encodeURIComponent(bodyParts.join("\n"));
 
     window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
+    // mailto はメーラー未設定だと無反応になりうるため、案内を明示。
+    toast.info("メールアプリを開きました。開かない場合は下のアドレスにコピーして送信してください。");
   };
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(CONTACT_EMAIL);
     setCopied(true);
+    toast.success("メールアドレスをコピーしました");
     setTimeout(() => setCopied(false), 2000);
   };
 

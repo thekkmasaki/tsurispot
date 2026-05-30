@@ -79,6 +79,9 @@ export function CalendarHeatmap({
               <div
                 key={di}
                 title={`${ymd(date)} (${count}件)`}
+                role={isFuture ? undefined : "img"}
+                aria-label={isFuture ? undefined : `${ymd(date)} ${count}件`}
+                aria-hidden={isFuture ? true : undefined}
                 className={cn(
                   "h-[10px] w-[10px] rounded-[2px]",
                   isFuture ? "bg-transparent" : colorFor(count),

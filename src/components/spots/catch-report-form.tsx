@@ -3,11 +3,13 @@
 import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import NextImage from "next/image";
+import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Send, CheckCircle, AlertCircle, Camera, X, Trophy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
+import { toast } from "@/components/ui/toast";
 import { getTitle, getNextTier } from "@/lib/titles";
 
 // そのスポットで釣れる魚名 + 汎用的な人気魚種
@@ -59,6 +61,7 @@ interface CatchReportFormProps {
 
 export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }: CatchReportFormProps) {
   const { data: session, status: authStatus } = useSession();
+  const router = useRouter();
   const fishInputRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isOpen, setIsOpen] = useState(false);
@@ -194,6 +197,9 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
         setSizeCm("");
         setMethod("");
         setWeather("");
+        // 自動公開UGCを一覧へ即反映（CatchReportList を initialReports 直結に変更済み）。
+        router.refresh();
+        toast.success("釣果を投稿しました！");
       } else {
         setErrorMessage(data.error || "送信に失敗しました");
         setStatus("error");
@@ -231,14 +237,14 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
     return (
       <Card className="mt-3 border-emerald-200 bg-emerald-50/50 py-4">
         <CardContent className="px-4">
-          <div className="flex items-start gap-3">
-            <CheckCircle className="mt-0.5 size-5 shrink-0 text-emerald-600" />
+          <div className="flex items-start gap-3" role="status">
+            <CheckCircle className="mt-0.5 size-5 shrink-0 text-emerald-600" aria-hidden="true" />
             <div>
               <p className="font-medium text-emerald-800">
                 投稿ありがとうございます！
               </p>
               <p className="mt-1 text-sm text-emerald-700">
-                ページを再読み込みすると表示されます。
+                投稿が一覧に反映されました。
                 {!session?.user && (
                   <>
                     <br />
@@ -314,7 +320,7 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
               type="text"
               placeholder="例: 釣りキチ太郎"
               value={userName}
-              onChange={(e) => setUserName(e.target.value)}
+              onChange={(e) => { setUserName(e.target.value); if (status === "error") setStatus("idle"); }}
               maxLength={20}
               required
             />
@@ -351,6 +357,7 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
                       key={name}
                       type="button"
                       onClick={() => toggle(name)}
+                      aria-pressed={selectedSet.has(name)}
                       className={`rounded-full border px-2.5 py-0.5 text-xs transition-colors ${
                         selectedSet.has(name)
                           ? "border-emerald-500 bg-emerald-50 text-emerald-700"
@@ -378,7 +385,7 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
               type="text"
               placeholder="例: アジ、サバ"
               value={fishName}
-              onChange={(e) => setFishName(e.target.value)}
+              onChange={(e) => { setFishName(e.target.value); if (status === "error") setStatus("idle"); }}
               maxLength={30}
               required
             />
@@ -475,6 +482,7 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
                   key={m}
                   type="button"
                   onClick={() => setMethod(method === m ? "" : m)}
+                  aria-pressed={method === m}
                   className={`rounded-full border px-2.5 py-0.5 text-xs transition-colors ${
                     method === m
                       ? "border-blue-500 bg-blue-50 text-blue-700"
@@ -498,13 +506,14 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
                   key={w.value}
                   type="button"
                   onClick={() => setWeather(weather === w.value ? "" : w.value)}
+                  aria-pressed={weather === w.value}
                   className={`rounded-full border px-2.5 py-0.5 text-xs transition-colors ${
                     weather === w.value
                       ? "border-amber-500 bg-amber-50 text-amber-700"
                       : "border-muted-foreground/20 text-muted-foreground hover:border-amber-300 hover:bg-amber-50/50"
                   }`}
                 >
-                  {w.icon} {w.label}
+                  <span aria-hidden="true">{w.icon}</span> {w.label}
                 </button>
               ))}
             </div>
@@ -522,15 +531,15 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
               className="flex min-h-[80px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
               placeholder="例: 朝マヅメにサビキで20匹釣れました！"
               value={comment}
-              onChange={(e) => setComment(e.target.value)}
+              onChange={(e) => { setComment(e.target.value); if (status === "error") setStatus("idle"); }}
               maxLength={100}
               required
             />
           </div>
 
           {status === "error" && errorMessage && (
-            <div className="flex items-center gap-2 rounded-md bg-destructive/10 px-3 py-2 text-sm text-destructive">
-              <AlertCircle className="size-4 shrink-0" />
+            <div role="alert" className="flex items-center gap-2 rounded-md bg-destructive/10 px-3 py-2 text-sm text-destructive">
+              <AlertCircle className="size-4 shrink-0" aria-hidden="true" />
               {errorMessage}
             </div>
           )}
@@ -541,8 +550,8 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
               disabled={status === "submitting" || photoUploading}
               className="gap-2"
             >
-              <Send className="size-4" />
-              {status === "submitting" ? "送信中..." : "釣果を投稿する"}
+              <Send className="size-4" aria-hidden="true" />
+              {photoUploading ? "写真をアップロード中..." : status === "submitting" ? "送信中..." : "釣果を投稿する"}
             </Button>
             <Button
               type="button"
