@@ -109,12 +109,12 @@ export default function RankingPage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListJsonLd) }}
       />
 
-      {/* ヘッダーグラデーション */}
-      <div className="bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-400 px-4 py-10 text-white">
+      {/* ヘッダーグラデーション（ブランドの ocean トークンに統一） */}
+      <div className="bg-gradient-to-br from-ocean-deep via-ocean-mid to-sea-foam px-4 py-10 text-white">
         <div className="mx-auto max-w-4xl">
           <div className="flex items-center gap-3">
             <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-white/20 backdrop-blur-sm">
-              <Trophy className="h-7 w-7 text-yellow-300" />
+              <Trophy className="h-7 w-7 text-sunset-gold" aria-hidden="true" />
             </div>
             <div>
               <h1 className="text-2xl font-bold sm:text-3xl">釣りスポット人気ランキング</h1>
