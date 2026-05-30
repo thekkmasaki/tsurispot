@@ -365,6 +365,7 @@ export function RankingClient({ spots }: { spots: RankingSpot[] }) {
         <div className="flex flex-wrap gap-2 items-center">
           <button
             onClick={() => setActivePrefecture("全国")}
+            aria-pressed={activePrefecture === "全国"}
             className={cn(
               "rounded-full px-4 py-1.5 text-sm font-bold transition-colors",
               activePrefecture === "全国"
@@ -379,6 +380,7 @@ export function RankingClient({ spots }: { spots: RankingSpot[] }) {
             <button
               key={group.label}
               onClick={() => setActiveRegion(activeRegion === group.label ? null : group.label)}
+              aria-pressed={activeRegion === group.label}
               className={cn(
                 "rounded-full px-3 py-1.5 text-sm font-medium transition-colors",
                 activeRegion === group.label
@@ -398,6 +400,7 @@ export function RankingClient({ spots }: { spots: RankingSpot[] }) {
               <button
                 key={pref}
                 onClick={() => { setActivePrefecture(pref); setActiveRegion(null); }}
+                aria-pressed={activePrefecture === pref}
                 className={cn(
                   "rounded-full px-3 py-1 text-xs font-medium transition-colors",
                   activePrefecture === pref
@@ -418,6 +421,7 @@ export function RankingClient({ spots }: { spots: RankingSpot[] }) {
           <button
             key={tab.key}
             onClick={() => setActiveTab(tab.key)}
+            aria-pressed={activeTab === tab.key}
             className={cn(
               "min-h-[40px] rounded-full px-4 py-1.5 text-sm font-medium transition-colors",
               activeTab === tab.key
@@ -431,7 +435,7 @@ export function RankingClient({ spots }: { spots: RankingSpot[] }) {
       </div>
 
       {/* 件数表示 */}
-      <p className="mb-4 text-sm text-muted-foreground">
+      <p aria-live="polite" className="mb-4 text-sm text-muted-foreground">
         {nearbyMode ? "現在地の近く" : activePrefecture}・{TABS.find((t) => t.key === activeTab)?.label ?? "総合"} TOP10
         （{rankedSpots.length}件）
       </p>

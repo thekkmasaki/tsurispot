@@ -318,7 +318,7 @@ export function QuizGame({ questions, categoryName, categoryIcon }: QuizGameProp
                 : "border-red-500 bg-red-50"
             }`}
           >
-            <div className="mb-2 text-4xl">
+            <div className="mb-2 text-4xl" aria-hidden="true">
               {isCorrect ? "⭕" : "❌"}
             </div>
             <p

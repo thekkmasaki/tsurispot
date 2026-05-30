@@ -1,11 +1,25 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { ArrowLeft, BarChart3 } from "lucide-react";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
-import { StatsCharts } from "@/components/mypage/stats-charts";
+
+// recharts(d3依存で重い)を /mypage/stats 専用チャンクに分離。
+// データ取得後にのみ描画されるため ssr:false で初期バンドルから除外する。
+const StatsCharts = dynamic(
+  () => import("@/components/mypage/stats-charts").then((m) => m.StatsCharts),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="flex justify-center py-12">
+        <div className="h-6 w-6 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+      </div>
+    ),
+  }
+);
 
 interface ChartsData {
   monthly: { month: string; count: number; label: string }[];

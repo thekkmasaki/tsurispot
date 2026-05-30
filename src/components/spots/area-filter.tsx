@@ -148,7 +148,8 @@ export function AreaFilteredSpotList({ spots }: { spots: SpotCardData[] }) {
       <div className="mb-4 flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
         <button
           onClick={() => setActiveRegion(null)}
-          className="min-h-[40px] shrink-0 focus:outline-none"
+          aria-pressed={activeRegion === null}
+          className="min-h-[40px] shrink-0 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
         >
           <Badge
             variant={activeRegion === null ? "default" : "outline"}
@@ -166,7 +167,8 @@ export function AreaFilteredSpotList({ spots }: { spots: SpotCardData[] }) {
             <button
               key={key}
               onClick={() => setActiveRegion(activeRegion === key ? null : key)}
-              className="min-h-[40px] shrink-0 focus:outline-none"
+              aria-pressed={activeRegion === key}
+              className="min-h-[40px] shrink-0 rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
             >
               <Badge
                 variant={activeRegion === key ? "default" : "outline"}
@@ -181,7 +183,7 @@ export function AreaFilteredSpotList({ spots }: { spots: SpotCardData[] }) {
       </div>
 
       {/* 件数表示 */}
-      <p className="mb-4 text-sm text-muted-foreground">
+      <p aria-live="polite" className="mb-4 text-sm text-muted-foreground">
         {activeRegion ? (
           <>
             {REGION_CONFIG[activeRegion].label}の

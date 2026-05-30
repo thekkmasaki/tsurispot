@@ -165,7 +165,7 @@ export function FishingPointMap({ spotName, center, zoom = 17, points }: Fishing
             }`}
             onClick={() => setActivePoint(point.id)}
           >
-            <span className="mt-0.5 text-xl">
+            <span className="mt-0.5 text-xl" aria-hidden="true">
               {point.icon === 'hot' ? '🔥' : '🐟'}
             </span>
             <div className="min-w-0">
