@@ -264,13 +264,28 @@ export function HeaderBannerAd() {
 
 // ---- 左右固定サイドバナー広告（kabutan.jp式、PCワイド画面のみ） ----
 export function SideRailAds() {
-  if (!ADSENSE_ID) return null;
+  const [wide, setWide] = useState(false);
+
+  // CSS の display 制御だとコンポーネントは常時マウントされ、各 AdUnit が
+  // ResizeObserver を張ってしまう。matchMedia でゲートして 1680px 未満では
+  // DOM 自体を出さず、observer 生成・AdSense push も発生させない。
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia("(min-width: 1680px)");
+    const update = () => setWide(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  if (!ADSENSE_ID || !wide) return null;
+
   return (
     <>
       {/* 左サイドレール: 1680px以上でのみ表示（コンテンツ1280px+広告160px×2+余白80px） */}
       <div
         className="fixed top-1/2 -translate-y-1/2 z-40"
-        style={{ left: "max(8px, calc((100vw - 1280px) / 2 - 176px))", display: "var(--side-rail-display, none)" }}
+        style={{ left: "max(8px, calc((100vw - 1280px) / 2 - 176px))" }}
       >
         <div className="w-[160px]">
           <AdUnit
@@ -284,7 +299,7 @@ export function SideRailAds() {
       {/* 右サイドレール */}
       <div
         className="fixed top-1/2 -translate-y-1/2 z-40"
-        style={{ right: "max(8px, calc((100vw - 1280px) / 2 - 176px))", display: "var(--side-rail-display, none)" }}
+        style={{ right: "max(8px, calc((100vw - 1280px) / 2 - 176px))" }}
       >
         <div className="w-[160px]">
           <AdUnit
@@ -295,11 +310,6 @@ export function SideRailAds() {
           />
         </div>
       </div>
-      {/* 1680px未満ではサイドレール非表示 */}
-      <style>{`
-        :root { --side-rail-display: none; }
-        @media (min-width: 1680px) { :root { --side-rail-display: block; } }
-      `}</style>
     </>
   );
 }

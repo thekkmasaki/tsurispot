@@ -117,14 +117,18 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
   const [isPending, startTransition] = useTransition();
 
   // UX-3: state 変更時に URL query を同期 (share/back/reload で復元可能に)
+  // 打鍵ごとに router.replace すると入力中のINPが悪化するため 300ms デバウンスする。
   useEffect(() => {
-    const params = new URLSearchParams();
-    if (searchText) params.set("q", searchText);
-    if (selectedPrefecture) params.set("prefecture", selectedPrefecture);
-    if (selectedType) params.set("type", selectedType);
-    if (selectedDifficulty) params.set("difficulty", selectedDifficulty);
-    const query = params.toString();
-    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+    const timer = setTimeout(() => {
+      const params = new URLSearchParams();
+      if (searchText) params.set("q", searchText);
+      if (selectedPrefecture) params.set("prefecture", selectedPrefecture);
+      if (selectedType) params.set("type", selectedType);
+      if (selectedDifficulty) params.set("difficulty", selectedDifficulty);
+      const query = params.toString();
+      router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+    }, 300);
+    return () => clearTimeout(timer);
   }, [searchText, selectedPrefecture, selectedType, selectedDifficulty, router, pathname]);
 
   // Geolocation state
