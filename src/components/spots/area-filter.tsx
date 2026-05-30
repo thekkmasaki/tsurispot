@@ -103,16 +103,16 @@ function LightSpotCard({ spot }: { spot: SpotCardData }) {
             {remainingCount > 0 && <Badge variant="outline" className="text-xs">+{remainingCount}</Badge>}
           </div>
           <div className="flex items-center gap-1 text-sm">
-            <Star className="size-4 fill-yellow-400 text-yellow-400" />
+            <Star className="size-4 fill-yellow-400 text-yellow-400" aria-hidden="true" />
             <span className="font-medium">{spot.rating.toFixed(1)}</span>
           </div>
           <div className="flex flex-wrap items-center gap-1.5">
             {spot.difficulty === "beginner" && <Badge className="bg-green-600 text-xs hover:bg-green-600">初心者OK</Badge>}
             {spot.isFree && <Badge className="bg-orange-500 text-xs hover:bg-orange-500">無料</Badge>}
-            {spot.hasParking && <span className="text-muted-foreground" title="駐車場あり"><Car className="size-4" /></span>}
-            {spot.hasToilet && <span className="text-muted-foreground" title="トイレあり"><Toilet className="size-4" /></span>}
-            {spot.hasRentalRod && <span className="text-muted-foreground" title="レンタル竿あり"><Fish className="size-4" /></span>}
-            {spot.hasConvenienceStore && <span className="text-muted-foreground" title="コンビニ近く"><ShoppingBag className="size-4" /></span>}
+            {spot.hasParking && <span className="text-muted-foreground" role="img" aria-label="駐車場あり" title="駐車場あり"><Car className="size-4" aria-hidden="true" /></span>}
+            {spot.hasToilet && <span className="text-muted-foreground" role="img" aria-label="トイレあり" title="トイレあり"><Toilet className="size-4" aria-hidden="true" /></span>}
+            {spot.hasRentalRod && <span className="text-muted-foreground" role="img" aria-label="レンタル竿あり" title="レンタル竿あり"><Fish className="size-4" aria-hidden="true" /></span>}
+            {spot.hasConvenienceStore && <span className="text-muted-foreground" role="img" aria-label="コンビニ近く" title="コンビニ近く"><ShoppingBag className="size-4" aria-hidden="true" /></span>}
           </div>
         </CardContent>
       </Card>

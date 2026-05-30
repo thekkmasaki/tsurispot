@@ -221,31 +221,33 @@ export function SearchOverlayClient() {
           <div className="fixed inset-0 z-40 bg-black/20 sm:hidden" />
 
           <div className="fixed inset-x-0 top-0 z-50 px-4 pt-3 sm:absolute sm:inset-x-auto sm:right-0 sm:top-full sm:mt-2 sm:w-[28rem] sm:px-0 sm:pt-0">
-            <div className="rounded-xl border border-border bg-white shadow-lg">
+            <div role="dialog" aria-label="サイト内検索" className="rounded-xl border border-border bg-white shadow-lg">
               {/* Search input (focus-within で wrapper に ring 表示、 a11y 強化) */}
               <div className="flex items-center gap-2 border-b px-4 py-3 focus-within:bg-primary/5">
-                <Search className="size-5 shrink-0 text-muted-foreground" />
+                <Search className="size-5 shrink-0 text-muted-foreground" aria-hidden="true" />
                 <input
                   ref={inputRef}
                   type="text"
                   value={query}
                   onChange={(e) => handleQueryChange(e.target.value)}
                   placeholder="釣り場・魚種・ガイド・コラムを検索..."
+                  aria-label="釣り場・魚種・ガイド・コラムを検索"
                   className="flex-1 bg-transparent text-sm outline-none placeholder:text-muted-foreground"
                 />
                 {isLoading && (
-                  <LoaderCircle className="size-4 shrink-0 animate-spin text-primary" />
+                  <LoaderCircle className="size-4 shrink-0 animate-spin text-primary" aria-hidden="true" />
                 )}
                 <button
                   onClick={() => { setIsOpen(false); handleQueryChange(""); }}
+                  aria-label="検索を閉じる"
                   className="rounded-full p-1 text-muted-foreground hover:bg-muted hover:text-foreground"
                 >
-                  <X className="size-4" />
+                  <X className="size-4" aria-hidden="true" />
                 </button>
               </div>
 
               {/* Results */}
-              <div className="max-h-[28rem] overflow-y-auto p-2" onMouseDown={(e) => e.preventDefault()}>
+              <div className="max-h-[28rem] overflow-y-auto p-2" aria-live="polite" onMouseDown={(e) => e.preventDefault()}>
                 {query.trim() === "" ? (
                   <div className="px-3 py-4">
                     <p className="mb-3 text-xs font-semibold text-muted-foreground">
