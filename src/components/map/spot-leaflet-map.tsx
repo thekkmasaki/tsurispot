@@ -13,6 +13,9 @@ import {
   useMapEvents,
 } from "react-leaflet";
 import L from "leaflet";
+// Leaflet CSS は外部CDN(unpkg)ではなく自己ホスト（node_modules）から取り込み、
+// この遅延チャンクと一緒にロードする（外部レンダーブロッキングを排除）。
+import "leaflet/dist/leaflet.css";
 
 /** タブ切替等で非表示→表示になった際に地図サイズを再計算する */
 function InvalidateSizeOnVisible() {

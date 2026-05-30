@@ -95,27 +95,44 @@ export function LeafletMapSection({ analysisResult, spot, spotFacilities, restri
   const [MapComp, setMapComp] = useState<React.ComponentType<{ data: SpotMapAnalysis }> | null>(null);
   const [error, setError] = useState<string | null>(null);
   const loaded = useRef(false);
+  const rootRef = useRef<HTMLDivElement>(null);
 
+  // 地図はスポット詳細のかなり下部にあるため、ファーストビューで即ロードせず
+  // IntersectionObserver で可視直前(rootMargin 400px)になってから leaflet チャンクを import する。
+  // Leaflet CSS は spot-leaflet-map 側で self-host import 済み（unpkg 依存を排除）。
   useEffect(() => {
-    if (loaded.current) return;
-    loaded.current = true;
+    const el = rootRef.current;
+    if (!el) return;
+    let cancelled = false;
 
-    // CSS をheadに注入
-    if (!document.querySelector('link[href*="leaflet.css"]')) {
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
-      document.head.appendChild(link);
-    }
+    const load = () => {
+      if (loaded.current) return;
+      loaded.current = true;
+      import("@/components/map/spot-leaflet-map")
+        .then((m) => {
+          if (!cancelled) setMapComp(() => m.SpotLeafletMap);
+        })
+        .catch((err) => {
+          if (cancelled) return;
+          console.error("[LeafletMap]", err);
+          setError(err?.message || "地図の読み込みに失敗しました");
+        });
+    };
 
-    import("@/components/map/spot-leaflet-map")
-      .then((m) => {
-        setMapComp(() => m.SpotLeafletMap);
-      })
-      .catch((err) => {
-        console.error("[LeafletMap]", err);
-        setError(err?.message || "地図の読み込みに失敗しました");
-      });
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          load();
+          io.disconnect();
+        }
+      },
+      { rootMargin: "400px" }
+    );
+    io.observe(el);
+    return () => {
+      cancelled = true;
+      io.disconnect();
+    };
   }, []);
 
   if (error) {
@@ -128,7 +145,7 @@ export function LeafletMapSection({ analysisResult, spot, spotFacilities, restri
 
   if (!MapComp) {
     return (
-      <div className="mt-6">
+      <div ref={rootRef} className="mt-6">
         <h3 className="mb-3 text-lg font-bold">AI解析 釣りマップ</h3>
         <div className="h-[360px] w-full animate-pulse rounded-lg bg-muted sm:h-[480px]" />
       </div>
