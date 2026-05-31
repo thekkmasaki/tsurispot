@@ -98,6 +98,42 @@ export interface FishingSpot {
   satelliteImageUrl?: string;
 }
 
+/**
+ * 一覧カード表示用の軽量スポット型。
+ * SpotCard / SpotListClient のフィルタが使うフィールドのみを持つ。catchableFish の重い
+ * FishSpecies(24フィールド) を fishNames/methods(文字列配列) に削減し、穴場/高級魚判定は
+ * サーバーで事前計算したフラグ(isHiddenGem/hasPremiumFish)として持つ。全 FishingSpot を
+ * クライアントへ渡す代わりにこの型へ map することで JS バンドルと RSC ペイロードを削減する。
+ * 変換は lib/data/list-spot.ts の toListSpot（サーバー専用）で行う。
+ */
+export interface ListSpot {
+  id: string;
+  slug: string;
+  name: string;
+  address: string;
+  region: Region;
+  latitude: number;
+  longitude: number;
+  spotType: FishingSpot["spotType"];
+  difficulty: FishingSpot["difficulty"];
+  isFree: boolean;
+  hasParking: boolean;
+  hasToilet: boolean;
+  hasConvenienceStore: boolean;
+  hasFishingShop: boolean;
+  hasRentalRod: boolean;
+  mainImageUrl: string;
+  rating: number;
+  /** 釣れる魚の名前（first-seen 順で unique。表示・対象魚フィルタ用） */
+  fishNames: string[];
+  /** 釣法（unique。釣法フィルタ用） */
+  methods: string[];
+  /** サーバー事前計算: 穴場判定 */
+  isHiddenGem: boolean;
+  /** サーバー事前計算: 高級魚が釣れるか */
+  hasPremiumFish: boolean;
+}
+
 export interface SpotRules {
   castingAllowed: boolean;
   lureAllowed: boolean;

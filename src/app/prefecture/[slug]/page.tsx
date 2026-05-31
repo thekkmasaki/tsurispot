@@ -26,7 +26,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies, getFishSeasons } from "@/lib/data/fish";
 import { REGION_NAME_TO_SLUG } from "@/lib/data/fish-regional-seasons";
 import type { RegionSlug } from "@/types";
-import { SpotCard } from "@/components/spots/spot-card";
+import { toListSpot } from "@/lib/data/list-spot";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { getPrefectureInfoBySlug, adjacentPrefectures, getPrefectureFAQs } from "@/lib/data/prefecture-info";
 import { getFishSlugByName } from "@/lib/data";
@@ -1319,9 +1319,9 @@ export default async function PrefecturePage({ params }: PageProps) {
         prefRegions={prefRegions.map((r) => ({ id: r.id, slug: r.slug, areaName: r.areaName }))}
         regionGroups={Array.from(regionMap.values()).map(({ region: r, spots: s }) => ({
           region: { id: r.id, slug: r.slug, areaName: r.areaName },
-          spots: s,
+          spots: s.map(toListSpot),
         }))}
-        ungroupedSpots={ungroupedSpots}
+        ungroupedSpots={ungroupedSpots.map(toListSpot)}
         totalSpots={spots.length}
       />
 

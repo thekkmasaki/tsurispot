@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { InFeedAd } from "@/components/ads/ad-unit";
-import { FishingSpot, SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
+import { ListSpot, SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { regions } from "@/lib/data/regions";
 
 type RegionKey = "hokkaido" | "tohoku" | "kanto" | "chubu" | "kinki" | "chugoku" | "shikoku" | "kyushu";
@@ -74,8 +74,8 @@ function haversineDistance(
 
 const ITEMS_PER_PAGE = 20;
 
-const spotTypes = Object.entries(SPOT_TYPE_LABELS) as [FishingSpot["spotType"], string][];
-const difficulties = Object.entries(DIFFICULTY_LABELS) as [FishingSpot["difficulty"], string][];
+const spotTypes = Object.entries(SPOT_TYPE_LABELS) as [ListSpot["spotType"], string][];
+const difficulties = Object.entries(DIFFICULTY_LABELS) as [ListSpot["difficulty"], string][];
 
 // Build unique prefecture list from regions
 const prefectures = Array.from(new Set(regions.map((r) => r.prefecture)));
@@ -90,15 +90,15 @@ const FACILITY_OPTIONS: { key: FacilityKey; label: string }[] = [
   { key: "hasRentalRod", label: "レンタル竿" },
 ];
 
-export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpot[]; initialQuery?: string }) {
+export function SpotListClient({ spots, initialQuery = "" }: { spots: ListSpot[]; initialQuery?: string }) {
   // UX-3: URL query から filter 初期値を取得 (share/back/reload で復元可能に)
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
   const initialPrefecture = searchParams.get("prefecture") ?? "";
-  const initialType = (searchParams.get("type") ?? "") as FishingSpot["spotType"] | "";
-  const initialDifficulty = (searchParams.get("difficulty") ?? "") as FishingSpot["difficulty"] | "";
+  const initialType = (searchParams.get("type") ?? "") as ListSpot["spotType"] | "";
+  const initialDifficulty = (searchParams.get("difficulty") ?? "") as ListSpot["difficulty"] | "";
   const urlQuery = searchParams.get("q") ?? initialQuery;
 
   const [searchText, setSearchText] = useState(urlQuery);
@@ -106,8 +106,8 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
   const [selectedRegion, setSelectedRegion] = useState<RegionKey | "">("");
   const [selectedPrefecture, setSelectedPrefecture] = useState<string>(initialPrefecture);
   const [selectedArea, setSelectedArea] = useState<string>("");
-  const [selectedType, setSelectedType] = useState<FishingSpot["spotType"] | "">(initialType);
-  const [selectedDifficulty, setSelectedDifficulty] = useState<FishingSpot["difficulty"] | "">(initialDifficulty);
+  const [selectedType, setSelectedType] = useState<ListSpot["spotType"] | "">(initialType);
+  const [selectedDifficulty, setSelectedDifficulty] = useState<ListSpot["difficulty"] | "">(initialDifficulty);
   const [selectedFacilities, setSelectedFacilities] = useState<FacilityKey[]>([]);
   const [selectedFree, setSelectedFree] = useState<"" | "free" | "paid">("");
   const [selectedMethods, setSelectedMethods] = useState<string[]>([]);
@@ -179,12 +179,8 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
   const topMethods = useMemo(() => {
     const counts = new Map<string, number>();
     for (const spot of spots) {
-      const seen = new Set<string>();
-      for (const cf of spot.catchableFish) {
-        if (cf.method && !seen.has(cf.method)) {
-          seen.add(cf.method);
-          counts.set(cf.method, (counts.get(cf.method) || 0) + 1);
-        }
+      for (const method of spot.methods) {
+        counts.set(method, (counts.get(method) || 0) + 1);
       }
     }
     return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 12).map(([m]) => m);
@@ -193,13 +189,8 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
   const topFishNames = useMemo(() => {
     const counts = new Map<string, number>();
     for (const spot of spots) {
-      const seen = new Set<string>();
-      for (const cf of spot.catchableFish) {
-        const name = cf.fish.name;
-        if (!seen.has(name)) {
-          seen.add(name);
-          counts.set(name, (counts.get(name) || 0) + 1);
-        }
+      for (const name of spot.fishNames) {
+        counts.set(name, (counts.get(name) || 0) + 1);
       }
     }
     return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 20).map(([n]) => n);
@@ -241,12 +232,12 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: FishingSpo
       }
       // 釣法フィルタ（AND: 選択したすべての釣法が可能なスポット）
       if (selectedMethods.length > 0) {
-        const spotMethods = new Set(spot.catchableFish.map(cf => cf.method));
+        const spotMethods = new Set(spot.methods);
         if (!selectedMethods.every(m => spotMethods.has(m))) return false;
       }
       // 対象魚フィルタ（OR: 選択した魚のいずれかがいるスポット）
       if (selectedFishNames.length > 0) {
-        const spotFish = new Set(spot.catchableFish.map(cf => cf.fish.name));
+        const spotFish = new Set(spot.fishNames);
         if (!selectedFishNames.some(f => spotFish.has(f))) return false;
       }
       return true;

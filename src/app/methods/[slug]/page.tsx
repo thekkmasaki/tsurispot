@@ -22,6 +22,7 @@ import { YouTubeVideoList } from "@/components/youtube-video-card";
 import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { getVideosForMethods } from "@/lib/data/youtube-videos";
 import { SpotCard } from "@/components/spots/spot-card";
+import { toListSpot } from "@/lib/data/list-spot";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
@@ -922,7 +923,7 @@ export default async function MethodDetailPage({ params }: PageProps) {
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
             {matchingSpots.slice(0, 8).map((spot) => (
-              <SpotCard key={spot.id} spot={spot} />
+              <SpotCard key={spot.id} spot={toListSpot(spot)} />
             ))}
           </div>
           {totalMatchCount > 8 && (

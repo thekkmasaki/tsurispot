@@ -15,6 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { SpotCard } from "@/components/spots/spot-card";
+import { toListSpot } from "@/lib/data/list-spot";
 import { fishSpecies, getFishBySlug } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
 import {
@@ -623,7 +624,7 @@ export default async function FishMethodPage({ params }: PageProps) {
           {/* SpotCardグリッド */}
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {matchingSpots.slice(0, 12).map((spot) => (
-              <SpotCard key={spot.id} spot={spot} />
+              <SpotCard key={spot.id} spot={toListSpot(spot)} />
             ))}
           </div>
           {matchingSpots.length > 12 && (

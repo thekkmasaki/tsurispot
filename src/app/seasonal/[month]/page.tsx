@@ -17,6 +17,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { SpotCard } from "@/components/spots/spot-card";
+import { toListSpot } from "@/lib/data/list-spot";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
@@ -359,7 +360,7 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
                     <h3 className="mb-3 text-sm font-bold text-muted-foreground border-b pb-1">{region}</h3>
                     <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                       {spots.map((spot) => (
-                        <SpotCard key={spot.id} spot={spot} />
+                        <SpotCard key={spot.id} spot={toListSpot(spot)} />
                       ))}
                     </div>
                   </div>
