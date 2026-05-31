@@ -51,7 +51,7 @@ describe("toListSpot", () => {
   });
 
   it("ListSpot は重いフィールド（description/catchableFish等）を持たない（ペイロード削減の保証）", () => {
-    const list = toListSpot(fishingSpots[0]) as Record<string, unknown>;
+    const list = toListSpot(fishingSpots[0]) as unknown as Record<string, unknown>;
     expect(list.description).toBeUndefined();
     expect(list.catchableFish).toBeUndefined();
     expect(list.tackleRecommendations).toBeUndefined();
