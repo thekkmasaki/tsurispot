@@ -6,7 +6,7 @@ import { Fish, X, Filter } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { SpotCard } from "@/components/spots/spot-card";
 import { cn } from "@/lib/utils";
-import type { FishingSpot } from "@/types";
+import type { ListSpot } from "@/types";
 
 interface FishInfo {
   id: string;
@@ -16,38 +16,39 @@ interface FishInfo {
 }
 
 interface AreaSpotListProps {
-  spots: FishingSpot[];
+  spots: ListSpot[];
   catchableFish: FishInfo[];
   areaName: string;
 }
 
 export function AreaSpotList({ spots, catchableFish, areaName }: AreaSpotListProps) {
-  const [selectedFishIds, setSelectedFishIds] = useState<Set<string>>(new Set());
+  // ListSpot は fish.id を持たない（fishNames のみ）ため、魚名ベースで絞り込む。
+  const [selectedFishNames, setSelectedFishNames] = useState<Set<string>>(new Set());
 
-  const toggleFish = (fishId: string) => {
-    setSelectedFishIds((prev) => {
+  const toggleFish = (fishName: string) => {
+    setSelectedFishNames((prev) => {
       const next = new Set(prev);
-      if (next.has(fishId)) {
-        next.delete(fishId);
+      if (next.has(fishName)) {
+        next.delete(fishName);
       } else {
-        next.add(fishId);
+        next.add(fishName);
       }
       return next;
     });
   };
 
   const clearFilter = () => {
-    setSelectedFishIds(new Set());
+    setSelectedFishNames(new Set());
   };
 
   const filteredSpots = useMemo(() => {
-    if (selectedFishIds.size === 0) return spots;
+    if (selectedFishNames.size === 0) return spots;
     return spots.filter((spot) =>
-      spot.catchableFish.some((cf) => selectedFishIds.has(cf.fish.id))
+      spot.fishNames.some((n) => selectedFishNames.has(n))
     );
-  }, [spots, selectedFishIds]);
+  }, [spots, selectedFishNames]);
 
-  const isFiltering = selectedFishIds.size > 0;
+  const isFiltering = selectedFishNames.size > 0;
 
   return (
     <>
@@ -80,11 +81,11 @@ export function AreaSpotList({ spots, catchableFish, areaName }: AreaSpotListPro
 
             {/* Fish badges */}
             {catchableFish.map((f) => {
-              const isSelected = selectedFishIds.has(f.id);
+              const isSelected = selectedFishNames.has(f.name);
               return (
                 <button
                   key={f.id}
-                  onClick={() => toggleFish(f.id)}
+                  onClick={() => toggleFish(f.name)}
                   className={cn(
                     "inline-flex items-center justify-center rounded-full border px-3 py-1.5 text-xs font-medium transition-all duration-200 min-h-[36px] sm:text-sm",
                     isSelected
@@ -111,10 +112,7 @@ export function AreaSpotList({ spots, catchableFish, areaName }: AreaSpotListPro
             <div className="mt-3 flex items-center gap-2 rounded-lg border border-primary/20 bg-primary/5 px-3 py-2">
               <Fish className="size-4 shrink-0 text-primary" />
               <span className="text-xs text-muted-foreground sm:text-sm">
-                {Array.from(selectedFishIds)
-                  .map((id) => catchableFish.find((f) => f.id === id)?.name)
-                  .filter(Boolean)
-                  .join("・")}
+                {Array.from(selectedFishNames).join("・")}
                 で絞り込み中 -
                 <span className="font-medium text-foreground">
                   {" "}{filteredSpots.length}件

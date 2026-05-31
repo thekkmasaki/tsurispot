@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { fishingSpots } from "@/lib/data/spots";
+import { toListSpot } from "@/lib/data/list-spot";
 import { FavoritesClient } from "./favorites-client";
 
 export const metadata: Metadata = {
@@ -8,27 +9,11 @@ export const metadata: Metadata = {
   robots: { index: false },
 };
 
-// SpotCardが使うフィールドだけを抽出してクライアントに渡す
+// SpotCard が使う軽量 ListSpot に変換してクライアントへ渡す（穴場/高級魚はサーバー事前計算）。
+// 旧実装は reviewCount/safetyLevel/hasFishingShop を欠いた部分データで穴場判定していたため、
+// toListSpot に統一することでバッジ判定も正しくなる。
 const spotMap = Object.fromEntries(
-  fishingSpots.map((s) => [
-    s.slug,
-    {
-      id: s.id,
-      slug: s.slug,
-      name: s.name,
-      mainImageUrl: s.mainImageUrl,
-      spotType: s.spotType,
-      region: s.region,
-      catchableFish: s.catchableFish,
-      rating: s.rating,
-      difficulty: s.difficulty,
-      isFree: s.isFree,
-      hasParking: s.hasParking,
-      hasToilet: s.hasToilet,
-      hasRentalRod: s.hasRentalRod,
-      hasConvenienceStore: s.hasConvenienceStore,
-    },
-  ])
+  fishingSpots.map((s) => [s.slug, toListSpot(s)])
 );
 
 export default function FavoritesPage() {

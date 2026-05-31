@@ -5,7 +5,7 @@ import Link from "next/link";
 import { MapPin, Search, X } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { SpotCard } from "@/components/spots/spot-card";
-import type { FishingSpot } from "@/types";
+import type { ListSpot } from "@/types";
 
 interface RegionInfo {
   id: string;
@@ -15,14 +15,14 @@ interface RegionInfo {
 
 interface RegionGroup {
   region: RegionInfo;
-  spots: FishingSpot[];
+  spots: ListSpot[];
 }
 
 interface SpotSearchFilterProps {
   prefName: string;
   prefRegions: RegionInfo[];
   regionGroups: RegionGroup[];
-  ungroupedSpots: FishingSpot[];
+  ungroupedSpots: ListSpot[];
   totalSpots: number;
 }
 
@@ -53,8 +53,8 @@ export function SpotSearchFilter({
         const filtered = spots.filter(
           (s) =>
             s.name.toLowerCase().includes(normalizedQuery) ||
-            s.catchableFish.some((cf) =>
-              cf.fish.name.toLowerCase().includes(normalizedQuery)
+            s.fishNames.some((n) =>
+              n.toLowerCase().includes(normalizedQuery)
             ) ||
             (s.address && s.address.toLowerCase().includes(normalizedQuery))
         );
@@ -69,8 +69,8 @@ export function SpotSearchFilter({
     return ungroupedSpots.filter(
       (s) =>
         s.name.toLowerCase().includes(normalizedQuery) ||
-        s.catchableFish.some((cf) =>
-          cf.fish.name.toLowerCase().includes(normalizedQuery)
+        s.fishNames.some((n) =>
+          n.toLowerCase().includes(normalizedQuery)
         ) ||
         (s.address && s.address.toLowerCase().includes(normalizedQuery))
     );

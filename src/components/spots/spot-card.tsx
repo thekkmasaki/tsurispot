@@ -2,18 +2,15 @@ import Link from "next/link";
 import { Star, Car, Toilet, Fish, ShoppingBag, Navigation, Gem, Crown } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { FishingSpot, SPOT_TYPE_LABELS } from "@/types";
+import { ListSpot, SPOT_TYPE_LABELS } from "@/types";
 import { SpotImage } from "@/components/ui/spot-image";
 import { FavoriteButton } from "@/components/spots/favorite-button";
 import { CompareToggleButton } from "@/components/spots/compare-bar";
-import { isHiddenGem, getPremiumFishForSpot } from "@/lib/hidden-gem";
 
-export function SpotCard({ spot, distance }: { spot: FishingSpot; distance?: number | null }) {
-  const fishNames = spot.catchableFish.map((cf) => cf.fish.name);
-  const displayFish = fishNames.slice(0, 3);
-  const remainingCount = fishNames.length - 3;
-  const hiddenGem = isHiddenGem(spot);
-  const premiumFish = getPremiumFishForSpot(spot);
+export function SpotCard({ spot, distance }: { spot: ListSpot; distance?: number | null }) {
+  const displayFish = spot.fishNames.slice(0, 3);
+  const remainingCount = spot.fishNames.length - 3;
+  const hiddenGem = spot.isHiddenGem;
 
   return (
     <Link href={`/spots/${spot.slug}`}>
@@ -81,7 +78,7 @@ export function SpotCard({ spot, distance }: { spot: FishingSpot; distance?: num
 
           {/* Badges and facilities */}
           <div className="flex flex-wrap items-center gap-1.5">
-            {premiumFish.length > 0 && (
+            {spot.hasPremiumFish && (
               <Badge className="bg-amber-600 text-xs hover:bg-amber-600">
                 <Crown className="mr-0.5 size-3" />
                 高級魚

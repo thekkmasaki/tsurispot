@@ -5,11 +5,16 @@ import { fishingSpots } from "@/lib/data/spots";
 import { SpotListClient } from "@/components/spots/spot-list-client";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { toListSpot } from "@/lib/data/list-spot";
 
 // ISR: 1時間ごとに再検証 (Cloudflare cache 効率と App Runner 負荷低減のため SSG/ISR を採用)
 export const revalidate = 3600;
 
 const sc = fishingSpots.length.toLocaleString();
+
+// 全 FishingSpot をクライアントに渡すと JS バンドル / RSC ペイロードが肥大化するため、
+// 一覧カードに必要な軽量 ListSpot に絞ってから SpotListClient へ渡す（CWV改善）。
+const listSpots = fishingSpots.map(toListSpot);
 
 export const metadata: Metadata = {
   title: `全国${sc}+の釣りスポット・釣り場を検索｜子連れ・初心者向けの穴場も`,
@@ -193,7 +198,7 @@ export default function SpotsPage() {
           <span className="sm:hidden">投稿</span>
         </Link>
       </div>
-      <SpotListClient spots={fishingSpots} />
+      <SpotListClient spots={listSpots} />
 
       {/* 初心者CTA */}
       <div className="mt-8 rounded-2xl border-2 border-emerald-200 bg-gradient-to-r from-emerald-50 to-teal-50 p-5 sm:p-6">

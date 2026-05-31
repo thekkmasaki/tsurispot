@@ -8,6 +8,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { getPrefectureByName } from "@/lib/data/prefectures";
 import { AreaSpotList } from "@/components/area/area-spot-list";
+import { toListSpot } from "@/lib/data/list-spot";
 import { InArticleAd } from "@/components/ads/ad-unit";
 
 type PageProps = {
@@ -408,7 +409,7 @@ export default async function AreaDetailPage({ params }: PageProps) {
 
       {/* Fish filter + Spots list (Client Component) */}
       <AreaSpotList
-        spots={spots}
+        spots={spots.map(toListSpot)}
         catchableFish={catchableFish}
         areaName={region.areaName}
       />

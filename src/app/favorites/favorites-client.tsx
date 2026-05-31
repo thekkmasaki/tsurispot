@@ -5,13 +5,11 @@ import Link from "next/link";
 import { Heart, Map, List } from "lucide-react";
 import { SpotCard } from "@/components/spots/spot-card";
 import { Button } from "@/components/ui/button";
-import type { FishingSpot } from "@/types";
+import type { ListSpot } from "@/types";
 import { useFavorites, getFavorites } from "@/hooks/use-favorites";
 import { DisplayAd } from "@/components/ads/ad-unit";
 
-type LightSpot = Pick<FishingSpot, "id" | "slug" | "name" | "mainImageUrl" | "spotType" | "region" | "catchableFish" | "rating" | "difficulty" | "isFree" | "hasParking" | "hasToilet" | "hasRentalRod" | "hasConvenienceStore">;
-
-export function FavoritesClient({ spotMap }: { spotMap: Record<string, LightSpot> }) {
+export function FavoritesClient({ spotMap }: { spotMap: Record<string, ListSpot> }) {
   const { favorites: favoritesSlugs, removeFavorite } = useFavorites();
   const validSlugs = useMemo(() => new Set(Object.keys(spotMap)), [spotMap]);
 
@@ -45,7 +43,7 @@ export function FavoritesClient({ spotMap }: { spotMap: Record<string, LightSpot
           </p>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
             {favoriteSpots.map((spot) => (
-              <SpotCard key={spot.id} spot={spot as FishingSpot} />
+              <SpotCard key={spot.id} spot={spot} />
             ))}
           </div>
           <DisplayAd />
