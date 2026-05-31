@@ -32,6 +32,8 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+# テンプレートは共有する（秘密情報なし・新規開発者が必要な env を把握できる）
+!.env.example
 
 # typescript
 *.tsbuildinfo
