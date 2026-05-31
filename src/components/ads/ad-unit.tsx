@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Waves } from "lucide-react";
+import { trackAdEvent } from "@/lib/ads-tracking";
 
 declare global {
   interface Window {
@@ -38,6 +39,8 @@ const SLOTS = {
 // ---- 基本AdSenseユニット ----
 interface AdUnitProps {
   slot?: string;
+  /** 広告枠の論理名。指定すると GA4 へ impression/viewability を送信する（計測対象になる） */
+  placement?: string;
   format?: "auto" | "horizontal" | "vertical" | "rectangle" | "fluid" | "autorelaxed";
   layout?: string;
   layoutKey?: string;
@@ -48,6 +51,7 @@ interface AdUnitProps {
 
 export function AdUnit({
   slot,
+  placement,
   format = "auto",
   layout,
   layoutKey,
@@ -57,6 +61,7 @@ export function AdUnit({
 }: AdUnitProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const pushed = useRef(false);
+  const viewed = useRef(false);
   const suppressed = useAdsSuppressed();
 
   useEffect(() => {
@@ -71,6 +76,9 @@ export function AdUnit({
         try {
           (window.adsbygoogle = window.adsbygoogle || []).push({});
           pushed.current = true;
+          // 広告リクエストが出た＝impression として placement 別に計測。
+          // （フィルされない場合もあるが placement 間の相対比較には有効）
+          if (placement) trackAdEvent({ placement, slot, event: "ad_impression" });
         } catch {
           // AdSense not loaded
         }
@@ -89,7 +97,43 @@ export function AdUnit({
     observer.observe(el);
 
     return () => observer.disconnect();
+    // 広告は初回マウント時に1回だけ push する設計のため依存配列は空に固定する
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // viewability 計測: 枠の50%以上が連続1秒見えたら ad_viewable を1回送信（MRC基準準拠）。
+  // LazyAd の IntersectionObserver と同じパターン。placement 未指定の枠は計測しない。
+  useEffect(() => {
+    if (!ADSENSE_ID || suppressed || !placement) return;
+    const el = containerRef.current;
+    if (!el) return;
+
+    let timer: ReturnType<typeof setTimeout> | null = null;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (viewed.current) return;
+        if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+          if (!timer) {
+            timer = setTimeout(() => {
+              viewed.current = true;
+              trackAdEvent({ placement, slot, event: "ad_viewable" });
+              io.disconnect();
+            }, 1000);
+          }
+        } else if (timer) {
+          clearTimeout(timer);
+          timer = null;
+        }
+      },
+      { threshold: [0, 0.5, 1] }
+    );
+    io.observe(el);
+
+    return () => {
+      if (timer) clearTimeout(timer);
+      io.disconnect();
+    };
+  }, [placement, slot, suppressed]);
 
   if (!ADSENSE_ID || suppressed) return null;
 
@@ -152,6 +196,7 @@ export function InArticleAd({ className = "" }: { className?: string }) {
           最小高さを予約する（SidebarAd/DisplayAd と同じ250px基準）。 */}
       <AdUnit
         slot={SLOTS.inArticle}
+        placement="in_article"
         format="fluid"
         layout="in-article"
         className="min-h-[250px]"
@@ -165,7 +210,7 @@ export function InArticleAd({ className = "" }: { className?: string }) {
 export function DisplayAd({ className = "" }: { className?: string }) {
   return (
     <AdWrapper className={`my-6 ${className}`}>
-      <AdUnit slot={SLOTS.display} format="auto" />
+      <AdUnit slot={SLOTS.display} format="auto" placement="display" />
     </AdWrapper>
   );
 }
@@ -183,17 +228,18 @@ export function NativeAdBreak({ className = "" }: { className?: string }) {
         <div className="h-px flex-1 bg-gradient-to-l from-transparent via-ocean-mid/20 to-transparent" />
       </div>
       <div className="rounded-2xl border border-border/50 bg-card/60 p-3 sm:p-5 shadow-sm shadow-ocean-deep/[0.03]">
-        <AdUnit slot={SLOTS.display} format="auto" />
+        <AdUnit slot={SLOTS.display} format="auto" placement="native_break" />
       </div>
     </div>
   );
 }
 
 // ---- Multiplex広告（関連コンテンツ風グリッド、フッター前に最適） ----
-export function MultiplexAd({ className = "" }: { className?: string }) {
+export function MultiplexAd({ className = "", placement = "multiplex" }: { className?: string; placement?: string }) {
   return (
     <AdUnit
       slot={SLOTS.multiplex}
+      placement={placement}
       format="autorelaxed"
       className={`my-8 ${className}`}
     />
@@ -216,7 +262,7 @@ export function PreFooterAd() {
         <div className="h-px flex-1 bg-gradient-to-l from-transparent via-border to-transparent" />
       </div>
       <div className="rounded-2xl border border-border/50 bg-card/60 p-4 sm:p-6 shadow-sm shadow-ocean-deep/[0.03]" style={{ minWidth: "300px" }}>
-        <MultiplexAd />
+        <MultiplexAd placement="pre_footer" />
       </div>
     </div>
   );
@@ -230,6 +276,7 @@ export function SidebarAd({ className = "" }: { className?: string }) {
       <AdWrapper variant="sidebar" label={false}>
         <AdUnit
           slot={SLOTS.display}
+          placement="sidebar"
           format="auto"
           className="min-h-[250px]"
         />
@@ -244,7 +291,7 @@ export function StickySidebarAd({ className = "" }: { className?: string }) {
   return (
     <div className={`sticky top-20 ${className}`}>
       <AdWrapper variant="sidebar" label={false}>
-        <AdUnit slot={SLOTS.display} format="auto" className="min-h-[250px]" />
+        <AdUnit slot={SLOTS.display} placement="sidebar_sticky" format="auto" className="min-h-[250px]" />
       </AdWrapper>
     </div>
   );
@@ -256,7 +303,7 @@ export function HeaderBannerAd() {
   return (
     <div className="hidden lg:block border-b border-border/30 bg-muted/10">
       <div className="mx-auto max-w-5xl px-4 py-2">
-        <AdUnit slot={SLOTS.display} format="horizontal" responsive />
+        <AdUnit slot={SLOTS.display} placement="header_banner" format="horizontal" responsive />
       </div>
     </div>
   );
@@ -290,6 +337,7 @@ export function SideRailAds() {
         <div className="w-[160px]">
           <AdUnit
             slot={SLOTS.display}
+            placement="side_rail_left"
             format="vertical"
             style={{ display: "block", width: "160px", minHeight: "600px" }}
             responsive={false}
@@ -304,6 +352,7 @@ export function SideRailAds() {
         <div className="w-[160px]">
           <AdUnit
             slot={SLOTS.display}
+            placement="side_rail_right"
             format="vertical"
             style={{ display: "block", width: "160px", minHeight: "600px" }}
             responsive={false}
@@ -321,6 +370,7 @@ export function InFeedAd({ className = "" }: { className?: string }) {
     // カード列を押し下げないよう最小高さを予約する。
     <AdUnit
       slot={SLOTS.display}
+      placement="in_feed"
       format="fluid"
       layoutKey="-6t+ed+2i-1n-4w"
       className={`my-4 min-h-[250px] ${className}`}
@@ -335,8 +385,8 @@ export function ParallelAds({ className = "" }: { className?: string }) {
   return (
     <AdWrapper className={`my-8 ${className}`}>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <AdUnit slot={SLOTS.display} format="rectangle" style={{ display: "block", width: "100%", height: "250px" }} />
-        <AdUnit slot={SLOTS.display} format="rectangle" style={{ display: "block", width: "100%", height: "250px" }} />
+        <AdUnit slot={SLOTS.display} placement="parallel" format="rectangle" style={{ display: "block", width: "100%", height: "250px" }} />
+        <AdUnit slot={SLOTS.display} placement="parallel" format="rectangle" style={{ display: "block", width: "100%", height: "250px" }} />
       </div>
     </AdWrapper>
   );
@@ -370,6 +420,7 @@ export function MobileStickyAd() {
         </button>
         <AdUnit
           slot={SLOTS.display}
+          placement="mobile_sticky"
           format="horizontal"
           style={{ display: "block", width: "100%", height: "90px" }}
           responsive
@@ -387,6 +438,7 @@ export function MobileHeaderBannerAd() {
       <div className="mx-auto max-w-lg px-2 py-1">
         <AdUnit
           slot={SLOTS.display}
+          placement="mobile_header_banner"
           format="horizontal"
           style={{ display: "block", width: "100%", height: "50px" }}
           responsive
