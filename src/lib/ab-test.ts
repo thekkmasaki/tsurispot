@@ -17,8 +17,8 @@ export type Variant = "control" | "treatment";
 
 const STORAGE_PREFIX = "tsurispot-ab-";
 
-/** 既知の実験キー（追加するごとにここへ定義し、利用側はこの型で参照する）。現状は空。 */
-export type ExperimentKey = never;
+/** 既知の実験キー（追加するごとにここへ定義し、利用側はこの型で参照する）。 */
+export type ExperimentKey = "ranking_infeed";
 
 /**
  * 実験キーに対するバケットを返す。初回はランダムに割当てて localStorage に固定保存し、

@@ -1,9 +1,11 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect, Fragment } from "react";
 import Link from "next/link";
 import { Star, MapPin, Trophy, Fish, ChevronDown, Info, Navigation, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { InFeedAd } from "@/components/ads/ad-unit";
+import { getBucket } from "@/lib/ab-test";
 
 /** サーバーから渡される軽量スポットデータ */
 export interface RankingSpot {
@@ -275,6 +277,13 @@ export function RankingClient({ spots }: { spots: RankingSpot[] }) {
   const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
   const [locating, setLocating] = useState(false);
 
+  // A/B: ranking_infeed 実験。SSR は control 相当（広告なし）で描画し、マウント後に確定する。
+  const [adBucket, setAdBucket] = useState<"control" | "treatment" | null>(null);
+  useEffect(() => {
+    setAdBucket(getBucket("ranking_infeed"));
+  }, []);
+  const showInfeedAd = adBucket === "treatment";
+
   const handleLocate = useCallback(() => {
     if (!navigator.geolocation) return;
     setLocating(true);
@@ -444,12 +453,17 @@ export function RankingClient({ spots }: { spots: RankingSpot[] }) {
       {rankedSpots.length > 0 ? (
         <div className="space-y-3">
           {rankedSpots.map((spot, index) => (
-            <SpotCard
-              key={spot.id}
-              spot={spot}
-              rank={index + 1}
-              distanceKm={nearbyMode && "_dist" in spot ? (spot as RankingSpot & { _dist: number })._dist : undefined}
-            />
+            <Fragment key={spot.id}>
+              <SpotCard
+                spot={spot}
+                rank={index + 1}
+                distanceKm={nearbyMode && "_dist" in spot ? (spot as RankingSpot & { _dist: number })._dist : undefined}
+              />
+              {/* A/B(treatment) のみ：高PVな縦リスト中盤に in-feed 広告を挿入 */}
+              {showInfeedAd && (index === 2 || index === 6) && index < rankedSpots.length - 1 && (
+                <InFeedAd />
+              )}
+            </Fragment>
           ))}
         </div>
       ) : (
