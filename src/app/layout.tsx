@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Footer } from "@/components/layout/footer";
 import { GoogleAnalytics } from "@/components/google-analytics";
+import { WebVitalsReporter } from "@/components/web-vitals-reporter";
 import { PWARegister } from "@/components/pwa-register";
 import { Providers } from "@/components/providers";
 import dynamic from "next/dynamic";
@@ -232,6 +233,7 @@ export default function RootLayout({
           }}
         />
         <GoogleAnalytics />
+        <WebVitalsReporter />
         {/* AdSense: lazyOnload で初回ロードのレンダリングブロックを回避（CLS/LCP優先） */}
         {process.env.NEXT_PUBLIC_ADSENSE_ID && (
           <Script
