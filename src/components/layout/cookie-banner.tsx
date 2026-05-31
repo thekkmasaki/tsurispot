@@ -17,6 +17,21 @@ export function CookieBanner() {
 
   const handleAccept = () => {
     localStorage.setItem(COOKIE_CONSENT_KEY, "accepted");
+    // Consent Mode v2: 同意で広告・解析ストレージを granted に更新
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      window.gtag("consent", "update", {
+        ad_storage: "granted",
+        ad_user_data: "granted",
+        ad_personalization: "granted",
+        analytics_storage: "granted",
+      });
+    }
+    setVisible(false);
+  };
+
+  const handleDecline = () => {
+    // consent default が denied のため、拒否時は更新せず denied を維持する
+    localStorage.setItem(COOKIE_CONSENT_KEY, "denied");
     setVisible(false);
   };
 
@@ -35,12 +50,20 @@ export function CookieBanner() {
             詳細
           </Link>
         </p>
-        <button
-          onClick={handleAccept}
-          className="shrink-0 rounded bg-primary px-3 py-1 text-xs font-medium text-primary-foreground hover:bg-primary/90 transition-colors md:px-4 md:py-1.5 md:text-sm"
-        >
-          同意する
-        </button>
+        <div className="flex shrink-0 items-center gap-2">
+          <button
+            onClick={handleDecline}
+            className="rounded px-3 py-1 text-xs font-medium text-muted-foreground hover:text-foreground transition-colors md:px-4 md:py-1.5 md:text-sm"
+          >
+            拒否
+          </button>
+          <button
+            onClick={handleAccept}
+            className="rounded bg-primary px-3 py-1 text-xs font-medium text-primary-foreground hover:bg-primary/90 transition-colors md:px-4 md:py-1.5 md:text-sm"
+          >
+            同意する
+          </button>
+        </div>
       </div>
     </div>
   );

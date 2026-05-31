@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Waves } from "lucide-react";
 import { trackAdEvent } from "@/lib/ads-tracking";
+import { AD_SLOTS } from "@/lib/ads-config";
 
 declare global {
   interface Window {
@@ -28,13 +29,6 @@ function useAdsSuppressed(): boolean {
   }, []);
   return suppressed;
 }
-
-// ---- AdSense スロットID ----
-const SLOTS = {
-  display: "9949278874",
-  multiplex: "8230049272",
-  inArticle: "4852864864",
-} as const;
 
 // ---- 基本AdSenseユニット ----
 interface AdUnitProps {
@@ -195,7 +189,7 @@ export function InArticleAd({ className = "" }: { className?: string }) {
       {/* CLS対策: lazyOnloadで遅延挿入される広告が下のコンテンツを押し下げないよう
           最小高さを予約する（SidebarAd/DisplayAd と同じ250px基準）。 */}
       <AdUnit
-        slot={SLOTS.inArticle}
+        slot={AD_SLOTS.in_article}
         placement="in_article"
         format="fluid"
         layout="in-article"
@@ -210,7 +204,7 @@ export function InArticleAd({ className = "" }: { className?: string }) {
 export function DisplayAd({ className = "" }: { className?: string }) {
   return (
     <AdWrapper className={`my-6 ${className}`}>
-      <AdUnit slot={SLOTS.display} format="auto" placement="display" />
+      <AdUnit slot={AD_SLOTS.display} format="auto" placement="display" />
     </AdWrapper>
   );
 }
@@ -228,17 +222,17 @@ export function NativeAdBreak({ className = "" }: { className?: string }) {
         <div className="h-px flex-1 bg-gradient-to-l from-transparent via-ocean-mid/20 to-transparent" />
       </div>
       <div className="rounded-2xl border border-border/50 bg-card/60 p-3 sm:p-5 shadow-sm shadow-ocean-deep/[0.03]">
-        <AdUnit slot={SLOTS.display} format="auto" placement="native_break" />
+        <AdUnit slot={AD_SLOTS.native_break} format="auto" placement="native_break" />
       </div>
     </div>
   );
 }
 
 // ---- Multiplex広告（関連コンテンツ風グリッド、フッター前に最適） ----
-export function MultiplexAd({ className = "", placement = "multiplex" }: { className?: string; placement?: string }) {
+export function MultiplexAd({ className = "", placement = "multiplex" }: { className?: string; placement?: "multiplex" | "pre_footer" }) {
   return (
     <AdUnit
-      slot={SLOTS.multiplex}
+      slot={placement === "pre_footer" ? AD_SLOTS.pre_footer : AD_SLOTS.multiplex}
       placement={placement}
       format="autorelaxed"
       className={`my-8 ${className}`}
@@ -275,7 +269,7 @@ export function SidebarAd({ className = "" }: { className?: string }) {
     <div className={className}>
       <AdWrapper variant="sidebar" label={false}>
         <AdUnit
-          slot={SLOTS.display}
+          slot={AD_SLOTS.sidebar}
           placement="sidebar"
           format="auto"
           className="min-h-[250px]"
@@ -291,7 +285,7 @@ export function StickySidebarAd({ className = "" }: { className?: string }) {
   return (
     <div className={`sticky top-20 ${className}`}>
       <AdWrapper variant="sidebar" label={false}>
-        <AdUnit slot={SLOTS.display} placement="sidebar_sticky" format="auto" className="min-h-[250px]" />
+        <AdUnit slot={AD_SLOTS.sidebar_sticky} placement="sidebar_sticky" format="auto" className="min-h-[250px]" />
       </AdWrapper>
     </div>
   );
@@ -303,7 +297,7 @@ export function HeaderBannerAd() {
   return (
     <div className="hidden lg:block border-b border-border/30 bg-muted/10">
       <div className="mx-auto max-w-5xl px-4 py-2">
-        <AdUnit slot={SLOTS.display} placement="header_banner" format="horizontal" responsive />
+        <AdUnit slot={AD_SLOTS.header_banner} placement="header_banner" format="horizontal" responsive />
       </div>
     </div>
   );
@@ -336,7 +330,7 @@ export function SideRailAds() {
       >
         <div className="w-[160px]">
           <AdUnit
-            slot={SLOTS.display}
+            slot={AD_SLOTS.side_rail}
             placement="side_rail_left"
             format="vertical"
             style={{ display: "block", width: "160px", minHeight: "600px" }}
@@ -351,7 +345,7 @@ export function SideRailAds() {
       >
         <div className="w-[160px]">
           <AdUnit
-            slot={SLOTS.display}
+            slot={AD_SLOTS.side_rail}
             placement="side_rail_right"
             format="vertical"
             style={{ display: "block", width: "160px", minHeight: "600px" }}
@@ -369,7 +363,7 @@ export function InFeedAd({ className = "" }: { className?: string }) {
     // CLS対策: スポット一覧グリッド(col-span-full)に遅延挿入されても
     // カード列を押し下げないよう最小高さを予約する。
     <AdUnit
-      slot={SLOTS.display}
+      slot={AD_SLOTS.in_feed}
       placement="in_feed"
       format="fluid"
       layoutKey="-6t+ed+2i-1n-4w"
@@ -385,8 +379,8 @@ export function ParallelAds({ className = "" }: { className?: string }) {
   return (
     <AdWrapper className={`my-8 ${className}`}>
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <AdUnit slot={SLOTS.display} placement="parallel" format="rectangle" style={{ display: "block", width: "100%", height: "250px" }} />
-        <AdUnit slot={SLOTS.display} placement="parallel" format="rectangle" style={{ display: "block", width: "100%", height: "250px" }} />
+        <AdUnit slot={AD_SLOTS.parallel} placement="parallel" format="rectangle" style={{ display: "block", width: "100%", height: "250px" }} />
+        <AdUnit slot={AD_SLOTS.parallel} placement="parallel" format="rectangle" style={{ display: "block", width: "100%", height: "250px" }} />
       </div>
     </AdWrapper>
   );
@@ -419,7 +413,7 @@ export function MobileStickyAd() {
           ✕
         </button>
         <AdUnit
-          slot={SLOTS.display}
+          slot={AD_SLOTS.mobile_sticky}
           placement="mobile_sticky"
           format="horizontal"
           style={{ display: "block", width: "100%", height: "90px" }}
@@ -437,7 +431,7 @@ export function MobileHeaderBannerAd() {
     <div className="md:hidden border-b border-border/20 bg-muted/5">
       <div className="mx-auto max-w-lg px-2 py-1">
         <AdUnit
-          slot={SLOTS.display}
+          slot={AD_SLOTS.mobile_header_banner}
           placement="mobile_header_banner"
           format="horizontal"
           style={{ display: "block", width: "100%", height: "50px" }}
