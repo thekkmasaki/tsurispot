@@ -138,9 +138,9 @@ export interface SpotAnalysisResult {
     lat: number;
     lng: number;
   };
-  /** 衛星画像のメタデータ */
+  /** 航空・衛星画像のメタデータ */
   imageMetadata: {
-    source: "sentinel-2" | "google-maps" | "manual";
+    source: "sentinel-2" | "google-maps" | "manual" | "gsi-aerial";
     date: string;
     resolution: number;
     imageSize: { width: number; height: number };

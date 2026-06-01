@@ -5,7 +5,7 @@ export const fishingPointsData: Record<string, SpotDiagramData> = {
   "hiraiso-fishing-park": {
     layout: 'seawall',
     structureLabel: '護岸（ベランダ）',
-    seaLabel: '大阪湾',
+    seaLabel: '明石海峡（大阪湾西端）',
     accessibilityNote: 'バリアフリー対応の釣り座あり。車椅子でも利用可能なエリアは管理事務所にお問い合わせください。',
 
     facilities: [
