@@ -922,8 +922,8 @@ export default async function MethodDetailPage({ params }: PageProps) {
             </span>
           </h2>
           <div className="grid gap-4 sm:grid-cols-2">
-            {matchingSpots.slice(0, 8).map((spot) => (
-              <SpotCard key={spot.id} spot={toListSpot(spot)} />
+            {matchingSpots.slice(0, 8).map((spot, index) => (
+              <SpotCard key={spot.id} spot={toListSpot(spot)} priority={index < 2} />
             ))}
           </div>
           {totalMatchCount > 8 && (

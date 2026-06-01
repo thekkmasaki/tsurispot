@@ -335,8 +335,8 @@ export default async function SpotTypePage({ params }: PageProps) {
           {spots
             .sort((a, b) => b.rating - a.rating)
             .slice(0, 6)
-            .map((spot) => (
-              <SpotCard key={spot.id} spot={toListSpot(spot)} />
+            .map((spot, index) => (
+              <SpotCard key={spot.id} spot={toListSpot(spot)} priority={index < 2} />
             ))}
         </div>
       </section>
