@@ -72,6 +72,8 @@ export async function generateMetadata({
   return {
     title,
     description,
+    // スポット3件未満の薄ページは noindex（クロールは follow）。sitemap/内部リンクのしきい値と統一。
+    robots: { index: spots.length >= 3, follow: true },
     openGraph: {
       title,
       description,
