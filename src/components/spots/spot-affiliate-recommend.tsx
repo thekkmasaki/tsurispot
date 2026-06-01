@@ -44,18 +44,24 @@ interface SpotAffiliateRecommendProps {
   methods: string[];
   isNightFishing?: boolean;
   prefecture?: string;
+  /** スポットで釣れる魚名。専用ギアの文脈レコメンドに使う */
+  fishNames?: string[];
 }
 
-export function SpotAffiliateRecommend({ methods, isNightFishing = false, prefecture }: SpotAffiliateRecommendProps) {
+export function SpotAffiliateRecommend({ methods, isNightFishing = false, prefecture, fishNames = [] }: SpotAffiliateRecommendProps) {
   const [products, setProducts] = useState<AffiliateProduct[]>([]);
   const [currentMonth, setCurrentMonth] = useState(1);
+
+  // 依存配列で配列参照の都度変化を避けるため key 文字列化
+  const fishKey = fishNames.join(",");
 
   useEffect(() => {
     const month = new Date().getMonth() + 1;
     setCurrentMonth(month);
-    const relevant = getRelevantAffiliateProducts(methods, month, 6, isNightFishing, prefecture);
+    const relevant = getRelevantAffiliateProducts(methods, month, 6, isNightFishing, prefecture, fishNames);
     setProducts(relevant);
-  }, [methods, isNightFishing, prefecture]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [methods, isNightFishing, prefecture, fishKey]);
 
   if (products.length === 0) return null;
 
