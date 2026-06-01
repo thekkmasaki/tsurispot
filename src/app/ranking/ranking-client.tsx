@@ -24,6 +24,8 @@ export interface RankingSpot {
   hasRentalRod: boolean;
   isFree: boolean;
   fishCount: number;
+  /** サーバーで事前計算したランキングスコア（@/lib/ranking-score） */
+  score: number;
   topFish: { id: string; name: string }[];
   bestTimes: { label: string; rating: string }[];
 }
@@ -102,33 +104,9 @@ function filterSpots(spots: RankingSpot[], tab: TabKey): RankingSpot[] {
   }
 }
 
-/** ランキングスコア算出（100点満点） */
-function calcRankScore(spot: RankingSpot): number {
-  const C = 10;
-  const M = 3.8;
-  const bayesian = (spot.reviewCount * spot.rating + C * M) / (spot.reviewCount + C);
-  const ratingScore = (bayesian / 5) * 50;
-
-  const fishScore = Math.min(spot.fishCount / 8, 1) * 15;
-
-  let facilityScore = 0;
-  if (spot.hasParking) facilityScore += 4;
-  if (spot.hasToilet) facilityScore += 4;
-  if (spot.hasRentalRod) facilityScore += 4;
-  if (spot.isFree) facilityScore += 3;
-
-  const popularityScore = Math.min(spot.reviewCount / 200, 1) * 10;
-
-  const accessScore = spot.difficulty === "beginner" ? 10 : spot.difficulty === "intermediate" ? 5 : 2;
-
-  return ratingScore + fishScore + facilityScore + popularityScore + accessScore;
-}
-
 function sortSpots(spots: RankingSpot[]): RankingSpot[] {
-  return [...spots]
-    .map((s) => ({ spot: s, score: calcRankScore(s) }))
-    .sort((a, b) => b.score - a.score)
-    .map((x) => x.spot);
+  // score はサーバーで事前計算済み（@/lib/ranking-score）。クライアントでは再計算しない。
+  return [...spots].sort((a, b) => b.score - a.score);
 }
 
 function MedalBadge({ rank }: { rank: number }) {
@@ -199,7 +177,7 @@ interface SpotCardProps {
 
 function SpotCard({ spot, rank, distanceKm }: SpotCardProps) {
   const isTop3 = rank <= 3;
-  const score = calcRankScore(spot);
+  const score = spot.score;
 
   return (
     <Link
@@ -305,7 +283,7 @@ export function RankingClient({ spots }: { spots: RankingSpot[] }) {
       return filtered
         .map((s) => {
           const dist = calcDistance(userLocation[0], userLocation[1], s.latitude, s.longitude);
-          const score = calcRankScore(s);
+          const score = s.score;
           const distBonus = dist <= 30 ? 20 : dist <= 100 ? 20 * (1 - (dist - 30) / 70) : 0;
           return { spot: s, score: score + distBonus, dist };
         })
