@@ -12,6 +12,8 @@ export interface AffiliateProduct {
   description: string;
   /** どの釣り方に関連するか（部分一致で判定） */
   methodKeywords: string[];
+  /** どの魚種に効くか（スポットの釣れる魚名と部分一致で加点。旬魚×専用ギアの文脈提案用） */
+  fishKeywords?: string[];
   /** どの季節に関連するか */
   seasons: ("spring" | "summer" | "autumn" | "winter" | "all")[];
   category: "tackle" | "bait" | "wear" | "accessory" | "book";
@@ -92,6 +94,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     url: "https://amzn.to/4rLFPqc",
     description: "エギング専用ロッド。しゃくりやすい軽量設計で、アオリイカやヤリイカ狙いに最適です。",
     methodKeywords: ["エギング"],
+    fishKeywords: ["アオリイカ", "イカ", "コウイカ", "ヤリイカ", "モンゴウイカ"],
     seasons: ["all"],
     category: "tackle",
     priceRange: "¥5,000〜10,000",
@@ -145,6 +148,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     url: "https://amzn.to/3Nc9r10",
     description: "2.5号・3.0号・3.5号の餌木10本セット。ラトル内蔵で集魚力抜群、夜光タイプで夜釣りにも対応。アオリイカ・ヤリイカ・タコ狙いに。",
     methodKeywords: ["エギング", "タコエギ"],
+    fishKeywords: ["アオリイカ", "イカ", "コウイカ", "ヤリイカ", "タコ", "マダコ"],
     seasons: ["all"],
     category: "tackle",
     priceRange: "¥1,500〜2,500",
@@ -216,6 +220,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     url: "https://amzn.to/4c6gaUn",
     description: "チューブタイプで手が汚れにくいコマセ。フルーティーな香りでにおいも少なく、サビキ釣りの必須アイテムです。",
     methodKeywords: ["サビキ"],
+    fishKeywords: ["アジ", "イワシ", "サバ", "サッパ", "コノシロ", "メバル"],
     seasons: ["all"],
     category: "bait",
     priceRange: "¥500〜800",
@@ -296,6 +301,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     url: "https://amzn.to/3NNwHmh",
     description: "タコエギに付けるだけで集魚効果がアップする専用エサ。貝殻容器付きでセットも簡単。初心者からベテランまでタコ釣りの釣果アップに。",
     methodKeywords: ["タコエギ", "タコ", "テンヤ", "タコジグ"],
+    fishKeywords: ["タコ", "マダコ", "イイダコ"],
     seasons: ["summer", "autumn"],
     category: "bait",
     priceRange: "¥800〜1,200",
@@ -452,7 +458,8 @@ export function getRelevantAffiliateProducts(
   currentMonth: number,
   maxItems: number = 3,
   isNightFishing: boolean = false,
-  prefecture?: string
+  prefecture?: string,
+  fishNames: string[] = []
 ): AffiliateProduct[] {
   const currentSeason = getSeasonFromMonth(currentMonth);
 
@@ -493,6 +500,21 @@ export function getRelevantAffiliateProducts(
             if (method.includes(keyword)) {
               score += 10;
               matchCount++;
+              break;
+            }
+          }
+        }
+      }
+
+      // 魚種マッチ: このスポットで釣れる魚に効く専用ギアを強く加点（旬魚×専用ギアの文脈提案）
+      if (product.fishKeywords && product.fishKeywords.length > 0 && fishNames.length > 0) {
+        let fishMatch = 0;
+        for (const fishName of fishNames) {
+          if (fishMatch >= 2) break;
+          for (const fk of product.fishKeywords) {
+            if (fishName.includes(fk) || fk.includes(fishName)) {
+              score += 25;
+              fishMatch++;
               break;
             }
           }

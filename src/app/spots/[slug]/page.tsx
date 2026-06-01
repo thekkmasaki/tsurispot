@@ -1139,7 +1139,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <section>
               <h3 className="mb-4 flex items-center gap-2 text-lg font-bold"><Wrench className="size-5" />{spot.gearGuides && spot.gearGuides.length > 0 ? "おすすめ装備" : "この釣り場でおすすめの装備"}</h3>
               <p className="mb-2 text-sm text-muted-foreground">このスポットの釣り方に合った装備をピックアップしました。</p>
-              <SpotAffiliateRecommend methods={spot.catchableFish.map((cf) => cf.method)} isNightFishing={isNightFishing} prefecture={spot.region.prefecture} />
+              <SpotAffiliateRecommend methods={spot.catchableFish.map((cf) => cf.method)} fishNames={spot.catchableFish.map((cf) => cf.fish.name)} isNightFishing={isNightFishing} prefecture={spot.region.prefecture} />
             </section>
           )}
           {/* 道具選びの特集ガイド（/gear）への高intent内部リンク（アフィリCV＋回遊） */}
