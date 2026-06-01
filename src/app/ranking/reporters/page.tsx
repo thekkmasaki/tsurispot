@@ -1,10 +1,22 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Trophy, Fish, Medal, Award } from "lucide-react";
-import { catchReports } from "@/lib/data/catch-reports";
 import { getTitle } from "@/lib/titles";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { redis } from "@/lib/redis";
+import { dbBatchGet } from "@/lib/dynamodb";
+
+// 全スポット横断の最新釣果フィード（/api/catch-report-ugc の POST が push）。投稿者ランキングの実データ源。
+const GLOBAL_RECENT_KEY = "recent_reports:global";
+
+interface RawReport {
+  id?: string;
+  userName?: string;
+  spotSlug?: string;
+  date?: string;
+  approved?: boolean;
+}
 
 export const revalidate = 3600;
 
@@ -28,21 +40,48 @@ interface ReporterRank {
   spots: Set<string>;
 }
 
-function aggregateReporters(): ReporterRank[] {
+// 実投稿（Redis グローバルリスト）から投稿者を集計する。通報フラグ付き投稿は除外。
+// 注: 匿名 userName は一意性が無いため同名は合算される（暫定）。本格化時は投稿時 ZINCRBY の
+// leaderboard へ移行する。ISR(revalidate=3600) でキャッシュされるため Redis 負荷は低い。
+async function aggregateReporters(): Promise<ReporterRank[]> {
+  let reports: RawReport[] = [];
+  try {
+    const raw = await redis.lrange<string>(GLOBAL_RECENT_KEY, 0, 49);
+    const parsed: RawReport[] = [];
+    for (const item of raw) {
+      try {
+        const r = typeof item === "string" ? JSON.parse(item) : item;
+        // 自動公開方針下では approved===true のみ公開（fail-closed）
+        if (r && r.id && r.approved === true && r.userName) parsed.push(r as RawReport);
+      } catch {
+        // 壊れたエントリはスキップ
+      }
+    }
+    if (parsed.length > 0) {
+      const flagKeys = parsed.map((r) => ({ pk: `REPORT#${r.id}`, sk: "FLAGGED" }));
+      const flags = await dbBatchGet(flagKeys);
+      reports = parsed.filter((_, i) => flags[i] === null);
+    }
+  } catch (err) {
+    console.error("[reporters] Redis fetch error:", err);
+  }
+
   const map = new Map<string, ReporterRank>();
-  for (const report of catchReports) {
-    if (!report.approved) continue;
-    const existing = map.get(report.userName);
+  for (const report of reports) {
+    const userName = report.userName as string;
+    const date = report.date || "";
+    const spotSlug = report.spotSlug || "";
+    const existing = map.get(userName);
     if (existing) {
       existing.count++;
-      if (report.date > existing.latestDate) existing.latestDate = report.date;
-      existing.spots.add(report.spotSlug);
+      if (date > existing.latestDate) existing.latestDate = date;
+      existing.spots.add(spotSlug);
     } else {
-      map.set(report.userName, {
-        userName: report.userName,
+      map.set(userName, {
+        userName,
         count: 1,
-        latestDate: report.date,
-        spots: new Set([report.spotSlug]),
+        latestDate: date,
+        spots: new Set([spotSlug]),
       });
     }
   }
@@ -61,8 +100,8 @@ function rankIcon(rank: number) {
   return <span className="inline-flex size-6 items-center justify-center rounded-full bg-muted text-xs font-bold text-muted-foreground">{rank}</span>;
 }
 
-export default function ReporterRankingPage() {
-  const ranking = aggregateReporters();
+export default async function ReporterRankingPage() {
+  const ranking = await aggregateReporters();
 
   return (
     <div className="container mx-auto max-w-3xl px-4 py-6 sm:py-8">
