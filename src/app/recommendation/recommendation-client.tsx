@@ -33,7 +33,42 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { InArticleAd } from "@/components/ads/ad-unit";
-import type { FishingSpot, FishSpecies } from "@/types";
+// /recommendation はクライアントに全2,141スポット＋全100魚種を渡すため、RSCペイロード/
+// ハイドレーション削減用に必要フィールドだけの軽量型を定義する。特に cf.fish の完全 RecoFish
+// （24フィールド）が数千回直列化されるのを {slug,name} のみに削減するのが主目的。
+export interface RecoFish {
+  slug: string;
+  name: string;
+}
+
+export interface RecoCatchableFish {
+  fish: RecoFish;
+  method: string;
+  monthStart: number;
+  monthEnd: number;
+  peakSeason: boolean;
+}
+
+export interface RecoSpot {
+  id: string;
+  slug: string;
+  name: string;
+  spotType: string;
+  difficulty: string;
+  rating: number;
+  latitude: number;
+  longitude: number;
+  hasToilet: boolean;
+  hasParking: boolean;
+  hasConvenienceStore: boolean;
+  region: { prefecture: string; areaName: string };
+  catchableFish: RecoCatchableFish[];
+}
+
+/** 旬の魚カウント用。fishSpecies プロップは「その月に旬の魚が何種か」の算出にしか使わない。 */
+export interface RecoPeakFish {
+  peakMonths: number[];
+}
 
 // --- 潮汐計算（tidesページと同じロジック） ---
 
@@ -97,23 +132,12 @@ function getTideTypeColor(type: string): string {
   }
 }
 
-// --- 旬判定 ---
-
-function isFishInSeason(
-  fish: FishSpecies,
-  month: number
-): { inSeason: boolean; isPeak: boolean } {
-  const inSeason = fish.seasonMonths.includes(month);
-  const isPeak = fish.peakMonths.includes(month);
-  return { inSeason, isPeak };
-}
-
 // --- スポットの釣れる魚を指定月で絞る ---
 
 function getCatchableFishNow(
-  spot: FishingSpot,
+  spot: RecoSpot,
   month: number
-): { fish: FishSpecies; isPeak: boolean; method: string }[] {
+): { fish: RecoFish; isPeak: boolean; method: string }[] {
   return spot.catchableFish
     .filter((cf) => {
       const start = cf.monthStart;
@@ -136,19 +160,19 @@ type UserLevel = "beginner" | "intermediate" | "advanced";
 type Companion = "solo" | "friends" | "family";
 
 interface ScoredSpot {
-  spot: FishingSpot;
+  spot: RecoSpot;
   totalScore: number;
   seasonScore: number;
   tideScore: number;
   difficultyScore: number;
   seasonalFitScore: number;
-  catchableFishNow: { fish: FishSpecies; isPeak: boolean; method: string }[];
+  catchableFishNow: { fish: RecoFish; isPeak: boolean; method: string }[];
   rank: "S" | "A" | "B" | "C";
   reason: string;
 }
 
 function scoreSpot(
-  spot: FishingSpot,
+  spot: RecoSpot,
   month: number,
   tideType: string,
   userLevel: UserLevel,
@@ -291,8 +315,8 @@ function getSeasonLabel(
 }
 
 function generateReason(
-  spot: FishingSpot,
-  catchable: { fish: FishSpecies; isPeak: boolean; method: string }[],
+  spot: RecoSpot,
+  catchable: { fish: RecoFish; isPeak: boolean; method: string }[],
   tideType: string,
   userLevel: UserLevel,
   companion: Companion,
@@ -357,7 +381,7 @@ function getRankColor(rank: string): string {
 
 // --- 旬の魚リストを取得 ---
 
-function getPeakFishList(month: number, fishSpecies: FishSpecies[]): FishSpecies[] {
+function getPeakFishList(month: number, fishSpecies: RecoPeakFish[]): RecoPeakFish[] {
   return fishSpecies.filter((f) => f.peakMonths.includes(month));
 }
 
@@ -505,7 +529,7 @@ function getDateTextColor(date: Date): string {
 
 // --- メインページ ---
 
-export function RecommendationClient({ fishingSpots, fishSpecies }: { fishingSpots: FishingSpot[]; fishSpecies: FishSpecies[] }) {
+export function RecommendationClient({ fishingSpots, fishSpecies }: { fishingSpots: RecoSpot[]; fishSpecies: RecoPeakFish[] }) {
   const [today] = useState(() => {
     const d = new Date();
     d.setHours(0, 0, 0, 0);
@@ -714,7 +738,7 @@ export function RecommendationClient({ fishingSpots, fishSpecies }: { fishingSpo
 
   // スポットデータから選択月の釣れる魚を動的に収集
   const spotFishList = useMemo(() => {
-    const fishRecord: Record<string, { fish: FishSpecies; isPeak: boolean }> = {};
+    const fishRecord: Record<string, { fish: RecoFish; isPeak: boolean }> = {};
     for (const spot of filteredSpots) {
       for (const cf of spot.catchableFish) {
         const start = cf.monthStart;

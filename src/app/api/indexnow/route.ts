@@ -10,12 +10,16 @@ import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { tackleShops } from "@/lib/data/shops";
 import { FISHING_METHODS, MONTHS } from "@/lib/data/fishing-methods";
 import { REGION_GROUPS } from "@/lib/data/regions-group";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 // IndexNow APIキー（public/{key}.txt に配置済み）
 const INDEXNOW_KEY = "03845770c729578716b88beda009b743";
 const HOST = "tsurispot.com";
 const BASE_URL = `https://${HOST}`;
 const INDEXNOW_ENDPOINT = "https://api.indexnow.org/indexnow";
+
+// 全URL収集＋バッチ送信は時間がかかるため実行時間上限を引き上げる
+export const maxDuration = 60;
 
 /**
  * サイト全URLを収集する（sitemap.tsと同じデータソース）
@@ -267,7 +271,24 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const result = await submitToIndexNow(urls);
+  // 自ドメイン(tsurispot.com)以外のURLは弾く（IndexNow送信枠の濫用防止・防御的検証）
+  const ownUrls = urls.filter((u) => typeof u === "string" && u.startsWith(BASE_URL));
+  if (ownUrls.length === 0) {
+    return NextResponse.json(
+      { success: false, message: "送信できるのは自サイト(tsurispot.com)のURLのみです" },
+      { status: 400 }
+    );
+  }
+
+  // レート制限（IndexNow送信枠・関数実行時間の浪費防止）: 1IP 10分間に 10 回まで
+  if (!(await checkRateLimit(getClientIp(request), "INDEXNOW", 10, 600))) {
+    return NextResponse.json(
+      { success: false, message: "送信回数の上限に達しました。しばらくしてからお試しください。" },
+      { status: 429 }
+    );
+  }
+
+  const result = await submitToIndexNow(ownUrls);
 
   return NextResponse.json({
     success: true,

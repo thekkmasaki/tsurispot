@@ -34,7 +34,8 @@ import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, getS
 import { RelatedSpotsByFish } from "@/components/spots/related-spots-by-fish";
 import { RelatedSpotsByMethod } from "@/components/spots/related-spots-by-method";
 import { RelatedSpotsGeneric } from "@/components/spots/related-spots-generic";
-// import { getNearbyShopsWithDistance } from "@/lib/data/shops"; // 有料プラン機能として温存中
+import { getNearbyShopsWithDistance } from "@/lib/data/shops";
+import { NearbyShops, type NearbyShopItem } from "@/components/spots/nearby-shops";
 import { getPrefectureByName } from "@/lib/data/prefectures";
 import { SeasonCalendar } from "@/components/spots/season-calendar";
 import { TackleCard } from "@/components/spots/tackle-card";
@@ -472,8 +473,22 @@ export default async function SpotDetailPage({ params }: PageProps) {
   // 県内スポット数（信頼性指標用）
   const prefSpotCount = fishingSpots.filter((s) => s.region.prefecture === spot.region.prefecture).length;
 
-  // 近くの釣具店 — 有料プラン機能として温存中
-  // const nearbyShopsWithDist = getNearbyShopsWithDistance(spot.latitude, spot.longitude, 5, 50);
+  // 近くの釣具店（B2B送客）。表示/クリックは GA4 で計測し、掲載店への送客実績の根拠にする。
+  const nearbyShops: NearbyShopItem[] = getNearbyShopsWithDistance(
+    spot.latitude,
+    spot.longitude,
+    5,
+    50
+  ).map(({ shop, distanceKm }) => ({
+    slug: shop.slug,
+    name: shop.name,
+    address: shop.address,
+    distanceKm,
+    isPremium: shop.isPremium,
+    planLevel: shop.planLevel,
+    hasLiveBait: shop.hasLiveBait,
+    hasFrozenBait: shop.hasFrozenBait,
+  }));
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
@@ -1127,6 +1142,36 @@ export default async function SpotDetailPage({ params }: PageProps) {
               <SpotAffiliateRecommend methods={spot.catchableFish.map((cf) => cf.method)} isNightFishing={isNightFishing} prefecture={spot.region.prefecture} />
             </section>
           )}
+          {/* 道具選びの特集ガイド（/gear）への高intent内部リンク（アフィリCV＋回遊） */}
+          {(() => {
+            const methods = spot.catchableFish.map((cf) => cf.method);
+            const features: { slug: string; label: string; desc: string }[] = [];
+            if (methods.some((m) => m.includes("サビキ"))) {
+              features.push({ slug: "sabiki", label: "サビキ釣りの道具・仕掛けガイド", desc: "アジ・イワシ・サバを手軽に釣るサビキ仕掛けの選び方" });
+            }
+            if (spot.difficulty === "beginner") {
+              features.push({ slug: "rod-beginner", label: "初心者向けロッドの選び方", desc: "最初の1本に迷わない万能竿の選定ガイド" });
+            }
+            features.push({ slug: "tackle-box", label: "タックルボックス・収納ガイド", desc: "道具をすっきり持ち運ぶ収納術とおすすめ" });
+            return (
+              <section>
+                <h3 className="mb-4 flex items-center gap-2 text-lg font-bold"><ShoppingBag className="size-5" />道具選びの特集ガイド</h3>
+                <p className="mb-3 text-sm text-muted-foreground">{spot.name}の釣りに役立つ道具の選び方を、特集ページで詳しく解説しています。</p>
+                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                  {features.map((f) => (
+                    <Link key={f.slug} href={`/gear/${f.slug}`}>
+                      <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                        <CardContent className="p-4">
+                          <h4 className="text-sm font-semibold group-hover:text-primary">{f.label}</h4>
+                          <p className="mt-1 text-xs text-muted-foreground">{f.desc}</p>
+                        </CardContent>
+                      </Card>
+                    </Link>
+                  ))}
+                </div>
+              </section>
+            );
+          })()}
           <section>
             <h3 className="mb-4 flex items-center gap-2 text-lg font-bold"><ShoppingBag className="size-5" />持ち物チェックリスト</h3>
             <PackingChecklist spotType={spot.spotType} hasConvenienceStore={spot.hasConvenienceStore} hasToilet={spot.hasToilet} hasFishingShop={spot.hasFishingShop} hasRentalRod={spot.hasRentalRod} difficulty={spot.difficulty} safetyLevel={spot.safetyLevel} isNightFishing={isNightFishing} />
@@ -1171,7 +1216,8 @@ export default async function SpotDetailPage({ params }: PageProps) {
               </CardContent>
             </Card>
           </section>
-          {/* 近くの釣具店セクション — 有料プラン機能として温存中 */}
+          {/* 近くの釣具店（B2B送客・GA4計測） */}
+          <NearbyShops spotName={spot.name} shops={nearbyShops} />
           <NearbyAccommodation
             spotName={spot.name}
             latitude={spot.latitude}

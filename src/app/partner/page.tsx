@@ -26,6 +26,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShopListingForm } from "@/components/shops/shop-listing-form";
+import { PaidPlanInquiry } from "@/components/shops/paid-plan-inquiry";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 import { tackleShops } from "@/lib/data/shops";
@@ -575,7 +576,7 @@ export default function PartnerPage() {
               </ul>
               <div className="mt-5">
                 <Button className="w-full bg-blue-600 hover:bg-blue-700" asChild>
-                  <Link href="/subscribe/basic">ベーシックプランに申し込む</Link>
+                  <Link href="#inquiry-basic">ベーシックプランに申し込む</Link>
                 </Button>
               </div>
             </CardContent>
@@ -600,11 +601,21 @@ export default function PartnerPage() {
               </ul>
               <div className="mt-5">
                 <Button className="w-full bg-amber-500 hover:bg-amber-600" asChild>
-                  <Link href="/subscribe/pro">プロプランに申し込む</Link>
+                  <Link href="#inquiry-pro">プロプランに申し込む</Link>
                 </Button>
               </div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* 有料プラン お問い合わせフォーム（公開LPからの申込導線を開通） */}
+        <div className="mt-8 grid gap-4 sm:grid-cols-2">
+          <div id="inquiry-basic" className="scroll-mt-24">
+            <PaidPlanInquiry plan="basic" />
+          </div>
+          <div id="inquiry-pro" className="scroll-mt-24">
+            <PaidPlanInquiry plan="pro" />
+          </div>
         </div>
       </section>
 

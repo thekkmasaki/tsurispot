@@ -312,6 +312,7 @@ export default function ShopsListPage() {
                   <CardHeader className="pb-2">
                     <CardTitle className="text-lg text-blue-600 dark:text-blue-400">ベーシック</CardTitle>
                     <p className="text-2xl font-bold">¥500<span className="text-sm font-normal text-muted-foreground">/月</span></p>
+                    <p className="mt-1 text-xs text-muted-foreground">初年度価格（2年目以降 ¥980/月）</p>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2">
@@ -327,7 +328,8 @@ export default function ShopsListPage() {
                 <Card className="border-amber-300/50">
                   <CardHeader className="pb-2">
                     <CardTitle className="text-lg text-amber-600 dark:text-amber-400">プロ</CardTitle>
-                    <p className="text-2xl font-bold">¥2,980<span className="text-sm font-normal text-muted-foreground">/月</span></p>
+                    <p className="text-2xl font-bold">¥1,980<span className="text-sm font-normal text-muted-foreground">/月</span></p>
+                    <p className="mt-1 text-xs text-muted-foreground">初年度価格（2年目以降 ¥2,980/月）</p>
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2">

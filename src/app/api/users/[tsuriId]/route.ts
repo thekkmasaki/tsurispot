@@ -50,6 +50,31 @@ export async function GET(
   const viewerId = session?.user?.tsuriId;
   const isSelf = viewerId === tsuriId;
 
+  const followingCount = await getFollowingCount(tsuriId);
+  const followersCount = await getFollowersCount(tsuriId);
+  const viewerFollowing =
+    viewerId && !isSelf ? await isFollowing(viewerId, tsuriId) : false;
+
+  // 非公開プロフィールは本人以外に釣果・統計・バッジを開示しない（sitemap の isPublic 尊重と整合）
+  if (target.isPublic === false && !isSelf) {
+    return NextResponse.json({
+      user: {
+        tsuriId: target.id,
+        nickname: target.nickname,
+        avatarUrl: target.avatarUrl,
+        bio: target.bio,
+        headerImage: target.headerImage,
+        createdAt: target.createdAt,
+        reportCount: 0,
+      },
+      isPrivate: true,
+      stats: { reportCount: 0, uniqueFishCount: 0, uniqueSpotCount: 0, maxSizeCm: 0 },
+      badges: { earned: [], total: ALL_TIERS.length },
+      reports: [],
+      follow: { followingCount, followersCount, viewerFollowing, isSelf },
+    });
+  }
+
   const allRaw = await redis.lrange(`auth:user_reports:${tsuriId}`, 0, 499);
   const allReports = parseReports(allRaw as unknown[]);
   const recentReports = allReports.slice(0, 10);
@@ -68,11 +93,6 @@ export async function GET(
     emoji: tier.emoji,
     className: tier.className,
   }));
-
-  const followingCount = await getFollowingCount(tsuriId);
-  const followersCount = await getFollowersCount(tsuriId);
-  const viewerFollowing =
-    viewerId && !isSelf ? await isFollowing(viewerId, tsuriId) : false;
 
   return NextResponse.json({
     user: {

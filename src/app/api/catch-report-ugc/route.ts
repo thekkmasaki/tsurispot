@@ -4,6 +4,7 @@ import { redis } from "@/lib/redis";
 import { checkNgWords } from "@/lib/moderation";
 import { auth } from "@/lib/auth";
 import { incrementReportCount } from "@/lib/auth-redis";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;
 
@@ -32,6 +33,14 @@ export async function POST(request: Request) {
   try {
     const session = await auth();
     const tsuriId = session?.user?.tsuriId;
+
+    // レート制限（匿名自動公開のため、スパム/荒らしによるトップ表示汚染を防ぐ）: 1IP 10分間に 10 投稿まで
+    if (!(await checkRateLimit(getClientIp(request), "CATCH_REPORT_UGC", 10, 600))) {
+      return NextResponse.json(
+        { error: "投稿が多すぎます。しばらくしてからお試しください。" },
+        { status: 429 },
+      );
+    }
 
     const body = await request.json().catch(() => ({}));
     const { spotSlug, spotName, fishName, userName, comment, date, photoUrl, sizeCm, method, weather } = body as {

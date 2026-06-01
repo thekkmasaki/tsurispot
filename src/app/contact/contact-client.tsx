@@ -3,7 +3,6 @@
 import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import {
-  Mail,
   Send,
   MapPin,
   Bug,
@@ -12,6 +11,8 @@ import {
   CheckCircle2,
   Copy,
   Store,
+  AlertCircle,
+  Loader2,
 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -68,6 +69,8 @@ function ContactClientInner() {
   const [category, setCategory] = useState("");
   const [message, setMessage] = useState("");
   const [copied, setCopied] = useState(false);
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     const from = searchParams.get("from");
@@ -76,22 +79,51 @@ function ContactClientInner() {
 
   const selectedCategory = categories.find((c) => c.value === category);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const isValid = email.trim() !== "" && message.trim() !== "";
 
+  // 送信できなかったときのフォールバック用 mailto リンク
+  const mailtoHref = (() => {
     const subject = encodeURIComponent(
       `[ツリスポ] ${selectedCategory?.label || "お問い合わせ"}`
     );
-    const bodyParts = [];
+    const bodyParts: string[] = [];
     if (name) bodyParts.push(`お名前: ${name}`);
     bodyParts.push(`返信先: ${email}`);
     if (selectedCategory) bodyParts.push(`カテゴリ: ${selectedCategory.label}`);
     bodyParts.push("", message);
-    const body = encodeURIComponent(bodyParts.join("\n"));
+    return `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${encodeURIComponent(bodyParts.join("\n"))}`;
+  })();
 
-    window.location.href = `mailto:${CONTACT_EMAIL}?subject=${subject}&body=${body}`;
-    // mailto はメーラー未設定だと無反応になりうるため、案内を明示。
-    toast.info("メールアプリを開きました。開かない場合は下のアドレスにコピーして送信してください。");
+  // mailto は端末によって無反応になりサイレント失敗するため、API 経由送信を主導線にする。
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isValid || status === "submitting") return;
+
+    setStatus("submitting");
+    setErrorMessage("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          email: email.trim(),
+          category: selectedCategory?.label || "",
+          message: message.trim(),
+        }),
+      });
+      const data = await res.json().catch(() => ({}));
+      if (res.ok && data.ok) {
+        setStatus("success");
+      } else {
+        setErrorMessage(data.error || "送信に失敗しました");
+        setStatus("error");
+      }
+    } catch {
+      setErrorMessage("ネットワークエラーが発生しました");
+      setStatus("error");
+    }
   };
 
   const handleCopyEmail = () => {
@@ -100,8 +132,6 @@ function ContactClientInner() {
     toast.success("メールアドレスをコピーしました");
     setTimeout(() => setCopied(false), 2000);
   };
-
-  const isValid = email.trim() !== "" && message.trim() !== "";
 
   return (
     <main className="container mx-auto max-w-2xl px-4 py-8 sm:py-12">
@@ -121,10 +151,10 @@ function ContactClientInner() {
       </div>
 
       {/* カテゴリ選択 */}
-      <div className="mb-6">
-        <p className="mb-3 text-sm font-medium">
+      <fieldset className="mb-6">
+        <legend className="mb-3 block text-sm font-medium">
           どんな内容ですか？
-        </p>
+        </legend>
         <div className="grid grid-cols-2 gap-2 sm:gap-3">
           {categories.map((cat) => {
             const Icon = cat.icon;
@@ -150,9 +180,23 @@ function ContactClientInner() {
             );
           })}
         </div>
-      </div>
+      </fieldset>
+
+      {/* 送信完了 */}
+      {status === "success" && (
+        <Card className="border-green-200 bg-green-50/50">
+          <CardContent className="flex flex-col items-center gap-3 p-6 text-center">
+            <CheckCircle2 className="size-10 text-green-600" />
+            <p className="text-lg font-bold text-green-800">送信しました！</p>
+            <p className="text-sm text-green-700">
+              お問い合わせありがとうございます。通常1〜3営業日以内に返信いたします。
+            </p>
+          </CardContent>
+        </Card>
+      )}
 
       {/* フォーム */}
+      {status !== "success" && (
       <Card>
         <CardContent className="p-4 sm:p-6">
           <form onSubmit={handleSubmit} className="space-y-5">
@@ -225,30 +269,52 @@ function ContactClientInner() {
               />
             </div>
 
+            {/* エラー時はフォールバックを案内 */}
+            {status === "error" && errorMessage && (
+              <div className="flex items-start gap-2 rounded-md bg-destructive/10 px-3 py-2 text-sm text-destructive">
+                <AlertCircle className="mt-0.5 size-4 shrink-0" />
+                <div>
+                  <p>{errorMessage}</p>
+                  <p className="mt-1">
+                    うまく送れない場合は{" "}
+                    <a href={mailtoHref} className="font-medium underline">
+                      メールアプリで送信
+                    </a>{" "}
+                    するか、下のアドレス宛に直接お送りください。
+                  </p>
+                </div>
+              </div>
+            )}
+
             {/* 送信ボタン */}
             <div className="pt-2">
               <Button
                 type="submit"
                 size="lg"
-                disabled={!isValid}
+                disabled={!isValid || status === "submitting"}
                 className="w-full min-h-[48px] gap-2"
               >
-                <Mail className="h-4 w-4" />
-                メールアプリで送信する
+                {status === "submitting" ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Send className="h-4 w-4" />
+                )}
+                {status === "submitting" ? "送信中..." : "送信する"}
               </Button>
               <p className="mt-2 text-center text-xs text-muted-foreground">
-                ボタンを押すとメールアプリが開きます。内容を確認して送信してください。写真がある場合はメールアプリで画像を添付してください。
+                このページから直接送信されます。写真を添付したい場合は、下のメールアドレス宛にお送りください。
               </p>
             </div>
           </form>
         </CardContent>
       </Card>
+      )}
 
-      {/* メールアプリが開かない場合 */}
+      {/* 送信できない場合のフォールバック（メール直送） */}
       <div className="mt-6 space-y-3">
         <div className="rounded-xl border border-dashed border-border p-4 text-center">
           <p className="text-sm text-muted-foreground">
-            メールアプリが開かない場合は、下記アドレスに直接送信してください
+            うまく送信できない場合は、下記アドレスに直接お送りください
           </p>
           <div className="mt-2 flex items-center justify-center gap-2">
             <code className="rounded bg-muted px-3 py-1.5 text-sm font-medium">

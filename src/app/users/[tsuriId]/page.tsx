@@ -47,6 +47,7 @@ interface ProfileFetchResult {
   reports: CatchReport[];
   bestCatch: CatchReport | null;
   follow: { followingCount: number; followersCount: number };
+  isPrivate: boolean;
 }
 
 function parseReports(raw: unknown[]): CatchReport[] {
@@ -67,6 +68,31 @@ function parseReports(raw: unknown[]): CatchReport[] {
 async function fetchProfile(tsuriId: string): Promise<ProfileFetchResult | null> {
   const target = await getUserById(tsuriId);
   if (!target) return null;
+
+  // 非公開プロフィール: 公開ページ(/users/[id])では釣果・統計・バッジを一切出さない。
+  // （本人は /mypage で自分のデータを管理する。sitemap も isPublic を尊重しており整合させる）
+  if (target.isPublic === false) {
+    const followingCount = await getFollowingCount(tsuriId);
+    const followersCount = await getFollowersCount(tsuriId);
+    return {
+      user: {
+        tsuriId: target.id,
+        nickname: target.nickname,
+        avatarUrl: target.avatarUrl,
+        bio: target.bio,
+        headerImage: target.headerImage,
+        createdAt: target.createdAt,
+        reportCount: 0,
+        styles: target.styles,
+      },
+      stats: { reportCount: 0, uniqueFishCount: 0, uniqueSpotCount: 0, maxSizeCm: 0 },
+      badges: { earned: [], total: ALL_TIERS.length },
+      reports: [],
+      bestCatch: null,
+      follow: { followingCount, followersCount },
+      isPrivate: true,
+    };
+  }
 
   const allRaw = await redis.lrange(`auth:user_reports:${tsuriId}`, 0, 499);
   const allReports = parseReports(allRaw as unknown[]);
@@ -110,6 +136,7 @@ async function fetchProfile(tsuriId: string): Promise<ProfileFetchResult | null>
     reports: recentReports,
     bestCatch,
     follow: { followingCount, followersCount },
+    isPrivate: false,
   };
 }
 
@@ -124,6 +151,15 @@ export async function generateMetadata({
     return {
       title: "ユーザーが見つかりません｜ツリスポ",
       robots: { index: false, follow: false },
+    };
+  }
+
+  if (profile.isPrivate) {
+    return {
+      title: `${profile.user.nickname}さんのプロフィール｜ツリスポ`,
+      description: "このプロフィールは非公開に設定されています。",
+      robots: { index: false, follow: false },
+      alternates: { canonical: `https://tsurispot.com/users/${tsuriId}` },
     };
   }
 
@@ -176,6 +212,23 @@ export default async function UserProfilePage({
       <div className="mx-auto max-w-lg px-4 py-16 text-center">
         <UserIcon className="mx-auto h-12 w-12 text-muted-foreground" />
         <h1 className="mt-4 text-xl font-bold">ユーザーが見つかりません</h1>
+        <Link href="/">
+          <Button className="mt-4">トップへ戻る</Button>
+        </Link>
+      </div>
+    );
+  }
+
+  if (profile.isPrivate) {
+    return (
+      <div className="mx-auto max-w-lg px-4 py-16 text-center">
+        <UserIcon className="mx-auto h-12 w-12 text-muted-foreground" />
+        <h1 className="mt-4 text-xl font-bold">
+          {profile.user.nickname}さんのプロフィールは非公開です
+        </h1>
+        <p className="mt-2 text-sm text-muted-foreground">
+          このユーザーは釣果・統計を公開していません。
+        </p>
         <Link href="/">
           <Button className="mt-4">トップへ戻る</Button>
         </Link>

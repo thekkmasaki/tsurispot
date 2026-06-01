@@ -20,6 +20,9 @@ export function GoogleAnalytics() {
           // Consent Mode v2（地域別 default）。AdSense は lazyOnload で後から読み込まれるため、
           // この default が確実に先行する。
           // EEA/UK/CH（GDPR圏）は全拒否を起点にし、同意で update する（法令順守）。
+          // 非EEA(日本など)は下の2つ目の default で analytics_storage のみ granted 起点にする
+          // （#86 の default 全 denied で GA4 が過少計測＝アクティブユーザー急減になった件への対応。
+          //  広告系は方針どおり同意制を維持し denied 起点）。
           gtag('consent', 'default', {
             ad_storage: 'denied',
             ad_user_data: 'denied',
