@@ -34,7 +34,8 @@ import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, getS
 import { RelatedSpotsByFish } from "@/components/spots/related-spots-by-fish";
 import { RelatedSpotsByMethod } from "@/components/spots/related-spots-by-method";
 import { RelatedSpotsGeneric } from "@/components/spots/related-spots-generic";
-// import { getNearbyShopsWithDistance } from "@/lib/data/shops"; // 有料プラン機能として温存中
+import { getNearbyShopsWithDistance } from "@/lib/data/shops";
+import { NearbyShops, type NearbyShopItem } from "@/components/spots/nearby-shops";
 import { getPrefectureByName } from "@/lib/data/prefectures";
 import { SeasonCalendar } from "@/components/spots/season-calendar";
 import { TackleCard } from "@/components/spots/tackle-card";
@@ -472,8 +473,22 @@ export default async function SpotDetailPage({ params }: PageProps) {
   // 県内スポット数（信頼性指標用）
   const prefSpotCount = fishingSpots.filter((s) => s.region.prefecture === spot.region.prefecture).length;
 
-  // 近くの釣具店 — 有料プラン機能として温存中
-  // const nearbyShopsWithDist = getNearbyShopsWithDistance(spot.latitude, spot.longitude, 5, 50);
+  // 近くの釣具店（B2B送客）。表示/クリックは GA4 で計測し、掲載店への送客実績の根拠にする。
+  const nearbyShops: NearbyShopItem[] = getNearbyShopsWithDistance(
+    spot.latitude,
+    spot.longitude,
+    5,
+    50
+  ).map(({ shop, distanceKm }) => ({
+    slug: shop.slug,
+    name: shop.name,
+    address: shop.address,
+    distanceKm,
+    isPremium: shop.isPremium,
+    planLevel: shop.planLevel,
+    hasLiveBait: shop.hasLiveBait,
+    hasFrozenBait: shop.hasFrozenBait,
+  }));
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
@@ -1171,7 +1186,8 @@ export default async function SpotDetailPage({ params }: PageProps) {
               </CardContent>
             </Card>
           </section>
-          {/* 近くの釣具店セクション — 有料プラン機能として温存中 */}
+          {/* 近くの釣具店（B2B送客・GA4計測） */}
+          <NearbyShops spotName={spot.name} shops={nearbyShops} />
           <NearbyAccommodation
             spotName={spot.name}
             latitude={spot.latitude}
