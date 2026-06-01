@@ -7,14 +7,15 @@ import { SpotImage } from "@/components/ui/spot-image";
 import { FavoriteButton } from "@/components/spots/favorite-button";
 import { CompareToggleButton } from "@/components/spots/compare-bar";
 
-export function SpotCard({ spot, distance }: { spot: ListSpot; distance?: number | null }) {
+export function SpotCard({ spot, distance, priority = false }: { spot: ListSpot; distance?: number | null; priority?: boolean }) {
   const displayFish = spot.fishNames.slice(0, 3);
   const remainingCount = spot.fishNames.length - 3;
   const hiddenGem = spot.isHiddenGem;
 
+  // stretched-link 方式: カード全体は Link の ::after で覆ってクリック可能にし、
+  // お気に入り/比較ボタンは Link の外（z-10）に出す（<a> 内 <button> の不正ネストを解消）。
   return (
-    <Link href={`/spots/${spot.slug}`}>
-      <Card className="group gap-0 overflow-hidden py-0 transition-all duration-200 hover:shadow-lg hover:shadow-ocean-deep/8 hover:-translate-y-1">
+    <Card className="group relative gap-0 overflow-hidden py-0 transition-all duration-200 hover:shadow-lg hover:shadow-ocean-deep/8 hover:-translate-y-1">
         {/* スポット画像 */}
         <div className="relative">
           <SpotImage
@@ -22,6 +23,7 @@ export function SpotCard({ spot, distance }: { spot: ListSpot; distance?: number
             alt={spot.name}
             spotType={spot.spotType}
             height="h-40"
+            priority={priority}
           />
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-black/30 to-transparent" />
           <span className="absolute bottom-2 right-2 rounded-lg bg-ocean-deep/70 px-2 py-0.5 text-xs text-white backdrop-blur-sm">
@@ -33,7 +35,7 @@ export function SpotCard({ spot, distance }: { spot: ListSpot; distance?: number
               穴場
             </span>
           )}
-          <div className="absolute top-2 right-2 flex items-center gap-1">
+          <div className="absolute top-2 right-2 z-10 flex items-center gap-1">
             <CompareToggleButton slug={spot.slug} name={spot.name} />
             <FavoriteButton spotSlug={spot.slug} />
           </div>
@@ -43,7 +45,9 @@ export function SpotCard({ spot, distance }: { spot: ListSpot; distance?: number
           {/* Spot name and region */}
           <div>
             <h3 className="text-sm font-semibold leading-tight group-hover:text-primary sm:text-base">
-              {spot.name}
+              <Link href={`/spots/${spot.slug}`} className="after:absolute after:inset-0">
+                {spot.name}
+              </Link>
             </h3>
             <p className="mt-0.5 text-xs text-muted-foreground sm:text-sm">
               {spot.region.prefecture} {spot.region.areaName}
@@ -116,7 +120,6 @@ export function SpotCard({ spot, distance }: { spot: ListSpot; distance?: number
             )}
           </div>
         </CardContent>
-      </Card>
-    </Link>
+    </Card>
   );
 }
