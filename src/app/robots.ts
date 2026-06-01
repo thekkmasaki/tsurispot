@@ -26,11 +26,13 @@ export default function robots(): MetadataRoute.Robots {
       { userAgent: "Baiduspider", allow: "/" },
       { userAgent: "Applebot", allow: "/" },
       { userAgent: "DuckDuckBot", allow: "/" },
+      // 「学習はNo・検索/引用はYes」: 検索インデックス・リアルタイム引用のbotは許可し、被引用→送客を狙う。
+      { userAgent: "OAI-SearchBot", allow: "/" },
+      { userAgent: "ChatGPT-User", allow: "/" },
+      { userAgent: "PerplexityBot", allow: "/" },
+      // 純粋な学習用クローラーは引き続き拒否。
       { userAgent: "GPTBot", disallow: "/" },
-      { userAgent: "OAI-SearchBot", disallow: "/" },
-      { userAgent: "ChatGPT-User", disallow: "/" },
       { userAgent: "Google-Extended", disallow: "/" },
-      { userAgent: "PerplexityBot", disallow: "/" },
       { userAgent: "ClaudeBot", disallow: "/" },
       { userAgent: "anthropic-ai", disallow: "/" },
       { userAgent: "Claude-Web", disallow: "/" },

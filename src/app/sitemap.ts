@@ -86,7 +86,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
   for (const [key, count] of prefFishCountMap) {
-    if (count < 5) continue;
+    // スポット3件以上のみ sitemap 掲載（noindex/内部リンクのしきい値と統一）
+    if (count < 3) continue;
     const [prefSlug, fishSlug] = key.split("|");
     prefFishCombos.push({ prefSlug, fishSlug });
   }

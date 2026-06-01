@@ -10,6 +10,8 @@ import {
 import { getPrefectureBySlug, prefectures } from "@/lib/data/prefectures";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { HeaderBannerAd, InArticleAd, InFeedAd } from "@/components/ads/ad-unit";
+import { RakutenTravelCta } from "@/components/spots/nearby-accommodation";
+import { getSpotsByPrefecture } from "@/lib/data/spots";
 
 export const revalidate = 21600;
 export const dynamicParams = true;
@@ -26,9 +28,14 @@ export async function generateMetadata({
   const { prefecture } = await params;
   const pref = getPrefectureBySlug(prefecture);
   if (!pref) return { title: "Not Found" };
+  // 実掲載（rakuten/jalan の実URL）がある県のみ index。準備中(空)の県は noindex でthin contentを除去。
+  const hasListings = getAccommodationsByPrefecture(pref.name).some(
+    (a) => (a.rakutenUrl && a.rakutenUrl !== "#") || (a.jalanUrl && a.jalanUrl !== "#")
+  );
   return {
     title: `${pref.name}の釣り宿・釣り客向け宿泊施設 おすすめ｜ツリスポ`,
     description: `${pref.name}で釣り客に人気の宿・旅館・民宿を紹介。 早朝出船・釣果料理対応・タックルレンタル可など、 釣り旅行に最適な宿を厳選して掲載。`,
+    robots: { index: hasListings, follow: true },
     alternates: { canonical: `https://tsurispot.com/accommodations/${prefecture}` },
     openGraph: {
       title: `${pref.name}の釣り宿・釣り客向け宿泊施設`,
@@ -51,6 +58,8 @@ export default async function PrefectureAccommodationsPage({
   const list = getAccommodationsByPrefecture(pref.name).filter(
     (a) => (a.rakutenUrl && a.rakutenUrl !== "#") || (a.jalanUrl && a.jalanUrl !== "#")
   );
+  // 県の代表スポット座標で、宿が未掲載でも周辺の宿を検索できる稼働中の geo CTA を出す
+  const repSpot = getSpotsByPrefecture(pref.name, "")[0];
 
   return (
     <div className="container mx-auto max-w-5xl px-4 py-6 sm:py-8">
@@ -79,8 +88,18 @@ export default async function PrefectureAccommodationsPage({
       {list.length === 0 ? (
         <div className="rounded-2xl border border-dashed bg-muted/30 p-8 text-center">
           <p className="text-sm text-muted-foreground">
-            {pref.name}の釣り宿は準備中です。 近隣の都道府県もご参照ください。
+            {pref.name}の釣り宿は準備中です。 周辺の宿泊施設は下記から検索できます。
           </p>
+          {repSpot && (
+            <div className="mx-auto mt-4 max-w-md text-left">
+              <RakutenTravelCta
+                spotName={`${pref.name}の釣り場`}
+                latitude={repSpot.latitude}
+                longitude={repSpot.longitude}
+                areaName={pref.name}
+              />
+            </div>
+          )}
           <Link
             href="/accommodations"
             className="mt-3 inline-block text-sm text-primary hover:underline"

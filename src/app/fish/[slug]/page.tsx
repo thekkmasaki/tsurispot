@@ -674,7 +674,8 @@ export default async function FishDetailPage({ params }: PageProps) {
             else prefMap.set(pref.slug, { prefSlug: pref.slug, prefName: pref.name, count: 1 });
           }
         }
-        const prefList = Array.from(prefMap.values()).sort((a, b) => b.count - a.count);
+        // スポット3件以上の県のみリンク（薄い県×魚種ページへのクロール経路を作らない）
+        const prefList = Array.from(prefMap.values()).filter((p) => p.count >= 3).sort((a, b) => b.count - a.count);
         return prefList.length > 0 ? (
           <section className="mb-6 sm:mb-8">
             <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
