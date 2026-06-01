@@ -38,7 +38,8 @@ export function BackToTop() {
       className={cn(
         "fixed z-40 flex items-center justify-center rounded-full",
         "size-10 sm:size-11",
-        "bottom-4 right-4 sm:bottom-6 sm:right-6",
+        // モバイルはボトムナビ(約60px)＋セーフエリアの上に配置して重なりを回避。sm+ はナビが無いので従来位置。
+        "bottom-[calc(60px+env(safe-area-inset-bottom,0px))] right-4 sm:bottom-6 sm:right-6",
         "bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm",
         "text-gray-700 dark:text-gray-200",
         "shadow-lg border border-gray-200/50 dark:border-gray-700/50",
