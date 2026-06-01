@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { uploadToS3, deleteFromS3 } from "@/lib/s3";
 import { moderateImage } from "@/lib/rekognition";
 import { dbGet, dbPut } from "@/lib/dynamodb";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB（クライアント側で自動圧縮済み）
@@ -45,6 +46,14 @@ export async function POST(request: NextRequest) {
   }
   if (file.size > MAX_FILE_SIZE) {
     return NextResponse.json({ error: "ファイルサイズは20MB以下にしてください" }, { status: 400 });
+  }
+
+  // レート制限（S3 + Rekognition 課金の濫用防止）: 1IP 10分間に 20 枚まで
+  if (!(await checkRateLimit(getClientIp(request), "SPOT_PHOTO", 20, 600))) {
+    return NextResponse.json(
+      { error: "アップロード回数の上限に達しました。しばらくしてからお試しください。" },
+      { status: 429 },
+    );
   }
 
   // 枚数制限チェック
