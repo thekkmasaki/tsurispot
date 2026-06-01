@@ -28,13 +28,14 @@ export function GoogleAnalytics() {
             region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IS','IE','IT','LV','LI','LT','LU','MT','NL','NO','PL','PT','RO','SK','SI','ES','SE','GB','CH'],
             wait_for_update: 500,
           });
-          // それ以外の地域（PVの大半を占める日本など、事前オプトイン不要の地域）は granted を
-          // 起点にし、同意前の計測欠測と非パーソナライズ広告による eCPM 低下を避ける。
-          // region 指定の default は非region default より優先されるため、EEA は上の denied が効く。
+          // それ以外の地域（PVの大半を占める日本など、Cookie解析に事前同意が不要な地域）は
+          // analytics_storage を granted で開始し、同意前の GA4 過少計測（アクティブユーザー急減）を解消する。
+          // 広告系(ad_storage/ad_user_data/ad_personalization)は方針どおり同意制を維持し denied 起点のまま。
+          // region 指定の default は非region default より優先されるため、EEA は上の全拒否が効く。
           gtag('consent', 'default', {
-            ad_storage: 'granted',
-            ad_user_data: 'granted',
-            ad_personalization: 'granted',
+            ad_storage: 'denied',
+            ad_user_data: 'denied',
+            ad_personalization: 'denied',
             analytics_storage: 'granted',
           });
           // 再訪ユーザーの明示選択を常に復元する（地域別 default に依存せず確実に honor する）。
