@@ -444,7 +444,8 @@ export function BlogListClient({ posts }: { posts: BlogPostSummary[] }) {
         {filteredPosts.slice(0, displayCount).map((post, index) => (
           <Fragment key={post.id}>
             <BlogCard post={post} />
-            {(index === 3 || index === 7 || index === 11 || index === 15) && (
+            {/* load-more で件数が増えても継続表示するため剰余ベースに（最初は4枚目の後、以降6枚ごと） */}
+            {index >= 3 && (index - 3) % 6 === 0 && (
               <div className="col-span-full">
                 <InFeedAd />
               </div>

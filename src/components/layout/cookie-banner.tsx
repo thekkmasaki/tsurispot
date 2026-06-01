@@ -30,8 +30,16 @@ export function CookieBanner() {
   };
 
   const handleDecline = () => {
-    // consent default が denied のため、拒否時は更新せず denied を維持する
     localStorage.setItem(COOKIE_CONSENT_KEY, "denied");
+    // 非EEAは default が granted のため、拒否時は明示的に denied へ update する。
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      window.gtag("consent", "update", {
+        ad_storage: "denied",
+        ad_user_data: "denied",
+        ad_personalization: "denied",
+        analytics_storage: "denied",
+      });
+    }
     setVisible(false);
   };
 

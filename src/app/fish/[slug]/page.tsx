@@ -36,7 +36,7 @@ import { getProductsByFish, getTopProducts } from "@/lib/data/products";
 import { getHookSizeData } from "@/lib/data/hook-sizes";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
-import { InArticleAd, DisplayAd, LazyAd } from "@/components/ads/ad-unit";
+import { InArticleAd, DisplayAd, LazyAd, StickySidebarAd } from "@/components/ads/ad-unit";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { getPrefectureByName, prefectures } from "@/lib/data/prefectures";
 import { MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
@@ -1265,6 +1265,11 @@ export default async function FishDetailPage({ params }: PageProps) {
       </CollapsibleSection>
 
       {/* 関連コンテンツリンク */}
+      {/* PC専用の追加広告枠（単一カラムの下部余白を収益化） */}
+      <div className="hidden lg:block my-8">
+        <StickySidebarAd />
+      </div>
+
       <section className="mb-8">
         <h2 className="mb-3 text-base font-bold sm:text-lg">関連コンテンツ</h2>
         <div className="flex flex-wrap gap-2">
