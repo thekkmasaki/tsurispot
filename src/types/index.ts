@@ -134,6 +134,38 @@ export interface ListSpot {
   hasPremiumFish: boolean;
 }
 
+/**
+ * 地図ページ(/map)用の軽量スポット型。マーカー描画・ポップアップ・混雑予想・spotType色分け・
+ * アフィリエイト導線・魚種フィルタ・検索に必要なフィールドのみを持つ。FishingSpot 全件を
+ * クライアントへ渡す代わりにこの型へ map することで JS バンドルと RSC ペイロードを削減する。
+ * 変換は lib/data/list-spot.ts の toMapSpot（サーバー専用）で行う。
+ */
+export interface MapSpot {
+  id: string;
+  slug: string;
+  name: string;
+  address: string;
+  region: Region;
+  latitude: number;
+  longitude: number;
+  spotType: FishingSpot["spotType"];
+  difficulty: FishingSpot["difficulty"];
+  isFree: boolean;
+  hasParking: boolean;
+  mainImageUrl: string;
+  rating: number;
+  reviewCount: number;
+  /** 釣れる魚の名前と slug。slug で first-seen unique 化し、両配列は同じ順序・同じ長さで対応する（表示・魚種フィルタ用）。 */
+  fishNames: string[];
+  fishSlugs: string[];
+  /** 釣法（unique）。アフィリエイト導線用。 */
+  methods: string[];
+  /** 夜釣り対象が含まれるか。アフィリエイト導線用。 */
+  isNightFishing: boolean;
+  /** 管理釣り場か。混雑予想を出さない判定用。 */
+  isManagedPond: boolean;
+}
+
 export interface SpotRules {
   castingAllowed: boolean;
   lureAllowed: boolean;

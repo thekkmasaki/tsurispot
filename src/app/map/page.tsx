@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { MapWrapper } from "@/components/map/map-wrapper";
 import { FeaturedAreas } from "@/components/map/featured-areas";
+import { fishingSpots } from "@/lib/data/spots";
+import { toMapSpots } from "@/lib/data/list-spot";
 
 export const metadata: Metadata = {
   title: "地図で釣りスポットを探す - 全国の釣り場マップ",
@@ -39,6 +41,8 @@ const breadcrumbJsonLd = {
 };
 
 export default function MapPage() {
+  // サーバー側で軽量 MapSpot[] へ変換してクライアントへ渡す（重い FishingSpot 全件の埋め込みを回避）。
+  const mapSpots = toMapSpots(fishingSpots);
   return (
     <main className="container mx-auto px-4 py-4 sm:py-8">
       <script
@@ -54,7 +58,7 @@ export default function MapPage() {
         </p>
       </div>
       <FeaturedAreas />
-      <MapWrapper />
+      <MapWrapper spots={mapSpots} />
     </main>
   );
 }

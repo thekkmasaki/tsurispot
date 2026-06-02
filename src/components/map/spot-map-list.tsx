@@ -5,11 +5,11 @@ import { Star, Navigation, MapPin } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { SpotImage } from '@/components/ui/spot-image';
 import { DIFFICULTY_LABELS, SPOT_TYPE_LABELS } from '@/types';
-import type { FishingSpot } from '@/types';
+import type { MapSpot } from '@/types';
 
 interface SpotMapListProps {
-  spots: FishingSpot[];
-  onSelect: (spot: FishingSpot) => void;
+  spots: MapSpot[];
+  onSelect: (spot: MapSpot) => void;
   emptyMessage?: string;
   limit?: number;
 }
