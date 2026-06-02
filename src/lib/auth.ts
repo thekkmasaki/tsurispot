@@ -50,6 +50,22 @@ function extractUpstreamProvider(profile: CognitoProfile | undefined): string {
   return "cognito";
 }
 
+// Cognito 独自ドメイン(例: https://auth.tsurispot.com)化のための任意上書き。
+// COGNITO_DOMAIN が設定されている時だけ OAuth エンドポイントを独自ドメインに向ける。
+// 未設定なら issuer からの OIDC discovery で従来どおり動作する（挙動完全不変・env を外せば即ロールバック）。
+// ※ id_token の iss 検証に使う issuer(cognito-idp...) は独自ドメインでも不変なので COGNITO_ISSUER は据え置く。
+const cognitoCustomDomain = process.env.COGNITO_DOMAIN?.replace(/\/+$/, "");
+const cognitoEndpointOverrides = cognitoCustomDomain
+  ? {
+      authorization: {
+        url: `${cognitoCustomDomain}/oauth2/authorize`,
+        params: { scope: "openid email profile" },
+      },
+      token: `${cognitoCustomDomain}/oauth2/token`,
+      userinfo: `${cognitoCustomDomain}/oauth2/userInfo`,
+    }
+  : {};
+
 const config: NextAuthConfig = {
   // App Runner / CloudFront 経由のため、Host ヘッダーを信頼してよい。
   trustHost: true,
@@ -75,6 +91,7 @@ const config: NextAuthConfig = {
       clientId: process.env.COGNITO_CLIENT_ID,
       clientSecret: process.env.COGNITO_CLIENT_SECRET,
       issuer: process.env.COGNITO_ISSUER,
+      ...cognitoEndpointOverrides,
     }),
   ],
   session: { strategy: "jwt", maxAge: 30 * 24 * 60 * 60 },
