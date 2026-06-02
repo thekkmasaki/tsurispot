@@ -1,6 +1,15 @@
 "use client";
 
-import { Fish, Loader2, AlertTriangle, ExternalLink, Info } from "lucide-react";
+import {
+  Fish,
+  Loader2,
+  AlertTriangle,
+  ExternalLink,
+  Info,
+  Cloud,
+  Smartphone,
+  ShieldCheck,
+} from "lucide-react";
 import Link from "next/link";
 import { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
@@ -184,22 +193,55 @@ export default function LoginPage() {
   }, [autoRetrying, csrfToken]);
 
   return (
-    <div className="flex min-h-[60vh] items-center justify-center px-4">
-      <div className="w-full max-w-sm space-y-6">
-        <div className="text-center">
-          <div className="mx-auto flex items-center justify-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-ocean-mid to-ocean-deep text-white">
-              <Fish className="h-5 w-5" aria-hidden="true" />
+    <div className="relative flex min-h-[78vh] items-center justify-center overflow-hidden px-4 py-10 sm:py-14">
+      {/* ── 夜明けの海: 背景アトモスフィア ── */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute -top-24 left-1/4 h-72 w-72 rounded-full bg-sea-foam/30 blur-3xl" />
+        <div className="absolute right-[-4rem] top-1/3 h-80 w-80 rounded-full bg-ocean-mid/20 blur-3xl" />
+        <div className="absolute -bottom-24 left-1/3 h-72 w-72 rounded-full bg-sand-warm/40 blur-3xl" />
+      </div>
+
+      <div className="ts-rise w-full max-w-md">
+        <div className="overflow-hidden rounded-[1.75rem] border border-white/70 bg-white/85 shadow-[0_24px_70px_-24px_rgba(12,46,74,0.45)] backdrop-blur-xl">
+          {/* ── ヒーロー（深い海＋発光する魚エンブレム） ── */}
+          <div className="relative isolate overflow-hidden bg-gradient-to-br from-ocean-deep via-ocean-mid to-ocean-deep px-8 pb-12 pt-10 text-center">
+            <div aria-hidden="true" className="absolute inset-0 -z-10">
+              <div className="absolute left-1/2 top-0 h-48 w-48 -translate-x-1/2 -translate-y-1/3 rounded-full bg-sea-foam/40 blur-2xl" />
             </div>
-            <span className="bg-gradient-to-r from-ocean-deep to-ocean-mid bg-clip-text text-lg font-bold text-transparent font-[family-name:var(--font-zen-maru)]">
+            <div aria-hidden="true" className="absolute inset-0 -z-10 opacity-70">
+              <span className="absolute left-7 top-9 h-1.5 w-1.5 rounded-full bg-white/40" />
+              <span className="absolute right-10 top-12 h-1 w-1 rounded-full bg-white/30" />
+              <span className="absolute bottom-16 right-16 h-2 w-2 rounded-full bg-white/20" />
+              <span className="absolute bottom-14 left-12 h-1 w-1 rounded-full bg-white/30" />
+            </div>
+            <div className="ts-float mx-auto flex h-16 w-16 items-center justify-center rounded-2xl border border-white/30 bg-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.25)] ring-1 ring-white/20 backdrop-blur-sm">
+              <Fish className="h-8 w-8 text-white" aria-hidden="true" />
+            </div>
+            <p className="mt-4 text-2xl font-bold tracking-wide text-white font-[family-name:var(--font-zen-maru)]">
               ツリスポ
-            </span>
+            </p>
+            <p className="mt-1.5 text-sm text-sea-foam/90">
+              お気に入りや釣果を、ひとつの海へ
+            </p>
+            <svg
+              className="absolute inset-x-0 bottom-0 h-5 w-full text-white/85"
+              viewBox="0 0 400 24"
+              preserveAspectRatio="none"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path d="M0,13 C70,26 150,2 230,11 C310,20 360,7 400,13 L400,24 L0,24 Z" />
+            </svg>
           </div>
-          <h1 className="mt-3 text-xl font-bold">ログイン</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            お気に入りや釣果をクラウドに保存
-          </p>
-        </div>
+
+          {/* ── 本体 ── */}
+          <div className="px-6 pb-7 pt-6 sm:px-8">
+            <div className="mb-5 text-center">
+              <h1 className="text-lg font-bold text-foreground">ログイン</h1>
+              <p className="mt-1 text-xs text-muted-foreground">数秒で完了・ずっと無料</p>
+            </div>
+
+            <div className="space-y-4">
 
         {/* 自動リトライ中はエラー文を見せず、そのまま再ログインへ流す */}
         {!autoRetrying && (
@@ -284,7 +326,7 @@ export default function LoginPage() {
             type="submit"
             disabled={loading !== null}
             aria-busy={loading === "google"}
-            className="flex w-full items-center justify-center gap-2.5 rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-medium text-gray-800 transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-60"
+            className="group flex w-full items-center justify-center gap-3 rounded-2xl border border-black/[0.08] bg-white px-5 py-3.5 text-[15px] font-semibold text-gray-800 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-black/15 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ocean-mid/50 focus-visible:ring-offset-2 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0 disabled:hover:shadow-sm"
           >
             {loading === "google" ? (
               <>
@@ -325,7 +367,7 @@ export default function LoginPage() {
             type="submit"
             disabled={loading !== null}
             aria-busy={loading === "apple"}
-            className="flex w-full items-center justify-center gap-2.5 rounded-xl bg-black px-4 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
+            className="group flex w-full items-center justify-center gap-3 rounded-2xl bg-gradient-to-b from-zinc-800 to-black px-5 py-3.5 text-[15px] font-semibold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-500 focus-visible:ring-offset-2 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0"
           >
             {loading === "apple" ? (
               <>
@@ -355,24 +397,56 @@ export default function LoginPage() {
               認証ページへ遷移中です。少しお待ちください...
             </p>
           )}
-        </div>
+            </div>
+            {/* /space-y-3 */}
+          </div>
+          {/* /space-y-4 */}
 
-        <div className="space-y-2 text-center text-xs text-muted-foreground">
-          <p>ログインしなくても全機能を利用できます</p>
-          <p>
-            ログインすると、お気に入りや釣果データを
-            <br />
-            別の端末でも引き継げるようになります
-          </p>
-          <p>
-            ログインにより
-            <Link href="/privacy" className="underline hover:text-foreground">
-              プライバシーポリシー
-            </Link>
-            に同意したものとみなします
-          </p>
+            {/* 信頼シグナル */}
+            <div className="mt-6 grid grid-cols-3 gap-1 border-t border-border/60 pt-5 text-center">
+              <div className="flex flex-col items-center gap-1.5">
+                <Cloud className="h-4 w-4 text-ocean-mid" aria-hidden="true" />
+                <span className="text-[11px] text-muted-foreground">クラウド保存</span>
+              </div>
+              <div className="flex flex-col items-center gap-1.5">
+                <Smartphone className="h-4 w-4 text-ocean-mid" aria-hidden="true" />
+                <span className="text-[11px] text-muted-foreground">端末間で同期</span>
+              </div>
+              <div className="flex flex-col items-center gap-1.5">
+                <ShieldCheck className="h-4 w-4 text-ocean-mid" aria-hidden="true" />
+                <span className="text-[11px] text-muted-foreground">無料・安全</span>
+              </div>
+            </div>
+
+            <div className="mt-5 space-y-1.5 text-center text-[11px] leading-relaxed text-muted-foreground">
+              <p>ログインしなくても全機能を利用できます</p>
+              <p>
+                ログインにより
+                <Link href="/privacy" className="underline hover:text-foreground">
+                  プライバシーポリシー
+                </Link>
+                に同意したものとみなします
+              </p>
+            </div>
+          </div>
         </div>
       </div>
+
+      <style>{`
+        @keyframes tsRise {
+          from { opacity: 0; transform: translateY(14px); }
+          to { opacity: 1; transform: none; }
+        }
+        .ts-rise { animation: tsRise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+        @keyframes tsFloat {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-5px); }
+        }
+        .ts-float { animation: tsFloat 4.5s ease-in-out infinite; }
+        @media (prefers-reduced-motion: reduce) {
+          .ts-rise, .ts-float { animation: none !important; }
+        }
+      `}</style>
     </div>
   );
 }
