@@ -14,6 +14,9 @@ interface SatelliteAnalysisSectionProps {
   structureTypes: StructureCategory[];
   spotName: string;
   spotType: string;
+  /** 実際に航空写真をAI解析した結果か（true=実解析スポット / false=釣り場タイプ由来の一般的想定）。
+   *  false のときは「衛星/AI解析で検出」と断言しない（虚偽表示防止）。 */
+  isAnalyzed?: boolean;
 }
 
 // ---------------------------------------------------------------------------
@@ -79,6 +82,7 @@ const METHOD_SLUG_LABELS: Record<string, string> = {
 export function SatelliteAnalysisSection({
   structureTypes,
   spotName,
+  isAnalyzed = false,
 }: SatelliteAnalysisSectionProps) {
   if (structureTypes.length === 0) return null;
 
@@ -93,15 +97,19 @@ export function SatelliteAnalysisSection({
           {"\u{1F6F0}\u{FE0F}"}
         </span>
         <h2 className="text-xl font-bold text-slate-800">
-          AI構造物解析
+          {isAnalyzed ? "AI構造物解析" : "想定される構造物・釣り場の特徴"}
         </h2>
-        <span className="rounded-full bg-indigo-600 px-3 py-0.5 text-xs font-semibold text-white">
-          特許技術
-        </span>
+        {isAnalyzed && (
+          <span className="rounded-full bg-indigo-600 px-3 py-0.5 text-xs font-semibold text-white">
+            特許技術
+          </span>
+        )}
       </div>
 
       <p className="mb-6 text-sm text-slate-600">
-        「{spotName}」周辺の衛星画像から検出された構造物カテゴリに基づく解析結果です。
+        {isAnalyzed
+          ? `「${spotName}」周辺の航空写真をAIで解析して検出した構造物カテゴリに基づく推定です。`
+          : `「${spotName}」の釣り場タイプから一般的に想定される構造物カテゴリです（この釣り場個別の画像解析は行っていません）。`}
       </p>
 
       {/* Structure cards grid */}
@@ -172,8 +180,10 @@ export function SatelliteAnalysisSection({
       )}
 
       {/* Disclaimer */}
-      <p className="text-xs text-slate-400">
-        ※ 構造物分類は衛星画像解析による自動推定です（特願2026-042836）
+      <p className="text-xs text-slate-600">
+        {isAnalyzed
+          ? "※ 航空写真のAI構造物解析による自動推定です（特許出願中・特願2026-042836）。実際の釣果を保証するものではありません。"
+          : "※ 釣り場タイプからの一般的な想定であり、この釣り場個別の画像解析・実際の釣果を保証するものではありません。"}
       </p>
     </section>
   );

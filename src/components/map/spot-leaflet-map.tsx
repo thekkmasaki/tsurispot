@@ -467,7 +467,7 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
                   <div className="grid grid-cols-2 gap-1 rounded bg-gray-50 p-2 text-[11px]">
                     <div><span className="text-gray-500">水深(手前):</span> {zone.estimatedDepth.shore}m</div>
                     <div><span className="text-gray-500">水深(沖):</span> {zone.estimatedDepth.offshore}m</div>
-                    <div><span className="text-gray-500">潮通し:</span> {Math.round(zone.currentFlow * 100)}%</div>
+                    <div><span className="text-gray-500">潮通し:</span> {zone.currentFlow >= 0.8 ? "良好" : zone.currentFlow >= 0.5 ? "ふつう" : "やや弱い"}</div>
                     {zone.seaBottomFeatures.length > 0 && (
                       <div className="col-span-2">
                         <span className="text-gray-500">海底:</span>{" "}
@@ -705,6 +705,10 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
             近くの釣り場
           </span>
         )}
+      </div>
+      {/* AI推定の免責（参考情報であることを常設明示） */}
+      <div className="border-t bg-muted/20 px-4 py-2 text-[11px] leading-relaxed text-slate-600">
+        ※ ゾーン区分・推定魚種・水深・潮通しは航空写真のAI構造物解析による<span className="font-medium">推定値（参考情報）</span>です。実際の地形・釣果を保証するものではありません。
       </div>
     </div>
   );

@@ -784,6 +784,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
               structureTypes={spot.structureTypes}
               spotName={spot.name}
               spotType={spot.spotType}
+              isAnalyzed={!!analysisResult}
             />
           </div>
         )}
