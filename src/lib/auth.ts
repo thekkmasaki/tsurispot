@@ -55,6 +55,21 @@ const config: NextAuthConfig = {
   trustHost: true,
   // 本番デフォルト OFF。OAuth トラブル調査時のみ App Runner 環境変数 NEXTAUTH_DEBUG=true で一時 ON。
   debug: process.env.NEXTAUTH_DEBUG === "true",
+  // ログイン「初回失敗(error=Configuration)・2回目成功」の真因確定用。
+  // コールバック段の失敗は内部的にほぼ InvalidCheck(pkce cookie missing / could not be parsed)
+  // に集約されるため、name/message/cause を App Runner ログへ常時出して切り分ける。
+  // (env を触らずに本番ログで根因を掴むための恒久ロガー)
+  logger: {
+    error(error: Error) {
+      const cause = (error as { cause?: { message?: string } })?.cause?.message;
+      console.error(
+        "[auth][error]",
+        error?.name ?? "UnknownError",
+        error?.message ?? "",
+        cause ? `cause=${cause}` : "",
+      );
+    },
+  },
   providers: [
     Cognito({
       clientId: process.env.COGNITO_CLIENT_ID,

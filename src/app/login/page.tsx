@@ -2,7 +2,7 @@
 
 import { Fish, Loader2, AlertTriangle, ExternalLink, Info } from "lucide-react";
 import Link from "next/link";
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, useRef, Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 
 const ERROR_MESSAGES: Record<string, string> = {
@@ -78,6 +78,20 @@ export default function LoginPage() {
   // ことで「1 回目押下で csrfToken="" が submit される」race condition を構造的に排除。
   const [csrfToken, setCsrfToken] = useState<string | null>(null);
 
+  // ─── 初回ログイン失敗(error=Configuration)のワンショット自動リトライ保険 ───
+  // 1回目は Google アカウント選択を挟む遅い経路で OAuth の pkce check に失敗し
+  // `?error=Configuration` で戻ることがある(2回目は Cognito 即SSOで通る)。ユーザーに
+  // 「2回押し」をさせず、初回失敗を検知したら1度だけ自動で同じプロバイダを再送する。
+  const [autoRetrying, setAutoRetrying] = useState(false);
+  const googleFormRef = useRef<HTMLFormElement>(null);
+  const appleFormRef = useRef<HTMLFormElement>(null);
+  const autoSubmittedRef = useRef(false);
+  // 初回レンダー時点の error クエリを同期捕捉(LoginErrorBanner が URL から消す前に確保)
+  const [initialError] = useState<string | null>(() => {
+    if (typeof window === "undefined") return null;
+    return new URLSearchParams(window.location.search).get("error");
+  });
+
   useEffect(() => {
     const detected = detectInAppBrowser();
     setInAppBrowser(detected);
@@ -123,8 +137,51 @@ export default function LoginPage() {
   // CSRF token は useEffect で取得して state に保持、button は token 未取得中は disabled。
   const handleSubmitClick = (provider: "google" | "apple") => {
     setLoading(provider);
+    // 自動リトライ保険のため「どのプロバイダを・いつ」試したかを記録(失敗して戻ってきた時に使う)。
+    try {
+      sessionStorage.setItem("login_provider", provider);
+      sessionStorage.setItem("login_attempt_ts", String(Date.now()));
+    } catch {
+      /* sessionStorage 不可環境では保険なしで通常動作 */
+    }
     // form は default action で submit される。loading state だけ管理。
   };
+
+  // 1) 失敗検知: ?error=Configuration で戻り、かつ直近(60秒以内)に自分が試したプロバイダが
+  //    分かっていて、まだ自動リトライしていなければ、1回だけ自動リトライを発火する。
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      // エラー無しで /login に来たら、次回のために保険を再武装(フラグ解除)
+      if (initialError !== "Configuration") {
+        sessionStorage.removeItem("login_autoretry_done");
+        return;
+      }
+      // すでに1回自動リトライ済み → これ以上は自動で繰り返さない(ループ防止・バナー表示に委ねる)
+      if (sessionStorage.getItem("login_autoretry_done") === "1") return;
+      const provider = sessionStorage.getItem("login_provider");
+      const ts = Number(sessionStorage.getItem("login_attempt_ts") || 0);
+      if (provider !== "google" && provider !== "apple") return;
+      if (!(Date.now() - ts < 60_000)) return; // 古いリンク踏み等での誤発火を防ぐ
+      sessionStorage.setItem("login_autoretry_done", "1");
+      setLoading(provider);
+      setAutoRetrying(true);
+    } catch {
+      /* sessionStorage 不可環境では何もしない */
+    }
+  }, [initialError]);
+
+  // 2) 実行: csrfToken が揃って form がレンダーされたら、該当プロバイダの form を1度だけ自動 submit。
+  useEffect(() => {
+    if (!autoRetrying || autoSubmittedRef.current) return;
+    if (typeof csrfToken !== "string" || csrfToken === "") return; // form 未レンダー中は待つ
+    const provider =
+      typeof window !== "undefined" ? sessionStorage.getItem("login_provider") : null;
+    const form = provider === "apple" ? appleFormRef.current : googleFormRef.current;
+    if (!form) return;
+    autoSubmittedRef.current = true;
+    form.requestSubmit();
+  }, [autoRetrying, csrfToken]);
 
   return (
     <div className="flex min-h-[60vh] items-center justify-center px-4">
@@ -144,9 +201,18 @@ export default function LoginPage() {
           </p>
         </div>
 
-        <Suspense fallback={null}>
-          <LoginErrorBanner />
-        </Suspense>
+        {/* 自動リトライ中はエラー文を見せず、そのまま再ログインへ流す */}
+        {!autoRetrying && (
+          <Suspense fallback={null}>
+            <LoginErrorBanner />
+          </Suspense>
+        )}
+        {autoRetrying && (
+          <div className="flex items-center justify-center gap-2 rounded-xl border border-ocean-mid/20 bg-ocean-mid/5 p-3 text-sm text-muted-foreground">
+            <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
+            ログインを再開しています...
+          </div>
+        )}
 
         {inAppBrowser.inApp && (
           <div className="rounded-xl border border-amber-300 bg-amber-50 p-4 text-sm">
@@ -210,7 +276,7 @@ export default function LoginPage() {
             </div>
           ) : (
           <>
-          <form method="POST" action="/api/auth/signin/cognito" onSubmit={() => handleSubmitClick("google")}>
+          <form ref={googleFormRef} method="POST" action="/api/auth/signin/cognito" onSubmit={() => handleSubmitClick("google")}>
             <input type="hidden" name="csrfToken" value={csrfToken} />
             <input type="hidden" name="callbackUrl" value="https://tsurispot.com/mypage" />
             <input type="hidden" name="identity_provider" value="Google" />
@@ -251,7 +317,7 @@ export default function LoginPage() {
           </button>
           </form>
 
-          <form method="POST" action="/api/auth/signin/cognito" onSubmit={() => handleSubmitClick("apple")}>
+          <form ref={appleFormRef} method="POST" action="/api/auth/signin/cognito" onSubmit={() => handleSubmitClick("apple")}>
             <input type="hidden" name="csrfToken" value={csrfToken} />
             <input type="hidden" name="callbackUrl" value="https://tsurispot.com/mypage" />
             <input type="hidden" name="identity_provider" value="SignInWithApple" />
