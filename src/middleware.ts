@@ -86,7 +86,13 @@ export function middleware(req: NextRequest) {
   // Cloudflare は Accept-Encoding 以外の Vary を持つ応答をキャッシュしない（cf-cache-status: DYNAMIC）。
   // ドキュメント要求(=RSCヘッダ無しのGET)は常に同一HTMLを返すため、Vary を Accept-Encoding に
   // 揃えても安全。RSC/プリフェッチ要求は CDN 側で明示バイパス済みなので、そちらは元の挙動のまま残す。
-  if (req.method === "GET" && !isRscRequest(req)) {
+  // ただし /api 配下(特に /api/auth/* の csrf/session/callback)は user 固有の動的応答であり、
+  // Vary を潰して CDN にキャッシュ可能化させるのは不適切。HTML 文書のみ対象にする。
+  if (
+    req.method === "GET" &&
+    !isRscRequest(req) &&
+    !req.nextUrl.pathname.startsWith("/api/")
+  ) {
     res.headers.set("vary", "Accept-Encoding");
   }
 
