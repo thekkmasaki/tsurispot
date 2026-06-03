@@ -65,7 +65,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
     hasParking: true, parkingDetail: "浦山ダム駐車場（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/chichibu-sakurako.webp", imageAttribution: "Photo: Raita Futo from Tokyo, Japan / Wikimedia Commons (CC BY 2.0)", images: ["/images/spots/wikimedia/chichibu-sakurako.webp"],
+    mainImageUrl: "", images: ["/images/spots/wikimedia/chichibu-sakurako.webp"],
     rating: 3.7, reviewCount: 67, googleRating: 4.1, googleReviewCount: 2067,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -88,7 +88,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     accessInfo: "東武東上線志木駅から徒歩約15分。関越道所沢ICから約15分。",
     region: lr("r733"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: false, hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/yanasegawa-river.webp", imageAttribution: "Photo: t.suzuki / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/yanasegawa-river.webp"],
+    mainImageUrl: "", images: ["/images/spots/wikimedia/yanasegawa-river.webp"],
     rating: 3.3, reviewCount: 45, googleRating: 3.9, googleReviewCount: 14,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -114,7 +114,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     region: lr("r734"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/oppegawa-river.webp", imageAttribution: "Photo: LERK / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/oppegawa-river.webp"],
+    mainImageUrl: "", images: ["/images/spots/wikimedia/oppegawa-river.webp"],
     rating: 3.5, reviewCount: 38, googleRating: 4.5, googleReviewCount: 4,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -139,7 +139,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人800円（1日）",
     hasParking: true, parkingDetail: "巾着田駐車場（500円/日）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/komagawa-river.webp", imageAttribution: "Photo: Alexander Wentworth / Wikimedia Commons (CC BY 4.0)", images: ["/images/spots/wikimedia/komagawa-river.webp"],
+    mainImageUrl: "", images: ["/images/spots/wikimedia/komagawa-river.webp"],
     rating: 3.8, reviewCount: 92, googleRating: 4.4, googleReviewCount: 18,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -166,7 +166,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "御岳渓谷駐車場（1,000円/日）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tamagawa-mitake.webp", imageAttribution: "Photo: Rory trains / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/tamagawa-mitake.webp"],
+    mainImageUrl: "", images: ["/images/spots/wikimedia/tamagawa-mitake.webp"],
     rating: 4.1, reviewCount: 156, googleRating: 4.4, googleReviewCount: 546,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フライ" },
@@ -188,7 +188,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     accessInfo: "JR中央線日野駅から徒歩約10分。中央道八王子ICから約15分。",
     region: lr("r737"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: false, hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/asakawa-river.webp", imageAttribution: "Photo: T.K / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/asakawa-river.webp"],
+    mainImageUrl: "", images: ["/images/spots/wikimedia/asakawa-river.webp"],
     rating: 3.2, reviewCount: 34, googleRating: 3.8, googleReviewCount: 21,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -215,7 +215,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,300円（1日）",
     hasParking: true, parkingDetail: "田代運動公園駐車場（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nakatsugawa-river-kanagawa.webp", imageAttribution: "Photo: Σ64 / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/nakatsugawa-river-kanagawa.webp"],
+    mainImageUrl: "", images: ["/images/spots/wikimedia/nakatsugawa-river-kanagawa.webp"],
     rating: 3.9, reviewCount: 78,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -239,7 +239,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "河川敷に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/sakawagawa-river.webp", imageAttribution: "Photo: sepi-wan / Wikimedia Commons (CC BY-SA 3.0)", images: ["/images/spots/wikimedia/sakawagawa-river.webp"],
+    mainImageUrl: "", images: ["/images/spots/wikimedia/sakawagawa-river.webp"],
     rating: 4.0, reviewCount: 145, googleRating: 4.3, googleReviewCount: 15,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -264,7 +264,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     region: lr("r740"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "養老渓谷周辺に駐車場あり（500円/日）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/yorogawa-river.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: ["/images/spots/wikimedia/yorogawa-river.webp"],
+    mainImageUrl: "", images: ["/images/spots/wikimedia/yorogawa-river.webp"],
     rating: 3.6, reviewCount: 56, googleRating: 2.9, googleReviewCount: 22,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -286,7 +286,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     region: lr("r742"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "手賀沼親水広場駐車場（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/%E6%96%87%E5%AD%A6%E3%81%AE%E5%BA%83%E5%A0%B4_%E7%9C%8B%E6%9D%BF_-_panoramio.jpg/960px-%E6%96%87%E5%AD%A6%E3%81%AE%E5%BA%83%E5%A0%B4_%E7%9C%8B%E6%9D%BF_-_panoramio.jpg", imageAttribution: "Photo: 運転太郎 / Wikimedia Commons (CC BY 3.0)", images: [],
+    mainImageUrl: "", images: [],
     rating: 3.4, reviewCount: 89, googleRating: 4.1, googleReviewCount: 196,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -438,7 +438,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "小菅フィッシングビレッジに駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: true, rentalDetail: "管理釣り場でレンタルタックルあり",
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/New_construction%2C_during_construction_Kosuge_village_office._Nov._2014.JPG/960px-New_construction%2C_during_construction_Kosuge_village_office._Nov._2014.JPG", imageAttribution: "Photo: Sakaori (talk) / Wikimedia Commons (CC BY 3.0)", images: [],
+    mainImageUrl: "", images: [],
     rating: 4.1, reviewCount: 98, googleRating: 4, googleReviewCount: 3,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -463,7 +463,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Inashi_Eki_platform_in_2009.jpg/960px-Inashi_Eki_platform_in_2009.jpg", imageAttribution: "Photo: Kinori / Wikimedia Commons (Public domain)", images: [],
+    mainImageUrl: "", images: [],
     rating: 4.0, reviewCount: 123,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -512,7 +512,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/miomotegawa-river.webp", imageAttribution: "Photo: Drph17 / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/miomotegawa-river.webp"],
+    mainImageUrl: "", images: ["/images/spots/wikimedia/miomotegawa-river.webp"],
     rating: 4.1, reviewCount: 134, googleRating: 3.7, googleReviewCount: 11,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -536,7 +536,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     region: lr("r757"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "秋ヶ瀬公園駐車場（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/arakawa-akigase.webp", imageAttribution: "Photo: renshuchu / Wikimedia Commons (CC0)", images: ["/images/spots/wikimedia/arakawa-akigase.webp"],
+    mainImageUrl: "", images: ["/images/spots/wikimedia/arakawa-akigase.webp"],
     rating: 3.6, reviewCount: 145, googleRating: 3.8, googleReviewCount: 28,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -565,7 +565,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     region: lr("r758"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tonegawa-sawara.webp", imageAttribution: "Photo: アリオト / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/tonegawa-sawara.webp"],
+    mainImageUrl: "", images: ["/images/spots/wikimedia/tonegawa-sawara.webp"],
     rating: 3.5, reviewCount: 78, googleRating: 4.5, googleReviewCount: 8,
     catchableFish: [
       { fish: fish("herabuna"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "へら竿" },
@@ -594,7 +594,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     region: lr("r760"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/omoigawa-river.webp", imageAttribution: "Photo: Miyuki Meinaka / Wikimedia Commons (CC BY-SA 4.0)", images: ["/images/spots/wikimedia/omoigawa-river.webp"],
+    mainImageUrl: "", images: ["/images/spots/wikimedia/omoigawa-river.webp"],
     rating: 3.4, reviewCount: 42, googleRating: 3.7, googleReviewCount: 49,
     catchableFish: [
       { fish: fish("oikawa"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
@@ -622,7 +622,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "入渓ポイント近くに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9d/Hakubamura_yakuba.JPG/960px-Hakubamura_yakuba.JPG", imageAttribution: "Photo: アラツク / Wikimedia Commons (CC BY-SA 4.0)", images: [],
+    mainImageUrl: "", images: [],
     rating: 4.2, reviewCount: 67, googleRating: 3.7, googleReviewCount: 55,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "エサ釣り" },

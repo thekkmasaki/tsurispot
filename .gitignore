@@ -58,3 +58,4 @@ scripts/instagram/node_modules/
 # Capacitor (iOS / Android のネイティブ project は再生成可能)
 /ios/
 /android/
+.audit-cache/

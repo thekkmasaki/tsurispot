@@ -1,0 +1,14 @@
+import fs from "node:fs";
+import path from "node:path";
+const ROOT = path.resolve(import.meta.dirname, "../..");
+const uniq = JSON.parse(fs.readFileSync(path.join(ROOT, ".audit-cache/unique-images.json"), "utf8"));
+const exists = (u) => { try { return fs.statSync(path.join(ROOT, u.localPath)).size > 500; } catch { return false; } };
+const aFlag = uniq.filter((u) => u.group === "A" && u.nameFlag && exists(u)).slice(0, 5);
+const aOk = uniq.filter((u) => u.group === "A" && !u.nameFlag && exists(u)).slice(0, 4);
+const b = uniq.filter((u) => u.group === "B" && exists(u)).slice(0, 5);
+const pick = [...aFlag, ...aOk, ...b];
+const items = pick.map((u) => ({ imageKey: u.imageKey, localPath: u.localPath, group: u.group, nameFlag: u.nameFlag, refCount: u.spots.length, spots: u.spots.slice(0, 3).map((s) => ({ name: s.name, address: s.address, spotType: s.spotType })) }));
+fs.mkdirSync(path.join(ROOT, ".audit-cache/batches"), { recursive: true });
+fs.writeFileSync(path.join(ROOT, ".audit-cache/batches/pilot.json"), JSON.stringify({ batchId: "pilot", items }, null, 2));
+console.log(`pilot.json 作成: ${items.length}枚 (A-flag=${aFlag.length} A-ok=${aOk.length} B=${b.length})`);
+for (const it of items) console.log(` - ${it.group}${it.nameFlag ? "*" : " "} ${it.spots[0]?.name || "?"} | ${it.localPath}`);

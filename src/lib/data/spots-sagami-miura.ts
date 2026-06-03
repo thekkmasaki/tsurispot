@@ -320,7 +320,7 @@ export const sagamiMiuraSpots: FishingSpot[] = [
     region: region("r8"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり（無料）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nichomachi-ko.webp", imageAttribution: "Photo: Osumi Akari / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.5, reviewCount: 35, googleRating: 3.5, googleReviewCount: 59,
+    mainImageUrl: "", images: [], rating: 3.5, reviewCount: 35, googleRating: 3.5, googleReviewCount: 59,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -419,7 +419,7 @@ export const sagamiMiuraSpots: FishingSpot[] = [
     region: region("r8"), spotType: "rocky", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "荒崎公園駐車場（無料、約50台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/arasaki-kaigan.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: [], rating: 4.0, reviewCount: 88, googleRating: 4.1, googleReviewCount: 48,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 88, googleRating: 4.1, googleReviewCount: 48,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "穴釣り" },
@@ -452,7 +452,7 @@ export const sagamiMiuraSpots: FishingSpot[] = [
     region: region("r8"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "有料駐車場あり（夏季1,000円、他季無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/wadanagahama.webp", imageAttribution: "Photo: Kasakasa719 / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.9, reviewCount: 95, googleRating: 4, googleReviewCount: 555,
+    mainImageUrl: "", images: [], rating: 3.9, reviewCount: 95, googleRating: 4, googleReviewCount: 555,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -590,7 +590,7 @@ export const sagamiMiuraSpots: FishingSpot[] = [
     region: region("r8"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に有料駐車場あり（1日500円）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hashirimizu-ko.webp", imageAttribution: "Photo: Aimaimyi / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.9, reviewCount: 85, googleRating: 4.2, googleReviewCount: 57,
+    mainImageUrl: "", images: [], rating: 3.9, reviewCount: 85, googleRating: 4.2, googleReviewCount: 57,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -659,7 +659,7 @@ export const sagamiMiuraSpots: FishingSpot[] = [
     region: region("r8"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり（無料、数台）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kamoi-ko.webp", imageAttribution: "Photo: Quercus acuta / Wikimedia Commons (CC0)", images: [], rating: 3.6, reviewCount: 48, googleRating: 3.5, googleReviewCount: 6,
+    mainImageUrl: "", images: [], rating: 3.6, reviewCount: 48, googleRating: 3.5, googleReviewCount: 6,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "穴釣り" },
@@ -692,7 +692,7 @@ export const sagamiMiuraSpots: FishingSpot[] = [
     region: region("r8"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺コインパーキングあり（1時間200円〜）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/uraga-ko.webp", imageAttribution: "Photo: Syced / Wikimedia Commons (CC0)", images: [], rating: 3.6, reviewCount: 75, googleRating: 4.3, googleReviewCount: 4,
+    mainImageUrl: "", images: [], rating: 3.6, reviewCount: 75, googleRating: 4.3, googleReviewCount: 4,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -725,7 +725,7 @@ export const sagamiMiuraSpots: FishingSpot[] = [
     region: region("r8"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "フェリーターミナル有料駐車場あり（1日700円）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kurihama-ko.webp", imageAttribution: "Photo: Quercus acuta / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.8, reviewCount: 120, googleRating: 3.8, googleReviewCount: 1366,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 120, googleRating: 3.8, googleReviewCount: 1366,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
@@ -759,7 +759,7 @@ export const sagamiMiuraSpots: FishingSpot[] = [
     region: region("r8"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海岸沿い駐車場（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nobi-kaigan.webp", imageAttribution: "Photo: Hiroyuki Sato / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 82, googleRating: 3.9, googleReviewCount: 213,
+    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 82, googleRating: 3.9, googleReviewCount: 213,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -792,7 +792,7 @@ export const sagamiMiuraSpots: FishingSpot[] = [
     region: region("r8"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海岸沿い駐車場（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tsukui-hama.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: [], rating: 3.6, reviewCount: 62, googleRating: 4.8, googleReviewCount: 12,
+    mainImageUrl: "", images: [], rating: 3.6, reviewCount: 62, googleRating: 4.8, googleReviewCount: 12,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
@@ -825,7 +825,7 @@ export const sagamiMiuraSpots: FishingSpot[] = [
     region: region("r8"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海岸沿いに路肩駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nagasawa-kaigan.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, Lyndon B. / Wikimedia Commons (Public domain)", images: [], rating: 3.5, reviewCount: 38,
+    mainImageUrl: "", images: [], rating: 3.5, reviewCount: 38,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
@@ -890,7 +890,7 @@ export const sagamiMiuraSpots: FishingSpot[] = [
     region: region("r8"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり（無料、数台）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kaneda-ko.webp", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 52, googleRating: 3.7, googleReviewCount: 154,
+    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 52, googleRating: 3.7, googleReviewCount: 154,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kamasu"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -923,7 +923,7 @@ export const sagamiMiuraSpots: FishingSpot[] = [
     region: region("r8"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり（無料、数台）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/maguchi-ko.webp", imageAttribution: "Photo: Aspere / Wikimedia Commons (CC0)", images: [], rating: 3.8, reviewCount: 42, googleRating: 3.5, googleReviewCount: 12,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 42, googleRating: 3.5, googleReviewCount: 12,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
@@ -956,7 +956,7 @@ export const sagamiMiuraSpots: FishingSpot[] = [
     region: region("r8"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "灯台周辺に駐車スペースあり（無料、5台程度）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kenzaki-iso.webp", imageAttribution: "Photo: Aspere / Wikimedia Commons (CC0)", images: [], rating: 4.4, reviewCount: 92, googleRating: 4.5, googleReviewCount: 4,
+    mainImageUrl: "", images: [], rating: 4.4, reviewCount: 92, googleRating: 4.5, googleReviewCount: 4,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("madai"), monthStart: 4, monthEnd: 6, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
