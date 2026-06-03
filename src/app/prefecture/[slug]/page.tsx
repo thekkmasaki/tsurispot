@@ -318,7 +318,7 @@ export async function generateMetadata({
   };
 }
 
-export const dynamicParams = false;
+// dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため撤廃。未知 slug は本体で permanentRedirect("/prefecture")。
 
 export function generateStaticParams() {
   return prefectures.map((pref) => ({ slug: pref.slug }));

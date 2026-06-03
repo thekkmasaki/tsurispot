@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import { MapPin, Target, ChevronLeft, HelpCircle, Users, Wallet } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -19,7 +19,7 @@ type PageProps = {
 
 const SPOT_TYPE_KEYS = Object.keys(SPOT_TYPE_LABELS) as FishingSpot["spotType"][];
 
-export const dynamicParams = false;
+// dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため撤廃。未知 param は下記で親へ 301。
 
 export function generateStaticParams() {
   const combos: { type: string; prefecture: string }[] = [];
@@ -77,15 +77,17 @@ export async function generateMetadata({
 
 export default async function SpotTypePrefecturePage({ params }: PageProps) {
   const { type, prefecture } = await params;
+  if (!SPOT_TYPE_KEYS.includes(type as FishingSpot["spotType"]))
+    permanentRedirect("/spot-type");
   const pref = getPrefectureBySlug(prefecture);
-  if (!pref || !SPOT_TYPE_KEYS.includes(type as FishingSpot["spotType"])) notFound();
+  if (!pref) permanentRedirect(`/spot-type/${type}`);
 
   const spotType = type as FishingSpot["spotType"];
   const label = SPOT_TYPE_LABELS[spotType];
   const spots = fishingSpots.filter(
     (s) => s.spotType === spotType && s.region.prefecture === pref.name
   );
-  if (spots.length === 0) notFound();
+  if (spots.length === 0) permanentRedirect(`/spot-type/${type}`);
 
   // 難易度集計
   const difficultyCount: Record<FishingSpot["difficulty"], number> = {

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import { MapPin, ChevronLeft, HelpCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -32,7 +32,7 @@ const SPOT_TYPE_DESCRIPTIONS: Record<FishingSpot["spotType"], string> = {
   pond: "管理釣り場（ポンド）は管理者がトラウト・コイ・ヘラブナなどを放流した有料施設です。レンタル竿・餌・トイレ・休憩所が整い、初心者やファミリー、お子様連れでも安心して釣りが楽しめます。天候や時期を問わず一定の釣果が期待できるため、入門に最適です。",
 };
 
-export const dynamicParams = false;
+// dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため撤廃。未知 param は下記で親へ 301。
 
 export function generateStaticParams() {
   const types = new Set<string>();
@@ -79,12 +79,13 @@ export async function generateMetadata({
 
 export default async function SpotTypePage({ params }: PageProps) {
   const { type } = await params;
-  if (!SPOT_TYPE_KEYS.includes(type as FishingSpot["spotType"])) notFound();
+  if (!SPOT_TYPE_KEYS.includes(type as FishingSpot["spotType"]))
+    permanentRedirect("/spot-type");
 
   const spotType = type as FishingSpot["spotType"];
   const label = SPOT_TYPE_LABELS[spotType];
   const spots = fishingSpots.filter((s) => s.spotType === spotType);
-  if (spots.length === 0) notFound();
+  if (spots.length === 0) permanentRedirect("/spot-type");
 
   // 都道府県別集計
   const prefMap = new Map<string, FishingSpot[]>();
