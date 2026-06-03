@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import {
   ChevronRight,
   Calendar,
@@ -24,7 +24,7 @@ interface Props {
   params: Promise<{ method: string }>;
 }
 
-export const dynamicParams = false;
+// dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため撤廃。未知 param は下記で親へ 301。
 
 export async function generateStaticParams() {
   return FISHING_METHODS.map((m) => ({ method: m.slug }));
@@ -78,7 +78,7 @@ const seasonBadgeColors: Record<string, string> = {
 export default async function MethodPage({ params }: Props) {
   const { method: methodSlug } = await params;
   const method = getMethodBySlug(methodSlug);
-  if (!method) notFound();
+  if (!method) permanentRedirect("/fishing");
 
   const currentMonth = new Date().getMonth() + 1;
 

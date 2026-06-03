@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import {
   AlertTriangle,
   Scale,
@@ -34,7 +34,7 @@ interface Props {
   params: Promise<{ prefecture: string }>;
 }
 
-export const dynamicParams = false;
+// dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため撤廃。未知 param は下記で親へ 301。
 
 export async function generateStaticParams() {
   return prefectures.map((pref) => ({ prefecture: pref.slug }));
@@ -75,7 +75,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function PrefectureFishingRulesPage({ params }: Props) {
   const { prefecture: prefSlug } = await params;
   const pref = prefectures.find((p) => p.slug === prefSlug);
-  if (!pref) notFound();
+  if (!pref) permanentRedirect("/fishing-rules");
 
   const rule = getFishingRuleByPrefSlug(prefSlug);
 

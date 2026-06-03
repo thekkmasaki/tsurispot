@@ -8,8 +8,11 @@ export async function GET() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">`;
 
-  // スポットの画像
-  for (const spot of fishingSpots) {
+  // スポットの画像（通常 sitemap と同じ品質基準: description>=100 かつ catchableFish>=2。
+  // noindex/薄ページの画像をGoogle画像検索に出さないよう統一する）
+  for (const spot of fishingSpots.filter(
+    (s) => (s.description || "").length >= 100 && s.catchableFish.length >= 2,
+  )) {
     xml += `
   <url>
     <loc>${baseUrl}/spots/${spot.slug}</loc>`;

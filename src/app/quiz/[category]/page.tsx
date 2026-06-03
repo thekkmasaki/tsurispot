@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import { ArrowLeft } from "lucide-react";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { QuizGame } from "@/components/quiz/quiz-game";
@@ -12,7 +12,7 @@ type Props = {
   params: Promise<{ category: string }>;
 };
 
-export const dynamicParams = false;
+// dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため撤廃。未知 param は下記で親へ 301。
 
 export function generateStaticParams() {
   return QUIZ_CATEGORIES.map((c) => ({ category: c.slug }));
@@ -50,7 +50,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function QuizCategoryPage({ params }: Props) {
   const { category } = await params;
   const cat = QUIZ_CATEGORIES.find((c) => c.slug === category);
-  if (!cat) notFound();
+  if (!cat) permanentRedirect("/quiz");
 
   // 10問をランダムに取得
   const questions = getQuestions(category, undefined, 10);

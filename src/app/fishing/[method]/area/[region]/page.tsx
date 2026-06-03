@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import {
   Fish,
   MapPin,
@@ -30,7 +30,7 @@ interface Props {
   params: Promise<{ method: string; region: string }>;
 }
 
-export const dynamicParams = false;
+// dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため撤廃。未知 param は下記で親へ 301。
 
 export async function generateStaticParams() {
   const params: { method: string; region: string }[] = [];
@@ -120,7 +120,8 @@ export default async function MethodRegionPage({ params }: Props) {
   const { method: methodSlug, region: regionSlug } = await params;
   const method = getMethodBySlug(methodSlug);
   const region = getRegionGroupBySlug(regionSlug);
-  if (!method || !region) notFound();
+  if (!method) permanentRedirect("/fishing");
+  if (!region) permanentRedirect(`/fishing/${methodSlug}`);
 
   const { spots, totalCount } = getSpotsForMethodAndRegion(method, region);
   const prefCounts = new Map<string, number>();

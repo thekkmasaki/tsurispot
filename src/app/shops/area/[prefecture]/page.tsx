@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import {
   Store,
   MapPin,
@@ -43,7 +43,7 @@ function getShopsForPrefecture(prefName: string) {
 }
 
 // ----- generateStaticParams -----
-export const dynamicParams = false;
+// dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため撤廃。未知 param は下記で親へ 301。
 
 export async function generateStaticParams() {
   return prefectures.map((pref) => ({ prefecture: pref.slug }));
@@ -96,7 +96,7 @@ export default async function PrefectureShopsPage({
 }) {
   const { prefecture } = await params;
   const pref = getPrefectureBySlug(prefecture);
-  if (!pref) notFound();
+  if (!pref) permanentRedirect("/shops");
 
   const shops = getShopsForPrefecture(pref.name);
   const count = shops.length;

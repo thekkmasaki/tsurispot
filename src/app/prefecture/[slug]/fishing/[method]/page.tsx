@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import {
   MapPin,
   Fish,
@@ -50,7 +50,7 @@ function getValidCombos() {
 const validCombos = getValidCombos();
 const validComboSet = new Set(validCombos.map((c) => `${c.slug}|${c.method}`));
 
-export const dynamicParams = false;
+// dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため撤廃。未知 param は下記で親へ 301。
 
 export function generateStaticParams() {
   return validCombos;
@@ -97,12 +97,9 @@ export default async function PrefectureFishingMethodPage({
   const { slug, method: methodSlug } = await params;
   const pref = getPrefectureBySlug(slug);
   const method = getMethodBySlug(methodSlug);
-  if (
-    !pref ||
-    !method ||
-    !validComboSet.has(`${slug}|${methodSlug}`)
-  )
-    notFound();
+  if (!pref) permanentRedirect("/prefecture");
+  if (!method || !validComboSet.has(`${slug}|${methodSlug}`))
+    permanentRedirect(`/prefecture/${slug}`);
 
   // この都道府県 × この釣り方のスポットを取得
   const matchingSpots = fishingSpots

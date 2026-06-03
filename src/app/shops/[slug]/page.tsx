@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import {
   MapPin,
   Star,
@@ -32,7 +32,7 @@ import { NoAdsSignal } from "@/components/ads/no-ads-signal";
 
 type Params = Promise<{ slug: string }>;
 
-export const dynamicParams = false;
+// dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため撤廃。未知 slug は下記で親へ 301。
 
 export async function generateStaticParams() {
   return tackleShops.map((shop) => ({ slug: shop.slug }));
@@ -77,7 +77,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
   const shop = getShopBySlug(slug);
 
   if (!shop) {
-    notFound();
+    permanentRedirect("/shops");
   }
 
   const isSample = slug === "sample-premium" || slug === "sample-basic" || slug === "sample-free";

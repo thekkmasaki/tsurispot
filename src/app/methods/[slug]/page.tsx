@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { notFound } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import {
   ArrowLeft,
   Calendar,
@@ -571,7 +571,7 @@ const methods: FishingMethod[] = [
   },
 ];
 
-export const dynamicParams = false;
+// dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため撤廃。未知 param は下記で親へ 301。
 
 export async function generateStaticParams() {
   return methods.map((method) => ({
@@ -610,7 +610,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 export default async function MethodDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const method = methods.find((m) => m.slug === slug);
-  if (!method) notFound();
+  if (!method) permanentRedirect("/methods");
 
   // この釣り方ができるスポット一覧
   const matchingSpots = getSpotsForMethod(method.methodKeys, 20);

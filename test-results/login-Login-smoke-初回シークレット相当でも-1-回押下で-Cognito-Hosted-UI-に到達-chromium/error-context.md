@@ -1,0 +1,358 @@
+# Page snapshot
+
+```yaml
+- generic [active] [ref=e1]:
+  - link "メインコンテンツへスキップ" [ref=e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=e3]:
+    - generic [ref=e4]:
+      - link "ツリスポ" [ref=e5] [cursor=pointer]:
+        - /url: /
+        - img [ref=e7]
+        - generic [ref=e13]: ツリスポ
+      - navigation "メインナビゲーション" [ref=e14]:
+        - link "スポット" [ref=e15] [cursor=pointer]:
+          - /url: /spots
+          - img [ref=e16]
+          - text: スポット
+        - link "釣果レポート" [ref=e19] [cursor=pointer]:
+          - /url: /blog
+          - img [ref=e20]
+          - text: 釣果レポート
+        - link "今釣れる" [ref=e23] [cursor=pointer]:
+          - /url: /catchable-now
+          - img [ref=e24]
+          - text: 今釣れる
+        - link "地図" [ref=e30] [cursor=pointer]:
+          - /url: /map
+          - img [ref=e31]
+          - text: 地図
+        - link "ランキング" [ref=e33] [cursor=pointer]:
+          - /url: /ranking
+          - img [ref=e34]
+          - text: ランキング
+        - link "図鑑" [ref=e40] [cursor=pointer]:
+          - /url: /fish
+          - img [ref=e41]
+          - text: 図鑑
+        - button "その他のメニュー" [ref=e44]:
+          - text: もっと見る
+          - img [ref=e45]
+      - generic [ref=e47]:
+        - button "何でも検索 Ctrl+K" [ref=e49]:
+          - img [ref=e50]
+          - generic [ref=e53]: 何でも検索
+          - generic [ref=e54]: Ctrl+K
+        - link "LINE友だち追加" [ref=e55] [cursor=pointer]:
+          - /url: https://line.me/R/ti/p/@710bvaxa
+          - img [ref=e56]
+          - text: LINE
+        - link "お気に入り" [ref=e58] [cursor=pointer]:
+          - /url: /favorites
+          - img [ref=e59]
+        - link "ログイン" [ref=e61] [cursor=pointer]:
+          - /url: /login
+          - img [ref=e62]
+  - main [ref=e65]:
+    - generic [ref=e67]:
+      - generic [ref=e68]:
+        - generic [ref=e69]:
+          - img [ref=e71]
+          - generic [ref=e77]: ツリスポ
+        - heading "ログイン" [level=1] [ref=e78]
+        - paragraph [ref=e79]: お気に入りや釣果をクラウドに保存
+      - generic [ref=e80]:
+        - button "Googleでログイン" [ref=e82]:
+          - img [ref=e83]
+          - text: Googleでログイン
+        - button "Appleでサインイン" [ref=e89]:
+          - img [ref=e90]
+          - text: Appleでサインイン
+      - generic [ref=e92]:
+        - paragraph [ref=e93]: ログインしなくても全機能を利用できます
+        - paragraph [ref=e94]:
+          - text: ログインすると、お気に入りや釣果データを
+          - text: 別の端末でも引き継げるようになります
+        - paragraph [ref=e95]:
+          - text: ログインにより
+          - link "プライバシーポリシー" [ref=e96] [cursor=pointer]:
+            - /url: /privacy
+          - text: に同意したものとみなします
+  - generic [ref=e97]:
+    - generic [ref=e100]: おすすめ
+    - insertion [ref=e104]:
+      - generic [ref=e107]:
+        - heading "この記事に関連するおすすめのトピックです" [level=2] [ref=e109]: 詳細を見る
+        - link "魚、水槽" [ref=e110] [cursor=pointer]:
+          - generic "魚、水槽" [ref=e111]
+          - img [ref=e113]
+        - link "動植物" [ref=e115] [cursor=pointer]:
+          - generic "動植物" [ref=e116]
+          - img [ref=e118]
+        - link "ロッド" [ref=e120] [cursor=pointer]:
+          - generic "ロッド" [ref=e121]
+          - img [ref=e123]
+        - link "養殖業" [ref=e125] [cursor=pointer]:
+          - generic "養殖業" [ref=e126]
+          - img [ref=e128]
+        - link "釣り" [ref=e130] [cursor=pointer]:
+          - generic "釣り" [ref=e131]
+          - img [ref=e133]
+        - link "魚介類、シーフード" [ref=e135] [cursor=pointer]:
+          - generic "魚介類、シーフード" [ref=e136]
+          - img [ref=e138]
+        - link "トラウト" [ref=e140] [cursor=pointer]:
+          - generic "トラウト" [ref=e141]
+          - img [ref=e143]
+  - contentinfo [ref=e145]:
+    - img [ref=e147]
+    - generic [ref=e150]:
+      - generic [ref=e151]:
+        - generic [ref=e152]:
+          - link "ツリスポ" [ref=e153] [cursor=pointer]:
+            - /url: /
+            - img [ref=e155]
+            - generic [ref=e161]: ツリスポ
+          - paragraph [ref=e162]:
+            - text: みんなが使いやすい
+            - text: 釣りスポット総合情報サイト
+          - generic [ref=e163]:
+            - link "公式Instagram" [ref=e164] [cursor=pointer]:
+              - /url: https://www.instagram.com/tsurispotjapan/
+              - img [ref=e165]
+              - text: "@tsurispotjapan"
+            - link "公式X（Twitter）" [ref=e167] [cursor=pointer]:
+              - /url: https://x.com/tsurispot_jp
+              - img [ref=e168]
+              - text: "@tsurispot_jp"
+            - link "LINE公式アカウント友だち追加" [ref=e170] [cursor=pointer]:
+              - /url: https://line.me/R/ti/p/@710bvaxa
+              - img [ref=e171]
+              - text: 友だち追加
+        - generic [ref=e173]:
+          - heading "釣りスポットを探す" [level=3] [ref=e174]
+          - list [ref=e175]:
+            - listitem [ref=e176]:
+              - link "全国の釣りスポット一覧" [ref=e177] [cursor=pointer]:
+                - /url: /spots
+            - listitem [ref=e178]:
+              - link "近くの釣り場を探す" [ref=e179] [cursor=pointer]:
+                - /url: /fishing-spots/near-me
+            - listitem [ref=e180]:
+              - link "釣りスポット人気ランキング" [ref=e181] [cursor=pointer]:
+                - /url: /ranking
+            - listitem [ref=e182]:
+              - link "堤防釣り初心者おすすめ" [ref=e183] [cursor=pointer]:
+                - /url: /fishing-spots/breakwater-beginner
+            - listitem [ref=e184]:
+              - link "海釣りおすすめスポット" [ref=e185] [cursor=pointer]:
+                - /url: /fishing-spots/best-saltwater
+            - listitem [ref=e186]:
+              - link "川釣り初心者おすすめ" [ref=e187] [cursor=pointer]:
+                - /url: /fishing-spots/river-beginner
+            - listitem [ref=e188]:
+              - link "エリアで探す" [ref=e189] [cursor=pointer]:
+                - /url: /area
+            - listitem [ref=e190]:
+              - link "地図で探す" [ref=e191] [cursor=pointer]:
+                - /url: /map
+            - listitem [ref=e192]:
+              - link "今釣れる魚" [ref=e193] [cursor=pointer]:
+                - /url: /catchable-now
+        - generic [ref=e194]:
+          - heading "釣りを学ぶ" [level=3] [ref=e195]
+          - list [ref=e196]:
+            - listitem [ref=e197]:
+              - link "エリア釣果レポート" [ref=e198] [cursor=pointer]:
+                - /url: /blog
+            - listitem [ref=e199]:
+              - link "釣りクイズ" [ref=e200] [cursor=pointer]:
+                - /url: /quiz
+            - listitem [ref=e201]:
+              - link "ボウズ確率チェッカー" [ref=e202] [cursor=pointer]:
+                - /url: /bouzu-checker
+            - listitem [ref=e203]:
+              - link "釣りの始め方" [ref=e204] [cursor=pointer]:
+                - /url: /guide
+            - listitem [ref=e205]:
+              - link "魚種図鑑" [ref=e206] [cursor=pointer]:
+                - /url: /fish
+            - listitem [ref=e207]:
+              - link "釣り用語集" [ref=e208] [cursor=pointer]:
+                - /url: /glossary
+            - listitem [ref=e209]:
+              - link "釣り方から探す" [ref=e210] [cursor=pointer]:
+                - /url: /methods
+            - listitem [ref=e211]:
+              - link "月別釣りガイド" [ref=e212] [cursor=pointer]:
+                - /url: /monthly
+            - listitem [ref=e213]:
+              - link "季節別ガイド" [ref=e214] [cursor=pointer]:
+                - /url: /seasonal
+            - listitem [ref=e215]:
+              - link "釣りカレンダー" [ref=e216] [cursor=pointer]:
+                - /url: /fishing-calendar
+            - listitem [ref=e217]:
+              - link "持ち物チェックリスト" [ref=e218] [cursor=pointer]:
+                - /url: /beginner-checklist
+            - listitem [ref=e219]:
+              - link "ルールとマナー" [ref=e220] [cursor=pointer]:
+                - /url: /fishing-rules
+            - listitem [ref=e221]:
+              - link "釣りインストラクター試験対策" [ref=e222] [cursor=pointer]:
+                - /url: /instructor-exam
+            - listitem [ref=e223]:
+              - link "編集長厳選の釣り道具" [ref=e224] [cursor=pointer]:
+                - /url: /gear
+        - generic [ref=e225]:
+          - heading "サポート" [level=3] [ref=e226]
+          - list [ref=e227]:
+            - listitem [ref=e228]:
+              - link "安全ガイド" [ref=e229] [cursor=pointer]:
+                - /url: /safety
+            - listitem [ref=e230]:
+              - link "よくある質問" [ref=e231] [cursor=pointer]:
+                - /url: /faq
+            - listitem [ref=e232]:
+              - link "お問い合わせ" [ref=e233] [cursor=pointer]:
+                - /url: /contact
+            - listitem [ref=e234]:
+              - link "釣具店・遊漁船の方へ" [ref=e235] [cursor=pointer]:
+                - /url: /partner
+        - generic [ref=e236]:
+          - heading "サイト情報" [level=3] [ref=e237]
+          - list [ref=e238]:
+            - listitem [ref=e239]:
+              - link "ツリスポについて" [ref=e240] [cursor=pointer]:
+                - /url: /about
+            - listitem [ref=e241]:
+              - link "事業者様向け（掲載案内）" [ref=e242] [cursor=pointer]:
+                - /url: /partner
+            - listitem [ref=e243]:
+              - link "プライバシーポリシー" [ref=e244] [cursor=pointer]:
+                - /url: /privacy
+            - listitem [ref=e245]:
+              - link "利用規約" [ref=e246] [cursor=pointer]:
+                - /url: /terms
+            - listitem [ref=e247]:
+              - link "特定商取引法に基づく表記" [ref=e248] [cursor=pointer]:
+                - /url: /legal
+      - generic [ref=e249]:
+        - heading "人気の釣りターゲット" [level=3] [ref=e250]
+        - generic [ref=e251]:
+          - link "アジの釣り方" [ref=e252] [cursor=pointer]:
+            - /url: /fish/aji
+          - generic [ref=e253]: ·
+          - link "サバの釣り方" [ref=e254] [cursor=pointer]:
+            - /url: /fish/saba
+          - generic [ref=e255]: ·
+          - link "カサゴの釣り方" [ref=e256] [cursor=pointer]:
+            - /url: /fish/kasago
+          - generic [ref=e257]: ·
+          - link "イワシの釣り方" [ref=e258] [cursor=pointer]:
+            - /url: /fish/iwashi
+          - generic [ref=e259]: ·
+          - link "キスの釣り方" [ref=e260] [cursor=pointer]:
+            - /url: /fish/kisu
+          - generic [ref=e261]: ·
+          - link "スズキの釣り方" [ref=e262] [cursor=pointer]:
+            - /url: /fish/suzuki
+          - generic [ref=e263]: ·
+          - link "クロダイの釣り方" [ref=e264] [cursor=pointer]:
+            - /url: /fish/kurodai
+          - generic [ref=e265]: ·
+          - link "アオリイカの釣り方" [ref=e266] [cursor=pointer]:
+            - /url: /fish/aori-ika
+          - generic [ref=e267]: ·
+          - link "メバルの釣り方" [ref=e268] [cursor=pointer]:
+            - /url: /fish/mebaru
+          - generic [ref=e269]: ·
+          - link "カレイの釣り方" [ref=e270] [cursor=pointer]:
+            - /url: /fish/karei
+          - generic [ref=e271]: ·
+          - link "魚種図鑑一覧 →" [ref=e272] [cursor=pointer]:
+            - /url: /fish
+      - generic [ref=e273]:
+        - heading "釣り方ガイド" [level=3] [ref=e274]
+        - generic [ref=e275]:
+          - link "サビキ釣り" [ref=e276] [cursor=pointer]:
+            - /url: /methods/sabiki
+          - generic [ref=e277]: ·
+          - link "ちょい投げ" [ref=e278] [cursor=pointer]:
+            - /url: /methods/choi-nage
+          - generic [ref=e279]: ·
+          - link "ウキ釣り" [ref=e280] [cursor=pointer]:
+            - /url: /methods/uki-zuri
+          - generic [ref=e281]: ·
+          - link "アジング" [ref=e282] [cursor=pointer]:
+            - /url: /methods/ajing
+          - generic [ref=e283]: ·
+          - link "エギング" [ref=e284] [cursor=pointer]:
+            - /url: /methods/eging
+          - generic [ref=e285]: ·
+          - link "メバリング" [ref=e286] [cursor=pointer]:
+            - /url: /methods/mebaring
+          - generic [ref=e287]: ·
+          - link "ショアジギング" [ref=e288] [cursor=pointer]:
+            - /url: /methods/shore-jigging
+          - generic [ref=e289]: ·
+          - link "穴釣り" [ref=e290] [cursor=pointer]:
+            - /url: /methods/ana-zuri
+          - generic [ref=e291]: ·
+          - link "釣り方一覧 →" [ref=e292] [cursor=pointer]:
+            - /url: /methods
+      - generic [ref=e293]:
+        - heading "人気エリアの釣りスポット" [level=3] [ref=e294]
+        - generic [ref=e295]:
+          - link "北海道の釣り場" [ref=e296] [cursor=pointer]:
+            - /url: /prefecture/hokkaido
+          - generic [ref=e297]: ·
+          - link "東京の釣り場" [ref=e298] [cursor=pointer]:
+            - /url: /prefecture/tokyo
+          - generic [ref=e299]: ·
+          - link "神奈川の釣り場" [ref=e300] [cursor=pointer]:
+            - /url: /prefecture/kanagawa
+          - generic [ref=e301]: ·
+          - link "千葉の釣り場" [ref=e302] [cursor=pointer]:
+            - /url: /prefecture/chiba
+          - generic [ref=e303]: ·
+          - link "静岡の釣り場" [ref=e304] [cursor=pointer]:
+            - /url: /prefecture/shizuoka
+          - generic [ref=e305]: ·
+          - link "愛知の釣り場" [ref=e306] [cursor=pointer]:
+            - /url: /prefecture/aichi
+          - generic [ref=e307]: ·
+          - link "大阪の釣り場" [ref=e308] [cursor=pointer]:
+            - /url: /prefecture/osaka
+          - generic [ref=e309]: ·
+          - link "兵庫の釣り場" [ref=e310] [cursor=pointer]:
+            - /url: /prefecture/hyogo
+          - generic [ref=e311]: ·
+          - link "広島の釣り場" [ref=e312] [cursor=pointer]:
+            - /url: /prefecture/hiroshima
+          - generic [ref=e313]: ·
+          - link "福岡の釣り場" [ref=e314] [cursor=pointer]:
+            - /url: /prefecture/fukuoka
+          - generic [ref=e315]: ·
+          - link "沖縄の釣り場" [ref=e316] [cursor=pointer]:
+            - /url: /prefecture/okinawa
+          - generic [ref=e317]: ·
+          - link "全都道府県一覧 →" [ref=e318] [cursor=pointer]:
+            - /url: /prefecture
+      - generic [ref=e319]:
+        - paragraph [ref=e320]: © 2025-2026 ツリスポ All rights reserved.
+        - paragraph [ref=e321]: "創設者・編集長: 正木 家康｜運営開始: 2025年｜掲載スポット: 2,100箇所以上｜特許出願中（特願2026-042836）"
+        - paragraph [ref=e322]: 当サイトはAmazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。
+        - paragraph [ref=e323]: また、楽天アフィリエイトにも参加しています。商品リンクからの購入で当サイトに報酬が支払われることがありますが、ユーザーに追加費用は発生しません。
+  - button "トップへ戻る":
+    - img
+  - generic [ref=e325]:
+    - paragraph [ref=e326]:
+      - text: 当サイトではCookieを使用しています。
+      - link "詳細" [ref=e327] [cursor=pointer]:
+        - /url: /privacy
+    - generic [ref=e328]:
+      - button "拒否" [ref=e329]
+      - button "同意する" [ref=e330]
+  - alert [ref=e331]
+```
