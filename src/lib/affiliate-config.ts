@@ -18,7 +18,7 @@ export const AFFILIATE_CONFIG = {
  * GA4イベントでもpage_typeとして送信されるため、
  * 現状のtsurispot-22だけでもGA4側でページ別分析が可能
  */
-export type PageType = "spot" | "gear" | "homepage" | "blog" | "monthly" | "fish" | "method" | "other";
+export type PageType = "spot" | "gear" | "homepage" | "blog" | "monthly" | "fish" | "method" | "map" | "other";
 
 /**
  * Amazon商品URLを生成（検索ベース：商品名で検索するため常に有効）
