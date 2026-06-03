@@ -215,7 +215,7 @@ export const okinawaSpots: FishingSpot[] = [
     region: localRegion("r183"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "海中道路沿いに無料駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/uruma-kaichu-road.webp", imageAttribution: "Photo: Toshihiro Matsui / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.3, reviewCount: 234,
+    mainImageUrl: "", images: [], rating: 4.3, reviewCount: 234,
     catchableFish: [
       { fish: fish("kanpachi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("hata"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "泳がせ釣り" },
@@ -246,7 +246,7 @@ export const okinawaSpots: FishingSpot[] = [
     region: localRegion("r184"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "湾岸沿いに無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nakagusuku-bay.webp", imageAttribution: "Photo: Takaaki Hattori / Wikimedia Commons (CC BY 4.0)", images: [], rating: 3.7, reviewCount: 76, googleRating: 3.7, googleReviewCount: 15,
+    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 76, googleRating: 3.7, googleReviewCount: 15,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("haze"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "チョイ投げ" },
@@ -278,7 +278,7 @@ export const okinawaSpots: FishingSpot[] = [
     region: localRegion("r182"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港内に無料駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nago-gyoko.webp", imageAttribution: "Photo: 690 Noda / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.9, reviewCount: 104, googleRating: 3.8, googleReviewCount: 186,
+    mainImageUrl: "", images: [], rating: 3.9, reviewCount: 104, googleRating: 3.8, googleReviewCount: 186,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
@@ -330,7 +330,7 @@ export const okinawaSpots: FishingSpot[] = [
     region: localRegion("r181"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "残波岬灯台周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/yomitan-zanpa-cape.webp", imageAttribution: "Photo: Earth Science and Remote Sensing Unit, NASA / Wikimedia Commons (Public domain)", images: [], rating: 4.5, reviewCount: 178, googleRating: 4.4, googleReviewCount: 1752,
+    mainImageUrl: "", images: [], rating: 4.5, reviewCount: 178, googleRating: 4.4, googleReviewCount: 1752,
     catchableFish: [
       { fish: fish("kanpachi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング・GT" },
       { fish: fish("hata"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー・泳がせ釣り" },
@@ -391,7 +391,7 @@ export const okinawaSpots: FishingSpot[] = [
     region: localRegion("r184"), spotType: "rocky", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "島内に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nanjo-oku-island.webp", imageAttribution: "Photo: Shig ISO / Wikimedia Commons (CC BY 2.0)", images: [], rating: 4.2, reviewCount: 136, googleRating: 4.3, googleReviewCount: 431,
+    mainImageUrl: "", images: [], rating: 4.2, reviewCount: 136, googleRating: 4.3, googleReviewCount: 431,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
       { fish: fish("hata"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー・泳がせ釣り" },
@@ -445,7 +445,7 @@ export const okinawaSpots: FishingSpot[] = [
     region: localRegion("r186"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "離島ターミナル周辺に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, rentalDetail: "釣具レンタル2000円〜（近くの釣具店で取り扱い）",
-    mainImageUrl: "/images/spots/wikimedia/ishigaki-port.webp", imageAttribution: "Photo: Syced / Wikimedia Commons (CC0)", images: [], rating: 4.5, reviewCount: 312, googleRating: 4, googleReviewCount: 382,
+    mainImageUrl: "", images: [], rating: 4.5, reviewCount: 312, googleRating: 4, googleReviewCount: 382,
     catchableFish: [
       { fish: fish("kanpachi"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("hata"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー・泳がせ釣り" },
@@ -536,7 +536,7 @@ export const okinawaSpots: FishingSpot[] = [
     region: localRegion("r188"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港湾内に無料駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "港近くの釣具店でレンタル可（2000円〜）",
-    mainImageUrl: "/images/spots/wikimedia/kumejima-kaneshiro-port.webp", imageAttribution: "Photo: M108t / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.1, reviewCount: 92, googleRating: 3.8, googleReviewCount: 19,
+    mainImageUrl: "", images: [], rating: 4.1, reviewCount: 92, googleRating: 3.8, googleReviewCount: 19,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("hata"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "泳がせ釣り" },
@@ -590,7 +590,7 @@ export const okinawaSpots: FishingSpot[] = [
     region: localRegion("r189"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "湾岸沿いに無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ogimi-shioya-bay.webp", imageAttribution: "Photo: kamiosaki / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 38, googleRating: 5, googleReviewCount: 2,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 38, googleRating: 5, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("kurodai"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
@@ -619,7 +619,7 @@ export const okinawaSpots: FishingSpot[] = [
     region: localRegion("r183"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/gushikawa-port.webp", imageAttribution: "Photo: Hykw-a4 / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.7, reviewCount: 72,
+    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 72,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
@@ -727,7 +727,7 @@ export const okinawaSpots: FishingSpot[] = [
     region: localRegion("r180"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内に無料駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kadena-port.webp", imageAttribution: "Photo: Nelo Hotsuma / Wikimedia Commons (CC BY 2.0)", images: [], rating: 3.8, reviewCount: 94, googleRating: 4.6, googleReviewCount: 14,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 94, googleRating: 4.6, googleReviewCount: 14,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("tachiuo"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ釣り" },
@@ -784,7 +784,7 @@ export const okinawaSpots: FishingSpot[] = [
     region: localRegion("r185"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内に無料駐車スペースあり（10台程度）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/tomigusuku-yone-port.webp", imageAttribution: "Photo: Naha Mama Pavilionz / Wikimedia Commons (CC0)", images: [], rating: 3.5, reviewCount: 42, googleRating: 4, googleReviewCount: 2,
+    mainImageUrl: "", images: [], rating: 3.5, reviewCount: 42, googleRating: 4, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
@@ -864,7 +864,7 @@ export const okinawaSpots: FishingSpot[] = [
     region: region("r17"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に有料駐車場あり（500円〜）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/naha-miegusuku-port.webp", imageAttribution: "Photo: TurnOnTheNight / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.7, reviewCount: 108, googleRating: 3.7, googleReviewCount: 37,
+    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 108, googleRating: 3.7, googleReviewCount: 37,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kawahagi"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "カワハギ釣り" },

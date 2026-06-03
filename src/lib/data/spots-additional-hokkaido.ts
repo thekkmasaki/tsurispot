@@ -225,7 +225,7 @@ export const additionalSpotsHokkaido: FishingSpot[] = [
     region: region("r51"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "無料駐車場あり（約100台）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Hakodate_Meiji-kan_at_night.jpg/960px-Hakodate_Meiji-kan_at_night.jpg", imageAttribution: "Photo: 掬茶 / Wikimedia Commons (CC BY-SA 4.0)", images: [],
+    mainImageUrl: "", images: [],
     rating: 4.2, reviewCount: 89, googleRating: 4.1, googleReviewCount: 614,
     catchableFish: [
       { fish: fish("aji"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -247,7 +247,7 @@ export const additionalSpotsHokkaido: FishingSpot[] = [
     region: region("r51"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場利用",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Hakodate_Asaichi_Hokkaido_Japan03s3.jpg/960px-Hakodate_Asaichi_Hokkaido_Japan03s3.jpg", imageAttribution: "Photo: 663highland / Wikimedia Commons (CC BY 2.5)", images: [],
+    mainImageUrl: "", images: [],
     rating: 3.9, reviewCount: 67, googleRating: 3.5, googleReviewCount: 15,
     catchableFish: [
       { fish: fish("kasago"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "ブラクリ釣り" },

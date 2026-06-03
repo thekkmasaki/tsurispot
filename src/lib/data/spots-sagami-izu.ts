@@ -109,7 +109,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/ajiro-port.webp", imageAttribution: "Photo: 運転太郎 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.8, reviewCount: 124, googleRating: 4, googleReviewCount: 281,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 124, googleRating: 4, googleReviewCount: 281,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "エギング" },
@@ -142,7 +142,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/taga-port.webp", imageAttribution: "Photo: 運転太郎 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.5, reviewCount: 56, googleRating: 3, googleReviewCount: 2,
+    mainImageUrl: "", images: [], rating: 3.5, reviewCount: 56, googleRating: 3, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ〜夜", method: "メバリング" },
@@ -210,7 +210,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海岸沿い有料駐車場あり（夏季のみ有料の場合あり）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nagahama-beach-atami.webp", imageAttribution: "Photo: Peterwchen / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.6, reviewCount: 68,
+    mainImageUrl: "", images: [], rating: 3.6, reviewCount: 68,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り・探り釣り" },
@@ -245,7 +245,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/usami-port.webp", imageAttribution: "Photo: Koji Horaguchi / Wikimedia Commons (CC BY 2.0)", images: [], rating: 3.7, reviewCount: 93, googleRating: 3.4, googleReviewCount: 16,
+    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 93, googleRating: 3.4, googleReviewCount: 16,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
@@ -276,7 +276,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kawana-port.webp", imageAttribution: "Photo: hiroaki from Tokyo, Japan / Wikimedia Commons (CC BY 2.0)", images: [], rating: 4.0, reviewCount: 156, googleRating: 3.9, googleReviewCount: 49,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 156, googleRating: 3.9, googleReviewCount: 49,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 1, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "エギング" },
@@ -309,7 +309,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/iruka-beach.webp", imageAttribution: "Photo: Nesnad / Wikimedia Commons (CC BY 4.0)", images: [], rating: 3.4, reviewCount: 45, googleRating: 4.1, googleReviewCount: 633,
+    mainImageUrl: "", images: [], rating: 3.4, reviewCount: 45, googleRating: 4.1, googleReviewCount: 633,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り（ちょい投げ）" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -378,7 +378,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり（一部有料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/futo-port.webp", imageAttribution: "Photo: Nesnad / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.9, reviewCount: 108, googleRating: 4.2, googleReviewCount: 256,
+    mainImageUrl: "", images: [], rating: 3.9, reviewCount: 108, googleRating: 4.2, googleReviewCount: 256,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kawahagi"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "胴突き釣り" },
@@ -409,7 +409,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/yahawano-port.webp", imageAttribution: "Photo: Nesnad / Wikimedia Commons (CC BY 4.0)", images: [], rating: 3.6, reviewCount: 64, googleRating: 4, googleReviewCount: 187,
+    mainImageUrl: "", images: [], rating: 3.6, reviewCount: 64, googleRating: 4, googleReviewCount: 187,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "エギング" },
@@ -438,7 +438,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/akazawa-port.webp", imageAttribution: "Photo: くろふね / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.7, reviewCount: 38, googleRating: 3, googleReviewCount: 1,
+    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 38, googleRating: 3, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ〜夜", method: "メバリング" },
@@ -467,7 +467,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/hokkawa-port.webp", imageAttribution: "Photo: Suikotei / Wikimedia Commons (CC BY 4.0)", images: [], rating: 3.5, reviewCount: 35, googleRating: 4.1, googleReviewCount: 35,
+    mainImageUrl: "", images: [], rating: 3.5, reviewCount: 35, googleRating: 4.1, googleReviewCount: 35,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
@@ -495,7 +495,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/okawa-port.webp", imageAttribution: "Photo: Koji Horaguchi / Wikimedia Commons (CC BY 2.0)", images: [], rating: 3.4, reviewCount: 28, googleRating: 4, googleReviewCount: 5,
+    mainImageUrl: "", images: [], rating: 3.4, reviewCount: 28, googleRating: 4, googleReviewCount: 5,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
@@ -524,7 +524,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/inatori-port.webp", imageAttribution: "Photo: Drivephotographer / Wikimedia Commons (CC0)", images: [], rating: 4.1, reviewCount: 187, googleRating: 4.2, googleReviewCount: 9,
+    mainImageUrl: "", images: [], rating: 4.1, reviewCount: 187, googleRating: 4.2, googleReviewCount: 9,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 1, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "エギング" },
@@ -560,7 +560,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "磯入り口付近に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/midaka-iso.webp", imageAttribution: "Photo: hideki higano / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.2, reviewCount: 52,
+    mainImageUrl: "", images: [], rating: 4.2, reviewCount: 52,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("aoriika"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エギング（磯）" },
@@ -597,7 +597,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海岸沿いに駐車スペースあり（桜シーズンは混雑）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/kawazu-beach.webp", imageAttribution: "Photo: 珈琲牛乳 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.5, reviewCount: 47, googleRating: 3.8, googleReviewCount: 135,
+    mainImageUrl: "", images: [], rating: 3.5, reviewCount: 47, googleRating: 3.8, googleReviewCount: 135,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー・泳がせ釣り" },
@@ -625,7 +625,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海岸沿いに有料駐車場あり（夏季）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/imaihama-beach.webp", imageAttribution: "Photo: 珈琲牛乳 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.6, reviewCount: 54, googleRating: 4.3, googleReviewCount: 230,
+    mainImageUrl: "", images: [], rating: 3.6, reviewCount: 54, googleRating: 4.3, googleReviewCount: 230,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "サーフルアー" },
@@ -869,7 +869,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nakagi-port.webp", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.2, reviewCount: 68, googleRating: 4.2, googleReviewCount: 220,
+    mainImageUrl: "", images: [], rating: 4.2, reviewCount: 68, googleRating: 4.2, googleReviewCount: 220,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
@@ -902,7 +902,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/mera-port.webp", imageAttribution: "Photo: Yobito KAYANUMA / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 4.0, reviewCount: 45, googleRating: 4, googleReviewCount: 127,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 45, googleRating: 4, googleReviewCount: 127,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -935,7 +935,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/koura-port.webp", imageAttribution: "Photo: menma1/2 / Wikimedia Commons (CC BY 3.0)", images: [], rating: 3.9, reviewCount: 38, googleRating: 4.3, googleReviewCount: 16,
+    mainImageUrl: "", images: [], rating: 3.9, reviewCount: 38, googleRating: 4.3, googleReviewCount: 16,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
@@ -964,7 +964,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり（夏季は混雑）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shimoda-sotora-port.webp", imageAttribution: "Photo: Syced / Wikimedia Commons (CC0)", images: [], rating: 3.7, reviewCount: 82, googleRating: 4.1, googleReviewCount: 7,
+    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 82, googleRating: 4.1, googleReviewCount: 7,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
@@ -1000,7 +1000,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "rocky", difficulty: "advanced",
     isFree: true, hasParking: true, parkingDetail: "城ヶ崎海岸駐車場あり（有料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/futo-iso-boranaya.webp", imageAttribution: "Photo: Nesnad / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 4.3, reviewCount: 78, googleRating: 3.4, googleReviewCount: 618,
+    mainImageUrl: "", images: [], rating: 4.3, reviewCount: 78, googleRating: 3.4, googleReviewCount: 618,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("aoriika"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エギング" },
@@ -1035,7 +1035,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "下田港周辺に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/shimoda-inubashiri-breakwater.webp", imageAttribution: "Photo: Yamaguchi Yoshiaki from Japan / Wikimedia Commons (CC BY-SA 2.0)", images: [], rating: 4.0, reviewCount: 145, googleRating: 3.4, googleReviewCount: 10,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 145, googleRating: 3.4, googleReviewCount: 10,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 1, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "エギング" },
