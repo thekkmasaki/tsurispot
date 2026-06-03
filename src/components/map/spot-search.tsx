@@ -3,35 +3,39 @@
 import { useState, useMemo, useEffect, useRef } from 'react';
 import Fuse from 'fuse.js';
 import { Search, X, MapPin } from 'lucide-react';
-import { fishingSpots } from '@/lib/data/spots';
-import type { FishingSpot } from '@/types';
-
-const fuse = new Fuse(fishingSpots, {
-  keys: [
-    { name: 'name', weight: 3 },
-    { name: 'region.areaName', weight: 2 },
-    { name: 'region.prefecture', weight: 1 },
-    { name: 'address', weight: 0.5 },
-  ],
-  threshold: 0.4,
-  ignoreLocation: true,
-  minMatchCharLength: 1,
-});
+import type { MapSpot } from '@/types';
 
 interface SpotSearchProps {
-  onSelect: (spot: FishingSpot) => void;
+  spots: MapSpot[];
+  onSelect: (spot: MapSpot) => void;
 }
 
-export function SpotSearch({ onSelect }: SpotSearchProps) {
+export function SpotSearch({ spots, onSelect }: SpotSearchProps) {
   const [q, setQ] = useState('');
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+
+  const fuse = useMemo(
+    () =>
+      new Fuse(spots, {
+        keys: [
+          { name: 'name', weight: 3 },
+          { name: 'region.areaName', weight: 2 },
+          { name: 'region.prefecture', weight: 1 },
+          { name: 'address', weight: 0.5 },
+        ],
+        threshold: 0.4,
+        ignoreLocation: true,
+        minMatchCharLength: 1,
+      }),
+    [spots]
+  );
 
   const results = useMemo(() => {
     const trimmed = q.trim();
     if (trimmed.length < 1) return [];
     return fuse.search(trimmed, { limit: 8 }).map((r) => r.item);
-  }, [q]);
+  }, [q, fuse]);
 
   useEffect(() => {
     const handler = (e: MouseEvent) => {
@@ -43,7 +47,7 @@ export function SpotSearch({ onSelect }: SpotSearchProps) {
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  const handlePick = (spot: FishingSpot) => {
+  const handlePick = (spot: MapSpot) => {
     onSelect(spot);
     setOpen(false);
     setQ(spot.name);

@@ -8,10 +8,9 @@ import 'leaflet.markercluster';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import 'leaflet.heat';
-import { fishingSpots } from '@/lib/data/spots';
 import { Navigation, Loader2, Fish, ChevronDown, ChevronUp, SlidersHorizontal, MapPin, Flame, List } from 'lucide-react';
 import { DIFFICULTY_LABELS } from '@/types';
-import type { FishingSpot } from '@/types';
+import type { MapSpot } from '@/types';
 import { getFavorites } from '@/hooks/use-favorites';
 import { SpotSearch } from '@/components/map/spot-search';
 import { SpotMapList } from '@/components/map/spot-map-list';
@@ -101,17 +100,17 @@ function heartSvg(filled: boolean): string {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="${fill}" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>`;
 }
 
-function buildPopupHtml(spot: FishingSpot, isFav: boolean): string {
-  const fishBadges = spot.catchableFish
+function buildPopupHtml(spot: MapSpot, isFav: boolean): string {
+  const fishBadges = spot.fishNames
     .slice(0, 3)
     .map(
-      (cf) =>
-        `<span style="display:inline-block;padding:2px 6px;border-radius:4px;background:#ffedd5;color:#9a3412;font-size:10px;margin-right:4px;margin-top:2px">${escapeHtml(cf.fish.name)}</span>`
+      (name) =>
+        `<span style="display:inline-block;padding:2px 6px;border-radius:4px;background:#ffedd5;color:#9a3412;font-size:10px;margin-right:4px;margin-top:2px">${escapeHtml(name)}</span>`
     )
     .join('');
   const moreFish =
-    spot.catchableFish.length > 3
-      ? `<span style="display:inline-block;color:#6b7280;font-size:10px">+${spot.catchableFish.length - 3}種</span>`
+    spot.fishNames.length > 3
+      ? `<span style="display:inline-block;color:#6b7280;font-size:10px">+${spot.fishNames.length - 3}種</span>`
       : '';
   const img = spot.mainImageUrl
     ? `<img src="${escapeHtml(spot.mainImageUrl)}" alt="" style="width:100%;height:120px;object-fit:cover;border-radius:6px;margin-bottom:6px" loading="lazy" onerror="this.style.display='none'" />`
@@ -167,7 +166,7 @@ function HeatLayer({
   enabled,
   catchCounts,
 }: {
-  spots: FishingSpot[];
+  spots: MapSpot[];
   enabled: boolean;
   catchCounts: Record<string, number> | null;
 }) {
@@ -222,7 +221,7 @@ function HeatLayer({
   return null;
 }
 
-function ClusteredSpotMarkers({ spots }: { spots: FishingSpot[] }) {
+function ClusteredSpotMarkers({ spots }: { spots: MapSpot[] }) {
   const map = useMap();
 
   useEffect(() => {
@@ -302,7 +301,7 @@ function ClusteredSpotMarkers({ spots }: { spots: FishingSpot[] }) {
   return null;
 }
 
-export function SpotMap() {
+export function SpotMap({ spots }: { spots: MapSpot[] }) {
   const [selectedPrefectures, setSelectedPrefectures] = useState<Set<string>>(new Set());
   const [selectedAreas, setSelectedAreas] = useState<Set<string>>(new Set());
   const [selectedFish, setSelectedFish] = useState<Set<string>>(new Set());
@@ -333,7 +332,7 @@ export function SpotMap() {
     tick: number;
   } | null>(null);
 
-  const handleSearchSelect = useCallback((spot: FishingSpot) => {
+  const handleSearchSelect = useCallback((spot: MapSpot) => {
     setFlyTarget({
       lat: spot.latitude,
       lng: spot.longitude,
@@ -342,7 +341,7 @@ export function SpotMap() {
     });
   }, []);
 
-  const handleListSelect = useCallback((spot: FishingSpot) => {
+  const handleListSelect = useCallback((spot: MapSpot) => {
     setFlyTarget({
       lat: spot.latitude,
       lng: spot.longitude,
@@ -443,7 +442,7 @@ export function SpotMap() {
   const availableAreasByPref = useMemo(() => {
     if (selectedPrefectures.size === 0) return [];
     const prefAreaMap = new Map<string, Map<string, number>>();
-    fishingSpots
+    spots
       .filter((s) => selectedPrefectures.has(s.region.prefecture))
       .forEach((s) => {
         if (!prefAreaMap.has(s.region.prefecture)) {
@@ -458,7 +457,7 @@ export function SpotMap() {
         .sort((a, b) => b[1] - a[1])
         .map(([name, count]) => ({ name, count })),
     }));
-  }, [selectedPrefectures]);
+  }, [selectedPrefectures, spots]);
 
   const totalAreaCount = useMemo(
     () => availableAreasByPref.reduce((sum, g) => sum + g.areas.length, 0),
@@ -468,7 +467,7 @@ export function SpotMap() {
   const locationFilteredSpots = useMemo(() => {
     if (nearbyMode && userLocation) {
       const toRad = (d: number) => (d * Math.PI) / 180;
-      const nearby = fishingSpots
+      const nearby = spots
         .map((s) => {
           const dLat = toRad(s.latitude - userLocation[0]);
           const dLon = toRad(s.longitude - userLocation[1]);
@@ -480,36 +479,30 @@ export function SpotMap() {
         })
         .filter((s) => s._dist <= 30)
         .sort((a, b) => a._dist - b._dist);
-      if (nearby.length === 0) return fishingSpots;
+      if (nearby.length === 0) return spots;
       return nearby;
     }
-    if (selectedPrefectures.size === 0) return fishingSpots;
-    const prefFiltered = fishingSpots.filter((s) =>
+    if (selectedPrefectures.size === 0) return spots;
+    const prefFiltered = spots.filter((s) =>
       selectedPrefectures.has(s.region.prefecture)
     );
     if (selectedAreas.size === 0) return prefFiltered;
     return prefFiltered.filter((s) => selectedAreas.has(s.region.areaName));
-  }, [selectedPrefectures, selectedAreas, nearbyMode, userLocation]);
+  }, [selectedPrefectures, selectedAreas, nearbyMode, userLocation, spots]);
 
   const availableFish = useMemo(() => {
     const fishMap = new Map<string, { name: string; slug: string; count: number }>();
     locationFilteredSpots.forEach((s) => {
-      if (s.catchableFish && s.catchableFish.length > 0) {
-        s.catchableFish.forEach((cf) => {
-          if (cf.fish?.slug && cf.fish?.name) {
-            const existing = fishMap.get(cf.fish.slug);
-            if (existing) {
-              existing.count++;
-            } else {
-              fishMap.set(cf.fish.slug, {
-                name: cf.fish.name,
-                slug: cf.fish.slug,
-                count: 1,
-              });
-            }
-          }
-        });
-      }
+      s.fishSlugs.forEach((slug, i) => {
+        const name = s.fishNames[i];
+        if (!slug || !name) return;
+        const existing = fishMap.get(slug);
+        if (existing) {
+          existing.count++;
+        } else {
+          fishMap.set(slug, { name, slug, count: 1 });
+        }
+      });
     });
     return Array.from(fishMap.values()).sort((a, b) => b.count - a.count);
   }, [locationFilteredSpots]);
@@ -517,7 +510,7 @@ export function SpotMap() {
   const filteredSpots = useMemo(() => {
     if (selectedFish.size === 0) return locationFilteredSpots;
     return locationFilteredSpots.filter((s) =>
-      s.catchableFish?.some((cf) => cf.fish?.slug && selectedFish.has(cf.fish.slug))
+      s.fishSlugs.some((slug) => selectedFish.has(slug))
     );
   }, [locationFilteredSpots, selectedFish]);
 
@@ -526,7 +519,7 @@ export function SpotMap() {
     mapZoom: number;
   } => {
     if (nearbyMode && userLocation) {
-      if (locationFilteredSpots.length === fishingSpots.length) {
+      if (locationFilteredSpots.length === spots.length) {
         return { mapCenter: DEFAULT_CENTER, mapZoom: DEFAULT_ZOOM };
       }
       return { mapCenter: userLocation, mapZoom: 12 };
@@ -551,14 +544,14 @@ export function SpotMap() {
       return { mapCenter: [centerLat, centerLng], mapZoom: 8 };
     }
     return { mapCenter: DEFAULT_CENTER, mapZoom: DEFAULT_ZOOM };
-  }, [selectedPrefectures, filteredSpots, nearbyMode, userLocation, locationFilteredSpots]);
+  }, [selectedPrefectures, filteredSpots, nearbyMode, userLocation, locationFilteredSpots, spots]);
 
   const nearbyEmpty =
-    nearbyMode && userLocation && locationFilteredSpots.length === fishingSpots.length;
+    nearbyMode && userLocation && locationFilteredSpots.length === spots.length;
 
   return (
     <div className="space-y-2">
-      <SpotSearch onSelect={handleSearchSelect} />
+      <SpotSearch spots={spots} onSelect={handleSearchSelect} />
       <div className="flex items-center justify-between gap-2">
         <button
           onClick={() => setFiltersOpen((v) => !v)}

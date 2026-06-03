@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import type { MapSpot } from "@/types";
 
 const SpotMap = dynamic(
   () => import("@/components/map/spot-map").then((m) => m.SpotMap),
@@ -12,6 +13,6 @@ const SpotMap = dynamic(
   }
 );
 
-export function MapWrapper() {
-  return <SpotMap />;
+export function MapWrapper({ spots }: { spots: MapSpot[] }) {
+  return <SpotMap spots={spots} />;
 }
