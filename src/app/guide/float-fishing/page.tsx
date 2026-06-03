@@ -10,6 +10,8 @@ import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import { fishingSpots } from "@/lib/data/spots";
 import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { ProductList } from "@/components/affiliate/product-list";
+import { getProductsByMethod } from "@/lib/data/products";
 
 export const metadata: Metadata = {
   title: "ウキ釣り完全ガイド - ウキの種類・仕掛け・アタリの取り方",
@@ -894,6 +896,16 @@ export default function FloatFishingGuidePage() {
 
         {/* この釣り方で釣れる魚 */}
         <CatchableFishSection guideSlug="float-fishing" title="ウキ釣りで釣れる魚" />
+
+        {/* ウキ釣りにおすすめの道具（アフィリエイト） */}
+        <section className="mt-8 sm:mt-10">
+          <ProductList
+            products={getProductsByMethod("ukifishing")}
+            title="ウキ釣りにおすすめの道具"
+            description="ウキ釣りに必要な仕掛け・道具。初心者はセットから揃えると安心です。"
+            pageType="guide"
+          />
+        </section>
 
         {/* 関連ガイド */}
         <div className="mt-8 sm:mt-12">

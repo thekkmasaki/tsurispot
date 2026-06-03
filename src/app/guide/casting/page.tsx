@@ -8,6 +8,8 @@ import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import type { YouTubeSearchLink } from "@/types";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { ProductList } from "@/components/affiliate/product-list";
+import { getProductsByMethod } from "@/lib/data/products";
 
 const castingVideos: YouTubeSearchLink[] = [
   {
@@ -1100,6 +1102,16 @@ export default function CastingGuidePage() {
               description="初心者向けにキャスティングの基本を解説した動画です。"
             />
           </div>
+        </section>
+
+        {/* 投げ釣りにおすすめの道具（アフィリエイト） */}
+        <section className="mt-8 sm:mt-10">
+          <ProductList
+            products={getProductsByMethod("choinage")}
+            title="ちょい投げ・投げ釣りにおすすめの道具"
+            description="投げ釣りに必要な仕掛けと道具。初心者はセットから揃えると手軽です。"
+            pageType="guide"
+          />
         </section>
 
         {/* ガイドに戻る */}

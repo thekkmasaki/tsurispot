@@ -8,6 +8,8 @@ import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { ProductList } from "@/components/affiliate/product-list";
+import { getProductsByMethod } from "@/lib/data/products";
 
 export const metadata: Metadata = {
   title: "エギング入門ガイド - エギの選び方・シャクリ方・季節別攻略",
@@ -767,6 +769,16 @@ export default function EgingGuidePage() {
 
         {/* この釣り方で釣れる魚 */}
         <CatchableFishSection guideSlug="eging" title="エギングで釣れる魚" />
+
+        {/* エギングにおすすめの道具（アフィリエイト） */}
+        <section className="mt-8 sm:mt-10">
+          <ProductList
+            products={getProductsByMethod("eging")}
+            title="エギングにおすすめの道具"
+            description="アオリイカ狙いのエギング入門に。まずはこのあたりから揃えるのがおすすめです。"
+            pageType="guide"
+          />
+        </section>
 
         {/* 関連ガイド */}
         <div className="mt-8 sm:mt-12">
