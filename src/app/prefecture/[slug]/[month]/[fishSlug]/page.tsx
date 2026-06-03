@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import {
   MapPin,
   Fish,
@@ -35,7 +35,8 @@ type PageProps = {
   params: Promise<{ slug: string; month: string; fishSlug: string }>;
 };
 
-export const dynamicParams = false;
+// dynamicParams=false は Next.js 16 で NoFallbackError を多発させ、CPU スパイクの原因になる。
+// デフォルト (true) に戻し、未知 slug や薄い組合せは permanentRedirect で確実に存在する親へ 301 する。
 
 const MIN_SPOTS = 2;
 
@@ -133,9 +134,18 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { slug, month: monthSlug, fishSlug } = await params;
   const pref = getPrefectureBySlug(slug);
+  // 県が無効 → 確実に存在する一覧へ 301（404 を出さない）
+  if (!pref) permanentRedirect("/prefecture");
   const month = getMonthBySlug(monthSlug);
   const fish = fishSpecies.find((f) => f.slug === fishSlug);
-  if (!pref || !month || !fish) return { title: "ページが見つかりません" };
+  // 月/魚種が無効、または当県で薄い組合せ（MIN_SPOTS 未満）→ 県トップへ 1 ホップ 301
+  if (
+    !month ||
+    !fish ||
+    !validCombos.get(`${pref.slug}/${fishSlug}`)?.has(monthSlug)
+  ) {
+    permanentRedirect(`/prefecture/${pref.slug}`);
+  }
 
   const title = `${pref.name}の${month.name}の${fish.name}釣り【2026年】釣れるスポット・釣り方`;
   const description = `${pref.name}で${month.name}に${fish.name}が釣れるスポットと釣り方を紹介。${month.season}シーズンの${fish.name}釣りの時期・仕掛け・おすすめポイントを完全ガイド。`;
@@ -144,6 +154,9 @@ export async function generateMetadata({
   return {
     title,
     description,
+    // 月固有の薄い派生ページ。UX のため残すが検索インデックスからは除外する。
+    // follow:true で内部リンク（スポット/魚種/県ページ）へ評価を流す。
+    robots: { index: false, follow: true },
     openGraph: {
       title,
       description,
@@ -159,10 +172,8 @@ export async function generateMetadata({
       ],
     },
     alternates: {
-      // 月別ページは親「都道府県×魚種」 ページに canonical 統一。
-      // GSC「クロール済み - インデックス未登録」 を解消するため、
-      // 評価を親 page に集約する (page 自体は UX 維持のため残す)。
-      canonical: `https://tsurispot.com/prefecture/${slug}/fish/${fishSlug}`,
+      // noindex と「別 URL を指す canonical」は矛盾シグナルになるため self-canonical に統一。
+      canonical: pageUrl,
     },
   };
 }
@@ -172,9 +183,10 @@ export default async function PrefectureMonthFishPage({
 }: PageProps) {
   const { slug, month: monthSlug, fishSlug } = await params;
   const pref = getPrefectureBySlug(slug);
+  if (!pref) permanentRedirect("/prefecture");
   const month = getMonthBySlug(monthSlug);
   const fish = fishSpecies.find((f) => f.slug === fishSlug);
-  if (!pref || !month || !fish) notFound();
+  if (!month || !fish) permanentRedirect(`/prefecture/${pref.slug}`);
 
   // この都道府県のスポットを取得
   const prefSpots = fishingSpots.filter(
@@ -208,7 +220,8 @@ export default async function PrefectureMonthFishPage({
       return b.spot.rating - a.spot.rating;
     });
 
-  if (matchingSpots.length < MIN_SPOTS) notFound();
+  // 薄い組合せ（MIN_SPOTS 未満）は 404 ではなく県トップへ 1 ホップ 301
+  if (matchingSpots.length < MIN_SPOTS) permanentRedirect(`/prefecture/${pref.slug}`);
 
   const topSpots = matchingSpots.slice(0, 10);
   const hasPeak = matchingSpots.some((s) => s.isPeak);
@@ -325,7 +338,7 @@ export default async function PrefectureMonthFishPage({
   const otherFishList = Array.from(otherFishMap.values())
     .filter((f) => f.count >= MIN_SPOTS)
     .sort((a, b) => b.count - a.count)
-    .slice(0, 12);
+    .slice(0, 6);
 
   // 月ナビゲーター用の有効月セット
   const comboKey = `${pref.slug}/${fishSlug}`;
@@ -914,21 +927,18 @@ export default async function PrefectureMonthFishPage({
             {month.name}に{fish.name}が釣れる他の都道府県
           </h2>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
+            {/* 他県は noindex の月×魚種ページ同士の相互リンク（クロール爆発）を避けるためテキスト表示に留める */}
             {topOtherPrefectures.map((op) => (
-              <Link
+              <Badge
                 key={op.slug}
-                href={`/prefecture/${op.slug}/${month.slug}/${fishSlug}`}
+                variant="outline"
+                className="px-2.5 py-1.5 text-xs sm:text-sm"
               >
-                <Badge
-                  variant="outline"
-                  className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
-                >
-                  {op.name}
-                  <span className="ml-1 text-muted-foreground">
-                    ({op.count}件)
-                  </span>
-                </Badge>
-              </Link>
+                {op.name}
+                <span className="ml-1 text-muted-foreground">
+                  ({op.count}件)
+                </span>
+              </Badge>
             ))}
           </div>
         </section>
@@ -941,10 +951,11 @@ export default async function PrefectureMonthFishPage({
             {pref.name}で{month.name}に釣れる他の魚
           </h2>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
+            {/* 他魚は noindex ページではなく indexable な魚種詳細へリンクし、評価を集約する */}
             {otherFishList.map((f) => (
               <Link
                 key={f.slug}
-                href={`/prefecture/${pref.slug}/${month.slug}/${f.slug}`}
+                href={`/fish/${f.slug}`}
               >
                 <Badge
                   variant="outline"
