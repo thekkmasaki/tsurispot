@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FishingSpot, SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { SpotImage } from "@/components/ui/spot-image";
+import { resolveSpotImageSrc } from "@/lib/data/spot-image-resolver";
 import { setCompareList } from "@/components/spots/compare-bar";
 
 function BoolCell({ value }: { value: boolean }) {
@@ -95,7 +96,7 @@ export function CompareClient({ spots }: { spots: FishingSpot[] }) {
                 <th key={s.id} className="border-b p-3 text-center">
                   <Link href={`/spots/${s.slug}`} className="group">
                     <SpotImage
-                      src={(s.mainImageUrl?.startsWith("http") || s.mainImageUrl?.startsWith("/images/spots/wikimedia/")) ? s.mainImageUrl : undefined}
+                      src={resolveSpotImageSrc(s.mainImageUrl)}
                       alt={s.name}
                       spotType={s.spotType}
                       height="h-28"

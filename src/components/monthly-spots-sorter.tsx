@@ -6,6 +6,7 @@ import { Navigation, Loader2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SpotImage } from "@/components/ui/spot-image";
+import { isDisplayableSpotImage } from "@/lib/data/spot-image-resolver";
 
 function haversineDistance(
   lat1: number,
@@ -166,12 +167,9 @@ export function MonthlySportsSorter({ spots, monthName }: MonthlySportsSorterPro
       {/* スポットグリッド */}
       <div className="grid gap-3 sm:grid-cols-2">
         {sortedSpots.map((spot) => {
-          const spotImageSrc =
-            spot.mainImageUrl &&
-            (spot.mainImageUrl.startsWith("http") ||
-              spot.mainImageUrl.startsWith("/images/spots/"))
-              ? spot.mainImageUrl
-              : undefined;
+          const spotImageSrc = isDisplayableSpotImage(spot.mainImageUrl)
+            ? spot.mainImageUrl
+            : undefined;
 
           return (
             <Link

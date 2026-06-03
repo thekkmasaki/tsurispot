@@ -10,6 +10,7 @@ import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import 'leaflet.heat';
 import { Navigation, Loader2, Fish, ChevronDown, ChevronUp, SlidersHorizontal, MapPin, Flame, List, Info } from 'lucide-react';
 import { DIFFICULTY_LABELS, SPOT_TYPE_LABELS } from '@/types';
+import { isDisplayableSpotImage } from '@/lib/data/spot-image-resolver';
 import type { MapSpot } from '@/types';
 import { getCurrentCrowdBadge, CROWD_LABELS } from '@/lib/crowd-prediction';
 import type { CrowdPrediction, CrowdLevel } from '@/lib/crowd-prediction';
@@ -116,8 +117,9 @@ function buildPopupHtml(spot: MapSpot, isFav: boolean, crowd: CrowdPrediction | 
     spot.fishNames.length > 3
       ? `<span style="display:inline-block;color:#6b7280;font-size:10px">+${spot.fishNames.length - 3}種</span>`
       : '';
-  const img = spot.mainImageUrl
-    ? `<img src="${escapeHtml(spot.mainImageUrl)}" alt="" style="width:100%;height:120px;object-fit:cover;border-radius:6px;margin-bottom:6px" loading="lazy" onerror="this.style.display='none'" />`
+  const imgSrc = isDisplayableSpotImage(spot.mainImageUrl) ? spot.mainImageUrl : undefined;
+  const img = imgSrc
+    ? `<img src="${escapeHtml(imgSrc)}" alt="" style="width:100%;height:120px;object-fit:cover;border-radius:6px;margin-bottom:6px" loading="lazy" onerror="this.style.display='none'" />`
     : '';
   const free = spot.isFree
     ? `<span style="display:inline-block;padding:2px 6px;border-radius:4px;background:#dcfce7;color:#166534;font-size:10px;margin-left:4px">無料</span>`

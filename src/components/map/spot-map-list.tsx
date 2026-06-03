@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Star, Navigation, MapPin } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { SpotImage } from '@/components/ui/spot-image';
+import { resolveSpotImageSrc } from '@/lib/data/spot-image-resolver';
 import { DIFFICULTY_LABELS, SPOT_TYPE_LABELS } from '@/types';
 import type { MapSpot } from '@/types';
 
@@ -45,12 +46,7 @@ export function SpotMapList({
           >
             <div className="size-20 shrink-0 overflow-hidden rounded-md">
               <SpotImage
-                src={
-                  spot.mainImageUrl?.startsWith('http') ||
-                  spot.mainImageUrl?.startsWith('/images/spots/wikimedia/')
-                    ? spot.mainImageUrl
-                    : undefined
-                }
+                src={resolveSpotImageSrc(spot.mainImageUrl)}
                 alt={spot.name}
                 spotType={spot.spotType}
                 height="h-20"
