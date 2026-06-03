@@ -8,9 +8,12 @@ import 'leaflet.markercluster';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css';
 import 'leaflet.heat';
-import { Navigation, Loader2, Fish, ChevronDown, ChevronUp, SlidersHorizontal, MapPin, Flame, List } from 'lucide-react';
-import { DIFFICULTY_LABELS } from '@/types';
+import { Navigation, Loader2, Fish, ChevronDown, ChevronUp, SlidersHorizontal, MapPin, Flame, List, Info } from 'lucide-react';
+import { DIFFICULTY_LABELS, SPOT_TYPE_LABELS } from '@/types';
 import type { MapSpot } from '@/types';
+import { getCurrentCrowdBadge, CROWD_LABELS } from '@/lib/crowd-prediction';
+import type { CrowdPrediction, CrowdLevel } from '@/lib/crowd-prediction';
+import { markerIconHtml, SPOT_TYPE_COLORS, CROWD_LEVEL_HEX } from '@/lib/map-marker';
 import { getFavorites } from '@/hooks/use-favorites';
 import { SpotSearch } from '@/components/map/spot-search';
 import { SpotMapList } from '@/components/map/spot-map-list';
@@ -100,7 +103,7 @@ function heartSvg(filled: boolean): string {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="${fill}" stroke="${stroke}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.29 1.51 4.04 3 5.5l7 7Z"/></svg>`;
 }
 
-function buildPopupHtml(spot: MapSpot, isFav: boolean): string {
+function buildPopupHtml(spot: MapSpot, isFav: boolean, crowd: CrowdPrediction | null): string {
   const fishBadges = spot.fishNames
     .slice(0, 3)
     .map(
@@ -118,9 +121,12 @@ function buildPopupHtml(spot: MapSpot, isFav: boolean): string {
   const free = spot.isFree
     ? `<span style="display:inline-block;padding:2px 6px;border-radius:4px;background:#dcfce7;color:#166534;font-size:10px;margin-left:4px">無料</span>`
     : '';
+  const crowdRow = crowd
+    ? `<div style="margin-top:6px"><span style="display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:9999px;background:#f3f4f6;color:${CROWD_LEVEL_HEX[crowd.level]};font-size:11px;font-weight:600"><span style="width:7px;height:7px;border-radius:50%;background:${CROWD_LEVEL_HEX[crowd.level]}"></span>いま ${escapeHtml(crowd.label)}</span></div>`
+    : '';
 
   return `
-    <div style="min-width:240px;padding:4px">
+    <div role="dialog" aria-label="${escapeHtml(spot.name)}の詳細" style="min-width:240px;padding:4px">
       ${img}
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
         <h3 style="margin:0;font-size:14px;font-weight:700;line-height:1.3;color:#111827">${escapeHtml(spot.name)}</h3>
@@ -135,6 +141,7 @@ function buildPopupHtml(spot: MapSpot, isFav: boolean): string {
         <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="#facc15" stroke="#facc15" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         <span style="font-weight:600">${spot.rating.toFixed(1)}</span>
       </div>
+      ${crowdRow}
       ${
         fishBadges
           ? `<div style="margin-top:6px;display:flex;flex-wrap:wrap;align-items:center;gap:2px">${fishBadges}${moreFish}</div>`
@@ -246,8 +253,27 @@ function ClusteredSpotMarkers({ spots }: { spots: MapSpot[] }) {
 
     const favs = new Set(getFavorites());
     spots.forEach((spot) => {
-      const marker = L.marker([spot.latitude, spot.longitude]);
-      marker.bindPopup(() => buildPopupHtml(spot, favs.has(spot.slug)), {
+      // 管理釣り場は営業時間ベースで混雑予想が無意味なので出さない。
+      const crowd = spot.isManagedPond
+        ? null
+        : getCurrentCrowdBadge({
+            rating: spot.rating,
+            isFree: spot.isFree,
+            difficulty: spot.difficulty,
+            prefecture: spot.region.prefecture,
+            hasParking: spot.hasParking,
+            reviewCount: spot.reviewCount,
+          });
+      const marker = L.marker([spot.latitude, spot.longitude], {
+        icon: L.divIcon({
+          html: markerIconHtml(spot.spotType, crowd ? crowd.level : null),
+          className: '',
+          iconSize: [18, 18],
+          iconAnchor: [9, 9],
+          popupAnchor: [0, -10],
+        }),
+      });
+      marker.bindPopup(() => buildPopupHtml(spot, favs.has(spot.slug), crowd), {
         maxWidth: 280,
         autoPan: true,
       });
@@ -313,6 +339,7 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
   const [showAllAreas, setShowAllAreas] = useState(false);
   const [heatEnabled, setHeatEnabled] = useState(false);
   const [listOpen, setListOpen] = useState(false);
+  const [legendOpen, setLegendOpen] = useState(false);
   const [catchCounts, setCatchCounts] = useState<Record<string, number> | null>(null);
 
   // ヒートマップ ON 時に釣果カウントを 1 回だけ取得（CDN キャッシュ前提）
@@ -586,6 +613,20 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
             <Flame className="size-3.5" />
             <span>ヒート</span>
           </button>
+          <button
+            onClick={() => setLegendOpen((v) => !v)}
+            aria-pressed={legendOpen}
+            aria-controls="map-legend"
+            className={`flex items-center gap-1 rounded-full px-3 py-1.5 text-xs font-medium transition-colors min-h-[36px] sm:text-sm ${
+              legendOpen
+                ? 'bg-slate-700 text-white shadow-sm'
+                : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground'
+            }`}
+            title="マーカーの色の凡例"
+          >
+            <Info className="size-3.5" />
+            <span className="hidden sm:inline">凡例</span>
+          </button>
           <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
             <MapPin className="size-3.5" />
             <span className="font-medium tabular-nums">{filteredSpots.length.toLocaleString()}件</span>
@@ -593,6 +634,45 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
           </div>
         </div>
       </div>
+
+      {legendOpen && (
+        <div
+          id="map-legend"
+          className="space-y-2 rounded-lg border bg-card p-3 text-xs"
+          aria-label="マーカーの色の凡例"
+        >
+          <div>
+            <p className="mb-1 font-medium text-muted-foreground">スポットの種類（マーカーの色）</p>
+            <ul role="list" className="flex flex-wrap gap-x-3 gap-y-1.5">
+              {(Object.keys(SPOT_TYPE_LABELS) as (keyof typeof SPOT_TYPE_LABELS)[]).map((t) => (
+                <li key={t} className="flex items-center gap-1.5">
+                  <span
+                    className="size-3 shrink-0 rounded-full border border-white shadow-sm"
+                    style={{ background: SPOT_TYPE_COLORS[t] }}
+                  />
+                  {SPOT_TYPE_LABELS[t]}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <p className="mb-1 font-medium text-muted-foreground">
+              いまの混雑（マーカー右上のドット）
+            </p>
+            <ul role="list" className="flex flex-wrap gap-x-3 gap-y-1.5">
+              {(Object.keys(CROWD_LABELS) as CrowdLevel[]).map((lv) => (
+                <li key={lv} className="flex items-center gap-1.5">
+                  <span
+                    className="size-2.5 shrink-0 rounded-full"
+                    style={{ background: CROWD_LEVEL_HEX[lv] }}
+                  />
+                  {CROWD_LABELS[lv].label}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )}
 
       {filtersOpen && (
         <div className="space-y-2 rounded-lg border bg-card p-3">

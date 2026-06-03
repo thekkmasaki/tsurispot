@@ -15,7 +15,7 @@ export interface CrowdPrediction {
   factors: string[];
 }
 
-const CROWD_LABELS: Record<CrowdLevel, { label: string; color: string }> = {
+export const CROWD_LABELS: Record<CrowdLevel, { label: string; color: string }> = {
   empty: { label: "ガラガラ", color: "text-green-600" },
   low: { label: "空いている", color: "text-emerald-600" },
   moderate: { label: "普通", color: "text-yellow-600" },
@@ -340,4 +340,33 @@ export function getWeeklyPredictions(
     dayLabel: dayLabels[i],
     prediction: calculateCrowdScore({ ...baseInput, dayOfWeek: i, hour: 7 }), // 朝マヅメ基準
   }));
+}
+
+/** 地図マーカー/ポップアップ用に、スポット側の少数フィールドだけを受け取る軽量入力。 */
+export interface CrowdBadgeInput {
+  rating: number;
+  isFree: boolean;
+  difficulty: "beginner" | "intermediate" | "advanced" | "all";
+  prefecture: string;
+  hasParking: boolean;
+  reviewCount: number;
+}
+
+/**
+ * 「いまの混雑」バッジを返す。現在時刻（曜日・時刻・月）を自動で補い、詳細ページと同一の
+ * calculateCrowdScore を通すため、値は詳細ページの予測と一致する。
+ */
+export function getCurrentCrowdBadge(input: CrowdBadgeInput): CrowdPrediction {
+  const now = new Date();
+  return calculateCrowdScore({
+    dayOfWeek: now.getDay(),
+    hour: now.getHours(),
+    month: now.getMonth() + 1,
+    spotPopularity: input.rating,
+    isFree: input.isFree,
+    difficulty: input.difficulty,
+    prefecture: input.prefecture,
+    hasParking: input.hasParking,
+    reviewCount: input.reviewCount,
+  });
 }
