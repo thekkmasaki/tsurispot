@@ -535,16 +535,10 @@ export default function MyPage() {
               <p className="mt-3 text-xs text-muted-foreground">
                 次の称号「{nextTier.emoji}
                 {nextTier.label}」まであと{nextTier.remaining}件
-                <Link href="/titles" className="ml-1 underline hover:text-foreground">
-                  全称号
-                </Link>
               </p>
             ) : (
               <p className="mt-3 text-xs font-medium text-amber-600">
                 🌟 最高ランク到達！
-                <Link href="/titles" className="ml-1 underline hover:text-amber-700">
-                  全称号
-                </Link>
               </p>
             )}
           </>

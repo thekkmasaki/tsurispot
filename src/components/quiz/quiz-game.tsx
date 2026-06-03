@@ -561,7 +561,7 @@ export function QuizGame({ questions, categoryName, categoryIcon }: QuizGameProp
             </h3>
             <div className="space-y-2">
               <Link
-                href="/guides/sabiki"
+                href="/guide/sabiki"
                 className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-sky-600 transition-colors hover:bg-sky-50 hover:text-sky-800"
               >
                 <span>🎣</span>
@@ -575,7 +575,7 @@ export function QuizGame({ questions, categoryName, categoryIcon }: QuizGameProp
                 <span>魚図鑑を見る</span>
               </Link>
               <Link
-                href="/guides/equipment"
+                href="/gear"
                 className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-sky-600 transition-colors hover:bg-sky-50 hover:text-sky-800"
               >
                 <span>🎒</span>
