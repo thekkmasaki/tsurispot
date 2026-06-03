@@ -6,6 +6,7 @@ import { Star, Car, Toilet, Fish, ShoppingBag } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { SpotImage } from "@/components/ui/spot-image";
+import { resolveSpotImageSrc } from "@/lib/data/spot-image-resolver";
 import { SPOT_TYPE_LABELS } from "@/types";
 import { FavoriteButton } from "@/components/spots/favorite-button";
 
@@ -81,7 +82,7 @@ function LightSpotCard({ spot }: { spot: SpotCardData }) {
       <Card className="group gap-0 overflow-hidden py-0 transition-shadow hover:shadow-md">
         <div className="relative">
           <SpotImage
-            src={(spot.mainImageUrl?.startsWith("http") || spot.mainImageUrl?.startsWith("/images/spots/wikimedia/")) ? spot.mainImageUrl : undefined}
+            src={resolveSpotImageSrc(spot.mainImageUrl)}
             alt={spot.name}
             spotType={spot.spotType as "port" | "beach" | "rocky" | "pier" | "breakwater" | "river" | "lake" | "canal" | "managed" | "surf" | "estuary"}
             height="h-40"

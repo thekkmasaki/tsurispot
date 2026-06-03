@@ -8,6 +8,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { SpotImage } from "@/components/ui/spot-image";
+import { resolveSpotImageSrc } from "@/lib/data/spot-image-resolver";
 import { Star, ArrowRight, MapPin } from "lucide-react";
 
 interface PopularSpotData {
@@ -127,12 +128,7 @@ export function HomePopularSpots({ spots }: HomePopularSpotsProps) {
           <Link key={spot.id} href={`/spots/${spot.slug}`}>
             <Card className="group h-full gap-0 overflow-hidden border py-0 transition-shadow hover:shadow-md">
               <SpotImage
-                src={
-                  spot.mainImageUrl?.startsWith("http") ||
-                  spot.mainImageUrl?.startsWith("/images/spots/wikimedia/")
-                    ? spot.mainImageUrl
-                    : undefined
-                }
+                src={resolveSpotImageSrc(spot.mainImageUrl)}
                 alt={spot.name}
                 spotType={spot.spotType}
                 height="h-36 sm:h-40"

@@ -52,6 +52,7 @@ import {
   DIFFICULTY_LABELS,
 } from "@/types";
 import { SpotImage } from "@/components/ui/spot-image";
+import { isDisplayableSpotImage } from "@/lib/data/spot-image-resolver";
 import { SpotBouzuCard } from "@/components/spots/spot-bouzu-card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
@@ -814,10 +815,8 @@ export default async function SpotDetailPage({ params }: PageProps) {
       <div className="min-w-0">
       {/* スポット画像ギャラリー: mainImageUrl をヘッダー、images 配列をサブ画像で表示 */}
       {(spot.mainImageUrl || (spot.images && spot.images.length > 0)) && (() => {
-        const isValidImage = (url: string | undefined): url is string =>
-          !!url && (url.startsWith("http") || url.startsWith("/images/spots/"));
-        const main = isValidImage(spot.mainImageUrl) ? spot.mainImageUrl : undefined;
-        const subs = (spot.images ?? []).filter(isValidImage);
+        const main = isDisplayableSpotImage(spot.mainImageUrl) ? spot.mainImageUrl : undefined;
+        const subs = (spot.images ?? []).filter(isDisplayableSpotImage);
         return (
           <section className="mb-6">
             {main && (
