@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ProductList } from "@/components/affiliate/product-list";
+import { getProductsByMethod } from "@/lib/data/products";
 import { ChevronLeft, Flashlight, Fish, ShieldAlert, MapPin, Heart } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -669,6 +671,16 @@ export default function NightFishingGuidePage() {
             </Card>
           </section>
         )}
+
+        {/* 夜釣りにおすすめの装備（アフィリエイト） */}
+        <section className="mt-8 sm:mt-10">
+          <ProductList
+            products={getProductsByMethod("night-fishing")}
+            title="夜釣りにおすすめの装備"
+            description="夜釣りは安全と防寒が最優先。ライトの電源、電熱ウェア、防寒グローブで快適に過ごせます。"
+            pageType="guide"
+          />
+        </section>
 
         {/* 参考動画 */}
         <div className="mt-8 sm:mt-12">

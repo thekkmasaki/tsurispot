@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ProductList } from "@/components/affiliate/product-list";
+import { getProductsByMethod } from "@/lib/data/products";
 import { ChevronLeft, Info } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -683,6 +685,16 @@ export default function LineGuidePage() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* ライン選びにおすすめ（アフィリエイト） */}
+      <section className="mb-8">
+        <ProductList
+          products={getProductsByMethod("line")}
+          title="おすすめのライン"
+          description="PE・フロロ・ナイロン・ハリスの定番どころ。釣り方に合わせて道糸とリーダーを選びましょう。"
+          pageType="guide"
+        />
       </section>
 
       {/* 関連ガイド */}

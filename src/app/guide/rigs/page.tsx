@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ProductList } from "@/components/affiliate/product-list";
+import { getProductsByMethod } from "@/lib/data/products";
 import { ChevronLeft } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { YouTubeEmbedList } from "@/components/youtube-embed";
@@ -1192,6 +1194,16 @@ export default function RigsGuidePage() {
             </CardContent>
           </Card>
         </div>
+
+        {/* 仕掛けづくりにおすすめ（アフィリエイト） */}
+        <section className="mt-8 sm:mt-10">
+          <ProductList
+            products={getProductsByMethod("rigs")}
+            title="仕掛けづくりにおすすめの小物"
+            description="ハリスやスナップなど、仕掛けの自作・交換に使う小物。予備を持っておくと現場で困りません。"
+            pageType="guide"
+          />
+        </section>
 
         {/* 次のステップ */}
         <div className="mt-8 text-center sm:mt-12">

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ProductList } from "@/components/affiliate/product-list";
+import { getProductsByMethod } from "@/lib/data/products";
 import Image from "next/image";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ChevronLeft, Fish, AlertTriangle, CheckCircle2, MapPin } from "lucide-react";
@@ -619,6 +621,16 @@ export default function OyogasePage() {
 
       {/* この釣り方で釣れる魚 */}
       <CatchableFishSection guideSlug="oyogase" title="泳がせ釣りで釣れる魚" />
+
+      {/* 泳がせ釣りにおすすめの道具（アフィリエイト） */}
+      <section className="mt-8">
+        <ProductList
+          products={getProductsByMethod("oyogase")}
+          title="泳がせ釣りにおすすめの道具"
+          description="大物とのやり取りに耐える竿・リールと丈夫なライン。泳がせ釣りはタックルの強さが釣果を分けます。"
+          pageType="guide"
+        />
+      </section>
 
       {/* 関連ガイド */}
       <div className="rounded-xl border bg-muted/30 p-6">

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ProductList } from "@/components/affiliate/product-list";
+import { getProductsByMethod } from "@/lib/data/products";
 import Image from "next/image";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import {
@@ -1106,6 +1108,16 @@ export default function JetSinkerGuidePage() {
               </Card>
             ))}
           </div>
+        </section>
+
+        {/* ジェット天秤におすすめ（アフィリエイト） */}
+        <section className="mb-12">
+          <ProductList
+            products={getProductsByMethod("jet-sinker")}
+            title="ジェット天秤・オモリのおすすめ"
+            description="投げ釣りの定番ジェット天秤と号数違いのオモリ。飛距離と根掛かり回避のバランスで選びましょう。"
+            pageType="guide"
+          />
         </section>
 
         {/* ===== 関連ガイド ===== */}

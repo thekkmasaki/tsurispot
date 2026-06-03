@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ProductList } from "@/components/affiliate/product-list";
+import { getBeginnerEssentials } from "@/lib/data/products";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { buildArticleJsonLd } from "@/lib/seo/article-jsonld";
 import {
@@ -759,6 +761,17 @@ export default function FamilyGuidePage() {
             </div>
           </SectionCard>
         </div>
+
+        {/* 家族におすすめの道具（アフィリエイト） */}
+        <section className="mt-8 sm:mt-10">
+          <ProductList
+            products={getBeginnerEssentials()}
+            title="ファミリーフィッシングにおすすめの道具"
+            description="お子さんでも扱いやすいサビキセットや安全グッズ。準備を整えて家族で釣りを楽しみましょう。"
+            maxItems={8}
+            pageType="guide"
+          />
+        </section>
 
         {/* 次のステップ */}
         <div className="mt-8 text-center sm:mt-12">

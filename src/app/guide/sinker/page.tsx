@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ProductList } from "@/components/affiliate/product-list";
+import { getProductsByMethod } from "@/lib/data/products";
 import { ChevronLeft, Info, ExternalLink } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -806,6 +808,16 @@ export default function SinkerGuidePage() {
             </p>
           </CardContent>
         </Card>
+      </section>
+
+      {/* おもり選びにおすすめ（アフィリエイト） */}
+      <section className="mb-10">
+        <ProductList
+          products={getProductsByMethod("sinker")}
+          title="おすすめのオモリ・天秤"
+          description="号数違いのオモリセットと投げ釣りの定番ジェット天秤。状況に合わせて重さを変えられると釣果が安定します。"
+          pageType="guide"
+        />
       </section>
 
       {/* セクション5: 関連ガイドへのリンク */}
