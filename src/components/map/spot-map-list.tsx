@@ -1,7 +1,8 @@
 'use client';
 
+import { useState, useRef } from 'react';
 import Link from 'next/link';
-import { Star, Navigation, MapPin } from 'lucide-react';
+import { Star, Navigation, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { SpotImage } from '@/components/ui/spot-image';
 import { DIFFICULTY_LABELS, SPOT_TYPE_LABELS } from '@/types';
@@ -11,15 +12,29 @@ interface SpotMapListProps {
   spots: MapSpot[];
   onSelect: (spot: MapSpot) => void;
   emptyMessage?: string;
-  limit?: number;
 }
+
+const ITEMS_PER_PAGE = 20;
 
 export function SpotMapList({
   spots,
   onSelect,
   emptyMessage = '条件に合うスポットがありません',
-  limit = 100,
 }: SpotMapListProps) {
+  const [page, setPage] = useState(1);
+  // フィルタ変更で spots が変わったら1ページ目へ戻す（effect を使わずレンダー中に調整する React 推奨パターン）。
+  const [prevSpots, setPrevSpots] = useState(spots);
+  if (spots !== prevSpots) {
+    setPrevSpots(spots);
+    setPage(1);
+  }
+  const listTopRef = useRef<HTMLDivElement>(null);
+  // ページ送り時はリスト先頭へスクロール（render 中 setState とは分離し、クリックハンドラ内で実行）。
+  const goToPage = (p: number) => {
+    setPage(p);
+    listTopRef.current?.scrollIntoView({ block: 'start', behavior: 'smooth' });
+  };
+
   if (spots.length === 0) {
     return (
       <div className="flex h-full items-center justify-center px-4 py-8 text-sm text-muted-foreground">
@@ -28,11 +43,13 @@ export function SpotMapList({
     );
   }
 
-  const displayed = spots.slice(0, limit);
-  const remaining = spots.length - displayed.length;
+  const totalPages = Math.ceil(spots.length / ITEMS_PER_PAGE);
+  const safePage = Math.min(page, totalPages);
+  const start = (safePage - 1) * ITEMS_PER_PAGE;
+  const displayed = spots.slice(start, start + ITEMS_PER_PAGE);
 
   return (
-    <div className="space-y-2 p-1">
+    <div ref={listTopRef} className="space-y-2 p-1">
       {displayed.map((spot) => (
         <div
           key={spot.id}
@@ -96,10 +113,36 @@ export function SpotMapList({
           </div>
         </div>
       ))}
-      {remaining > 0 && (
-        <p className="px-2 py-3 text-center text-xs text-muted-foreground">
-          他に {remaining} 件のスポットがあります。フィルタで絞り込んでください。
-        </p>
+      {totalPages > 1 && (
+        <nav
+          className="flex items-center justify-center gap-3 px-2 py-3"
+          aria-label="スポット一覧のページ送り"
+        >
+          <button
+            type="button"
+            onClick={() => goToPage(Math.max(1, safePage - 1))}
+            disabled={safePage <= 1}
+            className="flex items-center gap-1 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors hover:bg-muted disabled:pointer-events-none disabled:opacity-40"
+          >
+            <ChevronLeft className="size-3.5" aria-hidden="true" />
+            前へ
+          </button>
+          <span className="text-xs tabular-nums text-muted-foreground">
+            <span aria-live="polite">
+              {safePage} / {totalPages} ページ
+            </span>
+            <span className="ml-1">（全{spots.length.toLocaleString()}件）</span>
+          </span>
+          <button
+            type="button"
+            onClick={() => goToPage(Math.min(totalPages, safePage + 1))}
+            disabled={safePage >= totalPages}
+            className="flex items-center gap-1 rounded-md border px-3 py-1.5 text-xs font-medium transition-colors hover:bg-muted disabled:pointer-events-none disabled:opacity-40"
+          >
+            次へ
+            <ChevronRight className="size-3.5" aria-hidden="true" />
+          </button>
+        </nav>
       )}
     </div>
   );
