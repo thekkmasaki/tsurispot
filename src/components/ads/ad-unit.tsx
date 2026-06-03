@@ -173,7 +173,7 @@ function AdWrapper({
       {label && (
         <div className="mb-2 flex items-center justify-center gap-3">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
-          <span className="text-[10px] font-medium tracking-widest text-muted-foreground/40">スポンサー</span>
+          <span className="text-[10px] font-medium tracking-widest text-muted-foreground/70">スポンサー</span>
           <div className="h-px flex-1 bg-gradient-to-l from-transparent via-border to-transparent" />
         </div>
       )}
@@ -204,7 +204,8 @@ export function InArticleAd({ className = "" }: { className?: string }) {
 export function DisplayAd({ className = "" }: { className?: string }) {
   return (
     <AdWrapper className={`my-6 ${className}`}>
-      <AdUnit slot={AD_SLOTS.display} format="auto" placement="display" />
+      {/* CLS対策: 遅延挿入される広告が下を押し下げないよう最小高さを予約 */}
+      <AdUnit slot={AD_SLOTS.display} format="auto" placement="display" className="min-h-[250px]" />
     </AdWrapper>
   );
 }
@@ -217,12 +218,13 @@ export function NativeAdBreak({ className = "" }: { className?: string }) {
       <div className="flex items-center justify-center gap-3 mb-4">
         <div className="h-px flex-1 bg-gradient-to-r from-transparent via-ocean-mid/20 to-transparent" />
         <Waves className="size-4 text-ocean-mid/30" />
-        <span className="text-[10px] font-medium tracking-widest text-muted-foreground/40">おすすめ</span>
+        <span className="text-[10px] font-medium tracking-widest text-muted-foreground/70">おすすめ</span>
         <Waves className="size-4 text-ocean-mid/30" />
         <div className="h-px flex-1 bg-gradient-to-l from-transparent via-ocean-mid/20 to-transparent" />
       </div>
       <div className="rounded-2xl border border-border/50 bg-card/60 p-3 sm:p-5 shadow-sm shadow-ocean-deep/[0.03]">
-        <AdUnit slot={AD_SLOTS.native_break} format="auto" placement="native_break" />
+        {/* CLS対策: fluid広告の後挿入による押し下げを防ぐため最小高さを予約 */}
+        <AdUnit slot={AD_SLOTS.native_break} format="auto" placement="native_break" className="min-h-[250px]" />
       </div>
     </div>
   );
@@ -230,12 +232,13 @@ export function NativeAdBreak({ className = "" }: { className?: string }) {
 
 // ---- Multiplex広告（関連コンテンツ風グリッド、フッター前に最適） ----
 export function MultiplexAd({ className = "", placement = "multiplex" }: { className?: string; placement?: "multiplex" | "pre_footer" }) {
+  // CLS対策: autorelaxed広告の後挿入による押し下げを防ぐため最小高さ(min-h-[250px])を予約
   return (
     <AdUnit
       slot={placement === "pre_footer" ? AD_SLOTS.pre_footer : AD_SLOTS.multiplex}
       placement={placement}
       format="autorelaxed"
-      className={`my-8 ${className}`}
+      className={`my-8 min-h-[250px] ${className}`}
     />
   );
 }
@@ -252,7 +255,7 @@ export function PreFooterAd() {
     <div className="mx-auto max-w-5xl px-4 py-8">
       <div className="flex items-center justify-center gap-3 mb-3">
         <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
-        <span className="text-[10px] font-medium tracking-widest text-muted-foreground/40 uppercase">おすすめ</span>
+        <span className="text-[10px] font-medium tracking-widest text-muted-foreground/70 uppercase">おすすめ</span>
         <div className="h-px flex-1 bg-gradient-to-l from-transparent via-border to-transparent" />
       </div>
       <div className="rounded-2xl border border-border/50 bg-card/60 p-4 sm:p-6 shadow-sm shadow-ocean-deep/[0.03]" style={{ minWidth: "300px" }}>

@@ -21,7 +21,7 @@ export function Footer() {
               </div>
               <span className="font-bold text-white font-[family-name:var(--font-zen-maru)]">ツリスポ</span>
             </Link>
-            <p className="mt-2 text-sm text-blue-100/70">
+            <p className="mt-2 text-sm text-blue-100/90">
               みんなが使いやすい
               <br />
               釣りスポット総合情報サイト
@@ -32,7 +32,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="公式Instagram"
-                className="inline-flex items-center gap-2 text-sm text-blue-100/70 hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 text-sm text-blue-100/90 hover:text-white transition-colors"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -49,7 +49,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="公式X（Twitter）"
-                className="inline-flex items-center gap-2 text-sm text-blue-100/70 hover:text-white transition-colors"
+                className="inline-flex items-center gap-2 text-sm text-blue-100/90 hover:text-white transition-colors"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -80,7 +80,7 @@ export function Footer() {
           </div>
           <div>
             <h3 className="mb-3 text-sm font-semibold text-sea-foam">釣りスポットを探す</h3>
-            <ul className="space-y-2 text-sm text-blue-100/70">
+            <ul className="space-y-2 text-sm text-blue-100/90">
               <li><Link href="/spots" className="hover:text-white">全国の釣りスポット一覧</Link></li>
               <li><Link href="/fishing-spots/near-me" className="hover:text-white">近くの釣り場を探す</Link></li>
               <li><Link href="/ranking" className="hover:text-white">釣りスポット人気ランキング</Link></li>
@@ -94,7 +94,7 @@ export function Footer() {
           </div>
           <div>
             <h3 className="mb-3 text-sm font-semibold text-sea-foam">釣りを学ぶ</h3>
-            <ul className="space-y-2 text-sm text-blue-100/70">
+            <ul className="space-y-2 text-sm text-blue-100/90">
               <li><Link href="/blog" className="hover:text-white">エリア釣果レポート</Link></li>
               <li><Link href="/quiz" className="hover:text-white">釣りクイズ</Link></li>
               <li><Link href="/bouzu-checker" className="hover:text-white">ボウズ確率チェッカー</Link></li>
@@ -113,7 +113,7 @@ export function Footer() {
           </div>
           <div>
             <h3 className="mb-3 text-sm font-semibold text-sea-foam">サポート</h3>
-            <ul className="space-y-2 text-sm text-blue-100/70">
+            <ul className="space-y-2 text-sm text-blue-100/90">
               <li><Link href="/safety" className="hover:text-white">安全ガイド</Link></li>
               <li><Link href="/faq" className="hover:text-white">よくある質問</Link></li>
               <li><Link href="/contact" className="hover:text-white">お問い合わせ</Link></li>
@@ -122,7 +122,7 @@ export function Footer() {
           </div>
           <div>
             <h3 className="mb-3 text-sm font-semibold text-sea-foam">サイト情報</h3>
-            <ul className="space-y-2 text-sm text-blue-100/70">
+            <ul className="space-y-2 text-sm text-blue-100/90">
               <li><Link href="/about" className="hover:text-white">ツリスポについて</Link></li>
               <li><Link href="/partner" className="hover:text-white">事業者様向け（掲載案内）</Link></li>
               <li><Link href="/privacy" className="hover:text-white">プライバシーポリシー</Link></li>
@@ -134,7 +134,7 @@ export function Footer() {
         {/* 人気魚種リンク */}
         <div className="mt-6 border-t border-white/10 pt-6">
           <h3 className="mb-3 text-sm font-semibold text-sea-foam">人気の釣りターゲット</h3>
-          <div className="flex flex-wrap gap-2 text-xs text-blue-100/60">
+          <div className="flex flex-wrap gap-2 text-xs text-blue-100/80">
             <Link href="/fish/aji" className="hover:text-white">アジの釣り方</Link>
             <span>·</span>
             <Link href="/fish/saba" className="hover:text-white">サバの釣り方</Link>
@@ -155,14 +155,14 @@ export function Footer() {
             <span>·</span>
             <Link href="/fish/karei" className="hover:text-white">カレイの釣り方</Link>
             <span>·</span>
-            <Link href="/fish" className="hover:text-foreground font-medium">魚種図鑑一覧 →</Link>
+            <Link href="/fish" className="hover:text-white font-medium">魚種図鑑一覧 →</Link>
           </div>
         </div>
 
         {/* 釣り方ガイドリンク */}
         <div className="mt-6 border-t border-white/10 pt-6">
           <h3 className="mb-3 text-sm font-semibold text-sea-foam">釣り方ガイド</h3>
-          <div className="flex flex-wrap gap-2 text-xs text-blue-100/60">
+          <div className="flex flex-wrap gap-2 text-xs text-blue-100/80">
             <Link href="/methods/sabiki" className="hover:text-white">サビキ釣り</Link>
             <span>·</span>
             <Link href="/methods/choi-nage" className="hover:text-white">ちょい投げ</Link>
@@ -179,14 +179,14 @@ export function Footer() {
             <span>·</span>
             <Link href="/methods/ana-zuri" className="hover:text-white">穴釣り</Link>
             <span>·</span>
-            <Link href="/methods" className="hover:text-foreground font-medium">釣り方一覧 →</Link>
+            <Link href="/methods" className="hover:text-white font-medium">釣り方一覧 →</Link>
           </div>
         </div>
 
         {/* 人気都道府県リンク */}
         <div className="mt-6 border-t border-white/10 pt-6">
           <h3 className="mb-3 text-sm font-semibold text-sea-foam">人気エリアの釣りスポット</h3>
-          <div className="flex flex-wrap gap-2 text-xs text-blue-100/60">
+          <div className="flex flex-wrap gap-2 text-xs text-blue-100/80">
             <Link href="/prefecture/hokkaido" className="hover:text-white">北海道の釣り場</Link>
             <span>·</span>
             <Link href="/prefecture/tokyo" className="hover:text-white">東京の釣り場</Link>
@@ -209,11 +209,11 @@ export function Footer() {
             <span>·</span>
             <Link href="/prefecture/okinawa" className="hover:text-white">沖縄の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture" className="hover:text-foreground font-medium">全都道府県一覧 →</Link>
+            <Link href="/prefecture" className="hover:text-white font-medium">全都道府県一覧 →</Link>
           </div>
         </div>
 
-        <div className="mt-6 border-t border-white/10 pt-6 text-center text-sm text-blue-100/60">
+        <div className="mt-6 border-t border-white/10 pt-6 text-center text-sm text-blue-100/80">
           <p>&copy; 2025-2026 ツリスポ All rights reserved.</p>
           <p className="mt-1 text-xs">
             創設者・編集長: 正木 家康｜運営開始: 2025年｜掲載スポット: 2,100箇所以上｜特許出願中（特願2026-042836）
@@ -221,7 +221,7 @@ export function Footer() {
           <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed">
             当サイトはAmazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。
           </p>
-          <p className="mx-auto mt-1 max-w-xl text-xs leading-relaxed text-blue-100/50">
+          <p className="mx-auto mt-1 max-w-xl text-xs leading-relaxed text-blue-100/70">
             また、楽天アフィリエイトにも参加しています。商品リンクからの購入で当サイトに報酬が支払われることがありますが、ユーザーに追加費用は発生しません。
           </p>
         </div>
@@ -229,13 +229,13 @@ export function Footer() {
 
       {/* Mobile footer - compact version with essential links */}
       <div className="px-4 pb-24 pt-6 md:hidden">
-        <div className="mb-4 flex justify-center gap-4">
+        <div className="mb-4 flex justify-center gap-4 [&>a]:inline-flex [&>a]:min-h-[44px] [&>a]:items-center">
           <a
             href="https://www.instagram.com/tsurispotjapan/"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="公式Instagram"
-            className="inline-flex items-center gap-2 text-sm text-blue-100/70 hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-blue-100/90 hover:text-white transition-colors"
           >
             <svg
               viewBox="0 0 24 24"
@@ -252,7 +252,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="公式X（Twitter）"
-            className="inline-flex items-center gap-2 text-sm text-blue-100/70 hover:text-white transition-colors"
+            className="inline-flex items-center gap-2 text-sm text-blue-100/90 hover:text-white transition-colors"
           >
             <svg
               viewBox="0 0 24 24"
@@ -279,13 +279,13 @@ export function Footer() {
             </a>
           )}
         </div>
-        <div className="flex flex-wrap justify-center gap-x-3 gap-y-2 text-xs text-blue-100/60 mb-3">
+        <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 text-xs text-blue-100/80 mb-3 [&>a]:inline-flex [&>a]:min-h-[44px] [&>a]:items-center [&>a]:px-1">
           <Link href="/fishing-spots/near-me" className="hover:text-white font-medium">近くの釣り場</Link>
           <Link href="/fishing-spots/breakwater-beginner" className="hover:text-white">堤防釣り初心者</Link>
           <Link href="/fishing-spots/best-saltwater" className="hover:text-white">海釣りおすすめ</Link>
           <Link href="/ranking" className="hover:text-white">人気ランキング</Link>
         </div>
-        <div className="flex flex-wrap justify-center gap-x-4 gap-y-2 text-xs text-blue-100/60">
+        <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs text-blue-100/80 [&>a]:inline-flex [&>a]:min-h-[44px] [&>a]:items-center [&>a]:px-1">
           <Link href="/blog" className="hover:text-white">エリア釣果レポート</Link>
           <Link href="/about" className="hover:text-white">ツリスポについて</Link>
           <Link href="/partner" className="hover:text-white">事業者様向け</Link>
@@ -293,13 +293,13 @@ export function Footer() {
           <Link href="/terms" className="hover:text-white">利用規約</Link>
           <Link href="/legal" className="hover:text-white">特商法表記</Link>
         </div>
-        <p className="mt-3 text-center text-xs text-blue-100/60">
+        <p className="mt-3 text-center text-xs text-blue-100/80">
           &copy; 2025-2026 ツリスポ
         </p>
-        <p className="mt-1 text-center text-[10px] text-blue-100/50">
+        <p className="mt-1 text-center text-[10px] text-blue-100/70">
           創設者: 正木 家康｜特許出願中
         </p>
-        <p className="mx-auto mt-2 max-w-xs text-center text-[11px] leading-relaxed text-blue-100/50">
+        <p className="mx-auto mt-2 max-w-xs text-center text-[11px] leading-relaxed text-blue-100/70">
           Amazonアソシエイト・プログラム参加者｜楽天アフィリエイト参加
         </p>
       </div>
