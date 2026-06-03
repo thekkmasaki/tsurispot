@@ -131,7 +131,7 @@ function buildPopupHtml(spot: MapSpot, isFav: boolean, crowd: CrowdPrediction | 
       ${img}
       <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
         <h3 style="margin:0;font-size:14px;font-weight:700;line-height:1.3;color:#111827">${escapeHtml(spot.name)}</h3>
-        <button data-fav-slug="${escapeHtml(spot.slug)}" data-fav-state="${isFav ? '1' : '0'}" aria-label="お気に入り" style="background:none;border:none;cursor:pointer;padding:2px;flex-shrink:0;line-height:0">${heartSvg(isFav)}</button>
+        <button data-fav-slug="${escapeHtml(spot.slug)}" data-fav-state="${isFav ? '1' : '0'}" aria-label="お気に入り" aria-pressed="${isFav ? 'true' : 'false'}" style="background:none;border:none;cursor:pointer;padding:2px;flex-shrink:0;line-height:0">${heartSvg(isFav)}</button>
       </div>
       <div style="display:flex;align-items:center;gap:6px;margin-top:6px;font-size:11px;color:#4b5563;flex-wrap:wrap">
         <span>${escapeHtml(spot.region.prefecture)} ${escapeHtml(spot.region.areaName)}</span>
@@ -318,6 +318,7 @@ function ClusteredSpotMarkers({ spots }: { spots: MapSpot[] }) {
       // この popup の DOM を即時更新（再開時にも反映）
       const newFav = !isCurrentlyFav;
       target.dataset.favState = newFav ? '1' : '0';
+      target.setAttribute('aria-pressed', newFav ? 'true' : 'false');
       target.innerHTML = heartSvg(newFav);
     };
     const container = map.getContainer();
@@ -608,6 +609,8 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
       <div className="flex items-center justify-between gap-2">
         <button
           onClick={() => setFiltersOpen((v) => !v)}
+          aria-expanded={filtersOpen}
+          aria-controls="map-filters"
           className="flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium text-foreground hover:bg-muted/60 transition-colors"
         >
           <SlidersHorizontal className="size-4" />
@@ -653,8 +656,12 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
             <Info className="size-3.5" />
             <span className="hidden sm:inline">凡例</span>
           </button>
-          <div className="flex items-center gap-1.5 text-sm text-muted-foreground">
-            <MapPin className="size-3.5" />
+          <div
+            className="flex items-center gap-1.5 text-sm text-muted-foreground"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            <MapPin className="size-3.5" aria-hidden="true" />
             <span className="font-medium tabular-nums">{filteredSpots.length.toLocaleString()}件</span>
             <span className="hidden sm:inline">のスポットを表示中</span>
           </div>
@@ -701,7 +708,12 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
       )}
 
       {filtersOpen && (
-        <div className="space-y-2 rounded-lg border bg-card p-3">
+        <div
+          id="map-filters"
+          role="group"
+          aria-label="スポットの絞り込み"
+          className="space-y-2 rounded-lg border bg-card p-3"
+        >
           <div className="flex flex-wrap items-center gap-2">
             <span className="text-xs font-medium text-muted-foreground sm:text-sm">地域:</span>
             <button
@@ -712,6 +724,7 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
                 setShowAllFish(false);
                 setNearbyMode(false);
               }}
+              aria-pressed={selectedPrefectures.size === 0 && !nearbyMode}
               className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors min-h-[36px] sm:text-sm ${
                 selectedPrefectures.size === 0 && !nearbyMode
                   ? 'bg-primary text-primary-foreground'
@@ -753,7 +766,12 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
             )}
           </div>
           {REGION_GROUPS.map((group) => (
-            <div key={group.label} className="flex flex-wrap items-center gap-1.5">
+            <div
+              key={group.label}
+              role="group"
+              aria-label={`${group.label}の都道府県で絞り込み`}
+              className="flex flex-wrap items-center gap-1.5"
+            >
               <span className="w-14 shrink-0 text-[10px] font-medium text-muted-foreground sm:text-xs">
                 {group.label}
               </span>
@@ -761,6 +779,7 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
                 <button
                   key={pref}
                   onClick={() => togglePrefecture(pref)}
+                  aria-pressed={selectedPrefectures.has(pref)}
                   className={`rounded-full px-2.5 py-1 text-[10px] font-medium transition-colors min-h-[32px] sm:text-xs ${
                     selectedPrefectures.has(pref)
                       ? 'bg-blue-600 text-white'
@@ -824,6 +843,7 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
                       <button
                         key={name}
                         onClick={() => toggleArea(name)}
+                        aria-pressed={selectedAreas.has(name)}
                         className={`rounded-full px-2.5 py-1 text-[10px] font-medium transition-colors min-h-[28px] sm:text-xs ${
                           selectedAreas.has(name)
                             ? 'bg-emerald-600 text-white'
@@ -848,13 +868,18 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
             </div>
           )}
           {availableFish.length > 0 && (
-            <div className="flex flex-wrap items-center gap-1.5 rounded-lg bg-orange-50 p-2">
+            <div
+              role="group"
+              aria-label="魚種で絞り込み"
+              className="flex flex-wrap items-center gap-1.5 rounded-lg bg-orange-50 p-2"
+            >
               <span className="flex w-14 shrink-0 items-center gap-0.5 text-[10px] font-medium text-orange-700 sm:text-xs">
-                <Fish className="size-3" />
+                <Fish className="size-3" aria-hidden="true" />
                 魚種
               </span>
               <button
                 onClick={() => setSelectedFish(new Set())}
+                aria-pressed={selectedFish.size === 0}
                 className={`rounded-full px-2.5 py-1 text-[10px] font-medium transition-colors min-h-[28px] sm:text-xs ${
                   selectedFish.size === 0
                     ? 'bg-orange-600 text-white'
@@ -868,6 +893,7 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
                   <button
                     key={slug}
                     onClick={() => toggleFish(slug)}
+                    aria-pressed={selectedFish.has(slug)}
                     className={`rounded-full px-2.5 py-1 text-[10px] font-medium transition-colors min-h-[28px] sm:text-xs ${
                       selectedFish.has(slug)
                         ? 'bg-orange-600 text-white'
