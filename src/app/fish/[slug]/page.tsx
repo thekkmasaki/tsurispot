@@ -725,20 +725,17 @@ export default async function FishDetailPage({ params }: PageProps) {
             <p className="mb-3 text-sm text-muted-foreground">
               {fish.name}が釣れる都道府県と時期の詳しい情報はこちら
             </p>
+            {/* noindex の月×魚種ページへのクロール集中を避けるためテキスト表示に留める（県別の遷移は上部の pref×fish リンクに集約済み） */}
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {topPrefMonthLinks.map((link) => (
-                <Link
+                <Badge
                   key={`${link.prefSlug}-${link.monthSlug}`}
-                  href={`/prefecture/${link.prefSlug}/${link.monthSlug}/${fish.slug}`}
+                  variant="outline"
+                  className="px-2.5 py-1.5 text-xs sm:text-sm"
                 >
-                  <Badge
-                    variant="outline"
-                    className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
-                  >
-                    {link.prefName}の{link.monthName}
-                    <span className="ml-1 text-muted-foreground">({link.count}件)</span>
-                  </Badge>
-                </Link>
+                  {link.prefName}の{link.monthName}
+                  <span className="ml-1 text-muted-foreground">({link.count}件)</span>
+                </Badge>
               ))}
             </div>
           </section>
