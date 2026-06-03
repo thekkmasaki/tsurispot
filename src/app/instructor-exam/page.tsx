@@ -461,7 +461,7 @@ export default function InstructorExamPage() {
             </li>
             <li>
               <Link
-                href="/guide/equipment"
+                href="/gear"
                 className="font-medium text-green-700 underline hover:text-green-900"
               >
                 釣り道具ガイド
