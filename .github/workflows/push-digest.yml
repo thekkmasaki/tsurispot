@@ -1,0 +1,100 @@
+name: Push 週次配信（釣果週報リテンション）
+
+# 眠っていた再訪エンジン（/api/push/send）を起動するための定期トリガー。
+# 購読者は Redis SET push:subscriptions（匿名 OK）に蓄積され、 ここから一斉配信する。
+# 通知疲れ回避のためまず週 1 本（月曜昼）。 効果を見て金曜「週末おすすめ」を追加検討。
+
+on:
+  schedule:
+    - cron: '0 3 * * 1'    # JST 12:00 月曜（釣果週報ダイジェスト）
+  workflow_dispatch:
+    inputs:
+      title:
+        description: '通知タイトル'
+        required: false
+        default: '今週の釣果週報が出ました🎣'
+      body:
+        description: '通知本文'
+        required: false
+        default: '全国の今週釣れた魚をエリア別にチェック'
+      url:
+        description: '遷移先パス（utm 付き推奨）'
+        required: false
+        default: '/catch-reports?utm_source=push&utm_medium=web_push&utm_campaign=weekly'
+
+env:
+  SITE_BASE_URL: https://tsurispot.com
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: ペイロード組み立て（schedule 起動時はデフォルト補完）
+        id: payload
+        run: |
+          TITLE="${{ github.event.inputs.title }}"
+          BODY="${{ github.event.inputs.body }}"
+          URL="${{ github.event.inputs.url }}"
+          TITLE="${TITLE:-今週の釣果週報が出ました🎣}"
+          BODY="${BODY:-全国の今週釣れた魚をエリア別にチェック}"
+          URL="${URL:-/catch-reports?utm_source=push&utm_medium=web_push&utm_campaign=weekly}"
+          PAYLOAD=$(jq -n --arg t "$TITLE" --arg b "$BODY" --arg u "$URL" \
+            '{title:$t, body:$b, url:$u, tag:"weekly"}')
+          # 複数行を安全に GITHUB_OUTPUT へ
+          {
+            echo 'payload<<EOF'
+            echo "$PAYLOAD"
+            echo 'EOF'
+          } >> "$GITHUB_OUTPUT"
+          echo "配信ペイロード: $PAYLOAD"
+
+      - name: Web Push 全件配信
+        env:
+          ADMIN_RECONCILE_TOKEN: ${{ secrets.ADMIN_RECONCILE_TOKEN }}
+        run: |
+          RESP=$(curl -s -w "\n%{http_code}" -X POST "${SITE_BASE_URL}/api/push/send" \
+            -H "Authorization: Bearer ${ADMIN_RECONCILE_TOKEN}" \
+            -H "Content-Type: application/json" \
+            --data '${{ steps.payload.outputs.payload }}')
+          CODE=$(echo "$RESP" | tail -n1)
+          BODY=$(echo "$RESP" | sed '$d')
+          echo "HTTP $CODE / $BODY"
+          if [ "$CODE" != "200" ]; then
+            echo "::error::push/send 失敗 (HTTP $CODE)"
+            exit 1
+          fi
+
+      - name: LINE ブロードキャスト（任意・repo variable LINE_BROADCAST_ENABLED=true で有効化）
+        if: vars.LINE_BROADCAST_ENABLED == 'true'
+        env:
+          ADMIN_RECONCILE_TOKEN: ${{ secrets.ADMIN_RECONCILE_TOKEN }}
+        run: |
+          RESP=$(curl -s -w "\n%{http_code}" -X POST "${SITE_BASE_URL}/api/line/broadcast" \
+            -H "Authorization: Bearer ${ADMIN_RECONCILE_TOKEN}" \
+            -H "Content-Type: application/json" \
+            --data '${{ steps.payload.outputs.payload }}')
+          CODE=$(echo "$RESP" | tail -n1)
+          BODY=$(echo "$RESP" | sed '$d')
+          echo "HTTP $CODE / $BODY"
+          if [ "$CODE" != "200" ]; then
+            echo "::error::line/broadcast 失敗 (HTTP $CODE)"
+            exit 1
+          fi
+
+      - name: Discord通知（成功）
+        if: success() && env.DISCORD_WEBHOOK_URL != ''
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          curl -s -H "Content-Type: application/json" \
+            -d "{\"content\":\"✅ **Push 週次配信** 成功\"}" \
+            "$DISCORD_WEBHOOK_URL"
+
+      - name: Discord通知（失敗）
+        if: failure() && env.DISCORD_WEBHOOK_URL != ''
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          curl -s -H "Content-Type: application/json" \
+            -d "{\"content\":\"❌ **Push 週次配信** 失敗\\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
+            "$DISCORD_WEBHOOK_URL"
