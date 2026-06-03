@@ -9,6 +9,8 @@ import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import { fishingSpots } from "@/lib/data/spots";
 import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { ProductList } from "@/components/affiliate/product-list";
+import { getProductsByMethod } from "@/lib/data/products";
 
 export const metadata: Metadata = {
   title: "ショアジギング入門ガイド - メタルジグで青物を狙う",
@@ -763,6 +765,16 @@ export default function JiggingGuidePage() {
 
         {/* この釣り方で釣れる魚 */}
         <CatchableFishSection guideSlug="jigging" title="ショアジギングで釣れる魚" />
+
+        {/* ショアジギングにおすすめの道具（アフィリエイト） */}
+        <section className="mt-8 sm:mt-10">
+          <ProductList
+            products={getProductsByMethod("shorejigging")}
+            title="ショアジギングにおすすめの道具"
+            description="ショアジギング入門に。メタルジグやタックルはこのあたりがおすすめです。"
+            pageType="guide"
+          />
+        </section>
 
         {/* 関連ガイド */}
         <div className="mt-8 sm:mt-12">

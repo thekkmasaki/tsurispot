@@ -8,6 +8,8 @@ import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import type { YouTubeSearchLink } from "@/types";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { ProductList } from "@/components/affiliate/product-list";
+import { getBeginnerEssentials } from "@/lib/data/products";
 
 const setupVideos: YouTubeSearchLink[] = [
   {
@@ -1165,6 +1167,17 @@ export default function SetupGuidePage() {
               description="セッティングを覚えたら実際の釣り動画を参考にしましょう。"
             />
           </div>
+        </section>
+
+        {/* 初心者におすすめの道具（アフィリエイト） */}
+        <section className="mt-8 sm:mt-10">
+          <ProductList
+            products={getBeginnerEssentials()}
+            title="初心者にまず揃えてほしい道具"
+            description="この記事のセッティングに必要な竿・リール・仕掛けの基本セット。迷ったらこのあたりから。"
+            maxItems={8}
+            pageType="guide"
+          />
         </section>
 
         {/* 次のステップ */}

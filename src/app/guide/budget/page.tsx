@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ProductList } from "@/components/affiliate/product-list";
+import { getTopProducts } from "@/lib/data/products";
 import {
   ChevronLeft,
   DollarSign,
@@ -800,6 +802,16 @@ export default function BudgetGuidePage() {
             </div>
           </div>
         </div>
+
+        {/* 予算で選ぶおすすめの道具（アフィリエイト） */}
+        <section className="mt-8 sm:mt-10">
+          <ProductList
+            products={getTopProducts(6)}
+            title="まず買うならこの道具"
+            description="コスパ重視で選んだ、最初に揃えたい定番アイテム。予算を抑えつつ長く使えるものを集めました。"
+            pageType="guide"
+          />
+        </section>
 
         {/* 次のステップ */}
         <div className="mt-8 text-center sm:mt-12">

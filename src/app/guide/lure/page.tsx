@@ -9,6 +9,8 @@ import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import { fishingSpots } from "@/lib/data/spots";
 import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { ProductList } from "@/components/affiliate/product-list";
+import { getProductsByMethod } from "@/lib/data/products";
 
 export const metadata: Metadata = {
   title: "ルアー釣り入門ガイド - ルアーの種類・選び方・アクションを解説",
@@ -676,6 +678,16 @@ export default function LureGuidePage() {
 
         {/* この釣り方で釣れる魚 */}
         <CatchableFishSection guideSlug="lure" title="ルアー釣りで釣れる魚" />
+
+        {/* ルアー釣りにおすすめの道具（アフィリエイト） */}
+        <section className="mt-8 sm:mt-10">
+          <ProductList
+            products={getProductsByMethod("lure")}
+            title="ルアー釣りにおすすめの道具"
+            description="ルアーフィッシングを始めるなら。ロッド・リール・ルアーの基本はこのあたりから揃えましょう。"
+            pageType="guide"
+          />
+        </section>
 
         {/* 関連ガイド */}
         <div className="mt-8 sm:mt-12">

@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ProductList } from "@/components/affiliate/product-list";
+import { getTopProducts } from "@/lib/data/products";
 import {
   ChevronLeft,
   ChevronRight,
@@ -792,6 +794,16 @@ export default function FishingGearGuidePage() {
               ))}
             </div>
           </SectionCard>
+
+          {/* 釣り初心者におすすめの道具（アフィリエイト） */}
+          <section className="mb-8">
+            <ProductList
+              products={getTopProducts(8)}
+              title="釣り初心者におすすめの道具"
+              description="まず揃えたい釣り道具をまとめました。迷ったらこのあたりから始めましょう。"
+              pageType="guide"
+            />
+          </section>
 
           {/* 10. 関連ガイド */}
           <section id="related">
