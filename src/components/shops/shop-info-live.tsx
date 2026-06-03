@@ -11,6 +11,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { useEffectivePlan, type EffectivePlan } from "./use-effective-plan";
 
 interface ShopInfoLiveProps {
   shopSlug: string;
@@ -22,7 +23,8 @@ interface ShopInfoLiveProps {
   parkingDetail?: string;
   hasParking?: boolean;
   services: string[];
-  isPro: boolean;
+  isSample: boolean;
+  staticPlan: EffectivePlan;
   ownerMessage?: string;
 }
 
@@ -46,9 +48,12 @@ export function ShopInfoLive({
   parkingDetail,
   hasParking,
   services: staticServices,
-  isPro,
+  isSample,
+  staticPlan,
   ownerMessage: staticOwnerMessage,
 }: ShopInfoLiveProps) {
+  const plan = useEffectivePlan(shopSlug, isSample, staticPlan);
+  const isPro = plan === "pro";
   const [override, setOverride] = useState<ShopInfoOverride | null>(null);
 
   useEffect(() => {

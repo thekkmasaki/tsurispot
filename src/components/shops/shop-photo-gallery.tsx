@@ -5,25 +5,33 @@ import Image from "next/image";
 import { Camera, ImageIcon, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { useEffectivePlan, type EffectivePlan } from "./use-effective-plan";
 
 interface ShopPhotoGalleryProps {
   shopSlug: string;
-  isPro: boolean;
-  isBasic: boolean;
+  isSample: boolean;
+  /** 静的 planLevel（フォールバック・サンプル用） */
+  staticPlan: EffectivePlan;
   /** 静的データの写真（フォールバック用） */
   staticPhotos?: string[];
 }
 
 export function ShopPhotoGallery({
   shopSlug,
-  isPro,
-  isBasic,
+  isSample,
+  staticPlan,
   staticPhotos,
 }: ShopPhotoGalleryProps) {
+  const plan = useEffectivePlan(shopSlug, isSample, staticPlan);
+  const isPro = plan === "pro";
+  const isBasic = plan === "basic";
+  const isPaid = isPro || isBasic;
+
   const [photos, setPhotos] = useState<string[]>(staticPhotos || []);
   const [lightboxUrl, setLightboxUrl] = useState<string | null>(null);
 
   useEffect(() => {
+    if (!isPaid) return;
     fetch(`/api/shop-photos?shop=${shopSlug}`)
       .then((r) => r.json())
       .then((data) => {
@@ -32,12 +40,12 @@ export function ShopPhotoGallery({
         }
       })
       .catch(() => {});
-  }, [shopSlug]);
+  }, [shopSlug, isPaid]);
 
   const maxPhotos = isPro ? undefined : 3;
   const displayPhotos = maxPhotos ? photos.slice(0, maxPhotos) : photos;
 
-  if (displayPhotos.length === 0) return null;
+  if (!isPaid || displayPhotos.length === 0) return null;
 
   return (
     <>

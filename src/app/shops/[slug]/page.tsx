@@ -10,7 +10,6 @@ import {
   Store,
   Sparkles,
   Mail,
-  Tag,
   HelpCircle,
   Calendar,
   Fish,
@@ -29,6 +28,8 @@ import { ShopPhotoGallery } from "@/components/shops/shop-photo-gallery";
 import { ShopListingForm } from "@/components/shops/shop-listing-form";
 import { PaidPlanInquiry } from "@/components/shops/paid-plan-inquiry";
 import { NoAdsSignal } from "@/components/ads/no-ads-signal";
+import { ShopPlanBadge } from "@/components/shops/shop-plan-badge";
+import { ShopCouponCard } from "@/components/shops/shop-coupon-card";
 
 type Params = Promise<{ slug: string }>;
 
@@ -84,7 +85,6 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
   const planLevel = shop.planLevel || "free";
   const isBasic = planLevel === "basic";
   const isPro = planLevel === "pro";
-  const isPaid = isBasic || isPro;
 
   // LocalBusiness JSON-LD
   const localBusinessJsonLd = {
@@ -216,7 +216,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
       {/* 有料プラン店舗・サンプルページは広告非表示 */}
-      {(isPaid || isSample) && <NoAdsSignal />}
+      <NoAdsSignal shopSlug={shop.slug} isSample={isSample} staticPlan={planLevel} />
       {shouldOutputJsonLd && (
         <script
           type="application/ld+json"
@@ -266,16 +266,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
         </div>
         {/* プランバッジ */}
         <div className="flex flex-wrap items-center gap-2 mt-1">
-          {isPro && (
-            <Badge variant="default" className="bg-amber-500 hover:bg-amber-600">
-              プロ掲載店
-            </Badge>
-          )}
-          {isBasic && (
-            <Badge variant="default" className="bg-blue-500 hover:bg-blue-600">
-              公式掲載店
-            </Badge>
-          )}
+          <ShopPlanBadge shopSlug={shop.slug} isSample={isSample} staticPlan={planLevel} />
           {isSample && (
             <Badge variant="outline" className="text-xs text-muted-foreground">
               {slug === "sample-free" ? "無料掲載" : isPro ? "プロプラン ¥2,980/月" : "ベーシックプラン ¥500/月"} サンプル
@@ -306,35 +297,21 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
         </Card>
       )}
 
-      {/* 写真ギャラリー（ベーシック以上） */}
-      {isPaid && (
-        <ShopPhotoGallery
-          shopSlug={shop.slug}
-          isPro={isPro}
-          isBasic={isBasic}
-          staticPhotos={shop.photos}
-        />
-      )}
+      {/* 写真ギャラリー（実効プランが有料なら内部で表示） */}
+      <ShopPhotoGallery
+        shopSlug={shop.slug}
+        isSample={isSample}
+        staticPlan={planLevel}
+        staticPhotos={shop.photos}
+      />
 
-      {/* プロ限定: クーポン */}
-      {isPro && shop.coupon && (
-        <Card className="mb-6 border-amber-200 bg-gradient-to-br from-amber-50/50 to-transparent dark:from-amber-950/10">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-base flex items-center gap-2">
-              <Tag className="w-5 h-5 text-amber-600" />
-              クーポン
-              <Badge variant="outline" className="text-[10px] text-amber-600 border-amber-300">プロ限定</Badge>
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="rounded-lg border-2 border-dashed border-amber-300 bg-white dark:bg-background p-4 text-center">
-              <p className="text-lg font-bold text-amber-700">{shop.coupon.title}</p>
-              <p className="mt-1 text-sm">{shop.coupon.description}</p>
-              <p className="mt-2 text-xs text-muted-foreground">有効期限: {shop.coupon.validUntil}</p>
-            </div>
-          </CardContent>
-        </Card>
-      )}
+      {/* プロ限定: クーポン（実効プランが pro なら内部で表示） */}
+      <ShopCouponCard
+        shopSlug={shop.slug}
+        isSample={isSample}
+        staticPlan={planLevel}
+        coupon={shop.coupon}
+      />
 
       {/* ベーシック: クーポン枠の案内 */}
       {isBasic && isSample && (
@@ -360,7 +337,8 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
           parkingDetail={shop.parkingDetail}
           hasParking={shop.hasParking}
           services={shop.services}
-          isPro={isPro}
+          isSample={isSample}
+          staticPlan={planLevel}
           ownerMessage={shop.ownerMessage}
         />
 
