@@ -10,7 +10,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { LoginPromoBanner } from "@/components/home/login-promo-banner";
 import { PushSubscribe } from "@/components/notifications/push-subscribe";
-import { LoggedInOnly } from "@/components/auth/logged-in-only";
 import { RecentlyViewedSpots } from "@/components/spots/recently-viewed";
 import { RecentCatchReports } from "@/components/home/recent-catch-reports";
 import { JoinCTA } from "@/components/home/join-cta";
@@ -422,22 +421,22 @@ export default async function Home() {
       {/* ログイン誘導バナー（未ログイン時のみ表示、 features 詳細訴求） */}
       <LoginPromoBanner />
 
-      {/* UX-6: PushSubscribe CTA はログイン user のみ表示 (未ログインは LoginPromoBanner と CTA 重複するため) */}
-      <LoggedInOnly>
-        <section className="mx-auto w-full max-w-5xl px-4 py-4">
-          <div className="rounded-2xl border-2 border-sky-200 bg-gradient-to-r from-sky-50 to-cyan-50 p-4 sm:p-5">
-            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-              <div>
-                <h2 className="text-sm font-bold text-sky-900 sm:text-base">釣果情報をブラウザで受け取る</h2>
-                <p className="mt-1 text-xs text-sky-700 sm:text-sm">
-                  週次の釣果週報・新着スポットをプッシュ通知でお届け。 いつでも解除できます。
-                </p>
-              </div>
-              <PushSubscribe />
+      {/* リテンション施策: Push 購読 CTA を全訪問者に表示（ログイン不要。 /api/push/subscribe は匿名 OK）。
+          LoginPromoBanner は「アカウント登録の価値」、 こちらは「登録不要の通知購読」と訴求を分離し、
+          月 9.6 万人の未ログイン訪問者を再訪チャネル（push:subscriptions）に取り込む。 */}
+      <section className="mx-auto w-full max-w-5xl px-4 py-4">
+        <div className="rounded-2xl border-2 border-sky-200 bg-gradient-to-r from-sky-50 to-cyan-50 p-4 sm:p-5">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h2 className="text-sm font-bold text-sky-900 sm:text-base">🎣 今週の釣果を見逃さない</h2>
+              <p className="mt-1 text-xs text-sky-700 sm:text-sm">
+                <span className="font-semibold">ログイン不要</span>。 週次の釣果週報・新着スポットをブラウザ通知でお届け。 いつでも解除できます。
+              </p>
             </div>
+            <PushSubscribe />
           </div>
-        </section>
-      </LoggedInOnly>
+        </div>
+      </section>
 
       {/* クイックアクション */}
       <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
