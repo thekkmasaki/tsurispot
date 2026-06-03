@@ -55,6 +55,16 @@ export function DashboardClient() {
     }
   }, [slug, shop]);
 
+  // Stripe 課金完了（success_url の ?subscribed=true）を GA4 に計測し、課金ファネル（問い合わせ→決済）の CVR を可視化する
+  useEffect(() => {
+    if (searchParams.get("subscribed") !== "true") return;
+    const plan = searchParams.get("plan") || shop?.planLevel || "unknown";
+    if (typeof window !== "undefined" && typeof window.gtag === "function") {
+      window.gtag("event", "shop_subscription", { shop_slug: slug, plan });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams, slug]);
+
   if (!shop) {
     return (
       <div className="mx-auto max-w-2xl px-4 py-12 text-center">
