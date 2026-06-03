@@ -17,6 +17,7 @@ import { markerIconHtml, SPOT_TYPE_COLORS, CROWD_LEVEL_HEX } from '@/lib/map-mar
 import { getFavorites } from '@/hooks/use-favorites';
 import { SpotSearch } from '@/components/map/spot-search';
 import { SpotMapList } from '@/components/map/spot-map-list';
+import { MapAffiliateRecommend } from '@/components/map/map-affiliate-recommend';
 import {
   Sheet,
   SheetContent,
@@ -541,6 +542,31 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
     );
   }, [locationFilteredSpots, selectedFish]);
 
+  // リストSheet上部のアフィリエイト導線用に、表示中スポットから釣れる魚・釣り方を頻度集計（上位）する。
+  const listAffiliateContext = useMemo(() => {
+    const fishCount = new Map<string, number>();
+    const methodCount = new Map<string, number>();
+    const prefCount = new Map<string, number>();
+    let isNight = false;
+    filteredSpots.forEach((s) => {
+      s.fishNames.forEach((n) => fishCount.set(n, (fishCount.get(n) ?? 0) + 1));
+      s.methods.forEach((m) => methodCount.set(m, (methodCount.get(m) ?? 0) + 1));
+      prefCount.set(s.region.prefecture, (prefCount.get(s.region.prefecture) ?? 0) + 1);
+      if (s.isNightFishing) isNight = true;
+    });
+    const top = (m: Map<string, number>, n: number) =>
+      Array.from(m.entries())
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, n)
+        .map(([k]) => k);
+    return {
+      fishNames: top(fishCount, 6),
+      methods: top(methodCount, 6),
+      prefecture: top(prefCount, 1)[0],
+      isNightFishing: isNight,
+    };
+  }, [filteredSpots]);
+
   const { mapCenter, mapZoom } = useMemo((): {
     mapCenter: [number, number];
     mapZoom: number;
@@ -938,6 +964,13 @@ export function SpotMap({ spots }: { spots: MapSpot[] }) {
               カードをタップすると地図がそのスポットに移動します。
             </SheetDescription>
           </SheetHeader>
+          <MapAffiliateRecommend
+            methods={listAffiliateContext.methods}
+            fishNames={listAffiliateContext.fishNames}
+            isNightFishing={listAffiliateContext.isNightFishing}
+            prefecture={listAffiliateContext.prefecture}
+            spotCount={filteredSpots.length}
+          />
           <SpotMapList spots={filteredSpots} onSelect={handleListSelect} />
         </SheetContent>
       </Sheet>
