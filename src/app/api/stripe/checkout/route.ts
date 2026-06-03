@@ -58,7 +58,7 @@ export async function POST(request: NextRequest) {
     mode: "subscription",
     line_items: [{ price: priceId, quantity: 1 }],
     metadata: { shopSlug, plan },
-    success_url: `${origin}/shops/${shopSlug}/dashboard?token=${token}&subscribed=true`,
+    success_url: `${origin}/shops/${shopSlug}/dashboard?token=${token}&subscribed=true&plan=${plan}`,
     cancel_url: `${origin}/subscribe/${plan}?shop=${shopSlug}&token=${token}`,
     locale: "ja",
   };
