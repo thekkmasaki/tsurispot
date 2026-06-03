@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { notFound } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import {
   Fish,
   Thermometer,
@@ -53,7 +53,7 @@ interface Props {
   params: Promise<{ month: string }>;
 }
 
-export const dynamicParams = false;
+// dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため撤廃。未知 param は下記で親へ 301。
 
 export async function generateStaticParams() {
   return monthSlugs.map((slug) => ({ month: slug }));
@@ -116,7 +116,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function MonthlyGuidePage({ params }: Props) {
   const { month } = await params;
   const guide = getMonthlyGuide(month);
-  if (!guide) notFound();
+  if (!guide) permanentRedirect("/monthly");
 
   // その月に釣れる魚をfish.tsから取得
   const allFishForMonth = fishSpecies

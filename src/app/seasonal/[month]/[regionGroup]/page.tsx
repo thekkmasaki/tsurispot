@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { notFound } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import {
   Fish,
   MapPin,
@@ -110,7 +110,7 @@ function getSeasonalTips(season: string, regionName: string): string[] {
 }
 
 // 12ヶ月 × 8地域 = 96ページ
-export const dynamicParams = false;
+// dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため撤廃。未知 param は本体で /seasonal へ 301。
 
 export function generateStaticParams() {
   const params: { month: string; regionGroup: string }[] = [];
@@ -176,7 +176,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
   const { month: monthSlug, regionGroup: regionSlug } = await params;
   const monthDef = MONTHS.find((m) => m.slug === monthSlug);
   const regionName = getRegionGroupBySlug(regionSlug);
-  if (!monthDef || !regionName) notFound();
+  if (!monthDef || !regionName) permanentRedirect("/seasonal");
 
   const rSlug = toRegionSlug(regionSlug);
 

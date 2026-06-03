@@ -10,30 +10,40 @@ const withBundleAnalyzer = bundleAnalyzer({
 // 生存しているslugの集合
 const liveSlugSet = new Set(fishingSpots.map(s => s.slug));
 
-// spot-redirects.json + dedup自動リダイレクトを統合
-// リダイレクト先が生存していない場合はdedupRedirectsで解決を試みる
+// spot-redirects.json + dedup自動リダイレクトを統合。
+// チェーン(A→B→C)を最終生存slugまで解決し、常に1ホップの301にする（GSCのリダイレクトエラー対策）。
 const allRedirects = new Map<string, string>();
+
+// oldSlug を生存している最終ターゲットまで解決（JSON→dedup を辿る・ループ防止つき）
+function resolveTarget(slug: string, seen = new Set<string>()): string | null {
+  if (liveSlugSet.has(slug)) return slug; // 生存 → 確定
+  if (seen.has(slug)) return null; // ループ防止
+  seen.add(slug);
+  const jsonNext = (spotRedirects as Record<string, string>)[slug];
+  if (jsonNext) return resolveTarget(jsonNext, seen);
+  const dedupNext = dedupRedirects.get(slug);
+  if (dedupNext) return resolveTarget(dedupNext, seen);
+  return null; // デッドターゲット（解決不能）
+}
 
 // 1. dedup自動リダイレクト（最優先: 確実に正しいターゲットを持つ）
 for (const [oldSlug, newSlug] of dedupRedirects) {
-  if (liveSlugSet.has(newSlug)) {
-    allRedirects.set(oldSlug, newSlug);
+  if (liveSlugSet.has(oldSlug)) continue; // source が生存 = 301不要
+  const finalTarget = resolveTarget(newSlug);
+  if (finalTarget && finalTarget !== oldSlug) {
+    allRedirects.set(oldSlug, finalTarget);
   }
 }
 
-// 2. spot-redirects.jsonの手動リダイレクト（ターゲット検証付き）
-for (const [oldSlug, newSlug] of Object.entries(spotRedirects)) {
+// 2. spot-redirects.jsonの手動リダイレクト（チェーン完全解決・生存先のみ登録）
+for (const [oldSlug, rawTarget] of Object.entries(spotRedirects)) {
   if (allRedirects.has(oldSlug)) continue; // dedup自動が優先
-  if (liveSlugSet.has(newSlug as string)) {
-    allRedirects.set(oldSlug, newSlug as string);
-  } else {
-    // ターゲットが消えている → dedupRedirectsで解決を試みる
-    const resolved = dedupRedirects.get(newSlug as string);
-    if (resolved && liveSlugSet.has(resolved)) {
-      allRedirects.set(oldSlug, resolved);
-    }
-    // それでも解決できない場合はスキップ（壊れたリダイレクトを防止）
+  if (liveSlugSet.has(oldSlug)) continue; // source が生存 = 無駄な301を出さない（代替canonical汚れ防止）
+  const finalTarget = resolveTarget(rawTarget as string);
+  if (finalTarget && finalTarget !== oldSlug) {
+    allRedirects.set(oldSlug, finalTarget); // 必ず1ホップ・生存先
   }
+  // 解決不能（デッドターゲット）はスキップ → 壊れた301を防止
 }
 
 const spotRedirectEntries = Array.from(allRedirects.entries()).map(([oldSlug, newSlug]) => ({

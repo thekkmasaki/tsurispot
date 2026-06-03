@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import {
   MapPin,
   Fish,
@@ -35,7 +35,7 @@ type PageProps = {
 };
 
 // generateStaticParams: 魚のfishingMethods × FISHING_METHODSの照合
-export const dynamicParams = false;
+// dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため撤廃。未知 param は下記で親へ 301。
 
 export function generateStaticParams() {
   const combos: { slug: string; method: string }[] = [];
@@ -126,14 +126,15 @@ export default async function FishMethodPage({ params }: PageProps) {
   const { slug, method } = await params;
   const fish = getFishBySlug(slug);
   const methodDef = getMethodBySlug(method);
-  if (!fish || !methodDef) notFound();
+  if (!fish) permanentRedirect("/fish");
+  if (!methodDef) permanentRedirect(`/fish/${slug}`);
 
   // この魚のこの釣り方に該当するfishingMethodsを取得
   const matchingMethods: FishingMethod[] = fish.fishingMethods?.filter((fm) =>
     methodDef.methods.includes(fm.methodName)
   ) ?? [];
 
-  if (matchingMethods.length === 0) notFound();
+  if (matchingMethods.length === 0) permanentRedirect(`/fish/${slug}`);
 
   // この魚×この釣り方で釣れるスポットを取得
   const matchingSpots = fishingSpots.filter((spot) =>
