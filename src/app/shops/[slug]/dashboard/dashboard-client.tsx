@@ -15,21 +15,9 @@ import {
   Save,
   Store,
   ShieldCheck,
+  Loader2,
 } from "lucide-react";
 import { PlanManagement } from "@/components/shops/plan-management";
-
-const TOKENS: Record<string, string> = {
-  "point-honmoku": "demo1234",
-  "joshunya-enoshima": "demo1234",
-  "casting-toyosu": "demo1234",
-  "joshunya-wakayama": "demo1234",
-  "fishing-yu-oiso": "demo1234",
-  "barbless-karatsu": "barbless-2026",
-};
-
-function getStorageKey(slug: string) {
-  return `tsurispot-baitstock-${slug}`;
-}
 
 export function DashboardClient() {
   const params = useParams();
@@ -38,21 +26,57 @@ export function DashboardClient() {
   const token = searchParams.get("token");
 
   const shop = tackleShops.find((s) => s.slug === slug);
-  const isAuthenticated = token === TOKENS[slug];
 
+  const [authState, setAuthState] = useState<"checking" | "ok" | "denied">("checking");
   const [baitStock, setBaitStock] = useState<BaitStock[]>([]);
   const [saved, setSaved] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState("");
 
+  // トークン認証（DynamoDB のトークンと照合。ハードコード TOKENS は廃止）
+  useEffect(() => {
+    if (!token) {
+      setAuthState("denied");
+      return;
+    }
+    let active = true;
+    fetch("/api/shop-auth/verify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ shop: slug, token }),
+    })
+      .then((r) => r.json())
+      .then((d) => {
+        if (active) setAuthState(d.ok ? "ok" : "denied");
+      })
+      .catch(() => {
+        if (active) setAuthState("denied");
+      });
+    return () => {
+      active = false;
+    };
+  }, [slug, token]);
+
   useEffect(() => {
     if (!shop) return;
-    const stored = localStorage.getItem(getStorageKey(slug));
-    if (stored) {
-      setBaitStock(JSON.parse(stored));
-    } else if (shop.baitStock) {
-      setBaitStock(shop.baitStock);
-    }
+    let active = true;
+    // サーバー(DynamoDB)から在庫を取得。無ければ静的データにフォールバック。
+    fetch(`/api/bait-stock?shop=${slug}`)
+      .then((r) => r.json())
+      .then((d) => {
+        if (!active) return;
+        if (d.stock && d.stock.length > 0) {
+          setBaitStock(d.stock);
+        } else if (shop.baitStock) {
+          setBaitStock(shop.baitStock);
+        }
+      })
+      .catch(() => {
+        if (active && shop.baitStock) setBaitStock(shop.baitStock);
+      });
+    return () => {
+      active = false;
+    };
   }, [slug, shop]);
 
   // Stripe 課金完了（success_url の ?subscribed=true）を GA4 に計測し、課金ファネル（問い合わせ→決済）の CVR を可視化する
@@ -76,7 +100,16 @@ export function DashboardClient() {
     );
   }
 
-  if (!isAuthenticated) {
+  if (authState === "checking") {
+    return (
+      <div className="mx-auto max-w-md px-4 py-16 text-center">
+        <Loader2 className="mx-auto size-8 animate-spin text-muted-foreground" />
+        <p className="mt-3 text-sm text-muted-foreground">認証を確認しています…</p>
+      </div>
+    );
+  }
+
+  if (authState === "denied") {
     return (
       <div className="mx-auto max-w-md px-4 py-16 text-center">
         <div className="mb-4 flex justify-center">
@@ -122,9 +155,8 @@ export function DashboardClient() {
   async function handleSave() {
     const filtered = baitStock.filter((b) => b.name.trim() !== "");
     setBaitStock(filtered);
-    localStorage.setItem(getStorageKey(slug), JSON.stringify(filtered));
 
-    // APIにも送信してリアルタイム反映
+    // サーバー(DynamoDB)に保存して店舗ページにリアルタイム反映
     setSaving(true);
     setSaveError("");
     try {
@@ -259,7 +291,7 @@ export function DashboardClient() {
       <PlanManagement shopSlug={slug} token={token || ""} />
 
       <p className="mt-4 text-xs text-muted-foreground">
-        ※ 現在はブラウザのローカルストレージに保存されます。同じブラウザからのみ変更内容が反映されます。
+        ※ 保存内容はサーバーに反映され、店舗ページにリアルタイム表示されます（どの端末からでも編集できます）。
       </p>
     </div>
   );
