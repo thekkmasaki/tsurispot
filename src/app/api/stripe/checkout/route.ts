@@ -3,6 +3,7 @@ import Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 import { dbGet } from "@/lib/dynamodb";
 import { getStripeCustomerId, setStripeCustomerId, getShopSubscription } from "@/lib/shop-plan";
+import { checkStripeCheckoutEnv } from "@/lib/stripe-env";
 
 export async function POST(request: NextRequest) {
   let body: { shopSlug: string; plan: string; token: string };
@@ -18,6 +19,19 @@ export async function POST(request: NextRequest) {
   }
   if (plan !== "basic" && plan !== "pro") {
     return NextResponse.json({ error: "invalid plan" }, { status: 400 });
+  }
+
+  // Stripe 環境変数チェック（未設定なら決済不可。サイレント失敗を防ぐ）
+  const env = checkStripeCheckoutEnv(plan);
+  if (!stripe || !env.ok) {
+    console.error(
+      "[Stripe checkout] 環境変数が未設定のため決済できません:",
+      env.missing.join(", ") || "STRIPE_SECRET_KEY"
+    );
+    return NextResponse.json(
+      { error: "決済システムが現在ご利用いただけません。お手数ですが時間をおいて再度お試しください。" },
+      { status: 503 }
+    );
   }
 
   // トークン認証
@@ -42,13 +56,12 @@ export async function POST(request: NextRequest) {
     await setStripeCustomerId(shopSlug, customerId);
   }
 
-  // Price/Coupon IDを決定
-  const priceId = plan === "basic"
-    ? process.env.STRIPE_PRICE_BASIC!
-    : process.env.STRIPE_PRICE_PRO!;
-  const couponId = plan === "basic"
-    ? process.env.STRIPE_COUPON_BASIC
-    : process.env.STRIPE_COUPON_PRO;
+  // Price/Coupon ID（env チェック済み: priceId は存在保証、couponId は任意）
+  const priceId = env.priceId!;
+  const couponId = env.couponId;
+  if (!couponId) {
+    console.error(`[Stripe checkout] クーポン未設定のため3ヶ月無料が適用されません: plan=${plan}`);
+  }
 
   const origin = request.nextUrl.origin;
 

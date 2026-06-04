@@ -1,6 +1,10 @@
 import Stripe from "stripe";
 
-// ビルド時はキーが未設定のためプレースホルダーを使用（API呼び出し時にランタイムで実キーが使われる）
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || "sk_test_build_placeholder", {
-  apiVersion: "2026-04-22.dahlia",
-});
+// STRIPE_SECRET_KEY が未設定なら null。各 API ルートで null チェックして 503 を返す。
+// （旧実装は "sk_test_build_placeholder" にフォールバックしており、未設定時に
+//  サイレントに決済が失敗していたため、明示的に「利用不可」を返せるよう null にする）
+export const stripe: Stripe | null = process.env.STRIPE_SECRET_KEY
+  ? new Stripe(process.env.STRIPE_SECRET_KEY, {
+      apiVersion: "2026-04-22.dahlia",
+    })
+  : null;

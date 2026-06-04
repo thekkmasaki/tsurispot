@@ -16,6 +16,15 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "shopSlug, token required" }, { status: 400 });
   }
 
+  // Stripe 環境変数チェック（未設定なら利用不可）
+  if (!stripe) {
+    console.error("[Stripe portal] STRIPE_SECRET_KEY が未設定です");
+    return NextResponse.json(
+      { error: "決済システムが現在ご利用いただけません。" },
+      { status: 503 }
+    );
+  }
+
   // トークン認証
   const storedToken = await dbGet<string>(`SHOP#${shopSlug}`, "TOKEN");
   if (!storedToken || storedToken !== token) {
