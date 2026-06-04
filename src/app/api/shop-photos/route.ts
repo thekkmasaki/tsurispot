@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { uploadToS3, deleteFromS3 } from "@/lib/s3";
 import { dbGet, dbPut } from "@/lib/dynamodb";
 import { getShopBySlug } from "@/lib/data/shops";
+import { getEffectivePlan } from "@/lib/shop-plan";
 
 const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
@@ -83,8 +84,8 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // プラン制限チェック
-  const planLevel = shopData.planLevel || "free";
+  // プラン制限チェック（課金状態を加味した実効プラン）
+  const planLevel = await getEffectivePlan(shop);
   const maxPhotos = PLAN_LIMITS[planLevel] || 0;
   if (maxPhotos === 0) {
     return NextResponse.json(

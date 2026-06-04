@@ -17,6 +17,7 @@ import { tackleShops } from "@/lib/data/shops";
 import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { adjacentPrefectures } from "@/lib/data/prefecture-info";
 import { fishingSpots } from "@/lib/data/spots";
+import { getEffectivePlanMap } from "@/lib/shop-plan";
 
 type Params = Promise<{ prefecture: string }>;
 
@@ -48,6 +49,10 @@ function getShopsForPrefecture(prefName: string) {
 export async function generateStaticParams() {
   return prefectures.map((pref) => ({ prefecture: pref.slug }));
 }
+
+// 課金状態(DynamoDB)を一覧の優先表示に反映するため 1時間 ISR。
+// 詳細ページは純SSGのまま維持し、この一覧だけ実効プランで並べ替える（SEO本文・metadataは不変）。
+export const revalidate = 3600;
 
 // ----- generateMetadata -----
 export async function generateMetadata({
@@ -98,8 +103,20 @@ export default async function PrefectureShopsPage({
   const pref = getPrefectureBySlug(prefecture);
   if (!pref) permanentRedirect("/shops");
 
-  const shops = getShopsForPrefecture(pref.name);
-  const count = shops.length;
+  const baseShops = getShopsForPrefecture(pref.name);
+  const count = baseShops.length;
+
+  // 課金状態を加味した実効プランで優先表示を並べ替え（ISR: revalidate=3600）
+  const planMap = await getEffectivePlanMap(baseShops.map((s) => s.slug));
+  const planRank: Record<string, number> = { pro: 0, basic: 1, free: 2 };
+  const shops = [...baseShops].sort((a, b) => {
+    const ra = planRank[planMap[a.slug] ?? "free"] ?? 2;
+    const rb = planRank[planMap[b.slug] ?? "free"] ?? 2;
+    if (ra !== rb) return ra - rb;
+    if (a.isPremium && !b.isPremium) return -1;
+    if (!a.isPremium && b.isPremium) return 1;
+    return 0;
+  });
 
   // この都道府県の人気スポット（上位6件）
   const prefSpots = fishingSpots
@@ -234,7 +251,7 @@ export default async function PrefectureShopsPage({
           {count > 0 ? (
             <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2">
               {shops.map((shop) => {
-                const planLevel = shop.planLevel ?? "free";
+                const planLevel = planMap[shop.slug] ?? "free";
                 const isPro = planLevel === "pro";
                 const isBasic = planLevel === "basic";
                 const isPaid = isPro || isBasic;

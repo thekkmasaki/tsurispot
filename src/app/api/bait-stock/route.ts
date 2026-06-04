@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { dbGet, dbPut, dbIncr } from "@/lib/dynamodb";
 import { getShopBySlug } from "@/lib/data/shops";
+import { getEffectivePlan } from "@/lib/shop-plan";
 
 export interface BaitStockEntry {
   name: string;
@@ -103,8 +104,8 @@ export async function POST(request: NextRequest) {
   try {
     const date = new Date().toISOString().slice(0, 10);
     const count = await dbIncr(`SHOP#${shop}`, `BAITLIMIT#${date}`, 1, 86400);
-    // レートリミット: planLevelに基づいて判定
-    const planLevel = shopData.planLevel || "free";
+    // レートリミット: 課金状態を加味した実効プランに基づいて判定
+    const planLevel = await getEffectivePlan(shop);
     const dailyLimits: Record<string, number> = { free: 10, basic: 10, pro: 50 };
     const dailyLimit = isVerified ? 100 : (dailyLimits[planLevel] ?? 10);
     if (count > dailyLimit) {
