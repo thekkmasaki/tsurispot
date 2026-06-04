@@ -5,6 +5,7 @@ import { Send, CheckCircle, AlertCircle, Mail, Sparkles, Gift } from "lucide-rea
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { PLAN_PRICING, formatYen } from "@/lib/data/plans";
 
 interface PaidPlanInquiryProps {
   plan: "basic" | "pro";
@@ -13,13 +14,13 @@ interface PaidPlanInquiryProps {
 const PLAN_INFO = {
   basic: {
     name: "ベーシック",
-    price: "最初の1年は月額500円、その後は月額980円",
+    price: `最初の1年は月額${formatYen(PLAN_PRICING.basic.firstYear)}円、その後は月額${formatYen(PLAN_PRICING.basic.afterYear)}円`,
     color: "blue",
     features: ["公式バッジ表示", "検索結果の優先表示", "写真3枚まで掲載", "Googleのお店情報を整備"],
   },
   pro: {
     name: "プロ",
-    price: "最初の1年は月額1,980円、その後は月額2,980円",
+    price: `最初の1年は月額${formatYen(PLAN_PRICING.pro.firstYear)}円、その後は月額${formatYen(PLAN_PRICING.pro.afterYear)}円`,
     color: "amber",
     features: ["ベーシックの全機能", "写真20枚・店主メッセージ", "1日50回エサ在庫更新", "クーポン配信・商品PR", "Googleのお店情報を整備"],
   },

@@ -19,10 +19,6 @@ import {
 } from "lucide-react";
 import { PlanManagement } from "@/components/shops/plan-management";
 
-function getStorageKey(slug: string) {
-  return `tsurispot-baitstock-${slug}`;
-}
-
 export function DashboardClient() {
   const params = useParams();
   const searchParams = useSearchParams();
@@ -63,12 +59,24 @@ export function DashboardClient() {
 
   useEffect(() => {
     if (!shop) return;
-    const stored = localStorage.getItem(getStorageKey(slug));
-    if (stored) {
-      setBaitStock(JSON.parse(stored));
-    } else if (shop.baitStock) {
-      setBaitStock(shop.baitStock);
-    }
+    let active = true;
+    // サーバー(DynamoDB)から在庫を取得。無ければ静的データにフォールバック。
+    fetch(`/api/bait-stock?shop=${slug}`)
+      .then((r) => r.json())
+      .then((d) => {
+        if (!active) return;
+        if (d.stock && d.stock.length > 0) {
+          setBaitStock(d.stock);
+        } else if (shop.baitStock) {
+          setBaitStock(shop.baitStock);
+        }
+      })
+      .catch(() => {
+        if (active && shop.baitStock) setBaitStock(shop.baitStock);
+      });
+    return () => {
+      active = false;
+    };
   }, [slug, shop]);
 
   // Stripe 課金完了（success_url の ?subscribed=true）を GA4 に計測し、課金ファネル（問い合わせ→決済）の CVR を可視化する
@@ -147,9 +155,8 @@ export function DashboardClient() {
   async function handleSave() {
     const filtered = baitStock.filter((b) => b.name.trim() !== "");
     setBaitStock(filtered);
-    localStorage.setItem(getStorageKey(slug), JSON.stringify(filtered));
 
-    // APIにも送信してリアルタイム反映
+    // サーバー(DynamoDB)に保存して店舗ページにリアルタイム反映
     setSaving(true);
     setSaveError("");
     try {
@@ -284,7 +291,7 @@ export function DashboardClient() {
       <PlanManagement shopSlug={slug} token={token || ""} />
 
       <p className="mt-4 text-xs text-muted-foreground">
-        ※ 現在はブラウザのローカルストレージに保存されます。同じブラウザからのみ変更内容が反映されます。
+        ※ 保存内容はサーバーに反映され、店舗ページにリアルタイム表示されます（どの端末からでも編集できます）。
       </p>
     </div>
   );
