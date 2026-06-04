@@ -76,3 +76,22 @@ export async function getEffectivePlanMap(
   });
   return map;
 }
+
+/**
+ * 店舗オーナー用トークンを検証する（管理画面の閲覧/編集認証）。
+ * - サンプル店舗(sample-*)はデモ用トークン "demo" で閲覧可
+ * - 実店舗は DynamoDB の SHOP#{slug}/TOKEN と照合
+ * 注意: これは管理画面用の認証。Stripe 決済(checkout/portal)は誤って
+ * サンプルが課金されないよう、引き続き DB トークンのみで照合する（本関数は使わない）。
+ */
+export async function verifyShopToken(slug: string, token: string): Promise<boolean> {
+  if (!slug || !token) return false;
+  if (
+    (slug === "sample-premium" || slug === "sample-basic" || slug === "sample-free") &&
+    token === "demo"
+  ) {
+    return true;
+  }
+  const stored = await dbGet<string>(`SHOP#${slug}`, "TOKEN");
+  return !!stored && stored === token;
+}

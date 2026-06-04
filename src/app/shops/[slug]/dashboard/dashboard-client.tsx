@@ -15,17 +15,9 @@ import {
   Save,
   Store,
   ShieldCheck,
+  Loader2,
 } from "lucide-react";
 import { PlanManagement } from "@/components/shops/plan-management";
-
-const TOKENS: Record<string, string> = {
-  "point-honmoku": "demo1234",
-  "joshunya-enoshima": "demo1234",
-  "casting-toyosu": "demo1234",
-  "joshunya-wakayama": "demo1234",
-  "fishing-yu-oiso": "demo1234",
-  "barbless-karatsu": "barbless-2026",
-};
 
 function getStorageKey(slug: string) {
   return `tsurispot-baitstock-${slug}`;
@@ -38,12 +30,36 @@ export function DashboardClient() {
   const token = searchParams.get("token");
 
   const shop = tackleShops.find((s) => s.slug === slug);
-  const isAuthenticated = token === TOKENS[slug];
 
+  const [authState, setAuthState] = useState<"checking" | "ok" | "denied">("checking");
   const [baitStock, setBaitStock] = useState<BaitStock[]>([]);
   const [saved, setSaved] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saveError, setSaveError] = useState("");
+
+  // トークン認証（DynamoDB のトークンと照合。ハードコード TOKENS は廃止）
+  useEffect(() => {
+    if (!token) {
+      setAuthState("denied");
+      return;
+    }
+    let active = true;
+    fetch("/api/shop-auth/verify", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ shop: slug, token }),
+    })
+      .then((r) => r.json())
+      .then((d) => {
+        if (active) setAuthState(d.ok ? "ok" : "denied");
+      })
+      .catch(() => {
+        if (active) setAuthState("denied");
+      });
+    return () => {
+      active = false;
+    };
+  }, [slug, token]);
 
   useEffect(() => {
     if (!shop) return;
@@ -76,7 +92,16 @@ export function DashboardClient() {
     );
   }
 
-  if (!isAuthenticated) {
+  if (authState === "checking") {
+    return (
+      <div className="mx-auto max-w-md px-4 py-16 text-center">
+        <Loader2 className="mx-auto size-8 animate-spin text-muted-foreground" />
+        <p className="mt-3 text-sm text-muted-foreground">認証を確認しています…</p>
+      </div>
+    );
+  }
+
+  if (authState === "denied") {
     return (
       <div className="mx-auto max-w-md px-4 py-16 text-center">
         <div className="mb-4 flex justify-center">
