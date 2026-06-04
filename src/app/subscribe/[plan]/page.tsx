@@ -8,18 +8,19 @@ import { Separator } from "@/components/ui/separator";
 import { ShieldCheck, ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import { SubscribeButton } from "./subscribe-button";
+import { PLAN_PRICING, formatYen } from "@/lib/data/plans";
 
 const PLAN_DETAILS = {
   basic: {
     name: "ベーシック",
-    priceFirst: "月額500円（税込）",
-    priceAfter: "月額980円（税込）",
+    priceFirst: `月額${formatYen(PLAN_PRICING.basic.firstYear)}円（税込）`,
+    priceAfter: `月額${formatYen(PLAN_PRICING.basic.afterYear)}円（税込）`,
     badgeColor: "bg-blue-100 text-blue-700",
   },
   pro: {
     name: "プロ",
-    priceFirst: "月額1,980円（税込）",
-    priceAfter: "月額2,980円（税込）",
+    priceFirst: `月額${formatYen(PLAN_PRICING.pro.firstYear)}円（税込）`,
+    priceAfter: `月額${formatYen(PLAN_PRICING.pro.afterYear)}円（税込）`,
     badgeColor: "bg-amber-100 text-amber-700",
   },
 } as const;

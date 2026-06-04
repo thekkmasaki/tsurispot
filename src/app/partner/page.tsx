@@ -28,6 +28,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShopListingForm } from "@/components/shops/shop-listing-form";
 import { PaidPlanInquiry } from "@/components/shops/paid-plan-inquiry";
 import { fishingSpots } from "@/lib/data/spots";
+import { PLAN_PRICING, formatYen } from "@/lib/data/plans";
 import { fishSpecies } from "@/lib/data/fish";
 import { tackleShops } from "@/lib/data/shops";
 
@@ -564,8 +565,8 @@ export default function PartnerPage() {
           <Card className="gap-0 border-blue-200 py-0">
             <CardContent className="p-5 sm:p-6">
               <h3 className="text-base font-bold text-blue-700">ベーシックプラン</h3>
-              <p className="mt-1 text-2xl font-bold">¥500<span className="text-sm font-normal text-muted-foreground">/月</span></p>
-              <p className="mt-1 text-xs text-muted-foreground">初年度価格（2年目以降 ¥980/月）</p>
+              <p className="mt-1 text-2xl font-bold">¥{formatYen(PLAN_PRICING.basic.firstYear)}<span className="text-sm font-normal text-muted-foreground">/月</span></p>
+              <p className="mt-1 text-xs text-muted-foreground">初年度価格（2年目以降 ¥{formatYen(PLAN_PRICING.basic.afterYear)}/月）</p>
               <ul className="mt-4 space-y-2 text-sm">
                 {["無料プランの全機能", "公式バッジ表示", "検索結果の優先表示", "写真3枚まで掲載", "Googleのお店情報を整備"].map((f) => (
                   <li key={f} className="flex items-start gap-2">
@@ -576,7 +577,7 @@ export default function PartnerPage() {
               </ul>
               <div className="mt-5">
                 <Button className="w-full bg-blue-600 hover:bg-blue-700" asChild>
-                  <Link href="#inquiry-basic">ベーシックプランに申し込む</Link>
+                  <Link href="#inquiry-basic">ベーシックプランを問い合わせる</Link>
                 </Button>
               </div>
             </CardContent>
@@ -589,8 +590,8 @@ export default function PartnerPage() {
             </div>
             <CardContent className="p-5 pt-6 sm:p-6 sm:pt-7">
               <h3 className="text-base font-bold text-amber-700">プロプラン</h3>
-              <p className="mt-1 text-2xl font-bold">¥1,980<span className="text-sm font-normal text-muted-foreground">/月</span></p>
-              <p className="mt-1 text-xs text-muted-foreground">初年度価格（2年目以降 ¥2,980/月）</p>
+              <p className="mt-1 text-2xl font-bold">¥{formatYen(PLAN_PRICING.pro.firstYear)}<span className="text-sm font-normal text-muted-foreground">/月</span></p>
+              <p className="mt-1 text-xs text-muted-foreground">初年度価格（2年目以降 ¥{formatYen(PLAN_PRICING.pro.afterYear)}/月）</p>
               <ul className="mt-4 space-y-2 text-sm">
                 {["ベーシックの全機能", "写真20枚・店主メッセージ", "エサ在庫1日50回更新", "クーポン配信・商品PR", "Googleのお店情報を整備"].map((f) => (
                   <li key={f} className="flex items-start gap-2">
@@ -601,7 +602,7 @@ export default function PartnerPage() {
               </ul>
               <div className="mt-5">
                 <Button className="w-full bg-amber-500 hover:bg-amber-600" asChild>
-                  <Link href="#inquiry-pro">プロプランに申し込む</Link>
+                  <Link href="#inquiry-pro">プロプランを問い合わせる</Link>
                 </Button>
               </div>
             </CardContent>
