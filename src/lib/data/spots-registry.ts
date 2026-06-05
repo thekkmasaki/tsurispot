@@ -75,6 +75,10 @@ import { kantoAdd8Spots } from "./spots-add8-kanto-chubu";
 import { kinkiAdd8Spots } from "./spots-add8-kinki";
 import { chugokuShikokuAdd8Spots } from "./spots-add8-chugoku-shikoku";
 import { kyushuOkinawaAdd8Spots } from "./spots-add8-kyushu-okinawa";
+import { bulkKyushuWSpots } from "./spots-bulk-kyushu-w";
+import { bulkKyushuESpots } from "./spots-bulk-kyushu-e";
+import { bulkShikokuSpots } from "./spots-bulk-shikoku";
+import { bulkSaninSetouchiSpots } from "./spots-bulk-sanin-setouchi";
 // TEMPORARILY DISABLED: add9-13 spots causing App Runner deployment failure (image too large)
 // import { eastAdd9Spots } from "./spots-add9-east";
 // import { centralAdd9Spots } from "./spots-add9-central";
@@ -167,6 +171,10 @@ export const allRawSpots: FishingSpot[] = [
   ...kinkiAdd8Spots,
   ...chugokuShikokuAdd8Spots,
   ...kyushuOkinawaAdd8Spots,
+  ...bulkKyushuWSpots,
+  ...bulkKyushuESpots,
+  ...bulkShikokuSpots,
+  ...bulkSaninSetouchiSpots,
   // TEMPORARILY DISABLED: add9-13 spots
   // ...eastAdd9Spots,
   // ...centralAdd9Spots,
