@@ -17,6 +17,8 @@ export async function POST(request: Request) {
   try {
     const session = await auth();
     const tsuriId = session?.user?.tsuriId;
+    // 表示名はクライアント送信値でなく【セッションのニックネーム】を正とする（なりすまし防止）
+    const userName = (session?.user?.nickname ?? "").trim();
 
     // ログイン必須
     if (!tsuriId) {
@@ -35,11 +37,10 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json().catch(() => ({}));
-    const { spotSlug, type, text, userName } = body as {
+    const { spotSlug, type, text } = body as {
       spotSlug?: string;
       type?: string;
       text?: string;
-      userName?: string;
     };
 
     // バリデーション
@@ -50,8 +51,8 @@ export async function POST(request: Request) {
     if (type !== "tip") {
       return NextResponse.json({ error: "投稿タイプが不正です" }, { status: 400 });
     }
-    if (!userName || typeof userName !== "string" || userName.length > 20) {
-      return NextResponse.json({ error: "ニックネームを入力してください（20文字以内）" }, { status: 400 });
+    if (!userName || userName.length > 20) {
+      return NextResponse.json({ error: "ニックネームを設定してから投稿してください" }, { status: 400 });
     }
     // 釣り場メモは最低限の長さを要求（薄いUGCでSEO品質を下げないため）
     const trimmed = typeof text === "string" ? text.trim() : "";
