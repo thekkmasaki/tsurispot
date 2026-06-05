@@ -10,7 +10,7 @@
  *   node scripts/twitter/post-seasonal-fish.mjs --dry-run  # 投稿せずに内容を確認
  */
 
-import { loadEnv, isDryRun, postTweet, makeUrl, ROOT, SCRIPTS_DIR } from "./lib/x-client.mjs";
+import { loadEnv, isDryRun, postTweetWithMedia, resolveFishImage, makeUrl, ROOT, SCRIPTS_DIR } from "./lib/x-client.mjs";
 import { getFishSummary } from "./lib/export-data.mjs";
 import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
@@ -280,7 +280,7 @@ async function postFishTweet(fish, month, season) {
     return;
   }
 
-  await postTweet(tweetText);
+  await postTweetWithMedia(tweetText, [resolveFishImage(fish.slug)]);
   markAsPosted(fish.slug, month);
   console.log(`\n投稿済み魚種に記録: ${fish.slug}（${month}月）`);
 }

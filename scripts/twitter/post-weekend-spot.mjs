@@ -10,7 +10,7 @@
  *   node scripts/twitter/post-weekend-spot.mjs --dry-run  # 投稿せずに内容を確認
  */
 
-import { loadEnv, isDryRun, postTweet, makeUrl, ROOT, SCRIPTS_DIR } from "./lib/x-client.mjs";
+import { loadEnv, isDryRun, postTweetWithMedia, resolveSpotImage, makeUrl, ROOT, SCRIPTS_DIR } from "./lib/x-client.mjs";
 import { getFishSummary, getSpotSummary } from "./lib/export-data.mjs";
 import { readFileSync, writeFileSync } from "fs";
 import { join } from "path";
@@ -196,7 +196,7 @@ async function postSpotTweet(spot, matchingFishSlugs, fishList) {
     return;
   }
 
-  await postTweet(tweetText);
+  await postTweetWithMedia(tweetText, [resolveSpotImage(spot.slug, spot.spotType)]);
   markAsPosted(spot.slug);
   console.log(`\n投稿済みスポットに記録: ${spot.slug}`);
 }

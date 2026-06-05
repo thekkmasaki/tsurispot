@@ -7,7 +7,7 @@
  */
 
 import { TwitterApi } from "twitter-api-v2";
-import { readFileSync } from "fs";
+import { readFileSync, existsSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
@@ -107,6 +107,73 @@ export async function postThread(tweets, delay = 2000) {
   }
 
   return { ids };
+}
+
+/**
+ * 魚スラッグからローカル魚画像のパスを解決（無ければ null）
+ * @param {string} slug
+ * @returns {string|null}
+ */
+export function resolveFishImage(slug) {
+  if (!slug) return null;
+  for (const ext of ["jpg", "png", "webp"]) {
+    const p = join(ROOT, `public/images/fish/${slug}.${ext}`);
+    if (existsSync(p)) return p;
+  }
+  return null;
+}
+
+/**
+ * スポットスラッグ（とspotType）からローカルスポット画像のパスを解決
+ * wikimedia実写 → spotType別デフォルト の順でフォールバック（無ければ null）
+ * @param {string} slug
+ * @param {string} [spotType]
+ * @returns {string|null}
+ */
+export function resolveSpotImage(slug, spotType) {
+  if (slug) {
+    for (const ext of ["webp", "jpg", "png"]) {
+      const p = join(ROOT, `public/images/spots/wikimedia/${slug}.${ext}`);
+      if (existsSync(p)) return p;
+    }
+  }
+  // spotType別デフォルト画像（6種すべて public/images/spots/default-*.jpg に存在）
+  const def = `default-${spotType}`;
+  if (spotType) {
+    const p = join(ROOT, `public/images/spots/${def}.jpg`);
+    if (existsSync(p)) return p;
+  }
+  // spotType不明時は breakwater をフォールバック
+  const fallback = join(ROOT, "public/images/spots/default-breakwater.jpg");
+  return existsSync(fallback) ? fallback : null;
+}
+
+/**
+ * 画像つきツイートを投稿する（釣り系Xはビジュアルでリーチが大きく変わる）。
+ * 画像が解決できない/アップロード失敗時はテキストのみにフォールバックする。
+ * @param {string} text - ツイート本文
+ * @param {string[]} imagePaths - ローカル画像ファイルパス（最大4枚・null/未存在は除外）
+ * @returns {Promise<{id: string}>}
+ */
+export async function postTweetWithMedia(text, imagePaths = []) {
+  const client = getClient();
+  const paths = (imagePaths || []).filter((p) => p && existsSync(p)).slice(0, 4);
+  let mediaIds = [];
+  if (paths.length > 0) {
+    try {
+      mediaIds = await Promise.all(paths.map((p) => client.v1.uploadMedia(p)));
+    } catch (e) {
+      console.warn(`画像アップロード失敗（テキストのみで投稿）: ${e?.message || e}`);
+      mediaIds = [];
+    }
+  }
+  const result =
+    mediaIds.length > 0
+      ? await client.v2.tweet(text, { media: { media_ids: mediaIds } })
+      : await client.v2.tweet(text);
+  const tag = mediaIds.length > 0 ? `画像${mediaIds.length}枚付き` : "テキストのみ";
+  console.log(`投稿完了(${tag}): https://x.com/tsurispot_jp/status/${result.data.id}`);
+  return result.data;
 }
 
 /**
