@@ -163,12 +163,12 @@ export function AreaSpotList({ spots, catchableFish, areaName }: AreaSpotListPro
         </h2>
         {filteredSpots.length > 0 ? (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {filteredSpots.map((spot) => (
+            {filteredSpots.map((spot, index) => (
               <div
                 key={spot.id}
                 className="animate-in fade-in-0 duration-300"
               >
-                <SpotCard spot={spot} />
+                <SpotCard spot={spot} priority={index < 4} />
               </div>
             ))}
           </div>

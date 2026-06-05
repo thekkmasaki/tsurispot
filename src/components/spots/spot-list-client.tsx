@@ -609,6 +609,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: ListSpot[]
                 <SpotCard
                   spot={spot}
                   distance={sortByDistance && distanceMap ? distanceMap.get(spot.id) : undefined}
+                  priority={index < 4}
                 />
                 {(index === 3 || index === 7 || index === 11 || index === 15) && (
                   <div className="col-span-full">
