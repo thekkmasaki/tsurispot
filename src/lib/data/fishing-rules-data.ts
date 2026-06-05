@@ -1884,3 +1884,7 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
 export function getFishingRuleByPrefSlug(slug: string): PrefectureFishingRule | undefined {
   return prefectureFishingRules.find((r) => r.prefSlug === slug);
 }
+
+export function getFishingRuleByPrefName(name: string): PrefectureFishingRule | undefined {
+  return prefectureFishingRules.find((r) => r.prefName === name);
+}
