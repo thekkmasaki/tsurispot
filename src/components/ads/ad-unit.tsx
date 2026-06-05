@@ -376,19 +376,6 @@ export function InFeedAd({ className = "" }: { className?: string }) {
   );
 }
 
-// ---- パラレル広告（PC: 横並び2枠） ----
-export function ParallelAds({ className = "" }: { className?: string }) {
-  if (!ADSENSE_ID) return null;
-  return (
-    <AdWrapper className={`my-8 ${className}`}>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <AdUnit slot={AD_SLOTS.parallel} placement="parallel" format="rectangle" style={{ display: "block", width: "100%", height: "250px" }} />
-        <AdUnit slot={AD_SLOTS.parallel} placement="parallel" format="rectangle" style={{ display: "block", width: "100%", height: "250px" }} />
-      </div>
-    </AdWrapper>
-  );
-}
-
 // ---- モバイル固定フッター広告（kabutan.jp式、MobileNav上部に固定） ----
 export function MobileStickyAd() {
   const [visible, setVisible] = useState(false);

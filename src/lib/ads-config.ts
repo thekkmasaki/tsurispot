@@ -33,7 +33,6 @@ export const AD_SLOTS = {
   header_banner: process.env.NEXT_PUBLIC_AD_SLOT_HEADER_BANNER || FALLBACK_DISPLAY,
   side_rail: process.env.NEXT_PUBLIC_AD_SLOT_SIDE_RAIL || FALLBACK_DISPLAY,
   in_feed: process.env.NEXT_PUBLIC_AD_SLOT_IN_FEED || FALLBACK_DISPLAY,
-  parallel: process.env.NEXT_PUBLIC_AD_SLOT_PARALLEL || FALLBACK_DISPLAY,
   mobile_sticky: process.env.NEXT_PUBLIC_AD_SLOT_MOBILE_STICKY || FALLBACK_DISPLAY,
   mobile_header_banner: process.env.NEXT_PUBLIC_AD_SLOT_MOBILE_HEADER_BANNER || FALLBACK_DISPLAY,
 } as const;
