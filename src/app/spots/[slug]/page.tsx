@@ -70,6 +70,8 @@ import { CatchReportList } from "@/components/spots/catch-report-list";
 import { CatchReportForm } from "@/components/spots/catch-report-form";
 import { NearbyAccommodation, RakutenTravelCta } from "@/components/spots/nearby-accommodation";
 import { SpotRulesCard } from "@/components/spots/spot-rules";
+import { SpotRulesPrefectureFallback } from "@/components/spots/spot-rules-prefecture-fallback";
+import { getFishingRuleByPrefName } from "@/lib/data/fishing-rules-data";
 const SpotPhotoGallery = nextDynamic(
   () => import("@/components/spots/spot-photo-gallery").then(m => ({ default: m.SpotPhotoGallery })),
   // CLS対策: ほぼファーストビュー圏にあるギャラリーの高さを予約（他の遅延importと同様）
@@ -221,6 +223,8 @@ export default async function SpotDetailPage({ params }: PageProps) {
   const rawSpot = getSpotBySlug(slug);
   if (!rawSpot) permanentRedirect("/spots");
   const spot = enrichSpotWithStructures(rawSpot);
+  // rules未設定スポット向け: 県レベルの公的釣りルールをフォールバック表示する
+  const prefRule = spot.rules ? undefined : getFishingRuleByPrefName(spot.region.prefecture);
   const initialCommunityPhotos = await getInitialCommunityPhotos(slug);
   // 特許パイプライン: 自動生成ダイアグラム優先、なければ手動データにフォールバック
   const analysisResult = getAnalysisResult(slug);
@@ -945,13 +949,19 @@ export default async function SpotDetailPage({ params }: PageProps) {
               {spot.hasConvenienceStore && <Badge variant="outline" className="text-xs"><ShoppingBag className="size-3.5 mr-1" />コンビニ近く</Badge>}
             </div>
           </section>
-          {/* 釣りルール: 個別データがあるスポットのみ表示（推測ルールは誤情報の原因になるため非表示） */}
-          {spot.rules && (
+          {/* 釣りルール: 個別データがあれば優先表示。無ければ県レベルの公的ルール（出典付き）をフォールバック。
+              推測のスポット固有ルールは誤情報源になるため出さない。 */}
+          {spot.rules ? (
           <section>
             <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><Shield className="size-5" />釣りルール・禁止事項</h3>
             <SpotRulesCard rules={spot.rules} spotType={spot.spotType} spotName={spot.name} />
           </section>
-          )}
+          ) : prefRule ? (
+          <section>
+            <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><Shield className="size-5" />釣りルール・禁止事項</h3>
+            <SpotRulesPrefectureFallback rule={prefRule} />
+          </section>
+          ) : null}
           {spot.spotType === "port" && <PortMannerSection />}
           <section id="catch-report">
             <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><MessageSquare className="size-5" />みんなの釣果報告</h3>
