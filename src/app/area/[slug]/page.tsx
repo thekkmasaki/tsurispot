@@ -16,7 +16,13 @@ type PageProps = {
 };
 
 function getRegionBySlug(slug: string) {
-  return regions.find((r) => r.slug === slug);
+  const r = regions.find((r) => r.slug === slug);
+  if (r) return r;
+  // ローカルregion（bulk/addファイルの lr() で定義され regions.ts に無いエリア）は、
+  // そのslugを参照するスポットの region オブジェクトから解決する。
+  // これが無いと /area/<ローカルslug> が notFound()→404 になり、スポット詳細の
+  // エリアリンク（/area/${spot.region.slug}）が大量に404化する（GSC 404の最大要因）。
+  return fishingSpots.find((s) => s.region.slug === slug)?.region;
 }
 
 function getSpotsForRegion(regionId: string) {
