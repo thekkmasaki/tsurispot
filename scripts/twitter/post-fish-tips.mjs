@@ -11,6 +11,7 @@ import { TwitterApi } from "twitter-api-v2";
 import { readFileSync, writeFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
+import { resolveFishImage } from "./lib/x-client.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "../..");
@@ -662,7 +663,20 @@ async function main() {
   });
 
   console.log("\n投稿中...");
-  const tweet = await client.v2.tweet(tweetText);
+  // 釣りXはビジュアルでリーチUP: 該当魚のローカル画像を添付（無ければテキストのみ）
+  const fishImg = resolveFishImage(tip.slug);
+  let mediaIds = [];
+  if (fishImg) {
+    try {
+      mediaIds = [await client.v1.uploadMedia(fishImg)];
+    } catch (e) {
+      console.warn(`画像アップロード失敗（テキストのみ）: ${e?.message || e}`);
+    }
+  }
+  const tweet =
+    mediaIds.length > 0
+      ? await client.v2.tweet(tweetText, { media: { media_ids: mediaIds } })
+      : await client.v2.tweet(tweetText);
   console.log(
     `投稿完了: https://x.com/tsurispot_jp/status/${tweet.data.id}`
   );
