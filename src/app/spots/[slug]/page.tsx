@@ -25,6 +25,7 @@ import {
   Waves,
   Gem,
   Crown,
+  Lightbulb,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -68,6 +69,9 @@ import { PackingChecklist } from "@/components/spots/packing-checklist";
 import { getCatchReportsBySpotAsync } from "@/lib/data/catch-reports";
 import { CatchReportList } from "@/components/spots/catch-report-list";
 import { CatchReportForm } from "@/components/spots/catch-report-form";
+import { getSpotContributionsAsync } from "@/lib/data/spot-contributions";
+import { SpotContributionList } from "@/components/spots/spot-contribution-list";
+import { SpotContributionForm } from "@/components/spots/spot-contribution-form";
 import { NearbyAccommodation, RakutenTravelCta } from "@/components/spots/nearby-accommodation";
 import { SpotRulesCard } from "@/components/spots/spot-rules";
 import { SpotRulesPrefectureFallback } from "@/components/spots/spot-rules-prefecture-fallback";
@@ -963,6 +967,15 @@ export default async function SpotDetailPage({ params }: PageProps) {
           </section>
           ) : null}
           {spot.spotType === "port" && <PortMannerSection />}
+          {/* みんなが教える釣り場情報（共同編集UGC・追記型・実体験でE-E-A-Tを底上げ） */}
+          <section id="spot-tips">
+            <h3 className="mb-1 flex items-center gap-2 text-lg font-bold"><Lightbulb className="size-5 text-amber-500" />みんなが教える釣り場情報</h3>
+            <p className="mb-3 text-xs text-muted-foreground">実際に訪れた釣り人が共有する、{spot.name}のコツ・足場・駐車・狙い目など。</p>
+            <SpotContributionList initialContributions={await getSpotContributionsAsync(slug)} />
+            <div className="mt-3">
+              <SpotContributionForm spotSlug={slug} spotName={spot.name} />
+            </div>
+          </section>
           <section id="catch-report">
             <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><MessageSquare className="size-5" />みんなの釣果報告</h3>
             <CatchReportList spotSlug={slug} initialReports={await getCatchReportsBySpotAsync(slug)} />

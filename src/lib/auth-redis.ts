@@ -12,6 +12,7 @@ export interface TsuriSpotUser {
   isPublic?: boolean;
   createdAt: string;
   reportCount?: number;
+  contributionCount?: number; // スポット情報の共同編集UGC（釣り場メモ等）の投稿数。編集者バッジ/貢献ランクの集計元
   nicknameSetAt?: string;
   bestCatchId?: string;
   styles?: string[];
@@ -223,6 +224,16 @@ export async function decrementReportCount(userId: string): Promise<number> {
   if (!user) return 0;
   const count = Math.max(0, (user.reportCount || 0) - 1);
   const updated = { ...user, reportCount: count };
+  await redis.set(`${USER_PREFIX}${userId}`, updated);
+  return count;
+}
+
+/** contributionCount を+1（スポット情報の共同編集UGC投稿時。編集者バッジ・貢献ランクの集計元） */
+export async function incrementContributionCount(userId: string): Promise<number> {
+  const user = await getUserById(userId);
+  if (!user) return 0;
+  const count = (user.contributionCount || 0) + 1;
+  const updated = { ...user, contributionCount: count };
   await redis.set(`${USER_PREFIX}${userId}`, updated);
   return count;
 }
