@@ -5,6 +5,7 @@ import {
   getStructureFishSlugs,
   getStructureMethods,
 } from "@/lib/data/structure-fish-mapping";
+import { PatentBadge } from "./patent-badge";
 
 // ---------------------------------------------------------------------------
 // Props
@@ -119,11 +120,7 @@ export function SatelliteAnalysisSection({
         <h2 className="text-xl font-bold text-slate-800">
           {isAnalyzed ? "AI構造物解析" : "想定される構造物・釣り場の特徴"}
         </h2>
-        {isAnalyzed && (
-          <span className="rounded-full bg-indigo-600 px-3 py-0.5 text-xs font-semibold text-white">
-            特許技術
-          </span>
-        )}
+        {isAnalyzed && <PatentBadge />}
       </div>
 
       <p className="mb-6 text-sm text-slate-600">

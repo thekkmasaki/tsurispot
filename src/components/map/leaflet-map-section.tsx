@@ -4,6 +4,7 @@ import type { SpotAnalysisResult } from "@/lib/patent/types";
 import type { SpotMapAnalysis } from "./spot-leaflet-map";
 // diagram-generator は純関数のみ（fs非依存）なのでクライアントから import 可
 import { generateMapPositions } from "@/lib/patent/diagram-generator";
+import { PatentBadge } from "@/components/patent/patent-badge";
 import React, { useState, useEffect, useRef } from "react";
 
 interface SpotBasicInfo {
@@ -171,7 +172,10 @@ export function LeafletMapSection({ analysisResult, spot, spotFacilities, restri
 
   return (
     <div className="mt-6">
-      <h3 className={(catchReportTotal ?? 0) > 0 ? "mb-1 text-lg font-bold" : "mb-3 text-lg font-bold"}>AI解析 釣りマップ</h3>
+      <div className={(catchReportTotal ?? 0) > 0 ? "mb-1 flex flex-wrap items-center gap-2" : "mb-3 flex flex-wrap items-center gap-2"}>
+        <h3 className="text-lg font-bold">AI解析 釣りマップ</h3>
+        <PatentBadge />
+      </div>
       {(catchReportTotal ?? 0) > 0 && (
         <p className="mb-2 text-[11px] text-emerald-700">
           直近の実釣果 {catchReportTotal}件 を魚種推定に反映済み
