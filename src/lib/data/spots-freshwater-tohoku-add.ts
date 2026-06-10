@@ -157,7 +157,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）/ 年券8,000円",
     hasParking: true, parkingDetail: "奥入瀬渓流沿いに無料駐車場複数あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/oirasegawa.jpg", images: ["/images/spots/oirasegawa.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.2, reviewCount: 71, googleRating: 4.5, googleReviewCount: 46,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -330,7 +330,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "入渓ポイント付近に路肩駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/anigawa.jpg", images: ["/images/spots/anigawa.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.1, reviewCount: 41, googleRating: 3.5, googleReviewCount: 16,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "餌釣り" },
@@ -354,7 +354,7 @@ export const freshwaterSpotsTohokuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人500円（1日）",
     hasParking: true, parkingDetail: "田沢湖畔に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/tazawako.jpg", images: ["/images/spots/tazawako.jpg"],
+    mainImageUrl: "", images: [],
     rating: 3.8, reviewCount: 58, googleRating: 4.4, googleReviewCount: 950,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },

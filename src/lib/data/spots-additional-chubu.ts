@@ -319,8 +319,7 @@ export const additionalSpotsChubu: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: true,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/yaizu-port.webp",
-    imageAttribution: "Photo: Wikimedia Commons / CC BY-SA 4.0",
+    mainImageUrl: "",
     images: [],
     rating: 3.8,
     reviewCount: 134, googleRating: 3.5, googleReviewCount: 47,
@@ -812,7 +811,7 @@ export const additionalSpotsChubu: FishingSpot[] = [
     region: region("r3"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/yura-port.jpg", images: ["/images/spots/yura-port.jpg"],
+    mainImageUrl: "", images: [],
     rating: 3.8, reviewCount: 56, googleRating: 4.5, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },

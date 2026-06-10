@@ -2161,7 +2161,7 @@ export const extraSpots: FishingSpot[] = [
     region: localRegion("r109"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "無料駐車場あり（15台）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/takehara-port.jpg", images: [], rating: 3.8, reviewCount: 58,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 58,
     catchableFish: [
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング", source: "かめや釣具" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "かめや釣具" },
@@ -2470,7 +2470,7 @@ export const extraSpots: FishingSpot[] = [
     region: localRegion("r118"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "無料駐車場あり（15台）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/shingu-port.jpg", images: [], rating: 3.9, reviewCount: 78,
+    mainImageUrl: "", images: [], rating: 3.9, reviewCount: 78,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "ポイント" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング", source: "ポイント" },
@@ -2597,7 +2597,7 @@ export const extraSpots: FishingSpot[] = [
     region: region("r41"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "有料駐車場あり（周辺）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/karatsu-higashi.jpg", images: [], rating: 4.0, reviewCount: 98,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 98,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "ポイント" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング", source: "ポイント" },
@@ -2708,7 +2708,7 @@ export const extraSpots: FishingSpot[] = [
     region: region("r17"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "有料駐車場あり（周辺）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/naha-tomari.jpg", images: [], rating: 3.6, reviewCount: 85,
+    mainImageUrl: "", images: [], rating: 3.6, reviewCount: 85,
     catchableFish: [
       { fish: fish("aji"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "アングラーズ" },
       { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "アングラーズ" },

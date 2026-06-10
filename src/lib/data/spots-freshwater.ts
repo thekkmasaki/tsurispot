@@ -251,7 +251,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "レンタルボート 4,000〜6,000円。遊漁券別途",
     hasParking: true, parkingDetail: "各ボート店に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
-    mainImageUrl: "/images/spots/ikehara-dam.jpg", images: ["/images/spots/ikehara-dam.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.5, reviewCount: 178, googleRating: 4.6, googleReviewCount: 48,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -1514,7 +1514,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: true,
     hasParking: true, parkingDetail: "遊水地内に複数の無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/watarase-yusuichi.jpg", images: ["/images/spots/watarase-yusuichi.jpg"],
+    mainImageUrl: "", images: [],
     rating: 3.8, reviewCount: 156, googleRating: 4.3, googleReviewCount: 696,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -1589,7 +1589,7 @@ export const freshwaterSpots: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（日券）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/azusagawa.jpg", images: ["/images/spots/azusagawa.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.3, reviewCount: 68, googleRating: 4.7, googleReviewCount: 8315,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" },

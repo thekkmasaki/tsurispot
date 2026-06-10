@@ -61,7 +61,7 @@ export const hokurikuSpots: FishingSpot[] = [
     region: region("r3"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり（50台）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/naoetsu-port.jpg", images: [], rating: 4.0, reviewCount: 165,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 165,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -115,7 +115,7 @@ export const hokurikuSpots: FishingSpot[] = [
     region: region("r3"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "周辺コインパーキングあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/niigata-nishi-port.jpg", images: [], rating: 3.8, reviewCount: 132, googleRating: 3.3, googleReviewCount: 4,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 132, googleRating: 3.3, googleReviewCount: 4,
     catchableFish: [
       { fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -145,7 +145,7 @@ export const hokurikuSpots: FishingSpot[] = [
     region: localRegion("r147"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり（30台）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/kashiwazaki-port.jpg", images: [], rating: 3.8, reviewCount: 118,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 118,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
@@ -206,7 +206,7 @@ export const hokurikuSpots: FishingSpot[] = [
     region: region("r21"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "氷見漁港場外市場駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/himi-gyoko.jpg", images: [], rating: 4.0, reviewCount: 145,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 145,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 6, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -289,7 +289,7 @@ export const hokurikuSpots: FishingSpot[] = [
     region: localRegion("r146"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "漁港周辺に無料駐車場あり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/kurobe-gyoko.jpg", images: [], rating: 3.8, reviewCount: 68,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 68,
     catchableFish: [
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -431,7 +431,7 @@ export const hokurikuSpots: FishingSpot[] = [
     region: region("r23"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "無料駐車場あり（100台以上）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/tsuruga-shinko.jpg", images: [], rating: 4.3, reviewCount: 285,
+    mainImageUrl: "", images: [], rating: 4.3, reviewCount: 285,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -509,7 +509,7 @@ export const hokurikuSpots: FishingSpot[] = [
     region: localRegion("r149"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "漁港内に無料駐車場あり（30台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/echizen-gyoko.jpg", images: [], rating: 4.0, reviewCount: 95,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 95,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
@@ -601,7 +601,7 @@ export const hokurikuSpots: FishingSpot[] = [
     region: localRegion("r147"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "道の駅マリンドリーム能生駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/nou-gyoko.jpg", images: [], rating: 3.8, reviewCount: 98,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 98,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 6, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -634,7 +634,7 @@ export const hokurikuSpots: FishingSpot[] = [
     region: region("r21"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港内に無料駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/namerikawa-gyoko.jpg", images: [], rating: 3.8, reviewCount: 95,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 95,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kamasu"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -726,7 +726,7 @@ export const hokurikuSpots: FishingSpot[] = [
     region: localRegion("r148"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港横に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/hakui-taki-port.jpg", images: [], rating: 3.6, reviewCount: 62, googleRating: 3.9, googleReviewCount: 18,
+    mainImageUrl: "", images: [], rating: 3.6, reviewCount: 62, googleRating: 3.9, googleReviewCount: 18,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 6, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -891,7 +891,7 @@ export const hokurikuSpots: FishingSpot[] = [
     region: localRegion("r149"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "漁港横に無料駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/takasu-gyoko-fukui.jpg", images: [], rating: 4.0, reviewCount: 82,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 82,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
       { fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -920,7 +920,7 @@ export const hokurikuSpots: FishingSpot[] = [
     region: region("r3"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港横に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/murakami-neya-port.jpg", images: [], rating: 3.9, reviewCount: 52,
+    mainImageUrl: "", images: [], rating: 3.9, reviewCount: 52,
     catchableFish: [
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },

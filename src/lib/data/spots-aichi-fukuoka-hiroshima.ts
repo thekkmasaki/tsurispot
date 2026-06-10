@@ -92,7 +92,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
     hasParking: true, parkingDetail: "マリンパーク駐車場（夏季500円、その他無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
     rentalDetail: "竿・リールセット500円/日",
-    mainImageUrl: "/images/spots/shinmaiko-marine-park.jpg", images: [], rating: 4.2, reviewCount: 342, googleRating: 3.5, googleReviewCount: 314,
+    mainImageUrl: "", images: [], rating: 4.2, reviewCount: 342, googleRating: 3.5, googleReviewCount: 314,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "イシグロ" },
       { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り", source: "イシグロ" },

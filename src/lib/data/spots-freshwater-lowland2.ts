@@ -423,7 +423,7 @@ export const freshwaterSpotsLowland2: FishingSpot[] = [
     isFree: true, feeDetail: "無料",
     hasParking: true, parkingDetail: "農道脇に駐車スペース",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/kasumi-tanbo.jpg", images: ["/images/spots/kasumi-tanbo.jpg"],
+    mainImageUrl: "", images: [],
     rating: 3.5, reviewCount: 28,
     catchableFish: [
       { fish: fish("dojou"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ミャク釣り" },

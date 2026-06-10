@@ -857,7 +857,7 @@ export const kyushuChugokuDetailSpots: FishingSpot[] = [
     region: localRegion("r845"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内に無料駐車スペースあり（15台）",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/hikari-murozumi-port.jpg", images: [], rating: 3.7, reviewCount: 74,
+    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 74,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 6, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },

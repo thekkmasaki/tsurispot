@@ -92,7 +92,7 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
     isFree: false, feeDetail: "1日券 大人4,300円、半日券3,100円",
     hasParking: true, parkingDetail: "専用駐車場あり（無料・約30台）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタルタックル一式あり（有料）",
-    mainImageUrl: "/images/spots/wikimedia/saitama-asaka-garden.webp", images: ["/images/spots/wikimedia/saitama-asaka-garden.webp"],
+    mainImageUrl: "", images: [],
     rating: 4.1, reviewCount: 230,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝一番", method: "ルアー（スプーン）" },
@@ -115,7 +115,7 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
     isFree: false, feeDetail: "1日券 大人4,800円、半日券3,500円",
     hasParking: true, parkingDetail: "広い無料駐車場あり（約100台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタルロッド・ルアーセットあり",
-    mainImageUrl: "/images/spots/wikimedia/tochigi-kingfisher.webp", images: ["/images/spots/wikimedia/tochigi-kingfisher.webp"],
+    mainImageUrl: "", images: [],
     rating: 4.3, reviewCount: 195,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝一番", method: "ルアー（スプーン）" },
@@ -139,7 +139,7 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
     isFree: false, feeDetail: "1日券 大人5,000円、半日券3,800円",
     hasParking: true, parkingDetail: "無料駐車場あり（約50台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタルタックルあり",
-    mainImageUrl: "/images/spots/wikimedia/tochigi-kaga-fishing-area.webp", images: ["/images/spots/wikimedia/tochigi-kaga-fishing-area.webp"],
+    mainImageUrl: "", images: [],
     rating: 4.4, reviewCount: 210,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝一番", method: "ルアー（スプーン）" },
@@ -161,7 +161,7 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
     isFree: false, feeDetail: "1日券 大人4,500円",
     hasParking: true, parkingDetail: "無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタルロッドあり",
-    mainImageUrl: "/images/spots/wikimedia/kanagawa-revaspot-hayato.webp", images: ["/images/spots/wikimedia/kanagawa-revaspot-hayato.webp"],
+    mainImageUrl: "", images: [],
     rating: 4.2, reviewCount: 178,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー・フライ" },
@@ -184,7 +184,7 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
     isFree: false, feeDetail: "1日券 大人4,600円、半日券3,300円",
     hasParking: true, parkingDetail: "無料駐車場あり（約80台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタルタックルセット1,500円",
-    mainImageUrl: "/images/spots/wikimedia/shizuoka-susono-fishing-park.webp", images: ["/images/spots/wikimedia/shizuoka-susono-fishing-park.webp"],
+    mainImageUrl: "", images: [],
     rating: 4.0, reviewCount: 165,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝一番", method: "ルアー（スプーン）" },
@@ -206,7 +206,7 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
     isFree: false, feeDetail: "1日券 大人3,500円",
     hasParking: true, parkingDetail: "無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタルロッドあり",
-    mainImageUrl: "/images/spots/wikimedia/tochigi-oashigawa-fc-village.webp", images: ["/images/spots/wikimedia/tochigi-oashigawa-fc-village.webp"],
+    mainImageUrl: "", images: [],
     rating: 3.9, reviewCount: 120,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "エサ釣り" },
@@ -229,7 +229,7 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
     isFree: false, feeDetail: "1日券 大人4,000円、半日券3,000円",
     hasParking: true, parkingDetail: "無料駐車場あり（約40台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタルタックルあり",
-    mainImageUrl: "/images/spots/wikimedia/gunma-kawaba-fishing-plaza.webp", images: ["/images/spots/wikimedia/gunma-kawaba-fishing-plaza.webp"],
+    mainImageUrl: "", images: [],
     rating: 4.0, reviewCount: 135,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝一番", method: "ルアー（スプーン）" },
@@ -251,7 +251,7 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
     isFree: false, feeDetail: "1日券 大人3,800円（エサ釣り）",
     hasParking: true, parkingDetail: "有料駐車場あり（1台1,000円/日）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタル竿・エサセットあり",
-    mainImageUrl: "/images/spots/wikimedia/tokyo-okutama-fishing-center.webp", images: ["/images/spots/wikimedia/tokyo-okutama-fishing-center.webp"],
+    mainImageUrl: "", images: [],
     rating: 3.8, reviewCount: 225,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "エサ釣り" },
@@ -273,7 +273,7 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
     isFree: false, feeDetail: "1日券 大人4,200円",
     hasParking: true, parkingDetail: "無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/gunma-akaguna-fa.webp", images: ["/images/spots/wikimedia/gunma-akaguna-fa.webp"],
+    mainImageUrl: "", images: [],
     rating: 4.1, reviewCount: 98,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー・フライ" },
@@ -295,7 +295,7 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
     isFree: false, feeDetail: "1日券 大人5,000円",
     hasParking: true, parkingDetail: "無料駐車場あり（約30台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/yamanashi-oshino-fishing-area.webp", images: ["/images/spots/wikimedia/yamanashi-oshino-fishing-area.webp"],
+    mainImageUrl: "", images: [],
     rating: 4.3, reviewCount: 145,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝一番", method: "ルアー・フライ" },
@@ -318,7 +318,7 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
     isFree: false, feeDetail: "1日券 大人4,700円、半日券3,500円",
     hasParking: true, parkingDetail: "無料駐車場あり（約100台）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタルタックルセットあり",
-    mainImageUrl: "/images/spots/wikimedia/shizuoka-higashiyamako-fa.webp", images: ["/images/spots/wikimedia/shizuoka-higashiyamako-fa.webp"],
+    mainImageUrl: "", images: [],
     rating: 4.0, reviewCount: 188,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝一番", method: "ルアー（スプーン）" },
@@ -340,7 +340,7 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
     isFree: false, feeDetail: "1日券 大人4,500円",
     hasParking: true, parkingDetail: "無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタルタックルあり",
-    mainImageUrl: "/images/spots/wikimedia/nagano-hakuba-fishing-area.webp", images: ["/images/spots/wikimedia/nagano-hakuba-fishing-area.webp"],
+    mainImageUrl: "", images: [],
     rating: 4.1, reviewCount: 88,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝一番", method: "ルアー（スプーン）" },
@@ -363,7 +363,7 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
     isFree: false, feeDetail: "1日券 大人3,500円（持ち帰り5匹付き）",
     hasParking: true, parkingDetail: "無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタル竿セットあり",
-    mainImageUrl: "/images/spots/wikimedia/gunma-uenomura-fishing-resort.webp", images: ["/images/spots/wikimedia/gunma-uenomura-fishing-resort.webp"],
+    mainImageUrl: "", images: [],
     rating: 3.9, reviewCount: 95,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "エサ釣り" },
@@ -386,7 +386,7 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
     isFree: false, feeDetail: "1日券 大人4,000円、半日券2,800円",
     hasParking: true, parkingDetail: "無料駐車場あり（約60台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタルタックルあり",
-    mainImageUrl: "/images/spots/wikimedia/nagano-hirayako-fishing-spot.webp", images: ["/images/spots/wikimedia/nagano-hirayako-fishing-spot.webp"],
+    mainImageUrl: "", images: [],
     rating: 4.0, reviewCount: 110,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝一番", method: "ルアー（スプーン）" },
@@ -408,7 +408,7 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
     isFree: false, feeDetail: "1日券 大人4,000円",
     hasParking: true, parkingDetail: "無料駐車場あり（約40台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタルロッドあり",
-    mainImageUrl: "/images/spots/wikimedia/fukushima-forest-park-adatara.webp", images: ["/images/spots/wikimedia/fukushima-forest-park-adatara.webp"],
+    mainImageUrl: "", images: [],
     rating: 4.2, reviewCount: 82,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝一番", method: "ルアー（スプーン）" },
@@ -431,7 +431,7 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
     isFree: false, feeDetail: "1日券 大人3,300円（持ち帰り含む）",
     hasParking: true, parkingDetail: "無料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "レンタル竿セットあり",
-    mainImageUrl: "/images/spots/wikimedia/aichi-kitakata-masu-fishing.webp", images: ["/images/spots/wikimedia/aichi-kitakata-masu-fishing.webp"],
+    mainImageUrl: "", images: [],
     rating: 3.8, reviewCount: 72,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "エサ釣り" },
@@ -453,7 +453,7 @@ export const freshwaterSpotsAdd2: FishingSpot[] = [
     isFree: false, feeDetail: "1日券 大人4,500円",
     hasParking: true, parkingDetail: "無料駐車場あり（約50台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/gifu-mino-fishing-area.webp", images: ["/images/spots/wikimedia/gifu-mino-fishing-area.webp"],
+    mainImageUrl: "", images: [],
     rating: 4.2, reviewCount: 125,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝一番", method: "ルアー（スプーン）" },

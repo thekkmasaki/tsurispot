@@ -99,7 +99,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,200円（1日）",
     hasParking: true, parkingDetail: "細岡展望台駐車場等あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/kushirogawa.jpg", images: ["/images/spots/kushirogawa.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.4, reviewCount: 95, googleRating: 4.2, googleReviewCount: 84,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -234,7 +234,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "入渓ポイント周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/shizukuishigawa.jpg", images: ["/images/spots/shizukuishigawa.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.0, reviewCount: 48, googleRating: 4.4, googleReviewCount: 5,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "餌釣り" },
@@ -344,7 +344,7 @@ export const freshwaterSpotsTohoku: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,500円（1日・アユ）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペース多数",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/sagaegawa.jpg", images: ["/images/spots/sagaegawa.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.2, reviewCount: 94, googleRating: 3.7, googleReviewCount: 13,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },

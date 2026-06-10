@@ -796,7 +796,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
     region: region("r9"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海岸近くに有料駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/yumigahama-beach.jpg", images: [], rating: 3.8, reviewCount: 89, googleRating: 4.4, googleReviewCount: 1687,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 89, googleRating: 4.4, googleReviewCount: 1687,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "サーフルアー" },

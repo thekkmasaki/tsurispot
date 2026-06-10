@@ -258,7 +258,7 @@ export const freshwaterSpotsWestAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "面河渓駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/omogogawa.jpg", images: ["/images/spots/omogogawa.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.3, reviewCount: 78, googleRating: 4.6, googleReviewCount: 20,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フライ" },

@@ -130,7 +130,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日）",
     hasParking: true, parkingDetail: "漁協指定の駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/mazegawa.jpg", images: ["/images/spots/mazegawa.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.5, reviewCount: 198, googleRating: 4.2, googleReviewCount: 24,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -154,7 +154,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/waragawa.jpg", images: ["/images/spots/waragawa.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.2, reviewCount: 78, googleRating: 4, googleReviewCount: 6,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -302,7 +302,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "付知峡周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/tsukechigawa.jpg", images: ["/images/spots/tsukechigawa.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.0, reviewCount: 84, googleRating: 4.7, googleReviewCount: 3,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -350,7 +350,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "入渓ポイント近くに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/dandogawa.jpg", images: ["/images/spots/dandogawa.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.1, reviewCount: 56,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -373,7 +373,7 @@ export const freshwaterSpotsChubuAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,300円（1日）",
     hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/hayatsukigawa.jpg", images: ["/images/spots/hayatsukigawa.jpg"],
+    mainImageUrl: "", images: [],
     rating: 3.9, reviewCount: 67, googleRating: 4.3, googleReviewCount: 7,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "日中", method: "友釣り" },

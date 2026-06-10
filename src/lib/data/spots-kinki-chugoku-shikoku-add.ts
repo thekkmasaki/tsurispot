@@ -670,7 +670,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
     isFree: true,
     hasParking: true, parkingDetail: "磯場近くに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/jushimanohana.jpg", images: ["/images/spots/jushimanohana.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.2, reviewCount: 67, googleRating: 3.5, googleReviewCount: 8,
     catchableFish: [
       { fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
@@ -796,7 +796,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
     isFree: true,
     hasParking: true, parkingDetail: "日生港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/hinase-port.jpg", images: ["/images/spots/hinase-port.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.0, reviewCount: 187,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -926,7 +926,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
     isFree: true,
     hasParking: true, parkingDetail: "宇野港周辺に有料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/tamano-uno.jpg", images: ["/images/spots/tamano-uno.jpg"],
+    mainImageUrl: "", images: [],
     rating: 3.7, reviewCount: 98,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "フカセ" },
