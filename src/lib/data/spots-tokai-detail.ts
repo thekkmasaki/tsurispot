@@ -491,7 +491,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
     region: lr("r826"), spotType: "breakwater", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "師崎港駐車場（有料・300円/日）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/morozaki-ko-teibo.jpg", images: [], rating: 4.0, reviewCount: 143, googleRating: 3.5, googleReviewCount: 36,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 143, googleRating: 3.5, googleReviewCount: 36,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ・夕マヅメ", method: "エギング" },
       { fish: fish("inada"), monthStart: 9, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
@@ -518,7 +518,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
     region: lr("r826"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺の無料駐車スペース",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/kowa-ko-teibo.jpg", images: [], rating: 3.9, reviewCount: 98, googleRating: 3.7, googleReviewCount: 18,
+    mainImageUrl: "", images: [], rating: 3.9, reviewCount: 98, googleRating: 3.7, googleReviewCount: 18,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ" },
@@ -702,7 +702,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
     region: lr("r828"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "ラグーナ駐車場（有料・テーマパーク利用者向け）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/gamagori-laguna-ura.jpg", images: [], rating: 3.7, reviewCount: 54,
+    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 54,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ヘチ釣り" },
@@ -900,7 +900,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
     region: region("r11"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港の無料駐車場（20台）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/nishiki-ko-teibo.jpg", images: [], rating: 4.2, reviewCount: 73,
+    mainImageUrl: "", images: [], rating: 4.2, reviewCount: 73,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 3, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エギング（大型狙い）" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ・夕マヅメ", method: "エギング" },
@@ -1003,7 +1003,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
     region: lr("r832"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺の無料駐車スペース（10台程度）",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/matoya-ko-teibo.jpg", images: [], rating: 4.0, reviewCount: 67, googleRating: 4.2, googleReviewCount: 13,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 67, googleRating: 4.2, googleReviewCount: 13,
     catchableFish: [
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },

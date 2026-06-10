@@ -314,7 +314,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     region: lr("r744"), spotType: "river", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "涸沼自然公園駐車場（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/hinuma.jpg", images: ["/images/spots/hinuma.jpg"],
+    mainImageUrl: "", images: [],
     rating: 3.8, reviewCount: 112, googleRating: 4, googleReviewCount: 150,
     catchableFish: [
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー" },
@@ -340,7 +340,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,100円（1日）",
     hasParking: true, parkingDetail: "湖畔に有料駐車場あり（500円/日）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/chuzenji-lake.jpg", images: ["/images/spots/chuzenji-lake.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.4, reviewCount: 198,
     catchableFish: [
       { fish: fish("nijimasu"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -365,7 +365,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "塩原温泉各所に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/houkigawa.jpg", images: ["/images/spots/houkigawa.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.0, reviewCount: 89, googleRating: 3.6, googleReviewCount: 34,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -390,7 +390,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,000円（1日）",
     hasParking: true, parkingDetail: "各入渓ポイントに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/usuigawa.jpg", images: ["/images/spots/usuigawa.jpg"],
+    mainImageUrl: "", images: [],
     rating: 3.7, reviewCount: 56,
     catchableFish: [
       { fish: fish("yamame"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -413,7 +413,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,200円（1日）",
     hasParking: true, parkingDetail: "各入渓ポイントに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/katashina.jpg", images: ["/images/spots/katashina.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.0, reviewCount: 72, googleRating: 3.5, googleReviewCount: 2,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },

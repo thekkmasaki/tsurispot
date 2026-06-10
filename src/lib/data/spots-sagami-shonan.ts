@@ -167,7 +167,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
     region: region("r7"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "葉山港駐車場（1時間310円）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/hayama-port.jpg", images: [], rating: 4.0, reviewCount: 158,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 158,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
@@ -684,7 +684,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
     region: region("r7"), spotType: "beach", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "柳島海岸駐車場（1日500円）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/chigasaki-headland.jpg", images: [], rating: 3.7, reviewCount: 85,
+    mainImageUrl: "", images: [], rating: 3.7, reviewCount: 85,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー・泳がせ" },

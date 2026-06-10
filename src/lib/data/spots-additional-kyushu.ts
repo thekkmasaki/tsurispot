@@ -130,8 +130,7 @@ export const additionalSpotsKyushu: FishingSpot[] = [
     hasConvenienceStore: true,
     hasFishingShop: false,
     hasRentalRod: false,
-    mainImageUrl: "/images/spots/wikimedia/nagasaki-port.webp",
-    imageAttribution: "Photo: Soramimi / CC BY-SA 4.0",
+    mainImageUrl: "",
     images: [],
     rating: 3.6,
     reviewCount: 98, googleRating: 4.7, googleReviewCount: 18,
@@ -562,7 +561,7 @@ export const additionalSpotsKyushu: FishingSpot[] = [
     region: region("r34"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/ushibuka-port.jpg", images: ["/images/spots/ushibuka-port.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.3, reviewCount: 45, googleRating: 4.4, googleReviewCount: 59,
     catchableFish: [
       { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
@@ -616,7 +615,7 @@ export const additionalSpotsKyushu: FishingSpot[] = [
     region: region("r16"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/kinkowan-umigata.jpg", images: ["/images/spots/kinkowan-umigata.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.0, reviewCount: 45, googleRating: 4.4, googleReviewCount: 14,
     catchableFish: [
       { fish: fish("inada"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },

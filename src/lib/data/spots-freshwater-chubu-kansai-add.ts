@@ -158,7 +158,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "宇奈月温泉周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/kurobegawa-upper.jpg", images: ["/images/spots/kurobegawa-upper.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.5, reviewCount: 78, googleRating: 4.1, googleReviewCount: 62,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -181,7 +181,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/shogawa-upper.jpg", images: ["/images/spots/shogawa-upper.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.0, reviewCount: 89,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -206,7 +206,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日）、年券12,000円",
     hasParking: true, parkingDetail: "小渡ヤナ周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/yahagigawa-upper.jpg", images: ["/images/spots/yahagigawa-upper.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.2, reviewCount: 156, googleRating: 5, googleReviewCount: 1,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -255,7 +255,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,600円（1日）、年券5,000円",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/miyagawa-upper.jpg", images: ["/images/spots/miyagawa-upper.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.3, reviewCount: 145,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -279,7 +279,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "キャンプinn海山に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/choshigawa.jpg", images: ["/images/spots/choshigawa.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.4, reviewCount: 123, googleRating: 4.6, googleReviewCount: 92,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -304,7 +304,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人2,000円（1日）",
     hasParking: true, parkingDetail: "道の駅くつき新本陣に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/adogawa-upper.jpg", images: ["/images/spots/adogawa-upper.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.1, reviewCount: 145, googleRating: 4.1, googleReviewCount: 38,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -354,7 +354,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "永源寺周辺に駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/echigawa-upper.jpg", images: ["/images/spots/echigawa-upper.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.0, reviewCount: 89, googleRating: 4.4, googleReviewCount: 23,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -455,7 +455,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/aridagawa-upper.jpg", images: ["/images/spots/aridagawa-upper.jpg"],
+    mainImageUrl: "", images: [],
     rating: 3.9, reviewCount: 89, googleRating: 5, googleReviewCount: 3,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -678,7 +678,7 @@ export const freshwaterSpotsChubuKansaiAdd: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人1,500円（1日）",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/kushidagawa-upper.jpg", images: ["/images/spots/kushidagawa-upper.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.1, reviewCount: 112, googleRating: 3.7, googleReviewCount: 21,
     catchableFish: [
       { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },

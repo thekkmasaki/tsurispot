@@ -137,7 +137,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券 大人3,500円（年券）/ 日券1,500円",
     hasParking: true, parkingDetail: "河川沿いに駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/choshigawa-mie.jpg", images: ["/images/spots/choshigawa-mie.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.1, reviewCount: 89, googleRating: 4.6, googleReviewCount: 92,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },

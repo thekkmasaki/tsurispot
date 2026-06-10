@@ -213,7 +213,7 @@ export const shikokuSpots: FishingSpot[] = [
     region: localRegion("r151"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/komatsushima-port.jpg", images: [], rating: 3.6, reviewCount: 95,
+    mainImageUrl: "", images: [], rating: 3.6, reviewCount: 95,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -329,7 +329,7 @@ export const shikokuSpots: FishingSpot[] = [
     region: localRegion("r152"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "漁港内に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/sukumo-bay.jpg", images: [], rating: 4.2, reviewCount: 68,
+    mainImageUrl: "", images: [], rating: 4.2, reviewCount: 68,
     catchableFish: [
       { fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
@@ -584,7 +584,7 @@ export const shikokuSpots: FishingSpot[] = [
     region: region("r30"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港横に無料駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/sanuki-tsuda-port.jpg", images: [], rating: 3.6, reviewCount: 82,
+    mainImageUrl: "", images: [], rating: 3.6, reviewCount: 82,
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "テンヤ" },
@@ -605,7 +605,7 @@ export const shikokuSpots: FishingSpot[] = [
     region: localRegion("r150"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/tadotsu-port.jpg", images: [], rating: 3.5, reviewCount: 72,
+    mainImageUrl: "", images: [], rating: 3.5, reviewCount: 72,
     catchableFish: [
       { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
@@ -663,7 +663,7 @@ export const shikokuSpots: FishingSpot[] = [
     region: localRegion("r151"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港内に無料駐車スペースあり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/hiwasa-port.jpg", images: [], rating: 3.8, reviewCount: 75,
+    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 75,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
@@ -743,7 +743,7 @@ export const shikokuSpots: FishingSpot[] = [
     region: localRegion("r152"), spotType: "river", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "河川敷に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/shimanto-river-mouth.jpg", images: [], rating: 4.2, reviewCount: 65,
+    mainImageUrl: "", images: [], rating: 4.2, reviewCount: 65,
     catchableFish: [
       { fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー" },
       { fish: fish("hirame"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -775,7 +775,7 @@ export const shikokuSpots: FishingSpot[] = [
     region: localRegion("r154"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/niihama-port.jpg", images: [], rating: 3.5, reviewCount: 88,
+    mainImageUrl: "", images: [], rating: 3.5, reviewCount: 88,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
@@ -827,7 +827,7 @@ export const shikokuSpots: FishingSpot[] = [
     region: region("r30"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/higashikagawa-hiketa-port.jpg", images: [], rating: 3.6, reviewCount: 68,
+    mainImageUrl: "", images: [], rating: 3.6, reviewCount: 68,
     catchableFish: [
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
       { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -848,7 +848,7 @@ export const shikokuSpots: FishingSpot[] = [
     region: localRegion("r151"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "漁港内に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/kaiyo-shishikui-port.jpg", images: [], rating: 4.0, reviewCount: 58,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 58,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
       { fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
@@ -875,7 +875,7 @@ export const shikokuSpots: FishingSpot[] = [
     region: region("r14"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/aki-port-kochi.jpg", images: [], rating: 3.6, reviewCount: 75,
+    mainImageUrl: "", images: [], rating: 3.6, reviewCount: 75,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("kamasu"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -1056,7 +1056,7 @@ export const shikokuSpots: FishingSpot[] = [
     region: localRegion("r152"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "漁港内に無料駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/shimanto-shimonokae-port.jpg", images: [], rating: 4.0, reviewCount: 45, googleRating: 4.6, googleReviewCount: 9,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 45, googleRating: 4.6, googleReviewCount: 9,
     catchableFish: [
       { fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
       { fish: fish("aoriika"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },

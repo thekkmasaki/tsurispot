@@ -262,7 +262,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
     region: localRegion("r1004"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "フェリーターミナル近くに駐車場あり",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "/images/spots/tanegashima-nishinoomote-port.jpg", images: [], rating: 4.0, reviewCount: 89,
+    mainImageUrl: "", images: [], rating: 4.0, reviewCount: 89,
     catchableFish: [
       { fish: fish("aji"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("kamasu"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー・サビキ" },
@@ -408,7 +408,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
     region: localRegion("r1010"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "青島周辺に有料駐車場あり（500円/日）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/aoshima-port.jpg", images: [], rating: 3.9, reviewCount: 132,
+    mainImageUrl: "", images: [], rating: 3.9, reviewCount: 132,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("kamasu"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー・サビキ" },
@@ -803,7 +803,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
     region: localRegion("r1027"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "ターミナル周辺に駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "港近くの釣具店でレンタル可能（2000円〜）",
-    mainImageUrl: "/images/spots/kumejima-kaneshiro-port.jpg", images: [], rating: 4.4, reviewCount: 109,
+    mainImageUrl: "", images: [], rating: 4.4, reviewCount: 109,
     catchableFish: [
       { fish: fish("kanpachi"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("hata"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "泳がせ釣り" },
@@ -984,7 +984,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
     region: localRegion("r1041"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港湾周辺に無料駐車スペースあり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true, rentalDetail: "海上釣り堀「釣っちゃ王」でレンタル可能",
-    mainImageUrl: "/images/spots/kamae-port.jpg", images: [], rating: 4.1, reviewCount: 156, googleRating: 3.9, googleReviewCount: 16,
+    mainImageUrl: "", images: [], rating: 4.1, reviewCount: 156, googleRating: 3.9, googleReviewCount: 16,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },

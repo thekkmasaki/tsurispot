@@ -477,7 +477,7 @@ export const freshwaterSpotsMajor: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券（日券）大人1,500円",
     hasParking: true, parkingDetail: "各入渓ポイント付近に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/kesengawa-iwate.jpg", images: ["/images/spots/kesengawa-iwate.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.1, reviewCount: 54, googleRating: 4.0, googleReviewCount: 18,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エサ釣り" },
@@ -653,7 +653,7 @@ export const freshwaterSpotsMajor: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券（日券）大人3,000円（アユ）",
     hasParking: true, parkingDetail: "沈下橋周辺に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/shimantogawa-mid.jpg", images: ["/images/spots/shimantogawa-mid.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.5, reviewCount: 156, googleRating: 4.6, googleReviewCount: 890,
     catchableFish: [
       { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
@@ -813,7 +813,7 @@ export const freshwaterSpotsMajor: FishingSpot[] = [
     isFree: false, feeDetail: "遊漁券（日券）大人1,000円",
     hasParking: true, parkingDetail: "林道脇に駐車スペースあり",
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/akaishigawa-shirakami.jpg", images: ["/images/spots/akaishigawa-shirakami.jpg"],
+    mainImageUrl: "", images: [],
     rating: 4.6, reviewCount: 28, googleRating: 4.3, googleReviewCount: 8,
     catchableFish: [
       { fish: fish("iwana"), monthStart: 4, monthEnd: 9, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "テンカラ" },
