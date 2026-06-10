@@ -75,6 +75,7 @@ function toMapData(
           adjustedProbability?: number;
           inSeasonNow?: boolean;
           catchReportCount?: number;
+          recommendLevel?: "high" | "mid" | "low";
         };
         return {
           name: f.name,
@@ -85,6 +86,7 @@ function toMapData(
           adjustedProbability: scored.adjustedProbability,
           inSeasonNow: scored.inSeasonNow,
           catchReportCount: scored.catchReportCount,
+          recommendLevel: scored.recommendLevel,
         };
       }),
       rating: z.rating,
@@ -178,7 +180,7 @@ export function LeafletMapSection({ analysisResult, spot, spotFacilities, restri
       </div>
       {(catchReportTotal ?? 0) > 0 && (
         <p className="mb-2 text-[11px] text-emerald-700">
-          直近の実釣果 {catchReportTotal}件 を魚種推定に反映済み
+          ユーザー釣果報告 {catchReportTotal}件 を魚種推定の参考にしています
         </p>
       )}
       <ErrorCatcher onError={(msg) => setError(msg)}>

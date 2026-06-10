@@ -65,6 +65,8 @@ interface ZoneFish {
   inSeasonNow?: boolean;
   /** 実釣果報告数 */
   catchReportCount?: number;
+  /** fish-estimation が算出した推奨レベル（判定の一元化用） */
+  recommendLevel?: "high" | "mid" | "low";
 }
 
 /** 環境パラメータ適用後スコア優先（未適用データは基礎スコア） */
@@ -72,7 +74,11 @@ function fishScore(f: ZoneFish): number {
   return f.adjustedProbability ?? f.probability;
 }
 
+const RECOMMEND_LEVEL_MARK: Record<string, string> = { high: "◎", mid: "○", low: "△" };
+
 function recommendMark(f: ZoneFish): string {
+  // fish-estimation の判定を最優先（丸め前の値で判定済み）。未適用データのみ閾値で代替
+  if (f.recommendLevel) return RECOMMEND_LEVEL_MARK[f.recommendLevel];
   const s = fishScore(f);
   return s >= 0.72 ? "◎" : s >= 0.45 ? "○" : "△";
 }

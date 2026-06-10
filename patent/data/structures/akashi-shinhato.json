@@ -25,6 +25,7 @@
     }
   },
   "structureLabel": "明石新波止（防波堤）",
+  "_structureLengthNote": "L字型防波堤の実延長。端点直線距離(約330m)ではなく公知の全長550mを採用",
   "seaLabel": "明石海峡",
   "detectedStructures": [
     {
@@ -527,7 +528,7 @@
     }
   ],
   "facilities": [],
-  "structureLength": 0,
+  "structureLength": 550,
   "analyzedAt": "2026-03-25T21:44:49.955934",
   "pipelineVersion": "1.0.0"
 }

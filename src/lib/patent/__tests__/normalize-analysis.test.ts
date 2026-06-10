@@ -93,14 +93,15 @@ describe("normalizeAnalysisResult — 生出力の補完", () => {
   });
 });
 
-describe("normalizeAnalysisResult — 全6スポットが正規化後も妥当", () => {
+describe("normalizeAnalysisResult — 全解析済みスポットが正規化後も妥当", () => {
   const slugs = fs
     .readdirSync(STRUCTURES_DIR)
     .filter((f) => f.endsWith(".json"))
     .map((f) => f.replace(/\.json$/, ""));
 
-  it("6スポット分のJSONが存在する", () => {
-    expect(slugs).toHaveLength(6);
+  it("解析済みJSONが存在する（亀崎港は座標不一致で rejected/ に隔離済み）", () => {
+    expect(slugs.length).toBeGreaterThanOrEqual(5);
+    expect(slugs).not.toContain("kamezaki-kou");
   });
 
   it.each(slugs)("%s: 構造物長>0・ゾーンあり・テトラ妥当", (slug) => {

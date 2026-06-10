@@ -247,6 +247,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
   // 釣果報告（地図の推定ブーストと釣果一覧で共用するため1回だけ取得）
   const catchReports = await getCatchReportsBySpotAsync(slug);
+  // 魚種推定への反映はユーザー投稿（UGC）のみ。サンプルデータ（id: cr-*）は
+  // 「実釣果N件」表示に混入させない（虚偽表示防止）
+  const ugcCatchReports = catchReports.filter((r) => !r.id.startsWith("cr-"));
 
   // 魚種推定部130: 環境パラメータ（季節・地域・潮汐・水温）＋釣果フィードバックを適用
   const estimationCtx = guardedAnalysisResult
@@ -260,7 +263,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           monthEnd: cf.monthEnd,
           peakSeason: cf.peakSeason,
         })),
-        catchCounts: aggregateCatchCounts(catchReports),
+        catchCounts: aggregateCatchCounts(ugcCatchReports),
       }
     : null;
   const analysisResult =
@@ -786,7 +789,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
         {/* Leaflet地図 */}
         {analysisResult && <LeafletMapSection
           analysisResult={analysisResult}
-          catchReportTotal={catchReports.length}
+          catchReportTotal={ugcCatchReports.length}
           spot={{
             name: spot.name,
             address: spot.address,
