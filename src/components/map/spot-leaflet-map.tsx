@@ -13,6 +13,7 @@ import {
   useMapEvents,
 } from "react-leaflet";
 import L from "leaflet";
+import type { MapPointMarker } from "@/lib/patent/diagram-generator";
 // Leaflet CSS は外部CDN(unpkg)ではなく自己ホスト（node_modules）から取り込み、
 // この遅延チャンクと一緒にロードする（外部レンダーブロッキングを排除）。
 import "leaflet/dist/leaflet.css";
@@ -58,6 +59,28 @@ interface ZoneFish {
   season: string;
   difficulty: string;
   probability: number;
+  /** 環境パラメータ（季節・地域・潮汐・水温）適用後のおすすめ度 */
+  adjustedProbability?: number;
+  /** 現在月がシーズン内か */
+  inSeasonNow?: boolean;
+  /** 実釣果報告数 */
+  catchReportCount?: number;
+  /** fish-estimation が算出した推奨レベル（判定の一元化用） */
+  recommendLevel?: "high" | "mid" | "low";
+}
+
+/** 環境パラメータ適用後スコア優先（未適用データは基礎スコア） */
+function fishScore(f: ZoneFish): number {
+  return f.adjustedProbability ?? f.probability;
+}
+
+const RECOMMEND_LEVEL_MARK: Record<string, string> = { high: "◎", mid: "○", low: "△" };
+
+function recommendMark(f: ZoneFish): string {
+  // fish-estimation の判定を最優先（丸め前の値で判定済み）。未適用データのみ閾値で代替
+  if (f.recommendLevel) return RECOMMEND_LEVEL_MARK[f.recommendLevel];
+  const s = fishScore(f);
+  return s >= 0.72 ? "◎" : s >= 0.45 ? "○" : "△";
 }
 
 interface Zone {
@@ -132,6 +155,8 @@ export interface SpotMapAnalysis {
     east: { lat: number; lng: number };
   };
   detectedTetrapods?: DetectedTetrapod[];
+  /** 番号付き釣りポイントマーカー（特許請求項6） */
+  positions?: MapPointMarker[];
   spotInfo?: SpotInfo;
   spotFacilities?: SpotFacilities;
   restrictedAreas?: string[];
@@ -335,8 +360,8 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
   // 全ゾーンで同じ魚種かチェック（同じなら個別ラベル不要）
   const allZoneFishKeys = useMemo(() => {
     return data.zones.map((z) =>
-      z.estimatedFish
-        .sort((a, b) => b.probability - a.probability)
+      [...z.estimatedFish]
+        .sort((a, b) => fishScore(b) - fishScore(a))
         .slice(0, 3)
         .map((f) => f.name)
         .join(",")
@@ -349,7 +374,7 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
     const map = new Map<string, string>();
     for (const z of data.zones) {
       if (z.estimatedFish.length > 0) {
-        const best = z.estimatedFish.reduce((a, b) => b.probability > a.probability ? b : a);
+        const best = z.estimatedFish.reduce((a, b) => fishScore(b) > fishScore(a) ? b : a);
         map.set(z.id, best.method);
       }
     }
@@ -392,7 +417,7 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
         {zoneBounds.map(({ zone, positions }) => {
           const style = RATING_STYLE[zone.rating] || RATING_STYLE.normal;
           const topFish = [...zone.estimatedFish]
-            .sort((a, b) => b.probability - a.probability)
+            .sort((a, b) => fishScore(b) - fishScore(a))
             .slice(0, 5);
 
           return (
@@ -479,19 +504,31 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
                   <table className="w-full text-xs">
                     <thead>
                       <tr className="border-b text-left text-gray-500">
+                        <th className="py-1 pr-2">今月</th>
                         <th className="py-1 pr-2">魚種</th>
                         <th className="py-1 pr-2">釣り方</th>
                         <th className="py-1">時期</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {topFish.map((f) => (
-                          <tr key={f.name} className="border-b border-gray-100">
-                            <td className="py-1 pr-2 font-medium">{f.name}</td>
-                            <td className="py-1 pr-2 text-gray-600">{f.method}</td>
-                            <td className="py-1 text-gray-500">{f.season}</td>
+                      {topFish.map((f) => {
+                          const offSeason = f.inSeasonNow === false;
+                          return (
+                          <tr key={f.name} className={`border-b border-gray-100${offSeason ? " text-gray-400" : ""}`}>
+                            <td className="py-1 pr-2 text-center">{recommendMark(f)}</td>
+                            <td className="py-1 pr-2 font-medium">
+                              {f.name}
+                              {(f.catchReportCount ?? 0) > 0 && (
+                                <span className="ml-1 rounded bg-emerald-100 px-1 py-0.5 text-[9px] font-bold text-emerald-700">
+                                  実釣果{f.catchReportCount}件
+                                </span>
+                              )}
+                            </td>
+                            <td className={`py-1 pr-2${offSeason ? "" : " text-gray-600"}`}>{f.method}</td>
+                            <td className={`py-1${offSeason ? "" : " text-gray-500"}`}>{f.season}</td>
                           </tr>
-                        ))}
+                          );
+                        })}
                     </tbody>
                   </table>
                 </div>
@@ -504,8 +541,8 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
         {showFishLabels && zoneBounds
           .filter(({ zone }) => !allFishSame || zone.rating === "hot")
           .map(({ zone, center }) => {
-            const topFish = zone.estimatedFish
-              .sort((a, b) => b.probability - a.probability)
+            const topFish = [...zone.estimatedFish]
+              .sort((a, b) => fishScore(b) - fishScore(a))
               .slice(0, 3)
               .map((f) => f.name);
             if (topFish.length === 0) return null;
@@ -566,6 +603,68 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
             </Tooltip>
           </Marker>
         ))}
+
+        {/* 番号付き釣りポイントマーカー（特許請求項6）: zoom>=15で表示 */}
+        {zoom >= 15 && data.positions?.map((p) => {
+          const style = RATING_STYLE[p.rating] || RATING_STYLE.normal;
+          const pos: [number, number] = [xToLat(p.relativeX), xToLng(p.relativeX)];
+          const topFish = p.fish.slice(0, 4);
+          return (
+            <Marker
+              key={`pos-${p.number}`}
+              position={pos}
+              icon={L.divIcon({
+                className: "",
+                html: `<div style="width:22px;height:22px;border-radius:50%;background:${style.color};color:white;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.4);line-height:1">${p.number}</div>`,
+                iconSize: [22, 22],
+                iconAnchor: [11, 11],
+              })}
+            >
+              <Popup maxWidth={300}>
+                <div className="min-w-[220px] space-y-2 p-1">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm font-bold">{p.name}</span>
+                    <span
+                      className="rounded-full px-2 py-0.5 text-[10px] font-bold text-white"
+                      style={{ backgroundColor: style.color }}
+                    >
+                      {style.emoji} {style.label}
+                    </span>
+                  </div>
+                  {p.depth && (
+                    <div className="rounded bg-sky-50 px-2 py-1 text-[11px] text-sky-800">
+                      推定水深: {p.depth}
+                    </div>
+                  )}
+                  {p.features && p.features.length > 0 && (
+                    <div className="flex flex-wrap gap-1">
+                      {p.features.slice(0, 4).map((f) => (
+                        <span key={f} className="rounded bg-gray-100 px-1.5 py-0.5 text-[10px] text-gray-700">
+                          {f}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  {topFish.length > 0 && (
+                    <table className="w-full text-xs">
+                      <tbody>
+                        {topFish.map((f) => (
+                          <tr key={f.name} className="border-b border-gray-100">
+                            <td className="py-0.5 pr-2 font-medium">{f.name}</td>
+                            <td className="py-0.5 text-gray-600">{f.method}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  )}
+                  {p.description && (
+                    <p className="text-[11px] leading-relaxed text-gray-600">{p.description}</p>
+                  )}
+                </div>
+              </Popup>
+            </Marker>
+          );
+        })}
 
         {/* テトラポッド検出マーカー: zoom>=17で表示 */}
         {zoom >= 17 && data.detectedTetrapods?.map((tp, idx) => (
@@ -679,6 +778,17 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
             <span className="font-medium">{val.emoji} {val.label}</span>
           </span>
         ))}
+        {(data.positions?.length ?? 0) > 0 && (
+          <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
+            <span
+              className="inline-flex size-4 items-center justify-center rounded-full text-[9px] font-bold text-white"
+              style={{ backgroundColor: "#2563eb" }}
+            >
+              1
+            </span>
+            釣りポイント番号
+          </span>
+        )}
         {(data.facilities.length > 0 || extraFacilityMarkers.length > 0) && (
           <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
             <span className="text-base">{"\uD83C\uDFEA"}</span> 施設

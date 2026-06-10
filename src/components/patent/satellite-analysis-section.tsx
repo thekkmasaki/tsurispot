@@ -5,10 +5,19 @@ import {
   getStructureFishSlugs,
   getStructureMethods,
 } from "@/lib/data/structure-fish-mapping";
+import { PatentBadge } from "./patent-badge";
 
 // ---------------------------------------------------------------------------
 // Props
 // ---------------------------------------------------------------------------
+
+interface MonthlyRecommendationFish {
+  name: string;
+  method: string;
+  recommendLevel: "high" | "mid" | "low";
+  catchReportCount: number;
+  inSeasonNow: boolean;
+}
 
 interface SatelliteAnalysisSectionProps {
   structureTypes: StructureCategory[];
@@ -17,7 +26,18 @@ interface SatelliteAnalysisSectionProps {
   /** 実際に航空写真をAI解析した結果か（true=実解析スポット / false=釣り場タイプ由来の一般的想定）。
    *  false のときは「衛星/AI解析で検出」と断言しない（虚偽表示防止）。 */
   isAnalyzed?: boolean;
+  /** 環境パラメータ（季節・地域・潮汐・水温）適用後の今月のおすすめ魚種（実解析スポットのみ） */
+  monthlyRecommendation?: {
+    month: number;
+    fish: MonthlyRecommendationFish[];
+  };
 }
+
+const RECOMMEND_MARK: Record<MonthlyRecommendationFish["recommendLevel"], string> = {
+  high: "◎", // ◎
+  mid: "○",  // ○
+  low: "△",  // △
+};
 
 // ---------------------------------------------------------------------------
 // Visual icon mapping per structure category
@@ -83,6 +103,7 @@ export function SatelliteAnalysisSection({
   structureTypes,
   spotName,
   isAnalyzed = false,
+  monthlyRecommendation,
 }: SatelliteAnalysisSectionProps) {
   if (structureTypes.length === 0) return null;
 
@@ -99,11 +120,7 @@ export function SatelliteAnalysisSection({
         <h2 className="text-xl font-bold text-slate-800">
           {isAnalyzed ? "AI構造物解析" : "想定される構造物・釣り場の特徴"}
         </h2>
-        {isAnalyzed && (
-          <span className="rounded-full bg-indigo-600 px-3 py-0.5 text-xs font-semibold text-white">
-            特許技術
-          </span>
-        )}
+        {isAnalyzed && <PatentBadge />}
       </div>
 
       <p className="mb-6 text-sm text-slate-600">
@@ -111,6 +128,43 @@ export function SatelliteAnalysisSection({
           ? `「${spotName}」周辺の航空写真をAIで解析して検出した構造物カテゴリに基づく推定です。`
           : `「${spotName}」の釣り場タイプから一般的に想定される構造物カテゴリです（この釣り場個別の画像解析は行っていません）。`}
       </p>
+
+      {/* 今月のおすすめ（環境パラメータ適用後・実解析スポットのみ） */}
+      {isAnalyzed && monthlyRecommendation && monthlyRecommendation.fish.length > 0 && (
+        <div className="mb-6 rounded-xl border border-indigo-200 bg-indigo-50/60 p-4">
+          <h3 className="mb-2 flex items-center gap-2 text-sm font-semibold text-indigo-900">
+            <span aria-hidden="true">{"\u{1F4C5}"}</span>
+            今月（{monthlyRecommendation.month}月）のおすすめ推定
+            <span className="text-[10px] font-normal text-indigo-700">
+              季節・地域・潮汐・水温を考慮
+            </span>
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {monthlyRecommendation.fish.map((f) => (
+              <span
+                key={f.name}
+                className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-sm font-medium ${
+                  f.inSeasonNow
+                    ? "bg-white text-indigo-900 border border-indigo-200"
+                    : "bg-slate-100 text-slate-400 border border-slate-200"
+                }`}
+              >
+                <span aria-hidden="true">{RECOMMEND_MARK[f.recommendLevel]}</span>
+                {f.name}
+                <span className="text-[10px] text-slate-500">{f.method}</span>
+                {f.catchReportCount > 0 && (
+                  <span className="rounded bg-emerald-100 px-1 py-0.5 text-[10px] font-bold text-emerald-700">
+                    実釣果{f.catchReportCount}件
+                  </span>
+                )}
+              </span>
+            ))}
+          </div>
+          <p className="mt-2 text-[10px] text-indigo-700/70">
+            ◎=好条件 ○=狙える △=条件次第（いずれもAIによる推定で釣果を保証するものではありません）
+          </p>
+        </div>
+      )}
 
       {/* Structure cards grid */}
       <div className="mb-8 grid gap-4 sm:grid-cols-2">

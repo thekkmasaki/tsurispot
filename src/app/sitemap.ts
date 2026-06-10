@@ -190,6 +190,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/sitemap-page`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.5 },
     { url: `${baseUrl}/contact`, lastModified: legalDate, changeFrequency: "yearly", priority: 0.4 },
     { url: `${baseUrl}/partner`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${baseUrl}/technology`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/umigyo`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
     // 釣りインストラクター試験対策
     { url: `${baseUrl}/instructor-exam`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },

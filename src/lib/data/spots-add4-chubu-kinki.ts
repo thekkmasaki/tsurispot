@@ -101,7 +101,7 @@ export const chubuKinkiAdd4Spots: FishingSpot[] = [
   {
     id: "sc4002", name: "亀崎港", slug: "kamezaki-kou",
     description: "半田市北部の小さな漁港で、テトラ帯が広がる穴釣りの名所。根魚の魚影が濃く、初心者にも手軽に楽しめる。",
-    latitude: 34.9110, longitude: 136.9470,
+    latitude: 34.9150, longitude: 136.9687,
     address: "〒475-0023 愛知県半田市亀崎町",
     accessInfo: "JR武豊線亀崎駅から徒歩約10分。",
     region: region("r10"), spotType: "breakwater", difficulty: "beginner",

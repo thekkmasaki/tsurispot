@@ -124,6 +124,7 @@ export function Footer() {
             <h3 className="mb-3 text-sm font-semibold text-sea-foam">サイト情報</h3>
             <ul className="space-y-2 text-sm text-blue-100/90">
               <li><Link href="/about" className="hover:text-white">ツリスポについて</Link></li>
+              <li><Link href="/technology" className="hover:text-white">AI解析技術（特許出願中）</Link></li>
               <li><Link href="/partner" className="hover:text-white">事業者様向け（掲載案内）</Link></li>
               <li><Link href="/privacy" className="hover:text-white">プライバシーポリシー</Link></li>
               <li><Link href="/terms" className="hover:text-white">利用規約</Link></li>
@@ -216,7 +217,7 @@ export function Footer() {
         <div className="mt-6 border-t border-white/10 pt-6 text-center text-sm text-blue-100/80">
           <p>&copy; 2025-2026 ツリスポ All rights reserved.</p>
           <p className="mt-1 text-xs">
-            創設者・編集長: 正木 家康｜運営開始: 2025年｜掲載スポット: 2,100箇所以上｜特許出願中（特願2026-042836）
+            創設者・編集長: 正木 家康｜運営開始: 2025年｜掲載スポット: 2,100箇所以上｜<Link href="/technology" className="underline-offset-2 hover:text-white hover:underline">特許出願中（特願2026-042836）</Link>
           </p>
           <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed">
             当サイトはAmazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。
@@ -288,6 +289,7 @@ export function Footer() {
         <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs text-blue-100/80 [&>a]:inline-flex [&>a]:min-h-[44px] [&>a]:items-center [&>a]:px-1">
           <Link href="/blog" className="hover:text-white">エリア釣果レポート</Link>
           <Link href="/about" className="hover:text-white">ツリスポについて</Link>
+          <Link href="/technology" className="hover:text-white">AI解析技術</Link>
           <Link href="/partner" className="hover:text-white">事業者様向け</Link>
           <Link href="/privacy" className="hover:text-white">プライバシーポリシー</Link>
           <Link href="/terms" className="hover:text-white">利用規約</Link>
@@ -297,7 +299,7 @@ export function Footer() {
           &copy; 2025-2026 ツリスポ
         </p>
         <p className="mt-1 text-center text-[10px] text-blue-100/70">
-          創設者: 正木 家康｜特許出願中
+          創設者: 正木 家康｜<Link href="/technology" className="underline-offset-2 hover:text-white hover:underline">特許出願中</Link>
         </p>
         <p className="mx-auto mt-2 max-w-xs text-center text-[11px] leading-relaxed text-blue-100/70">
           Amazonアソシエイト・プログラム参加者｜楽天アフィリエイト参加

@@ -11,6 +11,7 @@
 import fs from "fs";
 import path from "path";
 import { generateDiagramData } from "./diagram-generator";
+import { normalizeAnalysisResult } from "./normalize-analysis";
 import type { SpotAnalysisResult } from "./types";
 import type { SpotDiagramData } from "@/components/spots/fishing-point-diagram";
 
@@ -41,7 +42,8 @@ function loadAnalysisDataMap(): Record<string, SpotAnalysisResult> {
       const raw = fs.readFileSync(filePath, "utf-8");
       const data = JSON.parse(raw) as SpotAnalysisResult;
       const slug = file.replace(/\.json$/, "");
-      map[slug] = data;
+      // パイプライン生出力を表示品質に正規化（構造物長・テトラ座標・ノイズ除去）
+      map[slug] = normalizeAnalysisResult(data);
     } catch {
       // JSONパースエラー時はスキップ
     }
