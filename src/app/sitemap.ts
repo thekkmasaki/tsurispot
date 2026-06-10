@@ -13,6 +13,7 @@ import { FISHING_METHODS, MONTHS, isMonthInRange } from "@/lib/data/fishing-meth
 import { REGION_GROUPS } from "@/lib/data/regions-group";
 import { redis } from "@/lib/redis";
 import { getUserById } from "@/lib/auth-redis";
+import { isSitemapEligible } from "@/lib/seo-quality";
 
 const baseUrl = "https://tsurispot.com";
 
@@ -246,12 +247,9 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // ===== スポット詳細ページ（画像サイトマップ付き）=====
     // 品質フィルタ厳格化: description >= 100 AND catchableFish >= 2
+    // （判定基準は src/lib/seo-quality.ts に一元化）
     ...fishingSpots
-      .filter((spot) => {
-        const descLen = (spot.description || "").length;
-        const fishCount = spot.catchableFish.length;
-        return descLen >= 100 && fishCount >= 2;
-      })
+      .filter((spot) => isSitemapEligible(spot))
       .map((spot) => {
         const spotUpdatedAt = (spot as unknown as { updatedAt?: string }).updatedAt;
         return {
