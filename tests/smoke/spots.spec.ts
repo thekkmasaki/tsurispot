@@ -34,7 +34,8 @@ test.describe("Spots smoke", () => {
     for (const p of paths) {
       const r = await request.get(`${BASE}${p}`);
       expect(r.status(), `${p}`).toBe(200);
-      expect(r.headers()["server"], `${p} should be from S3`).toContain("AmazonS3");
+      // 配信元はS3直 or Cloudflare CDN経由のどちらも正（Next.js経由での配信になっていないことを確認）
+      expect(r.headers()["server"], `${p} should be served by S3/CDN`).toMatch(/AmazonS3|cloudflare/i);
     }
   });
 });
