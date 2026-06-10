@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { Bell, BellOff } from "lucide-react";
+import { trackPush } from "@/lib/analytics";
 
 /**
  * Web Push 通知の subscribe UI (Phase 4)
@@ -38,7 +39,11 @@ export function PushSubscribe({ className }: { className?: string }) {
     try {
       const perm = await Notification.requestPermission();
       setPermission(perm);
-      if (perm !== "granted") return;
+      if (perm !== "granted") {
+        // GA4: 明示的にブロックされた場合のみ計測（"default" = ダイアログ閉じは除外）
+        if (perm === "denied") trackPush({ action: "permission_denied" });
+        return;
+      }
 
       const reg = await navigator.serviceWorker.ready;
       const vapidKey = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY;
@@ -60,6 +65,7 @@ export function PushSubscribe({ className }: { className?: string }) {
 
       if (res.ok) {
         setIsSubscribed(true);
+        trackPush({ action: "subscribe" });
       } else {
         console.error("[push] subscribe API error", res.status);
       }
@@ -83,6 +89,7 @@ export function PushSubscribe({ className }: { className?: string }) {
         });
         await sub.unsubscribe();
         setIsSubscribed(false);
+        trackPush({ action: "unsubscribe" });
       }
     } catch (e) {
       console.error("[push] unsubscribe error", e);

@@ -300,7 +300,9 @@ export function HeaderBannerAd() {
   return (
     <div className="hidden lg:block border-b border-border/30 bg-muted/10">
       <div className="mx-auto max-w-5xl px-4 py-2">
-        <AdUnit slot={AD_SLOTS.header_banner} placement="header_banner" format="horizontal" responsive />
+        {/* CLS対策: 遅延挿入される広告がヘッダー下のコンテンツを押し下げないよう
+            最小高さを予約する（728x90 リーダーボード基準）。 */}
+        <AdUnit slot={AD_SLOTS.header_banner} placement="header_banner" format="horizontal" responsive className="min-h-[90px]" />
       </div>
     </div>
   );
