@@ -77,7 +77,9 @@ export function MonthlySportsSorter({ spots, monthName }: MonthlySportsSorterPro
           return;
         }
       }
-    } catch {}
+    } catch (e) {
+      console.warn("[monthly-spots-sorter] localStorage読み込みに失敗（プライベートモード?）", e);
+    }
 
     navigator.geolocation.getCurrentPosition(
       (pos) => {
@@ -89,7 +91,9 @@ export function MonthlySportsSorter({ spots, monthName }: MonthlySportsSorterPro
             "tsurispot_user_location",
             JSON.stringify({ latitude: loc.lat, longitude: loc.lng, timestamp: Date.now() })
           );
-        } catch {}
+        } catch (e) {
+          console.warn("[monthly-spots-sorter] localStorage書き込みに失敗（プライベートモード?）", e);
+        }
       },
       (err) => {
         if (err.code === err.PERMISSION_DENIED) {
