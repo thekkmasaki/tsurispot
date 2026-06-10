@@ -8,7 +8,9 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T 
     try {
       const item = localStorage.getItem(key);
       if (item) setStoredValue(JSON.parse(item));
-    } catch {}
+    } catch (e) {
+      console.warn("[use-local-storage] localStorage読み込みに失敗（プライベートモード?）", e);
+    }
   }, [key]);
 
   const setValue = useCallback((value: T | ((prev: T) => T)) => {
@@ -16,7 +18,9 @@ export function useLocalStorage<T>(key: string, initialValue: T): [T, (value: T 
       const newValue = value instanceof Function ? value(prev) : value;
       try {
         localStorage.setItem(key, JSON.stringify(newValue));
-      } catch {}
+      } catch (e) {
+        console.warn("[use-local-storage] localStorage書き込みに失敗（プライベートモード?）", e);
+      }
       return newValue;
     });
   }, [key]);

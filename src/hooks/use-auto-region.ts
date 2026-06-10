@@ -33,14 +33,18 @@ export function useAutoRegion(): UseAutoRegionResult {
       if (saved && saved !== "null") {
         setSelectedRegionState(saved as RegionSlug);
       }
-    } catch {}
+    } catch (e) {
+      console.warn("[use-auto-region] localStorage読み込みに失敗（プライベートモード?）", e);
+    }
   }, []);
 
   const setSelectedRegion = useCallback((region: RegionSlug | null) => {
     setSelectedRegionState(region);
     try {
       localStorage.setItem(STORAGE_KEY, region ?? "null");
-    } catch {}
+    } catch (e) {
+      console.warn("[use-auto-region] localStorage書き込みに失敗（プライベートモード?）", e);
+    }
   }, []);
 
   const detectRegion = useCallback(() => {

@@ -59,7 +59,9 @@ export function GoogleAnalytics() {
                 analytics_storage: 'denied',
               });
             }
-          } catch (e) {}
+          } catch (e) {
+            console.warn('[google-analytics] localStorageの同意状態読み込みに失敗（プライベートモード?）', e);
+          }
           gtag('js', new Date());
           gtag('config', '${GA_ID}', {
             page_path: window.location.pathname,

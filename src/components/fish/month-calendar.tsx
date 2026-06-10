@@ -31,12 +31,18 @@ export function MonthCalendar({ seasonMonths, peakMonths, regionalData }: MonthC
       if (saved && saved !== "null") {
         setSelectedRegion(saved as RegionSlug);
       }
-    } catch {}
+    } catch (e) {
+      console.warn("[month-calendar] localStorage読み込みに失敗（プライベートモード?）", e);
+    }
   }, []);
 
   function handleSelect(region: RegionSlug | null) {
     setSelectedRegion(region);
-    try { localStorage.setItem(STORAGE_KEY, region ?? "null"); } catch {}
+    try {
+      localStorage.setItem(STORAGE_KEY, region ?? "null");
+    } catch (e) {
+      console.warn("[month-calendar] localStorage書き込みに失敗（プライベートモード?）", e);
+    }
   }
 
   function handleDetect() {
