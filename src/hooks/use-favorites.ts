@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
 import { useSession } from "next-auth/react";
+import { trackFavorite } from "@/lib/analytics";
 
 const STORAGE_KEY = "tsurispot-favorites";
 
@@ -102,6 +103,7 @@ export function useFavorites() {
           body: JSON.stringify({ slug, action: "increment" }),
         }).catch(() => {});
         syncToServer(next);
+        trackFavorite({ action: "add", slug });
       }
     },
     [syncToServer],
@@ -119,6 +121,7 @@ export function useFavorites() {
         body: JSON.stringify({ slug, action: "decrement" }),
       }).catch(() => {});
       syncToServer(next);
+      trackFavorite({ action: "remove", slug });
     },
     [syncToServer],
   );
@@ -136,6 +139,7 @@ export function useFavorites() {
           body: JSON.stringify({ slug, action: "decrement" }),
         }).catch(() => {});
         syncToServer(next);
+        trackFavorite({ action: "remove", slug });
       } else {
         const next = [...current, slug];
         saveFavorites(next);
@@ -146,6 +150,7 @@ export function useFavorites() {
           body: JSON.stringify({ slug, action: "increment" }),
         }).catch(() => {});
         syncToServer(next);
+        trackFavorite({ action: "add", slug });
       }
     },
     [syncToServer],

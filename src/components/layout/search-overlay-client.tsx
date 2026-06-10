@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Search, X, MapPin, Fish, BookOpen, FileText, Wrench, LoaderCircle } from "lucide-react";
 import type { SearchItemType } from "@/lib/data/search-index";
+import { trackSearch, trackSearchSelect } from "@/lib/analytics";
 
 // API レスポンスの型（searchText を除いた SearchItem）
 interface SearchResult {
@@ -84,6 +85,8 @@ export function SearchOverlayClient() {
       const data: SearchResult[] = await res.json();
       setResults(data);
       setHasSearched(true);
+      // GA4: デバウンス済みの確定クエリのみ計測（入力1文字ごとには送らない）
+      trackSearch({ searchTerm: q, resultCount: data.length });
     } catch (err) {
       if (err instanceof DOMException && err.name === "AbortError") {
         // キャンセルされたリクエストは無視
@@ -179,10 +182,12 @@ export function SearchOverlayClient() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [isOpen, handleQueryChange]);
 
-  const handleSelect = (slug: string) => {
+  const handleSelect = (result: SearchResult) => {
+    // GA4: どのカテゴリのどのコンテンツが選ばれたかを計測
+    trackSearchSelect({ itemType: result.type, slug: result.slug });
     setIsOpen(false);
     handleQueryChange("");
-    router.push(slug);
+    router.push(result.slug);
   };
 
   // 人気の検索をクリック
@@ -304,7 +309,7 @@ export function SearchOverlayClient() {
                             {catItems.map((result) => (
                               <li key={result.slug}>
                                 <button
-                                  onClick={() => handleSelect(result.slug)}
+                                  onClick={() => handleSelect(result)}
                                   className="flex w-full items-center gap-3 rounded-lg px-3 py-2 text-left transition-colors hover:bg-muted"
                                 >
                                   <div className={`flex size-8 shrink-0 items-center justify-center rounded-full ${config.bgColor} ${config.color}`}>
