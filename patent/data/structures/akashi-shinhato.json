@@ -1,8 +1,8 @@
 {
   "spotSlug": "akashi-shinhato",
   "coordinates": {
-    "lat": 34.6387,
-    "lng": 134.9773
+    "lat": 34.6381,
+    "lng": 134.9813
   },
   "imageMetadata": {
     "source": "gsi-aerial",
@@ -16,15 +16,15 @@
   "layoutType": "pier",
   "structureEndpoints": {
     "west": {
-      "lat": 34.638,
-      "lng": 134.976
+      "lat": 34.6389,
+      "lng": 134.9799
     },
     "east": {
-      "lat": 34.6395,
-      "lng": 134.979
+      "lat": 34.6372,
+      "lng": 134.9828
     }
   },
-  "structureLabel": "護岸",
+  "structureLabel": "明石新波止（防波堤）",
   "seaLabel": "明石海峡",
   "detectedStructures": [
     {
