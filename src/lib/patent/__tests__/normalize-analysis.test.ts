@@ -99,9 +99,10 @@ describe("normalizeAnalysisResult — 全解析済みスポットが正規化後
     .filter((f) => f.endsWith(".json"))
     .map((f) => f.replace(/\.json$/, ""));
 
-  it("解析済みJSONが存在する（亀崎港は座標不一致で rejected/ に隔離済み）", () => {
-    expect(slugs.length).toBeGreaterThanOrEqual(5);
+  it("解析済みJSONが存在する（亀崎港・武豊は座標不一致で rejected/ に隔離済み）", () => {
+    expect(slugs.length).toBeGreaterThanOrEqual(4);
     expect(slugs).not.toContain("kamezaki-kou");
+    expect(slugs).not.toContain("taketoyo-kou-ryokuchi");
   });
 
   it.each(slugs)("%s: 構造物長>0・ゾーンあり・テトラ妥当", (slug) => {
