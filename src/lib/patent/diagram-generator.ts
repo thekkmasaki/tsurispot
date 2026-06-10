@@ -14,7 +14,6 @@ import type {
   SpotAnalysisResult,
   AnalysisZone,
   SeaBottomFeature,
-  EstimatedFish,
 } from "./types";
 import type {
   SpotDiagramData,
@@ -74,11 +73,34 @@ export function generateDiagramData(
 }
 
 // ---------------------------------------------------------------------------
-// 2. ポジション（テントマーカー）生成
+// 2. ポジション（番号付き釣りポイントマーカー）生成
 // ---------------------------------------------------------------------------
 
 /**
- * ゾーン情報からテントマーカー位置を自動決定。
+ * 地図表示用の番号付き釣りポイントマーカー。
+ * 特許請求項6「推奨される釣りポイントの位置を示す番号付きマーカー」に相当。
+ * 座標系に依存しない relativeX（0=西端, 1=東端）で返す。
+ */
+export interface MapPointMarker {
+  number: number;
+  name: string;
+  shortName: string;
+  rating: "hot" | "good" | "normal";
+  /** 構造物ラインに対する相対位置（0=西端, 1=東端） */
+  relativeX: number;
+  depth?: string;
+  fish: {
+    name: string;
+    method: string;
+    season: string;
+    difficulty: "easy" | "medium" | "hard";
+  }[];
+  features?: string[];
+  description: string;
+}
+
+/**
+ * ゾーン情報から番号付き釣りポイントを自動決定。
  *
  * アルゴリズム:
  * 1. positionCount個のポジションを構造物長に沿って等間隔配置
@@ -86,18 +108,19 @@ export function generateDiagramData(
  * 3. ゾーンの評価・魚種情報をポジションに付与
  * 4. 端のポジションには潮通し補正（大物確率アップ）
  */
-function generatePositions(analysis: SpotAnalysisResult): DiagramPosition[] {
+export function generateMapPositions(
+  analysis: SpotAnalysisResult
+): MapPointMarker[] {
   const { zones } = analysis;
   // positionCountがない場合はゾーン数×2（最低5、最大15）で自動決定
   const positionCount = analysis.positionCount || Math.min(Math.max(zones.length * 2, 5), 15);
-  const positions: DiagramPosition[] = [];
+  const positions: MapPointMarker[] = [];
 
   for (let i = 0; i < positionCount; i++) {
     // ポジション番号は右端（東端）から1始まり
     const number = positionCount - i;
     // X座標: 左端（西端）から右端（東端）へ等間隔
     const relativeX = i / (positionCount - 1);
-    const svgX = SVG_MARGIN + relativeX * USABLE_WIDTH;
 
     // このポジションが属するゾーンを特定
     const zone = findZoneForPosition(zones, relativeX);
@@ -114,10 +137,6 @@ function generatePositions(analysis: SpotAnalysisResult): DiagramPosition[] {
           }))
       : [];
 
-    // ポジション名の生成
-    const posName = generatePositionName(number, positionCount, zone);
-    const shortName = generateShortName(number, positionCount);
-
     // 水深情報
     const depth = zone
       ? `足元${zone.estimatedDepth.shore}m${
@@ -127,15 +146,6 @@ function generatePositions(analysis: SpotAnalysisResult): DiagramPosition[] {
         }`
       : undefined;
 
-    // 説明文の自動生成
-    const description = generatePositionDescription(
-      number,
-      positionCount,
-      zone,
-      fish
-    );
-
-    // 特徴の自動生成
     const features = generatePositionFeatures(
       number,
       positionCount,
@@ -143,24 +153,36 @@ function generatePositions(analysis: SpotAnalysisResult): DiagramPosition[] {
       fish
     );
 
-    // 評価: ゾーンの評価を使用、両端は潮通しで補正
-    const rating = determineRating(number, positionCount, zone, fish);
-
     positions.push({
-      id: `auto-t${number}`,
       number,
-      name: posName,
-      shortName,
-      rating,
+      name: generatePositionName(number, positionCount, zone),
+      shortName: generateShortName(number, positionCount),
+      rating: determineRating(number, positionCount, zone, fish),
+      relativeX,
       fish,
       depth,
       features: features.length > 0 ? features : undefined,
-      description,
-      x: Math.round(svgX),
+      description: generatePositionDescription(number, positionCount, zone, fish),
     });
   }
 
   return positions;
+}
+
+/** SVGダイアグラム用: MapPointMarker を SVG 座標系の DiagramPosition に変換 */
+function generatePositions(analysis: SpotAnalysisResult): DiagramPosition[] {
+  return generateMapPositions(analysis).map((p) => ({
+    id: `auto-t${p.number}`,
+    number: p.number,
+    name: p.name,
+    shortName: p.shortName,
+    rating: p.rating,
+    fish: p.fish,
+    depth: p.depth,
+    features: p.features,
+    description: p.description,
+    x: Math.round(SVG_MARGIN + p.relativeX * USABLE_WIDTH),
+  }));
 }
 
 // ---------------------------------------------------------------------------
@@ -454,26 +476,26 @@ function generatePositionName(
   zone: AnalysisZone | undefined
 ): string {
   if (number === 1) {
-    return `テント1番〜東端（一級ポイント）`;
+    return `ポイント1番（東端・推定一級）`;
   }
   if (number === total) {
-    return `テント${total}番（西端）`;
+    return `ポイント${total}番（西端）`;
   }
   if (zone?.rating === "hot") {
-    return `テント${number}番（一級ポイント）`;
+    return `ポイント${number}番（推定一級）`;
   }
-  // 中央入口付近
+  // 中央付近
   const relX = 1 - (number - 1) / (total - 1);
   if (Math.abs(relX - 0.5) < 0.05) {
-    return `テント${number}番（中央入口付近）`;
+    return `ポイント${number}番（中央付近）`;
   }
-  return `テント${number}番`;
+  return `ポイント${number}番`;
 }
 
 function generateShortName(number: number, total: number): string {
   if (number === 1) return "東端";
   if (number === total) return "西端";
-  return `T${number}`;
+  return `P${number}`;
 }
 
 function generatePositionDescription(
@@ -482,21 +504,20 @@ function generatePositionDescription(
   zone: AnalysisZone | undefined,
   fish: { name: string; method: string }[]
 ): string {
-  if (!zone) return `テント${number}番の釣り座。`;
+  if (!zone) return `ポイント${number}番の釣り座。`;
 
   const parts: string[] = [];
 
   // 位置情報
   if (number === 1) {
-    parts.push("ベテラン人気No.1。");
+    parts.push("東端の釣り座。");
     if (zone.currentFlow >= 0.9) {
-      parts.push("沖50mで湧き潮が発生し、流れに仕掛けを乗せて大物が狙える。");
-      parts.push("青物シーズンは場所取り競争が激しい。");
+      parts.push("構造物の先端寄りで潮通しが良く、回遊魚や大型魚が期待できる推定一級ポイント。");
     }
   } else if (number === total) {
-    parts.push("西端エリア。");
+    parts.push("西端の釣り座。");
     if (zone.currentFlow >= 0.8) {
-      parts.push("潮の変化があり、タチウオの回遊が多い。夕マヅメ〜夜に実績。");
+      parts.push("潮の変化が出やすく、夕マヅメ〜夜は回遊魚狙いに向くと推定。");
     }
   } else {
     // ゾーン特徴から説明文を生成
@@ -513,7 +534,7 @@ function generatePositionDescription(
       parts.push("六角錐魚礁が近い。");
     }
     if (zone.rating === "hot" && zone.structures.length >= 2) {
-      parts.push("縁石の変化点で魚影が濃い。");
+      parts.push("複数の構造物が切り替わる変化点で、魚が付きやすいと推定。");
     }
   }
 
@@ -554,7 +575,7 @@ function generatePositionFeatures(
     fish.some((f) => f.name === "アジ" && f.method.includes("サビキ")) &&
     zone.rating === "hot"
   ) {
-    features.push("アジ100匹超え実績");
+    features.push("サビキ好条件");
   }
 
   // 構造物ベースの特徴
@@ -568,19 +589,19 @@ function generatePositionFeatures(
 
   // ポジションベースの特徴
   if (number === 1 || number === total) {
-    if (zone.currentFlow >= 0.8) features.push("潮通し最高");
+    if (zone.currentFlow >= 0.8) features.push("潮通し良好");
     if (number === 1) {
-      features.push("大物実績多数", "ベテラン向け", "場所取り競争あり");
+      features.push("大物期待", "先端寄り");
     }
     if (number === total) {
-      features.push("タチウオ実績", "夕マヅメ狙い");
+      features.push("夕マヅメ向き");
     }
   }
 
-  // 中央入口
+  // 中央付近
   const relX = 1 - (number - 1) / (total - 1);
   if (Math.abs(relX - 0.5) < 0.05) {
-    features.push("中央入口すぐ", "アクセス良好");
+    features.push("中央付近", "アクセス良好");
   }
 
   // 初心者向け
@@ -588,10 +609,9 @@ function generatePositionFeatures(
     features.push("初心者おすすめ");
   }
 
-  // 縁石変化
+  // 構造変化
   if (zone.structures.length >= 2 && zone.rating === "hot") {
-    features.push("縁石の変化");
-    features.push("ファミリー向け");
+    features.push("地形変化あり");
   }
 
   return features;

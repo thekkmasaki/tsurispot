@@ -2,6 +2,8 @@
 
 import type { SpotAnalysisResult } from "@/lib/patent/types";
 import type { SpotMapAnalysis } from "./spot-leaflet-map";
+// diagram-generator は純関数のみ（fs非依存）なのでクライアントから import 可
+import { generateMapPositions } from "@/lib/patent/diagram-generator";
 import React, { useState, useEffect, useRef } from "react";
 
 interface SpotBasicInfo {
@@ -84,6 +86,8 @@ function toMapData(
     seaLabel: r.seaLabel,
     structureEndpoints: r.structureEndpoints,
     detectedTetrapods: r.detectedTetrapods,
+    // 番号付き釣りポイントマーカー（特許請求項6: マップ生成部）
+    positions: generateMapPositions(r),
     spotInfo: spot,
     spotFacilities,
     restrictedAreas,
