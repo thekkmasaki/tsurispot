@@ -6,15 +6,12 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
+        // /mypage /login /spots/submit /favorites は noindex メタに一本化したため disallow しない（disallow するとクローラーが noindex を読めず「ブロック済みだがインデックス登録」になるため）。
         disallow: [
           "/api/",
           "/_next/",
           "/shops/*/dashboard",
-          "/spots/submit",
           "/spots/compare",
-          "/favorites",
-          "/login",
-          "/mypage",
           "/*/opengraph-image",
         ],
       },
