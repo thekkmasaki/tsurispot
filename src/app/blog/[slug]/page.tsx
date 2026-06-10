@@ -26,6 +26,7 @@ import {
   Search,
 } from "lucide-react";
 import { InArticleAd, StickySidebarAd, MultiplexAd } from "@/components/ads/ad-unit";
+import { BlogAffiliateRecommend } from "@/components/blog/blog-affiliate-recommend";
 
 // 一時的に force-dynamic (build時SSGで空HTML焼き付き問題対策)
 export const dynamic = "force-dynamic";
@@ -299,6 +300,30 @@ export default async function BlogPostPage({
       })()}
 
       <InArticleAd className="my-8" />
+
+      {/* アフィリエイト商品レコメンド（タグ・タイトルの釣り方 + 関連魚種でマッチング） */}
+      {(() => {
+        const fishNames = Array.from(
+          new Set(
+            [
+              ...(post.relatedFish ?? []).map(
+                (slug) => fishSpecies.find((f) => f.slug === slug)?.name
+              ),
+              ...post.tags.map(
+                (tag) => fishSpecies.find((f) => f.name === tag)?.name
+              ),
+            ].filter((name): name is string => name != null)
+          )
+        );
+        return (
+          <BlogAffiliateRecommend
+            tags={post.tags}
+            category={post.category}
+            fishNames={fishNames}
+            title={post.title}
+          />
+        );
+      })()}
 
       {/* Phase 5: in-content Native Multiplex (本文末尾、 関連魚種の前。 CTR +15% 想定) */}
       <MultiplexAd className="my-6" />
