@@ -59,6 +59,22 @@ interface ZoneFish {
   season: string;
   difficulty: string;
   probability: number;
+  /** 環境パラメータ（季節・地域・潮汐・水温）適用後のおすすめ度 */
+  adjustedProbability?: number;
+  /** 現在月がシーズン内か */
+  inSeasonNow?: boolean;
+  /** 実釣果報告数 */
+  catchReportCount?: number;
+}
+
+/** 環境パラメータ適用後スコア優先（未適用データは基礎スコア） */
+function fishScore(f: ZoneFish): number {
+  return f.adjustedProbability ?? f.probability;
+}
+
+function recommendMark(f: ZoneFish): string {
+  const s = fishScore(f);
+  return s >= 0.72 ? "◎" : s >= 0.45 ? "○" : "△";
 }
 
 interface Zone {
@@ -339,7 +355,7 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
   const allZoneFishKeys = useMemo(() => {
     return data.zones.map((z) =>
       [...z.estimatedFish]
-        .sort((a, b) => b.probability - a.probability)
+        .sort((a, b) => fishScore(b) - fishScore(a))
         .slice(0, 3)
         .map((f) => f.name)
         .join(",")
@@ -352,7 +368,7 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
     const map = new Map<string, string>();
     for (const z of data.zones) {
       if (z.estimatedFish.length > 0) {
-        const best = z.estimatedFish.reduce((a, b) => b.probability > a.probability ? b : a);
+        const best = z.estimatedFish.reduce((a, b) => fishScore(b) > fishScore(a) ? b : a);
         map.set(z.id, best.method);
       }
     }
@@ -395,7 +411,7 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
         {zoneBounds.map(({ zone, positions }) => {
           const style = RATING_STYLE[zone.rating] || RATING_STYLE.normal;
           const topFish = [...zone.estimatedFish]
-            .sort((a, b) => b.probability - a.probability)
+            .sort((a, b) => fishScore(b) - fishScore(a))
             .slice(0, 5);
 
           return (
@@ -482,19 +498,31 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
                   <table className="w-full text-xs">
                     <thead>
                       <tr className="border-b text-left text-gray-500">
+                        <th className="py-1 pr-2">今月</th>
                         <th className="py-1 pr-2">魚種</th>
                         <th className="py-1 pr-2">釣り方</th>
                         <th className="py-1">時期</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {topFish.map((f) => (
-                          <tr key={f.name} className="border-b border-gray-100">
-                            <td className="py-1 pr-2 font-medium">{f.name}</td>
-                            <td className="py-1 pr-2 text-gray-600">{f.method}</td>
-                            <td className="py-1 text-gray-500">{f.season}</td>
+                      {topFish.map((f) => {
+                          const offSeason = f.inSeasonNow === false;
+                          return (
+                          <tr key={f.name} className={`border-b border-gray-100${offSeason ? " text-gray-400" : ""}`}>
+                            <td className="py-1 pr-2 text-center">{recommendMark(f)}</td>
+                            <td className="py-1 pr-2 font-medium">
+                              {f.name}
+                              {(f.catchReportCount ?? 0) > 0 && (
+                                <span className="ml-1 rounded bg-emerald-100 px-1 py-0.5 text-[9px] font-bold text-emerald-700">
+                                  実釣果{f.catchReportCount}件
+                                </span>
+                              )}
+                            </td>
+                            <td className={`py-1 pr-2${offSeason ? "" : " text-gray-600"}`}>{f.method}</td>
+                            <td className={`py-1${offSeason ? "" : " text-gray-500"}`}>{f.season}</td>
                           </tr>
-                        ))}
+                          );
+                        })}
                     </tbody>
                   </table>
                 </div>
@@ -508,7 +536,7 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
           .filter(({ zone }) => !allFishSame || zone.rating === "hot")
           .map(({ zone, center }) => {
             const topFish = [...zone.estimatedFish]
-              .sort((a, b) => b.probability - a.probability)
+              .sort((a, b) => fishScore(b) - fishScore(a))
               .slice(0, 3)
               .map((f) => f.name);
             if (topFish.length === 0) return null;

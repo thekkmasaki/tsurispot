@@ -47,6 +47,8 @@ interface LeafletMapSectionProps {
   spotFacilities?: SpotFacilitiesInfo;
   restrictedAreas?: string[];
   nearbySpots?: NearbySpotData[];
+  /** このスポットの実釣果報告数（推定に反映済みであることの注記用） */
+  catchReportTotal?: number;
 }
 
 function toMapData(
@@ -66,13 +68,24 @@ function toMapData(
       seaBottomFeatures: z.seaBottomFeatures,
       estimatedDepth: z.estimatedDepth,
       currentFlow: z.currentFlow,
-      estimatedFish: z.estimatedFish.map((f) => ({
-        name: f.name,
-        method: f.method,
-        season: f.season,
-        difficulty: f.difficulty,
-        probability: f.probability,
-      })),
+      estimatedFish: z.estimatedFish.map((f) => {
+        // 環境パラメータ適用済み（ScoredEstimatedFish）ならスコアもパススルー
+        const scored = f as typeof f & {
+          adjustedProbability?: number;
+          inSeasonNow?: boolean;
+          catchReportCount?: number;
+        };
+        return {
+          name: f.name,
+          method: f.method,
+          season: f.season,
+          difficulty: f.difficulty,
+          probability: f.probability,
+          adjustedProbability: scored.adjustedProbability,
+          inSeasonNow: scored.inSeasonNow,
+          catchReportCount: scored.catchReportCount,
+        };
+      }),
       rating: z.rating,
     })),
     facilities: r.facilities.map((f) => ({
@@ -95,7 +108,7 @@ function toMapData(
   };
 }
 
-export function LeafletMapSection({ analysisResult, spot, spotFacilities, restrictedAreas, nearbySpots }: LeafletMapSectionProps) {
+export function LeafletMapSection({ analysisResult, spot, spotFacilities, restrictedAreas, nearbySpots, catchReportTotal }: LeafletMapSectionProps) {
   const [MapComp, setMapComp] = useState<React.ComponentType<{ data: SpotMapAnalysis }> | null>(null);
   const [error, setError] = useState<string | null>(null);
   const loaded = useRef(false);
@@ -158,7 +171,12 @@ export function LeafletMapSection({ analysisResult, spot, spotFacilities, restri
 
   return (
     <div className="mt-6">
-      <h3 className="mb-3 text-lg font-bold">AI解析 釣りマップ</h3>
+      <h3 className={(catchReportTotal ?? 0) > 0 ? "mb-1 text-lg font-bold" : "mb-3 text-lg font-bold"}>AI解析 釣りマップ</h3>
+      {(catchReportTotal ?? 0) > 0 && (
+        <p className="mb-2 text-[11px] text-emerald-700">
+          直近の実釣果 {catchReportTotal}件 を魚種推定に反映済み
+        </p>
+      )}
       <ErrorCatcher onError={(msg) => setError(msg)}>
         <MapComp data={toMapData(analysisResult, spot, spotFacilities, restrictedAreas, nearbySpots)} />
       </ErrorCatcher>
