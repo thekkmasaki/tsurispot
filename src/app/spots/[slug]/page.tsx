@@ -31,6 +31,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { trimDescription } from "@/lib/utils/seo";
+import { isLowQualitySpot } from "@/lib/seo-quality";
 import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, getSpotsByFish, getSpotsByMethod, getSpotsBySpotType, getSpotsByDifficulty, type NearbySpot } from "@/lib/data/spots";
 import { RelatedSpotsByFish } from "@/components/spots/related-spots-by-fish";
 import { RelatedSpotsByMethod } from "@/components/spots/related-spots-by-method";
@@ -163,10 +164,8 @@ export async function generateMetadata({
   const description = trimDescription(descParts.filter(Boolean).join(""), 158);
   const ogDescription = `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）で${fishNames}が狙えます。${spot.description}`;
 
-  // 本当に薄いページのみnoindex: 説明文50文字未満 かつ 魚種1種以下
-  const descLength = (spot.description || "").length;
-  const fishCount = spot.catchableFish.length;
-  const isLowQuality = descLength < 50 && fishCount <= 1;
+  // 本当に薄いページのみnoindex（判定基準は src/lib/seo-quality.ts に一元化）
+  const isLowQuality = isLowQualitySpot(spot);
 
   return {
     title,
