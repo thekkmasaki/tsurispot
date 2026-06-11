@@ -243,10 +243,15 @@ export function MultiplexAd({ className = "", placement = "multiplex" }: { class
   );
 }
 
-// ---- アンカー広告（モバイル下部固定） ----
-// AdSense Auto Adsが自動で出すため、手動実装は不要
-// → AdSense管理画面で「ページ内フォーマット」をONにする
-// → 「オーバーレイ フォーマット」のアンカー広告はOFF推奨（UXが悪い）
+// ---- 自動広告（Auto Ads）の方針 ----
+// STEP 0（2026-06）: 増収のため「ビネット（ページ遷移時の全画面オーバーレイ）」のみ
+// AdSense管理画面で有効化する。ビネットはオーバーレイなので in-page を押し下げず CLS=0。
+// 以下は管理画面側の設定であり、コードでの実装は不要（adsbygoogle.js は layout.tsx で全ページ読込済み）。
+//   - ビネット（ページ間広告）         → ON
+//   - ページ内フォーマット（記事内等）  → OFF（既存の手動枠と二重化＆領域予約なしでCLS悪化するため）
+//   - オーバーレイ アンカー広告         → OFF（下記 MobileStickyAd と二重化するため）
+// アンカーは手動の MobileStickyAd（領域予約・dismiss付き）で出している。
+// 詳細・手順・ロールバック → ./VIGNETTE-STEP0.md
 
 // ---- フッター前広告（全ページ共通） ----
 export function PreFooterAd() {
