@@ -1863,6 +1863,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
     images: [],
     rating: 4.0,
     reviewCount: 198,
+    googleRating: 4.3,
+    googleReviewCount: 84,
     catchableFish: [
       { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("ainame"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ブラクリ" },
@@ -1874,6 +1876,8 @@ export const hokkaidoTohokuDetailSpots: FishingSpot[] = [
           { fish: fish("madai"), monthStart: 4, monthEnd: 6, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
           { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
           { fish: fish("ishimochi"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "ちょい投げ" },
+          { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+          { fish: fish("kamasu"), monthStart: 8, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー釣り" },
     ],
     bestTimes: btEvening,
     tackleRecommendations: [],

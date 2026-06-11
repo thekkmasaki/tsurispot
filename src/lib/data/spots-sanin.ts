@@ -162,8 +162,8 @@ export const saninSpots: FishingSpot[] = [
     accessInfo: "JR山陰本線岩美駅から車で約15分。山陰自動車道鳥取東ICから約25分。",
     region: localRegion("r190"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港内に無料駐車スペースあり",
-    hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "", images: [], rating: 3.8, reviewCount: 67, googleRating: 3.6, googleReviewCount: 10,
+    hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
+    mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/%E6%B5%A6%E5%AF%8C%E6%B5%B7%E5%B2%B8%E3%80%81%E9%B4%A8%E3%82%AC%E7%A3%AF.jpg/960px-%E6%B5%A6%E5%AF%8C%E6%B5%B7%E5%B2%B8%E3%80%81%E9%B4%A8%E3%82%AC%E7%A3%AF.jpg", imageAttribution: "Photo: Yuniko / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 67, googleRating: 3.6, googleReviewCount: 10,
     catchableFish: [
       { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
@@ -174,6 +174,7 @@ export const saninSpots: FishingSpot[] = [
           { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
           { fish: fish("hirame"), monthStart: 9, monthEnd: 2, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
           { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+          { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
     tideAdvice: tideStandard, mazumeInfo: mazumeSanin,
