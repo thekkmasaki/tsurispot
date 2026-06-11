@@ -340,33 +340,46 @@ async function main() {
   let processed = 0;
   let requestsTotal = 0;
 
-  for (const spot of pending) {
-    const r = await checkSpot(spot);
-    results[spot.slug] = {
-      verdict: r.verdict,
-      probes: r.probes.map((p) => ({
-        dir: p.dir,
-        dist: p.dist,
-        status: p.status,
-        ...(p.status === 'land' ? { elevation: p.elevation } : {}),
-      })),
-    };
-    processed++;
-    requestsTotal += r.requestCount;
+  // スポット単位の小規模並列（各ワーカー内のプローブは従来どおり直列+200ms間隔。
+  // GSI APIのレスポンスが約2秒/件と遅く、直列だと全件7時間超かかるため。
+  // 実効レートは 3並列 × 約0.5req/s ≈ 1.5req/s で5req/s上限に対し十分マナー内）
+  const CONCURRENCY = 3;
+  let nextIndex = 0;
 
-    if (processed % CHECKPOINT_EVERY === 0 || processed === pending.length) {
-      saveCheckpoint({ updatedAt: new Date().toISOString(), results });
-      const elapsed = (Date.now() - startedAt) / 1000;
-      const rate = processed / elapsed;
-      const etaMin = ((pending.length - processed) / rate / 60).toFixed(1);
-      const all = Object.values(results);
-      const strong = all.filter((v) => v.verdict === 'inland-suspect').length;
-      const weak = all.filter((v) => v.verdict === 'inland-weak').length;
-      console.log(
-        `  進捗 ${processed}/${pending.length}（API ${requestsTotal}req, ${elapsed.toFixed(0)}s経過, 残り約${etaMin}分） 内陸疑い累計: 強${strong}件 / 弱${weak}件`,
-      );
+  async function worker() {
+    while (true) {
+      const i = nextIndex++;
+      if (i >= pending.length) return;
+      const spot = pending[i];
+      const r = await checkSpot(spot);
+      results[spot.slug] = {
+        verdict: r.verdict,
+        probes: r.probes.map((p) => ({
+          dir: p.dir,
+          dist: p.dist,
+          status: p.status,
+          ...(p.status === 'land' ? { elevation: p.elevation } : {}),
+        })),
+      };
+      processed++;
+      requestsTotal += r.requestCount;
+
+      if (processed % CHECKPOINT_EVERY === 0 || processed === pending.length) {
+        saveCheckpoint({ updatedAt: new Date().toISOString(), results });
+        const elapsed = (Date.now() - startedAt) / 1000;
+        const rate = processed / elapsed;
+        const etaMin = ((pending.length - processed) / rate / 60).toFixed(1);
+        const all = Object.values(results);
+        const strong = all.filter((v) => v.verdict === 'inland-suspect').length;
+        const weak = all.filter((v) => v.verdict === 'inland-weak').length;
+        console.log(
+          `  進捗 ${processed}/${pending.length}（API ${requestsTotal}req, ${elapsed.toFixed(0)}s経過, 残り約${etaMin}分） 内陸疑い累計: 強${strong}件 / 弱${weak}件`,
+        );
+      }
     }
   }
+
+  await Promise.all(Array.from({ length: CONCURRENCY }, () => worker()));
   if (pending.length > 0) saveCheckpoint({ updatedAt: new Date().toISOString(), results });
 
   // ── レポート生成 ──
