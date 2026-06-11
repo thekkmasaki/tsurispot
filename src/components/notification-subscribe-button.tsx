@@ -3,6 +3,10 @@
 import { useState, useEffect } from "react";
 import { Bell, BellOff } from "lucide-react";
 import { useSession } from "next-auth/react";
+import { isNativeApp } from "@/lib/platform";
+import { registerNativePush } from "@/lib/native-push";
+
+const APNS_TOKEN_KEY = "tsurispot_apns_token";
 
 function urlBase64ToUint8Array(base64String: string): Uint8Array {
   const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
@@ -17,6 +21,7 @@ function urlBase64ToUint8Array(base64String: string): Uint8Array {
 
 export function NotificationSubscribeButton() {
   const { status: authStatus } = useSession();
+  const [native, setNative] = useState(false);
   const [permission, setPermission] = useState<NotificationPermission | "unsupported">("default");
   const [subscribed, setSubscribed] = useState(false);
   const [publicKey, setPublicKey] = useState<string | null>(null);
@@ -29,13 +34,19 @@ export function NotificationSubscribeButton() {
       setHydrated(true);
       return;
     }
-    if (typeof window === "undefined" || typeof Notification === "undefined" || !("serviceWorker" in navigator)) {
-      setPermission("unsupported");
-      setHydrated(true);
-      return;
+    const isNative = isNativeApp();
+    setNative(isNative);
+    // Web ブラウザのみ: Web Push 非対応環境を弾く（ネイティブは APNs 経路で別途対応）
+    if (!isNative) {
+      if (typeof window === "undefined" || typeof Notification === "undefined" || !("serviceWorker" in navigator)) {
+        setPermission("unsupported");
+        setHydrated(true);
+        return;
+      }
+      setPermission(Notification.permission);
     }
-    setPermission(Notification.permission);
 
+    // 購読状態（apns:// 端末も含めてカウントされる）を取得
     fetch("/api/notification/subscribe")
       .then((r) => (r.ok ? r.json() : null))
       .then((data) => {
@@ -48,7 +59,51 @@ export function NotificationSubscribeButton() {
       .finally(() => setHydrated(true));
   }, [authStatus]);
 
+  const subscribeNative = async () => {
+    setBusy(true);
+    setMessage(null);
+    const res = await registerNativePush();
+    if (res.ok) {
+      if (res.token) {
+        try {
+          localStorage.setItem(APNS_TOKEN_KEY, res.token);
+        } catch {
+          /* localStorage 不可環境は無視 */
+        }
+      }
+      setSubscribed(true);
+      setMessage("通知をオンにしました");
+    } else if (res.error === "permission-denied") {
+      setMessage("通知が許可されませんでした。設定アプリから許可してください。");
+    } else {
+      setMessage("通知の登録に失敗しました");
+    }
+    setBusy(false);
+  };
+
+  const unsubscribeNative = async () => {
+    setBusy(true);
+    setMessage(null);
+    try {
+      const token = localStorage.getItem(APNS_TOKEN_KEY);
+      if (token) {
+        await fetch("/api/notification/subscribe-native", {
+          method: "DELETE",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ token }),
+        });
+        localStorage.removeItem(APNS_TOKEN_KEY);
+      }
+      setSubscribed(false);
+      setMessage("通知をオフにしました");
+    } catch {
+      setMessage("解除中にエラーが発生しました");
+    }
+    setBusy(false);
+  };
+
   const subscribe = async () => {
+    if (native) return subscribeNative();
     if (!publicKey) {
       setMessage("通知サーバーが未設定です");
       return;
@@ -91,6 +146,7 @@ export function NotificationSubscribeButton() {
   };
 
   const unsubscribe = async () => {
+    if (native) return unsubscribeNative();
     setBusy(true);
     setMessage(null);
     try {
@@ -132,14 +188,14 @@ export function NotificationSubscribeButton() {
 
   if (authStatus !== "authenticated") return null;
   if (!hydrated) return null;
-  if (permission === "unsupported") {
+  if (!native && permission === "unsupported") {
     return (
       <p className="text-xs text-muted-foreground">
         このブラウザは Web Push 通知に対応していません。iOS は ホーム画面に追加した PWA でのみ対応します。
       </p>
     );
   }
-  if (permission === "denied") {
+  if (!native && permission === "denied") {
     return (
       <p className="text-xs text-muted-foreground">
         通知がブロックされています。ブラウザの設定で許可してから再度お試しください。

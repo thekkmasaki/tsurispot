@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { X, Share, Plus } from "lucide-react";
+import { isNativeApp } from "@/lib/platform";
 
 const DISMISS_KEY = "tsurispot-pwa-install-dismissed";
 const VISIT_COUNT_KEY = "tsurispot-visit-count";
@@ -14,6 +15,8 @@ export function PWAInstallHint() {
   const [isIOS, setIsIOS] = useState(false);
 
   useEffect(() => {
+    // ネイティブアプリ内では「ホーム画面に追加」案内は不要
+    if (isNativeApp()) return;
     // 既にインストール済み（standaloneモード）なら表示しない
     if (window.matchMedia("(display-mode: standalone)").matches) return;
     // PCなら表示しない
