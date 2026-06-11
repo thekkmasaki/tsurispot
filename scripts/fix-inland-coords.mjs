@@ -18,8 +18,9 @@
  *       漁港↔港スワップ / ・分割 / 末尾施設語除去）で検索。
  *       市町村中心ヒット（dataSourceなし＝住所サジェスト）は除外し、
  *       title が港湾・海岸系キーワード or スポット名を含む POI のみ候補化。
- *    b. Overpass API: スポットの都道府県（area["ISO3166-2"="JP-XX"]）内で
- *       name がスポット名の主要部分にマッチする node/way を検索。
+ *    b. Overpass API: 元座標±50km相当のbbox内で name がスポット名の主要部分に
+ *       マッチする node/way を検索（都道府県areaスコープ+正規表現はクエリタイム
+ *       アウトするためbbox方式。県一致は検証フェーズの逆ジオコーダ照合で担保）。
  *       港湾・海岸系タグ（harbour / leisure=marina / man_made=pier|breakwater /
  *       natural=beach|cape 等）を持つもの、または名前完全一致のみ候補化。
  * 2. 候補検証（すべて通過したものだけ採用）
@@ -115,7 +116,10 @@ async function fetchWithRetry(url, { body, timeoutMs = 15000, retries = 2 } = {}
       const timer = setTimeout(() => ctrl.abort(), timeoutMs);
       const res = await fetch(url, {
         signal: ctrl.signal,
-        headers: { 'User-Agent': UA },
+        headers: {
+          'User-Agent': UA,
+          ...(body != null ? { 'Content-Type': 'application/x-www-form-urlencoded' } : {}),
+        },
         ...(body != null ? { method: 'POST', body } : {}),
       });
       clearTimeout(timer);
@@ -161,13 +165,24 @@ function buildVariations(spot) {
     }
   }
 
-  // 市区町村プレフィックス除去: address から「〜市/郡/町/村/区」トークンを抽出し、
-  // そのもの＋接尾辞を外した形（屋久島町→屋久島）で先頭から剥がす
+  // 市区町村プレフィックス除去: address（郵便番号・都道府県を除去した残り）の先頭から
+  // 「〜市/郡/町/村/区」トークンを順に抽出し、そのもの＋接尾辞を外した形
+  // （屋久島町→屋久島）でスポット名の先頭から剥がす
   const muniTokens = new Set();
-  for (const m of normalize(spot.address).matchAll(/[一-龥ぁ-んァ-ヶa-zA-Z]{1,6}?[市郡町村区]/g)) {
-    muniTokens.add(m[0]);
-    const stem = m[0].slice(0, -1);
+  let addr = normalize(spot.address).replace(/〒?\d{3}-?\d{4}/g, '');
+  for (const ps of prefStems) {
+    if (ps && addr.startsWith(ps)) {
+      addr = addr.slice(ps.length);
+      break;
+    }
+  }
+  for (let i = 0; i < 3; i++) {
+    const m = addr.match(/^(.{1,6}?[市郡町村区])/);
+    if (!m) break;
+    muniTokens.add(m[1]);
+    const stem = m[1].slice(0, -1);
     if (stem.length >= 2) muniTokens.add(stem);
+    addr = addr.slice(m[1].length);
   }
   let changed = true;
   while (changed) {
@@ -246,7 +261,9 @@ async function gsiCandidates(spot, variations, log) {
       if (!props.dataSource) continue;
       const title = normalize(props.title);
       const exact = variations.some((v) => title === v);
-      const related = variations.some((v) => title.includes(v)) || WATER_KEYWORD_RE.test(title);
+      // 非完全一致は「スポット名を含む かつ 港湾・海岸系キーワードあり」のみ（交番・裁判所等のノイズ除外）
+      const related =
+        variations.some((v) => title.includes(v)) && WATER_KEYWORD_RE.test(title);
       if (!exact && !related) continue;
       out.push({
         lat: coords[1],
@@ -278,25 +295,37 @@ function isWaterTag(tags) {
 function isExcludedTag(tags) {
   if (!tags) return true;
   if (tags.place) return true; // 地名・行政点（市町村中心と同類）
-  if (tags.railway || tags.shop) return true;
+  if (tags.railway || tags.shop || tags.highway) return true; // 駅・店・道路・バス停
+  if (tags.waterway) return true; // 河川セグメント（way中心は川の途中になるため不適）
   if (['school', 'kindergarten', 'hospital', 'social_facility', 'townhall', 'post_office',
        'police', 'fire_station', 'bank', 'restaurant', 'fast_food', 'cafe'].includes(tags.amenity)) return true;
   return false;
 }
 
 /**
- * Overpass検索（都道府県areaスコープ）。
+ * Overpass検索。
+ * 都道府県area + name正規表現は重くタイムアウトするため、元座標±50km相当の
+ * bboxでスコープする（距離<50kmルールと整合。都道府県一致は検証フェーズの
+ * 逆ジオコーダ照合で担保）。
  * 返値: [{ lat, lng, label, source: 'overpass-water'|'overpass-name' }]
  */
 async function overpassCandidates(spot, variations, stems, log) {
   const prefCode = PREF_CODE[spot.region?.prefecture];
   if (!prefCode || stems.length === 0) return [];
   const regex = stems.map(escapeRegex).join('|');
-  const query = `[out:json][timeout:25];
-area["ISO3166-2"="JP-${prefCode}"][admin_level=4]->.pref;
+  // bbox: 緯度±0.45°(≈50km)・経度±50km相当
+  const dLat = 0.45;
+  const dLng = 50000 / (111320 * Math.cos((spot.latitude * Math.PI) / 180));
+  const bbox = [
+    (spot.latitude - dLat).toFixed(4),
+    (spot.longitude - dLng).toFixed(4),
+    (spot.latitude + dLat).toFixed(4),
+    (spot.longitude + dLng).toFixed(4),
+  ].join(',');
+  const query = `[out:json][timeout:25][bbox:${bbox}];
 (
-  node["name"~"${regex}"](area.pref);
-  way["name"~"${regex}"](area.pref);
+  node["name"~"${regex}"];
+  way["name"~"${regex}"];
 );
 out center 40;`;
   let json;
@@ -309,6 +338,7 @@ out center 40;`;
     log(`    Overpass検索: エラー (${e.message})`);
     return [];
   }
+  if (json?.remark) log(`    Overpass remark: ${json.remark}`);
   const out = [];
   for (const el of json?.elements ?? []) {
     const tags = el.tags ?? {};
@@ -331,9 +361,15 @@ out center 40;`;
 
 const SOURCE_PRIORITY = { 'gsi-exact': 1, 'overpass-water': 2, 'gsi-poi': 3, 'overpass-name': 4 };
 
-/** 近接重複（150m以内）の候補を優先度の高い方に集約し、優先度順に並べる */
-function dedupeCandidates(candidates) {
-  const sorted = [...candidates].sort(
+/**
+ * 候補の前処理: 50km超の遠隔地を除外し、近接重複（150m以内）を優先度の高い方に
+ * 集約して優先度順に返す。
+ */
+function dedupeCandidates(candidates, spot) {
+  const inRange = candidates.filter(
+    (c) => haversine(spot.latitude, spot.longitude, c.lat, c.lng) / 1000 <= MAX_DIST_KM,
+  );
+  const sorted = inRange.sort(
     (a, b) => SOURCE_PRIORITY[a.source] - SOURCE_PRIORITY[b.source],
   );
   const kept = [];
@@ -376,8 +412,12 @@ async function validateCandidate(spot, cand, log) {
     return { pass: false, reasons: [`too-far (${distanceKm.toFixed(1)}km)`], distanceKm };
   }
 
-  // (2) 水際検証: 中心 + 4方向×400m。海1点以上で合格。
-  //     陸点は都道府県照合用に記録（海が見つかり陸点も確保できたら打ち切り）
+  // (2) 水際検証: 中心 + 4方向×400m。海("-----")1点以上で合格。
+  //     陸点は都道府県照合用に記録（海が見つかり陸点も確保できたら打ち切り）。
+  //     例外: 沿岸部の5mレーザーDEMは沖合数百mまで負の標高値を持つことがある
+  //     （実測: 鳥取県大山町沖は400〜700m沖で-0.1〜-0.2m、1000m沖でやっと"-----"）。
+  //     400m圏に負標高(≤-0.05m)がある場合のみ、8方向×1000mの拡張リングで海を探し、
+  //     見つかれば「拡張合格」とする（採用時はconfidenceをmediumに格下げ）。
   const probePoints = [
     { dir: 'C', lat: cand.lat, lng: cand.lng },
     ...[0, 90, 180, 270].map((b, i) => ({
@@ -387,17 +427,35 @@ async function validateCandidate(spot, cand, log) {
   ];
   const waterProbes = [];
   let seaFound = false;
+  let negativeNear = false; // DEMに覆われた浅海の兆候
   let landPoint = null;
   for (const p of probePoints) {
     const r = await probeElevation(p.lat, p.lng, UA);
-    waterProbes.push({ dir: p.dir, ...r });
+    waterProbes.push({ dir: p.dir, dist: p.dir === 'C' ? 0 : 400, ...r });
     if (r.status === 'sea') seaFound = true;
-    if (r.status === 'land' && !landPoint) landPoint = p;
+    if (r.status === 'land') {
+      if (r.elevation <= -0.05) negativeNear = true;
+      else if (!landPoint) landPoint = p;
+    }
     if (seaFound && landPoint) break; // 両方確保できたら以降のプローブは不要
+  }
+  let waterfrontLevel = seaFound ? 'sea-within-400m' : null;
+  if (!seaFound && negativeNear) {
+    for (const b of [0, 45, 90, 135, 180, 225, 270, 315]) {
+      const p = { dir: `ext${b}`, ...offsetPoint(cand.lat, cand.lng, b, 1000) };
+      const r = await probeElevation(p.lat, p.lng, UA);
+      waterProbes.push({ dir: p.dir, dist: 1000, ...r });
+      if (r.status === 'sea') {
+        seaFound = true;
+        waterfrontLevel = 'extended-1000m';
+        break;
+      }
+      if (r.status === 'land' && r.elevation > -0.05 && !landPoint) landPoint = p;
+    }
   }
   if (!seaFound) {
     reasons.push('no-sea-within-400m');
-    log(`      水際検証: 400m圏に海なし → 不採用 [${waterProbes.map((p) => `${p.dir}:${p.status === 'land' ? p.elevation + 'm' : p.status}`).join(' ')}]`);
+    log(`      水際検証: 400m圏に海なし${negativeNear ? '（拡張1000m圏でも海なし）' : ''} → 不採用 [${waterProbes.map((p) => `${p.dir}:${p.status === 'land' ? p.elevation + 'm' : p.status}`).join(' ')}]`);
     return { pass: false, reasons, waterProbes, distanceKm };
   }
 
@@ -431,8 +489,8 @@ async function validateCandidate(spot, cand, log) {
     return { pass: false, reasons, waterProbes, muniCd, distanceKm };
   }
 
-  log(`      検証OK: 距離${distanceKm.toFixed(1)}km / 海あり / muniCd=${muniCd}`);
-  return { pass: true, reasons: [], waterProbes, muniCd, distanceKm };
+  log(`      検証OK: 距離${distanceKm.toFixed(1)}km / 海あり(${waterfrontLevel}) / muniCd=${muniCd}`);
+  return { pass: true, reasons: [], waterProbes, muniCd, distanceKm, waterfrontLevel };
 }
 
 // ── 1スポットの処理 ─────────────────────────────────────
@@ -445,7 +503,7 @@ async function processSpot(spot, log) {
   // 候補生成
   const gsi = await gsiCandidates(spot, variations, log);
   const osm = await overpassCandidates(spot, variations, stems, log);
-  const candidates = dedupeCandidates([...gsi, ...osm]);
+  const candidates = dedupeCandidates([...gsi, ...osm], spot);
   log(`  候補（重複排除後・優先度順）: ${candidates.length}件`);
   for (const c of candidates) {
     log(`    [${c.source}] ${c.label} (${c.lat.toFixed(5)}, ${c.lng.toFixed(5)})`);
@@ -465,15 +523,17 @@ async function processSpot(spot, log) {
     log(`    検証中 [${cand.source}] ${cand.label} ...`);
     const v = await validateCandidate(spot, cand, log);
     if (v.pass) {
-      passed.push({ ...cand, distanceKm: v.distanceKm, muniCd: v.muniCd });
+      passed.push({ ...cand, distanceKm: v.distanceKm, muniCd: v.muniCd, waterfrontLevel: v.waterfrontLevel });
       if (SOURCE_PRIORITY[cand.source] <= 2) {
         // GSI完全一致 / OSM港湾タグの強ソースが全検証を通過 → 即採用
+        // （拡張リングでの水際合格は確度を1段下げる）
         return {
           status: 'fix',
           newLat: cand.lat,
           newLng: cand.lng,
           source: `${cand.source}: ${cand.label}`,
-          confidence: 'high',
+          confidence: v.waterfrontLevel === 'extended-1000m' ? 'medium' : 'high',
+          waterfront: v.waterfrontLevel,
           distanceKm: v.distanceKm,
           muniCd: v.muniCd,
           candidatesTried: tried,
@@ -508,12 +568,14 @@ async function processSpot(spot, log) {
   );
   reps.sort((a, b) => a.distanceKm - b.distanceKm);
   const chosen = reps[0];
+  const downgraded = chosen.waterfrontLevel === 'extended-1000m' || clusters.length > 1;
   return {
     status: 'fix',
     newLat: chosen.lat,
     newLng: chosen.lng,
     source: `${chosen.source}: ${chosen.label}`,
-    confidence: clusters.length === 1 ? 'high' : 'medium',
+    confidence: downgraded ? 'medium' : 'high',
+    waterfront: chosen.waterfrontLevel,
     distanceKm: chosen.distanceKm,
     muniCd: chosen.muniCd,
     candidatesTried: tried,
@@ -555,6 +617,7 @@ function writeOutput(results, spotBySlug, targetCount) {
         newLng: r.newLng,
         source: r.source,
         confidence: r.confidence,
+        waterfront: r.waterfront,
         movedKm: Number(r.distanceKm?.toFixed(2)),
       });
     } else {
