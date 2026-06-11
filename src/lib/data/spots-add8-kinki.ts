@@ -2470,23 +2470,6 @@ export const kinkiAdd8Spots: FishingSpot[] = [
   // 奈良県（10スポット: sk8136〜sk8145）
   // =========================================
   {
-    id: "sk8136", name: "吉野川・五条", slug: "yoshinogawa-gojo-k8",
-    description: "奈良県南部を流れる吉野川の五条市エリア。アユの友釣りが盛んで、夏のハイシーズンには多くの釣り人で賑わう。清流で育つ天然アユは格別。",
-    latitude: 34.351, longitude: 135.694,
-    address: "〒637-0043 兵庫県五条市新町",
-    accessInfo: "JR五条駅から車で約5分",
-    region: localRegion("rk8023"), spotType: "river", difficulty: "intermediate",
-    isFree: false, hasParking: true, parkingDetail: "河川敷に駐車スペースあり",
-    hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
-    mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.9, reviewCount: 0,
-    catchableFish: [
-      { fish: fish("ayu"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "友釣り" },
-      { fish: fish("amago"), monthStart: 3, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
-      { fish: fish("oikawa"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
-    ],
-    bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeBiwako,
-  },
-  {
     id: "sk8137", name: "吉野川・下市", slug: "yoshinogawa-shimoichi-k8",
     description: "下市町付近の吉野川は川幅が広がり、アユの友釣りに最適なポイントが点在。ウグイやオイカワも多く、のんびりとした川釣りが楽しめる。",
     latitude: 34.382, longitude: 135.791,

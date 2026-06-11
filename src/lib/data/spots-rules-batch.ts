@@ -1342,7 +1342,8 @@ export const spotRulesBatch: Record<string, SpotRules> = {
   // ========================================
   // 磯 (rocky)
   // ========================================
-  "tappi-zaki": {
+  // 重複統合: tappi-zaki（龍飛崎）→ tappizaki（竜飛崎）に正準化
+  "tappizaki": {
     castingAllowed: true,
     lureAllowed: true,
     chumAllowed: true,
