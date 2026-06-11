@@ -279,6 +279,8 @@ export const kyushuSouthSpots: FishingSpot[] = [
           { fish: fish("kamasu"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ライトショアジギング" },
           { fish: fish("tachiuo"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ワインド釣法" },
           { fish: fish("shiira"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
+          { fish: fish("kisu"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+          { fish: fish("katsuo"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
     tideAdvice: tideRock, mazumeInfo: mazumeKyushuSouth,

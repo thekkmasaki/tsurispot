@@ -873,27 +873,6 @@ export const expandKyushuSpots: FishingSpot[] = [
   // 宮崎県（12スポット: exp-k037〜exp-k048）
   // =========================================
   {
-    id: "exp-k037", name: "日南・油津港", slug: "nichinan-aburatsu-kou",
-    description: "日南海岸の中核港。黒潮の影響を受ける温暖な海域で、カツオやシイラなど大型回遊魚の実績がある。堤防からのサビキ釣りでアジも安定して釣れる。",
-    latitude: 31.5770, longitude: 131.3900,
-    address: "〒887-0002 宮崎県日南市西町",
-    accessInfo: "JR日南線油津駅から徒歩約10分。東九州自動車道日南東郷ICから約15分。",
-    region: localRegion("r4130"), spotType: "port", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "港周辺に無料駐車場あり",
-    hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "", images: [], rating: 3.9, reviewCount: 165,
-    catchableFish: [
-      { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("katsuo"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
-      { fish: fish("shiira"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "ルアー" },
-    ],
-    bestTimes: btMorning, tackleRecommendations: [],
-    tideAdvice: tideStandard, mazumeInfo: mazumeKyushu,
-    gearGuides: [gearSabiki, gearJig],
-    safetyLevel: "safe", safetyNotes: ["大型港で足場良好", "駐車場・トイレ完備"],
-    youtubeLinks: [{ label: "油津港 釣り", searchQuery: "油津港 日南 アジ カツオ 釣り 宮崎", description: "油津港での釣り動画" }],
-  },
-  {
     id: "exp-k038", name: "串間・都井岬港", slug: "kushima-toimisaki-kou",
     description: "野生馬で有名な都井岬の近くにある小さな港。太平洋に突き出た岬付近は潮通し抜群で、磯釣りではイシダイ・クロダイの大物実績がある。",
     latitude: 31.3680, longitude: 131.3280,
