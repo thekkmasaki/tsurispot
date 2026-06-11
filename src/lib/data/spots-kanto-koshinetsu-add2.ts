@@ -347,28 +347,6 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
   // 神奈川県（10スポット: s2210〜s2219）
   // =========================================
   {
-    id: "s2210", name: "早川港（小田原漁港）", slug: "hayakawa-ko-add2",
-    description: "小田原市の相模湾に面した活気ある漁港。堤防からアジ、サバ、イワシのサビキ釣りが盛んで、朝マヅメは回遊魚の群れに出会える確率が高い。漁港直結の「港の朝市」で新鮮な海鮮丼を食べてから釣りを楽しむのが定番。駅からも近く電車釣行に最適。",
-    latitude: 35.2350, longitude: 139.1370,
-    address: "〒250-0021 神奈川県小田原市早川1丁目10-1",
-    accessInfo: "JR東海道本線早川駅から徒歩約3分。小田原厚木道路小田原西ICから約5分。",
-    region: localRegion("r2372"), spotType: "port", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "漁港駐車場あり（有料500円/日）",
-    hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
-    mainImageUrl: "", images: [], rating: 3.9, reviewCount: 180, googleRating: 3.9, googleReviewCount: 157,
-    catchableFish: [
-      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
-      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
-      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
-      { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
-    ],
-    bestTimes: btMorning, tackleRecommendations: [],
-    tideAdvice: tideStandard, mazumeInfo: mazumeKanto,
-    gearGuides: [gearSabiki, gearRock],
-    safetyLevel: "safe", safetyNotes: ["堤防は足場良好", "漁船の出入りに注意", "駅から近い"],
-    youtubeLinks: [{ label: "早川港 サビキ釣り", searchQuery: "小田原 早川港 サビキ アジ 釣り", description: "早川港でのサビキ釣り動画" }],
-  },
-  {
     id: "s2211", name: "真鶴港", slug: "manazuru-ko-add2",
     description: "相模湾の西端に位置する風光明媚な漁港。堤防からのサビキ釣りでアジやイワシが通年で楽しめるほか、メジナやクロダイのウキ釣りも人気。港内は比較的穏やかで初心者にも安心。真鶴半島の磯場にも近くステップアップにも最適。",
     latitude: 35.1568, longitude: 139.1365,

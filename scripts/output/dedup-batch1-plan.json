@@ -1,0 +1,2616 @@
+{
+  "mergePlan": [
+    {
+      "canonical": "aburatsu-port",
+      "canonicalName": "油津港",
+      "canonicalFile": "spots-kyushu-south.ts",
+      "canonicalInfo": {
+        "file": "spots-kyushu-south.ts",
+        "name": "油津港",
+        "descLen": 81,
+        "fishCount": 12,
+        "spotType": "port",
+        "mainImageUrl": "/images/spots/wikimedia/aburatsu-port.webp"
+      },
+      "losers": [
+        {
+          "slug": "nichinan-aburatsu",
+          "name": "日南・油津港",
+          "file": "spots-additional-kyushu.ts",
+          "descLen": 43,
+          "fishCount": 12,
+          "mainImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4c/%E6%B2%B9%E6%B4%A5%E6%B8%AF_-_panoramio.jpg/960px-%E6%B2%B9%E6%B4%A5%E6%B8%AF_-_panoramio.jpg"
+        }
+      ]
+    },
+    {
+      "canonical": "ichinomiya-surf",
+      "canonicalName": "一宮海岸（サーフ）",
+      "canonicalFile": "spots-chiba-shizuoka-detail.ts",
+      "canonicalInfo": {
+        "file": "spots-chiba-shizuoka-detail.ts",
+        "name": "一宮海岸（サーフ）",
+        "descLen": 116,
+        "fishCount": 9,
+        "spotType": "beach",
+        "mainImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Boso_20160811154216_%2831381691033%29.jpg/960px-Boso_20160811154216_%2831381691033%29.jpg"
+      },
+      "losers": [
+        {
+          "slug": "ichinomiya-kaigan6",
+          "name": "一宮海岸",
+          "file": "spots-add6-east.ts",
+          "descLen": 76,
+          "fishCount": 5,
+          "mainImageUrl": ""
+        }
+      ]
+    },
+    {
+      "canonical": "iwami-tago-port",
+      "canonicalName": "岩美町田後港",
+      "canonicalFile": "spots-sanin.ts",
+      "canonicalInfo": {
+        "file": "spots-sanin.ts",
+        "name": "岩美町田後港",
+        "descLen": 81,
+        "fishCount": 9,
+        "spotType": "port",
+        "mainImageUrl": ""
+      },
+      "losers": [
+        {
+          "slug": "tago-port-tottori",
+          "name": "田後港",
+          "file": "spots-chugoku-kyushu-okinawa-add3.ts",
+          "descLen": 72,
+          "fishCount": 4,
+          "mainImageUrl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/%E6%B5%A6%E5%AF%8C%E6%B5%B7%E5%B2%B8%E3%80%81%E9%B4%A8%E3%82%AC%E7%A3%AF.jpg/960px-%E6%B5%A6%E5%AF%8C%E6%B5%B7%E5%B2%B8%E3%80%81%E9%B4%A8%E3%82%AC%E7%A3%AF.jpg"
+        }
+      ]
+    },
+    {
+      "canonical": "odawara-hayakawa-port",
+      "canonicalName": "小田原早川港",
+      "canonicalFile": "spots-kanto-detail.ts",
+      "canonicalInfo": {
+        "file": "spots-kanto-detail.ts",
+        "name": "小田原早川港",
+        "descLen": 106,
+        "fishCount": 9,
+        "spotType": "port",
+        "mainImageUrl": "/images/spots/placeholder.webp"
+      },
+      "losers": [
+        {
+          "slug": "hayakawa-ko-add2",
+          "name": "早川港（小田原漁港）",
+          "file": "spots-kanto-koshinetsu-add2.ts",
+          "descLen": 114,
+          "fishCount": 4,
+          "mainImageUrl": ""
+        }
+      ]
+    },
+    {
+      "canonical": "onahama-ko",
+      "canonicalName": "小名浜港",
+      "canonicalFile": "spots-hokkaido-tohoku-detail.ts",
+      "canonicalInfo": {
+        "file": "spots-hokkaido-tohoku-detail.ts",
+        "name": "小名浜港",
+        "descLen": 109,
+        "fishCount": 10,
+        "spotType": "port",
+        "mainImageUrl": ""
+      },
+      "losers": [
+        {
+          "slug": "iwaki-onahama",
+          "name": "いわき・小名浜港",
+          "file": "spots-additional-tohoku.ts",
+          "descLen": 50,
+          "fishCount": 4,
+          "mainImageUrl": ""
+        }
+      ]
+    },
+    {
+      "canonical": "sado-ryotsu-kou",
+      "canonicalName": "佐渡・両津港",
+      "canonicalFile": "spots-kanto-koshinetsu-add3.ts",
+      "canonicalInfo": {
+        "file": "spots-kanto-koshinetsu-add3.ts",
+        "name": "佐渡・両津港",
+        "descLen": 80,
+        "fishCount": 4,
+        "spotType": "port",
+        "mainImageUrl": ""
+      },
+      "losers": [
+        {
+          "slug": "sado-ryotsu-port",
+          "name": "佐渡両津港",
+          "file": "spots-extra.ts",
+          "descLen": 48,
+          "fishCount": 4,
+          "mainImageUrl": ""
+        }
+      ]
+    },
+    {
+      "canonical": "tappizaki",
+      "canonicalName": "竜飛崎",
+      "canonicalFile": "spots-hokkaido-tohoku-detail.ts",
+      "canonicalInfo": {
+        "file": "spots-hokkaido-tohoku-detail.ts",
+        "name": "竜飛崎",
+        "descLen": 99,
+        "fishCount": 9,
+        "spotType": "rocky",
+        "mainImageUrl": "/images/spots/wikimedia/tappizaki.webp"
+      },
+      "losers": [
+        {
+          "slug": "tappi-misaki",
+          "name": "竜飛岬",
+          "file": "spots-tohoku.ts",
+          "descLen": 67,
+          "fishCount": 8,
+          "mainImageUrl": "/images/spots/wikimedia/tappi-misaki.webp"
+        },
+        {
+          "slug": "tappi-zaki",
+          "name": "龍飛崎",
+          "file": "spots-additional-tohoku.ts",
+          "descLen": 61,
+          "fishCount": 3,
+          "mainImageUrl": ""
+        }
+      ]
+    },
+    {
+      "canonical": "yoshinogawa-gojo",
+      "canonicalName": "吉野川（五條）",
+      "canonicalFile": "spots-expand-central.ts",
+      "canonicalInfo": {
+        "file": "spots-expand-central.ts",
+        "name": "吉野川（五條）",
+        "descLen": 73,
+        "fishCount": 4,
+        "spotType": "river",
+        "mainImageUrl": "/images/spots/placeholder.webp"
+      },
+      "losers": [
+        {
+          "slug": "yoshinogawa-gojo-k8",
+          "name": "吉野川・五条",
+          "file": "spots-add8-kinki.ts",
+          "descLen": 65,
+          "fishCount": 3,
+          "mainImageUrl": "/images/spots/placeholder.svg"
+        },
+        {
+          "slug": "yoshinogawa-gojo-detail",
+          "name": "吉野川（五條・詳細）",
+          "file": "spots-kinki-chugoku-shikoku-add.ts",
+          "descLen": 97,
+          "fishCount": 4,
+          "mainImageUrl": ""
+        }
+      ]
+    }
+  ],
+  "manualPairs": [
+    {
+      "slugA": "tomonoura-hiroshima-w6",
+      "nameA": "鞆の浦",
+      "slugB": "tomonoura-sensuijima-c8",
+      "nameB": "鞆の浦・仙酔島渡船場",
+      "prefecture": "広島県",
+      "distanceM": 0,
+      "nameRelation": "containment",
+      "reason": "接尾辞「仙酔島渡船場」は部位の可能性"
+    },
+    {
+      "slugA": "inatori-port",
+      "nameA": "稲取港",
+      "slugB": "inatori-ko-teibo",
+      "nameB": "稲取港堤防",
+      "prefecture": "静岡県",
+      "distanceM": 0,
+      "nameRelation": "containment",
+      "reason": "接尾辞「堤防」は部位の可能性"
+    },
+    {
+      "slugA": "kanaya-port",
+      "nameA": "金谷港",
+      "slugB": "hamakanaya-port",
+      "nameB": "浜金谷港",
+      "prefecture": "千葉県",
+      "distanceM": 0,
+      "nameRelation": "containment",
+      "reason": "プレフィックス「浜」が部位語/短すぎ"
+    },
+    {
+      "slugA": "uradome-kaigan-w5",
+      "nameA": "浦富海岸",
+      "slugB": "uradome-iso-w6",
+      "nameB": "浦富海岸磯場",
+      "prefecture": "鳥取県",
+      "distanceM": 0,
+      "nameRelation": "containment",
+      "reason": "接尾辞「磯場」は部位の可能性"
+    },
+    {
+      "slugA": "iruma-gawa-sayama",
+      "nameA": "入間川（狭山市周辺）",
+      "slugB": "irumagawa-housui-bashi",
+      "nameB": "入間川 豊水橋付近",
+      "prefecture": "埼玉県",
+      "distanceM": 0,
+      "nameRelation": "containment",
+      "reason": "包含関係なし（表記揺れ以上の差）"
+    },
+    {
+      "slugA": "abashiri-ko",
+      "nameA": "網走港",
+      "slugB": "abashiri-kou-bouhatei",
+      "nameB": "網走港防波堤",
+      "prefecture": "北海道",
+      "distanceM": 68,
+      "nameRelation": "containment",
+      "reason": "spotType differs: port vs breakwater"
+    },
+    {
+      "slugA": "hiroo-gyoko",
+      "nameA": "広尾漁港",
+      "slugB": "hiroo-ko-add3",
+      "nameB": "広尾港",
+      "prefecture": "北海道",
+      "distanceM": 82,
+      "nameRelation": "editDistance=1",
+      "reason": "包含関係なし（表記揺れ以上の差）"
+    },
+    {
+      "slugA": "jusanko-fishing",
+      "nameA": "十三湖",
+      "slugB": "jusanko-kakou6",
+      "nameB": "十三湖河口",
+      "prefecture": "青森県",
+      "distanceM": 84,
+      "nameRelation": "containment",
+      "reason": "接尾辞「河口」は部位の可能性"
+    },
+    {
+      "slugA": "fukaura-kita-bohatei",
+      "nameA": "深浦漁港北防波堤",
+      "slugB": "fukaura-gyokou",
+      "nameB": "深浦漁港",
+      "prefecture": "青森県",
+      "distanceM": 87,
+      "nameRelation": "containment",
+      "reason": "spotType differs: breakwater vs port"
+    },
+    {
+      "slugA": "mikuni-ko-sunset-beach",
+      "nameA": "三国港（サンセットビーチ前）",
+      "slugB": "mikuni-ko-kuzuryu-kakou",
+      "nameB": "三国港 九頭竜川河口",
+      "prefecture": "福井県",
+      "distanceM": 90,
+      "nameRelation": "containment",
+      "reason": "包含関係なし（表記揺れ以上の差）"
+    },
+    {
+      "slugA": "tomonoura-sensui-gokan",
+      "nameA": "鞆の浦仙酔島渡船場護岸",
+      "slugB": "tomonoura-hiroshima-w6",
+      "nameB": "鞆の浦",
+      "prefecture": "広島県",
+      "distanceM": 92,
+      "nameRelation": "containment",
+      "reason": "接尾辞「仙酔島渡船場護岸」は部位の可能性"
+    },
+    {
+      "slugA": "tomonoura-sensui-gokan",
+      "nameA": "鞆の浦仙酔島渡船場護岸",
+      "slugB": "tomonoura-sensuijima-c8",
+      "nameB": "鞆の浦・仙酔島渡船場",
+      "prefecture": "広島県",
+      "distanceM": 92,
+      "nameRelation": "editDistance=3",
+      "reason": "接尾辞「護岸」は部位の可能性"
+    },
+    {
+      "slugA": "fukuyama-tomonoura-sensuijima",
+      "nameA": "福山市・鞆の浦仙酔島渡船場",
+      "slugB": "tomonoura-hiroshima-w6",
+      "nameB": "鞆の浦",
+      "prefecture": "広島県",
+      "distanceM": 92,
+      "nameRelation": "containment",
+      "reason": "包含関係なし（表記揺れ以上の差）"
+    },
+    {
+      "slugA": "tomonoura-gyokou-w5",
+      "nameA": "鞆の浦漁港",
+      "slugB": "tomonoura-hiroshima-w6",
+      "nameB": "鞆の浦",
+      "prefecture": "広島県",
+      "distanceM": 92,
+      "nameRelation": "containment",
+      "reason": "接尾辞「漁港」は部位の可能性"
+    },
+    {
+      "slugA": "yawatahama-port-fishing",
+      "nameA": "八幡浜港",
+      "slugB": "yawatahama-kou-ooteibou",
+      "nameB": "八幡浜市・八幡浜港大堤防",
+      "prefecture": "愛媛県",
+      "distanceM": 93,
+      "nameRelation": "containment",
+      "reason": "spotType differs: port vs breakwater"
+    },
+    {
+      "slugA": "izumiotsu-shiomi",
+      "nameA": "泉大津・汐見埠頭",
+      "slugB": "shiomi-futou-osaka",
+      "nameB": "汐見埠頭（大阪）",
+      "prefecture": "大阪府",
+      "distanceM": 105,
+      "nameRelation": "containment",
+      "reason": "distance 105m > 100m"
+    },
+    {
+      "slugA": "yawatahama-port-fishing",
+      "nameA": "八幡浜港",
+      "slugB": "ehime-yawatahama-obato-bulk",
+      "nameB": "八幡浜港大波止",
+      "prefecture": "愛媛県",
+      "distanceM": 110,
+      "nameRelation": "containment",
+      "reason": "distance 110m > 100m"
+    },
+    {
+      "slugA": "fukuyama-tomonoura-gokan",
+      "nameA": "福山市鞆の浦護岸",
+      "slugB": "tomonoura-hiroshima-w6",
+      "nameB": "鞆の浦",
+      "prefecture": "広島県",
+      "distanceM": 111,
+      "nameRelation": "containment",
+      "reason": "distance 111m > 100m"
+    },
+    {
+      "slugA": "uno-kou-okayama",
+      "nameA": "宇野港",
+      "slugB": "tamano-uno-port",
+      "nameB": "玉野・宇野港",
+      "prefecture": "岡山県",
+      "distanceM": 111,
+      "nameRelation": "containment",
+      "reason": "distance 111m > 100m"
+    },
+    {
+      "slugA": "sakaiminato-marina-gokan",
+      "nameA": "境港公共マリーナ護岸",
+      "slugB": "sakaiminato-port",
+      "nameB": "境港",
+      "prefecture": "鳥取県",
+      "distanceM": 111,
+      "nameRelation": "containment",
+      "reason": "distance 111m > 100m"
+    },
+    {
+      "slugA": "fuefukigawa-isawa6",
+      "nameA": "笛吹川（石和付近）",
+      "slugB": "fuefukigawa-isawa-kofu",
+      "nameB": "笛吹川（石和・甲府）",
+      "prefecture": "山梨県",
+      "distanceM": 111,
+      "nameRelation": "containment",
+      "reason": "distance 111m > 100m"
+    },
+    {
+      "slugA": "chikumagawa-ueda-nagano",
+      "nameA": "千曲川・上田エリア",
+      "slugB": "chikumagawa-ueda-saku",
+      "nameB": "千曲川（上田・佐久）",
+      "prefecture": "長野県",
+      "distanceM": 111,
+      "nameRelation": "containment",
+      "reason": "distance 111m > 100m"
+    },
+    {
+      "slugA": "miyako-desaki-futou6",
+      "nameA": "宮古港出崎埠頭",
+      "slugB": "miyako-kou-fujiwara",
+      "nameB": "宮古港藤原埠頭",
+      "prefecture": "岩手県",
+      "distanceM": 111,
+      "nameRelation": "editDistance=2",
+      "reason": "distance 111m > 100m"
+    },
+    {
+      "slugA": "ajigasawa-gyokou",
+      "nameA": "鯵ヶ沢漁港",
+      "slugB": "ajigasawa-port",
+      "nameB": "鰺ヶ沢漁港",
+      "prefecture": "青森県",
+      "distanceM": 111,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 111m > 100m"
+    },
+    {
+      "slugA": "inatori-port",
+      "nameA": "稲取港",
+      "slugB": "inatori-gyokou",
+      "nameB": "稲取漁港",
+      "prefecture": "静岡県",
+      "distanceM": 115,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 115m > 100m"
+    },
+    {
+      "slugA": "katsuragawa-otsuki-tsuru",
+      "nameA": "桂川（大月・都留）",
+      "slugB": "katsuragawa-otsuki",
+      "nameB": "桂川（大月〜都留）",
+      "prefecture": "山梨県",
+      "distanceM": 115,
+      "nameRelation": "containment",
+      "reason": "distance 115m > 100m"
+    },
+    {
+      "slugA": "takamatsu-sunport",
+      "nameA": "高松・サンポート高松周辺",
+      "slugB": "sunport-takamatsu-kagawa",
+      "nameB": "サンポート高松",
+      "prefecture": "香川県",
+      "distanceM": 120,
+      "nameRelation": "containment",
+      "reason": "distance 120m > 100m"
+    },
+    {
+      "slugA": "katsuura-port",
+      "nameA": "勝浦漁港",
+      "slugB": "katsuura-suminawa-breakwater",
+      "nameB": "勝浦漁港墨名堤防",
+      "prefecture": "千葉県",
+      "distanceM": 120,
+      "nameRelation": "containment",
+      "reason": "distance 120m > 100m"
+    },
+    {
+      "slugA": "nagara-river-gujo",
+      "nameA": "長良川郡上八幡",
+      "slugB": "nagaragawa-gujo-ayu",
+      "nameB": "長良川（郡上八幡）",
+      "prefecture": "岐阜県",
+      "distanceM": 122,
+      "nameRelation": "containment",
+      "reason": "distance 122m > 100m"
+    },
+    {
+      "slugA": "shimotsui-port-detail",
+      "nameA": "下津井港（詳細）",
+      "slugB": "kurashiki-shimotsui-kou",
+      "nameB": "倉敷・下津井港",
+      "prefecture": "岡山県",
+      "distanceM": 123,
+      "nameRelation": "containment",
+      "reason": "distance 123m > 100m"
+    },
+    {
+      "slugA": "enoshima-katase-gyoko6",
+      "nameA": "江の島片瀬漁港",
+      "slugB": "katase-port",
+      "nameB": "片瀬漁港",
+      "prefecture": "神奈川県",
+      "distanceM": 124,
+      "nameRelation": "containment",
+      "reason": "distance 124m > 100m"
+    },
+    {
+      "slugA": "tenryugawa-upper",
+      "nameA": "天竜川上流（伊那谷）",
+      "slugB": "tenryugawa-ina-komagane",
+      "nameB": "天竜川（伊那・駒ヶ根）",
+      "prefecture": "長野県",
+      "distanceM": 128,
+      "nameRelation": "containment",
+      "reason": "distance 128m > 100m"
+    },
+    {
+      "slugA": "hasegawa-tsuri",
+      "nameA": "初瀬川",
+      "slugB": "hatsusegawa-river",
+      "nameB": "初瀬川（大和川上流）",
+      "prefecture": "奈良県",
+      "distanceM": 129,
+      "nameRelation": "containment",
+      "reason": "distance 129m > 100m"
+    },
+    {
+      "slugA": "katsuragawa-otsuki6",
+      "nameA": "桂川（大月付近）",
+      "slugB": "katsuragawa-otsuki-e8",
+      "nameB": "桂川（大月エリア）",
+      "prefecture": "山梨県",
+      "distanceM": 135,
+      "nameRelation": "containment",
+      "reason": "distance 135m > 100m"
+    },
+    {
+      "slugA": "hakodate-kou",
+      "nameA": "函館港",
+      "slugB": "hakodate-midorinoshima6",
+      "nameB": "函館港緑の島",
+      "prefecture": "北海道",
+      "distanceM": 139,
+      "nameRelation": "containment",
+      "reason": "distance 139m > 100m"
+    },
+    {
+      "slugA": "obama-kou-fukui",
+      "nameA": "小浜港",
+      "slugB": "obama-gyokou-fukui",
+      "nameB": "小浜漁港",
+      "prefecture": "福井県",
+      "distanceM": 143,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 143m > 100m"
+    },
+    {
+      "slugA": "kasumi-higashi-port",
+      "nameA": "香住東港",
+      "slugB": "kasumi-gyokou-hyogo",
+      "nameB": "香住漁港",
+      "prefecture": "兵庫県",
+      "distanceM": 143,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 143m > 100m"
+    },
+    {
+      "slugA": "hidagawa-gero-e8",
+      "nameA": "飛騨川（下呂温泉）",
+      "slugB": "hidagawa-gero-gifu",
+      "nameB": "飛騨川・下呂温泉エリア",
+      "prefecture": "岐阜県",
+      "distanceM": 143,
+      "nameRelation": "containment",
+      "reason": "distance 143m > 100m"
+    },
+    {
+      "slugA": "moji-kou-w5",
+      "nameA": "門司港",
+      "slugB": "mojikou-retro-gogan-w6",
+      "nameB": "門司港レトロ護岸",
+      "prefecture": "福岡県",
+      "distanceM": 144,
+      "nameRelation": "containment",
+      "reason": "distance 144m > 100m"
+    },
+    {
+      "slugA": "hikari-nijigahama-c8",
+      "nameA": "光市・虹ヶ浜海岸",
+      "slugB": "nijigahama-hikari-w6",
+      "nameB": "光市・虹ヶ浜",
+      "prefecture": "山口県",
+      "distanceM": 144,
+      "nameRelation": "containment",
+      "reason": "distance 144m > 100m"
+    },
+    {
+      "slugA": "yuasa-gyokou-k8",
+      "nameA": "湯浅漁港",
+      "slugB": "yuasa-hiro-port",
+      "nameB": "湯浅広港",
+      "prefecture": "和歌山県",
+      "distanceM": 144,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 144m > 100m"
+    },
+    {
+      "slugA": "arai-umizuri-kouen-e8",
+      "nameA": "新居海釣公園",
+      "slugB": "hamanako-arai-kouen",
+      "nameB": "浜名湖・新居海釣公園",
+      "prefecture": "静岡県",
+      "distanceM": 144,
+      "nameRelation": "containment",
+      "reason": "distance 144m > 100m"
+    },
+    {
+      "slugA": "enoshima-ura-iso",
+      "nameA": "江の島・裏磯",
+      "slugB": "enoshima-uraiso-e8",
+      "nameB": "江の島裏磯",
+      "prefecture": "神奈川県",
+      "distanceM": 144,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 144m > 100m"
+    },
+    {
+      "slugA": "fuke-kou-osaka",
+      "nameA": "深日港",
+      "slugB": "misaki-fuke",
+      "nameB": "岬町・深日港",
+      "prefecture": "大阪府",
+      "distanceM": 145,
+      "nameRelation": "containment",
+      "reason": "distance 145m > 100m"
+    },
+    {
+      "slugA": "tannowa-kou",
+      "nameA": "淡輪港",
+      "slugB": "tannowa-gyoko",
+      "nameB": "淡輪漁港",
+      "prefecture": "大阪府",
+      "distanceM": 149,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 149m > 100m"
+    },
+    {
+      "slugA": "inubosaki",
+      "nameA": "犬吠埼",
+      "slugB": "inubosaki-todaishita-e8",
+      "nameB": "犬吠埼灯台下",
+      "prefecture": "千葉県",
+      "distanceM": 151,
+      "nameRelation": "containment",
+      "reason": "distance 151m > 100m"
+    },
+    {
+      "slugA": "monbetsu-ko-dai3-futo",
+      "nameA": "紋別港第3ふ頭",
+      "slugB": "monbetsu-daisan-futou6",
+      "nameB": "紋別港第3埠頭",
+      "prefecture": "北海道",
+      "distanceM": 159,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 159m > 100m"
+    },
+    {
+      "slugA": "awaji-sumoto-kou-k8",
+      "nameA": "淡路島・洲本港",
+      "slugB": "awaji-sumoto-port",
+      "nameB": "淡路島洲本港",
+      "prefecture": "兵庫県",
+      "distanceM": 160,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 160m > 100m"
+    },
+    {
+      "slugA": "wajima-marinetown",
+      "nameA": "輪島港マリンタウン",
+      "slugB": "wajima-ko-ishikawa",
+      "nameB": "輪島港",
+      "prefecture": "石川県",
+      "distanceM": 160,
+      "nameRelation": "containment",
+      "reason": "distance 160m > 100m"
+    },
+    {
+      "slugA": "tomiura-shinko6",
+      "nameA": "富浦新港",
+      "slugB": "tomiura-kyuukou",
+      "nameB": "富浦旧港",
+      "prefecture": "東京都",
+      "distanceM": 167,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 167m > 100m"
+    },
+    {
+      "slugA": "mojikou-retro-gogan-w6",
+      "nameA": "門司港レトロ護岸",
+      "slugB": "moji-retro-wharf",
+      "nameB": "門司港レトロ波止場",
+      "prefecture": "福岡県",
+      "distanceM": 173,
+      "nameRelation": "editDistance=3",
+      "reason": "distance 173m > 100m"
+    },
+    {
+      "slugA": "ito-port-hakuto-teibo",
+      "nameA": "伊東港白灯堤防",
+      "slugB": "ito-kou",
+      "nameB": "伊東港",
+      "prefecture": "静岡県",
+      "distanceM": 177,
+      "nameRelation": "containment",
+      "reason": "distance 177m > 100m"
+    },
+    {
+      "slugA": "tonegawa-sawara",
+      "nameA": "利根川下流（佐原）",
+      "slugB": "tonegawa-lower-chiba",
+      "nameB": "利根川下流（千葉県側・佐原〜銚子）",
+      "prefecture": "千葉県",
+      "distanceM": 180,
+      "nameRelation": "containment",
+      "reason": "distance 180m > 100m"
+    },
+    {
+      "slugA": "miyako-heigawa-mouth",
+      "nameA": "宮古港閉伊川河口",
+      "slugB": "miyako-fujiwara-futou",
+      "nameB": "宮古港（藤原埠頭）",
+      "prefecture": "岩手県",
+      "distanceM": 180,
+      "nameRelation": "containment",
+      "reason": "distance 180m > 100m"
+    },
+    {
+      "slugA": "jogashima-iso-minami",
+      "nameA": "城ヶ島磯場南側",
+      "slugB": "jogashima6",
+      "nameB": "城ヶ島",
+      "prefecture": "神奈川県",
+      "distanceM": 181,
+      "nameRelation": "containment",
+      "reason": "distance 181m > 100m"
+    },
+    {
+      "slugA": "shinkiba-park",
+      "nameA": "新木場公園",
+      "slugB": "shinkiba-koen-e8",
+      "nameB": "新木場公園護岸",
+      "prefecture": "東京都",
+      "distanceM": 181,
+      "nameRelation": "containment",
+      "reason": "distance 181m > 100m"
+    },
+    {
+      "slugA": "enoshima-omote-iso",
+      "nameA": "江の島・表磯",
+      "slugB": "enoshima-uraiso-e8",
+      "nameB": "江の島裏磯",
+      "prefecture": "神奈川県",
+      "distanceM": 182,
+      "nameRelation": "editDistance=2",
+      "reason": "distance 182m > 100m"
+    },
+    {
+      "slugA": "muya-kou-w6",
+      "nameA": "撫養港",
+      "slugB": "tokushima-naruto-muya-bulk",
+      "nameB": "鳴門市・撫養港",
+      "prefecture": "徳島県",
+      "distanceM": 184,
+      "nameRelation": "containment",
+      "reason": "distance 184m > 100m"
+    },
+    {
+      "slugA": "tomonoura-port",
+      "nameA": "鞆の浦港",
+      "slugB": "tomonoura-hiroshima-w6",
+      "nameB": "鞆の浦",
+      "prefecture": "広島県",
+      "distanceM": 184,
+      "nameRelation": "containment",
+      "reason": "distance 184m > 100m"
+    },
+    {
+      "slugA": "tanabe-gyoko",
+      "nameA": "田辺漁港",
+      "slugB": "tanabe-ko-add3",
+      "nameB": "田辺港",
+      "prefecture": "和歌山県",
+      "distanceM": 185,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 185m > 100m"
+    },
+    {
+      "slugA": "goto-fukue-kou",
+      "nameA": "五島列島・福江港",
+      "slugB": "fukue-kou-w6",
+      "nameB": "五島・福江港",
+      "prefecture": "長崎県",
+      "distanceM": 187,
+      "nameRelation": "editDistance=2",
+      "reason": "distance 187m > 100m"
+    },
+    {
+      "slugA": "teganuma-canal-tanago",
+      "nameA": "手賀沼周辺用水路（柏市・我孫子市）",
+      "slugB": "teganuma-lake",
+      "nameB": "手賀沼",
+      "prefecture": "千葉県",
+      "distanceM": 192,
+      "nameRelation": "containment",
+      "reason": "distance 192m > 100m"
+    },
+    {
+      "slugA": "takeno-higashi-bouhatei",
+      "nameA": "竹野港東防波堤",
+      "slugB": "takeno-kita-bouhatei",
+      "nameB": "竹野港北防波堤",
+      "prefecture": "兵庫県",
+      "distanceM": 193,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 193m > 100m"
+    },
+    {
+      "slugA": "izu-shimoda-port",
+      "nameA": "伊豆下田港",
+      "slugB": "shimoda-port",
+      "nameB": "下田港",
+      "prefecture": "静岡県",
+      "distanceM": 202,
+      "nameRelation": "containment",
+      "reason": "distance 202m > 100m"
+    },
+    {
+      "slugA": "kinugawa-onsen-keiryu6",
+      "nameA": "鬼怒川温泉渓流",
+      "slugB": "kinugawa-nikko-fujiwara",
+      "nameB": "鬼怒川（日光〜藤原）",
+      "prefecture": "栃木県",
+      "distanceM": 210,
+      "nameRelation": "containment",
+      "reason": "distance 210m > 100m"
+    },
+    {
+      "slugA": "natsudumari-gyokou-w7",
+      "nameA": "夏泊漁港",
+      "slugB": "natsudomari-kou-tottori-c8",
+      "nameB": "夏泊港",
+      "prefecture": "鳥取県",
+      "distanceM": 212,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 212m > 100m"
+    },
+    {
+      "slugA": "sakaiminato-yumeminato-gogan",
+      "nameA": "境港市・夢みなと公園護岸",
+      "slugB": "sakaiminato-port",
+      "nameB": "境港",
+      "prefecture": "鳥取県",
+      "distanceM": 212,
+      "nameRelation": "containment",
+      "reason": "distance 212m > 100m"
+    },
+    {
+      "slugA": "hidagawa-gero",
+      "nameA": "飛騨川 下呂エリア",
+      "slugB": "hidagawa-gero-gifu",
+      "nameB": "飛騨川・下呂温泉エリア",
+      "prefecture": "岐阜県",
+      "distanceM": 212,
+      "nameRelation": "editDistance=3",
+      "reason": "distance 212m > 100m"
+    },
+    {
+      "slugA": "yoshinogawa-gojo",
+      "nameA": "吉野川（五條）",
+      "slugB": "yoshino-river-gojo",
+      "nameB": "吉野川五條周辺",
+      "prefecture": "奈良県",
+      "distanceM": 213,
+      "nameRelation": "containment",
+      "reason": "distance 213m > 100m"
+    },
+    {
+      "slugA": "kamogawa-port",
+      "nameA": "鴨川漁港",
+      "slugB": "kamogawa-ko-add2",
+      "nameB": "鴨川港（鴨川漁港）",
+      "prefecture": "千葉県",
+      "distanceM": 213,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 213m > 100m"
+    },
+    {
+      "slugA": "higashikagawa-hiketa-kou-higashi",
+      "nameA": "東かがわ市・引田港東堤防",
+      "slugB": "hiketa-port-kagawa",
+      "nameB": "引田港",
+      "prefecture": "香川県",
+      "distanceM": 215,
+      "nameRelation": "containment",
+      "reason": "distance 215m > 100m"
+    },
+    {
+      "slugA": "takamatsu-kou-w6",
+      "nameA": "高松港",
+      "slugB": "takamatsu-tamamo-park",
+      "nameB": "高松港玉藻公園前",
+      "prefecture": "香川県",
+      "distanceM": 215,
+      "nameRelation": "containment",
+      "reason": "distance 215m > 100m"
+    },
+    {
+      "slugA": "biwako-otsu-ko",
+      "nameA": "琵琶湖大津港",
+      "slugB": "biwako-otsu-port",
+      "nameB": "琵琶湖大津港周辺",
+      "prefecture": "滋賀県",
+      "distanceM": 215,
+      "nameRelation": "containment",
+      "reason": "distance 215m > 100m"
+    },
+    {
+      "slugA": "morie-kou-kitsuki-w6",
+      "nameA": "杵築・守江港",
+      "slugB": "kitsuki-morie-bay",
+      "nameB": "杵築市守江湾",
+      "prefecture": "大分県",
+      "distanceM": 216,
+      "nameRelation": "editDistance=2",
+      "reason": "distance 216m > 100m"
+    },
+    {
+      "slugA": "moji-kou-w5",
+      "nameA": "門司港",
+      "slugB": "kanmon-kaikyo-moji-kou",
+      "nameB": "関門海峡・門司港",
+      "prefecture": "福岡県",
+      "distanceM": 222,
+      "nameRelation": "containment",
+      "reason": "distance 222m > 100m"
+    },
+    {
+      "slugA": "handa-ko-teibo",
+      "nameA": "半田港堤防",
+      "slugB": "handa-kou",
+      "nameB": "半田港",
+      "prefecture": "愛知県",
+      "distanceM": 222,
+      "nameRelation": "containment",
+      "reason": "distance 222m > 100m"
+    },
+    {
+      "slugA": "biwako-otsu-ko-shuhen",
+      "nameA": "琵琶湖 大津港周辺",
+      "slugB": "biwako-otsu-ko",
+      "nameB": "琵琶湖大津港",
+      "prefecture": "滋賀県",
+      "distanceM": 222,
+      "nameRelation": "containment",
+      "reason": "distance 222m > 100m"
+    },
+    {
+      "slugA": "tenryugawa-ina-nagano",
+      "nameA": "天竜川・伊那エリア",
+      "slugB": "tenryugawa-ina-komagane",
+      "nameB": "天竜川（伊那・駒ヶ根）",
+      "prefecture": "長野県",
+      "distanceM": 222,
+      "nameRelation": "containment",
+      "reason": "distance 222m > 100m"
+    },
+    {
+      "slugA": "chikumagawa-saku-e8",
+      "nameA": "千曲川（佐久エリア）",
+      "slugB": "chikumagawa-saku-nagano",
+      "nameB": "千曲川・佐久エリア",
+      "prefecture": "長野県",
+      "distanceM": 222,
+      "nameRelation": "containment",
+      "reason": "distance 222m > 100m"
+    },
+    {
+      "slugA": "saigawa-azumino-e8",
+      "nameA": "犀川（安曇野）",
+      "slugB": "saigawa-azumino",
+      "nameB": "犀川 安曇野エリア",
+      "prefecture": "長野県",
+      "distanceM": 222,
+      "nameRelation": "containment",
+      "reason": "distance 222m > 100m"
+    },
+    {
+      "slugA": "tappi-gyoko",
+      "nameA": "竜飛漁港",
+      "slugB": "tappi-gyokou6",
+      "nameB": "龍飛漁港",
+      "prefecture": "青森県",
+      "distanceM": 222,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 222m > 100m"
+    },
+    {
+      "slugA": "biwako-kitako-nagahama",
+      "nameA": "琵琶湖北湖（長浜エリア）",
+      "slugB": "biwako-nagahama",
+      "nameB": "琵琶湖長浜",
+      "prefecture": "滋賀県",
+      "distanceM": 223,
+      "nameRelation": "editDistance=2",
+      "reason": "distance 223m > 100m"
+    },
+    {
+      "slugA": "tonegawa-numata6",
+      "nameA": "利根川沼田地区",
+      "slugB": "tonegawa-numata",
+      "nameB": "利根川（沼田エリア）",
+      "prefecture": "群馬県",
+      "distanceM": 224,
+      "nameRelation": "containment",
+      "reason": "distance 224m > 100m"
+    },
+    {
+      "slugA": "omoe-aneyoshi-gyokou",
+      "nameA": "重茂半島・姉吉漁港",
+      "slugB": "omoe-aneyoshi-gyokou6",
+      "nameB": "重茂半島姉吉漁港",
+      "prefecture": "岩手県",
+      "distanceM": 224,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 224m > 100m"
+    },
+    {
+      "slugA": "tokawa-gyokou",
+      "nameA": "外川漁港",
+      "slugB": "tokawa-port",
+      "nameB": "外川港",
+      "prefecture": "千葉県",
+      "distanceM": 232,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 232m > 100m"
+    },
+    {
+      "slugA": "ishikaribay-higashi-futou6",
+      "nameA": "石狩湾新港東埠頭",
+      "slugB": "ishikaribay-higashi-futo",
+      "nameB": "石狩湾新港東ふ頭",
+      "prefecture": "北海道",
+      "distanceM": 237,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 237m > 100m"
+    },
+    {
+      "slugA": "oshika-ayukawa-kou-e8",
+      "nameA": "牡鹿半島鮎川港",
+      "slugB": "oshika-ayukawa-kou",
+      "nameB": "牡鹿半島 鮎川港",
+      "prefecture": "宮城県",
+      "distanceM": 239,
+      "nameRelation": "containment",
+      "reason": "distance 239m > 100m"
+    },
+    {
+      "slugA": "tobishima-katsuura-e8",
+      "nameA": "飛島勝浦漁港",
+      "slugB": "tobishima-katsuura-kou",
+      "nameB": "飛島勝浦港",
+      "prefecture": "山形県",
+      "distanceM": 239,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 239m > 100m"
+    },
+    {
+      "slugA": "hamanako-maisaka-e8",
+      "nameA": "浜名湖・舞阪漁港",
+      "slugB": "hamanako-maisaka-kou",
+      "nameB": "浜名湖・舞阪港",
+      "prefecture": "静岡県",
+      "distanceM": 240,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 240m > 100m"
+    },
+    {
+      "slugA": "ashiya-gyokou-fukuoka-w6",
+      "nameA": "芦屋漁港",
+      "slugB": "ashiya-kou-fukuoka",
+      "nameB": "芦屋港",
+      "prefecture": "福岡県",
+      "distanceM": 241,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 241m > 100m"
+    },
+    {
+      "slugA": "totsukawa-dorokyo-k8",
+      "nameA": "十津川・瀞峡",
+      "slugB": "totsukawa-nara-add3",
+      "nameB": "十津川",
+      "prefecture": "奈良県",
+      "distanceM": 241,
+      "nameRelation": "containment",
+      "reason": "distance 241m > 100m"
+    },
+    {
+      "slugA": "abashiri-boushiiwa6",
+      "nameA": "網走港帽子岩",
+      "slugB": "abashiri-ko",
+      "nameB": "網走港",
+      "prefecture": "北海道",
+      "distanceM": 241,
+      "nameRelation": "containment",
+      "reason": "distance 241m > 100m"
+    },
+    {
+      "slugA": "nishinoomote-kou-w6",
+      "nameA": "種子島・西之表港",
+      "slugB": "tanegashima-nishinoomote-port",
+      "nameB": "種子島西之表港",
+      "prefecture": "鹿児島県",
+      "distanceM": 242,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 242m > 100m"
+    },
+    {
+      "slugA": "irumagawa-fishing",
+      "nameA": "入間川",
+      "slugB": "irumagawa-hanno",
+      "nameB": "入間川（飯能地区）",
+      "prefecture": "埼玉県",
+      "distanceM": 243,
+      "nameRelation": "containment",
+      "reason": "distance 243m > 100m"
+    },
+    {
+      "slugA": "moji-kou-w5",
+      "nameA": "門司港",
+      "slugB": "moji-retro-wharf",
+      "nameB": "門司港レトロ波止場",
+      "prefecture": "福岡県",
+      "distanceM": 245,
+      "nameRelation": "containment",
+      "reason": "distance 245m > 100m"
+    },
+    {
+      "slugA": "himeji-port",
+      "nameA": "姫路港",
+      "slugB": "himeji-ko-shikama-futo",
+      "nameB": "姫路港 飾磨埠頭",
+      "prefecture": "兵庫県",
+      "distanceM": 247,
+      "nameRelation": "containment",
+      "reason": "distance 247m > 100m"
+    },
+    {
+      "slugA": "jogashima-iso-minami",
+      "nameA": "城ヶ島磯場南側",
+      "slugB": "jogashima-iso-e8",
+      "nameB": "城ヶ島磯",
+      "prefecture": "神奈川県",
+      "distanceM": 247,
+      "nameRelation": "containment",
+      "reason": "distance 247m > 100m"
+    },
+    {
+      "slugA": "fukaura-port",
+      "nameA": "深浦港",
+      "slugB": "fukaura-gyokou",
+      "nameB": "深浦漁港",
+      "prefecture": "青森県",
+      "distanceM": 254,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 254m > 100m"
+    },
+    {
+      "slugA": "oarai-ko-add2",
+      "nameA": "大洗港（大洗漁港）",
+      "slugB": "oarai-teiho",
+      "nameB": "大洗・大洗港堤防",
+      "prefecture": "茨城県",
+      "distanceM": 260,
+      "nameRelation": "containment",
+      "reason": "distance 260m > 100m"
+    },
+    {
+      "slugA": "takamatsu-sunport-gokan",
+      "nameA": "高松市サンポート高松護岸",
+      "slugB": "takamatsu-sunport",
+      "nameB": "高松・サンポート高松周辺",
+      "prefecture": "香川県",
+      "distanceM": 262,
+      "nameRelation": "editDistance=3",
+      "reason": "distance 262m > 100m"
+    },
+    {
+      "slugA": "yuriage-port",
+      "nameA": "閖上港",
+      "slugB": "yuriage-gyokou6",
+      "nameB": "閖上漁港",
+      "prefecture": "宮城県",
+      "distanceM": 262,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 262m > 100m"
+    },
+    {
+      "slugA": "yoshinogawa-gojo-detail",
+      "nameA": "吉野川（五條・詳細）",
+      "slugB": "yoshino-river-gojo",
+      "nameB": "吉野川五條周辺",
+      "prefecture": "奈良県",
+      "distanceM": 263,
+      "nameRelation": "containment",
+      "reason": "distance 263m > 100m"
+    },
+    {
+      "slugA": "biwako-otsu-ko",
+      "nameA": "琵琶湖大津港",
+      "slugB": "biwako-hamaotsu",
+      "nameB": "琵琶湖・浜大津港",
+      "prefecture": "滋賀県",
+      "distanceM": 267,
+      "nameRelation": "editDistance=2",
+      "reason": "distance 267m > 100m"
+    },
+    {
+      "slugA": "suwako-nagano-add5",
+      "nameA": "諏訪湖",
+      "slugB": "suwako-wakasagi",
+      "nameB": "諏訪湖（ワカサギ）",
+      "prefecture": "長野県",
+      "distanceM": 270,
+      "nameRelation": "containment",
+      "reason": "distance 270m > 100m"
+    },
+    {
+      "slugA": "matsuyama-port",
+      "nameA": "松山港",
+      "slugB": "mitsuhama-kou-ehime",
+      "nameB": "松山港三津浜",
+      "prefecture": "愛媛県",
+      "distanceM": 271,
+      "nameRelation": "containment",
+      "reason": "distance 271m > 100m"
+    },
+    {
+      "slugA": "nagara-river-gujo",
+      "nameA": "長良川郡上八幡",
+      "slugB": "nagaragawa-gujo",
+      "nameB": "長良川郡上",
+      "prefecture": "岐阜県",
+      "distanceM": 271,
+      "nameRelation": "containment",
+      "reason": "distance 271m > 100m"
+    },
+    {
+      "slugA": "hidagawa-gero",
+      "nameA": "飛騨川 下呂エリア",
+      "slugB": "hidagawa-gero-e8",
+      "nameB": "飛騨川（下呂温泉）",
+      "prefecture": "岐阜県",
+      "distanceM": 271,
+      "nameRelation": "containment",
+      "reason": "distance 271m > 100m"
+    },
+    {
+      "slugA": "hagi-kou-kikugahama",
+      "nameA": "萩港・菊ヶ浜",
+      "slugB": "hagi-kikugahama",
+      "nameB": "萩・菊ヶ浜",
+      "prefecture": "山口県",
+      "distanceM": 272,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 272m > 100m"
+    },
+    {
+      "slugA": "rausu-kou-e8",
+      "nameA": "羅臼港",
+      "slugB": "rausu-gyoko",
+      "nameB": "羅臼漁港",
+      "prefecture": "北海道",
+      "distanceM": 274,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 274m > 100m"
+    },
+    {
+      "slugA": "tomonoura-port",
+      "nameA": "鞆の浦港",
+      "slugB": "tomonoura-gyokou-w5",
+      "nameB": "鞆の浦漁港",
+      "prefecture": "広島県",
+      "distanceM": 275,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 275m > 100m"
+    },
+    {
+      "slugA": "ajigasawa-port",
+      "nameA": "鰺ヶ沢漁港",
+      "slugB": "ajigasawa-ko",
+      "nameB": "鰺ヶ沢港",
+      "prefecture": "青森県",
+      "distanceM": 276,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 276m > 100m"
+    },
+    {
+      "slugA": "kumamoto-tsunagi-fukuhama-bulk",
+      "nameA": "津奈木・福浜港",
+      "slugB": "akasaki-kou-tsunagi-w6",
+      "nameB": "津奈木・赤崎港",
+      "prefecture": "熊本県",
+      "distanceM": 277,
+      "nameRelation": "editDistance=2",
+      "reason": "distance 277m > 100m"
+    },
+    {
+      "slugA": "takamatsu-kou-w6",
+      "nameA": "高松港",
+      "slugB": "takamatsu-tamamo-breakwater",
+      "nameB": "高松港玉藻防波堤",
+      "prefecture": "香川県",
+      "distanceM": 288,
+      "nameRelation": "containment",
+      "reason": "distance 288m > 100m"
+    },
+    {
+      "slugA": "mishima-yamaguchi-w6",
+      "nameA": "見島",
+      "slugB": "hagi-mishima-port",
+      "nameB": "萩市見島漁港",
+      "prefecture": "山口県",
+      "distanceM": 288,
+      "nameRelation": "containment",
+      "reason": "distance 288m > 100m"
+    },
+    {
+      "slugA": "kanonji-kou-w6",
+      "nameA": "観音寺港",
+      "slugB": "kanonji-port-teibo",
+      "nameB": "観音寺港堤防",
+      "prefecture": "香川県",
+      "distanceM": 289,
+      "nameRelation": "containment",
+      "reason": "distance 289m > 100m"
+    },
+    {
+      "slugA": "muroto-misaki-w6",
+      "nameA": "室戸岬",
+      "slugB": "muroto-misaki-shinkou",
+      "nameB": "室戸市・室戸岬新港",
+      "prefecture": "高知県",
+      "distanceM": 290,
+      "nameRelation": "containment",
+      "reason": "distance 290m > 100m"
+    },
+    {
+      "slugA": "uchinada-kaigan-surf-e8",
+      "nameA": "内灘海岸サーフ",
+      "slugB": "uchinada-kaigan",
+      "nameB": "内灘海岸",
+      "prefecture": "石川県",
+      "distanceM": 290,
+      "nameRelation": "containment",
+      "reason": "distance 290m > 100m"
+    },
+    {
+      "slugA": "jogashima6",
+      "nameA": "城ヶ島",
+      "slugB": "jogashima-iso-e8",
+      "nameB": "城ヶ島磯",
+      "prefecture": "神奈川県",
+      "distanceM": 292,
+      "nameRelation": "containment",
+      "reason": "distance 292m > 100m"
+    },
+    {
+      "slugA": "akasaki-kou-w6",
+      "nameA": "赤碕港",
+      "slugB": "akasaki-gyokou-tottori",
+      "nameB": "赤碕漁港",
+      "prefecture": "鳥取県",
+      "distanceM": 293,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 293m > 100m"
+    },
+    {
+      "slugA": "nagaragawa-gujo",
+      "nameA": "長良川郡上",
+      "slugB": "nagaragawa-gujo-ayu",
+      "nameB": "長良川（郡上八幡）",
+      "prefecture": "岐阜県",
+      "distanceM": 293,
+      "nameRelation": "containment",
+      "reason": "distance 293m > 100m"
+    },
+    {
+      "slugA": "shimoda-port",
+      "nameA": "下田港",
+      "slugB": "shimoda-ko-teibo",
+      "nameB": "下田港堤防",
+      "prefecture": "静岡県",
+      "distanceM": 294,
+      "nameRelation": "containment",
+      "reason": "distance 294m > 100m"
+    },
+    {
+      "slugA": "enoshima-ura-iso",
+      "nameA": "江の島・裏磯",
+      "slugB": "enoshima-omote-iso",
+      "nameB": "江の島・表磯",
+      "prefecture": "神奈川県",
+      "distanceM": 294,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 294m > 100m"
+    },
+    {
+      "slugA": "yanagishima-kaigan-surf",
+      "nameA": "柳島海岸サーフ",
+      "slugB": "yanagishima-beach",
+      "nameB": "柳島海岸",
+      "prefecture": "神奈川県",
+      "distanceM": 294,
+      "nameRelation": "containment",
+      "reason": "distance 294m > 100m"
+    },
+    {
+      "slugA": "maishima-tsuri",
+      "nameA": "舞洲",
+      "slugB": "maishima-gogan",
+      "nameB": "舞洲地区護岸",
+      "prefecture": "大阪府",
+      "distanceM": 296,
+      "nameRelation": "containment",
+      "reason": "distance 296m > 100m"
+    },
+    {
+      "slugA": "maishima-tsuri",
+      "nameA": "舞洲",
+      "slugB": "maishima-seaside-promenade",
+      "nameB": "舞洲シーサイドプロムナード",
+      "prefecture": "大阪府",
+      "distanceM": 296,
+      "nameRelation": "containment",
+      "reason": "distance 296m > 100m"
+    },
+    {
+      "slugA": "tsu-nagisa-seaside-k8",
+      "nameA": "津なぎさまちシーサイドパーク",
+      "slugB": "tsu-nagisa-machi",
+      "nameB": "津なぎさまち",
+      "prefecture": "三重県",
+      "distanceM": 296,
+      "nameRelation": "containment",
+      "reason": "distance 296m > 100m"
+    },
+    {
+      "slugA": "matsuyama-port",
+      "nameA": "松山港",
+      "slugB": "matsuyama-gaiko",
+      "nameB": "松山外港",
+      "prefecture": "愛媛県",
+      "distanceM": 297,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 297m > 100m"
+    },
+    {
+      "slugA": "hagi-port-yamaguchi",
+      "nameA": "萩漁港",
+      "slugB": "hagi-kou-w6",
+      "nameB": "萩港",
+      "prefecture": "山口県",
+      "distanceM": 297,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 297m > 100m"
+    },
+    {
+      "slugA": "sumidagawa-terrace-asakusa",
+      "nameA": "隅田川テラス（浅草周辺）",
+      "slugB": "sumidagawa-terrace",
+      "nameB": "隅田川テラス（台東〜中央区）",
+      "prefecture": "東京都",
+      "distanceM": 298,
+      "nameRelation": "containment",
+      "reason": "distance 298m > 100m"
+    },
+    {
+      "slugA": "nanjo-oujima",
+      "nameA": "南城市・奥武島",
+      "slugB": "ou-jima-nanjo-w6",
+      "nameB": "南城・奥武島",
+      "prefecture": "沖縄県",
+      "distanceM": 299,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 299m > 100m"
+    },
+    {
+      "slugA": "naha-miegusuku-port",
+      "nameA": "那覇市三重城港",
+      "slugB": "miegusuku-kou-naha-w6",
+      "nameB": "那覇・三重城港",
+      "prefecture": "沖縄県",
+      "distanceM": 299,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 299m > 100m"
+    },
+    {
+      "slugA": "toya-gyokou-yomitan-w6",
+      "nameA": "読谷・都屋漁港",
+      "slugB": "yomitan-toya-gyokou",
+      "nameB": "読谷村・都屋漁港",
+      "prefecture": "沖縄県",
+      "distanceM": 299,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 299m > 100m"
+    },
+    {
+      "slugA": "atsumi-irago-port",
+      "nameA": "渥美半島伊良湖港",
+      "slugB": "irago-ko-add3",
+      "nameB": "伊良湖港",
+      "prefecture": "愛知県",
+      "distanceM": 309,
+      "nameRelation": "containment",
+      "reason": "distance 309m > 100m"
+    },
+    {
+      "slugA": "shimizu-port",
+      "nameA": "清水港",
+      "slugB": "shimizu-ejiri-futo",
+      "nameB": "清水港江尻埠頭",
+      "prefecture": "静岡県",
+      "distanceM": 312,
+      "nameRelation": "containment",
+      "reason": "distance 312m > 100m"
+    },
+    {
+      "slugA": "enoshima-omote-iso",
+      "nameA": "江の島・表磯",
+      "slugB": "enoshima6",
+      "nameB": "江の島",
+      "prefecture": "神奈川県",
+      "distanceM": 312,
+      "nameRelation": "containment",
+      "reason": "distance 312m > 100m"
+    },
+    {
+      "slugA": "tateyama-port",
+      "nameA": "館山港（館山夕日桟橋）",
+      "slugB": "tateyama-ko6",
+      "nameB": "館山港",
+      "prefecture": "千葉県",
+      "distanceM": 315,
+      "nameRelation": "containment",
+      "reason": "distance 315m > 100m"
+    },
+    {
+      "slugA": "katakami-kou-w6",
+      "nameA": "片上港",
+      "slugB": "bizen-katakami-kou",
+      "nameB": "備前・片上港",
+      "prefecture": "岡山県",
+      "distanceM": 325,
+      "nameRelation": "containment",
+      "reason": "distance 325m > 100m"
+    },
+    {
+      "slugA": "katsuura-port",
+      "nameA": "勝浦漁港",
+      "slugB": "katsuura-ko-add2",
+      "nameB": "勝浦港（勝浦漁港）",
+      "prefecture": "千葉県",
+      "distanceM": 328,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 328m > 100m"
+    },
+    {
+      "slugA": "muroto-misaki-w6",
+      "nameA": "室戸岬",
+      "slugB": "muroto-misaki-port",
+      "nameB": "室戸岬港",
+      "prefecture": "高知県",
+      "distanceM": 334,
+      "nameRelation": "containment",
+      "reason": "distance 334m > 100m"
+    },
+    {
+      "slugA": "karatsu-kou-w6",
+      "nameA": "唐津港",
+      "slugB": "karatsu-kou-higashi-hato",
+      "nameB": "唐津港東波止",
+      "prefecture": "佐賀県",
+      "distanceM": 334,
+      "nameRelation": "containment",
+      "reason": "distance 334m > 100m"
+    },
+    {
+      "slugA": "moji-retro-ganpeki-s8",
+      "nameA": "門司港レトロ岸壁",
+      "slugB": "moji-kou-w5",
+      "nameB": "門司港",
+      "prefecture": "福岡県",
+      "distanceM": 334,
+      "nameRelation": "containment",
+      "reason": "distance 334m > 100m"
+    },
+    {
+      "slugA": "manazuru-misaki-mitsuishi",
+      "nameA": "真鶴岬（三ツ石海岸）",
+      "slugB": "manazuru-kou",
+      "nameB": "真鶴港",
+      "prefecture": "神奈川県",
+      "distanceM": 334,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 334m > 100m"
+    },
+    {
+      "slugA": "sakaiminato-tonoe-port",
+      "nameA": "境港外江港",
+      "slugB": "sotoe-kou-sakaiminato-w6",
+      "nameB": "境港・外江港",
+      "prefecture": "鳥取県",
+      "distanceM": 334,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 334m > 100m"
+    },
+    {
+      "slugA": "miyako-fujiwara-futo",
+      "nameA": "宮古港藤原ふ頭",
+      "slugB": "miyako-kou-fujiwara",
+      "nameB": "宮古港藤原埠頭",
+      "prefecture": "岩手県",
+      "distanceM": 334,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 334m > 100m"
+    },
+    {
+      "slugA": "kitakyushu-mojiko-breakwater",
+      "nameA": "北九州門司港堤防",
+      "slugB": "moji-port",
+      "nameB": "北九州門司港",
+      "prefecture": "福岡県",
+      "distanceM": 340,
+      "nameRelation": "containment",
+      "reason": "distance 340m > 100m"
+    },
+    {
+      "slugA": "miyako-kou-fujiwara",
+      "nameA": "宮古港藤原埠頭",
+      "slugB": "miyako-fujiwara-futou",
+      "nameB": "宮古港（藤原埠頭）",
+      "prefecture": "岩手県",
+      "distanceM": 341,
+      "nameRelation": "containment",
+      "reason": "distance 341m > 100m"
+    },
+    {
+      "slugA": "toimisaki-iso-miyazaki",
+      "nameA": "都井岬周辺磯",
+      "slugB": "kushima-toimisaki-iso-s8",
+      "nameB": "串間・都井岬周辺磯",
+      "prefecture": "宮崎県",
+      "distanceM": 347,
+      "nameRelation": "containment",
+      "reason": "distance 347m > 100m"
+    },
+    {
+      "slugA": "enoshima-uraiso-e8",
+      "nameA": "江の島裏磯",
+      "slugB": "enoshima6",
+      "nameB": "江の島",
+      "prefecture": "神奈川県",
+      "distanceM": 352,
+      "nameRelation": "containment",
+      "reason": "distance 352m > 100m"
+    },
+    {
+      "slugA": "kushimoto-ko-add5",
+      "nameA": "串本港",
+      "slugB": "kushimoto-gyoko-detail",
+      "nameB": "串本漁港",
+      "prefecture": "和歌山県",
+      "distanceM": 356,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 356m > 100m"
+    },
+    {
+      "slugA": "kishiwada-south",
+      "nameA": "岸和田旧港南側",
+      "slugB": "kishiwada-kyuko-detail",
+      "nameB": "岸和田旧港",
+      "prefecture": "大阪府",
+      "distanceM": 357,
+      "nameRelation": "containment",
+      "reason": "distance 357m > 100m"
+    },
+    {
+      "slugA": "oarai-port",
+      "nameA": "大洗港",
+      "slugB": "oarai-ko-add2",
+      "nameB": "大洗港（大洗漁港）",
+      "prefecture": "茨城県",
+      "distanceM": 358,
+      "nameRelation": "containment",
+      "reason": "distance 358m > 100m"
+    },
+    {
+      "slugA": "shima-daiozaki",
+      "nameA": "志摩大王崎",
+      "slugB": "daiozaki-mie",
+      "nameB": "大王崎",
+      "prefecture": "三重県",
+      "distanceM": 360,
+      "nameRelation": "containment",
+      "reason": "distance 360m > 100m"
+    },
+    {
+      "slugA": "biwako-otsu-ko-shuhen",
+      "nameA": "琵琶湖 大津港周辺",
+      "slugB": "biwako-otsu-port",
+      "nameB": "琵琶湖大津港周辺",
+      "prefecture": "滋賀県",
+      "distanceM": 361,
+      "nameRelation": "containment",
+      "reason": "distance 361m > 100m"
+    },
+    {
+      "slugA": "yamada-kou-iwate",
+      "nameA": "山田港",
+      "slugB": "yamada-gyokou6",
+      "nameB": "山田漁港",
+      "prefecture": "岩手県",
+      "distanceM": 361,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 361m > 100m"
+    },
+    {
+      "slugA": "shimonoseki-karato-w6",
+      "nameA": "下関・唐戸市場前",
+      "slugB": "shimonoseki-karato",
+      "nameB": "下関唐戸市場周辺",
+      "prefecture": "山口県",
+      "distanceM": 362,
+      "nameRelation": "editDistance=3",
+      "reason": "distance 362m > 100m"
+    },
+    {
+      "slugA": "minami-ashiyahama-veranda",
+      "nameA": "南芦屋浜ベランダ",
+      "slugB": "minami-ashiyahama",
+      "nameB": "南芦屋浜",
+      "prefecture": "兵庫県",
+      "distanceM": 364,
+      "nameRelation": "containment",
+      "reason": "distance 364m > 100m"
+    },
+    {
+      "slugA": "numazu-gaiko-teibo",
+      "nameA": "沼津港外港堤防",
+      "slugB": "numazu-gaiko-add3",
+      "nameB": "沼津港外港",
+      "prefecture": "静岡県",
+      "distanceM": 364,
+      "nameRelation": "containment",
+      "reason": "distance 364m > 100m"
+    },
+    {
+      "slugA": "kaneda-ko",
+      "nameA": "金田港",
+      "slugB": "kaneda-gyokou",
+      "nameB": "金田漁港",
+      "prefecture": "神奈川県",
+      "distanceM": 364,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 364m > 100m"
+    },
+    {
+      "slugA": "yokosuka-umikaze-e8",
+      "nameA": "横須賀・うみかぜ公園",
+      "slugB": "yokosuka-umikaze6",
+      "nameB": "横須賀うみかぜ公園",
+      "prefecture": "神奈川県",
+      "distanceM": 370,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 370m > 100m"
+    },
+    {
+      "slugA": "hashidate-gyoko",
+      "nameA": "橋立漁港",
+      "slugB": "kaga-hashidate-gyokou",
+      "nameB": "加賀・橋立漁港",
+      "prefecture": "石川県",
+      "distanceM": 375,
+      "nameRelation": "containment",
+      "reason": "distance 375m > 100m"
+    },
+    {
+      "slugA": "matsushima-kaigan-iso-e8",
+      "nameA": "松島海岸磯場",
+      "slugB": "matsushima-kaigan-tsuri6",
+      "nameB": "松島海岸",
+      "prefecture": "宮城県",
+      "distanceM": 376,
+      "nameRelation": "containment",
+      "reason": "distance 376m > 100m"
+    },
+    {
+      "slugA": "hidagawa-gero-onsen",
+      "nameA": "飛騨川・下呂温泉",
+      "slugB": "hidagawa-gero-gifu",
+      "nameB": "飛騨川・下呂温泉エリア",
+      "prefecture": "岐阜県",
+      "distanceM": 377,
+      "nameRelation": "containment",
+      "reason": "distance 377m > 100m"
+    },
+    {
+      "slugA": "motoarakawa-hasuda",
+      "nameA": "元荒川（蓮田周辺）",
+      "slugB": "motoarekawa-hasuda6",
+      "nameB": "元荒川蓮田地区",
+      "prefecture": "埼玉県",
+      "distanceM": 377,
+      "nameRelation": "containment",
+      "reason": "distance 377m > 100m"
+    },
+    {
+      "slugA": "nakagawa-karasuyama",
+      "nameA": "那珂川（烏山周辺）",
+      "slugB": "nakagawa-karasuyama6",
+      "nameB": "那珂川烏山地区",
+      "prefecture": "栃木県",
+      "distanceM": 378,
+      "nameRelation": "containment",
+      "reason": "distance 378m > 100m"
+    },
+    {
+      "slugA": "notojima-kouda-gyokou",
+      "nameA": "能登島・向田漁港",
+      "slugB": "notojima-koda-port",
+      "nameB": "能登島向田漁港",
+      "prefecture": "石川県",
+      "distanceM": 378,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 378m > 100m"
+    },
+    {
+      "slugA": "echizen-misaki-e8",
+      "nameA": "越前岬",
+      "slugB": "echizen-kou",
+      "nameB": "越前港",
+      "prefecture": "福井県",
+      "distanceM": 379,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 379m > 100m"
+    },
+    {
+      "slugA": "hachinohe-tatehana-gyokou",
+      "nameA": "八戸港（館鼻漁港）",
+      "slugB": "hachinohe-kou",
+      "nameB": "八戸港",
+      "prefecture": "青森県",
+      "distanceM": 380,
+      "nameRelation": "containment",
+      "reason": "distance 380m > 100m"
+    },
+    {
+      "slugA": "takamatsu-sunport-gokan",
+      "nameA": "高松市サンポート高松護岸",
+      "slugB": "sunport-takamatsu-kagawa",
+      "nameB": "サンポート高松",
+      "prefecture": "香川県",
+      "distanceM": 381,
+      "nameRelation": "containment",
+      "reason": "distance 381m > 100m"
+    },
+    {
+      "slugA": "kishiwada-kyuko-detail",
+      "nameA": "岸和田旧港",
+      "slugB": "kishiwada-gyoko",
+      "nameB": "岸和田漁港",
+      "prefecture": "大阪府",
+      "distanceM": 381,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 381m > 100m"
+    },
+    {
+      "slugA": "uno-kou-tamano-w6",
+      "nameA": "玉野市・宇野港",
+      "slugB": "tamano-uno-kou-ferry",
+      "nameB": "玉野市・宇野港フェリー乗り場横",
+      "prefecture": "岡山県",
+      "distanceM": 381,
+      "nameRelation": "containment",
+      "reason": "distance 381m > 100m"
+    },
+    {
+      "slugA": "nagasaki-mizube-park",
+      "nameA": "長崎港水辺の森公園",
+      "slugB": "nagasaki-mizubenomori-w6",
+      "nameB": "長崎港・水辺の森公園",
+      "prefecture": "長崎県",
+      "distanceM": 382,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 382m > 100m"
+    },
+    {
+      "slugA": "fukue-kou-w6",
+      "nameA": "五島・福江港",
+      "slugB": "goto-fukue-port",
+      "nameB": "五島福江港",
+      "prefecture": "長崎県",
+      "distanceM": 383,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 383m > 100m"
+    },
+    {
+      "slugA": "takamatsu-tamamo-park",
+      "nameA": "高松港玉藻公園前",
+      "slugB": "takamatsu-tamamo-breakwater",
+      "nameB": "高松港玉藻防波堤",
+      "prefecture": "香川県",
+      "distanceM": 384,
+      "nameRelation": "editDistance=3",
+      "reason": "distance 384m > 100m"
+    },
+    {
+      "slugA": "momochihama-kaigan-s8",
+      "nameA": "百道浜海岸",
+      "slugB": "momochihama-gokan",
+      "nameB": "百道浜護岸",
+      "prefecture": "福岡県",
+      "distanceM": 387,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 387m > 100m"
+    },
+    {
+      "slugA": "hakata-chuo-futo",
+      "nameA": "博多湾中央ふ頭",
+      "slugB": "hakata-chuou-futo-w6",
+      "nameB": "博多港中央ふ頭",
+      "prefecture": "福岡県",
+      "distanceM": 387,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 387m > 100m"
+    },
+    {
+      "slugA": "mugi-port",
+      "nameA": "牟岐港",
+      "slugB": "mugi-gyokou-w5",
+      "nameB": "牟岐漁港",
+      "prefecture": "徳島県",
+      "distanceM": 387,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 387m > 100m"
+    },
+    {
+      "slugA": "totsukawa-kamiyukawa",
+      "nameA": "十津川 上湯川エリア",
+      "slugB": "totsukawa-river",
+      "nameB": "十津川（熊野川上流）",
+      "prefecture": "奈良県",
+      "distanceM": 387,
+      "nameRelation": "containment",
+      "reason": "distance 387m > 100m"
+    },
+    {
+      "slugA": "hachinohe-tatehana-ganpeki",
+      "nameA": "八戸港館鼻岸壁",
+      "slugB": "hachinohe-tatehana-wharf",
+      "nameB": "八戸館鼻岸壁",
+      "prefecture": "青森県",
+      "distanceM": 389,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 389m > 100m"
+    },
+    {
+      "slugA": "kamogawa-kou",
+      "nameA": "鴨川港",
+      "slugB": "kamogawa-port",
+      "nameB": "鴨川漁港",
+      "prefecture": "千葉県",
+      "distanceM": 396,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 396m > 100m"
+    },
+    {
+      "slugA": "shonan-enoshima-breakwater",
+      "nameA": "湘南江の島堤防",
+      "slugB": "enoshima6",
+      "nameB": "江の島",
+      "prefecture": "神奈川県",
+      "distanceM": 399,
+      "nameRelation": "containment",
+      "reason": "distance 399m > 100m"
+    },
+    {
+      "slugA": "otaru-port",
+      "nameA": "小樽港",
+      "slugB": "otaru-minami-bouchatei6",
+      "nameB": "小樽港南防波堤",
+      "prefecture": "北海道",
+      "distanceM": 400,
+      "nameRelation": "containment",
+      "reason": "distance 400m > 100m"
+    },
+    {
+      "slugA": "tadamigawa-upper-okuaizu",
+      "nameA": "只見川上流（奥会津）",
+      "slugB": "tadamigawa-upper-keiryu",
+      "nameB": "只見川上流",
+      "prefecture": "福島県",
+      "distanceM": 401,
+      "nameRelation": "containment",
+      "reason": "distance 401m > 100m"
+    },
+    {
+      "slugA": "kochi-urado-bay",
+      "nameA": "高知浦戸湾",
+      "slugB": "urado-bay",
+      "nameB": "浦戸湾",
+      "prefecture": "高知県",
+      "distanceM": 403,
+      "nameRelation": "containment",
+      "reason": "distance 403m > 100m"
+    },
+    {
+      "slugA": "hachinohe-tatehana-ganpeki",
+      "nameA": "八戸港館鼻岸壁",
+      "slugB": "hachinohe-tatehana-gyokou6",
+      "nameB": "八戸港館鼻漁港",
+      "prefecture": "青森県",
+      "distanceM": 405,
+      "nameRelation": "editDistance=2",
+      "reason": "distance 405m > 100m"
+    },
+    {
+      "slugA": "gobo-hidaka-ko",
+      "nameA": "御坊港日高港",
+      "slugB": "gobo-hidaka-port",
+      "nameB": "御坊・日高港",
+      "prefecture": "和歌山県",
+      "distanceM": 406,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 406m > 100m"
+    },
+    {
+      "slugA": "irumagawa-fishing",
+      "nameA": "入間川",
+      "slugB": "iruma-river-upstream",
+      "nameB": "入間川上流域",
+      "prefecture": "埼玉県",
+      "distanceM": 411,
+      "nameRelation": "containment",
+      "reason": "distance 411m > 100m"
+    },
+    {
+      "slugA": "towadako-trout",
+      "nameA": "十和田湖",
+      "slugB": "towadako-west-konokuchi",
+      "nameB": "十和田湖（西湖畔・子ノ口）",
+      "prefecture": "青森県",
+      "distanceM": 411,
+      "nameRelation": "containment",
+      "reason": "distance 411m > 100m"
+    },
+    {
+      "slugA": "awaji-sumoto-port",
+      "nameA": "淡路島洲本港",
+      "slugB": "sumoto-port-detail",
+      "nameB": "洲本港",
+      "prefecture": "兵庫県",
+      "distanceM": 412,
+      "nameRelation": "containment",
+      "reason": "distance 412m > 100m"
+    },
+    {
+      "slugA": "jogashima6",
+      "nameA": "城ヶ島",
+      "slugB": "jogashima-seawall",
+      "nameB": "城ヶ島岸壁",
+      "prefecture": "神奈川県",
+      "distanceM": 412,
+      "nameRelation": "containment",
+      "reason": "distance 412m > 100m"
+    },
+    {
+      "slugA": "hirara-kou-miyako-w6",
+      "nameA": "宮古島・平良港",
+      "slugB": "miyakojima-hirara-port",
+      "nameB": "宮古島平良港",
+      "prefecture": "沖縄県",
+      "distanceM": 418,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 418m > 100m"
+    },
+    {
+      "slugA": "heigawa-kakou6",
+      "nameA": "閉伊川河口",
+      "slugB": "miyako-heigawa-kakou-e8",
+      "nameB": "宮古閉伊川河口",
+      "prefecture": "岩手県",
+      "distanceM": 421,
+      "nameRelation": "containment",
+      "reason": "distance 421m > 100m"
+    },
+    {
+      "slugA": "mugi-port",
+      "nameA": "牟岐港",
+      "slugB": "tokushima-mugi-port-bulk",
+      "nameB": "牟岐町・牟岐港",
+      "prefecture": "徳島県",
+      "distanceM": 426,
+      "nameRelation": "containment",
+      "reason": "distance 426m > 100m"
+    },
+    {
+      "slugA": "yaizu-shinko-add3",
+      "nameA": "焼津新港",
+      "slugB": "yaizu-shinko-teibo",
+      "nameB": "焼津新港堤防",
+      "prefecture": "静岡県",
+      "distanceM": 427,
+      "nameRelation": "containment",
+      "reason": "distance 427m > 100m"
+    },
+    {
+      "slugA": "takamatsu-kou-w6",
+      "nameA": "高松港",
+      "slugB": "takamatsu-sunport-c8",
+      "nameB": "高松港・サンポート",
+      "prefecture": "香川県",
+      "distanceM": 429,
+      "nameRelation": "containment",
+      "reason": "distance 429m > 100m"
+    },
+    {
+      "slugA": "shimonoseki-kanmon-fishing-park",
+      "nameA": "下関市関門海峡釣り公園",
+      "slugB": "shimonoseki-kanmon-c8",
+      "nameB": "下関・関門海峡釣り場",
+      "prefecture": "山口県",
+      "distanceM": 431,
+      "nameRelation": "editDistance=3",
+      "reason": "distance 431m > 100m"
+    },
+    {
+      "slugA": "shimoda-inubashiri-e8",
+      "nameA": "下田港・犬走島",
+      "slugB": "shimoda-port",
+      "nameB": "下田港",
+      "prefecture": "静岡県",
+      "distanceM": 431,
+      "nameRelation": "containment",
+      "reason": "distance 431m > 100m"
+    },
+    {
+      "slugA": "ainoshima-fukuoka-w6",
+      "nameA": "相島",
+      "slugB": "ainoshima-kou",
+      "nameB": "相島港",
+      "prefecture": "福岡県",
+      "distanceM": 434,
+      "nameRelation": "containment",
+      "reason": "distance 434m > 100m"
+    },
+    {
+      "slugA": "hondo-gyokou-amakusa",
+      "nameA": "天草 本渡漁港",
+      "slugB": "hondo-kou-amakusa-w6",
+      "nameB": "天草・本渡港",
+      "prefecture": "熊本県",
+      "distanceM": 436,
+      "nameRelation": "editDistance=2",
+      "reason": "distance 436m > 100m"
+    },
+    {
+      "slugA": "uchinoura-port",
+      "nameA": "内之浦漁港",
+      "slugB": "kagoshima-uchinoura-port-bulk",
+      "nameB": "肝付・内之浦漁港",
+      "prefecture": "鹿児島県",
+      "distanceM": 440,
+      "nameRelation": "containment",
+      "reason": "distance 440m > 100m"
+    },
+    {
+      "slugA": "miyako-desaki-futou6",
+      "nameA": "宮古港出崎埠頭",
+      "slugB": "miyako-fujiwara-futou",
+      "nameB": "宮古港（藤原埠頭）",
+      "prefecture": "岩手県",
+      "distanceM": 442,
+      "nameRelation": "containment",
+      "reason": "distance 442m > 100m"
+    },
+    {
+      "slugA": "biwako-nagahama",
+      "nameA": "琵琶湖長浜",
+      "slugB": "biwako-nagahama-ko",
+      "nameB": "琵琶湖 長浜港",
+      "prefecture": "滋賀県",
+      "distanceM": 445,
+      "nameRelation": "containment",
+      "reason": "distance 445m > 100m"
+    },
+    {
+      "slugA": "ooma-kou",
+      "nameA": "大間港",
+      "slugB": "ooma-gyokou6",
+      "nameB": "大間漁港",
+      "prefecture": "青森県",
+      "distanceM": 446,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 446m > 100m"
+    },
+    {
+      "slugA": "ushimado-gyokou-w5",
+      "nameA": "牛窓漁港",
+      "slugB": "ushimado-port-detail",
+      "nameB": "牛窓港（詳細）",
+      "prefecture": "岡山県",
+      "distanceM": 450,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 450m > 100m"
+    },
+    {
+      "slugA": "hidagawa-gero-onsen",
+      "nameA": "飛騨川・下呂温泉",
+      "slugB": "hidagawa-gero-e8",
+      "nameB": "飛騨川（下呂温泉）",
+      "prefecture": "岐阜県",
+      "distanceM": 451,
+      "nameRelation": "containment",
+      "reason": "distance 451m > 100m"
+    },
+    {
+      "slugA": "sakaiminato-port",
+      "nameA": "境港",
+      "slugB": "sakaiminato-marina-c8",
+      "nameB": "境港公共マリーナ",
+      "prefecture": "鳥取県",
+      "distanceM": 452,
+      "nameRelation": "containment",
+      "reason": "distance 452m > 100m"
+    },
+    {
+      "slugA": "shiraoi-gyokou-e8",
+      "nameA": "白老漁港",
+      "slugB": "shiraoi-kou6",
+      "nameB": "白老港",
+      "prefecture": "北海道",
+      "distanceM": 452,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 452m > 100m"
+    },
+    {
+      "slugA": "moji-retro-ganpeki-s8",
+      "nameA": "門司港レトロ岸壁",
+      "slugB": "mojikou-retro-gogan-w6",
+      "nameB": "門司港レトロ護岸",
+      "prefecture": "福岡県",
+      "distanceM": 454,
+      "nameRelation": "editDistance=2",
+      "reason": "distance 454m > 100m"
+    },
+    {
+      "slugA": "setouchi-mushiake-kou",
+      "nameA": "瀬戸内市・虫明港堤防",
+      "slugB": "mushiake-kou-c8",
+      "nameB": "虫明港",
+      "prefecture": "岡山県",
+      "distanceM": 454,
+      "nameRelation": "containment",
+      "reason": "distance 454m > 100m"
+    },
+    {
+      "slugA": "hedo-misaki-s8",
+      "nameA": "辺戸岬",
+      "slugB": "hedo-misaki-iso",
+      "nameB": "辺戸岬磯",
+      "prefecture": "沖縄県",
+      "distanceM": 455,
+      "nameRelation": "containment",
+      "reason": "distance 455m > 100m"
+    },
+    {
+      "slugA": "nomozaki-kabashima-todai-s8",
+      "nameA": "野母崎・樺島灯台下",
+      "slugB": "nomozaki-nagasaki-w6",
+      "nameB": "野母崎",
+      "prefecture": "長崎県",
+      "distanceM": 455,
+      "nameRelation": "containment",
+      "reason": "distance 455m > 100m"
+    },
+    {
+      "slugA": "aomori-port",
+      "nameA": "青森港",
+      "slugB": "aomori-chuo-futo-e8",
+      "nameB": "青森港中央ふ頭",
+      "prefecture": "青森県",
+      "distanceM": 456,
+      "nameRelation": "containment",
+      "reason": "distance 456m > 100m"
+    },
+    {
+      "slugA": "sagamigawa-kakko6",
+      "nameA": "相模川河口",
+      "slugB": "sagamigawa-lower-unagi",
+      "nameB": "相模川下流（馬入橋〜河口）",
+      "prefecture": "神奈川県",
+      "distanceM": 460,
+      "nameRelation": "editDistance=2",
+      "reason": "distance 460m > 100m"
+    },
+    {
+      "slugA": "nagaragawa-gujo-hachiman",
+      "nameA": "長良川・郡上八幡",
+      "slugB": "nagara-river-gujo",
+      "nameB": "長良川郡上八幡",
+      "prefecture": "岐阜県",
+      "distanceM": 462,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 462m > 100m"
+    },
+    {
+      "slugA": "tenryugawa-ina-komagane",
+      "nameA": "天竜川（伊那・駒ヶ根）",
+      "slugB": "nagano-tenryugawa-ina-stream",
+      "nameB": "天竜川上流（伊那市）",
+      "prefecture": "長野県",
+      "distanceM": 463,
+      "nameRelation": "containment",
+      "reason": "distance 463m > 100m"
+    },
+    {
+      "slugA": "sakaiminato-marina-gokan",
+      "nameA": "境港公共マリーナ護岸",
+      "slugB": "sakaiminato-marina-c8",
+      "nameB": "境港公共マリーナ",
+      "prefecture": "鳥取県",
+      "distanceM": 466,
+      "nameRelation": "containment",
+      "reason": "distance 466m > 100m"
+    },
+    {
+      "slugA": "izumo-inasa-beach",
+      "nameA": "出雲大社稲佐の浜",
+      "slugB": "inasa-no-hama-w6",
+      "nameB": "稲佐の浜",
+      "prefecture": "島根県",
+      "distanceM": 467,
+      "nameRelation": "containment",
+      "reason": "distance 467m > 100m"
+    },
+    {
+      "slugA": "honmoku-umizuri-e8",
+      "nameA": "横浜・本牧海づり施設",
+      "slugB": "honmoku-fishing",
+      "nameB": "本牧海づり施設",
+      "prefecture": "神奈川県",
+      "distanceM": 467,
+      "nameRelation": "containment",
+      "reason": "distance 467m > 100m"
+    },
+    {
+      "slugA": "katsuragawa-otsuki-tsuru",
+      "nameA": "桂川（大月・都留）",
+      "slugB": "katsuragawa-otsuki6",
+      "nameB": "桂川（大月付近）",
+      "prefecture": "山梨県",
+      "distanceM": 467,
+      "nameRelation": "containment",
+      "reason": "distance 467m > 100m"
+    },
+    {
+      "slugA": "hagi-kou-kikugahama",
+      "nameA": "萩港・菊ヶ浜",
+      "slugB": "hagi-kou-w6",
+      "nameB": "萩港",
+      "prefecture": "山口県",
+      "distanceM": 470,
+      "nameRelation": "containment",
+      "reason": "distance 470m > 100m"
+    },
+    {
+      "slugA": "abashiri-daisi-futo-e8",
+      "nameA": "網走港第4ふ頭",
+      "slugB": "abashiri-ko",
+      "nameB": "網走港",
+      "prefecture": "北海道",
+      "distanceM": 472,
+      "nameRelation": "containment",
+      "reason": "distance 472m > 100m"
+    },
+    {
+      "slugA": "biwako-nagahama",
+      "nameA": "琵琶湖長浜",
+      "slugB": "biwako-hokuko-nagahama",
+      "nameB": "琵琶湖北湖（長浜・湖北）",
+      "prefecture": "滋賀県",
+      "distanceM": 473,
+      "nameRelation": "editDistance=2",
+      "reason": "distance 473m > 100m"
+    },
+    {
+      "slugA": "suma-kaigan-k8",
+      "nameA": "須磨海岸",
+      "slugB": "suma-senmori-tottei",
+      "nameB": "須磨海岸（千守突堤）",
+      "prefecture": "兵庫県",
+      "distanceM": 476,
+      "nameRelation": "containment",
+      "reason": "distance 476m > 100m"
+    },
+    {
+      "slugA": "oki-saigo-kou-w7",
+      "nameA": "隠岐・西郷港",
+      "slugB": "oki-saigo-detail",
+      "nameB": "隠岐の島・西郷港（詳細）",
+      "prefecture": "島根県",
+      "distanceM": 477,
+      "nameRelation": "editDistance=2",
+      "reason": "distance 477m > 100m"
+    },
+    {
+      "slugA": "iwaki-nakoso-kou-e8",
+      "nameA": "いわき勿来港",
+      "slugB": "iwaki-nakoso-kaigan-e8",
+      "nameB": "いわき勿来海岸",
+      "prefecture": "福島県",
+      "distanceM": 479,
+      "nameRelation": "editDistance=2",
+      "reason": "distance 479m > 100m"
+    },
+    {
+      "slugA": "nanao-kou-ishikawa",
+      "nameA": "七尾港",
+      "slugB": "nanao-ko-fuchu-futo",
+      "nameB": "七尾港 府中埠頭",
+      "prefecture": "石川県",
+      "distanceM": 479,
+      "nameRelation": "containment",
+      "reason": "distance 479m > 100m"
+    },
+    {
+      "slugA": "awaji-sumoto-kou-k8",
+      "nameA": "淡路島・洲本港",
+      "slugB": "sumoto-port-detail",
+      "nameB": "洲本港",
+      "prefecture": "兵庫県",
+      "distanceM": 481,
+      "nameRelation": "containment",
+      "reason": "distance 481m > 100m"
+    },
+    {
+      "slugA": "onomichi-suido-w6",
+      "nameA": "尾道水道",
+      "slugB": "onomichi-suido-gokan",
+      "nameB": "尾道水道護岸",
+      "prefecture": "広島県",
+      "distanceM": 481,
+      "nameRelation": "containment",
+      "reason": "distance 481m > 100m"
+    },
+    {
+      "slugA": "gamagori-takeshima",
+      "nameA": "蒲郡竹島",
+      "slugB": "gamagori-takeshima-futo",
+      "nameB": "蒲郡 竹島埠頭",
+      "prefecture": "愛知県",
+      "distanceM": 481,
+      "nameRelation": "containment",
+      "reason": "distance 481m > 100m"
+    },
+    {
+      "slugA": "kaiyo-shishikui-port",
+      "nameA": "海陽町宍喰港",
+      "slugB": "shishikui-kou-w6",
+      "nameB": "海陽町・宍喰港",
+      "prefecture": "徳島県",
+      "distanceM": 482,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 482m > 100m"
+    },
+    {
+      "slugA": "izumozaki-kou-niigata",
+      "nameA": "出雲崎港",
+      "slugB": "izumozaki-gyoko",
+      "nameB": "出雲崎漁港",
+      "prefecture": "新潟県",
+      "distanceM": 485,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 485m > 100m"
+    },
+    {
+      "slugA": "tenryugawa-ina-e8",
+      "nameA": "天竜川（伊那エリア）",
+      "slugB": "tenryugawa-upper",
+      "nameB": "天竜川上流（伊那谷）",
+      "prefecture": "長野県",
+      "distanceM": 491,
+      "nameRelation": "containment",
+      "reason": "distance 491m > 100m"
+    },
+    {
+      "slugA": "yamatogawa-estuary-sakai",
+      "nameA": "大和川河口（堺〜松原）",
+      "slugB": "yamatogawa-estuary-tenaga",
+      "nameB": "大和川河口（堺市）",
+      "prefecture": "大阪府",
+      "distanceM": 492,
+      "nameRelation": "containment",
+      "reason": "distance 492m > 100m"
+    },
+    {
+      "slugA": "hamasaka-gyoko",
+      "nameA": "浜坂漁港",
+      "slugB": "hamasaka-higashi-bouhatei",
+      "nameB": "浜坂漁港東防波堤",
+      "prefecture": "兵庫県",
+      "distanceM": 492,
+      "nameRelation": "containment",
+      "reason": "distance 492m > 100m"
+    },
+    {
+      "slugA": "oga-nyudouzaki6",
+      "nameA": "男鹿入道崎",
+      "slugB": "oga-nyudozaki",
+      "nameB": "男鹿半島入道崎",
+      "prefecture": "秋田県",
+      "distanceM": 492,
+      "nameRelation": "editDistance=2",
+      "reason": "distance 492m > 100m"
+    },
+    {
+      "slugA": "enoshima-ura-iso",
+      "nameA": "江の島・裏磯",
+      "slugB": "enoshima6",
+      "nameB": "江の島",
+      "prefecture": "神奈川県",
+      "distanceM": 493,
+      "nameRelation": "containment",
+      "reason": "distance 493m > 100m"
+    },
+    {
+      "slugA": "yaizu-ogawa-kou-e8",
+      "nameA": "焼津港・小川港",
+      "slugB": "yaizu-ko",
+      "nameB": "焼津港",
+      "prefecture": "静岡県",
+      "distanceM": 494,
+      "nameRelation": "containment",
+      "reason": "distance 494m > 100m"
+    },
+    {
+      "slugA": "ushibuka-kou-w6",
+      "nameA": "天草・牛深港",
+      "slugB": "amakusa-ushibuka-port",
+      "nameB": "天草牛深港",
+      "prefecture": "熊本県",
+      "distanceM": 495,
+      "nameRelation": "editDistance=1",
+      "reason": "distance 495m > 100m"
+    },
+    {
+      "slugA": "kitakyushu-moji-port",
+      "nameA": "北九州・門司港",
+      "slugB": "moji-kou-w5",
+      "nameB": "門司港",
+      "prefecture": "福岡県",
+      "distanceM": 497,
+      "nameRelation": "containment",
+      "reason": "distance 497m > 100m"
+    },
+    {
+      "slugA": "katsuragawa-otsuki",
+      "nameA": "桂川（大月〜都留）",
+      "slugB": "katsuragawa-otsuki6",
+      "nameB": "桂川（大月付近）",
+      "prefecture": "山梨県",
+      "distanceM": 497,
+      "nameRelation": "containment",
+      "reason": "distance 497m > 100m"
+    },
+    {
+      "slugA": "tanabe-ko-add3",
+      "nameA": "田辺港",
+      "slugB": "shirahama-tanabe-ko",
+      "nameB": "白浜 田辺港",
+      "prefecture": "和歌山県",
+      "distanceM": 498,
+      "nameRelation": "containment",
+      "reason": "distance 498m > 100m"
+    },
+    {
+      "slugA": "mitsuhama-matsuyama-w6",
+      "nameA": "松山港・三津浜",
+      "slugB": "matsuyama-mitsuhama",
+      "nameB": "松山・三津浜港",
+      "prefecture": "愛媛県",
+      "distanceM": 500,
+      "nameRelation": "editDistance=2",
+      "reason": "distance 500m > 100m"
+    }
+  ]
+}

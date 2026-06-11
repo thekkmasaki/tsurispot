@@ -463,6 +463,8 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
           { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
           { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
           { fish: fish("sawara"), monthStart: 8, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
+          { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
+          { fish: fish("inada"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マズメ", method: "ルアー" },
     ], bestTimes: btMorning, tackleRecommendations: [],
     gearGuides: [gearLure, gearRock, gearMebaring, gearEging, gearKago, gearTakoegi, gearJig],
     safetyLevel: "caution", safetyNotes: ["離岸流に注意", "サーファーとの距離を十分取ること", "ウェーダー着用推奨"],
