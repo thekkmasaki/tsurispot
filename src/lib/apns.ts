@@ -120,7 +120,7 @@ export async function sendApns(
 
     client.on("error", (err) => done({ ok: false, error: err.message }));
 
-    const headers: http2.OutgoingHttpHeaders = {
+    const headers: Record<string, string> = {
       ":method": "POST",
       ":path": `/3/device/${deviceToken}`,
       authorization: `bearer ${jwt}`,
