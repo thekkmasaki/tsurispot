@@ -225,7 +225,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
   {
     id: "s707", name: "相良港堤防", slug: "sagara-ko-teibo",
     description: "遠州灘に面した静かな漁港。キスやヒラメの砂浜釣りが盛んで、堤防先端ではアジやメバルも狙える。人が少なくのんびり釣りを楽しめる隠れたスポット。夏の夜釣りではアナゴも釣果がある。",
-    latitude: 34.6820, longitude: 138.1210,
+    latitude: 34.684902, longitude: 138.209447,
     address: "〒421-0522 静岡県牧之原市相良",
     accessInfo: "東名高速相良牧之原ICから約15分。最寄りバス停「相良港」から徒歩5分。",
     region: lr("r822"), spotType: "port", difficulty: "beginner",
@@ -921,7 +921,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
   {
     id: "s736", name: "尾鷲港堤防", slug: "owase-ko-teibo",
     description: "日本有数の多雨地帯・尾鷲にある大型港。熊野灘の豊かな海に抱かれ、ブリ・カンパチの青物からアオリイカ、磯魚まで魚種が豊富。秋のショアジギングシーズンは全国からアングラーが訪れる三重の名釣り場。",
-    latitude: 34.0590, longitude: 136.1890,
+    latitude: 34.073885, longitude: 136.203897,
     address: "〒519-3602 三重県尾鷲市天満浦",
     accessInfo: "JR紀勢本線尾鷲駅から徒歩約15分。紀勢自動車道尾鷲北ICから約10分。",
     region: region("r60"), spotType: "breakwater", difficulty: "intermediate",
@@ -997,7 +997,7 @@ export const tokaiDetailSpots: FishingSpot[] = [
   {
     id: "s739", name: "的矢港堤防", slug: "matoya-ko-teibo",
     description: "的矢カキで有名な志摩市・的矢湾の港。養殖筏が多い静穏な湾奥でアジやメバル、クロダイが狙える。カキの旨みが水中に溶け込んだ栄養豊富な水域で、秋冬の夜釣りメバリングが特に人気の隠れた好スポット。",
-    latitude: 34.4160, longitude: 136.8670,
+    latitude: 34.375146, longitude: 136.891423,
     address: "〒517-0507 三重県志摩市阿児町安乗",
     accessInfo: "近鉄志摩線志摩磯部駅から車で約15分。伊勢自動車道玉城ICから約50分。",
     region: lr("r832"), spotType: "port", difficulty: "intermediate",

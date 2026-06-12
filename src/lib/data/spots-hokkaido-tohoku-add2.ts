@@ -362,7 +362,7 @@ export const hokkaidoTohokuAdd2Spots: FishingSpot[] = [
   {
     id: "s2010", name: "古平漁港", slug: "furubira-gyoko",
     description: "積丹半島の東側に位置する漁港。ホッケの魚影が濃く、春のシーズンには数釣りも可能。積丹方面の磯釣りへの拠点としても利用される。",
-    latitude: 43.2120, longitude: 140.6180,
+    latitude: 43.263716, longitude: 140.641641,
     address: "〒046-0113 北海道古平町港町",
     accessInfo: "小樽市街から国道5号・229号経由で約50分。",
     region: localRegion("r2010"), spotType: "port", difficulty: "beginner",
@@ -1830,7 +1830,7 @@ export const hokkaidoTohokuAdd2Spots: FishingSpot[] = [
   {
     id: "s2077", name: "崎浜漁港", slug: "sakihama-gyoko",
     description: "大船渡市末崎半島の先端にある漁港。碁石海岸に隣接する景勝地で、根魚が豊富。テトラ帯でのソイ・アイナメ釣りが人気。",
-    latitude: 39.0300, longitude: 141.7520,
+    latitude: 39.104433, longitude: 141.86125,
     address: "〒022-0101 岩手県大船渡市三陸町越喜来明神道16",
     accessInfo: "大船渡市街から車で約15分。碁石海岸方面。",
     region: localRegion("r2041"), spotType: "port", difficulty: "intermediate",

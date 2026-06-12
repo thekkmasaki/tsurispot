@@ -613,7 +613,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-026", name: "境水道・美保関", slug: "sakai-suido-mihonoseki",
     description: "島根県松江市美保関町の境水道周辺。鳥取県境港市との間を流れる境水道は潮通しが良く、多彩な魚種が狙える。特にアジ・メバル・チヌが好調で、秋にはサゴシ（サワラの若魚）の回遊も。美保神社の参拝と合わせて。",
-    latitude: 35.5612, longitude: 133.2389, address: "〒690-1312 島根県松江市美保関町森山",
+    latitude: 35.567304, longitude: 133.325491, address: "〒690-1312 島根県松江市美保関町森山",
     accessInfo: "JR境港駅から車で約20分。松江市内から約40分。",
     region: region("r3014"), spotType: "port", difficulty: "beginner",
     isFree: true,
@@ -639,7 +639,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   {
     id: "s-kcsadd-027", name: "出雲市・十六島鼻", slug: "izumo-jushimanohana",
     description: "島根県出雲市十六島町の岩場。日本海に突き出した磯場で、グレ・チヌ・イシダイなどの磯釣りが楽しめる本格ポイント。十六島海苔（うっぷるいのり）でも有名な地域。荒々しい日本海の波を受ける迫力ある釣り場。",
-    latitude: 35.4478, longitude: 132.7689, address: "〒691-0042 島根県出雲市十六島町",
+    latitude: 35.468587, longitude: 132.731826, address: "〒691-0042 島根県出雲市十六島町",
     accessInfo: "出雲市内から車で約30分。山陰自動車道出雲ICから約25分。",
     region: region("r3015"), spotType: "rocky", difficulty: "advanced",
     isFree: true,

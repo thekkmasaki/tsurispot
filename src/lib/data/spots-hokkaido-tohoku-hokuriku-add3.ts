@@ -177,7 +177,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3001", name: "宗谷港", slug: "soya-ko",
     description: "宗谷岬に近い小規模な漁港。日本最北の釣りスポットの一つで、夏のホッケやカレイが主なターゲット。港内は比較的穏やかで足場も良い。",
-    latitude: 45.4600, longitude: 141.9370,
+    latitude: 45.518704, longitude: 141.945893,
     address: "〒098-6758 北海道稚内市宗谷岬5-23",
     accessInfo: "JR稚内駅から車で約30分。国道238号沿い。",
     region: localRegion("r3010"), spotType: "port", difficulty: "beginner",
@@ -734,7 +734,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3027", name: "虎杖浜漁港", slug: "kojohama-gyoko",
     description: "たらこの産地として有名な虎杖浜にある小規模漁港。砂浜に隣接しキスやカレイの投げ釣りに最適。温泉街が近く釣りの後に入浴も楽しめる。",
-    latitude: 42.4620, longitude: 141.1370,
+    latitude: 42.455953, longitude: 141.205058,
     address: "〒059-0466 北海道登別市登別港町1丁目28",
     accessInfo: "JR虎杖浜駅から徒歩約10分。道央自動車道登別東ICから約15分。",
     region: localRegion("r3005"), spotType: "port", difficulty: "beginner",
@@ -1053,7 +1053,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   {
     id: "s3042", name: "三厩漁港", slug: "minmaya-gyoko",
     description: "津軽半島の先端に近い漁港で、津軽海峡に面する。潮通しが良く、マダイやヒラメの好ポイント。青函トンネルの入口にも近い観光エリア。",
-    latitude: 41.1870, longitude: 140.3570,
+    latitude: 41.203603, longitude: 140.427729,
     address: "〒030-1731 青森県外ヶ浜町三厩本町12",
     accessInfo: "JR三厩駅から車で約5分。青森市中心部から車で約1時間40分。",
     region: localRegion("r3023"), spotType: "port", difficulty: "intermediate",

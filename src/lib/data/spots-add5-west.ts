@@ -171,7 +171,7 @@ export const westAdd5Spots: FishingSpot[] = [
   {
     id: "sw5003", name: "浦富海岸", slug: "uradome-kaigan-w5",
     description: "山陰海岸ジオパークの一部をなす景勝地で、磯釣りの名所。リアス式海岸の変化に富んだ地形にメジナやクロダイが潜む。透明度抜群の海でのロックフィッシュゲームも楽しめる。",
-    latitude: 35.5930, longitude: 134.3510,
+    latitude: 35.605879, longitude: 134.338934,
     address: "〒681-0071 鳥取県岩美郡岩美町浦富",
     accessInfo: "JR山陰本線岩美駅から車で約5分。鳥取自動車道鳥取ICから約35分。",
     region: localRegion("rw5002"), spotType: "rocky", difficulty: "intermediate",
@@ -768,7 +768,7 @@ export const westAdd5Spots: FishingSpot[] = [
   {
     id: "sw5037", name: "海陽町宍喰漁港", slug: "shishikui-gyokou-tokushima",
     description: "徳島県最南端に近い漁港で、黒潮の影響を直接受ける好漁場。アオリイカの実績が県内トップクラスで、秋のエギングシーズンは特に活況。サーフィンの名所としても知られる。",
-    latitude: 33.5710, longitude: 134.2830,
+    latitude: 33.561718, longitude: 134.309213,
     address: "〒775-0501 徳島県海部郡海陽町宍喰浦",
     accessInfo: "JR牟岐線海部駅から車で約15分。徳島自動車道徳島ICから約90分。",
     region: localRegion("rw5023"), spotType: "port", difficulty: "beginner",
@@ -820,7 +820,7 @@ export const westAdd5Spots: FishingSpot[] = [
   {
     id: "sw5040", name: "鳴門ウチノ海", slug: "naruto-uchinomi-w5",
     description: "鳴門海峡の内側に位置する穏やかな内海。筏釣りやカセ釣りのメッカとして全国的に有名。チヌやマダイが安定して釣れ、冬場のカレイも実績十分な通年型の釣り場。",
-    latitude: 34.1920, longitude: 134.5860,
+    latitude: 34.220355, longitude: 134.608132,
     address: "〒772-0011 徳島県鳴門市鳴門町三ツ石",
     accessInfo: "JR鳴門線鳴門駅から車で約10分。神戸淡路鳴門自動車道鳴門ICから約5分。",
     region: localRegion("rw5020"), spotType: "port", difficulty: "intermediate",
@@ -911,7 +911,7 @@ export const westAdd5Spots: FishingSpot[] = [
   {
     id: "sw5045", name: "津田の松原海岸", slug: "tsuda-matsubara-kagawa",
     description: "さぬき市にある白砂青松の美しい海岸。瀬戸内海屈指のキス釣り場として有名で、夏場の投げ釣りでは良型のシロギスが期待できる。海水浴場にもなるため夏季は朝夕の釣行がおすすめ。",
-    latitude: 34.2740, longitude: 134.2630,
+    latitude: 34.287288, longitude: 134.253923,
     address: "〒769-2401 香川県さぬき市津田町津田",
     accessInfo: "JR高徳線讃岐津田駅から徒歩約15分。高松自動車道津田東ICから約5分。",
     region: localRegion("rw5032"), spotType: "beach", difficulty: "beginner",
@@ -1299,7 +1299,7 @@ export const westAdd5Spots: FishingSpot[] = [
   {
     id: "sw5067", name: "周防大島 安下庄漁港", slug: "agematsura-gyokou-suooshima",
     description: "周防大島の南側に位置する漁港。瀬戸内海の温暖な海域でメバルやカサゴの魚影が濃く、冬場のメバリングが特に好調。島のスローライフを満喫しながらの釣りが楽しめる。",
-    latitude: 33.8890, longitude: 132.2190,
+    latitude: 33.886549, longitude: 132.277789,
     address: "〒742-2601 山口県大島郡周防大島町安下庄",
     accessInfo: "大島大橋から車で約20分。JR大畠駅から車で約30分。",
     region: localRegion("rw5043"), spotType: "port", difficulty: "beginner",
@@ -2005,7 +2005,7 @@ export const westAdd5Spots: FishingSpot[] = [
   {
     id: "sw5107", name: "宿毛漁港", slug: "sukumo-gyokou-w5",
     description: "高知県西端の宿毛湾に面した漁港。温暖な海域でアオリイカの実績が高く、秋のエギングシーズンは県外からも釣り人が訪れる。堤防からのサビキ釣りも安定している。",
-    latitude: 32.9430, longitude: 132.7210,
+    latitude: 32.920967, longitude: 132.695179,
     address: "〒788-0006 高知県宿毛市片島",
     accessInfo: "土佐くろしお鉄道宿毛駅から車で約5分。宿毛自動車道宿毛ICから約5分。",
     region: localRegion("rw5083"), spotType: "port", difficulty: "beginner",
@@ -2301,7 +2301,7 @@ export const westAdd5Spots: FishingSpot[] = [
   {
     id: "sw5124", name: "因島大浜漁港", slug: "innoshima-ohama-gyokou",
     description: "しまなみ海道の因島にある漁港。瀬戸内海の島々に囲まれた穏やかな海域で、サビキ釣りが安定して楽しめる。除虫菊の島としても知られ、瀬戸内の風情を感じられる釣り場。",
-    latitude: 34.3120, longitude: 133.1690,
+    latitude: 34.34325, longitude: 133.17625,
     address: "〒722-2101 広島県尾道市因島大浜町",
     accessInfo: "しまなみ海道因島北ICから約5分。JR尾道駅から因島行きバスで約30分。",
     region: localRegion("rw5092"), spotType: "port", difficulty: "beginner",
@@ -2391,7 +2391,7 @@ export const westAdd5Spots: FishingSpot[] = [
   {
     id: "sw5129", name: "日南市油津港", slug: "aburatsu-kou-nichinan",
     description: "日南市の太平洋に面した港。カツオの水揚げ基地として有名で、黒潮の恩恵を受けた豊かな漁場が広がる。堤防からのショアジギングでブリやカンパチが狙える好ポイント。",
-    latitude: 31.5760, longitude: 131.3920,
+    latitude: 31.568995, longitude: 131.401506,
     address: "〒887-0001 宮崎県日南市油津",
     accessInfo: "JR日南線油津駅から徒歩約10分。宮崎自動車道田野ICから約50分。",
     region: localRegion("rw5101"), spotType: "port", difficulty: "intermediate",
@@ -2689,7 +2689,7 @@ export const westAdd5Spots: FishingSpot[] = [
   {
     id: "sw5146", name: "国東市竹田津港", slug: "takedatsu-kou-kunisaki",
     description: "国東半島の北端に位置する港。周防灘に面し、カレイやメバルの魚影が濃い。山口県との間を結ぶフェリーの発着港でもあり、穏やかな海での釣りが楽しめる。",
-    latitude: 33.6340, longitude: 131.5240,
+    latitude: 33.678743, longitude: 131.565443,
     address: "〒873-0503 大分県国東市国見町竹田津",
     accessInfo: "大分自動車道日出JCTから宇佐別府道路経由で約60分。",
     region: localRegion("rw5122"), spotType: "port", difficulty: "beginner",

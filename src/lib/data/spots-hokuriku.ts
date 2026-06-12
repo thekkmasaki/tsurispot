@@ -167,7 +167,7 @@ export const hokurikuSpots: FishingSpot[] = [
   {
     id: "s448", name: "佐渡小木港", slug: "sado-ogi-port",
     description: "佐渡島南端のたらい舟で有名な港。離島ならではの魚影の濃さで、アジ・メバル・クロダイなど多彩な魚種が釣れる。",
-    latitude: 37.8150, longitude: 138.2570,
+    latitude: 37.808035, longitude: 138.278891,
     address: "〒952-0604 新潟県佐渡市小木町",
     accessInfo: "佐渡汽船小木港フェリーターミナルすぐ。直江津港からフェリーで約1時間40分。",
     region: localRegion("r147"), spotType: "port", difficulty: "beginner",

@@ -817,7 +817,7 @@ export const chugokuShikokuAdd8Spots: FishingSpot[] = [
   {
     id: "sc8043", name: "寄島港", slug: "yorishima-kou-c8",
     description: "浅口市寄島町の漁港。三ツ山をバックにした風光明媚な港で、カキの養殖が盛ん。港内のサビキ釣りでイワシやアジ、外波止からは投げ釣りでカレイが狙える。",
-    latitude: 34.501, longitude: 133.563,
+    latitude: 34.473192, longitude: 133.596119,
     address: "〒714-0101 岡山県浅口市寄島町",
     accessInfo: "JR鴨方駅から車で約15分",
     region: localRegion("rc8007"), spotType: "port", difficulty: "beginner",
@@ -1081,7 +1081,7 @@ export const chugokuShikokuAdd8Spots: FishingSpot[] = [
   {
     id: "sc8058", name: "向島・干汐海岸", slug: "mukaishima-hishio-c8",
     description: "尾道市向島の南側海岸。しまなみ海道の玄関口にあたり、瀬戸内海の穏やかな波を見ながらのんびり釣りができる。投げ釣りでキスやカレイ、ルアーでヒラメも狙える。",
-    latitude: 34.379, longitude: 133.209,
+    latitude: 34.403438, longitude: 133.193746,
     address: "〒722-0073 広島県尾道市向島町",
     accessInfo: "尾道大橋経由で約10分",
     region: localRegion("rc8012"), spotType: "beach", difficulty: "beginner",
@@ -1098,7 +1098,7 @@ export const chugokuShikokuAdd8Spots: FishingSpot[] = [
   {
     id: "sc8059", name: "大竹港", slug: "otake-kou-c8",
     description: "大竹市の山口県境に近い港。瀬戸内海の西端に位置し、潮流が適度。チヌやメバルの根魚に加え、秋にはサワラの回遊も見られる。広い波止からゆったり釣りが楽しめる。",
-    latitude: 34.223, longitude: 132.214,
+    latitude: 34.235431, longitude: 132.236047,
     address: "〒739-0614 広島県大竹市晴海",
     accessInfo: "JR大竹駅から車で約5分",
     region: localRegion("rc8013"), spotType: "port", difficulty: "beginner",
@@ -1279,7 +1279,7 @@ export const chugokuShikokuAdd8Spots: FishingSpot[] = [
   {
     id: "sc8069", name: "青海島・通漁港", slug: "omijima-kayoi-c8",
     description: "長門市の青海島にある漁港。日本海の荒波が作り出した絶景の中で釣りができる。グレやイシダイの磯釣りが有名で、エギングでのアオリイカも好釣果の上級者向けポイント。",
-    latitude: 34.410, longitude: 131.195,
+    latitude: 34.424674, longitude: 131.220249,
     address: "〒759-4106 山口県長門市通",
     accessInfo: "JR長門市駅から車で約15分",
     region: localRegion("rc8015"), spotType: "rocky", difficulty: "advanced",
@@ -1635,7 +1635,7 @@ export const chugokuShikokuAdd8Spots: FishingSpot[] = [
   {
     id: "sc8089", name: "鳴門・北泊港", slug: "naruto-kitatomari-c8",
     description: "鳴門市北灘町の漁港。鳴門海峡の潮流の恩恵を受け、マダイやアジの魚影が濃い。波止先端は潮当たりが良く、大型マダイの実績がある中級者向けポイント。",
-    latitude: 34.214, longitude: 134.547,
+    latitude: 34.232575, longitude: 134.641471,
     address: "〒772-0021 徳島県鳴門市里浦町里浦",
     accessInfo: "鳴門ICから車で約10分",
     region: localRegion("rc8018"), spotType: "port", difficulty: "intermediate",

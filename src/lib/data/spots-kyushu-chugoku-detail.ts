@@ -258,7 +258,7 @@ export const kyushuChugokuDetailSpots: FishingSpot[] = [
   {
     id: "s756", name: "津屋崎漁港堤防", slug: "tsuyazaki-port-breakwater",
     description: "福津市津屋崎の漁港。小さいながらも魚影が濃く、地元アングラーが通い詰める穴場スポット。テトラ周りのメバルやカサゴ、堤防外側のクロダイなど根魚の宝庫として知られる。",
-    latitude: 33.80280, longitude: 130.491200,
+    latitude: 33.783089, longitude: 130.467523,
     address: "〒811-3304 福岡県福津市津屋崎4丁目47",
     accessInfo: "JR鹿児島本線福間駅から車で約10分。",
     region: localRegion("r841"), spotType: "breakwater", difficulty: "intermediate",
@@ -451,7 +451,7 @@ export const kyushuChugokuDetailSpots: FishingSpot[] = [
   {
     id: "s763", name: "天応護岸", slug: "tenno-shore",
     description: "呉市天応の整備された護岸。瀬戸内海の穏やかな内海に面し、ファミリーフィッシングに最適な環境。キスやハゼの投げ釣りが人気で、夏場のサビキ釣りでは大量のイワシが楽しめる初心者向けポイント。",
-    latitude: 34.2820, longitude: 132.5320,
+    latitude: 34.288051, longitude: 132.515663,
     address: "〒737-0875 広島県呉市天応大浜3丁目2",
     accessInfo: "JR呉線天応駅から徒歩約5分。広島呉道路天応西出口から約5分。",
     region: localRegion("r842"), spotType: "breakwater", difficulty: "beginner",
@@ -553,7 +553,7 @@ export const kyushuChugokuDetailSpots: FishingSpot[] = [
   {
     id: "s767", name: "安芸津港堤防", slug: "akitsu-port-breakwater",
     description: "東広島市安芸津の港。江の川河口に近く淡水と海水が混じる豊かな環境が特徴。ウナギやスズキの実績が高く、秋にはコノシロの大群が接岸してルアーフィッシングで賑わう人気ポイント。",
-    latitude: 34.3120, longitude: 132.8480,
+    latitude: 34.312599, longitude: 132.816152,
     address: "〒739-2402 広島県東広島市安芸津町三津",
     accessInfo: "JR呉線安芸津駅から徒歩約10分。東広島バイパスから約30分。",
     region: localRegion("r843"), spotType: "port", difficulty: "beginner",
@@ -575,7 +575,7 @@ export const kyushuChugokuDetailSpots: FishingSpot[] = [
   {
     id: "s768", name: "竹原港堤防", slug: "takehara-port-breakwater",
     description: "竹原市の穏やかな港。「安芸の小京都」として知られる城下町の港で、瀬戸内海の豊かな漁場に面する。キスの投げ釣りが盛んで、秋冬はカレイの実績も高い。初心者から上級者まで楽しめる定番スポット。",
-    latitude: 34.3390, longitude: 132.9180,
+    latitude: 34.328316, longitude: 132.914389,
     address: "〒725-0024 広島県竹原市港町4丁目2",
     accessInfo: "JR呉線忠海駅から車で約10分。山陽自動車道河内ICから約20分。",
     region: localRegion("r843"), spotType: "breakwater", difficulty: "beginner",
@@ -851,7 +851,7 @@ export const kyushuChugokuDetailSpots: FishingSpot[] = [
   {
     id: "s778", name: "光市室積港堤防", slug: "hikari-murozumi-port",
     description: "光市室積の港。瀬戸内海に面した静穏な港で、キスやカレイの投げ釣りが盛ん。春のメバルと秋のアオリイカが特に人気で、地元のファミリー釣り師に愛される穏やかな釣り場。",
-    latitude: 33.9630, longitude: 131.9730,
+    latitude: 33.92167, longitude: 131.976876,
     address: "〒743-0007 山口県光市室積2丁目17",
     accessInfo: "JR山陽本線光駅から車で約10分。山陽自動車道熊毛ICから約20分。",
     region: localRegion("r845"), spotType: "port", difficulty: "beginner",

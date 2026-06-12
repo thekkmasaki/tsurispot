@@ -313,7 +313,7 @@ export const expandKyushuSpots: FishingSpot[] = [
   {
     id: "exp-k011", name: "小友漁港", slug: "otomo-gyokou",
     description: "唐津市肥前町の小さな漁港。穴場的な存在で、波止からアジ・メバルが狙える。イカの実績も高く、エギンガーにも人気の隠れスポット。",
-    latitude: 33.4680, longitude: 129.8150,
+    latitude: 33.546759, longitude: 129.904291,
     address: "〒847-1527 佐賀県唐津市肥前町星賀",
     accessInfo: "JR唐津駅から車で約30分。",
     region: localRegion("r4100"), spotType: "port", difficulty: "beginner",
@@ -851,7 +851,7 @@ export const expandKyushuSpots: FishingSpot[] = [
   {
     id: "exp-k036", name: "宇土マリーナ", slug: "uto-marina",
     description: "宇土半島の先端近くに位置するマリーナ。整備された護岸からサビキ釣りでアジが狙え、投げ釣りでキスも。御輿来海岸の絶景干潟も近い。",
-    latitude: 32.6310, longitude: 130.5410,
+    latitude: 32.662242, longitude: 130.522698,
     address: "〒869-0401 熊本県宇土市住吉町",
     accessInfo: "JR住吉駅から車で約5分。九州自動車道松橋ICから約20分。",
     region: localRegion("r4122"), spotType: "port", difficulty: "beginner",
@@ -1001,7 +1001,7 @@ export const expandKyushuSpots: FishingSpot[] = [
   {
     id: "exp-k044", name: "内海港", slug: "uchiumi-kou-miyazaki",
     description: "日南市の内海漁港。小さな港だがアジの回遊が安定しており、サビキ釣りの穴場。エギングでのアオリイカ狙いも人気で、秋は数・型ともに期待できる。",
-    latitude: 31.7520, longitude: 131.4380,
+    latitude: 31.756815, longitude: 131.473253,
     address: "〒889-2301 宮崎県日南市内海",
     accessInfo: "JR日南線内海駅から徒歩約10分。東九州自動車道田野ICから約30分。",
     region: localRegion("r4130"), spotType: "port", difficulty: "beginner",
@@ -1043,7 +1043,7 @@ export const expandKyushuSpots: FishingSpot[] = [
   {
     id: "exp-k046", name: "美々津漁港", slug: "mimitsu-gyokou",
     description: "日向市の歴史ある港町・美々津の漁港。耳川河口に位置し、シーバスの好ポイント。重要伝統的建造物群保存地区に隣接する趣ある港で釣りが楽しめる。",
-    latitude: 32.3620, longitude: 131.5970,
+    latitude: 32.333676, longitude: 131.620488,
     address: "〒889-1111 宮崎県日向市美々津町",
     accessInfo: "JR日豊本線美々津駅から徒歩約15分。東九州自動車道日向ICから約15分。",
     region: localRegion("r4131"), spotType: "port", difficulty: "intermediate",
@@ -1236,7 +1236,7 @@ export const expandKyushuSpots: FishingSpot[] = [
   {
     id: "exp-k055", name: "蒲江・波当津漁港", slug: "kamae-hatozu-gyokou",
     description: "佐伯市蒲江の波当津漁港。豊後水道に面した好漁場で、アジ・イサキが良く釣れる。磯釣りの渡船基地でもあり、周辺の磯ではグレ・チヌの大物が期待できる。",
-    latitude: 32.8890, longitude: 131.9450,
+    latitude: 32.839637, longitude: 132.004218,
     address: "〒876-2301 大分県佐伯市蒲江大字波当津浦",
     accessInfo: "JR佐伯駅から車で約40分。東九州自動車道蒲江ICから約10分。",
     region: localRegion("r4141"), spotType: "port", difficulty: "intermediate",
@@ -1432,7 +1432,7 @@ export const expandKyushuSpots: FishingSpot[] = [
   {
     id: "exp-k064", name: "五島列島・福江港", slug: "goto-fukue-kou",
     description: "五島列島の玄関口・福江港。東シナ海に浮かぶ五島列島は釣り天国として知られ、港内でもアジ・イサキが良く釣れる。大物狙いの磯釣りの拠点でもある。",
-    latitude: 32.6900, longitude: 128.8380,
+    latitude: 32.694023, longitude: 128.854306,
     address: "〒853-0015 長崎県五島市東浜町",
     accessInfo: "長崎港からジェットフォイルで約1時間25分。福江空港から車で約10分。",
     region: localRegion("r4152"), spotType: "port", difficulty: "beginner",

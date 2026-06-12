@@ -321,7 +321,7 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
   {
     id: "scs011", name: "和田港", slug: "wada-port-chiba",
     description: "南房総市和田にある漁港。捕鯨基地として全国的に知られるが、堤防釣りの人気も高い。サビキでアジ、イワシが安定して釣れるほか、エギングでアオリイカ、フカセでクロダイ・メジナも狙える。道の駅和田浦WA・O!が近く食事にも困らない。",
-    latitude: 35.0562, longitude: 139.9912,
+    latitude: 35.274261, longitude: 139.852914,
     address: "〒299-2704 千葉県南房総市和田町和田",
     accessInfo: "JR和田浦駅から徒歩約10分。富津館山道路鋸南富山ICから約30分。",
     region: lr("r1052"), spotType: "port", difficulty: "beginner",

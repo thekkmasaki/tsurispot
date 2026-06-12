@@ -336,7 +336,7 @@ export const eastAdd5Spots2: FishingSpot[] = [
   {
     id: "se5061", name: "真鶴港", slug: "manazuru-kou",
     description: "真鶴半島の付け根に位置する漁港。クロダイやメジナのフカセ釣りが盛んで、堤防からアオリイカも狙える相模湾西部の好漁場。",
-    latitude: 35.1560, longitude: 139.1370,
+    latitude: 35.152339, longitude: 139.14796,
     address: "〒259-0201 神奈川県足柄下郡真鶴町真鶴",
     accessInfo: "JR真鶴駅から徒歩約15分。小田原厚木道路小田原西ICから約15分。",
     region: localRegion("re5050"), spotType: "port", difficulty: "intermediate",
@@ -731,7 +731,7 @@ export const eastAdd5Spots2: FishingSpot[] = [
   {
     id: "se5081", name: "川尻港", slug: "kawajiri-kou",
     description: "日立市北部の漁港。堤防からカレイやアイナメが狙え、秋にはサバの回遊も見られる。北茨城との県境に近い穴場。",
-    latitude: 36.6640, longitude: 140.6770,
+    latitude: 36.649774, longitude: 140.700484,
     address: "〒319-1222 茨城県日立市川尻町",
     accessInfo: "JR十王駅から車で約10分。常磐自動車道日立北ICから約10分。",
     region: localRegion("re5061"), spotType: "port", difficulty: "beginner",
@@ -789,7 +789,7 @@ export const eastAdd5Spots2: FishingSpot[] = [
   {
     id: "se5084", name: "磯崎港", slug: "isozaki-kou",
     description: "ひたちなか市の小さな漁港。堤防からメバルやカサゴの根魚が狙え、春のメバリングシーズンに特に人気がある。",
-    latitude: 36.3690, longitude: 140.6130,
+    latitude: 36.385725, longitude: 140.624633,
     address: "〒311-1202 茨城県ひたちなか市磯崎町",
     accessInfo: "ひたちなか海浜鉄道磯崎駅から徒歩約10分。東水戸道路ひたちなかICから約15分。",
     region: localRegion("re5061"), spotType: "port", difficulty: "beginner",
@@ -892,7 +892,7 @@ export const eastAdd5Spots2: FishingSpot[] = [
   {
     id: "se5090", name: "雄勝港", slug: "ogatsu-kou",
     description: "石巻市の三陸海岸にある漁港。硯の産地として知られる静かな漁村で、ソイやアイナメの根魚が豊富な穴場スポット。",
-    latitude: 38.5280, longitude: 141.4660,
+    latitude: 38.504466, longitude: 141.495948,
     address: "〒986-1333 宮城県石巻市雄勝町雄勝",
     accessInfo: "三陸自動車道河北ICから約30分。JR石巻駅から車で約40分。",
     region: localRegion("re5070"), spotType: "port", difficulty: "intermediate",

@@ -478,7 +478,7 @@ export const tohokuSpots: FishingSpot[] = [
   {
     id: "s437", name: "石巻漁港", slug: "ishinomaki-gyoko",
     description: "世界三大漁場の一つ・金華山沖に近い大港。カツオやマグロの水揚げで有名だが、堤防からもサバやイワシが大量に釣れる。",
-    latitude: 38.4240, longitude: 141.3060,
+    latitude: 38.416013, longitude: 141.311881,
     address: "〒986-0022 宮城県石巻市魚町2丁目",
     accessInfo: "JR仙石線石巻駅から車で約10分。三陸自動車道石巻港ICから約5分。",
     region: localRegion("r145"), spotType: "port", difficulty: "beginner",
@@ -762,7 +762,7 @@ export const tohokuSpots: FishingSpot[] = [
   {
     id: "s1066", name: "船川港", slug: "funakawa-port",
     description: "男鹿半島の玄関口・船川港。男鹿水族館GAOにも近く、アジやメバルが安定して釣れる。冬場のハタハタ接岸は風物詩。",
-    latitude: 39.91050, longitude: 139.81570,
+    latitude: 39.882297, longitude: 139.85974,
     address: "〒010-0511 秋田県男鹿市船川港船川（船川港）",
     accessInfo: "JR男鹿線男鹿駅から徒歩約15分。秋田自動車道昭和男鹿半島ICから約40分。",
     region: region("r36"), spotType: "port", difficulty: "beginner",

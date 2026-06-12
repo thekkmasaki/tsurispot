@@ -462,7 +462,7 @@ export const hokkaidoTohokuAdd8Spots: FishingSpot[] = [
   {
     id: "se8023", name: "えりも港", slug: "erimo-kou-e8",
     description: "襟裳岬の東側に位置する漁港で、太平洋の荒波を受ける外洋系のスポット。強風で知られるが、条件が合えばアイナメやソイの大物が期待できるロックフィッシュの名所。",
-    latitude: 42.020, longitude: 143.250,
+    latitude: 42.016183, longitude: 143.143812,
     address: "〒058-0203 北海道幌泉郡えりも町新浜",
     accessInfo: "帯広市内から車で約2時間30分",
     region: localRegion("rn8010"), spotType: "port", difficulty: "intermediate",
@@ -569,7 +569,7 @@ export const hokkaidoTohokuAdd8Spots: FishingSpot[] = [
   {
     id: "se8029", name: "室蘭イタンキ浜", slug: "muroran-itanki-hama-e8",
     description: "室蘭市街から近い太平洋に面した砂浜で、サーフフィッシングの好ポイント。春から秋にかけてカレイやヒラメが狙え、波打ち際のルアー釣りも楽しめる。",
-    latitude: 42.326, longitude: 141.003,
+    latitude: 42.335656, longitude: 141.034586,
     address: "〒050-0083 北海道室蘭市東町",
     accessInfo: "JR東室蘭駅から車で約15分",
     region: localRegion("rn8004"), spotType: "beach", difficulty: "intermediate",
@@ -1501,7 +1501,7 @@ export const hokkaidoTohokuAdd8Spots: FishingSpot[] = [
   {
     id: "se8082", name: "小本漁港", slug: "omoto-gyokou-e8",
     description: "岩泉町の太平洋岸にある小さな漁港。龍泉洞観光の帰りに立ち寄れるスポットで、カレイやアイナメが主なターゲット。静かな港でゆっくり釣りを楽しめる。",
-    latitude: 39.798, longitude: 141.955,
+    latitude: 39.847295, longitude: 141.976345,
     address: "〒027-0501 岩手県下閉伊郡岩泉町小本",
     accessInfo: "JR岩泉線小本駅跡から車で約5分",
     region: localRegion("rn8015"), spotType: "port", difficulty: "beginner",
@@ -1622,7 +1622,7 @@ export const hokkaidoTohokuAdd8Spots: FishingSpot[] = [
   {
     id: "se8089", name: "久慈侍浜海岸", slug: "kuji-samuraihama-e8",
     description: "久慈市北部の断崖に囲まれた海岸で、キャンプ場が併設されている。磯場からのロックフィッシュが主体で、アイナメやソイの大型個体が狙える秘境スポット。",
-    latitude: 40.223, longitude: 141.788,
+    latitude: 40.178661, longitude: 141.828641,
     address: "〒028-0001 岩手県久慈市侍浜町",
     accessInfo: "久慈市中心部から車で約15分",
     region: localRegion("rn8018"), spotType: "rocky", difficulty: "intermediate",
@@ -1890,7 +1890,7 @@ export const hokkaidoTohokuAdd8Spots: FishingSpot[] = [
   {
     id: "se8104", name: "菖蒲田海水浴場", slug: "shobuta-kaigan-e8",
     description: "七ヶ浜町にある仙台近郊のビーチ。夏場の海水浴シーズン以外は投げ釣りでキスやカレイが楽しめる。サーフルアーでヒラメやマゴチも狙える好ポイント。",
-    latitude: 38.308, longitude: 141.061,
+    latitude: 38.292216, longitude: 141.068223,
     address: "〒985-0811 宮城県宮城郡七ヶ浜町菖蒲田浜",
     accessInfo: "仙台市中心部から車で約40分",
     region: localRegion("rn8021"), spotType: "beach", difficulty: "beginner",
@@ -2309,7 +2309,7 @@ export const hokkaidoTohokuAdd8Spots: FishingSpot[] = [
   {
     id: "se8128", name: "男鹿戸賀漁港", slug: "oga-toga-gyokou-e8",
     description: "男鹿半島の西側に位置する漁港。男鹿水族館GAOの近くで、マダイやクロダイの好釣り場として知られる。磯が隣接しており本格的な磯釣りも可能。",
-    latitude: 39.930, longitude: 139.722,
+    latitude: 39.954021, longitude: 139.714564,
     address: "〒010-0672 秋田県男鹿市戸賀塩浜",
     accessInfo: "男鹿市中心部から車で約30分",
     region: localRegion("rn8024"), spotType: "port", difficulty: "intermediate",
@@ -3213,7 +3213,7 @@ export const hokkaidoTohokuAdd8Spots: FishingSpot[] = [
   {
     id: "se8180", name: "いわき薄磯海岸", slug: "iwaki-usuiso-kaigan-e8",
     description: "いわき市の美空ひばり記念碑がある海岸。塩屋埼灯台の麓に広がる砂浜で、キスの投げ釣りが盛ん。秋にはサーフルアーでヒラメも狙える好ポイント。",
-    latitude: 36.976, longitude: 140.932,
+    latitude: 37.033808, longitude: 140.97302,
     address: "〒970-0101 福島県いわき市平薄磯",
     accessInfo: "JRいわき駅から車で約20分",
     region: localRegion("rn8031"), spotType: "beach", difficulty: "beginner",

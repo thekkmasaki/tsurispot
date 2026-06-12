@@ -1008,7 +1008,7 @@ export const expandNorthSpots: FishingSpot[] = [
   {
     id: "exp-n041", name: "下北半島・脇野沢港", slug: "wakinosawa-kou",
     description: "陸奥湾に面した下北半島の漁港。穏やかな湾内でカレイ・アイナメが狙え、夏にはマダイの回遊も。ニホンザルの北限の地としても知られる。",
-    latitude: 41.0583, longitude: 140.4917,
+    latitude: 41.144771, longitude: 140.826721,
     address: "〒039-5327 青森県むつ市脇野沢本村",
     accessInfo: "JR下北駅から車で約60分。下北半島縦貫道路むつICから約50分。",
     region: localRegion("r4231"), spotType: "port", difficulty: "beginner",

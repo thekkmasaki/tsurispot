@@ -686,7 +686,7 @@ export const sagamiMiuraSpots: FishingSpot[] = [
   {
     id: "sm20", name: "浦賀港", slug: "uraga-ko",
     description: "ペリー来航で有名な浦賀の港。東西に分かれた港内でアジやハゼのサビキ・ちょい投げが楽しめる。歴史散策と釣りを組み合わせて楽しめる。",
-    latitude: 35.2490, longitude: 139.7260,
+    latitude: 35.241231, longitude: 139.71934,
     address: "〒239-0821 神奈川県横須賀市東浦賀1丁目23",
     accessInfo: "京急浦賀駅から徒歩約10分。",
     region: region("r8"), spotType: "port", difficulty: "beginner",

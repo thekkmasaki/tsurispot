@@ -86,7 +86,7 @@ export const shikokuSpots: FishingSpot[] = [
   {
     id: "s462", name: "詫間港", slug: "takuma-port",
     description: "瀬戸内海の穏やかな海に面した港。タチウオの接岸が早く、夏から秋の夜釣りが特に人気。キスの投げ釣りも好調。",
-    latitude: 34.2230, longitude: 133.6520,
+    latitude: 34.239837, longitude: 133.648143,
     address: "〒769-1101 香川県三豊市詫間町詫間2112-106",
     accessInfo: "JR予讃線詫間駅から徒歩約20分。高松自動車道三豊鳥坂ICから約15分。",
     region: localRegion("r150"), spotType: "port", difficulty: "beginner",
@@ -323,7 +323,7 @@ export const shikokuSpots: FishingSpot[] = [
   {
     id: "s471", name: "宿毛湾", slug: "sukumo-bay",
     description: "四国南西端の深い入江。黒潮の影響で魚種が豊富。グレやイサギの磯釣りから、湾内でのアジ釣りまで幅広く楽しめる。",
-    latitude: 32.9380, longitude: 132.6930,
+    latitude: 32.920109, longitude: 132.696485,
     address: "〒788-0013 高知県宿毛市片島6-29",
     accessInfo: "土佐くろしお鉄道宿毛駅から車で約15分。高知自動車道四万十町中央ICから約90分。",
     region: localRegion("r152"), spotType: "port", difficulty: "intermediate",
@@ -709,7 +709,7 @@ export const shikokuSpots: FishingSpot[] = [
   {
     id: "s1101", name: "中土佐町久礼漁港", slug: "nakatosa-kure-port",
     description: "カツオの一本釣りで名高い久礼の漁港。大正町市場で新鮮なカツオが味わえる。堤防からはアジやカマスが狙える。",
-    latitude: 33.3450, longitude: 133.2160,
+    latitude: 33.326354, longitude: 133.238945,
     address: "〒789-1301 高知県中土佐町久礼6372-1",
     accessInfo: "JR土讃線土佐久礼駅から徒歩約10分。高知自動車道中土佐ICから約5分。",
     region: region("r14"), spotType: "port", difficulty: "beginner",
@@ -842,7 +842,7 @@ export const shikokuSpots: FishingSpot[] = [
   {
     id: "s1106", name: "海陽町宍喰港", slug: "kaiyo-shishikui-port",
     description: "徳島県最南端の宍喰港。サーフィンの聖地としても有名で、太平洋の黒潮が近い好漁場。アオリイカやグレの好ポイント。",
-    latitude: 33.5560, longitude: 134.3020,
+    latitude: 33.561718, longitude: 134.309213,
     address: "〒775-0501 徳島県海陽町宍喰浦正梶",
     accessInfo: "JR牟岐線海部駅から車で約20分。高知方面から国道55号線。",
     region: localRegion("r151"), spotType: "port", difficulty: "intermediate",
@@ -946,7 +946,7 @@ export const shikokuSpots: FishingSpot[] = [
   {
     id: "s1110", name: "黒潮町入野漁港", slug: "kuroshio-irino-port",
     description: "高知県西部の黒潮町にある漁港。Tシャツアート展で有名な砂浜美術館の近く。サーフからキスやヒラメが、堤防からアジが狙える。",
-    latitude: 33.0260, longitude: 133.0090,
+    latitude: 33.012538, longitude: 133.010949,
     address: "〒789-1931 高知県黒潮町入野",
     accessInfo: "土佐くろしお鉄道土佐入野駅から徒歩約15分。高知市内から車で約2時間。",
     region: localRegion("r152"), spotType: "beach", difficulty: "beginner",
@@ -995,7 +995,7 @@ export const shikokuSpots: FishingSpot[] = [
   {
     id: "s1112", name: "土佐市宇佐港", slug: "tosa-usa-port",
     description: "高知県中部の宇佐港。ホエールウォッチングの発着地で、堤防からアジやカマスが安定して釣れる。太平洋の好漁場。",
-    latitude: 33.4550, longitude: 133.4340,
+    latitude: 33.441792, longitude: 133.447798,
     address: "〒781-1161 高知県土佐市宇佐町宇佐",
     accessInfo: "JR土讃線高知駅から車で約40分。高知自動車道土佐ICから約20分。",
     region: localRegion("r153"), spotType: "port", difficulty: "beginner",
@@ -1050,7 +1050,7 @@ export const shikokuSpots: FishingSpot[] = [
   {
     id: "s1114", name: "四万十市下ノ加江漁港", slug: "shimanto-shimonokae-port",
     description: "高知県西部の小さな漁港。太平洋に面した静かな入江で、グレやアオリイカの好ポイント。地元釣り師に愛される穴場。",
-    latitude: 32.8580, longitude: 132.8720,
+    latitude: 32.862024, longitude: 132.954748,
     address: "〒787-0242 高知県土佐清水市下ノ加江211-19",
     accessInfo: "土佐くろしお鉄道中村駅から車で約30分。",
     region: localRegion("r152"), spotType: "port", difficulty: "intermediate",

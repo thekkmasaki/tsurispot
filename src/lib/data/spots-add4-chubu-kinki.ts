@@ -1007,7 +1007,7 @@ export const chubuKinkiAdd4Spots: FishingSpot[] = [
   {
     id: "sc4048", name: "福良港", slug: "fukura-kou",
     description: "淡路島南端の港で鳴門海峡の渦潮観光船の発着地。港内は穏やかな内湾で、サビキでアジ、投げ釣りでキス・カレイ・マダイが狙える。冬の投げ釣りでは各種のキスやマダイが釣れる実績があり、メバルの夜釣りも人気。",
-    latitude: 34.2320, longitude: 134.7300,
+    latitude: 34.252718, longitude: 134.715962,
     address: "〒656-0501 兵庫県南あわじ市福良",
     accessInfo: "淡路島南ICから約5分。",
     region: region("r136"), spotType: "port", difficulty: "beginner",
@@ -1093,7 +1093,7 @@ export const chubuKinkiAdd4Spots: FishingSpot[] = [
   {
     id: "sc4052", name: "広川・唐尾漁港", slug: "hirogawa-karao-gyokou",
     description: "有田郡広川町の小漁港。アオリイカの実績が非常に高く、春の親イカシーズンにはエギンガーが集結する。",
-    latitude: 33.9960, longitude: 135.1800,
+    latitude: 34.031812, longitude: 135.170873,
     address: "〒643-0071 和歌山県有田郡広川町唐尾",
     accessInfo: "湯浅御坊道路広川ICから約10分。",
     region: region("r501"), spotType: "port", difficulty: "intermediate",
@@ -1192,7 +1192,7 @@ export const chubuKinkiAdd4Spots: FishingSpot[] = [
   {
     id: "sc4057", name: "古座港", slug: "koza-kou",
     description: "串本町の古座川河口にある港。カンパチやブリの回遊があり、ショアジギングの実績が高い南紀の好釣り場。",
-    latitude: 33.5180, longitude: 135.7310,
+    latitude: 33.511457, longitude: 135.825526,
     address: "〒649-3503 和歌山県東牟婁郡串本町古座",
     accessInfo: "JR紀勢本線古座駅から徒歩約10分。",
     region: region("r504"), spotType: "port", difficulty: "intermediate",
@@ -1293,7 +1293,7 @@ export const chubuKinkiAdd4Spots: FishingSpot[] = [
   {
     id: "sc4062", name: "網野港", slug: "amino-kou",
     description: "京丹後市の日本海に面した漁港。カニ漁で有名だが釣りも盛んで、サビキでアジ、秋にはアオリイカも好調。",
-    latitude: 35.6720, longitude: 135.0150,
+    latitude: 35.693371, longitude: 135.029777,
     address: "〒629-3104 京都府京丹後市網野町浅茂川",
     accessInfo: "京都縦貫自動車道京丹後大宮ICから約30分。",
     region: localRegion("rc4010"), spotType: "port", difficulty: "beginner",
@@ -2045,7 +2045,7 @@ export const chubuKinkiAdd4Spots: FishingSpot[] = [
   {
     id: "sc4100", name: "小浜・犬熊海岸", slug: "obama-inokuma-kaigan",
     description: "小浜市の透明度抜群のビーチ。夏は海水浴場だが春秋はキスの穴場。遠浅でちょい投げでも十分に釣果が出る。",
-    latitude: 35.5230, longitude: 135.7650,
+    latitude: 35.491976, longitude: 135.733841,
     address: "〒917-0003 福井県小浜市犬熊",
     accessInfo: "舞鶴若狭自動車道小浜ICから約10分。",
     region: region("r84"), spotType: "beach", difficulty: "beginner",

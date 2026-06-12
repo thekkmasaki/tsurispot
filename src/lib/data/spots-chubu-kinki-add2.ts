@@ -343,7 +343,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2509", name: "黒島漁港", slug: "kuroshima-gyoko",
     description: "輪島市門前町に位置する静かな漁港。北前船の寄港地として栄えた歴史がある。根魚の魚影が濃く、カサゴ・メバルの穴釣りや、秋のアオリイカが好調。",
-    latitude: 37.3280, longitude: 136.7520,
+    latitude: 37.155546, longitude: 136.982644,
     address: "〒927-2165 石川県輪島市門前町黒島町",
     accessInfo: "のと里山海道門前ICから約15分。金沢市から車で約1時間30分。",
     region: localRegion("r2550"), spotType: "port", difficulty: "beginner",
@@ -2223,7 +2223,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   {
     id: "s2599", name: "日置漁港", slug: "hiki-gyoko",
     description: "白浜町の南に位置する日置漁港。リアス式海岸の入り江にあり、グレ・チヌのフカセ釣りの好ポイント。秋のアオリイカも実績が高く、穴場感が魅力。",
-    latitude: 33.6260, longitude: 135.4280, address: "〒649-2511 和歌山県白浜町日置745",
+    latitude: 33.561881, longitude: 135.448102, address: "〒649-2511 和歌山県白浜町日置745",
     accessInfo: "紀勢自動車道日置川ICから約5分。JR紀伊日置駅から徒歩約15分。",
     region: localRegion("r2622"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港内無料駐車場あり",

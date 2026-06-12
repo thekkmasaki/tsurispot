@@ -291,7 +291,7 @@ export const westAdd7Spots: FishingSpot[] = [
   {
     id: "sw7011", name: "青谷海岸", slug: "aoya-kaigan-w7",
     description: "鳥取市青谷町に広がる日本海のサーフ。夏場のキス釣りで知られ、秋にはサゴシの回遊も見られる。波の穏やかな日は初心者でも楽しめるポイント。",
-    latitude: 35.470, longitude: 134.035,
+    latitude: 35.52536, longitude: 134.000363,
     address: "〒689-0514 鳥取県鳥取市青谷町青谷",
     accessInfo: "JR青谷駅から徒歩約15分",
     region: localRegion("rw7001"), spotType: "beach", difficulty: "beginner",
@@ -368,7 +368,7 @@ export const westAdd7Spots: FishingSpot[] = [
   {
     id: "sw7015", name: "船磯海岸", slug: "funaiso-kaigan-w7",
     description: "鳥取市の福部町にある砂浜で、鳥取砂丘の東側に位置する。キスの投げ釣りに加え、秋のサゴシ回遊時にはショアジギングも楽しめる比較的静かなポイント。",
-    latitude: 35.547, longitude: 134.264,
+    latitude: 35.520975, longitude: 134.016861,
     address: "〒689-0101 鳥取県鳥取市福部町海士",
     accessInfo: "JR鳥取駅から車で約20分",
     region: localRegion("rw7001"), spotType: "beach", difficulty: "intermediate",
@@ -387,7 +387,7 @@ export const westAdd7Spots: FishingSpot[] = [
   {
     id: "sw7016", name: "浜村港", slug: "hamamura-kou-w7",
     description: "気高町にある中規模漁港で、浜村温泉にも近い。堤防からのサビキ釣りでアジが年間を通して狙え、エギングでのアオリイカも好実績のポイント。",
-    latitude: 35.497, longitude: 134.068,
+    latitude: 35.515781, longitude: 134.055778,
     address: "〒689-0332 鳥取県鳥取市気高町浜村",
     accessInfo: "JR浜村駅から徒歩約10分",
     region: localRegion("rw7001"), spotType: "port", difficulty: "beginner",
@@ -678,7 +678,7 @@ export const westAdd7Spots: FishingSpot[] = [
   {
     id: "sw7031", name: "仁摩海岸・琴ヶ浜", slug: "nima-kotogahama-w7",
     description: "鳴り砂で有名な琴ヶ浜に隣接するサーフポイント。キスの投げ釣りが定番で、遠投で良型が期待できる。砂浜の音を楽しみながらの釣りは格別。",
-    latitude: 35.138, longitude: 132.440,
+    latitude: 35.132613, longitude: 132.390043,
     address: "〒699-2301 島根県大田市仁摩町馬路",
     accessInfo: "JR仁万駅から徒歩約10分",
     region: localRegion("rw7005"), spotType: "beach", difficulty: "beginner",
@@ -830,7 +830,7 @@ export const westAdd7Spots: FishingSpot[] = [
   {
     id: "sw7039", name: "石見海浜公園", slug: "iwami-kaihin-koen-w7",
     description: "浜田市の広大な海浜公園。キャンプ場併設で家族連れに人気。広い砂浜でキスの投げ釣りが楽しめ、岩場ではカサゴやメバルも狙える複合ポイント。",
-    latitude: 34.914, longitude: 132.107,
+    latitude: 34.94967, longitude: 132.120023,
     address: "〒697-0003 島根県浜田市国分町",
     accessInfo: "JR浜田駅から車で約10分",
     region: localRegion("rw7006"), spotType: "beach", difficulty: "beginner",

@@ -517,7 +517,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   {
     id: "s223", name: "田井漁港", slug: "tai-port-maizuru",
     description: "舞鶴市の静かな漁港。アジング・メバリングの穴場として知られ、夜の常夜灯周りが好ポイント。",
-    latitude: 35.491200, longitude: 135.431200, address: "〒625-0157 京都府舞鶴市田井1074",
+    latitude: 35.582655, longitude: 135.228806, address: "〒625-0157 京都府舞鶴市田井1074",
     accessInfo: "舞鶴若狭道舞鶴東ICから約15分。",
     region: region("r137"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "漁港横に駐車スペースあり",

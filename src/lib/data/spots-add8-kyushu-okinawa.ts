@@ -500,7 +500,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8025", name: "岡垣・波津海岸", slug: "okagaki-hatsu-kaigan-s8",
     description: "遠賀郡岡垣町の美しい砂浜海岸。投げ釣りでキスが数釣りでき、秋にはサーフルアーでヒラメも。波が穏やかな日は初心者でも楽しめる。",
-    latitude: 33.859, longitude: 130.593,
+    latitude: 33.87888, longitude: 130.573865,
     address: "〒811-4203 福岡県遠賀郡岡垣町大字原",
     accessInfo: "JR海老津駅から車で約10分",
     region: localRegion("rs8004"), spotType: "beach", difficulty: "beginner",
@@ -749,7 +749,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8039", name: "太良町・竹崎港", slug: "tara-takezaki-kou-s8",
     description: "有明海最奥部の太良町にある竹崎港。竹崎カニで有名な地域で、満潮時にはクロダイやスズキが港内に入り込む。干潮時は干潟が露出するため潮位の確認が必須。",
-    latitude: 33.018, longitude: 130.170,
+    latitude: 32.953774, longitude: 130.219841,
     address: "〒849-1602 佐賀県藤津郡太良町大字大浦",
     accessInfo: "JR多良駅から車で約15分",
     region: localRegion("rs8007"), spotType: "port", difficulty: "intermediate",
@@ -1298,7 +1298,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8070", name: "時津・日並漁港", slug: "togitsu-hinami-gyokou-s8",
     description: "大村湾北部の時津町にある漁港。穏やかな湾内でキスやハゼの投げ釣りが主体。秋のハゼ釣りシーズンは特に好調で、初心者やファミリーに最適。",
-    latitude: 32.839, longitude: 129.861,
+    latitude: 32.837691, longitude: 129.84447,
     address: "〒851-2101 長崎県西彼杵郡時津町日並",
     accessInfo: "長崎市中心部から車で約20分",
     region: localRegion("rs8009"), spotType: "port", difficulty: "beginner",
@@ -1315,7 +1315,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8071", name: "佐世保・相浦港", slug: "sasebo-ainoura-kou-s8",
     description: "佐世保市相浦の港。黒島行きフェリーの発着場で、堤防からアジやメバルが手軽に狙える。周辺は小型だが根魚も豊富で探り釣りが面白い。",
-    latitude: 33.199, longitude: 129.691,
+    latitude: 33.167133, longitude: 129.722997,
     address: "〒858-0918 長崎県佐世保市相浦町",
     accessInfo: "松浦鉄道相浦駅から徒歩約5分",
     region: localRegion("rs8010"), spotType: "port", difficulty: "beginner",
@@ -1332,7 +1332,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8072", name: "壱岐・芦辺港", slug: "iki-ashibe-kou-s8",
     description: "壱岐島北東部の芦辺港。堤防から大型のアオリイカが狙える壱岐を代表するエギングポイント。サビキのアジやフカセのクロダイも安定している。",
-    latitude: 33.801, longitude: 129.750,
+    latitude: 33.750263, longitude: 129.783873,
     address: "〒811-5501 長崎県壱岐市芦辺町芦辺浦",
     accessInfo: "博多港からフェリーで約2時間10分",
     region: localRegion("rs8012"), spotType: "breakwater", difficulty: "intermediate",
@@ -1419,7 +1419,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8077", name: "外海・神浦港", slug: "sotome-kounora-kou-s8",
     description: "長崎市外海地区の神浦港。世界遺産の教会群が点在するエリアで、堤防からメバルやカサゴの根魚が良く釣れる。静かな漁村の雰囲気が漂う穴場ポイント。",
-    latitude: 32.893, longitude: 129.737,
+    latitude: 32.880208, longitude: 129.679285,
     address: "〒851-2322 長崎県長崎市神浦江川町",
     accessInfo: "長崎市中心部から車で約45分",
     region: localRegion("rs8009"), spotType: "port", difficulty: "beginner",
@@ -1437,7 +1437,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8078", name: "対馬・比田勝港", slug: "tsushima-hitakatsu-kou-s8",
     description: "対馬北端の比田勝港。韓国釜山からのフェリーも発着する国際港で、堤防からのアジング・エギングが好調。対馬海峡の豊かな潮流が大型のイカや青物を運んでくる。",
-    latitude: 34.652, longitude: 129.462,
+    latitude: 34.616736, longitude: 129.437772,
     address: "〒817-1701 長崎県対馬市上対馬町比田勝",
     accessInfo: "対馬空港から車で約90分",
     region: localRegion("rs8012"), spotType: "port", difficulty: "intermediate",
@@ -1455,7 +1455,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8079", name: "茂木港", slug: "mogi-kou-s8",
     description: "長崎市茂木町にある漁港。天草行きフェリーの発着場で、堤防からアジやメバルが狙える。長崎名物びわの産地としても知られる風情ある港町。",
-    latitude: 32.717, longitude: 129.904,
+    latitude: 32.706013, longitude: 129.91462,
     address: "〒851-0241 長崎県長崎市茂木町",
     accessInfo: "長崎駅から車で約20分",
     region: localRegion("rs8009"), spotType: "port", difficulty: "beginner",
@@ -1650,7 +1650,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8090", name: "宇土・長部田海床路", slug: "uto-nagabeta-kaishouro-s8",
     description: "有明海の干潮時に現れる海に続く道として有名な長部田海床路。満潮時には護岸からクロダイやスズキが狙え、フォトジェニックな景観も魅力のユニークな釣り場。",
-    latitude: 32.660, longitude: 130.600,
+    latitude: 32.662242, longitude: 130.522698,
     address: "〒869-0401 熊本県宇土市住吉町",
     accessInfo: "JR住吉駅から車で約5分",
     region: localRegion("rs8016"), spotType: "pier", difficulty: "intermediate",
@@ -1755,7 +1755,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8096", name: "上天草・龍ヶ岳港", slug: "kamiamakusa-ryugatake-kou-s8",
     description: "上天草市龍ヶ岳の漁港。八代海に面した穏やかな海域で、堤防からアジやイカが安定して釣れる。港内は足場が良くファミリーにも適している。",
-    latitude: 32.454, longitude: 130.397,
+    latitude: 32.386518, longitude: 130.366835,
     address: "〒866-0201 熊本県上天草市龍ヶ岳町",
     accessInfo: "松橋ICから車で約70分",
     region: localRegion("rs8014"), spotType: "port", difficulty: "beginner",
@@ -1875,7 +1875,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8103", name: "天草・大江港", slug: "amakusa-oe-kou-s8",
     description: "天草下島西岸の大江港。大江天主堂を見上げるロマンチックな港で、堤防からアジやメバルが釣れる。観光の合間に竿を出せる手軽さが魅力。",
-    latitude: 32.342, longitude: 130.016,
+    latitude: 32.448512, longitude: 130.418318,
     address: "〒863-2801 熊本県天草市天草町大江",
     accessInfo: "天草市中心部から車で約40分",
     region: localRegion("rs8014"), spotType: "port", difficulty: "beginner",
@@ -1892,7 +1892,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8104", name: "上天草・姫戸港", slug: "kamiamakusa-himedo-kou-s8",
     description: "上天草市姫戸町の漁港。八代海に面した穏やかな港で、アジやメバルの夜釣りが地元で人気。昼間はキスのちょい投げも楽しめる。",
-    latitude: 32.484, longitude: 130.402,
+    latitude: 32.436216, longitude: 130.415164,
     address: "〒866-0101 熊本県上天草市姫戸町姫浦",
     accessInfo: "松橋ICから車で約60分",
     region: localRegion("rs8014"), spotType: "port", difficulty: "beginner",
@@ -1966,7 +1966,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8108", name: "佐伯・蒲江波当津海岸", slug: "saiki-kamae-hatozu-s8",
     description: "佐伯市蒲江の波当津海岸。リアス式海岸に囲まれた美しい砂浜で、キスの投げ釣りが絶好調。周辺の磯場ではグレやイシダイも狙える。",
-    latitude: 32.930, longitude: 131.875,
+    latitude: 32.978619, longitude: 131.915348,
     address: "〒876-2301 大分県佐伯市蒲江大字波当津浦",
     accessInfo: "佐伯ICから車で約50分",
     region: localRegion("rs8018"), spotType: "beach", difficulty: "beginner",
@@ -2001,7 +2001,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8110", name: "蒲江・元猿港", slug: "kamae-motosaru-kou-s8",
     description: "佐伯市蒲江の最南部にある元猿港。宮崎県境に近いリアス式海岸の漁港で、堤防からイサキやグレが狙える。黒潮の影響を受け回遊魚も豊富。",
-    latitude: 32.900, longitude: 131.896,
+    latitude: 32.839637, longitude: 132.004218,
     address: "〒876-2301 大分県佐伯市蒲江大字元猿海岸",
     accessInfo: "佐伯ICから車で約60分",
     region: localRegion("rs8018"), spotType: "port", difficulty: "intermediate",
@@ -2139,7 +2139,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8118", name: "佐伯・米水津港", slug: "saiki-yonouzu-kou-s8",
     description: "佐伯市米水津の漁港。豊後水道に面したリアス式海岸の奥に位置し、堤防からでもマダイやイサキが狙える贅沢なポイント。磯釣り渡船の基地でもある。",
-    latitude: 32.923, longitude: 131.959,
+    latitude: 32.978619, longitude: 131.915348,
     address: "〒876-0100 大分県佐伯市米水津大字浦代浦",
     accessInfo: "佐伯ICから車で約40分",
     region: localRegion("rs8018"), spotType: "port", difficulty: "intermediate",
@@ -2243,7 +2243,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8124", name: "佐伯・大入島", slug: "saiki-oonyujima-s8",
     description: "佐伯湾に浮かぶ大入島。渡船で渡る離島で、堤防からアジ・イカ・クロダイが高確率で釣れる。島を一周する道路沿いに多数の釣りポイントが点在する。",
-    latitude: 32.943, longitude: 131.930,
+    latitude: 32.99955, longitude: 131.92608,
     address: "〒876-0101 大分県佐伯市大入島",
     accessInfo: "佐伯港から渡船で約10分",
     region: localRegion("rs8018"), spotType: "breakwater", difficulty: "intermediate",
@@ -2278,7 +2278,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8126", name: "別府・上人ヶ浜", slug: "beppu-shonin-ga-hama-s8",
     description: "別府市の上人ヶ浜。温泉地帯の砂浜で、砂蒸し温泉の近くにある。投げ釣りでキスが釣れ、温泉観光の合間に気軽に竿が出せるユニークなポイント。",
-    latitude: 33.274, longitude: 131.489,
+    latitude: 33.314459, longitude: 131.502124,
     address: "〒874-0903 大分県別府市上人ヶ浜",
     accessInfo: "JR別府大学駅から徒歩約10分",
     region: localRegion("rs8017"), spotType: "beach", difficulty: "beginner",
@@ -2330,7 +2330,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8129", name: "津久見・落ノ浦", slug: "tsukumi-ochinoura-s8",
     description: "津久見市の豊後水道に面した落ノ浦。深い入り江に位置し、堤防からグレやクロダイが通年楽しめる。みかんの段々畑を背景にした風情ある釣り場。",
-    latitude: 33.058, longitude: 131.840,
+    latitude: 33.069019, longitude: 131.990753,
     address: "〒879-2631 大分県津久見市落ノ浦",
     accessInfo: "津久見ICから車で約15分",
     region: localRegion("rs8020"), spotType: "breakwater", difficulty: "intermediate",
@@ -2385,7 +2385,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8133", name: "延岡・島浦島", slug: "nobeoka-shimanoura-s8",
     description: "延岡沖に浮かぶ島浦島。磯釣りの聖地として全国から釣り師が訪れる。渡船で渡る地磯からグレ・イシダイ・青物の大物が狙える九州屈指のポイント。",
-    latitude: 32.647, longitude: 131.656,
+    latitude: 32.522677, longitude: 131.692629,
     address: "〒882-0096 宮崎県延岡市島浦町",
     accessInfo: "延岡港から渡船で約30分",
     region: localRegion("rs8022"), spotType: "rocky", difficulty: "advanced",
@@ -2719,7 +2719,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8152", name: "桜島・袴腰海岸", slug: "sakurajima-hakamakoshi-s8",
     description: "桜島南岸の海岸。溶岩原が海に落ち込む独特の景観で、根魚やクロダイが豊富。錦江湾の奥でありながら大型のカンパチ回遊も。火山と釣りのコラボが楽しめる。",
-    latitude: 31.565, longitude: 130.650,
+    latitude: 31.592602, longitude: 130.600053,
     address: "〒891-1419 鹿児島県鹿児島市桜島赤水町",
     accessInfo: "桜島フェリーターミナルから車で約15分",
     region: localRegion("rs8024"), spotType: "rocky", difficulty: "intermediate",
@@ -2755,7 +2755,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8154", name: "坊津・秋目港", slug: "bonotsu-akime-kou-s8",
     description: "南さつま市坊津の秋目港。鑑真が日本に上陸した歴史ある港で、外海に面した好ポイント。グレやイシダイの磯釣りの名所として全国に知られる。",
-    latitude: 31.311, longitude: 130.271,
+    latitude: 31.263085, longitude: 130.214811,
     address: "〒898-0211 鹿児島県南さつま市坊津町秋目",
     accessInfo: "JR枕崎駅から車で約30分",
     region: localRegion("rs8025"), spotType: "rocky", difficulty: "advanced",
@@ -2861,7 +2861,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8160", name: "いちき串木野・照島海岸", slug: "kushikino-terushima-kaigan-s8",
     description: "いちき串木野市の照島海岸。東シナ海に面した砂浜でキスの投げ釣りが好調。秋にはサーフルアーでヒラメも。羽島崎灯台を望むロケーション。",
-    latitude: 31.735, longitude: 130.265,
+    latitude: 31.703722, longitude: 130.277302,
     address: "〒896-0046 鹿児島県いちき串木野市照島",
     accessInfo: "JR串木野駅から車で約10分",
     region: localRegion("rs8025"), spotType: "beach", difficulty: "beginner",
@@ -2949,7 +2949,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   {
     id: "ss8165", name: "内之浦港", slug: "uchinoura-kou-s8",
     description: "肝付町の内之浦港。JAXAロケット発射場のある宇宙の町の港。大隅半島東岸に位置し、堤防からアジ・イカ・クロダイが狙える静かな穴場ポイント。",
-    latitude: 31.257, longitude: 131.071,
+    latitude: 31.279255, longitude: 131.08461,
     address: "〒893-1402 鹿児島県肝属郡肝付町南方",
     accessInfo: "鹿屋市から車で約45分",
     region: localRegion("rs8026"), spotType: "port", difficulty: "beginner",

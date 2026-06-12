@@ -219,7 +219,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
   {
     id: "s1026", name: "赤羽根港堤防", slug: "akabane-ko-teibo",
     description: "渥美半島の太平洋側に面する赤羽根港。サーフィンの名所・赤羽根海岸に隣接し、外洋からの潮が直接入る好漁場。キスの投げ釣りとヒラメの泳がせ釣りが特に有名で、週末はファミリーから上級者まで多くの釣り人で賑わう。",
-    latitude: 34.6080, longitude: 137.1450,
+    latitude: 34.600753, longitude: 137.18909,
     address: "〒441-3502 愛知県田原市",
     accessInfo: "豊橋鉄道渥美線三河田原駅から車で約20分。東名豊川ICから約50分。",
     region: lr("r900"), spotType: "breakwater", difficulty: "beginner",
@@ -628,7 +628,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
   {
     id: "s1042", name: "神湊漁港堤防", slug: "konominato-gyoko-teibo",
     description: "宗像市の神湊漁港は宗像大島への定期船が発着する港。大波止からのカゴ釣りでアジが好調、内波止では投げ釣りでカレイやキスの実績が高い。世界遺産・宗像大社に近く観光と合わせた釣行が可能。",
-    latitude: 33.8280, longitude: 130.5320,
+    latitude: 33.85291, longitude: 130.483453,
     address: "〒811-3501 福岡県宗像市神湊港487-29",
     accessInfo: "JR鹿児島本線東郷駅からバスで約15分。福岡都市高速から国道3号経由で約50分。",
     region: lr("r903"), spotType: "port", difficulty: "beginner",
@@ -753,7 +753,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
   {
     id: "s1047", name: "大島漁港堤防", slug: "oshima-gyoko-teibo-munakata",
     description: "世界遺産・宗像大島の漁港。神湊港からフェリーで約25分の離島で、玄界灘に面し潮通し抜群。ヒラマサやブリの大型青物が堤防から狙える九州屈指の離島釣り場。アオリイカのサイズも本土より大きく、遠征する価値が十分にある。",
-    latitude: 33.8510, longitude: 130.5420,
+    latitude: 33.909709, longitude: 130.408621,
     address: "〒811-3701 福岡県宗像市",
     accessInfo: "神湊港からフェリーで約25分。JR東郷駅からバスで神湊港まで約15分。",
     region: lr("r905"), spotType: "breakwater", difficulty: "intermediate",
@@ -809,7 +809,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
   {
     id: "s1049", name: "相島漁港堤防", slug: "ainoshima-gyoko-teibo",
     description: "糟屋郡新宮町の相島。新宮漁港からフェリーで約20分の猫の島として有名な離島で、堤防釣りのポイントも充実。アジやメバルが好調で、潮通しの良い堤防先端ではクロダイや青物も狙える穴場離島。",
-    latitude: 33.7350, longitude: 130.4920,
+    latitude: 33.717851, longitude: 130.423829,
     address: "〒811-0118 福岡県新宮町相島1559",
     accessInfo: "新宮漁港からフェリーで約20分。JR福工大前駅からバスで新宮漁港まで約10分。",
     region: lr("r903"), spotType: "breakwater", difficulty: "intermediate",
@@ -880,7 +880,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
   {
     id: "s1052", name: "狩留賀海浜公園護岸", slug: "karuga-kaihin-gokan",
     description: "呉市の狩留賀海浜公園内の釣りスポット。手すり付きの護岸で安全に釣りが楽しめ、トイレや駐車場も完備。キスやカレイの投げ釣り、アジのサビキ釣りが人気で、バーベキュー施設も隣接しアウトドアレジャーと釣りを一日楽しめる。",
-    latitude: 34.2670, longitude: 132.5420,
+    latitude: 34.261787, longitude: 132.516983,
     address: "〒737-0846 広島県呉市狩留賀町1-1-1",
     accessInfo: "JR呉線狩留賀駅から徒歩約5分。広島呉道路天応西ICから約10分。",
     region: region("r13"), spotType: "breakwater", difficulty: "beginner",
@@ -907,7 +907,7 @@ export const aichiFukuokaHiroshimaSpots: FishingSpot[] = [
   {
     id: "s1053", name: "呉ポートピアパーク護岸", slug: "kure-portopia-gokan",
     description: "呉市天応町のポートピアパーク。護岸にある2つのデッキから釣りが可能で、イワシ・サヨリ・キス・カレイなどが釣れる。子供向け遊具や芝生広場も充実しており、家族で一日楽しめるファミリーフィッシングの聖地。駐車料金無料が嬉しい。",
-    latitude: 34.2820, longitude: 132.5350,
+    latitude: 34.292894, longitude: 132.511503,
     address: "〒737-0875 広島県呉市天応大浜3丁目2-3",
     accessInfo: "JR呉線天応駅から徒歩約10分。広島呉道路天応西ICから約5分。",
     region: region("r13"), spotType: "breakwater", difficulty: "beginner",

@@ -478,7 +478,7 @@ export const kyushuSouthSpots: FishingSpot[] = [
   {
     id: "s493", name: "桜島フェリー港（桜島側）", slug: "sakurajima-ferry-port",
     description: "活火山・桜島のフェリー乗り場周辺の釣りスポット。溶岩地帯が形成する複雑な海底地形に根魚が豊富。カサゴやメバルの穴釣りに加え、エギングでアオリイカも狙える特異な釣り場。",
-    latitude: 31.5800, longitude: 130.6380,
+    latitude: 31.592602, longitude: 130.600053,
     address: "〒891-1419 鹿児島県鹿児島市桜島横山町2",
     accessInfo: "鹿児島港からフェリーで約15分。桜島フェリーターミナルから徒歩すぐ。",
     region: localRegion("r16"), spotType: "rocky", difficulty: "intermediate",

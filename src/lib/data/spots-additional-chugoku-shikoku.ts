@@ -733,7 +733,7 @@ export const additionalSpotsChugokuShikoku: FishingSpot[] = [
   {
     id: "s180", name: "波止浜港", slug: "hashihama-port",
     description: "愛媛県今治市の港。しまなみ海道の四国側拠点。来島海峡の潮流が近くマダイやチヌの大物が狙える。",
-    latitude: 34.0712, longitude: 132.9812, address: "〒799-2112 愛媛県今治市波止浜4丁目1",
+    latitude: 34.10956, longitude: 132.969087, address: "〒799-2112 愛媛県今治市波止浜4丁目1",
     accessInfo: "JR波止浜駅から徒歩10分。西瀬戸自動車道今治北ICから約10分。",
     region: region("r31"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",

@@ -461,7 +461,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
   {
     id: "sks4019", name: "星賀漁港", slug: "hoshika-gyokou",
     description: "唐津市の北西に位置する小漁港。穴場的存在で釣り人が少なく、テトラ帯でのカサゴやメバルの根魚釣りをのんびり楽しめる。",
-    latitude: 33.5040, longitude: 129.9000,
+    latitude: 33.448313, longitude: 129.788638,
     address: "〒847-0305 佐賀県唐津市呼子町加部島",
     accessInfo: "JR唐津駅から車で約35分。長崎道多久ICから約55分。",
     region: localRegion("rks4010"), spotType: "port", difficulty: "beginner",
@@ -716,7 +716,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
   {
     id: "sks4032", name: "田平港", slug: "tabira-kou",
     description: "平戸大橋の手前にある田平の港。平戸瀬戸に面し潮流が速く魚影が濃い。アジのサビキやクロダイのフカセ釣りが安定して楽しめる。",
-    latitude: 33.3590, longitude: 129.5480,
+    latitude: 33.362153, longitude: 129.574114,
     address: "〒859-4825 長崎県平戸市田平町山内免",
     accessInfo: "松浦鉄道たびら平戸口駅から車で約5分。西九州道佐世保大塔ICから約50分。",
     region: localRegion("rks4021"), spotType: "port", difficulty: "beginner",
@@ -952,7 +952,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
   {
     id: "sks4044", name: "樋島漁港", slug: "hishima-gyokou",
     description: "上天草市の樋島にある漁港。八代海と有明海の合流点に位置し潮通し抜群。大型のクロダイやマダイの実績が高い好釣り場。",
-    latitude: 32.4680, longitude: 130.3560,
+    latitude: 32.395385, longitude: 130.405686,
     address: "〒861-6301 熊本県上天草市龍ヶ岳町樋島",
     accessInfo: "九州道松橋ICから約1時間20分。三角港からフェリーも利用可。",
     region: localRegion("rks4030"), spotType: "port", difficulty: "intermediate",
@@ -972,7 +972,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
   {
     id: "sks4045", name: "宇土マリーナ護岸", slug: "uto-marina-gogan",
     description: "宇土市の有明海に面したマリーナ護岸。足場が良く初心者も安心。ハゼやシーバスが年間を通じて楽しめる手軽な釣りスポット。",
-    latitude: 32.6500, longitude: 130.5760,
+    latitude: 32.662242, longitude: 130.522698,
     address: "〒869-0454 熊本県宇土市戸口町",
     accessInfo: "JR宇土駅から車で約10分。九州道松橋ICから約15分。",
     region: localRegion("rks4031"), spotType: "beach", difficulty: "beginner",
@@ -1230,7 +1230,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
   {
     id: "sks4058", name: "串間市都井岬磯", slug: "kushima-toimisaki-iso",
     description: "野生馬で有名な都井岬の磯場。黒潮が接岸するポイントで大型グレやイシダイが狙える上級者向きの磯。秋にはカンパチやブリも回遊する。",
-    latitude: 31.3720, longitude: 131.3310,
+    latitude: 31.367389, longitude: 131.345806,
     address: "〒888-0222 宮崎県串間市大納",
     accessInfo: "串間駅から車で約30分。国道448号経由でアクセス。",
     region: localRegion("rks4050"), spotType: "rocky", difficulty: "advanced",
