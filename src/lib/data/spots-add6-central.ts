@@ -180,7 +180,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   {
     id: "sc6003", name: "寺泊港", slug: "teradomari-kou-niigata",
     description: "「魚のアメ横」と呼ばれる寺泊魚市場に隣接する港。岸壁からアジやイワシのサビキ釣りが手軽に楽しめ、食事や買い物もできるファミリー向けスポット。",
-    latitude: 37.6320, longitude: 138.7820,
+    latitude: 37.640783, longitude: 138.761223,
     address: "〒940-2502 新潟県長岡市寺泊下荒町",
     accessInfo: "JR寺泊駅からバスで約15分。北陸自動車道中之島見附ICから約30分。",
     region: localRegion("rc6003"), spotType: "port", difficulty: "beginner",
@@ -199,7 +199,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   {
     id: "sc6004", name: "出雲崎港", slug: "izumozaki-kou-niigata",
     description: "良寛ゆかりの地として知られる出雲崎の漁港。堤防からのメバル・カサゴの根魚釣りが人気で、春にはホタルイカの接岸も見られる風情ある港。",
-    latitude: 37.5290, longitude: 138.6870,
+    latitude: 37.544415, longitude: 138.689954,
     address: "〒949-4342 新潟県三島郡出雲崎町尼瀬",
     accessInfo: "JR出雲崎駅から徒歩20分。北陸自動車道西山ICから約15分。",
     region: localRegion("rc6002"), spotType: "port", difficulty: "beginner",
@@ -315,7 +315,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   {
     id: "sc6010", name: "能生港", slug: "nou-kou-niigata",
     description: "糸魚川市にある日本海に面した港。堤防からのアジ釣りや、秋のアオリイカが人気。近くの能生漁港では新鮮な紅ズワイガニも味わえる。",
-    latitude: 37.0550, longitude: 137.9870,
+    latitude: 37.10904, longitude: 137.992742,
     address: "〒949-1351 新潟県糸魚川市能生",
     accessInfo: "えちごトキめき鉄道能生駅から徒歩15分。北陸自動車道能生ICから約5分。",
     region: localRegion("rc6001"), spotType: "port", difficulty: "beginner",
@@ -507,7 +507,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   {
     id: "sc6020", name: "荒浜港", slug: "arahama-kou-niigata",
     description: "柏崎市刈羽村に近い小さな漁港。堤防からクロダイやメバルが狙え、足場も良好でファミリーにも適している。静かな環境でのんびり釣りが楽しめる。",
-    latitude: 37.4160, longitude: 138.6010,
+    latitude: 37.196419, longitude: 138.274785,
     address: "〒945-0855 新潟県柏崎市荒浜",
     accessInfo: "JR荒浜駅から徒歩15分。北陸自動車道西山ICから約10分。",
     region: localRegion("rc6002"), spotType: "port", difficulty: "beginner",
@@ -526,7 +526,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   {
     id: "sc6021", name: "谷浜海岸", slug: "tanihama-kaigan-niigata",
     description: "上越市の景勝地で、透明度の高い海が広がる。磯場と砂浜が隣接し、多彩な釣りが楽しめる。夏のキス釣り、秋のエギングが特に人気。",
-    latitude: 37.1250, longitude: 138.1350,
+    latitude: 37.16186, longitude: 138.174868,
     address: "〒949-3101 新潟県上越市谷浜",
     accessInfo: "えちごトキめき鉄道谷浜駅から徒歩5分。北陸自動車道名立谷浜ICから約3分。",
     region: localRegion("rc6001"), spotType: "beach", difficulty: "beginner",
@@ -1085,7 +1085,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   {
     id: "sc6050", name: "国分浜", slug: "kokubuhama-toyama",
     description: "高岡市の伏木海岸に続く砂利浜。投げ釣りでカレイやキスが狙え、ルアーでヒラメの実績もある。越中国分駅からのアクセスが良い穴場スポット。",
-    latitude: 36.7950, longitude: 137.0340,
+    latitude: 36.80564, longitude: 137.052861,
     address: "〒933-0133 富山県高岡市伏木国分",
     accessInfo: "JR氷見線越中国分駅から徒歩10分。能越自動車道高岡北ICから約15分。",
     region: localRegion("rc6006"), spotType: "beach", difficulty: "beginner",
@@ -1565,7 +1565,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   {
     id: "sc6075", name: "門前・皆月湾", slug: "monzen-minazuki-wan",
     description: "輪島市門前町にある小さな入り江。波が穏やかで磯釣りとエギングが楽しめる。能登の秘境的な釣り場で、大物クロダイの実績がある。",
-    latitude: 37.3040, longitude: 136.7540,
+    latitude: 37.349953, longitude: 136.747833,
     address: "〒927-2344 石川県輪島市門前町皆月",
     accessInfo: "のと里山海道穴水ICから車で約40分。金沢駅から車で約120分。",
     region: localRegion("rc6008"), spotType: "rocky", difficulty: "intermediate",
@@ -1794,7 +1794,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   {
     id: "sc6087", name: "七尾・和倉温泉裏海岸", slug: "nanao-wakura-kaigan",
     description: "和倉温泉街の裏手に広がる七尾湾の海岸。穏やかな内湾で初心者にも釣りやすく、温泉旅行のついでに釣りが楽しめる贅沢なスポット。",
-    latitude: 37.0740, longitude: 136.9220,
+    latitude: 37.056261, longitude: 136.968123,
     address: "〒926-0174 石川県七尾市石崎町",
     accessInfo: "JR七尾線和倉温泉駅から徒歩15分。のと里山海道七尾ICから約15分。",
     region: localRegion("rc6008"), spotType: "beach", difficulty: "beginner",
@@ -1813,7 +1813,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   {
     id: "sc6088", name: "羽咋・滝港", slug: "hakui-taki-kou-ishikawa",
     description: "羽咋市にある小さな漁港。千里浜のすぐ近くに位置し、堤防からのアジ・メバル釣りが中心。穴場的なスポットで混雑少なく釣りが楽しめる。",
-    latitude: 36.8460, longitude: 136.7620,
+    latitude: 36.922296, longitude: 136.754333,
     address: "〒925-0003 石川県羽咋市滝町",
     accessInfo: "JR七尾線羽咋駅から車で約10分。のと里山海道千里浜ICから約5分。",
     region: localRegion("rc6007"), spotType: "port", difficulty: "beginner",
@@ -1912,7 +1912,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   {
     id: "sc6093", name: "小浜港", slug: "obama-kou-fukui",
     description: "若狭湾に面した歴史ある港町の港。御食国として知られる食の都で、堤防からアジ・メバル・クロダイが狙える。ファミリーにも人気のスポット。",
-    latitude: 35.4820, longitude: 135.7450,
+    latitude: 35.491976, longitude: 135.733841,
     address: "〒917-0081 福井県小浜市小浜白鳥",
     accessInfo: "JR小浜線小浜駅から徒歩15分。舞鶴若狭自動車道小浜ICから約10分。",
     region: localRegion("rc6012"), spotType: "port", difficulty: "beginner",
@@ -1932,7 +1932,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   {
     id: "sc6094", name: "三国港", slug: "mikuni-kou-fukui",
     description: "坂井市にある九頭竜川河口の港。越前ガニの水揚げ港として有名で、堤防からの釣りが盛ん。アジ・サバのサビキ釣りや、秋の青物が人気。",
-    latitude: 36.2430, longitude: 136.1460,
+    latitude: 36.250456, longitude: 136.172891,
     address: "〒913-0056 福井県坂井市三国町宿",
     accessInfo: "えちぜん鉄道三国港駅から徒歩5分。北陸自動車道金津ICから約20分。",
     region: localRegion("rc6010"), spotType: "port", difficulty: "beginner",
@@ -1971,7 +1971,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   {
     id: "sc6096", name: "美浜・日向海岸", slug: "mihama-higa-kaigan-fukui",
     description: "美浜町の美しい砂浜海岸。「日本海の宝石箱」と称される透明度の高い海で、キスの投げ釣りやサーフルアーが楽しめる。水晶浜に近い。",
-    latitude: 35.5940, longitude: 135.9280,
+    latitude: 35.613313, longitude: 135.894372,
     address: "〒919-1124 福井県三方郡美浜町日向",
     accessInfo: "JR小浜線美浜駅から車で約10分。舞鶴若狭自動車道若狭美浜ICから約10分。",
     region: localRegion("rc6011"), spotType: "beach", difficulty: "beginner",
@@ -2086,7 +2086,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   {
     id: "sc6102", name: "若狭・鳥浜漁港", slug: "wakasa-torihama-gyokou",
     description: "若狭町の三方五湖に近い漁港。穏やかな若狭湾内に位置し、アジやキスが手軽に狙える。三方五湖の淡水釣りも合わせて楽しめるエリア。",
-    latitude: 35.5430, longitude: 135.8880,
+    latitude: 35.496783, longitude: 135.550327,
     address: "〒919-1331 福井県三方上中郡若狭町鳥浜",
     accessInfo: "JR小浜線三方駅から車で約5分。舞鶴若狭自動車道若狭三方ICから約5分。",
     region: localRegion("rc6012"), spotType: "port", difficulty: "beginner",
@@ -2143,7 +2143,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   {
     id: "sc6105", name: "敦賀・名子海岸", slug: "tsuruga-nago-kaigan-fukui",
     description: "敦賀半島の西側に位置する砂浜。キスの投げ釣りが盛んで、夏場はファミリーで賑わう。水の透明度が高く海底が見えることも。",
-    latitude: 35.6880, longitude: 136.0200,
+    latitude: 35.702779, longitude: 135.973411,
     address: "〒914-0833 福井県敦賀市名子",
     accessInfo: "JR敦賀駅から車で約15分。北陸自動車道敦賀ICから約20分。",
     region: localRegion("rc6011"), spotType: "beach", difficulty: "beginner",
@@ -2162,7 +2162,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   {
     id: "sc6106", name: "小浜・阿納漁港", slug: "obama-anou-gyokou-fukui",
     description: "小浜市東部の小さな漁港。若狭湾のリアス式海岸に面し、アジやメバルの魚影が濃い。秋のアオリイカエギングは県内屈指の実績。",
-    latitude: 35.4960, longitude: 135.7830,
+    latitude: 35.491976, longitude: 135.733841,
     address: "〒917-0105 福井県小浜市阿納",
     accessInfo: "JR小浜線東小浜駅から車で約15分。舞鶴若狭自動車道小浜ICから約15分。",
     region: localRegion("rc6012"), spotType: "port", difficulty: "beginner",
@@ -2200,7 +2200,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   {
     id: "sc6108", name: "敦賀・松原海岸", slug: "tsuruga-matsubara-kaigan",
     description: "日本三大松原の一つ「気比の松原」に隣接する砂浜。キスの投げ釣りやサーフルアーが楽しめ、夏は海水浴と合わせて家族で楽しめる人気スポット。",
-    latitude: 35.6350, longitude: 136.0830,
+    latitude: 35.702779, longitude: 135.973411,
     address: "〒914-0801 福井県敦賀市松島町",
     accessInfo: "JR敦賀駅から車で約5分。北陸自動車道敦賀ICから約10分。",
     region: localRegion("rc6011"), spotType: "beach", difficulty: "beginner",
@@ -2219,7 +2219,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   {
     id: "sc6109", name: "大飯・あかぐり海岸", slug: "ohi-akaguri-kaigan-fukui",
     description: "おおい町にある静かな海岸。若狭湾に面した入り江で波が穏やか。磯場からクロダイやメバルが楽しめ、夕暮れのエギングも人気。",
-    latitude: 35.4690, longitude: 135.6430,
+    latitude: 35.481304, longitude: 135.633563,
     address: "〒919-2102 福井県大飯郡おおい町大島",
     accessInfo: "JR小浜線若狭本郷駅から車で約15分。舞鶴若狭自動車道大飯高浜ICから約15分。",
     region: localRegion("rc6012"), spotType: "rocky", difficulty: "intermediate",
@@ -2390,7 +2390,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   {
     id: "sc6118", name: "小浜・犬熊海水浴場", slug: "obama-inokuma-fukui",
     description: "小浜市西部のこじんまりした海水浴場。穴場的な砂浜でキスの投げ釣りが楽しめる。若狭湾の透明度の高い海が魅力。",
-    latitude: 35.4740, longitude: 135.7110,
+    latitude: 35.491976, longitude: 135.733841,
     address: "〒917-0024 福井県小浜市犬熊",
     accessInfo: "JR小浜線小浜駅から車で約10分。舞鶴若狭自動車道小浜ICから約10分。",
     region: localRegion("rc6012"), spotType: "beach", difficulty: "beginner",

@@ -764,7 +764,7 @@ export const kantoDetailSpots: FishingSpot[] = [
   {
     id: "s831", name: "鹿島港", slug: "kashima-port",
     description: "鹿島臨海工業地帯に隣接する巨大な港湾。港公園周辺の護岸からの釣りが人気で、アジ、サバ、イワシのサビキ釣りから、ヒラメやマゴチの大物釣りまで楽しめる。黒潮の影響を受けた温暖な海域で、多彩な魚種が狙える。※南防波堤は死亡事故多発のため立入禁止。",
-    latitude: 35.94490, longitude: 140.66170,
+    latitude: 35.915458, longitude: 140.676151,
     address: "〒314-0141 茨城県神栖市居切",
     accessInfo: "JR鹿島線鹿島神宮駅からタクシーで約15分。東関東自動車道潮来ICから約20分。",
     region: region("r52"), spotType: "port", difficulty: "intermediate",

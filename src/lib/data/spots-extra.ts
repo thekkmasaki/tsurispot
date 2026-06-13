@@ -2590,7 +2590,7 @@ export const extraSpots: FishingSpot[] = [
   },{
     id: "s358", name: "鹿児島屋久島宮之浦港", slug: "yakushima-miyanoura",
     description: "世界遺産・屋久島の玄関口。黒潮に囲まれた島で、アジやカンパチなど大型回遊魚も期待できる。",
-    latitude: 30.391200, longitude: 130.561200,
+    latitude: 30.43036, longitude: 130.577272,
     address: "〒891-4205 鹿児島県屋久島町宮之浦",
     accessInfo: "屋久島空港から車で約20分。鹿児島港からフェリーで約4時間。",
     region: region("r56"), spotType: "port", difficulty: "intermediate",

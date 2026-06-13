@@ -681,7 +681,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
   {
     id: "sh019", name: "坂越漁港", slug: "sakoshi-gyoko",
     description: "赤穂市坂越湾に面した漁港。牡蠣養殖で有名な坂越湾は栄養豊富な海域で、チヌ・メバル・カサゴの魚影が濃い。堤防からのフカセ釣りでチヌ、投げ釣りでキス・カレイが定番。坂越の町並み散策と合わせた釣行もおすすめ。",
-    latitude: 34.7530, longitude: 134.4120,
+    latitude: 34.76489, longitude: 134.434347,
     address: "〒678-0172 兵庫県赤穂市坂越",
     accessInfo: "JR「坂越」駅から徒歩約15分。山陽自動車道赤穂ICから約10分。",
     region: lr("r404"), spotType: "port", difficulty: "beginner",
@@ -715,7 +715,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
   {
     id: "sh020", name: "相生港（野瀬埠頭）", slug: "aioi-port-nose",
     description: "相生市の中心的な港湾エリア。野瀬埠頭は足場が良く広々とした岸壁から釣りができ、車横付け可能でファミリーに人気。サビキでアジ・サバ・イワシが安定して釣れ、投げ釣りでキス・カレイ、ルアーでシーバスも狙える。",
-    latitude: 34.7950, longitude: 134.4530,
+    latitude: 34.774535, longitude: 134.464166,
     address: "〒678-0041 兵庫県相生市相生",
     accessInfo: "JR「相生」駅から車で約10分。山陽自動車道竜野西ICから約15分。",
     region: lr("r404"), spotType: "port", difficulty: "beginner",
@@ -740,7 +740,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
   {
     id: "sh021", name: "室津漁港", slug: "murotsu-gyoko",
     description: "たつの市にある歴史ある漁港。約2000年の歴史を持つ室津は牡蠣養殖でも有名。栄養豊富な海域でチヌの魚影が非常に濃く、フカセ釣りの実績が特に高い。メバルの人気ポイントとしても知られ、冬場のメバリングは安定した釣果が期待できる。カサゴの根魚も豊富で、秋にはアオリイカのエギングも人気。",
-    latitude: 34.8010, longitude: 134.5120,
+    latitude: 34.522097, longitude: 134.874296,
     address: "〒671-1332 兵庫県たつの市御津町室津1034-46",
     accessInfo: "JR「竜野」駅から車で約15分。山陽自動車道竜野西ICから約20分。",
     region: lr("r404"), spotType: "port", difficulty: "intermediate",
@@ -821,7 +821,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
   {
     id: "sh023", name: "津名港（志筑）", slug: "tsuna-port-shizuki",
     description: "淡路島中部東海岸の大型港。4つの人工島が並ぶ淡路島屈指の人気釣り場で、堤防から釣れる魚ならほぼ全て狙える。海底グレの好ポイントとしても知られ、ミオ筋（船の通り道の深場）にカレイが集まる。青物・コブダイの名所で、チヌのフカセ釣り、シーバスのルアー、投げ釣りでカワハギ・カレイ、エギングでアオリイカと魚種が非常に豊富。",
-    latitude: 34.47280, longitude: 134.921200,
+    latitude: 34.432445, longitude: 134.916949,
     address: "〒656-2133 兵庫県淡路市志筑新浜",
     accessInfo: "神戸淡路鳴門自動車道津名一宮ICから約10分。",
     region: lr("r405"), spotType: "port", difficulty: "beginner",
@@ -1028,7 +1028,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
   {
     id: "sh030", name: "佐津漁港", slug: "satsu-gyoko",
     description: "香美町佐津の小さな漁港。佐津海水浴場に隣接し、夏は海水浴と釣りを同時に楽しめる。堤防からのサビキでアジ・キス、投げ釣りでシロギスの実績が高い。秋にはアオリイカのエギングポイントとしても知られる穴場的存在。",
-    latitude: 35.64420, longitude: 134.671200,
+    latitude: 35.656074, longitude: 134.692925,
     address: "〒669-6402 兵庫県香美町香住区訓谷",
     accessInfo: "JR「佐津」駅から徒歩約15分。山陰近畿自動車道香住ICから約10分。",
     region: lr("r407"), spotType: "port", difficulty: "beginner",
@@ -1119,7 +1119,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
   {
     id: "sh033", name: "津居山港", slug: "tsuiyama-port",
     description: "豊岡市津居山にある日本海側の漁港。津居山ガニ（松葉ガニのブランド）の水揚げ港として有名。堤防からサビキでアジ・サバ、投げ釣りでキス・カレイが狙え、秋にはサゴシ・ハマチなどの青物も回遊する実力派の釣り場。",
-    latitude: 35.64780, longitude: 134.821200,
+    latitude: 35.64733, longitude: 134.831748,
     address: "〒669-6121 兵庫県豊岡市津居山248",
     accessInfo: "JR「城崎温泉」駅から車で約10分。北近畿豊岡自動車道日高神鍋高原ICから約35分。",
     region: lr("r408"), spotType: "port", difficulty: "beginner",
@@ -1208,7 +1208,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
   {
     id: "sh036", name: "諸寄漁港", slug: "moroyose-gyoko",
     description: "新温泉町の小さな漁港。但馬御火浦（天然記念物）に近い風光明媚なロケーション。堤防からサビキでアジ・イワシ、投げ釣りでキスが楽しめる。秋のエギングでアオリイカも人気の穴場スポット。温泉町「湯村温泉」にも近い。",
-    latitude: 35.6330, longitude: 134.4670,
+    latitude: 35.629898, longitude: 134.430625,
     address: "〒669-6753 兵庫県新温泉町諸寄",
     accessInfo: "JR「諸寄」駅から徒歩約10分。北近畿豊岡自動車道浜坂ICから約5分。",
     region: lr("r409"), spotType: "port", difficulty: "beginner",
@@ -1261,7 +1261,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
   {
     id: "sh038", name: "釜屋漁港（三尾）", slug: "kamaya-gyoko-mio",
     description: "香美町三尾地区の小さな漁港。余部鉄橋（余部橋梁）の近くに位置し、観光と釣りを兼ねた訪問が可能。日本海の荒磯に囲まれた港で、グレ・チヌのフカセ釣り、根魚の穴釣りが好調。秋のアオリイカのシーズンは特に人気。",
-    latitude: 35.6460, longitude: 134.5460,
+    latitude: 35.618827, longitude: 134.413436,
     address: "〒669-6715 兵庫県新温泉町三尾",
     accessInfo: "JR「鎧」駅から徒歩約20分。山陰近畿自動車道香住ICから約15分。",
     region: lr("r409"), spotType: "port", difficulty: "intermediate",

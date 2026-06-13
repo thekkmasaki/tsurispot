@@ -1,0 +1,3385 @@
+{
+  "appliedAt": "2026-06-12T21:26:46.815Z",
+  "apply": true,
+  "applied": [
+    {
+      "slug": "akabane-ko-teibo",
+      "name": "赤羽根港堤防",
+      "file": "spots-aichi-fukuoka-hiroshima.ts",
+      "newLat": 34.600753,
+      "newLng": 137.18909,
+      "movedKm": 4.11,
+      "source": "overpass-water: OSM:赤羽根港東防波堤灯台",
+      "confidence": "high"
+    },
+    {
+      "slug": "ainan-yura-hanto",
+      "name": "愛南町由良半島",
+      "file": "spots-chugoku-kyushu-okinawa-add3.ts",
+      "newLat": 33.056729,
+      "newLng": 132.422878,
+      "movedKm": 15.47,
+      "source": "gsi-exact: 由良半島",
+      "confidence": "high"
+    },
+    {
+      "slug": "hashihama-port",
+      "name": "波止浜港",
+      "file": "spots-additional-chugoku-shikoku.ts",
+      "newLat": 34.10956,
+      "newLng": 132.969087,
+      "movedKm": 4.41,
+      "source": "overpass-water: OSM:波止浜港",
+      "confidence": "high"
+    },
+    {
+      "slug": "isozaki-kou",
+      "name": "磯崎港",
+      "file": "spots-add5-east2.ts",
+      "newLat": 36.385725,
+      "newLng": 140.624633,
+      "movedKm": 2.13,
+      "source": "gsi-exact: 磯崎",
+      "confidence": "high"
+    },
+    {
+      "slug": "kashima-port",
+      "name": "鹿島港",
+      "file": "spots-kanto-detail.ts",
+      "newLat": 35.915458,
+      "newLng": 140.676151,
+      "movedKm": 3.52,
+      "source": "gsi-exact: 鹿島港",
+      "confidence": "high"
+    },
+    {
+      "slug": "kawajiri-kou",
+      "name": "川尻港",
+      "file": "spots-add5-east2.ts",
+      "newLat": 36.649774,
+      "newLng": 140.700484,
+      "movedKm": 2.62,
+      "source": "gsi-exact: 川尻港",
+      "confidence": "high"
+    },
+    {
+      "slug": "nakaminato-ko-add2",
+      "name": "那珂湊港（那珂湊漁港）",
+      "file": "spots-kanto-koshinetsu-add2.ts",
+      "newLat": 36.338737,
+      "newLng": 140.599786,
+      "movedKm": 1.22,
+      "source": "overpass-water: OSM:那珂湊港",
+      "confidence": "high"
+    },
+    {
+      "slug": "ootsu-gyokou-ibaraki6",
+      "name": "大津漁港",
+      "file": "spots-add6-east.ts",
+      "newLat": 36.825643,
+      "newLng": 140.78414,
+      "movedKm": 3.4,
+      "source": "overpass-water: OSM:大津港",
+      "confidence": "high"
+    },
+    {
+      "slug": "ose-kou",
+      "name": "会瀬港",
+      "file": "spots-kanto-koshinetsu-add3.ts",
+      "newLat": 36.578233,
+      "newLng": 140.660053,
+      "movedKm": 2.7,
+      "source": "overpass-water: OSM:会瀬漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "maeshima-okayama-w6",
+      "name": "前島",
+      "file": "spots-add6-west.ts",
+      "newLat": 34.607961,
+      "newLng": 134.183347,
+      "movedKm": 4.19,
+      "source": "gsi-exact: 前島",
+      "confidence": "high"
+    },
+    {
+      "slug": "obatake-gyokou-okayama-w6",
+      "name": "大畠漁港",
+      "file": "spots-add6-west.ts",
+      "newLat": 34.434317,
+      "newLng": 133.816615,
+      "movedKm": 35.99,
+      "source": "gsi-exact: 大畠",
+      "confidence": "high"
+    },
+    {
+      "slug": "setouchi-mushiake-port",
+      "name": "瀬戸内市虫明漁港",
+      "file": "spots-chugoku-shikoku-kyushu-add2.ts",
+      "newLat": 34.683895,
+      "newLng": 134.213639,
+      "movedKm": 7.99,
+      "source": "overpass-water: OSM:虫明漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "tamano-shibukawa-beach",
+      "name": "玉野市渋川海岸",
+      "file": "spots-chugoku-shikoku-kyushu-add2.ts",
+      "newLat": 34.454699,
+      "newLng": 133.90335,
+      "movedKm": 2.45,
+      "source": "overpass-water: OSM:渋川海岸",
+      "confidence": "high"
+    },
+    {
+      "slug": "yorishima-gyokou-w6",
+      "name": "寄島漁港",
+      "file": "spots-add6-west.ts",
+      "newLat": 34.473192,
+      "newLng": 133.596119,
+      "movedKm": 5.09,
+      "source": "gsi-exact: 寄島",
+      "confidence": "high"
+    },
+    {
+      "slug": "yorishima-kou-c8",
+      "name": "寄島港",
+      "file": "spots-add8-chugoku-shikoku.ts",
+      "newLat": 34.473192,
+      "newLng": 133.596119,
+      "movedKm": 4.33,
+      "source": "gsi-exact: 寄島",
+      "confidence": "high"
+    },
+    {
+      "slug": "yorishima-mitsuyama-kou",
+      "name": "寄島・三ツ山港",
+      "file": "spots-expand-west.ts",
+      "newLat": 34.473192,
+      "newLng": 133.596119,
+      "movedKm": 5.06,
+      "source": "gsi-exact: 寄島",
+      "confidence": "high"
+    },
+    {
+      "slug": "awase-gyokou-okinawa-w6",
+      "name": "沖縄市・泡瀬漁港",
+      "file": "spots-add6-west.ts",
+      "newLat": 26.31629,
+      "newLng": 127.830307,
+      "movedKm": 1.84,
+      "source": "overpass-name: OSM:泡瀬",
+      "confidence": "high"
+    },
+    {
+      "slug": "ginowan-marina",
+      "name": "宜野湾マリーナ",
+      "file": "spots-additional-okinawa.ts",
+      "newLat": 26.277732,
+      "newLng": 127.729564,
+      "movedKm": 2.44,
+      "source": "overpass-water: OSM:宜野湾港マリーナ",
+      "confidence": "high"
+    },
+    {
+      "slug": "heshikiya-gyokou-uruma-w6",
+      "name": "うるま・平敷屋漁港",
+      "file": "spots-add6-west.ts",
+      "newLat": 26.30719,
+      "newLng": 127.922707,
+      "movedKm": 5.61,
+      "source": "overpass-water: OSM:平敷屋",
+      "confidence": "high"
+    },
+    {
+      "slug": "hirara-kou-miyako-w6",
+      "name": "宮古島・平良港",
+      "file": "spots-add6-west.ts",
+      "newLat": 24.81815,
+      "newLng": 125.267805,
+      "movedKm": 3.36,
+      "source": "gsi-exact: 平良港",
+      "confidence": "high"
+    },
+    {
+      "slug": "kaneshiro-kou-kumejima-w6",
+      "name": "久米島・兼城港",
+      "file": "spots-add6-west.ts",
+      "newLat": 26.335392,
+      "newLng": 126.754959,
+      "movedKm": 1.58,
+      "source": "gsi-exact: 兼城港",
+      "confidence": "high"
+    },
+    {
+      "slug": "kin-gyokou-w6",
+      "name": "金武・金武漁港",
+      "file": "spots-add6-west.ts",
+      "newLat": 26.437912,
+      "newLng": 127.94873,
+      "movedKm": 3.16,
+      "source": "overpass-water: OSM:金武岬",
+      "confidence": "high"
+    },
+    {
+      "slug": "miyakojima-hirara-port",
+      "name": "宮古島平良港",
+      "file": "spots-south-kyushu-detail.ts",
+      "newLat": 24.81815,
+      "newLng": 125.267805,
+      "movedKm": 3.05,
+      "source": "gsi-exact: 平良港",
+      "confidence": "high"
+    },
+    {
+      "slug": "nanjo-oku-island",
+      "name": "南城市奥武島",
+      "file": "spots-okinawa.ts",
+      "newLat": 26.129628,
+      "newLng": 127.773028,
+      "movedKm": 3.73,
+      "source": "gsi-exact: 奥武島",
+      "confidence": "high"
+    },
+    {
+      "slug": "sarahama-port",
+      "name": "佐良浜港",
+      "file": "spots-south-kyushu-detail.ts",
+      "newLat": 24.838345,
+      "newLng": 125.214321,
+      "movedKm": 1.17,
+      "source": "overpass-water: OSM:佐良浜",
+      "confidence": "high"
+    },
+    {
+      "slug": "fudai-gyokou6",
+      "name": "普代漁港",
+      "file": "spots-add6-east.ts",
+      "newLat": 40.015532,
+      "newLng": 141.89998,
+      "movedKm": 2.33,
+      "source": "gsi-poi: 普代浜",
+      "confidence": "high"
+    },
+    {
+      "slug": "funakoshi-gyokou6",
+      "name": "船越漁港",
+      "file": "spots-add6-east.ts",
+      "newLat": 39.414644,
+      "newLng": 142.010496,
+      "movedKm": 4.18,
+      "source": "gsi-exact: 船越",
+      "confidence": "high"
+    },
+    {
+      "slug": "iwaizumi-omoto-gyokou6",
+      "name": "岩泉小本漁港",
+      "file": "spots-add6-east.ts",
+      "newLat": 39.847295,
+      "newLng": 141.976345,
+      "movedKm": 5.44,
+      "source": "gsi-exact: 小本港",
+      "confidence": "high"
+    },
+    {
+      "slug": "iwaizumi-omoto-kou",
+      "name": "岩泉 小本港",
+      "file": "spots-add5-east3.ts",
+      "newLat": 39.847295,
+      "newLng": 141.976345,
+      "movedKm": 11.2,
+      "source": "gsi-exact: 小本港",
+      "confidence": "high"
+    },
+    {
+      "slug": "kuji-samuraihama-e8",
+      "name": "久慈侍浜海岸",
+      "file": "spots-add8-hokkaido-tohoku.ts",
+      "newLat": 40.178661,
+      "newLng": 141.828641,
+      "movedKm": 6.02,
+      "source": "gsi-poi: 小袖海岸",
+      "confidence": "medium"
+    },
+    {
+      "slug": "omoto-gyokou-e8",
+      "name": "小本漁港",
+      "file": "spots-add8-hokkaido-tohoku.ts",
+      "newLat": 39.847295,
+      "newLng": 141.976345,
+      "movedKm": 5.78,
+      "source": "gsi-exact: 小本港",
+      "confidence": "high"
+    },
+    {
+      "slug": "sakihama-gyoko",
+      "name": "崎浜漁港",
+      "file": "spots-hokkaido-tohoku-add2.ts",
+      "newLat": 39.104433,
+      "newLng": 141.86125,
+      "movedKm": 12.55,
+      "source": "gsi-poi: 崎浜簡易郵便局",
+      "confidence": "high"
+    },
+    {
+      "slug": "sakiyama-gyokou6",
+      "name": "崎山漁港",
+      "file": "spots-add6-east.ts",
+      "newLat": 39.687035,
+      "newLng": 141.98752,
+      "movedKm": 4.36,
+      "source": "gsi-exact: 崎山",
+      "confidence": "high"
+    },
+    {
+      "slug": "taro-gyokou6",
+      "name": "田老漁港",
+      "file": "spots-add6-east.ts",
+      "newLat": 39.753545,
+      "newLng": 141.99982,
+      "movedKm": 3.89,
+      "source": "gsi-exact: 田老",
+      "confidence": "high"
+    },
+    {
+      "slug": "yoshihama-gyokou6",
+      "name": "吉浜漁港",
+      "file": "spots-add6-east.ts",
+      "newLat": 39.144469,
+      "newLng": 141.838167,
+      "movedKm": 2.91,
+      "source": "gsi-poi: 吉浜川",
+      "confidence": "medium"
+    },
+    {
+      "slug": "aburatsu-kou-nichinan",
+      "name": "日南市油津港",
+      "file": "spots-add5-west.ts",
+      "newLat": 31.568995,
+      "newLng": 131.401506,
+      "movedKm": 1.19,
+      "source": "gsi-exact: 油津港",
+      "confidence": "high"
+    },
+    {
+      "slug": "kayoihama-kawaminami-w6",
+      "name": "川南・通浜海岸",
+      "file": "spots-add6-west.ts",
+      "newLat": 32.172731,
+      "newLng": 131.549469,
+      "movedKm": 3.16,
+      "source": "gsi-poi: 川南港簡易郵便局",
+      "confidence": "high"
+    },
+    {
+      "slug": "kushima-toimisaki-iso",
+      "name": "串間市都井岬磯",
+      "file": "spots-add4-kyushu-okinawa.ts",
+      "newLat": 31.367389,
+      "newLng": 131.345806,
+      "movedKm": 1.5,
+      "source": "overpass-water: OSM:都井岬灯台",
+      "confidence": "high"
+    },
+    {
+      "slug": "mimitsu-gyokou",
+      "name": "美々津漁港",
+      "file": "spots-expand-kyushu.ts",
+      "newLat": 32.333676,
+      "newLng": 131.620488,
+      "movedKm": 3.85,
+      "source": "gsi-exact: 美々津港",
+      "confidence": "high"
+    },
+    {
+      "slug": "mimitsu-kou-w6",
+      "name": "日向・美々津港",
+      "file": "spots-add6-west.ts",
+      "newLat": 32.333676,
+      "newLng": 131.620488,
+      "movedKm": 5.5,
+      "source": "gsi-exact: 美々津港",
+      "confidence": "high"
+    },
+    {
+      "slug": "miyazaki-kadogawa-iorigawa-port-bulk",
+      "name": "門川・庵川港",
+      "file": "spots-bulk-kyushu-e.ts",
+      "newLat": 32.483464,
+      "newLng": 131.663712,
+      "movedKm": 2.96,
+      "source": "gsi-poi: 門川海浜総合公園",
+      "confidence": "high"
+    },
+    {
+      "slug": "miyazaki-kitaura-furue-port-bulk",
+      "name": "延岡・北浦古江港",
+      "file": "spots-bulk-kyushu-e.ts",
+      "newLat": 32.522677,
+      "newLng": 131.692629,
+      "movedKm": 22.48,
+      "source": "gsi-poi: 延岡新港",
+      "confidence": "high"
+    },
+    {
+      "slug": "miyazaki-nango-port-bulk",
+      "name": "日南・南郷目井津港",
+      "file": "spots-bulk-kyushu-e.ts",
+      "newLat": 31.772872,
+      "newLng": 131.481437,
+      "movedKm": 30.45,
+      "source": "gsi-poi: 日南海岸",
+      "confidence": "high"
+    },
+    {
+      "slug": "miyazaki-sumie-port-bulk",
+      "name": "延岡・須美江漁港",
+      "file": "spots-bulk-kyushu-e.ts",
+      "newLat": 32.522677,
+      "newLng": 131.692629,
+      "movedKm": 30.14,
+      "source": "gsi-poi: 延岡新港",
+      "confidence": "high"
+    },
+    {
+      "slug": "naoumi-gyokou-w6",
+      "name": "北浦・直海漁港",
+      "file": "spots-add6-west.ts",
+      "newLat": 32.694935,
+      "newLng": 131.834071,
+      "movedKm": 7.89,
+      "source": "overpass-water: OSM:北浦港宮野浦東防波堤灯台",
+      "confidence": "high"
+    },
+    {
+      "slug": "nichinan-aburatsu-port",
+      "name": "日南油津港",
+      "file": "spots-additional-kyushu.ts",
+      "newLat": 31.568995,
+      "newLng": 131.401506,
+      "movedKm": 1.88,
+      "source": "gsi-exact: 油津港",
+      "confidence": "high"
+    },
+    {
+      "slug": "nobeoka-shimanoura-s8",
+      "name": "延岡・島浦島",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 32.522677,
+      "newLng": 131.692629,
+      "movedKm": 14.24,
+      "source": "gsi-poi: 延岡新港",
+      "confidence": "high"
+    },
+    {
+      "slug": "obi-kou-nichinan-w6",
+      "name": "日南・飫肥港",
+      "file": "spots-add6-west.ts",
+      "newLat": 31.772872,
+      "newLng": 131.481437,
+      "movedKm": 19.07,
+      "source": "gsi-poi: 日南海岸",
+      "confidence": "high"
+    },
+    {
+      "slug": "otoshima-kadogawa-w6",
+      "name": "門川・乙島",
+      "file": "spots-add6-west.ts",
+      "newLat": 32.467372,
+      "newLng": 131.668378,
+      "movedKm": 3.79,
+      "source": "gsi-exact: 乙島",
+      "confidence": "high"
+    },
+    {
+      "slug": "shimanour-nobeoka-w6",
+      "name": "延岡・島野浦",
+      "file": "spots-add6-west.ts",
+      "newLat": 32.522677,
+      "newLng": 131.692629,
+      "movedKm": 17.68,
+      "source": "gsi-poi: 延岡新港",
+      "confidence": "high"
+    },
+    {
+      "slug": "tomita-fishing-port",
+      "name": "富田漁港",
+      "file": "spots-south-kyushu-detail.ts",
+      "newLat": 32.061031,
+      "newLng": 131.508215,
+      "movedKm": 9.09,
+      "source": "gsi-poi: 富田浜入江",
+      "confidence": "medium"
+    },
+    {
+      "slug": "totoro-kou-nobeoka-w6",
+      "name": "延岡・土々呂港",
+      "file": "spots-add6-west.ts",
+      "newLat": 32.522677,
+      "newLng": 131.692629,
+      "movedKm": 3.07,
+      "source": "gsi-poi: 延岡新港",
+      "confidence": "high"
+    },
+    {
+      "slug": "uchiumi-kou-miyazaki",
+      "name": "内海港",
+      "file": "spots-expand-kyushu.ts",
+      "newLat": 31.756815,
+      "newLng": 131.473253,
+      "movedKm": 3.38,
+      "source": "gsi-exact: 内海港",
+      "confidence": "high"
+    },
+    {
+      "slug": "hamaguri-hama6",
+      "name": "蛤浜",
+      "file": "spots-add6-east.ts",
+      "newLat": 38.404336,
+      "newLng": 141.409847,
+      "movedKm": 3.75,
+      "source": "gsi-exact: 蛤浜",
+      "confidence": "high"
+    },
+    {
+      "slug": "ishinomaki-gyoko",
+      "name": "石巻漁港",
+      "file": "spots-tohoku.ts",
+      "newLat": 38.416013,
+      "newLng": 141.311881,
+      "movedKm": 1.03,
+      "source": "gsi-poi: 石巻港（内港）",
+      "confidence": "medium"
+    },
+    {
+      "slug": "ogatsu-gyokou6",
+      "name": "雄勝漁港",
+      "file": "spots-add6-east.ts",
+      "newLat": 38.504466,
+      "newLng": 141.495948,
+      "movedKm": 3.33,
+      "source": "gsi-exact: 雄勝港",
+      "confidence": "high"
+    },
+    {
+      "slug": "ogatsu-kou",
+      "name": "雄勝港",
+      "file": "spots-add5-east2.ts",
+      "newLat": 38.504466,
+      "newLng": 141.495948,
+      "movedKm": 3.69,
+      "source": "gsi-exact: 雄勝港",
+      "confidence": "high"
+    },
+    {
+      "slug": "ooya-kaigan6",
+      "name": "大谷海岸",
+      "file": "spots-add6-east.ts",
+      "newLat": 38.813248,
+      "newLng": 141.562332,
+      "movedKm": 0.97,
+      "source": "gsi-exact: 大谷海岸",
+      "confidence": "high"
+    },
+    {
+      "slug": "shobuta-kaigan-e8",
+      "name": "菖蒲田海水浴場",
+      "file": "spots-add8-hokkaido-tohoku.ts",
+      "newLat": 38.292216,
+      "newLng": 141.068223,
+      "movedKm": 1.86,
+      "source": "gsi-poi: 菖蒲田浜",
+      "confidence": "high"
+    },
+    {
+      "slug": "shobutada-beach",
+      "name": "菖蒲田海岸",
+      "file": "spots-base.ts",
+      "newLat": 38.292216,
+      "newLng": 141.068223,
+      "movedKm": 1.69,
+      "source": "gsi-poi: 菖蒲田浜",
+      "confidence": "high"
+    },
+    {
+      "slug": "utatsu-gyokou6",
+      "name": "歌津漁港",
+      "file": "spots-add6-east.ts",
+      "newLat": 38.699356,
+      "newLng": 141.521718,
+      "movedKm": 3.27,
+      "source": "gsi-exact: 歌津",
+      "confidence": "high"
+    },
+    {
+      "slug": "amino-gyokou-k8",
+      "name": "網野漁港",
+      "file": "spots-add8-kinki.ts",
+      "newLat": 35.691381,
+      "newLng": 134.994522,
+      "movedKm": 1.36,
+      "source": "gsi-poi: 網野町磯",
+      "confidence": "medium"
+    },
+    {
+      "slug": "amino-kou",
+      "name": "網野港",
+      "file": "spots-add4-chubu-kinki.ts",
+      "newLat": 35.693371,
+      "newLng": 135.029777,
+      "movedKm": 2.73,
+      "source": "gsi-poi: 網野町小浜",
+      "confidence": "medium"
+    },
+    {
+      "slug": "kurida-gyokou-kyoto",
+      "name": "栗田漁港",
+      "file": "spots-add5-central.ts",
+      "newLat": 35.55055,
+      "newLng": 135.240777,
+      "movedKm": 4.44,
+      "source": "overpass-water: OSM:栗田漁港(中津)",
+      "confidence": "high"
+    },
+    {
+      "slug": "nakahama-gyoko",
+      "name": "中浜漁港",
+      "file": "spots-kitakinki.ts",
+      "newLat": 35.759888,
+      "newLng": 135.181511,
+      "movedKm": 9.37,
+      "source": "overpass-water: OSM:中浜海水浴場",
+      "confidence": "high"
+    },
+    {
+      "slug": "niizaki-gyoko",
+      "name": "新井崎漁港",
+      "file": "spots-kitakinki.ts",
+      "newLat": 35.6937,
+      "newLng": 135.308528,
+      "movedKm": 3.5,
+      "source": "gsi-exact: 新井崎",
+      "confidence": "high"
+    },
+    {
+      "slug": "tai-port-maizuru",
+      "name": "田井漁港",
+      "file": "spots-osaka-kinki.ts",
+      "newLat": 35.582655,
+      "newLng": 135.228806,
+      "movedKm": 20.95,
+      "source": "overpass-water: OSM:田井宮津ヨットハーバー",
+      "confidence": "high"
+    },
+    {
+      "slug": "amakusa-oe-kou-s8",
+      "name": "天草・大江港",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 32.448512,
+      "newLng": 130.418318,
+      "movedKm": 39.59,
+      "source": "gsi-poi: 上天草港（永目）",
+      "confidence": "high"
+    },
+    {
+      "slug": "goshoura-kou-w6",
+      "name": "天草・御所浦港",
+      "file": "spots-add6-west.ts",
+      "newLat": 32.448512,
+      "newLng": 130.418318,
+      "movedKm": 8.14,
+      "source": "gsi-poi: 上天草港（永目）",
+      "confidence": "high"
+    },
+    {
+      "slug": "hishima-gyokou",
+      "name": "樋島漁港",
+      "file": "spots-add4-kyushu-okinawa.ts",
+      "newLat": 32.395385,
+      "newLng": 130.405686,
+      "movedKm": 9.32,
+      "source": "gsi-poi: 上天草港（樋島）",
+      "confidence": "high"
+    },
+    {
+      "slug": "kamiamakusa-himedo-kou-s8",
+      "name": "上天草・姫戸港",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 32.436216,
+      "newLng": 130.415164,
+      "movedKm": 5.45,
+      "source": "gsi-exact: 姫戸港",
+      "confidence": "high"
+    },
+    {
+      "slug": "kamiamakusa-ryugatake-kou-s8",
+      "name": "上天草・龍ヶ岳港",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 32.386518,
+      "newLng": 130.366835,
+      "movedKm": 8.02,
+      "source": "gsi-poi: 上天草港（大道）",
+      "confidence": "medium"
+    },
+    {
+      "slug": "kumamoto-kamiamakusa-iwajima-bulk",
+      "name": "上天草・維和島港",
+      "file": "spots-bulk-kyushu-w.ts",
+      "newLat": 32.550196,
+      "newLng": 130.440287,
+      "movedKm": 3.33,
+      "source": "gsi-poi: 上天草港（柳）",
+      "confidence": "medium"
+    },
+    {
+      "slug": "kumamoto-kamiamakusa-naka-bulk",
+      "name": "上天草・中港",
+      "file": "spots-bulk-kyushu-w.ts",
+      "newLat": 32.550196,
+      "newLng": 130.440287,
+      "movedKm": 2.07,
+      "source": "gsi-poi: 上天草港（柳）",
+      "confidence": "medium"
+    },
+    {
+      "slug": "kumamoto-minamata-yudo-bulk",
+      "name": "水俣・湯堂港",
+      "file": "spots-bulk-kyushu-w.ts",
+      "newLat": 32.192617,
+      "newLng": 130.374313,
+      "movedKm": 8.4,
+      "source": "gsi-poi: 水俣港",
+      "confidence": "medium"
+    },
+    {
+      "slug": "kumamoto-minamata-yunoko-fishingpark-bulk",
+      "name": "水俣・湯の児フィッシングパーク",
+      "file": "spots-bulk-kyushu-w.ts",
+      "newLat": 32.271447,
+      "newLng": 130.450539,
+      "movedKm": 5.5,
+      "source": "gsi-poi: 水俣警察署福浜駐在所",
+      "confidence": "medium"
+    },
+    {
+      "slug": "ouda-gyokou-uto-w6",
+      "name": "宇土・網田漁港",
+      "file": "spots-add6-west.ts",
+      "newLat": 32.662242,
+      "newLng": 130.522698,
+      "movedKm": 5.72,
+      "source": "gsi-poi: 道の駅「宇土マリーナ」",
+      "confidence": "high"
+    },
+    {
+      "slug": "shimoda-onsen-iso-w6",
+      "name": "天草・下田温泉磯",
+      "file": "spots-add6-west.ts",
+      "newLat": 32.448512,
+      "newLng": 130.418318,
+      "movedKm": 37.03,
+      "source": "gsi-poi: 上天草港（永目）",
+      "confidence": "high"
+    },
+    {
+      "slug": "uto-marina",
+      "name": "宇土マリーナ",
+      "file": "spots-expand-kyushu.ts",
+      "newLat": 32.662242,
+      "newLng": 130.522698,
+      "movedKm": 3.87,
+      "source": "gsi-poi: 道の駅「宇土マリーナ」",
+      "confidence": "high"
+    },
+    {
+      "slug": "uto-marina-gogan",
+      "name": "宇土マリーナ護岸",
+      "file": "spots-add4-kyushu-okinawa.ts",
+      "newLat": 32.662242,
+      "newLng": 130.522698,
+      "movedKm": 5.17,
+      "source": "gsi-poi: 道の駅「宇土マリーナ」",
+      "confidence": "high"
+    },
+    {
+      "slug": "uto-nagabeta-kaishouro-s8",
+      "name": "宇土・長部田海床路",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 32.662242,
+      "newLng": 130.522698,
+      "movedKm": 7.24,
+      "source": "gsi-poi: 道の駅「宇土マリーナ」",
+      "confidence": "high"
+    },
+    {
+      "slug": "akitsu-port-breakwater",
+      "name": "安芸津港堤防",
+      "file": "spots-kyushu-chugoku-detail.ts",
+      "newLat": 34.312599,
+      "newLng": 132.816152,
+      "movedKm": 2.93,
+      "source": "gsi-exact: 安芸津港",
+      "confidence": "high"
+    },
+    {
+      "slug": "etajima-kirikushi-teibo",
+      "name": "江田島市切串港堤防",
+      "file": "spots-chugoku-shikoku-kyushu-add2.ts",
+      "newLat": 34.284866,
+      "newLng": 132.475122,
+      "movedKm": 1.9,
+      "source": "overpass-water: OSM:切串",
+      "confidence": "high"
+    },
+    {
+      "slug": "innoshima-habu-kou-soto",
+      "name": "因島・土生港外堤防",
+      "file": "spots-add4-chugoku-shikoku.ts",
+      "newLat": 34.34325,
+      "newLng": 133.17625,
+      "movedKm": 4.65,
+      "source": "gsi-poi: 因島大浜郵便局",
+      "confidence": "high"
+    },
+    {
+      "slug": "innoshima-ohama-gyokou",
+      "name": "因島大浜漁港",
+      "file": "spots-add5-west.ts",
+      "newLat": 34.34325,
+      "newLng": 133.17625,
+      "movedKm": 3.54,
+      "source": "gsi-poi: 因島大浜郵便局",
+      "confidence": "high"
+    },
+    {
+      "slug": "karuga-kaihin-gokan",
+      "name": "狩留賀海浜公園護岸",
+      "file": "spots-aichi-fukuoka-hiroshima.ts",
+      "newLat": 34.261787,
+      "newLng": 132.516983,
+      "movedKm": 2.37,
+      "source": "gsi-exact: 狩留賀海浜公園",
+      "confidence": "high"
+    },
+    {
+      "slug": "kure-portopia-gokan",
+      "name": "呉ポートピアパーク護岸",
+      "file": "spots-aichi-fukuoka-hiroshima.ts",
+      "newLat": 34.292894,
+      "newLng": 132.511503,
+      "movedKm": 2.48,
+      "source": "gsi-exact: 呉ポートピアパーク",
+      "confidence": "high"
+    },
+    {
+      "slug": "mukaishima-hishio-c8",
+      "name": "向島・干汐海岸",
+      "file": "spots-add8-chugoku-shikoku.ts",
+      "newLat": 34.403438,
+      "newLng": 133.193746,
+      "movedKm": 3.06,
+      "source": "overpass-water: OSM:駅前桟橋(向島運航)",
+      "confidence": "high"
+    },
+    {
+      "slug": "osakikamijima-shirami-kou",
+      "name": "大崎上島・白水港",
+      "file": "spots-add4-chugoku-shikoku.ts",
+      "newLat": 34.269461,
+      "newLng": 132.914062,
+      "movedKm": 1.28,
+      "source": "overpass-water: OSM:白水港",
+      "confidence": "high"
+    },
+    {
+      "slug": "otake-kou-c8",
+      "name": "大竹港",
+      "file": "spots-add8-chugoku-shikoku.ts",
+      "newLat": 34.235431,
+      "newLng": 132.236047,
+      "movedKm": 2.45,
+      "source": "gsi-exact: 大竹港",
+      "confidence": "high"
+    },
+    {
+      "slug": "takehara-port-breakwater",
+      "name": "竹原港堤防",
+      "file": "spots-kyushu-chugoku-detail.ts",
+      "newLat": 34.328316,
+      "newLng": 132.914389,
+      "movedKm": 1.23,
+      "source": "gsi-exact: 竹原港",
+      "confidence": "high"
+    },
+    {
+      "slug": "tenno-shore",
+      "name": "天応護岸",
+      "file": "spots-kyushu-chugoku-detail.ts",
+      "newLat": 34.288051,
+      "newLng": 132.515663,
+      "movedKm": 1.64,
+      "source": "gsi-poi: 天応大浜二丁目",
+      "confidence": "medium"
+    },
+    {
+      "slug": "nio-marina-gokan",
+      "name": "仁尾マリーナ護岸",
+      "file": "spots-chugoku-shikoku-kyushu-add2.ts",
+      "newLat": 34.352723,
+      "newLng": 134.042975,
+      "movedKm": 40.15,
+      "source": "overpass-water: OSM:高松マリーナ",
+      "confidence": "high"
+    },
+    {
+      "slug": "shodoshima-fukuda-kou",
+      "name": "小豆島・福田港堤防",
+      "file": "spots-add4-chugoku-shikoku.ts",
+      "newLat": 34.481707,
+      "newLng": 134.194722,
+      "movedKm": 12.49,
+      "source": "gsi-exact: 小豆島",
+      "confidence": "high"
+    },
+    {
+      "slug": "shodoshima-fukuda-port",
+      "name": "小豆島福田港",
+      "file": "spots-chugoku-shikoku-kyushu-add2.ts",
+      "newLat": 34.543382,
+      "newLng": 134.347536,
+      "movedKm": 2.43,
+      "source": "overpass-water: OSM:福田漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "shodoshima-ikeda-port",
+      "name": "小豆島池田港",
+      "file": "spots-chugoku-shikoku-kyushu-add2.ts",
+      "newLat": 34.4763,
+      "newLng": 134.226874,
+      "movedKm": 3.28,
+      "source": "gsi-exact: 池田港",
+      "confidence": "high"
+    },
+    {
+      "slug": "shodoshima-kusakabe-port",
+      "name": "小豆島草壁港",
+      "file": "spots-chugoku-shikoku-kyushu-add2.ts",
+      "newLat": 34.478747,
+      "newLng": 134.298992,
+      "movedKm": 4.69,
+      "source": "overpass-water: OSM:草壁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "shodoshima-ookadohana-gogan",
+      "name": "小豆島・大角鼻護岸",
+      "file": "spots-add4-chugoku-shikoku.ts",
+      "newLat": 34.481707,
+      "newLng": 134.194722,
+      "movedKm": 8.1,
+      "source": "gsi-exact: 小豆島",
+      "confidence": "high"
+    },
+    {
+      "slug": "takuma-port",
+      "name": "詫間港",
+      "file": "spots-shikoku.ts",
+      "newLat": 34.239837,
+      "newLng": 133.648143,
+      "movedKm": 1.91,
+      "source": "gsi-exact: 詫間港",
+      "confidence": "high"
+    },
+    {
+      "slug": "tsuda-matsubara-kagawa",
+      "name": "津田の松原海岸",
+      "file": "spots-add5-west.ts",
+      "newLat": 34.287288,
+      "newLng": 134.253923,
+      "movedKm": 1.7,
+      "source": "gsi-exact: 津田の松原",
+      "confidence": "high"
+    },
+    {
+      "slug": "kaminokae-kou-w6",
+      "name": "中土佐・上ノ加江港",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.276448,
+      "newLng": 133.245287,
+      "movedKm": 6.25,
+      "source": "gsi-exact: 上ノ加江港",
+      "confidence": "high"
+    },
+    {
+      "slug": "kochi-muroto-misaki-gyokou-bulk",
+      "name": "室戸市・室戸岬漁港",
+      "file": "spots-bulk-shikoku.ts",
+      "newLat": 33.24358,
+      "newLng": 134.176834,
+      "movedKm": 5.24,
+      "source": "overpass-water: OSM:室戸岬",
+      "confidence": "high"
+    },
+    {
+      "slug": "kochi-nakatosa-kure-bulk",
+      "name": "中土佐町・久礼港",
+      "file": "spots-bulk-shikoku.ts",
+      "newLat": 33.326354,
+      "newLng": 133.238945,
+      "movedKm": 2.82,
+      "source": "gsi-exact: 久礼港",
+      "confidence": "high"
+    },
+    {
+      "slug": "kochi-susaki-uranouchi-bulk",
+      "name": "須崎市・浦ノ内湾",
+      "file": "spots-bulk-shikoku.ts",
+      "newLat": 33.425466,
+      "newLng": 133.383808,
+      "movedKm": 3.57,
+      "source": "gsi-exact: 浦ノ内湾",
+      "confidence": "high"
+    },
+    {
+      "slug": "kochi-tosashimizu-port-bulk",
+      "name": "土佐清水市・清水港",
+      "file": "spots-bulk-shikoku.ts",
+      "newLat": 32.768786,
+      "newLng": 132.953082,
+      "movedKm": 2.09,
+      "source": "gsi-exact: 清水港",
+      "confidence": "high"
+    },
+    {
+      "slug": "kochi-toyo-ikumi-bulk",
+      "name": "東洋町・生見漁港",
+      "file": "spots-bulk-shikoku.ts",
+      "newLat": 33.525744,
+      "newLng": 134.283678,
+      "movedKm": 3.14,
+      "source": "overpass-water: OSM:生見サーフィンビーチ",
+      "confidence": "high"
+    },
+    {
+      "slug": "kure-kou-nakatosa-w6",
+      "name": "中土佐・久礼港",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.326354,
+      "newLng": 133.238945,
+      "movedKm": 2.76,
+      "source": "gsi-exact: 久礼港",
+      "confidence": "high"
+    },
+    {
+      "slug": "kuroshio-irino-port",
+      "name": "黒潮町入野漁港",
+      "file": "spots-shikoku.ts",
+      "newLat": 33.012538,
+      "newLng": 133.010949,
+      "movedKm": 1.51,
+      "source": "overpass-water: OSM:入野漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "nakatosa-kure-port",
+      "name": "中土佐町久礼漁港",
+      "file": "spots-shikoku.ts",
+      "newLat": 33.326354,
+      "newLng": 133.238945,
+      "movedKm": 2.97,
+      "source": "gsi-exact: 久礼港",
+      "confidence": "high"
+    },
+    {
+      "slug": "saga-kou-kuroshio-w6",
+      "name": "黒潮町・佐賀港",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.071279,
+      "newLng": 133.107729,
+      "movedKm": 3.5,
+      "source": "gsi-exact: 佐賀港",
+      "confidence": "high"
+    },
+    {
+      "slug": "shimanto-shimonokae-port",
+      "name": "四万十市下ノ加江漁港",
+      "file": "spots-shikoku.ts",
+      "newLat": 32.862024,
+      "newLng": 132.954748,
+      "movedKm": 7.74,
+      "source": "gsi-exact: 下ノ加江港",
+      "confidence": "high"
+    },
+    {
+      "slug": "shiwa-kou-shimanto-w6",
+      "name": "四万十町・志和港",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.22993,
+      "newLng": 133.251061,
+      "movedKm": 16.26,
+      "source": "overpass-water: OSM:志和漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "sukumo-bay",
+      "name": "宿毛湾",
+      "file": "spots-shikoku.ts",
+      "newLat": 32.920109,
+      "newLng": 132.696485,
+      "movedKm": 2.02,
+      "source": "overpass-water: OSM:宿毛湾港",
+      "confidence": "high"
+    },
+    {
+      "slug": "sukumo-gyokou-w5",
+      "name": "宿毛漁港",
+      "file": "spots-add5-west.ts",
+      "newLat": 32.920967,
+      "newLng": 132.695179,
+      "movedKm": 3.44,
+      "source": "gsi-poi: 四国地方整備局高知港湾・空港整備事務所宿毛湾港出張所",
+      "confidence": "medium"
+    },
+    {
+      "slug": "tosa-usa-port",
+      "name": "土佐市宇佐港",
+      "file": "spots-shikoku.ts",
+      "newLat": 33.441792,
+      "newLng": 133.447798,
+      "movedKm": 1.95,
+      "source": "overpass-water: OSM:宇佐漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "usa-kou-tosa-w6",
+      "name": "土佐市・宇佐港",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.441792,
+      "newLng": 133.447798,
+      "movedKm": 3.54,
+      "source": "overpass-water: OSM:宇佐漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "hoshika-gyokou",
+      "name": "星賀漁港",
+      "file": "spots-add4-kyushu-okinawa.ts",
+      "newLat": 33.448313,
+      "newLng": 129.788638,
+      "movedKm": 12.04,
+      "source": "gsi-exact: 星賀港",
+      "confidence": "high"
+    },
+    {
+      "slug": "karatsu-nishinohama-w6",
+      "name": "唐津・西ノ浜",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.455652,
+      "newLng": 129.967358,
+      "movedKm": 1.73,
+      "source": "gsi-exact: 西ノ浜",
+      "confidence": "high"
+    },
+    {
+      "slug": "kashima-hama-gyokou-w6",
+      "name": "鹿島・浜漁港",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.103904,
+      "newLng": 130.121569,
+      "movedKm": 2.66,
+      "source": "gsi-poi: 鹿島港",
+      "confidence": "high"
+    },
+    {
+      "slug": "nanatsugama-saga-w6",
+      "name": "七ツ釜",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.548963,
+      "newLng": 129.931958,
+      "movedKm": 5.25,
+      "source": "overpass-name: OSM:七ツ釜",
+      "confidence": "high"
+    },
+    {
+      "slug": "otomo-gyokou",
+      "name": "小友漁港",
+      "file": "spots-expand-kyushu.ts",
+      "newLat": 33.546759,
+      "newLng": 129.904291,
+      "movedKm": 12.05,
+      "source": "overpass-water: OSM:小友漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "saga-karatsu-minatohama-bulk",
+      "name": "唐津・湊浜漁港",
+      "file": "spots-bulk-kyushu-w.ts",
+      "newLat": 33.469644,
+      "newLng": 129.963617,
+      "movedKm": 5.83,
+      "source": "overpass-water: OSM:唐津フェリーターミナル",
+      "confidence": "high"
+    },
+    {
+      "slug": "saga-kashima-iida-bulk",
+      "name": "鹿島・飯田港",
+      "file": "spots-bulk-kyushu-w.ts",
+      "newLat": 33.103904,
+      "newLng": 130.121569,
+      "movedKm": 7.03,
+      "source": "gsi-poi: 鹿島港",
+      "confidence": "high"
+    },
+    {
+      "slug": "saga-tara-oura-bulk",
+      "name": "太良・大浦港",
+      "file": "spots-bulk-kyushu-w.ts",
+      "newLat": 32.981523,
+      "newLng": 130.21051,
+      "movedKm": 2.35,
+      "source": "gsi-exact: 大浦港",
+      "confidence": "high"
+    },
+    {
+      "slug": "tara-takezaki-kou-s8",
+      "name": "太良町・竹崎港",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 32.953774,
+      "newLng": 130.219841,
+      "movedKm": 8.52,
+      "source": "overpass-water: OSM:竹崎漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "furue-gyoko-owase",
+      "name": "古江漁港",
+      "file": "spots-wakayama-mie-niigata.ts",
+      "newLat": 33.928702,
+      "newLng": 136.145673,
+      "movedKm": 14.86,
+      "source": "gsi-exact: 古江",
+      "confidence": "high"
+    },
+    {
+      "slug": "gokasho-gyoko",
+      "name": "五ヶ所漁港",
+      "file": "spots-wakayama-mie-niigata.ts",
+      "newLat": 34.335123,
+      "newLng": 136.69951,
+      "movedKm": 5.7,
+      "source": "gsi-exact: 五ヶ所港",
+      "confidence": "high"
+    },
+    {
+      "slug": "matoya-ko-teibo",
+      "name": "的矢港堤防",
+      "file": "spots-tokai-detail.ts",
+      "newLat": 34.375146,
+      "newLng": 136.891423,
+      "movedKm": 5.07,
+      "source": "gsi-exact: 的矢港",
+      "confidence": "high"
+    },
+    {
+      "slug": "matoya-wan-mie",
+      "name": "的矢湾",
+      "file": "spots-add5-central.ts",
+      "newLat": 34.370788,
+      "newLng": 136.886548,
+      "movedKm": 4.98,
+      "source": "gsi-exact: 的矢湾",
+      "confidence": "high"
+    },
+    {
+      "slug": "nikishima-kou-k8",
+      "name": "二木島港",
+      "file": "spots-add8-kinki.ts",
+      "newLat": 33.937772,
+      "newLng": 136.183411,
+      "movedKm": 5.23,
+      "source": "gsi-exact: 二木島港",
+      "confidence": "high"
+    },
+    {
+      "slug": "owase-ko-teibo",
+      "name": "尾鷲港堤防",
+      "file": "spots-tokai-detail.ts",
+      "newLat": 34.073885,
+      "newLng": 136.203897,
+      "movedKm": 2.15,
+      "source": "gsi-exact: 尾鷲港",
+      "confidence": "high"
+    },
+    {
+      "slug": "agematsura-gyokou-suooshima",
+      "name": "周防大島 安下庄漁港",
+      "file": "spots-add5-west.ts",
+      "newLat": 33.886549,
+      "newLng": 132.277789,
+      "movedKm": 5.43,
+      "source": "gsi-exact: 安下庄港",
+      "confidence": "high"
+    },
+    {
+      "slug": "hagi-susa-port",
+      "name": "萩市須佐漁港",
+      "file": "spots-chugoku-shikoku-kyushu-add2.ts",
+      "newLat": 34.62698,
+      "newLng": 131.598033,
+      "movedKm": 8.66,
+      "source": "gsi-exact: 須佐港",
+      "confidence": "high"
+    },
+    {
+      "slug": "hikari-murozumi-port",
+      "name": "光市室積港堤防",
+      "file": "spots-kyushu-chugoku-detail.ts",
+      "newLat": 33.92167,
+      "newLng": 131.976876,
+      "movedKm": 4.61,
+      "source": "overpass-water: OSM:室積灯台",
+      "confidence": "high"
+    },
+    {
+      "slug": "omijima-kayoi-c8",
+      "name": "青海島・通漁港",
+      "file": "spots-add8-chugoku-shikoku.ts",
+      "newLat": 34.424674,
+      "newLng": 131.220249,
+      "movedKm": 2.83,
+      "source": "gsi-exact: 青海島",
+      "confidence": "high"
+    },
+    {
+      "slug": "suo-oshima-ihotata-port",
+      "name": "周防大島町伊保田漁港",
+      "file": "spots-chugoku-shikoku-kyushu-add2.ts",
+      "newLat": 33.945458,
+      "newLng": 132.442434,
+      "movedKm": 10.93,
+      "source": "gsi-exact: 伊保田港",
+      "confidence": "high"
+    },
+    {
+      "slug": "susa-gyokou-yamaguchi-w6",
+      "name": "須佐漁港",
+      "file": "spots-add6-west.ts",
+      "newLat": 34.62698,
+      "newLng": 131.598033,
+      "movedKm": 5.85,
+      "source": "gsi-exact: 須佐港",
+      "confidence": "high"
+    },
+    {
+      "slug": "yuu-kou-iwakuni-w6",
+      "name": "岩国・由宇港",
+      "file": "spots-add6-west.ts",
+      "newLat": 34.042323,
+      "newLng": 132.218927,
+      "movedKm": 17.04,
+      "source": "gsi-exact: 由宇港",
+      "confidence": "high"
+    },
+    {
+      "slug": "yuya-kou-w6",
+      "name": "油谷湾・油谷港",
+      "file": "spots-add6-west.ts",
+      "newLat": 34.385963,
+      "newLng": 131.014526,
+      "movedKm": 7.22,
+      "source": "gsi-exact: 油谷港",
+      "confidence": "high"
+    },
+    {
+      "slug": "bonotsu-akime-kou-s8",
+      "name": "坊津・秋目港",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 31.263085,
+      "newLng": 130.214811,
+      "movedKm": 7.54,
+      "source": "gsi-exact: 坊津",
+      "confidence": "high"
+    },
+    {
+      "slug": "hakamakoshi-kou-sakurajima-w6",
+      "name": "桜島・袴腰港",
+      "file": "spots-add6-west.ts",
+      "newLat": 31.592602,
+      "newLng": 130.600053,
+      "movedKm": 1.69,
+      "source": "overpass-water: OSM:桜島フェリー",
+      "confidence": "high"
+    },
+    {
+      "slug": "kagoshima-nagashima-port-bulk",
+      "name": "長島・明神鼻側（長島町）",
+      "file": "spots-bulk-kyushu-e.ts",
+      "newLat": 32.207436,
+      "newLng": 130.105391,
+      "movedKm": 6.79,
+      "source": "gsi-poi: 長島港（北方崎）",
+      "confidence": "medium"
+    },
+    {
+      "slug": "kaigata-gyokou-tarumizu-w6",
+      "name": "垂水・海潟漁港",
+      "file": "spots-add6-west.ts",
+      "newLat": 31.095183,
+      "newLng": 130.694431,
+      "movedKm": 40.8,
+      "source": "gsi-exact: 垂水",
+      "confidence": "medium"
+    },
+    {
+      "slug": "kuroshima-katatomari",
+      "name": "黒島（片泊港）",
+      "file": "spots-south-kyushu-detail.ts",
+      "newLat": 30.836279,
+      "newLng": 129.957727,
+      "movedKm": 0.86,
+      "source": "overpass-water: OSM:黒島・大里",
+      "confidence": "high"
+    },
+    {
+      "slug": "kushikino-terushima-kaigan-s8",
+      "name": "いちき串木野・照島海岸",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 31.703722,
+      "newLng": 130.277302,
+      "movedKm": 3.67,
+      "source": "gsi-exact: 照島海岸",
+      "confidence": "high"
+    },
+    {
+      "slug": "miyanoura-kou-yakushima-w6",
+      "name": "屋久島・宮之浦港",
+      "file": "spots-add6-west.ts",
+      "newLat": 30.43036,
+      "newLng": 130.577272,
+      "movedKm": 6.91,
+      "source": "gsi-exact: 宮之浦港",
+      "confidence": "high"
+    },
+    {
+      "slug": "nishinoomote-kou-w6",
+      "name": "種子島・西之表港",
+      "file": "spots-add6-west.ts",
+      "newLat": 30.73091,
+      "newLng": 130.984446,
+      "movedKm": 1.49,
+      "source": "gsi-exact: 西之表港",
+      "confidence": "high"
+    },
+    {
+      "slug": "sakurajima-ferry-port",
+      "name": "桜島フェリー港（桜島側）",
+      "file": "spots-kyushu-south.ts",
+      "newLat": 31.592602,
+      "newLng": 130.600053,
+      "movedKm": 3.86,
+      "source": "overpass-water: OSM:桜島フェリー",
+      "confidence": "high"
+    },
+    {
+      "slug": "sakurajima-hakamakoshi-s8",
+      "name": "桜島・袴腰海岸",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 31.592602,
+      "newLng": 130.600053,
+      "movedKm": 5.64,
+      "source": "overpass-water: OSM:桜島フェリー",
+      "confidence": "high"
+    },
+    {
+      "slug": "uchinoura-kou-kimotsuki-w6",
+      "name": "肝付・内之浦港",
+      "file": "spots-add6-west.ts",
+      "newLat": 31.279255,
+      "newLng": 131.08461,
+      "movedKm": 1.12,
+      "source": "overpass-water: OSM:内之浦漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "uchinoura-kou-s8",
+      "name": "内之浦港",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 31.279255,
+      "newLng": 131.08461,
+      "movedKm": 2.79,
+      "source": "overpass-water: OSM:内之浦漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "yakushima-miyanoura",
+      "name": "鹿児島屋久島宮之浦港",
+      "file": "spots-extra.ts",
+      "newLat": 30.43036,
+      "newLng": 130.577272,
+      "movedKm": 4.62,
+      "source": "gsi-exact: 宮之浦港",
+      "confidence": "high"
+    },
+    {
+      "slug": "yakushima-miyanoura-port",
+      "name": "屋久島宮之浦港",
+      "file": "spots-south-kyushu-detail.ts",
+      "newLat": 30.43036,
+      "newLng": 130.577272,
+      "movedKm": 9.97,
+      "source": "gsi-exact: 宮之浦港",
+      "confidence": "high"
+    },
+    {
+      "slug": "funakawa-port",
+      "name": "船川港",
+      "file": "spots-tohoku.ts",
+      "newLat": 39.882297,
+      "newLng": 139.85974,
+      "movedKm": 4.89,
+      "source": "gsi-exact: 船川港",
+      "confidence": "high"
+    },
+    {
+      "slug": "oga-toga-gyokou-e8",
+      "name": "男鹿戸賀漁港",
+      "file": "spots-add8-hokkaido-tohoku.ts",
+      "newLat": 39.954021,
+      "newLng": 139.714564,
+      "movedKm": 2.75,
+      "source": "gsi-exact: 戸賀港",
+      "confidence": "high"
+    },
+    {
+      "slug": "arahama-kou-niigata",
+      "name": "荒浜港",
+      "file": "spots-add6-central.ts",
+      "newLat": 37.196419,
+      "newLng": 138.274785,
+      "movedKm": 37.8,
+      "source": "gsi-poi: 大字上荒浜",
+      "confidence": "high"
+    },
+    {
+      "slug": "iwafune-kou-murakami",
+      "name": "村上市岩船港",
+      "file": "spots-add4-kanto.ts",
+      "newLat": 38.18698,
+      "newLng": 139.424231,
+      "movedKm": 13.54,
+      "source": "gsi-exact: 岩船港",
+      "confidence": "high"
+    },
+    {
+      "slug": "iwafune-port-murakami",
+      "name": "岩船港",
+      "file": "spots-wakayama-mie-niigata.ts",
+      "newLat": 38.18698,
+      "newLng": 139.424231,
+      "movedKm": 14.76,
+      "source": "gsi-exact: 岩船港",
+      "confidence": "high"
+    },
+    {
+      "slug": "izumozaki-gyoko",
+      "name": "出雲崎漁港",
+      "file": "spots-wakayama-mie-niigata.ts",
+      "newLat": 37.544415,
+      "newLng": 138.689954,
+      "movedKm": 1.51,
+      "source": "gsi-poi: 出雲崎港郵便局",
+      "confidence": "high"
+    },
+    {
+      "slug": "izumozaki-kou-niigata",
+      "name": "出雲崎港",
+      "file": "spots-add6-central.ts",
+      "newLat": 37.544415,
+      "newLng": 138.689954,
+      "movedKm": 1.73,
+      "source": "gsi-poi: 出雲崎港郵便局",
+      "confidence": "high"
+    },
+    {
+      "slug": "kuwagawa-gyoko-sasagawanagare",
+      "name": "桑川漁港（笹川流れ）",
+      "file": "spots-wakayama-mie-niigata.ts",
+      "newLat": 38.368882,
+      "newLng": 139.454548,
+      "movedKm": 24.29,
+      "source": "gsi-exact: 桑川",
+      "confidence": "high"
+    },
+    {
+      "slug": "nou-kou-niigata",
+      "name": "能生港",
+      "file": "spots-add6-central.ts",
+      "newLat": 37.10904,
+      "newLng": 137.992742,
+      "movedKm": 6.03,
+      "source": "overpass-water: OSM:能生灯台",
+      "confidence": "high"
+    },
+    {
+      "slug": "oyashirazu-kaigan-niigata",
+      "name": "親不知海岸",
+      "file": "spots-add5-central.ts",
+      "newLat": 36.993211,
+      "newLng": 137.694961,
+      "movedKm": 3.22,
+      "source": "gsi-exact: 親不知",
+      "confidence": "high"
+    },
+    {
+      "slug": "sado-nozaki-hana",
+      "name": "佐渡・野崎鼻",
+      "file": "spots-wakayama-mie-niigata.ts",
+      "newLat": 38.081653,
+      "newLng": 138.438069,
+      "movedKm": 12.34,
+      "source": "overpass-water: OSM:両津港佐渡汽船ターミナル",
+      "confidence": "high"
+    },
+    {
+      "slug": "sado-ogi-port",
+      "name": "佐渡小木港",
+      "file": "spots-hokuriku.ts",
+      "newLat": 37.808035,
+      "newLng": 138.278891,
+      "movedKm": 2.07,
+      "source": "gsi-exact: 小木港",
+      "confidence": "high"
+    },
+    {
+      "slug": "sado-washizaki-gyokou",
+      "name": "佐渡・鷲崎漁港",
+      "file": "spots-add4-kanto.ts",
+      "newLat": 38.184117,
+      "newLng": 138.320117,
+      "movedKm": 17.37,
+      "source": "gsi-poi: 佐渡海府海岸",
+      "confidence": "medium"
+    },
+    {
+      "slug": "sasagawa-nagare-surf",
+      "name": "笹川流れサーフ",
+      "file": "spots-add4-kanto.ts",
+      "newLat": 38.391576,
+      "newLng": 139.456734,
+      "movedKm": 28.34,
+      "source": "overpass-name: OSM:笹川流れ",
+      "confidence": "high"
+    },
+    {
+      "slug": "tanihama-kaigan-niigata",
+      "name": "谷浜海岸",
+      "file": "spots-add6-central.ts",
+      "newLat": 37.16186,
+      "newLng": 138.174868,
+      "movedKm": 5.41,
+      "source": "gsi-poi: 谷浜郵便局",
+      "confidence": "high"
+    },
+    {
+      "slug": "teradomari-kou-niigata",
+      "name": "寺泊港",
+      "file": "spots-add6-central.ts",
+      "newLat": 37.640783,
+      "newLng": 138.761223,
+      "movedKm": 2.07,
+      "source": "gsi-exact: 寺泊港",
+      "confidence": "high"
+    },
+    {
+      "slug": "yoneyama-kaigan",
+      "name": "米山海岸",
+      "file": "spots-wakayama-mie-niigata.ts",
+      "newLat": 37.376869,
+      "newLng": 138.554584,
+      "movedKm": 16.96,
+      "source": "gsi-poi: 海岸公園",
+      "confidence": "high"
+    },
+    {
+      "slug": "manazuru-kou",
+      "name": "真鶴港",
+      "file": "spots-add5-east2.ts",
+      "newLat": 35.152339,
+      "newLng": 139.14796,
+      "movedKm": 1.08,
+      "source": "gsi-exact: 真鶴港",
+      "confidence": "high"
+    },
+    {
+      "slug": "odawara-hayakawa-kou-e8",
+      "name": "小田原港（早川港）",
+      "file": "spots-add8-kanto-chubu.ts",
+      "newLat": 35.277747,
+      "newLng": 139.206528,
+      "movedKm": 7.77,
+      "source": "gsi-poi: 関東地方整備局横浜国道事務所小田原出張所",
+      "confidence": "high"
+    },
+    {
+      "slug": "uraga-ko",
+      "name": "浦賀港",
+      "file": "spots-sagami-miura.ts",
+      "newLat": 35.241231,
+      "newLng": 139.71934,
+      "movedKm": 1.05,
+      "source": "gsi-poi: 横須賀南警察署浦賀港交番",
+      "confidence": "high"
+    },
+    {
+      "slug": "yokosuka-umikaze-e8",
+      "name": "横須賀・うみかぜ公園",
+      "file": "spots-add8-kanto-chubu.ts",
+      "newLat": 35.282293,
+      "newLng": 139.675113,
+      "movedKm": 1.22,
+      "source": "gsi-poi: 関東財務局横浜財務事務所横須賀出張所",
+      "confidence": "high"
+    },
+    {
+      "slug": "hashikami-kaigan6",
+      "name": "階上海岸",
+      "file": "spots-add6-east.ts",
+      "newLat": 40.506735,
+      "newLng": 141.607441,
+      "movedKm": 5.58,
+      "source": "gsi-poi: 種差海岸駅",
+      "confidence": "medium"
+    },
+    {
+      "slug": "kanita-gyokou6",
+      "name": "蟹田漁港",
+      "file": "spots-add6-east.ts",
+      "newLat": 41.041589,
+      "newLng": 140.644514,
+      "movedKm": 1.64,
+      "source": "gsi-exact: 蟹田",
+      "confidence": "high"
+    },
+    {
+      "slug": "kawauchi-gyokou6",
+      "name": "川内漁港",
+      "file": "spots-add6-east.ts",
+      "newLat": 41.188317,
+      "newLng": 140.990705,
+      "movedKm": 8.7,
+      "source": "gsi-exact: 川内港",
+      "confidence": "high"
+    },
+    {
+      "slug": "kodomari-gyokou6",
+      "name": "小泊漁港",
+      "file": "spots-add6-east.ts",
+      "newLat": 41.131044,
+      "newLng": 140.304867,
+      "movedKm": 1.84,
+      "source": "gsi-exact: 小泊",
+      "confidence": "high"
+    },
+    {
+      "slug": "kofunato-gyokou",
+      "name": "小舟渡漁港",
+      "file": "spots-add5-east3.ts",
+      "newLat": 40.453433,
+      "newLng": 141.6728,
+      "movedKm": 6.37,
+      "source": "gsi-exact: 小舟渡",
+      "confidence": "high"
+    },
+    {
+      "slug": "minmaya-gyoko",
+      "name": "三厩漁港",
+      "file": "spots-hokkaido-tohoku-hokuriku-add3.ts",
+      "newLat": 41.203603,
+      "newLng": 140.427729,
+      "movedKm": 6.2,
+      "source": "gsi-poi: 字三厩中浜",
+      "confidence": "medium"
+    },
+    {
+      "slug": "tairadate-gyokou6",
+      "name": "平舘漁港",
+      "file": "spots-add6-east.ts",
+      "newLat": 41.09967,
+      "newLng": 140.628223,
+      "movedKm": 3.92,
+      "source": "gsi-exact: 平舘",
+      "confidence": "high"
+    },
+    {
+      "slug": "wakinosawa-kou",
+      "name": "下北半島・脇野沢港",
+      "file": "spots-expand-north.ts",
+      "newLat": 41.144771,
+      "newLng": 140.826721,
+      "movedKm": 29.67,
+      "source": "overpass-water: OSM:脇野沢港フェリーターミナル",
+      "confidence": "high"
+    },
+    {
+      "slug": "wakinosawa-kou6",
+      "name": "脇野沢港",
+      "file": "spots-add6-east.ts",
+      "newLat": 41.120414,
+      "newLng": 140.814643,
+      "movedKm": 4.56,
+      "source": "gsi-exact: 脇野沢",
+      "confidence": "high"
+    },
+    {
+      "slug": "futo-gyokou",
+      "name": "富戸漁港",
+      "file": "spots-add4-kanto.ts",
+      "newLat": 34.633573,
+      "newLng": 138.794346,
+      "movedKm": 42.46,
+      "source": "gsi-poi: 富戸ノ浜",
+      "confidence": "high"
+    },
+    {
+      "slug": "futo-port",
+      "name": "富戸港",
+      "file": "spots-sagami-izu.ts",
+      "newLat": 34.633573,
+      "newLng": 138.794346,
+      "movedKm": 43.7,
+      "source": "gsi-poi: 富戸ノ浜",
+      "confidence": "high"
+    },
+    {
+      "slug": "mera-gyokou-shizuoka",
+      "name": "妻良漁港",
+      "file": "spots-add4-kanto.ts",
+      "newLat": 34.659482,
+      "newLng": 138.779539,
+      "movedKm": 8.65,
+      "source": "gsi-exact: 妻良",
+      "confidence": "high"
+    },
+    {
+      "slug": "mera-port",
+      "name": "妻良港",
+      "file": "spots-sagami-izu.ts",
+      "newLat": 34.659482,
+      "newLng": 138.779539,
+      "movedKm": 6.36,
+      "source": "gsi-exact: 妻良",
+      "confidence": "high"
+    },
+    {
+      "slug": "sagara-ko-teibo",
+      "name": "相良港堤防",
+      "file": "spots-tokai-detail.ts",
+      "newLat": 34.684902,
+      "newLng": 138.209447,
+      "movedKm": 8.09,
+      "source": "gsi-exact: 相良港",
+      "confidence": "high"
+    },
+    {
+      "slug": "shimoda-sotora-port",
+      "name": "下田外浦港",
+      "file": "spots-sagami-izu.ts",
+      "newLat": 34.675094,
+      "newLng": 138.972741,
+      "movedKm": 3.47,
+      "source": "overpass-water: OSM:外浦海水浴場",
+      "confidence": "high"
+    },
+    {
+      "slug": "hakui-taki-kou-ishikawa",
+      "name": "羽咋・滝港",
+      "file": "spots-add6-central.ts",
+      "newLat": 36.922296,
+      "newLng": 136.754333,
+      "movedKm": 8.51,
+      "source": "gsi-exact: 滝港",
+      "confidence": "high"
+    },
+    {
+      "slug": "kuroshima-gyoko",
+      "name": "黒島漁港",
+      "file": "spots-chubu-kinki-add2.ts",
+      "newLat": 37.155546,
+      "newLng": 136.982644,
+      "movedKm": 28.01,
+      "source": "gsi-exact: 黒島",
+      "confidence": "high"
+    },
+    {
+      "slug": "monzen-minazuki-wan",
+      "name": "門前・皆月湾",
+      "file": "spots-add6-central.ts",
+      "newLat": 37.349953,
+      "newLng": 136.747833,
+      "movedKm": 5.14,
+      "source": "gsi-exact: 皆月湾",
+      "confidence": "high"
+    },
+    {
+      "slug": "nanao-wakura-kaigan",
+      "name": "七尾・和倉温泉裏海岸",
+      "file": "spots-add6-central.ts",
+      "newLat": 37.056261,
+      "newLng": 136.968123,
+      "movedKm": 4.54,
+      "source": "gsi-poi: 七尾港",
+      "confidence": "high"
+    },
+    {
+      "slug": "choshi-kou",
+      "name": "銚子港",
+      "file": "spots-kanto-koshinetsu-add3.ts",
+      "newLat": 35.739858,
+      "newLng": 140.857786,
+      "movedKm": 0.27,
+      "source": "gsi-poi: 横浜税関千葉税関支署銚子監視署",
+      "confidence": "high"
+    },
+    {
+      "slug": "futomi-gyokou",
+      "name": "太海漁港",
+      "file": "spots-kanto-koshinetsu-add3.ts",
+      "newLat": 35.076705,
+      "newLng": 140.097699,
+      "movedKm": 4.34,
+      "source": "overpass-water: OSM:太海フラワー磯釣りセンター",
+      "confidence": "high"
+    },
+    {
+      "slug": "iwaibukuro-gyokou",
+      "name": "岩井袋漁港",
+      "file": "spots-add4-kanto.ts",
+      "newLat": 35.101768,
+      "newLng": 139.831421,
+      "movedKm": 7.52,
+      "source": "gsi-exact: 岩井袋",
+      "confidence": "high"
+    },
+    {
+      "slug": "iwaibukuro-kou-e8",
+      "name": "岩井袋港",
+      "file": "spots-add8-kanto-chubu.ts",
+      "newLat": 35.101768,
+      "newLng": 139.831421,
+      "movedKm": 2.85,
+      "source": "gsi-exact: 岩井袋",
+      "confidence": "high"
+    },
+    {
+      "slug": "otohama-gyokou",
+      "name": "乙浜漁港",
+      "file": "spots-add4-kanto.ts",
+      "newLat": 34.911829,
+      "newLng": 139.922314,
+      "movedKm": 3.29,
+      "source": "gsi-poi: 館山警察署乙浜駐在所",
+      "confidence": "medium"
+    },
+    {
+      "slug": "wada-port-chiba",
+      "name": "和田港",
+      "file": "spots-chiba-shizuoka-detail.ts",
+      "newLat": 35.274261,
+      "newLng": 139.852914,
+      "movedKm": 27.31,
+      "source": "gsi-exact: 和田",
+      "confidence": "high"
+    },
+    {
+      "slug": "beppu-shonin-ga-hama-s8",
+      "name": "別府・上人ヶ浜",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 33.314459,
+      "newLng": 131.502124,
+      "movedKm": 4.66,
+      "source": "gsi-exact: 上人ヶ浜",
+      "confidence": "high"
+    },
+    {
+      "slug": "hotojima-tsukumi-w6",
+      "name": "津久見・保戸島",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.084624,
+      "newLng": 131.871007,
+      "movedKm": 3.94,
+      "source": "gsi-poi: 津久見港",
+      "confidence": "high"
+    },
+    {
+      "slug": "kamae-hatozu-gyokou",
+      "name": "蒲江・波当津漁港",
+      "file": "spots-expand-kyushu.ts",
+      "newLat": 32.839637,
+      "newLng": 132.004218,
+      "movedKm": 7.79,
+      "source": "gsi-exact: 蒲江",
+      "confidence": "high"
+    },
+    {
+      "slug": "kamae-motosaru-kou-s8",
+      "name": "蒲江・元猿港",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 32.839637,
+      "newLng": 132.004218,
+      "movedKm": 12.13,
+      "source": "gsi-exact: 蒲江",
+      "confidence": "high"
+    },
+    {
+      "slug": "kazenari-kou-usuki-w6",
+      "name": "臼杵・風成港",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.126486,
+      "newLng": 131.81053,
+      "movedKm": 2.93,
+      "source": "overpass-water: OSM:臼杵港",
+      "confidence": "high"
+    },
+    {
+      "slug": "matama-kaigan-w6",
+      "name": "豊後高田・真玉海岸",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.594824,
+      "newLng": 131.423117,
+      "movedKm": 7.64,
+      "source": "overpass-water: OSM:豊後高田港導流堤灯台",
+      "confidence": "high"
+    },
+    {
+      "slug": "nishi-oita-kou-w6",
+      "name": "大分・西大分港",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.255364,
+      "newLng": 131.586536,
+      "movedKm": 1.81,
+      "source": "gsi-poi: 大分港",
+      "confidence": "high"
+    },
+    {
+      "slug": "oita-hiji-ogami-port-bulk",
+      "name": "日出・大神港",
+      "file": "spots-bulk-kyushu-e.ts",
+      "newLat": 33.365419,
+      "newLng": 131.536885,
+      "movedKm": 4.13,
+      "source": "gsi-poi: 日出港",
+      "confidence": "high"
+    },
+    {
+      "slug": "oita-kamae-hatozu-port-bulk",
+      "name": "蒲江・波当津港",
+      "file": "spots-bulk-kyushu-e.ts",
+      "newLat": 32.839637,
+      "newLng": 132.004218,
+      "movedKm": 16.82,
+      "source": "gsi-exact: 蒲江",
+      "confidence": "high"
+    },
+    {
+      "slug": "oita-saganoseki-ichishakuya-port-bulk",
+      "name": "佐賀関・一尺屋下浦港",
+      "file": "spots-bulk-kyushu-e.ts",
+      "newLat": 33.250326,
+      "newLng": 131.869508,
+      "movedKm": 1.39,
+      "source": "overpass-water: OSM:佐賀関港",
+      "confidence": "high"
+    },
+    {
+      "slug": "oita-saiki-urashiro-port-bulk",
+      "name": "佐伯・浦代港（米水津）",
+      "file": "spots-bulk-kyushu-e.ts",
+      "newLat": 32.919393,
+      "newLng": 131.978301,
+      "movedKm": 1.16,
+      "source": "gsi-exact: 浦代港",
+      "confidence": "high"
+    },
+    {
+      "slug": "ozai-futo-w6",
+      "name": "大分・大在公共ふ頭",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.255364,
+      "newLng": 131.586536,
+      "movedKm": 8.7,
+      "source": "gsi-poi: 大分港",
+      "confidence": "high"
+    },
+    {
+      "slug": "saiki-kamae-hatozu-s8",
+      "name": "佐伯・蒲江波当津海岸",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 32.978619,
+      "newLng": 131.915348,
+      "movedKm": 6.59,
+      "source": "gsi-poi: 佐伯港",
+      "confidence": "high"
+    },
+    {
+      "slug": "saiki-oonyujima-s8",
+      "name": "佐伯・大入島",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 32.99955,
+      "newLng": 131.92608,
+      "movedKm": 6.3,
+      "source": "gsi-exact: 大入島",
+      "confidence": "high"
+    },
+    {
+      "slug": "saiki-yonouzu-kou-s8",
+      "name": "佐伯・米水津港",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 32.978619,
+      "newLng": 131.915348,
+      "movedKm": 7.41,
+      "source": "gsi-poi: 佐伯港",
+      "confidence": "high"
+    },
+    {
+      "slug": "sakanoshi-kaigan-w6",
+      "name": "大分・坂ノ市海岸",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.255364,
+      "newLng": 131.586536,
+      "movedKm": 13.86,
+      "source": "gsi-poi: 大分港",
+      "confidence": "high"
+    },
+    {
+      "slug": "takedatsu-kou-kunisaki",
+      "name": "国東市竹田津港",
+      "file": "spots-add5-west.ts",
+      "newLat": 33.678743,
+      "newLng": 131.565443,
+      "movedKm": 6.28,
+      "source": "overpass-water: OSM:竹田津港FT",
+      "confidence": "high"
+    },
+    {
+      "slug": "tsukumi-ochinoura-s8",
+      "name": "津久見・落ノ浦",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 33.069019,
+      "newLng": 131.990753,
+      "movedKm": 14.1,
+      "source": "gsi-exact: 落ノ浦",
+      "confidence": "high"
+    },
+    {
+      "slug": "yonozu-gyokou-w6",
+      "name": "佐伯・米水津漁港",
+      "file": "spots-add6-west.ts",
+      "newLat": 32.978619,
+      "newLng": 131.915348,
+      "movedKm": 4.87,
+      "source": "gsi-poi: 佐伯港",
+      "confidence": "high"
+    },
+    {
+      "slug": "goto-fukue-kou",
+      "name": "五島列島・福江港",
+      "file": "spots-expand-kyushu.ts",
+      "newLat": 32.694023,
+      "newLng": 128.854306,
+      "movedKm": 1.59,
+      "source": "gsi-exact: 福江港",
+      "confidence": "high"
+    },
+    {
+      "slug": "iki-ashibe-kou-s8",
+      "name": "壱岐・芦辺港",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 33.750263,
+      "newLng": 129.783873,
+      "movedKm": 6.45,
+      "source": "gsi-poi: 壱岐消防署壱岐空港出張所",
+      "confidence": "high"
+    },
+    {
+      "slug": "iki-gounoura-w6",
+      "name": "壱岐・郷ノ浦港",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.741793,
+      "newLng": 129.671372,
+      "movedKm": 1.95,
+      "source": "gsi-exact: 郷ノ浦港",
+      "confidence": "high"
+    },
+    {
+      "slug": "iki-katsumoto-kou-w6",
+      "name": "壱岐・勝本港",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.855757,
+      "newLng": 129.693416,
+      "movedKm": 5.86,
+      "source": "gsi-exact: 勝本港",
+      "confidence": "high"
+    },
+    {
+      "slug": "kishuku-kou-goto-w6",
+      "name": "五島・岐宿港",
+      "file": "spots-add6-west.ts",
+      "newLat": 32.757148,
+      "newLng": 128.763306,
+      "movedKm": 4.31,
+      "source": "gsi-exact: 岐宿港",
+      "confidence": "high"
+    },
+    {
+      "slug": "matsuura-fukushima-kou-w6",
+      "name": "松浦・福島港",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.362413,
+      "newLng": 129.823,
+      "movedKm": 5.18,
+      "source": "gsi-exact: 福島港",
+      "confidence": "high"
+    },
+    {
+      "slug": "miyanoura-hirado-w6",
+      "name": "平戸・宮ノ浦漁港",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.37096,
+      "newLng": 129.553782,
+      "movedKm": 12.22,
+      "source": "gsi-poi: 平戸港",
+      "confidence": "high"
+    },
+    {
+      "slug": "mogi-kou-s8",
+      "name": "茂木港",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 32.706013,
+      "newLng": 129.91462,
+      "movedKm": 1.57,
+      "source": "gsi-exact: 茂木港",
+      "confidence": "high"
+    },
+    {
+      "slug": "nagasaki-hirado-shimonakano-bulk",
+      "name": "平戸・下中野漁港",
+      "file": "spots-bulk-kyushu-w.ts",
+      "newLat": 33.37096,
+      "newLng": 129.553782,
+      "movedKm": 5.16,
+      "source": "gsi-poi: 平戸港",
+      "confidence": "high"
+    },
+    {
+      "slug": "nagasaki-hirado-tsuyoshi-bulk",
+      "name": "平戸・津吉港",
+      "file": "spots-bulk-kyushu-w.ts",
+      "newLat": 33.37096,
+      "newLng": 129.553782,
+      "movedKm": 20.1,
+      "source": "gsi-poi: 平戸港",
+      "confidence": "high"
+    },
+    {
+      "slug": "nagasaki-unzen-obama-onsen-bulk",
+      "name": "雲仙・小浜温泉前防波堤",
+      "file": "spots-bulk-kyushu-w.ts",
+      "newLat": 32.729982,
+      "newLng": 130.207387,
+      "movedKm": 1.66,
+      "source": "gsi-poi: 雲仙警察署小浜交番",
+      "confidence": "high"
+    },
+    {
+      "slug": "sasebo-ainoura-kou-s8",
+      "name": "佐世保・相浦港",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 33.167133,
+      "newLng": 129.722997,
+      "movedKm": 4.63,
+      "source": "gsi-poi: 佐世保塩浜郵便局",
+      "confidence": "medium"
+    },
+    {
+      "slug": "sotome-kounora-kou-s8",
+      "name": "外海・神浦港",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 32.880208,
+      "newLng": 129.679285,
+      "movedKm": 5.57,
+      "source": "overpass-water: OSM:神浦・池島フェリー乗場",
+      "confidence": "high"
+    },
+    {
+      "slug": "tabira-kou",
+      "name": "田平港",
+      "file": "spots-add4-kyushu-okinawa.ts",
+      "newLat": 33.362153,
+      "newLng": 129.574114,
+      "movedKm": 2.45,
+      "source": "gsi-exact: 田平港",
+      "confidence": "high"
+    },
+    {
+      "slug": "togitsu-hinami-gyokou-s8",
+      "name": "時津・日並漁港",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 32.837691,
+      "newLng": 129.84447,
+      "movedKm": 1.55,
+      "source": "gsi-poi: 時津港",
+      "confidence": "medium"
+    },
+    {
+      "slug": "tsushima-hitakatsu-kou-s8",
+      "name": "対馬・比田勝港",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 34.616736,
+      "newLng": 129.437772,
+      "movedKm": 4.5,
+      "source": "gsi-exact: 比田勝港",
+      "confidence": "high"
+    },
+    {
+      "slug": "aoya-gyokou-w6",
+      "name": "青谷漁港",
+      "file": "spots-add6-west.ts",
+      "newLat": 35.52536,
+      "newLng": 134.000363,
+      "movedKm": 5.45,
+      "source": "overpass-water: OSM:青谷海水浴場",
+      "confidence": "high"
+    },
+    {
+      "slug": "aoya-kaigan-w7",
+      "name": "青谷海岸",
+      "file": "spots-add7-west.ts",
+      "newLat": 35.52536,
+      "newLng": 134.000363,
+      "movedKm": 6.91,
+      "source": "overpass-water: OSM:青谷海水浴場",
+      "confidence": "high"
+    },
+    {
+      "slug": "funaiso-kaigan-w7",
+      "name": "船磯海岸",
+      "file": "spots-add7-west.ts",
+      "newLat": 35.520975,
+      "newLng": 134.016861,
+      "movedKm": 22.55,
+      "source": "gsi-exact: 船磯",
+      "confidence": "high"
+    },
+    {
+      "slug": "hamamura-kou-w7",
+      "name": "浜村港",
+      "file": "spots-add7-west.ts",
+      "newLat": 35.515781,
+      "newLng": 134.055778,
+      "movedKm": 2.36,
+      "source": "gsi-exact: 浜村",
+      "confidence": "high"
+    },
+    {
+      "slug": "hamamura-port",
+      "name": "鳥取中部・浜村漁港",
+      "file": "spots-chugoku-shikoku-kyushu-add2.ts",
+      "newLat": 35.519388,
+      "newLng": 134.061074,
+      "movedKm": 4.35,
+      "source": "overpass-water: OSM:浜村海岸",
+      "confidence": "high"
+    },
+    {
+      "slug": "hokuei-hojo-dune",
+      "name": "北栄町北条砂丘",
+      "file": "spots-sanin.ts",
+      "newLat": 35.501287,
+      "newLng": 133.808744,
+      "movedKm": 6.98,
+      "source": "gsi-exact: 北条砂丘",
+      "confidence": "medium"
+    },
+    {
+      "slug": "iwami-hao-gyokou",
+      "name": "岩美町・羽尾漁港",
+      "file": "spots-add4-chugoku-shikoku.ts",
+      "newLat": 35.608159,
+      "newLng": 134.339755,
+      "movedKm": 2.26,
+      "source": "overpass-water: OSM:羽尾鼻",
+      "confidence": "high"
+    },
+    {
+      "slug": "mikuriya-gyokou-w6",
+      "name": "御来屋漁港",
+      "file": "spots-add6-west.ts",
+      "newLat": 35.510864,
+      "newLng": 133.49588,
+      "movedKm": 6.72,
+      "source": "gsi-exact: 御来屋",
+      "confidence": "high"
+    },
+    {
+      "slug": "nagaobana-tottori",
+      "name": "長尾鼻",
+      "file": "spots-chugoku-shikoku-kyushu-add2.ts",
+      "newLat": 35.537892,
+      "newLng": 134.007667,
+      "movedKm": 9.41,
+      "source": "gsi-exact: 長尾鼻",
+      "confidence": "high"
+    },
+    {
+      "slug": "uradome-kaigan-w5",
+      "name": "浦富海岸",
+      "file": "spots-add5-west.ts",
+      "newLat": 35.605879,
+      "newLng": 134.338934,
+      "movedKm": 1.8,
+      "source": "gsi-exact: 浦富海岸",
+      "confidence": "high"
+    },
+    {
+      "slug": "gotsu-kou-w6",
+      "name": "江津港",
+      "file": "spots-add6-west.ts",
+      "newLat": 35.021958,
+      "newLng": 132.226064,
+      "movedKm": 4.45,
+      "source": "gsi-exact: 江津港",
+      "confidence": "medium"
+    },
+    {
+      "slug": "iwami-kaihin-koen-w7",
+      "name": "石見海浜公園",
+      "file": "spots-add7-west.ts",
+      "newLat": 34.94967,
+      "newLng": 132.120023,
+      "movedKm": 4.14,
+      "source": "gsi-exact: 石見海浜公園",
+      "confidence": "high"
+    },
+    {
+      "slug": "iwami-tatamigaura-w6",
+      "name": "石見畳ヶ浦",
+      "file": "spots-add6-west.ts",
+      "newLat": 34.945526,
+      "newLng": 132.103952,
+      "movedKm": 10.23,
+      "source": "gsi-exact: 石見畳ヶ浦",
+      "confidence": "high"
+    },
+    {
+      "slug": "izumo-jushimanohana",
+      "name": "出雲市・十六島鼻",
+      "file": "spots-kinki-chugoku-shikoku-add.ts",
+      "newLat": 35.468587,
+      "newLng": 132.731826,
+      "movedKm": 4.08,
+      "source": "gsi-exact: 十六島鼻",
+      "confidence": "high"
+    },
+    {
+      "slug": "matsue-etomo-port",
+      "name": "松江市恵曇漁港",
+      "file": "spots-sanin.ts",
+      "newLat": 35.522576,
+      "newLng": 132.967774,
+      "movedKm": 8.08,
+      "source": "overpass-water: OSM:恵曇漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "nima-kotogahama-w7",
+      "name": "仁摩海岸・琴ヶ浜",
+      "file": "spots-add7-west.ts",
+      "newLat": 35.132613,
+      "newLng": 132.390043,
+      "movedKm": 4.58,
+      "source": "gsi-exact: 琴ヶ浜",
+      "confidence": "high"
+    },
+    {
+      "slug": "oki-beppu-kou-w6",
+      "name": "隠岐島前・別府港",
+      "file": "spots-add6-west.ts",
+      "newLat": 36.106853,
+      "newLng": 133.044797,
+      "movedKm": 4.73,
+      "source": "gsi-exact: 別府港",
+      "confidence": "high"
+    },
+    {
+      "slug": "oki-saigo-port",
+      "name": "隠岐の島西郷港",
+      "file": "spots-sanin.ts",
+      "newLat": 36.21135,
+      "newLng": 133.343265,
+      "movedKm": 2.96,
+      "source": "gsi-exact: 西郷港",
+      "confidence": "high"
+    },
+    {
+      "slug": "sakai-suido-mihonoseki",
+      "name": "境水道・美保関",
+      "file": "spots-kinki-chugoku-shikoku-add.ts",
+      "newLat": 35.567304,
+      "newLng": 133.325491,
+      "movedKm": 7.86,
+      "source": "overpass-water: OSM:美保関灯台",
+      "confidence": "high"
+    },
+    {
+      "slug": "shichirui-kou-w6",
+      "name": "七類港",
+      "file": "spots-add6-west.ts",
+      "newLat": 35.572735,
+      "newLng": 133.226574,
+      "movedKm": 1.91,
+      "source": "gsi-exact: 七類港",
+      "confidence": "high"
+    },
+    {
+      "slug": "taisha-gyokou-w6",
+      "name": "大社漁港",
+      "file": "spots-add6-west.ts",
+      "newLat": 35.402788,
+      "newLng": 132.665448,
+      "movedKm": 2.06,
+      "source": "overpass-water: OSM:大社漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "upurui-gyokou-w6",
+      "name": "十六島漁港",
+      "file": "spots-add6-west.ts",
+      "newLat": 35.463511,
+      "newLng": 132.745181,
+      "movedKm": 2.65,
+      "source": "gsi-exact: 十六島",
+      "confidence": "high"
+    },
+    {
+      "slug": "upurui-hana",
+      "name": "十六島鼻",
+      "file": "spots-chugoku-kyushu-okinawa-add3.ts",
+      "newLat": 35.468587,
+      "newLng": 132.731826,
+      "movedKm": 3.82,
+      "source": "gsi-exact: 十六島鼻",
+      "confidence": "high"
+    },
+    {
+      "slug": "kaiyo-shishikui-kou-teihou",
+      "name": "海陽町・宍喰港堤防",
+      "file": "spots-add4-chugoku-shikoku.ts",
+      "newLat": 33.561718,
+      "newLng": 134.309213,
+      "movedKm": 0.57,
+      "source": "overpass-water: OSM:宍喰漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "kaiyo-shishikui-port",
+      "name": "海陽町宍喰港",
+      "file": "spots-shikoku.ts",
+      "newLat": 33.561718,
+      "newLng": 134.309213,
+      "movedKm": 0.92,
+      "source": "overpass-water: OSM:宍喰漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "naruto-kitatomari-c8",
+      "name": "鳴門・北泊港",
+      "file": "spots-add8-chugoku-shikoku.ts",
+      "newLat": 34.232575,
+      "newLng": 134.641471,
+      "movedKm": 8.93,
+      "source": "gsi-exact: 鳴門",
+      "confidence": "high"
+    },
+    {
+      "slug": "naruto-uchinomi-w5",
+      "name": "鳴門ウチノ海",
+      "file": "spots-add5-west.ts",
+      "newLat": 34.220355,
+      "newLng": 134.608132,
+      "movedKm": 3.75,
+      "source": "gsi-exact: ウチノ海",
+      "confidence": "high"
+    },
+    {
+      "slug": "shishikui-gyokou-tokushima",
+      "name": "海陽町宍喰漁港",
+      "file": "spots-add5-west.ts",
+      "newLat": 33.561718,
+      "newLng": 134.309213,
+      "movedKm": 2.64,
+      "source": "overpass-water: OSM:宍喰漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "shishikui-kou-w6",
+      "name": "海陽町・宍喰港",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.561718,
+      "newLng": 134.309213,
+      "movedKm": 0.87,
+      "source": "overpass-water: OSM:宍喰漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "yuki-kou-w6",
+      "name": "由岐港",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.763139,
+      "newLng": 134.572359,
+      "movedKm": 0.79,
+      "source": "overpass-water: OSM:由岐漁港（木岐）",
+      "confidence": "high"
+    },
+    {
+      "slug": "amaharashi-kaigan-toyama",
+      "name": "雨晴海岸",
+      "file": "spots-add5-central.ts",
+      "newLat": 36.815035,
+      "newLng": 137.041849,
+      "movedKm": 3.59,
+      "source": "overpass-water: OSM:雨晴海岸",
+      "confidence": "high"
+    },
+    {
+      "slug": "fushiki-manyou-futo",
+      "name": "伏木万葉埠頭",
+      "file": "spots-add5-central.ts",
+      "newLat": 36.800383,
+      "newLng": 137.064825,
+      "movedKm": 3.56,
+      "source": "gsi-poi: 伏木万葉ふ頭",
+      "confidence": "high"
+    },
+    {
+      "slug": "kokubuhama-toyama",
+      "name": "国分浜",
+      "file": "spots-add6-central.ts",
+      "newLat": 36.80564,
+      "newLng": 137.052861,
+      "movedKm": 2.05,
+      "source": "overpass-water: OSM:国分浜",
+      "confidence": "high"
+    },
+    {
+      "slug": "nyuzen-kaigan-surf-e8",
+      "name": "入善海岸サーフ",
+      "file": "spots-add8-kanto-chubu.ts",
+      "newLat": 36.760608,
+      "newLng": 137.257045,
+      "movedKm": 28.44,
+      "source": "gsi-poi: 富山中央警察署海岸通警察官駐在所",
+      "confidence": "medium"
+    },
+    {
+      "slug": "inukuma-gyoko",
+      "name": "犬熊漁港",
+      "file": "spots-kitakinki.ts",
+      "newLat": 35.528576,
+      "newLng": 135.789253,
+      "movedKm": 3.47,
+      "source": "gsi-exact: 犬熊",
+      "confidence": "high"
+    },
+    {
+      "slug": "mihama-higa-gyokou",
+      "name": "美浜日向漁港",
+      "file": "spots-add4-north.ts",
+      "newLat": 35.613313,
+      "newLng": 135.894372,
+      "movedKm": 4.77,
+      "source": "overpass-water: OSM:日向漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "mihama-higa-gyokou-e8",
+      "name": "美浜・日向漁港",
+      "file": "spots-add8-kanto-chubu.ts",
+      "newLat": 35.613313,
+      "newLng": 135.894372,
+      "movedKm": 7.39,
+      "source": "overpass-water: OSM:日向漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "mihama-higa-kaigan-fukui",
+      "name": "美浜・日向海岸",
+      "file": "spots-add6-central.ts",
+      "newLat": 35.613313,
+      "newLng": 135.894372,
+      "movedKm": 3.72,
+      "source": "overpass-water: OSM:日向漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "mikuni-kou-fukui",
+      "name": "三国港",
+      "file": "spots-add6-central.ts",
+      "newLat": 36.250456,
+      "newLng": 136.172891,
+      "movedKm": 2.55,
+      "source": "gsi-poi: 三国町浜地",
+      "confidence": "medium"
+    },
+    {
+      "slug": "nishitsu-gyoko",
+      "name": "西津漁港",
+      "file": "spots-kitakinki.ts",
+      "newLat": 35.517336,
+      "newLng": 135.752794,
+      "movedKm": 3.94,
+      "source": "gsi-exact: 西津",
+      "confidence": "high"
+    },
+    {
+      "slug": "obama-anou-gyokou-fukui",
+      "name": "小浜・阿納漁港",
+      "file": "spots-add6-central.ts",
+      "newLat": 35.491976,
+      "newLng": 135.733841,
+      "movedKm": 4.47,
+      "source": "gsi-poi: 小浜香取",
+      "confidence": "high"
+    },
+    {
+      "slug": "obama-gyokou-fukui",
+      "name": "小浜漁港",
+      "file": "spots-add5-central.ts",
+      "newLat": 35.491976,
+      "newLng": 135.733841,
+      "movedKm": 1.49,
+      "source": "gsi-poi: 小浜香取",
+      "confidence": "high"
+    },
+    {
+      "slug": "obama-inokuma-fukui",
+      "name": "小浜・犬熊海水浴場",
+      "file": "spots-add6-central.ts",
+      "newLat": 35.491976,
+      "newLng": 135.733841,
+      "movedKm": 2.88,
+      "source": "gsi-poi: 小浜香取",
+      "confidence": "high"
+    },
+    {
+      "slug": "obama-inokuma-kaigan",
+      "name": "小浜・犬熊海岸",
+      "file": "spots-add4-chubu-kinki.ts",
+      "newLat": 35.491976,
+      "newLng": 135.733841,
+      "movedKm": 4.46,
+      "source": "gsi-poi: 小浜香取",
+      "confidence": "high"
+    },
+    {
+      "slug": "obama-kou-fukui",
+      "name": "小浜港",
+      "file": "spots-add6-central.ts",
+      "newLat": 35.491976,
+      "newLng": 135.733841,
+      "movedKm": 1.5,
+      "source": "gsi-poi: 小浜香取",
+      "confidence": "high"
+    },
+    {
+      "slug": "ohi-akaguri-kaigan-fukui",
+      "name": "大飯・あかぐり海岸",
+      "file": "spots-add6-central.ts",
+      "newLat": 35.481304,
+      "newLng": 135.633563,
+      "movedKm": 1.61,
+      "source": "overpass-water: OSM:うみんぴあ大飯マリーナ",
+      "confidence": "high"
+    },
+    {
+      "slug": "suisho-hama-e8",
+      "name": "水晶浜海水浴場",
+      "file": "spots-add8-kanto-chubu.ts",
+      "newLat": 35.686179,
+      "newLng": 135.97757,
+      "movedKm": 9.08,
+      "source": "overpass-name: OSM:水晶浜",
+      "confidence": "high"
+    },
+    {
+      "slug": "tsuruga-matsubara-kaigan",
+      "name": "敦賀・松原海岸",
+      "file": "spots-add6-central.ts",
+      "newLat": 35.702779,
+      "newLng": 135.973411,
+      "movedKm": 12.44,
+      "source": "gsi-poi: 敦賀警察署美浜丹生駐在所",
+      "confidence": "medium"
+    },
+    {
+      "slug": "tsuruga-nago-kaigan-fukui",
+      "name": "敦賀・名子海岸",
+      "file": "spots-add6-central.ts",
+      "newLat": 35.702779,
+      "newLng": 135.973411,
+      "movedKm": 4.52,
+      "source": "gsi-poi: 敦賀警察署美浜丹生駐在所",
+      "confidence": "medium"
+    },
+    {
+      "slug": "wakasa-torihama-gyokou",
+      "name": "若狭・鳥浜漁港",
+      "file": "spots-add6-central.ts",
+      "newLat": 35.496783,
+      "newLng": 135.550327,
+      "movedKm": 30.99,
+      "source": "overpass-water: OSM:若狭高浜島堤燈台",
+      "confidence": "high"
+    },
+    {
+      "slug": "ainoshima-gyoko-teibo",
+      "name": "相島漁港堤防",
+      "file": "spots-aichi-fukuoka-hiroshima.ts",
+      "newLat": 33.717851,
+      "newLng": 130.423829,
+      "movedKm": 6.59,
+      "source": "overpass-water: OSM:相島渡船場",
+      "confidence": "high"
+    },
+    {
+      "slug": "funakoshi-gyokou-itoshima-w6",
+      "name": "糸島・船越漁港",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.554124,
+      "newLng": 130.127092,
+      "movedKm": 7.84,
+      "source": "overpass-water: OSM:船越漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "itoshima-keya-port",
+      "name": "糸島・芥屋漁港",
+      "file": "spots-chugoku-kyushu-okinawa-add3.ts",
+      "newLat": 33.587561,
+      "newLng": 130.106576,
+      "movedKm": 4.38,
+      "source": "overpass-water: OSM:芥屋漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "konominato-gyoko-teibo",
+      "name": "神湊漁港堤防",
+      "file": "spots-aichi-fukuoka-hiroshima.ts",
+      "newLat": 33.85291,
+      "newLng": 130.483453,
+      "movedKm": 5.27,
+      "source": "overpass-water: OSM:神湊港渡船ターミナル",
+      "confidence": "high"
+    },
+    {
+      "slug": "nogi-gyokou-itoshima-w6",
+      "name": "糸島・野北漁港",
+      "file": "spots-add6-west.ts",
+      "newLat": 33.614595,
+      "newLng": 130.158243,
+      "movedKm": 1.95,
+      "source": "overpass-water: OSM:野北漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "okagaki-hatsu-kaigan-s8",
+      "name": "岡垣・波津海岸",
+      "file": "spots-add8-kyushu-okinawa.ts",
+      "newLat": 33.87888,
+      "newLng": 130.573865,
+      "movedKm": 2.83,
+      "source": "gsi-exact: 波津海岸",
+      "confidence": "high"
+    },
+    {
+      "slug": "oshima-gyoko-teibo-munakata",
+      "name": "大島漁港堤防",
+      "file": "spots-aichi-fukuoka-hiroshima.ts",
+      "newLat": 33.909709,
+      "newLng": 130.408621,
+      "movedKm": 13.94,
+      "source": "overpass-water: OSM:筑前大島神崎灯台",
+      "confidence": "high"
+    },
+    {
+      "slug": "tsuyazaki-port-breakwater",
+      "name": "津屋崎漁港堤防",
+      "file": "spots-kyushu-chugoku-detail.ts",
+      "newLat": 33.783089,
+      "newLng": 130.467523,
+      "movedKm": 3.1,
+      "source": "overpass-water: OSM:津屋崎海水浴場",
+      "confidence": "high"
+    },
+    {
+      "slug": "iwaki-usuiso-kaigan-e8",
+      "name": "いわき薄磯海岸",
+      "file": "spots-add8-hokkaido-tohoku.ts",
+      "newLat": 37.033808,
+      "newLng": 140.97302,
+      "movedKm": 7.39,
+      "source": "overpass-water: OSM:薄磯海岸",
+      "confidence": "high"
+    },
+    {
+      "slug": "aioi-port-nose",
+      "name": "相生港（野瀬埠頭）",
+      "file": "spots-hyogo-detail.ts",
+      "newLat": 34.774535,
+      "newLng": 134.464166,
+      "movedKm": 2.49,
+      "source": "gsi-exact: 相生港",
+      "confidence": "high"
+    },
+    {
+      "slug": "awaji-ikuho-shinjima-k8",
+      "name": "淡路島・生穂新島",
+      "file": "spots-add8-kinki.ts",
+      "newLat": 34.440167,
+      "newLng": 134.916639,
+      "movedKm": 4.6,
+      "source": "gsi-exact: 生穂新島",
+      "confidence": "high"
+    },
+    {
+      "slug": "awaji-tsuna-kou-k8",
+      "name": "淡路島・津名港",
+      "file": "spots-add8-kinki.ts",
+      "newLat": 34.432445,
+      "newLng": 134.916949,
+      "movedKm": 3.44,
+      "source": "gsi-exact: 津名港",
+      "confidence": "high"
+    },
+    {
+      "slug": "awaji-yura-kou-k8",
+      "name": "淡路島・由良港",
+      "file": "spots-add8-kinki.ts",
+      "newLat": 34.290947,
+      "newLng": 134.948841,
+      "movedKm": 3.75,
+      "source": "gsi-exact: 由良港",
+      "confidence": "high"
+    },
+    {
+      "slug": "fukura-kou",
+      "name": "福良港",
+      "file": "spots-add4-chubu-kinki.ts",
+      "newLat": 34.252718,
+      "newLng": 134.715962,
+      "movedKm": 2.64,
+      "source": "gsi-exact: 福良港",
+      "confidence": "high"
+    },
+    {
+      "slug": "kamaya-gyoko-mio",
+      "name": "釜屋漁港（三尾）",
+      "file": "spots-hyogo-detail.ts",
+      "newLat": 35.618827,
+      "newLng": 134.413436,
+      "movedKm": 12.36,
+      "source": "overpass-water: OSM:釜屋漁港",
+      "confidence": "high"
+    },
+    {
+      "slug": "kinosaki-tsuiyama-kou-k8",
+      "name": "城崎温泉・津居山港",
+      "file": "spots-add8-kinki.ts",
+      "newLat": 35.64733,
+      "newLng": 134.831748,
+      "movedKm": 3.15,
+      "source": "gsi-exact: 津居山港",
+      "confidence": "high"
+    },
+    {
+      "slug": "moroyose-gyoko",
+      "name": "諸寄漁港",
+      "file": "spots-hyogo-detail.ts",
+      "newLat": 35.629898,
+      "newLng": 134.430625,
+      "movedKm": 3.31,
+      "source": "gsi-exact: 諸寄",
+      "confidence": "high"
+    },
+    {
+      "slug": "murotsu-gyoko",
+      "name": "室津漁港",
+      "file": "spots-hyogo-detail.ts",
+      "newLat": 34.522097,
+      "newLng": 134.874296,
+      "movedKm": 45.38,
+      "source": "gsi-exact: 室津港",
+      "confidence": "high"
+    },
+    {
+      "slug": "sakoshi-gyoko",
+      "name": "坂越漁港",
+      "file": "spots-hyogo-detail.ts",
+      "newLat": 34.76489,
+      "newLng": 134.434347,
+      "movedKm": 2.43,
+      "source": "gsi-exact: 坂越港",
+      "confidence": "high"
+    },
+    {
+      "slug": "satsu-gyoko",
+      "name": "佐津漁港",
+      "file": "spots-hyogo-detail.ts",
+      "newLat": 35.656074,
+      "newLng": 134.692925,
+      "movedKm": 2.37,
+      "source": "overpass-water: OSM:佐津海水浴場",
+      "confidence": "high"
+    },
+    {
+      "slug": "tai-gyoko-toyooka",
+      "name": "田結漁港",
+      "file": "spots-kitakinki.ts",
+      "newLat": 35.656565,
+      "newLng": 134.850871,
+      "movedKm": 4.13,
+      "source": "gsi-exact: 田結",
+      "confidence": "high"
+    },
+    {
+      "slug": "tsuiyama-port",
+      "name": "津居山港",
+      "file": "spots-hyogo-detail.ts",
+      "newLat": 35.64733,
+      "newLng": 134.831748,
+      "movedKm": 0.95,
+      "source": "gsi-exact: 津居山港",
+      "confidence": "high"
+    },
+    {
+      "slug": "tsuna-port-shizuki",
+      "name": "津名港（志筑）",
+      "file": "spots-hyogo-detail.ts",
+      "newLat": 34.432445,
+      "newLng": 134.916949,
+      "movedKm": 4.5,
+      "source": "gsi-exact: 津名港",
+      "confidence": "high"
+    },
+    {
+      "slug": "erimo-kou-e8",
+      "name": "えりも港",
+      "file": "spots-add8-hokkaido-tohoku.ts",
+      "newLat": 42.016183,
+      "newLng": 143.143812,
+      "movedKm": 8.78,
+      "source": "gsi-exact: えりも港",
+      "confidence": "high"
+    },
+    {
+      "slug": "furubira-gyoko",
+      "name": "古平漁港",
+      "file": "spots-hokkaido-tohoku-add2.ts",
+      "newLat": 43.263716,
+      "newLng": 140.641641,
+      "movedKm": 6.06,
+      "source": "gsi-poi: 古平浜町郵便局",
+      "confidence": "high"
+    },
+    {
+      "slug": "kojohama-gyoko",
+      "name": "虎杖浜漁港",
+      "file": "spots-hokkaido-tohoku-hokuriku-add3.ts",
+      "newLat": 42.455953,
+      "newLng": 141.205058,
+      "movedKm": 5.62,
+      "source": "gsi-poi: 虎杖浜六区",
+      "confidence": "medium"
+    },
+    {
+      "slug": "mori-kou-hokkaido",
+      "name": "森港",
+      "file": "spots-add4-north.ts",
+      "newLat": 42.115226,
+      "newLng": 140.593502,
+      "movedKm": 2.14,
+      "source": "gsi-exact: 森港",
+      "confidence": "high"
+    },
+    {
+      "slug": "muroran-itanki-hama-e8",
+      "name": "室蘭イタンキ浜",
+      "file": "spots-add8-hokkaido-tohoku.ts",
+      "newLat": 42.335656,
+      "newLng": 141.034586,
+      "movedKm": 2.81,
+      "source": "gsi-poi: イタンキ岬",
+      "confidence": "high"
+    },
+    {
+      "slug": "nemuro-kou6",
+      "name": "根室港",
+      "file": "spots-add6-east.ts",
+      "newLat": 43.3344,
+      "newLng": 145.570705,
+      "movedKm": 1.22,
+      "source": "gsi-poi: 根室港（根室）",
+      "confidence": "medium"
+    },
+    {
+      "slug": "otaru-port",
+      "name": "小樽港",
+      "file": "spots-base.ts",
+      "newLat": 43.198458,
+      "newLng": 141.01404,
+      "movedKm": 1.8,
+      "source": "gsi-exact: 小樽港",
+      "confidence": "high"
+    },
+    {
+      "slug": "rishiri-oshidomari-kou",
+      "name": "利尻鴛泊港",
+      "file": "spots-add4-north.ts",
+      "newLat": 45.241732,
+      "newLng": 141.230304,
+      "movedKm": 4.42,
+      "source": "gsi-exact: 鴛泊港",
+      "confidence": "high"
+    },
+    {
+      "slug": "samani-gyokou",
+      "name": "様似漁港",
+      "file": "spots-add4-north.ts",
+      "newLat": 42.12397,
+      "newLng": 142.911036,
+      "movedKm": 11.49,
+      "source": "overpass-water: OSM:様似港外西防波堤灯台",
+      "confidence": "high"
+    },
+    {
+      "slug": "soya-ko",
+      "name": "宗谷港",
+      "file": "spots-hokkaido-tohoku-hokuriku-add3.ts",
+      "newLat": 45.518704,
+      "newLng": 141.945893,
+      "movedKm": 6.56,
+      "source": "gsi-exact: 宗谷港",
+      "confidence": "high"
+    },
+    {
+      "slug": "toyoura-gyokou",
+      "name": "豊浦漁港",
+      "file": "spots-add4-north.ts",
+      "newLat": 42.439077,
+      "newLng": 140.328502,
+      "movedKm": 37.23,
+      "source": "gsi-poi: 国縫漁港大橋",
+      "confidence": "high"
+    },
+    {
+      "slug": "fukuro-gyokou-wakayama-k8",
+      "name": "袋漁港",
+      "file": "spots-add8-kinki.ts",
+      "newLat": 33.477169,
+      "newLng": 135.771598,
+      "movedKm": 6.58,
+      "source": "gsi-exact: 袋港",
+      "confidence": "high"
+    },
+    {
+      "slug": "hidaka-kou-k8",
+      "name": "日高港",
+      "file": "spots-add8-kinki.ts",
+      "newLat": 33.871032,
+      "newLng": 135.142529,
+      "movedKm": 6.02,
+      "source": "gsi-exact: 日高港",
+      "confidence": "medium"
+    },
+    {
+      "slug": "hiki-gyoko",
+      "name": "日置漁港",
+      "file": "spots-chubu-kinki-add2.ts",
+      "newLat": 33.561881,
+      "newLng": 135.448102,
+      "movedKm": 7.37,
+      "source": "gsi-exact: 日置港",
+      "confidence": "high"
+    },
+    {
+      "slug": "hikigawa-kakou",
+      "name": "日置川河口",
+      "file": "spots-wakayama-mie-niigata.ts",
+      "newLat": 33.560342,
+      "newLng": 135.44712,
+      "movedKm": 9.36,
+      "source": "gsi-exact: 日置川",
+      "confidence": "high"
+    },
+    {
+      "slug": "hirogawa-karao-gyokou",
+      "name": "広川・唐尾漁港",
+      "file": "spots-add4-chubu-kinki.ts",
+      "newLat": 34.031812,
+      "newLng": 135.170873,
+      "movedKm": 4.07,
+      "source": "gsi-exact: 広川",
+      "confidence": "high"
+    },
+    {
+      "slug": "isonoura-beach-k8",
+      "name": "磯ノ浦海水浴場",
+      "file": "spots-add8-kinki.ts",
+      "newLat": 34.260506,
+      "newLng": 135.094581,
+      "movedKm": 1.35,
+      "source": "gsi-poi: 磯ノ浦駅",
+      "confidence": "high"
+    },
+    {
+      "slug": "koza-kou",
+      "name": "古座港",
+      "file": "spots-add4-chubu-kinki.ts",
+      "newLat": 33.511457,
+      "newLng": 135.825526,
+      "movedKm": 8.79,
+      "source": "gsi-exact: 古座港",
+      "confidence": "high"
+    },
+    {
+      "slug": "tanabe-iso",
+      "name": "田辺磯",
+      "file": "spots-additional-kinki.ts",
+      "newLat": 33.727614,
+      "newLng": 135.378292,
+      "movedKm": 0.94,
+      "source": "gsi-poi: 田辺消防署扇ヶ浜分署",
+      "confidence": "high"
+    },
+    {
+      "slug": "wabuka-gyoko",
+      "name": "和深漁港",
+      "file": "spots-wakayama-mie-niigata.ts",
+      "newLat": 33.501157,
+      "newLng": 135.643099,
+      "movedKm": 1.83,
+      "source": "gsi-exact: 和深",
+      "confidence": "high"
+    }
+  ],
+  "skipped": [
+    {
+      "slug": "hayakawa-ko-add2",
+      "reason": "slug-not-found（重複統合等で削除済みの可能性）"
+    }
+  ],
+  "slugDuplicates": [
+    {
+      "slug": "kashima-port",
+      "files": [
+        "spots-additional-kanto.ts",
+        "spots-kanto-detail.ts"
+      ]
+    },
+    {
+      "slug": "ginowan-marina",
+      "files": [
+        "spots-add4-kyushu-okinawa.ts",
+        "spots-additional-okinawa.ts",
+        "spots-okinawa.ts"
+      ]
+    },
+    {
+      "slug": "sukumo-bay",
+      "files": [
+        "spots-additional-chugoku-shikoku.ts",
+        "spots-shikoku.ts"
+      ]
+    },
+    {
+      "slug": "otomo-gyokou",
+      "files": [
+        "spots-add4-kyushu-okinawa.ts",
+        "spots-expand-kyushu.ts"
+      ]
+    },
+    {
+      "slug": "izumozaki-gyoko",
+      "files": [
+        "spots-hokkaido-tohoku-hokuriku-add3.ts",
+        "spots-hokuriku.ts",
+        "spots-kanto-koshinetsu-add2.ts",
+        "spots-wakayama-mie-niigata.ts"
+      ]
+    },
+    {
+      "slug": "oyashirazu-kaigan-niigata",
+      "files": [
+        "spots-add5-central.ts",
+        "spots-add6-central.ts"
+      ]
+    },
+    {
+      "slug": "yoneyama-kaigan",
+      "files": [
+        "spots-kanto-koshinetsu-add3.ts",
+        "spots-wakayama-mie-niigata.ts"
+      ]
+    },
+    {
+      "slug": "manazuru-kou",
+      "files": [
+        "spots-add5-east2.ts",
+        "spots-kanto-koshinetsu-add3.ts"
+      ]
+    },
+    {
+      "slug": "futomi-gyokou",
+      "files": [
+        "spots-add4-kanto.ts",
+        "spots-kanto-koshinetsu-add3.ts"
+      ]
+    },
+    {
+      "slug": "kaiyo-shishikui-port",
+      "files": [
+        "spots-chugoku-kyushu-okinawa-add3.ts",
+        "spots-shikoku.ts"
+      ]
+    },
+    {
+      "slug": "amaharashi-kaigan-toyama",
+      "files": [
+        "spots-add5-central.ts",
+        "spots-add6-central.ts"
+      ]
+    },
+    {
+      "slug": "tsuruga-matsubara-kaigan",
+      "files": [
+        "spots-add4-chubu-kinki.ts",
+        "spots-add6-central.ts"
+      ]
+    },
+    {
+      "slug": "murotsu-gyoko",
+      "files": [
+        "spots-chubu-kinki-add2.ts",
+        "spots-hyogo-detail.ts"
+      ]
+    },
+    {
+      "slug": "hikigawa-kakou",
+      "files": [
+        "spots-chubu-kinki-add3.ts",
+        "spots-wakayama-mie-niigata.ts"
+      ]
+    }
+  ]
+}

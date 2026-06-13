@@ -335,7 +335,7 @@ export const saninSpots: FishingSpot[] = [
   {
     id: "s524", name: "隠岐の島西郷港", slug: "oki-saigo-port",
     description: "島根県沖に浮かぶ隠岐の島（島後）の中心港・西郷港。離島の豊かな漁場に囲まれ、大型のクロダイ・グレ・ヒラマサなどが狙える磯釣りの聖地。日本海の荒波に揉まれた魚は引きが強烈。",
-    latitude: 36.1910, longitude: 133.3220,
+    latitude: 36.21135, longitude: 133.343265,
     address: "〒685-0013 島根県隠岐の島町中町目貫の四",
     accessInfo: "境港から高速船で約2時間20分（フェリーで約3時間）。七類港からも高速船・フェリーあり。",
     region: localRegion("r196"), spotType: "port", difficulty: "intermediate",
@@ -400,7 +400,7 @@ export const saninSpots: FishingSpot[] = [
   {
     id: "s1152", name: "北栄町北条砂丘", slug: "hokuei-hojo-dune",
     description: "名探偵コナンの作者・青山剛昌の出身地として知られる北栄町の砂丘海岸。広大な砂浜が続き、キスの投げ釣りでは県内屈指の実績を誇る。秋のカレイ釣りも人気で、広い釣り場でのんびり楽しめる。",
-    latitude: 35.4830, longitude: 133.7350,
+    latitude: 35.501287, longitude: 133.808744,
     address: "〒689-2104 鳥取県北栄町弓原",
     accessInfo: "JR山陰本線由良駅から車で約10分。山陰自動車道北栄ICから約10分。",
     region: localRegion("r197"), spotType: "beach", difficulty: "beginner",
@@ -626,7 +626,7 @@ export const saninSpots: FishingSpot[] = [
   {
     id: "s1160", name: "松江市恵曇漁港", slug: "matsue-etomo-port",
     description: "島根半島北側の恵曇（えとも）漁港。松江市街から比較的アクセスの良い漁港で、アジ・サバのサビキ釣りや冬のヤリイカエギングが楽しめる。春にはメバルの実績も高い好漁場。",
-    latitude: 35.5340, longitude: 133.0560,
+    latitude: 35.522576, longitude: 132.967774,
     address: "〒690-0324 島根県松江市鹿島町片句330-2",
     accessInfo: "JR松江駅から車で約30分。山陰自動車道松江西ICから約20分。",
     region: localRegion("r192"), spotType: "port", difficulty: "beginner",

@@ -428,7 +428,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
   {
     id: "se5119", name: "岩泉 小本港", slug: "iwaizumi-omoto-kou",
     description: "岩泉町の小本川河口にある漁港。龍泉洞の街として知られ、サケの遡上シーズンは見応えがある。ソイやメバルの根魚釣り場。",
-    latitude: 39.7520, longitude: 141.9340,
+    latitude: 39.847295, longitude: 141.976345,
     address: "〒027-0421 岩手県下閉伊郡岩泉町小本",
     accessInfo: "三陸自動車道岩泉龍泉洞ICから約20分。",
     region: localRegion("re5090"), spotType: "port", difficulty: "beginner",
@@ -1116,7 +1116,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
   {
     id: "se5159", name: "小舟渡漁港", slug: "kofunato-gyokou",
     description: "八戸市南部の漁港。岩場が隣接しメバルやアイナメの根魚が豊富。夜釣りのソイ狙いでも実績がある穴場。",
-    latitude: 40.4650, longitude: 141.5990,
+    latitude: 40.453433, longitude: 141.6728,
     address: "〒031-0841 青森県八戸市大字鮫町",
     accessInfo: "JR鮫駅から車で約10分。八戸自動車道八戸南ICから約10分。",
     region: localRegion("re5130"), spotType: "port", difficulty: "beginner",

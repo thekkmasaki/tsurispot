@@ -385,7 +385,7 @@ export const okinawaSpots: FishingSpot[] = [
   {
     id: "s512", name: "南城市奥武島", slug: "nanjo-oku-island",
     description: "天ぷらで有名な奥武島（おうじま）の磯場。島の周囲は潮通しが良く、アオリイカやミーバイの好ポイント。橋で本島と繋がっているため渡船不要でアクセスできる穴場的な離島釣り場。",
-    latitude: 26.1590, longitude: 127.7550,
+    latitude: 26.129628, longitude: 127.773028,
     address: "〒901-0614 沖縄県南城市玉城奥武",
     accessInfo: "那覇市内から車で約35分。南風原南ICから国道331号経由で奥武島橋を渡る。",
     region: localRegion("r184"), spotType: "rocky", difficulty: "intermediate",

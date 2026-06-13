@@ -290,7 +290,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6009", name: "根室港", slug: "nemuro-kou6",
     description: "日本最東端の港。冷たい海流の影響で良型のカレイやタラが狙える。花咲ガニで有名な地域だが釣りでもホッケやソイなど多彩な魚種が楽しめる。",
-    latitude: 43.328, longitude: 145.583,
+    latitude: 43.3344, longitude: 145.570705,
     address: "〒087-0027 北海道根室市弥栄町",
     accessInfo: "JR根室駅から徒歩約15分。中標津空港から車で約1時間30分。",
     region: localRegion("re6003"), spotType: "port", difficulty: "intermediate",
@@ -801,7 +801,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6035", name: "平舘漁港", slug: "tairadate-gyokou6",
     description: "陸奥湾に面した穏やかな漁港。真鯛釣りの名所として知られ春から秋にかけて良型が期待できる。湾内なので波が穏やかで初心者にも安心。",
-    latitude: 41.105, longitude: 140.582,
+    latitude: 41.09967, longitude: 140.628223,
     address: "〒030-1303 青森県東津軽郡外ヶ浜町平舘",
     accessInfo: "青森市から車で約1時間。国道280号線沿い。",
     region: localRegion("re6005"), spotType: "port", difficulty: "beginner",
@@ -840,7 +840,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6037", name: "脇野沢港", slug: "wakinosawa-kou6",
     description: "下北半島西側の陸奥湾に面した静かな漁港。マダイやカレイが狙え冬場はタラの投げ釣りも。北限のニホンザルが生息する地域でもある。",
-    latitude: 41.158, longitude: 140.793,
+    latitude: 41.120414, longitude: 140.814643,
     address: "〒039-5327 青森県むつ市脇野沢本村",
     accessInfo: "JR下北駅から車で約40分。むつ市街から車で約30分。",
     region: localRegion("re6005"), spotType: "port", difficulty: "intermediate",
@@ -937,7 +937,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6042", name: "階上海岸", slug: "hashikami-kaigan6",
     description: "八戸市南部に続く岩礁海岸。投げ釣りのカレイやアイナメが好ポイント。みちのく潮風トレイルのルート上にあり景観も素晴らしい。",
-    latitude: 40.458, longitude: 141.623,
+    latitude: 40.506735, longitude: 141.607441,
     address: "〒039-1201 青森県三戸郡階上町道仏",
     accessInfo: "JR階上駅から車で約10分。八戸から車で約30分。",
     region: localRegion("re6006"), spotType: "rocky", difficulty: "intermediate",
@@ -956,7 +956,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6043", name: "小泊漁港", slug: "kodomari-gyokou6",
     description: "津軽半島の日本海側に位置する漁港。太宰治の小説にも登場する歴史ある港。メバルやソイの根魚が豊富で夜釣りが特に人気。",
-    latitude: 41.13, longitude: 140.283,
+    latitude: 41.131044, longitude: 140.304867,
     address: "〒037-0531 青森県北津軽郡中泊町小泊",
     accessInfo: "五所川原から車で約1時間。竜泊ラインの途中。",
     region: localRegion("re6004"), spotType: "port", difficulty: "intermediate",
@@ -1052,7 +1052,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6048", name: "蟹田漁港", slug: "kanita-gyokou6",
     description: "外ヶ浜町の陸奥湾に面した漁港。マダイやカレイが狙える穏やかなポイント。蟹田の名の通りカニも有名でのどかな港町の雰囲気。",
-    latitude: 41.054, longitude: 140.634,
+    latitude: 41.041589, longitude: 140.644514,
     address: "〒030-1211 青森県東津軽郡外ヶ浜町蟹田",
     accessInfo: "JR蟹田駅から徒歩約10分。青森市から車で約50分。",
     region: localRegion("re6005"), spotType: "port", difficulty: "beginner",
@@ -1263,7 +1263,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6059", name: "川内漁港", slug: "kawauchi-gyokou6",
     description: "むつ市川内町の陸奥湾に面した漁港。穏やかな湾内でカレイやアイナメの投げ釣りが中心。川内川の河口も近くシーバスも狙える。",
-    latitude: 41.183, longitude: 140.887,
+    latitude: 41.188317, longitude: 140.990705,
     address: "〒039-5202 青森県むつ市川内町川内",
     accessInfo: "JR下北駅から車で約20分。むつ市街から車で約15分。",
     region: localRegion("re6005"), spotType: "port", difficulty: "beginner",
@@ -1481,7 +1481,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6070", name: "普代漁港", slug: "fudai-gyokou6",
     description: "高さ15mの防潮堤で東日本大震災から街を守った普代村の漁港。黒崎の断崖が近く根魚が豊富。アイナメやソイの穴釣りが特に人気。",
-    latitude: 40.003, longitude: 141.878,
+    latitude: 40.015532, longitude: 141.89998,
     address: "〒028-8331 岩手県下閉伊郡普代村普代",
     accessInfo: "三陸鉄道普代駅から車で約5分。久慈から車で約40分。",
     region: localRegion("re6007"), spotType: "port", difficulty: "intermediate",
@@ -1500,7 +1500,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6071", name: "岩泉小本漁港", slug: "iwaizumi-omoto-gyokou6",
     description: "龍泉洞で有名な岩泉町の太平洋側にある漁港。小本川の河口に位置しカレイやアイナメが好調。春にはサクラマスも狙える穴場。",
-    latitude: 39.834, longitude: 141.915,
+    latitude: 39.847295, longitude: 141.976345,
     address: "〒027-0421 岩手県下閉伊郡岩泉町小本",
     accessInfo: "三陸鉄道岩泉小本駅から徒歩約10分。宮古から車で約40分。",
     region: localRegion("re6008"), spotType: "port", difficulty: "intermediate",
@@ -1557,7 +1557,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6074", name: "吉浜漁港", slug: "yoshihama-gyokou6",
     description: "大船渡市の吉浜湾に面した漁港。津波防災のモデル地区としても知られる。根魚が豊富でアイナメやメバルの釣りが楽しめる穏やかなポイント。",
-    latitude: 39.128, longitude: 141.812,
+    latitude: 39.144469, longitude: 141.838167,
     address: "〒022-0101 岩手県大船渡市三陸町吉浜",
     accessInfo: "大船渡から車で約25分。三陸道吉浜ICから約5分。",
     region: localRegion("re6009"), spotType: "port", difficulty: "beginner",
@@ -1747,7 +1747,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6084", name: "崎山漁港", slug: "sakiyama-gyokou6",
     description: "宮古市北部の崎山半島にある漁港。宮古湾を一望できる高台に位置し根魚が豊富。穴場的な存在で地元の釣り人に愛されるスポット。",
-    latitude: 39.678, longitude: 141.938,
+    latitude: 39.687035, longitude: 141.98752,
     address: "〒027-0097 岩手県宮古市崎山",
     accessInfo: "JR宮古駅から車で約15分。宮古ICから車で約20分。",
     region: localRegion("re6008"), spotType: "port", difficulty: "intermediate",
@@ -1766,7 +1766,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6085", name: "船越漁港", slug: "funakoshi-gyokou6",
     description: "山田湾と船越湾の間に位置する漁港。穏やかな湾内でカレイやハゼの投げ釣りが楽しめる。三陸鉄道の線路沿いでアクセスも良い。",
-    latitude: 39.433, longitude: 141.968,
+    latitude: 39.414644, longitude: 142.010496,
     address: "〒028-1361 岩手県下閉伊郡山田町船越",
     accessInfo: "三陸鉄道船越駅から徒歩約10分。宮古から車で約40分。",
     region: localRegion("re6008"), spotType: "port", difficulty: "beginner",
@@ -1785,7 +1785,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6086", name: "田老漁港", slug: "taro-gyokou6",
     description: "宮古市田老地区の漁港。かつて万里の長城と呼ばれた防潮堤で知られる。復興後の新しい港からカレイやソイが狙える。たろう観光ホテルの震災遺構も近い。",
-    latitude: 39.733, longitude: 141.963,
+    latitude: 39.753545, longitude: 141.99982,
     address: "〒027-0307 岩手県宮古市田老",
     accessInfo: "JR宮古駅から車で約20分。三陸道田老ICから約5分。",
     region: localRegion("re6008"), spotType: "port", difficulty: "beginner",
@@ -2138,7 +2138,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6104", name: "雄勝漁港", slug: "ogatsu-gyokou6",
     description: "石巻市雄勝町の漁港で硯の産地としても知られる。リアス式海岸の入り江にあり根魚が豊富。震災復興が進み新しい岸壁で釣りが楽しめる。",
-    latitude: 38.508, longitude: 141.458,
+    latitude: 38.504466, longitude: 141.495948,
     address: "〒986-1333 宮城県石巻市雄勝町雄勝",
     accessInfo: "石巻から車で約40分。三陸道河北ICから約30分。",
     region: localRegion("re6011"), spotType: "port", difficulty: "intermediate",
@@ -2176,7 +2176,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6106", name: "歌津漁港", slug: "utatsu-gyokou6",
     description: "南三陸町の歌津地区にある漁港。モアイ像のレプリカで有名な地域で岸壁からの釣りが楽しめる。カレイやソイが中心で穏やかな湾内は初心者にも安心。",
-    latitude: 38.728, longitude: 141.513,
+    latitude: 38.699356, longitude: 141.521718,
     address: "〒988-0453 宮城県本吉郡南三陸町歌津",
     accessInfo: "三陸道歌津ICから約5分。気仙沼から車で約30分。",
     region: localRegion("re6010"), spotType: "port", difficulty: "beginner",
@@ -2214,7 +2214,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6108", name: "大谷海岸", slug: "ooya-kaigan6",
     description: "気仙沼市の太平洋に面した砂浜。道の駅大谷海岸に隣接しアクセスが良い。投げ釣りのカレイやキスが楽しめる。夏は海水浴場にもなる。",
-    latitude: 38.818, longitude: 141.553,
+    latitude: 38.813248, longitude: 141.562332,
     address: "〒988-0273 宮城県気仙沼市本吉町三島",
     accessInfo: "三陸道大谷海岸ICから約3分。気仙沼から車で約20分。",
     region: localRegion("re6010"), spotType: "beach", difficulty: "beginner",
@@ -2408,7 +2408,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6118", name: "蛤浜", slug: "hamaguri-hama6",
     description: "石巻市の牡鹿半島基部にある小さな浜。穏やかな入り江で根魚やカレイが釣れる隠れた名スポット。カフェが併設された復興の浜。",
-    latitude: 38.438, longitude: 141.408,
+    latitude: 38.404336, longitude: 141.409847,
     address: "〒986-2135 宮城県石巻市蛤浜",
     accessInfo: "石巻市街から車で約25分。県道2号線沿い。",
     region: localRegion("re6011"), spotType: "beach", difficulty: "beginner",
@@ -4287,7 +4287,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   {
     id: "se6214", name: "大津漁港", slug: "ootsu-gyokou-ibaraki6",
     description: "北茨城市の太平洋に面した漁港。底引き網漁が盛んで新鮮な海産物が楽しめる。岸壁からカレイやアジが釣れるアクセスの良いポイント。",
-    latitude: 36.848, longitude: 140.758,
+    latitude: 36.825643, longitude: 140.78414,
     address: "〒319-1702 茨城県北茨城市大津町",
     accessInfo: "JR大津港駅から徒歩約15分。常磐道北茨城ICから約10分。",
     region: localRegion("re6021"), spotType: "port", difficulty: "beginner",

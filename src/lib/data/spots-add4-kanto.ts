@@ -186,7 +186,7 @@ export const kantoAdd4Spots: FishingSpot[] = [
   {
     id: "sk4006", name: "岩井袋漁港", slug: "iwaibukuro-gyokou",
     description: "南房総市の小さな入り江にある静かな漁港。テトラ周りでカサゴやメバルが狙え、穴釣りビギナーにも最適な根魚パラダイス。",
-    latitude: 35.0400, longitude: 139.8650,
+    latitude: 35.101768, longitude: 139.831421,
     address: "〒299-2115 千葉県南房総市富浦町多田良",
     accessInfo: "JR内房線岩井駅から車で約10分。富津館山道鋸南富山ICから約15分。",
     region: localRegion("rk4003"), spotType: "port", difficulty: "beginner",
@@ -226,7 +226,7 @@ export const kantoAdd4Spots: FishingSpot[] = [
   {
     id: "sk4008", name: "乙浜漁港", slug: "otohama-gyokou",
     description: "房総半島最南端に近い漁港で、堤防からの釣りが楽しめる。回遊魚の通り道にあたり、秋のソウダガツオやカンパチ狙いが人気。",
-    latitude: 34.9180, longitude: 139.8870,
+    latitude: 34.911829, longitude: 139.922314,
     address: "〒295-0103 千葉県南房総市白浜町乙浜",
     accessInfo: "富津館山道富浦ICから約40分。JR内房線千倉駅からバスで約20分。",
     region: localRegion("rk4003"), spotType: "port", difficulty: "beginner",
@@ -1342,7 +1342,7 @@ export const kantoAdd4Spots: FishingSpot[] = [
   {
     id: "sk4064", name: "富戸漁港", slug: "futo-gyokou",
     description: "伊東市の東海岸に位置する小漁港。溶岩で形成された磯が隣接し、メジナやイシダイの磯釣り天国として関東のベテラン釣り師に人気。",
-    latitude: 34.9060, longitude: 139.1200,
+    latitude: 34.633573, longitude: 138.794346,
     address: "〒413-0231 静岡県伊東市富戸",
     accessInfo: "伊豆急行富戸駅から徒歩約15分。東名沼津ICから約60分。",
     region: localRegion("rk4030"), spotType: "port", difficulty: "intermediate",
@@ -1499,7 +1499,7 @@ export const kantoAdd4Spots: FishingSpot[] = [
   {
     id: "sk4072", name: "妻良漁港", slug: "mera-gyokou-shizuoka",
     description: "南伊豆町の東に位置する小港。黒潮の影響を受けた好漁場で、磯釣りのメジナやイシダイの大物が期待できる本格派ポイント。",
-    latitude: 34.6550, longitude: 138.8740,
+    latitude: 34.659482, longitude: 138.779539,
     address: "〒415-0531 静岡県賀茂郡南伊豆町妻良",
     accessInfo: "伊豆急行下田駅からバスで約40分。東名沼津ICから約120分。",
     region: localRegion("rk4031"), spotType: "port", difficulty: "advanced",
@@ -1954,7 +1954,7 @@ export const kantoAdd4Spots: FishingSpot[] = [
   {
     id: "sk4095", name: "佐渡・鷲崎漁港", slug: "sado-washizaki-gyokou",
     description: "佐渡島最北端に位置する漁港。対馬海流の恩恵で魚種が豊富、ショアジギングでイナダやサワラが回遊する日本海の好フィールド。",
-    latitude: 38.2830, longitude: 138.4740,
+    latitude: 38.184117, longitude: 138.320117,
     address: "〒952-3205 新潟県佐渡市鷲崎",
     accessInfo: "両津港からレンタカーで約40分。",
     region: localRegion("rk4051"), spotType: "port", difficulty: "intermediate",
@@ -1974,7 +1974,7 @@ export const kantoAdd4Spots: FishingSpot[] = [
   {
     id: "sk4096", name: "村上市岩船港", slug: "iwafune-kou-murakami",
     description: "新潟県北部の岩船港は三面川河口に位置する漁港。秋のサケ遡上シーズンには多くの釣り人が集まり、通年でシーバスやクロダイも狙える。",
-    latitude: 38.0680, longitude: 139.4570,
+    latitude: 38.18698, longitude: 139.424231,
     address: "〒958-0023 新潟県村上市岩船駅前",
     accessInfo: "JR羽越本線岩船町駅から徒歩約10分。日本海東北道村上瀬波温泉ICから約10分。",
     region: localRegion("rk4050"), spotType: "port", difficulty: "beginner",
@@ -1994,7 +1994,7 @@ export const kantoAdd4Spots: FishingSpot[] = [
   {
     id: "sk4097", name: "笹川流れサーフ", slug: "sasagawa-nagare-surf",
     description: "国の名勝に指定された笹川流れの海岸。透明度の高い海でキスの投げ釣りが人気。奇岩が連なる美しい景観の中で釣りが楽しめる。",
-    latitude: 38.1370, longitude: 139.4730,
+    latitude: 38.391576, longitude: 139.456734,
     address: "〒959-3665 新潟県村上市笹川",
     accessInfo: "JR羽越本線桑川駅から徒歩約5分。日本海東北道朝日まほろばICから約30分。",
     region: localRegion("rk4050"), spotType: "beach", difficulty: "beginner",

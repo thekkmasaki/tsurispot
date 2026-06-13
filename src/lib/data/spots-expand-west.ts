@@ -1065,7 +1065,7 @@ export const expandWestSpots: FishingSpot[] = [
   {
     id: "exp-w047", name: "寄島・三ツ山港", slug: "yorishima-mitsuyama-kou",
     description: "浅口市寄島にある小さな漁港。アサリやカキの産地で、港周辺は穏やかな瀬戸内の海。サビキ釣りでアジ、投げ釣りでカレイ・キス、エギングでアオリイカが狙える地元密着型の釣り場。",
-    latitude: 34.5117, longitude: 133.5667,
+    latitude: 34.473192, longitude: 133.596119,
     address: "〒714-0101 岡山県浅口市寄島町",
     accessInfo: "JR鴨方駅から車で約15分。山陽自動車道鴨方ICから約15分。",
     region: localRegion("r4043"), spotType: "port", difficulty: "beginner",

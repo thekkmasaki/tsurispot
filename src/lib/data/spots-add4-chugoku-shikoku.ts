@@ -203,7 +203,7 @@ export const chugokuShikokuAdd4Spots: FishingSpot[] = [
   {
     id: "scs4006", name: "因島・土生港外堤防", slug: "innoshima-habu-kou-soto",
     description: "因島の中心部にある土生港の外側堤防。しまなみ海道の島々を望みながら、多彩な魚種が狙える本格派ポイント。",
-    latitude: 34.3020, longitude: 133.1680,
+    latitude: 34.34325, longitude: 133.17625,
     address: "〒722-2211 広島県尾道市因島土生町",
     accessInfo: "しまなみ海道因島北ICから約15分。尾道港からフェリーで約30分。",
     region: localRegion("rcs4003"), spotType: "breakwater", difficulty: "intermediate",
@@ -242,7 +242,7 @@ export const chugokuShikokuAdd4Spots: FishingSpot[] = [
   {
     id: "scs4008", name: "大崎上島・白水港", slug: "osakikamijima-shirami-kou",
     description: "大崎上島南側に位置する白水港。島の港特有の透明度の高い海で、メバルやアジを中心に四季折々の釣りが楽しめる。",
-    latitude: 34.2580, longitude: 132.9150,
+    latitude: 34.269461, longitude: 132.914062,
     address: "〒725-0402 広島県豊田郡大崎上島町東野",
     accessInfo: "竹原港からフェリーで約30分。白水港下船すぐ。",
     region: localRegion("rcs4004"), spotType: "port", difficulty: "beginner",
@@ -1062,7 +1062,7 @@ export const chugokuShikokuAdd4Spots: FishingSpot[] = [
   {
     id: "scs4051", name: "岩美町・羽尾漁港", slug: "iwami-hao-gyokou",
     description: "浦富海岸の東端に位置する羽尾漁港。岩場と砂地が混在する海底でカレイやキスの投げ釣りが好調。春にはサヨリの群れも接岸する。",
-    latitude: 35.5920, longitude: 134.3550,
+    latitude: 35.608159, longitude: 134.339755,
     address: "〒681-0003 鳥取県岩美郡岩美町羽尾",
     accessInfo: "JR岩美駅から車で約15分。鳥取自動車道鳥取ICから約30分。",
     region: localRegion("rcs4041"), spotType: "port", difficulty: "beginner",
@@ -1458,7 +1458,7 @@ export const chugokuShikokuAdd4Spots: FishingSpot[] = [
   {
     id: "scs4071", name: "小豆島・福田港堤防", slug: "shodoshima-fukuda-kou",
     description: "小豆島東端の福田港。姫路からのフェリーが着く港で、堤防からのサビキ釣りやエギングが楽しめる。島の中では比較的釣り人が少ない穴場。",
-    latitude: 34.5050, longitude: 134.3280,
+    latitude: 34.481707, longitude: 134.194722,
     address: "〒761-4301 香川県小豆郡小豆島町福田",
     accessInfo: "姫路港からフェリーで約100分。福田港下船すぐ。",
     region: localRegion("rcs4061"), spotType: "breakwater", difficulty: "beginner",
@@ -1477,7 +1477,7 @@ export const chugokuShikokuAdd4Spots: FishingSpot[] = [
   {
     id: "scs4072", name: "小豆島・大角鼻護岸", slug: "shodoshima-ookadohana-gogan",
     description: "小豆島北端の大角鼻周辺の護岸。播磨灘に突き出た岬で潮通しが抜群。ショアジギングでの青物やカゴ釣りでのマダイが期待できる上級者向けスポット。",
-    latitude: 34.5350, longitude: 134.2550,
+    latitude: 34.481707, longitude: 134.194722,
     address: "〒761-4100 香川県小豆郡土庄町小部",
     accessInfo: "土庄港から車で約25分。",
     region: localRegion("rcs4061"), spotType: "rocky", difficulty: "advanced",
@@ -1993,7 +1993,7 @@ export const chugokuShikokuAdd4Spots: FishingSpot[] = [
   {
     id: "scs4099", name: "海陽町・宍喰港堤防", slug: "kaiyo-shishikui-kou-teihou",
     description: "徳島県最南端の宍喰港。サーフィンの町としても知られ、太平洋に面した堤防からエギングやショアジギングが楽しめる。温暖な気候で冬も釣りやすい。",
-    latitude: 33.5580, longitude: 134.3050,
+    latitude: 33.561718, longitude: 134.309213,
     address: "〒775-0501 徳島県海部郡海陽町宍喰浦",
     accessInfo: "阿佐海岸鉄道宍喰駅から徒歩約10分。徳島市から車で約2時間半。",
     region: localRegion("rcs4082"), spotType: "breakwater", difficulty: "intermediate",

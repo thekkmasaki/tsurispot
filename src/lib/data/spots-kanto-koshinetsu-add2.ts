@@ -969,7 +969,7 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
   {
     id: "s2239", name: "那珂湊港（那珂湊漁港）", slug: "nakaminato-ko-add2",
     description: "ひたちなか市の那珂湊おさかな市場で有名な大型漁港。堤防からサビキ釣りでアジやサバが楽しめ、冬場はカレイの投げ釣りも人気。回遊魚の魚影が濃く、ショアジギングでイナダやサワラも期待できる。おさかな市場での食事と合わせて楽しめる。",
-    latitude: 36.3350, longitude: 140.5870,
+    latitude: 36.338737, longitude: 140.599786,
     address: "〒311-1221 茨城県ひたちなか市湊本町20",
     accessInfo: "ひたちなか海浜鉄道那珂湊駅から徒歩約10分。東水戸道路ひたちなかICから約15分。",
     region: localRegion("r2400"), spotType: "port", difficulty: "beginner",

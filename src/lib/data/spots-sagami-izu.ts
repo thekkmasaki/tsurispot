@@ -373,7 +373,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si9", name: "富戸港", slug: "futo-port",
     description: "東伊豆の代表的な漁港。ダイビングスポットとしても有名だが、堤防からのサビキ釣りやカゴ釣りの実績も高い。透明度の高い海で気持ちよく釣りが楽しめる。",
-    latitude: 34.9120, longitude: 139.1320, address: "〒413-0231 静岡県伊東市富戸987-2",
+    latitude: 34.633573, longitude: 138.794346, address: "〒413-0231 静岡県伊東市富戸987-2",
     accessInfo: "伊豆急行富戸駅から徒歩約15分。国道135号から県道経由。",
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり（一部有料）",
@@ -897,7 +897,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si25", name: "妻良港", slug: "mera-port",
     description: "南伊豆の西側に位置する漁港。伊豆の秘境的漁港で釣り人の数が少なく、のんびり釣りが楽しめる。カゴ釣りやフカセ釣りでメジナ、マダイが狙える実力派ポイント。",
-    latitude: 34.6250, longitude: 138.8350, address: "〒415-0533 静岡県南伊豆町妻良416",
+    latitude: 34.659482, longitude: 138.779539, address: "〒415-0533 静岡県南伊豆町妻良416",
     accessInfo: "伊豆急行伊豆急下田駅からバスで約50分。車は国道136号経由。",
     region: region("r9"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり",
@@ -959,7 +959,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   {
     id: "si27", name: "下田外浦港", slug: "shimoda-sotora-port",
     description: "下田湾の入口に位置する外浦港。穏やかな内湾でファミリー釣りに最適。サビキでアジ・イワシが安定して釣れるほか、エギングのポイントとしても知られる。",
-    latitude: 34.6780, longitude: 138.9350, address: "〒415-0013 静岡県下田市柿崎",
+    latitude: 34.675094, longitude: 138.972741, address: "〒415-0013 静岡県下田市柿崎",
     accessInfo: "伊豆急行伊豆急下田駅から車で約10分。バスの場合は外浦口バス停下車徒歩5分。",
     region: region("r9"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車スペースあり（夏季は混雑）",

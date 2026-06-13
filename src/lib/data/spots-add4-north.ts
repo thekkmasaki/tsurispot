@@ -141,7 +141,7 @@ export const northAdd4Spots: FishingSpot[] = [
   {
     id: "sn4002", name: "森港", slug: "mori-kou-hokkaido",
     description: "駒ヶ岳を望む噴火湾奥の港。カレイの投げ釣りで知られ、春にはマコガレイが40cm超えの大型も。港内でのサビキ釣りも楽しめる。",
-    latitude: 42.1010, longitude: 140.5760,
+    latitude: 42.115226, longitude: 140.593502,
     address: "〒049-2311 北海道茅部郡森町港町",
     accessInfo: "JR森駅から徒歩約10分。道央自動車道森ICから約5分。",
     region: localRegion("rn4001"), spotType: "port", difficulty: "beginner",
@@ -463,7 +463,7 @@ export const northAdd4Spots: FishingSpot[] = [
   {
     id: "sn4017", name: "様似漁港", slug: "samani-gyokou",
     description: "アポイ岳ジオパークのふもとにある太平洋岸の港。春のカレイ釣りが特に好調で、砂がれいの50cm級も夢ではない穴場。周辺の磯場も魅力的。",
-    latitude: 42.1310, longitude: 143.0500,
+    latitude: 42.12397, longitude: 142.911036,
     address: "〒058-0024 北海道様似郡様似町港町",
     accessInfo: "帯広から国道236号で約2時間。えりも岬から約30分。",
     region: localRegion("rn4007"), spotType: "port", difficulty: "intermediate",
@@ -506,7 +506,7 @@ export const northAdd4Spots: FishingSpot[] = [
   {
     id: "sn4019", name: "利尻鴛泊港", slug: "rishiri-oshidomari-kou",
     description: "利尻島の玄関口となる港。利尻富士を背景に釣りが楽しめる絶景ポイント。ホッケとカレイが主力で、夏場は昆布漁の合間にウニも見られる。",
-    latitude: 45.2020, longitude: 141.2280,
+    latitude: 45.241732, longitude: 141.230304,
     address: "〒097-0101 北海道利尻郡利尻富士町鴛泊",
     accessInfo: "稚内からハートランドフェリーで約1時間40分。鴛泊港下船すぐ。",
     region: localRegion("rn4006"), spotType: "port", difficulty: "intermediate",
@@ -634,7 +634,7 @@ export const northAdd4Spots: FishingSpot[] = [
   {
     id: "sn4025", name: "豊浦漁港", slug: "toyoura-gyokou",
     description: "噴火湾に面した道央の漁港。ホタテ養殖が盛んな海域でカレイの大型が期待できる。湾内は比較的穏やかで初心者にも向いている。",
-    latitude: 42.5870, longitude: 140.7360,
+    latitude: 42.439077, longitude: 140.328502,
     address: "〒049-5414 北海道虻田郡豊浦町浜町",
     accessInfo: "道央自動車道豊浦ICから約10分。JR豊浦駅から徒歩約15分。",
     region: localRegion("rn4003"), spotType: "port", difficulty: "beginner",
@@ -2241,7 +2241,7 @@ export const northAdd4Spots: FishingSpot[] = [
   {
     id: "sn4099", name: "美浜日向漁港", slug: "mihama-higa-gyokou",
     description: "美浜五湖レインボーラインの入口近くにある小さな漁港。三方五湖に近い自然豊かな環境で、アジやメバルがのんびり楽しめる穴場スポット。",
-    latitude: 35.5860, longitude: 135.9350,
+    latitude: 35.613313, longitude: 135.894372,
     address: "〒919-1124 福井県三方郡美浜町日向",
     accessInfo: "JR美浜駅から車で約10分。舞鶴若狭自動車道若狭美浜ICから約10分。",
     region: localRegion("rn4100"), spotType: "port", difficulty: "beginner",

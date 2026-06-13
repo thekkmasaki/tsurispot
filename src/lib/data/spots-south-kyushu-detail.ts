@@ -290,7 +290,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
   {
     id: "s996", name: "屋久島宮之浦港", slug: "yakushima-miyanoura-port",
     description: "世界遺産・屋久島の玄関口。黒潮の影響で回遊魚が豊富に回り、堤防からでもカンパチやシマアジなどの高級魚が狙える。トレッキングの前後に釣りを楽しむ観光客も多い、自然と釣りの融合スポット。",
-    latitude: 30.3750, longitude: 130.6590,
+    latitude: 30.43036, longitude: 130.577272,
     address: "〒891-4205 鹿児島県屋久島町宮之浦",
     accessInfo: "鹿児島港から高速船「トッピー」で約2時間。フェリーで約4時間。空路は鹿児島空港から屋久島空港まで約35分。",
     region: localRegion("r1005"), spotType: "port", difficulty: "intermediate",
@@ -459,7 +459,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
   {
     id: "s1002", name: "富田漁港", slug: "tomita-fishing-port",
     description: "宮崎市北部に位置する小規模ながら好釣果が多い漁港。一ツ瀬川河口に近く、河口部の導流堤と港の堤防から多彩な魚種が狙える。シーバスの好ポイントとしても知られ、夜のルアー釣りで良型が出る。",
-    latitude: 32.0120, longitude: 131.4310,
+    latitude: 32.061031, longitude: 131.508215,
     address: "〒889-1411 宮崎県新富町富田",
     accessInfo: "JR宮崎駅から車で約20分。宮崎西ICから約15分。",
     region: localRegion("r1014"), spotType: "port", difficulty: "intermediate",
@@ -584,7 +584,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
   {
     id: "s1006", name: "宮古島平良港", slug: "miyakojima-hirara-port",
     description: "宮古島の玄関口・平良港。フェリーターミナルがある大型港で、防波堤からガーラ（アジ類）やカーエー（フエフキダイ）が狙える。離島ターミナル付近は足場が良く、宮古島観光の合間に手軽に釣りが楽しめる。",
-    latitude: 24.79360, longitude: 125.281200,
+    latitude: 24.81815, longitude: 125.267805,
     address: "〒906-0013 沖縄県宮古島市平良下里",
     accessInfo: "宮古空港から車で約15分。下地島空港から宮古大橋経由で約30分。",
     region: localRegion("r1020"), spotType: "port", difficulty: "beginner",
@@ -651,7 +651,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
   {
     id: "s1008", name: "佐良浜港", slug: "sarahama-port",
     description: "伊良部島の北東部に位置する歴史ある漁港。カツオ漁の基地として知られ、港内は穏やかで初心者でも安心して釣りが楽しめる。アジ類のサビキ釣りが手軽で、夕方にはタマン（ハマフエフキ）も狙える。",
-    latitude: 24.831200, longitude: 125.20580,
+    latitude: 24.838345, longitude: 125.214321,
     address: "〒906-0000 沖縄県宮古島市伊良部",
     accessInfo: "宮古空港から伊良部大橋経由で車で約30分。",
     region: localRegion("r1021"), spotType: "port", difficulty: "beginner",
@@ -1040,7 +1040,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
   {
     id: "s1163", name: "黒島（片泊港）", slug: "kuroshima-katatomari",
     description: "鹿児島県の離島・黒島にある漁港。磯釣りのメッカとして知られ、グレ（メジナ）や石鯛、カンパチなどの大型魚が狙える。島への渡航はフェリーみしまを利用。黒潮の影響を受ける豊かな海域で、磯からの本格的な釣りが楽しめる。",
-    latitude: 30.8294, longitude: 129.9536,
+    latitude: 30.836279, longitude: 129.957727,
     address: "〒890-0902 鹿児島県三島村黒島",
     accessInfo: "鹿児島港からフェリーみしまで約3時間30分。片泊港下船。週3便程度の運航のため事前にダイヤを確認。",
     region: localRegion("r1043"), spotType: "port", difficulty: "intermediate",

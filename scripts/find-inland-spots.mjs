@@ -80,7 +80,7 @@ const RING2 = [
 ];
 
 // ── 実データ読み込み（spot-quality-stats.mjs と同方式: esbuildでバンドル評価） ──
-async function loadSpots() {
+export async function loadSpots() {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'tsurispot-coord-sweep-'));
   const outfile = path.join(tmpDir, 'bundle.mjs');
   try {
@@ -109,7 +109,7 @@ const EARTH_R = 6371000; // m
 const toRad = (deg) => (deg * Math.PI) / 180;
 
 /** ハーバサイン距離（m） */
-function haversine(lat1, lng1, lat2, lng2) {
+export function haversine(lat1, lng1, lat2, lng2) {
   const dLat = toRad(lat2 - lat1);
   const dLng = toRad(lng2 - lng1);
   const a =
@@ -119,7 +119,7 @@ function haversine(lat1, lng1, lat2, lng2) {
 }
 
 /** 座標から bearing(度)・距離(m) だけ移動した点（小距離なので平面近似で十分） */
-function offsetPoint(lat, lng, bearingDeg, distM) {
+export function offsetPoint(lat, lng, bearingDeg, distM) {
   const b = toRad(bearingDeg);
   const dLat = (distM * Math.cos(b)) / 111320;
   const dLng = (distM * Math.sin(b)) / (111320 * Math.cos(toRad(lat)));
@@ -127,21 +127,21 @@ function offsetPoint(lat, lng, bearingDeg, distM) {
 }
 
 // ── 標高API ─────────────────────────────────────────
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+export const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 /**
  * 1点の標高を問い合わせる。戻り値:
  *   { status: 'sea' } | { status: 'land', elevation } | { status: 'error', message }
  * 必ず呼び出しごとに REQUEST_INTERVAL_MS 待機（直列前提）。
  */
-async function probeElevation(lat, lng) {
+export async function probeElevation(lat, lng, userAgent = 'tsurispot-coord-sweep/1.0') {
   const url = `${GSI_API}?lon=${lng.toFixed(6)}&lat=${lat.toFixed(6)}&outtype=JSON`;
   let lastError = 'unknown';
   for (let attempt = 0; attempt <= MAX_RETRIES; attempt++) {
     try {
       const ctrl = new AbortController();
       const timer = setTimeout(() => ctrl.abort(), 10000);
-      const res = await fetch(url, { signal: ctrl.signal });
+      const res = await fetch(url, { signal: ctrl.signal, headers: { 'User-Agent': userAgent } });
       clearTimeout(timer);
       await sleep(REQUEST_INTERVAL_MS);
       if (!res.ok) {
@@ -168,7 +168,7 @@ async function probeElevation(lat, lng) {
  *   inland-weak    … 400m以内は全陸だが700m以内に海（弱疑い・要目視）
  *   inland-suspect … 700m以内に海が一切ない（強疑い）
  */
-async function checkSpot(spot) {
+export async function checkSpot(spot) {
   const probes = [];
   let requestCount = 0;
   let errorCount = 0;
@@ -463,7 +463,12 @@ async function main() {
   console.log(`\nレポート: ${path.relative(ROOT, REPORT)}`);
 }
 
-main().catch((e) => {
-  console.error(e);
-  process.exit(1);
-});
+// 直接実行時のみ main を起動（fix-inland-coords.mjs 等からの import 時は何もしない）
+const isMainModule =
+  process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href;
+if (isMainModule) {
+  main().catch((e) => {
+    console.error(e);
+    process.exit(1);
+  });
+}

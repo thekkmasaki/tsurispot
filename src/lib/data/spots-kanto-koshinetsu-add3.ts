@@ -247,7 +247,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3131", name: "会瀬港", slug: "ose-kou",
     description: "日立市の小さな漁港で、堤防からアジ・サバのサビキ釣りが楽しめる穴場スポット。テトラ帯ではカサゴやアイナメなどの根魚が豊富。周辺の磯場ではクロダイも狙える。",
-    latitude: 36.6025, longitude: 140.6614,
+    latitude: 36.578233, longitude: 140.660053,
     address: "〒317-0075 茨城県日立市",
     accessInfo: "JR常磐線日立駅から車で約5分。常磐自動車道日立中央ICから約10分。",
     region: localRegion("r3101"), spotType: "port", difficulty: "beginner",
@@ -423,7 +423,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3140", name: "銚子港", slug: "choshi-kou",
     description: "日本有数の水揚げ量を誇る銚子漁港。広大な岸壁からサビキ釣りでアジ・イワシ・サバが大量に釣れる。黒潮と親潮がぶつかる好漁場で、青物の回遊も期待できる。",
-    latitude: 35.7375, longitude: 140.8583,
+    latitude: 35.739858, longitude: 140.857786,
     address: "〒288-0001 千葉県銚子市川口町2丁目6529-32",
     accessInfo: "JR総武本線銚子駅から車で約5分。東関東自動車道佐原香取ICから約60分。",
     region: localRegion("r3113"), spotType: "port", difficulty: "beginner",
@@ -775,7 +775,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   {
     id: "s3156", name: "太海漁港", slug: "futomi-gyokou",
     description: "鴨川市にある小さな漁港。仁右衛門島への渡船場としても知られる。堤防からアジ・メバルなどが狙え、周辺の磯場ではクロダイやメジナも釣れる静かな穴場スポット。",
-    latitude: 35.0750, longitude: 140.0500,
+    latitude: 35.076705, longitude: 140.097699,
     address: "〒299-2863 千葉県鴨川市太海浜135-1",
     accessInfo: "JR外房線太海駅から徒歩約10分。館山自動車道君津ICから約60分。",
     region: localRegion("r3110"), spotType: "port", difficulty: "beginner",

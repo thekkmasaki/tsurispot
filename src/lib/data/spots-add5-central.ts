@@ -923,7 +923,7 @@ export const centralAdd5Spots: FishingSpot[] = [
   {
     id: "sc5043", name: "伏木万葉埠頭", slug: "fushiki-manyou-futo",
     description: "高岡市の伏木港にある万葉埠頭。車横付けで釣りができる便利なスポットで、アジのサビキ釣りからショアジギングまで幅広く楽しめる。",
-    latitude: 36.7900, longitude: 137.0270,
+    latitude: 36.800383, longitude: 137.064825,
     address: "〒933-0113 富山県高岡市伏木国分",
     accessInfo: "能越自動車道高岡北ICから約10分。JR伏木駅から徒歩約15分。",
     region: localRegion("rc5032"), spotType: "pier", difficulty: "beginner",
@@ -1026,7 +1026,7 @@ export const centralAdd5Spots: FishingSpot[] = [
   {
     id: "sc5048", name: "雨晴海岸", slug: "amaharashi-kaigan-toyama",
     description: "高岡市の景勝地で、富山湾越しに立山連峰を望む絶景スポット。岩礁帯が多くメバルやカサゴなど根魚の穴場。撮影スポットとしても有名。",
-    latitude: 36.8020, longitude: 137.0050,
+    latitude: 36.815035, longitude: 137.041849,
     address: "〒933-0133 富山県高岡市太田",
     accessInfo: "能越自動車道高岡北ICから約10分。JR雨晴駅から徒歩約5分。",
     region: localRegion("rc5032"), spotType: "rocky", difficulty: "intermediate",
@@ -1928,7 +1928,7 @@ export const centralAdd5Spots: FishingSpot[] = [
   {
     id: "sc5098", name: "栗田漁港", slug: "kurida-gyokou-kyoto",
     description: "宮津市栗田にある漁港。栗田湾に面した静かな港で、アジのサビキ釣りや根魚狙いの穴釣りが楽しめる。釣り人が少なくのんびりと竿を出せる穴場。",
-    latitude: 35.5140, longitude: 135.2210,
+    latitude: 35.55055, longitude: 135.240777,
     address: "〒626-0051 京都府宮津市栗田",
     accessInfo: "京都縦貫自動車道宮津天橋立ICから約10分。",
     region: localRegion("rc5070"), spotType: "port", difficulty: "beginner",
@@ -1994,7 +1994,7 @@ export const centralAdd5Spots: FishingSpot[] = [
   {
     id: "sc5101", name: "小浜漁港", slug: "obama-gyokou-fukui",
     description: "若狭湾に面した小浜市の漁港。古くからの港町で魚影が濃く、アジやサヨリ、チヌの実績が高い。オバマ大統領就任時に一躍有名になった港。",
-    latitude: 35.4830, longitude: 135.7460,
+    latitude: 35.491976, longitude: 135.733841,
     address: "〒917-0081 福井県小浜市川崎",
     accessInfo: "舞鶴若狭自動車道小浜ICから約5分。JR小浜駅から徒歩約15分。",
     region: localRegion("rc5081"), spotType: "port", difficulty: "beginner",
@@ -2225,7 +2225,7 @@ export const centralAdd5Spots: FishingSpot[] = [
   {
     id: "sc5113", name: "的矢湾", slug: "matoya-wan-mie",
     description: "志摩市にある的矢湾。牡蠣の養殖で有名な湾で、穏やかな水面からハゼやキスが手軽に狙える。湾奥ではチヌの筏釣りも人気。",
-    latitude: 34.4060, longitude: 136.8530,
+    latitude: 34.370788, longitude: 136.886548,
     address: "〒517-0204 三重県志摩市磯部町的矢",
     accessInfo: "伊勢自動車道伊勢ICから約25分。近鉄志摩磯部駅から車で約15分。",
     region: localRegion("rc5090"), spotType: "port", difficulty: "beginner",
@@ -2731,7 +2731,7 @@ export const centralAdd5Spots: FishingSpot[] = [
   {
     id: "sc5138", name: "親不知海岸", slug: "oyashirazu-kaigan-niigata",
     description: "糸魚川市の親不知海岸。断崖絶壁の直下に広がる玉石のビーチで、キスやカレイが狙える。北アルプスが海に落ち込む雄大な景観が魅力の釣り場。",
-    latitude: 36.9730, longitude: 137.7210,
+    latitude: 36.993211, longitude: 137.694961,
     address: "〒949-0308 新潟県糸魚川市市振",
     accessInfo: "北陸自動車道親不知ICから約5分。JR親不知駅から徒歩約10分。",
     region: localRegion("rc5111"), spotType: "beach", difficulty: "intermediate",

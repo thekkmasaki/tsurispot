@@ -202,7 +202,7 @@ export const kinkiAdd8Spots: FishingSpot[] = [
   {
     id: "sk8008", name: "二木島港", slug: "nikishima-kou-k8",
     description: "奥まった入り江に位置する静かな漁港。湾内はスズキやクロダイが居着いており、外向きではアオリイカのエギングが秋に好実績。穏やかで釣りやすい。",
-    latitude: 33.942, longitude: 136.127,
+    latitude: 33.937772, longitude: 136.183411,
     address: "〒519-4207 三重県熊野市二木島町",
     accessInfo: "JR二木島駅から徒歩約5分",
     region: localRegion("rk8002"), spotType: "port", difficulty: "beginner",
@@ -1056,7 +1056,7 @@ export const kinkiAdd8Spots: FishingSpot[] = [
   {
     id: "sk8056", name: "網野漁港", slug: "amino-gyokou-k8",
     description: "京丹後市の日本海に面した漁港。冬場のヤリイカ釣りの名所で、電気ウキ仕掛けで良型が上がる。春秋はアジ・サバのサビキも安定して楽しめる。",
-    latitude: 35.680, longitude: 134.989,
+    latitude: 35.691381, longitude: 134.994522,
     address: "〒629-3104 京都府京丹後市網野町浅茂川",
     accessInfo: "京都丹後鉄道網野駅から車で約5分",
     region: localRegion("rk8010"), spotType: "port", difficulty: "beginner",
@@ -1838,7 +1838,7 @@ export const kinkiAdd8Spots: FishingSpot[] = [
   {
     id: "sk8100", name: "淡路島・津名港", slug: "awaji-tsuna-kou-k8",
     description: "淡路島東岸の大きな港。堤防からのサビキ釣りでアジが安定して釣れ、秋のタチウオ・冬のメバルと年間を通じて楽しめる。アクセスも良好。",
-    latitude: 34.463, longitude: 134.923,
+    latitude: 34.432445, longitude: 134.916949,
     address: "〒656-2131 兵庫県淡路市志筑",
     accessInfo: "神戸淡路鳴門自動車道津名一宮ICから約10分",
     region: localRegion("rk8019"), spotType: "port", difficulty: "beginner",
@@ -2175,7 +2175,7 @@ export const kinkiAdd8Spots: FishingSpot[] = [
   {
     id: "sk8119", name: "淡路島・由良港", slug: "awaji-yura-kou-k8",
     description: "洲本市南部の漁港で、紀淡海峡の潮が効く。青物やアオリイカの回遊が期待でき、堤防からの釣りで多彩な魚種が狙える好ポイント。",
-    latitude: 34.291, longitude: 134.908,
+    latitude: 34.290947, longitude: 134.948841,
     address: "〒656-2541 兵庫県洲本市由良町由良",
     accessInfo: "神戸淡路鳴門自動車道洲本ICから約20分",
     region: localRegion("rk8018"), spotType: "port", difficulty: "intermediate",
@@ -2332,7 +2332,7 @@ export const kinkiAdd8Spots: FishingSpot[] = [
   {
     id: "sk8128", name: "城崎温泉・津居山港", slug: "kinosaki-tsuiyama-kou-k8",
     description: "城崎温泉から近い津居山港。松葉ガニの水揚げ港として有名だが、堤防からサビキでアジが釣れ、カレイの投げ釣りも楽しめる。温泉と釣りの両方を満喫できる。",
-    latitude: 35.624, longitude: 134.812,
+    latitude: 35.64733, longitude: 134.831748,
     address: "〒669-6101 兵庫県豊岡市津居山",
     accessInfo: "JR城崎温泉駅から車で約10分",
     region: localRegion("rk8030"), spotType: "port", difficulty: "beginner",
@@ -2366,7 +2366,7 @@ export const kinkiAdd8Spots: FishingSpot[] = [
   {
     id: "sk8130", name: "淡路島・生穂新島", slug: "awaji-ikuho-shinjima-k8",
     description: "淡路島東岸の人工島。護岸から手軽にアジのサビキ釣りやタチウオの夜釣りが楽しめる。駐車スペースが広く利便性が高い。",
-    latitude: 34.480, longitude: 134.930,
+    latitude: 34.440167, longitude: 134.916639,
     address: "〒656-2155 兵庫県淡路市生穂新島",
     accessInfo: "神戸淡路鳴門自動車道津名一宮ICから約5分",
     region: localRegion("rk8019"), spotType: "pier", difficulty: "beginner",
@@ -2769,7 +2769,7 @@ export const kinkiAdd8Spots: FishingSpot[] = [
   {
     id: "sk8154", name: "日高港", slug: "hidaka-kou-k8",
     description: "日高町の日高川河口に位置する港。シーバスのルアーフィッシングが盛んで、河口域ではハゼのちょい投げも楽しめる。チヌの実績も高い。",
-    latitude: 33.923, longitude: 135.161,
+    latitude: 33.871032, longitude: 135.142529,
     address: "〒649-1213 和歌山県日高郡日高町方杭",
     accessInfo: "JR紀伊内原駅から車で約10分",
     region: localRegion("rk8028"), spotType: "port", difficulty: "beginner",
@@ -3028,7 +3028,7 @@ export const kinkiAdd8Spots: FishingSpot[] = [
   {
     id: "sk8169", name: "磯ノ浦海水浴場", slug: "isonoura-beach-k8",
     description: "和歌山市のサーフィンスポットとしても有名な砂浜。投げ釣りでキスが好調で、秋にはヒラメやマゴチのルアーフィッシングも楽しめる。",
-    latitude: 34.268, longitude: 135.083,
+    latitude: 34.260506, longitude: 135.094581,
     address: "〒640-0114 和歌山県和歌山市磯の浦",
     accessInfo: "南海加太線磯ノ浦駅から徒歩約3分",
     region: localRegion("rk8027"), spotType: "beach", difficulty: "beginner",
@@ -3216,7 +3216,7 @@ export const kinkiAdd8Spots: FishingSpot[] = [
   {
     id: "sk8180", name: "袋漁港", slug: "fukuro-gyokou-wakayama-k8",
     description: "串本町の小さな漁港。外向きの堤防はアオリイカのエギングの好ポイントで、グレやカサゴの根魚も狙える。釣り人が少ない穴場。",
-    latitude: 33.495, longitude: 135.704,
+    latitude: 33.477169, longitude: 135.771598,
     address: "〒649-3515 和歌山県東牟婁郡串本町袋",
     accessInfo: "JR串本駅から車で約10分",
     region: localRegion("rk8026"), spotType: "port", difficulty: "beginner",

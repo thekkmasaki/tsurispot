@@ -374,7 +374,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
   {
     id: "swmn010", name: "日置川河口", slug: "hikigawa-kakou",
     description: "白浜町日置にある日置川の河口。清流日置川は鮎釣りの名所だが、河口域はシーバス・ヒラスズキの好ポイント。サーフからはヒラメ・マゴチも狙え、河口のテトラ周りではチヌ・キビレが付く。南紀エリアの穴場的存在で、のんびりした釣りが楽しめる。",
-    latitude: 33.631200, longitude: 135.50170,
+    latitude: 33.560342, longitude: 135.44712,
     address: "〒649-2532 和歌山県白浜町安居13",
     accessInfo: "紀勢自動車道すさみ南ICから約20分。JR紀勢本線紀伊日置駅から徒歩約15分。",
     region: lr("r503"), spotType: "beach", difficulty: "intermediate",
@@ -442,7 +442,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
   {
     id: "swmn013", name: "和深漁港", slug: "wabuka-gyoko",
     description: "串本町の西に位置する小さな漁港。黒潮の恩恵を受け魚影が濃く、堤防からグレ・チヌ・アオリイカが狙える。隣接する地磯「エビス」はイシダイ・イガミの好ポイントとして磯釣り師に人気。釣り人が少なく穴場的存在で、大物との出会いが期待できる。",
-    latitude: 33.5120, longitude: 135.6580,
+    latitude: 33.501157, longitude: 135.643099,
     address: "〒649-3523 和歌山県串本町和深2051",
     accessInfo: "紀勢自動車道すさみ南ICから約20分。JR紀勢本線和深駅から徒歩約10分。",
     region: lr("r504"), spotType: "port", difficulty: "intermediate",
@@ -540,7 +540,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
   {
     id: "swmn017", name: "五ヶ所漁港", slug: "gokasho-gyoko",
     description: "南伊勢町の五ヶ所湾に面した大型漁港。リアス式海岸特有の奥深い湾に位置し、波が穏やかで初心者にも安心。チヌのフカセ釣り・ダンゴ釣りの名所として東海エリアで有名。アオリイカのエギングも好調で、春には3kg超の大物も出る。",
-    latitude: 34.3280, longitude: 136.6380,
+    latitude: 34.335123, longitude: 136.69951,
     address: "〒516-0118 三重県南伊勢町相賀浦 大池",
     accessInfo: "伊勢自動車道玉城ICから約40分。近鉄「五ヶ所」バス停下車徒歩約5分。",
     region: lr("r510"), spotType: "port", difficulty: "intermediate",
@@ -702,7 +702,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
   {
     id: "swmn024", name: "古江漁港", slug: "furue-gyoko-owase",
     description: "尾鷲市古江にある漁港。足元が平坦で広い岸壁が続き、ファミリーでサビキ釣りをするのに最適。夏〜秋のアジ・サバの回遊が特に良く、数釣りが楽しめる。投げ釣りでキス、エギングでアオリイカも。尾鷲湾の奥に位置するため波が穏やかで安心して釣りができる。",
-    latitude: 34.0530, longitude: 136.2050,
+    latitude: 33.928702, longitude: 136.145673,
     address: "〒519-3922 三重県尾鷲市古江町805",
     accessInfo: "紀勢自動車道尾鷲北ICから約10分。JR紀勢本線尾鷲駅から車で約10分。",
     region: lr("r513"), spotType: "port", difficulty: "beginner",
@@ -869,7 +869,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
   {
     id: "swmn030", name: "出雲崎漁港", slug: "izumozaki-gyoko",
     description: "良寛ゆかりの地・出雲崎にある漁港。堤防に車横付けで竿を出せる便利な釣り場。夏〜秋のサビキでアジ・サバの数釣り、投げ釣りでキス・カレイ、エギングでアオリイカが楽しめる。佐渡島を正面に望む絶景ロケーションで、夕日は「日本一」と称される美しさ。",
-    latitude: 37.5320, longitude: 138.6830,
+    latitude: 37.544415, longitude: 138.689954,
     address: "〒949-4308 新潟県出雲崎町尼瀬175-9",
     accessInfo: "北陸自動車道西山ICから約15分。JR越後線出雲崎駅から車で約10分。",
     region: lr("r522"), spotType: "port", difficulty: "beginner",
@@ -897,7 +897,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
   {
     id: "swmn031", name: "米山海岸", slug: "yoneyama-kaigan",
     description: "柏崎市と上越市の境にある米山海岸。サーフフィッシングの好ポイントで、投げ釣りでキス・カレイ、ルアーでヒラメ・マゴチ・シーバスが狙える。秋にはイナダ・サワラの青物も回遊し、ショアジギングの実績が高い。日本海の雄大な景色の中でダイナミックな釣りが楽しめる。",
-    latitude: 37.2480, longitude: 138.4520,
+    latitude: 37.376869, longitude: 138.554584,
     address: "〒949-3675 新潟県柏崎市米山町",
     accessInfo: "北陸自動車道米山ICから約5分。JR信越本線米山駅から徒歩約10分。",
     region: lr("r522"), spotType: "beach", difficulty: "intermediate",
@@ -929,7 +929,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
   {
     id: "swmn032", name: "岩船港", slug: "iwafune-port-murakami",
     description: "村上市の日本海に面した大型漁港。車横付けで釣りができ、ファミリーからベテランまで楽しめる。サビキでアジ・サバ・カマス、投げ釣りでキス・カレイ、ルアーでシーバス・ヒラメが狙える。粟島への連絡船が発着する港で、港内の水深があり大物の実績も。",
-    latitude: 38.0550, longitude: 139.4420,
+    latitude: 38.18698, longitude: 139.424231,
     address: "〒958-0000 新潟県村上市岩船2132-5",
     accessInfo: "日本海東北自動車道村上瀬波温泉ICから約10分。JR羽越本線岩船町駅から徒歩約15分。",
     region: lr("r523"), spotType: "port", difficulty: "beginner",
@@ -959,7 +959,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
   {
     id: "swmn033", name: "桑川漁港（笹川流れ）", slug: "kuwagawa-gyoko-sasagawanagare",
     description: "国の名勝・天然記念物「笹川流れ」エリアにある漁港。透明度の高い美しい海が特徴で、磯場ではクロダイ・メジナのフカセ釣り、堤防ではサビキでアジ・サバ、エギングでアオリイカが楽しめる。夏の海水浴シーズン以外は比較的釣り人が少なく、穴場的存在。",
-    latitude: 38.1520, longitude: 139.4880,
+    latitude: 38.368882, longitude: 139.454548,
     address: "〒959-3665 新潟県村上市桑川",
     accessInfo: "日本海東北自動車道朝日まほろばICから約30分。JR羽越本線桑川駅から徒歩約10分。",
     region: lr("r523"), spotType: "port", difficulty: "intermediate",
@@ -1011,7 +1011,7 @@ export const wakayamaMieNiigataSpots: FishingSpot[] = [
   {
     id: "swmn035", name: "佐渡・野崎鼻", slug: "sado-nozaki-hana",
     description: "佐渡島北端の地磯。冬場の北西風の影響を受けにくく、一年中釣りが楽しめる佐渡屈指の好ポイント。青物（ワラサ・ブリ）、マダイ、アオリイカの回遊が盛んで、磯からの大物釣りが期待できる。「クロダイアイランド」と呼ばれる佐渡の中でも特にクロダイの実績が高い。",
-    latitude: 38.1650, longitude: 138.3450,
+    latitude: 38.081653, longitude: 138.438069,
     address: "〒952-2214 新潟県佐渡市高千2086-1",
     accessInfo: "両津港からレンタカーで約45分。佐渡交通バス「鷲崎」下車徒歩約20分。",
     region: lr("r524"), spotType: "rocky", difficulty: "advanced",

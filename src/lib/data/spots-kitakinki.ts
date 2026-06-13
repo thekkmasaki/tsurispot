@@ -541,7 +541,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk019", name: "中浜漁港", slug: "nakahama-gyoko",
     description: "京丹後市丹後町に位置し、常夜灯が設置されているため夜釣りに最適な漁港。特にアジングの好フィールドとして評価が高く、夜間は常夜灯周りにアジが集まる。メバリングも好調で、ライトゲームを楽しむアングラーの間で口コミで広まっている穴場。",
-    latitude: 35.7200, longitude: 135.0900,
+    latitude: 35.759888, longitude: 135.181511,
     address: "〒627-0244 京都府京丹後市丹後町中浜",
     accessInfo: "山陰近畿自動車道「京丹後大宮IC」から約45分。",
     region: lr("rnk03"), spotType: "port", difficulty: "intermediate",
@@ -584,7 +584,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk021", name: "新井崎漁港", slug: "niizaki-gyoko",
     description: "伊根町の先端部に位置し、大きな波止が特徴の漁港。日本海に面しているため潮通しが抜群で、エギングでアオリイカの大型が狙える人気ポイント。春の親イカシーズンは特に期待値が高い。メバルやカサゴの根魚も魚影が濃く、年間を通じて楽しめる。",
-    latitude: 35.6900, longitude: 135.2700,
+    latitude: 35.6937, longitude: 135.308528,
     address: "〒626-0400 京都府与謝郡伊根町新井",
     accessInfo: "京都縦貫自動車道「宮津天橋立IC」から約40分。",
     region: lr("rnk04"), spotType: "port", difficulty: "intermediate",
@@ -697,7 +697,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk026", name: "田結漁港", slug: "tai-gyoko-toyooka",
     description: "豊岡市の日本海側に位置し、城崎温泉から車で約15分とアクセスの良い漁港。穏やかな入江にあるため波が立ちにくく、初心者でも安心して釣りが楽しめる。サビキでアジ、投げ釣りでキスやカレイを狙え、チヌのウキフカセ釣りも好調なバランスの良いスポット。",
-    latitude: 35.6400, longitude: 134.8100,
+    latitude: 35.656565, longitude: 134.850871,
     address: "〒669-6123 兵庫県豊岡市田結",
     accessInfo: "北近畿豊岡自動車道「豊岡IC」から約20分。JR「城崎温泉」駅から車約15分。",
     region: lr("rnk07"), spotType: "port", difficulty: "beginner",
@@ -765,7 +765,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk029", name: "犬熊漁港", slug: "inukuma-gyoko",
     description: "小浜市の東側にある小規模な漁港で、釣り人が少なく静かに竿を出せる穴場。堤防からはサビキでアジ、投げ釣りでキスが安定して釣れる。メバリングやアオリイカのエギングも楽しめるが、規模が小さいため少人数での釣行に適している。",
-    latitude: 35.5100, longitude: 135.8200,
+    latitude: 35.528576, longitude: 135.789253,
     address: "〒917-0107 福井県小浜市犬熊",
     accessInfo: "舞鶴若狭自動車道「小浜IC」から約30分。",
     region: lr("rnk08"), spotType: "port", difficulty: "beginner",
@@ -808,7 +808,7 @@ export const kitakinkiSpots: FishingSpot[] = [
   {
     id: "nk031", name: "西津漁港", slug: "nishitsu-gyoko",
     description: "小浜市の西側に位置し、夜釣りのポイントとして地元で知られる漁港。常夜灯周りにはメバルやシーバスが集まり、ライトゲームやルアーフィッシングに最適。チヌのウキフカセ釣りの実績も高い。日中よりも夕方以降に本領を発揮するスポット。",
-    latitude: 35.4850, longitude: 135.7350,
+    latitude: 35.517336, longitude: 135.752794,
     address: "〒917-0000 福井県小浜市西津",
     accessInfo: "舞鶴若狭自動車道「小浜IC」から約10分。JR「小浜」駅から車約10分。",
     region: lr("rnk08"), spotType: "port", difficulty: "intermediate",

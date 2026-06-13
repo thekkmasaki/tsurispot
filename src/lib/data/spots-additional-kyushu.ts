@@ -586,7 +586,7 @@ export const additionalSpotsKyushu: FishingSpot[] = [
   {
     id: "s140", name: "日南油津港", slug: "nichinan-aburatsu-port",
     description: "宮崎県日南市の港。黒潮の影響で大型回遊魚が狙える。カンパチやシイラなど南国ならではのターゲットも。",
-    latitude: 31.5834, longitude: 131.3912, address: "〒887-0001 宮崎県日南市油津3丁目12",
+    latitude: 31.568995, longitude: 131.401506, address: "〒887-0001 宮崎県日南市油津3丁目12",
     accessInfo: "JR油津駅から徒歩10分。宮崎自動車道田野ICから約60分。",
     region: region("r35"), spotType: "port", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "港周辺に駐車場あり",

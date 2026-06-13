@@ -317,7 +317,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3385", name: "十六島鼻", slug: "upurui-hana",
     description: "出雲市の十六島（うっぷるい）鼻は磯釣りの名ポイント。クロダイやメジナの大型が期待でき、秋にはアオリイカも好調。荒々しい日本海の磯場で本格的な磯釣りが楽しめる。",
-    latitude: 35.4350, longitude: 132.7230,
+    latitude: 35.468587, longitude: 132.731826,
     address: "〒691-0042 島根県出雲市十六島町",
     accessInfo: "JR出雲市駅から車で約30分。山陰自動車道出雲ICから約25分。",
     region: localRegion("r3002"), spotType: "rocky", difficulty: "advanced",
@@ -1455,7 +1455,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3438", name: "愛南町由良半島", slug: "ainan-yura-hanto",
     description: "愛南町の由良半島は豊後水道に面した磯釣りの名所。クロダイやメジナの大型が期待でき、アオリイカの聖地としても有名。遠征釣り師が集まる本格スポット。",
-    latitude: 32.9340, longitude: 132.5010,
+    latitude: 33.056729, longitude: 132.422878,
     address: "〒798-4110 愛媛県南宇和郡愛南町由良（由良港）",
     accessInfo: "JR予讃線宇和島駅から車で約60分。松山自動車道津島岩松ICから約40分。",
     region: localRegion("r3015"), spotType: "rocky", difficulty: "advanced",
@@ -1769,7 +1769,7 @@ export const chugokuKyushuOkinawaAdd3Spots: FishingSpot[] = [
   {
     id: "s3453", name: "糸島・芥屋漁港", slug: "itoshima-keya-port",
     description: "糸島市の芥屋漁港は玄界灘に面した漁港。芥屋の大門が近くにあり、アジやヒラメが狙える好ポイント。秋のアオリイカも好調で、糸島のグルメと合わせて楽しめる。",
-    latitude: 33.5740, longitude: 130.1510,
+    latitude: 33.587561, longitude: 130.106576,
     address: "〒819-1335 福岡県糸島市志摩芥屋3824",
     accessInfo: "JR筑肥線筑前前原駅から車で約20分。西九州自動車道前原ICから約20分。",
     region: localRegion("r3019"), spotType: "port", difficulty: "beginner",
