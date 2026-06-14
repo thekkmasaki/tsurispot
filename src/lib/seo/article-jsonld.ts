@@ -138,3 +138,93 @@ export function buildHowToJsonLd(input: HowToJsonLdInput) {
     })),
   };
 }
+
+/**
+ * BreadcrumbList JSON-LD ビルダー。
+ * 各 page で手書きしていた BreadcrumbList を統一する。
+ * 末尾要素（現在ページ）は url を省略しても可（schema.org 推奨）。
+ *
+ * ```ts
+ * buildBreadcrumbJsonLd([
+ *   { name: "ホーム", url: "https://tsurispot.com" },
+ *   { name: "都道府県一覧", url: "https://tsurispot.com/prefecture" },
+ *   { name: "福井県", url: "https://tsurispot.com/prefecture/fukui" },
+ *   { name: "キスの釣り情報" }, // 現在ページは url 省略可
+ * ])
+ * ```
+ */
+export function buildBreadcrumbJsonLd(items: { name: string; url?: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: item.name,
+      ...(item.url && { item: item.url }),
+    })),
+  };
+}
+
+/**
+ * FAQPage JSON-LD ビルダー。
+ * 各 page で手書きしていた FAQPage を統一する。
+ *
+ * ```ts
+ * buildFaqJsonLd([
+ *   { question: "...", answer: "..." },
+ * ])
+ * ```
+ */
+export function buildFaqJsonLd(items: { question: string; answer: string }[]) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    inLanguage: "ja-JP",
+    mainEntity: items.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+}
+
+interface ItemListEntry {
+  name: string;
+  url: string;
+}
+
+/**
+ * ItemList JSON-LD ビルダー。
+ * スポット一覧などを ItemList として統一出力する。
+ * numberOfItems は items 全体の件数（表示は先頭 N 件でも、総数を別途渡せる）。
+ *
+ * ```ts
+ * buildItemListJsonLd({
+ *   name: "福井県でキスが釣れる釣り場",
+ *   items: spots.slice(0, 30).map((s) => ({ name: s.name, url: `https://tsurispot.com/spots/${s.slug}` })),
+ *   numberOfItems: spots.length,
+ * })
+ * ```
+ */
+export function buildItemListJsonLd(input: {
+  name: string;
+  items: ItemListEntry[];
+  numberOfItems?: number;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: input.name,
+    numberOfItems: input.numberOfItems ?? input.items.length,
+    itemListElement: input.items.map((entry, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: entry.name,
+      url: entry.url,
+    })),
+  };
+}

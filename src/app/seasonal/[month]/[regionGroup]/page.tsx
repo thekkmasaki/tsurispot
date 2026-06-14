@@ -5,7 +5,6 @@ import { permanentRedirect } from "next/navigation";
 import {
   Fish,
   MapPin,
-  Calendar,
   ChevronLeft,
   ChevronRight,
   Flame,
@@ -17,13 +16,20 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { MonthlySportsSorter, type MonthlySpot } from "@/components/monthly-spots-sorter";
 import { SeasonalAffiliateSection } from "@/components/seasonal-affiliate-section";
-import { MONTHS } from "@/lib/data/fishing-methods";
+import { MONTHS, MONTH_CONDITIONS } from "@/lib/data/fishing-methods";
 import { prefectures } from "@/lib/data/prefectures";
 import { fishSpecies, getFishSeasons } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
 import type { RegionSlug } from "@/types";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { REGION_CLIMATE, getRegionGroup } from "@/lib/utils/spot-content-generator";
+import {
+  buildArticleJsonLd,
+  buildBreadcrumbJsonLd,
+  buildFaqJsonLd,
+  buildItemListJsonLd,
+} from "@/lib/seo/article-jsonld";
 
 type PageProps = {
   params: Promise<{ month: string; regionGroup: string }>;
@@ -45,10 +51,6 @@ const REGION_GROUP_SLUG_ENTRIES = Object.entries(REGION_GROUP_SLUGS);
 
 function getRegionGroupBySlug(slug: string): string | undefined {
   return REGION_GROUP_SLUGS[slug];
-}
-
-function getRegionGroupSlug(name: string): string | undefined {
-  return REGION_GROUP_SLUG_ENTRIES.find(([, v]) => v === name)?.[0];
 }
 
 function toRegionSlug(pageSlug: string): RegionSlug | undefined {
@@ -245,6 +247,31 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
       .slice(0, 3);
   }
 
+  // 各 peak fish について、この地域内でその魚が釣れるスポット数が最多の県を算出。
+  // 県×魚ページ（/prefecture/{prefSlug}/fish/{fishSlug}）への送客リンク用。
+  // getEligiblePrefFishCombos(1) と同じ「月を問わず catchableFish に含まれるか」で集計し、
+  // 算出した県は必ず事前生成済み（count>=1）の県×魚ページに着地する。
+  function getTopPrefForFish(fishSlug: string): { prefSlug: string; prefName: string } | null {
+    const counts = new Map<string, number>();
+    for (const spot of regionSpots) {
+      if (!spot.catchableFish.some((cf) => cf.fish.slug === fishSlug)) continue;
+      const pref = regionPrefs.find((p) => p.name === spot.region.prefecture);
+      if (!pref) continue;
+      counts.set(pref.slug, (counts.get(pref.slug) || 0) + 1);
+    }
+    let bestSlug: string | undefined;
+    let bestCount = 0;
+    for (const [slug, count] of counts) {
+      if (count > bestCount) {
+        bestCount = count;
+        bestSlug = slug;
+      }
+    }
+    if (!bestSlug) return null;
+    const pref = regionPrefs.find((p) => p.slug === bestSlug);
+    return pref ? { prefSlug: pref.slug, prefName: pref.nameShort } : null;
+  }
+
   // おすすめスポットTOP6（旬の魚が多いスポット）
   const topSpots = regionSpots
     .map((spot) => {
@@ -268,6 +295,15 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
   // 季節のコツ
   const seasonalTips = getSeasonalTips(monthDef.season, regionName);
 
+  // 水温・天候ナラティブ用データ
+  // RegionGroup キー（hokkaido/.../kyushu）はページ slug とほぼ同一だが kyushu-okinawa→kyushu の差異がある。
+  // 県名→RegionGroup を返す getRegionGroup() を使い、地域内の代表県から安全に解決する
+  // （PREFECTURE_TO_REGION が権威マッピングのため slug 差異に依存しない）。
+  const regionGroupKey = regionPrefs.length > 0 ? getRegionGroup(regionPrefs[0].name) : "kanto";
+  const monthCondition = MONTH_CONDITIONS[monthDef.num];
+  const regionClimate = REGION_CLIMATE[regionGroupKey];
+  const peakFishForNarrative = peakFish.slice(0, 3).map((f) => f.name);
+
   // この地域の全釣り方を集約してアフィリエイト商品をマッチング
   const allMethods = new Set<string>();
   for (const f of allFishList) {
@@ -282,79 +318,35 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
   );
 
   // JSON-LD
-  const breadcrumbJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: "ホーム",
-        item: "https://tsurispot.com",
-      },
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: "今釣れる魚",
-        item: "https://tsurispot.com/catchable-now",
-      },
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: monthDef.name,
-        item: `https://tsurispot.com/seasonal/${monthSlug}/${regionSlug}`,
-      },
-      {
-        "@type": "ListItem",
-        position: 4,
-        name: regionName,
-        item: `https://tsurispot.com/seasonal/${monthSlug}/${regionSlug}`,
-      },
-    ],
-  };
+  const pageUrl = `https://tsurispot.com/seasonal/${monthSlug}/${regionSlug}`;
 
-  const itemListJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
+  // datePublished は当該月基準（全96ページが「6月公開」を主張するバグの修正）。
+  // 年は他テンプレ（buildArticleJsonLd 既定 2025-01-01）と整合する固定値 2025。
+  const datePublished = `2025-${String(monthDef.num).padStart(2, "0")}-01`;
+
+  const breadcrumbJsonLd = buildBreadcrumbJsonLd([
+    { name: "ホーム", url: "https://tsurispot.com" },
+    { name: "今釣れる魚", url: "https://tsurispot.com/catchable-now" },
+    { name: monthDef.name, url: pageUrl },
+    { name: regionName },
+  ]);
+
+  const itemListJsonLd = buildItemListJsonLd({
     name: `${monthDef.name}に${regionName}で釣れる魚`,
-    numberOfItems: allFishList.length,
-    itemListElement: allFishList.slice(0, 30).map((f, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
+    items: allFishList.slice(0, 30).map((f) => ({
       name: f.name,
       url: `https://tsurispot.com/fish/${f.slug}`,
     })),
-  };
+    numberOfItems: allFishList.length,
+  });
 
-  const pageUrl = `https://tsurispot.com/seasonal/${monthSlug}/${regionSlug}`;
-
-  const articleJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "Article",
+  const articleJsonLd = buildArticleJsonLd({
     headline: `${monthDef.name}の${regionName}釣り情報・釣れる魚とおすすめスポット`,
     description: `${monthDef.name}（${monthDef.season}）に${regionName}地方で釣れる魚${allFishList.length}種とおすすめ釣り場を完全ガイド。初心者向け穴場スポットも紹介。`,
-    datePublished: "2025-06-01",
+    url: pageUrl,
+    datePublished,
     dateModified: new Date().toISOString().split("T")[0],
-    author: {
-      "@type": "Person",
-      name: "正木 家康",
-      jobTitle: "編集長",
-      url: "https://tsurispot.com/about",
-    },
-    publisher: {
-      "@type": "Organization",
-      name: "ツリスポ",
-      url: "https://tsurispot.com",
-      logo: {
-        "@type": "ImageObject",
-        url: "https://tsurispot.com/logo.svg",
-      },
-    },
-    mainEntityOfPage: {
-      "@type": "WebPage",
-      "@id": pageUrl,
-    },
-  };
+  });
 
   // FAQ 動的生成
   const peakFishNames = peakFish.slice(0, 4).map((f) => f.name);
@@ -386,18 +378,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
     },
   ];
 
-  const faqJsonLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqItems.map((item) => ({
-      "@type": "Question",
-      name: item.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: item.answer,
-      },
-    })),
-  };
+  const faqJsonLd = buildFaqJsonLd(faqItems);
 
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
@@ -465,6 +446,29 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
         </Link>
       </div>
 
+      {/* 今月の海の状況（水温・天候ナラティブ） */}
+      <section className="mb-8 sm:mb-10">
+        <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
+          <Thermometer className="size-5 text-cyan-600" />
+          {monthDef.name}の{regionName}の海の状況・水温
+        </h2>
+        <Card className="gap-0 border-cyan-100 bg-cyan-50/40 py-0">
+          <CardContent className="space-y-2 p-4 text-sm leading-relaxed text-muted-foreground">
+            <p>
+              {monthDef.name}（{monthDef.season}）の{regionName}は、海水温の目安が
+              <span className="font-semibold text-foreground">{monthCondition.waterTemp}</span>
+              前後。{monthCondition.feature}。
+            </p>
+            <p>
+              {regionClimate}。
+              {peakFishForNarrative.length > 0
+                ? `この時期は${peakFishForNarrative.join("・")}など旬の魚の活性が高まり、水温と潮の動きを意識した釣りが釣果につながります。`
+                : "水温と潮の動きを意識して、活性の高い時間帯を狙いましょう。"}
+            </p>
+          </CardContent>
+        </Card>
+      </section>
+
       {/* 最盛期の魚 */}
       {peakFish.length > 0 && (
         <section className="mb-8 sm:mb-10">
@@ -514,6 +518,17 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
                         ))}
                       </div>
                     )}
+                    {(() => {
+                      const topPref = getTopPrefForFish(f.slug);
+                      return topPref ? (
+                        <Link
+                          href={`/prefecture/${topPref.prefSlug}/fish/${f.slug}`}
+                          className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
+                        >
+                          {topPref.prefName}で{f.name}が釣れるスポット →
+                        </Link>
+                      ) : null;
+                    })()}
                   </CardContent>
                 </Card>
               );

@@ -1,6 +1,7 @@
 import { FishSpecies, FishingSpot, SpotSummary } from "@/types";
 import { fishSpecies } from "./fish";
 import { fishingSpots } from "./spots";
+import { prefectures } from "./prefectures";
 
 // 魚種データにスポット情報を自動付与（個別魚詳細ページ用、全件）
 export function getFishSpeciesWithSpots(): FishSpecies[] {
@@ -150,6 +151,34 @@ export function getSpotsByPrefectureAndFish(prefName: string, fishSlug: string):
     s.region.prefecture === prefName &&
     s.catchableFish.some(cf => cf.fish.slug === fishSlug)
   );
+}
+
+/**
+ * 品質基準を満たす「都道府県×魚種」組み合わせを返す共有ヘルパ。
+ * minSpots 件以上のスポットがある組み合わせのみ（noindex/sitemap のしきい値=3 と統一）。
+ * sitemap と prefecture/[slug]/fish/[fishSlug] の generateStaticParams で共用し、
+ * 「インデックス対象 = 事前生成対象」を保証する（空HTMLの尾を作らない）。
+ */
+export function getEligiblePrefFishCombos(
+  minSpots: number = 3
+): { prefSlug: string; fishSlug: string; count: number }[] {
+  const countMap = new Map<string, number>();
+  for (const spot of fishingSpots) {
+    const pref = prefectures.find((p) => p.name === spot.region.prefecture);
+    if (!pref) continue;
+    for (const cf of spot.catchableFish) {
+      const key = `${pref.slug}|${cf.fish.slug}`;
+      countMap.set(key, (countMap.get(key) || 0) + 1);
+    }
+  }
+  const combos: { prefSlug: string; fishSlug: string; count: number }[] = [];
+  for (const [key, count] of countMap) {
+    if (count < minSpots) continue;
+    const [prefSlug, fishSlug] = key.split("|");
+    combos.push({ prefSlug, fishSlug, count });
+  }
+  // 件数の多い順（人気組み合わせを先にプリレンダ）
+  return combos.sort((a, b) => b.count - a.count);
 }
 
 // 全データのエクスポート
