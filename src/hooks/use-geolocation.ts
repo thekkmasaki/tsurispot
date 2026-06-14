@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
+import { isNativeApp } from "@/lib/platform";
 
 interface GeolocationState {
   latitude: number | null;
@@ -20,6 +21,48 @@ export function useGeolocation() {
   });
 
   const requestLocation = useCallback(() => {
+    // ネイティブアプリ: Capacitor Geolocation（権限ダイアログが安定）
+    if (isNativeApp()) {
+      setState((prev) => ({ ...prev, loading: true, error: null }));
+      void (async () => {
+        try {
+          const { Geolocation } = await import("@capacitor/geolocation");
+          const perm = await Geolocation.requestPermissions();
+          if (perm.location === "denied") {
+            setState({
+              latitude: null,
+              longitude: null,
+              error: "位置情報の使用が許可されていません",
+              loading: false,
+              permissionDenied: true,
+            });
+            return;
+          }
+          const pos = await Geolocation.getCurrentPosition({
+            enableHighAccuracy: false,
+            timeout: 10000,
+            maximumAge: 300000,
+          });
+          setState({
+            latitude: pos.coords.latitude,
+            longitude: pos.coords.longitude,
+            error: null,
+            loading: false,
+            permissionDenied: false,
+          });
+        } catch {
+          setState({
+            latitude: null,
+            longitude: null,
+            error: "位置情報を取得できませんでした",
+            loading: false,
+            permissionDenied: false,
+          });
+        }
+      })();
+      return;
+    }
+
     if (!navigator.geolocation) {
       setState((prev) => ({
         ...prev,
@@ -81,6 +124,20 @@ export function useGeolocation() {
       }
     } catch {
       // パースエラーは無視
+    }
+
+    // ネイティブアプリ: 既に許可済みなら自動取得（未許可時はボタン押下まで待つ）
+    if (isNativeApp()) {
+      void (async () => {
+        try {
+          const { Geolocation } = await import("@capacitor/geolocation");
+          const perm = await Geolocation.checkPermissions();
+          if (perm.location === "granted") requestLocation();
+        } catch {
+          /* noop */
+        }
+      })();
+      return;
     }
 
     // permissions APIでチェック

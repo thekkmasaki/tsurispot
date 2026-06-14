@@ -12,6 +12,7 @@ import dynamic from "next/dynamic";
 import { SPOT_COUNT_FORMATTED } from "@/lib/data/spot-count";
 
 const PWAInstallHint = dynamic(() => import("@/components/pwa-install-hint").then(m => ({ default: m.PWAInstallHint })));
+const NativeBootstrap = dynamic(() => import("@/components/native-bootstrap").then(m => ({ default: m.NativeBootstrap })));
 const CookieBanner = dynamic(() => import("@/components/layout/cookie-banner").then(m => ({ default: m.CookieBanner })));
 const BackToTop = dynamic(() => import("@/components/ui/back-to-top").then(m => ({ default: m.BackToTop })));
 const CompareBar = dynamic(() => import("@/components/spots/compare-bar").then(m => ({ default: m.CompareBar })));
@@ -251,6 +252,7 @@ export default function RootLayout({
             メインコンテンツへスキップ
           </a>
           <PWARegister />
+          <NativeBootstrap />
           <SideRailAds />
           <Header />
           <main id="main-content" className="min-h-screen pb-24 md:pb-0">{children}</main>
