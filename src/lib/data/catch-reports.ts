@@ -87,8 +87,11 @@ export function getCatchReportsBySpot(spotSlug: string): CatchReport[] {
 export async function getCatchReportsBySpotAsync(
   spotSlug: string,
 ): Promise<CatchReport[]> {
-  const { dbGet, dbBatchGet } = await import("@/lib/dynamodb");
   const hardcoded = getCatchReportsBySpot(spotSlug);
+  // SSGビルド時はDynamoDBを叩かない（全スポット完全SSG化でビルド時I/Oを排除）。
+  // UGC釣果はランタイムISR再生成時にマージされる。
+  if (process.env.NEXT_PHASE === "phase-production-build") return hardcoded;
+  const { dbGet, dbBatchGet } = await import("@/lib/dynamodb");
 
   let ugcReports: CatchReport[] = [];
   try {

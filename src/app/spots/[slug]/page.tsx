@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import nextDynamic from "next/dynamic";
-import { permanentRedirect } from "next/navigation";
+import { notFound } from "next/navigation";
 import {
   Star,
   MapPin,
@@ -138,7 +138,7 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
   const spot = getSpotBySlug(slug);
-  if (!spot) permanentRedirect("/spots");
+  if (!spot) notFound();
 
   const fishNames = spot.catchableFish.map((cf) => cf.fish.name).join("・");
   const topFishNames = spot.catchableFish.slice(0, 2).map((cf) => cf.fish.name).join("・");
@@ -199,21 +199,21 @@ export async function generateMetadata({
   };
 }
 
-export const dynamic = "force-dynamic";
+// force-dynamic を撤廃し ISR 化。revalidate でUGC（写真・釣果・投稿）の鮮度を確保する。
+export const revalidate = 3600;
 export const maxDuration = 60;
 
 export function generateStaticParams() {
-  // 上位500件のみSSG。残りはISRで初回アクセス時に生成。
-  return [...fishingSpots]
-    .sort(
-      (a, b) =>
-        b.rating - a.rating || b.reviewCount - a.reviewCount,
-    )
-    .slice(0, 500)
-    .map((spot) => ({ slug: spot.slug }));
+  // 全スポットを完全列挙してSSG化する。
+  // 部分プリレンダ（一部だけ事前生成し残りをオンデマンド）は「空HTML焼付き」の真因のため、
+  // 全件列挙でオンデマンドmissを無くし、force-dynamic 無しでも空HTMLが出ないようにする。
+  return fishingSpots.map((spot) => ({ slug: spot.slug }));
 }
 
 async function getInitialCommunityPhotos(slug: string): Promise<{ url: string; uploadedAt: number }[]> {
+  // SSGビルド時はDynamoDBを叩かない（全スポット完全SSG化でビルド時I/Oを排除）。
+  // コミュニティ写真はランタイムISR再生成時に取得される。
+  if (process.env.NEXT_PHASE === "phase-production-build") return [];
   try {
     const { dbGet } = await import("@/lib/dynamodb");
     const photos = await dbGet<{ url: string; uploadedAt: number }[]>(`SPOT#${slug}`, "PHOTOS");
@@ -227,7 +227,7 @@ async function getInitialCommunityPhotos(slug: string): Promise<{ url: string; u
 export default async function SpotDetailPage({ params }: PageProps) {
   const { slug } = await params;
   const rawSpot = getSpotBySlug(slug);
-  if (!rawSpot) permanentRedirect("/spots");
+  if (!rawSpot) notFound();
   const spot = enrichSpotWithStructures(rawSpot);
   // rules未設定スポット向け: 県レベルの公的釣りルールをフォールバック表示する
   const prefRule = spot.rules ? undefined : getFishingRuleByPrefName(spot.region.prefecture);
