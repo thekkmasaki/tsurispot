@@ -42,12 +42,12 @@ const PREFECTURE_TO_REGION: Record<string, RegionGroup> = {
   "鹿児島県": "kyushu", "沖縄県": "kyushu",
 };
 
-function getRegionGroup(prefecture: string): RegionGroup {
+export function getRegionGroup(prefecture: string): RegionGroup {
   return PREFECTURE_TO_REGION[prefecture] || "kanto";
 }
 
 // ── 地域の気候特性 ──────────────────────────
-const REGION_CLIMATE: Record<RegionGroup, string> = {
+export const REGION_CLIMATE: Record<RegionGroup, string> = {
   hokkaido: "冬は厳しい寒さになるため防寒対策が必須。夏場は涼しく快適に釣りが楽しめる地域",
   tohoku: "冬場は日本海側を中心に荒天が多い。春〜秋がメインシーズン",
   kanto: "年間を通じて比較的温暖で、四季折々の釣りが楽しめる地域",
@@ -147,7 +147,7 @@ const DIFFICULTY_SUMMARIES: Record<Difficulty, (name: string, topFish: string) =
 };
 
 // ── 魚種別の狙い方ヒント ──────────────────────
-const FISH_TIPS: Record<string, string> = {
+export const FISH_TIPS: Record<string, string> = {
   "アジ": "サビキ仕掛けのハリスは1〜1.5号が食い込みがよい。コマセは少量ずつ撒いて群れを留める",
   "サバ": "回遊が始まると入れ食いになることも。サビキの針は小さめ5〜6号で手返しよく",
   "イワシ": "群れが入れば数釣りが楽しめる。仕掛けは4〜5号の小さめの針で対応",
@@ -171,7 +171,7 @@ const FISH_TIPS: Record<string, string> = {
 };
 
 // ── 釣り方×スポットタイプの文脈別説明 ──────────────────
-const METHOD_CONTEXT: Record<string, Record<string, string>> = {
+export const METHOD_CONTEXT: Record<string, Record<string, string>> = {
   "サビキ釣り": {
     port: "港内の常夜灯付近や足場のよい岸壁がベストポイント。コマセカゴにアミエビを詰めて上下に振れば、群れが寄ってきます",
     breakwater: "堤防の内側がおすすめ。外洋向きは潮が速すぎるため、内側の穏やかなポイントで",

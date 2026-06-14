@@ -11,6 +11,7 @@ import { seasons as seasonCategories } from "@/lib/data/seasonal-data";
 import { tackleShops } from "@/lib/data/shops";
 import { FISHING_METHODS, MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
 import { REGION_GROUPS } from "@/lib/data/regions-group";
+import { getEligiblePrefFishCombos } from "@/lib/data";
 import { redis } from "@/lib/redis";
 import { getUserById } from "@/lib/auth-redis";
 import { isSitemapEligible } from "@/lib/seo-quality";
@@ -76,22 +77,9 @@ async function getSitemapUsers(): Promise<
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const sitemapUsers = await getSitemapUsers();
   // 都道府県×魚種の組み合わせを事前計算 (品質フィルタ: その都道府県でその魚が3スポット以上)
-  const prefFishCombos: { prefSlug: string; fishSlug: string }[] = [];
-  const prefFishCountMap = new Map<string, number>();
-  for (const spot of fishingSpots) {
-    const pref = prefectures.find(p => p.name === spot.region.prefecture);
-    if (!pref) continue;
-    for (const cf of spot.catchableFish) {
-      const key = `${pref.slug}|${cf.fish.slug}`;
-      prefFishCountMap.set(key, (prefFishCountMap.get(key) || 0) + 1);
-    }
-  }
-  for (const [key, count] of prefFishCountMap) {
-    // スポット3件以上のみ sitemap 掲載（noindex/内部リンクのしきい値と統一）
-    if (count < 3) continue;
-    const [prefSlug, fishSlug] = key.split("|");
-    prefFishCombos.push({ prefSlug, fishSlug });
-  }
+  // generateStaticParams (prefecture/[slug]/fish/[fishSlug]) と共有ヘルパで統一し、
+  // 「インデックス対象 = 事前生成対象」を保証する。
+  const prefFishCombos = getEligiblePrefFishCombos(3);
 
   const MONTHS_SLUGS = ["january","february","march","april","may","june","july","august","september","october","november","december"];
   const REGION_SLUGS = ["hokkaido","tohoku","kanto","chubu","kinki","chugoku","shikoku","kyushu-okinawa"];
