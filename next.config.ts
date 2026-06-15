@@ -172,7 +172,9 @@ const nextConfig: NextConfig = {
     {
       source: "/area/:slug",
       headers: [
-        { key: "Cache-Control", value: "public, s-maxage=604800, stale-while-revalidate=86400" },
+        // 7日キャッシュは soft-404（存在しないslugが200で返るページ）をCloudflareに長期キャッシュさせ
+        // 害が大きいため、他の詳細ページと同じ1時間+SWRに短縮。
+        { key: "Cache-Control", value: "public, s-maxage=3600, stale-while-revalidate=86400" },
       ],
     },
     {

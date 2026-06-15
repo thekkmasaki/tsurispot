@@ -26,6 +26,9 @@ export interface SpotContribution {
 export async function getSpotContributionsAsync(
   spotSlug: string,
 ): Promise<SpotContribution[]> {
+  // SSGビルド時はDynamoDBを叩かない（全スポット完全SSG化でビルド時I/Oを排除）。
+  // ユーザー投稿はランタイムISR再生成時にマージされる。
+  if (process.env.NEXT_PHASE === "phase-production-build") return [];
   const { dbGet, dbBatchGet } = await import("@/lib/dynamodb");
 
   let contributions: SpotContribution[] = [];
