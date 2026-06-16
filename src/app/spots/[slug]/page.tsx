@@ -31,7 +31,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { trimDescription } from "@/lib/utils/seo";
-import { isLowQualitySpot } from "@/lib/seo-quality";
+import { isLowQualitySpot, isSitemapEligible } from "@/lib/seo-quality";
 import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, getSpotsByFish, getSpotsByMethod, getSpotsBySpotType, getSpotsByDifficulty, type NearbySpot } from "@/lib/data/spots";
 import { RelatedSpotsByFish } from "@/components/spots/related-spots-by-fish";
 import { RelatedSpotsByMethod } from "@/components/spots/related-spots-by-method";
@@ -203,11 +203,30 @@ export async function generateMetadata({
 export const revalidate = 3600;
 export const maxDuration = 60;
 
+// 事前生成する高優先スポット数の上限（部分SSG）。残りは dynamicParams=true（既定）により
+// 初回アクセスでオンデマンド生成され、cache-handler.js 経由で Upstash Redis に永続化される。
+const SSG_PRERENDER_LIMIT = 1000;
+
 export function generateStaticParams() {
-  // 全スポットを完全列挙してSSG化する。
-  // 部分プリレンダ（一部だけ事前生成し残りをオンデマンド）は「空HTML焼付き」の真因のため、
-  // 全件列挙でオンデマンドmissを無くし、force-dynamic 無しでも空HTMLが出ないようにする。
-  return fishingSpots.map((spot) => ({ slug: spot.slug }));
+  // 高優先スポットのみ事前生成し、残りはオンデマンドISR（Redis永続）に委ねる。
+  //
+  // なぜ全件SSGをやめたか: 全件列挙は「生成ページ数 = Docker イメージ容量」を直結させ、
+  // 全スポット有効化時にイメージが肥大して App Runner 起動不能になっていた。
+  // 過去に部分SSGで「空HTML焼付き」が起きたのはローカルディスクISRキャッシュの ENOSPC が
+  // 原因（2026-05-19）であり、部分SSG自体が原因ではない。ISR を Redis に外部化
+  // （next.config.ts の cacheHandler + cache-handler.js: 空HTMLは絶対にキャッシュせず、
+  // 失敗時はミス扱いで再生成）したことで根治済みのため、部分SSGへ安全に戻せる。
+  // 閾値・順序を変えると事前生成対象が変わる点に注意（Phase 4 のCIガードで容量を監視）。
+  const prioritized = fishingSpots
+    .filter(isSitemapEligible) // index/sitemap適格（description>=100字 かつ 魚種>=2）に限定
+    .sort((a, b) => {
+      if (b.rating !== a.rating) return b.rating - a.rating; // 評価が高い順
+      if (b.catchableFish.length !== a.catchableFish.length)
+        return b.catchableFish.length - a.catchableFish.length; // 魚種が多い順
+      return a.slug.localeCompare(b.slug); // 同点は slug 昇順で決定的に
+    })
+    .slice(0, SSG_PRERENDER_LIMIT);
+  return prioritized.map((spot) => ({ slug: spot.slug }));
 }
 
 async function getInitialCommunityPhotos(slug: string): Promise<{ url: string; uploadedAt: number }[]> {
