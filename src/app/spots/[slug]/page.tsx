@@ -199,15 +199,20 @@ export async function generateMetadata({
   };
 }
 
-// force-dynamic を撤廃し ISR 化。revalidate でUGC（写真・釣果・投稿）の鮮度を確保する。
-export const revalidate = 3600;
+// 注意: 全スポット完全SSG（4,072p）化(#144)は App Runner のヘルスチェック(TCP:3000)が
+// 起動で失敗しロールバックしたため force-dynamic に差し戻す。クロール効率改善は別アプローチで再検討。
+export const dynamic = "force-dynamic";
 export const maxDuration = 60;
 
 export function generateStaticParams() {
-  // 全スポットを完全列挙してSSG化する。
-  // 部分プリレンダ（一部だけ事前生成し残りをオンデマンド）は「空HTML焼付き」の真因のため、
-  // 全件列挙でオンデマンドmissを無くし、force-dynamic 無しでも空HTMLが出ないようにする。
-  return fishingSpots.map((spot) => ({ slug: spot.slug }));
+  // 上位500件のみSSG。残りはISRで初回アクセス時に生成。
+  return [...fishingSpots]
+    .sort(
+      (a, b) =>
+        b.rating - a.rating || b.reviewCount - a.reviewCount,
+    )
+    .slice(0, 500)
+    .map((spot) => ({ slug: spot.slug }));
 }
 
 async function getInitialCommunityPhotos(slug: string): Promise<{ url: string; uploadedAt: number }[]> {
