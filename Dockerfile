@@ -22,6 +22,11 @@ COPY public ./public
 
 # standalone出力（サーバー本体）
 COPY --chown=nextjs:nodejs .next/standalone ./
+# ISR Redis キャッシュハンドラ（next.config.ts の cacheHandler が参照）。
+# ランタイムは /app/.next を基準に "../cache-handler.js" を解決するため /app 直下に置く。
+# 動的 import 解決のため nft の静的トレースから漏れる可能性があり、明示 COPY で確実に同梱する
+# （欠落すると起動時にハンドラ読込が失敗しデプロイがロールバックするため）。
+COPY --chown=nextjs:nodejs cache-handler.js ./cache-handler.js
 # 静的アセット（CSS/JS）
 COPY --chown=nextjs:nodejs .next/static ./.next/static
 # Vary 正規化エントリ（Cloudflare が HTML をエッジキャッシュできるようにする）

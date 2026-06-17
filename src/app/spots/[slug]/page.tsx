@@ -31,7 +31,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { trimDescription } from "@/lib/utils/seo";
-import { isLowQualitySpot } from "@/lib/seo-quality";
+import { isLowQualitySpot, isSitemapEligible } from "@/lib/seo-quality";
 import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, getSpotsByFish, getSpotsByMethod, getSpotsBySpotType, getSpotsByDifficulty, type NearbySpot } from "@/lib/data/spots";
 import { RelatedSpotsByFish } from "@/components/spots/related-spots-by-fish";
 import { RelatedSpotsByMethod } from "@/components/spots/related-spots-by-method";
@@ -199,20 +199,34 @@ export async function generateMetadata({
   };
 }
 
-// 注意: 全スポット完全SSG（4,072p）化(#144)は App Runner のヘルスチェック(TCP:3000)が
-// 起動で失敗しロールバックしたため force-dynamic に差し戻す。クロール効率改善は別アプローチで再検討。
-export const dynamic = "force-dynamic";
+// ISR 化（force-dynamic は使わない）。revalidate で UGC（写真・釣果・投稿）の鮮度を確保しつつ、
+// 事前生成外のページは cache-handler.js（Upstash Redis）にオンデマンド生成結果を永続化する。
+// #145 は #144 の全件SSG(4,072p)が App Runner 起動ヘルスチェックを落とした緊急対応で force-dynamic に
+// 退避したが、それでは Redis 永続キャッシュが活きない。Phase 1 で ISR を Redis に外部化（空HTMLは
+// 絶対に焼かず・失敗時はミス扱い再生成）したため「部分SSG + 残りISR」を安全運用できる（本来設計に復帰）。
+export const revalidate = 3600;
 export const maxDuration = 60;
 
+// 事前生成する高優先スポット数の上限（部分SSG）。残りは dynamicParams=true（既定）で初回アクセス時に
+// オンデマンド生成され、cache-handler.js 経由で Upstash Redis に永続化される。
+// 500 は #144 以前から本番デプロイ実績のある安全件数（CLAUDE.md「上位500件SSG」）。全件(4,072p)は
+// イメージ肥大で起動ヘルスチェックを落とすため、まず500で安全復帰し、ライブ安定確認後に Phase 4 の
+// 容量CIガードを見つつ引き上げる。
+const SSG_PRERENDER_LIMIT = 500;
+
 export function generateStaticParams() {
-  // 上位500件のみSSG。残りはISRで初回アクセス時に生成。
-  return [...fishingSpots]
-    .sort(
-      (a, b) =>
-        b.rating - a.rating || b.reviewCount - a.reviewCount,
-    )
-    .slice(0, 500)
-    .map((spot) => ({ slug: spot.slug }));
+  // 高優先スポットのみ事前生成。index/sitemap適格（description>=100字 かつ 魚種>=2）に限定し、
+  // クロール予算を良質ページへ集中させる。
+  const prioritized = fishingSpots
+    .filter(isSitemapEligible)
+    .sort((a, b) => {
+      if (b.rating !== a.rating) return b.rating - a.rating; // 評価が高い順
+      if (b.catchableFish.length !== a.catchableFish.length)
+        return b.catchableFish.length - a.catchableFish.length; // 魚種が多い順
+      return a.slug.localeCompare(b.slug); // 同点は slug 昇順で決定的に
+    })
+    .slice(0, SSG_PRERENDER_LIMIT);
+  return prioritized.map((spot) => ({ slug: spot.slug }));
 }
 
 async function getInitialCommunityPhotos(slug: string): Promise<{ url: string; uploadedAt: number }[]> {

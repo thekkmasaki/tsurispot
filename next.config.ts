@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import path from "node:path";
 import bundleAnalyzer from "@next/bundle-analyzer";
 import spotRedirects from "./src/lib/data/spot-redirects.json";
 import { dedupRedirects, fishingSpots } from "./src/lib/data/spots";
@@ -55,6 +56,18 @@ const spotRedirectEntries = Array.from(allRedirects.entries()).map(([oldSlug, ne
 const nextConfig: NextConfig = {
   // Docker/App Runner用: 最小限のスタンドアロン出力を生成
   output: "standalone",
+  // ISR/データキャッシュを Upstash Redis に外部化（cache-handler.js）。
+  // 目的: 「生成ページ数 = Docker イメージ容量」の結合を断ち、ローカルディスク ISR の
+  // ENOSPC（2026-05-19 の空 HTML 焼付き障害）を再発させずに部分 SSG へ戻すため。
+  // パス解決の仕組み: Next はビルド時に絶対パスを distDir 相対へ変換して
+  // required-server-files.json に保存し（build/index.js）、ランタイムでは
+  // runtime distDir 基準に再解決する（next-server.js → format-dynamic-import-path）。
+  // よってビルドマシンの絶対パスはランタイムに焼き込まれない。cache-handler.js を
+  // standalone ルート（.next の隣 = /app/cache-handler.js）に置けば自動解決される。
+  cacheHandler: path.join(process.cwd(), "cache-handler.js"),
+  // 既定の 50MB インメモリ LRU を無効化（カスタムハンドラが全責務を負うため、
+  // 二重キャッシュによる古い HTML 滞留を避ける）。
+  cacheMaxMemorySize: 0,
   // react-leaflet ESM + Webpack互換性修正
   transpilePackages: ['react-leaflet', '@react-leaflet/core'],
   // パフォーマンス: X-Powered-By ヘッダーを削除（不要な情報漏洩防止＋レスポンスサイズ削減）
