@@ -199,26 +199,26 @@ export async function generateMetadata({
   };
 }
 
-// force-dynamic を撤廃し ISR 化。revalidate でUGC（写真・釣果・投稿）の鮮度を確保する。
+// ISR 化（force-dynamic は使わない）。revalidate で UGC（写真・釣果・投稿）の鮮度を確保しつつ、
+// 事前生成外のページは cache-handler.js（Upstash Redis）にオンデマンド生成結果を永続化する。
+// #145 は #144 の全件SSG(4,072p)が App Runner 起動ヘルスチェックを落とした緊急対応で force-dynamic に
+// 退避したが、それでは Redis 永続キャッシュが活きない。Phase 1 で ISR を Redis に外部化（空HTMLは
+// 絶対に焼かず・失敗時はミス扱い再生成）したため「部分SSG + 残りISR」を安全運用できる（本来設計に復帰）。
 export const revalidate = 3600;
 export const maxDuration = 60;
 
-// 事前生成する高優先スポット数の上限（部分SSG）。残りは dynamicParams=true（既定）により
-// 初回アクセスでオンデマンド生成され、cache-handler.js 経由で Upstash Redis に永続化される。
-const SSG_PRERENDER_LIMIT = 1000;
+// 事前生成する高優先スポット数の上限（部分SSG）。残りは dynamicParams=true（既定）で初回アクセス時に
+// オンデマンド生成され、cache-handler.js 経由で Upstash Redis に永続化される。
+// 500 は #144 以前から本番デプロイ実績のある安全件数（CLAUDE.md「上位500件SSG」）。全件(4,072p)は
+// イメージ肥大で起動ヘルスチェックを落とすため、まず500で安全復帰し、ライブ安定確認後に Phase 4 の
+// 容量CIガードを見つつ引き上げる。
+const SSG_PRERENDER_LIMIT = 500;
 
 export function generateStaticParams() {
-  // 高優先スポットのみ事前生成し、残りはオンデマンドISR（Redis永続）に委ねる。
-  //
-  // なぜ全件SSGをやめたか: 全件列挙は「生成ページ数 = Docker イメージ容量」を直結させ、
-  // 全スポット有効化時にイメージが肥大して App Runner 起動不能になっていた。
-  // 過去に部分SSGで「空HTML焼付き」が起きたのはローカルディスクISRキャッシュの ENOSPC が
-  // 原因（2026-05-19）であり、部分SSG自体が原因ではない。ISR を Redis に外部化
-  // （next.config.ts の cacheHandler + cache-handler.js: 空HTMLは絶対にキャッシュせず、
-  // 失敗時はミス扱いで再生成）したことで根治済みのため、部分SSGへ安全に戻せる。
-  // 閾値・順序を変えると事前生成対象が変わる点に注意（Phase 4 のCIガードで容量を監視）。
+  // 高優先スポットのみ事前生成。index/sitemap適格（description>=100字 かつ 魚種>=2）に限定し、
+  // クロール予算を良質ページへ集中させる。
   const prioritized = fishingSpots
-    .filter(isSitemapEligible) // index/sitemap適格（description>=100字 かつ 魚種>=2）に限定
+    .filter(isSitemapEligible)
     .sort((a, b) => {
       if (b.rating !== a.rating) return b.rating - a.rating; // 評価が高い順
       if (b.catchableFish.length !== a.catchableFish.length)
