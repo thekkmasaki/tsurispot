@@ -97,6 +97,8 @@ export async function fetchMicroCMSBlogPosts(): Promise<BlogPost[]> {
     const data = await client.get<MicroCMSListResponse>({
       endpoint: "blogs",
       queries: { limit: 100, orders: "-publishedAt" },
+      // Next16のfetch既定no-storeを上書きしISRデータキャッシュに載せる（無いと動的化しトップが毎回SSRで遅い）
+      customRequestInit: { next: { revalidate: 3600 } },
     });
     return data.contents.map(microCMSToBlogPost);
   } catch (e) {
@@ -117,6 +119,7 @@ export async function fetchMicroCMSBlogBySlug(
     const data = await client.get<MicroCMSListResponse>({
       endpoint: "blogs",
       queries: { filters: `slug[equals]${slug}`, limit: 1 },
+      customRequestInit: { next: { revalidate: 3600 } },
     });
     if (data.contents.length > 0) {
       return microCMSToBlogPost(data.contents[0]);
@@ -127,6 +130,7 @@ export async function fetchMicroCMSBlogBySlug(
       const item = await client.get<MicroCMSBlogResponse>({
         endpoint: "blogs",
         contentId: slug,
+        customRequestInit: { next: { revalidate: 3600 } },
       });
       return microCMSToBlogPost(item);
     } catch {
