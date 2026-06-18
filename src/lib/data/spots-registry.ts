@@ -79,20 +79,22 @@ import { bulkKyushuWSpots } from "./spots-bulk-kyushu-w";
 import { bulkKyushuESpots } from "./spots-bulk-kyushu-e";
 import { bulkShikokuSpots } from "./spots-bulk-shikoku";
 import { bulkSaninSetouchiSpots } from "./spots-bulk-sanin-setouchi";
-// TEMPORARILY DISABLED: add9-13 spots causing App Runner deployment failure (image too large)
-// import { eastAdd9Spots } from "./spots-add9-east";
-// import { centralAdd9Spots } from "./spots-add9-central";
-// import { westAdd9Spots } from "./spots-add9-west";
-// import { northAdd10Spots } from "./spots-add10-north";
-// import { eastAdd10Spots } from "./spots-add10-east";
-// import { westAdd10Spots } from "./spots-add10-west";
-// import { northAdd11Spots } from "./spots-add11-north";
-// import { eastAdd11Spots } from "./spots-add11-east";
-// import { westAdd11Spots } from "./spots-add11-west";
-// import { northAdd12Spots } from "./spots-add12-north";
-// import { eastAdd12Spots } from "./spots-add12-east";
-// import { westAdd12Spots } from "./spots-add12-west";
-// import { eastAdd13Spots } from "./spots-add13-east";
+// add9-13 (3,096件): 2026-05-19 にイメージ肥大で App Runner 起動不能となり一時無効化していたが、
+// spots/[slug] を部分SSG(上位500件)化して「ページ件数」と「イメージ容量」を分離し、
+// deploy.yml の容量ガードで再肥大を阻止できるようになったため再有効化。
+import { eastAdd9Spots } from "./spots-add9-east";
+import { centralAdd9Spots } from "./spots-add9-central";
+import { westAdd9Spots } from "./spots-add9-west";
+import { northAdd10Spots } from "./spots-add10-north";
+import { eastAdd10Spots } from "./spots-add10-east";
+import { westAdd10Spots } from "./spots-add10-west";
+import { northAdd11Spots } from "./spots-add11-north";
+import { eastAdd11Spots } from "./spots-add11-east";
+import { westAdd11Spots } from "./spots-add11-west";
+import { northAdd12Spots } from "./spots-add12-north";
+import { eastAdd12Spots } from "./spots-add12-east";
+import { westAdd12Spots } from "./spots-add12-west";
+import { eastAdd13Spots } from "./spots-add13-east";
 
 export const allRawSpots: FishingSpot[] = [
   ..._baseSpots,
@@ -175,18 +177,17 @@ export const allRawSpots: FishingSpot[] = [
   ...bulkKyushuESpots,
   ...bulkShikokuSpots,
   ...bulkSaninSetouchiSpots,
-  // TEMPORARILY DISABLED: add9-13 spots
-  // ...eastAdd9Spots,
-  // ...centralAdd9Spots,
-  // ...westAdd9Spots,
-  // ...northAdd10Spots,
-  // ...eastAdd10Spots,
-  // ...westAdd10Spots,
-  // ...northAdd11Spots,
-  // ...eastAdd11Spots,
-  // ...westAdd11Spots,
-  // ...northAdd12Spots,
-  // ...eastAdd12Spots,
-  // ...westAdd12Spots,
-  // ...eastAdd13Spots,
+  ...eastAdd9Spots,
+  ...centralAdd9Spots,
+  ...westAdd9Spots,
+  ...northAdd10Spots,
+  ...eastAdd10Spots,
+  ...westAdd10Spots,
+  ...northAdd11Spots,
+  ...eastAdd11Spots,
+  ...westAdd11Spots,
+  ...northAdd12Spots,
+  ...eastAdd12Spots,
+  ...westAdd12Spots,
+  ...eastAdd13Spots,
 ];
