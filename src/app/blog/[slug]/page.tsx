@@ -33,6 +33,11 @@ import { BlogAffiliateRecommend } from "@/components/blog/blog-affiliate-recomme
 //   Phase 1 で ISRキャッシュを Upstash Redis に外部化し恒久解決したため撤去。）
 export const revalidate = 3600;
 
+// force-static: 静的記事(generateStaticParams)+microCMS記事(dynamicParams)を共に静的(○/オンデマンドISR)化。
+// 公式: ランタイムISR生成には空配列か force-static が必要。dynamicParams=true と両立し、未掲載slugは
+// 404でなくオンデマンド生成される。revalidate / unstable_cache だけでは ƒ(毎回SSR・44s) のままだった。
+export const dynamic = "force-static";
+
 // microCMS API呼び出しのタイムアウト対策
 export const maxDuration = 60;
 

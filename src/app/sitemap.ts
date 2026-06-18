@@ -22,6 +22,10 @@ const baseUrl = "https://tsurispot.com";
 // ISR化: 旧版は getSitemapUsers の Redis SCAN を毎リクエスト実行しƒ(動的)・低速(~25s)だった。
 // getSitemapUsers を unstable_cache 化し、ルートもISRにして配信を高速化する。
 export const revalidate = 3600;
+// force-static: revalidate / unstable_cache だけでは auto 判定で ƒ(毎回XML再生成・28s) のまま
+// だったため、静的(○)を強制してビルド時1回生成＋1hごとISRにする。Redis SCAN は getSitemapUsers の
+// try/catch 内なので、万一 force-static 下で失敗してもユーザーURLが空になるだけでビルドは壊れない。
+export const dynamic = "force-static";
 
 // ビルド時の日付を固定（毎回 new Date() にしない）
 const BUILD_DATE = new Date().toISOString().split("T")[0]; // YYYY-MM-DD形式

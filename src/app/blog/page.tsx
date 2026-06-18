@@ -9,6 +9,11 @@ import { InArticleAd, NativeAdBreak } from "@/components/ads/ad-unit";
 // ISR: 1時間ごとに再検証 (microCMS の新着記事を取り込みつつ Cloudflare cache 効率を維持)
 export const revalidate = 3600;
 
+// force-static: getAllBlogPosts(microCMS fetch)があっても静的(○)を強制しCDNエッジ配信。
+// revalidate / unstable_cache だけでは auto 判定で ƒ(毎回SSR・63s) のままだった。
+// tag/categoryフィルタは BlogListClient(クライアント)側なので searchParams 未使用。
+export const dynamic = "force-static";
+
 // microCMS API呼び出しのタイムアウト対策
 export const maxDuration = 60;
 
