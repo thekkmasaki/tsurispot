@@ -23,6 +23,50 @@ const DEFAULT_TTL_SECONDS = Number(
   process.env.ISR_CACHE_TTL_SECONDS || 60 * 60 * 24 * 7
 );
 
+// ── L1 インメモリキャッシュ（プロセス内・最小限）─────────────────────────────
+// 目的: 同一キーの連続 read（クローラの再訪・人気ページ）で毎回 Redis GET を叩かず、
+// Upstash のコマンド数を削減する（上限超過の再発防止）。cacheMaxMemorySize:0 で Next
+// 既定の LRU を切っているため、ここで小さな L1 を持つ。
+// 安全性: TTL を revalidate より十分短く（既定30s）取り、set()/revalidateTag() で必ず
+// 無効化するので「二重キャッシュで古い HTML が滞留」する問題は起きない（L1 はこのハンドラ
+// が単一の権威として管理する）。巨大エントリは L1 に載せずメモリを保護する。
+const L1_TTL_MS = Number(process.env.ISR_L1_TTL_MS || 30_000);
+const L1_MAX_ENTRIES = Number(process.env.ISR_L1_MAX_ENTRIES || 128);
+const L1_MAX_ENTRY_BYTES = Number(process.env.ISR_L1_MAX_ENTRY_BYTES || 256_000);
+const _l1 = new Map(); // key -> { entry, expiresAt }
+
+function l1Get(key) {
+  const hit = _l1.get(key);
+  if (!hit) return null;
+  if (hit.expiresAt < Date.now()) {
+    _l1.delete(key);
+    return null;
+  }
+  return hit.entry;
+}
+function l1Set(key, entry, sizeBytes) {
+  // 巨大エントリはメモリ保護のため L1 に載せない（Redis 経由は従来どおり機能）
+  if (typeof sizeBytes === "number" && sizeBytes > L1_MAX_ENTRY_BYTES) {
+    _l1.delete(key);
+    return;
+  }
+  // delete→set で挿入順を更新（Map は挿入順を保持＝近似 LRU）
+  _l1.delete(key);
+  _l1.set(key, { entry, expiresAt: Date.now() + L1_TTL_MS });
+  // 件数上限を超えたら最古を捨てる
+  while (_l1.size > L1_MAX_ENTRIES) {
+    const oldest = _l1.keys().next().value;
+    if (oldest === undefined) break;
+    _l1.delete(oldest);
+  }
+}
+function l1Delete(key) {
+  _l1.delete(key);
+}
+function l1Clear() {
+  _l1.clear();
+}
+
 let _redis = null; // null=未初期化 / false=無効 / Redis=有効
 function getRedis() {
   if (_redis !== null) return _redis || null;
@@ -117,37 +161,56 @@ module.exports = class IsrRedisCacheHandler {
   }
 
   async get(cacheKey) {
+    const k = this._k(cacheKey);
+    const cached = l1Get(k);
+    if (cached) return cached; // L1 ヒット → Redis を叩かない（コマンド削減）
     const redis = getRedis();
     if (!redis) return null;
     try {
-      const stored = await redis.get(this._k(cacheKey));
+      const stored = await redis.get(k);
       if (!stored || typeof stored !== "string") return null;
-      return deserializeEntry(stored); // { value, lastModified, tags }
+      const entry = deserializeEntry(stored); // { value, lastModified, tags }
+      l1Set(k, entry, stored.length); // 次回の同一 read を L1 で吸収
+      return entry;
     } catch {
       return null; // 失敗 → ミス扱い → Next が再生成（安全）
     }
   }
 
   async set(cacheKey, data, ctx) {
+    const k = this._k(cacheKey);
     const redis = getRedis();
-    if (!redis) return;
+    if (!redis) {
+      l1Delete(k); // Redis 無しでも L1 に古いものを残さない
+      return;
+    }
     try {
       // 削除指示
       if (data == null) {
-        await redis.del(this._k(cacheKey));
+        await redis.del(k);
+        l1Delete(k);
         return;
       }
       // 空 / 壊れたページは絶対に焼き付けない
-      if (!isCacheableValue(data)) return;
+      if (!isCacheableValue(data)) {
+        l1Delete(k);
+        return;
+      }
 
       const tags = (ctx && ctx.tags) || (data && data.tags) || [];
-      const payload = serializeEntry({ value: data, lastModified: Date.now(), tags });
-      if (payload.length > MAX_CACHE_BYTES) return; // 大きすぎ → 非キャッシュ（毎回生成で正常動作）
+      const now = Date.now();
+      const payload = serializeEntry({ value: data, lastModified: now, tags });
+      if (payload.length > MAX_CACHE_BYTES) {
+        l1Delete(k);
+        return; // 大きすぎ → 非キャッシュ（毎回生成で正常動作）
+      }
 
       const revalidate =
         ctx && typeof ctx.revalidate === "number" ? ctx.revalidate : 0;
       const ttl = Math.max(revalidate, DEFAULT_TTL_SECONDS);
-      await redis.set(this._k(cacheKey), payload, { ex: ttl });
+      await redis.set(k, payload, { ex: ttl });
+      // L1 も更新（Redis と同じ shape）。ISR 再生成直後の read が即 fresh を返す。
+      l1Set(k, { value: data, lastModified: now, tags }, payload.length);
 
       if (Array.isArray(tags) && tags.length > 0) {
         const pipeline = redis.pipeline();
@@ -159,10 +222,13 @@ module.exports = class IsrRedisCacheHandler {
       }
     } catch {
       // 書込失敗は致命でない（次回再生成）。壊れたエントリは残さない。
+      l1Delete(k);
     }
   }
 
   async revalidateTag(tags) {
+    // タグ無効化時は L1 を全クリア（低頻度なのでコスト無視。古い HTML 滞留を防ぐ安全側）
+    l1Clear();
     const redis = getRedis();
     if (!redis) return;
     const list = Array.isArray(tags) ? tags : [tags];
@@ -189,3 +255,11 @@ module.exports = class IsrRedisCacheHandler {
 module.exports.__serializeEntry = serializeEntry;
 module.exports.__deserializeEntry = deserializeEntry;
 module.exports.__isCacheableValue = isCacheableValue;
+// テスト用に L1 ヘルパーを公開（本体動作には影響しない）
+module.exports.__l1Get = l1Get;
+module.exports.__l1Set = l1Set;
+module.exports.__l1Delete = l1Delete;
+module.exports.__l1Clear = l1Clear;
+module.exports.__l1Size = () => _l1.size;
+module.exports.__L1_MAX_ENTRIES = L1_MAX_ENTRIES;
+module.exports.__L1_MAX_ENTRY_BYTES = L1_MAX_ENTRY_BYTES;
