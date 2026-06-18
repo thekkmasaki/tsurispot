@@ -1,4 +1,5 @@
 import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { blogArticles2 } from "./blog-articles-2";
 import { blogArticles3 } from "./blog-articles-3";
 import { blogArticles4 } from "./blog-articles-4";
@@ -2572,25 +2573,43 @@ export function getBlogPostBySlug(slug: string): BlogPost | undefined {
   return blogPosts.find((post) => post.slug === slug);
 }
 
-/** slugで記事を取得（async版、microCMS優先 → 静的記事フォールバック）— React cache でリクエスト単位メモ化 */
-export const getBlogPostBySlugAsync = cache(async (slug: string): Promise<BlogPost | undefined> => {
-  const { fetchMicroCMSBlogBySlug } = await import("@/lib/microcms");
-  const cmsPost = await fetchMicroCMSBlogBySlug(slug);
-  if (cmsPost) return cmsPost;
-  return blogPosts.find((post) => post.slug === slug);
-});
+/**
+ * slugで記事を取得（async版、microCMS優先 → 静的記事フォールバック）。
+ * unstable_cache でデータキャッシュ境界を作り、microCMS fetch の計装有無に依らず
+ * ルートを ISR(◐) に保つ（fetch単体の revalidate ではƒのままだったため）。
+ * slug は自動でキャッシュキーに含まれる。React cache でリクエスト単位メモ化も併用。
+ */
+const fetchBlogPostBySlugCached = unstable_cache(
+  async (slug: string): Promise<BlogPost | undefined> => {
+    const { fetchMicroCMSBlogBySlug } = await import("@/lib/microcms");
+    const cmsPost = await fetchMicroCMSBlogBySlug(slug);
+    if (cmsPost) return cmsPost;
+    return blogPosts.find((post) => post.slug === slug);
+  },
+  ["blog-post-by-slug"],
+  { revalidate: 3600, tags: ["blog-posts"] }
+);
+export const getBlogPostBySlugAsync = cache(fetchBlogPostBySlugCached);
 
-/** 全ブログ記事を取得（静的 + microCMS、publishedAt降順）— React cache でリクエスト単位メモ化 */
-export const getAllBlogPosts = cache(async (): Promise<BlogPost[]> => {
-  const { fetchMicroCMSBlogPosts } = await import("@/lib/microcms");
-  const cmsPosts = await fetchMicroCMSBlogPosts();
-  const cmsSlugs = new Set(cmsPosts.map((p) => p.slug));
-  const staticPosts = blogPosts.filter((p) => !cmsSlugs.has(p.slug));
-  const merged = [...cmsPosts, ...staticPosts];
-  return merged.sort(
-    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
-  );
-});
+/**
+ * 全ブログ記事を取得（静的 + microCMS、publishedAt降順）。
+ * unstable_cache でキャッシュ境界を作り、/・/blog・/blog/[slug]・sitemap を ISR 化＆高速化。
+ */
+const fetchAllBlogPostsCached = unstable_cache(
+  async (): Promise<BlogPost[]> => {
+    const { fetchMicroCMSBlogPosts } = await import("@/lib/microcms");
+    const cmsPosts = await fetchMicroCMSBlogPosts();
+    const cmsSlugs = new Set(cmsPosts.map((p) => p.slug));
+    const staticPosts = blogPosts.filter((p) => !cmsSlugs.has(p.slug));
+    const merged = [...cmsPosts, ...staticPosts];
+    return merged.sort(
+      (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+    );
+  },
+  ["all-blog-posts"],
+  { revalidate: 3600, tags: ["blog-posts"] }
+);
+export const getAllBlogPosts = cache(fetchAllBlogPostsCached);
 
 /** カテゴリで記事をフィルタ */
 export function getBlogPostsByCategory(category: BlogPost["category"]): BlogPost[] {

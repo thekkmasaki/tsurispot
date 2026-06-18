@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { unstable_cache } from "next/cache";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 import { regions } from "@/lib/data/regions";
@@ -18,6 +19,10 @@ import { isSitemapEligible } from "@/lib/seo-quality";
 
 const baseUrl = "https://tsurispot.com";
 
+// ISR化: 旧版は getSitemapUsers の Redis SCAN を毎リクエスト実行しƒ(動的)・低速(~25s)だった。
+// getSitemapUsers を unstable_cache 化し、ルートもISRにして配信を高速化する。
+export const revalidate = 3600;
+
 // ビルド時の日付を固定（毎回 new Date() にしない）
 const BUILD_DATE = new Date().toISOString().split("T")[0]; // YYYY-MM-DD形式
 
@@ -36,42 +41,47 @@ const monthDate = (num: number) =>
 
 // 釣果1件以上 & isPublic!=false のユーザーを sitemap に含める
 // (Redis SCAN は数百ユーザー規模なら問題ないが、将来規模拡大時は別途インデックス化検討)
-async function getSitemapUsers(): Promise<
-  { tsuriId: string; updatedAt: Date }[]
-> {
-  try {
-    const userIds: string[] = [];
-    let cursor: string | number = 0;
-    let iterations = 0;
-    do {
-      const result = (await redis.scan(cursor, {
-        match: "auth:user:*",
-        count: 200,
-      })) as [string | number, string[]];
-      cursor = result[0];
-      for (const key of result[1] || []) {
-        const id = key.replace(/^auth:user:/, "");
-        if (id) userIds.push(id);
-      }
-      iterations++;
-      if (iterations > 50) break; // 安全弁: 1万ユーザー上限
-    } while (cursor !== "0" && cursor !== 0);
+// 釣果1件以上 & isPublic!=false のユーザーを sitemap に含める。
+// unstable_cache でキャッシュ境界を作り、毎リクエストの Redis SCAN + N回 getUserById を回避。
+// updatedAt はキャッシュ境界をまたぐため Date ではなく ISO文字列で返す（Date復元のブレを避ける）。
+const getSitemapUsers = unstable_cache(
+  async (): Promise<{ tsuriId: string; updatedAt: string }[]> => {
+    try {
+      const userIds: string[] = [];
+      let cursor: string | number = 0;
+      let iterations = 0;
+      do {
+        const result = (await redis.scan(cursor, {
+          match: "auth:user:*",
+          count: 200,
+        })) as [string | number, string[]];
+        cursor = result[0];
+        for (const key of result[1] || []) {
+          const id = key.replace(/^auth:user:/, "");
+          if (id) userIds.push(id);
+        }
+        iterations++;
+        if (iterations > 50) break; // 安全弁: 1万ユーザー上限
+      } while (cursor !== "0" && cursor !== 0);
 
-    const users = await Promise.all(
-      userIds.map(async (id) => {
-        const u = await getUserById(id);
-        if (!u) return null;
-        if (u.isPublic === false) return null;
-        if ((u.reportCount || 0) < 1) return null;
-        return { tsuriId: id, updatedAt: new Date(u.createdAt) };
-      }),
-    );
-    return users.filter((u): u is { tsuriId: string; updatedAt: Date } => Boolean(u));
-  } catch (err) {
-    console.error("[sitemap] getSitemapUsers failed:", err);
-    return [];
-  }
-}
+      const users = await Promise.all(
+        userIds.map(async (id) => {
+          const u = await getUserById(id);
+          if (!u) return null;
+          if (u.isPublic === false) return null;
+          if ((u.reportCount || 0) < 1) return null;
+          return { tsuriId: id, updatedAt: new Date(u.createdAt).toISOString() };
+        }),
+      );
+      return users.filter((u): u is { tsuriId: string; updatedAt: string } => Boolean(u));
+    } catch (err) {
+      console.error("[sitemap] getSitemapUsers failed:", err);
+      return [];
+    }
+  },
+  ["sitemap-users"],
+  { revalidate: 3600, tags: ["sitemap-users"] }
+);
 
 // 単一サイトマップ（generateSitemapsを削除 → Google が確実に取得できる1ファイル構成）
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -478,7 +488,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // ===== ユーザープロフィール（釣果1件以上の公開ユーザー） =====
     ...sitemapUsers.map((u) => ({
       url: `${baseUrl}/users/${u.tsuriId}`,
-      lastModified: u.updatedAt,
+      lastModified: new Date(u.updatedAt),
       changeFrequency: "weekly" as const,
       priority: 0.5,
     })),

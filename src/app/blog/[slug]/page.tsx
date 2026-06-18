@@ -28,8 +28,10 @@ import {
 import { InArticleAd, StickySidebarAd, MultiplexAd } from "@/components/ads/ad-unit";
 import { BlogAffiliateRecommend } from "@/components/blog/blog-affiliate-recommend";
 
-// 一時的に force-dynamic (build時SSGで空HTML焼き付き問題対策)
-export const dynamic = "force-dynamic";
+// ISR: 静的記事は generateStaticParams で SSG、microCMS記事は dynamicParams で随時生成。
+// （旧 force-dynamic は2026-05-19の空HTML焼き付き対策の暫定措置。
+//   Phase 1 で ISRキャッシュを Upstash Redis に外部化し恒久解決したため撤去。）
+export const revalidate = 3600;
 
 // microCMS API呼び出しのタイムアウト対策
 export const maxDuration = 60;
