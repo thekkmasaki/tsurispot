@@ -32,7 +32,7 @@ import {
   ClipboardCheck,
   Sparkles,
 } from "lucide-react";
-import dynamic from "next/dynamic";
+import nextDynamic from "next/dynamic";
 import { HomeSearchBar } from "@/components/home-search-bar";
 import { HomeSeasonalFish } from "@/components/home-seasonal-fish";
 import { HomeTop10Client } from "@/components/home-top10-client";
@@ -59,21 +59,21 @@ function getFishImage(tags: string[], id: string): string {
 }
 
 // Below-the-fold client components loaded lazily
-const LocationPromptBanner = dynamic(() => import("@/components/location-prompt-banner").then((m) => m.LocationPromptBanner), {
+const LocationPromptBanner = nextDynamic(() => import("@/components/location-prompt-banner").then((m) => m.LocationPromptBanner), {
   // CWV: 実 component は fixed positioning (normal flow 外) なので、 skeleton の h-12 空 box は不要。 CLS 削減のため null
   loading: () => null,
 });
-const SeasonalRecommend = dynamic(() => import("@/components/affiliate/seasonal-recommend").then((m) => m.SeasonalRecommend), {
+const SeasonalRecommend = nextDynamic(() => import("@/components/affiliate/seasonal-recommend").then((m) => m.SeasonalRecommend), {
   // CWV: 実 component 高さ (200-250px) に近づけて CLS 削減
   loading: () => <div className="h-64 sm:h-72 w-full animate-pulse rounded-xl bg-muted" />,
 });
-const OnlineUsersBadge = dynamic(() => import("@/components/online-users-badge").then((m) => m.OnlineUsersBadge), {
+const OnlineUsersBadge = nextDynamic(() => import("@/components/online-users-badge").then((m) => m.OnlineUsersBadge), {
   loading: () => <div className="inline-flex h-7 w-28 animate-pulse rounded-full bg-white/10" />,
 });
-const NativeAdBreak = dynamic(() => import("@/components/ads/ad-unit").then((m) => m.NativeAdBreak), {
+const NativeAdBreak = nextDynamic(() => import("@/components/ads/ad-unit").then((m) => m.NativeAdBreak), {
   loading: () => null,
 });
-const InArticleAd = dynamic(() => import("@/components/ads/ad-unit").then((m) => m.InArticleAd), {
+const InArticleAd = nextDynamic(() => import("@/components/ads/ad-unit").then((m) => m.InArticleAd), {
   loading: () => null,
 });
 
@@ -82,6 +82,10 @@ const fishCount = fishSpecies.length;
 
 // ブログ記事はmicroCMSから動的取得するため、ISRで定期更新
 export const revalidate = 21600;
+// force-static: fetch(microCMS等)があっても静的プリレンダ(○)を強制しCDNエッジ配信する。
+// revalidate / unstable_cache だけでは auto 判定で ƒ(毎回SSR・38s) のままだった。
+// cookies/headers/searchParams は未使用なので空値化の副作用なし。
+export const dynamic = "force-static";
 
 export const metadata: Metadata = {
   title: "ツリスポ（つりすぽ）- 近くの釣りスポット検索｜釣り場が地図で見つかる",
