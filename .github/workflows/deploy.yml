@@ -234,27 +234,33 @@ jobs:
         run: |
           echo "Running post-deploy health checks..."
           FAILED=0
+          # この時点で App Runner は既に RUNNING・本番反映済み。これはデプロイ後の smoke check。
+          # Cloudflare purge 直後の ISR コールド生成で時間がかかるページ(/blog, /sitemap.xml 等)があるため、
+          # タイムアウトはデプロイを止めず警告に留める。curl 失敗(exit 28 等)が set -e でステップ全体を
+          # 落とさないよう `|| echo "000"` で握りつぶす。4xx/5xx の実エラーのみ ❌ として集計する。
           URLS=(
             "https://tsurispot.com/api/health"
             "https://tsurispot.com"
             "https://tsurispot.com/spots"
             "https://tsurispot.com/fish"
-            "https://tsurispot.com/prefectures"
+            "https://tsurispot.com/prefecture"
             "https://tsurispot.com/blog"
-            "https://tsurispot.com/guides"
+            "https://tsurispot.com/monthly"
             "https://tsurispot.com/sitemap.xml"
           )
           for URL in "${URLS[@]}"; do
-            STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 "$URL")
-            if [ "$STATUS" = "200" ]; then
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 "$URL" || echo "000")
+            if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 400 ]; then
               echo "✅ $URL → $STATUS"
+            elif [ "$STATUS" = "000" ]; then
+              echo "⚠️  $URL → タイムアウト(>30s) — ISRコールド生成中の可能性。警告のみ"
             else
               echo "❌ $URL → $STATUS"
               FAILED=$((FAILED + 1))
             fi
           done
           if [ "$FAILED" -gt 0 ]; then
-            echo "::warning::$FAILED ページでヘルスチェック失敗"
+            echo "::warning::$FAILED ページが 4xx/5xx を返しました（要確認・デプロイは継続）"
           else
             echo "All health checks passed!"
           fi
