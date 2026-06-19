@@ -21,6 +21,7 @@ import { toListSpot } from "@/lib/data/list-spot";
 import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { fishSpecies } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
+import { getHighValuePrefMonthFishCombos } from "@/lib/data";
 import {
   MONTHS,
   getMonthBySlug,
@@ -100,33 +101,31 @@ function buildValidCombos(): Map<string, Set<string>> {
 
 const validCombos = buildValidCombos();
 
+// 高価値組合せ（index / 事前生成 / sitemap 対象）。sitemap と共有ヘルパで一致させ
+// 「index対象 = 事前生成対象 = sitemap掲載」を保証する。
+const highValueComboSet = new Set(
+  getHighValuePrefMonthFishCombos().map(
+    (c) => `${c.prefSlug}/${c.monthSlug}/${c.fishSlug}`
+  )
+);
+
+function isHighValueCombo(
+  prefSlug: string,
+  monthSlug: string,
+  fishSlug: string
+): boolean {
+  return highValueComboSet.has(`${prefSlug}/${monthSlug}/${fishSlug}`);
+}
+
 export function generateStaticParams() {
-  const combos: { slug: string; month: string; fishSlug: string }[] = [];
-
-  for (const pref of prefectures) {
-    const prefSpots = fishingSpots.filter(
-      (s) => s.region.prefecture === pref.name
-    );
-
-    for (const month of MONTHS) {
-      const fishMap = new Map<string, number>();
-      for (const spot of prefSpots) {
-        for (const cf of spot.catchableFish) {
-          if (isMonthInRange(month.num, cf.monthStart, cf.monthEnd)) {
-            fishMap.set(cf.fish.slug, (fishMap.get(cf.fish.slug) || 0) + 1);
-          }
-        }
-      }
-
-      for (const [fSlug, count] of fishMap) {
-        if (count >= MIN_SPOTS) {
-          combos.push({ slug: pref.slug, month: month.slug, fishSlug: fSlug });
-        }
-      }
-    }
-  }
-
-  return combos;
+  // 事前生成(SSG)は高価値組合せ（数百件）だけに絞り、イメージ肥大を防ぐ。
+  // それ以外の count>=MIN_SPOTS の組合せは dynamicParams=true でオンデマンド生成され
+  // noindex で配信される（UX は維持しつつクロール予算と容量を高価値ページへ集中）。
+  return getHighValuePrefMonthFishCombos().map((c) => ({
+    slug: c.prefSlug,
+    month: c.monthSlug,
+    fishSlug: c.fishSlug,
+  }));
 }
 
 export async function generateMetadata({
@@ -151,12 +150,14 @@ export async function generateMetadata({
   const description = `${pref.name}で${month.name}に${fish.name}が釣れるスポットと釣り方を紹介。${month.season}シーズンの${fish.name}釣りの時期・仕掛け・おすすめポイントを完全ガイド。`;
   const pageUrl = `https://tsurispot.com/prefecture/${slug}/${monthSlug}/${fishSlug}`;
 
+  // 高価値組合せ（人気魚×旬の月×スポット数多／県ごとに厳選）だけ index する。
+  // それ以外の薄い月派生ページは UX のため残すが noindex（follow:true で内部リンクへ評価を流す）。
+  const indexable = isHighValueCombo(pref.slug, monthSlug, fishSlug);
+
   return {
     title,
     description,
-    // 月固有の薄い派生ページ。UX のため残すが検索インデックスからは除外する。
-    // follow:true で内部リンク（スポット/魚種/県ページ）へ評価を流す。
-    robots: { index: false, follow: true },
+    robots: { index: indexable, follow: true },
     openGraph: {
       title,
       description,

@@ -12,7 +12,7 @@ import { seasons as seasonCategories } from "@/lib/data/seasonal-data";
 import { tackleShops } from "@/lib/data/shops";
 import { FISHING_METHODS, MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
 import { REGION_GROUPS } from "@/lib/data/regions-group";
-import { getEligiblePrefFishCombos } from "@/lib/data";
+import { getEligiblePrefFishCombos, getHighValuePrefMonthFishCombos } from "@/lib/data";
 import { redis } from "@/lib/redis";
 import { getUserById } from "@/lib/auth-redis";
 import { isSitemapEligible } from "@/lib/seo-quality";
@@ -404,6 +404,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     })().map(c => ({
       url: `${baseUrl}/prefecture/${c.prefSlug}/${c.monthSlug}`,
       lastModified: monthDate(c.monthNum),
+      changeFrequency: "monthly" as const,
+      priority: 0.5,
+    })),
+
+    // ===== 都道府県×月×魚種ページ（厳選 index 化: 高価値組合せのみ） =====
+    // matrix の generateStaticParams / generateMetadata と共有ヘルパで統一し、
+    // index対象 = 事前生成対象 = sitemap掲載 を一致させる（薄いnoindexは載せない）。
+    ...getHighValuePrefMonthFishCombos().map(c => ({
+      url: `${baseUrl}/prefecture/${c.prefSlug}/${c.monthSlug}/${c.fishSlug}`,
+      lastModified: monthDate(
+        MONTHS.find(m => m.slug === c.monthSlug)?.num ?? 1
+      ),
       changeFrequency: "monthly" as const,
       priority: 0.5,
     })),
