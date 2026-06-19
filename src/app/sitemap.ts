@@ -12,7 +12,10 @@ import { seasons as seasonCategories } from "@/lib/data/seasonal-data";
 import { tackleShops } from "@/lib/data/shops";
 import { FISHING_METHODS, MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
 import { REGION_GROUPS } from "@/lib/data/regions-group";
-import { getEligiblePrefFishCombos, getHighValuePrefMonthFishCombos } from "@/lib/data";
+import {
+  getEligiblePrefFishCombos,
+  getEligiblePrefMonthFishCombos,
+} from "@/lib/data";
 import { redis } from "@/lib/redis";
 import { getUserById } from "@/lib/auth-redis";
 import { isSitemapEligible } from "@/lib/seo-quality";
@@ -290,11 +293,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.6,
       })),
     { url: `${baseUrl}/area`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.9 },
-    // 低コンテンツarea（スポット1件以下）はサイトマップから除外
+    // スポット0件のareaのみ除外（1件以上は index 対象なので sitemap 掲載。area ページの noindex 判定と一致）
     ...regions
       .filter((region) => {
         const spotCount = fishingSpots.filter((s) => s.region.id === region.id).length;
-        return spotCount >= 2;
+        return spotCount >= 1;
       })
       .map((region) => ({
         url: `${baseUrl}/area/${region.slug}`,
@@ -408,10 +411,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.5,
     })),
 
-    // ===== 都道府県×月×魚種ページ（厳選 index 化: 高価値組合せのみ） =====
-    // matrix の generateStaticParams / generateMetadata と共有ヘルパで統一し、
-    // index対象 = 事前生成対象 = sitemap掲載 を一致させる（薄いnoindexは載せない）。
-    ...getHighValuePrefMonthFishCombos().map(c => ({
+    // ===== 都道府県×月×魚種ページ（実在組合せ count>=2 を全件 index 化） =====
+    // matrix の generateMetadata は count>=2 のレンダリング全ページを index する。
+    // sitemap も同じ getEligiblePrefMonthFishCombos() を共有し「index対象 = sitemap掲載」を一致させる
+    // （事前生成(SSG)の範囲は別＝容量対策で高価値のみ。残りは ISR でオンデマンド生成される）。
+    ...getEligiblePrefMonthFishCombos().map(c => ({
       url: `${baseUrl}/prefecture/${c.prefSlug}/${c.monthSlug}/${c.fishSlug}`,
       lastModified: monthDate(
         MONTHS.find(m => m.slug === c.monthSlug)?.num ?? 1

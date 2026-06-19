@@ -101,26 +101,11 @@ function buildValidCombos(): Map<string, Set<string>> {
 
 const validCombos = buildValidCombos();
 
-// 高価値組合せ（index / 事前生成 / sitemap 対象）。sitemap と共有ヘルパで一致させ
-// 「index対象 = 事前生成対象 = sitemap掲載」を保証する。
-const highValueComboSet = new Set(
-  getHighValuePrefMonthFishCombos().map(
-    (c) => `${c.prefSlug}/${c.monthSlug}/${c.fishSlug}`
-  )
-);
-
-function isHighValueCombo(
-  prefSlug: string,
-  monthSlug: string,
-  fishSlug: string
-): boolean {
-  return highValueComboSet.has(`${prefSlug}/${monthSlug}/${fishSlug}`);
-}
-
 export function generateStaticParams() {
-  // 事前生成(SSG)は高価値組合せ（数百件）だけに絞り、イメージ肥大を防ぐ。
-  // それ以外の count>=MIN_SPOTS の組合せは dynamicParams=true でオンデマンド生成され
-  // noindex で配信される（UX は維持しつつクロール予算と容量を高価値ページへ集中）。
+  // 事前生成(SSG)は高価値組合せ（数百件）だけに絞り、Dockerイメージ肥大を防ぐ。
+  // 事前生成の範囲＝イメージ容量であり、index対象とは別物。それ以外の
+  // count>=MIN_SPOTS の組合せは dynamicParams=true でオンデマンド生成＋ISR永続化され、
+  // index も sitemap 掲載もされる（容量は据え置きつつ index 数だけ最大化する）。
   return getHighValuePrefMonthFishCombos().map((c) => ({
     slug: c.prefSlug,
     month: c.monthSlug,
@@ -150,14 +135,13 @@ export async function generateMetadata({
   const description = `${pref.name}で${month.name}に${fish.name}が釣れるスポットと釣り方を紹介。${month.season}シーズンの${fish.name}釣りの時期・仕掛け・おすすめポイントを完全ガイド。`;
   const pageUrl = `https://tsurispot.com/prefecture/${slug}/${monthSlug}/${fishSlug}`;
 
-  // 高価値組合せ（人気魚×旬の月×スポット数多／県ごとに厳選）だけ index する。
-  // それ以外の薄い月派生ページは UX のため残すが noindex（follow:true で内部リンクへ評価を流す）。
-  const indexable = isHighValueCombo(pref.slug, monthSlug, fishSlug);
-
+  // ここに到達した時点で validCombos（count>=MIN_SPOTS=2 の実在組合せ）が保証されている
+  // （薄い組合せは L141-147 で県トップへ 301 済み）。レンダリングする全ページを index 対象とし、
+  // ロングテール検索の取りこぼしを無くす。事前生成(SSG)の範囲とは独立（容量は generateStaticParams で制御）。
   return {
     title,
     description,
-    robots: { index: indexable, follow: true },
+    robots: { index: true, follow: true },
     openGraph: {
       title,
       description,
@@ -928,7 +912,7 @@ export default async function PrefectureMonthFishPage({
             {month.name}に{fish.name}が釣れる他の都道府県
           </h2>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
-            {/* 他県は noindex の月×魚種ページ同士の相互リンク（クロール爆発）を避けるためテキスト表示に留める */}
+            {/* 数千の同種ページが密な相互リンク網を張ると PageRank が希釈されるため、検出は sitemap に任せ、ここはテキスト表示に留める */}
             {topOtherPrefectures.map((op) => (
               <Badge
                 key={op.slug}

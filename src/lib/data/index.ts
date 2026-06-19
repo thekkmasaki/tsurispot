@@ -299,6 +299,56 @@ export function getHighValuePrefMonthFishCombos(
   return combos.sort((a, b) => b.count - a.count);
 }
 
+/**
+ * index 対象の「都道府県×月×魚種」組み合わせ（= 配信される全ページ）。
+ *
+ * 条件は matrix ページの buildValidCombos と完全一致させる必要がある:
+ *   その県・その月にその魚が釣れる catchableFish エントリ数 >= minSpots。
+ * matrix ページは count < minSpots を 301 リダイレクトし、それ以外は配信する。
+ * その「配信される全ページ」を index / sitemap 掲載対象にする（薄いページも積極 index 方針）。
+ *
+ * getHighValuePrefMonthFishCombos（高価値の厳選サブセット）は引き続き
+ * generateStaticParams の事前生成(SSG)対象に使い、SSG 枚数=イメージ容量を抑える。
+ * 索引は広いが事前生成は厳選、という非対称でロングテール index と容量を両立する。
+ */
+export function getEligiblePrefMonthFishCombos(
+  minSpots: number = 2
+): { prefSlug: string; monthSlug: string; fishSlug: string; count: number }[] {
+  const out: {
+    prefSlug: string;
+    monthSlug: string;
+    fishSlug: string;
+    count: number;
+  }[] = [];
+  for (const pref of prefectures) {
+    const prefSpots = fishingSpots.filter(
+      (s) => s.region.prefecture === pref.name
+    );
+    if (prefSpots.length === 0) continue;
+    for (const month of MONTHS) {
+      const fishMap = new Map<string, number>();
+      for (const spot of prefSpots) {
+        for (const cf of spot.catchableFish) {
+          if (isMonthInRange(month.num, cf.monthStart, cf.monthEnd)) {
+            fishMap.set(cf.fish.slug, (fishMap.get(cf.fish.slug) || 0) + 1);
+          }
+        }
+      }
+      for (const [fSlug, count] of fishMap) {
+        if (count >= minSpots) {
+          out.push({
+            prefSlug: pref.slug,
+            monthSlug: month.slug,
+            fishSlug: fSlug,
+            count,
+          });
+        }
+      }
+    }
+  }
+  return out;
+}
+
 // 全データのエクスポート
 export { fishSpecies } from "./fish";
 export { fishingSpots } from "./spots";
