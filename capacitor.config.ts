@@ -13,6 +13,9 @@ const config: CapacitorConfig = {
         ? "https://tsurispot.com"
         : "http://localhost:3000"),
     cleartext: true,
+    // server.url の読み込みに失敗（圏外・サーバ障害）した場合、
+    // バンドル済みの public/offline.html を表示する（白画面リジェクト対策）。
+    errorPath: "offline.html",
   },
   ios: {
     contentInset: "automatic",

@@ -1,4 +1,8 @@
 import webpush, { type PushSubscription as WebPushSubscription } from "web-push";
+import { sendApns } from "./apns";
+
+/** APNs（iOS ネイティブ）購読を識別する endpoint プレフィックス */
+export const APNS_ENDPOINT_PREFIX = "apns://";
 
 const VAPID_PUBLIC = process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY || "";
 const VAPID_PRIVATE = process.env.VAPID_PRIVATE_KEY || "";
@@ -28,6 +32,12 @@ export async function sendPush(
   subscription: WebPushSubscription,
   payload: PushPayload,
 ): Promise<{ ok: boolean; status?: number; error?: string }> {
+  // iOS ネイティブ（Capacitor）端末は APNs 経路へ振り分ける。
+  // endpoint は "apns://<deviceToken>" 形式で保存されている。
+  if (subscription.endpoint?.startsWith(APNS_ENDPOINT_PREFIX)) {
+    const token = subscription.endpoint.slice(APNS_ENDPOINT_PREFIX.length);
+    return sendApns(token, payload);
+  }
   if (!ensureVapid()) {
     return { ok: false, error: "VAPID未設定" };
   }
