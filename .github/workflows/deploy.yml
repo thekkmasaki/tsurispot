@@ -84,33 +84,20 @@ jobs:
           AWS_REGION: ap-northeast-1
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
 
-      # イメージ容量ガード（App Runner 起動不能の再発防止 / 2026-05-19 障害対策）
-      # 全10,919スポットを全件SSGした際に .next が肥大 → Docker image 2.65GB →
-      # App Runner がイメージを起動できず連続ROLLBACK。現在は spots/[slug] を部分SSG
-      # (上位500件)化して「ページ件数」と「イメージ容量」を分離しているが、スポット追加や
-      # SSG設定変更で再肥大しないよう、毎ビルドで最終イメージ成果物
-      # (.next/standalone + .next/static + public)を計測する。
-      # 危険水域なら Docker push の前に FAIL → App Runner は旧イメージのまま無傷で停止する。
-      - name: イメージ容量ガード
+      # ビルド成果物サイズ計測（情報・内訳）
+      # 非圧縮の .next/standalone は実デプロイ可否(=App Runner が pull する圧縮イメージ容量)と
+      # 直結しないため、ここでは FAIL させず「どのルートが肥大しているか」の内訳ログのみ出す。
+      # 実際の起動不能ガードは Docker push 後の「イメージ容量ガード（ECR圧縮サイズ）」が担う。
+      - name: ビルド成果物サイズ計測（情報・内訳）
         if: github.ref == 'refs/heads/master'
         run: |
-          WARN_MB=1300
-          FAIL_MB=1900
           STANDALONE_KB=$(du -sk .next/standalone 2>/dev/null | cut -f1 || echo 0)
           STATIC_KB=$(du -sk .next/static 2>/dev/null | cut -f1 || echo 0)
           PUBLIC_KB=$(du -sk public 2>/dev/null | cut -f1 || echo 0)
           TOTAL_MB=$(( (STANDALONE_KB + STATIC_KB + PUBLIC_KB) / 1024 ))
-          echo "イメージ成果物サイズ: ${TOTAL_MB} MB (standalone $((STANDALONE_KB/1024))MB / static $((STATIC_KB/1024))MB / public $((PUBLIC_KB/1024))MB)"
+          echo "ビルド成果物サイズ(非圧縮): ${TOTAL_MB} MB (standalone $((STANDALONE_KB/1024))MB / static $((STATIC_KB/1024))MB / public $((PUBLIC_KB/1024))MB)"
           echo "--- .next/server/app 内訳（上位20）---"
           du -h .next/standalone/.next/server/app 2>/dev/null | sort -rh | head -20 || true
-          if [ "$TOTAL_MB" -ge "$FAIL_MB" ]; then
-            echo "::error::イメージ成果物 ${TOTAL_MB}MB が上限 ${FAIL_MB}MB を超過。App Runner 起動不能リスクのためデプロイ中止（SSG件数/データ量を見直してください）。"
-            exit 1
-          fi
-          if [ "$TOTAL_MB" -ge "$WARN_MB" ]; then
-            echo "::warning::イメージ成果物 ${TOTAL_MB}MB が警告閾値 ${WARN_MB}MB を超過。容量推移を注視してください。"
-          fi
-          echo "容量ガード通過 (${TOTAL_MB}MB < ${FAIL_MB}MB)"
 
       - name: Configure AWS credentials
         if: github.ref == 'refs/heads/master'
@@ -140,6 +127,36 @@ jobs:
           tags: ${{ steps.login-ecr.outputs.registry }}/${{ env.ECR_REPOSITORY }}:latest
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      # イメージ容量ガード（App Runner 起動不能の再発防止 / 2026-05-19 障害対策）
+      # push 済みイメージの ECR 圧縮サイズ（= App Runner が実際に pull する容量）で判定する。
+      # 過去、全10,919スポット+全件マトリクスSSGで 2.65GB に膨張 → App Runner 起動不能 →
+      # 連続ROLLBACK。実績値を基準に FAIL=2400MB / WARN=1800MB。
+      # FAIL なら後続の Deploy(update-service) ステップが実行されない → App Runner は旧イメージのまま無傷。
+      - name: イメージ容量ガード（ECR圧縮サイズ）
+        if: github.ref == 'refs/heads/master'
+        run: |
+          WARN_MB=1800
+          FAIL_MB=2400
+          DIGEST="${{ steps.docker-build.outputs.digest }}"
+          SIZE_BYTES=$(aws ecr describe-images \
+            --repository-name "${{ env.ECR_REPOSITORY }}" \
+            --image-ids imageDigest="$DIGEST" \
+            --query 'imageDetails[0].imageSizeInBytes' --output text 2>/dev/null || echo "")
+          if [ -z "$SIZE_BYTES" ] || [ "$SIZE_BYTES" = "None" ]; then
+            echo "::warning::ECR イメージサイズを取得できませんでした（digest=$DIGEST）。容量ガードをスキップしてデプロイ続行。"
+            exit 0
+          fi
+          SIZE_MB=$(( SIZE_BYTES / 1024 / 1024 ))
+          echo "ECR圧縮イメージサイズ: ${SIZE_MB} MB (digest=$DIGEST)"
+          if [ "$SIZE_MB" -ge "$FAIL_MB" ]; then
+            echo "::error::ECRイメージ ${SIZE_MB}MB が上限 ${FAIL_MB}MB を超過。App Runner 起動不能リスク（過去2.65GBで起動失敗）のためデプロイ中止。SSG件数/データ量を見直してください。App Runner は旧イメージのまま無傷です。"
+            exit 1
+          fi
+          if [ "$SIZE_MB" -ge "$WARN_MB" ]; then
+            echo "::warning::ECRイメージ ${SIZE_MB}MB が警告閾値 ${WARN_MB}MB を超過。容量推移を注視してください。"
+          fi
+          echo "容量ガード通過 (${SIZE_MB}MB < ${FAIL_MB}MB)"
 
       - name: Wait for App Runner to be RUNNING
         if: github.ref == 'refs/heads/master'
