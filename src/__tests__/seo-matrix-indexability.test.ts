@@ -11,7 +11,6 @@ describe("マトリクス厳選index化（高価値組合せ）", () => {
   const combos = getHighValuePrefMonthFishCombos();
 
   it("数百規模に収まる（薄いページの大量indexに戻らない）", () => {
-    // eslint-disable-next-line no-console
     console.log(`[matrix high-value] index対象 = ${combos.length} 件`);
     // 旧挙動（count>=2 全件 ≒ 数千）への退行を検出。県数 × perPrefLimit の数百規模を担保。
     expect(combos.length).toBeGreaterThan(100);
