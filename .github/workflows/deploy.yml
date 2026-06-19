@@ -84,6 +84,34 @@ jobs:
           AWS_REGION: ap-northeast-1
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
 
+      # イメージ容量ガード（App Runner 起動不能の再発防止 / 2026-05-19 障害対策）
+      # 全10,919スポットを全件SSGした際に .next が肥大 → Docker image 2.65GB →
+      # App Runner がイメージを起動できず連続ROLLBACK。現在は spots/[slug] を部分SSG
+      # (上位500件)化して「ページ件数」と「イメージ容量」を分離しているが、スポット追加や
+      # SSG設定変更で再肥大しないよう、毎ビルドで最終イメージ成果物
+      # (.next/standalone + .next/static + public)を計測する。
+      # 危険水域なら Docker push の前に FAIL → App Runner は旧イメージのまま無傷で停止する。
+      - name: イメージ容量ガード
+        if: github.ref == 'refs/heads/master'
+        run: |
+          WARN_MB=1300
+          FAIL_MB=1900
+          STANDALONE_KB=$(du -sk .next/standalone 2>/dev/null | cut -f1 || echo 0)
+          STATIC_KB=$(du -sk .next/static 2>/dev/null | cut -f1 || echo 0)
+          PUBLIC_KB=$(du -sk public 2>/dev/null | cut -f1 || echo 0)
+          TOTAL_MB=$(( (STANDALONE_KB + STATIC_KB + PUBLIC_KB) / 1024 ))
+          echo "イメージ成果物サイズ: ${TOTAL_MB} MB (standalone $((STANDALONE_KB/1024))MB / static $((STATIC_KB/1024))MB / public $((PUBLIC_KB/1024))MB)"
+          echo "--- .next/server/app 内訳（上位20）---"
+          du -h .next/standalone/.next/server/app 2>/dev/null | sort -rh | head -20 || true
+          if [ "$TOTAL_MB" -ge "$FAIL_MB" ]; then
+            echo "::error::イメージ成果物 ${TOTAL_MB}MB が上限 ${FAIL_MB}MB を超過。App Runner 起動不能リスクのためデプロイ中止（SSG件数/データ量を見直してください）。"
+            exit 1
+          fi
+          if [ "$TOTAL_MB" -ge "$WARN_MB" ]; then
+            echo "::warning::イメージ成果物 ${TOTAL_MB}MB が警告閾値 ${WARN_MB}MB を超過。容量推移を注視してください。"
+          fi
+          echo "容量ガード通過 (${TOTAL_MB}MB < ${FAIL_MB}MB)"
+
       - name: Configure AWS credentials
         if: github.ref == 'refs/heads/master'
         uses: aws-actions/configure-aws-credentials@v5
@@ -264,6 +292,38 @@ jobs:
           else
             echo "All health checks passed!"
           fi
+
+      # 本番 indexability 検証（GSC「noindexで除外/検証に失敗しました」の再発検出）。
+      # Cloudflare purge 後に代表URLを取得し、meta robots / X-Robots-Tag に noindex が
+      # 付いていないことを確認する。逆に /mypage は noindex であるべき（ネガティブコントロール）。
+      # キャッシュ起因の noindex 残存（GSC検証失敗の主因）を直接検出するのが目的。
+      # 誤検出やコールド生成でデプロイを止めないよう WARN のみ（デプロイは継続）。
+      - name: 本番 indexability チェック
+        if: success() && github.ref == 'refs/heads/master'
+        run: |
+          echo "Checking indexability (noindex regression detection)..."
+          check_index() {
+            URL="$1"; EXPECT="$2"
+            BODY=$(curl -sS --max-time 30 "$URL" 2>/dev/null || echo "")
+            HDR=$(curl -sS -I --max-time 30 "$URL" 2>/dev/null || echo "")
+            HAS_NOINDEX=0
+            echo "$BODY" | grep -iqE 'name="robots"[^>]*noindex' && HAS_NOINDEX=1
+            echo "$HDR" | grep -iqE 'x-robots-tag:[^\r\n]*noindex' && HAS_NOINDEX=1
+            if [ "$EXPECT" = "index" ] && [ "$HAS_NOINDEX" = "1" ]; then
+              echo "::warning::$URL が noindex を返しています（インデックスされるべきページ／キャッシュ残存を疑う）"
+            elif [ "$EXPECT" = "noindex" ] && [ "$HAS_NOINDEX" = "0" ]; then
+              echo "::warning::$URL に noindex が付いていません（noindex であるべきページ）"
+            else
+              echo "✅ $URL ($EXPECT 期待どおり)"
+            fi
+          }
+          check_index "https://tsurispot.com/" index
+          check_index "https://tsurispot.com/spots" index
+          check_index "https://tsurispot.com/fish" index
+          check_index "https://tsurispot.com/blog" index
+          check_index "https://tsurispot.com/prefecture" index
+          check_index "https://tsurispot.com/mypage" noindex
+          echo "Indexability check done."
 
       # Bing/Yandex に新規 deploy 内容を IndexNow で即時通知。
       # `?full=true` で全 URL (7,000+) を一括 ping。健康チェック後・通知前に実行。
