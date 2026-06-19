@@ -22,7 +22,7 @@ describe("マトリクス厳選index化（高価値組合せ）", () => {
       expect(c.count).toBeGreaterThanOrEqual(5);
       const rank = fishMetadata[c.fishSlug]?.popularity;
       expect(rank, `fish ${c.fishSlug} の popularity 未定義`).toBeDefined();
-      expect(rank!).toBeLessThanOrEqual(20);
+      expect(rank!).toBeLessThanOrEqual(30);
     }
   });
 
@@ -38,7 +38,7 @@ describe("マトリクス厳選index化（高価値組合せ）", () => {
       perPrefFish.set(key, (perPrefFish.get(key) || 0) + 1);
     }
     const maxMonths = Math.max(...perPrefFish.values());
-    // 12ヶ月分が並ぶ旧挙動の検出（既定 perFishMonthLimit=2、余裕を見て 4 まで許容）
+    // 12ヶ月分が並ぶ旧挙動の検出（既定 perFishMonthLimit=3、余裕を見て 4 まで許容）
     expect(maxMonths).toBeLessThanOrEqual(4);
   });
 

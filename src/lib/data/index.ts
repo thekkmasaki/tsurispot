@@ -192,11 +192,13 @@ export function getEligiblePrefFishCombos(
  *   - 旬: 対象スポットのいずれかで peakSeason=true（その月が実際の好機であることの裏付け）
  * さらに 2 段の上限で総数と多様性を制御する:
  *   - **魚種ごとに月数上位 perFishMonthLimit 件**（同じ魚で似たページが12ヶ月並ぶのを防ぎ、旬の月に集約）
- *   - **都道府県ごとに spot 数上位 perPrefLimit 件**（県数 × perPrefLimit ≒ 数百規模に圧縮、各県の“看板ページ”だけ残す）
+ *   - **都道府県ごとに spot 数上位 perPrefLimit 件**（県数 × perPrefLimit ≒ 数百〜千規模に圧縮、各県の“看板ページ”だけ残す）
  *
  * matrix の generateStaticParams / generateMetadata と sitemap.ts で共用し
  * 「index対象 = 事前生成対象 = sitemap掲載」を一致させ、薄い noindex ページの大量生成を防ぐ。
- * 既定値は保守的（少なめに index）。GSC で index 状況を見て perPrefLimit/maxFishRank を緩めて拡大する。
+ * 既定値は約750件（minSpots=5 は据え置き＝各ページの厚みは不変、幅だけ拡大）。
+ * すべての index ページが「旬・人気魚種・実スポット5件以上」を満たす前提で、
+ * GSC の index 数・収益を見て perPrefLimit/maxFishRank をさらに緩めて拡大する。
  */
 export function getHighValuePrefMonthFishCombos(
   opts: {
@@ -207,9 +209,9 @@ export function getHighValuePrefMonthFishCombos(
   } = {}
 ): { prefSlug: string; monthSlug: string; fishSlug: string; count: number }[] {
   const minSpots = opts.minSpots ?? 5;
-  const maxFishRank = opts.maxFishRank ?? 20;
-  const perPrefLimit = opts.perPrefLimit ?? 8;
-  const perFishMonthLimit = opts.perFishMonthLimit ?? 2;
+  const maxFishRank = opts.maxFishRank ?? 30;
+  const perPrefLimit = opts.perPrefLimit ?? 16;
+  const perFishMonthLimit = opts.perFishMonthLimit ?? 3;
 
   const combos: {
     prefSlug: string;
