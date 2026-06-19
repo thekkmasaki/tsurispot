@@ -151,7 +151,9 @@ export async function generateMetadata({
 
   const titleSuffix = familyCount > 0 ? "子連れ・穴場スポットも紹介" : "穴場スポットも紹介";
 
-  const isLowContent = spots.length <= 1;
+  // スポット0件のみ noindex。実在スポットを1件でも持つエリアは index 対象にして
+  // ロングテール（地名×釣り場）の検索流入を取りこぼさない。
+  const isLowContent = spots.length <= 0;
 
   return {
     title: `${region.areaName}（${region.prefecture}）の釣り場おすすめ${spots.length}選｜${titleSuffix}`,

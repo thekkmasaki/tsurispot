@@ -192,11 +192,13 @@ export function getEligiblePrefFishCombos(
  *   - 旬: 対象スポットのいずれかで peakSeason=true（その月が実際の好機であることの裏付け）
  * さらに 2 段の上限で総数と多様性を制御する:
  *   - **魚種ごとに月数上位 perFishMonthLimit 件**（同じ魚で似たページが12ヶ月並ぶのを防ぎ、旬の月に集約）
- *   - **都道府県ごとに spot 数上位 perPrefLimit 件**（県数 × perPrefLimit ≒ 数百規模に圧縮、各県の“看板ページ”だけ残す）
+ *   - **都道府県ごとに spot 数上位 perPrefLimit 件**（県数 × perPrefLimit ≒ 数百〜千規模に圧縮、各県の“看板ページ”だけ残す）
  *
  * matrix の generateStaticParams / generateMetadata と sitemap.ts で共用し
  * 「index対象 = 事前生成対象 = sitemap掲載」を一致させ、薄い noindex ページの大量生成を防ぐ。
- * 既定値は保守的（少なめに index）。GSC で index 状況を見て perPrefLimit/maxFishRank を緩めて拡大する。
+ * 既定値は約750件（minSpots=5 は据え置き＝各ページの厚みは不変、幅だけ拡大）。
+ * すべての index ページが「旬・人気魚種・実スポット5件以上」を満たす前提で、
+ * GSC の index 数・収益を見て perPrefLimit/maxFishRank をさらに緩めて拡大する。
  */
 export function getHighValuePrefMonthFishCombos(
   opts: {
@@ -207,9 +209,9 @@ export function getHighValuePrefMonthFishCombos(
   } = {}
 ): { prefSlug: string; monthSlug: string; fishSlug: string; count: number }[] {
   const minSpots = opts.minSpots ?? 5;
-  const maxFishRank = opts.maxFishRank ?? 20;
-  const perPrefLimit = opts.perPrefLimit ?? 8;
-  const perFishMonthLimit = opts.perFishMonthLimit ?? 2;
+  const maxFishRank = opts.maxFishRank ?? 30;
+  const perPrefLimit = opts.perPrefLimit ?? 16;
+  const perFishMonthLimit = opts.perFishMonthLimit ?? 3;
 
   const combos: {
     prefSlug: string;
@@ -295,6 +297,56 @@ export function getHighValuePrefMonthFishCombos(
 
   // 全体をスポット数の多い順（価値の高い組み合わせを先にプリレンダ）
   return combos.sort((a, b) => b.count - a.count);
+}
+
+/**
+ * index 対象の「都道府県×月×魚種」組み合わせ（= 配信される全ページ）。
+ *
+ * 条件は matrix ページの buildValidCombos と完全一致させる必要がある:
+ *   その県・その月にその魚が釣れる catchableFish エントリ数 >= minSpots。
+ * matrix ページは count < minSpots を 301 リダイレクトし、それ以外は配信する。
+ * その「配信される全ページ」を index / sitemap 掲載対象にする（薄いページも積極 index 方針）。
+ *
+ * getHighValuePrefMonthFishCombos（高価値の厳選サブセット）は引き続き
+ * generateStaticParams の事前生成(SSG)対象に使い、SSG 枚数=イメージ容量を抑える。
+ * 索引は広いが事前生成は厳選、という非対称でロングテール index と容量を両立する。
+ */
+export function getEligiblePrefMonthFishCombos(
+  minSpots: number = 2
+): { prefSlug: string; monthSlug: string; fishSlug: string; count: number }[] {
+  const out: {
+    prefSlug: string;
+    monthSlug: string;
+    fishSlug: string;
+    count: number;
+  }[] = [];
+  for (const pref of prefectures) {
+    const prefSpots = fishingSpots.filter(
+      (s) => s.region.prefecture === pref.name
+    );
+    if (prefSpots.length === 0) continue;
+    for (const month of MONTHS) {
+      const fishMap = new Map<string, number>();
+      for (const spot of prefSpots) {
+        for (const cf of spot.catchableFish) {
+          if (isMonthInRange(month.num, cf.monthStart, cf.monthEnd)) {
+            fishMap.set(cf.fish.slug, (fishMap.get(cf.fish.slug) || 0) + 1);
+          }
+        }
+      }
+      for (const [fSlug, count] of fishMap) {
+        if (count >= minSpots) {
+          out.push({
+            prefSlug: pref.slug,
+            monthSlug: month.slug,
+            fishSlug: fSlug,
+            count,
+          });
+        }
+      }
+    }
+  }
+  return out;
 }
 
 // 全データのエクスポート
