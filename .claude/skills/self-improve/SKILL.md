@@ -20,11 +20,13 @@ description: ツリスポ自己改善サイクル。metrics取得→サイト健
 
 ### 0. 前提読込
 - `config/agent.config.json`（autonomy.mode, phase, 閾値, maxDeploysPerDay, measurement, siteHealth）
-- `memory/agent/priorities.json`・`memory/agent/playbook-learnings.md`・`memory/metrics/striking-distance.json`
+- `memory/agent/priorities.json`（excludeUrls, laneCycleCount, weights）・`playbook-learnings.md`
+- `memory/metrics/striking-distance.json`・`memory/metrics/coverage-gap.json`
 
 ### 1. メトリクス鮮度チェック
 - `memory/metrics/latest.json` の `fetchedAt` が `freshnessHours`（既定48h）より古い/無ければ：
-  - `node scripts/metrics/fetch-all.mjs` → `node scripts/metrics/extract-striking-distance.mjs`
+  - `node scripts/metrics/fetch-all.mjs` → `node scripts/metrics/extract-striking-distance.mjs` → `node scripts/metrics/coverage-gap.mjs`
+- `coverage-gap.json` が無ければ `node scripts/metrics/coverage-gap.mjs` を実行。
 - 取得が認証エラー等で失敗 → 改善は実施せず手順8の通知だけして終了（測定基盤未整備＝Phase1未完）。
 
 ### 1.5 サイト健全性チェック（サーキットブレーカー）
@@ -44,16 +46,23 @@ description: ツリスポ自己改善サイクル。metrics取得→サイト健
 - `node scripts/agent/ledger.mjs update <id> --json '{"verdict":"win","after":{...}}'`。
 - win/loss が2件累積したパターンを `playbook-learnings.md` に昇格/除外リスト反映。
 
-### 3. 候補選定（最高ROIを1つ）
-- `striking-distance.json` の items（ROI降順）上位から、`playbook-learnings.md` の「効かない施策」と進行中PR（`gh pr list`）を除外し、**未着手で最もROIが高い1件**を選ぶ。
+### 3. レーン選定と候補（2レーン交互・1サイクル=1ページ）
+- `priorities.json` の `laneCycleCount`（無ければ0）で**2レーンを交互**に回す:
+  - **偶数 → coverageレーン（不可視ページ救出）**: `coverage-gap.json` の `invisibleWorklist`（record-backed・除外済み除外済み）上位から1件。狙い=**検索表示0の実在ページをインデックス/ランク入りさせる**（伸びしろ大）。
+  - **奇数 → strikingレーン（既存需要の刈り取り）**: `striking-distance.json` の items（ROI降順）上位から1件。
+- 共通フィルタ: `playbook-learnings.md` の「効かない施策」・`excludeUrls`・進行中PR（`gh pr list`）を除外し、**未着手で最上位の1件**を選ぶ。
+- 選んだレーンのワークリストが空なら、もう一方のレーンにフォールバック。
 
 ### 4. フェーズゲート
 - `config.phase` に従う。**guardrail-check.mjs もコードで phase を強制する**（phase1は差分があれば needs-human）。
 - phase1=測定のみ（改善実装しない・ここで終了）/ phase2=title/description/見出し/内部リンク改善 / phase3=本文加筆も可（新規routeは承認要）。
 
 ### 5. 実装
-- `git checkout -b feature/auto-<種別>-<YYYYMMDD-連番>`（run-cycleが事前にbaseをorigin/masterへ同期済み）
-- `sourcePaths` を grep で特定し**テキストのみ**改善。title≤32字でクエリ前方配置、description≤120字で行動喚起、見出し網羅性、内部リンク3件以上。既存の構造化データは壊さない。`.claude/agents/seo-optimizer.md` のチェックリスト準拠。
+- `git checkout -b feature/auto-<lane>-<YYYYMMDD-連番>`（run-cycleが事前にbaseをorigin/masterへ同期済み）
+- `sourcePaths` を grep で特定し**テキストのみ**改善。**検証済みデータ（catchableFishの魚種/釣法/月・施設フラグ has*・region・isFree・difficulty）だけ**を使い、データに無い事実は書かない（捏造禁止）。
+  - **strikingレーン**: title/descriptionのCTR改善（狙うクエリを前方配置・行動喚起）。
+  - **coverageレーン**: descriptionを網羅性で具体化し薄さを解消→インデックス獲得（魚種・釣法・季節・施設を自然に盛り込む。200〜320字目安）。余裕があれば集客できている関連ページ側から、この不可視ページへ内部リンクを1本足す（孤立解消）。
+- 既存の構造化データを壊さない。クリックベイト禁止。`.claude/agents/seo-optimizer.md` 準拠。
 
 ### 6. ガードレール検証
 - `npx tsc --noEmit` / `npx eslint src/` / `npx vitest run` を実行（FAILは無条件で needs-human）。
@@ -62,10 +71,10 @@ description: ツリスポ自己改善サイクル。metrics取得→サイト健
 
 ### 7. 分岐（autonomy.mode × guardrail × デプロイ予算）
 - **safe(exit0) かつ 全検証PASS かつ `autonomy.mode=="auto-merge-pr"` かつ `node scripts/agent/deploy-budget.mjs check` が exit0**:
-  - `git push origin feature/...` → `gh pr create`（PRテンプレ全記入）→ `gh pr merge --squash --auto`
-  - マージ確定後 `node scripts/agent/deploy-budget.mjs increment`。
+  - `git push origin feature/...` → `gh pr create`（記録用・PRテンプレ記入）→ **`gh pr merge --squash --delete-branch`（即時マージ＝本番反映）** → `node scripts/agent/deploy-budget.mjs increment`。
+  - ※ 対象は**超安全クラス（テキストのみ・guardrail safe・ローカルCI全PASS）だけ**。これが「単純なページ改善は人間承認不要」の実体。`--admin` は使わない（deny済）。
 - **それ以外（needs-human / FAIL / pr-only / 予算超過）**:
-  - `git push` → `gh pr create` → `gh pr edit --add-label needs-human`。**マージしない。**
+  - `git push` → `gh pr create` → `gh pr edit --add-label needs-human`。**マージしない**（人間レビュー）。
 
 ### 8. 台帳記録 & 通知
 - `node scripts/agent/ledger.mjs add --json '{"phase":<n>,"targetPath":"...","hypothesis":"...","changeType":"...","prNumber":<n>,"before":{"position":..,"clicks":..,"ctr":..,"impressions":..,"affiliateClicks":..}}'`（measureOnは config.measurement.measureInDays から自動算出）
@@ -73,6 +82,7 @@ description: ツリスポ自己改善サイクル。metrics取得→サイト健
 
 ### 9. 優先度更新（学習）
 - `memory/agent/priorities.json`：
+  - **`laneCycleCount` を +1**（次サイクルでレーンが切り替わる）。
   - 今回消化したURLを `excludeUrls` に **TTL付き**で追加（`{"path":"...","until":"<verdict別のクールダウン: win=30/flat=60/loss=120日後>"}`）。恒久除外にしない（優良ページの永久放置を防ぐ）。
   - 直近の win/loss 傾向で該当ページタイプの weight を `learningRate`(0.1)以内で微調整し `weightClamp`[0.5,2.0]にclip。`updatedAt` 更新。
 
