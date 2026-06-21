@@ -146,7 +146,9 @@ const nextConfig: NextConfig = {
           key: "Strict-Transport-Security",
           value: "max-age=63072000; includeSubDomains; preload",
         },
-        { key: "X-Robots-Tag", value: "noai, noimageai" },
+        // noai は外す: AI検索（ChatGPT Search / Perplexity）での本文引用→送客を狙うため。
+        // noimageai は維持: 実写の釣り写真のAI学習は引き続き拒否（著作権保護）。
+        { key: "X-Robots-Tag", value: "noimageai" },
       ],
     },
     // SSGページのCloudFrontキャッシュ最適化（App Runnerへのリクエスト削減）

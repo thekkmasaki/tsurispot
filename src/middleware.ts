@@ -1,11 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
 
-const BLOCKED_UA_PATTERNS = [
+// robots.ts と意図を一致させること。
+// AI検索bot（OAI-SearchBot / ChatGPT-User / PerplexityBot）は robots.ts で allow 済みで、
+// 被引用→送客を狙うため middleware でも通す（＝ここに含めない）。
+// 純粋な学習系・SEO/広告系クローラーのみ 403 でブロックし、App Runner コスト再燃を防ぐ。
+export const BLOCKED_UA_PATTERNS = [
   /GPTBot/i,
-  /OAI-SearchBot/i,
-  /ChatGPT-User/i,
   /Google-Extended/i,
-  /PerplexityBot/i,
   /ClaudeBot/i,
   /anthropic-ai/i,
   /Claude-Web/i,
