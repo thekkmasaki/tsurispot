@@ -20,9 +20,24 @@ const REPO_ROOT = path.resolve(__dirname, "..", "..");
 const METRICS = path.join(REPO_ROOT, "memory", "metrics");
 
 const LOW_IMPR = 50; // これ未満の表示回数は「ほぼ不可視」
+// 単一レコードで個別編集できる型のみ救出対象。テンプレ/マトリクス(pref-*, method-area 等)は対象外
+// (個別救出に不向き＆薄ページ量産の温床)。
+const RECORD_BACKED = new Set(["spot-detail", "fish", "blog", "other:shops"]);
 
 function loadConfig() { return JSON.parse(fs.readFileSync(path.join(REPO_ROOT, "config", "agent.config.json"), "utf8")); }
 function readJsonSafe(p) { try { return JSON.parse(fs.readFileSync(p, "utf8")); } catch { return null; } }
+
+// priorities.json の excludeUrls(消化済み/TTL)を集合化。救出ワークリストから除外する。
+function loadExcludeSet() {
+  const today = new Date().toISOString().slice(0, 10);
+  const pri = readJsonSafe(path.join(REPO_ROOT, "memory", "agent", "priorities.json")) || {};
+  const set = new Set();
+  for (const e of (pri.excludeUrls || [])) {
+    if (typeof e === "string") set.add(e);
+    else if (e && (e.path || e.url) && (!e.until || e.until >= today)) set.add(e.path || e.url);
+  }
+  return set;
+}
 
 async function fetchSitemapPaths(baseUrl) {
   const res = await fetch(`${baseUrl.replace(/\/$/, "")}/sitemap.xml`);
@@ -43,6 +58,7 @@ async function main() {
 
   const inventory = await fetchSitemapPaths(cfg.site.baseUrl);
   const pages = latest.pages || {};
+  const exclude = loadExcludeSet();
 
   const buckets = {
     invisible: [],     // 表示0（GSCに出てこない）
@@ -97,9 +113,10 @@ async function main() {
     byType: Object.entries(byType)
       .map(([type, v]) => ({ type, ...v }))
       .sort((a, b) => b.invisible - a.invisible),
-    // 強化対象ワークリスト（内部リンク救出＋本文網羅性強化）
-    invisibleWorklist: buckets.invisible.slice(0, 200).map(enrich),
-    lowVisibleWorklist: buckets.lowVisible.slice(0, 100).map(enrich),
+    // 強化対象ワークリスト（record-backed＝個別編集可能な型のみ・消化済み除外）。
+    // テンプレ/マトリクスは byType の集計には残すが、ワークリスト＝エージェントの着手対象からは外す。
+    invisibleWorklist: buckets.invisible.filter((it) => RECORD_BACKED.has(it.type) && !exclude.has(it.path)).slice(0, 300).map(enrich),
+    lowVisibleWorklist: buckets.lowVisible.filter((it) => RECORD_BACKED.has(it.type) && !exclude.has(it.path)).slice(0, 100).map(enrich),
     note: "対策はテキストのみの安全レーン: ①孤立ページへの内部リンク追加(集客ページ→不可視ページ) ②本文の網羅性強化。薄いページの量産はしない。価値の低い重複は統合/noindexを検討。",
   };
 
