@@ -273,7 +273,8 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
   }
 
   // おすすめスポットTOP6（旬の魚が多いスポット）
-  const topSpots = regionSpots
+  // 旬の魚が釣れるスポット全件を先に確定し、件数(inSeasonSpotCount)をFAQ統計に使う。
+  const inSeasonSpots = regionSpots
     .map((spot) => {
       const inSeasonCount = spot.catchableFish.filter((cf) =>
         getFishSeasons(cf.fish, rSlug).seasonMonths.includes(monthDef.num)
@@ -284,8 +285,9 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
       return { spot, inSeasonCount, peakCount };
     })
     .filter((s) => s.inSeasonCount > 0)
-    .sort((a, b) => b.peakCount - a.peakCount || b.inSeasonCount - a.inSeasonCount || b.spot.rating - a.spot.rating)
-    .slice(0, 6);
+    .sort((a, b) => b.peakCount - a.peakCount || b.inSeasonCount - a.inSeasonCount || b.spot.rating - a.spot.rating);
+  const inSeasonSpotCount = inSeasonSpots.length;
+  const topSpots = inSeasonSpots.slice(0, 6);
 
   // 前月/翌月
   const monthIdx = MONTHS.findIndex((m) => m.slug === monthSlug);
@@ -357,13 +359,13 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
     {
       question: `${monthDef.name}に${regionName}で釣れる魚は？`,
       answer: allFishList.length > 0
-        ? `${monthDef.name}に${regionName}では${topFishNames.join("・")}など${allFishList.length}種が釣れます。${peakFishNames.length > 0 ? `特に${peakFishNames.join("・")}は最盛期です。` : ""}`
+        ? `${monthDef.name}に${regionName}では${topFishNames.join("・")}など${allFishList.length}種が釣れます。${peakFish.length > 0 ? `うち最盛期は${peakFish.length}種で、特に${peakFishNames.join("・")}が狙い目です。` : ""}${monthCondition?.waterTemp ? `この時期の平均水温は${monthCondition.waterTemp}が目安です。` : ""}`
         : `${monthDef.name}の${regionName}で釣れる魚の情報は現在準備中です。`,
     },
     {
       question: `${monthDef.name}の${regionName}のおすすめ釣りスポットは？`,
       answer: topSpotNames.length > 0
-        ? `${monthDef.name}の${regionName}では${topSpotNames.join("・")}などがおすすめです。旬の魚が多く釣れるスポットを厳選しています。`
+        ? `${monthDef.name}の${regionName}で旬の魚が釣れるスポットは${inSeasonSpotCount}件あります。中でも${topSpotNames.join("・")}は旬の魚種が多くおすすめです。`
         : `${monthDef.name}の${regionName}のおすすめスポット情報は現在準備中です。`,
     },
     {

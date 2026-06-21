@@ -8,6 +8,8 @@ export function GET() {
   const totalSpots = fishingSpots.length;
   const totalFish = fishSpecies.length;
   const coveredPrefectures = new Set(fishingSpots.map((s) => s.region.prefecture)).size;
+  // 固定日付の陳腐化を防ぐため、生成（デプロイ／配信）時点の現在日付を動的に反映する。
+  const lastUpdated = new Date().toISOString().split("T")[0];
 
   // 都道府県別スポット集計
   const spotsByPrefecture = new Map<string, typeof fishingSpots>();
@@ -43,7 +45,7 @@ export function GET() {
 ツリスポ（https://tsurispot.com）は日本最大級の釣りスポット情報サイトです。
 全国${totalSpots.toLocaleString()}箇所以上の釣り場と${totalFish}種以上の魚種情報を無料で提供しています。
 
-## データ統計（最終更新: 2026-04-25）
+## データ統計（最終更新: ${lastUpdated}）
 - 総スポット数: ${totalSpots.toLocaleString()}
 - 総魚種数: ${totalFish}
 - カバー都道府県: ${coveredPrefectures}

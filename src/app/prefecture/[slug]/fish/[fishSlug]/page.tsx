@@ -255,6 +255,18 @@ export default async function PrefectureFishPage({ params }: PageProps) {
     .sort((a, b) => a - b)
     .map((m) => `${m}月`);
 
+  // FAQ用の統計（答えファースト＋数値根拠の強化に使用。実データのみ・ゼロ除算ガード付き）
+  const easySpotNames = spotsWithCatchInfo
+    .filter(({ catchInfo }) => catchInfo?.catchDifficulty === "easy")
+    .map(({ spot }) => spot.name);
+  const easyCount = easySpotNames.length;
+  const easyPct = spots.length > 0 ? Math.round((easyCount / spots.length) * 100) : 0;
+  const topMethod = methodBreakdown[0];
+  const topMethodPct = topMethod && spots.length > 0 ? Math.round((topMethod.count / spots.length) * 100) : 0;
+  const seasonLen = fish.seasonMonths.length;
+  const peakLen = fish.peakMonths.length;
+  const peakRatio = seasonLen > 0 ? Math.round((peakLen / seasonLen) * 100) : 0;
+
   const pageUrl = `https://tsurispot.com/prefecture/${pref.slug}/fish/${fish.slug}`;
   const headline = `${pref.name}で${fish.name}が釣れるスポット・時期・釣り方【完全ガイド】`;
   const pageDescription = `${pref.name}で${fish.name}が釣れるおすすめスポット${spots.length}件を徹底紹介。ベストシーズン・おすすめ釣り方・初心者向け穴場スポットまで完全ガイド。`;
@@ -263,36 +275,33 @@ export default async function PrefectureFishPage({ params }: PageProps) {
   const faqItems = [
     {
       question: `${pref.name}で${fish.name}が釣れるスポットは何件ありますか？`,
-      answer: `現在、${pref.name}で${fish.name}が釣れるスポットは${spots.length}件掲載しています。${methodBreakdown.length > 0 ? `主な釣り方は${methodBreakdown.slice(0, 3).map((m) => m.method).join("、")}です。` : ""}`,
+      answer: `${pref.name}で${fish.name}が釣れるスポットは${spots.length}件です。${easyCount > 0 ? `うち初心者向け（難易度やさしい）が${easyCount}件（${easyPct}%）あります。` : ""}${methodBreakdown.length > 0 ? `主な釣り方は${methodBreakdown.slice(0, 3).map((m) => m.method).join("、")}です。` : ""}`,
     },
     {
       question: `${pref.name}で${fish.name}が釣れる時期はいつですか？`,
       answer: seasonMonthNames.length > 0
-        ? `${pref.name}での${fish.name}のシーズンは${seasonMonthNames.join("・")}です。${peakMonthNames.length > 0 ? `特に${peakMonthNames.join("・")}が最盛期で、最も釣果が期待できます。` : ""}`
+        ? `${pref.name}での${fish.name}のシーズンは${seasonMonthNames.join("・")}の${seasonLen}ヶ月間です。${peakMonthNames.length > 0 ? `特に${peakMonthNames.join("・")}（${peakLen}ヶ月）が最盛期で、最も釣果が期待できます。` : ""}`
         : `${fish.name}の詳しいシーズン情報は各スポットページでご確認ください。`,
     },
     {
       question: `${pref.name}で${fish.name}を釣るにはどんな釣り方がおすすめですか？`,
-      answer: methodBreakdown.length > 0
-        ? `${pref.name}で${fish.name}を狙うなら、${methodBreakdown[0].method}が最も多く${methodBreakdown[0].count}件のスポットで実績があります。${methodBreakdown.length > 1 ? `他にも${methodBreakdown.slice(1, 3).map((m) => m.method).join("、")}でも狙えます。` : ""}各スポットの詳細ページで具体的な釣り方をご確認ください。`
+      answer: methodBreakdown.length > 0 && topMethod
+        ? `${pref.name}で${fish.name}を狙うなら${topMethod.method}が最有力で、掲載${spots.length}件中${topMethod.count}件（${topMethodPct}%）のスポットで実績があります。${methodBreakdown.length > 1 ? `次いで${methodBreakdown.slice(1, 3).map((m) => `${m.method}${m.count}件`).join("、")}でも狙えます。` : ""}`
         : `${fish.name}の釣り方の詳細は各スポットページでご確認ください。`,
     },
     {
       question: `${pref.name}で${fish.name}釣りの初心者におすすめのスポットはどこですか？`,
-      answer: (() => {
-        const easySpots = spotsWithCatchInfo.filter(({ catchInfo }) => catchInfo?.catchDifficulty === "easy").map(({ spot }) => spot.name);
-        return easySpots.length > 0
-          ? `${pref.name}で${fish.name}を初心者が狙うなら、${easySpots.slice(0, 3).join("・")}がおすすめです。比較的難易度が低く、足場も安定しているスポットです。${methodBreakdown.length > 0 ? `${methodBreakdown[0].method}から始めてみましょう。` : ""}`
-          : `${pref.name}で${fish.name}を初心者が狙う場合は、堤防や漁港など足場が安定したスポットを選びましょう。${methodBreakdown.length > 0 ? `${methodBreakdown[0].method}なら初心者でも比較的釣りやすいです。` : ""}`;
-      })(),
+      answer: easyCount > 0
+        ? `${pref.name}で${fish.name}を狙える初心者向け（難易度やさしい）スポットは${easyCount}件（全${spots.length}件中${easyPct}%）あります。中でも${easySpotNames.slice(0, 3).join("・")}は足場が安定しておすすめです。${topMethod ? `${topMethod.method}から始めてみましょう。` : ""}`
+        : `${pref.name}で${fish.name}を初心者が狙う場合は、堤防や漁港など足場が安定したスポットを選びましょう。${topMethod ? `${topMethod.method}なら初心者でも比較的釣りやすいです。` : ""}`,
     },
     {
       question: `${pref.name}で${fish.name}は何月がベストシーズンですか？`,
       answer:
         peakMonthNames.length > 0
-          ? `${pref.name}での${fish.name}のベストシーズンは${peakMonthNames.join("・")}です。${seasonMonthNames.length > 0 ? `${seasonMonthNames.join("・")}にかけて狙えます。` : ""}水温と魚の活性が合うこの時期が最も釣果を期待できます。`
+          ? `${pref.name}での${fish.name}のベストシーズンは${peakMonthNames.join("・")}の${peakLen}ヶ月です。${seasonLen > 0 ? `シーズン全体${seasonLen}ヶ月のうち約${peakRatio}%がこの最盛期にあたり、水温と活性が合うこの時期が最も釣果を期待できます。` : ""}`
           : seasonMonthNames.length > 0
-          ? `${pref.name}での${fish.name}のシーズンは${seasonMonthNames.join("・")}です。`
+          ? `${pref.name}での${fish.name}のシーズンは${seasonMonthNames.join("・")}の${seasonLen}ヶ月間です。`
           : `${fish.name}のシーズンは各スポットの詳細ページでご確認ください。`,
     },
     {
