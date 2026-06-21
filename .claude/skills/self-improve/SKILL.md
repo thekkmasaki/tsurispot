@@ -26,8 +26,8 @@ description: ツリスポ自己改善サイクル。metrics取得→サイト健
 
 ### 1. メトリクス鮮度チェック
 - `memory/metrics/latest.json` の `fetchedAt` が `freshnessHours`（既定48h）より古い/無ければ：
-  - `node scripts/metrics/fetch-all.mjs` → `node scripts/metrics/extract-striking-distance.mjs` → `node scripts/metrics/coverage-gap.mjs`
-- `coverage-gap.json` が無ければ `node scripts/metrics/coverage-gap.mjs` を実行。
+  - `node scripts/metrics/fetch-all.mjs` → `node scripts/metrics/extract-striking-distance.mjs` → `node scripts/metrics/coverage-gap.mjs` → `node scripts/metrics/template-opportunities.mjs`
+- `coverage-gap.json` / `template-opportunities.json` が無ければ各スクリプトを実行。
 - 取得が認証エラー等で失敗 → 改善は実施せず手順8の通知だけして終了（測定基盤未整備＝Phase1未完）。
 
 ### 1.5 サイト健全性チェック（サーキットブレーカー）
@@ -47,22 +47,28 @@ description: ツリスポ自己改善サイクル。metrics取得→サイト健
 - `node scripts/agent/ledger.mjs update <id> --json '{"verdict":"win","after":{...}}'`。
 - win/loss が2件累積したパターンを `playbook-learnings.md` に昇格/除外リスト反映。
 
-### 3. レーン選定と候補（2レーン交互・バッチ=N件）
-- `priorities.json` の `laneCycleCount`（無ければ0）で**2レーンを交互**に回す:
-  - **偶数 → coverageレーン（不可視ページ救出）**: `coverage-gap.json` の `invisibleWorklist`（record-backed・除外済み）上位。狙い=**検索表示0の実在ページをインデックス/ランク入りさせる**（伸びしろ大）。
+### 3. レーン選定と候補（3レーン・`laneCycleCount`で振り分け）
+- **テンプレレーン判定が最優先**: `laneCycleCount` が `config.templateLane.everyNthCycle`（既定6）の倍数なら → **テンプレ改善レーン**（下記C。1件のみ・バッチしない・必ずneeds-human）。
+- そうでなければ、`laneCycleCount` の偶奇で per-page バッチ:
+  - **偶数 → coverageレーン（不可視ページ救出）**: `coverage-gap.json` の `invisibleWorklist`（record-backed・除外済み）上位。狙い=**検索表示0の実在ページをインデックス/ランク入り**。
   - **奇数 → strikingレーン（既存需要の刈り取り）**: `striking-distance.json` の items（ROI降順）上位。
-- 共通フィルタ: `playbook-learnings.md` の「効かない施策」・`excludeUrls`・進行中PR（`gh pr list`）を除外。
-- 選んだレーンのワークリスト上位から、**未着手の `config.batchSize`（既定5）件**を選ぶ（ワークリストが尽きたらもう一方のレーンで補充）。**guardrail上限（8ファイル/150行）に収まる件数に抑える**こと。
+- per-page共通フィルタ: `playbook-learnings.md`の「効かない施策」・`excludeUrls`・進行中PR（`gh pr list`）を除外。ワークリスト上位から**未着手の `config.batchSize`（既定10）件**を選ぶ（尽きたら他レーンで補充）。`guardrail.maxChangedFiles`/`maxChangedLines` 内に収める。
+
+#### C. テンプレ改善レーン（pSEOテンプレ＝1編集で同型の全ページを改善）
+- `template-opportunities.json` の items（機会降順）から、**最近触っていない型を1つ**選ぶ（`priorities.json` の `templateDone`[]に消化済みの型をクールダウン付きで記録。空ならそれを使う）。
+- その型の `templateFile`（generateMetadataを持つ page.tsx）を grep で特定し、**title/description/見出しの生成ロジック、または本文テンプレの網羅性**を改善（順位を押し上げる）。**検証済みの構造化データ参照のみ**で、捏造・クリックベイト禁止。
+- **1件だけ**（バッチしない）。テンプレ変更は同型の全N百ページに波及するため**影響が大きい＝必ず人間レビュー**。tsc/eslint/vitest が壊れやすいので確実に通す。
 
 ### 4. フェーズゲート
 - `config.phase` に従う。**guardrail-check.mjs もコードで phase を強制する**（phase1は差分があれば needs-human）。
 - phase1=測定のみ（改善実装しない・ここで終了）/ phase2=title/description/見出し/内部リンク改善 / phase3=本文加筆も可（新規routeは承認要）。
 
-### 5. 実装（N件を1ブランチにまとめて）
-- `git checkout -b feature/auto-<lane>-batch-<YYYYMMDD-連番>`（run-cycleが事前にbaseをorigin/masterへ同期済み）
-- 選んだ**N件すべて**を、それぞれ `sourcePaths` を grep で特定し**テキストのみ**改善。**検証済みデータ（catchableFishの魚種/釣法/月・施設フラグ has*・region・isFree・difficulty）だけ**を使い、データに無い事実は書かない（捏造禁止）。1件ごとに対象レコードのデータを必ず確認してから書く。
+### 5. 実装
+- `git checkout -b feature/auto-<lane>-<YYYYMMDD-連番>`（run-cycleが事前にbaseをorigin/masterへ同期済み）
+- **per-pageレーン（coverage/striking）= N件をまとめて**: 各件 `sourcePaths` を grep で特定し**テキストのみ**改善。**検証済みデータ（catchableFishの魚種/釣法/月・施設フラグ has*・region・isFree・difficulty）だけ**を使い捏造しない。1件ごとに対象レコードを必ず確認してから書く。
   - **strikingレーン**: title/descriptionのCTR改善（狙うクエリを前方配置・行動喚起）。
-  - **coverageレーン**: descriptionを網羅性で具体化し薄さを解消→インデックス獲得（魚種・釣法・季節・施設を自然に盛り込む。200〜320字目安）。
+  - **coverageレーン**: descriptionを網羅性で具体化し薄さを解消→インデックス獲得（200〜320字目安）。
+- **テンプレレーン = 手順3-Cの1件のみ**: テンプレ(page.tsx)の title/description/見出し生成 or 本文テンプレを改善。構造化データ参照のみ。**型が壊れやすいので tsc を必ず通す**。差分は最小限に。
 - 既存の構造化データを壊さない。クリックベイト禁止。`.claude/agents/seo-optimizer.md` 準拠。
 - N件すべてを1コミット（または数コミット）にまとめる。
 
@@ -84,7 +90,8 @@ description: ツリスポ自己改善サイクル。metrics取得→サイト健
 ### 9. 優先度更新（学習）
 - `memory/agent/priorities.json`：
   - **`laneCycleCount` を +1**（次サイクルでレーンが切り替わる）。
-  - 今回消化した**N件すべて**のURLを `excludeUrls` に **TTL付き**で追加（`{"path":"...","until":"<verdict別: win=30/flat=60/loss=120日後>"}`）。恒久除外にしない。
+  - **per-pageレーン**: 今回消化した**N件すべて**のURLを `excludeUrls` に **TTL付き**で追加（`{"path":"...","until":"<verdict別: win=30/flat=60/loss=120日後>"}`）。恒久除外にしない。
+  - **テンプレレーン**: 改善した**型**を `templateDone`[] に `{"type":"pref-fish","until":"<効果測定後まで＝measureInDays日後>"}` で追加（同じ型を連続で触らない）。
   - 直近の win/loss 傾向で該当ページタイプの weight を `learningRate`(0.1)以内で微調整し `weightClamp`[0.5,2.0]にclip。`updatedAt` 更新。
 
 ### 10. 終了
