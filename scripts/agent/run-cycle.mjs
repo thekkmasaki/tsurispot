@@ -200,6 +200,7 @@ async function runCycle() {
 
 async function main() {
   const acceptPolicy = process.argv.includes("--accept-policy");
+  const dryRun = process.argv.includes("--dry-run");
   const cfg = loadConfig();
 
   // --- 起動前セルフチェック(失敗したらサイクルを起動しない) ---
@@ -214,6 +215,26 @@ async function main() {
     console.error(policy.abort); process.exit(2);
   }
   if (acceptPolicy) { console.log(policy.note || "ポリシー承認完了"); process.exit(0); }
+
+  // --dry-run: claude を起動せず、起動前チェックと改善候補だけ報告して終了（無人運用前の安全確認用）
+  if (dryRun) {
+    const branch = gitTry("rev-parse --abbrev-ref HEAD") || "?";
+    const dirty = (gitTry("status --porcelain") || "").length > 0;
+    let candidate = "(striking-distance.json なし → 先に fetch-all + extract が必要)";
+    try {
+      const sd = JSON.parse(fs.readFileSync(path.join(REPO_ROOT, "memory", "metrics", "striking-distance.json"), "utf8"));
+      const top = (sd.items || [])[0];
+      if (top) candidate = `${top.path} (ROI${top.roiScore} / pos${top.position} / ${top.recommendedAction})`;
+    } catch { /* noop */ }
+    console.log("=== DRY-RUN（claude は起動しません）===");
+    console.log(`settings deny: ✅ PASS`);
+    console.log(`policy: ${policy.note || "✅ 既存ハッシュと一致"}`);
+    console.log(`phase: ${cfg.phase} / autonomy.mode: ${cfg.autonomy?.mode}`);
+    console.log(`git: branch=${branch} / dirty=${dirty}`);
+    console.log(`次に着手する改善候補: ${candidate}`);
+    console.log("本番ではここで claude -p が SKILL.md の手順を1サイクル(=1改善)実行します。");
+    process.exit(0);
+  }
 
   if (!acquireLock()) { console.log("別のサイクルが稼働中 → 今回はスキップ"); process.exit(0); }
 

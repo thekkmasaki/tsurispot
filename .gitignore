@@ -5,6 +5,7 @@
 /logs/agent/
 /config/agent.config.json
 /.claude/state/
+/memory/
 
 # dependencies
 /node_modules
