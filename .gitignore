@@ -1,5 +1,11 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# 自己改善エージェント（環境固有・秘密・実行時状態は追跡しない。テンプレートは config/agent.config.example.json）
+/secrets/
+/logs/agent/
+/config/agent.config.json
+/.claude/state/
+
 # dependencies
 /node_modules
 /.pnp

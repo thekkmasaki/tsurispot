@@ -1,0 +1,119 @@
+{
+  "_comment": "ツリスポ自己改善エージェントの単一設定源。これは『人間が所有するポリシー』。エージェントが学習で動かす可変状態は memory/agent/priorities.json 側。このファイル自体の変更はguardrailで needs-human 固定(自己改変防止)。",
+  "autonomy": {
+    "mode": "pr-only",
+    "_modeOptions": "pr-only(全件人間承認・観察モード) | auto-merge-pr(超安全クラスのみCI後自動merge) | 段階運用: 数日pr-onlyで誤作動ゼロ確認→auto-merge-prへ昇格",
+    "maxDeploysPerDay": 3
+  },
+  "phase": 1,
+  "_phaseOptions": "1=測定基盤のみ(metrics取得・分析、改善実装はしない。差分があれば即needs-human) | 2=SEO striking distance最適化 | 3=コンテンツ自動拡充。順序強制。guardrailがphaseを読んで強制する。観察モードはphase1から開始。",
+  "site": {
+    "baseUrl": "https://tsurispot.com",
+    "gscSiteUrl": "https://tsurispot.com/",
+    "_gscSiteUrlNote": "GSCがドメインプロパティなら 'sc-domain:tsurispot.com'、URLプレフィックスなら 'https://tsurispot.com/'",
+    "ga4PropertyId": "",
+    "_ga4PropertyIdNote": "GA4管理→プロパティ設定の『プロパティID』(数値)。測定ID G-FD4XGHP9FN とは別物。Data APIは数値IDを使う。",
+    "ga4MeasurementId": "G-FD4XGHP9FN"
+  },
+  "metrics": {
+    "lookbackDays": 28,
+    "gscLagDays": 3,
+    "freshnessHours": 48
+  },
+  "strikingDistance": {
+    "posLo": 5.0,
+    "posHi": 20.0,
+    "minImpressions": 200
+  },
+  "measurement": {
+    "measureInDays": 42,
+    "_measureInDaysNote": "before(直近28日窓)とafter窓の重複を避け、デプロイ反映ラグ+season考慮で最低6週後に判定。短すぎる判定は季節ノイズに埋もれる。",
+    "minImpressionsForVerdict": 300,
+    "excludeCooldownDays": { "win": 30, "flat": 60, "loss": 120 }
+  },
+  "siteHealth": {
+    "regressionStopPct": 8,
+    "_regressionStopPctNote": "サイト全体KPI(総クリック/総impression/平均順位/総affiliateClick)が前週比でこの%以上悪化したら新規改善を停止し人間にエスカレーション(サーキットブレーカー)。"
+  },
+  "guardrail": {
+    "maxChangedLines": 150,
+    "maxChangedFiles": 8,
+    "maxLineLength": 400,
+    "maxAddedChars": 8000,
+    "allowedPathPatterns": [
+      "^src/app/.*/(page|layout)\\.tsx$",
+      "^src/lib/data/[^/]+\\.ts$",
+      "^public/llms.*\\.txt$",
+      "^src/components/.*\\.tsx$"
+    ],
+    "forbiddenPathPatterns": [
+      "^package(-lock)?\\.json$",
+      "\\.config\\.(ts|js|mjs|cjs|json)$",
+      "^next\\.config\\.(ts|js|mjs)$",
+      "^Dockerfile$",
+      "^\\.github/",
+      "^src/types/",
+      "^src/app/api/",
+      "(^|/)\\.env",
+      "^config/agent\\.config\\.json$",
+      "^\\.claude/",
+      "^scripts/agent/",
+      "^scripts/metrics/",
+      "^memory/agent/"
+    ],
+    "schemaChangePatterns": [
+      "(export\\s+)?(interface|type|enum|class)\\s+\\w",
+      "\\bz\\.(object|enum|union|discriminatedUnion)\\b",
+      "\\bas\\s+const\\b"
+    ],
+    "dangerousCodePatterns": [
+      "\\beval\\s*\\(",
+      "\\bnew\\s+Function\\s*\\(",
+      "\\bchild_process\\b",
+      "\\brequire\\s*\\(",
+      "\\bimport\\s*\\(",
+      "\\bfetch\\s*\\(",
+      "\\bXMLHttpRequest\\b",
+      "\\baxios\\b",
+      "https?://(?!tsurispot\\.com|amzn\\.to|a\\.r10\\.to)",
+      "dangerouslySetInnerHTML",
+      "process\\.(env|cwd|exit|argv)",
+      "globalThis",
+      "\\bfs\\.",
+      "Buffer\\.from",
+      "\\batob\\b",
+      "fromCharCode",
+      "use server",
+      "process_input"
+    ],
+    "secretAccessPatterns": [
+      "process\\s*\\.\\s*env",
+      "process\\s*\\[\\s*['\"]env",
+      "=\\s*process\\.env",
+      "cookies\\s*\\(\\s*\\)",
+      "headers\\s*\\(\\s*\\)"
+    ],
+    "clickbaitPatterns": [
+      "爆釣",
+      "絶対(に)?釣れ",
+      "必ず釣れ",
+      "日本一",
+      "世界一",
+      "100%",
+      "兵庫県在住",
+      "！！",
+      "誰でも簡単に大漁"
+    ]
+  },
+  "validation": {
+    "typecheck": "npx tsc --noEmit",
+    "lint": "npx eslint src/",
+    "test": "npx vitest run"
+  },
+  "git": {
+    "baseBranch": "master",
+    "remote": "origin",
+    "branchPrefix": "feature/auto-",
+    "needsHumanLabel": "needs-human"
+  }
+}
