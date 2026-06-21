@@ -99,12 +99,12 @@ function sanitizeGit(cfg) {
     // リポジトリにコミットせず置く運用)を巻き込んで削除してしまうため。
     // 追跡ファイルの未コミット編集は reset --hard で十分に破棄できる。
     gitTry("reset --hard --quiet");
-    if (!gitTry(`checkout ${base} --quiet`)) return { abort: `base(${base})へのcheckout失敗` };
+    if (gitTry(`checkout ${base} --quiet`) === null) return { abort: `base(${base})へのcheckout失敗` };
   } else if (dirty) {
     // ユーザーの未コミット作業がある → 破壊せずスキップ(作業保護)
     return { abort: `作業ツリーがdirty(ブランチ:${branch})。ユーザー作業保護のためスキップ。無人運用は専用クローン推奨。` };
   } else {
-    if (!gitTry(`checkout ${base} --quiet`)) return { abort: `base(${base})へのcheckout失敗` };
+    if (gitTry(`checkout ${base} --quiet`) === null) return { abort: `base(${base})へのcheckout失敗` };
   }
   // base を origin に同期(fast-forwardのみ。発散していたら止める)
   if (gitTry(`rev-parse --verify ${remote}/${base}`)) {
