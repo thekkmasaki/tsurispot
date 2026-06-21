@@ -1271,7 +1271,7 @@ export const seaFishRootHata: FishSpecies[] = [
     scientificName: "Doederleinia berycoides",
     slug: "akamutsu",
     description:
-      "「白身のトロ」と称される最高級の深海魚。喉の奥が黒いことから「ノドグロ」の名で知られる。水深100〜300mの深海に生息し、船釣り専門のターゲット。脂の乗りが抜群で、塩焼きにすると皮の脂が滴るほど。",
+      "アカムツ（ノドグロ）が釣れる時期は秋から冬で、晩秋〜初冬（10〜12月）が最盛期。「白身のトロ」と称される最高級の深海魚で、喉の奥が黒いことから「ノドグロ」の名で知られる。水深100〜300mの深海に生息し、船釣り専門のターゲット。脂の乗りが抜群で、塩焼きにすると皮の脂が滴るほど美味。",
     category: "sea",
     family: "ホタルジャコ科",
     difficulty: "advanced",

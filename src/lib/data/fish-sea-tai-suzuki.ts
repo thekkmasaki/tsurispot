@@ -317,7 +317,7 @@ export const seaFishTaiSuzuki: FishSpecies[] = [
     scientificName: "Oplegnathus fasciatus",
     slug: "ishidai",
     description:
-      "磯釣りの王様と呼ばれる憧れの対象魚。強力な歯でサザエやウニを砕いて食べます。引きは強烈で、磯からの底物釣りで狙います。",
+      "イシダイが釣れる時期は初夏（5〜6月）と秋（9〜10月）がピークで、シーズンは春から晩秋（4〜11月）。磯釣りの王様と呼ばれる憧れの底物で、強力な歯でサザエやウニを砕いて食べる。磯から専用の石鯛仕掛けで狙い、引きは強烈。釣れたら刺身や塩焼きで楽しみたい高級魚。",
     category: "sea",
     family: "イシダイ科",
     difficulty: "advanced",
