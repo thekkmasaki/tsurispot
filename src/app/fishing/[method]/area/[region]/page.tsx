@@ -79,7 +79,7 @@ interface SpotSummary {
 function getSpotsForMethodAndRegion(
   method: FishingMethodDef,
   regionGroup: RegionGroup
-): { spots: SpotSummary[]; totalCount: number } {
+): { spots: SpotSummary[]; totalCount: number; beginnerCount: number } {
   const prefs = new Set(regionGroup.prefectures);
   const filtered: SpotSummary[] = [];
   for (const spot of fishingSpots) {
@@ -108,7 +108,9 @@ function getSpotsForMethodAndRegion(
       return b.matchingFishCount - a.matchingFishCount;
     return b.rating - a.rating;
   });
-  return { spots: filtered.slice(0, 50), totalCount: filtered.length };
+  // 初心者向け件数は全件（slice前）で集計し、FAQ統計の正確性を担保する。
+  const beginnerCount = filtered.filter((s) => s.difficulty === "beginner").length;
+  return { spots: filtered.slice(0, 50), totalCount: filtered.length, beginnerCount };
 }
 
 /**
@@ -163,7 +165,8 @@ export default async function MethodRegionPage({ params }: Props) {
   if (!method) permanentRedirect("/fishing");
   if (!region) permanentRedirect(`/fishing/${methodSlug}`);
 
-  const { spots, totalCount } = getSpotsForMethodAndRegion(method, region);
+  const { spots, totalCount, beginnerCount } = getSpotsForMethodAndRegion(method, region);
+  const beginnerPct = totalCount > 0 ? Math.round((beginnerCount / totalCount) * 100) : 0;
   const prefCounts = new Map<string, number>();
   for (const spot of spots) {
     prefCounts.set(spot.prefecture, (prefCounts.get(spot.prefecture) ?? 0) + 1);
@@ -294,12 +297,14 @@ export default async function MethodRegionPage({ params }: Props) {
     {
       question: `${region.name}で${method.name}ができるスポットは何件ありますか？`,
       answer: totalCount > 0
-        ? `現在、${region.name}地方で${method.name}ができるスポットは${totalCount}件掲載しています。${topPrefLabel ? `${topPrefLabel}などにスポットがあります。` : ""}`
+        ? `${region.name}地方（${region.prefectures.length}県）で${method.name}ができるスポットは${totalCount}件掲載しています。${beginnerCount > 0 ? `うち初心者向けが${beginnerCount}件（${beginnerPct}%）。` : ""}${topPrefLabel ? `${topPrefLabel}などに分布しています。` : ""}`
         : `現在、${region.name}地方の${method.name}スポットは準備中です。随時追加しています。`,
     },
     {
       question: `${region.name}で${method.name}をするのに初心者でも大丈夫ですか？`,
-      answer: `はい、${region.name}には初心者向けの${method.name}スポットもあります。${method.description}各スポットページで難易度を確認できるので、「初心者向け」のスポットから始めるのがおすすめです。`,
+      answer: totalCount > 0 && beginnerCount > 0
+        ? `はい。${region.name}には初心者向けの${method.name}スポットが${beginnerCount}件（全${totalCount}件中${beginnerPct}%）あります。${method.description}各スポットページで難易度を確認できるので、「初心者向け」表記のスポットから始めるのがおすすめです。`
+        : `はい、${region.name}には初心者でも楽しめる${method.name}スポットがあります。${method.description}各スポットページで難易度を確認し、足場が安定したポイントから始めましょう。`,
     },
     {
       question: `${region.name}の${method.name}で釣れる魚は何ですか？`,
