@@ -17,6 +17,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { SpotCard } from "@/components/spots/spot-card";
+import { RelatedPseoLinks } from "@/components/seo/related-pseo-links";
+import { SEASONAL_REGIONS } from "@/lib/data/seasonal-regions";
 import { toListSpot } from "@/lib/data/list-spot";
 import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { fishSpecies } from "@/lib/data/fish";
@@ -958,6 +960,16 @@ export default async function PrefectureMonthFishPage({
           </div>
         </section>
       )}
+
+      {/* 月×地域（全国の同月ガイド）への内部リンク */}
+      <RelatedPseoLinks
+        title={`${month.name}の全国の釣り（地域別）`}
+        links={SEASONAL_REGIONS.map((r) => ({
+          href: `/seasonal/${monthSlug}/${r.slug}`,
+          label: `${month.name}の${r.name}`,
+          sublabel: "釣れる魚・スポット",
+        }))}
+      />
 
       {/* 月ナビゲーター */}
       <section className="mb-8 sm:mb-10">
