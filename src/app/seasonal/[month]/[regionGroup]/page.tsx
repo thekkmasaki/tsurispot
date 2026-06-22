@@ -148,7 +148,8 @@ export async function generateMetadata({
   const metaFishNames = Array.from(metaInSeasonFish.values()).slice(0, 5).join("・");
   const metaSpotCount = fishingSpots.filter((s) => metaRegionPrefNames.has(s.region.prefecture)).length;
 
-  const title = `${monthDef.num}月の${regionName}釣り情報・釣れる魚とおすすめスポット【2026年版】`;
+  const year = new Date().getFullYear();
+  const title = `${monthDef.num}月の${regionName}の釣り｜釣れる魚・おすすめスポット【${year}年版】`;
   const description = `${monthDef.name}（${monthDef.season}）に${regionName}地方で釣れる魚と人気の釣り場を完全ガイド。${metaFishNames ? `${metaFishNames}など旬の魚` : "ベストシーズンの魚"}が狙えるおすすめスポット${metaSpotCount > 0 ? `${metaSpotCount}箇所` : ""}を紹介。初心者でも楽しめる穴場ポイントや釣り方・タックル情報も掲載。`;
 
   return {

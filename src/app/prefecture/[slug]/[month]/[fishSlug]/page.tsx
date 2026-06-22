@@ -17,6 +17,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { SpotCard } from "@/components/spots/spot-card";
+import { RelatedPseoLinks } from "@/components/seo/related-pseo-links";
+import { SEASONAL_REGIONS } from "@/lib/data/seasonal-regions";
 import { toListSpot } from "@/lib/data/list-spot";
 import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { fishSpecies } from "@/lib/data/fish";
@@ -131,8 +133,10 @@ export async function generateMetadata({
     permanentRedirect(`/prefecture/${pref.slug}`);
   }
 
-  const title = `${pref.name}の${month.name}の${fish.name}釣り【2026年】釣れるスポット・釣り方`;
-  const description = `${pref.name}で${month.name}に${fish.name}が釣れるスポットと釣り方を紹介。${month.season}シーズンの${fish.name}釣りの時期・仕掛け・おすすめポイントを完全ガイド。`;
+  const year = new Date().getFullYear();
+  const isPeakMonth = fish.peakMonths?.includes(month.num) ?? false;
+  const title = `${pref.name}の${month.name}の${fish.name}釣り｜${isPeakMonth ? "最盛期の" : ""}釣れるスポット・釣り方【${year}年】`;
+  const description = `${pref.name}で${month.name}に${fish.name}が釣れるスポットと釣り方を紹介。${isPeakMonth ? `${month.name}は最盛期の狙い目。` : `${month.season}シーズン。`}仕掛け・時間帯・おすすめポイントまで完全ガイド。`;
   const pageUrl = `https://tsurispot.com/prefecture/${slug}/${monthSlug}/${fishSlug}`;
 
   // ここに到達した時点で validCombos（count>=MIN_SPOTS=2 の実在組合せ）が保証されている
@@ -956,6 +960,16 @@ export default async function PrefectureMonthFishPage({
           </div>
         </section>
       )}
+
+      {/* 月×地域（全国の同月ガイド）への内部リンク */}
+      <RelatedPseoLinks
+        title={`${month.name}の全国の釣り（地域別）`}
+        links={SEASONAL_REGIONS.map((r) => ({
+          href: `/seasonal/${monthSlug}/${r.slug}`,
+          label: `${month.name}の${r.name}`,
+          sublabel: "釣れる魚・スポット",
+        }))}
+      />
 
       {/* 月ナビゲーター */}
       <section className="mb-8 sm:mb-10">

@@ -19,6 +19,8 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { SpotCard } from "@/components/spots/spot-card";
+import { RelatedPseoLinks } from "@/components/seo/related-pseo-links";
+import { SEASONAL_REGIONS } from "@/lib/data/seasonal-regions";
 import { toListSpot } from "@/lib/data/list-spot";
 import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { fishSpecies } from "@/lib/data/fish";
@@ -58,8 +60,9 @@ export async function generateMetadata({
   const month = getMonthBySlug(monthSlug);
   if (!pref || !month) return { title: "ページが見つかりません" };
 
-  const title = `${pref.name}の${month.name}の釣り情報【2026年】釣れる魚・おすすめスポット`;
-  const description = `${pref.name}で${month.name}に釣れる魚とおすすめ釣りスポットを紹介。${month.season}シーズンの釣り方・水温・狙い目の魚種を完全ガイド。${pref.name}で${month.name}に釣りに行くならツリスポ。`;
+  const year = new Date().getFullYear();
+  const title = `${pref.name}の${month.name}の釣り｜釣れる魚・おすすめスポット【${year}年】`;
+  const description = `${pref.name}の${month.name}に釣れる魚とおすすめ釣りスポットを紹介。${month.season}シーズンの狙い目魚種・釣り方・水温の傾向まで、${pref.name}で${month.name}に釣行するなら役立つ情報をまとめました。`;
 
   const pageUrl = `https://tsurispot.com/prefecture/${slug}/${monthSlug}`;
   return {
@@ -728,6 +731,16 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      {/* 月×地域（全国の同月ガイド）への内部リンク */}
+      <RelatedPseoLinks
+        title={`${month.name}の全国の釣り（地域別）`}
+        links={SEASONAL_REGIONS.map((r) => ({
+          href: `/seasonal/${monthSlug}/${r.slug}`,
+          label: `${month.name}の${r.name}`,
+          sublabel: "釣れる魚・スポット",
+        }))}
+      />
 
       {/* よくある質問 */}
       <section className="mb-8 sm:mb-10">
