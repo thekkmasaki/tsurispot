@@ -58,8 +58,9 @@ export async function generateMetadata({
   const month = getMonthBySlug(monthSlug);
   if (!pref || !month) return { title: "ページが見つかりません" };
 
-  const title = `${pref.name}の${month.name}の釣り情報【2026年】釣れる魚・おすすめスポット`;
-  const description = `${pref.name}で${month.name}に釣れる魚とおすすめ釣りスポットを紹介。${month.season}シーズンの釣り方・水温・狙い目の魚種を完全ガイド。${pref.name}で${month.name}に釣りに行くならツリスポ。`;
+  const year = new Date().getFullYear();
+  const title = `${pref.name}の${month.name}の釣り｜釣れる魚・おすすめスポット【${year}年】`;
+  const description = `${pref.name}の${month.name}に釣れる魚とおすすめ釣りスポットを紹介。${month.season}シーズンの狙い目魚種・釣り方・水温の傾向まで、${pref.name}で${month.name}に釣行するなら役立つ情報をまとめました。`;
 
   const pageUrl = `https://tsurispot.com/prefecture/${slug}/${monthSlug}`;
   return {

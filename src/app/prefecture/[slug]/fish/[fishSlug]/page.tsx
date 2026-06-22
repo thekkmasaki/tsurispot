@@ -15,6 +15,7 @@ import { getSpotsByPrefectureAndFish, getEligiblePrefFishCombos } from "@/lib/da
 import { FISHING_METHODS } from "@/lib/data/fishing-methods";
 import { REGION_GROUPS } from "@/lib/data/regions-group";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
+import { trimDescription } from "@/lib/utils/seo";
 import {
   generateContextMethodBrief,
   generateTimeAdvice,
@@ -67,8 +68,18 @@ export async function generateMetadata({
   }
   const metaTopMethods = Array.from(metaMethodMap.entries()).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([m]) => m);
 
-  const title = `${pref.name}で${fish.name}が釣れるスポット・時期・釣り方【完全ガイド】`;
-  const description = `${pref.name}で${fish.name}が釣れるおすすめスポット${spots.length}件を徹底紹介。${metaPeakMonths.length > 0 ? `ベストシーズンは${metaPeakMonths.join("・")}。` : metaSeasonMonths.length > 0 ? `シーズンは${metaSeasonMonths.join("・")}。` : ""}${metaTopMethods.length > 0 ? `おすすめの釣り方は${metaTopMethods.join("・")}。` : ""}初心者向けの穴場スポットから上級者向けポイントまで、${pref.name}で${fish.name}を釣るための情報を完全ガイド。`;
+  // 最盛期月・スポット件数を前方配置してCTRを上げる（noindexの薄ページ<3件は汎用titleにフォールバック）
+  const metaPeakLabel = metaPeakMonths.slice(0, 2).join("・");
+  const metaCountLabel = spots.length >= 3 ? `${spots.length}選` : "";
+  const title = metaPeakLabel
+    ? `${pref.name}の${fish.name}釣りスポット${metaCountLabel}｜${metaPeakLabel}が最盛期・釣り方`
+    : `${pref.name}で${fish.name}が釣れるスポット・時期・釣り方`;
+  const description = trimDescription(
+    `${pref.name}で${fish.name}が釣れるおすすめ釣りスポット${spots.length}件を厳選。` +
+      `${metaPeakMonths.length > 0 ? `最盛期は${metaPeakMonths.join("・")}、` : metaSeasonMonths.length > 0 ? `シーズンは${metaSeasonMonths.join("・")}、` : ""}` +
+      `${metaTopMethods.length > 0 ? `${metaTopMethods.join("・")}など釣り方とポイント、` : ""}` +
+      `アクセス・初心者向けの穴場まで完全ガイド。`,
+  );
 
   return {
     title,

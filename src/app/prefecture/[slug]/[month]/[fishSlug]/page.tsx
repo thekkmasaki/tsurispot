@@ -131,8 +131,10 @@ export async function generateMetadata({
     permanentRedirect(`/prefecture/${pref.slug}`);
   }
 
-  const title = `${pref.name}の${month.name}の${fish.name}釣り【2026年】釣れるスポット・釣り方`;
-  const description = `${pref.name}で${month.name}に${fish.name}が釣れるスポットと釣り方を紹介。${month.season}シーズンの${fish.name}釣りの時期・仕掛け・おすすめポイントを完全ガイド。`;
+  const year = new Date().getFullYear();
+  const isPeakMonth = fish.peakMonths?.includes(month.num) ?? false;
+  const title = `${pref.name}の${month.name}の${fish.name}釣り｜${isPeakMonth ? "最盛期の" : ""}釣れるスポット・釣り方【${year}年】`;
+  const description = `${pref.name}で${month.name}に${fish.name}が釣れるスポットと釣り方を紹介。${isPeakMonth ? `${month.name}は最盛期の狙い目。` : `${month.season}シーズン。`}仕掛け・時間帯・おすすめポイントまで完全ガイド。`;
   const pageUrl = `https://tsurispot.com/prefecture/${slug}/${monthSlug}/${fishSlug}`;
 
   // ここに到達した時点で validCombos（count>=MIN_SPOTS=2 の実在組合せ）が保証されている
