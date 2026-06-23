@@ -30,7 +30,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
-import { trimDescription } from "@/lib/utils/seo";
+import { trimDescription, buildSpotTitle } from "@/lib/utils/seo";
 import { isLowQualitySpot, isSitemapEligible } from "@/lib/seo-quality";
 import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, getSpotsByFish, getSpotsByMethod, getSpotsBySpotType, getSpotsByDifficulty, type NearbySpot } from "@/lib/data/spots";
 import { RelatedSpotsByFish } from "@/components/spots/related-spots-by-fish";
@@ -141,25 +141,21 @@ export async function generateMetadata({
   if (!spot) notFound();
 
   const fishNames = spot.catchableFish.map((cf) => cf.fish.name).join("・");
-  const topFishNames = spot.catchableFish.slice(0, 2).map((cf) => cf.fish.name).join("・");
   const top3FishNames = spot.catchableFish.slice(0, 3).map((cf) => cf.fish.name).join("・");
-  const topMethodLabel = spot.catchableFish[0]?.method ?? "";
-  const baseTitleText = `${spot.name}の釣り情報・釣果・アクセス`;
-  const fullTitle = topMethodLabel && topFishNames
-    ? `${baseTitleText}【${topMethodLabel}で${topFishNames}】`
-    : baseTitleText;
-  const title = fullTitle.length <= 60 ? fullTitle : baseTitleText;
+  // title: striking-distance の実クエリ（[地名]+釣果/釣り情報）に合わせ「釣果」を前方化＋鮮度トークン。
+  const title = buildSpotTitle(spot);
   const isFamilyFriendly = spot.difficulty === "beginner" && spot.hasToilet && spot.hasParking;
   const popularityLabel = spot.rating >= 4.0 ? "人気" : spot.rating <= 3.0 ? "穴場" : "";
+  // description も検索 intent（最新釣果）を冒頭に前置。属性列挙は後段に回す。
   const descParts: string[] = [
-    `${spot.name}は${spot.region.prefecture}${spot.region.areaName}の${SPOT_TYPE_LABELS[spot.spotType]}。`,
-    top3FishNames ? `${top3FishNames}が狙える${popularityLabel ? popularityLabel + "の" : ""}釣り場。` : "",
+    `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）の最新釣果・釣り方・アクセス情報。`,
+    top3FishNames ? `${top3FishNames}が狙える${popularityLabel ? popularityLabel + "の" : ""}${SPOT_TYPE_LABELS[spot.spotType]}。` : "",
     spot.difficulty === "beginner" ? "初心者向け。" : "",
     spot.hasParking ? "駐車場あり。" : "",
     spot.hasToilet ? "トイレあり。" : "",
     spot.isFree ? "無料。" : "",
     isFamilyFriendly ? "ファミリーOK。" : "",
-    "アクセス・仕掛け・釣果を完全ガイド。",
+    "仕掛け・季節・混雑予想まで完全ガイド。",
   ];
   const description = trimDescription(descParts.filter(Boolean).join(""), 158);
   const ogDescription = `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）で${fishNames}が狙えます。${spot.description}`;
