@@ -72,6 +72,7 @@ import { CatchReportList } from "@/components/spots/catch-report-list";
 import { CatchReportForm } from "@/components/spots/catch-report-form";
 import { getSpotContributionsAsync } from "@/lib/data/spot-contributions";
 import { SpotContributionList } from "@/components/spots/spot-contribution-list";
+import { SpotEeatFooter } from "@/components/spots/spot-eeat-footer";
 import { SpotContributionForm } from "@/components/spots/spot-contribution-form";
 import { NearbyAccommodation, RakutenTravelCta } from "@/components/spots/nearby-accommodation";
 import { SpotRulesCard } from "@/components/spots/spot-rules";
@@ -106,7 +107,6 @@ import { applyEnvironmentalEstimation, getMonthlyTopFish } from "@/lib/patent/fi
 import { aggregateCatchCounts } from "@/lib/patent/catch-feedback";
 import { SatelliteAnalysisSection } from "@/components/patent/satellite-analysis-section";
 import {
-  generateSpotIntro,
   generateSpotTips,
   generateTimeAdvice,
   generateSeasonDetail,
@@ -731,10 +731,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
           )}
         </div>
 
-        {/* 説明文（スポット固有の導入文） */}
+        {/* 説明文（スポット固有の導入文）。テンプレ自動文(generateSpotIntro)の重複描画は
+            コアアップデート対策で廃止。実データ(下部の魚種カレンダー/施設/潮汐/釣果)を本体とする。 */}
         <div className="mt-3 space-y-3 text-sm leading-relaxed text-muted-foreground">
           <p>{spot.description}</p>
-          <p className="border-t border-border/30 pt-3">{generateSpotIntro(spot)}</p>
         </div>
 
         {/* データ信頼性指標 */}
@@ -1668,6 +1668,16 @@ export default async function SpotDetailPage({ params }: PageProps) {
             </div>
           );
         })()}
+
+        {/* E-E-A-T: 情報の出典・編集体制（コアアップデート対策の信頼シグナル） */}
+        <SpotEeatFooter
+          spotName={spot.name}
+          prefecture={spot.region.prefecture}
+          managementOrg={spot.managementInfo?.organizationName}
+          hasPublicRules={Boolean(prefRule) || Boolean(spot.rules)}
+          catchReportCount={ugcCatchReports.length}
+          hasSatellite={Boolean(spot.structureTypes && spot.structureTypes.length > 0)}
+        />
 
         {/* 同じ魚が釣れる他のスポット (Phase A 内部リンク強化) */}
         {(() => {
