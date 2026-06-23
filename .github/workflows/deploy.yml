@@ -274,6 +274,32 @@ jobs:
           }
           echo "Cloudflare cache purged."
 
+      # デプロイ後ウォームアップ（コールド ISR 生成を完了させてキャッシュ投入）。
+      # 直前の purge_everything でエッジが空 → トップ等は次の1アクセスで同期再生成される。
+      # 既存ヘルスチェックは --max-time 30 のため、重いページ(過去トップ53s)が生成完了前に放棄され
+      # 温まらず、最初の実ユーザー/Googlebot が冷えたページを踏んでいた。ここで十分なタイムアウト(90s)で
+      # 代表ページを叩き生成を完了させ、Next/Redis + Cloudflare を温める。非致命（警告のみ・デプロイ継続）。
+      - name: デプロイ後ウォームアップ
+        if: success() && github.ref == 'refs/heads/master'
+        run: |
+          echo "Warming caches after purge..."
+          WARM_URLS=(
+            "https://tsurispot.com/"
+            "https://tsurispot.com/blog"
+            "https://tsurispot.com/catchable-now"
+            "https://tsurispot.com/fish"
+          )
+          # 1回目: コールド生成を完了させる（十分なタイムアウト）
+          for URL in "${WARM_URLS[@]}"; do
+            T=$(curl -s -o /dev/null -w "%{time_starttransfer}" --max-time 90 "$URL" || echo "timeout")
+            echo "warmed  $URL (TTFB=${T}s)"
+          done
+          # 2回目: キャッシュHITで高速化したことを確認（温まり検証）
+          for URL in "${WARM_URLS[@]}"; do
+            T=$(curl -s -o /dev/null -w "%{time_starttransfer}" --max-time 30 "$URL" || echo "still-cold")
+            echo "verify  $URL (TTFB=${T}s)"
+          done
+
       - name: デプロイ後ヘルスチェック
         if: success() && github.ref == 'refs/heads/master'
         run: |
