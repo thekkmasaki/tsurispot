@@ -247,13 +247,18 @@ jobs:
           echo "::error::Deployment timed out after 7.5 minutes"
           exit 1
 
-      # Cloudflare キャッシュ purge。
+      # Cloudflare キャッシュ purge（限定purge）。
       # 本番 DNS は Cloudflare に移行済みで CloudFront はバイパス（アイドル）。
-      # Cloudflare で HTML をエッジキャッシュするため、deploy 後に purge しないと
-      # 古い HTML が返り続け「シークレットでも治らない」事故になる。
-      # 静的アセットは hash 付き immutable URL のため purge_everything でも実害なし。
+      # 【2026-06-23 障害対策】以前は purge_everything で全HTML+全エッジを消去していたが、
+      # deploy 直後に Cloudflare も Redis ISR(buildID名前空間) も空になり、オリジンが約7,600ページを
+      # 一斉に同期冷生成 → 1 vCPU が CPU100% 飽和 → 125s タイムアウト → 502 の嵐（本番ダウン）に
+      # なっていた。対策として、サイト全体に影響する「ハブ/インデックスページ」だけを限定 purge する。
+      # 長尾の詳細ページ(spot/fish/prefecture/blog 詳細)はエッジに残し、stale-while-revalidate により
+      # アクセス毎に裏側で1回ずつ再検証 → 同期冷生成の殺到を回避（trade-off: 詳細ページの内容反映は
+      # 最大 s-maxage(1h)+次アクセスまで遅延。ハブと sitemap は即時 purge され新規ページ導線は維持）。
+      # 静的アセットは hash 付き immutable URL なので purge しない（残すことで stale HTML とも整合）。
       # CF_API_TOKEN / CF_ZONE_ID 未設定時は skip（段階導入のため非致命）。
-      - name: Cloudflare cache purge
+      - name: Cloudflare cache purge (限定purge)
         if: github.ref == 'refs/heads/master'
         env:
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
@@ -263,19 +268,20 @@ jobs:
             echo "::warning::CF_API_TOKEN / CF_ZONE_ID 未設定のため Cloudflare purge を skip しました。"
             exit 0
           fi
+          # サイト全体に影響するハブ/インデックスページのみ purge（長尾詳細は SWR に委ねる）
           resp=$(curl -sS -X POST \
             "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
             -H "Authorization: Bearer ${CF_API_TOKEN}" \
             -H "Content-Type: application/json" \
-            --data '{"purge_everything":true}')
+            --data '{"files":["https://tsurispot.com/","https://tsurispot.com/spots","https://tsurispot.com/fish","https://tsurispot.com/blog","https://tsurispot.com/catchable-now","https://tsurispot.com/prefecture","https://tsurispot.com/monthly","https://tsurispot.com/sitemap.xml"]}')
           echo "$resp"
           echo "$resp" | grep -q '"success":true' || {
             echo "::error::Cloudflare purge failed"; exit 1;
           }
-          echo "Cloudflare cache purged."
+          echo "Cloudflare cache purged (targeted hub pages)."
 
       # デプロイ後ウォームアップ（コールド ISR 生成を完了させてキャッシュ投入）。
-      # 直前の purge_everything でエッジが空 → トップ等は次の1アクセスで同期再生成される。
+      # 直前の限定purgeでハブページのエッジが空 → トップ等は次の1アクセスで同期再生成される。
       # 既存ヘルスチェックは --max-time 30 のため、重いページ(過去トップ53s)が生成完了前に放棄され
       # 温まらず、最初の実ユーザー/Googlebot が冷えたページを踏んでいた。ここで十分なタイムアウト(90s)で
       # 代表ページを叩き生成を完了させ、Next/Redis + Cloudflare を温める。非致命（警告のみ・デプロイ継続）。
