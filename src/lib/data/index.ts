@@ -300,19 +300,6 @@ export function getHighValuePrefMonthFishCombos(
 }
 
 /**
- * 高価値マトリクス組合せの O(1) index 判定用キー集合（`prefSlug/monthSlug/fishSlug`）。
- * matrix ページの generateMetadata はこの集合に含まれる組合せのみ robots.index=true にし、
- * それ以外の count>=2 配信ページは noindex,follow にする（薄ページの大量indexによる
- * サイト単位の品質希釈を回避＝Google May 2026 コアアップデート対策）。sitemap も高価値に揃える。
- * モジュール読み込み時に1度だけ計算（getHighValuePrefMonthFishCombos は決定的）。
- */
-export const highValuePrefMonthFishKeys: Set<string> = new Set(
-  getHighValuePrefMonthFishCombos().map(
-    (c) => `${c.prefSlug}/${c.monthSlug}/${c.fishSlug}`
-  )
-);
-
-/**
  * index 対象の「都道府県×月×魚種」組み合わせ（= 配信される全ページ）。
  *
  * 条件は matrix ページの buildValidCombos と完全一致させる必要がある:

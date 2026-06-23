@@ -23,7 +23,7 @@ import { toListSpot } from "@/lib/data/list-spot";
 import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { fishSpecies } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
-import { getHighValuePrefMonthFishCombos, highValuePrefMonthFishKeys } from "@/lib/data";
+import { getHighValuePrefMonthFishCombos } from "@/lib/data";
 import {
   MONTHS,
   getMonthBySlug,
@@ -140,16 +140,12 @@ export async function generateMetadata({
   const pageUrl = `https://tsurispot.com/prefecture/${slug}/${monthSlug}/${fishSlug}`;
 
   // ここに到達した時点で validCombos（count>=MIN_SPOTS=2 の実在組合せ）が保証されている
-  // （薄い組合せは上で県トップへ 301 済み）。ただし index は「高価値752件のみ」に絞り、それ以外の
-  // count>=2 配信ページは noindex,follow にする（クロール経路は残しつつ、薄ページの大量indexによる
-  // サイト単位の品質希釈を回避＝Google May 2026 コアアップデート対策。高価値集合を広げれば可逆）。
-  const isHighValue = highValuePrefMonthFishKeys.has(
-    `${pref.slug}/${monthSlug}/${fishSlug}`
-  );
+  // （薄い組合せは L141-147 で県トップへ 301 済み）。レンダリングする全ページを index 対象とし、
+  // ロングテール検索の取りこぼしを無くす。事前生成(SSG)の範囲とは独立（容量は generateStaticParams で制御）。
   return {
     title,
     description,
-    robots: { index: isHighValue, follow: true },
+    robots: { index: true, follow: true },
     openGraph: {
       title,
       description,

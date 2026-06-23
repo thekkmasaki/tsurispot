@@ -14,7 +14,7 @@ import { FISHING_METHODS, MONTHS, isMonthInRange } from "@/lib/data/fishing-meth
 import { REGION_GROUPS } from "@/lib/data/regions-group";
 import {
   getEligiblePrefFishCombos,
-  getHighValuePrefMonthFishCombos,
+  getEligiblePrefMonthFishCombos,
 } from "@/lib/data";
 import { redis } from "@/lib/redis";
 import { getUserById } from "@/lib/auth-redis";
@@ -411,11 +411,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.5,
     })),
 
-    // ===== 都道府県×月×魚種ページ（高価値752件のみ index/sitemap = 薄ページ剪定） =====
-    // matrix の generateMetadata は count>=2 を配信するが index は高価値752件のみ（他は noindex,follow）。
-    // sitemap も同じ getHighValuePrefMonthFishCombos() に揃え「index対象 = sitemap掲載」を一致させる。
-    // 薄ページの大量indexによるサイト単位の品質希釈を回避（Google May 2026 コアアップデート対策・可逆）。
-    ...getHighValuePrefMonthFishCombos().map(c => ({
+    // ===== 都道府県×月×魚種ページ（実在組合せ count>=2 を全件 index 化） =====
+    // matrix の generateMetadata は count>=2 のレンダリング全ページを index する。
+    // sitemap も同じ getEligiblePrefMonthFishCombos() を共有し「index対象 = sitemap掲載」を一致させる
+    // （事前生成(SSG)の範囲は別＝容量対策で高価値のみ。残りは ISR でオンデマンド生成される）。
+    ...getEligiblePrefMonthFishCombos().map(c => ({
       url: `${baseUrl}/prefecture/${c.prefSlug}/${c.monthSlug}/${c.fishSlug}`,
       lastModified: monthDate(
         MONTHS.find(m => m.slug === c.monthSlug)?.num ?? 1
