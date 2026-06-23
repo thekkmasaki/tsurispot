@@ -151,9 +151,10 @@ export async function generateMetadata({
 
   const titleSuffix = familyCount > 0 ? "子連れ・穴場スポットも紹介" : "穴場スポットも紹介";
 
-  // スポット0件のみ noindex。実在スポットを1件でも持つエリアは index 対象にして
-  // ロングテール（地名×釣り場）の検索流入を取りこぼさない。
-  const isLowContent = spots.length <= 0;
+  // スポット1件以下は noindex（薄ページ）。2件以上のエリアのみ index 対象にして、
+  // 1スポットだけの薄いエリアの大量indexによるサイト単位の品質希釈を回避する
+  // （Google May 2026 コアアップデート対策。閾値を 0 に戻せば可逆）。
+  const isLowContent = spots.length <= 1;
 
   return {
     title: `${region.areaName}（${region.prefecture}）の釣り場おすすめ${spots.length}選｜${titleSuffix}`,
