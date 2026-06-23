@@ -3,7 +3,7 @@ import { auth } from "@/lib/auth";
 import {
   getPushSubscriptions,
   removePushSubscription,
-} from "@/lib/auth-redis";
+} from "@/lib/user-store";
 import { sendPush } from "@/lib/push";
 
 export async function POST() {

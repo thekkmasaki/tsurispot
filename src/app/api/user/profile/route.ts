@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { updateProfile, deleteUser, getUserById, STYLE_TAGS } from "@/lib/auth-redis";
+import { updateProfile, deleteUser, getUserById, STYLE_TAGS } from "@/lib/user-store";
 import { checkNgWords } from "@/lib/moderation";
 
 interface ProfilePatch {

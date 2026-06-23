@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { getUserFavorites, setUserFavorites } from "@/lib/auth-redis";
+import { getUserFavorites, setUserFavorites } from "@/lib/user-store";
 
 // GET: 認証ユーザーのお気に入り一覧
 export async function GET() {

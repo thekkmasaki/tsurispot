@@ -7,7 +7,7 @@ import {
   getWishlist,
   getWishMemo,
   setWishMemo,
-} from "@/lib/auth-redis";
+} from "@/lib/user-store";
 import { getSpotBySlug } from "@/lib/data/spots";
 import { checkNgWords } from "@/lib/moderation";
 

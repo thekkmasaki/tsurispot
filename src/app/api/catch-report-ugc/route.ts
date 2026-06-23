@@ -3,7 +3,7 @@ import { dbGet, dbPut } from "@/lib/dynamodb";
 import { redis } from "@/lib/redis";
 import { checkNgWords } from "@/lib/moderation";
 import { auth } from "@/lib/auth";
-import { incrementReportCount } from "@/lib/auth-redis";
+import { incrementReportCount } from "@/lib/user-store";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;

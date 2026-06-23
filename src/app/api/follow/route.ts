@@ -7,7 +7,7 @@ import {
   getFollowingCount,
   getFollowersCount,
   getUserById,
-} from "@/lib/auth-redis";
+} from "@/lib/user-store";
 
 export async function POST(request: Request) {
   const session = await auth();

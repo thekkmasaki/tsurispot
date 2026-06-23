@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
-import { getUserFavorites } from "@/lib/auth-redis";
+import { getUserFavorites } from "@/lib/user-store";
 import { getSpotBySlug } from "@/lib/data/spots";
 import { getMoonAge, getTideInfo } from "@/lib/weather/calculations";
 

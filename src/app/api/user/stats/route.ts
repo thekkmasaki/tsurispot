@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/redis";
 import { auth } from "@/lib/auth";
-import { getUserById } from "@/lib/auth-redis";
+import { getUserById } from "@/lib/user-store";
 
 interface CatchReport {
   spotSlug?: string;

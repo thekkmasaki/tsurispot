@@ -6,7 +6,7 @@ import {
   isFollowing,
   getFollowingCount,
   getFollowersCount,
-} from "@/lib/auth-redis";
+} from "@/lib/user-store";
 import { ALL_TIERS } from "@/lib/titles";
 
 interface CatchReport {

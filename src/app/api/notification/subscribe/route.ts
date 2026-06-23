@@ -5,7 +5,7 @@ import {
   removePushSubscription,
   getPushSubscriptions,
   type StoredPushSubscription,
-} from "@/lib/auth-redis";
+} from "@/lib/user-store";
 import { getVapidPublicKey } from "@/lib/push";
 
 export async function GET() {

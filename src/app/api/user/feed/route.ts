@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { redis } from "@/lib/redis";
-import { getFollowingList, getUserById } from "@/lib/auth-redis";
+import { getFollowingList, getUserById } from "@/lib/user-store";
 
 interface CatchReport {
   id?: string;
