@@ -79,7 +79,9 @@ export function microCMSToBlogPost(item: MicroCMSBlogResponse): BlogPost {
     slug: item.slug || item.id, // slugがなければmicroCMSのidをフォールバック
     title: item.title,
     description: item.description || "",
-    content: item.content,
+    // 一覧フェッチ(fetchMicroCMSBlogPosts)は fields で content を除外するため undefined になり得る。
+    // 詳細フェッチ(fetchMicroCMSBlogBySlug)では全文が入る。BlogPost.content:string を満たすため既定 ""。
+    content: item.content ?? "",
     category,
     tags: item.tags ? item.tags.split(",").map((t) => t.trim()).filter(Boolean) : [],
     publishedAt: item.publishedAt.split("T")[0],
@@ -93,17 +95,29 @@ export async function fetchMicroCMSBlogPosts(): Promise<BlogPost[]> {
   const client = getClient();
   if (!client) return [];
 
+  // 一覧用途では本文(content)は不要。fields で除外し、100件×全文HTMLの巨大ペイロードを回避する
+  // （詳細ページは fetchMicroCMSBlogBySlug が別途 content を取得）。これがトップのコールド生成が
+  // 約53秒かかっていた主因。さらに microCMS が遅延/応答停止した場合に同期描画を長時間ブロック
+  // しないよう AbortController で 8 秒タイムアウト → catch が空配列を返し静的記事へ fail-soft する。
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
   try {
     const data = await client.get<MicroCMSListResponse>({
       endpoint: "blogs",
-      queries: { limit: 100, orders: "-publishedAt" },
+      queries: {
+        limit: 100,
+        orders: "-publishedAt",
+        fields: "id,slug,title,description,category,tags,publishedAt,updatedAt,eyecatch",
+      },
       // Next16のfetch既定no-storeを上書きしISRデータキャッシュに載せる（無いと動的化しトップが毎回SSRで遅い）
-      customRequestInit: { next: { revalidate: 3600 } },
+      customRequestInit: { next: { revalidate: 3600 }, signal: controller.signal },
     });
     return data.contents.map(microCMSToBlogPost);
   } catch (e) {
     console.warn("[microCMS] ブログ記事取得失敗:", e);
     return [];
+  } finally {
+    clearTimeout(timeout);
   }
 }
 
