@@ -434,3 +434,59 @@ export async function getPushSubscriptions(
   });
   return items.map((i) => i.data);
 }
+
+// ================= バックフィル（Redis→DynamoDB一括投入）=================
+
+export interface UserBundle {
+  user: TsuriSpotUser;
+  favorites?: string[];
+  following?: { id: string; ts: number }[];
+  followers?: { id: string; ts: number }[];
+  wishlist?: { slug: string; ts: number }[];
+  memos?: { slug: string; memo: string }[];
+  checkins?: Checkin[];
+  pushSubs?: StoredPushSubscription[];
+}
+
+/**
+ * 1ユーザー分のデータをDynamoDBへ一括投入（移行用・既存上書き）。
+ * キー生成を本モジュールに閉じ込めるため、バックフィルrouteはこれを呼ぶだけでよい。
+ * 会員数カウンタは件数確定後に setUserCount で別途設定する。
+ */
+export async function importUserBundle(b: UserBundle): Promise<void> {
+  const u = b.user;
+  await dbPut(userPk(u.id), PROFILE, u);
+  await dbPut(providerPk(u.provider, u.providerId), "MAP", u.id);
+  if (b.favorites && b.favorites.length) {
+    await dbPut(userPk(u.id), FAVORITES, b.favorites);
+  }
+  for (const f of b.following ?? []) {
+    await dbPut(followingPk(u.id), memberSk(f.id), { ts: f.ts, id: f.id });
+  }
+  for (const f of b.followers ?? []) {
+    await dbPut(followersPk(u.id), memberSk(f.id), { ts: f.ts, id: f.id });
+  }
+  if (b.following) {
+    await dbPut(userPk(u.id), FOLLOWING_COUNT, b.following.length);
+  }
+  if (b.followers) {
+    await dbPut(userPk(u.id), FOLLOWERS_COUNT, b.followers.length);
+  }
+  for (const w of b.wishlist ?? []) {
+    await dbPut(wishPk(u.id), wishItemSk(w.slug), { ts: w.ts, slug: w.slug });
+  }
+  for (const m of b.memos ?? []) {
+    if (m.memo) await dbPut(wishPk(u.id), wishMemoSk(m.slug), m.memo);
+  }
+  for (const c of b.checkins ?? []) {
+    await dbPut(checkinPk(u.id), checkinSk(c), c);
+  }
+  for (const s of b.pushSubs ?? []) {
+    await dbPut(pushPk(u.id), endpointSk(s.endpoint), s);
+  }
+}
+
+/** 会員数カウンタを明示設定（バックフィル件数確定後に使用） */
+export async function setUserCount(n: number): Promise<void> {
+  await dbPut(STATS_PK, USER_COUNT_SK, n);
+}
