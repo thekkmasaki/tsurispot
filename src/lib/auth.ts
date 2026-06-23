@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import type { NextAuthConfig } from "next-auth";
 import Cognito from "next-auth/providers/cognito";
-import { getUserByProvider, getUserById, createUser, updateAvatarUrl } from "@/lib/auth-redis";
+import { getUserByProvider, getUserById, createUser, updateAvatarUrl } from "@/lib/user-store";
 
 interface CognitoProfile {
   sub: string;

@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/redis";
 import { auth } from "@/lib/auth";
-import { getUserById } from "@/lib/auth-redis";
+import { getUserById } from "@/lib/user-store";
 
 // GET: 認証ユーザーの投稿した釣果一覧を取得
 export async function GET() {

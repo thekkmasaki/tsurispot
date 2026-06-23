@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { dbGet, dbPut } from "@/lib/dynamodb";
 import { checkNgWords } from "@/lib/moderation";
 import { auth } from "@/lib/auth";
-import { incrementContributionCount } from "@/lib/auth-redis";
+import { incrementContributionCount } from "@/lib/user-store";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import type { SpotContribution } from "@/lib/data/spot-contributions";
 

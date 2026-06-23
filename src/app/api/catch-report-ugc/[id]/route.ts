@@ -3,7 +3,7 @@ import { dbGet, dbPut } from "@/lib/dynamodb";
 import { redis } from "@/lib/redis";
 import { auth } from "@/lib/auth";
 import { checkNgWords } from "@/lib/moderation";
-import { decrementReportCount } from "@/lib/auth-redis";
+import { decrementReportCount } from "@/lib/user-store";
 
 interface CatchReport {
   id: string;

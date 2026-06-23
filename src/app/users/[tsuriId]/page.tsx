@@ -7,7 +7,7 @@ import {
   getUserById,
   getFollowingCount,
   getFollowersCount,
-} from "@/lib/auth-redis";
+} from "@/lib/user-store";
 import { ALL_TIERS, getTitle } from "@/lib/titles";
 import { ProfileClient } from "./profile-client";
 

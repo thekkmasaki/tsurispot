@@ -17,7 +17,7 @@ import {
   getEligiblePrefMonthFishCombos,
 } from "@/lib/data";
 import { redis } from "@/lib/redis";
-import { getUserById } from "@/lib/auth-redis";
+import { getUserById } from "@/lib/user-store";
 import { isSitemapEligible } from "@/lib/seo-quality";
 
 const baseUrl = "https://tsurispot.com";

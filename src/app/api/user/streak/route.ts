@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/redis";
 import { auth } from "@/lib/auth";
-import { getCheckins } from "@/lib/auth-redis";
+import { getCheckins } from "@/lib/user-store";
 import { calculateStreak, buildDailyCounts } from "@/lib/streak";
 
 interface CatchReportLite {
