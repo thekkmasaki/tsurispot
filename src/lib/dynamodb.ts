@@ -7,6 +7,7 @@ import {
   UpdateCommand,
   BatchGetCommand,
   ScanCommand,
+  QueryCommand,
 } from "@aws-sdk/lib-dynamodb";
 
 const TABLE = "tsurispot";
@@ -159,4 +160,122 @@ export async function dbScanCatchCounts(): Promise<Record<string, number>> {
     lastKey = res.LastEvaluatedKey as Record<string, unknown> | undefined;
   } while (lastKey);
   return counts;
+}
+
+export interface DbItem<T = unknown> {
+  pk: string;
+  sk: string;
+  data: T;
+}
+
+/**
+ * pk 配下を sk で Query 取得（順序付きコレクション = Redis の zset/list 相当）。
+ * 既定は sk 降順（新しい順）。skPrefix で begins_with 絞り込み、limit で件数制限。
+ * all=true で全ページ取得（カウント・全件列挙用、limit は無視）。
+ */
+export async function dbQuery<T = unknown>(
+  pk: string,
+  opts: {
+    skPrefix?: string;
+    forward?: boolean; // ScanIndexForward。既定 false = 降順（新しい順）
+    limit?: number;
+    all?: boolean;
+  } = {},
+): Promise<DbItem<T>[]> {
+  const { skPrefix, forward = false, limit, all = false } = opts;
+  const names: Record<string, string> = { "#pk": "pk" };
+  const values: Record<string, unknown> = { ":pk": pk };
+  let keyCond = "#pk = :pk";
+  if (skPrefix) {
+    names["#sk"] = "sk";
+    values[":skp"] = skPrefix;
+    keyCond += " AND begins_with(#sk, :skp)";
+  }
+  const out: DbItem<T>[] = [];
+  let lastKey: Record<string, unknown> | undefined = undefined;
+  do {
+    const res = await doc.send(
+      new QueryCommand({
+        TableName: TABLE,
+        KeyConditionExpression: keyCond,
+        ExpressionAttributeNames: names,
+        ExpressionAttributeValues: values,
+        ScanIndexForward: forward,
+        Limit: !all && limit ? limit : undefined,
+        ExclusiveStartKey: lastKey,
+      }),
+    );
+    for (const it of res.Items ?? []) {
+      out.push({ pk: it.pk as string, sk: it.sk as string, data: it.data as T });
+    }
+    if (!all && limit && out.length >= limit) return out.slice(0, limit);
+    lastKey = res.LastEvaluatedKey as Record<string, unknown> | undefined;
+  } while (lastKey);
+  return !all && limit ? out.slice(0, limit) : out;
+}
+
+/**
+ * pk が prefix で始まるアイテムを Scan（横断列挙。低頻度想定: sitemap のユーザー列挙等）。
+ * sk を指定するとその sk のものだけに絞る。
+ */
+export async function dbScanPrefix<T = unknown>(
+  pkPrefix: string,
+  sk?: string,
+): Promise<DbItem<T>[]> {
+  const names: Record<string, string> = { "#d": "data" };
+  const values: Record<string, unknown> = { ":pkp": pkPrefix };
+  let filter = "begins_with(pk, :pkp)";
+  if (sk) {
+    names["#sk"] = "sk";
+    values[":sk"] = sk;
+    filter = "#sk = :sk AND " + filter;
+  }
+  const out: DbItem<T>[] = [];
+  let lastKey: Record<string, unknown> | undefined = undefined;
+  do {
+    const res = await doc.send(
+      new ScanCommand({
+        TableName: TABLE,
+        FilterExpression: filter,
+        ExpressionAttributeNames: names,
+        ExpressionAttributeValues: values,
+        ProjectionExpression: "pk, sk, #d",
+        ExclusiveStartKey: lastKey,
+      }),
+    );
+    for (const it of res.Items ?? []) {
+      out.push({ pk: it.pk as string, sk: it.sk as string, data: it.data as T });
+    }
+    lastKey = res.LastEvaluatedKey as Record<string, unknown> | undefined;
+  } while (lastKey);
+  return out;
+}
+
+/**
+ * 条件付き Put（pk/sk が存在しない時だけ書く = Redis SETNX 相当）。
+ * 書けたら true、既存で書けなければ false。
+ */
+export async function dbConditionalPut(
+  pk: string,
+  sk: string,
+  data: unknown,
+  ttlSeconds?: number,
+): Promise<boolean> {
+  const item: Record<string, unknown> = { pk, sk, data };
+  if (ttlSeconds) item.ttl = ttlEpoch(ttlSeconds);
+  try {
+    await doc.send(
+      new PutCommand({
+        TableName: TABLE,
+        Item: item,
+        ConditionExpression: "attribute_not_exists(pk)",
+      }),
+    );
+    return true;
+  } catch (e) {
+    if ((e as { name?: string })?.name === "ConditionalCheckFailedException") {
+      return false;
+    }
+    throw e;
+  }
 }
