@@ -2,31 +2,39 @@
 // Next.js カスタム ISR / データキャッシュハンドラ（CommonJS / Next が runtime で require する）
 //
 // 目的: App Runner のローカルディスク ISR キャッシュ（2026-05-19 に ENOSPC で
-// 空 HTML を焼き付けた障害の原因）を、既存の Upstash Redis 共有キャッシュに置き換える。
-// これで「生成ページ数 = Docker イメージ容量」の結合を断ち、部分 SSG + オンデマンド ISR を
-// 安全化する（全件 SSG に戻さなくても空 HTML が出ない）。
+// 空 HTML を焼き付けた障害の原因）を、共有キャッシュ（DynamoDB 単一テーブル tsurispot）に
+// 置き換える。これで「生成ページ数 = Docker イメージ容量」の結合を断ち、部分 SSG +
+// オンデマンド ISR を安全化する（全件 SSG に戻さなくても空 HTML が出ない）。
+// 旧実装は Upstash Redis だったが、月間リクエスト上限に達するため AWS(DynamoDB) に移行。
 //
-// 設計上の不変条件:
+// 設計上の不変条件（旧実装から維持）:
 //  - 空 / 壊れた HTML は絶対にキャッシュしない（空 HTML 焼付きの直接対策）
-//  - Redis 失敗時は必ずミス扱いにフォールバックし、Next に再生成させる（安全側）
+//  - バックエンド失敗時は必ずミス扱いにフォールバックし、Next に再生成させる（安全側）
 //  - ビルド ID で名前空間を分け、デプロイ毎に新世代キャッシュ（旧構造 HTML 混入を防止）
+//  - L1 インメモリキャッシュで連続 read を吸収し、バックエンドアクセス数を抑える
+//
+// DynamoDB データモデル:
+//  本体  pk=ISR#{buildId}        sk=KEY#{cacheKey}  data=base64(gzip(JSON))  ttl=epoch
+//  タグ  pk=ISRTAG#{buildId}#{tag} sk=KEY#{cacheKey}  ttl=epoch
 
 const zlib = require("node:zlib");
 const fs = require("node:fs");
 const path = require("node:path");
 
-// Upstash REST の 1 リクエスト上限を超えないための保守的な上限（gzip 後 base64 バイト数）。
+const TABLE = "tsurispot";
+
+// DynamoDB item は最大 400KB。pk/sk/ttl の余白を見て gzip 後 base64 の上限を保守的に。
 // 超える巨大ページはキャッシュせず毎回オンデマンド生成（正しく動くが遅いだけ）。
-const MAX_CACHE_BYTES = Number(process.env.ISR_CACHE_MAX_BYTES || 900_000);
-// 未アクセス時に Redis から自然消滅させる TTL（秒）。SWR のため revalidate より十分長く取る。
+const MAX_CACHE_BYTES = Number(process.env.ISR_CACHE_MAX_BYTES || 360_000);
+// 未アクセス時に自然消滅させる TTL（秒）。SWR のため revalidate より十分長く取る。
 const DEFAULT_TTL_SECONDS = Number(
   process.env.ISR_CACHE_TTL_SECONDS || 60 * 60 * 24 * 7
 );
 
 // ── L1 インメモリキャッシュ（プロセス内・最小限）─────────────────────────────
-// 目的: 同一キーの連続 read（クローラの再訪・人気ページ）で毎回 Redis GET を叩かず、
-// Upstash のコマンド数を削減する（上限超過の再発防止）。cacheMaxMemorySize:0 で Next
-// 既定の LRU を切っているため、ここで小さな L1 を持つ。
+// 目的: 同一キーの連続 read（クローラの再訪・人気ページ）で毎回 DynamoDB GET を叩かず、
+// 読み取り回数を削減する。cacheMaxMemorySize:0 で Next 既定の LRU を切っているため、
+// ここで小さな L1 を持つ。
 // 安全性: TTL を revalidate より十分短く（既定30s）取り、set()/revalidateTag() で必ず
 // 無効化するので「二重キャッシュで古い HTML が滞留」する問題は起きない（L1 はこのハンドラ
 // が単一の権威として管理する）。巨大エントリは L1 に載せずメモリを保護する。
@@ -45,7 +53,7 @@ function l1Get(key) {
   return hit.entry;
 }
 function l1Set(key, entry, sizeBytes) {
-  // 巨大エントリはメモリ保護のため L1 に載せない（Redis 経由は従来どおり機能）
+  // 巨大エントリはメモリ保護のため L1 に載せない（バックエンド経由は従来どおり機能）
   if (typeof sizeBytes === "number" && sizeBytes > L1_MAX_ENTRY_BYTES) {
     _l1.delete(key);
     return;
@@ -67,25 +75,35 @@ function l1Clear() {
   _l1.clear();
 }
 
-let _redis = null; // null=未初期化 / false=無効 / Redis=有効
-function getRedis() {
-  if (_redis !== null) return _redis || null;
-  const url = (process.env.UPSTASH_REDIS_REST_URL || "").trim();
-  const token = (process.env.UPSTASH_REDIS_REST_TOKEN || "").trim();
-  if (url.startsWith("https://") && token.length > 10) {
-    try {
-      // 遅延require: 未設定時・ビルド時・テスト時に @upstash/redis を読み込まない。
-      // 依存が解決できない環境でも throw せず無効化（安全側フォールバック）。
-      const { Redis } = require("@upstash/redis");
-      // automaticDeserialization=false: base64 文字列をそのまま往復させる
-      _redis = new Redis({ url, token, automaticDeserialization: false });
-    } catch {
-      _redis = false;
-    }
-  } else {
-    _redis = false;
+let _doc = null; // null=未初期化 / false=無効 / DocumentClient=有効
+function getDoc() {
+  if (_doc !== null) return _doc || null;
+  try {
+    // 遅延require: ビルド時・テスト時に aws-sdk を読み込まない。
+    // 依存が解決できない環境でも throw せず無効化（安全側フォールバック）。
+    const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
+    const { DynamoDBDocumentClient } = require("@aws-sdk/lib-dynamodb");
+    const client = new DynamoDBClient({
+      region: process.env.AWS_REGION || "ap-northeast-1",
+    });
+    _doc = DynamoDBDocumentClient.from(client, {
+      marshallOptions: { removeUndefinedValues: true },
+    });
+  } catch {
+    _doc = false;
   }
-  return _redis || null;
+  return _doc || null;
+}
+
+// aws-sdk のコマンドを遅延 require（getDoc 同様、未解決でも安全側）
+function cmds() {
+  const {
+    GetCommand,
+    PutCommand,
+    DeleteCommand,
+    QueryCommand,
+  } = require("@aws-sdk/lib-dynamodb");
+  return { GetCommand, PutCommand, DeleteCommand, QueryCommand };
 }
 
 // Buffer / Uint8Array（RSC payload・body 等）を JSON で安全に往復させる
@@ -145,32 +163,47 @@ function readBuildId(options) {
   return process.env.NEXT_BUILD_ID || "nobuild";
 }
 
-module.exports = class IsrRedisCacheHandler {
+function ttlEpoch(seconds) {
+  return Math.floor(Date.now() / 1000) + seconds;
+}
+
+module.exports = class IsrDynamoCacheHandler {
   constructor(options) {
     this.options = options || {};
     const buildId = readBuildId(this.options);
-    this.keyPrefix = `isr:${buildId}:`;
-    this.tagPrefix = `isrtag:${buildId}:`;
+    this.pk = `ISR#${buildId}`; // 本体パーティション
+    this.tagPrefix = `ISRTAG#${buildId}#`; // タグ別パーティション接頭辞
   }
 
-  _k(cacheKey) {
-    return this.keyPrefix + cacheKey;
+  _lk(cacheKey) {
+    // L1 用のプロセス内ユニークキー
+    return `${this.pk}|${cacheKey}`;
   }
-  _tk(tag) {
-    return this.tagPrefix + tag;
+  _sk(cacheKey) {
+    return `KEY#${cacheKey}`;
+  }
+  _tagPk(tag) {
+    return `${this.tagPrefix}${tag}`;
   }
 
   async get(cacheKey) {
-    const k = this._k(cacheKey);
-    const cached = l1Get(k);
-    if (cached) return cached; // L1 ヒット → Redis を叩かない（コマンド削減）
-    const redis = getRedis();
-    if (!redis) return null;
+    const lk = this._lk(cacheKey);
+    const cached = l1Get(lk);
+    if (cached) return cached; // L1 ヒット → DynamoDB を叩かない
+    const doc = getDoc();
+    if (!doc) return null;
     try {
-      const stored = await redis.get(k);
+      const { GetCommand } = cmds();
+      const res = await doc.send(
+        new GetCommand({
+          TableName: TABLE,
+          Key: { pk: this.pk, sk: this._sk(cacheKey) },
+        })
+      );
+      const stored = res.Item && res.Item.data;
       if (!stored || typeof stored !== "string") return null;
       const entry = deserializeEntry(stored); // { value, lastModified, tags }
-      l1Set(k, entry, stored.length); // 次回の同一 read を L1 で吸収
+      l1Set(lk, entry, stored.length); // 次回の同一 read を L1 で吸収
       return entry;
     } catch {
       return null; // 失敗 → ミス扱い → Next が再生成（安全）
@@ -178,22 +211,28 @@ module.exports = class IsrRedisCacheHandler {
   }
 
   async set(cacheKey, data, ctx) {
-    const k = this._k(cacheKey);
-    const redis = getRedis();
-    if (!redis) {
-      l1Delete(k); // Redis 無しでも L1 に古いものを残さない
+    const lk = this._lk(cacheKey);
+    const doc = getDoc();
+    if (!doc) {
+      l1Delete(lk); // バックエンド無しでも L1 に古いものを残さない
       return;
     }
     try {
+      const { PutCommand, DeleteCommand } = cmds();
       // 削除指示
       if (data == null) {
-        await redis.del(k);
-        l1Delete(k);
+        await doc.send(
+          new DeleteCommand({
+            TableName: TABLE,
+            Key: { pk: this.pk, sk: this._sk(cacheKey) },
+          })
+        );
+        l1Delete(lk);
         return;
       }
       // 空 / 壊れたページは絶対に焼き付けない
       if (!isCacheableValue(data)) {
-        l1Delete(k);
+        l1Delete(lk);
         return;
       }
 
@@ -201,47 +240,77 @@ module.exports = class IsrRedisCacheHandler {
       const now = Date.now();
       const payload = serializeEntry({ value: data, lastModified: now, tags });
       if (payload.length > MAX_CACHE_BYTES) {
-        l1Delete(k);
-        return; // 大きすぎ → 非キャッシュ（毎回生成で正常動作）
+        l1Delete(lk);
+        return; // 大きすぎ（>DynamoDB item上限） → 非キャッシュ（毎回生成で正常動作）
       }
 
       const revalidate =
         ctx && typeof ctx.revalidate === "number" ? ctx.revalidate : 0;
       const ttl = Math.max(revalidate, DEFAULT_TTL_SECONDS);
-      await redis.set(k, payload, { ex: ttl });
-      // L1 も更新（Redis と同じ shape）。ISR 再生成直後の read が即 fresh を返す。
-      l1Set(k, { value: data, lastModified: now, tags }, payload.length);
+      const exp = ttlEpoch(ttl);
+      await doc.send(
+        new PutCommand({
+          TableName: TABLE,
+          Item: { pk: this.pk, sk: this._sk(cacheKey), data: payload, ttl: exp },
+        })
+      );
+      // L1 も更新（バックエンドと同じ shape）。ISR 再生成直後の read が即 fresh を返す。
+      l1Set(lk, { value: data, lastModified: now, tags }, payload.length);
 
+      // タグ → cacheKey の逆引きを別パーティションに記録（revalidateTag 用）
       if (Array.isArray(tags) && tags.length > 0) {
-        const pipeline = redis.pipeline();
         for (const tag of tags) {
-          pipeline.sadd(this._tk(tag), cacheKey);
-          pipeline.expire(this._tk(tag), ttl);
+          if (!tag) continue;
+          await doc.send(
+            new PutCommand({
+              TableName: TABLE,
+              Item: { pk: this._tagPk(tag), sk: this._sk(cacheKey), ttl: exp },
+            })
+          );
         }
-        await pipeline.exec();
       }
     } catch {
       // 書込失敗は致命でない（次回再生成）。壊れたエントリは残さない。
-      l1Delete(k);
+      l1Delete(lk);
     }
   }
 
   async revalidateTag(tags) {
     // タグ無効化時は L1 を全クリア（低頻度なのでコスト無視。古い HTML 滞留を防ぐ安全側）
     l1Clear();
-    const redis = getRedis();
-    if (!redis) return;
+    const doc = getDoc();
+    if (!doc) return;
+    const { QueryCommand, DeleteCommand } = cmds();
     const list = Array.isArray(tags) ? tags : [tags];
     try {
       for (const tag of list) {
         if (!tag) continue;
-        const members = await redis.smembers(this._tk(tag));
-        const pipeline = redis.pipeline();
-        if (Array.isArray(members)) {
-          for (const k of members) pipeline.del(this._k(k));
+        const tagPk = this._tagPk(tag);
+        // タグパーティションの全メンバー(sk=KEY#...)を取得
+        const members = [];
+        let lastKey = undefined;
+        do {
+          const res = await doc.send(
+            new QueryCommand({
+              TableName: TABLE,
+              KeyConditionExpression: "pk = :pk",
+              ExpressionAttributeValues: { ":pk": tagPk },
+              ProjectionExpression: "sk",
+              ExclusiveStartKey: lastKey,
+            })
+          );
+          for (const it of res.Items || []) members.push(it.sk);
+          lastKey = res.LastEvaluatedKey;
+        } while (lastKey);
+        // 本体エントリとタグ逆引きの両方を削除
+        for (const sk of members) {
+          await doc.send(
+            new DeleteCommand({ TableName: TABLE, Key: { pk: this.pk, sk } })
+          );
+          await doc.send(
+            new DeleteCommand({ TableName: TABLE, Key: { pk: tagPk, sk } })
+          );
         }
-        pipeline.del(this._tk(tag));
-        await pipeline.exec();
       }
     } catch {
       /* ベストエフォート */
