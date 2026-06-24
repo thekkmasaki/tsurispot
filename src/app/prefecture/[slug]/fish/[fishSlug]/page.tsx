@@ -67,6 +67,11 @@ export async function generateMetadata({
     if (cf) metaMethodMap.set(cf.method, (metaMethodMap.get(cf.method) || 0) + 1);
   }
   const metaTopMethods = Array.from(metaMethodMap.entries()).sort((a, b) => b[1] - a[1]).slice(0, 3).map(([m]) => m);
+  // 初心者向け（難易度やさしい）スポット数を実データから集計し、description の訴求に使う（CTR向上・捏造なし）
+  const metaEasyCount = spots.filter((s) => {
+    const cf = s.catchableFish.find((c) => c.fish.slug === fishSlug);
+    return cf?.catchDifficulty === "easy";
+  }).length;
 
   // 最盛期月・スポット件数を前方配置してCTRを上げる（noindexの薄ページ<3件は汎用titleにフォールバック）
   const metaPeakLabel = metaPeakMonths.slice(0, 2).join("・");
@@ -78,7 +83,8 @@ export async function generateMetadata({
     `${pref.name}で${fish.name}が釣れるおすすめ釣りスポット${spots.length}件を厳選。` +
       `${metaPeakMonths.length > 0 ? `最盛期は${metaPeakMonths.join("・")}、` : metaSeasonMonths.length > 0 ? `シーズンは${metaSeasonMonths.join("・")}、` : ""}` +
       `${metaTopMethods.length > 0 ? `${metaTopMethods.join("・")}など釣り方とポイント、` : ""}` +
-      `アクセス・初心者向けの穴場まで完全ガイド。`,
+      `${metaEasyCount > 0 ? `初心者でも狙いやすい${metaEasyCount}スポットを含め、` : ""}` +
+      `アクセス・時間帯・タックルまで実釣に役立つ情報を網羅。`,
   );
 
   return {
