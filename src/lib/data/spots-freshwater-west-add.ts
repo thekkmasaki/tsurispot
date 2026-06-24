@@ -154,7 +154,7 @@ export const freshwaterSpotsWestAdd: FishingSpot[] = [
   },
   {
     id: "fw-150", name: "旭川", slug: "asahikawa-river-okayama",
-    description: "岡山県を流れる一級河川。岡山後楽園の横を流れ、上流の湯原温泉周辺は渓流釣りの名所。中流域はアユ、下流域はシーバスも狙える。湯原ダム上流は大物イワナが潜む。",
+    description: "岡山県を北から南へ貫く一級河川で、岡山後楽園の脇を流れる。上流の湯原温泉周辺はヤマメ・イワナを狙う渓流釣りの名所で、3〜9月にルアーやエサ釣りで楽しめる。6〜10月は瀬を中心にアユの友釣りが盛んで、天然遡上の魚が掛かる。釣りには遊漁券（大人1日1,500円）が必要。米子道湯原ICから約5分、湯原温泉周辺に駐車場・トイレが整い、釣りの後は露天風呂で疲れを癒せるのも魅力の中級者向けフィールド。",
     latitude: 35.0528, longitude: 133.7681, address: "〒717-0402 岡山県真庭市湯原温泉3",
     accessInfo: "米子道湯原ICから約5分。JR中国勝山駅からバスで約20分。",
     region: lr("r792"), spotType: "river", difficulty: "intermediate",
