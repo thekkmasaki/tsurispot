@@ -404,7 +404,7 @@ export const seaFishKaiyuu: FishSpecies[] = [
     scientificName: "Katsuwonus pelamis",
     slug: "katsuo",
     description:
-      "夏〜秋に太平洋側を北上する回遊魚。「初ガツオ」「戻りガツオ」として日本人に親しまれる食卓の主役。船釣りのカツオ釣りはルアーや活き餌の一本釣りで、豪快な引きが魅力。ショアからはナブラ撃ちが興奮必至。",
+      "カツオが釣れる場所は黒潮に乗って北上する太平洋側で、初夏（初ガツオ）と秋（戻りガツオ）が旬。沖の船釣りではルアーのオフショアキャスティングや活き餌の一本釣りで狙い、ショアからはナブラ撃ちが興奮必至。豪快な引きと、たたきや刺身で味わう食卓の主役。",
     category: "sea",
     family: "サバ科",
     difficulty: "advanced",
