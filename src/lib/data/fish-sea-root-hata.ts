@@ -218,7 +218,7 @@ export const seaFishRootHata: FishSpecies[] = [
     scientificName: "Conger myriaster",
     slug: "anago",
     description:
-      "夜釣りの人気ターゲット。堤防やサーフから投げ釣りで狙えます。天ぷらや白焼きは絶品で、ウナギに負けない上品な味わいが魅力。",
+      "アナゴが釣れる時期は初夏〜秋（旬は6〜8月）。夜行性のため夜釣りが定番で、堤防やサーフからのぶっこみ釣り・投げ釣りで初心者でも狙える人気ターゲット。仕掛けはシンプルで、イソメ類のエサを底に這わせて待つのが基本。天ぷらや白焼きは絶品で、ウナギに負けない上品な味わいが魅力。",
     category: "sea",
     family: "アナゴ科",
     difficulty: "beginner",
@@ -1735,7 +1735,7 @@ export const seaFishRootHata: FishSpecies[] = [
     scientificName: "Lethrinus nebulosus",
     slug: "taman",
     description:
-      "沖縄で最も人気の高い釣りターゲット。正式名はハマフエフキで、フエフキダイの仲間。夜行性で、夜釣りでの打ち込み釣りが定番。最大80cm以上に成長し、パワフルな引きと美味な白身で人気。",
+      "タマンが釣れる時期は春〜秋（旬は5〜9月）で、特に夏場の夜釣りが本番。沖縄で最も人気の高い釣りターゲットで、正式名はハマフエフキ。夜行性のため夜の打ち込み釣りが定番で、堤防や磯から70cm級の大型が狙える。パワフルな引きと、刺身やマース煮で味わう白身の美味しさで人気。",
     category: "sea",
     family: "フエフキダイ科",
     difficulty: "intermediate",
