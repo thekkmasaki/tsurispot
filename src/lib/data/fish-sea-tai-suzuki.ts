@@ -634,7 +634,7 @@ export const seaFishTaiSuzuki: FishSpecies[] = [
     scientificName: "Parapristipoma trilineatum",
     slug: "isaki",
     description:
-      "夏を代表する美味な磯魚。梅雨〜夏にかけて産卵のため浅場に寄り、堤防や磯からのカゴ釣り・ウキ釣りで狙える。船釣りでも人気が高く、コマセ釣りで数釣りが楽しめる。白身で脂の乗りが良く、特に旬の夏イサキは刺身・塩焼きともに絶品。群れで行動するため回遊に当たれば連続ヒットも期待できる。",
+      "イサキは堤防や磯からのカゴ釣り・ウキ釣りで狙える夏の人気魚。梅雨〜夏に産卵のため浅場へ寄り、コマセで群れを足止めすれば数釣りも可能。船釣りでもコマセ釣りで人気が高い。白身で脂の乗りが良く、特に旬の夏イサキは刺身・塩焼きともに絶品。群れで行動するため回遊に当たれば連続ヒットも期待できる。",
     category: "sea",
     family: "イサキ科",
     difficulty: "intermediate",
@@ -992,7 +992,7 @@ export const seaFishTaiSuzuki: FishSpecies[] = [
     scientificName: "Rhabdosargus sarba",
     slug: "hedai",
     description:
-      "クロダイに似た体型だが、体色がやや明るく金色がかっている。チヌ狙いの外道として釣れることが多いが、味はクロダイより上品で美味。温暖な海域を好む。",
+      "ヘダイの旬は初夏〜秋（6〜9月頃）で、夏に脂がのり上品な白身が刺身・塩焼きで美味。クロダイ（チヌ）に似た体型だが、体色がやや明るく金色がかるのが見分け方。チヌ狙いのウキフカセ釣りで外道として掛かることが多く、温暖な海域を好む。",
     category: "sea",
     family: "タイ科",
     difficulty: "intermediate",
