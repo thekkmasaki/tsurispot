@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { dbGet, dbPut } from "@/lib/dynamodb";
 import { redis } from "@/lib/redis";
 import { checkNgWords } from "@/lib/moderation";
@@ -126,6 +127,8 @@ export async function POST(request: Request) {
       const existing = await dbGet<CatchReport[]>(`SPOT#${spotSlug}`, "UGC_REPORTS") ?? [];
       const updated = [reportData, ...existing].slice(0, 200); // 最大200件保持
       await dbPut(`SPOT#${spotSlug}`, "UGC_REPORTS", updated, TTL_SECONDS);
+      // ISR ページを即時無効化し、新しい釣果を即反映（spot revalidate=86400 の遅延を回避）
+      revalidatePath(`/spots/${spotSlug}`);
     } catch (err) {
       console.error("[釣果投稿] DynamoDB保存エラー:", err);
       // DynamoDB障害時もGASに送信するため続行

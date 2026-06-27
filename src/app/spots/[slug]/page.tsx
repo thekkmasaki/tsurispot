@@ -195,12 +195,17 @@ export async function generateMetadata({
   };
 }
 
-// ISR 化（force-dynamic は使わない）。revalidate で UGC（写真・釣果・投稿）の鮮度を確保しつつ、
-// 事前生成外のページは cache-handler.js（Upstash Redis）にオンデマンド生成結果を永続化する。
+// ISR 化（force-dynamic は使わない）。事前生成外のページは cache-handler.js（DynamoDB）に
+// オンデマンド生成結果を永続化する。
 // #145 は #144 の全件SSG(4,072p)が App Runner 起動ヘルスチェックを落とした緊急対応で force-dynamic に
-// 退避したが、それでは Redis 永続キャッシュが活きない。Phase 1 で ISR を Redis に外部化（空HTMLは
+// 退避したが、それでは永続キャッシュが活きない。ISR を共有キャッシュに外部化（空HTMLは
 // 絶対に焼かず・失敗時はミス扱い再生成）したため「部分SSG + 残りISR」を安全運用できる（本来設計に復帰）。
-export const revalidate = 3600;
+//
+// revalidate=86400(24h): UGC(釣果・投稿)は投稿APIの revalidatePath(`/spots/${slug}`) で即時反映するため、
+// 定期再生成は長くてよい。これで重い spot 詳細の再生成頻度を 1/24 にし App Runner の CPU を削減する。
+// 天気・潮汐は "use client" コンポーネントでブラウザ取得（ISR非依存・常時最新）、月別カレンダーは月粒度のため
+// 24h staleでも実害なし。
+export const revalidate = 86400;
 export const maxDuration = 60;
 
 // 事前生成する高優先スポット数の上限（部分SSG）。残りは dynamicParams=true（既定）で初回アクセス時に
