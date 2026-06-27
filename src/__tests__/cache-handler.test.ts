@@ -48,6 +48,48 @@ describe("cache-handler シリアライズ往復", () => {
     expect(Buffer.isBuffer(restored.body)).toBe(true);
     expect(Array.from(restored.body)).toEqual([0, 1, 2, 250, 255]);
   });
+
+  // 退行防止: Next.js 16 の App Page キャッシュ値は segmentData を Map<string, Buffer> で持つ。
+  // Map を JSON 往復で保持できないと、キャッシュ HIT 時に Next が segmentData.get() を呼んだ瞬間
+  // `TypeError: segmentData.get is not a function` で落ち、全 ISR ページが毎リクエスト
+  // フル動的レンダにフォールバックして CPU が 100% に張り付く（2026-06 本番障害の真因）。
+  it("segmentData（Map<string, Buffer>）を Map のまま復元し .get() が動く", () => {
+    const entry = {
+      value: {
+        kind: "APP_PAGE",
+        html: Buffer.from("<html>ok</html>"),
+        rscData: Buffer.from("RSC"),
+        segmentData: new Map([
+          ["/__PAGE__", Buffer.from("seg-buf")],
+          ["/layout", Buffer.from("seg2")],
+        ]),
+        status: 200,
+      },
+      lastModified: 123,
+      tags: ["spot"],
+    };
+    const restored = __deserializeEntry(__serializeEntry(entry)) as {
+      value: { segmentData: Map<string, Buffer>; html: Buffer };
+    };
+    const sd = restored.value.segmentData;
+    expect(sd).toBeInstanceOf(Map);
+    // 本番障害のクラッシュ条件そのもの: HIT 時に .get() が呼べること
+    const seg = sd.get("/__PAGE__");
+    expect(Buffer.isBuffer(seg)).toBe(true);
+    expect((seg as Buffer).toString()).toBe("seg-buf");
+    expect((sd.get("/layout") as Buffer).toString()).toBe("seg2");
+    // 入れ子の Buffer も保持される
+    expect(Buffer.isBuffer(restored.value.html)).toBe(true);
+    expect(restored.value.html.toString()).toBe("<html>ok</html>");
+  });
+
+  it("空の Map も Map として復元する", () => {
+    const restored = __deserializeEntry(
+      __serializeEntry({ value: { segmentData: new Map() } })
+    ) as { value: { segmentData: Map<string, Buffer> } };
+    expect(restored.value.segmentData).toBeInstanceOf(Map);
+    expect(restored.value.segmentData.size).toBe(0);
+  });
 });
 
 describe("cache-handler isCacheableValue（空/壊れHTMLを絶対にキャッシュしない）", () => {
