@@ -106,7 +106,7 @@ function cmds() {
   return { GetCommand, PutCommand, DeleteCommand, QueryCommand };
 }
 
-// Buffer / Uint8Array（RSC payload・body 等）を JSON で安全に往復させる
+// Buffer / Uint8Array / Map（RSC payload・body・segmentData 等）を JSON で安全に往復させる
 function serializeEntry(entry) {
   const json = JSON.stringify(entry, (_key, value) => {
     // 重要: JSON.stringify は replacer より先に値の toJSON() を呼ぶ。Buffer は
@@ -123,6 +123,12 @@ function serializeEntry(entry) {
     // 素の Uint8Array は toJSON を持たないため raw のまま届く。
     if (value instanceof Uint8Array)
       return { __isrBuf: Buffer.from(value).toString("base64") };
+    // Next.js 16 の App Page キャッシュ値は segmentData を Map<string, Buffer> で持つ。
+    // Map は toJSON を持たず JSON.stringify で {} に化けるため、エントリ配列で保持する。
+    // 中の Buffer 値は再帰的に上の __isrBuf 分岐で base64 化される。
+    if (value instanceof Map) {
+      return { __isrMap: Array.from(value.entries()) };
+    }
     return value;
   });
   return zlib.gzipSync(Buffer.from(json, "utf8")).toString("base64");
@@ -132,6 +138,9 @@ function deserializeEntry(b64) {
   return JSON.parse(json, (_key, value) => {
     if (value && typeof value === "object" && typeof value.__isrBuf === "string")
       return Buffer.from(value.__isrBuf, "base64");
+    // reviver は内側から処理されるため、__isrMap のエントリ内 Buffer は復元済みで届く。
+    if (value && typeof value === "object" && Array.isArray(value.__isrMap))
+      return new Map(value.__isrMap);
     return value;
   });
 }
