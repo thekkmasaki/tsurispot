@@ -31,15 +31,20 @@ const DEFAULT_TTL_SECONDS = Number(
   process.env.ISR_CACHE_TTL_SECONDS || 60 * 60 * 24 * 7
 );
 
-// ── L1 インメモリキャッシュ（プロセス内・最小限）─────────────────────────────
-// 目的: 同一キーの連続 read（クローラの再訪・人気ページ）で毎回 DynamoDB GET を叩かず、
-// 読み取り回数を削減する。cacheMaxMemorySize:0 で Next 既定の LRU を切っているため、
-// ここで小さな L1 を持つ。
-// 安全性: TTL を revalidate より十分短く（既定30s）取り、set()/revalidateTag() で必ず
-// 無効化するので「二重キャッシュで古い HTML が滞留」する問題は起きない（L1 はこのハンドラ
-// が単一の権威として管理する）。巨大エントリは L1 に載せずメモリを保護する。
-const L1_TTL_MS = Number(process.env.ISR_L1_TTL_MS || 30_000);
-const L1_MAX_ENTRIES = Number(process.env.ISR_L1_MAX_ENTRIES || 128);
+// ── L1 インメモリキャッシュ（プロセス内）────────────────────────────────────
+// 目的: 同一キーの連続 read（クローラの再訪・人気ページ）で毎回 DynamoDB GET ＋
+// gunzip + JSON.parse + reviver（Buffer/Map 復元）を払わず、デシリアライズ済みエントリを
+// プロセス内に常駐させる。cacheMaxMemorySize:0 で Next 既定の LRU を切っているため、
+// この L1 が唯一のインメモリ層。
+// チューニング (2026-06): 既定 128件/30s では人気ページもすぐ追い出され、ほぼ毎リクエストで
+// 上記デシリアライズ（1エントリ ~144KB→展開で重い）を払い、App Runner のCPU床が健全期の
+// 4-5倍に上昇していた。インスタンスのメモリ使用率は ~22%（4GBの大半が遊休）だったため、
+// L1 を 512件/10分 に拡大しホット集合を常駐させて配信コストを削減する。
+// メモリ概算: 512件 × 展開後 ~0.8-1MB ≈ 0.4-0.5GB（256KB超のエントリは L1 非載で保護）。
+// 安全性: set()/revalidateTag() で必ず無効化するので「二重キャッシュで古い HTML が滞留」は
+// 起きない（L1 はこのハンドラが単一の権威として管理）。TTL は revalidate(86400s) より十分短い。
+const L1_TTL_MS = Number(process.env.ISR_L1_TTL_MS || 600_000);
+const L1_MAX_ENTRIES = Number(process.env.ISR_L1_MAX_ENTRIES || 512);
 const L1_MAX_ENTRY_BYTES = Number(process.env.ISR_L1_MAX_ENTRY_BYTES || 256_000);
 const _l1 = new Map(); // key -> { entry, expiresAt }
 
