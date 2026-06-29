@@ -169,13 +169,17 @@ const nextConfig: NextConfig = {
     {
       source: "/spots/:slug",
       headers: [
-        { key: "Cache-Control", value: "public, s-maxage=3600, stale-while-revalidate=86400" },
+        // エッジ(Cloudflare)を24hキャッシュしオリジン来訪を激減（コスト/負荷削減）。
+        // UGC(釣果・投稿)は投稿APIの Cloudflare URL purge で即時反映するため長く取れる。
+        { key: "Cache-Control", value: "public, s-maxage=86400, stale-while-revalidate=86400" },
       ],
     },
     {
       source: "/fish/:slug",
       headers: [
-        { key: "Cache-Control", value: "public, s-maxage=3600, stale-while-revalidate=86400" },
+        // 魚種詳細はUGC無し。エッジ24hキャッシュでオリジン来訪を削減。内容更新はデプロイ時の
+        // 再生成＋次アクセスのSWRで反映（最大24h遅延・SEOのクロール周期内で許容）。
+        { key: "Cache-Control", value: "public, s-maxage=86400, stale-while-revalidate=86400" },
       ],
     },
     {
