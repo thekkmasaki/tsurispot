@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
+import { purgeCloudflareUrls } from "@/lib/cloudflare";
 import { dbGet, dbPut } from "@/lib/dynamodb";
 import { redis } from "@/lib/redis";
 import { checkNgWords } from "@/lib/moderation";
@@ -127,8 +128,10 @@ export async function POST(request: Request) {
       const existing = await dbGet<CatchReport[]>(`SPOT#${spotSlug}`, "UGC_REPORTS") ?? [];
       const updated = [reportData, ...existing].slice(0, 200); // 最大200件保持
       await dbPut(`SPOT#${spotSlug}`, "UGC_REPORTS", updated, TTL_SECONDS);
-      // ISR ページを即時無効化し、新しい釣果を即反映（spot revalidate=86400 の遅延を回避）
+      // オリジンISR＋Cloudflareエッジ(s-maxage=24h)の両方を該当スポットだけ無効化し、新しい釣果を即反映。
+      // CF purge は特定URLのみ（全体purge禁止）・CF env未設定時は no-op。
       revalidatePath(`/spots/${spotSlug}`);
+      await purgeCloudflareUrls([`/spots/${spotSlug}`]);
     } catch (err) {
       console.error("[釣果投稿] DynamoDB保存エラー:", err);
       // DynamoDB障害時もGASに送信するため続行

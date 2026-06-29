@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
+import { purgeCloudflareUrls } from "@/lib/cloudflare";
 import { dbGet, dbPut } from "@/lib/dynamodb";
 import { checkNgWords } from "@/lib/moderation";
 import { auth } from "@/lib/auth";
@@ -100,8 +101,9 @@ export async function POST(request: Request) {
       }
       const updated = [contribution, ...existing].slice(0, MAX_PER_SPOT);
       await dbPut(`SPOT#${spotSlug}`, "SPOT_CONTRIB", updated, TTL_SECONDS);
-      // ISR ページを即時無効化し、新しい投稿を即反映（spot revalidate=86400 の遅延を回避）
+      // オリジンISR＋Cloudflareエッジ(s-maxage=24h)の両方を該当スポットだけ無効化し、新しい投稿を即反映。
       revalidatePath(`/spots/${spotSlug}`);
+      await purgeCloudflareUrls([`/spots/${spotSlug}`]);
     } catch (err) {
       console.error("[spot-contribution] DynamoDB保存エラー:", err);
       return NextResponse.json(
