@@ -38,13 +38,15 @@ const DEFAULT_TTL_SECONDS = Number(
 // この L1 が唯一のインメモリ層。
 // チューニング (2026-06): 既定 128件/30s では人気ページもすぐ追い出され、ほぼ毎リクエストで
 // 上記デシリアライズ（1エントリ ~144KB→展開で重い）を払い、App Runner のCPU床が健全期の
-// 4-5倍に上昇していた。インスタンスのメモリ使用率は ~22%（4GBの大半が遊休）だったため、
-// L1 を 512件/10分 に拡大しホット集合を常駐させて配信コストを削減する。
-// メモリ概算: 512件 × 展開後 ~0.8-1MB ≈ 0.4-0.5GB（256KB超のエントリは L1 非載で保護）。
+// 4-5倍に上昇していた。インスタンスのメモリ使用率は遊休が大半（4GB中 ~22%）。
+// 実測: L1 を 128→512件/10分 にした結果、深夜CPU床 ~45%→~26%（半減）・レイテンシ床 ~1.5s→~1s、
+// メモリは 22%→~31% で安全だった（512件で実質 +~0.3GB＝展開後 ~0.5-0.7MB/件）。
+// まだメモリに大幅な余裕があるため 1536件 に増やし、ホット集合をより広く常駐させてピーク時の
+// 配信デシリアライズをさらに削減する。概算メモリ +~1GB（合計 ~48%）。256KB超は L1 非載で保護。
 // 安全性: set()/revalidateTag() で必ず無効化するので「二重キャッシュで古い HTML が滞留」は
 // 起きない（L1 はこのハンドラが単一の権威として管理）。TTL は revalidate(86400s) より十分短い。
 const L1_TTL_MS = Number(process.env.ISR_L1_TTL_MS || 600_000);
-const L1_MAX_ENTRIES = Number(process.env.ISR_L1_MAX_ENTRIES || 512);
+const L1_MAX_ENTRIES = Number(process.env.ISR_L1_MAX_ENTRIES || 1536);
 const L1_MAX_ENTRY_BYTES = Number(process.env.ISR_L1_MAX_ENTRY_BYTES || 256_000);
 const _l1 = new Map(); // key -> { entry, expiresAt }
 
