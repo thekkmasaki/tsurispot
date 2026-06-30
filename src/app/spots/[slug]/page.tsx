@@ -127,7 +127,14 @@ const CrowdPredictionCard = nextDynamic(() => import("@/components/spots/crowd-p
 const NearbyGpsSearch = nextDynamic(() => import("@/components/spots/nearby-gps-search").then((m) => m.NearbyGpsSearch), {
   loading: () => <div className="h-32 w-full animate-pulse rounded-xl bg-muted" />,
 });
-import { LeafletMapSection } from "@/components/map/leaflet-map-section";
+// below-the-fold かつ解析結果ありのスポットのみ表示する地図ラッパー。同期importだと表示しない
+// 多数のスポットページにもラッパーコードがバンドルされるため dynamic 化（クライアントチャンクから分離）。
+// ※ Server Component では ssr:false 不可のため付けない（"use client" なので SSR は問題なく、
+//   Leaflet本体は本コンポーネント内で既に遅延 import 済み）。
+const LeafletMapSection = nextDynamic(
+  () => import("@/components/map/leaflet-map-section").then((m) => m.LeafletMapSection),
+  { loading: () => <div className="h-96 w-full animate-pulse rounded-xl bg-muted" /> },
+);
 
 type PageProps = {
   params: Promise<{ slug: string }>;
