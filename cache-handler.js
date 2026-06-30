@@ -25,7 +25,9 @@ const TABLE = "tsurispot";
 
 // DynamoDB item は最大 400KB。pk/sk/ttl の余白を見て gzip 後 base64 の上限を保守的に。
 // 超える巨大ページはキャッシュせず毎回オンデマンド生成（正しく動くが遅いだけ）。
-const MAX_CACHE_BYTES = Number(process.env.ISR_CACHE_MAX_BYTES || 360_000);
+// 2026-06: トップ(/)のシリアライズ後が ~360KB 近辺で上限を超え set スキップ→毎回フル再生成
+// (TTFB 7-9s) になっていたため、400KB item 上限に対し pk/sk/ttl 分の余白を残しつつ 380KB へ引上げ。
+const MAX_CACHE_BYTES = Number(process.env.ISR_CACHE_MAX_BYTES || 380_000);
 // 未アクセス時に自然消滅させる TTL（秒）。SWR のため revalidate より十分長く取る。
 const DEFAULT_TTL_SECONDS = Number(
   process.env.ISR_CACHE_TTL_SECONDS || 60 * 60 * 24 * 7

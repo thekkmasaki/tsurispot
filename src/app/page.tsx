@@ -641,7 +641,9 @@ export default async function Home() {
         spots={fishingSpots
           .slice()
           .sort((a, b) => b.rating * b.reviewCount - a.rating * a.reviewCount)
-          .slice(0, 100)
+          // 近い順10件表示の候補。上位30人気スポットで主要エリアを網羅しつつ SSR ペイロードを削減
+          // （100→30件で ~40-60KB 軽量化。トップHTML肥大→TTFB/FCP悪化の対策）。
+          .slice(0, 30)
           .map((s) => ({
             id: s.id,
             slug: s.slug,
@@ -664,7 +666,8 @@ export default async function Home() {
       <SectionErrorBoundary>
         <HomeSeasonalFish
           currentMonth={new Date().getMonth() + 1}
-          fish={getCatchableNow(new Date().getMonth() + 1).map((f) => ({
+          // 初期表示＋展開分を確保しつつ、当月の全魚種(30-50)の埋め込みを抑制（SSR軽量化）。
+          fish={getCatchableNow(new Date().getMonth() + 1).slice(0, 20).map((f) => ({
             id: f.id,
             name: f.name,
             slug: f.slug,

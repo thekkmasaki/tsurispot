@@ -153,6 +153,16 @@ const nextConfig: NextConfig = {
     },
     // SSGページのCloudFrontキャッシュ最適化（App Runnerへのリクエスト削減）
     {
+      // トップ(/) - Next 既定の s-maxage=3600(1h) では毎時 Cloudflare がオリジンへ
+      // ブロッキング再検証し、重いトップ(HTML 540KB)を毎回 7-9s 再生成→定期的に激遅化していた
+      // (実測 cf:REVALIDATED 15.9s)。force-static(revalidate=6h)に合わせ s-maxage=6h へ延長し、
+      // 遅い再検証の頻度を 1/6 に削減。動的な「最近の釣果」フィードはクライアント取得のため鮮度に影響なし。
+      source: "/",
+      headers: [
+        { key: "Cache-Control", value: "public, s-maxage=21600, stale-while-revalidate=86400" },
+      ],
+    },
+    {
       // /spots（リスト一覧）専用 - SSG 化でデフォルト挙動 OK だが念のため明示
       source: "/spots",
       headers: [
