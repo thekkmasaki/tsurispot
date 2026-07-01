@@ -9,9 +9,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { LoginPromoBanner } from "@/components/home/login-promo-banner";
-import { PushSubscribe } from "@/components/notifications/push-subscribe";
-import { RecentlyViewedSpots } from "@/components/spots/recently-viewed";
-import { RecentCatchReports } from "@/components/home/recent-catch-reports";
 import { JoinCTA } from "@/components/home/join-cta";
 // CommunityStats は数字が小さいうち (釣り人 26 人等) は逆効果なので一時 hide。
 // 数字が育ったら以下 1 行 + 下記 render を復活。 component 自体は残してある。
@@ -34,8 +31,6 @@ import {
 } from "lucide-react";
 import nextDynamic from "next/dynamic";
 import { HomeSearchBar } from "@/components/home-search-bar";
-import { HomeSeasonalFish } from "@/components/home-seasonal-fish";
-import { HomeTop10Client } from "@/components/home-top10-client";
 import { SectionErrorBoundary } from "@/components/ui/section-error-boundary";
 import { ContentDivider } from "@/components/ui/content-divider";
 
@@ -74,6 +69,24 @@ const NativeAdBreak = nextDynamic(() => import("@/components/ads/ad-unit").then(
   loading: () => null,
 });
 const InArticleAd = nextDynamic(() => import("@/components/ads/ad-unit").then((m) => m.InArticleAd), {
+  loading: () => null,
+});
+// below-the-fold の "use client" コンポーネント。eager import だと初期JSに乗るため nextDynamic で分割
+// （SSRは維持＝内容/SEO不変・ハイドレーションJSのみ別チャンク遅延）→ 初期JS/TBT/メインスレッド削減。
+// SSR済み内容が初期HTMLに入るため loading は null（余計なスケルトンで CLS を出さない）。
+const HomeTop10Client = nextDynamic(() => import("@/components/home-top10-client").then((m) => m.HomeTop10Client), {
+  loading: () => null,
+});
+const HomeSeasonalFish = nextDynamic(() => import("@/components/home-seasonal-fish").then((m) => m.HomeSeasonalFish), {
+  loading: () => null,
+});
+const RecentlyViewedSpots = nextDynamic(() => import("@/components/spots/recently-viewed").then((m) => m.RecentlyViewedSpots), {
+  loading: () => null,
+});
+const RecentCatchReports = nextDynamic(() => import("@/components/home/recent-catch-reports").then((m) => m.RecentCatchReports), {
+  loading: () => null,
+});
+const PushSubscribe = nextDynamic(() => import("@/components/notifications/push-subscribe").then((m) => m.PushSubscribe), {
   loading: () => null,
 });
 
