@@ -9,9 +9,12 @@ export function GoogleAnalytics() {
 
   return (
     <>
+      {/* gtag.js 本体は lazyOnload（load 後アイドル）で読み込み、初期のメインスレッド占有を回避。
+          下の ga4-init は afterInteractive のまま先に window.dataLayer と stub gtag() を用意するので、
+          読み込み前に発火したイベント（PV/web_vitals 等）は dataLayer にキューされ、ロード時に flush される（欠損なし）。 */}
       <Script
         src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-        strategy="afterInteractive"
+        strategy="lazyOnload"
       />
       <Script id="ga4-init" strategy="afterInteractive">
         {`
