@@ -16,7 +16,6 @@ interface SeasonalFish {
   description: string;
   imageUrl: string;
   peakMonths: number[];
-  seasonMonths: number[];
   isPoisonous: boolean;
   poisonType?: string;
   dangerLevel?: "low" | "medium" | "high";
