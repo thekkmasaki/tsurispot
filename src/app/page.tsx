@@ -689,7 +689,6 @@ export default async function Home() {
             description: f.description,
             imageUrl: f.imageUrl,
             peakMonths: f.peakMonths,
-            seasonMonths: f.seasonMonths,
             isPoisonous: f.isPoisonous ?? false,
             poisonType: f.poisonType,
             dangerLevel: f.dangerLevel,
