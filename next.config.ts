@@ -56,6 +56,13 @@ const spotRedirectEntries = Array.from(allRedirects.entries()).map(([oldSlug, ne
 const nextConfig: NextConfig = {
   // Docker/App Runner用: 最小限のスタンドアロン出力を生成
   output: "standalone",
+  // パフォーマンス: barrel import のパッケージをプリミティブ単位でツリーシェイクし初期JSバンドルを削減
+  // （トップの重さ対策）。radix-ui は統合メタパッケージ v1.x で `from "radix-ui"` の barrel import を
+  // 5箇所で使用しており、Next のデフォルト最適化リストに未包含のため明示指定。recharts は mypage/stats 用。
+  // lucide-react は Next 既定で最適化済みのため列挙不要。効果は CI の ANALYZE=true で First Load JS を計測して確認する。
+  experimental: {
+    optimizePackageImports: ["radix-ui", "recharts"],
+  },
   // ISR/データキャッシュを Upstash Redis に外部化（cache-handler.js）。
   // 目的: 「生成ページ数 = Docker イメージ容量」の結合を断ち、ローカルディスク ISR の
   // ENOSPC（2026-05-19 の空 HTML 焼付き障害）を再発させずに部分 SSG へ戻すため。
