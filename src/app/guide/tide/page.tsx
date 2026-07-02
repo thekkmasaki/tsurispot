@@ -5,13 +5,13 @@ import { Card, CardContent } from "@/components/ui/card";
 import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
-  title: "潮汐の読み方ガイド - 大潮・小潮・潮見表の見方を解説",
+  title: "潮汐表（潮見表）の読み方 - 大潮・小潮の違いと釣れるタイミング",
   description:
-    "釣りに重要な潮汐の読み方を初心者向けに解説。大潮・中潮・小潮・長潮・若潮の違い、潮見表の読み方、釣れる潮のタイミング、朝マズメ・夕マズメの重要性、潮止まりの対策まで。",
+    "潮汐表（潮見表）の読み方を初心者向けに解説。満潮・干潮の時刻の見方、大潮・中潮・小潮・長潮・若潮の違い、釣れる潮のタイミング、朝マズメ・夕マズメの重要性、潮止まりの対策まで、釣行前に知りたい潮の知識をまとめて紹介。",
   openGraph: {
-    title: "潮汐の読み方ガイド - 大潮・小潮・潮見表の見方を解説",
+    title: "潮汐表（潮見表）の読み方 - 大潮・小潮の違いと釣れるタイミング",
     description:
-      "大潮・小潮の違いから潮見表の読み方、釣れるタイミングまで解説。",
+      "潮汐表（潮見表）の読み方から大潮・小潮の違い、釣れるタイミングまで解説。",
     type: "article",
     url: "https://tsurispot.com/guide/tide",
     siteName: "ツリスポ",
@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 const guideSpeakableJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: "潮汐の読み方ガイド - 大潮・小潮・潮見表の見方を解説",
+  name: "潮汐表（潮見表）の読み方 - 大潮・小潮の違いと釣れるタイミング",
   url: "https://tsurispot.com/guide/tide",
   speakable: {
     "@type": "SpeakableSpecification",
@@ -373,7 +373,7 @@ export default function TideGuidePage() {
         {/* ヘッダー */}
         <div className="mb-8 text-center sm:mb-10">
           <h1 className="text-2xl font-bold tracking-tight sm:text-4xl">
-            潮汐の読み方ガイド
+            潮汐表（潮見表）の読み方ガイド
           </h1>
           <p className="mt-2 text-sm text-muted-foreground sm:mt-3 sm:text-base">
             潮の動きを理解すれば、釣果が格段にアップします。
