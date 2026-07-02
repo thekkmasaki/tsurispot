@@ -362,6 +362,15 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
           {pref.name}で{month.name}（{month.season}）に釣れる魚と
           おすすめ釣りスポットを紹介します。
+          {catchableFishList.length > 0 &&
+            `${month.name}の${pref.name}では${
+              peakFishList.length > 0
+                ? `${peakFishList
+                    .slice(0, 3)
+                    .map((f) => f.name)
+                    .join("・")}が旬を迎え、`
+                : ""
+            }全${catchableFishList.length}種の魚を${spotsWithMatchCount.length}件のスポットで狙えます。`}
           {getSeasonOverview(pref.regionGroup, month.num)}
         </p>
         <div className="mt-4">
