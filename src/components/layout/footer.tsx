@@ -190,23 +190,39 @@ export function Footer() {
           <div className="flex flex-wrap gap-2 text-xs text-blue-100/80">
             <Link href="/prefecture/hokkaido" className="hover:text-white">北海道の釣り場</Link>
             <span>·</span>
+            <Link href="/prefecture/iwate" className="hover:text-white">岩手の釣り場</Link>
+            <span>·</span>
+            <Link href="/prefecture/miyagi" className="hover:text-white">宮城の釣り場</Link>
+            <span>·</span>
+            <Link href="/prefecture/fukushima" className="hover:text-white">福島の釣り場</Link>
+            <span>·</span>
             <Link href="/prefecture/tokyo" className="hover:text-white">東京の釣り場</Link>
             <span>·</span>
             <Link href="/prefecture/kanagawa" className="hover:text-white">神奈川の釣り場</Link>
             <span>·</span>
             <Link href="/prefecture/chiba" className="hover:text-white">千葉の釣り場</Link>
             <span>·</span>
+            <Link href="/prefecture/ishikawa" className="hover:text-white">石川の釣り場</Link>
+            <span>·</span>
             <Link href="/prefecture/shizuoka" className="hover:text-white">静岡の釣り場</Link>
             <span>·</span>
             <Link href="/prefecture/aichi" className="hover:text-white">愛知の釣り場</Link>
+            <span>·</span>
+            <Link href="/prefecture/mie" className="hover:text-white">三重の釣り場</Link>
             <span>·</span>
             <Link href="/prefecture/osaka" className="hover:text-white">大阪の釣り場</Link>
             <span>·</span>
             <Link href="/prefecture/hyogo" className="hover:text-white">兵庫の釣り場</Link>
             <span>·</span>
+            <Link href="/prefecture/okayama" className="hover:text-white">岡山の釣り場</Link>
+            <span>·</span>
             <Link href="/prefecture/hiroshima" className="hover:text-white">広島の釣り場</Link>
             <span>·</span>
+            <Link href="/prefecture/kagawa" className="hover:text-white">香川の釣り場</Link>
+            <span>·</span>
             <Link href="/prefecture/fukuoka" className="hover:text-white">福岡の釣り場</Link>
+            <span>·</span>
+            <Link href="/prefecture/nagasaki" className="hover:text-white">長崎の釣り場</Link>
             <span>·</span>
             <Link href="/prefecture/okinawa" className="hover:text-white">沖縄の釣り場</Link>
             <span>·</span>
