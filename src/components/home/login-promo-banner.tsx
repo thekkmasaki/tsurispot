@@ -22,7 +22,10 @@ const FEATURES = [
 
 export function LoginPromoBanner() {
   const { status } = useSession();
-  if (status === "authenticated" || status === "loading") return null;
+  // CLS対策: "loading" 中も描画する。以前は loading で null → セッション解決後(未ログイン確定)に
+  // 約400pxのセクションが途中挿入され、大多数の未ログイン訪問者(とPSI)で毎回レイアウトシフトしていた。
+  // SSR/初期HTMLから表示しておけば未ログイン時のシフトはゼロ。ログイン済みのみ解決時に消える(少数派)。
+  if (status === "authenticated") return null;
 
   return (
     <section className="bg-gradient-to-b from-white via-blue-50/40 to-white py-10 sm:py-14">

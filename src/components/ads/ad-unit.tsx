@@ -13,6 +13,10 @@ declare global {
 
 const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_ID;
 
+// AdSense push を許可する広告コンテナの最小幅(px)。
+// 全スロット中の最小明示幅は SideRail の 160px のため、120px で正当な枠を誤ブロックしない。
+const MIN_AD_WIDTH = 120;
+
 /** body[data-no-ads="true"] が付与されていれば広告を抑制（有料店舗ページ等） */
 function useAdsSuppressed(): boolean {
   const [suppressed, setSuppressed] = useState(false);
@@ -66,7 +70,11 @@ export function AdUnit({
 
     const tryPush = () => {
       if (pushed.current) return true;
-      if (el.offsetWidth > 0) {
+      // 幅ガード: レイアウト確定前の一時的な狭幅(実測79px等)で push すると
+      // AdSense が "No slot size for availableWidth" エラーを出し配信もされない。
+      // 最小の明示スロットは SideRail の 160px なので 120px 未満では push せず
+      // ResizeObserver で幅が確保されるまで待つ。
+      if (el.offsetWidth >= MIN_AD_WIDTH) {
         try {
           (window.adsbygoogle = window.adsbygoogle || []).push({});
           pushed.current = true;
