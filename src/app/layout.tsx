@@ -25,20 +25,27 @@ import "./globals.css";
 
 const SPOT_COUNT = SPOT_COUNT_FORMATTED;
 
+// 日本語フォントは unicode-range で約120スライス/ウェイトに分割されるが、preload: true だと
+// 全スライス（実測240ファイル・4.18MB）に <link rel="preload"> が付き最優先DLされ、
+// モバイル4GでFCP/LCPを20秒以上悪化させていた（PSI 43点の主因）。
+// preload: false で @font-face + unicode-range による「使う文字のスライスのみ」の遅延取得に変更。
+// display: swap + adjustFontFallback(デフォルト有効) でフォールバック表示・CLS抑制済み。
 const notoSansJP = Noto_Sans_JP({
   variable: "--font-noto-sans-jp",
   subsets: ["latin"],
   weight: ["400", "500", "700"],
   display: "swap",
-  preload: true,
+  preload: false,
 });
 
+// weight は 700 のみ: 全使用箇所(header/footer/mobile-nav/hero h1等)が font-bold。
+// 900 は未使用、500 はタブ1箇所のみだったため削減（@font-face 定義 = ブロッキングCSS が約1/3に）。
 const zenMaruGothic = Zen_Maru_Gothic({
   variable: "--font-zen-maru",
   subsets: ["latin"],
-  weight: ["500", "700", "900"],
+  weight: ["700"],
   display: "swap",
-  preload: true,
+  preload: false,
 });
 
 
