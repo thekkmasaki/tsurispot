@@ -120,13 +120,12 @@ const MONTH_NAMES = [
  */
 function getSpotTypeBreakdown(prefectureName: string) {
   const spots = getSpotsForPrefecture(prefectureName);
-  const typeMap = new Map<string, number>();
+  const typeMap = new Map<keyof typeof SPOT_TYPE_LABELS, number>();
   for (const spot of spots) {
-    const label = SPOT_TYPE_LABELS[spot.spotType];
-    typeMap.set(label, (typeMap.get(label) || 0) + 1);
+    typeMap.set(spot.spotType, (typeMap.get(spot.spotType) || 0) + 1);
   }
   return Array.from(typeMap.entries())
-    .map(([type, count]) => ({ type, count }))
+    .map(([key, count]) => ({ key, type: SPOT_TYPE_LABELS[key], count }))
     .sort((a, b) => b.count - a.count);
 }
 
@@ -1433,6 +1432,24 @@ export default async function PrefecturePage({ params }: PageProps) {
                         </div>
                       );
                     })}
+                  </div>
+                  <div className="mt-4 border-t pt-3">
+                    <p className="mb-2 text-xs font-medium text-muted-foreground">タイプ別の釣り場一覧を見る</p>
+                    <div className="flex flex-wrap gap-2">
+                      {spotTypeBreakdown.map(({ key, type, count }) => (
+                        <Link
+                          key={key}
+                          href={`/spot-type/${key}/${pref.slug}`}
+                          className="rounded-full border bg-muted/50 px-3 py-1 text-xs transition-colors hover:bg-muted hover:text-primary"
+                        >
+                          {key === "breakwater"
+                            ? `${pref.name}の堤防・防波堤の釣り場${count}件`
+                            : key === "pond"
+                              ? `${pref.name}の管理釣り場${count}件`
+                              : `${pref.name}の${type}の釣り場${count}件`}
+                        </Link>
+                      ))}
+                    </div>
                   </div>
                 </CardContent>
               </Card>
