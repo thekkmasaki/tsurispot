@@ -221,8 +221,10 @@ export function DisplayAd({ className = "" }: { className?: string }) {
 // ---- セクション間ネイティブ広告（波デザインでサイトに馴染む） ----
 export function NativeAdBreak({ className = "" }: { className?: string }) {
   if (!ADSENSE_ID) return null;
+  // w-full: flex コンテナ直下に置かれると mx-auto の auto マージンが stretch を打ち消し
+  // fit-content 幅に収縮して広告が配信されなくなるため明示する
   return (
-    <div className={`mx-auto max-w-4xl px-4 py-10 ${className}`}>
+    <div className={`mx-auto w-full max-w-4xl px-4 py-10 ${className}`}>
       <div className="flex items-center justify-center gap-3 mb-4">
         <div className="h-px flex-1 bg-gradient-to-r from-transparent via-ocean-mid/20 to-transparent" />
         <Waves className="size-4 text-ocean-mid/30" />

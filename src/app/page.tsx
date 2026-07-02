@@ -37,7 +37,9 @@ import { ContentDivider } from "@/components/ui/content-divider";
 /** タグの魚名→画像パス */
 const FISH_TAG_IMG: Record<string, string> = {
   "アジ": "aji", "サバ": "saba", "カサゴ": "kasago", "ガシラ": "kasago",
-  "メバル": "mebaru", "イワシ": "iwashi", "シーバス": "suzuki",
+  // シーバス: suzuki.jpg は実ファイル未配置(404)のため、同属でシーバスと総称される
+  // ヒラスズキの実写を使用（suzuki.jpg を photo-ac から調達後に差し替え）
+  "メバル": "mebaru", "イワシ": "iwashi", "シーバス": "hirasuzuki",
   "タチウオ": "tachiuo", "マダイ": "madai", "キス": "kisu",
   "カレイ": "karei", "イシガレイ": "karei", "アオリイカ": "aoriika",
   "カワハギ": "kawahagi", "サヨリ": "sayori", "ヒラメ": "hirame",
@@ -46,7 +48,7 @@ const FISH_TAG_IMG: Record<string, string> = {
   "グレ": "mejina", "ホッケ": "hokke", "フグ": "fugu", "ハゼ": "haze",
   "コブダイ": "kobudai", "ヒラマサ": "hiramasa", "アカハタ": "akahata",
 };
-const FALLBACK_FISH = ["aji", "madai", "mebaru", "kasago", "suzuki", "buri"];
+const FALLBACK_FISH = ["aji", "madai", "mebaru", "kasago", "kurodai", "buri"];
 function getFishImage(tags: string[], id: string): string {
   for (const t of tags) { const s = FISH_TAG_IMG[t]; if (s) return `/images/fish/${s}.jpg`; }
   let h = 0; for (let i = 0; i < id.length; i++) h = (h * 31 + id.charCodeAt(i)) | 0;
@@ -635,8 +637,10 @@ export default async function Home() {
         </section>
       )}
 
-      {/* 広告: 釣果週報後 */}
-      <div className="mx-auto max-w-5xl px-4">
+      {/* 広告: 釣果週報後
+          注: ルートが flex flex-col のため、mx-auto だけだと auto マージンが stretch を打ち消し
+          fit-content 幅(実測145px)に収縮 → 広告が availableWidth 不足で配信されない。w-full 必須。 */}
+      <div className="mx-auto w-full max-w-5xl px-4">
         <ContentDivider variant="line" />
         <InArticleAd className="my-4" />
       </div>
@@ -672,7 +676,7 @@ export default async function Home() {
       />
 
       {/* 広告（below fold） */}
-      <div className="mx-auto max-w-5xl px-4"><ContentDivider variant="line" /></div>
+      <div className="mx-auto w-full max-w-5xl px-4"><ContentDivider variant="line" /></div>
       <NativeAdBreak />
 
       {/* 今釣れる魚セクション */}
@@ -697,7 +701,7 @@ export default async function Home() {
       </SectionErrorBoundary>
 
       {/* 広告: 今釣れる魚セクション後 */}
-      <div className="mx-auto max-w-5xl px-4"><InArticleAd className="my-4" /></div>
+      <div className="mx-auto w-full max-w-5xl px-4"><InArticleAd className="my-4" /></div>
 
       {/* 今月おすすめの釣り場 */}
       {(() => {
