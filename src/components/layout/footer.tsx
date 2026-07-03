@@ -15,7 +15,7 @@ export function Footer() {
       <div className="mx-auto hidden max-w-7xl px-4 py-8 md:block">
         <div className="grid grid-cols-5 gap-8">
           <div>
-            <Link href="/" className="flex items-center gap-2">
+            <Link href="/" prefetch={false} className="flex items-center gap-2">
               <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-white/10">
                 <Fish className="h-4 w-4 text-sea-foam" aria-hidden="true" />
               </div>
@@ -81,54 +81,54 @@ export function Footer() {
           <div>
             <h3 className="mb-3 text-sm font-semibold text-sea-foam">釣りスポットを探す</h3>
             <ul className="space-y-2 text-sm text-blue-100/90">
-              <li><Link href="/spots" className="hover:text-white">全国の釣りスポット一覧</Link></li>
-              <li><Link href="/fishing-spots/near-me" className="hover:text-white">近くの釣り場を探す</Link></li>
-              <li><Link href="/ranking" className="hover:text-white">釣りスポット人気ランキング</Link></li>
-              <li><Link href="/fishing-spots/breakwater-beginner" className="hover:text-white">堤防釣り初心者おすすめ</Link></li>
-              <li><Link href="/fishing-spots/best-saltwater" className="hover:text-white">海釣りおすすめスポット</Link></li>
-              <li><Link href="/fishing-spots/river-beginner" className="hover:text-white">川釣り初心者おすすめ</Link></li>
-              <li><Link href="/area" className="hover:text-white">エリアで探す</Link></li>
-              <li><Link href="/map" className="hover:text-white">地図で探す</Link></li>
-              <li><Link href="/catchable-now" className="hover:text-white">今釣れる魚</Link></li>
+              <li><Link href="/spots" prefetch={false} className="hover:text-white">全国の釣りスポット一覧</Link></li>
+              <li><Link href="/fishing-spots/near-me" prefetch={false} className="hover:text-white">近くの釣り場を探す</Link></li>
+              <li><Link href="/ranking" prefetch={false} className="hover:text-white">釣りスポット人気ランキング</Link></li>
+              <li><Link href="/fishing-spots/breakwater-beginner" prefetch={false} className="hover:text-white">堤防釣り初心者おすすめ</Link></li>
+              <li><Link href="/fishing-spots/best-saltwater" prefetch={false} className="hover:text-white">海釣りおすすめスポット</Link></li>
+              <li><Link href="/fishing-spots/river-beginner" prefetch={false} className="hover:text-white">川釣り初心者おすすめ</Link></li>
+              <li><Link href="/area" prefetch={false} className="hover:text-white">エリアで探す</Link></li>
+              <li><Link href="/map" prefetch={false} className="hover:text-white">地図で探す</Link></li>
+              <li><Link href="/catchable-now" prefetch={false} className="hover:text-white">今釣れる魚</Link></li>
             </ul>
           </div>
           <div>
             <h3 className="mb-3 text-sm font-semibold text-sea-foam">釣りを学ぶ</h3>
             <ul className="space-y-2 text-sm text-blue-100/90">
-              <li><Link href="/blog" className="hover:text-white">エリア釣果レポート</Link></li>
-              <li><Link href="/quiz" className="hover:text-white">釣りクイズ</Link></li>
-              <li><Link href="/bouzu-checker" className="hover:text-white">ボウズ確率チェッカー</Link></li>
-              <li><Link href="/guide" className="hover:text-white">釣りの始め方</Link></li>
-              <li><Link href="/fish" className="hover:text-white">魚種図鑑</Link></li>
-              <li><Link href="/glossary" className="hover:text-white">釣り用語集</Link></li>
-              <li><Link href="/methods" className="hover:text-white">釣り方から探す</Link></li>
-              <li><Link href="/monthly" className="hover:text-white">月別釣りガイド</Link></li>
-              <li><Link href="/seasonal" className="hover:text-white">季節別ガイド</Link></li>
-              <li><Link href="/fishing-calendar" className="hover:text-white">釣りカレンダー</Link></li>
-              <li><Link href="/beginner-checklist" className="hover:text-white">持ち物チェックリスト</Link></li>
-              <li><Link href="/fishing-rules" className="hover:text-white">ルールとマナー</Link></li>
-              <li><Link href="/instructor-exam" className="hover:text-white">釣りインストラクター試験対策</Link></li>
-              <li><Link href="/gear" className="hover:text-white">編集長厳選の釣り道具</Link></li>
+              <li><Link href="/blog" prefetch={false} className="hover:text-white">エリア釣果レポート</Link></li>
+              <li><Link href="/quiz" prefetch={false} className="hover:text-white">釣りクイズ</Link></li>
+              <li><Link href="/bouzu-checker" prefetch={false} className="hover:text-white">ボウズ確率チェッカー</Link></li>
+              <li><Link href="/guide" prefetch={false} className="hover:text-white">釣りの始め方</Link></li>
+              <li><Link href="/fish" prefetch={false} className="hover:text-white">魚種図鑑</Link></li>
+              <li><Link href="/glossary" prefetch={false} className="hover:text-white">釣り用語集</Link></li>
+              <li><Link href="/methods" prefetch={false} className="hover:text-white">釣り方から探す</Link></li>
+              <li><Link href="/monthly" prefetch={false} className="hover:text-white">月別釣りガイド</Link></li>
+              <li><Link href="/seasonal" prefetch={false} className="hover:text-white">季節別ガイド</Link></li>
+              <li><Link href="/fishing-calendar" prefetch={false} className="hover:text-white">釣りカレンダー</Link></li>
+              <li><Link href="/beginner-checklist" prefetch={false} className="hover:text-white">持ち物チェックリスト</Link></li>
+              <li><Link href="/fishing-rules" prefetch={false} className="hover:text-white">ルールとマナー</Link></li>
+              <li><Link href="/instructor-exam" prefetch={false} className="hover:text-white">釣りインストラクター試験対策</Link></li>
+              <li><Link href="/gear" prefetch={false} className="hover:text-white">編集長厳選の釣り道具</Link></li>
             </ul>
           </div>
           <div>
             <h3 className="mb-3 text-sm font-semibold text-sea-foam">サポート</h3>
             <ul className="space-y-2 text-sm text-blue-100/90">
-              <li><Link href="/safety" className="hover:text-white">安全ガイド</Link></li>
-              <li><Link href="/faq" className="hover:text-white">よくある質問</Link></li>
-              <li><Link href="/contact" className="hover:text-white">お問い合わせ</Link></li>
-              <li><Link href="/partner" className="hover:text-white font-medium text-sea-foam">釣具店・遊漁船の方へ</Link></li>
+              <li><Link href="/safety" prefetch={false} className="hover:text-white">安全ガイド</Link></li>
+              <li><Link href="/faq" prefetch={false} className="hover:text-white">よくある質問</Link></li>
+              <li><Link href="/contact" prefetch={false} className="hover:text-white">お問い合わせ</Link></li>
+              <li><Link href="/partner" prefetch={false} className="hover:text-white font-medium text-sea-foam">釣具店・遊漁船の方へ</Link></li>
             </ul>
           </div>
           <div>
             <h3 className="mb-3 text-sm font-semibold text-sea-foam">サイト情報</h3>
             <ul className="space-y-2 text-sm text-blue-100/90">
-              <li><Link href="/about" className="hover:text-white">ツリスポについて</Link></li>
-              <li><Link href="/technology" className="hover:text-white">AI解析技術（特許出願中）</Link></li>
-              <li><Link href="/partner" className="hover:text-white">事業者様向け（掲載案内）</Link></li>
-              <li><Link href="/privacy" className="hover:text-white">プライバシーポリシー</Link></li>
-              <li><Link href="/terms" className="hover:text-white">利用規約</Link></li>
-              <li><Link href="/legal" className="hover:text-white">特定商取引法に基づく表記</Link></li>
+              <li><Link href="/about" prefetch={false} className="hover:text-white">ツリスポについて</Link></li>
+              <li><Link href="/technology" prefetch={false} className="hover:text-white">AI解析技術（特許出願中）</Link></li>
+              <li><Link href="/partner" prefetch={false} className="hover:text-white">事業者様向け（掲載案内）</Link></li>
+              <li><Link href="/privacy" prefetch={false} className="hover:text-white">プライバシーポリシー</Link></li>
+              <li><Link href="/terms" prefetch={false} className="hover:text-white">利用規約</Link></li>
+              <li><Link href="/legal" prefetch={false} className="hover:text-white">特定商取引法に基づく表記</Link></li>
             </ul>
           </div>
         </div>
@@ -136,27 +136,27 @@ export function Footer() {
         <div className="mt-6 border-t border-white/10 pt-6">
           <h3 className="mb-3 text-sm font-semibold text-sea-foam">人気の釣りターゲット</h3>
           <div className="flex flex-wrap gap-2 text-xs text-blue-100/80">
-            <Link href="/fish/aji" className="hover:text-white">アジの釣り方</Link>
+            <Link href="/fish/aji" prefetch={false} className="hover:text-white">アジの釣り方</Link>
             <span>·</span>
-            <Link href="/fish/saba" className="hover:text-white">サバの釣り方</Link>
+            <Link href="/fish/saba" prefetch={false} className="hover:text-white">サバの釣り方</Link>
             <span>·</span>
-            <Link href="/fish/kasago" className="hover:text-white">カサゴの釣り方</Link>
+            <Link href="/fish/kasago" prefetch={false} className="hover:text-white">カサゴの釣り方</Link>
             <span>·</span>
-            <Link href="/fish/iwashi" className="hover:text-white">イワシの釣り方</Link>
+            <Link href="/fish/iwashi" prefetch={false} className="hover:text-white">イワシの釣り方</Link>
             <span>·</span>
-            <Link href="/fish/kisu" className="hover:text-white">キスの釣り方</Link>
+            <Link href="/fish/kisu" prefetch={false} className="hover:text-white">キスの釣り方</Link>
             <span>·</span>
-            <Link href="/fish/suzuki" className="hover:text-white">スズキの釣り方</Link>
+            <Link href="/fish/suzuki" prefetch={false} className="hover:text-white">スズキの釣り方</Link>
             <span>·</span>
-            <Link href="/fish/kurodai" className="hover:text-white">クロダイの釣り方</Link>
+            <Link href="/fish/kurodai" prefetch={false} className="hover:text-white">クロダイの釣り方</Link>
             <span>·</span>
-            <Link href="/fish/aori-ika" className="hover:text-white">アオリイカの釣り方</Link>
+            <Link href="/fish/aori-ika" prefetch={false} className="hover:text-white">アオリイカの釣り方</Link>
             <span>·</span>
-            <Link href="/fish/mebaru" className="hover:text-white">メバルの釣り方</Link>
+            <Link href="/fish/mebaru" prefetch={false} className="hover:text-white">メバルの釣り方</Link>
             <span>·</span>
-            <Link href="/fish/karei" className="hover:text-white">カレイの釣り方</Link>
+            <Link href="/fish/karei" prefetch={false} className="hover:text-white">カレイの釣り方</Link>
             <span>·</span>
-            <Link href="/fish" className="hover:text-white font-medium">魚種図鑑一覧 →</Link>
+            <Link href="/fish" prefetch={false} className="hover:text-white font-medium">魚種図鑑一覧 →</Link>
           </div>
         </div>
 
@@ -164,23 +164,23 @@ export function Footer() {
         <div className="mt-6 border-t border-white/10 pt-6">
           <h3 className="mb-3 text-sm font-semibold text-sea-foam">釣り方ガイド</h3>
           <div className="flex flex-wrap gap-2 text-xs text-blue-100/80">
-            <Link href="/methods/sabiki" className="hover:text-white">サビキ釣り</Link>
+            <Link href="/methods/sabiki" prefetch={false} className="hover:text-white">サビキ釣り</Link>
             <span>·</span>
-            <Link href="/methods/choi-nage" className="hover:text-white">ちょい投げ</Link>
+            <Link href="/methods/choi-nage" prefetch={false} className="hover:text-white">ちょい投げ</Link>
             <span>·</span>
-            <Link href="/methods/uki-zuri" className="hover:text-white">ウキ釣り</Link>
+            <Link href="/methods/uki-zuri" prefetch={false} className="hover:text-white">ウキ釣り</Link>
             <span>·</span>
-            <Link href="/methods/ajing" className="hover:text-white">アジング</Link>
+            <Link href="/methods/ajing" prefetch={false} className="hover:text-white">アジング</Link>
             <span>·</span>
-            <Link href="/methods/eging" className="hover:text-white">エギング</Link>
+            <Link href="/methods/eging" prefetch={false} className="hover:text-white">エギング</Link>
             <span>·</span>
-            <Link href="/methods/mebaring" className="hover:text-white">メバリング</Link>
+            <Link href="/methods/mebaring" prefetch={false} className="hover:text-white">メバリング</Link>
             <span>·</span>
-            <Link href="/methods/shore-jigging" className="hover:text-white">ショアジギング</Link>
+            <Link href="/methods/shore-jigging" prefetch={false} className="hover:text-white">ショアジギング</Link>
             <span>·</span>
-            <Link href="/methods/ana-zuri" className="hover:text-white">穴釣り</Link>
+            <Link href="/methods/ana-zuri" prefetch={false} className="hover:text-white">穴釣り</Link>
             <span>·</span>
-            <Link href="/methods" className="hover:text-white font-medium">釣り方一覧 →</Link>
+            <Link href="/methods" prefetch={false} className="hover:text-white font-medium">釣り方一覧 →</Link>
           </div>
         </div>
 
@@ -188,52 +188,52 @@ export function Footer() {
         <div className="mt-6 border-t border-white/10 pt-6">
           <h3 className="mb-3 text-sm font-semibold text-sea-foam">人気エリアの釣りスポット</h3>
           <div className="flex flex-wrap gap-2 text-xs text-blue-100/80">
-            <Link href="/prefecture/hokkaido" className="hover:text-white">北海道の釣り場</Link>
+            <Link href="/prefecture/hokkaido" prefetch={false} className="hover:text-white">北海道の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/iwate" className="hover:text-white">岩手の釣り場</Link>
+            <Link href="/prefecture/iwate" prefetch={false} className="hover:text-white">岩手の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/miyagi" className="hover:text-white">宮城の釣り場</Link>
+            <Link href="/prefecture/miyagi" prefetch={false} className="hover:text-white">宮城の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/fukushima" className="hover:text-white">福島の釣り場</Link>
+            <Link href="/prefecture/fukushima" prefetch={false} className="hover:text-white">福島の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/tokyo" className="hover:text-white">東京の釣り場</Link>
+            <Link href="/prefecture/tokyo" prefetch={false} className="hover:text-white">東京の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/kanagawa" className="hover:text-white">神奈川の釣り場</Link>
+            <Link href="/prefecture/kanagawa" prefetch={false} className="hover:text-white">神奈川の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/chiba" className="hover:text-white">千葉の釣り場</Link>
+            <Link href="/prefecture/chiba" prefetch={false} className="hover:text-white">千葉の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/ishikawa" className="hover:text-white">石川の釣り場</Link>
+            <Link href="/prefecture/ishikawa" prefetch={false} className="hover:text-white">石川の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/shizuoka" className="hover:text-white">静岡の釣り場</Link>
+            <Link href="/prefecture/shizuoka" prefetch={false} className="hover:text-white">静岡の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/aichi" className="hover:text-white">愛知の釣り場</Link>
+            <Link href="/prefecture/aichi" prefetch={false} className="hover:text-white">愛知の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/mie" className="hover:text-white">三重の釣り場</Link>
+            <Link href="/prefecture/mie" prefetch={false} className="hover:text-white">三重の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/osaka" className="hover:text-white">大阪の釣り場</Link>
+            <Link href="/prefecture/osaka" prefetch={false} className="hover:text-white">大阪の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/hyogo" className="hover:text-white">兵庫の釣り場</Link>
+            <Link href="/prefecture/hyogo" prefetch={false} className="hover:text-white">兵庫の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/okayama" className="hover:text-white">岡山の釣り場</Link>
+            <Link href="/prefecture/okayama" prefetch={false} className="hover:text-white">岡山の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/hiroshima" className="hover:text-white">広島の釣り場</Link>
+            <Link href="/prefecture/hiroshima" prefetch={false} className="hover:text-white">広島の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/kagawa" className="hover:text-white">香川の釣り場</Link>
+            <Link href="/prefecture/kagawa" prefetch={false} className="hover:text-white">香川の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/fukuoka" className="hover:text-white">福岡の釣り場</Link>
+            <Link href="/prefecture/fukuoka" prefetch={false} className="hover:text-white">福岡の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/nagasaki" className="hover:text-white">長崎の釣り場</Link>
+            <Link href="/prefecture/nagasaki" prefetch={false} className="hover:text-white">長崎の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture/okinawa" className="hover:text-white">沖縄の釣り場</Link>
+            <Link href="/prefecture/okinawa" prefetch={false} className="hover:text-white">沖縄の釣り場</Link>
             <span>·</span>
-            <Link href="/prefecture" className="hover:text-white font-medium">全都道府県一覧 →</Link>
+            <Link href="/prefecture" prefetch={false} className="hover:text-white font-medium">全都道府県一覧 →</Link>
           </div>
         </div>
 
         <div className="mt-6 border-t border-white/10 pt-6 text-center text-sm text-blue-100/80">
           <p>&copy; 2025-2026 ツリスポ All rights reserved.</p>
           <p className="mt-1 text-xs">
-            創設者・編集長: 正木 家康｜運営開始: 2025年｜掲載スポット: 2,100箇所以上｜<Link href="/technology" className="underline-offset-2 hover:text-white hover:underline">特許出願中（特願2026-042836）</Link>
+            創設者・編集長: 正木 家康｜運営開始: 2025年｜掲載スポット: 2,100箇所以上｜<Link href="/technology" prefetch={false} className="underline-offset-2 hover:text-white hover:underline">特許出願中（特願2026-042836）</Link>
           </p>
           <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed">
             当サイトはAmazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。
@@ -297,25 +297,25 @@ export function Footer() {
           )}
         </div>
         <div className="flex flex-wrap justify-center gap-x-3 gap-y-1 text-xs text-blue-100/80 mb-3 [&>a]:inline-flex [&>a]:min-h-[44px] [&>a]:items-center [&>a]:px-1">
-          <Link href="/fishing-spots/near-me" className="hover:text-white font-medium">近くの釣り場</Link>
-          <Link href="/fishing-spots/breakwater-beginner" className="hover:text-white">堤防釣り初心者</Link>
-          <Link href="/fishing-spots/best-saltwater" className="hover:text-white">海釣りおすすめ</Link>
-          <Link href="/ranking" className="hover:text-white">人気ランキング</Link>
+          <Link href="/fishing-spots/near-me" prefetch={false} className="hover:text-white font-medium">近くの釣り場</Link>
+          <Link href="/fishing-spots/breakwater-beginner" prefetch={false} className="hover:text-white">堤防釣り初心者</Link>
+          <Link href="/fishing-spots/best-saltwater" prefetch={false} className="hover:text-white">海釣りおすすめ</Link>
+          <Link href="/ranking" prefetch={false} className="hover:text-white">人気ランキング</Link>
         </div>
         <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs text-blue-100/80 [&>a]:inline-flex [&>a]:min-h-[44px] [&>a]:items-center [&>a]:px-1">
-          <Link href="/blog" className="hover:text-white">エリア釣果レポート</Link>
-          <Link href="/about" className="hover:text-white">ツリスポについて</Link>
-          <Link href="/technology" className="hover:text-white">AI解析技術</Link>
-          <Link href="/partner" className="hover:text-white">事業者様向け</Link>
-          <Link href="/privacy" className="hover:text-white">プライバシーポリシー</Link>
-          <Link href="/terms" className="hover:text-white">利用規約</Link>
-          <Link href="/legal" className="hover:text-white">特商法表記</Link>
+          <Link href="/blog" prefetch={false} className="hover:text-white">エリア釣果レポート</Link>
+          <Link href="/about" prefetch={false} className="hover:text-white">ツリスポについて</Link>
+          <Link href="/technology" prefetch={false} className="hover:text-white">AI解析技術</Link>
+          <Link href="/partner" prefetch={false} className="hover:text-white">事業者様向け</Link>
+          <Link href="/privacy" prefetch={false} className="hover:text-white">プライバシーポリシー</Link>
+          <Link href="/terms" prefetch={false} className="hover:text-white">利用規約</Link>
+          <Link href="/legal" prefetch={false} className="hover:text-white">特商法表記</Link>
         </div>
         <p className="mt-3 text-center text-xs text-blue-100/80">
           &copy; 2025-2026 ツリスポ
         </p>
         <p className="mt-1 text-center text-[10px] text-blue-100/70">
-          創設者: 正木 家康｜<Link href="/technology" className="underline-offset-2 hover:text-white hover:underline">特許出願中</Link>
+          創設者: 正木 家康｜<Link href="/technology" prefetch={false} className="underline-offset-2 hover:text-white hover:underline">特許出願中</Link>
         </p>
         <p className="mx-auto mt-2 max-w-xs text-center text-[11px] leading-relaxed text-blue-100/70">
           Amazonアソシエイト・プログラム参加者｜楽天アフィリエイト参加

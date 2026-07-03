@@ -53,6 +53,7 @@ export function RecentCatchReports() {
         </h2>
         <Link
           href="/spots"
+          prefetch={false}
           className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
         >
           投稿する
@@ -64,6 +65,7 @@ export function RecentCatchReports() {
           <Link
             key={report.id}
             href={`/spots/${report.spotSlug}`}
+            prefetch={false}
             className="w-64 shrink-0 rounded-xl border bg-card p-4 transition-shadow hover:shadow-md sm:w-72"
           >
             <div className="mb-2 flex items-center gap-2 text-xs text-muted-foreground">

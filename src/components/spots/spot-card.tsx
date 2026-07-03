@@ -46,7 +46,7 @@ export function SpotCard({ spot, distance, priority = false }: { spot: ListSpot;
           {/* Spot name and region */}
           <div>
             <h3 className="text-sm font-semibold leading-tight group-hover:text-primary sm:text-base">
-              <Link href={`/spots/${spot.slug}`} className="after:absolute after:inset-0">
+              <Link href={`/spots/${spot.slug}`} prefetch={false} className="after:absolute after:inset-0">
                 {spot.name}
               </Link>
             </h3>
