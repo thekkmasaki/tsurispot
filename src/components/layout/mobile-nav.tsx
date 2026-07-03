@@ -124,6 +124,7 @@ export function MobileNav() {
                 <Link
                   key={item.href}
                   href={item.href}
+                  prefetch={false}
                   role="menuitem"
                   className={cn(
                     "flex flex-col items-center gap-1.5 rounded-xl px-2 py-3.5 text-xs transition-colors touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
@@ -153,6 +154,7 @@ export function MobileNav() {
               <Link
                 key={item.href}
                 href={item.href}
+                prefetch={false}
                 className={cn(
                   "relative flex flex-col items-center justify-center gap-0.5 px-1 py-2 text-[11px] transition-colors min-h-[48px] touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
                   isActive

@@ -117,6 +117,7 @@ function DropdownMenu() {
               <Link
                 key={item.href}
                 href={item.href}
+                prefetch={false}
                 role="menuitem"
                 onClick={() => setOpen(false)}
                 className={cn(
@@ -144,7 +145,7 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b border-border/40 bg-gradient-to-r from-white/95 via-white/90 to-sand-light/80 backdrop-blur-lg">
       <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" prefetch={false} className="flex items-center gap-2">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-ocean-mid to-ocean-deep text-white">
             <Fish className="h-5 w-5" aria-hidden="true" />
           </div>
@@ -160,6 +161,7 @@ export function Header() {
               <Link
                 key={item.href}
                 href={item.href}
+                prefetch={false}
                 className={cn(
                   "flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
                   isActive
@@ -180,6 +182,7 @@ export function Header() {
           <LineButton />
           <Link
             href="/favorites"
+            prefetch={false}
             className={cn(
               "relative flex items-center justify-center rounded-lg p-2 transition-colors",
               pathname === "/favorites"
