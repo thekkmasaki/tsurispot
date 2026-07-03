@@ -68,6 +68,11 @@ export function AdUnit({
     const el = containerRef.current;
     if (!el) return;
 
+    // 画面外の広告ユニットはビューポート接近(300px手前)まで push しない。
+    // 初期ロードから広告ペイロード(実測2.7MB/101req)を排除しTBT/LCPを改善。
+    // 固定配置(sticky/side rail)は表示時点で交差するため挙動不変。
+    let roRef: ResizeObserver | null = null;
+
     const tryPush = () => {
       if (pushed.current) return true;
       // 幅ガード: レイアウト確定前の一時的な狭幅(実測79px等)で push すると
@@ -89,16 +94,35 @@ export function AdUnit({
       return false;
     };
 
-    // 即座に幅があれば実行
-    if (tryPush()) return;
+    const startPush = () => {
+      // 即座に幅があれば実行
+      if (tryPush()) return;
 
-    // 幅0の場合はResizeObserverで待つ
-    const observer = new ResizeObserver(() => {
-      if (tryPush()) observer.disconnect();
-    });
-    observer.observe(el);
+      // 幅0の場合はResizeObserverで待つ
+      roRef = new ResizeObserver(() => {
+        if (tryPush()) roRef?.disconnect();
+      });
+      roRef.observe(el);
+    };
 
-    return () => observer.disconnect();
+    // IntersectionObserver でビューポート 300px 手前まで近づいたら push を開始する。
+    // display:none の広告（例: MobileHeaderBannerAd が PC で hidden）は IO が発火しないため
+    // push されない=正しい挙動（現在も幅0で push されないため互換）。
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          io.disconnect();
+          startPush();
+        }
+      },
+      { rootMargin: "300px 0px", threshold: 0 }
+    );
+    io.observe(el);
+
+    return () => {
+      io.disconnect();
+      roRef?.disconnect();
+    };
     // 広告は初回マウント時に1回だけ push する設計のため依存配列は空に固定する
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -411,7 +435,10 @@ export function MobileStickyAd() {
     <div
       className="fixed bottom-[calc(60px+env(safe-area-inset-bottom,0px))] left-0 right-0 z-40 md:hidden border-t border-border/30 bg-background/95 backdrop-blur-sm"
     >
-      <div className="relative px-2 py-1">
+      {/* 下部アンカーの固定広告が読み込み後に高さ拡張すると内容が上方向にシフトし
+          CLS 0.2の主因になっていた。サイズ固定+クリップ枠で拡張を物理的に遮断。
+          ✕ボタンは -top-5 で外側にはみ出るため、overflow-hidden は内側divのみに付ける。 */}
+      <div className="relative px-2 py-1 h-[98px]">
         <button
           onClick={() => setDismissed(true)}
           className="absolute -top-5 right-2 z-50 flex size-5 items-center justify-center rounded-full bg-muted/90 text-[10px] text-muted-foreground shadow-sm"
@@ -419,13 +446,15 @@ export function MobileStickyAd() {
         >
           ✕
         </button>
-        <AdUnit
-          slot={AD_SLOTS.mobile_sticky}
-          placement="mobile_sticky"
-          format="horizontal"
-          style={{ display: "block", width: "100%", height: "90px" }}
-          responsive
-        />
+        <div className="h-[90px] overflow-hidden">
+          <AdUnit
+            slot={AD_SLOTS.mobile_sticky}
+            placement="mobile_sticky"
+            format="horizontal"
+            style={{ display: "block", width: "100%", height: "90px" }}
+            responsive={false}
+          />
+        </div>
       </div>
     </div>
   );
