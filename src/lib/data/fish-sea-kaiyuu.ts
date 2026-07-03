@@ -528,7 +528,7 @@ export const seaFishKaiyuu: FishSpecies[] = [
     scientificName: "Seriola lalandi",
     slug: "hiramasa",
     description:
-      "ブリ・カンパチと並ぶ「青物御三家」の一角。ブリより引きが強くスピードも速く、ショアジギングで最も難度の高い魚とも言われる。主に磯から狙い、ヒラマサを仕留めた時の達成感はショアアングラー最高の喜び。",
+      "ベストシーズンは初夏〜秋で、盛期は6〜8月。主に磯から狙う大型青物で、ブリ・カンパチと並ぶ「青物御三家」の一角。ブリより引きが強くスピードも速く、ショアジギングで最も難度の高い魚とも言われる。仕留めた時の達成感はショアアングラー最高の喜び。",
     category: "sea",
     family: "アジ科",
     difficulty: "advanced",

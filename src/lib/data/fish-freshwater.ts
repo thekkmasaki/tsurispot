@@ -1097,7 +1097,7 @@ export const freshwaterFish: FishSpecies[] = [
     scientificName: "Channa argus",
     slug: "raigyo",
     description:
-      "「雷魚」とも呼ばれる外来種の大型肉食魚。フロッグ（カエル型ルアー）を水草の上に投げ入れ、表層から爆発的なバイトを引き出すゲームが最大の醍醐味。都市近郊の水路や溜め池にも生息し、迫力ある釣りが楽しめる。",
+      "都市近郊の水路や溜め池など、水草の茂る身近な止水域が主な釣り場。シーズンは5〜9月で盛期は6〜8月。「雷魚」とも呼ばれる外来種の大型肉食魚で、フロッグ（カエル型ルアー）を水草の上に投げ入れ、表層から爆発的なバイトを引き出すゲームが最大の醍醐味。",
     category: "freshwater",
     family: "タイワンドジョウ科",
     difficulty: "advanced",
@@ -1345,7 +1345,7 @@ export const freshwaterFish: FishSpecies[] = [
     scientificName: "Oncorhynchus masou rhodurus",
     slug: "biwamasu",
     description:
-      "琵琶湖の固有種で「琵琶湖の宝石」とも呼ばれるサケ科の魚。琵琶湖とその流入河川にのみ生息し、湖で大きく成長する。脂が乗った身は絶品で、食味の評価が非常に高い。トローリングやルアーで狙うことができる。",
+      "ベストシーズンは5〜7月で、琵琶湖沖のレイクトローリングで狙うのが定番。琵琶湖とその流入河川にのみ生息する固有種で「琵琶湖の宝石」とも呼ばれるサケ科の魚。湖で大きく成長し、脂が乗った身は絶品と食味の評価が非常に高い。",
     category: "freshwater",
     family: "サケ科",
     difficulty: "advanced",
@@ -1468,7 +1468,7 @@ export const freshwaterFish: FishSpecies[] = [
     scientificName: "Tribolodon hakonensis",
     slug: "ugui",
     description:
-      "北海道から九州まで広く分布する淡水魚。河川の中流域を中心に生息し、雑食性で何でもよく食べる。春の婚姻色は美しく、釣りの入門魚として最適。近年はルアーフィッシングの対象としても注目されている。",
+      "盛期は春の4〜6月で、美しい婚姻色の個体に出会える季節。3〜11月と長く楽しめ、河川の中流域でミャク釣りやルアーで手軽に狙える入門魚。北海道から九州まで広く分布し、雑食性で何でもよく食べる。近年はルアーフィッシングの対象としても注目されている。",
     category: "freshwater",
     family: "コイ科",
     difficulty: "beginner",
@@ -1694,7 +1694,7 @@ export const freshwaterFish: FishSpecies[] = [
     scientificName: "Anguilla japonica",
     slug: "unagi",
     description:
-      "夏の風物詩。河川や湖沼に生息し、夜行性で夕マヅメ以降が狙い目。ミミズやドジョウなどの生き餌で穴釣りやぶっ込み釣りで狙う。資源保護のため、禁漁区域やサイズ制限がある地域も多いので注意。",
+      "梅雨〜夏の6〜8月が最盛期で、日没後の夜釣りが基本。河川や湖沼で、ミミズやドジョウなどの生き餌を使ったぶっ込み釣りや穴釣りで狙う夏の風物詩。資源保護のため禁漁区域やサイズ制限がある地域も多く、事前にルール確認を。",
     category: "freshwater",
     family: "ウナギ科",
     difficulty: "intermediate",
