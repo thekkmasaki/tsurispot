@@ -773,7 +773,7 @@ export const seaFishPopular: FishSpecies[] = [
     scientificName: "Siganus fuscescens",
     slug: "aigo",
     description:
-      "【注意: 毒棘あり】背ビレ・腹ビレ・臀ビレのすべての棘に毒を持つ危険魚。堤防でエサ取りとしてよく釣れます。磯臭いイメージがありますが、内臓を素早く処理すれば美味しい白身魚。",
+      "【毒棘注意】盛期は夏〜秋の7〜10月で、堤防のウキフカセ釣りなどでよく釣れます。背ビレ・腹ビレ・臀ビレのすべての棘に毒を持つ危険魚のため、釣れたらまずハサミで棘を切り落とすこと。磯臭いイメージがありますが、内臓を素早く処理すれば美味しい白身魚。",
     category: "sea",
     family: "アイゴ科",
     difficulty: "beginner",

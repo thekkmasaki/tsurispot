@@ -158,7 +158,7 @@ export const brackishFish: FishSpecies[] = [
     scientificName: "Konosirus punctatus",
     slug: "konoshiro",
     description:
-      "河口や内湾に群れで回遊する魚。サビキ釣りで手軽に釣れます。小骨が多いですが、酢締めや唐揚げにすると美味しくいただけます。寿司ネタの「コハダ」は本種の幼魚。",
+      "盛期は秋の9〜11月。河口や内湾に大群で回遊してくるタイミングは、サビキ釣りで手軽に数釣りが楽しめます。小骨が多いですが、酢締めや唐揚げにすると美味しくいただけます。寿司ネタの「コハダ」は本種の幼魚。",
     category: "brackish",
     family: "ニシン科",
     difficulty: "beginner",

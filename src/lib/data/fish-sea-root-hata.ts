@@ -280,7 +280,7 @@ export const seaFishRootHata: FishSpecies[] = [
     scientificName: "Gymnothorax kidako",
     slug: "utsubo",
     description:
-      "岩礁帯に潜む大型の魚。鋭い歯を持ち噛みつく力が非常に強いため、取り扱いには細心の注意が必要。高知県では「うつぼのたたき」が郷土料理として有名。",
+      "通年釣れるが、狙い目は10〜12月。磯や堤防の根回りを切り身餌のぶっこみ釣りで狙う岩礁帯の大型魚。鋭い歯を持ち噛みつく力が非常に強いため、取り扱いには細心の注意が必要。高知県では「うつぼのたたき」が郷土料理として有名。",
     category: "sea",
     family: "ウツボ科",
     difficulty: "intermediate",
@@ -349,7 +349,7 @@ export const seaFishRootHata: FishSpecies[] = [
     scientificName: "Epinephelus akaara",
     slug: "hata",
     description:
-      "アコウとも呼ばれる高級根魚。岩礁帯やテトラ周りに生息し、ワームやプラグで狙えます。もちっとした白身は刺身・鍋で最高の味わい。",
+      "旬・ベストシーズンは夏の6〜9月。アコウとも呼ばれる高級根魚で、岩礁帯やテトラ周りをワームやプラグで狙うロックフィッシュゲームの人気ターゲット。もちっとした白身は刺身・鍋で最高の味わい。",
     category: "sea",
     family: "ハタ科",
     difficulty: "intermediate",
@@ -1641,7 +1641,7 @@ export const seaFishRootHata: FishSpecies[] = [
     scientificName: "Epinephelus areolatus",
     slug: "oomonhata",
     description:
-      "九州・四国を中心に人気のハタ類。比較的浅場の岩礁帯に生息し、ショアからのルアーで狙えるのが魅力。身は上品な白身で美味。温暖化に伴い生息域が北上傾向にある。",
+      "シーズンは5〜11月で盛期は6〜9月。九州・四国を中心に人気のハタ類で、比較的浅場の岩礁帯に生息し、ショアからのルアーで狙えるのが魅力。身は上品な白身で美味。温暖化に伴い生息域が北上傾向にある。",
     category: "sea",
     family: "ハタ科",
     difficulty: "intermediate",
