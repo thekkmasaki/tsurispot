@@ -286,6 +286,7 @@ export default async function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(homeJsonLdArray) }}
       />
       {/* ヒーローセクション */}
+      {/* ATFのLinkはprefetch={false}: 初期ロード中のRSC自動プリフェッチ(実測442KB、/spotsだけで354KB)が低速回線でLCPと帯域競合するため。タップ時取得に変更（体感+100-300msだが初期表示を優先） */}
       <section className="relative overflow-x-hidden bg-gradient-to-b from-sky-400 via-[oklch(0.45_0.14_220)] to-[oklch(0.30_0.10_235)]">
         {/* 水平線グロー（夕焼け/朝焼け感） */}
         <div className="pointer-events-none absolute inset-0">
@@ -328,17 +329,17 @@ export default async function Home() {
 
             {/* スポット数統計 */}
             <div className="mb-5 flex items-center justify-center gap-4 text-xs text-blue-200/90 sm:mb-7 sm:gap-6 sm:text-sm">
-              <Link href="/spots" className="flex items-center gap-1.5 transition-colors hover:text-white">
+              <Link href="/spots" prefetch={false} className="flex items-center gap-1.5 transition-colors hover:text-white">
                 <MapPin className="size-3.5 sm:size-4" />
                 <span>全国<strong className="font-bold text-white">{totalSpots.toLocaleString()}</strong>スポット</span>
               </Link>
               <div className="h-3 w-px bg-white/30" />
-              <Link href="/fish" className="flex items-center gap-1.5 transition-colors hover:text-white">
+              <Link href="/fish" prefetch={false} className="flex items-center gap-1.5 transition-colors hover:text-white">
                 <Fish className="size-3.5 sm:size-4" />
                 <span><strong className="font-bold text-white">{totalFishSpecies}</strong>魚種</span>
               </Link>
               <div className="h-3 w-px bg-white/30" />
-              <Link href="/prefecture" className="flex items-center gap-1.5 transition-colors hover:text-white">
+              <Link href="/prefecture" prefetch={false} className="flex items-center gap-1.5 transition-colors hover:text-white">
                 <Compass className="size-3.5 sm:size-4" />
                 <span><strong className="font-bold text-white">{totalPrefectures}</strong>都道府県</span>
               </Link>
@@ -362,20 +363,20 @@ export default async function Home() {
 
             {/* メインCTA */}
             <div className="mb-4 flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
-              <Link href="/map" className="w-full sm:w-auto">
+              <Link href="/map" prefetch={false} className="w-full sm:w-auto">
                 <Button size="lg" className="w-full gap-2 bg-gradient-to-r from-sunset-coral to-sunset-gold px-8 py-6 text-base font-bold text-white shadow-lg shadow-sunset-coral/25 transition-[box-shadow,transform] hover:shadow-xl hover:shadow-sunset-coral/30 hover:scale-[1.02] sm:w-auto sm:text-lg min-h-[52px]">
                   <MapPin className="size-5" />
                   近くの釣り場を探す
                 </Button>
               </Link>
               <div className="flex gap-3">
-                <Link href="/for-beginners">
+                <Link href="/for-beginners" prefetch={false}>
                   <Button variant="outline" size="lg" className="gap-1.5 border-white/40 bg-white/10 text-white backdrop-blur-sm transition-[background-color,transform] hover:bg-white/20 hover:scale-[1.02] min-h-[48px]">
                     <BookOpen className="size-4" />
                     初心者ガイド
                   </Button>
                 </Link>
-                <Link href="/catchable-now">
+                <Link href="/catchable-now" prefetch={false}>
                   <Button variant="outline" size="lg" className="gap-1.5 border-white/40 bg-white/10 text-white backdrop-blur-sm transition-[background-color,transform] hover:bg-white/20 hover:scale-[1.02] min-h-[48px]">
                     <Fish className="size-4" />
                     今釣れる魚
@@ -386,27 +387,27 @@ export default async function Home() {
 
             {/* フィルタータグ */}
             <div className="flex flex-wrap items-center justify-center gap-2">
-              <Link href="/spots?type=breakwater">
+              <Link href="/spots?type=breakwater" prefetch={false}>
                 <Badge variant="outline" className="cursor-pointer border-white/25 bg-white/8 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/15 min-h-[40px]">
                   堤防
                 </Badge>
               </Link>
-              <Link href="/spots?type=port">
+              <Link href="/spots?type=port" prefetch={false}>
                 <Badge variant="outline" className="cursor-pointer border-white/25 bg-white/8 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/15 min-h-[40px]">
                   漁港
                 </Badge>
               </Link>
-              <Link href="/spots?type=rocky">
+              <Link href="/spots?type=rocky" prefetch={false}>
                 <Badge variant="outline" className="cursor-pointer border-white/25 bg-white/8 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/15 min-h-[40px]">
                   磯
                 </Badge>
               </Link>
-              <Link href="/spots?type=river">
+              <Link href="/spots?type=river" prefetch={false}>
                 <Badge variant="outline" className="cursor-pointer border-emerald-300/40 bg-emerald-500/10 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-emerald-500/20 min-h-[40px]">
                   川・湖
                 </Badge>
               </Link>
-              <Link href="/spots">
+              <Link href="/spots" prefetch={false}>
                 <Badge variant="outline" className="cursor-pointer border-white/25 bg-white/8 px-3 py-1.5 text-sm text-white backdrop-blur-sm transition-colors hover:bg-white/15 min-h-[40px]">
                   すべて
                 </Badge>
@@ -460,7 +461,7 @@ export default async function Home() {
       {/* クイックアクション */}
       <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
         <div className="grid grid-cols-4 gap-2 sm:gap-3 lg:grid-cols-8">
-          <Link href="/map">
+          <Link href="/map" prefetch={false}>
             <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-sky-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
               <div className="flex size-10 items-center justify-center rounded-full bg-sky-100 sm:size-12">
                 <MapPin className="size-5 text-sky-600 sm:size-6" />
@@ -470,7 +471,7 @@ export default async function Home() {
               </span>
             </div>
           </Link>
-          <Link href="/catchable-now">
+          <Link href="/catchable-now" prefetch={false}>
             <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-orange-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
               <div className="flex size-10 items-center justify-center rounded-full bg-orange-100 sm:size-12">
                 <Fish className="size-5 text-orange-600 sm:size-6" />
@@ -480,7 +481,7 @@ export default async function Home() {
               </span>
             </div>
           </Link>
-          <Link href="/fish-finder">
+          <Link href="/fish-finder" prefetch={false}>
             <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-purple-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
               <div className="flex size-10 items-center justify-center rounded-full bg-purple-100 sm:size-12">
                 <Target className="size-5 text-purple-600 sm:size-6" />
@@ -490,7 +491,7 @@ export default async function Home() {
               </span>
             </div>
           </Link>
-          <Link href="/for-beginners">
+          <Link href="/for-beginners" prefetch={false}>
             <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-emerald-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
               <div className="flex size-10 items-center justify-center rounded-full bg-emerald-100 sm:size-12">
                 <BookOpen className="size-5 text-emerald-600 sm:size-6" />
@@ -500,7 +501,7 @@ export default async function Home() {
               </span>
             </div>
           </Link>
-          <Link href="/fishing-calendar">
+          <Link href="/fishing-calendar" prefetch={false}>
             <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-blue-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
               <div className="flex size-10 items-center justify-center rounded-full bg-blue-100 sm:size-12">
                 <Calendar className="size-5 text-blue-600 sm:size-6" />
@@ -510,7 +511,7 @@ export default async function Home() {
               </span>
             </div>
           </Link>
-          <Link href="/fishing-spots/near-me">
+          <Link href="/fishing-spots/near-me" prefetch={false}>
             <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-amber-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
               <div className="flex size-10 items-center justify-center rounded-full bg-amber-100 sm:size-12">
                 <Navigation className="size-5 text-amber-600 sm:size-6" />
@@ -520,7 +521,7 @@ export default async function Home() {
               </span>
             </div>
           </Link>
-          <Link href="/quiz">
+          <Link href="/quiz" prefetch={false}>
             <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-rose-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
               <div className="flex size-10 items-center justify-center rounded-full bg-rose-100 sm:size-12">
                 <Sparkles className="size-5 text-rose-600 sm:size-6" />
@@ -530,7 +531,7 @@ export default async function Home() {
               </span>
             </div>
           </Link>
-          <Link href="/ranking/reporters">
+          <Link href="/ranking/reporters" prefetch={false}>
             <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-amber-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
               <div className="flex size-10 items-center justify-center rounded-full bg-amber-100 sm:size-12">
                 <Star className="size-5 text-amber-600 sm:size-6" />
@@ -540,7 +541,7 @@ export default async function Home() {
               </span>
             </div>
           </Link>
-          <Link href="/instructor-exam">
+          <Link href="/instructor-exam" prefetch={false}>
             <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-indigo-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
               <div className="flex size-10 items-center justify-center rounded-full bg-indigo-100 sm:size-12">
                 <ClipboardCheck className="size-5 text-indigo-600 sm:size-6" />
