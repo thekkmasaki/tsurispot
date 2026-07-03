@@ -514,19 +514,7 @@ export default async function PrefecturePage({ params }: PageProps) {
     ? getPrefectureFAQs(slug, pref.name, spots.length, prefInfo.popularFish, prefInfo.bestSeason)
     : [];
 
-  // FAQ構造化データ
-  const faqJsonLd = faqs.length > 0 ? {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: faqs.map((faq) => ({
-      "@type": "Question",
-      name: faq.question,
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: faq.answer,
-      },
-    })),
-  } : null;
+  // FAQ構造化データは finalFaqItems 確定後（下方）で生成する
 
   // Article構造化データ
   const articleJsonLd = {
@@ -555,6 +543,25 @@ export default async function PrefecturePage({ params }: PageProps) {
     },
     datePublished: "2025-01-01",
     dateModified: new Date().toISOString().split("T")[0],
+  };
+
+  // スポット実データ入りFAQ（動的FAQと追加FAQの両方で使う）
+  const parkingFaqItem = {
+    question: `${pref.name}の釣り場の駐車場事情は？`,
+    answer: (() => {
+      const parkingSpots = spots.filter((s) => s.hasParking);
+      const toiletSpots = spots.filter((s) => s.hasToilet);
+      if (parkingSpots.length > 0) {
+        return `${pref.name}の釣り場${spots.length}件のうち、駐車場ありのスポットは${parkingSpots.length}件（${Math.round((parkingSpots.length / spots.length) * 100)}%）です。${toiletSpots.length > 0 ? `トイレ完備のスポットは${toiletSpots.length}件あります。` : ""}初心者やファミリーの方は、駐車場・トイレ完備のスポットを選ぶと安心して釣りを楽しめます。各スポットの詳細ページで最新の施設情報をご確認ください。`;
+      }
+      return `${pref.name}の各釣り場の駐車場情報は、スポット詳細ページでご確認いただけます。`;
+    })(),
+  };
+  const top3FaqItem = {
+    question: `${pref.name}で人気の釣りスポットTOP3は？`,
+    answer: top10Spots.length >= 3
+      ? `${pref.name}で評価の高い人気釣りスポットTOP3は、1位「${top10Spots[0].name}」（${SPOT_TYPE_LABELS[top10Spots[0].spotType]}・評価${top10Spots[0].rating.toFixed(1)}）、2位「${top10Spots[1].name}」（${SPOT_TYPE_LABELS[top10Spots[1].spotType]}・評価${top10Spots[1].rating.toFixed(1)}）、3位「${top10Spots[2].name}」（${SPOT_TYPE_LABELS[top10Spots[2].spotType]}・評価${top10Spots[2].rating.toFixed(1)}）です。詳しくはページ内のランキングをご覧ください。`
+      : `${pref.name}の人気釣りスポットは各スポットの詳細ページでご確認ください。`,
   };
 
   // 動的FAQデータ（prefInfoが無い場合でもスポットデータから生成）
@@ -589,23 +596,8 @@ export default async function PrefecturePage({ params }: PageProps) {
         ? `${pref.name}には${spots.length}件の釣りスポットがあり、${spots.filter((s) => s.hasParking).length > 0 ? `${spots.filter((s) => s.hasParking).length}件のスポットに駐車場があります。` : ""}各スポットの詳細ページで住所・アクセス方法・最寄り駐車場の情報を確認できます。`
         : `${pref.name}の釣り場のアクセス情報は各スポットの詳細ページでご確認ください。`,
     },
-    {
-      question: `${pref.name}の釣り場の駐車場事情は？`,
-      answer: (() => {
-        const parkingSpots = spots.filter((s) => s.hasParking);
-        const toiletSpots = spots.filter((s) => s.hasToilet);
-        if (parkingSpots.length > 0) {
-          return `${pref.name}の釣り場${spots.length}件のうち、駐車場ありのスポットは${parkingSpots.length}件（${Math.round((parkingSpots.length / spots.length) * 100)}%）です。${toiletSpots.length > 0 ? `トイレ完備のスポットは${toiletSpots.length}件あります。` : ""}初心者やファミリーの方は、駐車場・トイレ完備のスポットを選ぶと安心して釣りを楽しめます。各スポットの詳細ページで最新の施設情報をご確認ください。`;
-        }
-        return `${pref.name}の各釣り場の駐車場情報は、スポット詳細ページでご確認いただけます。`;
-      })(),
-    },
-    {
-      question: `${pref.name}で人気の釣りスポットTOP3は？`,
-      answer: top10Spots.length >= 3
-        ? `${pref.name}で評価の高い人気釣りスポットTOP3は、1位「${top10Spots[0].name}」（${SPOT_TYPE_LABELS[top10Spots[0].spotType]}・評価${top10Spots[0].rating.toFixed(1)}）、2位「${top10Spots[1].name}」（${SPOT_TYPE_LABELS[top10Spots[1].spotType]}・評価${top10Spots[1].rating.toFixed(1)}）、3位「${top10Spots[2].name}」（${SPOT_TYPE_LABELS[top10Spots[2].spotType]}・評価${top10Spots[2].rating.toFixed(1)}）です。詳しくはページ内のランキングをご覧ください。`
-        : `${pref.name}の人気釣りスポットは各スポットの詳細ページでご確認ください。`,
-    },
+    parkingFaqItem,
+    top3FaqItem,
     {
       question: `${pref.name}の釣りのベストシーズンは？`,
       answer: (() => {
@@ -626,14 +618,43 @@ export default async function PrefecturePage({ params }: PageProps) {
     },
   ];
 
-  // prefInfoのFAQがあればそちらを使い、なければ動的FAQを使用
-  const finalFaqItems = faqs.length > 0 ? faqs : dynamicFaqItems;
+  // インテント対応の追加FAQ（GSC実測クエリ「〇〇 防波堤」「〇〇 ファミリー」等に対応。データがある県のみ生成）
+  const breakwaterCount = spots.filter((s) => s.spotType === "breakwater").length;
+  const portCount = spots.filter((s) => s.spotType === "port").length;
+  const topShoreSpots = spots
+    .filter((s) => s.spotType === "breakwater" || s.spotType === "port")
+    .slice()
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 3);
+  const familySpots = spots.filter((s) => s.difficulty === "beginner" && s.hasToilet && s.hasParking);
+  const intentFaqItems = [
+    ...(breakwaterCount + portCount > 0
+      ? [{
+          question: `${pref.name}で防波堤（堤防）から釣りができる場所は？`,
+          answer: `${pref.name}には${[
+            breakwaterCount > 0 ? `堤防・防波堤の釣り場が${breakwaterCount}件` : "",
+            portCount > 0 ? `漁港の釣り場が${portCount}件` : "",
+          ].filter(Boolean).join("、")}あります。評価が高いのは${topShoreSpots.map((s) => `「${s.name}」`).join("、")}などです。足場が良くサビキ釣りやちょい投げがしやすいため、初心者やファミリーにもおすすめです。`,
+        }]
+      : []),
+    ...(familySpots.length > 0
+      ? [{
+          question: `${pref.name}でファミリー・子連れにおすすめの釣り場は？`,
+          answer: `${pref.name}にはトイレ・駐車場を備えた初心者向けの釣り場が${familySpots.length}件あります。${familySpots.slice(0, 3).map((s) => `「${s.name}」`).join("、")}などは設備が整っており、お子様連れでも安心して釣りを楽しめます。`,
+        }]
+      : []),
+    top3FaqItem,
+    parkingFaqItem,
+  ];
 
-  // 動的FAQ用のJSON-LD（prefInfoがない場合）
-  const dynamicFaqJsonLd = faqs.length === 0 && dynamicFaqItems.length > 0 ? {
+  // prefInfoの定型FAQに、インテント対応FAQを後方合成（既存6問の順序・文面は不変）。prefInfoが無い場合は動的FAQ
+  const finalFaqItems = faqs.length > 0 ? [...faqs, ...intentFaqItems] : dynamicFaqItems;
+
+  // FAQ構造化データ（表示するFAQと同一の合成済み配列から生成）
+  const faqJsonLd = finalFaqItems.length > 0 ? {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: dynamicFaqItems.map((item) => ({
+    mainEntity: finalFaqItems.map((item) => ({
       "@type": "Question",
       name: item.question,
       acceptedAnswer: {
@@ -661,7 +682,7 @@ export default async function PrefecturePage({ params }: PageProps) {
     placeJsonLd,
     articleJsonLd,
     prefSpeakableJsonLd,
-    ...(faqJsonLd ? [faqJsonLd] : dynamicFaqJsonLd ? [dynamicFaqJsonLd] : []),
+    ...(faqJsonLd ? [faqJsonLd] : []),
     ...(itemListJsonLd ? [itemListJsonLd] : []),
   ];
 
