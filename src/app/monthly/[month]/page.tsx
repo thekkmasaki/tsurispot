@@ -499,7 +499,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
               if (!fish) return null;
               const isPeak = fish.peakMonths.includes(guide.month);
               return (
-                <Link
+                <Link prefetch={false}
                   key={fish.slug}
                   href={`/fish/${fish.slug}`}
                   className="group flex items-start gap-3 rounded-lg border bg-white p-3 transition-shadow hover:shadow-md dark:bg-card"
@@ -560,7 +560,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
           </div>
           {totalFishCount > displayFish.length && (
             <div className="mt-4 text-center">
-              <Link
+              <Link prefetch={false}
                 href={`/seasonal/${month}`}
                 className="inline-flex items-center gap-1.5 rounded-lg border px-4 py-2 text-sm font-medium transition-colors hover:bg-muted"
               >
@@ -569,10 +569,10 @@ export default async function MonthlyGuidePage({ params }: Props) {
             </div>
           )}
           <div className="mt-3 flex flex-wrap justify-center gap-4">
-            <Link href="/catchable-now" className="text-sm text-primary hover:underline">
+            <Link prefetch={false} href="/catchable-now" className="text-sm text-primary hover:underline">
               今釣れる魚をもっと見る →
             </Link>
-            <Link href="/fish" className="text-sm text-primary hover:underline">
+            <Link prefetch={false} href="/fish" className="text-sm text-primary hover:underline">
               魚種図鑑 →
             </Link>
           </div>
@@ -666,7 +666,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
               </h2>
               <div className="grid gap-3 sm:grid-cols-2">
                 {links.map((link) => (
-                  <Link
+                  <Link prefetch={false}
                     key={link.href}
                     href={link.href}
                     className="group flex items-start gap-3 rounded-lg border bg-white p-4 transition-shadow hover:shadow-md dark:bg-card"
@@ -689,7 +689,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
                 ))}
               </div>
               <div className="mt-3 text-center">
-                <Link href="/guide" className="text-sm text-primary hover:underline">
+                <Link prefetch={false} href="/guide" className="text-sm text-primary hover:underline">
                   すべてのガイドを見る →
                 </Link>
               </div>
@@ -706,7 +706,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
             </h2>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
               {regionGroups.map((rg) => (
-                <Link
+                <Link prefetch={false}
                   key={rg.slug}
                   href={`/seasonal/${month}/${rg.slug}`}
                   className="group rounded-lg border bg-white p-3 text-center transition-shadow hover:shadow-md dark:bg-card"
@@ -721,7 +721,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
               <h3 className="mb-2 text-sm font-bold text-muted-foreground">人気の都道府県</h3>
               <div className="flex flex-wrap gap-1.5">
                 {topPrefectures.map((pref) => (
-                  <Link
+                  <Link prefetch={false}
                     key={pref.slug}
                     href={`/prefecture/${pref.slug}`}
                     className="rounded-full border bg-white px-3 py-1 text-xs font-medium transition-colors hover:border-primary hover:text-primary dark:bg-card"
@@ -733,7 +733,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
               </div>
             </div>
             <div className="mt-3 text-center">
-              <Link href="/prefecture" className="text-sm text-primary hover:underline">
+              <Link prefetch={false} href="/prefecture" className="text-sm text-primary hover:underline">
                 47都道府県から探す →
               </Link>
             </div>
@@ -749,7 +749,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">
               {relatedBlogPosts.map((post) => (
-                <Link
+                <Link prefetch={false}
                   key={post.slug}
                   href={`/blog/${post.slug}`}
                   className="group flex items-start gap-3 rounded-lg border bg-white p-3 transition-shadow hover:shadow-md dark:bg-card"
@@ -767,7 +767,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
               ))}
             </div>
             <div className="mt-3 text-center">
-              <Link href="/blog" className="text-sm text-primary hover:underline">
+              <Link prefetch={false} href="/blog" className="text-sm text-primary hover:underline">
                 すべてのコラムを見る →
               </Link>
             </div>
@@ -824,19 +824,19 @@ export default async function MonthlyGuidePage({ params }: Props) {
               monthName={guide.nameJa}
             />
             <div className="mt-4 flex flex-wrap items-center justify-center gap-4">
-              <Link
+              <Link prefetch={false}
                 href="/spots"
                 className="text-sm text-primary hover:underline"
               >
                 すべての釣りスポットを見る →
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/map"
                 className="text-sm text-primary hover:underline"
               >
                 地図で探す →
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/fishing-spots/near-me"
                 className="text-sm text-primary hover:underline"
               >
@@ -1025,7 +1025,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
               <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
                 釣り場の近くの釣具店でエサや仕掛けを調達しましょう。活きエサの在庫状況もリアルタイムで確認できます。
               </p>
-              <Link
+              <Link prefetch={false}
                 href="/shops"
                 className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90"
               >
@@ -1089,7 +1089,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
             釣りに役立つツール
           </h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            <Link
+            <Link prefetch={false}
               href="/tides"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
             >
@@ -1099,7 +1099,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
                 釣果に直結する潮汐情報
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/bouzu-checker"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
             >
@@ -1109,7 +1109,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
                 条件から釣果確率を算出
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/glossary"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
             >
@@ -1119,7 +1119,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
                 わからない言葉をすぐ検索
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/quiz"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
             >
@@ -1141,7 +1141,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">
               {relatedSeasonalGuides.map((sg) => (
-                <Link
+                <Link prefetch={false}
                   key={sg.slug}
                   href={`/seasonal/${sg.slug}`}
                   className="group flex items-start gap-3 rounded-lg border bg-white p-4 transition-shadow hover:shadow-md dark:bg-card"
@@ -1191,7 +1191,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
               { href: "/beginner-checklist", label: "持ち物チェックリスト" },
               { href: "/guide/knots", label: "結び方ガイド" },
             ].map((link) => (
-              <Link key={link.href} href={link.href} className="flex items-center gap-1.5 py-1 text-sm text-primary hover:underline">
+              <Link prefetch={false} key={link.href} href={link.href} className="flex items-center gap-1.5 py-1 text-sm text-primary hover:underline">
                 <ChevronRight className="size-3 shrink-0" />
                 {link.label}
               </Link>
@@ -1202,14 +1202,14 @@ export default async function MonthlyGuidePage({ params }: Props) {
 
         {/* 安全・マナー */}
         <div className="mb-8 grid gap-3 sm:grid-cols-2">
-          <Link href="/safety" className="flex items-center gap-3 rounded-lg border border-red-200 bg-red-50/50 p-4 transition-shadow hover:shadow-md dark:bg-red-950/20">
+          <Link prefetch={false} href="/safety" className="flex items-center gap-3 rounded-lg border border-red-200 bg-red-50/50 p-4 transition-shadow hover:shadow-md dark:bg-red-950/20">
             <Shield className="size-6 text-red-500" />
             <div>
               <p className="font-semibold">安全ガイド</p>
               <p className="text-xs text-muted-foreground">事故を防ぐための必読情報</p>
             </div>
           </Link>
-          <Link href="/fishing-rules" className="flex items-center gap-3 rounded-lg border border-amber-200 bg-amber-50/50 p-4 transition-shadow hover:shadow-md dark:bg-amber-950/20">
+          <Link prefetch={false} href="/fishing-rules" className="flex items-center gap-3 rounded-lg border border-amber-200 bg-amber-50/50 p-4 transition-shadow hover:shadow-md dark:bg-amber-950/20">
             <BookOpen className="size-6 text-amber-500" />
             <div>
               <p className="font-semibold">ルールとマナー</p>
@@ -1227,14 +1227,14 @@ export default async function MonthlyGuidePage({ params }: Props) {
               道具は5,000円から。近くの堤防で、初心者でも魚が釣れます。
             </p>
             <div className="flex flex-wrap gap-3">
-              <Link
+              <Link prefetch={false}
                 href="/guide/beginner"
                 className="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-bold text-emerald-700 transition-colors hover:bg-emerald-50"
               >
                 初心者ガイドを見る
                 <ChevronRight className="size-4" />
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/guide/budget"
                 className="inline-flex items-center gap-2 rounded-lg border-2 border-white/50 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-white/10"
               >
@@ -1251,10 +1251,10 @@ export default async function MonthlyGuidePage({ params }: Props) {
             条件に合った釣り場を診断します
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <Link href="/fish-finder" className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90">
+            <Link prefetch={false} href="/fish-finder" className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90">
               釣り場診断を試す
             </Link>
-            <Link href="/recommendation" className="inline-flex items-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-muted">
+            <Link prefetch={false} href="/recommendation" className="inline-flex items-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-muted">
               今週のおすすめを見る
             </Link>
           </div>
@@ -1263,7 +1263,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
         {/* 前月・翌月ナビ */}
         <div className="mb-8 grid grid-cols-2 gap-4">
           {prevGuide && (
-            <Link
+            <Link prefetch={false}
               href={`/monthly/${prevSlug}`}
               className="flex items-center gap-2 rounded-lg border bg-white p-4 transition-shadow hover:shadow-md dark:bg-card"
             >
@@ -1277,7 +1277,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
             </Link>
           )}
           {nextGuide && (
-            <Link
+            <Link prefetch={false}
               href={`/monthly/${nextSlug}`}
               className="flex items-center justify-end gap-2 rounded-lg border bg-white p-4 transition-shadow hover:shadow-md dark:bg-card"
             >

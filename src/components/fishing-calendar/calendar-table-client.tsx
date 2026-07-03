@@ -108,7 +108,7 @@ export function CalendarTableClient({ fishList, regionalData }: CalendarTableCli
               return (
                 <tr key={fish.slug} className="hover:bg-muted/30">
                   <td className="whitespace-nowrap px-3 py-1.5">
-                    <Link
+                    <Link prefetch={false}
                       href={`/fish/${fish.slug}`}
                       className="font-medium text-foreground hover:text-primary"
                     >

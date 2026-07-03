@@ -359,7 +359,7 @@ export default function JiggingGuidePage() {
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
         {/* パンくず */}
         <div className="mb-6">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
@@ -694,7 +694,7 @@ export default function JiggingGuidePage() {
                   { slug: "aji", name: "アジ", badge: "ライトジギング" },
                   { slug: "shiira", name: "シイラ", badge: "夏の大物" },
                 ].map((fish) => (
-                  <Link
+                  <Link prefetch={false}
                     key={fish.slug}
                     href={`/fish/${fish.slug}`}
                     className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
@@ -729,7 +729,7 @@ export default function JiggingGuidePage() {
                   {jiggingSpots.map((spot) => {
                     const spotTypeLabel = spot.spotType === "breakwater" ? "堤防" : spot.spotType === "rocky" ? "磯" : spot.spotType === "port" ? "漁港" : "釣り場";
                     return (
-                    <Link
+                    <Link prefetch={false}
                       key={spot.id}
                       href={`/spots/${spot.slug}`}
                       className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
@@ -745,7 +745,7 @@ export default function JiggingGuidePage() {
                   })}
                 </div>
                 <div className="mt-3 text-center">
-                  <Link href="/spots" className="text-sm text-primary hover:underline">
+                  <Link prefetch={false} href="/spots" className="text-sm text-primary hover:underline">
                     全国の釣りスポットから探す →
                   </Link>
                 </div>
@@ -783,37 +783,37 @@ export default function JiggingGuidePage() {
               <h2 className="mb-4 text-xl font-bold">関連ガイド</h2>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href="/guide/lure" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/lure" className="text-primary hover:underline">
                     ルアー釣り入門ガイド
                   </Link>
                   <span className="text-muted-foreground"> - ルアーフィッシングの基本をおさらい</span>
                 </li>
                 <li>
-                  <Link href="/guide/knots" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/knots" className="text-primary hover:underline">
                     釣り糸の結び方
                   </Link>
                   <span className="text-muted-foreground"> - FGノットなどの強力な結び方</span>
                 </li>
                 <li>
-                  <Link href="/guide/fish-handling" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/fish-handling" className="text-primary hover:underline">
                     釣った魚の持ち帰り方ガイド
                   </Link>
                   <span className="text-muted-foreground"> - 大型青物の締め方と持ち帰り方</span>
                 </li>
                 <li>
-                  <Link href="/guide/tide" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/tide" className="text-primary hover:underline">
                     潮汐の読み方ガイド
                   </Link>
                   <span className="text-muted-foreground"> - 青物が回遊しやすい潮のタイミング</span>
                 </li>
                 <li>
-                  <Link href="/guide/sabiki" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/sabiki" className="text-primary hover:underline">
                     サビキ釣り完全ガイド
                   </Link>
                   <span className="text-muted-foreground"> - 同じ堤防で楽しめるお手軽釣法</span>
                 </li>
                 <li>
-                  <Link href="/guide/eging" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/eging" className="text-primary hover:underline">
                     エギング入門ガイド
                   </Link>
                   <span className="text-muted-foreground"> - 堤防からイカを狙うルアー釣り</span>
@@ -829,13 +829,13 @@ export default function JiggingGuidePage() {
             釣った青物を美味しく持ち帰る方法も確認しましょう。
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            <Link
+            <Link prefetch={false}
               href="/guide/fish-handling"
               className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
             >
               釣った魚の持ち帰り方ガイドへ
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/spots"
               className="inline-flex items-center rounded-full border border-primary px-6 py-3 text-sm font-medium text-primary transition-colors hover:bg-primary/5"
             >
@@ -843,11 +843,11 @@ export default function JiggingGuidePage() {
             </Link>
           </div>
           <div className="mt-4 flex flex-wrap justify-center gap-3 text-sm">
-            <Link href="/catchable-now" className="text-primary hover:underline">今釣れる魚</Link>
+            <Link prefetch={false} href="/catchable-now" className="text-primary hover:underline">今釣れる魚</Link>
             <span className="text-muted-foreground">|</span>
-            <Link href="/for-beginners" className="text-primary hover:underline">初心者ガイド</Link>
+            <Link prefetch={false} href="/for-beginners" className="text-primary hover:underline">初心者ガイド</Link>
             <span className="text-muted-foreground">|</span>
-            <Link href="/guide" className="text-primary hover:underline">釣り方ガイド一覧</Link>
+            <Link prefetch={false} href="/guide" className="text-primary hover:underline">釣り方ガイド一覧</Link>
           </div>
         </div>
       {/* LINE登録バナー */}

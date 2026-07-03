@@ -58,28 +58,28 @@ export default function NotFound() {
 
         {/* 誘導ボタン */}
         <div className="flex flex-wrap justify-center gap-3">
-          <Link href="/">
+          <Link prefetch={false} href="/">
             <button className="flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-700">
               <Home className="size-4" />
               トップページへ
             </button>
           </Link>
 
-          <Link href="/spots">
+          <Link prefetch={false} href="/spots">
             <button className="flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-700">
               <MapPin className="size-4" />
               釣りスポットを探す
             </button>
           </Link>
 
-          <Link href="/ranking">
+          <Link prefetch={false} href="/ranking">
             <button className="flex items-center gap-2 rounded-lg border border-blue-300 bg-white px-6 py-3 text-sm font-semibold text-blue-700 shadow-sm transition-colors hover:bg-blue-50">
               <TrendingUp className="size-4" />
               人気ランキング
             </button>
           </Link>
 
-          <Link href="/bouzu-checker">
+          <Link prefetch={false} href="/bouzu-checker">
             <button className="flex items-center gap-2 rounded-lg border border-blue-300 bg-white px-6 py-3 text-sm font-semibold text-blue-700 shadow-sm transition-colors hover:bg-blue-50">
               <Fish className="size-4" />
               ボウズ確率チェッカー

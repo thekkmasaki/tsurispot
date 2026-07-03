@@ -96,7 +96,7 @@ export function NearbyGpsSearch({
         </div>
         <div className="flex gap-3 overflow-x-auto pb-2">
           {results.map((s) => (
-            <Link key={s.slug} href={`/spots/${s.slug}`} className="shrink-0">
+            <Link prefetch={false} key={s.slug} href={`/spots/${s.slug}`} className="shrink-0">
               <div className="min-w-[200px] rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
                 <p className="text-sm font-medium text-sky-600 mb-1">
                   <MapPin className="mr-1 inline size-3" />

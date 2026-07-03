@@ -139,7 +139,7 @@ export function SpotSearchFilter({
               const count = regionSpotCounts.get(r.id) ??
                 regionGroups.find((g) => g.region.id === r.id)?.spots.length ?? 0;
               return (
-                <Link key={r.id} href={`/area/${r.slug}`}>
+                <Link prefetch={false} key={r.id} href={`/area/${r.slug}`}>
                   <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                     <CardContent className="p-4">
                       <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">

@@ -7,7 +7,7 @@ import Link from "next/link";
  */
 export function PatentBadge({ className = "" }: { className?: string }) {
   return (
-    <Link
+    <Link prefetch={false}
       href="/technology"
       className={`inline-flex items-center gap-1 rounded-full bg-indigo-600 px-3 py-0.5 text-xs font-semibold text-white transition-colors hover:bg-indigo-700 ${className}`}
       title="ツリスポのAI釣り場解析技術（特許出願中）について"

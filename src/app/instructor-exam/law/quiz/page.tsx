@@ -70,11 +70,11 @@ export default function LawQuizPage() {
       <div className="mx-auto max-w-3xl px-4 py-8">
         <nav aria-label="パンくずリスト" className="mb-6 text-sm text-muted-foreground">
           <ol className="flex flex-wrap items-center gap-1.5">
-            <li><Link href="/" className="hover:text-foreground">ホーム</Link></li>
+            <li><Link prefetch={false} href="/" className="hover:text-foreground">ホーム</Link></li>
             <li aria-hidden="true">/</li>
-            <li><Link href="/instructor-exam" className="hover:text-foreground">インストラクター試験</Link></li>
+            <li><Link prefetch={false} href="/instructor-exam" className="hover:text-foreground">インストラクター試験</Link></li>
             <li aria-hidden="true">/</li>
-            <li><Link href="/instructor-exam/law" className="hover:text-foreground">漁業関連法規</Link></li>
+            <li><Link prefetch={false} href="/instructor-exam/law" className="hover:text-foreground">漁業関連法規</Link></li>
             <li aria-hidden="true">/</li>
             <li className="font-medium text-foreground">確認クイズ</li>
           </ol>
@@ -93,14 +93,14 @@ export default function LawQuizPage() {
         <InArticleAd className="my-8" />
 
         <div className="mt-8 flex justify-center gap-4">
-          <Link
+          <Link prefetch={false}
             href="/instructor-exam/law"
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50"
           >
             <ArrowLeft className="size-4" />
             学習ページに戻る
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/instructor-exam"
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-5 py-2.5 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50"
           >

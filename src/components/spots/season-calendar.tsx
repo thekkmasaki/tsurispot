@@ -45,7 +45,7 @@ export function SeasonCalendar({
       <div className="space-y-0.5">
         {catchableFish.map((cf) => (
           <div key={cf.fish.id} className="flex items-center">
-            <Link
+            <Link prefetch={false}
               href={`/fish/${cf.fish.slug}`}
               className="w-[4.5rem] shrink-0 truncate pr-1.5 text-xs font-medium text-foreground hover:text-primary hover:underline sm:w-20 sm:pr-2 sm:text-sm"
             >

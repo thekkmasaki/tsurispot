@@ -212,7 +212,7 @@ export default async function UserProfilePage({
       <div className="mx-auto max-w-lg px-4 py-16 text-center">
         <UserIcon className="mx-auto h-12 w-12 text-muted-foreground" />
         <h1 className="mt-4 text-xl font-bold">ユーザーが見つかりません</h1>
-        <Link href="/">
+        <Link prefetch={false} href="/">
           <Button className="mt-4">トップへ戻る</Button>
         </Link>
       </div>
@@ -229,7 +229,7 @@ export default async function UserProfilePage({
         <p className="mt-2 text-sm text-muted-foreground">
           このユーザーは釣果・統計を公開していません。
         </p>
-        <Link href="/">
+        <Link prefetch={false} href="/">
           <Button className="mt-4">トップへ戻る</Button>
         </Link>
       </div>

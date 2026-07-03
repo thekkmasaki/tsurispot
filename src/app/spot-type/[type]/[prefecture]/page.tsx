@@ -272,7 +272,7 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
         ]}
       />
 
-      <Link
+      <Link prefetch={false}
         href={`/spot-type/${type}`}
         className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground min-h-[44px]"
       >
@@ -367,7 +367,7 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
                 <h2 className="mb-2 text-sm font-bold">釣れる魚</h2>
                 <div className="flex flex-wrap gap-1">
                   {topFish.slice(0, 6).map((f) => (
-                    <Link key={f.slug} href={`/fish/${f.slug}`}>
+                    <Link prefetch={false} key={f.slug} href={`/fish/${f.slug}`}>
                       <Badge
                         variant="secondary"
                         className="cursor-pointer text-xs hover:bg-primary hover:text-primary-foreground"
@@ -409,7 +409,7 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
           </h2>
           <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
             {otherTypesInPref.map(({ type: t, count }) => (
-              <Link key={t} href={`/spot-type/${t}/${pref.slug}`}>
+              <Link prefetch={false} key={t} href={`/spot-type/${t}/${pref.slug}`}>
                 <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                   <CardContent className="p-3 sm:p-4">
                     <h3 className="text-sm font-semibold group-hover:text-primary">
@@ -434,7 +434,7 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
           </h2>
           <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
             {relatedPrefs.map((p) => (
-              <Link
+              <Link prefetch={false}
                 key={p.prefSlug}
                 href={`/spot-type/${type}/${p.prefSlug}`}
               >
@@ -482,31 +482,31 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
           関連リンク
         </h2>
         <div className="flex flex-wrap gap-2">
-          <Link
+          <Link prefetch={false}
             href={`/spot-type/${type}`}
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             {label}の釣り場一覧
           </Link>
-          <Link
+          <Link prefetch={false}
             href={`/prefecture/${pref.slug}`}
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             {pref.name}の釣り場
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/spot-type"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             釣り場タイプ一覧
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/prefecture"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             都道府県から探す
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/fish"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >

@@ -310,7 +310,7 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
           <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
             {targetFishData.map((fish) =>
               fish ? (
-                <Link key={fish.slug} href={`/fish/${fish.slug}`}>
+                <Link prefetch={false} key={fish.slug} href={`/fish/${fish.slug}`}>
                   <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                     <CardContent className="flex items-center gap-3 p-4">
                       <div className="size-10 shrink-0 overflow-hidden rounded-lg bg-primary/10">
@@ -337,7 +337,7 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
             )}
           </div>
           <p className="mt-3 text-sm text-muted-foreground">
-            <Link href="/catchable-now" className="text-primary hover:underline">
+            <Link prefetch={false} href="/catchable-now" className="text-primary hover:underline">
               今釣れる魚をもっと見る
             </Link>
           </p>
@@ -367,7 +367,7 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
                 ))}
               </div>
               <div className="mt-4 text-center">
-                <Link
+                <Link prefetch={false}
                   href="/spots"
                   className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
                 >
@@ -379,7 +379,7 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
           ) : (
             <p className="text-sm text-muted-foreground">
               条件に合うスポットが見つかりませんでした。
-              <Link href="/spots" className="text-primary hover:underline">
+              <Link prefetch={false} href="/spots" className="text-primary hover:underline">
                 全スポット一覧
               </Link>
               から探してみてください。
@@ -421,7 +421,7 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
             ))}
           </div>
           <p className="mt-3 text-sm text-muted-foreground">
-            <Link href="/beginner-checklist" className="text-primary hover:underline">
+            <Link prefetch={false} href="/beginner-checklist" className="text-primary hover:underline">
               持ち物チェックリストも確認する
             </Link>
           </p>
@@ -531,7 +531,7 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
               <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                 {relatedGuides.map((rg) =>
                   rg ? (
-                    <Link key={rg.slug} href={`/seasonal/${rg.slug}`}>
+                    <Link prefetch={false} key={rg.slug} href={`/seasonal/${rg.slug}`}>
                       <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                         <CardContent className="p-4">
                           <p className="text-sm font-semibold group-hover:text-primary">
@@ -552,7 +552,7 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
           {/* その他の関連ページ */}
           <div className="rounded-xl border bg-muted/30 p-4 sm:p-6">
             <div className="grid gap-3 sm:grid-cols-3">
-              <Link
+              <Link prefetch={false}
                 href="/seasonal"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >
@@ -561,7 +561,7 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
                   春夏秋冬のおすすめ釣り
                 </p>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/methods"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >
@@ -570,7 +570,7 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
                   釣り方・釣法の詳しい解説
                 </p>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/catchable-now"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >
@@ -579,7 +579,7 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
                   今の時期に釣れる魚をチェック
                 </p>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/guide"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >
@@ -588,7 +588,7 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
                   初心者向けステップバイステップ
                 </p>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/beginner-checklist"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >
@@ -597,7 +597,7 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
                   忘れ物防止チェックリスト
                 </p>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/spots"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >

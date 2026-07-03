@@ -64,7 +64,7 @@ const faqItems: FAQItem[] = [
         </p>
         <p className="mt-2">
           釣り方の詳細は
-          <Link href="/methods" className="font-medium text-primary hover:underline">釣り方ガイド</Link>
+          <Link prefetch={false} href="/methods" className="font-medium text-primary hover:underline">釣り方ガイド</Link>
           をご覧ください。
         </p>
       </>
@@ -104,7 +104,7 @@ const faqItems: FAQItem[] = [
         </p>
         <p className="mt-2">
           釣り方ごとの詳しい解説は
-          <Link href="/methods" className="font-medium text-primary hover:underline">釣り方ガイド</Link>
+          <Link prefetch={false} href="/methods" className="font-medium text-primary hover:underline">釣り方ガイド</Link>
           をご覧ください。
         </p>
       </>
@@ -148,7 +148,7 @@ const faqItems: FAQItem[] = [
         </div>
         <p className="mt-2">
           コマセを使う釣り方の詳細は
-          <Link href="/guide/sabiki" className="font-medium text-primary hover:underline">サビキ釣りガイド</Link>
+          <Link prefetch={false} href="/guide/sabiki" className="font-medium text-primary hover:underline">サビキ釣りガイド</Link>
           をご覧ください。
         </p>
       </>
@@ -250,7 +250,7 @@ const faqItems: FAQItem[] = [
         </div>
         <p className="mt-2">
           仕掛けの選び方は
-          <Link href="/guide/rigs" className="font-medium text-primary hover:underline">仕掛けガイド</Link>
+          <Link prefetch={false} href="/guide/rigs" className="font-medium text-primary hover:underline">仕掛けガイド</Link>
           をご覧ください。
         </p>
       </>
@@ -293,7 +293,7 @@ const faqItems: FAQItem[] = [
         </div>
         <p className="mt-2">
           結び方の詳しい図解は
-          <Link href="/guide/knots" className="font-medium text-primary hover:underline">結び方ガイド</Link>
+          <Link prefetch={false} href="/guide/knots" className="font-medium text-primary hover:underline">結び方ガイド</Link>
           をご覧ください。
         </p>
       </>
@@ -336,7 +336,7 @@ const faqItems: FAQItem[] = [
         </div>
         <p className="mt-2">
           ボウズ回避に役立つ情報は
-          <Link href="/bouzu-checker" className="font-medium text-primary hover:underline">ボウズ回避チェッカー</Link>
+          <Link prefetch={false} href="/bouzu-checker" className="font-medium text-primary hover:underline">ボウズ回避チェッカー</Link>
           もお試しください。
         </p>
       </>
@@ -373,7 +373,7 @@ const faqItems: FAQItem[] = [
         </div>
         <p className="mt-2">
           最初は50m飛べば十分です。練習を重ねれば100m以上も可能になります。投げ釣りの詳細は
-          <Link href="/guide/casting" className="font-medium text-primary hover:underline">キャスティングガイド</Link>
+          <Link prefetch={false} href="/guide/casting" className="font-medium text-primary hover:underline">キャスティングガイド</Link>
           をご覧ください。
         </p>
       </>
@@ -488,19 +488,19 @@ export default function FAQTechniquePage() {
         <div className="mt-12 rounded-xl border bg-muted/30 p-6">
           <h2 className="mb-4 text-lg font-bold">関連するFAQ・ガイド</h2>
           <div className="grid gap-3 sm:grid-cols-2">
-            <Link href="/faq" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
+            <Link prefetch={false} href="/faq" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
               <p className="font-semibold">よくある質問（総合）</p>
               <p className="mt-1 text-xs text-muted-foreground">全カテゴリのFAQを見る</p>
             </Link>
-            <Link href="/faq/spot" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
+            <Link prefetch={false} href="/faq/spot" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
               <p className="font-semibold">釣り場FAQ</p>
               <p className="mt-1 text-xs text-muted-foreground">堤防・漁港・管理釣り場</p>
             </Link>
-            <Link href="/methods" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
+            <Link prefetch={false} href="/methods" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
               <p className="font-semibold">釣り方・釣法ガイド</p>
               <p className="mt-1 text-xs text-muted-foreground">各釣法を詳しく解説</p>
             </Link>
-            <Link href="/guide/knots" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
+            <Link prefetch={false} href="/guide/knots" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
               <p className="font-semibold">結び方ガイド</p>
               <p className="mt-1 text-xs text-muted-foreground">基本の結び方を図解</p>
             </Link>

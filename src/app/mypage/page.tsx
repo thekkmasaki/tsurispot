@@ -309,7 +309,7 @@ export default function MyPage() {
         <p className="mt-2 text-sm text-muted-foreground">
           マイページを利用するにはログインしてください
         </p>
-        <Link href="/login">
+        <Link prefetch={false} href="/login">
           <Button className="mt-4">ログインする</Button>
         </Link>
       </div>
@@ -454,7 +454,7 @@ export default function MyPage() {
             : undefined
         }
       >
-        <Link
+        <Link prefetch={false}
           href="/"
           className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-white/85 px-3 py-1 text-xs text-foreground backdrop-blur-sm hover:bg-white"
         >
@@ -756,13 +756,13 @@ export default function MyPage() {
                 <div className="space-y-2 text-sm text-muted-foreground">
                   <p>
                     お気に入りスポットを登録すると、今日の潮汐とおすすめ度が一覧で見られます。
-                    <Link href="/spots" className="ml-1 underline hover:text-foreground">
+                    <Link prefetch={false} href="/spots" className="ml-1 underline hover:text-foreground">
                       スポットを探す
                     </Link>
                   </p>
                   <p>
                     ツリスポに無いスポットは
-                    <Link href="/spots/submit" className="ml-1 underline hover:text-foreground">
+                    <Link prefetch={false} href="/spots/submit" className="ml-1 underline hover:text-foreground">
                       投稿
                     </Link>
                     できます。
@@ -772,7 +772,7 @@ export default function MyPage() {
                 <ul className="space-y-2">
                   {dashboard.items.slice(0, 5).map((item) => (
                     <li key={item.slug}>
-                      <Link
+                      <Link prefetch={false}
                         href={`/spots/${item.slug}`}
                         className="block rounded-lg border p-3 transition-colors hover:bg-muted/50"
                       >
@@ -812,7 +812,7 @@ export default function MyPage() {
               )}
               {/* スポット投稿導線（リスト有無に関わらず常時表示） */}
               <div className="mt-3 border-t pt-3 text-center">
-                <Link
+                <Link prefetch={false}
                   href="/spots/submit"
                   className="inline-flex items-center gap-1.5 rounded-lg border border-ocean-mid/30 bg-ocean-mid/5 px-3 py-1.5 text-xs font-medium text-ocean-mid hover:bg-ocean-mid/10"
                 >
@@ -915,7 +915,7 @@ export default function MyPage() {
         {/* お気に入り */}
         <Card className="mt-4">
           <CardContent className="p-4">
-            <Link href="/favorites" className="flex items-center justify-between">
+            <Link prefetch={false} href="/favorites" className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <Heart className="h-5 w-5 text-red-500" />
                 <span className="font-medium">お気に入りスポット</span>
@@ -973,7 +973,7 @@ export default function MyPage() {
                     )}
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-1.5">
-                        <Link
+                        <Link prefetch={false}
                           href={`/users/${item.authorId}`}
                           className="text-xs font-medium text-ocean-mid hover:underline"
                         >
@@ -985,7 +985,7 @@ export default function MyPage() {
                           </span>
                         )}
                       </div>
-                      <Link
+                      <Link prefetch={false}
                         href={item.spotSlug ? `/spots/${item.spotSlug}` : "#"}
                         className="block"
                       >
@@ -1030,7 +1030,7 @@ export default function MyPage() {
                 <p className="text-sm text-muted-foreground">
                   スポット詳細ページの「ここに行った」ボタンで記録できます。
                 </p>
-                <Link
+                <Link prefetch={false}
                   href="/map"
                   className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm font-medium text-emerald-700 hover:bg-emerald-100"
                 >
@@ -1045,7 +1045,7 @@ export default function MyPage() {
                     key={c.id}
                     className="flex items-start gap-2 rounded-lg border p-3"
                   >
-                    <Link
+                    <Link prefetch={false}
                       href={`/spots/${c.spotSlug}`}
                       className="min-w-0 flex-1"
                     >
@@ -1093,7 +1093,7 @@ export default function MyPage() {
                 <p className="text-sm text-muted-foreground">
                   スポット詳細ページの「行きたい」ボタンで登録できます。
                 </p>
-                <Link
+                <Link prefetch={false}
                   href="/map"
                   className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-sm font-medium text-amber-700 hover:bg-amber-100"
                 >
@@ -1108,7 +1108,7 @@ export default function MyPage() {
                     key={item.slug}
                     className="flex items-start gap-2 rounded-lg border p-3"
                   >
-                    <Link href={`/spots/${item.slug}`} className="min-w-0 flex-1">
+                    <Link prefetch={false} href={`/spots/${item.slug}`} className="min-w-0 flex-1">
                       <div className="truncate font-medium">{item.name}</div>
                       <div className="text-xs text-muted-foreground">
                         {item.prefecture}
@@ -1139,28 +1139,28 @@ export default function MyPage() {
           <CardContent className="p-4">
             <h2 className="mb-3 text-sm font-bold sm:text-base">釣り日記</h2>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
-              <Link
+              <Link prefetch={false}
                 href="/mypage/stats"
                 className="flex flex-col items-center gap-1 rounded-lg border bg-card p-3 transition-all hover:border-primary/50 hover:shadow-md"
               >
                 <span className="text-2xl">📊</span>
                 <span className="text-xs font-medium">統計</span>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/mypage/fishdex"
                 className="flex flex-col items-center gap-1 rounded-lg border bg-card p-3 transition-all hover:border-primary/50 hover:shadow-md"
               >
                 <span className="text-2xl">🐟</span>
                 <span className="text-xs font-medium">魚種図鑑</span>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/mypage/prefecture-map"
                 className="flex flex-col items-center gap-1 rounded-lg border bg-card p-3 transition-all hover:border-primary/50 hover:shadow-md"
               >
                 <span className="text-2xl">🗾</span>
                 <span className="text-xs font-medium">都道府県</span>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/mypage/records"
                 className="flex flex-col items-center gap-1 rounded-lg border bg-card p-3 transition-all hover:border-primary/50 hover:shadow-md"
               >
@@ -1183,7 +1183,7 @@ export default function MyPage() {
                 <span className="font-medium">投稿した釣果</span>
               </div>
               <div className="flex items-center gap-2">
-                <Link
+                <Link prefetch={false}
                   href="/mypage/stats"
                   className="inline-flex items-center gap-1 rounded-full border border-primary/30 bg-primary/5 px-2.5 py-1 text-xs font-medium text-primary hover:bg-primary/10"
                 >
@@ -1204,7 +1204,7 @@ export default function MyPage() {
                 <p className="text-sm text-muted-foreground">
                   まだ釣果を投稿していません。スポットページから投稿できます。
                 </p>
-                <Link
+                <Link prefetch={false}
                   href="/map"
                   className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50 px-3 py-2 text-sm font-medium text-blue-700 hover:bg-blue-100"
                 >

@@ -160,7 +160,7 @@ export function SpotListWithFilter({ spots, methodName, monthName }: Props) {
       ) : (
         <div className="space-y-3">
           {sorted.map((spot, idx) => (
-            <Link key={spot.slug} href={`/spots/${spot.slug}`}>
+            <Link prefetch={false} key={spot.slug} href={`/spots/${spot.slug}`}>
               <Card className="hover:shadow-md transition-shadow">
                 <CardContent className="p-4">
                   <div className="flex items-start gap-3">

@@ -146,7 +146,7 @@ export function QuizClient() {
           スタート
         </button>
         <div className="mt-6">
-          <Link href="/glossary" className="text-sm text-primary hover:underline">
+          <Link prefetch={false} href="/glossary" className="text-sm text-primary hover:underline">
             <BookOpenText className="mr-1 inline size-4" />
             先に用語集で勉強する
           </Link>
@@ -206,7 +206,7 @@ export function QuizClient() {
             結果をXでシェア
           </a>
 
-          <Link
+          <Link prefetch={false}
             href="/glossary"
             className="inline-flex w-full max-w-xs items-center justify-center gap-2 rounded-full border border-border bg-white px-6 py-3 text-sm font-bold text-foreground shadow-sm transition-colors hover:bg-muted"
           >

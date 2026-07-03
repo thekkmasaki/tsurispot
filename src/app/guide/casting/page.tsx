@@ -752,7 +752,7 @@ export default function CastingGuidePage() {
           { label: "キャスティングの基本" },
         ]} />
         <div className="mb-6">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
@@ -1119,7 +1119,7 @@ export default function CastingGuidePage() {
           <p className="mb-4 text-sm text-muted-foreground">
             基本をマスターしたら、実際に釣り場に行ってみましょう！
           </p>
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >

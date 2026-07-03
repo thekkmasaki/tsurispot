@@ -137,8 +137,8 @@ function FishListContent() {
         <p className="text-sm text-blue-800">
           <span className="font-bold">🐟 初心者の方へ：</span>
           「初心者向け」フィルターで、最初に狙いやすい魚が見つかります。
-          まずは<Link href="/fish/aji" className="font-bold underline hover:text-blue-900">アジ</Link>や
-          <Link href="/fish/iwashi" className="font-bold underline hover:text-blue-900">イワシ</Link>から始めてみましょう！
+          まずは<Link prefetch={false} href="/fish/aji" className="font-bold underline hover:text-blue-900">アジ</Link>や
+          <Link prefetch={false} href="/fish/iwashi" className="font-bold underline hover:text-blue-900">イワシ</Link>から始めてみましょう！
         </p>
       </div>
 

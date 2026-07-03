@@ -59,7 +59,7 @@ export function LoginPromoBanner() {
           </div>
 
           <div className="mt-6 flex flex-col items-center gap-2">
-            <Link href="/login">
+            <Link prefetch={false} href="/login">
               <Button
                 size="lg"
                 className="gap-2 bg-gradient-to-r from-blue-600 to-cyan-600 px-6 py-3 text-sm font-bold text-white shadow-md shadow-blue-600/20 hover:shadow-lg hover:shadow-blue-600/30"

@@ -242,7 +242,7 @@ export function CatchableNowClient({ fishSpecies, initialMonth }: CatchableNowCl
             const slug = MONTH_SLUGS[i];
             const isSelected = monthNum === selectedMonth;
             return (
-              <Link
+              <Link prefetch={false}
                 key={slug}
                 href={`/monthly/${slug}`}
                 className={`rounded-lg border p-2 text-center text-sm font-medium transition-shadow hover:shadow-md ${
@@ -262,7 +262,7 @@ export function CatchableNowClient({ fishSpecies, initialMonth }: CatchableNowCl
       <div className="mt-8 rounded-xl border bg-muted/30 p-6">
         <h2 className="mb-4 text-base font-bold">関連ページ</h2>
         <div className="grid gap-3 sm:grid-cols-3">
-          <Link
+          <Link prefetch={false}
             href="/fish"
             className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
           >
@@ -271,7 +271,7 @@ export function CatchableNowClient({ fishSpecies, initialMonth }: CatchableNowCl
               全魚種の詳しい情報を見る
             </p>
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/monthly"
             className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
           >
@@ -280,7 +280,7 @@ export function CatchableNowClient({ fishSpecies, initialMonth }: CatchableNowCl
               全12ヶ月の釣り情報
             </p>
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/spots"
             className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
           >

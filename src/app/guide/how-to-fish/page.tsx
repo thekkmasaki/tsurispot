@@ -452,7 +452,7 @@ export default function HowToFishPage() {
           ]}
         />
         <div className="mb-6">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
@@ -558,11 +558,11 @@ export default function HowToFishPage() {
 
             <p className="text-sm text-muted-foreground">
               どの釣りから始めればいいか迷ったら、まずは
-              <Link href="/guide/fishing-for-beginners" className="text-primary hover:underline">
+              <Link prefetch={false} href="/guide/fishing-for-beginners" className="text-primary hover:underline">
                 釣り初心者ガイド
               </Link>
               を参考にしてみてください。全国の釣りスポットは
-              <Link href="/spots" className="text-primary hover:underline">
+              <Link prefetch={false} href="/spots" className="text-primary hover:underline">
                 釣りスポット一覧
               </Link>
               から検索できます。
@@ -585,7 +585,7 @@ export default function HowToFishPage() {
                   コンクリートで整備された足場で安全。車を横付けできる場所も多く、初心者やファミリーに最適です。サビキ釣りでアジ・イワシ・サバなどの回遊魚が狙えます。
                 </p>
                 <div className="mt-2">
-                  <Link
+                  <Link prefetch={false}
                     href="/fishing-spots/breakwater-beginner"
                     className="inline-flex items-center text-sm text-primary hover:underline"
                   >
@@ -623,7 +623,7 @@ export default function HowToFishPage() {
 
             <div className="mt-4 text-center">
               <Button asChild variant="outline" size="sm">
-                <Link href="/spots">
+                <Link prefetch={false} href="/spots">
                   全国の釣りスポットを探す
                   <ChevronRight className="ml-1 size-4" />
                 </Link>
@@ -685,19 +685,19 @@ export default function HowToFishPage() {
 
             <div className="mt-4 flex flex-wrap gap-2">
               <Button asChild variant="outline" size="sm">
-                <Link href="/gear">
+                <Link prefetch={false} href="/gear">
                   おすすめ道具を見る
                   <ChevronRight className="ml-1 size-4" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="sm">
-                <Link href="/beginner-checklist">
+                <Link prefetch={false} href="/beginner-checklist">
                   持ち物チェックリスト
                   <ChevronRight className="ml-1 size-4" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="sm">
-                <Link href="/guide/fishing-gear-guide">
+                <Link prefetch={false} href="/guide/fishing-gear-guide">
                   道具の選び方ガイド
                   <ChevronRight className="ml-1 size-4" />
                 </Link>
@@ -751,7 +751,7 @@ export default function HowToFishPage() {
                   <div className="min-w-0 flex-1">
                     <h3 className="font-bold text-foreground">{item.title}</h3>
                     <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
-                    <Link
+                    <Link prefetch={false}
                       href={item.link.href}
                       className="mt-2 inline-flex items-center text-sm text-primary hover:underline"
                     >
@@ -780,9 +780,9 @@ export default function HowToFishPage() {
                 </div>
                 <p className="text-sm text-muted-foreground">
                   コマセ（撒き餌）で魚を集め、疑似餌のついた複数の針で一度にたくさんの魚を釣る方法です。投げる技術が不要で、足元に仕掛けを落とすだけ。
-                  <Link href="/fish/aji" className="text-primary hover:underline">アジ</Link>・
-                  <Link href="/fish/saba" className="text-primary hover:underline">サバ</Link>・
-                  <Link href="/fish/iwashi" className="text-primary hover:underline">イワシ</Link>
+                  <Link prefetch={false} href="/fish/aji" className="text-primary hover:underline">アジ</Link>・
+                  <Link prefetch={false} href="/fish/saba" className="text-primary hover:underline">サバ</Link>・
+                  <Link prefetch={false} href="/fish/iwashi" className="text-primary hover:underline">イワシ</Link>
                   が主なターゲットで、群れが回遊していれば初心者でも数十匹の釣果が期待できます。
                 </p>
                 <div className="mt-3 space-y-1 text-sm text-muted-foreground">
@@ -790,7 +790,7 @@ export default function HowToFishPage() {
                   <p><span className="font-medium text-foreground">おすすめの場所：</span>漁港、堤防</p>
                   <p><span className="font-medium text-foreground">予算目安：</span>3,000〜5,000円</p>
                 </div>
-                <Link
+                <Link prefetch={false}
                   href="/guide/sabiki"
                   className="mt-3 inline-flex items-center text-sm font-medium text-primary hover:underline"
                 >
@@ -808,15 +808,15 @@ export default function HowToFishPage() {
                 </div>
                 <p className="text-sm text-muted-foreground">
                   軽いオモリとエサ（青イソメ）をつけた仕掛けを20〜30m先に投げ、海底にいる
-                  <Link href="/fish/kisu" className="text-primary hover:underline">キス</Link>や
-                  <Link href="/fish/haze" className="text-primary hover:underline">ハゼ</Link>
+                  <Link prefetch={false} href="/fish/kisu" className="text-primary hover:underline">キス</Link>や
+                  <Link prefetch={false} href="/fish/haze" className="text-primary hover:underline">ハゼ</Link>
                   を狙う釣り方です。投げる動作が楽しく、天ぷらが美味しい魚が釣れるのも魅力。サビキ釣りに慣れたら次のステップとしておすすめです。
                 </p>
                 <div className="mt-3 space-y-1 text-sm text-muted-foreground">
                   <p><span className="font-medium text-foreground">ベストシーズン：</span>キスは5〜9月、ハゼは7〜11月</p>
                   <p><span className="font-medium text-foreground">おすすめの場所：</span>砂浜、漁港内の砂地</p>
                 </div>
-                <Link
+                <Link prefetch={false}
                   href="/guide/choinage"
                   className="mt-3 inline-flex items-center text-sm font-medium text-primary hover:underline"
                 >
@@ -834,13 +834,13 @@ export default function HowToFishPage() {
                 </div>
                 <p className="text-sm text-muted-foreground">
                   小さなワーム（ソフトルアー）を使って
-                  <Link href="/fish/aji" className="text-primary hover:underline">アジ</Link>を狙う「アジング」は、ルアー釣り入門に最適です。エサを使わないので手が汚れず、繊細なアタリを感じるゲーム性の高さが人気。夜の常夜灯周りが好ポイントです。
+                  <Link prefetch={false} href="/fish/aji" className="text-primary hover:underline">アジ</Link>を狙う「アジング」は、ルアー釣り入門に最適です。エサを使わないので手が汚れず、繊細なアタリを感じるゲーム性の高さが人気。夜の常夜灯周りが好ポイントです。
                 </p>
                 <div className="mt-3 space-y-1 text-sm text-muted-foreground">
                   <p><span className="font-medium text-foreground">ベストシーズン：</span>通年（秋〜冬がベスト）</p>
                   <p><span className="font-medium text-foreground">おすすめの場所：</span>漁港の常夜灯周り</p>
                 </div>
-                <Link
+                <Link prefetch={false}
                   href="/guide/lure"
                   className="mt-3 inline-flex items-center text-sm font-medium text-primary hover:underline"
                 >
@@ -852,7 +852,7 @@ export default function HowToFishPage() {
 
             <div className="mt-4 text-center">
               <Button asChild variant="outline" size="sm">
-                <Link href="/methods">
+                <Link prefetch={false} href="/methods">
                   すべての釣り方を見る
                   <ChevronRight className="ml-1 size-4" />
                 </Link>
@@ -912,19 +912,19 @@ export default function HowToFishPage() {
 
             <div className="mt-4 flex flex-wrap justify-center gap-2">
               <Button asChild variant="outline" size="sm">
-                <Link href="/seasonal">
+                <Link prefetch={false} href="/seasonal">
                   季節の釣り情報を見る
                   <ChevronRight className="ml-1 size-4" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="sm">
-                <Link href="/catchable-now">
+                <Link prefetch={false} href="/catchable-now">
                   今釣れる魚を見る
                   <ChevronRight className="ml-1 size-4" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="sm">
-                <Link href="/fishing-calendar">
+                <Link prefetch={false} href="/fishing-calendar">
                   釣りカレンダー
                   <ChevronRight className="ml-1 size-4" />
                 </Link>
@@ -959,14 +959,14 @@ export default function HowToFishPage() {
             </div>
 
             <div className="mt-4 flex flex-wrap gap-2">
-              <Link
+              <Link prefetch={false}
                 href="/fishing-rules"
                 className="inline-flex items-center text-sm font-medium text-primary hover:underline"
               >
                 釣りのルールをもっと詳しく見る
                 <ChevronRight className="ml-0.5 size-4" />
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/safety"
                 className="ml-4 inline-flex items-center text-sm font-medium text-primary hover:underline"
               >
@@ -1031,7 +1031,7 @@ export default function HowToFishPage() {
                 { href: "/fish", title: "魚図鑑", desc: "80種以上の魚の特徴・釣り方・旬を紹介", icon: Fish },
                 { href: "/spots", title: "釣りスポット一覧", desc: "全国1,000以上の釣りスポットを検索", icon: MapPin },
               ].map((guide) => (
-                <Link key={guide.href} href={guide.href} className="group">
+                <Link prefetch={false} key={guide.href} href={guide.href} className="group">
                   <Card className="h-full transition-colors group-hover:border-primary">
                     <CardContent className="flex items-start gap-3 pt-6">
                       <guide.icon className="mt-0.5 size-5 shrink-0 text-primary" />
@@ -1053,7 +1053,7 @@ export default function HowToFishPage() {
             さっそく釣りスポットを探してみよう！
           </p>
           <Button asChild size="lg" className="min-h-[48px] rounded-full px-8">
-            <Link href="/spots">スポットを探す</Link>
+            <Link prefetch={false} href="/spots">スポットを探す</Link>
           </Button>
         </div>
 

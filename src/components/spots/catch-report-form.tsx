@@ -223,7 +223,7 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
         </Button>
         {!session?.user && (
           <p className="text-xs text-muted-foreground">
-            <Link href="/login" className="underline hover:text-foreground">
+            <Link prefetch={false} href="/login" className="underline hover:text-foreground">
               ログイン
             </Link>
             するとマイページに記録され、 連続釣行ストリーク等の機能も使えます
@@ -249,7 +249,7 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
                   <>
                     <br />
                     ※マイページに記録するには
-                    <Link href="/login" className="ml-1 underline">
+                    <Link prefetch={false} href="/login" className="ml-1 underline">
                       ログイン
                     </Link>
                     が必要です。
@@ -280,7 +280,7 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
         {/* UX-9: 初投稿者向けヘルプ link (Nielsen H10) */}
         <div className="mb-3 rounded-lg bg-muted/40 px-3 py-2 text-xs text-muted-foreground">
           初めての投稿ですか？
-          <Link href="/guide/beginner" className="ml-1 font-medium text-primary underline">
+          <Link prefetch={false} href="/guide/beginner" className="ml-1 font-medium text-primary underline">
             初心者向けガイドを見る
           </Link>
           <span className="ml-1">で書き方のコツを確認できます</span>

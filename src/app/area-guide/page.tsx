@@ -82,7 +82,7 @@ export default function AreaGuidePage() {
             {areaGuides.map((guide) => {
               const spotCount = getSpotCountForArea(guide.prefectures);
               return (
-                <Link key={guide.slug} href={`/area-guide/${guide.slug}`}>
+                <Link prefetch={false} key={guide.slug} href={`/area-guide/${guide.slug}`}>
                   <Card className="h-full transition-all hover:shadow-md hover:-translate-y-0.5">
                     <CardContent className="p-5">
                       <div className="mb-3 flex items-start justify-between">

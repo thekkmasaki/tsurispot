@@ -409,7 +409,7 @@ export default function FishingGearGuidePage() {
           ]}
         />
         <div className="mb-6">
-          <Link href="/guide" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground">
+          <Link prefetch={false} href="/guide" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground">
             <ChevronLeft className="mr-1 size-4" />
             釣りの始め方ガイドに戻る
           </Link>
@@ -713,7 +713,7 @@ export default function FishingGearGuidePage() {
                 <div key={item.method} className="rounded-lg border p-4">
                   <div className="mb-2 flex items-center justify-between">
                     <h3 className="font-bold text-foreground">{item.method}</h3>
-                    <Link href={item.link} className="text-xs text-primary hover:underline">
+                    <Link prefetch={false} href={item.link} className="text-xs text-primary hover:underline">
                       詳しく見る <ChevronRight className="ml-0.5 inline size-3" />
                     </Link>
                   </div>
@@ -817,7 +817,7 @@ export default function FishingGearGuidePage() {
                 { href: "/fish", title: "魚図鑑", desc: "80種以上の魚の特徴・釣り方・旬を紹介", icon: Fish },
                 { href: "/spots", title: "釣りスポット一覧", desc: "全国1,000以上の釣りスポットを検索", icon: MapPin },
               ].map((guide) => (
-                <Link key={guide.href} href={guide.href} className="group">
+                <Link prefetch={false} key={guide.href} href={guide.href} className="group">
                   <Card className="h-full transition-colors group-hover:border-primary">
                     <CardContent className="flex items-start gap-3 pt-6">
                       <guide.icon className="mt-0.5 size-5 shrink-0 text-primary" />
@@ -836,7 +836,7 @@ export default function FishingGearGuidePage() {
         <div className="mt-8 text-center sm:mt-12">
           <p className="mb-4 text-base font-medium sm:text-lg">道具が揃ったら釣りスポットを探そう！</p>
           <Button asChild size="lg" className="min-h-[48px] rounded-full px-8">
-            <Link href="/spots">スポットを探す</Link>
+            <Link prefetch={false} href="/spots">スポットを探す</Link>
           </Button>
         </div>
 

@@ -337,7 +337,7 @@ export default function OyogasePage() {
         { label: "泳がせ釣りガイド" },
       ]} />
 
-      <Link href="/guide" className="mb-4 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary">
+      <Link prefetch={false} href="/guide" className="mb-4 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary">
         <ChevronLeft className="size-4" />
         ガイド一覧に戻る
       </Link>
@@ -389,7 +389,7 @@ export default function OyogasePage() {
             { name: "アオリイカ", slug: "aoriika", desc: "ウキ泳がせで狙う" },
             { name: "ハタ類", slug: "hata", desc: "根周りの高級根魚" },
           ].map((fish) => (
-            <Link key={fish.slug} href={`/fish/${fish.slug}`} className="group">
+            <Link prefetch={false} key={fish.slug} href={`/fish/${fish.slug}`} className="group">
               <Card className="h-full py-0 transition-shadow hover:shadow-md">
                 <CardContent className="p-3">
                   <div className="flex items-center gap-2">
@@ -598,7 +598,7 @@ export default function OyogasePage() {
           <h2 className="mb-4 text-xl font-bold sm:text-2xl">泳がせ釣りにおすすめのスポット</h2>
           <div className="grid gap-2 sm:grid-cols-2">
             {oyogaseSpots.map((spot) => (
-              <Link
+              <Link prefetch={false}
                 key={spot.id}
                 href={`/spots/${spot.slug}`}
                 className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
@@ -612,7 +612,7 @@ export default function OyogasePage() {
             ))}
           </div>
           <div className="mt-3 text-center">
-            <Link href="/spots" className="text-sm text-primary hover:underline">
+            <Link prefetch={false} href="/spots" className="text-sm text-primary hover:underline">
               すべてのスポットを見る →
             </Link>
           </div>
@@ -636,27 +636,27 @@ export default function OyogasePage() {
       <div className="rounded-xl border bg-muted/30 p-6">
         <h2 className="mb-4 text-lg font-bold">関連ガイド</h2>
         <div className="grid gap-3 sm:grid-cols-3">
-          <Link href="/guide/sabiki" className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md">
+          <Link prefetch={false} href="/guide/sabiki" className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md">
             <p className="font-semibold group-hover:text-primary">サビキ釣りガイド</p>
             <p className="mt-1 text-xs text-muted-foreground">エサ確保の基本</p>
           </Link>
-          <Link href="/guide/rigs" className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md">
+          <Link prefetch={false} href="/guide/rigs" className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md">
             <p className="font-semibold group-hover:text-primary">仕掛け図解ガイド</p>
             <p className="mt-1 text-xs text-muted-foreground">基本仕掛けの作り方</p>
           </Link>
-          <Link href="/guide/handling" className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md">
+          <Link prefetch={false} href="/guide/handling" className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md">
             <p className="font-semibold group-hover:text-primary">魚の締め方ガイド</p>
             <p className="mt-1 text-xs text-muted-foreground">大物を美味しく持ち帰る</p>
           </Link>
-          <Link href="/guide/jigging" className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md">
+          <Link prefetch={false} href="/guide/jigging" className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md">
             <p className="font-semibold group-hover:text-primary">ショアジギングガイド</p>
             <p className="mt-1 text-xs text-muted-foreground">メタルジグで青物を狙う</p>
           </Link>
-          <Link href="/guide/lure" className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md">
+          <Link prefetch={false} href="/guide/lure" className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md">
             <p className="font-semibold group-hover:text-primary">ルアー釣りガイド</p>
             <p className="mt-1 text-xs text-muted-foreground">ルアーの基本を学ぶ</p>
           </Link>
-          <Link href="/guide/choinage" className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md">
+          <Link prefetch={false} href="/guide/choinage" className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md">
             <p className="font-semibold group-hover:text-primary">ちょい投げガイド</p>
             <p className="mt-1 text-xs text-muted-foreground">堤防でのお手軽投げ釣り</p>
           </Link>

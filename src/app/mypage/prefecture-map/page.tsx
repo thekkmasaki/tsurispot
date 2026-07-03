@@ -64,7 +64,7 @@ export default function PrefectureMapPage() {
     return (
       <div className="container mx-auto px-4 py-8">
         <p className="text-sm text-muted-foreground">ログインが必要です。</p>
-        <Link
+        <Link prefetch={false}
           href="/login"
           className="mt-3 inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
         >
@@ -98,7 +98,7 @@ export default function PrefectureMapPage() {
         ]}
       />
 
-      <Link
+      <Link prefetch={false}
         href="/mypage"
         className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground"
       >
@@ -135,7 +135,7 @@ export default function PrefectureMapPage() {
             </h2>
             <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-7">
               {prefectures.map((p) => (
-                <Link
+                <Link prefetch={false}
                   key={p.slug}
                   href={`/prefecture/${p.slug}`}
                   className={`relative rounded-lg border px-2 py-2 text-center transition-all hover:shadow-md ${

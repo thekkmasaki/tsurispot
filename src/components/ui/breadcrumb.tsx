@@ -26,7 +26,7 @@ export function Breadcrumb({ items }: BreadcrumbProps) {
                   {item.label}
                 </span>
               ) : (
-                <Link
+                <Link prefetch={false}
                   href={item.href}
                   className="hover:underline hover:text-gray-700 transition-colors line-clamp-1 max-w-[180px] sm:max-w-xs"
                 >

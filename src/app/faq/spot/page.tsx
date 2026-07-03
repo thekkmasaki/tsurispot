@@ -58,9 +58,9 @@ const faqItems: FAQItem[] = [
         </div>
         <p className="mt-2">
           堤防釣りの全国スポットは
-          <Link href="/spots" className="font-medium text-primary hover:underline">スポット検索</Link>
+          <Link prefetch={false} href="/spots" className="font-medium text-primary hover:underline">スポット検索</Link>
           で探せます。釣り方の詳細は
-          <Link href="/methods" className="font-medium text-primary hover:underline">釣り方ガイド</Link>
+          <Link prefetch={false} href="/methods" className="font-medium text-primary hover:underline">釣り方ガイド</Link>
           をご覧ください。
         </p>
       </>
@@ -91,7 +91,7 @@ const faqItems: FAQItem[] = [
         </p>
         <p className="mt-2">
           釣りのルールについて詳しくは
-          <Link href="/fishing-rules" className="font-medium text-primary hover:underline">ルール・マナーガイド</Link>
+          <Link prefetch={false} href="/fishing-rules" className="font-medium text-primary hover:underline">ルール・マナーガイド</Link>
           をご覧ください。
         </p>
       </>
@@ -134,7 +134,7 @@ const faqItems: FAQItem[] = [
         </div>
         <p className="mt-2">
           全国の釣り場情報は
-          <Link href="/spots" className="font-medium text-primary hover:underline">スポット検索</Link>
+          <Link prefetch={false} href="/spots" className="font-medium text-primary hover:underline">スポット検索</Link>
           で探せます。
         </p>
       </>
@@ -191,9 +191,9 @@ const faqItems: FAQItem[] = [
         </p>
         <p className="mt-2">
           海釣りスポットは
-          <Link href="/spots" className="font-medium text-primary hover:underline">スポット検索</Link>
+          <Link prefetch={false} href="/spots" className="font-medium text-primary hover:underline">スポット検索</Link>
           で、釣り方は
-          <Link href="/methods" className="font-medium text-primary hover:underline">釣り方ガイド</Link>
+          <Link prefetch={false} href="/methods" className="font-medium text-primary hover:underline">釣り方ガイド</Link>
           で確認できます。
         </p>
       </>
@@ -236,7 +236,7 @@ const faqItems: FAQItem[] = [
         </div>
         <p className="mt-2">
           安全情報は
-          <Link href="/safety" className="font-medium text-primary hover:underline">安全ガイド</Link>
+          <Link prefetch={false} href="/safety" className="font-medium text-primary hover:underline">安全ガイド</Link>
           をご覧ください。
         </p>
       </>
@@ -279,7 +279,7 @@ const faqItems: FAQItem[] = [
         </div>
         <p className="mt-2">
           まずは堤防釣りから始めましょう。
-          <Link href="/spots" className="font-medium text-primary hover:underline">スポット検索</Link>
+          <Link prefetch={false} href="/spots" className="font-medium text-primary hover:underline">スポット検索</Link>
           で初心者向けの釣り場を探せます。
         </p>
       </>
@@ -314,9 +314,9 @@ const faqItems: FAQItem[] = [
         </div>
         <p className="mt-2">
           穴場スポットは
-          <Link href="/spots" className="font-medium text-primary hover:underline">スポット検索</Link>
+          <Link prefetch={false} href="/spots" className="font-medium text-primary hover:underline">スポット検索</Link>
           で探せます。釣り場のマナーは
-          <Link href="/fishing-rules" className="font-medium text-primary hover:underline">ルール・マナーガイド</Link>
+          <Link prefetch={false} href="/fishing-rules" className="font-medium text-primary hover:underline">ルール・マナーガイド</Link>
           をご覧ください。
         </p>
       </>
@@ -431,19 +431,19 @@ export default function FAQSpotPage() {
         <div className="mt-12 rounded-xl border bg-muted/30 p-6">
           <h2 className="mb-4 text-lg font-bold">関連するFAQ・ガイド</h2>
           <div className="grid gap-3 sm:grid-cols-2">
-            <Link href="/faq" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
+            <Link prefetch={false} href="/faq" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
               <p className="font-semibold">よくある質問（総合）</p>
               <p className="mt-1 text-xs text-muted-foreground">全カテゴリのFAQを見る</p>
             </Link>
-            <Link href="/faq/technique" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
+            <Link prefetch={false} href="/faq/technique" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
               <p className="font-semibold">テクニックFAQ</p>
               <p className="mt-1 text-xs text-muted-foreground">釣れない時の対処法・潮回り</p>
             </Link>
-            <Link href="/spots" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
+            <Link prefetch={false} href="/spots" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
               <p className="font-semibold">釣りスポット検索</p>
               <p className="mt-1 text-xs text-muted-foreground">全国の釣り場を探す</p>
             </Link>
-            <Link href="/fishing-rules" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
+            <Link prefetch={false} href="/fishing-rules" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
               <p className="font-semibold">ルール・マナーガイド</p>
               <p className="mt-1 text-xs text-muted-foreground">釣り場で守るべきルール</p>
             </Link>

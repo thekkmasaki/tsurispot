@@ -21,7 +21,7 @@ const INITIAL_SHOW = 4;
 
 function ReportCard({ post, featured }: { post: BlogPostSummary; featured?: boolean }) {
   return (
-    <Link href={`/blog/${post.slug}`}>
+    <Link prefetch={false} href={`/blog/${post.slug}`}>
       <Card
         className={`group h-full overflow-hidden border-0 py-0 transition-all hover:shadow-lg ${
           featured

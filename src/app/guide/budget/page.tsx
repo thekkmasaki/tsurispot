@@ -368,7 +368,7 @@ export default function BudgetGuidePage() {
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
         {/* パンくず */}
         <div className="mb-6">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
@@ -818,7 +818,7 @@ export default function BudgetGuidePage() {
           <p className="mb-4 text-sm text-muted-foreground">
             予算が決まったら、次は道具のセッティング方法を学びましょう。
           </p>
-          <Link
+          <Link prefetch={false}
             href="/guide/setup"
             className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >

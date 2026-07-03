@@ -69,7 +69,7 @@ export default function AccommodationsIndexPage() {
                 const count = countByPref.get(p.name) ?? 0;
                 if (count === 0) return null;
                 return (
-                  <Link
+                  <Link prefetch={false}
                     key={p.slug}
                     href={`/accommodations/${p.slug}`}
                     className="rounded-lg border p-3 text-sm transition-colors hover:bg-muted"
@@ -96,7 +96,7 @@ export default function AccommodationsIndexPage() {
         <p className="mt-2 text-sm text-emerald-700">
           各スポット詳細ページの「近くの釣り宿」セクションから、 釣り場と宿をまとめて検討できます。
         </p>
-        <Link
+        <Link prefetch={false}
           href="/spots"
           className="mt-3 inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-emerald-700"
         >

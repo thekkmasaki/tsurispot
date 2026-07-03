@@ -311,7 +311,7 @@ export default function SpotSubmitPage() {
 
         <div className="mt-8 flex justify-center gap-3">
           <Button asChild variant="outline">
-            <Link href="/spots">スポット一覧に戻る</Link>
+            <Link prefetch={false} href="/spots">スポット一覧に戻る</Link>
           </Button>
           <Button
             onClick={() => {
@@ -331,7 +331,7 @@ export default function SpotSubmitPage() {
     <main className="container mx-auto max-w-2xl px-4 py-8 sm:py-12">
       {/* パンくず */}
       <div className="mb-6">
-        <Link
+        <Link prefetch={false}
           href="/spots"
           className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground min-h-[44px]"
         >
@@ -783,7 +783,7 @@ export default function SpotSubmitPage() {
         <p className="text-center text-xs text-muted-foreground">
           投稿内容はスタッフが確認後、1〜3営業日以内に掲載されます。
           <br />
-          <Link href="/terms" className="underline hover:text-foreground">
+          <Link prefetch={false} href="/terms" className="underline hover:text-foreground">
             利用規約
           </Link>
           に同意の上、投稿してください。

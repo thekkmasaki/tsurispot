@@ -168,7 +168,7 @@ export default function GearPage() {
           </h2>
           <div className="grid gap-4 sm:grid-cols-3">
             {featuredArticles.map((article) => (
-              <Link key={article.href} href={article.href} className="group">
+              <Link prefetch={false} key={article.href} href={article.href} className="group">
                 <Card
                   className={`h-full border-2 py-0 transition-all hover:shadow-lg ${article.bgColor}`}
                 >
@@ -252,7 +252,7 @@ export default function GearPage() {
         <div className="rounded-xl border bg-muted/30 p-6">
           <h2 className="mb-4 text-lg font-bold">道具選びに迷ったら</h2>
           <div className="grid gap-3 sm:grid-cols-3">
-            <Link
+            <Link prefetch={false}
               href="/guide"
               className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >
@@ -264,7 +264,7 @@ export default function GearPage() {
               </p>
               <ChevronRight className="mx-auto mt-2 size-4 text-muted-foreground group-hover:text-primary" />
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/guide/budget"
               className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >
@@ -276,7 +276,7 @@ export default function GearPage() {
               </p>
               <ChevronRight className="mx-auto mt-2 size-4 text-muted-foreground group-hover:text-primary" />
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/beginner-checklist"
               className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >

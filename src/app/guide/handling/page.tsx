@@ -301,7 +301,7 @@ export default function HandlingGuidePage() {
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
         {/* パンくず */}
         <div className="mb-6">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
@@ -848,13 +848,13 @@ export default function HandlingGuidePage() {
             持ち帰った魚を美味しく調理しましょう。
           </p>
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <Link
+            <Link prefetch={false}
               href="/guide/fish-recipes"
               className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
             >
               釣った魚のレシピ集へ
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/guide/rigs"
               className="inline-flex items-center rounded-full border border-primary/50 px-6 py-3 text-sm font-medium text-primary hover:bg-primary/10"
             >

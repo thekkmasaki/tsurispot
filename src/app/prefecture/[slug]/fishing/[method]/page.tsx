@@ -320,7 +320,7 @@ export default async function PrefectureFishingMethodPage({
       />
 
       {/* 戻るリンク */}
-      <Link
+      <Link prefetch={false}
         href={`/prefecture/${pref.slug}`}
         className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground min-h-[44px]"
       >
@@ -402,7 +402,7 @@ export default async function PrefectureFishingMethodPage({
           </h2>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {catchableFishList.map((f) => (
-              <Link key={f.slug} href={`/fish/${f.slug}`}>
+              <Link prefetch={false} key={f.slug} href={`/fish/${f.slug}`}>
                 <Badge
                   variant="outline"
                   className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
@@ -437,7 +437,7 @@ export default async function PrefectureFishingMethodPage({
                     ? "bg-primary/60 text-white"
                     : "bg-primary/20";
             return (
-              <Link
+              <Link prefetch={false}
                 key={month.slug}
                 href={`/prefecture/${pref.slug}/${month.slug}`}
                 className={`rounded-lg px-3 py-2 text-center text-sm transition-opacity hover:opacity-80 ${intensity}`}
@@ -484,7 +484,7 @@ export default async function PrefectureFishingMethodPage({
                 {topSpots.map(({ spot, matchingFishCount, matchingFishNames }) => (
                   <tr key={spot.id} className="border-b hover:bg-muted/30">
                     <td className="px-3 py-2">
-                      <Link
+                      <Link prefetch={false}
                         href={`/spots/${spot.slug}`}
                         className="font-medium text-primary hover:underline"
                       >
@@ -529,7 +529,7 @@ export default async function PrefectureFishingMethodPage({
 
           {matchingSpots.length > 15 && (
             <div className="mt-4 text-center">
-              <Link
+              <Link prefetch={false}
                 href={`/prefecture/${pref.slug}`}
                 className="text-sm text-primary hover:underline"
               >
@@ -573,7 +573,7 @@ export default async function PrefectureFishingMethodPage({
           </h2>
           <div className="flex flex-wrap gap-2">
             {otherMethods.map((fm) => (
-              <Link
+              <Link prefetch={false}
                 key={fm.slug}
                 href={`/prefecture/${pref.slug}/fishing/${fm.slug}`}
                 className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
@@ -592,7 +592,7 @@ export default async function PrefectureFishingMethodPage({
         </h2>
         <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-6">
           {MONTHS.map((m) => (
-            <Link
+            <Link prefetch={false}
               key={m.slug}
               href={`/prefecture/${pref.slug}/${m.slug}`}
               className="rounded-lg border px-3 py-2 text-center text-sm transition-colors hover:bg-muted"
@@ -612,31 +612,31 @@ export default async function PrefectureFishingMethodPage({
           関連リンク
         </h2>
         <div className="flex flex-wrap gap-2">
-          <Link
+          <Link prefetch={false}
             href={`/prefecture/${pref.slug}`}
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             {pref.name}の釣り場
           </Link>
-          <Link
+          <Link prefetch={false}
             href={`/fishing/${method.slug}`}
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             {method.name}ガイド
           </Link>
-          <Link
+          <Link prefetch={false}
             href={method.guide}
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             {method.name}の始め方
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/prefecture"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             都道府県から探す
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/fishing"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >

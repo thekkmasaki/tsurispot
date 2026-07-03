@@ -156,7 +156,7 @@ function FishContent({ fish }: { fish: FishRecipeData }) {
 
       {/* 魚詳細ページへのリンク */}
       <div className="text-sm">
-        <Link
+        <Link prefetch={false}
           href={`/fish/${fish.slug}`}
           className="text-primary hover:underline"
         >

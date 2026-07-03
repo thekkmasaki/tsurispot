@@ -157,7 +157,7 @@ export default async function MethodPage({ params }: Props) {
                 ベストシーズン:
               </span>
               {bestMonths.map((bm) => (
-                <Link
+                <Link prefetch={false}
                   key={bm.month.slug}
                   href={`/fishing/${method.slug}/${bm.month.slug}`}
                 >
@@ -172,7 +172,7 @@ export default async function MethodPage({ params }: Props) {
 
         {/* ガイドへのリンク */}
         <div className="mb-8">
-          <Link
+          <Link prefetch={false}
             href={method.guide}
             className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 font-medium"
           >
@@ -195,7 +195,7 @@ export default async function MethodPage({ params }: Props) {
               const isCurrentMonth = month.num === currentMonth;
 
               return (
-                <Link
+                <Link prefetch={false}
                   key={month.slug}
                   href={`/fishing/${method.slug}/${month.slug}`}
                 >
@@ -287,7 +287,7 @@ export default async function MethodPage({ params }: Props) {
           <h2 className="text-xl font-bold mb-4">他の釣り方</h2>
           <div className="flex flex-wrap gap-2">
             {FISHING_METHODS.filter((m) => m.slug !== method.slug).map((m) => (
-              <Link key={m.slug} href={`/fishing/${m.slug}`}>
+              <Link prefetch={false} key={m.slug} href={`/fishing/${m.slug}`}>
                 <Badge
                   variant="outline"
                   className="hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer text-sm py-1.5 px-3"

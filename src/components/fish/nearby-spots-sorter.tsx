@@ -110,7 +110,7 @@ export function NearbySpotsSorter({ spots, fishName, totalCount }: NearbySpotsSo
   }) => {
     const richLabel = `${spot.prefecture}${spot.areaName}の${spot.name}で${fishName}を釣る`;
     return (
-    <Link
+    <Link prefetch={false}
       href={`/spots/${spot.slug}`}
       title={richLabel}
       aria-label={richLabel}

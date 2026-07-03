@@ -104,7 +104,7 @@ export default async function PrefectureAllSpotsPage({ params }: PageProps) {
         ]}
       />
 
-      <Link
+      <Link prefetch={false}
         href={`/prefecture/${pref.slug}`}
         className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground min-h-[44px]"
       >
@@ -158,7 +158,7 @@ export default async function PrefectureAllSpotsPage({ params }: PageProps) {
                   {spots.map((spot) => (
                     <tr key={spot.id} className="border-b hover:bg-muted/30">
                       <td className="px-3 py-2">
-                        <Link
+                        <Link prefetch={false}
                           href={`/spots/${spot.slug}`}
                           className="font-medium text-primary hover:underline"
                         >
@@ -195,19 +195,19 @@ export default async function PrefectureAllSpotsPage({ params }: PageProps) {
       <section className="mt-8 sm:mt-12">
         <h2 className="mb-3 text-base font-bold sm:text-lg">関連リンク</h2>
         <div className="flex flex-wrap gap-2">
-          <Link
+          <Link prefetch={false}
             href={`/prefecture/${pref.slug}`}
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             {pref.name}トップ
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/prefecture"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             都道府県から探す
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/spots"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >

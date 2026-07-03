@@ -80,7 +80,7 @@ export default function LegalPage() {
                   お問い合わせフォームからお問い合わせください。
                 </p>
                 <p className="mt-2">
-                  <Link
+                  <Link prefetch={false}
                     href="/contact"
                     className="text-primary underline underline-offset-4 hover:text-primary/80"
                   >
@@ -102,7 +102,7 @@ export default function LegalPage() {
               </div>
               <div className="text-sm leading-relaxed text-muted-foreground">
                 <p>
-                  <Link
+                  <Link prefetch={false}
                     href="/contact"
                     className="text-primary underline underline-offset-4 hover:text-primary/80"
                   >
@@ -260,7 +260,7 @@ export default function LegalPage() {
               <div className="text-sm leading-relaxed text-muted-foreground">
                 <p>
                   本表記に関するお問い合わせは、
-                  <Link
+                  <Link prefetch={false}
                     href="/contact"
                     className="text-primary underline underline-offset-4 hover:text-primary/80"
                   >

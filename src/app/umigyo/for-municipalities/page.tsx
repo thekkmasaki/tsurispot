@@ -628,7 +628,7 @@ export default function ForMunicipalitiesPage() {
       {/* 海業推進ページへ戻る */}
       <div className="mx-auto w-full max-w-5xl px-4 pb-12 sm:px-6 sm:pb-16">
         <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-          <Link href="/umigyo">
+          <Link prefetch={false} href="/umigyo">
             <Button variant="outline" className="gap-1.5">
               海業推進ページに戻る
               <ChevronRight className="size-4" />

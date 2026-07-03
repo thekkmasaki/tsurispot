@@ -403,7 +403,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
       />
 
       {/* 戻るリンク */}
-      <Link
+      <Link prefetch={false}
         href="/catchable-now"
         className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground min-h-[44px]"
       >
@@ -430,7 +430,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
 
       {/* 前月/翌月ナビ */}
       <div className="mb-6 flex items-center justify-between gap-2">
-        <Link
+        <Link prefetch={false}
           href={`/seasonal/${prevMonth.slug}/${regionSlug}`}
           className="flex items-center gap-1 rounded-lg border px-3 py-2 text-sm transition-colors hover:bg-muted"
         >
@@ -440,7 +440,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
         <span className="text-sm font-medium text-muted-foreground">
           {monthDef.name}（{monthDef.season}）
         </span>
-        <Link
+        <Link prefetch={false}
           href={`/seasonal/${nextMonth.slug}/${regionSlug}`}
           className="flex items-center gap-1 rounded-lg border px-3 py-2 text-sm transition-colors hover:bg-muted"
         >
@@ -486,7 +486,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
                 <Card key={f.slug} className="gap-0 py-0">
                   <CardContent className="p-4">
                     <div className="flex items-start justify-between gap-2">
-                      <Link href={`/fish/${f.slug}`} className="group">
+                      <Link prefetch={false} href={`/fish/${f.slug}`} className="group">
                         <h3 className="text-sm font-bold group-hover:text-primary sm:text-base">
                           {f.name}
                         </h3>
@@ -510,7 +510,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
                     {topSpots.length > 0 && (
                       <div className="mt-2 space-y-1">
                         {topSpots.map((spot) => (
-                          <Link
+                          <Link prefetch={false}
                             key={spot.id}
                             href={`/spots/${spot.slug}`}
                             className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-primary"
@@ -524,7 +524,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
                     {(() => {
                       const topPref = getTopPrefForFish(f.slug);
                       return topPref ? (
-                        <Link
+                        <Link prefetch={false}
                           href={`/prefecture/${topPref.prefSlug}/fish/${f.slug}`}
                           className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
                         >
@@ -554,7 +554,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
             {seasonFish.map((f) => {
               const fishData = fishSpecies.find((fs) => fs.slug === f.slug);
               return (
-                <Link key={f.slug} href={`/fish/${f.slug}`}>
+                <Link prefetch={false} key={f.slug} href={`/fish/${f.slug}`}>
                   <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
                     <CardContent className="p-3">
                       <div className="flex items-center gap-2">
@@ -679,7 +679,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
                 (s) => s.region.prefecture === p.name
               ).length;
               return (
-                <Link key={p.slug} href={`/prefecture/${p.slug}`}>
+                <Link prefetch={false} key={p.slug} href={`/prefecture/${p.slug}`}>
                   <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                     <CardContent className="p-3 sm:p-4">
                       <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
@@ -706,7 +706,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
           {REGION_GROUP_SLUG_ENTRIES
             .filter(([slug]) => slug !== regionSlug)
             .map(([slug, name]) => (
-              <Link key={slug} href={`/seasonal/${monthSlug}/${slug}`}>
+              <Link prefetch={false} key={slug} href={`/seasonal/${monthSlug}/${slug}`}>
                 <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                   <CardContent className="p-3 sm:p-4">
                     <h3 className="text-sm font-semibold group-hover:text-primary">
@@ -725,31 +725,31 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
           関連リンク
         </h2>
         <div className="flex flex-wrap gap-2">
-          <Link
+          <Link prefetch={false}
             href="/catchable-now"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             今釣れる魚
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/spots"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             全国の釣りスポット
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/prefecture"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             都道府県から探す
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/fish"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             魚種から探す
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/ranking"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >

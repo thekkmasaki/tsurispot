@@ -366,7 +366,7 @@ export default function LoginPage() {
           </p>
           <p>
             ログインにより
-            <Link href="/privacy" className="underline hover:text-foreground">
+            <Link prefetch={false} href="/privacy" className="underline hover:text-foreground">
               プライバシーポリシー
             </Link>
             に同意したものとみなします

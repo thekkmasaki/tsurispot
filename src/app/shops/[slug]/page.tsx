@@ -244,7 +244,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
       />
 
       {/* Back link */}
-      <Link
+      <Link prefetch={false}
         href="/shops"
         className="inline-flex items-center text-sm text-muted-foreground hover:text-primary mb-4"
       >
@@ -291,7 +291,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
           <CardContent className="py-4">
             <p className="text-sm text-muted-foreground text-center">
               💬 <strong>プロプラン</strong>にアップグレードすると、ここに店主からのメッセージを掲載できます。
-              <Link href="/shops/sample-premium" className="ml-1 text-primary hover:underline">プロプランのサンプルを見る →</Link>
+              <Link prefetch={false} href="/shops/sample-premium" className="ml-1 text-primary hover:underline">プロプランのサンプルを見る →</Link>
             </p>
           </CardContent>
         </Card>
@@ -319,7 +319,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
           <CardContent className="py-4">
             <p className="text-sm text-muted-foreground text-center">
               🏷️ <strong>プロプラン</strong>にアップグレードすると、クーポンを配信できます。
-              <Link href="/shops/sample-premium" className="ml-1 text-primary hover:underline">プロプランのサンプルを見る →</Link>
+              <Link prefetch={false} href="/shops/sample-premium" className="ml-1 text-primary hover:underline">プロプランのサンプルを見る →</Link>
             </p>
           </CardContent>
         </Card>
@@ -357,7 +357,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                   (spot) =>
                     spot && (
                       <li key={spot.slug}>
-                        <Link
+                        <Link prefetch={false}
                           href={`/spots/${spot.slug}`}
                           className="flex items-center gap-2 text-sm text-primary hover:underline"
                         >
@@ -463,7 +463,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
               {/* サンプル間のリンク */}
               <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
                 {!isPro && (
-                  <Link
+                  <Link prefetch={false}
                     href="/shops/sample-premium"
                     className="inline-flex items-center justify-center gap-2 rounded-lg bg-amber-500 px-5 py-2.5 text-sm font-bold text-white hover:bg-amber-600 transition-colors"
                   >
@@ -472,7 +472,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                   </Link>
                 )}
                 {!isBasic && (
-                  <Link
+                  <Link prefetch={false}
                     href="/shops/sample-basic"
                     className="inline-flex items-center justify-center gap-1 rounded-lg border border-blue-300 px-5 py-2.5 text-sm font-medium text-blue-700 hover:bg-blue-50 transition-colors"
                   >
@@ -480,14 +480,14 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                   </Link>
                 )}
                 {(isBasic || isPro) && (
-                  <Link
+                  <Link prefetch={false}
                     href="/shops/sample-free"
                     className="inline-flex items-center justify-center gap-1 rounded-lg border px-5 py-2.5 text-sm font-medium text-muted-foreground hover:bg-accent transition-colors"
                   >
                     無料プランのサンプルを見る
                   </Link>
                 )}
-                <Link
+                <Link prefetch={false}
                   href="/shops/update?shop=sample-premium&token=demo"
                   className="inline-flex items-center justify-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-medium hover:bg-accent transition-colors"
                 >
@@ -515,7 +515,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
         <div className="mt-8 space-y-4">
           <ShopListingForm />
           <div className="text-center">
-            <Link
+            <Link prefetch={false}
               href="/shops/update?shop=sample-free&token=demo"
               className="inline-flex items-center gap-2 rounded-lg border px-5 py-2.5 text-sm font-medium hover:bg-accent transition-colors"
             >
@@ -560,7 +560,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
               <p className="mb-4 text-sm leading-relaxed text-muted-foreground line-clamp-2">
                 {currentGuide.description}
               </p>
-              <Link
+              <Link prefetch={false}
                 href={`/monthly/${currentMonthSlug}`}
                 className="inline-flex items-center gap-2 rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-emerald-700"
               >
@@ -609,14 +609,14 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                 ツリスポに<strong>無料で</strong>店舗情報を掲載・管理できます。エサの在庫状況をリアルタイム公開すれば、お客様からの「エサある？」の電話対応を減らせます。
               </p>
               <div className="flex flex-wrap gap-2 pt-1">
-                <Link
+                <Link prefetch={false}
                   href="/partner"
                   className="inline-flex items-center gap-1.5 rounded-lg bg-blue-600 px-4 py-2 text-sm font-bold text-white hover:bg-blue-700 transition-colors"
                 >
                   <Mail className="w-4 h-4" />
                   無料で店舗を管理する
                 </Link>
-                <Link
+                <Link prefetch={false}
                   href="/partner#plans"
                   className="inline-flex items-center gap-1 rounded-lg border border-blue-300 px-4 py-2 text-sm font-medium text-blue-700 hover:bg-blue-100 transition-colors dark:text-blue-400 dark:hover:bg-blue-950/30"
                 >
@@ -653,7 +653,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                       </li>
                     ))}
                   </ul>
-                  <Link href="/shops/sample-free" className="mt-3 flex items-center justify-center gap-1 rounded-md border border-green-300 bg-green-50 px-3 py-1.5 text-xs font-bold text-green-700 transition-colors hover:bg-green-100 dark:bg-green-950/30 dark:border-green-800">
+                  <Link prefetch={false} href="/shops/sample-free" className="mt-3 flex items-center justify-center gap-1 rounded-md border border-green-300 bg-green-50 px-3 py-1.5 text-xs font-bold text-green-700 transition-colors hover:bg-green-100 dark:bg-green-950/30 dark:border-green-800">
                     <ChevronRight className="size-3" />
                     サンプルページを見る
                   </Link>
@@ -671,7 +671,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                       </li>
                     ))}
                   </ul>
-                  <Link href="/shops/sample-basic" className="mt-3 flex items-center justify-center gap-1 rounded-md border border-blue-300 bg-blue-50 px-3 py-1.5 text-xs font-bold text-blue-700 transition-colors hover:bg-blue-100 dark:bg-blue-950/30 dark:border-blue-800">
+                  <Link prefetch={false} href="/shops/sample-basic" className="mt-3 flex items-center justify-center gap-1 rounded-md border border-blue-300 bg-blue-50 px-3 py-1.5 text-xs font-bold text-blue-700 transition-colors hover:bg-blue-100 dark:bg-blue-950/30 dark:border-blue-800">
                     <ChevronRight className="size-3" />
                     サンプルページを見る
                   </Link>
@@ -689,7 +689,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
                       </li>
                     ))}
                   </ul>
-                  <Link href="/shops/sample-premium" className="mt-3 flex items-center justify-center gap-1 rounded-md border border-amber-300 bg-amber-50 px-3 py-1.5 text-xs font-bold text-amber-700 transition-colors hover:bg-amber-100 dark:bg-amber-950/30 dark:border-amber-800">
+                  <Link prefetch={false} href="/shops/sample-premium" className="mt-3 flex items-center justify-center gap-1 rounded-md border border-amber-300 bg-amber-50 px-3 py-1.5 text-xs font-bold text-amber-700 transition-colors hover:bg-amber-100 dark:bg-amber-950/30 dark:border-amber-800">
                     <ChevronRight className="size-3" />
                     サンプルページを見る
                   </Link>
@@ -752,7 +752,7 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
           </div>
 
           <div className="text-center">
-            <Link
+            <Link prefetch={false}
               href="/shops/update?shop=sample-premium&token=demo"
               className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >

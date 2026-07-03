@@ -287,7 +287,7 @@ export default function FishHandlingGuidePage() {
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
         {/* パンくず */}
         <div className="mb-6">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
@@ -648,31 +648,31 @@ export default function FishHandlingGuidePage() {
               <h2 className="mb-4 text-xl font-bold">関連ガイド</h2>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href="/guide/handling" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/handling" className="text-primary hover:underline">
                     魚の締め方・持ち帰りガイド（詳細版）
                   </Link>
                   <span className="text-muted-foreground"> - 氷締め・脳締め・血抜き・神経締めの詳細解説</span>
                 </li>
                 <li>
-                  <Link href="/guide/jigging" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/jigging" className="text-primary hover:underline">
                     ショアジギング入門ガイド
                   </Link>
                   <span className="text-muted-foreground"> - 大型青物の取り込みと処理</span>
                 </li>
                 <li>
-                  <Link href="/guide/eging" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/eging" className="text-primary hover:underline">
                     エギング入門ガイド
                   </Link>
                   <span className="text-muted-foreground"> - アオリイカの締め方と持ち帰り</span>
                 </li>
                 <li>
-                  <Link href="/guide/sabiki" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/sabiki" className="text-primary hover:underline">
                     サビキ釣り完全ガイド
                   </Link>
                   <span className="text-muted-foreground"> - 小型魚の氷締めの基本</span>
                 </li>
                 <li>
-                  <Link href="/guide/fish-recipes" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/fish-recipes" className="text-primary hover:underline">
                     釣った魚の簡単レシピガイド
                   </Link>
                   <span className="text-muted-foreground"> - 持ち帰った魚を美味しく食べる24レシピ</span>
@@ -687,7 +687,7 @@ export default function FishHandlingGuidePage() {
           <p className="mb-4 text-sm text-muted-foreground">
             釣り場選びに役立つ、潮の読み方も学びましょう。
           </p>
-          <Link
+          <Link prefetch={false}
             href="/guide/tide"
             className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >

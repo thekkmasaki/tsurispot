@@ -131,7 +131,7 @@ export default function PrefectureListPage() {
                       : 0;
 
                   return (
-                    <Link key={pref.slug} href={`/prefecture/${pref.slug}`}>
+                    <Link prefetch={false} key={pref.slug} href={`/prefecture/${pref.slug}`}>
                       <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                         <CardContent className="p-3 sm:p-4">
                           <div className="flex items-center justify-between">
@@ -191,37 +191,37 @@ export default function PrefectureListPage() {
           他の方法で探す
         </h2>
         <div className="flex flex-wrap gap-2">
-          <Link
+          <Link prefetch={false}
             href="/spots"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             全国の釣りスポット一覧
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/area"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             エリアから探す
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/map"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             地図から探す
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/catchable-now"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             今釣れる魚
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/fish"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             魚種から探す
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/ranking"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >

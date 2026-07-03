@@ -406,7 +406,7 @@ export function QuizGame({ questions, categoryName, categoryIcon }: QuizGameProp
             {currentQuestion.relatedLinks && currentQuestion.relatedLinks.length > 0 && (
               <div className="mt-4 space-y-1">
                 {currentQuestion.relatedLinks.map((link, idx) => (
-                  <Link
+                  <Link prefetch={false}
                     key={idx}
                     href={link.href}
                     className="flex items-center gap-1 text-sm text-sky-600 hover:text-sky-800 hover:underline"
@@ -548,7 +548,7 @@ export function QuizGame({ questions, categoryName, categoryIcon }: QuizGameProp
               className="min-h-[48px] flex-1 text-base font-bold"
               size="lg"
             >
-              <Link href="/quiz" aria-label="他のクイズを見る">
+              <Link prefetch={false} href="/quiz" aria-label="他のクイズを見る">
                 他のクイズ ←
               </Link>
             </Button>
@@ -560,21 +560,21 @@ export function QuizGame({ questions, categoryName, categoryIcon }: QuizGameProp
               <span>📚</span> おすすめガイド
             </h3>
             <div className="space-y-2">
-              <Link
+              <Link prefetch={false}
                 href="/guide/sabiki"
                 className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-sky-600 transition-colors hover:bg-sky-50 hover:text-sky-800"
               >
                 <span>🎣</span>
                 <span>サビキ釣り入門ガイド</span>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/fish"
                 className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-sky-600 transition-colors hover:bg-sky-50 hover:text-sky-800"
               >
                 <span>🐟</span>
                 <span>魚図鑑を見る</span>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/gear"
                 className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-sky-600 transition-colors hover:bg-sky-50 hover:text-sky-800"
               >

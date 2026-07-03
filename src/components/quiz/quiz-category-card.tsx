@@ -69,7 +69,7 @@ export function QuizCategoryCard({
   const colors = colorMap[color] ?? defaultColor;
 
   return (
-    <Link
+    <Link prefetch={false}
       href={`/quiz/${slug}`}
       className={`group block rounded-2xl border-2 ${colors.border} ${colors.bg} p-6 transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5`}
       aria-label={`${name} - ${questionCount}問`}

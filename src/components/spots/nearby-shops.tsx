@@ -70,7 +70,7 @@ export function NearbyShops({ spotName, shops }: NearbyShopsProps) {
               ? "・冷凍エサあり"
               : "";
           return (
-            <Link
+            <Link prefetch={false}
               key={shop.slug}
               href={`/shops/${shop.slug}`}
               onClick={() => handleClick(shop.slug, shop.planLevel || "free")}

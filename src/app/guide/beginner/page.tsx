@@ -555,7 +555,7 @@ export default function BeginnerGuidePage() {
         ]} />
         {/* 戻るリンク */}
         <div className="mb-6">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
@@ -747,19 +747,19 @@ export default function BeginnerGuidePage() {
                   <div>
                     <p className="font-medium">「どこで釣ればいいかわからない。勝手に入っていい場所？」</p>
                     <p className="mt-1 text-amber-700 dark:text-amber-400">
-                      → 漁港や堤防の<strong>「釣り禁止」看板がない場所</strong>ならOK。不安なら海釣り公園や有料の釣り堀が確実。<Link href="/spots" className="font-medium underline">ツリスポで近くの釣り場を探す</Link>のが一番簡単です。
+                      → 漁港や堤防の<strong>「釣り禁止」看板がない場所</strong>ならOK。不安なら海釣り公園や有料の釣り堀が確実。<Link prefetch={false} href="/spots" className="font-medium underline">ツリスポで近くの釣り場を探す</Link>のが一番簡単です。
                     </p>
                   </div>
                   <div>
                     <p className="font-medium">「1匹も釣れなかったらどうしよう」</p>
                     <p className="mt-1 text-amber-700 dark:text-amber-400">
-                      → サビキ釣りで<strong>アジやイワシの回遊</strong>にあたれば、初心者でも10匹以上釣れます。「釣れやすい時期×釣れやすい場所」を選ぶのがコツ。<Link href="/catchable-now" className="font-medium underline">今釣れる魚</Link>をチェックしましょう。
+                      → サビキ釣りで<strong>アジやイワシの回遊</strong>にあたれば、初心者でも10匹以上釣れます。「釣れやすい時期×釣れやすい場所」を選ぶのがコツ。<Link prefetch={false} href="/catchable-now" className="font-medium underline">今釣れる魚</Link>をチェックしましょう。
                     </p>
                   </div>
                   <div>
                     <p className="font-medium">「釣れた魚の扱い方がわからない。そのまま持って帰っていいの？」</p>
                     <p className="mt-1 text-amber-700 dark:text-amber-400">
-                      → クーラーボックスに氷と海水を入れておき、釣れたら入れるだけ。小さい魚はリリース（逃がす）でOK。持ち帰る場合は<Link href="/guide/fish-handling" className="font-medium underline">魚の締め方ガイド</Link>を参考に。
+                      → クーラーボックスに氷と海水を入れておき、釣れたら入れるだけ。小さい魚はリリース（逃がす）でOK。持ち帰る場合は<Link prefetch={false} href="/guide/fish-handling" className="font-medium underline">魚の締め方ガイド</Link>を参考に。
                     </p>
                   </div>
                   <div>
@@ -857,7 +857,7 @@ export default function BeginnerGuidePage() {
                 </div>
                 <p className="mt-2 text-xs text-muted-foreground">
                   詳しくは
-                  <Link
+                  <Link prefetch={false}
                     href="/guide/budget"
                     className="text-primary hover:underline"
                   >
@@ -893,21 +893,21 @@ export default function BeginnerGuidePage() {
                 <div className="mb-3 space-y-1 text-sm text-muted-foreground">
                   <p>
                     <span className="font-medium text-foreground">対象魚：</span>
-                    <Link
+                    <Link prefetch={false}
                       href="/fish/aji"
                       className="text-primary hover:underline"
                     >
                       アジ
                     </Link>
                     、
-                    <Link
+                    <Link prefetch={false}
                       href="/fish/saba"
                       className="text-primary hover:underline"
                     >
                       サバ
                     </Link>
                     、
-                    <Link
+                    <Link prefetch={false}
                       href="/fish/iwashi"
                       className="text-primary hover:underline"
                     >
@@ -931,7 +931,7 @@ export default function BeginnerGuidePage() {
                     初心者向け
                   </p>
                 </div>
-                <Link
+                <Link prefetch={false}
                   href="/guide/sabiki"
                   className="inline-flex items-center text-sm font-medium text-primary hover:underline"
                 >
@@ -955,14 +955,14 @@ export default function BeginnerGuidePage() {
                 <div className="mb-3 space-y-1 text-sm text-muted-foreground">
                   <p>
                     <span className="font-medium text-foreground">対象魚：</span>
-                    <Link
+                    <Link prefetch={false}
                       href="/fish/kisu"
                       className="text-primary hover:underline"
                     >
                       キス
                     </Link>
                     、
-                    <Link
+                    <Link prefetch={false}
                       href="/fish/haze"
                       className="text-primary hover:underline"
                     >
@@ -986,7 +986,7 @@ export default function BeginnerGuidePage() {
                     初心者向け（軽く投げる技術が必要）
                   </p>
                 </div>
-                <Link
+                <Link prefetch={false}
                   href="/guide/choinage"
                   className="inline-flex items-center text-sm font-medium text-primary hover:underline"
                 >
@@ -1010,14 +1010,14 @@ export default function BeginnerGuidePage() {
                 <div className="mb-3 space-y-1 text-sm text-muted-foreground">
                   <p>
                     <span className="font-medium text-foreground">対象魚：</span>
-                    <Link
+                    <Link prefetch={false}
                       href="/fish/kasago"
                       className="text-primary hover:underline"
                     >
                       カサゴ
                     </Link>
                     、
-                    <Link
+                    <Link prefetch={false}
                       href="/fish/mebaru"
                       className="text-primary hover:underline"
                     >
@@ -1041,7 +1041,7 @@ export default function BeginnerGuidePage() {
                     初心者向け（足場に注意）
                   </p>
                 </div>
-                <Link
+                <Link prefetch={false}
                   href="/guide/anazuri"
                   className="inline-flex items-center text-sm font-medium text-primary hover:underline"
                 >
@@ -1117,7 +1117,7 @@ export default function BeginnerGuidePage() {
                   </h3>
                   <div className="grid gap-2 sm:grid-cols-2">
                     {beginnerSpots.map((spot) => (
-                      <Link
+                      <Link prefetch={false}
                         key={spot.id}
                         href={`/spots/${spot.slug}`}
                         className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
@@ -1136,7 +1136,7 @@ export default function BeginnerGuidePage() {
                   </div>
                   <div className="mt-3 text-center">
                     <Button asChild variant="outline" size="sm">
-                      <Link href="/spots">
+                      <Link prefetch={false} href="/spots">
                         すべてのスポットを見る
                         <ChevronRight className="ml-1 size-4" />
                       </Link>
@@ -1220,7 +1220,7 @@ export default function BeginnerGuidePage() {
               </div>
 
               <div className="mt-4">
-                <Link
+                <Link prefetch={false}
                   href="/fishing-rules"
                   className="inline-flex items-center text-sm font-medium text-primary hover:underline"
                 >
@@ -1249,21 +1249,21 @@ export default function BeginnerGuidePage() {
                   </h3>
                   <p className="text-sm text-muted-foreground">
                     サビキ釣りが最もおすすめです。投げる技術が不要で、足元に仕掛けを落とすだけ。
-                    <Link
+                    <Link prefetch={false}
                       href="/fish/aji"
                       className="text-primary hover:underline"
                     >
                       アジ
                     </Link>
                     や
-                    <Link
+                    <Link prefetch={false}
                       href="/fish/iwashi"
                       className="text-primary hover:underline"
                     >
                       イワシ
                     </Link>
                     などが群れで釣れるので、初心者でも数釣りが楽しめます。詳しくは
-                    <Link
+                    <Link prefetch={false}
                       href="/guide/sabiki"
                       className="text-primary hover:underline"
                     >
@@ -1286,7 +1286,7 @@ export default function BeginnerGuidePage() {
                   </h3>
                   <p className="text-sm text-muted-foreground">
                     朝マズメ（日の出前後の1〜2時間）と夕マズメ（日没前後の1〜2時間）が最も魚の活性が高く釣れやすい時間帯です。特に朝マズメがおすすめ。潮の動きも釣果に影響するので、
-                    <Link
+                    <Link prefetch={false}
                       href="/guide/tide"
                       className="text-primary hover:underline"
                     >
@@ -1301,7 +1301,7 @@ export default function BeginnerGuidePage() {
                   </h3>
                   <p className="text-sm text-muted-foreground">
                     はい、ファミリーフィッシングは大変人気があります。海釣り公園や足場の良い漁港なら安全に楽しめます。お子さんにはライフジャケットを必ず着用させ、柵のある場所を選びましょう。詳しくは
-                    <Link
+                    <Link prefetch={false}
                       href="/guide/family"
                       className="text-primary hover:underline"
                     >
@@ -1316,21 +1316,21 @@ export default function BeginnerGuidePage() {
                   </h3>
                   <p className="text-sm text-muted-foreground">
                     クーラーボックスに氷と一緒に入れて持ち帰り、自宅で調理できます。
-                    <Link
+                    <Link prefetch={false}
                       href="/fish/aji"
                       className="text-primary hover:underline"
                     >
                       アジ
                     </Link>
                     なら刺身やフライ、
-                    <Link
+                    <Link prefetch={false}
                       href="/fish/iwashi"
                       className="text-primary hover:underline"
                     >
                       イワシ
                     </Link>
                     なら煮付けが定番。魚の締め方や持ち帰り方は
-                    <Link
+                    <Link prefetch={false}
                       href="/guide/fish-handling"
                       className="text-primary hover:underline"
                     >
@@ -1353,7 +1353,7 @@ export default function BeginnerGuidePage() {
           />
           <div className="mt-4 text-center">
             <Button asChild variant="outline" className="rounded-full">
-              <Link href="/gear">
+              <Link prefetch={false} href="/gear">
                 すべてのおすすめ道具を見る
                 <ChevronRight className="ml-1 size-4" />
               </Link>
@@ -1365,7 +1365,7 @@ export default function BeginnerGuidePage() {
         <section className="mt-8 sm:mt-10">
           <CollapsibleSection title="次に読むガイド" previewText="5件のガイド">
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-              <Link href="/guide/beginner-setup" className="group">
+              <Link prefetch={false} href="/guide/beginner-setup" className="group">
                 <Card className="h-full transition-colors group-hover:border-primary">
                   <CardContent className="pt-6">
                     <Package className="mb-2 size-5 text-primary" />
@@ -1378,7 +1378,7 @@ export default function BeginnerGuidePage() {
                   </CardContent>
                 </Card>
               </Link>
-              <Link href="/guide/sabiki" className="group">
+              <Link prefetch={false} href="/guide/sabiki" className="group">
                 <Card className="h-full transition-colors group-hover:border-primary">
                   <CardContent className="pt-6">
                     <Anchor className="mb-2 size-5 text-primary" />
@@ -1391,7 +1391,7 @@ export default function BeginnerGuidePage() {
                   </CardContent>
                 </Card>
               </Link>
-              <Link href="/guide/choinage" className="group">
+              <Link prefetch={false} href="/guide/choinage" className="group">
                 <Card className="h-full transition-colors group-hover:border-primary">
                   <CardContent className="pt-6">
                     <Target className="mb-2 size-5 text-primary" />
@@ -1404,7 +1404,7 @@ export default function BeginnerGuidePage() {
                   </CardContent>
                 </Card>
               </Link>
-              <Link href="/guide/anazuri" className="group">
+              <Link prefetch={false} href="/guide/anazuri" className="group">
                 <Card className="h-full transition-colors group-hover:border-primary">
                   <CardContent className="pt-6">
                     <Waves className="mb-2 size-5 text-primary" />
@@ -1417,7 +1417,7 @@ export default function BeginnerGuidePage() {
                   </CardContent>
                 </Card>
               </Link>
-              <Link href="/guide/troubleshooting" className="group">
+              <Link prefetch={false} href="/guide/troubleshooting" className="group">
                 <Card className="h-full transition-colors group-hover:border-primary">
                   <CardContent className="pt-6">
                     <HelpCircle className="mb-2 size-5 text-primary" />
@@ -1440,7 +1440,7 @@ export default function BeginnerGuidePage() {
             さっそく釣りスポットを探してみよう！
           </p>
           <Button asChild size="lg" className="min-h-[48px] rounded-full px-8">
-            <Link href="/spots">スポットを探す</Link>
+            <Link prefetch={false} href="/spots">スポットを探す</Link>
           </Button>
         </div>
 
@@ -1453,11 +1453,11 @@ export default function BeginnerGuidePage() {
             近くの釣り場を探して、今週末の予定を決めましょう。
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            <Link href="/spots?difficulty=beginner" className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 font-bold text-emerald-700 transition-colors hover:bg-emerald-50 min-h-[48px]">
+            <Link prefetch={false} href="/spots?difficulty=beginner" className="inline-flex items-center gap-2 rounded-lg bg-white px-6 py-3 font-bold text-emerald-700 transition-colors hover:bg-emerald-50 min-h-[48px]">
               <MapPin className="size-4" />
               初心者向け釣り場を探す
             </Link>
-            <Link href="/guide/sabiki" className="inline-flex items-center gap-2 rounded-lg border-2 border-white/60 px-6 py-3 font-medium text-white transition-colors hover:bg-white/10 min-h-[48px]">
+            <Link prefetch={false} href="/guide/sabiki" className="inline-flex items-center gap-2 rounded-lg border-2 border-white/60 px-6 py-3 font-medium text-white transition-colors hover:bg-white/10 min-h-[48px]">
               サビキ釣りの始め方
             </Link>
           </div>

@@ -299,7 +299,7 @@ export default function LineGuidePage() {
           { label: "釣り糸の選び方" },
         ]}
       />
-      <Link
+      <Link prefetch={false}
         href="/guide"
         className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground min-h-[44px]"
       >
@@ -701,7 +701,7 @@ export default function LineGuidePage() {
       <section>
         <h2 className="mb-4 text-xl font-bold">関連ガイド</h2>
         <div className="grid gap-3 sm:grid-cols-2">
-          <Link href="/guide/knots">
+          <Link prefetch={false} href="/guide/knots">
             <Card className="h-full gap-0 py-0 transition-shadow hover:shadow-md">
               <CardContent className="p-4">
                 <h3 className="font-semibold hover:text-primary">釣り糸の結び方</h3>
@@ -711,7 +711,7 @@ export default function LineGuidePage() {
               </CardContent>
             </Card>
           </Link>
-          <Link href="/guide/rigs">
+          <Link prefetch={false} href="/guide/rigs">
             <Card className="h-full gap-0 py-0 transition-shadow hover:shadow-md">
               <CardContent className="p-4">
                 <h3 className="font-semibold hover:text-primary">仕掛けの作り方</h3>
@@ -721,7 +721,7 @@ export default function LineGuidePage() {
               </CardContent>
             </Card>
           </Link>
-          <Link href="/guide/sabiki">
+          <Link prefetch={false} href="/guide/sabiki">
             <Card className="h-full gap-0 py-0 transition-shadow hover:shadow-md">
               <CardContent className="p-4">
                 <h3 className="font-semibold hover:text-primary">サビキ釣り入門</h3>
@@ -731,7 +731,7 @@ export default function LineGuidePage() {
               </CardContent>
             </Card>
           </Link>
-          <Link href="/guide/setup">
+          <Link prefetch={false} href="/guide/setup">
             <Card className="h-full gap-0 py-0 transition-shadow hover:shadow-md">
               <CardContent className="p-4">
                 <h3 className="font-semibold hover:text-primary">タックルの選び方</h3>

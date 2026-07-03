@@ -114,7 +114,7 @@ export function HomePopularSpots({ spots }: HomePopularSpotsProps) {
               : "みんなに選ばれている釣り場"}
           </p>
         </div>
-        <Link
+        <Link prefetch={false}
           href="/spots"
           className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
         >
@@ -125,7 +125,7 @@ export function HomePopularSpots({ spots }: HomePopularSpotsProps) {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {displaySpots.map((spot) => (
-          <Link key={spot.id} href={`/spots/${spot.slug}`}>
+          <Link prefetch={false} key={spot.id} href={`/spots/${spot.slug}`}>
             <Card className="group h-full gap-0 overflow-hidden border py-0 transition-shadow hover:shadow-md">
               <SpotImage
                 src={resolveSpotImageSrc(spot.mainImageUrl)}
@@ -196,7 +196,7 @@ export function HomePopularSpots({ spots }: HomePopularSpotsProps) {
       </div>
 
       <div className="mt-6 flex justify-center sm:hidden">
-        <Link href="/spots">
+        <Link prefetch={false} href="/spots">
           <Button variant="outline" className="min-h-[44px] gap-1">
             すべてのスポットを見る
             <ArrowRight className="size-4" />

@@ -61,7 +61,7 @@ export function RecentlyViewedSpots() {
       </h2>
       <div className="-mx-4 flex gap-3 overflow-x-auto px-4 pb-3 scrollbar-hide sm:-mx-0 sm:px-0">
         {spots.map((spot) => (
-          <Link
+          <Link prefetch={false}
             key={spot.slug}
             href={`/spots/${spot.slug}`}
             className="w-44 shrink-0 rounded-xl border bg-card p-3 transition-shadow hover:shadow-md"

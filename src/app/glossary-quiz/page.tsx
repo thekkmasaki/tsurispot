@@ -81,37 +81,37 @@ export default function GlossaryQuizPage() {
         <section className="mt-12">
           <h2 className="mb-4 text-lg font-bold text-gray-900">関連コンテンツ</h2>
           <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-            <Link href="/glossary">
+            <Link prefetch={false} href="/glossary">
               <div className="rounded-xl border border-gray-200 bg-white px-4 py-3 transition-all hover:border-amber-300 hover:shadow-sm">
                 <p className="text-sm font-semibold text-gray-800">📖 釣り用語集</p>
                 <p className="text-xs text-gray-500">用語の意味を詳しく学ぶ</p>
               </div>
             </Link>
-            <Link href="/quiz">
+            <Link prefetch={false} href="/quiz">
               <div className="rounded-xl border border-gray-200 bg-white px-4 py-3 transition-all hover:border-amber-300 hover:shadow-sm">
                 <p className="text-sm font-semibold text-gray-800">🎯 釣りクイズ</p>
                 <p className="text-xs text-gray-500">全8カテゴリ240問に挑戦</p>
               </div>
             </Link>
-            <Link href="/for-beginners">
+            <Link prefetch={false} href="/for-beginners">
               <div className="rounded-xl border border-gray-200 bg-white px-4 py-3 transition-all hover:border-amber-300 hover:shadow-sm">
                 <p className="text-sm font-semibold text-gray-800">🎓 初心者ガイド</p>
                 <p className="text-xs text-gray-500">これから釣りを始める方へ</p>
               </div>
             </Link>
-            <Link href="/instructor-exam">
+            <Link prefetch={false} href="/instructor-exam">
               <div className="rounded-xl border border-gray-200 bg-white px-4 py-3 transition-all hover:border-amber-300 hover:shadow-sm">
                 <p className="text-sm font-semibold text-gray-800">📝 インストラクター試験対策</p>
                 <p className="text-xs text-gray-500">全7章・確認クイズ130問</p>
               </div>
             </Link>
-            <Link href="/spots">
+            <Link prefetch={false} href="/spots">
               <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 transition-all hover:border-blue-400 hover:shadow-sm">
                 <p className="text-sm font-semibold text-blue-800">🗺️ 釣りスポットを探す</p>
                 <p className="text-xs text-blue-600">学んだ知識を活かして釣りに行こう</p>
               </div>
             </Link>
-            <Link href="/gear">
+            <Link prefetch={false} href="/gear">
               <div className="rounded-xl border border-blue-200 bg-blue-50 px-4 py-3 transition-all hover:border-blue-400 hover:shadow-sm">
                 <p className="text-sm font-semibold text-blue-800">🎣 おすすめ釣り道具</p>
                 <p className="text-xs text-blue-600">初心者向けの道具選びガイド</p>

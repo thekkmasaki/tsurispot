@@ -118,7 +118,7 @@ export function PlanManagement({ shopSlug, token }: PlanManagementProps) {
             <p className="text-xs text-muted-foreground">
               有料プランにアップグレードすると、公式バッジ・検索優先表示・写真掲載などの機能が使えます。
             </p>
-            <Link href={`/subscribe/basic?shop=${shopSlug}&token=${token}`}>
+            <Link prefetch={false} href={`/subscribe/basic?shop=${shopSlug}&token=${token}`}>
               <Button size="sm" className="gap-1.5">
                 <Crown className="size-3" />
                 有料プランにアップグレード

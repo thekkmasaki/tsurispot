@@ -94,7 +94,7 @@ export default async function BlogListPage() {
           エリアごとの釣果週報、釣り場ガイド、テクニック情報をお届けします。
         </p>
         <div className="mt-3">
-          <Link
+          <Link prefetch={false}
             href="/catch-reports"
             className="inline-flex items-center gap-1.5 rounded-full border border-sky-200 bg-sky-50 px-4 py-2 text-sm font-medium text-sky-700 transition-colors hover:bg-sky-100"
           >

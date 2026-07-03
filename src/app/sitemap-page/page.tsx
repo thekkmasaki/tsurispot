@@ -211,7 +211,7 @@ export default function SitemapPage() {
                       <ul className="grid gap-x-4 gap-y-1 sm:grid-cols-2 lg:grid-cols-3">
                         {spots.map((spot) => (
                           <li key={spot.slug}>
-                            <Link
+                            <Link prefetch={false}
                               href={`/spots/${spot.slug}`}
                               className="inline-block py-0.5 text-sm text-muted-foreground transition-colors hover:text-primary hover:underline"
                             >
@@ -227,7 +227,7 @@ export default function SitemapPage() {
                 <ul className="grid gap-x-4 gap-y-1 sm:grid-cols-2 lg:grid-cols-3">
                   {section.links.map((link) => (
                     <li key={link.href}>
-                      <Link
+                      <Link prefetch={false}
                         href={link.href}
                         className="inline-block py-0.5 text-sm text-muted-foreground transition-colors hover:text-primary hover:underline"
                       >

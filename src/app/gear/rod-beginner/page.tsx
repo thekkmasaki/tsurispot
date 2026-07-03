@@ -1016,7 +1016,7 @@ export default function GearRodBeginnerPage() {
         <div className="rounded-xl border bg-muted/30 p-6">
           <h2 className="mb-4 text-lg font-bold">関連記事</h2>
           <div className="grid gap-3 sm:grid-cols-3">
-            <Link
+            <Link prefetch={false}
               href="/gear/sabiki"
               className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >
@@ -1028,7 +1028,7 @@ export default function GearRodBeginnerPage() {
               </p>
               <ChevronRight className="mx-auto mt-2 size-4 text-muted-foreground group-hover:text-primary" />
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/gear/tackle-box"
               className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >
@@ -1040,7 +1040,7 @@ export default function GearRodBeginnerPage() {
               </p>
               <ChevronRight className="mx-auto mt-2 size-4 text-muted-foreground group-hover:text-primary" />
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/gear"
               className="group rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >
@@ -1057,7 +1057,7 @@ export default function GearRodBeginnerPage() {
 
         {/* --- 戻るリンク --- */}
         <div className="mt-8 text-center">
-          <Link
+          <Link prefetch={false}
             href="/gear"
             className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
           >

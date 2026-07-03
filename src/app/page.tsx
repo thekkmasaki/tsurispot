@@ -567,7 +567,7 @@ export default async function Home() {
                   全国の今週の釣果をエリア別にお届け
                 </p>
               </div>
-              <Link
+              <Link prefetch={false}
                 href="/blog?tag=釣果週報"
                 className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
               >
@@ -578,7 +578,7 @@ export default async function Home() {
 
             {/* モバイル用「すべて見る」リンク — カード一覧の上 */}
             <div className="mb-4 flex justify-center sm:hidden">
-              <Link href="/blog?tag=釣果週報">
+              <Link prefetch={false} href="/blog?tag=釣果週報">
                 <Button variant="outline" className="min-h-[44px] gap-1">
                   すべての釣果週報を見る
                   <ArrowRight className="size-4" />
@@ -588,7 +588,7 @@ export default async function Home() {
 
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {weeklyReports.map((post) => (
-                <Link key={post.id} href={`/blog/${post.slug}`}>
+                <Link prefetch={false} key={post.id} href={`/blog/${post.slug}`}>
                   <Card className="group h-full overflow-hidden py-0 transition-shadow hover:shadow-md">
                     <div className="relative h-36 w-full overflow-hidden">
                       <Image
@@ -739,7 +739,7 @@ export default async function Home() {
                   {currentMonth}月に釣れる魚がいるスポットをピックアップ
                 </p>
               </div>
-              <Link
+              <Link prefetch={false}
                 href="/catchable-now"
                 className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
               >
@@ -758,7 +758,7 @@ export default async function Home() {
                   })
                   .slice(0, 3);
                 return (
-                  <Link key={spot.id} href={`/spots/${spot.slug}`}>
+                  <Link prefetch={false} key={spot.id} href={`/spots/${spot.slug}`}>
                     <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                       <CardContent className="p-4">
                         <div className="mb-2 flex items-start justify-between gap-2">
@@ -797,7 +797,7 @@ export default async function Home() {
               })}
             </div>
             <div className="mt-6 flex justify-center sm:hidden">
-              <Link href="/catchable-now">
+              <Link prefetch={false} href="/catchable-now">
                 <Button variant="outline" className="min-h-[44px] gap-1">
                   もっと見る
                   <ArrowRight className="size-4" />
@@ -823,7 +823,7 @@ export default async function Home() {
                 都道府県別の釣りスポット・釣れる魚情報
               </p>
             </div>
-            <Link
+            <Link prefetch={false}
               href="/prefecture"
               className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
             >
@@ -843,7 +843,7 @@ export default async function Home() {
                 .sort((a, b) => b.spotCount - a.spotCount)
                 .slice(0, 12);
               return prefSpotCounts.map((pref) => (
-                <Link key={pref.slug} href={`/prefecture/${pref.slug}`} title={`${pref.name}の釣りスポット${pref.spotCount}件`}>
+                <Link prefetch={false} key={pref.slug} href={`/prefecture/${pref.slug}`} title={`${pref.name}の釣りスポット${pref.spotCount}件`}>
                   <div className="flex items-center justify-between gap-2 rounded-lg border bg-white p-3 transition-shadow hover:shadow-md">
                     <div className="min-w-0">
                       <p className="text-sm font-semibold">{pref.nameShort}</p>
@@ -856,7 +856,7 @@ export default async function Home() {
             })()}
           </div>
           <div className="mt-6 flex justify-center sm:hidden">
-            <Link href="/prefecture">
+            <Link prefetch={false} href="/prefecture">
               <Button variant="outline" className="min-h-[44px] gap-1">
                 すべての都道府県を見る
                 <ArrowRight className="size-4" />
@@ -873,12 +873,12 @@ export default async function Home() {
       <section className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8">
         <h2 className="mb-3 text-sm font-bold text-foreground">人気の釣り方</h2>
         <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
-          <Link href="/fishing/sabiki" className="text-primary transition-colors hover:text-primary/80">サビキ釣り</Link>
-          <Link href="/fishing/nagezuri" className="text-primary transition-colors hover:text-primary/80">投げ釣り</Link>
-          <Link href="/fishing/ukizuri" className="text-primary transition-colors hover:text-primary/80">ウキ釣り</Link>
-          <Link href="/fishing/lure" className="text-primary transition-colors hover:text-primary/80">ルアー</Link>
-          <Link href="/fishing/eging" className="text-primary transition-colors hover:text-primary/80">エギング</Link>
-          <Link href="/fishing/fukasezuri" className="text-primary transition-colors hover:text-primary/80">フカセ釣り</Link>
+          <Link prefetch={false} href="/fishing/sabiki" className="text-primary transition-colors hover:text-primary/80">サビキ釣り</Link>
+          <Link prefetch={false} href="/fishing/nagezuri" className="text-primary transition-colors hover:text-primary/80">投げ釣り</Link>
+          <Link prefetch={false} href="/fishing/ukizuri" className="text-primary transition-colors hover:text-primary/80">ウキ釣り</Link>
+          <Link prefetch={false} href="/fishing/lure" className="text-primary transition-colors hover:text-primary/80">ルアー</Link>
+          <Link prefetch={false} href="/fishing/eging" className="text-primary transition-colors hover:text-primary/80">エギング</Link>
+          <Link prefetch={false} href="/fishing/fukasezuri" className="text-primary transition-colors hover:text-primary/80">フカセ釣り</Link>
         </div>
       </section>
 

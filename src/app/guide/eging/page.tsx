@@ -365,7 +365,7 @@ export default function EgingGuidePage() {
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
         {/* パンくず */}
         <div className="mb-6">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
@@ -726,7 +726,7 @@ export default function EgingGuidePage() {
               { slug: "aoriika", name: "アオリイカ" },
               { slug: "kouika", name: "コウイカ" },
             ].map((f) => (
-              <Link key={f.slug} href={`/fish/${f.slug}`}>
+              <Link prefetch={false} key={f.slug} href={`/fish/${f.slug}`}>
                 <Badge variant="outline" className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-white sm:text-sm">
                   {f.name}の釣り方
                 </Badge>
@@ -750,7 +750,7 @@ export default function EgingGuidePage() {
               .sort((a, b) => b.rating - a.rating)
               .slice(0, 6)
               .map((spot) => (
-                <Link key={spot.slug} href={`/spots/${spot.slug}`} title={`${spot.name}（${spot.region.prefecture}のエギングスポット）`}>
+                <Link prefetch={false} key={spot.slug} href={`/spots/${spot.slug}`} title={`${spot.name}（${spot.region.prefecture}のエギングスポット）`}>
                   <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                     <CardContent className="p-3">
                       <p className="text-sm font-semibold group-hover:text-primary truncate">{spot.name}</p>
@@ -761,7 +761,7 @@ export default function EgingGuidePage() {
               ))}
           </div>
           <div className="mt-3">
-            <Link href="/spots" className="text-sm text-primary hover:underline">
+            <Link prefetch={false} href="/spots" className="text-sm text-primary hover:underline">
               すべての釣りスポットを見る →
             </Link>
           </div>
@@ -787,31 +787,31 @@ export default function EgingGuidePage() {
               <h2 className="mb-4 text-xl font-bold">関連ガイド</h2>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href="/guide/lure" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/lure" className="text-primary hover:underline">
                     ルアー釣り入門ガイド
                   </Link>
                   <span className="text-muted-foreground"> - ルアーフィッシングの基本</span>
                 </li>
                 <li>
-                  <Link href="/guide/night-fishing" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/night-fishing" className="text-primary hover:underline">
                     夜釣り入門ガイド
                   </Link>
                   <span className="text-muted-foreground"> - ナイトエギングの基本と装備</span>
                 </li>
                 <li>
-                  <Link href="/guide/tide" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/tide" className="text-primary hover:underline">
                     潮汐の読み方ガイド
                   </Link>
                   <span className="text-muted-foreground"> - エギングに重要な潮の読み方</span>
                 </li>
                 <li>
-                  <Link href="/guide/knots" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/knots" className="text-primary hover:underline">
                     釣り糸の結び方
                   </Link>
                   <span className="text-muted-foreground"> - エギとの接続に必要な結び方</span>
                 </li>
                 <li>
-                  <Link href="/guide/sabiki" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/sabiki" className="text-primary hover:underline">
                     サビキ釣り完全ガイド
                   </Link>
                   <span className="text-muted-foreground"> - 堤防で手軽にアジ・サバ・イワシ</span>
@@ -826,7 +826,7 @@ export default function EgingGuidePage() {
           <p className="mb-4 text-sm text-muted-foreground">
             ナイトエギングも人気。夜釣りの基本を学びましょう。
           </p>
-          <Link
+          <Link prefetch={false}
             href="/guide/night-fishing"
             className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >

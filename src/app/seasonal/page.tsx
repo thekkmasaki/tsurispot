@@ -342,7 +342,7 @@ export default function SeasonalPage() {
                 </h3>
                 <div className="grid gap-2 sm:grid-cols-2">
                   {season.fish.map((f) => (
-                    <Link
+                    <Link prefetch={false}
                       key={f.slug}
                       href={`/fish/${f.slug}`}
                       className="group flex items-start gap-3 rounded-lg border bg-white p-3 transition-shadow hover:shadow-md dark:bg-card"
@@ -419,7 +419,7 @@ export default function SeasonalPage() {
 
               {/* 季節詳細ページへのリンク */}
               <div className="mt-6 border-t pt-4">
-                <Link
+                <Link prefetch={false}
                   href={`/seasonal/${season.id}`}
                   className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
                 >
@@ -484,7 +484,7 @@ export default function SeasonalPage() {
                       ] as const
                     ).map((regionSlug) => (
                       <td key={regionSlug} className="border p-1 text-center">
-                        <Link
+                        <Link prefetch={false}
                           href={`/seasonal/${month.slug}/${regionSlug}`}
                           className="inline-flex items-center justify-center rounded px-2 py-1.5 text-xs text-primary hover:bg-primary/10 transition-colors"
                         >
@@ -506,7 +506,7 @@ export default function SeasonalPage() {
         <div className="mt-12 rounded-xl border bg-muted/30 p-6">
           <h2 className="mb-4 text-lg font-bold">関連ページ</h2>
           <div className="grid gap-3 sm:grid-cols-3">
-            <Link
+            <Link prefetch={false}
               href="/catchable-now"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >
@@ -515,7 +515,7 @@ export default function SeasonalPage() {
                 今の時期に釣れる魚をチェック
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/glossary"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >
@@ -524,7 +524,7 @@ export default function SeasonalPage() {
                 釣りの基本用語を学ぶ
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/beginner-checklist"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >

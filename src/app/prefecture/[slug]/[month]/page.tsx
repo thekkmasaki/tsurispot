@@ -338,7 +338,7 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
       />
 
       {/* 戻るリンク */}
-      <Link
+      <Link prefetch={false}
         href={`/prefecture/${pref.slug}`}
         className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground min-h-[44px]"
       >
@@ -383,7 +383,7 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
 
       {/* 前月/翌月ナビ */}
       <div className="mb-6 flex items-center justify-between">
-        <Link
+        <Link prefetch={false}
           href={`/prefecture/${pref.slug}/${prevMonth.slug}`}
           className="inline-flex items-center gap-1 rounded-lg border px-3 py-2 text-sm transition-colors hover:bg-muted"
         >
@@ -393,7 +393,7 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
         <span className="text-sm font-medium text-muted-foreground">
           {month.name}（{month.season}）
         </span>
-        <Link
+        <Link prefetch={false}
           href={`/prefecture/${pref.slug}/${nextMonth.slug}`}
           className="inline-flex items-center gap-1 rounded-lg border px-3 py-2 text-sm transition-colors hover:bg-muted"
         >
@@ -476,7 +476,7 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
               </h3>
               <div className="flex flex-wrap gap-1.5 sm:gap-2">
                 {peakFishList.map((f) => (
-                  <Link key={f.slug} href={f.count >= 2 ? `/prefecture/${pref.slug}/${month.slug}/${f.slug}` : `/fish/${f.slug}`}>
+                  <Link prefetch={false} key={f.slug} href={f.count >= 2 ? `/prefecture/${pref.slug}/${month.slug}/${f.slug}` : `/fish/${f.slug}`}>
                     <Badge
                       variant="outline"
                       className="cursor-pointer border-orange-300 bg-orange-50 px-2.5 py-1.5 text-xs transition-colors hover:bg-orange-100 sm:text-sm"
@@ -497,7 +497,7 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
             {catchableFishList
               .filter((f) => !f.isPeak)
               .map((f) => (
-                <Link key={f.slug} href={f.count >= 2 ? `/prefecture/${pref.slug}/${month.slug}/${f.slug}` : `/fish/${f.slug}`}>
+                <Link prefetch={false} key={f.slug} href={f.count >= 2 ? `/prefecture/${pref.slug}/${month.slug}/${f.slug}` : `/fish/${f.slug}`}>
                   <Badge
                     variant="outline"
                     className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
@@ -659,7 +659,7 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
                 {topSpots.map(({ spot, matchCount }) => (
                   <tr key={spot.id} className="border-b hover:bg-muted/30">
                     <td className="px-3 py-2">
-                      <Link
+                      <Link prefetch={false}
                         href={`/spots/${spot.slug}`}
                         className="font-medium text-primary hover:underline"
                       >
@@ -701,7 +701,7 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
           {/* 全スポット表示リンク */}
           {spotsWithMatchCount.length > 10 && (
             <div className="mt-6 text-center">
-              <Link
+              <Link prefetch={false}
                 href={`/prefecture/${pref.slug}`}
                 className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90"
               >
@@ -725,7 +725,7 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
           </h2>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {catchableFishList.slice(0, 20).map((f) => (
-              <Link
+              <Link prefetch={false}
                 key={f.slug}
                 href={`/prefecture/${pref.slug}/fish/${f.slug}`}
               >
@@ -782,7 +782,7 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
         </h2>
         <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 lg:grid-cols-6">
           {otherMonths.map((m) => (
-            <Link
+            <Link prefetch={false}
               key={m.slug}
               href={`/prefecture/${pref.slug}/${m.slug}`}
               className="rounded-lg border px-3 py-2 text-center text-sm transition-colors hover:bg-muted"
@@ -802,7 +802,7 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
           {pref.name}で{month.name}の釣りを楽しもう
         </h2>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          <Link
+          <Link prefetch={false}
             href={`/prefecture/${pref.slug}`}
             className="flex items-center gap-3 rounded-lg bg-background p-4 shadow-sm transition-all hover:shadow-md"
           >
@@ -812,7 +812,7 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
               <div className="text-xs text-muted-foreground">{prefSpots.length}件のスポットを探す</div>
             </div>
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/catchable-now"
             className="flex items-center gap-3 rounded-lg bg-background p-4 shadow-sm transition-all hover:shadow-md"
           >
@@ -822,7 +822,7 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
               <div className="text-xs text-muted-foreground">全国の旬の魚情報</div>
             </div>
           </Link>
-          <Link
+          <Link prefetch={false}
             href={`/monthly/${month.slug}`}
             className="flex items-center gap-3 rounded-lg bg-background p-4 shadow-sm transition-all hover:shadow-md"
           >
@@ -841,37 +841,37 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
           関連リンク
         </h2>
         <div className="flex flex-wrap gap-2">
-          <Link
+          <Link prefetch={false}
             href={`/prefecture/${pref.slug}`}
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             {pref.name}の釣り場
           </Link>
-          <Link
+          <Link prefetch={false}
             href={`/monthly/${month.slug}`}
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             {month.name}の釣りガイド
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/prefecture"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             都道府県から探す
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/fish"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             魚種から探す
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/catchable-now"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             今釣れる魚
           </Link>
-          <Link
+          <Link prefetch={false}
             href={`/prefecture/${pref.slug}/${nextMonth.slug}`}
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >

@@ -142,7 +142,7 @@ export function GearGuideCard({ guide }: { guide: GearGuideType }) {
           </h4>
           <div className="flex shrink-0 items-center gap-2">
             {methodLink && (
-              <Link
+              <Link prefetch={false}
                 href={`/methods/${methodLink.slug}`}
                 className="inline-flex items-center gap-1 rounded-md bg-sky-50 px-2 py-1 text-[11px] font-medium text-sky-700 transition-colors hover:bg-sky-100"
               >

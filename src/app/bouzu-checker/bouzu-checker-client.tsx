@@ -765,7 +765,7 @@ export function BouzuCheckerClient() {
 
       {/* 関連ページリンク */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-8">
-        <Link href="/recommendation">
+        <Link prefetch={false} href="/recommendation">
           <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
             <CardContent className="p-4 flex items-center gap-3">
               <div className="rounded-full bg-orange-100 p-2.5">
@@ -781,7 +781,7 @@ export function BouzuCheckerClient() {
             </CardContent>
           </Card>
         </Link>
-        <Link href="/spots">
+        <Link prefetch={false} href="/spots">
           <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
             <CardContent className="p-4 flex items-center gap-3">
               <div className="rounded-full bg-blue-100 p-2.5">
@@ -797,7 +797,7 @@ export function BouzuCheckerClient() {
             </CardContent>
           </Card>
         </Link>
-        <Link href="/tides">
+        <Link prefetch={false} href="/tides">
           <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
             <CardContent className="p-4 flex items-center gap-3">
               <div className="rounded-full bg-cyan-100 p-2.5">
@@ -813,7 +813,7 @@ export function BouzuCheckerClient() {
             </CardContent>
           </Card>
         </Link>
-        <Link href="/beginner-checklist">
+        <Link prefetch={false} href="/beginner-checklist">
           <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
             <CardContent className="p-4 flex items-center gap-3">
               <div className="rounded-full bg-green-100 p-2.5">

@@ -230,7 +230,7 @@ export default function QuizListPage() {
             <p className="mt-1 text-sm text-indigo-700">
               公認釣りインストラクター試験の筆記対策に特化した学習ガイドと確認クイズ（全130問）もご利用いただけます。
             </p>
-            <Link
+            <Link prefetch={false}
               href="/instructor-exam"
               className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-indigo-600 hover:text-indigo-800"
             >
@@ -249,7 +249,7 @@ export default function QuizListPage() {
             </p>
             <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2">
               {relatedLinks.map((link) => (
-                <Link key={link.href} href={link.href}>
+                <Link prefetch={false} key={link.href} href={link.href}>
                   <div className="flex items-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3 transition-all hover:border-amber-300 hover:shadow-sm">
                     <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-amber-50">
                       <link.icon className="size-5 text-amber-600" />
@@ -279,7 +279,7 @@ export default function QuizListPage() {
             </p>
             <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
               {revenueLinks.map((link) => (
-                <Link key={link.href} href={link.href}>
+                <Link prefetch={false} key={link.href} href={link.href}>
                   <div className="flex items-center gap-3 rounded-xl border border-gray-200 bg-white px-4 py-3 transition-all hover:border-blue-300 hover:shadow-sm">
                     <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-blue-50">
                       <link.icon className="size-5 text-blue-600" />

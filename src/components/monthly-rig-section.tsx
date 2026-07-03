@@ -106,7 +106,7 @@ function RigSetCard({ set }: { set: MonthlyRigSet }) {
 
               <div className="mt-3 flex flex-wrap gap-x-4 gap-y-1">
                 {set.guideLink && (
-                  <Link
+                  <Link prefetch={false}
                     href={set.guideLink}
                     className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
                   >
@@ -115,7 +115,7 @@ function RigSetCard({ set }: { set: MonthlyRigSet }) {
                   </Link>
                 )}
                 {set.fishSlug && (
-                  <Link
+                  <Link prefetch={false}
                     href={`/fish/${set.fishSlug}`}
                     className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
                   >

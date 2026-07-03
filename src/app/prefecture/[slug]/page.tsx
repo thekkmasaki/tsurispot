@@ -703,7 +703,7 @@ export default async function PrefecturePage({ params }: PageProps) {
       />
 
       {/* Back link */}
-      <Link
+      <Link prefetch={false}
         href="/prefecture"
         className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground min-h-[44px]"
       >
@@ -786,7 +786,7 @@ export default async function PrefecturePage({ params }: PageProps) {
                 .slice(0, 3)
                 .map((cf) => cf.fish.name);
               return (
-                <Link
+                <Link prefetch={false}
                   key={spot.id}
                   href={`/spots/${spot.slug}`}
                   title={`${spot.name}（${topFish.join("・")}が釣れる${SPOT_TYPE_LABELS[spot.spotType]}）`}
@@ -863,7 +863,7 @@ export default async function PrefecturePage({ params }: PageProps) {
           {/* 全スポット一覧ページへの導線 */}
           {spots.length > 10 && (
             <div className="mt-6 text-center">
-              <Link
+              <Link prefetch={false}
                 href={`/prefecture/${pref.slug}/all`}
                 className="inline-flex items-center gap-2 rounded-lg border bg-card px-6 py-3 text-sm font-medium transition-colors hover:bg-muted"
               >
@@ -888,7 +888,7 @@ export default async function PrefecturePage({ params }: PageProps) {
           </p>
           <div className="grid gap-3 sm:gap-4">
             {hiddenGemSpots.map((spot) => (
-              <Link key={spot.id} href={`/spots/${spot.slug}`}>
+              <Link prefetch={false} key={spot.id} href={`/spots/${spot.slug}`}>
                 <Card className="group gap-0 py-0 transition-shadow hover:shadow-md border-emerald-200/50">
                   <CardContent className="p-3 sm:p-4">
                     <div className="flex items-start gap-3 sm:gap-4">
@@ -953,7 +953,7 @@ export default async function PrefecturePage({ params }: PageProps) {
           </p>
           <div className="grid gap-3 sm:gap-4">
             {topSeasonalSpots.map((item, index) => (
-              <Link key={item.spot.id} href={`/spots/${item.spot.slug}`}>
+              <Link prefetch={false} key={item.spot.id} href={`/spots/${item.spot.slug}`}>
                 <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
                   <CardContent className="p-3 sm:p-4">
                     <div className="flex items-start gap-3 sm:gap-4">
@@ -1040,7 +1040,7 @@ export default async function PrefecturePage({ params }: PageProps) {
             {inSeasonFish.map((f) => {
               const fishData = fishSpecies.find((fs) => fs.slug === f.slug);
               return (
-                <Link key={f.slug} href={f.spotCount >= 3 ? `/prefecture/${pref.slug}/fish/${f.slug}` : `/fish/${f.slug}`}>
+                <Link prefetch={false} key={f.slug} href={f.spotCount >= 3 ? `/prefecture/${pref.slug}/fish/${f.slug}` : `/fish/${f.slug}`}>
                   <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
                     <CardContent className="p-3">
                       <div className="flex items-center gap-2">
@@ -1088,7 +1088,7 @@ export default async function PrefecturePage({ params }: PageProps) {
           </p>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {currentMonthFishList.map((f) => (
-              <Link
+              <Link prefetch={false}
                 key={f.slug}
                 href={`/prefecture/${pref.slug}/${currentMonthDef.slug}/${f.slug}`}
               >
@@ -1103,7 +1103,7 @@ export default async function PrefecturePage({ params }: PageProps) {
             ))}
           </div>
           <div className="mt-3">
-            <Link
+            <Link prefetch={false}
               href={`/prefecture/${pref.slug}/${currentMonthDef.slug}`}
               className="text-sm text-primary hover:underline"
             >
@@ -1148,7 +1148,7 @@ export default async function PrefecturePage({ params }: PageProps) {
                         ? `/prefecture/${pref.slug}/fish/${fishSlug}`
                         : fishSlug ? `/fish/${fishSlug}` : null;
                       return href ? (
-                        <Link key={f} href={href} title={fishInPref && fishInPref.count >= 3 ? `${pref.name}の${f}釣り情報` : `${f}の釣り情報を見る`}>
+                        <Link prefetch={false} key={f} href={href} title={fishInPref && fishInPref.count >= 3 ? `${pref.name}の${f}釣り情報` : `${f}の釣り情報を見る`}>
                           <Badge
                             variant="secondary"
                             className="cursor-pointer text-xs transition-colors hover:bg-primary hover:text-primary-foreground"
@@ -1204,7 +1204,7 @@ export default async function PrefecturePage({ params }: PageProps) {
                           ? `/prefecture/${pref.slug}/fish/${f.slug}`
                           : `/fish/${f.slug}`;
                         return (
-                          <Link key={f.slug} href={href} title={`${pref.name}の${f.name}釣り情報`}>
+                          <Link prefetch={false} key={f.slug} href={href} title={`${pref.name}の${f.name}釣り情報`}>
                             <Badge
                               variant="secondary"
                               className="cursor-pointer text-xs transition-colors hover:bg-primary hover:text-primary-foreground"
@@ -1281,7 +1281,7 @@ export default async function PrefecturePage({ params }: PageProps) {
 
       {/* 釣りルール・注意事項リンク */}
       <section className="mb-8 sm:mb-10">
-        <Link href={`/fishing-rules/${slug}`}>
+        <Link prefetch={false} href={`/fishing-rules/${slug}`}>
           <Card className="gap-0 py-0 border-amber-200 bg-amber-50 transition-shadow hover:shadow-md">
             <CardContent className="p-4 sm:p-5">
               <div className="flex items-center gap-3">
@@ -1310,7 +1310,7 @@ export default async function PrefecturePage({ params }: PageProps) {
           </h2>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {catchableFish.map((f) => (
-              <Link
+              <Link prefetch={false}
                 key={f.slug}
                 href={
                   f.count >= 3
@@ -1357,7 +1357,7 @@ export default async function PrefecturePage({ params }: PageProps) {
           </p>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {prefAreaGuides.map((guide) => (
-              <Link key={guide.slug} href={`/area-guide/${guide.slug}`}>
+              <Link prefetch={false} key={guide.slug} href={`/area-guide/${guide.slug}`}>
                 <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                   <CardContent className="p-4">
                     <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
@@ -1402,7 +1402,7 @@ export default async function PrefecturePage({ params }: PageProps) {
             {prefInfo.popularFish.map((fishName) => {
               const fishSlug = getFishSlugByName(fishName);
               return fishSlug ? (
-                <Link key={fishName} href={`/fish/${fishSlug}`} title={`${fishName}の釣り情報・釣り方を見る`}>
+                <Link prefetch={false} key={fishName} href={`/fish/${fishSlug}`} title={`${fishName}の釣り情報・釣り方を見る`}>
                   <Badge
                     variant="outline"
                     className="cursor-pointer px-3 py-1.5 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
@@ -1458,7 +1458,7 @@ export default async function PrefecturePage({ params }: PageProps) {
                     <p className="mb-2 text-xs font-medium text-muted-foreground">タイプ別の釣り場一覧を見る</p>
                     <div className="flex flex-wrap gap-2">
                       {spotTypeBreakdown.map(({ key, type, count }) => (
-                        <Link
+                        <Link prefetch={false}
                           key={key}
                           href={`/spot-type/${key}/${pref.slug}`}
                           className="rounded-full border bg-muted/50 px-3 py-1 text-xs transition-colors hover:bg-muted hover:text-primary"
@@ -1550,7 +1550,7 @@ export default async function PrefecturePage({ params }: PageProps) {
               ).length;
               const adjInfo = getPrefectureInfoBySlug(p.slug);
               return (
-                <Link key={p.slug} href={`/prefecture/${p.slug}`}>
+                <Link prefetch={false} key={p.slug} href={`/prefecture/${p.slug}`}>
                   <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                     <CardContent className="p-3 sm:p-4">
                       <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
@@ -1589,7 +1589,7 @@ export default async function PrefecturePage({ params }: PageProps) {
                 (s) => s.region.prefecture === p.name
               ).length;
               return (
-                <Link key={p.slug} href={`/prefecture/${p.slug}`}>
+                <Link prefetch={false} key={p.slug} href={`/prefecture/${p.slug}`}>
                   <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                     <CardContent className="p-3 sm:p-4">
                       <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">
@@ -1655,7 +1655,7 @@ export default async function PrefecturePage({ params }: PageProps) {
                     >
                       QRコードをダウンロード
                     </a>
-                    <Link
+                    <Link prefetch={false}
                       href="/partner"
                       className="inline-flex items-center justify-center gap-1 text-sm text-blue-600 hover:text-blue-800 transition-colors"
                     >
@@ -1677,7 +1677,7 @@ export default async function PrefecturePage({ params }: PageProps) {
           {pref.name}で{currentMonthName}の釣りを楽しもう
         </h2>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          <Link
+          <Link prefetch={false}
             href={`/prefecture/${slug}/${MONTHS[currentMonth - 1].slug}`}
             className="flex items-center gap-3 rounded-lg bg-background p-4 shadow-sm transition-all hover:shadow-md"
           >
@@ -1687,7 +1687,7 @@ export default async function PrefecturePage({ params }: PageProps) {
               <div className="text-xs text-muted-foreground">今釣れる魚・おすすめスポット</div>
             </div>
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/catchable-now"
             className="flex items-center gap-3 rounded-lg bg-background p-4 shadow-sm transition-all hover:shadow-md"
           >
@@ -1697,7 +1697,7 @@ export default async function PrefecturePage({ params }: PageProps) {
               <div className="text-xs text-muted-foreground">全国の旬の魚情報</div>
             </div>
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/map"
             className="flex items-center gap-3 rounded-lg bg-background p-4 shadow-sm transition-all hover:shadow-md"
           >
@@ -1724,7 +1724,7 @@ export default async function PrefecturePage({ params }: PageProps) {
             </h3>
             <div className="flex flex-wrap gap-2">
               {prefAreaGuides.map((guide) => (
-                <Link
+                <Link prefetch={false}
                   key={guide.slug}
                   href={`/area-guide/${guide.slug}`}
                   className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
@@ -1751,7 +1751,7 @@ export default async function PrefecturePage({ params }: PageProps) {
               { href: "/guide/jigging", label: "ショアジギングガイド" },
               { href: "/guide", label: "釣り方ガイド一覧" },
             ].map((g) => (
-              <Link
+              <Link prefetch={false}
                 key={g.href}
                 href={g.href}
                 className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
@@ -1769,7 +1769,7 @@ export default async function PrefecturePage({ params }: PageProps) {
           </h3>
           <div className="flex flex-wrap gap-2">
             {monthlyGuides.slice(0, 12).map((guide) => (
-              <Link
+              <Link prefetch={false}
                 key={guide.slug}
                 href={`/monthly/${guide.slug}`}
                 className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
@@ -1787,7 +1787,7 @@ export default async function PrefecturePage({ params }: PageProps) {
           </h3>
           <div className="flex flex-wrap gap-2">
             {MONTHS.map((m) => (
-              <Link
+              <Link prefetch={false}
                 key={m.slug}
                 href={`/prefecture/${slug}/${m.slug}`}
                 className="rounded-full border px-3 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:px-4 sm:py-2 sm:text-sm"
@@ -1805,7 +1805,7 @@ export default async function PrefecturePage({ params }: PageProps) {
           </h3>
           <div className="flex flex-wrap gap-2">
             {adjacentPrefs.map((p) => (
-              <Link
+              <Link prefetch={false}
                 key={p.slug}
                 href={`/prefecture/${p.slug}`}
                 className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
@@ -1813,61 +1813,61 @@ export default async function PrefecturePage({ params }: PageProps) {
                 {p.name}の釣り場ガイド
               </Link>
             ))}
-            <Link
+            <Link prefetch={false}
               href={`/fishing-rules/${slug}`}
               className="rounded-full border border-amber-300 bg-amber-50 px-4 py-2 text-sm transition-colors hover:bg-amber-100"
             >
               {pref.name}の釣りルール
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/spots"
               className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
             >
               全国の釣りスポット一覧
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/prefecture"
               className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
             >
               都道府県から探す
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/catchable-now"
               className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
             >
               今釣れる魚
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/map"
               className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
             >
               地図から釣り場を探す
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/fish"
               className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
             >
               魚種図鑑
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/ranking"
               className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
             >
               全国釣り場ランキング
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/fishing-calendar"
               className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
             >
               釣り月別カレンダー
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/for-beginners"
               className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
             >
               初心者向け釣りガイド
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/blog"
               className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
             >
@@ -1886,7 +1886,7 @@ export default async function PrefecturePage({ params }: PageProps) {
               早朝出船・釣果料理・タックルレンタル対応の {pref.name} の宿を厳選掲載。
             </p>
           </div>
-          <Link
+          <Link prefetch={false}
             href={`/accommodations/${pref.slug}`}
             className="inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-orange-600 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-orange-700 min-h-[44px]"
           >

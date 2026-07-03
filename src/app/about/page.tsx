@@ -687,19 +687,19 @@ export default function AboutPage() {
         </Card>
 
         <div className="mx-auto mt-6 flex max-w-2xl flex-wrap items-center justify-center gap-3">
-          <Link href="/privacy">
+          <Link prefetch={false} href="/privacy">
             <Button variant="outline" size="sm" className="gap-1.5 text-xs">
               <FileText className="size-3.5" />
               プライバシーポリシー
             </Button>
           </Link>
-          <Link href="/terms">
+          <Link prefetch={false} href="/terms">
             <Button variant="outline" size="sm" className="gap-1.5 text-xs">
               <FileText className="size-3.5" />
               利用規約
             </Button>
           </Link>
-          <Link href="/legal">
+          <Link prefetch={false} href="/legal">
             <Button variant="outline" size="sm" className="gap-1.5 text-xs">
               <FileText className="size-3.5" />
               特定商取引法に基づく表記
@@ -721,13 +721,13 @@ export default function AboutPage() {
                 あなたにぴったりの釣り場がきっと見つかります。
               </p>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <Link href="/spots">
+                <Link prefetch={false} href="/spots">
                   <Button size="lg" className="min-h-[44px] gap-1.5 px-6">
                     スポット一覧を見る
                     <ChevronRight className="size-4" />
                   </Button>
                 </Link>
-                <Link href="/map">
+                <Link prefetch={false} href="/map">
                   <Button
                     variant="outline"
                     size="lg"

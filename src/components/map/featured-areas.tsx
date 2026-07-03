@@ -35,7 +35,7 @@ export function FeaturedAreas() {
       </h2>
       <div className="grid grid-cols-4 gap-2 sm:grid-cols-8">
         {items.map(({ pref, count }) => (
-          <Link
+          <Link prefetch={false}
             key={pref.slug}
             href={`/prefecture/${pref.slug}`}
             className="group rounded-lg border bg-card p-2 text-center transition-shadow hover:shadow-md sm:p-3"

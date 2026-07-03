@@ -48,7 +48,7 @@ function ReportCard({ report, big = false }: { report: CatchReport; big?: boolea
     );
   }
   return (
-    <Link
+    <Link prefetch={false}
       href={`/spots/${report.spotSlug}`}
       className={`flex gap-3 rounded-md border bg-background transition-colors hover:bg-muted/50 ${
         big ? "p-3" : "p-2"
@@ -115,7 +115,7 @@ export default function RecordsPage() {
     return (
       <div className="container mx-auto px-4 py-8">
         <p className="text-sm text-muted-foreground">ログインが必要です。</p>
-        <Link
+        <Link prefetch={false}
           href="/login"
           className="mt-3 inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
         >
@@ -135,7 +135,7 @@ export default function RecordsPage() {
             { label: "個人記録" },
           ]}
         />
-        <Link
+        <Link prefetch={false}
           href="/mypage"
           className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground"
         >
@@ -161,7 +161,7 @@ export default function RecordsPage() {
         ]}
       />
 
-      <Link
+      <Link prefetch={false}
         href="/mypage"
         className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground"
       >
@@ -274,7 +274,7 @@ export default function RecordsPage() {
               </h2>
               <div className="space-y-1.5">
                 {topSpots.map((s, idx) => (
-                  <Link
+                  <Link prefetch={false}
                     key={s.spotSlug}
                     href={`/spots/${s.spotSlug}`}
                     className="flex items-center justify-between rounded-md border bg-background p-3 transition-colors hover:bg-muted/50"

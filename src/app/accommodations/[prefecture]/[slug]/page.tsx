@@ -116,7 +116,7 @@ export default async function AccommodationDetailPage({
 
       <HeaderBannerAd />
 
-      <Link
+      <Link prefetch={false}
         href={`/accommodations/${prefecture}`}
         className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground"
       >
@@ -184,7 +184,7 @@ export default async function AccommodationDetailPage({
           <ul className="space-y-2">
             {linkedSpots.map((s) => (
               <li key={s.slug}>
-                <Link href={`/spots/${s.slug}`} className="text-sm text-primary hover:underline">
+                <Link prefetch={false} href={`/spots/${s.slug}`} className="text-sm text-primary hover:underline">
                   {s.name} ({s.region.areaName})
                 </Link>
               </li>
