@@ -380,7 +380,7 @@ export default async function AreaDetailPage({ params }: PageProps) {
       />
 
       {/* Back link */}
-      <Link
+      <Link prefetch={false}
         href="/area"
         className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground min-h-[44px]"
       >
@@ -400,7 +400,7 @@ export default async function AreaDetailPage({ params }: PageProps) {
           {(() => {
             const pref = getPrefectureByName(region.prefecture);
             return pref ? (
-              <Link href={`/prefecture/${pref.slug}`} className="hover:text-foreground hover:underline">
+              <Link prefetch={false} href={`/prefecture/${pref.slug}`} className="hover:text-foreground hover:underline">
                 {region.prefecture}
               </Link>
             ) : (
@@ -460,7 +460,7 @@ export default async function AreaDetailPage({ params }: PageProps) {
                 (s) => s.region.id === r.id
               ).length;
               return (
-                <Link key={r.id} href={`/area/${r.slug}`}>
+                <Link prefetch={false} key={r.id} href={`/area/${r.slug}`}>
                   <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                     <CardContent className="p-4">
                       <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">

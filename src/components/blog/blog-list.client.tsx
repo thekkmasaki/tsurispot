@@ -105,7 +105,7 @@ function BlogThumbnail({ post }: { post: BlogPostSummary }) {
 
 function BlogCard({ post }: { post: BlogPostSummary }) {
   return (
-    <Link href={`/blog/${post.slug}`}>
+    <Link prefetch={false} href={`/blog/${post.slug}`}>
       <Card className="group h-full overflow-hidden py-0 transition-all duration-200 hover:shadow-lg hover:shadow-ocean-deep/8 hover:-translate-y-0.5">
         <div className="flex h-full flex-col sm:flex-row">
           <BlogThumbnail post={post} />

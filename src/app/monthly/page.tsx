@@ -126,7 +126,7 @@ export default function MonthlyPage() {
                 </div>
               )}
               <div className="mt-4">
-                <Link
+                <Link prefetch={false}
                   href={`/monthly/${todayGuide.slug}`}
                   className="inline-flex items-center gap-1 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-opacity hover:opacity-90"
                 >
@@ -148,7 +148,7 @@ export default function MonthlyPage() {
               .filter(Boolean);
 
             return (
-              <Link
+              <Link prefetch={false}
                 key={guide.slug}
                 href={`/monthly/${guide.slug}`}
                 className={`group block overflow-hidden rounded-xl border transition-all hover:shadow-lg ${
@@ -249,7 +249,7 @@ export default function MonthlyPage() {
           <div>
             <h3 className="mb-3 text-sm font-semibold text-muted-foreground">情報・ガイド</h3>
             <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-4">
-              <Link
+              <Link prefetch={false}
                 href="/guide"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >
@@ -258,7 +258,7 @@ export default function MonthlyPage() {
                   初心者から上級者向けまで
                 </p>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/seasonal"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >
@@ -267,7 +267,7 @@ export default function MonthlyPage() {
                   春夏秋冬でまとめた釣り情報
                 </p>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/catchable-now"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >
@@ -276,7 +276,7 @@ export default function MonthlyPage() {
                   今の時期に釣れる魚をチェック
                 </p>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/fishing-calendar"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >
@@ -285,7 +285,7 @@ export default function MonthlyPage() {
                   魚種別の釣りシーズン早見表
                 </p>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/methods"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >
@@ -294,7 +294,7 @@ export default function MonthlyPage() {
                   9つの釣り方を徹底解説
                 </p>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/gear"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >
@@ -310,7 +310,7 @@ export default function MonthlyPage() {
           <div>
             <h3 className="mb-3 text-sm font-semibold text-muted-foreground">スポットを探す</h3>
             <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-4">
-              <Link
+              <Link prefetch={false}
                 href="/ranking"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >
@@ -319,7 +319,7 @@ export default function MonthlyPage() {
                   全国の人気釣り場TOP
                 </p>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/spots"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >
@@ -328,7 +328,7 @@ export default function MonthlyPage() {
                   1000+の釣り場を検索
                 </p>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/map"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >
@@ -337,7 +337,7 @@ export default function MonthlyPage() {
                   全国の釣り場をマップ表示
                 </p>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/prefecture"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >
@@ -353,7 +353,7 @@ export default function MonthlyPage() {
           <div>
             <h3 className="mb-3 text-sm font-semibold text-muted-foreground">ツール・初心者向け</h3>
             <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-4">
-              <Link
+              <Link prefetch={false}
                 href="/tides"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >
@@ -362,7 +362,7 @@ export default function MonthlyPage() {
                   潮の動きをチェック
                 </p>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/bouzu-checker"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >
@@ -371,7 +371,7 @@ export default function MonthlyPage() {
                   釣れない確率を診断
                 </p>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/for-beginners"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >
@@ -380,7 +380,7 @@ export default function MonthlyPage() {
                   釣りの始め方ガイド
                 </p>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/fish"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >

@@ -327,7 +327,7 @@ export default async function FishMethodPage({ params }: PageProps) {
       />
 
       {/* 戻るリンク */}
-      <Link
+      <Link prefetch={false}
         href={`/fish/${fish.slug}`}
         className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground min-h-[44px]"
       >
@@ -585,7 +585,7 @@ export default async function FishMethodPage({ params }: PageProps) {
                 {spotsWithCatchInfo.map(({ spot, catchInfo }) => (
                   <tr key={spot.id} className="border-b hover:bg-muted/30">
                     <td className="px-3 py-2">
-                      <Link
+                      <Link prefetch={false}
                         href={`/spots/${spot.slug}`}
                         className="font-medium text-primary hover:underline"
                       >
@@ -644,7 +644,7 @@ export default async function FishMethodPage({ params }: PageProps) {
           </h2>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {otherMethodsForFish.map((m) => (
-              <Link key={m.slug} href={`/fish/${fish.slug}/method/${m.slug}`}>
+              <Link prefetch={false} key={m.slug} href={`/fish/${fish.slug}/method/${m.slug}`}>
                 <Badge
                   variant="outline"
                   className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
@@ -665,7 +665,7 @@ export default async function FishMethodPage({ params }: PageProps) {
           </h2>
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {relatedFishSameMethod.map((f) => (
-              <Link key={f.slug} href={`/fish/${f.slug}/method/${method}`}>
+              <Link prefetch={false} key={f.slug} href={`/fish/${f.slug}/method/${method}`}>
                 <Badge
                   variant="outline"
                   className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
@@ -706,31 +706,31 @@ export default async function FishMethodPage({ params }: PageProps) {
           関連リンク
         </h2>
         <div className="flex flex-wrap gap-2">
-          <Link
+          <Link prefetch={false}
             href={`/fish/${fish.slug}`}
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             {fish.name}の詳細
           </Link>
-          <Link
+          <Link prefetch={false}
             href={methodDef.guide}
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             {methodDef.name}ガイド
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/fish"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             魚種から探す
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/catchable-now"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             今釣れる魚
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >

@@ -33,7 +33,7 @@ function MiniReport({ report }: { report: CatchReport }) {
     );
   }
   return (
-    <Link
+    <Link prefetch={false}
       href={`/spots/${report.spotSlug}`}
       className="block rounded-md border bg-background p-2 text-xs transition-colors hover:bg-muted/50"
     >

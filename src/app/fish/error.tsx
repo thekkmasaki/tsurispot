@@ -64,14 +64,14 @@ export default function FishError({
             もう一度試す
           </button>
 
-          <Link href="/fish">
+          <Link prefetch={false} href="/fish">
             <button className="flex items-center gap-2 rounded-lg border border-blue-300 bg-white px-6 py-3 text-sm font-semibold text-blue-700 shadow-sm transition-colors hover:bg-blue-50">
               <ArrowLeft className="size-4" />
               魚種図鑑に戻る
             </button>
           </Link>
 
-          <Link href="/">
+          <Link prefetch={false} href="/">
             <button className="flex items-center gap-2 rounded-lg border border-blue-300 bg-white px-6 py-3 text-sm font-semibold text-blue-700 shadow-sm transition-colors hover:bg-blue-50">
               <Home className="size-4" />
               トップページへ

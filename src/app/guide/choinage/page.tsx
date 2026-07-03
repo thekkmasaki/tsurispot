@@ -727,7 +727,7 @@ export default function ChoinageGuidePage() {
           { label: "ちょい投げ釣りガイド" },
         ]} />
         <div className="mb-6">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
@@ -902,7 +902,7 @@ export default function ChoinageGuidePage() {
 
             <Warning>
               投げる前に必ず後方を確認しましょう。背後に人がいると、針やオモリが当たって大怪我をする恐れがあります。投げ方の詳しい手順は
-              <Link
+              <Link prefetch={false}
                 href="/guide/casting"
                 className="font-medium text-amber-900 underline dark:text-amber-100"
               >
@@ -925,7 +925,7 @@ export default function ChoinageGuidePage() {
                 <p className="mb-2 text-sm text-muted-foreground">
                   ちょい投げの代表的なターゲット。白くて上品な身は天ぷらにすると絶品です。砂底を好み、群れで行動するため、1匹釣れたら同じポイントに投げると連続して釣れることも。シーズンは5〜9月で、特に6〜8月の夏が最盛期。初心者でも20cmクラスのキスを釣ることができます。
                 </p>
-                <Link
+                <Link prefetch={false}
                   href="/fish/kisu"
                   className="inline-flex items-center text-sm text-primary hover:underline"
                 >
@@ -944,7 +944,7 @@ export default function ChoinageGuidePage() {
                 <p className="mb-2 text-sm text-muted-foreground">
                   秋のちょい投げの主役。河口や汽水域に多く生息し、小さいながらもアタリが明確で釣る楽しさがあります。シーズンは7〜11月で、9〜10月が最盛期。初夏の小さなハゼ（デキハゼ）から秋の大型ハゼまで、成長を追いかけるのも楽しみの一つ。天ぷらや唐揚げが定番料理です。
                 </p>
-                <Link
+                <Link prefetch={false}
                   href="/fish/haze"
                   className="inline-flex items-center text-sm text-primary hover:underline"
                 >
@@ -1032,7 +1032,7 @@ export default function ChoinageGuidePage() {
               <div>
                 <div className="grid gap-2 sm:grid-cols-2">
                   {choinageSpots.map((spot) => (
-                    <Link
+                    <Link prefetch={false}
                       key={spot.id}
                       href={`/spots/${spot.slug}`}
                       className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
@@ -1051,7 +1051,7 @@ export default function ChoinageGuidePage() {
                 </div>
                 <div className="mt-3 text-center">
                   <Button asChild variant="outline" size="sm">
-                    <Link href="/spots">
+                    <Link prefetch={false} href="/spots">
                       すべてのスポットを見る
                       <ChevronRight className="ml-1 size-4" />
                     </Link>
@@ -1077,14 +1077,14 @@ export default function ChoinageGuidePage() {
                   Q. ちょい投げで釣れる魚は？
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  <Link
+                  <Link prefetch={false}
                     href="/fish/kisu"
                     className="text-primary hover:underline"
                   >
                     キス（シロギス）
                   </Link>
                   と
-                  <Link
+                  <Link prefetch={false}
                     href="/fish/haze"
                     className="text-primary hover:underline"
                   >
@@ -1106,14 +1106,14 @@ export default function ChoinageGuidePage() {
                   Q. ちょい投げに最適な時期はいつですか？
                 </h3>
                 <p className="text-sm text-muted-foreground">
-                  <Link
+                  <Link prefetch={false}
                     href="/fish/kisu"
                     className="text-primary hover:underline"
                   >
                     キス
                   </Link>
                   は5〜9月（特に6〜8月がベスト）、
-                  <Link
+                  <Link prefetch={false}
                     href="/fish/haze"
                     className="text-primary hover:underline"
                   >
@@ -1157,7 +1157,7 @@ export default function ChoinageGuidePage() {
               { slug: "magochi", name: "マゴチ" },
               { slug: "hirame", name: "ヒラメ" },
             ].map((f) => (
-              <Link key={f.slug} href={`/fish/${f.slug}`}>
+              <Link prefetch={false} key={f.slug} href={`/fish/${f.slug}`}>
                 <Badge variant="outline" className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-white sm:text-sm">
                   {f.name}の釣り方
                 </Badge>
@@ -1181,7 +1181,7 @@ export default function ChoinageGuidePage() {
               .sort((a, b) => b.rating - a.rating)
               .slice(0, 6)
               .map((spot) => (
-                <Link key={spot.slug} href={`/spots/${spot.slug}`} title={`${spot.name}（${spot.region.prefecture}のちょい投げスポット）`}>
+                <Link prefetch={false} key={spot.slug} href={`/spots/${spot.slug}`} title={`${spot.name}（${spot.region.prefecture}のちょい投げスポット）`}>
                   <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                     <CardContent className="p-3">
                       <p className="text-sm font-semibold group-hover:text-primary truncate">{spot.name}</p>
@@ -1192,7 +1192,7 @@ export default function ChoinageGuidePage() {
               ))}
           </div>
           <div className="mt-3 text-center">
-            <Link href="/spots" className="text-sm text-primary hover:underline">
+            <Link prefetch={false} href="/spots" className="text-sm text-primary hover:underline">
               全国の釣りスポットから探す →
             </Link>
           </div>
@@ -1207,7 +1207,7 @@ export default function ChoinageGuidePage() {
             関連ガイド
           </h2>
           <div className="grid gap-3 sm:grid-cols-2">
-            <Link href="/guide/casting" className="group">
+            <Link prefetch={false} href="/guide/casting" className="group">
               <Card className="h-full transition-colors group-hover:border-primary">
                 <CardContent className="pt-6">
                   <Target className="mb-2 size-5 text-primary" />
@@ -1220,7 +1220,7 @@ export default function ChoinageGuidePage() {
                 </CardContent>
               </Card>
             </Link>
-            <Link href="/guide/sabiki" className="group">
+            <Link prefetch={false} href="/guide/sabiki" className="group">
               <Card className="h-full transition-colors group-hover:border-primary">
                 <CardContent className="pt-6">
                   <Fish className="mb-2 size-5 text-primary" />
@@ -1233,7 +1233,7 @@ export default function ChoinageGuidePage() {
                 </CardContent>
               </Card>
             </Link>
-            <Link href="/guide/beginner" className="group">
+            <Link prefetch={false} href="/guide/beginner" className="group">
               <Card className="h-full transition-colors group-hover:border-primary">
                 <CardContent className="pt-6">
                   <Fish className="mb-2 size-5 text-primary" />
@@ -1246,7 +1246,7 @@ export default function ChoinageGuidePage() {
                 </CardContent>
               </Card>
             </Link>
-            <Link href="/guide/sinker" className="group">
+            <Link prefetch={false} href="/guide/sinker" className="group">
               <Card className="h-full transition-colors group-hover:border-primary">
                 <CardContent className="pt-6">
                   <Target className="mb-2 size-5 text-primary" />
@@ -1259,7 +1259,7 @@ export default function ChoinageGuidePage() {
                 </CardContent>
               </Card>
             </Link>
-            <Link href="/guide/troubleshooting" className="group">
+            <Link prefetch={false} href="/guide/troubleshooting" className="group">
               <Card className="h-full transition-colors group-hover:border-primary">
                 <CardContent className="pt-6">
                   <HelpCircle className="mb-2 size-5 text-primary" />
@@ -1272,7 +1272,7 @@ export default function ChoinageGuidePage() {
                 </CardContent>
               </Card>
             </Link>
-            <Link href="/guide/beginner-setup" className="group">
+            <Link prefetch={false} href="/guide/beginner-setup" className="group">
               <Card className="h-full transition-colors group-hover:border-primary">
                 <CardContent className="pt-6">
                   <Package className="mb-2 size-5 text-primary" />
@@ -1294,7 +1294,7 @@ export default function ChoinageGuidePage() {
             ちょい投げで釣れるスポットを探してみよう
           </p>
           <Button asChild size="lg" className="min-h-[48px] rounded-full px-8">
-            <Link href="/spots">スポットを探す</Link>
+            <Link prefetch={false} href="/spots">スポットを探す</Link>
           </Button>
         </div>
       {/* LINE登録バナー */}

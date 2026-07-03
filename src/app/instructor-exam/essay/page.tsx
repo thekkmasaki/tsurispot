@@ -112,11 +112,11 @@ export default function EssayPage() {
         <nav aria-label="パンくずリスト" className="mb-6 text-sm text-muted-foreground">
           <ol className="flex flex-wrap items-center gap-1.5">
             <li>
-              <Link href="/" className="hover:text-foreground">ホーム</Link>
+              <Link prefetch={false} href="/" className="hover:text-foreground">ホーム</Link>
             </li>
             <li aria-hidden="true">/</li>
             <li>
-              <Link href="/instructor-exam" className="hover:text-foreground">
+              <Link prefetch={false} href="/instructor-exam" className="hover:text-foreground">
                 試験対策
               </Link>
             </li>
@@ -573,13 +573,13 @@ export default function EssayPage() {
 
         {/* ナビ */}
         <div className="mt-12 flex items-center justify-between border-t pt-6">
-          <Link
+          <Link prefetch={false}
             href="/instructor-exam"
             className="rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium hover:bg-gray-200"
           >
             目次に戻る
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/instructor-exam/practical"
             className="rounded-lg bg-sky-600 px-4 py-2 text-sm font-medium text-white hover:bg-sky-700"
           >

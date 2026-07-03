@@ -176,7 +176,7 @@ export function MonthlySportsSorter({ spots, monthName }: MonthlySportsSorterPro
             : undefined;
 
           return (
-            <Link
+            <Link prefetch={false}
               key={spot.slug}
               href={`/spots/${spot.slug}`}
               className="group overflow-hidden rounded-lg border bg-white transition-shadow hover:shadow-md dark:bg-card"

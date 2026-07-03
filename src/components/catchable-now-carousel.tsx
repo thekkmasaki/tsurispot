@@ -33,7 +33,7 @@ function CarouselCard({ fish }: { fish: CarouselFish }) {
   const iconColor = CATEGORY_ICON_COLOR[fish.category] || "text-sky-500";
 
   return (
-    <Link
+    <Link prefetch={false}
       href={`/fish/${fish.slug}`}
       className="w-40 shrink-0 snap-start overflow-hidden rounded-xl border bg-card transition-shadow hover:shadow-md sm:w-44"
     >
@@ -80,7 +80,7 @@ export function CatchableNowCarousel({ fish }: { fish: CarouselFish[] }) {
           <Fish className="size-5 text-orange-500" />
           <h2 className="text-lg font-bold sm:text-xl">今釣れている魚</h2>
         </div>
-        <Link
+        <Link prefetch={false}
           href="/catchable-now"
           className="flex items-center gap-0.5 text-sm font-medium text-primary hover:text-primary/80"
         >

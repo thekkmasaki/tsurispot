@@ -189,7 +189,7 @@ export default function SpotsPage() {
             全国の釣りスポット・穴場を地域・タイプ・難易度で絞り込み
           </p>
         </div>
-        <Link
+        <Link prefetch={false}
           href="/spots/submit"
           className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 min-h-[44px]"
         >
@@ -209,7 +209,7 @@ export default function SpotsPage() {
               道具の選び方から釣り方まで、初心者向けのガイドを用意しています。
             </p>
           </div>
-          <Link
+          <Link prefetch={false}
             href="/guide/beginner"
             className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-emerald-600 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-emerald-700 min-h-[44px]"
           >
@@ -223,36 +223,36 @@ export default function SpotsPage() {
       <div className="mt-10 border-t pt-8">
         <h2 className="mb-4 text-lg font-bold">目的別に釣り場を探す</h2>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-          <Link href="/fishing-spots/breakwater-beginner" className="rounded-lg border p-3 text-sm hover:bg-muted transition-colors">
+          <Link prefetch={false} href="/fishing-spots/breakwater-beginner" className="rounded-lg border p-3 text-sm hover:bg-muted transition-colors">
             <span className="font-medium">堤防釣り初心者向け</span>
             <p className="mt-1 text-xs text-muted-foreground">安全で釣りやすい堤防</p>
           </Link>
-          <Link href="/fishing-spots/best-saltwater" className="rounded-lg border p-3 text-sm hover:bg-muted transition-colors">
+          <Link prefetch={false} href="/fishing-spots/best-saltwater" className="rounded-lg border p-3 text-sm hover:bg-muted transition-colors">
             <span className="font-medium">海釣りおすすめ</span>
             <p className="mt-1 text-xs text-muted-foreground">人気の海釣りスポット</p>
           </Link>
-          <Link href="/fishing-spots/river-beginner" className="rounded-lg border p-3 text-sm hover:bg-muted transition-colors">
+          <Link prefetch={false} href="/fishing-spots/river-beginner" className="rounded-lg border p-3 text-sm hover:bg-muted transition-colors">
             <span className="font-medium">川釣り初心者向け</span>
             <p className="mt-1 text-xs text-muted-foreground">のんびり楽しめる川釣り</p>
           </Link>
-          <Link href="/fishing-spots/near-me" className="rounded-lg border p-3 text-sm hover:bg-muted transition-colors">
+          <Link prefetch={false} href="/fishing-spots/near-me" className="rounded-lg border p-3 text-sm hover:bg-muted transition-colors">
             <span className="font-medium">近くの釣り場</span>
             <p className="mt-1 text-xs text-muted-foreground">現在地から近い順で表示</p>
           </Link>
         </div>
         <div className="mt-4 flex flex-wrap gap-2 text-xs text-muted-foreground">
           <span className="font-medium text-foreground">人気エリア:</span>
-          <Link href="/prefecture/hokkaido" className="hover:text-primary">北海道</Link>
-          <Link href="/prefecture/tokyo" className="hover:text-primary">東京</Link>
-          <Link href="/prefecture/kanagawa" className="hover:text-primary">神奈川</Link>
-          <Link href="/prefecture/chiba" className="hover:text-primary">千葉</Link>
-          <Link href="/prefecture/shizuoka" className="hover:text-primary">静岡</Link>
-          <Link href="/prefecture/aichi" className="hover:text-primary">愛知</Link>
-          <Link href="/prefecture/osaka" className="hover:text-primary">大阪</Link>
-          <Link href="/prefecture/hyogo" className="hover:text-primary">兵庫</Link>
-          <Link href="/prefecture/fukuoka" className="hover:text-primary">福岡</Link>
-          <Link href="/prefecture/okinawa" className="hover:text-primary">沖縄</Link>
-          <Link href="/prefecture" className="font-medium hover:text-primary">全都道府県 →</Link>
+          <Link prefetch={false} href="/prefecture/hokkaido" className="hover:text-primary">北海道</Link>
+          <Link prefetch={false} href="/prefecture/tokyo" className="hover:text-primary">東京</Link>
+          <Link prefetch={false} href="/prefecture/kanagawa" className="hover:text-primary">神奈川</Link>
+          <Link prefetch={false} href="/prefecture/chiba" className="hover:text-primary">千葉</Link>
+          <Link prefetch={false} href="/prefecture/shizuoka" className="hover:text-primary">静岡</Link>
+          <Link prefetch={false} href="/prefecture/aichi" className="hover:text-primary">愛知</Link>
+          <Link prefetch={false} href="/prefecture/osaka" className="hover:text-primary">大阪</Link>
+          <Link prefetch={false} href="/prefecture/hyogo" className="hover:text-primary">兵庫</Link>
+          <Link prefetch={false} href="/prefecture/fukuoka" className="hover:text-primary">福岡</Link>
+          <Link prefetch={false} href="/prefecture/okinawa" className="hover:text-primary">沖縄</Link>
+          <Link prefetch={false} href="/prefecture" className="font-medium hover:text-primary">全都道府県 →</Link>
         </div>
       </div>
 

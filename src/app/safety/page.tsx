@@ -328,7 +328,7 @@ export default function SafetyPage() {
               </div>
 
               <div className="mt-2">
-                <Link
+                <Link prefetch={false}
                   href="/fish"
                   className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
                 >
@@ -532,7 +532,7 @@ export default function SafetyPage() {
           </p>
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Button asChild size="lg" className="min-h-[48px] gap-1.5 rounded-full px-8">
-              <Link href="/spots">
+              <Link prefetch={false} href="/spots">
                 スポットを探す
                 <ChevronRight className="h-4 w-4" />
               </Link>
@@ -543,7 +543,7 @@ export default function SafetyPage() {
               size="lg"
               className="min-h-[48px] gap-1.5 rounded-full px-8"
             >
-              <Link href="/beginner-checklist">
+              <Link prefetch={false} href="/beginner-checklist">
                 持ち物チェックリスト
                 <ChevronRight className="h-4 w-4" />
               </Link>

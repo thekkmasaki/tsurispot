@@ -135,7 +135,7 @@ export function ProfileClient({ data, shareUrl }: Props) {
             : undefined
         }
       >
-        <Link
+        <Link prefetch={false}
           href="/"
           className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-white/85 px-3 py-1 text-xs text-foreground backdrop-blur-sm hover:bg-white"
         >
@@ -159,7 +159,7 @@ export function ProfileClient({ data, shareUrl }: Props) {
             </div>
           )}
           {follow.isSelf ? (
-            <Link
+            <Link prefetch={false}
               href="/mypage"
               className="mt-2 inline-flex items-center gap-1 rounded-full border bg-white/95 px-3 py-1.5 text-xs font-medium shadow-sm hover:bg-white"
             >
@@ -235,7 +235,7 @@ export function ProfileClient({ data, shareUrl }: Props) {
                 <Award className="h-4 w-4 text-amber-600" />
                 <span className="text-sm font-semibold text-amber-900">Best Catch</span>
               </div>
-              <Link
+              <Link prefetch={false}
                 href={bestCatch.spotSlug ? `/spots/${bestCatch.spotSlug}` : "#"}
                 className="flex gap-3 p-4 transition-colors hover:bg-amber-100/40"
               >
@@ -348,7 +348,7 @@ export function ProfileClient({ data, shareUrl }: Props) {
             ) : (
               <div className="space-y-3">
                 {reports.map((report, idx) => (
-                  <Link
+                  <Link prefetch={false}
                     key={report.id || idx}
                     href={report.spotSlug ? `/spots/${report.spotSlug}` : "#"}
                     className="block rounded-lg border p-3 transition-colors hover:bg-muted/50"

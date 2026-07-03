@@ -160,7 +160,7 @@ export default function BestSaltwaterPage() {
       <section className="mt-10 rounded-xl border bg-muted/30 p-6">
         <h2 className="mb-4 text-lg font-bold">関連ページ</h2>
         <div className="grid gap-3 sm:grid-cols-3">
-          <Link
+          <Link prefetch={false}
             href="/fishing-spots/breakwater-beginner"
             className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
           >
@@ -169,7 +169,7 @@ export default function BestSaltwaterPage() {
               初心者に安全な堤防・漁港を厳選
             </p>
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/guide/beginner"
             className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
           >
@@ -178,7 +178,7 @@ export default function BestSaltwaterPage() {
               道具選びから釣り方まで徹底解説
             </p>
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/seasonal"
             className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
           >

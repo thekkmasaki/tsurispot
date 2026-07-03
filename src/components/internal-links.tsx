@@ -24,7 +24,7 @@ export function RelatedSpots({
       </h2>
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {spots.map((spot) => (
-          <Link key={spot.id} href={`/spots/${spot.slug}`}>
+          <Link prefetch={false} key={spot.id} href={`/spots/${spot.slug}`}>
             <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
               <CardContent className="p-4">
                 <h3 className="truncate font-semibold group-hover:text-primary">
@@ -70,7 +70,7 @@ export function RelatedFish({
       </h2>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         {fishList.map((fish) => (
-          <Link key={fish.id} href={`/fish/${fish.slug}`}>
+          <Link prefetch={false} key={fish.id} href={`/fish/${fish.slug}`}>
             <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
               <CardContent className="p-4 text-center">
                 <Fish
@@ -105,7 +105,7 @@ export function FishSpotLinks({ catchableFish }: FishSpotLinksProps) {
       <h2 className="mb-4 text-lg font-bold">この釣り場で狙える魚の詳細</h2>
       <div className="flex flex-wrap gap-2">
         {catchableFish.map((cf) => (
-          <Link key={cf.fish.id} href={`/fish/${cf.fish.slug}`}>
+          <Link prefetch={false} key={cf.fish.id} href={`/fish/${cf.fish.slug}`}>
             <Badge
               variant="outline"
               className="cursor-pointer px-3 py-1.5 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"

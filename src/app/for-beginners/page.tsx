@@ -405,7 +405,7 @@ export default function ForBeginnersPage() {
 
                 <div className="text-center">
                   <Button asChild variant="outline" size="sm">
-                    <Link href="/gear">
+                    <Link prefetch={false} href="/gear">
                       編集長厳選の道具をもっと見る
                       <ChevronRight className="ml-1 size-4" />
                     </Link>
@@ -435,7 +435,7 @@ export default function ForBeginnersPage() {
                     {beginnerFishThisMonth.map((fish) => {
                       const isPeak = fish.peakMonths.includes(currentMonth);
                       return (
-                        <Link
+                        <Link prefetch={false}
                           key={fish.slug}
                           href={`/fish/${fish.slug}`}
                           className="group flex items-start gap-3 rounded-lg border p-3 transition-colors hover:border-teal-400 hover:bg-teal-50/50"
@@ -486,7 +486,7 @@ export default function ForBeginnersPage() {
 
                 <div className="mt-4 text-center">
                   <Button asChild variant="outline" size="sm">
-                    <Link href="/fish">
+                    <Link prefetch={false} href="/fish">
                       すべての魚種を見る
                       <ChevronRight className="ml-1 size-4" />
                     </Link>
@@ -560,7 +560,7 @@ export default function ForBeginnersPage() {
 
                 <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
                   <Button asChild size="lg" className="min-h-[48px] w-full sm:w-auto">
-                    <Link href="/spots">
+                    <Link prefetch={false} href="/spots">
                       <Compass className="mr-2 size-4" />
                       近くの釣りスポットを探す
                     </Link>
@@ -571,7 +571,7 @@ export default function ForBeginnersPage() {
                     size="sm"
                     className="w-full sm:w-auto"
                   >
-                    <Link href="/guide/family">
+                    <Link prefetch={false} href="/guide/family">
                       ファミリー向けガイドを見る
                       <ChevronRight className="ml-1 size-4" />
                     </Link>
@@ -609,7 +609,7 @@ export default function ForBeginnersPage() {
                     コマセ（撒き餌）で魚を集め、疑似餌のついた仕掛けで釣ります。足元に落とすだけなので投げる技術が不要。アジ・サバ・イワシなど群れで釣れるので、初心者でもたくさんの魚に出会えます。
                   </p>
                   <div className="mt-3 flex flex-wrap items-center gap-3">
-                    <Link
+                    <Link prefetch={false}
                       href="/guide/sabiki"
                       className="inline-flex items-center text-sm font-medium text-green-600 hover:underline"
                     >
@@ -642,7 +642,7 @@ export default function ForBeginnersPage() {
                     軽いオモリとエサ（青イソメ）を20〜30mほど投げて、海底の魚を狙います。キスやハゼなど天ぷらが美味しい魚が釣れます。投げる楽しさも味わえる釣り方です。
                   </p>
                   <div className="mt-3">
-                    <Link
+                    <Link prefetch={false}
                       href="/guide/casting"
                       className="inline-flex items-center text-sm font-medium text-blue-500 hover:underline"
                     >
@@ -665,7 +665,7 @@ export default function ForBeginnersPage() {
                     ウキの動きで魚のアタリを見る、最も基本的な釣り方です。ウキがスッと沈む瞬間はドキドキの一言。メジナ・クロダイ・メバルなど幅広い魚種が狙えます。
                   </p>
                   <div className="mt-3">
-                    <Link
+                    <Link prefetch={false}
                       href="/guide/float-fishing"
                       className="inline-flex items-center text-sm font-medium text-red-500 hover:underline"
                     >
@@ -703,7 +703,7 @@ export default function ForBeginnersPage() {
                       <p className="mt-1 text-xs text-muted-foreground">
                         特に堤防や磯では必ず着用。レンタルできる釣り場もあります。お子さんは必須です。
                       </p>
-                      <Link
+                      <Link prefetch={false}
                         href="/gear"
                         className="mt-1.5 inline-flex items-center gap-1 text-xs font-medium text-red-600 hover:underline"
                       >
@@ -753,7 +753,7 @@ export default function ForBeginnersPage() {
 
                 <div className="text-center">
                   <Button asChild variant="outline" size="sm">
-                    <Link href="/safety">
+                    <Link prefetch={false} href="/safety">
                       安全ガイドをもっと読む
                       <ChevronRight className="ml-1 size-4" />
                     </Link>
@@ -846,7 +846,7 @@ export default function ForBeginnersPage() {
                 <p className="mt-1 text-sm text-amber-800">
                   全釣り協が認定する「公認釣りインストラクター」の資格取得を目指しませんか？ツリスポでは無料の試験対策ガイド（全7章・クイズ290問以上）を公開中です。
                 </p>
-                <Link href="/instructor-exam" className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-amber-700 hover:text-amber-900">
+                <Link prefetch={false} href="/instructor-exam" className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-amber-700 hover:text-amber-900">
                   釣りインストラクター試験対策ガイドを見る
                   <ChevronRight className="size-4" />
                 </Link>
@@ -869,7 +869,7 @@ export default function ForBeginnersPage() {
                 size="lg"
                 className="min-h-[48px] w-full bg-white text-blue-600 hover:bg-sky-50 sm:w-auto"
               >
-                <Link href="/spots">
+                <Link prefetch={false} href="/spots">
                   <MapPin className="mr-2 size-4" />
                   釣りスポットを探す
                 </Link>
@@ -880,7 +880,7 @@ export default function ForBeginnersPage() {
                 variant="outline"
                 className="min-h-[48px] w-full border-white/40 bg-white/10 text-white hover:bg-white/20 sm:w-auto"
               >
-                <Link href="/guide">
+                <Link prefetch={false} href="/guide">
                   <Clock className="mr-2 size-4" />
                   もっと詳しいガイドを読む
                 </Link>

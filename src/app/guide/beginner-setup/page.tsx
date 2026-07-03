@@ -884,7 +884,7 @@ export default function BeginnerSetupGuidePage() {
           ]}
         />
         <div className="mb-6">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
@@ -1285,7 +1285,7 @@ export default function BeginnerSetupGuidePage() {
               慣れてきたら他のノットも試してみましょう。
             </p>
             <p className="mt-2">
-              <Link
+              <Link prefetch={false}
                 href="/guide/knots"
                 className="font-medium text-sky-700 underline hover:text-sky-600 dark:text-sky-300"
               >
@@ -1336,7 +1336,7 @@ export default function BeginnerSetupGuidePage() {
                 下にぶら下げるようにゆっくり広げましょう。
               </Tip>
               <p className="mt-3">
-                <Link
+                <Link prefetch={false}
                   href="/guide/sabiki"
                   className="text-sm font-medium text-sky-700 underline hover:text-sky-600 dark:text-sky-300"
                 >
@@ -1378,7 +1378,7 @@ export default function BeginnerSetupGuidePage() {
                 />
               </div>
               <p className="mt-3">
-                <Link
+                <Link prefetch={false}
                   href="/guide/choinage"
                   className="text-sm font-medium text-sky-700 underline hover:text-sky-600 dark:text-sky-300"
                 >
@@ -1412,7 +1412,7 @@ export default function BeginnerSetupGuidePage() {
                 最初は1〜2mの浅いタナから始めて、釣れなかったら少しずつ深くしてみましょう。
               </Tip>
               <p className="mt-3">
-                <Link
+                <Link prefetch={false}
                   href="/guide/float-fishing"
                   className="text-sm font-medium text-sky-700 underline hover:text-sky-600 dark:text-sky-300"
                 >
@@ -1542,13 +1542,13 @@ export default function BeginnerSetupGuidePage() {
             最初は上手くいかなくて当たり前。何度かやるうちに体が覚えます。
           </p>
           <div className="mt-4 flex flex-wrap justify-center gap-3">
-            <Link
+            <Link prefetch={false}
               href="/spots"
               className="inline-flex items-center rounded-full bg-green-600 px-6 py-3 text-sm font-bold text-white hover:bg-green-700 transition-colors"
             >
               近くの釣りスポットを探す
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/for-beginners"
               className="inline-flex items-center rounded-full border border-green-600 px-6 py-3 text-sm font-bold text-green-700 hover:bg-green-100 transition-colors dark:text-green-300 dark:hover:bg-green-900"
             >
@@ -1600,7 +1600,7 @@ export default function BeginnerSetupGuidePage() {
                   desc: "釣りの魅力から道具選びまで総合案内",
                 },
               ].map((link) => (
-                <Link
+                <Link prefetch={false}
                   key={link.href}
                   href={link.href}
                   className="flex flex-col rounded-lg border p-4 hover:bg-muted/50 transition-colors"

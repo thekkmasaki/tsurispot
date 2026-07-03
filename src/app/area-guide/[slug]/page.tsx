@@ -242,7 +242,7 @@ export default async function AreaGuideDetailPage({
                       <span key={prefName}>
                         {idx > 0 && " / "}
                         {pref ? (
-                          <Link
+                          <Link prefetch={false}
                             href={`/prefecture/${pref.slug}`}
                             className="hover:underline"
                           >
@@ -277,7 +277,7 @@ export default async function AreaGuideDetailPage({
                   {guide.mainFish.map((fishName) => {
                     const fishSlug = getFishSlug(fishName);
                     return fishSlug ? (
-                      <Link key={fishName} href={`/fish/${fishSlug}`}>
+                      <Link prefetch={false} key={fishName} href={`/fish/${fishSlug}`}>
                         <Badge variant="secondary" className="cursor-pointer hover:bg-primary/10 text-sm">
                           {fishName}
                         </Badge>
@@ -338,7 +338,7 @@ export default async function AreaGuideDetailPage({
                           </div>
                           <div className="flex-1 min-w-0">
                             <div className="flex items-start justify-between gap-2">
-                              <Link
+                              <Link prefetch={false}
                                 href={`/spots/${spot.slug}`}
                                 className="font-semibold hover:text-primary hover:underline text-sm sm:text-base"
                               >
@@ -411,7 +411,7 @@ export default async function AreaGuideDetailPage({
                     <p className="text-xs text-muted-foreground">データ準備中</p>
                   ) : (
                     beginnerSpots.map((spot) => (
-                      <Link
+                      <Link prefetch={false}
                         key={spot.id}
                         href={`/spots/${spot.slug}`}
                         className="block rounded-lg border p-2.5 hover:bg-muted/50 transition-colors"
@@ -445,7 +445,7 @@ export default async function AreaGuideDetailPage({
                     <p className="text-xs text-muted-foreground">データ準備中</p>
                   ) : (
                     intermediateSpots.map((spot) => (
-                      <Link
+                      <Link prefetch={false}
                         key={spot.id}
                         href={`/spots/${spot.slug}`}
                         className="block rounded-lg border p-2.5 hover:bg-muted/50 transition-colors"
@@ -474,7 +474,7 @@ export default async function AreaGuideDetailPage({
                     <p className="text-xs text-muted-foreground">データ準備中</p>
                   ) : (
                     advancedSpots.map((spot) => (
-                      <Link
+                      <Link prefetch={false}
                         key={spot.id}
                         href={`/spots/${spot.slug}`}
                         className="block rounded-lg border p-2.5 hover:bg-muted/50 transition-colors"
@@ -529,7 +529,7 @@ export default async function AreaGuideDetailPage({
                           <tr key={fishName} className="border-b last:border-0">
                             <td className="py-2 font-medium text-sm">
                               {fishSlug ? (
-                                <Link href={`/fish/${fishSlug}`} className="text-primary hover:underline">
+                                <Link prefetch={false} href={`/fish/${fishSlug}`} className="text-primary hover:underline">
                                   {fishName}
                                 </Link>
                               ) : (
@@ -596,7 +596,7 @@ export default async function AreaGuideDetailPage({
               </h2>
               <div className="grid gap-4 sm:grid-cols-3">
                 {relatedGuides.map((rg) => (
-                  <Link key={rg.slug} href={`/area-guide/${rg.slug}`}>
+                  <Link prefetch={false} key={rg.slug} href={`/area-guide/${rg.slug}`}>
                     <Card className="hover:shadow-md transition-all hover:-translate-y-0.5">
                       <CardContent className="p-4">
                         <div className="flex items-center justify-between mb-2">
@@ -636,7 +636,7 @@ export default async function AreaGuideDetailPage({
                     (s) => s.region.prefecture === prefName
                   ).length;
                   return (
-                    <Link key={pref.slug} href={`/prefecture/${pref.slug}`}>
+                    <Link prefetch={false} key={pref.slug} href={`/prefecture/${pref.slug}`}>
                       <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                         <CardContent className="p-4">
                           <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base flex items-center gap-1.5">
@@ -661,7 +661,7 @@ export default async function AreaGuideDetailPage({
             <p className="text-sm text-muted-foreground mb-4">
               {allSpots.length}か所の釣りスポット情報を詳しくチェック
             </p>
-            <Link
+            <Link prefetch={false}
               href={`/spots?prefecture=${encodeURIComponent(guide.prefectures[0])}`}
               className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
             >

@@ -333,7 +333,7 @@ export function ShopsFilterList({ shops }: ShopsFilterListProps) {
       {/* 店舗一覧 */}
       <div className="grid grid-cols-1 gap-4 sm:gap-5 md:grid-cols-2">
         {filteredShops.slice(0, displayCount).map((shop) => (
-          <Link
+          <Link prefetch={false}
             key={shop.id}
             href={`/shops/${shop.slug}`}
             className="group block"

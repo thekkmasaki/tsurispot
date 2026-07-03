@@ -211,13 +211,13 @@ export default async function BlogPostPage({
       <nav className="mb-6 text-sm text-muted-foreground" aria-label="パンくず">
         <ol className="flex items-center gap-1.5 flex-wrap">
           <li>
-            <Link href="/" className="hover:text-foreground">
+            <Link prefetch={false} href="/" className="hover:text-foreground">
               ホーム
             </Link>
           </li>
           <li>/</li>
           <li>
-            <Link href="/blog" className="hover:text-foreground">
+            <Link prefetch={false} href="/blog" className="hover:text-foreground">
               コラム
             </Link>
           </li>
@@ -349,7 +349,7 @@ export default async function BlogPostPage({
             </h2>
             <div className="flex flex-wrap gap-2">
               {relatedFishData.map((fish) => (
-                <Link
+                <Link prefetch={false}
                   key={fish!.slug}
                   href={`/fish/${fish!.slug}`}
                   className="inline-flex items-center gap-1.5 rounded-lg border bg-white px-3 py-2 text-sm font-medium transition-colors hover:border-primary hover:text-primary"
@@ -383,7 +383,7 @@ export default async function BlogPostPage({
                 <p className="mb-2 text-sm text-muted-foreground">都道府県別に探す</p>
                 <div className="flex flex-wrap gap-2">
                   {matchedPrefs.map(pref => (
-                    <Link
+                    <Link prefetch={false}
                       key={pref.slug}
                       href={`/prefecture/${pref.slug}`}
                       className="inline-flex items-center gap-1.5 rounded-lg border bg-white px-3 py-2 text-sm font-medium transition-colors hover:border-primary hover:text-primary"
@@ -401,7 +401,7 @@ export default async function BlogPostPage({
                 <div className="flex flex-wrap gap-2">
                   {matchedPrefs.flatMap(pref =>
                     matchedFish.map(f => (
-                      <Link
+                      <Link prefetch={false}
                         key={`${pref.slug}-${f.slug}`}
                         href={`/prefecture/${pref.slug}/fish/${f.slug}`}
                         className="inline-flex items-center gap-1.5 rounded-lg border bg-white px-3 py-2 text-sm font-medium transition-colors hover:border-primary hover:text-primary"
@@ -426,21 +426,21 @@ export default async function BlogPostPage({
           ツリスポでは全国2,100か所以上の釣りスポット情報を掲載。今釣れる魚・混雑予想・アクセス情報をまとめてチェックできます。
         </p>
         <div className="flex flex-wrap gap-3">
-          <Link
+          <Link prefetch={false}
             href="/spots"
             className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary/90"
           >
             <MapPin className="size-4" />
             全国の釣りスポットを検索
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/fish"
             className="inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-white px-5 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-primary/5"
           >
             <Fish className="size-4" />
             {fishSpecies.length}種の魚種図鑑
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/catchable-now"
             className="inline-flex items-center gap-2 rounded-lg border border-primary/30 bg-white px-5 py-2.5 text-sm font-semibold text-primary transition-colors hover:bg-primary/5"
           >
@@ -450,15 +450,15 @@ export default async function BlogPostPage({
         </div>
         {/* 関連ガイドリンク */}
         <div className="mt-4 flex flex-wrap gap-2 border-t border-primary/10 pt-4">
-          <Link href="/guide" className="text-xs font-medium text-primary hover:underline">釣り方ガイド一覧</Link>
+          <Link prefetch={false} href="/guide" className="text-xs font-medium text-primary hover:underline">釣り方ガイド一覧</Link>
           <span className="text-xs text-muted-foreground">|</span>
-          <Link href="/for-beginners" className="text-xs font-medium text-primary hover:underline">初心者向けガイド</Link>
+          <Link prefetch={false} href="/for-beginners" className="text-xs font-medium text-primary hover:underline">初心者向けガイド</Link>
           <span className="text-xs text-muted-foreground">|</span>
-          <Link href="/fishing-calendar" className="text-xs font-medium text-primary hover:underline">月別釣りカレンダー</Link>
+          <Link prefetch={false} href="/fishing-calendar" className="text-xs font-medium text-primary hover:underline">月別釣りカレンダー</Link>
           <span className="text-xs text-muted-foreground">|</span>
-          <Link href="/prefecture" className="text-xs font-medium text-primary hover:underline">都道府県別スポット</Link>
+          <Link prefetch={false} href="/prefecture" className="text-xs font-medium text-primary hover:underline">都道府県別スポット</Link>
           <span className="text-xs text-muted-foreground">|</span>
-          <Link href="/map" className="text-xs font-medium text-primary hover:underline">地図で釣り場を探す</Link>
+          <Link prefetch={false} href="/map" className="text-xs font-medium text-primary hover:underline">地図で釣り場を探す</Link>
         </div>
       </section>
 
@@ -467,7 +467,7 @@ export default async function BlogPostPage({
       {/* 前後の記事ナビゲーション */}
       <nav className="mt-12 grid gap-4 border-t pt-8 sm:grid-cols-2" aria-label="前後の記事">
         {prev ? (
-          <Link
+          <Link prefetch={false}
             href={`/blog/${prev.slug}`}
             className="group flex items-start gap-2 rounded-xl border p-4 transition-colors hover:bg-muted/50"
           >
@@ -483,7 +483,7 @@ export default async function BlogPostPage({
           <div />
         )}
         {next ? (
-          <Link
+          <Link prefetch={false}
             href={`/blog/${next.slug}`}
             className="group flex items-start justify-end gap-2 rounded-xl border p-4 text-right transition-colors hover:bg-muted/50"
           >
@@ -511,7 +511,7 @@ export default async function BlogPostPage({
               const relImage = related.image || CATEGORY_DEFAULT_IMAGE[related.category];
               const isExternal = relImage.startsWith("http");
               return (
-                <Link key={related.id} href={`/blog/${related.slug}`}>
+                <Link prefetch={false} key={related.id} href={`/blog/${related.slug}`}>
                   <Card className="group h-full overflow-hidden py-0 transition-shadow hover:shadow-md">
                     <div className="relative h-32 w-full">
                       <Image
@@ -544,7 +544,7 @@ export default async function BlogPostPage({
 
       {/* コラム一覧へのリンク */}
       <div className="mt-10 text-center">
-        <Link
+        <Link prefetch={false}
           href="/blog"
           className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:text-primary/80"
         >

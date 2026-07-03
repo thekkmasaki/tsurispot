@@ -502,7 +502,7 @@ export function TidesClient() {
         <section className="bg-gradient-to-r from-blue-600 to-cyan-500 text-white">
           <div className="mx-auto max-w-4xl px-4 py-8 sm:py-12">
             <div className="flex items-center gap-2 text-blue-100 text-sm mb-3">
-              <Link href="/" className="hover:text-white transition-colors">
+              <Link prefetch={false} href="/" className="hover:text-white transition-colors">
                 ホーム
               </Link>
               <ChevronRight className="size-3" />
@@ -843,7 +843,7 @@ export function TidesClient() {
 
           {/* 関連ページリンク */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-8">
-            <Link href="/recommendation">
+            <Link prefetch={false} href="/recommendation">
               <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
                 <CardContent className="p-4 flex items-center gap-3">
                   <div className="rounded-full bg-orange-100 p-2.5">
@@ -861,7 +861,7 @@ export function TidesClient() {
                 </CardContent>
               </Card>
             </Link>
-            <Link href="/spots">
+            <Link prefetch={false} href="/spots">
               <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
                 <CardContent className="p-4 flex items-center gap-3">
                   <div className="rounded-full bg-blue-100 p-2.5">

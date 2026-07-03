@@ -481,7 +481,7 @@ export default function SinkerGuidePage() {
           { label: "おもりの種類と選び方" },
         ]}
       />
-      <Link
+      <Link prefetch={false}
         href="/guide"
         className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground min-h-[44px]"
       >
@@ -824,7 +824,7 @@ export default function SinkerGuidePage() {
       <section className="mb-10">
         <h2 className="mb-4 text-xl font-bold">関連ガイド</h2>
         <div className="grid gap-3 sm:grid-cols-2">
-          <Link href="/guide/rigs">
+          <Link prefetch={false} href="/guide/rigs">
             <Card className="h-full gap-0 py-0 transition-shadow hover:shadow-md">
               <CardContent className="p-4">
                 <h3 className="font-semibold hover:text-primary">仕掛けの種類</h3>
@@ -834,7 +834,7 @@ export default function SinkerGuidePage() {
               </CardContent>
             </Card>
           </Link>
-          <Link href="/guide/casting">
+          <Link prefetch={false} href="/guide/casting">
             <Card className="h-full gap-0 py-0 transition-shadow hover:shadow-md">
               <CardContent className="p-4">
                 <h3 className="font-semibold hover:text-primary">投げ釣りガイド</h3>
@@ -844,7 +844,7 @@ export default function SinkerGuidePage() {
               </CardContent>
             </Card>
           </Link>
-          <Link href="/guide/float-fishing">
+          <Link prefetch={false} href="/guide/float-fishing">
             <Card className="h-full gap-0 py-0 transition-shadow hover:shadow-md">
               <CardContent className="p-4">
                 <h3 className="font-semibold hover:text-primary">ウキ釣りガイド</h3>
@@ -854,7 +854,7 @@ export default function SinkerGuidePage() {
               </CardContent>
             </Card>
           </Link>
-          <Link href="/guide/anazuri">
+          <Link prefetch={false} href="/guide/anazuri">
             <Card className="h-full gap-0 py-0 transition-shadow hover:shadow-md">
               <CardContent className="p-4">
                 <h3 className="font-semibold hover:text-primary">穴釣りガイド</h3>

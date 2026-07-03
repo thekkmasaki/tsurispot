@@ -449,7 +449,7 @@ export default function FishingRulesPage() {
                   <h3 className="mb-2 text-sm font-bold text-muted-foreground">{regionName}</h3>
                   <div className="flex flex-wrap gap-1.5">
                     {regionPrefs.map((pref) => (
-                      <Link key={pref.slug} href={`/fishing-rules/${pref.slug}`}>
+                      <Link prefetch={false} key={pref.slug} href={`/fishing-rules/${pref.slug}`}>
                         <Badge
                           variant="outline"
                           className="cursor-pointer px-3 py-1.5 text-sm transition-colors hover:bg-primary hover:text-primary-foreground"
@@ -471,7 +471,7 @@ export default function FishingRulesPage() {
           <p className="mt-1 text-sm text-blue-800">
             全釣り協認定「公認釣りインストラクター」の試験対策ガイドでは、漁業法・遊漁船業法・釣りマナーなどを体系的に学べます。確認クイズ290問以上で無料。
           </p>
-          <Link href="/instructor-exam" className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-blue-700 hover:text-blue-900">
+          <Link prefetch={false} href="/instructor-exam" className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-blue-700 hover:text-blue-900">
             釣りインストラクター試験対策ガイド
             <ChevronRight className="size-4" />
           </Link>
@@ -484,7 +484,7 @@ export default function FishingRulesPage() {
           </p>
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Button asChild size="lg" className="min-h-[48px] gap-1.5 rounded-full px-8">
-              <Link href="/spots">
+              <Link prefetch={false} href="/spots">
                 スポットを探す
                 <ChevronRight className="h-4 w-4" />
               </Link>
@@ -495,7 +495,7 @@ export default function FishingRulesPage() {
               size="lg"
               className="min-h-[48px] gap-1.5 rounded-full px-8"
             >
-              <Link href="/guide">
+              <Link prefetch={false} href="/guide">
                 初心者ガイドを見る
                 <ChevronRight className="h-4 w-4" />
               </Link>

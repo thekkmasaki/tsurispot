@@ -732,7 +732,7 @@ export default function JetSinkerGuidePage() {
         />
 
         {/* 戻るリンク */}
-        <Link
+        <Link prefetch={false}
           href="/guide"
           className="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary"
         >
@@ -896,7 +896,7 @@ export default function JetSinkerGuidePage() {
                       サビキで釣ったアジやイワシを生きエサにして遠投。ヒラメ・マゴチ・シーバスなどの大型魚を狙えます。
                       ジェット天秤なら根がかりを気にせず、生きエサを沖のポイントに届けられるのが強みです。
                     </p>
-                    <Link
+                    <Link prefetch={false}
                       href="/guide/oyogase"
                       className="mt-2 inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
                     >
@@ -1052,7 +1052,7 @@ export default function JetSinkerGuidePage() {
                 マゴチは砂底に潜む底物のフィッシュイーター。泳がせ釣りの好ターゲットで、ジェット天秤との相性は抜群です。
                 刺身にすると絶品で、釣り人の間では「照りゴチ」（夏のマゴチ）が最高と言われています。
               </p>
-              <Link
+              <Link prefetch={false}
                 href="/spots/tai-port-maizuru"
                 className="inline-flex items-center gap-2 rounded-lg border border-primary/20 bg-primary/5 px-4 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/10"
               >
@@ -1124,7 +1124,7 @@ export default function JetSinkerGuidePage() {
         <section className="mb-12">
           <h2 className="mb-4 text-2xl font-bold">関連ガイド</h2>
           <div className="grid gap-3 sm:grid-cols-2">
-            <Link href="/guide/sinker">
+            <Link prefetch={false} href="/guide/sinker">
               <Card className="transition-colors hover:bg-muted/50">
                 <CardContent className="flex items-center gap-3 p-4">
                   <Anchor className="h-5 w-5 text-gray-500" />
@@ -1138,7 +1138,7 @@ export default function JetSinkerGuidePage() {
                 </CardContent>
               </Card>
             </Link>
-            <Link href="/guide/choinage">
+            <Link prefetch={false} href="/guide/choinage">
               <Card className="transition-colors hover:bg-muted/50">
                 <CardContent className="flex items-center gap-3 p-4">
                   <Target className="h-5 w-5 text-green-500" />
@@ -1152,7 +1152,7 @@ export default function JetSinkerGuidePage() {
                 </CardContent>
               </Card>
             </Link>
-            <Link href="/guide/oyogase">
+            <Link prefetch={false} href="/guide/oyogase">
               <Card className="transition-colors hover:bg-muted/50">
                 <CardContent className="flex items-center gap-3 p-4">
                   <Fish className="h-5 w-5 text-blue-500" />
@@ -1166,7 +1166,7 @@ export default function JetSinkerGuidePage() {
                 </CardContent>
               </Card>
             </Link>
-            <Link href="/guide/casting">
+            <Link prefetch={false} href="/guide/casting">
               <Card className="transition-colors hover:bg-muted/50">
                 <CardContent className="flex items-center gap-3 p-4">
                   <Waves className="h-5 w-5 text-sky-500" />

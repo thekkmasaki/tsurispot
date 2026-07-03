@@ -20,7 +20,7 @@ export default function ShopUpdatePage() {
       {/* ヘッダー */}
       <div className="bg-white dark:bg-card border-b sticky top-0 z-10">
         <div className="container mx-auto px-4 py-3 flex items-center gap-3">
-          <Link href="/" className="flex items-center gap-2">
+          <Link prefetch={false} href="/" className="flex items-center gap-2">
             <Store className="w-6 h-6 text-primary" />
             <span className="font-bold text-primary">ツリスポ</span>
           </Link>

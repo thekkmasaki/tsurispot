@@ -284,7 +284,7 @@ export default function FishFinderPage() {
         <section className="bg-gradient-to-r from-cyan-600 to-blue-500 text-white">
           <div className="mx-auto max-w-3xl px-4 py-8 sm:py-12">
             <div className="flex items-center gap-2 text-cyan-100 text-sm mb-3">
-              <Link href="/" className="hover:text-white transition-colors">
+              <Link prefetch={false} href="/" className="hover:text-white transition-colors">
                 ホーム
               </Link>
               <ChevronRight className="size-3" />
@@ -718,7 +718,7 @@ export default function FishFinderPage() {
 
               {/* Related links */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-                <Link href="/recommendation">
+                <Link prefetch={false} href="/recommendation">
                   <Card className="hover:shadow-md transition-shadow cursor-pointer h-full border-orange-200 bg-gradient-to-r from-orange-50 to-amber-50">
                     <CardContent className="p-4 flex items-center gap-3">
                       <div className="rounded-full bg-orange-100 p-2.5">
@@ -736,7 +736,7 @@ export default function FishFinderPage() {
                     </CardContent>
                   </Card>
                 </Link>
-                <Link href="/guide/beginner">
+                <Link prefetch={false} href="/guide/beginner">
                   <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
                     <CardContent className="p-4 flex items-center gap-3">
                       <div className="rounded-full bg-green-100 p-2.5">
@@ -882,7 +882,7 @@ function FishResultCard({
             )}
 
             {/* Link to fish detail page */}
-            <Link
+            <Link prefetch={false}
               href={`/fish/${fish.slug}`}
               className="inline-flex items-center gap-1 text-sm font-medium text-cyan-600 hover:text-cyan-800 transition-colors min-h-[44px]"
             >

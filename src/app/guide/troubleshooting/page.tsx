@@ -819,7 +819,7 @@ export default function TroubleshootingGuidePage() {
                 "20本以上のガイドから自分に合ったものを見つけよう",
             },
           ].map((link) => (
-            <Link
+            <Link prefetch={false}
               key={link.href}
               href={link.href}
               className="group flex items-center gap-3 rounded-lg border p-3 transition-colors hover:bg-muted/50"
@@ -844,13 +844,13 @@ export default function TroubleshootingGuidePage() {
           トラブル対策を覚えたら、釣りに出かけよう！
         </p>
         <Button asChild size="lg" className="min-h-[48px] rounded-full px-8">
-          <Link href="/spots">スポットを探す</Link>
+          <Link prefetch={false} href="/spots">スポットを探す</Link>
         </Button>
       </div>
 
       {/* 戻るリンク */}
       <div className="mt-8 flex justify-center">
-        <Link
+        <Link prefetch={false}
           href="/guide"
           className="inline-flex items-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90"
         >

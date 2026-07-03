@@ -253,7 +253,7 @@ export default function TechnologyPage() {
           </p>
           <div className="grid gap-3 sm:grid-cols-2">
             {analyzedSpots.map((s) => (
-              <Link
+              <Link prefetch={false}
                 key={s.slug}
                 href={`/spots/${s.slug}`}
                 className="group flex items-center justify-between rounded-xl border bg-white p-4 shadow-sm transition-colors hover:border-indigo-300 hover:bg-indigo-50/40"
@@ -281,13 +281,13 @@ export default function TechnologyPage() {
           釣具店・釣り船・観光事業者さまとの連携や、本技術・データに関するお問い合わせを受け付けています。
         </p>
         <div className="flex flex-wrap gap-3">
-          <Link
+          <Link prefetch={false}
             href="/partner"
             className="rounded-lg bg-white px-4 py-2 text-sm font-semibold text-indigo-700 transition-colors hover:bg-indigo-50"
           >
             掲載・提携について
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/contact"
             className="rounded-lg border border-white/60 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-white/10"
           >

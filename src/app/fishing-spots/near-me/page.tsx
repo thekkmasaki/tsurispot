@@ -342,7 +342,7 @@ export default function NearMePage() {
                         {idx + 1}
                       </span>
                       <div className="min-w-0 flex-1">
-                        <Link
+                        <Link prefetch={false}
                           href={`/spots/${spot.slug}`}
                           className="font-medium text-primary hover:underline"
                         >
@@ -390,7 +390,7 @@ export default function NearMePage() {
         </p>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {catchableNowFish.map((fish) => (
-            <Link
+            <Link prefetch={false}
               key={fish.slug}
               href={`/fish/${fish.slug}`}
               className="flex items-start gap-3 rounded-lg border bg-card p-3 transition-colors hover:bg-accent"
@@ -417,7 +417,7 @@ export default function NearMePage() {
           ))}
         </div>
         <div className="mt-3 text-right">
-          <Link href="/catchable-now" className="text-sm text-primary hover:underline">
+          <Link prefetch={false} href="/catchable-now" className="text-sm text-primary hover:underline">
             今釣れる魚をもっと見る →
           </Link>
         </div>
@@ -540,7 +540,7 @@ export default function NearMePage() {
                       {topSpots.map((spot, idx) => (
                         <li key={spot.id} className="flex items-center gap-2 text-sm">
                           <span className="font-bold text-muted-foreground">{idx + 1}.</span>
-                          <Link
+                          <Link prefetch={false}
                             href={`/spots/${spot.slug}`}
                             className="text-primary hover:underline"
                           >
@@ -584,7 +584,7 @@ export default function NearMePage() {
                     const count = prefSpotCounts.get(pref.name) || 0;
                     return (
                       <li key={pref.slug} className="text-sm">
-                        <Link
+                        <Link prefetch={false}
                           href={`/prefecture/${pref.slug}`}
                           className="text-primary hover:underline"
                         >
@@ -656,7 +656,7 @@ export default function NearMePage() {
               desc: "編集長が厳選した、初心者から上級者まで使える釣り道具紹介",
             },
           ].map((link) => (
-            <Link
+            <Link prefetch={false}
               key={link.href}
               href={link.href}
               className="flex flex-col rounded-lg border bg-card p-4 transition-colors hover:bg-accent"

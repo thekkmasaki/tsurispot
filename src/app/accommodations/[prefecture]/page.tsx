@@ -100,7 +100,7 @@ export default async function PrefectureAccommodationsPage({
               />
             </div>
           )}
-          <Link
+          <Link prefetch={false}
             href="/accommodations"
             className="mt-3 inline-block text-sm text-primary hover:underline"
           >
@@ -111,7 +111,7 @@ export default async function PrefectureAccommodationsPage({
         <div className="grid gap-4 sm:grid-cols-2">
           {list.map((a, index) => (
             <Fragment key={a.id}>
-              <Link
+              <Link prefetch={false}
                 href={`/accommodations/${prefecture}/${a.slug}`}
                 className="group rounded-xl border bg-card p-5 transition-shadow hover:shadow-md"
               >

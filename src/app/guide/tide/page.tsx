@@ -361,7 +361,7 @@ export default function TideGuidePage() {
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
         {/* パンくず */}
         <div className="mb-6">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
@@ -717,25 +717,25 @@ export default function TideGuidePage() {
               <h2 className="mb-4 text-xl font-bold">関連ガイド</h2>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href="/guide/float-fishing" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/float-fishing" className="text-primary hover:underline">
                     ウキ釣り完全ガイド
                   </Link>
                   <span className="text-muted-foreground"> - 潮を読むことが重要なウキ釣りの基本</span>
                 </li>
                 <li>
-                  <Link href="/guide/jigging" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/jigging" className="text-primary hover:underline">
                     ショアジギング入門ガイド
                   </Link>
                   <span className="text-muted-foreground"> - 青物回遊と潮の関係</span>
                 </li>
                 <li>
-                  <Link href="/guide/eging" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/eging" className="text-primary hover:underline">
                     エギング入門ガイド
                   </Link>
                   <span className="text-muted-foreground"> - イカの活性と潮の動き</span>
                 </li>
                 <li>
-                  <Link href="/guide/night-fishing" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/night-fishing" className="text-primary hover:underline">
                     夜釣り入門ガイド
                   </Link>
                   <span className="text-muted-foreground"> - 夜釣りの時間帯と潮の関係</span>
@@ -750,7 +750,7 @@ export default function TideGuidePage() {
           <p className="mb-4 text-sm text-muted-foreground">
             潮の知識を活かして、さっそく釣りに出かけましょう。
           </p>
-          <Link
+          <Link prefetch={false}
             href="/spots"
             className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >

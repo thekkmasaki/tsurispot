@@ -180,7 +180,7 @@ function SpotCard({ spot, rank, distanceKm }: SpotCardProps) {
   const score = spot.score;
 
   return (
-    <Link
+    <Link prefetch={false}
       href={`/spots/${spot.slug}`}
       className={cn(
         "flex gap-3 rounded-xl border p-4 transition-all hover:shadow-md sm:gap-4",

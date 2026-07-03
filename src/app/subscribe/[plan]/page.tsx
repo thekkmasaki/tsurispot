@@ -58,7 +58,7 @@ export default async function SubscribePage({ params }: { params: Promise<{ plan
 
   return (
     <div className="mx-auto max-w-xl px-4 py-8 sm:py-12">
-      <Link href="/partner" className="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary">
+      <Link prefetch={false} href="/partner" className="mb-6 inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-primary">
         <ArrowLeft className="size-4" />
         パートナーページに戻る
       </Link>
@@ -94,14 +94,14 @@ export default async function SubscribePage({ params }: { params: Promise<{ plan
         <Suspense fallback={<div className="flex-1"><Button disabled className="w-full gap-2">読み込み中...</Button></div>}>
           <SubscribeButton plan={plan as "basic" | "pro"} />
         </Suspense>
-        <Link href="/partner" className="flex-1">
+        <Link prefetch={false} href="/partner" className="flex-1">
           <Button variant="outline" className="w-full">キャンセル</Button>
         </Link>
       </div>
 
       <p className="mt-6 text-center text-xs text-muted-foreground">
         お申し込みにより、
-        <Link href="/legal" className="text-primary underline underline-offset-4 hover:text-primary/80">
+        <Link prefetch={false} href="/legal" className="text-primary underline underline-offset-4 hover:text-primary/80">
           特定商取引法に基づく表記
         </Link>
         に同意したものとみなされます。

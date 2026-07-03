@@ -41,7 +41,7 @@ export function SpotContributionForm({ spotSlug, spotName }: SpotContributionFor
           <p className="text-sm font-medium">この釣り場のコツ・情報を共有しませんか？</p>
           <p className="text-xs text-muted-foreground">ログインすると釣り場メモを投稿できます（貢献バッジが貯まります）</p>
           <Button asChild size="sm" className="mt-1 gap-1.5">
-            <Link href={`/login?callbackUrl=${encodeURIComponent(pathname)}`}>
+            <Link prefetch={false} href={`/login?callbackUrl=${encodeURIComponent(pathname)}`}>
               <LogIn className="size-4" aria-hidden="true" />
               ログインして投稿
             </Link>

@@ -36,7 +36,7 @@ export function JoinCTA() {
               </li>
             </ul>
           </div>
-          <Link
+          <Link prefetch={false}
             href="/login"
             className="inline-flex shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-lg bg-white px-5 py-3 text-sm font-bold text-green-700 transition-colors hover:bg-green-50 min-h-[44px]"
           >

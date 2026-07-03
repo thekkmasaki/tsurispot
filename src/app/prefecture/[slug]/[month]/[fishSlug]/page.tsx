@@ -507,7 +507,7 @@ export default async function PrefectureMonthFishPage({
       />
 
       {/* 戻るリンク */}
-      <Link
+      <Link prefetch={false}
         href={`/prefecture/${pref.slug}/${month.slug}`}
         className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground min-h-[44px]"
       >
@@ -735,7 +735,7 @@ export default async function PrefectureMonthFishPage({
                       {count}スポットで対応
                     </span>
                     {def && (
-                      <Link
+                      <Link prefetch={false}
                         href={def.guide}
                         className="text-xs text-primary hover:underline"
                       >
@@ -782,7 +782,7 @@ export default async function PrefectureMonthFishPage({
                 {topSpots.map(({ spot, matchingCf, isPeak }) => (
                   <tr key={spot.id} className="border-b hover:bg-muted/30">
                     <td className="px-3 py-2">
-                      <Link
+                      <Link prefetch={false}
                         href={`/spots/${spot.slug}`}
                         className="font-medium text-primary hover:underline"
                       >
@@ -942,7 +942,7 @@ export default async function PrefectureMonthFishPage({
           <div className="flex flex-wrap gap-1.5 sm:gap-2">
             {/* 他魚は noindex ページではなく indexable な魚種詳細へリンクし、評価を集約する */}
             {otherFishList.map((f) => (
-              <Link
+              <Link prefetch={false}
                 key={f.slug}
                 href={`/fish/${f.slug}`}
               >
@@ -994,7 +994,7 @@ export default async function PrefectureMonthFishPage({
 
             if (isValid) {
               return (
-                <Link
+                <Link prefetch={false}
                   key={m.slug}
                   href={`/prefecture/${pref.slug}/${m.slug}/${fishSlug}`}
                   className="rounded-lg border px-3 py-2 text-center text-sm transition-colors hover:bg-muted"
@@ -1022,7 +1022,7 @@ export default async function PrefectureMonthFishPage({
           {pref.name}で{month.name}の{fish.name}釣りを楽しもう
         </h2>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          <Link
+          <Link prefetch={false}
             href={`/prefecture/${pref.slug}`}
             className="flex items-center gap-3 rounded-lg bg-background p-4 shadow-sm transition-all hover:shadow-md"
           >
@@ -1036,7 +1036,7 @@ export default async function PrefectureMonthFishPage({
               </div>
             </div>
           </Link>
-          <Link
+          <Link prefetch={false}
             href={`/fish/${fishSlug}`}
             className="flex items-center gap-3 rounded-lg bg-background p-4 shadow-sm transition-all hover:shadow-md"
           >
@@ -1048,7 +1048,7 @@ export default async function PrefectureMonthFishPage({
               </div>
             </div>
           </Link>
-          <Link
+          <Link prefetch={false}
             href={`/prefecture/${pref.slug}/${month.slug}`}
             className="flex items-center gap-3 rounded-lg bg-background p-4 shadow-sm transition-all hover:shadow-md"
           >
@@ -1071,51 +1071,51 @@ export default async function PrefectureMonthFishPage({
           関連リンク
         </h2>
         <div className="flex flex-wrap gap-2">
-          <Link
+          <Link prefetch={false}
             href={`/prefecture/${pref.slug}`}
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             {pref.name}の釣り場
           </Link>
-          <Link
+          <Link prefetch={false}
             href={`/prefecture/${pref.slug}/${month.slug}`}
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             {pref.name}の{month.name}の釣り
           </Link>
-          <Link
+          <Link prefetch={false}
             href={`/fish/${fishSlug}`}
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             {fish.name}の詳細
           </Link>
-          <Link
+          <Link prefetch={false}
             href={`/monthly/${month.slug}`}
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             {month.name}の釣りガイド
           </Link>
           {matchedMethods[0]?.def && (
-            <Link
+            <Link prefetch={false}
               href={matchedMethods[0].def.guide}
               className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
             >
               {matchedMethods[0].def.name}ガイド
             </Link>
           )}
-          <Link
+          <Link prefetch={false}
             href="/prefecture"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             都道府県から探す
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/fish"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             魚種から探す
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/catchable-now"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >

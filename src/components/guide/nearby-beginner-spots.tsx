@@ -98,7 +98,7 @@ export function NearbyBeginnerSpots({
         </div>
         <div className="grid gap-2 sm:grid-cols-2">
           {results.map((spot) => (
-            <Link
+            <Link prefetch={false}
               key={spot.slug}
               href={`/spots/${spot.slug}`}
               className="group flex items-center gap-3 rounded-lg border p-3 transition-colors hover:border-emerald-500"
@@ -122,7 +122,7 @@ export function NearbyBeginnerSpots({
         </div>
         <div className="mt-3 text-center">
           <Button asChild variant="outline" size="sm">
-            <Link href="/spots">
+            <Link prefetch={false} href="/spots">
               すべてのスポットを見る
               <MapPin className="ml-1 size-4" />
             </Link>

@@ -25,7 +25,7 @@ export function RelatedPseoLinks({
       <h2 className="mb-3 text-base font-bold sm:text-lg">{title}</h2>
       <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         {links.map((l) => (
-          <Link key={l.href} href={l.href}>
+          <Link prefetch={false} key={l.href} href={l.href}>
             <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
               <CardContent className="p-3 sm:p-4">
                 <h3 className="text-sm font-semibold group-hover:text-primary sm:text-base">

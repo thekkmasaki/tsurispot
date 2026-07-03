@@ -53,7 +53,7 @@ const faqItems: FAQItem[] = [
         </p>
         <p className="mt-2">
           持ち物の詳細は
-          <Link href="/beginner-checklist" className="font-medium text-primary hover:underline">持ち物チェックリスト</Link>
+          <Link prefetch={false} href="/beginner-checklist" className="font-medium text-primary hover:underline">持ち物チェックリスト</Link>
           を参考にしてください。
         </p>
       </>
@@ -95,7 +95,7 @@ const faqItems: FAQItem[] = [
         </div>
         <p className="mt-2">
           お近くの釣り場は
-          <Link href="/spots" className="font-medium text-primary hover:underline">スポット検索</Link>
+          <Link prefetch={false} href="/spots" className="font-medium text-primary hover:underline">スポット検索</Link>
           で探せます。
         </p>
       </>
@@ -123,7 +123,7 @@ const faqItems: FAQItem[] = [
         </p>
         <p className="mt-2">
           より詳しい解説は
-          <Link href="/guide/sabiki" className="font-medium text-primary hover:underline">サビキ釣りガイド</Link>
+          <Link prefetch={false} href="/guide/sabiki" className="font-medium text-primary hover:underline">サビキ釣りガイド</Link>
           をご覧ください。
         </p>
       </>
@@ -163,7 +163,7 @@ const faqItems: FAQItem[] = [
         </div>
         <p className="mt-2">
           やりたい釣法が決まってから専用タックルに移行するのが賢い買い方です。詳しくは
-          <Link href="/guide/setup" className="font-medium text-primary hover:underline">タックル準備ガイド</Link>
+          <Link prefetch={false} href="/guide/setup" className="font-medium text-primary hover:underline">タックル準備ガイド</Link>
           をご覧ください。
         </p>
       </>
@@ -208,7 +208,7 @@ const faqItems: FAQItem[] = [
         </p>
         <p className="mt-2">
           釣り方ごとのエサ情報は
-          <Link href="/methods" className="font-medium text-primary hover:underline">釣り方ガイド</Link>
+          <Link prefetch={false} href="/methods" className="font-medium text-primary hover:underline">釣り方ガイド</Link>
           で確認できます。
         </p>
       </>
@@ -244,9 +244,9 @@ const faqItems: FAQItem[] = [
         </div>
         <p className="mt-2">
           ファミリー向けの釣り場は
-          <Link href="/spots" className="font-medium text-primary hover:underline">スポット検索</Link>
+          <Link prefetch={false} href="/spots" className="font-medium text-primary hover:underline">スポット検索</Link>
           でトイレ・駐車場ありの条件で探せます。安全情報は
-          <Link href="/safety" className="font-medium text-primary hover:underline">安全ガイド</Link>
+          <Link prefetch={false} href="/safety" className="font-medium text-primary hover:underline">安全ガイド</Link>
           もご確認ください。
         </p>
       </>
@@ -286,7 +286,7 @@ const faqItems: FAQItem[] = [
         </div>
         <p className="mt-2">
           詳しいルールは
-          <Link href="/fishing-rules" className="font-medium text-primary hover:underline">釣りのルール・マナーガイド</Link>
+          <Link prefetch={false} href="/fishing-rules" className="font-medium text-primary hover:underline">釣りのルール・マナーガイド</Link>
           をご覧ください。
         </p>
       </>
@@ -330,7 +330,7 @@ const faqItems: FAQItem[] = [
         <p className="mt-2">
           初心者は<strong>ナイロンライン3号</strong>
           から始めて、慣れてきたらPEラインに移行するのがおすすめです。ラインの結び方は
-          <Link href="/guide/knots" className="font-medium text-primary hover:underline">結び方ガイド</Link>
+          <Link prefetch={false} href="/guide/knots" className="font-medium text-primary hover:underline">結び方ガイド</Link>
           をご覧ください。
         </p>
       </>
@@ -364,7 +364,7 @@ const faqItems: FAQItem[] = [
         </div>
         <p className="mt-2">
           帰宅したらなるべく早く下処理（ウロコ取り・内臓除去）をしましょう。魚の処理方法は
-          <Link href="/guide/fish-handling" className="font-medium text-primary hover:underline">魚の処理ガイド</Link>
+          <Link prefetch={false} href="/guide/fish-handling" className="font-medium text-primary hover:underline">魚の処理ガイド</Link>
           で詳しく解説しています。
         </p>
       </>
@@ -479,19 +479,19 @@ export default function FAQBeginnerPage() {
         <div className="mt-12 rounded-xl border bg-muted/30 p-6">
           <h2 className="mb-4 text-lg font-bold">関連するFAQ・ガイド</h2>
           <div className="grid gap-3 sm:grid-cols-2">
-            <Link href="/faq" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
+            <Link prefetch={false} href="/faq" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
               <p className="font-semibold">よくある質問（総合）</p>
               <p className="mt-1 text-xs text-muted-foreground">全カテゴリのFAQを見る</p>
             </Link>
-            <Link href="/faq/season" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
+            <Link prefetch={false} href="/faq/season" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
               <p className="font-semibold">季節・時期別FAQ</p>
               <p className="mt-1 text-xs text-muted-foreground">ベストシーズン・朝マヅメ</p>
             </Link>
-            <Link href="/guide" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
+            <Link prefetch={false} href="/guide" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
               <p className="font-semibold">釣りの始め方ガイド</p>
               <p className="mt-1 text-xs text-muted-foreground">ステップバイステップ解説</p>
             </Link>
-            <Link href="/beginner-checklist" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
+            <Link prefetch={false} href="/beginner-checklist" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
               <p className="font-semibold">持ち物チェックリスト</p>
               <p className="mt-1 text-xs text-muted-foreground">忘れ物を防ぐリスト</p>
             </Link>

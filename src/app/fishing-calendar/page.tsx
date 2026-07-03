@@ -200,7 +200,7 @@ export default function FishingCalendarPage() {
                         </Badge>
                       )}
                     </div>
-                    <Link
+                    <Link prefetch={false}
                       href={`/catchable-now?month=${month}`}
                       className="text-sm font-medium text-primary hover:underline hidden sm:inline-flex items-center gap-1"
                     >
@@ -223,7 +223,7 @@ export default function FishingCalendarPage() {
                         </h3>
                         <div className="flex flex-wrap gap-2">
                           {peakFish.map((fish) => (
-                            <Link
+                            <Link prefetch={false}
                               key={fish.slug}
                               href={`/fish/${fish.slug}`}
                               className="inline-flex items-center gap-1.5 rounded-full border bg-white px-3 py-1.5 text-sm font-medium transition-colors hover:border-primary hover:text-primary dark:bg-card"
@@ -244,7 +244,7 @@ export default function FishingCalendarPage() {
                         </h3>
                         <div className="flex flex-wrap gap-1.5">
                           {otherCatchable.map((fish) => (
-                            <Link
+                            <Link prefetch={false}
                               key={fish.slug}
                               href={`/fish/${fish.slug}`}
                               className="inline-flex items-center rounded-full border px-2.5 py-1 text-xs text-muted-foreground transition-colors hover:border-primary hover:text-primary"
@@ -257,7 +257,7 @@ export default function FishingCalendarPage() {
                     )}
 
                     <div className="mt-3 sm:hidden">
-                      <Link
+                      <Link prefetch={false}
                         href={`/catchable-now?month=${month}`}
                         className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
                       >
@@ -278,7 +278,7 @@ export default function FishingCalendarPage() {
         <div className="mt-12 rounded-xl border bg-muted/30 p-6">
           <h2 className="mb-4 text-lg font-bold">関連ページ</h2>
           <div className="grid gap-3 sm:grid-cols-3">
-            <Link
+            <Link prefetch={false}
               href="/catchable-now"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
             >
@@ -287,7 +287,7 @@ export default function FishingCalendarPage() {
                 今月の旬のターゲット一覧
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/fish"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
             >
@@ -296,7 +296,7 @@ export default function FishingCalendarPage() {
                 釣れる魚の旬・食べ方を紹介
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/seasonal"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
             >
@@ -314,7 +314,7 @@ export default function FishingCalendarPage() {
             釣りたい魚が決まったらスポットを探そう！
           </p>
           <Button asChild size="lg" className="min-h-[48px] gap-1.5 rounded-full px-8">
-            <Link href="/spots">
+            <Link prefetch={false} href="/spots">
               スポットを探す
               <ChevronRight className="h-4 w-4" />
             </Link>

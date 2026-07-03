@@ -379,7 +379,7 @@ export default function FishingForBeginnersPage() {
           ]}
         />
         <div className="mb-6">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
@@ -466,7 +466,7 @@ export default function FishingForBeginnersPage() {
             <div className="mt-4 rounded-lg bg-blue-50 p-4 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">
               <span className="font-medium">ヒント：</span>
               考えすぎるよりも、まず一度行ってみるのが上達の近道です。レンタル竿がある
-              <Link href="/spots" className="font-medium text-blue-600 hover:underline dark:text-blue-300">管理釣り場や海釣り公園</Link>
+              <Link prefetch={false} href="/spots" className="font-medium text-blue-600 hover:underline dark:text-blue-300">管理釣り場や海釣り公園</Link>
               なら、手ぶらで体験できます。
             </div>
           </SectionCard>
@@ -503,7 +503,7 @@ export default function FishingForBeginnersPage() {
                 </li>
               </ul>
               <div className="mt-3">
-                <Link
+                <Link prefetch={false}
                   href="/fishing-spots/breakwater-beginner"
                   className="inline-flex items-center text-sm font-medium text-primary hover:underline"
                 >
@@ -572,19 +572,19 @@ export default function FishingForBeginnersPage() {
 
             <div className="flex flex-wrap gap-2">
               <Button asChild variant="outline" size="sm">
-                <Link href="/gear">
+                <Link prefetch={false} href="/gear">
                   おすすめ道具を見る
                   <ChevronRight className="ml-1 size-4" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="sm">
-                <Link href="/beginner-checklist">
+                <Link prefetch={false} href="/beginner-checklist">
                   持ち物チェックリスト
                   <ChevronRight className="ml-1 size-4" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="sm">
-                <Link href="/guide/fishing-gear-guide">
+                <Link prefetch={false} href="/guide/fishing-gear-guide">
                   道具の選び方ガイド
                   <ChevronRight className="ml-1 size-4" />
                 </Link>
@@ -660,7 +660,7 @@ export default function FishingForBeginnersPage() {
                     </Badge>
                   </div>
                   <p className="text-sm text-muted-foreground">{item.desc}</p>
-                  <Link
+                  <Link prefetch={false}
                     href={item.link}
                     className="mt-2 inline-flex items-center text-sm font-medium text-primary hover:underline"
                   >
@@ -673,7 +673,7 @@ export default function FishingForBeginnersPage() {
 
             <div className="mt-4 text-center">
               <Button asChild variant="outline" size="sm">
-                <Link href="/methods">
+                <Link prefetch={false} href="/methods">
                   すべての釣り方を見る
                   <ChevronRight className="ml-1 size-4" />
                 </Link>
@@ -700,7 +700,7 @@ export default function FishingForBeginnersPage() {
                 { name: "カレイ", slug: "karei", desc: "投げ釣りの定番。煮付け・唐揚げに", season: "冬" },
                 { name: "シーバス", slug: "suzuki", desc: "ルアー釣りの王道。大型の引きが魅力", season: "通年" },
               ].map((fish, i) => (
-                <Link
+                <Link prefetch={false}
                   key={fish.slug}
                   href={`/fish/${fish.slug}`}
                   className="group flex items-start gap-3 rounded-lg border p-3 transition-colors hover:border-primary"
@@ -719,13 +719,13 @@ export default function FishingForBeginnersPage() {
 
             <div className="mt-4 flex flex-wrap justify-center gap-2">
               <Button asChild variant="outline" size="sm">
-                <Link href="/fish">
+                <Link prefetch={false} href="/fish">
                   すべての魚種を見る
                   <ChevronRight className="ml-1 size-4" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="sm">
-                <Link href="/catchable-now">
+                <Link prefetch={false} href="/catchable-now">
                   今釣れる魚を見る
                   <ChevronRight className="ml-1 size-4" />
                 </Link>
@@ -804,13 +804,13 @@ export default function FishingForBeginnersPage() {
 
             <div className="mt-4 flex flex-wrap justify-center gap-2">
               <Button asChild variant="outline" size="sm">
-                <Link href="/fishing-calendar">
+                <Link prefetch={false} href="/fishing-calendar">
                   詳しい釣りカレンダーを見る
                   <ChevronRight className="ml-1 size-4" />
                 </Link>
               </Button>
               <Button asChild variant="outline" size="sm">
-                <Link href="/catchable-now">
+                <Link prefetch={false} href="/catchable-now">
                   今釣れる魚をチェック
                   <ChevronRight className="ml-1 size-4" />
                 </Link>
@@ -860,7 +860,7 @@ export default function FishingForBeginnersPage() {
 
             <div className="mt-4">
               <Button asChild variant="outline" size="sm">
-                <Link href="/guide/budget">
+                <Link prefetch={false} href="/guide/budget">
                   予算別ガイドを見る
                   <ChevronRight className="ml-1 size-4" />
                 </Link>
@@ -924,7 +924,7 @@ export default function FishingForBeginnersPage() {
                 { href: "/methods", title: "釣り方・釣法ガイド", desc: "9つの釣法を初心者向けに徹底解説", icon: Target },
                 { href: "/safety", title: "安全ガイド", desc: "安全に釣りを楽しむための必読ガイド", icon: ShieldCheck },
               ].map((guide) => (
-                <Link key={guide.href} href={guide.href} className="group">
+                <Link prefetch={false} key={guide.href} href={guide.href} className="group">
                   <Card className="h-full transition-colors group-hover:border-primary">
                     <CardContent className="flex items-start gap-3 pt-6">
                       <guide.icon className="mt-0.5 size-5 shrink-0 text-primary" />
@@ -945,7 +945,7 @@ export default function FishingForBeginnersPage() {
             さっそく釣りスポットを探してみよう！
           </p>
           <Button asChild size="lg" className="min-h-[48px] rounded-full px-8">
-            <Link href="/spots">スポットを探す</Link>
+            <Link prefetch={false} href="/spots">スポットを探す</Link>
           </Button>
         </div>
 

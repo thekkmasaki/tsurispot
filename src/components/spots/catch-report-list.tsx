@@ -131,7 +131,7 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-medium leading-snug">
                   {report.tsuriId ? (
-                    <Link
+                    <Link prefetch={false}
                       href={`/users/${report.tsuriId}`}
                       className="text-emerald-700 hover:underline"
                     >
@@ -152,7 +152,7 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
                   <span className="flex items-center gap-1">
                     <User className="size-3" />
                     {report.tsuriId ? (
-                      <Link
+                      <Link prefetch={false}
                         href={`/users/${report.tsuriId}`}
                         className="hover:underline hover:text-foreground"
                       >

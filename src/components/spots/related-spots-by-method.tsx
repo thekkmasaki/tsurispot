@@ -26,7 +26,7 @@ export function RelatedSpotsByMethod({ spots, methodLabel }: Props) {
       </p>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {spots.map((s) => (
-          <Link key={s.slug} href={`/spots/${s.slug}`}>
+          <Link prefetch={false} key={s.slug} href={`/spots/${s.slug}`}>
             <Card className="h-full transition-colors hover:bg-muted/50">
               <CardContent className="p-3">
                 <div className="font-medium">{s.name}</div>

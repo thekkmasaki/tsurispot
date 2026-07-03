@@ -54,9 +54,9 @@ const faqItems: FAQItem[] = [
         </ul>
         <p className="mt-2">
           サビキ釣りの詳しいやり方は
-          <Link href="/guide/sabiki" className="font-medium text-primary hover:underline">サビキ釣りガイド</Link>
+          <Link prefetch={false} href="/guide/sabiki" className="font-medium text-primary hover:underline">サビキ釣りガイド</Link>
           をご覧ください。月別の釣り情報は
-          <Link href="/monthly" className="font-medium text-primary hover:underline">月別釣りカレンダー</Link>
+          <Link prefetch={false} href="/monthly" className="font-medium text-primary hover:underline">月別釣りカレンダー</Link>
           で確認できます。
         </p>
       </>
@@ -83,7 +83,7 @@ const faqItems: FAQItem[] = [
         </p>
         <p className="mt-2">
           アジの詳しい情報は
-          <Link href="/fish/aji" className="font-medium text-primary hover:underline">アジの魚種図鑑</Link>
+          <Link prefetch={false} href="/fish/aji" className="font-medium text-primary hover:underline">アジの魚種図鑑</Link>
           をご覧ください。
         </p>
       </>
@@ -110,7 +110,7 @@ const faqItems: FAQItem[] = [
         </p>
         <p className="mt-2">
           冬の釣りスポットは
-          <Link href="/seasonal/winter" className="font-medium text-primary hover:underline">冬の釣り特集</Link>
+          <Link prefetch={false} href="/seasonal/winter" className="font-medium text-primary hover:underline">冬の釣り特集</Link>
           で確認できます。
         </p>
       </>
@@ -152,9 +152,9 @@ const faqItems: FAQItem[] = [
         </div>
         <p className="mt-2">
           夏の釣りスポットは
-          <Link href="/seasonal/summer" className="font-medium text-primary hover:underline">夏の釣り特集</Link>
+          <Link prefetch={false} href="/seasonal/summer" className="font-medium text-primary hover:underline">夏の釣り特集</Link>
           で確認できます。安全情報は
-          <Link href="/safety" className="font-medium text-primary hover:underline">安全ガイド</Link>
+          <Link prefetch={false} href="/safety" className="font-medium text-primary hover:underline">安全ガイド</Link>
           もご覧ください。
         </p>
       </>
@@ -196,7 +196,7 @@ const faqItems: FAQItem[] = [
         </p>
         <p className="mt-2">
           潮と時間帯の関係については
-          <Link href="/tides" className="font-medium text-primary hover:underline">潮汐情報</Link>
+          <Link prefetch={false} href="/tides" className="font-medium text-primary hover:underline">潮汐情報</Link>
           も参考にしてください。
         </p>
       </>
@@ -224,9 +224,9 @@ const faqItems: FAQItem[] = [
         </p>
         <p className="mt-2">
           月別の詳しい情報は
-          <Link href="/monthly" className="font-medium text-primary hover:underline">月別釣りカレンダー</Link>
+          <Link prefetch={false} href="/monthly" className="font-medium text-primary hover:underline">月別釣りカレンダー</Link>
           で確認できます。春の釣りスポットは
-          <Link href="/seasonal/spring" className="font-medium text-primary hover:underline">春の釣り特集</Link>
+          <Link prefetch={false} href="/seasonal/spring" className="font-medium text-primary hover:underline">春の釣り特集</Link>
           をご覧ください。
         </p>
       </>
@@ -263,9 +263,9 @@ const faqItems: FAQItem[] = [
         </div>
         <p className="mt-2">
           秋の釣りスポットは
-          <Link href="/seasonal/autumn" className="font-medium text-primary hover:underline">秋の釣り特集</Link>
+          <Link prefetch={false} href="/seasonal/autumn" className="font-medium text-primary hover:underline">秋の釣り特集</Link>
           、月別情報は
-          <Link href="/monthly" className="font-medium text-primary hover:underline">月別釣りカレンダー</Link>
+          <Link prefetch={false} href="/monthly" className="font-medium text-primary hover:underline">月別釣りカレンダー</Link>
           をご覧ください。
         </p>
       </>
@@ -304,7 +304,7 @@ const faqItems: FAQItem[] = [
         </p>
         <p className="mt-2">
           安全に関する詳細は
-          <Link href="/safety" className="font-medium text-primary hover:underline">安全ガイド</Link>
+          <Link prefetch={false} href="/safety" className="font-medium text-primary hover:underline">安全ガイド</Link>
           をご覧ください。
         </p>
       </>
@@ -337,7 +337,7 @@ const faqItems: FAQItem[] = [
         </p>
         <p className="mt-2">
           潮汐情報は
-          <Link href="/tides" className="font-medium text-primary hover:underline">潮汐カレンダー</Link>
+          <Link prefetch={false} href="/tides" className="font-medium text-primary hover:underline">潮汐カレンダー</Link>
           で確認できます。
         </p>
       </>
@@ -452,19 +452,19 @@ export default function FAQSeasonPage() {
         <div className="mt-12 rounded-xl border bg-muted/30 p-6">
           <h2 className="mb-4 text-lg font-bold">関連するFAQ・ガイド</h2>
           <div className="grid gap-3 sm:grid-cols-2">
-            <Link href="/faq" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
+            <Link prefetch={false} href="/faq" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
               <p className="font-semibold">よくある質問（総合）</p>
               <p className="mt-1 text-xs text-muted-foreground">全カテゴリのFAQを見る</p>
             </Link>
-            <Link href="/faq/beginner" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
+            <Link prefetch={false} href="/faq/beginner" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
               <p className="font-semibold">初心者向けFAQ</p>
               <p className="mt-1 text-xs text-muted-foreground">道具・予算・始め方の疑問</p>
             </Link>
-            <Link href="/monthly" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
+            <Link prefetch={false} href="/monthly" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
               <p className="font-semibold">月別釣りカレンダー</p>
               <p className="mt-1 text-xs text-muted-foreground">月ごとの釣り情報</p>
             </Link>
-            <Link href="/fishing-calendar" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
+            <Link prefetch={false} href="/fishing-calendar" className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
               <p className="font-semibold">釣りカレンダー</p>
               <p className="mt-1 text-xs text-muted-foreground">年間スケジュール</p>
             </Link>

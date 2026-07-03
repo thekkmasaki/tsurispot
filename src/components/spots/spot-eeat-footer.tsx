@@ -42,7 +42,7 @@ export function SpotEeatFooter({
       <p className="mb-3 leading-relaxed">
         {spotName}の釣り場情報は、釣り場データベース「ツリスポ」編集部（編集長: 正木 家康）が
         実データをもとに編集・管理しています。最新の現地状況・釣り禁止区域は必ず現地表示や管理者にご確認ください。{" "}
-        <Link href="/about" className="text-primary underline underline-offset-2">
+        <Link prefetch={false} href="/about" className="text-primary underline underline-offset-2">
           運営者情報
         </Link>
       </p>

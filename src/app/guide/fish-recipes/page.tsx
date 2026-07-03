@@ -1318,7 +1318,7 @@ export default function FishRecipesGuidePage() {
               <h2 className="mb-4 text-xl font-bold">関連ガイド</h2>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link
+                  <Link prefetch={false}
                     href="/guide/fish-handling"
                     className="text-primary hover:underline"
                   >
@@ -1330,7 +1330,7 @@ export default function FishRecipesGuidePage() {
                   </span>
                 </li>
                 <li>
-                  <Link
+                  <Link prefetch={false}
                     href="/guide/handling"
                     className="text-primary hover:underline"
                   >
@@ -1342,7 +1342,7 @@ export default function FishRecipesGuidePage() {
                   </span>
                 </li>
                 <li>
-                  <Link
+                  <Link prefetch={false}
                     href="/guide/sabiki"
                     className="text-primary hover:underline"
                   >
@@ -1354,7 +1354,7 @@ export default function FishRecipesGuidePage() {
                   </span>
                 </li>
                 <li>
-                  <Link
+                  <Link prefetch={false}
                     href="/guide/eging"
                     className="text-primary hover:underline"
                   >
@@ -1366,7 +1366,7 @@ export default function FishRecipesGuidePage() {
                   </span>
                 </li>
                 <li>
-                  <Link
+                  <Link prefetch={false}
                     href="/guide/choinage"
                     className="text-primary hover:underline"
                   >
@@ -1378,7 +1378,7 @@ export default function FishRecipesGuidePage() {
                   </span>
                 </li>
                 <li>
-                  <Link
+                  <Link prefetch={false}
                     href="/guide/float-fishing"
                     className="text-primary hover:underline"
                   >
@@ -1390,7 +1390,7 @@ export default function FishRecipesGuidePage() {
                   </span>
                 </li>
                 <li>
-                  <Link
+                  <Link prefetch={false}
                     href="/guide/anazuri"
                     className="text-primary hover:underline"
                   >
@@ -1402,7 +1402,7 @@ export default function FishRecipesGuidePage() {
                   </span>
                 </li>
                 <li>
-                  <Link
+                  <Link prefetch={false}
                     href="/guide/casting"
                     className="text-primary hover:underline"
                   >
@@ -1414,7 +1414,7 @@ export default function FishRecipesGuidePage() {
                   </span>
                 </li>
                 <li>
-                  <Link
+                  <Link prefetch={false}
                     href="/guide/beginner"
                     className="text-primary hover:underline"
                   >
@@ -1435,7 +1435,7 @@ export default function FishRecipesGuidePage() {
           <p className="mb-4 text-sm text-muted-foreground">
             美味しく食べるなら、正しい持ち帰り方も大切です。
           </p>
-          <Link
+          <Link prefetch={false}
             href="/guide/fish-handling"
             className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >

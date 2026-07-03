@@ -129,7 +129,7 @@ export default async function ReporterRankingPage() {
           <p className="text-sm text-muted-foreground">
             まだ投稿者がいません。 あなたが最初の 1 位になれます!
           </p>
-          <Link
+          <Link prefetch={false}
             href="/spots"
             className="mt-3 inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90"
           >
@@ -176,7 +176,7 @@ export default async function ReporterRankingPage() {
         <p className="mb-3 text-sm text-muted-foreground">
           釣果を投稿するごとに称号がアップし、 ランキングが上位に。 投稿はログイン不要、 ニックネームだけで OK。
         </p>
-        <Link
+        <Link prefetch={false}
           href="/spots"
           className="inline-flex items-center gap-2 rounded-lg bg-primary px-5 py-2.5 text-sm font-bold text-primary-foreground transition-colors hover:bg-primary/90"
         >

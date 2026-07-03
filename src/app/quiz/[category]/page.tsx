@@ -149,7 +149,7 @@ export default async function QuizCategoryPage({ params }: Props) {
           className={`bg-gradient-to-r ${gradient} text-white`}
         >
           <div className="mx-auto max-w-3xl px-4 py-8 sm:py-12">
-            <Link
+            <Link prefetch={false}
               href="/quiz"
               className="mb-4 inline-flex items-center gap-1 text-sm text-white/80 transition-colors hover:text-white"
             >

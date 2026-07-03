@@ -153,7 +153,7 @@ export default function ShopsListPage() {
             </p>
             <div className="flex flex-wrap gap-2">
               {topPrefectures.map((pref) => (
-                <Link
+                <Link prefetch={false}
                   key={pref.slug}
                   href={`/shops/area/${pref.slug}`}
                   className="inline-flex items-center gap-1.5 rounded-lg border bg-white px-3 py-1.5 text-sm font-medium shadow-sm transition-all hover:border-blue-300 hover:bg-blue-50 hover:shadow dark:bg-card dark:hover:bg-accent"
@@ -164,7 +164,7 @@ export default function ShopsListPage() {
                   </span>
                 </Link>
               ))}
-              <Link
+              <Link prefetch={false}
                 href="#all-prefectures"
                 className="inline-flex items-center gap-1 rounded-lg border border-dashed px-3 py-1.5 text-sm text-muted-foreground transition-colors hover:border-primary hover:text-primary"
               >
@@ -202,7 +202,7 @@ export default function ShopsListPage() {
                     {regionPrefs.map((pref) => {
                       const count = prefectureShopCounts.get(pref.name) || 0;
                       return (
-                        <Link
+                        <Link prefetch={false}
                           key={pref.slug}
                           href={`/shops/area/${pref.slug}`}
                           className="rounded-md px-2 py-1 text-xs font-medium transition-colors hover:bg-muted"
@@ -243,7 +243,7 @@ export default function ShopsListPage() {
                 <p className="mb-3 text-sm text-muted-foreground line-clamp-2">
                   {currentGuide.description}
                 </p>
-                <Link
+                <Link prefetch={false}
                   href={`/monthly/${currentMonthSlug}`}
                   className="inline-flex items-center gap-1 text-sm font-medium text-emerald-700 hover:underline dark:text-emerald-400"
                 >
@@ -264,7 +264,7 @@ export default function ShopsListPage() {
                 <p className="mb-3 text-sm text-muted-foreground">
                   1月〜12月の月ごとに釣れる魚・おすすめ釣り方・装備をまとめた完全ガイドです。
                 </p>
-                <Link
+                <Link prefetch={false}
                   href="/monthly"
                   className="inline-flex items-center gap-1 text-sm font-medium text-blue-700 hover:underline dark:text-blue-400"
                 >
@@ -345,20 +345,20 @@ export default function ShopsListPage() {
               </div>
 
               <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:flex-wrap">
-                <Link href="/shops/sample-basic" className="inline-flex items-center justify-center gap-1 rounded-lg border border-blue-300 px-5 py-2.5 text-sm font-medium text-blue-700 transition-colors hover:bg-blue-50">
+                <Link prefetch={false} href="/shops/sample-basic" className="inline-flex items-center justify-center gap-1 rounded-lg border border-blue-300 px-5 py-2.5 text-sm font-medium text-blue-700 transition-colors hover:bg-blue-50">
                   ベーシックプランのサンプルを見る
                 </Link>
-                <Link href="/shops/sample-premium" className="inline-flex items-center justify-center gap-2 rounded-lg bg-amber-500 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-amber-600">
+                <Link prefetch={false} href="/shops/sample-premium" className="inline-flex items-center justify-center gap-2 rounded-lg bg-amber-500 px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-amber-600">
                   プロプランのサンプルを見る
                   <ChevronRight className="size-4" />
                 </Link>
-                <Link href="/shops/update?shop=sample-premium&token=demo" className="inline-flex items-center justify-center gap-1 rounded-lg border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-accent">
+                <Link prefetch={false} href="/shops/update?shop=sample-premium&token=demo" className="inline-flex items-center justify-center gap-1 rounded-lg border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-accent">
                   店舗管理のデモを試す
                 </Link>
               </div>
 
               <div className="flex flex-col gap-2 pt-2 text-sm sm:flex-row sm:items-center">
-                <Link href="/partner" className="inline-flex items-center gap-1 font-medium text-primary hover:underline">
+                <Link prefetch={false} href="/partner" className="inline-flex items-center gap-1 font-medium text-primary hover:underline">
                   掲載の詳細・お申し込みはこちら
                   <ChevronRight className="size-3.5" />
                 </Link>

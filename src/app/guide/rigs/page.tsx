@@ -902,7 +902,7 @@ export default function RigsGuidePage() {
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
         {/* パンくず */}
         <div className="mb-6">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
@@ -1210,7 +1210,7 @@ export default function RigsGuidePage() {
           <p className="mb-4 text-sm text-muted-foreground">
             仕掛けが分かったら、結び方をマスターしましょう。
           </p>
-          <Link
+          <Link prefetch={false}
             href="/guide/knots"
             className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >

@@ -51,7 +51,7 @@ export function CookieBanner() {
         <p className="text-xs text-muted-foreground md:text-sm">
           <span className="hidden sm:inline">当サイトではCookieを使用しています。</span>
           <span className="sm:hidden">Cookie使用に同意しますか？</span>
-          <Link
+          <Link prefetch={false}
             href="/privacy"
             className="ml-1 text-primary underline underline-offset-2 hover:text-primary/80"
           >

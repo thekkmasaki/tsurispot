@@ -67,7 +67,7 @@ function SpotItem({
   distanceKm?: number;
 }) {
   return (
-    <Link href={`/spots/${spot.slug}`}>
+    <Link prefetch={false} href={`/spots/${spot.slug}`}>
       <Card className="group gap-0 overflow-hidden py-0 transition-shadow hover:shadow-md">
         <CardContent className="space-y-2.5 p-3 sm:space-y-3 sm:p-4">
           <div>
@@ -244,7 +244,7 @@ export function NearMeClient({ spots }: { spots: SpotData[] }) {
 
       {displaySpots.length > 30 && (
         <div className="mt-6 text-center">
-          <Link
+          <Link prefetch={false}
             href="/spots"
             className="inline-flex items-center gap-1 rounded-full border px-6 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
           >

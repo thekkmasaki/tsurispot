@@ -109,7 +109,7 @@ export function SpotContributionList({ initialContributions }: SpotContributionL
                   <span className="inline-flex items-center gap-1">
                     <User className="size-3" aria-hidden="true" />
                     {c.tsuriId ? (
-                      <Link href={`/users/${c.tsuriId}`} className="hover:text-foreground hover:underline">
+                      <Link prefetch={false} href={`/users/${c.tsuriId}`} className="hover:text-foreground hover:underline">
                         {c.userName}
                       </Link>
                     ) : (

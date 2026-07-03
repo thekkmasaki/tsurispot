@@ -228,7 +228,7 @@ export default function MethodsIndexPage() {
         {/* 釣法カード一覧 (前半 5 件) */}
         <div className="grid gap-4 sm:grid-cols-2">
           {methods.slice(0, 5).map((method) => (
-            <Link key={method.slug} href={`/methods/${method.slug}`}>
+            <Link prefetch={false} key={method.slug} href={`/methods/${method.slug}`}>
               <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                 <CardContent className="p-4 sm:p-5">
                   <div className="mb-3 flex items-start justify-between gap-2">
@@ -285,7 +285,7 @@ export default function MethodsIndexPage() {
         {/* 釣法カード一覧 (後半 4 件) */}
         <div className="grid gap-4 sm:grid-cols-2">
           {methods.slice(5).map((method) => (
-            <Link key={method.slug} href={`/methods/${method.slug}`}>
+            <Link prefetch={false} key={method.slug} href={`/methods/${method.slug}`}>
               <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                 <CardContent className="p-4 sm:p-5">
                   <div className="mb-3 flex items-start justify-between gap-2">
@@ -343,7 +343,7 @@ export default function MethodsIndexPage() {
         <div className="mt-12 rounded-xl border bg-muted/30 p-6">
           <h2 className="mb-4 text-lg font-bold">関連ページ</h2>
           <div className="grid gap-3 sm:grid-cols-3">
-            <Link
+            <Link prefetch={false}
               href="/guide"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >
@@ -352,7 +352,7 @@ export default function MethodsIndexPage() {
                 初心者向けステップバイステップ解説
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/fish"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >
@@ -361,7 +361,7 @@ export default function MethodsIndexPage() {
                 釣れる魚の旬・食べ方を紹介
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/seasonal"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >

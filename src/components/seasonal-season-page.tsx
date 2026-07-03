@@ -169,7 +169,7 @@ export function SeasonalSeasonPage({ season }: SeasonPageProps) {
                 .filter(Boolean);
 
               return (
-                <Link
+                <Link prefetch={false}
                   key={guide.slug}
                   href={`/monthly/${guide.slug}`}
                   className="group block overflow-hidden rounded-xl border transition-all hover:shadow-lg hover:border-primary/30"
@@ -240,7 +240,7 @@ export function SeasonalSeasonPage({ season }: SeasonPageProps) {
                     : "bg-red-100 text-red-700";
 
               return (
-                <Link
+                <Link prefetch={false}
                   key={fish.slug}
                   href={`/fish/${fish.slug}`}
                   className="group flex items-center gap-3 rounded-lg border bg-white p-3 transition-shadow hover:shadow-md dark:bg-card"
@@ -332,7 +332,7 @@ export function SeasonalSeasonPage({ season }: SeasonPageProps) {
             関連コンテンツ
           </h2>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            <Link
+            <Link prefetch={false}
               href="/monthly"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
             >
@@ -342,7 +342,7 @@ export function SeasonalSeasonPage({ season }: SeasonPageProps) {
                 1月〜12月の釣り情報一覧
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/catchable-now"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
             >
@@ -352,7 +352,7 @@ export function SeasonalSeasonPage({ season }: SeasonPageProps) {
                 今の時期に釣れる魚をチェック
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/fishing-calendar"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
             >
@@ -362,7 +362,7 @@ export function SeasonalSeasonPage({ season }: SeasonPageProps) {
                 魚種別の釣りシーズン早見表
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/spots"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
             >
@@ -372,7 +372,7 @@ export function SeasonalSeasonPage({ season }: SeasonPageProps) {
                 2,000+の釣り場を検索
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/guide"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
             >
@@ -382,7 +382,7 @@ export function SeasonalSeasonPage({ season }: SeasonPageProps) {
                 初心者から上級者向けまで
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/shops"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
             >
@@ -404,7 +404,7 @@ export function SeasonalSeasonPage({ season }: SeasonPageProps) {
             {seasons.map((s) => {
               const isActive = s.slug === season.slug;
               return (
-                <Link
+                <Link prefetch={false}
                   key={s.slug}
                   href={`/seasonal/${s.slug}`}
                   className={`group flex flex-col items-center rounded-xl border-2 p-4 text-center transition-all ${

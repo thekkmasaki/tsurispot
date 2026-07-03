@@ -139,7 +139,7 @@ export function LocationRecommendations({
       <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {/* 都道府県ページ */}
         {prefData && (
-          <Link href={`/prefecture/${prefData.slug}`}>
+          <Link prefetch={false} href={`/prefecture/${prefData.slug}`}>
             <Card className="group h-full transition-shadow hover:shadow-md">
               <CardContent className="flex flex-col gap-2 p-3 sm:p-4">
                 <div className="flex items-center gap-2">
@@ -169,7 +169,7 @@ export function LocationRecommendations({
 
         {/* エリアガイド */}
         {matchingGuides.slice(0, 2).map((guide) => (
-          <Link key={guide.slug} href={`/area-guide/${guide.slug}`}>
+          <Link prefetch={false} key={guide.slug} href={`/area-guide/${guide.slug}`}>
             <Card className="group h-full transition-shadow hover:shadow-md">
               <CardContent className="flex flex-col gap-2 p-3 sm:p-4">
                 <div className="flex items-center gap-2">
@@ -211,7 +211,7 @@ export function LocationRecommendations({
           </div>
           <div className="flex flex-wrap gap-2">
             {seasonalFish.map((f) => (
-              <Link key={f.slug} href={`/fish/${f.slug}`}>
+              <Link prefetch={false} key={f.slug} href={`/fish/${f.slug}`}>
                 <Badge
                   variant="outline"
                   className={`cursor-pointer text-xs transition-colors hover:bg-primary/5 ${
@@ -230,7 +230,7 @@ export function LocationRecommendations({
       )}
 
       {/* 今週どこ行こうかなリンク */}
-      <Link href="/recommendation" className="mt-4 block">
+      <Link prefetch={false} href="/recommendation" className="mt-4 block">
         <Card className="group border-dashed transition-shadow hover:shadow-md">
           <CardContent className="flex items-center gap-3 p-3 sm:p-4">
             <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-sky-100 to-indigo-100">

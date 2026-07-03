@@ -53,7 +53,7 @@ export default function FishdexPage() {
     return (
       <div className="container mx-auto px-4 py-8">
         <p className="text-sm text-muted-foreground">ログインが必要です。</p>
-        <Link
+        <Link prefetch={false}
           href="/login"
           className="mt-3 inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
         >
@@ -88,7 +88,7 @@ export default function FishdexPage() {
         ]}
       />
 
-      <Link
+      <Link prefetch={false}
         href="/mypage"
         className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground"
       >
@@ -134,7 +134,7 @@ export default function FishdexPage() {
 
       <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-3 lg:grid-cols-6">
         {filtered.map((f) => (
-          <Link
+          <Link prefetch={false}
             key={f.slug}
             href={`/fish/${f.slug}`}
             className={`relative rounded-lg border bg-card p-2 text-center transition-all hover:shadow-md ${

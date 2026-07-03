@@ -246,7 +246,7 @@ export default function InstructorExamPage() {
         <nav aria-label="パンくずリスト" className="mb-6 text-sm text-muted-foreground">
           <ol className="flex items-center gap-1.5">
             <li>
-              <Link href="/" className="hover:text-foreground">
+              <Link prefetch={false} href="/" className="hover:text-foreground">
                 ホーム
               </Link>
             </li>
@@ -366,14 +366,14 @@ export default function InstructorExamPage() {
                     </div>
                   </div>
                   <div className="mt-4 flex gap-2">
-                    <Link
+                    <Link prefetch={false}
                       href={`/instructor-exam/${ch.slug}`}
                       className="flex-1 rounded-lg border border-slate-200 px-3 py-2 text-center text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50 cursor-pointer"
                     >
                       学習する
                     </Link>
                     {ch.quizCount > 0 && (
-                      <Link
+                      <Link prefetch={false}
                         href={`/instructor-exam/${ch.slug}/quiz`}
                         className="flex-1 rounded-lg bg-purple-600 px-3 py-2 text-center text-sm font-medium text-white transition-colors hover:bg-purple-700 cursor-pointer"
                       >
@@ -416,7 +416,7 @@ export default function InstructorExamPage() {
                 頻出テーマ5選と800字論文の構成フレームワークを解説
               </p>
               <div className="mt-4">
-                <Link
+                <Link prefetch={false}
                   href="/instructor-exam/essay"
                   className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50"
                 >
@@ -430,7 +430,7 @@ export default function InstructorExamPage() {
                 キャスティング・結び方・仕掛け作りの手順と減点ポイントを解説
               </p>
               <div className="mt-4">
-                <Link
+                <Link prefetch={false}
                   href="/instructor-exam/practical"
                   className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-medium text-slate-700 transition-colors hover:bg-slate-50"
                 >
@@ -451,7 +451,7 @@ export default function InstructorExamPage() {
           </p>
           <ul className="space-y-2 text-sm">
             <li>
-              <Link
+              <Link prefetch={false}
                 href="/fishing-rules"
                 className="font-medium text-green-700 underline hover:text-green-900"
               >
@@ -460,7 +460,7 @@ export default function InstructorExamPage() {
               -- 都道府県別の規制まとめ
             </li>
             <li>
-              <Link
+              <Link prefetch={false}
                 href="/gear"
                 className="font-medium text-green-700 underline hover:text-green-900"
               >
@@ -469,7 +469,7 @@ export default function InstructorExamPage() {
               -- 竿・リール・仕掛けの基礎知識
             </li>
             <li>
-              <Link
+              <Link prefetch={false}
                 href="/safety"
                 className="font-medium text-green-700 underline hover:text-green-900"
               >
@@ -478,7 +478,7 @@ export default function InstructorExamPage() {
               -- 落水事故・落雷対策
             </li>
             <li>
-              <Link
+              <Link prefetch={false}
                 href="/fish"
                 className="font-medium text-green-700 underline hover:text-green-900"
               >
@@ -487,7 +487,7 @@ export default function InstructorExamPage() {
               -- 魚の生態・旬の知識
             </li>
             <li>
-              <Link
+              <Link prefetch={false}
                 href="/glossary"
                 className="font-medium text-green-700 underline hover:text-green-900"
               >
@@ -496,7 +496,7 @@ export default function InstructorExamPage() {
               -- 試験で出る用語の確認に
             </li>
             <li>
-              <Link
+              <Link prefetch={false}
                 href="/quiz"
                 className="font-medium text-green-700 underline hover:text-green-900"
               >
@@ -505,7 +505,7 @@ export default function InstructorExamPage() {
               -- 遊びながら学べる釣り検定（全240問）
             </li>
             <li>
-              <Link
+              <Link prefetch={false}
                 href="/spots"
                 className="font-medium text-green-700 underline hover:text-green-900"
               >
@@ -514,7 +514,7 @@ export default function InstructorExamPage() {
               -- 学んだ知識を活かして実際に釣りに行こう
             </li>
             <li>
-              <Link
+              <Link prefetch={false}
                 href="/gear"
                 className="font-medium text-green-700 underline hover:text-green-900"
               >

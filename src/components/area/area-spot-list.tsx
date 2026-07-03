@@ -133,7 +133,7 @@ export function AreaSpotList({ spots, catchableFish, areaName }: AreaSpotListPro
           {!isFiltering && (
             <div className="mt-3 flex flex-wrap gap-1.5 sm:gap-2">
               {catchableFish.slice(0, 8).map((f) => (
-                <Link
+                <Link prefetch={false}
                   key={f.slug}
                   href={`/fish/${f.slug}`}
                   className="text-xs text-primary hover:underline sm:text-sm"

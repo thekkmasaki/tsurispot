@@ -159,7 +159,7 @@ export function AreaListFilter({ groups }: AreaListFilterProps) {
                   <div className="border-t px-3 pb-3 pt-2 sm:px-4 sm:pb-4">
                     <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
                       {group.regions.map((region) => (
-                        <Link key={region.id} href={`/area/${region.slug}`}>
+                        <Link prefetch={false} key={region.id} href={`/area/${region.slug}`}>
                           <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                             <CardContent className="p-3 sm:p-4">
                               <div className="flex items-start justify-between gap-2">

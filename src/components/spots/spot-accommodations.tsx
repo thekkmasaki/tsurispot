@@ -41,7 +41,7 @@ export function SpotAccommodations({
         ))}
       </div>
       <div className="mt-4 text-right text-sm">
-        <Link
+        <Link prefetch={false}
           href={`/accommodations/${spotPrefectureToSlug(spotPrefecture)}`}
           className="inline-flex items-center gap-1 text-primary hover:underline"
         >
@@ -58,7 +58,7 @@ function AccommodationCard({ accommodation }: { accommodation: Accommodation }) 
       ? accommodation.rakutenUrl
       : accommodation.jalanUrl;
   return (
-    <Link
+    <Link prefetch={false}
       href={`/accommodations/${spotPrefectureToSlug(accommodation.prefecture)}/${accommodation.slug}`}
       className="group rounded-xl border bg-background p-4 transition-shadow hover:shadow-md"
     >

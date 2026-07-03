@@ -1644,7 +1644,7 @@ export function RecommendationClient({ fishingSpots, fishSpecies }: { fishingSpo
               {/* もっと見るリンク */}
               {scoredSpots.length > 6 && (
                 <div className="text-center">
-                  <Link href="/spots">
+                  <Link prefetch={false} href="/spots">
                     <Button variant="outline" className="gap-2">
                       <MapPin className="size-4" />
                       すべての釣りスポットを見る
@@ -1659,7 +1659,7 @@ export function RecommendationClient({ fishingSpots, fishSpecies }: { fishingSpo
 
           {/* 関連ページリンク */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pb-8">
-            <Link href="/tides">
+            <Link prefetch={false} href="/tides">
               <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
                 <CardContent className="p-4 flex items-center gap-3">
                   <div className="rounded-full bg-blue-100 p-2.5">
@@ -1675,7 +1675,7 @@ export function RecommendationClient({ fishingSpots, fishSpecies }: { fishingSpo
                 </CardContent>
               </Card>
             </Link>
-            <Link href="/fish-finder">
+            <Link prefetch={false} href="/fish-finder">
               <Card className="hover:shadow-md transition-shadow cursor-pointer h-full">
                 <CardContent className="p-4 flex items-center gap-3">
                   <div className="rounded-full bg-purple-100 p-2.5">
@@ -1751,7 +1751,7 @@ function SpotCard({
   };
 
   return (
-    <Link href={`/spots/${spot.slug}`}>
+    <Link prefetch={false} href={`/spots/${spot.slug}`}>
       <Card className="hover:shadow-lg transition-all cursor-pointer h-full group overflow-hidden">
         {/* ランクバッジ */}
         <div className="relative">

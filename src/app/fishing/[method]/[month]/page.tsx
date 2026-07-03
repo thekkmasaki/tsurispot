@@ -187,7 +187,7 @@ export default async function MethodMonthPage({ params }: Props) {
 
         {/* 前月・翌月ナビゲーション */}
         <div className="flex items-center justify-between mb-4">
-          <Link
+          <Link prefetch={false}
             href={`/fishing/${method.slug}/${prevMonth.slug}`}
             className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800"
           >
@@ -205,7 +205,7 @@ export default async function MethodMonthPage({ params }: Props) {
               </summary>
               <div className="absolute top-full left-1/2 -translate-x-1/2 mt-1 z-10 bg-white dark:bg-gray-900 border rounded-lg shadow-lg p-2 grid grid-cols-4 gap-1 min-w-[200px]">
                 {MONTHS.map((m) => (
-                  <Link
+                  <Link prefetch={false}
                     key={m.slug}
                     href={`/fishing/${method.slug}/${m.slug}`}
                     className={`text-center text-sm px-2 py-1.5 rounded hover:bg-blue-50 dark:hover:bg-blue-900/50 ${
@@ -221,7 +221,7 @@ export default async function MethodMonthPage({ params }: Props) {
             </details>
           </div>
 
-          <Link
+          <Link prefetch={false}
             href={`/fishing/${method.slug}/${nextMonth.slug}`}
             className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800"
           >
@@ -275,14 +275,14 @@ export default async function MethodMonthPage({ params }: Props) {
                   {month.name}の{method.name}は対象魚が少なめです。
                 </p>
                 <p className="mt-2">
-                  <Link
+                  <Link prefetch={false}
                     href={`/fishing/${method.slug}`}
                     className="text-blue-600 hover:underline"
                   >
                     他の月を確認する
                   </Link>
                   {" "}または{" "}
-                  <Link
+                  <Link prefetch={false}
                     href="/fishing"
                     className="text-blue-600 hover:underline"
                   >
@@ -301,7 +301,7 @@ export default async function MethodMonthPage({ params }: Props) {
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                     {peakFish.map((f) => (
-                      <Link key={f.slug} href={`/fish/${f.slug}`}>
+                      <Link prefetch={false} key={f.slug} href={`/fish/${f.slug}`}>
                         <Card className="hover:shadow-md transition-shadow border-orange-200 dark:border-orange-800">
                           <CardContent className="p-3">
                             <div className="flex items-start gap-3">
@@ -351,7 +351,7 @@ export default async function MethodMonthPage({ params }: Props) {
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
                     {normalFish.map((f) => (
-                      <Link key={f.slug} href={`/fish/${f.slug}`}>
+                      <Link prefetch={false} key={f.slug} href={`/fish/${f.slug}`}>
                         <Card className="hover:shadow-md transition-shadow">
                           <CardContent className="p-3">
                             <div className="flex items-start gap-3">
@@ -433,7 +433,7 @@ export default async function MethodMonthPage({ params }: Props) {
               <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
                 {faqs[2]?.answer}
               </p>
-              <Link
+              <Link prefetch={false}
                 href={method.guide}
                 className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 text-sm font-medium"
               >
@@ -535,7 +535,7 @@ export default async function MethodMonthPage({ params }: Props) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {/* この月の他の釣り方 */}
             {FISHING_METHODS.filter((m) => m.slug !== method.slug).map((m) => (
-              <Link
+              <Link prefetch={false}
                 key={m.slug}
                 href={`/fishing/${m.slug}/${month.slug}`}
               >
@@ -552,7 +552,7 @@ export default async function MethodMonthPage({ params }: Props) {
             ))}
 
             {/* 月別ガイドへのリンク */}
-            <Link href={`/monthly/${month.slug}`}>
+            <Link prefetch={false} href={`/monthly/${month.slug}`}>
               <Card className="hover:shadow-md transition-shadow">
                 <CardContent className="p-3 flex items-center gap-2">
                   <Calendar className="size-5 text-blue-500" />
@@ -568,7 +568,7 @@ export default async function MethodMonthPage({ params }: Props) {
 
         {/* 前月・翌月ナビゲーション（フッター） */}
         <div className="flex items-center justify-between border-t pt-6">
-          <Link
+          <Link prefetch={false}
             href={`/fishing/${method.slug}/${prevMonth.slug}`}
             className="flex items-center gap-2 text-blue-600 hover:text-blue-800"
           >
@@ -580,7 +580,7 @@ export default async function MethodMonthPage({ params }: Props) {
               </div>
             </div>
           </Link>
-          <Link
+          <Link prefetch={false}
             href={`/fishing/${method.slug}/${nextMonth.slug}`}
             className="flex items-center gap-2 text-blue-600 hover:text-blue-800 text-right"
           >

@@ -114,7 +114,7 @@ export function CatchReportCard({ report, onUpdate, onDelete }: Props) {
 
   return (
     <div className="relative rounded-lg border p-3 transition-colors hover:bg-muted/50">
-      <Link href={`/spots/${report.spotSlug}`} className="block">
+      <Link prefetch={false} href={`/spots/${report.spotSlug}`} className="block">
         <div className="flex gap-3">
           {report.photoUrl && (
             // eslint-disable-next-line @next/next/no-img-element

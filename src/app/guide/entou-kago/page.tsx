@@ -684,7 +684,7 @@ export default function EntouKagoGuidePage() {
           ]}
         />
         <div className="mb-6">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
@@ -1018,7 +1018,7 @@ export default function EntouKagoGuidePage() {
                 <p className="mb-2 text-sm text-muted-foreground">
                   堤防からマダイを狙える数少ない釣法が遠投カゴ釣りです。乗っ込み（産卵期）の春と、荒食いの秋がベストシーズン。30〜50cmクラスが堤防から狙え、時に70cmオーバーの大物も。タナは深め（5〜10m）に設定し、日の出・日没前後の薄暗い時間帯が最もチャンスです。
                 </p>
-                <Link
+                <Link prefetch={false}
                   href="/fish/madai"
                   className="inline-flex items-center text-sm text-primary hover:underline"
                 >
@@ -1036,7 +1036,7 @@ export default function EntouKagoGuidePage() {
                 <p className="mb-2 text-sm text-muted-foreground">
                   磯釣りの代表的ターゲットですが、遠投カゴ釣りなら堤防から手軽に狙えます。秋〜冬が本番で、水温が下がると良型が接岸します。タナは浅め（2〜5m）で、コマセワークが釣果を左右します。引きが強く、やり取りも楽しい魚です。
                 </p>
-                <Link
+                <Link prefetch={false}
                   href="/fish/mejina"
                   className="inline-flex items-center text-sm text-primary hover:underline"
                 >
@@ -1066,7 +1066,7 @@ export default function EntouKagoGuidePage() {
                 <p className="mb-2 text-sm text-muted-foreground">
                   サビキ釣りでは届かない沖の大型アジを狙えるのがカゴ釣りの強み。25cm以上の「尺アジ」や40cmクラスの「ギガアジ」を堤防から狙えます。朝夕のマヅメ時に回遊するので、タナを3〜8mで探りましょう。
                 </p>
-                <Link
+                <Link prefetch={false}
                   href="/fish/aji"
                   className="inline-flex items-center text-sm text-primary hover:underline"
                 >
@@ -1158,7 +1158,7 @@ export default function EntouKagoGuidePage() {
         <section className="mt-8 sm:mt-10">
           <h2 className="mb-4 text-center text-xl font-bold">関連ガイド</h2>
           <div className="grid gap-3 sm:grid-cols-2">
-            <Link href="/guide/float-fishing" className="group">
+            <Link prefetch={false} href="/guide/float-fishing" className="group">
               <Card className="h-full transition-colors group-hover:border-primary">
                 <CardContent className="pt-6">
                   <Target className="mb-2 size-5 text-primary" />
@@ -1171,7 +1171,7 @@ export default function EntouKagoGuidePage() {
                 </CardContent>
               </Card>
             </Link>
-            <Link href="/guide/rigs" className="group">
+            <Link prefetch={false} href="/guide/rigs" className="group">
               <Card className="h-full transition-colors group-hover:border-primary">
                 <CardContent className="pt-6">
                   <Package className="mb-2 size-5 text-primary" />
@@ -1184,7 +1184,7 @@ export default function EntouKagoGuidePage() {
                 </CardContent>
               </Card>
             </Link>
-            <Link href="/guide/casting" className="group">
+            <Link prefetch={false} href="/guide/casting" className="group">
               <Card className="h-full transition-colors group-hover:border-primary">
                 <CardContent className="pt-6">
                   <Target className="mb-2 size-5 text-primary" />
@@ -1197,7 +1197,7 @@ export default function EntouKagoGuidePage() {
                 </CardContent>
               </Card>
             </Link>
-            <Link href="/guide/sabiki" className="group">
+            <Link prefetch={false} href="/guide/sabiki" className="group">
               <Card className="h-full transition-colors group-hover:border-primary">
                 <CardContent className="pt-6">
                   <Fish className="mb-2 size-5 text-primary" />
@@ -1219,7 +1219,7 @@ export default function EntouKagoGuidePage() {
             遠投カゴ釣りができるスポットを探してみよう
           </p>
           <Button asChild size="lg" className="min-h-[48px] rounded-full px-8">
-            <Link href="/spots">スポットを探す</Link>
+            <Link prefetch={false} href="/spots">スポットを探す</Link>
           </Button>
         </div>
 

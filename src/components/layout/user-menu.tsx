@@ -38,7 +38,7 @@ export function UserMenu() {
 
   if (!session?.user?.tsuriId) {
     return (
-      <Link
+      <Link prefetch={false}
         href="/login"
         className="flex items-center justify-center rounded-lg p-2 text-driftwood transition-colors hover:bg-sand-light hover:text-foreground"
         aria-label="ログイン"
@@ -92,7 +92,7 @@ export function UserMenu() {
               );
             })()}
           </div>
-          <Link
+          <Link prefetch={false}
             href="/mypage"
             onClick={() => setOpen(false)}
             className="flex w-full items-center gap-2.5 px-4 py-2.5 text-sm text-driftwood transition-colors hover:bg-sand-light/50"
@@ -100,7 +100,7 @@ export function UserMenu() {
             <User className="h-4 w-4" />
             マイページ
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/favorites"
             onClick={() => setOpen(false)}
             className="flex w-full items-center gap-2.5 px-4 py-2.5 text-sm text-driftwood transition-colors hover:bg-sand-light/50"

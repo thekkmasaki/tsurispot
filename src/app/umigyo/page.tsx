@@ -313,7 +313,7 @@ export default function UmigyoPage() {
                 </p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row">
-                <Link href="/umigyo/for-municipalities">
+                <Link prefetch={false} href="/umigyo/for-municipalities">
                   <Button size="lg" className="min-h-[44px] gap-1.5 px-6">
                     掲載について詳しく
                     <ChevronRight className="size-4" />

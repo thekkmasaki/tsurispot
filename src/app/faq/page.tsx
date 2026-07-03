@@ -58,7 +58,7 @@ const faqData: FAQCategory[] = [
             </p>
             <p className="mt-2">
               詳しい持ち物は
-              <Link href="/beginner-checklist" className="font-medium text-primary hover:underline">持ち物チェックリスト</Link>
+              <Link prefetch={false} href="/beginner-checklist" className="font-medium text-primary hover:underline">持ち物チェックリスト</Link>
               で確認できます。
             </p>
           </>
@@ -76,7 +76,7 @@ const faqData: FAQCategory[] = [
             </p>
             <p className="mt-2">
               各釣法の詳細は
-              <Link href="/methods" className="font-medium text-primary hover:underline">釣り方・釣法ガイド</Link>
+              <Link prefetch={false} href="/methods" className="font-medium text-primary hover:underline">釣り方・釣法ガイド</Link>
               をご覧ください。
             </p>
           </>
@@ -98,7 +98,7 @@ const faqData: FAQCategory[] = [
             </ul>
             <p className="mt-2">
               不安な方は、
-              <Link href="/guide" className="font-medium text-primary hover:underline">釣りの始め方ガイド</Link>
+              <Link prefetch={false} href="/guide" className="font-medium text-primary hover:underline">釣りの始め方ガイド</Link>
               で事前に流れを確認しておくと安心です。
             </p>
           </>
@@ -145,7 +145,7 @@ const faqData: FAQCategory[] = [
             </ul>
             <p className="mt-2">
               また、
-              <Link href="/fishing-rules" className="font-medium text-primary hover:underline">釣りのルール・マナーガイド</Link>
+              <Link prefetch={false} href="/fishing-rules" className="font-medium text-primary hover:underline">釣りのルール・マナーガイド</Link>
               もあわせてご確認ください。禁止場所で釣りをすると条例違反になる場合があります。
             </p>
           </>
@@ -184,7 +184,7 @@ const faqData: FAQCategory[] = [
               <strong>堤防</strong>は、無料で自由に釣りができる場所が多いですが、トイレや柵がないことが多く、安全管理は自己責任です。釣り場としてのポテンシャルは堤防の方が高い場合もありますが、初心者は海釣り公園から始めるのがおすすめです。
             </p>
             <p className="mt-2">
-              <Link href="/spots" className="font-medium text-primary hover:underline">釣りスポット検索</Link>
+              <Link prefetch={false} href="/spots" className="font-medium text-primary hover:underline">釣りスポット検索</Link>
               で、お近くの釣り場を探してみてください。
             </p>
           </>
@@ -203,7 +203,7 @@ const faqData: FAQCategory[] = [
               <li>・<strong>SNS・釣りコミュニティ</strong>：Instagramや釣り掲示板で地域の釣果情報をチェック</li>
             </ul>
             <p className="mt-2">
-              <Link href="/map" className="font-medium text-primary hover:underline">ツリスポの地図検索</Link>
+              <Link prefetch={false} href="/map" className="font-medium text-primary hover:underline">ツリスポの地図検索</Link>
               なら、現在地から近い順にスポットが表示されるので、すぐに行ける釣り場が見つかります。
             </p>
           </>
@@ -225,7 +225,7 @@ const faqData: FAQCategory[] = [
             </ul>
             <p className="mt-2">
               ツリスポでは各スポットに難易度表示があるので、
-              <Link href="/spots" className="font-medium text-primary hover:underline">スポット一覧</Link>
+              <Link prefetch={false} href="/spots" className="font-medium text-primary hover:underline">スポット一覧</Link>
               から「初心者向け」で絞り込み検索できます。
             </p>
           </>
@@ -243,7 +243,7 @@ const faqData: FAQCategory[] = [
             </p>
             <p className="mt-2">
               ツリスポでは各スポットの料金情報も掲載しています。
-              <Link href="/spots" className="font-medium text-primary hover:underline">スポット一覧</Link>
+              <Link prefetch={false} href="/spots" className="font-medium text-primary hover:underline">スポット一覧</Link>
               で確認してみてください。
             </p>
           </>
@@ -303,7 +303,7 @@ const faqData: FAQCategory[] = [
             </p>
             <p className="mt-2">
               特定の釣法にハマったら、その釣法の専用タックルにステップアップするのが一般的です。詳しくは
-              <Link href="/guide/setup" className="font-medium text-primary hover:underline">タックル準備ガイド</Link>
+              <Link prefetch={false} href="/guide/setup" className="font-medium text-primary hover:underline">タックル準備ガイド</Link>
               をご覧ください。
             </p>
           </>
@@ -373,7 +373,7 @@ const faqData: FAQCategory[] = [
             </p>
             <p className="mt-2">
               詳しくは
-              <Link href="/methods/sabiki" className="font-medium text-primary hover:underline">サビキ釣りガイド</Link>
+              <Link prefetch={false} href="/methods/sabiki" className="font-medium text-primary hover:underline">サビキ釣りガイド</Link>
               をご覧ください。
             </p>
           </>
@@ -395,7 +395,7 @@ const faqData: FAQCategory[] = [
             </ul>
             <p className="mt-2">
               各釣法の詳細は
-              <Link href="/methods" className="font-medium text-primary hover:underline">釣り方・釣法ガイド</Link>
+              <Link prefetch={false} href="/methods" className="font-medium text-primary hover:underline">釣り方・釣法ガイド</Link>
               で確認できます。
             </p>
           </>
@@ -418,7 +418,7 @@ const faqData: FAQCategory[] = [
             </ul>
             <p className="mt-2">
               防寒対策をしっかりすれば、冬は人が少なく大物が狙える絶好のシーズンです。
-              <Link href="/seasonal" className="font-medium text-primary hover:underline">季節別釣りガイド</Link>
+              <Link prefetch={false} href="/seasonal" className="font-medium text-primary hover:underline">季節別釣りガイド</Link>
               も参考にしてください。
             </p>
           </>
@@ -465,7 +465,7 @@ const faqData: FAQCategory[] = [
             </ul>
             <p className="mt-2">
               魚の食べ方については
-              <Link href="/fish" className="font-medium text-primary hover:underline">魚種図鑑</Link>
+              <Link prefetch={false} href="/fish" className="font-medium text-primary hover:underline">魚種図鑑</Link>
               で魚種ごとに紹介しています。
             </p>
           </>
@@ -485,7 +485,7 @@ const faqData: FAQCategory[] = [
             </ul>
             <p className="mt-2">
               代表的な毒魚（ゴンズイ、ハオコゼ、アカエイ、フグ類）は見た目を覚えておくと安心です。
-              <Link href="/fish" className="font-medium text-primary hover:underline">魚種図鑑</Link>
+              <Link prefetch={false} href="/fish" className="font-medium text-primary hover:underline">魚種図鑑</Link>
               で確認できます。
             </p>
           </>
@@ -553,7 +553,7 @@ const faqData: FAQCategory[] = [
             </ul>
             <p className="mt-2">
               マナーの悪さが釣り禁止の最大の原因です。詳しくは
-              <Link href="/fishing-rules" className="font-medium text-primary hover:underline">釣りのルール・マナーガイド</Link>
+              <Link prefetch={false} href="/fishing-rules" className="font-medium text-primary hover:underline">釣りのルール・マナーガイド</Link>
               をご覧ください。
             </p>
           </>
@@ -798,7 +798,7 @@ export default function FAQPage() {
             もっと詳しいFAQをカテゴリごとにまとめています。
           </p>
           <div className="grid gap-3 sm:grid-cols-2">
-            <Link
+            <Link prefetch={false}
               href="/faq/season"
               className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md"
             >
@@ -807,7 +807,7 @@ export default function FAQPage() {
                 サビキ釣りの時期・朝マヅメ・冬の釣り（9問）
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/faq/beginner"
               className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md"
             >
@@ -816,7 +816,7 @@ export default function FAQPage() {
                 必要な道具・予算・場所選び・始め方（9問）
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/faq/spot"
               className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md"
             >
@@ -825,7 +825,7 @@ export default function FAQPage() {
                 堤防・漁港・管理釣り場のコツとマナー（7問）
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/faq/technique"
               className="rounded-lg border bg-white p-4 transition-shadow hover:shadow-md"
             >
@@ -841,7 +841,7 @@ export default function FAQPage() {
         <div className="mt-8 rounded-xl border bg-muted/30 p-6">
           <h2 className="mb-4 text-lg font-bold">もっと詳しく知りたい方へ</h2>
           <div className="grid gap-3 sm:grid-cols-3">
-            <Link
+            <Link prefetch={false}
               href="/guide"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >
@@ -850,7 +850,7 @@ export default function FAQPage() {
                 初心者向けステップバイステップ解説
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/methods"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >
@@ -859,7 +859,7 @@ export default function FAQPage() {
                 8つの釣法を徹底解説
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/fishing-rules"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >
@@ -868,7 +868,7 @@ export default function FAQPage() {
                 釣り場で守るべきルール
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/safety"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >
@@ -877,7 +877,7 @@ export default function FAQPage() {
                 安全に釣りを楽しむための知識
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/beginner-checklist"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >
@@ -886,7 +886,7 @@ export default function FAQPage() {
                 忘れ物を防止するリスト
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/spots"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >

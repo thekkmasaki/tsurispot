@@ -163,7 +163,7 @@ export default function BreakwaterBeginnerPage() {
       <section className="mt-10 rounded-xl border bg-muted/30 p-6">
         <h2 className="mb-4 text-lg font-bold">関連ページ</h2>
         <div className="grid gap-3 sm:grid-cols-3">
-          <Link
+          <Link prefetch={false}
             href="/guide/beginner"
             className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
           >
@@ -172,7 +172,7 @@ export default function BreakwaterBeginnerPage() {
               道具選びから釣り方まで徹底解説
             </p>
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/guide/sabiki"
             className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
           >
@@ -181,7 +181,7 @@ export default function BreakwaterBeginnerPage() {
               堤防の定番、サビキ釣りを詳しく解説
             </p>
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/fishing-spots/best-saltwater"
             className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
           >

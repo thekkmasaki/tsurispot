@@ -725,7 +725,7 @@ export default async function MethodDetailPage({ params }: PageProps) {
           { label: method.name },
         ]}
       />
-      <Link
+      <Link prefetch={false}
         href="/methods"
         className="mb-5 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground transition-colors hover:text-primary min-h-[44px] sm:mb-6"
       >
@@ -886,7 +886,7 @@ export default async function MethodDetailPage({ params }: PageProps) {
             const fishData = fishSpecies.find((f) => f.slug === fish.slug);
             const fishImageUrl = fishData?.imageUrl;
             return (
-              <Link key={fish.slug} href={`/fish/${fish.slug}`}>
+              <Link prefetch={false} key={fish.slug} href={`/fish/${fish.slug}`}>
                 <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                   <CardContent className="flex items-center gap-3 p-4">
                     <div className="size-10 shrink-0 overflow-hidden rounded-lg bg-primary/10">
@@ -928,7 +928,7 @@ export default async function MethodDetailPage({ params }: PageProps) {
           </div>
           {totalMatchCount > 8 && (
             <div className="mt-4 text-center">
-              <Link
+              <Link prefetch={false}
                 href="/spots"
                 className="inline-flex items-center gap-1 rounded-lg border px-5 py-2.5 text-sm font-medium transition-colors hover:bg-muted"
               >
@@ -971,7 +971,7 @@ export default async function MethodDetailPage({ params }: PageProps) {
         </h2>
         <div className="grid grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-3">
           {method.relatedMethods.map((related) => (
-            <Link key={related.slug} href={`/methods/${related.slug}`}>
+            <Link prefetch={false} key={related.slug} href={`/methods/${related.slug}`}>
               <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                 <CardContent className="p-4 text-center">
                   <p className="text-sm font-semibold group-hover:text-primary">
@@ -988,7 +988,7 @@ export default async function MethodDetailPage({ params }: PageProps) {
       <div className="rounded-xl border bg-muted/30 p-6">
         <h2 className="mb-4 text-lg font-bold">関連ページ</h2>
         <div className="grid gap-3 sm:grid-cols-3">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
           >
@@ -997,7 +997,7 @@ export default async function MethodDetailPage({ params }: PageProps) {
               初心者向けステップバイステップ
             </p>
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/beginner-checklist"
             className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
           >
@@ -1006,7 +1006,7 @@ export default async function MethodDetailPage({ params }: PageProps) {
               忘れ物防止チェックリスト
             </p>
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/seasonal"
             className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
           >

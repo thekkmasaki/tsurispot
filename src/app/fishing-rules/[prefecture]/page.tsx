@@ -643,7 +643,7 @@ export default async function PrefectureFishingRulesPage({ params }: Props) {
               </div>
               <div className="space-y-2">
                 {prefSpots.map((spot) => (
-                  <Link key={spot.slug} href={`/spots/${spot.slug}`}>
+                  <Link prefetch={false} key={spot.slug} href={`/spots/${spot.slug}`}>
                     <Card className="hover:shadow-md transition-shadow">
                       <CardContent className="p-3 flex items-center gap-3">
                         <MapPin className="h-4 w-4 shrink-0 text-primary" />
@@ -663,7 +663,7 @@ export default async function PrefectureFishingRulesPage({ params }: Props) {
               </div>
               <div className="mt-3 text-center">
                 <Button asChild variant="outline" size="sm">
-                  <Link href={`/prefecture/${pref.slug}`}>
+                  <Link prefetch={false} href={`/prefecture/${pref.slug}`}>
                     {pref.name}のスポットをすべて見る
                     <ChevronRight className="h-4 w-4 ml-1" />
                   </Link>
@@ -680,7 +680,7 @@ export default async function PrefectureFishingRulesPage({ params }: Props) {
           </p>
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
             <Button asChild size="lg" className="min-h-[48px] gap-1.5 rounded-full px-8">
-              <Link href="/fishing-rules">
+              <Link prefetch={false} href="/fishing-rules">
                 全国共通のルールを見る
                 <ChevronRight className="h-4 w-4" />
               </Link>
@@ -691,7 +691,7 @@ export default async function PrefectureFishingRulesPage({ params }: Props) {
               size="lg"
               className="min-h-[48px] gap-1.5 rounded-full px-8"
             >
-              <Link href="/spots">
+              <Link prefetch={false} href="/spots">
                 スポットを探す
                 <ChevronRight className="h-4 w-4" />
               </Link>

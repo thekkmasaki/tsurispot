@@ -22,7 +22,7 @@ export function CompareClient({ spots }: { spots: FishingSpot[] }) {
     return (
       <div className="py-16 text-center">
         <p className="text-muted-foreground">比較するには2つ以上のスポットを選択してください。</p>
-        <Link href="/spots">
+        <Link prefetch={false} href="/spots">
           <Button variant="outline" className="mt-4 gap-2">
             <ArrowLeft className="size-4" />
             スポット一覧に戻る
@@ -94,7 +94,7 @@ export function CompareClient({ spots }: { spots: FishingSpot[] }) {
               <th className="w-28 border-b p-3 text-left text-muted-foreground" />
               {spots.map((s) => (
                 <th key={s.id} className="border-b p-3 text-center">
-                  <Link href={`/spots/${s.slug}`} className="group">
+                  <Link prefetch={false} href={`/spots/${s.slug}`} className="group">
                     <SpotImage
                       src={resolveSpotImageSrc(s.mainImageUrl)}
                       alt={s.name}
@@ -138,7 +138,7 @@ export function CompareClient({ spots }: { spots: FishingSpot[] }) {
       </div>
 
       <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-        <Link href="/spots">
+        <Link prefetch={false} href="/spots">
           <Button variant="outline" className="gap-2">
             <ArrowLeft className="size-4" />
             スポット一覧に戻る

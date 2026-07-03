@@ -78,7 +78,7 @@ function LightSpotCard({ spot }: { spot: SpotCardData }) {
   const displayFish = spot.fishNames.slice(0, 3);
   const remainingCount = spot.fishNames.length - 3;
   return (
-    <Link href={`/spots/${spot.slug}`}>
+    <Link prefetch={false} href={`/spots/${spot.slug}`}>
       <Card className="group gap-0 overflow-hidden py-0 transition-shadow hover:shadow-md">
         <div className="relative">
           <SpotImage

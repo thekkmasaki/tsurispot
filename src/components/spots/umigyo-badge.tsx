@@ -8,7 +8,7 @@ interface UmigyoBadgeProps {
 
 export function UmigyoBadge({ isModelDistrict, portName }: UmigyoBadgeProps) {
   return (
-    <Link
+    <Link prefetch={false}
       href="/umigyo"
       className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium transition-colors ${
         isModelDistrict

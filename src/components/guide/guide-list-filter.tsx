@@ -63,7 +63,7 @@ export function GuideListFilter({ guides }: GuideListFilterProps) {
       {/* Guide cards */}
       <div className="grid gap-4 sm:grid-cols-2">
         {filtered.map((guide) => (
-          <Link key={guide.href} href={guide.href} className="group">
+          <Link prefetch={false} key={guide.href} href={guide.href} className="group">
             <Card className="h-full transition-colors group-hover:border-primary">
               <CardContent className="flex items-start gap-4 pt-6">
                 <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 text-primary">

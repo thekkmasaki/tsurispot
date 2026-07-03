@@ -60,7 +60,7 @@ export default function StatsPage() {
     return (
       <div className="container mx-auto px-4 py-8">
         <p className="text-sm text-muted-foreground">ログインが必要です。</p>
-        <Link
+        <Link prefetch={false}
           href="/login"
           className="mt-3 inline-flex items-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-primary/90"
         >
@@ -80,7 +80,7 @@ export default function StatsPage() {
         ]}
       />
 
-      <Link
+      <Link prefetch={false}
         href="/mypage"
         className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground"
       >

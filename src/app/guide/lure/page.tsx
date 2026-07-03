@@ -359,7 +359,7 @@ export default function LureGuidePage() {
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
         {/* パンくず */}
         <div className="mb-6">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
@@ -612,7 +612,7 @@ export default function LureGuidePage() {
                   { slug: "aoriika", name: "アオリイカ", badge: "エギング" },
                   { slug: "kurodai", name: "クロダイ", badge: "チニング" },
                 ].map((fish) => (
-                  <Link
+                  <Link prefetch={false}
                     key={fish.slug}
                     href={`/fish/${fish.slug}`}
                     className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
@@ -644,7 +644,7 @@ export default function LureGuidePage() {
                 </div>
                 <div className="grid gap-2 sm:grid-cols-2">
                   {lureSpots.map((spot) => (
-                    <Link
+                    <Link prefetch={false}
                       key={spot.id}
                       href={`/spots/${spot.slug}`}
                       className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
@@ -658,7 +658,7 @@ export default function LureGuidePage() {
                   ))}
                 </div>
                 <div className="mt-3 text-center">
-                  <Link href="/spots" className="text-sm text-primary hover:underline">
+                  <Link prefetch={false} href="/spots" className="text-sm text-primary hover:underline">
                     すべてのスポットを見る →
                   </Link>
                 </div>
@@ -696,37 +696,37 @@ export default function LureGuidePage() {
               <h2 className="mb-4 text-xl font-bold">関連ガイド</h2>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href="/guide/jigging" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/jigging" className="text-primary hover:underline">
                     ショアジギング入門ガイド
                   </Link>
                   <span className="text-muted-foreground"> - メタルジグを使った青物狙いの詳細解説</span>
                 </li>
                 <li>
-                  <Link href="/guide/knots" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/knots" className="text-primary hover:underline">
                     釣り糸の結び方
                   </Link>
                   <span className="text-muted-foreground"> - ルアーと糸の接続に必要な結び方</span>
                 </li>
                 <li>
-                  <Link href="/guide/rigs" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/rigs" className="text-primary hover:underline">
                     釣り仕掛け図解ガイド
                   </Link>
                   <span className="text-muted-foreground"> - ルアー仕掛けの基本構成を図解で解説</span>
                 </li>
                 <li>
-                  <Link href="/guide/night-fishing" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/night-fishing" className="text-primary hover:underline">
                     夜釣り入門ガイド
                   </Link>
                   <span className="text-muted-foreground"> - メバリングやアジングに最適な夜釣りの基本</span>
                 </li>
                 <li>
-                  <Link href="/guide/sabiki" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/sabiki" className="text-primary hover:underline">
                     サビキ釣り完全ガイド
                   </Link>
                   <span className="text-muted-foreground"> - エサ釣りの基本をマスター</span>
                 </li>
                 <li>
-                  <Link href="/guide/anazuri" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/anazuri" className="text-primary hover:underline">
                     穴釣り完全ガイド
                   </Link>
                   <span className="text-muted-foreground"> - テトラの穴でロックフィッシュを狙う</span>
@@ -741,7 +741,7 @@ export default function LureGuidePage() {
           <p className="mb-4 text-sm text-muted-foreground">
             ルアー釣りの基本がわかったら、ショアジギングに挑戦してみましょう。
           </p>
-          <Link
+          <Link prefetch={false}
             href="/guide/jigging"
             className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >

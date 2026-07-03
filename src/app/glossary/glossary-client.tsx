@@ -130,7 +130,7 @@ export function GlossaryClient({ glossaryData }: GlossaryClientProps) {
                       {item.description}
                     </p>
                     {item.link && (
-                      <Link
+                      <Link prefetch={false}
                         href={item.link.href}
                         className="mt-2 inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
                       >

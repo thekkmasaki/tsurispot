@@ -820,7 +820,7 @@ export default function SetupGuidePage() {
           { label: "セッティング方法" },
         ]} />
         <div className="mb-6">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
@@ -1186,13 +1186,13 @@ export default function SetupGuidePage() {
             セッティングができたら、次は糸の結び方を覚えましょう。
           </p>
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <Link
+            <Link prefetch={false}
               href="/guide/knots"
               className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
             >
               釣り糸の結び方を学ぶ
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/guide/beginner-setup"
               className="inline-flex items-center rounded-full border border-primary/50 px-6 py-3 text-sm font-medium text-primary hover:bg-primary/10"
             >

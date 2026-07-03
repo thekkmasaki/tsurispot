@@ -91,7 +91,7 @@ export default function FishingIndexPage() {
           <p className="text-sm text-amber-800">
             <span className="font-bold">何から始めればいいかわからない？</span>
             →{" "}
-            <Link href="/guide/beginner" className="font-bold underline hover:text-amber-900">
+            <Link prefetch={false} href="/guide/beginner" className="font-bold underline hover:text-amber-900">
               初心者完全ガイド
             </Link>
             を読んでみよう！
@@ -111,7 +111,7 @@ export default function FishingIndexPage() {
                 currentMonth
               );
               return (
-                <Link
+                <Link prefetch={false}
                   key={method.slug}
                   href={`/fishing/${method.slug}`}
                 >
@@ -197,7 +197,7 @@ export default function FishingIndexPage() {
                 {FISHING_METHODS.map((method) => (
                   <tr key={method.slug}>
                     <td className="border border-gray-200 p-2 font-medium">
-                      <Link
+                      <Link prefetch={false}
                         href={`/fishing/${method.slug}`}
                         className="flex items-center gap-1 hover:text-blue-600"
                       >
@@ -223,7 +223,7 @@ export default function FishingIndexPage() {
                               : ""
                           }`}
                         >
-                          <Link
+                          <Link prefetch={false}
                             href={`/fishing/${method.slug}/${m.slug}`}
                             className={`block p-2 hover:bg-blue-100 dark:hover:bg-blue-900/50 transition-colors ${
                               count === 0
@@ -263,7 +263,7 @@ export default function FishingIndexPage() {
                       m.num
                     ).some((f) => f.isPeak);
                     return (
-                      <Link
+                      <Link prefetch={false}
                         key={m.slug}
                         href={`/fishing/${method.slug}/${m.slug}`}
                         className={`rounded-lg p-2 text-center text-sm transition-colors ${
@@ -304,7 +304,7 @@ export default function FishingIndexPage() {
               if (fish.length === 0) return null;
               const peakCount = fish.filter((f) => f.isPeak).length;
               return (
-                <Link
+                <Link prefetch={false}
                   key={method.slug}
                   href={`/fishing/${method.slug}/${MONTHS[currentMonth - 1].slug}`}
                 >

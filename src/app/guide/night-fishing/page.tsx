@@ -328,7 +328,7 @@ export default function NightFishingGuidePage() {
       <main className="container mx-auto max-w-3xl px-4 py-8 sm:py-12">
         {/* パンくず */}
         <div className="mb-6">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
@@ -432,7 +432,7 @@ export default function NightFishingGuidePage() {
                 <p className="text-sm text-muted-foreground">
                   夜釣りの代表的なターゲット。常夜灯の明暗部に潜み、プランクトンに集まる小魚を捕食します。ルアー（メバリング）でもウキ釣りでも狙えます。冬〜春がベストシーズン。
                 </p>
-                <Link href="/fish/mebaru" className="mt-2 inline-flex items-center text-sm text-primary hover:underline">
+                <Link prefetch={false} href="/fish/mebaru" className="mt-2 inline-flex items-center text-sm text-primary hover:underline">
                   メバルの詳細を見る →
                 </Link>
               </div>
@@ -442,7 +442,7 @@ export default function NightFishingGuidePage() {
                 <p className="text-sm text-muted-foreground">
                   常夜灯周りに集まる習性があり、夜のアジング（ルアー）やサビキ釣りが人気。群れで回遊するため、回ってくれば連続ヒットが期待できます。
                 </p>
-                <Link href="/fish/aji" className="mt-2 inline-flex items-center text-sm text-primary hover:underline">
+                <Link prefetch={false} href="/fish/aji" className="mt-2 inline-flex items-center text-sm text-primary hover:underline">
                   アジの詳細を見る →
                 </Link>
               </div>
@@ -452,7 +452,7 @@ export default function NightFishingGuidePage() {
                 <p className="text-sm text-muted-foreground">
                   夜になると浅場に出てきてエサを漁る、ナイトゲームの人気ターゲット。常夜灯の明暗の境目や橋脚周りがポイント。ミノーやバイブレーションで狙います。
                 </p>
-                <Link href="/fish/seabass" className="mt-2 inline-flex items-center text-sm text-primary hover:underline">
+                <Link prefetch={false} href="/fish/seabass" className="mt-2 inline-flex items-center text-sm text-primary hover:underline">
                   シーバスの詳細を見る →
                 </Link>
               </div>
@@ -462,7 +462,7 @@ export default function NightFishingGuidePage() {
                 <p className="text-sm text-muted-foreground">
                   ナイトエギングで狙うアオリイカ。日中よりも浅場に寄ってくるため、岸からの射程内に入りやすい。常夜灯周りが好ポイントです。
                 </p>
-                <Link href="/fish/aoriika" className="mt-2 inline-flex items-center text-sm text-primary hover:underline">
+                <Link prefetch={false} href="/fish/aoriika" className="mt-2 inline-flex items-center text-sm text-primary hover:underline">
                   アオリイカの詳細を見る →
                 </Link>
               </div>
@@ -472,7 +472,7 @@ export default function NightFishingGuidePage() {
                 <p className="text-sm text-muted-foreground">
                   夕方から夜にかけて接岸するタチウオは、ケミホタル付きのテンヤ仕掛けやルアーで狙います。鋭い歯を持つため、ワイヤーリーダーが必要。秋が最盛期です。
                 </p>
-                <Link href="/fish/tachiuo" className="mt-2 inline-flex items-center text-sm text-primary hover:underline">
+                <Link prefetch={false} href="/fish/tachiuo" className="mt-2 inline-flex items-center text-sm text-primary hover:underline">
                   タチウオの詳細を見る →
                 </Link>
               </div>
@@ -482,7 +482,7 @@ export default function NightFishingGuidePage() {
                 <p className="text-sm text-muted-foreground">
                   根魚は夜になると岩から出てきてエサを探します。穴釣りやルアーのワーム釣りで狙えます。日中より警戒心が薄れ、食い気が増します。
                 </p>
-                <Link href="/fish/kasago" className="mt-2 inline-flex items-center text-sm text-primary hover:underline">
+                <Link prefetch={false} href="/fish/kasago" className="mt-2 inline-flex items-center text-sm text-primary hover:underline">
                   カサゴの詳細を見る →
                 </Link>
               </div>
@@ -649,7 +649,7 @@ export default function NightFishingGuidePage() {
                 </p>
                 <div className="grid gap-2 sm:grid-cols-2">
                   {nightSpots.map((spot) => (
-                    <Link
+                    <Link prefetch={false}
                       key={spot.id}
                       href={`/spots/${spot.slug}`}
                       className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
@@ -663,7 +663,7 @@ export default function NightFishingGuidePage() {
                   ))}
                 </div>
                 <div className="mt-3 text-center">
-                  <Link href="/spots" className="text-sm text-primary hover:underline">
+                  <Link prefetch={false} href="/spots" className="text-sm text-primary hover:underline">
                     すべてのスポットを見る →
                   </Link>
                 </div>
@@ -698,37 +698,37 @@ export default function NightFishingGuidePage() {
               <h2 className="mb-4 text-xl font-bold">関連ガイド</h2>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href="/guide/lure" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/lure" className="text-primary hover:underline">
                     ルアー釣り入門ガイド
                   </Link>
                   <span className="text-muted-foreground"> - メバリング・アジングの基本</span>
                 </li>
                 <li>
-                  <Link href="/guide/eging" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/eging" className="text-primary hover:underline">
                     エギング入門ガイド
                   </Link>
                   <span className="text-muted-foreground"> - ナイトエギングの詳細</span>
                 </li>
                 <li>
-                  <Link href="/guide/float-fishing" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/float-fishing" className="text-primary hover:underline">
                     ウキ釣り完全ガイド
                   </Link>
                   <span className="text-muted-foreground"> - 電気ウキを使った夜のウキ釣り</span>
                 </li>
                 <li>
-                  <Link href="/guide/tide" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/tide" className="text-primary hover:underline">
                     潮汐の読み方ガイド
                   </Link>
                   <span className="text-muted-foreground"> - 夜釣りの時間帯選びに役立つ潮の知識</span>
                 </li>
                 <li>
-                  <Link href="/guide/sabiki" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/sabiki" className="text-primary hover:underline">
                     サビキ釣り完全ガイド
                   </Link>
                   <span className="text-muted-foreground"> - 常夜灯下でのナイトサビキ</span>
                 </li>
                 <li>
-                  <Link href="/guide/anazuri" className="text-primary hover:underline">
+                  <Link prefetch={false} href="/guide/anazuri" className="text-primary hover:underline">
                     穴釣り完全ガイド
                   </Link>
                   <span className="text-muted-foreground"> - 夜に活発になる根魚をテトラで狙う</span>
@@ -743,7 +743,7 @@ export default function NightFishingGuidePage() {
           <p className="mb-4 text-sm text-muted-foreground">
             潮の読み方を知ると、夜釣りの釣果がさらにアップします。
           </p>
-          <Link
+          <Link prefetch={false}
             href="/guide/tide"
             className="inline-flex items-center rounded-full bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90"
           >

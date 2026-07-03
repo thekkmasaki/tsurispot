@@ -71,7 +71,7 @@ export function SpotRulesPrefectureFallback({
         )}
 
         <div className="flex flex-wrap items-center gap-3 border-t border-amber-200/60 pt-3">
-          <Link
+          <Link prefetch={false}
             href={`/fishing-rules/${rule.prefSlug}`}
             className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
           >

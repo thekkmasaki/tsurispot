@@ -39,7 +39,7 @@ export function CatchableFishSection({
         ))}
       </div>
       <div className="mt-4 text-center">
-        <Link
+        <Link prefetch={false}
           href="/fish"
           className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline"
         >
@@ -52,7 +52,7 @@ export function CatchableFishSection({
 
 function FishMiniCard({ fish }: { fish: FishSpecies }) {
   return (
-    <Link href={`/fish/${fish.slug}`} className="group">
+    <Link prefetch={false} href={`/fish/${fish.slug}`} className="group">
       <Card className="h-full gap-0 overflow-hidden py-0 transition-shadow hover:shadow-md">
         <div className="relative">
           <FishImage

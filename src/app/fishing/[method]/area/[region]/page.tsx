@@ -523,7 +523,7 @@ export default async function MethodRegionPage({ params }: Props) {
                   {region.name}で{method.name}ができるスポットは現在準備中です。
                 </p>
                 <p className="mt-2">
-                  <Link
+                  <Link prefetch={false}
                     href={`/fishing/${method.slug}`}
                     className="text-blue-600 hover:underline"
                   >
@@ -535,7 +535,7 @@ export default async function MethodRegionPage({ params }: Props) {
           ) : (
             <div className="space-y-3">
               {spots.map((spot, idx) => (
-                <Link key={spot.slug} href={`/spots/${spot.slug}`}>
+                <Link prefetch={false} key={spot.slug} href={`/spots/${spot.slug}`}>
                   <Card className="hover:shadow-md transition-shadow">
                     <CardContent className="p-4">
                       <div className="flex items-start gap-3">
@@ -589,7 +589,7 @@ export default async function MethodRegionPage({ params }: Props) {
                   <CardContent className="p-4 text-center text-sm text-gray-500">
                     全{totalCount}件中、上位50件を表示しています。
                     すべてのスポットは
-                    <Link href="/spots" className="text-blue-600 hover:underline mx-1">
+                    <Link prefetch={false} href="/spots" className="text-blue-600 hover:underline mx-1">
                       スポット一覧
                     </Link>
                     から検索できます。
@@ -613,7 +613,7 @@ export default async function MethodRegionPage({ params }: Props) {
                 </h3>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
                   {fishMethodLinks.map((f) => (
-                    <Link
+                    <Link prefetch={false}
                       key={f.slug}
                       href={`/fish/${f.slug}/method/${method.slug}`}
                     >
@@ -637,7 +637,7 @@ export default async function MethodRegionPage({ params }: Props) {
                 </h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                   {prefFishLinks.map((p) => (
-                    <Link
+                    <Link prefetch={false}
                       key={`${p.prefSlug}-${p.fishSlug}`}
                       href={`/prefecture/${p.prefSlug}/fish/${p.fishSlug}`}
                     >
@@ -665,7 +665,7 @@ export default async function MethodRegionPage({ params }: Props) {
           </h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
             {REGION_GROUPS.filter((r) => r.slug !== region.slug).map((r) => (
-              <Link
+              <Link prefetch={false}
                 key={r.slug}
                 href={`/fishing/${method.slug}/area/${r.slug}`}
               >
@@ -686,7 +686,7 @@ export default async function MethodRegionPage({ params }: Props) {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {FISHING_METHODS.filter((m) => m.slug !== method.slug).map((m) => (
-              <Link key={m.slug} href={`/fishing/${m.slug}/area/${region.slug}`}>
+              <Link prefetch={false} key={m.slug} href={`/fishing/${m.slug}/area/${region.slug}`}>
                 <Card className="hover:shadow-md transition-shadow">
                   <CardContent className="p-3 flex items-center gap-2">
                     <span className="text-lg">{m.icon}</span>

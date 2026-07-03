@@ -54,7 +54,7 @@ export default function BouzuCheckerPage() {
         <section className="bg-gradient-to-r from-indigo-600 to-purple-500 text-white">
           <div className="mx-auto max-w-3xl px-4 py-8 sm:py-12">
             <div className="flex items-center gap-2 text-indigo-200 text-sm mb-3">
-              <Link href="/" className="hover:text-white transition-colors">
+              <Link prefetch={false} href="/" className="hover:text-white transition-colors">
                 ホーム
               </Link>
               <ChevronRight className="size-3" />
@@ -82,7 +82,7 @@ export default function BouzuCheckerPage() {
               条件の良い釣り場と適切な道具選びで、ボウズの確率を大幅に下げられます。
             </p>
             <div className="grid gap-3 sm:grid-cols-3">
-              <Link
+              <Link prefetch={false}
                 href="/spots"
                 className="rounded-lg border border-indigo-200 bg-white p-4 text-center transition-shadow hover:shadow-md"
               >
@@ -91,7 +91,7 @@ export default function BouzuCheckerPage() {
                   全国2,100箇所以上の釣り場
                 </p>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/catchable-now"
                 className="rounded-lg border border-indigo-200 bg-white p-4 text-center transition-shadow hover:shadow-md"
               >
@@ -100,7 +100,7 @@ export default function BouzuCheckerPage() {
                   旬の魚を狙ってボウズ回避
                 </p>
               </Link>
-              <Link
+              <Link prefetch={false}
                 href="/gear"
                 className="rounded-lg border border-indigo-200 bg-white p-4 text-center transition-shadow hover:shadow-md"
               >

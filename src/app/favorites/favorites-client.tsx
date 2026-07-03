@@ -59,13 +59,13 @@ export function FavoritesClient({ spotMap }: { spotMap: Record<string, ListSpot>
           </p>
           <div className="mt-6 flex gap-3">
             <Button asChild>
-              <Link href="/spots">
+              <Link prefetch={false} href="/spots">
                 <List className="mr-1 size-4" />
                 スポット一覧を見る
               </Link>
             </Button>
             <Button variant="outline" asChild>
-              <Link href="/">
+              <Link prefetch={false} href="/">
                 <Map className="mr-1 size-4" />
                 地図で探す
               </Link>

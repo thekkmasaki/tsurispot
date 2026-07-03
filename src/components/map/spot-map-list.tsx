@@ -100,7 +100,7 @@ export function SpotMapList({
             </div>
           </button>
           <div className="border-t bg-muted/30 px-2 py-1.5">
-            <Link
+            <Link prefetch={false}
               href={`/spots/${spot.slug}`}
               className="text-xs font-medium text-primary hover:underline"
             >

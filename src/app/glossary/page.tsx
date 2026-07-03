@@ -201,7 +201,7 @@ export default function GlossaryPage() {
             用語の知識があれば釣り場での情報収集がスムーズに。まずは近くの釣りスポットを探してみましょう。
           </p>
           <div className="grid gap-3 sm:grid-cols-3">
-            <Link
+            <Link prefetch={false}
               href="/spots"
               className="rounded-lg border border-blue-200 bg-white p-4 text-center transition-shadow hover:shadow-md"
             >
@@ -210,7 +210,7 @@ export default function GlossaryPage() {
                 全国2,100箇所以上の釣り場
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/catchable-now"
               className="rounded-lg border border-blue-200 bg-white p-4 text-center transition-shadow hover:shadow-md"
             >
@@ -219,7 +219,7 @@ export default function GlossaryPage() {
                 今月のおすすめターゲット
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/gear"
               className="rounded-lg border border-blue-200 bg-white p-4 text-center transition-shadow hover:shadow-md"
             >
@@ -273,7 +273,7 @@ export default function GlossaryPage() {
         <div className="mt-12 rounded-xl border bg-muted/30 p-6">
           <h2 className="mb-4 text-lg font-bold">関連ページ</h2>
           <div className="grid gap-3 sm:grid-cols-3">
-            <Link
+            <Link prefetch={false}
               href="/guide"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >
@@ -282,7 +282,7 @@ export default function GlossaryPage() {
                 初心者向けステップバイステップ解説
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/seasonal"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >
@@ -291,7 +291,7 @@ export default function GlossaryPage() {
                 春夏秋冬のおすすめ釣り
               </p>
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/beginner-checklist"
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md"
             >

@@ -99,11 +99,11 @@ export default function HistoryPage() {
         <nav aria-label="パンくずリスト" className="mb-6 text-sm text-muted-foreground">
           <ol className="flex flex-wrap items-center gap-1.5">
             <li>
-              <Link href="/" className="hover:text-foreground">ホーム</Link>
+              <Link prefetch={false} href="/" className="hover:text-foreground">ホーム</Link>
             </li>
             <li aria-hidden="true">/</li>
             <li>
-              <Link href="/instructor-exam" className="hover:text-foreground">
+              <Link prefetch={false} href="/instructor-exam" className="hover:text-foreground">
                 試験対策
               </Link>
             </li>
@@ -493,11 +493,11 @@ export default function HistoryPage() {
         <TsuriSpotBox>
           <p>
             ツリスポの{" "}
-            <Link href="/fish" className="font-medium underline">
+            <Link prefetch={false} href="/fish" className="font-medium underline">
               魚種図鑑
             </Link>{" "}
             では、文学作品にも登場するアユやイワナなどの渓流魚の生態や釣り方を詳しく紹介しています。また{" "}
-            <Link href="/glossary" className="font-medium underline">
+            <Link prefetch={false} href="/glossary" className="font-medium underline">
               釣り用語集
             </Link>{" "}
             では、テンカラや和竿など本章に登場する伝統的な用語も解説しています。
@@ -547,7 +547,7 @@ export default function HistoryPage() {
         <div className="mt-8 rounded-xl border-2 border-purple-200 bg-purple-50 p-6 text-center">
           <h2 className="text-xl font-bold text-purple-800">確認クイズに挑戦</h2>
           <p className="mt-2 text-sm text-purple-600">全40問の4択クイズで理解度をチェック</p>
-          <Link
+          <Link prefetch={false}
             href="/instructor-exam/history/quiz"
             className="mt-4 inline-flex items-center gap-2 rounded-lg bg-purple-600 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-purple-700"
           >
@@ -558,13 +558,13 @@ export default function HistoryPage() {
 
         {/* ナビ */}
         <div className="mt-12 flex items-center justify-between border-t pt-6">
-          <Link
+          <Link prefetch={false}
             href="/instructor-exam/manners"
             className="rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium hover:bg-gray-200"
           >
             &larr; 第3章 マナーと指導法
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/instructor-exam/tackle"
             className="rounded-lg bg-sky-600 px-4 py-2 text-sm font-medium text-white hover:bg-sky-700"
           >

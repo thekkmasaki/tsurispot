@@ -623,7 +623,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
       </a>
 
       {/* Back link */}
-      <Link
+      <Link prefetch={false}
         href="/spots"
         className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground min-h-[44px]"
       >
@@ -689,14 +689,14 @@ export default async function SpotDetailPage({ params }: PageProps) {
               return (
                 <>
                   {pref ? (
-                    <Link href={`/prefecture/${pref.slug}`} className="hover:text-foreground hover:underline">
+                    <Link prefetch={false} href={`/prefecture/${pref.slug}`} className="hover:text-foreground hover:underline">
                       {spot.region.prefecture}
                     </Link>
                   ) : (
                     <span>{spot.region.prefecture}</span>
                   )}
                   {" "}
-                  <Link href={`/area/${spot.region.slug}`} className="hover:text-foreground hover:underline">
+                  <Link prefetch={false} href={`/area/${spot.region.slug}`} className="hover:text-foreground hover:underline">
                     {spot.region.areaName}
                   </Link>
                 </>
@@ -1173,7 +1173,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                     <div key={`${cf.fish.id}-${cf.method}-${idx}`} className="rounded-lg border p-3 text-sm">
                       <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2 min-w-0">
-                          <Link href={`/fish/${cf.fish.slug}`} className="font-medium truncate hover:text-primary hover:underline">{cf.fish.name}</Link>
+                          <Link prefetch={false} href={`/fish/${cf.fish.slug}`} className="font-medium truncate hover:text-primary hover:underline">{cf.fish.name}</Link>
                           <Badge variant="secondary" className="text-xs shrink-0">{cf.method}</Badge>
                         </div>
                         <p className="text-xs text-muted-foreground shrink-0">{explainTime(cf.recommendedTime)}</p>
@@ -1202,7 +1202,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 <h3 className="mb-2 text-sm font-bold">{pref.name}で釣れる魚のスポットをもっと見る</h3>
                 <div className="flex flex-wrap gap-1.5">
                   {uniqueFish.map(cf => (
-                    <Link key={cf.fish.slug} href={`/prefecture/${pref.slug}/fish/${cf.fish.slug}`}>
+                    <Link prefetch={false} key={cf.fish.slug} href={`/prefecture/${pref.slug}/fish/${cf.fish.slug}`}>
                       <Badge variant="outline" className="text-xs cursor-pointer hover:bg-primary hover:text-white transition-colors">
                         {cf.fish.name}
                       </Badge>
@@ -1262,7 +1262,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 <p className="mb-3 text-sm text-muted-foreground">{spot.name}の釣りに役立つ道具の選び方を、特集ページで詳しく解説しています。</p>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                   {features.map((f) => (
-                    <Link key={f.slug} href={`/gear/${f.slug}`}>
+                    <Link prefetch={false} key={f.slug} href={`/gear/${f.slug}`}>
                       <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                         <CardContent className="p-4">
                           <h4 className="text-sm font-semibold group-hover:text-primary">{f.label}</h4>
@@ -1371,7 +1371,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
             </p>
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {guides.map((guide) => (
-                <Link key={guide.href} href={guide.href}>
+                <Link prefetch={false} key={guide.href} href={guide.href}>
                   <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                     <CardContent className="p-4">
                       <h3 className="text-sm font-semibold group-hover:text-primary">{guide.label}</h3>
@@ -1382,15 +1382,15 @@ export default async function SpotDetailPage({ params }: PageProps) {
               ))}
             </div>
             <div className="mt-3 flex flex-wrap gap-2">
-              <Link href="/guide" className="text-sm text-primary hover:underline">
+              <Link prefetch={false} href="/guide" className="text-sm text-primary hover:underline">
                 すべての釣り方ガイドを見る →
               </Link>
               {isNightFishing && (
-                <Link href="/guide/night-fishing" className="text-sm text-primary hover:underline">
+                <Link prefetch={false} href="/guide/night-fishing" className="text-sm text-primary hover:underline">
                   ナイトフィッシングガイド →
                 </Link>
               )}
-              <Link href="/guide/knots" className="text-sm text-primary hover:underline">
+              <Link prefetch={false} href="/guide/knots" className="text-sm text-primary hover:underline">
                 結び方ガイド →
               </Link>
             </div>
@@ -1540,7 +1540,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                             <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-bold text-primary">{idx + 1}</span>
                             <span className="text-sm font-bold">{cf.method}</span>
                             {guideHref && (
-                              <Link href={guideHref} className="ml-auto text-xs text-primary hover:underline">
+                              <Link prefetch={false} href={guideHref} className="ml-auto text-xs text-primary hover:underline">
                                 ガイドを見る →
                               </Link>
                             )}
@@ -1554,10 +1554,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 </div>
                 {/* 関連ガイドリンク */}
                 <div className="flex flex-wrap gap-2 border-t pt-3">
-                  <Link href="/guide" className="text-xs text-primary hover:underline">すべての釣り方ガイド →</Link>
-                  <Link href="/fishing-calendar" className="text-xs text-primary hover:underline">月別釣りカレンダー →</Link>
+                  <Link prefetch={false} href="/guide" className="text-xs text-primary hover:underline">すべての釣り方ガイド →</Link>
+                  <Link prefetch={false} href="/fishing-calendar" className="text-xs text-primary hover:underline">月別釣りカレンダー →</Link>
                   {spot.difficulty === "beginner" && (
-                    <Link href="/for-beginners" className="text-xs text-primary hover:underline">釣りの始め方ガイド →</Link>
+                    <Link prefetch={false} href="/for-beginners" className="text-xs text-primary hover:underline">釣りの始め方ガイド →</Link>
                   )}
                 </div>
               </CardContent>
@@ -1587,7 +1587,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 ? `${nearSpot.name}（${nearSpot.prefecture}の${nearSpotFishStr}釣り場）`
                 : `${nearSpot.name}（${nearSpot.prefecture}の${nearSpotTypeLabel}）`;
               return (
-              <Link
+              <Link prefetch={false}
                 key={nearSpot.id}
                 href={`/spots/${nearSpot.slug}`}
                 className="shrink-0"
@@ -1654,7 +1654,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                   const psFishStr = ps.fishNames.join("・");
                   const psTypeLabel = SPOT_TYPE_LABELS[ps.spotType] || "";
                   return (
-                  <Link key={ps.id} href={`/spots/${ps.slug}`} title={psFishStr ? `${ps.name}（${psFishStr}が釣れる${psTypeLabel}）` : `${ps.name}（${spot.region.prefecture}の${psTypeLabel}）`}>
+                  <Link prefetch={false} key={ps.id} href={`/spots/${ps.slug}`} title={psFishStr ? `${ps.name}（${psFishStr}が釣れる${psTypeLabel}）` : `${ps.name}（${spot.region.prefecture}の${psTypeLabel}）`}>
                     <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                       <CardContent className="p-3">
                         <h4 className="text-sm font-semibold group-hover:text-primary truncate">{ps.name}</h4>
@@ -1672,7 +1672,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
               </div>
               {pref && (
                 <div className="mt-2 text-right">
-                  <Link href={`/prefecture/${pref.slug}`} className="text-sm text-primary hover:underline">
+                  <Link prefetch={false} href={`/prefecture/${pref.slug}`} className="text-sm text-primary hover:underline">
                     {spot.region.prefecture}の釣りスポットをすべて見る →
                   </Link>
                 </div>
@@ -1749,7 +1749,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
               {(() => {
                 const seen = new Set<string>();
                 return spot.catchableFish.filter(cf => { if (seen.has(cf.fish.slug)) return false; seen.add(cf.fish.slug); return true; }).map((cf) => (
-                  <Link key={cf.fish.id} href={`/fish/${cf.fish.slug}`}>
+                  <Link prefetch={false} key={cf.fish.id} href={`/fish/${cf.fish.slug}`}>
                     <Badge variant="outline" className="cursor-pointer px-2 py-1 text-xs transition-colors hover:bg-primary hover:text-primary-foreground">
                       {cf.fish.name}
                     </Badge>
@@ -1790,7 +1790,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
               <h3 className="mb-2 text-sm font-bold">おすすめ釣り方ガイド</h3>
               <div className="flex flex-wrap gap-1.5">
                 {uniqueGuides.slice(0, 4).map((guide) => (
-                  <Link key={guide.href} href={guide.href}>
+                  <Link prefetch={false} key={guide.href} href={guide.href}>
                     <Badge variant="outline" className="cursor-pointer px-2 py-1 text-xs transition-colors hover:bg-primary hover:text-primary-foreground">
                       {guide.label}
                     </Badge>
@@ -1809,12 +1809,12 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <div className="mb-4">
               <h3 className="mb-2 text-sm font-bold">{spot.region.prefecture}の釣り情報</h3>
               <div className="flex flex-wrap gap-1.5">
-                <Link href={`/prefecture/${pref.slug}`}>
+                <Link prefetch={false} href={`/prefecture/${pref.slug}`}>
                   <Badge variant="outline" className="cursor-pointer px-2 py-1 text-xs transition-colors hover:bg-primary hover:text-primary-foreground">
                     {spot.region.prefecture}の釣りガイド
                   </Badge>
                 </Link>
-                <Link href={`/fishing-rules/${pref.slug}`}>
+                <Link prefetch={false} href={`/fishing-rules/${pref.slug}`}>
                   <Badge variant="outline" className="cursor-pointer px-2 py-1 text-xs transition-colors hover:bg-primary hover:text-primary-foreground">
                     {spot.region.prefecture}の釣りルール
                   </Badge>
@@ -1879,7 +1879,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
             >
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
                 {relatedPosts.slice(0, 5).map((post) => (
-                  <Link key={post.slug} href={`/blog/${post.slug}`} className="group">
+                  <Link prefetch={false} key={post.slug} href={`/blog/${post.slug}`} className="group">
                     <Card className="h-full gap-0 py-0 transition-colors group-hover:border-primary/40 group-hover:bg-primary/5">
                       <CardContent className="p-4">
                         <Badge variant="secondary" className="mb-2 text-[10px]">
@@ -1898,7 +1898,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 ))}
               </div>
               <div className="mt-3 text-right">
-                <Link
+                <Link prefetch={false}
                   href="/blog"
                   className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
                 >
@@ -1967,26 +1967,26 @@ export default async function SpotDetailPage({ params }: PageProps) {
                     if (!pref) return null;
                     return (
                       <>
-                        <Link href={`/prefecture/${pref.slug}`} className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+                        <Link prefetch={false} href={`/prefecture/${pref.slug}`} className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
                           <MapPin className="size-3" />
                           {spot.region.prefecture}の釣りスポット一覧
                         </Link>
-                        <Link href={`/fishing-rules/${pref.slug}`} className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+                        <Link prefetch={false} href={`/fishing-rules/${pref.slug}`} className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
                           <Scale className="size-3" />
                           {spot.region.prefecture}の釣りルール
                         </Link>
                       </>
                     );
                   })()}
-                  <Link href={`/area/${spot.region.slug}`} className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+                  <Link prefetch={false} href={`/area/${spot.region.slug}`} className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
                     <Compass className="size-3" />
                     {spot.region.areaName}エリアガイド
                   </Link>
-                  <Link href="/fishing-calendar" className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+                  <Link prefetch={false} href="/fishing-calendar" className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
                     <Fish className="size-3" />
                     月別釣りカレンダー
                   </Link>
-                  <Link href="/for-beginners" className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
+                  <Link prefetch={false} href="/for-beginners" className="inline-flex items-center gap-1 rounded-md border px-2.5 py-1 text-xs font-medium text-primary transition-colors hover:bg-primary/5">
                     <BookOpen className="size-3" />
                     釣りの始め方ガイド
                   </Link>

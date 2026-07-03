@@ -577,7 +577,7 @@ export default function PartnerPage() {
               </ul>
               <div className="mt-5">
                 <Button className="w-full bg-blue-600 hover:bg-blue-700" asChild>
-                  <Link href="#inquiry-basic">ベーシックプランを問い合わせる</Link>
+                  <Link prefetch={false} href="#inquiry-basic">ベーシックプランを問い合わせる</Link>
                 </Button>
               </div>
             </CardContent>
@@ -602,7 +602,7 @@ export default function PartnerPage() {
               </ul>
               <div className="mt-5">
                 <Button className="w-full bg-amber-500 hover:bg-amber-600" asChild>
-                  <Link href="#inquiry-pro">プロプランを問い合わせる</Link>
+                  <Link prefetch={false} href="#inquiry-pro">プロプランを問い合わせる</Link>
                 </Button>
               </div>
             </CardContent>

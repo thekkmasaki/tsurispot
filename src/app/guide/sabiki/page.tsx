@@ -924,7 +924,7 @@ export default function SabikiGuidePage() {
           { label: "サビキ釣りガイド" },
         ]} />
         <div className="mb-6">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
@@ -1153,7 +1153,7 @@ export default function SabikiGuidePage() {
                 <p className="mb-2 text-sm text-muted-foreground">
                   サビキ釣りで最も人気のターゲット。群れで回遊し、コマセに集まりやすい魚です。刺身、なめろう、フライ、南蛮漬けなど料理のレパートリーも豊富。10〜20cmの「豆アジ」から25cm以上の「尺アジ」まで、サイズを問わず美味しくいただけます。特に秋のアジは脂が乗って絶品です。
                 </p>
-                <Link
+                <Link prefetch={false}
                   href="/fish/aji"
                   className="inline-flex items-center text-sm text-primary hover:underline"
                 >
@@ -1172,7 +1172,7 @@ export default function SabikiGuidePage() {
                 <p className="mb-2 text-sm text-muted-foreground">
                   サビキ釣りの外道としても人気のターゲット。アジよりも引きが強く、竿をグイグイ引き込む力強いファイトが楽しめます。塩焼き、味噌煮、しめ鯖が定番料理。傷みが早い魚なので、釣ったらすぐに氷水の入ったクーラーボックスに入れて鮮度を保ちましょう。
                 </p>
-                <Link
+                <Link prefetch={false}
                   href="/fish/saba"
                   className="inline-flex items-center text-sm text-primary hover:underline"
                 >
@@ -1191,7 +1191,7 @@ export default function SabikiGuidePage() {
                 <p className="mb-2 text-sm text-muted-foreground">
                   大群で回遊するため、群れに当たれば一度に5〜6匹かかることも。サビキ釣りで最も数が釣れる魚です。天ぷら、唐揚げ、煮干し、オイルサーディンなど加工方法も多彩。小さなお子さんでも簡単に釣れるので、ファミリーフィッシングの強い味方です。
                 </p>
-                <Link
+                <Link prefetch={false}
                   href="/fish/iwashi"
                   className="inline-flex items-center text-sm text-primary hover:underline"
                 >
@@ -1206,7 +1206,7 @@ export default function SabikiGuidePage() {
                 </p>
                 <p className="mt-1">
                   サッパ、コノシロ、ウミタナゴ、メジナ（グレ）の幼魚、小型のクロダイなど。思わぬ魚が針にかかるのもサビキ釣りの楽しさです。サビキで釣ったアジやイワシを生きエサにして
-                  <Link
+                  <Link prefetch={false}
                     href="/guide/oyogase"
                     className="text-primary hover:underline"
                   >
@@ -1311,7 +1311,7 @@ export default function SabikiGuidePage() {
                       .map((cf) => cf.fish.name)
                       .join("・");
                     return (
-                    <Link
+                    <Link prefetch={false}
                       key={spot.id}
                       href={`/spots/${spot.slug}`}
                       className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
@@ -1332,7 +1332,7 @@ export default function SabikiGuidePage() {
                 </div>
                 <div className="mt-3 text-center">
                   <Button asChild variant="outline" size="sm">
-                    <Link href="/spots">
+                    <Link prefetch={false} href="/spots">
                       全国の釣りスポットから探す
                       <ChevronRight className="ml-1 size-4" />
                     </Link>
@@ -1356,21 +1356,21 @@ export default function SabikiGuidePage() {
                 </h3>
                 <p className="text-sm text-muted-foreground">
                   ベストシーズンは5〜11月です。特に6〜9月の夏場は
-                  <Link
+                  <Link prefetch={false}
                     href="/fish/aji"
                     className="text-primary hover:underline"
                   >
                     アジ
                   </Link>
                   ・
-                  <Link
+                  <Link prefetch={false}
                     href="/fish/saba"
                     className="text-primary hover:underline"
                   >
                     サバ
                   </Link>
                   ・
-                  <Link
+                  <Link prefetch={false}
                     href="/fish/iwashi"
                     className="text-primary hover:underline"
                   >
@@ -1425,7 +1425,7 @@ export default function SabikiGuidePage() {
                 </h3>
                 <p className="text-sm text-muted-foreground">
                   クーラーボックスに氷と海水を入れた「潮氷」に魚を入れるのがベスト。魚全体が均一に冷えて鮮度が保たれます。詳しくは
-                  <Link
+                  <Link prefetch={false}
                     href="/guide/handling"
                     className="text-primary hover:underline"
                   >
@@ -1529,7 +1529,7 @@ export default function SabikiGuidePage() {
               { slug: "sayori", name: "サヨリ" },
               { slug: "umitanago", name: "ウミタナゴ" },
             ].map((f) => (
-              <Link key={f.slug} href={`/fish/${f.slug}`}>
+              <Link prefetch={false} key={f.slug} href={`/fish/${f.slug}`}>
                 <Badge variant="outline" className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-white sm:text-sm">
                   {f.name}の釣り方
                 </Badge>
@@ -1547,7 +1547,7 @@ export default function SabikiGuidePage() {
           >
             <div className="grid gap-2 sm:grid-cols-2">
               {sabikiSpots.slice(0, 6).map((spot) => (
-                <Link key={spot.slug} href={`/spots/${spot.slug}`}>
+                <Link prefetch={false} key={spot.slug} href={`/spots/${spot.slug}`}>
                   <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                     <CardContent className="p-3">
                       <p className="text-sm font-semibold group-hover:text-primary truncate">{spot.name}</p>
@@ -1577,7 +1577,7 @@ export default function SabikiGuidePage() {
             previewText="6件のガイド"
           >
             <div className="grid gap-3 sm:grid-cols-2">
-              <Link href="/guide/choinage" className="group">
+              <Link prefetch={false} href="/guide/choinage" className="group">
                 <Card className="h-full transition-colors group-hover:border-primary">
                   <CardContent className="pt-6">
                     <Target className="mb-2 size-5 text-primary" />
@@ -1590,7 +1590,7 @@ export default function SabikiGuidePage() {
                   </CardContent>
                 </Card>
               </Link>
-              <Link href="/guide/oyogase" className="group">
+              <Link prefetch={false} href="/guide/oyogase" className="group">
                 <Card className="h-full transition-colors group-hover:border-primary">
                   <CardContent className="pt-6">
                     <Anchor className="mb-2 size-5 text-primary" />
@@ -1603,7 +1603,7 @@ export default function SabikiGuidePage() {
                   </CardContent>
                 </Card>
               </Link>
-              <Link href="/guide/rigs" className="group">
+              <Link prefetch={false} href="/guide/rigs" className="group">
                 <Card className="h-full transition-colors group-hover:border-primary">
                   <CardContent className="pt-6">
                     <Anchor className="mb-2 size-5 text-primary" />
@@ -1616,7 +1616,7 @@ export default function SabikiGuidePage() {
                   </CardContent>
                 </Card>
               </Link>
-              <Link href="/guide/handling" className="group">
+              <Link prefetch={false} href="/guide/handling" className="group">
                 <Card className="h-full transition-colors group-hover:border-primary">
                   <CardContent className="pt-6">
                     <Fish className="mb-2 size-5 text-primary" />
@@ -1629,7 +1629,7 @@ export default function SabikiGuidePage() {
                   </CardContent>
                 </Card>
               </Link>
-              <Link href="/guide/beginner-setup" className="group">
+              <Link prefetch={false} href="/guide/beginner-setup" className="group">
                 <Card className="h-full transition-colors group-hover:border-primary">
                   <CardContent className="pt-6">
                     <Package className="mb-2 size-5 text-primary" />
@@ -1642,7 +1642,7 @@ export default function SabikiGuidePage() {
                   </CardContent>
                 </Card>
               </Link>
-              <Link href="/guide/troubleshooting" className="group">
+              <Link prefetch={false} href="/guide/troubleshooting" className="group">
                 <Card className="h-full transition-colors group-hover:border-primary">
                   <CardContent className="pt-6">
                     <HelpCircle className="mb-2 size-5 text-primary" />
@@ -1666,18 +1666,18 @@ export default function SabikiGuidePage() {
           </p>
           <div className="flex flex-wrap justify-center gap-3">
             <Button asChild size="lg" className="min-h-[48px] rounded-full px-8">
-              <Link href="/spots">全国の釣りスポットを検索</Link>
+              <Link prefetch={false} href="/spots">全国の釣りスポットを検索</Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="min-h-[48px] rounded-full px-6">
-              <Link href="/fish-finder">釣り場診断で探す</Link>
+              <Link prefetch={false} href="/fish-finder">釣り場診断で探す</Link>
             </Button>
           </div>
           <div className="mt-4 flex flex-wrap justify-center gap-3 text-sm">
-            <Link href="/for-beginners" className="text-primary hover:underline">初心者ガイド</Link>
+            <Link prefetch={false} href="/for-beginners" className="text-primary hover:underline">初心者ガイド</Link>
             <span className="text-muted-foreground">|</span>
-            <Link href="/catchable-now" className="text-primary hover:underline">今釣れる魚</Link>
+            <Link prefetch={false} href="/catchable-now" className="text-primary hover:underline">今釣れる魚</Link>
             <span className="text-muted-foreground">|</span>
-            <Link href="/fishing-calendar" className="text-primary hover:underline">月別カレンダー</Link>
+            <Link prefetch={false} href="/fishing-calendar" className="text-primary hover:underline">月別カレンダー</Link>
           </div>
         </div>
       {/* LINE登録バナー */}

@@ -289,7 +289,7 @@ export default function KnotsGuidePage() {
           { label: "釣り糸の結び方" },
         ]} />
         <div className="mb-6">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
@@ -479,19 +479,19 @@ export default function KnotsGuidePage() {
             初心者でも簡単に釣れるサビキ釣り。仕掛けのセット方法から魚の釣り方まで解説。
           </p>
           <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            <Link
+            <Link prefetch={false}
               href="/guide/sabiki"
               className="inline-flex items-center rounded-full bg-white px-6 py-3 text-sm font-medium text-sky-700 hover:bg-sky-50"
             >
               サビキ釣りガイドへ
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/guide/beginner-setup"
               className="inline-flex items-center rounded-full bg-white/20 px-6 py-3 text-sm font-medium text-white hover:bg-white/30"
             >
               仕掛けの準備ガイド
             </Link>
-            <Link
+            <Link prefetch={false}
               href="/guide/beginner"
               className="inline-flex items-center rounded-full border border-white/50 px-6 py-3 text-sm font-medium text-white hover:bg-white/10"
             >

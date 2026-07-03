@@ -464,7 +464,7 @@ export default function AnazuriGuidePage() {
           { label: "穴釣りガイド" },
         ]} />
         <div className="mb-6">
-          <Link
+          <Link prefetch={false}
             href="/guide"
             className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
           >
@@ -710,7 +710,7 @@ export default function AnazuriGuidePage() {
             </div>
 
             <div className="mt-4">
-              <Link
+              <Link prefetch={false}
                 href="/safety"
                 className="inline-flex items-center text-sm font-medium text-primary hover:underline"
               >
@@ -733,7 +733,7 @@ export default function AnazuriGuidePage() {
                 <p className="mb-2 text-sm text-muted-foreground">
                   穴釣りの代表的なターゲット。赤褐色の体に斑点模様が特徴的な根魚です。岩やテトラの隙間に住み着いており、エサが来ると素早く食いつきます。最大30cm程度になり、煮付けや唐揚げ、味噌汁にすると抜群に美味しい魚です。年中釣れますが、特に秋〜冬が狙い目。15cm以下の小さなカサゴはリリースして資源を守りましょう。
                 </p>
-                <Link
+                <Link prefetch={false}
                   href="/fish/kasago"
                   className="inline-flex items-center text-sm text-primary hover:underline"
                 >
@@ -752,7 +752,7 @@ export default function AnazuriGuidePage() {
                 <p className="mb-2 text-sm text-muted-foreground">
                   大きな目が特徴の根魚で、「春告げ魚」とも呼ばれます。カサゴに比べてやや上の層（中層〜底層）にいることが多く、穴の入り口付近で釣れることもあります。煮付けが定番料理で、上品な白身が楽しめます。シーズンは11月〜4月で、特に冬から早春にかけてが最盛期。メバリング（ルアーでメバルを狙う釣り）にステップアップする人も多いです。
                 </p>
-                <Link
+                <Link prefetch={false}
                   href="/fish/mebaru"
                   className="inline-flex items-center text-sm text-primary hover:underline"
                 >
@@ -838,7 +838,7 @@ export default function AnazuriGuidePage() {
               <div>
                 <div className="grid gap-2 sm:grid-cols-2">
                   {anazuriSpots.map((spot) => (
-                    <Link
+                    <Link prefetch={false}
                       key={spot.id}
                       href={`/spots/${spot.slug}`}
                       className="group flex items-center gap-2 rounded-lg border p-3 transition-colors hover:border-primary"
@@ -858,7 +858,7 @@ export default function AnazuriGuidePage() {
                 </div>
                 <div className="mt-3 text-center">
                   <Button asChild variant="outline" size="sm">
-                    <Link href="/spots">
+                    <Link prefetch={false} href="/spots">
                       全国の釣りスポットから探す
                       <ChevronRight className="ml-1 size-4" />
                     </Link>
@@ -893,14 +893,14 @@ export default function AnazuriGuidePage() {
                 </h3>
                 <p className="text-sm text-muted-foreground">
                   穴釣りは年中楽しめるのが大きな魅力です。特に秋から冬（10〜2月）がベストシーズンで、
-                  <Link
+                  <Link prefetch={false}
                     href="/fish/kasago"
                     className="text-primary hover:underline"
                   >
                     カサゴ
                   </Link>
                   や
-                  <Link
+                  <Link prefetch={false}
                     href="/fish/mebaru"
                     className="text-primary hover:underline"
                   >
@@ -915,7 +915,7 @@ export default function AnazuriGuidePage() {
                 </h3>
                 <p className="text-sm text-muted-foreground">
                   テトラポッドは足場が不安定で、滑りやすいため注意が必要です。滑り止め付きのスパイクシューズを履き、両手が使えるようリュックタイプのバッグを使いましょう。雨の日や波が高い日は絶対に避けること。詳しくは
-                  <Link
+                  <Link prefetch={false}
                     href="/safety"
                     className="text-primary hover:underline"
                   >
@@ -954,7 +954,7 @@ export default function AnazuriGuidePage() {
             関連ガイド
           </h2>
           <div className="grid gap-3 sm:grid-cols-2">
-            <Link href="/guide/sabiki" className="group">
+            <Link prefetch={false} href="/guide/sabiki" className="group">
               <Card className="h-full transition-colors group-hover:border-primary">
                 <CardContent className="pt-6">
                   <Anchor className="mb-2 size-5 text-primary" />
@@ -967,7 +967,7 @@ export default function AnazuriGuidePage() {
                 </CardContent>
               </Card>
             </Link>
-            <Link href="/guide/beginner" className="group">
+            <Link prefetch={false} href="/guide/beginner" className="group">
               <Card className="h-full transition-colors group-hover:border-primary">
                 <CardContent className="pt-6">
                   <Fish className="mb-2 size-5 text-primary" />
@@ -989,7 +989,7 @@ export default function AnazuriGuidePage() {
             穴釣りができるスポットを探してみよう
           </p>
           <Button asChild size="lg" className="min-h-[48px] rounded-full px-8">
-            <Link href="/spots">スポットを探す</Link>
+            <Link prefetch={false} href="/spots">スポットを探す</Link>
           </Button>
         </div>
       {/* LINE登録バナー */}

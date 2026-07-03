@@ -286,7 +286,7 @@ export default function GuidePage() {
         <div className="mx-auto mt-4 max-w-lg rounded-xl bg-emerald-50 p-4 text-center">
           <p className="text-sm font-medium text-emerald-800">
             🎣 釣りが初めてなら、まずは
-            <Link href="/guide/beginner" className="font-bold underline hover:text-emerald-900">初心者完全ガイド</Link>
+            <Link prefetch={false} href="/guide/beginner" className="font-bold underline hover:text-emerald-900">初心者完全ガイド</Link>
             から！
           </p>
         </div>
@@ -439,7 +439,7 @@ export default function GuidePage() {
         />
         <div className="mt-4 text-center">
           <Button asChild variant="outline" className="min-h-[44px] rounded-full">
-            <Link href="/gear">
+            <Link prefetch={false} href="/gear">
               すべてのおすすめ道具を見る
               <ChevronRight className="ml-1 size-4" />
             </Link>
@@ -457,7 +457,7 @@ export default function GuidePage() {
           さっそく釣りスポットを探してみよう！
         </p>
         <Button asChild size="lg" className="min-h-[48px] rounded-full px-8">
-          <Link href="/spots">スポットを探す</Link>
+          <Link prefetch={false} href="/spots">スポットを探す</Link>
         </Button>
       </div>
 

@@ -142,7 +142,7 @@ export default function SpotTypeIndexPage() {
                     <Icon className="size-6 text-primary" />
                   </div>
                   <div className="flex-1">
-                    <Link
+                    <Link prefetch={false}
                       href={`/spot-type/${type}`}
                       className="group"
                     >
@@ -169,7 +169,7 @@ export default function SpotTypeIndexPage() {
                             );
                             if (!pref) return null;
                             return (
-                              <Link
+                              <Link prefetch={false}
                                 key={pref.slug}
                                 href={`/spot-type/${type}/${pref.slug}`}
                               >
@@ -186,7 +186,7 @@ export default function SpotTypeIndexPage() {
                             );
                           })}
                         {prefCount > 12 && (
-                          <Link href={`/spot-type/${type}`}>
+                          <Link prefetch={false} href={`/spot-type/${type}`}>
                             <Badge
                               variant="outline"
                               className="cursor-pointer text-xs transition-colors hover:bg-primary hover:text-primary-foreground"
@@ -214,25 +214,25 @@ export default function SpotTypeIndexPage() {
           関連リンク
         </h2>
         <div className="flex flex-wrap gap-2">
-          <Link
+          <Link prefetch={false}
             href="/prefecture"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             都道府県から探す
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/fish"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             魚種から探す
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/catchable-now"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >
             今釣れる魚
           </Link>
-          <Link
+          <Link prefetch={false}
             href="/spots"
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
           >

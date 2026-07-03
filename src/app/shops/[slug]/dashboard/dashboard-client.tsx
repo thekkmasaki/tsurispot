@@ -93,7 +93,7 @@ export function DashboardClient() {
     return (
       <div className="mx-auto max-w-2xl px-4 py-12 text-center">
         <p className="text-muted-foreground">店舗が見つかりません。</p>
-        <Link href="/shops" className="mt-4 inline-block text-primary hover:underline">
+        <Link prefetch={false} href="/shops" className="mt-4 inline-block text-primary hover:underline">
           釣具店一覧へ
         </Link>
       </div>
@@ -181,7 +181,7 @@ export function DashboardClient() {
 
   return (
     <div className="mx-auto max-w-2xl px-4 py-6 sm:px-6 sm:py-10">
-      <Link
+      <Link prefetch={false}
         href={`/shops/${slug}`}
         className="mb-5 inline-flex min-h-[44px] items-center gap-1 py-2 text-sm text-muted-foreground transition-colors hover:text-primary"
       >

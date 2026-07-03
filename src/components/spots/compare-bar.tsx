@@ -71,7 +71,7 @@ export function CompareBar() {
             すべて解除
           </button>
         </div>
-        <Link href={`/spots/compare?slugs=${list.join(",")}`}>
+        <Link prefetch={false} href={`/spots/compare?slugs=${list.join(",")}`}>
           <Button
             size="sm"
             disabled={list.length < 2}

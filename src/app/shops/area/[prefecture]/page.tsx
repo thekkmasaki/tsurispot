@@ -257,7 +257,7 @@ export default async function PrefectureShopsPage({
                 const isPaid = isPro || isBasic;
 
                 return (
-                  <Link
+                  <Link prefetch={false}
                     key={shop.id}
                     href={`/shops/${shop.slug}`}
                     className="group block"
@@ -357,7 +357,7 @@ export default async function PrefectureShopsPage({
               </p>
               <p className="mt-2 text-sm text-muted-foreground">
                 情報が入り次第追加します。
-                <Link
+                <Link prefetch={false}
                   href="/shops"
                   className="ml-1 text-primary hover:underline"
                 >
@@ -383,7 +383,7 @@ export default async function PrefectureShopsPage({
                 <ul className="space-y-2">
                   {prefSpots.map((spot) => (
                     <li key={spot.slug}>
-                      <Link
+                      <Link prefetch={false}
                         href={`/spots/${spot.slug}`}
                         className="flex items-center gap-2 rounded-md px-2 py-1.5 text-sm transition-colors hover:bg-muted"
                       >
@@ -394,7 +394,7 @@ export default async function PrefectureShopsPage({
                     </li>
                   ))}
                 </ul>
-                <Link
+                <Link prefetch={false}
                   href={`/prefecture/${prefecture}`}
                   className="mt-3 flex items-center justify-center gap-1 rounded-md border px-3 py-2 text-sm font-medium transition-colors hover:bg-muted"
                 >
@@ -414,7 +414,7 @@ export default async function PrefectureShopsPage({
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <Link
+              <Link prefetch={false}
                 href={`/monthly/${currentMonthSlug}`}
                 className="flex items-center justify-center gap-1 rounded-md border px-3 py-2 text-sm font-medium transition-colors hover:bg-muted"
               >
@@ -444,7 +444,7 @@ export default async function PrefectureShopsPage({
                     ).length;
                     return (
                       <li key={ap.slug}>
-                        <Link
+                        <Link prefetch={false}
                           href={`/shops/area/${ap.slug}`}
                           className="flex items-center justify-between rounded-md px-2 py-1.5 text-sm transition-colors hover:bg-muted"
                         >
@@ -479,7 +479,7 @@ export default async function PrefectureShopsPage({
                         s.slug !== "sample-basic"
                     ).length;
                     return (
-                      <Link
+                      <Link prefetch={false}
                         key={sp.slug}
                         href={`/shops/area/${sp.slug}`}
                         className="rounded-full border px-3 py-1.5 text-xs font-medium transition-colors hover:bg-muted"
