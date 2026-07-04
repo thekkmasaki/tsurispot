@@ -21,6 +21,17 @@ const FISH_GRADIENTS = {
   brackish: "from-teal-50 to-cyan-100",
 } as const;
 
+// プレースホルダー用グラデーション: ブランドパレット3系統に集約
+// （明度は 淡→中→深 のスイープで統一し、多色グラデによる配色のばらつきを排除）
+const PLACEHOLDER_GRADIENTS = {
+  // 海系（漁港・堤防・桟橋・運河）
+  ocean: "from-ocean-mid to-ocean-deep",
+  // 淡水・緑系（河川・湖・管理釣り場・河口）
+  foam: "from-sea-foam via-ocean-mid to-ocean-deep",
+  // 砂浜・磯系
+  sand: "from-sand-light via-driftwood to-ocean-deep",
+} as const;
+
 // スポットタイプ別のデザイン設定
 const SPOT_TYPE_STYLES: Record<
   string,
@@ -33,74 +44,74 @@ const SPOT_TYPE_STYLES: Record<
   }
 > = {
   port: {
-    gradient: "from-sky-400 via-blue-500 to-indigo-600",
+    gradient: PLACEHOLDER_GRADIENTS.ocean,
     icon: Anchor,
     iconColor: "text-white/30",
     pattern: "text-white/[0.06]",
-    accentColor: "bg-sky-300/20",
+    accentColor: "bg-sea-foam/20",
   },
   breakwater: {
-    gradient: "from-slate-400 via-blue-500 to-sky-600",
+    gradient: PLACEHOLDER_GRADIENTS.ocean,
     icon: Building2,
     iconColor: "text-white/30",
     pattern: "text-white/[0.06]",
-    accentColor: "bg-blue-300/20",
+    accentColor: "bg-sea-foam/20",
   },
   beach: {
-    gradient: "from-amber-300 via-orange-400 to-sky-500",
+    gradient: PLACEHOLDER_GRADIENTS.sand,
     icon: Waves,
     iconColor: "text-white/30",
     pattern: "text-white/[0.06]",
-    accentColor: "bg-amber-200/20",
+    accentColor: "bg-sunset-gold/20",
   },
   rocky: {
-    gradient: "from-stone-500 via-slate-600 to-blue-700",
+    gradient: PLACEHOLDER_GRADIENTS.sand,
     icon: Mountain,
     iconColor: "text-white/30",
     pattern: "text-white/[0.06]",
-    accentColor: "bg-stone-300/20",
+    accentColor: "bg-sunset-gold/20",
   },
   river: {
-    gradient: "from-emerald-400 via-teal-500 to-cyan-600",
+    gradient: PLACEHOLDER_GRADIENTS.foam,
     icon: Droplets,
     iconColor: "text-white/30",
     pattern: "text-white/[0.06]",
-    accentColor: "bg-emerald-300/20",
+    accentColor: "bg-sea-foam/25",
   },
   lake: {
-    gradient: "from-teal-400 via-cyan-500 to-blue-600",
+    gradient: PLACEHOLDER_GRADIENTS.foam,
     icon: Waves,
     iconColor: "text-white/30",
     pattern: "text-white/[0.06]",
-    accentColor: "bg-teal-300/20",
+    accentColor: "bg-sea-foam/25",
   },
   managed: {
-    gradient: "from-green-400 via-emerald-500 to-teal-600",
+    gradient: PLACEHOLDER_GRADIENTS.foam,
     icon: TreePine,
     iconColor: "text-white/30",
     pattern: "text-white/[0.06]",
-    accentColor: "bg-green-300/20",
+    accentColor: "bg-sea-foam/25",
   },
   pier: {
-    gradient: "from-blue-400 via-indigo-500 to-violet-600",
+    gradient: PLACEHOLDER_GRADIENTS.ocean,
     icon: Ship,
     iconColor: "text-white/30",
     pattern: "text-white/[0.06]",
-    accentColor: "bg-indigo-300/20",
+    accentColor: "bg-sea-foam/20",
   },
   canal: {
-    gradient: "from-cyan-400 via-sky-500 to-blue-600",
+    gradient: PLACEHOLDER_GRADIENTS.ocean,
     icon: Route,
     iconColor: "text-white/30",
     pattern: "text-white/[0.06]",
-    accentColor: "bg-cyan-300/20",
+    accentColor: "bg-sea-foam/20",
   },
   estuary: {
-    gradient: "from-teal-400 via-emerald-500 to-sky-600",
+    gradient: PLACEHOLDER_GRADIENTS.foam,
     icon: Droplets,
     iconColor: "text-white/30",
     pattern: "text-white/[0.06]",
-    accentColor: "bg-teal-300/20",
+    accentColor: "bg-sea-foam/25",
   },
 };
 
@@ -149,6 +160,8 @@ export function SpotImage({ src, alt, spotType = "port", className = "", height 
 
   return (
     <div
+      role="img"
+      aria-label={descriptiveAlt}
       className={`relative ${height} overflow-hidden bg-gradient-to-br ${style.gradient} ${className}`}
       style={aspectStyle}
     >
@@ -176,14 +189,11 @@ export function SpotImage({ src, alt, spotType = "port", className = "", height 
         className={`absolute -bottom-6 -left-6 size-24 rounded-full ${style.accentColor} blur-xl`}
       />
 
-      {/* メインコンテンツ */}
+      {/* メインコンテンツ（スポット名はカードタイトルと重複するため表示しない） */}
       <div className="relative flex h-full flex-col items-center justify-center gap-2">
         <div className="rounded-full bg-white/20 p-3 shadow-lg backdrop-blur-sm">
           <IconComponent className="size-8 text-white/90" />
         </div>
-        <span className="max-w-[85%] truncate text-center text-sm font-semibold tracking-wide text-white/90 drop-shadow-sm">
-          {descriptiveAlt}
-        </span>
       </div>
     </div>
   );

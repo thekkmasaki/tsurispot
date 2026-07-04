@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Fish } from "lucide-react";
 import { getFishSpeciesForList } from "@/lib/data";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { PageHeader } from "@/components/ui/page-header";
 import { FishListClient } from "@/components/fish/fish-list-client";
 import { InArticleAd, NativeAdBreak } from "@/components/ads/ad-unit";
 
@@ -118,19 +119,16 @@ function FishListContent() {
         ]}
       />
       {/* ページヘッダー */}
-      <div className="mb-8">
-        <div className="mb-2 flex items-center gap-2">
+      <PageHeader
+        className="mb-8"
+        icon={
           <div className="flex size-10 items-center justify-center rounded-lg bg-sky-100">
             <Fish className="size-5 text-sky-600" />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-balance sm:text-3xl">
-            魚種図鑑
-          </h1>
-        </div>
-        <p className="text-sm text-muted-foreground">
-          釣りで狙える魚{fishSpecies.length}種を図鑑形式で紹介。名前・難易度・旬でかんたん絞り込み。
-        </p>
-      </div>
+        }
+        title="魚種図鑑"
+        lead={`釣りで狙える魚${fishSpecies.length}種を図鑑形式で紹介。名前・難易度・旬でかんたん絞り込み。`}
+      />
 
       {/* 初心者向けメッセージ */}
       <div className="mb-6 rounded-xl bg-blue-50 p-4">

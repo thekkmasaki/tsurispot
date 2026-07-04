@@ -88,7 +88,7 @@ export function SpotMapList({
                   {DIFFICULTY_LABELS[spot.difficulty]}
                 </Badge>
                 {spot.isFree && (
-                  <Badge className="bg-emerald-100 text-emerald-700 hover:bg-emerald-100 text-[10px]">
+                  <Badge variant="free" className="text-[10px]">
                     無料
                   </Badge>
                 )}

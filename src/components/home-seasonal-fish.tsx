@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { FishImage } from "@/components/ui/spot-image";
+import { SectionHeading } from "@/components/ui/section-heading";
 
 interface SeasonalFish {
   id: string;
@@ -70,7 +71,7 @@ export function HomeSeasonalFish({ currentMonth, fish }: HomeSeasonalFishProps) 
     return (
       <section className="bg-muted/50 py-8 sm:py-12">
         <div className="mx-auto max-w-5xl px-4 text-center sm:px-6">
-          <h2 className="text-xl font-bold tracking-tight sm:text-3xl">今月釣れる魚</h2>
+          <h2 className="font-display text-xl font-bold tracking-tight sm:text-2xl">今月釣れる魚</h2>
           <p className="mt-2 text-sm text-muted-foreground">データの読み込みに失敗しました</p>
           <Link prefetch={false} href="/fish" className="mt-4 inline-block">
             <Button variant="outline" className="min-h-[44px] gap-1">
@@ -89,14 +90,10 @@ export function HomeSeasonalFish({ currentMonth, fish }: HomeSeasonalFishProps) 
     <section className="bg-muted/50 py-8 sm:py-12">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <div className="mb-4 flex items-end justify-between sm:mb-6">
-          <div>
-            <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
-              {currentMonth}月に釣れる魚
-            </h2>
-            <p className="mt-1 text-sm text-muted-foreground">
-              {safeFiltered.length}種類
-            </p>
-          </div>
+          <SectionHeading
+            title={`${currentMonth}月に釣れる魚`}
+            subtitle={`${safeFiltered.length}種類`}
+          />
           <Link prefetch={false}
             href="/fish"
             className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"

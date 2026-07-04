@@ -20,7 +20,7 @@ export function Footer() {
               <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-white/10">
                 <Fish className="h-4 w-4 text-sea-foam" aria-hidden="true" />
               </div>
-              <span className="font-bold text-white font-[family-name:var(--font-zen-maru)]">ツリスポ</span>
+              <span className="font-bold text-white font-display">ツリスポ</span>
             </Link>
             <p className="mt-2 text-sm text-blue-100/90">
               みんなが使いやすい

@@ -421,7 +421,10 @@ export function InFeedAd({ className = "" }: { className?: string }) {
 }
 
 // ---- モバイル固定フッター広告（kabutan.jp式、MobileNav上部に固定） ----
-export function MobileStickyAd() {
+// suspended: 下部一時UI（Cookie/比較/位置情報/PWA）表示中の一時非表示（bottom-layer.tsx で調停）。
+// dismissed と異なり、一時UIが消えれば自動復帰する。unmount ではなく hidden クラスで隠すことで
+// 読み込み済み広告を保持し、AdSense の再リクエスト（push 重複）を発生させない。
+export function MobileStickyAd({ suspended = false }: { suspended?: boolean }) {
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -434,9 +437,9 @@ export function MobileStickyAd() {
   }, []);
 
   // 表示中はページ末尾が固定広告の裏に隠れないよう、広告の実高さ分だけ body 下部に余白を確保する。
-  // dismiss / unmount 時はクリーンアップで必ず解除する。
+  // dismiss / suspend / unmount 時はクリーンアップで必ず解除する。
   useEffect(() => {
-    if (!visible || dismissed) return;
+    if (!visible || dismissed || suspended) return;
     const el = containerRef.current;
     if (!el) return;
     const applyPadding = () => {
@@ -450,14 +453,17 @@ export function MobileStickyAd() {
       ro.disconnect();
       document.body.style.paddingBottom = "";
     };
-  }, [visible, dismissed]);
+  }, [visible, dismissed, suspended]);
 
   if (!ADSENSE_ID || dismissed || !visible) return null;
 
   return (
+    // suspend はインラインstyleではなく hidden クラスで行う
+    // （smart-mobile-ad.tsx の MutationObserver が style*="display: none" を未充足広告の
+    //   自動折りたたみと誤検知して恒久 dismiss してしまうのを防ぐため）
     <div
       ref={containerRef}
-      className="fixed bottom-[calc(60px+env(safe-area-inset-bottom,0px))] left-0 right-0 z-40 md:hidden border-t border-border/30 bg-background/95 backdrop-blur-sm"
+      className={`fixed bottom-[calc(60px+env(safe-area-inset-bottom,0px))] left-0 right-0 z-40 md:hidden border-t border-border/30 bg-background/95 backdrop-blur-sm${suspended ? " hidden" : ""}`}
     >
       {/* 下部アンカーの固定広告が読み込み後に高さ拡張すると内容が上方向にシフトし
           CLS 0.2の主因になっていた。サイズ固定+クリップ枠で拡張を物理的に遮断。

@@ -14,13 +14,13 @@ interface SearchResult {
   sub: string;
 }
 
-// --- カテゴリ表示設定 ---
+// --- カテゴリ表示設定（色はブランドパレット5系統: forest-green/ocean-mid/sunset-coral/sea-foam/sunset-gold） ---
 const CATEGORY_CONFIG: Record<SearchItemType, { label: string; icon: string; color: string; bgColor: string }> = {
-  fish:  { label: "魚種",          icon: "fish",     color: "text-green-600", bgColor: "bg-green-100" },
-  spot:  { label: "スポット",      icon: "mappin",   color: "text-blue-600",  bgColor: "bg-blue-100" },
-  guide: { label: "ガイド・釣り方", icon: "bookopen", color: "text-orange-600", bgColor: "bg-orange-100" },
-  blog:  { label: "コラム",        icon: "filetext", color: "text-purple-600", bgColor: "bg-purple-100" },
-  tool:  { label: "便利ツール",    icon: "wrench",   color: "text-rose-600",  bgColor: "bg-rose-100" },
+  fish:  { label: "魚種",          icon: "fish",     color: "text-[oklch(0.40_0.12_150)]", bgColor: "bg-forest-green/15" },
+  spot:  { label: "スポット",      icon: "mappin",   color: "text-ocean-mid",              bgColor: "bg-ocean-mid/10" },
+  guide: { label: "ガイド・釣り方", icon: "bookopen", color: "text-[oklch(0.50_0.16_25)]",  bgColor: "bg-sunset-coral/15" },
+  blog:  { label: "コラム",        icon: "filetext", color: "text-[oklch(0.45_0.10_175)]", bgColor: "bg-sea-foam/25" },
+  tool:  { label: "便利ツール",    icon: "wrench",   color: "text-[oklch(0.50_0.10_70)]",  bgColor: "bg-sunset-gold/25" },
 };
 
 // カテゴリの表示順序

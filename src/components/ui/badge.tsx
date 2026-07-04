@@ -18,9 +18,22 @@ const badgeVariants = cva(
           "border-border text-foreground [a&]:hover:bg-sand-light [a&]:hover:text-foreground",
         ghost: "[a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
         link: "text-primary underline-offset-4 [a&]:hover:underline",
-        beginner: "bg-forest-green/15 text-forest-green border-forest-green/25",
+        // 意味バリアント: 淡色bg＋濃色文字（AA準拠）。ブランドトークン同系の境界線を持つ
+        beginner:
+          "bg-forest-green/15 text-[oklch(0.35_0.10_150)] border-forest-green/30",
         free: "bg-sunset-coral/10 text-[oklch(0.45_0.16_25)] border-sunset-coral/25",
-        season: "bg-sunset-gold/15 text-driftwood border-sunset-gold/30",
+        season:
+          "bg-sunset-gold/20 text-[oklch(0.50_0.10_70)] border-sunset-gold/40",
+        // premium: 高級魚等のゴールド系（seasonと同系トーン、意味だけ分離）
+        premium:
+          "bg-sunset-gold/20 text-[oklch(0.50_0.10_70)] border-sunset-gold/40",
+        // 状態系: 安全/注意/危険（safety-warning・難易度・○×表示で共用）
+        success:
+          "bg-forest-green/15 text-[oklch(0.35_0.10_150)] border-forest-green/30",
+        warning:
+          "bg-sunset-gold/20 text-[oklch(0.50_0.10_70)] border-sunset-gold/40",
+        danger:
+          "bg-destructive/10 text-[oklch(0.45_0.20_27)] border-destructive/25",
       },
     },
     defaultVariants: {
