@@ -611,47 +611,41 @@ export default async function SpotDetailPage({ params }: PageProps) {
         ]}
       />
 
-      {/* PC ヘッダー下リーダーボード広告 (above-fold, lg:1024px+ のみ表示。 mobile は MobileStickyAd で対応するためスキップ) */}
-      <HeaderBannerAd />
-
-      {/* PR-INV-1: 投稿動線強化 - 上部に釣果投稿 CTA */}
-      <a
-        href="#catch-report"
-        className="my-3 inline-flex w-full items-center justify-between rounded-lg border-2 border-primary/30 bg-primary/5 px-4 py-2.5 text-sm font-medium text-primary transition-colors hover:bg-primary/10 sm:w-auto"
-      >
-        <span>釣果を投稿する (ログイン不要)</span>
-        <span className="ml-3 text-xs text-muted-foreground">↓ 報告セクションへ</span>
-      </a>
-
-      {/* Back link */}
-      <Link prefetch={false}
-        href="/spots"
-        className="mb-4 inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground min-h-[44px]"
-      >
-        <ChevronLeft className="size-4" />
-        スポット一覧に戻る
-      </Link>
-
-      {/* Header section - モバイルファースト設計 */}
+      {/* Phase3a ヒーローユニット: 「場所の顔 → 何が釣れるか」の順で第一印象を作る */}
       <div className="mb-5 sm:mb-6">
-        {/* スポット名 + お気に入り（最上段） */}
+        {/* メイン写真（あれば場所の顔として最上部に表示） */}
+        {isDisplayableSpotImage(spot.mainImageUrl) && (
+          <div className="mb-4 overflow-hidden rounded-2xl shadow-sm">
+            <SpotImage
+              src={spot.mainImageUrl}
+              alt={`${spot.name}のメイン写真`}
+              spotType={spot.spotType}
+              height="h-56 sm:h-72 lg:h-96"
+              priority
+              sizes="(max-width: 1024px) 100vw, 1152px"
+            />
+          </div>
+        )}
+
+        {/* スポット名 + お気に入り（最上段）。H1 はスポット名のみ（SEO文字列はサブタイトルへ分離） */}
         <div className="flex items-start justify-between gap-3">
           <h1 className="min-w-0 font-display text-xl font-bold leading-tight text-pretty sm:text-2xl md:text-3xl">
             {spot.name}
-            {/* SEO-1: H1 にキーワード追加 (検索意図キーワードを補足、 視覚的にも文脈が伝わる) */}
-            {spot.catchableFish.length > 0 && (
-              <span className="ml-2 text-sm font-medium text-muted-foreground sm:text-base">
-                — {spot.catchableFish.slice(0, 2).map((cf) => cf.fish.name).join("・")}
-                {spot.catchableFish[0]?.method && ` が ${spot.catchableFish[0].method} で釣れる`}
-                {SPOT_TYPE_LABELS[spot.spotType]}
-              </span>
-            )}
           </h1>
           <div className="flex shrink-0 items-center gap-2">
             <WishlistButton slug={spot.slug} />
             <FavoriteButton spotSlug={spot.slug} />
           </div>
         </div>
+
+        {/* サブタイトル: 検索意図キーワード（旧H1抱合せ文字列）を p に分離して可読性を維持 */}
+        {spot.catchableFish.length > 0 && (
+          <p className="mt-1 text-sm font-medium text-muted-foreground sm:text-base">
+            {spot.catchableFish.slice(0, 2).map((cf) => cf.fish.name).join("・")}
+            {spot.catchableFish[0]?.method && ` が ${spot.catchableFish[0].method} で釣れる`}
+            {SPOT_TYPE_LABELS[spot.spotType]}
+          </p>
+        )}
 
         {/* 釣行記録ボタン（プライベート、ログイン時のみ表示） */}
         <div className="mt-2">
@@ -757,7 +751,33 @@ export default async function SpotDetailPage({ params }: PageProps) {
             釣れる魚 {spot.catchableFish.length}種類
           </span>
         </div>
+      </div>
 
+      {/* シーズンカレンダー（常時表示）: 「何がいつ釣れるか」をヒーロー直下で即提示 */}
+      {spot.catchableFish.length > 0 && (
+        <section className="mb-4">
+          <h2 className="mb-3 flex items-center gap-2 text-lg font-bold sm:text-xl">
+            <Fish className="size-5 text-ocean-mid" />
+            {spot.name}で釣れる魚の季節カレンダー
+          </h2>
+          <Card className="py-3 sm:py-4"><CardContent className="px-3 sm:px-4 overflow-x-auto scrollbar-hide"><div className="min-w-[480px]"><SeasonCalendar catchableFish={spot.catchableFish} /></div></CardContent></Card>
+        </section>
+      )}
+
+      {/* PR-INV-1: 投稿動線強化 - 釣果投稿 CTA（ヒーロー直下へ移動） */}
+      <a
+        href="#catch-report"
+        className="my-3 inline-flex w-full items-center justify-between rounded-lg border-2 border-primary/30 bg-primary/5 px-4 py-2.5 text-sm font-medium text-primary transition-colors hover:bg-primary/10 sm:w-auto"
+      >
+        <span>釣果を投稿する (ログイン不要)</span>
+        <span className="ml-3 text-xs text-muted-foreground">↓ 報告セクションへ</span>
+      </a>
+
+      {/* PC リーダーボード広告 (above-fold, lg:1024px+ のみ表示。 mobile は MobileStickyAd で対応するためスキップ。
+          枠数不変のままヒーロー直下へ位置調整) */}
+      <HeaderBannerAd />
+
+      <div className="mb-5 sm:mb-6">
         {/* 「今日行く」ボタン + ナビゲーション */}
         <div className="mt-4 rounded-xl border bg-muted/30 p-3 sm:p-4">
           <GoTodayButton slug={spot.slug} spotName={spot.name} />
@@ -793,9 +813,20 @@ export default async function SpotDetailPage({ params }: PageProps) {
             title={`${spot.name}の釣り情報｜ツリスポ`}
           />
         </div>
+
+        {/* Back link */}
+        <div className="mt-2">
+          <Link prefetch={false}
+            href="/spots"
+            className="inline-flex items-center gap-1 py-2 text-sm text-muted-foreground hover:text-foreground min-h-[44px]"
+          >
+            <ChevronLeft className="size-4" />
+            スポット一覧に戻る
+          </Link>
+        </div>
       </div>
 
-      {/* ATF広告: ヒーロー直後 */}
+      {/* ATF広告: ヒーローユニット＋シーズンカレンダーの直後（枠数不変） */}
       <DisplayAd className="mt-4" />
 
       {/* スポット写真ギャラリー（航空写真マップ or ユーザー投稿写真） */}
@@ -902,38 +933,24 @@ export default async function SpotDetailPage({ params }: PageProps) {
       <div className="lg:grid lg:grid-cols-[1fr_320px] lg:gap-8">
       {/* メインコンテンツ */}
       <div className="min-w-0">
-      {/* スポット画像ギャラリー: mainImageUrl をヘッダー、images 配列をサブ画像で表示 */}
-      {(spot.mainImageUrl || (spot.images && spot.images.length > 0)) && (() => {
-        const main = isDisplayableSpotImage(spot.mainImageUrl) ? spot.mainImageUrl : undefined;
+      {/* スポット画像ギャラリー: mainImageUrl はヒーローユニットへ移動済み。 images 配列のサブ画像のみ表示 */}
+      {spot.images && spot.images.length > 0 && (() => {
         const subs = (spot.images ?? []).filter(isDisplayableSpotImage);
+        if (subs.length === 0) return null;
         return (
           <section className="mb-6">
-            {main && (
-              <div className="overflow-hidden rounded-2xl shadow-sm">
-                <SpotImage
-                  src={main}
-                  alt={`${spot.name}のメイン写真`}
-                  spotType={spot.spotType}
-                  height="h-56 sm:h-72 lg:h-96"
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 800px"
-                />
-              </div>
-            )}
-            {subs.length > 0 && (
-              <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
-                {subs.slice(0, 8).map((img, i) => (
-                  <div key={img} className="overflow-hidden rounded-lg">
-                    <SpotImage
-                      src={img}
-                      alt={`${spot.name}の写真 ${i + 1}`}
-                      spotType={spot.spotType}
-                      height="h-24 sm:h-28 lg:h-32"
-                    />
-                  </div>
-                ))}
-              </div>
-            )}
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
+              {subs.slice(0, 8).map((img, i) => (
+                <div key={img} className="overflow-hidden rounded-lg">
+                  <SpotImage
+                    src={img}
+                    alt={`${spot.name}の写真 ${i + 1}`}
+                    spotType={spot.spotType}
+                    height="h-24 sm:h-28 lg:h-32"
+                  />
+                </div>
+              ))}
+            </div>
           </section>
         );
       })()}
@@ -1158,12 +1175,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
         </>}
         fishTab={<>
           <h2 className="sr-only">{spot.name}の釣り情報</h2>
-          <section>
-            <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><Fish className="size-5" />{spot.name}で釣れる魚の季節カレンダー</h3>
-            {spot.catchableFish.length > 0 ? (
-              <Card className="py-3 sm:py-4"><CardContent className="px-3 sm:px-4 overflow-x-auto scrollbar-hide"><div className="min-w-[480px]"><SeasonCalendar catchableFish={spot.catchableFish} /></div></CardContent></Card>
-            ) : (<p className="text-sm text-muted-foreground">釣れる魚の情報はまだ登録されていません。</p>)}
-          </section>
+          {/* 季節カレンダーはヒーロー直下の常時表示セクションへ移動済み（タブ内の重複を排除） */}
+          {spot.catchableFish.length === 0 && (
+            <p className="text-sm text-muted-foreground">釣れる魚の情報はまだ登録されていません。</p>
+          )}
           {spot.catchableFish.length > 0 && (
             <section>
               <h3 className="mb-3 text-lg font-bold">魚種別の釣り方</h3>
@@ -2066,12 +2081,26 @@ export default async function SpotDetailPage({ params }: PageProps) {
             </CardContent>
           </Card>
 
-          {/* シーズンカレンダーミニ */}
-          {spot.catchableFish.length > 0 && (
+          {/* 今月釣れる魚サマリー（カレンダー本体はヒーロー直下に常時表示のため重複させない） */}
+          {currentMonthFish.length > 0 && (
             <Card className="gap-0 py-0">
               <CardContent className="p-4">
-                <h3 className="mb-2 text-sm font-bold font-display">シーズンカレンダー</h3>
-                <SeasonCalendar catchableFish={spot.catchableFish.slice(0, 5)} />
+                <h3 className="mb-2 text-sm font-bold font-display">{monthNames[currentMonth]}に釣れる魚</h3>
+                <div className="flex flex-wrap gap-1.5">
+                  {(() => {
+                    const seen = new Set<string>();
+                    return currentMonthFish
+                      .filter((cf) => { if (seen.has(cf.fish.slug)) return false; seen.add(cf.fish.slug); return true; })
+                      .slice(0, 8)
+                      .map((cf) => (
+                        <Link prefetch={false} key={cf.fish.slug} href={`/fish/${cf.fish.slug}`}>
+                          <Badge variant="outline" className="cursor-pointer text-xs transition-colors hover:bg-primary hover:text-primary-foreground">
+                            {cf.fish.name}
+                          </Badge>
+                        </Link>
+                      ));
+                  })()}
+                </div>
               </CardContent>
             </Card>
           )}

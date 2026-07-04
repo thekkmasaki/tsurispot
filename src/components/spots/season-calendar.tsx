@@ -64,15 +64,16 @@ export function SeasonCalendar({
                       // 最初と最後のセルのみ角丸
                       m === 1 && "rounded-l-md",
                       m === 12 && "rounded-r-md",
+                      // ブランドトークン3段階: ハイシーズン=ocean-mid / シーズン=ocean-mid/25 / オフ=muted
                       isPeak
-                        ? "bg-sky-500"
+                        ? "bg-ocean-mid"
                         : inSeason
-                          ? "bg-sky-200"
-                          : "bg-slate-100",
+                          ? "bg-ocean-mid/25"
+                          : "bg-muted",
                     )}
                   >
                     {isCurrent && (
-                      <div className="absolute inset-x-0 bottom-0 h-[3px] rounded-full bg-amber-400" />
+                      <div className="absolute inset-x-0 bottom-0 h-[3px] rounded-full bg-sunset-gold" />
                     )}
                   </div>
                 );
@@ -86,22 +87,22 @@ export function SeasonCalendar({
       <div className="flex items-center">
         <div className="w-[4.5rem] shrink-0 sm:w-20" />
         <p className="text-[10px] text-muted-foreground sm:text-xs">
-          <span className="mr-0.5 inline-block h-[3px] w-3 rounded-full bg-amber-400 align-middle" /> 今月
+          <span className="mr-0.5 inline-block h-[3px] w-3 rounded-full bg-sunset-gold align-middle" /> 今月
         </p>
       </div>
 
       {/* Legend */}
       <div className="flex items-center gap-4 pt-1 text-[11px] text-muted-foreground sm:text-xs">
         <div className="flex items-center gap-1.5">
-          <div className="h-3.5 w-5 rounded-sm bg-sky-500" />
+          <div className="h-3.5 w-5 rounded-sm bg-ocean-mid" />
           <span>ハイシーズン</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <div className="h-3.5 w-5 rounded-sm bg-sky-200" />
+          <div className="h-3.5 w-5 rounded-sm bg-ocean-mid/25" />
           <span>シーズン</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <div className="h-3.5 w-5 rounded-sm bg-slate-100" />
+          <div className="h-3.5 w-5 rounded-sm bg-muted" />
           <span>オフ</span>
         </div>
       </div>

@@ -67,16 +67,18 @@ export function SpotDetailTabs({
         ))}
       </TabsList>
 
-      <TabsContent value="overview" className="mt-4 space-y-6 sm:space-y-8">
+      {/* SEO: forceMount で全タブ内容を初期HTMLに含め、非活性タブは CSS で隠す
+          （ui/tabs.tsx は props 透過なのでスポット詳細のタブにのみ適用される） */}
+      <TabsContent value="overview" forceMount className="mt-4 space-y-6 data-[state=inactive]:hidden sm:space-y-8">
         {overviewTab}
       </TabsContent>
-      <TabsContent value="fish" className="mt-4 space-y-6 sm:space-y-8">
+      <TabsContent value="fish" forceMount className="mt-4 space-y-6 data-[state=inactive]:hidden sm:space-y-8">
         {fishTab}
       </TabsContent>
-      <TabsContent value="gear" className="mt-4 space-y-6 sm:space-y-8">
+      <TabsContent value="gear" forceMount className="mt-4 space-y-6 data-[state=inactive]:hidden sm:space-y-8">
         {gearTab}
       </TabsContent>
-      <TabsContent value="access" className="mt-4 space-y-6 sm:space-y-8">
+      <TabsContent value="access" forceMount className="mt-4 space-y-6 data-[state=inactive]:hidden sm:space-y-8">
         {accessTab}
       </TabsContent>
     </Tabs>
