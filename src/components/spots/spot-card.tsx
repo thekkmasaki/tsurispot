@@ -64,7 +64,7 @@ export function SpotCard({ spot, distance, priority = false }: { spot: ListSpot;
           {/* Fish badges */}
           <div className="flex flex-wrap gap-1">
             {displayFish.map((name) => (
-              <Badge key={name} variant="secondary" className="text-xs bg-sea-foam/20 text-ocean-deep border-sea-foam/30">
+              <Badge key={name} variant="secondary" className="text-xs">
                 {name}
               </Badge>
             ))}
@@ -84,18 +84,18 @@ export function SpotCard({ spot, distance, priority = false }: { spot: ListSpot;
           {/* Badges and facilities */}
           <div className="flex flex-wrap items-center gap-1.5">
             {spot.hasPremiumFish && (
-              <Badge className="bg-amber-100 text-amber-900 text-xs hover:bg-amber-100">
+              <Badge variant="premium" className="text-xs">
                 <Crown className="mr-0.5 size-3" />
                 高級魚
               </Badge>
             )}
             {spot.difficulty === "beginner" && (
-              <Badge className="bg-green-100 text-green-800 text-xs hover:bg-green-100">
+              <Badge variant="beginner" className="text-xs">
                 初心者OK
               </Badge>
             )}
             {spot.isFree && (
-              <Badge className="bg-orange-100 text-orange-800 text-xs hover:bg-orange-100">
+              <Badge variant="free" className="text-xs">
                 無料
               </Badge>
             )}

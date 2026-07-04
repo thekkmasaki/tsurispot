@@ -3,7 +3,6 @@ import { ExternalLink, BookOpen, Fish, RefreshCw, Cable, Anchor, Lightbulb, Stor
 import { GearGuide as GearGuideType, DIFFICULTY_LABELS } from "@/types";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 import { explainGearSpec, generateShopAdvice } from "@/lib/fishing-term-helper";
 
 // 釣り方名 → 解説ページスラッグのマッピング
@@ -99,11 +98,12 @@ function addPeEquivalent(lineText: string): string {
   return `${lineText}（${pe}相当）`;
 }
 
-const difficultyColors = {
-  beginner: "bg-emerald-100 text-emerald-700 hover:bg-emerald-100",
-  intermediate: "bg-amber-100 text-amber-700 hover:bg-amber-100",
-  advanced: "bg-red-100 text-red-700 hover:bg-red-100",
-};
+// 難易度 → Badge意味バリアント（beginner=緑 / warning=金 / danger=赤）
+const difficultyVariants = {
+  beginner: "beginner",
+  intermediate: "warning",
+  advanced: "danger",
+} as const;
 
 function GearRow({ label, value, icon, affiliateUrl, affiliateLabel }: { label: string; value: string; icon: React.ReactNode; affiliateUrl?: string; affiliateLabel?: string }) {
   return (
@@ -150,7 +150,7 @@ export function GearGuideCard({ guide }: { guide: GearGuideType }) {
                 やり方を見る
               </Link>
             )}
-            <Badge className={cn("text-xs", difficultyColors[guide.difficulty])}>
+            <Badge variant={difficultyVariants[guide.difficulty]} className="text-xs">
               {DIFFICULTY_LABELS[guide.difficulty]}
             </Badge>
           </div>
