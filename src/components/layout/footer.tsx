@@ -126,6 +126,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-blue-100/90">
               <li><Link href="/about" prefetch={false} className="hover:text-white">ツリスポについて</Link></li>
               <li><Link href="/technology" prefetch={false} className="hover:text-white">AI解析技術（特許出願中）</Link></li>
+              <li><Link href="/umigyo" prefetch={false} className="hover:text-white">海業推進の取り組み</Link></li>
               <li><Link href="/partner" prefetch={false} className="hover:text-white">事業者様向け（掲載案内）</Link></li>
               <li><Link href="/privacy" prefetch={false} className="hover:text-white">プライバシーポリシー</Link></li>
               <li><Link href="/terms" prefetch={false} className="hover:text-white">利用規約</Link></li>

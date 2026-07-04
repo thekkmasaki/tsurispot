@@ -22,7 +22,6 @@ import {
   FileText,
   Anchor,
   Store,
-  ClipboardCheck,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SearchOverlayClient } from "./search-overlay-client";
@@ -31,29 +30,45 @@ import { UserMenu } from "./user-menu";
 // メインナビ（常時表示：最大6個）
 const mainNavItems = [
   { href: "/spots", label: "スポット", icon: MapPin },
-  { href: "/blog", label: "釣果レポート", icon: FileText },
+  { href: "/blog", label: "釣果週報", icon: FileText },
   { href: "/catchable-now", label: "今釣れる", icon: Fish },
   { href: "/map", label: "地図", icon: Map },
   { href: "/ranking", label: "ランキング", icon: Trophy },
   { href: "/fish", label: "図鑑", icon: BookOpen },
 ];
 
-// ドロップダウン「もっと見る」
-const moreNavItems = [
-  { href: "/methods", label: "釣り方ガイド", icon: Anchor },
-  { href: "/area", label: "エリア一覧", icon: Compass },
-  { href: "/area-guide", label: "エリアガイド記事", icon: MapPin },
-  { href: "/monthly", label: "月別釣りガイド", icon: Calendar },
-  { href: "/guide", label: "釣りガイド", icon: GraduationCap },
-  { href: "/bouzu-checker", label: "ボウズ確率チェッカー", icon: Target },
-  { href: "/shops", label: "釣具店ガイド", icon: Store },
-  { href: "/gear", label: "おすすめ道具", icon: Package },
-  { href: "/fishing-rules", label: "ルールとマナー", icon: Scale },
-  { href: "/quiz", label: "釣りクイズ", icon: Sparkles },
-  { href: "/instructor-exam", label: "インストラクター試験", icon: ClipboardCheck },
-  { href: "/catch-reports", label: "釣行レポート", icon: Fish },
-  { href: "/umigyo", label: "海業推進", icon: Anchor },
+// ドロップダウン「もっと見る」（目的別グループ。海業推進・インストラクター試験はフッターへ移設済み）
+const moreNavGroups = [
+  {
+    heading: "探す",
+    items: [
+      { href: "/area", label: "エリア一覧", icon: Compass },
+      { href: "/area-guide", label: "エリアガイド記事", icon: MapPin },
+      { href: "/shops", label: "釣具店ガイド", icon: Store },
+    ],
+  },
+  {
+    heading: "学ぶ",
+    items: [
+      { href: "/methods", label: "釣り方ガイド", icon: Anchor },
+      { href: "/guide", label: "釣りガイド", icon: GraduationCap },
+      { href: "/monthly", label: "月別釣りガイド", icon: Calendar },
+      { href: "/fishing-rules", label: "ルールとマナー", icon: Scale },
+      { href: "/gear", label: "おすすめ道具", icon: Package },
+    ],
+  },
+  {
+    heading: "楽しむ",
+    items: [
+      { href: "/quiz", label: "釣りクイズ", icon: Sparkles },
+      { href: "/bouzu-checker", label: "ボウズ確率チェッカー", icon: Target },
+      { href: "/catch-reports", label: "みんなの釣果", icon: Fish },
+    ],
+  },
 ];
+
+// アクティブ判定用のフラットリスト
+const moreNavItems = moreNavGroups.flatMap((group) => group.items);
 
 function DropdownMenu() {
   const [open, setOpen] = useState(false);
@@ -89,7 +104,6 @@ function DropdownMenu() {
       <button
         onClick={() => setOpen(!open)}
         aria-expanded={open}
-        aria-haspopup="true"
         aria-label="その他のメニュー"
         className={cn(
           "flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
@@ -108,31 +122,45 @@ function DropdownMenu() {
         />
       </button>
       {open && (
-        <div role="menu" className="absolute right-0 top-full mt-1 w-56 rounded-2xl border bg-white py-2 shadow-xl shadow-ocean-deep/5">
-          {moreNavItems.map((item) => {
-            const isActive =
-              pathname === item.href ||
-              (item.href !== "/" && pathname.startsWith(item.href));
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                prefetch={false}
-                role="menuitem"
-                onClick={() => setOpen(false)}
-                className={cn(
-                  "flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary",
-                  isActive
-                    ? "bg-ocean-mid/5 font-medium text-ocean-mid"
-                    : "text-driftwood hover:bg-sand-light/50 hover:text-foreground"
-                )}
+        <nav
+          aria-label="その他のメニュー"
+          className="absolute right-0 top-full mt-1 w-[26rem] rounded-2xl border bg-white p-2 shadow-xl shadow-ocean-deep/5"
+        >
+          <div className="grid grid-cols-2 gap-x-1">
+            {moreNavGroups.map((group) => (
+              <div
+                key={group.heading}
+                className={cn("py-1", group.heading === "学ぶ" && "row-span-2")}
               >
-                <item.icon className="h-4 w-4" aria-hidden="true" />
-                {item.label}
-              </Link>
-            );
-          })}
-        </div>
+                <p className="px-4 pb-1 pt-2 text-xs font-semibold text-muted-foreground">
+                  {group.heading}
+                </p>
+                {group.items.map((item) => {
+                  const isActive =
+                    pathname === item.href ||
+                    (item.href !== "/" && pathname.startsWith(item.href));
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      prefetch={false}
+                      onClick={() => setOpen(false)}
+                      className={cn(
+                        "flex items-center gap-2.5 rounded-lg px-4 py-2.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary",
+                        isActive
+                          ? "bg-ocean-mid/5 font-medium text-ocean-mid"
+                          : "text-driftwood hover:bg-sand-light/50 hover:text-foreground"
+                      )}
+                    >
+                      <item.icon className="h-4 w-4" aria-hidden="true" />
+                      {item.label}
+                    </Link>
+                  );
+                })}
+              </div>
+            ))}
+          </div>
+        </nav>
       )}
     </div>
   );

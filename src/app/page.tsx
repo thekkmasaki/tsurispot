@@ -8,7 +8,7 @@ import { prefectures } from "@/lib/data/prefectures";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { LoginPromoBanner } from "@/components/home/login-promo-banner";
+// LoginPromoBanner はホームから撤去（登録系バナー3連続の解消。 component 自体は残してある）
 import { JoinCTA } from "@/components/home/join-cta";
 // CommunityStats は数字が小さいうち (釣り人 26 人等) は逆効果なので一時 hide。
 // 数字が育ったら以下 1 行 + 下記 render を復活。 component 自体は残してある。
@@ -26,8 +26,6 @@ import {
   Target,
   Navigation,
   Star,
-  ClipboardCheck,
-  Sparkles,
 } from "lucide-react";
 import nextDynamic from "next/dynamic";
 import { HomeSearchBar } from "@/components/home-search-bar";
@@ -413,225 +411,63 @@ export default async function Home() {
         </div>
       </section>
 
-      {/* Phase 6: Hero 直下 Green Join CTA (community pattern、 登録率改善) */}
-      <JoinCTA />
-
       {/* CommunityStats は数字が育ってから復活 (現状 26人/1件 が逆効果) */}
 
-      {/* ログイン誘導バナー（未ログイン時のみ表示、 features 詳細訴求） */}
-      <LoginPromoBanner />
+      {/* Phase 3b: 登録系バナー3連続（JoinCTA→LoginPromoBanner→Push購読）を解消。
+          JoinCTA は人気TOP10後（価値体験後の登録訴求）、Push購読CTAは週報セクション末尾へ文脈配置、
+          LoginPromoBanner はホームから撤去。 */}
 
-      {/* リテンション施策: Push 購読 CTA を全訪問者に表示（ログイン不要。 /api/push/subscribe は匿名 OK）。
-          LoginPromoBanner は「アカウント登録の価値」、 こちらは「登録不要の通知購読」と訴求を分離し、
-          月 9.6 万人の未ログイン訪問者を再訪チャネル（push:subscriptions）に取り込む。 */}
-      <section className="mx-auto w-full max-w-5xl px-4 py-4">
-        <div className="rounded-2xl border-2 border-sky-200 bg-gradient-to-r from-sky-50 to-cyan-50 p-4 sm:p-5">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h2 className="flex items-center gap-1.5 text-sm font-bold text-sky-900 sm:text-base">
-                <Fish className="size-4 shrink-0" aria-hidden="true" />
-                今週の釣果を見逃さない
-              </h2>
-              <p className="mt-1 text-xs text-sky-700 sm:text-sm">
-                <span className="font-semibold">ログイン不要</span>。 週次の釣果週報・新着スポットをブラウザ通知でお届け。 いつでも解除できます。
-              </p>
-            </div>
-            <PushSubscribe />
-          </div>
-        </div>
-      </section>
-
-      {/* クイックアクション */}
+      {/* ===== ATF層: クイックアクション（検索直下の主要導線。ヒーローCTAと重複するタイルは置かない） ===== */}
+      {/* ヒーローCTAと重複する「今釣れる魚」「初心者ガイド」、フッターにリンク済みの「釣りクイズ」「試験対策」を除去。
+          「地図で探す」と「近くの釣り場」は遷移先が同じ /map になるため1タイルに統合（4タイル=grid 4の倍数）。
+          タイル色は多色→sand-light背景+ocean系アイコンの単一トーンに統一。 */}
       <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
-        <div className="grid grid-cols-4 gap-2 sm:gap-3 lg:grid-cols-8">
+        <div className="grid grid-cols-4 gap-2 sm:gap-3">
+          {/* 近くの釣り場: ヒーローCTAと同じ /map に統一（/fishing-spots/near-me はSEOランディングとして存続） */}
           <Link href="/map" prefetch={false}>
-            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-sky-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
-              <div className="flex size-10 items-center justify-center rounded-full bg-sky-100 sm:size-12">
-                <MapPin className="size-5 text-sky-600 sm:size-6" />
-              </div>
-              <span className="text-center text-[11px] font-medium leading-tight sm:text-xs">
-                地図で探す
-              </span>
-            </div>
-          </Link>
-          <Link href="/catchable-now" prefetch={false}>
-            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-orange-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
-              <div className="flex size-10 items-center justify-center rounded-full bg-orange-100 sm:size-12">
-                <Fish className="size-5 text-orange-600 sm:size-6" />
-              </div>
-              <span className="text-center text-[11px] font-medium leading-tight sm:text-xs">
-                今釣れる魚
-              </span>
-            </div>
-          </Link>
-          <Link href="/fish-finder" prefetch={false}>
-            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-purple-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
-              <div className="flex size-10 items-center justify-center rounded-full bg-purple-100 sm:size-12">
-                <Target className="size-5 text-purple-600 sm:size-6" />
-              </div>
-              <span className="text-center text-[11px] font-medium leading-tight sm:text-xs">
-                釣り場診断
-              </span>
-            </div>
-          </Link>
-          <Link href="/for-beginners" prefetch={false}>
-            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-emerald-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
-              <div className="flex size-10 items-center justify-center rounded-full bg-emerald-100 sm:size-12">
-                <BookOpen className="size-5 text-emerald-600 sm:size-6" />
-              </div>
-              <span className="text-center text-[11px] font-medium leading-tight sm:text-xs">
-                はじめての方
-              </span>
-            </div>
-          </Link>
-          <Link href="/fishing-calendar" prefetch={false}>
-            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-blue-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
-              <div className="flex size-10 items-center justify-center rounded-full bg-blue-100 sm:size-12">
-                <Calendar className="size-5 text-blue-600 sm:size-6" />
-              </div>
-              <span className="text-center text-[11px] font-medium leading-tight sm:text-xs">
-                月別ガイド
-              </span>
-            </div>
-          </Link>
-          <Link href="/fishing-spots/near-me" prefetch={false}>
-            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-amber-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
-              <div className="flex size-10 items-center justify-center rounded-full bg-amber-100 sm:size-12">
-                <Navigation className="size-5 text-amber-600 sm:size-6" />
+            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-sand-light p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
+              <div className="flex size-10 items-center justify-center rounded-full bg-ocean-mid/10 sm:size-12">
+                <Navigation className="size-5 text-ocean-mid sm:size-6" />
               </div>
               <span className="text-center text-[11px] font-medium leading-tight sm:text-xs">
                 近くの釣り場
               </span>
             </div>
           </Link>
-          <Link href="/quiz" prefetch={false}>
-            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-rose-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
-              <div className="flex size-10 items-center justify-center rounded-full bg-rose-100 sm:size-12">
-                <Sparkles className="size-5 text-rose-600 sm:size-6" />
+          <Link href="/fish-finder" prefetch={false}>
+            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-sand-light p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
+              <div className="flex size-10 items-center justify-center rounded-full bg-ocean-mid/10 sm:size-12">
+                <Target className="size-5 text-ocean-mid sm:size-6" />
               </div>
               <span className="text-center text-[11px] font-medium leading-tight sm:text-xs">
-                釣りクイズ
+                釣り場診断
+              </span>
+            </div>
+          </Link>
+          <Link href="/fishing-calendar" prefetch={false}>
+            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-sand-light p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
+              <div className="flex size-10 items-center justify-center rounded-full bg-ocean-mid/10 sm:size-12">
+                <Calendar className="size-5 text-ocean-mid sm:size-6" />
+              </div>
+              <span className="text-center text-[11px] font-medium leading-tight sm:text-xs">
+                月別ガイド
               </span>
             </div>
           </Link>
           <Link href="/ranking/reporters" prefetch={false}>
-            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-amber-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
-              <div className="flex size-10 items-center justify-center rounded-full bg-amber-100 sm:size-12">
-                <Star className="size-5 text-amber-600 sm:size-6" />
+            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-sand-light p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
+              <div className="flex size-10 items-center justify-center rounded-full bg-ocean-mid/10 sm:size-12">
+                <Star className="size-5 text-ocean-mid sm:size-6" />
               </div>
               <span className="text-center text-[11px] font-medium leading-tight sm:text-xs">
                 投稿ランキング
               </span>
             </div>
           </Link>
-          <Link href="/instructor-exam" prefetch={false}>
-            <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-indigo-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
-              <div className="flex size-10 items-center justify-center rounded-full bg-indigo-100 sm:size-12">
-                <ClipboardCheck className="size-5 text-indigo-600 sm:size-6" />
-              </div>
-              <span className="text-center text-[11px] font-medium leading-tight sm:text-xs">
-                試験対策
-              </span>
-            </div>
-          </Link>
         </div>
       </section>
 
-      {/* 最新釣果週報（6件表示） */}
-      {weeklyReports.length > 0 && (
-        <section className="bg-muted/50 py-8 sm:py-12">
-          <div className="mx-auto max-w-5xl px-4 sm:px-6">
-            <div className="mb-6 flex items-end justify-between sm:mb-8">
-              <SectionHeading
-                title="最新釣果週報"
-                subtitle="全国の今週の釣果をエリア別にお届け"
-              />
-              <Link prefetch={false}
-                href="/blog?tag=釣果週報"
-                className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
-              >
-                すべて見る
-                <ArrowRight className="size-4" />
-              </Link>
-            </div>
-
-            {/* モバイル用「すべて見る」リンク — カード一覧の上 */}
-            <div className="mb-4 flex justify-center sm:hidden">
-              <Link prefetch={false} href="/blog?tag=釣果週報">
-                <Button variant="outline" className="min-h-[44px] gap-1">
-                  すべての釣果週報を見る
-                  <ArrowRight className="size-4" />
-                </Button>
-              </Link>
-            </div>
-
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {weeklyReports.map((post) => (
-                <Link prefetch={false} key={post.id} href={`/blog/${post.slug}`}>
-                  <Card className="group h-full overflow-hidden py-0 transition-shadow hover:shadow-md">
-                    <div className="relative h-36 w-full overflow-hidden">
-                      <Image
-                        src={post.image || getFishImage(post.tags, post.id)}
-                        alt={post.title}
-                        fill
-                        className="object-cover transition-transform duration-300 group-hover:scale-105"
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      />
-                    </div>
-                    <CardContent className="flex h-full flex-col gap-2 p-4">
-                      <div className="flex items-center gap-2">
-                        <Badge variant="secondary" className="text-xs">
-                          {BLOG_CATEGORIES[post.category]}
-                        </Badge>
-                        <span className="text-xs text-muted-foreground">
-                          {post.publishedAt}
-                        </span>
-                      </div>
-                      <h3 className="text-sm font-semibold leading-snug group-hover:text-primary sm:text-base">
-                        {post.title}
-                      </h3>
-                      <p className="line-clamp-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
-                        {post.description}
-                      </p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {post.tags.slice(0, 3).map((tag) => (
-                          <span
-                            key={tag}
-                            className="inline-flex items-center gap-0.5 rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground"
-                          >
-                            <Tag className="size-2.5" />
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <div className="flex items-center gap-1 text-sm font-medium text-primary">
-                        続きを読む
-                        <ChevronRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
-                      </div>
-                    </CardContent>
-                  </Card>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
-
-      {/* 広告: 釣果週報後
-          注: ルートが flex flex-col のため、mx-auto だけだと auto マージンが stretch を打ち消し
-          fit-content 幅(実測145px)に収縮 → 広告が availableWidth 不足で配信されない。w-full 必須。 */}
-      <div className="mx-auto w-full max-w-5xl px-4">
-        <ContentDivider variant="line" />
-        <InArticleAd className="my-4" />
-      </div>
-
-      {/* UX-7: 最近見た釣り場 carousel (RecentlyViewedTracker のデータを使用、 spot 詳細を見た user のみ表示) */}
-      <div className="mx-auto w-full max-w-5xl px-4">
-        <RecentlyViewedSpots />
-      </div>
-
-      {/* PR-INV-1: みんなの最近の釣果 mini feed (投稿動線強化) */}
-      <RecentCatchReports />
+      {/* ===== 中盤: 回遊コア（人気TOP10 → 今釣れる魚 → おすすめ釣り場 → エリア） ===== */}
 
       {/* 人気スポットTOP10（近い順ソート対応） */}
       <HomeTop10Client
@@ -655,7 +491,10 @@ export default async function Home() {
           }))}
       />
 
-      {/* 広告（below fold） */}
+      {/* 登録CTA: 人気TOP10で価値を体験した直後に配置（登録率改善） */}
+      <JoinCTA />
+
+      {/* 広告: TOP10・登録CTA後（below fold） */}
       <div className="mx-auto w-full max-w-5xl px-4"><ContentDivider variant="line" /></div>
       <NativeAdBreak />
 
@@ -840,6 +679,127 @@ export default async function Home() {
       {/* 広告: エリアセクション後 */}
       <NativeAdBreak />
 
+      {/* ===== 下部: 週報 → みんなの釣果 → 最近見たスポット → アフィリエイト → 釣り方/知識 ===== */}
+
+      {/* 最新釣果週報（6件表示）＋ Push購読CTA */}
+      {weeklyReports.length > 0 && (
+        <section className="bg-muted/50 py-8 sm:py-12">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6">
+            <div className="mb-6 flex items-end justify-between sm:mb-8">
+              <SectionHeading
+                title="最新釣果週報"
+                subtitle="全国の今週の釣果をエリア別にお届け"
+              />
+              <Link prefetch={false}
+                href="/blog?tag=釣果週報"
+                className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
+              >
+                すべて見る
+                <ArrowRight className="size-4" />
+              </Link>
+            </div>
+
+            {/* モバイル用「すべて見る」リンク — カード一覧の上 */}
+            <div className="mb-4 flex justify-center sm:hidden">
+              <Link prefetch={false} href="/blog?tag=釣果週報">
+                <Button variant="outline" className="min-h-[44px] gap-1">
+                  すべての釣果週報を見る
+                  <ArrowRight className="size-4" />
+                </Button>
+              </Link>
+            </div>
+
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {weeklyReports.map((post) => (
+                <Link prefetch={false} key={post.id} href={`/blog/${post.slug}`}>
+                  <Card className="group h-full overflow-hidden py-0 transition-shadow hover:shadow-md">
+                    <div className="relative h-36 w-full overflow-hidden">
+                      <Image
+                        src={post.image || getFishImage(post.tags, post.id)}
+                        alt={post.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      />
+                    </div>
+                    <CardContent className="flex h-full flex-col gap-2 p-4">
+                      <div className="flex items-center gap-2">
+                        <Badge variant="secondary" className="text-xs">
+                          {BLOG_CATEGORIES[post.category]}
+                        </Badge>
+                        <span className="text-xs text-muted-foreground">
+                          {post.publishedAt}
+                        </span>
+                      </div>
+                      <h3 className="text-sm font-semibold leading-snug group-hover:text-primary sm:text-base">
+                        {post.title}
+                      </h3>
+                      <p className="line-clamp-2 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                        {post.description}
+                      </p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {post.tags.slice(0, 3).map((tag) => (
+                          <span
+                            key={tag}
+                            className="inline-flex items-center gap-0.5 rounded-full bg-muted px-2 py-0.5 text-xs text-muted-foreground"
+                          >
+                            <Tag className="size-2.5" />
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <div className="flex items-center gap-1 text-sm font-medium text-primary">
+                        続きを読む
+                        <ChevronRight className="size-3.5 transition-transform group-hover:translate-x-0.5" />
+                      </div>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+
+            {/* リテンション施策: Push 購読 CTA（ログイン不要。/api/push/subscribe は匿名 OK）。
+                週報を読んだ直後の「見逃したくない」文脈で通知購読を訴求し、
+                未ログイン訪問者を再訪チャネル（push:subscriptions）に取り込む。 */}
+            <div className="mt-8 rounded-2xl border-2 border-sky-200 bg-gradient-to-r from-sky-50 to-cyan-50 p-4 sm:p-5">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <h3 className="flex items-center gap-1.5 text-sm font-bold text-sky-900 sm:text-base">
+                    <Fish className="size-4 shrink-0" aria-hidden="true" />
+                    今週の釣果を見逃さない
+                  </h3>
+                  <p className="mt-1 text-xs text-sky-700 sm:text-sm">
+                    <span className="font-semibold">ログイン不要</span>。週次の釣果週報・新着スポットをブラウザ通知でお届け。いつでも解除できます。
+                  </p>
+                </div>
+                <PushSubscribe />
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 広告: 釣果週報後
+          注: ルートが flex flex-col のため、mx-auto だけだと auto マージンが stretch を打ち消し
+          fit-content 幅(実測145px)に収縮 → 広告が availableWidth 不足で配信されない。w-full 必須。 */}
+      <div className="mx-auto w-full max-w-5xl px-4">
+        <ContentDivider variant="line" />
+        <InArticleAd className="my-4" />
+      </div>
+
+      {/* PR-INV-1: みんなの最近の釣果 mini feed (投稿動線強化) */}
+      <RecentCatchReports />
+
+      {/* UX-7: 最近見た釣り場 carousel (RecentlyViewedTracker のデータを使用、 spot 詳細を見た user のみ表示) */}
+      <div className="mx-auto w-full max-w-5xl px-4">
+        <RecentlyViewedSpots />
+      </div>
+
+      {/* 今月のおすすめアイテム（アフィリエイト） */}
+      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
+        <SeasonalRecommend maxItems={4} />
+      </section>
+
       {/* 釣り方コンパクトリンク */}
       <section className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8">
         <SectionHeading title="人気の釣り方" className="mb-4" />
@@ -851,11 +811,6 @@ export default async function Home() {
           <Link prefetch={false} href="/fishing/eging" className="text-primary transition-colors hover:text-primary/80">エギング</Link>
           <Link prefetch={false} href="/fishing/fukasezuri" className="text-primary transition-colors hover:text-primary/80">フカセ釣り</Link>
         </div>
-      </section>
-
-      {/* 今月のおすすめアイテム */}
-      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
-        <SeasonalRecommend maxItems={4} />
       </section>
 
 
