@@ -160,6 +160,8 @@ export function SpotImage({ src, alt, spotType = "port", className = "", height 
 
   return (
     <div
+      role="img"
+      aria-label={descriptiveAlt}
       className={`relative ${height} overflow-hidden bg-gradient-to-br ${style.gradient} ${className}`}
       style={aspectStyle}
     >
