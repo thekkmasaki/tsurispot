@@ -106,7 +106,7 @@ export function MobileNav() {
           className="fixed bottom-[calc(60px+env(safe-area-inset-bottom,0px))] left-2 right-2 z-50 rounded-3xl border bg-white shadow-2xl shadow-ocean-deep/10 md:hidden animate-in slide-in-from-bottom-4 duration-200 overscroll-contain"
         >
           <div className="flex items-center justify-between px-4 py-3 border-b">
-            <span className="text-sm font-bold text-gray-800 font-[family-name:var(--font-zen-maru)]">メニュー</span>
+            <span className="text-sm font-bold text-gray-800 font-display">メニュー</span>
             <button
               onClick={() => setMoreOpen(false)}
               aria-label="メニューを閉じる"

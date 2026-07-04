@@ -308,7 +308,7 @@ export default async function Home() {
               <span>海釣り・川釣り 総合情報サイト</span>
             </div>
 
-            <h1 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-white text-balance font-[family-name:var(--font-zen-maru)] drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] sm:mb-4 sm:text-4xl lg:text-5xl">
+            <h1 className="mb-3 text-2xl font-bold leading-tight tracking-tight text-white text-balance font-display drop-shadow-[0_2px_4px_rgba(0,0,0,0.3)] sm:mb-4 sm:text-4xl lg:text-5xl">
               近くの釣りスポットが
               <br className="sm:hidden" />
               すぐ見つかる。

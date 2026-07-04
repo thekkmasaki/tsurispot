@@ -635,7 +635,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
       <div className="mb-5 sm:mb-6">
         {/* スポット名 + お気に入り（最上段） */}
         <div className="flex items-start justify-between gap-3">
-          <h1 className="min-w-0 text-xl font-bold leading-tight text-pretty sm:text-2xl md:text-3xl">
+          <h1 className="min-w-0 font-display text-xl font-bold leading-tight text-pretty sm:text-2xl md:text-3xl">
             {spot.name}
             {/* SEO-1: H1 にキーワード追加 (検索意図キーワードを補足、 視覚的にも文脈が伝わる) */}
             {spot.catchableFish.length > 0 && (
@@ -2072,7 +2072,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           {spot.catchableFish.length > 0 && (
             <Card className="gap-0 py-0">
               <CardContent className="p-4">
-                <h3 className="mb-2 text-sm font-bold font-[family-name:var(--font-zen-maru)]">シーズンカレンダー</h3>
+                <h3 className="mb-2 text-sm font-bold font-display">シーズンカレンダー</h3>
                 <SeasonCalendar catchableFish={spot.catchableFish.slice(0, 5)} />
               </CardContent>
             </Card>

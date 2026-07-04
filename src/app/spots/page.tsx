@@ -4,6 +4,7 @@ import { PlusCircle, ArrowRight } from "lucide-react";
 import { fishingSpots } from "@/lib/data/spots";
 import { SpotListClient } from "@/components/spots/spot-list-client";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { PageHeader } from "@/components/ui/page-header";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { toListSpot } from "@/lib/data/list-spot";
 
@@ -183,12 +184,10 @@ export default function SpotsPage() {
         ]}
       />
       <div className="mb-5 flex items-start justify-between gap-4 sm:mb-8">
-        <div>
-          <h1 className="text-xl font-bold text-balance sm:text-2xl md:text-3xl">近くの釣りスポット・釣り場を探す</h1>
-          <p className="mt-1 text-sm text-muted-foreground sm:mt-2 sm:text-base">
-            全国の釣りスポット・穴場を地域・タイプ・難易度で絞り込み
-          </p>
-        </div>
+        <PageHeader
+          title="近くの釣りスポット・釣り場を探す"
+          lead="全国の釣りスポット・穴場を地域・タイプ・難易度で絞り込み"
+        />
         <Link prefetch={false}
           href="/spots/submit"
           className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 min-h-[44px]"
