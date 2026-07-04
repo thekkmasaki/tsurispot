@@ -2,11 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useBottomLayer } from "@/components/layout/bottom-layer";
 
 const COOKIE_CONSENT_KEY = "tsurispot-cookie-consent";
 
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
+  // 下部一時UIの排他制御（最優先=100）。表示条件自体は従来のlocalStorage判定のまま
+  const canShow = useBottomLayer("cookie", visible);
 
   useEffect(() => {
     const consent = localStorage.getItem(COOKIE_CONSENT_KEY);
@@ -43,11 +46,12 @@ export function CookieBanner() {
     setVisible(false);
   };
 
-  if (!visible) return null;
+  if (!canShow) return null;
 
   return (
     // モバイルでは下部ナビ(60px+safe-area)の上に出して遮蔽を防ぐ。md以上は従来通り最下部
-    <div className="fixed bottom-[calc(60px+env(safe-area-inset-bottom,0px))] md:bottom-0 left-0 right-0 z-50 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 px-3 py-2 shadow-lg md:px-4 md:py-2.5">
+    // z-40: 一時UI層はナビ(z-50)より上に被せない
+    <div className="fixed bottom-[calc(60px+env(safe-area-inset-bottom,0px))] md:bottom-0 left-0 right-0 z-40 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 px-3 py-2 shadow-lg md:px-4 md:py-2.5">
       <div className="mx-auto flex max-w-screen-xl items-center justify-between gap-3">
         <p className="text-xs text-muted-foreground md:text-sm">
           <span className="hidden sm:inline">当サイトではCookieを使用しています。</span>

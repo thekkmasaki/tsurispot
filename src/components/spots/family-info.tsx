@@ -1,7 +1,6 @@
 import { Baby, Shield, Info } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 import type { FamilyInfo } from "@/types";
 
 interface FamilyInfoCardProps {
@@ -14,11 +13,11 @@ interface FamilyInfoCardProps {
 
 function YesNo({ value }: { value: boolean }) {
   return value ? (
-    <Badge className="bg-green-100 text-green-700 hover:bg-green-100 text-xs">
+    <Badge variant="success" className="text-xs">
       ○
     </Badge>
   ) : (
-    <Badge className="bg-red-100 text-red-700 hover:bg-red-100 text-xs">
+    <Badge variant="danger" className="text-xs">
       ×
     </Badge>
   );

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { Fish, Calendar, MapPin, Camera, ArrowRight } from "lucide-react";
 import { catchReports, type CatchReport } from "@/lib/data/catch-reports";
+import { SectionHeading } from "@/components/ui/section-heading";
 
 /**
  * PR-INV-1: ホームに「最近の釣果」 mini feed 表示。
@@ -47,10 +48,11 @@ export function RecentCatchReports() {
   return (
     <section className="mx-auto w-full max-w-5xl px-4 py-6 sm:py-8">
       <div className="mb-4 flex items-center justify-between">
-        <h2 className="flex items-center gap-2 text-base font-bold sm:text-lg">
-          <Fish className="size-5 text-primary" />
-          みんなの最近の釣果
-        </h2>
+        <SectionHeading
+          size="md"
+          icon={<Fish className="size-5" />}
+          title="みんなの最近の釣果"
+        />
         <Link
           href="/spots"
           prefetch={false}

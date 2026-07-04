@@ -103,16 +103,16 @@ export function MobileNav() {
         <div
           ref={menuRef}
           role="menu"
-          className="fixed bottom-[calc(60px+env(safe-area-inset-bottom,0px))] left-2 right-2 z-50 rounded-3xl border bg-white shadow-2xl shadow-ocean-deep/10 md:hidden animate-in slide-in-from-bottom-4 duration-200 overscroll-contain"
+          className="fixed bottom-[calc(60px+env(safe-area-inset-bottom,0px))] left-2 right-2 z-50 rounded-3xl border bg-background shadow-2xl shadow-ocean-deep/10 md:hidden animate-in slide-in-from-bottom-4 duration-200 overscroll-contain"
         >
           <div className="flex items-center justify-between px-4 py-3 border-b">
-            <span className="text-sm font-bold text-gray-800 font-[family-name:var(--font-zen-maru)]">メニュー</span>
+            <span className="text-sm font-bold text-foreground font-display">メニュー</span>
             <button
               onClick={() => setMoreOpen(false)}
               aria-label="メニューを閉じる"
-              className="rounded-full p-2 hover:bg-gray-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+              className="rounded-full p-2 hover:bg-muted focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
-              <X className="size-5 text-gray-500" aria-hidden="true" />
+              <X className="size-5 text-muted-foreground" aria-hidden="true" />
             </button>
           </div>
           <div className="grid grid-cols-3 gap-1.5 p-3">
@@ -130,7 +130,7 @@ export function MobileNav() {
                     "flex flex-col items-center gap-1.5 rounded-xl px-2 py-3.5 text-xs transition-colors touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
                     isActive
                       ? "bg-ocean-mid/10 text-ocean-mid font-medium"
-                      : "text-gray-600 hover:bg-sand-light/50"
+                      : "text-muted-foreground hover:bg-sand-light/50"
                   )}
                 >
                   <item.icon className="size-5" aria-hidden="true" />
@@ -143,7 +143,7 @@ export function MobileNav() {
       )}
 
       {/* ボトムナビ */}
-      <nav aria-label="メインナビゲーション" className="fixed bottom-0 left-0 right-0 z-50 border-t border-ocean-mid/10 bg-white/95 backdrop-blur-lg md:hidden pb-safe">
+      <nav aria-label="メインナビゲーション" className="fixed bottom-0 left-0 right-0 z-50 border-t border-ocean-mid/10 bg-background/95 backdrop-blur-lg md:hidden pb-safe">
         <div className="flex items-center justify-around">
           {mainNavItems.map((item) => {
             const isActive =
@@ -168,7 +168,7 @@ export function MobileNav() {
                     className={cn("h-5 w-5", isActive && "fill-ocean-mid/20")}
                   />
                   {isFav && favCount > 0 && (
-                    <span className="absolute -right-2 -top-1.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-red-500 px-0.5 text-[9px] font-bold text-white">
+                    <span className="absolute -right-2 -top-1.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-destructive px-0.5 text-[9px] font-bold text-white">
                       {favCount > 99 ? "99+" : favCount}
                     </span>
                   )}

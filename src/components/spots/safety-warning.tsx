@@ -10,7 +10,7 @@ const safetyConfig = {
     bgClass: "bg-emerald-50",
     borderClass: "border-emerald-200",
     textClass: "text-emerald-800",
-    badgeClass: "bg-emerald-100 text-emerald-700 hover:bg-emerald-100",
+    badgeVariant: "success",
     iconClass: "text-emerald-600",
   },
   caution: {
@@ -19,7 +19,7 @@ const safetyConfig = {
     bgClass: "bg-amber-50",
     borderClass: "border-amber-200",
     textClass: "text-amber-800",
-    badgeClass: "bg-amber-100 text-amber-700 hover:bg-amber-100",
+    badgeVariant: "warning",
     iconClass: "text-amber-600",
   },
   danger: {
@@ -28,10 +28,10 @@ const safetyConfig = {
     bgClass: "bg-red-50",
     borderClass: "border-red-200",
     textClass: "text-red-800",
-    badgeClass: "bg-red-100 text-red-700 hover:bg-red-100",
+    badgeVariant: "danger",
     iconClass: "text-red-600",
   },
-};
+} as const;
 
 export function SafetyWarning({
   level,
@@ -58,7 +58,7 @@ export function SafetyWarning({
       <CardContent className="p-4">
         <div className="mb-2 flex items-center gap-2">
           <Icon className={cn("size-5", config.iconClass)} />
-          <Badge className={cn("text-xs", config.badgeClass)}>
+          <Badge variant={config.badgeVariant} className="text-xs">
             {config.label}
           </Badge>
           {isKuchikomi && (
