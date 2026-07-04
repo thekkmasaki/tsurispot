@@ -26,6 +26,7 @@ import {
   Gem,
   Crown,
   Lightbulb,
+  CheckCircle2,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -1178,7 +1179,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                         </div>
                         <p className="text-xs text-muted-foreground shrink-0">{explainTime(cf.recommendedTime)}</p>
                       </div>
-                      {methodExplanation && (<p className="mt-1.5 text-xs text-muted-foreground"><span className="mr-1">💡</span>{cf.method}とは… {methodExplanation}</p>)}
+                      {methodExplanation && (<p className="mt-1.5 text-xs text-muted-foreground"><Lightbulb className="mr-1 inline size-3 text-sunset-gold" aria-hidden="true" />{cf.method}とは… {methodExplanation}</p>)}
                       {/* source フィールドはUI非表示（内部管理用に残す） */}
                       <div className="mt-2"><FishLikeButton spotSlug={slug} fishSlug={cf.fish.slug} /></div>
                     </div>
@@ -1937,23 +1938,23 @@ export default async function SpotDetailPage({ params }: PageProps) {
               <CardContent className="p-4">
                 <ul className="space-y-2 text-sm text-muted-foreground">
                   <li className="flex items-start gap-2">
-                    <span className="mt-0.5 text-primary">✓</span>
+                    <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
                     <span>{summary.oneLineFeature}</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="mt-0.5 text-primary">✓</span>
+                    <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
                     <span>{summary.topFishAndSeason}</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="mt-0.5 text-primary">✓</span>
+                    <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
                     <span>{summary.recommendedMethod}</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="mt-0.5 text-primary">✓</span>
+                    <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
                     <span>{summary.facilityOverview}</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="mt-0.5 text-primary">✓</span>
+                    <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-primary" aria-hidden="true" />
                     <span>{summary.difficultyComment}</span>
                   </li>
                 </ul>
@@ -2004,9 +2005,6 @@ export default async function SpotDetailPage({ params }: PageProps) {
       {/* 最近見たスポット */}
       <RecentlyViewedSpots />
 
-      {/* LINE登録バナー */}
-      <section className="mt-8 sm:mt-12">
-      </section>
       {spot.googleRating && (
         <p className="mt-2 text-[10px] text-muted-foreground">レビューデータ提供: Google</p>
       )}

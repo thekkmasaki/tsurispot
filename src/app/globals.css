@@ -53,11 +53,15 @@
   --color-ocean-mid: oklch(0.50 0.14 215);
   --color-sea-foam: oklch(0.78 0.10 175);
   --color-sand-light: oklch(0.92 0.03 80);
-  --color-sand-warm: oklch(0.85 0.05 70);
   --color-driftwood: oklch(0.55 0.04 60);
   --color-sunset-gold: oklch(0.78 0.14 70);
   --color-sunset-coral: oklch(0.68 0.16 25);
   --color-forest-green: oklch(0.50 0.12 150);
+  /* semanticエイリアス（新規コードはTailwind生パレット(blue-500等)の直書き禁止、必ずトークン経由で指定する） */
+  --color-success: var(--color-forest-green);
+  --color-info: var(--color-ocean-mid);
+  --color-warning: var(--color-sunset-gold);
+  --color-danger: var(--destructive);
 }
 
 :root {

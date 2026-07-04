@@ -30,15 +30,16 @@ function sortByEase<
   });
 }
 
+// フィルタ色はブランドパレット限定（ocean-mid/sea-foam/sunset-coral/sunset-gold/forest-green）
 const CATEGORY_CONFIG = {
-  sea: { label: "海水魚", color: "bg-sky-100 text-sky-700 hover:bg-sky-200" },
+  sea: { label: "海水魚", color: "bg-ocean-mid/10 text-ocean-mid hover:bg-ocean-mid/20" },
   brackish: {
     label: "汽水魚",
-    color: "bg-teal-100 text-teal-700 hover:bg-teal-200",
+    color: "bg-sea-foam/25 text-[oklch(0.45_0.10_175)] hover:bg-sea-foam/40",
   },
   freshwater: {
     label: "淡水魚",
-    color: "bg-emerald-100 text-emerald-700 hover:bg-emerald-200",
+    color: "bg-forest-green/15 text-[oklch(0.40_0.12_150)] hover:bg-forest-green/25",
   },
 } as const;
 
@@ -49,13 +50,13 @@ type Difficulty = "beginner" | "intermediate" | "advanced";
 type FishingCategory = "rockfish" | "pelagic" | "flatfish" | "migratory" | "shore" | "freshwater_sub" | "squid_octopus";
 
 const FISHING_CATEGORY_CONFIG: Record<FishingCategory, { label: string; color: string }> = {
-  rockfish: { label: "根魚・ロックフィッシュ", color: "bg-amber-100 text-amber-700 hover:bg-amber-200" },
-  pelagic: { label: "青物", color: "bg-blue-100 text-blue-700 hover:bg-blue-200" },
-  flatfish: { label: "フラットフィッシュ", color: "bg-yellow-100 text-yellow-700 hover:bg-yellow-200" },
-  migratory: { label: "回遊魚", color: "bg-cyan-100 text-cyan-700 hover:bg-cyan-200" },
-  shore: { label: "堤防・磯魚", color: "bg-teal-100 text-teal-700 hover:bg-teal-200" },
-  freshwater_sub: { label: "淡水魚", color: "bg-emerald-100 text-emerald-700 hover:bg-emerald-200" },
-  squid_octopus: { label: "イカ・タコ・甲殻類", color: "bg-purple-100 text-purple-700 hover:bg-purple-200" },
+  rockfish: { label: "根魚・ロックフィッシュ", color: "bg-sunset-gold/25 text-[oklch(0.50_0.10_70)] hover:bg-sunset-gold/40" },
+  pelagic: { label: "青物", color: "bg-ocean-mid/10 text-ocean-mid hover:bg-ocean-mid/20" },
+  flatfish: { label: "フラットフィッシュ", color: "bg-sunset-coral/10 text-[oklch(0.50_0.16_25)] hover:bg-sunset-coral/20" },
+  migratory: { label: "回遊魚", color: "bg-sea-foam/25 text-[oklch(0.45_0.10_175)] hover:bg-sea-foam/40" },
+  shore: { label: "堤防・磯魚", color: "bg-ocean-mid/10 text-ocean-mid hover:bg-ocean-mid/20" },
+  freshwater_sub: { label: "淡水魚", color: "bg-forest-green/15 text-[oklch(0.40_0.12_150)] hover:bg-forest-green/25" },
+  squid_octopus: { label: "イカ・タコ・甲殻類", color: "bg-sunset-coral/10 text-[oklch(0.50_0.16_25)] hover:bg-sunset-coral/20" },
 };
 
 // slugベースのマッピング（日本語キーの文字化け問題を回避）

@@ -1,7 +1,6 @@
 import { Baby, Shield, Info } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { cn } from "@/lib/utils";
 import type { FamilyInfo } from "@/types";
 
 interface FamilyInfoCardProps {
