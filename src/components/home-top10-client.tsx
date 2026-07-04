@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Star, ChevronRight, Loader2, ArrowRight, MapPin, Waves, TreePine, Navigation } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { SectionHeading } from "@/components/ui/section-heading";
 import { cn } from "@/lib/utils";
 
 interface Top10Spot {
@@ -85,16 +86,14 @@ export function HomeTop10Client({ spots }: { spots: Top10Spot[] }) {
     <section className="bg-muted/50 py-8 sm:py-12">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <div className="mb-6 flex items-end justify-between sm:mb-8">
-          <div>
-            <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
-              {hasLocation ? "近くの人気スポット TOP10" : "人気スポット TOP10"}
-            </h2>
-            <p className="mt-1 text-sm text-muted-foreground">
-              {hasLocation
+          <SectionHeading
+            title={hasLocation ? "近くの人気スポット TOP10" : "人気スポット TOP10"}
+            subtitle={
+              hasLocation
                 ? "評価の高い釣り場を現在地から近い順に表示"
-                : "評価とレビュー数で選ぶ注目の釣り場"}
-            </p>
-          </div>
+                : "評価とレビュー数で選ぶ注目の釣り場"
+            }
+          />
           <Link prefetch={false}
             href="/spots"
             className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"

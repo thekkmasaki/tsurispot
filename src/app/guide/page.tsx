@@ -277,7 +277,7 @@ export default function GuidePage() {
       </div>
       {/* ヘッダー */}
       <div className="mb-8 text-center sm:mb-10">
-        <h1 className="text-2xl font-bold tracking-tight sm:text-4xl">
+        <h1 className="font-display text-2xl font-bold tracking-tight sm:text-4xl">
           釣りの始め方ガイド
         </h1>
         <p className="mt-2 text-sm text-muted-foreground sm:mt-3 sm:text-base">

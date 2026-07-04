@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { X, Share, Plus } from "lucide-react";
+import { useBottomLayer } from "@/components/layout/bottom-layer";
 
 const DISMISS_KEY = "tsurispot-pwa-install-dismissed";
 const VISIT_COUNT_KEY = "tsurispot-visit-count";
@@ -12,6 +13,8 @@ export function PWAInstallHint() {
   const [deferredPrompt, setDeferredPrompt] =
     useState<BeforeInstallPromptEvent | null>(null);
   const [isIOS, setIsIOS] = useState(false);
+  // 下部一時UIの排他制御（最下位=他の一時UIが全て消えてから繰り上げ表示）
+  const canShow = useBottomLayer("pwa", visible);
 
   useEffect(() => {
     // 既にインストール済み（standaloneモード）なら表示しない
@@ -72,7 +75,7 @@ export function PWAInstallHint() {
     }
   }, [deferredPrompt]);
 
-  if (!visible) return null;
+  if (!canShow) return null;
 
   return (
     <div className="fixed bottom-[60px] left-3 right-3 z-40 md:hidden animate-in slide-in-from-bottom-2 duration-300">

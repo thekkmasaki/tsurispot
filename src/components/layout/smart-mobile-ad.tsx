@@ -1,6 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
+import { useBottomAdSuspended } from "@/components/layout/bottom-layer";
 const MobileStickyAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.MobileStickyAd })));
 
 const STORAGE_KEY = "tsurispot-mobile-ad-dismissed";
@@ -8,6 +9,9 @@ const STORAGE_KEY = "tsurispot-mobile-ad-dismissed";
 export function SmartMobileStickyAd() {
   const [dismissed, setDismissed] = useState(false);
   const [mounted, setMounted] = useState(false);
+  // 一時UI（Cookie/比較/位置情報/PWA）表示中は広告をサスペンド。
+  // dismissedとは別の一時非表示で、広告の上にコンテンツが被さる状態（AdSenseポリシー違反リスク）を根絶する
+  const suspended = useBottomAdSuspended();
 
   useEffect(() => {
     setMounted(true);
@@ -33,5 +37,5 @@ export function SmartMobileStickyAd() {
   }, [mounted, dismissed]);
 
   if (dismissed) return null;
-  return <MobileStickyAd />;
+  return <MobileStickyAd suspended={suspended} />;
 }

@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { X, GitCompareArrows } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useBottomLayer } from "@/components/layout/bottom-layer";
 import { cn } from "@/lib/utils";
 
 const STORAGE_KEY = "tsurispot-compare";
@@ -43,6 +44,8 @@ export function isInCompare(slug: string): boolean {
 
 export function CompareBar() {
   const [list, setList] = useState<string[]>([]);
+  // 下部一時UIの排他制御（Cookieバナーより下位）。選択状態自体は保持され、上位UIが消えたら繰り上げ表示
+  const canShow = useBottomLayer("compare", list.length > 0);
 
   const sync = useCallback(() => setList(getCompareList()), []);
 
@@ -56,7 +59,7 @@ export function CompareBar() {
     };
   }, [sync]);
 
-  if (list.length === 0) return null;
+  if (!canShow) return null;
 
   return (
     <div className="fixed bottom-[60px] left-0 right-0 z-40 border-t bg-white/95 px-4 py-2.5 shadow-lg backdrop-blur-lg md:bottom-0">
