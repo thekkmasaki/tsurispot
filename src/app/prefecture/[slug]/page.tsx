@@ -768,6 +768,42 @@ export default async function PrefecturePage({ params }: PageProps) {
         </section>
       )}
 
+      {/* エリア別の釣り場解説（定義した県のみ表示） */}
+      {prefInfo?.areaOverviews && prefInfo.areaOverviews.length > 0 && (
+        <section className="mb-8 sm:mb-10">
+          <h2 className="mb-4 text-base font-bold sm:text-lg">
+            {pref.name}のエリア別釣り場ガイド
+          </h2>
+          <div className="space-y-4">
+            {prefInfo.areaOverviews.map((areaOverview) => (
+              <Card key={areaOverview.area} className="gap-0 py-0">
+                <CardContent className="p-4 sm:p-5">
+                  <h3 className="mb-2 text-sm font-bold sm:text-base">
+                    {areaOverview.area}
+                  </h3>
+                  <p className="text-sm leading-relaxed text-muted-foreground">
+                    {areaOverview.text}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+          {prefInfo.editorComment && (
+            <Card className="mt-4 gap-0 border-primary/20 bg-primary/5 py-0">
+              <CardContent className="p-4 sm:p-5">
+                <h3 className="mb-2 text-sm font-bold sm:text-base">編集長コメント</h3>
+                <p className="text-sm leading-relaxed text-muted-foreground">
+                  {prefInfo.editorComment}
+                </p>
+                <p className="mt-2 text-xs text-muted-foreground">
+                  ツリスポ編集長・正木 家康
+                </p>
+              </CardContent>
+            </Card>
+          )}
+        </section>
+      )}
+
       <DisplayAd />
 
       {/* 人気の釣りスポットTOP10ランキング */}
