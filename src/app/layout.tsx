@@ -55,8 +55,7 @@ export const metadata: Metadata = {
     default: "ツリスポ（つりすぽ）- 近くの釣りスポット検索",
     template: "%s | ツリスポ（つりすぽ）",
   },
-  description:
-    "全国 2,100 件超の釣り場を地図で直感的に探せる総合情報サイト「つりすぽ (ツリスポ)」。 潮汐・水温・風速・波浪の予報、 今釣れる魚種、 釣り場ごとの混雑予想・航空写真・口コミ・釣果報告まで、 初心者の釣行計画に必要な情報をすべて無料で掲載しています。",
+  description: `全国${SPOT_COUNT}件の釣り場を地図で直感的に探せる総合情報サイト「つりすぽ（ツリスポ）」。潮汐・水温・風速・波浪の予報、今釣れる魚種、釣り場ごとの混雑予想・航空写真・口コミ・釣果報告まで、初心者の釣行計画に必要な情報をすべて無料で掲載しています。`,
   keywords: [
     "ツリスポ",
     "つりすぽ",
@@ -154,7 +153,7 @@ export default function RootLayout({
         <link rel="author" type="text/plain" href="/humans.txt" />
       </head>
       <body
-        className={`${notoSansJP.variable} ${zenMaruGothic.variable} font-[family-name:var(--font-noto-sans-jp)] antialiased`}
+        className={`${notoSansJP.variable} ${zenMaruGothic.variable} font-sans antialiased`}
       >
         {/* WebSite schema: サイト名をGoogleに正しく認識させるため独立したscriptタグ */}
         <script

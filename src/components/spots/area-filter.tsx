@@ -108,8 +108,8 @@ function LightSpotCard({ spot }: { spot: SpotCardData }) {
             <span className="font-medium">{spot.rating.toFixed(1)}</span>
           </div>
           <div className="flex flex-wrap items-center gap-1.5">
-            {spot.difficulty === "beginner" && <Badge className="bg-green-600 text-xs hover:bg-green-600">初心者OK</Badge>}
-            {spot.isFree && <Badge className="bg-orange-500 text-xs hover:bg-orange-500">無料</Badge>}
+            {spot.difficulty === "beginner" && <Badge className="bg-green-100 text-green-800 text-xs hover:bg-green-100">初心者OK</Badge>}
+            {spot.isFree && <Badge className="bg-orange-100 text-orange-800 text-xs hover:bg-orange-100">無料</Badge>}
             {spot.hasParking && <span className="text-muted-foreground" role="img" aria-label="駐車場あり" title="駐車場あり"><Car className="size-4" aria-hidden="true" /></span>}
             {spot.hasToilet && <span className="text-muted-foreground" role="img" aria-label="トイレあり" title="トイレあり"><Toilet className="size-4" aria-hidden="true" /></span>}
             {spot.hasRentalRod && <span className="text-muted-foreground" role="img" aria-label="レンタル竿あり" title="レンタル竿あり"><Fish className="size-4" aria-hidden="true" /></span>}

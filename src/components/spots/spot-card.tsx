@@ -31,7 +31,7 @@ export function SpotCard({ spot, distance, priority = false }: { spot: ListSpot;
             {SPOT_TYPE_LABELS[spot.spotType]}
           </span>
           {hiddenGem && (
-            <span className="absolute top-2 left-2 flex items-center gap-1 rounded-lg bg-emerald-600/90 px-2 py-0.5 text-xs font-medium text-white backdrop-blur-sm">
+            <span className="absolute top-2 left-2 flex items-center gap-1 rounded-lg bg-emerald-100/95 px-2 py-0.5 text-xs font-medium text-emerald-900 backdrop-blur-sm">
               <Gem className="size-3" />
               穴場
             </span>
@@ -84,18 +84,18 @@ export function SpotCard({ spot, distance, priority = false }: { spot: ListSpot;
           {/* Badges and facilities */}
           <div className="flex flex-wrap items-center gap-1.5">
             {spot.hasPremiumFish && (
-              <Badge className="bg-amber-600 text-xs hover:bg-amber-600">
+              <Badge className="bg-amber-100 text-amber-900 text-xs hover:bg-amber-100">
                 <Crown className="mr-0.5 size-3" />
                 高級魚
               </Badge>
             )}
             {spot.difficulty === "beginner" && (
-              <Badge className="bg-green-600 text-xs hover:bg-green-600">
+              <Badge className="bg-green-100 text-green-800 text-xs hover:bg-green-100">
                 初心者OK
               </Badge>
             )}
             {spot.isFree && (
-              <Badge className="bg-orange-500 text-xs hover:bg-orange-500">
+              <Badge className="bg-orange-100 text-orange-800 text-xs hover:bg-orange-100">
                 無料
               </Badge>
             )}

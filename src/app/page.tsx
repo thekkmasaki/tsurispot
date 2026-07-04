@@ -64,9 +64,6 @@ const SeasonalRecommend = nextDynamic(() => import("@/components/affiliate/seaso
   // CWV: 実 component 高さ (200-250px) に近づけて CLS 削減
   loading: () => <div className="h-64 sm:h-72 w-full animate-pulse rounded-xl bg-muted" />,
 });
-const OnlineUsersBadge = nextDynamic(() => import("@/components/online-users-badge").then((m) => m.OnlineUsersBadge), {
-  loading: () => <div className="inline-flex h-7 w-28 animate-pulse rounded-full bg-white/10" />,
-});
 const NativeAdBreak = nextDynamic(() => import("@/components/ads/ad-unit").then((m) => m.NativeAdBreak), {
   loading: () => null,
 });
@@ -304,13 +301,8 @@ export default async function Home() {
         </div>
 
         <div className="relative mx-auto max-w-5xl px-4 pb-12 pt-10 sm:px-6 sm:pb-20 sm:pt-20 lg:pb-24 lg:pt-24">
-          {/* 接続人数 */}
-          <div className="absolute right-4 top-4 sm:right-6 sm:top-20 lg:top-24">
-            <OnlineUsersBadge />
-          </div>
-
           <div className="flex flex-col items-center text-center">
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-sm text-white/90 backdrop-blur-sm sm:mb-4">
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-[oklch(0.30_0.10_235)]/35 px-4 py-1.5 text-sm text-white backdrop-blur-sm sm:mb-4">
               <Waves className="size-4" aria-hidden="true" />
               <span>海釣り・川釣り 総合情報サイト</span>
             </div>
@@ -328,7 +320,7 @@ export default async function Home() {
             </p>
 
             {/* スポット数統計 */}
-            <div className="mb-5 flex items-center justify-center gap-4 text-xs text-blue-200/90 sm:mb-7 sm:gap-6 sm:text-sm">
+            <div className="mb-5 flex items-center justify-center gap-4 text-xs text-white/95 sm:mb-7 sm:gap-6 sm:text-sm">
               <Link href="/spots" prefetch={false} className="flex items-center gap-1.5 transition-colors hover:text-white">
                 <MapPin className="size-3.5 sm:size-4" />
                 <span>全国<strong className="font-bold text-white">{totalSpots.toLocaleString()}</strong>スポット</span>
