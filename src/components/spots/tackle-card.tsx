@@ -36,9 +36,11 @@ export function TackleCard({ tackle }: { tackle: TackleRecommendation }) {
             <span className="text-xs text-muted-foreground">
               ({tackle.reviewCount}件)
             </span>
+            {/* 評価の出所を明示（第三者レビューと誤認させない） */}
+            <span className="text-[10px] text-muted-foreground">編集部評価</span>
           </div>
           {tackle.isBeginnerFriendly && (
-            <Badge className="bg-green-600 text-[10px] hover:bg-green-600">
+            <Badge className="bg-green-100 text-green-800 text-[10px] hover:bg-green-100">
               初心者向け
             </Badge>
           )}
@@ -53,13 +55,13 @@ export function TackleCard({ tackle }: { tackle: TackleRecommendation }) {
         {/* Affiliate buttons */}
         <div className="flex gap-2">
           <Button asChild size="sm" className="flex-1 bg-[#FF9900] hover:bg-[#FF9900]/90 min-h-[44px]">
-            <a href={tackle.amazonUrl} target="_blank" rel="noopener noreferrer">
+            <a href={tackle.amazonUrl} target="_blank" rel="noopener noreferrer sponsored">
               Amazon
               <ExternalLink className="ml-1 size-3" />
             </a>
           </Button>
           <Button asChild size="sm" className="flex-1 bg-[#BF0000] hover:bg-[#BF0000]/90 min-h-[44px]">
-            <a href={tackle.rakutenUrl} target="_blank" rel="noopener noreferrer">
+            <a href={tackle.rakutenUrl} target="_blank" rel="noopener noreferrer sponsored">
               楽天
               <ExternalLink className="ml-1 size-3" />
             </a>

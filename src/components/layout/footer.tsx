@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Fish } from "lucide-react";
+import { SPOT_COUNT_FORMATTED } from "@/lib/data/spot-count";
 
 export function Footer() {
   return (
@@ -233,7 +234,7 @@ export function Footer() {
         <div className="mt-6 border-t border-white/10 pt-6 text-center text-sm text-blue-100/80">
           <p>&copy; 2025-2026 ツリスポ All rights reserved.</p>
           <p className="mt-1 text-xs">
-            創設者・編集長: 正木 家康｜運営開始: 2025年｜掲載スポット: 2,100箇所以上｜<Link href="/technology" prefetch={false} className="underline-offset-2 hover:text-white hover:underline">特許出願中（特願2026-042836）</Link>
+            創設者・編集長: 正木 家康｜運営開始: 2025年｜掲載スポット: {SPOT_COUNT_FORMATTED}箇所｜<Link href="/technology" prefetch={false} className="underline-offset-2 hover:text-white hover:underline">特許出願中（特願2026-042836）</Link>
           </p>
           <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed">
             当サイトはAmazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。

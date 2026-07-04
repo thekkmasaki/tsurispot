@@ -86,7 +86,7 @@ export function MonthCalendar({ seasonMonths, peakMonths, regionalData }: MonthC
               type="button"
               onClick={handleDetect}
               disabled={detecting}
-              className="inline-flex items-center gap-1 rounded-full bg-sky-600 px-2.5 py-1 text-[11px] font-medium text-white transition-colors hover:bg-sky-700 disabled:opacity-50"
+              className="inline-flex items-center gap-1 rounded-full bg-sky-700 px-2.5 py-1 text-[11px] font-medium text-white transition-colors hover:bg-sky-800 disabled:opacity-50"
             >
               <Navigation className={`size-3 ${detecting ? "animate-spin" : ""}`} />
               {detecting ? "取得中" : "現在地"}
@@ -98,7 +98,7 @@ export function MonthCalendar({ seasonMonths, peakMonths, regionalData }: MonthC
               onClick={() => handleSelect(null)}
               className={`rounded-full px-2.5 py-1 text-xs font-medium transition-all ${
                 selectedRegion === null
-                  ? "bg-sky-600 text-white shadow ring-1 ring-sky-300"
+                  ? "bg-sky-700 text-white shadow ring-1 ring-sky-300"
                   : "bg-white text-gray-600 shadow-sm hover:bg-sky-100"
               }`}
             >
@@ -111,7 +111,7 @@ export function MonthCalendar({ seasonMonths, peakMonths, regionalData }: MonthC
                 onClick={() => handleSelect(slug)}
                 className={`rounded-full px-2.5 py-1 text-xs font-medium transition-all ${
                   selectedRegion === slug
-                    ? "bg-sky-600 text-white shadow ring-1 ring-sky-300"
+                    ? "bg-sky-700 text-white shadow ring-1 ring-sky-300"
                     : "bg-white text-gray-600 shadow-sm hover:bg-sky-100"
                 }`}
               >

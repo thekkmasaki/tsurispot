@@ -265,6 +265,11 @@ export function GearGuideList({ guides }: { guides?: GearGuideType[] }) {
 
   return (
     <div className="space-y-4">
+      {/* アフィリエイト表記: TackleCard と同型の PR チップ + 注記をカード群の上に明示 */}
+      <div className="flex items-center gap-2">
+        <span className="rounded bg-gray-100 px-1.5 py-0.5 text-[10px] text-gray-500">PR</span>
+        <p className="text-xs text-muted-foreground">※本セクションはアフィリエイトリンクを含みます</p>
+      </div>
       {guides.map((guide, index) => (
         <GearGuideCard key={`${guide.targetFish}-${guide.method}-${index}`} guide={guide} />
       ))}

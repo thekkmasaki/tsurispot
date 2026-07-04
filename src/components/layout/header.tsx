@@ -124,7 +124,7 @@ function DropdownMenu() {
                   "flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary",
                   isActive
                     ? "bg-ocean-mid/5 font-medium text-ocean-mid"
-                    : "text-driftwood hover:bg-sand-light/50"
+                    : "text-driftwood hover:bg-sand-light/50 hover:text-foreground"
                 )}
               >
                 <item.icon className="h-4 w-4" aria-hidden="true" />

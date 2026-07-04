@@ -13,6 +13,9 @@ declare global {
 
 const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_ID;
 
+// 広告ラベル文言（全広告枠で統一。「おすすめ」等の曖昧な表現は誤認を招くため禁止）
+const AD_LABEL = "スポンサー";
+
 // AdSense push を許可する広告コンテナの最小幅(px)。
 // 全スロット中の最小明示幅は SideRail の 160px のため、120px で正当な枠を誤ブロックしない。
 const MIN_AD_WIDTH = 120;
@@ -205,7 +208,7 @@ function AdWrapper({
       {label && (
         <div className="mb-2 flex items-center justify-center gap-3">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
-          <span className="text-[10px] font-medium tracking-widest text-muted-foreground/70">スポンサー</span>
+          <span className="text-[11px] font-medium tracking-widest text-muted-foreground">{AD_LABEL}</span>
           <div className="h-px flex-1 bg-gradient-to-l from-transparent via-border to-transparent" />
         </div>
       )}
@@ -252,7 +255,7 @@ export function NativeAdBreak({ className = "" }: { className?: string }) {
       <div className="flex items-center justify-center gap-3 mb-4">
         <div className="h-px flex-1 bg-gradient-to-r from-transparent via-ocean-mid/20 to-transparent" />
         <Waves className="size-4 text-ocean-mid/30" />
-        <span className="text-[10px] font-medium tracking-widest text-muted-foreground/70">おすすめ</span>
+        <span className="text-[11px] font-medium tracking-widest text-muted-foreground">{AD_LABEL}</span>
         <Waves className="size-4 text-ocean-mid/30" />
         <div className="h-px flex-1 bg-gradient-to-l from-transparent via-ocean-mid/20 to-transparent" />
       </div>
@@ -294,7 +297,7 @@ export function PreFooterAd() {
     <div className="mx-auto max-w-5xl px-4 py-8">
       <div className="flex items-center justify-center gap-3 mb-3">
         <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
-        <span className="text-[10px] font-medium tracking-widest text-muted-foreground/70 uppercase">おすすめ</span>
+        <span className="text-[11px] font-medium tracking-widest text-muted-foreground uppercase">{AD_LABEL}</span>
         <div className="h-px flex-1 bg-gradient-to-l from-transparent via-border to-transparent" />
       </div>
       <div className="rounded-2xl border border-border/50 bg-card/60 p-4 sm:p-6 shadow-sm shadow-ocean-deep/[0.03]" style={{ minWidth: "300px" }}>
@@ -421,6 +424,7 @@ export function InFeedAd({ className = "" }: { className?: string }) {
 export function MobileStickyAd() {
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!ADSENSE_ID) return;
@@ -429,22 +433,45 @@ export function MobileStickyAd() {
     return () => clearTimeout(timer);
   }, []);
 
+  // 表示中はページ末尾が固定広告の裏に隠れないよう、広告の実高さ分だけ body 下部に余白を確保する。
+  // dismiss / unmount 時はクリーンアップで必ず解除する。
+  useEffect(() => {
+    if (!visible || dismissed) return;
+    const el = containerRef.current;
+    if (!el) return;
+    const applyPadding = () => {
+      document.body.style.paddingBottom = `${el.offsetHeight}px`;
+    };
+    applyPadding();
+    // md以上（display:none）→モバイル幅への切替や広告の高さ変化に追従
+    const ro = new ResizeObserver(applyPadding);
+    ro.observe(el);
+    return () => {
+      ro.disconnect();
+      document.body.style.paddingBottom = "";
+    };
+  }, [visible, dismissed]);
+
   if (!ADSENSE_ID || dismissed || !visible) return null;
 
   return (
     <div
+      ref={containerRef}
       className="fixed bottom-[calc(60px+env(safe-area-inset-bottom,0px))] left-0 right-0 z-40 md:hidden border-t border-border/30 bg-background/95 backdrop-blur-sm"
     >
       {/* 下部アンカーの固定広告が読み込み後に高さ拡張すると内容が上方向にシフトし
           CLS 0.2の主因になっていた。サイズ固定+クリップ枠で拡張を物理的に遮断。
-          ✕ボタンは -top-5 で外側にはみ出るため、overflow-hidden は内側divのみに付ける。 */}
+          ✕ボタンは -top-6 で外側にはみ出るため、overflow-hidden は内側divのみに付ける。
+          タップ領域は44×44px確保（size-5だと誤タップ→広告誤クリックのリスク）。視覚上の●は内側spanでsize-5維持。 */}
       <div className="relative px-2 py-1 h-[98px]">
         <button
           onClick={() => setDismissed(true)}
-          className="absolute -top-5 right-2 z-50 flex size-5 items-center justify-center rounded-full bg-muted/90 text-[10px] text-muted-foreground shadow-sm"
+          className="absolute -top-6 right-1 z-50 flex size-11 items-center justify-center"
           aria-label="広告を閉じる"
         >
-          ✕
+          <span className="flex size-5 items-center justify-center rounded-full bg-muted/90 text-[10px] text-muted-foreground shadow-sm" aria-hidden="true">
+            ✕
+          </span>
         </button>
         <div className="h-[90px] overflow-hidden">
           <AdUnit

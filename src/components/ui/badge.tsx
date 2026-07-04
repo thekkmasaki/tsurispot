@@ -19,7 +19,7 @@ const badgeVariants = cva(
         ghost: "[a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
         link: "text-primary underline-offset-4 [a&]:hover:underline",
         beginner: "bg-forest-green/15 text-forest-green border-forest-green/25",
-        free: "bg-sunset-coral/15 text-sunset-coral border-sunset-coral/25",
+        free: "bg-sunset-coral/10 text-[oklch(0.45_0.16_25)] border-sunset-coral/25",
         season: "bg-sunset-gold/15 text-driftwood border-sunset-gold/30",
       },
     },
