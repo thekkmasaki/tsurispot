@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { ExternalLink, ShoppingBag, Snowflake, Sun, Leaf, Flower2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { SectionHeading } from "@/components/ui/section-heading";
 import {
   type AffiliateProduct,
   affiliateProducts,
@@ -132,15 +133,12 @@ export function SeasonalRecommend({ maxItems = 4 }: SeasonalRecommendProps) {
         <div className={`flex size-8 items-center justify-center rounded-full bg-white/80 ${config.accent}`}>
           <SeasonIcon className="size-4" />
         </div>
-        <div>
-          <h2 className="flex items-center gap-2 text-base font-bold sm:text-lg">
-            <ShoppingBag className="size-4 text-primary" />
-            {month}月の釣りに役立つ装備
-          </h2>
-          <p className="text-xs text-muted-foreground">
-            {config.label}の釣りで実際に使って良かったアイテムを厳選
-          </p>
-        </div>
+        <SectionHeading
+          size="md"
+          icon={<ShoppingBag className="size-4" />}
+          title={`${month}月の釣りに役立つ装備`}
+          subtitle={`${config.label}の釣りで実際に使って良かったアイテムを厳選`}
+        />
       </div>
 
       <div className="grid gap-3 sm:grid-cols-2">

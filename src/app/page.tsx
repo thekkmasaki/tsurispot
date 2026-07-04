@@ -33,6 +33,7 @@ import nextDynamic from "next/dynamic";
 import { HomeSearchBar } from "@/components/home-search-bar";
 import { SectionErrorBoundary } from "@/components/ui/section-error-boundary";
 import { ContentDivider } from "@/components/ui/content-divider";
+import { SectionHeading } from "@/components/ui/section-heading";
 
 /** タグの魚名→画像パス */
 const FISH_TAG_IMG: Record<string, string> = {
@@ -314,7 +315,7 @@ export default async function Home() {
             </h1>
 
             <p className="hero-description mb-4 max-w-lg text-sm text-blue-100 sm:mb-5 sm:text-lg">
-              潮汐・水温・風速・混雑予想まで全部わかる。
+              潮汐・水温・風速・混雑予想・航空写真まで、この1つで。
               <br className="hidden sm:inline" />
               近くの釣り場で、最高の1匹に出会おう。
             </p>
@@ -335,19 +336,6 @@ export default async function Home() {
                 <Compass className="size-3.5 sm:size-4" />
                 <span><strong className="font-bold text-white">{totalPrefectures}</strong>都道府県</span>
               </Link>
-            </div>
-
-            {/* わかる情報バッジ */}
-            <div className="mb-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1.5 text-[11px] text-blue-100 sm:mb-6 sm:gap-x-4 sm:text-xs">
-              <span className="flex items-center gap-1"><span aria-hidden="true">☀️</span>天気予報</span>
-              <span className="flex items-center gap-1"><span aria-hidden="true">🌡️</span>気温</span>
-              <span className="flex items-center gap-1"><span aria-hidden="true">🌊</span>水温</span>
-              <span className="flex items-center gap-1"><span aria-hidden="true">💨</span>風速・風向</span>
-              <span className="flex items-center gap-1"><span aria-hidden="true">🌅</span>日出・日入</span>
-              <span className="flex items-center gap-1"><span aria-hidden="true">🌙</span>潮回り・月齢</span>
-              <span className="flex items-center gap-1"><span aria-hidden="true">⏰</span>満潮・干潮</span>
-              <span className="flex items-center gap-1"><span aria-hidden="true">👥</span>混雑予想</span>
-              <span className="flex items-center gap-1"><span aria-hidden="true">🛰️</span>航空写真</span>
             </div>
 
             {/* 検索バー */}
@@ -440,7 +428,10 @@ export default async function Home() {
         <div className="rounded-2xl border-2 border-sky-200 bg-gradient-to-r from-sky-50 to-cyan-50 p-4 sm:p-5">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <h2 className="text-sm font-bold text-sky-900 sm:text-base">🎣 今週の釣果を見逃さない</h2>
+              <h2 className="flex items-center gap-1.5 text-sm font-bold text-sky-900 sm:text-base">
+                <Fish className="size-4 shrink-0" aria-hidden="true" />
+                今週の釣果を見逃さない
+              </h2>
               <p className="mt-1 text-xs text-sky-700 sm:text-sm">
                 <span className="font-semibold">ログイン不要</span>。 週次の釣果週報・新着スポットをブラウザ通知でお届け。 いつでも解除できます。
               </p>
@@ -551,14 +542,10 @@ export default async function Home() {
         <section className="bg-muted/50 py-8 sm:py-12">
           <div className="mx-auto max-w-5xl px-4 sm:px-6">
             <div className="mb-6 flex items-end justify-between sm:mb-8">
-              <div>
-                <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
-                  最新釣果週報
-                </h2>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  全国の今週の釣果をエリア別にお届け
-                </p>
-              </div>
+              <SectionHeading
+                title="最新釣果週報"
+                subtitle="全国の今週の釣果をエリア別にお届け"
+              />
               <Link prefetch={false}
                 href="/blog?tag=釣果週報"
                 className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
@@ -723,14 +710,10 @@ export default async function Home() {
         return seasonalSpots.length > 0 ? (
           <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
             <div className="mb-6 flex items-end justify-between sm:mb-8">
-              <div>
-                <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
-                  今月おすすめの釣り場
-                </h2>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  {currentMonth}月に釣れる魚がいるスポットをピックアップ
-                </p>
-              </div>
+              <SectionHeading
+                title="今月おすすめの釣り場"
+                subtitle={`${currentMonth}月に釣れる魚がいるスポットをピックアップ`}
+              />
               <Link prefetch={false}
                 href="/catchable-now"
                 className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
@@ -807,14 +790,10 @@ export default async function Home() {
       <section className="bg-muted/50 py-8 sm:py-12">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
           <div className="mb-6 flex items-end justify-between sm:mb-8">
-            <div>
-              <h2 className="text-xl font-bold tracking-tight text-pretty sm:text-3xl">
-                人気のエリアで釣り場を探す
-              </h2>
-              <p className="mt-1 text-sm text-muted-foreground">
-                都道府県別の釣りスポット・釣れる魚情報
-              </p>
-            </div>
+            <SectionHeading
+              title="人気のエリアで釣り場を探す"
+              subtitle="都道府県別の釣りスポット・釣れる魚情報"
+            />
             <Link prefetch={false}
               href="/prefecture"
               className="hidden items-center gap-1 text-sm font-medium text-primary transition-colors hover:text-primary/80 sm:flex"
@@ -863,7 +842,7 @@ export default async function Home() {
 
       {/* 釣り方コンパクトリンク */}
       <section className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8">
-        <h2 className="mb-3 text-sm font-bold text-foreground">人気の釣り方</h2>
+        <SectionHeading title="人気の釣り方" className="mb-4" />
         <div className="flex flex-wrap gap-x-4 gap-y-2 text-sm">
           <Link prefetch={false} href="/fishing/sabiki" className="text-primary transition-colors hover:text-primary/80">サビキ釣り</Link>
           <Link prefetch={false} href="/fishing/nagezuri" className="text-primary transition-colors hover:text-primary/80">投げ釣り</Link>
