@@ -24,7 +24,10 @@ const baseUrl = "https://tsurispot.com";
 
 // ISR化: 旧版は getSitemapUsers の Redis SCAN を毎リクエスト実行しƒ(動的)・低速(~25s)だった。
 // getSitemapUsers を unstable_cache 化し、ルートもISRにして配信を高速化する。
-export const revalidate = 3600;
+// revalidate=86400(24h): 旧3600(毎時)は全7,600件反復＋マトリクス組合せ生成＋Redis SCAN を毎時
+// 再実行し、クローラ巡回と重なって昼のCPUスパイクに寄与していた。sitemapは日次更新で十分（新規
+// spot/ページはデプロイ時の再生成で反映）なので、この重い生成の頻度を 1/24 に下げる。
+export const revalidate = 86400;
 
 // force-static: revalidate / unstable_cache だけでは auto 判定で ƒ(毎回XML再生成・28s) のまま
 // だったため、静的(○)を強制してビルド時1回生成＋1hごとISRにする。Redis SCAN は getSitemapUsers の
@@ -88,7 +91,7 @@ const getSitemapUsers = unstable_cache(
     }
   },
   ["sitemap-users"],
-  { revalidate: 3600, tags: ["sitemap-users"] }
+  { revalidate: 86400, tags: ["sitemap-users"] }
 );
 
 // 単一サイトマップ（generateSitemapsを削除 → Google が確実に取得できる1ファイル構成）

@@ -209,11 +209,12 @@ export async function generateMetadata({
 // 退避したが、それでは永続キャッシュが活きない。ISR を共有キャッシュに外部化（空HTMLは
 // 絶対に焼かず・失敗時はミス扱い再生成）したため「部分SSG + 残りISR」を安全運用できる（本来設計に復帰）。
 //
-// revalidate=86400(24h): UGC(釣果・投稿)は投稿APIの revalidatePath(`/spots/${slug}`) で即時反映するため、
-// 定期再生成は長くてよい。これで重い spot 詳細の再生成頻度を 1/24 にし App Runner の CPU を削減する。
+// revalidate=604800(7日): UGC(釣果・投稿)は投稿APIの revalidatePath(`/spots/${slug}`) で即時反映するため、
+// 定期再生成は長くてよい。これで重い spot 詳細の再生成頻度をさらに 1/7 に下げ App Runner の CPU を削減する
+// （クローラ巡回による ISR オリジン冷生成の同時多発＝昼の CPU100% 飽和の主因を直接抑える）。
 // 天気・潮汐は "use client" コンポーネントでブラウザ取得（ISR非依存・常時最新）、月別カレンダーは月粒度のため
-// 24h staleでも実害なし。
-export const revalidate = 86400;
+// 7日 staleでも実害なし。
+export const revalidate = 604800;
 export const maxDuration = 60;
 
 // 事前生成する高優先スポット数の上限（部分SSG）。残りは dynamicParams=true（既定）で初回アクセス時に

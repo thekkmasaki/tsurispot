@@ -2,10 +2,13 @@ import { NextResponse } from "next/server";
 import { dbScanCatchCounts } from "@/lib/dynamodb";
 
 export const runtime = "nodejs";
-export const revalidate = 3600;
+// revalidate=86400(24h): 旧3600(毎時)は dbScanCatchCounts() の DynamoDB 全件Scan を毎時走らせ、
+// 昼のクローラ集中時のCPU/RCUスパイクに寄与していた。ヒートマップは日次更新で実害がないため、
+// 全ScanをCDN/ISRで日次に間引く（Scan頻度 1/24）。
+export const revalidate = 86400;
 
 // GET: 全スポットの釣果カウントを一括取得
-// クライアント側でヒートマップに使用。1時間 CDN キャッシュ。
+// クライアント側でヒートマップに使用。24時間 CDN キャッシュ。
 export async function GET() {
   // ビルド時(SSG prerender)は dbScanCatchCounts() の DynamoDB 全スキャンが
   // 静的生成の60秒タイムアウトを超えてビルド自体を落とす（#191 デプロイ失敗の原因）。
@@ -17,7 +20,7 @@ export async function GET() {
       {
         headers: {
           "Cache-Control":
-            "public, s-maxage=3600, stale-while-revalidate=86400",
+            "public, s-maxage=86400, stale-while-revalidate=86400",
         },
       },
     );
@@ -29,7 +32,7 @@ export async function GET() {
       {
         headers: {
           "Cache-Control":
-            "public, s-maxage=3600, stale-while-revalidate=86400",
+            "public, s-maxage=86400, stale-while-revalidate=86400",
         },
       },
     );
