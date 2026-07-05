@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cache } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
@@ -37,6 +38,7 @@ import {
   MONTHLY_CAUTIONS,
   type RegionGroup,
 } from "@/lib/data/prefecture-month-enrichment";
+import { buildPrefMonthDescription } from "@/lib/seo/meta-description";
 
 type PageProps = {
   params: Promise<{ slug: string; month: string }>;
@@ -45,6 +47,56 @@ type PageProps = {
 // 一時的に force-dynamic (build時 SSG で空HTML 焼き付き問題対策)
 export const dynamic = "force-dynamic";
 export const maxDuration = 60;
+
+/**
+ * この県・この月の「釣れる魚」「おすすめスポット」を集計。
+ * force-dynamic のため generateMetadata と本体の二重集計を react cache() で 1 回にまとめる。
+ */
+const getMonthAggregates = cache((prefName: string, monthNum: number) => {
+  const prefSpots = fishingSpots.filter((s) => s.region.prefecture === prefName);
+
+  const fishCountMap = new Map<
+    string,
+    { slug: string; name: string; count: number; isPeak: boolean }
+  >();
+  for (const spot of prefSpots) {
+    for (const cf of spot.catchableFish) {
+      if (isMonthInRange(monthNum, cf.monthStart, cf.monthEnd)) {
+        const existing = fishCountMap.get(cf.fish.slug);
+        if (existing) {
+          existing.count++;
+          if (cf.peakSeason) existing.isPeak = true;
+        } else {
+          fishCountMap.set(cf.fish.slug, {
+            slug: cf.fish.slug,
+            name: cf.fish.name,
+            count: 1,
+            isPeak: cf.peakSeason,
+          });
+        }
+      }
+    }
+  }
+  const catchableFishList = Array.from(fishCountMap.values()).sort((a, b) => {
+    if (a.isPeak !== b.isPeak) return a.isPeak ? -1 : 1;
+    return b.count - a.count;
+  });
+
+  const spotsWithMatchCount = prefSpots
+    .map((spot) => ({
+      spot,
+      matchCount: spot.catchableFish.filter((cf) =>
+        isMonthInRange(monthNum, cf.monthStart, cf.monthEnd)
+      ).length,
+    }))
+    .filter(({ matchCount }) => matchCount > 0)
+    .sort((a, b) => {
+      if (b.matchCount !== a.matchCount) return b.matchCount - a.matchCount;
+      return b.spot.rating - a.spot.rating;
+    });
+
+  return { catchableFishList, spotsWithMatchCount };
+});
 
 export function generateStaticParams() {
   // 現在月のみ全都道府県SSG。他月は初回アクセス時にISR生成。
@@ -62,7 +114,23 @@ export async function generateMetadata({
 
   const year = new Date().getFullYear();
   const title = `${pref.name}の${month.name}の釣り｜釣れる魚・おすすめスポット【${year}年】`;
-  const description = `${pref.name}の${month.name}に釣れる魚とおすすめ釣りスポットを紹介。${month.season}シーズンの狙い目魚種・釣り方・水温の傾向まで、${pref.name}で${month.name}に釣行するなら役立つ情報をまとめました。`;
+
+  // 実データ（釣れる魚数・上位魚種・スポット数・実績スポット名・水温）を織り込んだ description。
+  // 集計は cache() で本体と共有。
+  const { catchableFishList, spotsWithMatchCount } = getMonthAggregates(
+    pref.name,
+    month.num
+  );
+  const description = buildPrefMonthDescription({
+    prefName: pref.name,
+    monthName: month.name,
+    fishCount: catchableFishList.length,
+    topFishNames: catchableFishList.slice(0, 3).map((f) => f.name),
+    spotCount: spotsWithMatchCount.length,
+    topSpotNames: spotsWithMatchCount.slice(0, 2).map((x) => x.spot.name),
+    waterTemp: getWaterTemp(pref.regionGroup, month.num),
+    season: month.season,
+  });
 
   const pageUrl = `https://tsurispot.com/prefecture/${slug}/${monthSlug}`;
   return {
@@ -107,53 +175,13 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
     (s) => s.region.prefecture === pref.name
   );
 
-  // この月に釣れる魚を集計（catchableFishのmonthStart〜monthEndで判定）
-  const fishCountMap = new Map<
-    string,
-    { slug: string; name: string; count: number; isPeak: boolean }
-  >();
-
-  for (const spot of prefSpots) {
-    for (const cf of spot.catchableFish) {
-      if (isMonthInRange(month.num, cf.monthStart, cf.monthEnd)) {
-        const existing = fishCountMap.get(cf.fish.slug);
-        const isPeak = cf.peakSeason;
-        if (existing) {
-          existing.count++;
-          if (isPeak) existing.isPeak = true;
-        } else {
-          fishCountMap.set(cf.fish.slug, {
-            slug: cf.fish.slug,
-            name: cf.fish.name,
-            count: 1,
-            isPeak,
-          });
-        }
-      }
-    }
-  }
-
-  const catchableFishList = Array.from(fishCountMap.values()).sort((a, b) => {
-    // 旬の魚を先に、その後スポット数順
-    if (a.isPeak !== b.isPeak) return a.isPeak ? -1 : 1;
-    return b.count - a.count;
-  });
+  // 釣れる魚・おすすめスポットの集計は generateMetadata と cache() で共有
+  const { catchableFishList, spotsWithMatchCount } = getMonthAggregates(
+    pref.name,
+    month.num
+  );
 
   const peakFishList = catchableFishList.filter((f) => f.isPeak);
-
-  // おすすめスポットTOP10（マッチする魚の数でソート）
-  const spotsWithMatchCount = prefSpots
-    .map((spot) => {
-      const matchCount = spot.catchableFish.filter((cf) =>
-        isMonthInRange(month.num, cf.monthStart, cf.monthEnd)
-      ).length;
-      return { spot, matchCount };
-    })
-    .filter(({ matchCount }) => matchCount > 0)
-    .sort((a, b) => {
-      if (b.matchCount !== a.matchCount) return b.matchCount - a.matchCount;
-      return b.spot.rating - a.spot.rating;
-    });
 
   const topSpots = spotsWithMatchCount.slice(0, 10);
 

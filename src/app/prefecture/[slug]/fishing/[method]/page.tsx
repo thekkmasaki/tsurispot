@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { cache } from "react";
 import Link from "next/link";
 import { permanentRedirect } from "next/navigation";
 import {
@@ -22,12 +23,77 @@ import {
   MONTHS,
   isMonthInRange,
 } from "@/lib/data/fishing-methods";
-import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
+import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS, type FishingSpot } from "@/types";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { buildPrefMethodDescription } from "@/lib/seo/meta-description";
 
 type PageProps = {
   params: Promise<{ slug: string; method: string }>;
 };
+
+type MethodMatchingSpot = {
+  spot: FishingSpot;
+  matchingFishCount: number;
+  matchingFishNames: string[];
+};
+type MethodFish = { slug: string; name: string; count: number };
+
+/**
+ * この県 × この釣り方の「対応スポット」「狙える魚」を集計。
+ * generateMetadata（description の実データ埋め込み）と本体で react cache() 共有し二重集計を避ける。
+ */
+const getMethodAggregates = cache(
+  (
+    prefName: string,
+    methodSlug: string
+  ): { matchingSpots: MethodMatchingSpot[]; catchableFishList: MethodFish[] } => {
+    const method = getMethodBySlug(methodSlug);
+    if (!method) return { matchingSpots: [], catchableFishList: [] };
+
+    const matchingSpots: MethodMatchingSpot[] = fishingSpots
+      .filter(
+        (s) =>
+          s.region.prefecture === prefName &&
+          s.catchableFish.some((cf) => method.methods.includes(cf.method))
+      )
+      .map((spot) => {
+        const matchingFish = spot.catchableFish.filter((cf) =>
+          method.methods.includes(cf.method)
+        );
+        return {
+          spot,
+          matchingFishCount: matchingFish.length,
+          matchingFishNames: matchingFish.map((cf) => cf.fish.name),
+        };
+      })
+      .sort((a, b) => {
+        if (b.matchingFishCount !== a.matchingFishCount)
+          return b.matchingFishCount - a.matchingFishCount;
+        return b.spot.rating - a.spot.rating;
+      });
+
+    const fishCountMap = new Map<string, MethodFish>();
+    for (const { spot } of matchingSpots) {
+      for (const cf of spot.catchableFish) {
+        if (!method.methods.includes(cf.method)) continue;
+        const existing = fishCountMap.get(cf.fish.slug);
+        if (existing) {
+          existing.count++;
+        } else {
+          fishCountMap.set(cf.fish.slug, {
+            slug: cf.fish.slug,
+            name: cf.fish.name,
+            count: 1,
+          });
+        }
+      }
+    }
+    const catchableFishList = Array.from(fishCountMap.values()).sort(
+      (a, b) => b.count - a.count
+    );
+    return { matchingSpots, catchableFishList };
+  }
+);
 
 // 都道府県×釣り方の有効組み合わせを事前計算（3スポット以上）
 function getValidCombos() {
@@ -65,7 +131,22 @@ export async function generateMetadata({
   if (!pref || !method) return { title: "ページが見つかりません" };
 
   const title = `${pref.name}の${method.name}おすすめスポット・釣れる魚【2026年】`;
-  const description = `${pref.name}で${method.name}ができるおすすめ釣りスポットを紹介。${method.name}で狙える魚種・ベストシーズン・攻略法を完全ガイド。${pref.name}で${method.name}を楽しむならツリスポ。`;
+
+  // 実データ（対応スポット件数・実績スポット名・狙える魚）を織り込んだ description。集計は cache() で本体と共有。
+  const { matchingSpots, catchableFishList } = getMethodAggregates(
+    pref.name,
+    methodSlug
+  );
+  const description =
+    matchingSpots.length > 0
+      ? buildPrefMethodDescription({
+          prefName: pref.name,
+          methodName: method.name,
+          spotCount: matchingSpots.length,
+          topSpotNames: matchingSpots.slice(0, 2).map((m) => m.spot.name),
+          topFishNames: catchableFishList.slice(0, 3).map((f) => f.name),
+        })
+      : `${pref.name}で${method.name}ができるおすすめ釣りスポットを紹介。${method.name}で狙える魚種・ベストシーズン・攻略法を完全ガイド。${pref.name}で${method.name}を楽しむならツリスポ。`;
 
   const pageUrl = `https://tsurispot.com/prefecture/${slug}/fishing/${methodSlug}`;
   return {
@@ -101,54 +182,13 @@ export default async function PrefectureFishingMethodPage({
   if (!method || !validComboSet.has(`${slug}|${methodSlug}`))
     permanentRedirect(`/prefecture/${slug}`);
 
-  // この都道府県 × この釣り方のスポットを取得
-  const matchingSpots = fishingSpots
-    .filter(
-      (s) =>
-        s.region.prefecture === pref.name &&
-        s.catchableFish.some((cf) => method.methods.includes(cf.method))
-    )
-    .map((spot) => {
-      const matchingFish = spot.catchableFish.filter((cf) =>
-        method.methods.includes(cf.method)
-      );
-      return {
-        spot,
-        matchingFishCount: matchingFish.length,
-        matchingFishNames: matchingFish.map((cf) => cf.fish.name),
-      };
-    })
-    .sort((a, b) => {
-      if (b.matchingFishCount !== a.matchingFishCount)
-        return b.matchingFishCount - a.matchingFishCount;
-      return b.spot.rating - a.spot.rating;
-    });
+  // スポット・釣れる魚の集計は generateMetadata と cache() で共有
+  const { matchingSpots, catchableFishList } = getMethodAggregates(
+    pref.name,
+    methodSlug
+  );
 
   const topSpots = matchingSpots.slice(0, 15);
-
-  // この釣り方で釣れる魚の集計（都道府県内）
-  const fishCountMap = new Map<
-    string,
-    { slug: string; name: string; count: number }
-  >();
-  for (const { spot } of matchingSpots) {
-    for (const cf of spot.catchableFish) {
-      if (!method.methods.includes(cf.method)) continue;
-      const existing = fishCountMap.get(cf.fish.slug);
-      if (existing) {
-        existing.count++;
-      } else {
-        fishCountMap.set(cf.fish.slug, {
-          slug: cf.fish.slug,
-          name: cf.fish.name,
-          count: 1,
-        });
-      }
-    }
-  }
-  const catchableFishList = Array.from(fishCountMap.values()).sort(
-    (a, b) => b.count - a.count
-  );
 
   // 月別の釣れるスポット数を集計（ベストシーズン判定用）
   const monthlyCount: { month: (typeof MONTHS)[number]; count: number }[] =
