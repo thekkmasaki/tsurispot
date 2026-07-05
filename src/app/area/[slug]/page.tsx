@@ -10,6 +10,7 @@ import { getPrefectureByName } from "@/lib/data/prefectures";
 import { AreaSpotList } from "@/components/area/area-spot-list";
 import { toListSpot } from "@/lib/data/list-spot";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { composeMetaDescription, joinNames } from "@/lib/seo/meta-description";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -155,15 +156,40 @@ export async function generateMetadata({
   // ロングテール（地名×釣り場）の検索流入を取りこぼさない。
   const isLowContent = spots.length <= 0;
 
+  const title = `${region.areaName}（${region.prefecture}）の釣り場おすすめ${spots.length}選｜${titleSuffix}`;
+  // 実績スポット名（rating 上位）を追記して一意性・情報量を高め、120-158 字を担保する。
+  const topSpotNames = [...spots]
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 3)
+    .map((s) => s.name);
+  const description = composeMetaDescription(
+    [
+      `${region.areaName}（${region.prefecture}）のおすすめ釣りスポット${spots.length}箇所を厳選。`,
+      topFishNames
+        ? `${topFishNames}などが釣れる初心者・ファミリー向けの穴場も紹介します。`
+        : false,
+      topSpotNames.length > 0 ? `人気は${joinNames(topSpotNames, 3)}など。` : false,
+      facilityText || false,
+      `アクセス・地図・設備情報まで掲載しています。`,
+    ],
+    {
+      fallbackTail: [
+        `${region.prefecture}の釣りスポット選びに役立ちます。`,
+        `近くの釣り場探しにもご活用ください。`,
+        `初心者やファミリーの釣行計画にもおすすめです。`,
+      ],
+    },
+  );
+
   return {
-    title: `${region.areaName}（${region.prefecture}）の釣り場おすすめ${spots.length}選｜${titleSuffix}`,
-    description: `${region.areaName}（${region.prefecture}）のおすすめ釣りスポット${spots.length}箇所を厳選。${topFishNames}が釣れる初心者やファミリーにもおすすめの穴場釣り場を紹介。${facilityText}アクセス・地図情報も完全掲載。`,
+    title,
+    description,
     ...(isLowContent && {
       robots: { index: false, follow: true },
     }),
     openGraph: {
-      title: `${region.areaName}（${region.prefecture}）の釣り場おすすめ${spots.length}選｜${titleSuffix}`,
-      description: `${region.areaName}（${region.prefecture}）のおすすめ釣りスポット${spots.length}箇所を厳選。${topFishNames}が釣れる初心者やファミリーにもおすすめの穴場釣り場を紹介。${facilityText}アクセス・地図情報も完全掲載。`,
+      title,
+      description,
       type: "website",
       url: `https://tsurispot.com/area/${region.slug}`,
       siteName: "ツリスポ",

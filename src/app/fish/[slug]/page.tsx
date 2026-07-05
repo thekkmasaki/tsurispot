@@ -26,6 +26,7 @@ import { Badge } from "@/components/ui/badge";
 import { getFishSpeciesWithSpots, getCoOccurringFish, getFishBySameMethod, getFishBySameSeason } from "@/lib/data";
 import { DIFFICULTY_LABELS, CATCH_RATING_LABELS } from "@/types";
 import { trimDescription } from "@/lib/utils/seo";
+import { composeMetaDescription, firstSentence } from "@/lib/seo/meta-description";
 import { MonthCalendar } from "@/components/fish/month-calendar";
 import { NearbySpotsSorter } from "@/components/fish/nearby-spots-sorter";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
@@ -82,12 +83,31 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     : "";
 
   const titleText = `${fish.name}の釣り方・時期・おすすめスポット${fish.aliases?.length ? `【${fish.aliases[0]}】` : ""}`;
-  const descText = `${fish.name}の釣り方を初心者にもわかりやすく解説。${peakMonthsStr ? `${fish.name}が釣れる時期は${peakMonthsStr}。` : ""}${methodNames ? `${methodNames}などの釣り方・仕掛け・タックル情報を詳しく紹介。` : ""}釣れるスポット一覧やシーズンカレンダーも掲載。${fish.description.slice(0, 60)}`;
+  // description は文単位で組み立て、min(120)を保証しつつ description 先頭文をきれいに載せる
+  // （従来の slice(0,60) は語の途中で切れていた）。
+  const description = composeMetaDescription(
+    [
+      `${fish.name}の釣り方を初心者にもわかりやすく解説します。`,
+      peakMonthsStr ? `${fish.name}が釣れる時期は${peakMonthsStr}。` : false,
+      methodNames
+        ? `${methodNames}などの釣り方・仕掛け・タックルまで詳しく紹介。`
+        : false,
+      `釣れるスポット一覧やシーズンカレンダーも掲載しています。`,
+      firstSentence(fish.description, 60) || false,
+    ],
+    {
+      fallbackTail: [
+        `${fish.name}の旬や美味しい食べ方の情報も確認できます。`,
+        `近くの釣り場から探すこともできます。`,
+        `初心者の釣行計画にもご活用ください。`,
+      ],
+    },
+  );
   const ogDesc = `${fish.name}の旬の時期・釣り方・おすすめの食べ方を紹介。${fish.description}`;
 
   return {
     title: titleText,
-    description: trimDescription(descText, 158),
+    description,
     keywords: [fish.name, fish.nameKana, ...(fish.aliases || []).slice(0, 3), "釣り方", "釣れる時期", "おすすめスポット"],
     openGraph: {
       title: `${fish.name}の釣り方・時期・おすすめスポット`,

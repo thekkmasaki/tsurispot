@@ -15,7 +15,7 @@ import { getSpotsByPrefectureAndFish, getEligiblePrefFishCombos } from "@/lib/da
 import { FISHING_METHODS } from "@/lib/data/fishing-methods";
 import { REGION_GROUPS } from "@/lib/data/regions-group";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
-import { trimDescription } from "@/lib/utils/seo";
+import { buildPrefFishDescription } from "@/lib/seo/meta-description";
 import {
   generateContextMethodBrief,
   generateTimeAdvice,
@@ -60,7 +60,6 @@ export async function generateMetadata({
 
   // ベストシーズン・釣り方をメタデータ用に取得
   const metaPeakMonths = fish.peakMonths.sort((a, b) => a - b).map((m) => `${m}月`);
-  const metaSeasonMonths = fish.seasonMonths.sort((a, b) => a - b).map((m) => `${m}月`);
   const metaMethodMap = new Map<string, number>();
   for (const spot of spots) {
     const cf = spot.catchableFish.find((c) => c.fish.slug === fishSlug);
@@ -79,13 +78,20 @@ export async function generateMetadata({
   const title = metaPeakLabel
     ? `${pref.name}の${fish.name}釣りスポット${metaCountLabel}｜${metaPeakLabel}が最盛期・釣り方`
     : `${pref.name}で${fish.name}が釣れるスポット・時期・釣り方`;
-  const description = trimDescription(
-    `${pref.name}で${fish.name}が釣れるおすすめ釣りスポット${spots.length}件を厳選。` +
-      `${metaPeakMonths.length > 0 ? `最盛期は${metaPeakMonths.join("・")}、` : metaSeasonMonths.length > 0 ? `シーズンは${metaSeasonMonths.join("・")}、` : ""}` +
-      `${metaTopMethods.length > 0 ? `${metaTopMethods.join("・")}など釣り方とポイント、` : ""}` +
-      `${metaEasyCount > 0 ? `初心者でも狙いやすい${metaEasyCount}スポットを含め、` : ""}` +
-      `アクセス・時間帯・タックルまで実釣に役立つ情報を網羅。`,
-  );
+  // 実績スポット名（rating 順上位）を description に加えて一意性・情報量を高める
+  const metaTopSpotNames = [...spots]
+    .sort((a, b) => b.rating - a.rating)
+    .slice(0, 2)
+    .map((s) => s.name);
+  const description = buildPrefFishDescription({
+    prefName: pref.name,
+    fishName: fish.name,
+    spotCount: spots.length,
+    topSpotNames: metaTopSpotNames,
+    peakMonths: metaPeakMonths,
+    topMethods: metaTopMethods,
+    easyCount: metaEasyCount,
+  });
 
   return {
     title,
