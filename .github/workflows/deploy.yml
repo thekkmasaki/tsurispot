@@ -27,6 +27,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
+      # IndexNow 差分送信用の「before」スナップショット。
+      # デプロイ前の本番 sitemap.xml に載っている URL 集合を控えておき、後段の
+      # 「IndexNow 差分送信」ステップでデプロイ後の sitemap と比較して新規公開 URL だけを送る。
+      # 取得失敗（オリジン一時不調等）でもデプロイをブロックしないよう continue-on-error。
+      - name: 本番sitemapスナップショット取得（IndexNow差分用・before）
+        continue-on-error: true
+        run: |
+          curl -sS --retry 3 --max-time 120 https://tsurispot.com/sitemap.xml -o /tmp/sitemap-before.xml || true
+          grep -o '<loc>[^<]*</loc>' /tmp/sitemap-before.xml 2>/dev/null \
+            | sed -e 's/<[^>]*>//g' | sort -u > /tmp/urls-before.txt || true
+          echo "before: $(wc -l < /tmp/urls-before.txt 2>/dev/null || echo 0) URLs"
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
@@ -394,25 +406,49 @@ jobs:
           check_index "https://tsurispot.com/mypage" noindex
           echo "Indexability check done."
 
-      # Bing/Yandex に新規 deploy 内容を IndexNow で即時通知（重要ページのみ）。
-      # デフォルトモード（?full なし）は主要ナビゲーションページのみを ping する。
-      # 全 URL (7,000+) の一括 ping はデプロイ毎に全量再クロールを誘発し、
-      # オリジン(App Runner)負荷とコストの一因になるため廃止。
-      # 全量通知は週1の cron（.github/workflows/indexnow-weekly.yml）に分離した。
-      # IndexNow の推奨（変更のない URL の再送は非推奨）にも合致する。
+      - name: www→apex リダイレクト監視（Cloudflareルールのドリフト検知）
+        if: success()
+        continue-on-error: true
+        run: |
+          LOC=$(curl -sI --max-time 30 https://www.tsurispot.com/ | tr -d '\r' | grep -i '^location:' | awk '{print $2}')
+          if [[ "$LOC" != https://tsurispot.com/* ]]; then
+            echo "::warning::www.tsurispot.com が apex へ301していません (Location: ${LOC:-なし})。Cloudflare Redirect Rule を確認してください"
+          fi
+
+      # Bing/Yandex に「今回のデプロイで新しく公開された URL」だけを IndexNow で即時通知する。
+      # 【方針変更 2026-07-05】従来は毎デプロイで重要23ページを ping ＋ 全量7,000+URL を週1 cron で
+      # 一括 ping していたが、Bing WMT が (a)最近公開ページが未送信 (b)バッチモードは避けよ を勧告。
+      # そこで「デプロイ時のイベント駆動・差分送信」に一本化する（週1全量 cron は廃止）。
+      # 差分は before/after の sitemap.xml を comm で比較して求める（状態保存は不要）。
+      # このステップはデプロイ成功確認済み・Cloudflare purge（sitemap.xml を含む）済みの後にあるため、
+      # after 取得時の sitemap は新デプロイ内容が反映済み（＝旧 sitemap を掴む問題は起きない）。
+      # before がエッジの古いキャッシュだった場合でも差分は「過大（＝再送）方向」にしか振れず安全側。
       # 失敗してもデプロイ自体は成功扱い (continue-on-error)。
-      - name: IndexNow auto ping (Bing/Yandex, 重要ページのみ)
+      - name: IndexNow 差分送信（新規公開URLのみ）
         if: success() && github.ref == 'refs/heads/master'
         continue-on-error: true
         run: |
-          echo "Triggering IndexNow ping for important pages..."
-          RESPONSE=$(curl -sS --max-time 60 "https://tsurispot.com/api/indexnow")
-          echo "Response: $RESPONSE"
-          if echo "$RESPONSE" | grep -q '"success":true'; then
-            echo "IndexNow ping succeeded."
-          else
-            echo "::warning::IndexNow ping failed or returned non-success response"
+          if [ ! -s /tmp/urls-before.txt ]; then
+            echo "::warning::beforeスナップショット無し。差分送信をskip"; exit 0
           fi
+          curl -sS --retry 3 --max-time 90 https://tsurispot.com/sitemap.xml -o /tmp/sitemap-after.xml
+          grep -o '<loc>[^<]*</loc>' /tmp/sitemap-after.xml | sed -e 's/<[^>]*>//g' | sort -u > /tmp/urls-after.txt
+          comm -13 /tmp/urls-before.txt /tmp/urls-after.txt > /tmp/urls-added.txt
+          ADDED=$(wc -l < /tmp/urls-added.txt)
+          echo "新規URL: ${ADDED}件"
+          if [ "$ADDED" -eq 0 ]; then echo "差分なし。送信skip（IndexNow推奨に合致）"; exit 0; fi
+          split -l 10000 /tmp/urls-added.txt /tmp/added-chunk-
+          for f in /tmp/added-chunk-*; do
+            jq -Rn --arg host "tsurispot.com" \
+              --arg key "03845770c729578716b88beda009b743" \
+              --arg kl "https://tsurispot.com/03845770c729578716b88beda009b743.txt" \
+              '{host:$host, key:$key, keyLocation:$kl, urlList:[inputs]}' < "$f" > /tmp/payload.json
+            CODE=$(curl -sS -o /tmp/inresp.txt -w "%{http_code}" -X POST \
+              -H "Content-Type: application/json; charset=utf-8" \
+              --data @/tmp/payload.json https://api.indexnow.org/indexnow)
+            echo "IndexNow response: $CODE $(cat /tmp/inresp.txt)"
+            case "$CODE" in 200|202) ;; *) echo "::warning::IndexNow送信が $CODE";; esac
+          done
 
       - name: Discord通知（成功）
         if: success() && github.ref == 'refs/heads/master'
