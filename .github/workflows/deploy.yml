@@ -394,15 +394,19 @@ jobs:
           check_index "https://tsurispot.com/mypage" noindex
           echo "Indexability check done."
 
-      # Bing/Yandex に新規 deploy 内容を IndexNow で即時通知。
-      # `?full=true` で全 URL (7,000+) を一括 ping。健康チェック後・通知前に実行。
+      # Bing/Yandex に新規 deploy 内容を IndexNow で即時通知（重要ページのみ）。
+      # デフォルトモード（?full なし）は主要ナビゲーションページのみを ping する。
+      # 全 URL (7,000+) の一括 ping はデプロイ毎に全量再クロールを誘発し、
+      # オリジン(App Runner)負荷とコストの一因になるため廃止。
+      # 全量通知は週1の cron（.github/workflows/indexnow-weekly.yml）に分離した。
+      # IndexNow の推奨（変更のない URL の再送は非推奨）にも合致する。
       # 失敗してもデプロイ自体は成功扱い (continue-on-error)。
-      - name: IndexNow auto ping (Bing/Yandex)
+      - name: IndexNow auto ping (Bing/Yandex, 重要ページのみ)
         if: success() && github.ref == 'refs/heads/master'
         continue-on-error: true
         run: |
-          echo "Triggering IndexNow ping for all URLs..."
-          RESPONSE=$(curl -sS --max-time 180 "https://tsurispot.com/api/indexnow?full=true")
+          echo "Triggering IndexNow ping for important pages..."
+          RESPONSE=$(curl -sS --max-time 60 "https://tsurispot.com/api/indexnow")
           echo "Response: $RESPONSE"
           if echo "$RESPONSE" | grep -q '"success":true'; then
             echo "IndexNow ping succeeded."
