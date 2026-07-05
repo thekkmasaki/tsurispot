@@ -363,6 +363,11 @@ export default function ShopsListPage() {
                   <ChevronRight className="size-3.5" />
                 </Link>
                 <span className="hidden sm:inline text-muted-foreground">|</span>
+                <Link prefetch={false} href="/shops/badge" className="inline-flex items-center gap-1 font-medium text-primary hover:underline">
+                  掲載店バッジのご案内（無料）
+                  <ChevronRight className="size-3.5" />
+                </Link>
+                <span className="hidden sm:inline text-muted-foreground">|</span>
                 <div className="flex items-center gap-2">
                   <Mail className="size-4 text-primary" />
                   <a href="mailto:fishingspotjapan@gmail.com" className="text-primary hover:underline">
