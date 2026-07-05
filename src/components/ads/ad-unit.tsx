@@ -436,21 +436,22 @@ export function MobileStickyAd({ suspended = false }: { suspended?: boolean }) {
     return () => clearTimeout(timer);
   }, []);
 
-  // 表示中はページ末尾が固定広告の裏に隠れないよう、広告の実高さ分だけ body 下部に余白を確保する。
-  // dismiss / suspend / unmount 時はクリーンアップで必ず解除する。
+  // 表示中はページ末尾が固定広告の裏に隠れないよう、広告の高さ分だけ body 下部に余白を確保する。
+  // 高さは固定（内側 h-[98px] + border-t 1px = 99px）なので offsetHeight の読み取りは不要。
+  // 旧実装は offsetHeight 読み取り＋ResizeObserver で padding を書いており「読み取り→書き込み」の
+  // 交錯が強制リフロー(layout thrashing)を起こし TBT を悪化させていた。レイアウト読み取りを排し、
+  // md以上は広告が md:hidden(display:none) のため matchMedia で padding を外す（旧ROの追従と等価）。
+  // 広告のマークアップ・スロット・表示タイミングは不変（収益影響なし）。
   useEffect(() => {
     if (!visible || dismissed || suspended) return;
-    const el = containerRef.current;
-    if (!el) return;
-    const applyPadding = () => {
-      document.body.style.paddingBottom = `${el.offsetHeight}px`;
+    const mql = window.matchMedia("(min-width: 768px)");
+    const apply = () => {
+      document.body.style.paddingBottom = mql.matches ? "" : "99px";
     };
-    applyPadding();
-    // md以上（display:none）→モバイル幅への切替や広告の高さ変化に追従
-    const ro = new ResizeObserver(applyPadding);
-    ro.observe(el);
+    apply();
+    mql.addEventListener("change", apply);
     return () => {
-      ro.disconnect();
+      mql.removeEventListener("change", apply);
       document.body.style.paddingBottom = "";
     };
   }, [visible, dismissed, suspended]);

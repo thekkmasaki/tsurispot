@@ -2,6 +2,15 @@
   "name": "tsurispot",
   "version": "0.1.0",
   "private": true,
+  "//browserslist": "Tailwind CSS v4 の動作要件(Safari 16.4+/Chrome 111+/Firefox 128+)と同じ床に JS ターゲットを揃える。これより古いブラウザはCSSが既に非対応のため追加で切り捨てるユーザーはいない。SWCが Array.prototype.at 等のlegacy polyfill/構文変換を出さなくなり、初期JSを削減(PSIのlegacy JS 14KiB指摘対策)。",
+  "browserslist": [
+    "chrome >= 111",
+    "edge >= 111",
+    "firefox >= 128",
+    "safari >= 16.4",
+    "ios_saf >= 16.4",
+    "and_chr >= 111"
+  ],
   "scripts": {
     "dev": "NODE_OPTIONS='--max-old-space-size=4096' next dev --turbopack",
     "build": "NODE_OPTIONS='--max-old-space-size=4096' next build",
