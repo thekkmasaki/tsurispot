@@ -32,6 +32,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { trimDescription, buildSpotTitle } from "@/lib/utils/seo";
+import { buildSpotMetaDescription } from "@/lib/seo/meta-description";
 import { isLowQualitySpot, isSitemapEligible } from "@/lib/seo-quality";
 import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, getSpotsByFish, getSpotsByMethod, getSpotsBySpotType, getSpotsByDifficulty, type NearbySpot } from "@/lib/data/spots";
 import { RelatedSpotsByFish } from "@/components/spots/related-spots-by-fish";
@@ -149,23 +150,11 @@ export async function generateMetadata({
   if (!spot) notFound();
 
   const fishNames = spot.catchableFish.map((cf) => cf.fish.name).join("・");
-  const top3FishNames = spot.catchableFish.slice(0, 3).map((cf) => cf.fish.name).join("・");
   // title: striking-distance の実クエリ（[地名]+釣果/釣り情報）に合わせ「釣果」を前方化＋鮮度トークン。
   const title = buildSpotTitle(spot);
-  const isFamilyFriendly = spot.difficulty === "beginner" && spot.hasToilet && spot.hasParking;
-  const popularityLabel = spot.rating >= 4.0 ? "人気" : spot.rating <= 3.0 ? "穴場" : "";
-  // description も検索 intent（最新釣果）を冒頭に前置。属性列挙は後段に回す。
-  const descParts: string[] = [
-    `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）の最新釣果・釣り方・アクセス情報。`,
-    top3FishNames ? `${top3FishNames}が狙える${popularityLabel ? popularityLabel + "の" : ""}${SPOT_TYPE_LABELS[spot.spotType]}。` : "",
-    spot.difficulty === "beginner" ? "初心者向け。" : "",
-    spot.hasParking ? "駐車場あり。" : "",
-    spot.hasToilet ? "トイレあり。" : "",
-    spot.isFree ? "無料。" : "",
-    isFamilyFriendly ? "ファミリーOK。" : "",
-    "仕掛け・季節・混雑予想まで完全ガイド。",
-  ];
-  const description = trimDescription(descParts.filter(Boolean).join(""), 158);
+  // description: 実データ（釣れる魚上位・魚種数・定番釣法・設備・固有の導入文）を織り込み 120-158 字化。
+  // 従来の属性列挙（93字）だと Bing「description 短すぎ」に該当したため実データ駆動へ組み立て直す。
+  const description = buildSpotMetaDescription(spot);
   const ogDescription = `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）で${fishNames}が狙えます。${spot.description}`;
 
   // 本当に薄いページのみnoindex（判定基準は src/lib/seo-quality.ts に一元化）
