@@ -186,9 +186,11 @@ const nextConfig: NextConfig = {
     {
       source: "/spots/:slug",
       headers: [
-        // エッジ(Cloudflare)を24hキャッシュしオリジン来訪を激減（コスト/負荷削減）。
+        // エッジ(Cloudflare)を7日キャッシュしオリジン来訪を激減（コスト/負荷削減）。
         // UGC(釣果・投稿)は投稿APIの Cloudflare URL purge で即時反映するため長く取れる。
-        { key: "Cache-Control", value: "public, s-maxage=86400, stale-while-revalidate=86400" },
+        // s-maxage を 24h→7日 に延長: クローラのエッジmiss由来のオリジンISR冷生成を約1/7に抑え、
+        // 昼のCPU100%飽和を緩和する。stale-while-revalidate で古い間も即返し（体感は不変）。
+        { key: "Cache-Control", value: "public, s-maxage=604800, stale-while-revalidate=86400" },
       ],
     },
     {
