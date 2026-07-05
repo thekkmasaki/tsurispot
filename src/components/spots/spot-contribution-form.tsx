@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import { Send, Lightbulb, LogIn } from "lucide-react";
@@ -40,11 +39,18 @@ export function SpotContributionForm({ spotSlug, spotName }: SpotContributionFor
           <Lightbulb className="size-6 text-amber-500" aria-hidden="true" />
           <p className="text-sm font-medium">この釣り場のコツ・情報を共有しませんか？</p>
           <p className="text-xs text-muted-foreground">ログインすると釣り場メモを投稿できます（貢献バッジが貯まります）</p>
-          <Button asChild size="sm" className="mt-1 gap-1.5">
-            <Link prefetch={false} href={`/login?callbackUrl=${encodeURIComponent(pathname)}`}>
-              <LogIn className="size-4" aria-hidden="true" />
-              ログインして投稿
-            </Link>
+          {/* href リンクにすると全スポットページが固有の /login?callbackUrl=… を生成し、
+              Googlebot が数千件クロールして GSC「noindex 除外」を埋め尽くすため、
+              クローラーから見えない onClick 遷移にする（ログイン後の戻り先 UX は同一） */}
+          <Button
+            size="sm"
+            className="mt-1 gap-1.5"
+            onClick={() =>
+              router.push(`/login?callbackUrl=${encodeURIComponent(pathname)}`)
+            }
+          >
+            <LogIn className="size-4" aria-hidden="true" />
+            ログインして投稿
           </Button>
         </CardContent>
       </Card>
