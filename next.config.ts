@@ -99,6 +99,12 @@ const nextConfig: NextConfig = {
       destination: '/fish/suzuki',
       permanent: true,
     },
+    // 県×魚種の旧slug seabass も 301（h1なしの200を返さないよう suzuki へ統一）
+    {
+      source: '/prefecture/:slug/fish/seabass',
+      destination: '/prefecture/:slug/fish/suzuki',
+      permanent: true,
+    },
     // 重複除去で消失したslug → 正しいslugへ301リダイレクト
     ...spotRedirectEntries,
   ],

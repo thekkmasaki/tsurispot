@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { permanentRedirect } from "next/navigation";
 import { MapPin, Fish, Calendar, Target, ChevronLeft, HelpCircle, Clock, Utensils, Sparkles, Compass } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -53,8 +53,11 @@ export async function generateMetadata({
 }: PageProps): Promise<Metadata> {
   const { slug, fishSlug } = await params;
   const pref = getPrefectureBySlug(slug);
+  // 無効slugは200+h1なしで描画され Bing の h1欠落勧告を招くため、
+  // マトリクスページと同じく必ず存在する親へ permanentRedirect（404 は出さない）。
+  if (!pref) permanentRedirect("/prefecture");
   const fish = getFishBySlug(fishSlug);
-  if (!pref || !fish) return { title: "ページが見つかりません" };
+  if (!fish) permanentRedirect(`/prefecture/${slug}`);
 
   const spots = getSpotsByPrefectureAndFish(pref.name, fishSlug);
 
@@ -134,11 +137,14 @@ const CATCH_DIFFICULTY_COLORS: Record<string, string> = {
 export default async function PrefectureFishPage({ params }: PageProps) {
   const { slug, fishSlug } = await params;
   const pref = getPrefectureBySlug(slug);
+  // 無効slug・0件は 404 ではなく必ず存在する親へ permanentRedirect し、
+  // h1なしの200描画（Bing の h1欠落勧告の原因）を防ぐ。
+  if (!pref) permanentRedirect("/prefecture");
   const fish = getFishBySlug(fishSlug);
-  if (!pref || !fish) notFound();
+  if (!fish) permanentRedirect(`/prefecture/${slug}`);
 
   const spots = getSpotsByPrefectureAndFish(pref.name, fishSlug);
-  if (spots.length === 0) notFound();
+  if (spots.length === 0) permanentRedirect(`/prefecture/${pref.slug}`);
 
   // 各スポットの釣れる魚情報を取得
   const spotsWithCatchInfo = spots.map((spot) => {
