@@ -62,6 +62,15 @@ const nextConfig: NextConfig = {
   // lucide-react は Next 既定で最適化済みのため列挙不要。効果は CI の ANALYZE=true で First Load JS を計測して確認する。
   experimental: {
     optimizePackageImports: ["radix-ui", "recharts"],
+    // ブロッキングCSS 3本(非圧縮656KB / br 97KB)を初期HTMLの<style>に埋め込み、
+    // 「CSS DL完了までFCP/LCPが始まらない」レンダリングブロック(PSIモバイル推定4,180ms)を解消する。
+    // クライアント遷移(RSCナビゲーション)は従来どおりCSSチャンクを<link>で取得（初期HTMLのみに作用）。
+    // 副作用: 全ページのHTMLが gzip後 +~110KB 底上げされる。
+    // 【前提・必須セット】cache-handler.js のマルチアイテム分割保存（本PRに同梱）。
+    // これが無いとトップ(~480KB)がDynamoDB単一item上限(380KB)を超えて set スキップ→
+    // 毎回フル再生成→TTFB 7-9s(2026-06障害)が再発する。単体でrevertする場合は
+    // この行だけ外す（cache-handler側の分割保存は残しても無害・恒久改善）。
+    inlineCss: true,
   },
   // ISR/データキャッシュを Upstash Redis に外部化（cache-handler.js）。
   // 目的: 「生成ページ数 = Docker イメージ容量」の結合を断ち、ローカルディスク ISR の
