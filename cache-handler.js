@@ -33,10 +33,31 @@ const TABLE = "tsurispot";
 // を見る。旧 base64 は 33% 膨張していたため、同じ 380KB 上限でも実質的にキャッシュ可能サイズが +33%
 // 緩和され、トップ等の大ページがキャッシュに載りやすくなる（TTFB 改善方向）。
 const MAX_CACHE_BYTES = Number(process.env.ISR_CACHE_MAX_BYTES || 380_000);
+// ── マルチアイテム分割保存（2026-07: experimental.inlineCss 対応）───────────────
+// inlineCss で全ページの HTML に CSS(gzip後 +~110KB) が焼き込まれ、トップ(/)のシリアライズ後が
+// ~480KB となり単一 item の 380KB 上限を確実に超える。従来は「上限超え = setスキップ = 毎回フル
+// 再生成」で、トップの TTFB 7-9s 障害(2026-06)の再発条件になるため、上限超えのエントリは
+// PART_BYTES 以下のチャンクに分割して複数 item(sk=KEY#{key}#p{n}) で保存する。
+//  - MAX_CACHE_BYTES 以下: 従来どおり単一 item（形式不変・後方互換）
+//  - 超え〜PART_BYTES×MAX_PARTS: 分割保存（先頭 item に parts数と世代genを記録）
+//  - PART_BYTES×MAX_PARTS 超: 従来どおり非キャッシュ（warn、毎回生成で正常動作）
+// 整合性: 書込は「末尾パート→先頭」の順、読出は gen 一致を全パートで検証し、
+// 世代混在（同時書換え中の読み）は必ずミス扱い→Next が再生成（安全側）。
+const PART_BYTES = Number(process.env.ISR_CACHE_PART_BYTES || 350_000);
+const MAX_PARTS = Number(process.env.ISR_CACHE_MAX_PARTS || 4);
 // 未アクセス時に自然消滅させる TTL（秒）。SWR のため revalidate より十分長く取る。
 const DEFAULT_TTL_SECONDS = Number(
   process.env.ISR_CACHE_TTL_SECONDS || 60 * 60 * 24 * 7
 );
+
+// payload を PART_BYTES 以下のチャンク配列に分割する（純関数・テスト対象）
+function splitPayload(payload) {
+  const parts = [];
+  for (let off = 0; off < payload.length; off += PART_BYTES) {
+    parts.push(payload.subarray(off, off + PART_BYTES));
+  }
+  return parts;
+}
 
 // ── L1 インメモリキャッシュ（プロセス内）────────────────────────────────────
 // 目的: 同一キーの連続 read（クローラの再訪・人気ページ）で毎回 DynamoDB GET ＋
@@ -52,9 +73,14 @@ const DEFAULT_TTL_SECONDS = Number(
 // 配信デシリアライズをさらに削減する。概算メモリ +~1GB（合計 ~48%）。256KB超は L1 非載で保護。
 // 安全性: set()/revalidateTag() で必ず無効化するので「二重キャッシュで古い HTML が滞留」は
 // 起きない（L1 はこのハンドラが単一の権威として管理）。TTL は revalidate(86400s) より十分短い。
+// 2026-07 (inlineCss対応): 全ページの gzip 後サイズが +~110KB 底上げされるため、
+// 256KB のままだとスポット詳細(~260KB)やトップ(~480KB)が軒並み L1 非載になり、
+// 2026-06 に修正した「毎リクエスト DynamoDB GET+デシリアライズで CPU 床 4-5倍」が再発する。
+// エントリ上限を 520KB に引上げ（トップを含むホット集合を維持）、件数を 1536→1024 に減らして
+// メモリ総量を概ね相殺する（展開後 ~0.8-1.0MB/件 × 1024 ≈ ~1GB、4GB 中 ~50% 以内を維持）。
 const L1_TTL_MS = Number(process.env.ISR_L1_TTL_MS || 600_000);
-const L1_MAX_ENTRIES = Number(process.env.ISR_L1_MAX_ENTRIES || 1536);
-const L1_MAX_ENTRY_BYTES = Number(process.env.ISR_L1_MAX_ENTRY_BYTES || 256_000);
+const L1_MAX_ENTRIES = Number(process.env.ISR_L1_MAX_ENTRIES || 1024);
+const L1_MAX_ENTRY_BYTES = Number(process.env.ISR_L1_MAX_ENTRY_BYTES || 520_000);
 const _l1 = new Map(); // key -> { entry, expiresAt }
 
 function l1Get(key) {
@@ -228,8 +254,35 @@ module.exports = class IsrDynamoCacheHandler {
       const stored = res.Item && res.Item.data;
       if (!stored || (typeof stored !== "string" && !(stored instanceof Uint8Array)))
         return null;
-      const entry = deserializeEntry(stored); // { value, lastModified, tags }
-      l1Set(lk, entry, stored.length); // 次回の同一 read を L1 で吸収
+
+      // 分割エントリ: 先頭 item の parts>1 なら残りパートを並列取得して結合。
+      // gen 不一致 / 欠損パートは世代混在（同時書換え中）なのでミス扱い→再生成（安全側）。
+      const partCount = res.Item.parts;
+      let payload = stored;
+      if (typeof partCount === "number" && partCount > 1) {
+        if (typeof stored === "string") return null; // 分割は新形式(バイナリ)のみ
+        const gen = res.Item.gen;
+        const rest = await Promise.all(
+          Array.from({ length: partCount - 1 }, (_, i) =>
+            doc.send(
+              new GetCommand({
+                TableName: TABLE,
+                Key: { pk: this.pk, sk: `${this._sk(cacheKey)}#p${i + 1}` },
+              })
+            )
+          )
+        );
+        const chunks = [Buffer.from(stored)];
+        for (const r of rest) {
+          const d = r.Item && r.Item.data;
+          if (!(d instanceof Uint8Array) || r.Item.gen !== gen) return null;
+          chunks.push(Buffer.from(d));
+        }
+        payload = Buffer.concat(chunks);
+      }
+
+      const entry = deserializeEntry(payload); // { value, lastModified, tags }
+      l1Set(lk, entry, payload.length); // 次回の同一 read を L1 で吸収
       return entry;
     } catch {
       return null; // 失敗 → ミス扱い → Next が再生成（安全）
@@ -245,14 +298,26 @@ module.exports = class IsrDynamoCacheHandler {
     }
     try {
       const { PutCommand, DeleteCommand } = cmds();
-      // 削除指示
+      // 削除指示（分割パートも掃除。存在しなくても Delete は冪等なのでまとめて投げる）
       if (data == null) {
-        await doc.send(
-          new DeleteCommand({
-            TableName: TABLE,
-            Key: { pk: this.pk, sk: this._sk(cacheKey) },
-          })
-        );
+        await Promise.all([
+          doc.send(
+            new DeleteCommand({
+              TableName: TABLE,
+              Key: { pk: this.pk, sk: this._sk(cacheKey) },
+            })
+          ),
+          ...Array.from({ length: MAX_PARTS - 1 }, (_, i) =>
+            doc
+              .send(
+                new DeleteCommand({
+                  TableName: TABLE,
+                  Key: { pk: this.pk, sk: `${this._sk(cacheKey)}#p${i + 1}` },
+                })
+              )
+              .catch(() => {})
+          ),
+        ]);
         l1Delete(lk);
         return;
       }
@@ -265,22 +330,60 @@ module.exports = class IsrDynamoCacheHandler {
       const tags = (ctx && ctx.tags) || (data && data.tags) || [];
       const now = Date.now();
       const payload = serializeEntry({ value: data, lastModified: now, tags });
-      if (payload.length > MAX_CACHE_BYTES) {
-        console.warn(`[isr-cache] set skip: key=${cacheKey} size=${payload.length}B > ${MAX_CACHE_BYTES}B (非キャッシュ・毎回再生成)`);
+      if (payload.length > PART_BYTES * MAX_PARTS) {
+        console.warn(`[isr-cache] set skip: key=${cacheKey} size=${payload.length}B > ${PART_BYTES * MAX_PARTS}B (非キャッシュ・毎回再生成)`);
         l1Delete(lk);
-        return; // 大きすぎ（>DynamoDB item上限） → 非キャッシュ（毎回生成で正常動作）
+        return; // 分割上限すら超える異常サイズ → 非キャッシュ（毎回生成で正常動作）
       }
 
       const revalidate =
         ctx && typeof ctx.revalidate === "number" ? ctx.revalidate : 0;
       const ttl = Math.max(revalidate, DEFAULT_TTL_SECONDS);
       const exp = ttlEpoch(ttl);
-      await doc.send(
-        new PutCommand({
-          TableName: TABLE,
-          Item: { pk: this.pk, sk: this._sk(cacheKey), data: payload, ttl: exp },
-        })
-      );
+      if (payload.length <= MAX_CACHE_BYTES) {
+        // 単一 item（従来形式・後方互換。parts/gen 属性なし = 旧リーダーもそのまま読める）
+        await doc.send(
+          new PutCommand({
+            TableName: TABLE,
+            Item: { pk: this.pk, sk: this._sk(cacheKey), data: payload, ttl: exp },
+          })
+        );
+      } else {
+        // 分割保存: 末尾パート(#p1..)を先に書き、最後に先頭(パート数+世代gen)を書く。
+        // 読者が書換え途中を掴んでも、先頭が旧なら旧genのパートを読む（新パートはgen不一致→ミス）、
+        // 先頭が新なら新パートは書込済み、で必ず一貫する。
+        const parts = splitPayload(payload);
+        const gen = `${now.toString(36)}-${Math.random().toString(36).slice(2, 8)}`;
+        await Promise.all(
+          parts.slice(1).map((part, i) =>
+            doc.send(
+              new PutCommand({
+                TableName: TABLE,
+                Item: {
+                  pk: this.pk,
+                  sk: `${this._sk(cacheKey)}#p${i + 1}`,
+                  data: part,
+                  gen,
+                  ttl: exp,
+                },
+              })
+            )
+          )
+        );
+        await doc.send(
+          new PutCommand({
+            TableName: TABLE,
+            Item: {
+              pk: this.pk,
+              sk: this._sk(cacheKey),
+              data: parts[0],
+              parts: parts.length,
+              gen,
+              ttl: exp,
+            },
+          })
+        );
+      }
       // L1 も更新（バックエンドと同じ shape）。ISR 再生成直後の read が即 fresh を返す。
       l1Set(lk, { value: data, lastModified: now, tags }, payload.length);
 
@@ -329,7 +432,9 @@ module.exports = class IsrDynamoCacheHandler {
           for (const it of res.Items || []) members.push(it.sk);
           lastKey = res.LastEvaluatedKey;
         } while (lastKey);
-        // 本体エントリとタグ逆引きの両方を削除
+        // 本体エントリとタグ逆引きの両方を削除。
+        // 分割エントリはタグ逆引きが先頭 sk のみを指すため先頭だけ消えるが、
+        // 先頭なしのパート(#p1..)は到達不能な孤児となり TTL で自然消滅する（読者に影響なし）。
         for (const sk of members) {
           await doc.send(
             new DeleteCommand({ TableName: TABLE, Key: { pk: this.pk, sk } })
@@ -351,6 +456,10 @@ module.exports = class IsrDynamoCacheHandler {
 module.exports.__serializeEntry = serializeEntry;
 module.exports.__deserializeEntry = deserializeEntry;
 module.exports.__isCacheableValue = isCacheableValue;
+module.exports.__splitPayload = splitPayload;
+module.exports.__PART_BYTES = PART_BYTES;
+module.exports.__MAX_PARTS = MAX_PARTS;
+module.exports.__MAX_CACHE_BYTES = MAX_CACHE_BYTES;
 // テスト用に L1 ヘルパーを公開（本体動作には影響しない）
 module.exports.__l1Get = l1Get;
 module.exports.__l1Set = l1Set;

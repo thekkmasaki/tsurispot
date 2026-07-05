@@ -7,6 +7,10 @@ const {
   __serializeEntry,
   __deserializeEntry,
   __isCacheableValue,
+  __splitPayload,
+  __PART_BYTES,
+  __MAX_PARTS,
+  __MAX_CACHE_BYTES,
   __l1Get,
   __l1Set,
   __l1Delete,
@@ -18,6 +22,10 @@ const {
   __serializeEntry: (entry: unknown) => Buffer;
   __deserializeEntry: (stored: string | Uint8Array) => unknown;
   __isCacheableValue: (value: unknown) => boolean;
+  __splitPayload: (payload: Buffer) => Buffer[];
+  __PART_BYTES: number;
+  __MAX_PARTS: number;
+  __MAX_CACHE_BYTES: number;
   __l1Get: (key: string) => unknown;
   __l1Set: (key: string, entry: unknown, sizeBytes?: number) => void;
   __l1Delete: (key: string) => void;
@@ -129,17 +137,46 @@ describe("cache-handler シリアライズ往復", () => {
   });
 });
 
-describe("cache-handler set() の 380KB 超スキップ（可視化ログ）", () => {
-  it("MAX_CACHE_BYTES 超のペイロードは console.warn を出してキャッシュしない", async () => {
+describe("cache-handler マルチアイテム分割保存（inlineCss 対応）", () => {
+  // 分割条件の境界: MAX_CACHE_BYTES(380KB) 以下=単一 / 超え=分割 / PART_BYTES×MAX_PARTS 超=スキップ
+  it("PART_BYTES 以下のペイロードは分割しない（単一チャンク）", () => {
+    const payload = Buffer.alloc(__PART_BYTES);
+    const parts = __splitPayload(payload);
+    expect(parts.length).toBe(1);
+    expect(parts[0].length).toBe(__PART_BYTES);
+  });
+
+  it("PART_BYTES 超は複数チャンクに分割され、結合すると元と一致する（ラウンドトリップ）", () => {
+    // 実物に近い擬似ペイロード: inlineCss 後のトップ相当 ~480KB のランダムバイト
+    const payload = Buffer.from(
+      Array.from({ length: 480_000 }, () => Math.floor(Math.random() * 256))
+    );
+    const parts = __splitPayload(payload);
+    expect(parts.length).toBe(2);
+    expect(parts.every((p) => p.length <= __PART_BYTES)).toBe(true);
+    expect(Buffer.concat(parts).equals(payload)).toBe(true);
+  });
+
+  it("分割チャンクの結合を deserializeEntry に通すと元エントリに戻る（保存経路の等価性）", () => {
+    // serialize → split → concat → deserialize が split 無しと同一結果になること
+    const bigHtml = "あ".repeat(400_000); // gzip 後も MAX_CACHE_BYTES 近辺になる大きさ
+    const entry = { value: { kind: "PAGE", html: bigHtml }, lastModified: 1, tags: ["big"] };
+    const payload = __serializeEntry(entry);
+    const rejoined = Buffer.concat(__splitPayload(payload));
+    expect(__deserializeEntry(rejoined)).toEqual(entry);
+  });
+
+  it("分割上限（PART_BYTES×MAX_PARTS）超のペイロードは console.warn を出してキャッシュしない", async () => {
     const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
     try {
       const handler = new (CacheHandler as unknown as new () => {
         set: (key: string, data: unknown, ctx?: unknown) => Promise<void>;
       })();
-      // 非圧縮性の巨大文字列（ランダム）で gzip 後も 380KB を確実に超えさせる。
+      // 非圧縮性の巨大文字列（ランダム）で gzip 後も PART_BYTES×MAX_PARTS(1.4MB) を確実に超えさせる。
       // サイズチェックは doc.send より前に return するため AWS 実呼出は発生しない。
+      const cap = __PART_BYTES * __MAX_PARTS;
       let random = "";
-      for (let i = 0; i < 600_000; i++) {
+      for (let i = 0; i < cap + 400_000; i++) {
         random += String.fromCharCode(33 + Math.floor(Math.random() * 94));
       }
       await handler.set("big-key", { kind: "PAGE", html: random });
@@ -150,6 +187,11 @@ describe("cache-handler set() の 380KB 超スキップ（可視化ログ）", (
     } finally {
       warnSpy.mockRestore();
     }
+  });
+
+  it("定数の健全性: 分割上限は inlineCss 後のトップ(~480KB)を余裕でカバーする", () => {
+    expect(__PART_BYTES * __MAX_PARTS).toBeGreaterThanOrEqual(1_000_000);
+    expect(__MAX_CACHE_BYTES).toBeLessThanOrEqual(__PART_BYTES * __MAX_PARTS);
   });
 });
 
