@@ -14,8 +14,10 @@
 //  - L1 インメモリキャッシュで連続 read を吸収し、バックエンドアクセス数を抑える
 //
 // DynamoDB データモデル:
-//  本体  pk=ISR#{buildId}        sk=KEY#{cacheKey}  data=base64(gzip(JSON))  ttl=epoch
+//  本体  pk=ISR#{buildId}        sk=KEY#{cacheKey}  data=gzip(JSON) を B型バイナリ保存  ttl=epoch
 //  タグ  pk=ISRTAG#{buildId}#{tag} sk=KEY#{cacheKey}  ttl=epoch
+// 2026-07: data は旧 base64 文字列から gzip 生バイトの B型バイナリ保存へ変更。base64 の 33% 膨張を
+// 除去し WRU（書込課金）を約 25% 削減。読み返しは SDK が素の Uint8Array で返すため両形式対応で復元。
 
 const zlib = require("node:zlib");
 const fs = require("node:fs");
@@ -23,10 +25,13 @@ const path = require("node:path");
 
 const TABLE = "tsurispot";
 
-// DynamoDB item は最大 400KB。pk/sk/ttl の余白を見て gzip 後 base64 の上限を保守的に。
+// DynamoDB item は最大 400KB。pk/sk/ttl の余白を見て gzip 後の実保存バイトの上限を保守的に。
 // 超える巨大ページはキャッシュせず毎回オンデマンド生成（正しく動くが遅いだけ）。
 // 2026-06: トップ(/)のシリアライズ後が ~360KB 近辺で上限を超え set スキップ→毎回フル再生成
 // (TTFB 7-9s) になっていたため、400KB item 上限に対し pk/sk/ttl 分の余白を残しつつ 380KB へ引上げ。
+// 2026-07: gzip 生バイトを B型バイナリ保存に変更したため、サイズ判定は実保存バイト（gzip後の生バイト）
+// を見る。旧 base64 は 33% 膨張していたため、同じ 380KB 上限でも実質的にキャッシュ可能サイズが +33%
+// 緩和され、トップ等の大ページがキャッシュに載りやすくなる（TTFB 改善方向）。
 const MAX_CACHE_BYTES = Number(process.env.ISR_CACHE_MAX_BYTES || 380_000);
 // 未アクセス時に自然消滅させる TTL（秒）。SWR のため revalidate より十分長く取る。
 const DEFAULT_TTL_SECONDS = Number(
@@ -140,10 +145,12 @@ function serializeEntry(entry) {
     }
     return value;
   });
-  return zlib.gzipSync(Buffer.from(json, "utf8")).toString("base64");
+  return zlib.gzipSync(Buffer.from(json, "utf8"));
 }
-function deserializeEntry(b64) {
-  const json = zlib.gunzipSync(Buffer.from(b64, "base64")).toString("utf8");
+function deserializeEntry(stored) {
+  // 旧形式: base64文字列 / 新形式: B型バイナリ（SDKは素のUint8Arrayで返す）
+  const buf = typeof stored === "string" ? Buffer.from(stored, "base64") : stored;
+  const json = zlib.gunzipSync(buf).toString("utf8");
   return JSON.parse(json, (_key, value) => {
     if (value && typeof value === "object" && typeof value.__isrBuf === "string")
       return Buffer.from(value.__isrBuf, "base64");
@@ -219,7 +226,8 @@ module.exports = class IsrDynamoCacheHandler {
         })
       );
       const stored = res.Item && res.Item.data;
-      if (!stored || typeof stored !== "string") return null;
+      if (!stored || (typeof stored !== "string" && !(stored instanceof Uint8Array)))
+        return null;
       const entry = deserializeEntry(stored); // { value, lastModified, tags }
       l1Set(lk, entry, stored.length); // 次回の同一 read を L1 で吸収
       return entry;
@@ -258,6 +266,7 @@ module.exports = class IsrDynamoCacheHandler {
       const now = Date.now();
       const payload = serializeEntry({ value: data, lastModified: now, tags });
       if (payload.length > MAX_CACHE_BYTES) {
+        console.warn(`[isr-cache] set skip: key=${cacheKey} size=${payload.length}B > ${MAX_CACHE_BYTES}B (非キャッシュ・毎回再生成)`);
         l1Delete(lk);
         return; // 大きすぎ（>DynamoDB item上限） → 非キャッシュ（毎回生成で正常動作）
       }

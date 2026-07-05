@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from "vitest";
+import { describe, it, expect, beforeEach, vi } from "vitest";
 import CacheHandler from "../../cache-handler.js";
 
 // cache-handler.js は @upstash/redis を getRedis() 内で遅延 require するため、
@@ -15,8 +15,8 @@ const {
   __L1_MAX_ENTRIES,
   __L1_MAX_ENTRY_BYTES,
 } = CacheHandler as unknown as {
-  __serializeEntry: (entry: unknown) => string;
-  __deserializeEntry: (b64: string) => unknown;
+  __serializeEntry: (entry: unknown) => Buffer;
+  __deserializeEntry: (stored: string | Uint8Array) => unknown;
   __isCacheableValue: (value: unknown) => boolean;
   __l1Get: (key: string) => unknown;
   __l1Set: (key: string, entry: unknown, sizeBytes?: number) => void;
@@ -89,6 +89,67 @@ describe("cache-handler シリアライズ往復", () => {
     ) as { value: { segmentData: Map<string, Buffer> } };
     expect(restored.value.segmentData).toBeInstanceOf(Map);
     expect(restored.value.segmentData.size).toBe(0);
+  });
+
+  // (1) serializeEntry の返り値は Buffer（B型バイナリ保存用）で、base64 文字列ではない
+  it("serializeEntry は Buffer を返す（base64 文字列ではない＝WRU 膨張を排除）", () => {
+    const out = __serializeEntry({ value: { html: "<html>x</html>" }, lastModified: 1, tags: [] });
+    expect(Buffer.isBuffer(out)).toBe(true);
+  });
+
+  // (2) 後方互換: 旧形式（base64 文字列）でも復元できる
+  it("旧形式（base64 文字列）を復元する（デプロイ跨ぎの保険）", () => {
+    const entry = { value: { kind: "PAGE", html: "<html>old</html>" }, lastModified: 42, tags: ["b"] };
+    const legacyB64 = __serializeEntry(entry).toString("base64");
+    expect(__deserializeEntry(legacyB64)).toEqual(entry);
+  });
+
+  // (3) SDK 戻り値シミュレーション: lib-dynamodb は B型を素の Uint8Array で返す
+  it("新形式（素の Uint8Array）を復元する（SDK 戻り値の実体）", () => {
+    const entry = { value: { kind: "PAGE", html: "<html>new</html>" }, lastModified: 7, tags: ["c"] };
+    const sdkReturned = new Uint8Array(__serializeEntry(entry));
+    expect(Buffer.isBuffer(sdkReturned)).toBe(false); // 落とし穴の確認: Buffer ではない
+    expect(__deserializeEntry(sdkReturned)).toEqual(entry);
+  });
+
+  // (4) 大きい値（数百KB）でもバイナリ往復で一致する
+  it("数百KB の値をバイナリ往復で復元する", () => {
+    const bigHtml = "あ".repeat(300_000); // マルチバイトで実サイズを稼ぐ
+    const entry = { value: { kind: "PAGE", html: bigHtml }, lastModified: 99, tags: [] };
+    const restored = __deserializeEntry(__serializeEntry(entry)) as typeof entry;
+    expect(restored.value.html).toBe(bigHtml);
+    expect(restored).toEqual(entry);
+  });
+
+  // (5) tags 付きエントリの tags が復元される
+  it("tags 付きエントリの tags を復元する", () => {
+    const entry = { value: { html: "<html>t</html>" }, lastModified: 5, tags: ["spot", "fish"] };
+    const restored = __deserializeEntry(__serializeEntry(entry)) as typeof entry;
+    expect(restored.tags).toEqual(["spot", "fish"]);
+  });
+});
+
+describe("cache-handler set() の 380KB 超スキップ（可視化ログ）", () => {
+  it("MAX_CACHE_BYTES 超のペイロードは console.warn を出してキャッシュしない", async () => {
+    const warnSpy = vi.spyOn(console, "warn").mockImplementation(() => {});
+    try {
+      const handler = new (CacheHandler as unknown as new () => {
+        set: (key: string, data: unknown, ctx?: unknown) => Promise<void>;
+      })();
+      // 非圧縮性の巨大文字列（ランダム）で gzip 後も 380KB を確実に超えさせる。
+      // サイズチェックは doc.send より前に return するため AWS 実呼出は発生しない。
+      let random = "";
+      for (let i = 0; i < 600_000; i++) {
+        random += String.fromCharCode(33 + Math.floor(Math.random() * 94));
+      }
+      await handler.set("big-key", { kind: "PAGE", html: random });
+      expect(warnSpy).toHaveBeenCalledTimes(1);
+      const msg = String(warnSpy.mock.calls[0][0]);
+      expect(msg).toContain("[isr-cache] set skip");
+      expect(msg).toContain("big-key");
+    } finally {
+      warnSpy.mockRestore();
+    }
   });
 });
 
