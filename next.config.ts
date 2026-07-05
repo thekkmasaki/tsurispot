@@ -62,15 +62,12 @@ const nextConfig: NextConfig = {
   // lucide-react は Next 既定で最適化済みのため列挙不要。効果は CI の ANALYZE=true で First Load JS を計測して確認する。
   experimental: {
     optimizePackageImports: ["radix-ui", "recharts"],
-    // ブロッキングCSS 3本(非圧縮656KB / br 97KB)を初期HTMLの<style>に埋め込み、
-    // 「CSS DL完了までFCP/LCPが始まらない」レンダリングブロック(PSIモバイル推定4,180ms)を解消する。
-    // クライアント遷移(RSCナビゲーション)は従来どおりCSSチャンクを<link>で取得（初期HTMLのみに作用）。
-    // 副作用: 全ページのHTMLが gzip後 +~110KB 底上げされる。
-    // 【前提・必須セット】cache-handler.js のマルチアイテム分割保存（本PRに同梱）。
-    // これが無いとトップ(~480KB)がDynamoDB単一item上限(380KB)を超えて set スキップ→
-    // 毎回フル再生成→TTFB 7-9s(2026-06障害)が再発する。単体でrevertする場合は
-    // この行だけ外す（cache-handler側の分割保存は残しても無害・恒久改善）。
-    inlineCss: true,
+    // 【2026-07-05 無効化】inlineCss はブロッキングCSS解消(PSI推定-4,180ms)のため #231 で
+    // 導入したが、全SSGページのHTMLにCSS(非圧縮656KB)が焼き込まれてビルド成果物が激増し、
+    // Docker build/push がジョブtimeout(60分)を超えてデプロイ不能になったため無効化。
+    // 再挑戦の前提条件: CSS本体の削減（656KB→200KB級）が先。それまで有効化しないこと。
+    // cache-handler.js のマルチアイテム分割保存(#231)は無害・恒久改善のため残置。
+    // inlineCss: true,
   },
   // ISR/データキャッシュを Upstash Redis に外部化（cache-handler.js）。
   // 目的: 「生成ページ数 = Docker イメージ容量」の結合を断ち、ローカルディスク ISR の
