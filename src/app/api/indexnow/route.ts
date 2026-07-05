@@ -1,15 +1,10 @@
+// IndexNow 送信エンドポイント。
+// 【方針変更 2026-07-05】新規/更新ページの通知は「デプロイ時の sitemap 差分送信」
+//（.github/workflows/deploy.yml の「IndexNow 差分送信」ステップ）へ移行した。
+// かつて存在した全量ping（GET ?full=true で 7,000+URL を一括バッチ送信）は、
+// Bing のバッチモード非推奨・未変更URL再送非推奨に反する上、無認証GETで誰でも誘発できたため廃止。
+// ここに残すのは GET（重要ナビゲーションページのみ・手動/補助用）と POST（指定URLの手動送信）のみ。
 import { NextRequest, NextResponse } from "next/server";
-import { fishingSpots } from "@/lib/data/spots";
-import { fishSpecies } from "@/lib/data/fish";
-import { regions } from "@/lib/data/regions";
-import { prefectures } from "@/lib/data/prefectures";
-import { areaGuides } from "@/lib/data/area-guides";
-import { monthlyGuides } from "@/lib/data/monthly-guides";
-import { getAllBlogPosts } from "@/lib/data/blog";
-import { seasonalGuides } from "@/lib/data/seasonal-guides";
-import { tackleShops } from "@/lib/data/shops";
-import { FISHING_METHODS, MONTHS } from "@/lib/data/fishing-methods";
-import { REGION_GROUPS } from "@/lib/data/regions-group";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 // IndexNow APIキー（public/{key}.txt に配置済み）
@@ -18,161 +13,12 @@ const HOST = "tsurispot.com";
 const BASE_URL = `https://${HOST}`;
 const INDEXNOW_ENDPOINT = "https://api.indexnow.org/indexnow";
 
-// 全URL収集＋バッチ送信は時間がかかるため実行時間上限を引き上げる
+// POST で複数URLをバッチ送信する場合に備えて実行時間上限を引き上げる
 export const maxDuration = 60;
 
 /**
- * サイト全URLを収集する（sitemap.tsと同じデータソース）
- */
-async function collectAllUrls(): Promise<string[]> {
-  const urls: string[] = [];
-
-  // 固定ページ
-  const staticPages = [
-    "", "/spots", "/fish", "/map", "/catchable-now", "/ranking", "/tides",
-    "/fishing-calendar", "/for-beginners", "/fishing",
-    "/fishing-spots/breakwater-beginner", "/fishing-spots/best-saltwater",
-    "/fishing-spots/river-beginner", "/fishing-spots/near-me",
-    "/guide", "/guide/beginner", "/guide/setup", "/guide/sabiki",
-    "/guide/choinage", "/guide/casting", "/guide/float-fishing",
-    "/guide/anazuri", "/guide/oyogase", "/guide/eging", "/guide/jigging",
-    "/guide/lure", "/guide/entou-kago", "/guide/knots", "/guide/line",
-    "/guide/sinker", "/guide/rigs", "/guide/tide", "/guide/night-fishing",
-    "/guide/family", "/guide/budget", "/guide/handling", "/guide/fish-handling",
-    "/guide/how-to-fish", "/guide/fishing-tips", "/guide/fishing-for-beginners",
-    "/guide/fishing-gear-guide", "/guide/jet-sinker",
-    "/gear", "/gear/sabiki", "/gear/rod-beginner", "/gear/tackle-box",
-    "/methods", "/methods/sabiki", "/methods/ajing", "/methods/eging",
-    "/methods/mebaring", "/methods/shore-jigging", "/methods/choi-nage",
-    "/methods/uki-zuri", "/methods/ana-zuri", "/methods/tachiuo-zuri",
-    "/glossary", "/glossary-quiz", "/seasonal", "/beginner-checklist",
-    "/fishing-rules", "/faq", "/faq/beginner", "/faq/season", "/faq/spot",
-    "/faq/technique", "/safety", "/recommendation", "/fish-finder", "/quiz",
-    "/bouzu-checker", "/shops", "/sitemap-page", "/contact", "/partner",
-    "/umigyo", "/umigyo/for-municipalities", "/about",
-    "/legal", "/privacy", "/terms",
-    "/blog", "/area-guide", "/monthly", "/prefecture", "/area",
-  ];
-  for (const page of staticPages) {
-    urls.push(`${BASE_URL}${page}`);
-  }
-
-  // ブログ記事
-  const blogPosts = await getAllBlogPosts();
-  for (const post of blogPosts) {
-    urls.push(`${BASE_URL}/blog/${post.slug}`);
-  }
-
-  // エリアガイド
-  for (const guide of areaGuides) {
-    urls.push(`${BASE_URL}/area-guide/${guide.slug}`);
-  }
-
-  // 月別ガイド
-  for (const guide of monthlyGuides) {
-    urls.push(`${BASE_URL}/monthly/${guide.slug}`);
-  }
-
-  // スポット詳細
-  for (const spot of fishingSpots) {
-    urls.push(`${BASE_URL}/spots/${spot.slug}`);
-  }
-
-  // 魚種詳細
-  for (const fish of fishSpecies) {
-    urls.push(`${BASE_URL}/fish/${fish.slug}`);
-  }
-
-  // 都道府県
-  for (const pref of prefectures) {
-    urls.push(`${BASE_URL}/prefecture/${pref.slug}`);
-  }
-
-  // エリア
-  for (const region of regions) {
-    urls.push(`${BASE_URL}/area/${region.slug}`);
-  }
-
-  // 釣り方×月マトリクス
-  for (const method of FISHING_METHODS) {
-    urls.push(`${BASE_URL}/fishing/${method.slug}`);
-    for (const month of MONTHS) {
-      urls.push(`${BASE_URL}/fishing/${method.slug}/${month.slug}`);
-    }
-  }
-
-  // 季節ガイド
-  for (const guide of seasonalGuides) {
-    urls.push(`${BASE_URL}/seasonal/${guide.slug}`);
-  }
-
-  // 釣具店
-  for (const shop of tackleShops) {
-    urls.push(`${BASE_URL}/shops/${shop.slug}`);
-  }
-
-  // 都道府県×魚種
-  const seen = new Set<string>();
-  for (const spot of fishingSpots) {
-    const pref = prefectures.find(p => p.name === spot.region.prefecture);
-    if (!pref) continue;
-    for (const cf of spot.catchableFish) {
-      const key = `${pref.slug}|${cf.fish.slug}`;
-      if (!seen.has(key)) {
-        seen.add(key);
-        urls.push(`${BASE_URL}/prefecture/${pref.slug}/fish/${cf.fish.slug}`);
-      }
-    }
-  }
-
-  // 月×地域
-  const MONTHS_SLUGS = [
-    "january", "february", "march", "april", "may", "june",
-    "july", "august", "september", "october", "november", "december",
-  ];
-  const REGION_SLUGS = [
-    "hokkaido", "tohoku", "kanto", "chubu", "kinki", "chugoku", "shikoku", "kyushu-okinawa",
-  ];
-  for (const month of MONTHS_SLUGS) {
-    for (const region of REGION_SLUGS) {
-      urls.push(`${BASE_URL}/seasonal/${month}/${region}`);
-    }
-  }
-
-  // 釣り方×地域
-  for (const method of FISHING_METHODS) {
-    for (const region of REGION_GROUPS) {
-      urls.push(`${BASE_URL}/fishing/${method.slug}/area/${region.slug}`);
-    }
-  }
-
-  // 都道府県別釣りルール
-  for (const pref of prefectures) {
-    urls.push(`${BASE_URL}/fishing-rules/${pref.slug}`);
-  }
-
-  // 釣りインストラクター試験 (290 問 quiz・章別解説、 sitemap には含むが従来 ping 漏れ)
-  const instructorExamPaths = [
-    "/instructor-exam",
-    "/instructor-exam/law", "/instructor-exam/law/quiz",
-    "/instructor-exam/manners", "/instructor-exam/manners/quiz",
-    "/instructor-exam/tackle", "/instructor-exam/tackle/quiz",
-    "/instructor-exam/safety", "/instructor-exam/safety/quiz",
-    "/instructor-exam/history", "/instructor-exam/history/quiz",
-    "/instructor-exam/technique", "/instructor-exam/technique/quiz",
-    "/instructor-exam/environment", "/instructor-exam/environment/quiz",
-    "/instructor-exam/essay", "/instructor-exam/practical",
-  ];
-  for (const p of instructorExamPaths) {
-    urls.push(`${BASE_URL}${p}`);
-  }
-
-  return urls;
-}
-
-/**
  * IndexNow APIにURLリストを送信する
- * 10,000件ずつバッチに分割して送信
+ * 500件ずつバッチに分割して送信
  */
 async function submitToIndexNow(urlList: string[]): Promise<{ submitted: number; batches: number; status: number[] }> {
   const BATCH_SIZE = 500;
@@ -228,24 +74,10 @@ function collectImportantUrls(): string[] {
 }
 
 /**
- * GET: 重要ページのみIndexNowに送信（デフォルト）
- * ?full=true で全URL送信（手動実行時のみ推奨）
+ * GET: 重要ナビゲーションページのみIndexNowに送信（手動/補助用）。
+ * 全URL送信（旧 ?full=true）は廃止。新規/更新ページの通知はデプロイ時の差分送信が担う。
  */
-export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url);
-  const full = searchParams.get("full") === "true";
-
-  if (full) {
-    const urls = await collectAllUrls();
-    const result = await submitToIndexNow(urls);
-    return NextResponse.json({
-      success: true,
-      message: `IndexNowに${result.submitted}件の全URLを送信しました（${result.batches}バッチ）`,
-      ...result,
-    });
-  }
-
-  // デフォルト: 重要ページのみ送信（Bingの推奨に従い、バッチ送信を最小限に）
+export async function GET() {
   const urls = collectImportantUrls();
   const result = await submitToIndexNow(urls);
 
