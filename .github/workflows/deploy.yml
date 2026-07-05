@@ -84,6 +84,26 @@ jobs:
           AWS_REGION: ap-northeast-1
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
 
+      # フォントpreloadハッシュ検証（layout.tsx のハードコードとビルド成果物の一致）
+      # LCP対策で layout.tsx に Zen Maru 700 スライス4本を <link rel=preload> でハードコードしている。
+      # next/font のハッシュは通常ビルド間で安定だが、Zen Maru 更新や Next.js 更新でずれると
+      # preload が 404(無害・コンソール警告のみ)になり LCP 改善が失効する。ここで検出する。
+      # ずれても表示は壊れないため FAIL させず warning に留め、コンテンツ系デプロイをブロックしない。
+      - name: フォントpreloadハッシュ検証
+        if: github.ref == 'refs/heads/master'
+        run: |
+          MISS=0
+          for f in f99f0c0793f80098-s.f3844250.woff2 27e35131747c32ae-s.b6c80edf.woff2 \
+                   4aa59075740ea887-s.56094210.woff2 918bec1d53fbfd5a-s.040320a2.woff2; do
+            if [ -f ".next/static/media/$f" ]; then
+              echo "OK  preload対象 $f が成果物に存在"
+            else
+              echo "::warning::preload対象 $f がビルド成果物に無い（Zen Maru/Next更新でハッシュずれ?）。src/app/layout.tsx の preload href を .next/static/media の実ファイル名に更新するとLCP改善が復活する（表示は壊れていない）"
+              MISS=1
+            fi
+          done
+          [ "$MISS" = "0" ] && echo "フォントpreload 4本すべて成果物に存在" || true
+
       # ビルド成果物サイズ計測（情報・内訳）
       # 非圧縮の .next/standalone は実デプロイ可否(=App Runner が pull する圧縮イメージ容量)と
       # 直結しないため、ここでは FAIL させず「どのルートが肥大しているか」の内訳ログのみ出す。
