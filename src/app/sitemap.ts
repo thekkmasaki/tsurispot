@@ -19,6 +19,7 @@ import {
 import { redis } from "@/lib/redis";
 import { getUserById } from "@/lib/user-store";
 import { isSitemapEligible } from "@/lib/seo-quality";
+import { monthLastModified } from "@/lib/sitemap-dates";
 
 const baseUrl = "https://tsurispot.com";
 
@@ -45,10 +46,11 @@ const dynamicDate = new Date(BUILD_DATE);
 const contentDate = new Date(BUILD_DATE);
 const legalDate = new Date("2025-06-01");
 
-// 月ごとの lastModified（マトリクスページ用: その月の1日に固定）
-const BUILD_YEAR = new Date(BUILD_DATE).getUTCFullYear();
-const monthDate = (num: number) =>
-  new Date(Date.UTC(BUILD_YEAR, num - 1, 1));
+// 月ごとの lastModified（マトリクス・県×月・月×地域・釣り方×月ページ用）。
+// 「直近の過去のその月1日」＋ INDEX_POLICY_DATE(2026-06-23) 下限クランプ。
+// 旧実装（ビルド年のその月1日固定）は過去月が「変更なし」判定で再クロールされず、
+// 未来月は未来日付で無視される問題があった → src/lib/sitemap-dates.ts 参照。
+const monthDate = (num: number) => monthLastModified(num, new Date(BUILD_DATE));
 
 // 釣果1件以上 & isPublic!=false のユーザーを sitemap に含める
 // (Redis SCAN は数百ユーザー規模なら問題ないが、将来規模拡大時は別途インデックス化検討)
@@ -475,9 +477,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.5,
     })),
-
-    // 都道府県×月×魚種マトリクスページは sitemap から除外。
-    // ページは ISR で生きてるが、Google「クロール済み未登録」の主因のため sitemap 非掲載で crawl budget 集中。
 
     // ===== 釣り場タイプページ =====
     { url: `${baseUrl}/spot-type`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.8 },
