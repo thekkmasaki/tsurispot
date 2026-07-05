@@ -123,6 +123,18 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="theme-color" content="#0369a1" />
+        {/* LCP対策: ヒーローh1「近くの釣りスポットがすぐ見つかる。」とロゴ「ツリスポ」の
+            Zen Maru Gothic 700 必要スライス4本(計52.9KB)をpreloadし、
+            「CSS DL→@font-face発見→スライスDL→フォントスワップでLCP再計上」の直列チェーンを並列化する。
+            LCP要素はこのh1テキストのため、フォント到着遅延がそのままLCPを押し上げていた。
+            ハッシュはnext/fontのコンテンツハッシュでフォント内容が変わらない限りビルド間で安定。
+            Zen Maru更新等でずれても preload 404(コンソール警告のみ)で表示は無傷。
+            deploy.yml のビルド後検証ステップがずれを検出する。
+            crossOrigin必須(フォントはCORSフェッチ。欠けるとpreloadが再利用されず二重DL)。 */}
+        <link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href="/_next/static/media/f99f0c0793f80098-s.f3844250.woff2" />
+        <link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href="/_next/static/media/27e35131747c32ae-s.b6c80edf.woff2" />
+        <link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href="/_next/static/media/4aa59075740ea887-s.56094210.woff2" />
+        <link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href="/_next/static/media/918bec1d53fbfd5a-s.040320a2.woff2" />
         {/* Preconnect: 外部ドメインへの接続を事前確立してCWV改善 */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
