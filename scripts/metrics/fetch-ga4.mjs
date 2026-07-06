@@ -53,12 +53,19 @@ export async function fetchGa4(cfg = loadConfig()) {
   for (const row of mainReport.rows || []) {
     const p = toPathKey(row.dimensionValues[0].value);
     const m = row.metricValues;
+    const pageviews = Number(m[0].value) || 0;
+    const activeUsers = Number(m[1].value) || 0;
+    // 1ユーザーあたりPVが異常に高いページはJS実行型ボットの連打が疑われる（非破壊フラグ）。
+    // 生PV/ユーザーは改変せず、下流の集計側で重み付け・除外の判断材料にする。
+    const pvPerUser = +(pageviews / Math.max(activeUsers, 1)).toFixed(1);
     pages[p] = {
-      pageviews: Number(m[0].value) || 0,
-      activeUsers: Number(m[1].value) || 0,
+      pageviews,
+      activeUsers,
       engagementRate: +(Number(m[2].value) || 0).toFixed(4),
       engagementDuration: Math.round(Number(m[3].value) || 0),
       affiliateClicks: 0,
+      pvPerUser,
+      ...(pvPerUser > 30 && pageviews > 500 ? { suspicious: true } : {}),
     };
   }
 
@@ -79,7 +86,7 @@ export async function fetchGa4(cfg = loadConfig()) {
     for (const row of affReport.rows || []) {
       const p = toPathKey(row.dimensionValues[0].value);
       const clicks = Number(row.metricValues[0].value) || 0;
-      if (!pages[p]) pages[p] = { pageviews: 0, activeUsers: 0, engagementRate: 0, engagementDuration: 0, affiliateClicks: 0 };
+      if (!pages[p]) pages[p] = { pageviews: 0, activeUsers: 0, engagementRate: 0, engagementDuration: 0, affiliateClicks: 0, pvPerUser: 0 };
       pages[p].affiliateClicks = clicks;
     }
   } catch (e) {

@@ -1,11 +1,17 @@
 "use client";
 
 import Script from "next/script";
+import { useAutomationGuard } from "@/lib/use-automation-guard";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 export function GoogleAnalytics() {
-  if (!GA_ID) return null;
+  // 自動化ブラウザ(navigator.webdriver === true)では gtag.js本体・ga4-init とも出力しない。
+  // これで window.gtag が未定義になり、ads-tracking / analytics / web-vitals-reporter の
+  // typeof window.gtag !== "function" 早期returnにより計測が連鎖的に無害化される。
+  // Consent Mode default は allowed のとき従来どおり ga4-init 内で先頭に発火するため順序は不変。
+  const allowed = useAutomationGuard();
+  if (!GA_ID || !allowed) return null;
 
   return (
     <>
