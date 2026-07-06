@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP, Zen_Maru_Gothic } from "next/font/google";
-import Script from "next/script";
+import { AdSenseLoader } from "@/components/ads/adsense-loader";
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Footer } from "@/components/layout/footer";
@@ -252,14 +252,9 @@ export default function RootLayout({
         />
         <GoogleAnalytics />
         <WebVitalsReporter />
-        {/* AdSense: lazyOnload で初回ロードのレンダリングブロックを回避（CLS/LCP優先） */}
-        {process.env.NEXT_PUBLIC_ADSENSE_ID && (
-          <Script
-            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_ID}`}
-            strategy="lazyOnload"
-            crossOrigin="anonymous"
-          />
-        )}
+        {/* AdSense は自動化ブラウザ(navigator.webdriver)をゲートするローダー経由で読み込む
+            （ボット由来の無効トラフィック抑止／AdSense配信制限リスク低減）。 */}
+        <AdSenseLoader />
         <Providers>
           {/* Phase 6 audit: skip link (a11y、 keyboard 利用者がナビをスキップしてメインへ) */}
           <a

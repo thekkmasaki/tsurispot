@@ -45,7 +45,7 @@ async function main() {
       merged[p] = {
         url: v.url, type: v.type,
         clicks: v.clicks, impressions: v.impressions, ctr: v.ctr, position: v.position,
-        pageviews: 0, affiliateClicks: 0, engagementRate: 0,
+        pageviews: 0, activeUsers: 0, affiliateClicks: 0, engagementRate: 0,
       };
     }
   }
@@ -54,8 +54,11 @@ async function main() {
       merged[p] = {
         ...(merged[p] || { url: cfg.site.baseUrl + p, type: null, clicks: 0, impressions: 0, ctr: 0, position: 0 }),
         pageviews: v.pageviews,
+        activeUsers: v.activeUsers,
         affiliateClicks: v.affiliateClicks,
         engagementRate: v.engagementRate,
+        // fetch-ga4 が付けたボット疑いフラグを引き継ぐ（非破壊、生値は改変しない）。
+        ...(v.suspicious ? { suspicious: true } : {}),
       };
     }
   }
