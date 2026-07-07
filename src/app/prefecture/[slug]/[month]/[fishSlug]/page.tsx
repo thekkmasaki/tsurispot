@@ -169,11 +169,14 @@ export async function generateMetadata({
 
   const year = new Date().getFullYear();
   const isPeakMonth = fish.peakMonths?.includes(month.num) ?? false;
-  const title = `${pref.name}の${month.name}の${fish.name}釣り｜${isPeakMonth ? "最盛期の" : ""}釣れるスポット・釣り方【${year}年】`;
 
   // 実データ（実績スポット名・釣り方・件数・水温・旬）を織り込んだ description を生成し、
   // Bing「description 短すぎ」対応と CTR 改善を狙う。matchingSpots は cache() で本体と共有。
   const matchingSpots = getMatchingSpots(pref.name, month.num, fishSlug);
+  // スポット件数を title に含めて具体性を上げる（pref-fish テンプレの「N選」と同パターン。
+  // 件数は本文・JSON-LD と同じ matchingSpots.length の実データ。2件では「2選」が不自然なので3件以上のみ）
+  const countLabel = matchingSpots.length >= 3 ? `${matchingSpots.length}選` : "";
+  const title = `${pref.name}の${month.name}の${fish.name}釣り｜${isPeakMonth ? "最盛期の" : ""}釣れるスポット${countLabel}・釣り方【${year}年】`;
   const methodCount = new Map<string, number>();
   for (const { matchingCf } of matchingSpots) {
     for (const cf of matchingCf) {
