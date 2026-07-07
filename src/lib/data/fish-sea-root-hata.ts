@@ -9,7 +9,7 @@ export const seaFishRootHata: FishSpecies[] = [
     scientificName: "Sebastiscus marmoratus",
     slug: "kasago",
     description:
-      "根魚の代表格。穴釣りやブラクリで堤防のテトラポッドや岩の隙間を狙います。冬でもよく釣れる貴重なターゲット。",
+      "カサゴのシーズンは晩秋から春で、最盛期は12〜2月の真冬。根魚の代表格で、穴釣りやブラクリで堤防のテトラポッドや岩の隙間を狙います。他の魚が釣れにくい冬でも数が出る貴重なターゲット。",
     category: "sea",
     family: "メバル科",
     difficulty: "beginner",
@@ -831,7 +831,7 @@ export const seaFishRootHata: FishSpecies[] = [
     scientificName: "Hemitrygon akajei",
     slug: "akaei",
     description:
-      "【注意: 毒棘あり】尾の付け根に鋸歯状の毒棘を持つ危険なエイ。堤防や砂浜で釣れることがあり、刺されると毒と物理的な傷の両方で重傷を負う恐れがあります。",
+      "【注意: 毒棘あり】アカエイは5〜10月に堤防や砂浜で釣れ、盛期は7〜9月。尾の付け根に鋸歯状の毒棘を持つ危険なエイで、刺されると毒と物理的な傷の両方で重傷を負う恐れがあります。",
     category: "sea",
     family: "アカエイ科",
     difficulty: "beginner",
