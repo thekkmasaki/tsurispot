@@ -95,6 +95,21 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: ap-northeast-1
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+          # ISR キャッシュ S3 移行: next build 中のプリレンダ書込（シーディング）を S3 へ向ける。
+          # これが無いとデプロイ直後の新 buildId 名前空間が未シード（コールド）になり
+          # 再生成ストーム（2026-06-23 型障害）の条件が揃う。ランタイム側は App Runner env で同値を設定。
+          ISR_CACHE_BACKEND: s3
+          ISR_CACHE_S3_BUCKET: tsurispot-isr-cache
+
+      # ISR キャッシュ S3 化の同梱検証: cache-handler.js は nft トレース外の明示 COPY のため、
+      # ランタイムが依存する @aws-sdk/client-s3 が standalone に無いと「全ミス→毎回再生成→CPU100%」
+      # になる。src/lib/s3.ts の静的 import でトレースされる想定だが、構成変更での欠落を CI で塞ぐ。
+      - name: ISRキャッシュ S3 SDK 同梱検証
+        if: github.ref == 'refs/heads/master'
+        run: |
+          test -d .next/standalone/node_modules/@aws-sdk/client-s3 \
+            || { echo "::error::@aws-sdk/client-s3 が .next/standalone に同梱されていない（ISRキャッシュが全ミスになる）"; exit 1; }
+          echo "client-s3 同梱 OK"
 
       # フォントpreloadハッシュ検証（layout.tsx のハードコードとビルド成果物の一致）
       # LCP対策で layout.tsx に Zen Maru 700 スライス4本を <link rel=preload> でハードコードしている。
