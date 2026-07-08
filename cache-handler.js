@@ -18,12 +18,46 @@
 //  タグ  pk=ISRTAG#{buildId}#{tag} sk=KEY#{cacheKey}  ttl=epoch
 // 2026-07: data は旧 base64 文字列から gzip 生バイトの B型バイナリ保存へ変更。base64 の 33% 膨張を
 // 除去し WRU（書込課金）を約 25% 削減。読み返しは SDK が素の Uint8Array で返すため両形式対応で復元。
+//
+// 2026-07 (S3移行): DynamoDB は 1KB=1WRU 課金のため平均 ~150KB のエントリで 1 Put ~150WRU を
+// 消費し、書込がコストの 85%（月$66-78ペース）を占めていた。ISR_CACHE_BACKEND=s3 で
+// ペイロード本体を S3 へ置く（PUT 課金はサイズ非依存 → 月$4-8 見込み）:
+//  本体  s3://{ISR_CACHE_S3_BUCKET}/{ISR_CACHE_S3_PREFIX}/{buildId}/{sha256(cacheKey)}  Body=gzip(JSON)
+//  タグ  従来どおり DynamoDB（pk=ISRTAG#...。~1WRU/行で誤差のため温存し、UGC 即時反映の
+//        revalidateTag の Query→Delete フローを変えない）
+//  TTL   S3 Lifecycle（ISR/ 14日 Expiration）が代替。上書き PUT で延命され、旧 buildId 世代は自然消滅。
+//  分割  S3 は 400KB 制約が無いため分割保存(parts/gen)は不使用。アトミック上書き＋strong consistency
+//        により gen 世代検証そのものが不要。
+// DynamoDB 経路はロールバック用に温存（env 未設定時のデフォルトは dynamodb ＝安全側）。
 
 const zlib = require("node:zlib");
 const fs = require("node:fs");
 const path = require("node:path");
+const crypto = require("node:crypto");
 
 const TABLE = "tsurispot";
+
+// ── キャッシュバックエンド選択 ─────────────────────────────────────────────
+// "s3": ペイロード本体を S3、タグ逆引きは DynamoDB のハイブリッド。
+// デフォルトは dynamodb: env が消えた場合に従来挙動へ自動フォールバックする安全側。
+const BACKEND = process.env.ISR_CACHE_BACKEND === "s3" ? "s3" : "dynamodb";
+const S3_BUCKET = process.env.ISR_CACHE_S3_BUCKET || "tsurispot-isr-cache";
+const S3_PREFIX = process.env.ISR_CACHE_S3_PREFIX || "ISR";
+// S3 は分割不要なので上限による set スキップは無いが、異常な巨大ページの観測用しきい値は残す
+const S3_WARN_BYTES = Number(process.env.ISR_CACHE_S3_WARN_BYTES || 2_000_000);
+// タグ逆引き行（DynamoDB）の TTL。S3 本体は Lifecycle（ISR/ 14日）で消えるため、索引がそれより
+// 短命だと 7〜14日窓で「索引だけ先に失効 → revalidateTag が本体 S3 に到達できず無効化が空振り」
+// になる。索引は本体寿命（Lifecycle 14日）を必ず上回るよう 15日に取り、本体到達性を保証する。
+const S3_TAG_TTL_SECONDS = Number(
+  process.env.ISR_CACHE_S3_TAG_TTL_SECONDS || 60 * 60 * 24 * 15
+);
+if (process.env.NODE_ENV === "production") {
+  // デプロイ後の稼働バックエンド確認用（App Runner ログで backend=s3 を確認する運用手順あり）
+  console.log(
+    `[isr-cache] backend=${BACKEND}` +
+      (BACKEND === "s3" ? ` bucket=${S3_BUCKET} prefix=${S3_PREFIX}` : "")
+  );
+}
 
 // DynamoDB item は最大 400KB。pk/sk/ttl の余白を見て gzip 後の実保存バイトの上限を保守的に。
 // 超える巨大ページはキャッシュせず毎回オンデマンド生成（正しく動くが遅いだけ）。
@@ -78,8 +112,12 @@ function splitPayload(payload) {
 // 2026-06 に修正した「毎リクエスト DynamoDB GET+デシリアライズで CPU 床 4-5倍」が再発する。
 // エントリ上限を 520KB に引上げ（トップを含むホット集合を維持）、件数を 1536→1024 に減らして
 // メモリ総量を概ね相殺する（展開後 ~0.8-1.0MB/件 × 1024 ≈ ~1GB、4GB 中 ~50% 以内を維持）。
+// 2026-07 (S3移行): inlineCss は無効化済み（next.config.ts）でエントリは ~110KB 縮小したのに
+// 件数が 1024 のままだった。S3 バックエンドでは L1 ミスのレイテンシが +20-50ms 増えるため
+// 吸収層としての L1 の重要度が上がる。2048 件へ拡大（展開後 ~0.5-0.7MB/件 × 2048 ≈ ~1.2GB、
+// 1536 件時代の安全実績と同水準）。
 const L1_TTL_MS = Number(process.env.ISR_L1_TTL_MS || 600_000);
-const L1_MAX_ENTRIES = Number(process.env.ISR_L1_MAX_ENTRIES || 1024);
+const L1_MAX_ENTRIES = Number(process.env.ISR_L1_MAX_ENTRIES || 2048);
 const L1_MAX_ENTRY_BYTES = Number(process.env.ISR_L1_MAX_ENTRY_BYTES || 520_000);
 const _l1 = new Map(); // key -> { entry, expiresAt }
 
@@ -144,6 +182,67 @@ function cmds() {
     QueryCommand,
   } = require("@aws-sdk/lib-dynamodb");
   return { GetCommand, PutCommand, DeleteCommand, QueryCommand };
+}
+
+let _s3 = null; // null=未初期化 / false=無効 / S3Client=有効
+function getS3() {
+  if (_s3 !== null) return _s3 || null;
+  try {
+    // 遅延require: getDoc() と同じパターン。依存が解決できない環境でも throw せず無効化。
+    const https = require("node:https");
+    const { S3Client } = require("@aws-sdk/client-s3");
+    _s3 = new S3Client({
+      region: process.env.AWS_REGION || "ap-northeast-1",
+      // 「失敗=ミス=再生成」の安全側設計に合わせ、ハングよりタイムアウトを優先して短めに切る。
+      // SDK デフォルト maxAttempts=3 だと S3 劣化時に 3×requestTimeout でブロックが伸び、
+      // オリジンにリクエストが滞留する。GET ミスはページ再生成にフォールバックすれば済むので
+      // fail-fast 寄り(2回)にして、劣化を素早くミス扱いへ倒す。
+      maxAttempts: 2,
+      // keepAlive は高頻度 GET（L1 ミス時）とデプロイ後ウォームアップのバーストに備え明示。
+      requestHandler: {
+        connectionTimeout: 1500,
+        requestTimeout: 6000,
+        httpsAgent: new https.Agent({ keepAlive: true, maxSockets: 64 }),
+      },
+    });
+  } catch {
+    _s3 = false;
+  }
+  return _s3 || null;
+}
+
+function s3Cmds() {
+  const {
+    GetObjectCommand,
+    PutObjectCommand,
+    DeleteObjectCommand,
+  } = require("@aws-sdk/client-s3");
+  return { GetObjectCommand, PutObjectCommand, DeleteObjectCommand };
+}
+
+// S3 の想定外エラー（AccessDenied・タイムアウト・バケット名/リージョン誤り等）を顕在化させる。
+// 正常なミス（NoSuchKey/NotFound=未生成ページ）は静かにする。無言で握り潰すと
+// IAM/バケット設定ミスが「全ミス→毎回再生成→CPU100%」としてサイレントに進行する（2026-06の教訓）。
+// 全ミス時のログ洪水を避けるため 30 秒に 1 回へスロットルする。
+let _lastS3Warn = 0;
+function isNormalMiss(err) {
+  const name = err && err.name;
+  return name === "NoSuchKey" || name === "NotFound";
+}
+function warnS3(op, err) {
+  if (isNormalMiss(err)) return;
+  const now = Date.now();
+  if (now - _lastS3Warn < 30_000) return;
+  _lastS3Warn = now;
+  console.warn(
+    `[isr-cache] S3 ${op} error: ${(err && err.name) || err}: ${(err && err.message) || ""}`
+  );
+}
+
+// cacheKey は URL パス等で S3 キーに不向きな文字を含み得るため sha256 hex に正規化する
+function s3KeyFor(buildId, cacheKey) {
+  const hash = crypto.createHash("sha256").update(String(cacheKey)).digest("hex");
+  return `${S3_PREFIX}/${buildId}/${hash}`;
 }
 
 // Buffer / Uint8Array / Map（RSC payload・body・segmentData 等）を JSON で安全に往復させる
@@ -222,6 +321,7 @@ module.exports = class IsrDynamoCacheHandler {
   constructor(options) {
     this.options = options || {};
     const buildId = readBuildId(this.options);
+    this.buildId = buildId; // S3 キーの名前空間（デプロイ毎に新世代）
     this.pk = `ISR#${buildId}`; // 本体パーティション
     this.tagPrefix = `ISRTAG#${buildId}#`; // タグ別パーティション接頭辞
   }
@@ -236,11 +336,36 @@ module.exports = class IsrDynamoCacheHandler {
   _tagPk(tag) {
     return `${this.tagPrefix}${tag}`;
   }
+  _s3Key(cacheKey) {
+    return s3KeyFor(this.buildId, cacheKey);
+  }
 
   async get(cacheKey) {
     const lk = this._lk(cacheKey);
     const cached = l1Get(lk);
-    if (cached) return cached; // L1 ヒット → DynamoDB を叩かない
+    if (cached) return cached; // L1 ヒット → バックエンドを叩かない
+
+    if (BACKEND === "s3") {
+      const s3 = getS3();
+      if (!s3) return null;
+      try {
+        const { GetObjectCommand } = s3Cmds();
+        const res = await s3.send(
+          new GetObjectCommand({ Bucket: S3_BUCKET, Key: this._s3Key(cacheKey) })
+        );
+        if (!res.Body) return null;
+        const bytes = await res.Body.transformToByteArray(); // Uint8Array → deserializeEntry がそのまま受理
+        const entry = deserializeEntry(bytes);
+        l1Set(lk, entry, bytes.length);
+        return entry;
+      } catch (err) {
+        // NoSuchKey（正常なミス）も権限/ネットワーク失敗もミス扱い → Next が再生成（安全側）。
+        // ただし想定外エラー（AccessDenied 等）はログして設定ミスを顕在化させる（無言だと全ミスが隠れる）。
+        warnS3("get", err);
+        return null;
+      }
+    }
+
     const doc = getDoc();
     if (!doc) return null;
     try {
@@ -291,6 +416,7 @@ module.exports = class IsrDynamoCacheHandler {
 
   async set(cacheKey, data, ctx) {
     const lk = this._lk(cacheKey);
+    if (BACKEND === "s3") return this._setS3(lk, cacheKey, data, ctx);
     const doc = getDoc();
     if (!doc) {
       l1Delete(lk); // バックエンド無しでも L1 に古いものを残さない
@@ -405,6 +531,80 @@ module.exports = class IsrDynamoCacheHandler {
     }
   }
 
+  // S3 バックエンドの set。本体は S3 単一 PUT（分割不要）、タグ逆引きのみ DynamoDB。
+  async _setS3(lk, cacheKey, data, ctx) {
+    const s3 = getS3();
+    if (!s3) {
+      l1Delete(lk); // バックエンド無しでも L1 に古いものを残さない
+      return;
+    }
+    try {
+      const { PutObjectCommand, DeleteObjectCommand } = s3Cmds();
+      // 削除指示（DeleteObject は存在しなくても成功する＝冪等）
+      if (data == null) {
+        await s3.send(
+          new DeleteObjectCommand({ Bucket: S3_BUCKET, Key: this._s3Key(cacheKey) })
+        );
+        l1Delete(lk);
+        return;
+      }
+      // 空 / 壊れたページは絶対に焼き付けない
+      if (!isCacheableValue(data)) {
+        l1Delete(lk);
+        return;
+      }
+
+      const tags = (ctx && ctx.tags) || (data && data.tags) || [];
+      const now = Date.now();
+      const payload = serializeEntry({ value: data, lastModified: now, tags });
+      if (payload.length > S3_WARN_BYTES) {
+        // S3 に 400KB 制約は無いのでキャッシュは続行。異常肥大の観測用 warn のみ。
+        console.warn(
+          `[isr-cache] large entry: key=${cacheKey} size=${payload.length}B (>${S3_WARN_BYTES}B、S3のためキャッシュ続行)`
+        );
+      }
+
+      await s3.send(
+        new PutObjectCommand({
+          Bucket: S3_BUCKET,
+          Key: this._s3Key(cacheKey),
+          Body: payload,
+          ContentType: "application/gzip",
+          // キーは sha256 で人間可読でないため、運用デバッグ用に元キーをメタデータへ。
+          // S3 メタデータは ASCII のみ・合計 2KB 制限のため encode + 切詰め。
+          Metadata: { "cache-key": encodeURIComponent(cacheKey).slice(0, 1800) },
+        })
+      );
+      // L1 も更新（バックエンドと同じ shape）。ISR 再生成直後の read が即 fresh を返す。
+      l1Set(lk, { value: data, lastModified: now, tags }, payload.length);
+
+      // タグ → cacheKey の逆引きは従来どおり DynamoDB（revalidateTag の Query→Delete を温存）。
+      // TTL は S3 本体（Lifecycle 14日）を上回る 15日にし、無効化の到達性を保証する。
+      if (Array.isArray(tags) && tags.length > 0) {
+        const doc = getDoc();
+        if (doc) {
+          const { PutCommand } = cmds();
+          const revalidate =
+            ctx && typeof ctx.revalidate === "number" ? ctx.revalidate : 0;
+          const exp = ttlEpoch(Math.max(revalidate, S3_TAG_TTL_SECONDS));
+          for (const tag of tags) {
+            if (!tag) continue;
+            await doc.send(
+              new PutCommand({
+                TableName: TABLE,
+                Item: { pk: this._tagPk(tag), sk: this._sk(cacheKey), ttl: exp },
+              })
+            );
+          }
+        }
+      }
+    } catch (err) {
+      // 書込失敗は致命でない（次回再生成）。壊れた L1 を残さない。想定外エラーはログして顕在化。
+      warnS3("set", err);
+      l1Delete(lk);
+    }
+  }
+
   async revalidateTag(tags) {
     // タグ無効化時は L1 を全クリア（低頻度なのでコスト無視。古い HTML 滞留を防ぐ安全側）
     l1Clear();
@@ -436,12 +636,48 @@ module.exports = class IsrDynamoCacheHandler {
         // 分割エントリはタグ逆引きが先頭 sk のみを指すため先頭だけ消えるが、
         // 先頭なしのパート(#p1..)は到達不能な孤児となり TTL で自然消滅する（読者に影響なし）。
         for (const sk of members) {
-          await doc.send(
-            new DeleteCommand({ TableName: TABLE, Key: { pk: this.pk, sk } })
-          );
-          await doc.send(
-            new DeleteCommand({ TableName: TABLE, Key: { pk: tagPk, sk } })
-          );
+          if (BACKEND === "s3") {
+            // S3 本体を削除。失敗時はタグ行を残して再 revalidateTag で回復可能にする
+            // （無条件にタグ行を消すと索引が壊れ、本体が S3 に残ったまま再無効化できなくなる）。
+            const s3 = getS3();
+            let bodyDeleted = false;
+            if (s3) {
+              const { DeleteObjectCommand } = s3Cmds();
+              const cacheKey = sk.slice("KEY#".length);
+              try {
+                await s3.send(
+                  new DeleteObjectCommand({
+                    Bucket: S3_BUCKET,
+                    Key: this._s3Key(cacheKey),
+                  })
+                );
+                bodyDeleted = true;
+              } catch (err) {
+                warnS3("revalidateTag delete", err);
+              }
+            }
+            // env flip ロールバック（同一 buildId で s3→dynamodb へ戻す）で、S3 モード中に
+            // 無効化した旧 DynamoDB 本体行が「有効キャッシュ」として復活しないよう冪等に掃除
+            // （~1WRU、存在しなければ無害）。revalidateTag は低頻度なのでコスト無視。
+            await doc
+              .send(new DeleteCommand({ TableName: TABLE, Key: { pk: this.pk, sk } }))
+              .catch(() => {});
+            // タグ行は S3 本体削除が成功したときだけ消す（失敗時は残す）
+            if (bodyDeleted) {
+              await doc.send(
+                new DeleteCommand({ TableName: TABLE, Key: { pk: tagPk, sk } })
+              );
+            }
+          } else {
+            // DynamoDB 経路（従来どおり・挙動不変）: 本体行→タグ行。throw は外側 catch で
+            // 中断し、残メンバーのタグ行が残るためリトライで回復可能。
+            await doc.send(
+              new DeleteCommand({ TableName: TABLE, Key: { pk: this.pk, sk } })
+            );
+            await doc.send(
+              new DeleteCommand({ TableName: TABLE, Key: { pk: tagPk, sk } })
+            );
+          }
         }
       }
     } catch {
@@ -468,3 +704,12 @@ module.exports.__l1Clear = l1Clear;
 module.exports.__l1Size = () => _l1.size;
 module.exports.__L1_MAX_ENTRIES = L1_MAX_ENTRIES;
 module.exports.__L1_MAX_ENTRY_BYTES = L1_MAX_ENTRY_BYTES;
+// テスト用: S3/DynamoDB クライアントを決定的に注入する（遅延 require への vi.mock 依存を避ける。
+// 2026-06 の cache-handler 改修ミス障害の教訓としてテストの確実性を優先）
+module.exports.__setClientsForTest = (clients) => {
+  if (clients && "s3" in clients) _s3 = clients.s3;
+  if (clients && "doc" in clients) _doc = clients.doc;
+};
+module.exports.__s3KeyFor = s3KeyFor;
+module.exports.__BACKEND = BACKEND;
+module.exports.__S3_BUCKET = S3_BUCKET;
