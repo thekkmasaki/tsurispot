@@ -215,7 +215,7 @@ export const seaFishIkaTako: FishSpecies[] = [
     scientificName: "Todarodes pacificus",
     slug: "surumeika",
     description:
-      "夏から秋に漁港の常夜灯周りに集まるイカ。エギングやイカメタル、スッテ仕掛けで狙えます。大群で押し寄せることもあり、数釣りが楽しめます。",
+      "スルメイカ釣りの時期は6〜10月で、盛期は7〜9月の夏イカシーズン。漁港の常夜灯周りに群れで集まり、エギングやイカメタル、スッテ仕掛けで狙えます。大群で押し寄せることもあり、数釣りが楽しめます。",
     category: "sea",
     family: "アカイカ科",
     difficulty: "beginner",

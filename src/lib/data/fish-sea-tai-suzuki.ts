@@ -252,7 +252,7 @@ export const seaFishTaiSuzuki: FishSpecies[] = [
     scientificName: "Platycephalus sp.2",
     slug: "magochi",
     description:
-      "砂地の海底に潜むフラットフィッシュ。泳がせ釣りやルアーで狙えます。夏が旬で、あっさりとした白身はヒラメに匹敵する美味しさ。",
+      "マゴチ釣りの時期は5〜10月で、旬と盛期が重なる6〜8月の夏が狙い目。砂地の海底に潜むフラットフィッシュで、泳がせ釣りやルアーで狙えます。あっさりとした白身はヒラメに匹敵する美味しさ。",
     category: "sea",
     family: "コチ科",
     difficulty: "intermediate",

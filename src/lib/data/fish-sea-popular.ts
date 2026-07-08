@@ -215,7 +215,7 @@ export const seaFishPopular: FishSpecies[] = [
     scientificName: "Sardinops melanostictus",
     slug: "iwashi",
     description:
-      "最も簡単に釣れる魚のひとつ。サビキ釣りで群れに当たれば100匹以上も。釣りデビューに最適。",
+      "イワシ釣りの時期は5〜10月で、6〜8月の夏が最盛期。堤防のサビキ釣りで群れに当たれば100匹以上も狙える、釣りデビューに最適な魚。",
     category: "sea",
     family: "ニシン科",
     difficulty: "beginner",
@@ -649,7 +649,7 @@ export const seaFishPopular: FishSpecies[] = [
     scientificName: "Pennahia argentata",
     slug: "ishimochi",
     description:
-      "堤防からの投げ釣りやちょい投げで手軽に釣れる魚。グーグーと鳴くことから「グチ」とも呼ばれます。塩焼きやフライが美味しい。",
+      "イシモチ釣りの時期は5〜10月で、盛期は6〜8月の初夏から夏。堤防からの投げ釣りやちょい投げで手軽に釣れ、グーグーと鳴くことから「グチ」とも呼ばれます。塩焼きやフライが美味しい。",
     category: "sea",
     family: "ニベ科",
     difficulty: "beginner",
@@ -906,7 +906,7 @@ export const seaFishPopular: FishSpecies[] = [
     scientificName: "Apogon semilineatus",
     slug: "nenbutsudai",
     description:
-      "堤防釣りで最もよく釣れる外道の一種。オレンジ色の体が特徴的で、群れで生息する。食用にはほとんどされないが、泳がせ釣りのエサとして活用できる。",
+      "ネンブツダイは泳がせ釣りの活きエサとして活用できる小魚。堤防釣りで最もよく釣れる外道の一種で、オレンジ色の体が特徴的。群れで生息しサビキ釣りで簡単に確保できるが、食用にはほとんどされない。",
     category: "sea",
     family: "テンジクダイ科",
     difficulty: "beginner",
