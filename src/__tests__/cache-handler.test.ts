@@ -452,10 +452,36 @@ describe("cache-handler S3 バックエンド（ISR_CACHE_BACKEND=s3）", () => 
     expect(del).toBeDefined();
     const expectedHash = createHash("sha256").update("/spots/target").digest("hex");
     expect(String(del!.input.Key).endsWith(expectedHash)).toBe(true);
-    // タグ行削除は DynamoDB。本体パーティション(pk=ISR#)への Delete は発行されない
+    // DynamoDB Delete は2発: (1)env flip 復活防止の本体行(pk=ISR#)冪等掃除 (2)タグ行(pk=ISRTAG#)
     const docDeletes = docCalls.filter((c) => c.cmd === "DeleteCommand");
-    expect(docDeletes.length).toBe(1);
-    expect((docDeletes[0].input.Key as { pk: string }).pk).toContain("ISRTAG#");
+    expect(docDeletes.length).toBe(2);
+    const pks = docDeletes.map((c) => (c.input.Key as { pk: string }).pk);
+    expect(pks.some((pk) => pk.startsWith("ISR#"))).toBe(true);
+    expect(pks.some((pk) => pk.startsWith("ISRTAG#"))).toBe(true);
+  });
+
+  it("revalidateTag: S3 本体削除が失敗したらタグ行を残す（再無効化を可能にする）", async () => {
+    const Mod = await loadModule("s3");
+    const docCalls: AwsCall[] = [];
+    // S3 は DeleteObject で必ず throw、Get/Put は使わない
+    const throwingS3 = {
+      send: async (command: FakeCommand) => {
+        if (command.constructor.name === "DeleteObjectCommand") throw new Error("S3 down");
+        return {};
+      },
+    };
+    Mod.__setClientsForTest({
+      s3: throwingS3,
+      doc: makeFakeDoc(docCalls, [{ sk: "KEY#/spots/target" }]),
+    });
+    Mod.__l1Clear();
+    const handler = new Mod();
+    await handler.revalidateTag("_N_T_/spots/target");
+    // タグ行(pk=ISRTAG#)の Delete は発行されない（本体が残るので索引を残して再試行可能に）
+    const tagDeletes = docCalls.filter(
+      (c) => c.cmd === "DeleteCommand" && (c.input.Key as { pk: string }).pk.startsWith("ISRTAG#")
+    );
+    expect(tagDeletes.length).toBe(0);
   });
 
   it("S3 put が throw しても set は throw しない（ミス扱い・次回再生成）", async () => {

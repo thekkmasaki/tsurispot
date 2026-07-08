@@ -111,6 +111,22 @@ jobs:
             || { echo "::error::@aws-sdk/client-s3 が .next/standalone に同梱されていない（ISRキャッシュが全ミスになる）"; exit 1; }
           echo "client-s3 同梱 OK"
 
+      # ISRキャッシュ シーディング実書込検証: build 中の set() は S3 エラーを握り潰す設計のため、
+      # バケット/IAM 設定ミスでも build は成功し S3 は空＝デプロイ直後コールド（再生成ストーム）に
+      # なり得る。この buildId の名前空間に実際にオブジェクトが書けたかを直接確認して塞ぐ。
+      - name: ISRキャッシュ シーディング検証
+        if: github.ref == 'refs/heads/master'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ap-northeast-1
+        run: |
+          BUILD_ID=$(cat .next/BUILD_ID)
+          COUNT=$(aws s3 ls "s3://tsurispot-isr-cache/ISR/${BUILD_ID}/" --recursive | wc -l | tr -d ' ')
+          echo "seeded objects for buildId=${BUILD_ID}: ${COUNT}"
+          [ "${COUNT}" -gt 0 ] \
+            || { echo "::error::S3 シーディングが 0 件（バケット/IAM 設定ミスの疑い。全ミス→CPU100%になる）"; exit 1; }
+
       # フォントpreloadハッシュ検証（layout.tsx のハードコードとビルド成果物の一致）
       # LCP対策で layout.tsx に Zen Maru 700 スライス4本を <link rel=preload> でハードコードしている。
       # next/font のハッシュは通常ビルド間で安定だが、Zen Maru 更新や Next.js 更新でずれると
@@ -238,7 +254,16 @@ jobs:
           aws apprunner describe-service \
             --service-arn ${{ env.APP_RUNNER_SERVICE_ARN }} \
             --query "Service.SourceConfiguration" > /tmp/source-config.json
-          jq --arg img "$NEW_IMAGE" '.ImageRepository.ImageIdentifier = $img' /tmp/source-config.json > /tmp/source-config-new.json
+          # ISRキャッシュ: build時シーディング先(S3)とランタイム backend を「同一コミット」で結合する。
+          # App Runner 側の手動 env 設定に依存すると、未設定・消失時に「build は S3 へシード、
+          # ランタイムは DynamoDB を読む」の不一致で新 buildId が完全コールドになり
+          # 再生成ストーム(2026-06-23型)の条件が揃うため、deploy.yml を唯一の真実源にして毎デプロイ注入する。
+          # ロールバックもこのファイルの revert 一発で build/runtime 両側が同時に戻る。
+          jq --arg img "$NEW_IMAGE" \
+            '.ImageRepository.ImageIdentifier = $img
+             | .ImageRepository.ImageConfiguration.RuntimeEnvironmentVariables.ISR_CACHE_BACKEND = "s3"
+             | .ImageRepository.ImageConfiguration.RuntimeEnvironmentVariables.ISR_CACHE_S3_BUCKET = "tsurispot-isr-cache"' \
+            /tmp/source-config.json > /tmp/source-config-new.json
 
           echo "Calling update-service with new image: $NEW_IMAGE"
           aws apprunner update-service \

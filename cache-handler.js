@@ -45,6 +45,12 @@ const S3_BUCKET = process.env.ISR_CACHE_S3_BUCKET || "tsurispot-isr-cache";
 const S3_PREFIX = process.env.ISR_CACHE_S3_PREFIX || "ISR";
 // S3 は分割不要なので上限による set スキップは無いが、異常な巨大ページの観測用しきい値は残す
 const S3_WARN_BYTES = Number(process.env.ISR_CACHE_S3_WARN_BYTES || 2_000_000);
+// タグ逆引き行（DynamoDB）の TTL。S3 本体は Lifecycle（ISR/ 14日）で消えるため、索引がそれより
+// 短命だと 7〜14日窓で「索引だけ先に失効 → revalidateTag が本体 S3 に到達できず無効化が空振り」
+// になる。索引は本体寿命（Lifecycle 14日）を必ず上回るよう 15日に取り、本体到達性を保証する。
+const S3_TAG_TTL_SECONDS = Number(
+  process.env.ISR_CACHE_S3_TAG_TTL_SECONDS || 60 * 60 * 24 * 15
+);
 if (process.env.NODE_ENV === "production") {
   // デプロイ後の稼働バックエンド確認用（App Runner ログで backend=s3 を確認する運用手順あり）
   console.log(
@@ -188,6 +194,10 @@ function getS3() {
     _s3 = new S3Client({
       region: process.env.AWS_REGION || "ap-northeast-1",
       // 「失敗=ミス=再生成」の安全側設計に合わせ、ハングよりタイムアウトを優先して短めに切る。
+      // SDK デフォルト maxAttempts=3 だと S3 劣化時に 3×requestTimeout でブロックが伸び、
+      // オリジンにリクエストが滞留する。GET ミスはページ再生成にフォールバックすれば済むので
+      // fail-fast 寄り(2回)にして、劣化を素早くミス扱いへ倒す。
+      maxAttempts: 2,
       // keepAlive は高頻度 GET（L1 ミス時）とデプロイ後ウォームアップのバーストに備え明示。
       requestHandler: {
         connectionTimeout: 1500,
@@ -208,6 +218,25 @@ function s3Cmds() {
     DeleteObjectCommand,
   } = require("@aws-sdk/client-s3");
   return { GetObjectCommand, PutObjectCommand, DeleteObjectCommand };
+}
+
+// S3 の想定外エラー（AccessDenied・タイムアウト・バケット名/リージョン誤り等）を顕在化させる。
+// 正常なミス（NoSuchKey/NotFound=未生成ページ）は静かにする。無言で握り潰すと
+// IAM/バケット設定ミスが「全ミス→毎回再生成→CPU100%」としてサイレントに進行する（2026-06の教訓）。
+// 全ミス時のログ洪水を避けるため 30 秒に 1 回へスロットルする。
+let _lastS3Warn = 0;
+function isNormalMiss(err) {
+  const name = err && err.name;
+  return name === "NoSuchKey" || name === "NotFound";
+}
+function warnS3(op, err) {
+  if (isNormalMiss(err)) return;
+  const now = Date.now();
+  if (now - _lastS3Warn < 30_000) return;
+  _lastS3Warn = now;
+  console.warn(
+    `[isr-cache] S3 ${op} error: ${(err && err.name) || err}: ${(err && err.message) || ""}`
+  );
 }
 
 // cacheKey は URL パス等で S3 キーに不向きな文字を含み得るため sha256 hex に正規化する
@@ -329,8 +358,10 @@ module.exports = class IsrDynamoCacheHandler {
         const entry = deserializeEntry(bytes);
         l1Set(lk, entry, bytes.length);
         return entry;
-      } catch {
-        // NoSuchKey（正常なミス）も権限/ネットワーク失敗もミス扱い → Next が再生成（安全側）
+      } catch (err) {
+        // NoSuchKey（正常なミス）も権限/ネットワーク失敗もミス扱い → Next が再生成（安全側）。
+        // ただし想定外エラー（AccessDenied 等）はログして設定ミスを顕在化させる（無言だと全ミスが隠れる）。
+        warnS3("get", err);
         return null;
       }
     }
@@ -547,14 +578,15 @@ module.exports = class IsrDynamoCacheHandler {
       // L1 も更新（バックエンドと同じ shape）。ISR 再生成直後の read が即 fresh を返す。
       l1Set(lk, { value: data, lastModified: now, tags }, payload.length);
 
-      // タグ → cacheKey の逆引きは従来どおり DynamoDB（revalidateTag の Query→Delete を温存）
+      // タグ → cacheKey の逆引きは従来どおり DynamoDB（revalidateTag の Query→Delete を温存）。
+      // TTL は S3 本体（Lifecycle 14日）を上回る 15日にし、無効化の到達性を保証する。
       if (Array.isArray(tags) && tags.length > 0) {
         const doc = getDoc();
         if (doc) {
           const { PutCommand } = cmds();
           const revalidate =
             ctx && typeof ctx.revalidate === "number" ? ctx.revalidate : 0;
-          const exp = ttlEpoch(Math.max(revalidate, DEFAULT_TTL_SECONDS));
+          const exp = ttlEpoch(Math.max(revalidate, S3_TAG_TTL_SECONDS));
           for (const tag of tags) {
             if (!tag) continue;
             await doc.send(
@@ -566,8 +598,9 @@ module.exports = class IsrDynamoCacheHandler {
           }
         }
       }
-    } catch {
-      // 書込失敗は致命でない（次回再生成）。壊れた L1 を残さない。
+    } catch (err) {
+      // 書込失敗は致命でない（次回再生成）。壊れた L1 を残さない。想定外エラーはログして顕在化。
+      warnS3("set", err);
       l1Delete(lk);
     }
   }
@@ -602,31 +635,49 @@ module.exports = class IsrDynamoCacheHandler {
         // 本体エントリとタグ逆引きの両方を削除。
         // 分割エントリはタグ逆引きが先頭 sk のみを指すため先頭だけ消えるが、
         // 先頭なしのパート(#p1..)は到達不能な孤児となり TTL で自然消滅する（読者に影響なし）。
-        // S3 バックエンド時: 本体は S3 オブジェクト（sk="KEY#{cacheKey}" から cacheKey を復元して
-        // sha256 キーを導出）。タグ行の削除は共通で DynamoDB。
         for (const sk of members) {
           if (BACKEND === "s3") {
+            // S3 本体を削除。失敗時はタグ行を残して再 revalidateTag で回復可能にする
+            // （無条件にタグ行を消すと索引が壊れ、本体が S3 に残ったまま再無効化できなくなる）。
             const s3 = getS3();
+            let bodyDeleted = false;
             if (s3) {
               const { DeleteObjectCommand } = s3Cmds();
               const cacheKey = sk.slice("KEY#".length);
-              await s3
-                .send(
+              try {
+                await s3.send(
                   new DeleteObjectCommand({
                     Bucket: S3_BUCKET,
                     Key: this._s3Key(cacheKey),
                   })
-                )
-                .catch(() => {}); // 本体削除失敗でもタグ行の掃除は続行（ベストエフォート）
+                );
+                bodyDeleted = true;
+              } catch (err) {
+                warnS3("revalidateTag delete", err);
+              }
+            }
+            // env flip ロールバック（同一 buildId で s3→dynamodb へ戻す）で、S3 モード中に
+            // 無効化した旧 DynamoDB 本体行が「有効キャッシュ」として復活しないよう冪等に掃除
+            // （~1WRU、存在しなければ無害）。revalidateTag は低頻度なのでコスト無視。
+            await doc
+              .send(new DeleteCommand({ TableName: TABLE, Key: { pk: this.pk, sk } }))
+              .catch(() => {});
+            // タグ行は S3 本体削除が成功したときだけ消す（失敗時は残す）
+            if (bodyDeleted) {
+              await doc.send(
+                new DeleteCommand({ TableName: TABLE, Key: { pk: tagPk, sk } })
+              );
             }
           } else {
+            // DynamoDB 経路（従来どおり・挙動不変）: 本体行→タグ行。throw は外側 catch で
+            // 中断し、残メンバーのタグ行が残るためリトライで回復可能。
             await doc.send(
               new DeleteCommand({ TableName: TABLE, Key: { pk: this.pk, sk } })
             );
+            await doc.send(
+              new DeleteCommand({ TableName: TABLE, Key: { pk: tagPk, sk } })
+            );
           }
-          await doc.send(
-            new DeleteCommand({ TableName: TABLE, Key: { pk: tagPk, sk } })
-          );
         }
       }
     } catch {
