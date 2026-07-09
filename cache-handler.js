@@ -112,12 +112,15 @@ function splitPayload(payload) {
 // 2026-06 に修正した「毎リクエスト DynamoDB GET+デシリアライズで CPU 床 4-5倍」が再発する。
 // エントリ上限を 520KB に引上げ（トップを含むホット集合を維持）、件数を 1536→1024 に減らして
 // メモリ総量を概ね相殺する（展開後 ~0.8-1.0MB/件 × 1024 ≈ ~1GB、4GB 中 ~50% 以内を維持）。
-// 2026-07 (S3移行): inlineCss は無効化済み（next.config.ts）でエントリは ~110KB 縮小したのに
-// 件数が 1024 のままだった。S3 バックエンドでは L1 ミスのレイテンシが +20-50ms 増えるため
-// 吸収層としての L1 の重要度が上がる。2048 件へ拡大（展開後 ~0.5-0.7MB/件 × 2048 ≈ ~1.2GB、
-// 1536 件時代の安全実績と同水準）。
+// 2026-07 (S3移行): 一度 2048 件へ拡大したが、V8 ヒープOOM（本番障害）を招いたため 1024 に戻す。
+// 失敗の教訓: コンテナメモリ(4GB中64%)ではなく Node の --max-old-space-size=1536(Dockerfile) が
+// 律速だった。L1 エントリの実体は gzip後 Buffer(off-heap) だが、デシリアライズ済みエントリの
+// オブジェクト構造・Map・文字列キー等が old-space に載り、2048 件で old-space が 1578MB/1601MB に
+// 達して "FATAL ERROR: Reached heap limit" でプロセスがクラッシュ→5xx を反復した（2026-07-08〜09）。
+// 1024 件は 2026-07-05〜07 に 5xx ほぼゼロで安定していた実績値。件数を増やすなら先に
+// --max-old-space-size の引上げ（コンテナ4GBに対し余地あり）を伴わせること。
 const L1_TTL_MS = Number(process.env.ISR_L1_TTL_MS || 600_000);
-const L1_MAX_ENTRIES = Number(process.env.ISR_L1_MAX_ENTRIES || 2048);
+const L1_MAX_ENTRIES = Number(process.env.ISR_L1_MAX_ENTRIES || 1024);
 const L1_MAX_ENTRY_BYTES = Number(process.env.ISR_L1_MAX_ENTRY_BYTES || 520_000);
 const _l1 = new Map(); // key -> { entry, expiresAt }
 
