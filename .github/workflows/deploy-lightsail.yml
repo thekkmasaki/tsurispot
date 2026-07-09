@@ -1,0 +1,157 @@
+# Lightsail Containers への手動デプロイ（App Runner 並行運用中の移行用）。
+#
+# 本番の deploy.yml(App Runner) には一切触れず、workflow_dispatch で手動起動する独立経路。
+# deploy.yml が master push で ECR に push 済みの「最新イメージ」を Lightsail に配るだけ
+# （再ビルドしない＝App Runner と完全に同一イメージが Lightsail でも動く）。
+#
+# 移行フェーズでの使い方:
+#   Phase 1: Lightsail サービス作成後、これを手動実行して直 URL で検証
+#   Phase 2: Cloudflare origin を Lightsail に切替（このワークフローは関与しない）
+#   Phase 3: soak 完了後、deploy.yml に統合し App Runner ステップを撤去（別PR）
+#
+# 前提: scripts/lightsail/migrate-env-to-gh-secrets.sh でランタイム env を GitHub Secrets 化済み。
+
+name: Deploy to Lightsail (manual)
+
+on:
+  workflow_dispatch:
+    inputs:
+      image_tag:
+        description: "デプロイする ECR イメージタグ（既定 latest。deploy.yml が push 済みのもの）"
+        required: false
+        default: "latest"
+
+concurrency:
+  group: deploy-lightsail
+  cancel-in-progress: false
+
+env:
+  AWS_REGION: ap-northeast-1
+  ECR_REPOSITORY: tsurispot
+  LIGHTSAIL_SERVICE_NAME: tsurispot
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # deploy.yml が ECR に push 済みの最新イメージを digest 固定で解決（再ビルドしない）
+      - name: Resolve ECR image digest
+        id: img
+        run: |
+          ACCOUNT=$(aws sts get-caller-identity --query Account --output text)
+          REGISTRY="${ACCOUNT}.dkr.ecr.${AWS_REGION}.amazonaws.com"
+          DIGEST=$(aws ecr describe-images \
+            --repository-name "$ECR_REPOSITORY" \
+            --image-ids imageTag=${{ inputs.image_tag }} \
+            --query 'imageDetails[0].imageDigest' --output text)
+          if [ -z "$DIGEST" ] || [ "$DIGEST" = "None" ]; then
+            echo "::error::ECR に tag=${{ inputs.image_tag }} のイメージが見つからない"; exit 1
+          fi
+          echo "image=${REGISTRY}/${ECR_REPOSITORY}@${DIGEST}" >> "$GITHUB_OUTPUT"
+          echo "resolved image: ${REGISTRY}/${ECR_REPOSITORY}@${DIGEST}"
+
+      # containers.json を Secrets から生成（秘密値はログに出さない）
+      - name: Generate containers.json
+        env:
+          ADMIN_RECONCILE_TOKEN: ${{ secrets.ADMIN_RECONCILE_TOKEN }}
+          AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
+          AUTH_TRUST_HOST: ${{ secrets.AUTH_TRUST_HOST }}
+          AUTH_URL: ${{ secrets.AUTH_URL }}
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+          COGNITO_CLIENT_ID: ${{ secrets.COGNITO_CLIENT_ID }}
+          COGNITO_CLIENT_SECRET: ${{ secrets.COGNITO_CLIENT_SECRET }}
+          COGNITO_ISSUER: ${{ secrets.COGNITO_ISSUER }}
+          GAS_CATCH_REPORT_URL: ${{ secrets.GAS_CATCH_REPORT_URL }}
+          LINE_CHANNEL_ACCESS_TOKEN: ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}
+          LINE_CHANNEL_SECRET: ${{ secrets.LINE_CHANNEL_SECRET }}
+          MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
+          MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
+          NEXT_PUBLIC_VAPID_PUBLIC_KEY: ${{ secrets.NEXT_PUBLIC_VAPID_PUBLIC_KEY }}
+          STRIPE_COUPON_BASIC: ${{ secrets.STRIPE_COUPON_BASIC }}
+          STRIPE_COUPON_PRO: ${{ secrets.STRIPE_COUPON_PRO }}
+          STRIPE_PRICE_BASIC: ${{ secrets.STRIPE_PRICE_BASIC }}
+          STRIPE_PRICE_PRO: ${{ secrets.STRIPE_PRICE_PRO }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
+          STRIPE_WEBHOOK_SECRET: ${{ secrets.STRIPE_WEBHOOK_SECRET }}
+          UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+          UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+          VAPID_PRIVATE_KEY: ${{ secrets.VAPID_PRIVATE_KEY }}
+          VAPID_SUBJECT: ${{ secrets.VAPID_SUBJECT }}
+          # ランタイム用 AWS キー（Lightsail はインスタンスロール非対応のため env で渡す）
+          AWS_ACCESS_KEY_ID: ${{ secrets.RUNTIME_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.RUNTIME_AWS_SECRET_ACCESS_KEY }}
+        run: |
+          bash scripts/lightsail/gen-containers-json.sh "${{ steps.img.outputs.image }}" /tmp/containers.json
+
+      - name: Wait for Lightsail service RUNNING
+        run: |
+          for i in $(seq 1 20); do
+            STATE=$(aws lightsail get-container-services \
+              --service-name "$LIGHTSAIL_SERVICE_NAME" \
+              --query 'containerServices[0].state' --output text 2>/dev/null || echo UNKNOWN)
+            echo "attempt $i: service state = $STATE"
+            case "$STATE" in
+              RUNNING|READY|ACTIVE) echo "service ready"; exit 0 ;;
+              DISABLED|UNKNOWN) echo "::error::Lightsail サービス $LIGHTSAIL_SERVICE_NAME が未作成/無効。先に作成が必要"; exit 1 ;;
+            esac
+            sleep 15
+          done
+          echo "::error::サービスが RUNNING にならない"; exit 1
+
+      - name: Create Lightsail deployment
+        id: deploy
+        run: |
+          BEFORE=$(aws lightsail get-container-services --service-name "$LIGHTSAIL_SERVICE_NAME" \
+            --query 'containerServices[0].currentDeployment.version' --output text 2>/dev/null || echo none)
+          echo "current deployment version before: $BEFORE"
+          aws lightsail create-container-service-deployment \
+            --service-name "$LIGHTSAIL_SERVICE_NAME" \
+            --containers file:///tmp/containers.json \
+            --public-endpoint file://scripts/lightsail/public-endpoint.json
+          echo "before=$BEFORE" >> "$GITHUB_OUTPUT"
+
+      # currentDeployment が新バージョンで ACTIVE になれば成功。
+      # nextDeployment=FAILED はヘルスチェック失敗で Lightsail が自動ロールバックした状態。
+      - name: Wait for deployment ACTIVE / detect rollback
+        run: |
+          BEFORE="${{ steps.deploy.outputs.before }}"
+          for i in $(seq 1 40); do
+            svc=$(aws lightsail get-container-services --service-name "$LIGHTSAIL_SERVICE_NAME" \
+              --query 'containerServices[0]' --output json)
+            curV=$(echo "$svc" | jq -r '.currentDeployment.version // "none"')
+            curS=$(echo "$svc" | jq -r '.currentDeployment.state // "none"')
+            nextS=$(echo "$svc" | jq -r '.nextDeployment.state // "none"')
+            echo "attempt $i: current=v${curV}/${curS} next=${nextS}"
+            if [ "$nextS" = "FAILED" ]; then
+              echo "::error::Lightsail デプロイ FAILED（ヘルスチェック失敗で自動ロールバック）"; exit 1
+            fi
+            if [ "$nextS" = "none" ] && [ "$curS" = "ACTIVE" ] && [ "$curV" != "$BEFORE" ]; then
+              URL=$(echo "$svc" | jq -r '.url')
+              echo "デプロイ成功 v${curV} / ${URL}"; exit 0
+            fi
+            sleep 15
+          done
+          echo "::error::デプロイが ACTIVE にならずタイムアウト"; exit 1
+
+      - name: Post-deploy health check (direct Lightsail URL)
+        run: |
+          URL=$(aws lightsail get-container-services --service-name "$LIGHTSAIL_SERVICE_NAME" \
+            --query 'containerServices[0].url' --output text)
+          for i in $(seq 1 10); do
+            CODE=$(curl -s -o /dev/null -w "%{http_code}" "${URL%/}/api/health" --max-time 10 || echo 000)
+            echo "attempt $i: GET ${URL%/}/api/health -> $CODE"
+            [ "$CODE" = "200" ] && { echo "health OK"; exit 0; }
+            sleep 10
+          done
+          echo "::error::Lightsail 直 URL のヘルスチェックが 200 にならない"; exit 1
