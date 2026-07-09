@@ -1,0 +1,36 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "UploadsBucket",
+      "Effect": "Allow",
+      "Action": ["s3:PutObject", "s3:DeleteObject"],
+      "Resource": "arn:aws:s3:::tsurispot-uploads/*"
+    },
+    {
+      "Sid": "IsrCacheObjects",
+      "Effect": "Allow",
+      "Action": ["s3:GetObject", "s3:PutObject", "s3:DeleteObject"],
+      "Resource": "arn:aws:s3:::tsurispot-isr-cache/ISR/*"
+    },
+    {
+      "Sid": "IsrCacheList",
+      "Effect": "Allow",
+      "Action": "s3:ListBucket",
+      "Resource": "arn:aws:s3:::tsurispot-isr-cache",
+      "Condition": { "StringLike": { "s3:prefix": ["ISR/*"] } }
+    },
+    {
+      "Sid": "DynamoTable",
+      "Effect": "Allow",
+      "Action": "dynamodb:*",
+      "Resource": "arn:aws:dynamodb:ap-northeast-1:179503922406:table/tsurispot"
+    },
+    {
+      "Sid": "RekognitionModeration",
+      "Effect": "Allow",
+      "Action": "rekognition:DetectModerationLabels",
+      "Resource": "*"
+    }
+  ]
+}
