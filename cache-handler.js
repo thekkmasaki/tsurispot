@@ -117,43 +117,68 @@ function splitPayload(payload) {
 // 律速だった。L1 エントリの実体は gzip後 Buffer(off-heap) だが、デシリアライズ済みエントリの
 // オブジェクト構造・Map・文字列キー等が old-space に載り、2048 件で old-space が 1578MB/1601MB に
 // 達して "FATAL ERROR: Reached heap limit" でプロセスがクラッシュ→5xx を反復した（2026-07-08〜09）。
-// 1024 件は 2026-07-05〜07 に 5xx ほぼゼロで安定していた実績値。件数を増やすなら先に
-// --max-old-space-size の引上げ（コンテナ4GBに対し余地あり）を伴わせること。
+// 1024 件は 2026-07-05〜07 に 5xx ほぼゼロで安定していた実績値。
+// 2026-07 (バイト基準LRU): 件数だけの上限では、エントリサイズの偏り（監査実測で個別 2〜5.7MB の
+// ページも存在）により合計メモリが読めず、上記 OOM の構造的原因が残っていた。sizeBytes（gzip 後の
+// 保存バイト）の合計を積算し、件数上限と「AND」で最古から追い出す二重上限にする。これでエントリ
+// サイズの分布が変わっても合計データ量が上限で頭打ちになり、V8 ヒープを溢れさせない。
+// 注: 実 on-heap コストはデシリアライズで ~3-4倍に膨らむため、ここは gzip バイトで保守的に取る。
+// 1024件 × 平均~150KB ≈ 150MB(gzip) ≈ ~600MB(on-heap) が安定水準だったので既定 160MB とする。
+// 最終的な安全網は --max-old-space-size(Dockerfile/env)。L1 を増やす場合は先にそれを引上げること。
 const L1_TTL_MS = Number(process.env.ISR_L1_TTL_MS || 600_000);
 const L1_MAX_ENTRIES = Number(process.env.ISR_L1_MAX_ENTRIES || 1024);
 const L1_MAX_ENTRY_BYTES = Number(process.env.ISR_L1_MAX_ENTRY_BYTES || 520_000);
-const _l1 = new Map(); // key -> { entry, expiresAt }
+const L1_MAX_BYTES = Number(process.env.ISR_L1_MAX_BYTES || 160_000_000);
+const _l1 = new Map(); // key -> { entry, expiresAt, sizeBytes }
+let _l1Bytes = 0; // L1 内エントリの sizeBytes 合計（近似）
 
 function l1Get(key) {
   const hit = _l1.get(key);
   if (!hit) return null;
   if (hit.expiresAt < Date.now()) {
     _l1.delete(key);
+    _l1Bytes -= hit.sizeBytes || 0;
     return null;
   }
   return hit.entry;
 }
 function l1Set(key, entry, sizeBytes) {
+  const bytes = typeof sizeBytes === "number" && sizeBytes > 0 ? sizeBytes : 0;
   // 巨大エントリはメモリ保護のため L1 に載せない（バックエンド経由は従来どおり機能）
-  if (typeof sizeBytes === "number" && sizeBytes > L1_MAX_ENTRY_BYTES) {
-    _l1.delete(key);
+  if (bytes > L1_MAX_ENTRY_BYTES) {
+    const existed = _l1.get(key);
+    if (existed) {
+      _l1.delete(key);
+      _l1Bytes -= existed.sizeBytes || 0;
+    }
     return;
   }
-  // delete→set で挿入順を更新（Map は挿入順を保持＝近似 LRU）
+  // 既存キーの置換なら旧バイトを先に減算してから delete→set で挿入順を更新（近似 LRU）
+  const prev = _l1.get(key);
+  if (prev) _l1Bytes -= prev.sizeBytes || 0;
   _l1.delete(key);
-  _l1.set(key, { entry, expiresAt: Date.now() + L1_TTL_MS });
-  // 件数上限を超えたら最古を捨てる
-  while (_l1.size > L1_MAX_ENTRIES) {
+  _l1.set(key, { entry, expiresAt: Date.now() + L1_TTL_MS, sizeBytes: bytes });
+  _l1Bytes += bytes;
+  // 件数上限 または 合計バイト上限を超えたら最古から追い出す
+  while (_l1.size > L1_MAX_ENTRIES || _l1Bytes > L1_MAX_BYTES) {
     const oldest = _l1.keys().next().value;
     if (oldest === undefined) break;
+    if (oldest === key) break; // 追加した本人しか残っていない場合は保持（1エントリ≤520KB<上限）
+    const o = _l1.get(oldest);
     _l1.delete(oldest);
+    if (o) _l1Bytes -= o.sizeBytes || 0;
   }
 }
 function l1Delete(key) {
-  _l1.delete(key);
+  const hit = _l1.get(key);
+  if (hit) {
+    _l1.delete(key);
+    _l1Bytes -= hit.sizeBytes || 0;
+  }
 }
 function l1Clear() {
   _l1.clear();
+  _l1Bytes = 0;
 }
 
 let _doc = null; // null=未初期化 / false=無効 / DocumentClient=有効
@@ -705,8 +730,10 @@ module.exports.__l1Set = l1Set;
 module.exports.__l1Delete = l1Delete;
 module.exports.__l1Clear = l1Clear;
 module.exports.__l1Size = () => _l1.size;
+module.exports.__l1Bytes = () => _l1Bytes;
 module.exports.__L1_MAX_ENTRIES = L1_MAX_ENTRIES;
 module.exports.__L1_MAX_ENTRY_BYTES = L1_MAX_ENTRY_BYTES;
+module.exports.__L1_MAX_BYTES = L1_MAX_BYTES;
 // テスト用: S3/DynamoDB クライアントを決定的に注入する（遅延 require への vi.mock 依存を避ける。
 // 2026-06 の cache-handler 改修ミス障害の教訓としてテストの確実性を優先）
 module.exports.__setClientsForTest = (clients) => {
