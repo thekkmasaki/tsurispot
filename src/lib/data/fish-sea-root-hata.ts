@@ -411,7 +411,7 @@ export const seaFishRootHata: FishSpecies[] = [
     scientificName: "Epinephelus fasciatus",
     slug: "akahata",
     description:
-      "赤い体色が美しい根魚。磯やテトラ帯に生息し、ワームやブラクリで狙えます。身は上品な白身で、煮付けや刺身が絶品。",
+      "釣りの時期は5〜11月で盛期は7〜9月、磯やテトラ帯で狙える赤い根魚。ワームやブラクリで狙えます。身は上品な白身で、煮付けや刺身が絶品。",
     category: "sea",
     family: "ハタ科",
     difficulty: "intermediate",

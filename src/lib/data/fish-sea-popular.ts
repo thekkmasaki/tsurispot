@@ -357,7 +357,7 @@ export const seaFishPopular: FishSpecies[] = [
     scientificName: "Suggrundus meerdervoortii",
     slug: "megochi",
     description:
-      "砂地に生息する小型の底魚で、キスのちょい投げ釣りの外道として釣れることが多い。見た目はユニークだが、天ぷらにすると絶品。",
+      "旬は夏〜初秋の6〜9月、砂浜や堤防のちょい投げで釣れる天ぷらが絶品の小型底魚。キスのちょい投げ釣りの外道として釣れることが多い。見た目はユニークだが、身はふわふわで美味。",
     category: "sea",
     family: "コチ科",
     difficulty: "beginner",
@@ -586,7 +586,7 @@ export const seaFishPopular: FishSpecies[] = [
     scientificName: "Sphyraena pinguis",
     slug: "kamasu",
     description:
-      "鋭い歯と俊敏な動きが特徴の回遊魚。ルアーやウキ釣りで手軽に狙え、引きも楽しめます。干物にすると絶品。",
+      "釣れる時期は7〜11月で盛期は8〜10月、堤防から手軽に狙える回遊魚。鋭い歯と俊敏な動きが特徴で、ルアーやウキ釣りで引きも楽しめます。干物にすると絶品。",
     category: "sea",
     family: "カマス科",
     difficulty: "beginner",
