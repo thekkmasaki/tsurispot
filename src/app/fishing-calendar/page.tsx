@@ -11,13 +11,13 @@ import { CalendarTableClient } from "@/components/fishing-calendar/calendar-tabl
 import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
-  title: "月別釣りカレンダー - 何月に何が釣れる？",
+  title: "今の時期に何が釣れる？月別釣りカレンダー",
   description:
-    "月ごとに釣れる魚を一覧で紹介。1月から12月まで各月のおすすめターゲット魚種、旬の釣りものがひと目でわかる釣りカレンダー。釣行計画にお役立てください。",
+    "「今の時期何が釣れる？」に月別カレンダーですぐ答えます。1月から12月まで、各月に旬を迎えるおすすめターゲットと釣りものを一覧表示。今月狙うべき魚がひと目でわかるので、釣行計画にお役立てください。",
   openGraph: {
-    title: "月別釣りカレンダー - 何月に何が釣れる？",
+    title: "今の時期に何が釣れる？月別釣りカレンダー",
     description:
-      "月ごとに釣れる魚を一覧で紹介。1月~12月の釣りカレンダーで旬の魚がひと目でわかる。",
+      "「今の時期何が釣れる？」に月別カレンダーですぐ答えます。1月~12月の旬の魚がひと目でわかる。",
     type: "website",
     url: "https://tsurispot.com/fishing-calendar",
     siteName: "ツリスポ",
