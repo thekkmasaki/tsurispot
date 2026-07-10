@@ -40,10 +40,21 @@ if [ ${#missing[@]} -gt 0 ]; then
   exit 1
 fi
 
-# jq が env.<KEY> で値を読む。REQUIRED をそのまま環境オブジェクトに畳み込み、
-# ISR_CACHE_* と AWS_REGION はリテラルで付与する。
+# OPTIONAL: 設定されていれば含める（未設定でも fail しない）。現状 App Runner にも無いが、
+# 移行を機に有効化しうるもの: origin lockdown(CDNバイパス防御) と管理系トークン。
+OPTIONAL=(
+  ORIGIN_VERIFY_SECRET ORIGIN_LOCKDOWN_MODE
+  ADMIN_SECRET ADMIN_MIGRATE_TOKEN
+)
+KEYS=("${REQUIRED[@]}")
+for k in "${OPTIONAL[@]}"; do
+  [ -n "${!k:-}" ] && KEYS+=("$k")
+done
+
+# jq が env.<KEY> で値を読む。REQUIRED+設定済みOPTIONAL を環境オブジェクトに畳み込み、
+# リテラル(ISR_CACHE_* / AWS_REGION / AWS_S3_BUCKET / NODE_OPTIONS)を付与する。
 export REQUIRED_KEYS_JSON
-REQUIRED_KEYS_JSON=$(printf '%s\n' "${REQUIRED[@]}" | jq -R . | jq -s .)
+REQUIRED_KEYS_JSON=$(printf '%s\n' "${KEYS[@]}" | jq -R . | jq -s .)
 
 jq -n --arg image "$IMAGE_URI" --argjson keys "$REQUIRED_KEYS_JSON" '
   {
@@ -56,7 +67,9 @@ jq -n --arg image "$IMAGE_URI" --argjson keys "$REQUIRED_KEYS_JSON" '
         + {
             "ISR_CACHE_BACKEND": "s3",
             "ISR_CACHE_S3_BUCKET": "tsurispot-isr-cache",
-            "AWS_REGION": "ap-northeast-1"
+            "AWS_REGION": "ap-northeast-1",
+            "AWS_S3_BUCKET": "tsurispot-uploads",
+            "NODE_OPTIONS": "--max-old-space-size=5120"
           }
       )
     }
