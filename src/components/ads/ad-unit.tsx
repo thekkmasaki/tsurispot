@@ -71,9 +71,11 @@ export function AdUnit({
     const el = containerRef.current;
     if (!el) return;
 
-    // 画面外の広告ユニットはビューポート接近(300px手前)まで push しない。
-    // 初期ロードから広告ペイロード(実測2.7MB/101req)を排除しTBT/LCPを改善。
-    // 固定配置(sticky/side rail)は表示時点で交差するため挙動不変。
+    // 収益優先(2026-07 全戻し): #216(2026-07-03)で全 AdUnit を IntersectionObserver(300px手前)の
+    // ビューポート遅延 push にしたところ、スクロールされない下部枠が読み込まれず 1PVあたり広告表示が
+    // ~0.6 まで激減し AdSense の RPM(ページのインプレッション収益)が 7/5 以降ほぼ半減した。
+    // PSI(速度)より収益を優先し、マウント時に即 push する旧来挙動へ戻す。
+    // 幅ガード(狭幅での "No slot size" 回避)と display:none 枠の非 push は維持する。
     let roRef: ResizeObserver | null = null;
 
     const tryPush = () => {
@@ -108,22 +110,12 @@ export function AdUnit({
       roRef.observe(el);
     };
 
-    // IntersectionObserver でビューポート 300px 手前まで近づいたら push を開始する。
-    // display:none の広告（例: MobileHeaderBannerAd が PC で hidden）は IO が発火しないため
-    // push されない=正しい挙動（現在も幅0で push されないため互換）。
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          io.disconnect();
-          startPush();
-        }
-      },
-      { rootMargin: "300px 0px", threshold: 0 }
-    );
-    io.observe(el);
+    // マウント時に即 push（ビューポート遅延を撤廃）。display:none の広告
+    // （例: MobileHeaderBannerAd が PC で hidden）は offsetWidth=0 のため push されず、
+    // レスポンシブで表示に切り替わった時点で ResizeObserver 経由で push される（従来互換）。
+    startPush();
 
     return () => {
-      io.disconnect();
       roRef?.disconnect();
     };
     // 広告は初回マウント時に1回だけ push する設計のため依存配列は空に固定する
