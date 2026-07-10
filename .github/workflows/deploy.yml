@@ -27,6 +27,21 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
+      # ランナーのディスク解放（重いビルド対策）。
+      # 2026-07: このリポジトリは next build(standalone) + docker build/push が重く、
+      # GitHub hosted runner の空き(~14GB)を使い切って "No space left on device" でデプロイが
+      # 断続失敗していた。ビルド前にプリインストールの巨大SDK群を消して ~20-30GB 空ける。
+      # master 以外(PR)ではデプロイ本体を走らせないので master 限定。失敗してもデプロイは続行。
+      - name: ランナーのディスク解放
+        if: github.ref == 'refs/heads/master'
+        continue-on-error: true
+        run: |
+          echo "空き(前): $(df -h / | awk 'NR==2{print $4}')"
+          sudo rm -rf /usr/share/dotnet /opt/ghc /usr/local/lib/android \
+            /opt/hostedtoolcache/CodeQL /usr/local/share/boost "$AGENT_TOOLSDIRECTORY" 2>/dev/null || true
+          sudo docker image prune --all --force 2>/dev/null || true
+          echo "空き(後): $(df -h / | awk 'NR==2{print $4}')"
+
       # IndexNow 差分送信用の「before」スナップショット。
       # デプロイ前の本番 sitemap.xml に載っている URL 集合を控えておき、後段の
       # 「IndexNow 差分送信」ステップでデプロイ後の sitemap と比較して新規公開 URL だけを送る。
@@ -490,20 +505,31 @@ jobs:
             case "$CODE" in 200|202) ;; *) echo "::warning::IndexNow送信が $CODE";; esac
           done
 
+      # コミットメッセージは env 経由で受け取り jq で JSON 構築する。
+      # 2026-07: 従来は ${{ ...head_commit.message }} をシェルの JSON リテラルへ直挿入しており、
+      # 引用符・バッククォート・改行・() を含むメッセージ(例: hotfix コミット)で構文が壊れ、
+      # 通知ステップが exit 3 で失敗しデプロイ全体が failure 判定になっていた。env + jq で安全化。
       - name: Discord通知（成功）
         if: success() && github.ref == 'refs/heads/master'
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
         run: |
           if [ -n "$DISCORD_WEBHOOK_URL" ]; then
-            curl -s -H "Content-Type: application/json" -d "{\"content\":\"✅ **デプロイ成功** \`${{ github.event.head_commit.message }}\`\\nhttps://tsurispot.com\"}" "$DISCORD_WEBHOOK_URL"
+            PAYLOAD=$(jq -n --arg msg "$COMMIT_MSG" \
+              '{content: ("✅ **デプロイ成功** `" + ($msg | split("\n")[0]) + "`\nhttps://tsurispot.com")}')
+            curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
           fi
 
       - name: Discord通知（失敗）
         if: failure() && github.ref == 'refs/heads/master'
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          COMMIT_MSG: ${{ github.event.head_commit.message }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
           if [ -n "$DISCORD_WEBHOOK_URL" ]; then
-            curl -s -H "Content-Type: application/json" -d "{\"content\":\"❌ **デプロイ失敗** \`${{ github.event.head_commit.message }}\`\\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" "$DISCORD_WEBHOOK_URL"
+            PAYLOAD=$(jq -n --arg msg "$COMMIT_MSG" --arg url "$RUN_URL" \
+              '{content: ("❌ **デプロイ失敗** `" + ($msg | split("\n")[0]) + "`\n" + $url)}')
+            curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
           fi

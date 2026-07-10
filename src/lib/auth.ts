@@ -77,12 +77,23 @@ const config: NextAuthConfig = {
   // (env を触らずに本番ログで根因を掴むための恒久ロガー)
   logger: {
     error(error: Error) {
-      const cause = (error as { cause?: { message?: string } })?.cause?.message;
+      // Auth.js の CallbackRouteError 等は cause が { err: Error, provider } 形で、真因は
+      // cause.err.message にある。従来 cause.message だけを読んでいたため、コールバック失敗の
+      // 根本原因(pkce cookie missing / issuer / proto 不一致等)が常に空になり診断不能だった。
+      // cause.err を優先し、無ければ cause 自体、それも無ければ error 本体を出す。
+      const cause = (
+        error as { cause?: { err?: Error; message?: string } }
+      )?.cause;
+      const inner = cause?.err;
       console.error(
         "[auth][error]",
-        error?.name ?? "UnknownError",
+        (error as { type?: string })?.type ?? error?.name ?? "UnknownError",
         error?.message ?? "",
-        cause ? `cause=${cause}` : "",
+        inner
+          ? `cause=${inner.name}: ${inner.message}`
+          : cause?.message
+            ? `cause=${cause.message}`
+            : "",
       );
     },
   },
