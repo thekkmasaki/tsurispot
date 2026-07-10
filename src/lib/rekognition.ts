@@ -71,6 +71,18 @@ export async function moderateImage(s3Key: string): Promise<ModerationResult> {
     MinConfidence: 70,
   });
 
-  const response = await getClient().send(command);
-  return evaluateModeration(response);
+  try {
+    const response = await getClient().send(command);
+    return evaluateModeration(response);
+  } catch (err) {
+    // 呼び出し側(catch-photo/cover-photo/spot-photo)は catch して fail-open(=safe扱い)するため、
+    // 権限欠落(AccessDenied)や API 障害だとモデレーションが無言で無効化される。ここで必ず
+    // 統一プレフィックスのログを出し、メトリクスフィルタ/アラートで検知可能にする(挙動は変えず re-throw)。
+    console.error(
+      "[rekognition] moderation failed",
+      (err as { name?: string })?.name ?? "UnknownError",
+      (err as { message?: string })?.message ?? "",
+    );
+    throw err;
+  }
 }
