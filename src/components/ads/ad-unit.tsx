@@ -504,32 +504,11 @@ export function MobileHeaderBannerAd() {
   );
 }
 
-// ---- 遅延ロード広告（スクロールして画面に入ったら読み込み） ----
+// ---- 広告ラッパー（2026-07 全戻し: 収益優先で即ロード化） ----
+// 旧: IntersectionObserver(rootMargin 200px)でスクロール到達まで children(広告)を出さず
+// プレースホルダ(min-h-[250px])だけ描画していた。稼ぎ頭の spots/fish 詳細の in-content 広告
+// (DisplayAd/InArticleAd)がスクロールされないと未ロード=インプレッション消滅のため、収益優先で
+// children を即描画する。CLS は内側の AdUnit が min-h を予約済みなのでプレースホルダ不要。
 export function LazyAd({ className = "", children }: { className?: string; children?: React.ReactNode }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "200px" }
-    );
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div ref={containerRef} className={className}>
-      {isVisible ? (children || <InArticleAd />) : <div className="min-h-[250px]" />}
-    </div>
-  );
+  return <div className={className}>{children || <InArticleAd />}</div>;
 }
