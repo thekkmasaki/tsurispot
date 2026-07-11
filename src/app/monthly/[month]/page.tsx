@@ -75,11 +75,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     .filter(Boolean)
     .join("・");
 
-  // CTR最適化: 【年月】先頭で鮮度シグナル + 魚種数で網羅性 + 具体的な魚名
-  const title = `【2026年${guide.nameJa}】釣れる魚${totalFishCount}種と釣り方 - ${topFishNames}を解説`;
-  const description = `${guide.nameJa}（2026年）に堤防・漁港で釣れる魚${totalFishCount}種を完全網羅。${topFishNames}など今狙えるターゲットの仕掛け・釣り方・おすすめスポットを解説。水温${guide.conditions.waterTemp}の${guide.nameJa}攻略法。初心者向けから上級テクニックまで。`;
+  // description用は4種目まで出す（サビキ定番3種の後に来る、その月の目玉魚が入りやすい）
+  const topFishNamesLong = guide.topFish
+    .slice(0, 4)
+    .map((slug) => fishSpecies.find((f) => f.slug === slug)?.name)
+    .filter(Boolean)
+    .join("・");
+
+  // CTR最適化: クエリ自然句「◯月に釣れる魚」を先頭で完全一致 + 「一覧」でリスト検索意図に応える
+  const title = `${guide.nameJa}に釣れる魚一覧【2026年】${topFishNames}など${totalFishCount}種と釣り方`;
+  const description = `${guide.nameJa}に堤防・漁港で釣れる魚は${topFishNamesLong}など全${totalFishCount}種。今が最盛期の魚と仕掛け・釣れる時間帯・全国のおすすめスポットを解説。水温${guide.conditions.waterTemp}の${guide.nameJa}に合った釣り方がわかる。初心者向けターゲットも紹介。`;
   // OG用タイトル（テンプレート「| ツリスポ」が付かないため少し長めに）
-  const ogTitle = `【2026年${guide.nameJa}】釣れる魚${totalFishCount}種と釣り方 - ${topFishNames}など｜ツリスポ`;
+  const ogTitle = `${guide.nameJa}に釣れる魚一覧【2026年】${topFishNames}など${totalFishCount}種と釣り方｜ツリスポ`;
 
   return {
     title,
