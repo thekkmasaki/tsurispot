@@ -37,6 +37,24 @@ function useAdsSuppressed(): boolean {
   return suppressed;
 }
 
+// ブレークポイントに一致する時だけ true。CSS の display:none で広告を隠すと、非表示でも
+// <ins> が幅0で DOM に残り、adsbygoogle.push({}) が DOM 順で処理して "No slot size for
+// availableWidth=0" 例外→push キュー停止→他の広告が埋まらなくなる（2026-07 モバイル広告不配信の真因）。
+// 非表示ブレークポイントでは DOM ごとアンマウントするため、この matchMedia でゲートする。
+// SSR/初回描画は false（navigator/matchMedia 不在＝hydration 一致、広告は元々 client push で実害なし）。
+function useMediaQuery(query: string): boolean {
+  const [matches, setMatches] = useState(false);
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mq = window.matchMedia(query);
+    const update = () => setMatches(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, [query]);
+  return matches;
+}
+
 // ---- 基本AdSenseユニット ----
 interface AdUnitProps {
   slot?: string;
@@ -330,9 +348,13 @@ export function StickySidebarAd({ className = "" }: { className?: string }) {
 
 // ---- ヘッダー下リーダーボード広告（PCのみ） ----
 export function HeaderBannerAd() {
-  if (!ADSENSE_ID) return null;
+  // lg(1024px)以上でのみマウント。旧 `hidden lg:block` の CSS 非表示だと、モバイルでも
+  // 幅0の <ins> が DOM に残り push キューを止め、モバイル広告(MobileHeaderBanner/Sticky)が
+  // 埋まらなくなる（2026-07 不具合の真因）。matchMedia で非該当時は DOM ごと出さない。
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  if (!ADSENSE_ID || !isDesktop) return null;
   return (
-    <div className="hidden lg:block border-b border-border/30 bg-muted/10">
+    <div className="border-b border-border/30 bg-muted/10">
       <div className="mx-auto max-w-5xl px-4 py-2">
         {/* CLS対策: 遅延挿入される広告がヘッダー下のコンテンツを押し下げないよう
             最小高さを予約する（728x90 リーダーボード基準）。 */}
@@ -420,6 +442,9 @@ export function MobileStickyAd({ suspended = false }: { suspended?: boolean }) {
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  // md未満(モバイル)でのみマウント。旧 `md:hidden` の CSS 非表示だと PC でも幅0の <ins> が
+  // DOM に残り push キューを止め、PC の本文広告が埋まらなくなる。DOM ごとゲートする。
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   useEffect(() => {
     if (!ADSENSE_ID) return;
@@ -448,15 +473,16 @@ export function MobileStickyAd({ suspended = false }: { suspended?: boolean }) {
     };
   }, [visible, dismissed, suspended]);
 
-  if (!ADSENSE_ID || dismissed || !visible) return null;
+  if (!ADSENSE_ID || dismissed || !visible || !isMobile) return null;
 
   return (
     // suspend はインラインstyleではなく hidden クラスで行う
     // （smart-mobile-ad.tsx の MutationObserver が style*="display: none" を未充足広告の
     //   自動折りたたみと誤検知して恒久 dismiss してしまうのを防ぐため）
+    // md:hidden は撤廃（isMobile ゲートで DOM ごとマウント制御するため）。
     <div
       ref={containerRef}
-      className={`fixed bottom-[calc(60px+env(safe-area-inset-bottom,0px))] left-0 right-0 z-40 md:hidden border-t border-border/30 bg-background/95 backdrop-blur-sm${suspended ? " hidden" : ""}`}
+      className={`fixed bottom-[calc(60px+env(safe-area-inset-bottom,0px))] left-0 right-0 z-40 border-t border-border/30 bg-background/95 backdrop-blur-sm${suspended ? " hidden" : ""}`}
     >
       {/* 下部アンカーの固定広告が読み込み後に高さ拡張すると内容が上方向にシフトし
           CLS 0.2の主因になっていた。サイズ固定+クリップ枠で拡張を物理的に遮断。
@@ -488,9 +514,12 @@ export function MobileStickyAd({ suspended = false }: { suspended?: boolean }) {
 
 // ---- モバイルヘッダーバナー広告（モバイルのみ表示） ----
 export function MobileHeaderBannerAd() {
-  if (!ADSENSE_ID) return null;
+  // md未満(モバイル)でのみマウント。旧 `md:hidden` の CSS 非表示だと PC でも幅0の <ins> が
+  // DOM に残り push キューを止め、PC の本文広告が埋まらなくなる。matchMedia で DOM ごとゲート。
+  const isMobile = useMediaQuery("(max-width: 767px)");
+  if (!ADSENSE_ID || !isMobile) return null;
   return (
-    <div className="md:hidden border-b border-border/20 bg-muted/5">
+    <div className="border-b border-border/20 bg-muted/5">
       <div className="mx-auto max-w-lg px-2 py-1">
         <AdUnit
           slot={AD_SLOTS.mobile_header_banner}
