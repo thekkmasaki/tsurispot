@@ -1036,7 +1036,7 @@ export const freshwaterFish: FishSpecies[] = [
     scientificName: "Acheilognathus spp.",
     slug: "tanago",
     description:
-      "小物釣りの王様と呼ばれる繊細な淡水魚。婚姻色（繁殖期の美しい体色）が美しく、観賞用としても人気。二枚貝に産卵するという独特の生態を持つ。細い仕掛けとタナゴ専用の極小針を使った繊細な釣りは、熟練者に独特の達成感を与える。",
+      "タナゴ釣りの時期は春の3月〜6月と秋の9月〜11月。小物釣りの王様と呼ばれる繊細な淡水魚で、婚姻色（繁殖期の美しい体色）の美しさから観賞用としても人気。二枚貝に産卵するという独特の生態を持ち、細い仕掛けとタナゴ専用の極小針を使った繊細な釣りは、熟練者に独特の達成感を与える。",
     category: "freshwater",
     family: "コイ科",
     difficulty: "intermediate",

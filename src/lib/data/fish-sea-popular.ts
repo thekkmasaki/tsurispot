@@ -72,7 +72,7 @@ export const seaFishPopular: FishSpecies[] = [
     scientificName: "Scomber japonicus",
     slug: "saba",
     description:
-      "力強い引きが楽しめる青物。サビキ釣りやジグサビキで狙えます。回遊次第では大量に釣れることも。",
+      "サバ釣りのシーズンは5月〜10月で、堤防のサビキ釣りで初心者でも手軽に狙える青物。7月〜9月は回遊が活発になり、ジグサビキの遠投で沖の群れも直撃できる。力強い引きが魅力で、回遊次第では数釣りも楽しめる。",
     category: "sea",
     family: "サバ科",
     difficulty: "beginner",
@@ -400,7 +400,7 @@ export const seaFishPopular: FishSpecies[] = [
     scientificName: "Pleuronectes yokohamae",
     slug: "karei",
     description:
-      "冬の投げ釣りの代表的ターゲット。砂地の海底に仕掛けを置いてじっくり待つ釣り。初心者にも分かりやすいアタリが特徴。",
+      "カレイは10月〜3月の低水温期が釣期で、冬の投げ釣りの代表的ターゲット。砂地の海底に仕掛けを置いてじっくり待つ釣りで、初心者にも分かりやすいアタリが特徴。船のカレイ五目なら岸から届かないポイントの大型も狙える。",
     category: "sea",
     family: "カレイ科",
     difficulty: "beginner",
