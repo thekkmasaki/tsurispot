@@ -1055,7 +1055,7 @@ export const seaFishTaiSuzuki: FishSpecies[] = [
     scientificName: "Acanthopagrus latus",
     slug: "kibire",
     description:
-      "クロダイの近縁種で、ヒレが黄色いのが特徴。河口域や汽水域を好み、ルアーへの反応が良い。クロダイよりも引きが強く、ルアーフィッシングの好ターゲット。チニングの対象魚。",
+      "旬は夏〜秋で、河口や汽水域のチニングで人気のクロダイ近縁種。ヒレが黄色いのが特徴で、クロダイよりも引きが強くルアーへの反応が良い。ウキフカセ釣りでも狙える好ターゲット。",
     category: "sea",
     family: "タイ科",
     difficulty: "intermediate",

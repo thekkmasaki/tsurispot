@@ -156,7 +156,7 @@ export const seaFishRootHata: FishSpecies[] = [
     scientificName: "Sebastes schlegelii",
     slug: "kurosoi",
     description:
-      "北日本を中心に釣れる大型根魚。堤防の夜釣りやワーム釣りで狙え、50cm超の大物も。脂が乗り、刺身・煮付けどちらも絶品です。",
+      "春と晩秋に堤防の夜釣りで狙いやすい北日本の大型根魚。ワームやブラクリで足元を丁寧に探ると50cm超の大物も。脂が乗り、刺身・煮付けどちらも絶品です。",
     category: "sea",
     family: "メバル科",
     difficulty: "intermediate",

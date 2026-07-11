@@ -1219,7 +1219,7 @@ export const freshwaterFish: FishSpecies[] = [
     scientificName: "Parahucho perryi",
     slug: "itou",
     description:
-      "日本最大の淡水魚で、「幻の魚」と呼ばれる。北海道の一部河川にのみ生息し、環境省レッドリストで絶滅危惧IB類に指定されている。体長1mを超える個体もおり、サケ科最大級。キャッチ＆リリースが強く推奨される。春の雪代が入る時期と秋の産卵前が狙い目。",
+      "北海道の一部河川にのみ生息する日本最大の淡水魚で、「幻の魚」と呼ばれる。環境省レッドリストで絶滅危惧IB類に指定されている。体長1mを超える個体もおり、サケ科最大級。キャッチ＆リリースが強く推奨される。春の雪代が入る時期と秋の産卵前が狙い目。",
     category: "freshwater",
     family: "サケ科",
     difficulty: "advanced",
