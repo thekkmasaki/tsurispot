@@ -1394,7 +1394,7 @@ export const seaFishRootHata: FishSpecies[] = [
     scientificName: "Epinephelus bruneus",
     slug: "kue",
     description:
-      "幻の高級魚と呼ばれる磯釣りの最高峰ターゲット。最大で1mを超え、市場では1kgあたり数万円の値がつく超高級魚。磯の穴に潜む大型個体を大物仕掛けで狙う釣りは、磯師にとって究極の夢。クエ鍋は絶品中の絶品。",
+      "クエ釣りは9月〜12月の秋が本番となる磯釣りの最高峰ターゲット。幻の高級魚と呼ばれ、最大で1mを超え、市場では1kgあたり数万円の値がつく。磯の穴に潜む大型個体を大物仕掛けのぶっこみ釣りで狙う釣りは、磯師にとって究極の夢。クエ鍋は絶品中の絶品。",
     category: "sea",
     family: "ハタ科",
     difficulty: "advanced",

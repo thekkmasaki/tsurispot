@@ -441,7 +441,7 @@ export const seaFishTaiSuzuki: FishSpecies[] = [
     scientificName: "Plectorhinchus cinctus",
     slug: "koshoudai",
     description:
-      "体に胡椒のような斑点がある大型魚。堤防やテトラ帯で釣れることがあります。食味は良く、刺身や塩焼きで美味しくいただけます。",
+      "コショウダイは堤防やテトラ帯からぶっこみ釣りやルアーで狙える大型魚。体に胡椒のような斑点があるのが名前の由来。6月〜8月の夏が最盛期で、食味も良く、刺身や塩焼きで美味しくいただけます。",
     category: "sea",
     family: "イサキ科",
     difficulty: "intermediate",
