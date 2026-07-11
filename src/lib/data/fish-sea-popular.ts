@@ -1031,7 +1031,7 @@ export const seaFishPopular: FishSpecies[] = [
     scientificName: "Nuchequula nuchalis",
     slug: "hiiragi",
     description:
-      "体表のヌメリが強い小型魚。ちょい投げの外道として砂地でよく釣れる。体から強い粘液を出すのが特徴。身は意外と美味しく、唐揚げや南蛮漬けにすると良い。",
+      "砂地のちょい投げで初夏〜秋によく釣れる小型魚。キスやハゼ狙いの外道の定番だが、身は意外と美味しく唐揚げや南蛮漬けに向く。体表から強い粘液を出すため、掴む際はタオルがあると扱いやすい。",
     category: "sea",
     family: "ヒイラギ科",
     difficulty: "beginner",
