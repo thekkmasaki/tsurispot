@@ -473,7 +473,7 @@ export const seaFishRootHata: FishSpecies[] = [
     scientificName: "Synodus variegatus",
     slug: "eso",
     description:
-      "底物釣りの外道としてよく釣れる魚。小骨が多く敬遠されがちですが、すり身にすると極上のかまぼこの原料になります。",
+      "小骨の多さから外道として敬遠されがちですが、すり身にすると極上のかまぼこの原料になる白身魚。砂浜や堤防の投げ釣り・ショアジギングでキスやカレイに混じってよく釣れ、鋭い歯を持つため針外しには注意が必要です。",
     category: "sea",
     family: "エソ科",
     difficulty: "beginner",
