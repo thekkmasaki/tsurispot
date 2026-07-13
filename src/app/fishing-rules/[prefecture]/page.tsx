@@ -45,9 +45,24 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const pref = prefectures.find((p) => p.slug === prefSlug);
   if (!pref) return {};
 
+  const rule = getFishingRuleByPrefSlug(prefSlug);
+  const hasSea = Boolean(rule?.seaRules);
   const prefSpotCount = fishingSpots.filter((s) => s.region.prefecture === pref.name).length;
-  const title = `${pref.name}の釣りルール・規制【2026年最新】海釣り・川釣りの禁漁期間・漁業権まとめ`;
-  const description = `${pref.name}で釣りをする前に必ず確認したいルール・規制を完全まとめ。海面の漁業権（タコ・貝類）・撒き餌規制・釣り禁止区域から、河川の遊漁券・禁漁期間・サイズ制限まで網羅。${prefSpotCount > 0 ? `${pref.name}の釣り場${prefSpotCount}箇所の情報も掲載。` : ""}違反すると罰則の対象になる場合もあるため、必ず事前にチェックしましょう。`;
+
+  const title = hasSea
+    ? `${pref.name}の釣り禁止区域・禁漁期間まとめ【2026年最新】タコ釣りの可否・漁業権・遊漁券`
+    : `${pref.name}の禁漁期間・遊漁券まとめ【2026年最新】川釣り・渓流釣りのルール規制`;
+
+  const details: string[] = [];
+  const restrictedCount = rule?.seaRules?.restrictedAreas.length ?? 0;
+  if (restrictedCount > 0) details.push(`釣り禁止・注意区域${restrictedCount}件`);
+  const closedSeasonFish = (rule?.closedSeasons ?? []).slice(0, 3).map((cs) => cs.fish);
+  if (closedSeasonFish.length > 0) details.push(`${closedSeasonFish.join("・")}の禁漁期間`);
+  const riverNames = (rule?.yugyokenRivers ?? []).slice(0, 2);
+  if (riverNames.length > 0) details.push(`遊漁券が必要な河川（${riverNames.join("・")}など）`);
+  const detailText = details.length > 0 ? details.join("、") : "禁漁期間・遊漁券・サイズ制限などの釣りルール";
+
+  const description = `${pref.name}の${detailText}を2026年最新版でまとめ。${hasSea ? "タコ・貝類の漁業権など海釣りのルールも網羅。" : ""}${prefSpotCount > 0 ? `${pref.name}の釣り場${prefSpotCount}箇所の情報も掲載。` : ""}違反すると罰則の対象になる場合もあるため、必ず事前にチェックしましょう。`;
 
   return {
     title,
@@ -78,6 +93,7 @@ export default async function PrefectureFishingRulesPage({ params }: Props) {
   if (!pref) permanentRedirect("/fishing-rules");
 
   const rule = getFishingRuleByPrefSlug(prefSlug);
+  const hasSea = Boolean(rule?.seaRules);
 
   // この都道府県のスポット取得
   const prefSpots = fishingSpots
@@ -116,8 +132,10 @@ export default async function PrefectureFishingRulesPage({ params }: Props) {
   const articleJsonLd = {
     "@context": "https://schema.org",
     "@type": "Article",
-    headline: `${pref.name}の釣りルール・規制情報｜禁漁期間・遊漁券・サイズ制限`,
-    description: `${pref.name}で釣りをする前に知っておきたいルールと規制。禁漁期間、遊漁券が必要な河川、サイズ制限、漁業権に関する注意事項を解説。`,
+    headline: hasSea
+      ? `${pref.name}の釣り禁止区域・禁漁期間・釣りルール｜漁業権・遊漁券・サイズ制限`
+      : `${pref.name}の禁漁期間・遊漁券・釣りルール｜川釣り・渓流釣りの規制情報`,
+    description: `${pref.name}で釣りをする前に知っておきたいルールと規制。${hasSea ? "釣り禁止区域、タコ・貝類の漁業権、" : ""}禁漁期間、遊漁券が必要な河川、サイズ制限に関する注意事項を解説。`,
     datePublished: "2025-06-01",
     dateModified: new Date().toISOString().split("T")[0],
     author: {
@@ -232,10 +250,14 @@ export default async function PrefectureFishingRulesPage({ params }: Props) {
         {/* ヘッダー */}
         <div className="mb-8 text-center sm:mb-10">
           <h1 className="text-2xl font-bold tracking-tight sm:text-4xl">
-            {pref.name}の釣りルール・規制情報
+            {hasSea
+              ? `${pref.name}の釣り禁止区域・禁漁期間・釣りルール`
+              : `${pref.name}の禁漁期間・遊漁券・釣りルール`}
           </h1>
           <p className="mt-2 text-sm text-muted-foreground sm:mt-3 sm:text-base">
-            {pref.name}で釣りを楽しむために、知っておきたいルールをまとめました。
+            {hasSea
+              ? `釣り禁止区域や漁業権、禁漁期間、遊漁券など、${pref.name}で釣りをする前に確認したいルールをまとめました。`
+              : `禁漁期間や遊漁券、サイズ制限など、${pref.name}で川釣り・渓流釣りをする前に確認したいルールをまとめました。`}
           </p>
         </div>
 
