@@ -3,6 +3,12 @@ import { fishSpecies } from "@/lib/data/fish";
 
 const baseUrl = "https://tsurispot.com";
 
+// 実画像（実写・イラスト）のみを配信する。
+// 旧実装は全スポット・全魚種に OGP 画像(/api/og?title=...)を <image:loc> として約5,400件
+// 配信しており、GSC「クロール済み-インデックス未登録」の最大の供給源になっていた
+// （OGPカードはテキスト画像で画像検索価値ゼロ。しかも robots.txt では /api/ を除外予定という矛盾）。
+// OGP 画像は各ページの og:image メタタグだけで十分で、sitemap から Google に押し込まない。
+
 export async function GET() {
   let xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
@@ -13,16 +19,14 @@ export async function GET() {
   for (const spot of fishingSpots.filter(
     (s) => (s.description || "").length >= 100 && s.catchableFish.length >= 2,
   )) {
-    xml += `
-  <url>
-    <loc>${baseUrl}/spots/${spot.slug}</loc>`;
+    let images = "";
 
     // mainImageUrl
     if (spot.mainImageUrl) {
       const imgUrl = spot.mainImageUrl.startsWith("http")
         ? spot.mainImageUrl
         : `${baseUrl}${spot.mainImageUrl}`;
-      xml += `
+      images += `
     <image:image>
       <image:loc>${escapeXml(imgUrl)}</image:loc>
       <image:title>${escapeXml(spot.name)}</image:title>
@@ -30,20 +34,13 @@ export async function GET() {
     </image:image>`;
     }
 
-    // OGP画像
-    xml += `
-    <image:image>
-      <image:loc>${baseUrl}/api/og?title=${encodeURIComponent(spot.name + ' | ツリスポ')}&amp;emoji=%F0%9F%8E%A3</image:loc>
-      <image:title>${escapeXml(`${spot.name} | ツリスポ`)}</image:title>
-    </image:image>`;
-
     // spotPhotos
     if (spot.spotPhotos) {
       for (const photo of spot.spotPhotos.slice(0, 3)) {
         const photoUrl = photo.url.startsWith("http")
           ? photo.url
           : `${baseUrl}${photo.url}`;
-        xml += `
+        images += `
     <image:image>
       <image:loc>${escapeXml(photoUrl)}</image:loc>
       <image:title>${escapeXml(photo.alt || spot.name)}</image:title>
@@ -51,32 +48,28 @@ export async function GET() {
       }
     }
 
+    // 実画像が1枚も無いスポットはエントリ自体を出さない（空<url>はノイズ）
+    if (!images) continue;
+
     xml += `
+  <url>
+    <loc>${baseUrl}/spots/${spot.slug}</loc>${images}
   </url>`;
   }
 
-  // 魚種の画像
+  // 魚種の画像（実写画像を持つ魚種のみ）
   for (const fish of fishSpecies) {
+    if (!fish.imageUrl) continue;
+    const fishImgUrl = fish.imageUrl.startsWith("http")
+      ? fish.imageUrl
+      : `${baseUrl}${fish.imageUrl}`;
     xml += `
   <url>
-    <loc>${baseUrl}/fish/${fish.slug}</loc>`;
-
-    if (fish.imageUrl) {
-      const fishImgUrl = fish.imageUrl.startsWith("http")
-        ? fish.imageUrl
-        : `${baseUrl}${fish.imageUrl}`;
-      xml += `
+    <loc>${baseUrl}/fish/${fish.slug}</loc>
     <image:image>
       <image:loc>${escapeXml(fishImgUrl)}</image:loc>
       <image:title>${escapeXml(fish.name)}</image:title>
       <image:caption>${escapeXml(`${fish.name}（${fish.nameKana}）`)}</image:caption>
-    </image:image>`;
-    }
-
-    xml += `
-    <image:image>
-      <image:loc>${baseUrl}/api/og?title=${encodeURIComponent(fish.name + ' | ツリスポ')}&amp;emoji=%F0%9F%90%9F</image:loc>
-      <image:title>${escapeXml(`${fish.name} | ツリスポ`)}</image:title>
     </image:image>
   </url>`;
   }

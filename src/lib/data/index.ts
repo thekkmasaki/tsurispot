@@ -160,6 +160,12 @@ export function getSpotsByPrefectureAndFish(prefName: string, fishSlug: string):
  * minSpots 件以上のスポットがある組み合わせのみ（noindex/sitemap のしきい値=3 と統一）。
  * sitemap と prefecture/[slug]/fish/[fishSlug] の generateStaticParams で共用し、
  * 「インデックス対象 = 事前生成対象」を保証する（空HTMLの尾を作らない）。
+ *
+ * count は**ユニークスポット数**で数える。ページ側の index 判定
+ * （getSpotsByPrefectureAndFish(...).length >= 3）と同一基準にするため。
+ * 旧実装は catchableFish の出現数カウントで、同一スポットが同じ魚を複数釣法で
+ * 持つと水増しされ、「sitemap 掲載なのにページ側は noindex」という GSC
+ * 「送信された URL に noindex タグが追加されています」の構造的発生源だった。
  */
 export function getEligiblePrefFishCombos(
   minSpots: number = 3
@@ -168,8 +174,10 @@ export function getEligiblePrefFishCombos(
   for (const spot of fishingSpots) {
     const pref = prefectures.find((p) => p.name === spot.region.prefecture);
     if (!pref) continue;
-    for (const cf of spot.catchableFish) {
-      const key = `${pref.slug}|${cf.fish.slug}`;
+    // 同一スポット内の複数エントリ（釣法・期間違い）を 1 スポットに正規化
+    const fishSlugs = new Set(spot.catchableFish.map((cf) => cf.fish.slug));
+    for (const fishSlug of fishSlugs) {
+      const key = `${pref.slug}|${fishSlug}`;
       countMap.set(key, (countMap.get(key) || 0) + 1);
     }
   }
@@ -302,13 +310,18 @@ export function getHighValuePrefMonthFishCombos(
 /**
  * index 対象の「都道府県×月×魚種」組み合わせ（= 配信される全ページ）。
  *
- * 条件は matrix ページの buildValidCombos と完全一致させる必要がある:
- *   その県・その月にその魚が釣れる catchableFish エントリ数 >= minSpots。
+ * 条件は matrix ページのレンダリング判定と完全一致させる必要がある:
+ *   その県・その月にその魚が釣れる**ユニークスポット数** >= minSpots
+ *   （= matrix ページ本体の `matchingSpots.length >= MIN_SPOTS` と同一基準）。
  * matrix ページは count < minSpots を 301 リダイレクトし、それ以外は配信する。
  * その「配信される全ページ」を index / sitemap 掲載対象にする（薄いページも積極 index 方針）。
  *
- * getHighValuePrefMonthFishCombos（高価値の厳選サブセット）は引き続き
- * generateStaticParams の事前生成(SSG)対象に使い、SSG 枚数=イメージ容量を抑える。
+ * 旧実装は catchableFish の出現数カウントで、同一スポットが同じ魚を複数釣法で持つと
+ * 「出現数>=2 だがユニークスポット<2」の組合せが sitemap に載り、ページ側では
+ * 301 される矛盾（GSC「送信された URL にリダイレクトがあります」）の構造的発生源だった。
+ *
+ * getHighValuePrefMonthFishCombos（高価値の厳選サブセット・元からユニークカウント）は
+ * 引き続き generateStaticParams の事前生成(SSG)対象に使い、SSG 枚数=イメージ容量を抑える。
  * 索引は広いが事前生成は厳選、という非対称でロングテール index と容量を両立する。
  */
 export function getEligiblePrefMonthFishCombos(
@@ -328,10 +341,15 @@ export function getEligiblePrefMonthFishCombos(
     for (const month of MONTHS) {
       const fishMap = new Map<string, number>();
       for (const spot of prefSpots) {
+        // 同一スポット内の複数エントリ（釣法・期間違い）を 1 スポットに正規化
+        const seen = new Set<string>();
         for (const cf of spot.catchableFish) {
           if (isMonthInRange(month.num, cf.monthStart, cf.monthEnd)) {
-            fishMap.set(cf.fish.slug, (fishMap.get(cf.fish.slug) || 0) + 1);
+            seen.add(cf.fish.slug);
           }
+        }
+        for (const fSlug of seen) {
+          fishMap.set(fSlug, (fishMap.get(fSlug) || 0) + 1);
         }
       }
       for (const [fSlug, count] of fishMap) {
