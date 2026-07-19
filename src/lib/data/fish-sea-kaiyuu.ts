@@ -342,7 +342,7 @@ export const seaFishKaiyuu: FishSpecies[] = [
     scientificName: "Pseudocaranx dentex",
     slug: "shimaaji",
     description:
-      "アジの仲間の最高級魚。天然物は非常に希少で、磯や沖の瀬で狙います。上品な脂と甘みのある刺身は寿司ネタの最高峰のひとつ。",
+      "シマアジが釣れる場所は、潮通しの良い磯の先端や沖の瀬が中心。アジ科の最高級魚で天然物は非常に希少です。上品な脂と甘みのある刺身は寿司ネタの最高峰のひとつ。",
     category: "sea",
     family: "アジ科",
     difficulty: "advanced",
