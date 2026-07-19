@@ -1,32 +1,40 @@
 import type { MetadataRoute } from "next";
 
+// 検索エンジン向けクロール除外パス。
+// 注意(RFC 9309): クローラーは「最も具体的にマッチする User-Agent グループ**だけ**」に従う。
+// 以前は { userAgent: "Googlebot", allow: "/" } 等の独立グループがあり、Googlebot/Bingbot には
+// * グループの disallow が一切適用されていなかった（GSC「クロール済み-インデックス未登録」に
+// /api/og 等のアセットURLが数千件積まれた原因）。検索botは * グループに任せ、個別グループは
+// 「全面ブロックしたいbot」か「全面許可が意図のbot（広告・SNSカード）」のみに限定すること。
+// - /_next/ の一括 disallow は Googlebot のレンダリング資源(JS/CSS = /_next/static)まで塞ぎ
+//   レンダリング評価を壊すため、重複画像URLを生む /_next/image のみに絞る。
+// - noindex にしたいページ(/mypage /login 等)は meta タグに一本化（disallow すると
+//   クローラーが noindex を読めず「ブロック済みだがインデックス登録」になるため）。
+const CRAWL_DISALLOW = [
+  "/api/",
+  "/_next/image",
+  "/shops/*/dashboard",
+  "/spots/compare",
+  "/*/opengraph-image",
+];
+
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
         userAgent: "*",
         allow: "/",
-        // /mypage /login /spots/submit /favorites は noindex メタに一本化したため disallow しない（disallow するとクローラーが noindex を読めず「ブロック済みだがインデックス登録」になるため）。
-        disallow: [
-          "/api/",
-          "/_next/",
-          "/shops/*/dashboard",
-          "/spots/compare",
-          "/*/opengraph-image",
-        ],
+        disallow: CRAWL_DISALLOW,
       },
-      { userAgent: "Googlebot", allow: "/" },
+      // 広告クローラー: AdsBot-Google は仕様上 * グループを無視するため明示的に全面許可。
+      // Mediapartners-Google(AdSense) も広告配信判定のため全面許可を維持する。
       { userAgent: "Mediapartners-Google", allow: "/" },
       { userAgent: "AdsBot-Google", allow: "/" },
-      { userAgent: "Bingbot", allow: "/" },
-      { userAgent: "Yandex", allow: "/" },
-      { userAgent: "Baiduspider", allow: "/" },
-      { userAgent: "Applebot", allow: "/" },
-      { userAgent: "DuckDuckBot", allow: "/" },
-      // 「学習はNo・検索/引用はYes」: 検索インデックス・リアルタイム引用のbotは許可し、被引用→送客を狙う。
-      { userAgent: "OAI-SearchBot", allow: "/" },
-      { userAgent: "ChatGPT-User", allow: "/" },
-      { userAgent: "PerplexityBot", allow: "/" },
+      // SNSカード: Twitterbot は robots.txt を尊重するため、OGP画像(/api/og,
+      // /*/opengraph-image)を取得できるよう全面許可（* に落とすとXカードの画像が壊れる）。
+      { userAgent: "Twitterbot", allow: "/" },
+      // 「学習はNo・検索/引用はYes」: OAI-SearchBot / ChatGPT-User / PerplexityBot は
+      // * グループ（allow: / + アセット除外）で十分なため個別グループは持たない。
       // 純粋な学習用クローラーは引き続き拒否。
       { userAgent: "GPTBot", disallow: "/" },
       { userAgent: "Google-Extended", disallow: "/" },

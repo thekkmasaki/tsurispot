@@ -72,6 +72,19 @@ function isRscRequest(req: NextRequest): boolean {
 }
 
 export function middleware(req: NextRequest) {
+  // ホスト正規化: www は apex へ 301。
+  // www.tsurispot.com は DNS/Cloudflare 経由で同一オリジンに到達し全ページを 200 で
+  // ミラー配信していた（canonical で救済されるが、GSC「代替ページ（適切な canonical タグあり）」
+  // に積まれ続け、クロールとリンク評価も分散する）。ここで恒久的に apex へ集約する。
+  const host = req.headers.get("host") || "";
+  if (host === "www.tsurispot.com" || host.startsWith("www.tsurispot.com:")) {
+    const url = req.nextUrl.clone();
+    url.protocol = "https:";
+    url.host = "tsurispot.com";
+    url.port = "";
+    return NextResponse.redirect(url, 301);
+  }
+
   const ua = req.headers.get("user-agent") || "";
   if (ua && BLOCKED_UA_PATTERNS.some((p) => p.test(ua))) {
     return new NextResponse("Forbidden", { status: 403 });

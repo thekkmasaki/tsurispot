@@ -24,7 +24,10 @@ import { toListSpot } from "@/lib/data/list-spot";
 import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { fishSpecies } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
-import { getHighValuePrefMonthFishCombos } from "@/lib/data";
+import {
+  getHighValuePrefMonthFishCombos,
+  getEligiblePrefMonthFishCombos,
+} from "@/lib/data";
 import {
   MONTHS,
   getMonthBySlug,
@@ -69,37 +72,19 @@ const CATEGORY_LABELS: Record<string, string> = {
 
 /**
  * 有効な都道府県×月×魚種の組み合わせを事前計算
- * generateStaticParams と月ナビゲーターの両方で使用
+ * generateMetadata の 301 判定と月ナビゲーターの両方で使用。
+ * かつてはここに独自の出現数カウント実装があり、sitemap 側
+ * （getEligiblePrefMonthFishCombos = ユニークスポット数）とドリフトして
+ * 「sitemap 掲載なのに 301」を生んでいたため、共有ヘルパからの導出に一本化した。
  */
 function buildValidCombos(): Map<string, Set<string>> {
   // key: `${prefSlug}/${fishSlug}`, value: Set<monthSlug>
   const map = new Map<string, Set<string>>();
-
-  for (const pref of prefectures) {
-    const prefSpots = fishingSpots.filter(
-      (s) => s.region.prefecture === pref.name
-    );
-
-    for (const month of MONTHS) {
-      const fishMap = new Map<string, number>();
-      for (const spot of prefSpots) {
-        for (const cf of spot.catchableFish) {
-          if (isMonthInRange(month.num, cf.monthStart, cf.monthEnd)) {
-            fishMap.set(cf.fish.slug, (fishMap.get(cf.fish.slug) || 0) + 1);
-          }
-        }
-      }
-
-      for (const [fSlug, count] of fishMap) {
-        if (count >= MIN_SPOTS) {
-          const key = `${pref.slug}/${fSlug}`;
-          if (!map.has(key)) map.set(key, new Set());
-          map.get(key)!.add(month.slug);
-        }
-      }
-    }
+  for (const c of getEligiblePrefMonthFishCombos(MIN_SPOTS)) {
+    const key = `${c.prefSlug}/${c.fishSlug}`;
+    if (!map.has(key)) map.set(key, new Set());
+    map.get(key)!.add(c.monthSlug);
   }
-
   return map;
 }
 
