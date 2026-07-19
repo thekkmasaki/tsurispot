@@ -505,7 +505,7 @@ export const freshwaterFish: FishSpecies[] = [
     scientificName: "Cyprinus carpio",
     slug: "koi",
     description:
-      "日本全国の河川・湖沼に生息する大型淡水魚。パンや練りエサで狙え、メーター級の大物も。ヨーロピアンスタイルのカープフィッシングも人気上昇中。",
+      "コイ釣りの盛期は春の4〜6月と秋の9〜10月。パンや練りエサで手軽に狙え、メーター級の大物も。日本全国の河川・湖沼に生息する大型淡水魚で、ヨーロピアンスタイルのカープフィッシングも人気上昇中。",
     category: "freshwater",
     family: "コイ科",
     difficulty: "beginner",
