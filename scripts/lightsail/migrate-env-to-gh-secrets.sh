@@ -40,12 +40,23 @@ ENV_JSON=$(aws apprunner describe-service --service-arn "$SVC_ARN" \
 
 set_count=0
 skip_count=0
+fail_count=0
 for k in "${KEYS[@]}"; do
   # jq -e: キーが無ければ非ゼロ終了 → スキップ（値は表示しない）
   if val=$(jq -e -r --arg k "$k" '.[$k] // empty' <<<"$ENV_JSON") && [ -n "$val" ]; then
-    printf '%s' "$val" | gh secret set "$k" --repo "$REPO" --body - >/dev/null
-    echo "  set  $k"
-    set_count=$((set_count + 1))
+    # --body は付けないこと。gh secret set は「--body 未指定なら標準入力から読む」仕様で、
+    # `--body -` と書くと値そのものがハイフン1文字になりパイプが無視される。
+    # 2026-07-15 にこれで13個のシークレットが "-" で上書きされ、microCMS記事192件が
+    # /blog・トップ・sitemap から5日間消え、Cloudflare purge と週次Push配信も停止した。
+    # 1個の失敗で set -e により中断すると「半分だけ書き換わった」状態になる。
+    # 2026-07-15 は実際に15個目で中断し、13個だけが壊れた値のまま残った。
+    if printf '%s' "$val" | gh secret set "$k" --repo "$REPO" >/dev/null; then
+      echo "  set  $k"
+      set_count=$((set_count + 1))
+    else
+      echo "  FAIL $k (登録失敗)"
+      fail_count=$((fail_count + 1))
+    fi
   else
     echo "  skip $k (App Runner に未設定)"
     skip_count=$((skip_count + 1))
@@ -54,7 +65,10 @@ for k in "${KEYS[@]}"; do
 done
 
 echo ""
-echo "完了: ${set_count} 個を GitHub Secrets に登録、${skip_count} 個スキップ。"
+echo "完了: ${set_count} 個を登録、${skip_count} 個スキップ、${fail_count} 個失敗。"
+if [ "$fail_count" -gt 0 ]; then
+  echo "::warning:: 失敗した Secret があります。中途半端な状態のまま放置しないこと。"
+fi
 echo ""
 echo "★ 別途、手動で登録が必要な Secret（このスクリプトの対象外）:"
 echo "   - RUNTIME_AWS_ACCESS_KEY_ID     : Lightsail 用 IAM ユーザーのアクセスキー ID"
