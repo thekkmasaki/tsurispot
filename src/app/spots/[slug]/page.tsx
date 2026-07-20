@@ -35,6 +35,7 @@ import { trimDescription, buildSpotTitle } from "@/lib/utils/seo";
 import { buildSpotMetaDescription } from "@/lib/seo/meta-description";
 import { isLowQualitySpot, isSitemapEligible } from "@/lib/seo-quality";
 import { fishingSpots, getSpotBySlug, getNearbySpots, getSpotsByPrefecture, getSpotsByFish, getSpotsByMethod, getSpotsBySpotType, getSpotsByDifficulty, type NearbySpot } from "@/lib/data/spots";
+import { TrackedSpotLink } from "@/components/spots/tracked-spot-link";
 import { RelatedSpotsByFish } from "@/components/spots/related-spots-by-fish";
 import { RelatedSpotsByMethod } from "@/components/spots/related-spots-by-method";
 import { RelatedSpotsGeneric } from "@/components/spots/related-spots-generic";
@@ -1571,16 +1572,20 @@ export default async function SpotDetailPage({ params }: PageProps) {
             {spot.name}周辺の釣りスポット
           </h3>
           <div className="flex gap-3 overflow-x-auto pb-2">
-            {nearbySpots.map((nearSpot) => {
+            {nearbySpots.map((nearSpot, nearIndex) => {
               const nearSpotTypeLabel = SPOT_TYPE_LABELS[nearSpot.spotType];
               const nearSpotFishStr = nearSpot.fishNames.slice(0, 2).join("・");
               const nearSpotRichLabel = nearSpotFishStr
                 ? `${nearSpot.name}（${nearSpot.prefecture}の${nearSpotFishStr}釣り場）`
                 : `${nearSpot.name}（${nearSpot.prefecture}の${nearSpotTypeLabel}）`;
               return (
-              <Link prefetch={false}
+              <TrackedSpotLink
                 key={nearSpot.id}
                 href={`/spots/${nearSpot.slug}`}
+                contentType="nearby_spot"
+                itemId={nearSpot.slug}
+                linkPlacement="spot_detail_nearby"
+                position={nearIndex}
                 className="shrink-0"
                 title={nearSpotRichLabel}
                 aria-label={nearSpotRichLabel}
@@ -1604,7 +1609,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                     </p>
                   )}
                 </div>
-              </Link>
+              </TrackedSpotLink>
               );
             })}
           </div>
@@ -1641,11 +1646,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <div className="mb-6">
               <h3 className="mb-3 text-sm font-bold">{spot.region.prefecture}の他の釣りスポット</h3>
               <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-                {samePrefSpots.map((ps) => {
+                {samePrefSpots.map((ps, psIndex) => {
                   const psFishStr = ps.fishNames.join("・");
                   const psTypeLabel = SPOT_TYPE_LABELS[ps.spotType] || "";
                   return (
-                  <Link prefetch={false} key={ps.id} href={`/spots/${ps.slug}`} title={psFishStr ? `${ps.name}（${psFishStr}が釣れる${psTypeLabel}）` : `${ps.name}（${spot.region.prefecture}の${psTypeLabel}）`}>
+                  <TrackedSpotLink key={ps.id} href={`/spots/${ps.slug}`} contentType="same_pref_spot" itemId={ps.slug} linkPlacement="spot_detail_same_pref" position={psIndex} title={psFishStr ? `${ps.name}（${psFishStr}が釣れる${psTypeLabel}）` : `${ps.name}（${spot.region.prefecture}の${psTypeLabel}）`}>
                     <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
                       <CardContent className="p-3">
                         <h4 className="text-sm font-semibold group-hover:text-primary truncate">{ps.name}</h4>
@@ -1657,15 +1662,21 @@ export default async function SpotDetailPage({ params }: PageProps) {
                         </div>
                       </CardContent>
                     </Card>
-                  </Link>
+                  </TrackedSpotLink>
                   );
                 })}
               </div>
               {pref && (
                 <div className="mt-2 text-right">
-                  <Link prefetch={false} href={`/prefecture/${pref.slug}`} className="text-sm text-primary hover:underline">
+                  <TrackedSpotLink
+                    href={`/prefecture/${pref.slug}`}
+                    contentType="pref_all"
+                    itemId={pref.slug}
+                    linkPlacement="spot_detail_pref_all"
+                    className="text-sm text-primary hover:underline"
+                  >
                     {spot.region.prefecture}の釣りスポットをすべて見る →
-                  </Link>
+                  </TrackedSpotLink>
                 </div>
               )}
             </div>
