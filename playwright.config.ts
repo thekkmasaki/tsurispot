@@ -9,7 +9,8 @@ export default defineConfig({
   reporter: 'html',
   timeout: 30000,
   use: {
-    baseURL: 'http://localhost:3000',
+    // ポート3000が別アプリに占有されることがあるため、E2E_BASE_URL で上書き可能にしている
+    baseURL: process.env.E2E_BASE_URL ?? 'http://localhost:3000',
     trace: 'on-first-retry',
     ...(process.env.ZAP_PROXY ? { proxy: { server: 'http://localhost:8080' } } : {}),
   },
