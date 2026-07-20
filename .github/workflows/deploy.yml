@@ -79,6 +79,35 @@ jobs:
             nextjs-build-${{ hashFiles('package-lock.json') }}-
             nextjs-build-
 
+      # ビルド前に microCMS への疎通を確認する。
+      # src/lib/microcms.ts の fetch は失敗時に空配列を返すフェイルソフト設計で、
+      # microCMS 障害でデプロイを止めないための意図的な作り。だが 2026-07-15 の
+      # Secrets 一括投入で MICROCMS_* が壊れた際、この catch が認証情報の破損まで
+      # 黙って握りつぶし「記事0件のサイト」を5日間ビルド・配信し続けた
+      # （/blog・トップ・sitemap から microCMS 記事192件が消失）。
+      # ランタイム側は無事だったため個別記事は表示でき、症状が出にくかった。
+      # ここで先に落として「気づけない劣化」を「即座に分かる失敗」に変える。
+      - name: microCMS 疎通確認（ビルド前ガード）
+        if: github.ref == 'refs/heads/master'
+        env:
+          MICROCMS_SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_DOMAIN }}
+          MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
+        run: |
+          if [ -z "$MICROCMS_SERVICE_DOMAIN" ] || [ -z "$MICROCMS_API_KEY" ]; then
+            echo "::error::MICROCMS_SERVICE_DOMAIN / MICROCMS_API_KEY が未設定です。"
+            exit 1
+          fi
+          # limit=0 で件数のみ取得（本文は取らないので転送量ほぼゼロ）
+          BODY=$(curl -sS --max-time 20 \
+            -H "X-MICROCMS-API-KEY: ${MICROCMS_API_KEY}" \
+            "https://${MICROCMS_SERVICE_DOMAIN}.microcms.io/api/v1/blogs?limit=0" || true)
+          CNT=$(printf '%s' "$BODY" | grep -oE '"totalCount":[0-9]+' | head -1 | cut -d: -f2)
+          if [ -z "$CNT" ] || [ "$CNT" -lt 1 ]; then
+            echo "::error::microCMS に到達できません（記事0件のサイトをビルドしてしまうため中止）。Secrets の MICROCMS_SERVICE_DOMAIN / MICROCMS_API_KEY を確認してください。末尾の改行混入に注意（gh secret set には printf '%s' を使う）。"
+            exit 1
+          fi
+          echo "microCMS OK: ${CNT}件"
+
       # Next.jsビルドをDocker外で実行（キャッシュ活用で高速化）
       - name: Build Next.js
         if: github.ref == 'refs/heads/master'
