@@ -41,6 +41,35 @@ export function trackFavorite(params: { action: "add" | "remove"; slug: string }
   );
 }
 
+/** 回遊リンクの種別（GA4 の content_type に入る） */
+export type InternalLinkContentType =
+  | "nearby_spot"
+  | "same_pref_spot"
+  | "pref_all"
+  | "related_post";
+
+/**
+ * サイト内の回遊リンクのクリックを GA4 標準イベント `select_content` として送信
+ *
+ * PV/セッション改善施策の効果測定用。どの導線が実際に次のページへ繋がったかを
+ * link_placement（設置箇所）と link_position（同一モジュール内の並び順）で切り分ける。
+ * 次元名の link_placement は ads-tracking.ts の ad_placement と衝突させないために分けている。
+ */
+export function trackInternalLink(params: {
+  contentType: InternalLinkContentType;
+  itemId: string;
+  linkPlacement: string;
+  position?: number;
+}) {
+  if (typeof window === "undefined" || typeof window.gtag !== "function") return;
+  window.gtag("event", "select_content", {
+    content_type: params.contentType,
+    item_id: params.itemId,
+    link_placement: params.linkPlacement,
+    ...(params.position !== undefined ? { link_position: params.position } : {}),
+  });
+}
+
 export type PushSubscriptionAction = "subscribe" | "unsubscribe" | "permission_denied";
 
 /** Web Push 購読状態の変化をカスタムイベント `push_subscription` として送信 */
