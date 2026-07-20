@@ -1,7 +1,7 @@
 "use client";
 
-import { type ReactNode, useEffect, useState } from "react";
-import { useSearchParams, useRouter, usePathname } from "next/navigation";
+import { type ReactNode, useEffect, useRef, useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import { Fish, Wrench, Car, Info } from "lucide-react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
@@ -28,20 +28,31 @@ export function SpotDetailTabs({
   accessTab,
 }: SpotDetailTabsProps) {
   // UX-5: tab state を URL に同期 (share/back/reload で復元)
-  const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
-  const urlTab = searchParams.get("tab") ?? "";
-  const initialTab = VALID_TAB_VALUES.has(urlTab as typeof TAB_ITEMS[number]["value"])
-    ? urlTab
-    : "overview";
+  // useSearchParams() は使わない: Suspense 境界なしで呼ぶとページ全体が CSR へ
+  // バックアウトし、スポット詳細の SSR HTML から本文・広告が丸ごと消える
+  // （2026-07 判明: h1 なし・広告 ins が pre_footer のみの本番 HTML の原因）。
+  // SSR は overview 固定で描画し、マウント後に window.location.search から復元する。
+  const [activeTab, setActiveTab] = useState<string>("overview");
+  const didMount = useRef(false);
 
-  const [activeTab, setActiveTab] = useState(initialTab);
-
-  // tab 変更 → URL 更新
+  // マウント後: URL の tab パラメータを復元 (share/back/reload で復元)
   useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
+    const urlTab = new URLSearchParams(window.location.search).get("tab") ?? "";
+    if (VALID_TAB_VALUES.has(urlTab as typeof TAB_ITEMS[number]["value"])) {
+      setActiveTab(urlTab);
+    }
+  }, []);
+
+  // tab 変更 → URL 更新（初回実行はスキップ: 復元前に ?tab= を消さないため）
+  useEffect(() => {
+    if (!didMount.current) {
+      didMount.current = true;
+      return;
+    }
+    const params = new URLSearchParams(window.location.search);
     if (activeTab === "overview") {
       params.delete("tab");
     } else {
