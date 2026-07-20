@@ -18,6 +18,9 @@ interface IndexItem {
   slug: string;
   sub: string;
   searchText: string;
+  /** 都道府県名（spotのみ）。前方一致専用 — searchText に混ぜて部分一致させると
+      「京都」が「東京都」に一致し、京都府の検索が東京都のスポットで埋まる(2026-07-20実バグ) */
+  pref?: string;
 }
 
 // --- 静的ガイドページ ---
@@ -96,12 +99,16 @@ function getSearchIndex(): IndexItem[] {
       name: s.name,
       slug: `/spots/${s.slug}`,
       sub: `${s.region.prefecture} ${s.region.areaName}`,
+      // 県名は searchText に入れない（部分一致で「京都」→「東京都」誤ヒットの原因）。
+      // 県名検索は pref の前方一致で拾う（「京都」→京都府のみ、「東京」→東京都のみ）。
+      // 住所は県名部分を除いて含める（「江東区」等の市区町村で引けるようにしつつ県名誤ヒットを防ぐ）。
       searchText: [
         s.name,
-        s.region.prefecture,
         s.region.areaName,
         katakanaToHiragana(s.name),
+        (s.address || "").replace(s.region.prefecture, ""),
       ].join(" ").toLowerCase(),
+      pref: s.region.prefecture,
     })),
     ...guidePages.map((g) => ({ ...g, searchText: g.searchText.toLowerCase() })),
     ...blogPosts.map((post) => ({
@@ -138,10 +145,12 @@ export async function GET(request: NextRequest) {
   const qLower = q.toLowerCase();
   const qHiragana = katakanaToHiragana(qLower);
 
-  // 検索実行（search-index.tsと同じロジック）
+  // 検索実行
   const matched = index.filter((item) => {
     if (item.searchText.includes(qLower) || item.searchText.includes(qHiragana)) return true;
     if (qLower.includes(item.name.toLowerCase()) || qHiragana.includes(katakanaToHiragana(item.name).toLowerCase())) return true;
+    // 県名は前方一致のみ（「京都」→京都府○・東京都×、「京都府」「東京」も正しく拾える）
+    if (item.pref && item.pref.startsWith(q)) return true;
     return false;
   });
 

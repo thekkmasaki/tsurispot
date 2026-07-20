@@ -54,6 +54,31 @@ function fuzzyMatch(query: string, ...targets: string[]): boolean {
   return false;
 }
 
+// スポットのテキスト検索一致。
+// 名前・エリア名は曖昧一致のままだが、県名は「前方一致」、住所は「県名部分を除いた上で部分一致」。
+// 県名・住所を素の部分一致にすると「京都」が「東京都」とその住所に一致し、
+// 京都府の検索結果が東京都のスポットで埋まる(2026-07-20実バグ)。
+// 前方一致なら「京都」→京都府のみ、「東京」→東京都のみ、「京都府」もそのまま拾える。
+// 住所は県名を除去することで「江東区」等の市区町村検索を維持しつつ県名誤ヒットを防ぐ。
+function spotSearchMatch(query: string, spot: ListSpot): boolean {
+  if (fuzzyMatch(query, spot.name, spot.region.areaName)) return true;
+  const nq = normalizeForSearch(query);
+  if (normalizeForSearch(spot.region.prefecture).startsWith(nq)) return true;
+  if (spot.address) {
+    const addrWithoutPref = normalizeForSearch(spot.address.replace(spot.region.prefecture, ""));
+    if (addrWithoutPref.includes(nq)) return true;
+  }
+  // 複数語クエリ（「千葉 サビキ」等）は従来どおり全フィールド結合で全語一致を判定
+  const words = nq.split(/\s+/).filter(Boolean);
+  if (words.length > 1) {
+    const combined = [spot.name, spot.region.areaName, spot.region.prefecture, spot.address || ""]
+      .map(normalizeForSearch)
+      .join(" ");
+    return words.every((w) => combined.includes(w));
+  }
+  return false;
+}
+
 function haversineDistance(
   lat1: number,
   lon1: number,
@@ -222,13 +247,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: ListSpot[]
   const filteredSpots = useMemo(() => {
     const filtered = spots.filter((spot) => {
       if (deferredSearchText) {
-        if (!fuzzyMatch(
-          deferredSearchText,
-          spot.name,
-          spot.region.prefecture,
-          spot.region.areaName,
-          spot.address,
-        )) return false;
+        if (!spotSearchMatch(deferredSearchText, spot)) return false;
       }
       if (selectedRegion && !REGION_CONFIG[selectedRegion].prefectures.includes(spot.region.prefecture)) return false;
       if (selectedPrefecture && spot.region.prefecture !== selectedPrefecture) return false;
