@@ -60,7 +60,8 @@ import { isDisplayableSpotImage } from "@/lib/data/spot-image-resolver";
 import { SpotBouzuCard } from "@/components/spots/spot-bouzu-card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
-import { InArticleAd, DisplayAd, LazyAd, StickySidebarAd, NativeAdBreak, HeaderBannerAd } from "@/components/ads/ad-unit";
+import { InArticleAd, DisplayAd, LazyAd, StickySidebarAd, NativeAdBreak, HeaderBannerAd, MobileHeaderBannerAd } from "@/components/ads/ad-unit";
+import { AdExperimentGate } from "@/components/ads/ad-experiment-gate";
 import { SpotAccommodations } from "@/components/spots/spot-accommodations";
 import { FishLikeButton } from "@/components/spots/fish-like-button";
 import { FishingReportSummary } from "@/components/spots/fishing-report-summary";
@@ -603,6 +604,13 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
       {/* PC ヘッダー下リーダーボード広告 (above-fold, lg:1024px+ のみ表示。 mobile は MobileStickyAd で対応するためスキップ) */}
       <HeaderBannerAd />
+
+      {/* P4保険(実験 spot_mobile_header, 現在 disabled=全ユーザー非表示):
+          モバイルATFバナーの再導入A/B。有効化は docs/VIGNETTE-STEP0.md の方針改訂PR先行が条件。
+          判定21日: CLS p75 +0.02未満 / LCP p75 +200ms以内 / GSC順位監視（ab-test.ts参照） */}
+      <AdExperimentGate experiment="spot_mobile_header" variant="treatment">
+        <MobileHeaderBannerAd />
+      </AdExperimentGate>
 
       {/* PR-INV-1: 投稿動線強化 - 上部に釣果投稿 CTA */}
       <a
@@ -1612,9 +1620,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
         </section>
       )}
 
-      {/* モバイル広告: 近くのスポット後 */}
+      {/* モバイル広告: 近くのスポット後（spots_deep_lazy A/B対象・深部枠。実験disabled中は即push） */}
       <div className="lg:hidden my-4">
-        <LazyAd><InArticleAd /></LazyAd>
+        <LazyAd><InArticleAd lazyExperiment="spots_deep_lazy" lazyRootMargin={1000} /></LazyAd>
       </div>
 
       {/* 関連スポット・ガイド（折りたたみ） */}
@@ -1844,9 +1852,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
       {/* 都道府県ガイド・地域ガイドは上の折りたたみセクションに統合済み */}
 
-      {/* 広告（FAQ後） */}
+      {/* 広告（FAQ後）（spots_deep_lazy A/B対象・深部枠。実験disabled中は即push） */}
       <ContentDivider variant="dots" />
-      <LazyAd className="my-6"><InArticleAd /></LazyAd>
+      <LazyAd className="my-6"><InArticleAd lazyExperiment="spots_deep_lazy" lazyRootMargin={1000} /></LazyAd>
 
       {/* 関連コラム（ブログ記事への内部リンク — AdSense対策） */}
       {(() => {
@@ -1902,9 +1910,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
         );
       })()}
 
-      {/* モバイル広告C: 関連コラム後 */}
+      {/* モバイル広告C: 関連コラム後（spots_deep_lazy A/B対象・最深部枠。実験disabled中は即push） */}
       <ContentDivider variant="dots" className="lg:hidden" />
-      <div className="lg:hidden my-6"><NativeAdBreak /></div>
+      <div className="lg:hidden my-6"><NativeAdBreak lazyExperiment="spots_deep_lazy" lazyRootMargin={1000} /></div>
 
       {/* 近くの釣り宿 (Phase 2: 旅行 affiliate 取り込み。 affiliate link 未設定なら自動 skip) */}
       <SpotAccommodations
@@ -2014,8 +2022,13 @@ export default async function SpotDetailPage({ params }: PageProps) {
       </div>{/* メインコンテンツ閉じ */}
 
       {/* デスクトップ右サイドバー */}
+      {/* sticky はカード群ではなく広告のみに効かせる: 旧実装はサイドバー全体(約850px)が
+          sticky でカード群が常に画面を占有し、最下部の StickySidebarAd は視認高さ900px未満の
+          環境で恒久的に画面外だった。カード群を通常フローに戻し(上部で一度視認される)、
+          広告は aside 直下に置いて grid stretch による全行高の中で本文スクロール中ずっと
+          top-20 に追従させる（視認可能時間の最大化）。 */}
       <aside className="hidden lg:block">
-        <div className="sticky top-20 space-y-4">
+        <div className="space-y-4">
           {/* 評価・所在地 */}
           <Card className="gap-0 py-0">
             <CardContent className="p-4 space-y-3">
@@ -2066,9 +2079,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
             </Card>
           )}
 
-          {/* サイドバー広告（デスクトップのみ） */}
-          <StickySidebarAd />
         </div>
+
+        {/* サイドバー広告（デスクトップのみ）: aside 直下で sticky top-20 追従 */}
+        <StickySidebarAd className="mt-4" />
       </aside>
       </div>{/* 2カラムグリッド閉じ */}
     </div>

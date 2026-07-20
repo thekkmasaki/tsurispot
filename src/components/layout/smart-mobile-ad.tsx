@@ -1,41 +1,19 @@
 "use client";
-import { useState, useEffect } from "react";
 import dynamic from "next/dynamic";
 import { useBottomAdSuspended } from "@/components/layout/bottom-layer";
 const MobileStickyAd = dynamic(() => import("@/components/ads/ad-unit").then(m => ({ default: m.MobileStickyAd })));
 
-const STORAGE_KEY = "tsurispot-mobile-ad-dismissed";
-
 export function SmartMobileStickyAd() {
-  const [dismissed, setDismissed] = useState(false);
-  const [mounted, setMounted] = useState(false);
   // 一時UI（Cookie/比較/位置情報/PWA）表示中は広告をサスペンド。
-  // dismissedとは別の一時非表示で、広告の上にコンテンツが被さる状態（AdSenseポリシー違反リスク）を根絶する
+  // 広告の上にコンテンツが被さる状態（AdSenseポリシー違反リスク）を根絶する。
+  //
+  // 旧実装の「未充足広告の自動折り畳み検知」(document全域の MutationObserver +
+  // sessionStorage 恒久 dismiss)は撤去した:
+  // - セレクタ [data-ad-slot="mobile-sticky"] がリテラル文字列で実際の数値スロットIDと
+  //   一致せず一度も発火しない dead code だった
+  // - 未フィル折り畳みは MobileStickyAd 自身が containerRef 配下の <ins> の
+  //   data-ad-status を監視して一時的に隠す方式に置換（恒久 dismiss は後続PVの
+  //   imp 機会を失うため廃止）
   const suspended = useBottomAdSuspended();
-
-  useEffect(() => {
-    setMounted(true);
-    if (typeof sessionStorage !== "undefined") {
-      setDismissed(sessionStorage.getItem(STORAGE_KEY) === "1");
-    }
-  }, []);
-
-  useEffect(() => {
-    if (!mounted || dismissed) return;
-    const observer = new MutationObserver(() => {
-      const adEl = document.querySelector('[data-ad-slot="mobile-sticky"]');
-      if (adEl) {
-        const parent = adEl.closest('[style*="display: none"]');
-        if (parent) {
-          sessionStorage.setItem(STORAGE_KEY, "1");
-          setDismissed(true);
-        }
-      }
-    });
-    observer.observe(document.body, { attributes: true, subtree: true, attributeFilter: ["style"] });
-    return () => observer.disconnect();
-  }, [mounted, dismissed]);
-
-  if (dismissed) return null;
   return <MobileStickyAd suspended={suspended} />;
 }

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { Waves } from "lucide-react";
 import { trackAdEvent } from "@/lib/ads-tracking";
 import { AD_SLOTS } from "@/lib/ads-config";
+import { getBucket, type ExperimentKey } from "@/lib/ab-test";
 
 declare global {
   interface Window {
@@ -60,12 +61,23 @@ interface AdUnitProps {
   slot?: string;
   /** 広告枠の論理名。指定すると GA4 へ impression/viewability を送信する（計測対象になる） */
   placement?: string;
-  format?: "auto" | "horizontal" | "vertical" | "rectangle" | "fluid" | "autorelaxed";
+  /** "none" は data-ad-format 属性自体を描画しない = style の width/height による完全固定サイズユニット。
+      AdSense 公式の固定サイズ化手順(format属性の削除)に対応する（レスポンシブ判定を確実に無効化）。 */
+  format?: "auto" | "horizontal" | "vertical" | "rectangle" | "fluid" | "autorelaxed" | "none";
   layout?: string;
   layoutKey?: string;
   className?: string;
   style?: React.CSSProperties;
   responsive?: boolean;
+  /**
+   * 選択的lazy化のA/B実験キー。指定すると treatment バケットのみ push を
+   * IntersectionObserver（lazyRootMargin 手前）まで遅延する。<ins> と min-height 予約は
+   * 両バケットとも即描画（CLS不変・SSR HTML不変）で、push のタイミングだけが変わる。
+   * control / 実験disabled / 未指定は従来どおりマウント時に即 push。
+   */
+  lazyExperiment?: ExperimentKey;
+  /** lazy時の先読みマージン(px)。スクロール速度に対して fill 時間を確保する。 */
+  lazyRootMargin?: number;
 }
 
 export function AdUnit({
@@ -77,6 +89,8 @@ export function AdUnit({
   className = "",
   style,
   responsive = true,
+  lazyExperiment,
+  lazyRootMargin = 800,
 }: AdUnitProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const pushed = useRef(false);
@@ -95,6 +109,7 @@ export function AdUnit({
     // PSI(速度)より収益を優先し、マウント時に即 push する旧来挙動へ戻す。
     // 幅ガード(狭幅での "No slot size" 回避)と display:none 枠の非 push は維持する。
     let roRef: ResizeObserver | null = null;
+    let ioRef: IntersectionObserver | null = null;
 
     const tryPush = () => {
       if (pushed.current) return true;
@@ -128,13 +143,35 @@ export function AdUnit({
       roRef.observe(el);
     };
 
-    // マウント時に即 push（ビューポート遅延を撤廃）。display:none の広告
-    // （例: MobileHeaderBannerAd が PC で hidden）は offsetWidth=0 のため push されず、
-    // レスポンシブで表示に切り替わった時点で ResizeObserver 経由で push される（従来互換）。
-    startPush();
+    // 選択的lazy（枠単位A/B）: treatment のみ push を IntersectionObserver でビューポート
+    // lazyRootMargin 手前まで遅延する。#216 の全枠一括lazyと違い対象枠を限定し、<ins> と
+    // min-height は即描画のまま（CLS不変）。
+    // 注意: 幅ガード(tryPush)が防げるのは「自枠の push」だけ。未処理の幅0 <ins> が DOM に
+    // あると他ユニットの push が DOM 順でそれを掴んで例外→キュー停止する(#260)ため、
+    // 非表示ブレークポイントの枠は matchMedia で DOM ごとゲートすることが再発防止の条件。
+    const lazyBucket = lazyExperiment ? getBucket(lazyExperiment) : null;
+    if (lazyBucket === "treatment") {
+      ioRef = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            ioRef?.disconnect();
+            ioRef = null;
+            startPush();
+          }
+        },
+        { rootMargin: `${lazyRootMargin}px 0px` }
+      );
+      ioRef.observe(el);
+    } else {
+      // マウント時に即 push（ビューポート遅延を撤廃）。display:none の広告
+      // （例: MobileHeaderBannerAd が PC で hidden）は offsetWidth=0 のため push されず、
+      // レスポンシブで表示に切り替わった時点で ResizeObserver 経由で push される（従来互換）。
+      startPush();
+    }
 
     return () => {
       roRef?.disconnect();
+      ioRef?.disconnect();
     };
     // 広告は初回マウント時に1回だけ push する設計のため依存配列は空に固定する
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -174,6 +211,33 @@ export function AdUnit({
     };
   }, [placement, slot, suppressed]);
 
+  // フィル状態計測: AdSense は配信結果を <ins> の data-ad-status="filled|unfilled" に設定する。
+  // filled 確定時に ad_filled を1回送信する。ad_impression は「push成功=リクエスト」であり
+  // 未フィルも数えるため、AdSense Active View（フィル済みimp分母）と定義を揃えた自前視認率
+  // (ad_viewable ÷ ad_filled) を GA4 で計算できるようにする。
+  useEffect(() => {
+    if (!ADSENSE_ID || suppressed || !placement) return;
+    const el = containerRef.current;
+    if (!el) return;
+    const ins = el.querySelector("ins.adsbygoogle");
+    if (!ins) return;
+
+    let sent = false;
+    let mo: MutationObserver | null = null;
+    const check = () => {
+      if (sent) return;
+      if (ins.getAttribute("data-ad-status") === "filled") {
+        sent = true;
+        trackAdEvent({ placement, slot, event: "ad_filled" });
+        mo?.disconnect();
+      }
+    };
+    mo = new MutationObserver(check);
+    mo.observe(ins, { attributes: true, attributeFilter: ["data-ad-status"] });
+    check();
+    return () => mo?.disconnect();
+  }, [placement, slot, suppressed]);
+
   if (!ADSENSE_ID || suppressed) return null;
 
   return (
@@ -183,7 +247,7 @@ export function AdUnit({
         style={style || { display: "block", width: "100%" }}
         data-ad-client={ADSENSE_ID}
         data-ad-slot={slot}
-        data-ad-format={format}
+        {...(format !== "none" && { "data-ad-format": format })}
         {...(layout && { "data-ad-layout": layout })}
         {...(layoutKey && { "data-ad-layout-key": layoutKey })}
         {...(responsive && { "data-full-width-responsive": "true" })}
@@ -228,7 +292,15 @@ function AdWrapper({
 }
 
 // ---- 記事内広告（コンテンツのセクション間） ----
-export function InArticleAd({ className = "" }: { className?: string }) {
+export function InArticleAd({
+  className = "",
+  lazyExperiment,
+  lazyRootMargin,
+}: {
+  className?: string;
+  lazyExperiment?: ExperimentKey;
+  lazyRootMargin?: number;
+}) {
   return (
     <AdWrapper className={`my-8 ${className}`}>
       {/* CLS対策: lazyOnloadで遅延挿入される広告が下のコンテンツを押し下げないよう
@@ -240,6 +312,8 @@ export function InArticleAd({ className = "" }: { className?: string }) {
         layout="in-article"
         className="min-h-[250px]"
         style={{ display: "block", textAlign: "center" }}
+        lazyExperiment={lazyExperiment}
+        lazyRootMargin={lazyRootMargin}
       />
     </AdWrapper>
   );
@@ -256,7 +330,15 @@ export function DisplayAd({ className = "" }: { className?: string }) {
 }
 
 // ---- セクション間ネイティブ広告（波デザインでサイトに馴染む） ----
-export function NativeAdBreak({ className = "" }: { className?: string }) {
+export function NativeAdBreak({
+  className = "",
+  lazyExperiment,
+  lazyRootMargin,
+}: {
+  className?: string;
+  lazyExperiment?: ExperimentKey;
+  lazyRootMargin?: number;
+}) {
   if (!ADSENSE_ID) return null;
   // w-full: flex コンテナ直下に置かれると mx-auto の auto マージンが stretch を打ち消し
   // fit-content 幅に収縮して広告が配信されなくなるため明示する
@@ -271,14 +353,24 @@ export function NativeAdBreak({ className = "" }: { className?: string }) {
       </div>
       <div className="rounded-2xl border border-border/50 bg-card/60 p-3 sm:p-5 shadow-sm shadow-ocean-deep/[0.03]">
         {/* CLS対策: fluid広告の後挿入による押し下げを防ぐため最小高さを予約 */}
-        <AdUnit slot={AD_SLOTS.native_break} format="auto" placement="native_break" className="min-h-[250px]" />
+        <AdUnit slot={AD_SLOTS.native_break} format="auto" placement="native_break" className="min-h-[250px]" lazyExperiment={lazyExperiment} lazyRootMargin={lazyRootMargin} />
       </div>
     </div>
   );
 }
 
 // ---- Multiplex広告（関連コンテンツ風グリッド、フッター前に最適） ----
-export function MultiplexAd({ className = "", placement = "multiplex" }: { className?: string; placement?: "multiplex" | "pre_footer" }) {
+export function MultiplexAd({
+  className = "",
+  placement = "multiplex",
+  lazyExperiment,
+  lazyRootMargin,
+}: {
+  className?: string;
+  placement?: "multiplex" | "pre_footer";
+  lazyExperiment?: ExperimentKey;
+  lazyRootMargin?: number;
+}) {
   // CLS対策: autorelaxed広告の後挿入による押し下げを防ぐため最小高さ(min-h-[250px])を予約
   return (
     <AdUnit
@@ -286,6 +378,8 @@ export function MultiplexAd({ className = "", placement = "multiplex" }: { class
       placement={placement}
       format="autorelaxed"
       className={`my-8 min-h-[250px] ${className}`}
+      lazyExperiment={lazyExperiment}
+      lazyRootMargin={lazyRootMargin}
     />
   );
 }
@@ -311,7 +405,10 @@ export function PreFooterAd() {
         <div className="h-px flex-1 bg-gradient-to-l from-transparent via-border to-transparent" />
       </div>
       <div className="rounded-2xl border border-border/50 bg-card/60 p-4 sm:p-6 shadow-sm shadow-ocean-deep/[0.03]" style={{ minWidth: "300px" }}>
-        <MultiplexAd placement="pre_footer" />
+        {/* prefooter_lazy A/B: 全ページ最下部=未視認impの最大容疑枠。treatment のみ push を
+            800px 手前まで遅延し、視認見込みのある到達impだけリクエストする。判定・ガードレールは
+            ab-test.ts と実験台帳を参照（#216 のRPM半減が lazy 単独か #260 バグ交絡かの切り分けも兼ねる） */}
+        <MultiplexAd placement="pre_footer" lazyExperiment="prefooter_lazy" lazyRootMargin={800} />
       </div>
     </div>
   );
@@ -335,11 +432,19 @@ export function SidebarAd({ className = "" }: { className?: string }) {
 }
 
 // ---- スティッキーサイドバー広告（スクロール追従） ----
-export function StickySidebarAd({ className = "" }: { className?: string }) {
-  if (!ADSENSE_ID) return null;
+// label: サイドバー配置では省スペースのため既定で非表示。本文中腹への配置
+// (fish_sidebar_reposition treatment 等)では #220 のラベル統一方針に従い必ず true にする
+// （無ラベルの本文内広告はコンテンツ誤認＝AdSenseポリシーリスク）。
+export function StickySidebarAd({ className = "", label = false }: { className?: string; label?: boolean }) {
+  // lg未満では DOM ごとアンマウント(#260 の正解パターン)。全使用箇所が `hidden lg:block` 等の
+  // PC専用ラッパー内だが、CSS 非表示だとモバイルで幅0の <ins> が DOM に残り、他ユニットの
+  // adsbygoogle.push({}) が DOM 順でそれを掴んで "No slot size for availableWidth=0" 例外
+  // → push キュー停止 → MobileStickyAd 等が埋まらなくなる(#260 の本番障害と同型)。
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  if (!ADSENSE_ID || !isDesktop) return null;
   return (
     <div className={`sticky top-20 ${className}`}>
-      <AdWrapper variant="sidebar" label={false}>
+      <AdWrapper variant="sidebar" label={label}>
         <AdUnit slot={AD_SLOTS.sidebar_sticky} placement="sidebar_sticky" format="auto" className="min-h-[250px]" />
       </AdWrapper>
     </div>
@@ -441,6 +546,7 @@ export function InFeedAd({ className = "" }: { className?: string }) {
 export function MobileStickyAd({ suspended = false }: { suspended?: boolean }) {
   const [visible, setVisible] = useState(false);
   const [dismissed, setDismissed] = useState(false);
+  const [unfilled, setUnfilled] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   // md未満(モバイル)でのみマウント。旧 `md:hidden` の CSS 非表示だと PC でも幅0の <ins> が
   // DOM に残り push キューを止め、PC の本文広告が埋まらなくなる。DOM ごとゲートする。
@@ -453,6 +559,27 @@ export function MobileStickyAd({ suspended = false }: { suspended?: boolean }) {
     return () => clearTimeout(timer);
   }, []);
 
+  // 未フィル時の一時折り畳み: 自分の containerRef 配下の <ins> の data-ad-status のみを監視。
+  // スロットIDや document 全域クエリでの特定は、共有フォールバックID(9949278874)が本文8枠と
+  // 同一のため誤マッチする — 禁止（旧 smart-mobile-ad.tsx の MutationObserver はリテラル
+  // "mobile-sticky" と数値スロットIDが不一致で一度も発火しない dead code だった）。
+  // sessionStorage による恒久 dismiss はしない: 空バーの UX/ポリシーリスクだけを除去し、
+  // 後続 PV の imp 機会（最優良の常時可視枠）を守る。フィルされたら自動復帰する。
+  useEffect(() => {
+    if (!visible || !isMobile) return;
+    const container = containerRef.current;
+    if (!container) return;
+    const ins = container.querySelector("ins.adsbygoogle");
+    if (!ins) return;
+    const apply = () => {
+      setUnfilled(ins.getAttribute("data-ad-status") === "unfilled");
+    };
+    const mo = new MutationObserver(apply);
+    mo.observe(ins, { attributes: true, attributeFilter: ["data-ad-status"] });
+    apply();
+    return () => mo.disconnect();
+  }, [visible, isMobile]);
+
   // 表示中はページ末尾が固定広告の裏に隠れないよう、広告の高さ分だけ body 下部に余白を確保する。
   // 高さは固定（内側 h-[98px] + border-t 1px = 99px）なので offsetHeight の読み取りは不要。
   // 旧実装は offsetHeight 読み取り＋ResizeObserver で padding を書いており「読み取り→書き込み」の
@@ -460,7 +587,7 @@ export function MobileStickyAd({ suspended = false }: { suspended?: boolean }) {
   // md以上は広告が md:hidden(display:none) のため matchMedia で padding を外す（旧ROの追従と等価）。
   // 広告のマークアップ・スロット・表示タイミングは不変（収益影響なし）。
   useEffect(() => {
-    if (!visible || dismissed || suspended) return;
+    if (!visible || dismissed || suspended || unfilled) return;
     const mql = window.matchMedia("(min-width: 768px)");
     const apply = () => {
       document.body.style.paddingBottom = mql.matches ? "" : "99px";
@@ -471,18 +598,17 @@ export function MobileStickyAd({ suspended = false }: { suspended?: boolean }) {
       mql.removeEventListener("change", apply);
       document.body.style.paddingBottom = "";
     };
-  }, [visible, dismissed, suspended]);
+  }, [visible, dismissed, suspended, unfilled]);
 
   if (!ADSENSE_ID || dismissed || !visible || !isMobile) return null;
 
   return (
-    // suspend はインラインstyleではなく hidden クラスで行う
-    // （smart-mobile-ad.tsx の MutationObserver が style*="display: none" を未充足広告の
-    //   自動折りたたみと誤検知して恒久 dismiss してしまうのを防ぐため）
+    // suspend / unfilled は unmount ではなく hidden クラスで隠す: 読み込み済み広告を保持し
+    // AdSense の再リクエスト（push 重複）を発生させない。フィル/一時UI解除で自動復帰する。
     // md:hidden は撤廃（isMobile ゲートで DOM ごとマウント制御するため）。
     <div
       ref={containerRef}
-      className={`fixed bottom-[calc(60px+env(safe-area-inset-bottom,0px))] left-0 right-0 z-40 border-t border-border/30 bg-background/95 backdrop-blur-sm${suspended ? " hidden" : ""}`}
+      className={`fixed bottom-[calc(60px+env(safe-area-inset-bottom,0px))] left-0 right-0 z-40 border-t border-border/30 bg-background/95 backdrop-blur-sm${suspended || unfilled ? " hidden" : ""}`}
     >
       {/* 下部アンカーの固定広告が読み込み後に高さ拡張すると内容が上方向にシフトし
           CLS 0.2の主因になっていた。サイズ固定+クリップ枠で拡張を物理的に遮断。
@@ -521,13 +647,19 @@ export function MobileHeaderBannerAd() {
   return (
     <div className="border-b border-border/20 bg-muted/5">
       <div className="mx-auto max-w-lg px-2 py-1">
-        <AdUnit
-          slot={AD_SLOTS.mobile_header_banner}
-          placement="mobile_header_banner"
-          format="horizontal"
-          style={{ display: "block", width: "100%", height: "50px" }}
-          responsive
-        />
+        {/* ATF配置のためサイズを 320x50 に完全固定する。format="none" で data-ad-format 属性を
+            出さない(AdSense公式の固定サイズ化手順) — format="horizontal" のままだとレスポンシブ
+            ユニット扱いが残り、コンテナ幅次第で 320x100/468x60 が配信されクリップ枠で半分切断
+            (広告の部分隠蔽=ポリシー違反リスク)になるため。クリップ枠は保険として維持。 */}
+        <div className="h-[50px] overflow-hidden text-center">
+          <AdUnit
+            slot={AD_SLOTS.mobile_header_banner}
+            placement="mobile_header_banner"
+            format="none"
+            style={{ display: "inline-block", width: "320px", height: "50px" }}
+            responsive={false}
+          />
+        </div>
       </div>
     </div>
   );

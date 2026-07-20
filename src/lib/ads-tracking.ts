@@ -10,7 +10,7 @@
  * placement の論理名は ads-config.ts（PR2 で導入）の論理名と一致させること。
  */
 
-export type AdEventName = "ad_impression" | "ad_viewable" | "ad_click";
+export type AdEventName = "ad_impression" | "ad_viewable" | "ad_click" | "ad_filled";
 
 export function trackAdEvent(params: {
   /** 広告枠の論理名（例: "in_article", "sidebar_sticky"）。GA4 のカスタムディメンションで集計する */
