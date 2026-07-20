@@ -38,6 +38,7 @@ import { getHookSizeData } from "@/lib/data/hook-sizes";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShareButtons } from "@/components/ui/share-buttons";
 import { InArticleAd, DisplayAd, LazyAd, StickySidebarAd } from "@/components/ads/ad-unit";
+import { AdExperimentGate } from "@/components/ads/ad-experiment-gate";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { getPrefectureByName, prefectures } from "@/lib/data/prefectures";
 import { MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
@@ -683,6 +684,15 @@ export default async function FishDetailPage({ params }: PageProps) {
         <LazyAd className="my-6"><InArticleAd /></LazyAd>
       </div>
 
+      {/* fish_sidebar_reposition A/B (treatment): 最深部で構造的に視認されなかったPC広告枠を
+          スポット一覧直後の中腹へ上方移動（枠数不変・移動のみ。control は従来の最深部位置）。
+          判定14日: placement=sidebar_sticky × /fish/ の視認率+30pt期待、imps/PV±3%ガードレール */}
+      <div className="hidden lg:block my-8">
+        <AdExperimentGate experiment="fish_sidebar_reposition" variant="treatment">
+          <StickySidebarAd />
+        </AdExperimentGate>
+      </div>
+
       {/* 都道府県別リンク */}
       {fish.spots.length > 0 && (() => {
         const prefMap = new Map<string, { prefSlug: string; prefName: string; count: number }>();
@@ -1282,9 +1292,12 @@ export default async function FishDetailPage({ params }: PageProps) {
       </CollapsibleSection>
 
       {/* 関連コンテンツリンク */}
-      {/* PC専用の追加広告枠（単一カラムの下部余白を収益化） */}
+      {/* PC専用の追加広告枠（単一カラムの下部余白を収益化）
+          fish_sidebar_reposition A/B (control): 従来の最深部位置。treatment は中腹へ移動済み */}
       <div className="hidden lg:block my-8">
-        <StickySidebarAd />
+        <AdExperimentGate experiment="fish_sidebar_reposition" variant="control">
+          <StickySidebarAd />
+        </AdExperimentGate>
       </div>
 
       <section className="mb-8">
