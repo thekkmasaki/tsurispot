@@ -61,7 +61,9 @@ interface AdUnitProps {
   slot?: string;
   /** 広告枠の論理名。指定すると GA4 へ impression/viewability を送信する（計測対象になる） */
   placement?: string;
-  format?: "auto" | "horizontal" | "vertical" | "rectangle" | "fluid" | "autorelaxed";
+  /** "none" は data-ad-format 属性自体を描画しない = style の width/height による完全固定サイズユニット。
+      AdSense 公式の固定サイズ化手順(format属性の削除)に対応する（レスポンシブ判定を確実に無効化）。 */
+  format?: "auto" | "horizontal" | "vertical" | "rectangle" | "fluid" | "autorelaxed" | "none";
   layout?: string;
   layoutKey?: string;
   className?: string;
@@ -143,8 +145,10 @@ export function AdUnit({
 
     // 選択的lazy（枠単位A/B）: treatment のみ push を IntersectionObserver でビューポート
     // lazyRootMargin 手前まで遅延する。#216 の全枠一括lazyと違い対象枠を限定し、<ins> と
-    // min-height は即描画のまま（CLS不変）。幅ガード(tryPush)を必ず通るため、#260 型の
-    // 「幅0 push でキュー全停止」は構造的に再発しない。
+    // min-height は即描画のまま（CLS不変）。
+    // 注意: 幅ガード(tryPush)が防げるのは「自枠の push」だけ。未処理の幅0 <ins> が DOM に
+    // あると他ユニットの push が DOM 順でそれを掴んで例外→キュー停止する(#260)ため、
+    // 非表示ブレークポイントの枠は matchMedia で DOM ごとゲートすることが再発防止の条件。
     const lazyBucket = lazyExperiment ? getBucket(lazyExperiment) : null;
     if (lazyBucket === "treatment") {
       ioRef = new IntersectionObserver(
@@ -243,7 +247,7 @@ export function AdUnit({
         style={style || { display: "block", width: "100%" }}
         data-ad-client={ADSENSE_ID}
         data-ad-slot={slot}
-        data-ad-format={format}
+        {...(format !== "none" && { "data-ad-format": format })}
         {...(layout && { "data-ad-layout": layout })}
         {...(layoutKey && { "data-ad-layout-key": layoutKey })}
         {...(responsive && { "data-full-width-responsive": "true" })}
@@ -428,11 +432,19 @@ export function SidebarAd({ className = "" }: { className?: string }) {
 }
 
 // ---- スティッキーサイドバー広告（スクロール追従） ----
-export function StickySidebarAd({ className = "" }: { className?: string }) {
-  if (!ADSENSE_ID) return null;
+// label: サイドバー配置では省スペースのため既定で非表示。本文中腹への配置
+// (fish_sidebar_reposition treatment 等)では #220 のラベル統一方針に従い必ず true にする
+// （無ラベルの本文内広告はコンテンツ誤認＝AdSenseポリシーリスク）。
+export function StickySidebarAd({ className = "", label = false }: { className?: string; label?: boolean }) {
+  // lg未満では DOM ごとアンマウント(#260 の正解パターン)。全使用箇所が `hidden lg:block` 等の
+  // PC専用ラッパー内だが、CSS 非表示だとモバイルで幅0の <ins> が DOM に残り、他ユニットの
+  // adsbygoogle.push({}) が DOM 順でそれを掴んで "No slot size for availableWidth=0" 例外
+  // → push キュー停止 → MobileStickyAd 等が埋まらなくなる(#260 の本番障害と同型)。
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+  if (!ADSENSE_ID || !isDesktop) return null;
   return (
     <div className={`sticky top-20 ${className}`}>
-      <AdWrapper variant="sidebar" label={false}>
+      <AdWrapper variant="sidebar" label={label}>
         <AdUnit slot={AD_SLOTS.sidebar_sticky} placement="sidebar_sticky" format="auto" className="min-h-[250px]" />
       </AdWrapper>
     </div>
@@ -635,15 +647,16 @@ export function MobileHeaderBannerAd() {
   return (
     <div className="border-b border-border/20 bg-muted/5">
       <div className="mx-auto max-w-lg px-2 py-1">
-        {/* CLS対策: ATF配置のため高さ50px固定+overflowクリップで縦拡張を物理的に遮断。
-            responsive=true だと full-width-responsive が縦長サイズを返しうるため無効化
-            （MobileStickyAd と同じクリップ枠パターン）。 */}
-        <div className="h-[50px] overflow-hidden">
+        {/* ATF配置のためサイズを 320x50 に完全固定する。format="none" で data-ad-format 属性を
+            出さない(AdSense公式の固定サイズ化手順) — format="horizontal" のままだとレスポンシブ
+            ユニット扱いが残り、コンテナ幅次第で 320x100/468x60 が配信されクリップ枠で半分切断
+            (広告の部分隠蔽=ポリシー違反リスク)になるため。クリップ枠は保険として維持。 */}
+        <div className="h-[50px] overflow-hidden text-center">
           <AdUnit
             slot={AD_SLOTS.mobile_header_banner}
             placement="mobile_header_banner"
-            format="horizontal"
-            style={{ display: "block", width: "100%", height: "50px" }}
+            format="none"
+            style={{ display: "inline-block", width: "320px", height: "50px" }}
             responsive={false}
           />
         </div>

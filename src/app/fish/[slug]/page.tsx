@@ -689,7 +689,7 @@ export default async function FishDetailPage({ params }: PageProps) {
           判定14日: placement=sidebar_sticky × /fish/ の視認率+30pt期待、imps/PV±3%ガードレール */}
       <div className="hidden lg:block my-8">
         <AdExperimentGate experiment="fish_sidebar_reposition" variant="treatment">
-          <StickySidebarAd />
+          <StickySidebarAd label />
         </AdExperimentGate>
       </div>
 

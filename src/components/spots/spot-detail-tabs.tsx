@@ -59,7 +59,11 @@ export function SpotDetailTabs({
       params.set("tab", activeTab);
     }
     const query = params.toString();
-    router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+    const next = query ? `${pathname}?${query}` : pathname;
+    // 変化がない場合は replace しない: ?tab= 付き着地の復元直後に同一URLへ replace すると
+    // ISRページの RSC 再フェッチが走り App Runner の無駄な負荷になる
+    if (next === window.location.pathname + window.location.search) return;
+    router.replace(next, { scroll: false });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeTab]);
 

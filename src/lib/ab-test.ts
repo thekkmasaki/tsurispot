@@ -44,8 +44,13 @@ export const EXPERIMENTS: Record<ExperimentKey, { enabled: boolean; description:
     description: "スポット詳細の深部3枠(InArticle×2/NativeAdBreak)の push を 1000px 手前まで遅延",
   },
   spot_mobile_header: {
-    enabled: false, // 70%未達時のみ。有効化前に docs/VIGNETTE-STEP0.md の方針改訂が必要
-    description: "スポット詳細モバイルATFバナー(MobileHeaderBannerAd)の再導入",
+    // 【有効化ブロッカー】現行実装(AdExperimentGate によるマウント後ATF挿入・高さ予約なし)の
+    // まま enabled にすると、treatment のモバイル全PVで約59pxの挿入シフト=CLS約+0.09 が発生し、
+    // 実験のguardrail(CLS p75 +0.02未満)を開始前から必ず割る。有効化前に (1)両バケット共通の
+    // SSR固定高プレースホルダ帯を敷きゲートは中身のみ出し分ける等の挿入方式変更、
+    // (2) docs/VIGNETTE-STEP0.md の「ATFヘッダー広告❌」方針の改訂PR、の両方が必須。
+    enabled: false,
+    description: "スポット詳細モバイルATFバナー(MobileHeaderBannerAd)の再導入(70%未達時のみ)",
   },
 };
 

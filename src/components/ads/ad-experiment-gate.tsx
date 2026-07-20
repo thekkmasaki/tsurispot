@@ -24,11 +24,17 @@ export function AdExperimentGate({
   children: ReactNode;
 }) {
   const [bucket, setBucket] = useState<Variant | null>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    setMounted(true);
     setBucket(getBucket(experiment));
   }, [experiment]);
 
-  if (bucket !== variant) return null;
+  // SSR/初回描画は非表示(ハイドレーション一致)。マウント後、getBucket が null を返す環境
+  // (localStorage不可のプライベートモード等)は ab-test.ts の規約どおり control 扱いにする
+  // — さもないと両バリアントとも非描画になり、その環境の imp が丸ごと消える。
+  if (!mounted) return null;
+  if ((bucket ?? "control") !== variant) return null;
   return <>{children}</>;
 }
