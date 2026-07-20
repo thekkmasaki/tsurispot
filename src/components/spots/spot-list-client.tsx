@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useMemo, useCallback, useDeferredValue, useTransition, useEffect, Fragment } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { Search, X, SlidersHorizontal, ChevronDown, ChevronLeft, ChevronRight, MapPin, Navigation, Loader2 } from "lucide-react";
 import { SpotCard } from "@/components/spots/spot-card";
 import { Button } from "@/components/ui/button";
@@ -120,7 +120,6 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: ListSpot[]
   // useSearchParams() は使わない: Suspense 境界なしで呼ぶとページ全体が CSR へ
   // バックアウトし、/spots の SSR HTML から本文・広告が消える（2026-07 判明）。
   // SSR はデフォルト値で描画し、マウント後に window.location.search から復元する。
-  const router = useRouter();
   const pathname = usePathname();
 
   const [searchText, setSearchText] = useState(initialQuery);
@@ -138,7 +137,44 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: ListSpot[]
   const [currentPage, setCurrentPage] = useState(1);
   const [isPending, startTransition] = useTransition();
 
-  // マウント後: URL query から filter を復元 (share/back/reload で復元可能に)
+  // URL を書き出す。router.replace ではなく History API を直接使う:
+  // (1) router.replace は同一ルートでも RSC ペイロードを取りに行き、/spots のそれは
+  //     実測で数百KB・Cloudflare では DYNAMIC 扱い（キャッシュされずオリジン直撃）。
+  //     フィルタ操作のたびにこれが走っていた。History API なら通信ゼロ。
+  // (2) ページ送りを pushState にすることで履歴エントリが積まれ、GA4 の拡張計測
+  //     「履歴イベントに基づくページの変更」で PV として計上される。従来ページ送りは
+  //     setState のみで URL すら変わらず、全ページ分の PV が失われていた。
+  // App Router は window.history.pushState/replaceState の直接利用を公式にサポートしている。
+  const writeUrl = useCallback(
+    (page: number, mode: "push" | "replace") => {
+      const params = new URLSearchParams();
+      if (searchText) params.set("q", searchText);
+      if (selectedPrefecture) params.set("prefecture", selectedPrefecture);
+      if (selectedType) params.set("type", selectedType);
+      if (selectedDifficulty) params.set("difficulty", selectedDifficulty);
+      if (page > 1) params.set("page", String(page));
+      const query = params.toString();
+      const url = query ? `${pathname}?${query}` : pathname;
+      // 同一URLなら何もしない。これがないと同期用の replace が
+      // ページ送りで積んだ履歴エントリを潰してしまう
+      if (url === window.location.pathname + window.location.search) return;
+      if (mode === "push") window.history.pushState(null, "", url);
+      else window.history.replaceState(null, "", url);
+    },
+    [searchText, selectedPrefecture, selectedType, selectedDifficulty, pathname],
+  );
+
+  // ページ送り。setState と URL を必ずセットで動かす
+  const goToPage = useCallback(
+    (page: number) => {
+      setCurrentPage(page);
+      writeUrl(page, "push");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    },
+    [writeUrl],
+  );
+
+  // マウント後: URL query から filter / page を復元 (share/back/reload で復元可能に)
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const q = params.get("q");
@@ -149,22 +185,37 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: ListSpot[]
     if (type) setSelectedType(type as ListSpot["spotType"]);
     const difficulty = params.get("difficulty");
     if (difficulty) setSelectedDifficulty(difficulty as ListSpot["difficulty"]);
+    const page = Number.parseInt(params.get("page") ?? "", 10);
+    if (Number.isFinite(page) && page > 1) setCurrentPage(page);
+  }, []);
+
+  // 戻る/進む: pushState は Next のマウント時 effect を再実行しないため、
+  // popstate で URL から state を復元する。マウント時と違い「URLに無い＝クリア」で
+  // 上書きしないと、戻ったのに前の絞り込みが残る
+  useEffect(() => {
+    const onPopState = () => {
+      const params = new URLSearchParams(window.location.search);
+      setSearchText(params.get("q") ?? "");
+      setSelectedPrefecture(params.get("prefecture") ?? "");
+      setSelectedType((params.get("type") ?? "") as ListSpot["spotType"] | "");
+      setSelectedDifficulty((params.get("difficulty") ?? "") as ListSpot["difficulty"] | "");
+      const page = Number.parseInt(params.get("page") ?? "", 10);
+      setCurrentPage(Number.isFinite(page) && page > 1 ? page : 1);
+    };
+    window.addEventListener("popstate", onPopState);
+    return () => window.removeEventListener("popstate", onPopState);
   }, []);
 
   // UX-3: state 変更時に URL query を同期 (share/back/reload で復元可能に)
-  // 打鍵ごとに router.replace すると入力中のINPが悪化するため 300ms デバウンスする。
+  // 打鍵ごとに書き換えると入力中の INP が悪化するため 300ms デバウンスする。
+  // currentPage を含めるのは、マウント直後にこの effect が ?page=N を消さないため。
+  // ページ送り由来の変化は writeUrl 内の同一URLガードで no-op になる。
   useEffect(() => {
     const timer = setTimeout(() => {
-      const params = new URLSearchParams();
-      if (searchText) params.set("q", searchText);
-      if (selectedPrefecture) params.set("prefecture", selectedPrefecture);
-      if (selectedType) params.set("type", selectedType);
-      if (selectedDifficulty) params.set("difficulty", selectedDifficulty);
-      const query = params.toString();
-      router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
+      writeUrl(currentPage, "replace");
     }, 300);
     return () => clearTimeout(timer);
-  }, [searchText, selectedPrefecture, selectedType, selectedDifficulty, router, pathname]);
+  }, [writeUrl, currentPage]);
 
   // Geolocation state
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
@@ -656,7 +707,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: ListSpot[]
                 variant="outline"
                 size="sm"
                 disabled={currentPage === 1}
-                onClick={() => { setCurrentPage(currentPage - 1); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                onClick={() => goToPage(currentPage - 1)}
                 className="min-h-[44px] gap-1"
               >
                 <ChevronLeft className="size-4" />
@@ -670,7 +721,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: ListSpot[]
                         key={page}
                         variant={currentPage === page ? "default" : "outline"}
                         size="sm"
-                        onClick={() => { setCurrentPage(page); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                        onClick={() => goToPage(page)}
                         className="min-h-[44px] min-w-[44px]"
                       >
                         {page}
@@ -693,7 +744,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: ListSpot[]
                         key={page}
                         variant={currentPage === page ? "default" : "outline"}
                         size="sm"
-                        onClick={() => { setCurrentPage(page); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                        onClick={() => goToPage(page)}
                         className="min-h-[44px] min-w-[36px] sm:min-w-[44px]"
                       >
                         {page}
@@ -706,7 +757,7 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: ListSpot[]
                 variant="outline"
                 size="sm"
                 disabled={currentPage === totalPages}
-                onClick={() => { setCurrentPage(currentPage + 1); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                onClick={() => goToPage(currentPage + 1)}
                 className="min-h-[44px] gap-1"
               >
                 <span className="hidden sm:inline">次へ</span>
