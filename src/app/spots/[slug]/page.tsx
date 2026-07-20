@@ -508,8 +508,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
   const allNearby: NearbySpot[] = getNearbySpots(spot.latitude, spot.longitude, 21)
     .filter((s) => s.id !== spot.id);
 
-  // Top 5 for internal linking — 必要フィールドのみ抽出（RSCペイロード軽量化）
-  const nearbySpots = allNearby.slice(0, 5).map((s) => ({
+  // 内部リンク用（回遊導線）。getNearbySpots の limit(21) は増やさないこと:
+  // 候補数 < limit で全スポットを丸ごとコピーするフォールバックに落ちて ISR 生成時の
+  // ピークメモリが跳ねる（spots.ts の getNearbySpots 参照）。ここは slice を変えるだけ。
+  const nearbySpots = allNearby.slice(0, 6).map((s) => ({
     id: s.id,
     slug: s.slug,
     name: s.name,
@@ -1571,7 +1573,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
             <MapPin className="size-5" />
             {spot.name}周辺の釣りスポット
           </h3>
-          <div className="flex gap-3 overflow-x-auto pb-2">
+          {/* 横スクロールから縦グリッドへ。カルーセルはクリックの大半が1枚目に集中し
+              2枚目以降が事実上見られないため、全件を一覧できる形にしている */}
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
             {nearbySpots.map((nearSpot, nearIndex) => {
               const nearSpotTypeLabel = SPOT_TYPE_LABELS[nearSpot.spotType];
               const nearSpotFishStr = nearSpot.fishNames.slice(0, 2).join("・");
@@ -1586,12 +1590,12 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 itemId={nearSpot.slug}
                 linkPlacement="spot_detail_nearby"
                 position={nearIndex}
-                className="shrink-0"
+                className="block h-full"
                 title={nearSpotRichLabel}
                 aria-label={nearSpotRichLabel}
               >
-                <div className="min-w-[220px] rounded-lg border bg-white p-4 transition-shadow hover:shadow-md">
-                  <p className="text-sm text-gray-500 mb-1">
+                <div className="h-full rounded-lg border bg-white p-3 transition-shadow hover:shadow-md">
+                  <p className="text-xs text-gray-500 mb-1">
                     約{nearSpot.distanceKm < 10
                       ? nearSpot.distanceKm.toFixed(1)
                       : Math.round(nearSpot.distanceKm).toString()}km
@@ -1599,12 +1603,13 @@ export default async function SpotDetailPage({ params }: PageProps) {
                   <p className="font-medium text-blue-600 hover:underline leading-snug">
                     {nearSpot.name}
                   </p>
+                  {/* 2カラム化でカード幅が狭いため、魚名の重複表示（旧: この行と下の行の両方）は
+                      解消し、下の「釣れる魚」に一本化している */}
                   <p className="mt-0.5 text-xs text-gray-500">
                     {nearSpot.prefecture}の{nearSpotTypeLabel}
-                    {nearSpotFishStr ? ` | ${nearSpotFishStr}` : ""}
                   </p>
                   {nearSpot.fishNames.length > 0 && (
-                    <p className="mt-1.5 text-xs text-muted-foreground">
+                    <p className="mt-1 text-xs text-muted-foreground">
                       釣れる魚: {nearSpot.fishNames.join("・")}
                     </p>
                   )}
@@ -1622,11 +1627,14 @@ export default async function SpotDetailPage({ params }: PageProps) {
         <LazyAd><InArticleAd /></LazyAd>
       </div>
 
-      {/* 関連スポット・ガイド（折りたたみ） */}
+      {/* 関連スポット・ガイド（初期状態で展開）
+          中身は折りたたみ時も常時DOM描画されている（高さ0にしているだけ）ため、
+          defaultOpen にしてもHTMLサイズは増えない。初期高さが確定するぶんCLSはむしろ改善方向。
+          隠されたコンテンツは事実上クリックされないため、回遊導線として展開しておく。 */}
       <CollapsibleSection
         title={`${spot.region.prefecture}の関連スポット・ガイド`}
         icon={<Compass className="size-5 text-primary" />}
-        previewText="タップして表示"
+        defaultOpen
       >
         {/* 同じ都道府県の釣りスポット */}
         {(() => {
@@ -1645,7 +1653,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
           return (
             <div className="mb-6">
               <h3 className="mb-3 text-sm font-bold">{spot.region.prefecture}の他の釣りスポット</h3>
-              <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {/* モバイルも2カラム。1カラムのまま defaultOpen にすると6件で縦600px超になり、
+                  下部の広告枠を大きく押し下げてしまうため */}
+              <div className="grid grid-cols-2 gap-3 lg:grid-cols-3">
                 {samePrefSpots.map((ps, psIndex) => {
                   const psFishStr = ps.fishNames.join("・");
                   const psTypeLabel = SPOT_TYPE_LABELS[ps.spotType] || "";
