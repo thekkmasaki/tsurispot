@@ -27,6 +27,7 @@ import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { fishSpecies } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
 import { MONTHS, getMonthBySlug, isMonthInRange } from "@/lib/data/fishing-methods";
+import { MATRIX_MIN_SPOTS } from "@/lib/data";
 import { SPOT_TYPE_LABELS } from "@/types";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
@@ -57,9 +58,18 @@ const getMonthAggregates = cache((prefName: string, monthNum: number) => {
 
   const fishCountMap = new Map<
     string,
-    { slug: string; name: string; count: number; isPeak: boolean }
+    {
+      slug: string;
+      name: string;
+      count: number;
+      isPeak: boolean;
+      uniqueSpotCount: number;
+    }
   >();
   for (const spot of prefSpots) {
+    // マトリクスの配信判定はユニークスポット数ベース。同一スポットの
+    // 複数エントリ（釣法・期間違い）を 1 スポットに正規化して別カウントする
+    const seenInSpot = new Set<string>();
     for (const cf of spot.catchableFish) {
       if (isMonthInRange(monthNum, cf.monthStart, cf.monthEnd)) {
         const existing = fishCountMap.get(cf.fish.slug);
@@ -72,9 +82,15 @@ const getMonthAggregates = cache((prefName: string, monthNum: number) => {
             name: cf.fish.name,
             count: 1,
             isPeak: cf.peakSeason,
+            uniqueSpotCount: 0,
           });
         }
+        seenInSpot.add(cf.fish.slug);
       }
+    }
+    for (const fSlug of seenInSpot) {
+      const entry = fishCountMap.get(fSlug);
+      if (entry) entry.uniqueSpotCount++;
     }
   }
   const catchableFishList = Array.from(fishCountMap.values()).sort((a, b) => {
@@ -768,6 +784,21 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      {/* 月×魚マトリクスへの内部リンク（この県×この月の魚種別詳細ガイド）。
+          リンク先はユニークスポット数 >= MATRIX_MIN_SPOTS の配信確定ページのみ
+          （エントリ数カウントだと 301 先にリンクする事故が起きるため必ず uniqueSpotCount で判定） */}
+      <RelatedPseoLinks
+        title={`${month.name}の${pref.name}で釣れる魚（魚種別ガイド）`}
+        links={catchableFishList
+          .filter((f) => f.uniqueSpotCount >= MATRIX_MIN_SPOTS)
+          .slice(0, 20)
+          .map((f) => ({
+            href: `/prefecture/${pref.slug}/${monthSlug}/${f.slug}`,
+            label: `${month.name}の${f.name}`,
+            sublabel: `${pref.name}のスポット${f.uniqueSpotCount}件${f.isPeak ? "・今が旬" : ""}`,
+          }))}
+      />
 
       {/* 月×地域（全国の同月ガイド）への内部リンク */}
       <RelatedPseoLinks

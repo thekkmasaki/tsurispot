@@ -308,6 +308,14 @@ export function getHighValuePrefMonthFishCombos(
 }
 
 /**
+ * マトリクス（都道府県×月×魚種）ページの配信下限ユニークスポット数。
+ * matrix ページ本体の 301 判定・sitemap 掲載判定・各テンプレからの
+ * 内部リンク適格判定で共用する（値がドリフトすると「301 先へのリンク」や
+ * 「sitemap 掲載なのに 301」が再発するため、必ずこの定数を参照すること）。
+ */
+export const MATRIX_MIN_SPOTS = 2;
+
+/**
  * index 対象の「都道府県×月×魚種」組み合わせ（= 配信される全ページ）。
  *
  * 条件は matrix ページのレンダリング判定と完全一致させる必要がある:
@@ -325,7 +333,7 @@ export function getHighValuePrefMonthFishCombos(
  * 索引は広いが事前生成は厳選、という非対称でロングテール index と容量を両立する。
  */
 export function getEligiblePrefMonthFishCombos(
-  minSpots: number = 2
+  minSpots: number = MATRIX_MIN_SPOTS
 ): { prefSlug: string; monthSlug: string; fishSlug: string; count: number }[] {
   const out: {
     prefSlug: string;
