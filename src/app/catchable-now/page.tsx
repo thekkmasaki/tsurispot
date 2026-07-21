@@ -1,7 +1,9 @@
 import { Metadata } from "next";
 import { getFishSpeciesWithSpots } from "@/lib/data";
+import { prefectures } from "@/lib/data/prefectures";
 import { CatchableNowClient } from "./catchable-now-client";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { RelatedPseoLinks } from "@/components/seo/related-pseo-links";
 
 // 現在の月を取得してタイトルに含める
 const currentMonth = new Date().getMonth() + 1;
@@ -64,6 +66,17 @@ export default function CatchableNowPage() {
         fishSpecies={fishSpecies}
         initialMonth={currentMonth}
       />
+      {/* 都道府県別の「今釣れる」ページへの内部リンク（47件） */}
+      <div className="container mx-auto max-w-6xl px-4 pb-8">
+        <RelatedPseoLinks
+          title={`都道府県別に今釣れる魚を見る【${currentMonth}月】`}
+          links={prefectures.map((pref) => ({
+            href: `/catchable-now/${pref.slug}`,
+            label: `${pref.name}で今釣れる魚`,
+            sublabel: `${currentMonth}月の旬の魚・スポット`,
+          }))}
+        />
+      </div>
     </>
   );
 }

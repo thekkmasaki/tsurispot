@@ -116,6 +116,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/fish`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.8 },
     { url: `${baseUrl}/map`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.8 },
     { url: `${baseUrl}/catchable-now`, lastModified: dynamicDate, changeFrequency: "daily", priority: 0.8 },
+    // 今釣れる魚（都道府県別、47件）: 月替わりで内容が変わるため daily
+    ...prefectures.map((pref) => ({
+      url: `${baseUrl}/catchable-now/${pref.slug}`,
+      lastModified: dynamicDate,
+      changeFrequency: "daily" as const,
+      priority: 0.7,
+    })),
     { url: `${baseUrl}/ranking`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.8 },
     { url: `${baseUrl}/tides`, lastModified: dynamicDate, changeFrequency: "daily", priority: 0.7 },
     { url: `${baseUrl}/fishing-calendar`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.8 },
