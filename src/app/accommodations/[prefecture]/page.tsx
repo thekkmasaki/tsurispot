@@ -33,7 +33,7 @@ export async function generateMetadata({
     (a) => (a.rakutenUrl && a.rakutenUrl !== "#") || (a.jalanUrl && a.jalanUrl !== "#")
   );
   return {
-    title: `${pref.name}の釣り宿・釣り客向け宿泊施設 おすすめ｜ツリスポ`,
+    title: `${pref.name}の釣り宿・釣り客向け宿泊施設 おすすめ`,
     description: `${pref.name}で釣り客に人気の宿・旅館・民宿を紹介。 早朝出船・釣果料理対応・タックルレンタル可など、 釣り旅行に最適な宿を厳選して掲載。`,
     robots: { index: hasListings, follow: true },
     alternates: { canonical: `https://tsurispot.com/accommodations/${prefecture}` },

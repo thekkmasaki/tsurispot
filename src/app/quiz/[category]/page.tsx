@@ -24,7 +24,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!cat) return {};
 
   return {
-    title: `${cat.name} — 釣りクイズ | ツリスポ`,
+    title: `${cat.name} — 釣りクイズ`,
     description: `${cat.description}。全${cat.questionCount}問の4択クイズに挑戦しよう！`,
     openGraph: {
       title: `${cat.icon} ${cat.name} | ツリスポ`,

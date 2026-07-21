@@ -149,14 +149,14 @@ export async function generateMetadata({
   const profile = await fetchProfile(tsuriId);
   if (!profile) {
     return {
-      title: "ユーザーが見つかりません｜ツリスポ",
+      title: "ユーザーが見つかりません",
       robots: { index: false, follow: false },
     };
   }
 
   if (profile.isPrivate) {
     return {
-      title: `${profile.user.nickname}さんのプロフィール｜ツリスポ`,
+      title: `${profile.user.nickname}さんのプロフィール`,
       description: "このプロフィールは非公開に設定されています。",
       robots: { index: false, follow: false },
       alternates: { canonical: `https://tsurispot.com/users/${tsuriId}` },
@@ -178,7 +178,7 @@ export async function generateMetadata({
   )}&reportCount=${stats.reportCount}&fishCount=${stats.uniqueFishCount}&maxSize=${stats.maxSizeCm}`;
 
   return {
-    title: `${ogTitle}｜ツリスポ`,
+    title: `${ogTitle}`,
     description,
     alternates: { canonical },
     openGraph: {

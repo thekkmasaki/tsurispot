@@ -83,10 +83,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     .join("・");
 
   // CTR最適化: クエリ自然句「◯月に釣れる魚」を先頭で完全一致 + 「一覧」でリスト検索意図に応える
-  const title = `${guide.nameJa}に釣れる魚一覧【2026年】${topFishNames}など${totalFishCount}種と釣り方`;
+  // 年号はハードコードすると翌年に古く見えてCTRを落とすため動的に生成する
+  const metaYear = new Date().getFullYear();
+  const title = `${guide.nameJa}に釣れる魚一覧【${metaYear}年】${topFishNames}など${totalFishCount}種と釣り方`;
   const description = `${guide.nameJa}に堤防・漁港で釣れる魚は${topFishNamesLong}など全${totalFishCount}種。今が最盛期の魚と仕掛け・釣れる時間帯・全国のおすすめスポットを解説。水温${guide.conditions.waterTemp}の${guide.nameJa}に合った釣り方がわかる。初心者向けターゲットも紹介。`;
   // OG用タイトル（テンプレート「| ツリスポ」が付かないため少し長めに）
-  const ogTitle = `${guide.nameJa}に釣れる魚一覧【2026年】${topFishNames}など${totalFishCount}種と釣り方｜ツリスポ`;
+  const ogTitle = `${guide.nameJa}に釣れる魚一覧【${metaYear}年】${topFishNames}など${totalFishCount}種と釣り方｜ツリスポ`;
 
   return {
     title,
