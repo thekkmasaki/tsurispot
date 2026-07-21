@@ -27,6 +27,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import {
   getHighValuePrefMonthFishCombos,
   getEligiblePrefMonthFishCombos,
+  MATRIX_MIN_SPOTS,
 } from "@/lib/data";
 import {
   MONTHS,
@@ -46,7 +47,8 @@ type PageProps = {
 // dynamicParams=false は Next.js 16 で NoFallbackError を多発させ、CPU スパイクの原因になる。
 // デフォルト (true) に戻し、未知 slug や薄い組合せは permanentRedirect で確実に存在する親へ 301 する。
 
-const MIN_SPOTS = 2;
+// 配信下限は sitemap・内部リンク適格判定と共有（src/lib/data/index.ts）
+const MIN_SPOTS = MATRIX_MIN_SPOTS;
 
 // 水温目安（地域別・月別）
 const WATER_TEMP: Record<number, string> = {

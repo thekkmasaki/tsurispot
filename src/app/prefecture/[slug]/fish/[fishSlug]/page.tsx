@@ -11,8 +11,12 @@ import { toListSpot } from "@/lib/data/list-spot";
 import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { getFishBySlug } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
-import { getSpotsByPrefectureAndFish, getEligiblePrefFishCombos } from "@/lib/data";
-import { FISHING_METHODS } from "@/lib/data/fishing-methods";
+import {
+  getSpotsByPrefectureAndFish,
+  getEligiblePrefFishCombos,
+  MATRIX_MIN_SPOTS,
+} from "@/lib/data";
+import { FISHING_METHODS, MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
 import { REGION_GROUPS } from "@/lib/data/regions-group";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 import { buildPrefFishDescription } from "@/lib/seo/meta-description";
@@ -252,17 +256,33 @@ export default async function PrefectureFishPage({ params }: PageProps) {
     [fish.name]
   );
 
-  // 月別ベストタイミング（◎最盛期 / ○シーズン / —オフ）
+  // 月別ベストタイミング（◎最盛期 / ○シーズン / —オフ）。
+  // 併せて各月の「この県でこの魚が釣れるユニークスポット数」を算出し、
+  // マトリクス（県×月×魚）ページへの内部リンク適格判定に使う。
+  // 判定はマトリクス本体の 301 判定と同じユニークスポット数 >= MATRIX_MIN_SPOTS
+  // （fish.seasonMonths は全国データのため、県別の配信有無とはズレることに注意）
   const peakSet = new Set(fish.peakMonths);
   const seasonSet = new Set(fish.seasonMonths);
-  const monthTimeline = Array.from({ length: 12 }, (_, i) => {
-    const m = i + 1;
+  const monthTimeline = MONTHS.map((monthDef) => {
+    const m = monthDef.num;
     const level: "peak" | "season" | "off" = peakSet.has(m)
       ? "peak"
       : seasonSet.has(m)
       ? "season"
       : "off";
-    return { month: m, level };
+    const monthSpotCount = spots.filter((s) =>
+      s.catchableFish.some(
+        (cf) =>
+          cf.fish.slug === fishSlug &&
+          isMonthInRange(m, cf.monthStart, cf.monthEnd)
+      )
+    ).length;
+    return {
+      month: m,
+      level,
+      monthSlug: monthDef.slug,
+      linkable: monthSpotCount >= MATRIX_MIN_SPOTS,
+    };
   });
 
   // クロスリンク（県×魚 → 釣法×地域）：代表メソッドを実在の FISHING_METHODS slug に解決
@@ -553,24 +573,47 @@ export default async function PrefectureFishPage({ params }: PageProps) {
           {pref.name}で{fish.name}が釣れる時期・時間帯
         </h2>
         <div className="grid grid-cols-12 gap-1 text-center">
-          {monthTimeline.map(({ month, level }) => (
-            <div key={month} className="flex flex-col items-center rounded-md border py-1.5">
-              <span className="text-[10px] text-muted-foreground">{month}月</span>
-              <span
-                className={`text-sm font-bold ${
-                  level === "peak"
-                    ? "text-orange-500"
-                    : level === "season"
-                    ? "text-primary"
-                    : "text-muted-foreground/40"
-                }`}
+          {monthTimeline.map(({ month, level, monthSlug, linkable }) => {
+            const cellContent = (
+              <>
+                <span className="text-[10px] text-muted-foreground">{month}月</span>
+                <span
+                  className={`text-sm font-bold ${
+                    level === "peak"
+                      ? "text-orange-500"
+                      : level === "season"
+                      ? "text-primary"
+                      : "text-muted-foreground/40"
+                  }`}
+                >
+                  {level === "peak" ? "◎" : level === "season" ? "○" : "—"}
+                </span>
+              </>
+            );
+            // 配信が確定している月（ユニークスポット数 >= MATRIX_MIN_SPOTS）だけ
+            // マトリクスページへリンク（301 先へのリンクを構造的に防ぐ）
+            return linkable ? (
+              <Link
+                prefetch={false}
+                key={month}
+                href={`/prefecture/${pref.slug}/${monthSlug}/${fishSlug}`}
+                className="flex flex-col items-center rounded-md border py-1.5 transition-colors hover:border-primary hover:bg-primary/5"
               >
-                {level === "peak" ? "◎" : level === "season" ? "○" : "—"}
-              </span>
-            </div>
-          ))}
+                {cellContent}
+                <span className="sr-only">
+                  {month}月の{pref.name}の{fish.name}釣りガイド
+                </span>
+              </Link>
+            ) : (
+              <div key={month} className="flex flex-col items-center rounded-md border py-1.5">
+                {cellContent}
+              </div>
+            );
+          })}
         </div>
-        <p className="mt-2 text-xs text-muted-foreground">◎ 最盛期 ・ ○ シーズン ・ — オフシーズン</p>
+        <p className="mt-2 text-xs text-muted-foreground">
+          ◎ 最盛期 ・ ○ シーズン ・ — オフシーズン（月をタップすると{pref.name}の月別{fish.name}ガイドへ）
+        </p>
         {timeAdvice && (
           <div className="mt-3 flex items-start gap-2 rounded-md bg-muted/40 p-3">
             <Clock className="mt-0.5 size-4 shrink-0 text-primary" />
