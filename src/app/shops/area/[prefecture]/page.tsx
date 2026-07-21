@@ -71,10 +71,13 @@ export async function generateMetadata({
     .map((s) => s.name)
     .join("・");
 
+  // layout.tsx の title.template が「| ツリスポ（つりすぽ）」を自動付与するため
+  // 手書きのブランド名は付けない（付けると「| ツリスポ | ツリスポ（つりすぽ）」と
+  // 二重表示になり SERP で本文が切れて CTR を大きく落とす。本番で実測確認済み）
   const title =
     count > 0
-      ? `${pref.name}の釣具屋・エサ店一覧【${count}件】営業時間・取扱エサ掲載 | ツリスポ`
-      : `${pref.name}の釣具屋・エサ店一覧 | ツリスポ`;
+      ? `${pref.name}の釣具屋・エサ店一覧【${count}件】営業時間・取扱エサ掲載`
+      : `${pref.name}の釣具屋・エサ店一覧`;
   const description =
     count > 0
       ? `${pref.name}の釣具屋・釣具店${count}件の営業時間・住所・エサ取扱を一覧掲載。${topShopNames}など、活きエサ・冷凍エサの取扱店やレンタルロッド対応店がすぐ見つかります。`

@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: { params: Promise<{ plan: str
   const details = PLAN_DETAILS[plan as PlanKey];
   if (!details) return {};
   return {
-    title: `${details.name}プランに申し込む - ツリスポ`,
+    title: `${details.name}プランに申し込む`,
     description: `ツリスポの${details.name}プランのお申し込み確認画面です。`,
   };
 }

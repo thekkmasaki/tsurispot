@@ -53,7 +53,7 @@ export async function generateMetadata({
       .slice(0, 2)
       .map((m) => `${m}月`)
       .join("・");
-    const title = `${seasonInfo.nameJa}の釣りガイド｜${seasonInfo.nameJa}に釣れる魚・おすすめ釣り方【2026年版】`;
+    const title = `${seasonInfo.nameJa}の釣りガイド｜${seasonInfo.nameJa}に釣れる魚・おすすめ釣り方【${new Date().getFullYear()}年版】`;
     const description = `${seasonInfo.nameJa}（${monthLabels}）に釣れる魚と釣り方を完全ガイド。${seasonInfo.description.slice(0, 80)}`;
 
     return {
@@ -83,14 +83,14 @@ export async function generateMetadata({
   const guide = seasonalGuides.find((g) => g.slug === month);
   if (!guide) return { title: "ページが見つかりません" };
 
-  const title = `${guide.season}の${guide.method}完全ガイド【2026年版】`;
+  const title = `${guide.season}の${guide.method}完全ガイド【${new Date().getFullYear()}年版】`;
   const description = `${guide.season}の${guide.method}を徹底解説。${guide.description.slice(0, 100)}...おすすめスポット・必要な道具・釣り方のコツまで網羅。`;
 
   return {
     title,
     description,
     openGraph: {
-      title: `${guide.season}の${guide.method}完全ガイド【2026年版】`,
+      title: `${guide.season}の${guide.method}完全ガイド【${new Date().getFullYear()}年版】`,
       description,
       type: "article",
       url: `https://tsurispot.com/seasonal/${guide.slug}`,

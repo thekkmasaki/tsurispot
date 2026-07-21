@@ -26,7 +26,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!pref) return { title: "ページが見つかりません" };
 
   const spotCount = fishingSpots.filter((s) => s.region.prefecture === pref.name).length;
-  const title = `${pref.name}の釣り場全${spotCount}件【完全リスト】| ツリスポ`;
+  // ブランド名は layout.tsx の title.template が自動付与（手書きすると二重になる）
+  const title = `${pref.name}の釣り場全${spotCount}件【完全リスト】`;
   const description = `${pref.name}の釣り場全${spotCount}件を釣り場タイプ別・難易度別に一覧。漁港・堤防・磯・サーフ・河川のスポットを評価順で網羅。地元の釣り場探しに。`;
   const pageUrl = `https://tsurispot.com/prefecture/${slug}/all`;
 

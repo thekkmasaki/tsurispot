@@ -78,9 +78,12 @@ export async function generateMetadata({
   // 最盛期月・スポット件数を前方配置してCTRを上げる（noindexの薄ページ<3件は汎用titleにフォールバック）
   const metaPeakLabel = metaPeakMonths.slice(0, 2).join("・");
   const metaCountLabel = spots.length >= 3 ? `${spots.length}選` : "";
+  // 別名（シーバス/モイカ等）を title 末尾に付与し、「{県} シーバス」等の
+  // 別名クエリを取りこぼさない（/fish/[slug] の【別名】方式と同パターン）
+  const metaAlias = fish.aliases?.length ? `【${fish.aliases[0]}】` : "";
   const title = metaPeakLabel
-    ? `${pref.name}の${fish.name}釣りスポット${metaCountLabel}｜${metaPeakLabel}が最盛期・釣り方`
-    : `${pref.name}で${fish.name}が釣れるスポット・時期・釣り方`;
+    ? `${pref.name}の${fish.name}釣りスポット${metaCountLabel}｜${metaPeakLabel}が最盛期・釣り方${metaAlias}`
+    : `${pref.name}で${fish.name}が釣れるスポット・時期・釣り方${metaAlias}`;
   // 実績スポット名（rating 順上位）を description に加えて一意性・情報量を高める
   const metaTopSpotNames = [...spots]
     .sort((a, b) => b.rating - a.rating)
