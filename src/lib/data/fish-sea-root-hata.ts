@@ -759,7 +759,7 @@ export const seaFishRootHata: FishSpecies[] = [
     scientificName: "Inimicus japonicus",
     slug: "oniokoze",
     description:
-      "【注意: 猛毒あり】背ビレの棘に非常に強い毒を持つ危険魚。岩に擬態するため見つけにくく、踏んで刺される事故も。ただし食味は超一級品で、唐揚げや刺身は高級料理。",
+      "釣り方はぶっこみ釣りやロックフィッシュルアーで岩礁帯の底を狙うのが基本（背ビレの棘に猛毒あり）。岩に擬態するため見つけにくく、踏んで刺される事故も。釣れたら必ずハサミで棘を切り落とすこと。食味は超一級品で、唐揚げや刺身は高級料理。",
     category: "sea",
     family: "オニオコゼ科",
     difficulty: "intermediate",

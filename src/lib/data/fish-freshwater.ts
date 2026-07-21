@@ -1529,7 +1529,7 @@ export const freshwaterFish: FishSpecies[] = [
     scientificName: "Nipponocypris temminckii",
     slug: "kawamutsu",
     description:
-      "西日本を中心に河川の中流域に生息する淡水魚。体側に太い暗色縦帯が特徴。小川や用水路でも見られ、ルアーへの反応が良いことから「川ムツング」としてライトゲームの対象として人気上昇中。",
+      "釣り方は川虫や練り餌のウキ釣り、マイクロルアーの「川ムツング」が手軽で入門に最適。西日本を中心に河川の中流域に生息し、体側の太い暗色縦帯が特徴。小川や用水路でも見られ、ルアーへの反応の良さからライトゲームの対象として人気上昇中。",
     category: "freshwater",
     family: "コイ科",
     difficulty: "beginner",

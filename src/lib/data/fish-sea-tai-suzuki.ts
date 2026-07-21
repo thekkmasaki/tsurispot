@@ -759,7 +759,7 @@ export const seaFishTaiSuzuki: FishSpecies[] = [
     scientificName: "Semicossyphus reticulatus",
     slug: "kobudai",
     description:
-      "磯の怪力王。頭部に大きなコブが特徴の大型ベラの仲間で、最大1m以上に成長する。岩礁帯に生息し、強靭な歯で貝やカニを砕いて食べる。その圧倒的なパワーで釣り人を魅了する。",
+      "釣りの盛期は春の4〜6月と秋の10〜11月、牡蠣エサのカブセ釣りで堤防から狙える磯の怪力王。頭部に大きなコブが特徴の大型ベラの仲間で、最大1m以上に成長する。岩礁帯に生息し、強靭な歯で貝やカニを砕いて食べる。その圧倒的なパワーで釣り人を魅了する。",
     category: "sea",
     family: "ベラ科",
     difficulty: "advanced",
