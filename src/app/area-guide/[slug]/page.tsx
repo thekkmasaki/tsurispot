@@ -51,8 +51,16 @@ export async function generateMetadata({
   const guide = getAreaGuideBySlug(slug);
   if (!guide) return {};
 
-  const title = `${guide.name}の釣り場おすすめガイド｜釣れる魚・時期・スポット一覧`;
-  const description = `${guide.name}のおすすめ釣りスポットを初心者〜上級者別に厳選紹介。釣れる魚・ベストシーズン・アクセス情報まで${guide.name}の釣りを完全攻略。`;
+  const spotCount = getAreaSpots(guide.prefectures).length;
+  const fishList = guide.mainFish.slice(0, 5).join("・");
+  const title =
+    spotCount > 0
+      ? `${guide.name}で釣れる魚・釣り場ガイド【${spotCount}件掲載】時期とポイント解説`
+      : `${guide.name}で釣れる魚・釣り場ガイド｜時期とポイント解説`;
+  const description =
+    spotCount > 0
+      ? `${guide.name}で釣れる魚は${fishList}など。ベストシーズンは${guide.bestSeason}。掲載${spotCount}か所から初心者向け・無料・設備充実の釣り場を厳選し、魚種別の釣れる時期表や攻略のコツも紹介。`
+      : `${guide.name}で釣れる魚は${fishList}など。ベストシーズンは${guide.bestSeason}。初心者向けの釣り場選びから魚種別の釣れる時期表、攻略のコツまで紹介。`;
 
   return {
     title,
@@ -148,7 +156,7 @@ export default async function AreaGuideDetailPage({
     "@context": "https://schema.org",
     "@type": "WebPage",
     name: `${guide.name}の釣り場おすすめガイド`,
-    description: `${guide.name}のおすすめ釣りスポットを初心者〜上級者別に厳選紹介。釣れる魚・ベストシーズン・アクセス情報まで完全攻略。`,
+    description: `${guide.name}で釣れる魚は${guide.mainFish.join("・")}など。ベストシーズンは${guide.bestSeason}。掲載${allSpots.length}か所から初心者向けの釣り場を厳選紹介。`,
     url: `https://tsurispot.com/area-guide/${slug}`,
     speakable: {
       "@type": "SpeakableSpecification",
