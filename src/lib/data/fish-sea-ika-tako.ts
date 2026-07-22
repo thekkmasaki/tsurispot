@@ -153,7 +153,7 @@ export const seaFishIkaTako: FishSpecies[] = [
     scientificName: "Heterololigo bleekeri",
     slug: "yariika",
     description:
-      "冬から春にかけて岸に寄る人気のイカ。エギングやウキ釣りで狙え、アオリイカより小型ですが食味は最高級。刺身は甘みが強く絶品です。",
+      "岸から釣れる時期は11月〜4月、盛期は1〜3月の真冬。産卵で接岸する群れをエギングや電気ウキ釣りで狙えます。アオリイカより小型ですが食味は最高級、刺身は甘みが強く絶品です。",
     category: "sea",
     family: "ヤリイカ科",
     difficulty: "intermediate",
