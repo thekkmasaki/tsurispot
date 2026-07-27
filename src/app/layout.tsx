@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP, Zen_Maru_Gothic } from "next/font/google";
 import { AdSenseLoader } from "@/components/ads/adsense-loader";
+import { AdBlockMeasure } from "@/components/ads/adblock-measure";
 import { Header } from "@/components/layout/header";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import { Footer } from "@/components/layout/footer";
@@ -255,6 +256,8 @@ export default function RootLayout({
         {/* AdSense は自動化ブラウザ(navigator.webdriver)をゲートするローダー経由で読み込む
             （ボット由来の無効トラフィック抑止／AdSense配信制限リスク低減）。 */}
         <AdSenseLoader />
+        {/* 広告ブロック率の実測（ページのフルロード毎に1回、GA4へ ad_blocked を送信） */}
+        <AdBlockMeasure />
         <Providers>
           {/* Phase 6 audit: skip link (a11y、 keyboard 利用者がナビをスキップしてメインへ) */}
           <a
