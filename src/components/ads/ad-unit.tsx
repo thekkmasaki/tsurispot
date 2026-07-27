@@ -2,8 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Waves } from "lucide-react";
-import { trackAdEvent } from "@/lib/ads-tracking";
+import { trackAdEvent, trackAdFallback } from "@/lib/ads-tracking";
 import { AD_SLOTS } from "@/lib/ads-config";
+import { HouseAd } from "./house-ad";
+
+// AdSense がスロットを処理してから fallback 判定するまでの待機(ms)。
+// 通常のフィルは1〜2秒のため 3.5秒は安全側（誤 fallback を避ける）。
+const FALLBACK_CHECK_MS = 3500;
 
 declare global {
   interface Window {
@@ -66,6 +71,10 @@ interface AdUnitProps {
   className?: string;
   style?: React.CSSProperties;
   responsive?: boolean;
+  /** true の枠は、ブロック/no-fill で埋まらなかった時に自前ハウス広告(サイト内誘導)へ差し替える */
+  houseFallback?: boolean;
+  /** fallback 判定結果をラッパーに通知（"empty" 時に「スポンサー」ラベルを抑制するため） */
+  onStatus?: (status: "filled" | "empty") => void;
 }
 
 export function AdUnit({
@@ -77,11 +86,15 @@ export function AdUnit({
   className = "",
   style,
   responsive = true,
+  houseFallback = false,
+  onStatus,
 }: AdUnitProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const pushed = useRef(false);
   const viewed = useRef(false);
   const suppressed = useAdsSuppressed();
+  // ブロック/no-fill で埋まらず自前ハウス広告に差し替えた状態
+  const [fellBack, setFellBack] = useState(false);
 
   useEffect(() => {
     if (!ADSENSE_ID || pushed.current || suppressed) return;
@@ -174,10 +187,43 @@ export function AdUnit({
     };
   }, [placement, slot, suppressed]);
 
+  // fallback 判定: push 後一定時間で <ins> の状態を「観測するだけ」（push 系には一切触れない）。
+  //  - data-adsbygoogle-status が付かない → スクリプト未処理＝広告ブロック
+  //  - data-ad-status === "unfilled"     → 配信なし（no-fill）
+  // いずれも空き枠なので自前ハウス広告に差し替える。実広告がフィル済みなら何もしない。
+  useEffect(() => {
+    if (!ADSENSE_ID || suppressed || !houseFallback) return;
+    const timer = setTimeout(() => {
+      const el = containerRef.current;
+      if (!el) return;
+      // 非表示(親が display:none 等)の枠は判定・差し替え・計測を行わない（誤発火防止）
+      if (el.offsetParent === null) return;
+      const ins = el.querySelector("ins.adsbygoogle");
+      const processed = ins?.getAttribute("data-adsbygoogle-status");
+      const adStatus = ins?.getAttribute("data-ad-status");
+      let reason: "blocked" | "unfilled" | null = null;
+      if (processed == null) reason = "blocked";
+      else if (adStatus === "unfilled") reason = "unfilled";
+
+      if (reason) {
+        setFellBack(true);
+        trackAdFallback(placement, reason);
+        onStatus?.("empty");
+      } else {
+        onStatus?.("filled");
+      }
+    }, FALLBACK_CHECK_MS);
+    return () => clearTimeout(timer);
+    // 初回マウント時に1回だけ判定する設計のため依存配列は固定
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   if (!ADSENSE_ID || suppressed) return null;
 
   return (
     <div ref={containerRef} className={`ad-container w-full ${className}`}>
+      {/* <ins> は差し替え後も DOM から消さず温存する（push キューへの副作用ゼロ）。
+          ブロック/no-fill 時は高さ0に潰れるため、上に重ねる HouseAd がそのまま面を埋める。 */}
       <ins
         className="adsbygoogle"
         style={style || { display: "block", width: "100%" }}
@@ -188,6 +234,7 @@ export function AdUnit({
         {...(layoutKey && { "data-ad-layout-key": layoutKey })}
         {...(responsive && { "data-full-width-responsive": "true" })}
       />
+      {fellBack && <HouseAd placement={placement} />}
     </div>
   );
 }
@@ -229,8 +276,10 @@ function AdWrapper({
 
 // ---- 記事内広告（コンテンツのセクション間） ----
 export function InArticleAd({ className = "" }: { className?: string }) {
+  // ブロック/no-fill 時は自前ハウス広告に差し替え、その間は「スポンサー」ラベルを抑制する。
+  const [empty, setEmpty] = useState(false);
   return (
-    <AdWrapper className={`my-8 ${className}`}>
+    <AdWrapper className={`my-8 ${className}`} label={!empty}>
       {/* CLS対策: lazyOnloadで遅延挿入される広告が下のコンテンツを押し下げないよう
           最小高さを予約する（SidebarAd/DisplayAd と同じ250px基準）。 */}
       <AdUnit
@@ -240,6 +289,8 @@ export function InArticleAd({ className = "" }: { className?: string }) {
         layout="in-article"
         className="min-h-[250px]"
         style={{ display: "block", textAlign: "center" }}
+        houseFallback
+        onStatus={(s) => setEmpty(s === "empty")}
       />
     </AdWrapper>
   );
@@ -247,38 +298,67 @@ export function InArticleAd({ className = "" }: { className?: string }) {
 
 // ---- ディスプレイ広告（レスポンシブ） ----
 export function DisplayAd({ className = "" }: { className?: string }) {
+  const [empty, setEmpty] = useState(false);
   return (
-    <AdWrapper className={`my-6 ${className}`}>
+    <AdWrapper className={`my-6 ${className}`} label={!empty}>
       {/* CLS対策: 遅延挿入される広告が下を押し下げないよう最小高さを予約 */}
-      <AdUnit slot={AD_SLOTS.display} format="auto" placement="display" className="min-h-[250px]" />
+      <AdUnit
+        slot={AD_SLOTS.display}
+        format="auto"
+        placement="display"
+        className="min-h-[250px]"
+        houseFallback
+        onStatus={(s) => setEmpty(s === "empty")}
+      />
     </AdWrapper>
   );
 }
 
 // ---- セクション間ネイティブ広告（波デザインでサイトに馴染む） ----
 export function NativeAdBreak({ className = "" }: { className?: string }) {
+  // フック順序を保つため状態は早期 return より前で宣言する
+  const [empty, setEmpty] = useState(false);
   if (!ADSENSE_ID) return null;
   // w-full: flex コンテナ直下に置かれると mx-auto の auto マージンが stretch を打ち消し
   // fit-content 幅に収縮して広告が配信されなくなるため明示する
   return (
     <div className={`mx-auto w-full max-w-4xl px-4 py-10 ${className}`}>
-      <div className="flex items-center justify-center gap-3 mb-4">
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-ocean-mid/20 to-transparent" />
-        <Waves className="size-4 text-ocean-mid/30" />
-        <span className="text-[11px] font-medium tracking-widest text-muted-foreground">{AD_LABEL}</span>
-        <Waves className="size-4 text-ocean-mid/30" />
-        <div className="h-px flex-1 bg-gradient-to-l from-transparent via-ocean-mid/20 to-transparent" />
-      </div>
+      {/* ブロック/no-fill でハウス広告に差し替わった時は「スポンサー」ラベルを出さない */}
+      {!empty && (
+        <div className="flex items-center justify-center gap-3 mb-4">
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-ocean-mid/20 to-transparent" />
+          <Waves className="size-4 text-ocean-mid/30" />
+          <span className="text-[11px] font-medium tracking-widest text-muted-foreground">{AD_LABEL}</span>
+          <Waves className="size-4 text-ocean-mid/30" />
+          <div className="h-px flex-1 bg-gradient-to-l from-transparent via-ocean-mid/20 to-transparent" />
+        </div>
+      )}
       <div className="rounded-2xl border border-border/50 bg-card/60 p-3 sm:p-5 shadow-sm shadow-ocean-deep/[0.03]">
         {/* CLS対策: fluid広告の後挿入による押し下げを防ぐため最小高さを予約 */}
-        <AdUnit slot={AD_SLOTS.native_break} format="auto" placement="native_break" className="min-h-[250px]" />
+        <AdUnit
+          slot={AD_SLOTS.native_break}
+          format="auto"
+          placement="native_break"
+          className="min-h-[250px]"
+          houseFallback
+          onStatus={(s) => setEmpty(s === "empty")}
+        />
       </div>
     </div>
   );
 }
 
 // ---- Multiplex広告（関連コンテンツ風グリッド、フッター前に最適） ----
-export function MultiplexAd({ className = "", placement = "multiplex" }: { className?: string; placement?: "multiplex" | "pre_footer" }) {
+export function MultiplexAd({
+  className = "",
+  placement = "multiplex",
+  onStatus,
+}: {
+  className?: string;
+  placement?: "multiplex" | "pre_footer";
+  /** 親（PreFooterAd 等）にラベル抑制を伝えるための通知 */
+  onStatus?: (status: "filled" | "empty") => void;
+}) {
   // CLS対策: autorelaxed広告の後挿入による押し下げを防ぐため最小高さ(min-h-[250px])を予約
   return (
     <AdUnit
@@ -286,6 +366,8 @@ export function MultiplexAd({ className = "", placement = "multiplex" }: { class
       placement={placement}
       format="autorelaxed"
       className={`my-8 min-h-[250px] ${className}`}
+      houseFallback
+      onStatus={onStatus}
     />
   );
 }
@@ -302,16 +384,20 @@ export function MultiplexAd({ className = "", placement = "multiplex" }: { class
 
 // ---- フッター前広告（全ページ共通） ----
 export function PreFooterAd() {
+  // フック順序を保つため状態は早期 return より前で宣言する
+  const [empty, setEmpty] = useState(false);
   if (!ADSENSE_ID) return null;
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
-      <div className="flex items-center justify-center gap-3 mb-3">
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
-        <span className="text-[11px] font-medium tracking-widest text-muted-foreground uppercase">{AD_LABEL}</span>
-        <div className="h-px flex-1 bg-gradient-to-l from-transparent via-border to-transparent" />
-      </div>
+      {!empty && (
+        <div className="flex items-center justify-center gap-3 mb-3">
+          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+          <span className="text-[11px] font-medium tracking-widest text-muted-foreground uppercase">{AD_LABEL}</span>
+          <div className="h-px flex-1 bg-gradient-to-l from-transparent via-border to-transparent" />
+        </div>
+      )}
       <div className="rounded-2xl border border-border/50 bg-card/60 p-4 sm:p-6 shadow-sm shadow-ocean-deep/[0.03]" style={{ minWidth: "300px" }}>
-        <MultiplexAd placement="pre_footer" />
+        <MultiplexAd placement="pre_footer" onStatus={(s) => setEmpty(s === "empty")} />
       </div>
     </div>
   );
@@ -328,6 +414,7 @@ export function SidebarAd({ className = "" }: { className?: string }) {
           placement="sidebar"
           format="auto"
           className="min-h-[250px]"
+          houseFallback
         />
       </AdWrapper>
     </div>
@@ -340,7 +427,7 @@ export function StickySidebarAd({ className = "" }: { className?: string }) {
   return (
     <div className={`sticky top-20 ${className}`}>
       <AdWrapper variant="sidebar" label={false}>
-        <AdUnit slot={AD_SLOTS.sidebar_sticky} placement="sidebar_sticky" format="auto" className="min-h-[250px]" />
+        <AdUnit slot={AD_SLOTS.sidebar_sticky} placement="sidebar_sticky" format="auto" className="min-h-[250px]" houseFallback />
       </AdWrapper>
     </div>
   );
@@ -430,6 +517,7 @@ export function InFeedAd({ className = "" }: { className?: string }) {
       layoutKey="-6t+ed+2i-1n-4w"
       className={`my-4 min-h-[250px] ${className}`}
       style={{ display: "block" }}
+      houseFallback
     />
   );
 }

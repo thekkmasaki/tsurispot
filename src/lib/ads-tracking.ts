@@ -25,3 +25,27 @@ export function trackAdEvent(params: {
     ...(params.slot ? { ad_slot: params.slot } : {}),
   });
 }
+
+/**
+ * 広告ブロック検知の実測イベント。ページロード毎に1回、ブロックの有無を GA4 へ送る。
+ * 割合 = blocked=1 の数 / page_view の数。
+ *
+ * 注意（計測の盲点）: gtag.js 自体も EasyPrivacy 等でブロックされ得るため、
+ * この集計は「下限値（過小評価）」になる。絶対値ではなく相対トレンドとして扱うこと。
+ */
+export function trackAdBlock(blocked: boolean) {
+  if (typeof window === "undefined" || typeof window.gtag !== "function") return;
+  window.gtag("event", "ad_blocked", { blocked: blocked ? 1 : 0 });
+}
+
+/**
+ * 広告枠が埋まらず（ブロック or no-fill）自前ハウス広告に差し替えた時に送る。
+ * reason で「blocked（スクリプト未処理）」と「unfilled（配信なし）」を区別する。
+ */
+export function trackAdFallback(placement: string | undefined, reason: "blocked" | "unfilled") {
+  if (typeof window === "undefined" || typeof window.gtag !== "function") return;
+  window.gtag("event", "ad_fallback", {
+    ...(placement ? { ad_placement: placement } : {}),
+    ad_fallback_reason: reason,
+  });
+}
