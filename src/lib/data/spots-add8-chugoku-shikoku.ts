@@ -850,7 +850,7 @@ export const chugokuShikokuAdd8Spots: FishingSpot[] = [
   },
   {
     id: "sc8045", name: "総社・高梁川中流", slug: "soja-takahashigawa-c8",
-    description: "総社市の高梁川中流域。清流にはアユやヤマメなどの渓流魚が生息する。春から秋にかけての渓流釣りが人気で、美しい渓谷の景色の中で本格的な川釣りが楽しめる。",
+    description: "総社市井手付近を流れる高梁川の中流域。3月〜9月は朝マヅメを中心にヤマメの渓流釣り、4月〜10月は日中のウキ釣りでコイが狙え、渓谷の景色を眺めながら落ち着いて川釣りができる。遊漁は有料のため、料金や対象区間は現地の漁協・釣具店で確認を。河川敷に駐車スペースがあり、JR総社駅から車で約10分と市街地から近いのも便利。トイレや売店はないので事前の準備を忘れずに。",
     latitude: 34.695, longitude: 133.737,
     address: "〒719-1123 岡山県総社市井手",
     accessInfo: "JR総社駅から車で約10分",
@@ -871,7 +871,7 @@ export const chugokuShikokuAdd8Spots: FishingSpot[] = [
     id: "sc8046", name: "呉港・大和ミュージアム前", slug: "kure-yamato-museum-c8",
     description: "呉市中心部の大和ミュージアム前の護岸。足場が良く夜間照明もあるため、ファミリーや初心者に人気。アジやメバルのサビキ・ルアーが定番で、秋のタチウオも好釣果。",
     latitude: 34.241, longitude: 132.562,
-    address: "〒737-0029 岡山県呉市宝町",
+    address: "〒737-0029 広島県呉市宝町",
     accessInfo: "JR呉駅から徒歩約10分",
     region: localRegion("rc8010"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "大和ミュージアム有料駐車場利用",
