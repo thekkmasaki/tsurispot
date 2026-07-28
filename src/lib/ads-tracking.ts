@@ -26,26 +26,52 @@ export function trackAdEvent(params: {
   });
 }
 
+/** 回線種別（4g/3g等）。誤判定の回線層別検算用にイベントへ添付する。未対応ブラウザは undefined。 */
+function effectiveConnectionType(): string | undefined {
+  if (typeof navigator === "undefined") return undefined;
+  const nav = navigator as Navigator & { connection?: { effectiveType?: string } };
+  return nav.connection?.effectiveType;
+}
+
 /**
- * 広告ブロック検知の実測イベント。ページロード毎に1回、ブロックの有無を GA4 へ送る。
- * 割合 = blocked=1 の数 / page_view の数。
+ * 広告ブロック検知の実測イベント。ページロード毎に最大1回、ブロックの有無を GA4 へ送る。
+ * 割合 = blocked=1 の数 / (blocked=0 + blocked=1 の数)。
  *
- * 注意（計測の盲点）: gtag.js 自体も EasyPrivacy 等でブロックされ得るため、
- * この集計は「下限値（過小評価）」になる。絶対値ではなく相対トレンドとして扱うこと。
+ * 判定はスクリプトの load/error イベント駆動（adsense-script-state）で、壁時計の推測をしない。
+ * スクリプト状態が確定する前に離脱したセッションは送信されない（分母にも入らない）ため、
+ * gtag 自体のブロックによる欠測と合わせ、この集計は真に「下限値（過小評価）」である。
  */
 export function trackAdBlock(blocked: boolean) {
   if (typeof window === "undefined" || typeof window.gtag !== "function") return;
-  window.gtag("event", "ad_blocked", { blocked: blocked ? 1 : 0 });
+  window.gtag("event", "ad_blocked", {
+    blocked: blocked ? 1 : 0,
+    ...(effectiveConnectionType() ? { net_effective_type: effectiveConnectionType() } : {}),
+  });
 }
 
 /**
  * 広告枠が埋まらず（ブロック or no-fill）自前ハウス広告に差し替えた時に送る。
- * reason で「blocked（スクリプト未処理）」と「unfilled（配信なし）」を区別する。
+ * reason: blocked＝スクリプト取得失敗（ブロッカー/ネットワーク断の合算）/ unfilled＝AdSense応答が配信なし。
  */
 export function trackAdFallback(placement: string | undefined, reason: "blocked" | "unfilled") {
   if (typeof window === "undefined" || typeof window.gtag !== "function") return;
   window.gtag("event", "ad_fallback", {
     ...(placement ? { ad_placement: placement } : {}),
     ad_fallback_reason: reason,
+    ...(effectiveConnectionType() ? { net_effective_type: effectiveConnectionType() } : {}),
+  });
+}
+
+/**
+ * fallback後に実広告が遅れてfillされ、HouseAdを撤去して復帰した時に送る（自己修復の記録）。
+ * late_fill ÷ ad_fallback がそのまま「fallback誤発火率」になる＝本機能の安全性を直接観測する主指標。
+ * （「AdSense表示回数÷PV」はpushが不変のため本機能の故障を検知できない。監視はこちらを使うこと）
+ */
+export function trackAdFallbackLateFill(placement: string | undefined, delayMs: number) {
+  if (typeof window === "undefined" || typeof window.gtag !== "function") return;
+  window.gtag("event", "ad_fallback_late_fill", {
+    ...(placement ? { ad_placement: placement } : {}),
+    delay_ms: Math.round(delayMs),
+    ...(effectiveConnectionType() ? { net_effective_type: effectiveConnectionType() } : {}),
   });
 }

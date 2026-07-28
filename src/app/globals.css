@@ -221,3 +221,15 @@
   }
 }
 
+/* no-fill(unfilled)広告枠の折りたたみ。
+   AdSense公式挙動ではビューポート内のunfilled枠は「高さを温存して空白表示」になる
+   (https://support.google.com/adsense/answer/10762946)。空白帯を残さないよう公式ヘルプ
+   記載の手法で折りたたむ。fallbackハウス広告(ad-unit.tsx)はこの折りたたみを前提に
+   <ins>の後へ通常フローで描画され、min-h予約内に収まる。
+   注意: data-ad-statusはAdSenseの広告リクエスト応答後にのみ付与されるため、この規則が
+   pushキュー処理を妨げることはない(処理前のinsには属性が無くマッチしない)。
+   smart-mobile-ad.tsxのMutationObserverはinline styleのみを検査するため干渉しない。 */
+ins.adsbygoogle[data-ad-status="unfilled"] {
+  display: none !important;
+}
+
