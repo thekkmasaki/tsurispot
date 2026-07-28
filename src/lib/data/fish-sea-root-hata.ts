@@ -613,7 +613,7 @@ export const seaFishRootHata: FishSpecies[] = [
     scientificName: "Plotosus japonicus",
     slug: "gonzui",
     description:
-      "【注意: 毒棘あり】堤防の夜釣りで頻繁に釣れる危険魚。背ビレと胸ビレの棘に強い毒を持ち、刺されると激痛が走ります。ゴンズイ玉と呼ばれる群れを作るのが特徴。",
+      "【毒棘注意】背ビレ・胸ビレの棘に強い毒を持つ危険魚だが、棘を完全に除去すれば味噌汁や唐揚げで食べられる。堤防の夜釣りで頻繁に釣れ、刺されると激痛が走るため素手で触らないこと。ゴンズイ玉と呼ばれる群れを作るのが特徴。",
     category: "sea",
     family: "ゴンズイ科",
     difficulty: "beginner",

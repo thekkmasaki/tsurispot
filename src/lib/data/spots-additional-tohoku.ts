@@ -728,7 +728,7 @@ export const additionalSpotsTohoku: FishingSpot[] = [
   },
   {
     id: "s200", name: "男鹿・戸賀漁港", slug: "oga-toga",
-    description: "男鹿半島の岩礁帯に囲まれた漁港。メバル・クロダイが豊富で磯釣りも楽しめる。",
+    description: "男鹿半島西部、岩礁帯に囲まれた戸賀湾の漁港。季節ごとの釣り物が豊富で、3月〜6月は朝マヅメのメバリング、5月〜9月はフカセ釣りのクロダイが盛期。11月〜1月は冬の風物詩ハタハタの接岸をサビキで狙えるほか、カサゴ・クロソイ・アイナメと根魚も充実し、一年を通して釣り物が絶えない。4月〜6月はカゴ釣りでマダイの実績もある。7月〜10月のサビキ釣りのアジは初心者でも手軽。無料駐車スペースあり。トイレは無いため事前の準備を。JR男鹿駅から車で約30分。冬季は強風・波浪、磯場は足元に注意。",
     latitude: 39.9425, longitude: 139.7850, address: "〒010-0674 秋田県男鹿市戸賀戸賀",
     accessInfo: "JR男鹿駅から車で約30分。", region: region("r36"),
     spotType: "port", difficulty: "intermediate", isFree: true,
