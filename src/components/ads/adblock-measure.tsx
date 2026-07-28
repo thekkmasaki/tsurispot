@@ -19,8 +19,8 @@ import { trackAdBlock } from "@/lib/ads-tracking";
 export function AdBlockMeasure() {
   useEffect(() => {
     let cancelled = false;
-    detectAdBlock().then((blocked) => {
-      if (!cancelled) trackAdBlock(blocked);
+    detectAdBlock().then((detection) => {
+      if (!cancelled) trackAdBlock(detection);
     });
     return () => {
       cancelled = true;

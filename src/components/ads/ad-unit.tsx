@@ -2,7 +2,13 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Waves } from "lucide-react";
-import { trackAdEvent, trackAdFallback, trackAdFallbackLateFill } from "@/lib/ads-tracking";
+import {
+  trackAdEvent,
+  trackAdFallback,
+  trackAdFallbackLateFill,
+  markAdSlotPending,
+  resolveAdSlotPending,
+} from "@/lib/ads-tracking";
 import { AD_SLOTS } from "@/lib/ads-config";
 import { HouseAd } from "./house-ad";
 import { decideAdSlotOutcome } from "@/lib/ad-fallback-decision";
@@ -27,6 +33,9 @@ const HOUSE_LABEL = "TsuriSpot";
 // AdSense push を許可する広告コンテナの最小幅(px)。
 // 全スロット中の最小明示幅は SideRail の 160px のため、120px で正当な枠を誤ブロックしない。
 const MIN_AD_WIDTH = 120;
+
+// pending滞留観測用のインスタンス採番（ads-tracking の markAdSlotPending のキーに使う）
+let adUnitInstanceSeq = 0;
 
 /** body[data-no-ads="true"] が付与されていれば広告を抑制（有料店舗ページ等） */
 function useAdsSuppressed(): boolean {
@@ -140,7 +149,11 @@ export function AdUnit({
           // 幅ガード解除後の遅延 push でも fallback エンジンが再評価できるよう通知
           evaluateRef.current?.();
         } catch {
-          // AdSense not loaded
+          // push({}) が同期 throw するのは adsbygoogle.js ロード済みで TagError が出るケース
+          // （一時的な幅0等）。ここで true を返すと ResizeObserver が外れて再試行経路が消え、
+          // pushed=false のまま fallback エンジンも永久 pending＝広告も HouseAd も出ない
+          // 死に枠になる（再監査指摘）。false を返して監視を維持し、サイズ変化時に再試行する。
+          return false;
         }
         return true;
       }
@@ -184,6 +197,12 @@ export function AdUnit({
         if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
           if (!timer) {
             timer = setTimeout(() => {
+              // HouseAd(fallback)表示中は実広告が見えていないので ad_viewable を送らない
+              // （視認率の水増し防止。viewed は立てず、実広告復帰後の視認は計測可能なまま残す）
+              if (fellBackAtRef.current != null) {
+                timer = null;
+                return;
+              }
               viewed.current = true;
               trackAdEvent({ placement, slot, event: "ad_viewable" });
               io.disconnect();
@@ -224,6 +243,8 @@ export function AdUnit({
     if (!ins) return;
 
     let disposed = false;
+    // pending滞留観測のキー（push済みで結果未確定のまま離脱した枠数を pagehide で送る）
+    const pendingKey = `${placement ?? "slot"}#${++adUnitInstanceSeq}`;
 
     const notify = (s: "empty" | "filled") => {
       if (notifiedRef.current === s) return;
@@ -238,7 +259,12 @@ export function AdUnit({
         pushed: pushed.current,
         adStatus: ins.getAttribute("data-ad-status"),
       });
-      if (outcome === "pending") return; // 確定情報が来るまで何もしない
+      if (outcome === "pending") {
+        // push済みなのに確定しない枠（広告リクエストのみ遮断される層等）を滞留として記録
+        if (pushed.current) markAdSlotPending(pendingKey);
+        return; // 確定情報が来るまで何もしない
+      }
+      resolveAdSlotPending(pendingKey);
 
       if (outcome === "filled") {
         if (fellBackAtRef.current != null) {
@@ -275,6 +301,8 @@ export function AdUnit({
       mo.disconnect();
       unsubscribe();
       evaluateRef.current = null;
+      // アンマウント枠（SPA遷移等）を滞留として誤計上しない
+      resolveAdSlotPending(pendingKey);
     };
     // 初回マウントで observer/購読を配線し、以後はイベントが駆動する。
     // onStatus は onStatusRef 経由で常に最新を参照する（stale closure 回避）。
@@ -284,7 +312,14 @@ export function AdUnit({
   if (!ADSENSE_ID || suppressed) return null;
 
   return (
-    <div ref={containerRef} className={`ad-container w-full ${className}`}>
+    // data-house-fallback は globals.css の unfilled collapse のスコープ限定に使う。
+    // min-h 予約の無い枠(MobileHeaderBannerAd等)まで折りたたむと、no-fill 時に
+    // ビューポート内で約50pxの上方向シフト(CLS)が新規発生するため、fallback枠に限定する。
+    <div
+      ref={containerRef}
+      className={`ad-container w-full ${className}`}
+      {...(houseFallback ? { "data-house-fallback": "true" } : {})}
+    >
       {/* <ins> は差し替え後も DOM から消さず温存する（push キューへの副作用ゼロ）。
           HouseAd は <ins> の後に通常フローで並ぶが、表示中の空間は重ならない:
           - blocked: スクリプト未処理の <ins> は中身が無く高さ0
@@ -448,6 +483,8 @@ export function MultiplexAd({
 //   - ビネット（ページ間広告）         → ON
 //   - ページ内フォーマット（記事内等）  → OFF（既存の手動枠と二重化＆領域予約なしでCLS悪化するため）
 //   - オーバーレイ アンカー広告         → OFF（下記 MobileStickyAd と二重化するため）
+//   - 空の広告枠の埋め合わせ(Fill empty in-page ads) → OFF維持（ONにすると unfilled が
+//     第3の値 unfill-optimized になり、fallback(HouseAd) と collapse CSS が不発化する）
 // アンカーは手動の MobileStickyAd（領域予約・dismiss付き）で出している。
 // 詳細・手順・ロールバック → ./VIGNETTE-STEP0.md
 

@@ -226,10 +226,13 @@
    (https://support.google.com/adsense/answer/10762946)。空白帯を残さないよう公式ヘルプ
    記載の手法で折りたたむ。fallbackハウス広告(ad-unit.tsx)はこの折りたたみを前提に
    <ins>の後へ通常フローで描画され、min-h予約内に収まる。
+   スコープ限定([data-house-fallback]): min-h予約の無い枠(MobileHeaderBannerAd等)まで
+   折りたたむと、no-fill時にビューポート内で約50pxの上方向シフト(CLS)が新規発生するため、
+   HouseAdが面を埋めるfallback枠に限定する(非fallback枠は公式の空白温存=従来挙動のまま)。
    注意: data-ad-statusはAdSenseの広告リクエスト応答後にのみ付与されるため、この規則が
    pushキュー処理を妨げることはない(処理前のinsには属性が無くマッチしない)。
    smart-mobile-ad.tsxのMutationObserverはinline styleのみを検査するため干渉しない。 */
-ins.adsbygoogle[data-ad-status="unfilled"] {
+.ad-container[data-house-fallback] ins.adsbygoogle[data-ad-status="unfilled"] {
   display: none !important;
 }
 
