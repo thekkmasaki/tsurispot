@@ -2,13 +2,17 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Waves } from "lucide-react";
-import { trackAdEvent, trackAdFallback } from "@/lib/ads-tracking";
+import {
+  trackAdEvent,
+  trackAdFallback,
+  trackAdFallbackLateFill,
+  markAdSlotPending,
+  resolveAdSlotPending,
+} from "@/lib/ads-tracking";
 import { AD_SLOTS } from "@/lib/ads-config";
 import { HouseAd } from "./house-ad";
-
-// AdSense がスロットを処理してから fallback 判定するまでの待機(ms)。
-// 通常のフィルは1〜2秒のため 3.5秒は安全側（誤 fallback を避ける）。
-const FALLBACK_CHECK_MS = 3500;
+import { decideAdSlotOutcome } from "@/lib/ad-fallback-decision";
+import { getAdSenseScriptState, subscribeAdSenseScriptState } from "@/lib/adsense-script-state";
 
 declare global {
   interface Window {
@@ -21,9 +25,17 @@ const ADSENSE_ID = process.env.NEXT_PUBLIC_ADSENSE_ID;
 // 広告ラベル文言（全広告枠で統一。「おすすめ」等の曖昧な表現は誤認を招くため禁止）
 const AD_LABEL = "スポンサー";
 
+// fallback（自前ハウス広告=サイト内誘導）表示中のラベル文言。自社コンテンツに「スポンサー」と
+// 誤ラベルしないための差し替え。ラベル行ごと消すと20-30pxの上方向シフト(CLS)が出るため、
+// 行は維持してテキストだけ替える（行高は同一）。
+const HOUSE_LABEL = "TsuriSpot";
+
 // AdSense push を許可する広告コンテナの最小幅(px)。
 // 全スロット中の最小明示幅は SideRail の 160px のため、120px で正当な枠を誤ブロックしない。
 const MIN_AD_WIDTH = 120;
+
+// pending滞留観測用のインスタンス採番（ads-tracking の markAdSlotPending のキーに使う）
+let adUnitInstanceSeq = 0;
 
 /** body[data-no-ads="true"] が付与されていれば広告を抑制（有料店舗ページ等） */
 function useAdsSuppressed(): boolean {
@@ -93,8 +105,19 @@ export function AdUnit({
   const pushed = useRef(false);
   const viewed = useRef(false);
   const suppressed = useAdsSuppressed();
-  // ブロック/no-fill で埋まらず自前ハウス広告に差し替えた状態
+  // ブロック/no-fill で埋まらず自前ハウス広告に差し替えた状態（実広告の遅延fillで自動復帰する）
   const [fellBack, setFellBack] = useState(false);
+  // fallback 実行時刻（誤発火の自己修復計測用）。null = fallback していない
+  const fellBackAtRef = useRef<number | null>(null);
+  // onStatus の重複通知防止（empty→empty 等の連打を抑止）
+  const notifiedRef = useRef<"empty" | "filled" | null>(null);
+  // 最新の onStatus を参照するための ref（fallback effect は初回マウントで配線するため）
+  const onStatusRef = useRef(onStatus);
+  useEffect(() => {
+    onStatusRef.current = onStatus;
+  }, [onStatus]);
+  // push 完了（幅ガード解除後の遅延 push 含む）を fallback エンジンに伝えるフック
+  const evaluateRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     if (!ADSENSE_ID || pushed.current || suppressed) return;
@@ -120,10 +143,17 @@ export function AdUnit({
           (window.adsbygoogle = window.adsbygoogle || []).push({});
           pushed.current = true;
           // 広告リクエストが出た＝impression として placement 別に計測。
-          // （フィルされない場合もあるが placement 間の相対比較には有効）
+          // （フィルされない場合もあるが placement 間の相対比較には有効。
+          //   スクリプト未ロード時は配列に queue されるだけでも成功扱い＝描画確認ではない点に注意）
           if (placement) trackAdEvent({ placement, slot, event: "ad_impression" });
+          // 幅ガード解除後の遅延 push でも fallback エンジンが再評価できるよう通知
+          evaluateRef.current?.();
         } catch {
-          // AdSense not loaded
+          // push({}) が同期 throw するのは adsbygoogle.js ロード済みで TagError が出るケース
+          // （一時的な幅0等）。ここで true を返すと ResizeObserver が外れて再試行経路が消え、
+          // pushed=false のまま fallback エンジンも永久 pending＝広告も HouseAd も出ない
+          // 死に枠になる（再監査指摘）。false を返して監視を維持し、サイズ変化時に再試行する。
+          return false;
         }
         return true;
       }
@@ -167,6 +197,12 @@ export function AdUnit({
         if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
           if (!timer) {
             timer = setTimeout(() => {
+              // HouseAd(fallback)表示中は実広告が見えていないので ad_viewable を送らない
+              // （視認率の水増し防止。viewed は立てず、実広告復帰後の視認は計測可能なまま残す）
+              if (fellBackAtRef.current != null) {
+                timer = null;
+                return;
+              }
               viewed.current = true;
               trackAdEvent({ placement, slot, event: "ad_viewable" });
               io.disconnect();
@@ -187,43 +223,109 @@ export function AdUnit({
     };
   }, [placement, slot, suppressed]);
 
-  // fallback 判定: push 後一定時間で <ins> の状態を「観測するだけ」（push 系には一切触れない）。
-  //  - data-adsbygoogle-status が付かない → スクリプト未処理＝広告ブロック
-  //  - data-ad-status === "unfilled"     → 配信なし（no-fill）
-  // いずれも空き枠なので自前ハウス広告に差し替える。実広告がフィル済みなら何もしない。
+  // fallback エンジン: イベント駆動で <ins> の状態を「観測するだけ」（push 系には一切触れない）。
+  // 壁時計での締切判定はしない。adsbygoogle.js は lazyOnload（window load 後+idle）でしか
+  // 読み込まれないため、時間ベースの判定は遅い回線の正常ユーザーを大量に誤 fallback させる
+  // （PR#295 監査 F1）。判定材料と発火タイミング:
+  //  - スクリプト状態（adsense-script-state）: onError='blocked' が確定した時のみ blocked 扱い
+  //  - <ins> の data-ad-status: AdSense 応答後に filled/unfilled が付与される（MutationObserver で監視）
+  //  - 幅ガード保留中（未 push）の枠は評価しない（push 成功時に evaluateRef 経由で再評価）
+  // 判定ロジック本体は decideAdSlotOutcome（pure 関数・ユニットテスト済み）。
+  //
+  // 可逆性（監査 F2 対策の核）: fallback 後も監視を続け、実広告が遅れて fill されたら
+  // HouseAd を撤去してラベルを復帰し、ad_fallback_late_fill を送信する。
+  // late_fill ÷ ad_fallback = 誤発火率で、本機能の安全性を直接観測できる。
   useEffect(() => {
     if (!ADSENSE_ID || suppressed || !houseFallback) return;
-    const timer = setTimeout(() => {
-      const el = containerRef.current;
-      if (!el) return;
-      // 非表示(親が display:none 等)の枠は判定・差し替え・計測を行わない（誤発火防止）
-      if (el.offsetParent === null) return;
-      const ins = el.querySelector("ins.adsbygoogle");
-      const processed = ins?.getAttribute("data-adsbygoogle-status");
-      const adStatus = ins?.getAttribute("data-ad-status");
-      let reason: "blocked" | "unfilled" | null = null;
-      if (processed == null) reason = "blocked";
-      else if (adStatus === "unfilled") reason = "unfilled";
+    const el = containerRef.current;
+    if (!el) return;
+    const ins = el.querySelector("ins.adsbygoogle");
+    if (!ins) return;
 
-      if (reason) {
-        setFellBack(true);
-        trackAdFallback(placement, reason);
-        onStatus?.("empty");
-      } else {
-        onStatus?.("filled");
+    let disposed = false;
+    // pending滞留観測のキー（push済みで結果未確定のまま離脱した枠数を pagehide で送る）
+    const pendingKey = `${placement ?? "slot"}#${++adUnitInstanceSeq}`;
+
+    const notify = (s: "empty" | "filled") => {
+      if (notifiedRef.current === s) return;
+      notifiedRef.current = s;
+      onStatusRef.current?.(s);
+    };
+
+    const evaluate = () => {
+      if (disposed) return;
+      const outcome = decideAdSlotOutcome({
+        scriptState: getAdSenseScriptState(),
+        pushed: pushed.current,
+        adStatus: ins.getAttribute("data-ad-status"),
+      });
+      if (outcome === "pending") {
+        // push済みなのに確定しない枠（広告リクエストのみ遮断される層等）を滞留として記録
+        if (pushed.current) markAdSlotPending(pendingKey);
+        return; // 確定情報が来るまで何もしない
       }
-    }, FALLBACK_CHECK_MS);
-    return () => clearTimeout(timer);
-    // 初回マウント時に1回だけ判定する設計のため依存配列は固定
+      resolveAdSlotPending(pendingKey);
+
+      if (outcome === "filled") {
+        if (fellBackAtRef.current != null) {
+          // 誤 fallback の自己修復: HouseAd を撤去してラベル復帰、誤発火率テレメトリを送信
+          trackAdFallbackLateFill(placement, Date.now() - fellBackAtRef.current);
+          fellBackAtRef.current = null;
+          setFellBack(false);
+        }
+        notify("filled");
+        return;
+      }
+
+      // blocked / unfilled → 空き枠なので自前ハウス広告に差し替え（初回のみ）
+      if (fellBackAtRef.current == null) {
+        fellBackAtRef.current = Date.now();
+        setFellBack(true);
+        trackAdFallback(placement, outcome);
+        notify("empty");
+      }
+    };
+
+    // AdSense が <ins> に付与する属性（処理・fill 結果）の変化を監視
+    const mo = new MutationObserver(evaluate);
+    mo.observe(ins, { attributes: true, attributeFilter: ["data-ad-status", "data-adsbygoogle-status"] });
+    // スクリプト状態の遷移（loaded/blocked）を購読
+    const unsubscribe = subscribeAdSenseScriptState(evaluate);
+    // 遅延 push（幅ガード解除）時の再評価フック
+    evaluateRef.current = evaluate;
+    // SPA 遷移後などスクリプト状態が既に確定済みのケースに備え、現時点の状態で一度評価
+    evaluate();
+
+    return () => {
+      disposed = true;
+      mo.disconnect();
+      unsubscribe();
+      evaluateRef.current = null;
+      // アンマウント枠（SPA遷移等）を滞留として誤計上しない
+      resolveAdSlotPending(pendingKey);
+    };
+    // 初回マウントで observer/購読を配線し、以後はイベントが駆動する。
+    // onStatus は onStatusRef 経由で常に最新を参照する（stale closure 回避）。
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!ADSENSE_ID || suppressed) return null;
 
   return (
-    <div ref={containerRef} className={`ad-container w-full ${className}`}>
+    // data-house-fallback は globals.css の unfilled collapse のスコープ限定に使う。
+    // min-h 予約の無い枠(MobileHeaderBannerAd等)まで折りたたむと、no-fill 時に
+    // ビューポート内で約50pxの上方向シフト(CLS)が新規発生するため、fallback枠に限定する。
+    <div
+      ref={containerRef}
+      className={`ad-container w-full ${className}`}
+      {...(houseFallback ? { "data-house-fallback": "true" } : {})}
+    >
       {/* <ins> は差し替え後も DOM から消さず温存する（push キューへの副作用ゼロ）。
-          ブロック/no-fill 時は高さ0に潰れるため、上に重ねる HouseAd がそのまま面を埋める。 */}
+          HouseAd は <ins> の後に通常フローで並ぶが、表示中の空間は重ならない:
+          - blocked: スクリプト未処理の <ins> は中身が無く高さ0
+          - unfilled: ビューポート内では公式挙動で枠の空白が温存されるため、
+            globals.css の ins.adsbygoogle[data-ad-status="unfilled"] { display:none } で折りたたむ
+          実広告が遅れて fill された場合は fallback エンジンが HouseAd を撤去する（併存しない）。 */}
       <ins
         className="adsbygoogle"
         style={style || { display: "block", width: "100%" }}
@@ -252,11 +354,14 @@ function AdWrapper({
   children,
   className = "",
   label = true,
+  labelText = AD_LABEL,
   variant = "default",
 }: {
   children: React.ReactNode;
   className?: string;
   label?: boolean;
+  /** ラベル行のテキスト。fallback時は HOUSE_LABEL に差し替える（行は消さない=シフト0） */
+  labelText?: string;
   variant?: AdVariant;
 }) {
   if (!ADSENSE_ID) return null;
@@ -265,7 +370,7 @@ function AdWrapper({
       {label && (
         <div className="mb-2 flex items-center justify-center gap-3">
           <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
-          <span className="text-[11px] font-medium tracking-widest text-muted-foreground">{AD_LABEL}</span>
+          <span className="text-[11px] font-medium tracking-widest text-muted-foreground">{labelText}</span>
           <div className="h-px flex-1 bg-gradient-to-l from-transparent via-border to-transparent" />
         </div>
       )}
@@ -276,10 +381,11 @@ function AdWrapper({
 
 // ---- 記事内広告（コンテンツのセクション間） ----
 export function InArticleAd({ className = "" }: { className?: string }) {
-  // ブロック/no-fill 時は自前ハウス広告に差し替え、その間は「スポンサー」ラベルを抑制する。
+  // ブロック/no-fill 時は自前ハウス広告に差し替え、ラベルは「スポンサー」→「TsuriSpot」に
+  // テキストのみ差し替える（行は維持=シフト0）。実広告が遅延fillされたら自動で復帰する。
   const [empty, setEmpty] = useState(false);
   return (
-    <AdWrapper className={`my-8 ${className}`} label={!empty}>
+    <AdWrapper className={`my-8 ${className}`} labelText={empty ? HOUSE_LABEL : AD_LABEL}>
       {/* CLS対策: lazyOnloadで遅延挿入される広告が下のコンテンツを押し下げないよう
           最小高さを予約する（SidebarAd/DisplayAd と同じ250px基準）。 */}
       <AdUnit
@@ -300,7 +406,7 @@ export function InArticleAd({ className = "" }: { className?: string }) {
 export function DisplayAd({ className = "" }: { className?: string }) {
   const [empty, setEmpty] = useState(false);
   return (
-    <AdWrapper className={`my-6 ${className}`} label={!empty}>
+    <AdWrapper className={`my-6 ${className}`} labelText={empty ? HOUSE_LABEL : AD_LABEL}>
       {/* CLS対策: 遅延挿入される広告が下を押し下げないよう最小高さを予約 */}
       <AdUnit
         slot={AD_SLOTS.display}
@@ -323,16 +429,14 @@ export function NativeAdBreak({ className = "" }: { className?: string }) {
   // fit-content 幅に収縮して広告が配信されなくなるため明示する
   return (
     <div className={`mx-auto w-full max-w-4xl px-4 py-10 ${className}`}>
-      {/* ブロック/no-fill でハウス広告に差し替わった時は「スポンサー」ラベルを出さない */}
-      {!empty && (
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-ocean-mid/20 to-transparent" />
-          <Waves className="size-4 text-ocean-mid/30" />
-          <span className="text-[11px] font-medium tracking-widest text-muted-foreground">{AD_LABEL}</span>
-          <Waves className="size-4 text-ocean-mid/30" />
-          <div className="h-px flex-1 bg-gradient-to-l from-transparent via-ocean-mid/20 to-transparent" />
-        </div>
-      )}
+      {/* fallback時はテキストのみ「TsuriSpot」に差し替え（行は消さない=シフト0） */}
+      <div className="flex items-center justify-center gap-3 mb-4">
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-ocean-mid/20 to-transparent" />
+        <Waves className="size-4 text-ocean-mid/30" />
+        <span className="text-[11px] font-medium tracking-widest text-muted-foreground">{empty ? HOUSE_LABEL : AD_LABEL}</span>
+        <Waves className="size-4 text-ocean-mid/30" />
+        <div className="h-px flex-1 bg-gradient-to-l from-transparent via-ocean-mid/20 to-transparent" />
+      </div>
       <div className="rounded-2xl border border-border/50 bg-card/60 p-3 sm:p-5 shadow-sm shadow-ocean-deep/[0.03]">
         {/* CLS対策: fluid広告の後挿入による押し下げを防ぐため最小高さを予約 */}
         <AdUnit
@@ -379,6 +483,8 @@ export function MultiplexAd({
 //   - ビネット（ページ間広告）         → ON
 //   - ページ内フォーマット（記事内等）  → OFF（既存の手動枠と二重化＆領域予約なしでCLS悪化するため）
 //   - オーバーレイ アンカー広告         → OFF（下記 MobileStickyAd と二重化するため）
+//   - 空の広告枠の埋め合わせ(Fill empty in-page ads) → OFF維持（ONにすると unfilled が
+//     第3の値 unfill-optimized になり、fallback(HouseAd) と collapse CSS が不発化する）
 // アンカーは手動の MobileStickyAd（領域予約・dismiss付き）で出している。
 // 詳細・手順・ロールバック → ./VIGNETTE-STEP0.md
 
@@ -389,13 +495,12 @@ export function PreFooterAd() {
   if (!ADSENSE_ID) return null;
   return (
     <div className="mx-auto max-w-5xl px-4 py-8">
-      {!empty && (
-        <div className="flex items-center justify-center gap-3 mb-3">
-          <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
-          <span className="text-[11px] font-medium tracking-widest text-muted-foreground uppercase">{AD_LABEL}</span>
-          <div className="h-px flex-1 bg-gradient-to-l from-transparent via-border to-transparent" />
-        </div>
-      )}
+      {/* fallback時はテキストのみ「TsuriSpot」に差し替え（行は消さない=シフト0） */}
+      <div className="flex items-center justify-center gap-3 mb-3">
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-transparent" />
+        <span className="text-[11px] font-medium tracking-widest text-muted-foreground uppercase">{empty ? HOUSE_LABEL : AD_LABEL}</span>
+        <div className="h-px flex-1 bg-gradient-to-l from-transparent via-border to-transparent" />
+      </div>
       <div className="rounded-2xl border border-border/50 bg-card/60 p-4 sm:p-6 shadow-sm shadow-ocean-deep/[0.03]" style={{ minWidth: "300px" }}>
         <MultiplexAd placement="pre_footer" onStatus={(s) => setEmpty(s === "empty")} />
       </div>

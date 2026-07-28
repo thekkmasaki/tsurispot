@@ -1,7 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { MapPin, Fish, Trophy, CalendarDays, Camera } from "lucide-react";
+import { MapPin, Fish, Trophy, CalendarDays, BookOpen } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
 /**
@@ -12,7 +13,7 @@ import type { LucideIcon } from "lucide-react";
  * 主要導線のみ（クライアントに spot データをバンドルしないため static 定義）。
  *
  * これは「スポンサー」ではなく自社コンテンツなので、呼び出し側は fallback 時に
- * 「スポンサー」ラベルを抑制すること（誤ラベル防止）。
+ * ラベルを HOUSE_LABEL（"TsuriSpot"）に差し替えること（誤ラベル防止）。
  */
 
 interface HousePromo {
@@ -28,16 +29,14 @@ const PROMOS: HousePromo[] = [
   { href: "/ranking", title: "人気ランキング", desc: "いま注目の釣り場をチェック", icon: Trophy },
   { href: "/fish", title: "魚種図鑑", desc: "狙える魚の釣り方・旬を調べる", icon: Fish },
   { href: "/monthly", title: "今月の釣りガイド", desc: "季節ごとの釣れる魚と釣り方", icon: CalendarDays },
-  { href: "/login", title: "釣果を記録・共有", desc: "無料登録でお気に入り保存や釣果報告", icon: Camera },
+  { href: "/blog", title: "釣りコラム", desc: "季節の釣りネタ・ハウツーを読む", icon: BookOpen },
 ];
 
-/** placement 文字列から決定的にオフセットを作り、枠ごとに違うカードを見せる */
-function offsetFor(placement?: string): number {
-  if (!placement) return 0;
-  let h = 0;
-  for (let i = 0; i < placement.length; i++) h = (h * 31 + placement.charCodeAt(i)) >>> 0;
-  return h % PROMOS.length;
-}
+// ページ内のマウント順カウンタ。同一ページに複数の fallback 枠が出ても
+// 同じカードペアが並ばないよう、インスタンス毎に異なるオフセットを割り当てる
+// （旧実装は placement 文字列ハッシュのみで、in_feed×4 等が全て同一ペアになっていた）。
+// HouseAd は fallback 時のみ client で描画されるため hydration 不一致の懸念はない。
+let houseAdSeq = 0;
 
 export function HouseAd({
   placement,
@@ -49,13 +48,19 @@ export function HouseAd({
   count?: number;
   className?: string;
 }) {
-  const start = offsetFor(placement);
-  const items = Array.from({ length: Math.min(count, PROMOS.length) }, (_, i) => PROMOS[(start + i) % PROMOS.length]);
+  // マウント毎に1回だけ採番（再レンダーでは変えない）
+  const [seq] = useState(() => houseAdSeq++);
+  const start = (seq * count) % PROMOS.length;
+  const items = Array.from(
+    { length: Math.min(count, PROMOS.length) },
+    (_, i) => PROMOS[(start + i) % PROMOS.length]
+  );
 
   return (
     <div
       className={`flex h-full min-h-[250px] w-full flex-col justify-center p-1 ${className}`}
       aria-label="TsuriSpot のおすすめ"
+      data-house-ad={placement || "unknown"}
     >
       <div className="mb-3 flex items-center gap-2">
         <span className="text-sm font-bold text-primary">TsuriSpot</span>
