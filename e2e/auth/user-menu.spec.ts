@@ -55,7 +55,7 @@ test.describe("ユーザーメニュー - キーボード操作", () => {
 });
 
 test.describe("ログインページからの導線", () => {
-  test("トップページ → ログインアイコン → ログインページ → Google/Apple ボタン", async ({
+  test("トップページ → ログインアイコン → ログインページ → Google ボタン", async ({
     page,
   }) => {
     await page.goto("/");
@@ -68,11 +68,8 @@ test.describe("ログインページからの導線", () => {
     await expect(page).toHaveURL("/login");
 
     const googleButton = page.getByRole("button", { name: /Googleでログイン/ });
-    const appleButton = page.getByRole("button", { name: /Appleでサインイン/ });
     await expect(googleButton).toBeVisible();
     await expect(googleButton).toBeEnabled();
-    await expect(appleButton).toBeVisible();
-    await expect(appleButton).toBeEnabled();
   });
 
   test("スポット詳細ページからもログインへ遷移できる", async ({ page }) => {
