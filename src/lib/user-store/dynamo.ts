@@ -70,8 +70,11 @@ export async function getUserByProvider(
   return getUserById(userId);
 }
 
-/** SETNX 相当: provider mapping を取れた時だけ user データを書く。会員数カウンタも加算。 */
-export async function createUser(user: TsuriSpotUser): Promise<void> {
+/**
+ * SETNX 相当: provider mapping を取れた時だけ user データを書く。会員数カウンタも加算。
+ * 競合敗北時は勝者のレコードを返す（auth-redis.ts の createUser と同一セマンティクス）。
+ */
+export async function createUser(user: TsuriSpotUser): Promise<TsuriSpotUser> {
   const acquired = await dbConditionalPut(
     providerPk(user.provider, user.providerId),
     "MAP",
@@ -80,7 +83,19 @@ export async function createUser(user: TsuriSpotUser): Promise<void> {
   if (acquired) {
     await dbPut(userPk(user.id), PROFILE, user);
     await dbIncr(STATS_PK, USER_COUNT_SK);
+    return user;
   }
+  const winner = await getUserByProvider(user.provider, user.providerId);
+  if (winner) return winner;
+  // mapping はあるのに本体が無い異常状態 → mapping の userId で自己修復（カウンタは加算済みなので触らない）
+  const mappedId = await dbGet<string>(
+    providerPk(user.provider, user.providerId),
+    "MAP",
+  );
+  const repairId = mappedId ?? user.id;
+  const repaired = { ...user, id: repairId };
+  await dbPut(userPk(repairId), PROFILE, repaired);
+  return repaired;
 }
 
 export async function updateNickname(

@@ -145,10 +145,8 @@ const config: NextAuthConfig = {
               upstreamProvider: upstream,
               createdAt: new Date().toISOString(),
             };
-            await createUser(newUser);
-            // createUser は SETNX で原子化済み (auth-redis.ts:88)。
-            // newUser をそのまま使うことで Redis ラウンドトリップ -1 (50-150ms 削減)。
-            user = newUser;
+            // createUser は SETNX で原子化済み。競合敗北時は勝者のレコードが返る。
+            user = await createUser(newUser);
           } else if (picture && user.avatarUrl !== picture) {
             await updateAvatarUrl(user.id, picture);
             user.avatarUrl = picture;

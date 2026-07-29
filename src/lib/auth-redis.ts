@@ -113,13 +113,24 @@ export async function getUserById(
 /**
  * 新規ユーザー作成。SETNX で provider mapping を取得できた時だけ user データを書く。
  * 並行する2リクエストが同じ providerId で createUser を呼んでも、片方しか作成されない。
+ * 戻り値は「実際に有効なユーザー」— SETNX 敗北時は勝者のレコードを返す（敗者の引数を
+ * そのまま使うと、存在しない tsuriId で JWT が発行される）。
  */
-export async function createUser(user: TsuriSpotUser): Promise<void> {
+export async function createUser(user: TsuriSpotUser): Promise<TsuriSpotUser> {
   const providerKey = `${PROVIDER_PREFIX}${user.provider}:${user.providerId}`;
   const acquired = await redis.set(providerKey, user.id, { nx: true });
   if (acquired) {
     await redis.set(`${USER_PREFIX}${user.id}`, user);
+    return user;
   }
+  const winner = await getUserByProvider(user.provider, user.providerId);
+  if (winner) return winner;
+  // mapping はあるのに本体が無い異常状態（過去の部分書込等）→ mapping の userId で自己修復
+  const mappedId = await redis.get(providerKey);
+  const repairId = typeof mappedId === "string" ? mappedId : user.id;
+  const repaired = { ...user, id: repairId };
+  await redis.set(`${USER_PREFIX}${repairId}`, repaired);
+  return repaired;
 }
 
 /** ニックネーム更新 */
