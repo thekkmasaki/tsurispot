@@ -87,7 +87,10 @@ export async function createUser(user: TsuriSpotUser): Promise<TsuriSpotUser> {
   }
   const winner = await getUserByProvider(user.provider, user.providerId);
   if (winner) return winner;
-  // mapping はあるのに本体が無い異常状態 → mapping の userId で自己修復（カウンタは加算済みなので触らない）
+  // mapping はあるのに本体が無い異常状態 → mapping の userId で自己修復。
+  // USER_COUNT は並行競合の敗者ケースなら勝者が加算済み。自己の部分書込失敗（dbPut/dbIncr
+  // 途中 throw → リトライでここに入る）からの修復では未加算のまま残るが、表示に未使用の
+  // 統計カウンタなのでドリフトを許容する。
   const mappedId = await dbGet<string>(
     providerPk(user.provider, user.providerId),
     "MAP",

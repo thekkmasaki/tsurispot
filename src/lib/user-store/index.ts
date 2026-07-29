@@ -56,7 +56,26 @@ export const getCheckins = read.getCheckins;
 export const getPushSubscriptions = read.getPushSubscriptions;
 
 // ---- 書き込み（dual は Redis/DynamoDB 両方へ）----
-export const createUser = w(redis.createUser, dynamo.createUser);
+// createUser は戻り値が「実際に有効なユーザー（競合敗北時は勝者）」契約のため、dual 時に
+// redis/dynamo で SETNX の勝者が食い違い tsuriId が乖離し得る。redis（移行元の正）を返し
+// つつ、不一致は検知できるようログに残す（dynamo cutover 直前の最終バックフィルで是正）。
+export const createUser: typeof redis.createUser = async (user) => {
+  if (MODE === "redis") return redis.createUser(user);
+  if (MODE === "dynamo") return dynamo.createUser(user);
+  const [r, d] = await Promise.all([
+    redis.createUser(user),
+    dynamo.createUser(user),
+  ]);
+  if (r.id !== d.id) {
+    console.error("[user-store] dual createUser id mismatch", {
+      provider: user.provider,
+      providerId: user.providerId,
+      redisId: r.id,
+      dynamoId: d.id,
+    });
+  }
+  return r;
+};
 export const updateNickname = w(redis.updateNickname, dynamo.updateNickname);
 export const updateProfile = w(redis.updateProfile, dynamo.updateProfile);
 export const updateAvatarUrl = w(redis.updateAvatarUrl, dynamo.updateAvatarUrl);

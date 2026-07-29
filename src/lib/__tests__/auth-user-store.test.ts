@@ -30,10 +30,20 @@ const winner: TsuriSpotUser = {
 describe("createUser の SETNX 競合セマンティクス", () => {
   beforeEach(() => vi.clearAllMocks());
 
+  // SETNX 契約: provider mapping キーに対し {nx:true} で id を書く。この呼び出し形が
+  // 原子性の本体なので、全ケースで引数ごとアサートする（戻り値駆動だけだと nx 外しや
+  // キー破壊の退行を検出できない）。
+  const SETNX_ARGS = [
+    "auth:provider:cognito:Google_123",
+    "loser-uuid",
+    { nx: true },
+  ] as const;
+
   it("SETNX 取得成功時は本体を書き込み引数の user を返す", async () => {
     vi.mocked(redis.set).mockResolvedValue("OK");
     const result = await createUser(loser);
     expect(result).toEqual(loser);
+    expect(redis.set).toHaveBeenNthCalledWith(1, ...SETNX_ARGS);
     expect(redis.set).toHaveBeenCalledWith("auth:user:loser-uuid", loser);
   });
 
@@ -46,8 +56,14 @@ describe("createUser の SETNX 競合セマンティクス", () => {
       .mockResolvedValueOnce(winner);
     const result = await createUser(loser);
     expect(result).toEqual(winner);
-    // 敗者の本体レコードは書き込まれない
+    // SETNX のみ呼ばれ、敗者の本体レコードは書き込まれない
+    expect(redis.set).toHaveBeenNthCalledWith(1, ...SETNX_ARGS);
     expect(redis.set).toHaveBeenCalledTimes(1);
+    expect(redis.get).toHaveBeenNthCalledWith(
+      1,
+      "auth:provider:cognito:Google_123",
+    );
+    expect(redis.get).toHaveBeenNthCalledWith(2, "auth:user:winner-uuid");
   });
 
   it("SETNX 敗北かつ本体欠損時は mapping の userId で自己修復する", async () => {
@@ -60,6 +76,11 @@ describe("createUser の SETNX 競合セマンティクス", () => {
       .mockResolvedValueOnce("orphan-uuid");
     const result = await createUser(loser);
     expect(result.id).toBe("orphan-uuid");
+    expect(redis.set).toHaveBeenNthCalledWith(1, ...SETNX_ARGS);
+    expect(redis.get).toHaveBeenNthCalledWith(
+      3,
+      "auth:provider:cognito:Google_123",
+    );
     expect(redis.set).toHaveBeenLastCalledWith("auth:user:orphan-uuid", {
       ...loser,
       id: "orphan-uuid",

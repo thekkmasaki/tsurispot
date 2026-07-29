@@ -76,8 +76,10 @@ export function middleware(req: NextRequest) {
   // www.tsurispot.com は DNS/Cloudflare 経由で同一オリジンに到達し全ページを 200 で
   // ミラー配信していた（canonical で救済されるが、GSC「代替ページ（適切な canonical タグあり）」
   // に積まれ続け、クロールとリンク評価も分散する）。ここで恒久的に apex へ集約する。
-  // 301 だと POST が GET に落ち、www 経由のログイン POST（/api/auth/signin）の body が
-  // 消失する。308 は permanent のまま method/body を保持する（SEO 上は 301 と等価）。
+  // 301 だと POST が GET に落ち body が消失するため、method/body を保持する 308 を使う
+  // (SEO 上は 301 と等価な permanent)。なお Auth.js の CSRF cookie は __Host- プレフィックス
+  // (ホスト限定)のため、www 発のログイン POST は 308 追従後も CSRF 検証で失敗する。
+  // 実効果は「GET が確実に apex に着地する」永続集約であり、本変更は防御的措置。
   const host = req.headers.get("host") || "";
   if (host === "www.tsurispot.com" || host.startsWith("www.tsurispot.com:")) {
     const url = req.nextUrl.clone();
