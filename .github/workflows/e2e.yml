@@ -7,8 +7,12 @@
 name: E2E
 
 on:
-  schedule:
-    - cron: '0 18 * * *' # JST 3:00（UTC 18:00）毎日
+  # nightly は一時無効。PR #311 の初回実走で、既存 E2E が CI の next dev
+  # コールドコンパイルに未適合と判明（検索オーバーレイ Ctrl+K 等が5s timeout）。
+  # 毎晩赤い「信用できないチェック」を避けるため、テスト安定化までは手動 + ラベルのみ。
+  # 安定化後に下記を復活させる。
+  # schedule:
+  #   - cron: '0 18 * * *' # JST 3:00（UTC 18:00）毎日
   workflow_dispatch: {}
   pull_request:
     types: [labeled]
