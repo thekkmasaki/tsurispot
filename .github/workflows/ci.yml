@@ -1,0 +1,49 @@
+# feature/* ブランチ用の軽量CI。
+# master 到達前の自動検証が存在しなかった穴を塞ぐ（deploy.yml は master と
+# refactor/split-large-files のみ発火のため、それ以外の全ブランチを担当）。
+# トリガーは push のみ: solo開発では pull_request 併用は同一SHAの二重実行に
+# なるだけで、push のチェック結果はそのまま PR 画面と required check に使える。
+name: CI
+
+on:
+  push:
+    branches-ignore:
+      - master
+      - refactor/split-large-files
+    paths-ignore:
+      - '**/*.md'
+      - 'docs/**'
+      - '.company/**'
+      - 'memory/**'
+
+# 連続 WIP push では最新 push だけ検証すれば十分なので古い run を打ち切る
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 依存インストール
+        run: npm ci
+
+      - name: 型チェック
+        run: npx tsc --noEmit
+
+      - name: Lint
+        run: npx eslint src/
+
+      - name: 単体テスト
+        run: npm run test:run
