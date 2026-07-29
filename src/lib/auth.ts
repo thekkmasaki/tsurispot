@@ -102,6 +102,16 @@ const config: NextAuthConfig = {
       clientId: process.env.COGNITO_CLIENT_ID,
       clientSecret: process.env.COGNITO_CLIENT_SECRET,
       issuer: process.env.COGNITO_ISSUER,
+      // Cognito は federated(Google) 経由だと、こちらが nonce を送っていなくても ID Token に
+      // nonce claim を入れて返すことがあり、oauth4webapi の OIDC 検証で
+      // `unexpected ID Token "nonce" claim value` → CallbackRouteError になる
+      // (本番 2026-07-26/27 に実発生。next-auth Discussion #3551 の既知事象)。
+      // 自ら nonce を送れば Cognito はその値を echo する(authorize エンドポイント仕様)ため
+      // 検証が常に整合する。pkce は既定値なので明示して維持。
+      // 注: nonce を送ると ID Token の nonce は必須クレームになる(欠落は従来素通り→今後は
+      // hard fail)。Cognito の echo 仕様(OIDC Core 準拠)に依存するが、万一問題が出たら
+      // この checks 1行を revert すれば即戻せる(env 変更不要)。
+      checks: ["pkce", "nonce"],
       ...cognitoEndpointOverrides,
     }),
   ],
@@ -131,7 +141,12 @@ const config: NextAuthConfig = {
           undefined;
         const picture = cognitoProfile?.picture;
 
-        try {
+        // ストア操作一式。障害時は 1 回だけリトライし、それでも失敗なら throw する。
+        // 以前はここで握り潰していたため、Redis 障害時に tsuriId 無しの JWT が発行され
+        // 「ログイン成功に見えるのに未ログイン表示」になっていた。throw すれば Auth.js が
+        // CallbackRouteError としてログし、?error=Configuration で /login のバナー+
+        // クライアント自動リトライに乗る（ユーザーに見えるエラーと再試行導線になる）。
+        const resolveUser = async () => {
           let user = await getUserByProvider(provider, providerId);
 
           if (!user) {
@@ -145,25 +160,40 @@ const config: NextAuthConfig = {
               upstreamProvider: upstream,
               createdAt: new Date().toISOString(),
             };
-            await createUser(newUser);
-            // createUser は SETNX で原子化済み (auth-redis.ts:88)。
-            // newUser をそのまま使うことで Redis ラウンドトリップ -1 (50-150ms 削減)。
-            user = newUser;
+            // createUser は SETNX で原子化済み。競合敗北時は勝者のレコードが返る。
+            user = await createUser(newUser);
           } else if (picture && user.avatarUrl !== picture) {
-            await updateAvatarUrl(user.id, picture);
-            user.avatarUrl = picture;
+            // アバター更新は装飾的な書き込み。ユーザー識別(getUserByProvider/createUser)は
+            // 成功しているのに、この失敗までログイン失敗(throw)へ昇格させない。
+            try {
+              await updateAvatarUrl(user.id, picture);
+              user.avatarUrl = picture;
+            } catch (err) {
+              console.error(
+                "[auth] updateAvatarUrl failed (best-effort, login continues):",
+                err,
+              );
+            }
           }
+          return user;
+        };
 
-          token.tsuriId = user.id;
-          token.nickname = user.nickname;
-          token.avatarUrl = user.avatarUrl;
-          token.provider = user.provider;
-          token.upstreamProvider = user.upstreamProvider;
-          token.isNewUser = !user.nicknameSetAt;
-          token.reportCount = user.reportCount ?? 0;
+        let user;
+        try {
+          user = await resolveUser();
         } catch (err) {
-          console.error("[auth] jwt callback error (login):", err);
+          console.error("[auth] jwt callback store error (login), retrying:", err);
+          await new Promise((resolve) => setTimeout(resolve, 200));
+          user = await resolveUser();
         }
+
+        token.tsuriId = user.id;
+        token.nickname = user.nickname;
+        token.avatarUrl = user.avatarUrl;
+        token.provider = user.provider;
+        token.upstreamProvider = user.upstreamProvider;
+        token.isNewUser = !user.nicknameSetAt;
+        token.reportCount = user.reportCount ?? 0;
       }
 
       if (trigger === "update" && token.tsuriId) {
