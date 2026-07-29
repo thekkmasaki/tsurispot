@@ -59,6 +59,13 @@ interface CatchReportFormProps {
   catchableFishNames?: string[];
 }
 
+// 端末ローカルの「今日」を YYYY-MM-DD で返す。
+// toISOString() はUTC日付になるため、JSTの0時〜9時に max がローカルの今日より
+// 過去になり、ネイティブ検証で送信不能になる（初期値とmaxは必ず同じ基準で生成する）
+function formatLocalDate(d: Date): string {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
 export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }: CatchReportFormProps) {
   const { data: session, status: authStatus } = useSession();
   const router = useRouter();
@@ -78,10 +85,7 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
   }, [authStatus, session?.user?.nickname]);
 
   const [fishName, setFishName] = useState("");
-  const [date, setDate] = useState(() => {
-    const d = new Date();
-    return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
-  });
+  const [date, setDate] = useState(() => formatLocalDate(new Date()));
   const [comment, setComment] = useState("");
   const [photoUrl, setPhotoUrl] = useState("");
   const [photoPreview, setPhotoPreview] = useState("");
@@ -400,7 +404,7 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
               type="date"
               value={date}
               onChange={(e) => setDate(e.target.value)}
-              max={new Date().toISOString().split("T")[0]}
+              max={formatLocalDate(new Date())}
               required
             />
           </div>

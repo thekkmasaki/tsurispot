@@ -75,11 +75,10 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "日付の形式が不正です" }, { status: 400 });
     }
 
-    // 未来の日付チェック
-    const reportDate = new Date(date);
-    const today = new Date();
-    today.setHours(23, 59, 59, 999);
-    if (reportDate > today) {
+    // 未来の日付チェック（コンテナのTZはUTCのため、JSTの「今日」と文字列比較する。
+    // UTC基準だとJST 0時〜9時に当日の投稿が「未来の日付」として弾かれてしまう）
+    const todayJst = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(new Date());
+    if (date > todayJst) {
       return NextResponse.json({ error: "未来の日付は指定できません" }, { status: 400 });
     }
 
@@ -184,7 +183,8 @@ export async function POST(request: Request) {
       ok: true,
       message: "釣果が投稿されました！",
     });
-  } catch {
+  } catch (e) {
+    console.error("[釣果投稿] 処理エラー:", e);
     return NextResponse.json(
       { error: "投稿の処理中にエラーが発生しました" },
       { status: 500 }

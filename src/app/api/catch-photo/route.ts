@@ -7,8 +7,14 @@ const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/webp"];
 const MAX_FILE_SIZE = 20 * 1024 * 1024; // 20MB（クライアント側で自動圧縮済み、iPhone対応）
 
 export async function POST(request: NextRequest) {
-  const formData = await request.formData();
-  const file = formData.get("file") as File | null;
+  // 非multipartボディだと formData() が throw する（未捕捉だと500になる）
+  let file: File | null = null;
+  try {
+    const formData = await request.formData();
+    file = formData.get("file") as File | null;
+  } catch {
+    return NextResponse.json({ error: "リクエスト形式が不正です" }, { status: 400 });
+  }
 
   if (!file) {
     return NextResponse.json({ error: "ファイルが必要です" }, { status: 400 });
