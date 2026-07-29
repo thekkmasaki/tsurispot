@@ -1,0 +1,52 @@
+# デプロイ成功後、本番(tsurispot.com)の主要導線を Playwright smoke で検証する。
+# workflow_run トリガーを使うことで、障害回帰ガードの塊である deploy.yml には
+# 一切手を入れずに「デプロイ完了 → 本番smoke」を後続させる。
+# smoke は本番URL対象のため、デプロイが本番へ反映された後にのみ意味がある。
+# ここが失敗してもデプロイは既に完了済み（ロールバックはしない・警告通知のみ）。
+name: Post-Deploy Smoke
+
+on:
+  workflow_run:
+    workflows: ['Deploy to App Runner']
+    types: [completed]
+
+jobs:
+  smoke:
+    # デプロイが master で成功した時のみ実行
+    if: >-
+      github.event.workflow_run.conclusion == 'success' &&
+      github.event.workflow_run.head_branch == 'master'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 依存インストール
+        run: npm ci
+
+      - name: Playwright ブラウザ導入
+        run: npx playwright install chromium --with-deps
+
+      - name: 本番 smoke（tsurispot.com）
+        run: npm run test:smoke
+        env:
+          SMOKE_BASE_URL: https://tsurispot.com
+
+      - name: Discord通知（smoke失敗）
+        if: failure()
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          RUN_URL: https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          if [ -n "$DISCORD_WEBHOOK_URL" ]; then
+            PAYLOAD=$(jq -n --arg url "$RUN_URL" \
+              '{content: ("⚠️ **本番smoke失敗** デプロイ完了後の主要導線に問題の可能性\n" + $url)}')
+            curl -s -H "Content-Type: application/json" -d "$PAYLOAD" "$DISCORD_WEBHOOK_URL"
+          fi
