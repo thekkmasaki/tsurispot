@@ -13,25 +13,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## コマンド
 
 ```bash
-# ビルド
-npx next build
+# 統合検証（Definition of Done: これがPASSしたら完了報告可）
+npm run verify                    # = typecheck + eslint src/ + vitest run
 
-# 開発サーバー（ポート3000が占有されやすいので注意）
-npx next dev
-
-# テスト
+# 個別実行
+npx tsc --noEmit                  # 型チェックのみ
+npx eslint src/                   # Lintのみ
 npx vitest run                    # 全テスト実行
 npx vitest run src/lib/data/__tests__/spots.test.ts  # 単一テスト
-
-# Lint
-npx eslint
-
-# デプロイ（AWS App Runner）+ IndexNow自動通知
-npm run deploy
-
-# TypeScript型チェック
-npx tsc --noEmit
 ```
+
+ビルド・開発サーバーはローカル実行禁止（禁止事項参照）。本番反映はユーザーが PR を GitHub UI で merge → GitHub Actions（AWS App Runner）のみ。
+
+**検証ハーネス**: feature/* への push で CI（`.github/workflows/ci.yml`）が tsc/eslint/vitest を自動実行する。ローカルには Claude Code hooks（`scripts/hooks/`）があり、ターン終了時の型チェックゲートと編集直後の eslint --fix が自動で走る（キルスイッチ: 環境変数 `TSURISPOT_HOOKS_OFF=1`）。このPCの node_modules は package.json に未追随のため、環境起因の型エラーはベースライン除外されている — **完全な正は CI green**。
 
 ## Git ルール
 
@@ -43,17 +37,13 @@ npx tsc --noEmit
 
 ### Claude 標準ワークフロー（毎タスク必須）
 
-1. `feature/<task-name>` ブランチを切る
-2. 変更を commit + push（feature ブランチ）
-3. **手元検証**：
-   - `npx tsc --noEmit` PASS
-   - `npx eslint src/` PASS（警告は許容、エラーはブロック）
-   - `npm run test:smoke` PASS（Playwright smoke test）
-4. `gh pr create` で PR 作成
-5. PR description は `.github/PULL_REQUEST_TEMPLATE.md` の項目を全て埋める
-6. ユーザに「PR #X 作成しました、確認お願いします」と通知
-7. ユーザが GitHub UI で merge → master 反映 → 本番 deploy
-8. deploy 完了後、Claude が本番 curl 再検証 → 結果通知
+通常タスクは `/task`（受け入れ条件の事前合意→実装→検証→PR）、1〜3ファイルの小修正は `/quickfix` に従う（`.claude/commands/`）。骨子:
+
+1. `feature/<task-name>` ブランチを切り、実装して commit + push（push で CI が自動検証）
+2. **手元検証**: `npm run verify` PASS（新規エラーゼロ）＋ CI green
+3. `gh pr create` で PR 作成（`.github/PULL_REQUEST_TEMPLATE.md` を全て埋め、AC判定を記載）
+4. ユーザに「PR #X 作成しました」と通知 → ユーザが GitHub UI で merge → 本番 deploy
+5. deploy 完了後、Claude が本番 curl / `npm run test:smoke` で再検証 → 結果通知（test:smoke は本番URL対象のためデプロイ後にのみ意味がある）
 
 ### 緊急 hotfix の例外
 
@@ -154,7 +144,7 @@ npx tsc --noEmit
 - 日本語パスを含むためbash操作時は引用符で囲む
 - アフィリエイトリンク一覧: `C:\Users\kk471\OneDrive\デスクトップ\saas\アフィリエイト\リンク一覧.txt`
 - スポット紹介文の他サイトからの丸パクリは絶対NG
-- デプロイ前に `npx tsc --noEmit` で型チェック必須
+- PR 作成前に `npm run verify` で検証必須（新規エラーゼロ）
 
 ## 禁止事項
 
@@ -253,26 +243,20 @@ curl -X POST "https://tsurispot.microcms.io/api/v1/blogs" \
 3. `fish.ts` の統合配列に含まれるか確認
 4. 型チェック → コミット
 
-### デプロイ前チェックリスト
+### PR 前チェックリスト
 
 ```bash
-# 1. 型チェック（必須）
-npx tsc --noEmit
+# 1. 統合検証（必須）
+npm run verify
 
-# 2. Lint
-npx eslint src/
-
-# 3. テスト
-npx vitest run
-
-# 4. 変更内容の確認
+# 2. 変更内容の確認
 git diff --stat
 
-# 5. コミット & プッシュ
+# 3. コミット & feature ブランチへプッシュ（master 直 push は禁止）
 git add <ファイル>
 git commit -m "変更内容"
-git push origin master
-# → GitHub Actions が自動でビルド・デプロイ
+git push origin feature/<task-name>
+# → CI が自動検証。PR を作成し、ユーザーの merge で本番デプロイされる
 ```
 
 ## カスタムエージェント
@@ -285,6 +269,9 @@ git push origin master
 | コンテンツライター | `content-writer.md` | ブログ記事・魚種解説の作成 |
 | データ検証 | `data-validator.md` | テスト実行・整合性チェック（Read-only志向） |
 | SEO最適化 | `seo-optimizer.md` | メタデータ・構造化データ・内部リンク改善 |
+| プランナー | `planner.md` | 短いプロンプトを製品仕様書に展開（`docs/specs/` に保存） |
+| ジェネレーター | `generator.md` | 仕様書を1スプリントずつ実装 |
+| エバリュエーター | `evaluator.md` | 本番URLのQA・E2E CI結果の解釈（ローカル dev サーバー禁止のためブランチ段階では使わない） |
 
 ### 推奨並列作業パターン
 
@@ -298,7 +285,7 @@ git push origin master
 | skill | パス | 用途 |
 |-------|------|------|
 | spot-generator | `.claude/skills/spot-generator/SKILL.md` | スポットを LLM/外部API/CSV から大量生成。checkpoint resume、容量チェック、PR自動作成つき |
-| weekly-report | `.claude/skills/weekly-report/SKILL.md` | 主要10エリアの釣果週報を生成して microCMS に投稿（ユーザー管理） |
+| self-improve | `.claude/skills/self-improve/SKILL.md` | 無人自己改善サイクル（人間所有・Claude からの改変禁止） |
 
 ### /spot-generator 運用ルール
 
