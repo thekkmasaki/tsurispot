@@ -102,6 +102,13 @@ const config: NextAuthConfig = {
       clientId: process.env.COGNITO_CLIENT_ID,
       clientSecret: process.env.COGNITO_CLIENT_SECRET,
       issuer: process.env.COGNITO_ISSUER,
+      // Cognito は federated(Google) 経由だと、こちらが nonce を送っていなくても ID Token に
+      // nonce claim を入れて返すことがあり、oauth4webapi の OIDC 検証で
+      // `unexpected ID Token "nonce" claim value` → CallbackRouteError になる
+      // (本番 2026-07-26/27 に実発生。next-auth Discussion #3551 の既知事象)。
+      // 自ら nonce を送れば Cognito はその値を echo する(authorize エンドポイント仕様)ため
+      // 検証が常に整合する。pkce は既定値なので明示して維持。
+      checks: ["pkce", "nonce"],
       ...cognitoEndpointOverrides,
     }),
   ],
