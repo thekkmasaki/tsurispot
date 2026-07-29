@@ -20,9 +20,12 @@ test.describe("ログインページ", () => {
     await expect(googleButton).toBeVisible();
   });
 
-  test("Appleログインボタンが表示される", async ({ page }) => {
-    const appleButton = page.getByRole("button", { name: /Appleでサインイン/ });
-    await expect(appleButton).toBeVisible();
+  test("Appleボタンは表示されない（Apple IdP 未設定のため撤去済み）", async ({
+    page,
+  }) => {
+    await expect(
+      page.getByRole("button", { name: /Appleでサインイン/ })
+    ).toHaveCount(0);
   });
 
   test("注意書きが表示される", async ({ page }) => {
@@ -65,16 +68,17 @@ test.describe("ログインページ", () => {
     ).toBe(true);
   });
 
-  test("Cognito OAuth のリダイレクトに identity_provider=Google が含まれる", async ({
+  test("Google ボタン押下で Cognito または Google の認可画面へ到達する", async ({
     page,
   }) => {
+    // Cognito は Google 単独クライアントのため authorize から accounts.google.com へ
+    // 自動 302 する。identity_provider パラメータは廃止済み(送っても Auth.js が捨てる)。
     const googleButton = page.getByRole("button", { name: /Googleでログイン/ });
 
     const navigationPromise = page.waitForURL(
       (url) =>
         url.href.includes("amazoncognito.com") ||
-        url.href.includes("accounts.google.com") ||
-        url.href.includes("/api/auth/signin"),
+        url.href.includes("accounts.google.com"),
       { timeout: 15000 }
     );
 
@@ -83,35 +87,12 @@ test.describe("ログインページ", () => {
     try {
       await navigationPromise;
       const currentUrl = page.url();
+      expect(
+        currentUrl.includes("amazoncognito.com") ||
+          currentUrl.includes("accounts.google.com")
+      ).toBe(true);
       if (currentUrl.includes("amazoncognito.com")) {
         expect(currentUrl).toContain("response_type=code");
-        expect(currentUrl).toContain("identity_provider=Google");
-      }
-    } catch {
-      test.skip(true, "Cognito OAuth redirect requires valid credentials");
-    }
-  });
-
-  test("Apple サインインボタンの遷移に identity_provider=SignInWithApple が含まれる", async ({
-    page,
-  }) => {
-    const appleButton = page.getByRole("button", { name: /Appleでサインイン/ });
-
-    const navigationPromise = page.waitForURL(
-      (url) =>
-        url.href.includes("amazoncognito.com") ||
-        url.href.includes("appleid.apple.com") ||
-        url.href.includes("/api/auth/signin"),
-      { timeout: 15000 }
-    );
-
-    await appleButton.click();
-
-    try {
-      await navigationPromise;
-      const currentUrl = page.url();
-      if (currentUrl.includes("amazoncognito.com")) {
-        expect(currentUrl).toContain("identity_provider=SignInWithApple");
       }
     } catch {
       test.skip(true, "Cognito OAuth redirect requires valid credentials");

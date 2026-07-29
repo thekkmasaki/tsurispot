@@ -25,9 +25,6 @@ test.describe("マイページ - 認証状態の表示", () => {
     await expect(
       page.getByRole("button", { name: /Googleでログイン/ })
     ).toBeVisible();
-    await expect(
-      page.getByRole("button", { name: /Appleでサインイン/ })
-    ).toBeVisible();
   });
 });
 
