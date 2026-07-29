@@ -315,6 +315,18 @@ export default async function AreaDetailPage({ params }: PageProps) {
           : `${region.areaName}の釣り場のアクセスや設備は各スポットの詳細ページでご確認ください。`;
       })(),
     },
+    {
+      question: `${region.areaName}で無料で釣りができるスポットはありますか？`,
+      answer:
+        freeCount > 0
+          ? `${region.areaName}には無料で釣りができるスポットが${freeCount}件あります。${spots
+              .filter((s) => s.isFree)
+              .sort((a, b) => b.rating - a.rating)
+              .slice(0, 3)
+              .map((s) => s.name)
+              .join("、")}などが利用でき、駐車場やトイレの有無は各スポットの詳細ページでご確認いただけます。`
+          : `${region.areaName}周辺で無料利用できる釣り場は、各スポットの詳細ページで利用料金の有無をご確認ください。`,
+    },
   ];
 
   const breadcrumbJsonLd = {
@@ -419,7 +431,7 @@ export default async function AreaDetailPage({ params }: PageProps) {
         <div className="flex items-center gap-2">
           <MapPin className="size-5 text-primary sm:size-6" />
           <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
-            {region.areaName}の釣りスポット
+            {region.areaName}（{region.prefecture}）のおすすめ釣り場
           </h1>
         </div>
         <p className="mt-1 text-sm text-muted-foreground sm:text-base">
