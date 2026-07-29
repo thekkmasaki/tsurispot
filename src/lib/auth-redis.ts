@@ -76,24 +76,23 @@ async function parseUser(key: string, val: unknown): Promise<TsuriSpotUser | nul
   return null;
 }
 
-/** プロバイダーIDからユーザーを検索 */
+/**
+ * プロバイダーIDからユーザーを検索。
+ * Redis 障害は null に潰さず例外を伝播させる — null は「未登録」を意味するため、障害を
+ * null にすると呼び出し元(jwt callback)が既存ユーザーへ別 tsuriId の新規作成を試みてしまう。
+ */
 export async function getUserByProvider(
   provider: string,
   providerId: string,
 ): Promise<TsuriSpotUser | null> {
-  try {
-    const raw = await redis.get(`${PROVIDER_PREFIX}${provider}:${providerId}`);
-    // provider mapping の値は userId 文字列
-    const userId = typeof raw === "string" ? raw : null;
-    if (!userId) return null;
+  const raw = await redis.get(`${PROVIDER_PREFIX}${provider}:${providerId}`);
+  // provider mapping の値は userId 文字列
+  const userId = typeof raw === "string" ? raw : null;
+  if (!userId) return null;
 
-    const key = `${USER_PREFIX}${userId}`;
-    const userRaw = await redis.get(key);
-    return await parseUser(key, userRaw);
-  } catch (err) {
-    console.error("[auth-redis] getUserByProvider failed:", err);
-    return null;
-  }
+  const key = `${USER_PREFIX}${userId}`;
+  const userRaw = await redis.get(key);
+  return await parseUser(key, userRaw);
 }
 
 /** UUIDからユーザーを取得 */

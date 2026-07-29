@@ -131,7 +131,12 @@ const config: NextAuthConfig = {
           undefined;
         const picture = cognitoProfile?.picture;
 
-        try {
+        // ストア操作一式。障害時は 1 回だけリトライし、それでも失敗なら throw する。
+        // 以前はここで握り潰していたため、Redis 障害時に tsuriId 無しの JWT が発行され
+        // 「ログイン成功に見えるのに未ログイン表示」になっていた。throw すれば Auth.js が
+        // CallbackRouteError としてログし、?error=Configuration で /login のバナー+
+        // クライアント自動リトライに乗る（ユーザーに見えるエラーと再試行導線になる）。
+        const resolveUser = async () => {
           let user = await getUserByProvider(provider, providerId);
 
           if (!user) {
@@ -151,17 +156,25 @@ const config: NextAuthConfig = {
             await updateAvatarUrl(user.id, picture);
             user.avatarUrl = picture;
           }
+          return user;
+        };
 
-          token.tsuriId = user.id;
-          token.nickname = user.nickname;
-          token.avatarUrl = user.avatarUrl;
-          token.provider = user.provider;
-          token.upstreamProvider = user.upstreamProvider;
-          token.isNewUser = !user.nicknameSetAt;
-          token.reportCount = user.reportCount ?? 0;
+        let user;
+        try {
+          user = await resolveUser();
         } catch (err) {
-          console.error("[auth] jwt callback error (login):", err);
+          console.error("[auth] jwt callback store error (login), retrying:", err);
+          await new Promise((resolve) => setTimeout(resolve, 200));
+          user = await resolveUser();
         }
+
+        token.tsuriId = user.id;
+        token.nickname = user.nickname;
+        token.avatarUrl = user.avatarUrl;
+        token.provider = user.provider;
+        token.upstreamProvider = user.upstreamProvider;
+        token.isNewUser = !user.nicknameSetAt;
+        token.reportCount = user.reportCount ?? 0;
       }
 
       if (trigger === "update" && token.tsuriId) {
