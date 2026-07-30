@@ -189,7 +189,13 @@ jobs:
               MISS=1
             fi
           done
-          [ "$MISS" = "0" ] && echo "フォントpreload 4本すべて成果物に存在" || true
+          if [ "$MISS" = "0" ]; then
+            echo "フォントpreload 4本すべて成果物に存在"
+          else
+            # ずれ検出時は実在する woff2 の候補を Job Summary に出し、layout.tsx の手修正を1分で終わらせる
+            echo "### フォントpreload ハッシュずれ検出 — layout.tsx の href を以下の実ファイル名へ更新" >> "$GITHUB_STEP_SUMMARY"
+            ls .next/static/media/*.woff2 2>/dev/null | sed 's#.*/#  candidate: #' >> "$GITHUB_STEP_SUMMARY" || true
+          fi
 
       # ビルド成果物サイズ計測（情報・内訳）
       # 非圧縮の .next/standalone は実デプロイ可否(=App Runner が pull する圧縮イメージ容量)と
@@ -205,6 +211,10 @@ jobs:
           echo "ビルド成果物サイズ(非圧縮): ${TOTAL_MB} MB (standalone $((STANDALONE_KB/1024))MB / static $((STATIC_KB/1024))MB / public $((PUBLIC_KB/1024))MB)"
           echo "--- .next/server/app 内訳（上位20）---"
           du -h .next/standalone/.next/server/app 2>/dev/null | sort -rh | head -20 || true
+          # 実ビルドのCSS実測（inlineCss 再有効化の権威値）。ci.yml の css-size は CLI 単発の近似のため、
+          # マージ後はここで .next/static/css の実サイズを確認する。
+          echo "--- .next/static/css 実測 ---"
+          du -ah .next/static/css 2>/dev/null | sort -rh | head || true
 
       - name: Configure AWS credentials
         if: github.ref == 'refs/heads/master'

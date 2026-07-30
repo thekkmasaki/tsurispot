@@ -47,3 +47,36 @@ jobs:
 
       - name: 単体テスト
         run: npm run test:run
+
+  # CSSバンドルサイズ計測。full build（EPERM/60分timeoutの元凶）を回さず、
+  # Tailwind CLI を単発実行して globals.css だけをコンパイルしバイト数を可視化する。
+  # 目的: inlineCss 再有効化の前提「CSS 656KB→200KB級削減」を、ローカルビルド無しで
+  # feature ブランチの push ごとに before/after 数値比較できるようにする（@source not の効果測定）。
+  # 権威ある実測は master マージ後の deploy.yml（.next/static/css）で取る。
+  css-size:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: 依存インストール
+        run: npm ci
+
+      - name: Tailwind CSS を単発コンパイルしてサイズ計測
+        run: |
+          npx --yes @tailwindcss/cli@4.2.0 -i src/app/globals.css -o /tmp/app.css --minify
+          RAW=$(wc -c < /tmp/app.css)
+          GZ=$(gzip -c /tmp/app.css | wc -c)
+          echo "CSS(min): $((RAW/1024)) KB / gzip: $((GZ/1024)) KB"
+          echo "### CSS bundle: $((RAW/1024)) KB (min) / $((GZ/1024)) KB (gzip)" >> "$GITHUB_STEP_SUMMARY"
+          # inlineCss 再有効化ゲート: 非圧縮 250KB 超なら warning（削減が不十分なうちは有効化不可）
+          if [ "$RAW" -gt $((250*1024)) ]; then
+            echo "::warning::CSS 未圧縮 $((RAW/1024))KB が目標 250KB 超。inlineCss 再有効化は不可。"
+          fi
