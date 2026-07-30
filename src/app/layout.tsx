@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Noto_Sans_JP, Zen_Maru_Gothic } from "next/font/google";
+import { Zen_Maru_Gothic } from "next/font/google";
 import { AdSenseLoader } from "@/components/ads/adsense-loader";
 import { AdBlockMeasure } from "@/components/ads/adblock-measure";
 import { Header } from "@/components/layout/header";
@@ -26,21 +26,14 @@ import "./globals.css";
 
 const SPOT_COUNT = SPOT_COUNT_FORMATTED;
 
-// 日本語フォントは unicode-range で約120スライス/ウェイトに分割されるが、preload: true だと
-// 全スライス（実測240ファイル・4.18MB）に <link rel="preload"> が付き最優先DLされ、
-// モバイル4GでFCP/LCPを20秒以上悪化させていた（PSI 43点の主因）。
-// preload: false で @font-face + unicode-range による「使う文字のスライスのみ」の遅延取得に変更。
-// display: swap + adjustFontFallback(デフォルト有効) でフォールバック表示・CLS抑制済み。
-const notoSansJP = Noto_Sans_JP({
-  variable: "--font-noto-sans-jp",
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  display: "swap",
-  preload: false,
-});
-
-// weight は 700 のみ: 全使用箇所(header/footer/mobile-nav/hero h1等)が font-bold。
-// 900 は未使用、500 はタブ1箇所のみだったため削減（@font-face 定義 = ブロッキングCSS が約1/3に）。
+// 本文フォントは OS 標準の日本語フォント（Hiragino/Yu Gothic/Meiryo/端末内Noto）を使う。
+// 【2026-07-31 Noto Sans JP self-host 廃止】next/font の Noto Sans JP は unicode-range で
+// 124スライス×3ウェイト＝@font-face 372個（非圧縮275KB / 圧縮96KB）をレンダリングブロックCSSに
+// 焼き込んでおり、これが PSI モバイル LCP 11.3秒の最大要因だった（本番実測で確認）。
+// 本文は --font-sans のシステムフォントスタックに切替え、Webフォントの往復DLとブロッキングCSSを
+// まるごと排除する（Android は端末内 Noto、Mac/iOS は Hiragino、Windows は Yu Gothic/Meiryo）。
+// 見出し(h1・ロゴ)の Zen Maru Gothic 700 のみ next/font で残す（LCP用スライス4本を <head> で preload）。
+// weight は 700 のみ: 全使用箇所(header/footer/mobile-nav/hero h1等)が font-bold。900/500 は未使用。
 const zenMaruGothic = Zen_Maru_Gothic({
   variable: "--font-zen-maru",
   subsets: ["latin"],
@@ -166,7 +159,7 @@ export default function RootLayout({
         <link rel="author" type="text/plain" href="/humans.txt" />
       </head>
       <body
-        className={`${notoSansJP.variable} ${zenMaruGothic.variable} font-sans antialiased`}
+        className={`${zenMaruGothic.variable} font-sans antialiased`}
       >
         {/* WebSite schema: サイト名をGoogleに正しく認識させるため独立したscriptタグ */}
         <script
