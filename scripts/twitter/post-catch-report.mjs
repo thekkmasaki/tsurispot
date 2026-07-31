@@ -11,7 +11,7 @@
  *   node scripts/twitter/post-catch-report.mjs --dry-run  # 投稿せずに内容を確認
  */
 
-import { loadEnv, isDryRun, postTweet, makeUrl, stripHtml, truncate, ROOT } from "./lib/x-client.mjs";
+import { loadEnv, isDryRun, postTweet, makeUrl, stripHtml, truncate, ROOT, assessWeekFreshness, allowStale } from "./lib/x-client.mjs";
 import { readFileSync, writeFileSync, readdirSync } from "fs";
 import { join } from "path";
 
@@ -235,6 +235,15 @@ async function main() {
   const weekKey = makeWeekKey(year, month, week);
   console.log(`最新週報: ${year}年${month}月 第${week}週（${files.length}エリア）`);
 
+  // 鮮度ガード: 2ヶ月前の週報を「速報」として投稿すると信頼を失うため防ぐ
+  const { freshness, daysOld, monthWeekLabel } = assessWeekFreshness(year, month, week);
+  if (freshness === "stale" && !allowStale) {
+    console.log(
+      `[skip] 最新週報が約${daysOld}日前（${monthWeekLabel}）と古いため、釣果速報を見送りました（--allow-stale で強制投稿可）。`
+    );
+    process.exit(0);
+  }
+
   // 投稿済みエリアを確認
   const postedData = getPostedAreas();
   const thisWeekRecord = postedData.find((r) => r.weekKey === weekKey);
@@ -301,9 +310,15 @@ async function main() {
   // CTA
   const cta = "あなたの今週の釣果を教えてください！";
 
+  // 鮮度に応じて見出しを切替（fresh=「速報」/ recent=「◯月第◯週 釣果まとめ」）
+  const headerLine =
+    freshness === "fresh"
+      ? `🔥 ${areaName} 釣果速報`
+      : `🔥 ${areaName} 釣果まとめ（${monthWeekLabel}）`;
+
   // ツイート組み立て（280文字制限を意識）
   const tweetParts = [
-    `🔥 ${areaName} 釣果速報`,
+    headerLine,
     "",
     ...summaryLines,
     "",
@@ -325,7 +340,7 @@ async function main() {
   } else {
     // summaryを削って再構成
     const shortParts = [
-      `🔥 ${areaName} 釣果速報`,
+      headerLine,
       "",
       ...summaryLines.slice(0, 2),
       "",

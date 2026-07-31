@@ -10,7 +10,7 @@
  *   node scripts/twitter/post-best-catch.mjs --dry-run  # 投稿せずに内容を確認
  */
 
-import { loadEnv, isDryRun, postTweet, makeUrl, stripHtml, ROOT } from "./lib/x-client.mjs";
+import { loadEnv, isDryRun, postTweet, makeUrl, stripHtml, ROOT, assessWeekFreshness, allowStale } from "./lib/x-client.mjs";
 import { readFileSync, readdirSync } from "fs";
 import { join } from "path";
 
@@ -202,6 +202,18 @@ async function main() {
   const { files, year, month, week } = getLatestWeekFiles();
   console.log(`最新週報: ${year}年${month}月 第${week}週（${files.length}エリア）\n`);
 
+  // 鮮度ガード: 古い週報を「今週のベスト釣果」として投稿すると信頼を失うため防ぐ
+  const { freshness, daysOld, monthWeekLabel } = assessWeekFreshness(year, month, week);
+  if (freshness === "stale" && !allowStale) {
+    console.log(
+      `[skip] 最新週報が約${daysOld}日前（${monthWeekLabel}）と古いため、ベスト釣果を見送りました（--allow-stale で強制投稿可）。`
+    );
+    process.exit(0);
+  }
+  // 鮮度に応じて見出しを切替（fresh=「今週の」/ recent=「◯月第◯週の」）
+  const headerLine =
+    freshness === "fresh" ? "🏆 今週のベスト釣果" : `🏆 ${monthWeekLabel}のベスト釣果`;
+
   // 全エリアの釣果データを収集
   /** @type {{ areaSlug: string, areaName: string, spot: string, fish: string, size: string, method: string, rating: number }[]} */
   const allEntries = [];
@@ -275,7 +287,7 @@ async function main() {
   });
 
   const tweetParts = [
-    "🏆 今週のベスト釣果",
+    headerLine,
     "",
     ...rankLines,
     "",
@@ -296,7 +308,7 @@ async function main() {
     });
 
     tweetText = [
-      "🏆 今週のベスト釣果",
+      headerLine,
       "",
       ...shortRankLines,
       "",
@@ -313,7 +325,7 @@ async function main() {
     });
 
     tweetText = [
-      "🏆 今週のベスト釣果",
+      headerLine,
       "",
       ...minimalRankLines,
       "",

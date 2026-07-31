@@ -206,3 +206,34 @@ export function makeUrl(path, campaign) {
   const url = path.startsWith("/") ? `${base}${path}` : `${base}/${path}`;
   return `${url}?utm_source=twitter&utm_campaign=${campaign}`;
 }
+
+// ── 週報の鮮度判定 ──
+
+/** この日数以内なら「今週の」と表現してよい */
+const WEEKLY_FRESH_DAYS = 14;
+/** この日数を超えたら古すぎるので投稿を見送る */
+const WEEKLY_STALE_DAYS = 45;
+
+/**
+ * 週報ファイル名の (year, month, week) から概算日付と鮮度を判定する。
+ * 週報は {area}-{year}-{month}-week{N}.json 形式。第N週の代表日を
+ * 「月初 + (N-1)*7 + 3日」で概算する。
+ *
+ * @param {number} year
+ * @param {number} month  1-12
+ * @param {number} week   1-
+ * @param {Date} [now]
+ * @returns {{ weekDate: Date, daysOld: number, freshness: "fresh"|"recent"|"stale", monthWeekLabel: string }}
+ */
+export function assessWeekFreshness(year, month, week, now = new Date()) {
+  const weekDate = new Date(year, month - 1, 1 + (week - 1) * 7 + 3);
+  const daysOld = Math.floor((now.getTime() - weekDate.getTime()) / 86_400_000);
+  let freshness = "fresh";
+  if (daysOld > WEEKLY_STALE_DAYS) freshness = "stale";
+  else if (daysOld > WEEKLY_FRESH_DAYS) freshness = "recent";
+  return { weekDate, daysOld, freshness, monthWeekLabel: `${month}月第${week}週` };
+}
+
+/** --allow-stale フラグ / FORCE_STALE=1 で古い週報でも投稿を許可（手動テスト用） */
+export const allowStale =
+  process.argv.includes("--allow-stale") || process.env.FORCE_STALE === "1";

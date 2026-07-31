@@ -9,7 +9,7 @@
 
 import { readFileSync, readdirSync } from "fs";
 import { join } from "path";
-import { loadEnv, getClient, isDryRun, ROOT, stripHtml, truncate } from "./lib/x-client.mjs";
+import { loadEnv, getClient, isDryRun, ROOT, stripHtml, truncate, assessWeekFreshness, allowStale } from "./lib/x-client.mjs";
 
 const REPORTS_DIR = join(ROOT, "scripts/weekly-reports");
 
@@ -124,9 +124,8 @@ function makeHighlight(areaName, description) {
  * メインツイートを組み立てる
  * 140文字（日本語）以内に収める
  */
-function buildMainTweet(areaReports) {
-  const areaCount = areaReports.length;
-  const header = `今週の釣果週報！全${areaCount}エリアの最新情報\n\n`;
+function buildMainTweet(areaReports, headline) {
+  const header = `${headline}\n\n`;
   const footer = `\n\n詳しくはリプライから\n#釣果 #釣り #ツリスポ`;
 
   // ハイライトを入れられるだけ入れる
@@ -169,6 +168,16 @@ async function main() {
   const { files, year, month, week } = getLatestWeekFiles();
   console.log(`最新週報: ${year}年${month}月 第${week}週（${files.length}エリア）\n`);
 
+  // 鮮度ガード: 古い週報を「今週の」と称して投稿すると信頼を失うため防ぐ
+  const { freshness, daysOld, monthWeekLabel } = assessWeekFreshness(year, month, week);
+  if (freshness === "stale" && !allowStale) {
+    console.log(
+      `[skip] 最新週報が約${daysOld}日前（${monthWeekLabel}）と古いため、週報ダイジェスト投稿を見送りました。\n` +
+        `週報を更新してください（--allow-stale で強制投稿可）。`
+    );
+    return;
+  }
+
   // 各エリアのデータを読み込み
   const areaReports = files.map((f) => {
     const report = loadReport(f.filename);
@@ -182,8 +191,14 @@ async function main() {
     };
   });
 
+  // 鮮度に応じて見出しを切替（fresh=「今週の」/ recent=「◯月第◯週の」）
+  const headline =
+    freshness === "fresh"
+      ? `今週の釣果週報！全${areaReports.length}エリアの最新情報`
+      : `${monthWeekLabel}の釣果まとめ！全${areaReports.length}エリア`;
+
   // メインツイート
-  const mainTweet = buildMainTweet(areaReports);
+  const mainTweet = buildMainTweet(areaReports, headline);
 
   // リプライツイート
   const replies = areaReports.map((r) =>
