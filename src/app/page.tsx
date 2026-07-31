@@ -8,7 +8,8 @@ import { prefectures } from "@/lib/data/prefectures";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { LoginPromoBanner } from "@/components/home/login-promo-banner";
+// LoginPromoBanner は 2026-07-30 ユーザー判断でトップ非表示中（下記 render もコメントアウト）。復活時に解除。
+// import { LoginPromoBanner } from "@/components/home/login-promo-banner";
 import { JoinCTA } from "@/components/home/join-cta";
 import { HomeNearbyBand } from "@/components/home/nearby-band";
 // CommunityStats は数字が小さいうち (釣り人 26 人等) は逆効果なので一時 hide。
@@ -21,14 +22,15 @@ import {
   Waves,
   BookOpen,
   ChevronRight,
-  Calendar,
   Compass,
   Tag,
-  Target,
-  Navigation,
   Star,
-  ClipboardCheck,
-  Sparkles,
+  // 以下 5 アイコンは 2026-07-30 非表示化したクイックアクション専用。復活時にコメント解除。
+  // Calendar,
+  // Target,
+  // Navigation,
+  // ClipboardCheck,
+  // Sparkles,
 } from "lucide-react";
 import nextDynamic from "next/dynamic";
 import { HomeSearchBar } from "@/components/home-search-bar";
@@ -87,9 +89,10 @@ const RecentlyViewedSpots = nextDynamic(() => import("@/components/spots/recentl
 const RecentCatchReports = nextDynamic(() => import("@/components/home/recent-catch-reports").then((m) => m.RecentCatchReports), {
   loading: () => null,
 });
-const PushSubscribe = nextDynamic(() => import("@/components/notifications/push-subscribe").then((m) => m.PushSubscribe), {
-  loading: () => null,
-});
+// PushSubscribe は 2026-07-30 非表示化した「今週の釣果を見逃さない」バナー専用。復活時にコメント解除。
+// const PushSubscribe = nextDynamic(() => import("@/components/notifications/push-subscribe").then((m) => m.PushSubscribe), {
+//   loading: () => null,
+// });
 
 const spotCount = fishingSpots.length.toLocaleString();
 const fishCount = fishSpecies.length;
@@ -424,13 +427,15 @@ export default async function Home() {
 
       {/* CommunityStats は数字が育ってから復活 (現状 26人/1件 が逆効果) */}
 
-      {/* ログイン誘導バナー（未ログイン時のみ表示、 features 詳細訴求） */}
-      <LoginPromoBanner />
+      {/* ログイン誘導バナー（未ログイン時のみ表示、 features 詳細訴求）
+          （2026-07-30 ユーザー判断で一時非表示。復活時は下記コメントを解除） */}
+      {/* <LoginPromoBanner /> */}
 
       {/* リテンション施策: Push 購読 CTA を全訪問者に表示（ログイン不要。 /api/push/subscribe は匿名 OK）。
           LoginPromoBanner は「アカウント登録の価値」、 こちらは「登録不要の通知購読」と訴求を分離し、
-          月 9.6 万人の未ログイン訪問者を再訪チャネル（push:subscriptions）に取り込む。 */}
-      <section className="mx-auto w-full max-w-5xl px-4 py-4">
+          月 9.6 万人の未ログイン訪問者を再訪チャネル（push:subscriptions）に取り込む。
+          （2026-07-30 ユーザー判断で一時非表示。復活時は下記コメントを解除） */}
+      {/* <section className="mx-auto w-full max-w-5xl px-4 py-4">
         <div className="rounded-2xl border-2 border-sky-200 bg-gradient-to-r from-sky-50 to-cyan-50 p-4 sm:p-5">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
@@ -445,10 +450,10 @@ export default async function Home() {
             <PushSubscribe />
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* クイックアクション */}
-      <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
+      {/* クイックアクション（2026-07-30 ユーザー判断で一時非表示。ヘッダーメニューから遷移可のため。復活時は下記コメントを解除） */}
+      {/* <section className="mx-auto w-full max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
         <div className="grid grid-cols-4 gap-2 sm:gap-3 lg:grid-cols-8">
           <Link href="/map" prefetch={false}>
             <div className="flex flex-col items-center gap-1.5 rounded-xl border bg-sky-50 p-3 transition-[box-shadow,transform] hover:shadow-md hover:-translate-y-0.5 sm:gap-2 sm:p-4">
@@ -541,7 +546,7 @@ export default async function Home() {
             </div>
           </Link>
         </div>
-      </section>
+      </section> */}
 
       {/* 最新釣果週報（6件表示） */}
       {weeklyReports.length > 0 && (
