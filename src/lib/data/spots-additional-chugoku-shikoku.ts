@@ -889,7 +889,7 @@ export const additionalSpotsChugokuShikoku: FishingSpot[] = [
   },
   {
     id: "s196", name: "松山・三津浜港", slug: "matsuyama-mitsuhama",
-    description: "松山市内からアクセス抜群の港。アジ・メバル・チヌに加え、タチウオの好ポイントとしても知られる。",
+    description: "愛媛県松山市の三津浜港は、市内中心部から車で約20分・伊予鉄三津駅から徒歩10分とアクセス抜群の港で、広い岸壁と常夜灯が整い夜釣りでも足場が安心。7〜11月はタチウオの好ポイントとして知られ、夕マヅメから夜にかけてワインド釣法で回遊を狙える。初夏から秋はアジのサビキ、冬から春はメバリングでメバルが本命となり、5〜9月はクロダイのフカセ釣りも楽しめる。トイレ・コンビニ・釣具店が近く、家族連れや仕事帰りの短時間釣行にも通いやすい。無料駐車スペースあり。",
     latitude: 33.8625, longitude: 132.7245, address: "〒791-8060 愛媛県松山市三津ふ頭",
     accessInfo: "伊予鉄三津駅から徒歩10分。松山自動車道松山ICから約20分。", region: region("r31"),
     spotType: "port", difficulty: "beginner", isFree: true,
