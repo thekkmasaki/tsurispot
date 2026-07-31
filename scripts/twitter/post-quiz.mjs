@@ -1,188 +1,168 @@
 #!/usr/bin/env node
 /**
- * X (Twitter) 自動クイズ投稿スクリプト
+ * X (Twitter) 自動クイズ投稿スクリプト（240問DB・日付決定論・投票対応）
+ *
+ * 改善点（旧実装からの変更）:
+ *  - 18問ハードコード → src/lib/data/quiz-questions.ts の 240問プールを使用
+ *  - 純ランダム + CIでstate消失で重複 → 日付ハッシュの決定論選択（state不要・
+ *    約240日で一巡し重複ゼロ）
+ *  - 捨てていた解説(explanation)を固定リプで発表（旧: リンクのみのバイト＆スイッチ）
+ *  - 選択肢が短ければ native poll（投票）で出題しエンゲージメント最大化
+ *  - コミュニティタグ(#釣り好きな人と繋がりたい) と UTM付きリンクを付与
  *
  * 使い方:
- *   node scripts/twitter/post-quiz.mjs           # ランダムなクイズを投稿
- *   node scripts/twitter/post-quiz.mjs --dry-run  # 投稿せずに内容を確認
- *   node scripts/twitter/post-quiz.mjs --type fish # 魚クイズのみ
- *   node scripts/twitter/post-quiz.mjs --type spot # スポットクイズのみ
+ *   node scripts/twitter/post-quiz.mjs
+ *   node scripts/twitter/post-quiz.mjs --dry-run
+ *   node scripts/twitter/post-quiz.mjs --day 5   # 決定論の日付オフセット指定（テスト用）
  */
 
-import { readFileSync, writeFileSync } from "fs";
-import { fileURLToPath } from "url";
-import { dirname, join } from "path";
-import { loadEnv, getClient, isDryRun } from "./lib/x-client.mjs";
-
-const __dirname = dirname(fileURLToPath(import.meta.url));
+import { loadEnv, getClient, isDryRun, makeUrl } from "./lib/x-client.mjs";
+import { loadAllQuizzes } from "./lib/quiz-data.mjs";
 
 loadEnv();
 
-// ── クイズデータ ──
+const CHOICE_LETTERS = ["A", "B", "C", "D"];
+const POLL_OPTION_MAX = 25; // X の投票選択肢は各25文字まで
+const TWEET_MAX = 280;
+const COMMUNITY_TAGS = "#釣りクイズ #釣り #釣り好きな人と繋がりたい";
 
-const fishQuizzes = [
-  {
-    question: "🐟 この漢字、読めますか？\n\n「鰯」\n\nA. サバ\nB. イワシ\nC. サンマ\nD. アジ",
-    answer: "正解は B.イワシ！\n「弱」いという字が入っているのは、水から出すとすぐ弱ってしまうから🐟",
-    url: "https://tsurispot.com/fish/iwashi",
-    tags: "#釣り #魚クイズ #イワシ #漢字クイズ",
-  },
-  {
-    question: "🐟 この漢字、読めますか？\n\n「鱸」\n\nA. スズキ\nB. タチウオ\nC. サワラ\nD. ヒラメ",
-    answer: "正解は A.スズキ！\nシーバスとも呼ばれ、ルアーフィッシングの大人気ターゲット🎣",
-    url: "https://tsurispot.com/fish/suzuki",
-    tags: "#釣り #魚クイズ #シーバス #スズキ",
-  },
-  {
-    question: "🐟 この漢字、読めますか？\n\n「鯛」\n\nA. サケ\nB. タイ\nC. フグ\nD. カレイ",
-    answer: "正解は B.タイ！\n「めでたい」の語呂合わせでお祝い魚の代表🎉",
-    url: "https://tsurispot.com/fish/madai",
-    tags: "#釣り #魚クイズ #真鯛 #タイ",
-  },
-  {
-    question: "🐟 この漢字、読めますか？\n\n「鰈」\n\nA. ヒラメ\nB. カレイ\nC. エイ\nD. カワハギ",
-    answer: "正解は B.カレイ！\n「左ヒラメに右カレイ」— 目が右側にあるのがカレイです👀",
-    url: "https://tsurispot.com/fish/karei",
-    tags: "#釣り #魚クイズ #カレイ #漢字クイズ",
-  },
-  {
-    question: "🐟 この漢字、読めますか？\n\n「鮃」\n\nA. カレイ\nB. ヒラメ\nC. コチ\nD. マゴチ",
-    answer: "正解は B.ヒラメ！\n高級魚の代表格。泳がせ釣りで大物が狙えます🐟",
-    url: "https://tsurispot.com/fish/hirame",
-    tags: "#釣り #魚クイズ #ヒラメ",
-  },
-  {
-    question: "🐟 この漢字、読めますか？\n\n「鰤」\n\nA. ブリ\nB. カンパチ\nC. ハマチ\nD. サワラ",
-    answer: "正解は A.ブリ！\n「師走(12月)」に旬を迎えるから「魚」+「師」で鰤🐟",
-    url: "https://tsurispot.com/fish/buri",
-    tags: "#釣り #魚クイズ #ブリ #出世魚",
-  },
-  {
-    question: "🐟 この漢字、読めますか？\n\n「鱧」\n\nA. ハモ\nB. ウナギ\nC. アナゴ\nD. ドジョウ",
-    answer: "正解は A.ハモ！\n京都の夏の風物詩。骨切りの技術が必要な高級魚🔪",
-    url: "https://tsurispot.com/fish/hamo",
-    tags: "#釣り #魚クイズ #ハモ #京料理",
-  },
-  {
-    question: "🤔 カレイとヒラメの見分け方、知ってる？\n\nA. 色が違う\nB. 目の位置が左右逆\nC. 大きさが違う\nD. ヒレの形が違う",
-    answer: "正解は B.目の位置！\n「左ヒラメに右カレイ」\nお腹を下にしたとき、目が左→ヒラメ、右→カレイ👀",
-    url: "https://tsurispot.com/fish/karei",
-    tags: "#釣り #魚クイズ #カレイ #ヒラメ #見分け方",
-  },
-  {
-    question: "🎣 ブリの出世魚の順番、正しいのは？\n\nA. ワカシ→イナダ→ワラサ→ブリ\nB. イナダ→ワカシ→ワラサ→ブリ\nC. ワカシ→ワラサ→イナダ→ブリ\nD. ハマチ→ワカシ→イナダ→ブリ",
-    answer: "正解は A！\nワカシ(〜35cm)→イナダ(〜60cm)→ワラサ(〜80cm)→ブリ(80cm〜)\n※関西ではツバス→ハマチ→メジロ→ブリ🐟",
-    url: "https://tsurispot.com/fish/buri",
-    tags: "#釣り #魚クイズ #ブリ #出世魚",
-  },
-  {
-    question: "🐡 フグの毒「テトロドトキシン」はどこに多い？\n\nA. 身（筋肉）\nB. 肝臓と卵巣\nC. ヒレ\nD. 目",
-    answer: "正解は B.肝臓と卵巣！\n⚠️ 釣ったフグは絶対に自分でさばかないで！免許を持った専門家に任せましょう",
-    url: "https://tsurispot.com/fish/fugu",
-    tags: "#釣り #魚クイズ #フグ #釣り安全",
-  },
-  {
-    question: "🎣 「サビキ釣り」ってどんな釣り方？\n\nA. ルアーを投げて巻く\nB. エサを撒いて疑似餌の仕掛けで釣る\nC. 生きたエサを泳がせる\nD. 水底に仕掛けを沈めて待つ",
-    answer: "正解は B！\nサビキ釣りは初心者に最もおすすめの釣り方。アジ・サバ・イワシが数釣りできます🎣",
-    url: "https://tsurispot.com/fish/aji",
-    tags: "#釣り #魚クイズ #サビキ釣り #初心者",
-  },
-  {
-    question: "🌊 「朝マズメ」ってどの時間帯のこと？\n\nA. 日の出前後\nB. 正午\nC. 夕方\nD. 深夜",
-    answer: "正解は A.日の出前後！\n魚の活性が最も高く、釣果が期待できるゴールデンタイム🌅",
-    url: "https://tsurispot.com/guides/march",
-    tags: "#釣り #魚クイズ #朝マズメ #釣り用語",
-  },
-  {
-    question: "🐟 メバルの名前の由来は？\n\nA. 目が張っている\nB. 春に釣れるから\nC. 岩に張り付くから\nD. 味が良いから",
-    answer: "正解は A.目が張っている！\n大きな目が特徴的なので「目張（メバル）」と呼ばれています👁️",
-    url: "https://tsurispot.com/fish/mebaru",
-    tags: "#釣り #魚クイズ #メバル #メバリング",
-  },
-  {
-    question: "🎣 タチウオの体が銀色に光る理由は？\n\nA. ウロコが反射\nB. グアニンという物質\nC. 粘液が光る\nD. 筋肉が発光",
-    answer: "正解は B.グアニン！\nタチウオのウロコは退化し、代わりにグアニンという銀色の物質で覆われています✨",
-    url: "https://tsurispot.com/fish/tachiuo",
-    tags: "#釣り #魚クイズ #タチウオ #太刀魚",
-  },
-  {
-    question: "🦀 ガザミ（ワタリガニ）の旬はいつ？\n\nA. 春（3-5月）\nB. 夏（6-8月）\nC. 秋〜冬（10-2月）\nD. 一年中同じ",
-    answer: "正解は C.秋〜冬！\nオスは秋、メスは冬が旬。内子（卵）が詰まった冬のメスは絶品🦀",
-    url: "https://tsurispot.com/fish/gazami",
-    tags: "#釣り #魚クイズ #ワタリガニ #カニ",
-  },
-];
-
-const spotQuizzes = [
-  {
-    question: "📍 日本で最も釣り場が多い都道府県はどこ？\n\nA. 北海道\nB. 長崎県\nC. 沖縄県\nD. 千葉県",
-    answer: "正解は B.長崎県！\n海岸線の長さが日本2位で、離島も多く釣り場が豊富🏝️",
-    url: "https://tsurispot.com/area/nagasaki",
-    tags: "#釣り #釣りスポット #長崎 #釣り場",
-  },
-  {
-    question: "🏖️ 「堤防釣り」と「磯釣り」、初心者におすすめなのは？\n\nA. 堤防釣り\nB. 磯釣り\nC. どちらも同じ\nD. 船釣り",
-    answer: "正解は A.堤防釣り！\n足場が安定していて、トイレや駐車場も近い。まずは堤防から始めよう🎣",
-    url: "https://tsurispot.com/",
-    tags: "#釣り #堤防釣り #初心者 #釣りスポット",
-  },
-  {
-    question: "🗾 「釣りの聖地」と呼ばれる三浦半島があるのは何県？\n\nA. 神奈川県\nB. 千葉県\nC. 静岡県\nD. 三重県",
-    answer: "正解は A.神奈川県！\n東京から1時間で行ける釣りの楽園。城ヶ島や三崎港が有名🐟",
-    url: "https://tsurispot.com/area/kanagawa",
-    tags: "#釣り #三浦半島 #神奈川 #釣りスポット",
-  },
-];
-
-// ── メイン処理 ──
-
-const args = process.argv.slice(2);
-const typeFilter = args.includes("--type") ? args[args.indexOf("--type") + 1] : null;
-
-const POSTED_FILE = join(__dirname, ".posted-quizzes.json");
-
-function getPostedQuizzes() {
-  try {
-    return JSON.parse(readFileSync(POSTED_FILE, "utf-8"));
-  } catch {
-    return [];
+/**
+ * Twitter 加重文字数（U+0000〜U+10FF=1、それ以外=2、URL=23）
+ * ※日本語・全角・絵文字は2としてカウント（Xの既定レンジに準拠）
+ */
+function weightedLen(text) {
+  const urls = text.match(/https?:\/\/\S+/g) || [];
+  const body = text.replace(/https?:\/\/\S+/g, "");
+  let n = 0;
+  for (const ch of body) {
+    n += ch.codePointAt(0) <= 0x10ff ? 1 : 2;
   }
+  return n + urls.length * 23;
 }
 
-function pickQuiz() {
-  let pool = [];
-
-  if (typeFilter === "fish" || !typeFilter) {
-    pool.push(...fishQuizzes.map((q, i) => ({ ...q, type: "fish", index: i })));
+/** 文字列の安定ハッシュ（FNV-1a） */
+function hashStr(s) {
+  let h = 2166136261;
+  for (let i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 16777619);
   }
-  if (typeFilter === "spot" || !typeFilter) {
-    pool.push(...spotQuizzes.map((q, i) => ({ ...q, type: "spot", index: i })));
+  return h >>> 0;
+}
+
+/**
+ * カテゴリを round-robin で交互に並べた決定論的な出題順を作る。
+ * カテゴリ内は id ハッシュで安定シャッフル。これにより連続する日は必ず
+ * 別カテゴリ（8カテゴリ→8日周期で一巡）になり、単調さを避けられる。
+ */
+function buildRotationOrder(quizzes) {
+  const byCat = new Map();
+  for (const q of quizzes) {
+    if (!byCat.has(q.category)) byCat.set(q.category, []);
+    byCat.get(q.category).push(q);
   }
+  const cats = [...byCat.keys()].sort(); // カテゴリ順は固定（決定論）
+  for (const c of cats) byCat.get(c).sort((a, b) => hashStr(a.id) - hashStr(b.id));
 
-  const posted = getPostedQuizzes();
-  const postedKeys = new Set(posted.map((p) => `${p.type}-${p.index}`));
-  const available = pool.filter((q) => !postedKeys.has(`${q.type}-${q.index}`));
-
-  if (available.length === 0) {
-    console.log("全クイズ投稿済み。リセットして最初から。");
-    writeFileSync(POSTED_FILE, "[]");
-    return pool[Math.floor(Math.random() * pool.length)];
+  const order = [];
+  for (let round = 0, added = true; added; round++) {
+    added = false;
+    for (const c of cats) {
+      const arr = byCat.get(c);
+      if (round < arr.length) {
+        order.push(arr[round]);
+        added = true;
+      }
+    }
   }
+  return order;
+}
 
-  return available[Math.floor(Math.random() * available.length)];
+/**
+ * 日付インデックスで決定論的に1問選ぶ。
+ * CIでstateが消えても同日は同じ問題／翌日は別カテゴリ、と重複が起きない
+ * （約240日で全問一巡）。
+ */
+function pickDeterministic(quizzes) {
+  const order = buildRotationOrder(quizzes);
+  const args = process.argv;
+  const dayArg = args.includes("--day")
+    ? parseInt(args[args.indexOf("--day") + 1], 10)
+    : NaN;
+  const dayIndex = Number.isNaN(dayArg)
+    ? Math.floor(Date.now() / 86_400_000)
+    : dayArg;
+  const idx = ((dayIndex % order.length) + order.length) % order.length;
+  return order[idx];
+}
+
+/** 関連リンクの href から UTM 付き詳細URLを作る（無ければ /quiz） */
+function detailUrl(quiz) {
+  const href = quiz.relatedLinks?.[0]?.href || "/quiz";
+  return makeUrl(href, "quiz");
+}
+
+/** 投票が使えるか（選択肢2〜4個かつ全て25文字以内） */
+function pollFits(quiz) {
+  return (
+    Array.isArray(quiz.choices) &&
+    quiz.choices.length >= 2 &&
+    quiz.choices.length <= 4 &&
+    quiz.choices.every((c) => typeof c === "string" && c.length <= POLL_OPTION_MAX)
+  );
+}
+
+/** 投票用の本文（選択肢は投票UIに出るので本文には入れない） */
+function buildPollText(quiz) {
+  const full = `🎣【釣りクイズ】\n${quiz.question}\n\n👇タップで回答！正解は固定リプで発表\n${COMMUNITY_TAGS}`;
+  if (weightedLen(full) <= TWEET_MAX) return full;
+  return `🎣【釣りクイズ】\n${quiz.question}\n\n👇タップで回答！正解は固定リプで\n#釣りクイズ`;
+}
+
+/** テキスト4択の本文（投票が使えない長い選択肢向け） */
+function buildTextChoices(quiz) {
+  const lines = quiz.choices.map((c, i) => `${CHOICE_LETTERS[i]}. ${c}`);
+  const full = `🎣【釣りクイズ】\n${quiz.question}\n\n${lines.join("\n")}\n\n答えは固定リプで👇\n${COMMUNITY_TAGS}`;
+  if (weightedLen(full) <= TWEET_MAX) return full;
+  return `🎣【釣りクイズ】\n${quiz.question}\n\n${lines.join("\n")}\n\n答えは固定リプで👇\n#釣りクイズ`;
+}
+
+/** 正解＋解説＋リンク＋フォローCTA の固定リプ本文 */
+function buildReply(quiz) {
+  const letter = CHOICE_LETTERS[quiz.correctIndex] || "?";
+  const answer = quiz.choices?.[quiz.correctIndex] || "";
+  return [
+    `正解は【${letter}】${answer}`,
+    "",
+    quiz.explanation,
+    "",
+    `くわしく→ ${detailUrl(quiz)}`,
+    "",
+    "毎日1問出題中🎣 フォローで挑戦！",
+  ].join("\n");
 }
 
 async function main() {
-  const quiz = pickQuiz();
+  const quizzes = loadAllQuizzes();
+  console.log(`クイズDB: ${quizzes.length}問 読込`);
 
-  const tweetText = `${quiz.question}\n\n答えはリプライのリンクから👇\n${quiz.tags}`;
-  const replyText = `答えはこちら👇\n${quiz.url}\n\nフォローで毎日クイズ配信中🎣`;
+  const quiz = pickDeterministic(quizzes);
+  const usePoll = pollFits(quiz);
+  const mainText = usePoll ? buildPollText(quiz) : buildTextChoices(quiz);
+  const replyText = buildReply(quiz);
 
-  console.log("=== 本文（ツイート）===");
-  console.log(tweetText);
-  console.log(`\n=== リプライ（答え）===`);
+  console.log(`\n=== 選択問題: ${quiz.id} / ${quiz.category} / ${quiz.difficulty} ===`);
+  console.log(`形式: ${usePoll ? "投票(poll)" : "テキスト4択"}`);
+  console.log("\n--- 本文 ---");
+  console.log(mainText);
+  if (usePoll) {
+    console.log(
+      `\n[投票選択肢] ${quiz.choices.map((c, i) => `${CHOICE_LETTERS[i]}.${c}`).join(" / ")}`
+    );
+  }
+  console.log("\n--- 固定リプ（正解）---");
   console.log(replyText);
-  console.log(`\n文字数: 本文${tweetText.length}字 / リプライ${replyText.length}字`);
+  console.log(`\n加重文字数: 本文${weightedLen(mainText)} / リプ${weightedLen(replyText)}`);
 
   if (isDryRun) {
     console.log("\n[dry-run] 投稿はスキップ");
@@ -190,18 +170,16 @@ async function main() {
   }
 
   const client = getClient();
-
   console.log("\n投稿中...");
-  const tweet = await client.v2.tweet(tweetText);
-  console.log(`✅ 本文投稿完了: https://x.com/tsurispot_jp/status/${tweet.data.id}`);
+  const tweet = usePoll
+    ? await client.v2.tweet(mainText, {
+        poll: { duration_minutes: 1440, options: quiz.choices },
+      })
+    : await client.v2.tweet(mainText);
+  console.log(`✅ 本文投稿: https://x.com/tsurispot_jp/status/${tweet.data.id}`);
 
   const reply = await client.v2.reply(replyText, tweet.data.id);
-  console.log(`✅ リプライ投稿完了: https://x.com/tsurispot_jp/status/${reply.data.id}`);
-
-  // 投稿済みに記録
-  const posted = getPostedQuizzes();
-  posted.push({ index: quiz.index, type: quiz.type, date: new Date().toISOString() });
-  writeFileSync(POSTED_FILE, JSON.stringify(posted, null, 2));
+  console.log(`✅ 固定リプ投稿: https://x.com/tsurispot_jp/status/${reply.data.id}`);
 }
 
 main().catch((err) => {
