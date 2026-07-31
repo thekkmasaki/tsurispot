@@ -730,6 +730,8 @@ export default async function PrefecturePage({ params }: PageProps) {
           {freeSpots.length > 0 ? `無料で釣りができるスポットは${freeSpots.length}件です。` : ""}
           {catchableFish.length > 0 ? `${pref.name}で人気の魚種は${catchableFish.slice(0, 4).map(f => f.name).join("、")}です。` : ""}
           {spotTypeBreakdown.length > 0 ? `釣り場のタイプは${spotTypeBreakdown.slice(0, 3).map(t => t.type).join("・")}が中心です。` : ""}
+          {inSeasonFish.length > 0 ? `${currentMonthName}は${inSeasonFish.slice(0, 4).map(f => f.name).join("・")}などが釣れる時期です。${inSeasonFish.filter(f => f.isPeak).length > 0 ? `特に${inSeasonFish.filter(f => f.isPeak).slice(0, 2).map(f => f.name).join("・")}が旬を迎えています。` : ""}` : ""}
+          {prefTopMethods.length > 0 ? `${prefTopMethods.slice(0, 3).join("・")}など${prefTopMethods.length}種類の釣り方に対応したスポットを掲載しています。` : ""}
           このページでは人気TOP10ランキング・季節別おすすめ魚種・エリア別スポット一覧を完全網羅しています。
         </p>
         <div className="mt-4">
