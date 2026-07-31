@@ -10,7 +10,8 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 // LoginPromoBanner は 2026-07-30 ユーザー判断でトップ非表示中（下記 render もコメントアウト）。復活時に解除。
 // import { LoginPromoBanner } from "@/components/home/login-promo-banner";
-import { JoinCTA } from "@/components/home/join-cta";
+// JoinCTA は 2026-07-31 ユーザー判断でトップ非表示中（下記 render もコメントアウト）。復活時に解除。
+// import { JoinCTA } from "@/components/home/join-cta";
 import { HomeNearbyBand } from "@/components/home/nearby-band";
 // CommunityStats は数字が小さいうち (釣り人 26 人等) は逆効果なので一時 hide。
 // 数字が育ったら以下 1 行 + 下記 render を復活。 component 自体は残してある。
@@ -422,8 +423,9 @@ export default async function Home() {
           埋めず /api/spots/coords（force-static＝CDN）をボタン押下時に 1 回だけ取得する。 */}
       <HomeNearbyBand />
 
-      {/* Phase 6: Hero 直下 Green Join CTA (community pattern、 登録率改善) */}
-      <JoinCTA />
+      {/* Phase 6: Hero 直下 Green Join CTA (community pattern、 登録率改善)
+          （2026-07-31 ユーザー判断で一時非表示。復活時は下記コメントを解除） */}
+      {/* <JoinCTA /> */}
 
       {/* CommunityStats は数字が育ってから復活 (現状 26人/1件 が逆効果) */}
 
