@@ -395,6 +395,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
   };
 
   // LocalBusiness（Googleが aggregateRating をサポートするタイプ）
+  // aggregateRating は実レビューが存在する時のみ出力する。無レビューで ratingCount=1 の
+  // 自己評価(編集評価)を出すのは Google リッチリザルト規約違反で、構造化データ評価の毀損リスク。
+  const hasRealReviews = (spot.googleReviewCount ?? 0) > 0 || spot.reviewCount > 0;
   const localBusinessJsonLd = {
     "@context": "https://schema.org",
     "@type": "LocalBusiness",
@@ -416,13 +419,17 @@ export default async function SpotDetailPage({ params }: PageProps) {
     },
     hasMap: `https://www.google.com/maps?q=${spot.latitude},${spot.longitude}`,
     image: `https://tsurispot.com/api/og?title=${encodeURIComponent(spot.name)}&emoji=${encodeURIComponent("🎣")}`,
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: (spot.googleRating || spot.rating).toFixed(1),
-      bestRating: "5",
-      worstRating: "1",
-      ratingCount: spot.googleReviewCount || (spot.reviewCount > 0 ? spot.reviewCount : 1),
-    },
+    ...(hasRealReviews
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: (spot.googleRating || spot.rating).toFixed(1),
+            bestRating: "5",
+            worstRating: "1",
+            ratingCount: spot.googleReviewCount || spot.reviewCount,
+          },
+        }
+      : {}),
     ...(spot.officialUrl ? { sameAs: spot.officialUrl } : {}),
   };
 
