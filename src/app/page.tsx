@@ -347,7 +347,10 @@ export default async function Home() {
 
             {/* メインCTA */}
             <div className="mb-4 flex flex-col items-center gap-3 sm:flex-row sm:gap-4">
-              <Link href="/map" prefetch={false} className="w-full sm:w-auto">
+              {/* 主CTA「近くの釣り場を探す」は near-me LP へ（旧: /map）。near-me は
+                  現在地GPS検索(navigator.geolocation)＋title「近くの釣り場を探す」で意図・アンカーが完全一致。
+                  home 最大の完全一致アンカーを、この語で狙う near-me LP へ集約する。/map はヘッダー等に残す。 */}
+              <Link href="/fishing-spots/near-me" prefetch={false} className="w-full sm:w-auto">
                 <Button size="lg" className="w-full gap-2 bg-gradient-to-r from-sunset-coral to-sunset-gold px-8 py-6 text-base font-bold text-white shadow-lg shadow-sunset-coral/25 transition-[box-shadow,transform] hover:shadow-xl hover:shadow-sunset-coral/30 hover:scale-[1.02] sm:w-auto sm:text-lg min-h-[52px]">
                   <MapPin className="size-5" />
                   近くの釣り場を探す
