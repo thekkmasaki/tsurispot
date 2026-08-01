@@ -137,15 +137,20 @@ export default async function MonthlyGuidePage({ params }: Props) {
       return bIsPeak - aIsPeak;
     });
   const totalFishCount = allFishForMonth.length;
-  const fishForMonth = allFishForMonth.slice(0, 8);
 
   // topFishのスラッグで魚を取得（データが指定した魚を優先表示）
   const guidedFish = guide.topFish
     .map((slug) => fishSpecies.find((f) => f.slug === slug))
     .filter(Boolean);
 
+  // タイトルの「全{N}種」と一致させ、その月に釣れる全魚種を表示する。
+  // 旧実装は8種のみ表示し「全{N}種を見る」CTAが /seasonal/[month]（season slug専用＝
+  // 月名は未知slugでnotFound→soft404）へ流出していた。全種を出せばCTA条件が偽になり死にリンクも消滅。
+  // 編集キュレーション(topFish)を先頭に、残りの月内魚種を続ける。
   const displayFish =
-    guidedFish.length > 0 ? guidedFish : fishForMonth;
+    guidedFish.length > 0
+      ? [...guidedFish, ...allFishForMonth.filter((f) => !guide.topFish.includes(f.slug))]
+      : allFishForMonth;
 
   // その月のおすすめ仕掛けセット
   const monthlyRigs = getMonthlyRigs(guide.month);
