@@ -297,14 +297,16 @@ export async function generateMetadata({
   const featureTexts = [beginnerText, familyText, freeText].filter(Boolean).join("・");
 
   const currentYear = new Date().getFullYear();
-  const title = `${pref.name}の釣り場おすすめ${spots.length > 0 ? `${spots.length}選` : ""}【${currentYear}年】初心者・穴場`;
+  // 勝ちパターン: 宮城が「[県]釣りスポット」で1位・広島が「[県]釣り場ランキング」で1位を取っている
+  // 主要語(釣りスポット/釣り場/ランキング)をtitle本体へ明示(従来はdescriptionのみ)。全47県共通テンプレ。
+  const title = `${pref.name}の釣りスポット・釣り場おすすめランキング${spots.length > 0 ? `${spots.length}選` : ""}【${currentYear}年】穴場`;
   const description = `${pref.name}のおすすめ釣りスポット${spots.length > 0 ? `${spots.length}箇所` : ""}を初心者〜上級者別にランキング形式で紹介。${familyCount > 0 ? `子連れ・ファミリー向け${familyCount}箇所。` : ""}${pref.name}近くの${spotTypeText || "堤防・漁港・磯"}で${topFishNames}が狙える穴場釣り場を厳選。人気TOP10ランキング・季節別おすすめ魚種・駐車場・トイレ情報・ベストシーズン・アクセス方法まで完全ガイド。${featureTexts ? `【${featureTexts}】` : ""}`;
 
   return {
     title,
     description,
     openGraph: {
-      title: `${pref.name}の釣り場おすすめ${spots.length > 0 ? `${spots.length}選` : ""}【${currentYear}年】`,
+      title: `${pref.name}の釣りスポット・釣り場おすすめランキング${spots.length > 0 ? `${spots.length}選` : ""}【${currentYear}年】`,
       description: `${pref.name}で人気の釣りスポットをエリア別に紹介。${topFishNames}が釣れるおすすめの釣り場情報。${featureTexts ? `${featureTexts}。` : ""}`,
       type: "website",
       url: `https://tsurispot.com/prefecture/${pref.slug}`,
@@ -714,7 +716,7 @@ export default async function PrefecturePage({ params }: PageProps) {
       {/* Header */}
       <div className="mb-6 sm:mb-8">
         <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
-          {pref.name}の釣り場おすすめ完全ガイド{spots.length > 0 && `【${spots.length}選】`}
+          {pref.name}の釣りスポット・釣り場おすすめランキング{spots.length > 0 && `【${spots.length}選】`}
         </h1>
         <p className="mt-2 text-sm text-muted-foreground sm:text-base page-description">
           {currentYear}年最新版｜{spots.length > 0
