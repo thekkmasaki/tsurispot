@@ -2846,7 +2846,7 @@ export const westAdd6Spots: FishingSpot[] = [
   },
   {
     id: "sw6141", name: "由岐港", slug: "yuki-kou-w6",
-    description: "美波町由岐の港。太平洋に面した漁港で、伊勢海老漁で知られるエリア。堤防からのエギングやフカセ釣りが人気で、グレの大物も期待できる。",
+    description: "由岐港は堤防からのエギング・フカセ釣りが人気でグレの大物も期待できる。美波町にある太平洋に面した漁港で、伊勢海老漁で知られるエリア。駐車場・トイレも整い釣行しやすい。",
     latitude: 33.763139, longitude: 134.572359,
     address: "〒779-2101 徳島県海部郡美波町西河内",
     accessInfo: "JR由岐駅から徒歩約10分",
@@ -5666,7 +5666,7 @@ export const westAdd6Spots: FishingSpot[] = [
   },
   {
     id: "sw6288", name: "鷹島", slug: "takashima-saga-w6",
-    description: "松浦市の鷹島。鷹島肥前大橋で本土と繋がっている。元寇の沈没船が発見された海域で、島周辺は魚影が濃くアジやチヌの釣りが楽しめる。",
+    description: "長崎・鷹島は魚影が濃くアジ・チヌの釣りが楽しめる人気の島。鷹島肥前大橋で本土と繋がり、元寇の沈没船が発見された海域としても知られる。駐車場・トイレありで釣行しやすい。",
     latitude: 33.38, longitude: 129.68,
     address: "〒859-4302 長崎県松浦市鷹島町",
     accessInfo: "JR伊万里駅から車で約40分+橋を渡る",

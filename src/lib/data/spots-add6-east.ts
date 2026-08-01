@@ -1382,7 +1382,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   },
   {
     id: "se6065", name: "山田漁港", slug: "yamada-gyokou6",
-    description: "山田湾に面した漁港で牡蠣の養殖で有名。湾内は穏やかでカレイやハゼの投げ釣りが楽しめる。秋のサンマシーズンには活気づく港。",
+    description: "山田湾の穏やかな漁港でカレイ・ハゼの投げ釣りが楽しめる。牡蠣の養殖で有名なエリアで、秋のサンマシーズンには活気づく港。駐車場・トイレも近く初心者やファミリーでも安心して釣行できる。",
     latitude: 39.468, longitude: 141.947,
     address: "〒028-1371 岩手県下閉伊郡山田町川向町",
     accessInfo: "JR陸中山田駅から徒歩約10分。宮古から車で約30分。",
@@ -4152,7 +4152,7 @@ export const eastAdd6Spots: FishingSpot[] = [
   },
   {
     id: "se6207", name: "那珂川河口", slug: "nakagawa-kakou-ibaraki6",
-    description: "ひたちなか市と大洗町の境を流れる那珂川の河口部。シーバスの超人気ポイントで全国からアングラーが集まる。ハゼ釣りの実績も高い。",
+    description: "那珂川河口はシーバスの超人気ポイントで全国からアングラーが集まる。ひたちなか市と大洗町の境に位置し、ハゼ釣りの実績も高い河口部。潮の動きに合わせた釣行が釣果のカギ。",
     latitude: 36.343, longitude: 140.568,
     address: "〒311-1205 茨城県ひたちなか市海門町",
     accessInfo: "JR那珂湊駅から車で約5分。北関東道ひたちなかICから約15分。",

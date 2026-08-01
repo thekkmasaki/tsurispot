@@ -1141,7 +1141,7 @@ export const kantoAdd4Spots: FishingSpot[] = [
   },
   {
     id: "sk4054", name: "神栖市波崎海岸サーフ", slug: "kamisu-hasaki-surf",
-    description: "利根川河口の南側に広がる広大なサーフ。ヒラメやマゴチのフラットフィッシュ天国として名高く、秋冬の座布団ヒラメ狙いが熱い。",
+    description: "波崎海岸はヒラメ・マゴチが狙えるフラットフィッシュ天国のサーフ。利根川河口の南側に広がる広大な砂浜で、秋冬の座布団ヒラメ狙いが熱い人気ポイント。",
     latitude: 35.7600, longitude: 140.8280,
     address: "〒314-0408 茨城県神栖市波崎",
     accessInfo: "JR総武本線銚子駅から車で約15分。東関東道潮来ICから約40分。",
