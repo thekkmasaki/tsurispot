@@ -818,15 +818,22 @@ export default async function Home() {
           </div>
           <div className="grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-4">
             {(() => {
-              // 人気の都道府県（スポット数順）
-              const prefSpotCounts = prefectures
+              // 人気の都道府県: 検索需要の高い主要市場(東京/大阪/神奈川/福岡/愛知)を必ず含めた上で、
+              // 残りをスポット数順で補完する。最強ページ(ホーム)から主要市場の県ハブへ内部リンクを通し、
+              // 高需要クエリ(「大阪 釣りスポット」等)の順位を後押しする。従来はスポット数順のみで
+              // 高需要市場がグリッド外になり内部リンクが弱かった（宮城等の高スポット数県は残り枠で維持）。
+              const PINNED_MARKET_SLUGS = ["tokyo", "osaka", "kanagawa", "fukuoka", "aichi"];
+              const prefWithCounts = prefectures
                 .map((pref) => ({
                   ...pref,
                   spotCount: fishingSpots.filter((s) => s.region.prefecture === pref.name).length,
                 }))
-                .filter((p) => p.spotCount > 0)
-                .sort((a, b) => b.spotCount - a.spotCount)
-                .slice(0, 12);
+                .filter((p) => p.spotCount > 0);
+              const pinnedPrefs = prefWithCounts.filter((p) => PINNED_MARKET_SLUGS.includes(p.slug));
+              const restPrefs = prefWithCounts
+                .filter((p) => !PINNED_MARKET_SLUGS.includes(p.slug))
+                .sort((a, b) => b.spotCount - a.spotCount);
+              const prefSpotCounts = [...pinnedPrefs, ...restPrefs].slice(0, 12);
               return prefSpotCounts.map((pref) => (
                 <Link prefetch={false} key={pref.slug} href={`/prefecture/${pref.slug}`} title={`${pref.name}の釣りスポット${pref.spotCount}件`}>
                   <div className="flex items-center justify-between gap-2 rounded-lg border bg-white p-3 transition-shadow hover:shadow-md">
