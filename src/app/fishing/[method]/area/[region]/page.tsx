@@ -132,8 +132,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const region = getRegionGroupBySlug(regionSlug);
   if (!method || !region) return {};
 
-  const title = `${region.name}の${method.name}おすすめスポットと攻略法【2026年版】`;
-  const description = `${region.name}地方で${method.name}ができるおすすめ釣りスポットを厳選紹介。初心者向けの穴場から上級者向けポイントまで、釣れる魚・アクセス・攻略法を掲載。${region.name}で${method.name}を楽しむならツリスポ。`;
+  const title = `${region.name}の${method.name}スポット・釣り場ランキング【2026年版】`;
+  const description = `${region.name}地方で${method.name}ができるおすすめ釣り場・釣りスポットを厳選紹介。初心者向けの穴場から上級者向けポイントまで、釣れる魚・アクセス・攻略法を掲載。${region.name}の${method.name}スポット探しの参考にどうぞ。`;
 
   return {
     title,
@@ -173,8 +173,8 @@ export default async function MethodRegionPage({ params }: Props) {
   }
 
   const pageUrl = `https://tsurispot.com/fishing/${method.slug}/area/${region.slug}`;
-  const title = `${region.name}の${method.name}おすすめスポットと攻略法`;
-  const description = `${region.name}地方で${method.name}ができるおすすめ釣りスポットを厳選紹介。初心者向けの穴場から上級者向けポイントまで掲載。`;
+  const title = `${region.name}の${method.name}スポット・釣り場ランキング`;
+  const description = `${region.name}地方で${method.name}ができるおすすめ釣り場・釣りスポットを厳選紹介。初心者向けの穴場から上級者向けポイントまで掲載。`;
 
   // 上位県（地域固有トークン。重複回避のため攻略文・FAQに織り込む）
   const topPrefs = Array.from(prefCounts.entries())
@@ -397,9 +397,9 @@ export default async function MethodRegionPage({ params }: Props) {
         {/* ヘッダー */}
         <div className="mb-8">
           <h1 className="text-2xl sm:text-3xl font-bold mb-3">
-            {region.name}の{method.name}おすすめスポットと攻略法
+            {region.name}の{method.name}スポット・釣り場ランキング
             <span className="block text-base sm:text-lg font-normal text-gray-600 mt-1">
-              初心者向けの穴場から人気ポイントまで{totalCount}件
+              初心者向けの穴場から人気ポイントまで{totalCount}件を厳選
             </span>
           </h1>
 
