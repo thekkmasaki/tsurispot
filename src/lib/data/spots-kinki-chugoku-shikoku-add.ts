@@ -946,7 +946,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-039", name: "阿南市・今津漁港", slug: "anan-imatsu-port",
-    description: "徳島県阿南市の今津漁港。波止とT字突堤が複数あり、ポイントが豊富。アジ・メバル・チヌのほか、アオリイカのエギングも人気。県南部の穏やかな海で、のんびりした釣りが楽しめる。",
+    description: "今津漁港はアジ・メバル・チヌにアオリイカのエギングまで狙える徳島県阿南市の漁港。波止とT字突堤が複数ありポイントが豊富で、夕マヅメのアジングや夜のメバリングが好調。県南部の穏やかな海で、のんびりした釣りが楽しめる。",
     latitude: 33.9178, longitude: 134.6645, address: "〒779-1111 徳島県阿南市",
     accessInfo: "JR阿南駅から車で約15分。徳島自動車道徳島ICから約40分。",
     region: region("r112"), spotType: "port", difficulty: "beginner",
