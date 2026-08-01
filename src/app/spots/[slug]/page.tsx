@@ -637,8 +637,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
         {/* スポット名 + お気に入り（最上段） */}
         <div className="flex items-start justify-between gap-3">
           <h1 className="min-w-0 font-display text-xl font-bold leading-tight text-pretty sm:text-2xl md:text-3xl">
-            {spot.name}
-            {/* SEO-1: H1 にキーワード追加 (検索意図キーワードを補足、 視覚的にも文脈が伝わる) */}
+            {spot.name}<span className="font-medium text-muted-foreground">の釣り場</span>
+            {/* SEO-2: H1本体に主要語「釣り場」を明示（対象クエリ「◯◯ 釣り」「◯◯ 釣り場」の
+                キーワードがH1本体に無く「釣れる/穴釣り」等の補足に埋没していたのを是正）。
+                魚種・釣法は下記のmuted補足として残す。 */}
             {spot.catchableFish.length > 0 && (
               <span className="ml-2 text-sm font-medium text-muted-foreground sm:text-base">
                 — {spot.catchableFish.slice(0, 2).map((cf) => cf.fish.name).join("・")}
