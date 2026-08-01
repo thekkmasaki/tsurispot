@@ -2370,7 +2370,7 @@ export const kantoKoshinetsuAdd3Spots: FishingSpot[] = [
   },
   {
     id: "s3199", name: "米山海岸", slug: "yoneyama-kaigan",
-    description: "柏崎市のサーフポイント。キスの投げ釣りの好漁場で、夏場は数釣りが楽しめる。秋にはヒラメも狙える。米山の雄大な景観を望みながらの釣りが魅力。",
+    description: "米山海岸はキスの投げ釣りの好漁場で夏は数釣り、秋はヒラメも狙える。柏崎市にあり、米山の雄大な景観を望みながらの釣りが魅力のサーフポイント。",
     latitude: 37.3333, longitude: 138.4833,
     address: "〒949-3675 新潟県柏崎市米山町",
     accessInfo: "JR信越本線米山駅から徒歩約10分。北陸自動車道米山ICから約5分。",

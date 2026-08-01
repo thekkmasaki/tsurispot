@@ -580,7 +580,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
   },
   {
     id: "se5127", name: "本荘マリーナ", slug: "honjo-marina",
-    description: "由利本荘市のマリーナ。子吉川河口に位置しシーバスの好ポイント。ハゼやキスも狙える身近な釣り場。",
+    description: "子吉川河口の本荘マリーナはシーバスの好ポイントでハゼ・キスも狙える。由利本荘市にある身近な釣り場で、駐車場・トイレも整い初心者でも楽しめる。",
     latitude: 39.3460, longitude: 140.0180,
     address: "〒015-0012 秋田県由利本荘市石脇",
     accessInfo: "JR羽後本荘駅から車で約10分。日本海東北自動車道本荘ICから約5分。",

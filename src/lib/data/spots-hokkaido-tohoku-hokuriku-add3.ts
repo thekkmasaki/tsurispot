@@ -1928,7 +1928,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   },
   {
     id: "s3083", name: "最上川河口（酒田）", slug: "mogamigawa-kakou-sakata",
-    description: "日本三大急流の一つ・最上川の河口。シーバスの超一級ポイントとして全国的に有名。河口の広大なサーフではヒラメのルアーフィッシングも楽しめる。",
+    description: "最上川河口はシーバスの超一級ポイントとして全国的に有名。日本三大急流の一つで、河口の広大なサーフではヒラメのルアーフィッシングも楽しめる好フィールド。",
     latitude: 38.9210, longitude: 139.8350,
     address: "〒998-0037 山形県酒田市日吉町2丁目3-5",
     accessInfo: "JR酒田駅から車で約15分。日本海東北自動車道酒田ICから約15分。",
@@ -2612,7 +2612,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   },
   {
     id: "s3115", name: "金沢港大野からくり記念館前", slug: "kanazawa-ko-ohno",
-    description: "金沢市の港。大野醤油の産地として知られるエリアで、岸壁からアジやクロダイが狙える。金沢港クルーズターミナルにも近く、観光と合わせて楽しめる。",
+    description: "金沢港大野は岸壁からアジ・クロダイが手軽に狙える釣り場。大野醤油の産地として知られるエリアで、金沢港クルーズターミナルにも近く、観光と合わせて楽しめる。",
     latitude: 36.6270, longitude: 136.6140,
     address: "〒920-0331 石川県金沢市大野町4丁目甲2番29",
     accessInfo: "JR金沢駅から車で約20分。北陸自動車道金沢西ICから約15分。",
