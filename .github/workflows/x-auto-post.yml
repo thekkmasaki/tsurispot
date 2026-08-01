@@ -27,6 +27,9 @@ on:
 jobs:
   post:
     runs-on: ubuntu-latest
+    # job レベルで定義しないと step の if: 条件では env が空になり通知が発火しない
+    env:
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
     steps:
       - uses: actions/checkout@v4
 
@@ -80,8 +83,6 @@ jobs:
 
       - name: Discord通知（成功）
         if: success() && env.DISCORD_WEBHOOK_URL != ''
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
           SCRIPT="${{ steps.detect.outputs.script }}"
           curl -s -H "Content-Type: application/json" \
@@ -90,8 +91,6 @@ jobs:
 
       - name: Discord通知（失敗）
         if: failure() && env.DISCORD_WEBHOOK_URL != ''
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
         run: |
           SCRIPT="${{ steps.detect.outputs.script }}"
           curl -s -H "Content-Type: application/json" \
