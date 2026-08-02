@@ -754,7 +754,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
   },
   {
     id: "sks4034", name: "三重漁港", slug: "mie-gyokou-nagasaki",
-    description: "長崎市の西海岸にある三重地区の漁港。外海に面し魚種が豊富で、メジナやクロダイのウキフカセが盛ん。エギングの好ポイントでもある。",
+    description: "三重漁港はメジナ・クロダイのウキフカセとエギングが盛んな長崎の漁港。長崎市西海岸の三重地区にあり外海に面して魚種が豊富。アオリイカのエギングやアジのサビキも楽しめる好ポイントで、港内に無料駐車場もある。",
     latitude: 32.7580, longitude: 129.7860,
     address: "〒851-2215 長崎県長崎市畝刈町",
     accessInfo: "長崎駅から車で約30分。長崎道長崎ICから約25分。",
