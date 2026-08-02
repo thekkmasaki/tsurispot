@@ -816,7 +816,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-034", name: "牛窓港（詳細）", slug: "ushimado-port-detail",
-    description: "岡山県瀬戸内市牛窓町の牛窓港。「日本のエーゲ海」と称される瀬戸内海の美しい風景の中で釣りが楽しめる。チヌの落とし込み釣りのメッカとして有名で、メバル・カサゴ・アジなども豊富。フェリー乗り場周辺は足場も良くファミリー向き。",
+    description: "チヌの落とし込み釣りのメッカとして有名で、メバル・カサゴ・アジなども豊富。岡山県瀬戸内市牛窓町の牛窓港で、「日本のエーゲ海」と称される瀬戸内海の美しい風景の中で釣りが楽しめる。フェリー乗り場周辺は足場も良くファミリー向き。",
     latitude: 34.6189, longitude: 134.1578, address: "〒701-4302 岡山県瀬戸内市牛窓町牛窓3009",
     accessInfo: "JR邑久駅からバス約20分。岡山ブルーライン邑久ICから約15分。",
     region: region("r106"), spotType: "port", difficulty: "beginner",
