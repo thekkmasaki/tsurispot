@@ -40,6 +40,7 @@ import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 import { ShoppingBag, ExternalLink, ArrowRight, Tag, Gem, Crown } from "lucide-react";
 import { getHiddenGemSpotsForPrefecture } from "@/lib/hidden-gem";
 import { ShareButtons } from "@/components/ui/share-buttons";
+import { getStrikingSpotsByPref } from "@/lib/data/striking-spots";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -504,6 +505,11 @@ export default async function PrefecturePage({ params }: PageProps) {
 
   // 穴場×高級魚スポット
   const hiddenGemSpots = getHiddenGemSpotsForPrefecture(spots, 3);
+  // G2: GSC実需要の高い「あと一歩」spot（striking-spots.ts）のうち、この県に実在するもの。
+  // 県ハブトップから直リンクを通し、pos8-12 で埋もれた漁港を1ページ目上位へ押し上げる。
+  const strikingSpotsForPref = getStrikingSpotsByPref(pref.slug)
+    .map((x) => spots.find((sp) => sp.slug === x.slug))
+    .filter((sp): sp is NonNullable<typeof sp> => Boolean(sp));
 
   // 季節別おすすめ魚種（動的生成）
   const seasonalFishBreakdown = getSeasonalFishBreakdown(pref.name, regionSlug);
@@ -912,6 +918,42 @@ export default async function PrefecturePage({ params }: PageProps) {
               </Link>
             </div>
           )}
+        </section>
+      )}
+
+      {/* GSC実需要の高い「あと一歩」の注目釣り場（G2内部リンク強化） */}
+      {strikingSpotsForPref.length > 0 && (
+        <section className="mb-8 sm:mb-10">
+          <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
+            <TrendingUp className="size-5 text-primary" />
+            {pref.name}で今チェックされている釣り場
+          </h2>
+          <p className="mb-4 text-sm text-muted-foreground">
+            検索でよく探されている{pref.name}の釣り場です。最新の釣果・仕掛け・アクセスをまとめています。
+          </p>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {strikingSpotsForPref.map((spot) => (
+              <Link prefetch={false} key={spot.id} href={`/spots/${spot.slug}`}>
+                <Card className="group gap-0 py-0 transition-shadow hover:shadow-md">
+                  <CardContent className="p-3 sm:p-4">
+                    <div className="flex items-center gap-3">
+                      <div className="min-w-0 flex-1">
+                        <h3 className="truncate text-sm font-semibold group-hover:text-primary sm:text-base">
+                          {spot.name}
+                        </h3>
+                        <p className="mt-0.5 text-xs text-muted-foreground">
+                          {spot.region.areaName}
+                          <span className="mx-1">|</span>
+                          {SPOT_TYPE_LABELS[spot.spotType]}
+                        </p>
+                      </div>
+                      <ArrowRight className="size-4 shrink-0 text-muted-foreground group-hover:text-primary" />
+                    </div>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
         </section>
       )}
 
