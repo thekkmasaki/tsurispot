@@ -82,17 +82,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     ? `${fish.peakMonths[0]}月〜${fish.peakMonths[fish.peakMonths.length - 1]}月`
     : "";
 
-  const titleText = `${fish.name}の釣り方・時期・おすすめスポット${fish.aliases?.length ? `【${fish.aliases[0]}】` : ""}`;
+  const year = new Date().getFullYear();
+  // title は検索意図（釣り方・仕掛け・時期・場所）を前方化。「◯◯ 旬」だけの zero-click 検索に
+  // 流れないよう、クリック価値のある具体語を並べ、年号で鮮度シグナルを立てる（CTR改善狙い）。
+  const titleText = `${fish.name}の釣り方・仕掛け・釣れる時期｜おすすめの釣り場【${year}年】`;
   // description は文単位で組み立て、min(120)を保証しつつ description 先頭文をきれいに載せる
   // （従来の slice(0,60) は語の途中で切れていた）。
   const description = composeMetaDescription(
     [
-      `${fish.name}の釣り方を初心者にもわかりやすく解説します。`,
-      peakMonthsStr ? `${fish.name}が釣れる時期は${peakMonthsStr}。` : false,
-      methodNames
-        ? `${methodNames}などの釣り方・仕掛け・タックルまで詳しく紹介。`
-        : false,
-      `釣れるスポット一覧やシーズンカレンダーも掲載しています。`,
+      `${fish.name}の釣り方・仕掛け・タックルを図解でわかりやすく解説。`,
+      peakMonthsStr
+        ? `釣れる時期は${peakMonthsStr}で、${methodNames || "各種の釣法"}が有効です。`
+        : methodNames
+          ? `${methodNames}などの釣り方・仕掛けを詳しく紹介。`
+          : false,
+      `${fish.name}が釣れるスポット一覧とシーズンカレンダーも掲載しています。`,
       firstSentence(fish.description, 60) || false,
     ],
     {
