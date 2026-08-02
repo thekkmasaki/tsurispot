@@ -34,12 +34,6 @@ const SPOT_CACHE = join(CACHE_DIR, "spot-summary.json");
 /** 魚種データディレクトリ */
 const DATA_DIR = join(ROOT, "src", "lib", "data");
 
-/**
- * 処理するスポットファイルの最大数
- * 全80+ファイルを処理すると重いので、代表的なサンプルのみ
- */
-const MAX_SPOT_FILES = 20;
-
 // ─── 魚種データ解析 ───
 
 /**
@@ -92,7 +86,17 @@ function parseFishFile(filePath) {
  * @returns {{ slug: string, name: string, peakMonths: number[], seasonMonths: number[] }[]}
  */
 function buildFishSummary() {
-  const fishFiles = ["fish-sea.ts", "fish-freshwater.ts", "fish-brackish.ts"];
+  // fish-sea.ts は集約ファイル(import + spread)で inline 定義が無く0種になる。
+  // 海水魚は5つのサブファイルを直接解析する（旧実装は海水魚が全欠落し31種のみだった）。
+  const fishFiles = [
+    "fish-sea-popular.ts",
+    "fish-sea-kaiyuu.ts",
+    "fish-sea-tai-suzuki.ts",
+    "fish-sea-root-hata.ts",
+    "fish-sea-ika-tako.ts",
+    "fish-freshwater.ts",
+    "fish-brackish.ts",
+  ];
   const all = [];
 
   for (const file of fishFiles) {
@@ -186,19 +190,19 @@ function parseSpotFile(filePath) {
 }
 
 /**
- * スポットファイルを最大MAX_SPOT_FILES件処理してサマリ配列を返す
+ * 全 spots-*.ts を処理してサマリ配列を返す。
+ * 以前は先頭20ファイル(アルファベット順)のみ処理し、北海道/九州など後方の地域が
+ * 週末スポット候補から漏れる地理バイアスがあった。合計~18MBの正規表現解析だが
+ * キャッシュされるため実行毎の負荷は限定的。
  * @returns {{ slug: string, name: string, region: string, spotType: string, fishSlugs: string[] }[]}
  */
 function buildSpotSummary() {
   // spots-*.ts ファイルを列挙（ただし spots.ts 本体は除外）
-  const allFiles = readdirSync(DATA_DIR)
+  const targetFiles = readdirSync(DATA_DIR)
     .filter((f) => f.startsWith("spots-") && f.endsWith(".ts"))
     .sort();
 
-  const targetFiles = allFiles.slice(0, MAX_SPOT_FILES);
-  console.log(
-    `[export-data] スポットファイル: ${allFiles.length}件中 ${targetFiles.length}件を処理`
-  );
+  console.log(`[export-data] スポットファイル: ${targetFiles.length}件を処理`);
 
   const all = [];
   for (const file of targetFiles) {
