@@ -86,7 +86,17 @@ function parseFishFile(filePath) {
  * @returns {{ slug: string, name: string, peakMonths: number[], seasonMonths: number[] }[]}
  */
 function buildFishSummary() {
-  const fishFiles = ["fish-sea.ts", "fish-freshwater.ts", "fish-brackish.ts"];
+  // fish-sea.ts は集約ファイル(import + spread)で inline 定義が無く0種になる。
+  // 海水魚は5つのサブファイルを直接解析する（旧実装は海水魚が全欠落し31種のみだった）。
+  const fishFiles = [
+    "fish-sea-popular.ts",
+    "fish-sea-kaiyuu.ts",
+    "fish-sea-tai-suzuki.ts",
+    "fish-sea-root-hata.ts",
+    "fish-sea-ika-tako.ts",
+    "fish-freshwater.ts",
+    "fish-brackish.ts",
+  ];
   const all = [];
 
   for (const file of fishFiles) {
