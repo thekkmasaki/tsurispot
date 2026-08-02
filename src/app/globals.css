@@ -149,9 +149,13 @@
     font-feature-settings: "palt" 1;
   }
   /* 見出し・カードタイトルは表示フォント（Zen Kaku Gothic New）に統一＋わずかな字間で締める。
-     letter-spacing はロゴ折返し等を避けるため見出し要素に限定（body 全体には掛けない）。 */
+     letter-spacing はロゴ折返し等を避けるため見出し要素に限定（body 全体には掛けない）。
+     【重要】--font-display / --font-sans は @theme inline のため“実CSS変数として出力されない”
+     （Tailwind が値を各ユーティリティにインライン展開するだけ）。生CSSから var(--font-display) を
+     参照すると未定義→無効→親の --font-sans を継承してしまう（h3カードタイトルが游ゴシックのまま化）。
+     そこで next/font が body に注入する実在の変数 var(--font-zkg) を直接参照する（=.font-display と同値）。 */
   h1, h2, h3 {
-    font-family: var(--font-display);
+    font-family: var(--font-zkg), -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", YuGothic, Meiryo, sans-serif;
     letter-spacing: 0.02em;
   }
 }
