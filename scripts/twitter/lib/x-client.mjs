@@ -197,14 +197,14 @@ export function stripHtml(text) {
 }
 
 /**
- * UTM付きURLを生成
+ * UTM付きURLを生成（GA4でSNS流入を分解できるよう utm_medium=social を付与）
  * @param {string} path - サイトパス（例: /blog/slug）
  * @param {string} campaign - キャンペーン名
  */
 export function makeUrl(path, campaign) {
   const base = "https://tsurispot.com";
   const url = path.startsWith("/") ? `${base}${path}` : `${base}/${path}`;
-  return `${url}?utm_source=twitter&utm_campaign=${campaign}`;
+  return `${url}?utm_source=twitter&utm_medium=social&utm_campaign=${campaign}`;
 }
 
 // ── 週報の鮮度判定 ──

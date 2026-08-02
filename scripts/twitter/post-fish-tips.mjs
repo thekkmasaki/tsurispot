@@ -11,7 +11,7 @@ import { TwitterApi } from "twitter-api-v2";
 import { readFileSync, writeFileSync } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
-import { resolveFishImage } from "./lib/x-client.mjs";
+import { resolveFishImage, makeUrl } from "./lib/x-client.mjs";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(__dirname, "../..");
@@ -605,8 +605,8 @@ async function main() {
     "",
     `\uD83C\uDFA3 ${difficultyStars} | \uD83D\uDCC5 ${peakMonthsJa}`,
     "",
-    `\u2192 https://tsurispot.com/fish/${tip.slug}`,
-    `#釣り #${tip.name} #ツリスポ`,
+    `\u2192 ${makeUrl(`/fish/${tip.slug}`, "fish-tips")}`,
+    `#${tip.name} #釣り好きな人と繋がりたい #ツリスポ`,
   ];
   const templateText = templateParts.join("\n");
   const templateWeight = twitterWeightedLength(templateText);
@@ -622,8 +622,8 @@ async function main() {
     "",
     `\uD83C\uDFA3 ${difficultyStars} | \uD83D\uDCC5 ${peakMonthsJa}`,
     "",
-    `\u2192 https://tsurispot.com/fish/${tip.slug}`,
-    `#釣り #${tip.name} #ツリスポ`,
+    `\u2192 ${makeUrl(`/fish/${tip.slug}`, "fish-tips")}`,
+    `#${tip.name} #釣り好きな人と繋がりたい #ツリスポ`,
   ].join("\n");
 
   const weightedLen = twitterWeightedLength(tweetText);

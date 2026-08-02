@@ -183,7 +183,7 @@ async function postSpotTweet(spot, matchingFishSlugs, fishList) {
   lines.push("");
   lines.push("週末の釣り計画はこちら👇");
   lines.push(makeUrl(`/spots/${spot.slug}`, "weekend-spot"));
-  lines.push("#釣り場 #週末釣り #ツリスポ");
+  lines.push("#釣り場 #週末釣り #釣り好きな人と繋がりたい #ツリスポ");
 
   const tweetText = lines.join("\n");
 
