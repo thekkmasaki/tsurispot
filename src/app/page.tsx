@@ -11,7 +11,8 @@ import { Button } from "@/components/ui/button";
 // LoginPromoBanner は 2026-07-30 ユーザー判断でトップ非表示中（下記 render もコメントアウト）。復活時に解除。
 // import { LoginPromoBanner } from "@/components/home/login-promo-banner";
 import { JoinCTA } from "@/components/home/join-cta";
-import { HomeNearbyBand } from "@/components/home/nearby-band";
+import { HomeMapBand } from "@/components/home/home-map-band";
+import { getHomeAreaMarkers } from "@/lib/geo/home-area-markers";
 // CommunityStats は数字が小さいうち (釣り人 26 人等) は逆効果なので一時 hide。
 // 数字が育ったら以下 1 行 + 下記 render を復活。 component 自体は残してある。
 // import { CommunityStats } from "@/components/home/community-stats";
@@ -94,6 +95,7 @@ const RecentCatchReports = nextDynamic(() => import("@/components/home/recent-ca
 //   loading: () => null,
 // });
 
+const homeAreaMarkers = getHomeAreaMarkers();
 const spotCount = fishingSpots.length.toLocaleString();
 const fishCount = fishSpecies.length;
 
@@ -423,7 +425,7 @@ export default async function Home() {
       {/* ヒーロー直下: 近くの釣り場バンド（現在地→近い順→実地図。実地図はボタン押下後に遅延マウント）。
           idle 状態は SSR され初期 HTML に含まれる（CLS 回避・即表示）。全スポット座標は初期 HTML に
           埋めず /api/spots/coords（force-static＝CDN）をボタン押下時に 1 回だけ取得する。 */}
-      <HomeNearbyBand />
+      <HomeMapBand areaMarkers={homeAreaMarkers} />
 
       {/* Phase 6: Hero 直下 Green Join CTA (community pattern、 登録率改善) */}
       <JoinCTA />
