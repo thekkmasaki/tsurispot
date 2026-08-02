@@ -138,7 +138,7 @@ export function HomeMapBand({ areaMarkers }: { areaMarkers: AreaMarker[] }) {
                   className="flex h-full flex-col gap-1 rounded-xl border bg-white p-3 transition-shadow hover:shadow-md"
                 >
                   <div className="flex items-start justify-between gap-2">
-                    <span className="min-w-0 truncate text-sm font-semibold">
+                    <span className="min-w-0 truncate font-display text-sm font-semibold">
                       {s.name}
                     </span>
                     <span className="inline-flex shrink-0 items-center gap-0.5 text-xs font-medium text-sky-600">

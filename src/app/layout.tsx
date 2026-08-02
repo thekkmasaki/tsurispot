@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Zen_Maru_Gothic } from "next/font/google";
+import { Zen_Kaku_Gothic_New, Inter } from "next/font/google";
 import { AdSenseLoader } from "@/components/ads/adsense-loader";
 import { AdBlockMeasure } from "@/components/ads/adblock-measure";
 import { Header } from "@/components/layout/header";
@@ -26,18 +26,28 @@ import "./globals.css";
 
 const SPOT_COUNT = SPOT_COUNT_FORMATTED;
 
-// 本文フォントは OS 標準の日本語フォント（Hiragino/Yu Gothic/Meiryo/端末内Noto）を使う。
-// 【2026-07-31 Noto Sans JP self-host 廃止】next/font の Noto Sans JP は unicode-range で
-// 124スライス×3ウェイト＝@font-face 372個（非圧縮275KB / 圧縮96KB）をレンダリングブロックCSSに
-// 焼き込んでおり、これが PSI モバイル LCP 11.3秒の最大要因だった（本番実測で確認）。
-// 本文は --font-sans のシステムフォントスタックに切替え、Webフォントの往復DLとブロッキングCSSを
-// まるごと排除する（Android は端末内 Noto、Mac/iOS は Hiragino、Windows は Yu Gothic/Meiryo）。
-// 見出し(h1・ロゴ)の Zen Maru Gothic 700 のみ next/font で残す（LCP用スライス4本を <head> で preload）。
-// weight は 700 のみ: 全使用箇所(header/footer/mobile-nav/hero h1等)が font-bold。900/500 は未使用。
-const zenMaruGothic = Zen_Maru_Gothic({
-  variable: "--font-zen-maru",
+// 本文の日本語は OS 標準フォント（Hiragino/Yu Gothic/Meiryo/端末内Noto）を維持する。
+// 【2026-07-31 Noto Sans JP self-host 廃止】本文をWebフォント化すると unicode-range で
+// @font-face 372個（圧縮96KB）がレンダリングブロックCSSに焼き込まれ、PSIモバイルLCP11.3秒の
+// 主因になった。本文は --font-sans のシステムフォントスタックのまま（往復DL/ブロッキングCSSゼロ）。
+//
+// 【2026-08-02 見出しフォント刷新】見出し(h1/h2/h3)・ロゴ・カードタイトルの表示フォントを
+// 丸ゴ Zen Maru Gothic → 角ゴ Zen Kaku Gothic New に統一（すっきりモダン・信頼感／同Zenファミリー）。
+// 数字・英字は Inter（Latinサブセットのみ）で締める。いずれも display:swap・preload:false で
+// 描画はブロックしない（本文/LCPは即時fallback描画→後追いでフォント差し替え）。#320の全滅とは別物。
+// weight は 500/700（見出しはfont-semibold/bold中心。細字ぶんを500でカバー）。
+const zenKakuGothicNew = Zen_Kaku_Gothic_New({
+  variable: "--font-zkg",
   subsets: ["latin"],
-  weight: ["700"],
+  weight: ["500", "700"],
+  display: "swap",
+  preload: false,
+});
+// 数字・英字専用（--font-sans の先頭に差し込む。日本語グリフを持たないため和文は system フォントに落ちる）。
+// 可変フォント（weight未指定＝latin可変1ファイル）で全ウェイトをカバーしつつ軽量に保つ。
+const inter = Inter({
+  variable: "--font-latin",
+  subsets: ["latin"],
   display: "swap",
   preload: false,
 });
@@ -117,18 +127,11 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="theme-color" content="#0369a1" />
-        {/* LCP対策: ヒーローh1「近くの釣りスポットがすぐ見つかる。」とロゴ「ツリスポ」の
-            Zen Maru Gothic 700 必要スライス4本(計52.9KB)をpreloadし、
-            「CSS DL→@font-face発見→スライスDL→フォントスワップでLCP再計上」の直列チェーンを並列化する。
-            LCP要素はこのh1テキストのため、フォント到着遅延がそのままLCPを押し上げていた。
-            ハッシュはnext/fontのコンテンツハッシュでフォント内容が変わらない限りビルド間で安定。
-            Zen Maru更新等でずれても preload 404(コンソール警告のみ)で表示は無傷。
-            deploy.yml のビルド後検証ステップがずれを検出する。
-            crossOrigin必須(フォントはCORSフェッチ。欠けるとpreloadが再利用されず二重DL)。 */}
-        <link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href="/_next/static/media/f99f0c0793f80098-s.f3844250.woff2" />
-        <link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href="/_next/static/media/27e35131747c32ae-s.b6c80edf.woff2" />
-        <link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href="/_next/static/media/4aa59075740ea887-s.56094210.woff2" />
-        <link rel="preload" as="font" type="font/woff2" crossOrigin="anonymous" href="/_next/static/media/918bec1d53fbfd5a-s.040320a2.woff2" />
+        {/* 見出しフォント(Zen Kaku Gothic New)/数字(Inter)は display:swap・preload:false で読み込む。
+            LCP要素のヒーローh1は和文のため、和文はまず system フォントで即時描画され（LCPは非ブロック）、
+            到着後に webフォントへ差し替わる。ハードコードpreloadはハッシュずれ運用コストが高いため廃止。
+            ※ヒーローh1のフォントスワップ点滅を消したい場合は、初回ビルド後 .next/static/media の
+              Zen Kaku New 該当スライスを preload に再追加する余地あり（LCP自体は現状で悪化しない）。 */}
         {/* Preconnect: 外部ドメインへの接続を事前確立してCWV改善 */}
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
@@ -159,7 +162,7 @@ export default function RootLayout({
         <link rel="author" type="text/plain" href="/humans.txt" />
       </head>
       <body
-        className={`${zenMaruGothic.variable} font-sans antialiased`}
+        className={`${zenKakuGothicNew.variable} ${inter.variable} font-sans antialiased`}
       >
         {/* WebSite schema: サイト名をGoogleに正しく認識させるため独立したscriptタグ */}
         <script
