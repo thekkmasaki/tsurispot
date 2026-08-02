@@ -303,7 +303,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   },
   {
     id: "s212", name: "汐見埠頭 砂上げ場", slug: "shiomi-wharf",
-    description: "泉大津の人気ポイント。広い護岸で車横付けが可能。サビキ・タチウオ・チヌと多彩な魚種。夜間は封鎖される場合があるので注意。",
+    description: "泉大津の汐見埠頭でアジ・タチウオ・チヌ（クロダイ）が狙える。広い護岸で車の横付けができ、足元のサビキ釣りから夜のタチウオまで多彩に楽しめる。人気ポイントだが夜間は封鎖される場合があるので事前に確認しておきたい。",
     latitude: 34.5050, longitude: 135.3750, address: "〒595-0054 大阪府泉大津市汐見町106",
     accessInfo: "臨海線・汐見町交差点を曲がる。阪神高速湾岸線助松出口から約10分。",
     region: region("r133"), spotType: "port", difficulty: "beginner",
@@ -465,7 +465,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   },
   {
     id: "s218", name: "神戸空港ベランダ", slug: "kobe-airport-veranda",
-    description: "神戸空港島の護岸釣り場。飛行機を眺めながら釣りが楽しめる開放的なスポット。サビキ・タチウオ・シーバスの実績あり。",
+    description: "神戸空港島のベランダ護岸でアジ・タチウオ・シーバスが狙える。飛行機を眺めながら釣りができる開放的なスポットで、足元のサビキ釣りから夜のタチウオ狙いまで楽しめる。足場が安定しファミリーにも人気の釣り場。",
     latitude: 34.6316, longitude: 135.2239, address: "〒650-0048 兵庫県神戸市中央区神戸空港",
     accessInfo: "ポートライナー「神戸空港」駅から徒歩約10分。",
     region: region("r135"), spotType: "breakwater", difficulty: "beginner",
