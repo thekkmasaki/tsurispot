@@ -3,7 +3,7 @@
 import { useState, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Fish, Calendar, User, Ruler, Flag } from "lucide-react";
+import { Fish, Calendar, User, Ruler, Flag, Share2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "@/components/ui/toast";
@@ -35,6 +35,27 @@ function getSessionId(): string {
     sessionStorage.setItem(key, sid);
   }
   return sid;
+}
+
+// ── UGCシェア（バイラルループ: 訪問者が釣果を拡散→スポットページへ新規流入） ──
+const SITE_URL = "https://tsurispot.com";
+
+function ugcSpotUrl(report: CatchReport, source: string): string {
+  return `${SITE_URL}/spots/${report.spotSlug}?utm_source=${source}&utm_medium=social&utm_campaign=ugc-share`;
+}
+
+function xShareUrl(report: CatchReport): string {
+  const size = report.sizeCm ? ` ${report.sizeCm}cm` : "";
+  const text = `${report.fishName}${size}が釣れた！🎣`;
+  const url = ugcSpotUrl(report, "twitter");
+  return `https://x.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(
+    url,
+  )}&hashtags=${encodeURIComponent("ツリスポ釣果,釣り")}`;
+}
+
+function lineShareUrl(report: CatchReport): string {
+  const url = ugcSpotUrl(report, "line");
+  return `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}`;
 }
 
 export function CatchReportList({ spotSlug, initialReports }: CatchReportListProps) {
@@ -185,6 +206,28 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
                   </p>
                 )}
               </div>
+            </div>
+            {/* シェア（バイラルループ: 訪問者が釣果を拡散→新規流入） */}
+            <div className="mt-2 flex items-center gap-2 border-t pt-2 text-xs text-muted-foreground/70">
+              <span>この釣果をシェア:</span>
+              <a
+                href={xShareUrl(report)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 rounded-md border px-2 py-0.5 font-medium text-foreground/70 hover:bg-muted"
+                aria-label="Xでシェア"
+              >
+                <Share2 className="size-3" aria-hidden="true" /> X
+              </a>
+              <a
+                href={lineShareUrl(report)}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-md border px-2 py-0.5 font-medium text-foreground/70 hover:bg-muted"
+                aria-label="LINEでシェア"
+              >
+                LINE
+              </a>
             </div>
           </CardContent>
         </Card>
