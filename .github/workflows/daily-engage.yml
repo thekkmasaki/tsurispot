@@ -1,0 +1,24 @@
+name: 中の人 交流候補配膳
+
+on:
+  schedule:
+    - cron: '0 21 * * *'   # JST 06:00 毎朝
+  workflow_dispatch:
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    # 未設定なら通知をスキップ（if で参照するため job レベルに置く）
+    env:
+      DISCORD_ENGAGE_WEBHOOK_URL: ${{ secrets.DISCORD_ENGAGE_WEBHOOK_URL }}
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 交流候補をDiscordへ配膳
+        if: env.DISCORD_ENGAGE_WEBHOOK_URL != '' || env.DISCORD_WEBHOOK_URL != ''
+        run: node scripts/sns/daily-engage-digest.mjs
