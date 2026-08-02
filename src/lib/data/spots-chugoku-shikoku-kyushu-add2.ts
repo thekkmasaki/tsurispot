@@ -1088,7 +1088,7 @@ export const chugokuShikokuKyushuAdd2Spots: FishingSpot[] = [
   },
   {
     id: "s2844", name: "出雲市小伊津漁港", slug: "izumo-koizu-port",
-    description: "出雲市小伊津の漁港。断崖の漁村にある小さな漁港で、水深が深く魚種が豊富。アジの他、大型のイシダイの実績もある知る人ぞ知る釣り場。",
+    description: "小伊津漁港は出雲市の断崖に囲まれた深場の漁港で、魚種が豊富。アジのサビキ釣りに加え、大型イシダイの底物釣りやメバリング、クロダイのウキフカセも楽しめる知る人ぞ知る釣り場。",
     latitude: 35.4280, longitude: 132.7680,
     address: "〒691-0052 島根県出雲市小伊津町1422",
     accessInfo: "JR出雲市駅から車で約25分。山陰自動車道出雲ICから約25分。",
