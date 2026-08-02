@@ -90,7 +90,7 @@ export const hokkaidoTohokuAdd8Spots: FishingSpot[] = [
   },
   {
     id: "se8002", name: "余市漁港", slug: "yoichi-gyokou-e8",
-    description: "余市川河口に位置する大型漁港で、ホッケやカレイの好ポイント。秋にはサケの遡上も見られ、周辺はニッカウヰスキー蒸溜所の観光と合わせて楽しめる。",
+    description: "余市漁港は余市川河口の大型漁港でホッケ・カレイの好ポイント。春はウキ釣りでホッケ、初夏は投げ釣りでカレイ、夏はイワシのサビキ、夜はワームでクロソイが狙える。駐車場・トイレ・コンビニが揃い初心者にも安心。",
     latitude: 43.195, longitude: 140.782,
     address: "〒046-0003 北海道余市郡余市町港町",
     accessInfo: "JR余市駅から徒歩約15分",
