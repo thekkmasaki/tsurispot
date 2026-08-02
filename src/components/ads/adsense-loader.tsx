@@ -18,10 +18,14 @@ export function AdSenseLoader() {
   if (!allowed || !adsenseId) return null;
 
   return (
-    // lazyOnload で初回ロードのレンダリングブロックを回避（CLS/LCP優先）。
+    // afterInteractive でハイドレーション直後に読込。next/script が body 末尾へ注入するため
+    // 非ブロックで、全広告枠が min-h-[250px] で領域予約済のため CLS は不変。
+    // lazyOnload（window load 後 + idle）だと ATF 枠の描画が着地直帰 PV に間に合わず、
+    // 広告が出ずに終わる＋視認率が下がるため、fill と視認を早める狙い。
+    // eager push（ad-unit 側）は一切変えないので #253（per-ad push 遅延で収益半減）とは別軸で安全。
     <Script
       src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsenseId}`}
-      strategy="lazyOnload"
+      strategy="afterInteractive"
       crossOrigin="anonymous"
       onLoad={() => setAdSenseScriptState("loaded")}
       onError={() => setAdSenseScriptState("blocked")}
