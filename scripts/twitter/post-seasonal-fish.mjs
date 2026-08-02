@@ -262,7 +262,7 @@ async function postFishTweet(fish, month, season) {
 
   lines.push("");
   lines.push(`図鑑はこちら→ ${makeUrl(`/fish/${fish.slug}`, "seasonal-fish")}`);
-  lines.push(`#${fish.name} #${month}月の釣り #旬の魚 #釣り #ツリスポ`);
+  lines.push(`#${fish.name} #旬の魚 #釣り好きな人と繋がりたい #ツリスポ`);
 
   const tweetText = lines.join("\n");
 
