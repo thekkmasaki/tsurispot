@@ -58,6 +58,17 @@ export function HomeMapBand({ areaMarkers }: { areaMarkers: AreaMarker[] }) {
 
   const mode = status === "ready" && center ? "nearby" : "overview";
 
+  // チップを地方ごとにグルーピング（areaMarkers は prefectures 順＝地方順で来る）。
+  const chipGroups: { region: string; items: AreaMarker[] }[] = [];
+  for (const a of areaMarkers) {
+    let g = chipGroups.find((x) => x.region === a.regionGroup);
+    if (!g) {
+      g = { region: a.regionGroup, items: [] };
+      chipGroups.push(g);
+    }
+    g.items.push(a);
+  }
+
   return (
     <section className="mx-auto w-full max-w-5xl px-4 py-6 sm:px-6 sm:py-8">
       <div className="rounded-2xl border-2 border-sky-200 bg-gradient-to-br from-sky-50 to-cyan-50 p-4 sm:p-6">
@@ -92,20 +103,27 @@ export function HomeMapBand({ areaMarkers }: { areaMarkers: AreaMarker[] }) {
           )}
         </div>
 
-        {/* 主要エリア（SSR される実リンク＝内部リンク/SEO・JS 無しでも辿れる） */}
-        <nav aria-label="主要エリアから探す" className="mt-3 flex flex-wrap gap-1.5">
-          {areaMarkers.map((a) => (
-            <Link
-              key={a.slug}
-              prefetch={false}
-              href={`/prefecture/${a.slug}`}
-              className="inline-flex items-center gap-1 rounded-full border border-sky-200 bg-white/70 px-2.5 py-1 text-xs font-medium text-sky-800 transition-colors hover:bg-white"
-            >
-              {a.nameShort}
-              <span className="text-[10px] text-sky-500">
-                {a.count.toLocaleString()}
+        {/* 全都道府県（SSR される実リンク＝内部リンク/SEO・JS 無しでも辿れる）。地方ごとにグルーピング。 */}
+        <nav aria-label="都道府県から探す" className="mt-3 space-y-1.5">
+          {chipGroups.map((g) => (
+            <div key={g.region} className="flex flex-wrap items-center gap-1.5">
+              <span className="mr-0.5 shrink-0 text-[11px] font-bold text-sky-900/60">
+                {g.region}
               </span>
-            </Link>
+              {g.items.map((a) => (
+                <Link
+                  key={a.slug}
+                  prefetch={false}
+                  href={`/prefecture/${a.slug}`}
+                  className="inline-flex items-center gap-1 rounded-full border border-sky-200 bg-white/70 px-2.5 py-1 text-xs font-medium text-sky-800 transition-colors hover:bg-white"
+                >
+                  {a.nameShort}
+                  <span className="text-[10px] text-sky-500">
+                    {a.count.toLocaleString()}
+                  </span>
+                </Link>
+              ))}
+            </div>
           ))}
         </nav>
 
