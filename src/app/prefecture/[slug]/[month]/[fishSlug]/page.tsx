@@ -1087,6 +1087,9 @@ export default async function PrefectureMonthFishPage({
         </div>
       </section>
 
+      {/* 関連リンク前の本文内広告（3スポット以上の充実ページのみ＝広告過多回避） */}
+      {matchingSpots.length >= 3 && <InArticleAd className="my-8" />}
+
       {/* 関連リンク */}
       <section className="mt-8 sm:mt-12">
         <h2 className="mb-3 text-base font-bold sm:mb-4 sm:text-lg">

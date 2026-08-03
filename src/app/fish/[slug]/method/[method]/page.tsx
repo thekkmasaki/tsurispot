@@ -636,6 +636,9 @@ export default async function FishMethodPage({ params }: PageProps) {
         </section>
       )}
 
+      {/* スポット一覧直後の本文内広告 */}
+      <InArticleAd className="my-8" />
+
       {/* 同じ魚の他の釣り方 */}
       {otherMethodsForFish.length > 0 && (
         <section className="mb-8 sm:mb-10">
@@ -699,6 +702,9 @@ export default async function FishMethodPage({ params }: PageProps) {
           ))}
         </div>
       </section>
+
+      {/* FAQ直後の本文内広告 */}
+      <InArticleAd className="my-8" />
 
       {/* 関連リンク */}
       <section className="mt-8 sm:mt-12">
