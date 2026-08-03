@@ -1582,7 +1582,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-064", name: "梓川（上高地〜松本）", slug: "azusagawa-kamikochi",
-    description: "北アルプスを源流とする梓川は、上高地から松本平野へ流れる清流。上流域はイワナ・ヤマメの渓流釣りの聖地。中流の波田〜梓橋エリアではアユやニジマスも狙える。",
+    description: "梓川は上高地を源流とするイワナ・ヤマメ渓流釣りの聖地。北アルプスの清流で、上流域はテンカラやルアーでイワナ・ヤマメが狙える。中流の波田〜梓橋エリアでは友釣りのアユやルアーのニジマスも楽しめる。遊漁券が必要。",
     latitude: 36.2450, longitude: 137.8333, address: "〒390-1516 長野県松本市安曇上高地",
     accessInfo: "長野自動車道松本ICから約20分。松本電鉄上高地線波田駅から徒歩約15分。",
     region: lr("r690"), spotType: "river", difficulty: "intermediate",

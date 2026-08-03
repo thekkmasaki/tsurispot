@@ -2358,7 +2358,7 @@ export const chugokuShikokuAdd8Spots: FishingSpot[] = [
   },
   {
     id: "sc8130", name: "四国中央市・三島川之江港", slug: "shikokuchuo-mishima-c8",
-    description: "四国中央市の製紙工場が並ぶ港町。瀬戸内海の燧灘に面し、ハゼやカレイの投げ釣りが定番。工業港だが釣り場は確保されており、秋のハゼ釣りは特に人気。",
+    description: "四国中央市・三島川之江港はハゼのちょい投げが定番の釣り場。瀬戸内海の燧灘に面し、秋のハゼ釣りが特に人気。冬はカレイの投げ釣り、初夏〜秋はサビキでアジが狙える。工業港だが釣り場が確保され初心者やファミリーも安心。",
     latitude: 34.016, longitude: 133.532,
     address: "〒799-0401 愛媛県四国中央市三島中央",
     accessInfo: "JR伊予三島駅から車で約10分",

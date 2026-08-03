@@ -660,7 +660,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   },
   {
     id: "ss8034", name: "名護屋港", slug: "nagoya-kou-saga-s8",
-    description: "名護屋城跡の近くにある漁港。湾内は穏やかでファミリー釣りに適し、外向きの堤防ではヒラメやマゴチも狙える。歴史ロマンと釣りの両方が楽しめる。",
+    description: "名護屋港はヒラメの泳がせ釣りが狙える佐賀・唐津の漁港。湾内は穏やかでサビキのアジやエギングのアオリイカがファミリーにも人気。外向きの堤防では良型ヒラメの実績も高い。名護屋城跡が近く観光と釣りが両立できる。",
     latitude: 33.519, longitude: 129.876,
     address: "〒847-0401 佐賀県唐津市鎮西町名護屋",
     accessInfo: "JR唐津駅から車で約30分",
@@ -1891,7 +1891,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   },
   {
     id: "ss8104", name: "上天草・姫戸港", slug: "kamiamakusa-himedo-kou-s8",
-    description: "上天草市姫戸町の漁港。八代海に面した穏やかな港で、アジやメバルの夜釣りが地元で人気。昼間はキスのちょい投げも楽しめる。",
+    description: "姫戸港はアジングとメバリングの夜釣りが人気の上天草の漁港。八代海に面した穏やかな港で、夜はアジ・メバルをライトゲームで狙え、昼はキスのちょい投げも楽しめる。初心者やファミリーにも通いやすい静かな釣り場。",
     latitude: 32.436216, longitude: 130.415164,
     address: "〒866-0101 熊本県上天草市姫戸町姫浦",
     accessInfo: "松橋ICから車で約60分",

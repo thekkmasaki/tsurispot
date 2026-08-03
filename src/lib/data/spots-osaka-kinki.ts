@@ -410,7 +410,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   // ===== 兵庫県（阪神エリア） =====
   {
     id: "s216", name: "尼崎市立魚つり公園", slug: "amagasaki-fishing-park",
-    description: "大阪湾奥に位置する人気の海釣り施設。柵・トイレ・売店完備で安全。サビキでアジ・サバ、ルアーでシーバス・タチウオが狙える。",
+    description: "尼崎市立魚つり公園はサビキのアジ・サバが人気の海釣り公園。大阪湾奥に位置し柵・トイレ・売店完備で安全、レンタル竿もあり初心者も安心。秋はルアーでシーバス、テンヤでタチウオも狙える家族連れに好評の施設。",
     latitude: 34.681200, longitude: 135.3800, address: "〒660-0087 兵庫県尼崎市平左衛門町66",
     accessInfo: "阪神「尼崎」駅からバスで約25分。阪神高速尼崎西出口から約10分。",
     region: region("r135"), spotType: "pier", difficulty: "beginner",
