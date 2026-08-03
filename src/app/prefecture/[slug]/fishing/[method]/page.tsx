@@ -654,6 +654,9 @@ export default async function PrefectureFishingMethodPage({
         </div>
       </section>
 
+      {/* 月別リンク後・関連リンク前の本文内広告 */}
+      <InArticleAd className="my-8" />
+
       {/* 関連リンク */}
       <section className="mt-8 sm:mt-12">
         <h2 className="mb-3 text-base font-bold sm:mb-4 sm:text-lg">

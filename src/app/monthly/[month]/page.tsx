@@ -887,6 +887,9 @@ export default async function MonthlyGuidePage({ params }: Props) {
           </Card>
         </section>
 
+        {/* 釣りのコツ後・中間帯の本文内広告 */}
+        <InArticleAd className="my-8" />
+
         {/* おすすめ装備 */}
         <CollapsibleSection
           title={`${guide.nameJa}のおすすめ装備`}
