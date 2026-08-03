@@ -371,14 +371,22 @@ export default async function PrefectureFishingMethodPage({
       {/* ヘッダー */}
       <div className="mb-6 sm:mb-8">
         <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
-          {pref.name}の{method.name}
+          {pref.name}の{method.name}ポイント・おすすめ釣り場
         </h1>
         <p className="mt-2 text-sm text-muted-foreground sm:text-base">
           おすすめスポット{matchingSpots.length}件・狙える魚
           {catchableFishList.length}種
         </p>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          {pref.name}で{method.name}ができるおすすめスポットを紹介します。
+          {pref.name}で{method.name}ができるおすすめの釣り場・ポイントを
+          {matchingSpots.length}件紹介します。
+          {catchableFishList.length > 0 &&
+            `${method.name}では${catchableFishList
+              .slice(0, 3)
+              .map((f) => f.name)
+              .join("・")}など${catchableFishList.length}種が狙え、`}
+          ベストシーズンは
+          {bestMonths.map(({ month }) => month.name).join("・")}。
           {method.description}
         </p>
       </div>
@@ -498,7 +506,7 @@ export default async function PrefectureFishingMethodPage({
         <section className="mb-8 sm:mb-10">
           <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
             <MapPin className="size-5 text-primary" />
-            {pref.name}の{method.name}おすすめスポット（TOP
+            {pref.name}の{method.name}おすすめ釣り場・ポイント（TOP
             {topSpots.length}）
           </h2>
 
