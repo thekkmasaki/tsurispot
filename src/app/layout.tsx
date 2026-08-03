@@ -204,11 +204,6 @@ export default function RootLayout({
               description:
                 `全国${SPOT_COUNT}箇所以上の釣りスポットを掲載する総合情報サイト。地図で直感的に釣り場を探せ、今の時期に釣れる魚やおすすめの仕掛け情報を提供。`,
               foundingDate: "2025",
-              founder: {
-                "@type": "Person",
-                name: "正木 家康",
-                jobTitle: "創設者・編集長",
-              },
               contactPoint: {
                 "@type": "ContactPoint",
                 contactType: "customer support",

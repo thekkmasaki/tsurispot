@@ -531,9 +531,8 @@ export default async function PrefecturePage({ params }: PageProps) {
     headline: `${pref.name}の釣り場おすすめ完全ガイド${spots.length > 0 ? `【${spots.length}選】` : ""}`,
     description: prefInfo?.description || `${pref.name}で人気の釣り場・穴場スポットを紹介。近くのおすすめ釣りスポットが見つかります。`,
     author: {
-      "@type": "Person",
-      name: "正木 家康",
-      jobTitle: "編集長",
+      "@type": "Organization",
+      name: "ツリスポ編集部",
       url: "https://tsurispot.com/about",
     },
     publisher: {
@@ -806,7 +805,7 @@ export default async function PrefecturePage({ params }: PageProps) {
                   {prefInfo.editorComment}
                 </p>
                 <p className="mt-2 text-xs text-muted-foreground">
-                  ツリスポ編集長・正木 家康
+                  ツリスポ編集部
                 </p>
               </CardContent>
             </Card>

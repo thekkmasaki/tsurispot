@@ -21,13 +21,13 @@ import {
 } from "@/lib/data/products";
 
 export const metadata: Metadata = {
-  title: "編集長が厳選した釣り道具 - 実際に使って選んだおすすめアイテム",
+  title: "編集部が厳選した釣り道具 - 実際に使って選んだおすすめアイテム",
   description:
-    "釣り歴2年目の編集長が実際に使い込んで厳選した釣り道具を紹介。サビキセット、ロッド、リール、仕掛け、アクセサリーまでカテゴリ別にわかりやすく解説。Amazon・楽天で購入できます。",
+    "ツリスポ編集部が実際に使い込んで厳選した釣り道具を紹介。サビキセット、ロッド、リール、仕掛け、アクセサリーまでカテゴリ別にわかりやすく解説。Amazon・楽天で購入できます。",
   openGraph: {
-    title: "編集長が厳選した釣り道具 - 実際に使って選んだおすすめアイテム",
+    title: "編集部が厳選した釣り道具 - 実際に使って選んだおすすめアイテム",
     description:
-      "釣り歴2年目の編集長が実際に使って厳選した道具をカテゴリ別に紹介。",
+      "ツリスポ編集部が実際に使って厳選した道具をカテゴリ別に紹介。",
     type: "website",
     url: "https://tsurispot.com/gear",
     siteName: "ツリスポ",
@@ -128,29 +128,29 @@ export default function GearPage() {
             <ShoppingBag className="size-7 text-primary" />
           </div>
           <h1 className="text-2xl font-bold tracking-tight sm:text-4xl">
-            編集長が厳選した釣り道具
+            編集部が厳選した釣り道具
           </h1>
           <p className="mx-auto mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-            ここで紹介するアイテムは、すべて編集長自身が実際に使い込んで「これは本当にいい」と納得したものだけです。
+            ここで紹介するアイテムは、すべて編集部自身が実際に使い込んで「これは本当にいい」と納得したものだけです。
             メーカーの宣伝ではなく、釣り場で何度も使った経験をもとに選んでいます。
           </p>
         </div>
 
-        {/* 編集長の厳選ポリシー */}
+        {/* 編集部の厳選ポリシー */}
         <div className="mb-10 rounded-xl border-2 border-primary/20 bg-gradient-to-r from-sky-50/80 to-blue-50/80 p-5 sm:mb-14 sm:p-6 dark:from-sky-950/30 dark:to-blue-950/30">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-start">
             <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-blue-700 text-lg font-bold text-white">
-              正木
+              編集
             </div>
             <div>
               <div className="mb-1 flex items-center gap-2">
-                <p className="font-bold">正木 家康</p>
+                <p className="font-bold">ツリスポ編集部</p>
                 <Badge className="bg-primary/10 text-primary hover:bg-primary/10 text-xs">
-                  編集長
+                  編集部
                 </Badge>
               </div>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                「安いだけ」「人気だから」では選びません。自分が明石の堤防で実際に使って、
+                「安いだけ」「人気だから」では選びません。編集部が実際に使い込み、
                 初心者の方にも自信を持っておすすめできるものだけを厳選しています。
                 迷ったらまずサビキセットから。これだけは間違いないです。
               </p>
@@ -294,7 +294,7 @@ export default function GearPage() {
         {/* 免責事項 */}
         <div className="mt-8 text-center text-xs leading-relaxed text-muted-foreground/70">
           <p>
-            ※ 掲載商品はすべて編集長が実際に使用・検証したうえで選定しています。掲載価格は目安です。最新の価格は各ショップでご確認ください。
+            ※ 掲載商品はすべて編集部が実際に使用・検証したうえで選定しています。掲載価格は目安です。最新の価格は各ショップでご確認ください。
           </p>
           <p className="mt-1">
             ※ 当ページにはアフィリエイトリンクが含まれます。リンク経由でご購入いただくと、当サイトの運営費に充てさせていただきます。

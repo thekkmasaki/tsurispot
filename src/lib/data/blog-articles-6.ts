@@ -167,8 +167,8 @@ export const blogArticles6: BlogPost[] = [
 
 <div style="margin:2em 0;padding:1.2em;background:linear-gradient(135deg,#f0fdf4,#ecfdf5);border:1px solid #bbf7d0;border-radius:12px">
 <p style="font-weight:700;color:#166534;margin:0 0 0.5em">この記事を書いた人</p>
-<p style="font-size:0.9em;color:#15803d;margin:0"><strong>正木 家康</strong>（ツリスポ編集長）</p>
-<p style="font-size:0.85em;color:#4ade80;margin:0.3em 0 0">29歳、釣り歴2年目。週末アングラー。冬でも釣りに行く派。好きな釣りはメバリングと胴突き。</p>
+<p style="font-size:0.9em;color:#15803d;margin:0"><strong>ツリスポ編集部</strong></p>
+<p style="font-size:0.85em;color:#4ade80;margin:0.3em 0 0">全国の釣り場・魚種データをもとに、初心者にもわかりやすい釣り情報をお届けするツリスポ編集部です。</p>
 </div>
 `,
   },
@@ -505,8 +505,8 @@ export const blogArticles6: BlogPost[] = [
 
 <div style="margin:2em 0;padding:1.2em;background:linear-gradient(135deg,#f0fdf4,#ecfdf5);border:1px solid #bbf7d0;border-radius:12px">
 <p style="font-weight:700;color:#166534;margin:0 0 0.5em">この記事を書いた人</p>
-<p style="font-size:0.9em;color:#15803d;margin:0"><strong>正木 家康</strong>（ツリスポ編集長）</p>
-<p style="font-size:0.85em;color:#4ade80;margin:0.3em 0 0">29歳、釣り歴2年目。SNS・釣果サイト・公式情報を毎日チェックして、釣り人に役立つ最新情報をお届けしています。</p>
+<p style="font-size:0.9em;color:#15803d;margin:0"><strong>ツリスポ編集部</strong></p>
+<p style="font-size:0.85em;color:#4ade80;margin:0.3em 0 0">全国の釣り場・魚種データと、SNS・釣果サイト・公式情報をもとに、釣り人に役立つ最新情報をお届けするツリスポ編集部です。</p>
 </div>
 `,
   },

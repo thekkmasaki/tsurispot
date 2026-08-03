@@ -170,9 +170,8 @@ export default async function BlogPostPage({
     dateModified: post.updatedAt || post.publishedAt,
     ...(imageUrl && { image: imageUrl }),
     author: {
-      "@type": "Person",
-      name: "正木 家康",
-      jobTitle: "編集長",
+      "@type": "Organization",
+      name: "ツリスポ編集部",
       url: "https://tsurispot.com/about",
     },
     publisher: {

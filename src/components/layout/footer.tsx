@@ -109,7 +109,7 @@ export function Footer() {
               <li><Link href="/beginner-checklist" prefetch={false} className="hover:text-white">持ち物チェックリスト</Link></li>
               <li><Link href="/fishing-rules" prefetch={false} className="hover:text-white">ルールとマナー</Link></li>
               <li><Link href="/instructor-exam" prefetch={false} className="hover:text-white">釣りインストラクター試験対策</Link></li>
-              <li><Link href="/gear" prefetch={false} className="hover:text-white">編集長厳選の釣り道具</Link></li>
+              <li><Link href="/gear" prefetch={false} className="hover:text-white">編集部厳選の釣り道具</Link></li>
             </ul>
           </div>
           <div>
@@ -234,7 +234,7 @@ export function Footer() {
         <div className="mt-6 border-t border-white/10 pt-6 text-center text-sm text-blue-100/80">
           <p>&copy; 2025-2026 ツリスポ All rights reserved.</p>
           <p className="mt-1 text-xs">
-            創設者・編集長: 正木 家康｜運営開始: 2025年｜掲載スポット: {SPOT_COUNT_FORMATTED}箇所｜<Link href="/technology" prefetch={false} className="underline-offset-2 hover:text-white hover:underline">特許出願中（特願2026-042836）</Link>
+            編集: ツリスポ編集部｜運営開始: 2025年｜掲載スポット: {SPOT_COUNT_FORMATTED}箇所｜<Link href="/technology" prefetch={false} className="underline-offset-2 hover:text-white hover:underline">特許出願中（特願2026-042836）</Link>
           </p>
           <p className="mx-auto mt-2 max-w-xl text-sm leading-relaxed">
             当サイトはAmazon.co.jpを宣伝しリンクすることによってサイトが紹介料を獲得できる手段を提供することを目的に設定されたアフィリエイトプログラムである、Amazonアソシエイト・プログラムの参加者です。
@@ -316,7 +316,7 @@ export function Footer() {
           &copy; 2025-2026 ツリスポ
         </p>
         <p className="mt-1 text-center text-[10px] text-blue-100/70">
-          創設者: 正木 家康｜<Link href="/technology" prefetch={false} className="underline-offset-2 hover:text-white hover:underline">特許出願中</Link>
+          編集: ツリスポ編集部｜<Link href="/technology" prefetch={false} className="underline-offset-2 hover:text-white hover:underline">特許出願中</Link>
         </p>
         <p className="mx-auto mt-2 max-w-xs text-center text-[11px] leading-relaxed text-blue-100/70">
           Amazonアソシエイト・プログラム参加者｜楽天アフィリエイト参加

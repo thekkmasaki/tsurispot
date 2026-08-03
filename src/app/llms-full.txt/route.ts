@@ -188,7 +188,7 @@ URL: /prefecture/{都道府県slug}/{月slug}/{魚種slug}
 - Article / BlogPosting: ガイド・ブログ記事
 - LocalBusiness: 釣具店情報
 - Event: 釣りシーズンイベント
-- Person: 編集長プロフィール
+- Organization: 編集部について
 - BreadcrumbList: パンくずリスト
 - WebApplication: サイトアプリ情報
 - SpeakableSpecification: 音声読み上げ対応
@@ -202,7 +202,7 @@ URL: /prefecture/{都道府県slug}/{月slug}/{魚種slug}
 - サイト名: ツリスポ (TsuriSpot)
 - URL: https://tsurispot.com
 - 運営: TsuriSpot編集部
-- 編集長: 正木家康（釣り歴2年目）
+- 編集: ツリスポ編集部
 - Instagram: https://www.instagram.com/tsurispotjapan/
 - お問い合わせ: https://tsurispot.com/contact
 `;
