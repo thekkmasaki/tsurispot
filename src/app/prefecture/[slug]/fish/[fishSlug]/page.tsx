@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { SpotCard } from "@/components/spots/spot-card";
 import { SeasonalAffiliateSection } from "@/components/seasonal-affiliate-section";
+import { InArticleAd, DisplayAd } from "@/components/ads/ad-unit";
 import { toListSpot } from "@/lib/data/list-spot";
 import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { getFishBySlug } from "@/lib/data/fish";
@@ -625,6 +626,10 @@ export default async function PrefectureFishPage({ params }: PageProps) {
         )}
       </section>
 
+      {/* 収益: 月別タイミング後・スポット一覧前の一等地にレスポンシブ広告。上に十分な本文があり
+          min-h-[250px]領域予約でCLS0。33K PVで従来0枠だった枠の増収(2026-08-03)。 */}
+      <DisplayAd className="my-8" />
+
       {/* スポット一覧 */}
       <section className="mb-8 sm:mb-10">
         <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
@@ -692,6 +697,9 @@ export default async function PrefectureFishPage({ params }: PageProps) {
           ))}
         </div>
       </section>
+
+      {/* 収益: メインのスポット一覧の直後に本文内広告(in-article) */}
+      <InArticleAd className="my-8" />
 
       {/* 同じ県の他の魚種 */}
       {relatedFishInPref.length > 0 && (
@@ -789,6 +797,9 @@ export default async function PrefectureFishPage({ params }: PageProps) {
           ))}
         </div>
       </section>
+
+      {/* 収益: FAQ後・関連リンク前(ページ下部)に本文内広告 */}
+      <InArticleAd className="my-8" />
 
       {/* 関連リンク */}
       <section className="mt-8 sm:mt-12">
