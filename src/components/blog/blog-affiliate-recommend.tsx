@@ -122,12 +122,12 @@ export function BlogAffiliateRecommend({
               key={product.id}
               className="group relative h-full gap-0 overflow-hidden py-0 transition-all hover:shadow-lg hover:border-primary/40"
             >
-              {/* 編集長おすすめバッジ */}
+              {/* 編集部おすすめバッジ */}
               {product.isRecommended && (
                 <div className="absolute right-0 top-0 z-10">
                   <div className="flex items-center gap-1 rounded-bl-lg bg-orange-500 px-2 py-1 text-[10px] font-bold text-white">
                     <Star className="size-3 fill-current" />
-                    編集長おすすめ
+                    編集部おすすめ
                   </div>
                 </div>
               )}

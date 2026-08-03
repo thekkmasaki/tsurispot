@@ -300,7 +300,7 @@ export default function MonthlyPage() {
               >
                 <p className="font-semibold">おすすめ釣り道具</p>
                 <p className="mt-1 text-xs text-muted-foreground">
-                  編集長厳選の道具
+                  編集部厳選の道具
                 </p>
               </Link>
             </div>

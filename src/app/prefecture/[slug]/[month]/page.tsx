@@ -643,7 +643,7 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
                 {product.isRecommended && (
                   <span className="absolute -top-2 right-3 flex items-center gap-1 rounded-full bg-orange-500 px-2 py-0.5 text-[10px] font-bold text-white">
                     <Star className="size-2.5 fill-current" />
-                    編集長おすすめ
+                    編集部おすすめ
                   </span>
                 )}
                 <div className="mb-1">

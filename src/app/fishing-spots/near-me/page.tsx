@@ -652,7 +652,7 @@ export default function NearMePage() {
             {
               href: "/gear",
               title: "おすすめ釣り道具",
-              desc: "編集長が厳選した、初心者から上級者まで使える釣り道具紹介",
+              desc: "編集部が厳選した、初心者から上級者まで使える釣り道具紹介",
             },
           ].map((link) => (
             <Link prefetch={false}

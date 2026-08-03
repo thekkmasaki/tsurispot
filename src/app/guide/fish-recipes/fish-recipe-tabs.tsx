@@ -80,7 +80,7 @@ function RecipeCard({ recipe }: { recipe: FishRecipe }) {
         <div className="absolute right-0 top-0 rounded-bl-lg bg-amber-500 px-2 py-1">
           <span className="flex items-center gap-1 text-[10px] font-bold text-white">
             <Award className="size-3" />
-            編集長おすすめ
+            編集部おすすめ
           </span>
         </div>
       )}

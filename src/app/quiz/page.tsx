@@ -134,7 +134,7 @@ const revenueLinks = [
     href: "/gear",
     icon: Compass,
     label: "おすすめの釣り道具",
-    sub: "編集長が実際に使って選んだ道具",
+    sub: "編集部が実際に使って選んだ道具",
   },
 ];
 
