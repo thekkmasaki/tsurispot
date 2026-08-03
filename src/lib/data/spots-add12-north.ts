@@ -2255,7 +2255,7 @@ export const northAdd12Spots: FishingSpot[] = [
   },
   {
     id: "ss12133", name: "石巻市旧北上川河口", slug: "ishinomaki-kitakamigawa-old-river-a12",
-    description: "石巻市中心部を流れる旧北上川の河口。シーバスの一級ポイントで、ナイトゲームが特に好評。",
+    description: "旧北上川河口は石巻市中心部を流れるシーバスの一級ポイント。ルアーのナイトゲームが特に好評で、夏から秋にはハゼのちょい投げも楽しめる。駐車場・トイレ・コンビニが近く、街中でアクセスしやすい釣り場。",
     latitude: 38.4280, longitude: 141.3180,
     address: "〒986-0822 宮城県石巻市中央",
     accessInfo: "JR石巻駅から徒歩約15分",

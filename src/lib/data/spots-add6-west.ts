@@ -8011,7 +8011,7 @@ export const westAdd6Spots: FishingSpot[] = [
   },
   {
     id: "sw6410", name: "鹿屋・古江港", slug: "furue-kou-kanoya-w6",
-    description: "鹿屋市古江の港。大隅半島の錦江湾側に位置する港で、桜島を対岸に望む。チヌや根魚の好ポイントとして地元で人気。",
+    description: "古江港は鹿屋市の錦江湾に面した港で、クロダイやアジが狙える。桜島を対岸に望む好ポイントで、メバリングやカサゴの穴釣り、秋のエギングも楽しめる。大隅半島の地元に愛される釣り場。",
     latitude: 31.4, longitude: 130.72,
     address: "〒893-0037 鹿児島県鹿屋市古江町",
     accessInfo: "鹿屋市内から車で約15分",
