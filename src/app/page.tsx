@@ -10,7 +10,6 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 // LoginPromoBanner は 2026-07-30 ユーザー判断でトップ非表示中（下記 render もコメントアウト）。復活時に解除。
 // import { LoginPromoBanner } from "@/components/home/login-promo-banner";
-import { JoinCTA } from "@/components/home/join-cta";
 import { HomeMapBand } from "@/components/home/home-map-band";
 import { getHomeAreaMarkers } from "@/lib/geo/home-area-markers";
 // CommunityStats は数字が小さいうち (釣り人 26 人等) は逆効果なので一時 hide。
@@ -73,6 +72,9 @@ const NativeAdBreak = nextDynamic(() => import("@/components/ads/ad-unit").then(
   loading: () => null,
 });
 const InArticleAd = nextDynamic(() => import("@/components/ads/ad-unit").then((m) => m.InArticleAd), {
+  loading: () => null,
+});
+const DisplayAd = nextDynamic(() => import("@/components/ads/ad-unit").then((m) => m.DisplayAd), {
   loading: () => null,
 });
 // below-the-fold の "use client" コンポーネント。eager import だと初期JSに乗るため nextDynamic で分割
@@ -427,8 +429,12 @@ export default async function Home() {
           埋めず /api/spots/coords（force-static＝CDN）をボタン押下時に 1 回だけ取得する。 */}
       <HomeMapBand areaMarkers={homeAreaMarkers} />
 
-      {/* Phase 6: Hero 直下 Green Join CTA (community pattern、 登録率改善) */}
-      <JoinCTA />
+      {/* ヒーロー直下の一等地: 旧 Green Join CTA（/login 登録導線）を広告枠に置換（2026-08-03）。
+          広告密度回復＝収益優先の判断。DisplayAd は min-h-[250px] 領域予約で CLS=0、未fill時は
+          ハウス広告フォールバック。登録導線はヘッダー/各ページの /login で維持されるため funnel は残る。 */}
+      <section className="mx-auto w-full max-w-5xl px-4 py-3 sm:py-4">
+        <DisplayAd />
+      </section>
 
       {/* CommunityStats は数字が育ってから復活 (現状 26人/1件 が逆効果) */}
 
