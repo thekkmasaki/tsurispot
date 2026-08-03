@@ -382,11 +382,11 @@ export default function ForBeginnersPage() {
                   </div>
                 </div>
 
-                {/* 編集長おすすめセット */}
+                {/* 編集部おすすめセット */}
                 <div>
                   <h3 className="mb-3 flex items-center gap-2 font-bold text-foreground">
                     <ShoppingBag className="size-4 text-primary" />
-                    編集長おすすめ - すぐ始められるセット
+                    編集部おすすめ - すぐ始められるセット
                   </h3>
                   <p className="mb-3 text-xs text-muted-foreground">
                     迷ったらこのセットを選べば間違いなし。竿・リール・仕掛け・バケツまで全部入りで、買ったその日に釣りが始められます。
@@ -406,7 +406,7 @@ export default function ForBeginnersPage() {
                 <div className="text-center">
                   <Button asChild variant="outline" size="sm">
                     <Link prefetch={false} href="/gear">
-                      編集長厳選の道具をもっと見る
+                      編集部厳選の道具をもっと見る
                       <ChevronRight className="ml-1 size-4" />
                     </Link>
                   </Button>

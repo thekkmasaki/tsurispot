@@ -200,9 +200,8 @@ const articleJsonLd = {
   datePublished: "2025-06-01",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Person",
-    name: "正木 家康",
-    jobTitle: "編集長",
+    "@type": "Organization",
+    name: "ツリスポ編集部",
     url: "https://tsurispot.com/about",
   },
   publisher: {
@@ -653,7 +652,7 @@ export default function NearMePage() {
             {
               href: "/gear",
               title: "おすすめ釣り道具",
-              desc: "編集長が厳選した、初心者から上級者まで使える釣り道具紹介",
+              desc: "編集部が厳選した、初心者から上級者まで使える釣り道具紹介",
             },
           ].map((link) => (
             <Link prefetch={false}

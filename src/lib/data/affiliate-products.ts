@@ -21,7 +21,7 @@ export interface AffiliateProduct {
   prefectures?: string[];
   /** 価格帯の目安（表示用） */
   priceRange?: string;
-  /** 編集長おすすめフラグ（高単価・高品質商品に設定） */
+  /** 編集部おすすめフラグ（高単価・高品質商品に設定） */
   isRecommended?: boolean;
 }
 
@@ -448,7 +448,7 @@ export const affiliateProducts: AffiliateProduct[] = [
  *
  * スコアリングロジック:
  * - 高単価商品にボーナス（+30点）→ 紹介料の高い商品を優先
- * - 編集長おすすめにボーナス（+20点）
+ * - 編集部おすすめにボーナス（+20点）
  * - 釣り方マッチ（+10点/マッチ、上限30点）→ 安い消耗品の過剰優先を防止
  * - 都道府県限定書籍（+15点）
  * - 夜釣りスポットでのバッテリー（+15点）
@@ -481,7 +481,7 @@ export function getRelevantAffiliateProducts(
         score += 30;
       }
 
-      // 編集長おすすめボーナス
+      // 編集部おすすめボーナス
       if (product.isRecommended) {
         score += 20;
       }

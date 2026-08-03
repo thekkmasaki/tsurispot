@@ -531,9 +531,8 @@ export default async function PrefecturePage({ params }: PageProps) {
     headline: `${pref.name}の釣り場おすすめ完全ガイド${spots.length > 0 ? `【${spots.length}選】` : ""}`,
     description: prefInfo?.description || `${pref.name}で人気の釣り場・穴場スポットを紹介。近くのおすすめ釣りスポットが見つかります。`,
     author: {
-      "@type": "Person",
-      name: "正木 家康",
-      jobTitle: "編集長",
+      "@type": "Organization",
+      name: "ツリスポ編集部",
       url: "https://tsurispot.com/about",
     },
     publisher: {
@@ -801,12 +800,12 @@ export default async function PrefecturePage({ params }: PageProps) {
           {prefInfo.editorComment && (
             <Card className="mt-4 gap-0 border-primary/20 bg-primary/5 py-0">
               <CardContent className="p-4 sm:p-5">
-                <h3 className="mb-2 text-sm font-bold sm:text-base">編集長コメント</h3>
+                <h3 className="mb-2 text-sm font-bold sm:text-base">編集部コメント</h3>
                 <p className="text-sm leading-relaxed text-muted-foreground">
                   {prefInfo.editorComment}
                 </p>
                 <p className="mt-2 text-xs text-muted-foreground">
-                  ツリスポ編集長・正木 家康
+                  ツリスポ編集部
                 </p>
               </CardContent>
             </Card>
@@ -1332,7 +1331,7 @@ export default async function PrefecturePage({ params }: PageProps) {
                 {product.isRecommended && (
                   <span className="absolute -top-2 right-3 flex items-center gap-1 rounded-full bg-orange-500 px-2 py-0.5 text-[10px] font-bold text-white">
                     <Star className="size-2.5 fill-current" />
-                    編集長おすすめ
+                    編集部おすすめ
                   </span>
                 )}
                 <div className="mb-1">

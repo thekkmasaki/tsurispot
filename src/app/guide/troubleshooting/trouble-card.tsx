@@ -140,7 +140,7 @@ export function TroubleCard({ section }: { section: TroubleSection }) {
                 <Lightbulb className="mt-0.5 size-5 shrink-0 text-amber-600" />
                 <div>
                   <p className="mb-1 text-xs font-bold uppercase tracking-wider text-amber-700 dark:text-amber-400">
-                    編集長のワンポイント
+                    編集部のワンポイント
                   </p>
                   <p className="text-sm leading-relaxed text-amber-900 dark:text-amber-200">
                     {section.proTip}

@@ -60,8 +60,19 @@ export default function LegalPage() {
                 </Badge>
                 <h2 className="text-lg font-semibold">代表者名</h2>
               </div>
+              {/* 特商法上、代表者氏名は「請求があれば遅滞なく開示」で省略可。B2B有料掲載（釣具店課金）開始時は実名記載が必要になる。 */}
               <div className="text-sm leading-relaxed text-muted-foreground">
-                <p>正木 家康</p>
+                <p>
+                  お問い合わせフォームよりご請求いただければ、遅滞なく開示します。
+                </p>
+                <p className="mt-2">
+                  <Link prefetch={false}
+                    href="/contact"
+                    className="text-primary underline underline-offset-4 hover:text-primary/80"
+                  >
+                    お問い合わせフォームはこちら
+                  </Link>
+                </p>
               </div>
             </div>
 

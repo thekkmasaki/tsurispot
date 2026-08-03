@@ -65,9 +65,8 @@ export function buildArticleJsonLd(input: ArticleJsonLdInput) {
       },
     }),
     author: {
-      "@type": "Person",
-      name: input.authorName ?? "正木 家康",
-      jobTitle: "編集長",
+      "@type": "Organization",
+      name: input.authorName ?? "ツリスポ編集部",
       url: "https://tsurispot.com/about",
     },
     publisher: {

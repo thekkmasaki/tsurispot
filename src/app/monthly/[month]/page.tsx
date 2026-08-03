@@ -333,9 +333,8 @@ export default async function MonthlyGuidePage({ params }: Props) {
       dateModified: new Date().toISOString().split("T")[0],
       url: `https://tsurispot.com/monthly/${month}`,
       author: {
-        "@type": "Person",
-        name: "正木 家康",
-        jobTitle: "編集長",
+        "@type": "Organization",
+        name: "ツリスポ編集部",
         url: "https://tsurispot.com/about",
       },
       publisher: {

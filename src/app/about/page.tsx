@@ -24,7 +24,7 @@ import {
 export const metadata: Metadata = {
   title: "ツリスポについて｜釣りスポット総合情報サイト",
   description:
-    "ツリスポは全国2,700箇所以上の釣りスポット・115魚種以上を掲載する日本最大級の釣り情報サイトです。編集長が全記事を監修し、地図検索・魚種図鑑・季節別ガイド・初心者向け解説で最高の釣り体験をサポートします。",
+    "ツリスポは全国2,700箇所以上の釣りスポット・115魚種以上を掲載する日本最大級の釣り情報サイトです。編集部が全記事を監修し、地図検索・魚種図鑑・季節別ガイド・初心者向け解説で最高の釣り体験をサポートします。",
   openGraph: {
     title: "ツリスポについて｜釣りスポット総合情報サイト",
     description: "全国2,700箇所以上の釣りスポット・115魚種を掲載する日本最大級の釣り総合情報サイト。地図検索・魚種図鑑・季節別ガイドで釣り体験をサポートします。",
@@ -69,18 +69,18 @@ const webPageJsonLd = {
   dateModified: "2026-03-17",
 };
 
-const personJsonLd = {
+const editorialJsonLd = {
   "@context": "https://schema.org",
-  "@type": "Person",
-  name: "正木 家康",
-  jobTitle: "編集長",
-  worksFor: {
+  "@type": "Organization",
+  name: "ツリスポ編集部",
+  url: "https://tsurispot.com/about",
+  parentOrganization: {
     "@type": "Organization",
     name: "ツリスポ",
     url: "https://tsurispot.com",
   },
   description:
-    "ツリスポ創設者・編集長。自身が釣り初心者として情報収集に苦労した経験から、2025年にツリスポを立ち上げ。全国2,100箇所以上の釣り場データベースを構築し、水産庁統計・自治体公開情報のクロスチェックによるデータ駆動型の釣り情報プラットフォームを運営。初心者が本当に必要な情報にすぐアクセスできるサイトを目指している。",
+    "ツリスポ編集部。水産庁統計・自治体の公開情報・Google Mapsでの位置確認など複数ソースのクロスチェックに基づき、初心者にもわかりやすい釣り場・魚種情報を発信しています。",
   knowsAbout: [
     "釣りスポットデータベース構築",
     "釣り情報プラットフォーム運営",
@@ -103,7 +103,7 @@ export default function AboutPage() {
       />
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(editorialJsonLd) }}
       />
       {/* ヒーローセクション */}
       <section className="relative overflow-hidden bg-gradient-to-br from-sky-600 via-blue-700 to-indigo-800">
@@ -227,65 +227,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* 編集長プロフィール */}
-      <section className="mx-auto w-full max-w-5xl px-4 py-12 sm:px-6 sm:py-16">
-        <div className="mx-auto max-w-2xl text-center">
-          <div className="mb-6 inline-flex items-center gap-2">
-            <Shield className="size-5 text-primary" />
-            <h2 className="text-2xl font-bold tracking-tight sm:text-3xl">
-              編集長プロフィール
-            </h2>
-          </div>
-        </div>
-
-        <Card className="mx-auto max-w-2xl border">
-          <CardContent className="p-6 sm:p-8">
-            <div className="flex flex-col gap-6 sm:flex-row">
-              <div className="flex shrink-0 flex-col items-center gap-2">
-                <div className="flex size-20 items-center justify-center rounded-full bg-gradient-to-br from-sky-500 to-blue-700 text-2xl font-bold text-white">
-                  正木
-                </div>
-                <Badge className="bg-primary/10 text-primary hover:bg-primary/10">
-                  編集長
-                </Badge>
-              </div>
-              <div className="flex-1">
-                <h3 className="mb-1 text-xl font-bold">正木 家康</h3>
-                <p className="mb-3 text-sm text-muted-foreground">
-                  ツリスポ創設者・編集長
-                </p>
-                <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-                  「釣りを始めたいけど、情報がバラバラで何を信じていいか分からない」――
-                  自身がまさにその壁にぶつかった経験から、2025年にツリスポを創設しました。
-                  初心者だからこそ分かる「本当に知りたい情報」を、全国2,100箇所以上のデータベースと
-                  公的情報のクロスチェックで提供しています。
-                  明石・播磨エリアをホームグラウンドに堤防釣りからショアジギングまで実践中。
-                  道具は自分で使って納得したものだけを紹介しています。
-                </p>
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="outline" className="text-xs">堤防釣り</Badge>
-                  <Badge variant="outline" className="text-xs">サビキ釣り</Badge>
-                  <Badge variant="outline" className="text-xs">ショアジギング</Badge>
-                  <Badge variant="outline" className="text-xs">エギング</Badge>
-                  <Badge variant="outline" className="text-xs">ちょい投げ</Badge>
-                  <Badge variant="outline" className="text-xs">穴釣り</Badge>
-                </div>
-                <div className="mt-4 rounded-lg bg-muted/50 p-3">
-                  <p className="text-xs leading-relaxed text-muted-foreground">
-                    <span className="font-semibold text-foreground">ホームグラウンド:</span>{" "}
-                    明石港、林崎漁港、大蔵海岸、翼港 など明石・播磨エリア
-                  </p>
-                  <p className="mt-1 text-xs leading-relaxed text-muted-foreground">
-                    <span className="font-semibold text-foreground">得意な釣り:</span>{" "}
-                    サビキ釣り、ショアジギング、エギング
-                  </p>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </section>
-
       {/* 編集チーム */}
       <section className="bg-muted/30 py-12 sm:py-16">
         <div className="mx-auto max-w-5xl px-4 sm:px-6">
@@ -359,10 +300,10 @@ export default function AboutPage() {
                 <div className="flex gap-3">
                   <CheckCircle className="mt-0.5 size-5 shrink-0 text-emerald-600" />
                   <div>
-                    <h3 className="font-semibold">明石・播磨エリアは実釣経験に基づく情報</h3>
+                    <h3 className="font-semibold">実データ・公開情報に基づく釣り場情報</h3>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      運営者自身が明石・播磨周辺をホームグラウンドとして定期的に釣行しています。
-                      明石港、林崎漁港、大蔵海岸、翼港などの釣り場情報は、実際の釣行経験をもとに作成しています。
+                      各釣り場の情報は、自治体・漁業協同組合・港湾管理者などの公開情報、
+                      釣果情報、地図情報を参照し、ツリスポ編集部が整理・作成しています。
                     </p>
                   </div>
                 </div>
@@ -373,10 +314,10 @@ export default function AboutPage() {
                 <div className="flex gap-3">
                   <CheckCircle className="mt-0.5 size-5 shrink-0 text-emerald-600" />
                   <div>
-                    <h3 className="font-semibold">その他エリアの情報について</h3>
+                    <h3 className="font-semibold">情報の正確性と修正対応</h3>
                     <p className="mt-1 text-sm text-muted-foreground">
-                      明石エリア以外のスポット情報は、公開されている釣果情報サイト・釣り場紹介記事・
-                      地図情報などを参考に作成しています。情報に誤りがあった場合は、お問い合わせよりご連絡いただければ修正いたします。
+                      情報に誤りや古くなった内容があった場合は、お問い合わせよりご連絡いただければ
+                      速やかに確認・修正いたします。最新の現地状況や釣り禁止区域は必ず現地表示や管理者にご確認ください。
                     </p>
                   </div>
                 </div>

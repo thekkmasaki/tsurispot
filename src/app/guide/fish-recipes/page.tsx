@@ -89,9 +89,8 @@ const articleJsonLd = {
   datePublished: "2026-03-05",
   dateModified: new Date().toISOString().split("T")[0],
   author: {
-    "@type": "Person",
-    name: "正木 家康",
-    jobTitle: "編集長",
+    "@type": "Organization",
+    name: "ツリスポ編集部",
     url: "https://tsurispot.com/about",
   },
   publisher: {
@@ -117,7 +116,7 @@ const recipeJsonLdList = [
     name: "アジの刺身（なめろう風）",
     description:
       "釣りたてのアジを三枚おろしにして薄切りにする基本の刺身。味噌と薬味で叩けば「なめろう」にもアレンジ可能。",
-    author: { "@type": "Person", name: "正木 家康" },
+    author: { "@type": "Organization", name: "ツリスポ編集部" },
     prepTime: "PT10M",
     cookTime: "PT5M",
     totalTime: "PT15M",
@@ -156,7 +155,7 @@ const recipeJsonLdList = [
     name: "サバの味噌煮",
     description:
       "脂がのったサバをコクのある味噌ダレでじっくり煮込む定番の家庭料理。ご飯が何杯でもすすむ。",
-    author: { "@type": "Person", name: "正木 家康" },
+    author: { "@type": "Organization", name: "ツリスポ編集部" },
     prepTime: "PT10M",
     cookTime: "PT20M",
     totalTime: "PT30M",
@@ -193,7 +192,7 @@ const recipeJsonLdList = [
     name: "カサゴの味噌汁",
     description:
       "丸ごとのカサゴから出る極上の出汁が決め手。身もホロホロで最高の一杯に。",
-    author: { "@type": "Person", name: "正木 家康" },
+    author: { "@type": "Organization", name: "ツリスポ編集部" },
     prepTime: "PT5M",
     cookTime: "PT15M",
     totalTime: "PT20M",
@@ -232,7 +231,7 @@ const recipeJsonLdList = [
     name: "キスの天ぷら",
     description:
       "釣りたてのキスをカラッと揚げる王道天ぷら。サクサクの衣とふわふわの身が絶品。",
-    author: { "@type": "Person", name: "正木 家康" },
+    author: { "@type": "Organization", name: "ツリスポ編集部" },
     prepTime: "PT15M",
     cookTime: "PT10M",
     totalTime: "PT25M",
@@ -271,7 +270,7 @@ const recipeJsonLdList = [
     name: "メバルの煮付け",
     description:
       "春告魚と呼ばれるメバルを甘辛い煮汁でふっくら煮上げる、春を代表する魚料理。",
-    author: { "@type": "Person", name: "正木 家康" },
+    author: { "@type": "Organization", name: "ツリスポ編集部" },
     prepTime: "PT5M",
     cookTime: "PT20M",
     totalTime: "PT25M",
@@ -312,7 +311,7 @@ const recipeJsonLdList = [
     name: "アオリイカの刺身",
     description:
       "釣りたてのアオリイカの甘みとねっとりした食感は格別。イカ好きにはたまらない一品。",
-    author: { "@type": "Person", name: "正木 家康" },
+    author: { "@type": "Organization", name: "ツリスポ編集部" },
     prepTime: "PT10M",
     cookTime: "PT0M",
     totalTime: "PT10M",

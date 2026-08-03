@@ -454,7 +454,7 @@ async function handleGeneralUserMessage(replyToken: string, text: string, userId
         "🎣 おすすめ釣り道具",
         "━━━━━━━━━━━━━━",
         "",
-        "▼ 編集長厳選の釣り道具",
+        "▼ 編集部厳選の釣り道具",
         "https://tsurispot.com/gear",
         "",
         "▼ 釣り方別の道具ガイド",

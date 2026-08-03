@@ -170,9 +170,8 @@ const articleJsonLd = {
   datePublished: "2026-03-05",
   dateModified: "2026-03-05",
   author: {
-    "@type": "Person",
-    name: "正木 家康",
-    jobTitle: "編集長",
+    "@type": "Organization",
+    name: "ツリスポ編集部",
     url: "https://tsurispot.com/about",
   },
   publisher: {
