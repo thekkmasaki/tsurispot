@@ -687,7 +687,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-029", name: "宍道湖（詳細・シーバス）", slug: "shinjiko-seabass",
-    description: "島根県松江市〜出雲市にかかる汽水湖。日本有数のシーバスフィールドとして知られ、全国からアングラーが訪れる。特に秋のコノシロパターンは爆発的な釣果をもたらす。夕日の名所でもあり、日本百景に選ばれた絶景の中で釣りが楽しめる。",
+    description: "宍道湖は全国屈指のシーバス（スズキ）が釣れる汽水湖。島根県松江市〜出雲市にかかり、秋のコノシロパターンで実績が高く全国からアングラーが訪れる。ハゼ釣りも楽しめ、夕日の名所として日本百景に選ばれた絶景の中で釣りができる。",
     latitude: 35.4389, longitude: 132.9478, address: "〒699-0204 島根県松江市玉湯町林445-2",
     accessInfo: "JR松江駅から車で約10分。出雲空港から約20分。",
     region: region("r727"), spotType: "river", difficulty: "intermediate",

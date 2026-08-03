@@ -695,7 +695,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   },
   {
     id: "ss8036", name: "伊万里湾・浦ノ崎港", slug: "imari-uranosakikou-s8",
-    description: "伊万里湾の入口に位置する浦ノ崎港。穏やかな湾内でアジやメバルが安定して釣れ、春のアオリイカの実績も高い。駐車場からすぐ竿出しできる手軽さが魅力。",
+    description: "浦ノ崎港（伊万里湾）はアジ・アオリイカが狙える釣り場。伊万里湾の入口に位置し、穏やかな湾内でアジやメバルが安定して釣れ、春のアオリイカの実績も高い。クロダイも人気で、駐車場からすぐ竿出しできる手軽さが魅力。",
     latitude: 33.334, longitude: 129.834,
     address: "〒848-0027 佐賀県伊万里市浦ノ崎町",
     accessInfo: "松浦鉄道浦ノ崎駅から徒歩約5分",
