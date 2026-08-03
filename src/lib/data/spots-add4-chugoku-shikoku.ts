@@ -1099,7 +1099,7 @@ export const chugokuShikokuAdd4Spots: FishingSpot[] = [
   },
   {
     id: "scs4053", name: "境港市・夢みなと公園護岸", slug: "sakaiminato-yumeminato-gogan",
-    description: "境港市の夢みなとタワー周辺の護岸。広い公園内で家族連れに最適。足元でサビキ釣り、ちょい投げでキスやハゼが手軽に楽しめる。",
+    description: "夢みなと公園護岸はサビキのアジ、ちょい投げのキス・ハゼが狙える。境港市の夢みなとタワー周辺の護岸で、広い公園内は無料駐車場も広く家族連れに最適。足元から手軽に釣れ、トイレもあり初心者やファミリーの釣行にもおすすめ。",
     latitude: 35.5380, longitude: 133.2280,
     address: "〒684-0046 島根県境港市竹内団地",
     accessInfo: "JR境線境港駅から車で約10分。米子自動車道米子ICから約20分。",

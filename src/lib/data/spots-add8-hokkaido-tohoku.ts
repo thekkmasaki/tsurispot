@@ -2795,7 +2795,7 @@ export const hokkaidoTohokuAdd8Spots: FishingSpot[] = [
   },
   {
     id: "se8156", name: "鶴岡堅苔沢漁港", slug: "tsuruoka-katanosawa-e8",
-    description: "庄内浜の南部にある小さな漁港。メバルやアジのライトゲームの穴場で、夕方からの時合いが良い。クロダイのフカセ釣りでも実績がある。",
+    description: "鶴岡堅苔沢漁港はメバル・アジのライトゲームとクロダイが狙える穴場。庄内浜南部の小さな漁港で、夕方からの時合いが良い。クロダイのフカセ釣りでも実績があり、地元の釣り人が通う静かな釣り場。港内に駐車スペースもある。",
     latitude: 38.750, longitude: 139.680,
     address: "〒999-7315 山形県鶴岡市堅苔沢",
     accessInfo: "鶴岡市中心部から車で約30分",
@@ -3229,7 +3229,7 @@ export const hokkaidoTohokuAdd8Spots: FishingSpot[] = [
   },
   {
     id: "se8181", name: "いわき江名港", slug: "iwaki-ena-kou-e8",
-    description: "いわき市南部の小さな漁港で、太平洋に面している。防波堤からのサビキでアジやサバ、投げ釣りでカレイが安定して釣れる。メバリングの穴場としても知られる。",
+    description: "いわき江名港はサビキのアジ・サバ、投げのカレイが釣れる漁港。太平洋に面したいわき市南部の小さな港で、秋のカレイや冬のメバリングの穴場としても知られる。防波堤中心で足場がよく初心者やファミリーでも楽しみやすい。",
     latitude: 36.914, longitude: 140.903,
     address: "〒970-0317 福島県いわき市江名",
     accessInfo: "JRいわき駅から車で約30分",

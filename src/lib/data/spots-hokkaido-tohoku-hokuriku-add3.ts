@@ -1597,7 +1597,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   },
   {
     id: "s3068", name: "渡波港", slug: "watanoha-ko",
-    description: "石巻市東部の漁港で、牡鹿半島の付け根に位置する。カレイの投げ釣りが安定しており、テトラ帯ではアイナメやソイの根魚も狙える。万石浦にも近い。",
+    description: "渡波港は投げ釣りのカレイ、テトラ帯でアイナメ・クロソイが狙える。石巻市東部、牡鹿半島の付け根に位置する漁港で、カレイの投げ釣りが安定している。万石浦にも近く、根魚のルアーゲームも楽しめ、コンビニやトイレも近い。",
     latitude: 38.4050, longitude: 141.3620,
     address: "〒986-2135 宮城県石巻市渡波",
     accessInfo: "JR渡波駅から徒歩約15分。三陸沿岸道路石巻女川ICから約10分。",
