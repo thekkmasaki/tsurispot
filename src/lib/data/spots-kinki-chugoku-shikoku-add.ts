@@ -894,7 +894,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-037", name: "玉野・宇野港", slug: "tamano-uno-port",
-    description: "岡山県玉野市の宇野港。直島への玄関口で、アート観光と合わせた釣行が可能。港内はチヌ・メバル・アジが好調で、足場も良くファミリー向き。瀬戸内海の穏やかな景色の中で釣りが楽しめる。",
+    description: "玉野・宇野港はチヌ・アジ・メバルが狙える釣り場。岡山県玉野市、直島への玄関口でアート観光と合わせた釣行も可能。港内はフカセのチヌ、サビキのアジ、夜のメバリングが好調で、ちょい投げのハゼも楽しめる。足場が良く無料でファミリー向きの好ポイント。",
     latitude: 34.4921, longitude: 133.9538, address: "〒706-0002 岡山県玉野市築港1丁目2",
     accessInfo: "JR宇野駅から徒歩約5分。瀬戸中央自動車道早島ICから約30分。",
     region: region("r3019"), spotType: "port", difficulty: "beginner",
