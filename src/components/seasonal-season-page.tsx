@@ -138,7 +138,7 @@ export function SeasonalSeasonPage({ season }: SeasonPageProps) {
               <h1
                 className={`text-2xl font-bold tracking-tight sm:text-4xl ${season.colorTheme.text}`}
               >
-                {season.nameJa}の釣りガイド
+                {season.nameJa}に釣れる魚と釣り方ガイド
               </h1>
               {isCurrent && (
                 <Badge variant="default">今のシーズン</Badge>
@@ -157,7 +157,7 @@ export function SeasonalSeasonPage({ season }: SeasonPageProps) {
         <section className="mb-10">
           <h2 className="mb-4 flex items-center gap-2 text-lg font-bold sm:text-xl">
             <Calendar className="size-5 text-primary" />
-            {season.nameJa}の月別ガイド
+            {season.nameJa}の月別ガイド｜{monthLabels}に釣れる魚
           </h2>
           <div className="grid gap-4 sm:grid-cols-3">
             {monthGuides.map((guide) => {
