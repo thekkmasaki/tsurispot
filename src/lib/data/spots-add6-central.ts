@@ -1583,7 +1583,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   },
   {
     id: "sc6076", name: "手取川河口", slug: "tedorigawa-kakou-ishikawa",
-    description: "白山から流れ出る手取川の河口部。急流河川の河口はシーバスの一級ポイント。秋にはサケの遡上も見られ、ハゼ釣りも盛ん。",
+    description: "手取川河口はシーバスの一級ポイントとして知られる石川県の汽水域。白山から流れ出る急流河川の河口で、秋はルアーでシーバス、夏はハゼのちょい投げが盛ん。春はサクラマス、初夏はアユも狙える多彩なフィールド。",
     latitude: 36.4710, longitude: 136.5220,
     address: "〒929-0237 石川県白山市湊町",
     accessInfo: "JR北陸本線美川駅から徒歩20分。北陸自動車道美川ICから約5分。",

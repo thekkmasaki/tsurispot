@@ -104,7 +104,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
   // ===== 大阪市エリア（南港・ベイエリア） =====
   {
     id: "s205", name: "シーサイドコスモ（魚釣り開放区域）", slug: "seaside-cosmo",
-    description: "大阪南港のATC前に広がる開放的な護岸釣り場。柵付きで安全、足場良好。サビキでアジ・サバ、ルアーでシーバスやタチウオが狙える都市型フィッシングスポット。",
+    description: "シーサイドコスモはサビキでアジ・サバが釣れる大阪南港の護岸釣り場。ATC前に広がる柵付きの安全な足場でファミリーにも人気。ルアーではシーバスやタチウオ、投げ釣りではワタリガニも狙える都市型フィッシングスポット。",
     latitude: 34.6383, longitude: 135.421700, address: "〒559-0034 大阪府大阪市住之江区南港北1丁目32",
     accessInfo: "ニュートラム「トレードセンター前」駅下車すぐ。ATC隣接。",
     region: region("r131"), spotType: "breakwater", difficulty: "beginner",
