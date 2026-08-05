@@ -119,7 +119,7 @@ export const chubuKinkiAdd4Spots: FishingSpot[] = [
   },
   {
     id: "sc4003", name: "武豊港緑地", slug: "taketoyo-kou-ryokuchi",
-    description: "武豊町の護岸整備された釣り場。足場がフラットで家族連れに最適。サビキ釣りでアジやイワシが手堅く釣れる。",
+    description: "武豊港緑地はアジ・イワシのサビキが手堅い釣り場。護岸が整備され足場がフラットで家族連れやビギナーに最適。サビキ釣りでアジやイワシが手堅く釣れ、夏はキスのちょい投げ、夜はスズキのルアーも楽しめる。無料の駐車場も完備。",
     latitude: 34.8520, longitude: 136.9220,
     address: "〒470-2380 愛知県知多郡武豊町字東大高",
     accessInfo: "名鉄河和線知多武豊駅から徒歩約20分。",
