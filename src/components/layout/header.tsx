@@ -43,6 +43,7 @@ const mainNavItems = [
 // ドロップダウン「もっと見る」
 const moreNavItems = [
   { href: "/timeline", label: "みんなのタイムライン", icon: Users },
+  { href: "/users", label: "釣り人を探す", icon: Users },
   { href: "/methods", label: "釣り方ガイド", icon: Anchor },
   { href: "/area", label: "エリア一覧", icon: Compass },
   { href: "/area-guide", label: "エリアガイド記事", icon: MapPin },

@@ -180,6 +180,71 @@ export async function getCommentCountsBulk(
   return counts;
 }
 
+// ─── ユーザー検索索引 ───
+// USERSEARCH/N#{normNickname}#{tsuriId} の単一パーティション索引（会員数規模なら十分）。
+// 改名時は旧skを削除するため、現在のskを USER#{id}/SEARCH_SK に控える。
+
+const USERSEARCH_PK = "USERSEARCH";
+
+export interface UserSearchEntry {
+  tsuriId: string;
+  nickname: string;
+  avatarUrl?: string;
+  reportCount?: number;
+}
+
+export function normalizeNickname(raw: string): string {
+  return raw.normalize("NFKC").trim().toLowerCase();
+}
+
+export async function updateUserSearchIndex(user: {
+  tsuriId: string;
+  nickname: string;
+  avatarUrl?: string;
+  reportCount?: number;
+  isPublic?: boolean;
+}): Promise<void> {
+  const pointerPk = `USER#${user.tsuriId}`;
+  const oldSk = await dbGet<string>(pointerPk, "SEARCH_SK");
+
+  // 非公開プロフィールは索引から外す
+  if (user.isPublic === false) {
+    if (oldSk) {
+      await dbDelete(USERSEARCH_PK, oldSk);
+      await dbDelete(pointerPk, "SEARCH_SK");
+    }
+    return;
+  }
+
+  const norm = normalizeNickname(user.nickname);
+  if (!norm) return;
+  const newSk = `N#${norm}#${user.tsuriId}`;
+  if (oldSk && oldSk !== newSk) {
+    await dbDelete(USERSEARCH_PK, oldSk);
+  }
+  await dbPut(USERSEARCH_PK, newSk, {
+    tsuriId: user.tsuriId,
+    nickname: user.nickname,
+    avatarUrl: user.avatarUrl,
+    reportCount: user.reportCount,
+  } satisfies UserSearchEntry);
+  if (oldSk !== newSk) {
+    await dbPut(pointerPk, "SEARCH_SK", newSk);
+  }
+}
+
+// 前方一致検索（正規化済みニックネーム）
+export async function searchUsers(query: string, limit = 20): Promise<UserSearchEntry[]> {
+  const norm = normalizeNickname(query);
+  if (!norm) return [];
+  const items = await dbQuery<UserSearchEntry>(USERSEARCH_PK, {
+    skPrefix: `N#${norm}`,
+    forward: true,
+    limit,
+  });
+  return items.map((it) => it.data).filter((u): u is UserSearchEntry => Boolean(u?.tsuriId));
+}
+
 // ─── ハッシュタグ ───
 // TAG#{normTag}/TS#{iso}#{reportId}（参照のみ・TTL365日）+ TAG#{normTag}/COUNT。
 // 人気タグは Redis zset（tags:popular）で別管理（呼び出し側）。
