@@ -7,7 +7,7 @@ import { checkNgWords } from "@/lib/moderation";
 import { auth } from "@/lib/auth";
 import { incrementReportCount } from "@/lib/user-store";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
-import { savePostMeta } from "@/lib/social-store";
+import { savePostMeta, addToGlobalFeed } from "@/lib/social-store";
 
 const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;
 
@@ -129,6 +129,13 @@ export async function POST(request: Request) {
     } catch (err) {
       console.error("[釣果投稿] POST META保存エラー:", err);
       // 失敗してもスポット別ビューには載るため続行（パーマリンクのみ404になる縮退）
+    }
+
+    // 全体タイムライン（/timeline）への参照書き込み
+    try {
+      await addToGlobalFeed(reportData);
+    } catch (err) {
+      console.error("[釣果投稿] タイムライン書込エラー:", err);
     }
 
     // DynamoDB に即時保存（自動承認）- read-modify-write

@@ -179,6 +179,168 @@ export async function getCommentCountsBulk(
   return counts;
 }
 
+// ─── リポスト ───
+// REPOSTS#{reportId}/USER#{tsuriId}（冪等判定用）+ REPOST_COUNT +
+// USERREPOSTS#{tsuriId}/TS#{iso}#{reportId}（プロフィールのリポスト一覧用）。
+
+const repostsPk = (reportId: string) => `REPOSTS#${reportId}`;
+const userRepostsPk = (tsuriId: string) => `USERREPOSTS#${tsuriId}`;
+
+export async function repostPost(
+  reportId: string,
+  tsuriId: string,
+): Promise<{ count: number; created: boolean }> {
+  const ts = new Date().toISOString();
+  const created = await dbConditionalPut(repostsPk(reportId), `USER#${tsuriId}`, { ts });
+  if (!created) {
+    return { count: await getRepostCount(reportId), created: false };
+  }
+  await dbPut(userRepostsPk(tsuriId), `TS#${ts}#${reportId}`, { reportId, ts }, POST_TTL_SECONDS);
+  return { count: await dbIncr(`REPORT#${reportId}`, "REPOST_COUNT"), created: true };
+}
+
+export async function unrepostPost(reportId: string, tsuriId: string): Promise<number> {
+  const existing = await dbGet<{ ts: string }>(repostsPk(reportId), `USER#${tsuriId}`);
+  if (!existing) return getRepostCount(reportId);
+  await dbDelete(repostsPk(reportId), `USER#${tsuriId}`);
+  if (existing.ts) {
+    await dbDelete(userRepostsPk(tsuriId), `TS#${existing.ts}#${reportId}`);
+  }
+  return dbDecr(`REPORT#${reportId}`, "REPOST_COUNT");
+}
+
+export async function hasReposted(reportId: string, tsuriId: string): Promise<boolean> {
+  return dbExists(repostsPk(reportId), `USER#${tsuriId}`);
+}
+
+export async function getRepostCount(reportId: string): Promise<number> {
+  const n = await dbGet<number>(`REPORT#${reportId}`, "REPOST_COUNT");
+  return typeof n === "number" && n > 0 ? n : 0;
+}
+
+// ユーザーがリポストした投稿ID（新しい順）
+export async function getUserRepostIds(tsuriId: string, limit = 20): Promise<string[]> {
+  const items = await dbQuery<{ reportId: string }>(userRepostsPk(tsuriId), {
+    skPrefix: "TS#",
+    forward: false,
+    limit,
+  });
+  return items.map((it) => it.data?.reportId).filter((id): id is string => Boolean(id));
+}
+
+export async function getRepostsBulk(
+  reportIds: string[],
+  viewerTsuriId?: string,
+): Promise<{ counts: Record<string, number>; repostedIds: string[] }> {
+  const ids = reportIds.slice(0, 100);
+  const vals = await dbBatchGet<number>(
+    ids.map((id) => ({ pk: `REPORT#${id}`, sk: "REPOST_COUNT" })),
+  );
+  const counts: Record<string, number> = {};
+  ids.forEach((id, i) => {
+    const v = vals[i];
+    if (typeof v === "number" && v > 0) counts[id] = v;
+  });
+  let repostedIds: string[] = [];
+  if (viewerTsuriId) {
+    const mine = await dbBatchGet(
+      ids.map((id) => ({ pk: repostsPk(id), sk: `USER#${viewerTsuriId}` })),
+    );
+    repostedIds = ids.filter((_, i) => mine[i] !== null);
+  }
+  return { counts, repostedIds };
+}
+
+// ─── 全体タイムライン ───
+// FEED#GLOBAL#{yyyymm}/TS#{createdAtISO}#{reportId}。月別パーティション（ホットパーティション回避+TTL180日で自然消滅）。
+// data は参照のみ（reportId+tsuriId）。本文は POST# 正本を dbBatchGet で引く。
+
+export const FEED_TTL_SECONDS = 180 * 24 * 60 * 60;
+
+export interface FeedRef {
+  reportId: string;
+  tsuriId?: string;
+}
+
+const feedPk = (yyyymm: string) => `FEED#GLOBAL#${yyyymm}`;
+
+function monthOf(iso: string): string {
+  return iso.slice(0, 7).replace("-", "");
+}
+
+function prevMonth(yyyymm: string): string {
+  const y = Number(yyyymm.slice(0, 4));
+  const m = Number(yyyymm.slice(4, 6));
+  return m === 1 ? `${y - 1}12` : `${y}${String(m - 1).padStart(2, "0")}`;
+}
+
+export async function addToGlobalFeed(post: PostMeta): Promise<void> {
+  const iso = post.submittedAt ?? new Date().toISOString();
+  await dbPut(
+    feedPk(monthOf(iso)),
+    `TS#${iso}#${post.id}`,
+    { reportId: post.id, tsuriId: post.tsuriId } satisfies FeedRef,
+    FEED_TTL_SECONDS,
+  );
+}
+
+// カーソルは「最後に返したアイテムの月+sk」。次ページはそれより古いものから再開する。
+// filter を渡すと該当参照のみ収集（フォロー中タブ用）。月をまたいで最大6ヶ月遡る。
+export async function getGlobalFeedRefs(
+  limit = 20,
+  cursor?: { month: string; sk: string },
+  filter?: (ref: FeedRef) => boolean,
+): Promise<{ refs: FeedRef[]; nextCursor?: { month: string; sk: string } }> {
+  const nowMonth = monthOf(new Date().toISOString());
+  let month = cursor?.month ?? nowMonth;
+  let boundarySk = cursor?.sk;
+  const collected: { ref: FeedRef; sk: string; month: string }[] = [];
+
+  for (let hop = 0; hop < 6 && collected.length <= limit; hop++) {
+    // 月パーティションは最大でも月間投稿数。1ページ分+境界判定に十分な200件で打ち切る
+    const items = await dbQuery<FeedRef>(feedPk(month), {
+      skPrefix: "TS#",
+      forward: false,
+      limit: 200,
+    });
+    for (const it of items) {
+      // sk降順走査: カーソル位置より新しいものは読み飛ばす
+      if (boundarySk && it.sk >= boundarySk) continue;
+      if (!it.data?.reportId) continue;
+      if (filter && !filter(it.data)) continue;
+      collected.push({ ref: it.data, sk: it.sk, month });
+      if (collected.length > limit) break;
+    }
+    if (collected.length > limit) break;
+    month = prevMonth(month);
+    boundarySk = undefined;
+  }
+
+  const hasMore = collected.length > limit;
+  const page = collected.slice(0, limit);
+  const last = page[page.length - 1];
+  return {
+    refs: page.map((p) => p.ref),
+    nextCursor: hasMore && last ? { month: last.month, sk: last.sk } : undefined,
+  };
+}
+
+// 参照から表示用の投稿へ解決（FLAGGED・欠損は除外）
+export async function resolveFeedPosts(refs: FeedRef[]): Promise<PostMeta[]> {
+  if (refs.length === 0) return [];
+  const ids = refs.map((r) => r.reportId);
+  const [metas, flags] = await Promise.all([
+    dbBatchGet<PostMeta>(ids.map((id) => ({ pk: `POST#${id}`, sk: "META" }))),
+    dbBatchGet(ids.map((id) => ({ pk: `REPORT#${id}`, sk: "FLAGGED" }))),
+  ]);
+  const out: PostMeta[] = [];
+  ids.forEach((_, i) => {
+    const meta = metas[i];
+    if (meta && flags[i] === null) out.push(meta);
+  });
+  return out;
+}
+
 // ─── アプリ内通知 ───
 // NOTIF#{tsuriId}/N#{createdAtISO}#{id}（TTL90日）。
 // 未読は USER#{tsuriId}/NOTIF_UNREAD のカウンタ方式（per-item既読フラグは持たない=write節約）。

@@ -1,8 +1,15 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { User as UserIcon } from "lucide-react";
+import { User as UserIcon, Repeat2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { redis } from "@/lib/redis";
+import { SocialCatchCard } from "@/components/social/social-catch-card";
+import {
+  getUserRepostIds,
+  resolveFeedPosts,
+  getLikesBulk,
+  getCommentCountsBulk,
+} from "@/lib/social-store";
 import {
   getUserById,
   getFollowingCount,
@@ -237,22 +244,65 @@ export default async function UserProfilePage({
   }
 
   const shareUrl = `https://tsurispot.com/users/${tsuriId}`;
+  const reposts = await fetchReposts(tsuriId);
 
   return (
-    <ProfileClient
-      data={{
-        user: profile.user,
-        stats: profile.stats,
-        badges: profile.badges,
-        reports: profile.reports,
-        bestCatch: profile.bestCatch,
-        follow: {
-          followingCount: profile.follow.followingCount,
-          followersCount: profile.follow.followersCount,
-          isSelf: false,
-        },
-      }}
-      shareUrl={shareUrl}
-    />
+    <>
+      <ProfileClient
+        data={{
+          user: profile.user,
+          stats: profile.stats,
+          badges: profile.badges,
+          reports: profile.reports,
+          bestCatch: profile.bestCatch,
+          follow: {
+            followingCount: profile.follow.followingCount,
+            followersCount: profile.follow.followersCount,
+            isSelf: false,
+          },
+        }}
+        shareUrl={shareUrl}
+      />
+      {reposts.length > 0 && (
+        <section aria-label="リポスト" className="mx-auto w-full max-w-2xl px-4 pb-10">
+          <h2 className="flex items-center gap-1.5 text-lg font-bold">
+            <Repeat2 className="size-5 text-emerald-600" aria-hidden="true" />
+            リポストした釣果
+          </h2>
+          <div className="mt-3 space-y-3">
+            {reposts.map(({ post, likeCount, commentCount }) => (
+              <SocialCatchCard
+                key={post.id}
+                post={post}
+                likeCount={likeCount}
+                commentCount={commentCount}
+                likedByViewer={false}
+                repostCount={0}
+              />
+            ))}
+          </div>
+        </section>
+      )}
+    </>
   );
+}
+
+// リポスト一覧（最新10件）。取得失敗時は非表示に縮退
+async function fetchReposts(tsuriId: string) {
+  try {
+    const ids = await getUserRepostIds(tsuriId, 10);
+    if (ids.length === 0) return [];
+    const posts = await resolveFeedPosts(ids.map((id) => ({ reportId: id })));
+    const [{ counts }, commentCounts] = await Promise.all([
+      getLikesBulk(posts.map((p) => p.id)),
+      getCommentCountsBulk(posts.map((p) => p.id)),
+    ]);
+    return posts.map((post) => ({
+      post,
+      likeCount: counts[post.id] ?? 0,
+      commentCount: commentCounts[post.id] ?? 0,
+    }));
+  } catch {
+    return [];
+  }
 }

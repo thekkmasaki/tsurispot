@@ -6,6 +6,7 @@ import { Fish, Calendar, MapPin, Ruler, User } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { LikeButton } from "@/components/social/like-button";
+import { RepostButton } from "@/components/social/repost-button";
 import { CommentSection } from "@/components/social/comment-section";
 import { auth } from "@/lib/auth";
 import {
@@ -14,6 +15,8 @@ import {
   getLikeCount,
   hasLiked,
   getComments,
+  getRepostCount,
+  hasReposted,
   type PostMeta,
 } from "@/lib/social-store";
 
@@ -74,10 +77,12 @@ export default async function PostPage({
 
   const session = await auth();
   const viewerId = session?.user?.tsuriId;
-  const [likeCount, liked, comments] = await Promise.all([
+  const [likeCount, liked, comments, repostCount, reposted] = await Promise.all([
     getLikeCount(post.id),
     viewerId ? hasLiked(post.id, viewerId) : Promise.resolve(false),
     getComments(post.id),
+    getRepostCount(post.id),
+    viewerId ? hasReposted(post.id, viewerId) : Promise.resolve(false),
   ]);
 
   return (
@@ -144,7 +149,15 @@ export default async function PostPage({
               <MapPin className="size-4" aria-hidden="true" />
               {post.spotName || post.spotSlug} のスポット情報を見る
             </Link>
-            <LikeButton reportId={post.id} initialCount={likeCount} initialLiked={liked} />
+            <span className="flex items-center gap-1">
+              <LikeButton reportId={post.id} initialCount={likeCount} initialLiked={liked} />
+              <RepostButton
+                reportId={post.id}
+                initialCount={repostCount}
+                initialReposted={reposted}
+                disabled={Boolean(post.tsuriId && viewerId && post.tsuriId === viewerId)}
+              />
+            </span>
           </div>
 
           <CommentSection

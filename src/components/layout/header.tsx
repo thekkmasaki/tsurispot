@@ -23,6 +23,7 @@ import {
   Anchor,
   Store,
   ClipboardCheck,
+  Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SearchOverlayClient } from "./search-overlay-client";
@@ -41,6 +42,7 @@ const mainNavItems = [
 
 // ドロップダウン「もっと見る」
 const moreNavItems = [
+  { href: "/timeline", label: "みんなのタイムライン", icon: Users },
   { href: "/methods", label: "釣り方ガイド", icon: Anchor },
   { href: "/area", label: "エリア一覧", icon: Compass },
   { href: "/area-guide", label: "エリアガイド記事", icon: MapPin },
