@@ -6,6 +6,7 @@ import { Fish, Calendar, MapPin, Ruler, MessageCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { LikeButton } from "@/components/social/like-button";
+import { RepostButton } from "@/components/social/repost-button";
 import type { PostMeta } from "@/lib/social-store";
 
 interface SocialCatchCardProps {
@@ -13,6 +14,9 @@ interface SocialCatchCardProps {
   likeCount: number;
   commentCount: number;
   likedByViewer: boolean;
+  repostCount?: number;
+  repostedByViewer?: boolean;
+  viewerTsuriId?: string;
 }
 
 const WEATHER_ICONS: Record<string, string> = {
@@ -34,6 +38,9 @@ export function SocialCatchCard({
   likeCount,
   commentCount,
   likedByViewer,
+  repostCount = 0,
+  repostedByViewer = false,
+  viewerTsuriId,
 }: SocialCatchCardProps) {
   const permalink = `/posts/${encodeURIComponent(post.id)}`;
 
@@ -130,6 +137,12 @@ export function SocialCatchCard({
             <MessageCircle className="size-4" aria-hidden="true" />
             <span className="tabular-nums">{commentCount > 0 ? commentCount : "コメント"}</span>
           </Link>
+          <RepostButton
+            reportId={post.id}
+            initialCount={repostCount}
+            initialReposted={repostedByViewer}
+            disabled={Boolean(post.tsuriId && viewerTsuriId && post.tsuriId === viewerTsuriId)}
+          />
         </div>
       </CardContent>
     </Card>

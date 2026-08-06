@@ -6,6 +6,7 @@ import {
   resolveFeedPosts,
   getLikesBulk,
   getCommentCountsBulk,
+  getRepostsBulk,
   type PostMeta,
 } from "@/lib/social-store";
 
@@ -14,6 +15,8 @@ export interface TimelineItem {
   likeCount: number;
   commentCount: number;
   likedByViewer: boolean;
+  repostCount: number;
+  repostedByViewer: boolean;
 }
 
 // カーソルは "yyyymm:sk" を base64url で包む
@@ -60,17 +63,21 @@ export async function GET(request: NextRequest) {
   const { refs, nextCursor } = await getGlobalFeedRefs(20, cursor, filter);
   const posts = await resolveFeedPosts(refs);
   const ids = posts.map((p) => p.id);
-  const [{ counts, likedIds }, commentCounts] = await Promise.all([
+  const [{ counts, likedIds }, commentCounts, reposts] = await Promise.all([
     getLikesBulk(ids, viewerId),
     getCommentCountsBulk(ids),
+    getRepostsBulk(ids, viewerId),
   ]);
   const likedSet = new Set(likedIds);
+  const repostedSet = new Set(reposts.repostedIds);
 
   const items: TimelineItem[] = posts.map((post) => ({
     post,
     likeCount: counts[post.id] ?? 0,
     commentCount: commentCounts[post.id] ?? 0,
     likedByViewer: likedSet.has(post.id),
+    repostCount: reposts.counts[post.id] ?? 0,
+    repostedByViewer: repostedSet.has(post.id),
   }));
 
   return NextResponse.json({
