@@ -8,6 +8,8 @@ import {
   getFollowersCount,
   getUserById,
 } from "@/lib/user-store";
+import { notify } from "@/lib/notifications";
+import { isBlockedBy } from "@/lib/social-store";
 
 export async function POST(request: Request) {
   const session = await auth();
@@ -25,9 +27,23 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "自分自身はフォローできません" }, { status: 400 });
   }
 
+  // 相手にブロックされている場合はフォロー不可
+  if (await isBlockedBy(targetId, viewerId)) {
+    return NextResponse.json({ error: "このユーザーはフォローできません" }, { status: 403 });
+  }
+
   const ok = await follow(viewerId, targetId);
   if (!ok) {
     return NextResponse.json({ error: "フォロー対象が見つかりません" }, { status: 404 });
+  }
+
+  const viewer = await getUserById(viewerId);
+  if (viewer) {
+    void notify(targetId, {
+      type: "follow",
+      actorId: viewerId,
+      actorNickname: viewer.nickname,
+    });
   }
 
   const followingCount = await getFollowingCount(viewerId);

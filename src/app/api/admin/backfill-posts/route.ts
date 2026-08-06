@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { redis } from "@/lib/redis";
 import { dbScanPrefix, dbConditionalPut } from "@/lib/dynamodb";
-import { POST_TTL_SECONDS, type PostMeta } from "@/lib/social-store";
+import { POST_TTL_SECONDS, FEED_TTL_SECONDS, type PostMeta } from "@/lib/social-store";
 
 export const runtime = "nodejs";
 export const maxDuration = 300;
@@ -79,11 +79,25 @@ export async function POST(request: NextRequest) {
 
   let written = 0;
   let skipped = 0;
+  let feedWritten = 0;
   for (const post of posts.values()) {
     const created = await dbConditionalPut(`POST#${post.id}`, "META", post, POST_TTL_SECONDS);
     if (created) written++;
     else skipped++;
+
+    // 全体タイムライン（/timeline）参照も投入。submittedAt が無い旧投稿は date(釣行日)を使う
+    const iso = post.submittedAt ?? (post.date ? `${post.date}T00:00:00.000Z` : null);
+    if (iso) {
+      const month = iso.slice(0, 7).replace("-", "");
+      const feedCreated = await dbConditionalPut(
+        `FEED#GLOBAL#${month}`,
+        `TS#${iso}#${post.id}`,
+        { reportId: post.id, tsuriId: post.tsuriId },
+        FEED_TTL_SECONDS,
+      );
+      if (feedCreated) feedWritten++;
+    }
   }
 
-  return NextResponse.json({ mode: "execute", total: posts.size, written, skipped });
+  return NextResponse.json({ mode: "execute", total: posts.size, written, skipped, feedWritten });
 }

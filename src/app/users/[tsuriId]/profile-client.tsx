@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ShareButtons } from "@/components/ui/share-buttons";
+import { BlockButton } from "@/components/social/block-button";
 import { getTitle } from "@/lib/titles";
 
 interface CatchReportItem {
@@ -185,6 +186,11 @@ export function ProfileClient({ data, shareUrl }: Props) {
                 </>
               )}
             </Button>
+          )}
+          {!follow.isSelf && (
+            <span className="mt-1">
+              <BlockButton tsuriId={data.user.tsuriId} />
+            </span>
           )}
         </div>
 

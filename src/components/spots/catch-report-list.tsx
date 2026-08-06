@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Fish, Calendar, User, Ruler, Flag, Share2 } from "lucide-react";
+import { Fish, Calendar, User, Ruler, Flag, Share2, MessageCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "@/components/ui/toast";
+import { LikeButton } from "@/components/social/like-button";
 import type { CatchReport } from "@/lib/data/catch-reports";
 
 interface CatchReportListProps {
@@ -65,6 +66,28 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
   const [flaggedIds, setFlaggedIds] = useState<Set<string>>(new Set());
   const [confirmingId, setConfirmingId] = useState<string | null>(null);
   const [submittingId, setSubmittingId] = useState<string | null>(null);
+
+  // いいね状態はISR/SSGページのHTMLに焼き込めないため、mount時に一括取得する（1リクエスト）
+  const [likeCounts, setLikeCounts] = useState<Record<string, number>>({});
+  const [likedIds, setLikedIds] = useState<Set<string>>(new Set());
+  const [commentCounts, setCommentCounts] = useState<Record<string, number>>({});
+  const [likesLoaded, setLikesLoaded] = useState(false);
+  useEffect(() => {
+    const ids = initialReports.slice(0, 100).map((r) => r.id);
+    if (ids.length === 0) return;
+    fetch(`/api/reports/likes?ids=${ids.map(encodeURIComponent).join(",")}`)
+      .then((res) => (res.ok ? res.json() : null))
+      .then((data) => {
+        if (!data) return;
+        setLikeCounts(data.counts ?? {});
+        setLikedIds(new Set(data.likedIds ?? []));
+        setCommentCounts(data.commentCounts ?? {});
+        setLikesLoaded(true);
+      })
+      .catch(() => {
+        // いいね表示は付加情報のため、取得失敗しても一覧は通常表示
+      });
+  }, [initialReports]);
 
   // ネイティブ confirm()/alert() を排除し、インライン確認 + 二重送信ガード + トースト通知に置換。
   const submitFlag = useCallback(async (reportId: string) => {
@@ -209,6 +232,23 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
             </div>
             {/* シェア（バイラルループ: 訪問者が釣果を拡散→新規流入） */}
             <div className="mt-2 flex items-center gap-2 border-t pt-2 text-xs text-muted-foreground/70">
+              <LikeButton
+                key={`${report.id}-${likesLoaded}`}
+                reportId={report.id}
+                initialCount={likeCounts[report.id] ?? 0}
+                initialLiked={likedIds.has(report.id)}
+              />
+              <Link
+                prefetch={false}
+                href={`/posts/${encodeURIComponent(report.id)}`}
+                className="inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-sky-700"
+                aria-label="コメントを見る"
+              >
+                <MessageCircle className="size-4" aria-hidden="true" />
+                <span className="tabular-nums">
+                  {commentCounts[report.id] ? commentCounts[report.id] : "コメント"}
+                </span>
+              </Link>
               <span>この釣果をシェア:</span>
               <a
                 href={xShareUrl(report)}

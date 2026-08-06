@@ -23,11 +23,13 @@ import {
   Anchor,
   Store,
   ClipboardCheck,
+  Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SearchOverlayClient } from "./search-overlay-client";
 import { LineButton } from "./line-button";
 import { UserMenu } from "./user-menu";
+import { NotificationBell } from "@/components/social/notification-bell";
 // メインナビ（常時表示：最大6個）
 const mainNavItems = [
   { href: "/spots", label: "スポット", icon: MapPin },
@@ -40,6 +42,8 @@ const mainNavItems = [
 
 // ドロップダウン「もっと見る」
 const moreNavItems = [
+  { href: "/timeline", label: "みんなのタイムライン", icon: Users },
+  { href: "/users", label: "釣り人を探す", icon: Users },
   { href: "/methods", label: "釣り方ガイド", icon: Anchor },
   { href: "/area", label: "エリア一覧", icon: Compass },
   { href: "/area-guide", label: "エリアガイド記事", icon: MapPin },
@@ -198,6 +202,7 @@ export function Header() {
               </span>
             )}
           </Link>
+          <NotificationBell />
           <UserMenu />
         </div>
       </div>
