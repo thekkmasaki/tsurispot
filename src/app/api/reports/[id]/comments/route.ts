@@ -3,7 +3,7 @@ import { auth } from "@/lib/auth";
 import { checkNgWords } from "@/lib/moderation";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { getUserById } from "@/lib/user-store";
-import { addComment, getComments, getPostMeta } from "@/lib/social-store";
+import { addComment, getComments, getPostMeta, isBlockedBy } from "@/lib/social-store";
 import { notify } from "@/lib/notifications";
 
 // GET /api/reports/[id]/comments — コメント一覧（公開・通報FLAGGED除外済み）
@@ -54,6 +54,10 @@ export async function POST(
   const post = await getPostMeta(id);
   if (!post) {
     return NextResponse.json({ error: "釣果が見つかりません" }, { status: 404 });
+  }
+  // 投稿主がコメント者をブロックしている場合は拒否
+  if (post.tsuriId && (await isBlockedBy(post.tsuriId, tsuriId))) {
+    return NextResponse.json({ error: "この釣果にはコメントできません" }, { status: 403 });
   }
 
   // ニックネームはセッションでなく正本（user-store）から取得（改名を即反映）

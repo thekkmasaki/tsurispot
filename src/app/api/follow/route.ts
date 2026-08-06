@@ -9,6 +9,7 @@ import {
   getUserById,
 } from "@/lib/user-store";
 import { notify } from "@/lib/notifications";
+import { isBlockedBy } from "@/lib/social-store";
 
 export async function POST(request: Request) {
   const session = await auth();
@@ -24,6 +25,11 @@ export async function POST(request: Request) {
   }
   if (targetId === viewerId) {
     return NextResponse.json({ error: "自分自身はフォローできません" }, { status: 400 });
+  }
+
+  // 相手にブロックされている場合はフォロー不可
+  if (await isBlockedBy(targetId, viewerId)) {
+    return NextResponse.json({ error: "このユーザーはフォローできません" }, { status: 403 });
   }
 
   const ok = await follow(viewerId, targetId);

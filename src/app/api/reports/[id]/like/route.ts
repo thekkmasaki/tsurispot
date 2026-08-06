@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { getUserById } from "@/lib/user-store";
-import { likePost, unlikePost, getPostMeta } from "@/lib/social-store";
+import { likePost, unlikePost, getPostMeta, isBlockedBy } from "@/lib/social-store";
 import { notify } from "@/lib/notifications";
 
 // POST/DELETE /api/reports/[id]/like — 釣果へのいいね（冪等）
@@ -27,6 +27,10 @@ export async function POST(
   const post = await getPostMeta(id);
   if (!post) {
     return NextResponse.json({ error: "釣果が見つかりません" }, { status: 404 });
+  }
+  // 投稿主にブロックされている場合は拒否
+  if (post.tsuriId && (await isBlockedBy(post.tsuriId, tsuriId))) {
+    return NextResponse.json({ error: "この釣果にはいいねできません" }, { status: 403 });
   }
 
   const { count, created } = await likePost(id, tsuriId);
