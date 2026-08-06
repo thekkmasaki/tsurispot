@@ -6,12 +6,14 @@ import { Fish, Calendar, MapPin, Ruler, User } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { LikeButton } from "@/components/social/like-button";
+import { CommentSection } from "@/components/social/comment-section";
 import { auth } from "@/lib/auth";
 import {
   getPostMeta,
   isPostFlagged,
   getLikeCount,
   hasLiked,
+  getComments,
   type PostMeta,
 } from "@/lib/social-store";
 
@@ -72,9 +74,10 @@ export default async function PostPage({
 
   const session = await auth();
   const viewerId = session?.user?.tsuriId;
-  const [likeCount, liked] = await Promise.all([
+  const [likeCount, liked, comments] = await Promise.all([
     getLikeCount(post.id),
     viewerId ? hasLiked(post.id, viewerId) : Promise.resolve(false),
+    getComments(post.id),
   ]);
 
   return (
@@ -143,6 +146,12 @@ export default async function PostPage({
             </Link>
             <LikeButton reportId={post.id} initialCount={likeCount} initialLiked={liked} />
           </div>
+
+          <CommentSection
+            reportId={post.id}
+            postAuthorTsuriId={post.tsuriId}
+            initialComments={comments}
+          />
         </CardContent>
       </Card>
     </main>
