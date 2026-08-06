@@ -28,6 +28,7 @@ import { cn } from "@/lib/utils";
 import { SearchOverlayClient } from "./search-overlay-client";
 import { LineButton } from "./line-button";
 import { UserMenu } from "./user-menu";
+import { NotificationBell } from "@/components/social/notification-bell";
 // メインナビ（常時表示：最大6個）
 const mainNavItems = [
   { href: "/spots", label: "スポット", icon: MapPin },
@@ -198,6 +199,7 @@ export function Header() {
               </span>
             )}
           </Link>
+          <NotificationBell />
           <UserMenu />
         </div>
       </div>

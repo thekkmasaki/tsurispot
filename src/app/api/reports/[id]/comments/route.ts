@@ -4,6 +4,7 @@ import { checkNgWords } from "@/lib/moderation";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { getUserById } from "@/lib/user-store";
 import { addComment, getComments, getPostMeta } from "@/lib/social-store";
+import { notify } from "@/lib/notifications";
 
 // GET /api/reports/[id]/comments — コメント一覧（公開・通報FLAGGED除外済み）
 export async function GET(
@@ -62,5 +63,16 @@ export async function POST(
   }
 
   const comment = await addComment(id, tsuriId, user.nickname, text);
+
+  if (post.tsuriId && post.tsuriId !== tsuriId) {
+    void notify(post.tsuriId, {
+      type: "comment",
+      actorId: tsuriId,
+      actorNickname: user.nickname,
+      reportId: id,
+      excerpt: text.slice(0, 40),
+    });
+  }
+
   return NextResponse.json({ ok: true, comment });
 }
