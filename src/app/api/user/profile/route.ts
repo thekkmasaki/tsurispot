@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { updateProfile, deleteUser, getUserById, STYLE_TAGS } from "@/lib/user-store";
 import { checkNgWords } from "@/lib/moderation";
+import { updateUserSearchIndex } from "@/lib/social-store";
 
 interface ProfilePatch {
   nickname?: string;
@@ -126,6 +127,15 @@ export async function PATCH(request: Request) {
   if (!updated) {
     return NextResponse.json({ error: "更新に失敗しました" }, { status: 500 });
   }
+
+  // ユーザー検索索引の更新（失敗しても本操作は成功扱い）
+  updateUserSearchIndex({
+    tsuriId: updated.id,
+    nickname: updated.nickname,
+    avatarUrl: updated.avatarUrl,
+    reportCount: updated.reportCount,
+    isPublic: updated.isPublic,
+  }).catch((err) => console.error("[プロフィール] 検索索引更新エラー:", err));
 
   return NextResponse.json({ ok: true, user: updated });
 }

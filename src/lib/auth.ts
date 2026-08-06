@@ -162,6 +162,18 @@ const config: NextAuthConfig = {
             };
             // createUser は SETNX で原子化済み。競合敗北時は勝者のレコードが返る。
             user = await createUser(newUser);
+            // ユーザー検索索引への登録（装飾的書き込み。失敗してもログインは成功させる）
+            import("@/lib/social-store")
+              .then((m) =>
+                m.updateUserSearchIndex({
+                  tsuriId: user!.id,
+                  nickname: user!.nickname,
+                  avatarUrl: user!.avatarUrl,
+                  reportCount: user!.reportCount,
+                  isPublic: user!.isPublic,
+                }),
+              )
+              .catch((err) => console.error("[auth] 検索索引登録エラー:", err));
           } else if (picture && user.avatarUrl !== picture) {
             // アバター更新は装飾的な書き込み。ユーザー識別(getUserByProvider/createUser)は
             // 成功しているのに、この失敗までログイン失敗(throw)へ昇格させない。
