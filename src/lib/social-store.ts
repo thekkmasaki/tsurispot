@@ -31,6 +31,7 @@ export interface PostMeta {
   method?: string;
   weather?: string;
   submittedAt?: string;
+  tags?: string[];
 }
 
 const postPk = (reportId: string) => `POST#${reportId}`;
@@ -177,6 +178,71 @@ export async function getCommentCountsBulk(
     if (typeof v === "number" && v > 0) counts[id] = v;
   });
   return counts;
+}
+
+// ─── ハッシュタグ ───
+// TAG#{normTag}/TS#{iso}#{reportId}（参照のみ・TTL365日）+ TAG#{normTag}/COUNT。
+// 人気タグは Redis zset（tags:popular）で別管理（呼び出し側）。
+
+export const MAX_TAGS_PER_POST = 5;
+export const MAX_TAG_LENGTH = 20;
+
+// NFKC正規化+小文字化+先頭#除去。全半角・大小文字を同一視する
+export function normalizeTag(raw: string): string {
+  return raw
+    .normalize("NFKC")
+    .trim()
+    .replace(/^#+/, "")
+    .toLowerCase()
+    .slice(0, MAX_TAG_LENGTH);
+}
+
+export function sanitizeTags(raw: unknown): string[] {
+  if (!Array.isArray(raw)) return [];
+  const seen = new Set<string>();
+  const out: string[] = [];
+  for (const t of raw) {
+    if (typeof t !== "string") continue;
+    const norm = normalizeTag(t);
+    if (!norm || /[\s#/\\?&=%]/.test(norm)) continue;
+    if (seen.has(norm)) continue;
+    seen.add(norm);
+    out.push(norm);
+    if (out.length >= MAX_TAGS_PER_POST) break;
+  }
+  return out;
+}
+
+const tagPk = (normTag: string) => `TAG#${normTag}`;
+
+export async function addTagsForPost(post: PostMeta, tags: string[]): Promise<void> {
+  const iso = post.submittedAt ?? new Date().toISOString();
+  await Promise.all(
+    tags.flatMap((tag) => [
+      dbPut(
+        tagPk(tag),
+        `TS#${iso}#${post.id}`,
+        { reportId: post.id, tsuriId: post.tsuriId } satisfies FeedRef,
+        POST_TTL_SECONDS,
+      ),
+      dbIncr(tagPk(tag), "COUNT"),
+    ]),
+  );
+}
+
+// タグ別の投稿参照（新しい順）
+export async function getTagFeedRefs(normTag: string, limit = 30): Promise<FeedRef[]> {
+  const items = await dbQuery<FeedRef>(tagPk(normTag), {
+    skPrefix: "TS#",
+    forward: false,
+    limit,
+  });
+  return items.map((it) => it.data).filter((r): r is FeedRef => Boolean(r?.reportId));
+}
+
+export async function getTagCount(normTag: string): Promise<number> {
+  const n = await dbGet<number>(tagPk(normTag), "COUNT");
+  return typeof n === "number" && n > 0 ? n : 0;
 }
 
 // ─── リポスト ───
