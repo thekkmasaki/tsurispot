@@ -7,6 +7,7 @@ import { checkNgWords } from "@/lib/moderation";
 import { auth } from "@/lib/auth";
 import { incrementReportCount } from "@/lib/user-store";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { savePostMeta } from "@/lib/social-store";
 
 const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;
 
@@ -121,6 +122,14 @@ export async function POST(request: Request) {
       weather: weather || undefined,
       submittedAt: new Date().toISOString(),
     };
+
+    // 投稿の正本（POST#{id}/META）。パーマリンク・いいね・コメントの参照元
+    try {
+      await savePostMeta(reportData);
+    } catch (err) {
+      console.error("[釣果投稿] POST META保存エラー:", err);
+      // 失敗してもスポット別ビューには載るため続行（パーマリンクのみ404になる縮退）
+    }
 
     // DynamoDB に即時保存（自動承認）- read-modify-write
     try {
