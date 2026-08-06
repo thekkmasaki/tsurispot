@@ -179,6 +179,96 @@ export async function getCommentCountsBulk(
   return counts;
 }
 
+// ─── 全体タイムライン ───
+// FEED#GLOBAL#{yyyymm}/TS#{createdAtISO}#{reportId}。月別パーティション（ホットパーティション回避+TTL180日で自然消滅）。
+// data は参照のみ（reportId+tsuriId）。本文は POST# 正本を dbBatchGet で引く。
+
+export const FEED_TTL_SECONDS = 180 * 24 * 60 * 60;
+
+export interface FeedRef {
+  reportId: string;
+  tsuriId?: string;
+}
+
+const feedPk = (yyyymm: string) => `FEED#GLOBAL#${yyyymm}`;
+
+function monthOf(iso: string): string {
+  return iso.slice(0, 7).replace("-", "");
+}
+
+function prevMonth(yyyymm: string): string {
+  const y = Number(yyyymm.slice(0, 4));
+  const m = Number(yyyymm.slice(4, 6));
+  return m === 1 ? `${y - 1}12` : `${y}${String(m - 1).padStart(2, "0")}`;
+}
+
+export async function addToGlobalFeed(post: PostMeta): Promise<void> {
+  const iso = post.submittedAt ?? new Date().toISOString();
+  await dbPut(
+    feedPk(monthOf(iso)),
+    `TS#${iso}#${post.id}`,
+    { reportId: post.id, tsuriId: post.tsuriId } satisfies FeedRef,
+    FEED_TTL_SECONDS,
+  );
+}
+
+// カーソルは「最後に返したアイテムの月+sk」。次ページはそれより古いものから再開する。
+// filter を渡すと該当参照のみ収集（フォロー中タブ用）。月をまたいで最大6ヶ月遡る。
+export async function getGlobalFeedRefs(
+  limit = 20,
+  cursor?: { month: string; sk: string },
+  filter?: (ref: FeedRef) => boolean,
+): Promise<{ refs: FeedRef[]; nextCursor?: { month: string; sk: string } }> {
+  const nowMonth = monthOf(new Date().toISOString());
+  let month = cursor?.month ?? nowMonth;
+  let boundarySk = cursor?.sk;
+  const collected: { ref: FeedRef; sk: string; month: string }[] = [];
+
+  for (let hop = 0; hop < 6 && collected.length <= limit; hop++) {
+    // 月パーティションは最大でも月間投稿数。1ページ分+境界判定に十分な200件で打ち切る
+    const items = await dbQuery<FeedRef>(feedPk(month), {
+      skPrefix: "TS#",
+      forward: false,
+      limit: 200,
+    });
+    for (const it of items) {
+      // sk降順走査: カーソル位置より新しいものは読み飛ばす
+      if (boundarySk && it.sk >= boundarySk) continue;
+      if (!it.data?.reportId) continue;
+      if (filter && !filter(it.data)) continue;
+      collected.push({ ref: it.data, sk: it.sk, month });
+      if (collected.length > limit) break;
+    }
+    if (collected.length > limit) break;
+    month = prevMonth(month);
+    boundarySk = undefined;
+  }
+
+  const hasMore = collected.length > limit;
+  const page = collected.slice(0, limit);
+  const last = page[page.length - 1];
+  return {
+    refs: page.map((p) => p.ref),
+    nextCursor: hasMore && last ? { month: last.month, sk: last.sk } : undefined,
+  };
+}
+
+// 参照から表示用の投稿へ解決（FLAGGED・欠損は除外）
+export async function resolveFeedPosts(refs: FeedRef[]): Promise<PostMeta[]> {
+  if (refs.length === 0) return [];
+  const ids = refs.map((r) => r.reportId);
+  const [metas, flags] = await Promise.all([
+    dbBatchGet<PostMeta>(ids.map((id) => ({ pk: `POST#${id}`, sk: "META" }))),
+    dbBatchGet(ids.map((id) => ({ pk: `REPORT#${id}`, sk: "FLAGGED" }))),
+  ]);
+  const out: PostMeta[] = [];
+  ids.forEach((_, i) => {
+    const meta = metas[i];
+    if (meta && flags[i] === null) out.push(meta);
+  });
+  return out;
+}
+
 // ─── アプリ内通知 ───
 // NOTIF#{tsuriId}/N#{createdAtISO}#{id}（TTL90日）。
 // 未読は USER#{tsuriId}/NOTIF_UNREAD のカウンタ方式（per-item既読フラグは持たない=write節約）。
