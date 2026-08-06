@@ -10,6 +10,7 @@ import {
   dbDecr,
   dbBatchGet,
   dbConditionalPut,
+  dbQuery,
 } from "@/lib/dynamodb";
 
 export const POST_TTL_SECONDS = 365 * 24 * 60 * 60;
@@ -82,6 +83,97 @@ export async function hasLiked(reportId: string, tsuriId: string): Promise<boole
 export async function getLikeCount(reportId: string): Promise<number> {
   const n = await dbGet<number>(reportPk(reportId), "LIKE_COUNT");
   return typeof n === "number" && n > 0 ? n : 0;
+}
+
+// ─── コメント ───
+// COMMENTS#{reportId}/C#{createdAtISO}#{commentId}。通報は既存 /api/report-flag を
+// commentId で共用（REPORT#{commentId}/FLAGGED が立つ → 取得時に除外）。
+
+export interface PostComment {
+  id: string;
+  reportId: string;
+  authorTsuriId: string;
+  authorNickname: string;
+  text: string;
+  createdAt: string;
+}
+
+const commentsPk = (reportId: string) => `COMMENTS#${reportId}`;
+
+export async function addComment(
+  reportId: string,
+  authorTsuriId: string,
+  authorNickname: string,
+  text: string,
+): Promise<PostComment> {
+  const createdAt = new Date().toISOString();
+  const comment: PostComment = {
+    id: `cmt-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
+    reportId,
+    authorTsuriId,
+    authorNickname,
+    text,
+    createdAt,
+  };
+  await dbPut(commentsPk(reportId), `C#${createdAt}#${comment.id}`, comment, POST_TTL_SECONDS);
+  await dbIncr(`REPORT#${reportId}`, "COMMENT_COUNT");
+  return comment;
+}
+
+// 古い順（会話の自然順）で返す。通報FLAGGED済みは除外
+export async function getComments(reportId: string, limit = 100): Promise<PostComment[]> {
+  const items = await dbQuery<PostComment>(commentsPk(reportId), {
+    skPrefix: "C#",
+    forward: true,
+    limit,
+  });
+  const comments = items.map((it) => it.data).filter(Boolean);
+  if (comments.length === 0) return [];
+  const flags = await dbBatchGet(
+    comments.map((c) => ({ pk: `REPORT#${c.id}`, sk: "FLAGGED" })),
+  );
+  return comments.filter((_, i) => flags[i] === null);
+}
+
+// コメント主 or 投稿主のみ削除可。削除できたら true
+export async function deleteComment(
+  reportId: string,
+  commentId: string,
+  requesterTsuriId: string,
+): Promise<{ ok: boolean; status: number; error?: string }> {
+  const items = await dbQuery<PostComment>(commentsPk(reportId), { skPrefix: "C#", all: true });
+  const target = items.find((it) => it.data?.id === commentId);
+  if (!target) return { ok: false, status: 404, error: "コメントが見つかりません" };
+
+  if (target.data.authorTsuriId !== requesterTsuriId) {
+    const post = await getPostMeta(reportId);
+    if (!post?.tsuriId || post.tsuriId !== requesterTsuriId) {
+      return { ok: false, status: 403, error: "このコメントを削除する権限がありません" };
+    }
+  }
+  await dbDelete(target.pk, target.sk);
+  await dbDecr(`REPORT#${reportId}`, "COMMENT_COUNT");
+  return { ok: true, status: 200 };
+}
+
+export async function getCommentCount(reportId: string): Promise<number> {
+  const n = await dbGet<number>(`REPORT#${reportId}`, "COMMENT_COUNT");
+  return typeof n === "number" && n > 0 ? n : 0;
+}
+
+export async function getCommentCountsBulk(
+  reportIds: string[],
+): Promise<Record<string, number>> {
+  const ids = reportIds.slice(0, 100);
+  const vals = await dbBatchGet<number>(
+    ids.map((id) => ({ pk: `REPORT#${id}`, sk: "COMMENT_COUNT" })),
+  );
+  const counts: Record<string, number> = {};
+  ids.forEach((id, i) => {
+    const v = vals[i];
+    if (typeof v === "number" && v > 0) counts[id] = v;
+  });
+  return counts;
 }
 
 // 一覧用の一括取得: reportIds → { counts, likedIds(閲覧者がいいね済み) }

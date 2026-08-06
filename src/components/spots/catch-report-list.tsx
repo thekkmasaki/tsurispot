@@ -3,7 +3,7 @@
 import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Fish, Calendar, User, Ruler, Flag, Share2 } from "lucide-react";
+import { Fish, Calendar, User, Ruler, Flag, Share2, MessageCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "@/components/ui/toast";
@@ -70,6 +70,7 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
   // いいね状態はISR/SSGページのHTMLに焼き込めないため、mount時に一括取得する（1リクエスト）
   const [likeCounts, setLikeCounts] = useState<Record<string, number>>({});
   const [likedIds, setLikedIds] = useState<Set<string>>(new Set());
+  const [commentCounts, setCommentCounts] = useState<Record<string, number>>({});
   const [likesLoaded, setLikesLoaded] = useState(false);
   useEffect(() => {
     const ids = initialReports.slice(0, 100).map((r) => r.id);
@@ -80,6 +81,7 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
         if (!data) return;
         setLikeCounts(data.counts ?? {});
         setLikedIds(new Set(data.likedIds ?? []));
+        setCommentCounts(data.commentCounts ?? {});
         setLikesLoaded(true);
       })
       .catch(() => {
@@ -236,6 +238,17 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
                 initialCount={likeCounts[report.id] ?? 0}
                 initialLiked={likedIds.has(report.id)}
               />
+              <Link
+                prefetch={false}
+                href={`/posts/${encodeURIComponent(report.id)}`}
+                className="inline-flex items-center gap-1 rounded-full px-2 py-1 text-xs text-muted-foreground transition-colors hover:bg-muted hover:text-sky-700"
+                aria-label="コメントを見る"
+              >
+                <MessageCircle className="size-4" aria-hidden="true" />
+                <span className="tabular-nums">
+                  {commentCounts[report.id] ? commentCounts[report.id] : "コメント"}
+                </span>
+              </Link>
               <span>この釣果をシェア:</span>
               <a
                 href={xShareUrl(report)}
