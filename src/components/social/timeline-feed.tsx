@@ -15,13 +15,16 @@ interface TimelineItem {
   likeCount: number;
   commentCount: number;
   likedByViewer: boolean;
+  repostCount: number;
+  repostedByViewer: boolean;
 }
 
 type Tab = "all" | "following";
 
 // タイムライン本体。タブ切替・カーソルページング・広告5件毎（即ロード=lazy化禁忌）
 export function TimelineFeed() {
-  const { status } = useSession();
+  const { data: session, status } = useSession();
+  const viewerTsuriId = session?.user?.tsuriId;
   const [tab, setTab] = useState<Tab>("all");
   const [items, setItems] = useState<TimelineItem[]>([]);
   const [nextCursor, setNextCursor] = useState<string | null>(null);
@@ -129,6 +132,9 @@ export function TimelineFeed() {
                 likeCount={item.likeCount}
                 commentCount={item.commentCount}
                 likedByViewer={item.likedByViewer}
+                repostCount={item.repostCount}
+                repostedByViewer={item.repostedByViewer}
+                viewerTsuriId={viewerTsuriId}
               />
               {/* フィード5件毎に広告（即ロード。lazy化はRPM半減の前歴があり禁忌） */}
               {(idx + 1) % 5 === 0 && <NativeAdBreak className="py-2" />}

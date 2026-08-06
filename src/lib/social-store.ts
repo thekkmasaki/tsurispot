@@ -179,6 +179,78 @@ export async function getCommentCountsBulk(
   return counts;
 }
 
+// ─── リポスト ───
+// REPOSTS#{reportId}/USER#{tsuriId}（冪等判定用）+ REPOST_COUNT +
+// USERREPOSTS#{tsuriId}/TS#{iso}#{reportId}（プロフィールのリポスト一覧用）。
+
+const repostsPk = (reportId: string) => `REPOSTS#${reportId}`;
+const userRepostsPk = (tsuriId: string) => `USERREPOSTS#${tsuriId}`;
+
+export async function repostPost(
+  reportId: string,
+  tsuriId: string,
+): Promise<{ count: number; created: boolean }> {
+  const ts = new Date().toISOString();
+  const created = await dbConditionalPut(repostsPk(reportId), `USER#${tsuriId}`, { ts });
+  if (!created) {
+    return { count: await getRepostCount(reportId), created: false };
+  }
+  await dbPut(userRepostsPk(tsuriId), `TS#${ts}#${reportId}`, { reportId, ts }, POST_TTL_SECONDS);
+  return { count: await dbIncr(`REPORT#${reportId}`, "REPOST_COUNT"), created: true };
+}
+
+export async function unrepostPost(reportId: string, tsuriId: string): Promise<number> {
+  const existing = await dbGet<{ ts: string }>(repostsPk(reportId), `USER#${tsuriId}`);
+  if (!existing) return getRepostCount(reportId);
+  await dbDelete(repostsPk(reportId), `USER#${tsuriId}`);
+  if (existing.ts) {
+    await dbDelete(userRepostsPk(tsuriId), `TS#${existing.ts}#${reportId}`);
+  }
+  return dbDecr(`REPORT#${reportId}`, "REPOST_COUNT");
+}
+
+export async function hasReposted(reportId: string, tsuriId: string): Promise<boolean> {
+  return dbExists(repostsPk(reportId), `USER#${tsuriId}`);
+}
+
+export async function getRepostCount(reportId: string): Promise<number> {
+  const n = await dbGet<number>(`REPORT#${reportId}`, "REPOST_COUNT");
+  return typeof n === "number" && n > 0 ? n : 0;
+}
+
+// ユーザーがリポストした投稿ID（新しい順）
+export async function getUserRepostIds(tsuriId: string, limit = 20): Promise<string[]> {
+  const items = await dbQuery<{ reportId: string }>(userRepostsPk(tsuriId), {
+    skPrefix: "TS#",
+    forward: false,
+    limit,
+  });
+  return items.map((it) => it.data?.reportId).filter((id): id is string => Boolean(id));
+}
+
+export async function getRepostsBulk(
+  reportIds: string[],
+  viewerTsuriId?: string,
+): Promise<{ counts: Record<string, number>; repostedIds: string[] }> {
+  const ids = reportIds.slice(0, 100);
+  const vals = await dbBatchGet<number>(
+    ids.map((id) => ({ pk: `REPORT#${id}`, sk: "REPOST_COUNT" })),
+  );
+  const counts: Record<string, number> = {};
+  ids.forEach((id, i) => {
+    const v = vals[i];
+    if (typeof v === "number" && v > 0) counts[id] = v;
+  });
+  let repostedIds: string[] = [];
+  if (viewerTsuriId) {
+    const mine = await dbBatchGet(
+      ids.map((id) => ({ pk: repostsPk(id), sk: `USER#${viewerTsuriId}` })),
+    );
+    repostedIds = ids.filter((_, i) => mine[i] !== null);
+  }
+  return { counts, repostedIds };
+}
+
 // ─── 全体タイムライン ───
 // FEED#GLOBAL#{yyyymm}/TS#{createdAtISO}#{reportId}。月別パーティション（ホットパーティション回避+TTL180日で自然消滅）。
 // data は参照のみ（reportId+tsuriId）。本文は POST# 正本を dbBatchGet で引く。
