@@ -5,7 +5,15 @@ import { notFound } from "next/navigation";
 import { Fish, Calendar, MapPin, Ruler, User } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { getPostMeta, isPostFlagged, type PostMeta } from "@/lib/social-store";
+import { LikeButton } from "@/components/social/like-button";
+import { auth } from "@/lib/auth";
+import {
+  getPostMeta,
+  isPostFlagged,
+  getLikeCount,
+  hasLiked,
+  type PostMeta,
+} from "@/lib/social-store";
 
 // 釣果パーマリンク: 通知・シェアの着地点。
 // ISRは使わない(キャッシュ肥大回避)・検索インデックスにも載せない(UGC単体はnoindex一貫)
@@ -61,6 +69,13 @@ export default async function PostPage({
   const { id } = await params;
   const post = await fetchPost(decodeURIComponent(id));
   if (!post) notFound();
+
+  const session = await auth();
+  const viewerId = session?.user?.tsuriId;
+  const [likeCount, liked] = await Promise.all([
+    getLikeCount(post.id),
+    viewerId ? hasLiked(post.id, viewerId) : Promise.resolve(false),
+  ]);
 
   return (
     <main className="mx-auto w-full max-w-2xl px-4 py-8">
@@ -118,7 +133,7 @@ export default async function PostPage({
             ) : null}
           </div>
 
-          <div className="mt-5 border-t pt-4">
+          <div className="mt-5 flex items-center justify-between gap-3 border-t pt-4">
             <Link
               href={`/spots/${post.spotSlug}`}
               className="inline-flex items-center gap-1.5 text-sm font-medium text-sky-700 hover:underline"
@@ -126,6 +141,7 @@ export default async function PostPage({
               <MapPin className="size-4" aria-hidden="true" />
               {post.spotName || post.spotSlug} のスポット情報を見る
             </Link>
+            <LikeButton reportId={post.id} initialCount={likeCount} initialLiked={liked} />
           </div>
         </CardContent>
       </Card>
