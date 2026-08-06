@@ -525,12 +525,29 @@ export async function clearUnreadNotifications(tsuriId: string): Promise<void> {
   await dbPut(`USER#${tsuriId}`, "NOTIF_UNREAD", 0);
 }
 
-// ブロック（PR9で書き込みUIを実装。それまでは常にfalseで前方互換）
+// ─── ブロック ───
+// BLOCKS#{tsuriId}/USER#{blockedId}。通知(notify)・コメント・フォローのガードが参照する
+
 export async function isBlockedBy(
   recipientTsuriId: string,
   actorTsuriId: string,
 ): Promise<boolean> {
   return dbExists(`BLOCKS#${recipientTsuriId}`, `USER#${actorTsuriId}`);
+}
+
+export async function blockUser(blockerTsuriId: string, blockedTsuriId: string): Promise<void> {
+  await dbPut(`BLOCKS#${blockerTsuriId}`, `USER#${blockedTsuriId}`, {
+    ts: new Date().toISOString(),
+  });
+}
+
+export async function unblockUser(blockerTsuriId: string, blockedTsuriId: string): Promise<void> {
+  await dbDelete(`BLOCKS#${blockerTsuriId}`, `USER#${blockedTsuriId}`);
+}
+
+export async function getBlockedList(blockerTsuriId: string, limit = 100): Promise<string[]> {
+  const items = await dbQuery(`BLOCKS#${blockerTsuriId}`, { skPrefix: "USER#", limit });
+  return items.map((it) => it.sk.slice("USER#".length));
 }
 
 // 一覧用の一括取得: reportIds → { counts, likedIds(閲覧者がいいね済み) }
