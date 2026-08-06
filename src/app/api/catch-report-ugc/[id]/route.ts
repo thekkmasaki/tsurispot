@@ -4,6 +4,7 @@ import { redis } from "@/lib/redis";
 import { auth } from "@/lib/auth";
 import { checkNgWords } from "@/lib/moderation";
 import { decrementReportCount } from "@/lib/user-store";
+import { savePostMeta, deletePostMeta } from "@/lib/social-store";
 
 interface CatchReport {
   id: string;
@@ -118,6 +119,11 @@ export async function PATCH(
   existing[idx] = updated;
   await dbPut(`SPOT#${spotSlug}`, "UGC_REPORTS", existing, TTL_SECONDS);
   await syncRedisItem(tsuriId, id, updated);
+  try {
+    await savePostMeta(updated);
+  } catch (err) {
+    console.error("[釣果編集] POST META更新エラー:", err);
+  }
 
   return NextResponse.json({ ok: true, report: updated });
 }
@@ -151,6 +157,11 @@ export async function DELETE(
   const filtered = existing.filter((r) => r.id !== id);
   await dbPut(`SPOT#${spotSlug}`, "UGC_REPORTS", filtered, TTL_SECONDS);
   await syncRedisItem(tsuriId, id, null);
+  try {
+    await deletePostMeta(id);
+  } catch (err) {
+    console.error("[釣果削除] POST META削除エラー:", err);
+  }
   try {
     await decrementReportCount(tsuriId);
   } catch (err) {
