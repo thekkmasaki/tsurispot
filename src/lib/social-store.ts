@@ -59,14 +59,17 @@ export async function isPostFlagged(reportId: string): Promise<boolean> {
 const likesPk = (reportId: string) => `LIKES#${reportId}`;
 const reportPk = (reportId: string) => `REPORT#${reportId}`;
 
-export async function likePost(reportId: string, tsuriId: string): Promise<number> {
+export async function likePost(
+  reportId: string,
+  tsuriId: string,
+): Promise<{ count: number; created: boolean }> {
   const created = await dbConditionalPut(likesPk(reportId), `USER#${tsuriId}`, {
     ts: new Date().toISOString(),
   });
   if (created) {
-    return dbIncr(reportPk(reportId), "LIKE_COUNT");
+    return { count: await dbIncr(reportPk(reportId), "LIKE_COUNT"), created: true };
   }
-  return getLikeCount(reportId);
+  return { count: await getLikeCount(reportId), created: false };
 }
 
 export async function unlikePost(reportId: string, tsuriId: string): Promise<number> {
@@ -174,6 +177,67 @@ export async function getCommentCountsBulk(
     if (typeof v === "number" && v > 0) counts[id] = v;
   });
   return counts;
+}
+
+// ─── アプリ内通知 ───
+// NOTIF#{tsuriId}/N#{createdAtISO}#{id}（TTL90日）。
+// 未読は USER#{tsuriId}/NOTIF_UNREAD のカウンタ方式（per-item既読フラグは持たない=write節約）。
+
+export const NOTIF_TTL_SECONDS = 90 * 24 * 60 * 60;
+
+export type NotificationType = "like" | "comment" | "follow" | "repost";
+
+export interface UserNotification {
+  id: string;
+  type: NotificationType;
+  actorId: string;
+  actorNickname: string;
+  reportId?: string;
+  excerpt?: string;
+  createdAt: string;
+}
+
+const notifPk = (tsuriId: string) => `NOTIF#${tsuriId}`;
+
+export async function addNotification(
+  recipientTsuriId: string,
+  n: Omit<UserNotification, "id" | "createdAt">,
+): Promise<void> {
+  const createdAt = new Date().toISOString();
+  const id = `ntf-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+  const notif: UserNotification = { ...n, id, createdAt };
+  await dbPut(notifPk(recipientTsuriId), `N#${createdAt}#${id}`, notif, NOTIF_TTL_SECONDS);
+  await dbIncr(`USER#${recipientTsuriId}`, "NOTIF_UNREAD");
+}
+
+// 新しい順
+export async function getNotifications(
+  tsuriId: string,
+  limit = 30,
+): Promise<UserNotification[]> {
+  const items = await dbQuery<UserNotification>(notifPk(tsuriId), {
+    skPrefix: "N#",
+    forward: false,
+    limit,
+  });
+  return items.map((it) => it.data).filter(Boolean);
+}
+
+export async function getUnreadNotificationCount(tsuriId: string): Promise<number> {
+  const n = await dbGet<number>(`USER#${tsuriId}`, "NOTIF_UNREAD");
+  return typeof n === "number" && n > 0 ? n : 0;
+}
+
+export async function clearUnreadNotifications(tsuriId: string): Promise<void> {
+  await dbPut(`USER#${tsuriId}`, "NOTIF_UNREAD", 0);
+}
+
+// ブロック（PR9で書き込みUIを実装。それまでは常にfalseで前方互換）
+export async function isBlockedBy(
+  recipientTsuriId: string,
+  actorTsuriId: string,
+): Promise<boolean> {
+  return dbExists(`BLOCKS#${recipientTsuriId}`, `USER#${actorTsuriId}`);
 }
 
 // 一覧用の一括取得: reportIds → { counts, likedIds(閲覧者がいいね済み) }

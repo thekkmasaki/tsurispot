@@ -8,6 +8,7 @@ import {
   getFollowersCount,
   getUserById,
 } from "@/lib/user-store";
+import { notify } from "@/lib/notifications";
 
 export async function POST(request: Request) {
   const session = await auth();
@@ -28,6 +29,15 @@ export async function POST(request: Request) {
   const ok = await follow(viewerId, targetId);
   if (!ok) {
     return NextResponse.json({ error: "フォロー対象が見つかりません" }, { status: 404 });
+  }
+
+  const viewer = await getUserById(viewerId);
+  if (viewer) {
+    void notify(targetId, {
+      type: "follow",
+      actorId: viewerId,
+      actorNickname: viewer.nickname,
+    });
   }
 
   const followingCount = await getFollowingCount(viewerId);
