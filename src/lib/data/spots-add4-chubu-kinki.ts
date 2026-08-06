@@ -986,7 +986,7 @@ export const chubuKinkiAdd4Spots: FishingSpot[] = [
   },
   {
     id: "sc4047", name: "南芦屋浜ベランダ", slug: "minami-ashiyahama-veranda",
-    description: "芦屋市の人工島南側護岸。安全柵付きで家族連れに大人気。サビキでアジ・イワシ、秋にはタチウオが回遊する。",
+    description: "南芦屋浜ベランダはサビキでアジ・イワシが狙える芦屋市の人工島護岸。安全柵付きで家族連れに人気があり、秋にはタチウオの回遊、春秋はヘチ釣りでクロダイも楽しめる。足場が安定し初心者やファミリーの釣行にも向く。",
     latitude: 34.7100, longitude: 135.3080,
     address: "〒659-0035 兵庫県芦屋市南浜町",
     accessInfo: "阪神芦屋駅からバス約10分。阪神高速芦屋ICから約5分。",
