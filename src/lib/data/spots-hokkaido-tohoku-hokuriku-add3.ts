@@ -626,7 +626,7 @@ export const hokkaidoTohokuHokurikuAdd3Spots: FishingSpot[] = [
   },
   {
     id: "s3022", name: "神恵内漁港", slug: "kamoenai-gyoko",
-    description: "積丹半島西側の小さな漁港。磯場が近く根魚の魚影が濃い。ソイやアイナメの穴釣りに加え、春のホッケ、秋のブリジギングでも知られる穴場ポイント。",
+    description: "神恵内漁港は積丹半島西側にある根魚釣りの好漁港。磯場が近く魚影が濃いのが特徴で、クロソイやアイナメの穴釣りが楽しめる。春はホッケの数釣り、秋には青物のブリジギングでも知られる、地元に人気の穴場ポイント。",
     latitude: 43.0680, longitude: 140.4250,
     address: "〒045-0301 北海道神恵内村",
     accessInfo: "札幌から車で約2時間。岩内町から国道229号経由で約20分。",

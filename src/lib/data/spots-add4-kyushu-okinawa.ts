@@ -201,7 +201,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
   },
   {
     id: "sks4006", name: "西浦漁港", slug: "nishiura-gyokou-fukuoka",
-    description: "糸島半島の先端近くにある静かな漁港。玄界灘に面し魚影が濃く、クロダイのウキフカセ釣りやアジの泳がせでヒラメも狙える。",
+    description: "西浦漁港は糸島半島の先端近くにある玄界灘の漁港。潮通しが良く魚影が濃いのが魅力で、クロダイのウキフカセ釣りが人気。アジの泳がせ釣りでヒラメの好釣果も期待でき、秋にはアオリイカのエギングも楽しめる静かな穴場。",
     latitude: 33.5880, longitude: 130.0980,
     address: "〒819-1335 福岡県糸島市志摩西浦",
     accessInfo: "JR筑前前原駅から車で約25分。西九州道前原ICから約30分。",
