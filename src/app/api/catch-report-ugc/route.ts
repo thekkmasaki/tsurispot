@@ -7,7 +7,7 @@ import { checkNgWords } from "@/lib/moderation";
 import { auth } from "@/lib/auth";
 import { incrementReportCount } from "@/lib/user-store";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
-import { savePostMeta, addToGlobalFeed } from "@/lib/social-store";
+import { savePostMeta, addToGlobalFeed, sanitizeTags, addTagsForPost } from "@/lib/social-store";
 
 const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;
 
@@ -29,6 +29,7 @@ interface CatchReport {
   method?: string;
   weather?: string;
   submittedAt?: string;
+  tags?: string[];
 }
 
 // POST: ユーザー釣果投稿を受け取る
@@ -46,7 +47,7 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json().catch(() => ({}));
-    const { spotSlug, spotName, fishName, userName, comment, date, photoUrl, sizeCm, method, weather } = body as {
+    const { spotSlug, spotName, fishName, userName, comment, date, photoUrl, sizeCm, method, weather, tags } = body as {
       spotSlug?: string;
       spotName?: string;
       fishName?: string;
@@ -57,6 +58,7 @@ export async function POST(request: Request) {
       sizeCm?: number;
       method?: string;
       weather?: string;
+      tags?: string[];
     };
 
     // バリデーション
@@ -99,8 +101,11 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "天候が不正です" }, { status: 400 });
     }
 
+    // タグ（正規化・最大5個・各20字。不正入力は黙って除外）
+    const normTags = sanitizeTags(tags);
+
     // NGワードチェック
-    const modResult = checkNgWords([userName, fishName, comment]);
+    const modResult = checkNgWords([userName, fishName, comment, ...normTags]);
     if (!modResult.ok) {
       return NextResponse.json({ error: modResult.reason }, { status: 400 });
     }
@@ -121,6 +126,7 @@ export async function POST(request: Request) {
       method: method || undefined,
       weather: weather || undefined,
       submittedAt: new Date().toISOString(),
+      tags: normTags.length > 0 ? normTags : undefined,
     };
 
     // 投稿の正本（POST#{id}/META）。パーマリンク・いいね・コメントの参照元
@@ -136,6 +142,16 @@ export async function POST(request: Request) {
       await addToGlobalFeed(reportData);
     } catch (err) {
       console.error("[釣果投稿] タイムライン書込エラー:", err);
+    }
+
+    // タグindex + 人気タグ（Redis zset）
+    if (normTags.length > 0) {
+      try {
+        await addTagsForPost(reportData, normTags);
+        await Promise.all(normTags.map((t) => redis.zincrby("tags:popular", 1, t)));
+      } catch (err) {
+        console.error("[釣果投稿] タグindex書込エラー:", err);
+      }
     }
 
     // DynamoDB に即時保存（自動承認）- read-modify-write

@@ -139,6 +139,16 @@ export default async function PostPage({
                 {WEATHER_ICONS[post.weather] ?? ""} {post.weather}
               </Badge>
             ) : null}
+            {post.tags?.map((tag) => (
+              <Link
+                prefetch={false}
+                key={tag}
+                href={`/tags/${encodeURIComponent(tag)}`}
+                className="text-sm text-sky-700 hover:underline"
+              >
+                #{tag}
+              </Link>
+            ))}
           </div>
 
           <div className="mt-5 flex items-center justify-between gap-3 border-t pt-4">

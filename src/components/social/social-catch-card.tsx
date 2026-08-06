@@ -118,6 +118,16 @@ export function SocialCatchCard({
                   <span aria-hidden="true">{WEATHER_ICONS[post.weather] || ""}</span> {post.weather}
                 </span>
               )}
+              {post.tags?.map((tag) => (
+                <Link
+                  prefetch={false}
+                  key={tag}
+                  href={`/tags/${encodeURIComponent(tag)}`}
+                  className="text-xs text-sky-700 hover:underline"
+                >
+                  #{tag}
+                </Link>
+              ))}
             </div>
           </div>
         </div>

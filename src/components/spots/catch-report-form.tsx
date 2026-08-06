@@ -93,6 +93,7 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
   const [sizeCm, setSizeCm] = useState("");
   const [method, setMethod] = useState("");
   const [weather, setWeather] = useState("");
+  const [tagsInput, setTagsInput] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -181,6 +182,12 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
       if (sizeCm) body.sizeCm = Number(sizeCm);
       if (method) body.method = method;
       if (weather) body.weather = weather;
+      const tags = tagsInput
+        .split(/[,、\s]+/)
+        .map((t) => t.trim())
+        .filter(Boolean)
+        .slice(0, 5);
+      if (tags.length > 0) body.tags = tags;
 
       const res = await fetch("/api/catch-report-ugc", {
         method: "POST",
@@ -201,6 +208,7 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
         setSizeCm("");
         setMethod("");
         setWeather("");
+        setTagsInput("");
         // 自動公開UGCを一覧へ即反映（CatchReportList を initialReports 直結に変更済み）。
         router.refresh();
         toast.success("釣果を投稿しました！");
@@ -538,6 +546,25 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
               onChange={(e) => { setComment(e.target.value); if (status === "error") setStatus("idle"); }}
               maxLength={100}
               required
+            />
+          </div>
+
+          {/* タグ（任意・最大5個） */}
+          <div>
+            <label htmlFor="cr-tags" className="mb-1 block text-sm font-medium">
+              タグ（任意）
+              <span className="ml-2 text-xs font-normal text-muted-foreground">
+                カンマ・スペース区切りで5個まで（例: アジング 夜釣り）
+              </span>
+            </label>
+            <input
+              id="cr-tags"
+              type="text"
+              className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-xs placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-none"
+              placeholder="#サビキ #朝マヅメ"
+              value={tagsInput}
+              onChange={(e) => setTagsInput(e.target.value)}
+              maxLength={120}
             />
           </div>
 
