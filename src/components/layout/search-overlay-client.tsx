@@ -201,7 +201,7 @@ export function SearchOverlayClient() {
       {/* Desktop trigger */}
       <button
         onClick={() => setIsOpen(true)}
-        className="hidden items-center gap-2 rounded-full border border-border bg-white px-4 py-1.5 text-sm text-muted-foreground shadow-sm transition-colors hover:border-primary/30 hover:text-foreground sm:flex"
+        className="hidden items-center gap-2 whitespace-nowrap rounded-full border border-border bg-white px-4 py-1.5 text-sm text-muted-foreground shadow-sm transition-colors hover:border-primary/30 hover:text-foreground sm:max-md:flex xl:flex"
       >
         <Search className="h-4 w-4" />
         <span>何でも検索</span>
@@ -210,10 +210,10 @@ export function SearchOverlayClient() {
         </kbd>
       </button>
 
-      {/* Mobile trigger */}
+      {/* Mobile / md〜lg trigger（md〜xl はナビと幅を取り合うためアイコンのみ） */}
       <button
         onClick={() => setIsOpen(true)}
-        className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-white text-muted-foreground shadow-sm transition-colors hover:border-primary/30 hover:text-foreground sm:hidden"
+        className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-white text-muted-foreground shadow-sm transition-colors hover:border-primary/30 hover:text-foreground sm:max-md:hidden xl:hidden"
         aria-label="検索"
       >
         <Search className="h-4 w-4" />
