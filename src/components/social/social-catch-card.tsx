@@ -75,6 +75,33 @@ export function SocialCatchCard({
           )}
         </div>
 
+        {post.type === "tweet" ? (
+          /* つぶやき: 本文が主役。魚見出しなし・写真は本文の下に大きめ表示 */
+          <div className="mt-2">
+            <Link prefetch={false} href={permalink} className="block hover:opacity-90">
+              <p className="whitespace-pre-wrap text-[15px] leading-relaxed">{post.comment}</p>
+            </Link>
+            {post.fishName && (
+              <span className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-0.5 text-xs font-semibold text-emerald-700">
+                <Fish className="size-3" aria-hidden="true" />
+                {post.fishName}
+                {post.sizeCm ? ` ${post.sizeCm}cm` : ""}
+              </span>
+            )}
+            {post.photoUrl && (
+              <Link prefetch={false} href={permalink} className="block">
+                <Image
+                  src={post.photoUrl}
+                  alt="投稿写真"
+                  width={640}
+                  height={360}
+                  className="mt-2 max-h-72 w-full rounded-xl border object-cover"
+                  unoptimized
+                />
+              </Link>
+            )}
+          </div>
+        ) : (
         <div className="mt-2 flex items-start gap-3">
           {post.photoUrl ? (
             <Link prefetch={false} href={permalink} className="shrink-0">
@@ -133,6 +160,7 @@ export function SocialCatchCard({
             </div>
           </div>
         </div>
+        )}
 
         <div className="mt-2 flex items-center gap-2 border-t pt-2">
           <LikeButton

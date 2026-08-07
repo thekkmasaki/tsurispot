@@ -19,6 +19,8 @@ export const POST_TTL_SECONDS = 365 * 24 * 60 * 60;
 // 従来どおり残る非正規化ビューで、ID単体参照(パーマリンク/いいね/コメント)はこちらを引く。
 export interface PostMeta {
   id: string;
+  /** 投稿種別。省略時は従来の釣果投稿（後方互換）。"tweet"=自由文つぶやき（魚名・スポットは任意添付） */
+  type?: "catch" | "tweet";
   spotSlug: string;
   spotName: string;
   fishName: string;

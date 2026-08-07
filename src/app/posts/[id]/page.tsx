@@ -60,6 +60,13 @@ export async function generateMetadata({
   }
   const size = post.sizeCm ? ` ${post.sizeCm}cm` : "";
   const spotLabel = post.spotName || post.spotSlug;
+  if (post.type === "tweet") {
+    return {
+      title: `${post.userName}さんの投稿`,
+      description: post.comment.slice(0, 60),
+      robots: { index: false, follow: false },
+    };
+  }
   return {
     title: spotLabel
       ? `${post.fishName}${size}｜${spotLabel}の釣果`
@@ -109,6 +116,32 @@ export default async function PostPage({
             <time dateTime={post.date}>{formatDate(post.date)}</time>
           </div>
 
+          {post.type === "tweet" ? (
+            /* つぶやき: 本文が主役（h1）。釣果情報が添付されていれば小さく出す */
+            <>
+              <h1 className="mt-3 whitespace-pre-wrap text-lg font-medium leading-relaxed sm:text-xl">
+                {post.comment}
+              </h1>
+              {post.fishName && (
+                <span className="mt-2 inline-flex items-center gap-1 rounded-full bg-emerald-50 px-3 py-1 text-sm font-semibold text-emerald-700">
+                  <Fish className="size-3.5" aria-hidden="true" />
+                  {post.fishName}
+                  {post.sizeCm ? ` ${post.sizeCm}cm` : ""}
+                </span>
+              )}
+              {post.photoUrl ? (
+                <Image
+                  src={post.photoUrl}
+                  alt="投稿写真"
+                  width={640}
+                  height={480}
+                  className="mt-4 w-full rounded-xl border object-cover"
+                  unoptimized
+                />
+              ) : null}
+            </>
+          ) : (
+            <>
           <h1 className="mt-3 flex items-center gap-2 text-xl font-bold sm:text-2xl">
             <Fish className="size-6 text-sky-700" aria-hidden="true" />
             {post.fishName}
@@ -134,6 +167,8 @@ export default async function PostPage({
           <p className="mt-4 whitespace-pre-wrap text-[15px] leading-relaxed">
             {post.comment}
           </p>
+            </>
+          )}
 
           <div className="mt-4 flex flex-wrap items-center gap-2">
             {post.method ? <Badge variant="secondary">{post.method}</Badge> : null}
