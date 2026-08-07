@@ -283,7 +283,7 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
       {/* ヘッダー */}
       <div className="mb-6 sm:mb-8">
         <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
-          {pref.name}の{label}釣り場一覧
+          {pref.name}の{label}釣り場・釣りスポット
         </h1>
         <p className="mt-2 text-sm text-muted-foreground sm:text-base">
           {spots.length}件の{label}スポットを掲載
@@ -390,7 +390,7 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
       <section className="mb-8 sm:mb-10">
         <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
           <MapPin className="size-5 text-primary" />
-          {pref.name}の{label}スポット（{spots.length}件）
+          {pref.name}の{label}釣りスポット・ポイント（{spots.length}件）
         </h2>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {spots
