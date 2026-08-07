@@ -59,8 +59,11 @@ export async function generateMetadata({
     return { title: "釣果が見つかりません", robots: { index: false, follow: false } };
   }
   const size = post.sizeCm ? ` ${post.sizeCm}cm` : "";
+  const spotLabel = post.spotName || post.spotSlug;
   return {
-    title: `${post.fishName}${size}｜${post.spotName || post.spotSlug}の釣果`,
+    title: spotLabel
+      ? `${post.fishName}${size}｜${spotLabel}の釣果`
+      : `${post.fishName}${size}｜${post.userName}さんの釣果`,
     description: `${post.userName}さんの釣果: ${post.comment.slice(0, 60)}`,
     robots: { index: false, follow: false },
   };
@@ -152,13 +155,17 @@ export default async function PostPage({
           </div>
 
           <div className="mt-5 flex items-center justify-between gap-3 border-t pt-4">
-            <Link
-              href={`/spots/${post.spotSlug}`}
-              className="inline-flex items-center gap-1.5 text-sm font-medium text-sky-700 hover:underline"
-            >
-              <MapPin className="size-4" aria-hidden="true" />
-              {post.spotName || post.spotSlug} のスポット情報を見る
-            </Link>
+            {post.spotSlug ? (
+              <Link
+                href={`/spots/${post.spotSlug}`}
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-sky-700 hover:underline"
+              >
+                <MapPin className="size-4" aria-hidden="true" />
+                {post.spotName || post.spotSlug} のスポット情報を見る
+              </Link>
+            ) : (
+              <span aria-hidden="true" />
+            )}
             <span className="flex items-center gap-1">
               <LikeButton reportId={post.id} initialCount={likeCount} initialLiked={liked} />
               <RepostButton

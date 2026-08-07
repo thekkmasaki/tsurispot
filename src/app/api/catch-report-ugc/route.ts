@@ -61,10 +61,11 @@ export async function POST(request: Request) {
       tags?: string[];
     };
 
-    // バリデーション
-    if (!spotSlug || typeof spotSlug !== "string" || spotSlug.length > 100) {
+    // バリデーション（スポットは任意: 未指定はタイムライン/マイページのみに載る「場所なし投稿」）
+    if (spotSlug !== undefined && (typeof spotSlug !== "string" || spotSlug.length > 100)) {
       return NextResponse.json({ error: "スポット情報が不正です" }, { status: 400 });
     }
+    const slug = typeof spotSlug === "string" ? spotSlug.trim() : "";
     if (!fishName || typeof fishName !== "string" || fishName.length > 30) {
       return NextResponse.json({ error: "魚名を入力してください（30文字以内）" }, { status: 400 });
     }
@@ -113,8 +114,8 @@ export async function POST(request: Request) {
     const reportId = `ugc-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
     const reportData: CatchReport = {
       id: reportId,
-      spotSlug,
-      spotName: spotName || "",
+      spotSlug: slug,
+      spotName: slug ? spotName || "" : "",
       fishName,
       userName,
       tsuriId,
@@ -154,27 +155,31 @@ export async function POST(request: Request) {
       }
     }
 
-    // DynamoDB に即時保存（自動承認）- read-modify-write
-    try {
-      const existing = await dbGet<CatchReport[]>(`SPOT#${spotSlug}`, "UGC_REPORTS") ?? [];
-      const updated = [reportData, ...existing].slice(0, 200); // 最大200件保持
-      await dbPut(`SPOT#${spotSlug}`, "UGC_REPORTS", updated, TTL_SECONDS);
-      // オリジンISR＋Cloudflareエッジ(s-maxage=24h)の両方を該当スポットだけ無効化し、新しい釣果を即反映。
-      // CF purge は特定URLのみ（全体purge禁止）・CF env未設定時は no-op。
-      revalidatePath(`/spots/${spotSlug}`);
-      await purgeCloudflareUrls([`/spots/${spotSlug}`]);
-    } catch (err) {
-      console.error("[釣果投稿] DynamoDB保存エラー:", err);
-      // DynamoDB障害時もGASに送信するため続行
-    }
+    // スポット別ビュー（場所なし投稿ではスキップ。パーマリンクとタイムラインにのみ載る）
+    if (slug) {
+      // DynamoDB に即時保存（自動承認）- read-modify-write
+      try {
+        const existing = await dbGet<CatchReport[]>(`SPOT#${slug}`, "UGC_REPORTS") ?? [];
+        const updated = [reportData, ...existing].slice(0, 200); // 最大200件保持
+        await dbPut(`SPOT#${slug}`, "UGC_REPORTS", updated, TTL_SECONDS);
+        // オリジンISR＋Cloudflareエッジ(s-maxage=24h)の両方を該当スポットだけ無効化し、新しい釣果を即反映。
+        // CF purge は特定URLのみ（全体purge禁止）・CF env未設定時は no-op。
+        revalidatePath(`/spots/${slug}`);
+        await purgeCloudflareUrls([`/spots/${slug}`]);
+      } catch (err) {
+        console.error("[釣果投稿] DynamoDB保存エラー:", err);
+        // DynamoDB障害時もGASに送信するため続行
+      }
 
-    // 全スポット横断の最新釣果フィード（トップ「みんなの最近の釣果」用）。
-    // 匿名・ログインを問わず push する（ログイン別の user_reports とは別系統）。
-    try {
-      await redis.lpush("recent_reports:global", JSON.stringify(reportData));
-      await redis.ltrim("recent_reports:global", 0, 49); // 最新50件保持
-    } catch (err) {
-      console.error("[釣果投稿] グローバル recent push エラー:", err);
+      // 全スポット横断の最新釣果フィード（トップ「みんなの最近の釣果」用）。
+      // 匿名・ログインを問わず push する（ログイン別の user_reports とは別系統）。
+      // トップの導線はスポット詳細リンク前提のため、場所なし投稿は載せない。
+      try {
+        await redis.lpush("recent_reports:global", JSON.stringify(reportData));
+        await redis.ltrim("recent_reports:global", 0, 49); // 最新50件保持
+      } catch (err) {
+        console.error("[釣果投稿] グローバル recent push エラー:", err);
+      }
     }
 
     // ログインユーザーの釣果数カウントを更新（バッジ・称号反映）
@@ -203,7 +208,7 @@ export async function POST(request: Request) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           ...reportData,
-          spotUrl: `https://tsurispot.com/spots/${spotSlug}`,
+          spotUrl: slug ? `https://tsurispot.com/spots/${slug}` : "",
         }),
         redirect: "follow",
       }).catch((err) => {
