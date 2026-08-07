@@ -31,15 +31,15 @@ import { useFavorites } from "@/hooks/use-favorites";
 
 const mainNavItems = [
   { href: "/spots", label: "スポット", icon: MapPin },
+  { href: "/timeline", label: "タイムライン", icon: Users },
   { href: "/blog", label: "釣果レポート", icon: FileText },
-  { href: "/catchable-now", label: "今釣れる", icon: Fish },
   { href: "/map", label: "地図", icon: Map },
   { href: "/favorites", label: "お気に入り", icon: Heart },
 ];
 
 const moreNavItems = [
   { href: "/", label: "ホーム", icon: Home },
-  { href: "/timeline", label: "タイムライン", icon: Users },
+  { href: "/catchable-now", label: "今釣れる", icon: Fish },
   { href: "/users", label: "釣り人を探す", icon: Users },
   { href: "/ranking", label: "ランキング", icon: Trophy },
   { href: "/fish", label: "魚図鑑", icon: BookOpen },
