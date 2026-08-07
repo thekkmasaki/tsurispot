@@ -30,18 +30,20 @@ import { SearchOverlayClient } from "./search-overlay-client";
 import { LineButton } from "./line-button";
 import { UserMenu } from "./user-menu";
 import { NotificationBell } from "@/components/social/notification-bell";
-// メインナビ（常時表示：最大6個）
+// メインナビ。ラベルは whitespace-nowrap 前提のため、全項目が入らない幅では
+// 下位項目をバーから隠して「もっと見る」に退避する（bar/menu は対の可視クラス）。
+// 幅の目安: md=スポット+タイムライン / lg=+釣果レポート+地図 / xl=+ランキング
 const mainNavItems = [
-  { href: "/spots", label: "スポット", icon: MapPin },
-  { href: "/timeline", label: "タイムライン", icon: Users },
-  { href: "/blog", label: "釣果レポート", icon: FileText },
-  { href: "/catchable-now", label: "今釣れる", icon: Fish },
-  { href: "/map", label: "地図", icon: Map },
-  { href: "/ranking", label: "ランキング", icon: Trophy },
+  { href: "/spots", label: "スポット", icon: MapPin, bar: "", menu: null },
+  { href: "/timeline", label: "タイムライン", icon: Users, bar: "", menu: null },
+  { href: "/blog", label: "釣果レポート", icon: FileText, bar: "hidden lg:flex", menu: "lg:hidden" },
+  { href: "/map", label: "地図", icon: Map, bar: "hidden lg:flex", menu: "lg:hidden" },
+  { href: "/ranking", label: "ランキング", icon: Trophy, bar: "hidden xl:flex", menu: "xl:hidden" },
 ];
 
 // ドロップダウン「もっと見る」
 const moreNavItems = [
+  { href: "/catchable-now", label: "今釣れる", icon: Fish },
   { href: "/fish", label: "図鑑", icon: BookOpen },
   { href: "/users", label: "釣り人を探す", icon: Users },
   { href: "/methods", label: "釣り方ガイド", icon: Anchor },
@@ -96,7 +98,7 @@ function DropdownMenu() {
         aria-haspopup="true"
         aria-label="その他のメニュー"
         className={cn(
-          "flex items-center gap-1 rounded-lg px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+          "flex items-center gap-1 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
           hasActiveChild
             ? "bg-ocean-mid/10 text-ocean-mid"
             : "text-driftwood hover:bg-sand-light hover:text-foreground"
@@ -113,6 +115,33 @@ function DropdownMenu() {
       </button>
       {open && (
         <div role="menu" className="absolute right-0 top-full mt-1 w-56 rounded-2xl border bg-white py-2 shadow-xl shadow-ocean-deep/5">
+          {/* バーに入りきらない幅ではメインナビの下位項目をここに退避（bar側の hidden と対） */}
+          {mainNavItems
+            .filter((item) => item.menu)
+            .map((item) => {
+              const isActive =
+                pathname === item.href ||
+                (item.href !== "/" && pathname.startsWith(item.href));
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  prefetch={false}
+                  role="menuitem"
+                  onClick={() => setOpen(false)}
+                  className={cn(
+                    "flex items-center gap-2.5 px-4 py-2.5 text-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary",
+                    item.menu,
+                    isActive
+                      ? "bg-ocean-mid/5 font-medium text-ocean-mid"
+                      : "text-driftwood hover:bg-sand-light/50 hover:text-foreground"
+                  )}
+                >
+                  <item.icon className="h-4 w-4" aria-hidden="true" />
+                  {item.label}
+                </Link>
+              );
+            })}
           {moreNavItems.map((item) => {
             const isActive =
               pathname === item.href ||
@@ -167,7 +196,8 @@ export function Header() {
                 href={item.href}
                 prefetch={false}
                 className={cn(
-                  "flex items-center gap-1.5 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                  "flex items-center gap-1.5 whitespace-nowrap rounded-lg px-3 py-2 text-sm font-medium transition-colors",
+                  item.bar,
                   isActive
                     ? "bg-ocean-mid/10 text-ocean-mid"
                     : "text-driftwood hover:bg-sand-light hover:text-foreground"
@@ -183,7 +213,10 @@ export function Header() {
 
         <div className="flex shrink-0 items-center gap-0.5 sm:gap-2">
           <SearchOverlayClient />
-          <LineButton />
+          {/* md〜lg はナビとの幅取り合いで折返しの原因になるため LINE 訴求を一時的に隠す */}
+          <span className="md:max-lg:hidden">
+            <LineButton />
+          </span>
           <Link
             href="/favorites"
             prefetch={false}
