@@ -63,14 +63,16 @@ export function SocialCatchCard({
             <Calendar className="size-3" aria-hidden="true" />
             {formatDate(post.date)}
           </span>
-          <Link
-            prefetch={false}
-            href={`/spots/${post.spotSlug}`}
-            className="flex items-center gap-0.5 text-sky-700 hover:underline"
-          >
-            <MapPin className="size-3" aria-hidden="true" />
-            {post.spotName || post.spotSlug}
-          </Link>
+          {post.spotSlug && (
+            <Link
+              prefetch={false}
+              href={`/spots/${post.spotSlug}`}
+              className="flex items-center gap-0.5 text-sky-700 hover:underline"
+            >
+              <MapPin className="size-3" aria-hidden="true" />
+              {post.spotName || post.spotSlug}
+            </Link>
+          )}
         </div>
 
         <div className="mt-2 flex items-start gap-3">

@@ -75,6 +75,17 @@ function ContactClientInner() {
   useEffect(() => {
     const from = searchParams.get("from");
     if (from === "partner") setCategory("partner");
+    // 釣果投稿(/post)で見つからなかった釣り場の追加リクエスト導線。検索語を本文に引き継ぐ
+    if (from === "spot-request") {
+      setCategory("spot-request");
+      const q = searchParams.get("q")?.trim();
+      if (q) {
+        setMessage((prev) =>
+          prev ||
+          `追加してほしい釣り場: ${q}\n\n（場所の目印・住所・釣れる魚など、わかる範囲で教えてください）`
+        );
+      }
+    }
   }, [searchParams]);
 
   const selectedCategory = categories.find((c) => c.value === category);
