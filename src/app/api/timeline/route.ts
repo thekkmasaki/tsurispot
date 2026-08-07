@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { getFollowingList } from "@/lib/user-store";
+import { getEditorialCards, type EditorialCard } from "@/lib/editorial-feed";
 import {
   getGlobalFeedRefs,
   resolveFeedPosts,
@@ -80,8 +81,20 @@ export async function GET(request: NextRequest) {
     repostedByViewer: repostedSet.has(post.id),
   }));
 
+  // 編集部カード（コールドスタート対策）: 全体タブの1ページ目のみ添付。
+  // UGCが増えるほど比率は自然に低下（挿入はクライアント側でUGC4件ごとに1枚）
+  let editorial: EditorialCard[] = [];
+  if (tab === "all" && !cursor) {
+    try {
+      editorial = await getEditorialCards();
+    } catch (err) {
+      console.error("[timeline] 編集部カード取得エラー:", err);
+    }
+  }
+
   return NextResponse.json({
     items,
     nextCursor: nextCursor ? encodeCursor(nextCursor) : null,
+    editorial,
   });
 }
