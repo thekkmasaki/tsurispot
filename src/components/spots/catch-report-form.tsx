@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "@/components/ui/toast";
 import { getTitle, getNextTier } from "@/lib/titles";
+import { compressImage } from "@/lib/image-compress";
 
 // そのスポットで釣れる魚名 + 汎用的な人気魚種
 const COMMON_FISH = ["アジ", "サバ", "イワシ", "メバル", "カサゴ", "シーバス", "クロダイ", "アオリイカ"];
@@ -22,36 +23,6 @@ const WEATHER_OPTIONS = [
   { value: "雨", label: "雨", icon: "🌧️" },
   { value: "風強い", label: "風強い", icon: "💨" },
 ];
-
-/** クライアント側で画像をリサイズ・JPEG圧縮してからアップロード */
-function compressImage(file: File, maxWidth = 1600, quality = 0.82): Promise<File> {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.onload = () => {
-      let { width, height } = img;
-      if (width > maxWidth) {
-        height = Math.round((height * maxWidth) / width);
-        width = maxWidth;
-      }
-      const canvas = document.createElement("canvas");
-      canvas.width = width;
-      canvas.height = height;
-      const ctx = canvas.getContext("2d");
-      if (!ctx) { resolve(file); return; }
-      ctx.drawImage(img, 0, 0, width, height);
-      canvas.toBlob(
-        (blob) => {
-          if (!blob) { resolve(file); return; }
-          resolve(new File([blob], file.name.replace(/\.\w+$/, ".jpg"), { type: "image/jpeg" }));
-        },
-        "image/jpeg",
-        quality,
-      );
-    };
-    img.onerror = () => reject(new Error("画像の読み込みに失敗しました"));
-    img.src = URL.createObjectURL(file);
-  });
-}
 
 interface CatchReportFormProps {
   spotSlug: string;

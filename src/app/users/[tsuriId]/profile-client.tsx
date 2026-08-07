@@ -356,7 +356,13 @@ export function ProfileClient({ data, shareUrl }: Props) {
                 {reports.map((report, idx) => (
                   <Link prefetch={false}
                     key={report.id || idx}
-                    href={report.spotSlug ? `/spots/${report.spotSlug}` : "#"}
+                    href={
+                      report.spotSlug
+                        ? `/spots/${report.spotSlug}`
+                        : report.id
+                          ? `/posts/${encodeURIComponent(report.id)}`
+                          : "#"
+                    }
                     className="block rounded-lg border p-3 transition-colors hover:bg-muted/50"
                   >
                     <div className="flex gap-3">
@@ -368,7 +374,10 @@ export function ProfileClient({ data, shareUrl }: Props) {
                         />
                       )}
                       <div className="min-w-0 flex-1">
-                        <p className="font-medium">{report.fishName}</p>
+                        {/* つぶやき投稿は fishName が空 → 本文を見出しにする */}
+                        <p className="line-clamp-2 font-medium">
+                          {report.fishName || report.comment}
+                        </p>
                         <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-muted-foreground">
                           {report.spotName && (
                             <span className="flex items-center gap-0.5">
