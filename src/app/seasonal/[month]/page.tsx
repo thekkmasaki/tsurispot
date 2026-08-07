@@ -29,6 +29,9 @@ interface PageProps {
   params: Promise<{ month: string }>;
 }
 
+// 純SSGだと年号(【○年版】)と「今の季節」判定がビルド時刻で凍結するため日次ISR
+export const revalidate = 86400;
+
 // dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため
 // デフォルト (true) に戻し、未知 slug は L128 の notFound() で 404 化する。
 export async function generateStaticParams() {

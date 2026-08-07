@@ -8,22 +8,28 @@ import { monthlyGuides } from "@/lib/data/monthly-guides";
 import { fishSpecies } from "@/lib/data/fish";
 import { InArticleAd } from "@/components/ads/ad-unit";
 
-export const metadata: Metadata = {
-  title: "月別釣りカレンダー｜1月〜12月の釣れる魚・おすすめ釣法一覧【2026年版】",
-  description:
-    "月別に釣れる魚・おすすめ釣り方を完全ガイド。1月〜12月の水温・気候・ベストターゲットを一覧で比較。今月の釣り計画にお役立てください。",
-  openGraph: {
-    title: "月別釣りカレンダー｜1月〜12月の釣れる魚・おすすめ釣法一覧【2026年版】",
+// 純SSGだと「今月」バッジと年号がビルド時刻で凍結するため、日次ISRで追従させる
+export const revalidate = 86400;
+
+export function generateMetadata(): Metadata {
+  const year = new Date().getFullYear();
+  return {
+    title: `月別釣りカレンダー｜1月〜12月の釣れる魚・おすすめ釣法一覧【${year}年版】`,
     description:
-      "月ごとに釣れる魚・おすすめ釣り場・釣りTipsをまとめたガイド。今月の釣り計画に役立てよう。",
-    type: "website",
-    url: "https://tsurispot.com/monthly",
-    siteName: "ツリスポ",
-  },
-  alternates: {
-    canonical: "https://tsurispot.com/monthly",
-  },
-};
+      "月別に釣れる魚・おすすめ釣り方を完全ガイド。1月〜12月の水温・気候・ベストターゲットを一覧で比較。今月の釣り計画にお役立てください。",
+    openGraph: {
+      title: `月別釣りカレンダー｜1月〜12月の釣れる魚・おすすめ釣法一覧【${year}年版】`,
+      description:
+        "月ごとに釣れる魚・おすすめ釣り場・釣りTipsをまとめたガイド。今月の釣り計画に役立てよう。",
+      type: "website",
+      url: "https://tsurispot.com/monthly",
+      siteName: "ツリスポ",
+    },
+    alternates: {
+      canonical: "https://tsurispot.com/monthly",
+    },
+  };
+}
 
 const jsonLd = [
   {

@@ -18,6 +18,9 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { MONTHS } from "@/lib/data/fishing-methods";
 import { InArticleAd } from "@/components/ads/ad-unit";
 
+// 純SSGだと「今の季節」ハイライトがビルド時刻で凍結するため日次ISR
+export const revalidate = 86400;
+
 export const metadata: Metadata = {
   title: "季節別釣りガイド - 春夏秋冬のおすすめ釣り",
   description:

@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useState, useMemo, useCallback } from "react";
+import { Fragment, useState, useMemo, useCallback, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
@@ -167,6 +167,19 @@ export function BlogListClient({ posts }: { posts: BlogPostSummary[] }) {
   const [activeArea, setActiveArea] = useState<string | null>(null);
   const [showAllTags, setShowAllTags] = useState(false);
   const [displayCount, setDisplayCount] = useState(INITIAL_DISPLAY);
+
+  // /blog?tag=釣果週報 等のディープリンク（トップの「すべての釣果週報を見る」など）を反映する。
+  // 親ページが force-static のため searchParams はサーバーで読めず、useSearchParams は
+  // Suspense 境界なしだと CSR bailout を招くため、マウント後に location から読む。
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const tag = params.get("tag");
+    if (tag) setActiveTags(new Set([tag]));
+    const category = params.get("category");
+    if (category && category in BLOG_CATEGORIES) setActiveCategory(category);
+    const area = params.get("area");
+    if (area && AREA_WHITELIST.has(area)) setActiveArea(area);
+  }, []);
 
   const allCategories = Object.entries(BLOG_CATEGORIES) as [
     BlogPost["category"],
