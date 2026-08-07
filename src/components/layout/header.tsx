@@ -33,16 +33,16 @@ import { NotificationBell } from "@/components/social/notification-bell";
 // メインナビ（常時表示：最大6個）
 const mainNavItems = [
   { href: "/spots", label: "スポット", icon: MapPin },
+  { href: "/timeline", label: "タイムライン", icon: Users },
   { href: "/blog", label: "釣果レポート", icon: FileText },
   { href: "/catchable-now", label: "今釣れる", icon: Fish },
   { href: "/map", label: "地図", icon: Map },
   { href: "/ranking", label: "ランキング", icon: Trophy },
-  { href: "/fish", label: "図鑑", icon: BookOpen },
 ];
 
 // ドロップダウン「もっと見る」
 const moreNavItems = [
-  { href: "/timeline", label: "みんなのタイムライン", icon: Users },
+  { href: "/fish", label: "図鑑", icon: BookOpen },
   { href: "/users", label: "釣り人を探す", icon: Users },
   { href: "/methods", label: "釣り方ガイド", icon: Anchor },
   { href: "/area", label: "エリア一覧", icon: Compass },

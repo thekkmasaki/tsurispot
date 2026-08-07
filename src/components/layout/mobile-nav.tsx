@@ -24,6 +24,7 @@ import {
   Anchor,
   Store,
   ClipboardCheck,
+  Users,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useFavorites } from "@/hooks/use-favorites";
@@ -38,6 +39,8 @@ const mainNavItems = [
 
 const moreNavItems = [
   { href: "/", label: "ホーム", icon: Home },
+  { href: "/timeline", label: "タイムライン", icon: Users },
+  { href: "/users", label: "釣り人を探す", icon: Users },
   { href: "/ranking", label: "ランキング", icon: Trophy },
   { href: "/fish", label: "魚図鑑", icon: BookOpen },
   { href: "/methods", label: "釣り方", icon: Anchor },

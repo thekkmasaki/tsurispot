@@ -123,6 +123,15 @@ export function TimelineFeed() {
                 ? "フォロー中のユーザーの釣果がここに流れます。気になる釣り人をフォローしてみましょう。"
                 : "まだ釣果がありません。最初の投稿者になりましょう！"}
             </p>
+            {tab === "all" && (
+              <Link
+                prefetch={false}
+                href="/post"
+                className="mt-3 inline-block rounded-full bg-sky-700 px-4 py-2 text-sm font-bold text-white hover:bg-sky-800"
+              >
+                釣果を投稿する
+              </Link>
+            )}
           </div>
         ) : (
           items.map((item, idx) => (
