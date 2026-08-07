@@ -7,8 +7,10 @@ import { Fish } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NativeAdBreak } from "@/components/ads/ad-unit";
 import { SocialCatchCard } from "@/components/social/social-catch-card";
+import { EditorialCard } from "@/components/social/editorial-card";
 import { cn } from "@/lib/utils";
 import type { PostMeta } from "@/lib/social-store";
+import type { EditorialCard as EditorialCardData } from "@/lib/editorial-feed";
 
 interface TimelineItem {
   post: PostMeta;
@@ -27,6 +29,7 @@ export function TimelineFeed() {
   const viewerTsuriId = session?.user?.tsuriId;
   const [tab, setTab] = useState<Tab>("all");
   const [items, setItems] = useState<TimelineItem[]>([]);
+  const [editorial, setEditorial] = useState<EditorialCardData[]>([]);
   const [nextCursor, setNextCursor] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -38,7 +41,11 @@ export function TimelineFeed() {
     const res = await fetch(`/api/timeline?${params.toString()}`);
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error ?? "タイムラインの取得に失敗しました");
-    return data as { items: TimelineItem[]; nextCursor: string | null };
+    return data as {
+      items: TimelineItem[];
+      nextCursor: string | null;
+      editorial?: EditorialCardData[];
+    };
   }, []);
 
   useEffect(() => {
@@ -49,6 +56,7 @@ export function TimelineFeed() {
       .then((data) => {
         if (cancelled) return;
         setItems(data.items);
+        setEditorial(data.editorial ?? []);
         setNextCursor(data.nextCursor);
       })
       .catch((err) => {
@@ -116,39 +124,55 @@ export function TimelineFeed() {
             すると使えます。
           </p>
         ) : items.length === 0 ? (
-          <div className="rounded-lg border border-dashed border-muted-foreground/30 p-8 text-center">
-            <Fish className="mx-auto size-8 text-muted-foreground/40" aria-hidden="true" />
-            <p className="mt-2 text-sm text-muted-foreground">
-              {tab === "following"
-                ? "フォロー中のユーザーの釣果がここに流れます。気になる釣り人をフォローしてみましょう。"
-                : "まだ釣果がありません。最初の投稿者になりましょう！"}
-            </p>
-            {tab === "all" && (
-              <Link
-                prefetch={false}
-                href="/post"
-                className="mt-3 inline-block rounded-full bg-sky-700 px-4 py-2 text-sm font-bold text-white hover:bg-sky-800"
-              >
-                釣果を投稿する
-              </Link>
-            )}
-          </div>
+          <>
+            <div className="rounded-lg border border-dashed border-muted-foreground/30 p-8 text-center">
+              <Fish className="mx-auto size-8 text-muted-foreground/40" aria-hidden="true" />
+              <p className="mt-2 text-sm text-muted-foreground">
+                {tab === "following"
+                  ? "フォロー中のユーザーの釣果がここに流れます。気になる釣り人をフォローしてみましょう。"
+                  : "まだ釣果がありません。最初の投稿者になりましょう！"}
+              </p>
+              {tab === "all" && (
+                <Link
+                  prefetch={false}
+                  href="/post"
+                  className="mt-3 inline-block rounded-full bg-sky-700 px-4 py-2 text-sm font-bold text-white hover:bg-sky-800"
+                >
+                  釣果を投稿する
+                </Link>
+              )}
+            </div>
+            {/* UGCゼロでもフィードが空にならないよう編集部カードで埋める */}
+            {tab === "all" &&
+              editorial.map((card, i) => (
+                <Fragment key={`ed-${card.href}`}>
+                  <EditorialCard card={card} />
+                  {(i + 1) % 5 === 0 && <NativeAdBreak className="py-2" />}
+                </Fragment>
+              ))}
+          </>
         ) : (
-          items.map((item, idx) => (
-            <Fragment key={item.post.id}>
-              <SocialCatchCard
-                post={item.post}
-                likeCount={item.likeCount}
-                commentCount={item.commentCount}
-                likedByViewer={item.likedByViewer}
-                repostCount={item.repostCount}
-                repostedByViewer={item.repostedByViewer}
-                viewerTsuriId={viewerTsuriId}
-              />
-              {/* フィード5件毎に広告（即ロード。lazy化はRPM半減の前歴があり禁忌） */}
-              {(idx + 1) % 5 === 0 && <NativeAdBreak className="py-2" />}
-            </Fragment>
-          ))
+          items.map((item, idx) => {
+            // UGC4件ごとに編集部カードを1枚挿入（UGCが増えるほど比率は自然に低下）
+            const edIdx = (idx + 1) % 4 === 0 ? Math.floor((idx + 1) / 4) - 1 : -1;
+            const ed = edIdx >= 0 && editorial.length > 0 ? editorial[edIdx % editorial.length] : null;
+            return (
+              <Fragment key={item.post.id}>
+                <SocialCatchCard
+                  post={item.post}
+                  likeCount={item.likeCount}
+                  commentCount={item.commentCount}
+                  likedByViewer={item.likedByViewer}
+                  repostCount={item.repostCount}
+                  repostedByViewer={item.repostedByViewer}
+                  viewerTsuriId={viewerTsuriId}
+                />
+                {ed && <EditorialCard card={ed} />}
+                {/* フィード5件毎に広告（即ロード。lazy化はRPM半減の前歴があり禁忌） */}
+                {(idx + 1) % 5 === 0 && <NativeAdBreak className="py-2" />}
+              </Fragment>
+            );
+          })
         )}
       </div>
 
