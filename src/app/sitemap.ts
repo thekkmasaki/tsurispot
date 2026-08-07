@@ -247,11 +247,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly" as const,
       priority: 0.5,
     })),
-    // 月別ガイド
+    // 月別ガイド（日次ISRで年号・今月判定が更新されるため、月×地域ページと同じ月別lastmodを使う）
     { url: `${baseUrl}/monthly`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
     ...monthlyGuides.map((guide) => ({
       url: `${baseUrl}/monthly/${guide.slug}`,
-      lastModified: contentDate,
+      lastModified: monthDate(guide.month),
       changeFrequency: "monthly" as const,
       priority: 0.5,
     })),

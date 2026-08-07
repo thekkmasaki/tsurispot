@@ -114,6 +114,9 @@ function getSeasonalTips(season: string, regionName: string): string[] {
 // 12ヶ月 × 8地域 = 96ページ
 // dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため撤廃。未知 param は本体で /seasonal へ 301。
 
+// 純SSGだと年号がビルド時刻で凍結するため日次ISR
+export const revalidate = 86400;
+
 export function generateStaticParams() {
   const params: { month: string; regionGroup: string }[] = [];
   for (const m of MONTHS) {

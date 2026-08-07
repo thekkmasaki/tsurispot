@@ -55,6 +55,9 @@ interface Props {
 
 // dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため撤廃。未知 param は下記で親へ 301。
 
+// 純SSGだと「今月」判定・metaYear・JSON-LD dateModified がビルド時刻で凍結するため日次ISR
+export const revalidate = 86400;
+
 export async function generateStaticParams() {
   return monthSlugs.map((slug) => ({ month: slug }));
 }

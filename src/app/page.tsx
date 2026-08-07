@@ -4,6 +4,7 @@ import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies, getCatchableNow } from "@/lib/data/fish";
 import { getLatestBlogPostsAsync, BLOG_CATEGORIES } from "@/lib/data/blog";
+import { monthSlugs } from "@/lib/data/monthly-guides";
 import { prefectures } from "@/lib/data/prefectures";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -799,6 +800,25 @@ export default async function Home() {
                   もっと見る
                   <ArrowRight className="size-4" />
                 </Button>
+              </Link>
+            </div>
+            {/* 月別ガイドへの導線（/monthly はトップから未リンクだったためクロール導線を確保） */}
+            <div className="mt-4 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+              <Link
+                prefetch={false}
+                href={`/monthly/${monthSlugs[currentMonth - 1]}`}
+                className="inline-flex items-center gap-1 font-medium text-primary hover:underline"
+              >
+                {currentMonth}月に釣れる魚一覧・釣り方ガイド
+                <ChevronRight className="size-3.5" />
+              </Link>
+              <Link
+                prefetch={false}
+                href="/monthly"
+                className="inline-flex items-center gap-1 font-medium text-primary hover:underline"
+              >
+                月別釣りカレンダー
+                <ChevronRight className="size-3.5" />
               </Link>
             </div>
           </section>

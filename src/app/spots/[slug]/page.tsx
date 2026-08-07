@@ -27,6 +27,8 @@ import {
   Crown,
   Lightbulb,
   CheckCircle2,
+  Calendar,
+  ChevronRight,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -88,7 +90,8 @@ const SpotPhotoGallery = nextDynamic(
 );
 import { areaGuides } from "@/lib/data/area-guides";
 import { explainTime, explainMethod } from "@/lib/fishing-term-helper";
-import { seasonalGuides } from "@/lib/data/seasonal-guides";
+import { monthSlugs } from "@/lib/data/monthly-guides";
+import { getSeasonByMonth } from "@/lib/data/seasonal-data";
 import { FISHING_METHODS } from "@/lib/data/fishing-methods";
 import { REGION_GROUPS } from "@/lib/data/regions-group";
 import { getRelatedBlogPostsForSpot, BLOG_CATEGORIES } from "@/lib/data/blog";
@@ -1928,6 +1931,47 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 </Link>
               </div>
             </CollapsibleSection>
+          </section>
+        );
+      })()}
+
+      {/* 時期から探す（/monthly・/seasonal はスポット詳細から未リンクだったためクロール導線を確保） */}
+      {(() => {
+        const season = getSeasonByMonth(currentMonth);
+        return (
+          <section className="mt-6 sm:mt-8">
+            <div className="flex flex-wrap items-center gap-x-5 gap-y-2 rounded-xl border bg-muted/30 px-4 py-3 text-sm">
+              <span className="flex items-center gap-1.5 font-medium text-muted-foreground">
+                <Calendar className="size-4" />
+                時期から探す:
+              </span>
+              <Link
+                prefetch={false}
+                href={`/monthly/${monthSlugs[currentMonth - 1]}`}
+                className="inline-flex items-center gap-0.5 font-medium text-primary hover:underline"
+              >
+                {currentMonth}月に釣れる魚一覧
+                <ChevronRight className="size-3.5" />
+              </Link>
+              {season ? (
+                <Link
+                  prefetch={false}
+                  href={`/seasonal/${season.slug}`}
+                  className="inline-flex items-center gap-0.5 font-medium text-primary hover:underline"
+                >
+                  {season.nameJa}の釣りガイド
+                  <ChevronRight className="size-3.5" />
+                </Link>
+              ) : null}
+              <Link
+                prefetch={false}
+                href="/monthly"
+                className="inline-flex items-center gap-0.5 font-medium text-primary hover:underline"
+              >
+                月別釣りカレンダー
+                <ChevronRight className="size-3.5" />
+              </Link>
+            </div>
           </section>
         );
       })()}

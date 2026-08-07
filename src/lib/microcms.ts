@@ -90,7 +90,12 @@ export function microCMSToBlogPost(item: MicroCMSBlogResponse): BlogPost {
   };
 }
 
-/** microCMSからブログ記事一覧を取得 */
+// microCMS APIの1リクエスト上限は100件。週報が積み上がると100件を超え、
+// 単発取得では101件目以降が一覧・sitemapから静かに消えるため offset ページングで全件取得する。
+// 暴走防止の総量上限（超過分は古い記事から切り捨て・warnで可視化）
+const MAX_LIST_POSTS = 500;
+
+/** microCMSからブログ記事一覧を取得（offsetページングで全件） */
 export async function fetchMicroCMSBlogPosts(): Promise<BlogPost[]> {
   const client = getClient();
   if (!client) return [];
@@ -98,27 +103,43 @@ export async function fetchMicroCMSBlogPosts(): Promise<BlogPost[]> {
   // 一覧用途では本文(content)は不要。fields で除外し、100件×全文HTMLの巨大ペイロードを回避する
   // （詳細ページは fetchMicroCMSBlogBySlug が別途 content を取得）。これがトップのコールド生成が
   // 約53秒かかっていた主因。さらに microCMS が遅延/応答停止した場合に同期描画を長時間ブロック
-  // しないよう AbortController で 8 秒タイムアウト → catch が空配列を返し静的記事へ fail-soft する。
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 8000);
-  try {
-    const data = await client.get<MicroCMSListResponse>({
-      endpoint: "blogs",
-      queries: {
-        limit: 100,
-        orders: "-publishedAt",
-        fields: "id,slug,title,description,category,tags,publishedAt,updatedAt,eyecatch",
-      },
-      // Next16のfetch既定no-storeを上書きしISRデータキャッシュに載せる（無いと動的化しトップが毎回SSRで遅い）
-      customRequestInit: { next: { revalidate: 3600 }, signal: controller.signal },
-    });
-    return data.contents.map(microCMSToBlogPost);
-  } catch (e) {
-    console.warn("[microCMS] ブログ記事取得失敗:", e);
-    return [];
-  } finally {
-    clearTimeout(timeout);
+  // しないよう AbortController で 8 秒タイムアウト（リクエスト毎）→ 1ページ目失敗は空配列、
+  // 2ページ目以降の失敗は取得済み分を返して静的記事へ fail-soft する。
+  const posts: BlogPost[] = [];
+  let offset = 0;
+  let totalCount = Infinity;
+
+  while (offset < Math.min(totalCount, MAX_LIST_POSTS)) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
+    try {
+      const data = await client.get<MicroCMSListResponse>({
+        endpoint: "blogs",
+        queries: {
+          limit: 100,
+          offset,
+          orders: "-publishedAt",
+          fields: "id,slug,title,description,category,tags,publishedAt,updatedAt,eyecatch",
+        },
+        // Next16のfetch既定no-storeを上書きしISRデータキャッシュに載せる（無いと動的化しトップが毎回SSRで遅い）
+        customRequestInit: { next: { revalidate: 3600 }, signal: controller.signal },
+      });
+      totalCount = data.totalCount;
+      posts.push(...data.contents.map(microCMSToBlogPost));
+      if (data.contents.length === 0) break; // 空ページで無限ループ防止
+      offset += data.contents.length;
+    } catch (e) {
+      console.warn(`[microCMS] ブログ記事取得失敗 (offset=${offset}, 取得済み${posts.length}件):`, e);
+      break;
+    } finally {
+      clearTimeout(timeout);
+    }
   }
+
+  if (totalCount > MAX_LIST_POSTS) {
+    console.warn(`[microCMS] 記事総数${totalCount}件が上限${MAX_LIST_POSTS}件を超過。古い記事は一覧・sitemapから省かれます`);
+  }
+  return posts;
 }
 
 /** microCMSからslug指定で1記事取得（slugフィールド → id フォールバック） */

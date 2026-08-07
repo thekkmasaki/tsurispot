@@ -17,22 +17,26 @@ export const dynamic = "force-static";
 // microCMS API呼び出しのタイムアウト対策
 export const maxDuration = 60;
 
-export const metadata: Metadata = {
-  title: "エリア釣果レポート 2026年最新｜全国15エリアの今釣れる魚・週次更新",
-  description:
-    "全国 15 エリアの最新釣果情報を週次更新。今釣れている魚種、おすすめタックル、ベストポイントを地域別に詳しく解説。明石・神戸、大阪湾、東京湾、伊豆、福岡など主要エリアを網羅。釣行前の情報収集に最適。",
-  openGraph: {
-    title: "エリア釣果レポート 2026年最新｜全国15エリアの今釣れる魚",
+// 年号をハードコードすると年を跨いだとき古く見えてCTRを落とすため動的生成（ISRで追従）
+export function generateMetadata(): Metadata {
+  const year = new Date().getFullYear();
+  return {
+    title: `エリア釣果レポート ${year}年最新｜全国15エリアの今釣れる魚・週次更新`,
     description:
-      "全国 15 エリアの最新釣果を週次更新。 今釣れる魚・おすすめタックルを地域別に紹介。",
-    type: "website",
-    url: "https://tsurispot.com/blog",
-    siteName: "ツリスポ",
-  },
-  alternates: {
-    canonical: "https://tsurispot.com/blog",
-  },
-};
+      "全国 15 エリアの最新釣果情報を週次更新。今釣れている魚種、おすすめタックル、ベストポイントを地域別に詳しく解説。明石・神戸、大阪湾、東京湾、伊豆、福岡など主要エリアを網羅。釣行前の情報収集に最適。",
+    openGraph: {
+      title: `エリア釣果レポート ${year}年最新｜全国15エリアの今釣れる魚`,
+      description:
+        "全国 15 エリアの最新釣果を週次更新。 今釣れる魚・おすすめタックルを地域別に紹介。",
+      type: "website",
+      url: "https://tsurispot.com/blog",
+      siteName: "ツリスポ",
+    },
+    alternates: {
+      canonical: "https://tsurispot.com/blog",
+    },
+  };
+}
 
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
