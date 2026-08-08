@@ -2371,7 +2371,7 @@ export const extraSpots: FishingSpot[] = [
     youtubeLinks: [{ label: "安芸港の釣り", searchQuery: "安芸 港 釣り 高知", description: "高知東部の穴場で釣り" }],
   },{
     id: "s339", name: "高知浦戸湾", slug: "kochi-urado-bay",
-    description: "高知市のすぐ南にある浦戸湾。シーバスの聖地として全国的に有名。チヌやハゼも好調。",
+    description: "高知・浦戸湾はシーバス釣りで全国的に知られる汽水の名所。高知市のすぐ南に広がり、夜のルアーでシーバス（スズキ）が周年狙える。チヌ（クロダイ）のウキフカセや夏のハゼのちょい投げ、カサゴの穴釣りも好調で、街近くとは思えない魚影の濃さが魅力。",
     latitude: 33.531700, longitude: 133.562800,
     address: "〒780-8571 高知県高知市孕東町",
     accessInfo: "JR高知駅から車で約20分。高知自動車道高知ICから約30分。",
