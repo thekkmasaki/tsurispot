@@ -1,0 +1,105 @@
+# Cloudflare エッジキャッシュの手動 purge（URL指定・バッチ処理）
+#
+# 背景（2026-08-08）: deploy.yml の限定purgeが silent failure しており、旧仕様（revalidate無しの
+# 純SSG時代）に s-maxage 超長期で焼かれた /monthly・/seasonal 系の旧HTMLがエッジに数日単位で
+# 残留していた。TTL切れを待てないページ群を狙って掃除するための運用ワークフロー。
+# purge_everything は使わない（2026-06-23 の全purge→全ページ同期冷生成→CPU飽和→502嵐の再発防止）。
+#
+# 使い方:
+#   gh workflow run cf-purge -f preset=seasonal-monthly
+#   gh workflow run cf-purge -f paths="/monthly /monthly/august /seasonal/summer"
+name: CF purge
+
+on:
+  workflow_dispatch:
+    inputs:
+      preset:
+        description: "プリセット名（.github/cf-purge-presets/<name>.txt を読む）。paths と併用可"
+        required: false
+        type: string
+      paths:
+        description: "purge するパスをスペース区切りで（例: /monthly /seasonal/summer）"
+        required: false
+        type: string
+
+jobs:
+  purge:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Cloudflare purge (batched)
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+          PRESET: ${{ inputs.preset }}
+          PATHS: ${{ inputs.paths }}
+        run: |
+          set -euo pipefail
+          if [ -z "$CF_API_TOKEN" ] || [ -z "$CF_ZONE_ID" ]; then
+            echo "::error::CF_API_TOKEN / CF_ZONE_ID が未設定です。"
+            exit 1
+          fi
+
+          # ゾーン実名照合（CF_ZONE_ID 取り違えで「別ゾーン purge に成功」する事故の防止）
+          zone_name=$(curl -sS "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}" \
+            -H "Authorization: Bearer ${CF_API_TOKEN}" | grep -o '"name":"[^"]*"' | head -1 | cut -d'"' -f4)
+          if [ -n "$zone_name" ] && [ "$zone_name" != "tsurispot.com" ]; then
+            echo "::error::CF_ZONE_ID が tsurispot.com ではなく「${zone_name}」を指しています。"
+            exit 1
+          fi
+          echo "purge対象ゾーン: ${zone_name:-（Zone:Read権限なしのため名称未確認）}"
+
+          # パスリストの組み立て（preset ファイル + paths 入力）
+          list=()
+          if [ -n "$PRESET" ]; then
+            preset_file=".github/cf-purge-presets/${PRESET}.txt"
+            if [ ! -f "$preset_file" ]; then
+              echo "::error::プリセット ${preset_file} が存在しません。"
+              exit 1
+            fi
+            while IFS= read -r p; do
+              [ -n "$p" ] && list+=("$p")
+            done < "$preset_file"
+          fi
+          for p in $PATHS; do list+=("$p"); done
+          if [ "${#list[@]}" -eq 0 ]; then
+            echo "::error::preset か paths のどちらかを指定してください。"
+            exit 1
+          fi
+          echo "purge対象: ${#list[@]} URL"
+
+          # Cloudflare purge API は 1リクエスト最大30ファイル → 30件ずつバッチ
+          total=${#list[@]}
+          i=0
+          while [ "$i" -lt "$total" ]; do
+            batch=("${list[@]:$i:30}")
+            files=$(printf '"https://tsurispot.com%s",' "${batch[@]}")
+            files="[${files%,}]"
+            resp=$(curl -sS -X POST \
+              "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
+              -H "Authorization: Bearer ${CF_API_TOKEN}" \
+              -H "Content-Type: application/json" \
+              --data "{\"files\":${files}}")
+            echo "$resp" | grep -q '"success":true' || {
+              echo "$resp"
+              echo "::error::purge 失敗（offset=$i）"
+              exit 1
+            }
+            i=$((i + 30))
+            echo "purged $((i < total ? i : total))/$total"
+            sleep 1
+          done
+
+          # 有効性の実測検証: 先頭URLのエッジエントリが消えたか（古い HIT のままなら無効）
+          first="${list[0]}"
+          sleep 5
+          cache_status=$(curl -s -o /dev/null -w "%header{cf-cache-status}" "https://tsurispot.com${first}")
+          cache_age=$(curl -s -o /dev/null -w "%header{age}" "https://tsurispot.com${first}")
+          echo "purge後の ${first}: cf-cache-status=${cache_status} age=${cache_age:-0}"
+          if [ "$cache_status" = "HIT" ] && [ "${cache_age:-0}" -gt 600 ]; then
+            echo "::error::purge 後も古いエッジキャッシュ(age=${cache_age}s)が残っています。CF_ZONE_ID か Cache Rule のカスタムキャッシュキーを確認してください。"
+            exit 1
+          fi
+          echo "purge 完了・有効性確認 OK"

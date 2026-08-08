@@ -371,6 +371,17 @@ jobs:
             echo "::warning::CF_API_TOKEN / CF_ZONE_ID 未設定のため Cloudflare purge を skip しました。"
             exit 0
           fi
+          # 【2026-08-08 対策】purge API が success:true を返すのに本番エッジの旧キャッシュが残り続ける
+          # silent failure が発覚（/monthly が age=3.9日 のまま等）。CF_ZONE_ID が別ゾーンを指すと
+          # 「別ゾーンの purge に成功」して検知不能になるため、purge 前にゾーン実名を照合する。
+          # （トークンに Zone:Read 権限が無い場合は取得できないため警告に留めて続行）
+          zone_name=$(curl -sS "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}" \
+            -H "Authorization: Bearer ${CF_API_TOKEN}" | grep -o '"name":"[^"]*"' | head -1 | cut -d'"' -f4)
+          if [ -n "$zone_name" ] && [ "$zone_name" != "tsurispot.com" ]; then
+            echo "::error::CF_ZONE_ID が tsurispot.com ではなく「${zone_name}」のゾーンを指しています。Secrets の CF_ZONE_ID を修正してください。"
+            exit 1
+          fi
+          echo "purge対象ゾーン: ${zone_name:-（Zone:Read権限なしのため名称未確認）}"
           # サイト全体に影響するハブ/インデックスページのみ purge（長尾詳細は SWR に委ねる）
           resp=$(curl -sS -X POST \
             "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
@@ -381,6 +392,15 @@ jobs:
           echo "$resp" | grep -q '"success":true' || {
             echo "::error::Cloudflare purge failed"; exit 1;
           }
+          # purge 有効性の実測検証: 直後の / が古い HIT のままなら purge は効いていない
+          sleep 5
+          cache_status=$(curl -s -o /dev/null -w "%header{cf-cache-status}" "https://tsurispot.com/")
+          cache_age=$(curl -s -o /dev/null -w "%header{age}" "https://tsurispot.com/")
+          echo "purge後の /: cf-cache-status=${cache_status} age=${cache_age:-0}"
+          if [ "$cache_status" = "HIT" ] && [ "${cache_age:-0}" -gt 600 ]; then
+            echo "::error::purge 後もトップに古いエッジキャッシュ(age=${cache_age}s)が残っています。CF_ZONE_ID の取り違え、または Cache Rule のカスタムキャッシュキー（single-file purge 非対応）を確認してください。"
+            exit 1
+          fi
           echo "Cloudflare cache purged (targeted hub pages)."
 
       # デプロイ後ウォームアップ（コールド ISR 生成を完了させてキャッシュ投入）。
