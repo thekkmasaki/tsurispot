@@ -641,7 +641,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss18", name: "茅ヶ崎漁港", slug: "chigasaki-port",
-    description: "茅ヶ崎のシンボル・えぼし岩を望む漁港。堤防からサビキでアジやイワシ、投げ釣りでキスが狙える。烏帽子岩への渡船の拠点でもある。足場が良くファミリーにも人気。",
+    description: "茅ヶ崎漁港はえぼし岩を望むサビキ釣りの好漁港。堤防からアジやコノシロ、投げ釣りでキスやカマスが狙える。烏帽子岩へ渡る渡船の拠点でもあり、足場が良くファミリーにも人気。秋はアオリイカのエギングも楽しめる。",
     latitude: 35.3200, longitude: 139.4100, address: "〒253-0061 神奈川県茅ヶ崎市南湖4丁目24-14",
     accessInfo: "JR茅ヶ崎駅南口からバス「茅ヶ崎漁港前」下車すぐ。",
     region: region("r7"), spotType: "port", difficulty: "beginner",
