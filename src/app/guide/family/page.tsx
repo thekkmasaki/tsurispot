@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ProductList } from "@/components/affiliate/product-list";
 import { getBeginnerEssentials } from "@/lib/data/products";
+import { monthSlugs } from "@/lib/data/monthly-guides";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { buildArticleJsonLd } from "@/lib/seo/article-jsonld";
 import {
@@ -221,6 +222,7 @@ const familyArticleJsonLd = buildArticleJsonLd({
 });
 
 export default function FamilyGuidePage() {
+  const currentMonth = new Date().getMonth() + 1; // 1-12（ビルド時固定・既存の季節導線と同方式）
   return (
     <>
       <script
@@ -771,6 +773,30 @@ export default function FamilyGuidePage() {
             maxItems={8}
             pageType="guide"
           />
+        </section>
+
+        {/* 関連ページ（回遊導線） */}
+        <section className="mt-8 sm:mt-10">
+          <h2 className="mb-3 text-lg font-bold">あわせて読みたい・探す</h2>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {[
+              { href: `/monthly/${monthSlugs[currentMonth - 1]}`, title: `${currentMonth}月の釣りガイド`, desc: "今の時期に釣れる魚と釣り方をチェック" },
+              { href: "/blog/summer-vacation-family", title: "夏休み家族釣行 安全ガイド", desc: "子供と釣るための安全対策を詳しく解説" },
+              { href: "/guide/sabiki", title: "サビキ釣り入門", desc: "ファミリーの定番。仕掛けとコツを解説" },
+              { href: "/fish/aji", title: "アジの釣り方", desc: "子供でも釣りやすい定番ターゲット" },
+              { href: "/fish/haze", title: "ハゼの釣り方", desc: "簡単な仕掛けで確実に釣れる入門魚" },
+              { href: "/bouzu-checker", title: "ボウズ回避チェッカー", desc: "行く前に釣れる確率を診断" },
+            ].map((l) => (
+              <Link prefetch={false} key={l.href} href={l.href}>
+                <Card className="group h-full gap-0 py-0 transition-shadow hover:shadow-md">
+                  <CardContent className="p-4">
+                    <p className="text-sm font-semibold group-hover:text-primary">{l.title} →</p>
+                    <p className="mt-1 text-xs text-muted-foreground">{l.desc}</p>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
         </section>
 
         {/* 次のステップ */}
