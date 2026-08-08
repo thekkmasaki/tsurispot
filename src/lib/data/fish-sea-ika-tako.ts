@@ -400,7 +400,7 @@ export const seaFishIkaTako: FishSpecies[] = [
     scientificName: "Portunus trituberculatus",
     slug: "watarigani",
     description:
-      "ワタリガニ（正式名称ガザミ）の釣れる時期は夏〜晩秋、特に8〜10月が狙い目。河口や砂泥底の浅場に生息し、カニ網やカニカゴで狙えます。秋のメスは内子が絶品で、茹でガニや味噌汁、パスタなど食味も抜群。初心者でも手軽に楽しめます。",
+      "ワタリガニ釣りの時期は夏〜晩秋、特に8〜10月が狙い目。正式名称はガザミで、河口や砂泥底の浅場に生息し、カニ網やカニカゴで狙えます。秋のメスは内子が絶品で、茹でガニや味噌汁、パスタなど食味も抜群。初心者でも手軽に楽しめます。",
     category: "sea",
     family: "ワタリガニ科",
     difficulty: "beginner",
