@@ -955,7 +955,7 @@ export const freshwaterFish: FishSpecies[] = [
     scientificName: "Misgurnus anguillicaudatus",
     slug: "dojou",
     description:
-      "どじょう（泥鰌）釣りは、田んぼの水路や小川でタモ網やどんどこ（どじょう筌）を使い手軽に楽しめる。子供の自然体験にも最適な初心者向けの淡水魚。気圧が下がると水面に浮いてくることから天気予報に使われたとも言われ、江戸時代から柳川鍋などの食用として親しまれてきた。",
+      "どじょう釣りは田んぼの水路や小川でタモ網やどじょう筌を使い手軽に楽しめる。正式名称は泥鰌で、子供の自然体験にも最適な初心者向けの淡水魚。気圧が下がると水面に浮いてくることから天気予報に使われたとも言われ、江戸時代から柳川鍋などの食用として親しまれてきた。",
     category: "freshwater",
     family: "ドジョウ科",
     difficulty: "beginner",
