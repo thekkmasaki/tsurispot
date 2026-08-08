@@ -394,7 +394,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   },
   {
     id: "ss8019", name: "箱崎ふ頭", slug: "hakozaki-futo-s8",
-    description: "博多湾東部のふ頭エリア。岸壁からシーバスやチヌ狙いが人気で、夜のアジングも好調。アクセスが良く仕事帰りの釣行にも最適。",
+    description: "箱崎ふ頭はシーバス・チヌが狙える博多湾東部のふ頭釣り場。岸壁からのルアーやアジングが人気で夜釣りも好調。アクセスが良く仕事帰りの釣行にも最適で、春〜秋は落とし込みでクロダイも手堅く楽しめる。ふ頭沿いに駐車も可能。",
     latitude: 33.627, longitude: 130.420,
     address: "〒812-0051 福岡県福岡市東区箱崎ふ頭",
     accessInfo: "JR箱崎駅から車で約10分",
@@ -2558,7 +2558,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   },
   {
     id: "ss8143", name: "志布志湾・福島港", slug: "shibushiwan-fukushima-kou-s8",
-    description: "串間市福島港。志布志湾の穏やかな内海に面し、堤防からアジやキスが手軽に釣れる。大きな漁港で足場が良くファミリーにも安心。",
+    description: "福島港（志布志湾）はアジ・キスが手軽に釣れる漁港。志布志湾の穏やかな内海に面し、大きな漁港で足場が良くファミリーにも安心。堤防からのサビキやちょい投げが定番で、春〜秋はクロダイのフカセ釣りも楽しめる。",
     latitude: 31.453, longitude: 131.165,
     address: "〒888-0008 宮崎県串間市大字西浜",
     accessInfo: "串間駅から車で約10分",
