@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { Trophy } from "lucide-react";
 import { fishingSpots } from "@/lib/data/spots";
+import { monthSlugs } from "@/lib/data/monthly-guides";
 import { RankingClient, type RankingSpot } from "./ranking-client";
 import { calcRankScore } from "@/lib/ranking-score";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
@@ -109,6 +111,7 @@ const rankingSpots: RankingSpot[] = fishingSpots.map((s) => {
 });
 
 export default function RankingPage() {
+  const currentMonth = new Date().getMonth() + 1; // 1-12（ビルド時固定・既存の季節導線と同方式）
   return (
     <div className="min-h-screen">
       <script
@@ -151,6 +154,28 @@ export default function RankingPage() {
         <RankingClient spots={rankingSpots} />
 
         <InArticleAd className="my-8" />
+
+        {/* 他の探し方への回遊導線 */}
+        <section className="mb-4">
+          <h2 className="mb-3 text-base font-bold sm:text-lg">他の探し方</h2>
+          <div className="flex flex-wrap gap-3">
+            <Link prefetch={false} href={`/monthly/${monthSlugs[currentMonth - 1]}`} className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted">
+              {currentMonth}月に釣れる魚 →
+            </Link>
+            <Link prefetch={false} href="/catchable-now" className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted">
+              今釣れる魚 →
+            </Link>
+            <Link prefetch={false} href="/fish" className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted">
+              魚種図鑑 →
+            </Link>
+            <Link prefetch={false} href="/area" className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted">
+              エリアから探す →
+            </Link>
+            <Link prefetch={false} href="/map" className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted">
+              地図から探す →
+            </Link>
+          </div>
+        </section>
       </div>
     </div>
   );

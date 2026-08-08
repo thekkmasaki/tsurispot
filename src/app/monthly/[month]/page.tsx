@@ -147,8 +147,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
     .filter(Boolean);
 
   // タイトルの「全{N}種」と一致させ、その月に釣れる全魚種を表示する。
-  // 旧実装は8種のみ表示し「全{N}種を見る」CTAが /seasonal/[month]（season slug専用＝
-  // 月名は未知slugでnotFound→soft404）へ流出していた。全種を出せばCTA条件が偽になり死にリンクも消滅。
+  // /seasonal/[month] は season slug 専用で月名は soft404 のためリンクしないこと。
   // 編集キュレーション(topFish)を先頭に、残りの月内魚種を続ける。
   const displayFish =
     guidedFish.length > 0
@@ -574,16 +573,6 @@ export default async function MonthlyGuidePage({ params }: Props) {
               );
             })}
           </div>
-          {totalFishCount > displayFish.length && (
-            <div className="mt-4 text-center">
-              <Link prefetch={false}
-                href={`/seasonal/${month}`}
-                className="inline-flex items-center gap-1.5 rounded-lg border px-4 py-2 text-sm font-medium transition-colors hover:bg-muted"
-              >
-                {guide.nameJa}に釣れる全{totalFishCount}種を見る →
-              </Link>
-            </div>
-          )}
           <div className="mt-3 flex flex-wrap justify-center gap-4">
             <Link prefetch={false} href="/catchable-now" className="text-sm text-primary hover:underline">
               今釣れる魚をもっと見る →
