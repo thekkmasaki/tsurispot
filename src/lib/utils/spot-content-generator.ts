@@ -510,7 +510,10 @@ export function generateSpotTips(spot: FishingSpot): string[] {
 export function generateTimeAdvice(spot: FishingSpot): string {
   const topFish = spot.catchableFish.length > 0 ? spot.catchableFish[0] : null;
   const topFishName = topFish?.fish.name || "";
-  const hasNight = spot.catchableFish.some(cf =>
+  // ルールで夜釣り禁止のスポットでは、夜を推す文言を一切生成しない
+  // （「夜釣りNG」表示と攻略法「夕方〜夜が活性UP」が同居していた実バグの対策）
+  const nightBanned = spot.rules?.nightFishing === false;
+  const hasNight = !nightBanned && spot.catchableFish.some(cf =>
     typeof cf.recommendedTime === "string" ? cf.recommendedTime.includes("夜") : false
   );
   const hasMorning = spot.catchableFish.some(cf =>
@@ -534,7 +537,12 @@ export function generateTimeAdvice(spot: FishingSpot): string {
   };
 
   if (topFishName && fishTimeAdvice[topFishName]) {
-    return fishTimeAdvice[topFishName];
+    const advice = fishTimeAdvice[topFishName];
+    // 夜釣り禁止スポットでは夜推しの魚種テンプレを使わず、
+    // 営業時間前提のスポットタイプ別テンプレへフォールバック
+    if (!nightBanned || !advice.includes("夜")) {
+      return advice;
+    }
   }
 
   // spotType別のデフォルトアドバイス

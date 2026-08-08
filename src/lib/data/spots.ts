@@ -4,6 +4,7 @@ import { spotRulesBatch } from "./spots-rules-batch";
 // next.config.ts が spots.ts を import する都合上、@/ エイリアスではなく
 // 相対パスで参照する必要がある (path mapping がビルド時 transpile では効かない)。
 import { generateSpotIntro } from "../utils/spot-content-generator";
+import { isSameSpotName } from "./spot-name-normalize";
 
 // 重複排除で消えたslugから勝者slugへのマップ（自動リダイレクト用）
 export const dedupRedirects = new Map<string, string>();
@@ -53,6 +54,45 @@ function deduplicateSpots(spots: FishingSpot[]): FishingSpot[] {
       deduped.push(spot);
     }
   }
+  // Pass3: 表記ゆれ名寄せ（2026-08 UX監査）。
+  // 「本牧海づり施設 / 横浜本牧海づり施設 / 横浜・本牧海づり施設」のような
+  // 同一地物の別表記が Pass1（名前完全一致）と Pass2（555mグリッド）を
+  // すり抜けて別ページとして生存し、互いの「周辺スポット」に並んでいた。
+  // 条件は保守的に「同一都道府県 かつ 5km以内 かつ 正規化名が同一
+  // （地名プレフィックス差は吸収、接尾辞差=別地物は結合しない）」。
+  const NAME_MERGE_MAX_KM = 5;
+  const byPref = new Map<string, FishingSpot[]>();
+  for (const spot of deduped) {
+    const list = byPref.get(spot.region.prefecture);
+    if (list) list.push(spot);
+    else byPref.set(spot.region.prefecture, [spot]);
+  }
+  const removedSlugs = new Set<string>();
+  for (const group of byPref.values()) {
+    for (let i = 0; i < group.length; i++) {
+      const a = group[i];
+      if (removedSlugs.has(a.slug)) continue;
+      for (let j = i + 1; j < group.length; j++) {
+        const b = group[j];
+        if (removedSlugs.has(b.slug)) continue;
+        if (!isSameSpotName(a.name, b.name)) continue;
+        if (haversineKm(a.latitude, a.longitude, b.latitude, b.longitude) > NAME_MERGE_MAX_KM) continue;
+        // 勝者は既存Passと同じく catchableFish が多い方（同数なら先着）
+        const [winner, loser] =
+          b.catchableFish.length > a.catchableFish.length ? [b, a] : [a, b];
+        dedupRedirects.set(loser.slug, winner.slug);
+        removedSlugs.add(loser.slug);
+        // 名寄せ結果のレビュー用（DEDUP_REPORT=1 npx vitest run ... で出力）
+        if (process.env.DEDUP_REPORT === "1") {
+          const km = haversineKm(a.latitude, a.longitude, b.latitude, b.longitude).toFixed(2);
+          console.log(`[dedup-pass3] ${loser.name}(${loser.slug}) -> ${winner.name}(${winner.slug}) ${km}km ${a.region.prefecture}`);
+        }
+        if (loser === a) break; // a が消えたら a のループを抜ける
+      }
+    }
+  }
+  const merged = removedSlugs.size > 0 ? deduped.filter((s) => !removedSlugs.has(s.slug)) : deduped;
+
   // チェーン解決: A→B→C の場合、A→C に修正
   for (const [loser, winner] of dedupRedirects) {
     let finalWinner = winner;
@@ -65,7 +105,7 @@ function deduplicateSpots(spots: FishingSpot[]): FishingSpot[] {
       dedupRedirects.set(loser, finalWinner);
     }
   }
-  return deduped;
+  return merged;
 }
 
 // ルールデータの一括適用（既にrulesが設定されているスポットは上書きしない）
@@ -138,18 +178,21 @@ export function getNearbySpots(lat: number, lng: number, limit = 5): NearbySpot[
     .slice(0, limit);
 }
 
-export function getSpotsByPrefecture(prefecture: string, excludeSlug: string, limit = 6): FishingSpot[] {
+// excludeSlugs: 同一ページ内で既に表示したスポットの連鎖除外用（2026-08 UX監査:
+// 各モジュールが rating 降順で同じ顔ぶれを返し、1ページに同一スポットが
+// 最大6回重複表示されていた）。
+export function getSpotsByPrefecture(prefecture: string, excludeSlug: string, limit = 6, excludeSlugs?: ReadonlySet<string>): FishingSpot[] {
   return fishingSpots
-    .filter((s) => s.region.prefecture === prefecture && s.slug !== excludeSlug)
+    .filter((s) => s.region.prefecture === prefecture && s.slug !== excludeSlug && !excludeSlugs?.has(s.slug))
     .sort((a, b) => b.rating - a.rating)
     .slice(0, limit);
 }
 
-export function getSpotsByFish(fishSlugs: string[], excludeSlug: string, limit = 5): FishingSpot[] {
+export function getSpotsByFish(fishSlugs: string[], excludeSlug: string, limit = 5, excludeSlugs?: ReadonlySet<string>): FishingSpot[] {
   const fishSet = new Set(fishSlugs);
   const matched: { spot: FishingSpot; matchCount: number }[] = [];
   for (const s of fishingSpots) {
-    if (s.slug === excludeSlug) continue;
+    if (s.slug === excludeSlug || excludeSlugs?.has(s.slug)) continue;
     let count = 0;
     for (const cf of s.catchableFish) {
       if (fishSet.has(cf.fish.slug)) count++;
@@ -160,11 +203,11 @@ export function getSpotsByFish(fishSlugs: string[], excludeSlug: string, limit =
   return matched.slice(0, limit).map((m) => m.spot);
 }
 
-export function getSpotsByMethod(methods: string[], excludeSlug: string, limit = 5): FishingSpot[] {
+export function getSpotsByMethod(methods: string[], excludeSlug: string, limit = 5, excludeSlugs?: ReadonlySet<string>): FishingSpot[] {
   const methodSet = new Set(methods);
   const matched: { spot: FishingSpot; matchCount: number }[] = [];
   for (const s of fishingSpots) {
-    if (s.slug === excludeSlug) continue;
+    if (s.slug === excludeSlug || excludeSlugs?.has(s.slug)) continue;
     const seen = new Set<string>();
     let count = 0;
     for (const cf of s.catchableFish) {
@@ -185,10 +228,11 @@ export function getSpotsBySpotType(
   spotType: FishingSpot["spotType"],
   prefecture: string,
   excludeSlug: string,
-  limit = 6
+  limit = 6,
+  excludeSlugs?: ReadonlySet<string>
 ): FishingSpot[] {
   return fishingSpots
-    .filter((s) => s.spotType === spotType && s.region.prefecture === prefecture && s.slug !== excludeSlug)
+    .filter((s) => s.spotType === spotType && s.region.prefecture === prefecture && s.slug !== excludeSlug && !excludeSlugs?.has(s.slug))
     .sort((a, b) => b.rating - a.rating)
     .slice(0, limit);
 }
@@ -199,10 +243,11 @@ export function getSpotsByDifficulty(
   difficulty: FishingSpot["difficulty"],
   prefecture: string,
   excludeSlug: string,
-  limit = 6
+  limit = 6,
+  excludeSlugs?: ReadonlySet<string>
 ): FishingSpot[] {
   return fishingSpots
-    .filter((s) => s.difficulty === difficulty && s.region.prefecture === prefecture && s.slug !== excludeSlug)
+    .filter((s) => s.difficulty === difficulty && s.region.prefecture === prefecture && s.slug !== excludeSlug && !excludeSlugs?.has(s.slug))
     .sort((a, b) => b.rating - a.rating)
     .slice(0, limit);
 }
