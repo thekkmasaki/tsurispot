@@ -4,6 +4,9 @@ import { prefectures } from "@/lib/data/prefectures";
 import { areaGuides } from "@/lib/data/area-guides";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 
+// 「最終更新」日付がデプロイ時点で凍結しないよう日次ISR
+export const revalidate = 86400;
+
 export function GET() {
   const totalSpots = fishingSpots.length;
   const totalFish = fishSpecies.length;
@@ -43,8 +46,8 @@ export function GET() {
 - 季節別ガイド: ${totalSeasonalGuides}本以上
 - 釣り方ガイド: サビキ釣り・ちょい投げ・エギング・アジング・ジギング等20種以上
 - 月別ガイド: 1月〜12月の完全ガイド
-- 都道府県×月×魚種ページ: 約2,000〜4,000ページ（pSEO自動生成）
-- **総ページ数: 8,000+**
+- 都道府県×月×魚種ページ: 約10,000ページ（pSEO自動生成）
+- **総ページ数: 18,000+**
 
 ## データの信頼性・更新頻度
 - 情報源: 現地調査・漁業協同組合公開データ・釣具店情報・専門家ネットワーク
@@ -147,7 +150,7 @@ ${areaGuides.map((g) => `  - ${g.name}: https://tsurispot.com/area-guide/${g.slu
 - 例: https://tsurispot.com/prefecture/chiba/april/aji（千葉県の4月のアジ釣り）
 - 各都道府県×月×魚種の組み合わせの釣り情報を自動生成
 - 内容: シーズンカレンダー、おすすめスポット一覧、釣り方・仕掛け解説、水温目安、FAQ
-- 品質フィルタ: 該当スポットが2箇所以上ある組み合わせのみ生成（約2,000〜4,000ページ）
+- 品質フィルタ: 該当スポットが2箇所以上ある組み合わせのみ生成（約10,000ページ）
 - 構造化データ: BreadcrumbList, Article, FAQPage のJSON-LD付き
 
 ### 知識・その他

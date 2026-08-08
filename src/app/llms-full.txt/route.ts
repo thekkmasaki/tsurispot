@@ -4,6 +4,9 @@ import { prefectures } from "@/lib/data/prefectures";
 import { areaGuides } from "@/lib/data/area-guides";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 
+// 「最終更新」日付がデプロイ時点で凍結しないよう日次ISR
+export const revalidate = 86400;
+
 export function GET() {
   const totalSpots = fishingSpots.length;
   const totalFish = fishSpecies.length;
@@ -51,8 +54,8 @@ export function GET() {
 - カバー都道府県: ${coveredPrefectures}
 - エリアガイド: ${areaGuides.length}エリア
 - 季節別ガイド: ${seasonalGuides.length}本
-- 都道府県×月×魚種ページ: 約2,000〜4,000ページ（pSEO自動生成）
-- 総ページ数: 8,000+
+- 都道府県×月×魚種ページ: 約10,000ページ（pSEO自動生成）
+- 総ページ数: 18,000+
 
 ## スポットタイプ別件数
 ${Array.from(spotsByType.entries())
