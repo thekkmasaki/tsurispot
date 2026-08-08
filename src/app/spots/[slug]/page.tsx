@@ -122,6 +122,12 @@ import {
   generateImprovedFAQs,
   generateAreaSeasonTrend,
 } from "@/lib/utils/spot-content-generator";
+import {
+  getForbiddenMethods,
+  isNightFishingAdvisable,
+  getAdvisableCatchableFish,
+} from "@/lib/utils/spot-rule-consistency";
+import { METHOD_GUIDES, guidesForMethods } from "@/lib/data/method-guides";
 
 // Below-the-fold client components loaded lazily
 const SpotWeatherTide = nextDynamic(() => import("@/components/spots/spot-weather-tide").then((m) => m.SpotWeatherTide), {
@@ -510,9 +516,11 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
   const videoJsonLd: object[] = [];
 
-  // 夜釣り可能かどうかの判定（catchableFishのrecommendedTimeに「夜」を含む場合）
-  const isNightFishing =
-    spot.catchableFish.some((cf) => cf.recommendedTime.includes("夜"));
+  // 夜釣りを訴求してよいか（recommendedTimeに「夜」があっても、ルールで
+  // 夜釣り禁止のスポットでは false。禁止なのに夜推しが出ていた実バグの対策）
+  const isNightFishing = isNightFishingAdvisable(spot);
+  // ルール上禁止されている釣法（おすすめ・ガイドリンクから除外する）
+  const forbiddenMethods = getForbiddenMethods(spot);
 
   // Single getNearbySpots call for both internal links and GPS search
   const allNearby: NearbySpot[] = getNearbySpots(spot.latitude, spot.longitude, 21)
@@ -530,6 +538,12 @@ export default async function SpotDetailPage({ params }: PageProps) {
     prefecture: s.region.prefecture,
     fishNames: s.catchableFish.slice(0, 3).map((cf) => cf.fish.name),
   }));
+
+  // 関連スポットモジュール間の連鎖除外（2026-08 UX監査: 各モジュールが
+  // rating 降順で同じ顔ぶれを返し、1ページに同一スポットが最大6回重複表示
+  // されていた）。周辺スポットで出した分を起点に、各モジュールが表示した
+  // slug を追加しながら下のモジュールから除外していく。
+  const usedRelatedSlugs = new Set<string>(nearbySpots.map((s) => s.slug));
 
   // Up to 20 for GPS search (client component) - lightweight data only
   const gpsNearbyData = allNearby.slice(0, 20).map((s) => ({
@@ -1044,7 +1058,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
           {spot.rules ? (
           <section>
             <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><Shield className="size-5" />釣りルール・禁止事項</h3>
-            <SpotRulesCard rules={spot.rules} spotType={spot.spotType} spotName={spot.name} />
+            <SpotRulesCard rules={spot.rules} spotType={spot.spotType} spotName={spot.name} isFree={spot.isFree} feeDetail={spot.feeDetail} />
           </section>
           ) : prefRule ? (
           <section>
@@ -1342,29 +1356,10 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
       {/* この釣り場で使える釣り方ガイド（常時表示） */}
       {(() => {
-        const METHOD_GUIDE_MAP: Record<string, { href: string; label: string; desc: string }> = {
-          "サビキ釣り": { href: "/guide/sabiki", label: "サビキ釣り完全ガイド", desc: "仕掛け・コマセの使い方を初心者向けに図解" },
-          "ちょい投げ": { href: "/guide/choinage", label: "ちょい投げ完全ガイド", desc: "キスやハゼを狙う投げ釣り入門" },
-          "ちょい投げ釣り": { href: "/guide/choinage", label: "ちょい投げ完全ガイド", desc: "キスやハゼを狙う投げ釣り入門" },
-          "エギング": { href: "/guide/eging", label: "エギング完全ガイド", desc: "エギの選び方とシャクリ方を解説" },
-          "ショアジギング": { href: "/guide/jigging", label: "ショアジギング完全ガイド", desc: "メタルジグで青物を狙う方法" },
-          "ウキ釣り": { href: "/guide/float-fishing", label: "ウキ釣り完全ガイド", desc: "ウキの種類・タナの取り方を解説" },
-          "穴釣り": { href: "/guide/anazuri", label: "穴釣り完全ガイド", desc: "テトラの隙間でカサゴ・メバルを狙う" },
-          "ルアー釣り": { href: "/guide/lure", label: "ルアー釣り完全ガイド", desc: "シーバスやヒラメをルアーで狙う" },
-          "泳がせ釣り": { href: "/guide/oyogase", label: "泳がせ釣り入門ガイド", desc: "活きエサで大物を狙う泳がせ釣り" },
-          "遠投カゴ釣り": { href: "/guide/entou-kago", label: "遠投カゴ釣りガイド", desc: "沖のタナを攻めるカゴ釣り" },
-          "投げ釣り": { href: "/guide/choinage", label: "ちょい投げ完全ガイド", desc: "投げ釣りの基本とコツ" },
-          "フカセ釣り": { href: "/guide/float-fishing", label: "ウキ釣り完全ガイド", desc: "フカセ釣りの基本テクニック" },
-        };
+        // 釣法→ガイドのマップは lib/data/method-guides.ts に一本化。
+        // ルールで禁止されている釣法（投げ釣り禁止のちょい投げ等）はここに出さない
         const methods = new Set(spot.catchableFish.map((cf) => cf.method));
-        const seenHref = new Set<string>();
-        const guides = Array.from(methods)
-          .map((m) => METHOD_GUIDE_MAP[m])
-          .filter((g): g is { href: string; label: string; desc: string } => {
-            if (!g || seenHref.has(g.href)) return false;
-            seenHref.add(g.href);
-            return true;
-          });
+        const guides = guidesForMethods(methods, forbiddenMethods);
         if (guides.length === 0) return null;
         return (
           <section className="mt-8 sm:mt-12">
@@ -1448,31 +1443,17 @@ export default async function SpotDetailPage({ params }: PageProps) {
         const maxCountStrategy = Math.max(...monthCountsForStrategy.map(mc => mc.count));
         const bestMonthsStrategy = monthCountsForStrategy.filter(mc => mc.count === maxCountStrategy).map(mc => monthNames[mc.month]);
 
-        // おすすめ釣り方トップ3（重複排除）
+        // おすすめ釣り方トップ3（重複排除）。
+        // 禁止釣法と、夜釣り禁止スポットの夜専用おすすめは表示前に除外する
+        const advisableFish = getAdvisableCatchableFish(spot);
         const seenMethodsStrategy = new Set<string>();
-        const topMethods = spot.catchableFish
+        const topMethods = advisableFish
           .filter(cf => {
             if (seenMethodsStrategy.has(cf.method)) return false;
             seenMethodsStrategy.add(cf.method);
             return true;
           })
           .slice(0, 3);
-
-        // 釣り方ガイドのリンクマップ
-        const METHOD_STRATEGY_MAP: Record<string, string> = {
-          "サビキ釣り": "/guide/sabiki",
-          "ちょい投げ": "/guide/choinage",
-          "ちょい投げ釣り": "/guide/choinage",
-          "エギング": "/guide/eging",
-          "ショアジギング": "/guide/jigging",
-          "ウキ釣り": "/guide/float-fishing",
-          "穴釣り": "/guide/anazuri",
-          "ルアー釣り": "/guide/lure",
-          "泳がせ釣り": "/guide/oyogase",
-          "遠投カゴ釣り": "/guide/entou-kago",
-          "投げ釣り": "/guide/choinage",
-          "フカセ釣り": "/guide/float-fishing",
-        };
 
         // 釣り方の説明マップ
         const METHOD_BRIEF: Record<string, string> = {
@@ -1537,7 +1518,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
                   <h3 className="mb-2 text-sm font-bold">おすすめの釣り方</h3>
                   <div className="space-y-2">
                     {topMethods.map((cf, idx) => {
-                      const guideHref = METHOD_STRATEGY_MAP[cf.method];
+                      const guideHref = METHOD_GUIDES[cf.method]?.href;
                       const brief = generateContextMethodBrief(cf.method, spot);
                       const targetFish = spot.catchableFish.filter(f => f.method === cf.method).slice(0, 3).map(f => f.fish.name).join("・");
                       return (
@@ -1650,7 +1631,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
       >
         {/* 同じ都道府県の釣りスポット */}
         {(() => {
-          const samePrefSpots = getSpotsByPrefecture(spot.region.prefecture, spot.slug, 6)
+          const samePrefSpots = getSpotsByPrefecture(spot.region.prefecture, spot.slug, 6, usedRelatedSlugs)
             .map((ps) => ({
               id: ps.id,
               slug: ps.slug,
@@ -1660,6 +1641,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
               rating: ps.rating,
               fishNames: ps.catchableFish?.slice(0, 2).map((cf) => cf.fish.name) || [],
             }));
+          samePrefSpots.forEach((ps) => usedRelatedSlugs.add(ps.slug));
           if (samePrefSpots.length === 0) return null;
           const pref = getPrefectureByName(spot.region.prefecture);
           return (
@@ -1720,7 +1702,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
           const fishSlugs = Array.from(new Set(spot.catchableFish.map((cf) => cf.fish.slug).filter(Boolean)));
           const topFishName = spot.catchableFish[0]?.fish.name || "";
           if (fishSlugs.length === 0 || !topFishName) return null;
-          const fishSpots = getSpotsByFish(fishSlugs, spot.slug, 12);
+          // 12→6件に削減（1ページの関連カード過多・17,000px超のページ長対策）
+          const fishSpots = getSpotsByFish(fishSlugs, spot.slug, 6, usedRelatedSlugs);
+          fishSpots.forEach((s) => usedRelatedSlugs.add(s.slug));
           if (fishSpots.length === 0) return null;
           return <RelatedSpotsByFish spots={fishSpots} fishName={topFishName} />;
         })()}
@@ -1730,14 +1714,17 @@ export default async function SpotDetailPage({ params }: PageProps) {
           const methods = Array.from(new Set(spot.catchableFish.map((cf) => cf.method).filter(Boolean)));
           if (methods.length === 0) return null;
           const methodLabel = methods[0];
-          const methodSpots = getSpotsByMethod(methods, spot.slug, 12);
+          // 12→6件に削減（ページ長対策）
+          const methodSpots = getSpotsByMethod(methods, spot.slug, 6, usedRelatedSlugs);
+          methodSpots.forEach((s) => usedRelatedSlugs.add(s.slug));
           if (methodSpots.length === 0) return null;
           return <RelatedSpotsByMethod spots={methodSpots} methodLabel={methodLabel} />;
         })()}
 
         {/* 同じ釣り場タイプ (Phase C 内部リンク強化) */}
         {(() => {
-          const sameTypeSpots = getSpotsBySpotType(spot.spotType, spot.region.prefecture, spot.slug, 6);
+          const sameTypeSpots = getSpotsBySpotType(spot.spotType, spot.region.prefecture, spot.slug, 6, usedRelatedSlugs);
+          sameTypeSpots.forEach((s) => usedRelatedSlugs.add(s.slug));
           if (sameTypeSpots.length === 0) return null;
           const typeLabel = SPOT_TYPE_LABELS[spot.spotType];
           return (
@@ -1752,7 +1739,8 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
         {/* 同じ難易度 (Phase C 内部リンク強化) */}
         {(() => {
-          const sameDiffSpots = getSpotsByDifficulty(spot.difficulty, spot.region.prefecture, spot.slug, 6);
+          const sameDiffSpots = getSpotsByDifficulty(spot.difficulty, spot.region.prefecture, spot.slug, 6, usedRelatedSlugs);
+          sameDiffSpots.forEach((s) => usedRelatedSlugs.add(s.slug));
           if (sameDiffSpots.length === 0) return null;
           const diffLabel = DIFFICULTY_LABELS[spot.difficulty];
           return (
@@ -1786,28 +1774,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
 
         {/* 釣り方ガイド */}
         {(() => {
-          const METHOD_TO_GUIDE: Record<string, { href: string; label: string }> = {
-            "サビキ釣り": { href: "/guide/sabiki", label: "サビキ釣り完全ガイド" },
-            "ちょい投げ": { href: "/guide/choinage", label: "ちょい投げ完全ガイド" },
-            "ちょい投げ釣り": { href: "/guide/choinage", label: "ちょい投げ完全ガイド" },
-            "エギング": { href: "/guide/eging", label: "エギング完全ガイド" },
-            "ショアジギング": { href: "/guide/jigging", label: "ショアジギング完全ガイド" },
-            "ウキ釣り": { href: "/guide/float-fishing", label: "ウキ釣り完全ガイド" },
-            "穴釣り": { href: "/guide/anazuri", label: "穴釣り完全ガイド" },
-            "ルアー釣り": { href: "/guide/lure", label: "ルアー釣り完全ガイド" },
-            "泳がせ釣り": { href: "/guide/oyogase", label: "泳がせ釣り入門ガイド" },
-            "遠投カゴ釣り": { href: "/guide/entou-kago", label: "遠投カゴ釣りガイド" },
-            "投げ釣り": { href: "/guide/choinage", label: "ちょい投げ完全ガイド" },
-          };
+          // 釣法→ガイドのマップは lib/data/method-guides.ts に一本化。禁止釣法は出さない
           const methods = new Set(spot.catchableFish.map((cf) => cf.method));
-          const seen = new Set<string>();
-          const uniqueGuides = Array.from(methods)
-            .map((m) => METHOD_TO_GUIDE[m])
-            .filter((g): g is { href: string; label: string } => {
-              if (!g || seen.has(g.href)) return false;
-              seen.add(g.href);
-              return true;
-            });
+          const uniqueGuides = guidesForMethods(methods, forbiddenMethods);
           if (uniqueGuides.length === 0) return null;
           return (
             <div className="mb-6">

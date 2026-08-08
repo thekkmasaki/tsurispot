@@ -7,6 +7,10 @@ interface SpotRulesCardProps {
   rules?: SpotRules;
   spotType: string;
   spotName: string;
+  /** 入場料・施設利用料が無料か（「無料で釣りを楽しめます」の表示条件） */
+  isFree?: boolean;
+  /** 料金の説明（例: 大人900円 / 子供450円）。有料時の文言に使う */
+  feeDetail?: string;
 }
 
 interface RuleItem {
@@ -131,7 +135,7 @@ function statusLabel(value: boolean | "partial"): string {
   return "場所による";
 }
 
-export function SpotRulesCard({ rules, spotType, spotName }: SpotRulesCardProps) {
+export function SpotRulesCard({ rules, spotType, spotName, isFree, feeDetail }: SpotRulesCardProps) {
   const isDefault = !rules;
   const spotTypeLabel = SPOT_TYPE_LABELS[spotType as keyof typeof SPOT_TYPE_LABELS] || spotType;
 
@@ -298,11 +302,17 @@ export function SpotRulesCard({ rules, spotType, spotName }: SpotRulesCardProps)
           </div>
         )}
 
-        {/* 遊漁券が不要の場合の表示（rulesがある場合のみ） */}
+        {/* 遊漁券が不要の場合の表示（rulesがある場合のみ）。
+            「無料で釣りを楽しめます」は施設として無料の場合だけ。有料施設
+            （本牧海づり施設: 大人900円等）で無料と誤表示していた実バグの対策 */}
         {rules && !rules.fishingLicenseRequired && (
           <div className="mt-4 flex items-start gap-2 rounded-lg bg-green-50 p-3 text-sm text-green-800">
             <Check className="mt-0.5 size-4 shrink-0" />
-            <p>遊漁券は不要です。無料で釣りを楽しめます。</p>
+            <p>
+              {isFree === false
+                ? `遊漁券は不要です${feeDetail ? `（別途施設利用料: ${feeDetail}）` : "（別途施設利用料がかかります）"}。`
+                : "遊漁券は不要です。無料で釣りを楽しめます。"}
+            </p>
           </div>
         )}
         {/* 現地確認の注意書き */}

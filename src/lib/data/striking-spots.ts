@@ -33,7 +33,8 @@ export const strikingSpots: StrikingSpot[] = [
   { slug: "daisen-mikuriya-port", prefSlug: "tottori", pos: 8.9, imp: 220, topQuery: "御来屋漁港" },
   { slug: "kemigawahama-tottei", prefSlug: "chiba", pos: 8.3, imp: 246, topQuery: "検見川浜突堤 釣果" },
   { slug: "noheji-gyoko", prefSlug: "aomori", pos: 9.3, imp: 190, topQuery: "野辺地釣り" },
-  { slug: "hachinohe-tatehana-gyokou", prefSlug: "aomori", pos: 6.6, imp: 672, topQuery: "八戸釣り情報" },
+  // 名寄せ統合(2026-08)で hachinohe-tatehana-gyokou は hachinohe-tatehana-gyokou6 へ301
+  { slug: "hachinohe-tatehana-gyokou6", prefSlug: "aomori", pos: 6.6, imp: 672, topQuery: "八戸釣り情報" },
   { slug: "tenryugawa-kakou-e8", prefSlug: "shizuoka", pos: 8.2, imp: 197, topQuery: "天竜川河口 釣果" },
   { slug: "onahama-aquamarine-park6", prefSlug: "fukushima", pos: 7.5, imp: 178, topQuery: "アクアマリン 釣り公園 釣果" },
   { slug: "maizuru-shinkai-park", prefSlug: "kyoto", pos: 8.1, imp: 235, topQuery: "舞鶴親海公園 釣果" },
