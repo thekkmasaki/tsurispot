@@ -75,7 +75,8 @@ export function SpotListWithFilter({ spots, methodName, monthName }: Props) {
       ? spots
       : spots.filter((s) => s.prefecture === selectedPref);
 
-  // 現在地ソート
+  // 現在地ソート。位置情報なしの既定順は評価順
+  // （データ定義順のままだと特定地域が先頭に偏る）
   const sorted =
     sortByDistance && userLocation
       ? [...filtered].sort(
@@ -83,7 +84,7 @@ export function SpotListWithFilter({ spots, methodName, monthName }: Props) {
             getDistanceKm(userLocation.lat, userLocation.lng, a.latitude, a.longitude) -
             getDistanceKm(userLocation.lat, userLocation.lng, b.latitude, b.longitude)
         )
-      : filtered;
+      : [...filtered].sort((a, b) => b.rating - a.rating);
 
   const handleNearbySort = useCallback(() => {
     if (sortByDistance) {

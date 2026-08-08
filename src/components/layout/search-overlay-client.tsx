@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Search, X, MapPin, Fish, BookOpen, FileText, Wrench, LoaderCircle } from "lucide-react";
-import type { SearchItemType } from "@/lib/data/search-index";
+import type { SearchItemType } from "@/lib/search/search-types";
 import { trackSearch, trackSearchSelect } from "@/lib/analytics";
 
 // API レスポンスの型（searchText を除いた SearchItem）
@@ -52,6 +52,8 @@ export function SearchOverlayClient() {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
+  // スポットの総ヒット数（APIは5件キャップで返すため X-Spot-Total ヘッダーで受ける）
+  const [spotTotal, setSpotTotal] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [hasSearched, setHasSearched] = useState(false);
   const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -84,6 +86,7 @@ export function SearchOverlayClient() {
       if (!res.ok) throw new Error("Search failed");
       const data: SearchResult[] = await res.json();
       setResults(data);
+      setSpotTotal(Number.parseInt(res.headers.get("X-Spot-Total") ?? "0", 10) || 0);
       setHasSearched(true);
       // GA4: デバウンス済みの確定クエリのみ計測（入力1文字ごとには送らない）
       trackSearch({ searchTerm: q, resultCount: data.length });
@@ -330,6 +333,20 @@ export function SearchOverlayClient() {
                               </li>
                             ))}
                           </ul>
+                          {/* スポットは5件キャップのため、全件は /spots の絞り込みへ誘導 */}
+                          {cat === "spot" && spotTotal > catItems.length && (
+                            <button
+                              onClick={() => {
+                                setIsOpen(false);
+                                handleQueryChange("");
+                                router.push(`/spots?q=${encodeURIComponent(query.trim())}`);
+                              }}
+                              className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-left text-sm font-medium text-primary transition-colors hover:bg-primary/5"
+                            >
+                              <Search className="size-4 shrink-0" />
+                              スポットを全{spotTotal}件から検索 →
+                            </button>
+                          )}
                         </div>
                       );
                     })}

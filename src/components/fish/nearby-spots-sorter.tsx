@@ -1,12 +1,13 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { MapPin, Navigation, Star, Loader2 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CATCH_RATING_LABELS } from "@/types";
+import { useGeolocation } from "@/hooks/use-geolocation";
 
 /** クライアントに渡す軽量スポットデータ（region.id/slugを省略） */
 export interface SpotLight {
@@ -52,38 +53,18 @@ interface NearbySpotsSorterProps {
 }
 
 export function NearbySpotsSorter({ spots, fishName, totalCount }: NearbySpotsSorterProps) {
-  const [userLocation, setUserLocation] = useState<{
-    lat: number;
-    lng: number;
-  } | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
+  // 独自 geolocation 実装をやめ、共通フックへ統一（2026-08 UX監査）:
+  // - localStorage 保存済み位置（1時間以内）と permission granted 済みなら自動で近い順になる
+  // - 未許可時の既定順はサーバー側で評価順ソート済み（fish/[slug]/page.tsx 参照）
+  const { latitude, longitude, error, loading, requestLocation } = useGeolocation();
+  // 「解除」で距離ソートをやめて評価順に戻すためのローカルスイッチ
+  const [distanceSortOff, setDistanceSortOff] = useState(false);
+  const userLocation =
+    !distanceSortOff && latitude !== null && longitude !== null
+      ? { lat: latitude, lng: longitude }
+      : null;
 
   const INITIAL_COUNT = 5;
-
-  const requestLocation = useCallback(() => {
-    if (!navigator.geolocation) {
-      setError("お使いのブラウザは位置情報に対応していません");
-      return;
-    }
-    setLoading(true);
-    setError(null);
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        setUserLocation({ lat: pos.coords.latitude, lng: pos.coords.longitude });
-        setLoading(false);
-      },
-      (err) => {
-        if (err.code === err.PERMISSION_DENIED) {
-          setError("位置情報の使用が許可されていません。ブラウザの設定を確認してください。");
-        } else {
-          setError("位置情報を取得できませんでした");
-        }
-        setLoading(false);
-      },
-      { enableHighAccuracy: false, timeout: 10000 }
-    );
-  }, []);
 
   // 距離でソート
   const sortedSpots = userLocation
@@ -170,23 +151,34 @@ export function NearbySpotsSorter({ spots, fishName, totalCount }: NearbySpotsSo
         </span>
       </h2>
 
-      {/* 現在地ボタン */}
+      {/* 並び順の状態表示 + 現在地ボタン。
+          旧文言「現在地から近い順に表示」は押下用ボタンなのに現在の並び順の説明に
+          読めてしまい、未許可時に全国順のまま「近い順」と誤解される問題があった */}
       {!userLocation && (
         <div className="mb-3 sm:mb-4">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={requestLocation}
-            disabled={loading}
-            className="gap-1.5 text-sm"
-          >
-            {loading ? (
-              <Loader2 className="size-4 animate-spin" />
-            ) : (
-              <Navigation className="size-4" />
-            )}
-            {loading ? "取得中..." : "現在地から近い順に表示"}
-          </Button>
+          <div className="flex flex-wrap items-center gap-2">
+            <span className="inline-flex items-center gap-1 rounded-full bg-muted px-2.5 py-1 text-xs text-muted-foreground">
+              <Star className="size-3" />
+              評価順で表示中
+            </span>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => {
+                setDistanceSortOff(false);
+                requestLocation();
+              }}
+              disabled={loading}
+              className="gap-1.5 text-sm"
+            >
+              {loading ? (
+                <Loader2 className="size-4 animate-spin" />
+              ) : (
+                <Navigation className="size-4" />
+              )}
+              {loading ? "取得中..." : "現在地から近い順に並べ替え"}
+            </Button>
+          </div>
           {error && (
             <p className="mt-1.5 text-xs text-red-600">{error}</p>
           )}
@@ -200,7 +192,7 @@ export function NearbySpotsSorter({ spots, fishName, totalCount }: NearbySpotsSo
             現在地から近い順に表示しています
           </span>
           <button
-            onClick={() => setUserLocation(null)}
+            onClick={() => setDistanceSortOff(true)}
             className="ml-auto text-xs text-muted-foreground hover:text-foreground"
           >
             解除
@@ -230,7 +222,7 @@ export function NearbySpotsSorter({ spots, fishName, totalCount }: NearbySpotsSo
       )}
       {totalCount > spots.length && (
         <p className="mt-2 text-center text-xs text-muted-foreground">
-          ※ 全{totalCount}件中、上位{spots.length}件を表示しています。
+          ※ 全{totalCount}件中、評価上位{spots.length}件を表示しています。
           都道府県別リンクから地域ごとのスポットを確認できます。
         </p>
       )}

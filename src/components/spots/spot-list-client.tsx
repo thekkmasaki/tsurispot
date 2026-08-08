@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useMemo, useCallback, useDeferredValue, useTransition, useEffect, Fragment } from "react";
-import { usePathname } from "next/navigation";
+import { useState, useMemo, useCallback, useDeferredValue, useTransition, useEffect, useRef, Fragment } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
 import { Search, X, SlidersHorizontal, ChevronDown, ChevronLeft, ChevronRight, MapPin, Navigation, Loader2 } from "lucide-react";
 import { SpotCard } from "@/components/spots/spot-card";
 import { Button } from "@/components/ui/button";
@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { InFeedAd } from "@/components/ads/ad-unit";
 import { ListSpot, SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { regions } from "@/lib/data/regions";
+import { spotSearchMatch } from "@/lib/search/spot-match";
 
 type RegionKey = "hokkaido" | "tohoku" | "kanto" | "chubu" | "kinki" | "chugoku" | "shikoku" | "kyushu";
 
@@ -24,60 +25,8 @@ const REGION_CONFIG: Record<RegionKey, { label: string; prefectures: string[] }>
   kyushu: { label: "九州・沖縄", prefectures: ["福岡県", "佐賀県", "長崎県", "熊本県", "大分県", "宮崎県", "鹿児島県", "沖縄県"] },
 };
 
-// カタカナ → ひらがな変換
-function katakanaToHiragana(str: string): string {
-  return str.replace(/[\u30A1-\u30F6]/g, (ch) =>
-    String.fromCharCode(ch.charCodeAt(0) - 0x60)
-  );
-}
-
-// 検索用正規化（小文字+ひらがな統一）
-function normalizeForSearch(str: string): string {
-  return katakanaToHiragana(str).toLowerCase();
-}
-
-// あいまい検索：双方向部分一致 + かな正規化
-function fuzzyMatch(query: string, ...targets: string[]): boolean {
-  const nq = normalizeForSearch(query);
-  for (const target of targets) {
-    if (!target) continue;
-    const nt = normalizeForSearch(target);
-    // 双方向: "伊根町"で"伊根"を検索 or "伊根"で"伊根町"を検索 どちらもOK
-    if (nt.includes(nq) || nq.includes(nt)) return true;
-  }
-  // クエリが複数語の場合（スペース区切り）すべて含まれるかチェック
-  const words = nq.split(/\s+/).filter(Boolean);
-  if (words.length > 1) {
-    const combined = targets.filter(Boolean).map(normalizeForSearch).join(" ");
-    return words.every((w) => combined.includes(w));
-  }
-  return false;
-}
-
-// スポットのテキスト検索一致。
-// 名前・エリア名は曖昧一致のままだが、県名は「前方一致」、住所は「県名部分を除いた上で部分一致」。
-// 県名・住所を素の部分一致にすると「京都」が「東京都」とその住所に一致し、
-// 京都府の検索結果が東京都のスポットで埋まる(2026-07-20実バグ)。
-// 前方一致なら「京都」→京都府のみ、「東京」→東京都のみ、「京都府」もそのまま拾える。
-// 住所は県名を除去することで「江東区」等の市区町村検索を維持しつつ県名誤ヒットを防ぐ。
-function spotSearchMatch(query: string, spot: ListSpot): boolean {
-  if (fuzzyMatch(query, spot.name, spot.region.areaName)) return true;
-  const nq = normalizeForSearch(query);
-  if (normalizeForSearch(spot.region.prefecture).startsWith(nq)) return true;
-  if (spot.address) {
-    const addrWithoutPref = normalizeForSearch(spot.address.replace(spot.region.prefecture, ""));
-    if (addrWithoutPref.includes(nq)) return true;
-  }
-  // 複数語クエリ（「千葉 サビキ」等）は従来どおり全フィールド結合で全語一致を判定
-  const words = nq.split(/\s+/).filter(Boolean);
-  if (words.length > 1) {
-    const combined = [spot.name, spot.region.areaName, spot.region.prefecture, spot.address || ""]
-      .map(normalizeForSearch)
-      .join(" ");
-    return words.every((w) => combined.includes(w));
-  }
-  return false;
-}
+// 検索マッチング（katakanaToHiragana / fuzzyMatch / spotSearchMatch）は
+// /api/search と共用するため src/lib/search/spot-match.ts に集約した
 
 function haversineDistance(
   lat1: number,
@@ -115,27 +64,41 @@ const FACILITY_OPTIONS: { key: FacilityKey; label: string }[] = [
   { key: "hasRentalRod", label: "レンタル竿" },
 ];
 
-export function SpotListClient({ spots, initialQuery = "" }: { spots: ListSpot[]; initialQuery?: string }) {
+export function SpotListClient({ spots }: { spots: ListSpot[] }) {
   // UX-3: URL query から filter 初期値を復元 (share/back/reload で復元可能に)
-  // useSearchParams() は使わない: Suspense 境界なしで呼ぶとページ全体が CSR へ
-  // バックアウトし、/spots の SSR HTML から本文・広告が消える（2026-07 判明）。
-  // SSR はデフォルト値で描画し、マウント後に window.location.search から復元する。
+  // useSearchParams() で初回レンダから URL の値を state に反映する。静的生成時は
+  // 空 params のまま page.tsx 側の Suspense fallback（サーバー描画の既定一覧）が
+  // SSR HTML に載るため、本文・広告が SSR から消える CSR バックアウト問題
+  // （2026-07 判明）は再発しない。
+  // 旧方式「マウント後に window.location.search から復元」には
+  // (1) クライアント遷移で URL 反映より先に mount effect が走り q を取り逃す
+  // (2) 同一ルートへの router.push('/spots?q=…') では remount されず反映されない
+  // (3) 取り逃した状態を 300ms 後の同期 effect が URL から消す
+  // という実バグがあった（2026-08 UX監査で特定）。
   const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  const [searchText, setSearchText] = useState(initialQuery);
+  const [searchText, setSearchText] = useState(() => searchParams.get("q") ?? "");
   const deferredSearchText = useDeferredValue(searchText);
   const [selectedRegion, setSelectedRegion] = useState<RegionKey | "">("");
-  const [selectedPrefecture, setSelectedPrefecture] = useState<string>("");
+  const [selectedPrefecture, setSelectedPrefecture] = useState<string>(() => searchParams.get("prefecture") ?? "");
   const [selectedArea, setSelectedArea] = useState<string>("");
-  const [selectedType, setSelectedType] = useState<ListSpot["spotType"] | "">("");
-  const [selectedDifficulty, setSelectedDifficulty] = useState<ListSpot["difficulty"] | "">("");
+  const [selectedType, setSelectedType] = useState<ListSpot["spotType"] | "">(() => (searchParams.get("type") ?? "") as ListSpot["spotType"] | "");
+  const [selectedDifficulty, setSelectedDifficulty] = useState<ListSpot["difficulty"] | "">(() => (searchParams.get("difficulty") ?? "") as ListSpot["difficulty"] | "");
   const [selectedFacilities, setSelectedFacilities] = useState<FacilityKey[]>([]);
   const [selectedFree, setSelectedFree] = useState<"" | "free" | "paid">("");
   const [selectedMethods, setSelectedMethods] = useState<string[]>([]);
   const [selectedFishNames, setSelectedFishNames] = useState<string[]>([]);
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(() => {
+    const p = Number.parseInt(searchParams.get("page") ?? "", 10);
+    return Number.isFinite(p) && p > 1 ? p : 1;
+  });
   const [isPending, startTransition] = useTransition();
+
+  // 自分が writeUrl で書いた URL を記録し、URL→state 同期 effect が自分の書き込みに
+  // 反応して入力中のテキストを巻き戻すのを防ぐ（打鍵 → デバウンス書き込み → effect の競合対策）
+  const lastWrittenUrlRef = useRef<string | null>(null);
 
   // URL を書き出す。router.replace ではなく History API を直接使う:
   // (1) router.replace は同一ルートでも RSC ペイロードを取りに行き、/spots のそれは
@@ -155,6 +118,9 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: ListSpot[]
       if (page > 1) params.set("page", String(page));
       const query = params.toString();
       const url = query ? `${pathname}?${query}` : pathname;
+      // 同一URLでも「自分の書き込み」として記録してから抜ける
+      // （URL→state 同期 effect の自己反応防止に使う）
+      lastWrittenUrlRef.current = url;
       // 同一URLなら何もしない。これがないと同期用の replace が
       // ページ送りで積んだ履歴エントリを潰してしまう
       if (url === window.location.pathname + window.location.search) return;
@@ -174,37 +140,21 @@ export function SpotListClient({ spots, initialQuery = "" }: { spots: ListSpot[]
     [writeUrl],
   );
 
-  // マウント後: URL query から filter / page を復元 (share/back/reload で復元可能に)
+  // URL → state 同期: ヘッダー検索の router.push（同一ルート・remount なし）、
+  // 戻る/進む、外部リンクなど「自分以外」が URL を変えたときに絞り込みへ反映する。
+  // useSearchParams は App Router の履歴統合により pushState/replaceState でも更新される。
+  // 自分の writeUrl 由来の変化は lastWrittenUrlRef で除外（入力巻き戻し防止）。
+  // 「URLに無い＝クリア」で上書きしないと、戻ったのに前の絞り込みが残る。
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const q = params.get("q");
-    if (q) setSearchText(q);
-    const prefecture = params.get("prefecture");
-    if (prefecture) setSelectedPrefecture(prefecture);
-    const type = params.get("type");
-    if (type) setSelectedType(type as ListSpot["spotType"]);
-    const difficulty = params.get("difficulty");
-    if (difficulty) setSelectedDifficulty(difficulty as ListSpot["difficulty"]);
-    const page = Number.parseInt(params.get("page") ?? "", 10);
-    if (Number.isFinite(page) && page > 1) setCurrentPage(page);
-  }, []);
-
-  // 戻る/進む: pushState は Next のマウント時 effect を再実行しないため、
-  // popstate で URL から state を復元する。マウント時と違い「URLに無い＝クリア」で
-  // 上書きしないと、戻ったのに前の絞り込みが残る
-  useEffect(() => {
-    const onPopState = () => {
-      const params = new URLSearchParams(window.location.search);
-      setSearchText(params.get("q") ?? "");
-      setSelectedPrefecture(params.get("prefecture") ?? "");
-      setSelectedType((params.get("type") ?? "") as ListSpot["spotType"] | "");
-      setSelectedDifficulty((params.get("difficulty") ?? "") as ListSpot["difficulty"] | "");
-      const page = Number.parseInt(params.get("page") ?? "", 10);
-      setCurrentPage(Number.isFinite(page) && page > 1 ? page : 1);
-    };
-    window.addEventListener("popstate", onPopState);
-    return () => window.removeEventListener("popstate", onPopState);
-  }, []);
+    const current = window.location.pathname + window.location.search;
+    if (lastWrittenUrlRef.current === current) return;
+    setSearchText(searchParams.get("q") ?? "");
+    setSelectedPrefecture(searchParams.get("prefecture") ?? "");
+    setSelectedType((searchParams.get("type") ?? "") as ListSpot["spotType"] | "");
+    setSelectedDifficulty((searchParams.get("difficulty") ?? "") as ListSpot["difficulty"] | "");
+    const page = Number.parseInt(searchParams.get("page") ?? "", 10);
+    setCurrentPage(Number.isFinite(page) && page > 1 ? page : 1);
+  }, [searchParams]);
 
   // UX-3: state 変更時に URL query を同期 (share/back/reload で復元可能に)
   // 打鍵ごとに書き換えると入力中の INP が悪化するため 300ms デバウンスする。
