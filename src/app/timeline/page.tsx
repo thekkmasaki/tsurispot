@@ -9,17 +9,19 @@ import { PreFooterAd } from "@/components/ads/ad-unit";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "みんなのタイムライン｜全国の釣果がリアルタイムに流れる",
+  title: "みんなのタイムライン｜全国の釣果が集まる",
   description:
-    "ツリスポのタイムライン。全国の釣り人の釣果投稿がリアルタイムに流れます。いいね・コメントで交流し、気になる釣り人をフォローしましょう。",
+    "ツリスポのタイムライン。全国の釣り人の釣果投稿が集まります。いいね・コメントで交流し、気になる釣り人をフォローしましょう。",
   robots: { index: false, follow: false },
 };
 
 export default function TimelinePage() {
   return (
     <main className="mx-auto w-full max-w-2xl px-4 py-8">
-      <div className="flex items-center justify-between gap-3">
-        <h1 className="flex items-center gap-2 text-xl font-bold">
+      {/* 狭い端末(〜360px)では見出しとボタンが1行に収まらず不自然な折返しになるため、
+          行ごと wrap させ、見出しは sm 未満で1段小さくする。 */}
+      <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
+        <h1 className="flex items-center gap-2 text-lg font-bold sm:text-xl">
           <Users className="size-5" aria-hidden="true" />
           みんなのタイムライン
         </h1>
@@ -32,8 +34,8 @@ export default function TimelinePage() {
           釣果を投稿
         </Link>
       </div>
-      <p className="mt-1 text-sm text-muted-foreground">
-        全国の釣果がリアルタイムに流れます。いいねやコメントで釣り仲間と交流しましょう。
+      <p className="mt-1 text-pretty text-sm text-muted-foreground">
+        全国の釣果が集まるタイムライン。いいねやコメントで釣り仲間と交流しましょう。
       </p>
 
       <div className="mt-4">

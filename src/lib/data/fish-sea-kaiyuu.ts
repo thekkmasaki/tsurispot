@@ -15,7 +15,6 @@ export const seaFishKaiyuu: FishSpecies[] = [
     difficulty: "intermediate",
     tasteRating: 4,
     sizeCm: "70~120cm",
-    imageUrl: "/images/fish/tachiuo.jpg",
     seasonMonths: [7, 8, 9, 10, 11, 12],
     peakMonths: [8, 9, 10, 11],
     cookingTips: ["塩焼き", "天ぷら", "刺身", "ムニエル"],

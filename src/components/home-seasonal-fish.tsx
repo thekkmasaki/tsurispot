@@ -15,7 +15,8 @@ interface SeasonalFish {
   category: "sea" | "freshwater" | "brackish";
   difficulty: "beginner" | "intermediate" | "advanced";
   description: string;
-  imageUrl: string;
+  /** 品質基準を満たす写真が無い魚種は未設定（FishImage がプレースホルダーへ落ちる） */
+  imageUrl?: string;
   peakMonths: number[];
   isPoisonous: boolean;
   poisonType?: string;

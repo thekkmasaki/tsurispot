@@ -68,6 +68,21 @@ export function trackAdFallback(placement: string | undefined, reason: "blocked"
 }
 
 /**
+ * no-fill（AdSense応答が「配信なし」）でハウス広告に差し替わった表示を、専用イベント名で送る。
+ * 同じ事象は ad_fallback にも reason='unfilled' として入るが、reason はカスタムディメンションの
+ * 登録が済むまで GA4 の探索で絞り込めない。イベント名を分けておくと登録前でも
+ * 「no-fill で失った面がどれだけハウス広告に置き換わったか」を単独で追える。
+ * blocked（スクリプト取得失敗）は在庫の話ではないのでここには含めない。
+ */
+export function trackHouseAdNoFill(placement: string | undefined) {
+  if (typeof window === "undefined" || typeof window.gtag !== "function") return;
+  window.gtag("event", "house_ad_nofill", {
+    ...(placement ? { ad_placement: placement } : {}),
+    ...(effectiveConnectionType() ? { net_effective_type: effectiveConnectionType() } : {}),
+  });
+}
+
+/**
  * fallback後に実広告が遅れてfillされ、HouseAdを撤去して復帰した時に送る（自己修復の記録）。
  * late_fill ÷ ad_fallback がそのまま「fallback誤発火率」になる＝本機能の安全性を直接観測する主指標。
  * （「AdSense表示回数÷PV」はpushが不変のため本機能の故障を検知できない。監視はこちらを使うこと）

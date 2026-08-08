@@ -345,7 +345,6 @@ export const seaFishIkaTako: FishSpecies[] = [
     difficulty: "intermediate",
     tasteRating: 5,
     sizeCm: "20~40cm（胴長）",
-    imageUrl: "/images/fish/kensaki-ika.jpg",
     seasonMonths: [5, 6, 7, 8, 9, 10, 11],
     peakMonths: [6, 7, 8, 9],
     cookingTips: ["刺身", "天ぷら", "イカそうめん", "一夜干し", "煮付け"],

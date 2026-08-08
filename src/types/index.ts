@@ -246,7 +246,9 @@ export interface FishSpecies {
   difficulty: "beginner" | "intermediate" | "advanced";
   tasteRating: number;
   sizeCm: string;
-  imageUrl: string;
+  /** 実写ヒーロー画像。品質基準を満たす写真が無い魚種は未設定にし、FishImage の
+   *  グラデーションプレースホルダーへフォールバックさせる（低品質画像を出さない）。 */
+  imageUrl?: string;
   seasonMonths: number[];
   peakMonths: number[];
   cookingTips: string[];
