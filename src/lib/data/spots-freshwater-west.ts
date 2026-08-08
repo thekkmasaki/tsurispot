@@ -104,7 +104,7 @@ export const freshwaterSpotsWest: FishingSpot[] = [
   // ===== 三重県 =====
   {
     id: "fw-088", name: "青蓮寺湖", slug: "shorenji-lake",
-    description: "三重県名張市にある青蓮寺ダムのダム湖。ブラックバスの穴場スポットとして知られ、50cmクラスの実績も。秋〜冬はワカサギ釣りも楽しめる。周囲は自然豊かでのんびりと釣りができる。",
+    description: "青蓮寺湖はブラックバスの穴場として知られる三重県名張市のダム湖。50cmクラスの実績もあり、ルアーでのバス釣りが盛ん。秋〜冬はワカサギ、周年でコイ・ヘラブナ・ブルーギルも狙える自然豊かなフィールド。遊漁券は1日1,000円。",
     latitude: 34.5994, longitude: 136.1128, address: "〒518-0443 三重県名張市青蓮寺",
     accessInfo: "名阪国道上野ICから約30分。近鉄名張駅から車で約15分。",
     region: lr("r714"), spotType: "river", difficulty: "intermediate",
