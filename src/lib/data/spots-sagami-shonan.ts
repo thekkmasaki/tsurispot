@@ -610,7 +610,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss17", name: "辻堂海岸", slug: "tsujido-beach",
-    description: "辻堂海浜公園前に広がる砂浜。サーフフィッシングでキスやヒラメが狙える広大なビーチ。駐車場やトイレなど設備が充実しており、初心者のサーフデビューにも最適。",
+    description: "辻堂海岸はキス・ヒラメが狙えるサーフの好ポイント。辻堂海浜公園前に広がる広大な砂浜で、初夏〜秋は投げ釣りでキス、晩秋〜春はルアーでヒラメ・マゴチ、夜はシーバスも。海浜公園の駐車場・トイレが充実し、初心者のサーフデビューにも最適。",
     latitude: 35.3190, longitude: 139.4470, address: "〒251-0046 神奈川県藤沢市辻堂西海岸3丁目",
     accessInfo: "JR辻堂駅南口からバス「辻堂海浜公園前」下車すぐ。",
     region: region("r7"), spotType: "beach", difficulty: "beginner",
