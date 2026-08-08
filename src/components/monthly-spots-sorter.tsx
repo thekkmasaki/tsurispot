@@ -124,7 +124,9 @@ export function MonthlySportsSorter({ spots, monthName }: MonthlySportsSorterPro
         const nearby = withDist.filter((s) => s.distance <= 150);
         return (nearby.length >= 3 ? nearby : withDist).slice(0, 10);
       })()
-    : spots
+    : [...spots]
+        // 位置情報なしの既定順は評価順（データ定義順のままだと特定地域が先頭に偏る）
+        .sort((a, b) => b.rating - a.rating)
         .slice(0, 10)
         .map((spot) => ({ ...spot, distance: null as number | null }));
 
@@ -145,7 +147,7 @@ export function MonthlySportsSorter({ spots, monthName }: MonthlySportsSorterPro
             ) : (
               <Navigation className="size-4" />
             )}
-            {loading ? "取得中..." : "現在地から近い順に表示"}
+            {loading ? "取得中..." : "現在地から近い順に並べ替え"}
           </Button>
           {error && (
             <p className="mt-1.5 text-xs text-red-600">{error}</p>

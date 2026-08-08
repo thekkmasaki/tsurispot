@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
 import { PlusCircle, ArrowRight } from "lucide-react";
 import { fishingSpots } from "@/lib/data/spots";
 import { SpotListClient } from "@/components/spots/spot-list-client";
+import { SpotListFallback } from "@/components/spots/spot-list-fallback";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { PageHeader } from "@/components/ui/page-header";
 import { InArticleAd } from "@/components/ads/ad-unit";
@@ -197,7 +199,11 @@ export default function SpotsPage() {
           <span className="sm:hidden">投稿</span>
         </Link>
       </div>
-      <SpotListClient spots={listSpots} />
+      {/* SpotListClient は useSearchParams() を使うため Suspense 境界が必須。
+          fallback は既定一覧のサーバー描画（SSR 本文の担保・CSRバックアウト再発防止） */}
+      <Suspense fallback={<SpotListFallback spots={listSpots} />}>
+        <SpotListClient spots={listSpots} />
+      </Suspense>
 
       {/* 初心者CTA */}
       <div className="mt-8 rounded-2xl border-2 border-emerald-200 bg-gradient-to-r from-emerald-50 to-teal-50 p-5 sm:p-6">

@@ -3,12 +3,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 import { blogPosts } from "@/lib/data/blog";
 
-// カタカナ → ひらがな変換
-function katakanaToHiragana(str: string): string {
-  return str.replace(/[\u30A1-\u30F6]/g, (ch) =>
-    String.fromCharCode(ch.charCodeAt(0) - 0x60)
-  );
-}
+import { katakanaToHiragana } from "@/lib/search/spot-match";
 
 type SearchItemType = "spot" | "fish" | "guide" | "blog" | "tool";
 
@@ -171,7 +166,14 @@ export async function GET(request: NextRequest) {
   // searchTextはクライアントに送る必要がないので除外
   const response = results.map(({ searchText: _st, ...rest }) => rest);
 
+  // スポットは5件キャップで返すため、総ヒット数をヘッダーで渡す
+  // （オーバーレイの「全N件を見る → /spots?q=」導線用。bodyの形は既存互換のまま）
+  const spotTotal = matched.reduce((n, m) => (m.type === "spot" ? n + 1 : n), 0);
+
   return NextResponse.json(response, {
-    headers: { "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400" },
+    headers: {
+      "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=86400",
+      "X-Spot-Total": String(spotTotal),
+    },
   });
 }

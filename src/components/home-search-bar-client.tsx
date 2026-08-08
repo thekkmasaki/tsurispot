@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Search, MapPin, Fish, BookOpen, FileText, Wrench, LoaderCircle } from "lucide-react";
-import type { SearchItemType } from "@/lib/data/search-index";
+import type { SearchItemType } from "@/lib/search/search-types";
 
 // API レスポンスの型（searchText を除いた SearchItem）
 interface SearchResult {
