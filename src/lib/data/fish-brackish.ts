@@ -164,7 +164,6 @@ export const brackishFish: FishSpecies[] = [
     difficulty: "beginner",
     tasteRating: 3,
     sizeCm: "15~25cm",
-    imageUrl: "/images/fish/konoshiro.jpg",
     seasonMonths: [3, 4, 5, 6, 7, 8, 9, 10, 11],
     peakMonths: [9, 10, 11],
     cookingTips: ["酢締め", "唐揚げ", "天ぷら", "南蛮漬け"],

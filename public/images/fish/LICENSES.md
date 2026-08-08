@@ -5,13 +5,9 @@
 
 | ファイル | 魚種 | 出典（Wikimedia Commons） | ライセンス | 作者 |
 |---------|------|--------------------------|-----------|------|
-| aji.jpg | アジ | 202408_Japanese_jack_mackerel.svg | CC BY 4.0 | DataBase Center for Life Science (DBCLS) |
 | saba.jpg | サバ | 202408_Chub_mackerel.svg | CC BY 4.0 | DataBase Center for Life Science (DBCLS) |
 | kasago.jpg | カサゴ | Sebastiscus_marmoratus_by_OpenCage.jpg | CC BY-SA 2.5 | OpenCage |
-| mebaru.jpg | メバル | FMIB_52977_Sebastes_inermis.jpeg | Public domain | - |
-| iwashi.jpg | イワシ | Sardinops_melanosticta_(Temminck_and_Schlegel)_-_Kawahara_Keiga | Public domain | Kawahara Keiga |
 | seabass.jpg | シーバス | Lateolabrax_japonicus_Iwaki.jpg | CC BY-SA 4.0 | Wikimedia Commons contributor |
-| tachiuo.jpg | タチウオ | Trichiurus_lepturus.jpg | Public domain | - |
 | kurodai.jpg | クロダイ | Acanthopagrus_schlegelii.JPG | CC BY-SA 3.0 | Wikimedia Commons contributor |
 | madai.jpg | マダイ | Pagrus_major_Red_seabream_ja01.jpg | CC BY-SA 3.0 | Wikimedia Commons contributor |
 | kisu.jpg | キス | Sillago_japonica.jpg | Public domain | - |
@@ -24,7 +20,6 @@
 | inada.jpg | イナダ | Seriola_quinqueradiata.jpg | CC BY 4.0 | re_nebel |
 | kamasu.jpg | カマス | Sphyraena_pinguis.jpeg | Public domain | Günther |
 | nijimasu.jpg | ニジマス | Oncorhynchus_mykiss.jpg | Public domain | Eric Engbretson / U.S. Fish and Wildlife Service |
-| yamame.jpg | ヤマメ | Yamame.jpg | Copyrighted free use | - |
 | madako.jpg | マダコ | Octopus_vulgaris_02.JPG | CC BY-SA 3.0 | Wikimedia Commons contributor |
 | yariika.jpg | ヤリイカ | Heterololigo_bleekeri_in_Sendai_Umino-Mori_Aquarium.jpg | CC0 | Wikimedia Commons contributor |
 | surumeika.jpg | スルメイカ | Todarodes_pacificus.jpg | CC BY-SA 3.0 | Wikimedia Commons contributor |
@@ -48,7 +43,6 @@
 | shimaaji.jpg | シマアジ | Pseudocaranx_dentex_211937492.jpg | CC BY 4.0 | Susan Prior |
 | houbou.jpg | ホウボウ | Chelidonichthys_spinosus_Arrábida.jpg | CC BY-SA 4.0 | Diego Delso |
 | eso.jpg | エソ | Synodus_variegatus_Zanzibar.jpg | CC BY-SA 4.0 | Diego Delso |
-| konoshiro.jpg | コノシロ | Konosirus_punctatus2.jpeg | Public domain | Temminck and Schlegel |
 | bera.jpg | ベラ | Halichoeres_poecilopterus_Kinosaki.jpg | CC BY-SA 4.0 | Totti |
 | umitanago.jpg | ウミタナゴ | UmiTG.jpg | CC BY-SA 3.0 | Izuzuki |
 | fugu.jpg | フグ | Takifugu_rubripes_Kamo_aquarium2.jpg | CC BY-SA 4.0 | Totti |

@@ -800,13 +800,19 @@ function FishResultCard({
         <div className="flex flex-col sm:flex-row">
           {/* Fish image */}
           <div className="relative w-full sm:w-40 h-36 sm:h-auto bg-gray-100 shrink-0">
-            <Image
-              src={fish.imageUrl}
-              alt={fish.name}
-              fill
-              className="object-cover"
-              sizes="(max-width: 640px) 100vw, 160px"
-            />
+            {fish.imageUrl ? (
+              <Image
+                src={fish.imageUrl}
+                alt={fish.name}
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 160px"
+              />
+            ) : (
+              <div className="flex size-full items-center justify-center bg-gradient-to-br from-cyan-50 to-sky-100">
+                <Fish className="size-10 text-sky-300" aria-hidden="true" />
+              </div>
+            )}
             {/* Season badge */}
             {isPeak ? (
               <div className="absolute top-2 left-2">

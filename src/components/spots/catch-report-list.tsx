@@ -2,8 +2,8 @@
 
 import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { Fish, Calendar, User, Ruler, Flag, Share2, MessageCircle } from "lucide-react";
+import { CatchPhoto } from "@/components/ui/spot-image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "@/components/ui/toast";
@@ -158,20 +158,7 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
               )
             )}
             <div className="flex items-start gap-3">
-              {report.photoUrl ? (
-                <Image
-                  src={report.photoUrl}
-                  alt={`${report.fishName}の釣果写真`}
-                  width={80}
-                  height={80}
-                  className="size-20 shrink-0 rounded-lg border object-cover"
-                  unoptimized
-                />
-              ) : (
-                <div className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-emerald-100">
-                  <Fish className="size-4 text-emerald-600" />
-                </div>
-              )}
+              <CatchPhoto src={report.photoUrl} alt={`${report.fishName}の釣果写真`} />
               <div className="min-w-0 flex-1">
                 <p className="text-sm font-medium leading-snug">
                   {report.tsuriId ? (

@@ -6,6 +6,7 @@ import {
   trackAdEvent,
   trackAdFallback,
   trackAdFallbackLateFill,
+  trackHouseAdNoFill,
   markAdSlotPending,
   resolveAdSlotPending,
 } from "@/lib/ads-tracking";
@@ -282,6 +283,8 @@ export function AdUnit({
         fellBackAtRef.current = Date.now();
         setFellBack(true);
         trackAdFallback(placement, outcome);
+        // no-fill 由来の差し替えだけ専用イベントでも送る（在庫不足の量をディメンション登録前でも追うため）
+        if (outcome === "unfilled") trackHouseAdNoFill(placement);
         notify("empty");
       }
     };
@@ -557,15 +560,35 @@ export function HeaderBannerAd() {
 }
 
 // ---- 左右固定サイドバナー広告（kabutan.jp式、PCワイド画面のみ） ----
+// 実レイアウトの最大コンテンツ幅。最も広いページ(/spots 等)は Tailwind の `container` を使い、
+// v4 のデフォルト --breakpoint-2xl: 96rem がそのまま max-width になる（tailwind.config は無く
+// globals.css の @theme にも breakpoint 上書きは無い＝96rem=1536px が実効値）。
+// 旧実装は 1280px 前提だったため、container 幅のページで左レールがフィルタUIに被っていた。
+const CONTENT_MAX = 1536;
+// レール1本 160px + コンテンツとの間隔 16px = 176px を左右に確保できる幅で初めて表示する。
+// 1536 + 176*2 = 1888px。
+const SIDE_RAIL_MIN_WIDTH = CONTENT_MAX + 176 * 2;
+// レールの外側位置。コンテンツ左端 (100vw - CONTENT_MAX)/2 から 176px 内側に置く。
+// 画面が最小ゲート幅ぴったりの時に 0 以下へ落ちないよう 8px で下限を切る。
+const SIDE_RAIL_OFFSET = `max(8px, calc((100vw - ${CONTENT_MAX}px) / 2 - 176px))`;
+
+// 被らないことの検算（1920px モニタの最大化ウィンドウ）:
+//  - スクロールバー有り: MQ幅=1903 → 表示。100vw は既定でスクロールバーを含む(=1920)ため
+//    left = max(8, (1920-1536)/2 - 176) = 16px。レールは 16〜176px を占める。
+//    コンテンツ左端は (1903-1536)/2 = 183.5px → 7.5px の余白が残り重ならない。
+//  - スクロールバー無し(1920): left = 16px、コンテンツ左端 192px → 16px の余白。
+//  - ゲート境界 1888px ちょうど: left = 8px（下限）、コンテンツ左端 176px → 8px の余白。
+// いずれも余白は正のままで、かつ 1888 < 1903 なので 1920px ユーザーを弾かない
+// （ゲートを 1900px 超にすると Windows のスクロールバー分で 1920 ユーザーが漏れる）。
 export function SideRailAds() {
   const [wide, setWide] = useState(false);
 
   // CSS の display 制御だとコンポーネントは常時マウントされ、各 AdUnit が
-  // ResizeObserver を張ってしまう。matchMedia でゲートして 1680px 未満では
+  // ResizeObserver を張ってしまう。matchMedia でゲートして SIDE_RAIL_MIN_WIDTH 未満では
   // DOM 自体を出さず、observer 生成・AdSense push も発生させない。
   useEffect(() => {
     if (typeof window === "undefined") return;
-    const mq = window.matchMedia("(min-width: 1680px)");
+    const mq = window.matchMedia(`(min-width: ${SIDE_RAIL_MIN_WIDTH}px)`);
     const update = () => setWide(mq.matches);
     update();
     mq.addEventListener("change", update);
@@ -576,10 +599,10 @@ export function SideRailAds() {
 
   return (
     <>
-      {/* 左サイドレール: 1680px以上でのみ表示（コンテンツ1280px+広告160px×2+余白80px） */}
+      {/* 左サイドレール（表示条件と位置は上の定数コメントの検算どおり） */}
       <div
         className="fixed top-1/2 -translate-y-1/2 z-40"
-        style={{ left: "max(8px, calc((100vw - 1280px) / 2 - 176px))" }}
+        style={{ left: SIDE_RAIL_OFFSET }}
       >
         <div className="w-[160px]">
           <AdUnit
@@ -594,7 +617,7 @@ export function SideRailAds() {
       {/* 右サイドレール */}
       <div
         className="fixed top-1/2 -translate-y-1/2 z-40"
-        style={{ right: "max(8px, calc((100vw - 1280px) / 2 - 176px))" }}
+        style={{ right: SIDE_RAIL_OFFSET }}
       >
         <div className="w-[160px]">
           <AdUnit

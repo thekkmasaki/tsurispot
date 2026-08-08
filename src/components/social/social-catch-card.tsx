@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { Fish, Calendar, MapPin, Ruler, MessageCircle } from "lucide-react";
+import { CatchPhoto } from "@/components/ui/spot-image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { LikeButton } from "@/components/social/like-button";
@@ -88,37 +88,15 @@ export function SocialCatchCard({
                 {post.sizeCm ? ` ${post.sizeCm}cm` : ""}
               </span>
             )}
-            {post.photoUrl && (
-              <Link prefetch={false} href={permalink} className="block">
-                <Image
-                  src={post.photoUrl}
-                  alt="投稿写真"
-                  width={640}
-                  height={360}
-                  className="mt-2 max-h-72 w-full rounded-xl border object-cover"
-                  unoptimized
-                />
-              </Link>
-            )}
+            <CatchPhoto variant="wide" src={post.photoUrl} alt="投稿写真" href={permalink} />
           </div>
         ) : (
         <div className="mt-2 flex items-start gap-3">
-          {post.photoUrl ? (
-            <Link prefetch={false} href={permalink} className="shrink-0">
-              <Image
-                src={post.photoUrl}
-                alt={`${post.fishName}の釣果写真`}
-                width={80}
-                height={80}
-                className="size-20 rounded-lg border object-cover"
-                unoptimized
-              />
-            </Link>
-          ) : (
-            <div className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full bg-emerald-100">
-              <Fish className="size-4 text-emerald-600" aria-hidden="true" />
-            </div>
-          )}
+          <CatchPhoto
+            src={post.photoUrl}
+            alt={`${post.fishName}の釣果写真`}
+            href={post.photoUrl ? permalink : undefined}
+          />
           <div className="min-w-0 flex-1">
             <Link prefetch={false} href={permalink} className="hover:underline">
               <p className="text-sm font-bold">
