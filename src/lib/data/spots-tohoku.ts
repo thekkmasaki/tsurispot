@@ -846,7 +846,7 @@ export const tohokuSpots: FishingSpot[] = [
   },
   {
     id: "s1069", name: "閖上港", slug: "yuriage-port",
-    description: "名取川河口に位置する仙台近郊の人気釣りスポット。閖上朝市で有名で、ハゼやシーバスの好ポイント。サーフからはヒラメも狙える。",
+    description: "閖上港は名取川河口に位置する仙台近郊の人気釣りスポットで、ハゼやシーバスの好釣果ポイント。閖上朝市でも有名。サーフからはヒラメも狙える。",
     latitude: 38.1780, longitude: 140.9560,
     address: "〒981-1204 宮城県名取市閖上東須賀",
     accessInfo: "JR仙台駅から車で約30分。仙台東部道路名取ICから約10分。",

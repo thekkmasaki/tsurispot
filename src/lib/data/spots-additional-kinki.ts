@@ -372,7 +372,7 @@ export const additionalSpotsKinki: FishingSpot[] = [
     name: "舞鶴親海公園",
     slug: "maizuru-shinkai-park",
     officialUrl: "https://www.city.maizuru.kyoto.jp/kurashi/0000009016.html",
-    description: "舞鶴市にある無料の海釣り公園。若狭湾に面し、アジやアオリイカの実績が高い。公園内に釣り桟橋があり足場良好。海軍ゆかりの港町観光も楽しめる。",
+    description: "舞鶴親海公園は若狭湾に面した無料の海釣り公園で、アジやアオリイカの釣果実績が高い。公園内に釣り桟橋があり足場良好。海軍ゆかりの港町観光も楽しめる。",
     latitude: 35.48670,
     longitude: 135.321400,
     address: "〒625-0135 京都府舞鶴市千歳897",

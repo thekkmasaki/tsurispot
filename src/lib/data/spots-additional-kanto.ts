@@ -815,7 +815,7 @@ export const additionalSpotsKanto: FishingSpot[] = [
   },
   {
     id: "s203", name: "大洗・大洗港堤防", slug: "oarai-teiho",
-    description: "茨城を代表する釣り場。アジ・ヒラメ・シーバスなど多彩な魚種が狙え、年間を通じて釣り人が絶えない。",
+    description: "大洗港の堤防は茨城を代表する人気の釣り場で、アジ・ヒラメ・シーバスなど多彩な魚種が狙える。堤防から周年釣りが楽しめ、年間を通じて釣り人が絶えない。",
     latitude: 36.3150, longitude: 140.5825, address: "〒311-1301 茨城県大洗町磯浜町",
     accessInfo: "鹿島臨海鉄道大洗駅から徒歩15分。北関東自動車道水戸大洗ICから約10分。", region: region("r20"),
     spotType: "breakwater", difficulty: "beginner", isFree: true,
