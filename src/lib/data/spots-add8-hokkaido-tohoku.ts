@@ -390,7 +390,7 @@ export const hokkaidoTohokuAdd8Spots: FishingSpot[] = [
   },
   {
     id: "se8019", name: "網走港第4ふ頭", slug: "abashiri-daisi-futo-e8",
-    description: "網走川河口に位置し、オホーツク海の恵みが集まる釣り場。夏のカレイやチカ、秋のサケ回遊で人気。港内は足場が良く、初心者でも快適に過ごせる。",
+    description: "網走港はカレイ・ホッケ・クロソイが狙えるオホーツクの釣り場。網走川河口の第4ふ頭にあり、夏はカレイやイワシ、春はホッケ、夜はクロソイのワームが楽しめる。駐車場・トイレを備え、足場が良く初心者でも快適に釣行できる無料の港。",
     latitude: 44.020, longitude: 144.282,
     address: "〒093-0003 北海道網走市南3条東",
     accessInfo: "JR網走駅から車で約10分",
@@ -2011,7 +2011,7 @@ export const hokkaidoTohokuAdd8Spots: FishingSpot[] = [
   },
   {
     id: "se8111", name: "東松島野蒜海岸", slug: "higashimatsushima-nobiru-e8",
-    description: "東松島市の太平洋に面した砂浜で、キスの投げ釣りとカレイが主なターゲット。松島湾の東に位置し、秋のサーフルアーではヒラメの実績もある。",
+    description: "野蒜海岸はキス・カレイ・ヒラメが狙える宮城のサーフ。東松島市の太平洋に面した砂浜で、夏はキスの投げ釣り、春はカレイ、秋のサーフルアーではヒラメの実績もある。松島湾の東に位置し、駐車場とトイレを備えた足場の良い無料の釣り場。",
     latitude: 38.358, longitude: 141.128,
     address: "〒981-0411 宮城県東松島市野蒜",
     accessInfo: "JR野蒜駅から徒歩約15分",
