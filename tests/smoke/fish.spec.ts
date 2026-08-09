@@ -16,7 +16,8 @@ test.describe("Fish images smoke", () => {
   test("複数魚種の画像が全て異なる (同一 fallback を返していない)", async ({
     request,
   }) => {
-    const fishSlugs = ["aji", "iwashi", "nijimasu", "blackbass", "kurodai"];
+    // aji/iwashi等7枚は低品質のため削除済み（PR#401）。現存する実写画像のみを対象にする。
+    const fishSlugs = ["madai", "kisu", "nijimasu", "blackbass", "kurodai"];
     const md5s = new Set<string>();
     for (const slug of fishSlugs) {
       const r = await request.get(`${BASE}/images/fish/${slug}.jpg`);
