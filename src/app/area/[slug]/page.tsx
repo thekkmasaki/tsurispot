@@ -11,6 +11,7 @@ import { AreaSpotList } from "@/components/area/area-spot-list";
 import { toListSpot } from "@/lib/data/list-spot";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { composeMetaDescription, joinNames } from "@/lib/seo/meta-description";
+import { monthSlugs } from "@/lib/data/monthly-guides";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -221,6 +222,7 @@ export default async function AreaDetailPage({ params }: PageProps) {
   const spots = getSpotsForRegion(region.id);
   const catchableFish = getCatchableFishForRegion(region.id);
   const description = generateAreaDescription(region, spots);
+  const currentMonth = new Date().getMonth() + 1; // 1-12（ビルド時固定・既存の季節導線と同方式）
 
   // Find other regions in the same prefecture for internal linking
   const samePreRegions = regions.filter(
@@ -515,6 +517,22 @@ export default async function AreaDetailPage({ params }: PageProps) {
           </div>
         </section>
       )}
+
+      {/* 時期からの回遊導線 */}
+      <section className="mt-8 sm:mt-12">
+        <h2 className="mb-3 text-base font-bold sm:text-lg">時期から探す</h2>
+        <div className="flex flex-wrap gap-3">
+          <Link prefetch={false} href={`/monthly/${monthSlugs[currentMonth - 1]}`} className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted">
+            {currentMonth}月に釣れる魚 →
+          </Link>
+          <Link prefetch={false} href="/catchable-now" className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted">
+            今釣れる魚 →
+          </Link>
+          <Link prefetch={false} href="/fishing-calendar" className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted">
+            釣りカレンダー →
+          </Link>
+        </div>
+      </section>
     </div>
   );
 }
