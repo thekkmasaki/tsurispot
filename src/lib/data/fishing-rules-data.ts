@@ -36,6 +36,8 @@ export interface PrefectureFishingRule {
   referenceText: string;
   /** 公式ルールページURL */
   referenceUrl?: string;
+  /** referenceUrl を当サイトが最後に実アクセスで確認した日（YYYY-MM-DD）。URL追加・再確認時に必ず更新する */
+  lastVerified?: string;
   /** 海面の釣りルール */
   seaRules?: SeaFishingRules;
 }

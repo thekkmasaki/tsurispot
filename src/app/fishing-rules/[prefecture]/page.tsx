@@ -137,7 +137,8 @@ export default async function PrefectureFishingRulesPage({ params }: Props) {
       : `${pref.name}の禁漁期間・遊漁券・釣りルール｜川釣り・渓流釣りの規制情報`,
     description: `${pref.name}で釣りをする前に知っておきたいルールと規制。${hasSea ? "釣り禁止区域、タコ・貝類の漁業権、" : ""}禁漁期間、遊漁券が必要な河川、サイズ制限に関する注意事項を解説。`,
     datePublished: "2025-06-01",
-    dateModified: new Date().toISOString().split("T")[0],
+    // ビルド日を毎回入れると「常に今日更新」という偽装になるため、実際に出典を確認した日のみ出す
+    ...(rule?.lastVerified && { dateModified: rule.lastVerified }),
     author: {
       "@type": "Organization",
       name: "ツリスポ編集部",
@@ -621,6 +622,11 @@ export default async function PrefectureFishingRulesPage({ params }: Props) {
                   )}
                   <p className="mt-2 text-xs text-muted-foreground">
                     管轄: {rule.authority}
+                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    {rule.lastVerified
+                      ? `当サイト確認日: ${rule.lastVerified}。規則は変更されることがあります。釣行前に必ず公式情報をご確認ください。`
+                      : "規則は変更されることがあります。釣行前に必ず管轄機関の最新情報をご確認ください。"}
                   </p>
                 </CardContent>
               </Card>
