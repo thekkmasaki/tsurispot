@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { Copy, Instagram } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Copy, Instagram, Share2 } from "lucide-react";
 
 interface ShareButtonsProps {
   url: string;
@@ -10,6 +10,14 @@ interface ShareButtonsProps {
 
 export function ShareButtons({ url, title }: ShareButtonsProps) {
   const [copied, setCopied] = useState(false);
+  // navigator.share はSSRに存在しないため、マウント後に判定してから出す（hydration不一致回避）
+  const [canNativeShare, setCanNativeShare] = useState(false);
+
+  useEffect(() => {
+    if (typeof navigator !== "undefined" && typeof navigator.share === "function") {
+      setCanNativeShare(true);
+    }
+  }, []);
 
   const encodedUrl = encodeURIComponent(url);
   const encodedTitle = encodeURIComponent(title);
@@ -25,8 +33,25 @@ export function ShareButtons({ url, title }: ShareButtonsProps) {
     });
   }
 
+  function handleNativeShare() {
+    // ユーザーがキャンセルすると AbortError で reject するので握りつぶす
+    navigator.share({ title, url }).catch(() => {});
+  }
+
   return (
     <div className="relative flex flex-wrap items-center gap-3">
+      {/* ネイティブ共有シート（対応端末のみ。スマホはこれが最短経路） */}
+      {canNativeShare && (
+        <button
+          onClick={handleNativeShare}
+          aria-label="共有"
+          className="flex h-11 items-center justify-center gap-1.5 rounded-full bg-primary px-4 text-sm font-medium text-primary-foreground opacity-100 hover:opacity-80 transition-opacity"
+        >
+          <Share2 className="h-4 w-4" />
+          共有
+        </button>
+      )}
+
       {/* X (Twitter) */}
       <button
         onClick={() =>
