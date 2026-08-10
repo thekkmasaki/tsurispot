@@ -151,7 +151,7 @@ export const freshwaterSpots: FishingSpot[] = [
   },
   {
     id: "fw-002", name: "琵琶湖北湖（長浜エリア）", slug: "biwako-kitako-nagahama",
-    description: "琵琶湖北湖は水深が深く大型バスが潜む。長浜エリアはおかっぱりポイントが豊富で、姉川河口や豊公園が有名。冬はワカサギも楽しめる。",
+    description: "琵琶湖北湖・長浜は大型バスのバス釣り釣果で知られる好ポイント。水深が深く、姉川河口や豊公園などおかっぱりから狙える実績エリアが豊富。ブルーギルやハスも数釣りで楽しめ、初夏から秋がバス釣りの盛期で大型狙いにも好機。",
     latitude: 35.3781, longitude: 136.2692, address: "〒526-0067 滋賀県長浜市港町4-17",
     accessInfo: "北陸自動車道長浜ICから約10分。JR長浜駅から徒歩約5分（豊公園）。",
     region: lr("r601"), spotType: "river", difficulty: "intermediate",
