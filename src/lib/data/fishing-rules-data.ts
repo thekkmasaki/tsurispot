@@ -36,6 +36,8 @@ export interface PrefectureFishingRule {
   referenceText: string;
   /** 公式ルールページURL */
   referenceUrl?: string;
+  /** referenceUrl を当サイトが最後に実アクセスで確認した日（YYYY-MM-DD）。URL追加・再確認時に必ず更新する */
+  lastVerified?: string;
   /** 海面の釣りルール */
   seaRules?: SeaFishingRules;
 }
@@ -77,6 +79,7 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     authority: "北海道",
     referenceText: "北海道の釣り・遊漁に関するルール・マナーは北海道庁の公式ページで確認できます。サケの河口規制、漁業権対象種、禁漁期間など詳細が掲載されています。",
     referenceUrl: "https://www.pref.hokkaido.lg.jp/sr/ggk/ggs/turi-r-m/rule-manner.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "ケガニ（毛ガニ）は全道で漁業権の対象。遊漁者の採捕は禁止されています。",
@@ -126,6 +129,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "青森県",
     referenceText: "青森県の内水面漁業調整規則は青森県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.aomori.lg.jp/soshiki/nourin/sshinko/suisan_yugyo_umituri.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "ナマコは全域で漁業権の対象。遊漁者の採取は禁止されています。",
@@ -171,6 +176,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "岩手県",
     referenceText: "岩手県の内水面漁業調整規則は岩手県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.iwate.jp/sangyoukoyou/suisan/1035462/index.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "アワビ・ウニは三陸沿岸全域で漁業権の対象。採取は密漁となります。",
@@ -214,6 +221,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "宮城県",
     referenceText: "宮城県の内水面漁業調整規則は宮城県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.miyagi.jp/soshiki/suishin/umiduri.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "カキ・ワカメ・ノリは養殖漁業権が設定されています。養殖施設に近づかないでください。",
@@ -258,6 +267,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "秋田県",
     referenceText: "秋田県の内水面漁業調整規則は秋田県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.akita.lg.jp/pages/archive/1914",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "タコは一部海域で漁業権が設定されています。タコ釣りの可否を事前に確認してください。",
@@ -301,6 +312,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "山形県",
     referenceText: "山形県の内水面漁業調整規則は山形県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.yamagata.jp/140033/sangyo/nourinsuisangyou/suisan/tyouseikisoku.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "タコは庄内地方の沿岸で漁業権が設定されているエリアがあります。タコ釣りの可否を事前に確認してください。",
@@ -341,6 +354,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "福島県",
     referenceText: "福島県の内水面漁業調整規則は福島県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.fukushima.lg.jp/sec/36490a/suisanjouhou10.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "アワビ・ウニは漁業権の対象。いわき沿岸を含め採取は密漁となります。",
@@ -381,6 +396,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "茨城県",
     referenceText: "茨城県の内水面漁業調整規則は茨城県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.ibaraki.jp/koho/kurashi-qanda/kyoiku-bunka/yoka-recreation/umituri.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "ハマグリは鹿島灘で漁業権が設定されています。潮干狩りでの採取は密漁となります。",
@@ -424,6 +441,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "栃木県",
     referenceText: "栃木県の内水面漁業調整規則は栃木県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.tochigi.lg.jp/g02/suisan/r6gyogyouken.html",
+    lastVerified: "2026-08-10",
   },
   {
     prefSlug: "gunma",
@@ -442,6 +461,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "群馬県",
     referenceText: "群馬県の内水面漁業調整規則は群馬県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.gunma.jp/page/217085.html",
+    lastVerified: "2026-08-10",
   },
   {
     prefSlug: "saitama",
@@ -460,6 +481,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "埼玉県",
     referenceText: "埼玉県の内水面漁業調整規則は埼玉県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.saitama.lg.jp/a0904/kisoku/index.html",
+    lastVerified: "2026-08-10",
   },
   {
     prefSlug: "chiba",
@@ -479,6 +502,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "千葉県",
     referenceText: "千葉県の漁業調整規則は千葉県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.chiba.lg.jp/suisan/makiesa.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "アワビ・サザエは千葉県全域で漁業権の対象。採取は密漁となり厳しく取り締まられています。",
@@ -524,6 +549,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "東京都",
     referenceText: "東京都の内水面漁業調整規則は東京都庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.sangyo-rodo.metro.tokyo.lg.jp/nourin/suisan/yuugyo/recreation/sea",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "伊豆諸島ではイセエビ・サザエ・トコブシは漁業権の対象。採取は密漁となります。",
@@ -567,6 +594,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "神奈川県",
     referenceText: "神奈川県の漁業調整規則は神奈川県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.kanagawa.jp/docs/kb2/cnt/f790/p8874.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "イセエビは相模湾沿岸で漁業権が設定されています。遊漁者の採捕は禁止です。",
@@ -616,6 +645,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "新潟県",
     referenceText: "新潟県の漁業調整規則は新潟県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.niigata.lg.jp/sec/suisan/1229889672774.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "サザエ・アワビ・ウニは全域で漁業権の対象。採取すると密漁となります。",
@@ -659,6 +690,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "富山県",
     referenceText: "富山県の漁業調整規則は富山県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.toyama.jp/1615/kurashi/sportsleisure/leisure/kj00014689.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "ホタルイカは漁業権の対象。ただし素手での少量捕獲は一部海岸で黙認されている場合もありますが、網やたも使用は違反となる可能性があります。",
@@ -701,6 +734,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "石川県",
     referenceText: "石川県の漁業調整規則は石川県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.ishikawa.lg.jp/suisanka/gyogyoutyouseikisoku/tyouseikisoku.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "サザエ・アワビ・ウニは全域で漁業権の対象。採取すると密漁となります。",
@@ -742,6 +777,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "福井県",
     referenceText: "福井県の漁業調整規則は福井県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://info.pref.fukui.lg.jp/suisan/rlmn/umi/rule/chousei-kisoku.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "サザエ・アワビ・ウニは全域で漁業権の対象。採取すると密漁となります。",
@@ -785,6 +822,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "山梨県",
     referenceText: "山梨県の内水面漁業調整規則は山梨県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.yamanashi.jp/shokusui/86113308216.html",
+    lastVerified: "2026-08-10",
   },
   {
     prefSlug: "nagano",
@@ -805,6 +844,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "長野県",
     referenceText: "長野県の内水面漁業調整規則は長野県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.nagano.lg.jp/enchiku/sangyo/nogyo/engei-suisan/suisan/2020tyouseikisoku/2020tyouseikisoku.html",
+    lastVerified: "2026-08-10",
   },
   {
     prefSlug: "gifu",
@@ -823,6 +864,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "岐阜県",
     referenceText: "岐阜県の内水面漁業調整規則は岐阜県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.gifu.lg.jp/page/5270.html",
+    lastVerified: "2026-08-10",
   },
   {
     prefSlug: "shizuoka",
@@ -842,6 +885,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "静岡県",
     referenceText: "静岡県の漁業調整規則は静岡県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.shizuoka.jp/sangyoshigoto/suisan/suisanshigen/1047550/1028113.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "サクラエビは駿河湾の漁業権対象。一般の採取は禁止です。",
@@ -887,6 +932,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "愛知県",
     referenceText: "愛知県の漁業調整規則は愛知県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.aichi.jp/soshiki/suisan/0000003320.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "アサリは三河湾・知多半島全域で漁業権の対象。許可された潮干狩り場以外での採取は密漁です。",
@@ -929,6 +976,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "三重県",
     referenceText: "三重県の漁業調整規則は三重県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.mie.lg.jp/SUISAN/HP/38869033664.htm",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "イセエビは三重県全域で漁業権の対象。一般の採取は厳禁です。違反すると厳しく罰せられます。",
@@ -973,6 +1022,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "滋賀県",
     referenceText: "滋賀県の内水面漁業調整規則は滋賀県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.shiga.lg.jp/ippan/shigotosangyou/suisan/18705.html",
+    lastVerified: "2026-08-10",
   },
   {
     prefSlug: "kyoto",
@@ -990,6 +1041,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "京都府",
     referenceText: "京都府の漁業調整規則は京都府庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.kyoto.jp/suiji/12400023.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "サザエ・アワビ・ウニは全域で漁業権の対象。採取すると密漁となります。",
@@ -1029,6 +1082,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "大阪府",
     referenceText: "大阪府の漁業調整規則は大阪府庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.osaka.lg.jp/o120130/suisan/ru-ru/index.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "タコは大阪湾の一部海域で漁業権が設定されています。特に泉南地域の磯場周辺は注意。",
@@ -1069,6 +1124,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "兵庫県",
     referenceText: "兵庫県の漁業調整規則は兵庫県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://web.pref.hyogo.lg.jp/nk16/gyosei.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "明石のタコは漁業権の対象。明石海峡周辺でのタコ釣り（タコエギ・タコテンヤ含む）は禁止されています。",
@@ -1115,6 +1172,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "奈良県",
     referenceText: "奈良県の内水面漁業調整規則は奈良県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.nara.lg.jp/n118/16650.html",
+    lastVerified: "2026-08-10",
   },
   {
     prefSlug: "wakayama",
@@ -1132,6 +1191,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "和歌山県",
     referenceText: "和歌山県の漁業調整規則は和歌山県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.wakayama.lg.jp/prefg/071500/yuugyo/sensuiki/ru-ru.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "アワビ・サザエ・ウニは全域で漁業権の対象。採取すると密漁となります。",
@@ -1176,6 +1237,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "鳥取県",
     referenceText: "鳥取県の漁業調整規則は鳥取県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.tottori.lg.jp/305750.htm",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "サザエ・アワビは漁業権の対象。遊漁者の採取は密漁となります。",
@@ -1217,6 +1280,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "島根県",
     referenceText: "島根県の漁業調整規則は島根県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.shimane.lg.jp/industry/suisan/kanri/iji/awabi_sazae.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "サザエ・アワビは漁業権の対象。遊漁者が採取すると密漁になります。",
@@ -1256,6 +1321,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "岡山県",
     referenceText: "岡山県の漁業調整規則は岡山県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.okayama.jp/page/detail-2855.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "タコは全域で漁業権の対象。竿釣り・タコエギでも採捕禁止です。",
@@ -1295,6 +1362,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "広島県",
     referenceText: "広島県の漁業調整規則は広島県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.hiroshima.lg.jp/soshiki/88/yuugyohenositumonmatome.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "タコは漁業権の対象。タコエギ・タコジグでの採捕も禁止されています。",
@@ -1336,6 +1405,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "山口県",
     referenceText: "山口県の漁業調整規則は山口県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.yamaguchi.lg.jp/soshiki/108/21930.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "サザエ・アワビは漁業権の対象。遊漁者の採取は密漁となります。",
@@ -1378,6 +1449,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "徳島県",
     referenceText: "徳島県の漁業調整規則は徳島県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.tokushima.lg.jp/ippannokata/sangyo/suisangyo/7302507",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "アワビ・サザエは漁業権の対象。遊漁者の採取は密漁となります。",
@@ -1420,6 +1493,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "香川県",
     referenceText: "香川県の漁業調整規則は香川県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.kagawa.lg.jp/suisan/yugyo/rule/index.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "タコは全域で漁業権の対象。タコエギ・タコジグでの採捕も禁止されています。",
@@ -1458,6 +1533,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "愛媛県",
     referenceText: "愛媛県の漁業調整規則は愛媛県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.ehime.jp/page/4120.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "アワビ・サザエは漁業権の対象。遊漁者の採取は密漁となります。",
@@ -1500,6 +1577,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "高知県",
     referenceText: "高知県の漁業調整規則は高知県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.kochi.lg.jp/doc/2021110900132/",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "アワビ・サザエ・ウニは漁業権の対象。遊漁者の採取は密漁となります。",
@@ -1545,6 +1624,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "福岡県",
     referenceText: "福岡県の漁業調整規則は福岡県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.fukuoka.lg.jp/life/4/38/168/",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "サザエ・アワビは漁業権の対象。遊漁者の採取は密漁となります。",
@@ -1587,6 +1668,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "佐賀県",
     referenceText: "佐賀県の漁業調整規則は佐賀県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.saga.lg.jp/kiji00350576/index.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "有明海のタイラギ・アゲマキは漁業権の対象。遊漁者の採取は禁止です。",
@@ -1628,6 +1711,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "長崎県",
     referenceText: "長崎県の漁業調整規則は長崎県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.nagasaki.lg.jp/bunrui/shigoto-sangyo/suisangho/gyogyo-shinko/gyogyo-tyosei/tyosei-kisoku/",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "五島列島・壱岐・対馬ではアワビ・サザエが広範囲で漁業権の対象です。",
@@ -1675,6 +1760,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "熊本県",
     referenceText: "熊本県の漁業調整規則は熊本県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.kumamoto.jp/soshiki/94/122478.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "天草ではタコに漁業権が設定されているエリアがあります。タコ釣りは事前に確認を。",
@@ -1716,6 +1803,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "大分県",
     referenceText: "大分県の漁業調整規則は大分県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.oita.jp/soshiki/16350/yugyo.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "サザエ・アワビは漁業権の対象。遊漁者の採取は密漁となります。",
@@ -1758,6 +1847,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "宮崎県",
     referenceText: "宮崎県の漁業調整規則は宮崎県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.miyazaki.lg.jp/gyogyo-kanri/shigoto/suisangyo/20201221153542.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "アワビ・サザエは漁業権の対象。遊漁者の採取は密漁となります。",
@@ -1803,6 +1894,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "鹿児島県",
     referenceText: "鹿児島県の漁業調整規則は鹿児島県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.kagoshima.jp/af05/suisan/gyochou/kisoku.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "サザエ・アワビ・ウニは漁業権の対象。遊漁者の採取は密漁となります。",
@@ -1847,6 +1940,8 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     ],
     authority: "沖縄県",
     referenceText: "沖縄県の漁業調整規則は沖縄県庁のウェブサイトで確認できます。",
+    referenceUrl: "https://www.pref.okinawa.lg.jp/shigoto/suisangyo/1011042/1011043/index.html",
+    lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
         "サンゴ礁の採取は厳禁。自然公園法により厳しく規制されています。",
