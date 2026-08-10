@@ -26,6 +26,7 @@ import {
   Search,
 } from "lucide-react";
 import { InArticleAd, StickySidebarAd, MultiplexAd } from "@/components/ads/ad-unit";
+import { ShareButtons } from "@/components/ui/share-buttons";
 import { BlogAffiliateRecommend } from "@/components/blog/blog-affiliate-recommend";
 
 // ISR: 静的記事は generateStaticParams で SSG、microCMS記事は dynamicParams で随時生成。
@@ -459,6 +460,12 @@ export default async function BlogPostPage({
           <span className="text-xs text-muted-foreground">|</span>
           <Link prefetch={false} href="/map" className="text-xs font-medium text-primary hover:underline">地図で釣り場を探す</Link>
         </div>
+      </section>
+
+      {/* 記事の共有 */}
+      <section className="mt-8">
+        <h2 className="mb-3 text-sm font-bold text-muted-foreground">この記事をシェアする</h2>
+        <ShareButtons url={`https://tsurispot.com/blog/${post.slug}`} title={post.title} />
       </section>
 
       <InArticleAd className="my-8" />
