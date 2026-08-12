@@ -44,6 +44,11 @@ async function main() {
   head("トークン権限");
   const verify = await cf("user/tokens/verify");
   console.log(`verify: HTTP ${verify.status} status=${verify.body?.result?.status ?? "?"}`);
+  // どのトークンが CF_API_TOKEN に入っているかの特定用（ダッシュボードで各トークンを開いた
+  // URL 末尾の ID と突き合わせる）。権限プローブで名前も推定する。
+  console.log(`token_id=${verify.body?.result?.id ?? "(取得不可)"}`);
+  const wafProbe = await cf(`zones/${ZONE}/rulesets/phases/http_request_firewall_custom/entrypoint`);
+  console.log(`WAFルール読み取り: HTTP ${wafProbe.status}（200なら WAF 権限あり＝tsurispot-waf-bot-defense 系、403なら Cache Purge 専用＝tsurispot-app-purge 系）`);
 
   head("ゾーン基本情報");
   const zone = await cf(`zones/${ZONE}`);
