@@ -165,9 +165,11 @@ const nextConfig: NextConfig = {
           key: "Strict-Transport-Security",
           value: "max-age=63072000; includeSubDomains; preload",
         },
-        // noai は外す: AI検索（ChatGPT Search / Perplexity）での本文引用→送客を狙うため。
-        // noimageai は維持: 実写の釣り写真のAI学習は引き続き拒否（著作権保護）。
-        { key: "X-Robots-Tag", value: "noimageai" },
+        // noai / noimageai は HTML には付けない。
+        // Bing が HTML の noimageai を NOARCHIVE 相当として扱い、スポット詳細 410 ページが
+        // Copilot / grounding 結果から除外されていた（Bing WMT の Recommendations で実測）。
+        // 写真の AI 学習拒否という当初意図は維持するため、noimageai は画像レスポンス限定に移設した
+        // （下部の /images/(.*)・/_next/image・画像拡張子ルールを参照）。
       ],
     },
     // SSGページのCloudFrontキャッシュ最適化（App Runnerへのリクエスト削減）
@@ -228,9 +230,25 @@ const nextConfig: NextConfig = {
       ],
     },
     {
+      // 実写の釣り写真の AI 学習拒否（著作権保護）。HTML には付けない（Copilot 除外の原因になったため）。
       source: "/images/(.*)",
       headers: [
         { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+        { key: "X-Robots-Tag", value: "noimageai" },
+      ],
+    },
+    {
+      // 画像最適化エンドポイント（robots.txt でも disallow 済みだが防御的に付与）
+      source: "/_next/image",
+      headers: [
+        { key: "X-Robots-Tag", value: "noimageai" },
+      ],
+    },
+    {
+      // public 直下など /images/ 以外に置かれた画像（logo.jpg / line-cover.png 等）
+      source: "/(.*\\.(?:jpg|jpeg|png|webp|avif|gif))",
+      headers: [
+        { key: "X-Robots-Tag", value: "noimageai" },
       ],
     },
     {
@@ -243,6 +261,41 @@ const nextConfig: NextConfig = {
       source: "/(.*\\.(?:ico|svg|woff|woff2))",
       headers: [
         { key: "Cache-Control", value: "public, max-age=31536000, immutable" },
+      ],
+    },
+    // AI/クローラー向けテキスト資産のエッジキャッシュ（bot 開放でオリジン負荷が乗らないようにする）。
+    // .txt / .xml は Cloudflare のデフォルトキャッシュ対象拡張子に含まれず、s-maxage を返しても
+    // cf-cache-status: DYNAMIC のまま毎回オリジンに届いていた（実測）。
+    // ヘッダー側を明示したうえで、Cloudflare Cache Rule（scripts/cf-ensure-cache-rule.mjs）で
+    // キャッシュ対象化する。
+    {
+      source: "/llms.txt",
+      headers: [
+        { key: "Cache-Control", value: "public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400" },
+      ],
+    },
+    {
+      source: "/llms-full.txt",
+      headers: [
+        { key: "Cache-Control", value: "public, max-age=3600, s-maxage=86400, stale-while-revalidate=86400" },
+      ],
+    },
+    {
+      source: "/sitemap.xml",
+      headers: [
+        { key: "Cache-Control", value: "public, s-maxage=86400, stale-while-revalidate=86400" },
+      ],
+    },
+    {
+      source: "/image-sitemap.xml",
+      headers: [
+        { key: "Cache-Control", value: "public, s-maxage=86400, stale-while-revalidate=86400" },
+      ],
+    },
+    {
+      source: "/robots.txt",
+      headers: [
+        { key: "Cache-Control", value: "public, max-age=14400, s-maxage=86400" },
       ],
     },
     // 認証必要なページ: ユーザー固有HTMLなのでCloudFrontに共有キャッシュさせない

@@ -33,14 +33,17 @@ export default function robots(): MetadataRoute.Robots {
       // SNSカード: Twitterbot は robots.txt を尊重するため、OGP画像(/api/og,
       // /*/opengraph-image)を取得できるよう全面許可（* に落とすとXカードの画像が壊れる）。
       { userAgent: "Twitterbot", allow: "/" },
-      // 「学習はNo・検索/引用はYes」: OAI-SearchBot / ChatGPT-User / PerplexityBot は
-      // * グループ（allow: / + アセット除外）で十分なため個別グループは持たない。
+      // 「学習はNo・検索/引用はYes」: OAI-SearchBot / ChatGPT-User / PerplexityBot /
+      // Claude-SearchBot / Claude-User / Perplexity-User は * グループ（allow: / + アセット除外）で
+      // 十分なため個別グループは持たない（独立グループを作ると RFC 9309 で * の disallow が
+      // 打ち消される。上部コメントと robots-crawl-rules.test.ts を参照）。
       // 純粋な学習用クローラーは引き続き拒否。
+      // anthropic-ai / Claude-Web は Anthropic が廃止した旧トークン。残すと「Anthropic 全クローラー拒否」と
+      // 解釈されて検索・引用系（Claude-SearchBot / Claude-User）まで忌避されるため撤去した。
+      // 学習拒否は現行トークンの ClaudeBot 単独で維持される。
       { userAgent: "GPTBot", disallow: "/" },
       { userAgent: "Google-Extended", disallow: "/" },
       { userAgent: "ClaudeBot", disallow: "/" },
-      { userAgent: "anthropic-ai", disallow: "/" },
-      { userAgent: "Claude-Web", disallow: "/" },
       { userAgent: "CCBot", disallow: "/" },
       { userAgent: "Applebot-Extended", disallow: "/" },
       { userAgent: "Bytespider", disallow: "/" },

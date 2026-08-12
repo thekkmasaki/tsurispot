@@ -17,6 +17,11 @@ describe("AI検索bot は middleware を通過する（robots.ts の allow と�
     "Mozilla/5.0 (compatible; OAI-SearchBot/1.0; +https://openai.com/searchbot)",
     "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; ChatGPT-User/1.0; +https://openai.com/bot",
     "Mozilla/5.0 (compatible; PerplexityBot/1.0; +https://perplexity.ai/perplexitybot)",
+    // Anthropic の検索/引用系（学習用の ClaudeBot とは別トークン）。
+    // /ClaudeBot/i が Claude-SearchBot にマッチしないことの回帰テストも兼ねる。
+    "Mozilla/5.0 (compatible; Claude-SearchBot/1.0; +Claude-SearchBot@anthropic.com)",
+    "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko); compatible; Claude-User/1.0; +Claude-User@anthropic.com",
+    "Mozilla/5.0 (compatible; Perplexity-User/1.0; +https://perplexity.ai/perplexity-user)",
   ];
 
   it.each(ALLOWED_UAS)("通過すべき: %s", (ua) => {
@@ -41,5 +46,14 @@ describe("学習系・SEO/広告系bot は引き続きブロックする（コ�
 
   it("Google-Extended（学習用権限トークン）は据え置きブロック", () => {
     expect(isBlocked("Google-Extended")).toBe(true);
+  });
+});
+
+describe("廃止済み Anthropic 旧トークンのパターンを復活させない", () => {
+  // anthropic-ai / Claude-Web は廃止済みトークン。パターンとして残すと
+  // 現行の Claude-SearchBot / Claude-User を巻き込むリスクだけが残るため撤去した。
+  it.each(["anthropic-ai", "Claude-Web"])("%s のパターンが存在しない", (token) => {
+    const sources = BLOCKED_UA_PATTERNS.map((p) => p.source.toLowerCase());
+    expect(sources).not.toContain(token.toLowerCase());
   });
 });

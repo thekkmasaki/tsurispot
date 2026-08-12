@@ -403,6 +403,17 @@ jobs:
           fi
           echo "Cloudflare cache purged (targeted hub pages)."
 
+      # AI クローラー向けテキスト資産(.txt/.xml)をエッジキャッシュ対象に昇格する Cache Rule を冪等適用。
+      # Cloudflare の既定キャッシュ拡張子に .txt/.xml は含まれず、オリジンが s-maxage を返しても
+      # cf-cache-status: DYNAMIC のまま毎回オリジンに届く（llms-full.txt は約900KB）。
+      # トークンに Cache Rules 権限が無い場合は警告のみで継続（purge ステップと同じ非致命方針）。
+      - name: Cloudflare Cache Rule 適用（GEO text files）
+        if: success() && github.ref == 'refs/heads/master'
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+        run: node scripts/cf-ensure-cache-rule.mjs
+
       # デプロイ後ウォームアップ（コールド ISR 生成を完了させてキャッシュ投入）。
       # 直前の限定purgeでハブページのエッジが空 → トップ等は次の1アクセスで同期再生成される。
       # 既存ヘルスチェックは --max-time 30 のため、重いページ(過去トップ53s)が生成完了前に放棄され

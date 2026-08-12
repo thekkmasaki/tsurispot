@@ -4,7 +4,10 @@ import { prefectures } from "@/lib/data/prefectures";
 import { areaGuides } from "@/lib/data/area-guides";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 
-// 「最終更新」日付がデプロイ時点で凍結しないよう日次ISR
+// 「最終更新」日付がデプロイ時点で凍結しないよう日次ISR。
+// force-static: Next 15+ の GET Route Handler は既定で非キャッシュのため、明示しないと
+// AI クローラーのアクセス毎に全スポット(5,000件超)を走査して生成し直してしまう。
+export const dynamic = "force-static";
 export const revalidate = 86400;
 
 export function GET() {
