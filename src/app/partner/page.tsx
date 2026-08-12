@@ -28,7 +28,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { ShopListingForm } from "@/components/shops/shop-listing-form";
 import { PaidPlanInquiry } from "@/components/shops/paid-plan-inquiry";
 import { fishingSpots } from "@/lib/data/spots";
-import { PLAN_PRICING, formatYen } from "@/lib/data/plans";
+import { PLAN_PRICING, formatYen, SHOP_PLANS_PAUSED } from "@/lib/data/plans";
 import { fishSpecies } from "@/lib/data/fish";
 import { tackleShops } from "@/lib/data/shops";
 
@@ -145,7 +145,9 @@ const STEPS = [
 const FAQS = [
   {
     q: "掲載に費用はかかりますか？",
-    a: "基本掲載は永久無料です。店舗名・住所・電話番号・営業時間・エサ在庫更新（1日10回）など、集客に必要な機能が初期費用0円・月額0円でご利用いただけます。より充実した集客機能が使える有料プラン（月額500円〜）もご用意しています。",
+    a: SHOP_PLANS_PAUSED
+      ? "基本掲載は永久無料です。店舗名・住所・電話番号・営業時間・エサ在庫更新（1日10回）など、集客に必要な機能が初期費用0円・月額0円でご利用いただけます。"
+      : "基本掲載は永久無料です。店舗名・住所・電話番号・営業時間・エサ在庫更新（1日10回）など、集客に必要な機能が初期費用0円・月額0円でご利用いただけます。より充実した集客機能が使える有料プラン（月額500円〜）もご用意しています。",
   },
   {
     q: "掲載までどのくらいかかりますか？",
@@ -165,12 +167,18 @@ const FAQS = [
   },
   {
     q: "掲載した情報は後から変更できますか？",
-    a: "はい、いつでも変更可能です。営業時間の変更、定休日の更新、取り扱い商品の追加など、メールでご連絡いただければ対応いたします。有料プランではご自身で管理画面から直接編集も可能です。",
+    a: SHOP_PLANS_PAUSED
+      ? "はい、いつでも変更可能です。営業時間の変更、定休日の更新、取り扱い商品の追加など、メールでご連絡いただければ対応いたします。"
+      : "はい、いつでも変更可能です。営業時間の変更、定休日の更新、取り扱い商品の追加など、メールでご連絡いただければ対応いたします。有料プランではご自身で管理画面から直接編集も可能です。",
   },
-  {
-    q: "有料プランと無料掲載の違いは何ですか？",
-    a: "無料掲載では基本情報の掲載とエサ在庫更新（1日10回）が使えます。有料プランでは、検索結果での優先表示・公式バッジ・写真掲載・Googleのお店情報の整備など、集客力をさらに強化する機能が追加されます。まずは無料で試して、効果を実感してからアップグレードをご検討いただけます。",
-  },
+  ...(SHOP_PLANS_PAUSED
+    ? []
+    : [
+        {
+          q: "有料プランと無料掲載の違いは何ですか？",
+          a: "無料掲載では基本情報の掲載とエサ在庫更新（1日10回）が使えます。有料プランでは、検索結果での優先表示・公式バッジ・写真掲載・Googleのお店情報の整備など、集客力をさらに強化する機能が追加されます。まずは無料で試して、効果を実感してからアップグレードをご検討いただけます。",
+        },
+      ]),
   {
     q: "QRコードも設置できますか？",
     a: "はい、QRコードの作成・送付も完全無料です。店頭に設置すると、お客様がスマホで読み取って近くの釣りスポットや釣り方を確認できます。「どこで釣れる？」「何が必要？」といったよくある質問への対応を減らせます。",
@@ -226,22 +234,26 @@ export default function PartnerPage() {
         priceCurrency: "JPY",
         description: "店舗基本情報掲載、エサ在庫更新（1日10回）、近くの釣りスポットとの連携",
       },
-      {
-        "@type": "Offer",
-        name: "ベーシックプラン",
-        price: "500",
-        priceCurrency: "JPY",
-        priceValidUntil: "2027-03-31",
-        description: "初年度月額500円（2年目以降980円）。公式バッジ、検索優先表示、写真3枚掲載、Googleのお店情報を整備",
-      },
-      {
-        "@type": "Offer",
-        name: "プロプラン",
-        price: "1980",
-        priceCurrency: "JPY",
-        priceValidUntil: "2027-03-31",
-        description: "初年度月額1,980円（2年目以降2,980円）。写真20枚、クーポン配信、Googleのお店情報を整備",
-      },
+      ...(SHOP_PLANS_PAUSED
+        ? []
+        : [
+            {
+              "@type": "Offer",
+              name: "ベーシックプラン",
+              price: "500",
+              priceCurrency: "JPY",
+              priceValidUntil: "2027-03-31",
+              description: "初年度月額500円（2年目以降980円）。公式バッジ、検索優先表示、写真3枚掲載、Googleのお店情報を整備",
+            },
+            {
+              "@type": "Offer",
+              name: "プロプラン",
+              price: "1980",
+              priceCurrency: "JPY",
+              priceValidUntil: "2027-03-31",
+              description: "初年度月額1,980円（2年目以降2,980円）。写真20枚、クーポン配信、Googleのお店情報を整備",
+            },
+          ]),
     ],
     provider: {
       "@type": "Organization",
@@ -523,13 +535,16 @@ export default function PartnerPage() {
               </div>
             </div>
             <p className="text-xs text-muted-foreground">
-              ※QRコード設置は無料です。エサ在庫管理などの追加機能は、無料プラン（永久無料）・ベーシック（初年度 月額500円）・プロ（初年度 月額1,980円）をご用意しています。
+              {SHOP_PLANS_PAUSED
+                ? "※QRコード設置は無料です。エサ在庫管理などの機能も無料プラン（永久無料）でご利用いただけます。"
+                : "※QRコード設置は無料です。エサ在庫管理などの追加機能は、無料プラン（永久無料）・ベーシック（初年度 月額500円）・プロ（初年度 月額1,980円）をご用意しています。"}
             </p>
           </CardContent>
         </Card>
       </section>
 
-      {/* ===== 料金プラン ===== */}
+      {/* ===== 料金プラン（SHOP_PLANS_PAUSED 中は申込フォームごと非表示） ===== */}
+      {!SHOP_PLANS_PAUSED && (
       <section className="mb-14 sm:mb-20">
         <h2 className="mb-2 text-center text-xl font-bold sm:text-2xl">
           料金プラン
@@ -619,6 +634,7 @@ export default function PartnerPage() {
           </div>
         </div>
       </section>
+      )}
 
       {/* ===== サイトの特徴 ===== */}
       <section className="mb-14 sm:mb-20">

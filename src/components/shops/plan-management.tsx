@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CreditCard, Crown, ArrowUpRight, AlertTriangle, Loader2 } from "lucide-react";
 import type { SubscriptionData } from "@/types";
+import { SHOP_PLANS_PAUSED } from "@/lib/data/plans";
 
 interface PlanManagementProps {
   shopSlug: string;
@@ -115,15 +116,20 @@ export function PlanManagement({ shopSlug, token }: PlanManagementProps) {
             <div className="flex items-center gap-2">
               <Badge variant="secondary">無料プラン</Badge>
             </div>
-            <p className="text-xs text-muted-foreground">
-              有料プランにアップグレードすると、公式バッジ・検索優先表示・写真掲載などの機能が使えます。
-            </p>
-            <Link prefetch={false} href={`/subscribe/basic?shop=${shopSlug}&token=${token}`}>
-              <Button size="sm" className="gap-1.5">
-                <Crown className="size-3" />
-                有料プランにアップグレード
-              </Button>
-            </Link>
+            {/* SHOP_PLANS_PAUSED 中はアップグレード導線を出さない（既契約の管理UIは上の分岐で維持） */}
+            {!SHOP_PLANS_PAUSED && (
+              <>
+                <p className="text-xs text-muted-foreground">
+                  有料プランにアップグレードすると、公式バッジ・検索優先表示・写真掲載などの機能が使えます。
+                </p>
+                <Link prefetch={false} href={`/subscribe/basic?shop=${shopSlug}&token=${token}`}>
+                  <Button size="sm" className="gap-1.5">
+                    <Crown className="size-3" />
+                    有料プランにアップグレード
+                  </Button>
+                </Link>
+              </>
+            )}
           </div>
         )}
       </CardContent>
