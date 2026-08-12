@@ -50,9 +50,22 @@ describe("robots.ts: グループ選択(RFC 9309)の整合", () => {
       "OAI-SearchBot",
       "ChatGPT-User",
       "PerplexityBot",
+      // AI検索/引用系も * グループに任せる（独立グループを作らない）
+      "Claude-SearchBot",
+      "Claude-User",
+      "Perplexity-User",
     ];
     for (const bot of searchBots) {
       expect(groupsFor(bot), `${bot} の独立グループは * の disallow を丸ごと打ち消すため作らないこと`).toHaveLength(0);
+    }
+  });
+
+  it("廃止済みの Anthropic 旧トークン（anthropic-ai / Claude-Web）のグループを復活させない", () => {
+    // 旧トークンを disallow に残すと「Anthropic 全体拒否」と解釈され、
+    // 現行の検索/引用系（Claude-SearchBot / Claude-User）まで忌避される。
+    // 学習拒否は現行トークン ClaudeBot 単独で維持する。
+    for (const legacy of ["anthropic-ai", "Claude-Web"]) {
+      expect(groupsFor(legacy), `${legacy} は廃止済みトークン。復活させないこと`).toHaveLength(0);
     }
   });
 

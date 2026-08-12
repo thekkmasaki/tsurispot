@@ -4,7 +4,11 @@ import { prefectures } from "@/lib/data/prefectures";
 import { areaGuides } from "@/lib/data/area-guides";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 
-// 「最終更新」日付がデプロイ時点で凍結しないよう日次ISR
+// 「最終更新」日付がデプロイ時点で凍結しないよう日次ISR。
+// force-static: Next 15+ の GET Route Handler は既定で非キャッシュ。約900KBの出力を
+// 毎リクエスト生成するとオリジン CPU / egress に直撃するため明示する
+// （ISR キャッシュは S3 バックエンドでサイズ上限なし・gzip 保存）。
+export const dynamic = "force-static";
 export const revalidate = 86400;
 
 export function GET() {

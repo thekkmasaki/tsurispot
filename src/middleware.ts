@@ -1,15 +1,17 @@
 import { NextResponse, type NextRequest } from "next/server";
 
 // robots.ts と意図を一致させること。
-// AI検索bot（OAI-SearchBot / ChatGPT-User / PerplexityBot）は robots.ts で allow 済みで、
-// 被引用→送客を狙うため middleware でも通す（＝ここに含めない）。
+// AI検索bot（OAI-SearchBot / ChatGPT-User / PerplexityBot / Claude-SearchBot / Claude-User /
+// Perplexity-User）は robots.ts で allow 済みで、被引用→送客を狙うため middleware でも通す
+// （＝ここに含めない）。robots.txt は「お願い」だがここの 403 は強制なので、両方で許可しないと
+// 実体は門前払いのままになる（過去にこの不整合で AI 流入が止まった）。
 // 純粋な学習系・SEO/広告系クローラーのみ 403 でブロックし、App Runner コスト再燃を防ぐ。
+// 注意: /ClaudeBot/i は学習用トークンなのでブロック維持。廃止済みの anthropic-ai / Claude-Web は
+// 撤去済み（現行の Claude-SearchBot / Claude-User を巻き込まないため）。
 export const BLOCKED_UA_PATTERNS = [
   /GPTBot/i,
   /Google-Extended/i,
   /ClaudeBot/i,
-  /anthropic-ai/i,
-  /Claude-Web/i,
   /CCBot/i,
   /Applebot-Extended/i,
   /Bytespider/i,
