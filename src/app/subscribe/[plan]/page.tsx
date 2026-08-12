@@ -35,6 +35,12 @@ export async function generateMetadata({ params }: { params: Promise<{ plan: str
   const { plan } = await params;
   const details = PLAN_DETAILS[plan as PlanKey];
   if (!details) return {};
+  // 一時停止中は本文が notFound() の 404 UI になるが、このサイトでは notFound() が
+  // ストリーミング制約で HTTP 200 のまま返る既知の挙動があり、そのままだとソフト404として
+  // インデックスされうる。メタデータ側で noindex を明示して防ぐ。
+  if (SHOP_PLANS_PAUSED) {
+    return { title: `${details.name}プラン`, robots: { index: false, follow: false } };
+  }
   return {
     title: `${details.name}プランに申し込む`,
     description: `ツリスポの${details.name}プランのお申し込み確認画面です。`,
