@@ -1210,7 +1210,7 @@ export const seaFishRootHata: FishSpecies[] = [
     scientificName: "Pleurogrammus azonus",
     slug: "hokke",
     description:
-      "北海道の代表的な食用魚。堤防からサビキやルアーで狙え、良型になれば40cmを超える力強い引きが楽しめる。開き干しが居酒屋の定番として全国に知られるが、釣りたての刺身は絶品。道南・道央の堤防で初心者でも数釣りが楽しめる。",
+      "ホッケは北海道の堤防からサビキ・ルアーで数釣りできる人気の食用魚。良型になれば40cmを超える力強い引きが楽しめる。開き干しが居酒屋の定番として全国に知られるが、釣りたての刺身は絶品。道南・道央の堤防では初心者でも数釣りが楽しめる。",
     category: "sea",
     family: "アイナメ科",
     difficulty: "beginner",
