@@ -27,6 +27,7 @@ import { ShopInfoLive } from "@/components/shops/shop-info-live";
 import { ShopPhotoGallery } from "@/components/shops/shop-photo-gallery";
 import { ShopListingForm } from "@/components/shops/shop-listing-form";
 import { PaidPlanInquiry } from "@/components/shops/paid-plan-inquiry";
+import { SHOP_PLANS_PAUSED } from "@/lib/data/plans";
 import { NoAdsSignal } from "@/components/ads/no-ads-signal";
 import { ShopPlanBadge } from "@/components/shops/shop-plan-badge";
 import { ShopCouponCard } from "@/components/shops/shop-coupon-card";
@@ -526,15 +527,15 @@ export default async function ShopDetailPage({ params }: { params: Params }) {
         </div>
       )}
 
-      {/* ベーシックプランサンプル: 問い合わせフォーム */}
-      {isSample && slug === "sample-basic" && (
+      {/* ベーシックプランサンプル: 問い合わせフォーム（SHOP_PLANS_PAUSED 中は非表示） */}
+      {!SHOP_PLANS_PAUSED && isSample && slug === "sample-basic" && (
         <div className="mt-8">
           <PaidPlanInquiry plan="basic" />
         </div>
       )}
 
-      {/* プロプランサンプル: 問い合わせフォーム */}
-      {isSample && slug === "sample-premium" && (
+      {/* プロプランサンプル: 問い合わせフォーム（SHOP_PLANS_PAUSED 中は非表示） */}
+      {!SHOP_PLANS_PAUSED && isSample && slug === "sample-premium" && (
         <div className="mt-8">
           <PaidPlanInquiry plan="pro" />
         </div>

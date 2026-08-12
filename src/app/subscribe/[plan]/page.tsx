@@ -8,7 +8,7 @@ import { Separator } from "@/components/ui/separator";
 import { ShieldCheck, ArrowLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import { SubscribeButton } from "./subscribe-button";
-import { PLAN_PRICING, formatYen } from "@/lib/data/plans";
+import { PLAN_PRICING, formatYen, SHOP_PLANS_PAUSED } from "@/lib/data/plans";
 
 const PLAN_DETAILS = {
   basic: {
@@ -42,6 +42,8 @@ export async function generateMetadata({ params }: { params: Promise<{ plan: str
 }
 
 export default async function SubscribePage({ params }: { params: Promise<{ plan: string }> }) {
+  // 店舗向け有料プラン一時停止中は申込ページ自体を閉じる（導線も全て非表示のため孤立ページ化）
+  if (SHOP_PLANS_PAUSED) notFound();
   const { plan } = await params;
   const details = PLAN_DETAILS[plan as PlanKey];
   if (!details) notFound();

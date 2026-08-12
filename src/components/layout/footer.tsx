@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Fish } from "lucide-react";
 import { SPOT_COUNT_FORMATTED } from "@/lib/data/spot-count";
+import { SHOP_PLANS_PAUSED } from "@/lib/data/plans";
 
 export function Footer() {
   return (
@@ -118,7 +119,9 @@ export function Footer() {
               <li><Link href="/safety" prefetch={false} className="hover:text-white">安全ガイド</Link></li>
               <li><Link href="/faq" prefetch={false} className="hover:text-white">よくある質問</Link></li>
               <li><Link href="/contact" prefetch={false} className="hover:text-white">お問い合わせ</Link></li>
-              <li><Link href="/partner" prefetch={false} className="hover:text-white font-medium text-sea-foam">釣具店・遊漁船の方へ</Link></li>
+              {!SHOP_PLANS_PAUSED && (
+                <li><Link href="/partner" prefetch={false} className="hover:text-white font-medium text-sea-foam">釣具店・遊漁船の方へ</Link></li>
+              )}
             </ul>
           </div>
           <div>
@@ -126,7 +129,9 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-blue-100/90">
               <li><Link href="/about" prefetch={false} className="hover:text-white">ツリスポについて</Link></li>
               <li><Link href="/technology" prefetch={false} className="hover:text-white">AI解析技術（特許出願中）</Link></li>
-              <li><Link href="/partner" prefetch={false} className="hover:text-white">事業者様向け（掲載案内）</Link></li>
+              {!SHOP_PLANS_PAUSED && (
+                <li><Link href="/partner" prefetch={false} className="hover:text-white">事業者様向け（掲載案内）</Link></li>
+              )}
               <li><Link href="/privacy" prefetch={false} className="hover:text-white">プライバシーポリシー</Link></li>
               <li><Link href="/terms" prefetch={false} className="hover:text-white">利用規約</Link></li>
               <li><Link href="/legal" prefetch={false} className="hover:text-white">特定商取引法に基づく表記</Link></li>
@@ -307,7 +312,9 @@ export function Footer() {
           <Link href="/blog" prefetch={false} className="hover:text-white">エリア釣果レポート</Link>
           <Link href="/about" prefetch={false} className="hover:text-white">ツリスポについて</Link>
           <Link href="/technology" prefetch={false} className="hover:text-white">AI解析技術</Link>
-          <Link href="/partner" prefetch={false} className="hover:text-white">事業者様向け</Link>
+          {!SHOP_PLANS_PAUSED && (
+            <Link href="/partner" prefetch={false} className="hover:text-white">事業者様向け</Link>
+          )}
           <Link href="/privacy" prefetch={false} className="hover:text-white">プライバシーポリシー</Link>
           <Link href="/terms" prefetch={false} className="hover:text-white">利用規約</Link>
           <Link href="/legal" prefetch={false} className="hover:text-white">特商法表記</Link>
