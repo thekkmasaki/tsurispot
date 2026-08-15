@@ -480,20 +480,32 @@ export default function MyPage() {
               {user.nickname.charAt(0)}
             </div>
           )}
-          <button
-            onClick={() => (editing ? setEditing(false) : startEdit())}
-            className="mt-2 inline-flex items-center gap-1 rounded-full border bg-white/95 px-3 py-1.5 text-xs font-medium shadow-sm hover:bg-white"
-          >
-            {editing ? (
-              <>
-                <X className="h-3.5 w-3.5" /> キャンセル
-              </>
-            ) : (
-              <>
-                <Edit3 className="h-3.5 w-3.5" /> プロフィール編集
-              </>
+          <div className="mt-2 flex flex-wrap items-center justify-end gap-2">
+            {/* 自分の公開プロフィールURLを知る手段がこれまで無かったため、共有導線としてここに置く */}
+            {!editing && (
+              <Link
+                prefetch={false}
+                href={`/users/${user.tsuriId}`}
+                className="inline-flex items-center gap-1 rounded-full border bg-white/95 px-3 py-1.5 text-xs font-medium shadow-sm hover:bg-white"
+              >
+                <User className="h-3.5 w-3.5" /> 公開プロフィール
+              </Link>
             )}
-          </button>
+            <button
+              onClick={() => (editing ? setEditing(false) : startEdit())}
+              className="inline-flex items-center gap-1 rounded-full border bg-white/95 px-3 py-1.5 text-xs font-medium shadow-sm hover:bg-white"
+            >
+              {editing ? (
+                <>
+                  <X className="h-3.5 w-3.5" /> キャンセル
+                </>
+              ) : (
+                <>
+                  <Edit3 className="h-3.5 w-3.5" /> プロフィール編集
+                </>
+              )}
+            </button>
+          </div>
         </div>
 
         {!editing && (

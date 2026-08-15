@@ -9,18 +9,32 @@ import { cn } from "@/lib/utils";
 interface FollowButtonProps {
   tsuriId: string;
   className?: string;
+  /**
+   * 呼び出し側が既にフォロー状態を把握している場合に渡す。渡すと状態取得の fetch を丸ごと省略する。
+   * タイムラインのようにカードが並ぶ画面で、1枚ごとに /api/follow を叩いてリクエストが増えるのを防ぐ用途。
+   */
+  initialFollowing?: boolean;
+  /** フォロー/解除が成功したときに呼ばれる（一覧側が持つフォロー中集合の更新用） */
+  onFollowChange?: (following: boolean) => void;
 }
 
 // ユーザーカード用の小型フォローボタン（既存 /api/follow を利用）。
 // 自分自身のカードでは非表示になる
-export function FollowButton({ tsuriId, className }: FollowButtonProps) {
+export function FollowButton({
+  tsuriId,
+  className,
+  initialFollowing,
+  onFollowChange,
+}: FollowButtonProps) {
   const { data: session, status } = useSession();
   const router = useRouter();
   const viewerId = session?.user?.tsuriId;
-  const [following, setFollowing] = useState<boolean | null>(null);
+  const [following, setFollowing] = useState<boolean | null>(initialFollowing ?? null);
   const [pending, setPending] = useState(false);
 
   useEffect(() => {
+    // 初期状態を受け取っている場合は取得不要
+    if (initialFollowing !== undefined) return;
     if (status !== "authenticated") {
       setFollowing(false);
       return;
@@ -29,7 +43,7 @@ export function FollowButton({ tsuriId, className }: FollowButtonProps) {
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => setFollowing(Boolean(data?.following)))
       .catch(() => setFollowing(false));
-  }, [status, tsuriId]);
+  }, [status, tsuriId, initialFollowing]);
 
   if (viewerId === tsuriId) return null;
 
@@ -52,6 +66,7 @@ export function FollowButton({ tsuriId, className }: FollowButtonProps) {
       });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error ?? "操作に失敗しました");
+      onFollowChange?.(next);
     } catch (err) {
       setFollowing(!next);
       toast.error(err instanceof Error ? err.message : "操作に失敗しました");

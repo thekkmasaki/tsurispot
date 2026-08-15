@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { LikeButton } from "@/components/social/like-button";
 import { RepostButton } from "@/components/social/repost-button";
+import { FollowButton } from "@/components/social/follow-button";
 import type { PostMeta } from "@/lib/social-store";
 
 interface SocialCatchCardProps {
@@ -17,6 +18,13 @@ interface SocialCatchCardProps {
   repostCount?: number;
   repostedByViewer?: boolean;
   viewerTsuriId?: string;
+  /**
+   * 閲覧者がフォロー中のIDの集合。渡すとフォローボタンが状態取得の fetch を省略する。
+   * 未指定の場合はボタン側が個別に取得する（カード枚数の少ない画面向け）。
+   */
+  viewerFollowingIds?: Set<string>;
+  /** フォロー状態が変わったときに親へ通知する（一覧側の集合を最新に保つ用） */
+  onFollowChange?: (tsuriId: string, following: boolean) => void;
 }
 
 const WEATHER_ICONS: Record<string, string> = {
@@ -41,8 +49,13 @@ export function SocialCatchCard({
   repostCount = 0,
   repostedByViewer = false,
   viewerTsuriId,
+  viewerFollowingIds,
+  onFollowChange,
 }: SocialCatchCardProps) {
   const permalink = `/posts/${encodeURIComponent(post.id)}`;
+  // 投稿者が自分でない場合だけフォロー導線を出す（未ログイン時は押すとログインへ誘導される）
+  const followTargetId =
+    post.tsuriId && post.tsuriId !== viewerTsuriId ? post.tsuriId : undefined;
 
   return (
     <Card className="py-3">
@@ -72,6 +85,14 @@ export function SocialCatchCard({
               <MapPin className="size-3" aria-hidden="true" />
               {post.spotName || post.spotSlug}
             </Link>
+          )}
+          {followTargetId && (
+            <FollowButton
+              tsuriId={followTargetId}
+              initialFollowing={viewerFollowingIds?.has(followTargetId)}
+              onFollowChange={(next) => onFollowChange?.(followTargetId, next)}
+              className="ml-auto px-3 py-0.5"
+            />
           )}
         </div>
 

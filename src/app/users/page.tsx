@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Users } from "lucide-react";
+import { auth } from "@/lib/auth";
 import { UserSearchBox } from "@/components/social/user-search-box";
 import { UserCard } from "@/components/social/user-card";
 import { getSuggestedUsers } from "@/lib/suggested-users";
@@ -23,7 +24,12 @@ async function fetchSuggested(): Promise<UserSearchEntry[]> {
 }
 
 export default async function UsersPage() {
-  const suggested = await fetchSuggested();
+  const [all, session] = await Promise.all([fetchSuggested(), auth()]);
+  // 自分自身はフォローできず FollowButton が非表示になるため、
+  // 除外しないと「ボタンが1つも無い一覧」に見えてしまう。
+  // getSuggestedUsers() のキャッシュは全ユーザー共有なので、絞り込みは表示側で行う
+  const viewerId = session?.user?.tsuriId;
+  const suggested = viewerId ? all.filter((u) => u.tsuriId !== viewerId) : all;
 
   return (
     <main className="mx-auto w-full max-w-2xl px-4 py-8">
@@ -39,7 +45,7 @@ export default async function UsersPage() {
         <UserSearchBox />
       </div>
 
-      {suggested.length > 0 && (
+      {suggested.length > 0 ? (
         <section aria-label="おすすめユーザー" className="mt-6">
           <h2 className="text-sm font-bold text-muted-foreground">
             おすすめユーザー（最近投稿した釣り人）
@@ -50,6 +56,13 @@ export default async function UsersPage() {
             ))}
           </div>
         </section>
+      ) : (
+        /* 該当ゼロだと検索窓だけの画面になり「何もできないページ」に見えるため案内を出す */
+        <p className="mt-6 rounded-2xl border border-dashed border-muted-foreground/30 p-6 text-center text-sm text-muted-foreground">
+          いまおすすめできる釣り人がいません。ニックネームで検索するか、
+          <br className="hidden sm:inline" />
+          釣果に投稿があった釣り人の名前から相手のページを開いてフォローできます。
+        </p>
       )}
     </main>
   );
