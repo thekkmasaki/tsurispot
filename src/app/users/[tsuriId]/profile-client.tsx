@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import {
   ArrowLeft, MapPin, Calendar, Ruler,
@@ -11,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ShareButtons } from "@/components/ui/share-buttons";
 import { BlockButton } from "@/components/social/block-button";
+import { toast } from "@/components/ui/toast";
 import { getTitle } from "@/lib/titles";
 
 interface CatchReportItem {
@@ -67,6 +69,7 @@ interface Props {
 
 export function ProfileClient({ data, shareUrl }: Props) {
   const { status: authStatus, data: session } = useSession();
+  const router = useRouter();
   const [follow, setFollow] = useState({
     followingCount: data.follow.followingCount,
     followersCount: data.follow.followersCount,
@@ -91,31 +94,47 @@ export function ProfileClient({ data, shareUrl }: Props) {
   }, [authStatus, session?.user?.tsuriId, data.user.tsuriId, data.follow.isSelf]);
 
   const handleFollow = async () => {
-    if (follow.isSelf) return;
+    if (follow.isSelf || followLoading) return;
     if (authStatus !== "authenticated") {
-      window.location.href = "/login";
+      toast.info("フォローにはログインが必要です");
+      router.push("/login");
       return;
     }
+
+    // 楽観的更新。失敗時は元に戻したうえで理由を必ず表示する
+    // （以前はエラーを握り潰していたため、押しても何も起きない状態に見えていた）
+    const next = !follow.viewerFollowing;
+    const before = {
+      viewerFollowing: follow.viewerFollowing,
+      followersCount: follow.followersCount,
+    };
+    setFollow((prev) => ({
+      ...prev,
+      viewerFollowing: next,
+      followersCount: Math.max(0, prev.followersCount + (next ? 1 : -1)),
+    }));
     setFollowLoading(true);
-    const method = follow.viewerFollowing ? "DELETE" : "POST";
     try {
       const res = await fetch("/api/follow", {
-        method,
+        method: next ? "POST" : "DELETE",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ tsuriId: data.user.tsuriId }),
       });
-      if (res.ok) {
-        const updated = await res.json();
-        setFollow((prev) => ({
-          ...prev,
-          viewerFollowing: updated.following,
-          followersCount: updated.followersCount,
-        }));
-      }
-    } catch {
-      /* ignore */
+      const updated = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(updated.error ?? "操作に失敗しました");
+      // サーバーの実数で確定させる
+      setFollow((prev) => ({
+        ...prev,
+        viewerFollowing: Boolean(updated.following),
+        followersCount:
+          typeof updated.followersCount === "number" ? updated.followersCount : prev.followersCount,
+      }));
+    } catch (err) {
+      setFollow((prev) => ({ ...prev, ...before }));
+      toast.error(err instanceof Error ? err.message : "操作に失敗しました");
+    } finally {
+      setFollowLoading(false);
     }
-    setFollowLoading(false);
   };
 
   const { user, stats, badges, reports, bestCatch } = data;

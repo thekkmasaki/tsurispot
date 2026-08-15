@@ -49,15 +49,19 @@ export async function GET(request: NextRequest) {
   const session = await auth();
   const viewerId = session?.user?.tsuriId;
 
+  // フォロー中IDは following タブの絞り込みだけでなく、カード上のフォローボタンの初期状態にも使う。
+  // ここでまとめて返すことで、クライアントがカード1枚ごとに /api/follow を叩くのを防ぐ（Redis ZRANGE 1回で済む）
+  const followingIds = viewerId ? await getFollowingList(viewerId, 100) : [];
+
   let filter: ((ref: { tsuriId?: string }) => boolean) | undefined;
   if (tab === "following") {
     if (!viewerId) {
       return NextResponse.json({ error: "認証が必要です" }, { status: 401 });
     }
-    const following = new Set(await getFollowingList(viewerId, 100));
-    if (following.size === 0) {
-      return NextResponse.json({ items: [], nextCursor: null });
+    if (followingIds.length === 0) {
+      return NextResponse.json({ items: [], nextCursor: null, followingIds: [] });
     }
+    const following = new Set(followingIds);
     filter = (ref) => Boolean(ref.tsuriId && following.has(ref.tsuriId));
   }
 
@@ -96,5 +100,6 @@ export async function GET(request: NextRequest) {
     items,
     nextCursor: nextCursor ? encodeCursor(nextCursor) : null,
     editorial,
+    followingIds,
   });
 }

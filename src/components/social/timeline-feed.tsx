@@ -3,7 +3,7 @@
 import { Fragment, useCallback, useEffect, useState } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { Fish } from "lucide-react";
+import { Fish, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { NativeAdBreak } from "@/components/ads/ad-unit";
 import { SocialCatchCard } from "@/components/social/social-catch-card";
@@ -30,6 +30,8 @@ export function TimelineFeed() {
   const [tab, setTab] = useState<Tab>("all");
   const [items, setItems] = useState<TimelineItem[]>([]);
   const [editorial, setEditorial] = useState<EditorialCardData[]>([]);
+  // カードのフォローボタン初期状態。API がまとめて返すのでカードごとの状態取得は発生しない
+  const [followingIds, setFollowingIds] = useState<Set<string>>(new Set());
   const [nextCursor, setNextCursor] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
@@ -45,6 +47,7 @@ export function TimelineFeed() {
       items: TimelineItem[];
       nextCursor: string | null;
       editorial?: EditorialCardData[];
+      followingIds?: string[];
     };
   }, []);
 
@@ -58,6 +61,7 @@ export function TimelineFeed() {
         setItems(data.items);
         setEditorial(data.editorial ?? []);
         setNextCursor(data.nextCursor);
+        setFollowingIds(new Set(data.followingIds ?? []));
       })
       .catch((err) => {
         if (!cancelled) setError(err instanceof Error ? err.message : "取得に失敗しました");
@@ -83,6 +87,17 @@ export function TimelineFeed() {
       setLoadingMore(false);
     }
   };
+
+  // カード上でフォロー状態が変わったら集合も更新する。
+  // これをしないと「もっと見る」で追加したカードが古い状態で初期化されて表示がズレる
+  const handleFollowChange = useCallback((tsuriId: string, following: boolean) => {
+    setFollowingIds((prev) => {
+      const next = new Set(prev);
+      if (following) next.add(tsuriId);
+      else next.delete(tsuriId);
+      return next;
+    });
+  }, []);
 
   return (
     <div>
@@ -132,13 +147,23 @@ export function TimelineFeed() {
                   ? "フォロー中のユーザーの釣果がここに流れます。気になる釣り人をフォローしてみましょう。"
                   : "まだ釣果がありません。最初の投稿者になりましょう！"}
               </p>
-              {tab === "all" && (
+              {tab === "all" ? (
                 <Link
                   prefetch={false}
                   href="/post"
                   className="mt-3 inline-block rounded-full bg-sky-700 px-4 py-2 text-sm font-bold text-white hover:bg-sky-800"
                 >
                   釣果を投稿する
+                </Link>
+              ) : (
+                /* フォロー先が居ないと永久に空のままなので、探す導線をここに出す */
+                <Link
+                  prefetch={false}
+                  href="/users"
+                  className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-sky-700 px-4 py-2 text-sm font-bold text-white hover:bg-sky-800"
+                >
+                  <Users className="size-4" aria-hidden="true" />
+                  釣り人を探す
                 </Link>
               )}
             </div>
@@ -166,6 +191,8 @@ export function TimelineFeed() {
                   repostCount={item.repostCount}
                   repostedByViewer={item.repostedByViewer}
                   viewerTsuriId={viewerTsuriId}
+                  viewerFollowingIds={followingIds}
+                  onFollowChange={handleFollowChange}
                 />
                 {ed && <EditorialCard card={ed} />}
                 {/* フィード5件毎に広告（即ロード。lazy化はRPM半減の前歴があり禁忌） */}
