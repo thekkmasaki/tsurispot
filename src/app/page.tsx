@@ -90,6 +90,9 @@ const HomeSeasonalFish = nextDynamic(() => import("@/components/home-seasonal-fi
 const RecentlyViewedSpots = nextDynamic(() => import("@/components/spots/recently-viewed").then((m) => m.RecentlyViewedSpots), {
   loading: () => null,
 });
+const FishingIndexCard = nextDynamic(() => import("@/components/fishing-index/fishing-index-card").then((m) => m.FishingIndexCard), {
+  loading: () => null,
+});
 const RecentCatchReports = nextDynamic(() => import("@/components/home/recent-catch-reports").then((m) => m.RecentCatchReports), {
   loading: () => null,
 });
@@ -435,6 +438,13 @@ export default async function Home() {
           ハウス広告フォールバック。登録導線はヘッダー/各ページの /login で維持されるため funnel は残る。 */}
       <section className="mx-auto w-full max-w-5xl px-4 py-3 sm:py-4">
         <DisplayAd />
+      </section>
+
+      {/* 今日の釣行指数（案③）: お気に入り×今日の条件を0-100点で。毎日開く理由をつくる。
+          一等地の DisplayAd（2026-08-03 の収益優先判断）は動かさず、その直下に置く。
+          force-static を壊さないよう完全にクライアント計算（お気に入りは localStorage、匿名OK）。 */}
+      <section className="mx-auto w-full max-w-5xl px-4 py-3 sm:py-4">
+        <FishingIndexCard />
       </section>
 
       {/* CommunityStats は数字が育ってから復活 (現状 26人/1件 が逆効果) */}
