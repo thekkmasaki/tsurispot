@@ -47,8 +47,9 @@ export function StreakCard({ className }: { className?: string }) {
       return;
     }
     let cancelled = false;
-    syncActivityToServer();
-    fetch("/api/user/streak")
+    // 今日の分をサーバーへ反映してから取得（VisitTracker の POST とのレース回避）
+    syncActivityToServer()
+      .then(() => fetch("/api/user/streak"))
       .then((r) => (r.ok ? r.json() : null))
       .then((data: StreakApiResponse | null) => {
         if (cancelled || !data || !data.dailyCounts) return;

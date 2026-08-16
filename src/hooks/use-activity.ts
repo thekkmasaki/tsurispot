@@ -60,16 +60,18 @@ export function getActions(): string[] {
   return readDates(ACTIONS_KEY);
 }
 
-/** ログイン中ならローカルの活動履歴をサーバーへ反映（SADD なので何度呼んでも安全） */
-export function syncActivityToServer(): void {
+/** ログイン中ならローカルの活動履歴をサーバーへ反映（SADD なので何度呼んでも安全）。成功可否を返す */
+export function syncActivityToServer(): Promise<boolean> {
   const visits = getVisits();
   const actions = getActions();
-  if (visits.length === 0 && actions.length === 0) return;
-  fetch("/api/user/activity", {
+  if (visits.length === 0 && actions.length === 0) return Promise.resolve(true);
+  return fetch("/api/user/activity", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ visits, actions }),
-  }).catch(() => {});
+  })
+    .then((r) => r.ok)
+    .catch(() => false);
 }
 
 export function useActivity() {

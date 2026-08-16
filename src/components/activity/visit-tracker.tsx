@@ -17,18 +17,30 @@ export function VisitTracker() {
 
   useEffect(() => {
     recordVisit();
+    // タブ開きっぱなし/PWA で日付をまたいでも記録が続くように（recordVisit は日単位で冪等）
+    const onVisible = () => {
+      if (document.visibilityState === "visible") recordVisit();
+    };
+    document.addEventListener("visibilitychange", onVisible);
+    return () => document.removeEventListener("visibilitychange", onVisible);
   }, []);
 
   useEffect(() => {
     if (status !== "authenticated") return;
     try {
-      const today = todayJST();
-      if (localStorage.getItem(SYNC_FLAG_KEY) === today) return;
-      localStorage.setItem(SYNC_FLAG_KEY, today);
+      if (localStorage.getItem(SYNC_FLAG_KEY) === todayJST()) return;
     } catch {
       // localStorage 不可でも同期自体は試す
     }
-    syncActivityToServer();
+    // フラグは成功時のみ立てる（失敗した日が再試行されないと最終日がサーバーから欠落する）
+    syncActivityToServer().then((ok) => {
+      if (!ok) return;
+      try {
+        localStorage.setItem(SYNC_FLAG_KEY, todayJST());
+      } catch {
+        // noop
+      }
+    });
   }, [status]);
 
   return null;

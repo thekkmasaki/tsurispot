@@ -11,6 +11,7 @@ import {
 import { NotificationSubscribeButton } from "@/components/notification-subscribe-button";
 import { CalendarHeatmap } from "@/components/mypage/calendar-heatmap";
 import { StreakBadgeStrip } from "@/components/activity/streak-badge-strip";
+import { syncActivityToServer } from "@/hooks/use-activity";
 import { PersonalBestCard } from "@/components/mypage/personal-best-card";
 import { CatchReportCard } from "@/components/mypage/catch-report-card";
 import { OnThisDay } from "@/components/mypage/on-this-day";
@@ -235,7 +236,10 @@ export default function MyPage() {
       fetch("/api/user/dashboard").then((r) => (r.ok ? r.json() : null)),
       fetch("/api/user/wishlist").then((r) => (r.ok ? r.json() : { items: [] })),
       fetch("/api/user/checkins").then((r) => (r.ok ? r.json() : { checkins: [] })),
-      fetch("/api/user/streak").then((r) => (r.ok ? r.json() : null)),
+      // 今日の訪問/アクションをサーバーへ反映してから取得（当日分の欠け防止）
+      syncActivityToServer()
+        .then(() => fetch("/api/user/streak"))
+        .then((r) => (r.ok ? r.json() : null)),
     ])
       .then(([reportsRes, statsRes, badgesRes, profileRes, dashboardRes, wishlistRes, checkinsRes, streakRes]) => {
         setCatchReports(reportsRes.reports || []);
