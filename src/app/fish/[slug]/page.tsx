@@ -29,6 +29,7 @@ import { trimDescription } from "@/lib/utils/seo";
 import { composeMetaDescription, firstSentence } from "@/lib/seo/meta-description";
 import { MonthCalendar } from "@/components/fish/month-calendar";
 import { NearbySpotsSorter } from "@/components/fish/nearby-spots-sorter";
+import { FishCaughtButton } from "@/components/fish/fish-caught-button";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
 import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { getVideosForMethods } from "@/lib/data/youtube-videos";
@@ -519,6 +520,9 @@ export default async function FishDetailPage({ params }: PageProps) {
         )}
         </div>
       </div>
+
+      {/* 釣ったことある1タップ記録（案①: 匿名で図鑑が貯まる入口） */}
+      <FishCaughtButton slug={fish.slug} name={fish.name} total={allFish.length} />
 
       {/* Answer-first: この魚の要点（AI引用されやすい構造） */}
       <div className="mb-6 rounded-lg border-l-4 border-primary bg-primary/5 p-4 sm:mb-8">

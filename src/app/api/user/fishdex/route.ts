@@ -31,8 +31,24 @@ export async function GET() {
     return NextResponse.json({ error: "未認証" }, { status: 401 });
   }
 
-  const raw = await redis.lrange(`auth:user_reports:${userId}`, 0, 999);
+  // 釣果投稿由来の caught に加えて、「釣ったことある」1タップ分（匿名からのマージ含む）を合成。
+  // fishdex_removed は「投稿由来だがユーザーが図鑑上で取り消した」slug（取り消しが復活しないように）
+  const [raw, extraRaw, removedRaw] = await Promise.all([
+    redis.lrange(`auth:user_reports:${userId}`, 0, 999),
+    redis.smembers(`auth:fishdex_extra:${userId}`),
+    redis.smembers(`auth:fishdex_removed:${userId}`),
+  ]);
   const reports = parseReports(raw as unknown[]);
+  const extraSlugs = new Set(
+    ((extraRaw as unknown[]) || []).filter(
+      (s): s is string => typeof s === "string",
+    ),
+  );
+  const removedSlugs = new Set(
+    ((removedRaw as unknown[]) || []).filter(
+      (s): s is string => typeof s === "string",
+    ),
+  );
 
   // ユーザが釣った魚名 (Set) + 各魚種の最大サイズ
   const caughtSet = new Set<string>();
@@ -56,7 +72,9 @@ export async function GET() {
     slug: f.slug,
     name: f.name,
     imageUrl: `/images/fish/${f.slug}.jpg`,
-    caught: caughtSet.has(f.name),
+    caught:
+      extraSlugs.has(f.slug) ||
+      (caughtSet.has(f.name) && !removedSlugs.has(f.slug)),
     maxSizeCm: maxByFish[f.name] ?? null,
     firstCaughtAt: firstCatchByFish[f.name] ?? null,
   }));
@@ -68,4 +86,64 @@ export async function GET() {
     completionRate: Math.round((caughtCount / fish.length) * 100),
     fish,
   });
+}
+
+const MAX_EXTRA_SLUGS = 300;
+
+/**
+ * 「釣ったことある」記録の全置換（クライアント側で union merge した結果を受ける。
+ * use-favorites と同じく last-write-wins）。
+ */
+export async function PUT(request: Request) {
+  const session = await auth();
+  const userId = session?.user?.tsuriId;
+  if (!userId) {
+    return NextResponse.json({ error: "未認証" }, { status: 401 });
+  }
+
+  let body: { slugs?: unknown };
+  try {
+    body = await request.json();
+  } catch {
+    return NextResponse.json({ error: "不正なリクエスト" }, { status: 400 });
+  }
+
+  const validSlugs = new Set(fishSpecies.map((f) => f.slug));
+  const slugs = Array.isArray(body.slugs)
+    ? body.slugs
+        .filter((s): s is string => typeof s === "string" && validSlugs.has(s))
+        .slice(0, MAX_EXTRA_SLUGS)
+    : [];
+
+  // 釣果投稿由来の slug のうち、クライアントの一覧に無いもの = ユーザーが図鑑上で取り消したもの。
+  // これを記録しないと GET の合成で毎回復活してしまう（取り消しできないバグになる）
+  const raw = await redis.lrange(`auth:user_reports:${userId}`, 0, 999);
+  const reports = parseReports(raw as unknown[]);
+  const slugByName = new Map(fishSpecies.map((f) => [f.name, f.slug]));
+  const received = new Set(slugs);
+  const removed: string[] = [];
+  const seen = new Set<string>();
+  for (const r of reports) {
+    const slug = r.fishName ? slugByName.get(r.fishName) : undefined;
+    if (slug && !received.has(slug) && !seen.has(slug)) {
+      seen.add(slug);
+      removed.push(slug);
+    }
+  }
+
+  const extraKey = `auth:fishdex_extra:${userId}`;
+  const removedKey = `auth:fishdex_removed:${userId}`;
+  // MULTI で del→sadd をアトミックに（隙間の GET が空集合を観測しないように）
+  const tx = redis.multi();
+  tx.del(extraKey);
+  if (slugs.length > 0) {
+    tx.sadd(extraKey, slugs[0], ...slugs.slice(1));
+  }
+  tx.del(removedKey);
+  if (removed.length > 0) {
+    tx.sadd(removedKey, removed[0], ...removed.slice(1));
+  }
+  await tx.exec();
+
+  return NextResponse.json({ ok: true, count: slugs.length });
 }

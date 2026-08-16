@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useSession } from "next-auth/react";
-import { ArrowLeft, Fish, CheckCircle2 } from "lucide-react";
+import { ArrowLeft, Fish } from "lucide-react";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
+import { FishdexGrid } from "@/components/fish/fishdex-grid";
 
 interface FishEntry {
   slug: string;
@@ -26,7 +27,6 @@ export default function FishdexPage() {
   const { status } = useSession();
   const [data, setData] = useState<FishdexData | null>(null);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState<"all" | "caught" | "uncaught">("all");
 
   useEffect(() => {
     if (status !== "authenticated") return;
@@ -71,13 +71,6 @@ export default function FishdexPage() {
     );
   }
 
-  const filtered =
-    filter === "all"
-      ? data.fish
-      : filter === "caught"
-        ? data.fish.filter((f) => f.caught)
-        : data.fish.filter((f) => !f.caught);
-
   return (
     <div className="container mx-auto max-w-4xl px-4 py-6 sm:py-8">
       <Breadcrumb
@@ -101,65 +94,9 @@ export default function FishdexPage() {
           <Fish className="h-6 w-6 text-primary" />
           魚種図鑑
         </h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          全{data.total}種のうち <span className="font-bold text-primary">{data.caughtCount}種</span> 釣りました ({data.completionRate}%)
-        </p>
-        <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-muted">
-          <div
-            className="h-full bg-gradient-to-r from-sky-400 to-emerald-400 transition-all duration-700"
-            style={{ width: `${data.completionRate}%` }}
-          />
-        </div>
       </div>
 
-      <div className="mb-4 flex gap-2">
-        {[
-          { key: "all" as const, label: `全て (${data.total})` },
-          { key: "caught" as const, label: `釣った (${data.caughtCount})` },
-          { key: "uncaught" as const, label: `未挑戦 (${data.total - data.caughtCount})` },
-        ].map(({ key, label }) => (
-          <button
-            key={key}
-            onClick={() => setFilter(key)}
-            className={`rounded-full px-3 py-1 text-xs font-medium transition-colors ${
-              filter === key
-                ? "bg-primary text-primary-foreground"
-                : "border bg-background hover:bg-muted"
-            }`}
-          >
-            {label}
-          </button>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-3 gap-2 sm:grid-cols-4 sm:gap-3 lg:grid-cols-6">
-        {filtered.map((f) => (
-          <Link prefetch={false}
-            key={f.slug}
-            href={`/fish/${f.slug}`}
-            className={`relative rounded-lg border bg-card p-2 text-center transition-all hover:shadow-md ${
-              f.caught ? "border-emerald-300 bg-emerald-50/30" : "opacity-60 grayscale"
-            }`}
-          >
-            {f.caught && (
-              <CheckCircle2 className="absolute right-1 top-1 h-4 w-4 text-emerald-500" />
-            )}
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={f.imageUrl}
-              alt={f.name}
-              className="mx-auto h-16 w-16 rounded object-cover sm:h-20 sm:w-20"
-              onError={(e) => {
-                (e.target as HTMLImageElement).style.display = "none";
-              }}
-            />
-            <p className="mt-1 text-xs font-medium">{f.name}</p>
-            {f.caught && f.maxSizeCm && (
-              <p className="text-[10px] text-emerald-700">{f.maxSizeCm}cm</p>
-            )}
-          </Link>
-        ))}
-      </div>
+      <FishdexGrid entries={data.fish} />
     </div>
   );
 }

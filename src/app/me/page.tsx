@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Heart, User } from "lucide-react";
 import { StreakCard } from "@/components/activity/streak-card";
+import { FishdexSummaryCard } from "@/components/fish/fishdex-summary-card";
+import { fishSpecies } from "@/lib/data/fish";
 import { Card, CardContent } from "@/components/ui/card";
 
 /**
@@ -27,6 +29,8 @@ export default function MePage() {
       </p>
 
       <StreakCard className="mt-4" />
+
+      <FishdexSummaryCard total={fishSpecies.length} className="mt-4" />
 
       <Card className="mt-4">
         <CardContent className="p-4">
