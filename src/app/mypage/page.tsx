@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { NotificationSubscribeButton } from "@/components/notification-subscribe-button";
 import { CalendarHeatmap } from "@/components/mypage/calendar-heatmap";
+import { StreakBadgeStrip } from "@/components/activity/streak-badge-strip";
 import { PersonalBestCard } from "@/components/mypage/personal-best-card";
 import { CatchReportCard } from "@/components/mypage/catch-report-card";
 import { OnThisDay } from "@/components/mypage/on-this-day";
@@ -139,7 +140,9 @@ interface StreakData {
     lastDate: string | null;
     totalDays: number;
   };
+  /** 値はレベル (1=見た / 2=動いた / 3=行った)。ヒートマップの濃淡に対応 */
   dailyCounts: Record<string, number>;
+  maxTripsInMonth?: number;
 }
 
 interface StatsExt {
@@ -693,13 +696,13 @@ export default function MyPage() {
           </Card>
         )}
 
-        {/* 釣行ストリーク */}
+        {/* 活動ストリーク（見た/動いた/行ったのハイブリッド定義） */}
         {streakData && streakData.streak.current > 0 && (
           <div className="mt-6 flex items-center gap-3 rounded-xl border border-orange-200 bg-gradient-to-r from-orange-50 to-amber-50 p-4">
             <Flame className="h-8 w-8 shrink-0 text-orange-500" />
             <div className="flex-1">
               <div className="text-sm font-medium text-orange-900">
-                {streakData.streak.current}日連続 釣行中！
+                {streakData.streak.current}日連続 ツリスポ習慣
               </div>
               <div className="text-xs text-orange-700">
                 最長記録 {streakData.streak.longest}日 / 通算 {streakData.streak.totalDays}日
@@ -841,19 +844,30 @@ export default function MyPage() {
           <PersonalBestCard maxByFish={stats.maxByFish} />
         )}
 
-        {/* 釣行カレンダー（半年分） */}
+        {/* 活動カレンダー（半年分・見た/動いた/行ったの3段階） */}
         {streakData && (
           <Card className="mt-4">
             <CardContent className="p-4">
               <div className="mb-3 flex items-center gap-2">
                 <Calendar className="h-5 w-5 text-emerald-600" />
-                <span className="font-medium">釣行カレンダー</span>
+                <span className="font-medium">活動カレンダー</span>
                 <span className="text-xs text-muted-foreground">
-                  直近半年・色が濃いほど釣行多数
+                  直近半年・色が濃いほど深く関わった日
                 </span>
               </div>
               <div className="overflow-x-auto pb-1">
                 <CalendarHeatmap dailyCounts={streakData.dailyCounts} weeks={26} />
+              </div>
+              <p className="mt-2 text-[11px] text-muted-foreground">
+                薄い＝見た（訪問）／中間＝動いた（お気に入り追加など）／濃い＝行った（釣行記録・釣果投稿）
+              </p>
+              <div className="mt-3">
+                <div className="mb-2 text-sm font-medium">連続日数バッジ</div>
+                <StreakBadgeStrip
+                  longest={streakData.streak.longest}
+                  current={streakData.streak.current}
+                  maxTripsInMonth={streakData.maxTripsInMonth ?? 0}
+                />
               </div>
             </CardContent>
           </Card>

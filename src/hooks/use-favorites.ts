@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useSession } from "next-auth/react";
 import { trackFavorite } from "@/lib/analytics";
+import { recordAction } from "@/hooks/use-activity";
 
 const STORAGE_KEY = "tsurispot-favorites";
 
@@ -104,6 +105,7 @@ export function useFavorites() {
         }).catch(() => {});
         syncToServer(next);
         trackFavorite({ action: "add", slug });
+        recordAction(); // お気に入り追加は活動カレンダーの「動いた」(Lv2)
       }
     },
     [syncToServer],
@@ -151,6 +153,7 @@ export function useFavorites() {
         }).catch(() => {});
         syncToServer(next);
         trackFavorite({ action: "add", slug });
+        recordAction(); // お気に入り追加は活動カレンダーの「動いた」(Lv2)
       }
     },
     [syncToServer],
