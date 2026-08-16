@@ -5,7 +5,7 @@
  * - ログイン時は /api/user/fishdex と union merge（use-favorites.ts と同じ構造）
  *   サーバー側は釣果投稿由来の caught + 追加分(auth:fishdex_extra)の合成
  */
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useSession } from "next-auth/react";
 import { recordAction } from "@/hooks/use-activity";
 
@@ -47,6 +47,8 @@ function saveCaughtFish(slugs: string[]) {
 export function useFishdex() {
   const { status } = useSession();
   const [caught, setCaught] = useState<string[]>([]);
+  // GET 中にユーザーが toggle したら、古いスナップショットでの merge を破棄する（巻き戻り防止）
+  const mutationGen = useRef(0);
 
   useEffect(() => {
     const load = () => setCaught(getCaughtFish());
@@ -63,10 +65,12 @@ export function useFishdex() {
   useEffect(() => {
     if (status !== "authenticated") return;
     let cancelled = false;
+    const gen = mutationGen.current;
     fetch("/api/user/fishdex")
       .then((r) => (r.ok ? r.json() : null))
       .then((data: { fish?: FishdexApiEntry[] } | null) => {
-        if (cancelled || !data || !Array.isArray(data.fish)) return;
+        if (cancelled || mutationGen.current !== gen) return;
+        if (!data || !Array.isArray(data.fish)) return;
         const serverSlugs = data.fish
           .filter((f) => f.caught)
           .map((f) => f.slug);
@@ -109,6 +113,7 @@ export function useFishdex() {
   /** トグル。追加時は活動カレンダーの「動いた」(Lv2) も記録する */
   const toggle = useCallback(
     (slug: string) => {
+      mutationGen.current += 1;
       const current = getCaughtFish();
       const next = current.includes(slug)
         ? current.filter((s) => s !== slug)
