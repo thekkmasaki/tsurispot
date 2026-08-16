@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 interface CalendarHeatmapProps {
@@ -27,11 +28,28 @@ function colorFor(count: number): string {
   return "bg-emerald-700";
 }
 
+// 値の意味は件数→活動レベル(1=見た/2=動いた/3=行った)に変わった（案②）
+function levelTitle(count: number): string {
+  if (count <= 0) return "記録なし";
+  return ["", "見た", "動いた", "行った"][Math.min(count, 3)];
+}
+
 export function CalendarHeatmap({
   dailyCounts,
   weeks = 26,
   className,
 }: CalendarHeatmapProps) {
+  // グリッドの起点がレンダ時の new Date() のため、静的プリレンダ（/me 等）に乗せると
+  // ビルド日と閲覧日のズレで全セルの日付・色が不一致になる。マウント後にだけ描画する
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) {
+    // 7行×10px + 6gap×2px ≒ 82px を確保して CLS を防ぐ
+    return (
+      <div className={cn("flex gap-2", className)} style={{ height: 82 }} aria-hidden />
+    );
+  }
+
   // 直近 weeks 週分のグリッドを生成。各列は1週、各行は曜日（日〜土）。
   const today = new Date();
   // JST 補正
@@ -78,9 +96,9 @@ export function CalendarHeatmap({
             {week.map(({ date, count, isFuture }, di) => (
               <div
                 key={di}
-                title={`${ymd(date)} (${count}件)`}
+                title={`${ymd(date)} ${levelTitle(count)}`}
                 role={isFuture ? undefined : "img"}
-                aria-label={isFuture ? undefined : `${ymd(date)} ${count}件`}
+                aria-label={isFuture ? undefined : `${ymd(date)} ${levelTitle(count)}`}
                 aria-hidden={isFuture ? true : undefined}
                 className={cn(
                   "h-[10px] w-[10px] rounded-[2px]",

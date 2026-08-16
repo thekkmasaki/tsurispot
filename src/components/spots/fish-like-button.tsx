@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { ThumbsUp, Calendar } from "lucide-react";
+import { recordAction } from "@/hooks/use-activity";
 
 interface FishLikeButtonProps {
   spotSlug: string;
@@ -77,6 +78,7 @@ export function FishLikeButton({ spotSlug, fishSlug }: FishLikeButtonProps) {
     const newDates = [...dates, today];
     saveDates(spotSlug, fishSlug, newDates);
     setDates(newDates);
+    recordAction(); // 活動カレンダーの「動いた」(Lv2)
     setTimeout(() => setAnimating(false), 600);
   }
 

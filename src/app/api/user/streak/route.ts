@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import { redis } from "@/lib/redis";
 import { auth } from "@/lib/auth";
 import { getCheckins } from "@/lib/user-store";
-import { calculateStreak, buildDailyCounts } from "@/lib/streak";
+import { calculateStreak } from "@/lib/streak";
+import { buildActivityLevels, countByLevel, maxTripsInAnyMonth } from "@/lib/activity";
 
 interface CatchReportLite {
   date?: string;
@@ -35,12 +36,28 @@ export async function GET() {
     .filter((r): r is CatchReportLite => Boolean(r));
   const reportDates = reports.map((r) => r.date).filter(Boolean) as string[];
 
-  const allDates = [...checkinDates, ...reportDates];
-  const streak = calculateStreak(allDates);
-  const dailyCounts = buildDailyCounts(allDates);
+  // 訪問日 (Lv1) / アクション日 (Lv2)。匿名時に貯めた分は /api/user/activity 経由で union 済み
+  const [visitsRaw, actionsRaw] = await Promise.all([
+    redis.smembers(`auth:visits:${userId}`),
+    redis.smembers(`auth:actions:${userId}`),
+  ]);
+  const visitDates = (visitsRaw || []).filter(
+    (d): d is string => typeof d === "string",
+  );
+  const actionDates = (actionsRaw || []).filter(
+    (d): d is string => typeof d === "string",
+  );
+
+  // ハイブリッド定義: 見た=1 / 動いた=2 / 行った=3（同日は最大レベル）
+  const tripDates = [...checkinDates, ...reportDates];
+  const levels = buildActivityLevels(visitDates, actionDates, tripDates);
+  const streak = calculateStreak(Object.keys(levels));
 
   return NextResponse.json({
     streak,
-    dailyCounts,
+    // 値は件数ではなくレベル (1-3)。CalendarHeatmap の色分け (1/2/3+) にそのまま渡せる
+    dailyCounts: levels,
+    levelCounts: countByLevel(levels),
+    maxTripsInMonth: maxTripsInAnyMonth(levels),
   });
 }
