@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/redis";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 
 /**
  * 毎朝の釣行指数 Push の購読（案③）。認証不要（匿名 OK）。
@@ -35,6 +36,14 @@ function sanitizeSlugs(input: unknown, cap: number): string[] {
 }
 
 export async function POST(request: Request) {
+  // 偽subscriptionの大量登録によるHSET肥大・送信コスト増を防ぐ
+  if (!(await checkRateLimit(getClientIp(request), "PUSH_IDX_SUB", 10, 600))) {
+    return NextResponse.json(
+      { error: "リクエストが多すぎます。しばらくしてからお試しください。" },
+      { status: 429 },
+    );
+  }
+
   let body: RequestBody;
   try {
     body = await request.json();

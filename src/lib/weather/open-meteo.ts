@@ -50,6 +50,13 @@ interface MarineApiResponse {
 
 const REVALIDATE_SEC = 3600;
 const FORECAST_DAYS = 7;
+const FETCH_TIMEOUT_MS = 8000;
+
+// POST Route Handler 内の fetch は Next の Data Cache 対象外（公式ドキュメント明記）のため、
+// next.revalidate に頼らずプロセス内メモでも重複取得を抑える（App Runner は実質1インスタンス）
+const MEMO_TTL_MS = 30 * 60 * 1000;
+const MEMO_FAIL_TTL_MS = 5 * 60 * 1000;
+const memo = new Map<string, { t: number; data: SpotForecast | null }>();
 
 function roundCoord(v: number): string {
   return v.toFixed(2);
@@ -62,6 +69,12 @@ export async function fetchSpotForecast(
   const lat = roundCoord(latitude);
   const lng = roundCoord(longitude);
 
+  const memoKey = `${lat},${lng}`;
+  const hit = memo.get(memoKey);
+  if (hit && Date.now() - hit.t < (hit.data ? MEMO_TTL_MS : MEMO_FAIL_TTL_MS)) {
+    return hit.data;
+  }
+
   const forecastUrl =
     `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}` +
     `&daily=weather_code,temperature_2m_max,sunrise,sunset,wind_speed_10m_max` +
@@ -72,17 +85,26 @@ export async function fetchSpotForecast(
     `&daily=sea_surface_temperature_max&timezone=Asia%2FTokyo&forecast_days=${FORECAST_DAYS}`;
 
   const [forecast, marine] = await Promise.all([
-    fetch(forecastUrl, { next: { revalidate: REVALIDATE_SEC } })
+    fetch(forecastUrl, {
+      next: { revalidate: REVALIDATE_SEC },
+      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+    })
       .then((r) => (r.ok ? (r.json() as Promise<ForecastApiResponse>) : null))
       .catch(() => null),
-    fetch(marineUrl, { next: { revalidate: REVALIDATE_SEC } })
+    fetch(marineUrl, {
+      next: { revalidate: REVALIDATE_SEC },
+      signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
+    })
       .then((r) => (r.ok ? (r.json() as Promise<MarineApiResponse>) : null))
       .catch(() => null),
   ]);
 
   const daily = forecast?.daily;
   const hourly = forecast?.hourly;
-  if (!daily?.time || daily.time.length === 0) return null;
+  if (!daily?.time || daily.time.length === 0) {
+    memo.set(memoKey, { t: Date.now(), data: null });
+    return null;
+  }
 
   const seaByDate = new Map<string, number | null>();
   const marineDaily = marine?.daily;
@@ -118,5 +140,7 @@ export async function fetchSpotForecast(
     };
   });
 
-  return { days };
+  const result = { days };
+  memo.set(memoKey, { t: Date.now(), data: result });
+  return result;
 }

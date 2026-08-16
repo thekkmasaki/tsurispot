@@ -135,7 +135,8 @@ function weatherPoints(
   else if (code <= 3) base = max === 15 ? 11 : 15;
   else if (code === 45 || code === 48) base = max === 15 ? 9 : 12;
   else if (code >= 95) base = max === 15 ? 2 : 3;
-  else if (code >= 71 && code <= 77) base = max === 15 ? 3 : 4;
+  else if ((code >= 71 && code <= 77) || code === 85 || code === 86)
+    base = max === 15 ? 3 : 4; // 雪（85/86 は snow showers）
   else if (code >= 51) base = max === 15 ? 5 : 7;
   else base = max === 15 ? 8 : 10;
 

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { getSpotBySlug } from "@/lib/data/spots";
 import { fetchSpotForecast, type SpotForecast } from "@/lib/weather/open-meteo";
 import {
@@ -50,6 +51,15 @@ function sanitizeSlugs(input: unknown, cap: number): string[] {
 }
 
 export async function POST(request: Request) {
+  // 認証不要APIかつ外部API(Open-Meteo)への増幅があるため、IPレート制限をかける
+  // （通常利用はクライアントの30分sessionStorageキャッシュで1回/30分）
+  if (!(await checkRateLimit(getClientIp(request), "FISHING_INDEX", 30, 600))) {
+    return NextResponse.json(
+      { error: "リクエストが多すぎます。しばらくしてからお試しください。" },
+      { status: 429 },
+    );
+  }
+
   let body: RequestBody;
   try {
     body = await request.json();
