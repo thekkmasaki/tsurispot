@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { redis } from "@/lib/redis";
 import { auth } from "@/lib/auth";
+import { splitFishNames } from "@/lib/fish-name";
 
 interface CatchReport {
   id?: string;
@@ -45,13 +46,15 @@ export async function GET() {
   const raw = await redis.lrange(`auth:user_reports:${userId}`, 0, 999);
   const reports = parseReports(raw as unknown[]);
 
-  // 魚種別最大サイズ
+  // 魚種別最大サイズ（「アジ、サバ」のような複数魚種の投稿は魚種単位に分割）
   const maxByFish: Record<string, CatchReport> = {};
   for (const r of reports) {
-    if (!r.fishName || typeof r.sizeCm !== "number") continue;
-    const prev = maxByFish[r.fishName];
-    if (!prev || (r.sizeCm > (prev.sizeCm ?? 0))) {
-      maxByFish[r.fishName] = r;
+    if (typeof r.sizeCm !== "number") continue;
+    for (const name of splitFishNames(r.fishName)) {
+      const prev = maxByFish[name];
+      if (!prev || (r.sizeCm > (prev.sizeCm ?? 0))) {
+        maxByFish[name] = { ...r, fishName: name };
+      }
     }
   }
   const fishRecords = Object.values(maxByFish)
@@ -64,10 +67,12 @@ export async function GET() {
   // 初挑戦魚種 (新しい順、最初の日付)
   const firstCatchByFish: Record<string, CatchReport> = {};
   for (const r of reports) {
-    if (!r.fishName || !r.date) continue;
-    const existing = firstCatchByFish[r.fishName];
-    if (!existing || (existing.date && r.date < existing.date)) {
-      firstCatchByFish[r.fishName] = r;
+    if (!r.date) continue;
+    for (const name of splitFishNames(r.fishName)) {
+      const existing = firstCatchByFish[name];
+      if (!existing || (existing.date && r.date < existing.date)) {
+        firstCatchByFish[name] = { ...r, fishName: name };
+      }
     }
   }
   const firstChallenges = Object.values(firstCatchByFish)

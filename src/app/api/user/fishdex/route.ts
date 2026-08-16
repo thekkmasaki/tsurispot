@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { redis } from "@/lib/redis";
 import { auth } from "@/lib/auth";
 import { fishSpecies } from "@/lib/data/fish";
+import { splitFishNames } from "@/lib/fish-name";
 
 interface CatchReport {
   fishName?: string;
@@ -50,20 +51,22 @@ export async function GET() {
     ),
   );
 
-  // ユーザが釣った魚名 (Set) + 各魚種の最大サイズ
+  // ユーザが釣った魚名 (Set) + 各魚種の最大サイズ。
+  // 「アジ、サバ」のような複数魚種の投稿は魚種単位に分割してから集計する
   const caughtSet = new Set<string>();
   const maxByFish: Record<string, number> = {};
   const firstCatchByFish: Record<string, string> = {};
   for (const r of reports) {
-    if (!r.fishName) continue;
-    caughtSet.add(r.fishName);
-    if (typeof r.sizeCm === "number" && r.sizeCm > (maxByFish[r.fishName] ?? 0)) {
-      maxByFish[r.fishName] = r.sizeCm;
-    }
-    if (r.date) {
-      const existing = firstCatchByFish[r.fishName];
-      if (!existing || r.date < existing) {
-        firstCatchByFish[r.fishName] = r.date;
+    for (const name of splitFishNames(r.fishName)) {
+      caughtSet.add(name);
+      if (typeof r.sizeCm === "number" && r.sizeCm > (maxByFish[name] ?? 0)) {
+        maxByFish[name] = r.sizeCm;
+      }
+      if (r.date) {
+        const existing = firstCatchByFish[name];
+        if (!existing || r.date < existing) {
+          firstCatchByFish[name] = r.date;
+        }
       }
     }
   }
@@ -124,10 +127,12 @@ export async function PUT(request: Request) {
   const removed: string[] = [];
   const seen = new Set<string>();
   for (const r of reports) {
-    const slug = r.fishName ? slugByName.get(r.fishName) : undefined;
-    if (slug && !received.has(slug) && !seen.has(slug)) {
-      seen.add(slug);
-      removed.push(slug);
+    for (const name of splitFishNames(r.fishName)) {
+      const slug = slugByName.get(name);
+      if (slug && !received.has(slug) && !seen.has(slug)) {
+        seen.add(slug);
+        removed.push(slug);
+      }
     }
   }
 
