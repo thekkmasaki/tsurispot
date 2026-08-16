@@ -1,0 +1,44 @@
+name: Push 毎朝の釣行指数配信
+
+# 案③「今日の釣行指数」の毎朝配信トリガー。
+# 購読者は Redis HSET push:index_subs（匿名 OK・お気に入り連動）に蓄積され、
+# /api/push/send-index が「ホームクラスタ内の最高指数が 80 点以上」の購読者にだけ送る。
+# 頻度は閾値で自然に絞られるため毎朝起動でも通知疲れしない設計。
+# GitHub Actions の schedule は遅延が常態のため、マヅメに間に合うよう早めの JST 5:00 設定。
+
+on:
+  schedule:
+    - cron: '0 20 * * *'   # JST 5:00 毎朝
+  workflow_dispatch:
+
+env:
+  SITE_BASE_URL: https://tsurispot.com
+
+jobs:
+  send:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 指数条件付き配信
+        env:
+          ADMIN_RECONCILE_TOKEN: ${{ secrets.ADMIN_RECONCILE_TOKEN }}
+        run: |
+          RESP=$(curl -s -w "\n%{http_code}" -X POST "${SITE_BASE_URL}/api/push/send-index" \
+            -H "Authorization: Bearer ${ADMIN_RECONCILE_TOKEN}" \
+            -H "Content-Type: application/json" \
+            --data '{}')
+          CODE=$(echo "$RESP" | tail -n1)
+          BODY=$(echo "$RESP" | sed '$d')
+          echo "HTTP $CODE / $BODY"
+          if [ "$CODE" != "200" ]; then
+            echo "::error::push/send-index 失敗 (HTTP $CODE)"
+            exit 1
+          fi
+
+      - name: Discord通知（失敗時のみ）
+        if: failure() && env.DISCORD_WEBHOOK_URL != ''
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+        run: |
+          curl -s -H "Content-Type: application/json" \
+            -d "{\"content\":\"❌ **Push 毎朝の釣行指数配信** 失敗\\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
+            "$DISCORD_WEBHOOK_URL"

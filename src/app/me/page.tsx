@@ -3,6 +3,7 @@ import Link from "next/link";
 import { Heart, User } from "lucide-react";
 import { StreakCard } from "@/components/activity/streak-card";
 import { FishdexSummaryCard } from "@/components/fish/fishdex-summary-card";
+import { FishingIndexCard } from "@/components/fishing-index/fishing-index-card";
 import { fishSpecies } from "@/lib/data/fish";
 import { Card, CardContent } from "@/components/ui/card";
 
@@ -27,6 +28,8 @@ export default function MePage() {
       <p className="mt-1 text-sm text-muted-foreground">
         アカウント登録なしで使えます。記録はこの端末に保存されています。
       </p>
+
+      <FishingIndexCard className="mt-4" />
 
       <StreakCard className="mt-4" />
 
