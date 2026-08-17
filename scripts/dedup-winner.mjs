@@ -15,6 +15,8 @@
  *   node scripts/dedup-winner.mjs --batch            spots-rules-batch.ts の棚卸し
  *     （batch は dedup 後に適用されるため、敗者slugのエントリは死んでいる。
  *       どのルールが実際に本番へ効いているかを県つきで一覧する）
+ *   node scripts/dedup-winner.mjs --region-mismatch  address と region.prefecture の不一致を全件列挙
+ *     （県のまき餌規制はスポットの所在県で決まるため、ここがズレると誤ったルールを表示する）
  */
 import fs from 'node:fs';
 import os from 'node:os';
@@ -96,6 +98,32 @@ if (keywords[0] === '--batch') {
   }
   console.log('\n--- DEAD（slugが存在せず、修正しても無意味）---');
   for (const r of dead) console.log(`  ${r.slug}  chum=${r.chum}`);
+  process.exit(0);
+}
+
+// ── address と region.prefecture の不一致を列挙 ──────────
+if (keywords[0] === '--region-mismatch') {
+  const PREFECTURES = [
+    '北海道', '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県',
+    '茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県',
+    '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県', '岐阜県',
+    '静岡県', '愛知県', '三重県', '滋賀県', '京都府', '大阪府', '兵庫県',
+    '奈良県', '和歌山県', '鳥取県', '島根県', '岡山県', '広島県', '山口県',
+    '徳島県', '香川県', '愛媛県', '高知県', '福岡県', '佐賀県', '長崎県',
+    '熊本県', '大分県', '宮崎県', '鹿児島県', '沖縄県',
+  ];
+  const rows = [];
+  for (const spot of fishingSpots) {
+    const fromAddress = PREFECTURES.find((p) => spot.address.includes(p));
+    if (!fromAddress || fromAddress === spot.region.prefecture) continue;
+    rows.push({ slug: spot.slug, name: spot.name, addr: spot.address, region: spot.region.prefecture });
+  }
+  console.log(`\naddress と region.prefecture の不一致: ${rows.length}件\n`);
+  for (const r of rows.sort((a, b) => a.slug.localeCompare(b.slug))) {
+    console.log(`${r.slug}（${r.name}）\n    address="${r.addr}" / region="${r.region}"`);
+  }
+  console.log('\n--- テスト用 slug 一覧 ---');
+  console.log(rows.map((r) => `"${r.slug}"`).sort().join(', '));
   process.exit(0);
 }
 
