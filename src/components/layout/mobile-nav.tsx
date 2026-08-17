@@ -25,14 +25,18 @@ import {
   Store,
   ClipboardCheck,
   Users,
+  Send,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { useFavorites } from "@/hooks/use-favorites";
 
-const mainNavItems = [
+// 中央は投稿FAB（下のJSXで固定描画）。「釣果レポート」タブは編集部ブログ行きで
+// 「レポートを書く場所」という期待と概念衝突していたため、投稿に置換し /blog は「もっと見る」へ
+const mainNavLeft = [
   { href: "/spots", label: "スポット", icon: MapPin },
   { href: "/timeline", label: "タイムライン", icon: Users },
-  { href: "/blog", label: "釣果レポート", icon: FileText },
+];
+const mainNavRight = [
   { href: "/map", label: "地図", icon: Map },
   { href: "/favorites", label: "お気に入り", icon: Heart },
 ];
@@ -48,6 +52,7 @@ const moreNavItems = [
   { href: "/area-guide", label: "エリアガイド", icon: MapPin },
   { href: "/monthly", label: "月別ガイド", icon: Calendar },
   { href: "/guide", label: "釣りガイド", icon: GraduationCap },
+  { href: "/blog", label: "ブログ", icon: FileText },
   { href: "/shops", label: "釣具店ガイド", icon: Store },
   { href: "/gear", label: "おすすめ道具", icon: Package },
   { href: "/bouzu-checker", label: "ボウズ確率", icon: Target },
@@ -148,12 +153,12 @@ export function MobileNav() {
       {/* ボトムナビ */}
       <nav aria-label="メインナビゲーション" className="fixed bottom-0 left-0 right-0 z-50 border-t border-ocean-mid/10 bg-background/95 backdrop-blur-lg md:hidden pb-safe">
         <div className="flex items-center justify-around">
-          {mainNavItems.map((item) => {
+          {[...mainNavLeft, ...mainNavRight].map((item, index) => {
             const isActive =
               pathname === item.href ||
               (item.href !== "/" && pathname.startsWith(item.href));
             const isFav = item.href === "/favorites";
-            return (
+            const link = (
               <Link
                 key={item.href}
                 href={item.href}
@@ -179,6 +184,29 @@ export function MobileNav() {
                 <span className="font-medium whitespace-nowrap">{item.label}</span>
               </Link>
             );
+            // 左2つの後（中央）に投稿FABを挟む
+            if (index === mainNavLeft.length) {
+              return (
+                <span key={`fab-${item.href}`} className="contents">
+                  <Link
+                    href="/post"
+                    prefetch={false}
+                    aria-label="釣果・つぶやきを投稿する"
+                    className={cn(
+                      "relative flex flex-col items-center justify-center gap-0.5 px-1 py-2 text-[11px] transition-colors min-h-[48px] touch-manipulation focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+                      pathname.startsWith("/post") ? "text-ocean-mid" : "text-muted-foreground"
+                    )}
+                  >
+                    <span className="flex size-8 items-center justify-center rounded-full bg-gradient-to-r from-primary to-ocean-mid text-white shadow-md">
+                      <Send aria-hidden="true" className="h-4 w-4" />
+                    </span>
+                    <span className="font-medium whitespace-nowrap">投稿</span>
+                  </Link>
+                  {link}
+                </span>
+              );
+            }
+            return link;
           })}
           {/* もっと見るボタン */}
           <button

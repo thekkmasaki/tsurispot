@@ -54,7 +54,7 @@ export function RecentCatchReports() {
           title="みんなの最近の釣果"
         />
         <Link
-          href="/spots"
+          href="/post"
           prefetch={false}
           className="inline-flex items-center gap-1 text-sm text-primary hover:underline"
         >
@@ -101,10 +101,14 @@ export function RecentCatchReports() {
           </Link>
         ))}
       </div>
-      <div className="mt-3 rounded-lg bg-primary/5 px-4 py-3 text-center text-sm">
+      <Link
+        href="/post"
+        prefetch={false}
+        className="mt-3 block rounded-lg bg-primary/5 px-4 py-3 text-center text-sm transition-colors hover:bg-primary/10"
+      >
         <span className="font-semibold text-primary">あなたの釣果も投稿しよう</span>
-        <span className="ml-2 text-muted-foreground">— 各スポット詳細から「釣果を報告する」 をクリック (ログイン不要)</span>
-      </div>
+        <span className="ml-2 text-muted-foreground">— タップして投稿へ（スポット詳細からはログイン不要）</span>
+      </Link>
     </section>
   );
 }
