@@ -72,9 +72,11 @@ export async function POST(request: Request) {
     if (!userName || typeof userName !== "string" || userName.length > 20) {
       return NextResponse.json({ error: "ニックネームを入力してください（20文字以内）" }, { status: 400 });
     }
-    if (!comment || typeof comment !== "string" || comment.length > 100) {
-      return NextResponse.json({ error: "コメントを入力してください（100文字以内）" }, { status: 400 });
+    // ひとことは任意（唯一の作文強制だったため撤廃。チップ完結の最小投稿を許す）
+    if (comment !== undefined && (typeof comment !== "string" || comment.length > 100)) {
+      return NextResponse.json({ error: "コメントは100文字以内で入力してください" }, { status: 400 });
     }
+    const commentText = typeof comment === "string" ? comment.trim() : "";
     if (!date || typeof date !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(date)) {
       return NextResponse.json({ error: "日付の形式が不正です" }, { status: 400 });
     }
@@ -106,7 +108,7 @@ export async function POST(request: Request) {
     const normTags = sanitizeTags(tags);
 
     // NGワードチェック
-    const modResult = checkNgWords([userName, fishName, comment, ...normTags]);
+    const modResult = checkNgWords([userName, fishName, commentText, ...normTags]);
     if (!modResult.ok) {
       return NextResponse.json({ error: modResult.reason }, { status: 400 });
     }
@@ -119,7 +121,7 @@ export async function POST(request: Request) {
       fishName,
       userName,
       tsuriId,
-      comment,
+      comment: commentText,
       date,
       approved: true,
       photoUrl: photoUrl || undefined,

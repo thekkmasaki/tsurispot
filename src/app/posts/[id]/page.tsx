@@ -72,7 +72,9 @@ export async function generateMetadata({
     title: spotLabel
       ? `${post.fishName}${size}｜${spotLabel}の釣果`
       : `${post.fishName}${size}｜${post.userName}さんの釣果`,
-    description: `${post.userName}さんの釣果: ${post.comment.slice(0, 60)}`,
+    description: post.comment
+      ? `${post.userName}さんの釣果: ${post.comment.slice(0, 60)}`
+      : `${post.userName}さんの釣果報告`,
     robots: { index: false, follow: false },
   };
 }
@@ -165,9 +167,11 @@ export default async function PostPage({
             />
           ) : null}
 
-          <p className="mt-4 whitespace-pre-wrap text-[15px] leading-relaxed">
-            {post.comment}
-          </p>
+          {post.comment && (
+            <p className="mt-4 whitespace-pre-wrap text-[15px] leading-relaxed">
+              {post.comment}
+            </p>
+          )}
             </>
           )}
 

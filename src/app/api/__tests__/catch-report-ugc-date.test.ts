@@ -66,3 +66,49 @@ describe("catch-report-ugc 未来日チェック（JST基準）", () => {
     expect(data.error).toContain("未来の日付");
   });
 });
+
+function postBody(body: Record<string, unknown>) {
+  return POST(
+    new Request("http://localhost/api/catch-report-ugc", {
+      method: "POST",
+      body: JSON.stringify({
+        spotSlug: "test-spot",
+        spotName: "テストスポット",
+        fishName: "アジ",
+        userName: "テスト太郎",
+        date: "2026-07-28",
+        ...body,
+      }),
+    }),
+  );
+}
+
+describe("catch-report-ugc ひとこと任意化", () => {
+  beforeEach(() => {
+    vi.useFakeTimers();
+    vi.setSystemTime(new Date("2026-07-28T20:00:00Z"));
+  });
+
+  afterEach(() => {
+    vi.useRealTimers();
+  });
+
+  it("comment なしでも投稿を受け付ける（チップ完結の最小投稿）", async () => {
+    const res = await postBody({});
+    expect(res.status).toBe(200);
+    const data = await res.json();
+    expect(data.ok).toBe(true);
+  });
+
+  it("空文字の comment も受け付ける", async () => {
+    const res = await postBody({ comment: "" });
+    expect(res.status).toBe(200);
+  });
+
+  it("100文字超の comment は 400", async () => {
+    const res = await postBody({ comment: "あ".repeat(101) });
+    expect(res.status).toBe(400);
+    const data = await res.json();
+    expect(data.error).toContain("100文字以内");
+  });
+});

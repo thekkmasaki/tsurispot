@@ -12,9 +12,15 @@ import { Card, CardContent } from "@/components/ui/card";
 import { toast } from "@/components/ui/toast";
 import { getTitle, getNextTier } from "@/lib/titles";
 import { compressImage } from "@/lib/image-compress";
+import { generateAnonNickname, loadAnonNickname, saveAnonNickname } from "@/lib/anon-nickname";
+import { trackPostSubmit } from "@/lib/analytics";
 
 // そのスポットで釣れる魚名 + 汎用的な人気魚種
 const COMMON_FISH = ["アジ", "サバ", "イワシ", "メバル", "カサゴ", "シーバス", "クロダイ", "アオリイカ"];
+
+// ひとこと定型チップ。NGワード判定が substring 一致のため、
+// 「クソデカい」等のスラングに誤反応しない語彙のみを採用する
+const COMMENT_CHIPS = ["入れ食いだった！", "ぽつぽつ釣れた", "渋かった…", "ボウズ回避！", "サイズは小さめ", "群れが回ってきた"];
 
 const METHODS = ["サビキ", "投げ", "ルアー", "フカセ", "エギング", "ジギング", "穴釣り", "ウキ釣り", "その他"];
 const WEATHER_OPTIONS = [
@@ -54,6 +60,23 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
     setProfileNickname(nickname);
     setUserName((prev) => (prev ? prev : nickname));
   }, [authStatus, session?.user?.nickname]);
+
+  // 匿名ユーザーには「釣り人{4桁}」を自動候補として prefill（1回だけ。
+  // ユーザーが空欄に消した後に勝手に再充填しないよう ref で制御）
+  const anonPrefilled = useRef(false);
+  useEffect(() => {
+    if (authStatus !== "unauthenticated" || anonPrefilled.current) return;
+    anonPrefilled.current = true;
+    const name = loadAnonNickname() || generateAnonNickname();
+    saveAnonNickname(name);
+    setUserName((prev) => (prev ? prev : name));
+  }, [authStatus]);
+
+  const rerollNickname = () => {
+    const name = generateAnonNickname();
+    setUserName(name);
+    saveAnonNickname(name);
+  };
 
   const [fishName, setFishName] = useState("");
   const [date, setDate] = useState(() => formatLocalDate(new Date()));
@@ -126,11 +149,6 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
       setStatus("error");
       return;
     }
-    if (!comment.trim()) {
-      setErrorMessage("ひとことを入力してください");
-      setStatus("error");
-      return;
-    }
     if (comment.length > 100) {
       setErrorMessage("ひとことは100文字以内で入力してください");
       setStatus("error");
@@ -146,9 +164,10 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
         spotName,
         fishName: fishName.trim(),
         userName: userName.trim(),
-        comment: comment.trim(),
         date,
       };
+      const commentText = comment.trim();
+      if (commentText) body.comment = commentText;
       if (photoUrl) body.photoUrl = photoUrl;
       if (sizeCm) body.sizeCm = Number(sizeCm);
       if (method) body.method = method;
@@ -170,8 +189,16 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
 
       if (res.ok && data.ok) {
         setStatus("success");
-        // フォームリセット (ログイン中はニックネームは保持)
-        setUserName(profileNickname || "");
+        // 手入力した匿名ニックネームも次回のために保存する
+        if (!session?.user) saveAnonNickname(userName.trim());
+        trackPostSubmit({
+          spotSlug,
+          loggedIn: !!session?.user,
+          hasComment: !!commentText,
+          hasPhoto: !!photoUrl,
+        });
+        // フォームリセット (ニックネームは保持)
+        setUserName(profileNickname || userName.trim());
         setFishName("");
         setComment("");
         setPhotoUrl("");
@@ -296,17 +323,35 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
         <form onSubmit={handleSubmit} className="space-y-3">
           <div>
             <label htmlFor="cr-username" className="mb-1 block text-sm font-medium">
-              ニックネーム <span className="text-destructive">*</span>
+              ニックネーム{" "}
+              {session?.user ? (
+                <span className="text-destructive">*</span>
+              ) : (
+                <span className="text-xs font-normal text-muted-foreground">自動でOK・そのまま投稿できます</span>
+              )}
             </label>
-            <Input
-              id="cr-username"
-              type="text"
-              placeholder="例: 釣りキチ太郎"
-              value={userName}
-              onChange={(e) => { setUserName(e.target.value); if (status === "error") setStatus("idle"); }}
-              maxLength={20}
-              required
-            />
+            <div className="flex items-center gap-2">
+              <Input
+                id="cr-username"
+                type="text"
+                placeholder="例: 釣りキチ太郎"
+                value={userName}
+                onChange={(e) => { setUserName(e.target.value); if (status === "error") setStatus("idle"); }}
+                maxLength={20}
+                required
+              />
+              {!session?.user && (
+                <button
+                  type="button"
+                  onClick={rerollNickname}
+                  title="別の名前にする"
+                  aria-label="ニックネームを引き直す"
+                  className="flex size-9 shrink-0 items-center justify-center rounded-md border border-input text-lg transition-colors hover:bg-muted"
+                >
+                  🎲
+                </button>
+              )}
+            </div>
           </div>
 
           <div>
@@ -504,19 +549,38 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
 
           <div>
             <label htmlFor="cr-comment" className="mb-1 block text-sm font-medium">
-              ひとこと <span className="text-destructive">*</span>
+              ひとこと（任意）
               <span className="ml-2 text-xs font-normal text-muted-foreground">
                 {comment.length}/100
               </span>
             </label>
+            <div className="mb-1.5 flex flex-wrap gap-1">
+              {COMMENT_CHIPS.map((text) => (
+                <button
+                  key={text}
+                  type="button"
+                  onClick={() => {
+                    setComment((prev) => {
+                      const base = prev.trim();
+                      if (!base) return text;
+                      const joined = `${base} ${text}`;
+                      return joined.length <= 100 ? joined : prev;
+                    });
+                    if (status === "error") setStatus("idle");
+                  }}
+                  className="rounded-full border border-muted-foreground/20 px-2.5 py-0.5 text-xs text-muted-foreground transition-colors hover:border-emerald-300 hover:bg-emerald-50/50"
+                >
+                  {text}
+                </button>
+              ))}
+            </div>
             <textarea
               id="cr-comment"
               className="flex min-h-[80px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-xs placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-              placeholder="例: 朝マヅメにサビキで20匹釣れました！"
+              placeholder="タップで入力できます（書かなくてもOK）"
               value={comment}
               onChange={(e) => { setComment(e.target.value); if (status === "error") setStatus("idle"); }}
               maxLength={100}
-              required
             />
           </div>
 
