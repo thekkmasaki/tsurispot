@@ -612,7 +612,7 @@ export const additionalSpotsChubu: FishingSpot[] = [
   },
   {
     id: "s144", name: "能登千里浜", slug: "noto-chirihama",
-    description: "車で走れる砂浜として有名な千里浜。投げ釣りでキスが良く釣れるサーフフィッシングの名所。",
+    description: "能登千里浜はキスの投げ釣りが楽しめるサーフフィッシングの名所。車で砂浜に乗り入れできる全国でも珍しいドライブウェイで、朝マヅメの波打ち際がキスの好ポイント。秋から冬はルアーでヒラメも狙える。トイレもあり家族連れにも安心。",
     latitude: 36.8134, longitude: 136.7612, address: "〒925-0054 石川県羽咋市千里浜町タ4-1",
     accessInfo: "のと里山海道千里浜ICすぐ。",
     region: region("r22"), spotType: "beach", difficulty: "beginner",
