@@ -126,6 +126,10 @@ function applyBatchRules(spots: FishingSpot[]): FishingSpot[] {
 function enrichDescriptions(spots: FishingSpot[]): FishingSpot[] {
   return spots.map((spot) => {
     if ((spot.description || "").length >= 100) return spot;
+    // 釣り禁止スポットは自動生成の対象外。generateSpotIntro() は
+    // 「〜が狙える」「ベストシーズンは〜」と釣行を勧める文を組み立てるため、
+    // 禁止スポットに適用すると人手で書いた禁止の説明を上書きしてしまう。
+    if (spot.fishingBan) return spot;
     return { ...spot, description: generateSpotIntro(spot) };
   });
 }

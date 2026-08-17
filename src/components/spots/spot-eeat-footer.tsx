@@ -1,8 +1,10 @@
 import Link from "next/link";
-import { ShieldCheck, FileText } from "lucide-react";
+import { ShieldCheck, FileText, Flag } from "lucide-react";
 
 type Props = {
   spotName: string;
+  /** 訂正報告リンクにスポットを引き渡すため */
+  spotSlug: string;
   prefecture: string;
   /** 管理団体名（spot.managementInfo.organizationName）。無ければ非表示 */
   managementOrg?: string;
@@ -21,6 +23,7 @@ type Props = {
  */
 export function SpotEeatFooter({
   spotName,
+  spotSlug,
   prefecture,
   managementOrg,
   hasPublicRules,
@@ -55,6 +58,18 @@ export function SpotEeatFooter({
           </li>
         ))}
       </ul>
+      {/* 訂正の受付導線。釣り場の規制は変わるため、読者からの指摘が最も早い検知手段になる。
+          /contact はカテゴリのプリフィルに対応済みだが、これまでスポット詳細から張られていなかった。 */}
+      <p className="mt-3 border-t pt-3">
+        <Link
+          prefetch={false}
+          href={`/contact?category=spot-correction&spot=${encodeURIComponent(spotSlug)}`}
+          className="inline-flex items-center gap-1.5 font-medium text-primary underline underline-offset-2"
+        >
+          <Flag className="size-3.5" />
+          この釣り場の情報の誤り・釣り禁止化を報告する
+        </Link>
+      </p>
     </section>
   );
 }

@@ -9,6 +9,7 @@ import { incrementReportCount } from "@/lib/user-store";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { savePostMeta, addToGlobalFeed, sanitizeTags, addTagsForPost } from "@/lib/social-store";
 import { fishSpecies } from "@/lib/data/fish";
+import { getSpotBySlug } from "@/lib/data/spots";
 import type { PostCatchResult } from "@/lib/catch-result";
 
 const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;
@@ -91,6 +92,14 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "スポット情報が不正です" }, { status: 400 });
     }
     const slug = typeof spotSlug === "string" ? spotSlug.trim() : "";
+    // 釣り禁止スポットへの釣果報告は受け付けない。
+    // UIでもフォームを出していないが、APIを直接叩かれた場合の防御。
+    if (slug && getSpotBySlug(slug)?.fishingBan?.scope === "full") {
+      return NextResponse.json(
+        { error: "この釣り場は現在釣りが禁止されているため、釣果報告を受け付けていません。" },
+        { status: 403 },
+      );
+    }
     if (!fishName || typeof fishName !== "string" || fishName.length > 30) {
       return NextResponse.json({ error: "魚名を入力してください（30文字以内）" }, { status: 400 });
     }
