@@ -90,9 +90,11 @@ export function RecentCatchReports() {
               <MapPin className="size-3" />
               <span className="truncate">{report.spotName}</span>
             </div>
-            <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
-              {report.comment}
-            </p>
+            {report.comment && (
+              <p className="line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+                {report.comment}
+              </p>
+            )}
             <p className="mt-2 text-[11px] text-muted-foreground">
               by {report.userName}
             </p>

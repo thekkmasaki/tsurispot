@@ -246,7 +246,7 @@ export function CatchReportCard({ report, onUpdate, onDelete }: Props) {
               </div>
             </div>
             <div>
-              <label className="mb-1 block text-sm font-medium">コメント *</label>
+              <label className="mb-1 block text-sm font-medium">コメント（任意）</label>
               <textarea
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
@@ -270,7 +270,7 @@ export function CatchReportCard({ report, onUpdate, onDelete }: Props) {
               </Button>
               <Button
                 onClick={handleSubmit}
-                disabled={submitting || !fishName || !comment}
+                disabled={submitting || !fishName}
                 className="flex-1"
               >
                 {submitting ? "保存中..." : "保存"}

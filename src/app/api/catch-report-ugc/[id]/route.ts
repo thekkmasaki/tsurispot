@@ -79,8 +79,9 @@ export async function PATCH(
   if (fishName !== undefined && (typeof fishName !== "string" || fishName.length === 0 || fishName.length > 30)) {
     return NextResponse.json({ error: "魚名を1〜30文字で入力してください" }, { status: 400 });
   }
-  if (comment !== undefined && (typeof comment !== "string" || comment.length === 0 || comment.length > 100)) {
-    return NextResponse.json({ error: "コメントを1〜100文字で入力してください" }, { status: 400 });
+  // ひとことは投稿時と同様に任意（空文字で「コメントなし」に更新できる）
+  if (comment !== undefined && (typeof comment !== "string" || comment.length > 100)) {
+    return NextResponse.json({ error: "コメントは100文字以内で入力してください" }, { status: 400 });
   }
   if (sizeCm !== undefined && sizeCm !== null && (typeof sizeCm !== "number" || sizeCm < 0 || sizeCm > 300)) {
     return NextResponse.json({ error: "サイズは0〜300cmで入力してください" }, { status: 400 });

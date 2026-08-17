@@ -32,6 +32,20 @@ export function getCaughtFish(): string[] {
   }
 }
 
+/**
+ * 図鑑へ slug をまとめて追加するスタンドアロン関数（釣果投稿のリザルト等から使う）。
+ * 実際に新規追加できた slug を返す（全て登録済みなら空配列）。
+ */
+export function addCaughtFish(slugs: string[]): string[] {
+  if (typeof window === "undefined" || slugs.length === 0) return [];
+  const current = getCaughtFish();
+  const known = new Set(current);
+  const added = slugs.filter((s) => !known.has(s));
+  if (added.length === 0) return [];
+  saveCaughtFish([...current, ...added]);
+  return added;
+}
+
 function saveCaughtFish(slugs: string[]) {
   try {
     localStorage.setItem(
