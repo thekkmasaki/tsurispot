@@ -9,11 +9,14 @@ import { Send, CheckCircle, AlertCircle, Camera, X, Trophy } from "lucide-react"
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
-import { toast } from "@/components/ui/toast";
 import { getTitle, getNextTier } from "@/lib/titles";
 import { compressImage } from "@/lib/image-compress";
 import { generateAnonNickname, loadAnonNickname, saveAnonNickname } from "@/lib/anon-nickname";
 import { trackPostSubmit } from "@/lib/analytics";
+import { addCaughtFish } from "@/hooks/use-fishdex";
+import { recordAction } from "@/hooks/use-activity";
+import { CatchReportResult } from "@/components/spots/catch-report-result";
+import type { PostCatchResult } from "@/lib/catch-result";
 
 // そのスポットで釣れる魚名 + 汎用的な人気魚種
 const COMMON_FISH = ["アジ", "サバ", "イワシ", "メバル", "カサゴ", "シーバス", "クロダイ", "アオリイカ"];
@@ -44,7 +47,7 @@ function formatLocalDate(d: Date): string {
 }
 
 export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }: CatchReportFormProps) {
-  const { data: session, status: authStatus } = useSession();
+  const { data: session, status: authStatus, update } = useSession();
   const router = useRouter();
   const fishInputRef = useRef<HTMLInputElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -90,6 +93,14 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
   const [tagsInput, setTagsInput] = useState("");
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  // 投稿リザルト画面の材料（フォームリセット前に確保する）
+  const [resultData, setResultData] = useState<{
+    postId?: string;
+    result?: PostCatchResult;
+    fishName: string;
+    date: string;
+    anonSaved: boolean;
+  } | null>(null);
 
   const handlePhotoSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -188,7 +199,6 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
       const data = await res.json();
 
       if (res.ok && data.ok) {
-        setStatus("success");
         // 手入力した匿名ニックネームも次回のために保存する
         if (!session?.user) saveAnonNickname(userName.trim());
         trackPostSubmit({
@@ -197,6 +207,28 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
           hasComment: !!commentText,
           hasPhoto: !!photoUrl,
         });
+
+        let anonSaved = false;
+        if (session?.user) {
+          // フォーム上部の称号カウンタはJWTキャッシュ依存で投稿しても動かなかったバグの修正:
+          // update() でトークンを再発行し reportCount を即フレッシュ化する（auth.ts の update トリガー）
+          update().catch(() => {});
+        } else {
+          // 匿名は端末図鑑に実保存（ログイン時に union merge で引き継がれる）+ 活動記録
+          const slugs = Array.isArray(data.fishSlugs)
+            ? (data.fishSlugs as unknown[]).filter((s): s is string => typeof s === "string")
+            : [];
+          anonSaved = addCaughtFish(slugs).length > 0;
+          recordAction();
+        }
+        setResultData({
+          postId: typeof data.id === "string" ? data.id : undefined,
+          result: data.result as PostCatchResult | undefined,
+          fishName: fishName.trim(),
+          date,
+          anonSaved,
+        });
+        setStatus("success");
         // フォームリセット (ニックネームは保持)
         setUserName(profileNickname || userName.trim());
         setFishName("");
@@ -209,7 +241,6 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
         setTagsInput("");
         // 自動公開UGCを一覧へ即反映（CatchReportList を initialReports 直結に変更済み）。
         router.refresh();
-        toast.success("釣果を投稿しました！");
       } else {
         setErrorMessage(data.error || "送信に失敗しました");
         setStatus("error");
@@ -243,6 +274,31 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
     );
   }
 
+  if (status === "success" && resultData) {
+    return (
+      <CatchReportResult
+        spotSlug={spotSlug}
+        spotName={spotName}
+        fishName={resultData.fishName}
+        date={resultData.date}
+        postId={resultData.postId}
+        result={resultData.result}
+        anonSaved={resultData.anonSaved}
+        isLoggedIn={!!session?.user}
+        onClose={() => {
+          setStatus("idle");
+          setIsOpen(false);
+          setResultData(null);
+        }}
+        onPostAnother={() => {
+          setStatus("idle");
+          setResultData(null);
+        }}
+      />
+    );
+  }
+
+  // 縮退フォールバック（リザルト材料が取れなかったときの従来表示）
   if (status === "success") {
     return (
       <Card className="mt-3 border-emerald-200 bg-emerald-50/50 py-4">

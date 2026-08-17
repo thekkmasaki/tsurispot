@@ -8,6 +8,8 @@ import { auth } from "@/lib/auth";
 import { incrementReportCount } from "@/lib/user-store";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
 import { savePostMeta, addToGlobalFeed, sanitizeTags, addTagsForPost } from "@/lib/social-store";
+import { fishSpecies } from "@/lib/data/fish";
+import type { PostCatchResult } from "@/lib/catch-result";
 
 const GAS_WEBHOOK_URL = process.env.GAS_CATCH_REPORT_URL;
 
@@ -30,6 +32,29 @@ interface CatchReport {
   weather?: string;
   submittedAt?: string;
   tags?: string[];
+}
+
+// 「アジ、サバ」のような複数魚種入力を分割（catch-feedback.ts と同じ区切り文字）
+function splitFishNames(fishName: string): string[] {
+  return fishName
+    .split(/[、,・/／]/)
+    .map((s) => s.trim())
+    .filter(Boolean);
+}
+
+function parseReports(raw: unknown[]): CatchReport[] {
+  return (raw || [])
+    .map((item) => {
+      if (typeof item === "string") {
+        try {
+          return JSON.parse(item) as CatchReport;
+        } catch {
+          return null;
+        }
+      }
+      return item as CatchReport;
+    })
+    .filter((r): r is CatchReport => Boolean(r));
 }
 
 // POST: ユーザー釣果投稿を受け取る
@@ -184,10 +209,42 @@ export async function POST(request: Request) {
       }
     }
 
-    // ログインユーザーの釣果数カウントを更新（バッジ・称号反映）
+    // 投稿リザルト用の差分計算 + ログインユーザーの釣果数カウント更新（バッジ・称号反映）
+    const postedSpecies = splitFishNames(fishName);
+    const slugByName = new Map(fishSpecies.map((f) => [f.name, f.slug]));
+    let result: PostCatchResult | undefined;
     if (tsuriId) {
+      // リザルト（図鑑新規・自己ベスト）は投稿「前」の状態との差分なので、書き込みより先に読む
+      let prevSpecies: Set<string> | null = null;
+      const prevBestBySpecies = new Map<string, number>();
+      let extraSlugs = new Set<string>();
+      let prevReportCount = 0;
       try {
-        await incrementReportCount(tsuriId);
+        const [prevRaw, extra] = await Promise.all([
+          redis.lrange(`auth:user_reports:${tsuriId}`, 0, 999),
+          redis.smembers(`auth:fishdex_extra:${tsuriId}`),
+        ]);
+        const prevReports = parseReports(prevRaw as unknown[]);
+        prevReportCount = prevReports.length;
+        prevSpecies = new Set<string>();
+        for (const r of prevReports) {
+          if (!r.fishName) continue;
+          for (const name of splitFishNames(r.fishName)) {
+            prevSpecies.add(name);
+            if (typeof r.sizeCm === "number" && Number.isFinite(r.sizeCm)) {
+              prevBestBySpecies.set(name, Math.max(prevBestBySpecies.get(name) ?? 0, r.sizeCm));
+            }
+          }
+        }
+        extraSlugs = new Set(extra);
+      } catch (err) {
+        // 差分計算に失敗しても投稿は成立させる（リザルトは称号行のみの縮退）
+        console.error("[釣果投稿] リザルト差分読込エラー:", err);
+      }
+
+      let newCount = 0;
+      try {
+        newCount = await incrementReportCount(tsuriId);
       } catch (err) {
         console.error("[釣果投稿] reportCount更新エラー:", err);
       }
@@ -200,6 +257,40 @@ export async function POST(request: Request) {
         await redis.ltrim(`auth:user_reports:${tsuriId}`, 0, 999);
       } catch (err) {
         console.error("[釣果投稿] Redis LIST push エラー:", err);
+      }
+
+      if (prevSpecies) {
+        const knownSpecies = prevSpecies;
+        // 図鑑の新規種: 過去投稿の魚種にも「釣ったことある」1タップ分にも無いものだけ
+        const newDexSpecies = postedSpecies.filter((name) => {
+          if (knownSpecies.has(name)) return false;
+          const slug = slugByName.get(name);
+          return !(slug && extraSlugs.has(slug));
+        });
+        // 図鑑種数の概算: slug に正規化できるものは slug、できないものは名前で distinct
+        const dexKeys = new Set<string>();
+        const keyOf = (name: string) => slugByName.get(name) ?? `name:${name}`;
+        knownSpecies.forEach((name) => dexKeys.add(keyOf(name)));
+        extraSlugs.forEach((slug) => dexKeys.add(slug));
+        postedSpecies.forEach((name) => dexKeys.add(keyOf(name)));
+
+        // 自己ベスト: サイズ入力があるときだけ。複数魚種投稿は先頭の魚に紐づける
+        let best: PostCatchResult["best"] = null;
+        if (typeof reportData.sizeCm === "number" && postedSpecies.length > 0) {
+          const target = postedSpecies[0];
+          const prevBest = prevBestBySpecies.get(target);
+          if (prevBest === undefined || reportData.sizeCm > prevBest) {
+            best = { fishName: target, sizeCm: reportData.sizeCm, prevBest: prevBest ?? null };
+          }
+        }
+
+        result = {
+          // incrementReportCount が使えない環境（ユーザー不在等）は user_reports 由来で近似
+          reportCount: newCount > 0 ? newCount : prevReportCount + 1,
+          dexCount: dexKeys.size,
+          newDexSpecies,
+          best,
+        };
       }
     }
 
@@ -221,6 +312,12 @@ export async function POST(request: Request) {
     return NextResponse.json({
       ok: true,
       message: "釣果が投稿されました！",
+      id: reportId,
+      // 匿名クライアントが端末図鑑（localStorage）へ保存するための slug（正規化できた魚種のみ）
+      fishSlugs: postedSpecies
+        .map((name) => slugByName.get(name))
+        .filter((s): s is string => Boolean(s)),
+      ...(result ? { result } : {}),
     });
   } catch (e) {
     console.error("[釣果投稿] 処理エラー:", e);

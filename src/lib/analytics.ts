@@ -91,6 +91,24 @@ export function trackPostSubmit(params: {
   });
 }
 
+/**
+ * 投稿リザルト画面の表示をカスタムイベント `post_result_view` として送信
+ *
+ * post_submit とのペアで「完了→リザルト到達→2件目」の継続ファネルを計測する。
+ */
+export function trackPostResultView(params: {
+  promoted: boolean;
+  anonymous: boolean;
+  newDexCount: number;
+}) {
+  if (typeof window === "undefined" || typeof window.gtag !== "function") return;
+  window.gtag("event", "post_result_view", {
+    promoted: params.promoted,
+    anonymous: params.anonymous,
+    new_dex_count: params.newDexCount,
+  });
+}
+
 export type PushSubscriptionAction = "subscribe" | "unsubscribe" | "permission_denied";
 
 /** Web Push 購読状態の変化をカスタムイベント `push_subscription` として送信 */
