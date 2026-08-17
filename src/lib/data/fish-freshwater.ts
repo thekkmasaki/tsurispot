@@ -1466,7 +1466,7 @@ export const freshwaterFish: FishSpecies[] = [
     scientificName: "Tribolodon hakonensis",
     slug: "ugui",
     description:
-      "盛期は春の4〜6月で、美しい婚姻色の個体に出会える季節。3〜11月と長く楽しめ、河川の中流域でミャク釣りやルアーで手軽に狙える入門魚。北海道から九州まで広く分布し、雑食性で何でもよく食べる。近年はルアーフィッシングの対象としても注目されている。",
+      "北海道から九州まで広く分布する淡水魚。河川の中流域を中心に生息し、雑食性で何でもよく食べる。春の婚姻色は美しく、釣りの入門魚として最適。近年はルアーフィッシングの対象としても注目されている。",
     category: "freshwater",
     family: "コイ科",
     difficulty: "beginner",
