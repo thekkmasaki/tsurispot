@@ -10,6 +10,7 @@ import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Gauge, MapPin, ChevronDown } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { AnimatedNumber } from "@/components/ui/animated-number";
 import { cn } from "@/lib/utils";
 import { useFavorites } from "@/hooks/use-favorites";
 import { IndexPushButton } from "./index-push-button";
@@ -40,6 +41,15 @@ function scoreTextClass(score: number): string {
   if (score >= 55) return "text-amber-600";
   if (score >= 40) return "text-orange-700";
   return "text-red-700";
+}
+
+/** リング用の実色（conic-gradient は Tailwind クラスでは塗れない） */
+function scoreHex(score: number): string {
+  if (score >= 85) return "#059669";
+  if (score >= 70) return "#0369a1";
+  if (score >= 55) return "#d97706";
+  if (score >= 40) return "#c2410c";
+  return "#dc2626";
 }
 
 function readRecentSlugs(): string[] {
@@ -279,18 +289,32 @@ export function FishingIndexCard({ className }: { className?: string }) {
           </p>
         ) : (
           <>
-            {/* スコア */}
+            {/* スコア（リング+カウントアップ） */}
             <div className="mt-3 flex items-center gap-4">
-              <div className="text-center">
-                <div
-                  className={cn(
-                    "text-4xl font-bold leading-none",
-                    dayScore !== null ? scoreTextClass(dayScore) : "",
+              <div
+                className="grid h-20 w-20 shrink-0 place-items-center rounded-full transition-[background] duration-500"
+                style={{
+                  background:
+                    dayScore !== null
+                      ? `conic-gradient(${scoreHex(dayScore)} ${dayScore * 3.6}deg, rgba(136,136,136,0.18) 0deg)`
+                      : "rgba(136,136,136,0.18)",
+                }}
+              >
+                <div className="flex h-[66px] w-[66px] flex-col items-center justify-center rounded-full bg-card">
+                  {dayScore !== null ? (
+                    <AnimatedNumber
+                      value={dayScore}
+                      durationMs={600}
+                      className={cn(
+                        "text-2xl font-bold leading-none",
+                        scoreTextClass(dayScore),
+                      )}
+                    />
+                  ) : (
+                    <span className="text-2xl font-bold leading-none">—</span>
                   )}
-                >
-                  {dayScore ?? "—"}
+                  <span className="text-[9px] text-muted-foreground">／100</span>
                 </div>
-                <div className="mt-0.5 text-[10px] text-muted-foreground">／100</div>
               </div>
               <div className="min-w-0 flex-1">
                 <div className="text-sm font-bold">

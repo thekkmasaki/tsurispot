@@ -211,6 +211,34 @@
   animation: float 3s ease-in-out infinite;
 }
 
+/* 中毒性UI（図鑑・ストリーク・バッジ）の演出。
+   prefers-reduced-motion は上の包括ルールで全て無効化される */
+@keyframes dex-pop {
+  0% { transform: scale(0.9); }
+  60% { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+.animate-dex-pop {
+  animation: dex-pop 0.26s ease-out;
+}
+@keyframes badge-earn {
+  0% { transform: scale(1); }
+  40% { transform: scale(1.18) rotate(-3deg); }
+  70% { transform: scale(0.98) rotate(2deg); }
+  100% { transform: scale(1); }
+}
+.animate-badge-earn {
+  animation: badge-earn 0.7s cubic-bezier(0.22, 1, 0.36, 1) 2;
+}
+@keyframes flame-flicker {
+  0%, 100% { transform: scale(1) rotate(-2deg); }
+  50% { transform: scale(1.1) rotate(2deg); }
+}
+.animate-flame {
+  animation: flame-flicker 1.6s ease-in-out infinite;
+  transform-origin: bottom center;
+}
+
 /* SVGインラインの波パターン背景 */
 .bg-wave-pattern {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60' fill='none'%3E%3Cpath d='M0,30 C360,60 720,0 1080,30 C1260,45 1380,40 1440,30' stroke='%23c8d5dc' stroke-opacity='0.12' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");

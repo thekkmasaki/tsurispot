@@ -4,9 +4,10 @@
  * /mypage/fishdex（読み取り専用・サイズ表示あり）と /fishdex（匿名・その場トグルあり）で共用する。
  * 見た目は旧 /mypage/fishdex の実装をそのまま移設（emerald枠・grayscale・sky→emeraldグラデ）。
  */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { CheckCircle2, Circle } from "lucide-react";
+import { AnimatedNumber } from "@/components/ui/animated-number";
 
 export interface FishdexEntry {
   slug: string;
@@ -24,6 +25,20 @@ interface FishdexGridProps {
 
 export function FishdexGrid({ entries, onToggle }: FishdexGridProps) {
   const [filter, setFilter] = useState<"all" | "caught" | "uncaught">("all");
+  // タップ直後のセルに pop アニメを当てる（貯める手応え）。タイマーは effect 管理
+  const [popSlug, setPopSlug] = useState<string | null>(null);
+  useEffect(() => {
+    if (popSlug === null) return;
+    const t = setTimeout(() => setPopSlug(null), 320);
+    return () => clearTimeout(t);
+  }, [popSlug]);
+
+  const handleToggle = onToggle
+    ? (slug: string) => {
+        onToggle(slug);
+        setPopSlug(slug);
+      }
+    : undefined;
 
   const total = entries.length;
   const caughtCount = entries.filter((f) => f.caught).length;
@@ -41,8 +56,12 @@ export function FishdexGrid({ entries, onToggle }: FishdexGridProps) {
     <div>
       <p className="text-sm text-muted-foreground">
         全{total}種のうち{" "}
-        <span className="font-bold text-primary">{caughtCount}種</span>{" "}
-        釣りました ({completionRate}%)
+        <AnimatedNumber
+          value={caughtCount}
+          durationMs={500}
+          className="font-bold text-primary"
+        />
+        種 釣りました ({completionRate}%)
       </p>
       <div className="mt-3 h-2 w-full overflow-hidden rounded-full bg-muted">
         <div
@@ -86,11 +105,11 @@ export function FishdexGrid({ entries, onToggle }: FishdexGridProps) {
               f.caught
                 ? "border-emerald-300 bg-emerald-50/30"
                 : "opacity-60 grayscale"
-            }`}
+            } ${popSlug === f.slug ? "animate-dex-pop" : ""}`}
           >
-            {onToggle ? (
+            {handleToggle ? (
               <button
-                onClick={() => onToggle(f.slug)}
+                onClick={() => handleToggle(f.slug)}
                 aria-pressed={f.caught}
                 aria-label={
                   f.caught
