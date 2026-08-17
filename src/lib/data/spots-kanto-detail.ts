@@ -705,7 +705,7 @@ export const kantoDetailSpots: FishingSpot[] = [
   // =========================================
   {
     id: "s828", name: "大洗港", slug: "oarai-port",
-    description: "茨城県を代表する大型漁港。堤防からのサビキ釣りでアジ、サバ、イワシが年間を通じて楽しめる。秋にはイナダやショゴなどの青物が回遊し、ショアジギングが盛り上がる。アニメ「ガールズ&パンツァー」の聖地としても知られ、釣りと観光を両立できる。",
+    description: "茨城県を代表する大型漁港で、足場のよい堤防から年間を通じて多彩な魚が狙える。茨城県はまき餌釣りが原則禁止のためサビキ釣りやカゴ釣りは行えないが、アジは朝マヅメのアジング、サバやイワシは小型ルアーで回遊を拾える。秋にはイナダやショゴなどの青物が回遊してルアーゲームが盛り上がり、冬は投げ釣りのカレイや夜のメバリングが本命。アニメ「ガールズ&パンツァー」の聖地としても知られ、釣りと観光を両立できる。",
     latitude: 36.3130, longitude: 140.5770,
     address: "〒311-1301 茨城県大洗町磯浜町8249",
     accessInfo: "鹿島臨海鉄道大洗駅から徒歩約15分。北関東自動車道水戸大洗ICから約10分。",
@@ -714,9 +714,9 @@ export const kantoDetailSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.0, reviewCount: 198,
     catchableFish: [
-      { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り", source: "上州屋" },
-      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り", source: "上州屋" },
-      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り", source: "上州屋" },
+      { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "アジング", source: "上州屋" },
+      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ショアジギング", source: "上州屋" },
+      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ルアー", source: "上州屋" },
       { fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー", source: "上州屋" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "上州屋" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "メバリング", source: "上州屋" },
@@ -724,7 +724,14 @@ export const kantoDetailSpots: FishingSpot[] = [
       { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り", source: "上州屋" },
       { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー", source: "上州屋" },
     ], bestTimes: btMorning, tackleRecommendations: [],
-    gearGuides: [gearSabiki, gearLure, gearRock, gearMebaring, gearNage, gearUki],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["茨城県ではまき餌（コマセ）釣りが原則禁止で、認められているのは鹿島港魚釣園とふれあい公園（ひたちなか市海門町1丁目地先）の2箇所のみです（1人1日2kgまで・船上不可）。この釣り場ではサビキ釣り・カゴ釣りは行えません。（出典: 茨城県）"],
+    },
+    gearGuides: [gearLure, gearRock, gearMebaring, gearNage],
     safetyLevel: "caution", safetyNotes: ["外洋に面しているため波が高い日あり", "漁船の往来が多いため注意", "大洗磯前神社が近く観光も楽しめる"],
   },
   {

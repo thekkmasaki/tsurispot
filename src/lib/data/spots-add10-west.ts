@@ -2363,7 +2363,7 @@ export const westAdd10Spots: FishingSpot[] = [
   },
   {
     id: "ss10528", name: "庵川港", slug: "iorigawa-kou-a10",
-    description: "門川町の日向灘に面した漁港。アジの好漁場として地元で人気が高く、夜のアジングでは尺アジの実績もある。静かな環境で集中して釣りができる。",
+    description: "門川町の日向灘に面した漁港。アジの好漁場として地元で人気が高く、夜のアジングでは尺アジの実績もある。常夜灯がつくる明暗の境目を丁寧に探るのが攻略の基本で、冬場はメバリングも楽しめる。門川町の海域はアミ餌を使った釣りが禁止されているためサビキ釣りは行えず、ルアーでの釣りが中心になる。人が少なく静かな環境で集中して竿を出せるのも魅力。",
     latitude: 32.4690, longitude: 131.6500,
     address: "〒889-0600 宮崎県東臼杵郡門川町庵川",
     accessInfo: "JR門川駅から車で約5分",
@@ -2376,6 +2376,11 @@ export const westAdd10Spots: FishingSpot[] = [
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "メバリング" },
     ],
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKyushu,
+    rules: {
+      castingAllowed: true, lureAllowed: true, chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["門川町海域では、宮崎海区漁業調整委員会指示によりアミ餌（アミエビ）を使用した釣りが禁止されています。サビキ釣りは行えません。（出典: 宮崎県）"],
+    },
   },
 
   // =========================================

@@ -7,6 +7,12 @@ export interface SeaFishingRules {
   fishingRightsNotes: string[];
   /** 撒き餌（コマセ）規制 */
   chumRegulation?: string;
+  /**
+   * 陸（岸壁・堤防・磯）からのまき餌釣りの可否。
+   * 船だけを規制する県と、陸にも及ぶ県を機械的に区別するために持つ。
+   * chumRegulation は人間向けの説明文で、こちらは判定用。
+   */
+  chumFromShore?: "allowed" | "area-limited" | "prohibited" | "unknown";
   /** 海面の禁漁期間 */
   closedSeasons: { fish: string; period: string; note?: string }[];
   /** 海面のサイズ制限 */
@@ -87,6 +93,7 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "昆布・ワカメ等の海藻類も漁業権の対象地域が多く、採取は禁止です。",
         "タコは一部海域で漁業権が設定されています。事前に確認してください。",
       ],
+      chumFromShore: "unknown",
       closedSeasons: [
         { fish: "サケ", period: "河口から一定距離（概ね500m〜1km）は周年採捕禁止", note: "河口規制。海面でのサケ釣りは地域・時期により可能な場合あり。" },
         { fish: "ケガニ", period: "周年（遊漁者は採捕禁止）", note: "漁業者のみ許可期間に採捕可能" },
@@ -128,9 +135,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
       "陸奥湾でのホタテ養殖エリアでの釣りは制限されています。",
     ],
     authority: "青森県",
-    referenceText: "青森県の内水面漁業調整規則は青森県庁のウェブサイトで確認できます。",
+    referenceText: "青森県の漁業調整規則・海区漁業調整委員会指示は青森県の公式サイトで確認できます。",
     referenceUrl: "https://www.pref.aomori.lg.jp/soshiki/nourin/sshinko/suisan_yugyo_umituri.html",
-    lastVerified: "2026-08-10",
+    lastVerified: "2026-08-17",
     seaRules: {
       fishingRightsNotes: [
         "ナマコは全域で漁業権の対象。遊漁者の採取は禁止されています。",
@@ -138,6 +145,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "陸奥湾のホタテ・ホヤは養殖漁業権が設定されています。養殖施設周辺での釣りは避けてください。",
         "昆布・ワカメ等の海藻類の採取も禁止区域があります。",
       ],
+      chumRegulation:
+        "青森県では、東部・西部の海区漁業調整委員会指示により、遊漁のまき餌釣りが県内19地先で禁止されています（青森県公表）。八戸市の鮫町・白銀町・築港街・湊町・新湊・河原木、深浦町の横磯・深浦・広戸・追良瀬は全区域が対象で、その他の地先は一部区域が対象です。この指示は毎年更新される（現行は令和7年4月1日〜令和8年3月31日）ため、最新の区域・条件は青森県の公式ページでご確認ください。",
+      chumFromShore: "area-limited",
       closedSeasons: [
         { fish: "ヒラメ", period: "地域により禁漁期間あり", note: "資源保護のため" },
       ],
@@ -175,7 +185,7 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
       "内水面でのサクラマス釣りは遊漁券が必要です。",
     ],
     authority: "岩手県",
-    referenceText: "岩手県の内水面漁業調整規則は岩手県庁のウェブサイトで確認できます。",
+    referenceText: "岩手県の漁業調整規則・海区漁業調整委員会指示は岩手県の公式サイトで確認できます。",
     referenceUrl: "https://www.pref.iwate.jp/sangyoukoyou/suisan/1035462/index.html",
     lastVerified: "2026-08-10",
     seaRules: {
@@ -185,6 +195,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "ワカメ・昆布等の海藻類も漁業権の対象。採取は厳禁です。",
         "三陸沿岸の磯場は広範囲に漁業権区域が設定されています。貝類・海藻の採取はしないでください。",
       ],
+      chumRegulation:
+        "まき餌（コマセ）釣りについて、岩手県の漁業調整規則および海区漁業調整委員会指示では県独自の禁止規定は確認されていません。ただし漁港・港湾施設の管理者が独自にまき餌を禁止している場合があるため、現地の掲示に従ってください。最新の区域・条件は岩手県の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [],
       sizeLimits: [
         { fish: "ヒラメ", minSize: "30cm" },
@@ -220,7 +233,7 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
       "仙台湾でのハゼ釣りは秋のシーズンが特に人気。",
     ],
     authority: "宮城県",
-    referenceText: "宮城県の内水面漁業調整規則は宮城県庁のウェブサイトで確認できます。",
+    referenceText: "宮城県の漁業調整規則・海区漁業調整委員会指示は宮城県の公式サイトで確認できます。",
     referenceUrl: "https://www.pref.miyagi.jp/soshiki/suishin/umiduri.html",
     lastVerified: "2026-08-10",
     seaRules: {
@@ -230,6 +243,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "ホヤも養殖漁業権の対象地域があります。",
         "松島湾内はほぼ全域に漁業権が設定されています。貝類・海藻の採取は厳禁です。",
       ],
+      chumRegulation:
+        "まき餌（コマセ）釣りについて、宮城県の漁業調整規則および海区漁業調整委員会指示では県独自の禁止規定は確認されていません。ただし漁港・港湾施設の管理者が独自にまき餌を禁止している場合があるため、現地の掲示に従ってください。最新の区域・条件は宮城県の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [],
       sizeLimits: [
         { fish: "ヒラメ", minSize: "30cm" },
@@ -266,7 +282,7 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
       "男鹿半島では磯釣りが盛んですが、荒天時は波浪に注意。",
     ],
     authority: "秋田県",
-    referenceText: "秋田県の内水面漁業調整規則は秋田県庁のウェブサイトで確認できます。",
+    referenceText: "秋田県の漁業調整規則・海区漁業調整委員会指示は秋田県の公式サイトで確認できます。",
     referenceUrl: "https://www.pref.akita.lg.jp/pages/archive/1914",
     lastVerified: "2026-08-10",
     seaRules: {
@@ -275,6 +291,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "アワビ・サザエ・ウニは漁業権の対象。採取は密漁となります。",
         "ワカメ・昆布等の海藻類も漁業権区域があります。",
       ],
+      chumRegulation:
+        "秋田県では平成29年3月にまき餌釣りが解禁されましたが、海区漁業調整委員会指示により一部の時期・区域では引き続き禁止されています（秋田県公表）。指示は更新されることがあるため、最新の区域・条件は秋田県の公式ページでご確認ください。",
+      chumFromShore: "area-limited",
       closedSeasons: [
         { fish: "ハタハタ", period: "産卵期（12月頃）に規制あり", note: "秋田県の県魚。産卵保護のため地域ごとに規制が設けられています。" },
       ],
@@ -311,7 +330,7 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
       "庄内地方の海岸での釣りは、冬季の日本海の荒波に注意してください。",
     ],
     authority: "山形県",
-    referenceText: "山形県の内水面漁業調整規則は山形県庁のウェブサイトで確認できます。",
+    referenceText: "山形県の漁業調整規則・海区漁業調整委員会指示は山形県の公式サイトで確認できます。",
     referenceUrl: "https://www.pref.yamagata.jp/140033/sangyo/nourinsuisangyou/suisan/tyouseikisoku.html",
     lastVerified: "2026-08-10",
     seaRules: {
@@ -321,6 +340,7 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "貝類（岩ガキ等）の採取も禁止されている区域があります。",
         "ワカメ等の海藻類の採取も漁業権区域では禁止です。",
       ],
+      chumFromShore: "unknown",
       closedSeasons: [],
       sizeLimits: [
         { fish: "ヒラメ", minSize: "30cm" },
@@ -353,7 +373,7 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
       "一部河川では放射性物質検査の結果に基づく出荷制限・採捕自粛がある場合があります。最新情報を確認してください。",
     ],
     authority: "福島県",
-    referenceText: "福島県の内水面漁業調整規則は福島県庁のウェブサイトで確認できます。",
+    referenceText: "福島県の漁業調整規則・海区漁業調整委員会指示は福島県の公式サイトで確認できます。",
     referenceUrl: "https://www.pref.fukushima.lg.jp/sec/36490a/suisanjouhou10.html",
     lastVerified: "2026-08-10",
     seaRules: {
@@ -362,6 +382,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "ワカメ・昆布等の海藻類も漁業権区域が設定されています。",
         "貝類（ホッキガイ等）の採取も禁止されている区域があります。",
       ],
+      chumRegulation:
+        "まき餌（コマセ）釣りについて、福島県の漁業調整規則および海区漁業調整委員会指示では県独自の禁止規定は確認されていません。ただし漁港・港湾施設の管理者が独自にまき餌を禁止している場合があるため、現地の掲示に従ってください。最新の区域・条件は福島県の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [],
       sizeLimits: [
         { fish: "ヒラメ", minSize: "30cm" },
@@ -395,9 +418,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
       "霞ヶ浦でのバス釣りは人気ですが、リリース禁止条例があります。",
     ],
     authority: "茨城県",
-    referenceText: "茨城県の内水面漁業調整規則は茨城県庁のウェブサイトで確認できます。",
+    referenceText: "茨城県の漁業調整規則・海区漁業調整委員会指示（まき餌釣りのルールを含む）は茨城県の公式サイトで確認できます。",
     referenceUrl: "https://www.pref.ibaraki.jp/koho/kurashi-qanda/kyoiku-bunka/yoka-recreation/umituri.html",
-    lastVerified: "2026-08-10",
+    lastVerified: "2026-08-17",
     seaRules: {
       fishingRightsNotes: [
         "ハマグリは鹿島灘で漁業権が設定されています。潮干狩りでの採取は密漁となります。",
@@ -405,11 +428,15 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "ウニ・ナマコも漁業権区域が設定されています。",
         "ワカメ・ヒジキ等の海藻類の採取も禁止区域があります。",
       ],
+      chumRegulation:
+        "茨城県の海面では、まき餌釣りは原則として禁止されています（茨城海区漁業調整委員会指示／茨城県公表）。認められているのは「鹿島港魚釣園」（鹿嶋市新浜地先）と「ふれあい公園」（ひたちなか市海門町1丁目地先）の2箇所のみで、1人1日2kgまで、船上からは行えません。この2箇所以外ではサビキ釣り・カゴ釣りはできません。また霞ヶ浦・北浦などの内水面も、霞ケ浦北浦海区漁業調整規則によりまき餌釣りが全面禁止です。最新の区域・条件は茨城県の公式ページでご確認ください。",
+      chumFromShore: "prohibited",
       closedSeasons: [],
       sizeLimits: [
         { fish: "ヒラメ", minSize: "30cm" },
       ],
       methodRestrictions: [
+        "まき餌釣りは県の海面では原則禁止で、鹿島港魚釣園とふれあい公園の2箇所でのみ認められています（1人1日2kgまで、船上不可）。",
         "鹿島灘沿岸の一部区域では投げ釣りに制限がある場合があります。現地の看板を確認してください。",
       ],
       restrictedAreas: [
@@ -511,6 +538,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "テングサ・ヒジキ等の海藻類の採取も禁止区域があります。",
         "ハマグリは九十九里・富津等で漁業権が設定されています。潮干狩り場以外での採取は禁止です。",
       ],
+      chumRegulation:
+        "千葉県では、陸からのまき餌釣りは必要最小限の量であれば行えますが、船からのまき餌には上限があり、東京湾は1人1日3kgまで、その他の海域は5kgまでとされています（千葉県公表）。また鴨川、勝浦〜御宿、銚子の3地先ではまき餌釣りが禁止されています。最新の区域・条件は千葉県の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [
         { fish: "イセエビ", period: "6月1日〜7月31日", note: "産卵保護のための禁漁期間。外房を中心に厳格に運用されています。" },
       ],
@@ -548,7 +578,7 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
       "伊豆諸島・小笠原諸島では離島特有のルールがあるため、事前確認が必要。",
     ],
     authority: "東京都",
-    referenceText: "東京都の内水面漁業調整規則は東京都庁のウェブサイトで確認できます。",
+    referenceText: "東京都の漁業調整規則・海区漁業調整委員会指示は東京都の公式サイトで確認できます。",
     referenceUrl: "https://www.sangyo-rodo.metro.tokyo.lg.jp/nourin/suisan/yuugyo/recreation/sea",
     lastVerified: "2026-08-10",
     seaRules: {
@@ -558,6 +588,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "ウニ・アワビも伊豆諸島・小笠原諸島で漁業権の対象です。",
         "テングサ等の海藻類も漁業権区域があります。",
       ],
+      chumRegulation:
+        "東京都では、令和6年11月15日の漁業調整規則の改正により、まき餌釣りが解禁されました（東京都公表）。ただし船から行う場合は、まき餌かごの規格や使用量（9kg・3kg）などの制限が定められています。最新の区域・条件は東京都の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [
         { fish: "イセエビ", period: "島ごとに異なる（概ね5月〜8月頃）", note: "伊豆諸島での禁漁期間。各島の漁協に確認してください。" },
       ],
@@ -603,6 +636,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "サザエ・アワビ・ウニは全域で漁業権の対象。採取は密漁となります。",
         "テングサ・ワカメ等の海藻類の採取も禁止区域があります。",
       ],
+      chumRegulation:
+        "神奈川県では、海区漁業調整委員会指示第4号により、まき餌かごは外径5.5cm以下・長さ16cm以下、1仕掛けにつき1個までと定められています（神奈川県公表）。指示は更新されることがあるため、最新の区域・条件は神奈川県の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [
         { fish: "イセエビ", period: "5月1日〜8月31日", note: "相模湾沿岸での禁漁期間。産卵保護のため。" },
       ],
@@ -653,6 +689,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "ワカメ・モズクなどの海藻類も漁業権が設定されています。",
         "佐渡島周辺は漁業権区域が広く設定されているため、磯場での貝類・海藻類の採取は特に注意が必要です。",
       ],
+      chumRegulation:
+        "新潟県では、佐渡海区漁業調整委員会指示により、姫津・大杉・杉野浦・南新保・柳沢・真浦・赤泊・徳和・三川・莚場・梅津・羽吉・椿などの各地先で、オキアミ以外のまき餌の使用が禁止されています（新潟県公表）。サビキ釣りで一般的なアミエビは使用できません。加茂湖は全域でまき餌が禁止です。最新の区域・条件は新潟県の公式ページでご確認ください。",
+      chumFromShore: "area-limited",
       closedSeasons: [
         { fish: "クロマグロ（小型）", period: "漁獲量上限あり（国の管理）", note: "遊漁でも30kg未満のクロマグロには報告義務あり" },
       ],
@@ -694,11 +733,12 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
-        "ホタルイカは漁業権の対象。ただし素手での少量捕獲は一部海岸で黙認されている場合もありますが、網やたも使用は違反となる可能性があります。",
+        "ホタルイカは漁業権の対象です。網・たも網等を使用した採捕は漁業権侵害や富山県漁業調整規則違反となる可能性があります。採捕の可否は場所によって扱いが異なるため、事前に富山県または地元漁協にご確認ください。",
         "シロエビは富山湾の漁業権対象。一般の採取は禁止です。",
         "サザエ・アワビ・ウニは全域で漁業権の対象。",
         "ワカメ・テングサ等の海藻類も漁業権が設定されています。",
       ],
+      chumFromShore: "unknown",
       closedSeasons: [
         { fish: "クロマグロ（小型）", period: "漁獲量上限あり（国の管理）", note: "遊漁でも30kg未満のクロマグロには報告義務あり" },
       ],
@@ -711,7 +751,7 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
       restrictedAreas: [
         "富山湾内の定置網・刺し網周辺は航行・釣り禁止区域。",
         "富山新港周辺の一部区域は立入禁止。",
-        "ホタルイカの身投げシーズン（3〜5月）は海岸が混雑。漁港内での捕獲は禁止の場合あり。",
+        "ホタルイカの身投げシーズン（3〜5月）は海岸が混雑します。漁港内での捕獲が禁止されている場合があるため、現地の掲示に従ってください。",
       ],
       otherNotes: [
         "ブリ・マダイなどは遊漁船での釣りが盛ん。漁業権の対象外で釣りOKです。",
@@ -742,6 +782,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "ワカメ・テングサ等の海藻類も漁業権が設定されています。",
         "能登半島の磯場は漁業権区域が特に広く設定されているため注意が必要です。",
       ],
+      chumRegulation:
+        "石川県では、海区漁業調整委員会指示第3号により、かき養殖施設から50m以内の区域、いわのり漁場、舳倉島等の周囲5海里の区域の3区域でまき餌の使用が禁止されています（石川県公表）。最新の区域・条件は石川県の公式ページでご確認ください。",
+      chumFromShore: "area-limited",
       closedSeasons: [
         { fish: "クロマグロ（小型）", period: "漁獲量上限あり（国の管理）", note: "遊漁でも30kg未満のクロマグロには報告義務あり" },
       ],
@@ -754,7 +797,7 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
       restrictedAreas: [
         "能登半島先端部（珠洲・輪島）の磯場は漁業権区域が広い。貝類・海藻の採取は厳禁。",
         "金沢港周辺の一部区域は立入禁止。",
-        "七尾湾内の養殖施設周辺は釣り禁止。",
+        "七尾湾など、かき養殖施設の周辺（施設から50m以内）ではまき餌の使用が禁止されています（海区漁業調整委員会指示）。養殖施設やロープには近づかないでください。",
       ],
       otherNotes: [
         "能登半島は外浦（日本海側）と内浦（七尾湾側）で海況が大きく異なります。外浦は荒天時の高波に注意。",
@@ -785,6 +828,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "ワカメ・テングサ等の海藻類も漁業権が設定されています。",
         "越前海岸は磯釣りの名所ですが、磯場周辺の貝類・海藻は漁業権区域のため採取禁止。",
       ],
+      chumRegulation:
+        "福井県では、海区漁業調整委員会指示第5-4号により「船舶を使用した（磯渡りを含む）まきえ釣り」が禁止されています（福井県公表）。対象は雄島漁協・福井市漁協・越廼漁協の全海域と、敦賀市漁協の区画漁業権全海域です。かごや袋に入れて海中に散布するものもまきえに該当するため、渡船を利用した磯釣りやサビキカゴも対象になります。有効期間は令和5年9月1日〜令和10年8月31日です。最新の区域・条件は福井県の公式ページでご確認ください。",
+      chumFromShore: "area-limited",
       closedSeasons: [
         { fish: "ズワイガニ（越前がに）", period: "1月20日〜11月5日（オス）/ 1月11日〜11月5日（メス）", note: "遊漁での採捕も禁止期間あり" },
       ],
@@ -894,6 +940,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "アワビ・サザエ・ウニは全域で漁業権の対象。",
         "伊豆半島の磯場は漁業権区域が広いため、貝類・海藻の採取は厳禁。",
       ],
+      chumRegulation:
+        "静岡県では、海区漁業調整委員会指示第9号により、船を使用する場合のまき餌かごは直径5cm・長さ15cm以内で1個までと定められています（静岡県公表）。最新の区域・条件は静岡県の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [
         { fish: "イセエビ", period: "5月15日〜9月15日", note: "産卵保護のため。伊豆半島全域で適用" },
       ],
@@ -940,6 +989,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "タコは一部海域で漁業権が設定されています。特に篠島・日間賀島周辺は注意。",
         "ワカメ・ノリ等の海藻類も漁業権が設定されています。",
       ],
+      chumRegulation:
+        "まき餌（コマセ）釣りについて、愛知県の漁業調整規則および海区漁業調整委員会指示では県独自の禁止規定は確認されていません。ただし漁港・港湾施設の管理者が独自にまき餌を禁止している場合があるため、現地の掲示に従ってください。最新の区域・条件は愛知県の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [],
       sizeLimits: [],
       methodRestrictions: [
@@ -985,6 +1037,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "真珠養殖区域（英虞湾・五ヶ所湾等）は立入注意。養殖筏周辺での釣りは禁止されています。",
         "ナマコ・ワカメ・テングサ等も漁業権が設定されています。",
       ],
+      chumRegulation:
+        "三重県では、海区漁業調整委員会告示第5号により広い海域でまき餌釣りが禁止されています（ただし漁業権者の同意を得た区域は除きます／三重県公表）。この告示は令和8年8月31日で失効し更新される予定のため、対象区域が変わる可能性があります。釣行前に必ず三重県の公式ページで最新の区域・条件をご確認ください。",
+      chumFromShore: "area-limited",
       closedSeasons: [
         { fish: "イセエビ", period: "5月1日〜9月30日", note: "産卵保護のため。三重県は特に取り締まりが厳格" },
       ],
@@ -1049,6 +1104,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "ワカメ・テングサ等の海藻類も漁業権が設定されています。",
         "丹後半島の磯場は漁業権区域が設定されているため、貝類・海藻の採取は厳禁。",
       ],
+      chumRegulation:
+        "まき餌（コマセ）釣りについて、京都府の漁業調整規則および海区漁業調整委員会指示では府独自の禁止規定は確認されていません。ただし漁港・港湾施設の管理者が独自にまき餌を禁止している場合があるため、現地の掲示に従ってください。最新の区域・条件は京都府の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [],
       sizeLimits: [],
       methodRestrictions: [
@@ -1090,6 +1148,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "アワビ・サザエ・ウニは漁業権の対象（大阪湾では生息数は少ないが規制は全国共通）。",
         "ワカメ等の海藻類も漁業権が設定されている場合があります。",
       ],
+      chumRegulation:
+        "まき餌（コマセ）釣りについて、大阪府の漁業調整規則および海区漁業調整委員会指示では府独自の禁止規定は確認されていません。ただし港湾施設の管理者が独自にまき餌を禁止している場合があるため、現地の掲示に従ってください。最新の区域・条件は大阪府の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [],
       sizeLimits: [],
       methodRestrictions: [
@@ -1133,6 +1194,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "瀬戸内海側でもワカメ・ノリ等の海藻類は漁業権が設定されています。",
         "淡路島周辺もタコ・サザエ等に漁業権が設定されている区域があります。",
       ],
+      chumRegulation:
+        "兵庫県漁業調整規則第40条第1号は、遊漁で使用できる漁具・漁法を「さお釣又は手釣り（船舶を使用してのまき餌釣りを除く）」と定めています（兵庫県公表）。陸からのまき餌釣りは可能ですが、船を使用してのまき餌釣りはできません。最新の区域・条件は兵庫県の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [
         { fish: "ズワイガニ（松葉がに）", period: "1月20日〜11月5日（オス）/ 1月11日〜11月5日（メス）", note: "日本海側のみ。遊漁での採捕も禁止期間あり" },
       ],
@@ -1199,6 +1263,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "ナマコ・ワカメ・テングサ等も漁業権が設定されています。",
         "紀伊半島南部の磯場は漁業権区域が広いため注意が必要。",
       ],
+      chumRegulation:
+        "和歌山県では、海区漁業調整委員会指示第1号（有効期間 令和8年4月24日〜令和9年4月23日）により、船からのまき餌釣りが12区域で禁止されています（和歌山県公表）。和歌山市加太地先の全域のほか、美浜町三尾、白浜町椿、有田市千田、宮崎町逢井、串本町樫野・田原、太地町、那智勝浦町宇久井などが対象です。また大型定置網の垣網周辺100mでも禁止されています。陸からのまき餌釣りは規制の対象外です。指示は毎年更新されるため、最新の区域・条件は和歌山県の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [
         { fish: "イセエビ", period: "5月1日〜9月15日", note: "産卵保護のため" },
       ],
@@ -1206,7 +1273,7 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         { fish: "イセエビ", minSize: "体長13cm以上（禁漁期間外でも漁業権対象で一般の採取不可）" },
       ],
       methodRestrictions: [
-        "撒き餌（コマセ）の使用に特段の規制なし（以前は一部制限があったが緩和済み）。",
+        "船からのまき餌釣りは、海区漁業調整委員会指示により加太地先をはじめ12区域で禁止されています（陸からのまき餌釣りは対象外）。詳細は上の「撒き餌（コマセ）の規制」をご確認ください。",
         "磯場でのピトン（竿受け）設置は岩場を傷つけないよう配慮してください。",
       ],
       restrictedAreas: [
@@ -1246,6 +1313,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "ウニ・ナマコも漁業権区域が広く設定されています。",
         "白イカ（ケンサキイカ）は竿釣り・エギングでの釣りはOKです。",
       ],
+      chumRegulation:
+        "まき餌（コマセ）釣りについて、鳥取県の漁業調整規則および海区漁業調整委員会指示では県独自の禁止規定は確認されていません。ただし漁港・港湾施設の管理者が独自にまき餌を禁止している場合があるため、現地の掲示に従ってください。最新の区域・条件は鳥取県の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [],
       sizeLimits: [
         { fish: "ヒラメ", minSize: "30cm" },
@@ -1288,12 +1358,15 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "ウニ・ナマコ・ワカメも漁業権が設定されている区域があります。",
         "隠岐諸島は本土以上に漁業権区域が広く設定されています。磯場での採取には特に注意。",
       ],
+      chumRegulation:
+        "島根県では、一部海域で船舶（ゴムボートを含む）によるまき餌釣りが禁止されています（島根県公表）。最新の区域・条件は島根県の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [],
       sizeLimits: [
         { fish: "ヒラメ", minSize: "30cm" },
       ],
       methodRestrictions: [
-        "隠岐諸島の一部磯場では、漁業者の操業区域と重なるため竿釣りのみ許可されている場所があります。",
+        "隠岐諸島の磯場は漁業者の操業区域と重なる場所が多いため、渡船業者や地元漁協の指示に従ってください。",
       ],
       restrictedAreas: [
         "隠岐諸島の磯場は漁業権区域が広いため、事前に地元漁協に確認することを推奨します。",
@@ -1329,6 +1402,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "アサリ・ワカメ・カキは養殖漁業権が設定されています。",
         "ウニ・ナマコ・サザエも漁業権の対象地域があります。",
       ],
+      chumRegulation:
+        "岡山県漁業調整規則第42条第4号は、遊漁で使用できる漁具・漁法を「手釣及び竿釣（船舶を使用するまきえ釣を除く）」と定めています（岡山県公表）。陸からのまき餌釣りは可能ですが、船を使用してのまき餌釣りはできません。最新の区域・条件は岡山県の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [],
       sizeLimits: [],
       methodRestrictions: [
@@ -1371,6 +1447,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "アサリ・ワカメも漁業権の対象地域があります。",
         "ウニ・ナマコ・サザエの採取も漁業権侵害となります。",
       ],
+      chumRegulation:
+        "広島県漁業調整規則第44条により、船からのまきえ釣りは禁止されています。さらに海区漁業調整委員会指示により、陸からのまき餌も30区域（周年25区域、7月10日〜9月30日の期間限定5区域）で禁止されています（広島県公表）。この指示は毎年9月1日に更新されるため、最新の区域・条件は広島県の公式ページでご確認ください。",
+      chumFromShore: "area-limited",
       closedSeasons: [],
       sizeLimits: [],
       methodRestrictions: [
@@ -1413,6 +1492,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "ウニ・ナマコ・ワカメも漁業権が設定されている区域があります。",
         "日本海側・瀬戸内海側ともに磯場での貝類・海藻類の採取は禁止です。",
       ],
+      chumRegulation:
+        "山口県の瀬戸内海側では、瀬戸内海海区漁業調整委員会指示第6号により、錨で船を固定して生きエビのまき餌でマダイ・スズキ・ヤズを釣る行為が禁止されています（山口県公表）。最新の区域・条件は山口県の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [],
       sizeLimits: [
         { fish: "ヒラメ", minSize: "30cm" },
@@ -1457,6 +1539,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "ウニ・ナマコ・ワカメも漁業権が設定されている区域があります。",
         "イセエビも漁業権の対象となっている地域があり、釣りでの採捕にも注意が必要です。",
       ],
+      chumRegulation:
+        "まき餌（コマセ）釣りについて、徳島県の漁業調整規則および海区漁業調整委員会指示では県独自の禁止規定は確認されていません。ただし漁港・港湾施設の管理者が独自にまき餌を禁止している場合があるため、現地の掲示に従ってください。最新の区域・条件は徳島県の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [
         { fish: "イセエビ", period: "5月〜8月頃（地域により異なる）", note: "資源保護のための禁漁期間" },
       ],
@@ -1497,14 +1582,17 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
     lastVerified: "2026-08-10",
     seaRules: {
       fishingRightsNotes: [
-        "タコは全域で漁業権の対象。タコエギ・タコジグでの採捕も禁止されています。",
+        "香川県漁業調整規則では、船を使用してのまだこ釣りが禁止されています。陸からのタコ釣りは規則上の禁止対象ではありませんが、共同漁業権が設定されている区域ではタコが漁業権の対象となっている場合があるため、現地の掲示や地元漁協の指示に従ってください。",
         "サザエ・アワビ・ウニも漁業権の対象です。",
         "ワカメ・ヒジキなどの海藻類も漁業権区域があります。",
       ],
+      chumRegulation:
+        "香川県漁業調整規則第40条は、遊漁で使用できる漁具・漁法をさお釣・手釣りとしたうえで「船を使ったまき餌釣りとまだこ釣りを除く」と定めています（香川県公表）。陸からのまき餌釣りは可能ですが、船を使用してのまき餌釣りはできません。最新の区域・条件は香川県の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [],
       sizeLimits: [],
       methodRestrictions: [
-        "タコ釣りは漁業権侵害となるため、香川県沿岸全域で行わないでください。",
+        "船を使用してのまだこ釣りは香川県漁業調整規則で禁止されています。陸からのタコ釣りは規則上の禁止対象ではありませんが、漁業権区域では地元漁協のルールに従ってください。",
       ],
       restrictedAreas: [
         "瀬戸大橋周辺は釣り禁止区域が設定されています。橋脚付近での釣りはできません。",
@@ -1541,6 +1629,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "タコは一部海域で漁業権が設定されています。事前に確認してください。",
         "ウニ・ナマコ・ワカメも漁業権区域があります。",
       ],
+      chumRegulation:
+        "愛媛県漁業調整規則第44条により、船からのまきえ釣りは禁止されています。さらに海区漁業調整委員会指示により、陸からのまき餌が禁止されている区域もあります（愛媛県公表）。指示は更新されることがあるため、最新の区域・条件は愛媛県の公式ページでご確認ください。",
+      chumFromShore: "area-limited",
       closedSeasons: [],
       sizeLimits: [
         { fish: "ヒラメ", minSize: "30cm" },
@@ -1586,6 +1677,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "サンゴは採取禁止。宝石サンゴの密漁は厳しく取り締まられています。",
         "ナマコ・ワカメも漁業権が設定されている区域があります。",
       ],
+      chumRegulation:
+        "まき餌（コマセ）釣りについて、高知県の漁業調整規則および海区漁業調整委員会指示では県独自の禁止規定は確認されていません。ただし漁港・港湾施設の管理者が独自にまき餌を禁止している場合があるため、現地の掲示に従ってください。最新の区域・条件は高知県の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [
         { fish: "イセエビ", period: "5月〜8月頃（地域により異なる）", note: "資源保護のための禁漁期間" },
       ],
@@ -1632,12 +1726,15 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "ウニ・ナマコ・ワカメも漁業権が設定されている区域があります。",
         "タコは一部海域で漁業権が設定されています。玄界灘側は特に注意。",
       ],
+      chumRegulation:
+        "まき餌（コマセ）釣りについて、福岡県の漁業調整規則および海区漁業調整委員会指示では県独自の禁止規定は確認されていません。ただし漁港・港湾施設の管理者が独自にまき餌を禁止している場合があります。個別の区域の扱いについては福岡県漁業管理課または各施設の管理者にご確認ください。最新の区域・条件は福岡県の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [],
       sizeLimits: [
         { fish: "ヒラメ", minSize: "30cm" },
       ],
       methodRestrictions: [
-        "博多湾内の一部区域では撒き餌（コマセ）の使用が制限されています。",
+        "漁港・港湾施設ごとに独自のルールが定められている場合があります。現地の掲示に従ってください。",
       ],
       restrictedAreas: [
         "博多湾の一部は釣り禁止区域が設定されています。博多ポートタワー周辺など。",
@@ -1677,6 +1774,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "ウニ・ナマコ・ワカメも漁業権区域があります。",
         "有明海独特の生物（ムツゴロウ等）は保護対象の場合があります。",
       ],
+      chumRegulation:
+        "佐賀県では、松浦海区漁業調整委員会指示第90号（令和5年9月1日〜令和10年8月31日）により、佐賀玄海漁協唐津市統括支所管内の共同漁業権漁場でまき餌の使用が禁止されています（佐賀県公表）。漁港・港湾施設は対象から除かれているため、堤防からの釣りは規制の対象外です。最新の区域・条件は佐賀県の公式ページでご確認ください。",
+      chumFromShore: "area-limited",
       closedSeasons: [],
       sizeLimits: [],
       methodRestrictions: [
@@ -1720,6 +1820,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "離島の磯場は漁業権区域が特に多いため、事前に地元漁協に確認を推奨します。",
         "イセエビも漁業権の対象地域があります。",
       ],
+      chumRegulation:
+        "長崎県の対馬海域では、対馬海区漁業調整委員会指示第2号により、まき餌の使用量が1人1日8kgまで・1釣行あたり10kgまでに制限され、12月1日〜3月31日の21時から翌6時までは使用が禁止されています（長崎県公表）。最新の区域・条件は長崎県の公式ページでご確認ください。",
+      chumFromShore: "area-limited",
       closedSeasons: [
         { fish: "イセエビ", period: "5月〜8月頃（地域により異なる）", note: "資源保護のための禁漁期間" },
       ],
@@ -1769,6 +1872,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "ナマコ・ワカメも漁業権区域があります。",
         "車エビの養殖区域は立入禁止です。",
       ],
+      chumRegulation:
+        "熊本県では、有明海を除く海域で、ばくだん釣り（アミ団子を使用する釣り）が禁止されています。また漁港・港湾内および防波堤の外縁から30m以内の区域では、まき餌に土砂を使用することが禁止されています（熊本県公表）。最新の区域・条件は熊本県の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [],
       sizeLimits: [],
       methodRestrictions: [
@@ -1811,6 +1917,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "ウニ・ナマコ・ワカメも漁業権が設定されている区域があります。",
         "関サバ・関アジのブランド産地周辺は漁業権区域に注意してください。",
       ],
+      chumRegulation:
+        "大分県では、海区漁業調整委員会告示第6号により、いそ釣りでのあみ（おきあみを含む）のまきえ使用禁止区域が指定されています（大分県公表）。佐賀関の高島・牛島、四浦、保戸島（最大高潮時海岸線から700m以内）、スカ漁場、鶴見などが対象です。告示の有効期間は年度単位で更新されるため、最新の区域・条件は大分県の公式ページでご確認ください。",
+      chumFromShore: "area-limited",
       closedSeasons: [],
       sizeLimits: [
         { fish: "ヒラメ", minSize: "30cm" },
@@ -1855,6 +1964,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "ウニ・ナマコ・ワカメも漁業権が設定されている区域があります。",
         "イセエビも漁業権の対象地域があり、採捕には注意が必要です。",
       ],
+      chumRegulation:
+        "宮崎県では、海区漁業調整委員会指示第27号により、門川町の海域でアミ餌を使用した釣りが禁止されています（昭和47年発出・終期の定めなし）。川南〜高鍋の海域にもまき餌の禁止（ただし書きあり）が定められているほか、県全域であぶらえさの使用が禁止されています（宮崎県公表）。最新の区域・条件は宮崎県の公式ページでご確認ください。",
+      chumFromShore: "area-limited",
       closedSeasons: [
         { fish: "イセエビ", period: "5月〜8月頃（地域により異なる）", note: "資源保護のための禁漁期間" },
       ],
@@ -1903,6 +2015,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "イセエビも漁業権の対象地域が広く設定されています。",
         "屋久島・奄美大島ではサンゴの採取は厳禁（自然公園法・種の保存法）。",
       ],
+      chumRegulation:
+        "まき餌（コマセ）釣りについて、鹿児島県の漁業調整規則および海区漁業調整委員会指示では県独自の禁止規定は確認されていません。ただし漁港・港湾施設の管理者が独自にまき餌を禁止している場合があるため、現地の掲示に従ってください。最新の区域・条件は鹿児島県の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [
         { fish: "イセエビ", period: "5月〜8月頃（地域により異なる）", note: "資源保護のための禁漁期間" },
       ],
@@ -1949,6 +2064,9 @@ export const prefectureFishingRules: PrefectureFishingRule[] = [
         "シャコガイ・夜光貝などの貝類は漁業権の対象です。採取は密漁となります。",
         "リーフエッジ（サンゴ礁の外縁部）周辺は漁業権区域に注意してください。",
       ],
+      chumRegulation:
+        "まき餌（コマセ）釣りについて、沖縄県の漁業調整規則および海区漁業調整委員会指示では県独自の禁止規定は確認されていません。ただし漁港・港湾施設の管理者が独自にまき餌を禁止している場合があるため、現地の掲示に従ってください。最新の区域・条件は沖縄県の公式ページでご確認ください。",
+      chumFromShore: "allowed",
       closedSeasons: [],
       sizeLimits: [
         { fish: "ハマダイ（アカマチ）", minSize: "30cm（リリース推奨）" },

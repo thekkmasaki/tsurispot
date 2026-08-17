@@ -228,7 +228,7 @@ export const eastAdd10Spots: FishingSpot[] = [
   },
   {
     id: "ss10209", name: "鹿島灘サーフ（大竹海岸）", slug: "kashimanada-otake-surf-a10",
-    description: "鹿島灘に面した砂浜サーフポイント。遠浅の地形でキスの投げ釣りに最適で、秋にはイシモチの大型も交じる。",
+    description: "鹿島灘に面した広大な砂浜サーフポイント。遠浅の地形でキスの投げ釣りに最適で、5〜10月は朝マヅメの数釣りが楽しめる。10〜12月はルアーでヒラメを狙うアングラーも入り、シーズンごとに表情が変わる。投げとルアーが主体のため、まき餌釣りが原則禁止の茨城県でも釣り方の制約を感じにくい。海水浴場の駐車場とトイレが使える。",
     latitude: 36.1300, longitude: 140.6400,
     address: "〒311-2111 茨城県鉾田市大竹",
     accessInfo: "東水戸道路水戸大洗ICから車で約30分",
@@ -240,6 +240,13 @@ export const eastAdd10Spots: FishingSpot[] = [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("hirame"), monthStart: 10, monthEnd: 12, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["茨城県ではまき餌（コマセ）釣りが原則禁止で、認められているのは鹿島港魚釣園とふれあい公園（ひたちなか市海門町1丁目地先）の2箇所のみです（1人1日2kgまで・船上不可）。この釣り場ではサビキ釣り・カゴ釣りは行えません。（出典: 茨城県）"],
+    },
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeKanto,
   },
   {

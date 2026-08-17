@@ -135,7 +135,7 @@ export const eastAdd13Spots: FishingSpot[] = [
   },
   {
     id: "ss13204", name: "小美玉・霞ヶ浦南岸", slug: "omitama-kasumigaura-south-a13",
-    description: "霞ヶ浦の南側護岸はバス釣りの穴場で、ウィードが豊富なシャローエリアが続く。秋はワカサギの群れも回遊する。",
+    description: "霞ヶ浦の南側護岸はバス釣りの穴場で、ウィードが豊富なシャローエリアが長く続く。4〜11月は朝マヅメのルアーでブラックバス、秋から冬は接岸するワカサギがターゲットになる。霞ヶ浦・北浦は茨城県霞ケ浦北浦海区漁業調整規則によりまき餌釣りが全面禁止されているため、ワカサギも寄せエサを使わず、アカムシなどの刺しエサだけのウキ釣りで狙うことになる。",
     latitude: 36.0210, longitude: 140.3450,
     address: "〒311-3422 茨城県小美玉市下馬場",
     accessInfo: "常磐道千代田石岡ICから車で約20分",
@@ -145,8 +145,15 @@ export const eastAdd13Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
       { fish: fish("blackbass"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
-      { fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("wakasagi"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["霞ヶ浦・北浦では茨城県霞ケ浦北浦海区漁業調整規則によりまき餌釣りが全面禁止されています。海面で認められている鹿島港魚釣園などの例外は当てはまらず、サビキ釣り・カゴ釣りは行えません。（出典: 茨城県）"],
+    },
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideFreshwater, mazumeInfo: mazumeLake,
   },
   {
@@ -168,7 +175,7 @@ export const eastAdd13Spots: FishingSpot[] = [
   },
   {
     id: "ss13206", name: "茨城港日立港区第5埠頭", slug: "ibarakikou-hitachi-5futou-a13",
-    description: "広い岸壁からサビキ釣りや投げ釣りが楽しめる。アジやサバの回遊が安定しており、家族連れの姿が多い。",
+    description: "茨城港日立港区の第5埠頭。かつては広い岸壁からアジ・サバ・キスが狙える釣り場として知られたが、現在は港湾施設内での魚釣りが認められておらず、立入と釣りを制限する掲示が出されている。家族連れ向けの釣り場として紹介されることが今もあるが、釣行はできない。日立市周辺で釣りをする際は現地の掲示を必ず確認してほしい。",
     latitude: 36.5680, longitude: 140.6520,
     address: "〒319-1222 茨城県日立市みなと町",
     accessInfo: "日立南太田ICから車で約15分",
@@ -181,6 +188,15 @@ export const eastAdd13Spots: FishingSpot[] = [
       { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
     ],
+    fishingBan: {
+      scope: "full",
+      reason: "茨城港の港区内の岸壁・防波堤等での魚釣りは、茨城県港湾施設管理条例第4条（港湾施設の目的外使用の禁止）に該当するとして、茨城港湾事務所が禁止を案内しています。日立港区（旧日立港）は全域が釣り禁止となっており、現地には釣り禁止の看板が設置されているとの情報が複数あります。",
+      sourceUrls: [
+        "https://www.pref.ibaraki.jp/doboku/ibako/okoku/index.html",
+        "https://www.pref.ibaraki.jp/somu/somu/hosei/cont/reiki_int/reiki_honbun/o400RG00000987.html",
+      ],
+      confirmedAt: "2026-08-17",
+    },
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideBreakwater, mazumeInfo: mazumeKanto,
   },
   {
@@ -234,7 +250,7 @@ export const eastAdd13Spots: FishingSpot[] = [
   },
   {
     id: "ss13210", name: "東海村・豊岡海岸", slug: "tokai-toyooka-kaigan-a13",
-    description: "遠浅のサーフが広がり、キス釣りの穴場として地元で人気。夏場は混雑が少なくのんびりと竿を出せる。",
+    description: "遠浅のサーフが広がり、キス釣りの穴場として地元で人気の海岸。5〜10月は朝マヅメの投げ釣りでシロギスが数釣りでき、秋から冬にかけてはルアーでヒラメを狙うアングラーも入る。夏場でも混雑が少なく、のんびりと竿を出せるのが魅力。投げとルアーが主体のため、まき餌釣りが原則禁止の茨城県でも釣り方に制約を感じにくい。トイレがないので事前の準備を。",
     latitude: 36.4650, longitude: 140.6180,
     address: "〒319-1106 茨城県那珂郡東海村豊岡",
     accessInfo: "東海駅から車で約10分",
@@ -246,6 +262,13 @@ export const eastAdd13Spots: FishingSpot[] = [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("hirame"), monthStart: 9, monthEnd: 2, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["茨城県ではまき餌（コマセ）釣りが原則禁止で、認められているのは鹿島港魚釣園とふれあい公園（ひたちなか市海門町1丁目地先）の2箇所のみです（1人1日2kgまで・船上不可）。この釣り場ではサビキ釣り・カゴ釣りは行えません。（出典: 茨城県）"],
+    },
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeKanto,
   },
   // =========================================
@@ -915,7 +938,18 @@ export const eastAdd13Spots: FishingSpot[] = [
   // =========================================
   {
     id: "ss13251", name: "東京港・晴海埠頭公園", slug: "tokyokou-harumi-futou-a13",
-    description: "晴海エリアの埠頭公園は東京湾の夜景を眺めながらシーバスやハゼが狙える。都心からアクセス抜群の釣り場。",
+    description: "中央区晴海の埠頭に整備された公園。東京湾の夜景を望む都心のウォーターフロントで、シーバスやハゼの生息域でもある。ただし東京港の港湾施設内は原則として釣りが禁止されており、公園でも釣りができるとは限らない。釣行前に必ず現地の掲示と管理者の案内を確認してほしい。",
+    rules: {
+      castingAllowed: false,
+      lureAllowed: true,
+      chumAllowed: true,
+      nightFishing: false,
+      fishingLicenseRequired: false,
+      restrictedAreas: [
+        "東京港（お台場・品川埠頭等を含む）の港湾施設内は原則として釣りが禁止されています。晴海埠頭公園で釣りができるかは現地の掲示を必ず確認してください。",
+      ],
+      otherRules: ["公園利用者が多いエリアのため、周囲の安全に十分配慮すること"],
+    },
     latitude: 35.6520, longitude: 139.7780,
     address: "〒104-0053 東京都中央区晴海",
     accessInfo: "都営大江戸線勝どき駅から徒歩約15分",
@@ -1358,7 +1392,7 @@ export const eastAdd13Spots: FishingSpot[] = [
   },
   {
     id: "ss13278", name: "佐渡・赤泊漁港", slug: "sado-akadomari-gyokou-a13",
-    description: "佐渡島南部の赤泊漁港はアオリイカの好ポイント。秋のエギングシーズンには良型のアオリイカが堤防から狙える。",
+    description: "佐渡島南部に位置する赤泊漁港はアオリイカの好ポイントとして知られ、秋のエギングシーズンには良型が堤防から狙える。赤泊地先は佐渡海区漁業調整委員会指示によりオキアミ以外のまき餌の使用が禁止されているため、標準的な餌がアミエビであるサビキ釣りは行えず、アジは夕マヅメのアジングで狙うことになる。両津港からバスで約90分と離島の奥まった場所にあり、その分プレッシャーが低い。",
     latitude: 37.8480, longitude: 138.3580,
     address: "〒952-0706 新潟県佐渡市赤泊",
     accessInfo: "両津港からバスで約90分",
@@ -1368,8 +1402,15 @@ export const eastAdd13Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
-      { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+      { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["この地先は佐渡海区漁業調整委員会指示により、オキアミ以外のまき餌の使用が禁止されています。アミエビを使うサビキ釣りは行えません。（出典: 新潟県）"],
+    },
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeHokuriku,
   },
   {

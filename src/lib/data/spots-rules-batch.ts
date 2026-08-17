@@ -2007,10 +2007,15 @@ export const spotRulesBatch: Record<string, SpotRules> = {
   "hinumagawa-kakou": {
     castingAllowed: true,
     lureAllowed: true,
+    // 河口部は海面と内水面の境界にあたり、どちらの規則が適用されるかを
+    // 公式ソースで確定できなかった。断定を避け、確認を促す注記にとどめる。
     chumAllowed: true,
     nightFishing: true,
     fishingLicenseRequired: false,
-    otherRules: ["河口部のため遊漁券不要"],
+    otherRules: [
+      "涸沼川河口は海面と内水面の境界にあたり、まき餌（コマセ）釣りに適用される規則が場所によって異なります。茨城県の海面ではまき餌釣りが原則禁止（鹿島港魚釣園とふれあい公園の2箇所のみ可）、霞ヶ浦・北浦では全面禁止です。涸沼水系での可否は茨城県にご確認ください。",
+      "河口部のため遊漁券不要",
+    ],
   },
   "ashiya-kou-fukuoka": {
     castingAllowed: true,

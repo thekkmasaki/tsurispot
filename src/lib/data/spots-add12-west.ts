@@ -2362,6 +2362,15 @@ export const westAdd12Spots: FishingSpot[] = [
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "メバリング" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      otherRules: [
+        "保戸島の最大高潮時海岸線から700m以内の海面では、大分海区漁業調整委員会の告示により「いそ釣りのあみ（おきあみを含む）」のまき餌の使用が禁止されています。磯場でコマセを使う釣りは行えません。最新の禁止区域は大分県の公式ページでご確認ください。（出典: 大分県）",
+      ],
+    },
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKyushu,
   },
   // =========================================
@@ -2454,7 +2463,7 @@ export const westAdd12Spots: FishingSpot[] = [
   },
   {
     id: "ss12530", name: "三ヶ瀬漁港", slug: "sangase-gyokou-a12",
-    description: "門川町の日向灘に面した漁港。潮通しが良くアジやイサキの回遊が安定し、夏の夜釣りでタチウオも狙える。",
+    description: "門川町の日向灘に面した漁港。潮通しが良くアジやイサキの回遊が安定し、夏から秋の夜釣りではタチウオも射程に入る。門川町の海域はアミ餌を使った釣りが禁止されているためサビキ釣りは行えず、アジは常夜灯周りのアジングで狙うのが定番になっている。足場は比較的良く、夕マヅメから夜にかけてが本命の時間帯。",
     latitude: 32.4710, longitude: 131.6550,
     address: "〒889-0611 宮崎県東臼杵郡門川町門川尾末",
     accessInfo: "門川駅から車で約10分",
@@ -2463,11 +2472,16 @@ export const westAdd12Spots: FishingSpot[] = [
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0,
     catchableFish: [
-      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
       { fish: fish("isaki"), monthStart: 5, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ウキ釣り" },
     ],
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKyushu,
+    rules: {
+      castingAllowed: true, lureAllowed: true, chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["門川町海域では、宮崎海区漁業調整委員会指示によりアミ餌（アミエビ）を使用した釣りが禁止されています。サビキ釣りは行えません。（出典: 宮崎県）"],
+    },
   },
   // =========================================
   // 鹿児島県（6スポット: ss12531〜ss12536）

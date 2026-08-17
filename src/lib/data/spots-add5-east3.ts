@@ -971,7 +971,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
   // =========================================
   {
     id: "se5151", name: "八戸港", slug: "hachinohe-kou",
-    description: "八戸市の大型漁港。イカの水揚げ日本一で知られ、夏のスルメイカ釣りが人気。サバやアジのサビキも好調。",
+    description: "イカの水揚げ日本一で知られる八戸市の大型漁港。広い岸壁と足場の良い護岸が続き、初めての人でも竿を出しやすい環境が整っている。ただし鮫町・白銀町・湊町など港を取り巻く地先は青森県海区漁業調整委員会指示で遊漁のまき餌釣りが禁止されているため、サビキ釣りやカゴ釣りは選べない。メタルジグやワームを使ったショアジギング・アジング、投げ釣りでのカレイ、テトラ帯の穴釣りでのカサゴが中心の狙い方になる。",
     latitude: 40.5260, longitude: 141.5290,
     address: "〒031-0841 青森県八戸市大字鮫町",
     accessInfo: "JR鮫駅から徒歩約10分。八戸自動車道八戸ICから約15分。",
@@ -980,12 +980,19 @@ export const eastAdd5Spots3: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.9, reviewCount: 0,
     catchableFish: [
-      { fish: fish("saba"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
-      { fish: fish("aji"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ショアジギング" },
+      { fish: fish("aji"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
       { fish: fish("karei"), monthStart: 4, monthEnd: 6, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝", method: "投げ釣り" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
       { fish: fish("ainame"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ブラクリ" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["この地先は青森県海区漁業調整委員会指示により、遊漁によるまき餌（コマセ）釣りが禁止されています。サビキ釣り・カゴ釣りは行えません。指示は毎年更新されるため、最新の区域は青森県の公式ページでご確認ください。"],
+    },
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeNorth,
   },
   {
@@ -1079,7 +1086,7 @@ export const eastAdd5Spots3: FishingSpot[] = [
   },
   {
     id: "se5157", name: "白銀漁港", slug: "shirogane-gyokou",
-    description: "八戸市の白銀地区にある漁港。蕪島のウミネコ繁殖地のすぐ近く。サバやイワシのサビキ釣りで賑わう人気漁港。",
+    description: "八戸市白銀地区にある漁港で、ウミネコの繁殖地として知られる蕪島のすぐ近くに位置する。白銀町地先は青森県海区漁業調整委員会指示により遊漁のまき餌釣りが全区域で禁止されているため、サビキ釣りやカゴ釣りは行えない。サバやイワシは表層を回遊するタイミングにメタルジグやジグ単のルアーで、アジは夕マヅメのアジングで狙うのが実際的。足元のテトラや捨て石ではアイナメ・メバルがブラクリやワームに反応する。",
     latitude: 40.5370, longitude: 141.5430,
     address: "〒031-0841 青森県八戸市大字鮫町字大作平",
     accessInfo: "JR鮫駅から徒歩約5分。八戸自動車道八戸ICから約15分。",
@@ -1088,12 +1095,19 @@ export const eastAdd5Spots3: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
-      { fish: fish("saba"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
-      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
-      { fish: fish("aji"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ショアジギング" },
+      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ルアー" },
+      { fish: fish("aji"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
       { fish: fish("ainame"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ブラクリ" },
       { fish: fish("mebaru"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "ワーム" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["この地先は青森県海区漁業調整委員会指示により、遊漁によるまき餌（コマセ）釣りが禁止されています。サビキ釣り・カゴ釣りは行えません。指示は毎年更新されるため、最新の区域は青森県の公式ページでご確認ください。"],
+    },
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeNorth,
   },
   {

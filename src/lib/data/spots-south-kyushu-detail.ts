@@ -491,7 +491,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
   },
   {
     id: "s1003", name: "門川漁港", slug: "kadogawa-fishing-port",
-    description: "宮崎県北部の門川湾に面した漁港。湾内は穏やかで年間を通じてアジやイワシの数釣りが楽しめる。秋はアオリイカのエギングポイントとしても人気が高く、防波堤の足場が良くファミリーにもおすすめ。",
+    description: "宮崎県北部の門川湾に面した漁港。湾内は波が穏やかで足場の良い防波堤が続き、初めての人でも竿を出しやすい環境が整っている。ただし門川町の海域はアミ餌を使った釣りが禁止されており、サビキ釣りは行えない。アジはジグヘッド単体のアジング、メバルはメバリングと、擬似餌で狙うのが基本になる。秋はアオリイカのエギング、冬場はテトラ周りのカサゴの穴釣りも面白い。",
     latitude: 32.46890, longitude: 131.651200,
     address: "〒889-0611 宮崎県門川町門川尾末",
     accessInfo: "JR門川駅から車で約5分。東九州自動車道門川ICから約10分。",
@@ -500,8 +500,8 @@ export const southKyushuDetailSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.8, reviewCount: 76, googleRating: 3.7, googleReviewCount: 54,
     catchableFish: [
-      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
-      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("aji"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "アジング" },
+      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
           { fish: fish("madai"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
@@ -513,9 +513,14 @@ export const southKyushuDetailSpots: FishingSpot[] = [
     ],
     bestTimes: btMorning, tackleRecommendations: [],
     tideAdvice: tideStandard, mazumeInfo: mazumeSouthKyushu,
-    gearGuides: [gearSabiki, gearEging],
+    gearGuides: [gearRock, gearEging],
     safetyLevel: "safe",
     safetyNotes: ["漁船の出入りに注意"],
+    rules: {
+      castingAllowed: true, lureAllowed: true, chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["門川町海域では、宮崎海区漁業調整委員会指示によりアミ餌（アミエビ）を使用した釣りが禁止されています。サビキ釣りは行えません。（出典: 宮崎県）"],
+    },
     youtubeLinks: [
       { label: "門川漁港 エギング アオリイカ", searchQuery: "門川 エギング アオリイカ 宮崎", description: "門川漁港でのエギング動画" },
     ],
@@ -707,7 +712,7 @@ export const southKyushuDetailSpots: FishingSpot[] = [
   },
   {
     id: "s1010", name: "石垣島名蔵湾", slug: "ishigaki-nagura-bay",
-    description: "石垣島西部に広がる名蔵湾。マングローブが茂る湾奥から外洋に面したリーフまで多彩な地形を有する。マングローブ周辺ではコトヒキやクロダイ、リーフエッジではGT（ロウニンアジ）やハタ類が狙える自然豊かなスポット。",
+    description: "石垣島西部に広がる名蔵湾。マングローブが茂る湾奥から外洋に面したリーフまで多彩な地形を持ち、亜熱帯の生き物が濃い自然豊かな一帯として知られる。ただし湾内には水産資源保護法にもとづく名蔵保護水面が指定されており、その区域内では釣りを含むすべての水産動植物の採捕が禁止されている。竿を出す前に必ず沖縄県の公表資料で保護水面の範囲を確認し、目的の場所が区域外であることを確かめてほしい。",
     latitude: 24.3670, longitude: 124.1210,
     address: "〒907-0021 沖縄県石垣市名蔵1356-91",
     accessInfo: "石垣空港から車で約30分。名蔵大橋方面から。",
@@ -727,8 +732,13 @@ export const southKyushuDetailSpots: FishingSpot[] = [
     gearGuides: [gearJiggingOkinawa, gearRock],
     safetyLevel: "caution",
     safetyNotes: ["リーフの上は滑りやすいので注意", "サンゴ礁保護のため踏みつけ禁止", "ハブクラゲに注意（夏季）"],
+    rules: {
+      castingAllowed: true, lureAllowed: true, chumAllowed: true,
+      fishingLicenseRequired: false,
+      otherRules: ["名蔵湾内には「名蔵保護水面」が指定されており、その区域内では釣りを含むすべての水産動植物の採捕が禁止されています（水産資源保護法。罰則: 6月以下の懲役または10万円以下の罰金）。当サイトでは指定範囲を確定できていないため、釣行前に必ず沖縄県の公表資料で区域を確認してください。（出典: 沖縄県「水産動植物の採捕に関するルール」令和4年7月改訂）"],
+    },
     youtubeLinks: [
-      { label: "石垣島 名蔵湾 GT 釣り", searchQuery: "石垣島 名蔵湾 GT ロウニンアジ 釣り", description: "石垣島名蔵湾でのGT釣り動画" },
+      { label: "沖縄の釣りルール 保護水面", searchQuery: "沖縄県 釣り ルール 保護水面 採捕禁止", description: "沖縄の釣りルール・保護水面を解説した動画" },
     ],
   },
   {

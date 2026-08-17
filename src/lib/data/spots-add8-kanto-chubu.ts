@@ -291,7 +291,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
   },
   {
     id: "se8212", name: "河原子海岸", slug: "kawarago-kaigan-e8",
-    description: "日立市の美しい砂浜で、キスの投げ釣りが盛んなポイント。夏場は遠浅の地形でピンギスが数釣りでき、秋にはヒラメ狙いのルアー勢も集まる。",
+    description: "日立市の美しい砂浜で、キスの投げ釣りが盛んなポイント。夏場は遠浅の地形でピンギスが数釣りでき、9〜12月にはヒラメ狙いのルアー勢も集まる。茨城県はまき餌釣りが原則禁止のためサビキ釣りやカゴ釣りは行えず、接岸したイワシは小型ルアーで狙うことになる。海水浴場の駐車場とトイレが使え、コンビニも近いのでファミリーでも動きやすい。",
     latitude: 36.493, longitude: 140.648,
     address: "〒316-0005 茨城県日立市河原子町",
     accessInfo: "JR常磐線常陸多賀駅から車で約5分",
@@ -302,8 +302,15 @@ export const kantoAdd8Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("hirame"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
-      { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ルアー" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["茨城県ではまき餌（コマセ）釣りが原則禁止で、認められているのは鹿島港魚釣園とふれあい公園（ひたちなか市海門町1丁目地先）の2箇所のみです（1人1日2kgまで・船上不可）。この釣り場ではサビキ釣り・カゴ釣りは行えません。（出典: 茨城県）"],
+    },
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeKanto,
   },
   {
@@ -343,7 +350,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
   },
   {
     id: "se8215", name: "大洗海岸サーフ", slug: "oarai-kaigan-surf-e8",
-    description: "大洗水族館近くの砂浜エリアで、キスやイシモチの投げ釣りが楽しめる。潮流の変化が大きく秋口にはヒラメの回遊も見られ、ルアー釣りの実績も上がっている。",
+    description: "大洗水族館の近くに広がる砂浜エリアで、5〜10月は朝マヅメの投げ釣りでキスが数釣りできる。潮流の変化が大きく、秋口の9〜12月はヒラメ、春から晩秋の夕マヅメはシーバスとルアーの実績も年々上がっている。投げとルアーが主体のため、まき餌釣りが原則禁止の茨城県でも釣り方の選択肢は狭まらない。大洗海岸公園の駐車場とトイレが利用できる。",
     latitude: 36.320, longitude: 140.586,
     address: "〒311-1301 茨城県東茨城郡大洗町磯浜町",
     accessInfo: "鹿島臨海鉄道大洗駅から車で約7分",
@@ -356,6 +363,13 @@ export const kantoAdd8Spots: FishingSpot[] = [
       { fish: fish("hirame"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["茨城県ではまき餌（コマセ）釣りが原則禁止で、認められているのは鹿島港魚釣園とふれあい公園（ひたちなか市海門町1丁目地先）の2箇所のみです（1人1日2kgまで・船上不可）。この釣り場ではサビキ釣り・カゴ釣りは行えません。（出典: 茨城県）"],
+    },
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeKanto,
   },
   // =========================================

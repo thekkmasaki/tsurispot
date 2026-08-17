@@ -658,7 +658,7 @@ export const northAdd12Spots: FishingSpot[] = [
   },
   {
     id: "ss12036", name: "八戸市蕪島堤防", slug: "hachinohe-kabushima-breakwater-a12",
-    description: "ウミネコの繁殖地・蕪島のすぐ横にある堤防。春〜秋はアジやイワシの回遊があり手軽に釣果が得られる。",
+    description: "ウミネコの繁殖地として国の天然記念物に指定された蕪島のすぐ横に位置する堤防。所在地の鮫町地先は青森県海区漁業調整委員会指示により遊漁のまき餌釣りが全区域で禁止されているため、サビキ釣りやカゴ釣りは行えない。春から秋に回遊するアジは夕マヅメのアジング、イワシは小型ルアーで狙うのが現実的で、春先の常夜灯周りではメバルがワームに好反応を見せる。観光客が多い時期は周囲への配慮を忘れずに。",
     latitude: 40.5380, longitude: 141.5620,
     address: "〒031-0841 青森県八戸市鮫町蕪島",
     accessInfo: "JR鮫駅から徒歩約15分",
@@ -667,10 +667,17 @@ export const northAdd12Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
-      { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
+      { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ルアー" },
       { fish: fish("mebaru"), monthStart: 3, monthEnd: 6, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ワーム" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["この地先は青森県海区漁業調整委員会指示により、遊漁によるまき餌（コマセ）釣りが禁止されています。サビキ釣り・カゴ釣りは行えません。指示は毎年更新されるため、最新の区域は青森県の公式ページでご確認ください。"],
+    },
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideBreakwater, mazumeInfo: mazumeTohoku,
   },
   {
@@ -708,7 +715,7 @@ export const northAdd12Spots: FishingSpot[] = [
   },
   {
     id: "ss12039", name: "深浦町深浦港外堤防", slug: "fukaura-outer-breakwater-a12",
-    description: "世界遺産白神山地の麓にある港の外堤防。日本海の潮を直接受けるため青物の回遊が期待できる。",
+    description: "世界遺産白神山地の麓に位置する深浦港の外堤防。日本海の潮を正面から受けるため青物の回遊が期待でき、朝マヅメのルアーでイナダを狙える。深浦地先は青森県海区漁業調整委員会指示により遊漁のまき餌釣りが全区域で禁止されているため、サビキ釣りやカゴ釣りは選べず、アジは夕マヅメのアジングで拾っていく形になる。夜はワームでクロソイが本命。外洋に面して波を被ることがあり、荒天時は立ち入らないこと。",
     latitude: 40.6480, longitude: 139.9180,
     address: "〒038-2324 青森県西津軽郡深浦町深浦",
     accessInfo: "JR深浦駅から徒歩約15分",
@@ -718,9 +725,16 @@ export const northAdd12Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
       { fish: fish("inada"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
-      { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+      { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
       { fish: fish("kurosoi"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ワーム" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["この地先は青森県海区漁業調整委員会指示により、遊漁によるまき餌（コマセ）釣りが禁止されています。サビキ釣り・カゴ釣りは行えません。指示は毎年更新されるため、最新の区域は青森県の公式ページでご確認ください。"],
+    },
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideBreakwater, mazumeInfo: mazumeTohokuNihonkai,
   },
   {
@@ -806,7 +820,7 @@ export const northAdd12Spots: FishingSpot[] = [
   },
   {
     id: "ss12045", name: "八戸市白浜海岸", slug: "hachinohe-shirahama-beach-a12",
-    description: "種差海岸の北に位置する白い砂浜。投げ釣りでカレイやキスが狙える夏場に人気のビーチポイント。",
+    description: "種差海岸の北側に広がる白い砂浜で、遠浅のサーフから投げ釣りが楽しめる。4〜10月は朝マヅメのカレイ、6〜9月は日中のキスが本命で、海水浴シーズンは遊泳者のいない早朝や夕方に竿を出したい。所在地の鮫町地先は青森県海区漁業調整委員会指示により遊漁のまき餌釣りが禁止されているため、コマセを使う釣り方は選べないが、投げ釣り主体のこの浜では影響が小さい。駐車場とトイレが利用できる。",
     latitude: 40.5120, longitude: 141.5880,
     address: "〒031-0841 青森県八戸市鮫町白浜",
     accessInfo: "JR鮫駅から車で約10分",
@@ -818,6 +832,13 @@ export const northAdd12Spots: FishingSpot[] = [
       { fish: fish("karei"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("kisu"), monthStart: 6, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["この地先は青森県海区漁業調整委員会指示により、遊漁によるまき餌（コマセ）釣りが禁止されています。サビキ釣り・カゴ釣りは行えません。指示は毎年更新されるため、最新の区域は青森県の公式ページでご確認ください。"],
+    },
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeTohoku,
   },
   {

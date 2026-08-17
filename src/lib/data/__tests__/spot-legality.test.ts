@@ -96,8 +96,11 @@ describe("県のまき餌規制とスポットの突合", () => {
     for (const spot of fishingSpots) {
       if (spot.rules?.chumAllowed !== true) continue;
       if (!isShoreChumProhibited(ruleByPref.get(spot.region.prefecture))) continue;
-      // 許可された場所であることが otherRules に明記されていれば適法
-      // （茨城の鹿島港魚釣園・ふれあい公園のような、県が指定した例外）
+      // otherRules でまき餌の扱いに触れていれば「判断済み」とみなす。
+      // 該当するのは2種類:
+      // - 県が指定した例外（茨城の鹿島港魚釣園・ふれあい公園）
+      // - 海面と内水面の境界など、適用規則を確定できず確認を促しているケース（涸沼川河口）
+      // 逆に言えば、まき餌に一言も触れずに chumAllowed: true としているものが検出対象。
       if (spot.rules.otherRules?.some((r) => /まき餌|コマセ/.test(r))) continue;
       violations.push(`${spot.region.prefecture} ${spot.slug}（${spot.name}）`);
     }
