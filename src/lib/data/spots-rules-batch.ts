@@ -741,12 +741,21 @@ export const spotRulesBatch: Record<string, SpotRules> = {
     otherRules: ["立入禁止区域あり（看板で確認）", "ゴミは必ず持ち帰り"],
   },
   "tomakomai-nishi-port": {
-    castingAllowed: true,
+    // 苫小牧港管理組合が投げ釣りを明文で禁止している
+    // （仕掛けが他の利用者に危険を及ぼす／船舶航行に支障を来すおそれ）。
+    castingAllowed: false,
     lureAllowed: true,
     chumAllowed: true,
     nightFishing: true,
     fishingLicenseRequired: false,
-    otherRules: ["漁業関係者に配慮すること"],
+    restrictedAreas: [
+      "防波堤（親水防波堤を除く）・ふ頭（岸壁および背後の荷さばき地）・波消しブロック上は立入禁止",
+    ],
+    otherRules: [
+      "苫小牧港では投げ釣りが禁止されています。仕掛けが他の利用者に危険を及ぼすおそれと、船舶の航行に支障を来すおそれがあるためです。（出典: 苫小牧港管理組合）",
+      "釣りにより荷役作業に影響がある場合、警察に通報されることがあります。",
+      "漁業関係者に配慮すること",
+    ],
   },
   "muroran-port": {
     castingAllowed: true,
@@ -867,19 +876,30 @@ export const spotRulesBatch: Record<string, SpotRules> = {
   "oarai-port": {
     castingAllowed: true,
     lureAllowed: true,
-    chumAllowed: true,
+    // 茨城県はまき餌釣りを原則禁止。認められているのは鹿島港魚釣園と
+    // ふれあい公園（ひたちなか市海門町1丁目地先）の2箇所のみで、大洗港は含まれない。
+    chumAllowed: false,
     nightFishing: true,
     fishingLicenseRequired: false,
-    otherRules: ["漁業関係者に配慮すること", "ゴミは必ず持ち帰り"],
+    otherRules: [
+      "茨城県ではまき餌（コマセ）釣りが原則禁止で、認められているのは鹿島港魚釣園とふれあい公園の2箇所のみです。大洗港ではサビキ釣り・カゴ釣りは行えません。（出典: 茨城県）",
+      "漁業関係者に配慮すること",
+      "ゴミは必ず持ち帰り",
+    ],
   },
   "kashima-port": {
     castingAllowed: true,
     lureAllowed: true,
-    chumAllowed: true,
+    // 鹿島港は魚釣園のみ釣り可。魚釣園は県内で数少ないまき餌釣り可の指定場所だが、
+    // それ以外の港内はまき餌以前に釣り自体が禁止されている。
+    chumAllowed: false,
     nightFishing: true,
     fishingLicenseRequired: false,
-    restrictedAreas: ["南防波堤は立入禁止"],
-    otherRules: ["テトラ帯は滑りやすいため注意"],
+    restrictedAreas: ["南防波堤は立入禁止（死亡事故多発）", "魚釣園以外は釣り禁止"],
+    otherRules: [
+      "茨城県は「鹿島港は魚釣園以外釣り禁止です」と案内しています。釣りができるのは鹿島港魚釣園のみです。（出典: 茨城県）",
+      "まき餌（コマセ）釣りが認められているのは鹿島港魚釣園の区域内のみです。",
+    ],
   },
   "hasaki-shinko": {
     castingAllowed: true,
@@ -1480,10 +1500,15 @@ export const spotRulesBatch: Record<string, SpotRules> = {
   "kasumigaura-tsuri": {
     castingAllowed: true,
     lureAllowed: true,
-    chumAllowed: true,
+    // 霞ヶ浦・北浦は茨城県霞ケ浦北浦海区漁業調整規則でまき餌釣りが全面禁止。
+    // 海面（指定2箇所のみ可）より厳しく、例外がない。
+    chumAllowed: false,
     nightFishing: true,
     fishingLicenseRequired: false,
-    otherRules: ["バス・ギルのリリース禁止（茨城県条例）"],
+    otherRules: [
+      "霞ヶ浦・北浦では茨城県霞ケ浦北浦海区漁業調整規則により、まき餌（コマセ）釣りが全面禁止されています。（出典: 茨城県）",
+      "バス・ギルのリリース禁止（茨城県条例）",
+    ],
   },
   "hinuma": {
     castingAllowed: true,

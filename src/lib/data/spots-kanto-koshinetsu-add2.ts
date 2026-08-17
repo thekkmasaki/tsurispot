@@ -1012,7 +1012,7 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
   },
   {
     id: "s2241", name: "鹿島港南堤", slug: "kashima-ko-nantei",
-    description: "鹿島灘に面した大規模工業港の南堤。ショアジギングでイナダやヒラマサなどの大型青物が狙える茨城県屈指のハイポテンシャルスポット。投げ釣りでシロギスやイシモチ、ルアーでヒラメやマゴチも期待できる。ただし風が強く上級者向けの日も多い。",
+    description: "鹿島灘に面した大規模工業港の南堤。かつては大型青物やヒラメが狙える茨城県屈指のポイントとして知られたが、茨城県は「鹿島港は魚釣園以外釣り禁止です」と案内しており、現在この堤防で釣りをすることはできない。南防波堤では過去に多数の死亡事故が発生している。鹿島港で釣りをする場合は港内の鹿島港魚釣園を利用してほしい。",
     latitude: 35.9350, longitude: 140.6900,
     address: "〒314-0101 茨城県神栖市",
     accessInfo: "JR鹿島線鹿島神宮駅から車で約20分。東関東自動車道潮来ICから約30分。",
@@ -1029,8 +1029,14 @@ export const kantoKoshinetsuAdd2Spots: FishingSpot[] = [
     bestTimes: btMorning, tackleRecommendations: [],
     tideAdvice: tideSurf, mazumeInfo: mazumeKanto,
     gearGuides: [gearJig, gearNage, gearLure],
-    safetyLevel: "caution", safetyNotes: ["風が非常に強い日あり", "立入禁止区域に注意", "ライフジャケット必着"],
-    youtubeLinks: [{ label: "鹿島港 青物", searchQuery: "鹿島港南堤 ショアジギング 青物 ヒラメ", description: "鹿島港での青物釣り動画" }],
+    fishingBan: {
+      scope: "full",
+      reason: "茨城県は「鹿島港は魚釣園以外釣り禁止です」と案内しています。鹿島港の防波堤・岸壁での釣りはできず、南防波堤は過去に多数の死亡事故が発生しており立入禁止です。",
+      sourceUrls: ["https://www.pref.ibaraki.jp/doboku/kako/tsuri.html"],
+      confirmedAt: "2026-08-17",
+      alternativeSpotSlugs: ["kashima-port-fishing-park"],
+    },
+    safetyLevel: "danger", safetyNotes: ["立入禁止区域（死亡事故多発）", "釣りをするなら鹿島港魚釣園を利用すること"],
   },
   {
     id: "s2243", name: "北浦（潮来周辺）", slug: "kitaura-itako",

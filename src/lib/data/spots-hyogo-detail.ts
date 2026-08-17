@@ -234,12 +234,13 @@ export const hyogoDetailSpots: FishingSpot[] = [
   },
   {
     id: "sh004", name: "六甲アイランドマリンパーク", slug: "rokko-island-marine-park",
-    description: "六甲アイランド南端の公園に隣接する護岸釣り場。全面柵付きで子連れファミリーに安全。サビキでアジ・サバ・イワシ、秋はタチウオ・青物も回遊する。2025年に海釣りGO施設がオープンし更に人気上昇中。",
+    description: "六甲アイランド南端の護岸釣り場。神戸市は神戸港の岸壁・物揚場・護岸での魚釣りを原則禁止しており、ここで釣りができるのは2025年に開業した有料施設「海釣りGO 六甲マリンパーク」の釣りゾーン内に限られる。全面柵付きで子連れでも安心。サビキでアジ・サバ・イワシ、秋はタチウオも狙える。利用は事前予約制で料金がかかる。",
     latitude: 34.6770, longitude: 135.2670,
     address: "〒658-0032 兵庫県神戸市東灘区向洋町中9丁目",
     accessInfo: "六甲ライナー「マリンパーク」駅から徒歩約5分。阪神高速湾岸線六甲アイランド北出口から約10分。",
     region: lr("r400"), spotType: "breakwater", difficulty: "beginner",
-    isFree: true, hasParking: true, parkingDetail: "マリンパーク駐車場利用可（有料）",
+    isFree: false, feeDetail: "「海釣りGO 六甲マリンパーク」の釣りゾーン利用料（アプリ予約制）。ゾーン外の護岸は釣り禁止",
+    hasParking: true, parkingDetail: "マリンパーク駐車場利用可（有料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: true, rentalDetail: "海釣りGO施設でレンタル可",
     mainImageUrl: "", images: [], rating: 4.0, reviewCount: 378, googleRating: 4, googleReviewCount: 293,
     catchableFish: [
@@ -259,6 +260,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
       chumAllowed: true,
       nightFishing: true,
       fishingLicenseRequired: false,
+      restrictedAreas: ["「海釣りGO 六甲マリンパーク」の釣りゾーン以外の神戸港の岸壁・物揚場・護岸は魚釣り禁止（神戸市）"],
       otherRules: ["投げ釣り禁止（公園管理規則）", "護岸の柵を越えての釣りは禁止", "ゴミの持ち帰り厳守"],
     },
     gearGuides: [gearSabiki, gearLure, gearJig],
