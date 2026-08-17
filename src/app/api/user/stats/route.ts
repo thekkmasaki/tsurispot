@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { redis } from "@/lib/redis";
 import { auth } from "@/lib/auth";
 import { getUserById } from "@/lib/user-store";
+import { splitFishNames } from "@/lib/fish-name";
 
 interface CatchReport {
   spotSlug?: string;
@@ -41,7 +42,8 @@ export async function GET() {
   const user = await getUserById(userId);
   const reportCount = user?.reportCount ?? reports.length;
 
-  const uniqueFish = new Set(reports.map((r) => r.fishName).filter(Boolean) as string[]);
+  // 「アジ、サバ」のような複数魚種の投稿を魚種単位に分割して数える
+  const uniqueFish = new Set(reports.flatMap((r) => splitFishNames(r.fishName)));
   const uniqueSpots = new Set(reports.map((r) => r.spotSlug).filter(Boolean) as string[]);
   const uniqueDates = new Set(reports.map((r) => r.date).filter(Boolean) as string[]);
   const uniqueMethods = new Set(reports.map((r) => r.method).filter(Boolean) as string[]);
@@ -54,8 +56,9 @@ export async function GET() {
 
   const maxByFish: Record<string, number> = {};
   reports.forEach((r) => {
-    if (r.fishName && typeof r.sizeCm === "number") {
-      maxByFish[r.fishName] = Math.max(maxByFish[r.fishName] || 0, r.sizeCm);
+    if (typeof r.sizeCm !== "number") return;
+    for (const name of splitFishNames(r.fishName)) {
+      maxByFish[name] = Math.max(maxByFish[name] || 0, r.sizeCm);
     }
   });
 

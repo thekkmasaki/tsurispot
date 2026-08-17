@@ -3,6 +3,7 @@ import { redis } from "@/lib/redis";
 import { auth } from "@/lib/auth";
 import { getUserById } from "@/lib/user-store";
 import { ALL_TIERS } from "@/lib/titles";
+import { splitFishNames } from "@/lib/fish-name";
 
 interface CatchReport {
   spotSlug?: string;
@@ -52,7 +53,7 @@ export async function GET() {
 
   const user = await getUserById(userId);
   const reportCount = user?.reportCount ?? reports.length;
-  const uniqueFishCount = new Set(reports.map((r) => r.fishName).filter(Boolean)).size;
+  const uniqueFishCount = new Set(reports.flatMap((r) => splitFishNames(r.fishName))).size;
   const uniqueSpotCount = new Set(reports.map((r) => r.spotSlug).filter(Boolean)).size;
   const uniqueMethodCount = new Set(reports.map((r) => r.method).filter(Boolean)).size;
   const photoCount = reports.filter((r) => r.photoUrl).length;
