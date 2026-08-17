@@ -5,13 +5,16 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   User, Heart, Trash2, Fish, ArrowLeft, MapPin, Calendar, Ruler,
-  Edit3, Check, X, Trophy, Sparkles, Waves, Moon, Bookmark, Anchor, Bell,
-  Flame,
+  Edit3, Check, X, Trophy, Sparkles, Bookmark, Anchor, Bell,
 } from "lucide-react";
 import { NotificationSubscribeButton } from "@/components/notification-subscribe-button";
 import { CalendarHeatmap } from "@/components/mypage/calendar-heatmap";
 import { StreakBadgeStrip } from "@/components/activity/streak-badge-strip";
+import { StreakBanner } from "@/components/activity/streak-banner";
+import { FishingIndexCard } from "@/components/fishing-index/fishing-index-card";
+import { AnimatedNumber } from "@/components/ui/animated-number";
 import { syncActivityToServer } from "@/hooks/use-activity";
+import { todayJST } from "@/lib/activity";
 import { PersonalBestCard } from "@/components/mypage/personal-best-card";
 import { CatchReportCard } from "@/components/mypage/catch-report-card";
 import { OnThisDay } from "@/components/mypage/on-this-day";
@@ -97,25 +100,6 @@ const STYLE_OPTIONS = [
   "夜釣り",
   "ファミリー",
 ] as const;
-
-interface DashboardItem {
-  slug: string;
-  name: string;
-  prefecture: string;
-  spotType: string;
-  tideLabel: string;
-  tideType: string;
-  fishingScore: number;
-  highTides: string[];
-  lowTides: string[];
-  description: string;
-}
-
-interface DashboardData {
-  items: DashboardItem[];
-  moonAge: number;
-  date: string;
-}
 
 interface WishlistItem {
   slug: string;
@@ -218,7 +202,6 @@ export default function MyPage() {
   const [stats, setStats] = useState<StatsExt | null>(null);
   const [badgesData, setBadgesData] = useState<BadgesResponse | null>(null);
   const [profile, setProfile] = useState<ProfileData | null>(null);
-  const [dashboard, setDashboard] = useState<DashboardData | null>(null);
   const [wishlist, setWishlist] = useState<WishlistItem[]>([]);
   const [checkins, setCheckins] = useState<CheckinItem[]>([]);
   const [catchReports, setCatchReports] = useState<CatchReport[]>([]);
@@ -233,7 +216,6 @@ export default function MyPage() {
       fetch("/api/user/stats").then((r) => (r.ok ? r.json() : null)),
       fetch("/api/user/badges").then((r) => (r.ok ? r.json() : null)),
       fetch("/api/user/profile").then((r) => (r.ok ? r.json() : null)),
-      fetch("/api/user/dashboard").then((r) => (r.ok ? r.json() : null)),
       fetch("/api/user/wishlist").then((r) => (r.ok ? r.json() : { items: [] })),
       fetch("/api/user/checkins").then((r) => (r.ok ? r.json() : { checkins: [] })),
       // 今日の訪問/アクションをサーバーへ反映してから取得（当日分の欠け防止）
@@ -241,11 +223,10 @@ export default function MyPage() {
         .then(() => fetch("/api/user/streak"))
         .then((r) => (r.ok ? r.json() : null)),
     ])
-      .then(([reportsRes, statsRes, badgesRes, profileRes, dashboardRes, wishlistRes, checkinsRes, streakRes]) => {
+      .then(([reportsRes, statsRes, badgesRes, profileRes, wishlistRes, checkinsRes, streakRes]) => {
         setCatchReports(reportsRes.reports || []);
         setStats(statsRes);
         setBadgesData(badgesRes);
-        setDashboard(dashboardRes);
         setWishlist(wishlistRes?.items || []);
         setCheckins(checkinsRes?.checkins || []);
         setStreakData(streakRes);
@@ -700,19 +681,15 @@ export default function MyPage() {
           </Card>
         )}
 
-        {/* 活動ストリーク（見た/動いた/行ったのハイブリッド定義） */}
-        {streakData && streakData.streak.current > 0 && (
-          <div className="mt-6 flex items-center gap-3 rounded-xl border border-orange-200 bg-gradient-to-r from-orange-50 to-amber-50 p-4">
-            <Flame className="h-8 w-8 shrink-0 text-orange-500" />
-            <div className="flex-1">
-              <div className="text-sm font-medium text-orange-900">
-                {streakData.streak.current}日連続 ツリスポ習慣
-              </div>
-              <div className="text-xs text-orange-700">
-                最長記録 {streakData.streak.longest}日 / 通算 {streakData.streak.totalDays}日
-              </div>
-            </div>
-          </div>
+        {/* 活動ストリーク（見た/動いた/行ったのハイブリッド定義・次のバッジ進捗つき） */}
+        {streakData && (
+          <StreakBanner
+            className="mt-6"
+            current={streakData.streak.current}
+            longest={streakData.streak.longest}
+            totalDays={streakData.streak.totalDays}
+            todayLevel={streakData.dailyCounts?.[todayJST()] ?? 0}
+          />
         )}
 
         {/* 統計 */}
@@ -743,105 +720,20 @@ export default function MyPage() {
           />
         </div>
 
-        {/* 今日の好機（お気に入りスポット潮汐ダッシュボード） */}
-        {!dashboard ? (
-          <Card className="mt-6">
-            <CardContent className="p-4">
-              <div className="mb-3 flex items-center gap-2">
-                <Waves className="h-5 w-5 text-ocean-mid" />
-                <span className="font-medium">今日の好機</span>
-              </div>
-              <div className="space-y-2">
-                {[0, 1, 2].map((i) => (
-                  <div key={i} className="h-14 animate-pulse rounded-lg bg-muted" />
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        ) : (
-          <Card className="mt-6">
-            <CardContent className="p-4">
-              <div className="mb-3 flex flex-wrap items-center gap-2">
-                <Waves className="h-5 w-5 text-ocean-mid" />
-                <span className="font-medium">今日の好機</span>
-                <span className="text-xs text-muted-foreground">
-                  <Moon className="mr-0.5 inline h-3 w-3" />
-                  {dashboard.items[0]?.tideLabel
-                    ? `${dashboard.items[0].tideLabel}（月齢${dashboard.moonAge.toFixed(1)}）`
-                    : `月齢 ${dashboard.moonAge.toFixed(1)}`}
-                </span>
-              </div>
-              {dashboard.items.length === 0 ? (
-                <div className="space-y-2 text-sm text-muted-foreground">
-                  <p>
-                    お気に入りスポットを登録すると、今日の潮汐とおすすめ度が一覧で見られます。
-                    <Link prefetch={false} href="/spots" className="ml-1 underline hover:text-foreground">
-                      スポットを探す
-                    </Link>
-                  </p>
-                  <p>
-                    ツリスポに無いスポットは
-                    <Link prefetch={false} href="/spots/submit" className="ml-1 underline hover:text-foreground">
-                      投稿
-                    </Link>
-                    できます。
-                  </p>
-                </div>
-              ) : (
-                <ul className="space-y-2">
-                  {dashboard.items.slice(0, 5).map((item) => (
-                    <li key={item.slug}>
-                      <Link prefetch={false}
-                        href={`/spots/${item.slug}`}
-                        className="block rounded-lg border p-3 transition-colors hover:bg-muted/50"
-                      >
-                        <div className="flex items-start justify-between gap-2">
-                          <div className="min-w-0 flex-1">
-                            <div className="truncate font-medium">{item.name}</div>
-                            <div className="text-xs text-muted-foreground">
-                              {item.prefecture}・{item.tideLabel}・月齢{dashboard.moonAge.toFixed(1)}
-                            </div>
-                          </div>
-                          <span
-                            className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${
-                              item.fishingScore >= 80
-                                ? "bg-rose-100 text-rose-700"
-                                : item.fishingScore >= 60
-                                  ? "bg-amber-100 text-amber-700"
-                                  : "bg-slate-100 text-slate-600"
-                            }`}
-                          >
-                            ★{Math.max(1, Math.round(item.fishingScore / 20))}
-                          </span>
-                        </div>
-                        {(item.highTides.length > 0 || item.lowTides.length > 0) && (
-                          <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-muted-foreground">
-                            {item.highTides.length > 0 && (
-                              <span>満潮 {item.highTides.join(" / ")}</span>
-                            )}
-                            {item.lowTides.length > 0 && (
-                              <span>干潮 {item.lowTides.join(" / ")}</span>
-                            )}
-                          </div>
-                        )}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              )}
-              {/* スポット投稿導線（リスト有無に関わらず常時表示） */}
-              <div className="mt-3 border-t pt-3 text-center">
-                <Link prefetch={false}
-                  href="/spots/submit"
-                  className="inline-flex items-center gap-1.5 rounded-lg border border-ocean-mid/30 bg-ocean-mid/5 px-3 py-1.5 text-xs font-medium text-ocean-mid hover:bg-ocean-mid/10"
-                >
-                  <MapPin className="h-3.5 w-3.5" />
-                  ツリスポにないスポットを投稿する
-                </Link>
-              </div>
-            </CardContent>
-          </Card>
-        )}
+        {/* 今日の釣行指数（旧「今日の好機」を置換。潮だけの★表示 → 潮/マヅメ/風/天気/水温の合成0-100点。
+            ★が常に1になる既存バグ（fishingScore1-5を/20していた）もこの置換で解消） */}
+        <FishingIndexCard className="mt-6" />
+
+        {/* スポット投稿導線 */}
+        <div className="mt-3 text-center">
+          <Link prefetch={false}
+            href="/spots/submit"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-ocean-mid/30 bg-ocean-mid/5 px-3 py-1.5 text-xs font-medium text-ocean-mid hover:bg-ocean-mid/10"
+          >
+            <MapPin className="h-3.5 w-3.5" />
+            ツリスポにないスポットを投稿する
+          </Link>
+        </div>
 
         {/* 自己ベスト */}
         {stats?.maxByFish && Object.keys(stats.maxByFish).length > 0 && (
@@ -1325,7 +1217,7 @@ function StatCard({
         {icon}
       </div>
       <div className="flex items-baseline gap-0.5">
-        <span className="text-2xl font-bold tabular-nums">{value}</span>
+        <AnimatedNumber value={value} className="text-2xl font-bold" />
         <span className="text-xs text-muted-foreground">{unit}</span>
       </div>
     </div>
