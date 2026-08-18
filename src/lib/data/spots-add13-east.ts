@@ -919,11 +919,11 @@ export const eastAdd13Spots: FishingSpot[] = [
   },
   {
     id: "ss13250", name: "習志野・茜浜緑地", slug: "narashino-akanehama-ryokuchi-a13",
-    description: "東京湾に面した茜浜緑地は護岸が整備されたシーバス・ハゼの好ポイント。アクセスの良さと夜景の美しさも魅力。",
+    description: "茜浜緑地は東京湾に面した護岸のシーバス・ハゼ釣り場。京葉線新習志野駅から徒歩約10分でアクセスでき、無料の緑地駐車場とトイレ、近くにコンビニもある。シーバスは4〜11月の夜のルアー、ハゼは7〜11月のちょい投げが定番で、夜景を眺めながらの短時間釣行にも向く。",
     latitude: 35.6680, longitude: 140.0280,
     address: "〒275-0024 千葉県習志野市茜浜",
     accessInfo: "京葉線新習志野駅から徒歩約10分",
-    region: localRegion("rs13110"), spotType: "breakwater", difficulty: "beginner",
+    region: localRegion("r1050"), spotType: "breakwater", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "緑地駐車場あり（無料）",
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0,
