@@ -129,7 +129,6 @@ export async function generateMetadata({
   if (!pref || !month) return { title: "ページが見つかりません" };
 
   const year = new Date().getFullYear();
-  const title = `${pref.name}の${month.name}の釣り｜釣れる魚・おすすめスポット【${year}年】`;
 
   // 実データ（釣れる魚数・上位魚種・スポット数・実績スポット名・水温）を織り込んだ description。
   // 集計は cache() で本体と共有。
@@ -137,6 +136,20 @@ export async function generateMetadata({
     pref.name,
     month.num
   );
+
+  // 「今 釣れる魚 ○○県」「○○県で釣れる魚」系クエリはこの型に平均8〜11位で流入しており、
+  // title に対象フレーズが無いのが取りこぼしの主因。当月ページに限り「今釣れる魚」を前方配置し、
+  // 集計済みの実数（魚種数・スポット数）で具体性を出す。0件時は従来型にフォールバック。
+  const fishCount = catchableFishList.length;
+  const spotCount = spotsWithMatchCount.length;
+  const isCurrentMonth = month.num === getCurrentMonthJst();
+  const title =
+    fishCount > 0 && spotCount > 0
+      ? isCurrentMonth
+        ? `${pref.name}で今釣れる魚${fishCount}種｜${month.name}の釣り場${spotCount}選【${year}年】`
+        : `${pref.name}の${month.name}に釣れる魚${fishCount}種と釣り場${spotCount}選【${year}年】`
+      : `${pref.name}の${month.name}の釣り｜釣れる魚・おすすめスポット【${year}年】`;
+
   const description = buildPrefMonthDescription({
     prefName: pref.name,
     monthName: month.name,
@@ -172,6 +185,19 @@ export async function generateMetadata({
   };
 }
 
+/**
+ * JST の現在月（1〜12）。当月ページだけ「今釣れる魚」表現に切り替えるための判定に使う。
+ * サーバのTZに依らず日本の月と一致させる（editorial-feed.ts と同じイディオム）。
+ */
+function getCurrentMonthJst(): number {
+  return Number(
+    new Intl.DateTimeFormat("en", {
+      timeZone: "Asia/Tokyo",
+      month: "numeric",
+    }).format(new Date())
+  );
+}
+
 function getWaterTemp(regionGroup: string, monthNum: number): string {
   return REGIONAL_WATER_TEMP[regionGroup as RegionGroup]?.[monthNum] ?? "—";
 }
@@ -198,6 +224,11 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
   );
 
   const peakFishList = catchableFishList.filter((f) => f.isPeak);
+
+  // 当月ページのみ「今釣れる魚」表現に切り替える（title と同じ判定）。
+  const isCurrentMonth = month.num === getCurrentMonthJst();
+  // 見出し・FAQ で使う時制表現。当月以外で「今」と書くと事実に反するため分岐必須。
+  const nowLabel = isCurrentMonth ? `今（${month.name}）` : `${month.name}に`;
 
   const topSpots = spotsWithMatchCount.slice(0, 10);
 
@@ -238,10 +269,12 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
   // FAQ
   const faqItems = [
     {
-      question: `${pref.name}で${month.name}に釣れる魚は何ですか？`,
+      question: isCurrentMonth
+        ? `${pref.name}で今釣れる魚は何ですか？`
+        : `${pref.name}で${month.name}に釣れる魚は何ですか？`,
       answer:
         catchableFishList.length > 0
-          ? `${pref.name}では${month.name}に${catchableFishList
+          ? `${pref.name}では${nowLabel}${catchableFishList
               .slice(0, 8)
               .map((f) => f.name)
               .join("・")}など${catchableFishList.length}種の魚が狙えます。${
@@ -394,8 +427,10 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
         <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
           {pref.name}の{month.name}の釣り
           {/* SEO-1: H1 にキーワード補足 (狙える魚数・スポット数を明示) */}
+          {/* 当月は「今釣れる魚」クエリに合わせた語順にする */}
           <span className="ml-2 text-sm font-medium text-muted-foreground sm:text-base">
-            — 釣れる魚{catchableFishList.length}種 / 釣り場{topSpots.length}件
+            — {isCurrentMonth ? "今" : ""}釣れる魚{catchableFishList.length}種 /
+            釣り場{topSpots.length}件
           </span>
         </h1>
         <p className="mt-2 text-sm text-muted-foreground sm:text-base">
@@ -505,7 +540,10 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
         <section className="mb-8 sm:mb-10">
           <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
             <Fish className="size-5 text-primary" />
-            {pref.name}で{month.name}に釣れる魚（{catchableFishList.length}種）
+            {/* 当月は「○○県で今釣れる魚」を完全一致で持たせる */}
+            {isCurrentMonth
+              ? `${pref.name}で今釣れる魚（${month.name}・${catchableFishList.length}種）`
+              : `${pref.name}で${month.name}に釣れる魚（${catchableFishList.length}種）`}
           </h2>
 
           {/* 旬の魚 */}
