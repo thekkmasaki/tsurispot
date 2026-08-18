@@ -53,6 +53,8 @@ import { CheckinButton } from "@/components/spots/checkin-button";
 import { GoTodayButton } from "@/components/spots/go-today-button";
 import { GearGuideList } from "@/components/spots/gear-guide";
 import { SafetyWarning } from "@/components/spots/safety-warning";
+import { FishingBanNotice } from "@/components/spots/fishing-ban-notice";
+import { ChumRegulationNotice } from "@/components/spots/chum-regulation-notice";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
 import {
   SPOT_TYPE_LABELS,
@@ -257,8 +259,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
   const rawSpot = getSpotBySlug(slug);
   if (!rawSpot) notFound();
   const spot = enrichSpotWithStructures(rawSpot);
+  const prefectureRule = getFishingRuleByPrefName(spot.region.prefecture);
   // rules未設定スポット向け: 県レベルの公的釣りルールをフォールバック表示する
-  const prefRule = spot.rules ? undefined : getFishingRuleByPrefName(spot.region.prefecture);
+  const prefRule = spot.rules ? undefined : prefectureRule;
   const initialCommunityPhotos = await getInitialCommunityPhotos(slug);
   // 特許パイプライン: 自動生成ダイアグラム優先、なければ手動データにフォールバック
   // 座標整合ガード: 解析座標がスポット実座標と乖離している場合は表示しない（虚偽表示防止）
@@ -814,6 +817,13 @@ export default async function SpotDetailPage({ params }: PageProps) {
         </div>
       </div>
 
+      {/* 釣り禁止の告知はファーストビューに出す。広告より前に置く。 */}
+      {spot.fishingBan && (
+        <div className="mt-4">
+          <FishingBanNotice ban={spot.fishingBan} spotName={spot.name} />
+        </div>
+      )}
+
       {/* ATF広告: ヒーロー直後 */}
       <DisplayAd className="mt-4" />
 
@@ -1055,31 +1065,49 @@ export default async function SpotDetailPage({ params }: PageProps) {
           </section>
           {/* 釣りルール: 個別データがあれば優先表示。無ければ県レベルの公的ルール（出典付き）をフォールバック。
               推測のスポット固有ルールは誤情報源になるため出さない。 */}
-          {spot.rules ? (
+          {(spot.rules || prefRule || prefectureRule?.seaRules?.chumRegulation) && (
           <section>
             <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><Shield className="size-5" />釣りルール・禁止事項</h3>
-            <SpotRulesCard rules={spot.rules} spotType={spot.spotType} spotName={spot.name} isFree={spot.isFree} feeDetail={spot.feeDetail} />
+            <div className="space-y-3">
+              {spot.rules ? (
+                <SpotRulesCard rules={spot.rules} spotType={spot.spotType} spotName={spot.name} isFree={spot.isFree} feeDetail={spot.feeDetail} />
+              ) : prefRule ? (
+                <SpotRulesPrefectureFallback rule={prefRule} />
+              ) : null}
+              {/* まき餌規制は県単位で適用されるため、スポット個別rulesの有無に関わらず表示する */}
+              {prefectureRule && <ChumRegulationNotice rule={prefectureRule} />}
+            </div>
           </section>
-          ) : prefRule ? (
-          <section>
-            <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><Shield className="size-5" />釣りルール・禁止事項</h3>
-            <SpotRulesPrefectureFallback rule={prefRule} />
-          </section>
-          ) : null}
+          )}
           {spot.spotType === "port" && <PortMannerSection />}
           {/* みんなが教える釣り場情報（共同編集UGC・追記型・実体験でE-E-A-Tを底上げ） */}
           <section id="spot-tips">
             <h3 className="mb-1 flex items-center gap-2 text-lg font-bold"><Lightbulb className="size-5 text-amber-500" />みんなが教える釣り場情報</h3>
             <p className="mb-3 text-xs text-muted-foreground">実際に訪れた釣り人が共有する、{spot.name}のコツ・足場・駐車・狙い目など。</p>
             <SpotContributionList initialContributions={await getSpotContributionsAsync(slug)} />
-            <div className="mt-3">
-              <SpotContributionForm spotSlug={slug} spotName={spot.name} />
-            </div>
+            {spot.fishingBan?.scope !== "full" && (
+              <div className="mt-3">
+                <SpotContributionForm spotSlug={slug} spotName={spot.name} />
+              </div>
+            )}
           </section>
           <section id="catch-report">
             <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><MessageSquare className="size-5" />みんなの釣果報告</h3>
             <CatchReportList spotSlug={slug} initialReports={catchReports} />
-            <CatchReportForm spotSlug={slug} spotName={spot.name} catchableFishNames={[...new Set(spot.catchableFish.map((cf) => cf.fish.name))]} />
+            {/* 釣り禁止スポットでは釣果報告を受け付けない（違法行為の記録・助長になるため）。
+                既存投稿の一覧は、いつまでの釣果かを示す記録として残す。 */}
+            {spot.fishingBan?.scope === "full" ? (
+              <p className="mt-3 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800">
+                この釣り場は現在釣りが禁止されているため、釣果報告は受け付けていません。
+                規制が解除されているなど情報に誤りがある場合は、
+                <Link prefetch={false} href={`/contact?category=spot-correction&spot=${slug}`} className="mx-1 underline underline-offset-2 hover:text-red-950">
+                  お問い合わせ
+                </Link>
+                からお知らせください。
+              </p>
+            ) : (
+              <CatchReportForm spotSlug={slug} spotName={spot.name} catchableFishNames={[...new Set(spot.catchableFish.map((cf) => cf.fish.name))]} />
+            )}
             {/* エリアの釣果傾向（釣果報告の補完情報） */}
             {(() => {
               const areaTrend = generateAreaSeasonTrend(spot, fishingSpots);
@@ -1690,6 +1718,7 @@ export default async function SpotDetailPage({ params }: PageProps) {
         {/* E-E-A-T: 情報の出典・編集体制（コアアップデート対策の信頼シグナル） */}
         <SpotEeatFooter
           spotName={spot.name}
+          spotSlug={spot.slug}
           prefecture={spot.region.prefecture}
           managementOrg={spot.managementInfo?.organizationName}
           hasPublicRules={Boolean(prefRule) || Boolean(spot.rules)}

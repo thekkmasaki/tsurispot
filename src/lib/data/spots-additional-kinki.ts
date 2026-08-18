@@ -528,6 +528,15 @@ export const additionalSpotsKinki: FishingSpot[] = [
     mazumeInfo: { springSunrise: "05:30", springSunset: "18:20", summerSunrise: "04:55", summerSunset: "19:10", autumnSunrise: "05:45", autumnSunset: "17:15", winterSunrise: "07:00", winterSunset: "16:55", tip: "タチウオは日没後1時間がピーク。" },
     gearGuides: [{ targetFish: "タチウオ", method: "ウキ釣り", difficulty: "beginner", rod: "磯竿2号3.6m", reel: "スピニング2500番", line: "ナイロン3号", hook: "タチウオ針1/0", otherItems: ["電気ウキ", "ケミホタル", "キビナゴ"], tip: "電気ウキで棚を合わせる。" }],
     safetyLevel: "caution", safetyNotes: ["工業地帯のため車の通行注意", "夜間は暗い"],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      nightFishing: true,
+      fishingLicenseRequired: false,
+      restrictedAreas: ["堺泉北港には立入禁止の防波堤・岸壁が多数あります。釣りができるのは開放された護岸に限られるため、現地の掲示とフェンスの表示を必ず確認してください。"],
+      otherRules: ["港湾関係者・漁業関係者の作業を妨げないこと"],
+    },
     youtubeLinks: [{ label: "堺 タチウオ", searchQuery: "堺泉北港 タチウオ 釣り", description: "堺泉北港での釣り動画" }],
   },
   {

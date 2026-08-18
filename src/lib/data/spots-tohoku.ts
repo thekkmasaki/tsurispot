@@ -111,7 +111,7 @@ export const tohokuSpots: FishingSpot[] = [
   },
   {
     id: "s423", name: "八戸港フェリーターミナル", slug: "hachinohe-ferry-terminal",
-    description: "八戸港のフェリーターミナル周辺は足場が良く、サバやイワシのサビキ釣りからシーバスまで多彩な魚種が狙える。夜釣りも人気。",
+    description: "八戸港のフェリーターミナル周辺は舗装された足場が広く、無料駐車場も整っていて手軽に竿を出せる。フェリーふ頭のある河原木地先は青森県海区漁業調整委員会指示により遊漁のまき餌釣りが禁止されているため、サビキ釣りやカゴ釣りは行えない。サバやイワシはメタルジグや小型ルアーで回遊を狙い、夜はシーバスのルアー、冬場は投げ釣りのカレイが本命。柵のない箇所があるためライフジャケットを着用したい。",
     latitude: 40.5350, longitude: 141.5340,
     address: "〒039-1161 青森県八戸市河原木海岸25-25",
     accessInfo: "JR八戸線本八戸駅から車で約15分。八戸自動車道八戸ICから約20分。",
@@ -120,17 +120,24 @@ export const tohokuSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/wikimedia/hachinohe-ferry-terminal.webp", imageAttribution: "Photo: tsushima / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.0, reviewCount: 156, googleRating: 3.9, googleReviewCount: 1027,
     catchableFish: [
-      { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
-      { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ショアジギング" },
+      { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ルアー" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
       { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["この地先は青森県海区漁業調整委員会指示により、遊漁によるまき餌（コマセ）釣りが禁止されています。サビキ釣り・カゴ釣りは行えません。指示は毎年更新されるため、最新の区域は青森県の公式ページでご確認ください。"],
+    },
     bestTimes: btMorning, tackleRecommendations: [],
     tideAdvice: tideStandard, mazumeInfo: mazumeTohoku,
-    gearGuides: [gearSabiki, gearNage],
+    gearGuides: [gearNage, gearRock],
     safetyLevel: "safe", safetyNotes: ["フェリー運航時は周辺に注意", "柵がない箇所あり"],
     youtubeLinks: [
-      { label: "八戸港 サビキ釣り", searchQuery: "八戸港 サビキ釣り サバ", description: "八戸港でのサビキ釣り動画" },
+      { label: "八戸港 釣り", searchQuery: "八戸港 フェリーターミナル 釣り", description: "八戸港での釣り動画" },
     ],
   },
   {
@@ -675,7 +682,7 @@ export const tohokuSpots: FishingSpot[] = [
   },
   {
     id: "s1063", name: "深浦港", slug: "fukaura-port",
-    description: "世界遺産白神山地の麓にある日本海の漁港。五能線沿いの絶景ポイントで、メバルやアジが好調。夏のイカ釣りも人気。",
+    description: "世界遺産・白神山地の麓に位置する日本海の漁港で、五能線の車窓に映る絶景ポイントとしても知られる。深浦地先は青森県海区漁業調整委員会指示により遊漁のまき餌釣りが全区域で禁止されているため、サビキ釣りやカゴ釣りは行えない。冬から春はメバリング、夏の夕マヅメはアジング、夏場の夜はスルメイカのエギングが主役。足元の敷石ではブラクリやワームでアイナメ・クロソイ・カサゴも狙える。",
     latitude: 40.6470, longitude: 139.9280,
     address: "〒038-2324 青森県西津軽郡深浦町深浦浜町364-2（深浦漁港）",
     accessInfo: "JR五能線深浦駅から徒歩約10分。",
@@ -685,7 +692,7 @@ export const tohokuSpots: FishingSpot[] = [
     mainImageUrl: "", images: [], rating: 3.8, reviewCount: 58,
     catchableFish: [
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "メバリング" },
-      { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+      { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
       { fish: fish("surumeika"), monthStart: 7, monthEnd: 9, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "エギング" },
           { fish: fish("ainame"), monthStart: 10, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ブラクリ" },
           { fish: fish("kurosoi"), monthStart: 10, monthEnd: 5, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夜", method: "ワーム" },
@@ -693,9 +700,16 @@ export const tohokuSpots: FishingSpot[] = [
           { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
           { fish: fish("ishimochi"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "ちょい投げ" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["この地先は青森県海区漁業調整委員会指示により、遊漁によるまき餌（コマセ）釣りが禁止されています。サビキ釣り・カゴ釣りは行えません。指示は毎年更新されるため、最新の区域は青森県の公式ページでご確認ください。"],
+    },
     bestTimes: btStandard, tackleRecommendations: [],
     tideAdvice: tideStandard, mazumeInfo: mazumeTohoku,
-    gearGuides: [gearSabiki],
+    gearGuides: [gearRock, gearNage],
     safetyLevel: "safe", safetyNotes: ["五能線の絶景を楽しみながら釣りができる"],
     youtubeLinks: [
       { label: "深浦港 釣り", searchQuery: "深浦港 釣り メバル 白神", description: "深浦港での釣り動画" },

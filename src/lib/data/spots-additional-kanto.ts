@@ -587,7 +587,7 @@ export const additionalSpotsKanto: FishingSpot[] = [
   {
     id: "s113", name: "鹿島港魚釣園", slug: "kashima-port-fishing-park",
     officialUrl: "https://kashima-fa.com/",
-    description: "鹿島港に隣接する有料の釣り公園。整備された施設でファミリーに最適。サビキから青物まで幅広く楽しめる。",
+    description: "鹿島港に隣接する有料の釣り公園。柵付きの釣り座が整備されファミリーに最適で、サビキのアジ・イワシからカレイ・メバル・シーバスまで幅広く狙える。茨城県ではまき餌（コマセ）釣りが原則禁止されているなか、ここは県が指定した数少ないまき餌可の釣り場で、サビキ釣りを楽しめる貴重なスポット。レンタル竿もあり手ぶらで行ける。鹿島港では魚釣園以外は釣り禁止のため、この施設を利用したい。",
     latitude: 35.9234, longitude: 140.6912, address: "〒314-0013 茨城県鹿嶋市新浜地先",
     accessInfo: "東関東自動車道潮来ICから約30分。",
     region: region("r52"), spotType: "breakwater", difficulty: "beginner",
@@ -612,6 +612,18 @@ export const additionalSpotsKanto: FishingSpot[] = [
     mazumeInfo: { springSunrise: "05:10", springSunset: "18:10", summerSunrise: "04:25", summerSunset: "19:00", autumnSunrise: "05:25", autumnSunset: "17:05", winterSunrise: "06:45", winterSunset: "16:25", tip: "営業時間内のマヅメ時を狙う。" },
     gearGuides: [{ targetFish: "アジ", method: "サビキ釣り", difficulty: "beginner", rod: "磯竿2号3.6m", reel: "スピニング2500番", line: "ナイロン3号", hook: "サビキ仕掛け6号", otherItems: ["コマセカゴ", "アミエビ"], tip: "レンタルも充実。初心者はスタッフに聞こう。" }],
     safetyLevel: "safe", safetyNotes: ["柵あり安全", "管理人常駐", "ファミリー向け施設"],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      // 茨城県はまき餌釣りを原則禁止しているが、この釣り公園は
+      // 茨城海区漁業調整委員会指示で認められた2箇所のうちの一方。
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      otherRules: [
+        "茨城県内で数少ない、まき餌（コマセ）釣りが認められた釣り場です（1人1日2kgまで）。県内の他の海岸・漁港ではまき餌釣りは行えません。（出典: 茨城県）",
+        "鹿島港では魚釣園以外は釣り禁止です。",
+      ],
+    },
     youtubeLinks: [{ label: "鹿島港 釣り", searchQuery: "鹿島港 魚釣園 サビキ", description: "鹿島港魚釣園での釣り動画" }],
   },
   {
@@ -815,7 +827,7 @@ export const additionalSpotsKanto: FishingSpot[] = [
   },
   {
     id: "s203", name: "大洗・大洗港堤防", slug: "oarai-teiho",
-    description: "大洗港の堤防は茨城を代表する人気の釣り場で、アジ・ヒラメ・シーバスなど多彩な魚種が狙える。堤防から周年釣りが楽しめ、年間を通じて釣り人が絶えない。",
+    description: "大洗港の堤防は茨城を代表する人気の釣り場で、アジ・ヒラメ・シーバスなど多彩な魚種が周年狙える。整備された広い堤防と約200台の無料駐車場があり、年間を通じて釣り人が絶えない。茨城県はまき餌釣りが原則禁止のためサビキ釣りやカゴ釣りは行えず、アジやイワシは朝マヅメのアジング・小型ルアーで狙う。秋はアジを活かした泳がせ釣りでヒラメ、夕マヅメはルアーのシーバス、冬は投げ釣りのカレイが本命。",
     latitude: 36.3150, longitude: 140.5825, address: "〒311-1301 茨城県大洗町磯浜町",
     accessInfo: "鹿島臨海鉄道大洗駅から徒歩15分。北関東自動車道水戸大洗ICから約10分。", region: region("r20"),
     spotType: "breakwater", difficulty: "beginner", isFree: true,
@@ -823,17 +835,24 @@ export const additionalSpotsKanto: FishingSpot[] = [
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/%E5%A4%A7%E6%B4%97%E6%B5%B7%E5%B2%B8_-_panoramio.jpg/960px-%E5%A4%A7%E6%B4%97%E6%B5%B7%E5%B2%B8_-_panoramio.jpg", imageAttribution: "Photo: KΛNΛTΛ / Wikimedia Commons (CC BY-SA 3.0)", images: [],
     rating: 4.3, reviewCount: 234, googleRating: 3.4, googleReviewCount: 8,
     catchableFish: [
-      { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "アジング" },
       { fish: fish("hirame"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "泳がせ釣り" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー釣り" },
       { fish: fish("karei"), monthStart: 11, monthEnd: 2, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
-      { fish: fish("iwashi"), monthStart: 6, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("iwashi"), monthStart: 6, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["茨城県ではまき餌（コマセ）釣りが原則禁止で、認められているのは鹿島港魚釣園とふれあい公園（ひたちなか市海門町1丁目地先）の2箇所のみです（1人1日2kgまで・船上不可）。この釣り場ではサビキ釣り・カゴ釣りは行えません。（出典: 茨城県）"],
+    },
     bestTimes: [{ label: "朝マヅメ", timeRange: "04:30〜06:30", rating: "best" }, { label: "夕マヅメ", timeRange: "16:00〜18:00", rating: "good" }, { label: "日中", timeRange: "10:00〜14:00", rating: "fair" }],
     tackleRecommendations: [],
     tideAdvice: { bestTide: "上げ潮", bestTidePhase: "上げ3分〜7分", description: "上げ潮で魚の活性が上がる。ヒラメは下げ潮の離岸流周辺も狙い目。" },
     mazumeInfo: { springSunrise: "04:55", springSunset: "18:10", summerSunrise: "04:20", summerSunset: "18:55", autumnSunrise: "05:10", autumnSunset: "16:55", winterSunrise: "06:40", winterSunset: "16:20", tip: "朝マヅメのヒラメ・シーバスが実績大。" },
-    gearGuides: [{ targetFish: "ヒラメ", method: "泳がせ釣り", difficulty: "intermediate", rod: "磯竿4号4.5m", reel: "スピニング4000番", line: "PE2号", hook: "チヌ針5号", otherItems: ["三又サルカン", "活きアジ"], tip: "サビキで釣ったアジをそのまま泳がせる。" }],
+    gearGuides: [{ targetFish: "ヒラメ", method: "泳がせ釣り", difficulty: "intermediate", rod: "磯竿4号4.5m", reel: "スピニング4000番", line: "PE2号", hook: "チヌ針5号", otherItems: ["三又サルカン", "活きアジ"], tip: "アジングで釣った小アジをそのまま泳がせる。茨城県はまき餌が原則禁止なのでサビキでのエサ確保はできない。" }],
     safetyLevel: "safe", safetyNotes: ["整備された堤防で安全", "冬季の強風時は注意"],
     youtubeLinks: [{ label: "大洗港 釣り", searchQuery: "大洗港 釣り ヒラメ", description: "大洗港でのヒラメ釣り動画" }],
   },

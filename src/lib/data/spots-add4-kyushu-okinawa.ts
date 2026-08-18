@@ -1308,7 +1308,7 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
   },
   {
     id: "sks4062", name: "門川港", slug: "kadogawa-kou",
-    description: "門川町の漁港で、堤防の外側ではメジナやクロダイが狙え、内側ではアジのサビキ釣りが手軽に楽しめる。近くの門川湾はイカの好ポイント。",
+    description: "門川町の漁港で、堤防の外側ではメジナやクロダイが狙え、内側では常夜灯周りのアジングでアジが手軽に楽しめる。門川町の海域はアミ餌を使った釣りが禁止されているためサビキ釣りは行えない点に注意。近くの門川湾はイカの好ポイントで、秋のエギングも人気がある。",
     latitude: 32.4730, longitude: 131.6480,
     address: "〒889-0611 宮崎県東臼杵郡門川町門川尾末",
     accessInfo: "JR門川駅から車で約5分。延岡南道路門川ICから約5分。",
@@ -1317,13 +1317,18 @@ export const kyushuOkinawaAdd4Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.5, reviewCount: 105,
     catchableFish: [
-      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+      { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
       { fish: fish("mejina"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "ウキフカセ" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
     ],
     bestTimes: btEvening, tackleRecommendations: [],
     tideAdvice: tidePort, mazumeInfo: mazumeKyushu,
-    youtubeLinks: [{ label: "門川港 釣り", searchQuery: "門川港 アジ サビキ 釣り", description: "門川港での釣り動画" }],
+    rules: {
+      castingAllowed: true, lureAllowed: true, chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["門川町海域では、宮崎海区漁業調整委員会指示によりアミ餌（アミエビ）を使用した釣りが禁止されています。サビキ釣りは行えません。（出典: 宮崎県）"],
+    },
+    youtubeLinks: [{ label: "門川港 釣り", searchQuery: "門川港 アジ 釣り", description: "門川港での釣り動画" }],
   },
   {
     id: "sks4063", name: "青島海岸", slug: "aoshima-kaigan-surf",

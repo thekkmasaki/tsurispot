@@ -2192,7 +2192,7 @@ export const westAdd6Spots: FishingSpot[] = [
     id: "sw6107", name: "光市・虹ヶ浜", slug: "nijigahama-hikari-w6",
     description: "光市の白砂青松で有名な海岸。約2.4kmの砂浜が続き、キスの投げ釣りの名所として知られる。夏場はピンギスから良型まで数釣りが楽しめる。",
     latitude: 33.96, longitude: 131.94,
-    address: "〒743-0021 広島県光市虹ヶ浜",
+    address: "〒743-0021 山口県光市虹ヶ浜",
     accessInfo: "JR光駅から徒歩約5分",
     region: localRegion("rw6015"), spotType: "beach", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "海水浴場駐車場あり",
@@ -6937,7 +6937,7 @@ export const westAdd6Spots: FishingSpot[] = [
   },
   {
     id: "sw6354", name: "津久見・保戸島", slug: "hotojima-tsukumi-w6",
-    description: "津久見市の保戸島。豊後水道に浮かぶ離島で、マグロ漁の島として有名。磯釣りの好ポイントで、グレやイシダイの大物が狙える。",
+    description: "津久見市の保戸島。豊後水道に浮かぶ離島で、マグロ漁の島として名高い。磯場が点在しグレやイシダイの魚影は濃いが、大分海区漁業調整委員会の告示により、島の最大高潮時海岸線から700m以内では「いそ釣りのあみ（おきあみを含む）」のまき餌使用が禁止されている。コマセを使うフカセ釣りは行えないため、餌の扱いに注意が必要。",
     latitude: 33.084624, longitude: 131.871007,
     address: "〒879-2671 大分県津久見市保戸島",
     accessInfo: "津久見港からフェリー約25分",
@@ -6952,6 +6952,17 @@ export const westAdd6Spots: FishingSpot[] = [
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
       { fish: fish("inada"), monthStart: 9, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      // 大分海区漁業調整委員会告示第6号「いそ釣りのあみ（おきあみを含む。）のまきえの使用禁止区域」に
+      // 保戸島の最大高潮時海岸線から700m以内の海面が指定されている。
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: [
+        "保戸島の海岸線から700m以内の海面では、大分海区漁業調整委員会の告示により「いそ釣りのあみ（おきあみを含む）」のまき餌の使用が禁止されています。コマセを使うフカセ釣りは行えません。禁止区域は年度ごとに更新されるため、最新の内容は大分県の公式ページでご確認ください。（出典: 大分県）",
+      ],
+    },
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeSouth,
   },
   {
@@ -7475,7 +7486,7 @@ export const westAdd6Spots: FishingSpot[] = [
   },
   {
     id: "sw6382", name: "門川・乙島", slug: "otoshima-kadogawa-w6",
-    description: "東臼杵郡門川町の乙島。門川湾に浮かぶ無人島で、渡船で渡る。手つかずの自然が残る磯で、グレやチヌの大物が狙える上級者向けスポット。",
+    description: "東臼杵郡門川町の乙島。門川湾に浮かぶ無人島で、門川漁港から渡船で渡る沖磯。手つかずの自然が残る荒々しい磯場に潮が直接当たり、良型のメジナやクロダイ、夏から秋にはイシダイの実績もある上級者向けのフィールド。門川町の海域はアミ餌を使った釣りが禁止されているためサビキ釣りは行えない。渡船の予約と足回り・ライフジャケットの準備は入念に。",
     latitude: 32.467372, longitude: 131.668378,
     address: "〒889-0611 宮崎県東臼杵郡門川町",
     accessInfo: "門川漁港から渡船約10分",
@@ -7491,6 +7502,11 @@ export const westAdd6Spots: FishingSpot[] = [
       { fish: fish("inada"), monthStart: 9, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeSouth,
+    rules: {
+      castingAllowed: true, lureAllowed: true, chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["門川町海域では、宮崎海区漁業調整委員会指示によりアミ餌（アミエビ）を使用した釣りが禁止されています。サビキ釣りは行えません。（出典: 宮崎県）"],
+    },
   },
   {
     id: "sw6383", name: "串間・都井岬", slug: "toimisaki-kushima-w6",

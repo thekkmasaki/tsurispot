@@ -142,7 +142,7 @@ export const kantoDetailSpots: FishingSpot[] = [
   },
   {
     id: "s803", name: "お台場海浜公園", slug: "odaiba-seaside-park",
-    description: "お台場海浜公園はハゼ・シーバスが狙える東京湾岸の釣り場。レインボーブリッジを望む人工ビーチ周辺の護岸から、ちょい投げのハゼ、ルアーのシーバス、投げ釣りのキス・カレイ、ウキ釣りのサヨリが狙える。都心の夜景を楽しむ夜釣りが魅力で、観光と組み合わせても楽しめる。",
+    description: "レインボーブリッジを望む東京湾岸の人工ビーチ。ハゼやシーバスの生息域だが、この公園では投げ釣り・ルアー釣り・撒き餌がいずれも禁止されており、釣りができるのは指定された場所に限られる。仕掛けが他の利用者に危険を及ぼすおそれがあるためで、竿を出す前に必ず現地の掲示を確認してほしい。観光と合わせて訪れる人が多いエリア。",
     latitude: 35.6290, longitude: 139.7750,
     address: "〒135-0091 東京都港区台場1丁目4",
     accessInfo: "ゆりかもめ「お台場海浜公園」駅から徒歩3分。りんかい線「東京テレポート」駅から徒歩7分。",
@@ -157,8 +157,19 @@ export const kantoDetailSpots: FishingSpot[] = [
       { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り", source: "上州屋" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 9, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "ちょい投げ", source: "上州屋" },
     ], bestTimes: btNight, tackleRecommendations: [],
-    gearGuides: [gearChoinage, gearLure, gearNage, gearUki],
-    safetyLevel: "safe", safetyNotes: ["遊泳禁止エリアで釣りが可能", "レインボーブリッジの夜景が美しい", "周辺商業施設が充実"],
+    gearGuides: [gearUki],
+    rules: {
+      // 東京臨海副都心の公式案内による。投げ釣り・ルアー・撒き餌がいずれも明文で禁止されている。
+      castingAllowed: false,
+      lureAllowed: false,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      restrictedAreas: ["指定された場所以外での釣りは禁止"],
+      otherRules: [
+        "お台場海浜公園では、撒き餌・投げ釣り（振りかぶって投げる、横から投げる釣り）・ルアー釣りがいずれも禁止されています。釣りができるのは指定された場所のみです。（出典: 東京臨海副都心）",
+      ],
+    },
+    safetyLevel: "safe", safetyNotes: ["レインボーブリッジの夜景が美しい", "周辺商業施設が充実", "公園利用者が多いため仕掛けの扱いに注意"],
   },
   {
     id: "s804", name: "有明西ふ頭公園", slug: "ariake-nishi-futo-park",
@@ -694,7 +705,7 @@ export const kantoDetailSpots: FishingSpot[] = [
   // =========================================
   {
     id: "s828", name: "大洗港", slug: "oarai-port",
-    description: "茨城県を代表する大型漁港。堤防からのサビキ釣りでアジ、サバ、イワシが年間を通じて楽しめる。秋にはイナダやショゴなどの青物が回遊し、ショアジギングが盛り上がる。アニメ「ガールズ&パンツァー」の聖地としても知られ、釣りと観光を両立できる。",
+    description: "茨城県を代表する大型漁港で、足場のよい堤防から年間を通じて多彩な魚が狙える。茨城県はまき餌釣りが原則禁止のためサビキ釣りやカゴ釣りは行えないが、アジは朝マヅメのアジング、サバやイワシは小型ルアーで回遊を拾える。秋にはイナダやショゴなどの青物が回遊してルアーゲームが盛り上がり、冬は投げ釣りのカレイや夜のメバリングが本命。アニメ「ガールズ&パンツァー」の聖地としても知られ、釣りと観光を両立できる。",
     latitude: 36.3130, longitude: 140.5770,
     address: "〒311-1301 茨城県大洗町磯浜町8249",
     accessInfo: "鹿島臨海鉄道大洗駅から徒歩約15分。北関東自動車道水戸大洗ICから約10分。",
@@ -703,9 +714,9 @@ export const kantoDetailSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 4.0, reviewCount: 198,
     catchableFish: [
-      { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り", source: "上州屋" },
-      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り", source: "上州屋" },
-      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り", source: "上州屋" },
+      { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "アジング", source: "上州屋" },
+      { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ショアジギング", source: "上州屋" },
+      { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ルアー", source: "上州屋" },
       { fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー", source: "上州屋" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り", source: "上州屋" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "メバリング", source: "上州屋" },
@@ -713,7 +724,14 @@ export const kantoDetailSpots: FishingSpot[] = [
       { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り", source: "上州屋" },
       { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー", source: "上州屋" },
     ], bestTimes: btMorning, tackleRecommendations: [],
-    gearGuides: [gearSabiki, gearLure, gearRock, gearMebaring, gearNage, gearUki],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["茨城県ではまき餌（コマセ）釣りが原則禁止で、認められているのは鹿島港魚釣園とふれあい公園（ひたちなか市海門町1丁目地先）の2箇所のみです（1人1日2kgまで・船上不可）。この釣り場ではサビキ釣り・カゴ釣りは行えません。（出典: 茨城県）"],
+    },
+    gearGuides: [gearLure, gearRock, gearMebaring, gearNage],
     safetyLevel: "caution", safetyNotes: ["外洋に面しているため波が高い日あり", "漁船の往来が多いため注意", "大洗磯前神社が近く観光も楽しめる"],
   },
   {
@@ -738,7 +756,7 @@ export const kantoDetailSpots: FishingSpot[] = [
   },
   {
     id: "s830", name: "日立港", slug: "hitachi-port",
-    description: "茨城県北部に位置する工業港兼漁港。第五ふ頭や久慈漁港周辺が主な釣り場で、アジ、サバのサビキ釣りから、ヒラメ、マゴチの泳がせ釣りまで多彩な釣りが楽しめる。秋のショアジギングではイナダやワラサの回遊も期待でき、県北随一の釣りスポット。",
+    description: "茨城県北部、日立市の重要港湾（茨城港日立港区）。かつては第5埠頭を中心にアジ・サバやヒラメ・イナダが狙える県北随一の釣り場として知られたが、現在は港区内の岸壁・防波堤での魚釣りが認められていない。釣り場としての情報が今も多く流通しているものの、釣行はできない。日立市周辺で釣りをする際は、現地の掲示と茨城県の釣りルールを必ず確認してほしい。",
     latitude: 36.5230, longitude: 140.6520,
     address: "〒319-1223 茨城県日立市みなと町5774",
     accessInfo: "JR常磐線大甕駅からタクシーで約10分。常磐自動車道日立南太田ICから約15分。",
@@ -758,12 +776,21 @@ export const kantoDetailSpots: FishingSpot[] = [
       { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り", source: "上州屋" },
       { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー", source: "上州屋" },
     ], bestTimes: btMorning, tackleRecommendations: [],
-    gearGuides: [gearSabiki, gearLure, gearRock, gearMebaring, gearNage, gearUki],
+    gearGuides: [gearLure, gearRock, gearMebaring, gearNage, gearUki],
+    fishingBan: {
+      scope: "full",
+      reason: "茨城港の港区内の岸壁・防波堤等での魚釣りは、茨城県港湾施設管理条例第4条（港湾施設の目的外使用の禁止）に該当するとして、茨城港湾事務所が禁止を案内しています。日立港区（旧日立港）は全域が釣り禁止となっており、現地には釣り禁止の看板が設置されているとの情報が複数あります。",
+      sourceUrls: [
+        "https://www.pref.ibaraki.jp/doboku/ibako/okoku/index.html",
+        "https://www.pref.ibaraki.jp/somu/somu/hosei/cont/reiki_int/reiki_honbun/o400RG00000987.html",
+      ],
+      confirmedAt: "2026-08-17",
+    },
     safetyLevel: "caution", safetyNotes: ["工業港エリアは立入禁止区域あり注意", "外洋側は波が高い日あり", "ライフジャケット着用推奨"],
   },
   {
     id: "s831", name: "鹿島港", slug: "kashima-port",
-    description: "鹿島臨海工業地帯に隣接する巨大な港湾。港公園周辺の護岸からの釣りが人気で、アジ、サバ、イワシのサビキ釣りから、ヒラメやマゴチの大物釣りまで楽しめる。黒潮の影響を受けた温暖な海域で、多彩な魚種が狙える。※南防波堤は死亡事故多発のため立入禁止。",
+    description: "鹿島臨海工業地帯に隣接する巨大な港湾。かつてはアジ・サバのサビキ釣りやヒラメ・マゴチ狙いで賑わったが、茨城県は「鹿島港は魚釣園以外釣り禁止です」と案内しており、現在この港で釣りができるのは港内の鹿島港魚釣園のみ。南防波堤では死亡事故が多発しており立入禁止となっている。釣行の際は必ず魚釣園を利用してほしい。",
     latitude: 35.915458, longitude: 140.676151,
     address: "〒314-0141 茨城県神栖市居切",
     accessInfo: "JR鹿島線鹿島神宮駅からタクシーで約15分。東関東自動車道潮来ICから約20分。",
@@ -782,8 +809,15 @@ export const kantoDetailSpots: FishingSpot[] = [
       { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り", source: "上州屋" },
       { fish: fish("suzuki"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ルアー", source: "上州屋" },
     ], bestTimes: btMorning, tackleRecommendations: [],
-    gearGuides: [gearSabiki, gearLure, gearRock, gearMebaring, gearNage, gearUki],
-    safetyLevel: "danger", safetyNotes: ["南防波堤は絶対に立入禁止（死亡事故多発）", "港公園護岸は比較的安全", "工業地帯のため立入制限エリアが多い", "必ず許可されたエリアで釣りをすること"],
+    gearGuides: [gearLure, gearRock, gearMebaring, gearNage, gearUki],
+    fishingBan: {
+      scope: "full",
+      reason: "茨城県は「鹿島港は魚釣園以外釣り禁止です」と案内しています。この港で釣りができるのは鹿島港魚釣園のみで、南防波堤では過去に多数の死亡事故が発生しており立入禁止です。",
+      sourceUrls: ["https://www.pref.ibaraki.jp/doboku/kako/tsuri.html"],
+      confirmedAt: "2026-08-17",
+      alternativeSpotSlugs: ["kashima-port-fishing-park"],
+    },
+    safetyLevel: "danger", safetyNotes: ["南防波堤は絶対に立入禁止（死亡事故多発）", "工業地帯のため立入制限エリアが多い", "釣りをするなら鹿島港魚釣園を利用すること"],
   },
 
   // =========================================

@@ -6,6 +6,7 @@ import { checkNgWords } from "@/lib/moderation";
 import { auth } from "@/lib/auth";
 import { incrementContributionCount } from "@/lib/user-store";
 import { checkRateLimit, getClientIp } from "@/lib/rate-limit";
+import { getSpotBySlug } from "@/lib/data/spots";
 import type { SpotContribution } from "@/lib/data/spot-contributions";
 
 // TTL: 365日（釣果UGCと同じ）
@@ -48,6 +49,13 @@ export async function POST(request: Request) {
     // バリデーション
     if (!spotSlug || typeof spotSlug !== "string" || spotSlug.length > 100) {
       return NextResponse.json({ error: "スポット情報が不正です" }, { status: 400 });
+    }
+    // 釣り禁止スポットへの投稿は受け付けない（UIでもフォームを出していない）
+    if (getSpotBySlug(spotSlug)?.fishingBan?.scope === "full") {
+      return NextResponse.json(
+        { error: "この釣り場は現在釣りが禁止されているため、投稿を受け付けていません。" },
+        { status: 403 },
+      );
     }
     // MVPは "tip"（釣り場メモ/コツ）のみ。将来 "fish" 等を許可
     if (type !== "tip") {

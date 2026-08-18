@@ -709,7 +709,7 @@ export const northAdd10Spots: FishingSpot[] = [
   },
   {
     id: "ss10039", name: "八戸港白銀堤防", slug: "hachinohe-shirogane-breakwater-a10",
-    description: "八戸港東側の堤防。潮通しが良くチカやサバのサビキ釣りが盛ん。秋のイナダ回遊時は特に熱い。",
+    description: "八戸港の東側に伸びる堤防で、潮通しが良く外洋の回遊魚が接岸しやすい。所在地の白銀町地先は青森県海区漁業調整委員会指示で遊漁のまき餌釣りが全区域禁止となっているため、サビキ釣りやカゴ釣りは使えない。サバやイワシはメタルジグやジグ単のルアーで表層を探り、秋のイナダ回遊時はショアジギングが本命になる。朝マヅメの短時間勝負が効率的で、堤防上は柵がないためライフジャケットを着用したい。",
     latitude: 40.5290, longitude: 141.5710,
     address: "〒031-0801 青森県八戸市白銀町",
     accessInfo: "JR白銀駅から徒歩約15分",
@@ -718,10 +718,17 @@ export const northAdd10Spots: FishingSpot[] = [
     hasToilet: false, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0,
     catchableFish: [
-      { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
+      { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ショアジギング" },
       { fish: fish("inada"), monthStart: 8, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
-      { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("iwashi"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ルアー" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["この地先は青森県海区漁業調整委員会指示により、遊漁によるまき餌（コマセ）釣りが禁止されています。サビキ釣り・カゴ釣りは行えません。指示は毎年更新されるため、最新の区域は青森県の公式ページでご確認ください。"],
+    },
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideBreakwater, mazumeInfo: mazumeTohoku,
   },
   {

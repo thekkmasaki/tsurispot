@@ -1303,6 +1303,15 @@ export const chubuKinkiAdd3Spots: FishingSpot[] = [
     tideAdvice: tideStandard, mazumeInfo: mazumeKinki,
     gearGuides: [gearSabiki, gearLure, gearChoinage],
     safetyLevel: "safe", safetyNotes: ["足場良好", "駅から近い", "大浜公園にトイレあり"],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      nightFishing: true,
+      fishingLicenseRequired: false,
+      restrictedAreas: ["堺泉北港には立入禁止の防波堤・岸壁が多数あります。釣りができるのは開放された護岸に限られるため、現地の掲示とフェンスの表示を必ず確認してください。"],
+      otherRules: ["港湾関係者・漁業関係者の作業を妨げないこと"],
+    },
     youtubeLinks: [{ label: "堺大浜埠頭 釣り", searchQuery: "堺 大浜埠頭 釣り アジ タチウオ", description: "堺大浜埠頭でのサビキ・タチウオ釣り" }],
   },
   {

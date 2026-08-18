@@ -884,7 +884,7 @@ export const hokurikuSpots: FishingSpot[] = [
   },
   {
     id: "s1093", name: "鷹巣漁港", slug: "takasu-gyoko-fukui",
-    description: "福井市北部の鷹巣漁港。越前海岸の景勝地に位置し、磯釣りとエギングの人気スポット。透明度の高い海で多彩な魚種が狙える。",
+    description: "福井市北部、越前海岸の景勝地に位置する鷹巣漁港。透明度の高い海に磯場が絡み、秋のエギングから冬のメジナ、初夏のマダイ、晩秋のブリまで多彩な魚種が狙える人気スポット。堤防や地磯からの釣りではコマセを使うフカセ釣り・カゴ釣り・サビキ釣りが可能だが、福井市漁協の海域は福井海区漁業調整委員会指示により船舶を使用した（磯渡りを含む）まきえ釣りが禁止されているため、渡船で沖磯へ渡る釣行ではコマセを使えない。",
     latitude: 36.0820, longitude: 135.9730,
     address: "〒910-3376 福井県福井市蓑町",
     accessInfo: "JR福井駅から車で約30分。北陸自動車道福井北ICから約30分。",
@@ -903,6 +903,13 @@ export const hokurikuSpots: FishingSpot[] = [
           { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "投げ釣り" },
           { fish: fish("ainame"), monthStart: 10, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "ブラクリ" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      otherRules: ["この海域（福井市漁協地先）は福井海区漁業調整委員会指示により、船舶を使用した（磯渡りを含む）まきえ釣りが禁止されています。渡船で渡る磯でのコマセを使った釣りは行えません。徒歩で立てる地磯・堤防からのまきえ釣りは対象外です。（出典: 福井県）"],
+    },
     bestTimes: btStandard, tackleRecommendations: [],
     tideAdvice: tideRock, mazumeInfo: mazumeChubu,
     gearGuides: [gearSabiki, gearEging],

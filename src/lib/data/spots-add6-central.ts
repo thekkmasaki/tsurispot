@@ -2123,7 +2123,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   },
   {
     id: "sc6104", name: "東尋坊・雄島", slug: "tojinbo-oshima-fukui",
-    description: "国の名勝・天然記念物の東尋坊に隣接する雄島周辺の磯場。ダイナミックな柱状節理の岩場からクロダイやメジナの大物が狙える上級者スポット。",
+    description: "国の名勝・天然記念物である東尋坊に隣接する雄島周辺の磯場。ダイナミックな柱状節理の岩場から、クロダイやメジナの大物が狙える上級者向けのフィールド。ここで紹介しているのは徒歩で立てる地磯からの釣りで、フカセ釣りやカゴ釣りにコマセを使うことができる。ただし雄島漁協の海域は福井海区漁業調整委員会指示により、船舶を使用した（磯渡りを含む）まきえ釣りが禁止されているため、渡船で沖磯へ渡る場合はコマセを持ち込めない。",
     latitude: 36.2290, longitude: 136.1250,
     address: "〒913-0064 福井県坂井市三国町安島",
     accessInfo: "えちぜん鉄道三国港駅からバスで約10分。北陸自動車道金津ICから約25分。",
@@ -2138,6 +2138,13 @@ export const centralAdd6Spots: FishingSpot[] = [
       { fish: fish("madai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
       { fish: fish("inada"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      otherRules: ["この海域（雄島漁協地先）は福井海区漁業調整委員会指示により、船舶を使用した（磯渡りを含む）まきえ釣りが禁止されています。渡船で渡る磯でのコマセを使った釣りは行えません。徒歩で立てる地磯・堤防からのまきえ釣りは対象外です。（出典: 福井県）"],
+    },
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeWest,
   },
   {
@@ -2180,7 +2187,7 @@ export const centralAdd6Spots: FishingSpot[] = [
   },
   {
     id: "sc6107", name: "越前・鷹巣海岸", slug: "echizen-takasu-kaigan",
-    description: "福井市北部の断崖海岸。荒々しい日本海の磯場でクロダイの大物が狙える。鷹巣温泉街に近く、釣りと温泉のセットで楽しめる。",
+    description: "福井市北部に連なる断崖海岸で、荒々しい日本海の磯場からクロダイの大物が狙える。鷹巣温泉街に近く、釣りと温泉をセットで楽しめるのも魅力。徒歩で降りられる地磯からの釣りが中心で、フカセ釣りにコマセを使うことができる。ただし福井市漁協の海域は福井海区漁業調整委員会指示により、船舶を使用した（磯渡りを含む）まきえ釣りが禁止されているため、渡船で沖磯へ渡る釣行ではコマセを使えない点に注意したい。",
     latitude: 36.1130, longitude: 136.0240,
     address: "〒910-3377 福井県福井市蓑町",
     accessInfo: "JR福井駅から車で約30分。北陸自動車道福井北ICから約35分。",
@@ -2195,6 +2202,13 @@ export const centralAdd6Spots: FishingSpot[] = [
       { fish: fish("mebaru"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "メバリング" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: true,
+      fishingLicenseRequired: false,
+      otherRules: ["この海域（福井市漁協地先）は福井海区漁業調整委員会指示により、船舶を使用した（磯渡りを含む）まきえ釣りが禁止されています。渡船で渡る磯でのコマセを使った釣りは行えません。徒歩で立てる地磯・堤防からのまきえ釣りは対象外です。（出典: 福井県）"],
+    },
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideRocky, mazumeInfo: mazumeWest,
   },
   {

@@ -2523,7 +2523,7 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
   },
   {
     id: "ss8141", name: "門川港", slug: "kadogawa-kou-s8",
-    description: "門川町の港。リアス式海岸の入口に位置し、魚種が豊富。堤防からアジやクロダイが安定して釣れ、秋のアオリイカエギングは特に人気。",
+    description: "門川町の門川港。リアス式海岸の入口に位置し、外海の回遊魚と湾内の居着きが両方入ってくる魚種の豊富な港。門川町の海域はアミ餌を使った釣りが禁止されているためサビキ釣りは行えないが、アジはジグヘッド単体のアジングで数が出せる。クロダイはウキフカセ、秋のアオリイカのエギングは特に人気が高く、冬場は常夜灯周りのメバリングが面白い。",
     latitude: 32.475, longitude: 131.651,
     address: "〒889-0611 宮崎県東臼杵郡門川町門川尾末",
     accessInfo: "JR門川駅から車で約5分",
@@ -2532,12 +2532,17 @@ export const kyushuOkinawaAdd8Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
-      { fish: fish("aji"), monthStart: 5, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+      { fish: fish("aji"), monthStart: 5, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "メバリング" },
     ],
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeKyushuS,
+    rules: {
+      castingAllowed: true, lureAllowed: true, chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["門川町海域では、宮崎海区漁業調整委員会指示によりアミ餌（アミエビ）を使用した釣りが禁止されています。サビキ釣りは行えません。（出典: 宮崎県）"],
+    },
   },
   {
     id: "ss8142", name: "日南海岸・鵜戸神宮下", slug: "nichinan-udo-jingu-shita-s8",

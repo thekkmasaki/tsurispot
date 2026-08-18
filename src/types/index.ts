@@ -84,6 +84,8 @@ export interface FishingSpot {
   isKuchikomiSpot?: boolean;
   youtubeLinks?: YouTubeSearchLink[];
   rules?: SpotRules;
+  /** 現在釣りが禁止されている場合の情報。設定すると警告バナーを出し、釣果投稿を封鎖する */
+  fishingBan?: FishingBan;
   parkingPeakInfo?: ParkingPeakInfo;
   parkingGuide?: ParkingGuide;
   familyInfo?: FamilyInfo;
@@ -164,6 +166,32 @@ export interface MapSpot {
   isNightFishing: boolean;
   /** 管理釣り場か。混雑予想を出さない判定用。 */
   isManagedPond: boolean;
+}
+
+/**
+ * 釣り禁止スポットの情報。
+ *
+ * 「そこで釣りが合法か」を表現する唯一のフィールド。SpotRules は釣法ごとの可否
+ * （投げ釣り/ルアー/コマセ）しか表せず、「釣り自体が禁止」を表現できなかったため追加した。
+ *
+ * 運用ルール:
+ * - sourceUrls は**一次情報のみ**（自治体・港湾管理者・漁協・県の公式ページ）。
+ *   釣り情報サイト由来の「全面禁止」情報は誇張が多く、検証した6件すべてが
+ *   実際には一部区域のみの禁止だった。裏が取れないものは fishingBan を設定せず、
+ *   rules.restrictedAreas の注意喚起にとどめる。
+ * - confirmedAt から時間が経つと規制状況は変わる。定期的な再確認が必要。
+ */
+export interface FishingBan {
+  /** full=釣り自体が禁止 / partial=一部区域・条件付きの禁止 */
+  scope: "full" | "partial";
+  /** 禁止の内容と根拠（ページに表示される本文） */
+  reason: string;
+  /** 一次情報のURL。釣り情報サイトは不可 */
+  sourceUrls: string[];
+  /** 確認日 "YYYY-MM-DD" */
+  confirmedAt: string;
+  /** 代替として案内する釣り可能スポットの slug */
+  alternativeSpotSlugs?: string[];
 }
 
 export interface SpotRules {

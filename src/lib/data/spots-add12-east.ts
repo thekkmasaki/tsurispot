@@ -152,7 +152,7 @@ export const eastAdd12Spots: FishingSpot[] = [
   },
   {
     id: "ss12205", name: "那珂湊おさかな市場前堤防", slug: "nakaminato-osakana-ichiba-a12",
-    description: "おさかな市場隣接の堤防で、買い物ついでに気軽に竿を出せる。サビキでアジやサバが好調に回遊する人気スポット。",
+    description: "那珂湊おさかな市場に隣接する堤防で、買い物ついでに気軽に竿を出せる人気スポット。沖に張り出した堤防は潮通しがよく、アジ・サバ・イワシの回遊が期待できる。ただし茨城県はまき餌釣りが原則禁止のためサビキ釣りやカゴ釣りは行えず、夕マヅメのアジングや小型ルアーで回遊のタイミングを直接狙う釣り方になる。市場の駐車場は買い物客優先なので配慮したい。",
     latitude: 36.3340, longitude: 140.6080,
     address: "〒311-1221 茨城県ひたちなか市湊本町",
     accessInfo: "ひたちなか海浜鉄, 那珂湊駅から徒歩約10分",
@@ -161,10 +161,17 @@ export const eastAdd12Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
-      { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
-      { fish: fish("iwashi"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
+      { fish: fish("saba"), monthStart: 7, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ショアジギング" },
+      { fish: fish("iwashi"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ルアー" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["茨城県ではまき餌（コマセ）釣りが原則禁止で、認められているのは鹿島港魚釣園とふれあい公園（ひたちなか市海門町1丁目地先）の2箇所のみです（1人1日2kgまで・船上不可）。この釣り場ではサビキ釣り・カゴ釣りは行えません。（出典: 茨城県）"],
+    },
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideBreakwater, mazumeInfo: mazumeKanto,
   },
   {
@@ -202,7 +209,7 @@ export const eastAdd12Spots: FishingSpot[] = [
   },
   {
     id: "ss12208", name: "常陸那珂港区南防波堤", slug: "hitachinaka-minami-bohatei-a12",
-    description: "足場の良い大型防波堤で、投げ釣りのカレイやイシモチ、サビキのアジなど四季を通じて多彩な魚種を楽しめる。",
+    description: "足場のよい大型防波堤で、四季を通じて多彩な魚種を狙える。11〜3月は日中の投げ釣りでカレイ、5〜9月は朝マヅメの投げ釣りでキスが本命になる。茨城県はまき餌釣りが原則禁止のためサビキ釣りやカゴ釣りは行えないが、夏から秋のアジは夕マヅメのアジングで十分に楽しめる。トイレやコンビニがないため、事前に準備を整えてから訪れたい。",
     latitude: 36.3680, longitude: 140.6250,
     address: "〒311-1202 茨城県ひたちなか市大字阿字ヶ浦",
     accessInfo: "常磐道ひたちなかICから車で約15分",
@@ -212,9 +219,16 @@ export const eastAdd12Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
       { fish: fish("karei"), monthStart: 11, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
-      { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
+      { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "アジング" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
     ],
+    rules: {
+      castingAllowed: true,
+      lureAllowed: true,
+      chumAllowed: false,
+      fishingLicenseRequired: false,
+      otherRules: ["茨城県ではまき餌（コマセ）釣りが原則禁止で、認められているのは鹿島港魚釣園とふれあい公園（ひたちなか市海門町1丁目地先）の2箇所のみです（1人1日2kgまで・船上不可）。この釣り場ではサビキ釣り・カゴ釣りは行えません。（出典: 茨城県）"],
+    },
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideBreakwater, mazumeInfo: mazumeKanto,
   },
   {
