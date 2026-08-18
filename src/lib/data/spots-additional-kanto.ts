@@ -628,7 +628,7 @@ export const additionalSpotsKanto: FishingSpot[] = [
   },
   {
     id: "s154", name: "横浜本牧海づり施設", slug: "yokohama-honmoku-fishing",
-    description: "本牧ふ頭で海釣りができる横浜市の大型有料釣り施設。整備された護岸と沖桟橋は柵付きで管理人が常駐し、5〜11月はサビキでアジやイワシ、冬は投げ釣りでカレイなど8魚種を狙える。入場料は大人900円・子供450円、レンタル竿セット2000円。有料駐車場約300台とトイレ・釣具売店を備え、JR根岸駅からバス15分。",
+    description: "横浜市の大型有料釣り施設。整備された護岸と沖桟橋で安全に釣りが楽しめる。都心から近くアクセス抜群。",
     latitude: 35.4134, longitude: 139.6612, address: "〒231-0811 神奈川県横浜市中区本牧ふ頭1",
     accessInfo: "JR根岸駅からバスで15分。首都高速本牧ふ頭出口すぐ。",
     region: region("r6"), spotType: "pier", difficulty: "beginner",
