@@ -36,7 +36,7 @@ interface SpotHit {
  * Twitter型のつぶやきコンポーザー（/post）。本文のみ必須・200字。
  * 写真📷・場所📍・釣果情報🐟は任意添付。ログイン必須（API側でも強制）。
  */
-export function TweetComposer() {
+export function TweetComposer({ initialFishName }: { initialFishName?: string } = {}) {
   const { data: session, status: authStatus } = useSession();
   const router = useRouter();
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -55,9 +55,9 @@ export function TweetComposer() {
   const [searching, setSearching] = useState(false);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // 釣果情報添付
-  const [fishPanelOpen, setFishPanelOpen] = useState(false);
-  const [fishName, setFishName] = useState("");
+  // 釣果情報添付（魚ページの「今日釣った？」導線からは魚名がプリフィルされる）
+  const [fishPanelOpen, setFishPanelOpen] = useState(!!initialFishName);
+  const [fishName, setFishName] = useState(initialFishName ?? "");
   const [sizeCm, setSizeCm] = useState("");
 
   const [submitting, setSubmitting] = useState(false);
