@@ -163,7 +163,9 @@ export async function generateMetadata({
   // スポット件数を title に含めて具体性を上げる（pref-fish テンプレの「N選」と同パターン。
   // 件数は本文・JSON-LD と同じ matchingSpots.length の実データ。2件では「2選」が不自然なので3件以上のみ）
   const countLabel = matchingSpots.length >= 3 ? `${matchingSpots.length}選` : "";
-  const title = `${pref.name}の${month.name}の${fish.name}釣り｜${isPeakMonth ? "最盛期の" : ""}釣れるスポット${countLabel}・釣り方【${year}年】`;
+  // 「○○ 釣り 時期／シーズン」クラスタ（この型の露出の約28%・平均順位10.98・CTR2.84%と
+  // 明確な取りこぼし）に対し、title/見出し/FAQ のどこにも「時期」フレーズが無かったため語彙を補う。
+  const title = `${pref.name}の${month.name}の${fish.name}釣り｜${isPeakMonth ? "最盛期の" : ""}釣れるスポット${countLabel}・時期と釣り方【${year}年】`;
   const methodCount = new Map<string, number>();
   for (const { matchingCf } of matchingSpots) {
     for (const cf of matchingCf) {
@@ -387,7 +389,7 @@ export default async function PrefectureMonthFishPage({
           : `${month.name}の${pref.name}での${fish.name}釣りスポット情報は現在準備中です。`,
     },
     {
-      question: `${month.name}の${fish.name}釣りのコツは？`,
+      question: `${pref.name}の${fish.name}釣り、${month.name}の時期のコツは？`,
       answer: `${month.name}（水温${WATER_TEMP[month.num]}）の${fish.name}釣りでは、${
         methodBreakdown.length > 0
           ? `${methodBreakdown[0].method}が最もポピュラーな釣り方です。`
@@ -663,7 +665,7 @@ export default async function PrefectureMonthFishPage({
       <section className="mb-8 sm:mb-10">
         <h2 className="mb-4 flex items-center gap-2 text-base font-bold sm:text-lg">
           <Calendar className="size-5 text-primary" />
-          {pref.name}の{fish.name} シーズンカレンダー
+          {pref.name}の{fish.name}釣りの時期｜シーズンカレンダー
         </h2>
         <p className="mb-3 text-sm text-muted-foreground">
           {pref.name}で{fish.name}が釣れる月を色分けで表示しています。色が濃いほど多くのスポットで狙えます。
