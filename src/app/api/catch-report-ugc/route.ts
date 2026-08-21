@@ -33,6 +33,17 @@ interface CatchReport {
   weather?: string;
   submittedAt?: string;
   tags?: string[];
+  /** スポット初投稿（開拓者）。バッジ集計・一覧の🏴表示に使う */
+  pioneer?: boolean;
+}
+
+/** スポット開拓者の永続レコード（SPOT#{slug}/PIONEER・TTLなし） */
+interface SpotPioneer {
+  userName: string;
+  tsuriId?: string;
+  date: string;
+  reportId: string;
+  at: string;
 }
 
 // 「アジ、サバ」のような複数魚種入力を分割（catch-feedback.ts と同じ区切り文字）
@@ -192,10 +203,38 @@ export async function POST(request: Request) {
     }
 
     // スポット別ビュー（場所なし投稿ではスキップ。パーマリンクとタイムラインにのみ載る）
+    let isPioneer = false;
     if (slug) {
       // DynamoDB に即時保存（自動承認）- read-modify-write
       try {
         const existing = await dbGet<CatchReport[]>(`SPOT#${slug}`, "UGC_REPORTS") ?? [];
+
+        // 開拓者判定: そのスポットの既存投稿ゼロ + 過去に開拓者がいない（レポートの
+        // 365日TTL切れ後の再認定は許容するが、二重認定はPIONEERレコードの存在で防ぐ）。
+        // 遡及なし: 既存投稿があるスポットは対象外。
+        if (existing.length === 0) {
+          try {
+            const prior = await dbGet<SpotPioneer>(`SPOT#${slug}`, "PIONEER");
+            if (!prior) {
+              isPioneer = true;
+              reportData.pioneer = true;
+              // TTLなしで永続保存（釣果本体が消えても開拓者表示は残す）
+              await dbPut(`SPOT#${slug}`, "PIONEER", {
+                userName: reportData.userName,
+                tsuriId,
+                date: reportData.date,
+                reportId,
+                at: reportData.submittedAt ?? "",
+              } satisfies SpotPioneer);
+            }
+          } catch (err) {
+            // 開拓者の記録に失敗しても投稿は成立させる
+            isPioneer = false;
+            reportData.pioneer = undefined;
+            console.error("[釣果投稿] 開拓者レコード保存エラー:", err);
+          }
+        }
+
         const updated = [reportData, ...existing].slice(0, 200); // 最大200件保持
         await dbPut(`SPOT#${slug}`, "UGC_REPORTS", updated, TTL_SECONDS);
         // オリジンISR＋Cloudflareエッジ(s-maxage=24h)の両方を該当スポットだけ無効化し、新しい釣果を即反映。
@@ -322,6 +361,8 @@ export async function POST(request: Request) {
       ok: true,
       message: "釣果が投稿されました！",
       id: reportId,
+      // スポット初投稿（開拓者）。匿名にも返し、リザルトの開拓者行に使う
+      pioneer: isPioneer,
       // 匿名クライアントが端末図鑑（localStorage）へ保存するための slug（正規化できた魚種のみ）
       fishSlugs: postedSpecies
         .map((name) => slugByName.get(name))

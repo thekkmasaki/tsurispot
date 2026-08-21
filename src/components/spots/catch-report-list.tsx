@@ -8,12 +8,19 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { toast } from "@/components/ui/toast";
 import { LikeButton } from "@/components/social/like-button";
-import type { CatchReport } from "@/lib/data/catch-reports";
+import type { CatchReport, SpotPioneer } from "@/lib/data/catch-reports";
 
 interface CatchReportListProps {
   spotSlug: string;
   initialReports: CatchReport[];
+  /** スポット開拓者（最初の投稿者）の永続レコード。遡及なしのため大半のスポットでは null */
+  pioneer?: SpotPioneer | null;
+  /** 釣り禁止スポット(fishingBan full)では false。空状態の投稿CTAを出さない */
+  allowPosting?: boolean;
 }
+
+/** 空状態のCTAから投稿フォーム（別コンポーネント）を開くためのイベント名 */
+export const OPEN_CATCH_REPORT_EVENT = "tsurispot:open-catch-report";
 
 const WEATHER_ICONS: Record<string, string> = {
   "晴れ": "☀️",
@@ -59,7 +66,7 @@ function lineShareUrl(report: CatchReport): string {
   return `https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}`;
 }
 
-export function CatchReportList({ spotSlug, initialReports }: CatchReportListProps) {
+export function CatchReportList({ spotSlug, initialReports, pioneer = null, allowPosting = true }: CatchReportListProps) {
   // initialReports を useState で固定すると router.refresh() 後も古い一覧のままになるため、
   // prop を直接使う（投稿成功時の router.refresh() で新しい釣果が反映される）。
   const reports = initialReports;
@@ -112,19 +119,59 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
     setConfirmingId(null);
   }, []);
 
+  // 開拓者の常設表示（投稿本体がTTLで消えても永続レコードで残り続ける）
+  const pioneerLine = pioneer ? (
+    <div className="flex flex-wrap items-center gap-2 rounded-lg border border-amber-300 bg-amber-50 px-3 py-2 text-sm text-amber-900">
+      <span aria-hidden="true">🏴</span>
+      <span>
+        このスポットの開拓者:{" "}
+        {pioneer.tsuriId ? (
+          <Link prefetch={false} href={`/users/${pioneer.tsuriId}`} className="font-bold hover:underline">
+            {pioneer.userName} さん
+          </Link>
+        ) : (
+          <b>{pioneer.userName} さん</b>
+        )}
+      </span>
+      <span className="text-xs text-amber-800/80">{formatDate(pioneer.date)} ・ 最初の釣果を投稿</span>
+    </div>
+  ) : null;
+
   if (reports.length === 0) {
+    if (!allowPosting) {
+      // 釣り禁止スポット等では投稿を促さない（従来の中立文言のみ）
+      return (
+        <div className="rounded-lg border border-dashed border-muted-foreground/30 p-6 text-center">
+          <Fish className="mx-auto size-8 text-muted-foreground/40" />
+          <p className="mt-2 text-sm text-muted-foreground">まだ釣果報告がありません。</p>
+        </div>
+      );
+    }
     return (
-      <div className="rounded-lg border border-dashed border-muted-foreground/30 p-6 text-center">
-        <Fish className="mx-auto size-8 text-muted-foreground/40" />
-        <p className="mt-2 text-sm text-muted-foreground">
-          まだ釣果報告がありません。最初の報告者になりましょう！
-        </p>
+      <div className="space-y-3">
+        {pioneerLine}
+        <div className="flex flex-col items-center gap-2.5 rounded-lg border border-dashed border-primary/40 bg-primary/5 p-6 text-center">
+          <span className="text-2xl" aria-hidden="true">🏴</span>
+          <p className="text-sm font-bold">このスポット、まだ誰も投稿していません</p>
+          <p className="max-w-md text-xs text-muted-foreground">
+            最初の投稿者は<b className="text-foreground">開拓者</b>として、このページに表示され続けます。
+            匿名OK・タップだけで投稿できます。
+          </p>
+          <button
+            type="button"
+            onClick={() => window.dispatchEvent(new Event(OPEN_CATCH_REPORT_EVENT))}
+            className="mt-1 inline-flex min-h-[44px] items-center gap-2 rounded-2xl bg-gradient-to-r from-primary to-ocean-mid px-5 text-sm font-semibold text-primary-foreground shadow-md transition-transform hover:brightness-110 active:scale-[.98]"
+          >
+            🏴 開拓者になる — 釣果を投稿
+          </button>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="space-y-3">
+      {pioneerLine}
       {reports.map((report) => (
         <Card key={report.id} className="group relative py-3">
           <CardContent className="px-4">
@@ -174,6 +221,11 @@ export function CatchReportList({ spotSlug, initialReports }: CatchReportListPro
                   さんが
                   <span className="font-bold text-foreground">{report.fishName}</span>
                   を釣りました！
+                  {report.pioneer && (
+                    <span className="ml-1.5 inline-flex items-center rounded-full border border-amber-300 bg-amber-50 px-2 py-0.5 align-middle text-[10px] font-bold text-amber-800">
+                      🏴 開拓者
+                    </span>
+                  )}
                 </p>
                 <div className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-muted-foreground">
                   <span className="flex items-center gap-1">

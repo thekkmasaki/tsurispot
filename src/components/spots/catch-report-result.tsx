@@ -33,6 +33,8 @@ interface CatchReportResultProps {
   result?: PostCatchResult;
   /** 匿名時: 端末図鑑（localStorage）へ新規保存できたか */
   anonSaved: boolean;
+  /** スポット初投稿（開拓者）になったか。匿名・ログイン共通 */
+  pioneer: boolean;
   isLoggedIn: boolean;
   onClose: () => void;
   onPostAnother: () => void;
@@ -80,6 +82,7 @@ export function CatchReportResult({
   postId,
   result,
   anonSaved,
+  pioneer,
   isLoggedIn,
   onClose,
   onPostAnother,
@@ -115,6 +118,7 @@ export function CatchReportResult({
       promoted,
       anonymous: !isLoggedIn,
       newDexCount: result?.newDexSpecies.length ?? 0,
+      pioneer,
     });
     // 表示は1回だけ計測する
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -123,6 +127,21 @@ export function CatchReportResult({
   // 行の組み立て（index は表示順のスタガー用）
   const rows: React.ReactNode[] = [];
   let i = 0;
+
+  // 開拓者行は最上段（匿名にとって唯一の「サイトに名前が残る」報酬でもある）
+  if (pioneer) {
+    rows.push(
+      <GainRow
+        key="pioneer"
+        icon="🏴"
+        title={`「${spotName}」の開拓者になりました`}
+        sub="このスポット最初の投稿者として、ページに表示され続けます"
+        index={i++}
+        shown={shown}
+        highlight
+      />,
+    );
+  }
 
   if (result) {
     for (const species of result.newDexSpecies) {

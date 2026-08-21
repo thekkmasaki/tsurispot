@@ -16,6 +16,7 @@ import { trackPostSubmit } from "@/lib/analytics";
 import { addCaughtFish } from "@/hooks/use-fishdex";
 import { recordAction } from "@/hooks/use-activity";
 import { CatchReportResult } from "@/components/spots/catch-report-result";
+import { OPEN_CATCH_REPORT_EVENT } from "@/components/spots/catch-report-list";
 import type { PostCatchResult } from "@/lib/catch-result";
 
 // そのスポットで釣れる魚名 + 汎用的な人気魚種
@@ -75,6 +76,13 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
     setUserName((prev) => (prev ? prev : name));
   }, [authStatus]);
 
+  // 空状態の「開拓者になる」CTA（CatchReportList側）からフォームを開く
+  useEffect(() => {
+    const open = () => setIsOpen(true);
+    window.addEventListener(OPEN_CATCH_REPORT_EVENT, open);
+    return () => window.removeEventListener(OPEN_CATCH_REPORT_EVENT, open);
+  }, []);
+
   const rerollNickname = () => {
     const name = generateAnonNickname();
     setUserName(name);
@@ -100,6 +108,7 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
     fishName: string;
     date: string;
     anonSaved: boolean;
+    pioneer: boolean;
   } | null>(null);
 
   const handlePhotoSelect = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -201,11 +210,13 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
       if (res.ok && data.ok) {
         // 手入力した匿名ニックネームも次回のために保存する
         if (!session?.user) saveAnonNickname(userName.trim());
+        const pioneer = data.pioneer === true;
         trackPostSubmit({
           spotSlug,
           loggedIn: !!session?.user,
           hasComment: !!commentText,
           hasPhoto: !!photoUrl,
+          pioneer,
         });
 
         let anonSaved = false;
@@ -227,6 +238,7 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
           fishName: fishName.trim(),
           date,
           anonSaved,
+          pioneer,
         });
         setStatus("success");
         // フォームリセット (ニックネームは保持)
@@ -284,6 +296,7 @@ export function CatchReportForm({ spotSlug, spotName, catchableFishNames = [] }:
         postId={resultData.postId}
         result={resultData.result}
         anonSaved={resultData.anonSaved}
+        pioneer={resultData.pioneer}
         isLoggedIn={!!session?.user}
         onClose={() => {
           setStatus("idle");
