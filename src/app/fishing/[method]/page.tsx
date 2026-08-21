@@ -19,6 +19,7 @@ import {
   getFishForMethodAndMonth,
   getSpotsForMethodAndMonth,
 } from "@/lib/data/fishing-methods";
+import { REGION_GROUPS } from "@/lib/data/regions-group";
 
 interface Props {
   params: Promise<{ method: string }>;
@@ -281,6 +282,31 @@ export default async function MethodPage({ params }: Props) {
         </section>
 
         <InArticleAd />
+
+        {/* エリア別（地方×釣法ページへの導線）。
+            /fishing/[method]/area/[region] はサイト内のどこからもリンクされておらず孤立していた。
+            GA4 実測でこの型は aff/PV 1.05%（サイト平均 0.06%・スポット詳細 0.02%）と最も収益寄与が高い。 */}
+        <section className="mb-12">
+          <h2 className="text-xl font-bold mb-4 flex items-center gap-2">
+            <MapPin className="size-5" />
+            エリア別の{method.name}スポット
+          </h2>
+          <p className="text-sm text-gray-600 dark:text-gray-400 mb-4">
+            地方ごとに{method.name}ができる釣り場・釣れる魚・攻略法をまとめています。
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {REGION_GROUPS.map((region) => (
+              <Link prefetch={false} key={region.slug} href={`/fishing/${method.slug}/area/${region.slug}`}>
+                <Card className="hover:shadow-md transition-shadow h-full">
+                  <CardContent className="p-3 flex items-center justify-between gap-2">
+                    <span className="text-sm font-medium">{region.name}</span>
+                    <ChevronRight className="size-4 text-gray-400" />
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </section>
 
         {/* 他の釣り方 */}
         <section>
