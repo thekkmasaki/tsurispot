@@ -291,6 +291,23 @@ export default async function MethodRegionPage({ params }: Props) {
       }
     }
   }
+  // 地域内の県 × この釣り方ページ(/prefecture/{slug}/fishing/{method})への内部リンク。
+  // spots は表示用に上位50件へ絞ってあるため prefCounts は使わず、当該ページの
+  // getValidCombos と同一条件（県内の対応スポット3件以上）を全件から判定して実在ページだけを指す。
+  const prefMethodLinks: { prefName: string; prefSlug: string; count: number }[] = [];
+  for (const prefName of region.prefectures) {
+    const prefDef = getPrefectureByName(prefName);
+    if (!prefDef) continue;
+    const count = fishingSpots.filter(
+      (s) =>
+        s.region.prefecture === prefName &&
+        s.catchableFish.some((cf) => method.methods.includes(cf.method))
+    ).length;
+    if (count >= 3) {
+      prefMethodLinks.push({ prefName, prefSlug: prefDef.slug, count });
+    }
+  }
+  prefMethodLinks.sort((a, b) => b.count - a.count);
 
   // FAQ データ（5-6問に拡充）
   const faqItems: { question: string; answer: string }[] = [
@@ -655,6 +672,36 @@ export default async function MethodRegionPage({ params }: Props) {
                 </div>
               </div>
             )}
+          </section>
+        )}
+
+        {/* 都道府県別の釣り方ページ（/prefecture/{slug}/fishing/{method}）への内部リンク */}
+        {prefMethodLinks.length > 0 && (
+          <section className="mb-10">
+            <h2 className="text-xl font-bold mb-4">
+              都道府県別に{region.name}の{method.name}スポットを探す
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              {prefMethodLinks.map((p) => (
+                <Link prefetch={false}
+                  key={p.prefSlug}
+                  href={`/prefecture/${p.prefSlug}/fishing/${method.slug}`}
+                >
+                  <Card className="hover:shadow-md transition-shadow">
+                    <CardContent className="p-3 flex items-center gap-2">
+                      <MapPin className="size-4 text-blue-600 shrink-0" />
+                      <span className="text-sm font-medium">
+                        {p.prefName}の{method.name}
+                      </span>
+                      <span className="text-xs text-gray-500 dark:text-gray-400">
+                        {p.count}件
+                      </span>
+                      <ChevronRight className="size-4 ml-auto text-gray-400" />
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
           </section>
         )}
 

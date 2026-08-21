@@ -34,7 +34,7 @@ import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { areaGuides, type AreaGuide } from "@/lib/data/area-guides";
 import { SpotSearchFilter } from "@/components/prefecture/spot-search-filter";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
-import { MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
+import { FISHING_METHODS, MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
 import { InArticleAd, DisplayAd, StickySidebarAd } from "@/components/ads/ad-unit";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 import { ShoppingBag, ExternalLink, ArrowRight, Tag, Gem, Crown } from "lucide-react";
@@ -354,6 +354,17 @@ export default async function PrefecturePage({ params }: PageProps) {
 
   // この都道府県に関連するエリアガイド
   const prefAreaGuides = getAreaGuidesForPrefecture(pref.name);
+
+  // 県×釣り方ページ(/prefecture/{slug}/fishing/{method})への内部リンク。
+  // 表示条件は当該ページの getValidCombos と同一（対応スポット3件以上）にそろえ、実在するページだけを指す。
+  const prefMethodLinks = FISHING_METHODS.map((fm) => ({
+    method: fm,
+    count: spots.filter((s) =>
+      s.catchableFish.some((cf) => fm.methods.includes(cf.method))
+    ).length,
+  }))
+    .filter((m) => m.count >= 3)
+    .sort((a, b) => b.count - a.count);
 
   const beginnerSpots = spots.filter((s) => s.difficulty === "beginner");
   const freeSpots = spots.filter((s) => s.isFree);
@@ -1359,6 +1370,36 @@ export default async function PrefecturePage({ params }: PageProps) {
       )}
 
       <InArticleAd />
+
+      {/* 釣り方別ページ（/prefecture/{slug}/fishing/{method}）への内部リンク */}
+      {prefMethodLinks.length > 0 && (
+        <section className="mb-8 sm:mb-10">
+          <h2 className="mb-2 flex items-center gap-2 text-base font-bold sm:text-lg">
+            <Compass className="size-5 text-primary" />
+            {pref.name}の釣り方別スポット
+          </h2>
+          <p className="mb-4 text-sm text-muted-foreground">
+            狙う釣り方が決まっている方は、{pref.name}でその釣り方に対応した釣り場だけを絞り込めます。件数は掲載スポットのうち対応を確認できたものです。
+          </p>
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            {prefMethodLinks.map(({ method, count }) => (
+              <Link prefetch={false}
+                key={method.slug}
+                href={`/prefecture/${pref.slug}/fishing/${method.slug}`}
+                className="flex items-center gap-2 rounded-lg border px-3 py-2 text-sm transition-colors hover:bg-muted"
+              >
+                <span aria-hidden>{method.icon}</span>
+                <span className="font-medium">
+                  {pref.name}の{method.name}
+                </span>
+                <span className="ml-auto shrink-0 text-xs text-muted-foreground">
+                  {count}件
+                </span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* 釣りルール・注意事項リンク */}
       <section className="mb-8 sm:mb-10">
