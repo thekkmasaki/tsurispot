@@ -81,6 +81,7 @@ export function trackPostSubmit(params: {
   loggedIn: boolean;
   hasComment: boolean;
   hasPhoto: boolean;
+  pioneer?: boolean;
 }) {
   if (typeof window === "undefined" || typeof window.gtag !== "function") return;
   window.gtag("event", "post_submit", {
@@ -88,6 +89,7 @@ export function trackPostSubmit(params: {
     logged_in: params.loggedIn,
     has_comment: params.hasComment,
     has_photo: params.hasPhoto,
+    pioneer: params.pioneer ?? false,
   });
 }
 
@@ -100,12 +102,14 @@ export function trackPostResultView(params: {
   promoted: boolean;
   anonymous: boolean;
   newDexCount: number;
+  pioneer?: boolean;
 }) {
   if (typeof window === "undefined" || typeof window.gtag !== "function") return;
   window.gtag("event", "post_result_view", {
     promoted: params.promoted,
     anonymous: params.anonymous,
     new_dex_count: params.newDexCount,
+    pioneer: params.pioneer ?? false,
   });
 }
 

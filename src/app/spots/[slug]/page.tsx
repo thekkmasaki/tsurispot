@@ -74,7 +74,7 @@ import { SpotDetailTabs } from "@/components/spots/spot-detail-tabs";
 import { ParkingGuideCard, getParkingBadgeText, getParkingAmenityDescription, getParkingFaqAnswer } from "@/components/spots/parking-guide-card";
 import { FamilyInfoCard } from "@/components/spots/family-info";
 import { PackingChecklist } from "@/components/spots/packing-checklist";
-import { getCatchReportsBySpotAsync } from "@/lib/data/catch-reports";
+import { getCatchReportsBySpotAsync, getSpotPioneerAsync } from "@/lib/data/catch-reports";
 import { CatchReportList } from "@/components/spots/catch-report-list";
 import { CatchReportForm } from "@/components/spots/catch-report-form";
 import { getSpotContributionsAsync } from "@/lib/data/spot-contributions";
@@ -1093,7 +1093,12 @@ export default async function SpotDetailPage({ params }: PageProps) {
           </section>
           <section id="catch-report">
             <h3 className="mb-3 flex items-center gap-2 text-lg font-bold"><MessageSquare className="size-5" />みんなの釣果報告</h3>
-            <CatchReportList spotSlug={slug} initialReports={catchReports} />
+            <CatchReportList
+              spotSlug={slug}
+              initialReports={catchReports}
+              pioneer={await getSpotPioneerAsync(slug)}
+              allowPosting={spot.fishingBan?.scope !== "full"}
+            />
             {/* 釣り禁止スポットでは釣果報告を受け付けない（違法行為の記録・助長になるため）。
                 既存投稿の一覧は、いつまでの釣果かを示す記録として残す。 */}
             {spot.fishingBan?.scope === "full" ? (

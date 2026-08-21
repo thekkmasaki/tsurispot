@@ -15,6 +15,16 @@ export interface CatchReport {
   method?: string; // 釣法
   weather?: string; // 天候
   submittedAt?: string; // 投稿日時(ISO)。UGC投稿時に設定。型と実値の整合用
+  pioneer?: boolean; // スポット初投稿（開拓者）。一覧の🏴バッジ表示用
+}
+
+/** スポット開拓者（SPOT#{slug}/PIONEER・TTLなしの永続レコード） */
+export interface SpotPioneer {
+  userName: string;
+  tsuriId?: string;
+  date: string;
+  reportId: string;
+  at: string;
 }
 
 // サンプル釣果データ（承認済み）
@@ -116,4 +126,20 @@ export async function getCatchReportsBySpotAsync(
     merged.push(r);
   }
   return merged.sort((a, b) => b.date.localeCompare(a.date));
+}
+
+/**
+ * スポット開拓者（最初の投稿者）の永続レコードを取得。
+ * 遡及なし運用のため、機能リリース以前に投稿があったスポットではレコード自体が存在しない。
+ * Server Component専用。
+ */
+export async function getSpotPioneerAsync(spotSlug: string): Promise<SpotPioneer | null> {
+  if (process.env.NEXT_PHASE === "phase-production-build") return null;
+  try {
+    const { dbGet } = await import("@/lib/dynamodb");
+    return await dbGet<SpotPioneer>(`SPOT#${spotSlug}`, "PIONEER");
+  } catch (err) {
+    console.error("[catch-reports] PIONEER fetch error:", err);
+    return null;
+  }
 }

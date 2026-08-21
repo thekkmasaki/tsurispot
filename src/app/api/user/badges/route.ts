@@ -11,6 +11,7 @@ interface CatchReport {
   photoUrl?: string;
   sizeCm?: number;
   method?: string;
+  pioneer?: boolean; // スポット初投稿（開拓者）フラグ。投稿API側で付与
 }
 
 interface Badge {
@@ -53,6 +54,9 @@ export async function GET() {
   const user = await getUserById(userId);
   const reportCount = user?.reportCount ?? reports.length;
   const uniqueFishCount = new Set(reports.map((r) => r.fishName).filter(Boolean)).size;
+  const pioneerCount = new Set(
+    reports.filter((r) => r.pioneer).map((r) => r.spotSlug).filter(Boolean),
+  ).size;
   const uniqueSpotCount = new Set(reports.map((r) => r.spotSlug).filter(Boolean)).size;
   const uniqueMethodCount = new Set(reports.map((r) => r.method).filter(Boolean)).size;
   const photoCount = reports.filter((r) => r.photoUrl).length;
@@ -84,6 +88,28 @@ export async function GET() {
       description: "初めての釣果を投稿",
       currentValue: Math.min(reportCount, 1),
       targetValue: 1,
+    },
+    {
+      code: "pioneer_1",
+      label: "開拓者",
+      emoji: "🏴",
+      className: "bg-amber-500 text-white",
+      earned: pioneerCount >= 1,
+      progress: Math.min(pioneerCount, 1),
+      description: "スポットに最初の釣果を投稿",
+      currentValue: Math.min(pioneerCount, 1),
+      targetValue: 1,
+    },
+    {
+      code: "pioneer_5",
+      label: "ベテラン開拓者",
+      emoji: "⛺",
+      className: "bg-orange-600 text-white",
+      earned: pioneerCount >= 5,
+      progress: Math.min(pioneerCount / 5, 1),
+      description: "5スポットで最初の釣果を投稿",
+      currentValue: pioneerCount,
+      targetValue: 5,
     },
     {
       code: "fish_collector_5",
