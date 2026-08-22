@@ -783,7 +783,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   // ===== 平塚・大磯エリア (r7 湘南) =====
   {
     id: "ss22", name: "平塚新港（ひらつかタマ三郎漁港）", slug: "hiratsuka-shinko",
-    description: "平塚市のメイン漁港。愛称「ひらつかタマ三郎漁港」。堤防釣りでアジ・サバのサビキが好調。秋冬はタチウオの名所としても有名。釣り場が広く混雑しにくい。",
+    description: "8〜12月はタチウオの名所として知られる平塚市のメイン漁港。夕マヅメから電気ウキやテンヤで狙える。春から秋はアジ・サバのサビキ、キスの投げ釣りも好調。無料駐車場とトイレがあり近くに釣具店も。釣り場が広く混雑しにくいので初めての堤防釣りにも向く。",
     latitude: 35.3190, longitude: 139.3590, address: "〒254-0803 神奈川県平塚市千石河岸57",
     accessInfo: "JR平塚駅南口からバス「須賀港」下車徒歩5分。",
     region: region("r7"), spotType: "port", difficulty: "beginner",
