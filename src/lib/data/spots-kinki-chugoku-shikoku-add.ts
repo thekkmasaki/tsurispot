@@ -586,7 +586,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   // ===== 島根県 =====
   {
     id: "s-kcsadd-025", name: "温泉津港", slug: "yunotsu-port",
-    description: "島根県大田市温泉津町にある漁港。世界遺産・石見銀山の積出港として栄えた歴史ある港。アジ・メバルの好ポイントで、秋にはアオリイカも好調。温泉津温泉に浸かった後の夜釣りが贅沢。",
+    description: "9〜12月のアオリイカと夕マヅメのアジサビキが狙える漁港。夜は穴釣りのカサゴ、11〜4月はメバリングが本命になる。日中はキスの投げ釣りもできる。世界遺産・石見銀山の積出港として栄えた歴史ある港で、駐車スペースとトイレを備え無料で竿を出せる。",
     latitude: 35.0942, longitude: 132.3388, address: "〒699-2501 島根県大田市温泉津町温泉津イ794-1",
     accessInfo: "JR温泉津駅から徒歩約15分。山陰自動車道温泉津ICから約10分。",
     region: region("r3013"), spotType: "port", difficulty: "beginner",
@@ -869,7 +869,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-036", name: "玉島港・E地区", slug: "tamashima-e-chiku",
-    description: "岡山県倉敷市玉島の工業港周辺。E地区と呼ばれる護岸エリアが釣り人に開放されており、チヌ・シーバス・ヒラメなどが狙える。足場が良く、車を横付けして釣りができるポイントもある。夜のシーバスゲームが特に人気。",
+    description: "車を横付けできる護岸で夜のシーバスが狙えるE地区。チヌはフカセや落とし込み、7〜12月はハゼのちょい投げが手軽。朝マヅメはヒラメの実績もある。無料で足場が良く、近くにコンビニもあるためファミリーの半日釣行にも向く。工業港のため大型車両の通行には注意したい。",
     latitude: 34.5412, longitude: 133.6878, address: "〒713-8103 岡山県倉敷市玉島乙島",
     accessInfo: "JR新倉敷駅から車で約15分。山陽自動車道玉島ICから約10分。",
     region: region("r3018"), spotType: "port", difficulty: "beginner",
