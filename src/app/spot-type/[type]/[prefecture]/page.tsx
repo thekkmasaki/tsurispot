@@ -12,6 +12,8 @@ import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import type { FishingSpot } from "@/types";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { SeasonalAffiliateSection } from "@/components/seasonal-affiliate-section";
+import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 
 type PageProps = {
   params: Promise<{ type: string; prefecture: string }>;
@@ -134,6 +136,17 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
   const methodBreakdown = Array.from(methodMap.entries())
     .map(([method, count]) => ({ method, count }))
     .sort((a, b) => b.count - a.count);
+
+  // 釣り場タイプ×釣法×魚種で文脈スコアリングした装備レコメンド（収益導線）。
+  // 10,346PV に対し affiliateClick 0 件＝収益枠が1つも無い型だった（2026-08-23 実測）。
+  const affiliateProducts = getRelevantAffiliateProducts(
+    methodBreakdown.map((m) => m.method),
+    new Date().getMonth() + 1,
+    3,
+    false,
+    pref.name,
+    topFish.slice(0, 3).map((f) => f.name)
+  );
 
   // 同タイプの他県
   const otherPrefsForType = new Map<
@@ -400,6 +413,13 @@ export default async function SpotTypePrefecturePage({ params }: PageProps) {
             ))}
         </div>
       </section>
+
+      {/* おすすめ装備（アフィリエイト）: スポット一覧の直後＝道具の必要性が最も高まる位置。 */}
+      <SeasonalAffiliateSection
+        products={affiliateProducts}
+        seasonLabel={`${pref.name}の${label}`}
+        regionName=""
+      />
 
       {/* 同県の他タイプ */}
       {otherTypesInPref.length > 0 && (

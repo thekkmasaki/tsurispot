@@ -570,6 +570,15 @@ export default async function PrefectureFishPage({ params }: PageProps) {
         </section>
       )}
 
+      {/* おすすめ装備（アフィリエイト）: 釣り方の攻略法を読み終えた直後＝道具の必要性が最も高まる位置に配置。
+          収益密度トップの /fishing/[method]/area/[region]（aff/PV 1.079%）と同じ「攻略手順の直後」順序に揃える。
+          従来はページ最下部（FAQ直前）で aff/PV 0.072% だった（2026-08-23 実測・44,441PVに対しaffClick 32）。 */}
+      <SeasonalAffiliateSection
+        products={affiliateProducts}
+        seasonLabel={`${pref.name}の${fish.name}`}
+        regionName=""
+      />
+
       {/* 月別ベストタイミング・時間帯 */}
       <section className="mb-8 sm:mb-10">
         <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
@@ -768,13 +777,6 @@ export default async function PrefectureFishPage({ params }: PageProps) {
           </Card>
         </section>
       )}
-
-      {/* おすすめ装備（アフィリエイト） */}
-      <SeasonalAffiliateSection
-        products={affiliateProducts}
-        seasonLabel={`${pref.name}の${fish.name}`}
-        regionName=""
-      />
 
       {/* よくある質問 */}
       <section className="mb-8 sm:mb-10">
