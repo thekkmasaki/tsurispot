@@ -25,7 +25,7 @@ export const FISHING_METHODS: FishingMethodDef[] = [
   {
     slug: "choinage",
     name: "ちょい投げ",
-    methods: ["ちょい投げ", "投げ釣り", "ぶっこみ釣り"],
+    methods: ["ちょい投げ", "投げ釣り", "ぶっこみ釣り", "ぶっ込み釣り", "ブッコミ釣り", "ブッコミ", "チョイ投げ"],
     icon: "🏖️",
     guide: "/guide/choinage",
     description:
@@ -58,6 +58,16 @@ export const FISHING_METHODS: FishingMethodDef[] = [
       "アジング",
       "ショアジギング",
       "サーフルアーフィッシング",
+      "ワーム",
+      "ルアー釣り",
+      "ルアーフィッシング",
+      "ルアー全般",
+      "ルアー（スプーン）",
+      "ルアー（ミノー）",
+      "ルアー（トップウォーター）",
+      "ルアー（クランク）",
+      "ルアー（トラウト）",
+      "ルアー（サーフ）",
     ],
     icon: "🐟",
     guide: "/guide/lure",
@@ -67,7 +77,7 @@ export const FISHING_METHODS: FishingMethodDef[] = [
   {
     slug: "anazuri",
     name: "穴釣り",
-    methods: ["穴釣り", "ブラクリ釣り", "穴釣り（磯）", "穴釣り・石積み釣り"],
+    methods: ["穴釣り", "ブラクリ釣り", "ブラクリ", "穴釣り（磯）", "穴釣り・石積み釣り", "穴釣り・根魚釣り", "穴釣り（外道）"],
     icon: "🪨",
     guide: "/guide/anazuri",
     description:
@@ -85,7 +95,7 @@ export const FISHING_METHODS: FishingMethodDef[] = [
   {
     slug: "oyogase",
     name: "泳がせ釣り",
-    methods: ["泳がせ釣り", "泳がせ釣り（ノマセ釣り）", "泳がせ釣り（堤防）"],
+    methods: ["泳がせ釣り", "泳がせ釣り（ノマセ釣り）", "泳がせ釣り（堤防）", "のませ釣り"],
     icon: "🐠",
     guide: "/guide/oyogase",
     description:
