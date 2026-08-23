@@ -9,6 +9,8 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { PageHeader } from "@/components/ui/page-header";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { toListSpot } from "@/lib/data/list-spot";
+import { SeasonalAffiliateSection } from "@/components/seasonal-affiliate-section";
+import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 
 // ISR: 1時間ごとに再検証 (Cloudflare cache 効率と App Runner 負荷低減のため SSG/ISR を採用)
 export const revalidate = 3600;
@@ -18,6 +20,18 @@ const sc = fishingSpots.length.toLocaleString();
 // 全 FishingSpot をクライアントに渡すと JS バンドル / RSC ペイロードが肥大化するため、
 // 一覧カードに必要な軽量 ListSpot に絞ってから SpotListClient へ渡す（CWV改善）。
 const listSpots = fishingSpots.map(toListSpot);
+
+// 掲載スポット全体で最も多い釣り方（装備レコメンドの文脈スコアリングに使う）。
+// 一覧ページは 1,555PV に対し affiliateClick 0 件＝収益枠が1つも無い状態だった（2026-08-23 実測）。
+const nationalMethodCount = new Map<string, number>();
+for (const spot of fishingSpots) {
+  for (const cf of spot.catchableFish) {
+    nationalMethodCount.set(cf.method, (nationalMethodCount.get(cf.method) || 0) + 1);
+  }
+}
+const nationalMethods = Array.from(nationalMethodCount.entries())
+  .sort((a, b) => b[1] - a[1])
+  .map(([method]) => method);
 
 export const metadata: Metadata = {
   title: `全国${sc}+の釣りスポット・釣り場を検索｜子連れ・初心者向けの穴場も`,
@@ -161,6 +175,9 @@ const spotsFaqJsonLd = {
 };
 
 export default function SpotsPage() {
+  const currentMonth = new Date().getMonth() + 1; // ISR(revalidate=3600)で毎時更新される
+  const affiliateProducts = getRelevantAffiliateProducts(nationalMethods, currentMonth, 3);
+
   return (
     <div className="container mx-auto px-4 py-6 sm:py-8">
       <script
@@ -204,6 +221,14 @@ export default function SpotsPage() {
       <Suspense fallback={<SpotListFallback spots={listSpots} />}>
         <SpotListClient spots={listSpots} />
       </Suspense>
+
+      {/* おすすめ装備（収益導線）: スポット一覧を見終えた直後＝釣行準備で道具の必要性が最も高まる位置。
+          収益密度トップの /fishing/[method]/area/[region]（aff/PV 1.079%）と同じ「一覧・攻略の直後」順序に揃える。 */}
+      <SeasonalAffiliateSection
+        products={affiliateProducts}
+        seasonLabel={`${currentMonth}月`}
+        regionName=""
+      />
 
       {/* 初心者CTA */}
       <div className="mt-8 rounded-2xl border-2 border-emerald-200 bg-gradient-to-r from-emerald-50 to-teal-50 p-5 sm:p-6">

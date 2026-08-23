@@ -21,6 +21,8 @@ import { fishSpecies } from "@/lib/data/fish";
 import { getPrefectureByName } from "@/lib/data/prefectures";
 import { DIFFICULTY_LABELS } from "@/types";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { SeasonalAffiliateSection } from "@/components/seasonal-affiliate-section";
+import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 
 // エリアガイドの魚名 → fishSpecies の名前へのマッピング（表記揺れ対応）
 const FISH_NAME_ALIASES: Record<string, string> = {
@@ -123,6 +125,27 @@ export default async function AreaGuideDetailPage({
 
   const allSpots = getAreaSpots(guide.prefectures);
   const top10 = allSpots.slice(0, 10);
+
+  // エリア内スポットの釣り方×主要魚種で文脈スコアリングした装備レコメンド（収益導線）。
+  // 同じ getRelevantAffiliateProducts を使う /fishing/[method]/area/[region] は aff/PV 1.079% だが、
+  // このエリアガイドは 28ページ 1,298PV に対し affiliateClick 0 件＝収益枠が1つも無い状態だった（2026-08-23 実測）。
+  const areaMethodCount = new Map<string, number>();
+  for (const spot of allSpots) {
+    for (const cf of spot.catchableFish) {
+      areaMethodCount.set(cf.method, (areaMethodCount.get(cf.method) || 0) + 1);
+    }
+  }
+  const areaMethods = Array.from(areaMethodCount.entries())
+    .sort((a, b) => b[1] - a[1])
+    .map(([method]) => method);
+  const affiliateProducts = getRelevantAffiliateProducts(
+    areaMethods,
+    new Date().getMonth() + 1,
+    3,
+    false,
+    guide.prefectures[0],
+    guide.mainFish.slice(0, 3)
+  );
   const beginnerSpots = allSpots
     .filter((s) => s.difficulty === "beginner")
     .slice(0, 3);
@@ -594,6 +617,14 @@ export default async function AreaGuideDetailPage({
               ))}
             </div>
           </section>
+
+          {/* おすすめ装備（収益導線）: 攻略Tipsを読み終えた直後＝道具の必要性が最も高まる位置。
+              収益密度トップの /fishing/[method]/area/[region]（aff/PV 1.079%）と同じ「攻略手順の直後」順序に揃える。 */}
+          <SeasonalAffiliateSection
+            products={affiliateProducts}
+            seasonLabel={guide.name}
+            regionName=""
+          />
 
           {/* 関連エリアガイド */}
           {relatedGuides.length > 0 && (

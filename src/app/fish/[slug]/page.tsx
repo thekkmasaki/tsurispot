@@ -963,6 +963,29 @@ export default async function FishDetailPage({ params }: PageProps) {
       )}
 
 
+      {/* この魚を釣るための道具（収益導線）: 「◯◯の釣り方・仕掛け」を読み終えた直後＝道具の必要性が最も高まる位置。
+          収益密度トップの /fishing/[method]/area/[region]（aff/PV 1.079%）と同じ「攻略手順の直後」順序に揃える。
+          従来は食べ方・参考動画・動画埋め込みの後（ページ下部77%地点）で aff/PV 0.245% だった
+          （2026-08-23 実測・116ページ 2,852PV に対し affiliateClick 7）。 */}
+      {(() => {
+        const fishProducts = getProductsByFish(slug);
+        const displayProducts = fishProducts.length > 0 ? fishProducts : getTopProducts(3);
+        return (
+          <section className="mb-6 sm:mb-8">
+            <ProductList
+              products={displayProducts}
+              title={`${fish.name}を釣るための道具`}
+              description={
+                fishProducts.length > 0
+                  ? `${fish.name}釣りにおすすめのアイテムを厳選しました。`
+                  : "まずは基本の道具を揃えて釣りを始めましょう。"
+              }
+              maxItems={3}
+            />
+          </section>
+        );
+      })()}
+
       {/* 広告（釣り方セクション後） */}
       <LazyAd className="my-6"><DisplayAd /></LazyAd>
 
@@ -1015,26 +1038,6 @@ export default async function FishDetailPage({ params }: PageProps) {
             />
           </section>
         ) : null;
-      })()}
-
-      {/* この魚を釣るための道具 */}
-      {(() => {
-        const fishProducts = getProductsByFish(slug);
-        const displayProducts = fishProducts.length > 0 ? fishProducts : getTopProducts(3);
-        return (
-          <section className="mb-6 sm:mb-8">
-            <ProductList
-              products={displayProducts}
-              title={`${fish.name}を釣るための道具`}
-              description={
-                fishProducts.length > 0
-                  ? `${fish.name}釣りにおすすめのアイテムを厳選しました。`
-                  : "まずは基本の道具を揃えて釣りを始めましょう。"
-              }
-              maxItems={3}
-            />
-          </section>
-        );
       })()}
 
       {/* 関連する魚種（折りたたみ） */}
