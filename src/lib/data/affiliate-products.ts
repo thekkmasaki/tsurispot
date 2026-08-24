@@ -94,7 +94,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     url: "https://amzn.to/4rLFPqc",
     description: "エギング専用ロッド。しゃくりやすい軽量設計で、アオリイカやヤリイカ狙いに最適です。",
     methodKeywords: ["エギング"],
-    fishKeywords: ["アオリイカ", "イカ", "コウイカ", "ヤリイカ", "モンゴウイカ"],
+    fishKeywords: ["アオリイカ", "コウイカ", "ヤリイカ", "ケンサキイカ", "スルメイカ", "モンゴウイカ"],
     seasons: ["all"],
     category: "tackle",
     priceRange: "¥5,000〜10,000",
@@ -148,7 +148,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     url: "https://amzn.to/3Nc9r10",
     description: "2.5号・3.0号・3.5号の餌木10本セット。ラトル内蔵で集魚力抜群、夜光タイプで夜釣りにも対応。アオリイカ・ヤリイカ・タコ狙いに。",
     methodKeywords: ["エギング", "タコエギ"],
-    fishKeywords: ["アオリイカ", "イカ", "コウイカ", "ヤリイカ", "タコ", "マダコ"],
+    fishKeywords: ["アオリイカ", "コウイカ", "ヤリイカ", "ケンサキイカ", "スルメイカ", "マダコ", "イイダコ"],
     seasons: ["all"],
     category: "tackle",
     priceRange: "¥1,500〜2,500",
@@ -158,7 +158,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     name: "第一精工 受太郎 竿受け",
     url: "https://amzn.to/4cuGPu5",
     description: "堤防の柵やパイプに取り付けられる竿受け。ぶっこみ釣りやサビキの置き竿に便利で、両手が空くので仕掛け交換も楽々。",
-    methodKeywords: ["サビキ", "ちょい投げ", "投げ釣り", "ぶっこみ", "胴突き", "泳がせ"],
+    methodKeywords: ["サビキ", "ちょい投げ", "投げ釣り", "ぶっこみ", "ぶっ込み", "ブッコミ", "胴突き", "泳がせ", "吸い込み", "吸込み", "石鯛", "打ち込み", "筏釣り"],
     seasons: ["all"],
     category: "accessory",
     priceRange: "¥1,000〜2,000",
@@ -168,7 +168,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     name: "ハリス（フロロカーボン）",
     url: "https://amzn.to/408jI1f",
     description: "フカセ釣りやウキ釣りに欠かせないハリス。魚に警戒されにくいフロロカーボン素材で、食い渋り時にも効果的です。",
-    methodKeywords: ["フカセ", "ウキ釣り", "ウキフカセ", "カゴ釣り", "落とし込み", "ヘチ釣り", "胴突き", "探り釣り"],
+    methodKeywords: ["フカセ", "ウキ釣り", "ウキフカセ", "カゴ釣り", "落とし込み", "ヘチ釣り", "胴突き", "探り釣り", "エサ釣り", "餌釣り", "ミャク釣り", "石鯛", "ヘラブナ", "ヘラ釣り", "へら竿", "ダンゴ釣り", "タナゴ", "延べ竿", "紀州釣り", "前打ち", "筏釣り", "渚釣り"],
     seasons: ["all"],
     category: "tackle",
     priceRange: "¥300〜800",
@@ -178,7 +178,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     name: "フロロカーボンライン",
     url: "https://amzn.to/4tKXyzu",
     description: "感度が高く根ズレに強いフロロカーボンライン。ルアーフィッシングのリーダーやメインラインに最適です。",
-    methodKeywords: ["ルアー", "エギング", "アジング", "メバリング", "ショアジギ", "サーフルアー", "ワインド", "渓流ルアー"],
+    methodKeywords: ["ルアー", "エギング", "アジング", "メバリング", "ショアジギ", "サーフルアー", "ワインド", "渓流ルアー", "ワーム", "ロックフィッシュ", "テキサスリグ", "ミノー", "スプーン", "トップウォーター", "フロッグ", "渓流釣り", "タイラバ"],
     seasons: ["all"],
     category: "tackle",
     priceRange: "¥500〜1,500",
@@ -219,7 +219,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     name: "マルキュー アミ姫（コマセ）",
     url: "https://amzn.to/4c6gaUn",
     description: "チューブタイプで手が汚れにくいコマセ。フルーティーな香りでにおいも少なく、サビキ釣りの必須アイテムです。",
-    methodKeywords: ["サビキ"],
+    methodKeywords: ["サビキ", "カゴ釣り"],
     fishKeywords: ["アジ", "イワシ", "サバ", "サッパ", "コノシロ", "メバル"],
     seasons: ["all"],
     category: "bait",
@@ -230,7 +230,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     name: "東レ PEライン（道糸）",
     url: "https://amzn.to/4s45H0i",
     description: "日本繊維メーカー最大手・東レ製のPEライン。感度と強度に優れ、ルアーフィッシングやショアジギングの道糸に最適です。",
-    methodKeywords: ["ルアー", "ショアジギ", "エギング", "アジング", "メバリング", "サーフルアー", "ワインド", "ジギング"],
+    methodKeywords: ["ルアー", "ショアジギ", "エギング", "アジング", "メバリング", "サーフルアー", "ワインド", "ジギング", "タイラバ", "イカメタル", "ロックフィッシュ", "フロッグ", "ビッグベイト", "トローリング"],
     seasons: ["all"],
     category: "tackle",
     priceRange: "¥1,000〜2,500",
@@ -240,7 +240,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     name: "東レ ナイロンライン（道糸）",
     url: "https://amzn.to/4s1SPaX",
     description: "視認性が高く天候を選ばず見やすいナイロンライン。強度も高く風にも強い。アタリの把握がしやすいと好評です。",
-    methodKeywords: ["サビキ", "ウキ釣り", "フカセ", "カゴ釣り", "投げ釣り", "ちょい投げ", "胴突き"],
+    methodKeywords: ["サビキ", "ウキ釣り", "フカセ", "カゴ釣り", "投げ釣り", "ちょい投げ", "胴突き", "穴釣り", "エサ釣り", "餌釣り", "ワカサギ", "吸い込み", "吸込み", "ヘラブナ", "ヘラ釣り", "へら竿", "延べ竿", "タナゴ", "ミャク釣り", "ダンゴ釣り", "紀州釣り"],
     seasons: ["all"],
     category: "tackle",
     priceRange: "¥500〜1,500",
@@ -280,7 +280,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     name: "偏光サングラス",
     url: "https://amzn.to/3ZPBnuq",
     description: "水面の反射を抑えて魚が見える偏光グラス。調光レンズで天候を選ばず使えます。軽量コンパクトフレームで長時間でも快適。",
-    methodKeywords: ["サイトフィッシング", "エギング", "アジング", "メバリング", "渓流ルアー"],
+    methodKeywords: ["サイトフィッシング", "エギング", "アジング", "メバリング", "渓流ルアー", "友釣り", "渓流釣り", "テンカラ", "フライ", "毛バリ", "毛鉤", "毛針", "毛ばり", "ワーム", "ロックフィッシュ", "前打ち", "ヘチ釣り"],
     seasons: ["all"],
     category: "accessory",
     priceRange: "¥2,000〜5,000",
@@ -311,7 +311,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     name: "おもりセット",
     url: "https://amzn.to/4cFGDbl",
     description: "意外と忘れがちなおもり。まとめ買いがお得です。",
-    methodKeywords: ["ちょい投げ", "投げ釣り", "ウキ釣り", "カゴ釣り", "胴突き", "探り釣り", "ぶっこみ"],
+    methodKeywords: ["ちょい投げ", "チョイ投げ", "投げ釣り", "ウキ釣り", "カゴ釣り", "胴突き", "探り釣り", "ぶっこみ", "ぶっ込み", "ブッコミ", "穴釣り", "ブラクリ", "ミャク釣り", "エサ釣り", "餌釣り"],
     seasons: ["all"],
     category: "tackle",
     priceRange: "¥300〜800",
@@ -321,7 +321,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     name: "スナップ（まとめ買い）",
     url: "https://amzn.to/4c9oMcU",
     description: "ルアーや仕掛けの交換に必須のスナップ。まとめ買いが断然お得です。",
-    methodKeywords: ["ルアー", "エギング", "アジング", "メバリング", "ショアジギ", "サーフルアー", "ワインド"],
+    methodKeywords: ["ルアー", "エギング", "アジング", "メバリング", "ショアジギ", "サーフルアー", "ワインド", "ワーム", "ミノー", "スプーン", "タイラバ", "ロックフィッシュ", "トップウォーター"],
     seasons: ["all"],
     category: "tackle",
     priceRange: "¥300〜600",
@@ -331,7 +331,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     name: "ロッドスタンド",
     url: "https://amzn.to/3OwwVy8",
     description: "タックルボックスに設置できるロッドスタンド。ぶっこみ釣りや泳がせ釣りがとても楽になります。",
-    methodKeywords: ["ぶっこみ", "泳がせ", "投げ釣り", "ちょい投げ"],
+    methodKeywords: ["ぶっこみ", "ぶっ込み", "ブッコミ", "泳がせ", "投げ釣り", "ちょい投げ", "吸い込み", "吸込み", "石鯛", "打ち込み"],
     seasons: ["all"],
     category: "accessory",
     priceRange: "¥1,500〜3,000",
@@ -381,7 +381,7 @@ export const affiliateProducts: AffiliateProduct[] = [
     name: "ジェット天秤",
     url: "https://amzn.to/4l7BnQg",
     description: "ちょい投げ・投げ釣りの必需品。遠投性能が高く、海底を引いても根がかりしにくい設計です。",
-    methodKeywords: ["ちょい投げ", "投げ釣り", "カレイ", "キス"],
+    methodKeywords: ["ちょい投げ", "チョイ投げ", "投げ釣り", "カレイ", "キス", "ぶっ込み", "打ち込み"],
     seasons: ["all"],
     category: "tackle",
     priceRange: "¥300〜600",
@@ -475,6 +475,8 @@ export function getRelevantAffiliateProducts(
     })
     .map((product) => {
       let score = 0;
+      // 釣り方キーワードが実際にこの釣り場の釣法と一致した数（表示枠の文脈判定に使う）
+      let methodMatchCount = 0;
 
       // 高単価商品ボーナス（紹介料が高い商品を優先）
       if (HIGH_VALUE_PRODUCT_IDS.has(product.id)) {
@@ -493,13 +495,12 @@ export function getRelevantAffiliateProducts(
         }
       } else {
         // 釣り方マッチ（上限30点 = 3マッチまで）
-        let matchCount = 0;
         for (const method of methods) {
-          if (matchCount >= 3) break;
+          if (methodMatchCount >= 3) break;
           for (const keyword of product.methodKeywords) {
             if (method.includes(keyword)) {
               score += 10;
-              matchCount++;
+              methodMatchCount++;
               break;
             }
           }
@@ -525,10 +526,28 @@ export function getRelevantAffiliateProducts(
         score += 15;
       }
 
-      return { product, score };
+      return { product, score, methodMatched: methodMatchCount > 0 };
     })
     .filter((item) => item.score > 0)
     .sort((a, b) => b.score - a.score);
 
-  return scored.slice(0, maxItems).map((item) => item.product);
+  const picked = scored.slice(0, maxItems);
+
+  // 表示枠が広い面（スポット詳細=6枠）では、高単価ボーナス(+30)と編集部おすすめ(+20)だけで
+  // 上位が埋まり切り、どの釣り場でも同じ商品が並ぶ。「この釣り場の釣り方に合った装備」という
+  // 見出しに対し、釣り方キーワードを持つのに1つもマッチしていない商品（例: エギングをしない
+  // 釣り場でのエギングロッド）が残るのは文脈違いなので、後半枠は実際にマッチした商品へ譲る。
+  // 釣り方キーワードを持たない商品（ライフジャケット等の釣法非依存アイテム）は差し替え対象外。
+  if (maxItems >= 5) {
+    const pickedIds = new Set(picked.map((item) => item.product.id));
+    const contextual = scored.filter((item) => item.methodMatched && !pickedIds.has(item.product.id));
+    for (let i = picked.length - 1; i >= 4 && contextual.length > 0; i--) {
+      const item = picked[i];
+      if (item.product.methodKeywords.length > 0 && !item.methodMatched) {
+        picked[i] = contextual.shift()!;
+      }
+    }
+  }
+
+  return picked.map((item) => item.product);
 }
