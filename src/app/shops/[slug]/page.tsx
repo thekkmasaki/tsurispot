@@ -18,6 +18,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 import { tackleShops, getShopBySlug } from "@/lib/data/shops";
+import { composeMetaDescription, firstSentence } from "@/lib/seo/meta-description";
 import { getMonthlyGuideByMonth, monthSlugs } from "@/lib/data/monthly-guides";
 import { fishSpecies } from "@/lib/data/fish";
 import { getSpotBySlug, fishingSpots } from "@/lib/data/spots";
@@ -40,6 +41,31 @@ export async function generateStaticParams() {
   return tackleShops.map((shop) => ({ slug: shop.slug }));
 }
 
+/**
+ * SERP のタイトルに載せられる営業時間表記を返す。
+ * businessHours は自由記述。"平日 6:00〜21:00 / 土 5:00〜22:00" や
+ * "4/16〜12/16: 5:00〜18:00 / …" のように曜日・季節で変わる店は、片方だけを
+ * 単独表記にするとタイトルが誤情報になるため実値を出さない（description には全文が載る）。
+ * 通年で単一レンジの店と "24時間営業" の店だけを対象にする。
+ */
+function shortBusinessHours(businessHours: string): string {
+  const value = businessHours.trim();
+  if (value === "24時間営業") return "24時間営業";
+  const single = value.match(/^\d{1,2}:\d{2}\s*[〜~ー－-]\s*\d{1,2}:\d{2}$/);
+  return single ? value.replace(/\s+/g, "") : "";
+}
+
+/**
+ * タイトルに載せられる短い定休日表記を返す。
+ * "月曜日（祝日の場合は翌日休、定休日でも朝9時まで営業）" のような注記付きは
+ * 切り取ると誤情報になるため載せない（description には全文が載る）。
+ */
+function shortClosedDays(closedDays: string): string {
+  const value = closedDays.trim();
+  if (!value || value === "お問い合わせください" || [...value].length > 8) return "";
+  return value;
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -51,16 +77,65 @@ export async function generateMetadata({
 
   const isSample = slug === "sample-premium" || slug === "sample-basic" || slug === "sample-free";
 
+  const area = `${shop.region.prefecture}${shop.region.areaName}`;
+  const hours = shortBusinessHours(shop.businessHours);
+  const closed = shortClosedDays(shop.closedDays);
+
+  // 流入クエリの実測: 「〇〇 営業時間」系 3,966imp が CTR 1.59%（平均順位 8.09）で、
+  // 順位 5 位でも 0 クリックのページが並ぶ。旧メタは「営業時間」というラベルだけで実値が
+  // タイトルになく、description でも実値の開始位置が中央値 131 字目＝スニペット圏外だった
+  // （120 字以内に営業時間が入るのは 569 店中 29 店）。実値を前方に出して一致させる。
+  // タイトルは表示幅（全角 32 字前後）で切れるため、店名＋営業時間の実値を最優先に貪欲組み立て。
+  let title = hours ? `${shop.name}の営業時間｜${hours}` : `${shop.name}の営業時間・定休日`;
+  const areaTail = `｜${area}の釣具店`;
+  // 表示上限 32 字に収まる範囲で「定休日 → エリア」の順に足す（優先度の低い方から落とす）。
+  for (const tail of [hours && closed ? `・${closed}` : "", areaTail]) {
+    if (tail && [...title].length + [...tail].length <= 32) title += tail;
+  }
+
+  const baitStock = [
+    shop.hasLiveBait ? "活きエサ" : "",
+    shop.hasFrozenBait ? "冷凍エサ" : "",
+    shop.hasRentalRod ? "レンタルロッド" : "",
+  ]
+    .filter(Boolean)
+    .join("・");
+  // shop.description が営業時間から書き起こしている店があるので、重複する場合は落とす。
+  const shopLead = firstSentence(shop.description, 60);
+  const description = composeMetaDescription(
+    [
+      `${shop.name}（${area}）の営業時間は${shop.businessHours}。`,
+      shop.closedDays && shop.closedDays !== "お問い合わせください"
+        ? `定休日は${shop.closedDays}。`
+        : false,
+      `所在地は${shop.address.replace(/^〒\d{3}-\d{4}\s*/, "")}${shop.phone ? `、電話は${shop.phone}` : ""}。`,
+      baitStock
+        ? `${baitStock}の取扱あり${shop.hasParking ? "、駐車場あり" : ""}。`
+        : shop.hasParking
+          ? "駐車場あり。"
+          : false,
+      shopLead && !shopLead.startsWith("営業時間") && !shopLead.startsWith("定休日")
+        ? shopLead
+        : false,
+    ],
+    {
+      fallbackTail: [
+        `${area}で釣行前にエサ・仕掛けを揃えられる釣具店です。`,
+        "近くの釣りスポット情報もあわせて掲載しています。",
+      ],
+    },
+  );
+
   return {
-    title: `${shop.name}（${shop.region.prefecture}${shop.region.areaName}）| 営業時間・アクセス・エサ情報`,
-    description: `${shop.region.prefecture}${shop.region.areaName}の${shop.name}。${shop.description} 営業時間: ${shop.businessHours}。${shop.hasLiveBait ? "活きエサ取扱あり。" : ""}${shop.hasFrozenBait ? "冷凍エサ取扱あり。" : ""}${shop.hasRentalRod ? "レンタルロッドあり。" : ""}${shop.hasParking ? "駐車場あり。" : ""}近くの釣りスポット情報も掲載。`,
+    title,
+    description,
     ...(isSample ? { robots: { index: false, follow: false } } : {}),
     alternates: {
       canonical: `https://tsurispot.com/shops/${slug}`,
     },
     openGraph: {
-      title: `${shop.name}（${shop.region.prefecture}${shop.region.areaName}）| 営業時間・アクセス・エサ情報`,
-      description: `${shop.region.prefecture}${shop.region.areaName}の${shop.name}。${shop.description} 営業時間: ${shop.businessHours}。${shop.hasLiveBait ? "活きエサ取扱あり。" : ""}${shop.hasFrozenBait ? "冷凍エサ取扱あり。" : ""}${shop.hasRentalRod ? "レンタルロッドあり。" : ""}${shop.hasParking ? "駐車場あり。" : ""}近くの釣りスポット情報も掲載。`,
+      title,
+      description,
       url: `https://tsurispot.com/shops/${slug}`,
       siteName: "ツリスポ",
       images: [
