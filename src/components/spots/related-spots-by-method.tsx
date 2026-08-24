@@ -19,10 +19,10 @@ export function RelatedSpotsByMethod({ spots, methodLabel }: Props) {
     <section className="mt-8">
       <div className="mb-3 flex items-center gap-2">
         <Anchor className="h-5 w-5 text-emerald-600" />
-        <h2 className="text-lg font-bold">{methodLabel}ができる他のスポット</h2>
+        <h2 className="text-lg font-bold">{methodLabel}ができる近くのスポット</h2>
       </div>
       <p className="mb-3 text-sm text-muted-foreground">
-        {methodLabel}を楽しめるスポットを探す
+        この釣り場の周辺エリアで{methodLabel}を楽しめるスポット
       </p>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {spots.map((s) => (

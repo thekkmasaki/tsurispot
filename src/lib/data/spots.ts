@@ -192,24 +192,51 @@ export function getSpotsByPrefecture(prefecture: string, excludeSlug: string, li
     .slice(0, limit);
 }
 
+// 関連スポットの距離リング幅(km)。2026-08 監査: getSpotsByFish / getSpotsByMethod は
+// 一致数→評価だけで全国ソートしていたため、5,073ページ x 6枠 = 約30,400本の内部リンクが
+// 1,398スポットに集中し(最大696ページから被リンク)、リンク先までの距離中央値は281km・
+// 県外率85.9%、3,675スポットは1本もリンクを受けていなかった。数百km先の釣り場を
+// 「同じ魚が釣れる他のスポット」として並べても回遊導線にならないので、25km刻みの
+// 距離リングを第1キーにし、同じリング内は従来どおり一致数→評価で並べる。
+const RELATED_RING_KM = 25;
+
+function relatedRing(distanceKm: number): number {
+  return Math.floor(distanceKm / RELATED_RING_KM);
+}
+
 export function getSpotsByFish(fishSlugs: string[], excludeSlug: string, limit = 5, excludeSlugs?: ReadonlySet<string>): FishingSpot[] {
   const fishSet = new Set(fishSlugs);
-  const matched: { spot: FishingSpot; matchCount: number }[] = [];
+  // 呼び出し側は excludeSlug に起点スポットの slug を渡す。座標が引けない場合は
+  // distanceKm=0 で全件が同一リングに入るため、従来の一致数→評価順へ縮退する。
+  const origin = getSpotBySlug(excludeSlug);
+  const matched: { spot: FishingSpot; matchCount: number; distanceKm: number }[] = [];
   for (const s of fishingSpots) {
     if (s.slug === excludeSlug || excludeSlugs?.has(s.slug)) continue;
     let count = 0;
     for (const cf of s.catchableFish) {
       if (fishSet.has(cf.fish.slug)) count++;
     }
-    if (count > 0) matched.push({ spot: s, matchCount: count });
+    if (count > 0) {
+      matched.push({
+        spot: s,
+        matchCount: count,
+        distanceKm: origin ? haversineKm(origin.latitude, origin.longitude, s.latitude, s.longitude) : 0,
+      });
+    }
   }
-  matched.sort((a, b) => b.matchCount - a.matchCount || b.spot.rating - a.spot.rating);
+  matched.sort(
+    (a, b) =>
+      relatedRing(a.distanceKm) - relatedRing(b.distanceKm) ||
+      b.matchCount - a.matchCount ||
+      b.spot.rating - a.spot.rating
+  );
   return matched.slice(0, limit).map((m) => m.spot);
 }
 
 export function getSpotsByMethod(methods: string[], excludeSlug: string, limit = 5, excludeSlugs?: ReadonlySet<string>): FishingSpot[] {
   const methodSet = new Set(methods);
-  const matched: { spot: FishingSpot; matchCount: number }[] = [];
+  const origin = getSpotBySlug(excludeSlug);
+  const matched: { spot: FishingSpot; matchCount: number; distanceKm: number }[] = [];
   for (const s of fishingSpots) {
     if (s.slug === excludeSlug || excludeSlugs?.has(s.slug)) continue;
     const seen = new Set<string>();
@@ -220,9 +247,20 @@ export function getSpotsByMethod(methods: string[], excludeSlug: string, limit =
         count++;
       }
     }
-    if (count > 0) matched.push({ spot: s, matchCount: count });
+    if (count > 0) {
+      matched.push({
+        spot: s,
+        matchCount: count,
+        distanceKm: origin ? haversineKm(origin.latitude, origin.longitude, s.latitude, s.longitude) : 0,
+      });
+    }
   }
-  matched.sort((a, b) => b.matchCount - a.matchCount || b.spot.rating - a.spot.rating);
+  matched.sort(
+    (a, b) =>
+      relatedRing(a.distanceKm) - relatedRing(b.distanceKm) ||
+      b.matchCount - a.matchCount ||
+      b.spot.rating - a.spot.rating
+  );
   return matched.slice(0, limit).map((m) => m.spot);
 }
 
