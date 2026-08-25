@@ -258,7 +258,7 @@ const faqItems: FAQItem[] = [
             <li>・<strong>タチウオ</strong>：秋がベストシーズン。夜のウキ釣りが定番</li>
             <li>・<strong>青物（ブリ・カンパチ・ソウダガツオ）</strong>：堤防からも狙えるチャンス</li>
             <li>・<strong>アオリイカ</strong>：秋イカ（新子）シーズン。数釣りが楽しめる</li>
-            <li>・<strong>シーバス</strong>：コノシロパターンなど秋の爆釣パターンあり</li>
+            <li>・<strong>シーバス</strong>：コノシロパターンなど秋の高活性パターンあり</li>
           </ul>
         </div>
         <p className="mt-2">

@@ -49,18 +49,18 @@ const sabikiVideos: YouTubeSearchLink[] = [
     description: "コマセの詰め方とシャクリのテクニック",
   },
   {
-    label: "サビキ釣りで爆釣する方法",
-    searchQuery: "サビキ釣り 爆釣 タナ 探り方",
+    label: "サビキ釣りで数を伸ばす方法",
+    searchQuery: "サビキ釣り タナ 探り方 コツ",
     description: "タナの探り方や手返しのコツで釣果アップ",
   },
 ];
 
 export const metadata: Metadata = {
-  title: "サビキ釣り完全ガイド - 初心者でも爆釣するコツと仕掛け",
+  title: "サビキ釣り完全ガイド - 初心者でも数が釣れるコツと仕掛け",
   description:
     "サビキ釣りの仕掛け、コマセの使い方、タナの探し方を初心者向けに完全解説。アジ・サバ・イワシの釣り方、必要な道具、おすすめスポット、釣果アップのコツ、片付けまで。堤防から手軽に始められるサビキ釣りで大漁を目指そう。",
   openGraph: {
-    title: "サビキ釣り完全ガイド - 初心者でも爆釣するコツと仕掛け",
+    title: "サビキ釣り完全ガイド - 初心者でも数が釣れるコツと仕掛け",
     description:
       "サビキ釣りの仕掛け、コマセの使い方、釣り方を初心者向けに完全解説。アジ・サバ・イワシを釣ろう。",
     type: "article",
@@ -81,7 +81,7 @@ export const metadata: Metadata = {
 const guideSpeakableJsonLd = {
   "@context": "https://schema.org",
   "@type": "WebPage",
-  name: "サビキ釣り完全ガイド - 初心者でも爆釣するコツと仕掛け",
+  name: "サビキ釣り完全ガイド - 初心者でも数が釣れるコツと仕掛け",
   url: "https://tsurispot.com/guide/sabiki",
   speakable: {
     "@type": "SpeakableSpecification",
@@ -92,7 +92,7 @@ const guideSpeakableJsonLd = {
 const articleJsonLd = {
   "@context": "https://schema.org",
   "@type": "Article",
-  headline: "サビキ釣り完全ガイド - 初心者でも爆釣するコツと仕掛け",
+  headline: "サビキ釣り完全ガイド - 初心者でも数が釣れるコツと仕掛け",
   description:
     "サビキ釣りの仕掛け、コマセの使い方、タナの探し方を初心者向けに完全解説。アジ・サバ・イワシの釣り方、必要な道具、おすすめスポット、釣果アップのコツ、片付けまで。",
   datePublished: "2025-01-01",
@@ -1282,7 +1282,7 @@ export default function SabikiGuidePage() {
                     周りの釣り人を観察する
                   </span>
                   <br />
-                  隣で爆釣している人がいたら、使っている仕掛けやタナを参考にしましょう。同じ釣り場でも、少しの違いで釣果に差が出ることがあります。釣りの上手い人は快く教えてくれることが多いです。
+                  隣で数を伸ばしている人がいたら、使っている仕掛けやタナを参考にしましょう。同じ釣り場でも、少しの違いで釣果に差が出ることがあります。釣りの上手い人は快く教えてくれることが多いです。
                 </div>
               </li>
             </ul>

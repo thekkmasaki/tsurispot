@@ -101,6 +101,11 @@ export function getFishSlugByName(name: string): string | null {
 
 /**
  * 同じ釣り方で釣れる魚種を取得（魚種ページの内部リンク用）
+ *
+ * 魚種ページの見出しは「{fishingMethods[0]}で釣れる他の魚」＝主釣法を名指しするため、
+ * 主釣法を実際に共有する魚を先頭に置く。共有釣法数だけで並べた旧実装では、主釣法を
+ * 共有しない魚が枠の約4割を占め、見出しと中身が食い違っていた（全116魚種で実測60.8%）。
+ * 同点は人気順→slug の順で決定的に並べ、外道が推薦枠の上位を占めるのを防ぐ。
  */
 export function getFishBySameMethod(
   fishSlug: string,
@@ -110,6 +115,7 @@ export function getFishBySameMethod(
   if (!targetFish || !targetFish.fishingMethods) return [];
 
   const targetMethods = new Set(targetFish.fishingMethods.map((m) => m.methodName));
+  const primaryMethod = targetFish.fishingMethods[0]?.methodName;
 
   return fishSpecies
     .filter((f) => f.slug !== fishSlug && f.fishingMethods && f.fishingMethods.length > 0)
@@ -120,12 +126,27 @@ export function getFishBySameMethod(
       return { slug: f.slug, name: f.name, methods: sharedMethods };
     })
     .filter((f) => f.methods.length > 0)
-    .sort((a, b) => b.methods.length - a.methods.length)
+    .sort((a, b) => {
+      const aPrimary = primaryMethod && a.methods.includes(primaryMethod) ? 1 : 0;
+      const bPrimary = primaryMethod && b.methods.includes(primaryMethod) ? 1 : 0;
+      if (aPrimary !== bPrimary) return bPrimary - aPrimary;
+      if (b.methods.length !== a.methods.length) return b.methods.length - a.methods.length;
+      const aRank = fishMetadata[a.slug]?.popularity ?? 999;
+      const bRank = fishMetadata[b.slug]?.popularity ?? 999;
+      if (aRank !== bRank) return aRank - bRank;
+      return a.slug.localeCompare(b.slug);
+    })
     .slice(0, limit);
 }
 
 /**
  * 同じ季節に釣れる魚種を取得（魚種ページの内部リンク用）
+ *
+ * 重複月数の生の多さで並べると、旬が年間8ヶ月に及ぶ魚（キス等）が全魚種ページの上位に
+ * 居座り、116ページ×6枠のリンクが74種にしか向かわず42種が被リンク0だった。旬の重なり度
+ * （重複月数 ÷ 和集合の月数）で並べると旬の幅が近い魚どうしが結びつき、平均重複月数を
+ * 落とさずに（実測 3.42→3.40ヶ月）リンク先が94種へ広がり被リンク0が22種まで減る。
+ * 同点は人気順→slug の順で決定的に並べる。
  */
 export function getFishBySameSeason(
   fishSlug: string,
@@ -139,12 +160,29 @@ export function getFishBySameSeason(
   return fishSpecies
     .filter((f) => f.slug !== fishSlug)
     .map((f) => {
-      const overlap = f.peakMonths.filter((m) => targetPeak.has(m)).length;
-      return { slug: f.slug, name: f.name, overlapMonths: overlap };
+      const peak = new Set(f.peakMonths);
+      let overlap = 0;
+      for (const m of peak) {
+        if (targetPeak.has(m)) overlap++;
+      }
+      const union = targetPeak.size + peak.size - overlap;
+      return {
+        slug: f.slug,
+        name: f.name,
+        overlapMonths: overlap,
+        seasonSimilarity: union > 0 ? overlap / union : 0,
+      };
     })
     .filter((f) => f.overlapMonths > 0)
-    .sort((a, b) => b.overlapMonths - a.overlapMonths)
-    .slice(0, limit);
+    .sort((a, b) => {
+      if (b.seasonSimilarity !== a.seasonSimilarity) return b.seasonSimilarity - a.seasonSimilarity;
+      const aRank = fishMetadata[a.slug]?.popularity ?? 999;
+      const bRank = fishMetadata[b.slug]?.popularity ?? 999;
+      if (aRank !== bRank) return aRank - bRank;
+      return a.slug.localeCompare(b.slug);
+    })
+    .slice(0, limit)
+    .map((f) => ({ slug: f.slug, name: f.name, overlapMonths: f.overlapMonths }));
 }
 
 // 都道府県×魚種のスポット取得

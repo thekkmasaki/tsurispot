@@ -619,7 +619,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
               { href: "/guide/choinage", title: "ちょい投げ", description: "キスのちょい投げ釣りが開幕" },
             ],
             6: [
-              { href: "/guide/sabiki", title: "サビキ釣り", description: "サビキ最盛期。アジ・イワシが爆釣" },
+              { href: "/guide/sabiki", title: "サビキ釣り", description: "サビキ最盛期。アジ・イワシの数釣りが本番" },
               { href: "/guide/choinage", title: "ちょい投げ", description: "キスのちょい投げが最も熱い時期" },
               { href: "/guide/eging", title: "エギング", description: "梅雨時のエギングテクニック" },
               { href: "/guide/night-fishing", title: "夜釣りガイド", description: "蒸し暑い日は涼しい夜釣りがおすすめ" },
