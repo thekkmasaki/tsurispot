@@ -848,7 +848,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss24", name: "花水川河口", slug: "hanamizugawa-kakou",
-    description: "金目川と花水川の合流地点が相模湾に注ぐ河口。シーバスの実績が高く、秋にはランカーも出る。ハゼ釣りのポイントとしても有名。平塚海岸のサーフとも連続する。",
+    description: "シーバスとハゼが狙える金目川・花水川の河口。相模湾に注ぐ平塚市の河口で、ルアーのシーバスは通年狙え、秋の落ちアユパターンでは大型の実績も高い。7〜11月はちょい投げでハゼ、5〜10月は投げ釣りでシロギス、6〜10月はマゴチも顔を出す。平塚海岸のサーフと連続し、周辺に無料の駐車スペースがある。流れが速く増水時は危険なため、夜間は特に足元に注意したい。",
     latitude: 35.3230, longitude: 139.3420, address: "〒254-0814 神奈川県平塚市花水台1",
     accessInfo: "JR平塚駅南口からバス「花水台」下車徒歩10分。",
     region: region("r7"), spotType: "beach", difficulty: "intermediate",
