@@ -165,7 +165,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   },
   {
     id: "si3", name: "初島堤防", slug: "hatsushima-breakwater",
-    description: "熱海からフェリーで30分の離島・初島。島を囲む堤防は潮通し抜群で、メジナやイサキ、回遊魚の実績が高い。島ならではの魚影の濃さが魅力。",
+    description: "初島堤防で釣れる魚はアジ・マダイ・メジナなど。熱海港からフェリーで約30分の離島で、5〜11月はアジのサビキ・カゴ釣り、3〜6月はマダイ、10〜5月はメジナ、9〜12月はアオリイカのエギングが狙える。夏から秋はソウダガツオやシマアジも実績あり。トイレがあり島内に車は不要。フェリーの時刻と強風時の欠航に注意。",
     latitude: 35.041200, longitude: 139.16580, address: "〒413-0004 静岡県熱海市初島800",
     accessInfo: "熱海港から富士急マリンリゾート初島航路で約30分。",
     region: region("r9"), spotType: "breakwater", difficulty: "intermediate",
@@ -896,7 +896,7 @@ export const sagamiIzuSpots: FishingSpot[] = [
   },
   {
     id: "si25", name: "妻良港", slug: "mera-port",
-    description: "南伊豆の西側に位置する漁港。伊豆の秘境的漁港で釣り人の数が少なく、のんびり釣りが楽しめる。カゴ釣りやフカセ釣りでメジナ、マダイが狙える実力派ポイント。",
+    description: "妻良港（静岡県南伊豆町）は釣り人が少なくのんびり竿を出せる漁港。3〜11月はクロダイのフカセ釣り、3〜6月はマダイのカゴ釣り、5〜11月はアジのサビキ釣り、7〜10月はカンパチのショアジギングが狙える。駐車スペースとトイレがあり、伊豆急下田駅からバス約50分。近くに商店がないため食料は事前に用意を。",
     latitude: 34.659482, longitude: 138.779539, address: "〒415-0533 静岡県南伊豆町妻良416",
     accessInfo: "伊豆急行伊豆急下田駅からバスで約50分。車は国道136号経由。",
     region: region("r9"), spotType: "port", difficulty: "intermediate",
