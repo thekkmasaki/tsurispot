@@ -386,7 +386,7 @@ export const freshwaterSpotsAdd4: FishingSpot[] = [
   },
   {
     id: "fw-555", name: "矢部川上流（八女市）", slug: "fukuoka-yabegawa-stream",
-    description: "福岡県八女市を流れる矢部川の上流域。八女茶の産地として有名な山間部で、ヤマメやオイカワが生息する清流。星野村の棚田と合わせて美しい里山風景が広がる。福岡市内からの日帰り渓流釣りに人気。",
+    description: "矢部川上流は福岡県八女市の鮎釣り場です。八女茶の産地・星野村を流れる清流で、6〜10月は日中の友釣りでアユ、3〜9月は朝マヅメのルアーでヤマメが狙えます。4〜11月はウキ釣りでオイカワも手軽。入川には矢部川漁協の遊漁券（日券 大人1,500円）が必要で、増水時は入川禁止です。河川沿いに駐車スペースとトイレがあり、九州自動車道八女ICから約40分です。",
     latitude: 33.2083, longitude: 130.7208, address: "福岡県八女市星野村",
     accessInfo: "九州自動車道八女ICから約40分。",
     region: lr("r5218"), spotType: "river", difficulty: "intermediate",
