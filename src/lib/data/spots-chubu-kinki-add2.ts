@@ -1155,8 +1155,8 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   },
   {
     id: "s2546", name: "南港", slug: "nanko-tsuri",
-    description: "大阪市住之江区の南港エリア。都心部からアクセス良好で、岸壁からサビキでアジ・イワシが手軽に楽しめる。チヌの落とし込み釣りの名所でもある。",
-    latitude: 34.6240, longitude: 135.4200, address: "〒115 台北市大阪市住之江区南港区",
+    description: "ニュートラム南港東駅から徒歩約10分の岸壁です。大阪市住之江区の南港エリアにあり、阪神高速湾岸線南港北ICからも約5分と車で入りやすい釣り場。5〜11月のアジは夕マヅメのサビキ釣りが手堅く、4〜11月のクロダイは落とし込みで日中も狙えます。夜はスズキのルアー、7〜11月はハゼのちょい投げと、季節ごとに対象を変えられるのが利点です。トイレとコンビニが近く、駐車場は周辺の有料施設を利用します。港湾部のため立入禁止区域には入らないでください。",
+    latitude: 34.6240, longitude: 135.4200, address: "大阪府大阪市住之江区南港",
     accessInfo: "ニュートラム南港東駅から徒歩約10分。阪神高速湾岸線南港北ICから約5分。",
     region: localRegion("r2570"), spotType: "port", difficulty: "beginner",
     isFree: true, hasParking: true, parkingDetail: "周辺有料駐車場あり",
