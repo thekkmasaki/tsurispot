@@ -12,6 +12,8 @@ import { toListSpot } from "@/lib/data/list-spot";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { composeMetaDescription, joinNames } from "@/lib/seo/meta-description";
 import { monthSlugs } from "@/lib/data/monthly-guides";
+import { SeasonalAffiliateSection } from "@/components/seasonal-affiliate-section";
+import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -286,6 +288,18 @@ export default async function AreaDetailPage({ params }: PageProps) {
     .map(([method, count]) => ({ method, count }))
     .sort((a, b) => b.count - a.count);
 
+  // エリア×釣法×魚種で文脈スコアリングした装備レコメンド（収益導線）。
+  // 同じ推薦ロジックを使う /fishing/[method]/area/[region] は aff/PV 1.079% だが、
+  // このエリアページは 14,872PV に対し affiliateClick 0 件＝収益枠が1つも無い状態だった（2026-08-23 実測）。
+  const affiliateProducts = getRelevantAffiliateProducts(
+    methodBreakdown.map((m) => m.method),
+    currentMonth,
+    3,
+    false,
+    region.prefecture,
+    catchableFish.slice(0, 3).map((f) => f.name)
+  );
+
   // 施設情報
   const parkingCount = spots.filter((s) => s.hasParking).length;
   const toiletCount = spots.filter((s) => s.hasToilet).length;
@@ -459,6 +473,13 @@ export default async function AreaDetailPage({ params }: PageProps) {
         spots={spots.map(toListSpot)}
         catchableFish={catchableFish}
         areaName={region.areaName}
+      />
+
+      {/* おすすめ装備（アフィリエイト）: スポット一覧を見終えた直後＝道具の必要性が最も高まる位置。 */}
+      <SeasonalAffiliateSection
+        products={affiliateProducts}
+        seasonLabel={region.areaName}
+        regionName=""
       />
 
       <InArticleAd />
