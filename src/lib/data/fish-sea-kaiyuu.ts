@@ -651,7 +651,7 @@ export const seaFishKaiyuu: FishSpecies[] = [
     scientificName: "Caranx ignobilis",
     slug: "rounin-aji",
     description:
-      "若魚メッキなら堤防ルアーでも狙える憧れのGT。アジ科最大種で、最大180cm・80kgに達する。沖縄や南西諸島を中心に生息し、磯やリーフからのキャスティングで狙う。圧倒的なパワーと爆発的な引きで釣り人を魅了するルアーマン究極のターゲット。",
+      "ルアーマン憧れの究極のターゲット「GT」。アジ科最大種で、最大180cm・80kgに達する。沖縄や南西諸島を中心に生息し、圧倒的なパワーと爆発的な引きで釣り人を魅了する。若魚は「メッキ」と呼ばれ堤防でも釣れる。",
     category: "sea",
     family: "アジ科",
     difficulty: "advanced",
