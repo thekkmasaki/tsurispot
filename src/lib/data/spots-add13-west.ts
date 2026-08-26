@@ -2615,7 +2615,7 @@ export const westAdd13Spots: FishingSpot[] = [
     bestTimes: btNight, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeOkinawa,
   },
   // =========================================
-  // ボーナス追加（10スポット: ss13543〜ss13552���
+  // ボーナス追加（10スポット: ss13543〜ss13552）
   // =========================================
   {
     id: "ss13543", name: "菅島漁港", slug: "sugashima-gyokou-a13",
@@ -2653,7 +2653,7 @@ export const westAdd13Spots: FishingSpot[] = [
   },
   {
     id: "ss13545", name: "天神崎", slug: "tenjinzaki-a13",
-    description: "田辺市の天然記念物に指定された岩礁帯。干潮時にはタイドプールが出現し、グレやイシダイの磯釣りが楽しめる景��地。",
+    description: "田辺市の天然記念物に指定された岩礁帯。干潮時にはタイドプールが出現し、グレやイシダイの磯釣りが楽しめる景勝地。",
     latitude: 33.7250, longitude: 135.3550,
     address: "〒646-0050 和歌山県田辺市天神崎",
     accessInfo: "紀勢自動車道南紀田辺ICから車で約10分",
@@ -2701,7 +2701,7 @@ export const westAdd13Spots: FishingSpot[] = [
   },
   {
     id: "ss13548", name: "上川口漁港", slug: "kamikawaguchi-gyokou-a13",
-    description: "黒潮町の太平洋に面した漁港。カツオの一本釣りの町として有名で、堤防からのカゴ釣りでイサキやグレが好調に釣れ���。",
+    description: "黒潮町の太平洋に面した漁港。カツオの一本釣りの町として有名で、堤防からのカゴ釣りでイサキやグレが好調に釣れる。",
     latitude: 33.0250, longitude: 133.0050,
     address: "〒789-1931 高知県幡多郡黒潮町上川口",
     accessInfo: "高知自動車道四万十町中央ICから車で約30分",
