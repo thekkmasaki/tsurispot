@@ -1415,6 +1415,31 @@ export default async function SpotDetailPage({ params }: PageProps) {
                 </Link>
               ))}
             </div>
+            {/* 地方×釣法ページ(/fishing/[method]/area/[region])への導線。
+                同ページは GA4 実測で aff/PV 1.05%（サイト平均 0.06%・スポット詳細 0.02%）と
+                最も収益寄与が高いのに、サイト内のどこからもリンクされず孤立していた。 */}
+            {(() => {
+              const regionGroup = REGION_GROUPS.find((r) => r.prefectures.includes(spot.region.prefecture));
+              if (!regionGroup) return null;
+              const areaMethods = FISHING_METHODS.filter((fm) =>
+                fm.methods.some((name) => methods.has(name) && !forbiddenMethods.has(name)),
+              ).slice(0, 4);
+              if (areaMethods.length === 0) return null;
+              return (
+                <div className="mt-4">
+                  <h3 className="mb-2 text-sm font-bold">{regionGroup.name}で同じ釣り方ができる釣り場</h3>
+                  <div className="flex flex-wrap gap-1.5">
+                    {areaMethods.map((fm) => (
+                      <Link prefetch={false} key={fm.slug} href={`/fishing/${fm.slug}/area/${regionGroup.slug}`}>
+                        <Badge variant="outline" className="cursor-pointer px-2 py-1 text-xs transition-colors hover:bg-primary hover:text-primary-foreground">
+                          {regionGroup.name}の{fm.name}スポット
+                        </Badge>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
             <div className="mt-3 flex flex-wrap gap-2">
               <Link prefetch={false} href="/guide" className="text-sm text-primary hover:underline">
                 すべての釣り方ガイドを見る →
