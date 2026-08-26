@@ -40,6 +40,60 @@ export async function generateStaticParams() {
   return prefectures.map((pref) => ({ prefecture: pref.slug }));
 }
 
+/** 区域名として使えない汎用語で始まる説明文（「各河川の…」「漁港内の…」等）を弾く。 */
+const GENERIC_AREA_HEAD = /^(各|漁港内|養殖|震災|沖合|沿岸|港湾|その他|一部|周辺|海岸|河川)/;
+/** 地名らしさの手がかり。これを含む区域名を優先して載せる。 */
+const PLACE_HINT = /(港|島|湾|岬|崎|浜|川|海峡|半島|橋|公園|空港|砂丘|海中|列島)/;
+/** 地名ではなく状態・設備を指す語。載せる優先度を下げる。 */
+const NON_PLACE_HINT = /(シーズン|ビーチ|養殖区域|養殖エリア|設定エリア|養殖施設|定置網)/;
+
+/**
+ * restrictedAreas の説明文（「松島湾内は釣り禁止区域が複数…」等）から先頭の区域名だけを取り出す。
+ *
+ * 背景: /fishing-rules/* のクエリの約5割が「石巻漁港 釣り禁止」「呼子港 釣り禁止」のような
+ * 地名指定型なのに、description は「釣り禁止・注意区域3件」と件数しか出しておらず、
+ * データ上は該当地名を持っているのにスニペットで一致していなかった（GSC実測: 塩釜港 70impでCTR 0%）。
+ * 助詞（は/では）の手前までを区域名とみなし、括弧書きと汎用語を落として最大 limit 件返す。
+ */
+function extractAreaNames(areas: string[], limit = 2): string[] {
+  const names: string[] = [];
+  for (const area of areas) {
+    const withoutParens = area.replace(/[（(][^）)]*[）)]/g, "");
+    const matched = withoutParens.match(/^([^はで]{2,20}?)(?:は|では|の一部は)/);
+    if (!matched) continue;
+    const name = matched[1].replace(
+      /(の一部区域|の一部|の多くの区域|の多くの護岸|の各漁港|の作業区域)$/,
+      "",
+    );
+    if (name.length < 2 || name.length > 14 || GENERIC_AREA_HEAD.test(name)) continue;
+    names.push(name);
+  }
+  // 「広島湾のカキ養殖区域」と「広島湾」のような包含重複は短い方に寄せる
+  const deduped = names.filter(
+    (name, i) =>
+      !names.some((other, j) => j !== i && name.includes(other) && other.length < name.length),
+  );
+  const ranked = deduped
+    .map((name, index) => ({ name, index }))
+    .sort(
+      (a, b) =>
+        Number(PLACE_HINT.test(b.name)) - Number(PLACE_HINT.test(a.name)) ||
+        Number(NON_PLACE_HINT.test(a.name)) - Number(NON_PLACE_HINT.test(b.name)) ||
+        a.index - b.index,
+    )
+    .slice(0, limit)
+    .map((entry) => entry.name);
+
+  // description が冗長にならないよう、2件目以降は合計 18 字までに収める（1件目は必ず残す）
+  const picked: string[] = [];
+  for (const name of ranked) {
+    const joinedLength = [...picked, name].join("・").length;
+    if (picked.length > 0 && joinedLength > 18) break;
+    picked.push(name);
+  }
+  return picked;
+}
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { prefecture: prefSlug } = await params;
   const pref = prefectures.find((p) => p.slug === prefSlug);
@@ -54,8 +108,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     : `${pref.name}の禁漁期間・遊漁券まとめ【2026年最新】川釣り・渓流釣りのルール規制`;
 
   const details: string[] = [];
-  const restrictedCount = rule?.seaRules?.restrictedAreas.length ?? 0;
-  if (restrictedCount > 0) details.push(`釣り禁止・注意区域${restrictedCount}件`);
+  const restrictedAreas = rule?.seaRules?.restrictedAreas ?? [];
+  if (restrictedAreas.length > 0) {
+    // 件数だけだと地名指定クエリにスニペットが一致しないため、実際の区域名を前方に出す
+    const areaNames = extractAreaNames(restrictedAreas);
+    details.push(
+      areaNames.length > 0
+        ? `釣り禁止・注意区域${restrictedAreas.length}件（${areaNames.join("・")}など）`
+        : `釣り禁止・注意区域${restrictedAreas.length}件`,
+    );
+  }
   const closedSeasonFish = (rule?.closedSeasons ?? []).slice(0, 3).map((cs) => cs.fish);
   if (closedSeasonFish.length > 0) details.push(`${closedSeasonFish.join("・")}の禁漁期間`);
   const riverNames = (rule?.yugyokenRivers ?? []).slice(0, 2);
