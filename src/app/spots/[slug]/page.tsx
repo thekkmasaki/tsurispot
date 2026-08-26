@@ -1291,13 +1291,9 @@ export default async function SpotDetailPage({ params }: PageProps) {
               <GearGuideList guides={spot.gearGuides} />
             </section>
           )}
-          {spot.catchableFish.length > 0 && (
-            <section>
-              <h3 className="mb-4 flex items-center gap-2 text-lg font-bold"><Wrench className="size-5" />{spot.gearGuides && spot.gearGuides.length > 0 ? "おすすめ装備" : "この釣り場でおすすめの装備"}</h3>
-              <p className="mb-2 text-sm text-muted-foreground">このスポットの釣り方に合った装備をピックアップしました。</p>
-              <SpotAffiliateRecommend methods={spot.catchableFish.map((cf) => cf.method)} fishNames={spot.catchableFish.map((cf) => cf.fish.name)} isNightFishing={isNightFishing} prefecture={spot.region.prefecture} />
-            </section>
-          )}
+          {/* 「この釣り場でおすすめの装備」は SpotDetailTabs の外（常時表示）へ移設した。
+              Radix Tabs は非アクティブな TabsContent を DOM に描画しないため、既定タブが
+              overview 固定のこのページでは、タブを押さない訪問者に商品が一度も表示されていなかった。 */}
           {/* 道具選びの特集ガイド（/gear）への高intent内部リンク（アフィリCV＋回遊） */}
           {(() => {
             const methods = spot.catchableFish.map((cf) => cf.method);
@@ -1456,6 +1452,24 @@ export default async function SpotDetailPage({ params }: PageProps) {
           </section>
         );
       })()}
+
+      {/* この釣り場でおすすめの装備（常時表示）。
+          旧位置は SpotDetailTabs の gearTab（3番目のタブ「装備・仕掛け」）の中だったが、
+          Radix Tabs は非アクティブな TabsContent を DOM に描画せず、既定タブは overview 固定のため、
+          タブを一度も押さない訪問者には商品が表示されていなかった。釣り方ガイドの直後＝
+          「この釣り方で行く」と決めた直後の位置に置き、装備検討の文脈に合わせる。 */}
+      {spot.catchableFish.length > 0 && (
+        <section className="mt-8 sm:mt-12">
+          <h2 className="mb-2 flex items-center gap-2 text-lg font-bold sm:text-xl">
+            <Wrench className="size-5 text-primary" />
+            {spot.name}でおすすめの装備
+          </h2>
+          <p className="mb-4 text-sm text-muted-foreground">
+            {spot.name}の釣り方と季節に合わせた装備をピックアップしました。当日に慌てないよう、事前に揃えておくと安心です。
+          </p>
+          <SpotAffiliateRecommend methods={spot.catchableFish.map((cf) => cf.method)} fishNames={spot.catchableFish.map((cf) => cf.fish.name)} isNightFishing={isNightFishing} prefecture={spot.region.prefecture} />
+        </section>
+      )}
 
       {/* この釣り場のポイント（固有コンテンツ） */}
       {(() => {
