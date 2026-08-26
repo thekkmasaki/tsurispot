@@ -19,10 +19,10 @@ export function RelatedSpotsByFish({ spots, fishName }: Props) {
     <section className="mt-8">
       <div className="mb-3 flex items-center gap-2">
         <Fish className="h-5 w-5 text-ocean-mid" />
-        <h2 className="text-lg font-bold">{fishName}が釣れる他のスポット</h2>
+        <h2 className="text-lg font-bold">{fishName}が釣れる近くのスポット</h2>
       </div>
       <p className="mb-3 text-sm text-muted-foreground">
-        同じく{fishName}が狙えるスポットをチェック
+        同じく{fishName}が狙える、この釣り場の周辺エリアのスポット
       </p>
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
         {spots.map((s) => (
