@@ -754,7 +754,7 @@ export const kantoAdd8Spots: FishingSpot[] = [
   },
   {
     id: "se8238", name: "荒川（志木・朝霞エリア）", slug: "arakawa-shiki-asaka-e8",
-    description: "都心近郊の荒川中流域で、テナガエビやハゼの釣り場として人気。秋葉の瀬や彩湖周辺は足場が良く、子供連れにも安全。マルタウグイの遡上シーズンも狙い目。",
+    description: "都心近郊の荒川中流域で、ハゼやオイカワの釣り場として人気。彩湖周辺は足場が良く、子供連れにも安全。コイやヘラブナの吸い込み釣り・ウキ釣りも楽しめる。",
     latitude: 35.825, longitude: 139.583,
     address: "〒351-0034 埼玉県朝霞市膝折町",
     accessInfo: "東武東上線朝霞台駅から徒歩約20分",
