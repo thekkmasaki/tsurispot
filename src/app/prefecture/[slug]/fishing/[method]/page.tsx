@@ -23,6 +23,7 @@ import {
   MONTHS,
   isMonthInRange,
 } from "@/lib/data/fishing-methods";
+import { REGION_GROUPS } from "@/lib/data/regions-group";
 import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS, type FishingSpot } from "@/types";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { buildPrefMethodDescription } from "@/lib/seo/meta-description";
@@ -224,6 +225,12 @@ export default async function PrefectureFishingMethodPage({
     (fm) =>
       fm.slug !== method.slug &&
       validComboSet.has(`${pref.slug}|${fm.slug}`)
+  );
+
+  // この県が属する地方（地方×釣り方ページ /fishing/{method}/area/{region} への内部リンク用）。
+  // 当該ページは全9釣法×全8地方を静的生成しているため、地方が引ければ必ず実在する。
+  const areaRegionGroup = REGION_GROUPS.find((r) =>
+    r.prefectures.includes(pref.name)
   );
 
   const pageUrl = `https://tsurispot.com/prefecture/${pref.slug}/fishing/${method.slug}`;
@@ -674,6 +681,14 @@ export default async function PrefectureFishingMethodPage({
           >
             {method.name}ガイド
           </Link>
+          {areaRegionGroup && (
+            <Link prefetch={false}
+              href={`/fishing/${method.slug}/area/${areaRegionGroup.slug}`}
+              className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
+            >
+              {areaRegionGroup.name}の{method.name}スポット
+            </Link>
+          )}
           <Link prefetch={false}
             href={method.guide}
             className="rounded-full border px-4 py-2 text-sm transition-colors hover:bg-muted"
