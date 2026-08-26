@@ -10,22 +10,42 @@ import { fishRegionalSeasons } from "@/lib/data/fish-regional-seasons";
 import { CalendarTableClient } from "@/components/fishing-calendar/calendar-table-client";
 import { InArticleAd } from "@/components/ads/ad-unit";
 
-export const metadata: Metadata = {
-  title: "今の時期に何が釣れる？月別釣りカレンダー",
-  description:
-    "「今の時期何が釣れる？」に月別カレンダーですぐ答えます。1月から12月まで、各月に旬を迎えるおすすめターゲットと釣りものを一覧表示。今月狙うべき魚がひと目でわかるので、釣行計画にお役立てください。",
-  openGraph: {
-    title: "今の時期に何が釣れる？月別釣りカレンダー",
-    description:
-      "「今の時期何が釣れる？」に月別カレンダーですぐ答えます。1月~12月の旬の魚がひと目でわかる。",
-    type: "website",
-    url: "https://tsurispot.com/fishing-calendar",
-    siteName: "ツリスポ",
-  },
-  alternates: {
-    canonical: "https://tsurispot.com/fishing-calendar",
-  },
-};
+// 純SSGだと generateMetadata の「今月」と旬の魚がビルド時刻で凍結し、
+// 実際とは違う月をSERPに出してしまうため日次ISRで追従させる（/monthly と同じ方針）
+export const revalidate = 86400;
+
+export function generateMetadata(): Metadata {
+  const month = new Date().getMonth() + 1;
+  // ページ本文の月別セクションと同じ並び（初心者向け優先の上位5種）を使い、
+  // SERPスニペットとページ内容が食い違わないようにする
+  const { peakFish } = getMonthData(month);
+  const topNames = peakFish.map((f) => f.name);
+  const peakCount = getPeakFish(month).length;
+  const catchableCount = getCatchableNow(month).length;
+
+  // 流入クエリは「今の時期釣れる魚」「今釣れる魚」「この時期に釣れる魚」系が中心。
+  // クエリ句を先頭に置いたうえで、「今」の中身（月・旬の魚・種類数）を具体化して
+  // 検索結果の時点で答えを見せる。
+  // 「月別釣りカレンダー」は /monthly が担うキーワードなので、共食い回避で title からは外す
+  // （H1・パンくず・本文には残るため、ページの主題は変わらない）。
+  const title = `今の時期に釣れる魚｜${month}月が旬の${topNames.slice(0, 3).join("・")}など${peakCount}種`;
+  const description = `今の時期（${month}月）に釣れる魚は${topNames.slice(0, 5).join("・")}など全${catchableCount}種。うち${peakCount}種が旬の最盛期です。1月〜12月の月別カレンダーで、各月の旬のターゲットとシーズンの魚・地域別の釣れる時期をひと目で比較できます。`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title: `${title}｜ツリスポ`,
+      description,
+      type: "website",
+      url: "https://tsurispot.com/fishing-calendar",
+      siteName: "ツリスポ",
+    },
+    alternates: {
+      canonical: "https://tsurispot.com/fishing-calendar",
+    },
+  };
+}
 
 const breadcrumbJsonLd = {
   "@context": "https://schema.org",
