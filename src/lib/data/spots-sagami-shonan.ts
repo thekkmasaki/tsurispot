@@ -817,7 +817,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss23", name: "平塚海岸", slug: "hiratsuka-beach",
-    description: "平塚市内を流れる花水川河口を含む広大なサーフ。投げ釣りでキスの数釣りが楽しめる湘南屈指のサーフポイント。秋冬はショアジギでイナダやサワラの回遊も。",
+    description: "平塚海岸はキスの投げ釣りが楽しめる湘南屈指のサーフ。花水川河口を含む広大な砂浜で、夏はシロギスの数釣り、秋はショアジギングでイナダの回遊が狙える。ヒラメやマゴチのフラットフィッシュも実績があり、朝夕マヅメが好機。",
     latitude: 35.3210, longitude: 139.3480, address: "〒254-0803 神奈川県平塚市千石河岸49-24",
     accessInfo: "JR平塚駅南口から徒歩約20分。湘南海岸公園方面。",
     region: region("r7"), spotType: "beach", difficulty: "intermediate",
