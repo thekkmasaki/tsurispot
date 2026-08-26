@@ -1905,7 +1905,7 @@ export const chubuKinkiAdd2Spots: FishingSpot[] = [
   },
   {
     id: "s2584", name: "舞鶴漁港", slug: "maizuru-gyoko",
-    description: "舞鶴市は東舞鶴・西舞鶴の2つの港があり、共に釣りが盛ん。サビキでアジ・サバが好調で、チヌのフカセ釣りも人気。港が広く多くのポイントがある。",
+    description: "舞鶴漁港の釣りはサビキのアジとフカセのチヌが二本柱。京都府舞鶴市の大型港で、6〜11月の夕マヅメはサビキでアジ、5〜11月の朝マヅメはウキフカセでクロダイ、7〜9月はサバ、9〜11月はエギングでアオリイカが狙えます。JR東舞鶴駅から車で約5分、港周辺に無料駐車場とトイレがあり釣具店も近い一方、自衛隊基地周辺は立入禁止のため釣り座選びには注意が必要です。",
     latitude: 35.4730, longitude: 135.3840, address: "〒624-0914 京都府舞鶴市下安久",
     accessInfo: "舞鶴若狭自動車道舞鶴東ICから約10分。JR東舞鶴駅から車で約5分。",
     region: localRegion("r2590"), spotType: "port", difficulty: "beginner",
