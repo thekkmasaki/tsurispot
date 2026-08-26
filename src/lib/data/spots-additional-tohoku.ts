@@ -639,7 +639,7 @@ export const additionalSpotsTohoku: FishingSpot[] = [
   },
   {
     id: "s149", name: "宮古浄土ヶ浜", slug: "miyako-jodogahama",
-    description: "三陸海岸を代表する景勝地。白い流紋岩の磯から根魚やアイナメが狙える。観光名所でもある。",
+    description: "浄土ヶ浜は岩手県宮古市の磯釣り場です。白い流紋岩が並ぶ三陸海岸の磯で、4〜11月は朝マヅメの穴釣りでカサゴ、3〜6月は夕マヅメのワームでメバルが狙えます。10〜3月はブラクリでアイナメ、投げ釣りでカレイも釣れる全6魚種。無料の浄土ヶ浜駐車場とトイレがあり、JR宮古駅からバスで約15分。磯場は滑りやすくスパイクシューズ推奨の中級者向けです。",
     latitude: 39.6412, longitude: 141.9812, address: "〒027-0001 岩手県宮古市日立浜町",
     accessInfo: "JR宮古駅からバスで15分。三陸自動車道宮古中央ICから約10分。",
     region: region("r19"), spotType: "rocky", difficulty: "intermediate",

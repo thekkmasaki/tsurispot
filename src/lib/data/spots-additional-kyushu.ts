@@ -162,7 +162,7 @@ export const additionalSpotsKyushu: FishingSpot[] = [
     id: "s96",
     name: "別府港",
     slug: "beppu-port",
-    description: "温泉の街別府の港。豊後水道に面し潮通し良好。アジやタチウオの回遊が豊富。温泉旅行のついでに手軽に釣りが楽しめる。",
+    description: "別府港は大分県別府市の海に面した釣り場です。豊後水道の潮通しが良く、4〜12月は朝マヅメのサビキでアジ、8〜12月は夕マヅメのテンヤでタチウオが狙えます。4〜11月はウキフカセでクロダイも本命。港内は足場が良く初心者向きですが、フェリーの往来に注意してください。駐車場は1日500円の有料、トイレとコンビニあり。JR別府駅から車で約10分です。",
     latitude: 33.3045,
     longitude: 131.4969000,
     address: "〒874-0000 大分県別府市南石垣",
@@ -766,7 +766,7 @@ export const additionalSpotsKyushu: FishingSpot[] = [
   },
   {
     id: "s198", name: "天草・鬼池港", slug: "amakusa-oniike",
-    description: "島原半島行きフェリー発着の港。潮通しが良くマダイ・アジ・アオリイカの好ポイント。",
+    description: "鬼池港は熊本県天草市五和町にある釣り場です。島原半島行きフェリーが発着する潮通しの良い港で、4〜11月は朝マヅメのカゴ釣りでマダイ、夕マヅメのエギングでアオリイカが本命。5〜10月はサビキでアジ、9〜2月はショアジギングでブリなど全9魚種が狙えます。フェリー乗り場の駐車場とトイレを利用でき入場無料。フェリー出入港時は竿を上げてください。",
     latitude: 32.54590, longitude: 130.19160, address: "〒863-2331 熊本県天草市五和町鬼池5090",
     accessInfo: "天草空港から車で約30分。", region: region("r34"),
     spotType: "port", difficulty: "intermediate", isFree: true,
