@@ -339,7 +339,7 @@ export const seaFishIkaTako: FishSpecies[] = [
     scientificName: "Uroteuthis edulis",
     slug: "kensaki-ika",
     description:
-      "日本海側を中心に人気の高いイカ。夏から秋にかけてが旬で、エギングやイカメタルで狙えます。身は柔らかく甘みが強い上品な味わいで、アカイカとも呼ばれます。",
+      "ケンサキイカは夏から秋が旬で、エギングやイカメタルで狙える人気のイカ。日本海側を中心に親しまれ、身は柔らかく甘みが強い上品な味わいです。アカイカとも呼ばれ、船のイカメタルや堤防からのエギングで手軽に狙えます。",
     category: "sea",
     family: "ヤリイカ科",
     difficulty: "intermediate",

@@ -684,7 +684,7 @@ export const additionalSpotsKanto: FishingSpot[] = [
   },
   {
     id: "s163", name: "湘南江の島堤防", slug: "shonan-enoshima-breakwater",
-    description: "湘南のシンボル・江の島の堤防。サビキでイワシ・アジが楽しめ、カワハギやメジナも狙える。観光と釣りの両立。",
+    description: "湘南江の島堤防はサビキでイワシ、秋はカワハギが狙える釣りスポット。湘南のシンボル江の島にあり、観光と釣りを両立できます。初夏から秋はサビキ釣りでイワシが数釣りでき、9〜12月はカワハギの胴突き仕掛けが本命。トイレ・駐車場ありでファミリーにも安心です。",
     latitude: 35.2978, longitude: 139.4812, address: "〒251-0036 神奈川県藤沢市江の島1丁目12-12",
     accessInfo: "小田急片瀬江ノ島駅から徒歩20分。",
     region: region("r7"), spotType: "breakwater", difficulty: "beginner",
