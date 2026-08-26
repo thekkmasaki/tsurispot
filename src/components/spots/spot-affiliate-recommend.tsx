@@ -28,7 +28,7 @@ const CATEGORY_COLORS: Record<AffiliateProduct["category"], string> = {
 
 const SEASON_MESSAGES: Record<string, string> = {
   spring: "春の釣りシーズン到来！GW前に装備を揃えよう",
-  summer: "夏の爆釣シーズン！熱中症対策も忘れずに",
+  summer: "夏は朝マヅメと夜釣りが本番。熱中症対策も忘れずに",
   autumn: "秋は年間ベストシーズン！大物狙いの装備を",
   winter: "冬の釣りは防寒が命！暖かく快適に楽しもう",
 };
