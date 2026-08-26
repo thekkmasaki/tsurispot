@@ -588,7 +588,7 @@ export const freshwaterSpotsKantoAdd: FishingSpot[] = [
   // ===== 栃木県 追加 =====
   {
     id: "fw-127", name: "思川", slug: "omoigawa-river",
-    description: "栃木県小山市を流れる利根川水系の河川。市街地を流れるが水質は良好で、オイカワ・コイ・ハヤのほか、バス釣りポイントもある。思川桜で有名な土手沿いでのんびり釣りができる。",
+    description: "思川（栃木県小山市）は利根川水系の一級河川で、市街地を流れながら水質は良好。日中のウキ釣りでオイカワやマブナ、通年狙えるコイの吸い込み釣り、朝マヅメのルアーでブラックバス、夕マヅメにはナマズも楽しめる。思川桜で有名な土手沿いは駐車スペースもあり、JR小山駅から徒歩約10分とアクセス良好でのんびり釣りができる。",
     latitude: 36.3131, longitude: 139.7944, address: "〒323-0041 栃木県小山市大行寺1108-34",
     accessInfo: "東北道佐野藤岡ICから約30分。JR小山駅から徒歩約10分。",
     region: lr("r760"), spotType: "river", difficulty: "beginner",
