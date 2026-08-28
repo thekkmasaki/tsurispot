@@ -78,7 +78,10 @@ export function PWAInstallHint() {
   if (!canShow) return null;
 
   return (
-    <div className="fixed bottom-[60px] left-3 right-3 z-40 md:hidden animate-in slide-in-from-bottom-2 duration-300">
+    // ボトムナビ(60px+safe-area) + 固定広告(99px) + ✕のはみ出し(24px) + 分離(16px) = 199px+safe-area の上へ。
+    // 広告を display:none で隠すと push 自体が走らず収益ゼロになるため、隠さず座標で避ける（2026-07の事故対策）。
+    // 旧値 bottom-[60px] は safe-area 項が無く、ノッチ端末ではボトムナビに重なっていた（併せて修正）。
+    <div className="fixed bottom-[calc(199px+env(safe-area-inset-bottom,0px))] left-3 right-3 z-40 md:hidden animate-in slide-in-from-bottom-2 duration-300">
       <div className="flex items-center gap-3 rounded-xl border border-sky-200 bg-white/95 px-3 py-2.5 shadow-lg backdrop-blur">
         <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-sky-100 text-sky-600">
           <Plus className="size-5" />

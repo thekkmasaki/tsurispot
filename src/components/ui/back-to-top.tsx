@@ -38,8 +38,13 @@ export function BackToTop() {
       className={cn(
         "fixed z-40 flex items-center justify-center rounded-full",
         "size-10 sm:size-11",
-        // モバイルはボトムナビ(約60px)＋セーフエリアの上に配置して重なりを回避。sm+ はナビが無いので従来位置。
-        "bottom-[calc(60px+env(safe-area-inset-bottom,0px))] right-4 sm:bottom-6 sm:right-6",
+        // モバイルは「ボトムナビ(60px+safe-area) + 固定広告(99px) + ✕のはみ出し(24px) + 分離(16px)」の上へ。
+        // 旧値(60px+safe-area)は固定広告と完全に同一座標・同一 z-40 で、layout.tsx の描画順により
+        // このボタンが広告の上に乗っていた（広告面積の約4.3%を半透明で覆う）。AdSense の
+        // 「広告にナビゲーション等のアクション要素を重ねない」規定に触れるため座標を分離する。
+        // ブレークポイントは sm(640px) ではなく md(768px)。固定広告は ad-unit.tsx の
+        // useMediaQuery("(max-width: 767px)") で表示されるため、md 未満は常に広告を避ける必要がある。
+        "bottom-[calc(199px+env(safe-area-inset-bottom,0px))] right-4 md:bottom-6 md:right-6",
         "bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm",
         "text-gray-700 dark:text-gray-200",
         "shadow-lg border border-gray-200/50 dark:border-gray-700/50",
