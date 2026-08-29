@@ -50,12 +50,12 @@ export function CookieBanner() {
 
   return (
     // モバイルでは「ボトムナビ(60px+safe-area) + 固定広告(99px) + ✕ボタンのはみ出し(24px) + 分離(16px)」
-    // の上に出す = 199px+safe-area。md以上は広告が出ない(ad-unit.tsx の max-width:767px ゲート)ので従来通り最下部。
+    // の上に出す = 215px+safe-area。md以上は広告が出ない(ad-unit.tsx の max-width:767px ゲート)ので従来通り最下部。
     // 【この方式を戻さないこと】以前はこのバナー表示中に広告を display:none にしていたが、それだと
     // offsetWidth=0 で adsbygoogle.push({}) が走らず広告リクエストが丸ごと消える（2026-07の53日間の事故）。
     // 隠すのではなく、座標をずらして共存させる。
     // z-40: 一時UI層はナビ(z-50)より上に被せない
-    <div className="fixed bottom-[calc(199px+env(safe-area-inset-bottom,0px))] md:bottom-0 left-0 right-0 z-40 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 px-3 py-2 shadow-lg md:px-4 md:py-2.5">
+    <div className="fixed bottom-[calc(215px+env(safe-area-inset-bottom,0px))] md:bottom-0 left-0 right-0 z-40 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 px-3 py-2 shadow-lg md:px-4 md:py-2.5">
       <div className="mx-auto flex max-w-screen-xl items-center justify-between gap-3">
         <p className="text-xs text-muted-foreground md:text-sm">
           <span className="hidden sm:inline">当サイトではCookieを使用しています。</span>

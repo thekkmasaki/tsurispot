@@ -44,7 +44,7 @@ export function BackToTop() {
         // 「広告にナビゲーション等のアクション要素を重ねない」規定に触れるため座標を分離する。
         // ブレークポイントは sm(640px) ではなく md(768px)。固定広告は ad-unit.tsx の
         // useMediaQuery("(max-width: 767px)") で表示されるため、md 未満は常に広告を避ける必要がある。
-        "bottom-[calc(199px+env(safe-area-inset-bottom,0px))] right-4 md:bottom-6 md:right-6",
+        "bottom-[calc(215px+env(safe-area-inset-bottom,0px))] right-4 md:bottom-6 md:right-6",
         "bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm",
         "text-gray-700 dark:text-gray-200",
         "shadow-lg border border-gray-200/50 dark:border-gray-700/50",

@@ -698,7 +698,18 @@ export function MobileStickyAd({ suspended = false }: { suspended?: boolean }) {
     // md:hidden は撤廃（isMobile ゲートで DOM ごとマウント制御するため）。
     <div
       ref={containerRef}
-      className={`fixed bottom-[calc(60px+env(safe-area-inset-bottom,0px))] left-0 right-0 z-40 border-t border-border/30 bg-background/95 backdrop-blur-sm${suspended ? " hidden" : ""}`}
+      // bottom の 76px = ボトムナビの実測高 67.5px + 余裕 8.5px。
+      // 【この定数の由来】元は 60px で、当時のナビ高(border 1px + 項目 54.5px = 55.5px)に合わせていた。
+      // 2026-08-18 の #424(1cc58168) がナビ中央に投稿FABを追加し、FAB1件だけが 66.5px と
+      // 他タブ(54.5px)より12px高いためナビ全体が 67.5px へ伸びた。しかし広告側の 60px が
+      // 追随しなかったため、ナビ(z-50・bg-background/95・backdrop-blur)が広告コンテナの
+      // 下端 7.5px（実クリエイティブでは 3.5px）を塗り潰す状態になっていた。
+      // 広告は 2026-07-05 から停止していたため本番で同時に描画されたことが無く露見していない。
+      // ※ env(safe-area-inset-bottom) はナビの pb-safe と広告の bottom の両方に等量効くため、
+      //    重なり量は端末非依存で一定（SAI=0/34 の両方で実測 7.5px）。SAIでは相殺されない。
+      // ※ ナビ高はラベルの line-height（text-[11px] が font-size のみ指定でブラウザ既定の 1.5 を継承）
+      //    に依存し、フォント設定で数px揺れるため 68px ちょうどではなく余裕を取っている。
+      className={`fixed bottom-[calc(76px+env(safe-area-inset-bottom,0px))] left-0 right-0 z-40 border-t border-border/30 bg-background/95 backdrop-blur-sm${suspended ? " hidden" : ""}`}
     >
       {/* 下部アンカーの固定広告が読み込み後に高さ拡張すると内容が上方向にシフトし
           CLS 0.2の主因になっていた。サイズ固定+クリップ枠で拡張を物理的に遮断。

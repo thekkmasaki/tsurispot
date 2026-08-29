@@ -70,9 +70,9 @@ export function Toaster() {
       aria-live="polite"
       aria-atomic="false"
       // 旧値(72px)は固定広告の帯(60px+safe-area 〜 159px+safe-area)の内側で、かつ z-[200] は広告(z-40)より上。
-      // トースト表示中に広告が覆われるため、広告の上端 + ✕のはみ出し + 分離 の外側(211px+safe-area)へ退避する。
+      // トースト表示中に広告が覆われるため、広告の上端 + ✕のはみ出し + 分離 の外側(227px+safe-area)へ退避する。
       // ブレークポイントは広告のゲート(max-width:767px)に合わせて md。
-      className="pointer-events-none fixed inset-x-0 bottom-[calc(211px+env(safe-area-inset-bottom,0px))] z-[200] flex flex-col items-center gap-2 px-4 md:bottom-6"
+      className="pointer-events-none fixed inset-x-0 bottom-[calc(227px+env(safe-area-inset-bottom,0px))] z-[200] flex flex-col items-center gap-2 px-4 md:bottom-6"
     >
       {items.map((t) => {
         const Icon = ICONS[t.type];
