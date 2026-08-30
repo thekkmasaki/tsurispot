@@ -768,9 +768,13 @@ export default function MyPage() {
                 <span className="font-medium">今日の好機</span>
                 <span className="text-xs text-muted-foreground">
                   <Moon className="mr-0.5 inline h-3 w-3" />
-                  {dashboard.items[0]?.tideLabel
-                    ? `${dashboard.items[0].tideLabel}（月齢${dashboard.moonAge.toFixed(1)}）`
-                    : `月齢 ${dashboard.moonAge.toFixed(1)}`}
+                  {(() => {
+                    // 潮汐が有効なスポットの潮回りをヘッダに出す（淡水のみの場合は月齢だけ）
+                    const tidal = dashboard.items.find((i) => i.tideMode !== "none");
+                    return tidal
+                      ? `${tidal.tideLabel}（月齢${dashboard.moonAge.toFixed(1)}）`
+                      : `月齢 ${dashboard.moonAge.toFixed(1)}`;
+                  })()}
                 </span>
               </div>
               {dashboard.items.length === 0 ? (
@@ -801,9 +805,13 @@ export default function MyPage() {
                           <div className="min-w-0 flex-1">
                             <div className="truncate font-medium">{item.name}</div>
                             <div className="text-xs text-muted-foreground">
-                              {item.prefecture}・{item.tideLabel}・月齢{dashboard.moonAge.toFixed(1)}
+                              {item.tideMode === "none"
+                                ? item.prefecture
+                                : `${item.prefecture}・${item.tideLabel}・月齢${dashboard.moonAge.toFixed(1)}`}
                             </div>
                           </div>
+                          {/* 潮汐が無関係な淡水スポットには潮ベースの★を出さない */}
+                          {item.tideMode !== "none" && (
                           <span
                             className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${
                               item.fishingScore >= 5
@@ -815,6 +823,7 @@ export default function MyPage() {
                           >
                             ★{item.fishingScore}
                           </span>
+                          )}
                         </div>
                         {(item.highTides.length > 0 || item.lowTides.length > 0) && (
                           <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-muted-foreground">

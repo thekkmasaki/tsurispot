@@ -51,7 +51,12 @@ export async function GET() {
       };
     })
     .filter((x): x is NonNullable<typeof x> => x !== null)
-    .sort((a, b) => b.fishingScore - a.fishingScore);
+    // 潮汐が無関係な淡水スポット（tideMode=none）は潮ベースの好機度で並べず末尾へ
+    .sort((a, b) => {
+      const rank = (x: { tideMode: string; fishingScore: number }) =>
+        x.tideMode === "none" ? -1 : x.fishingScore;
+      return rank(b) - rank(a);
+    });
 
   return NextResponse.json({ items, moonAge, date: dateStr });
 }

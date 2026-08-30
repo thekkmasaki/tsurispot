@@ -35,16 +35,19 @@ function loadStationYear(code: string, year: string): StationYearData | null {
   const cached = cache.get(key);
   if (cached !== undefined) return cached;
   const file = path.join(DATA_DIR, year, `${code}.json`);
-  let data: StationYearData | null = null;
-  try {
-    if (fs.existsSync(file)) {
-      data = JSON.parse(fs.readFileSync(file, "utf-8")) as StationYearData;
-    }
-  } catch {
-    data = null;
+  if (!fs.existsSync(file)) {
+    // ファイル不存在（翌年分の未取込など）は確定情報なので負キャッシュしてよい
+    cache.set(key, null);
+    return null;
   }
-  cache.set(key, data);
-  return data;
+  try {
+    const data = JSON.parse(fs.readFileSync(file, "utf-8")) as StationYearData;
+    cache.set(key, data);
+    return data;
+  } catch {
+    // 読み取り失敗は一時的なfsエラーの可能性があるためキャッシュせず次回再試行する
+    return null;
+  }
 }
 
 /** データが存在する年ディレクトリの一覧（昇順） */

@@ -459,8 +459,8 @@ export function SpotWeatherTide({ lat, lng, hideBestTimes, tideMode, tideStation
                       {tideDay && tideDay.hi.length > 0
                         ? tideDay.hi.map(([t, cm]) => `${t}(${cm}cm)`).join(" / ")
                         : tideDays
-                          ? "—"
-                          : "—（データ準備中）"}
+                          ? "—（データ準備中）" // 取得済みだが選択日が未整備（翌年分の未取込など）
+                          : "—"}
                     </span>
                   </div>
                   <div className="flex items-center gap-1.5">
@@ -470,8 +470,8 @@ export function SpotWeatherTide({ lat, lng, hideBestTimes, tideMode, tideStation
                       {tideDay && tideDay.lo.length > 0
                         ? tideDay.lo.map(([t, cm]) => `${t}(${cm}cm)`).join(" / ")
                         : tideDays
-                          ? "—"
-                          : "—（データ準備中）"}
+                          ? "—（データ準備中）"
+                          : "—"}
                     </span>
                   </div>
                   {tideStation && (
@@ -519,11 +519,12 @@ export function SpotWeatherTide({ lat, lng, hideBestTimes, tideMode, tideStation
               )}
               <p className="text-[11px] text-amber-700 leading-relaxed">{best.detail}</p>
             </div>
-          ) : (
+          ) : tideMode !== "none" ? (
+            // 淡水（none）スポットでは潮の解説文を出さない
             <div className="mt-3 rounded-lg bg-gray-50 px-3 py-2">
               <p className="text-xs text-muted-foreground leading-relaxed">{tidePhase.description}</p>
             </div>
-          );
+          ) : null;
         })()}
 
         {/* 風速警告バナー */}
