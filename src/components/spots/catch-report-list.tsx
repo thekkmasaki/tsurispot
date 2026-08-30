@@ -267,6 +267,22 @@ export function CatchReportList({ spotSlug, initialReports, pioneer = null, allo
                     {report.comment}
                   </p>
                 )}
+                {/* 運営からの公式返信（REPORT#{id}/OFFICIAL_REPLY） */}
+                {report.officialReply && (
+                  <div className="mt-2 rounded-md border-l-4 border-sky-400 bg-sky-50 px-3 py-2">
+                    <div className="mb-1 flex items-center gap-1.5">
+                      <Badge className="bg-sky-600 px-1.5 py-0 text-[10px] font-medium text-white hover:bg-sky-600">
+                        ツリスポ運営
+                      </Badge>
+                      <span className="text-[10px] text-muted-foreground">
+                        {formatDate(report.officialReply.repliedAt.slice(0, 10))}
+                      </span>
+                    </div>
+                    <p className="text-sm leading-relaxed text-sky-900">
+                      {report.officialReply.text}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
             {/* シェア（バイラルループ: 訪問者が釣果を拡散→新規流入） */}
