@@ -73,10 +73,22 @@ export default async function StationTidePage({
   if (!resolved) notFound();
   const { code, station, entry } = resolved;
 
-  // 今日の満干をサーバー側で焼き込み（SEO用の実コンテンツ。revalidate=1日で追従）
-  const today = todayJST();
-  const todayTide = getTideDay(code, today);
-  const todayPhase = getTidePhaseJST(today);
+  // 直近7日分の満干をサーバー側で焼き込み（SEO用の実コンテンツ。revalidate=1日で追従）。
+  // ISR再生成はJSTの日付切替に整列しないため「今日」というラベルは使わず、日付を明示する
+  // （「今日」の実体はクライアント側の日付セレクターが担う）。
+  const startDate = todayJST();
+  const weekRows = Array.from({ length: 7 }, (_, i) => {
+    const d = new Date(`${startDate}T12:00:00+09:00`);
+    d.setUTCDate(d.getUTCDate() + i);
+    const dateStr = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(d);
+    return {
+      dateStr,
+      label: `${Number(dateStr.slice(5, 7))}/${Number(dateStr.slice(8, 10))}`,
+      dow: "日月火水木金土"[d.getUTCDay()], // 12:00 JST = 03:00 UTC 同日なので getUTCDay で曜日一致
+      phase: getTidePhaseJST(dateStr),
+      tide: getTideDay(code, dateStr),
+    };
+  });
 
   const nearbySpots = getSpotsForStation(code, 12);
   const spotCount = getStationSpotCount(code);
@@ -122,22 +134,46 @@ export default async function StationTidePage({
         {spotCount > 0 && `この地点を基準にする釣りスポットが周辺に${spotCount}ヶ所あります。`}
       </p>
 
-      {/* 今日の満干（サーバー焼き込み: SEO用実コンテンツ） */}
-      {todayTide && (
-        <section className="mt-4 rounded-lg border bg-sky-50/60 px-4 py-3 text-sm">
-          <h2 className="font-bold">
-            今日（{today.slice(5, 7)}月{today.slice(8, 10)}日）の{station.name}: {todayPhase.tideType}
-          </h2>
-          <p className="mt-1 text-muted-foreground">
-            満潮 {todayTide.hi.map(([t, cm]) => `${t}（${cm}cm）`).join(" / ") || "—"} ・ 干潮{" "}
-            {todayTide.lo.map(([t, cm]) => `${t}（${cm}cm）`).join(" / ") || "—"}
-          </p>
-        </section>
-      )}
-
       <div className="mt-5">
         <StationTidesClient code={code} name={station.name} />
       </div>
+
+      {/* 直近7日間の満干テーブル（サーバー焼き込み: SEO用実コンテンツ・日付明示） */}
+      {weekRows.some((r) => r.tide) && (
+        <section className="mt-8 overflow-x-auto">
+          <h2 className="mb-3 text-lg font-bold">{station.name}の満潮・干潮時刻（直近7日間）</h2>
+          <table className="w-full min-w-[560px] border-collapse text-sm">
+            <thead>
+              <tr className="border-b bg-muted/50 text-left">
+                <th className="px-2 py-2 font-medium">日付</th>
+                <th className="px-2 py-2 font-medium">潮回り</th>
+                <th className="px-2 py-2 font-medium">満潮（潮位）</th>
+                <th className="px-2 py-2 font-medium">干潮（潮位）</th>
+              </tr>
+            </thead>
+            <tbody>
+              {weekRows.map((r) => (
+                <tr key={r.dateStr} className="border-b">
+                  <td className="whitespace-nowrap px-2 py-2 tabular-nums">
+                    {r.label}（{r.dow}）
+                  </td>
+                  <td className="px-2 py-2">{r.phase.tideType}</td>
+                  <td className="px-2 py-2 tabular-nums">
+                    {r.tide && r.tide.hi.length > 0
+                      ? r.tide.hi.map(([t, cm]) => `${t}（${cm}cm）`).join(" / ")
+                      : "—"}
+                  </td>
+                  <td className="px-2 py-2 tabular-nums">
+                    {r.tide && r.tide.lo.length > 0
+                      ? r.tide.lo.map(([t, cm]) => `${t}（${cm}cm）`).join(" / ")
+                      : "—"}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+      )}
 
       {/* この地点が最寄りの釣りスポット（内部リンク網: 潮見表→スポット） */}
       {nearbySpots.length > 0 && (

@@ -1655,7 +1655,7 @@ export function RecommendationClient({ fishingSpots, fishSpecies }: { fishingSpo
                   <div>
                     <p className="font-semibold text-sm">潮見表・潮汐情報</p>
                     <p className="text-xs text-gray-500 mt-0.5">
-                      今日の潮位グラフと満潮・干潮時刻
+                      全国239地点の満潮・干潮時刻と潮位グラフ
                     </p>
                   </div>
                   <ChevronRight className="size-4 text-gray-400 ml-auto" />

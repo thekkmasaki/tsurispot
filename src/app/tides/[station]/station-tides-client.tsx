@@ -15,9 +15,26 @@ interface StationTidesClientProps {
 
 const DAY_LABELS = ["日", "月", "火", "水", "木", "金", "土"];
 
-// ローカル日付 → "YYYY-MM-DD"（クライアント実行なので日本のユーザーは実質JST）
-function fmtDateKey(d: Date): string {
-  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+// JST基準の日付キー14日分（"YYYY-MM-DD"）。SSR/クライアントどちらで実行されてもJSTで揃える
+function buildDayKeys(): string[] {
+  const fmt = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" });
+  const now = Date.now();
+  const keys: string[] = [];
+  for (let i = 0; i < 14; i++) {
+    keys.push(fmt.format(new Date(now + i * 86400000)));
+  }
+  return keys;
+}
+
+function keyMonth(key: string): number {
+  return Number(key.slice(5, 7));
+}
+function keyDay(key: string): number {
+  return Number(key.slice(8, 10));
+}
+function keyDow(key: string): number {
+  // 12:00 JST = 03:00 UTC の同日なので getUTCDay で JST の曜日が取れる
+  return new Date(`${key}T12:00:00+09:00`).getUTCDay();
 }
 
 function tideTypeColor(tideType: string): string {
@@ -43,18 +60,20 @@ function TideCurve({ day, isToday }: { day: TideDay; isToday: boolean }) {
   if (!hourly || hourly.length < 24) return null;
 
   const W = 720;
-  const H = 260;
+  const H = 280;
   const PAD_L = 44;
   const PAD_R = 12;
-  const PAD_T = 16;
-  const PAD_B = 28;
-  const min = Math.min(...hourly);
-  const max = Math.max(...hourly);
+  const PAD_T = 30; // 満潮ラベル（点の上8px+文字高）が枠内に収まる余白
+  const PAD_B = 42; // 干潮ラベル（点の下18px）と時刻軸ラベルが重ならない余白
+  // レンジは毎時24点に加え満干の極値（毎時サンプルの範囲外に出る）も含める
+  const extremes = [...day.hi, ...day.lo].map(([, cm]) => cm);
+  const min = Math.min(...hourly, ...extremes);
+  const max = Math.max(...hourly, ...extremes);
   const span = Math.max(max - min, 40); // 潮差が小さい日でも潰れないように最小レンジ
   const yOf = (cm: number) =>
     PAD_T + (H - PAD_T - PAD_B) * (1 - (cm - min) / span);
-  const xOf = (hour: number) =>
-    PAD_L + ((W - PAD_L - PAD_R) * hour) / 23;
+  // 0〜24時スケール（満干は23時台まで取り得るため /23 だと右端からはみ出す）
+  const xOf = (hour: number) => PAD_L + ((W - PAD_L - PAD_R) * hour) / 24;
 
   const path = hourly
     .map((cm, h) => `${h === 0 ? "M" : "L"}${xOf(h).toFixed(1)},${yOf(cm).toFixed(1)}`)
@@ -92,9 +111,9 @@ function TideCurve({ day, isToday }: { day: TideDay; isToday: boolean }) {
             </text>
           </g>
         ))}
-        {[0, 3, 6, 9, 12, 15, 18, 21].map((h) => (
+        {[0, 3, 6, 9, 12, 15, 18, 21, 24].map((h) => (
           <text key={h} x={xOf(h)} y={H - 8} textAnchor="middle" fontSize="11" fill="#64748b">
-            {h}時
+            {h}
           </text>
         ))}
         <path d={path} fill="none" stroke="#0284c7" strokeWidth="2.5" strokeLinecap="round" />
@@ -131,21 +150,23 @@ function TideCurve({ day, isToday }: { day: TideDay; isToday: boolean }) {
 }
 
 export function StationTidesClient({ code, name }: StationTidesClientProps) {
-  const [days] = useState(() => {
-    const list: Date[] = [];
-    const today = new Date();
-    for (let i = 0; i < 14; i++) {
-      const d = new Date(today);
-      d.setDate(today.getDate() + i);
-      list.push(d);
-    }
-    return list;
-  });
+  // 日付はマウント後にクライアントで確定させる（SSGの焼き込み時刻と閲覧時刻のズレによる
+  // hydration不一致・古い「今日」の表示を避ける。SEO用の実コンテンツはサーバー側の
+  // 7日間テーブルが担う）
+  const [dayKeys, setDayKeys] = useState<string[] | null>(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [tideDays, setTideDays] = useState<Record<string, TideDay> | null>(null);
   const [fetchFailed, setFetchFailed] = useState(false);
 
   useEffect(() => {
+    setDayKeys(buildDayKeys());
+  }, []);
+
+  useEffect(() => {
+    // 地点間のソフトナビゲーション（/tides/A → /tides/B）ではコンポーネントが再マウント
+    // されず state が残るため、code が変わったら前地点のデータを必ず破棄する
+    setTideDays(null);
+    setFetchFailed(false);
     let cancelled = false;
     fetch(`/api/tide/${code}`)
       .then((r) => (r.ok ? r.json() : null))
@@ -162,8 +183,16 @@ export function StationTidesClient({ code, name }: StationTidesClientProps) {
     };
   }, [code]);
 
-  const selectedDate = days[selectedIndex];
-  const dateKey = fmtDateKey(selectedDate);
+  if (!dayKeys) {
+    return (
+      <div className="animate-pulse space-y-3">
+        <div className="h-12 rounded bg-muted" />
+        <div className="h-72 rounded bg-muted" />
+      </div>
+    );
+  }
+
+  const dateKey = dayKeys[Math.min(selectedIndex, dayKeys.length - 1)];
   const phase = getTideTypeFromMoonAge(getMoonAgeJST(dateKey));
   const day = tideDays?.[dateKey] ?? null;
   const isToday = selectedIndex === 0;
@@ -172,10 +201,9 @@ export function StationTidesClient({ code, name }: StationTidesClientProps) {
     <div className="space-y-4">
       {/* 日付セレクター（14日間） */}
       <div className="flex gap-1 overflow-x-auto pb-1 scrollbar-hide" style={{ WebkitOverflowScrolling: "touch" }}>
-        {days.map((d, i) => {
-          const dow = d.getDay();
+        {dayKeys.map((key, i) => {
+          const dow = keyDow(key);
           const isSelected = i === selectedIndex;
-          const key = fmtDateKey(d);
           const p = getTideTypeFromMoonAge(getMoonAgeJST(key));
           return (
             <button
@@ -189,7 +217,7 @@ export function StationTidesClient({ code, name }: StationTidesClientProps) {
               )}
             >
               <span className="text-[10px] leading-tight">
-                {i === 0 ? "今日" : `${d.getMonth() + 1}/${d.getDate()}(${DAY_LABELS[dow]})`}
+                {i === 0 ? "今日" : `${keyMonth(key)}/${keyDay(key)}(${DAY_LABELS[dow]})`}
               </span>
               <span className={cn("text-[10px] font-medium leading-tight", isSelected ? "text-white/90" : "text-muted-foreground")}>
                 {p.tideType}
@@ -204,7 +232,7 @@ export function StationTidesClient({ code, name }: StationTidesClientProps) {
         <CardHeader className="pb-2">
           <CardTitle className="flex flex-wrap items-center gap-2 text-base">
             <Waves className="h-5 w-5 text-sky-600" />
-            {selectedDate.getMonth() + 1}月{selectedDate.getDate()}日（{DAY_LABELS[selectedDate.getDay()]}）の{name}の潮
+            {keyMonth(dateKey)}月{keyDay(dateKey)}日（{DAY_LABELS[keyDow(dateKey)]}）の{name}の潮
             <Badge className={cn("text-sm", tideTypeColor(phase.tideType))}>{phase.tideType}</Badge>
             <span className="flex items-center gap-1 text-xs font-normal text-muted-foreground">
               <Moon className="h-3.5 w-3.5" />
@@ -256,7 +284,11 @@ export function StationTidesClient({ code, name }: StationTidesClientProps) {
               </div>
               <p className="text-xs text-muted-foreground">{phase.description}</p>
             </>
-          ) : tideDays || fetchFailed ? (
+          ) : fetchFailed ? (
+            <p className="py-6 text-center text-sm text-muted-foreground">
+              潮汐データの読み込みに失敗しました。通信環境をご確認のうえ、ページを再読み込みしてください。
+            </p>
+          ) : tideDays ? (
             <p className="py-6 text-center text-sm text-muted-foreground">
               この日の潮汐データは準備中です（翌年分は毎年11月頃の気象庁公開後に反映されます）。
             </p>
