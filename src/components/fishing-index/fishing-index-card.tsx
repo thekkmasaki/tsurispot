@@ -356,7 +356,7 @@ export function FishingIndexCard({ className }: { className?: string }) {
                     {today.profile === "no-sea-temp"
                       ? "※ このスポットは海面水温が取得できないため、配点は 潮35・マヅメ25・風20・天気20。"
                       : "※ 配点は 潮35・マヅメ25・風20・天気15・水温5。"}
-                    潮汐は月齢からの概算です。
+                    潮の時刻は気象庁 潮位表（最寄り観測地点）の天文潮推算値です。
                   </p>
                 </div>
               </details>

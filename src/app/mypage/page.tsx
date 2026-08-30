@@ -103,6 +103,8 @@ interface DashboardItem {
   name: string;
   prefecture: string;
   spotType: string;
+  tideMode: "full" | "phase-only" | "none";
+  stationName: string | null;
   tideLabel: string;
   tideType: string;
   fishingScore: number;
@@ -766,9 +768,13 @@ export default function MyPage() {
                 <span className="font-medium">今日の好機</span>
                 <span className="text-xs text-muted-foreground">
                   <Moon className="mr-0.5 inline h-3 w-3" />
-                  {dashboard.items[0]?.tideLabel
-                    ? `${dashboard.items[0].tideLabel}（月齢${dashboard.moonAge.toFixed(1)}）`
-                    : `月齢 ${dashboard.moonAge.toFixed(1)}`}
+                  {(() => {
+                    // 潮汐が有効なスポットの潮回りをヘッダに出す（淡水のみの場合は月齢だけ）
+                    const tidal = dashboard.items.find((i) => i.tideMode !== "none");
+                    return tidal
+                      ? `${tidal.tideLabel}（月齢${dashboard.moonAge.toFixed(1)}）`
+                      : `月齢 ${dashboard.moonAge.toFixed(1)}`;
+                  })()}
                 </span>
               </div>
               {dashboard.items.length === 0 ? (
@@ -799,20 +805,25 @@ export default function MyPage() {
                           <div className="min-w-0 flex-1">
                             <div className="truncate font-medium">{item.name}</div>
                             <div className="text-xs text-muted-foreground">
-                              {item.prefecture}・{item.tideLabel}・月齢{dashboard.moonAge.toFixed(1)}
+                              {item.tideMode === "none"
+                                ? item.prefecture
+                                : `${item.prefecture}・${item.tideLabel}・月齢${dashboard.moonAge.toFixed(1)}`}
                             </div>
                           </div>
+                          {/* 潮汐が無関係な淡水スポットには潮ベースの★を出さない */}
+                          {item.tideMode !== "none" && (
                           <span
                             className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${
-                              item.fishingScore >= 80
+                              item.fishingScore >= 5
                                 ? "bg-rose-100 text-rose-700"
-                                : item.fishingScore >= 60
+                                : item.fishingScore >= 4
                                   ? "bg-amber-100 text-amber-700"
                                   : "bg-slate-100 text-slate-600"
                             }`}
                           >
-                            ★{Math.max(1, Math.round(item.fishingScore / 20))}
+                            ★{item.fishingScore}
                           </span>
+                          )}
                         </div>
                         {(item.highTides.length > 0 || item.lowTides.length > 0) && (
                           <div className="mt-1 flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-muted-foreground">
@@ -821,6 +832,9 @@ export default function MyPage() {
                             )}
                             {item.lowTides.length > 0 && (
                               <span>干潮 {item.lowTides.join(" / ")}</span>
+                            )}
+                            {item.stationName && (
+                              <span className="text-[10px]">（{item.stationName}）</span>
                             )}
                           </div>
                         )}
