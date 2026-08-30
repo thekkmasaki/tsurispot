@@ -3,6 +3,8 @@ import { redis } from "@/lib/redis";
 import { getSpotBySlug } from "@/lib/data/spots";
 import { fetchSpotForecast } from "@/lib/weather/open-meteo";
 import { calcFishingIndex } from "@/lib/weather/fishing-index";
+import { getTideDisplayMode, getTideStationForSpot } from "@/lib/tide/nearest-station";
+import { getTideInfoForDate } from "@/lib/tide/tide-info";
 import {
   clusterByDistance,
   pickHomeClusterIndex,
@@ -104,7 +106,12 @@ export async function POST(req: NextRequest) {
         });
         return;
       }
-      const r = calcFishingIndex(today.date, spot.longitude, today);
+      // フル表示スポット以外（湖・池・非河口の河川）には海の満干時刻を流さない（潮回りのみ）
+      const tideCode =
+        getTideDisplayMode(spot) === "full"
+          ? (getTideStationForSpot(spot)?.code ?? null)
+          : null;
+      const r = calcFishingIndex(getTideInfoForDate(tideCode, today.date), today);
       const best = r.best
         ? `${String(r.best.startHour).padStart(2, "0")}:00-${String(r.best.endHour).padStart(2, "0")}:00`
         : null;

@@ -363,7 +363,7 @@ export default function MonthlyPage() {
                 href="/tides"
                 className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
               >
-                <p className="font-semibold">潮汐チャート</p>
+                <p className="font-semibold">潮見表（全国239地点）</p>
                 <p className="mt-1 text-xs text-muted-foreground">
                   潮の動きをチェック
                 </p>

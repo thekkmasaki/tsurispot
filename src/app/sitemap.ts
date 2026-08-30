@@ -20,6 +20,7 @@ import { redis } from "@/lib/redis";
 import { getUserById } from "@/lib/user-store";
 import { isSitemapEligible } from "@/lib/seo-quality";
 import { monthLastModified } from "@/lib/sitemap-dates";
+import { STATION_SLUGS } from "@/lib/tide/station-slugs";
 
 const baseUrl = "https://tsurispot.com";
 
@@ -118,6 +119,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/catchable-now`, lastModified: dynamicDate, changeFrequency: "daily", priority: 0.8 },
     { url: `${baseUrl}/ranking`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.8 },
     { url: `${baseUrl}/tides`, lastModified: dynamicDate, changeFrequency: "daily", priority: 0.7 },
+    // 地点別潮見表（気象庁239地点。満干時刻は日々変わるため daily）
+    ...Object.values(STATION_SLUGS).map((e) => ({
+      url: `${baseUrl}/tides/${e.slug}`,
+      lastModified: dynamicDate,
+      changeFrequency: "daily" as const,
+      priority: 0.6,
+    })),
     { url: `${baseUrl}/fishing-calendar`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/for-beginners`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.8 },
     { url: `${baseUrl}/fishing`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.8 },

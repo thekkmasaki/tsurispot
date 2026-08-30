@@ -33,6 +33,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { getMoonAgeJST, getTideTypeFromMoonAge } from "@/lib/tide/moon";
 // /recommendation はクライアントに全2,141スポット＋全100魚種を渡すため、RSCペイロード/
 // ハイドレーション削減用に必要フィールドだけの軽量型を定義する。特に cf.fish の完全 RecoFish
 // （24フィールド）が数千回直列化されるのを {slug,name} のみに削減するのが主目的。
@@ -70,33 +71,19 @@ export interface RecoPeakFish {
   peakMonths: number[];
 }
 
-// --- 潮汐計算（tidesページと同じロジック） ---
+// --- 潮汐計算（共通モジュール @/lib/tide/moon を使用） ---
 
-function getMoonAge(date: Date): number {
-  const knownNewMoon = new Date(2024, 0, 11);
-  const diffDays =
-    (date.getTime() - knownNewMoon.getTime()) / (1000 * 60 * 60 * 24);
-  return ((diffDays % 29.53) + 29.53) % 29.53;
+// ローカル日付 → "YYYY-MM-DD"（クライアント実行なので日本のユーザーは実質JST）
+function toDateKey(date: Date): string {
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
 }
 
-function getTideType(
-  moonAge: number
-): "大潮" | "中潮" | "小潮" | "長潮" | "若潮" {
-  if (moonAge < 2 || (moonAge >= 13.5 && moonAge < 16.5)) return "大潮";
-  if (
-    (moonAge >= 2 && moonAge < 5) ||
-    (moonAge >= 10 && moonAge < 13.5) ||
-    (moonAge >= 16.5 && moonAge < 20) ||
-    (moonAge >= 25 && moonAge < 28)
-  )
-    return "中潮";
-  if ((moonAge >= 5 && moonAge < 8) || (moonAge >= 20 && moonAge < 23))
-    return "小潮";
-  if ((moonAge >= 8 && moonAge < 9) || (moonAge >= 23 && moonAge < 24))
-    return "長潮";
-  if ((moonAge >= 9 && moonAge < 10) || (moonAge >= 24 && moonAge < 25))
-    return "若潮";
-  return "中潮";
+function getMoonAge(date: Date): number {
+  return getMoonAgeJST(toDateKey(date));
+}
+
+function getTideType(moonAge: number): string {
+  return getTideTypeFromMoonAge(moonAge).tideType;
 }
 
 function getTideScore(tideType: string): number {
@@ -1668,7 +1655,7 @@ export function RecommendationClient({ fishingSpots, fishSpecies }: { fishingSpo
                   <div>
                     <p className="font-semibold text-sm">潮見表・潮汐情報</p>
                     <p className="text-xs text-gray-500 mt-0.5">
-                      今日の潮位グラフと満潮・干潮時刻
+                      全国239地点の満潮・干潮時刻と潮位グラフ
                     </p>
                   </div>
                   <ChevronRight className="size-4 text-gray-400 ml-auto" />

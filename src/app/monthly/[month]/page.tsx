@@ -1102,7 +1102,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
               className="rounded-lg border bg-white p-4 text-center transition-shadow hover:shadow-md dark:bg-card"
             >
               <Waves className="mx-auto mb-2 size-8 text-blue-500" />
-              <p className="font-semibold">潮汐チャート</p>
+              <p className="font-semibold">潮見表（全国239地点）</p>
               <p className="mt-1 text-xs text-muted-foreground">
                 釣果に直結する潮汐情報
               </p>

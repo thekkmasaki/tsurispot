@@ -10,7 +10,7 @@
  * 決定論的な純関数のみ（now は呼び出し側から注入）。
  */
 
-import { getMoonAge, getTideInfo } from "@/lib/weather/calculations";
+import { getMoonAgeJST, getTideTypeFromMoonAge } from "@/lib/tide/moon";
 import type { SpotAnalysisResult, EstimatedFish } from "./types";
 
 // ---------------------------------------------------------------------------
@@ -152,9 +152,11 @@ function regionFactor(
  * 月齢から潮回り（大潮〜長潮）を求め、回遊性魚種のみに適用する。
  * fishingScore 1-5 → 0.96〜1.04
  */
-function tideFactor(fishName: string, now: Date, lng: number): number {
+function tideFactor(fishName: string, now: Date): number {
   if (!MIGRATORY_FISH.has(normalizeFishName(fishName))) return 1.0;
-  const score = getTideInfo(getMoonAge(now), lng).fishingScore;
+  // 潮回りは朔テーブル由来の月齢から判定（JST日付基準）
+  const dateStr = new Intl.DateTimeFormat("sv-SE", { timeZone: "Asia/Tokyo" }).format(now);
+  const score = getTideTypeFromMoonAge(getMoonAgeJST(dateStr)).fishingScore;
   return 0.96 + (score - 1) * 0.02;
 }
 
@@ -202,7 +204,7 @@ export function scoreEstimatedFish(
 
   const { f: fSeason, inSeason } = seasonFactor(fish, month);
   const fRegion = regionFactor(fish.name, month, ctx.catchableFish);
-  const fTide = tideFactor(fish.name, ctx.now, ctx.longitude);
+  const fTide = tideFactor(fish.name, ctx.now);
   const fTemp = waterTempFactor(month, ctx.latitude);
   const { boost, count } = catchBoost(fish.name, ctx.catchCounts);
 

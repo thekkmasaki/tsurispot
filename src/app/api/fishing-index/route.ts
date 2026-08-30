@@ -6,6 +6,8 @@ import {
   calcFishingIndex,
   type FishingIndexResult,
 } from "@/lib/weather/fishing-index";
+import { getTideDisplayMode, getTideStationForSpot } from "@/lib/tide/nearest-station";
+import { getTideInfoForDate } from "@/lib/tide/tide-info";
 import {
   clusterByDistance,
   pickHomeClusterIndex,
@@ -118,8 +120,14 @@ export async function POST(request: Request) {
         weatherOk: false,
       };
     }
+    // 満干時刻は最寄り観測地点の気象庁データから。
+    // フル表示スポット以外（湖・池・非河口の河川）には海の満干時刻を流さない（潮回りのみ）
+    const tideCode =
+      getTideDisplayMode(spot) === "full"
+        ? (getTideStationForSpot(spot)?.code ?? null)
+        : null;
     const results = forecast.days.map((d) =>
-      calcFishingIndex(d.date, spot.longitude, d),
+      calcFishingIndex(getTideInfoForDate(tideCode, d.date), d),
     );
     return {
       slug: spot.slug,
