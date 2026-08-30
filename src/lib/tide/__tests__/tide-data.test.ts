@@ -71,53 +71,61 @@ describe("データファイルの網羅性・妥当性", () => {
 });
 
 describe("満干値の回帰ピン（気象庁txt原本と突合済み）", () => {
+  // hourly（毎時潮位）は --with-hourly 生成時のみ付くため、満干（hi/lo）だけをピンする
   it("鳥羽TB 2026-08-29/30（香良洲漁港の最寄り地点・UGC指摘の検証日）", () => {
-    expect(getTideDay("TB", "2026-08-29")).toEqual({
-      hi: [
-        ["06:15", 215],
-        ["19:02", 218],
-      ],
-      lo: [
-        ["00:26", 73],
-        ["12:39", 33],
-      ],
-    });
-    expect(getTideDay("TB", "2026-08-30")).toEqual({
-      hi: [
-        ["06:52", 217],
-        ["19:25", 219],
-      ],
-      lo: [
-        ["00:56", 63],
-        ["13:08", 41],
-      ],
-    });
+    const d29 = getTideDay("TB", "2026-08-29");
+    expect(d29?.hi).toEqual([
+      ["06:15", 215],
+      ["19:02", 218],
+    ]);
+    expect(d29?.lo).toEqual([
+      ["00:26", 73],
+      ["12:39", 33],
+    ]);
+    const d30 = getTideDay("TB", "2026-08-30");
+    expect(d30?.hi).toEqual([
+      ["06:52", 217],
+      ["19:25", 219],
+    ]);
+    expect(d30?.lo).toEqual([
+      ["00:56", 63],
+      ["13:08", 41],
+    ]);
   });
 
   it("東京TK 2026-01-01（負の潮位を含む固定長パースの回帰）", () => {
-    expect(getTideDay("TK", "2026-01-01")).toEqual({
-      hi: [
-        ["04:08", 169],
-        ["14:15", 176],
-      ],
-      lo: [
-        ["09:01", 123],
-        ["21:35", -2],
-      ],
-    });
+    const d = getTideDay("TK", "2026-01-01");
+    expect(d?.hi).toEqual([
+      ["04:08", 169],
+      ["14:15", 176],
+    ]);
+    expect(d?.lo).toEqual([
+      ["09:01", 123],
+      ["21:35", -2],
+    ]);
   });
 
   it("那覇NH 2026-08-29", () => {
-    expect(getTideDay("NH", "2026-08-29")).toEqual({
-      hi: [
-        ["07:32", 222],
-        ["20:12", 216],
-      ],
-      lo: [
-        ["01:37", 72],
-        ["13:56", 35],
-      ],
-    });
+    const d = getTideDay("NH", "2026-08-29");
+    expect(d?.hi).toEqual([
+      ["07:32", 222],
+      ["20:12", 216],
+    ]);
+    expect(d?.lo).toEqual([
+      ["01:37", 72],
+      ["13:56", 35],
+    ]);
+  });
+
+  it("hourly（毎時潮位）が24点・満干と整合したレンジで入っている", () => {
+    const d = getTideDay("TB", "2026-08-29");
+    expect(d?.hourly).toHaveLength(24);
+    const min = Math.min(...(d?.hourly ?? []));
+    const max = Math.max(...(d?.hourly ?? []));
+    // 満干の潮位は毎時サンプルの範囲を少し超える程度に収まる
+    expect(min).toBeGreaterThan(0);
+    expect(max).toBeLessThan(250);
+    expect(max).toBeGreaterThanOrEqual(215); // 満潮215cm付近を含む
   });
 });
 

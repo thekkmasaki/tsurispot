@@ -32,6 +32,7 @@ import {
   generate14Days,
 } from "@/lib/weather/calculations";
 import { getMoonAgeJST, getTideTypeFromMoonAge } from "@/lib/tide/moon";
+import { getStationSlug } from "@/lib/tide/station-slugs";
 import type { ResolvedTideStation, TideDisplayMode } from "@/lib/tide/nearest-station";
 import type { TideDay } from "@/lib/tide/tide-data";
 import { FishingScoreBar } from "./fishing-score-bar";
@@ -477,6 +478,14 @@ export function SpotWeatherTide({ lat, lng, hideBestTimes, tideMode, tideStation
                   {tideStation && (
                     <p className="text-[10px] leading-relaxed">
                       観測地点: {tideStation.name}（約{tideStation.distanceKm}km）
+                      {getStationSlug(tideStation.code) && (
+                        <a
+                          href={`/tides/${getStationSlug(tideStation.code)}`}
+                          className="ml-1 text-sky-600 underline hover:text-sky-800"
+                        >
+                          潮見表を見る
+                        </a>
+                      )}
                     </p>
                   )}
                 </div>
