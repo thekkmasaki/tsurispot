@@ -91,6 +91,38 @@ export async function getLikeCount(reportId: string): Promise<number> {
   return typeof n === "number" && n > 0 ? n : 0;
 }
 
+// ─── 運営返信 ───
+// REPORT#{reportId}/OFFICIAL_REPLY。UGC釣果投稿へのサイト運営からの公式返信（1投稿1件）。
+// 表示側は SPOT#{slug}/UGC_REPORTS の配列を書き換えず、取得時に batchGet で付与する
+// （非正規化ビューへの二重書き込みを避け、書き込み整合性の問題を作らない）。
+
+export interface OfficialReply {
+  text: string;
+  repliedAt: string;
+}
+
+export async function setOfficialReply(
+  reportId: string,
+  text: string,
+): Promise<OfficialReply> {
+  const reply: OfficialReply = { text, repliedAt: new Date().toISOString() };
+  await dbPut(reportPk(reportId), "OFFICIAL_REPLY", reply, POST_TTL_SECONDS);
+  return reply;
+}
+
+export async function getOfficialReply(reportId: string): Promise<OfficialReply | null> {
+  return dbGet<OfficialReply>(reportPk(reportId), "OFFICIAL_REPLY");
+}
+
+export async function getOfficialRepliesBatch(
+  reportIds: string[],
+): Promise<(OfficialReply | null)[]> {
+  if (reportIds.length === 0) return [];
+  return dbBatchGet<OfficialReply>(
+    reportIds.map((id) => ({ pk: reportPk(id), sk: "OFFICIAL_REPLY" })),
+  );
+}
+
 // ─── コメント ───
 // COMMENTS#{reportId}/C#{createdAtISO}#{commentId}。通報は既存 /api/report-flag を
 // commentId で共用（REPORT#{commentId}/FLAGGED が立つ → 取得時に除外）。

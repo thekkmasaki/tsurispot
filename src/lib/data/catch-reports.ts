@@ -1,5 +1,11 @@
 // ユーザー釣果投稿（UGC）データ定義
 
+/** 運営からの公式返信（REPORT#{id}/OFFICIAL_REPLY。social-store.ts の OfficialReply と同形） */
+export interface OfficialReplyInfo {
+  text: string;
+  repliedAt: string;
+}
+
 export interface CatchReport {
   id: string;
   spotSlug: string;
@@ -16,6 +22,7 @@ export interface CatchReport {
   weather?: string; // 天候
   submittedAt?: string; // 投稿日時(ISO)。UGC投稿時に設定。型と実値の整合用
   pioneer?: boolean; // スポット初投稿（開拓者）。一覧の🏴バッジ表示用
+  officialReply?: OfficialReplyInfo; // 運営返信（取得時にbatchGetで付与、配列には保存しない）
 }
 
 /** スポット開拓者（SPOT#{slug}/PIONEER・TTLなしの永続レコード） */
@@ -112,6 +119,15 @@ export async function getCatchReportsBySpotAsync(
         const flagKeys = parsed.map((r) => ({ pk: `REPORT#${r.id}`, sk: "FLAGGED" }));
         const flags = await dbBatchGet(flagKeys);
         ugcReports = parsed.filter((_, i) => flags[i] === null);
+      }
+      // 運営返信を付与（配列は書き換えず取得時にbatchGetで載せる）
+      if (ugcReports.length > 0) {
+        const { getOfficialRepliesBatch } = await import("@/lib/social-store");
+        const replies = await getOfficialRepliesBatch(ugcReports.map((r) => r.id));
+        ugcReports = ugcReports.map((r, i) => {
+          const reply = replies[i];
+          return reply ? { ...r, officialReply: reply } : r;
+        });
       }
     }
   } catch (err) {
