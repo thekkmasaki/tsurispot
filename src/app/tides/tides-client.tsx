@@ -18,36 +18,25 @@ import {
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { getMoonAgeJST, getTideTypeFromMoonAge } from "@/lib/tide/moon";
 
 // --- 潮汐計算ロジック ---
+// 月齢・潮回りは共通モジュール（@/lib/tide/moon、朔テーブル由来）を使用。
+// 潮位カーブは簡易正弦波モデルのまま（気象庁実データへの置き換えは地点別ページ化と同時に実施予定）。
 
-/** 月齢を計算（既知の新月基準） */
+// ローカル日付 → "YYYY-MM-DD"（クライアント実行なので日本のユーザーは実質JST）
+function toDateKey(date: Date): string {
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+}
+
+/** 月齢を計算（朔テーブル由来） */
 function getMoonAge(date: Date): number {
-  const knownNewMoon = new Date(2024, 0, 11); // 2024年1月11日は新月
-  const diffDays =
-    (date.getTime() - knownNewMoon.getTime()) / (1000 * 60 * 60 * 24);
-  return ((diffDays % 29.53) + 29.53) % 29.53;
+  return getMoonAgeJST(toDateKey(date));
 }
 
 /** 潮回りを判定 */
-function getTideType(
-  moonAge: number
-): "大潮" | "中潮" | "小潮" | "長潮" | "若潮" {
-  if (moonAge < 2 || (moonAge >= 13.5 && moonAge < 16.5)) return "大潮";
-  if (
-    (moonAge >= 2 && moonAge < 5) ||
-    (moonAge >= 10 && moonAge < 13.5) ||
-    (moonAge >= 16.5 && moonAge < 20) ||
-    (moonAge >= 25 && moonAge < 28)
-  )
-    return "中潮";
-  if ((moonAge >= 5 && moonAge < 8) || (moonAge >= 20 && moonAge < 23))
-    return "小潮";
-  if ((moonAge >= 8 && moonAge < 9) || (moonAge >= 23 && moonAge < 24))
-    return "長潮";
-  if ((moonAge >= 9 && moonAge < 10) || (moonAge >= 24 && moonAge < 25))
-    return "若潮";
-  return "中潮";
+function getTideType(moonAge: number): string {
+  return getTideTypeFromMoonAge(moonAge).tideType;
 }
 
 /** 潮位を計算（0-100の相対値） */

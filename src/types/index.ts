@@ -358,21 +358,6 @@ export interface TackleRecommendation {
   isBeginnerFriendly: boolean;
 }
 
-export interface TideInfo {
-  date: string;
-  tideType: string;
-  highTide1: string;
-  highTide1Cm: number;
-  highTide2: string;
-  highTide2Cm: number;
-  lowTide1: string;
-  lowTide1Cm: number;
-  lowTide2: string;
-  lowTide2Cm: number;
-  sunrise: string;
-  sunset: string;
-}
-
 export interface TideAdvice {
   bestTide: string;
   bestTidePhase: string;
