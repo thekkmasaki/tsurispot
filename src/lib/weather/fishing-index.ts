@@ -8,8 +8,6 @@
  * 時間帯おすすめは既存 calcBestFishingTime（マヅメ+4/潮変わり目+3/…）をそのまま使う。
  */
 import {
-  getMoonAge,
-  getTideInfo,
   calcBestFishingTime,
   type BestTimeResult,
   type TideInfo,
@@ -192,19 +190,14 @@ function seaTempPoints(seaTempC: number): IndexBreakdownRow {
 
 /**
  * 1スポット×1日の指数を計算する。
- * @param dateStr YYYY-MM-DD（潮計算に使用）
- * @param lng スポット経度（潮時刻の概算に使用）
+ * @param tide その日・そのスポットの潮情報（呼出側が @/lib/tide で解決して渡す。
+ *             満干時刻は気象庁 潮位表データ由来。誤差の大きい近似式へのフォールバックはしない）
  * @param day その日の天気ダイジェスト
  */
 export function calcFishingIndex(
-  dateStr: string,
-  lng: number,
+  tide: TideInfo,
   day: DayWeatherDigest,
 ): FishingIndexResult {
-  // 正午JST基準で月齢を求める（日付境界のブレ防止）
-  const moonAge = getMoonAge(new Date(`${dateStr}T12:00:00+09:00`));
-  const tide = getTideInfo(moonAge, lng);
-
   const profile: FishingIndexResult["profile"] =
     day.seaTempC === null ? "no-sea-temp" : "marine";
 

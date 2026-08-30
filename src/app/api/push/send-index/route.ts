@@ -3,6 +3,8 @@ import { redis } from "@/lib/redis";
 import { getSpotBySlug } from "@/lib/data/spots";
 import { fetchSpotForecast } from "@/lib/weather/open-meteo";
 import { calcFishingIndex } from "@/lib/weather/fishing-index";
+import { getTideStationForSpot } from "@/lib/tide/nearest-station";
+import { getTideInfoForDate } from "@/lib/tide/tide-info";
 import {
   clusterByDistance,
   pickHomeClusterIndex,
@@ -104,7 +106,11 @@ export async function POST(req: NextRequest) {
         });
         return;
       }
-      const r = calcFishingIndex(today.date, spot.longitude, today);
+      const station = getTideStationForSpot(spot);
+      const r = calcFishingIndex(
+        getTideInfoForDate(station?.code ?? null, today.date),
+        today,
+      );
       const best = r.best
         ? `${String(r.best.startHour).padStart(2, "0")}:00-${String(r.best.endHour).padStart(2, "0")}:00`
         : null;

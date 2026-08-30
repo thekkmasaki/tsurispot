@@ -28,29 +28,39 @@ import {
   getWindDirectionLabel,
   getWindRotation,
   getWeatherInfo,
-  getMoonAge,
-  getTideInfo,
   calcBestFishingTime,
   generate14Days,
 } from "@/lib/weather/calculations";
+import { getMoonAgeJST, getTideTypeFromMoonAge } from "@/lib/tide/moon";
+import type { ResolvedTideStation, TideDisplayMode } from "@/lib/tide/nearest-station";
+import type { TideDay } from "@/lib/tide/tide-data";
 import { FishingScoreBar } from "./fishing-score-bar";
 
 interface SpotWeatherTideProps {
   lat: number;
   lng: number;
-  spotName: string;
   hideBestTimes?: boolean; // 管理釣り場では潮汐・タマヅメ無関係なので「おすすめ時間帯」を隠す
+  /** 潮汐表示モード（none=淡水で非表示 / phase-only=河川で潮回りのみ / full=満干時刻あり） */
+  tideMode: TideDisplayMode;
+  /** 最寄りの気象庁 潮位表観測地点（tideMode=none のときは null） */
+  tideStation: ResolvedTideStation | null;
 }
 
 // 曜日ラベル
 const DAY_LABELS = ["日", "月", "火", "水", "木", "金", "土"];
 
-export function SpotWeatherTide({ lat, lng, spotName, hideBestTimes }: SpotWeatherTideProps) {
+// ローカル日付 → "YYYY-MM-DD"（クライアント実行なので日本のユーザーは実質JST）
+function fmtDateKey(d: Date): string {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+}
+
+export function SpotWeatherTide({ lat, lng, hideBestTimes, tideMode, tideStation }: SpotWeatherTideProps) {
   const [weather, setWeather] = useState<WeatherData | null>(null);
   const [loading, setLoading] = useState(true);
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [selectedHour, setSelectedHour] = useState<number | null>(null); // null=終日
   const [expandedGroup, setExpandedGroup] = useState<string | null>(null);
+  const [tideDays, setTideDays] = useState<Record<string, TideDay> | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const hourScrollRef = useRef<HTMLDivElement>(null);
 
@@ -58,8 +68,30 @@ export function SpotWeatherTide({ lat, lng, spotName, hideBestTimes }: SpotWeath
   const dates = generate14Days();
   const selectedDate = dates[selectedIndex];
 
-  // 選択日の潮汐情報
-  const tideInfo = getTideInfo(getMoonAge(selectedDate), lng);
+  // 気象庁 潮位表データ（最寄り観測地点ぶん）を1回だけ取得
+  const stationCode = tideMode === "full" && tideStation ? tideStation.code : null;
+  useEffect(() => {
+    if (!stationCode) return;
+    let cancelled = false;
+    fetch(`/api/tide/${stationCode}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((json) => {
+        if (!cancelled && json?.days) setTideDays(json.days as Record<string, TideDay>);
+      })
+      .catch(() => {
+        // 取得失敗時は満干時刻なし（潮回りのみ）で表示
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [stationCode]);
+
+  // 選択日の潮回り（朔テーブル由来の月齢から判定）と満干実データ
+  const dateKey = fmtDateKey(selectedDate);
+  const tidePhase = getTideTypeFromMoonAge(getMoonAgeJST(dateKey));
+  const tideDay = tideMode === "full" ? (tideDays?.[dateKey] ?? null) : null;
+  const highTideStrs = tideDay ? tideDay.hi.map(([t]) => t) : [];
+  const lowTideStrs = tideDay ? tideDay.lo.map(([t]) => t) : [];
 
   // 時間帯グループ（釣り人向け）
   const TIME_GROUPS = [
@@ -172,7 +204,7 @@ export function SpotWeatherTide({ lat, lng, spotName, hideBestTimes }: SpotWeath
           <ThermometerSun className="h-5 w-5 text-sky-600" />
           <h3 className="font-bold text-sm">{getHeaderText()}</h3>
         </div>
-        <FishingScoreBar score={tideInfo.fishingScore} />
+        {tideMode !== "none" && <FishingScoreBar score={tidePhase.fishingScore} />}
       </div>
 
       {/* 14日間の日付セレクター */}
@@ -301,7 +333,7 @@ export function SpotWeatherTide({ lat, lng, spotName, hideBestTimes }: SpotWeath
       </div>
 
       <CardContent className="p-4">
-        <div className="grid grid-cols-2 gap-4">
+        <div className={cn("grid gap-4", tideMode !== "none" ? "grid-cols-2" : "grid-cols-1")}>
           {/* 天気セクション */}
           <div className="space-y-3">
             <h4 className="text-xs font-semibold text-muted-foreground flex items-center gap-1">
@@ -386,7 +418,8 @@ export function SpotWeatherTide({ lat, lng, spotName, hideBestTimes }: SpotWeath
             )}
           </div>
 
-          {/* 潮汐セクション */}
+          {/* 潮汐セクション（淡水の湖・管理池では非表示） */}
+          {tideMode !== "none" && (
           <div className="space-y-3">
             <h4 className="text-xs font-semibold text-muted-foreground flex items-center gap-1">
               <Waves className="h-3.5 w-3.5" />
@@ -396,39 +429,65 @@ export function SpotWeatherTide({ lat, lng, spotName, hideBestTimes }: SpotWeath
               <div className="flex items-center gap-2">
                 <div className={cn(
                   "flex items-center justify-center rounded-lg h-10 w-10",
-                  tideInfo.fishingScore >= 4 ? "bg-emerald-100" :
-                  tideInfo.fishingScore >= 3 ? "bg-blue-100" :
+                  tidePhase.fishingScore >= 4 ? "bg-emerald-100" :
+                  tidePhase.fishingScore >= 3 ? "bg-blue-100" :
                   "bg-amber-100"
                 )}>
                   <span className={cn(
                     "text-sm font-bold",
-                    tideInfo.fishingScore >= 4 ? "text-emerald-700" :
-                    tideInfo.fishingScore >= 3 ? "text-blue-700" :
+                    tidePhase.fishingScore >= 4 ? "text-emerald-700" :
+                    tidePhase.fishingScore >= 3 ? "text-blue-700" :
                     "text-amber-700"
                   )}>
-                    {tideInfo.tideLabel}
+                    {tidePhase.tideLabel}
                   </span>
                 </div>
                 <div>
                   <div className="flex items-center gap-1 text-xs text-muted-foreground">
                     <Moon className="h-3 w-3" />
-                    <span>月齢 {tideInfo.moonAge.toFixed(1)}</span>
+                    <span>月齢 {tidePhase.moonAge.toFixed(1)}</span>
                   </div>
                 </div>
               </div>
 
-              <div className="space-y-1 text-xs text-muted-foreground">
-                <div className="flex items-center gap-1.5">
-                  <Droplets className="h-3 w-3 text-blue-500" />
-                  <span>満潮 {tideInfo.highTides.join(" / ")}</span>
+              {tideMode === "full" ? (
+                <div className="space-y-1 text-xs text-muted-foreground">
+                  <div className="flex items-center gap-1.5">
+                    <Droplets className="h-3 w-3 text-blue-500" />
+                    <span>
+                      満潮{" "}
+                      {tideDay && tideDay.hi.length > 0
+                        ? tideDay.hi.map(([t, cm]) => `${t}(${cm}cm)`).join(" / ")
+                        : tideDays
+                          ? "—"
+                          : "—（データ準備中）"}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <Droplets className="h-3 w-3 text-gray-400" />
+                    <span>
+                      干潮{" "}
+                      {tideDay && tideDay.lo.length > 0
+                        ? tideDay.lo.map(([t, cm]) => `${t}(${cm}cm)`).join(" / ")
+                        : tideDays
+                          ? "—"
+                          : "—（データ準備中）"}
+                    </span>
+                  </div>
+                  {tideStation && (
+                    <p className="text-[10px] leading-relaxed">
+                      観測地点: {tideStation.name}（約{tideStation.distanceKm}km）
+                    </p>
+                  )}
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <Droplets className="h-3 w-3 text-gray-400" />
-                  <span>干潮 {tideInfo.lowTides.join(" / ")}</span>
-                </div>
-              </div>
+              ) : (
+                <p className="text-[11px] text-muted-foreground leading-relaxed">
+                  河口・汽水域では潮の影響を受けます。満潮・干潮の時刻は最寄りの海の釣り場ページをご確認ください。
+                </p>
+              )}
             </div>
           </div>
+          )}
         </div>
 
         {/* おすすめ時間帯 + 潮の解説 (管理釣り場では非表示) */}
@@ -437,8 +496,8 @@ export function SpotWeatherTide({ lat, lng, spotName, hideBestTimes }: SpotWeath
             dailyData.hourly,
             dailyData.sunrise,
             dailyData.sunset,
-            tideInfo.highTides,
-            tideInfo.lowTides,
+            highTideStrs,
+            lowTideStrs,
           );
           return best && best.score > 0 ? (
             <div className="mt-3 rounded-lg bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 px-3 py-2.5">
@@ -462,7 +521,7 @@ export function SpotWeatherTide({ lat, lng, spotName, hideBestTimes }: SpotWeath
             </div>
           ) : (
             <div className="mt-3 rounded-lg bg-gray-50 px-3 py-2">
-              <p className="text-xs text-muted-foreground leading-relaxed">{tideInfo.description}</p>
+              <p className="text-xs text-muted-foreground leading-relaxed">{tidePhase.description}</p>
             </div>
           );
         })()}
@@ -691,7 +750,9 @@ export function SpotWeatherTide({ lat, lng, spotName, hideBestTimes }: SpotWeath
         })()}
 
         <p className="mt-2 text-[10px] text-muted-foreground">
-          ※ 天気・水温はOpen-Meteoの予報データ。潮汐は月齢に基づく概算値で、実際の潮位とは異なる場合があります。
+          {tideMode === "full" && tideStation
+            ? `※ 天気・水温はOpen-Meteoの予報データ。潮汐は気象庁 潮位表（${tideStation.name}地点）の天文潮推算値で、実際の潮位は気象の影響により変わります。航海・作業の用途には使用できません。`
+            : "※ 天気・水温はOpen-Meteoの予報データ。"}
         </p>
       </CardContent>
     </Card>

@@ -103,6 +103,8 @@ interface DashboardItem {
   name: string;
   prefecture: string;
   spotType: string;
+  tideMode: "full" | "phase-only" | "none";
+  stationName: string | null;
   tideLabel: string;
   tideType: string;
   fishingScore: number;
@@ -804,14 +806,14 @@ export default function MyPage() {
                           </div>
                           <span
                             className={`shrink-0 rounded-full px-2 py-0.5 text-xs font-medium ${
-                              item.fishingScore >= 80
+                              item.fishingScore >= 5
                                 ? "bg-rose-100 text-rose-700"
-                                : item.fishingScore >= 60
+                                : item.fishingScore >= 4
                                   ? "bg-amber-100 text-amber-700"
                                   : "bg-slate-100 text-slate-600"
                             }`}
                           >
-                            ★{Math.max(1, Math.round(item.fishingScore / 20))}
+                            ★{item.fishingScore}
                           </span>
                         </div>
                         {(item.highTides.length > 0 || item.lowTides.length > 0) && (
@@ -821,6 +823,9 @@ export default function MyPage() {
                             )}
                             {item.lowTides.length > 0 && (
                               <span>干潮 {item.lowTides.join(" / ")}</span>
+                            )}
+                            {item.stationName && (
+                              <span className="text-[10px]">（{item.stationName}）</span>
                             )}
                           </div>
                         )}

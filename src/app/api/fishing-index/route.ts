@@ -6,6 +6,8 @@ import {
   calcFishingIndex,
   type FishingIndexResult,
 } from "@/lib/weather/fishing-index";
+import { getTideStationForSpot } from "@/lib/tide/nearest-station";
+import { getTideInfoForDate } from "@/lib/tide/tide-info";
 import {
   clusterByDistance,
   pickHomeClusterIndex,
@@ -118,8 +120,10 @@ export async function POST(request: Request) {
         weatherOk: false,
       };
     }
+    // 満干時刻は最寄り観測地点の気象庁データから（淡水スポットは潮回りのみ）
+    const station = getTideStationForSpot(spot);
     const results = forecast.days.map((d) =>
-      calcFishingIndex(d.date, spot.longitude, d),
+      calcFishingIndex(getTideInfoForDate(station?.code ?? null, d.date), d),
     );
     return {
       slug: spot.slug,
