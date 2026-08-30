@@ -13,10 +13,25 @@ export type TideDisplayMode = "full" | "phase-only" | "none";
 
 interface SpotForTide {
   slug: string;
+  name?: string;
   latitude: number;
   longitude: number;
   spotType: string;
+  region?: { prefecture?: string };
 }
+
+// 内陸県: 琵琶湖等の湖岸スポットが port/pier/breakwater 型で登録されているケースがあり、
+// spotType だけでは淡水と判定できないため県で足切りする（海の潮汐は無関係）。
+const LANDLOCKED_PREFECTURES = new Set([
+  "埼玉県",
+  "群馬県",
+  "栃木県",
+  "山梨県",
+  "長野県",
+  "岐阜県",
+  "滋賀県",
+  "奈良県",
+]);
 
 const EARTH_RADIUS_KM = 6371;
 
@@ -32,17 +47,25 @@ function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number): nu
 
 const estuarySet = new Set(ESTUARY_FULL_TIDE_SLUGS);
 
+// river スポットのうち、名称が河口部を明示するものは潮汐の影響を直接受けるためフル表示
+const ESTUARY_NAME_RE = /(河口|導流堤|汽水)/;
+
 /**
  * スポットの潮汐表示モードを返す。
- * - lake / pond: none（海の潮汐は無関係）
- * - river: phase-only（潮回りのみ）。河口の昇格リストにあれば full
+ * - lake / pond・内陸県: none（海の潮汐は無関係）
+ * - river: phase-only（潮回りのみ）。河口（名称判定 or 昇格リスト）は full
  * - それ以外（海のスポット）: full
  */
-export function getTideDisplayMode(spot: Pick<SpotForTide, "slug" | "spotType">): TideDisplayMode {
+export function getTideDisplayMode(
+  spot: Pick<SpotForTide, "slug" | "spotType" | "region"> & { name?: string },
+): TideDisplayMode {
   if (STATION_OVERRIDES[spot.slug] === null) return "none";
   if (spot.spotType === "lake" || spot.spotType === "pond") return "none";
+  if (LANDLOCKED_PREFECTURES.has(spot.region?.prefecture ?? "")) return "none";
   if (spot.spotType === "river") {
-    return estuarySet.has(spot.slug) ? "full" : "phase-only";
+    return estuarySet.has(spot.slug) || ESTUARY_NAME_RE.test(spot.name ?? "")
+      ? "full"
+      : "phase-only";
   }
   return "full";
 }

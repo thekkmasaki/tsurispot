@@ -24,7 +24,9 @@
     "test:smoke": "playwright test --config=playwright.smoke.config.ts",
     "deploy": "git push origin master && echo 'GitHub Actions → App Runner デプロイ開始'",
     "analyze": "ANALYZE=true next build",
-    "download-fish-images": "node scripts/download-fish-images.mjs"
+    "download-fish-images": "node scripts/download-fish-images.mjs",
+    "build:tides": "node scripts/build-tide-data.mjs",
+    "audit:tides": "node scripts/audit-tide-stations.mjs"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.1019.0",

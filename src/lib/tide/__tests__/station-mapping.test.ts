@@ -26,6 +26,18 @@ const TIDAL_SPOT_TYPES = new Set([
   "surf",
 ]);
 
+// nearest-station.ts と同じ内陸県定義（実装と独立に列挙して二重化する回帰ガード）
+const LANDLOCKED = new Set([
+  "埼玉県",
+  "群馬県",
+  "栃木県",
+  "山梨県",
+  "長野県",
+  "岐阜県",
+  "滋賀県",
+  "奈良県",
+]);
+
 describe("観測地点マスタ（stations.ts）", () => {
   it("239地点・code一意・日本近海の座標", () => {
     expect(TIDE_STATIONS.length).toBe(239);
@@ -43,11 +55,13 @@ describe("観測地点マスタ（stations.ts）", () => {
 });
 
 describe("全スポットの観測地点マッピング点検", () => {
-  it("海のスポット全件が観測地点100km圏内に割り当てられる", () => {
+  it("海のスポット全件（内陸県を除く）が観測地点100km圏内に割り当てられる", () => {
     const tooFar: string[] = [];
     let count = 0;
     for (const spot of fishingSpots) {
       if (!TIDAL_SPOT_TYPES.has(spot.spotType)) continue;
+      if (LANDLOCKED.has(spot.region?.prefecture ?? "")) continue;
+      if (STATION_OVERRIDES[spot.slug] === null) continue; // 汽水湖等の個別除外
       count++;
       const st = getTideStationForSpot(spot);
       expect(st, `${spot.slug} に観測地点が割り当てられていない`).not.toBeNull();
@@ -67,14 +81,25 @@ describe("全スポットの観測地点マッピング点検", () => {
     }
   });
 
-  it("河川は潮回りのみ（河口の昇格リストを除く）", () => {
+  it("内陸県（琵琶湖の湖港等が海型で登録されているケース）では潮汐を表示しない", () => {
+    let landlockedCount = 0;
+    for (const spot of fishingSpots) {
+      if (!LANDLOCKED.has(spot.region?.prefecture ?? "")) continue;
+      landlockedCount++;
+      expect(getTideDisplayMode(spot), `${spot.slug}（${spot.region?.prefecture}）`).toBe("none");
+    }
+    expect(landlockedCount).toBeGreaterThan(100); // 内陸県スポットの実在性
+  });
+
+  it("河川は潮回りのみ（河口＝名称判定 or 昇格リストは満干フル表示）", () => {
     const estuarySet = new Set(ESTUARY_FULL_TIDE_SLUGS);
+    const estuaryNameRe = /(河口|導流堤|汽水)/;
     for (const spot of fishingSpots) {
       if (spot.spotType !== "river") continue;
       const mode = getTideDisplayMode(spot);
-      if (STATION_OVERRIDES[spot.slug] === null) {
+      if (STATION_OVERRIDES[spot.slug] === null || LANDLOCKED.has(spot.region?.prefecture ?? "")) {
         expect(mode, spot.slug).toBe("none");
-      } else if (estuarySet.has(spot.slug)) {
+      } else if (estuarySet.has(spot.slug) || estuaryNameRe.test(spot.name)) {
         expect(mode, spot.slug).toBe("full");
       } else {
         expect(mode, spot.slug).toBe("phase-only");
