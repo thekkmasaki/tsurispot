@@ -618,11 +618,11 @@ export const blogArticles10: BlogPost[] = [
     category: "technique",
     tags: ["黒鯛", "チヌ", "フカセ釣り", "落とし込み", "ヘチ", "全国"],
     publishedAt: "2026-05-15",
-    relatedSpots: [],
+    relatedSpots: ["jogashima6", "sumoto-port-detail", "tateyama-ko6"],
     relatedFish: ["kurodai"],
     content: `
 <h2>黒鯛 (チヌ) は釣り人憧れの「磯のキング」</h2>
-<p>クロダイ (チヌ) は40cm超の大型になると引きも強く、味も最高の人気魚種。「磯のキング」とも称され、釣り人なら一度は釣ってみたい目標魚です。シーズンは年中可能ですが、特に春の「ノッコミ」(産卵接岸期、4-6月) と秋 (9-11月) が絶好期。</p>
+<p><a href="/fish/kurodai">クロダイ (チヌ)</a> は40cm超の大型になると引きも強く、味も最高の人気魚種。「磯のキング」とも称され、釣り人なら一度は釣ってみたい目標魚です。シーズンは年中可能ですが、特に春の「ノッコミ」(産卵接岸期、4-6月) と秋 (9-11月) が絶好期。</p>
 
 <h2>主な釣法 3つ</h2>
 <h3>1. フカセ釣り (磯釣りの王道)</h3>
@@ -639,7 +639,7 @@ export const blogArticles10: BlogPost[] = [
 <p>産卵のため浅場に接岸する時期。50cm超の大型が狙えるベストシーズン。磯場・河口でフカセ。</p>
 
 <h3>夏 (7-8月)</h3>
-<p>水温上昇で深場に落ちる。夜釣りや早朝が狙い目。</p>
+<p>水温上昇で深場に落ちる。<a href="/guide/night-fishing">夜釣り</a>や早朝が狙い目。</p>
 
 <h3>秋 (9-11月)</h3>
 <p>再び浅場に戻る「秋ノッコミ」。落とし込み・ヘチ釣りで堤防壁際を狙う。</p>
@@ -649,9 +649,9 @@ export const blogArticles10: BlogPost[] = [
 
 <h2>関東のチヌポイント</h2>
 <ul>
-<li>三浦半島・城ヶ島の地磯 — フカセの聖地</li>
+<li>三浦半島・<a href="/spots/jogashima6">城ヶ島</a>の地磯 — フカセの聖地</li>
 <li>横浜・本牧の堤防 — 落とし込みで都心アクセス</li>
-<li>千葉・館山湾 — 春のノッコミが熱い</li>
+<li>千葉・館山湾（<a href="/spots/tateyama-ko6">館山港</a>ほか） — 春のノッコミが熱い</li>
 <li>東京湾奥の運河 — チニングで手軽に</li>
 </ul>
 
@@ -659,7 +659,7 @@ export const blogArticles10: BlogPost[] = [
 <ul>
 <li>南港・大阪湾の堤防 — チニング王国</li>
 <li>和歌山・南紀の地磯 — フカセで大型</li>
-<li>淡路島・洲本港 — ヘチ釣りのメッカ</li>
+<li>淡路島・<a href="/spots/sumoto-port-detail">洲本港</a> — ヘチ釣りのメッカ</li>
 <li>琵琶湖周辺の河口 — 淡水でもチヌが狙える</li>
 </ul>
 
