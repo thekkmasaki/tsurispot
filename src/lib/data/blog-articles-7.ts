@@ -83,7 +83,7 @@ export const blogArticles7: BlogPost[] = [
       "アミ姫",
     ],
     publishedAt: "2024-08-15",
-    relatedSpots: ["okuragaigan"],
+    relatedSpots: ["akashi-okura-coast"],
     relatedFish: ["aji", "saba"],
     content: `
 <h2>大蔵海岸、バケモンみたいに釣れた</h2>
@@ -146,7 +146,7 @@ export const blogArticles7: BlogPost[] = [
     ],
     publishedAt: "2024-12-15",
     image: "/images/blog/hiraiso-small-fish.jpeg",
-    relatedSpots: ["hiraiso-umizuri-park"],
+    relatedSpots: ["hiraiso-fishing-park"],
     relatedFish: ["karei"],
     content: `
 <h2>有料の海釣り公園なら釣れるだろう、と思ってた</h2>
@@ -396,7 +396,7 @@ export const blogArticles7: BlogPost[] = [
     ],
     publishedAt: "2025-01-15",
     image: "/images/blog/night-flatfish-measure.jpeg",
-    relatedSpots: ["okuragaigan"],
+    relatedSpots: ["akashi-okura-coast"],
     relatedFish: ["karei", "kisu"],
     content: `
 <h2>冬の海＝釣れない、は嘘だった</h2>
@@ -610,7 +610,7 @@ export const blogArticles7: BlogPost[] = [
     publishedAt: "2025-11-15",
     relatedSpots: [
       "akashi-shinhato",
-      "okuragaigan",
+      "akashi-okura-coast",
       "hayashizaki-gyoko",
       "tsubasa-port",
     ],
@@ -626,7 +626,7 @@ export const blogArticles7: BlogPost[] = [
 <p>でも、明石で何回か釣りをするうちに、嫌でも潮の重要性を思い知らされた。</p>
 
 <h2>大潮の激流で仕掛けが消えた日</h2>
-<p>僕の失敗談。ある大潮の日、明石新波止でサビキをやった時のこと。</p>
+<p>僕の失敗談。ある大潮の日、<a href="/spots/akashi-shinhato">明石新波止</a>でサビキをやった時のこと。</p>
 <p>仕掛けを足元に落としたら、着底する前に横に流されて隣の人の前まで行った。「すみません」と回収して、もう一度落とす。また流される。</p>
 <p>大潮の明石海峡は本当に川みたいに潮が流れる。サビキの仕掛け（軽いオモリ）程度では底に届かない。6号のオモリが一瞬で流されていく。結局、その日は仕掛けが安定しなくて、まともに釣りにならなかった。</p>
 <p>隣の常連さんに「大潮の本流はキツいで。潮止まりの前後にしか釣りにならへんから」と教えてもらった。</p>
@@ -674,6 +674,7 @@ export const blogArticles7: BlogPost[] = [
 <li><strong>潮止まり×マヅメが重なる日は最強</strong></li>
 </ul>
 <p>面倒くさがらずにアプリで確認するだけ。それだけで明石の釣りが3倍楽しくなる。</p>
+<p>潮汐の仕組み（大潮・小潮のサイクルや潮止まりの原理）をもっと詳しく知りたい人は<a href="/guide/tide">潮汐と釣りの完全ガイド</a>へ。潮を読めるようになったら、<a href="/spots/akashi-okura-coast">大蔵海岸</a>や<a href="/spots/hayashizaki-gyoko">林崎漁港</a>など明石エリアの釣り場で実践してみてください。</p>
 `,
   },
 ];
