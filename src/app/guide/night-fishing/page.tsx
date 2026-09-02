@@ -357,7 +357,7 @@ export default function NightFishingGuidePage() {
           <SectionCard title="必要な装備" icon={Flashlight}>
             <NightFishingEquipmentDiagram />
             <p className="mb-4 text-sm text-muted-foreground">
-              夜釣りでは昼間の装備に加えて、暗闘対策の道具が必要です。事前にしっかり準備しましょう。
+              夜釣りでは昼間の装備に加えて、暗さ対策の道具が必要です。事前にしっかり準備しましょう。
             </p>
 
             <div className="space-y-3 text-sm text-muted-foreground">
@@ -485,6 +485,28 @@ export default function NightFishingGuidePage() {
                 <Link prefetch={false} href="/fish/kasago" className="mt-2 inline-flex items-center text-sm text-primary hover:underline">
                   カサゴの詳細を見る →
                 </Link>
+              </div>
+            </div>
+          </SectionCard>
+
+          {/* エサと時間帯 */}
+          <SectionCard title="夜釣りのエサと時間帯" icon={Fish}>
+            <div className="space-y-4 text-sm text-muted-foreground">
+              <div>
+                <h3 className="mb-1 font-medium text-foreground">夜釣りの定番エサ</h3>
+                <p>
+                  暗い海では、匂いと動きで魚にアピールできるエサが有利です。電気ウキ釣りやぶっこみ釣りには
+                  <strong className="text-foreground">アオイソメ</strong>
+                  が万能で、メバル・アジ・カサゴなど幅広く狙えます。タチウオにはキビナゴやサンマの切り身といった匂いの強いエサが定番です。ルアーの場合は、常夜灯周りではクリア系やグロー（夜光）系のワームが実績があります。
+                </p>
+              </div>
+              <div>
+                <h3 className="mb-1 font-medium text-foreground">釣れる時間帯と半夜釣り</h3>
+                <p>
+                  日没前後の「夕マズメ」は魚の活性が最も上がる時間帯です。夕マズメから21〜22時頃までで切り上げる釣り方は
+                  <strong className="text-foreground">「半夜釣り」</strong>
+                  と呼ばれ、翌日に疲れを残さず、常夜灯も効き始めるため初心者に最もおすすめです。深夜は魚の活性が落ち着くことも多く、夜明け前の「朝マズメ」が第二のチャンスタイムになります。潮の動く時間帯を選ぶのも重要です。
+                </p>
               </div>
             </div>
           </SectionCard>
