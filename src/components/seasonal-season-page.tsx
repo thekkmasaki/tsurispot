@@ -20,6 +20,7 @@ import type { SeasonInfo } from "@/lib/data/seasonal-data";
 import { seasons } from "@/lib/data/seasonal-data";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
 import { fishSpecies } from "@/lib/data/fish";
+import { seasonalGuides } from "@/lib/data/seasonal-guides";
 
 interface SeasonPageProps {
   season: SeasonInfo;
@@ -41,6 +42,11 @@ export function SeasonalSeasonPage({ season }: SeasonPageProps) {
   const monthGuides = season.months
     .map((m) => monthlyGuides.find((g) => g.month === m))
     .filter(Boolean);
+
+  // この季節の特集記事
+  const featureGuides = seasonalGuides.filter(
+    (sg) => sg.season === season.nameJa
+  );
 
   // 3ヶ月分のtopFishを集約・重複排除
   const allTopFishSlugs = Array.from(
@@ -323,6 +329,35 @@ export function SeasonalSeasonPage({ season }: SeasonPageProps) {
             })}
           </div>
         </section>
+
+        {/* 季節の特集記事 */}
+        {featureGuides.length > 0 && (
+          <section className="mb-10">
+            <h2 className="mb-4 flex items-center gap-2 text-lg font-bold sm:text-xl">
+              <BookOpen className="size-5 text-primary" />
+              {season.nameJa}の特集記事
+            </h2>
+            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+              {featureGuides.map((sg) => (
+                <Link prefetch={false}
+                  key={sg.slug}
+                  href={`/seasonal/${sg.slug}`}
+                  className="group block rounded-lg border bg-white p-4 transition-shadow hover:shadow-md dark:bg-card"
+                >
+                  <p className="font-semibold group-hover:text-primary">
+                    {sg.title}
+                  </p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    {sg.months.map((m) => `${m}月`).join("・")}
+                  </p>
+                  <p className="mt-1.5 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+                    {sg.description}
+                  </p>
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
 
         {/* 関連コンテンツ */}
         <section className="mb-10">
