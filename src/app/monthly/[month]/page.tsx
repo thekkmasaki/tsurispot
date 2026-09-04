@@ -198,9 +198,21 @@ export default async function MonthlyGuidePage({ params }: Props) {
   const prevGuide = getMonthlyGuide(prevSlug);
   const nextGuide = getMonthlyGuide(nextSlug);
 
-  // この月に関連する季節特集ガイド
+  // この月に関連する季節特集ガイド（当月の季節に合致する特集を優先表示）
+  const monthSeasonJa =
+    guide.month >= 3 && guide.month <= 5
+      ? "春"
+      : guide.month >= 6 && guide.month <= 8
+        ? "夏"
+        : guide.month >= 9 && guide.month <= 11
+          ? "秋"
+          : "冬";
   const relatedSeasonalGuides = seasonalGuides
     .filter((sg) => sg.months.includes(guide.month))
+    .sort(
+      (a, b) =>
+        Number(b.season === monthSeasonJa) - Number(a.season === monthSeasonJa)
+    )
     .slice(0, 4);
 
   const currentMonth = new Date().getMonth() + 1;
@@ -637,6 +649,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
               { href: "/guide/oyogase", title: "泳がせ釣り", description: "サビキで釣った小魚で大物を狙う" },
             ],
             9: [
+              { href: "/guide/tachiuo", title: "タチウオ釣り", description: "堤防タチウオが開幕。夕マヅメからのテンヤ・ワインドを解説" },
               { href: "/guide/sabiki", title: "サビキ釣り", description: "秋のサビキ。大型のアジが回遊" },
               { href: "/guide/eging", title: "エギング", description: "秋イカ最盛期。新子サイズが数釣れる" },
               { href: "/guide/jigging", title: "ショアジギング", description: "秋の青物ラッシュ。堤防から大物チャンス" },
@@ -645,6 +658,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
             10: [
               { href: "/guide/eging", title: "エギング", description: "秋イカ後半戦。サイズアップしたアオリイカ" },
               { href: "/guide/jigging", title: "ショアジギング", description: "秋の大型青物ラストチャンス" },
+              { href: "/guide/tachiuo", title: "タチウオ釣り", description: "夜の堤防タチウオが引き続き好調。釣れる時間帯とコツ" },
               { href: "/guide/sabiki", title: "サビキ釣り", description: "秋サビキの終盤。脂ののったアジを狙え" },
               { href: "/guide/lure", title: "ルアー釣り", description: "シーバスの秋パターンが好調" },
             ],
