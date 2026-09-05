@@ -15,9 +15,9 @@ import { InArticleAd } from "@/components/ads/ad-unit";
 const baseUrl = "https://tsurispot.com";
 
 export const metadata: Metadata = {
-  title: "釣りインストラクター試験 問題集・過去問対策【無料290問】2026年版",
+  title: "釣りインストラクター資格の取り方と試験問題集・過去問対策【無料290問】2026年版",
   description:
-    "公認釣りインストラクター試験（JOFI認定・全釣協）の筆記試験対策ガイド。漁業法・釣りマナー・釣り具など全7章を無料で学べる。確認クイズ290問以上で合格をサポート。過去問の傾向と対策、論文・実技対策も網羅。",
+    "釣りインストラクター資格の取り方を解説。受験資格は20歳以上、費用は約4万円、試験は筆記・論文・実技・面接。公認釣りインストラクター試験（JOFI認定・全釣協）の筆記対策として漁業法・釣りマナー・釣り具など全7章＋確認クイズ290問以上を無料で学べる。過去問の傾向と対策も網羅。",
   alternates: {
     canonical: `${baseUrl}/instructor-exam`,
   },
@@ -260,7 +260,7 @@ export default function InstructorExamPage() {
         {/* ヘッダー */}
         <div className="mb-8 rounded-2xl bg-gradient-to-br from-sky-800 to-blue-900 px-6 py-10 text-white sm:px-10">
           <h1 className="text-2xl font-bold sm:text-3xl">
-            公認釣りインストラクター試験対策ガイド
+            公認釣りインストラクター資格・試験対策ガイド
           </h1>
           <p className="mt-3 text-sky-200">
             講習前の予習に最適 -- 全7章の学習ガイドと確認クイズで筆記試験の知識を整理できます
@@ -318,6 +318,32 @@ export default function InstructorExamPage() {
               </tbody>
             </table>
           </div>
+        </section>
+
+        {/* 資格取得までの流れ */}
+        <section className="mb-10">
+          <h2 className="mb-4 text-xl font-bold">資格取得までの流れ</h2>
+          <ol className="space-y-2 text-sm">
+            <li className="flex gap-3">
+              <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-sky-700 text-xs font-bold text-white">1</span>
+              <span>全釣り協または都道府県の釣りインストラクター連盟の募集案内から受講を申し込む（受験資格は20歳以上）</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-sky-700 text-xs font-bold text-white">2</span>
+              <span>養成講習会を受講する（海面・内水面の区分ごと）</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-sky-700 text-xs font-bold text-white">3</span>
+              <span>試験を受ける — 筆記（選択式60分）・論文・実技・面接の4科目</span>
+            </li>
+            <li className="flex gap-3">
+              <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-sky-700 text-xs font-bold text-white">4</span>
+              <span>合格後に登録手続きを行い、公認釣りインストラクターとして認定される（3年ごとに更新研修あり）</span>
+            </li>
+          </ol>
+          <p className="mt-3 text-xs text-muted-foreground">
+            ※ 開催日程・会場は年度や地域によって異なります。最新情報は全釣り協公式サイトをご確認ください。
+          </p>
         </section>
 
         {/* 試験の統計情報（GEO: 統計・出典追加） */}
