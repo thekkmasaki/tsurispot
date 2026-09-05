@@ -107,7 +107,7 @@ export const blogArticles2: BlogPost[] = [
 <li>付けエサ（オキアミ）</li>
 <li>コマセ（アミエビ+集魚材）</li>
 </ul>
-<p>カゴ釣りのベストシーズンは<strong>秋（9〜11月）</strong>。この時期は脂が乗った良型アジが堤防の沖合を回遊します。遠投して広範囲を探れるため、回遊ルートを見つけたときの爆釣は圧巻です。</p>
+<p>カゴ釣りのベストシーズンは<strong>秋（9〜11月）</strong>。この時期は脂が乗った良型アジが堤防の沖合を回遊します。遠投して広範囲を探れるため、回遊ルートを見つけたときの連続ヒットは圧巻です。</p>
 
 <div class="my-6 rounded-xl border-2 border-blue-200 bg-blue-50 p-4">
   <p class="text-sm font-bold text-blue-800">📖 もっと詳しく知りたい方へ</p>
