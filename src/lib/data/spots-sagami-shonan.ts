@@ -227,7 +227,7 @@ export const sagamiShonanSpots: FishingSpot[] = [
   },
   {
     id: "ss5", name: "一色海岸", slug: "isshiki-beach",
-    description: "葉山御用邸前の美しいビーチ。サーフからのキス釣りが中心。両端の磯場ではメバルやカサゴも。水質が良く、神奈川屈指の美しさを誇る海岸。",
+    description: "葉山御用邸前の美しい砂浜で、盛期は5〜10月の投げキス。水質が良く神奈川屈指の美しさを誇る海岸で、朝マヅメが狙い目。両端の磯場では晩秋から春にメバルやカサゴ、9〜12月はエギングのアオリイカも面白い。JR逗子駅からバス「一色海岸」下車すぐと公共交通でも通いやすく、有料駐車場とトイレが揃うので家族連れの釣りにも向く。",
     latitude: 35.2590, longitude: 139.5730, address: "〒240-0111 神奈川県葉山町一色",
     accessInfo: "JR逗子駅からバス「一色海岸」下車すぐ。",
     region: region("r7"), spotType: "beach", difficulty: "beginner",
