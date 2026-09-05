@@ -138,6 +138,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: `${baseUrl}/guide/oyogase`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/guide/eging`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/guide/jigging`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
+    { url: `${baseUrl}/guide/tachiuo`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/guide/lure`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/guide/entou-kago`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
     { url: `${baseUrl}/guide/knots`, lastModified: contentDate, changeFrequency: "monthly", priority: 0.5 },
