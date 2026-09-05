@@ -215,7 +215,7 @@ export const freshwaterSpotsAdd3: FishingSpot[] = [
   },
   {
     id: "fw-527", name: "九頭竜湖", slug: "fukui-kuzuryuko-lake",
-    description: "福井県大野市にある九頭竜ダムのダム湖。イワナやヤマメが生息し、特に流入河川との合流点が好ポイント。周囲の山々は紅葉の名所でもあり、秋の釣行は景色も楽しめる。九頭竜川本流の鮎釣りと合わせて訪れる人も多い。",
+    description: "遊漁券は日券大人1,500円、イワナやヤマメは流入河川との合流点が好ポイント。福井県大野市にある九頭竜ダムのダム湖で、渓流魚の釣期は3月から9月。周囲の山々は紅葉の名所でもあり、秋の釣行は景色も楽しめる。九頭竜川本流の鮎釣りと合わせて訪れる人も多い。",
     latitude: 35.9228, longitude: 136.6767, address: "福井県大野市長野",
     accessInfo: "東海北陸自動車道白鳥ICから約30分。JR九頭竜線九頭竜湖駅から徒歩約15分。",
     region: lr("r5110"), spotType: "river", difficulty: "intermediate",
@@ -237,7 +237,7 @@ export const freshwaterSpotsAdd3: FishingSpot[] = [
   },
   {
     id: "fw-528", name: "釜房ダム（釜房湖）", slug: "miyagi-kamafusa-dam-lake",
-    description: "宮城県川崎町にある名取川上流のダム湖。仙台市街地から車で約40分と近く、ブラックバスやヘラブナの釣り場として人気。春のワカサギ釣りもでき、四季を通じて楽しめるフィールド。蔵王連峰を望む眺望も美しい。",
+    description: "仙台から車で約40分、秋冬のワカサギと春からのバスで一年釣れるダム湖。宮城県川崎町の名取川上流にあり、ブラックバスやヘラブナの釣り場として人気。ワカサギは10月から3月、ヘラブナは3月から11月と釣期が長く、四季を通じて楽しめるフィールド。蔵王連峰を望む眺望も美しい。",
     latitude: 38.2233, longitude: 140.5847, address: "宮城県柴田郡川崎町大字小野字大平山",
     accessInfo: "東北自動車道村田ICから約20分。仙台市街地から車約40分。",
     region: lr("r5111"), spotType: "river", difficulty: "intermediate",
