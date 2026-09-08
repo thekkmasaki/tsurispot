@@ -28,6 +28,7 @@ import { fishSpecies } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
 import { MONTHS, getMonthBySlug, isMonthInRange } from "@/lib/data/fishing-methods";
 import { MATRIX_MIN_SPOTS } from "@/lib/data";
+import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import { SPOT_TYPE_LABELS } from "@/types";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
@@ -71,6 +72,8 @@ const getMonthAggregates = cache((prefName: string, monthNum: number) => {
     // 複数エントリ（釣法・期間違い）を 1 スポットに正規化して別カウントする
     const seenInSpot = new Set<string>();
     for (const cf of spot.catchableFish) {
+      // 釣れる度ゲート（fish-aptitude）: sitemap・マトリクスと同一基準
+      if (!isFishListedAtSpot(spot, cf.fish.slug)) continue;
       if (isMonthInRange(monthNum, cf.monthStart, cf.monthEnd)) {
         const existing = fishCountMap.get(cf.fish.slug);
         if (existing) {

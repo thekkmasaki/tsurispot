@@ -4,6 +4,7 @@ import { ChevronLeft, Palette, Settings, Waves, Calendar, Scissors, MapPin, Fish
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { fishingSpots } from "@/lib/data/spots";
+import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import { YouTubeEmbedList } from "@/components/youtube-embed";
 import { fishingMethodVideos } from "@/lib/data/youtube-videos";
 import { CatchableFishSection } from "@/components/guide/catchable-fish-section";
@@ -746,7 +747,13 @@ export default function EgingGuidePage() {
           </p>
           <div className="grid gap-2 sm:grid-cols-2">
             {fishingSpots
-              .filter((s) => s.catchableFish.some((cf) => cf.method.includes("エギング")))
+              .filter((s) =>
+                s.catchableFish.some(
+                  (cf) =>
+                    cf.method.includes("エギング") &&
+                    isFishListedAtSpot(s, cf.fish.slug) // 釣れる度ゲート
+                )
+              )
               .sort((a, b) => b.rating - a.rating)
               .slice(0, 6)
               .map((spot) => (

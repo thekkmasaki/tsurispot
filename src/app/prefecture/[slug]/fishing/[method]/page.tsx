@@ -17,6 +17,7 @@ import { SpotCard } from "@/components/spots/spot-card";
 import { toListSpot } from "@/lib/data/list-spot";
 import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { fishingSpots } from "@/lib/data/spots";
+import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import {
   FISHING_METHODS,
   getMethodBySlug,
@@ -55,11 +56,17 @@ const getMethodAggregates = cache(
       .filter(
         (s) =>
           s.region.prefecture === prefName &&
-          s.catchableFish.some((cf) => method.methods.includes(cf.method))
+          s.catchableFish.some(
+            (cf) =>
+              method.methods.includes(cf.method) &&
+              isFishListedAtSpot(s, cf.fish.slug) // 釣れる度ゲート
+          )
       )
       .map((spot) => {
-        const matchingFish = spot.catchableFish.filter((cf) =>
-          method.methods.includes(cf.method)
+        const matchingFish = spot.catchableFish.filter(
+          (cf) =>
+            method.methods.includes(cf.method) &&
+            isFishListedAtSpot(spot, cf.fish.slug)
         );
         return {
           spot,
@@ -77,6 +84,7 @@ const getMethodAggregates = cache(
     for (const { spot } of matchingSpots) {
       for (const cf of spot.catchableFish) {
         if (!method.methods.includes(cf.method)) continue;
+        if (!isFishListedAtSpot(spot, cf.fish.slug)) continue; // 釣れる度ゲート
         const existing = fishCountMap.get(cf.fish.slug);
         if (existing) {
           existing.count++;
@@ -104,7 +112,11 @@ function getValidCombos() {
       const count = fishingSpots.filter(
         (s) =>
           s.region.prefecture === pref.name &&
-          s.catchableFish.some((cf) => fm.methods.includes(cf.method))
+          s.catchableFish.some(
+            (cf) =>
+              fm.methods.includes(cf.method) &&
+              isFishListedAtSpot(s, cf.fish.slug) // 釣れる度ゲート（sitemapと同一基準）
+          )
       ).length;
       if (count >= 3) {
         combos.push({ slug: pref.slug, method: fm.slug });

@@ -21,6 +21,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { fishingSpots } from "@/lib/data/spots";
+import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import { ProductList } from "@/components/affiliate/product-list";
 import { getProductsByMethod } from "@/lib/data/products";
 import { YouTubeVideoList } from "@/components/youtube-video-card";
@@ -119,7 +120,11 @@ const articleJsonLd = {
 
 // サビキ釣りができるスポット（methodに「サビキ」を含む）
 const sabikiSpots = fishingSpots
-  .filter((s) => s.catchableFish.some((cf) => cf.method.includes("サビキ")))
+  .filter((s) =>
+    s.catchableFish.some(
+      (cf) => cf.method.includes("サビキ") && isFishListedAtSpot(s, cf.fish.slug)
+    )
+  )
   .sort((a, b) => b.rating - a.rating)
   .slice(0, 8);
 

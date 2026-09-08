@@ -30,6 +30,7 @@ import { toListSpot } from "@/lib/data/list-spot";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { getPrefectureInfoBySlug, adjacentPrefectures, getPrefectureFAQs } from "@/lib/data/prefecture-info";
 import { getFishSlugByName } from "@/lib/data";
+import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import { SPOT_TYPE_LABELS, DIFFICULTY_LABELS } from "@/types";
 import { areaGuides, type AreaGuide } from "@/lib/data/area-guides";
 import { SpotSearchFilter } from "@/components/prefecture/spot-search-filter";
@@ -87,6 +88,9 @@ function getCatchableFishForPrefecture(prefectureName: string) {
   for (const spot of fishingSpots) {
     if (spot.region.prefecture !== prefectureName) continue;
     for (const cf of spot.catchableFish) {
+      // 釣れる度ゲート（fish-aptitude）: count>=3 の内部リンク判定が
+      // 県×魚種ページの index/301 判定（getSpotsByPrefectureAndFish）と一致する必要がある
+      if (!isFishListedAtSpot(spot, cf.fish.slug)) continue;
       const existing = fishMap.get(cf.fish.id);
       if (existing) {
         existing.count++;
@@ -153,8 +157,10 @@ function getTopSeasionalSpots(prefectureName: string, currentMonth: number, regi
 
   const scored = prefSpots.map((spot) => {
     // このスポットのcatchableFishの中で、今月がseasonMonthsに含まれる魚の数をカウント
-    const inSeasonFish = spot.catchableFish.filter((cf) =>
-      getFishSeasons(cf.fish, regionSlug).seasonMonths.includes(currentMonth)
+    const inSeasonFish = spot.catchableFish.filter(
+      (cf) =>
+        isFishListedAtSpot(spot, cf.fish.slug) &&
+        getFishSeasons(cf.fish, regionSlug).seasonMonths.includes(currentMonth)
     );
     return {
       spot,
@@ -199,6 +205,7 @@ function getSeasonalFishBreakdown(prefectureName: string, regionSlug?: RegionSlu
     for (const spot of fishingSpots) {
       if (spot.region.prefecture !== prefectureName) continue;
       for (const cf of spot.catchableFish) {
+        if (!isFishListedAtSpot(spot, cf.fish.slug)) continue; // 釣れる度ゲート
         const seasons = getFishSeasons(cf.fish, regionSlug);
         const inSeason = months.some((m) => seasons.seasonMonths.includes(m));
         if (!inSeason) continue;
@@ -245,6 +252,7 @@ function getInSeasonFishForPrefecture(
   for (const spot of fishingSpots) {
     if (spot.region.prefecture !== prefectureName) continue;
     for (const cf of spot.catchableFish) {
+      if (!isFishListedAtSpot(spot, cf.fish.slug)) continue; // 釣れる度ゲート
       const seasons = getFishSeasons(cf.fish, regionSlug);
       if (!seasons.seasonMonths.includes(currentMonth)) continue;
       const existing = fishMap.get(cf.fish.id);
@@ -360,7 +368,12 @@ export default async function PrefecturePage({ params }: PageProps) {
   const prefMethodLinks = FISHING_METHODS.map((fm) => ({
     method: fm,
     count: spots.filter((s) =>
-      s.catchableFish.some((cf) => fm.methods.includes(cf.method))
+      s.catchableFish.some(
+        (cf) =>
+          fm.methods.includes(cf.method) &&
+          // 釣れる度ゲート: sitemap の県×釣法カウントと同一基準
+          isFishListedAtSpot(s, cf.fish.slug)
+      )
     ).length,
   }))
     .filter((m) => m.count >= 3)
@@ -383,6 +396,7 @@ export default async function PrefecturePage({ params }: PageProps) {
   const currentMonthFishMap = new Map<string, { name: string; slug: string; count: number }>();
   for (const spot of spots) {
     for (const cf of spot.catchableFish) {
+      if (!isFishListedAtSpot(spot, cf.fish.slug)) continue; // 釣れる度ゲート
       if (isMonthInRange(currentMonth, cf.monthStart, cf.monthEnd)) {
         const existing = currentMonthFishMap.get(cf.fish.slug);
         if (existing) {

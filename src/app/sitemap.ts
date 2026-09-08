@@ -2,6 +2,7 @@ import type { MetadataRoute } from "next";
 import { unstable_cache } from "next/cache";
 import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
+import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import { regions } from "@/lib/data/regions";
 import { prefectures } from "@/lib/data/prefectures";
 import { areaGuides } from "@/lib/data/area-guides";
@@ -407,6 +408,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           const fishSet = new Set<string>();
           for (const spot of prefSpots) {
             for (const cf of spot.catchableFish) {
+              // 釣れる度ゲート（fish-aptitude）: ページ側の集計と同一基準
+              if (!isFishListedAtSpot(spot, cf.fish.slug)) continue;
               if (isMonthInRange(month.num, cf.monthStart, cf.monthEnd)) {
                 fishSet.add(cf.fish.slug);
               }
@@ -472,7 +475,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
           const count = fishingSpots.filter(
             (s) =>
               s.region.prefecture === pref.name &&
-              s.catchableFish.some((cf) => method.methods.includes(cf.method))
+              s.catchableFish.some(
+                (cf) =>
+                  method.methods.includes(cf.method) &&
+                  // 釣れる度ゲート: 生息域外の魚のエントリを釣法カウントに含めない
+                  isFishListedAtSpot(s, cf.fish.slug)
+              )
           ).length;
           if (count >= 3) {
             prefMethodCombos.push({ prefSlug: pref.slug, methodSlug: method.slug });

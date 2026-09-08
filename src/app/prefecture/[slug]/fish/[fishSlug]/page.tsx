@@ -12,6 +12,7 @@ import { toListSpot } from "@/lib/data/list-spot";
 import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { getFishBySlug } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
+import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import {
   getSpotsByPrefectureAndFish,
   getEligiblePrefFishCombos,
@@ -177,6 +178,8 @@ export default async function PrefectureFishPage({ params }: PageProps) {
   for (const spot of spots) {
     for (const cf of spot.catchableFish) {
       if (cf.fish.slug === fishSlug) continue;
+      // 釣れる度ゲート: 生息域外の魚を関連リンクに出さない
+      if (!isFishListedAtSpot(spot, cf.fish.slug)) continue;
       const existing = otherFishInPref.get(cf.fish.slug);
       if (existing) {
         existing.count++;
@@ -198,6 +201,8 @@ export default async function PrefectureFishPage({ params }: PageProps) {
   for (const spot of fishingSpots) {
     if (spot.region.prefecture === pref.name) continue;
     if (!spot.catchableFish.some((cf) => cf.fish.slug === fishSlug)) continue;
+    // 釣れる度ゲート: 0件化した県への「他の県」リンク（301先）を出さない
+    if (!isFishListedAtSpot(spot, fishSlug)) continue;
     const spotPref = prefectures.find((p) => p.name === spot.region.prefecture);
     if (!spotPref) continue;
     const existing = otherPrefsForFish.get(spotPref.slug);

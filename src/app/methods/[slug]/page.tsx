@@ -25,6 +25,7 @@ import { SpotCard } from "@/components/spots/spot-card";
 import { toListSpot } from "@/lib/data/list-spot";
 import { InArticleAd } from "@/components/ads/ad-unit";
 import { fishingSpots } from "@/lib/data/spots";
+import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import { fishSpecies } from "@/lib/data/fish";
 import type { YouTubeSearchLink, FishingSpot } from "@/types";
 
@@ -62,6 +63,7 @@ function getSpotsForMethod(
   return fishingSpots
     .map((spot) => {
       const matchCount = spot.catchableFish.filter((cf) =>
+        isFishListedAtSpot(spot, cf.fish.slug) && // 釣れる度ゲート
         methodKeys.some((key) => cf.method.includes(key))
       ).length;
       return { ...spot, matchCount };

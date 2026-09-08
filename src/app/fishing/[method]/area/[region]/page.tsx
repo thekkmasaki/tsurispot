@@ -26,6 +26,7 @@ import {
   type RegionGroup,
 } from "@/lib/data/regions-group";
 import { fishingSpots } from "@/lib/data/spots";
+import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import { getFishBySlug } from "@/lib/data/fish";
 import { getPrefectureByName } from "@/lib/data/prefectures";
 import {
@@ -84,8 +85,10 @@ function getSpotsForMethodAndRegion(
   const filtered: SpotSummary[] = [];
   for (const spot of fishingSpots) {
     if (!prefs.has(spot.region.prefecture)) continue;
-    const matchingFish = spot.catchableFish.filter((cf) =>
-      method.methods.includes(cf.method)
+    const matchingFish = spot.catchableFish.filter(
+      (cf) =>
+        method.methods.includes(cf.method) &&
+        isFishListedAtSpot(spot, cf.fish.slug) // 釣れる度ゲート
     );
     if (matchingFish.length === 0) continue;
     filtered.push({
@@ -301,7 +304,11 @@ export default async function MethodRegionPage({ params }: Props) {
     const count = fishingSpots.filter(
       (s) =>
         s.region.prefecture === prefName &&
-        s.catchableFish.some((cf) => method.methods.includes(cf.method))
+        s.catchableFish.some(
+          (cf) =>
+            method.methods.includes(cf.method) &&
+            isFishListedAtSpot(s, cf.fish.slug) // 釣れる度ゲート（sitemapと同一基準）
+        )
     ).length;
     if (count >= 3) {
       prefMethodLinks.push({ prefName, prefSlug: prefDef.slug, count });

@@ -19,6 +19,7 @@ import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { SpotCard } from "@/components/spots/spot-card";
 import { toListSpot } from "@/lib/data/list-spot";
 import { fishingSpots } from "@/lib/data/spots";
+import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import { fishSpecies } from "@/lib/data/fish";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { seasons, seasonSlugs, getSeasonBySlug } from "@/lib/data/seasonal-data";
@@ -159,6 +160,7 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
       const typeMatch = guide.spotTypes.includes(spot.spotType);
       if (!typeMatch) return false;
       const hasFishInSeason = spot.catchableFish.some((cf) => {
+        if (!isFishListedAtSpot(spot, cf.fish.slug)) return false; // 釣れる度ゲート
         const cfMonths: number[] = [];
         if (cf.monthStart <= cf.monthEnd) {
           for (let m = cf.monthStart; m <= cf.monthEnd; m++) cfMonths.push(m);
