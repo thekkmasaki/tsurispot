@@ -1031,6 +1031,34 @@ export default function SetupGuidePage() {
             </Hint>
           </SectionCard>
 
+          {/* リールの基本的な使い方 */}
+          <SectionCard title="リールの基本的な使い方">
+            <p className="mb-4 text-sm text-muted-foreground">
+              セッティングが終わったら、スピニングリールの基本操作を覚えましょう。使うのは「ベイル」「ハンドル」「ドラグ」の3つだけです。
+            </p>
+            <ul className="space-y-3 text-sm text-muted-foreground">
+              <li>
+                <span className="font-medium text-foreground">糸を出すとき（投げるとき）：</span>
+                人差し指で糸を押さえてからベイルを起こすと、糸が自由に出る状態になります。仕掛けを振り出して指を離すと、糸が出て仕掛けが飛んでいきます。
+              </li>
+              <li>
+                <span className="font-medium text-foreground">糸を巻き取るとき：</span>
+                ベイルを戻してからハンドルを回します。糸がたるんだまま巻くと糸ヨレの原因になるため、竿を少し立てて糸を張ってから巻くのがコツです。
+              </li>
+              <li>
+                <span className="font-medium text-foreground">ドラグを調整するとき：</span>
+                スプール上部のノブを回して調整します。糸を手で引いたとき「ジーッ」と少し出る程度が適正です（上のドラグ調整の図を参照）。
+              </li>
+            </ul>
+            <Hint>
+              投げ方の詳しい手順と練習方法は
+              <Link prefetch={false} href="/guide/casting" className="underline">
+                キャスティング（投げ方）ガイド
+              </Link>
+              で解説しています。
+            </Hint>
+          </SectionCard>
+
           <InArticleAd className="my-8" />
 
           {/* リールの糸巻き方向の注意 */}
