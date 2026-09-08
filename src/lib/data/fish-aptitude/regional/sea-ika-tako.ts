@@ -100,5 +100,146 @@ export const seaIkaTakoAptitude: Record<string, FishRegionalAptitude> = {
       "タコエギ釣果実績（明石・東京湾）",
     ],
   },
-  // surumeika / kouika / kensaki-ika / watarigani / nokogirigazami / iidako は P3 で投入
+  surumeika: {
+    default: 1,
+    regionOverrides: { tohoku: 3 },
+    seaOverrides: { 瀬戸内海: 1, 有明海: 0 },
+    prefectureOverrides: {
+      hokkaido: { 日本海: 4, 太平洋: 4, オホーツク海: 2 }, // 函館は「イカのまち」
+      aomori: 4, // 八戸・津軽海峡
+      ishikawa: 3, // 能登小木は日本有数のイカ釣り基地
+      niigata: 3, // 佐渡
+      toyama: 3,
+      fukui: 2,
+      kyoto: 2,
+      hyogo: { 日本海: 2, 瀬戸内海: 1 },
+      tottori: 2,
+      shimane: 2,
+      nagasaki: 2, // 対馬
+      okinawa: 0, // 暖海の琉球列島は分布外
+    },
+    rationale:
+      "スルメイカは冷水性で、「イカのまち」函館を筆頭に北海道・津軽海峡・三陸と日本海北部が漁獲・夜釣り実績とも本場。能登小木・佐渡など北陸も基地。南日本では薄く、有明海・沖縄には分布しない。",
+    sources: [
+      "農林水産省 海面漁業生産統計調査（するめいか・県別漁獲量）",
+      "夜焚き・堤防イカ釣り実績（函館・三陸・日本海北部）",
+    ],
+  },
+  kouika: {
+    default: 2,
+    regionOverrides: { hokkaido: 0, tohoku: 1 },
+    seaOverrides: {
+      東京湾: 4,
+      伊勢湾: 4,
+      瀬戸内海: 4,
+      有明海: 3,
+      オホーツク海: 0,
+    },
+    prefectureOverrides: {
+      okinawa: 1, // コブシメ等別種が主で本種は少ない
+    },
+    rationale:
+      "コウイカ（スミイカ）は内湾の砂泥底に着く春の乗っ込みエギングの定番で、江戸前のスミイカ釣り文化を持つ東京湾と伊勢湾・瀬戸内海が実績・文化とも本場。分布は本州以南で、東北は境界域、北海道には分布しない。",
+    sources: [
+      "農林水産省 海面漁業生産統計調査（こういか類）",
+      "スミイカ・エギング釣果実績（東京湾・伊勢湾・瀬戸内）",
+    ],
+  },
+  "kensaki-ika": {
+    default: 1,
+    regionOverrides: { hokkaido: 0, tohoku: 1 },
+    seaOverrides: { 瀬戸内海: 1, 有明海: 0, オホーツク海: 0 },
+    prefectureOverrides: {
+      nagasaki: 4, // 壱岐・対馬・五島の夜焚き
+      saga: { 日本海: 4, 東シナ海: 2 }, // 呼子のイカ
+      fukuoka: { 日本海: 4, 瀬戸内海: 1 },
+      yamaguchi: { 日本海: 4, 瀬戸内海: 1 },
+      shimane: 4, // 白イカ
+      tottori: 3,
+      hyogo: { 日本海: 3, 瀬戸内海: 1 },
+      kyoto: 3,
+      fukui: 3,
+      ishikawa: 3,
+      niigata: 2,
+      yamagata: 2,
+      kanagawa: 2, // 相模湾のマルイカ（船）
+      shizuoka: 2,
+      oita: 2,
+      kagoshima: 2,
+      okinawa: 1,
+    },
+    rationale:
+      "ケンサキイカ（白イカ・マルイカ）は対馬暖流域の夏の夜焚き・イカメタルが本場で、呼子・壱岐対馬・山陰が漁獲・食文化とも突出。北陸〜新潟まで実績が続き、太平洋側は相模湾のマルイカ船が知られる。東北は境界域で、北海道には分布しない。",
+    sources: [
+      "農林水産省 海面漁業生産統計調査（いか類・県別漁獲量）",
+      "夜焚き・イカメタル釣果実績（九州北部・山陰・北陸）",
+    ],
+  },
+  watarigani: {
+    default: 2,
+    regionOverrides: { hokkaido: 1 },
+    seaOverrides: {
+      瀬戸内海: 4,
+      伊勢湾: 4,
+      有明海: 4,
+      東京湾: 3,
+      オホーツク海: 0,
+    },
+    prefectureOverrides: {
+      aichi: 3, // 三河湾
+      okinawa: 1, // タイワンガザミ等別種が主
+    },
+    rationale:
+      "ワタリガニ（ガザミ）は内湾の砂泥底に生息し、瀬戸内海・伊勢湾・三河湾・有明海が漁獲・カニ網釣りとも本場。東京湾でも夜の堤防で実績がある。寒海には少なく北海道は境界域。",
+    sources: [
+      "農林水産省 海面漁業生産統計調査（がざみ類・県別漁獲量）",
+      "カニ網・夜釣り実績（瀬戸内・伊勢湾・東京湾）",
+    ],
+  },
+  nokogirigazami: {
+    default: 0,
+    prefectureOverrides: {
+      okinawa: 4, // マングローブ域のガニ（アミナー）
+      kagoshima: 3,
+      kochi: 3, // 浦戸湾等の「エガニ」
+      miyazaki: 2,
+      ehime: 2,
+      tokushima: 2,
+      wakayama: 2,
+      mie: 2,
+      shizuoka: 2, // 浜名湖の「ドウマン」
+      aichi: 2, // 三河湾の「ドウマン」
+      kumamoto: 2,
+      nagasaki: 2,
+      oita: 1,
+      kanagawa: 1,
+      chiba: 1,
+    },
+    rationale:
+      "ノコギリガザミ類は暖地の河口・内湾干潟に生息する大型ガニで、マングローブ域の沖縄と、ドウマンと呼ぶ浜名湖・三河湾、エガニと呼ぶ高知の内湾が知られる。九州・四国・紀伊半島の暖流域にも点在するが、関東以北では散発的な記録にとどまる。",
+    sources: [
+      "各県水産資料（トゲノコギリガザミ・ドウマン・エガニ）",
+      "カニ網・打ち込み釣り実績（沖縄・浜名湖・高知）",
+    ],
+  },
+  iidako: {
+    default: 2,
+    regionOverrides: { hokkaido: 1 },
+    seaOverrides: {
+      瀬戸内海: 4,
+      東京湾: 3,
+      伊勢湾: 3,
+      有明海: 3,
+      オホーツク海: 0,
+    },
+    prefectureOverrides: {
+      okinawa: 1,
+    },
+    rationale:
+      "イイダコは内湾の砂泥底に多い小型ダコで、テンヤの伝統釣法が根付く瀬戸内海が文化・実績とも本場。東京湾・伊勢湾・有明海など各地の内湾でも秋〜冬の定番。寒海には少なく北海道は境界域で、沖縄はまれ。",
+    sources: [
+      "農林水産省 海面漁業生産統計調査（たこ類）",
+      "イイダコテンヤ釣果実績（瀬戸内・東京湾）",
+    ],
+  },
 };
