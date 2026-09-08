@@ -99,7 +99,7 @@ export const spotTypeOverrides: Record<string, Partial<Record<SpotType, Aptitude
   oomonhata: { rocky: 3, port: 2, breakwater: 2 },
   onikasago: { rocky: 1, port: 0, breakwater: 1 },
   taman: { rocky: 3, beach: 3, surf: 3 },
-  oonibe: { surf: 4, beach: 3, port: 1, breakwater: 1 },
+  oonibe: { surf: 4, beach: 3, port: 1, breakwater: 1, river: 2 }, // 宮崎の河口サーフはオオニベの主戦場
   sujiara: { rocky: 3, port: 1, breakwater: 1 },
 
   // ── イカ・タコ・甲殻類（fish-sea-ika-tako）──
@@ -140,7 +140,8 @@ export const spotTypeOverrides: Record<string, Partial<Record<SpotType, Aptitude
   kawamutsu: { river: 4, lake: 1, pond: 0 },
   mabuna: {},
   himemasu: { lake: 4, river: 0, pond: 1 },
-  unagi: { river: 4, lake: 1, pond: 0 },
+  // ウナギは降河回遊魚のため港湾・運河・汽水湖（宍道湖等）でも実釣が成立する
+  unagi: { river: 4, lake: 2, port: 1, breakwater: 1, beach: 1, pond: 0 },
 
   // ── 汽水（fish-brackish）──
   kurodai: { port: 4, breakwater: 4, rocky: 3, pier: 3 },

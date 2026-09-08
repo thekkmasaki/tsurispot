@@ -25,6 +25,13 @@ const bySlug = new Map(allFish.map((f) => [f.slug, f]));
 const validSlugs = new Set(fishSpecies.map((f) => f.slug));
 
 describe("適性データの整合性", () => {
+  it("全116魚種に地域適性が定義されている（網羅性・P3完了で有効化）", () => {
+    const missing = fishSpecies
+      .filter((f) => !(f.slug in fishRegionalAptitude))
+      .map((f) => f.slug);
+    expect(missing, `地域適性が未定義: ${missing.join(", ")}`).toEqual([]);
+  });
+
   it("地域適性のキーが実在する魚種slugのみ", () => {
     for (const slug of Object.keys(fishRegionalAptitude)) {
       expect(validSlugs.has(slug), `未知の魚種slug: ${slug}`).toBe(true);
@@ -50,6 +57,8 @@ describe("適性データの整合性", () => {
         expect(getSpotTypeAptitude(fish.slug, "sea", "pond"), `${fish.slug}×pond`).toBe(0);
       }
       if (fish.category === "freshwater") {
+        // unagi は降河回遊魚のため港湾・汽水域の適性1を意図的に許容（例外）
+        if (fish.slug === "unagi") continue;
         for (const st of ["port", "breakwater", "rocky", "surf", "pier"] as const) {
           expect(getSpotTypeAptitude(fish.slug, "freshwater", st), `${fish.slug}×${st}`).toBe(0);
         }

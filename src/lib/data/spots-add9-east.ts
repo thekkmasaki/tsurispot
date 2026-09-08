@@ -655,7 +655,7 @@ export const eastAdd9Spots: FishingSpot[] = [
     latitude: 36.8240, longitude: 139.3500,
     address: "〒378-0414 群馬県利根郡片品村丸沼",
     accessInfo: "関越自動車道沼田ICから車で約50分",
-    region: region("r671"), spotType: "river", difficulty: "beginner",
+    region: region("r671"), spotType: "lake", difficulty: "beginner",
     isFree: false, feeDetail: "ボート利用料・遊漁料が必要",
     hasParking: true, parkingDetail: "丸沼高原駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
