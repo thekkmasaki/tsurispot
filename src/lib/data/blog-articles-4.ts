@@ -100,7 +100,7 @@ export const blogArticles4: BlogPost[] = [
 <li><strong>クリンチノット</strong>：ルアーやフックへの接続に。覚えやすい基本ノット</li>
 <li><strong>FGノット</strong>：PEラインとリーダーの接続に。やや難しいが強度は最高クラス</li>
 </ul>
-<p>結び方の詳しい手順は<a href="/guides/knots">結び方ガイドページ</a>で図解付きで解説しています。</p>
+<p>結び方の詳しい手順は<a href="/guide/knots">結び方ガイドページ</a>で図解付きで解説しています。</p>
 
 <div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
 <span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
@@ -383,7 +383,7 @@ export const blogArticles4: BlogPost[] = [
 
 <h2>潮回りカレンダーの確認方法</h2>
 <p>潮回りは約15日周期で「大潮→中潮→小潮→長潮→若潮→中潮→大潮」と繰り返します。釣行の計画を立てる際は、1〜2週間前から潮回りカレンダーをチェックして、大潮〜中潮の日に予定を合わせると効率的です。</p>
-<p>潮汐についてさらに詳しくは<a href="/guides/tide">潮汐ガイドページ</a>で解説しています。<a href="/catchable-now">今釣れる魚ページ</a>と合わせて、最適な釣行日を見つけましょう。</p>
+<p>潮汐についてさらに詳しくは<a href="/guide/tide">潮汐ガイドページ</a>で解説しています。<a href="/catchable-now">今釣れる魚ページ</a>と合わせて、最適な釣行日を見つけましょう。</p>
 `,
   },
   {
@@ -571,7 +571,7 @@ export const blogArticles4: BlogPost[] = [
 </ul>
 <p>深夜0時〜3時頃は魚の活性が落ちる「中だるみ」の時間帯です。初心者はまず日没前後の「ゴールデンタイム」だけ狙って、夜10時頃までの釣りから始めるのがおすすめです。</p>
 
-<p>夜釣りの装備や安全についてさらに詳しくは<a href="/guides/night-fishing">夜釣りガイドページ</a>をご覧ください。釣りマナーの基本は<a href="/blog/tsuri-manner-rule">釣りのマナーとルール</a>で確認できます。<a href="/spots">全国の釣りスポット一覧</a>で、夜釣りにおすすめのスポットを探してみましょう。</p>
+<p>夜釣りの装備や安全についてさらに詳しくは<a href="/guide/night-fishing">夜釣りガイドページ</a>をご覧ください。釣りマナーの基本は<a href="/blog/tsuri-manner-rule">釣りのマナーとルール</a>で確認できます。<a href="/spots">全国の釣りスポット一覧</a>で、夜釣りにおすすめのスポットを探してみましょう。</p>
 `,
   },
 ];

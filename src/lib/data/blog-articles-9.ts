@@ -119,7 +119,7 @@ export const blogArticles9: BlogPost[] = [
     category: "report",
     tags: ["投げ釣り", "キス", "ミヨ崎", "佐波賀", "舞鶴", "カレイ", "ジェット天秤"],
     publishedAt: "2025-05-15",
-    relatedSpots: ["miyozaki"],
+    relatedSpots: ["miyosaki-todai"],
     relatedFish: ["kisu", "karei"],
     content: `
 <h2>舞鶴で投げ釣りするならミヨ崎</h2>
@@ -157,11 +157,11 @@ export const blogArticles9: BlogPost[] = [
     category: "report",
     tags: ["サビキ", "アジ", "舞鶴漁港", "東舞鶴", "入れ食い", "初心者", "アミ姫"],
     publishedAt: "2025-07-15",
-    relatedSpots: [],
+    relatedSpots: ["maizuru-higashi-kou-k8", "maizuru-gyoko"],
     relatedFish: ["aji", "saba"],
     content: `
 <h2>舞鶴でサビキなら東舞鶴漁港が鉄板</h2>
-<p>舞鶴でサビキをするなら、東舞鶴漁港が鉄板。これは断言できる。</p>
+<p>舞鶴でサビキをするなら、<a href="/spots/maizuru-higashi-kou-k8">東舞鶴の漁港（舞鶴東港）</a>が鉄板。これは断言できる。</p>
 <p>2025年7月、朝6時。眠い目をこすりながら東舞鶴の漁港に到着。7月の朝は早くから明るくて、すでに先客が10人ほど。皆さん常連っぽい装備で、竿を4〜5本出している人もいる。</p>
 <p>どこに入ればいいかわからず、おろおろしていたら、隣の常連のおじさんが声をかけてくれた。</p>
 <p>「兄ちゃん、あそこの角がええで。潮が当たるところに群れが溜まるんや」</p>
@@ -180,6 +180,7 @@ export const blogArticles9: BlogPost[] = [
 <h2>帰宅後の料理</h2>
 <p>8時に納竿。帰宅後、アジは半分を刺身、半分をフライに。刺身は薬味たっぷりのなめろう風にして、フライはタルタルソースで。50匹は多すぎたので、近所にもおすそ分けした。</p>
 <p>舞鶴漁港のサビキは、釣りを始めたばかりの人に一番おすすめしたい。常連さんが優しいし、魚影が濃いし、足場が良い。「釣りって楽しい」を最短で実感できる場所だと思う。</p>
+<p>サビキ釣りの仕掛けやコマセワークの基本は<a href="/guide/sabiki">サビキ釣り完全ガイド</a>にまとまっている。アジの習性や釣れる時期は<a href="/fish/aji">アジの釣り方ページ</a>も参考に。</p>
 
 <div style="margin:1.5em 0;padding:1em 1.2em;background:#f0f9ff;border:1px solid #bae6fd;border-radius:12px;display:flex;flex-direction:column;gap:0.5em">
 <span style="font-size:0.75em;font-weight:600;color:#0369a1">おすすめアイテム</span>
@@ -280,7 +281,7 @@ export const blogArticles9: BlogPost[] = [
     tags: ["カレイ", "投げ釣り", "冬釣り", "ミヨ崎", "舞鶴", "防寒装備", "電熱ベスト"],
     publishedAt: "2025-12-15",
     image: "/images/blog/night-flatfish-measure.jpeg",
-    relatedSpots: ["miyozaki"],
+    relatedSpots: ["miyosaki-todai"],
     relatedFish: ["karei"],
     content: `
 <h2>冬の釣りは修行だ</h2>
