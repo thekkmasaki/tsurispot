@@ -92,7 +92,7 @@ export const brackishFish: FishSpecies[] = [
     scientificName: "Acanthogobius flavimanus",
     slug: "haze",
     description:
-      "河口や汽水域で手軽に釣れるファミリーフィッシングの定番。ちょい投げやミャク釣りで数釣りが楽しめます。",
+      "河口や運河で初心者でも数釣りでき、釣りたての天ぷらが人気の秋のファミリーフィッシング定番魚です。ちょい投げやミャク釣りで手軽に狙え、盛期の8〜11月は汽水域で活発にエサを追います。",
     category: "brackish",
     family: "ハゼ科",
     difficulty: "beginner",

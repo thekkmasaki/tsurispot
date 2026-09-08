@@ -20,6 +20,7 @@ import {
   Anchor,
   Crosshair,
   Moon,
+  Swords,
   Snowflake,
   Clock,
   BookOpen,
@@ -179,6 +180,14 @@ const detailGuides: GuideItem[] = [
     description:
       "エギの選び方、シャクリ方とフォール、季節別のポイント、アオリイカの締め方を解説。",
     icon: Crosshair,
+    category: "method",
+  },
+  {
+    href: "/guide/tachiuo",
+    title: "タチウオ釣り完全ガイド",
+    description:
+      "堤防からのタチウオ釣りを徹底解説。ワインド・テンヤ・電気ウキ・引き釣り4種の使い分け、タナの探り方、安全対策まで。",
+    icon: Swords,
     category: "method",
   },
   {

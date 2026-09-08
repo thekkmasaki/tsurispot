@@ -8,6 +8,7 @@ import {
   Fish,
   AlertTriangle,
   Anchor,
+  BookOpen,
   Calendar,
   MapPin,
   ChevronRight,
@@ -16,6 +17,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { MONTHS } from "@/lib/data/fishing-methods";
+import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { InArticleAd } from "@/components/ads/ad-unit";
 
 // 純SSGだと「今の季節」ハイライトがビルド時刻で凍結するため日次ISR
@@ -434,6 +436,48 @@ export default function SeasonalPage() {
         </div>
 
         <InArticleAd className="my-8" />
+
+        {/* 季節の特集記事 */}
+        <section className="mt-12">
+          <div className="mb-4 flex items-center gap-2">
+            <BookOpen className="size-5 text-primary" />
+            <h2 className="text-xl font-bold sm:text-2xl">季節の特集記事</h2>
+          </div>
+          <p className="mb-6 text-sm leading-relaxed text-muted-foreground sm:text-base">
+            季節×釣り方のテーマ別に、道具・手順・コツを詳しく解説した特集ガイドです
+          </p>
+          <div className="space-y-6">
+            {(["春", "夏", "秋", "冬"] as const).map((seasonName) => {
+              const guidesForSeason = seasonalGuides.filter(
+                (sg) => sg.season === seasonName
+              );
+              if (guidesForSeason.length === 0) return null;
+              return (
+                <div key={seasonName}>
+                  <h3 className="mb-3 border-b pb-1 text-sm font-bold text-muted-foreground">
+                    {seasonName}の特集
+                  </h3>
+                  <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+                    {guidesForSeason.map((sg) => (
+                      <Link prefetch={false}
+                        key={sg.slug}
+                        href={`/seasonal/${sg.slug}`}
+                        className="group block rounded-lg border bg-white p-3 transition-shadow hover:shadow-md dark:bg-card"
+                      >
+                        <p className="text-sm font-semibold group-hover:text-primary">
+                          {sg.title}
+                        </p>
+                        <p className="mt-0.5 text-xs text-muted-foreground">
+                          {sg.months.map((m) => `${m}月`).join("・")}
+                        </p>
+                      </Link>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </section>
 
         {/* 月×地域別ガイド */}
         <section className="mt-12">

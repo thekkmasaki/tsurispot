@@ -105,6 +105,15 @@ const nextConfig: NextConfig = {
       destination: '/prefecture/:slug/fish/suzuki',
       permanent: true,
     },
+    // 英語月slugの /seasonal/september 等は /monthly の同slugへ恒久リダイレクト
+    // （過去に /monthly から誤リンクされてインデックスされた期間があるための回収。
+    //   ページ内の permanentRedirect はストリーミング時に meta refresh へ落ちるため、
+    //   config レベルで確実に 308 を返す）
+    {
+      source: '/seasonal/:month(january|february|march|april|may|june|july|august|september|october|november|december)',
+      destination: '/monthly/:month',
+      permanent: true,
+    },
     // 重複除去で消失したslug → 正しいslugへ301リダイレクト
     ...spotRedirectEntries,
   ],

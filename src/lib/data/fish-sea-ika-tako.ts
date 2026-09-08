@@ -277,7 +277,7 @@ export const seaFishIkaTako: FishSpecies[] = [
     scientificName: "Sepia esculenta",
     slug: "kouika",
     description:
-      "甲羅を持つずんぐりしたイカ。エギングで底をゆっくり探ると効果的。墨の量が多いので注意。身が厚く甘みがあり、天ぷらが絶品です。",
+      "コウイカは砂泥底の漁港で狙え、春の親イカと秋の新子でシーズンが分かれる。甲羅を持つずんぐりした姿が特徴で、エギを底に沈めてゆっくり探ると効果的。墨の量が多いので取り込みには注意。身が厚く甘みがあり、天ぷらが絶品です。",
     category: "sea",
     family: "コウイカ科",
     difficulty: "beginner",
@@ -524,7 +524,7 @@ export const seaFishIkaTako: FishSpecies[] = [
     scientificName: "Octopus ocellatus",
     slug: "iidako",
     description:
-      "秋の人気ターゲット。マダコより小型で胴長10cm前後と扱いやすく、エギやタコテンヤで堤防から気軽に楽しめる。体に青い眼状紋があるのが特徴で、旬の秋には卵巣に飯（いい）を詰めたような白い卵が入り美味しい。",
+      "イイダコは砂泥底の堤防や浅場で、エギを底でじっくり見せて誘うのがコツ。マダコより小型で胴長10cm前後と扱いやすく、秋の数釣りは初心者でも釣果を出しやすい。体に青い眼状紋があるのが特徴で、旬の秋には卵巣に飯（いい）を詰めたような白い卵が入り美味しい。",
     category: "sea",
     family: "マダコ科",
     difficulty: "beginner",

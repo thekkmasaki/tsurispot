@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import {
   Fish,
   MapPin,
@@ -22,12 +22,17 @@ import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { seasons, seasonSlugs, getSeasonBySlug } from "@/lib/data/seasonal-data";
+import { MONTHS } from "@/lib/data/fishing-methods";
 import { SeasonalSeasonPage } from "@/components/seasonal-season-page";
 import { InArticleAd } from "@/components/ads/ad-unit";
 
 interface PageProps {
   params: Promise<{ month: string }>;
 }
+
+// 過去に /seasonal/september 形式で内部リンクされていた期間があり、
+// インデックス回収のため英語月slug 12種のみ /monthly へ恒久リダイレクトする
+const MONTH_SLUG_SET = new Set(MONTHS.map((m) => m.slug));
 
 // 純SSGだと年号(【○年版】)と「今の季節」判定がビルド時刻で凍結するため日次ISR
 export const revalidate = 86400;
@@ -82,6 +87,11 @@ export async function generateMetadata({
     };
   }
 
+  // 英語月slugは /monthly の同slugへ恒久リダイレクト
+  if (MONTH_SLUG_SET.has(month)) {
+    permanentRedirect(`/monthly/${month}`);
+  }
+
   // 既存の季節ガイドの場合
   const guide = seasonalGuides.find((g) => g.slug === month);
   if (!guide) return { title: "ページが見つかりません" };
@@ -126,6 +136,11 @@ export default async function SeasonalGuidePage({ params }: PageProps) {
   const seasonInfo = getSeasonBySlug(month);
   if (seasonInfo) {
     return <SeasonalSeasonPage season={seasonInfo} />;
+  }
+
+  // 英語月slugは /monthly の同slugへ恒久リダイレクト（それ以外の未知slugは404）
+  if (MONTH_SLUG_SET.has(month)) {
+    permanentRedirect(`/monthly/${month}`);
   }
 
   const guide = seasonalGuides.find((g) => g.slug === month);

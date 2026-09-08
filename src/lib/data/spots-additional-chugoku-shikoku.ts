@@ -116,7 +116,7 @@ export const additionalSpotsChugokuShikoku: FishingSpot[] = [
     id: "s84",
     name: "尾道港",
     slug: "onomichi-port",
-    description: "しまなみ海道の起点、尾道の港。瀬戸内海の穏やかな海でメバルやカサゴなどの根魚が豊富。千光寺公園の観光と合わせて楽しめる。",
+    description: "秋から春はメバリングと穴釣り、夏はサビキと季節で釣り物が入れ替わる尾道の港。しまなみ海道の起点にあたり、瀬戸内海の穏やかな海でメバルやカサゴなどの根魚が豊富。メバルは11月から4月の夕マヅメ、アジは5月から11月の朝マヅメが狙い目。千光寺公園の観光と合わせて楽しめる。",
     latitude: 34.4094,
     longitude: 133.2056,
     address: "〒722-0035 広島県尾道市土堂1丁目12",
@@ -754,7 +754,7 @@ export const additionalSpotsChugokuShikoku: FishingSpot[] = [
   },
   {
     id: "s188", name: "下関彦島海士郷", slug: "shimonoseki-hikoshima",
-    description: "関門海峡に面した彦島の漁港。潮流が速くアジの魚影が濃い。アジングの隠れた名所。",
+    description: "潮流の速い関門海峡に面し、5月から11月はアジングが本命の彦島の漁港。アジの魚影が濃い隠れた名所で、冬は夜のメバリング、9月から12月はエギングのアオリイカも実績がある。6月から10月はタコエギのマダコ、春はカゴ釣りでマダイを狙える。トイレはないため事前に済ませておきたい。",
     latitude: 33.9312, longitude: 130.9012, address: "〒750-0071 山口県下関市彦島海士郷町",
     accessInfo: "JR下関駅から車で15分。中国自動車道下関ICから約20分。",
     region: region("r28"), spotType: "port", difficulty: "intermediate",
@@ -811,7 +811,7 @@ export const additionalSpotsChugokuShikoku: FishingSpot[] = [
   },
   {
     id: "s193", name: "下関・角島大橋周辺", slug: "shimonoseki-tsunoshima",
-    description: "エメラルドグリーンの海が広がる角島周辺。橋の下や周辺の磯場でヒラメ・マダイ・青物が狙える。",
+    description: "サビキで釣ったアジを泳がせてヒラメを狙える角島大橋周辺の磯場。エメラルドグリーンの海が広がり、朝マヅメのショアジギングでは4月から11月にマダイの実績もある。秋はエギングのアオリイカ、冬は穴釣りのカサゴやメバリングと釣期が途切れない。無料駐車場あり。",
     latitude: 34.3550, longitude: 130.8975, address: "〒759-5331 山口県下関市豊北町大字神田",
     accessInfo: "中国自動車道下関ICから約70分。", region: region("r28"),
     spotType: "rocky", difficulty: "intermediate", isFree: true,

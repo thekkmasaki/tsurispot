@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { Fish, ChevronLeft, ChevronRight, Lightbulb, Calendar } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -63,7 +64,14 @@ interface CatchableNowClientProps {
 }
 
 export function CatchableNowClient({ fishSpecies, initialMonth }: CatchableNowClientProps) {
-  const [selectedMonth, setSelectedMonth] = useState(initialMonth);
+  // ?month=1..12 があれば初期選択月にする（範囲外・非数値は無視して現在月）
+  const searchParams = useSearchParams();
+  const monthParam = Number(searchParams.get("month"));
+  const startMonth =
+    Number.isInteger(monthParam) && monthParam >= 1 && monthParam <= 12
+      ? monthParam
+      : initialMonth;
+  const [selectedMonth, setSelectedMonth] = useState(startMonth);
   const nextMonth = getNextMonth(selectedMonth);
   const prevMonth = getPrevMonth(selectedMonth);
   const season = getSeason(selectedMonth);

@@ -253,3 +253,20 @@
   display: none !important;
 }
 
+/* ---- Leaflet の z-index をマップ内に封じ込める ----
+   Leaflet は .leaflet-map-pane に z-index:400、各ペインに 200〜700、コントロールに
+   800〜1000 を付ける。ところが .leaflet-container は position:relative / z-index:auto で
+   スタッキングコンテキストを作らないため、これらがルートのスタッキングコンテキストへ
+   そのまま参加し、下部固定広告(z-40)やボトムナビ(z-50)より上に描画されてしまう。
+   （実測: leaflet-container の z-index=auto / isolation=auto、祖先にSCを作る要素なし）
+
+   isolation:isolate でコンテナ自身にスタッキングコンテキストを作ると、内部の z-index は
+   すべてマップ内での相対順序になり、マップ全体は本来の文書位置（＝固定要素より下）に収まる。
+   Leaflet のポップアップ・コントロールはいずれもコンテナの子なので表示順は変わらない。
+
+   対象: ホームの地図バンド(home-map-view) / /map / スポット詳細の空撮・釣り座マップ。
+   いずれも広告が 2026-07-05 から停止していたため、本番で広告と同時に描画されたことが無い。 */
+.leaflet-container {
+  isolation: isolate;
+}
+

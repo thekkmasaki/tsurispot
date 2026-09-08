@@ -11,7 +11,7 @@ import { InArticleAd } from "@/components/ads/ad-unit";
 export const metadata: Metadata = {
   title: "釣り仕掛け図解ガイド - 5つの基本仕掛けをイラストで解説",
   description:
-    "サビキ・ウキ釣り・ちょい投げ・穴釣り・ルアーの5つの基本仕掛けをイラスト付きでわかりやすく解説。初心者でもすぐに仕掛けが作れるようになります。",
+    "仕掛けとは、竿とリールから先に付ける糸・ウキ・オモリ・針などの組み合わせのこと。サビキ・ウキ釣り・ちょい投げ・穴釣り・ルアーの5つの基本仕掛けをイラスト付きでわかりやすく解説します。",
   openGraph: {
     title: "釣り仕掛け図解ガイド - 5つの基本仕掛けをイラストで解説",
     description:
@@ -921,10 +921,23 @@ export default function RigsGuidePage() {
           </p>
         </div>
 
-        <div className="mb-6 rounded-lg bg-blue-50 p-4 text-sm text-blue-800 dark:bg-blue-950 dark:text-blue-200">
-          <span className="font-medium">はじめに：</span>
-          仕掛けとは、竿先から針までの糸や道具の組み合わせのこと。狙う魚や釣り方によって仕掛けは異なります。ここでは初心者が覚えるべき5つの基本仕掛けを図解で紹介します。
-        </div>
+        <section className="mb-6 rounded-lg bg-blue-50 p-4 text-blue-800 dark:bg-blue-950 dark:text-blue-200">
+          <h2 className="mb-2 text-base font-bold">釣りの仕掛けとは？</h2>
+          <p className="text-sm leading-relaxed">
+            仕掛けとは、竿とリールから先に取り付ける、糸（道糸・ハリス）・ウキ・オモリ・サルカン・針などのパーツを組み合わせた部分のことです。狙う魚や釣り方に合わせて仕掛けを変えるのが釣りの基本で、市販の完成仕掛けを使えば初心者でも簡単にセットできます。
+          </p>
+          <p className="mt-2 text-sm leading-relaxed">
+            ここでは初心者が覚えるべき5つの基本仕掛けを図解で紹介します。オモリの種類と号数は
+            <Link prefetch={false} href="/guide/sinker" className="underline">
+              オモリの選び方ガイド
+            </Link>
+            、糸と針の結び方は
+            <Link prefetch={false} href="/guide/knots" className="underline">
+              釣り糸の結び方ガイド
+            </Link>
+            も参考にしてください。
+          </p>
+        </section>
 
         <RigComparisonSvg />
 
