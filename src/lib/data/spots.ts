@@ -10,8 +10,21 @@ import { isSameSpotName } from "./spot-name-normalize";
 export const dedupRedirects = new Map<string, string>();
 
 // Deduplication: remove duplicate spots by name (and near-duplicates within ~500m)
-// Keeps the entry with the most catchable fish as a proxy for data completeness.
-// _baseSpots are listed first so they are preferred when catchableFish counts tie.
+// 勝者は spotWins() で判定。_baseSpots are listed first so they are preferred on full tie.
+
+// 重複スポットの勝者判定。旧実装は「catchableFish 件数が多い方」だけだったため、
+// テンプレで魚種数を水増しされたスポットが出典付きの厳選データに必ず勝ち、
+// 改善済みスポットが本番から消える逆転が起きていた（実測54件）。
+// 出典付きエントリ数を最優先し、同数なら従来どおり魚種数（同値は先着=既存優先）。
+// ※本文長などを基準に足すと出典0同士の同点が大量反転し公開URLが500件超入れ替わる
+//   ため、SEO保全（URL churn最小化）の観点で意図的に2基準のみとする。
+function spotWins(challenger: FishingSpot, incumbent: FishingSpot): boolean {
+  const srcC = challenger.catchableFish.filter((cf) => cf.source).length;
+  const srcI = incumbent.catchableFish.filter((cf) => cf.source).length;
+  if (srcC !== srcI) return srcC > srcI;
+  return challenger.catchableFish.length > incumbent.catchableFish.length;
+}
+
 function deduplicateSpots(spots: FishingSpot[]): FishingSpot[] {
   const seen = new Map<string, FishingSpot>();
   for (const spot of spots) {
@@ -20,7 +33,7 @@ function deduplicateSpots(spots: FishingSpot[]): FishingSpot[] {
     if (!existing) {
       seen.set(key, spot);
     } else {
-      if (spot.catchableFish.length > existing.catchableFish.length) {
+      if (spotWins(spot, existing)) {
         // 既存のslugは負け → 新しいslugへリダイレクト
         dedupRedirects.set(existing.slug, spot.slug);
         seen.set(key, spot);
@@ -42,7 +55,7 @@ function deduplicateSpots(spots: FishingSpot[]): FishingSpot[] {
       coordMap.set(ck, spot);
       deduped.push(spot);
     } else if (existing.name.trim() === spot.name.trim()) {
-      if (spot.catchableFish.length > existing.catchableFish.length) {
+      if (spotWins(spot, existing)) {
         dedupRedirects.set(existing.slug, spot.slug);
         const idx = deduped.indexOf(existing);
         if (idx !== -1) deduped[idx] = spot;
@@ -77,9 +90,8 @@ function deduplicateSpots(spots: FishingSpot[]): FishingSpot[] {
         if (removedSlugs.has(b.slug)) continue;
         if (!isSameSpotName(a.name, b.name)) continue;
         if (haversineKm(a.latitude, a.longitude, b.latitude, b.longitude) > NAME_MERGE_MAX_KM) continue;
-        // 勝者は既存Passと同じく catchableFish が多い方（同数なら先着）
-        const [winner, loser] =
-          b.catchableFish.length > a.catchableFish.length ? [b, a] : [a, b];
+        // 勝者は既存Passと同じ spotWins 基準（完全同値なら先着）
+        const [winner, loser] = spotWins(b, a) ? [b, a] : [a, b];
         dedupRedirects.set(loser.slug, winner.slug);
         removedSlugs.add(loser.slug);
         // 名寄せ結果のレビュー用（DEDUP_REPORT=1 npx vitest run ... で出力）
@@ -93,6 +105,23 @@ function deduplicateSpots(spots: FishingSpot[]): FishingSpot[] {
   }
   const merged = removedSlugs.size > 0 ? deduped.filter((s) => !removedSlugs.has(s.slug)) : deduped;
 
+  // Pass4: slug一意性の構造的保証。別名だが同一slugのペア（例: 南港海釣り公園 /
+  // 南港魚つり園護岸 が共に nanko-fishing-park）は Pass1-3 をすり抜け得る。
+  // 同一URLに複数実体は存在できないため spotWins の勝者のみ残す（URLは同じなので
+  // リダイレクト登録は不要）。
+  const bySlug = new Map<string, FishingSpot>();
+  let slugDupFound = false;
+  for (const spot of merged) {
+    const existing = bySlug.get(spot.slug);
+    if (!existing) {
+      bySlug.set(spot.slug, spot);
+    } else {
+      slugDupFound = true;
+      if (spotWins(spot, existing)) bySlug.set(spot.slug, spot);
+    }
+  }
+  const unique = slugDupFound ? merged.filter((s) => bySlug.get(s.slug) === s) : merged;
+
   // チェーン解決: A→B→C の場合、A→C に修正
   for (const [loser, winner] of dedupRedirects) {
     let finalWinner = winner;
@@ -105,7 +134,7 @@ function deduplicateSpots(spots: FishingSpot[]): FishingSpot[] {
       dedupRedirects.set(loser, finalWinner);
     }
   }
-  return merged;
+  return unique;
 }
 
 // ルールデータの一括適用（既にrulesが設定されているスポットは上書きしない）

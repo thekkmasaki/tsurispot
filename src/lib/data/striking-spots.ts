@@ -23,8 +23,10 @@ export interface StrikingSpot {
 }
 
 export const strikingSpots: StrikingSpot[] = [
-  { slug: "rumoi-ko", prefSlug: "hokkaido", pos: 9.6, imp: 749, topQuery: "留萌 釣り" },
-  { slug: "ishikaribay-higashi-futou6", prefSlug: "hokkaido", pos: 10.5, imp: 543, topQuery: "石狩湾新港 釣り" },
+  // dedup勝者交代（spotWins: 出典数優先）で rumoi-ko → rumoi-port、
+  // ishikaribay-higashi-futou6 → ishikari-east-wharf に公開slugが変わった（旧URLは301）
+  { slug: "rumoi-port", prefSlug: "hokkaido", pos: 9.6, imp: 749, topQuery: "留萌 釣り" },
+  { slug: "ishikari-east-wharf", prefSlug: "hokkaido", pos: 10.5, imp: 543, topQuery: "石狩湾新港 釣り" },
   { slug: "misawa-gyokou6", prefSlug: "aomori", pos: 8.3, imp: 395, topQuery: "三沢漁港 釣り" },
   { slug: "samegawa-kakou6", prefSlug: "fukushima", pos: 5.9, imp: 362, topQuery: "鮫川河口 釣果" },
   { slug: "atsuta-gyokou6", prefSlug: "hokkaido", pos: 8.1, imp: 415, topQuery: "厚田漁港 釣り" },
