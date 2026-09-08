@@ -21,8 +21,10 @@ import {
  * - 各一時UIは「表示したい」状態を useBottomLayer(id, wantsVisible) で申告する
  * - 同時にアクティブな場合は優先度最上位の1つだけが表示許可される
  *   （他は非表示のまま待機し、上位が消えたら繰り上げで表示される）
- * - 一時UIがいずれか表示中は MobileStickyAd をサスペンド
+ * - 広告と同座標のまま残す一時UI(compare/location)が表示中は MobileStickyAd をサスペンド
  *   （useBottomAdSuspended で参照。広告の上に何かが被さる状態を根絶）
+ * - 常時出る一時UI(cookie/pwa)はサスペンドせず、座標を広告の上へずらして共存させる
+ *   （サスペンド＝display:none は広告リクエスト自体を止めるため。下の AD_SUSPENDING_LAYERS 参照）
  */
 
 /** 調停対象の一時UI。優先度はここで一元管理する */
@@ -117,11 +119,32 @@ export function useBottomLayer(
 }
 
 /**
+ * 広告をサスペンド（display:none）する一時UI。
+ *
+ * 【重要】ここに登録した一時UIが表示中は MobileStickyAd が display:none になる。
+ * display:none は offsetWidth=0 → ad-unit.tsx の MIN_AD_WIDTH ガードにより
+ * adsbygoogle.push({}) 自体が実行されない ＝ 広告リクエストが出ない ＝ 収益ゼロ。
+ * **常時出る一時UIをここに入れてはいけない。**
+ *
+ * 実際に 2026-07-05〜08-27 の53日間、cookie(新規の1PV目) と pwa(2PV目以降) がここに
+ * 含まれていたため、mobile_sticky の広告表示が 1PVあたり 0.49→0.007 まで落ちた。
+ * この2つは座標を広告の上へずらして共存させる方式へ変更した（bottom を 199px+safe-area に）。
+ *
+ * compare / location は発生が限定的（compare=比較に追加した時のみ、location=トップのみ）で、
+ * かつ広告と同座標のままなので、従来どおりサスペンドで重なりを回避する。
+ */
+const AD_SUSPENDING_LAYERS: ReadonlySet<BottomLayerId> = new Set<BottomLayerId>([
+  "compare",
+  "location",
+]);
+
+/**
  * MobileStickyAd 側で呼ぶフック。
- * 一時UIがいずれか表示中は true（広告をサスペンドすべき状態）。
+ * AD_SUSPENDING_LAYERS のいずれかが表示中のときだけ true（広告をサスペンドすべき状態）。
  * dismissed フラグとは別の一時非表示であり、上位UIが消えれば広告は自動復帰する。
  */
 export function useBottomAdSuspended(): boolean {
   const ctx = useContext(BottomLayerContext);
-  return ctx !== null && ctx.activeId !== null;
+  if (ctx === null || ctx.activeId === null) return false;
+  return AD_SUSPENDING_LAYERS.has(ctx.activeId);
 }
