@@ -9,6 +9,7 @@ import { fishMetadata } from "@/lib/data/fish-metadata";
 import { prefectures } from "@/lib/data/prefectures";
 import { fishingSpots } from "@/lib/data/spots";
 import { MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
+import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 
 /**
  * マトリクス（県×月×魚種）の index 方針を保証する。
@@ -94,6 +95,8 @@ describe("index/sitemap セット = 配信される全組合せ（薄いペー�
         for (const spot of prefSpots) {
           const seen = new Set<string>();
           for (const cf of spot.catchableFish) {
+            // ページ本体・combos集計と同じ釣れる度ゲート（fish-aptitude）を適用
+            if (!isFishListedAtSpot(spot, cf.fish.slug)) continue;
             if (isMonthInRange(month.num, cf.monthStart, cf.monthEnd)) {
               seen.add(cf.fish.slug);
             }
@@ -126,6 +129,8 @@ describe("index/sitemap セット = 配信される全組合せ（薄いペー�
       const uniqueSpots = fishingSpots.filter(
         (s) =>
           s.region.prefecture === pref.name &&
+          // matrix ページ本体のレンダ判定と同じゲート
+          isFishListedAtSpot(s, c.fishSlug) &&
           s.catchableFish.some(
             (cf) =>
               cf.fish.slug === c.fishSlug &&

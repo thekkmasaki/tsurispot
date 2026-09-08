@@ -51,7 +51,10 @@ const labelIdx = args.indexOf('--label');
 const label = labelIdx >= 0 ? args[labelIdx + 1] : 'snapshot';
 
 // ── 実行時データのバンドル & 読み込み ──────────────────
-const hasAptitude = fs.existsSync(path.join(ROOT, 'src/lib/data/fish-aptitude/index.ts'));
+// --legacy: fish-aptitude が存在しても現行ロジックで集計（基準線の再採取用）
+const hasAptitude =
+  !args.includes('--legacy') &&
+  fs.existsSync(path.join(ROOT, 'src/lib/data/fish-aptitude/index.ts'));
 
 async function loadRuntimeData() {
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'tsurispot-aptitude-'));

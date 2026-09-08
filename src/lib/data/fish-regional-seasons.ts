@@ -20,10 +20,8 @@ export const fishRegionalSeasons: Record<
   // ── マダイ ──
   // 全国デフォルト: season [3-6,9-12], peak [4,5,10,11]
   madai: {
-    hokkaido: {
-      seasonMonths: [5, 6, 7, 8, 9, 10],
-      peakMonths: [6, 7, 9],
-    },
+    // hokkaido は分布外のため定義しない（fish-aptitude の regionOverrides.hokkaido=0 と整合。
+    // 実スポット登録も0件で、旧定義の「北海道5-10月」は誤りだった）
     tohoku: {
       seasonMonths: [4, 5, 6, 7, 9, 10, 11],
       peakMonths: [5, 6, 10],
@@ -200,10 +198,8 @@ export const fishRegionalSeasons: Record<
   // ── タチウオ ──
   // 全国デフォルト: season [7-12], peak [8,9,10]
   tachiuo: {
-    hokkaido: {
-      seasonMonths: [8, 9, 10],
-      peakMonths: [9],
-    },
+    // hokkaido は分布外のため定義しない（fish-aptitude の regionOverrides.hokkaido=0 と整合。
+    // 旧定義の「北海道8-10月」は誤りだった）
     tohoku: {
       seasonMonths: [8, 9, 10, 11],
       peakMonths: [9, 10],
@@ -224,11 +220,9 @@ export const fishRegionalSeasons: Record<
 
   // ── アオリイカ ──
   // 全国デフォルト: season [4-6,9-12], peak [5,10,11]
+  // hokkaido は分布外のため定義しない（fish-aptitude の regionOverrides.hokkaido=0 と整合。
+  // 旧定義の「北海道6-9月」は誤りだった）
   aoriika: {
-    hokkaido: {
-      seasonMonths: [6, 7, 8, 9],
-      peakMonths: [7, 8],
-    },
     tohoku: {
       seasonMonths: [5, 6, 7, 9, 10, 11],
       peakMonths: [6, 10],
@@ -237,9 +231,23 @@ export const fishRegionalSeasons: Record<
       seasonMonths: [4, 5, 6, 9, 10, 11, 12],
       peakMonths: [5, 10, 11],
     },
+    chubu: {
+      // 北陸（新潟〜福井）の日本海側は春5-6月・秋9-11月が中心
+      seasonMonths: [4, 5, 6, 9, 10, 11, 12],
+      peakMonths: [5, 10, 11],
+    },
     kinki: {
       seasonMonths: [4, 5, 6, 9, 10, 11, 12],
       peakMonths: [5, 6, 10, 11],
+    },
+    chugoku: {
+      // 山陰はエギングの本場。春の親イカ・秋の新子とも長い
+      seasonMonths: [4, 5, 6, 9, 10, 11, 12],
+      peakMonths: [5, 6, 10, 11],
+    },
+    shikoku: {
+      seasonMonths: [3, 4, 5, 6, 9, 10, 11, 12],
+      peakMonths: [4, 5, 10, 11],
     },
     kyushu: {
       seasonMonths: [3, 4, 5, 6, 9, 10, 11, 12, 1],

@@ -24,6 +24,7 @@ import { toListSpot } from "@/lib/data/list-spot";
 import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { fishSpecies } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
+import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import {
   getHighValuePrefMonthFishCombos,
   getEligiblePrefMonthFishCombos,
@@ -106,7 +107,13 @@ type MatchingSpot = {
 const getMatchingSpots = cache(
   (prefName: string, monthNum: number, fishSlug: string): MatchingSpot[] => {
     return fishingSpots
-      .filter((s) => s.region.prefecture === prefName)
+      .filter(
+        (s) =>
+          s.region.prefecture === prefName &&
+          // 釣れる度ゲート: 生息域外・地形不適合は掲載しない
+          //（combos集計・sitemapと同一基準にして301判定のドリフトを防ぐ）
+          isFishListedAtSpot(s, fishSlug)
+      )
       .map((spot) => {
         const matchingCf = spot.catchableFish.filter(
           (cf) =>

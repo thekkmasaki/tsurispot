@@ -1,6 +1,13 @@
 /**
  * sea-label-resolver.mjs
  * 座標から最も近い海域名を返すモジュール
+ *
+ * ⚠ src/lib/geo/sea-label.ts と同一ロジック。片方を変えたら必ず両方を同期し、
+ *   src/lib/geo/__tests__/sea-label.test.ts の代表座標で検証すること。
+ *
+ * 旧実装は日本海の判定が「lng<136」のみで、新潟・山形・秋田・青森西岸・石川・
+ * 北海道西岸がすべて太平洋と誤判定されていた（他に大分→日本海、萩→瀬戸内、
+ * 釧路→オホーツク等）。日本海/太平洋の分水嶺を緯度の関数として引き直した。
  */
 
 /**
@@ -19,12 +26,14 @@ const SEA_AREAS = [
   { name: '響灘', lat: 33.95, lng: 130.8, radius: 0.3 },
   { name: '紀伊水道', lat: 33.9, lng: 135.0, radius: 0.4 },
   { name: '豊後水道', lat: 33.1, lng: 132.2, radius: 0.4 },
-  { name: '津軽海峡', lat: 41.5, lng: 140.5, radius: 0.4 },
+  // 津軽海峡は松前・函館・竜飛をカバーするため半径を0.4→0.45に拡大
+  { name: '津軽海峡', lat: 41.5, lng: 140.5, radius: 0.45 },
   { name: '噴火湾', lat: 42.3, lng: 140.7, radius: 0.3 },
   { name: '陸奥湾', lat: 41.0, lng: 140.85, radius: 0.3 },
   { name: '播磨灘', lat: 34.6, lng: 134.6, radius: 0.3 },
   { name: '備讃瀬戸', lat: 34.35, lng: 133.8, radius: 0.3 },
-  { name: 'オホーツク海', lat: 44.5, lng: 144.5, radius: 2.0 },
+  // オホーツク海の巨大円（半径2.0度）は釧路・根室まで飲み込んでいたため廃止し、
+  // 大域判定（lat>43.6 かつ lng>142）に置き換えた
 ];
 
 /**
@@ -58,26 +67,23 @@ export function resolveSeaLabel(lat, lng) {
 
   if (closest) return closest;
 
-  // 2. 大域判定
-  // オホーツク海
-  if (lat > 42 && lng > 142) return 'オホーツク海';
-
-  // 東シナ海
+  // 東シナ海（九州西岸。天草・八代海を含み、鹿児島湾は除く）
   if (lng < 130) return '東シナ海';
+  if (lat < 33.7 && lng < 130.55) return '東シナ海';
 
-  // 瀬戸内海判定
-  if (lat >= 33.5 && lat <= 34.8 && lng >= 131 && lng <= 135) {
-    return '瀬戸内海';
+  // 瀬戸内海（東部: 広島〜播磨。西部: 周防灘〜安芸灘。萩・長門・高知・宇和海・大分は含まない）
+  if (lat >= 33.9 && lat <= 34.8 && lng >= 132.4 && lng <= 135.2) return '瀬戸内海';
+  if (lat >= 33.6 && lat <= 34.35 && lng >= 131 && lng < 132.4) return '瀬戸内海';
+
+  // 北海道
+  if (lat >= 41.4) {
+    if (lat > 43.6 && lng > 142) return 'オホーツク海';
+    if (lng < 0.9 * lat + 102.5) return '日本海';
+    return '太平洋';
   }
 
-  // 北部判定
-  if (lat > 39) {
-    return lng < 136 ? '日本海' : '太平洋';
-  }
-
-  // 日本海側
-  if (lng < 136) return '日本海';
-
-  // デフォルト
+  // 本州・四国・九州の日本海/太平洋分水嶺
+  const divide = lat <= 36 ? 136.2 : Math.min(136.2 + 2.0 * (lat - 36), 140.8);
+  if (lat >= 34.3 && lng < divide) return '日本海';
   return '太平洋';
 }

@@ -4,52 +4,69 @@ import { fishingSpots } from "./spots";
 import { prefectures } from "./prefectures";
 import { MONTHS, isMonthInRange } from "./fishing-methods";
 import { fishMetadata } from "./fish-metadata";
+import { getCatchAssessment, isFishListedAtSpot } from "./fish-aptitude";
 
-// 魚種データにスポット情報を自動付与（個別魚詳細ページ用、全件）
+/**
+ * 魚種×スポットの掲載可否・バッジ・並び順はすべて fish-aptitude の
+ * 判定（地域適性=漁獲量/実績 + 地形適性 + 旬/出典/評価）に一元化されている。
+ * catchableFish の有無だけで「釣れる」と判定してはならない
+ * （生息域外のテンプレデータが一覧・sitemap に漏れる）。
+ */
+
+/** スポットが魚を持ち、かつ適性ゲートを通るか（.some()の事前判定でメモ化を汚さない） */
+function isListed(spot: FishingSpot, fishSlug: string): boolean {
+  return (
+    spot.catchableFish.some((cf) => cf.fish.slug === fishSlug) &&
+    isFishListedAtSpot(spot, fishSlug)
+  );
+}
+
+/** 掲載スポットの SpotSummary（tier・並び順スコアつき） */
+function toSpotSummary(spot: FishingSpot, fishSlug: string): SpotSummary {
+  const assessment = getCatchAssessment(spot, fishSlug)!;
+  return {
+    id: spot.id,
+    name: spot.name,
+    slug: spot.slug,
+    region: spot.region,
+    rating: spot.rating,
+    catchRating: assessment.tier === "excluded" ? "fair" : assessment.tier,
+    catchScore: assessment.score,
+    latitude: spot.latitude,
+    longitude: spot.longitude,
+  };
+}
+
+/** 釣れる度スコア降順 → rating降順 → slug昇順（決定的） */
+function bySpotScore(a: SpotSummary, b: SpotSummary): number {
+  return (
+    (b.catchScore ?? 0) - (a.catchScore ?? 0) ||
+    b.rating - a.rating ||
+    a.slug.localeCompare(b.slug)
+  );
+}
+
+// 魚種データにスポット情報を自動付与（個別魚詳細ページ用、全件・スコア順ソート済み）
 export function getFishSpeciesWithSpots(): FishSpecies[] {
   return fishSpecies.map((fish) => ({
     ...fish,
     spots: fishingSpots
-      .filter((spot) =>
-        spot.catchableFish.some((cf) => cf.fish.slug === fish.slug)
-      )
-      .map((spot): SpotSummary => {
-        const cf = spot.catchableFish.find((cf) => cf.fish.slug === fish.slug)!;
-        return {
-          id: spot.id,
-          name: spot.name,
-          slug: spot.slug,
-          region: spot.region,
-          rating: spot.rating,
-          catchRating: cf.peakSeason ? "excellent" : "good",
-          latitude: spot.latitude,
-          longitude: spot.longitude,
-        };
-      }),
+      .filter((spot) => isListed(spot, fish.slug))
+      .map((spot) => toSpotSummary(spot, fish.slug))
+      .sort(bySpotScore),
   }));
 }
 
-// 魚種一覧ページ用（軽量版）: 各魚種にスポットは先頭3件のみ + 総数。
+// 魚種一覧ページ用（軽量版）: 各魚種にスポットは上位3件のみ + 総数。
 // 元の getFishSpeciesWithSpots は 100 魚種 × 数百スポットを HTML に埋め込み
 // 5.6 MB / 1 ページの巨大 HTML を生成していたため、リスト用に分離。
 export function getFishSpeciesForList(): FishSpecies[] {
   return fishSpecies.map((fish) => {
-    const matching = fishingSpots.filter((spot) =>
-      spot.catchableFish.some((cf) => cf.fish.slug === fish.slug)
-    );
-    const top3: SpotSummary[] = matching.slice(0, 3).map((spot): SpotSummary => {
-      const cf = spot.catchableFish.find((cf) => cf.fish.slug === fish.slug)!;
-      return {
-        id: spot.id,
-        name: spot.name,
-        slug: spot.slug,
-        region: spot.region,
-        rating: spot.rating,
-        catchRating: cf.peakSeason ? "excellent" : "good",
-        latitude: spot.latitude,
-        longitude: spot.longitude,
-      };
-    });
+    const matching = fishingSpots.filter((spot) => isListed(spot, fish.slug));
+    const top3: SpotSummary[] = matching
+      .map((spot) => toSpotSummary(spot, fish.slug))
+      .sort(bySpotScore)
+      .slice(0, 3);
     return { ...fish, spots: top3, spotCount: matching.length };
   });
 }
@@ -63,16 +80,15 @@ export function getCoOccurringFish(
   fishSlug: string,
   limit: number = 8
 ): { slug: string; name: string; count: number }[] {
-  // この魚が釣れるスポットを取得
-  const relevantSpots = fishingSpots.filter((spot) =>
-    spot.catchableFish.some((cf) => cf.fish.slug === fishSlug)
-  );
+  // この魚が釣れるスポットを取得（適性ゲート適用）
+  const relevantSpots = fishingSpots.filter((spot) => isListed(spot, fishSlug));
 
-  // 同じスポットに出現する他の魚種を集計
+  // 同じスポットに出現する他の魚種を集計（共起側にもゲート適用）
   const coOccurrenceMap = new Map<string, { slug: string; name: string; count: number }>();
   for (const spot of relevantSpots) {
     for (const cf of spot.catchableFish) {
       if (cf.fish.slug === fishSlug) continue;
+      if (!isFishListedAtSpot(spot, cf.fish.slug)) continue;
       const existing = coOccurrenceMap.get(cf.fish.slug);
       if (existing) {
         existing.count++;
@@ -185,11 +201,10 @@ export function getFishBySameSeason(
     .map((f) => ({ slug: f.slug, name: f.name, overlapMonths: f.overlapMonths }));
 }
 
-// 都道府県×魚種のスポット取得
+// 都道府県×魚種のスポット取得（適性ゲート適用。県×魚種ページの301判定と共用）
 export function getSpotsByPrefectureAndFish(prefName: string, fishSlug: string): FishingSpot[] {
-  return fishingSpots.filter(s =>
-    s.region.prefecture === prefName &&
-    s.catchableFish.some(cf => cf.fish.slug === fishSlug)
+  return fishingSpots.filter(
+    (s) => s.region.prefecture === prefName && isListed(s, fishSlug)
   );
 }
 
@@ -215,6 +230,7 @@ export function getEligiblePrefFishCombos(
     // 同一スポット内の複数エントリ（釣法・期間違い）を 1 スポットに正規化
     const fishSlugs = new Set(spot.catchableFish.map((cf) => cf.fish.slug));
     for (const fishSlug of fishSlugs) {
+      if (!isFishListedAtSpot(spot, fishSlug)) continue; // 適性ゲート
       const key = `${pref.slug}|${fishSlug}`;
       countMap.set(key, (countMap.get(key) || 0) + 1);
     }
@@ -282,6 +298,7 @@ export function getHighValuePrefMonthFishCombos(
         // 同一スポットで同魚種が複数 method で釣れても 1 スポットとして数える
         const seen = new Map<string, boolean>(); // fishSlug -> このスポットで旬か
         for (const cf of spot.catchableFish) {
+          if (!isFishListedAtSpot(spot, cf.fish.slug)) continue; // 適性ゲート
           if (isMonthInRange(month.num, cf.monthStart, cf.monthEnd)) {
             seen.set(
               cf.fish.slug,
@@ -390,6 +407,7 @@ export function getEligiblePrefMonthFishCombos(
         // 同一スポット内の複数エントリ（釣法・期間違い）を 1 スポットに正規化
         const seen = new Set<string>();
         for (const cf of spot.catchableFish) {
+          if (!isFishListedAtSpot(spot, cf.fish.slug)) continue; // 適性ゲート
           if (isMonthInRange(month.num, cf.monthStart, cf.monthEnd)) {
             seen.add(cf.fish.slug);
           }
@@ -412,6 +430,9 @@ export function getEligiblePrefMonthFishCombos(
   }
   return out;
 }
+
+// 釣れる度ゲート（県×魚種/マトリクスページの掲載判定・テストで共用）
+export { isFishListedAtSpot, getCatchTier, getCatchScore, hasRegionalAptitude } from "./fish-aptitude";
 
 // 全データのエクスポート
 export { fishSpecies } from "./fish";
