@@ -1021,7 +1021,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
   },
   {
     id: "s-kcsadd-042", name: "徳島・マリンピア沖洲", slug: "tokushima-marinpia-okisu",
-    description: "徳島市沖洲のマリンピア護岸。徳島市中心部から最も近い海釣りスポットで、足場の良い護岸からチヌ・シーバス・ハゼなどが狙える。夜の常夜灯周りでのアジングやメバリングが人気。仕事帰りの釣行にも便利な都市型フィッシングポイント。",
+    description: "徳島市中心部からアクセスしやすい護岸で、夜のアジングが定番。徳島市沖洲のマリンピア護岸は足場が良く、チヌのフカセ・落とし込みが4〜11月、シーバスのルアーは3〜12月と長く楽しめる。7〜12月はハゼのちょい投げが数釣り向きで、5〜11月はアジも回る。仕事帰りの短時間釣行にも使える都市型フィッシングポイント。",
     latitude: 34.0578, longitude: 134.5978, address: "〒770-0873 徳島県徳島市東沖洲2丁目",
     accessInfo: "徳島駅から車で約15分。徳島自動車道徳島ICから約15分。",
     region: region("r3022"), spotType: "port", difficulty: "beginner",
