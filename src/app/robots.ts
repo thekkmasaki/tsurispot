@@ -23,7 +23,10 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
+        // /api/tide/ は地点別潮見表(/tides/[station])のメインコンテンツ（14日満干・潮位グラフ）の
+        // データ源。塞ぐと Googlebot のレンダリングで本文が描画されないため、最長一致で
+        // /api/ の disallow より優先される個別 allow を置く（RFC 9309）。読み取り専用・force-static。
+        allow: ["/", "/api/tide/"],
         disallow: CRAWL_DISALLOW,
       },
       // 広告クローラー: AdsBot-Google は仕様上 * グループを無視するため明示的に全面許可。

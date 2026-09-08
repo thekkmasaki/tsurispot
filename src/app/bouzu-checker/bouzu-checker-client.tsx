@@ -806,7 +806,7 @@ export function BouzuCheckerClient() {
               <div>
                 <p className="font-semibold text-sm">潮見表・潮汐情報</p>
                 <p className="text-xs text-gray-500 mt-0.5">
-                  今日の潮回りと満潮・干潮時刻を確認
+                  全国239地点から選べる満潮・干潮時刻
                 </p>
               </div>
               <ChevronRight className="size-4 text-gray-400 ml-auto" />
