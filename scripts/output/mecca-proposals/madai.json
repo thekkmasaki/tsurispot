@@ -54,6 +54,30 @@
     {
       "action": "note",
       "text": "現TOPと名所の乖離まとめ: madaiのTOP30は84.8止まり(明石新波止・宗像大島など出典付き)で、瀬戸内・九州西部に偏る。一方、全国区の堤防マダイ聖地である直江津(新潟)はsource欠落でTOP30圏外、鳴門海峡勢も同様に圏外。上記add-source反映で直江津・鳴門が+8点となり、地域バランスと知名度の整合が改善する見込み。日本海側(新潟・上越)の地域適性がマダイで低めに設定されている可能性もあり、乗っ込み期の実績(50-70cm級)を踏まえ県レベル適性の再確認を推奨"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "hiburi-shima-ehime",
+      "source": "カンパリ 西予〜宇和島",
+      "evidence": "日振島は宇和海磯釣りの全国的名門。カゴ釣りは春〜秋にマダイ・イサキ（引き潮時）。カンパリ西予〜宇和島エリアページ実在"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "ainan-yura-hanto-c8",
+      "source": "カンパリ 西予〜宇和島",
+      "evidence": "由良半島は宇和海の磯マダイ実績地。宇和海はリアス式で魚影濃く磯釣りで全国区"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "imabari-kurushima-c8",
+      "source": "カンパリ 今治市",
+      "evidence": "来島海峡は日本三大急潮流の豊かな漁場でカゴ釣りマダイ・ブリの大物実績。カンパリ今治市・アングラーズ松ヶ崎(今治)ページ実在"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "imabari-kurushima-w6",
+      "source": "カンパリ 今治市",
+      "evidence": "同上（フカセでマダイ・クロダイ、護岸からの実績）"
     }
   ]
 }
