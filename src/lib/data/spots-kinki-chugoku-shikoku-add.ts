@@ -673,7 +673,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
     mainImageUrl: "/images/spots/wikimedia/matsue-nakaumi.webp", imageAttribution: "Photo: Multi Ewell / Wikimedia Commons (CC BY 3.0)", images: ["/images/spots/wikimedia/matsue-nakaumi.webp"],
     rating: 4.3, reviewCount: 198, googleRating: 4, googleReviewCount: 79,
     catchableFish: [
-      { fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー" },
+      { fish: fish("suzuki"), monthStart: 3, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ルアー", source: "アングラーズ 中海" },
       { fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "フカセ・落とし込み" },
     ],
@@ -1113,7 +1113,7 @@ export const kinkiChugokuShikokuAddSpots: FishingSpot[] = [
       { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "メバリング" },
       { fish: fish("madai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
-      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "フカセ" },
+      { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "フカセ", source: "アングラーズ 広島県" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "穴釣り" },
     ],
     bestTimes: [{ label: "朝マヅメ", timeRange: "05:00〜07:00", rating: "best" }, { label: "夕マヅメ", timeRange: "16:00〜18:30", rating: "good" }],

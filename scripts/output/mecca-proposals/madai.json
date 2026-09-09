@@ -1,0 +1,59 @@
+{
+  "fish": "madai",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "naoetsu-port",
+      "source": "アングラーズ 直江津港第3東防波堤",
+      "evidence": "直江津は「堤防マダイのメッカ」として全国区。港内の第3東防波堤管理釣り場(NPOハッピーフィッシング)はアングラーズ専用エリアページ(https://anglers.jp/areas/1218、釣果1,555件)を持ち、公式サイト(happyfishing-n.jp)が毎日釣果を公開。TSURINEWSも「乗っ込みマダイ狙い遠投カゴ釣り徹底解説」(https://tsurinews.jp/345335/)で50-70cm級の乗っ込みマダイを特集。勝者s444(直江津港、dedup 9件の勝者)のmadaiエントリ(4-6月、カゴ釣り)にsource無しで+8点を取り逃し。spotType:portでカゴ釣りマダイと矛盾なし"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "naruto-ogemajima",
+      "source": "カンパリ 鳴門市",
+      "evidence": "鳴門海峡は明石・来島と並ぶ潮流マダイの名所。カンパリ鳴門市マダイ陸っぱりページ(https://fishing.ne.jp/fishingpost/fish/fish-madai?area=tokushima-naruto)で岸からのマダイ実績を確認、ショアタイラバでのマダイ釣果投稿(https://fishing.ne.jp/fishingpost/1428475)もあり。鳴門市うずしお観光協会も岸からのマダイを年間対象魚として紹介。勝者s135(鳴門海峡大毛島、生データ1件で重複なし)のmadaiエントリ(3-6月peak、フカセ釣り)にsource無し。spotType:rockyで磯フカセのマダイと矛盾なし"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "naruto-kaikyo-gogan-w5",
+      "source": "カンパリ 鳴門市",
+      "evidence": "土佐泊浦(鳴門海峡に面した護岸)。カンパリ鳴門市陸っぱりページ(https://fishing.ne.jp/fishingpost/area/tokushima-naruto)およびマダイ絞り込み(fish-madai?area=tokushima-naruto)で岸マダイ実績を確認。勝者sw5029(鳴門海峡周辺護岸、生データ1件で重複なし)のmadaiエントリ(3-11月peak、カゴ釣り)にsource無し。spotType:breakwaterでカゴ釣りマダイと矛盾なし"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "hiraiso-fishing-park",
+      "monthStart": 6,
+      "monthEnd": 12,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "朝マヅメ",
+      "method": "遠投カゴ釣り",
+      "source": "フィッシングマックス 垂水",
+      "evidence": "平磯海づり公園(神戸市垂水区・明石海峡東側)は関西の岸マダイ定番施設。フィッシングマックスの釣果速報に「遠投カゴ釣りで明石天然マダイ」「マダイ連発ヒット」の記事が継続掲載(https://fishingmax.co.jp/fishingpost/1681648 ほか1681179・1666860)、公式釣果ページ(https://kobeumiduri.jp/fishresult/)もあり。攻略サイトでは6月〜12月中旬が遠投カゴのマダイシーズンとされる。勝者s80(dedup 2件の勝者、魚種15件)はスズキ・クロダイ等に「現地釣果情報」sourceを持つのにマダイエントリ自体が欠落しており、明石海峡沿いの同格スポット(明石新波止84.8等)と比べ明確な欠落。spotType:pierの柵付き護岸でカゴ釣りと矛盾なし"
+    },
+    {
+      "action": "note",
+      "text": "直江津港(naoetsu-port)のmadaiエントリはpeakSeason:falseだが、直江津の堤防マダイは4-6月の乗っ込みが全国から釣り人を集める本番シーズン(TSURINEWS特集・ハッピーフィッシング釣果)。peakSeason:trueへの変更で旬8点の整合を取るべき。また名所の実体は「直江津港第3東防波堤管理釣り場」(有料・4-11月営業)なので、別トラックでの専用スポット新設を推奨(現DBには新潟東港第3東防波堤=聖籠町はあるが直江津のものは無い)"
+    },
+    {
+      "action": "note",
+      "text": "鹿島港魚釣園: 勝者kashima-port-fishing-park(s113、dedup 5件の勝者)にmadaiエントリ無し。アングラーズ鹿島港魚釣園ページ(https://anglers.jp/areas/1336)は存在し鹿島港では2026年5月のマダイ記録を確認したが、魚釣園の柵内に限った継続的なマダイ実績までは今回の検索で特定できず(直近釣果はサヨリ・サバ・シーバス・アジ中心)。「鹿島港=大ダイ」の実績は立入禁止の南防波堤由来が大きく、魚釣園へのadd-entryは保留。次回「鹿島港魚釣園 マダイ 魚速報」等で裏取りできればmonthStart5-monthEnd6のカゴ/ウキ釣りエントリを追加検討"
+    },
+    {
+      "action": "note",
+      "text": "敦賀新港・鞠山周辺(北陸屈指のカゴ釣りマダイ場として知られる)は生データに敦賀新港系4件+鞠山海遊パーク2件の重複があり、いずれのブロックにもmadai source無しまたはエントリ無し(鞠山se8366はアジ・キス・カレイのみ)。今回は検索回数の制約で裏取り未実施のため提案せず。次回「敦賀新港 マダイ カゴ釣り 釣果」で確認の上、dedup勝者特定→add-source/add-entryを推奨"
+    },
+    {
+      "action": "note",
+      "text": "鳴門エリアの他スポットも同パターン: 撫養港堤防(naruto-muya-kou-teihou)・鳴門・亀浦港(naruto-kameura-w6)・鳴門・大毛島(naruto-oogeshima-w6)はいずれもmadaiエントリ(4-6月peak)を持つがsource無し。カンパリ鳴門市のエリア出典で一括付与は可能だが、スポット単位の特定度が低いため今回は海峡直面の2件(s135/sw5029)に絞った。なおnaruto-ogemajima(鳴門海峡大毛島)とnaruto-oogeshima-w6(鳴門・大毛島)は名称違いで dedup を素通りした実質同一島の重複であり、統合を推奨"
+    },
+    {
+      "action": "note",
+      "text": "TOP30内の実質重複がランキングを占有: imabari-kurushima-c8(84.3)とimabari-kurushima-w6(77.8)、sadamisaki-misaki-kou-soto(84.1)/sadamisaki-misaki-kou-c8(78.8)/misaki-gyokou-sadamisaki(77.8)、oshima-gyoko-teibo-munakata(84.8)/ooshima-gyokou-munakata-s8(78.3)、goto-fukue-kou(78.1)/fukue-kou-w6(77.8)。名称表記ゆれでdedupを素通りしたペアとみられ、統合すれば直江津・鳴門など本来の名所がTOP30に入る余地が生まれる"
+    },
+    {
+      "action": "note",
+      "text": "現TOPと名所の乖離まとめ: madaiのTOP30は84.8止まり(明石新波止・宗像大島など出典付き)で、瀬戸内・九州西部に偏る。一方、全国区の堤防マダイ聖地である直江津(新潟)はsource欠落でTOP30圏外、鳴門海峡勢も同様に圏外。上記add-source反映で直江津・鳴門が+8点となり、地域バランスと知名度の整合が改善する見込み。日本海側(新潟・上越)の地域適性がマダイで低めに設定されている可能性もあり、乗っ込み期の実績(50-70cm級)を踏まえ県レベル適性の再確認を推奨"
+    }
+  ]
+}

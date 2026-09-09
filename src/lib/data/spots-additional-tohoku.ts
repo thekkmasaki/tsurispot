@@ -674,6 +674,7 @@ export const additionalSpotsTohoku: FishingSpot[] = [
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/0d/Fishing_Boat_-_panoramio.jpg", imageAttribution: "Photo: Ryuetsu Kato / Wikimedia Commons (CC BY 3.0)", images: [],
     rating: 4.4, reviewCount: 34, googleRating: 4.4, googleReviewCount: 865,
     catchableFish: [
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕マヅメ", method: "エギング", source: "カンパリ 男鹿半島" },
       { fish: fish("madai"), monthStart: 4, monthEnd: 6, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
           { fish: fish("hatahata"), monthStart: 11, monthEnd: 1, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -743,6 +744,7 @@ export const additionalSpotsTohoku: FishingSpot[] = [
     mainImageUrl: "", images: [],
     rating: 4.1, reviewCount: 58, googleRating: 4, googleReviewCount: 44,
     catchableFish: [
+      { fish: fish("aoriika"), monthStart: 9, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕マヅメ", method: "エギング", source: "エギCOM 男鹿" },
       { fish: fish("mebaru"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "メバリング" },
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("aji"), monthStart: 7, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },

@@ -1,0 +1,73 @@
+{
+  "fish": "mebaru",
+  "proposals": [
+    {
+      "action": "add-entry",
+      "spotSlug": "kaizuka-artificial-island",
+      "monthStart": 12,
+      "monthEnd": 5,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "夜",
+      "method": "メバリング（プラッギング）",
+      "source": "フィッシングマックス 貝塚人工島",
+      "evidence": "大阪湾岸壁の代表的メバリングポイントなのに勝者ブロック(stob008, spots-tokyo-osaka-bay.ts)の魚種6件にmebaruが皆無。フィッシングマックス釣果「【貝塚人工島】メバルプラッギングで連発」https://fishingmax.co.jp/fishingpost/1414838 およびエリア釣果ページ https://fishingmax.co.jp/fishingpost/area/kaidukajinkoto、アングラーズ貝塚人工島 https://anglers.jp/areas/2306 で直近1ヶ月もメバル釣果を確認。冬〜春の根魚シーズン欠落は明確。spotTypeは人工島護岸でテトラ・岸壁際狙いと矛盾なし"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "innoshima-habu-kou-soto",
+      "monthStart": 12,
+      "monthEnd": 5,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "夜",
+      "method": "メバリング",
+      "source": "アングラーズ しまなみ海道",
+      "evidence": "しまなみ海道はアングラーズにメバル専用エリアページ（https://anglers.jp/areas/2750/fishes/7 釣果一覧 https://anglers.jp/areas/2750/fishes/7/catches）が立つ全国区のメバル場だが、因島の勝者・土生港外堤防(scs4006)は魚種4件(アジ/アオリイカ/マダイ/カサゴ)でmebaruエントリ自体が無い。同島の敗者ブロック(innoshima-habu-w6等)にはメバル11-4月があり、勝者だけ冬春メバルが欠落しているのは不整合。堤防spotTypeと矛盾なし"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "ondo-gyokou-w6",
+      "source": "カンパリ 倉橋島〜江田島",
+      "evidence": "音戸漁港（呉・音戸/警固屋、勝者sw6076）はmebaru(12-5月, peakSeason:true, メバリング)を持つがsource無しで+8点を取り逃し。カンパリの陸っぱりメバル釣果ページ「倉橋島〜江田島」https://fishing.ne.jp/fishingpost/area/hiroshima-kurahashijimaetajima?fish=fish-mebaru および広島メバル https://fishing.ne.jp/fishingpost/area/hiroshima?fish=fish-mebaru で音戸・警固屋周辺の実績を確認"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "kure-kurashiki-karouto-kou",
+      "source": "カンパリ 倉橋島〜江田島",
+      "evidence": "倉橋島先端の鹿老渡港（勝者scs4012、重複なし1件）はメバルの銘地としてmebaru(11-4月, peakSeason:true, メバリング)を持つがsource無し。カンパリ「倉橋島〜江田島 メバル 陸っぱり」https://fishing.ne.jp/fishingpost/area/hiroshima-kurahashijimaetajima?fish=fish-mebaru に同エリアの釣果が掲載されており出典として妥当"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "anamizu-kou-ishikawa",
+      "source": "北陸中日新聞 穴水",
+      "evidence": "穴水港（勝者sc6071、dedup 3件の勝者）はmebaru(3-6月, peakSeason:true, メバリング)を持つがsource無し。北陸中日新聞の釣況記事「穴水でメバル好調」https://www.chunichi.co.jp/article/448830 で実績を確認。能登内浦のメバルは全国的に知られており+8点欠落は過小評価"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "kanazawa-ko-ono-futo",
+      "source": "魚速報 石川・金沢",
+      "evidence": "金沢港大野埠頭（勝者sc5027）はmebaru(1-5月, メバリング)を持つがsource無し、かつpeakSeason:false。魚速プラス（魚速報）の石川県夜釣り釣果 https://plus.uosoku.com/search?er=23.0&me=%E5%A4%9C%E9%87%A3%E3%82%8A およびつりナビ金沢港ページ（メバル旬4ヶ月表記 https://tsuriyoho.com/port/kanazawa-kou）で夜釣りメバル実績を確認。source付与に加えpeakSeason:true(春)への見直しも検討価値あり"
+    },
+    {
+      "action": "note",
+      "text": "TOP30が30/30すべて瀬戸内（兵庫/広島/香川/愛媛/岡山/徳島/山口）で独占されており、大阪湾岸壁と北陸(金沢・能登)の名所が1件も入っていない。メバルは大阪湾(貝塚人工島・泉州岸壁)と能登内浦(穴水・七尾湾)でも岸釣りの看板魚種であり、湾/県レベルの地域適性が瀬戸内偏重になっていないか確認を推奨。特に大阪湾はアングラーズ・フィッシングマックスに冬春メバル釣果が恒常的に載る"
+    },
+    {
+      "action": "note",
+      "text": "金沢港の勝者は分割されており、港名義の勝者 kanazawa-kou-ishikawa (sc6061) は魚種6件にmebaruが無い（大野埠頭 sc5027 側にはあり）。同一港内で不整合。つりナビ金沢港はメバル旬4ヶ月と表記するが、金沢港名義スポットへの釣果記事直リンクは未確認のためadd-entryは保留。裏取りでき次第エントリ追加を推奨"
+    },
+    {
+      "action": "note",
+      "text": "七尾港の勝者 nanao-port (s280) は魚種3件(アジ/キス/ハゼ)でmebaru無し。七尾湾はメバル・穴水と並ぶ能登内浦の実績海域だが、七尾港個別の釣果媒体実績を今回の検索では直接確認できなかったため提案は見送り。次回「七尾港 メバル 釣果」で裏取り推奨"
+    },
+    {
+      "action": "note",
+      "text": "南芦屋浜の勝者 minami-ashiyahama (s217) は魚種6件にmebaru無し。大阪湾ガイド(ovlier)ではキャナルパーク北護岸がメバリングポイントと紹介されるが、釣果実績媒体（フィッシングマックス芦屋店等）での直接確認が取れなかったためadd-entryは保留。裏取りでき次第追加を推奨"
+    },
+    {
+      "action": "note",
+      "text": "とびしま海道は下蒲刈島大地蔵港堤防(shimokamagari-daijizo-teibo)が既にTOP4(97.6)に入っており適正評価。呉ポート(kure-port)もTOP19。ヒントのうち呉・とびしま・しまなみは概ね反映済みで、残る乖離は音戸〜倉橋島の出典欠落（上記add-source 2件）と因島勝者のエントリ欠落のみ"
+    }
+  ]
+}

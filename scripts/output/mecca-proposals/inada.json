@@ -1,0 +1,93 @@
+{
+  "fish": "inada",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "kozu-kaigan6",
+      "source": "魚速報 国府津海岸",
+      "evidence": "魚速報の国府津海岸釣り場ページ（https://uosoku.com/home/kanto/kanagawa/syounan/kouzu/）で、夏〜初冬に青物狙いで賑わいイナダは9月が最盛、ショアジギング/サーフトローリングの実績と明記。関東の岸イナダ最有名メッカだが winner の inada エントリ（8-12月・ルアー）に source が無く+8を取り逃し、現TOP30圏外。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "naoetsu-port",
+      "source": "ハッピーフィッシング 直江津港第3東防波堤",
+      "evidence": "NPO法人ハッピーフィッシング公式釣果ページ（happyfishing-n.jp/category/catch/）で第3東防波堤のイナダ43cm（遠投カゴ）・ワカシ・ワラサ65cmなど連日の実績、上越タイムス週間釣り情報・釣りビジョン釣果詳細でも裏付け。全国区の管理堤防メッカだが winner（s444, spots-hokuriku.ts）の inada エントリ（8-11月・ショアジギング）に source 無し。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "hasaki-shinkou",
+      "source": "魚速報 波崎",
+      "evidence": "魚速報の波崎新港ページ（https://uosoku.com/home/kanto/ibaraki/hazaki/）で夏〜秋にイナダ・ショゴ・サバが回遊しショアジギング・泳がせで狙えると明記。winner（se5074）の inada エントリ（9-11月・peak）に source 無し。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "sado-ryotsu-kou-niigata",
+      "source": "アングラーズ 佐渡島",
+      "evidence": "アングラーズ佐渡島エリア（anglers.jp/areas/462）で『毎年岸から多くのイナダが釣れる』、カンパリ佐渡ヶ島ショアジギング釣行記でも実績確認。winner（sc6016『佐渡 両津港周辺』）の inada エントリ（9-11月・ショアジギング）に source 無し。"
+    },
+    {
+      "action": "note",
+      "text": "単一行ブロックのためメインが直接編集で対応済み: inada source 魚速報 伊東"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "sado-ryotsu-higashi-futo",
+      "monthStart": 9,
+      "monthEnd": 11,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "朝マヅメ",
+      "method": "ショアジギング",
+      "source": "アングラーズ 佐渡島",
+      "evidence": "アングラーズ佐渡島（anglers.jp/areas/462）とFishRankerで『佐渡は岸からほぼ周年イナダが釣れる』と確認。当スポット（両津港東埠頭・breakwater・method にショアジギング既載）は buri（9-1月）のみでイナダ欠落。ブリより先に岸で数が出るのはイナダであり、秋の定番エントリが無いのは明確な欠落。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "kashima-port-fishing-park",
+      "monthStart": 8,
+      "monthEnd": 11,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "朝マヅメ",
+      "method": "カゴ釣り",
+      "source": "魚速報 茨城",
+      "evidence": "魚速報『茨城県のおすすめ青物釣り場』（uosoku.com/ibarakiaomono/）で鹿島港魚釣園は夏〜秋にイナダ・ショゴが回遊し、まき餌可の柵付き施設としてカゴ釣り・ショアジギング・泳がせで青物を狙えると明記。現在8魚種登録も回遊青物がゼロで、県内屈指の青物施設として明確な欠落。まき餌可ルールとも整合。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "ito-port-hakuto-teibo",
+      "monthStart": 8,
+      "monthEnd": 11,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "朝マヅメ",
+      "method": "ショアジギング",
+      "source": "魚速報 伊豆",
+      "evidence": "魚速報『伊豆の青物ポイント』（uosoku.com/izuomono/）で伊東港のイナダ・ソウダ実績を確認。winner（scs037・9魚種）は sawara（8-11月・ショアジギング）を載せながらイナダが欠落しており、東伊豆の代表的秋青物ターゲットとして明確な季節欠落。spotType=breakwater で矛盾なし。"
+    },
+    {
+      "action": "note",
+      "text": "氷見（himi-ao-kaigan-toyama、現TOP30の7位83.1）: inadaエントリ（9-11月）にsourceが無い。富山湾はフクラギ（イナダ）の全国区名所であり+8付与が妥当と思われるが、今回の検索では氷見個別のイナダ実績記事を直接確認できなかったため保留。アングラーズ氷見市エリアの実績を確認のうえ付与を推奨。"
+    },
+    {
+      "action": "note",
+      "text": "酒田北港（winner: sakata-kitakou se5001）: 庄内の青物メッカでinadaエントリ（9-11月）にsource無し。魚速報plus酒田市の釣果ページ存在は確認したが、要約で確認できたのはイワシ・アジのみでイナダ個別実績は未確認のため保留。裏取りできればadd-source対象の筆頭。"
+    },
+    {
+      "action": "note",
+      "text": "熱海港海釣り施設（winner: atami-fishing-pier・10魚種）: soudagatuo（8-10月・カゴ釣り）は既載だがイナダが無い。魚速報熱海まとめで『青物・カゴ釣り』までは確認したがイナダ個別実績は未確認のため保留。確認できれば秋カゴ釣りのadd-entry候補。"
+    },
+    {
+      "action": "note",
+      "text": "データ不整合の疑い: DBの『新潟東港第3東防波堤』（niigata-higashi-kou-dai3）は説明文が『管理釣り場・有料・貸し竿あり』だが、新潟東港の管理釣り場堤防は第2東防波堤で、『第3東防波堤』はハッピーフィッシング管理の直江津港側の名称。名称取り違えの疑いがあり要確認。直江津港第3東防波堤としての独立スポットはDBに存在しない（naoetsu-portに包含）。"
+    },
+    {
+      "action": "note",
+      "text": "TOP30重複: niigata-higashiko-dai2-bohatei と niigata-higashikou-dai2-bouhatei（いずれも新潟東港第2東防波堤、78.1で同点）が両方TOP30入りしておりdedup漏れ。片方を統合すべき。"
+    },
+    {
+      "action": "note",
+      "text": "地形適性の検討: 国府津海岸はカゴ釣り/サーフトローリング文化発祥級の関東随一の岸イナダメッカだが現TOP30圏外。source+8で相応に上がるが、beach型スポットの青物地形係数が堤防型より不利に働いている可能性がある。西湘〜遠州灘のような『急深サーフ×回遊青物』は地形評価の例外扱いを検討する価値あり。煙樹ヶ浜（mihama-enjugahama-k8/enjugahama-surf重複あり）も同パターンだが今回実績未確認。"
+    }
+  ]
+}

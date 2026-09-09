@@ -638,6 +638,7 @@ export const akashiHarimaSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 4.2, reviewCount: 380, googleRating: 4.2, googleReviewCount: 610,
     catchableFish: [
+      { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝夕マヅメ", method: "チニング(トップ)・フカセ釣り", source: "まるは釣具明石店 大蔵海岸釣果ブログ" },
       { fish: fish("kisu"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜日中", method: "投げ釣り", source: "フィッシングマックス" },
       { fish: fish("karei"), monthStart: 10, monthEnd: 3, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "投げ釣り", source: "フィッシングマックス" },
       { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "ワインド・テンヤ", source: "フィッシングマックス" },

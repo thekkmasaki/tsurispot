@@ -1,0 +1,81 @@
+{
+  "fish": "karei",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "tomakomai-nishi-port",
+      "source": "魚速報 苫小牧西港",
+      "evidence": "苫小牧西港はクロガシラガレイ狙いで道外からも釣り人が集まる北海道屈指の投げカレイ名所。魚速報に専用釣り場ページあり（https://uosoku.com/home/hokai/dounan/tomani/）。カレイスポット紹介記事も複数（https://chouseisan.com/l/post-53412/）。勝者ブロック(id=s33, spots-additional-hokkaido.ts:45)のkareiエントリにsourceなし。spotType=portで矛盾なし"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "ishikari-shinko-west-a13",
+      "source": "アングラーズ 石狩湾新港",
+      "evidence": "石狩湾新港は札幌圏最大の投げカレイ場でマガレイ・クロガシラ・イシモチガレイの実績多数。アングラーズに釣り場ページあり（https://anglers.jp/areas/2894）、魚速報にも専用ページ（https://uosoku.com/home/hokai/dounan/ishi/）。東埠頭(ishikari-east-wharf)はsource有りでTOP30入り済みだが、同じ港の西埠頭(ss13001)はkareiエントリにsourceが無く非対称に過小評価"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "onahama-ko",
+      "source": "アングラーズプラザ岸波 小名浜港",
+      "evidence": "小名浜港は常磐エリアを代表する投げカレイ名所。地元釣具店アングラーズプラザ岸波の釣果ページに小名浜港の実績掲載（https://kishinami.jp/resultplace/小名浜港/）、アングラーズにも小名浜港のカレイ釣果ページあり（https://anglers.jp/areas/3723/fishes/37）。勝者ブロック(id=s988, spots-hokkaido-tohoku-detail.ts:1872)のkareiエントリ(10〜3月peak)にsourceなし。現TOP30にいわき勢は久之浜港・薄磯海岸のみで、本命の小名浜港本体が入っていない"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "onahama-aquamarine-park6",
+      "source": "アングラーズ 小名浜港アクアマリンふくしま周辺",
+      "evidence": "アングラーズに「小名浜港アクアマリンふくしま周辺で釣れたカレイ」の釣果一覧ページが存在（https://anglers.jp/areas/2246/fishes/37/catches）。勝者ブロック(id=se6171)のkareiエントリにsourceなし"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "onahama-ichigou-futou6",
+      "source": "アングラーズ 小名浜港",
+      "evidence": "1号埠頭は小名浜港の主要な釣り座で、アングラーズの小名浜港カレイ釣果ページ（https://anglers.jp/areas/3723/fishes/37）の実績範囲内。勝者ブロック(id=se6186)のkareiエントリ(5〜10月peak)にsourceなし"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "noheji-gyoko",
+      "source": "アングラーズ 野辺地湾",
+      "evidence": "陸奥湾・野辺地は投げカレイの東北を代表する実績地。アングラーズに野辺地湾のカレイ釣果ページあり（https://anglers.jp/areas/467/fishes/37）、陸奥湾全体のカレイ釣果ページも存在（https://anglers.jp/areas/468/fishes/37）。勝者ブロック(id=s2038, spots-hokkaido-tohoku-add2.ts)のkareiエントリ(4〜11月peak)にsourceなし。候補ヒント「陸奥湾の投げカレイ」に直接該当"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "yuriage-port",
+      "source": "釣割 宮城県",
+      "evidence": "仙台湾・名取川河口の閖上は宮城の投げカレイ（マコガレイ）定番エリア。釣割の宮城県マコガレイ釣果ページに実績掲載（https://www.chowari.jp/catcharea/?area=04&fish=529）。勝者ブロック(id=s1069, spots-tohoku.ts)のkareiエントリ(10〜3月)にsourceなし。同DBの閖上漁港防波堤(yuriage-breakwater-a10)は説明文で「カレイの投げ釣りが本命」と明記しており整合"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "yuriage-gyokou6",
+      "source": "釣割 宮城県",
+      "evidence": "同上・閖上漁港（勝者id=se6098, spots-add6-east.ts:2046）。kareiエントリ(5〜10月peak)にsourceなし。釣割 宮城県マコガレイ釣果（https://www.chowari.jp/catcharea/?area=04&fish=529）で県内実績を確認"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "tomakomai-nishi-port",
+      "monthStart": 4,
+      "monthEnd": 6,
+      "peakSeason": true,
+      "catchDifficulty": "easy",
+      "recommendedTime": "朝マヅメ",
+      "method": "投げ釣り",
+      "source": "魚速報 苫小牧西港",
+      "evidence": "現エントリは10〜3月のみで、苫小牧が最も賑わう春（4〜6月）のマガレイ・クロガシラ乗っ込みシーズンが丸ごと欠落している。苫小牧のカレイ紹介記事（https://chouseisan.com/l/post-53412/）・魚速報 苫小牧西港ページとも春の投げカレイが看板。北海道の投げカレイは雪解け後の春が最大のハイシーズンであり、10〜3月のみの季節設定は実態と乖離"
+    },
+    {
+      "action": "note",
+      "text": "苫小牧東港フェンス前(tomakomai-east-fence-a13)はkarei(4〜10月peak)エントリがあるがsourceなし。東港もクロガシラの有名場だが、今回の検索では西港・石狩湾新港ほどの具体的媒体ページを東港単体で確認できなかったため提案から除外。次回「苫小牧東港 カレイ 釣果」で裏取りすればadd-source妥当の可能性が高い"
+    },
+    {
+      "action": "note",
+      "text": "明石・播磨エリア（林崎漁港 hayashisaki-gyoko ほか）: TSURINEWSに「超早場カレイの好釣り場3選【兵庫・明石周辺】」(https://tsurinews.jp/68655/)、関西のつりwebに明石〜播磨でマコガレイ39cm実釣記事があり、明石周辺は西日本の投げカレイ名所であることを確認。しかし勝者・林崎漁港にはkareiエントリ自体が無く、林崎単体のカレイ実績は今回未裏取りのためadd-entryは見送り。prefCombosでは兵庫84件と件数が多いのにTOP30は北海道・東北のみ。瀬戸内（明石海峡〜播磨灘）のマコガレイ地域適性が相対的に低く設定されていないか確認を推奨（既存sourceに使われている「フィッシングマックス」の店舗釣果で裏取り可能なはず）"
+    },
+    {
+      "action": "note",
+      "text": "東京湾奥のマコガレイ古典名所（大井ふ頭中央海浜公園 ooi-futo-chuo6 / 木更津内港 kisarazu-naiko）: 大井ふ頭はkarei(11〜3月)エントリありsourceなし、木更津内港はkareiエントリ自体なし。いずれも投げカレイの定番として釣り雑誌で長年紹介される場所だが、今回の検索では具体的な釣果媒体ページを確認できなかったためnote扱い。「アングラーズ 京浜運河」「大井ふ頭 カレイ 釣果」での追加裏取りを推奨"
+    },
+    {
+      "action": "note",
+      "text": "現TOP30は北海道・東北の港で占められており地域構成自体は妥当（カレイの岸釣りメッカは北日本に集中）。ただし候補ヒントの5エリアのうちTOP30入りは石狩湾新港東埠頭・青森港・仙台湾勢（中野埠頭・塩釜）のみで、苫小牧・小名浜・野辺地(陸奥湾)はいずれも本命スポットがsource欠落で圏外。上記add-sourceで+8点が入れば苫小牧西港・小名浜港・野辺地漁港はTOP30相当に浮上する見込み"
+    }
+  ]
+}

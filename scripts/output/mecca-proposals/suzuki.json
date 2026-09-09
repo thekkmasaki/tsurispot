@@ -1,0 +1,103 @@
+{
+  "fish": "suzuki",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "hinuma-tsuri6",
+      "source": "アングラーズ 涸沼",
+      "evidence": "涸沼はシーバスの聖地と呼ばれる日本最大級の汽水湖。アングラーズの全国シーバスまとめで「直近1ヶ月は東京湾湾奥、中海、旧江戸川、涸沼で釣れています」と全国トップ4に列挙され、涸沼エリアページに釣果多数。https://anglers.jp/areas/3264/fishes/2"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "hinumagawa-kakou",
+      "source": "アングラーズ 涸沼川",
+      "evidence": "涸沼川はアングラーズにシーバス専用エリアページがあり釣果報告多数。茨城県でシーバスがよく釣れる釣り場として涸沼・涸沼川・那珂川河口が挙げられている。https://anglers.jp/areas/3267/fishes/2"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "nakagawa-kakou-ibaraki6",
+      "source": "アングラーズ 那珂川河口",
+      "evidence": "アングラーズ茨城県シーバスページで「茨城県でシーバスが良く釣れる釣り場は涸沼、涸沼川、那珂川河口」と明記。https://anglers.jp/prefectures/8/fishes/2"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "tonegawa-kakou-ibaraki6",
+      "source": "つり人WEB 利根川",
+      "evidence": "つり人WEBに「【利根川】RED中村が釣る秋のシーバス」の実釣記事があり、利根川河口はアングラーズにも釣果報告あり。同エリアの別勝者 tone-river-mouth にはsource(HONDA釣り倶楽部)が付いており、本slugのみ+8点を取り逃している。https://web.tsuribito.co.jp/suburb/nakamura-tonegawa-seabass"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "yodogawa-kakou-k8",
+      "source": "カンパリ 淀川河口",
+      "evidence": "カンパリに淀川河口のシーバス陸っぱり専用ページと釣果投稿(神崎川でシーバス等)があり、アングラーズ淀川河口エリアでも直近1ヶ月にシーバス釣果あり(最新2025-09)。https://fishing.ne.jp/fishingpost/howto/howto-seabass?area=osakashi-a / https://anglers.jp/areas/870"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "hamanako-imagiri",
+      "source": "アングラーズ 浜名湖",
+      "evidence": "浜名湖はアングラーズにシーバス釣果多数(https://anglers.jp/areas/399/fishes/2)。釣具のイシグロも「浜名湖シーバス入れ食い絶好調」の釣果記事を掲載。今切口は浜名湖シーバスの代表ポイントで各ガイド記事でも筆頭扱い。"
+    },
+    {
+      "action": "note",
+      "text": "単一行ブロックのためメインが直接編集で対応済み: suzuki source アングラーズ 浜名湖"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "nagoyako-9gouchi",
+      "source": "フィッシング遊 名古屋港",
+      "evidence": "東海の釣具店フィッシング遊の釣果情報に「名古屋港シーバス」タグがあり店舗釣果が継続的に掲載。9号地は名古屋港シーバスの定番ポイント。https://fishing-you.com/tag/名古屋港シーバス"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "abukumagawa-kakou-miyagi6",
+      "source": "アングラーズプラザ岸波 阿武隈川河口",
+      "evidence": "仙南の釣具店アングラーズプラザ岸波の釣果ページに阿武隈川河口カテゴリがあり、76cmシーバス等の実績が掲載。スポット説明文も「シーバスが本命の河口ポイント」と記載済みでsourceのみ欠落。https://kishinami.jp/result/result-6334/"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "ishinomaki-kitakamigawa-old-river-a12",
+      "source": "アングラーズプラザ岸波 北上川河口",
+      "evidence": "アングラーズプラザ岸波の釣果ページに北上川河口カテゴリがありシーバス実績が掲載(result-1344等)。石巻市街の旧北上川河口は東北リバーシーバスの代表格。https://kishinami.jp/resultplace/北上川河口/"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "matsue-nakaumi",
+      "source": "アングラーズ 中海",
+      "evidence": "アングラーズの全国シーバスまとめで「直近1ヶ月は東京湾湾奥、中海、旧江戸川、涸沼で釣れています」と中海が全国トップ4に列挙される全国区の汽水湖。https://anglers.jp/fishes/2"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "nakaumi-daikonshima-w7",
+      "source": "アングラーズ 中海",
+      "evidence": "同上。中海はアングラーズ全国シーバスまとめで直近釣れているエリアのトップ4に列挙。大根島周辺は中海シーバスの主要ポイント。https://anglers.jp/fishes/2"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "osaka-nanko-fishing-park",
+      "monthStart": 4,
+      "monthEnd": 12,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "夕マヅメ〜夜",
+      "method": "ルアー",
+      "source": "カンパリ 大阪市",
+      "evidence": "大阪南港魚つり園(魚種9件)にsuzukiエントリ自体が無い。同一施設の別勝者 nanko-fishing-park には通年suzukiエントリがあり、カンパリ大阪市エリア(南港含む)にシーバス釣果投稿がある。大阪湾岸壁でシーバス(ハネ)は主要ターゲットであり、片方の勝者だけ欠落しているのは不整合。"
+    },
+    {
+      "action": "note",
+      "text": "【勝者データ異常】北上川河口の重複勝者 kitakami-kakou-iwate6 の所在地が「岩手県陸前高田市気仙町」(38.943,141.527)になっている。北上川河口の実所在地は宮城県石巻市(追波湾)であり、県・座標が誤り。リバーシーバス聖地の適性評価が岩手側に付与されてしまうため、座標修正または敗者(ss10126=宮城県石巻市北上町)との統合見直しが必要。"
+    },
+    {
+      "action": "note",
+      "text": "【適性値調整の提案】現TOP30は東京湾奥・神奈川で26/30を占める一方、アングラーズ全国まとめで「直近1ヶ月釣れているエリア」トップ4の涸沼(茨城)・中海(島根)が圏外。東京湾奥の高評価自体は妥当だが、涸沼・涸沼川・那珂川河口(茨城の汽水湖・河口地形)と中海(島根/鳥取・湖沼地形)の地域適性(県/湾レベル)は引き上げ余地あり。add-source採用後もTOP30入りしない場合は再検討を推奨。"
+    },
+    {
+      "action": "note",
+      "text": "【検索未裏取りの有名地】雄物川河口(omonogawa-kakou6)・隅田川テラス(勝者: sumidagawa-terrace-tsukuda ほか計6勝者に分裂)・荒川河口(arakawa-kakou-kasai、現TOP30入り済みだがsource無し)はリバーシーバスの著名地だが、今回の検索(4回)では個別媒体の実績確認まで至らなかったため提案から除外。次回「アングラーズ 雄物川」「アングラーズ 隅田川」等で裏取り推奨。"
+    },
+    {
+      "action": "note",
+      "text": "【重複統合の提案】大阪南港の魚つり園は osaka-nanko-fishing-park(大阪南港魚つり園)と nanko-fishing-park(南港魚つり園護岸)が同一施設(同住所: 住之江区南港南6丁目9-3)なのに別勝者として並存。dedup対象候補。また隅田川テラスは6スポットが全て勝者として並存しており、区間分割の意図がなければ整理候補。"
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "fish": "haze",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "edogawa-hosuiro6",
+      "source": "TSURINEWS 江戸川放水路",
+      "evidence": "日本一のハゼ釣りメッカとして裏取り多数。TSURINEWSに陸っぱりでマハゼ29尾(https://tsurinews.jp/322275/)、開幕ボート&桟橋で夫婦100匹超え(https://tsurinews.jp/362788/)。つり人「関東ハゼ釣りの名所『江戸川放水路』」(https://web.tsuribito.co.jp/suburb/edogawa-housuiro)、釣りビジョンのボートハゼ特集もあり。現在#7(89.6)だが本来#1級。spotType=riverでマハゼ(汽水河川)と整合。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "edogawa-housui-ichikawa-a11",
+      "source": "TSURINEWS 江戸川放水路",
+      "evidence": "江戸川放水路（市川市側）。上記と同じメッカの市川側で、TSURINEWSの実績記事(千葉・江戸川放水路 https://tsurinews.jp/322275/)は市川側の陸っぱり釣行。妙典駅徒歩圏の定番ポイント。haze エントリに source 無し。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "hinuma-tsuri6",
+      "source": "アングラーズ 涸沼",
+      "evidence": "涸沼はラムサール条約登録の汽水湖でハゼの全国区名所。アングラーズに涸沼のハゼ釣果エリアページ(https://anglers.jp/areas/3264/fishes/19)、魚速釣果検索にも涸沼ハゼ釣果あり(https://plus.uosoku.com/)。現在top30圏外で、東京湾勢一色のTOPと乖離。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "hinumagawa-kakou",
+      "source": "アングラーズ 涸沼川",
+      "evidence": "アングラーズ涸沼川のハゼ釣果ページ(https://anglers.jp/areas/3267/fishes/19、マハゼ釣果一覧 https://anglers.jp/areas/3267/fishes/370/catches)。TSURINEWS「涸沼川のハゼ釣りで17cm筆頭に良型マハゼ8匹【茨城】」(https://tsurinews.jp/324778/)。haze エントリに source 無し。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "hinumagawa-onuki-a11",
+      "source": "TSURINEWS 涸沼川",
+      "evidence": "涸沼川（大貫橋付近）。TSURINEWSの涸沼川ハゼ実釣記事(https://tsurinews.jp/324778/)およびアングラーズ涸沼川エリアの釣果が根拠。dedup勝者確認済み。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "hinuma-ooba-a9",
+      "source": "アングラーズ 涸沼",
+      "evidence": "涸沼・大場付近。涸沼水系のハゼ実績はアングラーズ涸沼エリア(https://anglers.jp/areas/3264)で確認。dedup勝者確認済み。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "matsukawa-ura6",
+      "source": "魚速報 松川浦",
+      "evidence": "福島県相馬市の潟湖・松川浦は東北屈指のハゼ場。魚速報の松川浦釣り場ページ(https://uosoku.com/home/touhoku/fukushima/matukawaura/)にハゼ実績、つりナビも良型ハゼの好ポイントとして海苔養殖場付近を紹介。haze エントリに source 無し。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "matsukawa-ura-gyokou-e8",
+      "source": "つりナビ 松川浦漁港",
+      "evidence": "つりナビ「松川浦漁港の釣り情報【2026年版】」(https://tsuriyoho.com/port/matsukawaura-gyokou)で夏〜秋のハゼが濃いファミリー定番と確認。同記事に釣り禁止区域（浦へ通じる水路部分）の注意ありなので rules への転記も検討価値あり。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "soma-ko-matsukawa",
+      "source": "魚速報 松川浦",
+      "evidence": "相馬港・松川浦（漁港側）。松川浦のハゼ実績は魚速報(https://uosoku.com/home/touhoku/fukushima/matukawaura/)・つりナビで確認済み。dedup勝者確認済み、spotType=portで漁港内のハゼと整合。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "hamanako-miyakodagawa",
+      "source": "イシグロ 浜名湖",
+      "evidence": "浜名湖都田川河口。釣具のイシグロ釣果情報「浜名湖ハゼ釣りシーズンスタート！」(https://www.ishiguro-gr.com/enjoy/fishing/detail.php?id=39804)、フィッシング遊スタッフ釣果で都田川みをつくし橋周辺ちょい投げ1時間10匹(https://fishing-you.com/fish-staff/20251017id=407706)。浜名湖は全国区のハゼ場だがtop30圏外。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "hamanako-miyakodagawa-kakou",
+      "source": "フィッシング遊 浜名湖・都田川",
+      "evidence": "浜名湖 都田川河口（別ブロック、dedup勝者）。フィッシング遊の都田川実釣釣果(https://fishing-you.com/fish-staff/20251017id=407706)とイシグロ浜名湖ハゼ釣果が根拠。haze エントリに source 無し。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "shonai-gawa-kakou-e8",
+      "source": "アングラーズ 庄内川河口",
+      "evidence": "名古屋・庄内川河口。アングラーズ庄内川河口エリアページ(https://anglers.jp/areas/749)で直近1ヶ月ハゼ釣果確認、名古屋港ハゼページ(https://anglers.jp/areas/752/fishes/19)にも実績。稲永公園側の同水域勝者 shonai-kakou-gokan には既に source「イシグロ」があり、本ブロックのみ+8取り逃し。"
+    },
+    {
+      "action": "note",
+      "text": "TOP30が東京湾奥の河口勢でほぼ独占（30件中28件が東京都/千葉/埼玉）。全国区メッカの涸沼（茨城）・浜名湖（静岡）・松川浦（福島）が1件も入っていないのは乖離。source付与(+8)だけで届かない場合、涸沼・浜名湖・松川浦の湾/水域レベルの地域適性引き上げを検討すべき（いずれも汽水湖・潟湖でマハゼ生息環境として最上級、媒体実績も豊富）。"
+    },
+    {
+      "action": "note",
+      "text": "中海（島根/鳥取）も汽水湖のハゼ場として知られるが、今回の検索では具体的媒体の釣果実績を確認できなかったため提案から除外。次回レビューで「中海 ハゼ 釣果」の個別裏取りを推奨。"
+    },
+    {
+      "action": "note",
+      "text": "「浜名湖都田川河口」(hamanako-miyakodagawa, 34.7655,137.6325) と「浜名湖 都田川河口」(hamanako-miyakodagawa-kakou, 34.783,137.683) はスペース有無の表記ゆれでdedupをすり抜けた実質重複の疑い。後者の座標は三ヶ日町都筑付近で実際の都田川河口からずれており、座標検証と統合を別トラックで推奨。"
+    },
+    {
+      "action": "note",
+      "text": "候補ヒントの旧江戸川(kyu-edogawa-mouth, source=HONDA釣り倶楽部)と木更津内港(kisarazu-naiko, source=上州屋)は既にsource付きで#1・#4に入っており過小評価なし。"
+    }
+  ]
+}

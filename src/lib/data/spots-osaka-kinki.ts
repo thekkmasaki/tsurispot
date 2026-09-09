@@ -312,7 +312,7 @@ export const osakaKinkiSpots: FishingSpot[] = [
     mainImageUrl: "/images/spots/wikimedia/shiomi-wharf.webp", imageAttribution: "Photo: Uziuzi / Wikimedia Commons (CC BY-SA 4.0)", images: [], rating: 3.6, reviewCount: 145, googleRating: 3, googleReviewCount: 3,
     catchableFish: [
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
-      { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ウキ釣り" },
+      { fish: fish("tachiuo"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "ウキ釣り", source: "カンパリ 高石・泉大津" },
       { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
     ],
     bestTimes: [

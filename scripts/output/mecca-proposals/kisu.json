@@ -1,0 +1,81 @@
+{
+  "fish": "kisu",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "hiratsuka-beach",
+      "source": "魚速報 湘南",
+      "evidence": "平塚海岸は湘南の投げ釣りキスの代表格。魚速報「湘南のおすすめ投げ釣りポイント」(https://uosoku.com/syounage/)にシロギス投げ釣りポイントとして掲載、アングラーズ神奈川県シロギス釣果ページ(https://anglers.jp/prefectures/14/fishes/363)にも釣果多数。spotType=beachで矛盾なし。kisuエントリはあるがsource欠落"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "kugenuma-beach",
+      "source": "アングラーズ 鵠沼海岸",
+      "evidence": "アングラーズ鵠沼海岸エリアページ(https://anglers.jp/areas/44)に2026年最新の釣果報告あり。シロギスが主要ターゲットで遠投有利の遠浅サーフとして紹介。spotType=beachで矛盾なし"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "tsujido-beach",
+      "source": "魚速報 湘南",
+      "evidence": "辻堂海岸は投げ釣りでシロギス・シタビラメ・イシモチが狙える湘南の定番サーフ。魚速報「湘南のおすすめ投げ釣りポイント」(https://uosoku.com/syounage/)に掲載。spotType=beachで矛盾なし"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "seisho-surf-sakawa",
+      "source": "アングラーズ 西湘サーフ",
+      "evidence": "アングラーズに西湘サーフのシロギス専用釣果ページが存在(https://anglers.jp/areas/28/fishes/363)。酒匂川河口周辺は西湘の代表的キスサーフ。spotType=beachで矛盾なし"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "oiso-terugasaki",
+      "source": "TSURINEWS 大磯海岸",
+      "evidence": "TSURINEWS「大磯海岸での投げ釣りで20cm級シロギス連打【神奈川】1色半でヒット」(https://tsurinews.jp/274033/)。照ヶ崎周辺は磯混じりだが投げ釣りシロギス実績が同記事で確認できる。spotType=rockyのため砂地混在である旨をevidenceとして残す"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "yuigahama",
+      "source": "アングラーズ 由比ヶ浜",
+      "evidence": "アングラーズ由比ヶ浜エリアページ(https://anglers.jp/areas/48)が存在し、砂底でシロギス・イシモチ・ヒラメの投げ釣り対象として複数媒体(https://uosoku.com/kamakuraturi/)で確認。夏場は海水浴客・マリンスポーツで投げ釣り困難な時期がある点に留意。spotType=beachで矛盾なし"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "zaimokuza-beach",
+      "source": "魚速報 鎌倉",
+      "evidence": "魚速報「鎌倉市の釣り場」(https://uosoku.com/kamakuraturi/)で材木座〜由比ヶ浜は砂底でシロギスの実績ポイントとして掲載。ちょい投げでのキス実績。spotType=beachで矛盾なし"
+    },
+    {
+      "action": "note",
+      "text": "【registry未登録】八丁浜海岸(spots-add13-west.ts)はspots-registry.tsに未登録で本番非公開。登録の是非は別トラックで判断。元提案: 八丁浜は京丹後を代表するキスサーフで6〜10月が好期(釣り場Navi北近畿版 https://kitakinki-turiba-navi.com/kyotango-area/ で「キス釣りの好釣り場」)。カンパリ京丹後中部エリア(https://fishing.ne.jp/fishingpost/area/kyotango-tyubu)に陸っぱり釣果掲載。勝者slug確認済(重複なし)。spotType=beachで矛盾なし"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "kotohikihama-k8",
+      "source": "カンパリ 京丹後西部",
+      "evidence": "琴引浜(鳴き砂で有名)は投げ釣りキスの好サーフ。カンパリ京丹後西部エリア(https://fishing.ne.jp/fishingpost/area/kyotango-seibu)に陸っぱり釣果掲載。dedup-winnerで勝者=kotohikihama-k8を確認(敗者kotobikihama-kyotango-a9への提案は無効)。spotType=beachで矛盾なし"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "hamadzume-kaigan-a10",
+      "source": "カンパリ 京丹後西部",
+      "evidence": "浜詰(夕日ヶ浦)海岸は京丹後西部の広大なキスサーフ。カンパリ京丹後西部エリア(https://fishing.ne.jp/fishingpost/area/kyotango-seibu)に陸っぱり釣果掲載、魚速報「京都のサーフ釣りポイント」(https://uosoku.com/kyoto-surf/)にも掲載。spotType=beachで矛盾なし"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "karasugawa-kaigan-k8",
+      "source": "釣具のイシグロ 香良洲海岸",
+      "evidence": "香良洲海岸は伊勢湾奥の代表的キスサーフ。釣具のイシグロ釣果「香良洲海岸 今年の初キス」(https://www.ishiguro-gr.com/enjoy/fishing/detail.php?id=42898)およびポイント解説(https://www.ishiguro-gr.com/enjoy/fishing-post/detail.php?id=320)、カンパリ「伊勢湾のキス釣査」(https://fishing.ne.jp/fishingpost/3069744)で実績確認。dedup-winnerで勝者=karasugawa-kaigan-k8を確認(敗者karassu-kaigan-a12への提案は無効)。spotType=beachで矛盾なし"
+    },
+    {
+      "action": "note",
+      "text": "町屋海岸(三重県津市)がDBに見当たらない。TSURINEWS「サーフの投げ釣りでキス97匹手中【町屋海岸・三重】」(https://tsurinews.jp/409114/)と全国級の数釣り実績があるため、スポット新設候補として別トラックで検討推奨"
+    },
+    {
+      "action": "note",
+      "text": "千代崎海岸(chiyozaki-kaigan-k8)と久美浜湾小天橋(kumihama-shoutenkyo-a10)はkisuエントリ有・source無だが、今回の検索では個別の釣果実績を直接確認できなかったため保留。次回「千代崎海岸 キス 釣果」「小天橋 久美浜 キス 釣果」で個別裏取り推奨"
+    },
+    {
+      "action": "note",
+      "text": "適性値調整の提案: 現TOP30は静岡(遠州灘・駿河湾)と愛知(三河湾・知多)が30/30を独占し、神奈川(湘南・西湘=関東屈指の投げキスエリア、県内カウント49件)、京都(丹後の砂浜群、20件)、三重(伊勢湾奥サーフ、30件)が1件も入っていない。遠州灘がキスの全国的メッカである点は実態と整合するため県レベル適性の大幅変更は不要だが、相模湾(湘南・西湘)と伊勢湾奥・丹後半島の湾レベル適性が静岡・愛知比で過小の可能性がある。まずは上記add-sourceの+8点適用後の順位を再計測し、それでも神奈川・京都・三重が上位50に皆無なら湾レベル適性を+1段階検討"
+    }
+  ]
+}
