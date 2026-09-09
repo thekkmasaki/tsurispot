@@ -147,7 +147,8 @@ export const spotTypeOverrides: Record<string, Partial<Record<SpotType, Aptitude
   kurodai: { port: 4, breakwater: 4, rocky: 3, pier: 3 },
   haze: { river: 4, beach: 3, breakwater: 2 },
   konoshiro: { port: 4, river: 1 },
-  sakuramasu: { surf: 3, river: 3, port: 1, breakwater: 1, beach: 2 },
+  // 海サクラは島牧・寿都・瀬棚・美国など漁港・防波堤が主要ポイント（サーフと並ぶ二本柱）
+  sakuramasu: { surf: 3, river: 3, port: 2, breakwater: 2, beach: 2 },
 };
 
 /** 魚種×地形の適性を返す（オーバーライド → カテゴリデフォルトの順） */
