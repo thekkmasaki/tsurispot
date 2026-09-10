@@ -149,6 +149,7 @@ export const tokyoOsakaBaySpots: FishingSpot[] = [
       fishingFee: "大人900円、中学生450円、小学生300円",
     },
     catchableFish: [
+      { fish: fish("madako"), monthStart: 6, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ", source: "ORETSURI 東京湾" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ〜夕マヅメ", method: "サビキ釣り", source: "上州屋" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中〜夜", method: "穴釣り・ブラクリ", source: "上州屋" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ〜夜", method: "メバリング・ウキ釣り", source: "上州屋" },

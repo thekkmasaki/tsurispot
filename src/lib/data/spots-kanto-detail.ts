@@ -745,6 +745,7 @@ export const kantoDetailSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.9, reviewCount: 165,
     catchableFish: [
+      { fish: fish("madako"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ（エギタコ）", source: "魚速報 那珂湊港" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り", source: "上州屋" },
       { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り", source: "上州屋" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り", source: "上州屋" },

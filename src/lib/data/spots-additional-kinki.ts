@@ -346,7 +346,6 @@ export const additionalSpotsKinki: FishingSpot[] = [
       { fish: fish("kurodai"), monthStart: 4, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ", source: "現地釣果情報" },
       { fish: fish("sayori"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り", source: "現地釣果情報" },
       { fish: fish("bera"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り", source: "現地釣果情報" },
-      { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ", source: "現地釣果情報" },
     ],
     bestTimes: [
       { label: "朝マヅメ", timeRange: "05:30〜07:00", rating: "best" },
