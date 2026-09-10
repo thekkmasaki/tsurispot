@@ -2636,7 +2636,7 @@ export const westAdd13Spots: FishingSpot[] = [
   },
   {
     id: "ss13544", name: "垂水漁港護岸", slug: "tarumi-gyokou-gogan-a13",
-    description: "神戸市垂水区の明石海峡に面した護岸。明石海峡大橋を望む絶景で、タコジグとアジのサビキが通年で楽しめる好アクセスの釣り場。",
+    description: "神戸市垂水区の明石海峡に面した護岸。明石海峡大橋を望む絶景で、アジのサビキ釣りやイワシが楽しめる好アクセスの釣り場。なお須磨〜垂水地区はタコの共同漁業権区域にあたり、タコの採捕は禁止されている（違反は罰金対象）。",
     latitude: 34.6280, longitude: 135.0550,
     address: "〒655-0036 兵庫県神戸市垂水区海岸通",
     accessInfo: "JR垂水駅から徒歩約10分",
@@ -2645,7 +2645,6 @@ export const westAdd13Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
-      { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "タコジグ" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
     ],

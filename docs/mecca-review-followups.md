@@ -3,6 +3,17 @@
 主要13魚種の全国名所をWeb裏取りして出典付与した際（scripts/output/mecca-proposals/）、
 適用を見送った発見事項。別トラックでの対応候補。
 
+## 重複統合の棚卸し（2026-09-10、#499後の現存確認）
+
+以下は #499 マージ後も両方公開中の同一地物重複。統合＝「敗者スポットのデータ削除＋`spot-redirects.json` へ敗者slug→勝者slug追加」の破壊的操作で、各ペアとも一方に固有の出典付きcatchableFishや魚種があるため、**勝者が敗者を情報包含するかを1件ずつ精査してから統合する**（機械的一括は情報損失リスク）。勝者候補=データが厚い/出典多い方:
+- 武庫川一文字: `mukogawa-ichimonji-k8`(5種) / `mukogawajiri-ichimonji-osaka`(6種)。**両方regionが誤り**（大阪市港湾/大阪北港だが実体は兵庫県尼崎市沖の武庫川尻一文字）→ 統合時にregionも是正
+- 汐見埠頭(泉大津): `izumiotsu-shiomi`(12種)/`shiomi-futo-detail`(12種)が主、`shiomi-wharf`(3種)/`shiomi-futou-osaka`(4種)が薄い → 12種の2つのどちらを正とするか精査
+- 入道崎: 勝者`oga-nyudozaki`(8種src2) / 敗者`oga-nyudouzaki6`(6種src0)
+- 翼港(淡路): `tsubasa-port`(9種) / `awaji-tsubasa-kou-k8`(4種)
+- 来島海峡: `imabari-kurushima-c8`(4種src1) / `imabari-kurushima-w6`(6種src1) ※両方に#497でマダイ出典付与済み、要マージ
+- 他（#497時点の記録・要現存再確認）: 郷ノ浦3重、佐田岬三崎港3件、宗像大島、福江港、隅田川テラス6分割、南港魚つり園、大蔵海岸、音戸大橋下、早川港3件、ichinomiya-surfのhirame二重エントリ
+- ツール: `node scripts/dedup-winner.mjs <名前>` で勝者/敗者確定、`--region-mismatch` で座標近接252ペア棚卸し
+
 ## データ異常（優先度高）
 
 1. **spots-add13-north.ts / spots-add13-west.ts が spots-registry.ts に未登録**

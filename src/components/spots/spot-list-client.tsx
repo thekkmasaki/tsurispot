@@ -2,7 +2,7 @@
 
 import { useState, useMemo, useCallback, useDeferredValue, useTransition, useEffect, useRef, Fragment } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { Search, X, SlidersHorizontal, ChevronDown, ChevronLeft, ChevronRight, MapPin, Navigation, Loader2 } from "lucide-react";
+import { Search, X, SlidersHorizontal, ChevronDown, ChevronLeft, ChevronRight, MapPin, Navigation, Loader2, Star } from "lucide-react";
 import { SpotCard } from "@/components/spots/spot-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -172,6 +172,7 @@ export function SpotListClient({ spots }: { spots: ListSpot[] }) {
   const [geoLoading, setGeoLoading] = useState(false);
   const [geoError, setGeoError] = useState<string | null>(null);
   const [sortByDistance, setSortByDistance] = useState(false);
+  const [sortByRating, setSortByRating] = useState(false);
 
   const requestLocation = useCallback(() => {
     if (!navigator.geolocation) {
@@ -273,13 +274,15 @@ export function SpotListClient({ spots }: { spots: ListSpot[] }) {
       return true;
     });
 
-    // Sort by distance if enabled
+    // Sort: 現在地からの距離を最優先、無効時は評価の高い順（同点は名前昇順で決定的）
     if (sortByDistance && distanceMap) {
       filtered.sort((a, b) => (distanceMap.get(a.id) ?? Infinity) - (distanceMap.get(b.id) ?? Infinity));
+    } else if (sortByRating) {
+      filtered.sort((a, b) => b.rating - a.rating || a.name.localeCompare(b.name));
     }
 
     return filtered;
-  }, [spots, deferredSearchText, selectedRegion, selectedPrefecture, selectedArea, selectedType, selectedDifficulty, selectedFacilities, selectedFree, selectedMethods, selectedFishNames, sortByDistance, distanceMap]);
+  }, [spots, deferredSearchText, selectedRegion, selectedPrefecture, selectedArea, selectedType, selectedDifficulty, selectedFacilities, selectedFree, selectedMethods, selectedFishNames, sortByDistance, sortByRating, distanceMap]);
 
   const totalPages = Math.ceil(filteredSpots.length / ITEMS_PER_PAGE);
   const paginatedSpots = filteredSpots.slice(
@@ -336,7 +339,7 @@ export function SpotListClient({ spots }: { spots: ListSpot[] }) {
 
       {/* Nearby sort button */}
       {!sortByDistance ? (
-        <div>
+        <div className="flex flex-wrap items-center gap-2">
           <Button
             variant="outline"
             size="sm"
@@ -351,8 +354,17 @@ export function SpotListClient({ spots }: { spots: ListSpot[] }) {
             )}
             {geoLoading ? "位置情報を取得中..." : "現在地から近い順に並べ替え"}
           </Button>
+          <Button
+            variant={sortByRating ? "default" : "outline"}
+            size="sm"
+            onClick={() => setSortByRating((v) => !v)}
+            className="gap-1.5 min-h-[44px]"
+          >
+            <Star className={`size-4 ${sortByRating ? "fill-current" : ""}`} />
+            評価の高い順
+          </Button>
           {geoError && (
-            <p className="mt-1.5 text-xs text-red-600">{geoError}</p>
+            <p className="mt-1.5 w-full text-xs text-red-600">{geoError}</p>
           )}
         </div>
       ) : (
