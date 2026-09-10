@@ -83,7 +83,7 @@ export const northAdd13Spots: FishingSpot[] = [
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.8, reviewCount: 0,
     catchableFish: [
-      { fish: fish("karei"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "投げ釣り" },
+      { fish: fish("karei"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "投げ釣り", source: "アングラーズ 石狩湾新港" },
       { fish: fish("hokke"), monthStart: 4, monthEnd: 6, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("kurosoi"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "ワーム" },
     ],
@@ -686,7 +686,7 @@ export const northAdd13Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
       { fish: fish("karei"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "投げ釣り" },
-      { fish: fish("hirame"), monthStart: 7, monthEnd: 10, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
+      { fish: fish("hirame"), monthStart: 7, monthEnd: 10, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー", source: "アングラーズ 三沢・高瀬川河口" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideSurf, mazumeInfo: mazumeTohoku,
   },
@@ -2163,7 +2163,7 @@ export const northAdd13Spots: FishingSpot[] = [
   {
     id: "ss13134", name: "いわき市三崎公園下磯", slug: "iwaki-misaki-park-rocky-a13",
     description: "小名浜の三崎公園の下に広がる磯場。メバルやアイナメの根魚が岩場の隙間に潜む。",
-    latitude: 36.9250, longitude: 140.8550, address: "〒970-0318 宮城県いわき市小名浜下神白", accessInfo: "JRいわき駅から車で約25分",
+    latitude: 36.9250, longitude: 140.8550, address: "〒970-0318 福島県いわき市小名浜下神白", accessInfo: "JRいわき駅から車で約25分",
     region: localRegion("rs13032"), spotType: "rocky", difficulty: "intermediate",
     isFree: true, hasParking: true, parkingDetail: "三崎公園駐車場", hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0,
