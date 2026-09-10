@@ -92,6 +92,12 @@
     {
       "action": "note",
       "text": "【裏取り保留】柿崎海岸（上越）kakizaki-kaigan-joetsu-a12 はhirameエントリ自体が無い。上越エリア全体のヒラメ実績はカンパリで確認済みだが柿崎個別の釣果裏取りは今回未実施のためadd-entryは保留。上越サーフの有名ポイントであり次回照合候補。三沢漁港（勝者misawa-gyokou6）もhirame無しだがspotType:portの港内主体でありサーフ実績を安易に流用しないため保留。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "misawa-sabishiro-beach-a13",
+      "source": "アングラーズ 三沢・高瀬川河口",
+      "evidence": "三沢サーフ（淋代〜高瀬川河口）は座布団ヒラメの全国区メッカ。アングラーズ高瀬川河口(三沢)専用ページ実在"
     }
   ]
 }

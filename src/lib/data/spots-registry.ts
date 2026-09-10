@@ -95,6 +95,10 @@ import { northAdd12Spots } from "./spots-add12-north";
 import { eastAdd12Spots } from "./spots-add12-east";
 import { westAdd12Spots } from "./spots-add12-west";
 import { eastAdd13Spots } from "./spots-add13-east";
+// add13のnorth/westは2026-06の一括無効化(#139)後、#154の再有効化から取り残されていた305件。
+// 全国メッカ照合レビュー(2026-09)で発見し再有効化（淋代海岸・八丁浜など名所を含む）
+import { northAdd13Spots } from "./spots-add13-north";
+import { westAdd13Spots } from "./spots-add13-west";
 
 export const allRawSpots: FishingSpot[] = [
   ..._baseSpots,
@@ -190,4 +194,6 @@ export const allRawSpots: FishingSpot[] = [
   ...eastAdd12Spots,
   ...westAdd12Spots,
   ...eastAdd13Spots,
+  ...northAdd13Spots,
+  ...westAdd13Spots,
 ];

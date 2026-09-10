@@ -2,16 +2,8 @@
   "fish": "madako",
   "proposals": [
     {
-      "action": "add-entry",
-      "spotSlug": "honmoku-fishing",
-      "monthStart": 6,
-      "monthEnd": 9,
-      "peakSeason": true,
-      "catchDifficulty": "medium",
-      "recommendedTime": "日中",
-      "method": "タコエギ",
-      "source": "釣割 東京湾（神奈川）",
-      "evidence": "本牧海づり施設は東京湾岸タコの代表的施設で通年釣果報告あり。釣割の東京湾（神奈川）マダコ釣果ページ(https://www.chowari.jp/catcharea/?area=56&fish=790)に2026年8月時点で最新釣果掲載、実釣記事(https://go.ookuwasyoukai.com/octopus-fishing/)、ORETSURIタコ釣り場15選で★★★★。勝者ブロック(s11/spots-base.ts)にmadakoエントリ自体が無く、敗者s154(yokohama-honmoku-fishing)にのみ存在する明確な欠落。"
+      "action": "note",
+      "text": "【適用禁止】本牧海づり施設はタコ採捕禁止（施設ルール）。spot-rule-consistencyテストが検証しており、madakoエントリを追加してはならない"
     },
     {
       "action": "add-entry",
