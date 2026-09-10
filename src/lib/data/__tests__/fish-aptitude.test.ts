@@ -97,13 +97,19 @@ describe("生息域外の除外", () => {
     }
   });
 
-  it("アオリイカ: 境界域（山形・秋田等）は「◎よく釣れる」にならない", () => {
+  it("アオリイカ: 境界域（山形・青森等）は「◎よく釣れる」にならない", () => {
     const spots = bySlug.get("aoriika")!.spots;
+    // 秋田は男鹿の秋イカ定着（SHIMANO特集・カンパリ実績）で適性2に引き上げたため境界域から除外。
+    // ◎（excellent）には適性3以上が必要なので、秋田でも「◎」にはならないことを別途検証
     const boundary = spots.filter((s) =>
-      ["山形県", "秋田県", "青森県", "宮城県", "福島県"].includes(s.region.prefecture)
+      ["山形県", "青森県", "宮城県", "福島県"].includes(s.region.prefecture)
     );
     for (const s of boundary) {
       expect(s.catchRating, `${s.region.prefecture} ${s.slug} が ${s.catchRating}`).toBe("fair");
+    }
+    const akita = spots.filter((s) => s.region.prefecture === "秋田県");
+    for (const s of akita) {
+      expect(s.catchRating, `秋田県 ${s.slug} が ${s.catchRating}`).not.toBe("excellent");
     }
   });
 });

@@ -984,7 +984,6 @@ export const _baseSpots: FishingSpot[] = [
     rating: 4.0,
     reviewCount: 95, googleRating: 3.8, googleReviewCount: 1725,
     catchableFish: [
-      { fish: fish("madako"), monthStart: 6, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ", source: "釣割 東京湾（神奈川）" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中〜夕方", method: "穴釣り" },
       { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "メバリング" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
