@@ -2718,6 +2718,7 @@ export const _baseSpots: FishingSpot[] = [
     rating: 3.9,
     reviewCount: 145, googleRating: 3.9, googleReviewCount: 167,
     catchableFish: [
+      { fish: fish("kamasu"), monthStart: 8, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "ルアー（ジグサビキ）", source: "アングラーズ 沼津港" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
       { fish: fish("tachiuo"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "テンヤ" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },

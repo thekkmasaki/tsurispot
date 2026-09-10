@@ -1,0 +1,97 @@
+{
+  "fish": "kanpachi",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "hachijojima-kaminato-a9",
+      "source": "アングラーズ 八丈島",
+      "evidence": "アングラーズ八丈島エリア(https://anglers.jp/areas/166)で直近1ヶ月にカンパチ釣果が掲載、堤防からのカンパチ・ヒラマサ実績も紹介。魚速報にも八丈島専用ページあり(https://uosoku.com/home/kanto/tokyo/hachijojima/)。八丈島はショアカンパチの聖地だがDBのkanpachiエントリにsourceが無く+8点を取り逃している"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "kashiwajima-w6",
+      "source": "カンパリ 高知(大月・柏島)",
+      "evidence": "カンパリの高知カンパチ・ネイリ陸っぱりカテゴリ(https://fishing.ne.jp/fishingpost/area/kochi?fish=fish-kanpachi)に釣果掲載、魚速報に柏島専用ページあり(https://uosoku.com/home/sikoku/kochi/kashiwa/)。柏島は磯・堤防からブリ・カンパチが狙える全国区の青物名所だがkanpachiエントリにsource無し"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "ashizuri-misaki-w6",
+      "source": "釣割 高知県カンパチ釣果",
+      "evidence": "釣割の高知県カンパチ最新釣果ページ(https://www.chowari.jp/catcharea/?area=39&fish=113、2025年9月更新)とカンパリ高知陸っぱりカンパチカテゴリで実績確認。黒潮直撃の四国最南端ロックショアで説明文にもカンパチ明記済みだがsource無し"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "ashizuri-cape-rocky",
+      "source": "カンパリ 高知(足摺・土佐清水)",
+      "evidence": "カンパリ高知のカンパチ・ネイリ陸っぱりカテゴリおよび釣割高知県カンパチ釣果で足摺周辺の実績確認。足摺岬磯(ashizuri-cape-rocky)はkanpachiエントリ(7-10月ショアジギング)を持つがsource無し。同名系の足摺岬(ashizuri-misaki-w6)と併せて出典付与を推奨"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "hachijojima-sokodo6",
+      "monthStart": 6,
+      "monthEnd": 11,
+      "peakSeason": true,
+      "catchDifficulty": "hard",
+      "recommendedTime": "朝マヅメ",
+      "method": "ショアジギング",
+      "source": "アングラーズ 八丈島",
+      "evidence": "スポット自身のdescriptionに『カンパチやヒラマサのショアジギングで実績が高い』と明記されているのにcatchableFishにkanpachiエントリが存在しない明確な欠落。アングラーズ八丈島(https://anglers.jp/areas/166)で直近カンパチ釣果あり。底土港は八丈島のショア青物代表ポイント"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "shionomisaki-k8",
+      "monthStart": 6,
+      "monthEnd": 11,
+      "peakSeason": true,
+      "catchDifficulty": "hard",
+      "recommendedTime": "朝マヅメ",
+      "method": "ショアジギング",
+      "source": "カンパリ 串本東部",
+      "evidence": "カンパリ串本東部にカンパチ・ネイリ陸っぱり釣果カテゴリあり(https://fishing.ne.jp/fishingpost/fish/fish-kanpachi?area=kushimoto-tobu-c)、魚速釣果検索でも串本ショアジギング釣果(2026年最新)を確認。本州最南端・潮岬はブリ(buri)エントリはあるのにカンパチが無く、南紀ロックショアの代表地として明確な欠落"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "kushimoto-oshima-k8",
+      "monthStart": 6,
+      "monthEnd": 11,
+      "peakSeason": false,
+      "catchDifficulty": "hard",
+      "recommendedTime": "朝マヅメ",
+      "method": "ショアジギング",
+      "source": "カンパリ 串本東部",
+      "evidence": "串本大島(樫野埼・海金剛周辺)は地磯実績で知られ、カンパリ串本東部のカンパチ・ネイリ陸っぱりカテゴリで釣果確認。現状はメジナ/イシダイ/ブリ/マダイのみでカンパチが欠落しており、隣接の潮岬と同様の是正が必要"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "goto-osezaki-todai-s8",
+      "monthStart": 6,
+      "monthEnd": 11,
+      "peakSeason": false,
+      "catchDifficulty": "medium",
+      "recommendedTime": "朝マヅメ",
+      "method": "ショアジギング",
+      "source": "カンパリ 五島列島",
+      "evidence": "カンパリ五島列島ショアジギングカテゴリ(https://fishing.ne.jp/fishingpost/area/nagasaki-goto?howto=howto-shorejiging)で青物釣果を確認。五島はネリゴ(小型カンパチ)の代表産地で、九州屈指のロックショア大瀬崎にブリ・イシダイはあるのにカンパチ(ネリゴ)がゼロなのは明確な欠落。長崎県はkanpachi prefCombosに1件も無い"
+    },
+    {
+      "action": "note",
+      "text": "【重大・地域割当バグ】spots-add6-east.ts の re6036 は『神奈川県 横浜・川崎』のregion定義だが、神津島港(kozushima-ko6)・八丈島底土港(hachijojima-sokodo6)・新島港(niijima-ko6)・大島岡田港(oshima-okada6)など東京都の伊豆諸島4港＋奥多摩系の計12スポットがこのregionに紐付いている。実行時descも『横浜・川崎の漁港』と誤生成されており、地域適性×12が神奈川で計算されるため伊豆諸島スポットがカンパチTOP30から構造的に脱落している(現TOP30に伊豆諸島ゼロの主因)。正しい東京都・伊豆諸島regionへの付け替えを最優先で推奨"
+    },
+    {
+      "action": "note",
+      "text": "【出典の全体的欠落】kanpachiのsource付きエントリはDB全体で3件のみ(アングラーズ高知/wiredFish山川漁港/wiredFish串木野新港)。現TOP1の佐多岬磯(satamisaki-iso)を含む鹿児島上位勢もすべてsource無しで、現在の序列はほぼ地域適性のみで決まっている。鹿児島は釣果媒体(wiredFish・アングラーズ鹿児島等)が豊富なので、錦江湾・佐多・指宿系スポットへの一括source付与パスを別途推奨"
+    },
+    {
+      "action": "note",
+      "text": "【神津島】伊豆諸島の中でも神津島はショゴ(小型カンパチ)の岸釣りで知られるが、今回の検索では具体的媒体での釣果を確認できなかったためadd-sourceは見送り。神津島港(kozushima-ko6)はkanpachiエントリ自体が無く、上記region修正とあわせて裏取りの上でエントリ追加を検討"
+    },
+    {
+      "action": "note",
+      "text": "【五島の面的欠落】長崎県はkanpachi prefCombosにゼロ件。五島はネリゴの本場でカンパリに五島列島ショアジギングカテゴリが存在する。福江港(goto-fukue-kou-a9)はhiramasaのみでカンパチ無しなど、大瀬崎以外の五島スポット(有川港・奈良尾港等)にも裏取りの上でネリゴ追加の面的パスを推奨"
+    },
+    {
+      "action": "note",
+      "text": "【spotType整合】カンパチ(ショゴ/ネリゴ)は小型が港内・堤防に回遊するためport/iso両spotTypeとも矛盾なし。今回の提案対象(port: 神湊漁港・底土港、iso: 足摺岬・潮岬・串本大島・大瀬崎)にspotType上の問題は無い"
+    }
+  ]
+}

@@ -394,6 +394,7 @@ export const northAdd11Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.2, reviewCount: 0,
     catchableFish: [
+      { fish: fish("buri"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング", source: "魚速釣果検索 積丹半島" },
       { fish: fish("hokke"), monthStart: 4, monthEnd: 7, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキ釣り" },
       { fish: fish("kurosoi"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ワーム" },
       { fish: fish("hirame"), monthStart: 7, monthEnd: 9, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
@@ -1387,7 +1388,7 @@ export const northAdd11Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.7, reviewCount: 0,
     catchableFish: [
       { fish: fish("inada"), monthStart: 8, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
-      { fish: fish("hatahata"), monthStart: 11, monthEnd: 1, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("hatahata"), monthStart: 11, monthEnd: 1, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り", source: "魚速報 八森漁港" },
       { fish: fish("mebaru"), monthStart: 3, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "メバリング" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideBreakwater, mazumeInfo: mazumeTohokuNihonkai,
@@ -1419,7 +1420,7 @@ export const northAdd11Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.6, reviewCount: 0,
     catchableFish: [
-      { fish: fish("hatahata"), monthStart: 11, monthEnd: 1, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("hatahata"), monthStart: 11, monthEnd: 1, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り", source: "つり具の上州屋 秋田(東北日本海ハタハタ釣り情報)" },
       { fish: fish("kisu"), monthStart: 6, monthEnd: 9, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("aji"), monthStart: 7, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },
     ],
@@ -1436,7 +1437,7 @@ export const northAdd11Spots: FishingSpot[] = [
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 3.5, reviewCount: 0,
     catchableFish: [
-      { fish: fish("hatahata"), monthStart: 11, monthEnd: 1, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
+      { fish: fish("hatahata"), monthStart: 11, monthEnd: 1, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り", source: "アングラーズ 男鹿半島" },
       { fish: fish("karei"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
     ],
     bestTimes: btAllDay, tackleRecommendations: [], tideAdvice: tidePort, mazumeInfo: mazumeTohokuNihonkai,

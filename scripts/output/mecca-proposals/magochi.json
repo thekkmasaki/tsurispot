@@ -1,0 +1,103 @@
+{
+  "fish": "magochi",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "kozu-kaigan6",
+      "source": "アングラーズ 国府津海岸",
+      "evidence": "国府津海岸はサーフジギングの聖地と呼ばれる西湘サーフ随一の名所で、マゴチはヒラメと並ぶ主要ターゲット。アングラーズに専用エリアページ(https://anglers.jp/areas/192)があり、魚速報にも釣り場ページ(https://uosoku.com/home/kanto/kanagawa/syounan/kouzu/)でマゴチが対象魚として掲載。magochiエントリは既存だがsource欠落で+8点を取り逃し、TOP30圏外に沈んでいる。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "ichinomiya-surf",
+      "source": "アングラーズ 九十九里浜",
+      "evidence": "アングラーズに九十九里浜のマゴチ専用釣果ページ(https://anglers.jp/areas/644/fishes/357)が存在。同スポットのhirameには同一source「アングラーズ 九十九里浜」が付与済みなのにmagochi(peakSeason:true)だけsource無しで不整合。現在TOP30の15位(77.6)だがsource付与で上位帯に入るべき名所。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "kujukurihama-katakai6",
+      "source": "アングラーズ 九十九里浜",
+      "evidence": "九十九里・片貝は夏マゴチの好機で知られ、アングラーズ九十九里浜マゴチページ(https://anglers.jp/areas/644/fishes/357)および片貝周辺釣り場ガイド(https://chiba-tsuri.net/chousikujukuri/katakaiko/『夏には良型マゴチ』)で実績確認。magochiエントリ(peakSeason:true)は既存だがsource無し。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "suzuka-surf-shiroko",
+      "source": "カンパリ 鈴鹿サーフ",
+      "evidence": "カンパリに『夕まずめIN鈴鹿サーフ | 三重県 白子漁港 マゴチ』の陸っぱり釣果投稿(https://fishing.ne.jp/fishingpost/889314、57cm良型)があり、釣具のイシグロも『【2025開幕】伊勢湾マゴチ＆ヒラメ釣果上昇中！』(https://www.ishiguro-gr.com/enjoy/fishing/detail.php?id=42799)で鈴鹿サーフの実績を報告。伊勢湾岸を代表するマゴチサーフなのにmagochi(peakSeason:true)にsource無し。現TOP30の18位(77.1)。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "chiyozaki-kaigan-k8",
+      "source": "アングラーズ 千代崎サーフ",
+      "evidence": "アングラーズに千代崎サーフの専用エリアページ(https://anglers.jp/areas/3978)があり、マゴチ・ヒラメ狙いのフラットフィッシュゲームの定番場として釣果が集積。magochiエントリ(peakSeason:true)は既存だがsource無し。現TOP30の22位(76.6)。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "katakai-gyoko",
+      "monthStart": 5,
+      "monthEnd": 9,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "朝マヅメ",
+      "method": "ルアー",
+      "source": "アングラーズ 九十九里浜",
+      "evidence": "片貝漁港（勝者slug=katakai-gyoko、dedup-winner確認済）は作田川河口に隣接する九十九里の中核港で、千葉釣りガイド(https://chiba-tsuri.net/chousikujukuri/katakaiko/)に『堤防でマゴチ、夏には特に良型』と明記、アングラーズ九十九里浜マゴチページ(https://anglers.jp/areas/644/fishes/357)でも釣果多数。説明文で『ヒラメ実績・ルアーのメッカ』と謳いながら魚種10件にマゴチが無いのは明確な欠落。spotType=portだが河口隣接堤防でマゴチと矛盾なし。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "shirako-kaigan-surf",
+      "monthStart": 5,
+      "monthEnd": 10,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "朝マヅメ",
+      "method": "ルアー",
+      "source": "アングラーズ 九十九里浜",
+      "evidence": "白子海岸サーフ（勝者slug=shirako-kaigan-surf、dedup-winner確認済）は九十九里南部のサーフで、hirameエントリはあるのにマゴチが無い。九十九里浜のマゴチはアングラーズ専用ページ(https://anglers.jp/areas/644/fishes/357)で夏の定番として釣果集積しており、ヒラメ・シーバスが載るサーフでマゴチ欠落は不自然。spotType=beachで矛盾なし。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "hamanako-imagiri",
+      "monthStart": 5,
+      "monthEnd": 10,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "朝マヅメ",
+      "method": "ルアー",
+      "source": "アングラーズ 浜名湖",
+      "evidence": "浜名湖今切口（勝者slug=hamanako-imagiri、dedup-winner確認済）は浜名湖と遠州灘をつなぐ流れの要衝で、ヒラメ・マゴチのフラットゲーム最著名ポイント。アングラーズに浜名湖のマゴチ専用釣果ページ(https://anglers.jp/areas/399/fishes/357)があり、表浜名湖で2025-06に45cm等の陸っぱり実績(https://anglers.jp/catches/6942591)。hirameエントリはあるのにマゴチ欠落は明確な穴。kurodai/suzukiには既に『アングラーズ 浜名湖』sourceが付いており媒体実在も確認済み。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "shiroko-gyoko",
+      "monthStart": 5,
+      "monthEnd": 9,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "夕マヅメ",
+      "method": "ルアー",
+      "source": "カンパリ 白子漁港",
+      "evidence": "白子漁港（三重県鈴鹿、slug=shiroko-gyokou-k8、重複なし）はカンパリの陸っぱり釣果投稿『夕まずめIN鈴鹿サーフ | 三重県 白子漁港 フラットフィッシュ マゴチ』(https://fishing.ne.jp/fishingpost/889314)で実績がピンポイントに確認できる。隣接の鈴鹿サーフ白子・千代崎海岸にはmagochiがあるのに当港だけ欠落しており不整合。港周辺の砂地でマゴチと矛盾なし。"
+    },
+    {
+      "action": "note",
+      "text": "【現TOPとの乖離】TOP30の上位11件が全て静岡・愛知の遠州灘サーフ(85点超)で占められる一方、全国区の名所である国府津海岸(西湘サーフの聖地)・九十九里(片貝)・浜名湖今切口が全てTOP30圏外または下位。いずれもsource欠落(+8取り逃し)かエントリ欠落が原因で、上記提案の適用で解消する見込み。"
+    },
+    {
+      "action": "note",
+      "text": "kozu-kaigan6のmagochiはpeakSeason:falseだが、5〜10月は西湘サーフのマゴチ盛期であり(アングラーズ国府津海岸・魚速報とも夏の主要ターゲット扱い)、peakSeason:trueへの調整を推奨。★2.4換算とは別に旬8点の扱いにも影響し得るため既存値レビュー対象。"
+    },
+    {
+      "action": "note",
+      "text": "【候補ヒント検証結果・東京湾奥運河】豊洲ぐるり公園・豊洲運河・若洲海浜公園を検索したが、媒体で確認できたのはシーバス・タチウオ・ハゼ・クロダイ中心でマゴチ特化の実績は裏取りできず、提案見送り。湾奥代表としては葛西臨海公園(kasai-rinkai-park)が既にTOP30の24位に入っており現状評価は妥当と判断。"
+    },
+    {
+      "action": "note",
+      "text": "浜名湖弁天島(hamanako-bentenjima)と村櫛海岸(hamanako-murakushi)にもmagochiエントリが無い。表浜名湖のマゴチ実績はアングラーズで確認済みだが、両ピン位置固有の岸釣り実績までは今回裏取りできなかったため追加提案は見送り。次回レビュー候補。また九十九里・片貝エリアはkatakai-gyoko/kujukurihama-katakai6/kujukuri-katakai-e8の実質3重掲載で、名寄せ(dedup)の検討を推奨。"
+    },
+    {
+      "action": "note",
+      "text": "【spotType整合確認】本提案の対象はbeach/port/breakwaterのみで、砂泥底を好むマゴチと矛盾するspotType(磯・淡水河川等)への提案は無し。南白亀川河口(nabakigawa-kakou-shirako-a10、spotType=river)は汽水河口でマゴチ実績の可能性はあるが媒体裏取り未達のため提案対象外とした。"
+    }
+  ]
+}

@@ -649,6 +649,7 @@ export const extraSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/0d/Fishing_Boat_-_panoramio.jpg", imageAttribution: "Photo: Ryuetsu Kato / Wikimedia Commons (CC BY 3.0)", images: [], rating: 4.1, reviewCount: 55, googleRating: 3.6, googleReviewCount: 62,
     catchableFish: [
+      { fish: fish("hatahata"), monthStart: 11, monthEnd: 1, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "サビキ釣り", source: "アングラーズ 男鹿半島" },
       { fish: fish("madai"), monthStart: 4, monthEnd: 6, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り", source: "アングラーズ" },
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ", source: "アングラーズ" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "アングラーズ" },
@@ -1836,6 +1837,7 @@ export const extraSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 4.0, reviewCount: 48, googleRating: 4.2, googleReviewCount: 10,
     catchableFish: [
+      { fish: fish("mejina"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り", source: "カンパリ すさみ" },
       { fish: fish("aji"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り", source: "フィッシングマックス" },
       { fish: fish("kurodai"), monthStart: 3, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ウキフカセ", source: "フィッシングマックス" },
       { fish: fish("aoriika"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング", source: "フィッシングマックス" },

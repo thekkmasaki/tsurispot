@@ -390,7 +390,7 @@ export const chubuKinkiAdd4Spots: FishingSpot[] = [
     catchableFish: [
       { fish: fish("kisu"), monthStart: 4, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "投げ釣り" },
       { fish: fish("hirame"), monthStart: 3, monthEnd: 6, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ルアー" },
-      { fish: fish("magochi"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "ルアー" },
+      { fish: fish("magochi"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "ルアー", source: "カンパリ 鈴鹿サーフ" },
     ],
     bestTimes: btMorning, tackleRecommendations: [],
     tideAdvice: tideSurf, mazumeInfo: mazumeChubu,

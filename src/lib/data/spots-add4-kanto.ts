@@ -850,6 +850,7 @@ export const kantoAdd4Spots: FishingSpot[] = [
     hasToilet: false, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 3.8, reviewCount: 110,
     catchableFish: [
+      { fish: fish("yariika"), monthStart: 1, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "電気ウキ(エサ巻きスッテ)・エギング", source: "ORETSURI 江之浦" },
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
       { fish: fish("mejina"), monthStart: 10, monthEnd: 4, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "ウキフカセ" },
       { fish: fish("kasago"), monthStart: 1, monthEnd: 12, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
@@ -1574,6 +1575,7 @@ export const kantoAdd4Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 4.1, reviewCount: 245,
     catchableFish: [
+      { fish: fish("kamasu"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー・サビキ釣り", source: "魚速報 静浦漁港" },
       { fish: fish("madai"), monthStart: 4, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
       { fish: fish("isaki"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
       { fish: fish("aji"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "サビキ釣り" },

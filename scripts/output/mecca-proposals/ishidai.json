@@ -1,0 +1,53 @@
+{
+  "fish": "ishidai",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "irozaki-port",
+      "source": "アングラーズ 南伊豆",
+      "evidence": "アングラーズに「南伊豆で釣れたイシダイの釣り・釣果情報」エリアページが実在（https://anglers.jp/areas/3613/fishes/190）。釣具のイシグロにも南伊豆の石鯛釣行記事あり（https://www.ishiguro-gr.com/fishing/detail.php?id=18724）。石廊崎は南伊豆地磯石鯛の代表格（spotType:rocky、勝者slug確認済み）だがishidaiエントリにsource無しで78.8点に留まっており、TOP勢90.8との乖離が大きい。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "kushimoto-oshima-k8",
+      "source": "カンパリ 串本東部",
+      "evidence": "釣果情報サイトカンパリに「串本東部 底物 陸っぱり」実績カテゴリが実在（https://fishing.ne.jp/fishingpost/area/kushimoto-tobu?howto=howto-sokomono）。樫野崎・海金剛など串本大島の磯は南紀を代表する底物（石鯛）フィールドで、釣太郎の串本大島釣り場地図でも確認。dedup勝者slug確認済み（sk8148）だがsource無しで78.8点。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "kushimoto-oshima-iso-a12",
+      "source": "カンパリ 串本東部",
+      "evidence": "串本大島磯（dedup勝者ss12435、spotType:rocky）。上記kushimoto-oshima-k8と同じくカンパリ「串本東部 底物 陸っぱり」カテゴリと釣太郎串本大島釣り場地図で陸からの底物実績を確認。ishidaiエントリにsource無し。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "shionomisaki-k8",
+      "source": "釣太郎 南紀串本",
+      "evidence": "本州最南端・潮岬（dedup勝者sk8165、spotType:rocky）。釣太郎の串本町大島・潮岬釣り場地図（http://mail.tsuttarou.co.jp/maps/kushimoto2/index.html）および釣果情報ページ、カンパリ「串本東部 底物 陸っぱり」カテゴリで陸っぱり底物実績を確認。source無しで78.6点は南紀の石鯛名所として過小評価。"
+    },
+    {
+      "action": "note",
+      "text": "【柏島の過小評価】kashiwajima-w6（大月町・柏島、dedup勝者sw6224）は全国区の底物メッカだがishidaiエントリはsource無しかつpeakSeason:falseで82.3点。追加検索でアングラーズ柏島エリアページ（https://anglers.jp/areas/5318）とカンパリの柏島陸っぱり釣果投稿（ハタ・アオリイカ）は実在確認できたが、石鯛個別の岸釣り釣果投稿までは今回確認できなかったため提案はnote止まり。石鯛個別実績を確認の上でsource付与＋peakSeason:true化を推奨（隣接の沖の島90.8・足摺90.8との乖離が大きい）。"
+    },
+    {
+      "action": "note",
+      "text": "【屋久島・種子島がishidai圏外】DBには港スポットのみ（勝者: yakushima-miyanoura／yakushima-anbo-port／tanegashima-nishinoomote）で、いずれもcatchableFishにishidaiエントリ自体が無い。屋久島・種子島はクチジロ（大型イシガキダイ）・石鯛の全国区メッカで実績媒体は確認済み（大漁時刻表・屋久島クチジロ実証データ https://tairyoujikokuhyou.com/data.html 、底物師・海坊主 https://ishidaiumibouzu.jp/kuchijiro/ 、ふるさと種子島・釣りポイント https://www.furusato-tanegashima.net/fishing/point-menu.html ）。ただし実績の中心は地磯・沖磯であり港へのadd-entryは根拠不足のため、「屋久島・一湊周辺地磯」「種子島地磯」等のスポット新設を推奨。鹿児島prefCombo 10件に離島地磯が入っていないのはデータ欠落。"
+    },
+    {
+      "action": "note",
+      "text": "【八丈島】東京都のishidaiスポットは3件のみ。八丈島・神湊港／底土港にはishidaiエントリがあるがsource無し。八丈島は伊豆諸島屈指の石鯛実績地だが、今回の検索では媒体裏取りを実施できなかったため保留。次回アングラーズ八丈島エリア等で個別実績を確認の上add-sourceを検討推奨。"
+    },
+    {
+      "action": "note",
+      "text": "【房総の現状は概ね適正】勝浦・鵜原理想郷（ubara-coast、85.6）と犬吠埼（inubosaki、85.8、dedup勝者s820）はいずれもsource:上州屋で出典済み。外房の媒体（魚速報 外房ページ https://uosoku.com/home/kanto/chiba/soto/ 、Costa Fishing Service 勝浦釣果 http://www.costa-fs.com/catch/ ）も実在確認。一方、南房総・野島崎（野島崎／白浜・野島崎灯台下磯）はsource無し。野島崎個別の石鯛実績は今回未確認のため保留、次回確認推奨。"
+    },
+    {
+      "action": "note",
+      "text": "【大瀬崎（西伊豆）】osezaki（78.6、dedup勝者scs040、spotType:rocky）はishidaiエントリにsource無し。アングラーズ静岡県イシダイ釣果ページ（https://anglers.jp/prefectures/22/fishes/190）は実在確認済みだが県単位の出典であり、大瀬崎個別の実績は未確認。県レベル出典で+8を与えると精度が下がるため保留とし、個別実績確認後のadd-sourceを推奨。"
+    },
+    {
+      "action": "note",
+      "text": "【spotType整合】今回のadd-source対象4件（irozaki-port／kushimoto-oshima-k8／kushimoto-oshima-iso-a12／shionomisaki-k8）は全てspotType:rockyで、磯の底物である石鯛と矛盾なし。なお生データに存在する「潮岬磯」（shionomisaki-iso-a13）はdedup-winner照会で生データ0件＝実行時に存在しないため提案対象外とした。"
+    }
+  ]
+}

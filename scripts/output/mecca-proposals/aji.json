@@ -1,0 +1,71 @@
+{
+  "fish": "aji",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "iki-gonoura-port",
+      "source": "アングラーズ 壱岐島",
+      "evidence": "壱岐は『アジの聖地』と呼ばれ、堤防から尺アジ〜ギガアジ(40cm+)・テラアジ(50cm+)の実績多数。アングラーズに壱岐島のアジ釣果ページあり(https://anglers.jp/areas/453/fishes/12)。TSURINEWSにも堤防アジングで尺アジの釣行記事(https://tsurinews.jp/243953/)。郷ノ浦港は壱岐アジングの中心ポイントだが本DBのajiエントリはsourceなしで+8点を取り逃している。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "iki-gounoura-w6",
+      "source": "アングラーズ 壱岐島",
+      "evidence": "同上（壱岐・郷ノ浦港の公開中重複ブロック。dedupRedirectsのリダイレクト先になっている勝者slugのためこちらにも付与）。アングラーズ壱岐島アジ釣果ページ https://anglers.jp/areas/453/fishes/12 で裏取り済み。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "iki-katsumoto-kou-w6",
+      "source": "アングラーズ 壱岐島",
+      "evidence": "勝本港は壱岐アジングの定番ランガンポイントとして釣行記事多数(tsuri-heaven.com/iki-island-ajing、ikiisland-concierge.com釣り攻略ガイド)。アングラーズ壱岐島エリアの釣果に含まれる(https://anglers.jp/areas/453/catches)。現在ajiエントリにsourceなし。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "iki-ashibe-kou-s8",
+      "source": "アングラーズ 壱岐島",
+      "evidence": "芦辺港も壱岐の主要アジングポイント。アングラーズ壱岐島アジ釣果(https://anglers.jp/areas/453/fishes/12)および壱岐アジング攻略ガイドで堤防実績を確認。現在ajiエントリにsourceなし。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "tsushima-izuhara-w6",
+      "source": "カンパリ 対馬",
+      "evidence": "対馬は玄界灘離島のアジング好フィールドで、カンパリに『対馬 陸っぱり』の釣果ページあり(https://fishing.ne.jp/fishingpost/area/nagasaki-tsushima)、魚速報にも対馬の釣り場・釣果情報あり(https://uosoku.com/home/kyuu/nagasaki/tushima/)。厳原港は対馬の中心港で夜のアジングが盛ん。現在ajiエントリにsourceなし。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "tsushima-hitakatsu-kou-s8",
+      "source": "カンパリ 対馬",
+      "evidence": "比田勝港は上対馬の主要港で、DB上もmethod『アジング』『夜』で登録済みなのにsourceなし。カンパリ対馬陸っぱり釣果ページ(https://fishing.ne.jp/fishingpost/area/nagasaki-tsushima)で港内夜釣りのライトゲーム実績を確認。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "saiki-yonouzu-kou-s8",
+      "source": "カンパリ 佐伯市",
+      "evidence": "米水津湾は大分屈指のアジ実績エリア。カンパリに『佐伯市 アジ 陸っぱり』の魚種別釣果ページが存在(https://fishing.ne.jp/fishingpost/fish/fish-aji?area=oita-saeki)。米水津の波止はアジ・チヌ・クロ・アオリイカ実績で知られる(higashikyusyu-turiba.seesaa.net他)。同エリアの浦代港(oita-saiki-urashiro-port-bulk)はsource済みだがこちらは未付与。"
+    },
+    {
+      "action": "note",
+      "text": "走水(hashirimizu-ko/hashirimizu-gyokou): 神奈川の大アジ名所として有名だが、裏取りできた実績(釣りビジョン『走水沖の大アジ42cm』https://www.fishing-v.jp/premium/238_3.html)は船釣り中心。走水港の岸からのアジ釣果を具体媒体で確認できなかったため、source付与は今回見送り。岸アジ実績の媒体が見つかれば追補を推奨。"
+    },
+    {
+      "action": "note",
+      "text": "城ヶ島岸壁(jogashima-wharf)はajiエントリにsource『上州屋』が既に付与済みで対応不要。カンパリ城ヶ島陸っぱりページ(https://fishing.ne.jp/fishingpost/area/kanagawa-arai-bishamon07)・魚速釣果検索(https://plus.uosoku.com/search?lo=城ヶ島)でも岸釣果を再確認できた。神奈川の『大アジ』は基本的に走水沖の船釣りであり、岸スポットのこれ以上の上方調整は不要。"
+    },
+    {
+      "action": "note",
+      "text": "データ異常: 郷ノ浦港は公開中スポットが3件並存(iki-gonoura-port / iki-gounoura-w6 / gonoura-kou-a10)。dedupRedirectsは4件をiki-gounoura-w6へ寄せているが、s1124(iki-gonoura-port)とss10509(gonoura-kou-a10)がリダイレクト網から漏れて同一港が三重公開になっている。統合を推奨。"
+    },
+    {
+      "action": "note",
+      "text": "説明文異常: iki-gonoura-port の説明が『五島の漁港』、iki-katsumoto-kou-w6 が『佐世保・五島の漁港』と記載されているが、両スポットは壱岐(壱岐市)。エリアラベルの誤生成とみられ、修正を推奨。"
+    },
+    {
+      "action": "note",
+      "text": "東京湾奥の常夜灯アジング: 候補ヒントにあったが、今回の検索では具体的媒体での岸釣果の裏取りまで到達できず提案なし。prefCombosで東京はアジ登録17件と全国最少級のため、湾奥運河筋(豊洲・有明・京浜運河等)のアジング実績を別途調査してエントリ拡充する余地あり。"
+    },
+    {
+      "action": "note",
+      "text": "米水津地磯(yonouzu-jiiso, 魚種11件)にはajiエントリ自体が無い。米水津エリアのアジ実績はカンパリ佐伯市アジ陸っぱりページで確認済みだが、この地磯個別のアジ釣果までは特定できなかったためadd-entryは保留。地磯個別の実績が確認できればエントリ追加候補。spotType面では今回の提案対象は全て港・岸壁でアジと矛盾なし。"
+    }
+  ]
+}

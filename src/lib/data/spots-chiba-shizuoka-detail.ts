@@ -428,6 +428,7 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 4.0, reviewCount: 178, googleRating: 3.8, googleReviewCount: 38,
     catchableFish: [
+      { fish: fish("magochi"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー", source: "アングラーズ 九十九里浜" },
       { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
       { fish: fish("ishimochi"), monthStart: 5, monthEnd: 9, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夕マヅメ〜夜", method: "投げ釣り" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },
@@ -455,7 +456,7 @@ export const chibaShizuokaDetailSpots: FishingSpot[] = [
     mainImageUrl: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e7/Boso_20160811154216_%2831381691033%29.jpg/960px-Boso_20160811154216_%2831381691033%29.jpg", imageAttribution: "Photo: inunami / Wikimedia Commons (CC BY 2.0)", images: [], rating: 4.0, reviewCount: 125, googleRating: 4.1, googleReviewCount: 681,
     catchableFish: [
       { fish: fish("hirame"), monthStart: 10, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー", source: "アングラーズ 九十九里浜" },
-      { fish: fish("magochi"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ〜日中", method: "ルアー" },
+      { fish: fish("magochi"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ〜日中", method: "ルアー", source: "アングラーズ 九十九里浜" },
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ルアー" },
           { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
           { fish: fish("mebaru"), monthStart: 11, monthEnd: 4, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ〜夜", method: "メバリング" },

@@ -1,0 +1,67 @@
+{
+  "fish": "ainame",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "muroran-sakimori-futou6",
+      "source": "アングラーズ 室蘭港",
+      "evidence": "室蘭はTSURI HACKで「ロックフィッシュの聖地」と紹介される全国区のアイナメ(アブラコ)メッカ(https://tsurihack.com/6210)。アングラーズ室蘭港エリア(https://anglers.jp/areas/2857)に2026年1月・6月のアイナメ釣果あり。funeco崎守埠頭ページでもアイナメ(ブラクリ)が主要ターゲット。勝者slugはdedup-winnerで確認済(敗者: muroran-sakimori-wharf-a10等)。現エントリはsource無しで+8点を取り逃し"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "muroran-port",
+      "source": "アングラーズ 室蘭港",
+      "evidence": "同上。アングラーズ室蘭港(https://anglers.jp/areas/2857)・魚速報室蘭(https://uosoku.com/home/hokai/dounan/murora/)で港内のアイナメ実績多数。「聖地」室蘭の本体スポット(s34, 魚種7件)がsource無しでTOP30圏外なのは過小評価"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "sendai-shinko",
+      "source": "アングラーズ 仙台漁港",
+      "evidence": "仙台新港は東北ロックフィッシュ発祥地とされる岸釣り名所。アングラーズ仙台漁港エリア(https://anglers.jp/areas/2160, 釣果665件)の釣れる魚にアイナメ明記、魚速報仙台港(https://uosoku.com/home/touhoku/miyagi/sendai/)に2026-05-12アイナメ/ロックフィッシュ釣果。現ainameエントリ(10-3月)はsource無し"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "shiogama-ko",
+      "source": "アングラーズ 仙台湾",
+      "evidence": "アングラーズ仙台湾エリア(https://anglers.jp/areas/3830)で直近1ヶ月の釣果にアイナメが挙がっており、塩釜港は仙台湾奥の主要岸釣り場。現ainameエントリ(9-12月)はsource無し。港名ピンポイントの媒体確認は仙台湾エリア単位のため、エリア表記のsourceとした"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "kesennuma-ko",
+      "source": "魚速報 気仙沼",
+      "evidence": "魚速報の気仙沼市釣り場ページ(https://uosoku.com/kesennuma/)でロックフィッシュ(アイナメ)が主要ターゲットとして掲載。三陸気仙沼はロックフィッシュメッカで、descriptionにも「9〜12月の朝マヅメはブラクリでアイナメ」と記載済みなのにsource無しは不整合"
+    },
+    {
+      "action": "note",
+      "text": "【registry未登録】唐桑小鯖港(spots-add13-north.ts)は本番非公開。元提案: 魚速報気仙沼ページ(https://uosoku.com/kesennuma/)で唐桑半島小鯖漁港は「日中はカレイやアイナメなどの底物」と実績記載。現ainameエントリ(4-11月 peak)はsource無し"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "ofunato-port",
+      "monthStart": 10,
+      "monthEnd": 3,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "朝マヅメ",
+      "method": "ワーム（ロックフィッシュ）",
+      "source": "カンパリ",
+      "evidence": "カンパリに「岩手 大船渡漁港周辺 ロックフィッシュ（ルアー） アイナメ」の陸っぱり釣果が複数掲載(49cm等, https://fishing.ne.jp/fishingpost/3141327)。同じ大船渡港の茶屋前(ofunato-chayamae, top30 7位)はainame+source有りなのに、港本体の勝者ofunato-port(s1064, 魚種7件)にはainameエントリ自体が無い明確な欠落。メバル・カサゴ・カレイは載っていてアイナメだけ無いのは三陸の港として不自然"
+    },
+    {
+      "action": "note",
+      "text": "日立港(hitachi-ko-aise)はainameエントリ無しだが、検索結果(つりナビ他)で「港内の大半ないし全域が釣り禁止・立入禁止」との情報あり。add-entryは提案せず、掲載ルール注記(釣り可能範囲の現地確認)の追記を推奨。冬のカレイ・アイナメ実績自体は媒体に記載あり"
+    },
+    {
+      "action": "note",
+      "text": "常磐(茨城)の過小評価疑い: prefCombosで茨城は12件のみ、TOP30ゼロ。大洗はきたかんナビ「ポン級アイナメ狙う 茨城・大洗の磯場」(https://kitakan-navi.jp/archives/224927)が示す通りアイナメ南限域の全国区名所で、大洗磯前海岸(oarai-isozen-coast)は上州屋sourceで整備済みなのに圏外。茨城の地域適性値の見直し(引き上げ)を検討する価値あり"
+    },
+    {
+      "action": "note",
+      "text": "大洗港(勝者oarai-port, s828)はainameエントリ無し。磯側(大洗磯前海岸)の実績は豊富だが、港堤防限定のアイナメ実績は今回の検索では特定記事を確認できず。大洗港徒歩3分の金丸釣具店ブログ(https://ameblo.jp/oaraii/)の釣果確認後にadd-entryするのが安全"
+    },
+    {
+      "action": "note",
+      "text": "TOP30と名所の乖離まとめ: 三陸(釜石港3位・大船渡茶屋前7位・気仙沼大島22位)と積丹美国1位は既にsource済みで妥当。主な乖離は(1)ロックフィッシュの聖地・室蘭が地球岬の磯(10位)以外圏外(muroran-port/崎守埠頭がsource無し)、(2)東北ロックフィッシュ文化の中心・仙台湾(仙台新港/塩釜)が圏外、(3)大船渡港本体のエントリ欠落。spotTypeは全提案がport/磯でアイナメと矛盾なし"
+    }
+  ]
+}

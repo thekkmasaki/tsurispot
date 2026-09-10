@@ -1000,7 +1000,7 @@ export const sagamiMiuraSpots: FishingSpot[] = [
       { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
       { fish: fish("kasago"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "穴釣り" },
       { fish: fish("inada"), monthStart: 9, monthEnd: 11, peakSeason: false, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "ショアジギング" },
-      { fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ウキフカセ" },
+      { fish: fish("mejina"), monthStart: 10, monthEnd: 5, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ウキフカセ", source: "TSURINEWS 城ヶ島" },
       { fish: fish("ishidai"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "石鯛仕掛け" },
       { fish: fish("madako"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ" },
       { fish: fish("bera"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "ウキ釣り（外道）" },

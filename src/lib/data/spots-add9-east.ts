@@ -716,7 +716,7 @@ export const eastAdd9Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.3, reviewCount: 0,
     catchableFish: [
       { fish: fish("kanpachi"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
-      { fish: fish("mejina"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
+      { fish: fish("mejina"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り", source: "アングラーズ 三宅島" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeIzu,
   },
@@ -747,7 +747,7 @@ export const eastAdd9Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.5, reviewCount: 0,
     catchableFish: [
-      { fish: fish("kanpachi"), monthStart: 6, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
+      { fish: fish("kanpachi"), monthStart: 6, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング", source: "アングラーズ 八丈島" },
       { fish: fish("isaki"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
       { fish: fish("mejina"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
     ],

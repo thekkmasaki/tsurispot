@@ -215,7 +215,7 @@ export const hokkaidoTohokuAdd2Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "", images: [], rating: 4.0, reviewCount: 198, googleRating: 3.9, googleReviewCount: 13,
     catchableFish: [
-      { fish: fish("yariika"), monthStart: 1, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "エギング" },
+      { fish: fish("yariika"), monthStart: 1, monthEnd: 5, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "エギング", source: "エギCOM 函館" },
       { fish: fish("surumeika"), monthStart: 6, monthEnd: 10, peakSeason: true, catchDifficulty: "easy", recommendedTime: "夜", method: "エギング" },
       { fish: fish("iwashi"), monthStart: 7, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り" },
       { fish: fish("saba"), monthStart: 7, monthEnd: 9, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },

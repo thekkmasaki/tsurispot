@@ -560,7 +560,7 @@ export const additionalSpotsChugokuShikoku: FishingSpot[] = [
           { fish: fish("kasago"), monthStart: 10, monthEnd: 4, peakSeason: false, catchDifficulty: "easy", recommendedTime: "夕マヅメ", method: "穴釣り" },
           { fish: fish("aoriika"), monthStart: 9, monthEnd: 12, peakSeason: false, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "エギング" },
           { fish: fish("buri"), monthStart: 9, monthEnd: 1, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
-          { fish: fish("kanpachi"), monthStart: 7, monthEnd: 10, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
+          { fish: fish("kanpachi"), monthStart: 7, monthEnd: 10, peakSeason: false, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング", source: "カンパリ 高知(足摺・土佐清水)" },
     ],
     bestTimes: [{ label: "朝マヅメ", timeRange: "05:30〜08:00", rating: "best" }, { label: "夕マヅメ", timeRange: "16:00〜18:00", rating: "good" }],
     tackleRecommendations: [],

@@ -1,0 +1,63 @@
+{
+  "fish": "kurosoi",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "muroran-port",
+      "source": "アングラーズ 北海道",
+      "evidence": "クロソイは室蘭市の「市の魚」でありクロソイ岸釣りの全国区の聖地。アングラーズのクロソイ釣果まとめ(https://anglers.jp/fishes/395)で北海道が直近釣果の最上位地域、Activel「北海道のロックフィッシュポイント6選！苫小牧・小樽・室蘭の攻略法」(https://activel.jp/fishing/04qqv)でも室蘭が主要ポイントとして解説されている。勝者ブロック(spots-additional-hokkaido.ts s34)のkurosoiエントリにsource無し。TOP30には崎守埠頭・エンルムマリーナなど周辺スポットのみ入り本体が圏外なのは+8取り逃しが原因"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "tomakomai-nishi-port",
+      "source": "魚速報 苫小牧西港",
+      "evidence": "魚速報の苫小牧西港釣り場ページ(https://uosoku.com/home/hokai/dounan/tomani/)にクロソイ20〜30cmがアベレージで狙える旨の実績記載。北のロックフィッシュラボ(https://hokkaidorockfish.com/2026/04/20/tomakomai-port-rockfish-safety/)も苫小牧港のクロソイ・ロックフィッシュ攻略を詳述。同spotの karei エントリは既に「魚速報 苫小牧西港」をsourceに持つが kurosoi エントリのみsource無し"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "shiogama-ko",
+      "source": "アングラーズ 宮城県",
+      "evidence": "アングラーズのクロソイ釣果まとめ(https://anglers.jp/fishes/395)で宮城県が直近1ヶ月の釣果上位地域。つり具の上州屋 仙台新港店の釣果情報(https://www.johshuya.co.jp/shop/choka.php?s=10)に塩釜港・七ヶ浜の釣行記が継続掲載。仙台湾奥の夜ワームのクロソイは定番だが勝者ブロック(spots-hokkaido-tohoku-detail.ts s981)のkurosoiエントリにsource無し"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "sendai-shinko",
+      "source": "カンパリ 仙台港",
+      "evidence": "カンパリの仙台港陸っぱりエリアページ(https://fishing.ne.jp/fishingpost/area/miyagi-shichigahamamachiyamamotocyou05)が実在し釣果投稿を集積。釣りっこの仙台新港記事(https://fishing.turicco.com/sendai-ainame-saba/)でもアイナメと並びクロソイ・メバルの釣果を確認。spot説明文自体に「夜のワームでクロソイも狙える」とあるのにkurosoiエントリ(spots-tohoku.ts s436)にsource無し"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "ishinomaki-gyoko",
+      "source": "アングラーズ 石巻湾",
+      "evidence": "アングラーズの石巻湾エリアページ(https://anglers.jp/areas/463)が実在し釣果を集積、釣り東北WEB(https://tsuri-tohoku.com/38227/)でも宮城沿岸のクロソイ28〜31cm釣果を確認。spot説明文に「夜のワームでクロソイ」と明記されているのにkurosoiエントリ(spots-tohoku.ts s437)にsource無し"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "naoetsu-port",
+      "monthStart": 11,
+      "monthEnd": 4,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "夜",
+      "method": "ワーム",
+      "source": "アングラーズ 直江津港",
+      "evidence": "アングラーズに直江津港のソイ釣果ページ(https://anglers.jp/areas/1217/fishes/20)が実在し20cm超のクロソイ釣果を確認。カンパリにも「根魚の反応良好 | 新潟 直江津港 アジング ソイ」(https://fishing.ne.jp/fishingpost/2060637)の実績投稿あり。直江津港は魚種12件を持つ新潟の代表的漁港なのにクロソイのエントリ自体が無く、新潟県全体でもクロソイ登録0件という明確な欠落"
+    },
+    {
+      "action": "note",
+      "text": "新潟県のクロソイ登録が全県で0件（prefCombosに新潟が存在しない）。日本海側の新潟・佐渡はクロソイの実績地域で、新潟日報の週間釣り情報では村上市周辺漁港でクロソイ25〜27cmが1人0〜2匹の釣果を確認済み(https://www.niigata-nippo.co.jp/feature/angling)。ただし新潟東港(niigata-higashi-kou / niigata-higashiko-dai2-bohatei)・佐渡両津港(sado-ryotsu-higashi-futo)・新潟港山の下埠頭はスポット単位のクロソイ裏取りが今回の検索で取れなかったため、add-entryは直江津港のみに留めた。ハッピーフィッシング(happyfishing.jp)の管理堤防釣果ログでの追加裏取りを推奨"
+    },
+    {
+      "action": "note",
+      "text": "仙台湾・七ヶ浜エリア: 菖蒲田漁港(shobuta-gyokou6)のkurosoiエントリが5〜11月・peakSeason:false・easyとなっており、クロソイの一般的な釣期（晩秋〜春・夜行性）と逆のシーズナリティで異常値の疑い。他の宮城spotは10〜5月表記で統一されているため 10-5月・夜・ワームへの是正を推奨。また塩釜港マリンゲート前(shiogama-marinegate)は根魚(アイナメ・メバル)エントリはあるがクロソイ欠落。上州屋仙台新港店の釣果情報が塩釜港・七ヶ浜をカバーしており、スポット単位の裏取りが取れればadd-entry候補"
+    },
+    {
+      "action": "note",
+      "text": "spotType整合性: 仙台新港(sendai-shinko)はspotType:beachだがクロソイはストラクチャー依存の根魚。同スポットは砂浜と岸壁・テトラ帯が混在する釣り場で説明文にも夜ワームのクロソイが明記されているため矛盾なしと判断。その他の提案対象は全てport/breakwaterでクロソイと整合"
+    },
+    {
+      "action": "note",
+      "text": "現TOP30の構成（北海道中心+宮城）は分布として妥当だが、クロソイ岸釣りの二大聖地である室蘭港本体と苫小牧西港本体がTOP30圏外で、代わりに周辺・分割スポット(muroran-sakimori-futo等)が入っている点が乖離。上記add-source 2件(+8点)適用後にTOP30入りするか再スナップショットで確認を推奨"
+    }
+  ]
+}

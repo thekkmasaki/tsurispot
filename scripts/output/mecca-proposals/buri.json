@@ -1,0 +1,97 @@
+{
+  "fish": "buri",
+  "proposals": [
+    {
+      "action": "add-entry",
+      "spotSlug": "shakotan-kamui-rocky-a11",
+      "source": "魚速釣果検索 積丹半島",
+      "evidence": "積丹半島は北海道ショアブリの最安定エリア（回遊のボトルネック）とされ、魚速釣果検索に積丹半島ブリ釣果ページが実在（https://plus.uosoku.com/search?er=1.5&fn=ブリ&lo=積丹半島）。アングラーズにも積丹半島沖エリアページあり（https://anglers.jp/areas/4017）。磯からの83cm/5.3kg実績記事も確認（https://note.com/lively_yak9462/n/n43a63158527d）。既存buriエントリ(8-10月ショアジギング)にsourceが無く+8点を取り逃している",
+      "monthStart": 6,
+      "monthEnd": 11,
+      "peakSeason": true,
+      "catchDifficulty": "hard",
+      "recommendedTime": "朝マヅメ",
+      "method": "ショアジギング"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "sado-nozaki-hana",
+      "source": "FishRanker Magazine 佐渡",
+      "evidence": "FishRanker Magazine「佐渡島の寒ブリ釣り攻略【ショア鰤】」（https://fishranker.jp/magazine/171/）で佐渡は岸から大型ブリ・ワラサの実績地と確認。現TOP7(78.3)だがburiエントリにsourceが無い"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "sado-ryotsu-higashi-futo",
+      "source": "FishRanker Magazine 佐渡",
+      "evidence": "同上（https://fishranker.jp/magazine/171/）。佐渡のショアブリ時期は春4-5月と秋冬10-12月と明記。両津東埠頭のburiエントリ(9-1月ショアジギング)にsource無し"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "iki-gonoura-port",
+      "source": "カンパリ 壱岐島",
+      "evidence": "カンパリに壱岐島の陸っぱりショアジギング釣果ページが実在（https://fishing.ne.jp/fishingpost/area/nagasaki-iki?howto=howto-shorejiging）。魚速報にも壱岐島釣り場ページあり（https://uosoku.com/home/kyuu/nagasaki/iki/）。壱岐は青物の宝庫として全国区だが、勝者slug=iki-gonoura-portのburiエントリ(9-2月ショアジギング)にsource無し。dedup-winner確認済（敗者iki-gounoura-w6/iki-gonoura-kouへの提案は無効）"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "tsushima-hitakatsu-kou-s8",
+      "source": "魚速報 対馬",
+      "evidence": "魚速報に対馬の釣り場・釣果ページが実在（https://uosoku.com/home/kyuu/nagasaki/tushima/）。対馬はブリ・ヒラマサの宝庫として知られ、スポットdescにも「ブリを狙える」と明記済みなのにburiエントリ(9-1月ショアジギング)にsource無し。dedup-winner確認済（比田勝は1件のみ）"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "oga-nyudozaki",
+      "monthStart": 9,
+      "monthEnd": 12,
+      "peakSeason": true,
+      "catchDifficulty": "hard",
+      "recommendedTime": "朝マヅメ",
+      "method": "ショアジギング",
+      "source": "アングラーズ 男鹿半島",
+      "evidence": "アングラーズに男鹿半島のブリ釣果専用ページが実在（https://anglers.jp/areas/656/fishes/5）、カンパリにも男鹿半島陸っぱりページあり（https://fishing.ne.jp/fishingpost/area/akita-oga）。男鹿は東北屈指のショアジギングエリアで秋のブリ・ワラサ実績が高い。しかし現DBのprefCombosに秋田県が完全欠落（buriエントリ0件）で、東北日本海側の名所が丸ごと抜けている。入道崎は男鹿の代表的地磯。dedup勝者=oga-nyudozaki(s150)"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "iki-katsumoto-kou-w6",
+      "monthStart": 10,
+      "monthEnd": 2,
+      "peakSeason": true,
+      "catchDifficulty": "hard",
+      "recommendedTime": "朝マヅメ",
+      "method": "ショアジギング",
+      "source": "カンパリ 壱岐島",
+      "evidence": "勝本は壱岐随一の一級漁港でスポットのmethodに既にショアジギングがあるのにburiエントリ自体が無い。カンパリ壱岐島ショアジギングページ（https://fishing.ne.jp/fishingpost/area/nagasaki-iki?howto=howto-shorejiging）で島の青物釣果実績を確認。郷ノ浦港(iki-gonoura-port)にはburiがあり勝本に無いのはデータ不整合。dedup-winner確認済（勝本は1件のみ）"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "tsushima-izuhara-w6",
+      "monthStart": 10,
+      "monthEnd": 2,
+      "peakSeason": true,
+      "catchDifficulty": "hard",
+      "recommendedTime": "朝マヅメ",
+      "method": "ショアジギング",
+      "source": "魚速報 対馬",
+      "evidence": "対馬はブリ・ヒラマサの宝庫で、厳原港入口付近の地磯がショアジギングの有望ポイントとして紹介されている（魚速報 https://uosoku.com/home/kyuu/nagasaki/tushima/ ほか）。同じ対馬の比田勝港(tsushima-hitakatsu-kou-s8)にはburiエントリがあるのに、より主要な厳原港に無いのは明確な欠落。dedup勝者=tsushima-izuhara-w6（敗者tsushima-izuhara-port/tsushima-izuhara-kou等への提案は無効）"
+    },
+    {
+      "action": "note",
+      "text": "【重大】buri全312エントリ中source付きは18件のみ(6%)。現TOP30のほぼ全てがsource無しで戦っている状態。特にTOP1輪島・舳倉島航路灯籠(wajima-hegura-kouro-teirou-a12)、TOP2七尾矢田新埠頭(nanao-yatashin-wharf)、氷見漁港(himi-gyokou-toyama、ひみ寒ぶりで全国ブランド)のburiエントリにsourceが無い。能登・氷見は日本一の寒ブリメッカでありアングラーズ等での裏取りは容易なはず。次回レビューで検索裏取りの上一括add-source推奨（今回は検索回数上限で未検証のためnote扱い）"
+    },
+    {
+      "action": "note",
+      "text": "【データ欠落】prefCombosに千葉県が0件。外房（勝浦・鴨川・銚子）はワラサ・イナダのショア実績で知られるエリアだが今回検索での裏取り未実施。次回、カンパリ/アングラーズ外房エリアの実績確認の上でadd-entry検討を推奨"
+    },
+    {
+      "action": "note",
+      "text": "【北海道の薄さ】北海道のburiは3件のみだが、近年の温暖化で積丹〜島牧はショアブリの全国区エリア化している（https://www.gururugarugon.com/hokkaido-shore-buri-fishing-guide/）。検索で言及のあった兜千畳敷・西の河原はDBにスポット自体が存在せず新設候補。島牧漁港(shimamaki-gyoko、dedup勝者)は本来サクラマス/アメマスサーフの聖地でブリ固有の裏取りが取れなかったためadd-entry見送り。余別漁港(shakotan-yobetsu-gyoko)もburi無しだがスポット単位の実績未確認"
+    },
+    {
+      "action": "note",
+      "text": "【粟島(新潟)】魚速プラスに粟島×ブリ釣果はあるが（https://plus.uosoku.com/search?lo=粟島&er=21.0）大半が船ジギングで、粟島・内浦港(awashima-uchiura-kou-a12)への岸からの実績裏取りは不十分のためadd-entry見送り。堤防からの青物実績が確認できれば追加候補"
+    },
+    {
+      "action": "note",
+      "text": "【重複異常】男鹿・入道崎はoga-nyudozaki(s150「男鹿半島入道崎」)とoga-nyudouzaki6(se6123「男鹿入道崎」)が両方公開中で、同一地磯が名称ゆれでdedupをすり抜けている（座標差約500m）。oga-nyudozaki-rocky-a10/oga-nyudozaki-e8はoga-nyudozakiへリダイレクト済み。dedupルールの名寄せ改善を推奨。なお対象魚とspotTypeの矛盾は無し（磯・港いずれもショアジギング可の地形）"
+    }
+  ]
+}
