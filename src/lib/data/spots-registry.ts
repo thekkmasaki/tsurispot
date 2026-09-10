@@ -99,6 +99,9 @@ import { eastAdd13Spots } from "./spots-add13-east";
 // 全国メッカ照合レビュー(2026-09)で発見し再有効化（淋代海岸・八丁浜など名所を含む）
 import { northAdd13Spots } from "./spots-add13-north";
 import { westAdd13Spots } from "./spots-add13-west";
+// 全国メッカ照合レビューで判明した「DB未収録の全国区名所」10件（木更津沖堤・青岸・和田防・男女群島等）
+import { meccaEastSpots } from "./spots-mecca-east";
+import { meccaWestSpots } from "./spots-mecca-west";
 
 export const allRawSpots: FishingSpot[] = [
   ..._baseSpots,
@@ -196,4 +199,6 @@ export const allRawSpots: FishingSpot[] = [
   ...eastAdd13Spots,
   ...northAdd13Spots,
   ...westAdd13Spots,
+  ...meccaEastSpots,
+  ...meccaWestSpots,
 ];
