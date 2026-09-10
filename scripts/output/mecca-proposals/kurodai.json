@@ -1,0 +1,83 @@
+{
+  "fish": "kurodai",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "hamanako-arai-umizuri-koen",
+      "source": "アングラーズ 浜名湖",
+      "evidence": "浜名湖はチニングの全国区フィールドとして名を轟かせる聖地。アングラーズ浜名湖エリアにクロダイ釣果ページあり(https://anglers.jp/areas/399/fishes/185)、カンパリにも浜名湖北部の陸っぱりチヌ釣果あり(https://fishing.ne.jp/fishingpost/area/shizuoka-hamanako02?fish=fish-chinu)。新居海釣公園は浜名湖今切口近くの代表的足場でクロダイ実績多数。既存kurodaiエントリ(4-11月フカセ)にsource無しで+8点取り逃し。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "hamanako-imagiri",
+      "source": "アングラーズ 浜名湖",
+      "evidence": "今切口は浜名湖と外海の接点でクロダイの一級ポイントとして全国的に有名。アングラーズ浜名湖エリア(https://anglers.jp/areas/399/fishes/185)に釣果多数、浜名湖流入航路でのクロダイヘチ釣り釣行記(note)や釣具店イシグロの浜名湖チヌ釣果報告もあり。既存kurodaiエントリ(3-12月ウキ釣り・peak)にsource無し。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "yodogawa-kakou-k8",
+      "source": "カンパリ 大阪",
+      "evidence": "淀川下流〜河口は大阪湾チニングの代表フィールド。カンパリ大阪府クロダイ(チヌ)陸っぱり釣果ページ(https://fishing.ne.jp/fishingpost/area/osaka?fish=fish-chinu)およびチニング釣果ページあり、TSURINEWSに淀川チニング釣り場紹介記事(https://tsurinews.jp/14810/)。魚速報でも大阪湾チヌ・キビレ釣果(47cm良型等)確認。既存kurodaiエントリ(4-11月ルアー・peak)にsource無し。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "akashi-port-detail",
+      "source": "カンパリ 明石東部",
+      "evidence": "明石はチヌ・フカセの好フィールドで、カンパリ明石東部エリア(https://fishing.ne.jp/fishingpost/area/akashi-tobu)にチヌのウキ釣り等の陸っぱり釣果掲載、アングラーズにも明石港エリアページあり(https://anglers.jp/areas/3875)。既存kurodaiエントリ(4-11月ウキ釣り)にsource無し。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "ondo-gyokou-w6",
+      "source": "アングラーズ 広島県",
+      "evidence": "広島湾〜呉・音戸はチヌの魚影日本屈指のメッカ。アングラーズ広島県チヌ釣果ページ(https://anglers.jp/prefectures/34/fishes/969、クロダイは/185)に釣果多数、呉市近辺のチヌ釣果投稿も確認(https://anglers.jp/catches/4841105)。音戸は牡蠣筏とチヌ釣り大会でも知られる。既存kurodaiエントリ(4-11月フカセ・peak)にsource無し。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "ondo-ohashi-shita",
+      "source": "アングラーズ 広島県",
+      "evidence": "音戸の瀬戸(音戸大橋下)は潮流が速くチヌ・フカセの広島側の名所。アングラーズ広島県クロダイ/チヌページ(https://anglers.jp/prefectures/34/fishes/185)とカンパリ広島チヌ陸っぱり(https://fishing.ne.jp/fishingpost/area/hiroshima?fish=fish-chinu)に釣果多数。既存kurodaiエントリ(4-11月フカセ・peak)にsource無し。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "ondo-ohashi-gokan",
+      "source": "カンパリ 広島",
+      "evidence": "同じく音戸大橋周辺護岸。カンパリ広島クロダイ(チヌ)陸っぱりページ(https://fishing.ne.jp/fishingpost/area/hiroshima?fish=fish-chinu)に呉地区のチニング・フカセ釣果あり。既存kurodaiエントリ(4-11月ウキフカセ)にsource無し。※s-kcsadd-045(ondo-ohashi-shita)と座標近接の実質重複の疑いあり(下記note参照)。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "okura-kaigan",
+      "monthStart": 5,
+      "monthEnd": 11,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "朝夕マヅメ",
+      "method": "チニング(トップ)・フカセ釣り",
+      "source": "まるは釣具明石店 大蔵海岸釣果ブログ",
+      "evidence": "大蔵海岸(sah019)はキス・カレイ・タチウオのみでkurodaiエントリが完全欠落。まるは釣具明石店・ルアー館の大蔵海岸釣りブログ(https://anglers.lekumo.biz/akashi/)が定点釣果を発信し、大蔵海岸釣り情報サイトにチヌ47cmのトップウォーター釣果記事(https://okurakaigan.com/okura-choka-2022/9-22_chinu/)あり。明石海峡周辺の護岸ビーチでチヌが釣れないことになっているのは実態と乖離。spotType=beach(護岸)でチニング・フカセと矛盾なし。"
+    },
+    {
+      "action": "note",
+      "text": "【最重要乖離】広島県はチヌ放流事業と『チヌの海』広島湾で全国的に日本一の魚影と称されるのに、TOP30に広島県は1件のみ(kamagari-daijizo-port、30位・90.1)。prefCombosでは広島84件と登録数は多いため、広島湾(湾レベル)の地域適性値が瀬戸内東部(兵庫111件がTOP30の約半数を独占)に比べ低く設定されている可能性が高い。根拠: アングラーズ広島県チヌ/クロダイ釣果ページの投稿量、カンパリ広島チヌ陸っぱりの掲載量。広島湾・呉周辺の適性引き上げを推奨。"
+    },
+    {
+      "action": "note",
+      "text": "【東京湾の過小評価】東京湾はヘチ釣り・落とし込み文化の本場で、木更津・横浜・川崎の沖堤群がクロダイ釣りの全国的メッカだが、TOP30に東京湾スポットがゼロ。Honda釣り倶楽部の落とし込み入門でも久里浜・野島・横浜・川崎・五井・長浦・木更津の沖堤が主要舞台と明記。東京湾岸(千葉・東京・神奈川)の湾レベル適性見直しを推奨。なお木更津内港(勝者s836/kisarazu-naiko)は既にsource『上州屋』あり対応不要。"
+    },
+    {
+      "action": "note",
+      "text": "【スポット新設候補】木更津沖堤防(A堤〜D堤)がDBに存在しない。アングラーズに専用エリアページ(https://anglers.jp/areas/1273 と木更津沖 /areas/556)がありクロダイ釣果多数、宮川丸(https://www.miyagawamaru.co.jp/)が堤防渡船を運航し釣果0〜12枚・30〜42cmの実績公表。東京湾落とし込みの代表メッカのため新設トラックで追加推奨。"
+    },
+    {
+      "action": "note",
+      "text": "【浜名湖の乖離】浜名湖は『チニングの一大フィールドとして全国に名が轟く』聖地で年無し(50cm超)も毎年記録されるが、TOP30に浜名湖スポットがゼロ。汽水湖・静岡県西部の地域適性見直しを検討推奨。弁天島(s299)は既にsource『イシグロ』あり。今回add-source提案の新居海釣公園・今切口の+8点で改善見込み。"
+    },
+    {
+      "action": "note",
+      "text": "【重複疑い】大蔵海岸系はs311(akashi-okura-coast/明石大蔵海岸)とsah019(okura-kaigan/大蔵海岸)の両方が公開中(名称差でdedup非対象)。音戸大橋下もs-kcsadd-045(ondo-ohashi-shita)とs3399(ondo-ohashi-gokan/護岸)が座標近接で両方公開中。dedupロジックの名寄せ強化候補。"
+    },
+    {
+      "action": "note",
+      "text": "【裏取り未達のため保留】洲本港(sumoto-kou-add4、kurodaiエントリありsource無し)・林崎漁港(sah027、kurodaiエントリ欠落)・翼港(s116、kurodaiエントリ欠落)・呉ポートピアパーク護岸(s1053、kurodaiエントリ欠落)・呉市広港堤防(s2883、同)はチヌ実績地として知られるが、今回の検索ではスポット単位の媒体実績を確認できず。次回の裏取り候補として記録。"
+    }
+  ]
+}

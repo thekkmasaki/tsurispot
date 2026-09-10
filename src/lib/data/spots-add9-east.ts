@@ -454,7 +454,7 @@ export const eastAdd9Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.0, reviewCount: 0,
     catchableFish: [
       { fish: fish("suzuki"), monthStart: 4, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夕マヅメ", method: "ルアー" },
-      { fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ" },
+      { fish: fish("haze"), monthStart: 7, monthEnd: 12, peakSeason: true, catchDifficulty: "easy", recommendedTime: "日中", method: "ちょい投げ", source: "アングラーズ 涸沼" },
     ],
     bestTimes: btEvening, tackleRecommendations: [], tideAdvice: tideRiver, mazumeInfo: mazumeKanto,
   },
@@ -655,7 +655,7 @@ export const eastAdd9Spots: FishingSpot[] = [
     latitude: 36.8240, longitude: 139.3500,
     address: "〒378-0414 群馬県利根郡片品村丸沼",
     accessInfo: "関越自動車道沼田ICから車で約50分",
-    region: region("r671"), spotType: "river", difficulty: "beginner",
+    region: region("r671"), spotType: "lake", difficulty: "beginner",
     isFree: false, feeDetail: "ボート利用料・遊漁料が必要",
     hasParking: true, parkingDetail: "丸沼高原駐車場あり",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: true, hasRentalRod: true,
@@ -716,7 +716,7 @@ export const eastAdd9Spots: FishingSpot[] = [
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.3, reviewCount: 0,
     catchableFish: [
       { fish: fish("kanpachi"), monthStart: 7, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
-      { fish: fish("mejina"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
+      { fish: fish("mejina"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り", source: "アングラーズ 三宅島" },
     ],
     bestTimes: btMorning, tackleRecommendations: [], tideAdvice: tideStandard, mazumeInfo: mazumeIzu,
   },
@@ -747,7 +747,7 @@ export const eastAdd9Spots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.svg", images: [], rating: 4.5, reviewCount: 0,
     catchableFish: [
-      { fish: fish("kanpachi"), monthStart: 6, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング" },
+      { fish: fish("kanpachi"), monthStart: 6, monthEnd: 12, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "ショアジギング", source: "アングラーズ 八丈島" },
       { fish: fish("isaki"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "hard", recommendedTime: "朝マヅメ", method: "カゴ釣り" },
       { fish: fish("mejina"), monthStart: 1, monthEnd: 12, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
     ],

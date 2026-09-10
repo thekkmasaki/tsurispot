@@ -1,0 +1,79 @@
+{
+  "fish": "tachiuo",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "mukogawa-ichimonji-k8",
+      "source": "アングラーズ 武庫川一文字",
+      "evidence": "アングラーズに武庫川一文字のタチウオ専用釣果ページがあり100cm超を含む多数の実績 (https://anglers.jp/areas/877/fishes/18)。カンパリにもメーターオーバーの釣果投稿あり (https://fishing.ne.jp/fishingpost/209056)。大阪湾岸タチウオの最有名メッカだがsource欠落でスコア90.6に留まっている（TOP勢は96〜98点台）。spotType=breakwater(渡船沖堤)でタチウオと整合"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "mukogawajiri-ichimonji-osaka",
+      "source": "カンパリ 尼崎・芦屋",
+      "evidence": "武庫川尻一文字は武庫川一文字の正式名。カンパリ尼崎・芦屋エリアにタチウオ釣果多数 (https://fishing.ne.jp/fishingpost/fish/fish-tachiuo?area=amagasaki-ashiya-e)。source欠落でスコア89.8。spotType=breakwaterで整合"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "kishiwada-oki-ichimonji-k8",
+      "source": "フィッシングマックス 岸和田一文字",
+      "evidence": "フィッシングマックス釣果ブログに「岸和田一文字にて、タチウオ釣果！」の投稿あり (https://fishingmax.co.jp/fishingpost/705312)。泉南の代表的沖堤メッカだがsource欠落でスコア90.1。spotType=breakwaterで整合"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "izumiotsu-shiomi",
+      "source": "カンパリ 高石・泉大津",
+      "evidence": "カンパリ高石・泉大津エリアにタチウオ釣果が7ページ以上蓄積 (https://fishing.ne.jp/fishingpost/area/takaishi-izumiotsu?fish=fish-tachiuo)。汐見埠頭ワインドの投稿も個別確認 (https://fishing.ne.jp/fishingpost/1712739)。説明文で『関西屈指のタチウオ人気スポット』を謳いながらtachiuoエントリにsource無し"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "shiomi-futo-detail",
+      "source": "カンパリ 高石・泉大津",
+      "evidence": "同上・汐見埠頭本体。カンパリ高石・泉大津エリアのタチウオ釣果多数 (https://fishing.ne.jp/fishingpost/area/takaishi-izumiotsu?fish=fish-tachiuo)。dedup勝者(公開中)だがtachiuoエントリにsource無し"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "shiomi-wharf",
+      "source": "カンパリ 高石・泉大津",
+      "evidence": "汐見埠頭 砂上げ場そのものの釣果投稿『【泉大津】砂上げ場でタチウオワインド【車横付】』を確認 (https://fishing.ne.jp/fishingpost/62521)。tachiuoエントリにsource無し"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "shiomi-futou-osaka",
+      "source": "魚速報 泉大津",
+      "evidence": "魚速釣果検索に泉大津のタチウオ釣果まとめあり (https://plus.uosoku.com/search?fn=タチウオ&lo=泉大津&er=26)。汐見埠頭（大阪）のtachiuoエントリ(テンヤ)にsource無し。※汐見埠頭系はdedup勝者が4スポット並存しており名寄せ自体の再点検も推奨"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "izumiotsu-jinkoutou",
+      "source": "カンパリ 高石・泉大津",
+      "evidence": "泉大津人工島（小津島）は汐見埠頭と並ぶ泉大津のタチウオ定番。カンパリ高石・泉大津エリアのタチウオ釣果集積 (https://fishing.ne.jp/fishingpost/area/takaishi-izumiotsu?fish=fish-tachiuo) とフィッシングマックス泉大津店の秋タチ告知 (https://fishingmax.co.jp/fishingpost/576748) で裏取り。tachiuoエントリにsource無し"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "suiken-tekko-danchi",
+      "source": "つり具のマルニシ 和歌山",
+      "evidence": "つり具のマルニシ釣果ブログ『【水軒】【青岸】タチウオつれています！』 (https://f-marunishi.com/fishing/18922/) で確認。水軒は青岸と並ぶ和歌山2大タチウオポイント（つりそく和歌山特集 https://www.tsurisoku.com/news/95864/ でも紹介）。説明文で『秋のタチウオシーズンは和歌山一の人気』と書きながらsource無し"
+    },
+    {
+      "action": "note",
+      "text": "【DB未収録の全国区メッカ】和歌山・青岸はDBに存在しない（grepでヒット0）。水軒と並ぶ和歌山2大タチウオポイントで、つり具のマルニシ (https://f-marunishi.com/fishing/24917/) やつりにいく等に実績多数。スポット新設の最優先候補。神戸沖堤（和田防・ポーアイ沖堤等の渡船沖堤群）も未収録で、こちらも新設候補"
+    },
+    {
+      "action": "note",
+      "text": "【大阪南港魚つり園 (osaka-nanko-fishing-park)】tachiuoエントリにsource無し。南港はタチウオの有名場所だが今回の検索でスポット個別の釣果媒体を直接確認できなかったため提案から除外。フィッシングマックスのタチウオ魚種ページ (https://fishingmax.co.jp/fish/tachiuo) は大阪店舗釣果を集約しており、次回照合で裏取りできれば add-source 妥当。かもめ大橋下 (kamome-ohashi-detail) も同様にsource無し・未裏取り"
+    },
+    {
+      "action": "note",
+      "text": "【東京湾の扱い】prefCombosにtokyo/chibaが0件。若洲海浜公園の勝者 (wakasu-seaside-park) にはtachiuoエントリ自体が無いが、検索では若洲の岸タチ実績を具体的媒体で確認できず（東京湾のタチウオは船が主体で岸からは年変動が大きい）、add-entryは見送り。東扇島西公園 (higashi-ogishima-nishi-park) は source:上州屋 付きで既収録なので対応不要。神奈川の地域適性を上げる根拠も現時点では弱く、適性値は現状維持が妥当"
+    },
+    {
+      "action": "note",
+      "text": "【重複疑い】武庫川一文字 (mukogawa-ichimonji-k8) と武庫川尻一文字 (mukogawajiri-ichimonji-osaka) は同一の実在堤防（正式名: 武庫川尻一文字波止）が別名で二重収録され両方公開中。両方へのadd-sourceは有効だが、中期的には名寄せ対象。汐見埠頭も勝者4件並存 (izumiotsu-shiomi / shiomi-wharf / shiomi-futo-detail / shiomi-futou-osaka) で同様"
+    },
+    {
+      "action": "note",
+      "text": "【現TOPとの乖離】TOP17（96.6〜98.8点）は明石〜大阪湾の出典付きスポットで妥当だが、大阪湾岸タチウオの二大メッカである武庫川一文字(90.6)と岸和田沖一文字(90.1)、関西屈指と自称する泉大津・汐見埠頭(圏外)がいずれもsource欠落の-8で沈んでおり、伊根湾アオリイカと同型の過小評価。上記add-source反映で実態通りTOP圏に入る見込み"
+    }
+  ]
+}

@@ -1013,6 +1013,7 @@ export const hyogoDetailSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,
     mainImageUrl: "/images/spots/wikimedia/shibayama-port.webp", imageAttribution: "Photo: kiwa dokokano / Wikimedia Commons (CC BY-SA 3.0)", images: [], rating: 3.8, reviewCount: 156, googleRating: 3.9, googleReviewCount: 17,
     catchableFish: [
+      { fish: fish("yariika"), monthStart: 1, monthEnd: 3, peakSeason: true, catchDifficulty: "medium", recommendedTime: "夜", method: "電気ウキ・エギング", source: "エギCOM 香住" },
       { fish: fish("kurodai"), monthStart: 5, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "フカセ釣り" },
       { fish: fish("aoriika"), monthStart: 4, monthEnd: 6, peakSeason: true, catchDifficulty: "medium", recommendedTime: "朝マヅメ", method: "エギング" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り" },

@@ -1,0 +1,87 @@
+{
+  "fish": "hiramasa",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "iki-gonoura-port",
+      "source": "アングラーズ 壱岐島",
+      "evidence": "壱岐島は磯・堤防からのショアヒラマサの全国区メッカ。アングラーズに壱岐島ヒラマサ専用釣果ページが実在 (https://anglers.jp/areas/453/fishes/43)。TSURINEWS『壱岐島は異次元の釣りの楽園 漁港で50cmアジに磯で1m超ヒラマサ狙える』(https://tsurinews.jp/242378/) でも裏取り。現在TOP30の#14ながらtier=fair(72.3)で、hiramasaエントリにsourceが無く+8を取り逃している(伊根湾アオリイカと同パターン)。dedup勝者(公開中)であることを確認済み。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "iki-katsumoto-kou-w6",
+      "source": "アングラーズ 壱岐島",
+      "evidence": "壱岐北端の勝本は壱岐ショアヒラマサの一級エリア。壱岐島コンシェルジュの釣果レポート『【壱岐】ショアからのヒラマサ狙い！堤防・地磯に通い込む』(https://ikiisland-concierge.com/information/catch-report/yellowtail-amberjack-autumn/) と完全攻略ガイドで堤防・地磯からの実績を確認。アングラーズ壱岐島エリアページも実在。hiramasaエントリ(spots-add6-west.ts:6355)にsource無し。dedup勝者(sw6323・公開中)確認済み。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "kanezaki-gyokou",
+      "source": "アングラーズ 玄界灘",
+      "evidence": "アングラーズのヒラマサまとめページ(https://anglers.jp/fishes/43)で『直近1ヶ月は玄界灘、響灘、外房、五島列島近海で釣れています』と玄界灘の現行実績を確認。鐘崎は宗像・玄界灘に面した好漁場でTOP30の#21ながらtier=fair(71.6)、hiramasaエントリ(spots-expand-kyushu.ts:433)にsource無し。dedup勝者(exp-k016・公開中)確認済み(a10版は敗者)。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "munakata-oshima-w6",
+      "source": "アングラーズ 玄界灘",
+      "evidence": "宗像大島は玄界灘ショアヒラマサの代表的な離島で、同島の別スポット(oshima-gyoko-teibo-munakata #2)はsource付きで92.8点。一方こちらの島全体スポットは#6(82.1)でhiramasaエントリ(spots-add6-west.ts:5236)にsource無く+8を取り逃し。アングラーズヒラマサまとめの直近実績地域『玄界灘』で裏取り。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "ikitsukijima-tateura-a10",
+      "source": "アングラーズ 生月",
+      "evidence": "生月島(平戸)は磯ヒラマサの全国的メッカで、同島のbulkスポット(nagasaki-ikitsuki-misaki-bulk #1)は『tsuriking 生月島』『アングラーズ 生月』sourceを既に保持し98.8点。舘浦港のこのエントリ(spots-add10-west.ts:2003)だけsource無しで#19 tier=fair(71.6)。dedup確認済み: 舘浦系4件中この勝者(ss10506・公開中)を含む3件が公開中、hiramasa保持の公開勝者はこのスポット。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "ikitsuki-bridge-w6",
+      "source": "アングラーズ 生月",
+      "evidence": "生月大橋周辺は生月島の定番ショアポイント。同島bulkスポットが『アングラーズ 生月』sourceを保持しており媒体実在は確認済み。現#3(90.3)だがhiramasaエントリ(spots-add6-west.ts:5873)にsource無しで+8未取得。名前一意でdedup重複なし。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "fukue-kou-w6",
+      "source": "アングラーズ 五島列島",
+      "evidence": "アングラーズのヒラマサまとめ(https://anglers.jp/fishes/43)で直近1ヶ月の実績地域に『五島列島近海』を確認。五島はショアヒラマサの全国区メッカだが、このエントリ(spots-add6-west.ts:5934)はsource無しで#30 tier=fair(63.8)まで沈んでいる。dedup勝者(sw6301・公開中)確認済み(goto-fukue-port等は敗者)。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "fukuejima-arakawa-a10",
+      "source": "アングラーズ 五島列島",
+      "evidence": "福江島・荒川港も五島列島の実績エリア内。アングラーズヒラマサまとめの直近実績『五島列島近海』で裏取り。エントリ(spots-add10-west.ts:1988)にsource無しで#29 tier=fair(64.1)。dedup勝者(ss10505・公開中)確認済み。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "kabeshima-gyokou-saga",
+      "source": "アングラーズ 玄界灘",
+      "evidence": "呼子・加部島は玄界灘に突き出た青物実績地。アングラーズヒラマサまとめの直近実績地域『玄界灘』で裏取り。エントリ(spots-add5-west.ts:584)はpeakSeason=trueながらsource無しで#20 tier=fair(71.6)。TOP30入りの公開スポット。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "tobishima-katsuura-kou",
+      "monthStart": 6,
+      "monthEnd": 10,
+      "peakSeason": true,
+      "catchDifficulty": "hard",
+      "recommendedTime": "朝夕マヅメ",
+      "method": "ショアジギング",
+      "source": "釣りビジョン 飛島",
+      "evidence": "山形県唯一の離島・飛島は近年1m超のヒラマサ報告がある日本海北部のショアヒラマサ名所。釣りビジョン番組『メタルバスター42 山形県飛島のヒラマサ』(https://www.fishing-v.jp/program/program_data.php?pcd=0321390)がショアからの飛島ヒラマサを特集しており媒体実在・実績とも確認済み。夏〜秋の夏マサ最盛期(https://fishingjapan.jp/fishing/26478)。現在DBの飛島勝浦港(dedup勝者se5010・公開中)は魚種6件にhiramasa自体が無く、山形県のヒラマサ件数が0のため県ごと欠落している。spotType=portだが飛島勝浦港は島釣りの拠点堤防で青物回遊があり矛盾しない。"
+    },
+    {
+      "action": "note",
+      "text": "【外房(千葉)が丸ごと欠落】prefCombosに千葉県が0件。房総半島は日本記録級ヒラマサが狙える全国区フィールドで(つり人社 https://web.tsuribito.co.jp/suburb/dekamasa_bousou)、魚速報に『外房、南房の大型青物ポイント～ヒラマサ、ブリの釣り場』(https://uosoku.com/sotonanooao/)、アングラーズ直近1ヶ月実績にも『外房』が明記。ただし実体は勝浦の黒鼻の磯(青物で有名・良型ヒラマサ実績、https://tsuriking.jp/fishing/2977 で確認)等の地磯で、黒鼻の磯はDB未収載→スポット新設トラックへ。既存の勝浦漁港/松部漁港/鵜原海岸は磯青物の主戦場と一致しないためadd-entryは見送り。外房エリアの湾レベル地域適性の新設・見直しを推奨。"
+    },
+    {
+      "action": "note",
+      "text": "【男鹿半島(秋田)】北限級ヒラマサ実績地として知られ秋田県は現在0件だが、今回の検索ではアングラーズ男鹿半島エリアページの存在は確認できたもののヒラマサ釣果の直接的な媒体実績を確認できなかった。add-entryは保留し追加調査を推奨。対象候補はoga-nyudozaki(男鹿半島入道崎、dedup勝者s150・rocky)。"
+    },
+    {
+      "action": "note",
+      "text": "【対馬・厳原港(#17 fair)と野母崎・樺島港(#16 fair)】いずれもヒラマサ著名地(野母崎はDB内他魚種で『アングラーズ 野母崎』source使用実績あり)だがsource無し。今回の検索ではこの2港のヒラマサ実績を直接確認できなかったため見送り。次回照合でsource付与を検討する価値が高い。"
+    },
+    {
+      "action": "note",
+      "text": "【日本海北部の適性過小の可能性】秋田0件・山形0件・青森1件。飛島で1m超、男鹿でも北限ヒラマサが知られる現状と乖離しており、庄内・飛島周辺(山形)および男鹿周辺(秋田)の県/湾レベル地域適性が未設定または過小と推定。飛島add-entry採用時に合わせて山形県・飛島周辺の適性値設定を推奨。"
+    }
+  ]
+}

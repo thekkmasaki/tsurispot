@@ -1,0 +1,97 @@
+{
+  "fish": "aoriika",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "yobuko-port",
+      "source": "エギCOM 呼子",
+      "evidence": "「イカの町」呼子。エギCOM呼子釣果情報(https://www.yamaria.com/community/catch/egiou/cities/211)で防波堤・磯から1kg〜2kg級のアオリイカ釣果を確認。勝者s495のaoriikaエントリ(9-12月)にsource無し、しかもpeakSeason:false。spotType:portでエギング対象として矛盾なし"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "iki-gonoura-port",
+      "source": "エギCOM 壱岐",
+      "evidence": "壱岐は全国区の離島エギング場。エギCOM壱岐釣果情報(https://www.yamaria.com/community/catch/egiou/cities/219)で防波堤からのアオリイカ釣果を確認。勝者s1124(壱岐島郷ノ浦港・魚種11件)のaoriikaエントリ(9-12月peak)にsource無し"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "tsushima-izuhara-w6",
+      "source": "エギCOM 対馬",
+      "evidence": "対馬は2kg〜3kg級の大型アオリイカ実績をエギCOM対馬釣果情報(https://www.yamaria.com/community/catch/egiou/cities/220)で確認。勝者sw6304(対馬・厳原港)のaoriikaエントリ(9-11月peak)にsource無し。エギングがmethod一覧に既載で矛盾なし"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "oki-saigo-port",
+      "source": "カンパリ 隠岐諸島",
+      "evidence": "カンパリの隠岐諸島アオリイカ陸っぱりページ(https://fishing.ne.jp/fishingpost/area/simane-okisyotou?fish=fish-aoriika)で実績確認。540g筆頭に2時間7杯の釣行記録も検索で確認。勝者s524(隠岐の島西郷港・魚種10件、説明文にも「秋はアオリイカ」)のaoriikaエントリ(9-11月peak)にsource無し"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "ena-gyokou",
+      "source": "カンパリ 和歌山県",
+      "evidence": "和歌山中紀・由良町衣奈は関西エギングの定番。カンパリ和歌山県アオリイカページ(https://fishing.ne.jp/fishingpost/area/wakayama?fish=fish-aoriika)で中紀(阿尾漁港・小浦漁港・由良)の陸っぱり釣果を確認。DB説明文自体が「アオリイカのメッカ。春は2kgオーバー」と記載しながら春(3-6月)・秋(9-11月)両エントリともsource無し"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "mera-gyokou-shizuoka",
+      "source": "アングラーズ 静岡",
+      "evidence": "南伊豆は静岡県内でイカがよく釣れる3大エリア(西伊豆・駿河湾・南伊豆)の一つとアングラーズ静岡イカページ(https://anglers.jp/prefectures/22/fishes/3)で確認。エギCOMも伊豆エリアの釣果を毎日更新。妻良漁港sk4072のaoriikaエントリ(9-1月peak)にsource無し"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "yobuko-port",
+      "monthStart": 4,
+      "monthEnd": 6,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "朝夕マヅメ",
+      "method": "エギング",
+      "source": "エギCOM 呼子",
+      "evidence": "呼子の現エントリは9-12月の秋イカのみ。玄界灘沿岸は春の親イカ(キロアップ)が本番で、エギCOM呼子に1kg〜2kg級(春親イカサイズ)の釣果が掲載されている。「イカの町」で春イカエントリが無いのは明確な季節欠落"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "oga-nyudozaki",
+      "monthStart": 9,
+      "monthEnd": 11,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "朝夕マヅメ",
+      "method": "エギング",
+      "source": "カンパリ 男鹿半島",
+      "evidence": "男鹿半島は「東北の新アオリイカフィールド」としてSHIMANO公式記事(fish.shimano.com 2025)で紹介され、カンパリ男鹿半島(https://fishing.ne.jp/fishingpost/area/akita-oga)・エギCOM男鹿(cities/36)で釣果確認。入道崎は秋イカ有名ポイント(椿・門前・戸賀・入道崎・北浦)の筆頭格だがaoriikaエントリ自体が無い。spotType:rockyでエギングと矛盾なし。9-11月に300-500gの数釣り"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "oga-toga",
+      "monthStart": 9,
+      "monthEnd": 11,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "朝夕マヅメ",
+      "method": "エギング",
+      "source": "エギCOM 男鹿",
+      "evidence": "戸賀漁港は男鹿の秋イカ有名ポイント群(椿・門前・戸賀・入道崎・北浦)の一つ。エギCOM男鹿釣果情報(https://www.yamaria.com/community/catch/egiou/cities/36)で釣果確認。現エントリはメバル・クロソイのみでaoriika欠落。spotType:port"
+    },
+    {
+      "action": "note",
+      "text": "秋田県の県適性が過小の疑い。aoriikaエントリはakita:2件のみ(男鹿の名所群spots-add10〜12-northにaoriikaゼロ)だが、男鹿半島はSHIMANO公式が「新たなアオリイカフィールド・東北ティップエギング先進地」と特集し、カンパリ・エギCOMに実績多数。温暖化で秋イカ北限が北上しており、秋田日本海側(男鹿)の地域適性を1段引き上げ、椿漁港(oga-tsubaki-port-a10)・北浦漁港(kitaura-akita-port-a10/oga-kitaura-port-a11は実質重複、要dedup)等へのエントリ追加も検討すべき"
+    },
+    {
+      "action": "note",
+      "text": "壱岐は春イカadd-entryを提案しない。壱岐市公式(city.iki.nagasaki.jp)がアオリイカ産卵期の自主禁漁を告知しており、春エントリ追加はルール面で不適切。むしろ壱岐スポット群のrules/safetyNotesに自主禁漁期間の注記を追加するのが望ましい"
+    },
+    {
+      "action": "note",
+      "text": "見島(hagi-mishima-port, 山口県萩市)はaoriikaエントリ(9-12月)ありsource無し。全国区の離島エギング遠征地として知られるが、今回の検索では見島固有の釣果媒体掲載を直接確認できなかったため保留。次回「見島 アオリイカ 釣果 カンパリ」等で裏取りしてからadd-source推奨"
+    },
+    {
+      "action": "note",
+      "text": "音海大波止(otomi-oohato, 福井県高浜町)は検索で「エギングの聖地・音海学校裏」と呼ばれる若狭内浦湾の全国区波止と確認(個人釣行ブログのみヒット)。春(4-6)・秋(9-11)両エントリともsource無し。カンパリ福井/エギCOM若狭での実績確認が取れ次第add-source推奨"
+    },
+    {
+      "action": "note",
+      "text": "現TOP(saga-genkai-chigazaki-bulk 97.4 / ine-kanjagahana-todai 96.9)との乖離: 全国的知名度では呼子・壱岐・対馬が伊根と同格以上のアオリイカ聖地だが、いずれもsource欠落で+8点を取り逃してTOP30圏外または下位。上記add-source反映後は呼子港・郷ノ浦港・厳原港が95点前後まで上がり、知名度と順位の整合が取れる見込み。伊根を超える明確な出典裏付けを持つ単独スポットは今回確認できず(呼子はエギCOM専用ページを持つ点で伊根と同等の裏付け強度)"
+    }
+  ]
+}

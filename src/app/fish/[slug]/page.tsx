@@ -668,15 +668,11 @@ export default async function FishDetailPage({ params }: PageProps) {
       {/* 釣れるスポット一覧（現在地ソート対応） */}
       {fish.spots.length > 0 && (() => {
         // クライアントコンポーネントに渡すデータを軽量化（最大30件、不要フィールド除去）。
-        // fish.spots はデータファイルの結合順のままなので、切り出す前に評価順
-        // （rating × log(reviewCount+1)）へ並べ替える。これをしないと位置情報未許可時の
-        // 既定表示が「たまたまファイル先頭にある県」で埋まる（2026-08 UX監査の実バグ）。
+        // fish.spots は getFishSpeciesWithSpots() が釣れる度スコア
+        // （地域適性=漁獲量/実績 + 地形適性 + 旬/出典/評価。fish-aptitude 参照）の
+        // 降順でソート済み。catchScore はサーバー内専用で lightSpots には含めない。
         const MAX_CLIENT_SPOTS = 30;
-        const catchScore = { excellent: 2, good: 1, fair: 0 } as const;
-        const scored = [...fish.spots].sort(
-          (a, b) =>
-            b.rating + catchScore[b.catchRating] - (a.rating + catchScore[a.catchRating]),
-        );
+        const scored = fish.spots;
         const lightSpots = scored.slice(0, MAX_CLIENT_SPOTS).map(s => ({
           id: s.id,
           name: s.name,

@@ -37,6 +37,7 @@ import {
 } from "@/lib/data/monthly-guides";
 import { fishSpecies } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
+import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { getSeasonByMonth } from "@/lib/data/seasonal-data";
 import { getMonthlyRigs } from "@/lib/data/monthly-rigs";
@@ -161,6 +162,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
   const allSpotsForMonth = fishingSpots
     .filter((spot) =>
       spot.catchableFish.some((cf) => {
+        if (!isFishListedAtSpot(spot, cf.fish.slug)) return false; // 釣れる度ゲート
         const start = cf.monthStart;
         const end = cf.monthEnd;
         if (start <= end) {
@@ -270,8 +272,10 @@ export default async function MonthlyGuidePage({ params }: Props) {
   const monthMethods = new Set<string>();
   for (const fish of displayFish) {
     if (!fish) continue;
-    const spots = fishingSpots.filter((s) =>
-      s.catchableFish.some((cf) => cf.fish.slug === fish.slug)
+    const spots = fishingSpots.filter(
+      (s) =>
+        s.catchableFish.some((cf) => cf.fish.slug === fish.slug) &&
+        isFishListedAtSpot(s, fish.slug) // 釣れる度ゲート
     );
     for (const spot of spots) {
       for (const cf of spot.catchableFish) {
@@ -829,6 +833,7 @@ export default async function MonthlyGuidePage({ params }: Props) {
                 region: { prefecture: spot.region.prefecture },
                 catchableFishNames: spot.catchableFish
                   .filter((cf) => {
+                    if (!isFishListedAtSpot(spot, cf.fish.slug)) return false; // 釣れる度ゲート
                     const start = cf.monthStart;
                     const end = cf.monthEnd;
                     if (start <= end) {

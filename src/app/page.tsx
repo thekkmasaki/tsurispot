@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { fishingSpots } from "@/lib/data/spots";
+import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import { fishSpecies, getCatchableNow } from "@/lib/data/fish";
 import { getLatestBlogPostsAsync, BLOG_CATEGORIES } from "@/lib/data/blog";
 import { monthSlugs } from "@/lib/data/monthly-guides";
@@ -731,6 +732,7 @@ export default async function Home() {
         const seasonalSpots = fishingSpots
           .filter((spot) =>
             spot.catchableFish.some((cf) => {
+              if (!isFishListedAtSpot(spot, cf.fish.slug)) return false; // 釣れる度ゲート
               if (cf.monthStart <= cf.monthEnd) {
                 return cf.monthStart <= currentMonth && cf.monthEnd >= currentMonth;
               }

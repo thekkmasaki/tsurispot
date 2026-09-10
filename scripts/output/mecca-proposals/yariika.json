@@ -1,0 +1,87 @@
+{
+  "fish": "yariika",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "hakodate-kita-futo",
+      "source": "エギCOM 函館",
+      "evidence": "現行エントリ(1-5月peak)はsource無しで+8を取り逃し。エギCOM函館釣果情報ページが存在し道南のイカ釣果が集積(https://www.yamaria.com/community/catch/egiou/cities/1)。函館地元ブログ「道南の函館の漁港（堤防）で餌木とテーラで狙うイカ釣り日記」(https://hakodatezin.com/ika/post-5823/)でも函館港堤防のヤリイカ実績を確認。道南岸ヤリの代表格でTOP3にいるのにsource無しは不整合。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "matsumae-ko",
+      "monthStart": 1,
+      "monthEnd": 3,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "夜",
+      "method": "エサ巻きテーラのウキ釣り・エギング",
+      "source": "つり人WEB 松前港",
+      "evidence": "つり人WEBに松前港単体のヤリイカ特集記事あり(https://web.tsuribito.co.jp/suburb/yariika-matsu1704)。『魚影・サイズとも実績充分、胴長40cmパラソル級、シーズン1〜3月、エサ巻きテーラのウキ釣りかエギング』と明記される全国区の岸ヤリイカのメッカ。しかし勝者ブロック(matsumae-ko, s963, 魚種7件)にヤリイカエントリ自体が無く、TOP30に松前が不在なのは明確な欠落。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "enoura-gyokou",
+      "monthStart": 1,
+      "monthEnd": 3,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "夜",
+      "method": "電気ウキ(エサ巻きスッテ)・エギング",
+      "source": "ORETSURI 江之浦",
+      "evidence": "ORETSURI「真冬の相模湾、堤防ヤリイカ釣りをやってみた」(https://oretsuri.com/sagamiwan-yariika)と江之浦漁港釣り場解説(https://oretsuri.com/enoura)で、厳冬期1〜3月に産卵接岸・防波堤先端が中心・電気ウキのエサ巻きスッテや小型エギで狙うと明記。アングラーズ神奈川ヤリイカページ(https://anglers.jp/prefectures/14/fishes/106)・魚速報神奈川ヤリイカも実績を掲載。関東圏で唯一級の岸ヤリ名所なのに勝者ブロック(enoura-gyokou)にエントリが無く、現TOP30に太平洋側の関東スポットがゼロなのは欠落。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "noto-ushitsu-kou",
+      "monthStart": 12,
+      "monthEnd": 3,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "夜",
+      "method": "電気ウキ・エギング",
+      "source": "魚速報 能登半島",
+      "evidence": "魚速報の宇出津港釣り場情報(https://uosoku.com/home/hokuriku/ishikawa/ushitu/)に海づり公園護岸からヤリイカが釣れると明記。能登半島の釣期は12〜3月で、魚速釣果検索でも2026-02-28に能登内浦の堤防でウキ釣り・エギングのヤリイカ釣果を確認。現在TOP30に石川県がゼロ件(富山・滑川のみ)で、北陸の岸ヤリ代表地・能登内浦が不在なのは欠落。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "shibayama-port",
+      "monthStart": 1,
+      "monthEnd": 3,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "夜",
+      "method": "電気ウキ・エギング",
+      "source": "エギCOM 香住",
+      "evidence": "エギCOM香住釣果情報ページが存在(https://www.yamaria.com/community/catch/egiou/cities/138)し、魚速釣果検索の香住/柴山エリア(https://plus.uosoku.com/search?er=27.0&lo=%E9%A6%99%E4%BD%8F)で2026年2月の柴山港ヤリイカ釣果を確認。但馬海岸の冬ヤリ電気ウキ釣りの代表港なのに勝者ブロック(shibayama-port, sh029)にヤリイカエントリが無い。兵庫県は現在TOP30で但馬・諸寄港1件のみで香住・柴山圏が空白。"
+    },
+    {
+      "action": "note",
+      "text": "【最重要・source一括是正候補】現行TOP30のうちsourceを持つのは1位の八戸館鼻岸壁(アングラーズ)のみで、2位美保関・4位境港・5位境水道五幹・7位鳥取賀露港など山陰の有名処を含む残り全てがsource無し(+8未取得)。今回の検索では美保関港はアオリイカ実績(かめや釣具山陰釣果 kameya-choka.com/sanin、魚速報美保関港 uosoku.com/home/cyuu/shimane/miho/)までしか個別確認できなかったためadd-sourceは見送り。かめや釣具山陰釣果・エギCOM山陰で1件ずつ裏取りの上、山陰上位勢への一括add-sourceを別途実施すべき。"
+    },
+    {
+      "action": "note",
+      "text": "【季節データ異常】esashi-ko(江差港)とsetana-gyoko(せたな港)のヤリイカエントリがmonthStart:6, monthEnd:9, peakSeason:falseになっている。ヤリイカは冬〜早春(1〜3月)に産卵接岸する冬イカで、道南の6〜9月設定はスルメイカ(マイカ)との混同の疑いが濃厚。つり人WEBの松前港記事(シーズン1〜3月)とも矛盾するため、1〜3月・peakSeason:trueへの修正を推奨。修正すればスコアの旬加点も適正化される。"
+    },
+    {
+      "action": "note",
+      "text": "【dedup誤統合】愛媛県伊予郡松前町の松前港(まさきこう, sw6209 masaki-kou-ehime-w6, 33.81N)が、名前の文字列一致だけで北海道松前港(matsumae-ko, 41.42N)の敗者としてdedupリダイレクトされている。読みも県も異なる別スポットの誤統合であり、dedupロジックに都道府県/距離チェックを入れるべき。"
+    },
+    {
+      "action": "note",
+      "text": "【別名重複が公開中】(1)江之浦漁港(enoura-gyokou)と江之浦港(enoura-port)、(2)柴山港(shibayama-port)と柴山漁港(shibayama-gyokou-hyogo)、(3)能登・宇出津港(noto-ushitsu-kou)と宇出津港(ushitsu-kou-a9)は、それぞれ同一港が名前違いで両方勝者として公開されている。dedupは名前完全一致ベースのため取りこぼしている。今回のadd-entryは各組の主要側(enoura-gyokou/shibayama-port/noto-ushitsu-kou)に付けたが、名寄せ統合を推奨。"
+    },
+    {
+      "action": "note",
+      "text": "【スポット新設候補】津軽海峡側の木古内・知内エリアはDBに岸釣りスポットが存在しない(「木古内/知内」の検索ヒットは琵琶湖の知内浜のみ)。松前港と並ぶ道南冬ヤリイカの実績エリアのため、木古内港・知内町小谷石漁港などの新設を検討。"
+    },
+    {
+      "action": "note",
+      "text": "【次回検証候補】秋田・男鹿半島はTOP30にゼロ件だが、釣り東北WEBに「エサとエギの二刀流！秋田ヤリイカはこう狙え！」(https://tsuri-tohoku.com/8631/)という岸ヤリ特集があり、北浦漁港・入道崎周辺は実績地として知られる。今回スポット単位の釣果裏取りが未了のためadd-entryは見送るが、北浦漁港は kitaura-akita-port-a10 と oga-kitaura-port-a11 の別名重複もあるため、名寄せと合わせて次回検証を推奨。"
+    },
+    {
+      "action": "note",
+      "text": "【spotType整合確認】今回提案した5スポットは全てspotType: port(漁港・岸壁)で、夜行性・冬季接岸のヤリイカ(夜の堤防釣り)と矛盾なし。江之浦漁港は24時間釣り可・夜釣り人気の記載も確認済み。"
+    }
+  ]
+}

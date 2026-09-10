@@ -20,6 +20,7 @@ import { MONTHS, MONTH_CONDITIONS } from "@/lib/data/fishing-methods";
 import { prefectures } from "@/lib/data/prefectures";
 import { fishSpecies, getFishSeasons } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
+import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import type { RegionSlug } from "@/types";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
 import { InArticleAd } from "@/components/ads/ad-unit";
@@ -154,6 +155,7 @@ export async function generateMetadata({
   for (const spot of fishingSpots) {
     if (!metaRegionPrefNames.has(spot.region.prefecture)) continue;
     for (const cf of spot.catchableFish) {
+      if (!isFishListedAtSpot(spot, cf.fish.slug)) continue; // 釣れる度ゲート
       if (getFishSeasons(cf.fish, metaRSlug).seasonMonths.includes(monthDef.num)) {
         metaInSeasonFish.set(cf.fish.id, cf.fish.name);
       }
@@ -220,6 +222,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
 
   for (const spot of regionSpots) {
     for (const cf of spot.catchableFish) {
+      if (!isFishListedAtSpot(spot, cf.fish.slug)) continue; // 釣れる度ゲート
       const seasons = getFishSeasons(cf.fish, rSlug);
       if (!seasons.seasonMonths.includes(monthDef.num)) continue;
       const existing = fishMap.get(cf.fish.slug);
@@ -255,6 +258,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
         s.catchableFish.some(
           (cf) =>
             cf.fish.slug === fishSlug &&
+            isFishListedAtSpot(s, fishSlug) && // 釣れる度ゲート
             getFishSeasons(cf.fish, rSlug).seasonMonths.includes(monthDef!.num)
         )
       )
@@ -270,6 +274,7 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
     const counts = new Map<string, number>();
     for (const spot of regionSpots) {
       if (!spot.catchableFish.some((cf) => cf.fish.slug === fishSlug)) continue;
+      if (!isFishListedAtSpot(spot, fishSlug)) continue; // 釣れる度ゲート（県×魚リンク先と整合）
       const pref = regionPrefs.find((p) => p.name === spot.region.prefecture);
       if (!pref) continue;
       counts.set(pref.slug, (counts.get(pref.slug) || 0) + 1);
@@ -291,11 +296,15 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
   // 旬の魚が釣れるスポット全件を先に確定し、件数(inSeasonSpotCount)をFAQ統計に使う。
   const inSeasonSpots = regionSpots
     .map((spot) => {
-      const inSeasonCount = spot.catchableFish.filter((cf) =>
-        getFishSeasons(cf.fish, rSlug).seasonMonths.includes(monthDef.num)
+      const inSeasonCount = spot.catchableFish.filter(
+        (cf) =>
+          isFishListedAtSpot(spot, cf.fish.slug) &&
+          getFishSeasons(cf.fish, rSlug).seasonMonths.includes(monthDef.num)
       ).length;
-      const peakCount = spot.catchableFish.filter((cf) =>
-        getFishSeasons(cf.fish, rSlug).peakMonths.includes(monthDef.num)
+      const peakCount = spot.catchableFish.filter(
+        (cf) =>
+          isFishListedAtSpot(spot, cf.fish.slug) &&
+          getFishSeasons(cf.fish, rSlug).peakMonths.includes(monthDef.num)
       ).length;
       return { spot, inSeasonCount, peakCount };
     })
@@ -612,7 +621,11 @@ export default async function SeasonalMonthRegionPage({ params }: PageProps) {
           mainImageUrl: spot.mainImageUrl,
           region: { prefecture: spot.region.prefecture },
           catchableFishNames: spot.catchableFish
-            .filter((cf) => getFishSeasons(cf.fish, rSlug).seasonMonths.includes(monthDef!.num))
+            .filter(
+              (cf) =>
+                isFishListedAtSpot(spot, cf.fish.slug) &&
+                getFishSeasons(cf.fish, rSlug).seasonMonths.includes(monthDef!.num)
+            )
             .map((cf) => cf.fish.name)
             .slice(0, 3),
         }));

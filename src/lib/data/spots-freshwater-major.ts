@@ -451,7 +451,7 @@ export const freshwaterSpotsMajor: FishingSpot[] = [
     description: "十和田湖西岸の子ノ口エリア。奥入瀬渓流の起点にあたり、ヒメマスやイワナの好ポイント。透明度の高い湖水で、秋の紅葉シーズンは絶景。ボート釣りで湖の中心部を攻めれば大型ヒメマスのチャンスも。",
     latitude: 40.4539, longitude: 140.8711, address: "〒018-5501 青森県十和田市奥瀬十和田湖畔",
     accessInfo: "東北自動車道十和田ICから約1時間。JR新青森駅からバスで約3時間。",
-    region: lr("r4080"), spotType: "river", difficulty: "intermediate",
+    region: lr("r4080"), spotType: "lake", difficulty: "intermediate",
     isFree: false, feeDetail: "遊漁券（日券）大人700円",
     hasParking: true, parkingDetail: "子ノ口駐車場（無料）",
     hasToilet: true, hasConvenienceStore: false, hasFishingShop: false, hasRentalRod: false,

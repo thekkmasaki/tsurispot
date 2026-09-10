@@ -1,0 +1,97 @@
+{
+  "fish": "hirame",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "kashimanada-surf",
+      "source": "アングラーズ 鹿島灘",
+      "evidence": "日本を代表するヒラメサーフ・鹿島灘の中核スポット（勝者slug確認済み、dedup-winnerでse5080が公開中）。アングラーズに鹿島灘のヒラメ専用釣果ページがあり直近1ヶ月もヒラメ釣果継続 (https://anglers.jp/areas/171/fishes/13)。TSURI HACKにも鹿島灘サーフ攻略特集あり (https://tsurihack.com/5941)。hirameエントリ(10-3月peak)にsourceが無く+8点を取り逃している。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "kashima-surf-e8",
+      "source": "アングラーズ 鹿島灘",
+      "evidence": "鹿島サーフ（鹿嶋市側）。アングラーズ鹿島灘エリアのヒラメ釣果ページ (https://anglers.jp/areas/171/fishes/13) ときたかんナビの鹿島灘サーフヒラメ攻略記事 (https://kitakan-navi.jp/archives/252230) で岸釣り実績を確認。hirameエントリ(9-1月peak)にsource無し。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "kamisu-hasaki-surf",
+      "source": "アングラーズ 鹿島灘",
+      "evidence": "鹿島灘サーフ南端・波崎エリア。大洗〜波崎の鹿島灘一帯はヒラメ・マゴチの全国区フィールドとしてアングラーズ釣果 (https://anglers.jp/areas/171/fishes/13)・TSURI HACK特集 (https://tsurihack.com/5941) で確認。hirameエントリ(10-3月peak)にsource無し。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "kujukuri-katakai-e8",
+      "source": "アングラーズ 九十九里浜",
+      "evidence": "九十九里・片貝はサーフヒラメの超有名エリア。アングラーズに九十九里浜のヒラメ専用釣果ページあり (https://anglers.jp/areas/644/fishes/13)。hirameエントリ(9-12月peak)にsource無し。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "ichinomiya-surf",
+      "source": "アングラーズ 九十九里浜",
+      "evidence": "一宮海岸は九十九里南部の定番ヒラメサーフ。アングラーズ九十九里浜ヒラメ釣果ページ (https://anglers.jp/areas/644/fishes/13) で実績確認。hirameエントリ(10-3月peak)にsource無し。※同スポットにhirameエントリが同一内容で2件重複登録されている点も要修正（notes参照）。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "enshuunada-nakatajima-sakyu",
+      "source": "TSURINEWS 遠州灘・中田島砂丘",
+      "evidence": "遠州灘は全長約60kmの日本屈指のヒラメサーフで中田島砂丘はその代表ポイント。TSURINEWSに中田島砂丘での60cmヒラメ釣果記事 (https://tsurinews.jp/32997/)、ルアマガ+に高木孝の遠州灘秋ヒラメポイントガイド (https://plus.luremaga.jp/2018/10/29/53988/)。hirameエントリ(10-3月peak)にsource無し。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "omaezaki-surf",
+      "source": "ルアマガ+ 遠州灘",
+      "evidence": "御前崎は遠州灘東端の有名ヒラメサーフ。ルアマガ+の遠州灘秋ヒラメおすすめサーフガイド (https://plus.luremaga.jp/2018/10/29/53988/) と遠州灘サーフ全ポイントガイド (https://hama-angler.com/archives/22418) で御前崎までの実績を確認。hirameエントリ(10-3月peak)にsource無し。"
+    },
+    {
+      "action": "note",
+      "text": "【registry未登録】三沢市淋代海岸(spots-add13-north.ts)はspots-registry.tsに未登録で本番非公開。登録の是非は別トラックで判断。元提案: 三沢サーフ（淋代〜高瀬川河口）は座布団ヒラメで全国区の青森太平洋側メッカ。アングラーズに高瀬川河口（三沢）の専用エリアページあり (https://anglers.jp/areas/633)、三沢サーフ2024釣り情報でもヒラメ・シーバス・青物の実績確認 (https://nobunobu-blog.com/misawa-surf-fishing-2024/)。現エントリはpeakSeason:false・hard・source無しで、メッカとしては過小評価。source付与と合わせpeakSeason見直しも検討価値あり。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "joetsu-tanihama-kaigan-a13",
+      "source": "カンパリ 上越",
+      "evidence": "上越・谷浜海岸は上越サーフヒラメの定番エントリーポイント（dedup-winnerで公開中確認、tanihama-kaigan-e8とは別名別スポットとして両方公開中）。カンパリに上越（上越市）のヒラメ陸っぱり釣果ページあり (https://fishing.ne.jp/fishingpost/area/niigata-jyoetu?fish=fish-hirame)。hirameエントリ(9-12月)にsource無し。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "jogehama-kaigan-a11",
+      "monthStart": 4,
+      "monthEnd": 11,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "朝夕マヅメ",
+      "method": "サーフルアー",
+      "source": "アングラーズ 上下浜",
+      "evidence": "上下浜は上越サーフヒラメの代表ポイントでアングラーズに専用エリアページがあり、直近もヒラメ・サワラ等の釣果が記録されている (https://anglers.jp/areas/3823)。カンパリ上越ヒラメページ (https://fishing.ne.jp/fishingpost/area/niigata-jyoetu?fish=fish-hirame) でも裏付け。現状catchableFishがキス・マゴチのみでヒラメが完全欠落しており、マゴチが居てヒラメが居ないのは上越サーフの実態と矛盾。spotType:beachとも整合。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "naoetsu-port",
+      "monthStart": 4,
+      "monthEnd": 11,
+      "peakSeason": false,
+      "catchDifficulty": "medium",
+      "recommendedTime": "朝マヅメ",
+      "method": "ルアー・泳がせ釣り",
+      "source": "カンパリ 上越",
+      "evidence": "直江津港（勝者slug=naoetsu-port、dedup-winnerでs444公開中を確認）は上越ヒラメの拠点港で、隣接するハッピーフィッシング直江津第3東防波堤はヒラメ泳がせの有名釣り場 (https://anglers.jp/areas/1218/users)。カンパリ上越ヒラメページ (https://fishing.ne.jp/fishingpost/area/niigata-jyoetu?fish=fish-hirame) で陸っぱり実績確認。現状11魚種登録済みだがヒラメが欠落。港でも砂底隣接岸壁のためspotType:portと矛盾しない。"
+    },
+    {
+      "action": "note",
+      "text": "【乖離所見】現TOP7は青森・日本海側スポット(88点台)が独占する一方、全国的知名度で勝る鹿島灘・九十九里・遠州灘のメッカ勢は77〜79点に留まる。主因は各メッカのhirameエントリのsource欠落(+8点)であり、上記add-source 9件を適用すればこれらは85〜87点となり実態と整合する。地域適性値(県/湾レベル)自体の調整は現時点では不要と判断。"
+    },
+    {
+      "action": "note",
+      "text": "【スポット新設候補】高瀬川河口（三沢）がDB未収載（grepでヒットするのは長野県の高瀬川のみ）。アングラーズに専用エリアページ (https://anglers.jp/areas/633) を持つ青森太平洋側の全国区ヒラメ・サーフポイントであり、スポット新設トラックでの追加を推奨。"
+    },
+    {
+      "action": "note",
+      "text": "【データバグ】ichinomiya-surf（一宮海岸（サーフ）、src/lib/data/spots-chiba-shizuoka-detail.ts:447付近）のcatchableFishにhirameエントリが同一内容で2件重複している。片方の削除を推奨。"
+    },
+    {
+      "action": "note",
+      "text": "【裏取り保留】柿崎海岸（上越）kakizaki-kaigan-joetsu-a12 はhirameエントリ自体が無い。上越エリア全体のヒラメ実績はカンパリで確認済みだが柿崎個別の釣果裏取りは今回未実施のためadd-entryは保留。上越サーフの有名ポイントであり次回照合候補。三沢漁港（勝者misawa-gyokou6）もhirame無しだがspotType:portの港内主体でありサーフ実績を安易に流用しないため保留。"
+    }
+  ]
+}

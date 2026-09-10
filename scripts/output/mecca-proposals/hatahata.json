@@ -1,0 +1,101 @@
+{
+  "fish": "hatahata",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "kitaura-ko",
+      "source": "アングラーズ 男鹿半島",
+      "evidence": "現TOP1(89.8)の北浦港。アングラーズに男鹿半島ハタハタ専用釣果ページがあり最新投稿2025年1月を確認(https://anglers.jp/areas/656/fishes/404)。北浦地区は季節ハタハタ初水揚げの報道もある(https://www.navitabi.jp/article/8303)。ハタハタ聖地の筆頭なのにsource無しで+8を取り逃している。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "kitaura-gyokou-akita",
+      "source": "アングラーズ 男鹿半島",
+      "evidence": "北浦漁港(勝者slug、dedup-winner確認済み)。「12月にサビキでハタハタ、シーズンは防波堤満杯」との実績がアングラーズ・テラス等でも確認できる(https://fishing.minnahiroba.com/content/5273、https://anglers.jp/areas/656/fishes/404)。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "oga-toga",
+      "source": "アングラーズ 男鹿半島",
+      "evidence": "現TOP2(89.8)の戸賀漁港(勝者確認済み)。男鹿半島エリアのハタハタ釣果はアングラーズで通年蓄積されている(https://anglers.jp/areas/656/fishes/404)。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "funakawa-port",
+      "source": "アングラーズ 男鹿半島",
+      "evidence": "船川港(勝者slug確認済み、funakawa-kou6等は敗者)。説明文にも「冬場のハタハタ接岸は風物詩」とあり、男鹿半島ハタハタ釣果ページで裏付け可能(https://anglers.jp/areas/656/fishes/404)。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "oga-wakimoto-port-a11",
+      "source": "アングラーズ 男鹿半島",
+      "evidence": "脇本漁港(勝者確認済み)。男鹿半島東岸の接岸ポイントとして同エリア釣果ページでカバーされる(https://anglers.jp/areas/656/fishes/404)。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "hachimori-gyokou6",
+      "source": "魚速報 八森漁港",
+      "evidence": "八森漁港(dedup勝者確認済み。hachimori-gyokou/hachimori-port-a10等は敗者)。魚速報に八森漁港の釣り場・釣果ページあり(https://uosoku.com/home/touhoku/akita/hachimori/)。八森は季節ハタハタ水揚げ報道の常連(https://www.navitabi.jp/article/8303)。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "happo-hachimori-breakwater-a11",
+      "source": "魚速報 八森漁港",
+      "evidence": "八峰町八森漁港外堤防(勝者確認済み、現TOP6)。八森漁港と同一水域で、魚速報の八森漁港ページ(https://uosoku.com/home/touhoku/akita/hachimori/)が実績出典になる。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "noshiro-north-breakwater-a11",
+      "source": "つり具の上州屋 秋田(東北日本海ハタハタ釣り情報)",
+      "evidence": "能代港北堤防(勝者確認済み、現TOP10)。上州屋が「東北日本海ハタハタ釣り!実績抜群の専用仕掛けを秋田、山形、他各店にて販売」と秋田沿岸の岸ハタハタ実績を明記(https://www.johshuya.co.jp/news/detail.php?no=131467)。能代は八森と並ぶ県北の接岸地。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "sakata-ko",
+      "source": "つり具の上州屋 酒田店",
+      "evidence": "酒田港(dedup勝者確認済み、sakata-kou/sakata-port等は敗者。現TOP21で山形勢が過小)。上州屋酒田店の釣果情報ページ(https://www.johshuya.co.jp/shop/choka.php?s=81)と、酒田北港のハタハタポイント解説記事(https://fucuco.com/fishing-yamagata-sakata/)で裏付け。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "nezugaseki-ko",
+      "source": "釣具の館 酒田店 釣果ブログ",
+      "evidence": "鼠ヶ関港(dedup勝者確認済み、nezugaseki-kou×3等は敗者。現TOP20)。地元釣具店の釣果情報で「冬はハタハタのポイント」と確認(https://turigunoyakatasakata.com/page4、上州屋酒田店にも鼠ヶ関釣果掲載)。庄内の代表的接岸地なのにsource無し。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "noshiro-port",
+      "monthStart": 11,
+      "monthEnd": 1,
+      "peakSeason": true,
+      "catchDifficulty": "easy",
+      "recommendedTime": "夜",
+      "method": "サビキ釣り",
+      "source": "つり具の上州屋 秋田(東北日本海ハタハタ釣り情報)",
+      "evidence": "能代港の勝者slug(s433、dedup-winner確認済み)にhatahataエントリが無い一方、敗者のnoshiro-kou/noshiro-kou6/noshiro-port-a10は全てhatahata持ち。dedup統合で本命の勝者からハタハタが欠落した明確な取りこぼし。能代港は冬の接岸で有名(https://www.johshuya.co.jp/news/detail.php?no=131467)。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "oga-kitaura-port",
+      "monthStart": 11,
+      "monthEnd": 1,
+      "peakSeason": true,
+      "catchDifficulty": "easy",
+      "recommendedTime": "夜",
+      "method": "サビキ釣り",
+      "source": "アングラーズ 男鹿半島",
+      "evidence": "「男鹿半島北浦漁港」の勝者slug(s247)にhatahataが無い(敗者oga-kitaura-port-a11はhatahata持ち)。北浦地区は季節ハタハタ水揚げ報道の本場(https://www.navitabi.jp/article/8303)であり、同名系のkitaura-ko/kitaura-gyokou-akitaが全てhatahata持ちなのに当スポットだけ欠落しているのは不整合。"
+    },
+    {
+      "action": "note",
+      "text": "全体異常: DB内のhatahataエントリ53件(重複含む)のうちsource付きが0件。ハタハタは全魚種の中でも産地が明確(秋田県魚)なのに出典+8を全スポットが取り逃しており、TOP30全員がsource無しという状態。まず上記の男鹿・八森・能代・庄内の10件から是正を推奨。"
+    },
+    {
+      "action": "note",
+      "text": "北海道日本海側の欠落: 石狩湾新港(ishikari-shinko-east-a10等)・小樽港(otaru-minami-bouchatei6等)は冬のハタハタ接岸で知られるがhatahataエントリ自体が無い。ただし今回のWebSearch(アングラーズ石狩湾新港・小樽港ページ)では直近釣果にハタハタを直接確認できなかったため、add-entryは保留。12月の現地釣果(アングラーズ/カンパリ石狩湾新港ページ)を確認できた時点での追加を推奨。現TOP30の北海道枠が留萌港南岸壁と紋別港第3埠頭のみというのは実態とずれている可能性が高い。なお紋別はオホーツク側であり、日本海側(石狩・小樽・岩内)より優先度が高い現状はやや不自然。"
+    },
+    {
+      "action": "note",
+      "text": "新潟・上越: 直江津港第3東防波堤は管理釣り場で11月〜2月は閉鎖・立入禁止(https://happyfishing-n.jp/)のため、ハタハタ接岸期のadd-entryは不可(提案せず)。上越エリア一般の岸ハタハタ実績も今回の検索では裏取りできず。既存のnadachi-kou-niigata(名立港、12〜2月)エントリは維持でよいが出典未確認のまま。また千葉・鴨川漁港(kamogawa-port)のhatahata(peakSeason:true)は太平洋側南部で分布的に不自然、福島・小名浜港(fukushima-soma-iwaki)も岸釣り実績が確認できないため、両者は削除または要検証としたい。spotType面では今回の提案対象は全てport/breakwater/surfで矛盾なし。"
+    }
+  ]
+}

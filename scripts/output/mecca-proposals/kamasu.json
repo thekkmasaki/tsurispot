@@ -1,0 +1,105 @@
+{
+  "fish": "kamasu",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "hayakawa-kou",
+      "source": "アングラーズ 相模湾",
+      "evidence": "相模湾はアカカマス(大型は50cm前後)の冬の看板ターゲットで、早川港はその拠点港。アングラーズ「相模湾で釣れたカマス」ページ(https://anglers.jp/areas/152/fishes/25)および釣りビジョン「相模湾の冬の人気ターゲット・カマスが開幕」(https://www.fishing-v.jp/premium/181_2.html)で実績確認。既存kamasuエントリ(9-12月・朝マヅメ・ルアー)にsourceが無く+8点を取り逃している。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "numazu-gaiko-add3",
+      "source": "アングラーズ 沼津港",
+      "evidence": "アングラーズに「沼津港で釣れたカマス」の専用エリアページが存在(https://anglers.jp/areas/3174/fishes/25)。魚速プラスにも「沼津のカマス釣果」検索ページあり。沼津港外港の既存kamasuエントリ(8-12月)にsourceが無い。駿河湾沼津は秋冬カマスの全国区で出典+8が妥当。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "numazu-port",
+      "monthStart": 8,
+      "monthEnd": 12,
+      "peakSeason": true,
+      "catchDifficulty": "easy",
+      "recommendedTime": "朝マヅメ",
+      "method": "ルアー（ジグサビキ）",
+      "source": "アングラーズ 沼津港",
+      "evidence": "dedup勝者の沼津港本体(s30)は11魚種登録なのにカマスが無い。アングラーズに沼津港カマス専用ページ(https://anglers.jp/areas/3174/fishes/25)がある全国区の実績地で、外港側(numazu-gaiko-add3)にはエントリがあるのに本体に無いのは明確な欠落。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "kozu-kaigan6",
+      "monthStart": 10,
+      "monthEnd": 2,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "朝マヅメ",
+      "method": "ルアー（メタルジグ・ジグサビキ）",
+      "source": "カンパリ 神奈川",
+      "evidence": "国府津海岸〜二宮エリアはショアジギング/サビキでカマスを狙う釣行記がアングラーズ(https://anglers.jp/prefectures/14/fishes/25)・カンパリ神奈川陸っぱりカマス(https://fishing.ne.jp/fishingpost/area/kanagawa?fish=fish-kamasu)に掲載される西湘の代表回遊ポイント。dedup勝者kozu-kaigan6にイナダ(出典付き)はあるのにカマスが無いのは欠落。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "ninomiya-kaigan6",
+      "monthStart": 10,
+      "monthEnd": 2,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "朝マヅメ",
+      "method": "ルアー（メタルジグ・ジグサビキ）",
+      "source": "カンパリ 神奈川",
+      "evidence": "カンパリ/アングラーズの神奈川カマス釣果で二宮海岸は「良く釣れる場所」として挙がる西湘サーフの定番。dedup勝者ninomiya-kaigan6(se6393)にカマスエントリ自体が無い。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "hiratsuka-shinko",
+      "monthStart": 9,
+      "monthEnd": 12,
+      "peakSeason": true,
+      "catchDifficulty": "easy",
+      "recommendedTime": "朝マヅメ",
+      "method": "サビキ釣り・ルアー",
+      "source": "アングラーズ 神奈川",
+      "evidence": "アングラーズ神奈川カマスページ(https://anglers.jp/prefectures/14/fishes/25)で平塚新港は県内トップクラスの実績場として挙がる。dedup勝者hiratsuka-shinko(ss22・タマ三郎漁港)はアジ/サバ/タチウオ等5魚種登録なのにカマスが無いのは明確な欠落。※同名winnerのhiratsuka-shinko6(se6377)にも無いが、二重ブーストを避けるため提案は本体1件のみ。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "sagamigawa-kakko6",
+      "monthStart": 9,
+      "monthEnd": 12,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "朝マヅメ",
+      "method": "ルアー",
+      "source": "カンパリ 神奈川",
+      "evidence": "カンパリ神奈川陸っぱりカマス(https://fishing.ne.jp/fishingpost/area/kanagawa?fish=fish-kamasu)で相模川河口は平塚新港・二宮海岸と並ぶ好釣果エリアとして確認。dedup勝者sagamigawa-kakko6はスズキ/ヒラメ等5魚種のみでカマス欠落。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "shizuura-gyokou",
+      "monthStart": 7,
+      "monthEnd": 12,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "朝マヅメ",
+      "method": "ルアー・サビキ釣り",
+      "source": "魚速報 静浦漁港",
+      "evidence": "魚速報に静浦漁港の釣り場ページ(https://uosoku.com/home/tokai/shizuoka/izu/shizuura/)があり、静浦港ガイド(note ねこりく)でも夏〜のカマス回遊を確認。沼津周辺の冬は40cm級の大型カマス実績もある(まるなか大衆鮮魚)。dedup勝者shizuura-gyokou(sk4074)はマダイ/イサキ/アジ/メジナのみでカマス欠落。"
+    },
+    {
+      "action": "note",
+      "text": "早川港がdedup勝者として3重複公開中: odawara-hayakawa-port(s807)・hayakawa-kou(se5070)・odawara-hayakawa-kou-e8(se8291)は同一港(小田原漁港)。うちse8291の座標(35.2777,139.2065)は内陸の国府津寄りで明確に誤り。現TOP30にhayakawa-kouとodawara-hayakawa-kou-e8が両方入っており同一港の二重カウントが起きている。dedupグループ統合とse8291の座標修正を推奨。"
+    },
+    {
+      "action": "note",
+      "text": "山陰の空白: prefCombosに鳥取・島根のカマス登録が0件。TSURINEWS「朝マヅメの堤防で30cm超えカマスが連発【山陰】」(https://tsurinews.jp/409993/)で山陰堤防カマスは全国区と確認できるが記事は場所を特定しておらず、浜田港渡船金時丸(kintokimaru.jp)の釣果もカマスを扱うが渡船主体。浜田漁港(sw5094/sw6032/sc8020と重複あり・要dedup)や境港エリアへの追加は、かめや釣具・アングル等の現地釣具店釣果で個別裏取りの上で行うべき。"
+    },
+    {
+      "action": "note",
+      "text": "南紀の過小評価: 和歌山のカマス登録は1件のみ。魚速プラス「南紀×カマス×和歌山県の釣果情報」ページ(https://plus.uosoku.com/search?er=25.0&fn=カマス&lo=南紀)が存在し、釣太郎(みなべ・白浜)でもキビナゴのウキ釣りでカマス8匹等の釣果を確認。白浜・みなべ・串本エリアの主要漁港へのカマスエントリ追加/地域適性見直しを推奨(具体スポットの個別裏取りは未了のためadd-entryは保留)。"
+    },
+    {
+      "action": "note",
+      "text": "茅ヶ崎漁港(chigasaki-port)のkamasuエントリも無出典だが、媒体でスポット単位の実績を特定できなかったため保留(アングラーズ神奈川カマスページの範囲には含まれる)。また米神堤防(komegami-teihou)・米神漁港(komenogi-gyokou)は候補ヒントにあったがカマス釣果の直接確認が取れず見送り。spotType整合性: 今回の提案対象は漁港(port/breakwater)とサーフ・河口で、回遊魚カマスとの矛盾なし(国府津・二宮のサーフカマスは相模湾で確立したパターン)。"
+    }
+  ]
+}

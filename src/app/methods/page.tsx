@@ -16,6 +16,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { fishingSpots } from "@/lib/data/spots";
+import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import { InArticleAd } from "@/components/ads/ad-unit";
 
 export const metadata: Metadata = {
@@ -67,8 +68,10 @@ interface MethodSummary {
 
 function getSpotCountForMethod(methodKeys: string[]): number {
   return fishingSpots.filter((spot) =>
-    spot.catchableFish.some((cf) =>
-      methodKeys.some((key) => cf.method.includes(key))
+    spot.catchableFish.some(
+      (cf) =>
+        methodKeys.some((key) => cf.method.includes(key)) &&
+        isFishListedAtSpot(spot, cf.fish.slug) // 釣れる度ゲート
     )
   ).length;
 }

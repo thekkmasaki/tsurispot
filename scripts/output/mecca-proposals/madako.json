@@ -1,0 +1,87 @@
+{
+  "fish": "madako",
+  "proposals": [
+    {
+      "action": "add-entry",
+      "spotSlug": "honmoku-fishing",
+      "monthStart": 6,
+      "monthEnd": 9,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "日中",
+      "method": "タコエギ",
+      "source": "釣割 東京湾（神奈川）",
+      "evidence": "本牧海づり施設は東京湾岸タコの代表的施設で通年釣果報告あり。釣割の東京湾（神奈川）マダコ釣果ページ(https://www.chowari.jp/catcharea/?area=56&fish=790)に2026年8月時点で最新釣果掲載、実釣記事(https://go.ookuwasyoukai.com/octopus-fishing/)、ORETSURIタコ釣り場15選で★★★★。勝者ブロック(s11/spots-base.ts)にmadakoエントリ自体が無く、敗者s154(yokohama-honmoku-fishing)にのみ存在する明確な欠落。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "daikoku-fishing-facility",
+      "monthStart": 6,
+      "monthEnd": 9,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "日中",
+      "method": "タコエギ",
+      "source": "ORETSURI 東京湾",
+      "evidence": "大黒海づり施設はORETSURI「東京・神奈川でタコ釣りができる15の釣り場」(https://oretsuri.com/tk-tako-tsuriba)で★★★★掲載の岸タコ実績施設。釣割 東京湾（神奈川）マダコ釣果ページでも周辺の釣果継続。勝者ブロック(stob004/spots-tokyo-osaka-bay.ts)にmadakoエントリが無いのは明確な欠落。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "wakasu-seaside-park",
+      "monthStart": 6,
+      "monthEnd": 10,
+      "peakSeason": false,
+      "catchDifficulty": "medium",
+      "recommendedTime": "日中",
+      "method": "タコエギ",
+      "source": "釣割 東京都",
+      "evidence": "若洲海浜公園は湾奥岸タコの定番で、釣割 東京都マダコ釣果ページ(https://www.chowari.jp/catcharea/?area=13&fish=790)に実績掲載、ORETSURIタコ釣り場15選(https://oretsuri.com/tk-tako-tsuriba)にも掲載。敗者s156(wakasu-kaihin-park)にはmadakoエントリがあったが勝者s8(wakasu-seaside-park/spots-base.ts)には無く、dedupでエントリが失われている状態。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "nakaminato-port",
+      "monthStart": 6,
+      "monthEnd": 11,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "日中",
+      "method": "タコエギ（エギタコ）",
+      "source": "魚速報 那珂湊港",
+      "evidence": "常磐の岸タコメッカ。魚速報の那珂湊港ページ(https://uosoku.com/home/kanto/ibaraki/nakaminato/)にタコ釣り場情報、堤防エギタコの実釣記録(https://fishing-diary.blog/ (23)那珂湊漁港タコ釣り)、釣割 茨城県マダコ釣果ページ(https://www.chowari.jp/catcharea/?area=08&fish=790)あり。南防波堤・那珂川河口はタコ回遊実績が高いと紹介される。勝者s829(nakaminato-port/spots-kanto-detail.ts)にmadakoエントリが無く、prefCombosで茨城のマダコ該当は1件(鹿島港魚釣園)のみという過小状態。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "kanazawa-suisaisen-ryokuchi",
+      "source": "ORETSURI 東京湾（金沢水際線緑地・旧福浦岸壁）",
+      "evidence": "旧福浦岸壁時代からの横浜岸タコ有名場所。ORETSURI「東京・神奈川でタコ釣りができる15の釣り場」(https://oretsuri.com/tk-tako-tsuriba)で「金沢水際線緑地（旧福浦岸壁）★★★★」として掲載を確認。現行madakoエントリ(spots-kanto-koshinetsu-add3.ts s3500)はsource無しで+8を取り逃している。"
+    },
+    {
+      "action": "note",
+      "text": "【現TOP30と名所の乖離】madako TOP30は30/30が瀬戸内で、全国区の岸タコ場である東京湾（本牧・大黒・若洲・東扇島）と常磐（那珂湊）が一切入っていない。東扇島西公園(higashi-ogishima-nishi-park)はsource有りで健全だが、本牧・大黒・若洲は勝者ブロックにmadakoエントリ自体が無い（上記add-entry参照）。神奈川はORETSURI記事で東扇島・川崎新堤・横浜沖堤が★★★★★評価であり、東京湾の適性が現ランキングに反映されていない。"
+    },
+    {
+      "action": "note",
+      "text": "【規制矛盾・要是正】現TOP30の4位 hiraiso-fishing-park（平磯海づり公園・神戸市垂水区）は、神戸須磨〜垂水のタコ共同漁業権区域内でタコの採捕は禁止（ORETSURI漁業権解説 https://oretsuri.com/about-madako-fishing、瀬戸内海マダコ密漁摘発事例あり）。madakoエントリ(source:「現地釣果情報」)の削除または禁止注記を推奨。禁止対象の魚がexcellent 4位に出るのはサイト信頼性リスク。"
+    },
+    {
+      "action": "note",
+      "text": "【規制注記推奨】TOP30の3位 awaji-tsubasa-kou-k8（淡路島・翼港）と6位 iwaya-gyoko（岩屋漁港）を含む淡路島沿岸は共同漁業権によるタコ採捕禁止区域が多い（『淡路島陸っぱりタコ釣り、必見！(これを見ないと密漁で捕まる）』https://ameblo.jp/sixyunpapa2/entry-12832071991.html 等）。両スポットのmadakoエントリ（翼港はpeakSeason:trueかつsource無し）は区域確認のうえotherRules注記か削除を推奨。sourceを追加して加点する対応はNG。"
+    },
+    {
+      "action": "note",
+      "text": "【明石ルール注記】明石市側（okura-kaigan-k8 大蔵海岸など明石沿岸スポット）はタコ釣り自体は可能だが明石市漁連の独自ルールがあり、令和8年12月からは採捕期間12/1〜3/31・午前5時〜正午のみ・100g以下リリース・1人10匹まで・タコエギ2個まで（釣具新聞 https://tsurigu-np.jp/news/30458/）。現行データの「6〜10月」表記は解禁期間と真逆で矛盾するため、該当スポットのmadakoエントリの期間修正とotherRules追記を推奨。"
+    },
+    {
+      "action": "note",
+      "text": "【スポット新設候補】木更津沖堤防（A〜C堤・渡船利用）がDBに存在しない（grep該当なし、DB内の『沖堤防』は金華山と八戸のみ）。アングラーズのエリアページ(https://anglers.jp/areas/1273/fishes/24)にタコ釣果多数（2026年1月投稿まで継続）、木更津の釣具店フィッシングTポートの釣果ブログでも『木更津沖堤防で良型タコ』(https://t-port.com/fishinginfo/35255/)を確認。東京湾屈指のタコ実績地であり新設価値が高い。なお木更津内港(kisarazu-naiko)は既にsource付きmadakoエントリあり健全。"
+    },
+    {
+      "action": "note",
+      "text": "【データ異常】TOP30の2位 mukogawa-ichimonji-k8（武庫川一文字）のprefが『大阪府』になっているが、実際は兵庫県尼崎市沖であり県表記の誤り。またmadakoエントリはpeakSeason:trueなのにsource無し。武庫川一文字は尼崎沖でタコ漁業権の制約が無く岸タコ実績が豊富な場所なので、武庫川渡船の釣果情報等で裏取りのうえsource追加を検討する価値あり（今回は媒体の直接確認未実施のため提案は保留）。"
+    },
+    {
+      "action": "note",
+      "text": "【裏取り不足で見送り】(1)大洗港(oarai-port): 茨城の船マダコ（釣割 茨城県マダコ）は全国区だが、堤防からの岸タコ実績の具体的媒体確認が取れず add-entry は見送り。(2)富津岬(futtsu-misaki): spotType=beach（砂州）でタコ適地の裏取りなし、富津は船タコ中心のため見送り。(3)日間賀島・東港(himakajima-higashi-kou-a10): 『タコの島』として全国区でmadakoエントリにsource無しだが、今回の検索では具体的釣果媒体を確認していないため次回のadd-source候補として申し送り。spotType整合性は今回の提案対象（port/breakwater/pier/facility系）で矛盾なし。"
+    }
+  ]
+}

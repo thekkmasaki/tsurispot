@@ -1,0 +1,43 @@
+{
+  "fish": "isaki",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "irozaki-port",
+      "source": "釣具のイシグロ釣果情報 南伊豆",
+      "evidence": "イシグロ釣果ブログで南伊豆エリア・石廊崎の磯を中心にカゴ釣りで30cm前後のイサキが朝マヅメに好調と確認（https://www.ishiguro-gr.com/enjoy/fishing/detail.php?id=48068）。釣割の伊豆半島イサキ釣果エリアページ（https://www.chowari.jp/catcharea/?area=59&fish=189）にも実績掲載。石廊崎はカゴ釣りイサキの伊豆屈指の名所だがsource欠落で+8を取り逃している（現18位70.8）"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "shiobuki-zaki",
+      "source": "釣具のイシグロ釣果情報 東伊豆",
+      "evidence": "イシグロ「東伊豆エリア地磯カゴ釣りイサキ始まりました」（https://www.ishiguro-gr.com/enjoy/fishing/detail.php?id=43050）で夜カゴ25〜35cmの実績を確認。伊東の汐吹崎は東伊豆地磯カゴ釣りの代表ポイント。source欠落（現22位69.8）"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "tsumekizaki",
+      "source": "釣割 伊豆半島",
+      "evidence": "釣割の伊豆半島イサキ釣果エリアページ（https://www.chowari.jp/catcharea/?area=59&fish=189）で下田エリアを含む実績を確認。爪木崎（下田・須崎）は伊豆の遠投カゴ釣りイサキの定番磯で、イシグロの東伊豆〜下田地磯カゴイサキ記事群の対象エリア。source欠落（現19位70.6）"
+    },
+    {
+      "action": "note",
+      "text": "【最重要データギャップ】千葉県のイサキエントリがDB全体で0件（prefCombosにchibaが存在しない）。外房・勝浦〜鴨川は遠投カゴ釣り文化の本場で候補ヒントにも挙がるが、今回の検索（魚速報 興津港・アングラーズ 勝浦湾エリア等）で確認できた岸釣果はアジ・青物主体で、岸からのイサキ具体釣果は裏取りできなかった。外房イサキは船釣りが主体のため安易なadd-entryは保留。追加調査するなら勝者slug: katsuura-port（勝浦漁港・魚種12件）/ kamogawa-port（鴨川漁港）/ okitsu-kou-chiba（興津港）が対象（dedup-winner確認済み。katsuura-gyokou-chiba-a10等は敗者）"
+    },
+    {
+      "action": "note",
+      "text": "shirahama-hiki（現2位78.6・和歌山）は南紀の有名磯でpeakSeason:true だがsource無し。南紀白浜の磯イサキは著名で媒体（カンパリ和歌山・魚速報南紀等）での裏取り成功の見込みが高い。今回は検索枠の都合で未検証のため、次サイクルで裏取りの上add-sourceを推奨"
+    },
+    {
+      "action": "note",
+      "text": "hirado-port（69.6）・iki-gonoura-port（70.3）・ashizuri-cape-rocky（71.0）・yonouzu-jiiso（71.0）はいずれも全国区の磯イサキ実績地（平戸・壱岐・足摺岬・米水津）だがsource無し。伊豆諸島のhachijojima-kaminato-a9・miyakejima-igaya-a9（夜磯カゴの超有名どころ）も同様。アングラーズ/魚速報の各エリアページで裏取りしsource付与すれば、メッカ実態に沿ってTOP20入りが期待できる"
+    },
+    {
+      "action": "note",
+      "text": "城ヶ島（神奈川・jogashima）にイサキエントリ無し。ただし今回確認できたのは船の『イサキ五目』のみで（魚速報 城ヶ島）、磯からの岸イサキ実績は裏取り不可のためadd-entryは非推奨。神奈川のイサキは3件と少ないが、岸実績が薄い実態と整合しており異常ではない"
+    },
+    {
+      "action": "note",
+      "text": "整合性確認: isaki TOP30はrocky/port構成でspotTypeとの矛盾なし。長崎勢（生月・五島・平戸・壱岐で15件）が上位を占める分布は九州西岸=岸イサキのメッカという実態と整合。tierDist excellent21/good100/fair26、計147件も回遊性・地域性から見て妥当な規模"
+    }
+  ]
+}

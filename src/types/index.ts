@@ -321,6 +321,8 @@ export interface SpotSummary {
   region: Region;
   rating: number;
   catchRating: "excellent" | "good" | "fair";
+  /** 釣れる度スコア（fish-aptitude、並び順用。サーバー内専用でクライアントへは渡さない） */
+  catchScore?: number;
   latitude: number;
   longitude: number;
 }

@@ -1,0 +1,89 @@
+{
+  "fish": "mejina",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "mirotsu-gyokou-k8",
+      "source": "カンパリ すさみ・見老津",
+      "evidence": "カンパリのすさみエリア釣果ページに見老津港のグレ(フカセ)釣果が掲載 (https://fishing.ne.jp/fishingpost/area/susami, https://fishing.ne.jp/fishingpost/area/susami-a)。見老津は林渡船の寒グレ磯渡しで全国区の南紀グレ名所 (https://hayashitosen.com/)。mejinaエントリ(10-4月peak)にsourceが無く+8点を取り逃している。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "susami-port",
+      "monthStart": 10,
+      "monthEnd": 4,
+      "peakSeason": true,
+      "catchDifficulty": "medium",
+      "recommendedTime": "朝マヅメ",
+      "method": "フカセ釣り",
+      "source": "カンパリ すさみ",
+      "evidence": "すさみは南紀寒グレのメッカでカンパリのすさみ陸っぱり釣果ページ(https://fishing.ne.jp/fishingpost/area/susami)にグレ釣果が複数掲載。勝者スポットsusami-port(dedup確認済)のcatchableFishはアジ/クロダイ/アオリイカ/カサゴのみでmejinaが欠落しており、名所として明確におかしい。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "kushimoto-oshima-k8",
+      "source": "釣具のブンブン 串本",
+      "evidence": "釣具のブンブン釣果コラムで串本地磯の寒グレ40cmオーバー連発を確認 (https://ec.bunbun-fishing.com/blogs/column/fishingreport-440)。串本大島(樫野含む)は渡船グレ磯の本場。descに既に10月〜翌5月グレと明記されているのにmejinaエントリにsourceが無い。dedup勝者確認済(kushimoto-oshima-k8)。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "jogashima-iso-minami",
+      "source": "TSURINEWS 城ヶ島",
+      "evidence": "TSURINEWSに城ヶ島地磯の寒グレ攻略記事(メジナ38cmキャッチ, https://tsurinews.jp/335655/)。descでも『クロダイ・メジナの一級磯』と明記されているのにmejinaエントリにsource無し。三浦半島陸っぱりメジナの代表格。dedup勝者確認済。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "jogashima-iso-e8",
+      "source": "魚速報 三浦半島",
+      "evidence": "魚速報の三浦半島磯釣りポイント特集(https://uosoku.com/miuraiso/)と城ヶ島釣果検索(https://plus.uosoku.com/search)でメジナ実績を確認。城ヶ島磯グループのdedup勝者(jogashima-iso-e8)のmejinaエントリにsourceが無い。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "kozushima-ko6",
+      "source": "TSURINEWS 神津島",
+      "evidence": "TSURINEWS『神津島 大型尾長メジナシーズン開幕 磯フカセ釣りで60cm超を狙う』(https://tsurinews.jp/101986/)、がまかつレポートでは祇苗島で67.5cm4.7kgの尾長記録 (https://www.gamakatsu.co.jp/report/229188/)。尾長グレの聖地・神津島の唯一の収録スポットなのにmejinaにsource無し。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "miyakejima-miike-a9",
+      "source": "アングラーズ 三宅島",
+      "evidence": "アングラーズ三宅島エリアページ(https://anglers.jp/areas/164)にメジナ釣果、東京都メジナ釣果ページ(https://anglers.jp/prefectures/13/fishes/30)でも三宅島は主要実績地。三池港のフカセで尾長30-33cm連発の釣行記も確認。mejinaエントリ(周年peak)にsource無し。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "hachijojima-sokodo6",
+      "source": "アングラーズ 東京都(八丈島)",
+      "evidence": "アングラーズの東京都メジナ釣果ページ(https://anglers.jp/prefectures/13/fishes/30)で八丈島が主要実績地として掲載。尾長グレの本場・八丈島の底土港はフカセの定番でmejinaエントリ(10-5月peak)にsource無し。dedup勝者確認済(hachijojima-sokodo6)。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "mugi-oshima-kou",
+      "source": "海漁丸(牟岐大島・山下渡船)釣果",
+      "evidence": "牟岐大島は大正初期にグレのフカセ釣りが始まった『グレ釣り発祥の地』。山下渡船・海漁丸(https://kairyoumaru.com/)が渡船釣果を継続発信。全国区の歴史的グレ名所なのにmejinaエントリにsource無し。"
+    },
+    {
+      "action": "note",
+      "text": "【スポット新設候補】男女群島(長崎)がDBに存在しない。尾長グレ72.0cmの実績(あじか磯釣センター https://www.ajika.jp/)を持つ日本最高峰の尾長メッカで、佐世保からの渡船(サクセスフィッシング等)で渡る磯。長崎はmejina24件収録済みだが男女群島が無いのは大きな欠落。"
+    },
+    {
+      "action": "note",
+      "text": "【スポット新設候補】鵜来島(高知・宿毛)がDBに存在しない。アングラーズにエリアページあり(https://anglers.jp/areas/4124)、がまかつレポートで64cm尾長 (https://www.gamakatsu.co.jp/report/283358/)、魚速報にも釣り場ページあり。隣接の沖の島(okinoshima-sukumo-w6)はTOP30入りしているのに、双璧をなす鵜来島だけ未収録。"
+    },
+    {
+      "action": "note",
+      "text": "【スポット新設候補】御五神島(愛媛・宇和海)がDBに存在しない。サンライン釣行レポート(https://fishing.sunline.co.jp/report/16949/)でグレ実績確認。日振島とともに宇和海磯釣りのメッカ。"
+    },
+    {
+      "action": "note",
+      "text": "【source追加保留】日振島(hiburi-shima-ehime, dedup勝者確認済)のmejinaエントリにsource無し。descには『40cm超尾長の実績』と明記され、うわじま観光ガイドも磯釣りメッカと記載するが、今回確認できた具体的釣果媒体は個人釣行ブログのみだったため保留。同スポットのmadaiで使用中の『カンパリ 西予〜宇和島』にグレ釣果があれば同一sourceでの追加を推奨。"
+    },
+    {
+      "action": "note",
+      "text": "【データ異常】八丈島底土港(hachijojima-sokodo6)のdescが『6種の魚が集まる横浜・川崎の漁港』となっており地域文言が誤り(実際は東京都八丈町)。region割当またはdesc生成テンプレートの誤りを修正すべき。"
+    },
+    {
+      "action": "note",
+      "text": "【TOPと名所の乖離】和歌山はmejina収録40件で全国最多なのにTOP30ゼロ。南紀(すさみ・見老津・串本)の出典欠落が主因とみられ、上記add-source/add-entry 3件で是正見込み。東京(伊豆諸島)も尾長の聖地でありながらTOP30は下位2枠のみで、神津島・三宅島・八丈島へのsource付与で適正化される。spotType矛盾は無し(port/rockyともメジナのフカセ対象として妥当)。"
+    }
+  ]
+}

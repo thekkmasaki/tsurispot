@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { fishingSpots } from "@/lib/data/spots";
+import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import { fishSpecies } from "@/lib/data/fish";
 import {
   RecommendationClient,
@@ -40,13 +41,16 @@ const recoSpots: RecoSpot[] = fishingSpots.map((s) => ({
   hasParking: s.hasParking,
   hasConvenienceStore: s.hasConvenienceStore,
   region: { prefecture: s.region.prefecture, areaName: s.region.areaName },
-  catchableFish: s.catchableFish.map((cf) => ({
-    fish: { slug: cf.fish.slug, name: cf.fish.name },
-    method: cf.method,
-    monthStart: cf.monthStart,
-    monthEnd: cf.monthEnd,
-    peakSeason: cf.peakSeason,
-  })),
+  catchableFish: s.catchableFish
+    // 釣れる度ゲート: 生息域外の魚をレコメンドのマッチング対象にしない
+    .filter((cf) => isFishListedAtSpot(s, cf.fish.slug))
+    .map((cf) => ({
+      fish: { slug: cf.fish.slug, name: cf.fish.name },
+      method: cf.method,
+      monthStart: cf.monthStart,
+      monthEnd: cf.monthEnd,
+      peakSeason: cf.peakSeason,
+    })),
 }));
 
 const recoFishSpecies: RecoPeakFish[] = fishSpecies.map((f) => ({ peakMonths: f.peakMonths }));

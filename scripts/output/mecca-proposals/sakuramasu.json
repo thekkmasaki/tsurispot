@@ -1,0 +1,57 @@
+{
+  "fish": "sakuramasu",
+  "proposals": [
+    {
+      "action": "add-source",
+      "spotSlug": "shimamaki-gyoko",
+      "source": "魚速報 島牧",
+      "evidence": "海サクラの聖地・島牧村。魚速報「島牧村の釣り場6選～アメマス、サクラマス、カレイ、ホッケetc.のポイント」(https://uosoku.com/shimamaki/) にサクラマスポイントとして掲載。つり人WEB「5月上旬、まさに今が旬！ショアからねらう海のサクラマス 北海道島牧村・江ノ島海岸ほか」(https://web.tsuribito.co.jp/suburb/hokkaido-sakuramasu1806) でも島牧村が特集。現状 sakuramasu エントリ(3-5月,peak)に source が無く+8点を取り逃し、全国的メッカなのに tier=fair(71.6) に沈んでいる。dedup勝者確認済(勝者=shimamaki-gyoko, 敗者=shimamaki-gyokou/shimamaki-port-a11)。spotType=port で堤防・隣接サーフからのルアー釣りと整合。"
+    },
+    {
+      "action": "add-source",
+      "spotSlug": "suttsu-gyokou6",
+      "source": "ぐるるがるごん 寿都・朱太川周辺",
+      "evidence": "「北海道ショアサクラマス釣り場ガイド【日本海版】エリア別ランキング＆河口規制2026」(https://www.gururugarugon.com/hokkaido-nihonkai-sakuramasu-guide/) で寿都(朱太川)が日本海ショアサクラの主要エリアとして掲載を確認。DB自身の説明文にも「サクラマスの実績もある」と記載があるのに sakuramasu エントリ(3-6月,peak)に source が無く+8点を取り逃し tier=fair(70.2)。dedup勝者確認済(勝者=suttsu-gyokou6)。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "bikuni-gyoko",
+      "monthStart": 4,
+      "monthEnd": 6,
+      "peakSeason": true,
+      "catchDifficulty": "hard",
+      "recommendedTime": "朝マヅメ",
+      "method": "ルアー",
+      "source": "魚速報 積丹・美国漁港",
+      "evidence": "魚速報「北海道でサクラマスが釣れる釣り場まとめ【サーフ/河口/磯】」(https://uosoku.com/hokkaisakura/) の掲載スポット一覧に美国漁港が明記。つり人WEB「北海道・後志エリア 海サクラ･海アメのルアーフィッシング」(https://web.tsuribito.co.jp/northanglers/shakotan-umisakura22012) でも積丹の春サクラ(4-6月盛期)を確認。積丹は候補ヒントにも挙がる名所だが、dedup勝者 bikuni-gyoko(s959) の catchableFish にサクラマスエントリ自体が無く、春の主役魚種が丸ごと欠落している。spotType=port・ルアー釣法と矛盾なし。"
+    },
+    {
+      "action": "add-entry",
+      "spotSlug": "sakata-kitako",
+      "monthStart": 3,
+      "monthEnd": 5,
+      "peakSeason": true,
+      "catchDifficulty": "hard",
+      "recommendedTime": "朝夕マヅメ",
+      "method": "ルアー",
+      "source": "即戦力釣り情報 山形",
+      "evidence": "即戦力釣り情報(fishing-labo.net)の山形県サクラマスページで「山形県でサクラマスが良く釣れる釣り場は最上川下流、酒田北港、最上川中流」と酒田北港が県内トップ3に明記。庄内サーフは候補ヒントの通り海サクラの一大エリアで、最上川河口(mogamigawa-kakou-sakata-a9)や遊佐・月光川サーフ(yuza-gakkogawa-surf-a12)はexcellent入りしているのに、隣接する酒田北港のdedup勝者 sakata-kitako にはサクラマスエントリ自体が無い。spotType=port、シーバス実績のあるルアー釣り場で釣法とも整合。"
+    },
+    {
+      "action": "note",
+      "text": "【新スポット候補】島牧・江ノ島海岸がDB未収録。魚速報の北海道サクラマスまとめ(https://uosoku.com/hokkaisakura/)とつり人WEB特集(https://web.tsuribito.co.jp/suburb/hokkaido-sakuramasu1806)の両方で海サクラ最重要ポイントとして明記される全国区メッカ(千走川系の回遊が入るロングサーフ)。スポット新設トラックでの追加を強く推奨。"
+    },
+    {
+      "action": "note",
+      "text": "【地域適性の見直し提案】青森県のサクラマスエントリが全DBで0件(prefCombosに青森なし)は明らかに過小。アングラーズに青森県サクラマス釣果ページが実在(https://anglers.jp/prefectures/2/fishes/135)し、釣り東北WEBに「青森下北サーフのショアサクラマスゲーム」記事(https://tsuri-tohoku.com/8714/)がある実績県。候補ヒントの鰺ヶ沢(勝者slug=ajigasawa-port、赤石川河口=ajigasawa-akaishigawa-river-a12もエントリ無し)はスポット単位のショア釣果出典を今回の検索では確認しきれなかったため add-entry は保留したが、津軽西海岸〜下北の地域適性(県レベル)を底上げし、裏取りが取れ次第エントリ追加すべき。"
+    },
+    {
+      "action": "note",
+      "text": "【裏取り未達】瀬棚港(setana-kou6, 勝者確認済)はDB説明文で「サクラマスの名所として知られ春には全道からアングラーが集まる」と記載され sakuramasu エントリ(3-6月)もあるが source が無い。今回参照できた媒体(魚速報まとめ・ぐるるがるごんガイド)では瀬棚港そのものの明記を確認できず(同じせたな町の太田漁港は魚速報に掲載あり)。檜山エリアの釣果媒体で裏取りが取れ次第 add-source 推奨。松前港(matsumae-kou6)の source 無しエントリも同様に保留。"
+    },
+    {
+      "action": "note",
+      "text": "【現TOPと名所の乖離】現TOP10はほぼ河川スポット(米代川上流・雄物川・北上川上流など川マス系)が占め、海サクラの全国区メッカである島牧・寿都・せたな・積丹が軒並み tier=fair の70点前後に沈んでいる。上記 add-source/add-entry で島牧・寿都・美国は是正されるが、構造的には「海サクラ(ショア)」と「川のサクラマス(遊漁承認証が必要な河川釣り)」が同一魚種スコアで混在している点も乖離の一因。北海道日本海側(後志・檜山)の湾レベル適性を海サクラ基準で一段引き上げる調整を検討する価値あり。"
+    }
+  ]
+}

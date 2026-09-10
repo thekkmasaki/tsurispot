@@ -16,6 +16,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { fishingSpots } from "@/lib/data/spots";
+import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import { ProductList } from "@/components/affiliate/product-list";
 import { getProductsByMethod } from "@/lib/data/products";
 import { RigDiagram } from "@/components/rig-diagram";
@@ -1177,7 +1178,13 @@ export default function ChoinageGuidePage() {
           </p>
           <div className="grid gap-2 sm:grid-cols-2">
             {fishingSpots
-              .filter((s) => s.catchableFish.some((cf) => cf.method.includes("ちょい投げ") || cf.method.includes("投げ釣り")))
+              .filter((s) =>
+                s.catchableFish.some(
+                  (cf) =>
+                    (cf.method.includes("ちょい投げ") || cf.method.includes("投げ釣り")) &&
+                    isFishListedAtSpot(s, cf.fish.slug) // 釣れる度ゲート
+                )
+              )
               .sort((a, b) => b.rating - a.rating)
               .slice(0, 6)
               .map((spot) => (

@@ -736,7 +736,7 @@ export const kantoDetailSpots: FishingSpot[] = [
   },
   {
     id: "s829", name: "那珂湊港", slug: "nakaminato-port",
-    description: "ひたちなか市にある茨城県最大級の漁港。おさかな市場に隣接し、釣りと買い物の両方が楽しめる。堤防からはアジ、サバ、イワシのサビキ釣りが盛んで、冬場はカレイやアイナメの投げ釣りも人気。港内は比較的穏やかで、ファミリー向けのスポット。",
+    description: "ひたちなか市にある茨城県最大級の漁港。おさかな市場に隣接し、釣りと買い物の両方が楽しめる。堤防からはアジ、サバ、イワシの回遊が多く、冬場はカレイやアイナメの投げ釣りが人気。茨城県は陸からのまき餌釣りが原則禁止のため、現地の掲示と県のルールを確認のこと。港内は比較的穏やかで、ファミリー向けのスポット。",
     latitude: 36.3445, longitude: 140.5825,
     address: "〒311-1214 茨城県ひたちなか市和田町3丁目8",
     accessInfo: "ひたちなか海浜鉄道那珂湊駅から徒歩約10分。北関東自動車道ひたちなかICから約15分。",
@@ -745,6 +745,7 @@ export const kantoDetailSpots: FishingSpot[] = [
     hasToilet: true, hasConvenienceStore: true, hasFishingShop: true, hasRentalRod: false,
     mainImageUrl: "/images/spots/placeholder.webp", images: [], rating: 3.9, reviewCount: 165,
     catchableFish: [
+      { fish: fish("madako"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "medium", recommendedTime: "日中", method: "タコエギ（エギタコ）", source: "魚速報 那珂湊港" },
       { fish: fish("aji"), monthStart: 6, monthEnd: 11, peakSeason: true, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り", source: "上州屋" },
       { fish: fish("saba"), monthStart: 6, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "朝マヅメ", method: "サビキ釣り", source: "上州屋" },
       { fish: fish("iwashi"), monthStart: 5, monthEnd: 10, peakSeason: false, catchDifficulty: "easy", recommendedTime: "日中", method: "サビキ釣り", source: "上州屋" },
