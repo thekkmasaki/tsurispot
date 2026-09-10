@@ -115,7 +115,7 @@ export function NearbySpotsSorter({ spots, fishName, totalCount }: NearbySpotsSo
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
             <Badge
               variant="outline"
-              className={`hidden text-xs sm:inline-flex ${
+              className={`inline-flex text-xs ${
                 spot.catchRating === "excellent"
                   ? "border-emerald-200 bg-emerald-50 text-emerald-700"
                   : spot.catchRating === "good"
@@ -123,12 +123,15 @@ export function NearbySpotsSorter({ spots, fishName, totalCount }: NearbySpotsSo
                     : ""
               }`}
             >
-              {CATCH_RATING_LABELS[spot.catchRating]}{" "}
-              {spot.catchRating === "excellent"
-                ? "よく釣れる"
-                : spot.catchRating === "good"
-                  ? "釣れる"
-                  : "まずまず"}
+              {CATCH_RATING_LABELS[spot.catchRating]}
+              {/* モバイルは記号（◎/○/△）のみ、sm以上でテキスト付き（サイト独自価値をスマホでも露出） */}
+              <span className="ml-0.5 hidden sm:inline">
+                {spot.catchRating === "excellent"
+                  ? "よく釣れる"
+                  : spot.catchRating === "good"
+                    ? "釣れる"
+                    : "まずまず"}
+              </span>
             </Badge>
             <div className="flex items-center gap-1 text-sm">
               <Star className="size-3.5 fill-amber-400 text-amber-400" />
