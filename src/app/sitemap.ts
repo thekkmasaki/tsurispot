@@ -4,6 +4,7 @@ import { fishingSpots } from "@/lib/data/spots";
 import { fishSpecies } from "@/lib/data/fish";
 import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import { regions } from "@/lib/data/regions";
+import { getAllAreaGroups } from "@/lib/data/area-groups";
 import { prefectures } from "@/lib/data/prefectures";
 import { areaGuides } from "@/lib/data/area-guides";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
@@ -308,18 +309,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         priority: 0.6,
       })),
     { url: `${baseUrl}/area`, lastModified: dynamicDate, changeFrequency: "weekly", priority: 0.9 },
-    // スポット0件のareaのみ除外（1件以上は index 対象なので sitemap 掲載。area ページの noindex 判定と一致）
-    ...regions
-      .filter((region) => {
-        const spotCount = fishingSpots.filter((s) => s.region.id === region.id).length;
-        return spotCount >= 1;
-      })
-      .map((region) => ({
-        url: `${baseUrl}/area/${region.slug}`,
-        lastModified: dynamicDate,
-        changeFrequency: "weekly" as const,
-        priority: 0.8,
-      })),
+    // エリアページは市区町村単位で1URL（代表slug）に集約。area/[slug] が canonical を
+    // 代表slugへ寄せるため、sitemap も代表slugのみ掲載して「canonical=sitemap掲載=index」を一致させる。
+    // これで薄い分割ページの重複掲載を無くし、各URLが市区町村の全スポットを持つ厚いページになる。
+    ...getAllAreaGroups().map((g) => ({
+      url: `${baseUrl}/area/${g.slug}`,
+      lastModified: dynamicDate,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
+    })),
 
     // ===== 釣り方×月マトリクス + 季節ガイド + 釣具店 =====
     ...FISHING_METHODS.flatMap((method) => [

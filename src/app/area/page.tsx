@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import { regions } from "@/lib/data/regions";
 import { fishingSpots } from "@/lib/data/spots";
+import { getSpotsForArea, getAllAreaGroups } from "@/lib/data/area-groups";
 import { Breadcrumb } from "@/components/ui/breadcrumb";
 import { AreaListFilter } from "@/components/area/area-list-filter";
 import { InArticleAd, NativeAdBreak } from "@/components/ads/ad-unit";
@@ -28,14 +28,12 @@ function buildPrefectureGroups() {
     { prefecture: string; regions: { id: string; slug: string; areaName: string; prefecture: string; spotCount: number; topFish: string[] }[] }
   >();
 
-  for (const region of regions) {
-    // Spot count
-    const spotCount = fishingSpots.filter((s) => s.region.id === region.id).length;
-
-    // Top fish
+  // 市区町村単位・代表slugのみを列挙（エリアページの canonical 集約先と一致させ、
+  // 内部リンクを代表URLへ集中させる。分割された薄いエリアの重複列挙も解消）。
+  for (const g of getAllAreaGroups()) {
+    const spots = getSpotsForArea(g.slug);
     const fishMap = new Map<string, number>();
-    for (const spot of fishingSpots) {
-      if (spot.region.id !== region.id) continue;
+    for (const spot of spots) {
       for (const cf of spot.catchableFish) {
         fishMap.set(cf.fish.name, (fishMap.get(cf.fish.name) || 0) + 1);
       }
@@ -46,20 +44,20 @@ function buildPrefectureGroups() {
       .map(([name]) => name);
 
     const item = {
-      id: region.id,
-      slug: region.slug,
-      areaName: region.areaName,
-      prefecture: region.prefecture,
-      spotCount,
+      id: g.slug,
+      slug: g.slug,
+      areaName: g.municipalityName,
+      prefecture: g.prefecture,
+      spotCount: g.count,
       topFish,
     };
 
-    const existing = grouped.get(region.prefecture);
+    const existing = grouped.get(g.prefecture);
     if (existing) {
       existing.regions.push(item);
     } else {
-      grouped.set(region.prefecture, {
-        prefecture: region.prefecture,
+      grouped.set(g.prefecture, {
+        prefecture: g.prefecture,
         regions: [item],
       });
     }
@@ -74,7 +72,7 @@ function buildPrefectureGroups() {
 export default function AreaListPage() {
   const groups = buildPrefectureGroups();
   const totalSpots = fishingSpots.length;
-  const totalRegions = regions.length;
+  const totalRegions = getAllAreaGroups().length;
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -82,11 +80,11 @@ export default function AreaListPage() {
     name: "全国の釣りエリア一覧",
     description: "都道府県別の釣りエリア一覧",
     numberOfItems: totalRegions,
-    itemListElement: regions.map((region, index) => ({
+    itemListElement: getAllAreaGroups().map((g, index) => ({
       "@type": "ListItem",
       position: index + 1,
-      name: `${region.prefecture} ${region.areaName}`,
-      url: `https://tsurispot.com/area/${region.slug}`,
+      name: `${g.prefecture} ${g.municipalityName}`,
+      url: `https://tsurispot.com/area/${g.slug}`,
     })),
   };
 
