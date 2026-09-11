@@ -14,6 +14,7 @@ import { composeMetaDescription, joinNames } from "@/lib/seo/meta-description";
 import { monthSlugs } from "@/lib/data/monthly-guides";
 import { SeasonalAffiliateSection } from "@/components/seasonal-affiliate-section";
 import { getRelevantAffiliateProducts } from "@/lib/data/affiliate-products";
+import { getSpotsForArea, getAreaMunicipalityName, getAreaRepSlug } from "@/lib/data/area-groups";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -33,10 +34,9 @@ function getSpotsForRegion(regionId: string) {
   return fishingSpots.filter((s) => s.region.id === regionId);
 }
 
-function getCatchableFishForRegion(regionId: string) {
+function getCatchableFishFromSpots(spots: typeof fishingSpots) {
   const fishMap = new Map<string, { id: string; name: string; slug: string; count: number }>();
-  for (const spot of fishingSpots) {
-    if (spot.region.id !== regionId) continue;
+  for (const spot of spots) {
     for (const cf of spot.catchableFish) {
       const existing = fishMap.get(cf.fish.id);
       if (existing) {
@@ -99,7 +99,7 @@ function generateAreaDescription(
   if (regionDescriptions[region.slug]) return regionDescriptions[region.slug];
   if (spots.length === 0) return "";
 
-  const topFish = getCatchableFishForRegion(region.id).slice(0, 4);
+  const topFish = getCatchableFishFromSpots(spots).slice(0, 4);
   const fishNames = topFish.map(f => f.name).join("・");
   const parkingCount = spots.filter(s => s.hasParking).length;
   const freeCount = spots.filter(s => s.isFree).length;
@@ -132,11 +132,19 @@ export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const region = getRegionBySlug(slug);
-  if (!region) return { title: "エリアが見つかりません" };
+  const baseRegion = getRegionBySlug(slug);
+  if (!baseRegion) return { title: "エリアが見つかりません" };
 
-  const spots = getSpotsForRegion(region.id);
-  const fishList = getCatchableFishForRegion(region.id);
+  // スポットを市区町村単位で束ね直す（同一市区町村の全スポットを載せて「N選」を厚くする）。
+  // region.areaName を市区町村名、region.slug を代表slug(canonical集約先)に差し替えることで、
+  // 以降の title/description/canonical/JSON-LD が自動的に市区町村ベースになる。
+  const areaSpots = getSpotsForArea(baseRegion.slug);
+  const spots = areaSpots.length > 0 ? areaSpots : getSpotsForRegion(baseRegion.id);
+  const muniName = getAreaMunicipalityName(baseRegion.slug);
+  const region = muniName
+    ? { ...baseRegion, areaName: muniName, slug: getAreaRepSlug(baseRegion.slug) }
+    : baseRegion;
+  const fishList = getCatchableFishFromSpots(spots);
   const topFishNames = fishList
     .slice(0, 5)
     .map((f) => f.name)
@@ -218,11 +226,18 @@ export function generateStaticParams() {
 
 export default async function AreaDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const region = getRegionBySlug(slug);
-  if (!region) notFound();
+  const baseRegion = getRegionBySlug(slug);
+  if (!baseRegion) notFound();
 
-  const spots = getSpotsForRegion(region.id);
-  const catchableFish = getCatchableFishForRegion(region.id);
+  // 市区町村単位で束ね直す（generateMetadata と同じ差し替え。region.areaName=市区町村名、
+  // region.slug=代表slug で canonical を集約し、薄い分割ページを1つに統合する）。
+  const areaSpots = getSpotsForArea(baseRegion.slug);
+  const spots = areaSpots.length > 0 ? areaSpots : getSpotsForRegion(baseRegion.id);
+  const muniName = getAreaMunicipalityName(baseRegion.slug);
+  const region = muniName
+    ? { ...baseRegion, areaName: muniName, slug: getAreaRepSlug(baseRegion.slug) }
+    : baseRegion;
+  const catchableFish = getCatchableFishFromSpots(spots);
   const description = generateAreaDescription(region, spots);
   const currentMonth = new Date().getMonth() + 1; // 1-12（ビルド時固定・既存の季節導線と同方式）
 
