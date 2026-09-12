@@ -7,6 +7,8 @@ import { shopsTohokuHokkaido } from "./shops-tohoku-hokkaido";
 import { shopsChugokuShikoku } from "./shops-chugoku-shikoku";
 import { shopsKyushu } from "./shops-kyushu";
 import { shopsLocalAdd } from "./shops-local-add";
+import { shopsCastingKanto } from "./shops-casting-kanto";
+import { shopsCastingWest } from "./shops-casting-west";
 
 const shopsKansai: TackleShop[] = [
   {
@@ -2883,6 +2885,8 @@ export const tackleShops: TackleShop[] = [
   ...shopsChugokuShikoku,
   ...shopsKyushu,
   ...shopsLocalAdd,
+  ...shopsCastingKanto,
+  ...shopsCastingWest,
 ];
 
 export function getShopBySlug(slug: string): TackleShop | undefined {
