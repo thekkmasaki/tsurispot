@@ -5,6 +5,7 @@ import { spotRulesBatch } from "./spots-rules-batch";
 // 相対パスで参照する必要がある (path mapping がビルド時 transpile では効かない)。
 import { generateSpotIntro } from "../utils/spot-content-generator";
 import { isSameSpotName } from "./spot-name-normalize";
+import { spotTipsAdd } from "./spot-tips-add";
 
 // 重複排除で消えたslugから勝者slugへのマップ（自動リダイレクト用）
 export const dedupRedirects = new Map<string, string>();
@@ -163,8 +164,17 @@ function enrichDescriptions(spots: FishingSpot[]): FishingSpot[] {
   });
 }
 
-export const fishingSpots: FishingSpot[] = enrichDescriptions(
-  applyBatchRules(deduplicateSpots(allRawSpots))
+// 実績サイトから裏取りした攻略メモ（spot-tips-add.ts）を各スポットへ後付けマージ。
+// dedup 後の勝者 slug に対して付与される（敗者 slug のエントリは自然に無効）。
+function applyLocalTips(spots: FishingSpot[]): FishingSpot[] {
+  return spots.map((spot) => {
+    const tips = spotTipsAdd[spot.slug];
+    return tips && tips.length > 0 ? { ...spot, localTips: tips } : spot;
+  });
+}
+
+export const fishingSpots: FishingSpot[] = applyLocalTips(
+  enrichDescriptions(applyBatchRules(deduplicateSpots(allRawSpots)))
 );
 
 export function getSpotBySlug(slug: string): FishingSpot | undefined {

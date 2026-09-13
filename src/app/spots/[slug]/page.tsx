@@ -1652,6 +1652,26 @@ export default async function SpotDetailPage({ params }: PageProps) {
                     ◎よく釣れる／○釣れる／△まずまず（漁獲量・地形・実績にもとづく釣れる度）
                   </p>
                 </div>
+                {/* このスポット固有の攻略ポイント（実績サイトから裏取りした一次情報の要約・出典つき） */}
+                {spot.localTips && spot.localTips.length > 0 && (
+                  <div>
+                    <h3 className="mb-2 text-sm font-bold">{spot.name}の攻略ポイント</h3>
+                    <ul className="space-y-1.5">
+                      {spot.localTips.map((tip, i) => (
+                        <li key={i} className="flex gap-2 text-sm leading-relaxed">
+                          <span className="mt-1 size-1.5 shrink-0 rounded-full bg-primary/60" aria-hidden />
+                          <span className="text-muted-foreground">
+                            {tip.text}
+                            <span className="ml-1 text-[10px] text-muted-foreground/70">（{tip.source}）</span>
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                    <p className="mt-1.5 text-[10px] text-muted-foreground/70">
+                      ※釣果情報サイト等の公開情報をもとに編集。最新の状況は現地の掲示・各出典をご確認ください。
+                    </p>
+                  </div>
+                )}
                 {/* おすすめ釣り方トップ3（文脈別説明） */}
                 <div>
                   <h3 className="mb-2 text-sm font-bold">おすすめの釣り方</h3>
