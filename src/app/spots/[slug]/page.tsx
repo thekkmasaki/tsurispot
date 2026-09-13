@@ -59,6 +59,7 @@ import { YouTubeVideoList } from "@/components/youtube-video-card";
 import {
   SPOT_TYPE_LABELS,
   DIFFICULTY_LABELS,
+  CATCH_RATING_LABELS,
 } from "@/types";
 import { SpotImage } from "@/components/ui/spot-image";
 import { isDisplayableSpotImage } from "@/lib/data/spot-image-resolver";
@@ -118,13 +119,14 @@ import { SatelliteAnalysisSection } from "@/components/patent/satellite-analysis
 import {
   generateSpotTips,
   generateTimeAdvice,
-  generateSeasonDetail,
   generateFacilityGuide,
   generateSpotSummary,
   generateContextMethodBrief,
   generateImprovedFAQs,
   generateAreaSeasonTrend,
+  buildSeasonTable,
 } from "@/lib/utils/spot-content-generator";
+import { getCatchAssessment } from "@/lib/data/fish-aptitude";
 import {
   getForbiddenMethods,
   isNightFishingAdvisable,
@@ -1551,7 +1553,23 @@ export default async function SpotDetailPage({ params }: PageProps) {
         };
 
         // 季節別アドバイス
-        const seasonDetails = generateSeasonDetail(spot);
+        // 季節×対象魚×釣れる度テーブル。各魚に釣れる度(◎○△)を付与し、
+        // 生息域外(excluded)を除外して釣れる度→旬の順に並べ替える。
+        const seasonTable = buildSeasonTable(spot).map((row) => ({
+          ...row,
+          fish: row.fish
+            .map((f) => ({ ...f, tier: getCatchAssessment(spot, f.slug)?.tier ?? "good" }))
+            .filter((f) => f.tier !== "excluded")
+            .sort((a, b) => {
+              const order = { excellent: 0, good: 1, fair: 2 } as const;
+              return (
+                order[a.tier as keyof typeof order] - order[b.tier as keyof typeof order] ||
+                Number(b.peakSeason) - Number(a.peakSeason) ||
+                a.name.localeCompare(b.name)
+              );
+            })
+            .slice(0, 5),
+        }));
 
         return (
           <section className="mt-8 sm:mt-12">
@@ -1577,21 +1595,63 @@ export default async function SpotDetailPage({ params }: PageProps) {
                       `旬の魚: ${spot.catchableFish.filter(cf => cf.peakSeason).slice(0, 3).map(cf => `${cf.fish.name}（${monthNames[cf.monthStart]}〜${monthNames[cf.monthEnd]}）`).join("、")}。`}
                   </p>
                 </div>
-                {/* 季節別の詳細アドバイス */}
-                {seasonDetails.length > 0 && (
-                  <div>
-                    <h3 className="mb-2 text-sm font-bold">季節ごとの釣りもの</h3>
-                    <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                      {seasonDetails.map(sd => (
-                        <div key={sd.season} className="rounded-lg border bg-muted/30 p-3">
-                          <p className="text-xs font-bold text-primary">{sd.season}</p>
-                          <p className="mt-0.5 text-xs font-medium">{sd.fish}</p>
-                          <p className="mt-1 text-xs text-muted-foreground">{sd.advice}</p>
-                        </div>
-                      ))}
-                    </div>
+                {/* 季節×対象魚×釣れる度テーブル（春夏秋冬の4行を常時表示） */}
+                <div>
+                  <h3 className="mb-2 text-sm font-bold">季節ごとの釣りもの</h3>
+                  <div className="overflow-x-auto">
+                    <table className="w-full min-w-[520px] border-collapse text-xs">
+                      <thead>
+                        <tr className="border-b bg-muted/40 text-left">
+                          <th className="w-16 px-2 py-2 font-bold">季節</th>
+                          <th className="px-2 py-2 font-bold">対象魚（釣れる度）</th>
+                          <th className="px-2 py-2 font-bold">ワンポイント</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {seasonTable.map((row) => (
+                          <tr key={row.seasonSlug} className="border-b align-top last:border-b-0">
+                            <td className="px-2 py-2 font-bold text-primary whitespace-nowrap">{row.label}</td>
+                            <td className="px-2 py-2">
+                              {row.fish.length > 0 ? (
+                                <span className="flex flex-wrap gap-x-2 gap-y-1">
+                                  {row.fish.map((f) => (
+                                    <Link
+                                      prefetch={false}
+                                      key={f.slug}
+                                      href={`/fish/${f.slug}`}
+                                      className="inline-flex items-center gap-0.5 hover:text-primary hover:underline"
+                                      title={`${f.name}の釣り方・釣れる時期`}
+                                    >
+                                      <span
+                                        className={
+                                          f.tier === "excellent"
+                                            ? "text-emerald-600 font-bold"
+                                            : f.tier === "good"
+                                              ? "text-sky-600"
+                                              : "text-muted-foreground"
+                                        }
+                                      >
+                                        {CATCH_RATING_LABELS[f.tier as keyof typeof CATCH_RATING_LABELS]}
+                                      </span>
+                                      <span className="font-medium">{f.name}</span>
+                                      <span className="text-[10px] text-muted-foreground">（{f.method}）</span>
+                                    </Link>
+                                  ))}
+                                </span>
+                              ) : (
+                                <span className="text-muted-foreground">この時期は狙える魚が少なめ</span>
+                              )}
+                            </td>
+                            <td className="px-2 py-2 text-muted-foreground">{row.advice}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
                   </div>
-                )}
+                  <p className="mt-1.5 text-[10px] text-muted-foreground">
+                    ◎よく釣れる／○釣れる／△まずまず（漁獲量・地形・実績にもとづく釣れる度）
+                  </p>
+                </div>
                 {/* おすすめ釣り方トップ3（文脈別説明） */}
                 <div>
                   <h3 className="mb-2 text-sm font-bold">おすすめの釣り方</h3>
