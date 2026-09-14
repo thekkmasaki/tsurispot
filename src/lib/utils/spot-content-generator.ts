@@ -620,6 +620,122 @@ export function generateSeasonDetail(spot: FishingSpot): { season: string; fish:
   return details;
 }
 
+// ── 季節テーブル（春夏秋冬 × 対象魚 × 釣り方 × アドバイス）──────────────
+// 競合(釣太郎)の「季節×対象魚×ワンポイント」テーブルに対抗しつつ、ツリスポの
+// 構造化データ（釣り方・時間帯・旬・後段で付与する釣れる度）で情報密度を上げる。
+// 釣れる度(tier)の付与は循環import回避のため呼び出し側(page.tsx)で getCatchAssessment を
+// 適用する（このファイルは next.config.ts 経由で transpile されるため fish-aptitude を
+// import しない）。
+
+export type SeasonSlug = "spring" | "summer" | "autumn" | "winter";
+
+export interface SeasonTableFish {
+  slug: string;
+  name: string;
+  method: string;
+  /** 朝マヅメ等（表示側で explainTime を通す） */
+  recommendedTime: string;
+  peakSeason: boolean;
+}
+
+export interface SeasonTableRow {
+  seasonSlug: SeasonSlug;
+  /** 例「春（3〜5月）」 */
+  label: string;
+  fish: SeasonTableFish[];
+  advice: string;
+  /** 対象魚ゼロ（オフシーズン）か */
+  isOffSeason: boolean;
+}
+
+const SEASON_DEFS: { slug: SeasonSlug; label: string; inSeason: (m: number) => boolean }[] = [
+  { slug: "spring", label: "春（3〜5月）", inSeason: (m) => m >= 3 && m <= 5 },
+  { slug: "summer", label: "夏（6〜8月）", inSeason: (m) => m >= 6 && m <= 8 },
+  { slug: "autumn", label: "秋（9〜11月）", inSeason: (m) => m >= 9 && m <= 11 },
+  { slug: "winter", label: "冬（12〜2月）", inSeason: (m) => m === 12 || m <= 2 },
+];
+
+/** その CatchableFish の月レンジ（年またぎ対応）がこの季節に1ヶ月でも重なるか */
+function cfInSeason(cf: CatchableFish, inSeason: (m: number) => boolean): boolean {
+  for (let m = cf.monthStart; ; m = (m % 12) + 1) {
+    if (inSeason(m)) return true;
+    if (m === cf.monthEnd) return false;
+  }
+}
+
+/** 季節別の一言アドバイス（generateSeasonDetail と同方針。魚の有無で分岐） */
+function seasonAdvice(spot: FishingSpot, slug: SeasonSlug, hasFish: boolean): string {
+  const region = getRegionGroup(spot.region.prefecture);
+  if (!hasFish) {
+    // オフシーズンのフォールバック（spotType考慮）
+    if (spot.spotType === "port" || spot.spotType === "breakwater" || spot.spotType === "rocky") {
+      return "狙える魚は少なめの時期。カサゴ・メバルなど根魚の探り釣りや穴釣りが手堅い";
+    }
+    if (spot.spotType === "river" || spot.spotType === "lake" || spot.spotType === "pond") {
+      return "淡水のオフシーズン。管理釣り場やワカサギなど時期の対象を選びたい";
+    }
+    return "この時期は狙える魚が限られる。近隣の漁港・堤防で根魚を狙うのが無難";
+  }
+  switch (slug) {
+    case "spring":
+      return spot.spotType === "beach"
+        ? "水温の上昇とともにキスが接岸。投げ釣りシーズンの開幕"
+        : spot.spotType === "rocky"
+          ? "のっこみのチヌやグレが狙える好シーズン。産卵前の荒食いを狙う"
+          : "水温が上がり始め、魚の活性が徐々にアップ。新子のアオリイカも登場";
+    case "summer":
+      return spot.spotType === "river"
+        ? "鮎やヤマメなど渓流魚のベストシーズン。日差しが強いので熱中症対策を"
+        : "青物の回遊が活発化。早朝の涼しい時間帯が特におすすめ。熱中症対策は必須";
+    case "autumn":
+      return spot.spotType === "port" || spot.spotType === "breakwater"
+        ? "最も魚種が豊富な時期。サビキ釣りの数釣りから青物まで多彩な釣りが楽しめる"
+        : "年間で最も釣れる時期。気候も穏やかで一日中快適に楽しめる";
+    case "winter":
+      return region === "hokkaido" || region === "tohoku"
+        ? "厳寒期は釣り物が限られるが、ワカサギやカレイなど冬ならではのターゲットも"
+        : region === "kyushu" || region === "shikoku"
+          ? "温暖な気候で冬場も快適に釣りができる。カレイや根魚が好ターゲット"
+          : "魚種は減るものの、カレイやメバルなど冬の定番ターゲットが楽しめる。防寒対策を万全に";
+  }
+}
+
+/**
+ * 春夏秋冬の4行を必ず返す季節テーブル。各季節にその時期釣れる魚（釣り方・時間帯つき）を
+ * 旬フラグ優先で集約する。釣れる度(tier)は呼び出し側で付与（循環import回避）。
+ */
+export function buildSeasonTable(spot: FishingSpot): SeasonTableRow[] {
+  return SEASON_DEFS.map(({ slug, label, inSeason }) => {
+    // 同一魚は季節内で1エントリに集約（旬を優先、次に難易度easy寄りの代表）
+    const bySlug = new Map<string, SeasonTableFish>();
+    for (const cf of spot.catchableFish) {
+      if (!cfInSeason(cf, inSeason)) continue;
+      const key = cf.fish.slug;
+      const cand: SeasonTableFish = {
+        slug: cf.fish.slug,
+        name: cf.fish.name,
+        method: cf.method,
+        recommendedTime: cf.recommendedTime,
+        peakSeason: cf.peakSeason,
+      };
+      const prev = bySlug.get(key);
+      // 旬フラグが立つエントリを優先採用（見出しの信頼性）
+      if (!prev || (!prev.peakSeason && cand.peakSeason)) bySlug.set(key, cand);
+    }
+    // 旬 → 名前 の順で決定的に並べる（釣れる度は呼び出し側でソートし直す）
+    const fish = [...bySlug.values()].sort(
+      (a, b) => Number(b.peakSeason) - Number(a.peakSeason) || a.name.localeCompare(b.name),
+    );
+    return {
+      seasonSlug: slug,
+      label,
+      fish,
+      advice: seasonAdvice(spot, slug, fish.length > 0),
+      isOffSeason: fish.length === 0,
+    };
+  });
+}
+
 /**
  * 設備・アクセスの実用ガイド
  */
