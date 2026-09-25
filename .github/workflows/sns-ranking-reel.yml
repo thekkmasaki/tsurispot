@@ -1,0 +1,84 @@
+name: SNS ランキング投稿（Instagramリール / Threads）
+
+# 毎日1本「◯月に△△が釣れる□□県の釣り場TOP10」を自動生成して投稿する。
+# 生成器: scripts/sns/ranking-reel/（サイトの県×月×魚種ページと同じデータ・掲載基準）
+on:
+  schedule:
+    - cron: '0 11 * * *'   # JST 20:00（帰宅後のアクティブ帯）
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: '投稿せずDiscordに画像プレビューだけ送る'
+        type: boolean
+        default: true
+      pref:
+        description: '県slugを固定（例: hyogo）。空なら自動選定'
+        required: false
+      fish:
+        description: '魚種slugを固定（例: tachiuo）。空なら自動選定'
+        required: false
+      platforms:
+        description: '投稿先'
+        default: 'instagram,threads'
+
+concurrency:
+  group: sns-ranking-reel
+  cancel-in-progress: false
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      INSTAGRAM_USER_ID: ${{ secrets.INSTAGRAM_USER_ID }}
+      INSTAGRAM_ACCESS_TOKEN: ${{ secrets.INSTAGRAM_ACCESS_TOKEN }}
+      THREADS_USER_ID: ${{ secrets.THREADS_USER_ID }}
+      THREADS_ACCESS_TOKEN: ${{ secrets.THREADS_ACCESS_TOKEN }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: ap-northeast-1
+      UPSTASH_REDIS_REST_URL: ${{ secrets.UPSTASH_REDIS_REST_URL }}
+      UPSTASH_REDIS_REST_TOKEN: ${{ secrets.UPSTASH_REDIS_REST_TOKEN }}
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: 依存インストール
+        run: npm ci
+
+      - name: 描画環境（Chromium・ffmpeg・日本語/絵文字フォント）
+        run: |
+          npx playwright install chromium --with-deps
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq ffmpeg fonts-noto-cjk fonts-noto-color-emoji
+
+      - name: 生成して投稿
+        run: |
+          ARGS=()
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            [ "${{ inputs.dry_run }}" = "true" ] && ARGS+=(--dry-run)
+            [ -n "${{ inputs.pref }}" ] && ARGS+=(--pref "${{ inputs.pref }}")
+            [ -n "${{ inputs.fish }}" ] && ARGS+=(--fish "${{ inputs.fish }}")
+            ARGS+=(--platforms "${{ inputs.platforms }}")
+          fi
+          node scripts/sns/ranking-reel/run.mjs "${ARGS[@]}"
+
+      - name: 生成物を保存（確認用・7日）
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sns-ranking-${{ github.run_id }}
+          path: out/sns-ranking/
+          retention-days: 7
+
+      - name: Discord通知（異常終了）
+        if: failure() && env.DISCORD_WEBHOOK_URL != ''
+        run: |
+          curl -s -H "Content-Type: application/json" \
+            -d "{\"content\":\"❌ **SNSランキング投稿** ワークフロー失敗\\nhttps://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}\"}" \
+            "$DISCORD_WEBHOOK_URL"
