@@ -98,6 +98,13 @@ export interface FishingSpot {
   structureTypes?: StructureCategory[];
   /** 衛星画像URL */
   satelliteImageUrl?: string;
+  /**
+   * 実績サイト等から裏取りした、このスポット固有の攻略メモ。
+   * AI創作ではなく既存の一次情報（釣果サイト・釣具店情報・ブログ等）の要約で、
+   * 出典(source)必須。ユーザー投稿(SpotContribution/CatchReport)とは別系統の編集情報。
+   * spot-tips-add.ts で定義し、spots.ts の統合パイプラインで後付けマージする。
+   */
+  localTips?: { text: string; source: string }[];
 }
 
 /**

@@ -48,6 +48,16 @@ describe("spots data", () => {
     });
   });
 
+  it("localTips がある場合は全 tip に非空の text と source を持つ（出典必須）", () => {
+    fishingSpots.forEach((s) => {
+      if (!s.localTips) return;
+      s.localTips.forEach((tip) => {
+        expect(tip.text?.trim().length ?? 0).toBeGreaterThan(0);
+        expect(tip.source?.trim().length ?? 0).toBeGreaterThan(0);
+      });
+    });
+  });
+
   it("all spots should have valid rating", () => {
     fishingSpots.forEach((s) => {
       expect(s.rating).toBeGreaterThanOrEqual(1);
