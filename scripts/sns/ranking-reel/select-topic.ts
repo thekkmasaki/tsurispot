@@ -72,7 +72,22 @@ function placeKey(name: string, prefName: string) {
     .replace(new RegExp("^" + prefName.replace(/[都道府県]$/, "")), "")
     .replace(/^[^\s]{1,5}?[市町村]/, "")
     .replace(/(左岸|右岸|サーフ|周辺|一帯|護岸|海岸|付近)$/g, "")
-    .trim();
+    .replace(/[\s　・･,、\-－]/g, "")
+    .replace(/漁港|港/g, "");
+}
+
+/** 表記ゆれ（「焼津新港」と「焼津港 新港」、「白灯台堤防」と「白灯堤防」）を同一視する */
+function samePlace(a: string, b: string) {
+  if (a === b) return true;
+  if (Math.min(a.length, b.length) >= 3 && (a.includes(b) || b.includes(a))) return true;
+  // 「清水港」と「清水港日の出埠頭」のような港全体と一部
+  if (Math.min(a.length, b.length) >= 2 && (a.startsWith(b) || b.startsWith(a))) return true;
+  const grams = (s: string) => new Set(Array.from({ length: Math.max(0, s.length - 1) }, (_, i) => s.slice(i, i + 2)));
+  const A = grams(a), B = grams(b);
+  if (A.size === 0 || B.size === 0) return false;
+  let common = 0;
+  for (const g of A) if (B.has(g)) common++;
+  return (2 * common) / (A.size + B.size) >= 0.7;
 }
 
 // 決定的な擬似乱数（同じ日付なら同じお題）
@@ -124,7 +139,7 @@ const seenPlace: string[] = [];
 const pool = matchingSpots(pick.pref.name, pick.fish.slug)
   .filter((x) => {
     const k = placeKey(x.spot.name, pick.pref.name);
-    if (!k || seenPlace.some((p) => p.includes(k) || k.includes(p))) return false;
+    if (!k || seenPlace.some((p) => samePlace(p, k))) return false;
     seenPlace.push(k);
     return true;
   })

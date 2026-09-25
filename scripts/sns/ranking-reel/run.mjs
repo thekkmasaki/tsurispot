@@ -36,6 +36,15 @@ if (!dryRun && ledger.some((e) => e.date === date && e.ok)) {
   console.log(`${date} は投稿済みのためスキップ`);
   process.exit(0);
 }
+if (!dryRun) {
+  const hasIg = platforms.has("instagram") && process.env.INSTAGRAM_USER_ID && (await getToken("instagram"));
+  const hasTh = platforms.has("threads") && process.env.THREADS_USER_ID && (await getToken("threads"));
+  if (!hasIg && !hasTh) {
+    console.log("投稿先の認証情報が未登録のためスキップ");
+    await discord("⏭️ **SNSランキング投稿** 認証情報（INSTAGRAM_USER_ID / INSTAGRAM_ACCESS_TOKEN 等）が未登録のためスキップしました");
+    process.exit(0);
+  }
+}
 
 // 2) お題選定（サイトと同じデータ・同じ掲載基準）
 const selArgs = ["--yes", "tsx@4.23.15", path.join(here, "select-topic.ts"), "--date", date,
