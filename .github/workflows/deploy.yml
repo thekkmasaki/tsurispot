@@ -526,19 +526,44 @@ jobs:
       # after 取得時の sitemap は新デプロイ内容が反映済み（＝旧 sitemap を掴む問題は起きない）。
       # before がエッジの古いキャッシュだった場合でも差分は「過大（＝再送）方向」にしか振れず安全側。
       # 失敗してもデプロイ自体は成功扱い (continue-on-error)。
-      - name: IndexNow 差分送信（新規公開URLのみ）
+      - name: IndexNow 送信（主要ハブ＋新規公開URL）
         if: success() && github.ref == 'refs/heads/master'
         continue-on-error: true
         run: |
-          if [ ! -s /tmp/urls-before.txt ]; then
-            echo "::warning::beforeスナップショット無し。差分送信をskip"; exit 0
+          # 送信対象 = 主要ハブページ（毎デプロイ）＋ sitemap差分の新規URL。
+          # 【2026-09 修正】従来は「新規URLのみ」だったため、(a)新規URLゼロのデプロイでは
+          # 何も送らず、(b)既存URLの内容更新（季節テーブル・攻略ポイント追記等）が一度も
+          # IndexNow に届かなかった。Bing WMT「最近公開したページが未送信」勧告の原因。
+          # ハブページ（トップ・各索引）は新規コンテンツを掲載する索引であり、更新のたびに
+          # 送信するのは IndexNow のエチケットに反しない少量（十数件）。全量バッチ送信はしない。
+          CORE_URLS="https://tsurispot.com/
+          https://tsurispot.com/spots
+          https://tsurispot.com/fish
+          https://tsurispot.com/area
+          https://tsurispot.com/map
+          https://tsurispot.com/guide
+          https://tsurispot.com/blog
+          https://tsurispot.com/ranking
+          https://tsurispot.com/catchable-now
+          https://tsurispot.com/fishing
+          https://tsurispot.com/methods
+          https://tsurispot.com/fishing-calendar
+          https://tsurispot.com/sitemap.xml"
+          echo "$CORE_URLS" | sed 's/^[[:space:]]*//' | grep -v '^$' | sort -u > /tmp/urls-added.txt
+          # 新規URL差分（beforeスナップショットがある場合のみ加える）
+          if [ -s /tmp/urls-before.txt ]; then
+            curl -sS --retry 3 --max-time 90 https://tsurispot.com/sitemap.xml -o /tmp/sitemap-after.xml || true
+            grep -o '<loc>[^<]*</loc>' /tmp/sitemap-after.xml 2>/dev/null | sed -e 's/<[^>]*>//g' | sort -u > /tmp/urls-after.txt || true
+            if [ -s /tmp/urls-after.txt ]; then
+              comm -13 /tmp/urls-before.txt /tmp/urls-after.txt >> /tmp/urls-added.txt
+            fi
+          else
+            echo "::warning::beforeスナップショット無し。差分は送らずハブのみ送信"
           fi
-          curl -sS --retry 3 --max-time 90 https://tsurispot.com/sitemap.xml -o /tmp/sitemap-after.xml
-          grep -o '<loc>[^<]*</loc>' /tmp/sitemap-after.xml | sed -e 's/<[^>]*>//g' | sort -u > /tmp/urls-after.txt
-          comm -13 /tmp/urls-before.txt /tmp/urls-after.txt > /tmp/urls-added.txt
+          sort -u /tmp/urls-added.txt -o /tmp/urls-added.txt
           ADDED=$(wc -l < /tmp/urls-added.txt)
-          echo "新規URL: ${ADDED}件"
-          if [ "$ADDED" -eq 0 ]; then echo "差分なし。送信skip（IndexNow推奨に合致）"; exit 0; fi
+          echo "送信URL: ${ADDED}件（ハブ＋新規差分）"
+          if [ "$ADDED" -eq 0 ]; then echo "送信対象なし"; exit 0; fi
           split -l 10000 /tmp/urls-added.txt /tmp/added-chunk-
           for f in /tmp/added-chunk-*; do
             jq -Rn --arg host "tsurispot.com" \
