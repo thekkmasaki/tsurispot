@@ -11,6 +11,8 @@
    - 写真はクレジットのあるものだけ使う。無いスポットは種別イラスト（`scenes.js`）で表示する
 2. `render.mjs` が 1080×1920 の画像とキャプション（Instagram / Threads）を作る
 3. `make-video.sh` が12秒のリール動画を作る（ffmpeg）
+   - BGM は非公開バケット `s3://tsurispot-sns-assets/bgm/` の mp3 を日替わりで使う。曲は再配布禁止なのでリポジトリや公開バケットに置かない
+   - ファイル名末尾の `@秒数` を再生開始位置にする（例: `summer-triangle@32.mp3`）。無ければ0秒から
 4. `run.mjs` が以下を順に行う
    - `tsurispot-uploads` の `sns/ranking/` に一時アップロードする
    - Instagramリールと Threads 画像を投稿する

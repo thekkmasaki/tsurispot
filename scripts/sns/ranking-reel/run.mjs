@@ -49,7 +49,10 @@ console.log(`お題: ${label}（${topic.spots.length}件）`);
 
 // 3) 画像・キャプション・動画
 execFileSync("node", [path.join(here, "render.mjs"), topicPath, outDir], { stdio: "inherit" });
-execFileSync("bash", [path.join(here, "make-video.sh"), path.join(outDir, "post.png"), path.join(outDir, "reel.mp4"), process.env.SNS_BGM_PATH ?? ""], { stdio: "inherit" });
+// BGM: SNS_BGM_DIR 内の mp3 を日替わりで選ぶ。ファイル名の「@秒数」をサビ等の開始位置として使う（例: track@32.5.mp3）
+const bgm = pickBgm(process.env.SNS_BGM_DIR, date);
+if (bgm) console.log(`BGM: ${path.basename(bgm.file)}（${bgm.offset}秒から）`);
+execFileSync("bash", [path.join(here, "make-video.sh"), path.join(outDir, "post.png"), path.join(outDir, "reel.mp4"), bgm?.file ?? "", String(bgm?.offset ?? 0)], { stdio: "inherit" });
 const igCaption = fs.readFileSync(path.join(outDir, "caption-instagram.txt"), "utf8");
 const thText = fs.readFileSync(path.join(outDir, "caption-threads.txt"), "utf8");
 
@@ -90,3 +93,14 @@ await appendLedger({ date, pref: topic.pref.slug, fish: topic.fish.slug, month: 
 const fmt = (k) => { const r = result[k]; return !r ? "" : r.id ? `✅ ${k}: ${r.permalink ?? r.id}` : r.error ? `❌ ${k}: ${r.error}` : `⏭️ ${k}: ${r.skipped}`; };
 await discord(`${failed.length ? "⚠️" : "📣"} **SNSランキング投稿** ${label}\n${["instagram", "threads"].map(fmt).filter(Boolean).join("\n")}\n${topic.url}`);
 if (posted.length === 0) process.exit(1);
+
+function pickBgm(dir, seed) {
+  if (!dir || !fs.existsSync(dir)) return null;
+  const files = fs.readdirSync(dir).filter((f) => /\.(mp3|m4a|wav)$/i.test(f)).sort();
+  if (files.length === 0) return null;
+  let h = 0;
+  for (const c of seed) h = (h * 31 + c.charCodeAt(0)) >>> 0;
+  const f = files[h % files.length];
+  const m = f.match(/@(\d+(?:\.\d+)?)\.[a-z0-9]+$/i);
+  return { file: path.join(dir, f), offset: m ? Number(m[1]) : 0 };
+}
