@@ -291,10 +291,6 @@ export async function generateMetadata({
 
   const spots = getSpotsForPrefecture(pref.name);
   const fishList = getCatchableFishForPrefecture(pref.name);
-  // この県の海釣りスポットが最寄りとする潮汐観測地点（/tides/[station] への導線。内陸県は空）
-  const tideStations = getStationsForPrefecture(pref.name)
-    .map((st) => ({ ...st, slug: getStationSlug(st.code) }))
-    .filter((st): st is typeof st & { slug: string } => st.slug !== null);
   const topFishNames = fishList
     .slice(0, 5)
     .map((f) => f.name)
@@ -363,6 +359,10 @@ export default async function PrefecturePage({ params }: PageProps) {
   const spots = getSpotsForPrefecture(pref.name);
   const prefRegions = getRegionsForPrefecture(pref.name);
   const catchableFish = getCatchableFishForPrefecture(pref.name);
+  // この県の海釣りスポットが最寄りとする潮汐観測地点（/tides/[station] への導線。内陸県は空）
+  const tideStations = getStationsForPrefecture(pref.name)
+    .map((st) => ({ ...st, slug: getStationSlug(st.code) }))
+    .filter((st): st is typeof st & { slug: string } => st.slug !== null);
   const prefInfo = getPrefectureInfoBySlug(slug);
 
   const { regionMap, ungroupedSpots } = getSpotsByRegion(pref.name);
