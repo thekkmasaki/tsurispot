@@ -1,16 +1,22 @@
 /**
  * 広告イベントの GA4 トラッキング
  *
- * 広告の impression（AdSense が実際に push された＝広告リクエストが出た）と
+ * 広告の request（AdSense が実際に push された＝広告リクエストが出た）と
  * viewability（枠の 50% 以上が 1 秒以上画面に表示された／MRC 基準に準拠）を
  * placement 別に GA4 へ送信する。これにより「どの広告枠が見られ・稼ぐか」を
  * 可視化し、データドリブンな配置最適化の意思決定に使う。
+ *
+ * 注意: 旧名 `ad_impression` は GA4 web の予約イベント名で、送信しても無音で破棄される
+ * （2026-08-27 に本番 /g/collect で送信を確認しつつ GA4 側 0 行を実測）。そのため
+ * `ad_request` へ改名した。`ad_request / page_view` が「枠描画率」で、mobile_sticky が
+ * 7週間 display:none で止まっていた事故（#474 で修復）はこの指標なら即日検知できる。
+ * `ad_click` はクロスオリジン iframe のため計測不可で送信箇所も無く、型から削除した。
  *
  * 送信パターンは affiliate-config.ts の trackAffiliateClick に揃えている。
  * placement の論理名は ads-config.ts（PR2 で導入）の論理名と一致させること。
  */
 
-export type AdEventName = "ad_impression" | "ad_viewable" | "ad_click";
+export type AdEventName = "ad_request" | "ad_viewable";
 
 export function trackAdEvent(params: {
   /** 広告枠の論理名（例: "in_article", "sidebar_sticky"）。GA4 のカスタムディメンションで集計する */

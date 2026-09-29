@@ -26,12 +26,14 @@ export function GoogleAnalytics() {
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
-          // Consent Mode v2（地域別 default）。AdSense は lazyOnload で後から読み込まれるため、
-          // この default が確実に先行する。
+          // Consent Mode v2（地域別 default）。ga4-init は afterInteractive で AdSense ローダーと
+          // 同段階だが、layout 上で先に配置されるためこの default が先行する。
           // EEA/UK/CH（GDPR圏）は全拒否を起点にし、同意で update する（法令順守）。
-          // 非EEA(日本など)は下の2つ目の default で analytics_storage のみ granted 起点にする
-          // （#86 の default 全 denied で GA4 が過少計測＝アクティブユーザー急減になった件への対応。
-          //  広告系は方針どおり同意制を維持し denied 起点）。
+          // 非EEA(日本など)は下の2つ目の default で解析・広告ともに granted 起点にする
+          // （日本は Cookie 利用に事前同意が法的必須ではなく、外部送信規律はプライバシーポリシーでの
+          //  公表で対応。2026-09 まで広告系を denied 起点にしていたため、新規ユーザーの初回PVと
+          //  バナー未操作ユーザーが恒久的に非パーソナライズ広告＝低単価配信になっていた。
+          //  拒否ボタンで明示的に denied にしたユーザーは下の復元ロジックで尊重する）。
           gtag('consent', 'default', {
             ad_storage: 'denied',
             ad_user_data: 'denied',
@@ -40,14 +42,14 @@ export function GoogleAnalytics() {
             region: ['AT','BE','BG','HR','CY','CZ','DK','EE','FI','FR','DE','GR','HU','IS','IE','IT','LV','LI','LT','LU','MT','NL','NO','PL','PT','RO','SK','SI','ES','SE','GB','CH'],
             wait_for_update: 500,
           });
-          // それ以外の地域（PVの大半を占める日本など、Cookie解析に事前同意が不要な地域）は
-          // analytics_storage を granted で開始し、同意前の GA4 過少計測（アクティブユーザー急減）を解消する。
-          // 広告系(ad_storage/ad_user_data/ad_personalization)は方針どおり同意制を維持し denied 起点のまま。
+          // それ以外の地域（PVの大半を占める日本など、Cookie利用に事前同意が不要な地域）は
+          // 解析・広告ともに granted で開始する。バナーの「拒否」で denied へ update し、
+          // 再訪時は下の復元ロジックで拒否を維持する（オプトアウト方式）。
           // region 指定の default は非region default より優先されるため、EEA は上の全拒否が効く。
           gtag('consent', 'default', {
-            ad_storage: 'denied',
-            ad_user_data: 'denied',
-            ad_personalization: 'denied',
+            ad_storage: 'granted',
+            ad_user_data: 'granted',
+            ad_personalization: 'granted',
             analytics_storage: 'granted',
           });
           // 再訪ユーザーの明示選択を常に復元する（地域別 default に依存せず確実に honor する）。
