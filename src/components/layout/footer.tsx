@@ -107,6 +107,7 @@ export function Footer() {
               <li><Link href="/monthly" prefetch={false} className="hover:text-white">月別釣りガイド</Link></li>
               <li><Link href="/seasonal" prefetch={false} className="hover:text-white">季節別ガイド</Link></li>
               <li><Link href="/fishing-calendar" prefetch={false} className="hover:text-white">釣りカレンダー</Link></li>
+              <li><Link href="/tides" prefetch={false} className="hover:text-white">潮見表（全国239地点）</Link></li>
               <li><Link href="/beginner-checklist" prefetch={false} className="hover:text-white">持ち物チェックリスト</Link></li>
               <li><Link href="/fishing-rules" prefetch={false} className="hover:text-white">ルールとマナー</Link></li>
               <li><Link href="/instructor-exam" prefetch={false} className="hover:text-white">釣りインストラクター試験対策</Link></li>

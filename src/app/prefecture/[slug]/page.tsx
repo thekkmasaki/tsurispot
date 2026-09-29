@@ -17,6 +17,7 @@ import {
   BookOpen,
   AlertTriangle,
   Thermometer,
+  Waves,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
@@ -42,6 +43,8 @@ import { ShoppingBag, ExternalLink, ArrowRight, Tag, Gem, Crown } from "lucide-r
 import { getHiddenGemSpotsForPrefecture } from "@/lib/hidden-gem";
 import { ShareButtons } from "@/components/ui/share-buttons";
 import { getStrikingSpotsByPref } from "@/lib/data/striking-spots";
+import { getStationsForPrefecture } from "@/lib/tide/station-spots";
+import { getStationSlug } from "@/lib/tide/station-slugs";
 
 type PageProps = {
   params: Promise<{ slug: string }>;
@@ -356,6 +359,10 @@ export default async function PrefecturePage({ params }: PageProps) {
   const spots = getSpotsForPrefecture(pref.name);
   const prefRegions = getRegionsForPrefecture(pref.name);
   const catchableFish = getCatchableFishForPrefecture(pref.name);
+  // この県の海釣りスポットが最寄りとする潮汐観測地点（/tides/[station] への導線。内陸県は空）
+  const tideStations = getStationsForPrefecture(pref.name)
+    .map((st) => ({ ...st, slug: getStationSlug(st.code) }))
+    .filter((st): st is typeof st & { slug: string } => st.slug !== null);
   const prefInfo = getPrefectureInfoBySlug(slug);
 
   const { regionMap, ungroupedSpots } = getSpotsByRegion(pref.name);
@@ -1465,6 +1472,36 @@ export default async function PrefecturePage({ params }: PageProps) {
                 </Badge>
               </Link>
             ))}
+          </div>
+        </section>
+      )}
+
+      {/* 潮見表（気象庁 潮位表データ・最寄り観測地点） */}
+      {tideStations.length > 0 && (
+        <section className="mb-6 sm:mb-8" id="tides">
+          <h2 className="mb-3 flex items-center gap-2 text-base font-bold sm:text-lg">
+            <Waves className="size-5 text-primary" />
+            {pref.name}の潮見表（満潮・干潮時刻）
+          </h2>
+          <p className="mb-3 text-sm text-muted-foreground">
+            {pref.name}の釣り場に近い潮汐観測地点です。今日から7日間の満潮・干潮時刻と潮回りを確認できます（気象庁 潮位表データ）。
+          </p>
+          <div className="flex flex-wrap gap-1.5 sm:gap-2">
+            {tideStations.map((st) => (
+              <Link prefetch={false} key={st.code} href={`/tides/${st.slug}`}>
+                <Badge
+                  variant="outline"
+                  className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-primary-foreground sm:text-sm"
+                >
+                  {st.name}の潮見表
+                </Badge>
+              </Link>
+            ))}
+            <Link prefetch={false} href="/tides">
+              <Badge variant="secondary" className="cursor-pointer px-2.5 py-1.5 text-xs sm:text-sm">
+                全国の潮見表一覧
+              </Badge>
+            </Link>
           </div>
         </section>
       )}
