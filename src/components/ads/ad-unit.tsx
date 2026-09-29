@@ -143,10 +143,11 @@ export function AdUnit({
         try {
           (window.adsbygoogle = window.adsbygoogle || []).push({});
           pushed.current = true;
-          // 広告リクエストが出た＝impression として placement 別に計測。
+          // 広告リクエストが出た＝ad_request として placement 別に計測（旧 ad_impression は
+          // GA4 予約名で破棄されていた）。ad_request/page_view が枠描画率。
           // （フィルされない場合もあるが placement 間の相対比較には有効。
           //   スクリプト未ロード時は配列に queue されるだけでも成功扱い＝描画確認ではない点に注意）
-          if (placement) trackAdEvent({ placement, slot, event: "ad_impression" });
+          if (placement) trackAdEvent({ placement, slot, event: "ad_request" });
           // 幅ガード解除後の遅延 push でも fallback エンジンが再評価できるよう通知
           evaluateRef.current?.();
         } catch {

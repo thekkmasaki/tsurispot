@@ -34,7 +34,8 @@ export function CookieBanner() {
 
   const handleDecline = () => {
     localStorage.setItem(COOKIE_CONSENT_KEY, "denied");
-    // 非EEAは default が granted のため、拒否時は明示的に denied へ update する。
+    // 非EEAは default が granted（解析・広告とも。google-analytics.tsx 参照）のため、
+    // 拒否時は明示的に denied へ update する。再訪時の復元は google-analytics.tsx 側で行う。
     if (typeof window !== "undefined" && typeof window.gtag === "function") {
       window.gtag("consent", "update", {
         ad_storage: "denied",
@@ -58,8 +59,8 @@ export function CookieBanner() {
     <div className="fixed bottom-[calc(215px+env(safe-area-inset-bottom,0px))] md:bottom-0 left-0 right-0 z-40 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80 px-3 py-2 shadow-lg md:px-4 md:py-2.5">
       <div className="mx-auto flex max-w-screen-xl items-center justify-between gap-3">
         <p className="text-xs text-muted-foreground md:text-sm">
-          <span className="hidden sm:inline">当サイトではCookieを使用しています。</span>
-          <span className="sm:hidden">Cookie使用に同意しますか？</span>
+          <span className="hidden sm:inline">当サイトではアクセス解析と広告配信のためにCookieを使用しています。</span>
+          <span className="sm:hidden">解析・広告のためCookieを使用しています。</span>
           <Link prefetch={false}
             href="/privacy"
             className="ml-1 text-primary underline underline-offset-2 hover:text-primary/80"
