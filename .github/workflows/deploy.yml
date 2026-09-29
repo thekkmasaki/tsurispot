@@ -306,7 +306,10 @@ jobs:
         run: |
           echo "Deployment started. Waiting for App Runner to update..."
           PREV_STATUS=""
-          for i in $(seq 1 30); do
+          # App Runner の更新所要時間は 2026-08 の約4分から 2026-09 に約17分へ伸びた（実測: list-operations）。
+          # 旧上限 30×15秒=7.5分 では 8/9 以降の全デプロイが「timed out」扱いとなり、後続の CF purge /
+          # ヘルスチェック / IndexNow / Discord成功通知が毎回スキップされていた。上限を 100×15秒=25分へ延長。
+          for i in $(seq 1 100); do
             STATUS=$(aws apprunner describe-service \
               --service-arn ${{ env.APP_RUNNER_SERVICE_ARN }} \
               --query "Service.Status" --output text)
@@ -347,7 +350,7 @@ jobs:
             PREV_STATUS="$STATUS"
             sleep 15
           done
-          echo "::error::Deployment timed out after 7.5 minutes"
+          echo "::error::Deployment timed out after 25 minutes"
           exit 1
 
       # Cloudflare キャッシュ purge（限定purge）。
