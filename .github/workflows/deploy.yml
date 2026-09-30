@@ -395,13 +395,21 @@ jobs:
           echo "$resp" | grep -q '"success":true' || {
             echo "::error::Cloudflare purge failed"; exit 1;
           }
-          # purge 有効性の実測検証: 直後の / が古い HIT のままなら purge は効いていない
-          sleep 5
-          cache_status=$(curl -s -o /dev/null -w "%header{cf-cache-status}" "https://tsurispot.com/")
-          cache_age=$(curl -s -o /dev/null -w "%header{age}" "https://tsurispot.com/")
-          echo "purge後の /: cf-cache-status=${cache_status} age=${cache_age:-0}"
-          if [ "$cache_status" = "HIT" ] && [ "${cache_age:-0}" -gt 600 ]; then
-            echo "::error::purge 後もトップに古いエッジキャッシュ(age=${cache_age}s)が残っています。CF_ZONE_ID の取り違え、または Cache Rule のカスタムキャッシュキー（single-file purge 非対応）を確認してください。"
+          # purge 有効性の実測検証: purge 直後の最初の / が cf-cache-status=HIT のままなら purge は効いていない。
+          # 【2026-09-30 修正】旧判定は Age ヘッダ >600s を「古いエッジキャッシュ」とみなしていたが、Age は
+          # Next.js の ISR キャッシュ（x-nextjs-cache: STALE/HIT）が付ける「生成からの経過秒」でもあり、
+          # CF が purge 後にオリジンから取り直しても大きな値になり得る（2026-09-29 の deploy で purge API
+          # 成功後に age=20300 で失敗扱い → 後続の IndexNow / ヘルスチェック / Discord 成功通知が全スキップ）。
+          # Age は見ず cf-cache-status のみで判定し、purge の伝播ラグを考慮して最大60秒リトライする。
+          purge_ok=0
+          for attempt in 1 2 3 4 5 6; do
+            sleep 10
+            cache_status=$(curl -s -o /dev/null -w "%header{cf-cache-status}" "https://tsurispot.com/")
+            echo "purge後の / (attempt ${attempt}): cf-cache-status=${cache_status:-none}"
+            if [ "$cache_status" != "HIT" ]; then purge_ok=1; break; fi
+          done
+          if [ "$purge_ok" != "1" ]; then
+            echo "::error::purge 後60秒経ってもトップが cf-cache-status=HIT のままです。CF_ZONE_ID の取り違え、または Cache Rule のカスタムキャッシュキー（single-file purge 非対応）を確認してください。"
             exit 1
           fi
           echo "Cloudflare cache purged (targeted hub pages)."
