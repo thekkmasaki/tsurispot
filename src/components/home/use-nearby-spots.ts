@@ -29,6 +29,42 @@ interface RawCoord {
   f: boolean;
 }
 
+export type SpotCoord = Omit<NearbySpot, "distanceKm">;
+
+let coordsPromise: Promise<SpotCoord[]> | null = null;
+
+/**
+ * /api/spots/coords を取得して復元する（モジュール内で 1 回だけ。現在地検索と地図の拡大表示で共有）。
+ * 失敗時はキャッシュを捨てて次回再試行できるようにする。
+ */
+export function loadSpotCoords(): Promise<SpotCoord[]> {
+  if (!coordsPromise) {
+    coordsPromise = fetch("/api/spots/coords")
+      .then((res) => {
+        if (!res.ok) throw new Error("fetch failed");
+        return res.json() as Promise<RawCoord[]>;
+      })
+      .then((raw) =>
+        raw.map((c) => ({
+          slug: c.s,
+          name: c.n,
+          lat: c.la,
+          lng: c.lo,
+          spotType: c.t,
+          rating: c.r,
+          prefecture: c.p,
+          areaName: c.a,
+          isFree: c.f,
+        }))
+      )
+      .catch((e) => {
+        coordsPromise = null;
+        throw e;
+      });
+  }
+  return coordsPromise;
+}
+
 export function haversineKm(lat1: number, lng1: number, lat2: number, lng2: number): number {
   const R = 6371;
   const dLat = ((lat2 - lat1) * Math.PI) / 180;
@@ -53,7 +89,7 @@ export type NearbyStatus = "idle" | "locating" | "ready" | "error";
  * 「現在地から探す」の共通ロジック（旧 HomeNearbyBand から抽出）。
  * ボタン押下 → geolocation → 静的座標 API を 1 回 fetch → 近い順を算出。
  * ※ getCurrentPosition は明示的な呼び出し時のみ（初期に自動発火しない）。
- * ※ /api/spots/coords（184KB）の取得も「押した人だけ・1 回だけ」。
+ * ※ /api/spots/coords（184KB）の取得も「押した人だけ・1 回だけ」（loadSpotCoords で地図拡大時と共有）。
  */
 export function useNearbySpots(limit = 5) {
   const [status, setStatus] = useState<NearbyStatus>("idle");
@@ -75,22 +111,9 @@ export function useNearbySpots(limit = 5) {
         const lat = pos.coords.latitude;
         const lng = pos.coords.longitude;
         try {
-          const res = await fetch("/api/spots/coords");
-          if (!res.ok) throw new Error("fetch failed");
-          const raw = (await res.json()) as RawCoord[];
-          const nearest: NearbySpot[] = raw
-            .map((c) => ({
-              slug: c.s,
-              name: c.n,
-              lat: c.la,
-              lng: c.lo,
-              spotType: c.t,
-              rating: c.r,
-              prefecture: c.p,
-              areaName: c.a,
-              isFree: c.f,
-              distanceKm: haversineKm(lat, lng, c.la, c.lo),
-            }))
+          const all = await loadSpotCoords();
+          const nearest: NearbySpot[] = all
+            .map((c) => ({ ...c, distanceKm: haversineKm(lat, lng, c.lat, c.lng) }))
             .sort((a, b) => a.distanceKm - b.distanceKm)
             .slice(0, limit);
           setCenter([lat, lng]);
