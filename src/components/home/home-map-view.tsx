@@ -145,7 +145,7 @@ function GestureInit({ onReady }: { onReady: (map: L.Map, coarse: boolean) => vo
 }
 
 /**
- * ホーム地図バンドの実地図（CARTO light_all）。
+ * ホーム地図バンドの実地図（国土地理院 淡色地図）。
  * 「スクロールで近づいた時」に dynamic(ssr:false) で遅延マウントされる。
  * mode="overview": 全都道府県のエリアマーカーを markercluster + fitBounds で表示。
  * mode="nearby": 現在地＋近い順スポットを表示。
@@ -186,8 +186,9 @@ export function HomeMapView({
         className="h-full w-full"
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>'
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          attribution='<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院</a>'
+          url="https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png"
+          maxNativeZoom={18}
         />
         <GestureInit onReady={handleReady} />
 

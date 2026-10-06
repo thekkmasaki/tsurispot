@@ -132,7 +132,7 @@ function GestureInit({ onReady }: { onReady: (map: L.Map, coarse: boolean) => vo
 /**
  * 釣果投稿の地図ピッカー（/post）。
  * 全スポット座標（/api/spots/coords・CDN配信）を開いた時に 1 回だけ取得し、
- * ホーム地図と同じ CARTO タイル + markercluster で表示。ピン→「この釣り場で投稿」で選択。
+ * markercluster で表示。ピン→「この釣り場で投稿」で選択。
  */
 export function PostSpotMapPicker({ onSelect }: { onSelect: (spot: PickedSpot) => void }) {
   const [spots, setSpots] = useState<RawCoord[] | null>(null);

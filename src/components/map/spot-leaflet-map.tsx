@@ -398,8 +398,9 @@ export function SpotLeafletMap({ data }: { data: SpotMapAnalysis }) {
         <InvalidateSizeOnVisible />
         <ZoomWatcher onZoomChange={handleZoom} />
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>'
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          attribution='<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener noreferrer">国土地理院</a>'
+          url="https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png"
+          maxNativeZoom={18}
           maxZoom={20}
         />
 
