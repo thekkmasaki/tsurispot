@@ -17,7 +17,7 @@ import { SPOT_TYPE_LABELS } from "@/types";
 import { useNearbySpots, formatDistance } from "./use-nearby-spots";
 import type { AreaMarker } from "@/lib/geo/home-area-markers";
 
-// 実地図（Leaflet + CARTO タイル）は「スクロールで近づいた時」にだけ読み込む（初期バンドル/初期HTMLに乗せない）。
+// 実地図（Leaflet + 国土地理院タイル）は「スクロールで近づいた時」にだけ読み込む（初期バンドル/初期HTMLに乗せない）。
 const HomeMapView = nextDynamic(
   () => import("./home-map-view").then((m) => m.HomeMapView),
   {
