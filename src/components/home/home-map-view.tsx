@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, useMap, useMapEvents } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import "leaflet.markercluster";
@@ -9,12 +9,14 @@ import "leaflet.markercluster/dist/MarkerCluster.css";
 import "leaflet.markercluster/dist/MarkerCluster.Default.css";
 import { markerIconHtml } from "@/lib/map-marker";
 import { SPOT_TYPE_LABELS } from "@/types";
-import type { NearbySpot } from "./use-nearby-spots";
+import { loadSpotCoords, type NearbySpot } from "./use-nearby-spots";
 import type { AreaMarker } from "@/lib/geo/home-area-markers";
 
 const JAPAN_CENTER: [number, number] = [37.6, 137.5];
 const JAPAN_ZOOM = 5;
 const NEARBY_ZOOM = 11;
+// これ以上拡大したら都道府県ピン → スポット単位のピンに切り替える。
+const SPOT_LEVEL_ZOOM = 8;
 
 // 現在地マーカー（青丸）。カスタム divIcon のため Leaflet 既定マーカー画像(CDN)は不要。
 const userIcon = new L.DivIcon({
@@ -53,10 +55,16 @@ const popupLinkStyle: React.CSSProperties = {
 
 /**
  * 全都道府県のエリアマーカーを markercluster で表示（密集は合計件数のクラスタにまとまる）。
- * マウント時に全マーカーが収まるよう fitBounds（北海道〜沖縄まで見切れない）。
+ * 初回マウント時は全マーカーが収まるよう fitBounds（北海道〜沖縄まで見切れない）。
  * ※ 個別マーカーは imperative に追加するため、popup は HTML 文字列でリンクを埋める。
  */
-function ClusteredAreaMarkers({ markers }: { markers: AreaMarker[] }) {
+function ClusteredAreaMarkers({
+  markers,
+  fittedRef,
+}: {
+  markers: AreaMarker[];
+  fittedRef: React.MutableRefObject<boolean>;
+}) {
   const map = useMap();
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -102,15 +110,126 @@ function ClusteredAreaMarkers({ markers }: { markers: AreaMarker[] }) {
     }
 
     map.addLayer(cluster);
-    const bounds = cluster.getBounds();
-    if (bounds && bounds.isValid()) {
-      map.fitBounds(bounds, { padding: [28, 28] });
+    // 全国 fitBounds は初回だけ（ズームアウトで都道府県ピンに戻った時に視点を飛ばさない）。
+    if (!fittedRef.current) {
+      fittedRef.current = true;
+      const bounds = cluster.getBounds();
+      if (bounds && bounds.isValid()) {
+        map.fitBounds(bounds, { padding: [28, 28] });
+      }
     }
     return () => {
       map.removeLayer(cluster);
     };
-  }, [markers, map]);
+  }, [markers, map, fittedRef]);
   return null;
+}
+
+function escapeHtml(str: string): string {
+  return str.replace(/[&<>"']/g, (ch) => `&#${ch.charCodeAt(0)};`);
+}
+
+/**
+ * 拡大時のスポット単位ピン（markercluster。密集は件数クラスタ、ズーム15以上で全件ばらす）。
+ * 座標は /api/spots/coords をマウント時に 1 回だけ取得（ズーム8未満の人は取得しない）。
+ */
+function SpotClusterMarkers({ onStatus }: { onStatus: (s: "loading" | "ready" | "error") => void }) {
+  const map = useMap();
+  useEffect(() => {
+    let cancelled = false;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let cluster: any = null;
+    onStatus("loading");
+    loadSpotCoords()
+      .then((spots) => {
+        if (cancelled) return;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        cluster = (L as any).markerClusterGroup({
+          chunkedLoading: true,
+          maxClusterRadius: 50,
+          disableClusteringAtZoom: 15,
+          showCoverageOnHover: false,
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          iconCreateFunction: (c: any) => {
+            const n = c.getChildCount();
+            const label = n >= 1000 ? `${(n / 1000).toFixed(1)}k` : String(n);
+            const size = n >= 100 ? 40 : n >= 10 ? 34 : 28;
+            return L.divIcon({
+              html:
+                `<div style="width:${size}px;height:${size}px;border-radius:50%;background:#ef5a48;border:2.5px solid #fff;` +
+                "box-shadow:0 2px 8px rgba(0,0,0,0.35);display:flex;align-items:center;justify-content:center;" +
+                `color:#fff;font-weight:800;font-size:11px;font-variant-numeric:tabular-nums">${label}</div>`,
+              className: "",
+              iconSize: [size, size],
+            });
+          },
+        });
+        const layers = spots.map((s) => {
+          const m = L.marker([s.lat, s.lng], {
+            icon: L.divIcon({
+              html: markerIconHtml(s.spotType, null),
+              className: "",
+              iconSize: [18, 18],
+              iconAnchor: [9, 9],
+              popupAnchor: [0, -10],
+            }),
+          });
+          m.bindPopup(
+            '<div style="min-width:160px">' +
+              `<p style="margin:0;font-weight:700;font-size:13px">${escapeHtml(s.name)}</p>` +
+              `<p style="margin:2px 0 6px;font-size:11px;color:#6b7280">${escapeHtml(s.prefecture)} ${escapeHtml(s.areaName)}・${SPOT_TYPE_LABELS[s.spotType] ?? ""}</p>` +
+              `<a href="/spots/${encodeURIComponent(s.slug)}" style="display:block;text-align:center;padding:6px 12px;border-radius:8px;background:#0369a1;color:#fff;font-size:12px;font-weight:700;text-decoration:none">詳細を見る →</a>` +
+              "</div>"
+          );
+          return m;
+        });
+        cluster.addLayers(layers);
+        map.addLayer(cluster);
+        onStatus("ready");
+      })
+      .catch(() => {
+        if (!cancelled) onStatus("error");
+      });
+    return () => {
+      cancelled = true;
+      if (cluster) map.removeLayer(cluster);
+    };
+  }, [map, onStatus]);
+  return null;
+}
+
+/**
+ * overview モード: ズーム8未満は都道府県ピン、8以上はスポット単位ピンに切り替える。
+ * 初回だけ全国に fitBounds し、以降の切替では視点を動かさない。
+ */
+function OverviewLayers({ areaMarkers }: { areaMarkers: AreaMarker[] }) {
+  const map = useMap();
+  const [zoom, setZoom] = useState(() => map.getZoom());
+  const [spotStatus, setSpotStatus] = useState<"loading" | "ready" | "error">("loading");
+  const fitted = useRef(false);
+  useMapEvents({ zoomend: () => setZoom(map.getZoom()) });
+
+  const spotLevel = zoom >= SPOT_LEVEL_ZOOM;
+
+  let hint: string | null = null;
+  if (!spotLevel) hint = "拡大すると釣り場を1件ずつ表示";
+  else if (spotStatus === "loading") hint = "釣り場を読み込み中…";
+  else if (spotStatus === "error") hint = "釣り場の読み込みに失敗しました";
+
+  return (
+    <>
+      {spotLevel ? (
+        <SpotClusterMarkers onStatus={setSpotStatus} />
+      ) : (
+        <ClusteredAreaMarkers markers={areaMarkers} fittedRef={fitted} />
+      )}
+      {hint && (
+        <div className="pointer-events-none absolute bottom-2 left-2 z-[400] rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-medium text-slate-700 shadow">
+          {hint}
+        </div>
+      )}
+    </>
+  );
 }
 
 /** center/zoom が変わったら地図を移動（nearby 表示への切替）。 */
@@ -147,7 +266,7 @@ function GestureInit({ onReady }: { onReady: (map: L.Map, coarse: boolean) => vo
 /**
  * ホーム地図バンドの実地図（国土地理院 淡色地図）。
  * 「スクロールで近づいた時」に dynamic(ssr:false) で遅延マウントされる。
- * mode="overview": 全都道府県のエリアマーカーを markercluster + fitBounds で表示。
+ * mode="overview": 全都道府県のエリアマーカーを markercluster + fitBounds で表示。ズーム8以上でスポット単位ピンに切替。
  * mode="nearby": 現在地＋近い順スポットを表示。
  */
 export function HomeMapView({
@@ -192,7 +311,7 @@ export function HomeMapView({
         />
         <GestureInit onReady={handleReady} />
 
-        {mode === "overview" && <ClusteredAreaMarkers markers={areaMarkers} />}
+        {mode === "overview" && <OverviewLayers areaMarkers={areaMarkers} />}
 
         {mode === "nearby" && center && (
           <>
