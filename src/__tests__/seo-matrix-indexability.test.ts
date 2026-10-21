@@ -11,11 +11,12 @@ import {
   explainPrefMonthFishDemand,
   resolveFishSlugsByName,
   UNAGI_SUMMER_MONTH_SLUGS,
-  MATRIX_DEMAND_POPULARITY_MAX,
+  MATRIX_DEMAND_RULE,
 } from "@/lib/data";
 import { fishMetadata } from "@/lib/data/fish-metadata";
 import { fishSpecies } from "@/lib/data/fish";
 import { monthlyGuides } from "@/lib/data/monthly-guides";
+import { prefectureInfoList } from "@/lib/data/prefecture-info";
 import { prefectures } from "@/lib/data/prefectures";
 import { fishingSpots } from "@/lib/data/spots";
 import { MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
@@ -221,10 +222,12 @@ describe("index/sitemap セット = 配信 ∧ 需要あり（isDemandPrefMonthF
     }
   });
 
-  it("需要判定は実際に絞り込んでいる（配信セットの 50〜90% が index）", () => {
+  it("需要判定は実際に絞り込んでいる（全件 index でも絞り過ぎでもない）", () => {
     // 全件 index（判定が常に true）や極端な絞り過ぎ（判定が壊れて false 連発）を検出する。
+    // GSC 12 週実測で需要は魚種横断に分散しており、損失 ≤2% を守ると noindex は配信の数%（約300件）が上限。
+    // 絞り幅は MATRIX_DEMAND_RULE で決める。ここでは「少なくとも 100 件は noindex」「半分以上は index」だけ固定。
+    expect(eligible.length - indexable.length).toBeGreaterThanOrEqual(100);
     expect(indexable.length).toBeGreaterThan(eligible.length * 0.5);
-    expect(indexable.length).toBeLessThan(eligible.length * 0.9);
     expect(indexable.length).toBeGreaterThan(1500);
   });
 
@@ -246,7 +249,7 @@ describe("index/sitemap セット = 配信 ∧ 需要あり（isDemandPrefMonthF
   });
 });
 
-describe("需要判定ルール（A topFish / B prefecture-info / C 海水人気 / D ウナギ夏）", () => {
+describe("需要判定ルール（A topFish / B prefecture-info / C 海水人気 / C' 淡水人気 / D ウナギ夏）", () => {
   const eligible = getEligiblePrefMonthFishCombos();
 
   it("A: monthlyGuides.topFish の slug は全て実在する魚種（tara→madara 等の無効 slug を防ぐ）", () => {
@@ -267,12 +270,26 @@ describe("需要判定ルール（A topFish / B prefecture-info / C 海水人気
     }
   });
 
-  it("C: 海水・汽水魚で popularity<=上限 は県・月を問わず需要あり、淡水魚は C では拾わない", () => {
+  it("C/C': 海水・汽水魚は seaPopularityMax、淡水魚は freshwaterPopularityMax 以下なら県・月を問わず需要あり", () => {
     for (const f of fishSpecies) {
       const rank = fishMetadata[f.slug]?.popularity;
       const reasons = explainPrefMonthFishDemand("__no_such_pref__", "january", f.slug);
-      const expectC = f.category !== "freshwater" && rank !== undefined && rank <= MATRIX_DEMAND_POPULARITY_MAX;
+      const expectC =
+        f.category !== "freshwater" && rank !== undefined && rank <= MATRIX_DEMAND_RULE.seaPopularityMax;
+      const expectC2 =
+        f.category === "freshwater" && rank !== undefined && rank <= MATRIX_DEMAND_RULE.freshwaterPopularityMax;
       expect(reasons.includes("sea-popular"), `${f.slug}(${f.category}, pop=${rank})`).toBe(expectC);
+      expect(reasons.includes("freshwater-popular"), `${f.slug}(${f.category}, pop=${rank})`).toBe(expectC2);
+    }
+  });
+
+  it("GSC 12週実測で需要が確認された淡水魚（ayu/blackbass/oikawa/yamame/nijimasu/herabuna/koi/tanago）は配信ページを 100% index 維持", () => {
+    // 2026-07-24〜10-18: ayu 257clicks / oikawa 161 / yamame 122 / blackbass 110 / herabuna 110 / tanago 95 / koi 85
+    for (const slug of ["ayu", "blackbass", "oikawa", "yamame", "nijimasu", "herabuna", "koi", "tanago"]) {
+      const combos = eligible.filter((c) => c.fishSlug === slug);
+      expect(combos.length, `${slug} の配信ページが無い`).toBeGreaterThan(0);
+      const dropped = combos.filter((c) => !isDemandPrefMonthFish(c.prefSlug, c.monthSlug, c.fishSlug));
+      expect(dropped.map(comboKey), `${slug} が noindex 化された`).toEqual([]);
     }
   });
 
@@ -299,10 +316,17 @@ describe("需要判定ルール（A topFish / B prefecture-info / C 海水人気
     for (const c of unagiSummer) expect(isDemandPrefMonthFish(c.prefSlug, c.monthSlug, c.fishSlug)).toBe(true);
   });
 
-  it("需要ゼロの組合せは理由なし＝noindex（マイナー淡水魚 × 無関係な県）", () => {
-    // ugui(淡水 pop20) は A/C/D いずれにも該当せず、存在しない県なら B も該当しない
-    expect(explainPrefMonthFishDemand("__no_such_pref__", "january", "ugui")).toEqual([]);
-    expect(isDemandPrefMonthFish("__no_such_pref__", "january", "ugui")).toBe(false);
+  it("需要ゼロの組合せは理由なし＝noindex（海水の外道 × 無関係な県）", () => {
+    // bora(海水 pop78)・kibire(pop81) は A/C/D いずれにも該当せず、存在しない県なら B も該当しない
+    for (const slug of ["bora", "kibire"]) {
+      expect(explainPrefMonthFishDemand("__no_such_pref__", "january", slug)).toEqual([]);
+      expect(isDemandPrefMonthFish("__no_such_pref__", "january", slug)).toBe(false);
+    }
+    // 実データ: 需要ゼロ帯の配信ページが実際に noindex 化されている（判定が形骸化していない）
+    const boraDropped = eligible.filter(
+      (c) => c.fishSlug === "bora" && !isDemandPrefMonthFish(c.prefSlug, c.monthSlug, c.fishSlug)
+    );
+    expect(boraDropped.length).toBeGreaterThan(50);
   });
 
   it("B: prefecture-info の魚名は別名・総称でも解決される（kurosoi/blackbass 等の救済）", () => {
@@ -314,12 +338,25 @@ describe("需要判定ルール（A topFish / B prefecture-info / C 海水人気
     // 魚種データに無い種は空（誤って別の魚に倒さない）
     expect(resolveFishSlugsByName("サケ")).toEqual([]);
     expect(resolveFishSlugsByName("")).toEqual([]);
-    // 実データ: 別名解決だけで index に残る組合せが存在する（alias 対応が機能している）
-    const aliasOnly = getIndexablePrefMonthFishCombos().filter((c) => {
-      const r = explainPrefMonthFishDemand(c.prefSlug, c.monthSlug, c.fishSlug);
-      return r.length === 1 && r[0] === "pref-info-alias";
-    });
-    expect(aliasOnly.length).toBeGreaterThan(0);
+    // 実データ: prefecture-info の popularFish に別名・総称で書かれた魚が、その県で
+    // "pref-info-alias" として需要判定に乗っている（alias 対応が機能している）
+    const fishNames = new Set(fishSpecies.map((f) => f.slug));
+    const nameSet = new Set(fishSpecies.map((f) => f.name));
+    let checked = 0;
+    for (const info of prefectureInfoList) {
+      for (const name of info.popularFish) {
+        if (nameSet.has(name)) continue;
+        for (const slug of resolveFishSlugsByName(name)) {
+          expect(fishNames.has(slug), `${name} → ${slug} が存在しない`).toBe(true);
+          expect(
+            explainPrefMonthFishDemand(info.slug, "january", slug),
+            `${info.slug} popularFish「${name}」→ ${slug}`
+          ).toContain("pref-info-alias");
+          checked++;
+        }
+      }
+    }
+    expect(checked).toBeGreaterThan(0);
   });
 });
 
