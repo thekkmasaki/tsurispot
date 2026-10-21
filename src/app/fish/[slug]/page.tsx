@@ -23,7 +23,13 @@ import {
 import { FishImage } from "@/components/ui/spot-image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { getFishSpeciesWithSpots, getCoOccurringFish, getFishBySameMethod, getFishBySameSeason } from "@/lib/data";
+import {
+  getFishSpeciesWithSpots,
+  getCoOccurringFish,
+  getFishBySameMethod,
+  getFishBySameSeason,
+  getIndexablePrefMonthFishCombos,
+} from "@/lib/data";
 import { DIFFICULTY_LABELS, CATCH_RATING_LABELS } from "@/types";
 import { trimDescription } from "@/lib/utils/seo";
 import { composeMetaDescription, firstSentence } from "@/lib/seo/meta-description";
@@ -41,8 +47,7 @@ import { ShareButtons } from "@/components/ui/share-buttons";
 import { InArticleAd, DisplayAd, LazyAd, StickySidebarAd } from "@/components/ads/ad-unit";
 import { seasonalGuides } from "@/lib/data/seasonal-guides";
 import { getPrefectureByName, prefectures } from "@/lib/data/prefectures";
-import { MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
-import { fishingSpots } from "@/lib/data/spots";
+import { MONTHS } from "@/lib/data/fishing-methods";
 import { fishRegionalSeasons } from "@/lib/data/fish-regional-seasons";
 import { CollapsibleSection } from "@/components/ui/collapsible-section";
 
@@ -726,27 +731,35 @@ export default async function FishDetailPage({ params }: PageProps) {
         ) : null;
       })()}
 
-      {/* 都道府県×月の釣り情報 */}
+      {/* 都道府県×月の釣り情報（マトリクスページへの内部リンク）。
+          リンク先は index 対象（配信 count>=MATRIX_MIN_SPOTS ∧ 需要あり isDemandPrefMonthFish）の
+          組合せだけ＝ getIndexablePrefMonthFishCombos() で sitemap・robots と同じ集合を共有する。
+          かつては noindex 側へのクロール集中を避けるためテキスト表示に留めていたが、
+          需要判定で index 対象が確定したので、その集合だけを Link 化して魚→県×月の導線を開く。 */}
       {(() => {
-        const prefMonthFishLinks: { prefName: string; prefSlug: string; monthName: string; monthSlug: string; count: number }[] = [];
-        for (const pref of prefectures) {
-          for (const month of MONTHS) {
-            if (!fish.seasonMonths.includes(month.num)) continue;
-            let count = 0;
-            for (const spot of fishingSpots.filter(s => s.region.prefecture === pref.name)) {
-              for (const cf of spot.catchableFish) {
-                if (cf.fish.slug === fish.slug && isMonthInRange(month.num, cf.monthStart, cf.monthEnd)) {
-                  count++;
-                  break;
-                }
-              }
-            }
-            if (count >= 2) {
-              prefMonthFishLinks.push({ prefName: pref.name, prefSlug: pref.slug, monthName: month.name, monthSlug: month.slug, count });
-            }
-          }
-        }
-        const topPrefMonthLinks = prefMonthFishLinks.sort((a, b) => b.count - a.count).slice(0, 18);
+        const monthBySlug = new Map(MONTHS.map((m) => [m.slug, m]));
+        const topPrefMonthLinks = getIndexablePrefMonthFishCombos()
+          .filter((c) => c.fishSlug === fish.slug)
+          .map((c) => {
+            const pref = prefectures.find((p) => p.slug === c.prefSlug);
+            const month = monthBySlug.get(c.monthSlug);
+            if (!pref || !month) return null;
+            return {
+              prefName: pref.name,
+              prefSlug: pref.slug,
+              monthName: month.name,
+              monthSlug: month.slug,
+              // 魚ページ上の文脈では全国の旬（fish.seasonMonths）に当たる月を優先表示
+              inSeason: fish.seasonMonths.includes(month.num),
+              count: c.count,
+            };
+          })
+          .filter((l): l is NonNullable<typeof l> => l !== null)
+          .sort((a, b) => {
+            if (a.inSeason !== b.inSeason) return a.inSeason ? -1 : 1;
+            return b.count - a.count || a.prefSlug.localeCompare(b.prefSlug) || a.monthSlug.localeCompare(b.monthSlug);
+          })
+          .slice(0, 18);
         if (topPrefMonthLinks.length === 0) return null;
         return (
           <section className="mb-8 sm:mb-10">
@@ -756,17 +769,22 @@ export default async function FishDetailPage({ params }: PageProps) {
             <p className="mb-3 text-sm text-muted-foreground">
               {fish.name}が釣れる都道府県と時期の詳しい情報はこちら
             </p>
-            {/* noindex の月×魚種ページへのクロール集中を避けるためテキスト表示に留める（県別の遷移は上部の pref×fish リンクに集約済み） */}
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
               {topPrefMonthLinks.map((link) => (
-                <Badge
+                <Link
+                  prefetch={false}
                   key={`${link.prefSlug}-${link.monthSlug}`}
-                  variant="outline"
-                  className="px-2.5 py-1.5 text-xs sm:text-sm"
+                  href={`/prefecture/${link.prefSlug}/${link.monthSlug}/${fish.slug}`}
+                  title={`${link.prefName}の${link.monthName}の${fish.name}釣り（スポット${link.count}件）`}
                 >
-                  {link.prefName}の{link.monthName}
-                  <span className="ml-1 text-muted-foreground">({link.count}件)</span>
-                </Badge>
+                  <Badge
+                    variant="outline"
+                    className="cursor-pointer px-2.5 py-1.5 text-xs transition-colors hover:bg-primary hover:text-white sm:text-sm"
+                  >
+                    {link.prefName}の{link.monthName}
+                    <span className="ml-1 text-muted-foreground">({link.count}件)</span>
+                  </Badge>
+                </Link>
               ))}
             </div>
           </section>

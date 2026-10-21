@@ -16,6 +16,7 @@ import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import {
   getSpotsByPrefectureAndFish,
   getEligiblePrefFishCombos,
+  isDemandPrefMonthFish,
   MATRIX_MIN_SPOTS,
 } from "@/lib/data";
 import { FISHING_METHODS, MONTHS, isMonthInRange } from "@/lib/data/fishing-methods";
@@ -268,7 +269,8 @@ export default async function PrefectureFishPage({ params }: PageProps) {
   // 月別ベストタイミング（◎最盛期 / ○シーズン / —オフ）。
   // 併せて各月の「この県でこの魚が釣れるユニークスポット数」を算出し、
   // マトリクス（県×月×魚）ページへの内部リンク適格判定に使う。
-  // 判定はマトリクス本体の 301 判定と同じユニークスポット数 >= MATRIX_MIN_SPOTS
+  // 判定はマトリクス本体の 301 判定と同じユニークスポット数 >= MATRIX_MIN_SPOTS、
+  // かつ需要あり＝index 対象（isDemandPrefMonthFish）。noindex のマトリクスにはリンクしない。
   // （fish.seasonMonths は全国データのため、県別の配信有無とはズレることに注意）
   const peakSet = new Set(fish.peakMonths);
   const seasonSet = new Set(fish.seasonMonths);
@@ -290,7 +292,9 @@ export default async function PrefectureFishPage({ params }: PageProps) {
       month: m,
       level,
       monthSlug: monthDef.slug,
-      linkable: monthSpotCount >= MATRIX_MIN_SPOTS,
+      linkable:
+        monthSpotCount >= MATRIX_MIN_SPOTS &&
+        isDemandPrefMonthFish(pref.slug, monthDef.slug, fishSlug),
     };
   });
 

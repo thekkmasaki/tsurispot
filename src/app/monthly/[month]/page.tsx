@@ -49,6 +49,8 @@ import { prefectures } from "@/lib/data/prefectures";
 import { products as allProducts } from "@/lib/data/products";
 import { MonthlyProductRecommend } from "@/components/monthly-product-recommend";
 import { InArticleAd } from "@/components/ads/ad-unit";
+import { RelatedPseoLinks } from "@/components/seo/related-pseo-links";
+import { getIndexablePrefMonthFishCombos } from "@/lib/data";
 
 interface Props {
   params: Promise<{ month: string }>;
@@ -762,6 +764,39 @@ export default async function MonthlyGuidePage({ params }: Props) {
             </div>
           </section>
         )}
+
+        {/* /monthly → 県×月×魚種マトリクスへの導線。
+            この月の注目魚（guide.topFish）× スポット数上位の都道府県のうち、index 対象
+            （配信 count>=MATRIX_MIN_SPOTS ∧ 需要あり）の組合せだけを getIndexablePrefMonthFishCombos()
+            で選び、sitemap・robots と同じ集合へリンクする（noindex ページへの導線は作らない） */}
+        {(() => {
+          const topFishSet = new Set(guide.topFish);
+          const prefRank = new Map(topPrefectures.map((p, i) => [p.slug, i]));
+          const links = getIndexablePrefMonthFishCombos()
+            .filter((c) => c.monthSlug === month && topFishSet.has(c.fishSlug) && prefRank.has(c.prefSlug))
+            .sort(
+              (a, b) =>
+                b.count - a.count ||
+                prefRank.get(a.prefSlug)! - prefRank.get(b.prefSlug)! ||
+                a.fishSlug.localeCompare(b.fishSlug)
+            )
+            .slice(0, 24)
+            .map((c) => {
+              const pref = topPrefectures.find((p) => p.slug === c.prefSlug)!;
+              const fishName = fishSpecies.find((f) => f.slug === c.fishSlug)?.name ?? c.fishSlug;
+              return {
+                href: `/prefecture/${c.prefSlug}/${month}/${c.fishSlug}`,
+                label: `${pref.name.replace(/[都道府県]$/, "")}の${fishName}`,
+                sublabel: `${guide.nameJa}に釣れるスポット${c.count}件`,
+              };
+            });
+          return (
+            <RelatedPseoLinks
+              title={`${guide.nameJa}の都道府県別・魚種別ガイド`}
+              links={links}
+            />
+          );
+        })()}
 
         {/* 関連ブログ・釣果週報 */}
         {relatedBlogPosts.length > 0 && (

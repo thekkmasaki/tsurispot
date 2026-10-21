@@ -27,7 +27,7 @@ import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { fishSpecies } from "@/lib/data/fish";
 import { fishingSpots } from "@/lib/data/spots";
 import { MONTHS, getMonthBySlug, isMonthInRange } from "@/lib/data/fishing-methods";
-import { MATRIX_MIN_SPOTS } from "@/lib/data";
+import { MATRIX_MIN_SPOTS, isDemandPrefMonthFish } from "@/lib/data";
 import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import { SPOT_TYPE_LABELS } from "@/types";
 import { InArticleAd } from "@/components/ads/ad-unit";
@@ -826,12 +826,17 @@ export default async function PrefectureMonthPage({ params }: PageProps) {
       )}
 
       {/* 月×魚マトリクスへの内部リンク（この県×この月の魚種別詳細ガイド）。
-          リンク先はユニークスポット数 >= MATRIX_MIN_SPOTS の配信確定ページのみ
-          （エントリ数カウントだと 301 先にリンクする事故が起きるため必ず uniqueSpotCount で判定） */}
+          リンク先はユニークスポット数 >= MATRIX_MIN_SPOTS の配信確定ページ
+          （エントリ数カウントだと 301 先にリンクする事故が起きるため必ず uniqueSpotCount で判定）
+          かつ需要あり＝index 対象（isDemandPrefMonthFish）のみ。noindex ページへ内部リンクを束ねない */}
       <RelatedPseoLinks
         title={`${month.name}の${pref.name}で釣れる魚（魚種別ガイド）`}
         links={catchableFishList
-          .filter((f) => f.uniqueSpotCount >= MATRIX_MIN_SPOTS)
+          .filter(
+            (f) =>
+              f.uniqueSpotCount >= MATRIX_MIN_SPOTS &&
+              isDemandPrefMonthFish(pref.slug, monthSlug, f.slug)
+          )
           .slice(0, 20)
           .map((f) => ({
             href: `/prefecture/${pref.slug}/${monthSlug}/${f.slug}`,
