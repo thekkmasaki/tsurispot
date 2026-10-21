@@ -5,6 +5,8 @@ import { prefectures } from "./prefectures";
 import { MONTHS, isMonthInRange } from "./fishing-methods";
 import { fishMetadata } from "./fish-metadata";
 import { getCatchAssessment, isFishListedAtSpot } from "./fish-aptitude";
+import { monthlyGuides } from "./monthly-guides";
+import { prefectureInfoList } from "./prefecture-info";
 
 /**
  * 魚種×スポットの掲載可否・バッジ・並び順はすべて fish-aptitude の
@@ -429,6 +431,201 @@ export function getEligiblePrefMonthFishCombos(
     }
   }
   return out;
+}
+
+// =============================================================================
+// マトリクス（県×月×魚種）の需要ベース index 判定
+// =============================================================================
+
+/**
+ * 魚種名（和名・別名）→ slug 群に解決する（prefecture-info の popularFish / seasonalFish 用）。
+ *
+ * 解決順: 1) fishSpecies.name の完全一致 → 2) fishMetadata.aliases の一致（複数魚種が同じ
+ * 別名を持つ場合は全件。例「ハマチ」= buri/inada） → 3) 総称の手動マップ（「青物」「イカ」）。
+ * 解決できない名前（サケ・ドンコ等、魚種データに無い種）は空配列。
+ *
+ * getFishSlugByName（UI の単一リンク用・名前一致のみ）とは別物。需要判定では
+ * 「県が看板に掲げている魚」を取り漏らさないことが目的なので、別名・総称まで広げる。
+ */
+const GENERIC_FISH_NAME_MAP: Record<string, readonly string[]> = {
+  青物: ["buri", "inada", "kanpachi", "hiramasa"],
+  イカ: ["aoriika", "yariika", "surumeika"],
+};
+
+let fishNameIndex: { byName: Map<string, string>; byAlias: Map<string, string[]> } | null = null;
+function getFishNameIndex() {
+  if (fishNameIndex) return fishNameIndex;
+  const byName = new Map<string, string>();
+  const byAlias = new Map<string, string[]>();
+  for (const f of fishSpecies) {
+    if (!byName.has(f.name)) byName.set(f.name, f.slug);
+    for (const a of fishMetadata[f.slug]?.aliases ?? []) {
+      const arr = byAlias.get(a) ?? [];
+      if (!arr.includes(f.slug)) arr.push(f.slug);
+      byAlias.set(a, arr);
+    }
+  }
+  fishNameIndex = { byName, byAlias };
+  return fishNameIndex;
+}
+
+export function resolveFishSlugsByName(name: string): string[] {
+  const { byName, byAlias } = getFishNameIndex();
+  const exact = byName.get(name);
+  if (exact) return [exact];
+  const aliased = byAlias.get(name);
+  if (aliased && aliased.length > 0) return [...aliased];
+  return [...(GENERIC_FISH_NAME_MAP[name] ?? [])];
+}
+
+/** 需要判定 C: 海水・汽水魚の人気上限（fishMetadata.popularity はカテゴリ別採番・1が最人気） */
+export const MATRIX_DEMAND_POPULARITY_MAX = 30;
+
+/** 需要判定 D: ウナギの夏（土用の丑の検索需要）ホワイトリスト */
+export const UNAGI_SUMMER_MONTH_SLUGS: readonly string[] = ["june", "july", "august"];
+
+/** prefecture-info.seasonalFish の季節 → 月 slug */
+const SEASON_MONTH_SLUGS: Record<"spring" | "summer" | "autumn" | "winter", readonly string[]> = {
+  spring: ["march", "april", "may"],
+  summer: ["june", "july", "august"],
+  autumn: ["september", "october", "november"],
+  winter: ["december", "january", "february"],
+};
+
+export type MatrixDemandReason =
+  | "ssg" // 事前生成(SSG)セットに含まれる
+  | "monthly-top-fish" // A: その月の monthlyGuides.topFish
+  | "sea-popular" // C: 海水/汽水魚で popularity <= MATRIX_DEMAND_POPULARITY_MAX
+  | "pref-info" // B: prefecture-info の popularFish / 当季 seasonalFish（名前一致）
+  | "pref-info-alias" // B': 同上を別名・総称で解決
+  | "unagi-summer"; // D: ウナギ×6〜8月
+
+type DemandIndex = {
+  ssgKeys: Set<string>;
+  topFishByMonth: Map<string, Set<string>>;
+  seaPopular: Set<string>;
+  /** `${prefSlug}|${fishSlug}` → 需要がある月 slug 群（"*" = 全月） */
+  prefInfoByName: Map<string, Set<string>>;
+  prefInfoByAlias: Map<string, Set<string>>;
+};
+
+let demandIndex: DemandIndex | null = null;
+function getDemandIndex(): DemandIndex {
+  if (demandIndex) return demandIndex;
+
+  const ssgKeys = new Set(
+    getHighValuePrefMonthFishCombos().map((c) => `${c.prefSlug}/${c.monthSlug}/${c.fishSlug}`)
+  );
+
+  const topFishByMonth = new Map<string, Set<string>>();
+  for (const g of monthlyGuides) topFishByMonth.set(g.slug, new Set(g.topFish));
+
+  const seaPopular = new Set<string>();
+  for (const f of fishSpecies) {
+    if (f.category === "freshwater") continue;
+    const rank = fishMetadata[f.slug]?.popularity;
+    if (rank !== undefined && rank <= MATRIX_DEMAND_POPULARITY_MAX) seaPopular.add(f.slug);
+  }
+
+  const prefInfoByName = new Map<string, Set<string>>();
+  const prefInfoByAlias = new Map<string, Set<string>>();
+  const { byName } = getFishNameIndex();
+  const add = (prefSlug: string, name: string, months: readonly string[]) => {
+    const slugs = resolveFishSlugsByName(name);
+    if (slugs.length === 0) return;
+    const target = byName.has(name) ? prefInfoByName : prefInfoByAlias;
+    for (const fSlug of slugs) {
+      const key = `${prefSlug}|${fSlug}`;
+      const set = target.get(key) ?? new Set<string>();
+      for (const m of months) set.add(m);
+      target.set(key, set);
+    }
+  };
+  for (const info of prefectureInfoList) {
+    for (const name of info.popularFish) add(info.slug, name, ["*"]);
+    for (const season of Object.keys(SEASON_MONTH_SLUGS) as (keyof typeof SEASON_MONTH_SLUGS)[]) {
+      for (const name of info.seasonalFish?.[season] ?? []) {
+        add(info.slug, name, SEASON_MONTH_SLUGS[season]);
+      }
+    }
+  }
+
+  demandIndex = { ssgKeys, topFishByMonth, seaPopular, prefInfoByName, prefInfoByAlias };
+  return demandIndex;
+}
+
+/**
+ * マトリクス（県×月×魚種）ページに検索需要があるか＝index 対象とみなす理由の一覧。
+ * 空配列なら需要なし（noindex,follow）。isDemandPrefMonthFish の内訳説明・監査スクリプト・テスト用。
+ */
+export function explainPrefMonthFishDemand(
+  prefSlug: string,
+  monthSlug: string,
+  fishSlug: string
+): MatrixDemandReason[] {
+  const idx = getDemandIndex();
+  const reasons: MatrixDemandReason[] = [];
+  if (idx.ssgKeys.has(`${prefSlug}/${monthSlug}/${fishSlug}`)) reasons.push("ssg");
+  if (idx.topFishByMonth.get(monthSlug)?.has(fishSlug)) reasons.push("monthly-top-fish");
+  if (idx.seaPopular.has(fishSlug)) reasons.push("sea-popular");
+  const key = `${prefSlug}|${fishSlug}`;
+  const byName = idx.prefInfoByName.get(key);
+  if (byName && (byName.has("*") || byName.has(monthSlug))) reasons.push("pref-info");
+  const byAlias = idx.prefInfoByAlias.get(key);
+  if (byAlias && (byAlias.has("*") || byAlias.has(monthSlug))) reasons.push("pref-info-alias");
+  if (fishSlug === "unagi" && UNAGI_SUMMER_MONTH_SLUGS.includes(monthSlug)) reasons.push("unagi-summer");
+  return reasons;
+}
+
+/**
+ * マトリクス（県×月×魚種）ページの**需要判定**（純関数・決定的）。
+ *
+ * GSC 実測（2026-08）で、メジャー海水魚は表示50〜360/ページある一方、マイナー淡水魚は
+ * 表示1〜16 と需要ゼロの組合せが大量に index されクロール資源を食っていた。
+ * そこで「配信される全ページ（count>=MATRIX_MIN_SPOTS）」のうち、以下のいずれか（OR）を
+ * 満たすものだけを index・sitemap 掲載・内部リンクの対象にする:
+ *   - SSG: getHighValuePrefMonthFishCombos()（事前生成セット）に含まれる
+ *   - A: その月の monthlyGuides.topFish に含まれる魚
+ *   - B: その県の prefecture-info（popularFish=全月 / seasonalFish=当季）に挙がる魚（別名・総称で解決）
+ *   - C: 海水・汽水魚で popularity <= MATRIX_DEMAND_POPULARITY_MAX
+ *   - D: ウナギ × 6〜8月（土用の丑の季節需要）
+ *
+ * **robots（generateMetadata の index/noindex）・sitemap・内部リンク（fish→matrix、
+ * 県×月→matrix、県×魚→matrix、/monthly→matrix）は必ずこの関数で駆動すること。**
+ * 判定が分散すると「sitemap 掲載なのに noindex」「noindex ページへの大量リンク」が再発する
+ * （seo-matrix-indexability.test.ts がドリフトを検出する）。
+ *
+ * これは需要の有無だけを判定する。ページが配信されるか（スポット数）は別軸なので、
+ * sitemap/内部リンクには getIndexablePrefMonthFishCombos()（配信 ∧ 需要）を使う。
+ * 事前生成(SSG)の範囲は従来どおり getHighValuePrefMonthFishCombos() で固定（容量不変）。
+ */
+export function isDemandPrefMonthFish(
+  prefSlug: string,
+  monthSlug: string,
+  fishSlug: string
+): boolean {
+  return explainPrefMonthFishDemand(prefSlug, monthSlug, fishSlug).length > 0;
+}
+
+let indexableCombosCache:
+  | { prefSlug: string; monthSlug: string; fishSlug: string; count: number }[]
+  | null = null;
+
+/**
+ * index・sitemap 掲載対象の「県×月×魚種」= 配信される組合せ（count>=MATRIX_MIN_SPOTS）∧ 需要あり。
+ * sitemap.ts と各テンプレの内部リンク生成で共用する（メモ化・決定的）。
+ */
+export function getIndexablePrefMonthFishCombos(): {
+  prefSlug: string;
+  monthSlug: string;
+  fishSlug: string;
+  count: number;
+}[] {
+  if (indexableCombosCache) return indexableCombosCache;
+  indexableCombosCache = getEligiblePrefMonthFishCombos().filter((c) =>
+    isDemandPrefMonthFish(c.prefSlug, c.monthSlug, c.fishSlug)
+  );
+  return indexableCombosCache;
 }
 
 // 釣れる度ゲート（県×魚種/マトリクスページの掲載判定・テストで共用）

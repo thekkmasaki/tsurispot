@@ -49,7 +49,7 @@ export const monthlyGuides: MonthlyGuide[] = [
       weather: "寒波に注意、防寒必須",
       daylight: "日の出7:00頃 日の入17:10頃",
     },
-    topFish: ["karei", "mebaru", "kasago", "wakasagi", "hirame", "tara"],
+    topFish: ["karei", "mebaru", "kasago", "wakasagi", "hirame", "madara"],
     tips: [
       "防寒対策が最重要。インナー・中間層・アウターの3層構造で防寒",
       "カイロや電気毛布、温かい飲み物を必ず持参",
@@ -106,7 +106,7 @@ export const monthlyGuides: MonthlyGuide[] = [
       weather: "最寒期、降雪・凍結に注意",
       daylight: "日の出6:40頃 日の入17:40頃",
     },
-    topFish: ["mebaru", "kasago", "karei", "hirame", "rainbow-trout"],
+    topFish: ["mebaru", "kasago", "karei", "hirame", "nijimasu"],
     tips: [
       "メバリングは常夜灯のある港・堤防がベスト。夕マズメから夜がチャンス",
       "管理釣り場のトラウトは防寒ウェアを着込んで快適に楽しめる",
@@ -666,7 +666,7 @@ export const monthlyGuides: MonthlyGuide[] = [
       weather: "冬の寒さ本格化。強風・降雪に注意",
       daylight: "日の出6:45頃 日の入16:30頃",
     },
-    topFish: ["karei", "mebaru", "kasago", "hirame", "madai", "tara"],
+    topFish: ["karei", "mebaru", "kasago", "hirame", "madai", "madara"],
     tips: [
       "カレイの投げ釣りは大潮前後の満潮前後が特に好釣果",
       "メバリングは水温10℃を下回っても釣れる。ゆっくり巻きが基本",
