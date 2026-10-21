@@ -9,6 +9,9 @@ name: CF diagnose
 
 on:
   workflow_dispatch:
+  # default branch 外の workflow_dispatch は 404 になるため、診断ブランチへの push でも起動する
+  push:
+    branches: [chore/cf-diagnose]
 
 jobs:
   diagnose:
