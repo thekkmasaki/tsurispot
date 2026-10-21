@@ -76,6 +76,9 @@ import { ParkingGuideCard, getParkingBadgeText, getParkingAmenityDescription, ge
 import { FamilyInfoCard } from "@/components/spots/family-info";
 import { PackingChecklist } from "@/components/spots/packing-checklist";
 import { getCatchReportsBySpotAsync, getSpotPioneerAsync } from "@/lib/data/catch-reports";
+import { SpotRecentCatch } from "@/components/spots/spot-recent-catch";
+import { getLatestWeeklyReportForSpot } from "@/lib/data/weekly-report-latest";
+import { getCurrentMonthTargets, pickRecentUgcCatches, getJstMonth } from "@/lib/spot-recent-catch";
 import { CatchReportList } from "@/components/spots/catch-report-list";
 import { CatchReportForm } from "@/components/spots/catch-report-form";
 import { getSpotContributionsAsync } from "@/lib/data/spot-contributions";
@@ -126,7 +129,7 @@ import {
   generateAreaSeasonTrend,
   buildSeasonTable,
 } from "@/lib/utils/spot-content-generator";
-import { getCatchAssessment } from "@/lib/data/fish-aptitude";
+import { getCatchAssessment, getCatchTier } from "@/lib/data/fish-aptitude";
 import {
   getForbiddenMethods,
   isNightFishingAdvisable,
@@ -169,7 +172,10 @@ export async function generateMetadata({
   const title = buildSpotTitle(spot);
   // description: 実データ（釣れる魚上位・魚種数・定番釣法・設備・固有の導入文）を織り込み 120-158 字化。
   // 従来の属性列挙（93字）だと Bing「description 短すぎ」に該当したため実データ駆動へ組み立て直す。
-  const description = buildSpotMetaDescription(spot);
+  // 週報エリアに属し最新週報が新鮮なスポットだけ「最新釣果週報も掲載」を足す（実在する場合のみ）。
+  // 週報一覧は getAllBlogPosts の 1 時間キャッシュ共有で microCMS への追加リクエストは無い。
+  const weekly = await getLatestWeeklyReportForSpot(spot);
+  const description = buildSpotMetaDescription(spot, { weeklyAreaLabel: weekly?.areaLabel });
   const ogDescription = `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）で${fishNames}が狙えます。${spot.description}`;
 
   // 本当に薄いページのみnoindex（判定基準は src/lib/seo-quality.ts に一元化）
@@ -283,6 +289,20 @@ export default async function SpotDetailPage({ params }: PageProps) {
   // 魚種推定への反映はユーザー投稿（UGC）のみ。サンプルデータ（id: cr-*）は
   // 「実釣果N件」表示に混入させない（虚偽表示防止）
   const ugcCatchReports = catchReports.filter((r) => !r.id.startsWith("cr-"));
+
+  // 「釣果・最近の様子」ブロック用データ（すべて実在データ。架空の釣果は作らない）
+  //  (a) 最新UGC釣果（上で取得済みの catchReports を再利用・追加I/Oなし）
+  //  (b) エリア最新週報（getAllBlogPosts の1時間キャッシュ共有・microCMS追加リクエストなし・失敗時 null）
+  //  (c) 今月の対象魚（catchableFish の月データ × 釣れる度）
+  const recentCatches = pickRecentUgcCatches(catchReports, 3);
+  const latestWeekly = await getLatestWeeklyReportForSpot(spot);
+  const jstMonth = getJstMonth();
+  const monthTargets = getCurrentMonthTargets(
+    spot.catchableFish,
+    jstMonth,
+    (fishSlug) => getCatchTier(spot, fishSlug),
+    5,
+  );
 
   // 魚種推定部130: 環境パラメータ（季節・地域・潮汐・水温）＋釣果フィードバックを適用
   const estimationCtx = guardedAnalysisResult
@@ -980,6 +1000,17 @@ export default async function SpotDetailPage({ params }: PageProps) {
           tideStation={getTideStationForSpot(spot)}
         />
       </section>
+
+      {/* 釣果・最近の様子（タブ外＝SSR本文に必ず入る。「[地名] 釣果」クエリの意図に先頭で答える） */}
+      <SpotRecentCatch
+        spotName={spot.name}
+        recentCatches={recentCatches}
+        ugcTotal={ugcCatchReports.length}
+        weekly={latestWeekly}
+        monthTargets={monthTargets}
+        month={jstMonth}
+        allowPosting={spot.fishingBan?.scope !== "full"}
+      />
 
       {/* タブレイアウト */}
       <SpotDetailTabs
