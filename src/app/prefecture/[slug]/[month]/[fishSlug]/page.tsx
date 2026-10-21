@@ -28,6 +28,7 @@ import { isFishListedAtSpot } from "@/lib/data/fish-aptitude";
 import {
   getHighValuePrefMonthFishCombos,
   getEligiblePrefMonthFishCombos,
+  isDemandPrefMonthFish,
   MATRIX_MIN_SPOTS,
 } from "@/lib/data";
 import {
@@ -195,12 +196,16 @@ export async function generateMetadata({
   const pageUrl = `https://tsurispot.com/prefecture/${slug}/${monthSlug}/${fishSlug}`;
 
   // ここに到達した時点で validCombos（count>=MIN_SPOTS=2 の実在組合せ）が保証されている
-  // （薄い組合せは L141-147 で県トップへ 301 済み）。レンダリングする全ページを index 対象とし、
-  // ロングテール検索の取りこぼしを無くす。事前生成(SSG)の範囲とは独立（容量は generateStaticParams で制御）。
+  // （薄い組合せは上で県トップへ 301 済み）。ページ自体は配信するが、index するのは
+  // 検索需要のある組合せ（isDemandPrefMonthFish）だけ。需要ゼロの組合せ（マイナー淡水魚等）は
+  // noindex,follow でクロール資源の浪費と薄いページによる希釈を止める（404/301 にはしない）。
+  // sitemap・内部リンクも同じ関数で駆動（seo-matrix-indexability.test.ts がドリフトを検出）。
+  // 事前生成(SSG)の範囲とは独立（容量は generateStaticParams で制御）。
+  const indexable = isDemandPrefMonthFish(pref.slug, monthSlug, fishSlug);
   return {
     title,
     description,
-    robots: { index: true, follow: true },
+    robots: { index: indexable, follow: true },
     openGraph: {
       title,
       description,
