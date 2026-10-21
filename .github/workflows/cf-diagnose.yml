@@ -1,0 +1,71 @@
+# Cloudflare キャッシュ設定の読み取り診断 + 単体purge の実効性テスト（運用ワークフロー・手動実行のみ）
+#
+# 背景（2026-10-21）: deploy.yml の限定purgeは API が success を返すのに / が cf-cache-status=HIT のまま
+# （#511 でAge誤検知は直したが purge 自体が効いていない）。/catchable-now は Age 78日。
+# ダッシュボードを開かずに Cache Rules / Cache Reserve / Tiered Cache / Page Rules を API で読み、
+# /catchable-now を URL purge → UA別に cf-cache-status を観測して「どのキーで残っているか」を切り分ける。
+# 書き込みは /catchable-now の単体purgeのみ（purge_everything は使わない）。
+name: CF diagnose
+
+on:
+  workflow_dispatch:
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Read cache config
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+        run: |
+          set -e
+          echo "::add-mask::$CF_ZONE_ID"
+          api() { curl -s -H "Authorization: Bearer ${CF_API_TOKEN}" -H "Content-Type: application/json" "$@"; }
+          Z="https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}"
+          echo "== zone =="; api "$Z" | jq -r '.result | "name=\(.name) plan=\(.plan.name)"'
+          echo "== cache reserve =="; api "$Z/cache/cache_reserve" | jq -c '.result'
+          echo "== tiered cache (argo) =="; api "$Z/argo/tiered_caching" | jq -c '.result'
+          echo "== smart tiered cache =="; api "$Z/cache/tiered_cache_smart_topology_enable" | jq -c '.result'
+          echo "== cache level / browser ttl =="; api "$Z/settings/cache_level" | jq -c '.result'; api "$Z/settings/browser_cache_ttl" | jq -c '.result'
+          echo "== page rules =="; api "$Z/pagerules" | jq -c '.result[]? | {status, targets:[.targets[].constraint.value], actions:[.actions[]|{id,value}]}'
+          echo "== cache rules (http_request_cache_settings) =="
+          api "$Z/rulesets/phases/http_request_cache_settings/entrypoint" | jq -c '.result.rules[]? | {enabled, description, expression, cache: .action_parameters.cache, edge_ttl: .action_parameters.edge_ttl, browser_ttl: .action_parameters.browser_ttl, cache_key: .action_parameters.cache_key, cache_reserve: .action_parameters.cache_reserve, serve_stale: .action_parameters.serve_stale}'
+          echo "== config rules / origin rules (参考) =="
+          api "$Z/rulesets/phases/http_config_settings/entrypoint" | jq -c '.result.rules[]? | {enabled, description, expression}' || true
+
+      - name: Purge test on /catchable-now
+        env:
+          CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
+        run: |
+          set -e
+          echo "::add-mask::$CF_ZONE_ID"
+          Z="https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}"
+          U="https://tsurispot.com/catchable-now"
+          probe() { # $1=label $2...=curl args
+            local label="$1"; shift
+            curl -s -o /dev/null -D - "$@" "$U" | tr -d '\r' | awk -v L="$label" 'BEGIN{s="";a="";n="";r=""} tolower($1)=="cf-cache-status:"{s=$2} tolower($1)=="age:"{a=$2} tolower($1)=="x-nextjs-cache:"{n=$2} tolower($1)=="cf-ray:"{r=$2} END{printf "%-14s cf-cache-status=%s age=%s x-nextjs-cache=%s ray=%s\n", L, s, a, n, r}'
+          }
+          echo "== before purge =="
+          probe "curl-default"
+          probe "desktop-ua" -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/130 Safari/537.36"
+          probe "mobile-ua" -A "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1"
+          probe "accept-html" -H "Accept: text/html,application/xhtml+xml" -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130"
+          probe "ja-lang" -H "Accept-Language: ja,en;q=0.8" -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130"
+          echo "== purge by URL (plain) =="
+          curl -s -X POST "$Z/purge_cache" -H "Authorization: Bearer ${CF_API_TOKEN}" -H "Content-Type: application/json" --data "{\"files\":[\"$U\"]}" | jq -c '{success, errors}'
+          sleep 8
+          echo "== after plain purge =="
+          probe "curl-default"; probe "desktop-ua" -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130"; probe "mobile-ua" -A "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) Mobile/15E148 Safari/604.1"
+          echo "== purge by URL with device-type headers =="
+          curl -s -X POST "$Z/purge_cache" -H "Authorization: Bearer ${CF_API_TOKEN}" -H "Content-Type: application/json" \
+            --data "{\"files\":[{\"url\":\"$U\",\"headers\":{\"CF-Device-Type\":\"desktop\"}},{\"url\":\"$U\",\"headers\":{\"CF-Device-Type\":\"mobile\"}},{\"url\":\"$U\",\"headers\":{\"CF-Device-Type\":\"tablet\"}},{\"url\":\"$U\",\"headers\":{\"CF-IPCountry\":\"JP\"}},{\"url\":\"$U\",\"headers\":{\"CF-IPCountry\":\"US\"}}]}" | jq -c '{success, errors}'
+          sleep 8
+          echo "== after header purge =="
+          probe "curl-default"; probe "desktop-ua" -A "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/130"; probe "mobile-ua" -A "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) Mobile/15E148 Safari/604.1"
+          echo "== purge by prefix (requires Enterprise; expect error on free/pro) =="
+          curl -s -X POST "$Z/purge_cache" -H "Authorization: Bearer ${CF_API_TOKEN}" -H "Content-Type: application/json" --data '{"prefixes":["tsurispot.com/catchable-now"]}' | jq -c '{success, errors:[.errors[]?.message]}'
+          sleep 8
+          probe "after-prefix"
