@@ -364,6 +364,15 @@ jobs:
       # 最大 s-maxage(1h)+次アクセスまで遅延。ハブと sitemap は即時 purge され新規ページ導線は維持）。
       # 静的アセットは hash 付き immutable URL なので purge しない（残すことで stale HTML とも整合）。
       # CF_API_TOKEN / CF_ZONE_ID 未設定時は skip（段階導入のため非致命）。
+      #
+      # 【2026-10-21 根本原因】"files"（URL単体purge）はこのゾーンでは API が success:true を返しても
+      # エッジの旧エントリが消えない（cf-diagnose.yml で /catchable-now・/fish・/prefecture の3回とも
+      # 45〜90秒待っても HIT のまま。Cache Reserve=off・カスタムキャッシュキー無しでも再現）。
+      # 一方 "prefixes"（プレフィックスpurge）は同条件で直後に MISS になった（2/2 再現）。
+      # そのため purge は prefixes 方式に切替。prefix は配下パスも消すので、配下が数千ページある
+      # "/"（全サイト）・"/spots"（5,349件）・"/prefecture"（県＋マトリクス約1.3万件）は自動purgeから外し、
+      # それぞれ s-maxage/ISR の TTL（トップ6h・/spots 1h）に委ねる。/prefecture を即時反映したいときは
+      # cf-purge.yml を夜間に手動実行（prefixes="/prefecture"）。
       - name: Cloudflare cache purge (限定purge)
         if: github.ref == 'refs/heads/master'
         env:
@@ -385,17 +394,21 @@ jobs:
             exit 1
           fi
           echo "purge対象ゾーン: ${zone_name:-（Zone:Read権限なしのため名称未確認）}"
-          # サイト全体に影響するハブ/インデックスページのみ purge（長尾詳細は SWR に委ねる）
+          # サイト全体に影響するハブ/インデックスページを prefix purge（配下が有限のものだけ）。
+          #   /catchable-now（1）・/monthly（13）・/blog（約250）・/sitemap.xml（1）・
+          #   /fish（魚種約200 ＋ 前方一致で /fishing-spots/near-me・/fishing-rules 等の SEOハブ約150）
+          # 長尾詳細（spot/prefecture）はエッジに残し SWR に委ねる（同期冷生成の殺到回避）。
           resp=$(curl -sS -X POST \
             "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
             -H "Authorization: Bearer ${CF_API_TOKEN}" \
             -H "Content-Type: application/json" \
-            --data '{"files":["https://tsurispot.com/","https://tsurispot.com/spots","https://tsurispot.com/fish","https://tsurispot.com/blog","https://tsurispot.com/catchable-now","https://tsurispot.com/prefecture","https://tsurispot.com/monthly","https://tsurispot.com/sitemap.xml"]}')
+            --data '{"prefixes":["tsurispot.com/catchable-now","tsurispot.com/monthly","tsurispot.com/blog","tsurispot.com/sitemap.xml","tsurispot.com/fish"]}')
           echo "$resp"
           echo "$resp" | grep -q '"success":true' || {
             echo "::error::Cloudflare purge failed"; exit 1;
           }
-          # purge 有効性の実測検証: purge 直後の最初の / が cf-cache-status=HIT のままなら purge は効いていない。
+          # purge 有効性の実測検証: purge 直後の /catchable-now が cf-cache-status=HIT のままなら purge は効いていない。
+          # （トップ / は prefix purge の対象外にしたため検証対象から外した）
           # 【2026-09-30 修正】旧判定は Age ヘッダ >600s を「古いエッジキャッシュ」とみなしていたが、Age は
           # Next.js の ISR キャッシュ（x-nextjs-cache: STALE/HIT）が付ける「生成からの経過秒」でもあり、
           # CF が purge 後にオリジンから取り直しても大きな値になり得る（2026-09-29 の deploy で purge API
@@ -404,15 +417,15 @@ jobs:
           purge_ok=0
           for attempt in 1 2 3 4 5 6; do
             sleep 10
-            cache_status=$(curl -s -o /dev/null -w "%header{cf-cache-status}" "https://tsurispot.com/")
-            echo "purge後の / (attempt ${attempt}): cf-cache-status=${cache_status:-none}"
+            cache_status=$(curl -s -o /dev/null -w "%header{cf-cache-status}" "https://tsurispot.com/catchable-now")
+            echo "purge後の /catchable-now (attempt ${attempt}): cf-cache-status=${cache_status:-none}"
             if [ "$cache_status" != "HIT" ]; then purge_ok=1; break; fi
           done
           if [ "$purge_ok" != "1" ]; then
-            echo "::error::purge 後60秒経ってもトップが cf-cache-status=HIT のままです。CF_ZONE_ID の取り違え、または Cache Rule のカスタムキャッシュキー（single-file purge 非対応）を確認してください。"
+            echo "::error::purge 後60秒経っても /catchable-now が cf-cache-status=HIT のままです。CF_ZONE_ID の取り違え、または purge 方式（prefixes）がこのゾーンで無効化されていないか cf-diagnose.yml で確認してください。"
             exit 1
           fi
-          echo "Cloudflare cache purged (targeted hub pages)."
+          echo "Cloudflare cache purged (targeted hub prefixes)."
 
       # AI クローラー向けテキスト資産(.txt/.xml)をエッジキャッシュ対象に昇格する Cache Rule を冪等適用。
       # Cloudflare の既定キャッシュ拡張子に .txt/.xml は含まれず、オリジンが s-maxage を返しても
