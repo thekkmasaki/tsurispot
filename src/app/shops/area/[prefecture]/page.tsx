@@ -18,6 +18,11 @@ import { prefectures, getPrefectureBySlug } from "@/lib/data/prefectures";
 import { adjacentPrefectures } from "@/lib/data/prefecture-info";
 import { fishingSpots } from "@/lib/data/spots";
 import { getEffectivePlanMap } from "@/lib/shop-plan";
+import {
+  buildShopAreaDescription,
+  buildShopAreaLead,
+  buildShopAreaTitle,
+} from "@/lib/seo/shop-meta";
 
 type Params = Promise<{ prefecture: string }>;
 
@@ -43,29 +48,6 @@ function getShopsForPrefecture(prefName: string) {
     });
 }
 
-// ----- クエリ直結の実データ件数（営業時間・エサ取扱） -----
-// GSC実測: /shops/area/* は「釣具屋」「近くの釣具屋」で平均順位8なのに CTR 1.1% と
-// 取りこぼしが大きい一方、「釣具屋 24時間」は CTR 4.5% と10倍ある。
-// 時間帯条件がクエリ側の主要な絞り込み軸なので、実データの件数を title/description/H1直下に出す。
-// businessHours は自由記述のため、「24時間営業」単独表記の店だけを24時間営業として数える。
-// 「平日3:00〜23:00 / 金・土・祝前日 24時間営業」のような曜日限定営業は
-// 常時24時間ではないので除外し（過大表示の回避）、開店時刻が5時以前なら早朝営業として数える。
-function countShopUtility(shops: ReturnType<typeof getShopsForPrefecture>) {
-  const is24 = (hours: string) => hours.trim() === "24時間営業";
-  const isEarly = (hours: string) => {
-    if (is24(hours)) return false;
-    const m = hours.match(/(\d{1,2}):\d{2}/);
-    return m ? Number(m[1]) <= 5 : false;
-  };
-  return {
-    n24: shops.filter((s) => is24(s.businessHours)).length,
-    nEarly: shops.filter((s) => isEarly(s.businessHours)).length,
-    nLive: shops.filter((s) => s.hasLiveBait).length,
-    nFrozen: shops.filter((s) => s.hasFrozenBait).length,
-    nRental: shops.filter((s) => s.hasRentalRod).length,
-  };
-}
-
 // ----- generateStaticParams -----
 // dynamicParams=false は Next.js 16 で NoFallbackError を多発させるため撤廃。未知 param は下記で親へ 301。
 
@@ -88,43 +70,17 @@ export async function generateMetadata({
   if (!pref) return { title: "ページが見つかりません" };
 
   const shops = getShopsForPrefecture(pref.name);
-  const count = shops.length;
-  const topShopNames = shops
-    .slice(0, 2)
-    .map((s) => s.name)
-    .join("・");
 
   // layout.tsx の title.template が「| ツリスポ（つりすぽ）」を自動付与するため
   // 手書きのブランド名は付けない（付けると「| ツリスポ | ツリスポ（つりすぽ）」と
   // 二重表示になり SERP で本文が切れて CTR を大きく落とす。本番で実測確認済み）
-  const { n24, nEarly, nLive, nFrozen, nRental } = countShopUtility(shops);
-  // 「釣具屋 24時間」「近くの釣具屋 現在営業中」等の時間帯クエリに title 前方で答える
-  const hoursHook =
-    n24 > 0 ? `24時間営業${n24}件` : nEarly > 0 ? `早朝営業${nEarly}件` : null;
-  const title =
-    count > 0
-      ? `${pref.name}の釣具屋・エサ店${count}件｜${hoursHook ? `${hoursHook}・` : ""}営業時間掲載`
-      : `${pref.name}の釣具屋・エサ店一覧`;
-
-  const utility = [
-    n24 > 0 ? `24時間営業${n24}件` : null,
-    nEarly > 0 ? `早朝営業${nEarly}件` : null,
-    nLive > 0 ? `活きエサ取扱${nLive}件` : null,
-    nFrozen > 0 ? `冷凍エサ取扱${nFrozen}件` : null,
-    nRental > 0 ? `レンタルロッド${nRental}件` : null,
-  ]
-    .filter(Boolean)
-    .join("・");
-  const timingNote =
-    n24 > 0
-      ? "深夜・早朝のエサ調達に使える店も含みます。"
-      : nEarly > 0
-        ? "朝マズメ前に開く店も含みます。"
-        : "";
-  const description =
-    count > 0
-      ? `${pref.name}の釣具屋・釣りエサ屋${count}件の営業時間・住所・電話を一覧掲載。${utility ? `${utility}。` : ""}${timingNote}${topShopNames}などをエリア名つきで比較できます。`
-      : `${pref.name}の釣具屋・釣具店は掲載準備中です。近隣県の釣具店一覧や${pref.name}の人気釣りスポット情報をご覧いただけます。`;
+  //
+  // GSC 実測（2026-09-21〜10-18）: /shops/area/* の表示の 87% は「釣具屋」「近くの釣具屋」
+  // 「◯◯ 釣具屋」の汎用・地名クエリ（CTR 0.3〜0.6%）で、旧 title が前方で答えていた
+  // 時間帯系（24時間/営業中）は 7%。県名・件数・市区町村名で汎用意図に先に答え、
+  // 時間帯・エサの実件数は description と H1 直下に残す（文言生成は shop-meta.ts に集約）。
+  const title = buildShopAreaTitle({ prefName: pref.name, shops });
+  const description = buildShopAreaDescription({ prefName: pref.name, shops });
 
   return {
     title,
@@ -174,15 +130,8 @@ export default async function PrefectureShopsPage({
     return 0;
   });
 
-  // H1直下でも時間帯の実件数を示す（「釣具屋 24時間」「現在営業中」系クエリとの本文一致）
-  const headerUtility = countShopUtility(baseShops);
-  const headerHookParts = [
-    headerUtility.n24 > 0 ? `24時間営業${headerUtility.n24}件` : null,
-    headerUtility.nEarly > 0 ? `早朝営業${headerUtility.nEarly}件` : null,
-  ].filter(Boolean);
-  const headerHook = headerHookParts.length
-    ? `（${headerHookParts.join("・")}）`
-    : "";
+  // H1直下でも title/description と同じ実数（件数・市区町村・時間帯）を示し本文一致させる
+  const lead = buildShopAreaLead({ prefName: pref.name, shops: baseShops });
 
   // この都道府県の人気スポット（上位6件）
   const prefSpots = fishingSpots
@@ -301,14 +250,10 @@ export default async function PrefectureShopsPage({
         <div className="mb-2 flex items-center gap-3">
           <Store className="size-8 text-primary" />
           <h1 className="text-2xl font-bold sm:text-3xl">
-            {pref.name}の釣具屋・エサ店
+            {pref.name}の釣具屋・釣具店一覧
           </h1>
         </div>
-        <p className="mt-2 text-base text-muted-foreground">
-          {count > 0
-            ? `${count}件の釣具店・エサ店を掲載中${headerHook}`
-            : "掲載準備中 ― 情報が入り次第追加します"}
-        </p>
+        <p className="mt-2 text-base text-muted-foreground">{lead}</p>
       </div>
 
       <div className="flex flex-col gap-8 lg:flex-row">
