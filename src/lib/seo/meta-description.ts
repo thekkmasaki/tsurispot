@@ -161,7 +161,10 @@ export function buildSpotMetaDescription(spot: {
   hasParking?: boolean;
   hasToilet?: boolean;
   catchableFish: { fish: { name: string }; method?: string }[];
-}): string {
+}, opts: {
+  /** 最新の釣果週報が実在するエリアのラベル（例「明石・神戸」）。無ければ週報文は出さない */
+  weeklyAreaLabel?: string;
+} = {}): string {
   const top3 = joinNames(
     spot.catchableFish.slice(0, 3).map((cf) => cf.fish.name),
     3,
@@ -183,13 +186,16 @@ export function buildSpotMetaDescription(spot: {
 
   return composeMetaDescription(
     [
-      `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）の釣り場・釣果情報。`,
+      // 「[地名] 釣果」クエリの意図語を先頭文に置く（釣果情報→釣れる魚→釣り方）。
+      `${spot.name}（${spot.region.prefecture}${spot.region.areaName}）の釣果情報・釣れる魚・釣り方。`,
       firstSentence(spot.description, 40) || false,
       top3 && topMethod
         ? `釣れる魚は${top3}など${fishCount}種で、${topMethod}が定番。`
         : top3
           ? `釣れる魚は${top3}など${fishCount}種。`
           : false,
+      // 実在する最新週報があるエリアのみ（架空の「毎週更新」等の約束はしない）
+      opts.weeklyAreaLabel ? `${opts.weeklyAreaLabel}エリアの最新釣果週報も掲載。` : false,
       facilitySentence,
       `仕掛け・季節の狙い目・混雑予測・アクセスまで掲載しています。`,
     ],

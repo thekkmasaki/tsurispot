@@ -235,6 +235,24 @@ describe("buildSpotMetaDescription（スポット詳細）", () => {
   const spots = sample(fishingSpots);
   const descriptions = spots.map((s) => buildSpotMetaDescription(s));
 
+  it("先頭文に釣果意図語（釣果情報・釣れる魚・釣り方）を含む", () => {
+    for (const desc of descriptions) {
+      expect(desc.startsWith(`${desc.split("（")[0]}（`)).toBe(true);
+      expect(desc).toContain("の釣果情報・釣れる魚・釣り方。");
+    }
+  });
+
+  it("weeklyAreaLabel を渡したときだけ週報文が入り、長さ上限も守る", () => {
+    const withWeekly = spots.map((s) =>
+      buildSpotMetaDescription(s, { weeklyAreaLabel: "明石・神戸" }),
+    );
+    expectAllInRange(withWeekly);
+    // 文アトムは max 超なら落とされる仕様なので「全件含む」ではなく「過半で含む」「無指定では一切含まない」を検証
+    const hit = withWeekly.filter((d) => d.includes("明石・神戸エリアの最新釣果週報も掲載。")).length;
+    expect(hit).toBeGreaterThan(withWeekly.length / 2);
+    for (const d of descriptions) expect(d).not.toContain("最新釣果週報");
+  });
+
   it(`全件 ${DESCRIPTION_MIN}..${DESCRIPTION_MAX} 字（${spots.length}件サンプル）`, () => {
     expect(descriptions.length).toBeGreaterThan(0);
     expectAllInRange(descriptions);
