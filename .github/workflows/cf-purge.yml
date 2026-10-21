@@ -1,13 +1,20 @@
-# Cloudflare エッジキャッシュの手動 purge（URL指定・バッチ処理）
+# Cloudflare エッジキャッシュの手動 purge（プレフィックス指定・バッチ処理）
 #
 # 背景（2026-08-08）: deploy.yml の限定purgeが silent failure しており、旧仕様（revalidate無しの
 # 純SSG時代）に s-maxage 超長期で焼かれた /monthly・/seasonal 系の旧HTMLがエッジに数日単位で
 # 残留していた。TTL切れを待てないページ群を狙って掃除するための運用ワークフロー。
 # purge_everything は使わない（2026-06-23 の全purge→全ページ同期冷生成→CPU飽和→502嵐の再発防止）。
 #
+# 【2026-10-21 方式変更】"files"（URL単体purge）はこのゾーンでは API success でもエッジが消えない
+# （cf-diagnose.yml で3回再現: 45〜90秒待っても HIT）。"prefixes" は直後に MISS になるため
+# prefix 方式へ切替。prefix は配下パスも対象になる点に注意（/monthly → /monthly/august も消える）。
+# "/" は全サイト purge と同義なので拒否する。配下が数千件のプレフィックス（/spots・/prefecture）は
+# オリジンの ISR キャッシュ（DynamoDB）から再配信されるだけで同期再生成ではないが、念のため夜間に実行する。
+#
 # 使い方:
 #   gh workflow run cf-purge -f preset=seasonal-monthly
-#   gh workflow run cf-purge -f paths="/monthly /monthly/august /seasonal/summer"
+#   gh workflow run cf-purge -f paths="/monthly /seasonal/summer"
+#   gh workflow run cf-purge -f paths="/prefecture"   # 県＋マトリクス約1.3万件（夜間推奨）
 name: CF purge
 
 on:
@@ -18,7 +25,7 @@ on:
         required: false
         type: string
       paths:
-        description: "purge するパスをスペース区切りで（例: /monthly /seasonal/summer）"
+        description: "purge するパス（プレフィックス一致・配下も対象）をスペース区切りで（例: /monthly /seasonal/summer）"
         required: false
         type: string
 
@@ -29,7 +36,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Cloudflare purge (batched)
+      - name: Cloudflare purge (prefixes, batched)
         env:
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
@@ -68,20 +75,30 @@ jobs:
             echo "::error::preset か paths のどちらかを指定してください。"
             exit 1
           fi
-          echo "purge対象: ${#list[@]} URL"
+          for p in "${list[@]}"; do
+            case "$p" in
+              /*) ;;
+              *) echo "::error::パスは / で始めてください: ${p}"; exit 1 ;;
+            esac
+            if [ "$p" = "/" ]; then
+              echo "::error::\"/\" は全サイト purge（purge_everything 相当）になるため拒否しました。"
+              exit 1
+            fi
+          done
+          echo "purge対象: ${#list[@]} プレフィックス"
 
-          # Cloudflare purge API は 1リクエスト最大30ファイル → 30件ずつバッチ
+          # Cloudflare purge API は 1リクエスト最大30プレフィックス → 30件ずつバッチ
           total=${#list[@]}
           i=0
           while [ "$i" -lt "$total" ]; do
             batch=("${list[@]:$i:30}")
-            files=$(printf '"https://tsurispot.com%s",' "${batch[@]}")
-            files="[${files%,}]"
+            prefixes=$(printf '"tsurispot.com%s",' "${batch[@]}")
+            prefixes="[${prefixes%,}]"
             resp=$(curl -sS -X POST \
               "https://api.cloudflare.com/client/v4/zones/${CF_ZONE_ID}/purge_cache" \
               -H "Authorization: Bearer ${CF_API_TOKEN}" \
               -H "Content-Type: application/json" \
-              --data "{\"files\":${files}}")
+              --data "{\"prefixes\":${prefixes}}")
             echo "$resp" | grep -q '"success":true' || {
               echo "$resp"
               echo "::error::purge 失敗（offset=$i）"
@@ -92,14 +109,18 @@ jobs:
             sleep 1
           done
 
-          # 有効性の実測検証: 先頭URLのエッジエントリが消えたか（古い HIT のままなら無効）
+          # 有効性の実測検証: 先頭パスのエッジエントリが消えたか（cf-cache-status のみで判定。
+          # Age は Next ISR の経過秒でもあるため見ない。伝播ラグ込みで最大60秒リトライ）
           first="${list[0]}"
-          sleep 5
-          cache_status=$(curl -s -o /dev/null -w "%header{cf-cache-status}" "https://tsurispot.com${first}")
-          cache_age=$(curl -s -o /dev/null -w "%header{age}" "https://tsurispot.com${first}")
-          echo "purge後の ${first}: cf-cache-status=${cache_status} age=${cache_age:-0}"
-          if [ "$cache_status" = "HIT" ] && [ "${cache_age:-0}" -gt 600 ]; then
-            echo "::error::purge 後も古いエッジキャッシュ(age=${cache_age}s)が残っています。CF_ZONE_ID か Cache Rule のカスタムキャッシュキーを確認してください。"
+          purge_ok=0
+          for attempt in 1 2 3 4 5 6; do
+            sleep 10
+            cache_status=$(curl -s -o /dev/null -w "%header{cf-cache-status}" "https://tsurispot.com${first}")
+            echo "purge後の ${first} (attempt ${attempt}): cf-cache-status=${cache_status:-none}"
+            if [ "$cache_status" != "HIT" ]; then purge_ok=1; break; fi
+          done
+          if [ "$purge_ok" != "1" ]; then
+            echo "::error::purge 後60秒経っても ${first} が cf-cache-status=HIT のままです。CF_ZONE_ID か purge 方式を cf-diagnose.yml で確認してください。"
             exit 1
           fi
           echo "purge 完了・有効性確認 OK"

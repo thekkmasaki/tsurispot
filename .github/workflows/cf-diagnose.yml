@@ -1,17 +1,25 @@
-# Cloudflare キャッシュ設定の読み取り診断 + 単体purge の実効性テスト（運用ワークフロー・手動実行のみ）
+# Cloudflare キャッシュ設定の読み取り診断 + purge 方式の実効性テスト（運用ワークフロー・手動実行のみ）
 #
 # 背景（2026-10-21）: deploy.yml の限定purgeは API が success を返すのに / が cf-cache-status=HIT のまま
-# （#511 でAge誤検知は直したが purge 自体が効いていない）。/catchable-now は Age 78日。
+# （#511 でAge誤検知は直したが purge 自体が効いていない）。/catchable-now は Age 78日だった。
 # ダッシュボードを開かずに Cache Rules / Cache Reserve / Tiered Cache / Page Rules を API で読み、
-# /catchable-now を URL purge → UA別に cf-cache-status を観測して「どのキーで残っているか」を切り分ける。
-# 書き込みは /catchable-now の単体purgeのみ（purge_everything は使わない）。
+# purge_test=true のときだけ /fish を URL purge → 45秒観測 → prefix purge → 観測、/prefecture を
+# URL purge のみで90秒観測して「どの方式が効くか」を切り分ける（purge_everything は使わない）。
+# 2026-10-21 実測: Free plan・Cache Reserve off・カスタムキー無し。URL purge は3回とも無効、prefix purge は2回とも即MISS。
+#
+# 使い方:
+#   gh workflow run cf-diagnose                      # 設定の読み取りのみ
+#   gh workflow run cf-diagnose -f purge_test=true   # /fish・/prefecture への purge 実験も行う
 name: CF diagnose
 
 on:
   workflow_dispatch:
-  # default branch 外の workflow_dispatch は 404 になるため、診断ブランチへの push でも起動する
-  push:
-    branches: [chore/cf-diagnose]
+    inputs:
+      purge_test:
+        description: "true にすると /fish・/prefecture へ実際に purge を打って方式を比較する"
+        required: false
+        default: "false"
+        type: string
 
 jobs:
   diagnose:
@@ -38,7 +46,8 @@ jobs:
           echo "== config rules / origin rules (参考) =="
           api "$Z/rulesets/phases/http_config_settings/entrypoint" | jq -c '.result.rules[]? | {enabled, description, expression}' || true
 
-      - name: Purge test on /catchable-now
+      - name: Purge method test (/fish, /prefecture)
+        if: inputs.purge_test == 'true'
         env:
           CF_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CF_ZONE_ID: ${{ secrets.CF_ZONE_ID }}
